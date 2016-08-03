@@ -14,12 +14,14 @@ package	org.eclipse.qvtd.doc.miniocl.lookup.util;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.qvtd.doc.miniocl.util.MiniOCLExportedOperationLookupVisitor;
+import org.eclipse.qvtd.doc.miniocl.util.MiniOCLExportedPackageLookupVisitor;
 import org.eclipse.qvtd.doc.miniocl.util.MiniOCLExportedPropertyLookupVisitor;
 import org.eclipse.qvtd.doc.miniocl.util.MiniOCLQualifiedClassLookupVisitor;
 import org.eclipse.qvtd.doc.miniocl.util.MiniOCLQualifiedOperationLookupVisitor;
 import org.eclipse.qvtd.doc.miniocl.util.MiniOCLQualifiedPackageLookupVisitor;
 import org.eclipse.qvtd.doc.miniocl.util.MiniOCLQualifiedPropertyLookupVisitor;
 import org.eclipse.qvtd.doc.miniocl.util.MiniOCLUnqualifiedClassLookupVisitor;
+import org.eclipse.qvtd.doc.miniocl.util.MiniOCLUnqualifiedNamedElementLookupVisitor;
 import org.eclipse.qvtd.doc.miniocl.util.MiniOCLUnqualifiedOperationLookupVisitor;
 import org.eclipse.qvtd.doc.miniocl.util.MiniOCLUnqualifiedPackageLookupVisitor;
 import org.eclipse.qvtd.doc.miniocl.util.MiniOCLUnqualifiedPropertyLookupVisitor;
@@ -85,12 +87,28 @@ public class MiniOCLLookupSolver {
 				(_lookupEnv.getNamedElementsByKind(org.eclipse.qvtd.doc.miniocl.Package.class));
 	}
 	
+	public MiniOCLLookupResult<org.eclipse.qvtd.doc.miniocl.Package> _lookupExportedPackage(org.eclipse.qvtd.doc.miniocl.Root context, java.lang.Object importer, java.lang.String pName) {
+		MiniOCLSingleResultLookupEnvironment _lookupEnv = new MiniOCLSingleResultLookupEnvironment(executor, org.eclipse.qvtd.doc.miniocl.MiniOCLPackage.Literals.PACKAGE,pName);
+		MiniOCLExportedPackageLookupVisitor _lookupVisitor = new MiniOCLExportedPackageLookupVisitor(_lookupEnv, importer);
+		context.accept(_lookupVisitor);
+		return new MiniOCLLookupResultImpl<org.eclipse.qvtd.doc.miniocl.Package>
+				(_lookupEnv.getNamedElementsByKind(org.eclipse.qvtd.doc.miniocl.Package.class));
+	}
+	
 	public MiniOCLLookupResult<org.eclipse.qvtd.doc.miniocl.Class> _lookupUnqualifiedClass(org.eclipse.qvtd.doc.miniocl.util.Visitable context, java.lang.String cName) {
 		MiniOCLSingleResultLookupEnvironment _lookupEnv = new MiniOCLSingleResultLookupEnvironment(executor, org.eclipse.qvtd.doc.miniocl.MiniOCLPackage.Literals.CLASS,cName);
 		MiniOCLUnqualifiedClassLookupVisitor _lookupVisitor = new MiniOCLUnqualifiedClassLookupVisitor(_lookupEnv);
 		context.accept(_lookupVisitor);
 		return new MiniOCLLookupResultImpl<org.eclipse.qvtd.doc.miniocl.Class>
 				(_lookupEnv.getNamedElementsByKind(org.eclipse.qvtd.doc.miniocl.Class.class));
+	}
+	
+	public MiniOCLLookupResult<org.eclipse.qvtd.doc.miniocl.NamedElement> _lookupUnqualifiedNamedElement(org.eclipse.qvtd.doc.miniocl.util.Visitable context, java.lang.String nName) {
+		MiniOCLSingleResultLookupEnvironment _lookupEnv = new MiniOCLSingleResultLookupEnvironment(executor, org.eclipse.qvtd.doc.miniocl.MiniOCLPackage.Literals.NAMED_ELEMENT,nName);
+		MiniOCLUnqualifiedNamedElementLookupVisitor _lookupVisitor = new MiniOCLUnqualifiedNamedElementLookupVisitor(_lookupEnv);
+		context.accept(_lookupVisitor);
+		return new MiniOCLLookupResultImpl<org.eclipse.qvtd.doc.miniocl.NamedElement>
+				(_lookupEnv.getNamedElementsByKind(org.eclipse.qvtd.doc.miniocl.NamedElement.class));
 	}
 	
 	public MiniOCLLookupResult<org.eclipse.qvtd.doc.miniocl.Operation> _lookupUnqualifiedOperation(org.eclipse.qvtd.doc.miniocl.util.Visitable context, java.lang.String oName, java.util.List<org.eclipse.qvtd.doc.miniocl.OCLExpression> args) {

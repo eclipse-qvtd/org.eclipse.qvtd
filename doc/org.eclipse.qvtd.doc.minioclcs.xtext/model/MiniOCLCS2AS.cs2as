@@ -14,57 +14,63 @@ disambiguation {
 	 }
 }
 
-nameresolution {
-		
-	named-element NamedElement name-property name; 	  /*from target */
-	name-referencer PathElementCS name-property pathName; /*from source */
-	name-qualifier PathNameCS name-segments-property path; /*from source */
-	
-	Root {
-		scopes 
-			Package using ownedPackages;
-	}
-	
-	Package {
-		named-element 
-			qualifies Package using ownedPackages,
+name-resolution {
+	targets {
+		NamedElement using name;
+		Package qualifies Package using ownedPackages,
 					   Class using ownedClasses;
-		
-		scopes-occluding 
-			Package using ownedPackages
-			Class using ownedClasses;
-	}
-
-	Class {
-		named-element
-			qualifies Operation using ownedOperations,
+		Class qualifies Operation using ownedOperations,
 					   Property using ownedProperties;
-					
-		scopes-occluding
-			Operation using ownedOperations occluding self->closure(superClass).ownedOperations
-			Property using ownedProperties occluding self->closure(superClass).ownedProperties;
-		
-		exports 
-			Operation using ownedOperations
-			Property using ownedProperties; 
-	}
-	
-	Operation {
-		named-element
-			filtered by args : OrderedSet(OCLExpression)
+		Operation filtered by args : OrderedSet(OCLExpression)
 				when args->size() = ownedParameters->size() 
-						-- FIXME and check arg/parm types conformance
+					-- FIXME and check arg/parm types conformance
 				;
-		scopes-occluding
-			Variable using ownedContext, ownedParameters;
+		Property;
+		Variable;
 	}
 	
-	Property {
-		named-element;
+	inputs {
+		PathElementCS using elementName;
+		qualifier PathNameCS using pathElements;
 	}
 	
-	Variable {
-		named-element;
+	providers {
+		Root {
+			in current-scope provides adding
+				Package using ownedPackages;
+			in exported-scope provides
+				Package using ownedPackages;
+		}
+		
+		
+		Package {	
+			in current-scope provides occluding 
+				Package using ownedPackages
+				Class using ownedClasses;
+		}
+			
+		Class {
+			vars superClasses = self->closure(superClass);
+			
+			in current-scope provides occluding
+				Operation using ownedOperations occluding superClasses.ownedOperations
+				Property using ownedProperties occluding superClasses.ownedProperties;
+				
+			in exported-scope provides
+				Operation using ownedOperations
+				Property using ownedProperties;
+		}
+		
+		
+		Operation {	
+			in current-scope provides occluding
+				Variable using ownedParameters;
+		}
+		
+		ExpressionInOCL {
+			in current-scope provides occluding
+				Variable using ownedSelfVar;
+		}
 	}
 }
 

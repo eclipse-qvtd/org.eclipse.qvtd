@@ -98,9 +98,9 @@ BooleanLiteralExpCS:
 
 PathNameCS :
 	path+=PathElementCS
-	('::'path+=PathElementCS)*
+	('::'pathElements+=PathElementCS)*
 ;
 
 PathElementCS:
-	pathName=ID
+	elementName=ID
 ;

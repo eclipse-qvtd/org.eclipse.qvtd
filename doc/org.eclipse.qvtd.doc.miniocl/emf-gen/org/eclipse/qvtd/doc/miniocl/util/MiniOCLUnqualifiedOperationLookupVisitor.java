@@ -91,6 +91,30 @@ public class MiniOCLUnqualifiedOperationLookupVisitor
     public /*@NonInvalid*/ LookupEnvironment visitClass(final /*@NonInvalid*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.NonNull Class element) {
         final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull IdResolver idResolver = executor.getIdResolver();
         final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull StandardLibrary standardLibrary = idResolver.getStandardLibrary();
+        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(executor, SET_CLSSid_Class, element);
+        final org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYPE_superClasses_0 = executor.getStaticTypeOf(oclAsSet);
+        final LibraryIteration.@org.eclipse.jdt.annotation.NonNull LibraryIterationExtension IMPL_superClasses_0 = (LibraryIteration.LibraryIterationExtension)TYPE_superClasses_0.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Set__closure);
+        final @NonNull Object ACC_superClasses_0 = IMPL_superClasses_0.createAccumulatorValue(executor, SET_CLSSid_Class, CLSSid_Class);
+        /**
+         * Implementation of the iterator body.
+         */
+        final @NonNull AbstractBinaryOperation BODY_superClasses_0 = new AbstractBinaryOperation()
+        {
+            /**
+             * _'null' : miniocl::Class[?]
+             */
+            @Override
+            public @Nullable Object evaluate(final @NonNull Executor executor, final @NonNull TypeId typeId, final @Nullable Object oclAsSet, final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.Nullable Object _1) {
+                final /*@NonInvalid*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.Nullable Class symbol_0 = (org.eclipse.qvtd.doc.miniocl.Class)_1;
+                if (symbol_0 == null) {
+                    throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCL/1.0\'::Class::superClass\'");
+                }
+                final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.Nullable Class superClass = symbol_0.getSuperClass();
+                return superClass;
+            }
+        };
+        final @NonNull  ExecutorSingleIterationManager MGR_superClasses_0 = new ExecutorSingleIterationManager(executor, SET_CLSSid_Class, BODY_superClasses_0, oclAsSet, ACC_superClasses_0);
+        final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue superClasses = ClassUtil.nonNullState((SetValue)IMPL_superClasses_0.evaluateIteration(MGR_superClasses_0));
         @SuppressWarnings("null")
         final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<Operation> ownedOperations = element.getOwnedOperations();
         @SuppressWarnings("null")
@@ -101,32 +125,8 @@ public class MiniOCLUnqualifiedOperationLookupVisitor
             symbol_2 = inner;
         }
         else {
-            final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(executor, SET_CLSSid_Class, element);
-            final org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYPE_closure_0 = executor.getStaticTypeOf(oclAsSet);
-            final LibraryIteration.@org.eclipse.jdt.annotation.NonNull LibraryIterationExtension IMPL_closure_0 = (LibraryIteration.LibraryIterationExtension)TYPE_closure_0.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Set__closure);
-            final @NonNull Object ACC_closure_0 = IMPL_closure_0.createAccumulatorValue(executor, SET_CLSSid_Class, CLSSid_Class);
-            /**
-             * Implementation of the iterator body.
-             */
-            final @NonNull AbstractBinaryOperation BODY_closure_0 = new AbstractBinaryOperation()
-            {
-                /**
-                 * _'null' : miniocl::Class[?]
-                 */
-                @Override
-                public @Nullable Object evaluate(final @NonNull Executor executor, final @NonNull TypeId typeId, final @Nullable Object oclAsSet, final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.Nullable Object _1) {
-                    final /*@NonInvalid*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.Nullable Class symbol_0 = (org.eclipse.qvtd.doc.miniocl.Class)_1;
-                    if (symbol_0 == null) {
-                        throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCL/1.0\'::Class::superClass\'");
-                    }
-                    final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.Nullable Class superClass = symbol_0.getSuperClass();
-                    return superClass;
-                }
-            };
-            final @NonNull  ExecutorSingleIterationManager MGR_closure_0 = new ExecutorSingleIterationManager(executor, SET_CLSSid_Class, BODY_closure_0, oclAsSet, ACC_closure_0);
-            final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue closure = ClassUtil.nonNullState((SetValue)IMPL_closure_0.evaluateIteration(MGR_closure_0));
             /*@Thrown*/ BagValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator = ValueUtil.createBagAccumulatorValue(BAG_CLSSid_Operation);
-            @Nullable Iterator<Object> ITERATOR__1_0 = closure.iterator();
+            @Nullable Iterator<Object> ITERATOR__1_0 = superClasses.iterator();
             /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull BagValue collect;
             while (true) {
                 if (!ITERATOR__1_0.hasNext()) {

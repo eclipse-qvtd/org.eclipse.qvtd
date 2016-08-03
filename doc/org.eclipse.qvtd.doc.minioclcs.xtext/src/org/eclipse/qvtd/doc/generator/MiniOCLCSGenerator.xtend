@@ -15,8 +15,8 @@ import org.eclipse.xtext.generator.IGeneratorContext
  */
 class MiniOCLCSGenerator extends AbstractGenerator {
 
-	override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
-//		fsa.generateFile('greetings.txt', 'People to greet: ' + 
+	override doGenerate(Resource input, IFileSystemAccess2 fsa, IGeneratorContext context) {
+		//		fsa.generateFile('greetings.txt', 'People to greet: ' + 
 //			resource.allContents
 //				.filter(typeof(Greeting))
 //				.map[name]

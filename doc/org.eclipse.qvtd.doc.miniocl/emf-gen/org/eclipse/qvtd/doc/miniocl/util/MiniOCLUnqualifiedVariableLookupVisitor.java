@@ -70,22 +70,16 @@ public class MiniOCLUnqualifiedVariableLookupVisitor
     }
     
     /**
-     * visitOperation(element : miniocl::Operation[1]) : lookup::LookupEnvironment[?]
+     * visitExpressionInOCL(element : miniocl::ExpressionInOCL[1]) : lookup::LookupEnvironment[?]
      * 
      * _'null' : lookup::LookupEnvironment[1]
      */
     @Override
-    public /*@NonInvalid*/ LookupEnvironment visitOperation(final /*@NonInvalid*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.NonNull Operation element) {
+    public /*@NonInvalid*/ LookupEnvironment visitExpressionInOCL(final /*@NonInvalid*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.NonNull ExpressionInOCL element) {
         @SuppressWarnings("null")
-        final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.NonNull ExpressionInOCL ownedBodyExpression = element.getOwnedBodyExpression();
+        final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.NonNull Variable ownedSelfVar = element.getOwnedSelfVar();
         @SuppressWarnings("null")
-        final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.NonNull Variable ownedSelfVar = ownedBodyExpression.getOwnedSelfVar();
-        @SuppressWarnings("null")
-        final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.lookup.@org.eclipse.jdt.annotation.NonNull LookupEnvironment addElement = context.addElement(ownedSelfVar);
-        @SuppressWarnings("null")
-        final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<Parameter> ownedParameters = element.getOwnedParameters();
-        @SuppressWarnings("null")
-        final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.lookup.@org.eclipse.jdt.annotation.NonNull LookupEnvironment inner = addElement.addElements(ownedParameters);
+        final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.lookup.@org.eclipse.jdt.annotation.NonNull LookupEnvironment inner = context.addElement(ownedSelfVar);
         final /*@Thrown*/ boolean hasFinalResult = inner.hasFinalResult();
         /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.lookup.@org.eclipse.jdt.annotation.Nullable LookupEnvironment symbol_0;
         if (hasFinalResult) {
@@ -93,6 +87,29 @@ public class MiniOCLUnqualifiedVariableLookupVisitor
         }
         else {
             final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.lookup.@org.eclipse.jdt.annotation.Nullable LookupEnvironment parentEnv = this.parentEnv(element);
+            symbol_0 = parentEnv;
+        }
+        return symbol_0;
+    }
+    
+    /**
+     * visitOperation(element : miniocl::Operation[1]) : lookup::LookupEnvironment[?]
+     * 
+     * _'null' : lookup::LookupEnvironment[1]
+     */
+    @Override
+    public /*@NonInvalid*/ LookupEnvironment visitOperation(final /*@NonInvalid*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.NonNull Operation element_0) {
+        @SuppressWarnings("null")
+        final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<Parameter> ownedParameters = element_0.getOwnedParameters();
+        @SuppressWarnings("null")
+        final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.lookup.@org.eclipse.jdt.annotation.NonNull LookupEnvironment inner = context.addElements(ownedParameters);
+        final /*@Thrown*/ boolean hasFinalResult = inner.hasFinalResult();
+        /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.lookup.@org.eclipse.jdt.annotation.Nullable LookupEnvironment symbol_0;
+        if (hasFinalResult) {
+            symbol_0 = inner;
+        }
+        else {
+            final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.lookup.@org.eclipse.jdt.annotation.Nullable LookupEnvironment parentEnv = this.parentEnv(element_0);
             symbol_0 = parentEnv;
         }
         return symbol_0;

@@ -88,9 +88,11 @@
   <eClassifiers xsi:type="ecore:EClass" name="PathNameCS" eSuperTypes="#//CSTrace">
     <eStructuralFeatures xsi:type="ecore:EReference" name="path" upperBound="-1" eType="#//PathElementCS"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pathElements" upperBound="-1"
+        eType="#//PathElementCS" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PathElementCS" eSuperTypes="#//CSTrace">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="pathName" eType="ecore:EDataType ../../../org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="elementName" eType="ecore:EDataType ../../../org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BooleanExpCS" eSuperTypes="#//BooleanLiteralExpCS">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="boolSymbol" eType="ecore:EDataType ../../../org.eclipse.emf.ecore/model/Ecore.ecore#//EBoolean"/>

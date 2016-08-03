@@ -59,6 +59,7 @@ import org.eclipse.qvtd.doc.miniocl.VariableExp;
 import org.eclipse.qvtd.doc.miniocl.lookup.util.MiniOCLLookupResult;
 import org.eclipse.qvtd.doc.miniocl.lookup.util.MiniOCLLookupSolver;
 import org.eclipse.qvtd.doc.miniocl.util.Visitable;
+import org.eclipse.qvtd.doc.minioclcs.CSTrace;
 import org.eclipse.qvtd.doc.minioclcs.CallExpCS;
 import org.eclipse.qvtd.doc.minioclcs.ClassCS;
 import org.eclipse.qvtd.doc.minioclcs.ExpCS;
@@ -96,6 +97,7 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
     public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbaseLibrary = IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/2015/QVTbaseLibrary", "qvtbaselib", null);
     public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvtd_s_doc_s_MiniOCLCS = IdManager.getNsURIPackageId("http://www.eclipse.org/qvtd/doc/MiniOCLCS", null, MinioclcsPackage.eINSTANCE);
     public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvtd_s_doc_s_MiniOCL_s_1_0 = IdManager.getNsURIPackageId("http://www.eclipse.org/qvtd/doc/MiniOCL/1.0", null, MiniOCLPackage.eINSTANCE);
+    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_CSTrace = PACKid_http_c_s_s_www_eclipse_org_s_qvtd_s_doc_s_MiniOCLCS.getClassId("CSTrace", 0);
     public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_CallExpCS = PACKid_http_c_s_s_www_eclipse_org_s_qvtd_s_doc_s_MiniOCLCS.getClassId("CallExpCS", 0);
     public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Class = PACKid_$metamodel$.getClassId("Class", 0);
     public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_ClassCS = PACKid_http_c_s_s_www_eclipse_org_s_qvtd_s_doc_s_MiniOCLCS.getClassId("ClassCS", 0);
@@ -190,6 +192,14 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
         {7}                     // 7 : RootCS -> {RootCS}
     };
     
+    protected final @NonNull AbstractInvocationConstructor CTOR_m_NameExpCS_ast_1 = new AbstractInvocationConstructor(idResolver)
+    {
+        @Override
+        public @NonNull MAP_m_NameExpCS_ast_1 newInstance(@NonNull Object @NonNull [] values) {
+            return new MAP_m_NameExpCS_ast_1(values);
+        }
+    };
+    
     protected final @NonNull AbstractInvocationConstructor CTOR_m_NameExpCS_ast_3 = new AbstractInvocationConstructor(idResolver)
     {
         @Override
@@ -198,11 +208,11 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
         }
     };
     
-    protected final @NonNull AbstractInvocationConstructor CTOR_m_NameExpCS_ast_4 = new AbstractInvocationConstructor(idResolver)
+    protected final @NonNull AbstractInvocationConstructor CTOR_m_NameExpCS_ast_expName = new AbstractInvocationConstructor(idResolver)
     {
         @Override
-        public @NonNull MAP_m_NameExpCS_ast_4 newInstance(@NonNull Object @NonNull [] values) {
-            return new MAP_m_NameExpCS_ast_4(values);
+        public @NonNull MAP_m_NameExpCS_ast_expName newInstance(@NonNull Object @NonNull [] values) {
+            return new MAP_m_NameExpCS_ast_expName(values);
         }
     };
     
@@ -214,11 +224,19 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
         }
     };
     
-    protected final @NonNull AbstractInvocationConstructor CTOR_m_NameExpCS_ast_expName_2 = new AbstractInvocationConstructor(idResolver)
+    protected final @NonNull AbstractInvocationConstructor CTOR_m_PropertyCallExp_NameExpCS_CallExpCS_Element_Expr = new AbstractInvocationConstructor(idResolver)
     {
         @Override
-        public @NonNull MAP_m_NameExpCS_ast_expName_2 newInstance(@NonNull Object @NonNull [] values) {
-            return new MAP_m_NameExpCS_ast_expName_2(values);
+        public @NonNull MAP_m_PropertyCallExp_NameExpCS_CallExpCS_Element_Expr newInstance(@NonNull Object @NonNull [] values) {
+            return new MAP_m_PropertyCallExp_NameExpCS_CallExpCS_Element_Expr(values);
+        }
+    };
+    
+    protected final @NonNull AbstractInvocationConstructor CTOR_m_VariableExp_NameExpCS_CallExpCS_Element_Expressi = new AbstractInvocationConstructor(idResolver)
+    {
+        @Override
+        public @NonNull MAP_m_VariableExp_NameExpCS_CallExpCS_Element_Expressi newInstance(@NonNull Object @NonNull [] values) {
+            return new MAP_m_VariableExp_NameExpCS_CallExpCS_Element_Expressi(values);
         }
     };
     
@@ -257,15 +275,15 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
         if (eq) {
             final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable PathElementCS aPathElementCS = (PathElementCS)OrderedCollectionFirstOperation.INSTANCE.evaluate(BOXED_segments);
             if (aPathElementCS == null) {
-                throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathElementCS::pathName\'");
+                throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathElementCS::elementName\'");
             }
-            final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String pathName = aPathElementCS.getPathName();
-            MiniOCLLookupResult<Package> _lookupResult = lookupSolver._lookupUnqualifiedPackage(self_0, (String)pathName);
+            final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String elementName = aPathElementCS.getElementName();
+            MiniOCLLookupResult<Package> _lookupResult = lookupSolver._lookupUnqualifiedPackage(self_0, (String)elementName);
             Package _lookupUnqualifiedPackage = null;
             if (_lookupResult.size() == 1) {
                 _lookupUnqualifiedPackage = _lookupResult.getSingleResult();
             } else {
-                handleLookupError(aPathElementCS,pathName);
+                handleLookupError(aPathElementCS,elementName);
             };
             symbol_1 = _lookupUnqualifiedPackage;
         }
@@ -293,15 +311,15 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
                 }
                 final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable PathElementCS aPathElementCS_0 = (PathElementCS)OrderedCollectionLastOperation.INSTANCE.evaluate(BOXED_segments);
                 if (aPathElementCS_0 == null) {
-                    throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathElementCS::pathName\'");
+                    throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathElementCS::elementName\'");
                 }
-                final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String pathName_0 = aPathElementCS_0.getPathName();
-                MiniOCLLookupResult<Package> _lookupResult_0 = lookupSolver._lookupQualifiedPackage(qualifier, (String)pathName_0);
+                final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String elementName_0 = aPathElementCS_0.getElementName();
+                MiniOCLLookupResult<Package> _lookupResult_0 = lookupSolver._lookupQualifiedPackage(qualifier, (String)elementName_0);
                 Package _lookupQualifiedPackage = null;
                 if (_lookupResult_0.size() == 1) {
                     _lookupQualifiedPackage = _lookupResult_0.getSingleResult();
                 } else {
-                    handleLookupError(aPathElementCS_0,pathName_0);
+                    handleLookupError(aPathElementCS_0,elementName_0);
                 };
                 safe_lookupQualifiedPackage_source = _lookupQualifiedPackage;
             }
@@ -330,7 +348,7 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
      *   ;
      * _'\u00ABRootCS\u00BB' : Set(minioclcs::RootCS) = leftCS.objectsOfKind(minioclcs::RootCS)
      *   ;
-     * ji_CallExpCS : Set(minioclcs::CallExpCS)[*|1] = _'\u00ABCallExpCS\u00BB';
+     * ji_CallExpCS_1 : Set(minioclcs::CallExpCS)[*|1] = _'\u00ABCallExpCS\u00BB';
      * ji_ClassCS : Set(minioclcs::ClassCS)[*|1] = _'\u00ABClassCS\u00BB';
      * ji_NameExpCS : Set(minioclcs::NameExpCS)[*|1] = _'\u00ABNameExpCS\u00BB';
      * ji_OperationCS : Set(minioclcs::OperationCS)[*|1] = _'\u00ABOperationCS\u00BB';
@@ -368,44 +386,20 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
      * lRootCS := loop0;
      * }}
      *   for loop0 : minioclcs::ClassCS in ji_ClassCS {
-     *     call m_OrderedSet_ClassCS {
+     *     call m_OrderedSet_ClassCS_2 {
      * lClassCS := loop0;
      * }}
      *   for loop0 : minioclcs::OperationCS in ji_OperationCS {
-     *     call m_OrderedSet_OperationCS {
+     *     call m_OrderedSet_OperationCS_1 {
      * lOperationCS := loop0;
      * }}
      *   for loop0 : minioclcs::PackageCS in ji_PackageCS {
-     *     call m_OrderedSet_PackageCS {
+     *     call m_OrderedSet_PackageCS_2 {
      * lPackageCS := loop0;
      * }}
      *   for loop0 : minioclcs::ParameterCS in ji_ParameterCS {
      *     call m_String_ParameterCS {
      * lParameterCS := loop0;
-     * }}
-     *   for loop0 : minioclcs::NameExpCS in ji_NameExpCS {
-     *     call m_PropertyCallExp_NameExpCS_NamedElement_Variable {
-     * lNameExpCS := loop0;
-     * }}
-     *   for loop0 : minioclcs::NameExpCS in ji_NameExpCS {
-     *     call m_VariableExp_NameExpCS_NamedElement_Variable {
-     * lNameExpCS := loop0;
-     * }}
-     *   for loop0 : minioclcs::CallExpCS in ji_CallExpCS {
-     *     call m_CallExpCS_ast_nameExp {
-     * lCallExpCS := loop0;
-     * }}
-     *   for loop0 : minioclcs::NameExpCS in ji_NameExpCS {
-     *     call m_NameExpCS_ast {
-     * lNameExpCS := loop0;
-     * }}
-     *   for loop0 : minioclcs::OperationCS in ji_OperationCS {
-     *     call m_OperationCS_ast_body {
-     * lOperationCS := loop0;
-     * }}
-     *   for loop0 : minioclcs::NameExpCS in ji_NameExpCS {
-     *     call m_NameExpCS_ast_expName {
-     * lNameExpCS := loop0;
      * }}
      *   for loop0 : minioclcs::PropertyCS in ji_PropertyCS {
      *     call m_String_PropertyCS {
@@ -427,24 +421,28 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
      *     call m_ParameterCS_ast_typeRef {
      * lParameterCS := loop0;
      * }}
-     *   for loop0 : minioclcs::NameExpCS in ji_NameExpCS {
-     *     call m_NameExpCS_ast_1 {
-     * lNameExpCS := loop0;
-     * }}
-     *   for loop0 : minioclcs::NameExpCS in ji_NameExpCS {
-     *     call m_NameExpCS_ast_2 {
-     * lNameExpCS := loop0;
-     * }}
      *   for loop0 : minioclcs::PropertyCS in ji_PropertyCS {
      *     call m_PropertyCS_ast_typeRef {
      * lPropertyCS := loop0;
      * }}
      *   for loop0 : minioclcs::NameExpCS in ji_NameExpCS {
-     *     call m_NameExpCS_ast_expName_1 {
+     *     call m_PropertyCallExp_NameExpCS_CallExpCS_Element_Expr {
      * lNameExpCS := loop0;
      * }}
      *   for loop0 : minioclcs::NameExpCS in ji_NameExpCS {
-     *     call m_NameExpCS_ast_3 {
+     *     call m_VariableExp_NameExpCS_CallExpCS_Element_Expressi {
+     * lNameExpCS := loop0;
+     * }}
+     *   for loop0 : minioclcs::CallExpCS in ji_CallExpCS_1 {
+     *     call m_CallExpCS_ast_nameExp {
+     * lCallExpCS := loop0;
+     * }}
+     *   for loop0 : minioclcs::NameExpCS in ji_NameExpCS {
+     *     call m_NameExpCS_ast {
+     * lNameExpCS := loop0;
+     * }}
+     *   for loop0 : minioclcs::NameExpCS in ji_NameExpCS {
+     *     call m_NameExpCS_ast_2 {
      * lNameExpCS := loop0;
      * }}
      *   for loop0 : minioclcs::NameExpCS in ji_NameExpCS {
@@ -453,6 +451,26 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
      * }}
      *   for loop0 : minioclcs::NameExpCS in ji_NameExpCS {
      *     call m_NameExpCS_ast_4 {
+     * lNameExpCS := loop0;
+     * }}
+     *   for loop0 : minioclcs::OperationCS in ji_OperationCS {
+     *     call m_OperationCS_ast_body {
+     * lOperationCS := loop0;
+     * }}
+     *   for loop0 : minioclcs::NameExpCS in ji_NameExpCS {
+     *     call m_NameExpCS_ast_expName {
+     * lNameExpCS := loop0;
+     * }}
+     *   for loop0 : minioclcs::NameExpCS in ji_NameExpCS {
+     *     call m_NameExpCS_ast_1 {
+     * lNameExpCS := loop0;
+     * }}
+     *   for loop0 : minioclcs::NameExpCS in ji_NameExpCS {
+     *     call m_NameExpCS_ast_expName_1 {
+     * lNameExpCS := loop0;
+     * }}
+     *   for loop0 : minioclcs::NameExpCS in ji_NameExpCS {
+     *     call m_NameExpCS_ast_3 {
      * lNameExpCS := loop0;
      * }}
      */
@@ -477,9 +495,9 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
             final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_minioclcs_c_c_RootCS_0 = idResolver.getClass(CLSSid_RootCS, null);
             final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue objectsOfKind_6 = ModelObjectsOfKindOperation.INSTANCE.evaluate(executor, SET_CLSSid_RootCS, models[0/*leftCS*/], TYP_minioclcs_c_c_RootCS_0);
             // connection variables
-            final SetValue.@NonNull Accumulator ji_CallExpCS = (SetValue.Accumulator)ValueUtil.createCollectionAccumulatorValue(SET_CLSSid_CallExpCS);
+            final SetValue.@NonNull Accumulator ji_CallExpCS_1 = (SetValue.Accumulator)ValueUtil.createCollectionAccumulatorValue(SET_CLSSid_CallExpCS);
             for (org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull CallExpCS iterator : ValueUtil.typedIterable(CallExpCS.class, objectsOfKind)) {
-                ji_CallExpCS.add(iterator);
+                ji_CallExpCS_1.add(iterator);
             }
             final SetValue.@NonNull Accumulator ji_ClassCS = (SetValue.Accumulator)ValueUtil.createCollectionAccumulatorValue(SET_CLSSid_ClassCS);
             for (org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull ClassCS iterator_0 : ValueUtil.typedIterable(ClassCS.class, objectsOfKind_0)) {
@@ -532,70 +550,70 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
                 MAP_m_Root_RootCS(loop0_5);
             }
             for (org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull ClassCS loop0_6 : ValueUtil.typedIterable(ClassCS.class, ji_ClassCS)) {
-                MAP_m_OrderedSet_ClassCS(loop0_6);
+                MAP_m_OrderedSet_ClassCS_2(loop0_6);
             }
             for (org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull OperationCS loop0_7 : ValueUtil.typedIterable(OperationCS.class, ji_OperationCS)) {
-                MAP_m_OrderedSet_OperationCS(loop0_7);
+                MAP_m_OrderedSet_OperationCS_1(loop0_7);
             }
             for (org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull PackageCS loop0_8 : ValueUtil.typedIterable(PackageCS.class, ji_PackageCS)) {
-                MAP_m_OrderedSet_PackageCS(loop0_8);
+                MAP_m_OrderedSet_PackageCS_2(loop0_8);
             }
             for (org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull ParameterCS loop0_9 : ValueUtil.typedIterable(ParameterCS.class, ji_ParameterCS)) {
                 MAP_m_String_ParameterCS(loop0_9);
             }
-            for (org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull NameExpCS loop0_10 : ValueUtil.typedIterable(NameExpCS.class, ji_NameExpCS)) {
-                MAP_m_PropertyCallExp_NameExpCS_NamedElement_Variable(loop0_10);
+            for (org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull PropertyCS loop0_10 : ValueUtil.typedIterable(PropertyCS.class, ji_PropertyCS)) {
+                MAP_m_String_PropertyCS(loop0_10);
             }
-            for (org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull NameExpCS loop0_11 : ValueUtil.typedIterable(NameExpCS.class, ji_NameExpCS)) {
-                MAP_m_VariableExp_NameExpCS_NamedElement_Variable(loop0_11);
+            for (org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull RootCS loop0_11 : ValueUtil.typedIterable(RootCS.class, ji_RootCS)) {
+                MAP_m_OrderedSet_RootCS(loop0_11);
             }
-            for (org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull CallExpCS loop0_12 : ValueUtil.typedIterable(CallExpCS.class, ji_CallExpCS)) {
-                MAP_m_CallExpCS_ast_nameExp(loop0_12);
+            for (org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull ClassCS loop0_12 : ValueUtil.typedIterable(ClassCS.class, ji_ClassCS)) {
+                MAP_m_ClassCS_ast_extends(loop0_12);
             }
-            for (org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull NameExpCS loop0_13 : ValueUtil.typedIterable(NameExpCS.class, ji_NameExpCS)) {
-                MAP_m_NameExpCS_ast(loop0_13);
+            for (org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull OperationCS loop0_13 : ValueUtil.typedIterable(OperationCS.class, ji_OperationCS)) {
+                MAP_m_OperationCS_ast_resultRef(loop0_13);
             }
-            for (org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull OperationCS loop0_14 : ValueUtil.typedIterable(OperationCS.class, ji_OperationCS)) {
-                MAP_m_OperationCS_ast_body(loop0_14);
+            for (org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull ParameterCS loop0_14 : ValueUtil.typedIterable(ParameterCS.class, ji_ParameterCS)) {
+                MAP_m_ParameterCS_ast_typeRef(loop0_14);
             }
-            for (org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull NameExpCS loop0_15 : ValueUtil.typedIterable(NameExpCS.class, ji_NameExpCS)) {
-                MAP_m_NameExpCS_ast_expName(loop0_15);
+            for (org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull PropertyCS loop0_15 : ValueUtil.typedIterable(PropertyCS.class, ji_PropertyCS)) {
+                MAP_m_PropertyCS_ast_typeRef(loop0_15);
             }
-            for (org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull PropertyCS loop0_16 : ValueUtil.typedIterable(PropertyCS.class, ji_PropertyCS)) {
-                MAP_m_String_PropertyCS(loop0_16);
+            for (org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull NameExpCS loop0_16 : ValueUtil.typedIterable(NameExpCS.class, ji_NameExpCS)) {
+                invoke(CTOR_m_PropertyCallExp_NameExpCS_CallExpCS_Element_Expr, loop0_16);
             }
-            for (org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull RootCS loop0_17 : ValueUtil.typedIterable(RootCS.class, ji_RootCS)) {
-                MAP_m_OrderedSet_RootCS(loop0_17);
+            for (org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull NameExpCS loop0_17 : ValueUtil.typedIterable(NameExpCS.class, ji_NameExpCS)) {
+                invoke(CTOR_m_VariableExp_NameExpCS_CallExpCS_Element_Expressi, loop0_17);
             }
-            for (org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull ClassCS loop0_18 : ValueUtil.typedIterable(ClassCS.class, ji_ClassCS)) {
-                MAP_m_ClassCS_ast_extends(loop0_18);
+            for (org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull CallExpCS loop0_18 : ValueUtil.typedIterable(CallExpCS.class, ji_CallExpCS_1)) {
+                MAP_m_CallExpCS_ast_nameExp(loop0_18);
             }
-            for (org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull OperationCS loop0_19 : ValueUtil.typedIterable(OperationCS.class, ji_OperationCS)) {
-                MAP_m_OperationCS_ast_resultRef(loop0_19);
+            for (org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull NameExpCS loop0_19 : ValueUtil.typedIterable(NameExpCS.class, ji_NameExpCS)) {
+                MAP_m_NameExpCS_ast(loop0_19);
             }
-            for (org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull ParameterCS loop0_20 : ValueUtil.typedIterable(ParameterCS.class, ji_ParameterCS)) {
-                MAP_m_ParameterCS_ast_typeRef(loop0_20);
+            for (org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull NameExpCS loop0_20 : ValueUtil.typedIterable(NameExpCS.class, ji_NameExpCS)) {
+                MAP_m_NameExpCS_ast_2(loop0_20);
             }
             for (org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull NameExpCS loop0_21 : ValueUtil.typedIterable(NameExpCS.class, ji_NameExpCS)) {
-                MAP_m_NameExpCS_ast_1(loop0_21);
+                MAP_m_NameExpCS_ast_expName_2(loop0_21);
             }
             for (org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull NameExpCS loop0_22 : ValueUtil.typedIterable(NameExpCS.class, ji_NameExpCS)) {
-                MAP_m_NameExpCS_ast_2(loop0_22);
+                MAP_m_NameExpCS_ast_4(loop0_22);
             }
-            for (org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull PropertyCS loop0_23 : ValueUtil.typedIterable(PropertyCS.class, ji_PropertyCS)) {
-                MAP_m_PropertyCS_ast_typeRef(loop0_23);
+            for (org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull OperationCS loop0_23 : ValueUtil.typedIterable(OperationCS.class, ji_OperationCS)) {
+                MAP_m_OperationCS_ast_body(loop0_23);
             }
             for (org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull NameExpCS loop0_24 : ValueUtil.typedIterable(NameExpCS.class, ji_NameExpCS)) {
-                invoke(CTOR_m_NameExpCS_ast_expName_1, loop0_24);
+                invoke(CTOR_m_NameExpCS_ast_expName, loop0_24);
             }
             for (org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull NameExpCS loop0_25 : ValueUtil.typedIterable(NameExpCS.class, ji_NameExpCS)) {
-                invoke(CTOR_m_NameExpCS_ast_3, loop0_25);
+                invoke(CTOR_m_NameExpCS_ast_1, loop0_25);
             }
             for (org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull NameExpCS loop0_26 : ValueUtil.typedIterable(NameExpCS.class, ji_NameExpCS)) {
-                invoke(CTOR_m_NameExpCS_ast_expName_2, loop0_26);
+                invoke(CTOR_m_NameExpCS_ast_expName_1, loop0_26);
             }
             for (org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull NameExpCS loop0_27 : ValueUtil.typedIterable(NameExpCS.class, ji_NameExpCS)) {
-                invoke(CTOR_m_NameExpCS_ast_4, loop0_27);
+                invoke(CTOR_m_NameExpCS_ast_3, loop0_27);
             }
             final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean __root__ = ValueUtil.TRUE_VALUE;
             return __root__;
@@ -656,6 +674,7 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
                             }
                             // property assignments
                             lCallExpCS.setAst(symbol_2);
+                            objectManager.assigned(lCallExpCS, MinioclcsPackage.Literals.CS_TRACE__AST, symbol_2, null);
                             final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean m_CallExpCS_ast_nameExp = ValueUtil.TRUE_VALUE;
                             raw_ast = m_CallExpCS_ast_nameExp;
                         }
@@ -739,10 +758,10 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
                         }
                         else {
                             if (symbol_4 == null) {
-                                throw throwNull(lClassCS, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathNameCS::path\'");
+                                throw throwNull(lClassCS, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathNameCS::pathElements\'");
                             }
                             @SuppressWarnings("null")
-                            final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<PathElementCS> segments_0 = symbol_4.getPath();
+                            final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<PathElementCS> segments_0 = symbol_4.getPathElements();
                             final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_segments_0 = idResolver.createOrderedSetOfAll(ORD_CLSSid_PathElementCS, segments_0);
                             final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(BOXED_segments_0);
                             final /*@Thrown*/ boolean eq = size.equals(INT_1);
@@ -750,15 +769,15 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
                             if (eq) {
                                 final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable PathElementCS aPathElementCS = (PathElementCS)OrderedCollectionFirstOperation.INSTANCE.evaluate(BOXED_segments_0);
                                 if (aPathElementCS == null) {
-                                    throw throwNull(lClassCS, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathElementCS::pathName\'");
+                                    throw throwNull(lClassCS, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathElementCS::elementName\'");
                                 }
-                                final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String pathName = aPathElementCS.getPathName();
-                                MiniOCLLookupResult<org.eclipse.qvtd.doc.miniocl.Class> _lookupResult = lookupSolver._lookupUnqualifiedClass(symbol_2, (String)pathName);
+                                final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String elementName = aPathElementCS.getElementName();
+                                MiniOCLLookupResult<org.eclipse.qvtd.doc.miniocl.Class> _lookupResult = lookupSolver._lookupUnqualifiedClass(symbol_2, (String)elementName);
                                 org.eclipse.qvtd.doc.miniocl.Class _lookupUnqualifiedClass = null;
                                 if (_lookupResult.size() == 1) {
                                     _lookupUnqualifiedClass = _lookupResult.getSingleResult();
                                 } else {
-                                    handleLookupError(aPathElementCS,pathName);
+                                    handleLookupError(aPathElementCS,elementName);
                                 };
                                 symbol_7 = _lookupUnqualifiedClass;
                             }
@@ -786,15 +805,15 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
                                     }
                                     final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable PathElementCS aPathElementCS_0 = (PathElementCS)OrderedCollectionLastOperation.INSTANCE.evaluate(BOXED_segments_0);
                                     if (aPathElementCS_0 == null) {
-                                        throw throwNull(lClassCS, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathElementCS::pathName\'");
+                                        throw throwNull(lClassCS, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathElementCS::elementName\'");
                                     }
-                                    final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String pathName_0 = aPathElementCS_0.getPathName();
-                                    MiniOCLLookupResult<org.eclipse.qvtd.doc.miniocl.Class> _lookupResult_0 = lookupSolver._lookupQualifiedClass(qualifier, (String)pathName_0);
+                                    final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String elementName_0 = aPathElementCS_0.getElementName();
+                                    MiniOCLLookupResult<org.eclipse.qvtd.doc.miniocl.Class> _lookupResult_0 = lookupSolver._lookupQualifiedClass(qualifier, (String)elementName_0);
                                     org.eclipse.qvtd.doc.miniocl.Class _lookupQualifiedClass = null;
                                     if (_lookupResult_0.size() == 1) {
                                         _lookupQualifiedClass = _lookupResult_0.getSingleResult();
                                     } else {
-                                        handleLookupError(aPathElementCS_0,pathName_0);
+                                        handleLookupError(aPathElementCS_0,elementName_0);
                                     };
                                     safe_lookupQualifiedClass_source = _lookupQualifiedClass;
                                 }
@@ -872,43 +891,27 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
      * map m_NameExpCS_ast in MiniOCLCS2AS_qvtp_qvtcas {
      *   leftCS (lNameExpCS : minioclcs::NameExpCS[1];
      *  |)
-     * {_'if' : minioclcs::CallExpCS[?];
-     * parentAsCallExpCS : minioclcs::CallExpCS[?];
-     *  |}
+     * { |}
      * rightAS ( |)
      * {aPropertyCallExp : miniocl::PropertyCallExp[1];
      * ast : miniocl::Element[1];
-     * if1 : miniocl::Element[?];
+     * lookupVariable : miniocl::Variable[?];
      * ownedSource : miniocl::OCLExpression[1];
+     * type : miniocl::Class[1];
      *  |}
      * where ( |
-     * lNameExpCS.isPropCallExpWithExplicitSource()
+     * not lNameExpCS.isPropCallExpWithExplicitSource()
+     *   not lNameExpCS.isVariableExp()
+     *   lNameExpCS.isPropCallExpWithImplicitSource()
      *   )
-     * {_'=' : Boolean[1];
-     * _'=1' : Boolean[1];
-     * _'=2' : Boolean[1];
-     *  |
+     * { |
      * aPropertyCallExp := lNameExpCS.ast;
      * ast := lNameExpCS.ast;
-     * parentAsCallExpCS := lNameExpCS.parentAsCallExpCS();
-     * _'=' := parentAsCallExpCS =
-     *   null;
-     * _'if' := if _'='
-     *   then null
-     *   else parentAsCallExpCS.source
-     *   endif;
-     * _'=1' := _'if' =
-     *   null;
-     * if1 := if _'=1'
-     *   then null
-     *   else _'if'.ast
-     *   endif;
-     * _'=2' := if1 =
-     *   null;
-     * ownedSource := if _'=2'
-     *   then null
-     *   else if1.oclAsType(miniocl::OCLExpression)
-     *   endif;
+     * lookupVariable := aPropertyCallExp.lookupVariable('self')
+     *   ;
+     * type := lookupVariable.type;
+     * ownedSource := miniocl::VariableExp{referredVariable = lookupVariable, type = type
+     *   };
      * aPropertyCallExp.ownedSource := ownedSource;
      * }
      * 
@@ -958,192 +961,9 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
                 CAUGHT_symbol_1 = ValueUtil.createInvalidValue(e);
             }
             final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean and = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_eq, CAUGHT_symbol_1);
-            if (and == null) {
-                throw throwNull(lNameExpCS, "Null if condition");
-            }
-            /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean symbol_16;
-            if (and) {
-                final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.Nullable Element ast = lNameExpCS.getAst();
-                final /*@Thrown*/ boolean symbol_2 = ast != null;
-                /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean raw_aPropertyCallExp;
-                if (symbol_2) {
-                    final /*@NonInvalid*/ boolean symbol_3 = ast instanceof PropertyCallExp;
-                    /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean symbol_15;
-                    if (symbol_3) {
-                        final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.Nullable PropertyCallExp symbol_4 = (PropertyCallExp)ast;
-                        if (symbol_4 == null) {
-                            throw throwNull(lNameExpCS, "Null where non-null value required");
-                        }
-                        final /*@Thrown*/ boolean symbol_5 = ast != null;
-                        /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean raw_ast;
-                        if (symbol_5) {
-                            if (ast == null) {
-                                throw throwNull(lNameExpCS, "Null where non-null value required");
-                            }
-                            final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.Nullable Object container_0 = ClassifierOclContainerOperation.INSTANCE.evaluate(executor, lNameExpCS);
-                            final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_minioclcs_c_c_CallExpCS_4 = idResolver.getClass(CLSSid_CallExpCS, null);
-                            final /*@Thrown*/ boolean oclIsKindOf_0 = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, container_0, TYP_minioclcs_c_c_CallExpCS_4).booleanValue();
-                            /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable CallExpCS symbol_6;
-                            if (oclIsKindOf_0) {
-                                final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull CallExpCS oclAsType_0 = ClassUtil.nonNullState((CallExpCS)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, container_0, TYP_minioclcs_c_c_CallExpCS_4));
-                                symbol_6 = oclAsType_0;
-                            }
-                            else {
-                                symbol_6 = null;
-                            }
-                            final /*@Thrown*/ boolean symbol_7 = symbol_6 == null;
-                            /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable CallExpCS symbol_8;
-                            if (symbol_7) {
-                                symbol_8 = null;
-                            }
-                            else {
-                                if (symbol_6 == null) {
-                                    throw throwNull(lNameExpCS, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::CallExpCS::source\'");
-                                }
-                                final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable CallExpCS source = symbol_6.getSource();
-                                symbol_8 = source;
-                            }
-                            final /*@Thrown*/ boolean symbol_9 = symbol_8 == null;
-                            /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.Nullable Element symbol_10;
-                            if (symbol_9) {
-                                symbol_10 = null;
-                            }
-                            else {
-                                if (symbol_8 == null) {
-                                    throw throwNull(lNameExpCS, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::CSTrace::ast\'");
-                                }
-                                final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.Nullable Element ast_1 = symbol_8.getAst();
-                                symbol_10 = ast_1;
-                            }
-                            final /*@Thrown*/ boolean symbol_11 = symbol_10 == null;
-                            /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.Nullable OCLExpression symbol_12;
-                            if (symbol_11) {
-                                symbol_12 = null;
-                            }
-                            else {
-                                final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_miniocl_c_c_OCLExpression_0 = idResolver.getClass(CLSSid_OCLExpression, null);
-                                final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.NonNull OCLExpression oclAsType_1 = ClassUtil.nonNullState((OCLExpression)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, symbol_10, TYP_miniocl_c_c_OCLExpression_0));
-                                symbol_12 = oclAsType_1;
-                            }
-                            final /*@Thrown*/ boolean symbol_13 = symbol_12 != null;
-                            /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean raw_ownedSource;
-                            if (symbol_13) {
-                                if (symbol_12 == null) {
-                                    throw throwNull(lNameExpCS, "Null where non-null value required");
-                                }
-                                // property assignments
-                                symbol_4.setOwnedSource(symbol_12);
-                                objectManager.assigned(symbol_4, MiniOCLPackage.Literals.CALL_EXP__OWNED_SOURCE, symbol_12, null);
-                                final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean m_NameExpCS_ast = ValueUtil.TRUE_VALUE;
-                                raw_ownedSource = m_NameExpCS_ast;
-                            }
-                            else {
-                                raw_ownedSource = ValueUtil.FALSE_VALUE;
-                            }
-                            raw_ast = raw_ownedSource;
-                        }
-                        else {
-                            raw_ast = ValueUtil.FALSE_VALUE;
-                        }
-                        symbol_15 = raw_ast;
-                    }
-                    else {
-                        symbol_15 = ValueUtil.FALSE_VALUE;
-                    }
-                    raw_aPropertyCallExp = symbol_15;
-                }
-                else {
-                    raw_aPropertyCallExp = ValueUtil.FALSE_VALUE;
-                }
-                symbol_16 = raw_aPropertyCallExp;
-            }
-            else {
-                symbol_16 = ValueUtil.FALSE_VALUE;
-            }
-            return symbol_16;
-        } catch (Throwable e) {
-            return handleExecutionFailure("MAP_m_NameExpCS_ast", e);
-        }
-    }
-    
-    /**
-     * 
-     * map m_NameExpCS_ast_1 in MiniOCLCS2AS_qvtp_qvtcas {
-     *   leftCS (lNameExpCS : minioclcs::NameExpCS[1];
-     *  |)
-     * { |}
-     * rightAS ( |)
-     * {aPropertyCallExp : miniocl::PropertyCallExp[1];
-     * ast : miniocl::Element[1];
-     * lookupVariable : miniocl::Variable[?];
-     * ownedSource : miniocl::OCLExpression[1];
-     * type : miniocl::Class[1];
-     *  |}
-     * where ( |
-     * not lNameExpCS.isPropCallExpWithExplicitSource()
-     *   not lNameExpCS.isVariableExp()
-     *   lNameExpCS.isPropCallExpWithImplicitSource()
-     *   )
-     * { |
-     * aPropertyCallExp := lNameExpCS.ast;
-     * ast := lNameExpCS.ast;
-     * lookupVariable := aPropertyCallExp.lookupVariable('self')
-     *   ;
-     * type := lookupVariable.type;
-     * ownedSource := miniocl::VariableExp{referredVariable = lookupVariable, type = type
-     *   };
-     * aPropertyCallExp.ownedSource := ownedSource;
-     * }
-     * 
-     */
-    protected boolean MAP_m_NameExpCS_ast_1(final /*@NonInvalid*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull NameExpCS lNameExpCS_0)  {
-        try {
-            // predicates and unrealized variables
-            final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull IdResolver idResolver = executor.getIdResolver();
-            /*@Caught*/ @NonNull Object CAUGHT_eq;
-            try {
-                final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable RoundedBracketClauseCS roundedBrackets = lNameExpCS_0.getRoundedBrackets();
-                final /*@Thrown*/ boolean eq = roundedBrackets == null;
-                CAUGHT_eq = eq;
-            }
-            catch (Exception e) {
-                CAUGHT_eq = ValueUtil.createInvalidValue(e);
-            }
-            /*@Caught*/ @NonNull Object CAUGHT_symbol_1;
-            try {
-                final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.Nullable Object container = ClassifierOclContainerOperation.INSTANCE.evaluate(executor, lNameExpCS_0);
-                final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_minioclcs_c_c_CallExpCS_2 = idResolver.getClass(CLSSid_CallExpCS, null);
-                final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, container, TYP_minioclcs_c_c_CallExpCS_2).booleanValue();
-                /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable CallExpCS symbol_0;
-                if (oclIsKindOf) {
-                    final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull CallExpCS oclAsType = ClassUtil.nonNullState((CallExpCS)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, container, TYP_minioclcs_c_c_CallExpCS_2));
-                    symbol_0 = oclAsType;
-                }
-                else {
-                    symbol_0 = null;
-                }
-                final /*@Thrown*/ boolean eq_0 = symbol_0 == null;
-                /*@Thrown*/ boolean symbol_1;
-                if (eq_0) {
-                    symbol_1 = ValueUtil.FALSE_VALUE;
-                }
-                else {
-                    if (symbol_0 == null) {
-                        throw throwNull(lNameExpCS_0, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::CallExpCS::nameExp\'");
-                    }
-                    final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable NameExpCS nameExp = symbol_0.getNameExp();
-                    final /*@Thrown*/ boolean eq_1 = lNameExpCS_0.equals(nameExp);
-                    symbol_1 = eq_1;
-                }
-                CAUGHT_symbol_1 = symbol_1;
-            }
-            catch (Exception e) {
-                CAUGHT_symbol_1 = ValueUtil.createInvalidValue(e);
-            }
-            final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean and = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_eq, CAUGHT_symbol_1);
             final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean not = BooleanNotOperation.INSTANCE.evaluate(and);
             if (not == null) {
-                throw throwNull(lNameExpCS_0, "Null if condition");
+                throw throwNull(lNameExpCS, "Null if condition");
             }
             /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean symbol_17;
             if (not) {
@@ -1153,7 +973,7 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
                     try {
                         /*@Caught*/ @NonNull Object CAUGHT_eq_2;
                         try {
-                            final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable RoundedBracketClauseCS roundedBrackets_0 = lNameExpCS_0.getRoundedBrackets();
+                            final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable RoundedBracketClauseCS roundedBrackets_0 = lNameExpCS.getRoundedBrackets();
                             final /*@Thrown*/ boolean eq_2 = roundedBrackets_0 == null;
                             CAUGHT_eq_2 = eq_2;
                         }
@@ -1162,7 +982,7 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
                         }
                         /*@Caught*/ @Nullable Object CAUGHT_not_0;
                         try {
-                            final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.Nullable Object container_0 = ClassifierOclContainerOperation.INSTANCE.evaluate(executor, lNameExpCS_0);
+                            final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.Nullable Object container_0 = ClassifierOclContainerOperation.INSTANCE.evaluate(executor, lNameExpCS);
                             final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_minioclcs_c_c_CallExpCS_4 = idResolver.getClass(CLSSid_CallExpCS, null);
                             final /*@Thrown*/ boolean oclIsKindOf_0 = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, container_0, TYP_minioclcs_c_c_CallExpCS_4).booleanValue();
                             /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable CallExpCS symbol_2;
@@ -1180,10 +1000,10 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
                             }
                             else {
                                 if (symbol_2 == null) {
-                                    throw throwNull(lNameExpCS_0, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::CallExpCS::nameExp\'");
+                                    throw throwNull(lNameExpCS, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::CallExpCS::nameExp\'");
                                 }
                                 final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable NameExpCS nameExp_0 = symbol_2.getNameExp();
-                                final /*@Thrown*/ boolean eq_4 = lNameExpCS_0.equals(nameExp_0);
+                                final /*@Thrown*/ boolean eq_4 = lNameExpCS.equals(nameExp_0);
                                 symbol_3 = eq_4;
                             }
                             final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean not_0 = BooleanNotOperation.INSTANCE.evaluate(symbol_3);
@@ -1200,9 +1020,9 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
                     }
                     /*@Caught*/ @NonNull Object CAUGHT_eq_5;
                     try {
-                        final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable PathNameCS expName = lNameExpCS_0.getExpName();
+                        final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable PathNameCS expName = lNameExpCS.getExpName();
                         if (expName == null) {
-                            throw throwNull(lNameExpCS_0, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathNameCS::path\'");
+                            throw throwNull(lNameExpCS, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathNameCS::path\'");
                         }
                         @SuppressWarnings("null")
                         final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<PathElementCS> path = expName.getPath();
@@ -1222,28 +1042,31 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
                 }
                 /*@Caught*/ @NonNull Object CAUGHT_ne;
                 try {
-                    final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.Nullable Element self_1 = lNameExpCS_0.getAst();
+                    final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_minioclcs_c_c_CSTrace_0 = idResolver.getClass(CLSSid_CSTrace, null);
+                    final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.Nullable Object oclContainer = ClassifierOclContainerOperation.INSTANCE.evaluate(executor, lNameExpCS);
+                    final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull CSTrace oclAsType_1 = ClassUtil.nonNullState((CSTrace)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, oclContainer, TYP_minioclcs_c_c_CSTrace_0));
+                    final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.Nullable Element self_1 = oclAsType_1.getAst();
                     if (self_1 == null) {
-                        throw throwNull(lNameExpCS_0, "Null where non-null value required");
+                        throw throwNull(lNameExpCS, "Null where non-null value required");
                     }
-                    final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable PathNameCS expName_0 = lNameExpCS_0.getExpName();
+                    final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable PathNameCS expName_0 = lNameExpCS.getExpName();
                     if (expName_0 == null) {
-                        throw throwNull(lNameExpCS_0, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathNameCS::path\'");
+                        throw throwNull(lNameExpCS, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathNameCS::path\'");
                     }
                     @SuppressWarnings("null")
                     final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<PathElementCS> path_0 = expName_0.getPath();
                     final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_path_0 = idResolver.createOrderedSetOfAll(ORD_CLSSid_PathElementCS, path_0);
                     final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable PathElementCS aPathElementCS = (PathElementCS)OrderedCollectionFirstOperation.INSTANCE.evaluate(BOXED_path_0);
                     if (aPathElementCS == null) {
-                        throw throwNull(lNameExpCS_0, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathElementCS::pathName\'");
+                        throw throwNull(lNameExpCS, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathElementCS::elementName\'");
                     }
-                    final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String pathName = aPathElementCS.getPathName();
-                    MiniOCLLookupResult<Variable> _lookupResult = lookupSolver._lookupUnqualifiedVariable(self_1, (String)pathName);
+                    final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String elementName = aPathElementCS.getElementName();
+                    MiniOCLLookupResult<Variable> _lookupResult = lookupSolver._lookupUnqualifiedVariable(self_1, (String)elementName);
                     Variable _lookupUnqualifiedVariable = null;
                     if (_lookupResult.size() == 1) {
                         _lookupUnqualifiedVariable = _lookupResult.getSingleResult();
                     } else {
-                        handleLookupError(aPathElementCS,pathName);
+                        handleLookupError(aPathElementCS,elementName);
                     };
                     final /*@Thrown*/ boolean ne = _lookupUnqualifiedVariable != null;
                     CAUGHT_ne = ne;
@@ -1254,97 +1077,58 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
                 final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean and_2 = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_and_1, CAUGHT_ne);
                 final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean not_1 = BooleanNotOperation.INSTANCE.evaluate(and_2);
                 if (not_1 == null) {
-                    throw throwNull(lNameExpCS_0, "Null if condition");
+                    throw throwNull(lNameExpCS, "Null if condition");
                 }
                 /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean symbol_16;
                 if (not_1) {
-                    /*@Caught*/ @Nullable Object CAUGHT_and_3;
+                    /*@Caught*/ @NonNull Object CAUGHT_eq_6;
                     try {
-                        /*@Caught*/ @NonNull Object CAUGHT_eq_6;
-                        try {
-                            final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable RoundedBracketClauseCS roundedBrackets_1 = lNameExpCS_0.getRoundedBrackets();
-                            final /*@Thrown*/ boolean eq_6 = roundedBrackets_1 == null;
-                            CAUGHT_eq_6 = eq_6;
-                        }
-                        catch (Exception e) {
-                            CAUGHT_eq_6 = ValueUtil.createInvalidValue(e);
-                        }
-                        /*@Caught*/ @Nullable Object CAUGHT_not_2;
-                        try {
-                            final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.Nullable Object container_1 = ClassifierOclContainerOperation.INSTANCE.evaluate(executor, lNameExpCS_0);
-                            final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_minioclcs_c_c_CallExpCS_6 = idResolver.getClass(CLSSid_CallExpCS, null);
-                            final /*@Thrown*/ boolean oclIsKindOf_1 = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, container_1, TYP_minioclcs_c_c_CallExpCS_6).booleanValue();
-                            /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable CallExpCS symbol_4;
-                            if (oclIsKindOf_1) {
-                                final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull CallExpCS oclAsType_1 = ClassUtil.nonNullState((CallExpCS)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, container_1, TYP_minioclcs_c_c_CallExpCS_6));
-                                symbol_4 = oclAsType_1;
-                            }
-                            else {
-                                symbol_4 = null;
-                            }
-                            final /*@Thrown*/ boolean eq_7 = symbol_4 == null;
-                            /*@Thrown*/ boolean symbol_5;
-                            if (eq_7) {
-                                symbol_5 = ValueUtil.FALSE_VALUE;
-                            }
-                            else {
-                                if (symbol_4 == null) {
-                                    throw throwNull(lNameExpCS_0, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::CallExpCS::nameExp\'");
-                                }
-                                final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable NameExpCS nameExp_1 = symbol_4.getNameExp();
-                                final /*@Thrown*/ boolean eq_8 = lNameExpCS_0.equals(nameExp_1);
-                                symbol_5 = eq_8;
-                            }
-                            final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean not_2 = BooleanNotOperation.INSTANCE.evaluate(symbol_5);
-                            CAUGHT_not_2 = not_2;
-                        }
-                        catch (Exception e) {
-                            CAUGHT_not_2 = ValueUtil.createInvalidValue(e);
-                        }
-                        final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean and_3 = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_eq_6, CAUGHT_not_2);
-                        CAUGHT_and_3 = and_3;
+                        final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable RoundedBracketClauseCS roundedBrackets_1 = lNameExpCS.getRoundedBrackets();
+                        final /*@Thrown*/ boolean eq_6 = roundedBrackets_1 == null;
+                        CAUGHT_eq_6 = eq_6;
                     }
                     catch (Exception e) {
-                        CAUGHT_and_3 = ValueUtil.createInvalidValue(e);
+                        CAUGHT_eq_6 = ValueUtil.createInvalidValue(e);
                     }
-                    /*@Caught*/ @NonNull Object CAUGHT_eq_9;
+                    /*@Caught*/ @Nullable Object CAUGHT_not_2;
                     try {
-                        final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.Nullable Element self_2 = lNameExpCS_0.getAst();
-                        if (self_2 == null) {
-                            throw throwNull(lNameExpCS_0, "Null where non-null value required");
+                        final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.Nullable Object container_1 = ClassifierOclContainerOperation.INSTANCE.evaluate(executor, lNameExpCS);
+                        final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_minioclcs_c_c_CallExpCS_6 = idResolver.getClass(CLSSid_CallExpCS, null);
+                        final /*@Thrown*/ boolean oclIsKindOf_1 = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, container_1, TYP_minioclcs_c_c_CallExpCS_6).booleanValue();
+                        /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable CallExpCS symbol_4;
+                        if (oclIsKindOf_1) {
+                            final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull CallExpCS oclAsType_2 = ClassUtil.nonNullState((CallExpCS)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, container_1, TYP_minioclcs_c_c_CallExpCS_6));
+                            symbol_4 = oclAsType_2;
                         }
-                        final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable PathNameCS expName_1 = lNameExpCS_0.getExpName();
-                        if (expName_1 == null) {
-                            throw throwNull(lNameExpCS_0, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathNameCS::path\'");
+                        else {
+                            symbol_4 = null;
                         }
-                        @SuppressWarnings("null")
-                        final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<PathElementCS> path_1 = expName_1.getPath();
-                        final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_path_1 = idResolver.createOrderedSetOfAll(ORD_CLSSid_PathElementCS, path_1);
-                        final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable PathElementCS aPathElementCS_0 = (PathElementCS)OrderedCollectionFirstOperation.INSTANCE.evaluate(BOXED_path_1);
-                        if (aPathElementCS_0 == null) {
-                            throw throwNull(lNameExpCS_0, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathElementCS::pathName\'");
+                        final /*@Thrown*/ boolean eq_7 = symbol_4 == null;
+                        /*@Thrown*/ boolean symbol_5;
+                        if (eq_7) {
+                            symbol_5 = ValueUtil.FALSE_VALUE;
                         }
-                        final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String pathName_0 = aPathElementCS_0.getPathName();
-                        MiniOCLLookupResult<Variable> _lookupResult_0 = lookupSolver._lookupUnqualifiedVariable(self_2, (String)pathName_0);
-                        Variable _lookupUnqualifiedVariable_0 = null;
-                        if (_lookupResult_0.size() == 1) {
-                            _lookupUnqualifiedVariable_0 = _lookupResult_0.getSingleResult();
-                        } else {
-                            handleLookupError(aPathElementCS_0,pathName_0);
-                        };
-                        final /*@Thrown*/ boolean eq_9 = _lookupUnqualifiedVariable_0 == null;
-                        CAUGHT_eq_9 = eq_9;
+                        else {
+                            if (symbol_4 == null) {
+                                throw throwNull(lNameExpCS, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::CallExpCS::nameExp\'");
+                            }
+                            final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable NameExpCS nameExp_1 = symbol_4.getNameExp();
+                            final /*@Thrown*/ boolean eq_8 = lNameExpCS.equals(nameExp_1);
+                            symbol_5 = eq_8;
+                        }
+                        final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean not_2 = BooleanNotOperation.INSTANCE.evaluate(symbol_5);
+                        CAUGHT_not_2 = not_2;
                     }
                     catch (Exception e) {
-                        CAUGHT_eq_9 = ValueUtil.createInvalidValue(e);
+                        CAUGHT_not_2 = ValueUtil.createInvalidValue(e);
                     }
-                    final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean and_4 = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_and_3, CAUGHT_eq_9);
-                    if (and_4 == null) {
-                        throw throwNull(lNameExpCS_0, "Null if condition");
+                    final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean and_3 = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_eq_6, CAUGHT_not_2);
+                    if (and_3 == null) {
+                        throw throwNull(lNameExpCS, "Null if condition");
                     }
                     /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean symbol_15;
-                    if (and_4) {
-                        final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.Nullable Element ast = lNameExpCS_0.getAst();
+                    if (and_3) {
+                        final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.Nullable Element ast = lNameExpCS.getAst();
                         final /*@Thrown*/ boolean symbol_6 = ast != null;
                         /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean raw_aPropertyCallExp;
                         if (symbol_6) {
@@ -1353,37 +1137,37 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
                             if (symbol_7) {
                                 final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.Nullable PropertyCallExp symbol_8 = (PropertyCallExp)ast;
                                 if (symbol_8 == null) {
-                                    throw throwNull(lNameExpCS_0, "Null where non-null value required");
+                                    throw throwNull(lNameExpCS, "Null where non-null value required");
                                 }
                                 final /*@Thrown*/ boolean symbol_9 = ast != null;
                                 /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean raw_ast;
                                 if (symbol_9) {
                                     if (ast == null) {
-                                        throw throwNull(lNameExpCS_0, "Null where non-null value required");
+                                        throw throwNull(lNameExpCS, "Null where non-null value required");
                                     }
-                                    MiniOCLLookupResult<Variable> _lookupResult_1 = lookupSolver._lookupUnqualifiedVariable(symbol_8, STR_self);
-                                    Variable _lookupUnqualifiedVariable_1 = null;
-                                    if (_lookupResult_1.size() == 1) {
-                                        _lookupUnqualifiedVariable_1 = _lookupResult_1.getSingleResult();
+                                    MiniOCLLookupResult<Variable> _lookupResult_0 = lookupSolver._lookupUnqualifiedVariable(symbol_8, STR_self);
+                                    Variable _lookupUnqualifiedVariable_0 = null;
+                                    if (_lookupResult_0.size() == 1) {
+                                        _lookupUnqualifiedVariable_0 = _lookupResult_0.getSingleResult();
                                     } else {
                                     };
-                                    if (_lookupUnqualifiedVariable_1 == null) {
-                                        throw throwNull(lNameExpCS_0, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCL/1.0\'::TypedElement::type\'");
+                                    if (_lookupUnqualifiedVariable_0 == null) {
+                                        throw throwNull(lNameExpCS, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCL/1.0\'::TypedElement::type\'");
                                     }
                                     @SuppressWarnings("null")
-                                    final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.NonNull Class type = _lookupUnqualifiedVariable_1.getType();
+                                    final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.NonNull Class type = _lookupUnqualifiedVariable_0.getType();
                                     final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Property CTORid_referredVariable = idResolver.getProperty(PROPid_referredVariable);
                                     final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Property CTORid_type = idResolver.getProperty(PROPid_type);
                                     final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_miniocl_c_c_VariableExp_0 = idResolver.getClass(CLSSid_VariableExp, null);
                                     final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.NonNull VariableExp symbol_12 = (VariableExp)TYP_miniocl_c_c_VariableExp_0.createInstance();
-                                    CTORid_referredVariable.initValue(symbol_12, _lookupUnqualifiedVariable_1);
+                                    CTORid_referredVariable.initValue(symbol_12, _lookupUnqualifiedVariable_0);
                                     CTORid_type.initValue(symbol_12, type);
                                     models[1/*rightAS*/].add(symbol_12);
                                     // property assignments
                                     symbol_8.setOwnedSource(symbol_12);
                                     objectManager.assigned(symbol_8, MiniOCLPackage.Literals.CALL_EXP__OWNED_SOURCE, symbol_12, null);
-                                    final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean m_NameExpCS_ast_1 = ValueUtil.TRUE_VALUE;
-                                    raw_ast = m_NameExpCS_ast_1;
+                                    final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean m_NameExpCS_ast = ValueUtil.TRUE_VALUE;
+                                    raw_ast = m_NameExpCS_ast;
                                 }
                                 else {
                                     raw_ast = ValueUtil.FALSE_VALUE;
@@ -1415,7 +1199,325 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
             }
             return symbol_17;
         } catch (Throwable e) {
-            return handleExecutionFailure("MAP_m_NameExpCS_ast_1", e);
+            return handleExecutionFailure("MAP_m_NameExpCS_ast", e);
+        }
+    }
+    
+    /**
+     * 
+     * map m_NameExpCS_ast_1 in MiniOCLCS2AS_qvtp_qvtcas {
+     *   leftCS (lNameExpCS : minioclcs::NameExpCS[1];
+     *  |)
+     * { |}
+     * rightAS ( |)
+     * {aPropertyCallExp : miniocl::PropertyCallExp[1];
+     * ast : miniocl::Element[1];
+     * referredProperty : miniocl::Property[1];
+     * type : miniocl::Class[1];
+     *  |}
+     * where ( |
+     * lNameExpCS.isPropCallExpWithImplicitSource()
+     *   not lNameExpCS.isVariableExp()
+     *   not lNameExpCS.isPropCallExpWithExplicitSource())
+     * {_'=' : Boolean[1];
+     *  |
+     * aPropertyCallExp := lNameExpCS.ast;
+     * ast := lNameExpCS.ast;
+     * referredProperty := aPropertyCallExp.referredProperty;
+     * _'=' := referredProperty =
+     *   null;
+     * type := if _'='
+     *   then null
+     *   else referredProperty.type
+     *   endif;
+     * aPropertyCallExp.type := type;
+     * }
+     * 
+     */
+    protected class MAP_m_NameExpCS_ast_1 extends AbstractInvocation
+    {
+        protected final /*@NonInvalid*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull NameExpCS lNameExpCS_0;
+        
+        public MAP_m_NameExpCS_ast_1(@NonNull Object @NonNull [] boundValues) {
+            lNameExpCS_0 = (NameExpCS)boundValues[0];
+        }
+        
+        public boolean execute()  {
+            try {
+                // predicates and unrealized variables
+                final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull IdResolver idResolver = executor.getIdResolver();
+                /*@Caught*/ @NonNull Object CAUGHT_eq;
+                try {
+                    final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable RoundedBracketClauseCS roundedBrackets = lNameExpCS_0.getRoundedBrackets();
+                    final /*@Thrown*/ boolean eq = roundedBrackets == null;
+                    CAUGHT_eq = eq;
+                }
+                catch (Exception e) {
+                    CAUGHT_eq = ValueUtil.createInvalidValue(e);
+                }
+                /*@Caught*/ @Nullable Object CAUGHT_not;
+                try {
+                    final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.Nullable Object container = ClassifierOclContainerOperation.INSTANCE.evaluate(executor, lNameExpCS_0);
+                    final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_minioclcs_c_c_CallExpCS_2 = idResolver.getClass(CLSSid_CallExpCS, null);
+                    final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, container, TYP_minioclcs_c_c_CallExpCS_2).booleanValue();
+                    /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable CallExpCS symbol_0;
+                    if (oclIsKindOf) {
+                        final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull CallExpCS oclAsType = ClassUtil.nonNullState((CallExpCS)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, container, TYP_minioclcs_c_c_CallExpCS_2));
+                        symbol_0 = oclAsType;
+                    }
+                    else {
+                        symbol_0 = null;
+                    }
+                    final /*@Thrown*/ boolean eq_0 = symbol_0 == null;
+                    /*@Thrown*/ boolean symbol_1;
+                    if (eq_0) {
+                        symbol_1 = ValueUtil.FALSE_VALUE;
+                    }
+                    else {
+                        if (symbol_0 == null) {
+                            throw throwNull(lNameExpCS_0, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::CallExpCS::nameExp\'");
+                        }
+                        final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable NameExpCS nameExp = symbol_0.getNameExp();
+                        final /*@Thrown*/ boolean eq_1 = lNameExpCS_0.equals(nameExp);
+                        symbol_1 = eq_1;
+                    }
+                    final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean not = BooleanNotOperation.INSTANCE.evaluate(symbol_1);
+                    CAUGHT_not = not;
+                }
+                catch (Exception e) {
+                    CAUGHT_not = ValueUtil.createInvalidValue(e);
+                }
+                final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean and = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_eq, CAUGHT_not);
+                if (and == null) {
+                    throw throwNull(lNameExpCS_0, "Null if condition");
+                }
+                /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean symbol_14;
+                if (and) {
+                    /*@Caught*/ @Nullable Object CAUGHT_and_1;
+                    try {
+                        /*@Caught*/ @Nullable Object CAUGHT_and_0;
+                        try {
+                            /*@Caught*/ @NonNull Object CAUGHT_eq_2;
+                            try {
+                                final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable RoundedBracketClauseCS roundedBrackets_0 = lNameExpCS_0.getRoundedBrackets();
+                                final /*@Thrown*/ boolean eq_2 = roundedBrackets_0 == null;
+                                CAUGHT_eq_2 = eq_2;
+                            }
+                            catch (Exception e) {
+                                CAUGHT_eq_2 = ValueUtil.createInvalidValue(e);
+                            }
+                            /*@Caught*/ @Nullable Object CAUGHT_not_0;
+                            try {
+                                final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.Nullable Object container_0 = ClassifierOclContainerOperation.INSTANCE.evaluate(executor, lNameExpCS_0);
+                                final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_minioclcs_c_c_CallExpCS_4 = idResolver.getClass(CLSSid_CallExpCS, null);
+                                final /*@Thrown*/ boolean oclIsKindOf_0 = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, container_0, TYP_minioclcs_c_c_CallExpCS_4).booleanValue();
+                                /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable CallExpCS symbol_2;
+                                if (oclIsKindOf_0) {
+                                    final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull CallExpCS oclAsType_0 = ClassUtil.nonNullState((CallExpCS)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, container_0, TYP_minioclcs_c_c_CallExpCS_4));
+                                    symbol_2 = oclAsType_0;
+                                }
+                                else {
+                                    symbol_2 = null;
+                                }
+                                final /*@Thrown*/ boolean eq_3 = symbol_2 == null;
+                                /*@Thrown*/ boolean symbol_3;
+                                if (eq_3) {
+                                    symbol_3 = ValueUtil.FALSE_VALUE;
+                                }
+                                else {
+                                    if (symbol_2 == null) {
+                                        throw throwNull(lNameExpCS_0, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::CallExpCS::nameExp\'");
+                                    }
+                                    final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable NameExpCS nameExp_0 = symbol_2.getNameExp();
+                                    final /*@Thrown*/ boolean eq_4 = lNameExpCS_0.equals(nameExp_0);
+                                    symbol_3 = eq_4;
+                                }
+                                final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean not_0 = BooleanNotOperation.INSTANCE.evaluate(symbol_3);
+                                CAUGHT_not_0 = not_0;
+                            }
+                            catch (Exception e) {
+                                CAUGHT_not_0 = ValueUtil.createInvalidValue(e);
+                            }
+                            final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean and_0 = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_eq_2, CAUGHT_not_0);
+                            CAUGHT_and_0 = and_0;
+                        }
+                        catch (Exception e) {
+                            CAUGHT_and_0 = ValueUtil.createInvalidValue(e);
+                        }
+                        /*@Caught*/ @NonNull Object CAUGHT_eq_5;
+                        try {
+                            final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable PathNameCS expName = lNameExpCS_0.getExpName();
+                            if (expName == null) {
+                                throw throwNull(lNameExpCS_0, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathNameCS::path\'");
+                            }
+                            @SuppressWarnings("null")
+                            final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<PathElementCS> path = expName.getPath();
+                            final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_path = idResolver.createOrderedSetOfAll(ORD_CLSSid_PathElementCS, path);
+                            final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(BOXED_path);
+                            final /*@Thrown*/ boolean eq_5 = size.equals(INT_1);
+                            CAUGHT_eq_5 = eq_5;
+                        }
+                        catch (Exception e) {
+                            CAUGHT_eq_5 = ValueUtil.createInvalidValue(e);
+                        }
+                        final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean and_1 = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_and_0, CAUGHT_eq_5);
+                        CAUGHT_and_1 = and_1;
+                    }
+                    catch (Exception e) {
+                        CAUGHT_and_1 = ValueUtil.createInvalidValue(e);
+                    }
+                    /*@Caught*/ @NonNull Object CAUGHT_ne;
+                    try {
+                        final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_minioclcs_c_c_CSTrace_0 = idResolver.getClass(CLSSid_CSTrace, null);
+                        final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.Nullable Object oclContainer = ClassifierOclContainerOperation.INSTANCE.evaluate(executor, lNameExpCS_0);
+                        final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull CSTrace oclAsType_1 = ClassUtil.nonNullState((CSTrace)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, oclContainer, TYP_minioclcs_c_c_CSTrace_0));
+                        final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.Nullable Element self_1 = oclAsType_1.getAst();
+                        if (self_1 == null) {
+                            throw throwNull(lNameExpCS_0, "Null where non-null value required");
+                        }
+                        final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable PathNameCS expName_0 = lNameExpCS_0.getExpName();
+                        if (expName_0 == null) {
+                            throw throwNull(lNameExpCS_0, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathNameCS::path\'");
+                        }
+                        @SuppressWarnings("null")
+                        final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<PathElementCS> path_0 = expName_0.getPath();
+                        final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_path_0 = idResolver.createOrderedSetOfAll(ORD_CLSSid_PathElementCS, path_0);
+                        final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable PathElementCS aPathElementCS = (PathElementCS)OrderedCollectionFirstOperation.INSTANCE.evaluate(BOXED_path_0);
+                        if (aPathElementCS == null) {
+                            throw throwNull(lNameExpCS_0, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathElementCS::elementName\'");
+                        }
+                        final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String elementName = aPathElementCS.getElementName();
+                        MiniOCLLookupResult<Variable> _lookupResult = lookupSolver._lookupUnqualifiedVariable(self_1, (String)elementName);
+                        Variable _lookupUnqualifiedVariable = null;
+                        if (_lookupResult.size() == 1) {
+                            _lookupUnqualifiedVariable = _lookupResult.getSingleResult();
+                        } else {
+                            handleLookupError(aPathElementCS,elementName);
+                        };
+                        final /*@Thrown*/ boolean ne = _lookupUnqualifiedVariable != null;
+                        CAUGHT_ne = ne;
+                    }
+                    catch (Exception e) {
+                        CAUGHT_ne = ValueUtil.createInvalidValue(e);
+                    }
+                    final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean and_2 = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_and_1, CAUGHT_ne);
+                    final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean not_1 = BooleanNotOperation.INSTANCE.evaluate(and_2);
+                    if (not_1 == null) {
+                        throw throwNull(lNameExpCS_0, "Null if condition");
+                    }
+                    /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean symbol_13;
+                    if (not_1) {
+                        /*@Caught*/ @NonNull Object CAUGHT_eq_6;
+                        try {
+                            final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable RoundedBracketClauseCS roundedBrackets_1 = lNameExpCS_0.getRoundedBrackets();
+                            final /*@Thrown*/ boolean eq_6 = roundedBrackets_1 == null;
+                            CAUGHT_eq_6 = eq_6;
+                        }
+                        catch (Exception e) {
+                            CAUGHT_eq_6 = ValueUtil.createInvalidValue(e);
+                        }
+                        /*@Caught*/ @NonNull Object CAUGHT_symbol_5;
+                        try {
+                            final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.Nullable Object container_1 = ClassifierOclContainerOperation.INSTANCE.evaluate(executor, lNameExpCS_0);
+                            final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_minioclcs_c_c_CallExpCS_6 = idResolver.getClass(CLSSid_CallExpCS, null);
+                            final /*@Thrown*/ boolean oclIsKindOf_1 = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, container_1, TYP_minioclcs_c_c_CallExpCS_6).booleanValue();
+                            /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable CallExpCS symbol_4;
+                            if (oclIsKindOf_1) {
+                                final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull CallExpCS oclAsType_2 = ClassUtil.nonNullState((CallExpCS)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, container_1, TYP_minioclcs_c_c_CallExpCS_6));
+                                symbol_4 = oclAsType_2;
+                            }
+                            else {
+                                symbol_4 = null;
+                            }
+                            final /*@Thrown*/ boolean eq_7 = symbol_4 == null;
+                            /*@Thrown*/ boolean symbol_5;
+                            if (eq_7) {
+                                symbol_5 = ValueUtil.FALSE_VALUE;
+                            }
+                            else {
+                                if (symbol_4 == null) {
+                                    throw throwNull(lNameExpCS_0, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::CallExpCS::nameExp\'");
+                                }
+                                final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable NameExpCS nameExp_1 = symbol_4.getNameExp();
+                                final /*@Thrown*/ boolean eq_8 = lNameExpCS_0.equals(nameExp_1);
+                                symbol_5 = eq_8;
+                            }
+                            CAUGHT_symbol_5 = symbol_5;
+                        }
+                        catch (Exception e) {
+                            CAUGHT_symbol_5 = ValueUtil.createInvalidValue(e);
+                        }
+                        final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean and_3 = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_eq_6, CAUGHT_symbol_5);
+                        final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean not_2 = BooleanNotOperation.INSTANCE.evaluate(and_3);
+                        if (not_2 == null) {
+                            throw throwNull(lNameExpCS_0, "Null if condition");
+                        }
+                        /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean symbol_12;
+                        if (not_2) {
+                            final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.Nullable Element ast = lNameExpCS_0.getAst();
+                            final /*@Thrown*/ boolean symbol_6 = ast != null;
+                            /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean raw_aPropertyCallExp;
+                            if (symbol_6) {
+                                final /*@NonInvalid*/ boolean symbol_7 = ast instanceof PropertyCallExp;
+                                /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean symbol_11;
+                                if (symbol_7) {
+                                    final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.Nullable PropertyCallExp symbol_8 = (PropertyCallExp)ast;
+                                    if (symbol_8 == null) {
+                                        throw throwNull(lNameExpCS_0, "Null where non-null value required");
+                                    }
+                                    final /*@Thrown*/ boolean symbol_9 = ast != null;
+                                    /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean raw_ast;
+                                    if (symbol_9) {
+                                        if (ast == null) {
+                                            throw throwNull(lNameExpCS_0, "Null where non-null value required");
+                                        }
+                                        objectManager.getting(symbol_8, MiniOCLPackage.Literals.PROPERTY_CALL_EXP__REFERRED_PROPERTY, false);
+                                        @SuppressWarnings("null")
+                                        final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.NonNull Property referredProperty = symbol_8.getReferredProperty();
+                                        @SuppressWarnings("null")
+                                        final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.NonNull Class type = referredProperty.getType();
+                                        // property assignments
+                                        symbol_8.setType(type);
+                                        objectManager.assigned(symbol_8, MiniOCLPackage.Literals.TYPED_ELEMENT__TYPE, type, null);
+                                        final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean m_NameExpCS_ast_1 = ValueUtil.TRUE_VALUE;
+                                        raw_ast = m_NameExpCS_ast_1;
+                                    }
+                                    else {
+                                        raw_ast = ValueUtil.FALSE_VALUE;
+                                    }
+                                    symbol_11 = raw_ast;
+                                }
+                                else {
+                                    symbol_11 = ValueUtil.FALSE_VALUE;
+                                }
+                                raw_aPropertyCallExp = symbol_11;
+                            }
+                            else {
+                                raw_aPropertyCallExp = ValueUtil.FALSE_VALUE;
+                            }
+                            symbol_12 = raw_aPropertyCallExp;
+                        }
+                        else {
+                            symbol_12 = ValueUtil.FALSE_VALUE;
+                        }
+                        symbol_13 = symbol_12;
+                    }
+                    else {
+                        symbol_13 = ValueUtil.FALSE_VALUE;
+                    }
+                    symbol_14 = symbol_13;
+                }
+                else {
+                    symbol_14 = ValueUtil.FALSE_VALUE;
+                }
+                return symbol_14;
+            } catch (Throwable e) {
+                return handleExecutionFailure("MAP_m_NameExpCS_ast_1", e);
+            }
+        }
+        
+        public boolean isEqual(@NonNull IdResolver idResolver, @NonNull Object @NonNull [] thoseValues) {
+            return idResolver.oclEquals(lNameExpCS_0, thoseValues[0]);
         }
     }
     
@@ -1424,22 +1526,44 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
      * map m_NameExpCS_ast_2 in MiniOCLCS2AS_qvtp_qvtcas {
      *   leftCS (lNameExpCS : minioclcs::NameExpCS[1];
      *  |)
-     * { |}
+     * {_'if' : minioclcs::CallExpCS[?];
+     * parentAsCallExpCS : minioclcs::CallExpCS[?];
+     *  |}
      * rightAS ( |)
-     * {aVariableExp : miniocl::VariableExp[1];
+     * {aPropertyCallExp : miniocl::PropertyCallExp[1];
      * ast : miniocl::Element[1];
-     * referredVariable : miniocl::Variable[1];
-     * type : miniocl::Class[1];
+     * if1 : miniocl::Element[?];
+     * ownedSource : miniocl::OCLExpression[1];
      *  |}
      * where ( |
-     * lNameExpCS.isVariableExp()
-     *   not lNameExpCS.isPropCallExpWithExplicitSource())
-     * { |
-     * aVariableExp := lNameExpCS.ast;
+     * lNameExpCS.isPropCallExpWithExplicitSource()
+     *   )
+     * {_'=' : Boolean[1];
+     * _'=1' : Boolean[1];
+     * _'=2' : Boolean[1];
+     *  |
+     * aPropertyCallExp := lNameExpCS.ast;
      * ast := lNameExpCS.ast;
-     * referredVariable := aVariableExp.referredVariable;
-     * type := referredVariable.type;
-     * aVariableExp.type := type;
+     * parentAsCallExpCS := lNameExpCS.parentAsCallExpCS();
+     * _'=' := parentAsCallExpCS =
+     *   null;
+     * _'if' := if _'='
+     *   then null
+     *   else parentAsCallExpCS.source
+     *   endif;
+     * _'=1' := _'if' =
+     *   null;
+     * if1 := if _'=1'
+     *   then null
+     *   else _'if'.ast
+     *   endif;
+     * _'=2' := if1 =
+     *   null;
+     * ownedSource := if _'=2'
+     *   then null
+     *   else if1.oclAsType(miniocl::OCLExpression)
+     *   endif;
+     * aPropertyCallExp.ownedSource := ownedSource;
      * }
      * 
      */
@@ -1447,214 +1571,150 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
         try {
             // predicates and unrealized variables
             final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull IdResolver idResolver = executor.getIdResolver();
-            /*@Caught*/ @Nullable Object CAUGHT_and_0;
+            /*@Caught*/ @NonNull Object CAUGHT_eq;
             try {
-                /*@Caught*/ @Nullable Object CAUGHT_and;
-                try {
-                    /*@Caught*/ @NonNull Object CAUGHT_eq;
-                    try {
-                        final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable RoundedBracketClauseCS roundedBrackets = lNameExpCS_1.getRoundedBrackets();
-                        final /*@Thrown*/ boolean eq = roundedBrackets == null;
-                        CAUGHT_eq = eq;
-                    }
-                    catch (Exception e) {
-                        CAUGHT_eq = ValueUtil.createInvalidValue(e);
-                    }
-                    /*@Caught*/ @Nullable Object CAUGHT_not;
-                    try {
-                        final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.Nullable Object container = ClassifierOclContainerOperation.INSTANCE.evaluate(executor, lNameExpCS_1);
-                        final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_minioclcs_c_c_CallExpCS_2 = idResolver.getClass(CLSSid_CallExpCS, null);
-                        final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, container, TYP_minioclcs_c_c_CallExpCS_2).booleanValue();
-                        /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable CallExpCS symbol_0;
-                        if (oclIsKindOf) {
-                            final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull CallExpCS oclAsType = ClassUtil.nonNullState((CallExpCS)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, container, TYP_minioclcs_c_c_CallExpCS_2));
-                            symbol_0 = oclAsType;
-                        }
-                        else {
-                            symbol_0 = null;
-                        }
-                        final /*@Thrown*/ boolean eq_0 = symbol_0 == null;
-                        /*@Thrown*/ boolean symbol_1;
-                        if (eq_0) {
-                            symbol_1 = ValueUtil.FALSE_VALUE;
-                        }
-                        else {
-                            if (symbol_0 == null) {
-                                throw throwNull(lNameExpCS_1, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::CallExpCS::nameExp\'");
-                            }
-                            final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable NameExpCS nameExp = symbol_0.getNameExp();
-                            final /*@Thrown*/ boolean eq_1 = lNameExpCS_1.equals(nameExp);
-                            symbol_1 = eq_1;
-                        }
-                        final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean not = BooleanNotOperation.INSTANCE.evaluate(symbol_1);
-                        CAUGHT_not = not;
-                    }
-                    catch (Exception e) {
-                        CAUGHT_not = ValueUtil.createInvalidValue(e);
-                    }
-                    final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean and = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_eq, CAUGHT_not);
-                    CAUGHT_and = and;
-                }
-                catch (Exception e) {
-                    CAUGHT_and = ValueUtil.createInvalidValue(e);
-                }
-                /*@Caught*/ @NonNull Object CAUGHT_eq_2;
-                try {
-                    final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable PathNameCS expName = lNameExpCS_1.getExpName();
-                    if (expName == null) {
-                        throw throwNull(lNameExpCS_1, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathNameCS::path\'");
-                    }
-                    @SuppressWarnings("null")
-                    final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<PathElementCS> path = expName.getPath();
-                    final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_path = idResolver.createOrderedSetOfAll(ORD_CLSSid_PathElementCS, path);
-                    final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(BOXED_path);
-                    final /*@Thrown*/ boolean eq_2 = size.equals(INT_1);
-                    CAUGHT_eq_2 = eq_2;
-                }
-                catch (Exception e) {
-                    CAUGHT_eq_2 = ValueUtil.createInvalidValue(e);
-                }
-                final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean and_0 = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_and, CAUGHT_eq_2);
-                CAUGHT_and_0 = and_0;
+                final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable RoundedBracketClauseCS roundedBrackets = lNameExpCS_1.getRoundedBrackets();
+                final /*@Thrown*/ boolean eq = roundedBrackets == null;
+                CAUGHT_eq = eq;
             }
             catch (Exception e) {
-                CAUGHT_and_0 = ValueUtil.createInvalidValue(e);
+                CAUGHT_eq = ValueUtil.createInvalidValue(e);
             }
-            /*@Caught*/ @NonNull Object CAUGHT_ne;
+            /*@Caught*/ @NonNull Object CAUGHT_symbol_1;
             try {
-                final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.Nullable Element self_1 = lNameExpCS_1.getAst();
-                if (self_1 == null) {
-                    throw throwNull(lNameExpCS_1, "Null where non-null value required");
-                }
-                final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable PathNameCS expName_0 = lNameExpCS_1.getExpName();
-                if (expName_0 == null) {
-                    throw throwNull(lNameExpCS_1, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathNameCS::path\'");
-                }
-                @SuppressWarnings("null")
-                final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<PathElementCS> path_0 = expName_0.getPath();
-                final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_path_0 = idResolver.createOrderedSetOfAll(ORD_CLSSid_PathElementCS, path_0);
-                final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable PathElementCS aPathElementCS = (PathElementCS)OrderedCollectionFirstOperation.INSTANCE.evaluate(BOXED_path_0);
-                if (aPathElementCS == null) {
-                    throw throwNull(lNameExpCS_1, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathElementCS::pathName\'");
-                }
-                final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String pathName = aPathElementCS.getPathName();
-                MiniOCLLookupResult<Variable> _lookupResult = lookupSolver._lookupUnqualifiedVariable(self_1, (String)pathName);
-                Variable _lookupUnqualifiedVariable = null;
-                if (_lookupResult.size() == 1) {
-                    _lookupUnqualifiedVariable = _lookupResult.getSingleResult();
-                } else {
-                    handleLookupError(aPathElementCS,pathName);
-                };
-                final /*@Thrown*/ boolean ne = _lookupUnqualifiedVariable != null;
-                CAUGHT_ne = ne;
-            }
-            catch (Exception e) {
-                CAUGHT_ne = ValueUtil.createInvalidValue(e);
-            }
-            final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean and_1 = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_and_0, CAUGHT_ne);
-            if (and_1 == null) {
-                throw throwNull(lNameExpCS_1, "Null if condition");
-            }
-            /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean symbol_11;
-            if (and_1) {
-                /*@Caught*/ @NonNull Object CAUGHT_eq_3;
-                try {
-                    final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable RoundedBracketClauseCS roundedBrackets_0 = lNameExpCS_1.getRoundedBrackets();
-                    final /*@Thrown*/ boolean eq_3 = roundedBrackets_0 == null;
-                    CAUGHT_eq_3 = eq_3;
-                }
-                catch (Exception e) {
-                    CAUGHT_eq_3 = ValueUtil.createInvalidValue(e);
-                }
-                /*@Caught*/ @NonNull Object CAUGHT_symbol_3;
-                try {
-                    final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.Nullable Object container_0 = ClassifierOclContainerOperation.INSTANCE.evaluate(executor, lNameExpCS_1);
-                    final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_minioclcs_c_c_CallExpCS_4 = idResolver.getClass(CLSSid_CallExpCS, null);
-                    final /*@Thrown*/ boolean oclIsKindOf_0 = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, container_0, TYP_minioclcs_c_c_CallExpCS_4).booleanValue();
-                    /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable CallExpCS symbol_2;
-                    if (oclIsKindOf_0) {
-                        final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull CallExpCS oclAsType_0 = ClassUtil.nonNullState((CallExpCS)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, container_0, TYP_minioclcs_c_c_CallExpCS_4));
-                        symbol_2 = oclAsType_0;
-                    }
-                    else {
-                        symbol_2 = null;
-                    }
-                    final /*@Thrown*/ boolean eq_4 = symbol_2 == null;
-                    /*@Thrown*/ boolean symbol_3;
-                    if (eq_4) {
-                        symbol_3 = ValueUtil.FALSE_VALUE;
-                    }
-                    else {
-                        if (symbol_2 == null) {
-                            throw throwNull(lNameExpCS_1, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::CallExpCS::nameExp\'");
-                        }
-                        final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable NameExpCS nameExp_0 = symbol_2.getNameExp();
-                        final /*@Thrown*/ boolean eq_5 = lNameExpCS_1.equals(nameExp_0);
-                        symbol_3 = eq_5;
-                    }
-                    CAUGHT_symbol_3 = symbol_3;
-                }
-                catch (Exception e) {
-                    CAUGHT_symbol_3 = ValueUtil.createInvalidValue(e);
-                }
-                final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean and_2 = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_eq_3, CAUGHT_symbol_3);
-                final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean not_0 = BooleanNotOperation.INSTANCE.evaluate(and_2);
-                if (not_0 == null) {
-                    throw throwNull(lNameExpCS_1, "Null if condition");
-                }
-                /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean symbol_10;
-                if (not_0) {
-                    final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.Nullable Element ast = lNameExpCS_1.getAst();
-                    final /*@Thrown*/ boolean symbol_4 = ast != null;
-                    /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean raw_aVariableExp;
-                    if (symbol_4) {
-                        final /*@NonInvalid*/ boolean symbol_5 = ast instanceof VariableExp;
-                        /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean symbol_9;
-                        if (symbol_5) {
-                            final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.Nullable VariableExp symbol_6 = (VariableExp)ast;
-                            if (symbol_6 == null) {
-                                throw throwNull(lNameExpCS_1, "Null where non-null value required");
-                            }
-                            final /*@Thrown*/ boolean symbol_7 = ast != null;
-                            /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean raw_ast;
-                            if (symbol_7) {
-                                if (ast == null) {
-                                    throw throwNull(lNameExpCS_1, "Null where non-null value required");
-                                }
-                                @SuppressWarnings("null")
-                                final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.NonNull Variable referredVariable = symbol_6.getReferredVariable();
-                                @SuppressWarnings("null")
-                                final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.NonNull Class type = referredVariable.getType();
-                                // property assignments
-                                symbol_6.setType(type);
-                                objectManager.assigned(symbol_6, MiniOCLPackage.Literals.TYPED_ELEMENT__TYPE, type, null);
-                                final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean m_NameExpCS_ast_2 = ValueUtil.TRUE_VALUE;
-                                raw_ast = m_NameExpCS_ast_2;
-                            }
-                            else {
-                                raw_ast = ValueUtil.FALSE_VALUE;
-                            }
-                            symbol_9 = raw_ast;
-                        }
-                        else {
-                            symbol_9 = ValueUtil.FALSE_VALUE;
-                        }
-                        raw_aVariableExp = symbol_9;
-                    }
-                    else {
-                        raw_aVariableExp = ValueUtil.FALSE_VALUE;
-                    }
-                    symbol_10 = raw_aVariableExp;
+                final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.Nullable Object container = ClassifierOclContainerOperation.INSTANCE.evaluate(executor, lNameExpCS_1);
+                final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_minioclcs_c_c_CallExpCS_2 = idResolver.getClass(CLSSid_CallExpCS, null);
+                final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, container, TYP_minioclcs_c_c_CallExpCS_2).booleanValue();
+                /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable CallExpCS symbol_0;
+                if (oclIsKindOf) {
+                    final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull CallExpCS oclAsType = ClassUtil.nonNullState((CallExpCS)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, container, TYP_minioclcs_c_c_CallExpCS_2));
+                    symbol_0 = oclAsType;
                 }
                 else {
-                    symbol_10 = ValueUtil.FALSE_VALUE;
+                    symbol_0 = null;
                 }
-                symbol_11 = symbol_10;
+                final /*@Thrown*/ boolean eq_0 = symbol_0 == null;
+                /*@Thrown*/ boolean symbol_1;
+                if (eq_0) {
+                    symbol_1 = ValueUtil.FALSE_VALUE;
+                }
+                else {
+                    if (symbol_0 == null) {
+                        throw throwNull(lNameExpCS_1, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::CallExpCS::nameExp\'");
+                    }
+                    final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable NameExpCS nameExp = symbol_0.getNameExp();
+                    final /*@Thrown*/ boolean eq_1 = lNameExpCS_1.equals(nameExp);
+                    symbol_1 = eq_1;
+                }
+                CAUGHT_symbol_1 = symbol_1;
+            }
+            catch (Exception e) {
+                CAUGHT_symbol_1 = ValueUtil.createInvalidValue(e);
+            }
+            final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean and = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_eq, CAUGHT_symbol_1);
+            if (and == null) {
+                throw throwNull(lNameExpCS_1, "Null if condition");
+            }
+            /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean symbol_16;
+            if (and) {
+                final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.Nullable Element ast = lNameExpCS_1.getAst();
+                final /*@Thrown*/ boolean symbol_2 = ast != null;
+                /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean raw_aPropertyCallExp;
+                if (symbol_2) {
+                    final /*@NonInvalid*/ boolean symbol_3 = ast instanceof PropertyCallExp;
+                    /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean symbol_15;
+                    if (symbol_3) {
+                        final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.Nullable PropertyCallExp symbol_4 = (PropertyCallExp)ast;
+                        if (symbol_4 == null) {
+                            throw throwNull(lNameExpCS_1, "Null where non-null value required");
+                        }
+                        final /*@Thrown*/ boolean symbol_5 = ast != null;
+                        /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean raw_ast;
+                        if (symbol_5) {
+                            if (ast == null) {
+                                throw throwNull(lNameExpCS_1, "Null where non-null value required");
+                            }
+                            final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.Nullable Object container_0 = ClassifierOclContainerOperation.INSTANCE.evaluate(executor, lNameExpCS_1);
+                            final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_minioclcs_c_c_CallExpCS_4 = idResolver.getClass(CLSSid_CallExpCS, null);
+                            final /*@Thrown*/ boolean oclIsKindOf_0 = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, container_0, TYP_minioclcs_c_c_CallExpCS_4).booleanValue();
+                            /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable CallExpCS symbol_6;
+                            if (oclIsKindOf_0) {
+                                final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull CallExpCS oclAsType_0 = ClassUtil.nonNullState((CallExpCS)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, container_0, TYP_minioclcs_c_c_CallExpCS_4));
+                                symbol_6 = oclAsType_0;
+                            }
+                            else {
+                                symbol_6 = null;
+                            }
+                            final /*@Thrown*/ boolean symbol_7 = symbol_6 == null;
+                            /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable CallExpCS symbol_8;
+                            if (symbol_7) {
+                                symbol_8 = null;
+                            }
+                            else {
+                                if (symbol_6 == null) {
+                                    throw throwNull(lNameExpCS_1, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::CallExpCS::source\'");
+                                }
+                                final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable CallExpCS source = symbol_6.getSource();
+                                symbol_8 = source;
+                            }
+                            final /*@Thrown*/ boolean symbol_9 = symbol_8 == null;
+                            /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.Nullable Element symbol_10;
+                            if (symbol_9) {
+                                symbol_10 = null;
+                            }
+                            else {
+                                if (symbol_8 == null) {
+                                    throw throwNull(lNameExpCS_1, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::CSTrace::ast\'");
+                                }
+                                final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.Nullable Element ast_1 = symbol_8.getAst();
+                                symbol_10 = ast_1;
+                            }
+                            final /*@Thrown*/ boolean symbol_11 = symbol_10 == null;
+                            /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.Nullable OCLExpression symbol_12;
+                            if (symbol_11) {
+                                symbol_12 = null;
+                            }
+                            else {
+                                final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_miniocl_c_c_OCLExpression_0 = idResolver.getClass(CLSSid_OCLExpression, null);
+                                final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.NonNull OCLExpression oclAsType_1 = ClassUtil.nonNullState((OCLExpression)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, symbol_10, TYP_miniocl_c_c_OCLExpression_0));
+                                symbol_12 = oclAsType_1;
+                            }
+                            final /*@Thrown*/ boolean symbol_13 = symbol_12 != null;
+                            /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean raw_ownedSource;
+                            if (symbol_13) {
+                                if (symbol_12 == null) {
+                                    throw throwNull(lNameExpCS_1, "Null where non-null value required");
+                                }
+                                // property assignments
+                                symbol_4.setOwnedSource(symbol_12);
+                                objectManager.assigned(symbol_4, MiniOCLPackage.Literals.CALL_EXP__OWNED_SOURCE, symbol_12, null);
+                                final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean m_NameExpCS_ast_2 = ValueUtil.TRUE_VALUE;
+                                raw_ownedSource = m_NameExpCS_ast_2;
+                            }
+                            else {
+                                raw_ownedSource = ValueUtil.FALSE_VALUE;
+                            }
+                            raw_ast = raw_ownedSource;
+                        }
+                        else {
+                            raw_ast = ValueUtil.FALSE_VALUE;
+                        }
+                        symbol_15 = raw_ast;
+                    }
+                    else {
+                        symbol_15 = ValueUtil.FALSE_VALUE;
+                    }
+                    raw_aPropertyCallExp = symbol_15;
+                }
+                else {
+                    raw_aPropertyCallExp = ValueUtil.FALSE_VALUE;
+                }
+                symbol_16 = raw_aPropertyCallExp;
             }
             else {
-                symbol_11 = ValueUtil.FALSE_VALUE;
+                symbol_16 = ValueUtil.FALSE_VALUE;
             }
-            return symbol_11;
+            return symbol_16;
         } catch (Throwable e) {
             return handleExecutionFailure("MAP_m_NameExpCS_ast_2", e);
         }
@@ -1673,9 +1733,7 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
      * type : miniocl::Class[1];
      *  |}
      * where ( |
-     * not lNameExpCS.isPropCallExpWithExplicitSource()
-     *   lNameExpCS.isPropCallExpWithImplicitSource()
-     *   not lNameExpCS.isVariableExp())
+     * lNameExpCS.isPropCallExpWithExplicitSource())
      * {_'=' : Boolean[1];
      *  |
      * aPropertyCallExp := lNameExpCS.ast;
@@ -1744,364 +1802,12 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
                     CAUGHT_symbol_1 = ValueUtil.createInvalidValue(e);
                 }
                 final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean and = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_eq, CAUGHT_symbol_1);
-                final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean not = BooleanNotOperation.INSTANCE.evaluate(and);
-                if (not == null) {
-                    throw throwNull(lNameExpCS_2, "Null if condition");
-                }
-                /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean symbol_14;
-                if (not) {
-                    /*@Caught*/ @Nullable Object CAUGHT_and_0;
-                    try {
-                        /*@Caught*/ @NonNull Object CAUGHT_eq_2;
-                        try {
-                            final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable RoundedBracketClauseCS roundedBrackets_0 = lNameExpCS_2.getRoundedBrackets();
-                            final /*@Thrown*/ boolean eq_2 = roundedBrackets_0 == null;
-                            CAUGHT_eq_2 = eq_2;
-                        }
-                        catch (Exception e) {
-                            CAUGHT_eq_2 = ValueUtil.createInvalidValue(e);
-                        }
-                        /*@Caught*/ @Nullable Object CAUGHT_not_0;
-                        try {
-                            final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.Nullable Object container_0 = ClassifierOclContainerOperation.INSTANCE.evaluate(executor, lNameExpCS_2);
-                            final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_minioclcs_c_c_CallExpCS_4 = idResolver.getClass(CLSSid_CallExpCS, null);
-                            final /*@Thrown*/ boolean oclIsKindOf_0 = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, container_0, TYP_minioclcs_c_c_CallExpCS_4).booleanValue();
-                            /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable CallExpCS symbol_2;
-                            if (oclIsKindOf_0) {
-                                final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull CallExpCS oclAsType_0 = ClassUtil.nonNullState((CallExpCS)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, container_0, TYP_minioclcs_c_c_CallExpCS_4));
-                                symbol_2 = oclAsType_0;
-                            }
-                            else {
-                                symbol_2 = null;
-                            }
-                            final /*@Thrown*/ boolean eq_3 = symbol_2 == null;
-                            /*@Thrown*/ boolean symbol_3;
-                            if (eq_3) {
-                                symbol_3 = ValueUtil.FALSE_VALUE;
-                            }
-                            else {
-                                if (symbol_2 == null) {
-                                    throw throwNull(lNameExpCS_2, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::CallExpCS::nameExp\'");
-                                }
-                                final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable NameExpCS nameExp_0 = symbol_2.getNameExp();
-                                final /*@Thrown*/ boolean eq_4 = lNameExpCS_2.equals(nameExp_0);
-                                symbol_3 = eq_4;
-                            }
-                            final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean not_0 = BooleanNotOperation.INSTANCE.evaluate(symbol_3);
-                            CAUGHT_not_0 = not_0;
-                        }
-                        catch (Exception e) {
-                            CAUGHT_not_0 = ValueUtil.createInvalidValue(e);
-                        }
-                        final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean and_0 = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_eq_2, CAUGHT_not_0);
-                        CAUGHT_and_0 = and_0;
-                    }
-                    catch (Exception e) {
-                        CAUGHT_and_0 = ValueUtil.createInvalidValue(e);
-                    }
-                    /*@Caught*/ @NonNull Object CAUGHT_eq_5;
-                    try {
-                        final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.Nullable Element self_1 = lNameExpCS_2.getAst();
-                        if (self_1 == null) {
-                            throw throwNull(lNameExpCS_2, "Null where non-null value required");
-                        }
-                        final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable PathNameCS expName = lNameExpCS_2.getExpName();
-                        if (expName == null) {
-                            throw throwNull(lNameExpCS_2, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathNameCS::path\'");
-                        }
-                        @SuppressWarnings("null")
-                        final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<PathElementCS> path = expName.getPath();
-                        final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_path = idResolver.createOrderedSetOfAll(ORD_CLSSid_PathElementCS, path);
-                        final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable PathElementCS aPathElementCS = (PathElementCS)OrderedCollectionFirstOperation.INSTANCE.evaluate(BOXED_path);
-                        if (aPathElementCS == null) {
-                            throw throwNull(lNameExpCS_2, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathElementCS::pathName\'");
-                        }
-                        final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String pathName = aPathElementCS.getPathName();
-                        MiniOCLLookupResult<Variable> _lookupResult = lookupSolver._lookupUnqualifiedVariable(self_1, (String)pathName);
-                        Variable _lookupUnqualifiedVariable = null;
-                        if (_lookupResult.size() == 1) {
-                            _lookupUnqualifiedVariable = _lookupResult.getSingleResult();
-                        } else {
-                            handleLookupError(aPathElementCS,pathName);
-                        };
-                        final /*@Thrown*/ boolean eq_5 = _lookupUnqualifiedVariable == null;
-                        CAUGHT_eq_5 = eq_5;
-                    }
-                    catch (Exception e) {
-                        CAUGHT_eq_5 = ValueUtil.createInvalidValue(e);
-                    }
-                    final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean and_1 = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_and_0, CAUGHT_eq_5);
-                    if (and_1 == null) {
-                        throw throwNull(lNameExpCS_2, "Null if condition");
-                    }
-                    /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean symbol_13;
-                    if (and_1) {
-                        /*@Caught*/ @Nullable Object CAUGHT_and_3;
-                        try {
-                            /*@Caught*/ @Nullable Object CAUGHT_and_2;
-                            try {
-                                /*@Caught*/ @NonNull Object CAUGHT_eq_6;
-                                try {
-                                    final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable RoundedBracketClauseCS roundedBrackets_1 = lNameExpCS_2.getRoundedBrackets();
-                                    final /*@Thrown*/ boolean eq_6 = roundedBrackets_1 == null;
-                                    CAUGHT_eq_6 = eq_6;
-                                }
-                                catch (Exception e) {
-                                    CAUGHT_eq_6 = ValueUtil.createInvalidValue(e);
-                                }
-                                /*@Caught*/ @Nullable Object CAUGHT_not_1;
-                                try {
-                                    final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.Nullable Object container_1 = ClassifierOclContainerOperation.INSTANCE.evaluate(executor, lNameExpCS_2);
-                                    final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_minioclcs_c_c_CallExpCS_6 = idResolver.getClass(CLSSid_CallExpCS, null);
-                                    final /*@Thrown*/ boolean oclIsKindOf_1 = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, container_1, TYP_minioclcs_c_c_CallExpCS_6).booleanValue();
-                                    /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable CallExpCS symbol_4;
-                                    if (oclIsKindOf_1) {
-                                        final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull CallExpCS oclAsType_1 = ClassUtil.nonNullState((CallExpCS)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, container_1, TYP_minioclcs_c_c_CallExpCS_6));
-                                        symbol_4 = oclAsType_1;
-                                    }
-                                    else {
-                                        symbol_4 = null;
-                                    }
-                                    final /*@Thrown*/ boolean eq_7 = symbol_4 == null;
-                                    /*@Thrown*/ boolean symbol_5;
-                                    if (eq_7) {
-                                        symbol_5 = ValueUtil.FALSE_VALUE;
-                                    }
-                                    else {
-                                        if (symbol_4 == null) {
-                                            throw throwNull(lNameExpCS_2, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::CallExpCS::nameExp\'");
-                                        }
-                                        final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable NameExpCS nameExp_1 = symbol_4.getNameExp();
-                                        final /*@Thrown*/ boolean eq_8 = lNameExpCS_2.equals(nameExp_1);
-                                        symbol_5 = eq_8;
-                                    }
-                                    final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean not_1 = BooleanNotOperation.INSTANCE.evaluate(symbol_5);
-                                    CAUGHT_not_1 = not_1;
-                                }
-                                catch (Exception e) {
-                                    CAUGHT_not_1 = ValueUtil.createInvalidValue(e);
-                                }
-                                final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean and_2 = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_eq_6, CAUGHT_not_1);
-                                CAUGHT_and_2 = and_2;
-                            }
-                            catch (Exception e) {
-                                CAUGHT_and_2 = ValueUtil.createInvalidValue(e);
-                            }
-                            /*@Caught*/ @NonNull Object CAUGHT_eq_9;
-                            try {
-                                final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable PathNameCS expName_0 = lNameExpCS_2.getExpName();
-                                if (expName_0 == null) {
-                                    throw throwNull(lNameExpCS_2, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathNameCS::path\'");
-                                }
-                                @SuppressWarnings("null")
-                                final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<PathElementCS> path_0 = expName_0.getPath();
-                                final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_path_0 = idResolver.createOrderedSetOfAll(ORD_CLSSid_PathElementCS, path_0);
-                                final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(BOXED_path_0);
-                                final /*@Thrown*/ boolean eq_9 = size.equals(INT_1);
-                                CAUGHT_eq_9 = eq_9;
-                            }
-                            catch (Exception e) {
-                                CAUGHT_eq_9 = ValueUtil.createInvalidValue(e);
-                            }
-                            final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean and_3 = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_and_2, CAUGHT_eq_9);
-                            CAUGHT_and_3 = and_3;
-                        }
-                        catch (Exception e) {
-                            CAUGHT_and_3 = ValueUtil.createInvalidValue(e);
-                        }
-                        /*@Caught*/ @NonNull Object CAUGHT_ne;
-                        try {
-                            final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.Nullable Element self_2 = lNameExpCS_2.getAst();
-                            if (self_2 == null) {
-                                throw throwNull(lNameExpCS_2, "Null where non-null value required");
-                            }
-                            final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable PathNameCS expName_1 = lNameExpCS_2.getExpName();
-                            if (expName_1 == null) {
-                                throw throwNull(lNameExpCS_2, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathNameCS::path\'");
-                            }
-                            @SuppressWarnings("null")
-                            final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<PathElementCS> path_1 = expName_1.getPath();
-                            final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_path_1 = idResolver.createOrderedSetOfAll(ORD_CLSSid_PathElementCS, path_1);
-                            final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable PathElementCS aPathElementCS_0 = (PathElementCS)OrderedCollectionFirstOperation.INSTANCE.evaluate(BOXED_path_1);
-                            if (aPathElementCS_0 == null) {
-                                throw throwNull(lNameExpCS_2, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathElementCS::pathName\'");
-                            }
-                            final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String pathName_0 = aPathElementCS_0.getPathName();
-                            MiniOCLLookupResult<Variable> _lookupResult_0 = lookupSolver._lookupUnqualifiedVariable(self_2, (String)pathName_0);
-                            Variable _lookupUnqualifiedVariable_0 = null;
-                            if (_lookupResult_0.size() == 1) {
-                                _lookupUnqualifiedVariable_0 = _lookupResult_0.getSingleResult();
-                            } else {
-                                handleLookupError(aPathElementCS_0,pathName_0);
-                            };
-                            final /*@Thrown*/ boolean ne = _lookupUnqualifiedVariable_0 != null;
-                            CAUGHT_ne = ne;
-                        }
-                        catch (Exception e) {
-                            CAUGHT_ne = ValueUtil.createInvalidValue(e);
-                        }
-                        final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean and_4 = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_and_3, CAUGHT_ne);
-                        final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean not_2 = BooleanNotOperation.INSTANCE.evaluate(and_4);
-                        if (not_2 == null) {
-                            throw throwNull(lNameExpCS_2, "Null if condition");
-                        }
-                        /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean symbol_12;
-                        if (not_2) {
-                            final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.Nullable Element ast = lNameExpCS_2.getAst();
-                            final /*@Thrown*/ boolean symbol_6 = ast != null;
-                            /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean raw_aPropertyCallExp;
-                            if (symbol_6) {
-                                final /*@NonInvalid*/ boolean symbol_7 = ast instanceof PropertyCallExp;
-                                /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean symbol_11;
-                                if (symbol_7) {
-                                    final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.Nullable PropertyCallExp symbol_8 = (PropertyCallExp)ast;
-                                    if (symbol_8 == null) {
-                                        throw throwNull(lNameExpCS_2, "Null where non-null value required");
-                                    }
-                                    final /*@Thrown*/ boolean symbol_9 = ast != null;
-                                    /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean raw_ast;
-                                    if (symbol_9) {
-                                        if (ast == null) {
-                                            throw throwNull(lNameExpCS_2, "Null where non-null value required");
-                                        }
-                                        objectManager.getting(symbol_8, MiniOCLPackage.Literals.PROPERTY_CALL_EXP__REFERRED_PROPERTY, false);
-                                        @SuppressWarnings("null")
-                                        final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.NonNull Property referredProperty = symbol_8.getReferredProperty();
-                                        @SuppressWarnings("null")
-                                        final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.NonNull Class type = referredProperty.getType();
-                                        // property assignments
-                                        symbol_8.setType(type);
-                                        objectManager.assigned(symbol_8, MiniOCLPackage.Literals.TYPED_ELEMENT__TYPE, type, null);
-                                        final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean m_NameExpCS_ast_3 = ValueUtil.TRUE_VALUE;
-                                        raw_ast = m_NameExpCS_ast_3;
-                                    }
-                                    else {
-                                        raw_ast = ValueUtil.FALSE_VALUE;
-                                    }
-                                    symbol_11 = raw_ast;
-                                }
-                                else {
-                                    symbol_11 = ValueUtil.FALSE_VALUE;
-                                }
-                                raw_aPropertyCallExp = symbol_11;
-                            }
-                            else {
-                                raw_aPropertyCallExp = ValueUtil.FALSE_VALUE;
-                            }
-                            symbol_12 = raw_aPropertyCallExp;
-                        }
-                        else {
-                            symbol_12 = ValueUtil.FALSE_VALUE;
-                        }
-                        symbol_13 = symbol_12;
-                    }
-                    else {
-                        symbol_13 = ValueUtil.FALSE_VALUE;
-                    }
-                    symbol_14 = symbol_13;
-                }
-                else {
-                    symbol_14 = ValueUtil.FALSE_VALUE;
-                }
-                return symbol_14;
-            } catch (Throwable e) {
-                return handleExecutionFailure("MAP_m_NameExpCS_ast_3", e);
-            }
-        }
-        
-        public boolean isEqual(@NonNull IdResolver idResolver, @NonNull Object @NonNull [] thoseValues) {
-            return idResolver.oclEquals(lNameExpCS_2, thoseValues[0]);
-        }
-    }
-    
-    /**
-     * 
-     * map m_NameExpCS_ast_4 in MiniOCLCS2AS_qvtp_qvtcas {
-     *   leftCS (lNameExpCS : minioclcs::NameExpCS[1];
-     *  |)
-     * { |}
-     * rightAS ( |)
-     * {aPropertyCallExp : miniocl::PropertyCallExp[1];
-     * ast : miniocl::Element[1];
-     * referredProperty : miniocl::Property[1];
-     * type : miniocl::Class[1];
-     *  |}
-     * where ( |
-     * lNameExpCS.isPropCallExpWithExplicitSource())
-     * {_'=' : Boolean[1];
-     *  |
-     * aPropertyCallExp := lNameExpCS.ast;
-     * ast := lNameExpCS.ast;
-     * referredProperty := aPropertyCallExp.referredProperty;
-     * _'=' := referredProperty =
-     *   null;
-     * type := if _'='
-     *   then null
-     *   else referredProperty.type
-     *   endif;
-     * aPropertyCallExp.type := type;
-     * }
-     * 
-     */
-    protected class MAP_m_NameExpCS_ast_4 extends AbstractInvocation
-    {
-        protected final /*@NonInvalid*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull NameExpCS lNameExpCS_3;
-        
-        public MAP_m_NameExpCS_ast_4(@NonNull Object @NonNull [] boundValues) {
-            lNameExpCS_3 = (NameExpCS)boundValues[0];
-        }
-        
-        public boolean execute()  {
-            try {
-                // predicates and unrealized variables
-                final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull IdResolver idResolver = executor.getIdResolver();
-                /*@Caught*/ @NonNull Object CAUGHT_eq;
-                try {
-                    final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable RoundedBracketClauseCS roundedBrackets = lNameExpCS_3.getRoundedBrackets();
-                    final /*@Thrown*/ boolean eq = roundedBrackets == null;
-                    CAUGHT_eq = eq;
-                }
-                catch (Exception e) {
-                    CAUGHT_eq = ValueUtil.createInvalidValue(e);
-                }
-                /*@Caught*/ @NonNull Object CAUGHT_symbol_1;
-                try {
-                    final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.Nullable Object container = ClassifierOclContainerOperation.INSTANCE.evaluate(executor, lNameExpCS_3);
-                    final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_minioclcs_c_c_CallExpCS_2 = idResolver.getClass(CLSSid_CallExpCS, null);
-                    final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, container, TYP_minioclcs_c_c_CallExpCS_2).booleanValue();
-                    /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable CallExpCS symbol_0;
-                    if (oclIsKindOf) {
-                        final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull CallExpCS oclAsType = ClassUtil.nonNullState((CallExpCS)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, container, TYP_minioclcs_c_c_CallExpCS_2));
-                        symbol_0 = oclAsType;
-                    }
-                    else {
-                        symbol_0 = null;
-                    }
-                    final /*@Thrown*/ boolean eq_0 = symbol_0 == null;
-                    /*@Thrown*/ boolean symbol_1;
-                    if (eq_0) {
-                        symbol_1 = ValueUtil.FALSE_VALUE;
-                    }
-                    else {
-                        if (symbol_0 == null) {
-                            throw throwNull(lNameExpCS_3, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::CallExpCS::nameExp\'");
-                        }
-                        final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable NameExpCS nameExp = symbol_0.getNameExp();
-                        final /*@Thrown*/ boolean eq_1 = lNameExpCS_3.equals(nameExp);
-                        symbol_1 = eq_1;
-                    }
-                    CAUGHT_symbol_1 = symbol_1;
-                }
-                catch (Exception e) {
-                    CAUGHT_symbol_1 = ValueUtil.createInvalidValue(e);
-                }
-                final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean and = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_eq, CAUGHT_symbol_1);
                 if (and == null) {
-                    throw throwNull(lNameExpCS_3, "Null if condition");
+                    throw throwNull(lNameExpCS_2, "Null if condition");
                 }
                 /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean symbol_8;
                 if (and) {
-                    final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.Nullable Element ast = lNameExpCS_3.getAst();
+                    final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.Nullable Element ast = lNameExpCS_2.getAst();
                     final /*@Thrown*/ boolean symbol_2 = ast != null;
                     /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean raw_aPropertyCallExp;
                     if (symbol_2) {
@@ -2110,13 +1816,13 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
                         if (symbol_3) {
                             final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.Nullable PropertyCallExp symbol_4 = (PropertyCallExp)ast;
                             if (symbol_4 == null) {
-                                throw throwNull(lNameExpCS_3, "Null where non-null value required");
+                                throw throwNull(lNameExpCS_2, "Null where non-null value required");
                             }
                             final /*@Thrown*/ boolean symbol_5 = ast != null;
                             /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean raw_ast;
                             if (symbol_5) {
                                 if (ast == null) {
-                                    throw throwNull(lNameExpCS_3, "Null where non-null value required");
+                                    throw throwNull(lNameExpCS_2, "Null where non-null value required");
                                 }
                                 objectManager.getting(symbol_4, MiniOCLPackage.Literals.PROPERTY_CALL_EXP__REFERRED_PROPERTY, false);
                                 @SuppressWarnings("null")
@@ -2126,8 +1832,8 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
                                 // property assignments
                                 symbol_4.setType(type);
                                 objectManager.assigned(symbol_4, MiniOCLPackage.Literals.TYPED_ELEMENT__TYPE, type, null);
-                                final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean m_NameExpCS_ast_4 = ValueUtil.TRUE_VALUE;
-                                raw_ast = m_NameExpCS_ast_4;
+                                final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean m_NameExpCS_ast_3 = ValueUtil.TRUE_VALUE;
+                                raw_ast = m_NameExpCS_ast_3;
                             }
                             else {
                                 raw_ast = ValueUtil.FALSE_VALUE;
@@ -2149,52 +1855,46 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
                 }
                 return symbol_8;
             } catch (Throwable e) {
-                return handleExecutionFailure("MAP_m_NameExpCS_ast_4", e);
+                return handleExecutionFailure("MAP_m_NameExpCS_ast_3", e);
             }
         }
         
         public boolean isEqual(@NonNull IdResolver idResolver, @NonNull Object @NonNull [] thoseValues) {
-            return idResolver.oclEquals(lNameExpCS_3, thoseValues[0]);
+            return idResolver.oclEquals(lNameExpCS_2, thoseValues[0]);
         }
     }
     
     /**
      * 
-     * map m_NameExpCS_ast_expName in MiniOCLCS2AS_qvtp_qvtcas {
+     * map m_NameExpCS_ast_4 in MiniOCLCS2AS_qvtp_qvtcas {
      *   leftCS (lNameExpCS : minioclcs::NameExpCS[1];
      *  |)
-     * {expName : minioclcs::PathNameCS[?];
-     * first : minioclcs::PathElementCS[?];
-     * path : OrderedSet(minioclcs::PathElementCS)[*|1];
-     *  |}
+     * { |}
      * rightAS ( |)
      * {aVariableExp : miniocl::VariableExp[1];
      * ast : miniocl::Element[1];
      * referredVariable : miniocl::Variable[1];
+     * type : miniocl::Class[1];
      *  |}
      * where ( |
      * not lNameExpCS.isPropCallExpWithExplicitSource()
-     *   lNameExpCS.isVariableExp()
-     *   )
+     *   lNameExpCS.isVariableExp())
      * { |
      * aVariableExp := lNameExpCS.ast;
      * ast := lNameExpCS.ast;
-     * expName := lNameExpCS.expName;
-     * path := expName.path;
-     * first := path->first()
-     *   ;
-     * referredVariable := aVariableExp.lookupVariable(first);
-     * aVariableExp.referredVariable := referredVariable;
+     * referredVariable := aVariableExp.referredVariable;
+     * type := referredVariable.type;
+     * aVariableExp.type := type;
      * }
      * 
      */
-    protected boolean MAP_m_NameExpCS_ast_expName(final /*@NonInvalid*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull NameExpCS lNameExpCS_4)  {
+    protected boolean MAP_m_NameExpCS_ast_4(final /*@NonInvalid*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull NameExpCS lNameExpCS_3)  {
         try {
             // predicates and unrealized variables
             final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull IdResolver idResolver = executor.getIdResolver();
             /*@Caught*/ @NonNull Object CAUGHT_eq;
             try {
-                final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable RoundedBracketClauseCS roundedBrackets = lNameExpCS_4.getRoundedBrackets();
+                final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable RoundedBracketClauseCS roundedBrackets = lNameExpCS_3.getRoundedBrackets();
                 final /*@Thrown*/ boolean eq = roundedBrackets == null;
                 CAUGHT_eq = eq;
             }
@@ -2203,7 +1903,7 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
             }
             /*@Caught*/ @NonNull Object CAUGHT_symbol_1;
             try {
-                final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.Nullable Object container = ClassifierOclContainerOperation.INSTANCE.evaluate(executor, lNameExpCS_4);
+                final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.Nullable Object container = ClassifierOclContainerOperation.INSTANCE.evaluate(executor, lNameExpCS_3);
                 final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_minioclcs_c_c_CallExpCS_2 = idResolver.getClass(CLSSid_CallExpCS, null);
                 final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, container, TYP_minioclcs_c_c_CallExpCS_2).booleanValue();
                 /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable CallExpCS symbol_0;
@@ -2221,10 +1921,10 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
                 }
                 else {
                     if (symbol_0 == null) {
-                        throw throwNull(lNameExpCS_4, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::CallExpCS::nameExp\'");
+                        throw throwNull(lNameExpCS_3, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::CallExpCS::nameExp\'");
                     }
                     final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable NameExpCS nameExp = symbol_0.getNameExp();
-                    final /*@Thrown*/ boolean eq_1 = lNameExpCS_4.equals(nameExp);
+                    final /*@Thrown*/ boolean eq_1 = lNameExpCS_3.equals(nameExp);
                     symbol_1 = eq_1;
                 }
                 CAUGHT_symbol_1 = symbol_1;
@@ -2235,9 +1935,9 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
             final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean and = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_eq, CAUGHT_symbol_1);
             final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean not = BooleanNotOperation.INSTANCE.evaluate(and);
             if (not == null) {
-                throw throwNull(lNameExpCS_4, "Null if condition");
+                throw throwNull(lNameExpCS_3, "Null if condition");
             }
-            /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean symbol_12;
+            /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean symbol_11;
             if (not) {
                 /*@Caught*/ @Nullable Object CAUGHT_and_1;
                 try {
@@ -2245,7 +1945,7 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
                     try {
                         /*@Caught*/ @NonNull Object CAUGHT_eq_2;
                         try {
-                            final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable RoundedBracketClauseCS roundedBrackets_0 = lNameExpCS_4.getRoundedBrackets();
+                            final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable RoundedBracketClauseCS roundedBrackets_0 = lNameExpCS_3.getRoundedBrackets();
                             final /*@Thrown*/ boolean eq_2 = roundedBrackets_0 == null;
                             CAUGHT_eq_2 = eq_2;
                         }
@@ -2254,7 +1954,7 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
                         }
                         /*@Caught*/ @Nullable Object CAUGHT_not_0;
                         try {
-                            final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.Nullable Object container_0 = ClassifierOclContainerOperation.INSTANCE.evaluate(executor, lNameExpCS_4);
+                            final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.Nullable Object container_0 = ClassifierOclContainerOperation.INSTANCE.evaluate(executor, lNameExpCS_3);
                             final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_minioclcs_c_c_CallExpCS_4 = idResolver.getClass(CLSSid_CallExpCS, null);
                             final /*@Thrown*/ boolean oclIsKindOf_0 = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, container_0, TYP_minioclcs_c_c_CallExpCS_4).booleanValue();
                             /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable CallExpCS symbol_2;
@@ -2272,10 +1972,10 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
                             }
                             else {
                                 if (symbol_2 == null) {
-                                    throw throwNull(lNameExpCS_4, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::CallExpCS::nameExp\'");
+                                    throw throwNull(lNameExpCS_3, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::CallExpCS::nameExp\'");
                                 }
                                 final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable NameExpCS nameExp_0 = symbol_2.getNameExp();
-                                final /*@Thrown*/ boolean eq_4 = lNameExpCS_4.equals(nameExp_0);
+                                final /*@Thrown*/ boolean eq_4 = lNameExpCS_3.equals(nameExp_0);
                                 symbol_3 = eq_4;
                             }
                             final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean not_0 = BooleanNotOperation.INSTANCE.evaluate(symbol_3);
@@ -2292,9 +1992,9 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
                     }
                     /*@Caught*/ @NonNull Object CAUGHT_eq_5;
                     try {
-                        final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable PathNameCS expName = lNameExpCS_4.getExpName();
+                        final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable PathNameCS expName = lNameExpCS_3.getExpName();
                         if (expName == null) {
-                            throw throwNull(lNameExpCS_4, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathNameCS::path\'");
+                            throw throwNull(lNameExpCS_3, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathNameCS::path\'");
                         }
                         @SuppressWarnings("null")
                         final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<PathElementCS> path = expName.getPath();
@@ -2314,28 +2014,31 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
                 }
                 /*@Caught*/ @NonNull Object CAUGHT_ne;
                 try {
-                    final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.Nullable Element self_1 = lNameExpCS_4.getAst();
+                    final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_minioclcs_c_c_CSTrace_0 = idResolver.getClass(CLSSid_CSTrace, null);
+                    final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.Nullable Object oclContainer = ClassifierOclContainerOperation.INSTANCE.evaluate(executor, lNameExpCS_3);
+                    final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull CSTrace oclAsType_1 = ClassUtil.nonNullState((CSTrace)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, oclContainer, TYP_minioclcs_c_c_CSTrace_0));
+                    final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.Nullable Element self_1 = oclAsType_1.getAst();
                     if (self_1 == null) {
-                        throw throwNull(lNameExpCS_4, "Null where non-null value required");
+                        throw throwNull(lNameExpCS_3, "Null where non-null value required");
                     }
-                    final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable PathNameCS expName_0 = lNameExpCS_4.getExpName();
+                    final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable PathNameCS expName_0 = lNameExpCS_3.getExpName();
                     if (expName_0 == null) {
-                        throw throwNull(lNameExpCS_4, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathNameCS::path\'");
+                        throw throwNull(lNameExpCS_3, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathNameCS::path\'");
                     }
                     @SuppressWarnings("null")
                     final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<PathElementCS> path_0 = expName_0.getPath();
                     final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_path_0 = idResolver.createOrderedSetOfAll(ORD_CLSSid_PathElementCS, path_0);
                     final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable PathElementCS aPathElementCS = (PathElementCS)OrderedCollectionFirstOperation.INSTANCE.evaluate(BOXED_path_0);
                     if (aPathElementCS == null) {
-                        throw throwNull(lNameExpCS_4, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathElementCS::pathName\'");
+                        throw throwNull(lNameExpCS_3, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathElementCS::elementName\'");
                     }
-                    final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String pathName = aPathElementCS.getPathName();
-                    MiniOCLLookupResult<Variable> _lookupResult = lookupSolver._lookupUnqualifiedVariable(self_1, (String)pathName);
+                    final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String elementName = aPathElementCS.getElementName();
+                    MiniOCLLookupResult<Variable> _lookupResult = lookupSolver._lookupUnqualifiedVariable(self_1, (String)elementName);
                     Variable _lookupUnqualifiedVariable = null;
                     if (_lookupResult.size() == 1) {
                         _lookupUnqualifiedVariable = _lookupResult.getSingleResult();
                     } else {
-                        handleLookupError(aPathElementCS,pathName);
+                        handleLookupError(aPathElementCS,elementName);
                     };
                     final /*@Thrown*/ boolean ne = _lookupUnqualifiedVariable != null;
                     CAUGHT_ne = ne;
@@ -2345,95 +2048,69 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
                 }
                 final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean and_2 = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_and_1, CAUGHT_ne);
                 if (and_2 == null) {
-                    throw throwNull(lNameExpCS_4, "Null if condition");
+                    throw throwNull(lNameExpCS_3, "Null if condition");
                 }
-                /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean symbol_11;
+                /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean symbol_10;
                 if (and_2) {
-                    final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.Nullable Element ast = lNameExpCS_4.getAst();
+                    final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.Nullable Element ast = lNameExpCS_3.getAst();
                     final /*@Thrown*/ boolean symbol_4 = ast != null;
                     /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean raw_aVariableExp;
                     if (symbol_4) {
                         final /*@NonInvalid*/ boolean symbol_5 = ast instanceof VariableExp;
-                        /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean symbol_10;
+                        /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean symbol_9;
                         if (symbol_5) {
                             final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.Nullable VariableExp symbol_6 = (VariableExp)ast;
                             if (symbol_6 == null) {
-                                throw throwNull(lNameExpCS_4, "Null where non-null value required");
+                                throw throwNull(lNameExpCS_3, "Null where non-null value required");
                             }
                             final /*@Thrown*/ boolean symbol_7 = ast != null;
                             /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean raw_ast;
                             if (symbol_7) {
                                 if (ast == null) {
-                                    throw throwNull(lNameExpCS_4, "Null where non-null value required");
-                                }
-                                final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable PathNameCS expName_1 = lNameExpCS_4.getExpName();
-                                if (expName_1 == null) {
-                                    throw throwNull(lNameExpCS_4, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathNameCS::path\'");
+                                    throw throwNull(lNameExpCS_3, "Null where non-null value required");
                                 }
                                 @SuppressWarnings("null")
-                                final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<PathElementCS> path_1 = expName_1.getPath();
-                                final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_path_1 = idResolver.createOrderedSetOfAll(ORD_CLSSid_PathElementCS, path_1);
-                                final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable PathElementCS first = (PathElementCS)OrderedCollectionFirstOperation.INSTANCE.evaluate(BOXED_path_1);
-                                if (first == null) {
-                                    throw throwNull(lNameExpCS_4, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathElementCS::pathName\'");
-                                }
-                                final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String pathName_0 = first.getPathName();
-                                MiniOCLLookupResult<Variable> _lookupResult_0 = lookupSolver._lookupUnqualifiedVariable(symbol_6, (String)pathName_0);
-                                Variable _lookupUnqualifiedVariable_0 = null;
-                                if (_lookupResult_0.size() == 1) {
-                                    _lookupUnqualifiedVariable_0 = _lookupResult_0.getSingleResult();
-                                } else {
-                                    handleLookupError(first,pathName_0);
-                                };
-                                final /*@Thrown*/ boolean symbol_8 = _lookupUnqualifiedVariable_0 != null;
-                                /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean raw_referredVariable;
-                                if (symbol_8) {
-                                    if (_lookupUnqualifiedVariable_0 == null) {
-                                        throw throwNull(lNameExpCS_4, "Null where non-null value required");
-                                    }
-                                    // property assignments
-                                    symbol_6.setReferredVariable(_lookupUnqualifiedVariable_0);
-                                    objectManager.assigned(symbol_6, MiniOCLPackage.Literals.VARIABLE_EXP__REFERRED_VARIABLE, _lookupUnqualifiedVariable_0, null);
-                                    final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean m_NameExpCS_ast_expName = ValueUtil.TRUE_VALUE;
-                                    raw_referredVariable = m_NameExpCS_ast_expName;
-                                }
-                                else {
-                                    raw_referredVariable = ValueUtil.FALSE_VALUE;
-                                }
-                                raw_ast = raw_referredVariable;
+                                final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.NonNull Variable referredVariable = symbol_6.getReferredVariable();
+                                @SuppressWarnings("null")
+                                final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.NonNull Class type = referredVariable.getType();
+                                // property assignments
+                                symbol_6.setType(type);
+                                objectManager.assigned(symbol_6, MiniOCLPackage.Literals.TYPED_ELEMENT__TYPE, type, null);
+                                final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean m_NameExpCS_ast_4 = ValueUtil.TRUE_VALUE;
+                                raw_ast = m_NameExpCS_ast_4;
                             }
                             else {
                                 raw_ast = ValueUtil.FALSE_VALUE;
                             }
-                            symbol_10 = raw_ast;
+                            symbol_9 = raw_ast;
                         }
                         else {
-                            symbol_10 = ValueUtil.FALSE_VALUE;
+                            symbol_9 = ValueUtil.FALSE_VALUE;
                         }
-                        raw_aVariableExp = symbol_10;
+                        raw_aVariableExp = symbol_9;
                     }
                     else {
                         raw_aVariableExp = ValueUtil.FALSE_VALUE;
                     }
-                    symbol_11 = raw_aVariableExp;
+                    symbol_10 = raw_aVariableExp;
                 }
                 else {
-                    symbol_11 = ValueUtil.FALSE_VALUE;
+                    symbol_10 = ValueUtil.FALSE_VALUE;
                 }
-                symbol_12 = symbol_11;
+                symbol_11 = symbol_10;
             }
             else {
-                symbol_12 = ValueUtil.FALSE_VALUE;
+                symbol_11 = ValueUtil.FALSE_VALUE;
             }
-            return symbol_12;
+            return symbol_11;
         } catch (Throwable e) {
-            return handleExecutionFailure("MAP_m_NameExpCS_ast_expName", e);
+            return handleExecutionFailure("MAP_m_NameExpCS_ast_4", e);
         }
     }
     
     /**
      * 
-     * map m_NameExpCS_ast_expName_1 in MiniOCLCS2AS_qvtp_qvtcas {
+     * map m_NameExpCS_ast_expName in MiniOCLCS2AS_qvtp_qvtcas {
      *   leftCS (lNameExpCS : minioclcs::NameExpCS[1];
      *  |)
      * {expName : minioclcs::PathNameCS[?];
@@ -2446,9 +2123,9 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
      * type : miniocl::Class[1];
      *  |}
      * where ( |
-     * not lNameExpCS.isVariableExp()
+     * not lNameExpCS.isPropCallExpWithExplicitSource()
+     *   not lNameExpCS.isVariableExp()
      *   lNameExpCS.isPropCallExpWithImplicitSource()
-     *   not lNameExpCS.isPropCallExpWithExplicitSource()
      *   )
      * { |
      * aPropertyCallExp := lNameExpCS.ast;
@@ -2461,263 +2138,227 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
      * }
      * 
      */
-    protected class MAP_m_NameExpCS_ast_expName_1 extends AbstractInvocation
+    protected class MAP_m_NameExpCS_ast_expName extends AbstractInvocation
     {
-        protected final /*@NonInvalid*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull NameExpCS lNameExpCS_5;
+        protected final /*@NonInvalid*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull NameExpCS lNameExpCS_4;
         
-        public MAP_m_NameExpCS_ast_expName_1(@NonNull Object @NonNull [] boundValues) {
-            lNameExpCS_5 = (NameExpCS)boundValues[0];
+        public MAP_m_NameExpCS_ast_expName(@NonNull Object @NonNull [] boundValues) {
+            lNameExpCS_4 = (NameExpCS)boundValues[0];
         }
         
         public boolean execute()  {
             try {
                 // predicates and unrealized variables
                 final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull IdResolver idResolver = executor.getIdResolver();
-                /*@Caught*/ @Nullable Object CAUGHT_and_0;
+                /*@Caught*/ @NonNull Object CAUGHT_eq;
                 try {
-                    /*@Caught*/ @Nullable Object CAUGHT_and;
-                    try {
-                        /*@Caught*/ @NonNull Object CAUGHT_eq;
-                        try {
-                            final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable RoundedBracketClauseCS roundedBrackets = lNameExpCS_5.getRoundedBrackets();
-                            final /*@Thrown*/ boolean eq = roundedBrackets == null;
-                            CAUGHT_eq = eq;
-                        }
-                        catch (Exception e) {
-                            CAUGHT_eq = ValueUtil.createInvalidValue(e);
-                        }
-                        /*@Caught*/ @Nullable Object CAUGHT_not;
-                        try {
-                            final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.Nullable Object container = ClassifierOclContainerOperation.INSTANCE.evaluate(executor, lNameExpCS_5);
-                            final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_minioclcs_c_c_CallExpCS_2 = idResolver.getClass(CLSSid_CallExpCS, null);
-                            final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, container, TYP_minioclcs_c_c_CallExpCS_2).booleanValue();
-                            /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable CallExpCS symbol_0;
-                            if (oclIsKindOf) {
-                                final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull CallExpCS oclAsType = ClassUtil.nonNullState((CallExpCS)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, container, TYP_minioclcs_c_c_CallExpCS_2));
-                                symbol_0 = oclAsType;
-                            }
-                            else {
-                                symbol_0 = null;
-                            }
-                            final /*@Thrown*/ boolean eq_0 = symbol_0 == null;
-                            /*@Thrown*/ boolean symbol_1;
-                            if (eq_0) {
-                                symbol_1 = ValueUtil.FALSE_VALUE;
-                            }
-                            else {
-                                if (symbol_0 == null) {
-                                    throw throwNull(lNameExpCS_5, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::CallExpCS::nameExp\'");
-                                }
-                                final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable NameExpCS nameExp = symbol_0.getNameExp();
-                                final /*@Thrown*/ boolean eq_1 = lNameExpCS_5.equals(nameExp);
-                                symbol_1 = eq_1;
-                            }
-                            final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean not = BooleanNotOperation.INSTANCE.evaluate(symbol_1);
-                            CAUGHT_not = not;
-                        }
-                        catch (Exception e) {
-                            CAUGHT_not = ValueUtil.createInvalidValue(e);
-                        }
-                        final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean and = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_eq, CAUGHT_not);
-                        CAUGHT_and = and;
-                    }
-                    catch (Exception e) {
-                        CAUGHT_and = ValueUtil.createInvalidValue(e);
-                    }
-                    /*@Caught*/ @NonNull Object CAUGHT_eq_2;
-                    try {
-                        final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable PathNameCS expName = lNameExpCS_5.getExpName();
-                        if (expName == null) {
-                            throw throwNull(lNameExpCS_5, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathNameCS::path\'");
-                        }
-                        @SuppressWarnings("null")
-                        final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<PathElementCS> path = expName.getPath();
-                        final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_path = idResolver.createOrderedSetOfAll(ORD_CLSSid_PathElementCS, path);
-                        final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(BOXED_path);
-                        final /*@Thrown*/ boolean eq_2 = size.equals(INT_1);
-                        CAUGHT_eq_2 = eq_2;
-                    }
-                    catch (Exception e) {
-                        CAUGHT_eq_2 = ValueUtil.createInvalidValue(e);
-                    }
-                    final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean and_0 = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_and, CAUGHT_eq_2);
-                    CAUGHT_and_0 = and_0;
+                    final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable RoundedBracketClauseCS roundedBrackets = lNameExpCS_4.getRoundedBrackets();
+                    final /*@Thrown*/ boolean eq = roundedBrackets == null;
+                    CAUGHT_eq = eq;
                 }
                 catch (Exception e) {
-                    CAUGHT_and_0 = ValueUtil.createInvalidValue(e);
+                    CAUGHT_eq = ValueUtil.createInvalidValue(e);
                 }
-                /*@Caught*/ @NonNull Object CAUGHT_ne;
+                /*@Caught*/ @NonNull Object CAUGHT_symbol_1;
                 try {
-                    final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.Nullable Element self_1 = lNameExpCS_5.getAst();
-                    if (self_1 == null) {
-                        throw throwNull(lNameExpCS_5, "Null where non-null value required");
+                    final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.Nullable Object container = ClassifierOclContainerOperation.INSTANCE.evaluate(executor, lNameExpCS_4);
+                    final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_minioclcs_c_c_CallExpCS_2 = idResolver.getClass(CLSSid_CallExpCS, null);
+                    final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, container, TYP_minioclcs_c_c_CallExpCS_2).booleanValue();
+                    /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable CallExpCS symbol_0;
+                    if (oclIsKindOf) {
+                        final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull CallExpCS oclAsType = ClassUtil.nonNullState((CallExpCS)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, container, TYP_minioclcs_c_c_CallExpCS_2));
+                        symbol_0 = oclAsType;
                     }
-                    final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable PathNameCS expName_0 = lNameExpCS_5.getExpName();
-                    if (expName_0 == null) {
-                        throw throwNull(lNameExpCS_5, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathNameCS::path\'");
+                    else {
+                        symbol_0 = null;
                     }
-                    @SuppressWarnings("null")
-                    final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<PathElementCS> path_0 = expName_0.getPath();
-                    final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_path_0 = idResolver.createOrderedSetOfAll(ORD_CLSSid_PathElementCS, path_0);
-                    final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable PathElementCS aPathElementCS = (PathElementCS)OrderedCollectionFirstOperation.INSTANCE.evaluate(BOXED_path_0);
-                    if (aPathElementCS == null) {
-                        throw throwNull(lNameExpCS_5, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathElementCS::pathName\'");
+                    final /*@Thrown*/ boolean eq_0 = symbol_0 == null;
+                    /*@Thrown*/ boolean symbol_1;
+                    if (eq_0) {
+                        symbol_1 = ValueUtil.FALSE_VALUE;
                     }
-                    final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String pathName = aPathElementCS.getPathName();
-                    MiniOCLLookupResult<Variable> _lookupResult = lookupSolver._lookupUnqualifiedVariable(self_1, (String)pathName);
-                    Variable _lookupUnqualifiedVariable = null;
-                    if (_lookupResult.size() == 1) {
-                        _lookupUnqualifiedVariable = _lookupResult.getSingleResult();
-                    } else {
-                        handleLookupError(aPathElementCS,pathName);
-                    };
-                    final /*@Thrown*/ boolean ne = _lookupUnqualifiedVariable != null;
-                    CAUGHT_ne = ne;
+                    else {
+                        if (symbol_0 == null) {
+                            throw throwNull(lNameExpCS_4, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::CallExpCS::nameExp\'");
+                        }
+                        final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable NameExpCS nameExp = symbol_0.getNameExp();
+                        final /*@Thrown*/ boolean eq_1 = lNameExpCS_4.equals(nameExp);
+                        symbol_1 = eq_1;
+                    }
+                    CAUGHT_symbol_1 = symbol_1;
                 }
                 catch (Exception e) {
-                    CAUGHT_ne = ValueUtil.createInvalidValue(e);
+                    CAUGHT_symbol_1 = ValueUtil.createInvalidValue(e);
                 }
-                final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean and_1 = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_and_0, CAUGHT_ne);
-                final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean not_0 = BooleanNotOperation.INSTANCE.evaluate(and_1);
-                if (not_0 == null) {
-                    throw throwNull(lNameExpCS_5, "Null if condition");
+                final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean and = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_eq, CAUGHT_symbol_1);
+                final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean not = BooleanNotOperation.INSTANCE.evaluate(and);
+                if (not == null) {
+                    throw throwNull(lNameExpCS_4, "Null if condition");
                 }
                 /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean symbol_19;
-                if (not_0) {
-                    /*@Caught*/ @Nullable Object CAUGHT_and_2;
+                if (not) {
+                    /*@Caught*/ @Nullable Object CAUGHT_and_1;
                     try {
-                        /*@Caught*/ @NonNull Object CAUGHT_eq_3;
+                        /*@Caught*/ @Nullable Object CAUGHT_and_0;
                         try {
-                            final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable RoundedBracketClauseCS roundedBrackets_0 = lNameExpCS_5.getRoundedBrackets();
-                            final /*@Thrown*/ boolean eq_3 = roundedBrackets_0 == null;
-                            CAUGHT_eq_3 = eq_3;
-                        }
-                        catch (Exception e) {
-                            CAUGHT_eq_3 = ValueUtil.createInvalidValue(e);
-                        }
-                        /*@Caught*/ @Nullable Object CAUGHT_not_1;
-                        try {
-                            final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.Nullable Object container_0 = ClassifierOclContainerOperation.INSTANCE.evaluate(executor, lNameExpCS_5);
-                            final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_minioclcs_c_c_CallExpCS_4 = idResolver.getClass(CLSSid_CallExpCS, null);
-                            final /*@Thrown*/ boolean oclIsKindOf_0 = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, container_0, TYP_minioclcs_c_c_CallExpCS_4).booleanValue();
-                            /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable CallExpCS symbol_2;
-                            if (oclIsKindOf_0) {
-                                final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull CallExpCS oclAsType_0 = ClassUtil.nonNullState((CallExpCS)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, container_0, TYP_minioclcs_c_c_CallExpCS_4));
-                                symbol_2 = oclAsType_0;
+                            /*@Caught*/ @NonNull Object CAUGHT_eq_2;
+                            try {
+                                final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable RoundedBracketClauseCS roundedBrackets_0 = lNameExpCS_4.getRoundedBrackets();
+                                final /*@Thrown*/ boolean eq_2 = roundedBrackets_0 == null;
+                                CAUGHT_eq_2 = eq_2;
                             }
-                            else {
-                                symbol_2 = null;
+                            catch (Exception e) {
+                                CAUGHT_eq_2 = ValueUtil.createInvalidValue(e);
                             }
-                            final /*@Thrown*/ boolean eq_4 = symbol_2 == null;
-                            /*@Thrown*/ boolean symbol_3;
-                            if (eq_4) {
-                                symbol_3 = ValueUtil.FALSE_VALUE;
-                            }
-                            else {
-                                if (symbol_2 == null) {
-                                    throw throwNull(lNameExpCS_5, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::CallExpCS::nameExp\'");
+                            /*@Caught*/ @Nullable Object CAUGHT_not_0;
+                            try {
+                                final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.Nullable Object container_0 = ClassifierOclContainerOperation.INSTANCE.evaluate(executor, lNameExpCS_4);
+                                final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_minioclcs_c_c_CallExpCS_4 = idResolver.getClass(CLSSid_CallExpCS, null);
+                                final /*@Thrown*/ boolean oclIsKindOf_0 = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, container_0, TYP_minioclcs_c_c_CallExpCS_4).booleanValue();
+                                /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable CallExpCS symbol_2;
+                                if (oclIsKindOf_0) {
+                                    final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull CallExpCS oclAsType_0 = ClassUtil.nonNullState((CallExpCS)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, container_0, TYP_minioclcs_c_c_CallExpCS_4));
+                                    symbol_2 = oclAsType_0;
                                 }
-                                final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable NameExpCS nameExp_0 = symbol_2.getNameExp();
-                                final /*@Thrown*/ boolean eq_5 = lNameExpCS_5.equals(nameExp_0);
-                                symbol_3 = eq_5;
+                                else {
+                                    symbol_2 = null;
+                                }
+                                final /*@Thrown*/ boolean eq_3 = symbol_2 == null;
+                                /*@Thrown*/ boolean symbol_3;
+                                if (eq_3) {
+                                    symbol_3 = ValueUtil.FALSE_VALUE;
+                                }
+                                else {
+                                    if (symbol_2 == null) {
+                                        throw throwNull(lNameExpCS_4, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::CallExpCS::nameExp\'");
+                                    }
+                                    final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable NameExpCS nameExp_0 = symbol_2.getNameExp();
+                                    final /*@Thrown*/ boolean eq_4 = lNameExpCS_4.equals(nameExp_0);
+                                    symbol_3 = eq_4;
+                                }
+                                final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean not_0 = BooleanNotOperation.INSTANCE.evaluate(symbol_3);
+                                CAUGHT_not_0 = not_0;
                             }
-                            final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean not_1 = BooleanNotOperation.INSTANCE.evaluate(symbol_3);
-                            CAUGHT_not_1 = not_1;
+                            catch (Exception e) {
+                                CAUGHT_not_0 = ValueUtil.createInvalidValue(e);
+                            }
+                            final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean and_0 = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_eq_2, CAUGHT_not_0);
+                            CAUGHT_and_0 = and_0;
                         }
                         catch (Exception e) {
-                            CAUGHT_not_1 = ValueUtil.createInvalidValue(e);
+                            CAUGHT_and_0 = ValueUtil.createInvalidValue(e);
                         }
-                        final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean and_2 = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_eq_3, CAUGHT_not_1);
-                        CAUGHT_and_2 = and_2;
+                        /*@Caught*/ @NonNull Object CAUGHT_eq_5;
+                        try {
+                            final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable PathNameCS expName = lNameExpCS_4.getExpName();
+                            if (expName == null) {
+                                throw throwNull(lNameExpCS_4, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathNameCS::path\'");
+                            }
+                            @SuppressWarnings("null")
+                            final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<PathElementCS> path = expName.getPath();
+                            final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_path = idResolver.createOrderedSetOfAll(ORD_CLSSid_PathElementCS, path);
+                            final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(BOXED_path);
+                            final /*@Thrown*/ boolean eq_5 = size.equals(INT_1);
+                            CAUGHT_eq_5 = eq_5;
+                        }
+                        catch (Exception e) {
+                            CAUGHT_eq_5 = ValueUtil.createInvalidValue(e);
+                        }
+                        final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean and_1 = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_and_0, CAUGHT_eq_5);
+                        CAUGHT_and_1 = and_1;
                     }
                     catch (Exception e) {
-                        CAUGHT_and_2 = ValueUtil.createInvalidValue(e);
+                        CAUGHT_and_1 = ValueUtil.createInvalidValue(e);
                     }
-                    /*@Caught*/ @NonNull Object CAUGHT_eq_6;
+                    /*@Caught*/ @NonNull Object CAUGHT_ne;
                     try {
-                        final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.Nullable Element self_2 = lNameExpCS_5.getAst();
-                        if (self_2 == null) {
-                            throw throwNull(lNameExpCS_5, "Null where non-null value required");
+                        final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_minioclcs_c_c_CSTrace_0 = idResolver.getClass(CLSSid_CSTrace, null);
+                        final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.Nullable Object oclContainer = ClassifierOclContainerOperation.INSTANCE.evaluate(executor, lNameExpCS_4);
+                        final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull CSTrace oclAsType_1 = ClassUtil.nonNullState((CSTrace)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, oclContainer, TYP_minioclcs_c_c_CSTrace_0));
+                        final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.Nullable Element self_1 = oclAsType_1.getAst();
+                        if (self_1 == null) {
+                            throw throwNull(lNameExpCS_4, "Null where non-null value required");
                         }
-                        final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable PathNameCS expName_1 = lNameExpCS_5.getExpName();
-                        if (expName_1 == null) {
-                            throw throwNull(lNameExpCS_5, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathNameCS::path\'");
+                        final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable PathNameCS expName_0 = lNameExpCS_4.getExpName();
+                        if (expName_0 == null) {
+                            throw throwNull(lNameExpCS_4, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathNameCS::path\'");
                         }
                         @SuppressWarnings("null")
-                        final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<PathElementCS> path_1 = expName_1.getPath();
-                        final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_path_1 = idResolver.createOrderedSetOfAll(ORD_CLSSid_PathElementCS, path_1);
-                        final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable PathElementCS aPathElementCS_0 = (PathElementCS)OrderedCollectionFirstOperation.INSTANCE.evaluate(BOXED_path_1);
-                        if (aPathElementCS_0 == null) {
-                            throw throwNull(lNameExpCS_5, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathElementCS::pathName\'");
+                        final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<PathElementCS> path_0 = expName_0.getPath();
+                        final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_path_0 = idResolver.createOrderedSetOfAll(ORD_CLSSid_PathElementCS, path_0);
+                        final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable PathElementCS aPathElementCS = (PathElementCS)OrderedCollectionFirstOperation.INSTANCE.evaluate(BOXED_path_0);
+                        if (aPathElementCS == null) {
+                            throw throwNull(lNameExpCS_4, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathElementCS::elementName\'");
                         }
-                        final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String pathName_0 = aPathElementCS_0.getPathName();
-                        MiniOCLLookupResult<Variable> _lookupResult_0 = lookupSolver._lookupUnqualifiedVariable(self_2, (String)pathName_0);
-                        Variable _lookupUnqualifiedVariable_0 = null;
-                        if (_lookupResult_0.size() == 1) {
-                            _lookupUnqualifiedVariable_0 = _lookupResult_0.getSingleResult();
+                        final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String elementName = aPathElementCS.getElementName();
+                        MiniOCLLookupResult<Variable> _lookupResult = lookupSolver._lookupUnqualifiedVariable(self_1, (String)elementName);
+                        Variable _lookupUnqualifiedVariable = null;
+                        if (_lookupResult.size() == 1) {
+                            _lookupUnqualifiedVariable = _lookupResult.getSingleResult();
                         } else {
-                            handleLookupError(aPathElementCS_0,pathName_0);
+                            handleLookupError(aPathElementCS,elementName);
                         };
-                        final /*@Thrown*/ boolean eq_6 = _lookupUnqualifiedVariable_0 == null;
-                        CAUGHT_eq_6 = eq_6;
+                        final /*@Thrown*/ boolean ne = _lookupUnqualifiedVariable != null;
+                        CAUGHT_ne = ne;
                     }
                     catch (Exception e) {
-                        CAUGHT_eq_6 = ValueUtil.createInvalidValue(e);
+                        CAUGHT_ne = ValueUtil.createInvalidValue(e);
                     }
-                    final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean and_3 = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_and_2, CAUGHT_eq_6);
-                    if (and_3 == null) {
-                        throw throwNull(lNameExpCS_5, "Null if condition");
+                    final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean and_2 = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_and_1, CAUGHT_ne);
+                    final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean not_1 = BooleanNotOperation.INSTANCE.evaluate(and_2);
+                    if (not_1 == null) {
+                        throw throwNull(lNameExpCS_4, "Null if condition");
                     }
                     /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean symbol_18;
-                    if (and_3) {
-                        /*@Caught*/ @NonNull Object CAUGHT_eq_7;
+                    if (not_1) {
+                        /*@Caught*/ @NonNull Object CAUGHT_eq_6;
                         try {
-                            final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable RoundedBracketClauseCS roundedBrackets_1 = lNameExpCS_5.getRoundedBrackets();
-                            final /*@Thrown*/ boolean eq_7 = roundedBrackets_1 == null;
-                            CAUGHT_eq_7 = eq_7;
+                            final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable RoundedBracketClauseCS roundedBrackets_1 = lNameExpCS_4.getRoundedBrackets();
+                            final /*@Thrown*/ boolean eq_6 = roundedBrackets_1 == null;
+                            CAUGHT_eq_6 = eq_6;
                         }
                         catch (Exception e) {
-                            CAUGHT_eq_7 = ValueUtil.createInvalidValue(e);
+                            CAUGHT_eq_6 = ValueUtil.createInvalidValue(e);
                         }
-                        /*@Caught*/ @NonNull Object CAUGHT_symbol_5;
+                        /*@Caught*/ @Nullable Object CAUGHT_not_2;
                         try {
-                            final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.Nullable Object container_1 = ClassifierOclContainerOperation.INSTANCE.evaluate(executor, lNameExpCS_5);
+                            final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.Nullable Object container_1 = ClassifierOclContainerOperation.INSTANCE.evaluate(executor, lNameExpCS_4);
                             final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_minioclcs_c_c_CallExpCS_6 = idResolver.getClass(CLSSid_CallExpCS, null);
                             final /*@Thrown*/ boolean oclIsKindOf_1 = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, container_1, TYP_minioclcs_c_c_CallExpCS_6).booleanValue();
                             /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable CallExpCS symbol_4;
                             if (oclIsKindOf_1) {
-                                final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull CallExpCS oclAsType_1 = ClassUtil.nonNullState((CallExpCS)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, container_1, TYP_minioclcs_c_c_CallExpCS_6));
-                                symbol_4 = oclAsType_1;
+                                final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull CallExpCS oclAsType_2 = ClassUtil.nonNullState((CallExpCS)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, container_1, TYP_minioclcs_c_c_CallExpCS_6));
+                                symbol_4 = oclAsType_2;
                             }
                             else {
                                 symbol_4 = null;
                             }
-                            final /*@Thrown*/ boolean eq_8 = symbol_4 == null;
+                            final /*@Thrown*/ boolean eq_7 = symbol_4 == null;
                             /*@Thrown*/ boolean symbol_5;
-                            if (eq_8) {
+                            if (eq_7) {
                                 symbol_5 = ValueUtil.FALSE_VALUE;
                             }
                             else {
                                 if (symbol_4 == null) {
-                                    throw throwNull(lNameExpCS_5, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::CallExpCS::nameExp\'");
+                                    throw throwNull(lNameExpCS_4, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::CallExpCS::nameExp\'");
                                 }
                                 final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable NameExpCS nameExp_1 = symbol_4.getNameExp();
-                                final /*@Thrown*/ boolean eq_9 = lNameExpCS_5.equals(nameExp_1);
-                                symbol_5 = eq_9;
+                                final /*@Thrown*/ boolean eq_8 = lNameExpCS_4.equals(nameExp_1);
+                                symbol_5 = eq_8;
                             }
-                            CAUGHT_symbol_5 = symbol_5;
+                            final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean not_2 = BooleanNotOperation.INSTANCE.evaluate(symbol_5);
+                            CAUGHT_not_2 = not_2;
                         }
                         catch (Exception e) {
-                            CAUGHT_symbol_5 = ValueUtil.createInvalidValue(e);
+                            CAUGHT_not_2 = ValueUtil.createInvalidValue(e);
                         }
-                        final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean and_4 = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_eq_7, CAUGHT_symbol_5);
-                        final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean not_2 = BooleanNotOperation.INSTANCE.evaluate(and_4);
-                        if (not_2 == null) {
-                            throw throwNull(lNameExpCS_5, "Null if condition");
+                        final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean and_3 = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_eq_6, CAUGHT_not_2);
+                        if (and_3 == null) {
+                            throw throwNull(lNameExpCS_4, "Null if condition");
                         }
                         /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean symbol_17;
-                        if (not_2) {
-                            final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.Nullable Element ast = lNameExpCS_5.getAst();
+                        if (and_3) {
+                            final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.Nullable Element ast = lNameExpCS_4.getAst();
                             final /*@Thrown*/ boolean symbol_6 = ast != null;
                             /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean raw_aPropertyCallExp;
                             if (symbol_6) {
@@ -2726,39 +2367,39 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
                                 if (symbol_7) {
                                     final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.Nullable PropertyCallExp symbol_8 = (PropertyCallExp)ast;
                                     if (symbol_8 == null) {
-                                        throw throwNull(lNameExpCS_5, "Null where non-null value required");
+                                        throw throwNull(lNameExpCS_4, "Null where non-null value required");
                                     }
                                     final /*@Thrown*/ boolean symbol_9 = ast != null;
                                     /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean raw_ast;
                                     if (symbol_9) {
                                         if (ast == null) {
-                                            throw throwNull(lNameExpCS_5, "Null where non-null value required");
+                                            throw throwNull(lNameExpCS_4, "Null where non-null value required");
                                         }
-                                        final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable PathNameCS expName_2 = lNameExpCS_5.getExpName();
+                                        final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable PathNameCS expName_1 = lNameExpCS_4.getExpName();
                                         @SuppressWarnings("null")
                                         final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.NonNull OCLExpression ownedSource = symbol_8.getOwnedSource();
                                         objectManager.getting(ownedSource, MiniOCLPackage.Literals.TYPED_ELEMENT__TYPE, false);
                                         @SuppressWarnings("null")
                                         final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.NonNull Class type = ownedSource.getType();
-                                        if (expName_2 == null) {
-                                            throw throwNull(lNameExpCS_5, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathNameCS::path\'");
+                                        if (expName_1 == null) {
+                                            throw throwNull(lNameExpCS_4, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathNameCS::pathElements\'");
                                         }
                                         @SuppressWarnings("null")
-                                        final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<PathElementCS> segments_0 = expName_2.getPath();
+                                        final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<PathElementCS> segments_0 = expName_1.getPathElements();
                                         final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_segments_0 = idResolver.createOrderedSetOfAll(ORD_CLSSid_PathElementCS, segments_0);
                                         final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue size_0 = CollectionSizeOperation.INSTANCE.evaluate(BOXED_segments_0);
-                                        final /*@Thrown*/ boolean eq_10 = size_0.equals(INT_1);
+                                        final /*@Thrown*/ boolean eq_9 = size_0.equals(INT_1);
                                         /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.Nullable Property symbol_13;
-                                        if (eq_10) {
-                                            final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable PathElementCS aPathElementCS_1 = (PathElementCS)OrderedCollectionFirstOperation.INSTANCE.evaluate(BOXED_segments_0);
-                                            if (aPathElementCS_1 == null) {
-                                                throw throwNull(lNameExpCS_5, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathElementCS::pathName\'");
+                                        if (eq_9) {
+                                            final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable PathElementCS aPathElementCS_0 = (PathElementCS)OrderedCollectionFirstOperation.INSTANCE.evaluate(BOXED_segments_0);
+                                            if (aPathElementCS_0 == null) {
+                                                throw throwNull(lNameExpCS_4, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathElementCS::elementName\'");
                                             }
-                                            final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String pathName_1 = aPathElementCS_1.getPathName();
-                                            MiniOCLLookupResult<org.eclipse.qvtd.doc.miniocl.Property> _lookupResult_1 = lookupSolver._lookupExportedProperty(type, symbol_8, (String)pathName_1);
+                                            final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String elementName_0 = aPathElementCS_0.getElementName();
+                                            MiniOCLLookupResult<org.eclipse.qvtd.doc.miniocl.Property> _lookupResult_0 = lookupSolver._lookupExportedProperty(type, symbol_8, (String)elementName_0);
                                             org.eclipse.qvtd.doc.miniocl.Property _lookupExportedProperty = null;
-                                            if (_lookupResult_1.size() == 1) {
-                                                _lookupExportedProperty = _lookupResult_1.getSingleResult();
+                                            if (_lookupResult_0.size() == 1) {
+                                                _lookupExportedProperty = _lookupResult_0.getSingleResult();
                                             } else {
                                                 handleLookupError(symbol_8,symbol_8);
                                             };
@@ -2768,20 +2409,20 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
                                             final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue diff = (IntegerValue)NumericMinusOperation.INSTANCE.evaluate(size_0, INT_1);
                                             final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue qualifierSegments = OrderedSetSubOrderedSetOperation.INSTANCE.evaluate(BOXED_segments_0, INT_1, diff);
                                             final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue size_2 = CollectionSizeOperation.INSTANCE.evaluate(qualifierSegments);
-                                            final /*@Thrown*/ boolean eq_11 = size_2.equals(INT_1);
+                                            final /*@Thrown*/ boolean eq_10 = size_2.equals(INT_1);
                                             /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.Nullable Class symbol_11;
-                                            if (eq_11) {
-                                                final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable PathElementCS aPathElementCS_2 = (PathElementCS)OrderedCollectionFirstOperation.INSTANCE.evaluate(qualifierSegments);
-                                                if (aPathElementCS_2 == null) {
-                                                    throw throwNull(lNameExpCS_5, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathElementCS::pathName\'");
+                                            if (eq_10) {
+                                                final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable PathElementCS aPathElementCS_1 = (PathElementCS)OrderedCollectionFirstOperation.INSTANCE.evaluate(qualifierSegments);
+                                                if (aPathElementCS_1 == null) {
+                                                    throw throwNull(lNameExpCS_4, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathElementCS::elementName\'");
                                                 }
-                                                final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String pathName_2 = aPathElementCS_2.getPathName();
-                                                MiniOCLLookupResult<org.eclipse.qvtd.doc.miniocl.Class> _lookupResult_2 = lookupSolver._lookupUnqualifiedClass(symbol_8, (String)pathName_2);
+                                                final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String elementName_1 = aPathElementCS_1.getElementName();
+                                                MiniOCLLookupResult<org.eclipse.qvtd.doc.miniocl.Class> _lookupResult_1 = lookupSolver._lookupUnqualifiedClass(symbol_8, (String)elementName_1);
                                                 org.eclipse.qvtd.doc.miniocl.Class _lookupUnqualifiedClass = null;
-                                                if (_lookupResult_2.size() == 1) {
-                                                    _lookupUnqualifiedClass = _lookupResult_2.getSingleResult();
+                                                if (_lookupResult_1.size() == 1) {
+                                                    _lookupUnqualifiedClass = _lookupResult_1.getSingleResult();
                                                 } else {
-                                                    handleLookupError(aPathElementCS_2,pathName_2);
+                                                    handleLookupError(aPathElementCS_1,elementName_1);
                                                 };
                                                 symbol_11 = _lookupUnqualifiedClass;
                                             }
@@ -2805,19 +2446,19 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
                                                 }
                                                 else {
                                                     if (qualifier == null) {
-                                                        throw throwNull(lNameExpCS_5, "Null where non-null value required");
+                                                        throw throwNull(lNameExpCS_4, "Null where non-null value required");
                                                     }
-                                                    final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable PathElementCS aPathElementCS_3 = (PathElementCS)OrderedCollectionLastOperation.INSTANCE.evaluate(qualifierSegments);
-                                                    if (aPathElementCS_3 == null) {
-                                                        throw throwNull(lNameExpCS_5, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathElementCS::pathName\'");
+                                                    final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable PathElementCS aPathElementCS_2 = (PathElementCS)OrderedCollectionLastOperation.INSTANCE.evaluate(qualifierSegments);
+                                                    if (aPathElementCS_2 == null) {
+                                                        throw throwNull(lNameExpCS_4, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathElementCS::elementName\'");
                                                     }
-                                                    final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String pathName_3 = aPathElementCS_3.getPathName();
-                                                    MiniOCLLookupResult<org.eclipse.qvtd.doc.miniocl.Class> _lookupResult_3 = lookupSolver._lookupQualifiedClass(qualifier, (String)pathName_3);
+                                                    final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String elementName_2 = aPathElementCS_2.getElementName();
+                                                    MiniOCLLookupResult<org.eclipse.qvtd.doc.miniocl.Class> _lookupResult_2 = lookupSolver._lookupQualifiedClass(qualifier, (String)elementName_2);
                                                     org.eclipse.qvtd.doc.miniocl.Class _lookupQualifiedClass = null;
-                                                    if (_lookupResult_3.size() == 1) {
-                                                        _lookupQualifiedClass = _lookupResult_3.getSingleResult();
+                                                    if (_lookupResult_2.size() == 1) {
+                                                        _lookupQualifiedClass = _lookupResult_2.getSingleResult();
                                                     } else {
-                                                        handleLookupError(aPathElementCS_3,pathName_3);
+                                                        handleLookupError(aPathElementCS_2,elementName_2);
                                                     };
                                                     safe_lookupQualifiedClass_source = _lookupQualifiedClass;
                                                 }
@@ -2837,19 +2478,19 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
                                             }
                                             else {
                                                 if (symbol_11 == null) {
-                                                    throw throwNull(lNameExpCS_5, "Null where non-null value required");
+                                                    throw throwNull(lNameExpCS_4, "Null where non-null value required");
                                                 }
-                                                final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable PathElementCS aPathElementCS_4 = (PathElementCS)OrderedCollectionLastOperation.INSTANCE.evaluate(BOXED_segments_0);
-                                                if (aPathElementCS_4 == null) {
-                                                    throw throwNull(lNameExpCS_5, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathElementCS::pathName\'");
+                                                final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable PathElementCS aPathElementCS_3 = (PathElementCS)OrderedCollectionLastOperation.INSTANCE.evaluate(BOXED_segments_0);
+                                                if (aPathElementCS_3 == null) {
+                                                    throw throwNull(lNameExpCS_4, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathElementCS::elementName\'");
                                                 }
-                                                final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String pathName_4 = aPathElementCS_4.getPathName();
-                                                MiniOCLLookupResult<org.eclipse.qvtd.doc.miniocl.Property> _lookupResult_4 = lookupSolver._lookupQualifiedProperty(symbol_11, (String)pathName_4);
+                                                final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String elementName_3 = aPathElementCS_3.getElementName();
+                                                MiniOCLLookupResult<org.eclipse.qvtd.doc.miniocl.Property> _lookupResult_3 = lookupSolver._lookupQualifiedProperty(symbol_11, (String)elementName_3);
                                                 org.eclipse.qvtd.doc.miniocl.Property _lookupQualifiedProperty = null;
-                                                if (_lookupResult_4.size() == 1) {
-                                                    _lookupQualifiedProperty = _lookupResult_4.getSingleResult();
+                                                if (_lookupResult_3.size() == 1) {
+                                                    _lookupQualifiedProperty = _lookupResult_3.getSingleResult();
                                                 } else {
-                                                    handleLookupError(aPathElementCS_4,pathName_4);
+                                                    handleLookupError(aPathElementCS_3,elementName_3);
                                                 };
                                                 safe_lookupQualifiedProperty_source = _lookupQualifiedProperty;
                                             }
@@ -2859,13 +2500,13 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
                                         /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean raw_referredProperty;
                                         if (symbol_14) {
                                             if (symbol_13 == null) {
-                                                throw throwNull(lNameExpCS_5, "Null where non-null value required");
+                                                throw throwNull(lNameExpCS_4, "Null where non-null value required");
                                             }
                                             // property assignments
                                             symbol_8.setReferredProperty(symbol_13);
                                             objectManager.assigned(symbol_8, MiniOCLPackage.Literals.PROPERTY_CALL_EXP__REFERRED_PROPERTY, symbol_13, null);
-                                            final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean m_NameExpCS_ast_expName_1 = ValueUtil.TRUE_VALUE;
-                                            raw_referredProperty = m_NameExpCS_ast_expName_1;
+                                            final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean m_NameExpCS_ast_expName = ValueUtil.TRUE_VALUE;
+                                            raw_referredProperty = m_NameExpCS_ast_expName;
                                         }
                                         else {
                                             raw_referredProperty = ValueUtil.FALSE_VALUE;
@@ -2902,18 +2543,18 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
                 }
                 return symbol_19;
             } catch (Throwable e) {
-                return handleExecutionFailure("MAP_m_NameExpCS_ast_expName_1", e);
+                return handleExecutionFailure("MAP_m_NameExpCS_ast_expName", e);
             }
         }
         
         public boolean isEqual(@NonNull IdResolver idResolver, @NonNull Object @NonNull [] thoseValues) {
-            return idResolver.oclEquals(lNameExpCS_5, thoseValues[0]);
+            return idResolver.oclEquals(lNameExpCS_4, thoseValues[0]);
         }
     }
     
     /**
      * 
-     * map m_NameExpCS_ast_expName_2 in MiniOCLCS2AS_qvtp_qvtcas {
+     * map m_NameExpCS_ast_expName_1 in MiniOCLCS2AS_qvtp_qvtcas {
      *   leftCS (lNameExpCS : minioclcs::NameExpCS[1];
      *  |)
      * {expName : minioclcs::PathNameCS[?];
@@ -2939,12 +2580,12 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
      * }
      * 
      */
-    protected class MAP_m_NameExpCS_ast_expName_2 extends AbstractInvocation
+    protected class MAP_m_NameExpCS_ast_expName_1 extends AbstractInvocation
     {
-        protected final /*@NonInvalid*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull NameExpCS lNameExpCS_6;
+        protected final /*@NonInvalid*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull NameExpCS lNameExpCS_5;
         
-        public MAP_m_NameExpCS_ast_expName_2(@NonNull Object @NonNull [] boundValues) {
-            lNameExpCS_6 = (NameExpCS)boundValues[0];
+        public MAP_m_NameExpCS_ast_expName_1(@NonNull Object @NonNull [] boundValues) {
+            lNameExpCS_5 = (NameExpCS)boundValues[0];
         }
         
         public boolean execute()  {
@@ -2953,7 +2594,7 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
                 final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull IdResolver idResolver = executor.getIdResolver();
                 /*@Caught*/ @NonNull Object CAUGHT_eq;
                 try {
-                    final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable RoundedBracketClauseCS roundedBrackets = lNameExpCS_6.getRoundedBrackets();
+                    final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable RoundedBracketClauseCS roundedBrackets = lNameExpCS_5.getRoundedBrackets();
                     final /*@Thrown*/ boolean eq = roundedBrackets == null;
                     CAUGHT_eq = eq;
                 }
@@ -2962,7 +2603,7 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
                 }
                 /*@Caught*/ @NonNull Object CAUGHT_symbol_1;
                 try {
-                    final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.Nullable Object container = ClassifierOclContainerOperation.INSTANCE.evaluate(executor, lNameExpCS_6);
+                    final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.Nullable Object container = ClassifierOclContainerOperation.INSTANCE.evaluate(executor, lNameExpCS_5);
                     final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_minioclcs_c_c_CallExpCS_2 = idResolver.getClass(CLSSid_CallExpCS, null);
                     final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, container, TYP_minioclcs_c_c_CallExpCS_2).booleanValue();
                     /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable CallExpCS symbol_0;
@@ -2980,10 +2621,10 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
                     }
                     else {
                         if (symbol_0 == null) {
-                            throw throwNull(lNameExpCS_6, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::CallExpCS::nameExp\'");
+                            throw throwNull(lNameExpCS_5, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::CallExpCS::nameExp\'");
                         }
                         final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable NameExpCS nameExp = symbol_0.getNameExp();
-                        final /*@Thrown*/ boolean eq_1 = lNameExpCS_6.equals(nameExp);
+                        final /*@Thrown*/ boolean eq_1 = lNameExpCS_5.equals(nameExp);
                         symbol_1 = eq_1;
                     }
                     CAUGHT_symbol_1 = symbol_1;
@@ -2993,11 +2634,11 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
                 }
                 final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean and = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_eq, CAUGHT_symbol_1);
                 if (and == null) {
-                    throw throwNull(lNameExpCS_6, "Null if condition");
+                    throw throwNull(lNameExpCS_5, "Null if condition");
                 }
                 /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean symbol_13;
                 if (and) {
-                    final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.Nullable Element ast = lNameExpCS_6.getAst();
+                    final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.Nullable Element ast = lNameExpCS_5.getAst();
                     final /*@Thrown*/ boolean symbol_2 = ast != null;
                     /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean raw_aPropertyCallExp;
                     if (symbol_2) {
@@ -3006,25 +2647,25 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
                         if (symbol_3) {
                             final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.Nullable PropertyCallExp symbol_4 = (PropertyCallExp)ast;
                             if (symbol_4 == null) {
-                                throw throwNull(lNameExpCS_6, "Null where non-null value required");
+                                throw throwNull(lNameExpCS_5, "Null where non-null value required");
                             }
                             final /*@Thrown*/ boolean symbol_5 = ast != null;
                             /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean raw_ast;
                             if (symbol_5) {
                                 if (ast == null) {
-                                    throw throwNull(lNameExpCS_6, "Null where non-null value required");
+                                    throw throwNull(lNameExpCS_5, "Null where non-null value required");
                                 }
-                                final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable PathNameCS expName = lNameExpCS_6.getExpName();
+                                final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable PathNameCS expName = lNameExpCS_5.getExpName();
                                 @SuppressWarnings("null")
                                 final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.NonNull OCLExpression ownedSource = symbol_4.getOwnedSource();
                                 objectManager.getting(ownedSource, MiniOCLPackage.Literals.TYPED_ELEMENT__TYPE, false);
                                 @SuppressWarnings("null")
                                 final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.NonNull Class type = ownedSource.getType();
                                 if (expName == null) {
-                                    throw throwNull(lNameExpCS_6, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathNameCS::path\'");
+                                    throw throwNull(lNameExpCS_5, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathNameCS::pathElements\'");
                                 }
                                 @SuppressWarnings("null")
-                                final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<PathElementCS> segments_0 = expName.getPath();
+                                final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<PathElementCS> segments_0 = expName.getPathElements();
                                 final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_segments_0 = idResolver.createOrderedSetOfAll(ORD_CLSSid_PathElementCS, segments_0);
                                 final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(BOXED_segments_0);
                                 final /*@Thrown*/ boolean eq_2 = size.equals(INT_1);
@@ -3032,10 +2673,10 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
                                 if (eq_2) {
                                     final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable PathElementCS aPathElementCS = (PathElementCS)OrderedCollectionFirstOperation.INSTANCE.evaluate(BOXED_segments_0);
                                     if (aPathElementCS == null) {
-                                        throw throwNull(lNameExpCS_6, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathElementCS::pathName\'");
+                                        throw throwNull(lNameExpCS_5, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathElementCS::elementName\'");
                                     }
-                                    final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String pathName = aPathElementCS.getPathName();
-                                    MiniOCLLookupResult<org.eclipse.qvtd.doc.miniocl.Property> _lookupResult = lookupSolver._lookupExportedProperty(type, symbol_4, (String)pathName);
+                                    final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String elementName = aPathElementCS.getElementName();
+                                    MiniOCLLookupResult<org.eclipse.qvtd.doc.miniocl.Property> _lookupResult = lookupSolver._lookupExportedProperty(type, symbol_4, (String)elementName);
                                     org.eclipse.qvtd.doc.miniocl.Property _lookupExportedProperty = null;
                                     if (_lookupResult.size() == 1) {
                                         _lookupExportedProperty = _lookupResult.getSingleResult();
@@ -3053,15 +2694,15 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
                                     if (eq_3) {
                                         final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable PathElementCS aPathElementCS_0 = (PathElementCS)OrderedCollectionFirstOperation.INSTANCE.evaluate(qualifierSegments);
                                         if (aPathElementCS_0 == null) {
-                                            throw throwNull(lNameExpCS_6, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathElementCS::pathName\'");
+                                            throw throwNull(lNameExpCS_5, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathElementCS::elementName\'");
                                         }
-                                        final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String pathName_0 = aPathElementCS_0.getPathName();
-                                        MiniOCLLookupResult<org.eclipse.qvtd.doc.miniocl.Class> _lookupResult_0 = lookupSolver._lookupUnqualifiedClass(symbol_4, (String)pathName_0);
+                                        final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String elementName_0 = aPathElementCS_0.getElementName();
+                                        MiniOCLLookupResult<org.eclipse.qvtd.doc.miniocl.Class> _lookupResult_0 = lookupSolver._lookupUnqualifiedClass(symbol_4, (String)elementName_0);
                                         org.eclipse.qvtd.doc.miniocl.Class _lookupUnqualifiedClass = null;
                                         if (_lookupResult_0.size() == 1) {
                                             _lookupUnqualifiedClass = _lookupResult_0.getSingleResult();
                                         } else {
-                                            handleLookupError(aPathElementCS_0,pathName_0);
+                                            handleLookupError(aPathElementCS_0,elementName_0);
                                         };
                                         symbol_7 = _lookupUnqualifiedClass;
                                     }
@@ -3085,19 +2726,19 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
                                         }
                                         else {
                                             if (qualifier == null) {
-                                                throw throwNull(lNameExpCS_6, "Null where non-null value required");
+                                                throw throwNull(lNameExpCS_5, "Null where non-null value required");
                                             }
                                             final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable PathElementCS aPathElementCS_1 = (PathElementCS)OrderedCollectionLastOperation.INSTANCE.evaluate(qualifierSegments);
                                             if (aPathElementCS_1 == null) {
-                                                throw throwNull(lNameExpCS_6, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathElementCS::pathName\'");
+                                                throw throwNull(lNameExpCS_5, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathElementCS::elementName\'");
                                             }
-                                            final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String pathName_1 = aPathElementCS_1.getPathName();
-                                            MiniOCLLookupResult<org.eclipse.qvtd.doc.miniocl.Class> _lookupResult_1 = lookupSolver._lookupQualifiedClass(qualifier, (String)pathName_1);
+                                            final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String elementName_1 = aPathElementCS_1.getElementName();
+                                            MiniOCLLookupResult<org.eclipse.qvtd.doc.miniocl.Class> _lookupResult_1 = lookupSolver._lookupQualifiedClass(qualifier, (String)elementName_1);
                                             org.eclipse.qvtd.doc.miniocl.Class _lookupQualifiedClass = null;
                                             if (_lookupResult_1.size() == 1) {
                                                 _lookupQualifiedClass = _lookupResult_1.getSingleResult();
                                             } else {
-                                                handleLookupError(aPathElementCS_1,pathName_1);
+                                                handleLookupError(aPathElementCS_1,elementName_1);
                                             };
                                             safe_lookupQualifiedClass_source = _lookupQualifiedClass;
                                         }
@@ -3117,19 +2758,19 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
                                     }
                                     else {
                                         if (symbol_7 == null) {
-                                            throw throwNull(lNameExpCS_6, "Null where non-null value required");
+                                            throw throwNull(lNameExpCS_5, "Null where non-null value required");
                                         }
                                         final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable PathElementCS aPathElementCS_2 = (PathElementCS)OrderedCollectionLastOperation.INSTANCE.evaluate(BOXED_segments_0);
                                         if (aPathElementCS_2 == null) {
-                                            throw throwNull(lNameExpCS_6, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathElementCS::pathName\'");
+                                            throw throwNull(lNameExpCS_5, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathElementCS::elementName\'");
                                         }
-                                        final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String pathName_2 = aPathElementCS_2.getPathName();
-                                        MiniOCLLookupResult<org.eclipse.qvtd.doc.miniocl.Property> _lookupResult_2 = lookupSolver._lookupQualifiedProperty(symbol_7, (String)pathName_2);
+                                        final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String elementName_2 = aPathElementCS_2.getElementName();
+                                        MiniOCLLookupResult<org.eclipse.qvtd.doc.miniocl.Property> _lookupResult_2 = lookupSolver._lookupQualifiedProperty(symbol_7, (String)elementName_2);
                                         org.eclipse.qvtd.doc.miniocl.Property _lookupQualifiedProperty = null;
                                         if (_lookupResult_2.size() == 1) {
                                             _lookupQualifiedProperty = _lookupResult_2.getSingleResult();
                                         } else {
-                                            handleLookupError(aPathElementCS_2,pathName_2);
+                                            handleLookupError(aPathElementCS_2,elementName_2);
                                         };
                                         safe_lookupQualifiedProperty_source = _lookupQualifiedProperty;
                                     }
@@ -3139,13 +2780,13 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
                                 /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean raw_referredProperty;
                                 if (symbol_10) {
                                     if (symbol_9 == null) {
-                                        throw throwNull(lNameExpCS_6, "Null where non-null value required");
+                                        throw throwNull(lNameExpCS_5, "Null where non-null value required");
                                     }
                                     // property assignments
                                     symbol_4.setReferredProperty(symbol_9);
                                     objectManager.assigned(symbol_4, MiniOCLPackage.Literals.PROPERTY_CALL_EXP__REFERRED_PROPERTY, symbol_9, null);
-                                    final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean m_NameExpCS_ast_expName_2 = ValueUtil.TRUE_VALUE;
-                                    raw_referredProperty = m_NameExpCS_ast_expName_2;
+                                    final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean m_NameExpCS_ast_expName_1 = ValueUtil.TRUE_VALUE;
+                                    raw_referredProperty = m_NameExpCS_ast_expName_1;
                                 }
                                 else {
                                     raw_referredProperty = ValueUtil.FALSE_VALUE;
@@ -3172,12 +2813,288 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
                 }
                 return symbol_13;
             } catch (Throwable e) {
-                return handleExecutionFailure("MAP_m_NameExpCS_ast_expName_2", e);
+                return handleExecutionFailure("MAP_m_NameExpCS_ast_expName_1", e);
             }
         }
         
         public boolean isEqual(@NonNull IdResolver idResolver, @NonNull Object @NonNull [] thoseValues) {
-            return idResolver.oclEquals(lNameExpCS_6, thoseValues[0]);
+            return idResolver.oclEquals(lNameExpCS_5, thoseValues[0]);
+        }
+    }
+    
+    /**
+     * 
+     * map m_NameExpCS_ast_expName_2 in MiniOCLCS2AS_qvtp_qvtcas {
+     *   leftCS (lNameExpCS : minioclcs::NameExpCS[1];
+     *  |)
+     * {expName : minioclcs::PathNameCS[?];
+     * first : minioclcs::PathElementCS[?];
+     * path : OrderedSet(minioclcs::PathElementCS)[*|1];
+     *  |}
+     * rightAS ( |)
+     * {aVariableExp : miniocl::VariableExp[1];
+     * ast : miniocl::Element[1];
+     * referredVariable : miniocl::Variable[1];
+     *  |}
+     * where ( |
+     * lNameExpCS.isVariableExp()
+     *   not lNameExpCS.isPropCallExpWithExplicitSource()
+     *   )
+     * { |
+     * aVariableExp := lNameExpCS.ast;
+     * ast := lNameExpCS.ast;
+     * expName := lNameExpCS.expName;
+     * path := expName.path;
+     * first := path->first()
+     *   ;
+     * referredVariable := aVariableExp.lookupVariable(first);
+     * aVariableExp.referredVariable := referredVariable;
+     * }
+     * 
+     */
+    protected boolean MAP_m_NameExpCS_ast_expName_2(final /*@NonInvalid*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull NameExpCS lNameExpCS_6)  {
+        try {
+            // predicates and unrealized variables
+            final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull IdResolver idResolver = executor.getIdResolver();
+            /*@Caught*/ @Nullable Object CAUGHT_and_0;
+            try {
+                /*@Caught*/ @Nullable Object CAUGHT_and;
+                try {
+                    /*@Caught*/ @NonNull Object CAUGHT_eq;
+                    try {
+                        final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable RoundedBracketClauseCS roundedBrackets = lNameExpCS_6.getRoundedBrackets();
+                        final /*@Thrown*/ boolean eq = roundedBrackets == null;
+                        CAUGHT_eq = eq;
+                    }
+                    catch (Exception e) {
+                        CAUGHT_eq = ValueUtil.createInvalidValue(e);
+                    }
+                    /*@Caught*/ @Nullable Object CAUGHT_not;
+                    try {
+                        final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.Nullable Object container = ClassifierOclContainerOperation.INSTANCE.evaluate(executor, lNameExpCS_6);
+                        final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_minioclcs_c_c_CallExpCS_2 = idResolver.getClass(CLSSid_CallExpCS, null);
+                        final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, container, TYP_minioclcs_c_c_CallExpCS_2).booleanValue();
+                        /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable CallExpCS symbol_0;
+                        if (oclIsKindOf) {
+                            final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull CallExpCS oclAsType = ClassUtil.nonNullState((CallExpCS)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, container, TYP_minioclcs_c_c_CallExpCS_2));
+                            symbol_0 = oclAsType;
+                        }
+                        else {
+                            symbol_0 = null;
+                        }
+                        final /*@Thrown*/ boolean eq_0 = symbol_0 == null;
+                        /*@Thrown*/ boolean symbol_1;
+                        if (eq_0) {
+                            symbol_1 = ValueUtil.FALSE_VALUE;
+                        }
+                        else {
+                            if (symbol_0 == null) {
+                                throw throwNull(lNameExpCS_6, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::CallExpCS::nameExp\'");
+                            }
+                            final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable NameExpCS nameExp = symbol_0.getNameExp();
+                            final /*@Thrown*/ boolean eq_1 = lNameExpCS_6.equals(nameExp);
+                            symbol_1 = eq_1;
+                        }
+                        final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean not = BooleanNotOperation.INSTANCE.evaluate(symbol_1);
+                        CAUGHT_not = not;
+                    }
+                    catch (Exception e) {
+                        CAUGHT_not = ValueUtil.createInvalidValue(e);
+                    }
+                    final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean and = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_eq, CAUGHT_not);
+                    CAUGHT_and = and;
+                }
+                catch (Exception e) {
+                    CAUGHT_and = ValueUtil.createInvalidValue(e);
+                }
+                /*@Caught*/ @NonNull Object CAUGHT_eq_2;
+                try {
+                    final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable PathNameCS expName = lNameExpCS_6.getExpName();
+                    if (expName == null) {
+                        throw throwNull(lNameExpCS_6, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathNameCS::path\'");
+                    }
+                    @SuppressWarnings("null")
+                    final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<PathElementCS> path = expName.getPath();
+                    final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_path = idResolver.createOrderedSetOfAll(ORD_CLSSid_PathElementCS, path);
+                    final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(BOXED_path);
+                    final /*@Thrown*/ boolean eq_2 = size.equals(INT_1);
+                    CAUGHT_eq_2 = eq_2;
+                }
+                catch (Exception e) {
+                    CAUGHT_eq_2 = ValueUtil.createInvalidValue(e);
+                }
+                final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean and_0 = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_and, CAUGHT_eq_2);
+                CAUGHT_and_0 = and_0;
+            }
+            catch (Exception e) {
+                CAUGHT_and_0 = ValueUtil.createInvalidValue(e);
+            }
+            /*@Caught*/ @NonNull Object CAUGHT_ne;
+            try {
+                final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_minioclcs_c_c_CSTrace_0 = idResolver.getClass(CLSSid_CSTrace, null);
+                final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.Nullable Object oclContainer = ClassifierOclContainerOperation.INSTANCE.evaluate(executor, lNameExpCS_6);
+                final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull CSTrace oclAsType_0 = ClassUtil.nonNullState((CSTrace)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, oclContainer, TYP_minioclcs_c_c_CSTrace_0));
+                final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.Nullable Element self_1 = oclAsType_0.getAst();
+                if (self_1 == null) {
+                    throw throwNull(lNameExpCS_6, "Null where non-null value required");
+                }
+                final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable PathNameCS expName_0 = lNameExpCS_6.getExpName();
+                if (expName_0 == null) {
+                    throw throwNull(lNameExpCS_6, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathNameCS::path\'");
+                }
+                @SuppressWarnings("null")
+                final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<PathElementCS> path_0 = expName_0.getPath();
+                final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_path_0 = idResolver.createOrderedSetOfAll(ORD_CLSSid_PathElementCS, path_0);
+                final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable PathElementCS aPathElementCS = (PathElementCS)OrderedCollectionFirstOperation.INSTANCE.evaluate(BOXED_path_0);
+                if (aPathElementCS == null) {
+                    throw throwNull(lNameExpCS_6, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathElementCS::elementName\'");
+                }
+                final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String elementName = aPathElementCS.getElementName();
+                MiniOCLLookupResult<Variable> _lookupResult = lookupSolver._lookupUnqualifiedVariable(self_1, (String)elementName);
+                Variable _lookupUnqualifiedVariable = null;
+                if (_lookupResult.size() == 1) {
+                    _lookupUnqualifiedVariable = _lookupResult.getSingleResult();
+                } else {
+                    handleLookupError(aPathElementCS,elementName);
+                };
+                final /*@Thrown*/ boolean ne = _lookupUnqualifiedVariable != null;
+                CAUGHT_ne = ne;
+            }
+            catch (Exception e) {
+                CAUGHT_ne = ValueUtil.createInvalidValue(e);
+            }
+            final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean and_1 = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_and_0, CAUGHT_ne);
+            if (and_1 == null) {
+                throw throwNull(lNameExpCS_6, "Null if condition");
+            }
+            /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean symbol_12;
+            if (and_1) {
+                /*@Caught*/ @NonNull Object CAUGHT_eq_3;
+                try {
+                    final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable RoundedBracketClauseCS roundedBrackets_0 = lNameExpCS_6.getRoundedBrackets();
+                    final /*@Thrown*/ boolean eq_3 = roundedBrackets_0 == null;
+                    CAUGHT_eq_3 = eq_3;
+                }
+                catch (Exception e) {
+                    CAUGHT_eq_3 = ValueUtil.createInvalidValue(e);
+                }
+                /*@Caught*/ @NonNull Object CAUGHT_symbol_3;
+                try {
+                    final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.Nullable Object container_0 = ClassifierOclContainerOperation.INSTANCE.evaluate(executor, lNameExpCS_6);
+                    final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_minioclcs_c_c_CallExpCS_4 = idResolver.getClass(CLSSid_CallExpCS, null);
+                    final /*@Thrown*/ boolean oclIsKindOf_0 = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, container_0, TYP_minioclcs_c_c_CallExpCS_4).booleanValue();
+                    /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable CallExpCS symbol_2;
+                    if (oclIsKindOf_0) {
+                        final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull CallExpCS oclAsType_1 = ClassUtil.nonNullState((CallExpCS)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, container_0, TYP_minioclcs_c_c_CallExpCS_4));
+                        symbol_2 = oclAsType_1;
+                    }
+                    else {
+                        symbol_2 = null;
+                    }
+                    final /*@Thrown*/ boolean eq_4 = symbol_2 == null;
+                    /*@Thrown*/ boolean symbol_3;
+                    if (eq_4) {
+                        symbol_3 = ValueUtil.FALSE_VALUE;
+                    }
+                    else {
+                        if (symbol_2 == null) {
+                            throw throwNull(lNameExpCS_6, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::CallExpCS::nameExp\'");
+                        }
+                        final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable NameExpCS nameExp_0 = symbol_2.getNameExp();
+                        final /*@Thrown*/ boolean eq_5 = lNameExpCS_6.equals(nameExp_0);
+                        symbol_3 = eq_5;
+                    }
+                    CAUGHT_symbol_3 = symbol_3;
+                }
+                catch (Exception e) {
+                    CAUGHT_symbol_3 = ValueUtil.createInvalidValue(e);
+                }
+                final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean and_2 = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_eq_3, CAUGHT_symbol_3);
+                final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean not_0 = BooleanNotOperation.INSTANCE.evaluate(and_2);
+                if (not_0 == null) {
+                    throw throwNull(lNameExpCS_6, "Null if condition");
+                }
+                /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean symbol_11;
+                if (not_0) {
+                    final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.Nullable Element ast = lNameExpCS_6.getAst();
+                    final /*@Thrown*/ boolean symbol_4 = ast != null;
+                    /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean raw_aVariableExp;
+                    if (symbol_4) {
+                        final /*@NonInvalid*/ boolean symbol_5 = ast instanceof VariableExp;
+                        /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean symbol_10;
+                        if (symbol_5) {
+                            final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.Nullable VariableExp symbol_6 = (VariableExp)ast;
+                            if (symbol_6 == null) {
+                                throw throwNull(lNameExpCS_6, "Null where non-null value required");
+                            }
+                            final /*@Thrown*/ boolean symbol_7 = ast != null;
+                            /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean raw_ast;
+                            if (symbol_7) {
+                                if (ast == null) {
+                                    throw throwNull(lNameExpCS_6, "Null where non-null value required");
+                                }
+                                final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable PathNameCS expName_1 = lNameExpCS_6.getExpName();
+                                if (expName_1 == null) {
+                                    throw throwNull(lNameExpCS_6, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathNameCS::path\'");
+                                }
+                                @SuppressWarnings("null")
+                                final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<PathElementCS> path_1 = expName_1.getPath();
+                                final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_path_1 = idResolver.createOrderedSetOfAll(ORD_CLSSid_PathElementCS, path_1);
+                                final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable PathElementCS first = (PathElementCS)OrderedCollectionFirstOperation.INSTANCE.evaluate(BOXED_path_1);
+                                if (first == null) {
+                                    throw throwNull(lNameExpCS_6, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathElementCS::elementName\'");
+                                }
+                                final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String elementName_0 = first.getElementName();
+                                MiniOCLLookupResult<Variable> _lookupResult_0 = lookupSolver._lookupUnqualifiedVariable(symbol_6, (String)elementName_0);
+                                Variable _lookupUnqualifiedVariable_0 = null;
+                                if (_lookupResult_0.size() == 1) {
+                                    _lookupUnqualifiedVariable_0 = _lookupResult_0.getSingleResult();
+                                } else {
+                                    handleLookupError(first,elementName_0);
+                                };
+                                final /*@Thrown*/ boolean symbol_8 = _lookupUnqualifiedVariable_0 != null;
+                                /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean raw_referredVariable;
+                                if (symbol_8) {
+                                    if (_lookupUnqualifiedVariable_0 == null) {
+                                        throw throwNull(lNameExpCS_6, "Null where non-null value required");
+                                    }
+                                    // property assignments
+                                    symbol_6.setReferredVariable(_lookupUnqualifiedVariable_0);
+                                    objectManager.assigned(symbol_6, MiniOCLPackage.Literals.VARIABLE_EXP__REFERRED_VARIABLE, _lookupUnqualifiedVariable_0, null);
+                                    final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean m_NameExpCS_ast_expName_2 = ValueUtil.TRUE_VALUE;
+                                    raw_referredVariable = m_NameExpCS_ast_expName_2;
+                                }
+                                else {
+                                    raw_referredVariable = ValueUtil.FALSE_VALUE;
+                                }
+                                raw_ast = raw_referredVariable;
+                            }
+                            else {
+                                raw_ast = ValueUtil.FALSE_VALUE;
+                            }
+                            symbol_10 = raw_ast;
+                        }
+                        else {
+                            symbol_10 = ValueUtil.FALSE_VALUE;
+                        }
+                        raw_aVariableExp = symbol_10;
+                    }
+                    else {
+                        raw_aVariableExp = ValueUtil.FALSE_VALUE;
+                    }
+                    symbol_11 = raw_aVariableExp;
+                }
+                else {
+                    symbol_11 = ValueUtil.FALSE_VALUE;
+                }
+                symbol_12 = symbol_11;
+            }
+            else {
+                symbol_12 = ValueUtil.FALSE_VALUE;
+            }
+            return symbol_12;
+        } catch (Throwable e) {
+            return handleExecutionFailure("MAP_m_NameExpCS_ast_expName_2", e);
         }
     }
     
@@ -3266,7 +3183,6 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
                             models[1/*rightAS*/].add(symbol_10);
                             // property assignments
                             symbol_2.setOwnedBodyExpression(symbol_10);
-                            objectManager.assigned(symbol_2, MiniOCLPackage.Literals.OPERATION__OWNED_BODY_EXPRESSION, symbol_10, null);
                             final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean m_OperationCS_ast_body = ValueUtil.TRUE_VALUE;
                             raw_ast1 = m_OperationCS_ast_body;
                         }
@@ -3339,10 +3255,10 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
                         }
                         final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable PathNameCS resultRef = lOperationCS_0.getResultRef();
                         if (resultRef == null) {
-                            throw throwNull(lOperationCS_0, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathNameCS::path\'");
+                            throw throwNull(lOperationCS_0, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathNameCS::pathElements\'");
                         }
                         @SuppressWarnings("null")
-                        final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<PathElementCS> segments_0 = resultRef.getPath();
+                        final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<PathElementCS> segments_0 = resultRef.getPathElements();
                         final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_segments_0 = idResolver.createOrderedSetOfAll(ORD_CLSSid_PathElementCS, segments_0);
                         final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(BOXED_segments_0);
                         final /*@Thrown*/ boolean eq = size.equals(INT_1);
@@ -3350,15 +3266,15 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
                         if (eq) {
                             final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable PathElementCS aPathElementCS = (PathElementCS)OrderedCollectionFirstOperation.INSTANCE.evaluate(BOXED_segments_0);
                             if (aPathElementCS == null) {
-                                throw throwNull(lOperationCS_0, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathElementCS::pathName\'");
+                                throw throwNull(lOperationCS_0, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathElementCS::elementName\'");
                             }
-                            final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String pathName = aPathElementCS.getPathName();
-                            MiniOCLLookupResult<org.eclipse.qvtd.doc.miniocl.Class> _lookupResult = lookupSolver._lookupUnqualifiedClass(symbol_2, (String)pathName);
+                            final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String elementName = aPathElementCS.getElementName();
+                            MiniOCLLookupResult<org.eclipse.qvtd.doc.miniocl.Class> _lookupResult = lookupSolver._lookupUnqualifiedClass(symbol_2, (String)elementName);
                             org.eclipse.qvtd.doc.miniocl.Class _lookupUnqualifiedClass = null;
                             if (_lookupResult.size() == 1) {
                                 _lookupUnqualifiedClass = _lookupResult.getSingleResult();
                             } else {
-                                handleLookupError(aPathElementCS,pathName);
+                                handleLookupError(aPathElementCS,elementName);
                             };
                             symbol_5 = _lookupUnqualifiedClass;
                         }
@@ -3386,15 +3302,15 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
                                 }
                                 final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable PathElementCS aPathElementCS_0 = (PathElementCS)OrderedCollectionLastOperation.INSTANCE.evaluate(BOXED_segments_0);
                                 if (aPathElementCS_0 == null) {
-                                    throw throwNull(lOperationCS_0, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathElementCS::pathName\'");
+                                    throw throwNull(lOperationCS_0, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathElementCS::elementName\'");
                                 }
-                                final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String pathName_0 = aPathElementCS_0.getPathName();
-                                MiniOCLLookupResult<org.eclipse.qvtd.doc.miniocl.Class> _lookupResult_0 = lookupSolver._lookupQualifiedClass(qualifier, (String)pathName_0);
+                                final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String elementName_0 = aPathElementCS_0.getElementName();
+                                MiniOCLLookupResult<org.eclipse.qvtd.doc.miniocl.Class> _lookupResult_0 = lookupSolver._lookupQualifiedClass(qualifier, (String)elementName_0);
                                 org.eclipse.qvtd.doc.miniocl.Class _lookupQualifiedClass = null;
                                 if (_lookupResult_0.size() == 1) {
                                     _lookupQualifiedClass = _lookupResult_0.getSingleResult();
                                 } else {
-                                    handleLookupError(aPathElementCS_0,pathName_0);
+                                    handleLookupError(aPathElementCS_0,elementName_0);
                                 };
                                 safe_lookupQualifiedClass_source = _lookupQualifiedClass;
                             }
@@ -3467,7 +3383,7 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
     
     /**
      * 
-     * map m_OrderedSet_ClassCS in MiniOCLCS2AS_qvtp_qvtcas {
+     * map m_OrderedSet_ClassCS_2 in MiniOCLCS2AS_qvtp_qvtcas {
      *   leftCS (lClassCS : minioclcs::ClassCS[1];
      *  |)
      * {operations : OrderedSet(minioclcs::OperationCS)[*|1];
@@ -3475,11 +3391,11 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
      *  |}
      * rightAS ( |)
      * {aClass : miniocl::Class[1];
-     * asOrderedSet : OrderedSet(miniocl::Property)[*|1];
-     * asOrderedSet1 : OrderedSet(miniocl::Operation)[*|1];
+     * asOrderedSet : OrderedSet(miniocl::Operation)[*|1];
+     * asOrderedSet1 : OrderedSet(miniocl::Property)[*|1];
      * ast : miniocl::Element[1];
-     * _'\u00ABcollect\u00BB' : Sequence(miniocl::Property)[*|1];
-     * _'\u00ABcollect\u00BB1' : Sequence(miniocl::Operation)[*|1];
+     * _'\u00ABcollect\u00BB' : Sequence(miniocl::Operation)[*|1];
+     * _'\u00ABcollect\u00BB1' : Sequence(miniocl::Property)[*|1];
      *  |}
      * where ( |)
      * {name : ecore::EString[?];
@@ -3492,22 +3408,22 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
      * properties := lClassCS.properties;
      * toString := name.toString()
      *   ;
-     * _'\u00ABcollect\u00BB' := properties->collect(_'1_' |
-     *     _'1_'.ast.oclAsType(miniocl::Property))
-     *   ;
-     * _'\u00ABcollect\u00BB1' := operations->collect(_'1_' |
+     * _'\u00ABcollect\u00BB' := operations->collect(_'1_' |
      *     _'1_'.ast.oclAsType(miniocl::Operation))
+     *   ;
+     * _'\u00ABcollect\u00BB1' := properties->collect(_'1_' |
+     *     _'1_'.ast.oclAsType(miniocl::Property))
      *   ;
      * asOrderedSet := _'\u00ABcollect\u00BB'->asOrderedSet()
      *   ;
      * asOrderedSet1 := _'\u00ABcollect\u00BB1'->asOrderedSet();
      * aClass.name := toString;
-     * aClass.ownedOperations := asOrderedSet1;
-     * aClass.ownedProperties := asOrderedSet;
+     * aClass.ownedOperations := asOrderedSet;
+     * aClass.ownedProperties := asOrderedSet1;
      * }
      * 
      */
-    protected boolean MAP_m_OrderedSet_ClassCS(final /*@NonInvalid*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull ClassCS lClassCS_1)  {
+    protected boolean MAP_m_OrderedSet_ClassCS_2(final /*@NonInvalid*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull ClassCS lClassCS_1)  {
         try {
             // predicates and unrealized variables
             final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull IdResolver idResolver = executor.getIdResolver();
@@ -3534,9 +3450,9 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
                         @SuppressWarnings("null")
                         final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<PropertyCS> properties = lClassCS_1.getProperties();
                         final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.NonNull String toString = OclAnyToStringOperation.INSTANCE.evaluate(name);
-                        final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_properties = idResolver.createOrderedSetOfAll(ORD_CLSSid_PropertyCS, properties);
-                        /*@Thrown*/ SequenceValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_Property);
-                        @NonNull Iterator<Object> ITERATOR__1 = BOXED_properties.iterator();
+                        final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_operations = idResolver.createOrderedSetOfAll(ORD_CLSSid_OperationCS, operations);
+                        /*@Thrown*/ SequenceValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_Operation);
+                        @NonNull Iterator<Object> ITERATOR__1 = BOXED_operations.iterator();
                         /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SequenceValue collect;
                         while (true) {
                             if (!ITERATOR__1.hasNext()) {
@@ -3544,19 +3460,19 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
                                 break;
                             }
                             @SuppressWarnings("null")
-                            /*@NonInvalid*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull PropertyCS _1 = (PropertyCS)ITERATOR__1.next();
+                            /*@NonInvalid*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull OperationCS _1 = (OperationCS)ITERATOR__1.next();
                             /**
-                             * _'1_'.ast.oclAsType(miniocl::Property)
+                             * _'1_'.ast.oclAsType(miniocl::Operation)
                              */
-                            final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_miniocl_c_c_Property_0 = idResolver.getClass(CLSSid_Property, null);
+                            final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_miniocl_c_c_Operation_0 = idResolver.getClass(CLSSid_Operation, null);
                             final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.Nullable Element ast_1 = _1.getAst();
-                            final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.NonNull Property oclAsType = ClassUtil.nonNullState((org.eclipse.qvtd.doc.miniocl.Property)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast_1, TYP_miniocl_c_c_Property_0));
+                            final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.NonNull Operation oclAsType = ClassUtil.nonNullState((Operation)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast_1, TYP_miniocl_c_c_Operation_0));
                             //
                             accumulator.add(oclAsType);
                         }
-                        final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_operations = idResolver.createOrderedSetOfAll(ORD_CLSSid_OperationCS, operations);
-                        /*@Thrown*/ SequenceValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator_0 = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_Operation);
-                        @NonNull Iterator<Object> ITERATOR__1_0 = BOXED_operations.iterator();
+                        final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_properties = idResolver.createOrderedSetOfAll(ORD_CLSSid_PropertyCS, properties);
+                        /*@Thrown*/ SequenceValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator_0 = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_Property);
+                        @NonNull Iterator<Object> ITERATOR__1_0 = BOXED_properties.iterator();
                         /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SequenceValue collect_0;
                         while (true) {
                             if (!ITERATOR__1_0.hasNext()) {
@@ -3564,13 +3480,13 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
                                 break;
                             }
                             @SuppressWarnings("null")
-                            /*@NonInvalid*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull OperationCS _1_0 = (OperationCS)ITERATOR__1_0.next();
+                            /*@NonInvalid*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull PropertyCS _1_0 = (PropertyCS)ITERATOR__1_0.next();
                             /**
-                             * _'1_'.ast.oclAsType(miniocl::Operation)
+                             * _'1_'.ast.oclAsType(miniocl::Property)
                              */
-                            final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_miniocl_c_c_Operation_0 = idResolver.getClass(CLSSid_Operation, null);
+                            final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_miniocl_c_c_Property_0 = idResolver.getClass(CLSSid_Property, null);
                             final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.Nullable Element ast_2 = _1_0.getAst();
-                            final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.NonNull Operation oclAsType_0 = ClassUtil.nonNullState((Operation)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast_2, TYP_miniocl_c_c_Operation_0));
+                            final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.NonNull Property oclAsType_0 = ClassUtil.nonNullState((org.eclipse.qvtd.doc.miniocl.Property)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast_2, TYP_miniocl_c_c_Property_0));
                             //
                             accumulator_0.add(oclAsType_0);
                         }
@@ -3578,12 +3494,12 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
                         final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue asOrderedSet_0 = CollectionAsOrderedSetOperation.INSTANCE.evaluate(collect_0);
                         // property assignments
                         symbol_2.setName(toString);
-                        final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<Operation> ECORE_asOrderedSet_0 = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(Operation.class, asOrderedSet_0);
-                        symbol_2.getOwnedOperations().addAll(ECORE_asOrderedSet_0);
-                        final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<org.eclipse.qvtd.doc.miniocl.Property> ECORE_asOrderedSet = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(org.eclipse.qvtd.doc.miniocl.Property.class, asOrderedSet);
-                        symbol_2.getOwnedProperties().addAll(ECORE_asOrderedSet);
-                        final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean m_OrderedSet_ClassCS = ValueUtil.TRUE_VALUE;
-                        raw_ast = m_OrderedSet_ClassCS;
+                        final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<Operation> ECORE_asOrderedSet = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(Operation.class, asOrderedSet);
+                        symbol_2.getOwnedOperations().addAll(ECORE_asOrderedSet);
+                        final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<org.eclipse.qvtd.doc.miniocl.Property> ECORE_asOrderedSet_0 = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(org.eclipse.qvtd.doc.miniocl.Property.class, asOrderedSet_0);
+                        symbol_2.getOwnedProperties().addAll(ECORE_asOrderedSet_0);
+                        final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean m_OrderedSet_ClassCS_2 = ValueUtil.TRUE_VALUE;
+                        raw_ast = m_OrderedSet_ClassCS_2;
                     }
                     else {
                         raw_ast = ValueUtil.FALSE_VALUE;
@@ -3600,13 +3516,13 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
             }
             return raw_aClass;
         } catch (Throwable e) {
-            return handleExecutionFailure("MAP_m_OrderedSet_ClassCS", e);
+            return handleExecutionFailure("MAP_m_OrderedSet_ClassCS_2", e);
         }
     }
     
     /**
      * 
-     * map m_OrderedSet_OperationCS in MiniOCLCS2AS_qvtp_qvtcas {
+     * map m_OrderedSet_OperationCS_1 in MiniOCLCS2AS_qvtp_qvtcas {
      *   leftCS (lOperationCS : minioclcs::OperationCS[1];
      *  |)
      * {params : OrderedSet(minioclcs::ParameterCS)[*|1];
@@ -3636,7 +3552,7 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
      * }
      * 
      */
-    protected boolean MAP_m_OrderedSet_OperationCS(final /*@NonInvalid*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull OperationCS lOperationCS_2)  {
+    protected boolean MAP_m_OrderedSet_OperationCS_1(final /*@NonInvalid*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull OperationCS lOperationCS_2)  {
         try {
             // predicates and unrealized variables
             final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull IdResolver idResolver = executor.getIdResolver();
@@ -3686,8 +3602,8 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
                         symbol_2.setName(toString);
                         final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<Parameter> ECORE_asOrderedSet = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(Parameter.class, asOrderedSet);
                         symbol_2.getOwnedParameters().addAll(ECORE_asOrderedSet);
-                        final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean m_OrderedSet_OperationCS = ValueUtil.TRUE_VALUE;
-                        raw_ast = m_OrderedSet_OperationCS;
+                        final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean m_OrderedSet_OperationCS_1 = ValueUtil.TRUE_VALUE;
+                        raw_ast = m_OrderedSet_OperationCS_1;
                     }
                     else {
                         raw_ast = ValueUtil.FALSE_VALUE;
@@ -3704,13 +3620,13 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
             }
             return raw_aOperation;
         } catch (Throwable e) {
-            return handleExecutionFailure("MAP_m_OrderedSet_OperationCS", e);
+            return handleExecutionFailure("MAP_m_OrderedSet_OperationCS_1", e);
         }
     }
     
     /**
      * 
-     * map m_OrderedSet_PackageCS in MiniOCLCS2AS_qvtp_qvtcas {
+     * map m_OrderedSet_PackageCS_2 in MiniOCLCS2AS_qvtp_qvtcas {
      *   leftCS (lPackageCS : minioclcs::PackageCS[1];
      *  |)
      * {classes : OrderedSet(minioclcs::ClassCS)[*|1];
@@ -3718,11 +3634,11 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
      *  |}
      * rightAS ( |)
      * {aPackage : miniocl::Package[1];
-     * asOrderedSet : OrderedSet(miniocl::Class)[*|1];
-     * asOrderedSet1 : OrderedSet(miniocl::Package)[*|1];
+     * asOrderedSet : OrderedSet(miniocl::Package)[*|1];
+     * asOrderedSet1 : OrderedSet(miniocl::Class)[*|1];
      * ast : miniocl::Element[1];
-     * _'\u00ABcollect\u00BB' : Sequence(miniocl::Class)[*|1];
-     * _'\u00ABcollect\u00BB1' : Sequence(miniocl::Package)[*|1];
+     * _'\u00ABcollect\u00BB' : Sequence(miniocl::Package)[*|1];
+     * _'\u00ABcollect\u00BB1' : Sequence(miniocl::Class)[*|1];
      *  |}
      * where ( |)
      * {name : ecore::EString[?];
@@ -3735,22 +3651,22 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
      * packages := lPackageCS.packages;
      * toString := name.toString()
      *   ;
-     * _'\u00ABcollect\u00BB' := classes->collect(_'1_' |
-     *     _'1_'.ast.oclAsType(miniocl::Class))
-     *   ;
-     * _'\u00ABcollect\u00BB1' := packages->collect(_'1_' |
+     * _'\u00ABcollect\u00BB' := packages->collect(_'1_' |
      *     _'1_'.ast.oclAsType(miniocl::Package))
+     *   ;
+     * _'\u00ABcollect\u00BB1' := classes->collect(_'1_' |
+     *     _'1_'.ast.oclAsType(miniocl::Class))
      *   ;
      * asOrderedSet := _'\u00ABcollect\u00BB'->asOrderedSet()
      *   ;
      * asOrderedSet1 := _'\u00ABcollect\u00BB1'->asOrderedSet();
      * aPackage.name := toString;
-     * aPackage.ownedClasses := asOrderedSet;
-     * aPackage.ownedPackages := asOrderedSet1;
+     * aPackage.ownedClasses := asOrderedSet1;
+     * aPackage.ownedPackages := asOrderedSet;
      * }
      * 
      */
-    protected boolean MAP_m_OrderedSet_PackageCS(final /*@NonInvalid*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull PackageCS lPackageCS)  {
+    protected boolean MAP_m_OrderedSet_PackageCS_2(final /*@NonInvalid*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull PackageCS lPackageCS)  {
         try {
             // predicates and unrealized variables
             final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull IdResolver idResolver = executor.getIdResolver();
@@ -3777,9 +3693,9 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
                         @SuppressWarnings("null")
                         final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<PackageCS> packages = lPackageCS.getPackages();
                         final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.NonNull String toString = OclAnyToStringOperation.INSTANCE.evaluate(name);
-                        final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_classes = idResolver.createOrderedSetOfAll(ORD_CLSSid_ClassCS, classes);
-                        /*@Thrown*/ SequenceValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_Class);
-                        @NonNull Iterator<Object> ITERATOR__1 = BOXED_classes.iterator();
+                        final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_packages = idResolver.createOrderedSetOfAll(ORD_CLSSid_PackageCS, packages);
+                        /*@Thrown*/ SequenceValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_Package);
+                        @NonNull Iterator<Object> ITERATOR__1 = BOXED_packages.iterator();
                         /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SequenceValue collect;
                         while (true) {
                             if (!ITERATOR__1.hasNext()) {
@@ -3787,19 +3703,19 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
                                 break;
                             }
                             @SuppressWarnings("null")
-                            /*@NonInvalid*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull ClassCS _1 = (ClassCS)ITERATOR__1.next();
+                            /*@NonInvalid*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull PackageCS _1 = (PackageCS)ITERATOR__1.next();
                             /**
-                             * _'1_'.ast.oclAsType(miniocl::Class)
+                             * _'1_'.ast.oclAsType(miniocl::Package)
                              */
-                            final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_miniocl_c_c_Class_0 = idResolver.getClass(CLSSid_Class_0, null);
+                            final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_miniocl_c_c_Package_0 = idResolver.getClass(CLSSid_Package, null);
                             final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.Nullable Element ast_1 = _1.getAst();
-                            final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.NonNull Class oclAsType = ClassUtil.nonNullState((org.eclipse.qvtd.doc.miniocl.Class)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast_1, TYP_miniocl_c_c_Class_0));
+                            final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.NonNull Package oclAsType = ClassUtil.nonNullState((Package)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast_1, TYP_miniocl_c_c_Package_0));
                             //
                             accumulator.add(oclAsType);
                         }
-                        final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_packages = idResolver.createOrderedSetOfAll(ORD_CLSSid_PackageCS, packages);
-                        /*@Thrown*/ SequenceValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator_0 = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_Package);
-                        @NonNull Iterator<Object> ITERATOR__1_0 = BOXED_packages.iterator();
+                        final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_classes = idResolver.createOrderedSetOfAll(ORD_CLSSid_ClassCS, classes);
+                        /*@Thrown*/ SequenceValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator_0 = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_Class);
+                        @NonNull Iterator<Object> ITERATOR__1_0 = BOXED_classes.iterator();
                         /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SequenceValue collect_0;
                         while (true) {
                             if (!ITERATOR__1_0.hasNext()) {
@@ -3807,13 +3723,13 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
                                 break;
                             }
                             @SuppressWarnings("null")
-                            /*@NonInvalid*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull PackageCS _1_0 = (PackageCS)ITERATOR__1_0.next();
+                            /*@NonInvalid*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull ClassCS _1_0 = (ClassCS)ITERATOR__1_0.next();
                             /**
-                             * _'1_'.ast.oclAsType(miniocl::Package)
+                             * _'1_'.ast.oclAsType(miniocl::Class)
                              */
-                            final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_miniocl_c_c_Package_0 = idResolver.getClass(CLSSid_Package, null);
+                            final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_miniocl_c_c_Class_0 = idResolver.getClass(CLSSid_Class_0, null);
                             final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.Nullable Element ast_2 = _1_0.getAst();
-                            final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.NonNull Package oclAsType_0 = ClassUtil.nonNullState((Package)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast_2, TYP_miniocl_c_c_Package_0));
+                            final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.NonNull Class oclAsType_0 = ClassUtil.nonNullState((org.eclipse.qvtd.doc.miniocl.Class)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, ast_2, TYP_miniocl_c_c_Class_0));
                             //
                             accumulator_0.add(oclAsType_0);
                         }
@@ -3821,12 +3737,12 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
                         final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue asOrderedSet_0 = CollectionAsOrderedSetOperation.INSTANCE.evaluate(collect_0);
                         // property assignments
                         symbol_2.setName(toString);
-                        final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<org.eclipse.qvtd.doc.miniocl.Class> ECORE_asOrderedSet = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(org.eclipse.qvtd.doc.miniocl.Class.class, asOrderedSet);
-                        symbol_2.getOwnedClasses().addAll(ECORE_asOrderedSet);
-                        final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<Package> ECORE_asOrderedSet_0 = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(Package.class, asOrderedSet_0);
-                        symbol_2.getOwnedPackages().addAll(ECORE_asOrderedSet_0);
-                        final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean m_OrderedSet_PackageCS = ValueUtil.TRUE_VALUE;
-                        raw_ast = m_OrderedSet_PackageCS;
+                        final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<org.eclipse.qvtd.doc.miniocl.Class> ECORE_asOrderedSet_0 = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(org.eclipse.qvtd.doc.miniocl.Class.class, asOrderedSet_0);
+                        symbol_2.getOwnedClasses().addAll(ECORE_asOrderedSet_0);
+                        final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<Package> ECORE_asOrderedSet = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(Package.class, asOrderedSet);
+                        symbol_2.getOwnedPackages().addAll(ECORE_asOrderedSet);
+                        final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean m_OrderedSet_PackageCS_2 = ValueUtil.TRUE_VALUE;
+                        raw_ast = m_OrderedSet_PackageCS_2;
                     }
                     else {
                         raw_ast = ValueUtil.FALSE_VALUE;
@@ -3843,7 +3759,7 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
             }
             return raw_aPackage;
         } catch (Throwable e) {
-            return handleExecutionFailure("MAP_m_OrderedSet_PackageCS", e);
+            return handleExecutionFailure("MAP_m_OrderedSet_PackageCS_2", e);
         }
     }
     
@@ -4017,10 +3933,10 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
                         }
                         final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable PathNameCS typeRef = lParameterCS.getTypeRef();
                         if (typeRef == null) {
-                            throw throwNull(lParameterCS, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathNameCS::path\'");
+                            throw throwNull(lParameterCS, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathNameCS::pathElements\'");
                         }
                         @SuppressWarnings("null")
-                        final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<PathElementCS> segments_0 = typeRef.getPath();
+                        final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<PathElementCS> segments_0 = typeRef.getPathElements();
                         final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_segments_0 = idResolver.createOrderedSetOfAll(ORD_CLSSid_PathElementCS, segments_0);
                         final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(BOXED_segments_0);
                         final /*@Thrown*/ boolean eq = size.equals(INT_1);
@@ -4028,15 +3944,15 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
                         if (eq) {
                             final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable PathElementCS aPathElementCS = (PathElementCS)OrderedCollectionFirstOperation.INSTANCE.evaluate(BOXED_segments_0);
                             if (aPathElementCS == null) {
-                                throw throwNull(lParameterCS, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathElementCS::pathName\'");
+                                throw throwNull(lParameterCS, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathElementCS::elementName\'");
                             }
-                            final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String pathName = aPathElementCS.getPathName();
-                            MiniOCLLookupResult<org.eclipse.qvtd.doc.miniocl.Class> _lookupResult = lookupSolver._lookupUnqualifiedClass(symbol_2, (String)pathName);
+                            final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String elementName = aPathElementCS.getElementName();
+                            MiniOCLLookupResult<org.eclipse.qvtd.doc.miniocl.Class> _lookupResult = lookupSolver._lookupUnqualifiedClass(symbol_2, (String)elementName);
                             org.eclipse.qvtd.doc.miniocl.Class _lookupUnqualifiedClass = null;
                             if (_lookupResult.size() == 1) {
                                 _lookupUnqualifiedClass = _lookupResult.getSingleResult();
                             } else {
-                                handleLookupError(aPathElementCS,pathName);
+                                handleLookupError(aPathElementCS,elementName);
                             };
                             symbol_5 = _lookupUnqualifiedClass;
                         }
@@ -4064,15 +3980,15 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
                                 }
                                 final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable PathElementCS aPathElementCS_0 = (PathElementCS)OrderedCollectionLastOperation.INSTANCE.evaluate(BOXED_segments_0);
                                 if (aPathElementCS_0 == null) {
-                                    throw throwNull(lParameterCS, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathElementCS::pathName\'");
+                                    throw throwNull(lParameterCS, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathElementCS::elementName\'");
                                 }
-                                final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String pathName_0 = aPathElementCS_0.getPathName();
-                                MiniOCLLookupResult<org.eclipse.qvtd.doc.miniocl.Class> _lookupResult_0 = lookupSolver._lookupQualifiedClass(qualifier, (String)pathName_0);
+                                final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String elementName_0 = aPathElementCS_0.getElementName();
+                                MiniOCLLookupResult<org.eclipse.qvtd.doc.miniocl.Class> _lookupResult_0 = lookupSolver._lookupQualifiedClass(qualifier, (String)elementName_0);
                                 org.eclipse.qvtd.doc.miniocl.Class _lookupQualifiedClass = null;
                                 if (_lookupResult_0.size() == 1) {
                                     _lookupQualifiedClass = _lookupResult_0.getSingleResult();
                                 } else {
-                                    handleLookupError(aPathElementCS_0,pathName_0);
+                                    handleLookupError(aPathElementCS_0,elementName_0);
                                 };
                                 safe_lookupQualifiedClass_source = _lookupQualifiedClass;
                             }
@@ -4189,10 +4105,10 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
                         }
                         final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable PathNameCS typeRef = lPropertyCS.getTypeRef();
                         if (typeRef == null) {
-                            throw throwNull(lPropertyCS, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathNameCS::path\'");
+                            throw throwNull(lPropertyCS, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathNameCS::pathElements\'");
                         }
                         @SuppressWarnings("null")
-                        final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<PathElementCS> segments_0 = typeRef.getPath();
+                        final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<PathElementCS> segments_0 = typeRef.getPathElements();
                         final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_segments_0 = idResolver.createOrderedSetOfAll(ORD_CLSSid_PathElementCS, segments_0);
                         final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(BOXED_segments_0);
                         final /*@Thrown*/ boolean eq = size.equals(INT_1);
@@ -4200,15 +4116,15 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
                         if (eq) {
                             final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable PathElementCS aPathElementCS = (PathElementCS)OrderedCollectionFirstOperation.INSTANCE.evaluate(BOXED_segments_0);
                             if (aPathElementCS == null) {
-                                throw throwNull(lPropertyCS, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathElementCS::pathName\'");
+                                throw throwNull(lPropertyCS, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathElementCS::elementName\'");
                             }
-                            final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String pathName = aPathElementCS.getPathName();
-                            MiniOCLLookupResult<org.eclipse.qvtd.doc.miniocl.Class> _lookupResult = lookupSolver._lookupUnqualifiedClass(symbol_2, (String)pathName);
+                            final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String elementName = aPathElementCS.getElementName();
+                            MiniOCLLookupResult<org.eclipse.qvtd.doc.miniocl.Class> _lookupResult = lookupSolver._lookupUnqualifiedClass(symbol_2, (String)elementName);
                             org.eclipse.qvtd.doc.miniocl.Class _lookupUnqualifiedClass = null;
                             if (_lookupResult.size() == 1) {
                                 _lookupUnqualifiedClass = _lookupResult.getSingleResult();
                             } else {
-                                handleLookupError(aPathElementCS,pathName);
+                                handleLookupError(aPathElementCS,elementName);
                             };
                             symbol_5 = _lookupUnqualifiedClass;
                         }
@@ -4236,15 +4152,15 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
                                 }
                                 final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable PathElementCS aPathElementCS_0 = (PathElementCS)OrderedCollectionLastOperation.INSTANCE.evaluate(BOXED_segments_0);
                                 if (aPathElementCS_0 == null) {
-                                    throw throwNull(lPropertyCS, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathElementCS::pathName\'");
+                                    throw throwNull(lPropertyCS, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathElementCS::elementName\'");
                                 }
-                                final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String pathName_0 = aPathElementCS_0.getPathName();
-                                MiniOCLLookupResult<org.eclipse.qvtd.doc.miniocl.Class> _lookupResult_0 = lookupSolver._lookupQualifiedClass(qualifier, (String)pathName_0);
+                                final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String elementName_0 = aPathElementCS_0.getElementName();
+                                MiniOCLLookupResult<org.eclipse.qvtd.doc.miniocl.Class> _lookupResult_0 = lookupSolver._lookupQualifiedClass(qualifier, (String)elementName_0);
                                 org.eclipse.qvtd.doc.miniocl.Class _lookupQualifiedClass = null;
                                 if (_lookupResult_0.size() == 1) {
                                     _lookupQualifiedClass = _lookupResult_0.getSingleResult();
                                 } else {
-                                    handleLookupError(aPathElementCS_0,pathName_0);
+                                    handleLookupError(aPathElementCS_0,elementName_0);
                                 };
                                 safe_lookupQualifiedClass_source = _lookupQualifiedClass;
                             }
@@ -4358,6 +4274,7 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
                 models[1/*rightAS*/].add(rPropertyCallExp);
                 // property assignments
                 lNameExpCS_7.setAst(rPropertyCallExp);
+                objectManager.assigned(lNameExpCS_7, MinioclcsPackage.Literals.CS_TRACE__AST, rPropertyCallExp, null);
                 final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean m_PropertyCallExp_NameExpCS = ValueUtil.TRUE_VALUE;
                 symbol_3 = m_PropertyCallExp_NameExpCS;
             }
@@ -4372,7 +4289,7 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
     
     /**
      * 
-     * map m_PropertyCallExp_NameExpCS_NamedElement_Variable in MiniOCLCS2AS_qvtp_qvtcas {
+     * map m_PropertyCallExp_NameExpCS_CallExpCS_Element_Expr in MiniOCLCS2AS_qvtp_qvtcas {
      *   leftCS (lNameExpCS : minioclcs::NameExpCS[1];
      *  |)
      * { |}
@@ -4388,123 +4305,132 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
      * }
      * 
      */
-    protected boolean MAP_m_PropertyCallExp_NameExpCS_NamedElement_Variable(final /*@NonInvalid*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull NameExpCS lNameExpCS_8)  {
-        try {
-            // predicates and unrealized variables
-            final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull IdResolver idResolver = executor.getIdResolver();
-            /*@Caught*/ @Nullable Object CAUGHT_and_0;
+    protected class MAP_m_PropertyCallExp_NameExpCS_CallExpCS_Element_Expr extends AbstractInvocation
+    {
+        protected final /*@NonInvalid*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull NameExpCS lNameExpCS_8;
+        
+        public MAP_m_PropertyCallExp_NameExpCS_CallExpCS_Element_Expr(@NonNull Object @NonNull [] boundValues) {
+            lNameExpCS_8 = (NameExpCS)boundValues[0];
+        }
+        
+        public boolean execute()  {
             try {
-                /*@Caught*/ @Nullable Object CAUGHT_and;
+                // predicates and unrealized variables
+                final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull IdResolver idResolver = executor.getIdResolver();
+                /*@Caught*/ @Nullable Object CAUGHT_and_0;
                 try {
-                    /*@Caught*/ @NonNull Object CAUGHT_eq;
+                    /*@Caught*/ @Nullable Object CAUGHT_and;
                     try {
-                        final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable RoundedBracketClauseCS roundedBrackets = lNameExpCS_8.getRoundedBrackets();
-                        final /*@Thrown*/ boolean eq = roundedBrackets == null;
-                        CAUGHT_eq = eq;
-                    }
-                    catch (Exception e) {
-                        CAUGHT_eq = ValueUtil.createInvalidValue(e);
-                    }
-                    /*@Caught*/ @Nullable Object CAUGHT_not;
-                    try {
-                        final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.Nullable Object container = ClassifierOclContainerOperation.INSTANCE.evaluate(executor, lNameExpCS_8);
-                        final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_minioclcs_c_c_CallExpCS_2 = idResolver.getClass(CLSSid_CallExpCS, null);
-                        final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, container, TYP_minioclcs_c_c_CallExpCS_2).booleanValue();
-                        /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable CallExpCS symbol_0;
-                        if (oclIsKindOf) {
-                            final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull CallExpCS oclAsType = ClassUtil.nonNullState((CallExpCS)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, container, TYP_minioclcs_c_c_CallExpCS_2));
-                            symbol_0 = oclAsType;
+                        /*@Caught*/ @NonNull Object CAUGHT_eq;
+                        try {
+                            final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable RoundedBracketClauseCS roundedBrackets = lNameExpCS_8.getRoundedBrackets();
+                            final /*@Thrown*/ boolean eq = roundedBrackets == null;
+                            CAUGHT_eq = eq;
                         }
-                        else {
-                            symbol_0 = null;
+                        catch (Exception e) {
+                            CAUGHT_eq = ValueUtil.createInvalidValue(e);
                         }
-                        final /*@Thrown*/ boolean eq_0 = symbol_0 == null;
-                        /*@Thrown*/ boolean symbol_1;
-                        if (eq_0) {
-                            symbol_1 = ValueUtil.FALSE_VALUE;
-                        }
-                        else {
-                            if (symbol_0 == null) {
-                                throw throwNull(lNameExpCS_8, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::CallExpCS::nameExp\'");
+                        /*@Caught*/ @Nullable Object CAUGHT_not;
+                        try {
+                            final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.Nullable Object container = ClassifierOclContainerOperation.INSTANCE.evaluate(executor, lNameExpCS_8);
+                            final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_minioclcs_c_c_CallExpCS_2 = idResolver.getClass(CLSSid_CallExpCS, null);
+                            final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, container, TYP_minioclcs_c_c_CallExpCS_2).booleanValue();
+                            /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable CallExpCS symbol_0;
+                            if (oclIsKindOf) {
+                                final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull CallExpCS oclAsType = ClassUtil.nonNullState((CallExpCS)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, container, TYP_minioclcs_c_c_CallExpCS_2));
+                                symbol_0 = oclAsType;
                             }
-                            final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable NameExpCS nameExp = symbol_0.getNameExp();
-                            final /*@Thrown*/ boolean eq_1 = lNameExpCS_8.equals(nameExp);
-                            symbol_1 = eq_1;
+                            else {
+                                symbol_0 = null;
+                            }
+                            final /*@Thrown*/ boolean eq_0 = symbol_0 == null;
+                            /*@Thrown*/ boolean symbol_1;
+                            if (eq_0) {
+                                symbol_1 = ValueUtil.FALSE_VALUE;
+                            }
+                            else {
+                                if (symbol_0 == null) {
+                                    throw throwNull(lNameExpCS_8, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::CallExpCS::nameExp\'");
+                                }
+                                final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable NameExpCS nameExp = symbol_0.getNameExp();
+                                final /*@Thrown*/ boolean eq_1 = lNameExpCS_8.equals(nameExp);
+                                symbol_1 = eq_1;
+                            }
+                            final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean not = BooleanNotOperation.INSTANCE.evaluate(symbol_1);
+                            CAUGHT_not = not;
                         }
-                        final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean not = BooleanNotOperation.INSTANCE.evaluate(symbol_1);
-                        CAUGHT_not = not;
+                        catch (Exception e) {
+                            CAUGHT_not = ValueUtil.createInvalidValue(e);
+                        }
+                        final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean and = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_eq, CAUGHT_not);
+                        CAUGHT_and = and;
                     }
                     catch (Exception e) {
-                        CAUGHT_not = ValueUtil.createInvalidValue(e);
+                        CAUGHT_and = ValueUtil.createInvalidValue(e);
                     }
-                    final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean and = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_eq, CAUGHT_not);
-                    CAUGHT_and = and;
+                    /*@Caught*/ @NonNull Object CAUGHT_eq_2;
+                    try {
+                        final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable PathNameCS expName = lNameExpCS_8.getExpName();
+                        if (expName == null) {
+                            throw throwNull(lNameExpCS_8, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathNameCS::path\'");
+                        }
+                        @SuppressWarnings("null")
+                        final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<PathElementCS> path = expName.getPath();
+                        final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_path = idResolver.createOrderedSetOfAll(ORD_CLSSid_PathElementCS, path);
+                        final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(BOXED_path);
+                        final /*@Thrown*/ boolean eq_2 = size.equals(INT_1);
+                        CAUGHT_eq_2 = eq_2;
+                    }
+                    catch (Exception e) {
+                        CAUGHT_eq_2 = ValueUtil.createInvalidValue(e);
+                    }
+                    final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean and_0 = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_and, CAUGHT_eq_2);
+                    CAUGHT_and_0 = and_0;
                 }
                 catch (Exception e) {
-                    CAUGHT_and = ValueUtil.createInvalidValue(e);
+                    CAUGHT_and_0 = ValueUtil.createInvalidValue(e);
                 }
-                /*@Caught*/ @NonNull Object CAUGHT_eq_2;
+                /*@Caught*/ @NonNull Object CAUGHT_ne;
                 try {
-                    final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable PathNameCS expName = lNameExpCS_8.getExpName();
-                    if (expName == null) {
+                    final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_minioclcs_c_c_CSTrace_0 = idResolver.getClass(CLSSid_CSTrace, null);
+                    final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.Nullable Object oclContainer = ClassifierOclContainerOperation.INSTANCE.evaluate(executor, lNameExpCS_8);
+                    final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull CSTrace oclAsType_0 = ClassUtil.nonNullState((CSTrace)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, oclContainer, TYP_minioclcs_c_c_CSTrace_0));
+                    final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.Nullable Element self_1 = oclAsType_0.getAst();
+                    if (self_1 == null) {
+                        throw throwNull(lNameExpCS_8, "Null where non-null value required");
+                    }
+                    final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable PathNameCS expName_0 = lNameExpCS_8.getExpName();
+                    if (expName_0 == null) {
                         throw throwNull(lNameExpCS_8, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathNameCS::path\'");
                     }
                     @SuppressWarnings("null")
-                    final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<PathElementCS> path = expName.getPath();
-                    final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_path = idResolver.createOrderedSetOfAll(ORD_CLSSid_PathElementCS, path);
-                    final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(BOXED_path);
-                    final /*@Thrown*/ boolean eq_2 = size.equals(INT_1);
-                    CAUGHT_eq_2 = eq_2;
+                    final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<PathElementCS> path_0 = expName_0.getPath();
+                    final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_path_0 = idResolver.createOrderedSetOfAll(ORD_CLSSid_PathElementCS, path_0);
+                    final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable PathElementCS aPathElementCS = (PathElementCS)OrderedCollectionFirstOperation.INSTANCE.evaluate(BOXED_path_0);
+                    if (aPathElementCS == null) {
+                        throw throwNull(lNameExpCS_8, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathElementCS::elementName\'");
+                    }
+                    final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String elementName = aPathElementCS.getElementName();
+                    MiniOCLLookupResult<Variable> _lookupResult = lookupSolver._lookupUnqualifiedVariable(self_1, (String)elementName);
+                    Variable _lookupUnqualifiedVariable = null;
+                    if (_lookupResult.size() == 1) {
+                        _lookupUnqualifiedVariable = _lookupResult.getSingleResult();
+                    } else {
+                        handleLookupError(aPathElementCS,elementName);
+                    };
+                    final /*@Thrown*/ boolean ne = _lookupUnqualifiedVariable != null;
+                    CAUGHT_ne = ne;
                 }
                 catch (Exception e) {
-                    CAUGHT_eq_2 = ValueUtil.createInvalidValue(e);
+                    CAUGHT_ne = ValueUtil.createInvalidValue(e);
                 }
-                final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean and_0 = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_and, CAUGHT_eq_2);
-                CAUGHT_and_0 = and_0;
-            }
-            catch (Exception e) {
-                CAUGHT_and_0 = ValueUtil.createInvalidValue(e);
-            }
-            /*@Caught*/ @NonNull Object CAUGHT_ne;
-            try {
-                final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.Nullable Element self_1 = lNameExpCS_8.getAst();
-                if (self_1 == null) {
-                    throw throwNull(lNameExpCS_8, "Null where non-null value required");
+                final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean and_1 = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_and_0, CAUGHT_ne);
+                final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean not_0 = BooleanNotOperation.INSTANCE.evaluate(and_1);
+                if (not_0 == null) {
+                    throw throwNull(lNameExpCS_8, "Null if condition");
                 }
-                final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable PathNameCS expName_0 = lNameExpCS_8.getExpName();
-                if (expName_0 == null) {
-                    throw throwNull(lNameExpCS_8, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathNameCS::path\'");
-                }
-                @SuppressWarnings("null")
-                final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<PathElementCS> path_0 = expName_0.getPath();
-                final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_path_0 = idResolver.createOrderedSetOfAll(ORD_CLSSid_PathElementCS, path_0);
-                final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable PathElementCS aPathElementCS = (PathElementCS)OrderedCollectionFirstOperation.INSTANCE.evaluate(BOXED_path_0);
-                if (aPathElementCS == null) {
-                    throw throwNull(lNameExpCS_8, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathElementCS::pathName\'");
-                }
-                final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String pathName = aPathElementCS.getPathName();
-                MiniOCLLookupResult<Variable> _lookupResult = lookupSolver._lookupUnqualifiedVariable(self_1, (String)pathName);
-                Variable _lookupUnqualifiedVariable = null;
-                if (_lookupResult.size() == 1) {
-                    _lookupUnqualifiedVariable = _lookupResult.getSingleResult();
-                } else {
-                    handleLookupError(aPathElementCS,pathName);
-                };
-                final /*@Thrown*/ boolean ne = _lookupUnqualifiedVariable != null;
-                CAUGHT_ne = ne;
-            }
-            catch (Exception e) {
-                CAUGHT_ne = ValueUtil.createInvalidValue(e);
-            }
-            final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean and_1 = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_and_0, CAUGHT_ne);
-            final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean not_0 = BooleanNotOperation.INSTANCE.evaluate(and_1);
-            if (not_0 == null) {
-                throw throwNull(lNameExpCS_8, "Null if condition");
-            }
-            /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean symbol_9;
-            if (not_0) {
-                /*@Caught*/ @Nullable Object CAUGHT_and_2;
-                try {
+                /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean symbol_9;
+                if (not_0) {
                     /*@Caught*/ @NonNull Object CAUGHT_eq_3;
                     try {
                         final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable RoundedBracketClauseCS roundedBrackets_0 = lNameExpCS_8.getRoundedBrackets();
@@ -4521,8 +4447,8 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
                         final /*@Thrown*/ boolean oclIsKindOf_0 = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, container_0, TYP_minioclcs_c_c_CallExpCS_4).booleanValue();
                         /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable CallExpCS symbol_2;
                         if (oclIsKindOf_0) {
-                            final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull CallExpCS oclAsType_0 = ClassUtil.nonNullState((CallExpCS)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, container_0, TYP_minioclcs_c_c_CallExpCS_4));
-                            symbol_2 = oclAsType_0;
+                            final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull CallExpCS oclAsType_1 = ClassUtil.nonNullState((CallExpCS)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, container_0, TYP_minioclcs_c_c_CallExpCS_4));
+                            symbol_2 = oclAsType_1;
                         }
                         else {
                             symbol_2 = null;
@@ -4547,120 +4473,89 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
                         CAUGHT_not_1 = ValueUtil.createInvalidValue(e);
                     }
                     final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean and_2 = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_eq_3, CAUGHT_not_1);
-                    CAUGHT_and_2 = and_2;
-                }
-                catch (Exception e) {
-                    CAUGHT_and_2 = ValueUtil.createInvalidValue(e);
-                }
-                /*@Caught*/ @NonNull Object CAUGHT_eq_6;
-                try {
-                    final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.Nullable Element self_2 = lNameExpCS_8.getAst();
-                    if (self_2 == null) {
-                        throw throwNull(lNameExpCS_8, "Null where non-null value required");
-                    }
-                    final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable PathNameCS expName_1 = lNameExpCS_8.getExpName();
-                    if (expName_1 == null) {
-                        throw throwNull(lNameExpCS_8, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathNameCS::path\'");
-                    }
-                    @SuppressWarnings("null")
-                    final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<PathElementCS> path_1 = expName_1.getPath();
-                    final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_path_1 = idResolver.createOrderedSetOfAll(ORD_CLSSid_PathElementCS, path_1);
-                    final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable PathElementCS aPathElementCS_0 = (PathElementCS)OrderedCollectionFirstOperation.INSTANCE.evaluate(BOXED_path_1);
-                    if (aPathElementCS_0 == null) {
-                        throw throwNull(lNameExpCS_8, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathElementCS::pathName\'");
-                    }
-                    final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String pathName_0 = aPathElementCS_0.getPathName();
-                    MiniOCLLookupResult<Variable> _lookupResult_0 = lookupSolver._lookupUnqualifiedVariable(self_2, (String)pathName_0);
-                    Variable _lookupUnqualifiedVariable_0 = null;
-                    if (_lookupResult_0.size() == 1) {
-                        _lookupUnqualifiedVariable_0 = _lookupResult_0.getSingleResult();
-                    } else {
-                        handleLookupError(aPathElementCS_0,pathName_0);
-                    };
-                    final /*@Thrown*/ boolean eq_6 = _lookupUnqualifiedVariable_0 == null;
-                    CAUGHT_eq_6 = eq_6;
-                }
-                catch (Exception e) {
-                    CAUGHT_eq_6 = ValueUtil.createInvalidValue(e);
-                }
-                final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean and_3 = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_and_2, CAUGHT_eq_6);
-                if (and_3 == null) {
-                    throw throwNull(lNameExpCS_8, "Null if condition");
-                }
-                /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean symbol_8;
-                if (and_3) {
-                    /*@Caught*/ @NonNull Object CAUGHT_eq_7;
-                    try {
-                        final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable RoundedBracketClauseCS roundedBrackets_1 = lNameExpCS_8.getRoundedBrackets();
-                        final /*@Thrown*/ boolean eq_7 = roundedBrackets_1 == null;
-                        CAUGHT_eq_7 = eq_7;
-                    }
-                    catch (Exception e) {
-                        CAUGHT_eq_7 = ValueUtil.createInvalidValue(e);
-                    }
-                    /*@Caught*/ @NonNull Object CAUGHT_symbol_5;
-                    try {
-                        final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.Nullable Object container_1 = ClassifierOclContainerOperation.INSTANCE.evaluate(executor, lNameExpCS_8);
-                        final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_minioclcs_c_c_CallExpCS_6 = idResolver.getClass(CLSSid_CallExpCS, null);
-                        final /*@Thrown*/ boolean oclIsKindOf_1 = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, container_1, TYP_minioclcs_c_c_CallExpCS_6).booleanValue();
-                        /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable CallExpCS symbol_4;
-                        if (oclIsKindOf_1) {
-                            final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull CallExpCS oclAsType_1 = ClassUtil.nonNullState((CallExpCS)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, container_1, TYP_minioclcs_c_c_CallExpCS_6));
-                            symbol_4 = oclAsType_1;
-                        }
-                        else {
-                            symbol_4 = null;
-                        }
-                        final /*@Thrown*/ boolean eq_8 = symbol_4 == null;
-                        /*@Thrown*/ boolean symbol_5;
-                        if (eq_8) {
-                            symbol_5 = ValueUtil.FALSE_VALUE;
-                        }
-                        else {
-                            if (symbol_4 == null) {
-                                throw throwNull(lNameExpCS_8, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::CallExpCS::nameExp\'");
-                            }
-                            final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable NameExpCS nameExp_1 = symbol_4.getNameExp();
-                            final /*@Thrown*/ boolean eq_9 = lNameExpCS_8.equals(nameExp_1);
-                            symbol_5 = eq_9;
-                        }
-                        CAUGHT_symbol_5 = symbol_5;
-                    }
-                    catch (Exception e) {
-                        CAUGHT_symbol_5 = ValueUtil.createInvalidValue(e);
-                    }
-                    final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean and_4 = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_eq_7, CAUGHT_symbol_5);
-                    final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean not_2 = BooleanNotOperation.INSTANCE.evaluate(and_4);
-                    if (not_2 == null) {
+                    if (and_2 == null) {
                         throw throwNull(lNameExpCS_8, "Null if condition");
                     }
-                    /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean symbol_7;
-                    if (not_2) {
-                        // creations
-                        final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.Nullable PropertyCallExp rPropertyCallExp = MiniOCLFactory.eINSTANCE.createPropertyCallExp();
-                        assert rPropertyCallExp != null;
-                        models[1/*rightAS*/].add(rPropertyCallExp);
-                        // property assignments
-                        lNameExpCS_8.setAst(rPropertyCallExp);
-                        final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean m_PropertyCallExp_NameExpCS_NamedElement_Variable = ValueUtil.TRUE_VALUE;
-                        symbol_7 = m_PropertyCallExp_NameExpCS_NamedElement_Variable;
+                    /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean symbol_8;
+                    if (and_2) {
+                        /*@Caught*/ @NonNull Object CAUGHT_eq_6;
+                        try {
+                            final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable RoundedBracketClauseCS roundedBrackets_1 = lNameExpCS_8.getRoundedBrackets();
+                            final /*@Thrown*/ boolean eq_6 = roundedBrackets_1 == null;
+                            CAUGHT_eq_6 = eq_6;
+                        }
+                        catch (Exception e) {
+                            CAUGHT_eq_6 = ValueUtil.createInvalidValue(e);
+                        }
+                        /*@Caught*/ @NonNull Object CAUGHT_symbol_5;
+                        try {
+                            final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.Nullable Object container_1 = ClassifierOclContainerOperation.INSTANCE.evaluate(executor, lNameExpCS_8);
+                            final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_minioclcs_c_c_CallExpCS_6 = idResolver.getClass(CLSSid_CallExpCS, null);
+                            final /*@Thrown*/ boolean oclIsKindOf_1 = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, container_1, TYP_minioclcs_c_c_CallExpCS_6).booleanValue();
+                            /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable CallExpCS symbol_4;
+                            if (oclIsKindOf_1) {
+                                final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull CallExpCS oclAsType_2 = ClassUtil.nonNullState((CallExpCS)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, container_1, TYP_minioclcs_c_c_CallExpCS_6));
+                                symbol_4 = oclAsType_2;
+                            }
+                            else {
+                                symbol_4 = null;
+                            }
+                            final /*@Thrown*/ boolean eq_7 = symbol_4 == null;
+                            /*@Thrown*/ boolean symbol_5;
+                            if (eq_7) {
+                                symbol_5 = ValueUtil.FALSE_VALUE;
+                            }
+                            else {
+                                if (symbol_4 == null) {
+                                    throw throwNull(lNameExpCS_8, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::CallExpCS::nameExp\'");
+                                }
+                                final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable NameExpCS nameExp_1 = symbol_4.getNameExp();
+                                final /*@Thrown*/ boolean eq_8 = lNameExpCS_8.equals(nameExp_1);
+                                symbol_5 = eq_8;
+                            }
+                            CAUGHT_symbol_5 = symbol_5;
+                        }
+                        catch (Exception e) {
+                            CAUGHT_symbol_5 = ValueUtil.createInvalidValue(e);
+                        }
+                        final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean and_3 = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_eq_6, CAUGHT_symbol_5);
+                        final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean not_2 = BooleanNotOperation.INSTANCE.evaluate(and_3);
+                        if (not_2 == null) {
+                            throw throwNull(lNameExpCS_8, "Null if condition");
+                        }
+                        /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean symbol_7;
+                        if (not_2) {
+                            // creations
+                            final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.Nullable PropertyCallExp rPropertyCallExp = MiniOCLFactory.eINSTANCE.createPropertyCallExp();
+                            assert rPropertyCallExp != null;
+                            models[1/*rightAS*/].add(rPropertyCallExp);
+                            // property assignments
+                            lNameExpCS_8.setAst(rPropertyCallExp);
+                            objectManager.assigned(lNameExpCS_8, MinioclcsPackage.Literals.CS_TRACE__AST, rPropertyCallExp, null);
+                            final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean m_PropertyCallExp_NameExpCS_CallExpCS_Element_Expr = ValueUtil.TRUE_VALUE;
+                            symbol_7 = m_PropertyCallExp_NameExpCS_CallExpCS_Element_Expr;
+                        }
+                        else {
+                            symbol_7 = ValueUtil.FALSE_VALUE;
+                        }
+                        symbol_8 = symbol_7;
                     }
                     else {
-                        symbol_7 = ValueUtil.FALSE_VALUE;
+                        symbol_8 = ValueUtil.FALSE_VALUE;
                     }
-                    symbol_8 = symbol_7;
+                    symbol_9 = symbol_8;
                 }
                 else {
-                    symbol_8 = ValueUtil.FALSE_VALUE;
+                    symbol_9 = ValueUtil.FALSE_VALUE;
                 }
-                symbol_9 = symbol_8;
+                return symbol_9;
+            } catch (Throwable e) {
+                return handleExecutionFailure("MAP_m_PropertyCallExp_NameExpCS_CallExpCS_Element_Expr", e);
             }
-            else {
-                symbol_9 = ValueUtil.FALSE_VALUE;
-            }
-            return symbol_9;
-        } catch (Throwable e) {
-            return handleExecutionFailure("MAP_m_PropertyCallExp_NameExpCS_NamedElement_Variable", e);
+        }
+        
+        public boolean isEqual(@NonNull IdResolver idResolver, @NonNull Object @NonNull [] thoseValues) {
+            return idResolver.oclEquals(lNameExpCS_8, thoseValues[0]);
         }
     }
     
@@ -4862,7 +4757,7 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
     
     /**
      * 
-     * map m_VariableExp_NameExpCS_NamedElement_Variable in MiniOCLCS2AS_qvtp_qvtcas {
+     * map m_VariableExp_NameExpCS_CallExpCS_Element_Expressi in MiniOCLCS2AS_qvtp_qvtcas {
      *   leftCS (lNameExpCS : minioclcs::NameExpCS[1];
      *  |)
      * { |}
@@ -4877,187 +4772,204 @@ public class MiniOCLCS2AS_qvtp_qvtcas extends AbstractCS2ASTransformer
      * }
      * 
      */
-    protected boolean MAP_m_VariableExp_NameExpCS_NamedElement_Variable(final /*@NonInvalid*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull NameExpCS lNameExpCS_9)  {
-        try {
-            // predicates and unrealized variables
-            final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull IdResolver idResolver = executor.getIdResolver();
-            /*@Caught*/ @NonNull Object CAUGHT_eq;
+    protected class MAP_m_VariableExp_NameExpCS_CallExpCS_Element_Expressi extends AbstractInvocation
+    {
+        protected final /*@NonInvalid*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull NameExpCS lNameExpCS_9;
+        
+        public MAP_m_VariableExp_NameExpCS_CallExpCS_Element_Expressi(@NonNull Object @NonNull [] boundValues) {
+            lNameExpCS_9 = (NameExpCS)boundValues[0];
+        }
+        
+        public boolean execute()  {
             try {
-                final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable RoundedBracketClauseCS roundedBrackets = lNameExpCS_9.getRoundedBrackets();
-                final /*@Thrown*/ boolean eq = roundedBrackets == null;
-                CAUGHT_eq = eq;
-            }
-            catch (Exception e) {
-                CAUGHT_eq = ValueUtil.createInvalidValue(e);
-            }
-            /*@Caught*/ @NonNull Object CAUGHT_symbol_1;
-            try {
-                final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.Nullable Object container = ClassifierOclContainerOperation.INSTANCE.evaluate(executor, lNameExpCS_9);
-                final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_minioclcs_c_c_CallExpCS_2 = idResolver.getClass(CLSSid_CallExpCS, null);
-                final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, container, TYP_minioclcs_c_c_CallExpCS_2).booleanValue();
-                /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable CallExpCS symbol_0;
-                if (oclIsKindOf) {
-                    final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull CallExpCS oclAsType = ClassUtil.nonNullState((CallExpCS)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, container, TYP_minioclcs_c_c_CallExpCS_2));
-                    symbol_0 = oclAsType;
-                }
-                else {
-                    symbol_0 = null;
-                }
-                final /*@Thrown*/ boolean eq_0 = symbol_0 == null;
-                /*@Thrown*/ boolean symbol_1;
-                if (eq_0) {
-                    symbol_1 = ValueUtil.FALSE_VALUE;
-                }
-                else {
-                    if (symbol_0 == null) {
-                        throw throwNull(lNameExpCS_9, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::CallExpCS::nameExp\'");
-                    }
-                    final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable NameExpCS nameExp = symbol_0.getNameExp();
-                    final /*@Thrown*/ boolean eq_1 = lNameExpCS_9.equals(nameExp);
-                    symbol_1 = eq_1;
-                }
-                CAUGHT_symbol_1 = symbol_1;
-            }
-            catch (Exception e) {
-                CAUGHT_symbol_1 = ValueUtil.createInvalidValue(e);
-            }
-            final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean and = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_eq, CAUGHT_symbol_1);
-            final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean not = BooleanNotOperation.INSTANCE.evaluate(and);
-            if (not == null) {
-                throw throwNull(lNameExpCS_9, "Null if condition");
-            }
-            /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean symbol_6;
-            if (not) {
-                /*@Caught*/ @Nullable Object CAUGHT_and_1;
+                // predicates and unrealized variables
+                final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull IdResolver idResolver = executor.getIdResolver();
+                /*@Caught*/ @NonNull Object CAUGHT_eq;
                 try {
-                    /*@Caught*/ @Nullable Object CAUGHT_and_0;
+                    final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable RoundedBracketClauseCS roundedBrackets = lNameExpCS_9.getRoundedBrackets();
+                    final /*@Thrown*/ boolean eq = roundedBrackets == null;
+                    CAUGHT_eq = eq;
+                }
+                catch (Exception e) {
+                    CAUGHT_eq = ValueUtil.createInvalidValue(e);
+                }
+                /*@Caught*/ @NonNull Object CAUGHT_symbol_1;
+                try {
+                    final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.Nullable Object container = ClassifierOclContainerOperation.INSTANCE.evaluate(executor, lNameExpCS_9);
+                    final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_minioclcs_c_c_CallExpCS_2 = idResolver.getClass(CLSSid_CallExpCS, null);
+                    final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, container, TYP_minioclcs_c_c_CallExpCS_2).booleanValue();
+                    /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable CallExpCS symbol_0;
+                    if (oclIsKindOf) {
+                        final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull CallExpCS oclAsType = ClassUtil.nonNullState((CallExpCS)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, container, TYP_minioclcs_c_c_CallExpCS_2));
+                        symbol_0 = oclAsType;
+                    }
+                    else {
+                        symbol_0 = null;
+                    }
+                    final /*@Thrown*/ boolean eq_0 = symbol_0 == null;
+                    /*@Thrown*/ boolean symbol_1;
+                    if (eq_0) {
+                        symbol_1 = ValueUtil.FALSE_VALUE;
+                    }
+                    else {
+                        if (symbol_0 == null) {
+                            throw throwNull(lNameExpCS_9, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::CallExpCS::nameExp\'");
+                        }
+                        final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable NameExpCS nameExp = symbol_0.getNameExp();
+                        final /*@Thrown*/ boolean eq_1 = lNameExpCS_9.equals(nameExp);
+                        symbol_1 = eq_1;
+                    }
+                    CAUGHT_symbol_1 = symbol_1;
+                }
+                catch (Exception e) {
+                    CAUGHT_symbol_1 = ValueUtil.createInvalidValue(e);
+                }
+                final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean and = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_eq, CAUGHT_symbol_1);
+                final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean not = BooleanNotOperation.INSTANCE.evaluate(and);
+                if (not == null) {
+                    throw throwNull(lNameExpCS_9, "Null if condition");
+                }
+                /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean symbol_6;
+                if (not) {
+                    /*@Caught*/ @Nullable Object CAUGHT_and_1;
                     try {
-                        /*@Caught*/ @NonNull Object CAUGHT_eq_2;
+                        /*@Caught*/ @Nullable Object CAUGHT_and_0;
                         try {
-                            final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable RoundedBracketClauseCS roundedBrackets_0 = lNameExpCS_9.getRoundedBrackets();
-                            final /*@Thrown*/ boolean eq_2 = roundedBrackets_0 == null;
-                            CAUGHT_eq_2 = eq_2;
-                        }
-                        catch (Exception e) {
-                            CAUGHT_eq_2 = ValueUtil.createInvalidValue(e);
-                        }
-                        /*@Caught*/ @Nullable Object CAUGHT_not_0;
-                        try {
-                            final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.Nullable Object container_0 = ClassifierOclContainerOperation.INSTANCE.evaluate(executor, lNameExpCS_9);
-                            final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_minioclcs_c_c_CallExpCS_4 = idResolver.getClass(CLSSid_CallExpCS, null);
-                            final /*@Thrown*/ boolean oclIsKindOf_0 = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, container_0, TYP_minioclcs_c_c_CallExpCS_4).booleanValue();
-                            /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable CallExpCS symbol_2;
-                            if (oclIsKindOf_0) {
-                                final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull CallExpCS oclAsType_0 = ClassUtil.nonNullState((CallExpCS)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, container_0, TYP_minioclcs_c_c_CallExpCS_4));
-                                symbol_2 = oclAsType_0;
+                            /*@Caught*/ @NonNull Object CAUGHT_eq_2;
+                            try {
+                                final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable RoundedBracketClauseCS roundedBrackets_0 = lNameExpCS_9.getRoundedBrackets();
+                                final /*@Thrown*/ boolean eq_2 = roundedBrackets_0 == null;
+                                CAUGHT_eq_2 = eq_2;
                             }
-                            else {
-                                symbol_2 = null;
+                            catch (Exception e) {
+                                CAUGHT_eq_2 = ValueUtil.createInvalidValue(e);
                             }
-                            final /*@Thrown*/ boolean eq_3 = symbol_2 == null;
-                            /*@Thrown*/ boolean symbol_3;
-                            if (eq_3) {
-                                symbol_3 = ValueUtil.FALSE_VALUE;
-                            }
-                            else {
-                                if (symbol_2 == null) {
-                                    throw throwNull(lNameExpCS_9, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::CallExpCS::nameExp\'");
+                            /*@Caught*/ @Nullable Object CAUGHT_not_0;
+                            try {
+                                final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.Nullable Object container_0 = ClassifierOclContainerOperation.INSTANCE.evaluate(executor, lNameExpCS_9);
+                                final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_minioclcs_c_c_CallExpCS_4 = idResolver.getClass(CLSSid_CallExpCS, null);
+                                final /*@Thrown*/ boolean oclIsKindOf_0 = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, container_0, TYP_minioclcs_c_c_CallExpCS_4).booleanValue();
+                                /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable CallExpCS symbol_2;
+                                if (oclIsKindOf_0) {
+                                    final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull CallExpCS oclAsType_0 = ClassUtil.nonNullState((CallExpCS)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, container_0, TYP_minioclcs_c_c_CallExpCS_4));
+                                    symbol_2 = oclAsType_0;
                                 }
-                                final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable NameExpCS nameExp_0 = symbol_2.getNameExp();
-                                final /*@Thrown*/ boolean eq_4 = lNameExpCS_9.equals(nameExp_0);
-                                symbol_3 = eq_4;
+                                else {
+                                    symbol_2 = null;
+                                }
+                                final /*@Thrown*/ boolean eq_3 = symbol_2 == null;
+                                /*@Thrown*/ boolean symbol_3;
+                                if (eq_3) {
+                                    symbol_3 = ValueUtil.FALSE_VALUE;
+                                }
+                                else {
+                                    if (symbol_2 == null) {
+                                        throw throwNull(lNameExpCS_9, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::CallExpCS::nameExp\'");
+                                    }
+                                    final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable NameExpCS nameExp_0 = symbol_2.getNameExp();
+                                    final /*@Thrown*/ boolean eq_4 = lNameExpCS_9.equals(nameExp_0);
+                                    symbol_3 = eq_4;
+                                }
+                                final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean not_0 = BooleanNotOperation.INSTANCE.evaluate(symbol_3);
+                                CAUGHT_not_0 = not_0;
                             }
-                            final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean not_0 = BooleanNotOperation.INSTANCE.evaluate(symbol_3);
-                            CAUGHT_not_0 = not_0;
+                            catch (Exception e) {
+                                CAUGHT_not_0 = ValueUtil.createInvalidValue(e);
+                            }
+                            final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean and_0 = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_eq_2, CAUGHT_not_0);
+                            CAUGHT_and_0 = and_0;
                         }
                         catch (Exception e) {
-                            CAUGHT_not_0 = ValueUtil.createInvalidValue(e);
+                            CAUGHT_and_0 = ValueUtil.createInvalidValue(e);
                         }
-                        final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean and_0 = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_eq_2, CAUGHT_not_0);
-                        CAUGHT_and_0 = and_0;
+                        /*@Caught*/ @NonNull Object CAUGHT_eq_5;
+                        try {
+                            final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable PathNameCS expName = lNameExpCS_9.getExpName();
+                            if (expName == null) {
+                                throw throwNull(lNameExpCS_9, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathNameCS::path\'");
+                            }
+                            @SuppressWarnings("null")
+                            final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<PathElementCS> path = expName.getPath();
+                            final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_path = idResolver.createOrderedSetOfAll(ORD_CLSSid_PathElementCS, path);
+                            final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(BOXED_path);
+                            final /*@Thrown*/ boolean eq_5 = size.equals(INT_1);
+                            CAUGHT_eq_5 = eq_5;
+                        }
+                        catch (Exception e) {
+                            CAUGHT_eq_5 = ValueUtil.createInvalidValue(e);
+                        }
+                        final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean and_1 = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_and_0, CAUGHT_eq_5);
+                        CAUGHT_and_1 = and_1;
                     }
                     catch (Exception e) {
-                        CAUGHT_and_0 = ValueUtil.createInvalidValue(e);
+                        CAUGHT_and_1 = ValueUtil.createInvalidValue(e);
                     }
-                    /*@Caught*/ @NonNull Object CAUGHT_eq_5;
+                    /*@Caught*/ @NonNull Object CAUGHT_ne;
                     try {
-                        final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable PathNameCS expName = lNameExpCS_9.getExpName();
-                        if (expName == null) {
+                        final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_minioclcs_c_c_CSTrace_0 = idResolver.getClass(CLSSid_CSTrace, null);
+                        final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.Nullable Object oclContainer = ClassifierOclContainerOperation.INSTANCE.evaluate(executor, lNameExpCS_9);
+                        final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.NonNull CSTrace oclAsType_1 = ClassUtil.nonNullState((CSTrace)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, oclContainer, TYP_minioclcs_c_c_CSTrace_0));
+                        final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.Nullable Element self_1 = oclAsType_1.getAst();
+                        if (self_1 == null) {
+                            throw throwNull(lNameExpCS_9, "Null where non-null value required");
+                        }
+                        final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable PathNameCS expName_0 = lNameExpCS_9.getExpName();
+                        if (expName_0 == null) {
                             throw throwNull(lNameExpCS_9, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathNameCS::path\'");
                         }
                         @SuppressWarnings("null")
-                        final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<PathElementCS> path = expName.getPath();
-                        final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_path = idResolver.createOrderedSetOfAll(ORD_CLSSid_PathElementCS, path);
-                        final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(BOXED_path);
-                        final /*@Thrown*/ boolean eq_5 = size.equals(INT_1);
-                        CAUGHT_eq_5 = eq_5;
+                        final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<PathElementCS> path_0 = expName_0.getPath();
+                        final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_path_0 = idResolver.createOrderedSetOfAll(ORD_CLSSid_PathElementCS, path_0);
+                        final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable PathElementCS aPathElementCS = (PathElementCS)OrderedCollectionFirstOperation.INSTANCE.evaluate(BOXED_path_0);
+                        if (aPathElementCS == null) {
+                            throw throwNull(lNameExpCS_9, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathElementCS::elementName\'");
+                        }
+                        final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String elementName = aPathElementCS.getElementName();
+                        MiniOCLLookupResult<Variable> _lookupResult = lookupSolver._lookupUnqualifiedVariable(self_1, (String)elementName);
+                        Variable _lookupUnqualifiedVariable = null;
+                        if (_lookupResult.size() == 1) {
+                            _lookupUnqualifiedVariable = _lookupResult.getSingleResult();
+                        } else {
+                            handleLookupError(aPathElementCS,elementName);
+                        };
+                        final /*@Thrown*/ boolean ne = _lookupUnqualifiedVariable != null;
+                        CAUGHT_ne = ne;
                     }
                     catch (Exception e) {
-                        CAUGHT_eq_5 = ValueUtil.createInvalidValue(e);
+                        CAUGHT_ne = ValueUtil.createInvalidValue(e);
                     }
-                    final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean and_1 = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_and_0, CAUGHT_eq_5);
-                    CAUGHT_and_1 = and_1;
-                }
-                catch (Exception e) {
-                    CAUGHT_and_1 = ValueUtil.createInvalidValue(e);
-                }
-                /*@Caught*/ @NonNull Object CAUGHT_ne;
-                try {
-                    final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.Nullable Element self_1 = lNameExpCS_9.getAst();
-                    if (self_1 == null) {
-                        throw throwNull(lNameExpCS_9, "Null where non-null value required");
+                    final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean and_2 = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_and_1, CAUGHT_ne);
+                    if (and_2 == null) {
+                        throw throwNull(lNameExpCS_9, "Null if condition");
                     }
-                    final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable PathNameCS expName_0 = lNameExpCS_9.getExpName();
-                    if (expName_0 == null) {
-                        throw throwNull(lNameExpCS_9, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathNameCS::path\'");
+                    /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean symbol_5;
+                    if (and_2) {
+                        // creations
+                        final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.Nullable VariableExp rVariableExp = MiniOCLFactory.eINSTANCE.createVariableExp();
+                        assert rVariableExp != null;
+                        models[1/*rightAS*/].add(rVariableExp);
+                        // property assignments
+                        lNameExpCS_9.setAst(rVariableExp);
+                        objectManager.assigned(lNameExpCS_9, MinioclcsPackage.Literals.CS_TRACE__AST, rVariableExp, null);
+                        final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean m_VariableExp_NameExpCS_CallExpCS_Element_Expressi = ValueUtil.TRUE_VALUE;
+                        symbol_5 = m_VariableExp_NameExpCS_CallExpCS_Element_Expressi;
                     }
-                    @SuppressWarnings("null")
-                    final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<PathElementCS> path_0 = expName_0.getPath();
-                    final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_path_0 = idResolver.createOrderedSetOfAll(ORD_CLSSid_PathElementCS, path_0);
-                    final /*@Thrown*/ org.eclipse.qvtd.doc.minioclcs.@org.eclipse.jdt.annotation.Nullable PathElementCS aPathElementCS = (PathElementCS)OrderedCollectionFirstOperation.INSTANCE.evaluate(BOXED_path_0);
-                    if (aPathElementCS == null) {
-                        throw throwNull(lNameExpCS_9, "Null source for \'\'http://www.eclipse.org/qvtd/doc/MiniOCLCS\'::PathElementCS::pathName\'");
+                    else {
+                        symbol_5 = ValueUtil.FALSE_VALUE;
                     }
-                    final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String pathName = aPathElementCS.getPathName();
-                    MiniOCLLookupResult<Variable> _lookupResult = lookupSolver._lookupUnqualifiedVariable(self_1, (String)pathName);
-                    Variable _lookupUnqualifiedVariable = null;
-                    if (_lookupResult.size() == 1) {
-                        _lookupUnqualifiedVariable = _lookupResult.getSingleResult();
-                    } else {
-                        handleLookupError(aPathElementCS,pathName);
-                    };
-                    final /*@Thrown*/ boolean ne = _lookupUnqualifiedVariable != null;
-                    CAUGHT_ne = ne;
-                }
-                catch (Exception e) {
-                    CAUGHT_ne = ValueUtil.createInvalidValue(e);
-                }
-                final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean and_2 = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_and_1, CAUGHT_ne);
-                if (and_2 == null) {
-                    throw throwNull(lNameExpCS_9, "Null if condition");
-                }
-                /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean symbol_5;
-                if (and_2) {
-                    // creations
-                    final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.Nullable VariableExp rVariableExp = MiniOCLFactory.eINSTANCE.createVariableExp();
-                    assert rVariableExp != null;
-                    models[1/*rightAS*/].add(rVariableExp);
-                    // property assignments
-                    lNameExpCS_9.setAst(rVariableExp);
-                    final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean m_VariableExp_NameExpCS_NamedElement_Variable = ValueUtil.TRUE_VALUE;
-                    symbol_5 = m_VariableExp_NameExpCS_NamedElement_Variable;
+                    symbol_6 = symbol_5;
                 }
                 else {
-                    symbol_5 = ValueUtil.FALSE_VALUE;
+                    symbol_6 = ValueUtil.FALSE_VALUE;
                 }
-                symbol_6 = symbol_5;
+                return symbol_6;
+            } catch (Throwable e) {
+                return handleExecutionFailure("MAP_m_VariableExp_NameExpCS_CallExpCS_Element_Expressi", e);
             }
-            else {
-                symbol_6 = ValueUtil.FALSE_VALUE;
-            }
-            return symbol_6;
-        } catch (Throwable e) {
-            return handleExecutionFailure("MAP_m_VariableExp_NameExpCS_NamedElement_Variable", e);
+        }
+        
+        public boolean isEqual(@NonNull IdResolver idResolver, @NonNull Object @NonNull [] thoseValues) {
+            return idResolver.oclEquals(lNameExpCS_9, thoseValues[0]);
         }
     }
 }

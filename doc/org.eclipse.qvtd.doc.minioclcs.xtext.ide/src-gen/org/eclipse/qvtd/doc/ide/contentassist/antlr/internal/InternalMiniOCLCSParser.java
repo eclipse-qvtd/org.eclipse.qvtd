@@ -1752,26 +1752,26 @@ public class InternalMiniOCLCSParser extends AbstractInternalContentAssistParser
 
 
     // $ANTLR start "rulePathElementCS"
-    // InternalMiniOCLCS.g:538:1: rulePathElementCS : ( ( rule__PathElementCS__PathNameAssignment ) ) ;
+    // InternalMiniOCLCS.g:538:1: rulePathElementCS : ( ( rule__PathElementCS__ElementNameAssignment ) ) ;
     public final void rulePathElementCS() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalMiniOCLCS.g:542:2: ( ( ( rule__PathElementCS__PathNameAssignment ) ) )
-            // InternalMiniOCLCS.g:543:2: ( ( rule__PathElementCS__PathNameAssignment ) )
+            // InternalMiniOCLCS.g:542:2: ( ( ( rule__PathElementCS__ElementNameAssignment ) ) )
+            // InternalMiniOCLCS.g:543:2: ( ( rule__PathElementCS__ElementNameAssignment ) )
             {
-            // InternalMiniOCLCS.g:543:2: ( ( rule__PathElementCS__PathNameAssignment ) )
-            // InternalMiniOCLCS.g:544:3: ( rule__PathElementCS__PathNameAssignment )
+            // InternalMiniOCLCS.g:543:2: ( ( rule__PathElementCS__ElementNameAssignment ) )
+            // InternalMiniOCLCS.g:544:3: ( rule__PathElementCS__ElementNameAssignment )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getPathElementCSAccess().getPathNameAssignment()); 
+               before(grammarAccess.getPathElementCSAccess().getElementNameAssignment()); 
             }
-            // InternalMiniOCLCS.g:545:3: ( rule__PathElementCS__PathNameAssignment )
-            // InternalMiniOCLCS.g:545:4: rule__PathElementCS__PathNameAssignment
+            // InternalMiniOCLCS.g:545:3: ( rule__PathElementCS__ElementNameAssignment )
+            // InternalMiniOCLCS.g:545:4: rule__PathElementCS__ElementNameAssignment
             {
             pushFollow(FOLLOW_2);
-            rule__PathElementCS__PathNameAssignment();
+            rule__PathElementCS__ElementNameAssignment();
 
             state._fsp--;
             if (state.failed) return ;
@@ -1779,7 +1779,7 @@ public class InternalMiniOCLCSParser extends AbstractInternalContentAssistParser
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getPathElementCSAccess().getPathNameAssignment()); 
+               after(grammarAccess.getPathElementCSAccess().getElementNameAssignment()); 
             }
 
             }
@@ -8492,26 +8492,26 @@ public class InternalMiniOCLCSParser extends AbstractInternalContentAssistParser
 
 
     // $ANTLR start "rule__PathNameCS__Group_1__1__Impl"
-    // InternalMiniOCLCS.g:2601:1: rule__PathNameCS__Group_1__1__Impl : ( ( rule__PathNameCS__PathAssignment_1_1 ) ) ;
+    // InternalMiniOCLCS.g:2601:1: rule__PathNameCS__Group_1__1__Impl : ( ( rule__PathNameCS__PathElementsAssignment_1_1 ) ) ;
     public final void rule__PathNameCS__Group_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalMiniOCLCS.g:2605:1: ( ( ( rule__PathNameCS__PathAssignment_1_1 ) ) )
-            // InternalMiniOCLCS.g:2606:1: ( ( rule__PathNameCS__PathAssignment_1_1 ) )
+            // InternalMiniOCLCS.g:2605:1: ( ( ( rule__PathNameCS__PathElementsAssignment_1_1 ) ) )
+            // InternalMiniOCLCS.g:2606:1: ( ( rule__PathNameCS__PathElementsAssignment_1_1 ) )
             {
-            // InternalMiniOCLCS.g:2606:1: ( ( rule__PathNameCS__PathAssignment_1_1 ) )
-            // InternalMiniOCLCS.g:2607:2: ( rule__PathNameCS__PathAssignment_1_1 )
+            // InternalMiniOCLCS.g:2606:1: ( ( rule__PathNameCS__PathElementsAssignment_1_1 ) )
+            // InternalMiniOCLCS.g:2607:2: ( rule__PathNameCS__PathElementsAssignment_1_1 )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getPathNameCSAccess().getPathAssignment_1_1()); 
+               before(grammarAccess.getPathNameCSAccess().getPathElementsAssignment_1_1()); 
             }
-            // InternalMiniOCLCS.g:2608:2: ( rule__PathNameCS__PathAssignment_1_1 )
-            // InternalMiniOCLCS.g:2608:3: rule__PathNameCS__PathAssignment_1_1
+            // InternalMiniOCLCS.g:2608:2: ( rule__PathNameCS__PathElementsAssignment_1_1 )
+            // InternalMiniOCLCS.g:2608:3: rule__PathNameCS__PathElementsAssignment_1_1
             {
             pushFollow(FOLLOW_2);
-            rule__PathNameCS__PathAssignment_1_1();
+            rule__PathNameCS__PathElementsAssignment_1_1();
 
             state._fsp--;
             if (state.failed) return ;
@@ -8519,7 +8519,7 @@ public class InternalMiniOCLCSParser extends AbstractInternalContentAssistParser
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getPathNameCSAccess().getPathAssignment_1_1()); 
+               after(grammarAccess.getPathNameCSAccess().getPathElementsAssignment_1_1()); 
             }
 
             }
@@ -10019,9 +10019,9 @@ public class InternalMiniOCLCSParser extends AbstractInternalContentAssistParser
     // $ANTLR end "rule__PathNameCS__PathAssignment_0"
 
 
-    // $ANTLR start "rule__PathNameCS__PathAssignment_1_1"
-    // InternalMiniOCLCS.g:3116:1: rule__PathNameCS__PathAssignment_1_1 : ( rulePathElementCS ) ;
-    public final void rule__PathNameCS__PathAssignment_1_1() throws RecognitionException {
+    // $ANTLR start "rule__PathNameCS__PathElementsAssignment_1_1"
+    // InternalMiniOCLCS.g:3116:1: rule__PathNameCS__PathElementsAssignment_1_1 : ( rulePathElementCS ) ;
+    public final void rule__PathNameCS__PathElementsAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
@@ -10033,7 +10033,7 @@ public class InternalMiniOCLCSParser extends AbstractInternalContentAssistParser
             // InternalMiniOCLCS.g:3122:3: rulePathElementCS
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getPathNameCSAccess().getPathPathElementCSParserRuleCall_1_1_0()); 
+               before(grammarAccess.getPathNameCSAccess().getPathElementsPathElementCSParserRuleCall_1_1_0()); 
             }
             pushFollow(FOLLOW_2);
             rulePathElementCS();
@@ -10041,7 +10041,7 @@ public class InternalMiniOCLCSParser extends AbstractInternalContentAssistParser
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getPathNameCSAccess().getPathPathElementCSParserRuleCall_1_1_0()); 
+               after(grammarAccess.getPathNameCSAccess().getPathElementsPathElementCSParserRuleCall_1_1_0()); 
             }
 
             }
@@ -10061,12 +10061,12 @@ public class InternalMiniOCLCSParser extends AbstractInternalContentAssistParser
         }
         return ;
     }
-    // $ANTLR end "rule__PathNameCS__PathAssignment_1_1"
+    // $ANTLR end "rule__PathNameCS__PathElementsAssignment_1_1"
 
 
-    // $ANTLR start "rule__PathElementCS__PathNameAssignment"
-    // InternalMiniOCLCS.g:3131:1: rule__PathElementCS__PathNameAssignment : ( RULE_ID ) ;
-    public final void rule__PathElementCS__PathNameAssignment() throws RecognitionException {
+    // $ANTLR start "rule__PathElementCS__ElementNameAssignment"
+    // InternalMiniOCLCS.g:3131:1: rule__PathElementCS__ElementNameAssignment : ( RULE_ID ) ;
+    public final void rule__PathElementCS__ElementNameAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
@@ -10078,11 +10078,11 @@ public class InternalMiniOCLCSParser extends AbstractInternalContentAssistParser
             // InternalMiniOCLCS.g:3137:3: RULE_ID
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getPathElementCSAccess().getPathNameIDTerminalRuleCall_0()); 
+               before(grammarAccess.getPathElementCSAccess().getElementNameIDTerminalRuleCall_0()); 
             }
             match(input,RULE_ID,FOLLOW_2); if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getPathElementCSAccess().getPathNameIDTerminalRuleCall_0()); 
+               after(grammarAccess.getPathElementCSAccess().getElementNameIDTerminalRuleCall_0()); 
             }
 
             }
@@ -10102,7 +10102,7 @@ public class InternalMiniOCLCSParser extends AbstractInternalContentAssistParser
         }
         return ;
     }
-    // $ANTLR end "rule__PathElementCS__PathNameAssignment"
+    // $ANTLR end "rule__PathElementCS__ElementNameAssignment"
 
     // Delegated rules
 
