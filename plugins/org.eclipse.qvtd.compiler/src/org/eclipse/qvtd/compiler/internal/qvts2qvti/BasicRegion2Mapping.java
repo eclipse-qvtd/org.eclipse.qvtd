@@ -1133,7 +1133,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		for (@NonNull NavigationEdge edge : NavigationEdgeSorter.getSortedAssignments(region.getRealizedNavigationEdges())) {
 			Node sourceNode = edge.getSource();
 			Node targetNode = edge.getTarget();
-			if (targetNode.isAttributeNode()) {
+			if (targetNode.isDataTypeNode()) {
 				OCLExpression slotVariableExp = createVariableExp(sourceNode);
 				Property property = edge.getProperty();
 				OCLExpression valueExp = expressionCreator.getExpression(targetNode);

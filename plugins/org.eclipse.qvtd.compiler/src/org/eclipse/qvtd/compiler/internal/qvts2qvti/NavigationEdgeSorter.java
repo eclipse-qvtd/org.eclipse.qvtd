@@ -58,7 +58,7 @@ public class NavigationEdgeSorter
 			Set<@NonNull Node> sourceNodes = null;
 			if (navigationEdge.isRealized()) {
 				Node targetNode = navigationEdge.getTarget();
-				if (targetNode.isAttributeNode()) {
+				if (targetNode.isDataTypeNode()) {
 					sourceNodes = gatherSourceNodes(new HashSet<@NonNull Node>(), targetNode);
 				}
 			}

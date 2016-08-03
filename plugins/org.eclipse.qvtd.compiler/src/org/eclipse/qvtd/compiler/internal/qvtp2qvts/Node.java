@@ -92,12 +92,7 @@ public interface Node extends ConnectionEnd, GraphStringBuilder.GraphNode, Namea
 	@NonNull Iterable<@NonNull Node> getUsedBindingSources();
 
 	/**
-	 * Return true if this node is an attribute value.
-	 */
-	boolean isAttributeNode();
-
-	/**
-	 * Return true if this node is a class value.
+	 * Return true if this node is a Class object.
 	 */
 	boolean isClassNode();
 
@@ -109,6 +104,11 @@ public interface Node extends ConnectionEnd, GraphStringBuilder.GraphNode, Namea
 	 * isConstant() is exclusive to isLoaded()/isPredicated()/isRealized()
 	 */
 	boolean isConstant();
+
+	/**
+	 * Return true if this node is a DataType value.
+	 */
+	boolean isDataTypeNode();
 
 	/**
 	 * Return true if this node is an OCL expression.

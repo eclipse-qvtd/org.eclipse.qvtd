@@ -158,7 +158,7 @@ public class OperationRegion extends AbstractRegion
 								Edges.NavigationEdgeRole.createNavigationEdge(this, extraNode2, iterateProperty, elementNode);
 								extraNode2 = elementNode;
 							}
-							Node nextNode = Nodes.UNNAVIGABLE_ATTRIBUTE.createNode(this, extraNode2, navigationCallExp);
+							Node nextNode = Nodes.UNNAVIGABLE_DATATYPE.createNode(this, extraNode2, navigationCallExp);
 							Edges.NavigationEdgeRole.createNavigationEdge(this, extraNode2, property, nextNode);
 							extraNode2 = nextNode;
 						}

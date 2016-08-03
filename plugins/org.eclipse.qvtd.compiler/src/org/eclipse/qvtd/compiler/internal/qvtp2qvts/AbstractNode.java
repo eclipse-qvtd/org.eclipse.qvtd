@@ -525,14 +525,6 @@ public abstract class AbstractNode implements Node
 		return sources;
 	}
 
-	@Override
-	public final boolean isAttributeNode() {
-		//		boolean isAttributeNode1 = nodeRole.isAttributeNode();		// FIXME OperationNode
-		boolean isAttributeNode2 = (classDatumAnalysis.getClassDatum().getType() instanceof DataType) && !isNull();
-		//		assert isAttributeNode1 == isAttributeNode2;
-		return isAttributeNode2;
-	}
-
 	//	@Override
 	//	public boolean isCast() {
 	//		return false;
@@ -559,6 +551,14 @@ public abstract class AbstractNode implements Node
 	@Override
 	public boolean isConstant() {
 		return nodeRole.isConstant();
+	}
+
+	@Override
+	public final boolean isDataTypeNode() {
+		//		boolean isAttributeNode1 = nodeRole.isAttributeNode();		// FIXME OperationNode
+		boolean isDataTypeNode2 = (classDatumAnalysis.getClassDatum().getType() instanceof DataType) && !isNull();
+		//		assert isAttributeNode1 == isAttributeNode2;
+		return isDataTypeNode2;
 	}
 
 	@Override

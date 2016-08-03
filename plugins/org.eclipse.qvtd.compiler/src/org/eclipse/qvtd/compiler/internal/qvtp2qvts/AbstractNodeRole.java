@@ -40,17 +40,17 @@ public abstract class AbstractNodeRole extends AbstractRole implements NodeRole
 	}
 
 	@Override
-	public boolean isAttributeNode() {
-		return false;
-	}
-
-	@Override
 	public boolean isClassNode() {
 		return false;
 	}
 
 	@Override
 	public boolean isComposed() {
+		return false;
+	}
+
+	@Override
+	public boolean isDataTypeNode() {
 		return false;
 	}
 

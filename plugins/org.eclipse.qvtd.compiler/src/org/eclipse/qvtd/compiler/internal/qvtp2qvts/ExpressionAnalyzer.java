@@ -313,7 +313,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 	}
 
 	protected @NonNull Node createNavigableAttributeNode(@NonNull Node sourceNode, @NonNull Property source2targetProperty) {
-		return Nodes.NAVIGABLE_ATTRIBUTE.createNode(context, sourceNode, source2targetProperty);
+		return Nodes.NAVIGABLE_DATATYPE.createNode(context, sourceNode, source2targetProperty);
 	}
 
 	protected @NonNull NavigationEdge createNavigableNavigationEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
@@ -364,7 +364,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 	}
 
 	protected @NonNull Node createRealizedAttributeNode(@NonNull Node sourceNode, @NonNull Property source2targetProperty) {
-		return Nodes.REALIZED_ATTRIBUTE.createNode(context, sourceNode, source2targetProperty);
+		return Nodes.REALIZED_DATATYPE.createNode(context, sourceNode, source2targetProperty);
 	}
 
 	protected @NonNull NavigationEdge createRealizedEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
@@ -429,7 +429,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 		else if (targetNode.isClassNode() && !targetNode.isOperation()) {		// FIXME rationalize isXXX tests
 			return getNavigationEdgeToClass(sourceNode, source2targetProperty, targetNode, navigationAssignment);
 		}
-		else if (targetNode.isAttributeNode()) {
+		else if (targetNode.isDataTypeNode()) {
 			return getNavigationEdgeToAttribute(sourceNode, source2targetProperty, targetNode, navigationAssignment);
 		}
 		else {
@@ -438,7 +438,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 	}
 
 	protected @NonNull NavigationEdge getNavigationEdgeToAttribute(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode, @Nullable NavigationAssignment navigationAssignment) {
-		assert targetNode.isAttributeNode();
+		assert targetNode.isDataTypeNode();
 		Type type = source2targetProperty.getType();
 		assert type instanceof DataType;
 		NavigationEdge navigationEdge = sourceNode.getNavigationEdge(source2targetProperty);
