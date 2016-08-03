@@ -48,7 +48,7 @@ public interface NodeRole extends Role
 	boolean isGuardVariable();
 
 	boolean isHead();
-	//	boolean isInput();
+
 	boolean isInternal();
 
 	boolean isIterator();
@@ -60,8 +60,6 @@ public interface NodeRole extends Role
 	boolean isNull();
 
 	boolean isOperation();
-	//	boolean isOutput();
-	boolean isRealizedVariable();
 
 	boolean isTrue();
 

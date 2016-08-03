@@ -117,4 +117,59 @@ public class RegionUtil
 		}
 		return false;
 	}
+	public static <@NonNull R extends Role> R mergeToLessKnownPhase(R firstRole, R secondRole) {
+		if (firstRole.isRealized()) {
+			return firstRole;
+		}
+		else if (secondRole.isRealized()) {
+			return secondRole;
+		}
+		else if (firstRole.isPredicated()){
+			return firstRole;
+		}
+		else if (secondRole.isPredicated()){
+			return secondRole;
+		}
+		else if (firstRole.isLoaded()) {
+			return firstRole;
+		}
+		else if (secondRole.isLoaded()) {
+			return secondRole;
+		}
+		else if (firstRole.isConstant()) {
+			return firstRole;
+		}
+		else if (secondRole.isConstant()) {
+			return secondRole;
+		}
+		throw new UnsupportedOperationException();
+	}
+
+	public static <@NonNull R extends Role> R mergeToMoreKnownPhase(@NonNull R firstRole, @NonNull R secondRole) {
+		if (firstRole.isConstant()) {
+			return firstRole;
+		}
+		else if (secondRole.isConstant()) {
+			return secondRole;
+		}
+		else if (firstRole.isLoaded()) {
+			return firstRole;
+		}
+		else if (secondRole.isLoaded()) {
+			return secondRole;
+		}
+		else if (firstRole.isRealized()) {
+			return firstRole;
+		}
+		else if (secondRole.isRealized()) {
+			return secondRole;
+		}
+		else if (firstRole.isPredicated()){
+			return firstRole;
+		}
+		else if (secondRole.isPredicated()){
+			return secondRole;
+		}
+		throw new UnsupportedOperationException();
+	}
 }

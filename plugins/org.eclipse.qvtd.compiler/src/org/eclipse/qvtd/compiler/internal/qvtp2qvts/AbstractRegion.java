@@ -281,7 +281,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 
 		@Override
 		public boolean apply(@NonNull Node node) {
-			return node.isRealizedVariable();
+			return node.isRealized() && node.isClassNode() && !node.isOperation();
 		}
 	}
 

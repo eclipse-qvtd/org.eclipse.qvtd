@@ -301,15 +301,15 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 	}
 
 	protected @NonNull Edge createIteratedEdge(@NonNull Node sourceNode, @NonNull Node targetNode) {
-		return Edges.IteratedEdgeRole.createIteratedEdgeRole(context, sourceNode, targetNode);
+		return Edges.IteratedEdgeRole.createIteratedEdge(context, sourceNode, targetNode);
 	}
 
 	protected @NonNull Node createIteratorNode(@NonNull Variable iterator, @NonNull Node sourceNode) {
-		return Nodes.ITERATOR.createNode(context, iterator, sourceNode);
+		return Nodes.IteratorNodeRole.createIteratorNode(context, iterator, sourceNode);
 	}
 
 	protected @NonNull Node createLetNode(@NonNull Variable letVariable, @NonNull Node inNode) {
-		return Nodes.LET.createNode(context, letVariable, inNode);
+		return Nodes.LetVariableNodeRole.createLetVariableNode(context, letVariable, inNode);
 	}
 
 	protected @NonNull Node createNavigableAttributeNode(@NonNull Node sourceNode, @NonNull Property source2targetProperty) {
@@ -343,7 +343,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 	}
 
 	protected @NonNull Node createOperationNode(@NonNull String name, @NonNull TypedElement typedElement, @NonNull Node @NonNull ... argNodes) {
-		return Nodes.OPERATION.createNode(context, name, typedElement, argNodes);
+		return Nodes.OperationNodeRole.createOperationNode(context, name, typedElement, argNodes);
 	}
 
 	protected @NonNull Edge createPredicateEdge(@NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode) {

@@ -19,62 +19,6 @@ import org.eclipse.ocl.pivot.Property;
  */
 public class Edges
 {
-	public static <@NonNull R extends Role> R mergeToLessKnownPhase(R firstRole, R secondRole) {
-		if (firstRole.isRealized()) {
-			return firstRole;
-		}
-		else if (secondRole.isRealized()) {
-			return secondRole;
-		}
-		else if (firstRole.isPredicated()){
-			return firstRole;
-		}
-		else if (secondRole.isPredicated()){
-			return secondRole;
-		}
-		else if (firstRole.isLoaded()) {
-			return firstRole;
-		}
-		else if (secondRole.isLoaded()) {
-			return secondRole;
-		}
-		else if (firstRole.isConstant()) {
-			return firstRole;
-		}
-		else if (secondRole.isConstant()) {
-			return secondRole;
-		}
-		throw new UnsupportedOperationException();
-	}
-
-	public static <@NonNull R extends Role> R mergeToMoreKnownPhase(@NonNull R firstRole, @NonNull R secondRole) {
-		if (firstRole.isConstant()) {
-			return firstRole;
-		}
-		else if (secondRole.isConstant()) {
-			return secondRole;
-		}
-		else if (firstRole.isLoaded()) {
-			return firstRole;
-		}
-		else if (secondRole.isLoaded()) {
-			return secondRole;
-		}
-		else if (firstRole.isPredicated()){
-			return firstRole;
-		}
-		else if (secondRole.isPredicated()){
-			return secondRole;
-		}
-		else if (firstRole.isRealized()) {
-			return firstRole;
-		}
-		else if (secondRole.isRealized()) {
-			return secondRole;
-		}
-		throw new UnsupportedOperationException();
-	}
-
 	protected abstract static class AbstractComputationEdgeRole extends AbstractEdgeRole implements EdgeRole.Simple
 	{
 		protected AbstractComputationEdgeRole(@NonNull Phase phase) {
@@ -173,7 +117,7 @@ public class Edges
 		}
 
 		public static EdgeRole.@NonNull Phase getCastEdgePhase(@NonNull Node sourceNode, @NonNull Node targetNode) {
-			return mergeToLessKnownPhase(sourceNode.getNodeRole(), targetNode.getNodeRole()).getPhase();
+			return RegionUtil.mergeToLessKnownPhase(sourceNode.getNodeRole(), targetNode.getNodeRole()).getPhase();
 		}
 
 		public static @NonNull CastEdgeRole getCastEdgeRole(EdgeRole.@NonNull Phase phase, boolean isNavigable) {
@@ -201,6 +145,16 @@ public class Edges
 		@Override
 		public boolean isCast() {
 			return true;
+		}
+
+		@Override
+		public @NonNull EdgeRole merge(@NonNull EdgeRole edgeRole) {
+			if (edgeRole instanceof CastEdgeRole) {
+				return RegionUtil.mergeToMoreKnownPhase(this, edgeRole);
+			}
+			else {
+				return super.merge(edgeRole);
+			}
 		}
 	}
 
@@ -239,6 +193,16 @@ public class Edges
 		public boolean isPredicate() {
 			return false;
 		}
+
+		@Override
+		public @NonNull EdgeRole merge(@NonNull EdgeRole edgeRole) {
+			if (edgeRole instanceof ExpressionEdgeRole) {
+				return RegionUtil.mergeToMoreKnownPhase(this, edgeRole);
+			}
+			else {
+				return super.merge(edgeRole);
+			}
+		}
 	}
 
 	public static class IteratedEdgeRole extends AbstractComputationEdgeRole
@@ -248,7 +212,7 @@ public class Edges
 		private static final @NonNull IteratedEdgeRole PREDICATED_ITERATED = new IteratedEdgeRole(Role.Phase.PREDICATED);
 		private static final @NonNull IteratedEdgeRole REALIZED_ITERATED = new IteratedEdgeRole(Role.Phase.REALIZED);
 
-		public static @NonNull Edge createIteratedEdgeRole(@NonNull Region region, @NonNull Node sourceNode,@NonNull Node targetNode) {
+		public static @NonNull Edge createIteratedEdge(@NonNull Region region, @NonNull Node sourceNode,@NonNull Node targetNode) {
 			EdgeRole edgeRole = getIteratedEdgeRole(sourceNode.getNodeRole().getPhase());
 			return new BasicEdge(edgeRole, region, sourceNode, null, targetNode);
 		}
@@ -265,6 +229,16 @@ public class Edges
 
 		private IteratedEdgeRole(@NonNull Phase phase) {
 			super(phase);
+		}
+
+		@Override
+		public @NonNull EdgeRole merge(@NonNull EdgeRole edgeRole) {
+			if (edgeRole instanceof IteratedEdgeRole) {
+				return RegionUtil.mergeToMoreKnownPhase(this, edgeRole);
+			}
+			else {
+				return super.merge(edgeRole);
+			}
 		}
 	}
 
@@ -306,7 +280,7 @@ public class Edges
 		} */
 
 		public static EdgeRole.@NonNull Phase getNavigationEdgePhase(@NonNull Node sourceNode, @NonNull Node targetNode) {
-			return mergeToLessKnownPhase(sourceNode.getNodeRole(), targetNode.getNodeRole()).getPhase();
+			return RegionUtil.mergeToLessKnownPhase(sourceNode.getNodeRole(), targetNode.getNodeRole()).getPhase();
 		}
 
 		public static @NonNull NavigationEdgeRole getNavigationEdgeRole(EdgeRole.@NonNull Phase phase, boolean isNavigable) {
@@ -334,7 +308,12 @@ public class Edges
 
 		@Override
 		public @NonNull EdgeRole merge(@NonNull EdgeRole edgeRole) {
-			return mergeToLessKnownPhase(this, edgeRole);
+			if (edgeRole instanceof NavigationEdgeRole) {
+				return RegionUtil.mergeToMoreKnownPhase(this, edgeRole);
+			}
+			else {
+				return super.merge(edgeRole);
+			}
 		}
 	}
 
@@ -372,6 +351,16 @@ public class Edges
 		@Override
 		public boolean isPredicate() {
 			return true;
+		}
+
+		@Override
+		public @NonNull EdgeRole merge(@NonNull EdgeRole edgeRole) {
+			if (edgeRole instanceof PredicateEdgeRole) {
+				return RegionUtil.mergeToMoreKnownPhase(this, edgeRole);
+			}
+			else {
+				return super.merge(edgeRole);
+			}
 		}
 	}
 

@@ -643,11 +643,6 @@ public abstract class AbstractNode implements Node
 	}
 
 	@Override
-	public boolean isRealizedVariable() {
-		return nodeRole.isRealizedVariable();
-	}
-
-	@Override
 	public boolean isTrue() {
 		return nodeRole.isTrue();
 	}
