@@ -36,11 +36,14 @@ public abstract class AbstractNodeRole extends AbstractRole implements NodeRole
 
 	@Override
 	public @Nullable String getStyle() {
+		if (isDataType()) {
+			return "rounded";
+		}
 		return isNavigable() || isRealized() || isHead() ? null : "dashed";
 	}
 
 	@Override
-	public boolean isClassNode() {
+	public boolean isClass() {
 		return false;
 	}
 
@@ -50,7 +53,7 @@ public abstract class AbstractNodeRole extends AbstractRole implements NodeRole
 	}
 
 	@Override
-	public boolean isDataTypeNode() {
+	public boolean isDataType() {
 		return false;
 	}
 

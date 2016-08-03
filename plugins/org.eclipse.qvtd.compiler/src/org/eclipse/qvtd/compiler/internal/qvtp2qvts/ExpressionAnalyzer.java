@@ -364,7 +364,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 	}
 
 	protected @NonNull Node createRealizedAttributeNode(@NonNull Node sourceNode, @NonNull Property source2targetProperty) {
-		return Nodes.REALIZED_DATATYPE.createNode(context, sourceNode, source2targetProperty);
+		return Nodes.PatternNodeRole.createRealizedDataTypeNode(context, sourceNode, source2targetProperty);
 	}
 
 	protected @NonNull NavigationEdge createRealizedEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
@@ -426,10 +426,10 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 		if (targetNode.isNull()) {
 			return getNavigationEdgeToNull(sourceNode, source2targetProperty, targetNode, navigationAssignment);
 		}
-		else if (targetNode.isClassNode() && !targetNode.isOperation()) {		// FIXME rationalize isXXX tests
+		else if (targetNode.isClass() && !targetNode.isOperation()) {		// FIXME rationalize isXXX tests
 			return getNavigationEdgeToClass(sourceNode, source2targetProperty, targetNode, navigationAssignment);
 		}
-		else if (targetNode.isDataTypeNode()) {
+		else if (targetNode.isDataType()) {
 			return getNavigationEdgeToAttribute(sourceNode, source2targetProperty, targetNode, navigationAssignment);
 		}
 		else {
@@ -438,7 +438,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 	}
 
 	protected @NonNull NavigationEdge getNavigationEdgeToAttribute(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode, @Nullable NavigationAssignment navigationAssignment) {
-		assert targetNode.isDataTypeNode();
+		assert targetNode.isDataType();
 		Type type = source2targetProperty.getType();
 		assert type instanceof DataType;
 		NavigationEdge navigationEdge = sourceNode.getNavigationEdge(source2targetProperty);
@@ -468,7 +468,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 	}
 
 	protected @NonNull NavigationEdge getNavigationEdgeToClass(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode, @Nullable NavigationAssignment navigationAssignment) {
-		assert targetNode.isClassNode();
+		assert targetNode.isClass();
 		NavigationEdge navigationEdge = sourceNode.getNavigationEdge(source2targetProperty);
 		if (navigationEdge != null) {
 			Node target = navigationEdge.getTarget();
@@ -687,7 +687,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 	@Override
 	public @NonNull Node visitNavigationAssignment(@NonNull NavigationAssignment asNavigationAssignment) {
 		Node slotNode = analyze(asNavigationAssignment.getSlotExpression());
-		assert slotNode.isClassNode();
+		assert slotNode.isClass();
 		Property property = QVTcoreBaseUtil.getTargetProperty(asNavigationAssignment);
 		assert property != null;
 		Node targetNode = analyze(asNavigationAssignment.getValue());
@@ -715,7 +715,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 		OCLExpression ownedSource = navigationCallExp.getOwnedSource();
 		assert ownedSource != null;
 		Node sourceNode = analyze(ownedSource);
-		if (sourceNode.isClassNode()) {
+		if (sourceNode.isClass()) {
 			if (!referredProperty.isIsMany()) {
 				NavigationEdge navigationEdge = sourceNode.getNavigationEdge(referredProperty);
 				if (navigationEdge != null) {

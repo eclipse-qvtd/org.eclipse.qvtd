@@ -68,7 +68,7 @@ public class Nodes
 		}
 
 		@Override
-		public boolean isClassNode() {
+		public boolean isClass() {
 			//			return !(classDatumAnalysis.getClassDatum().getType() instanceof DataType);
 			return isClassNode;
 		}
@@ -86,7 +86,7 @@ public class Nodes
 			}
 
 			@Override
-			public boolean isDataTypeNode() {
+			public boolean isDataType() {
 				return true;
 			}
 
@@ -111,7 +111,7 @@ public class Nodes
 			}
 
 			public @NonNull Node createNode(@NonNull Region region, @NonNull Node parentNode, @NonNull NavigationCallExp navigationCallExp) {
-				assert parentNode.isClassNode();
+				assert parentNode.isClass();
 				//				SchedulerConstants schedulerConstants = region.getSchedulerConstants();
 				Property referredProperty = PivotUtil.getReferredProperty(navigationCallExp);
 				assert referredProperty != null;
@@ -156,7 +156,7 @@ public class Nodes
 
 			@Override
 			public @NonNull NodeRole merge(@NonNull NodeRole nodeRole) {
-				if (nodeRole == REALIZED_DATATYPE) {
+				if (nodeRole == PatternNodeRole.REALIZED_DATATYPE_STEP) {
 					return nodeRole;
 				}
 				if (getClass() != nodeRole.getClass()) {
@@ -188,50 +188,6 @@ public class Nodes
 			}
 		}
 
-		public static final class RealizedDataTypeNodeRole extends AbstractDataTypeNodeRole
-		{
-			protected RealizedDataTypeNodeRole() {
-				super(Role.Phase.REALIZED, false);
-			}
-
-			public @NonNull Node createNode(@NonNull Region region, @NonNull Node parentNode, @NonNull Property property) {
-				assert parentNode.isClassNode();
-				SchedulerConstants schedulerConstants = region.getSchedulerConstants();
-				org.eclipse.ocl.pivot.Class type = (org.eclipse.ocl.pivot.Class)property.getType();
-				assert type != null;
-				Type elementType = QVTbaseUtil.getElementalType(type);
-				TypedModel typedModel = elementType instanceof DataType ? region.getSchedulerConstants().getDomainAnalysis().getPrimitiveTypeModel() : parentNode.getClassDatumAnalysis().getTypedModel();
-				//				DomainUsage usage = region.getSchedulerConstants().getDomainAnalysis().getUsage(type);
-				//				assert usage != null;
-				//				TypedModel typedModel = usage.getTypedModel();
-				assert typedModel != null;
-				ClassDatum classDatum = schedulerConstants.getClassDatum(type, typedModel);
-				//				DomainUsage domainUsage = parentNode.getClassDatumAnalysis().getDomainUsage();
-				ClassDatumAnalysis classDatumAnalysis = schedulerConstants.getClassDatumAnalysis(classDatum);
-				String name = property.getName();
-				assert name != null;
-				return createNode(region, name, classDatumAnalysis);
-			}
-
-			@Override
-			public @Nullable String getStyle() {
-				return "rounded";
-			}
-
-			@Override
-			public @NonNull NodeRole merge(@NonNull NodeRole nodeRole) {
-				if (nodeRole.getPhase() == Phase.PREDICATED) {
-					return this;
-				}
-				return super.merge(nodeRole);
-			}
-
-			@Override
-			public String toString() {
-				return getClass().getSimpleName();
-			}
-		}
-
 		public static final class PredicatedInternalNodeRole extends AbstractDataTypeNodeRole
 		{
 			protected PredicatedInternalNodeRole() {
@@ -239,7 +195,7 @@ public class Nodes
 			}
 
 			public @NonNull Node createNode(@NonNull Region region, @NonNull Node parentNode, @NonNull NavigationAssignment navigationAssignment) {
-				assert parentNode.isClassNode();
+				assert parentNode.isClass();
 				SchedulerConstants schedulerConstants = region.getSchedulerConstants();
 				Property property = QVTcoreBaseUtil.getTargetProperty(navigationAssignment);
 				assert property != null;
@@ -295,7 +251,7 @@ public class Nodes
 				return attributeNodeRole.createNode(parentNode.getRegion(), parentNode, navigationCallExp);
 			}
 			if (parentNode.isRealized()) {
-				return REALIZED_DATATYPE.createNode(parentNode.getRegion(), parentNode, referredProperty);
+				return PatternNodeRole.createRealizedDataTypeNode(parentNode.getRegion(), parentNode, referredProperty);
 			}
 			else {
 				throw new UnsupportedOperationException();
@@ -310,7 +266,7 @@ public class Nodes
 				return attributeNodeRole.createNode(parentNode.getRegion(), parentNode, property);
 			}
 			if (parentNode.isRealized()) {
-				return REALIZED_DATATYPE.createNode(parentNode.getRegion(), parentNode, property);
+				return PatternNodeRole.createRealizedDataTypeNode(parentNode.getRegion(), parentNode, property);
 			}
 			else {
 				throw new UnsupportedOperationException();
@@ -340,7 +296,7 @@ public class Nodes
 		}
 
 		@Override
-		public boolean isClassNode() {
+		public boolean isClass() {
 			return true;
 		}
 
@@ -359,7 +315,7 @@ public class Nodes
 			}
 
 			@Override
-			public boolean isClassNode() {
+			public boolean isClass() {
 				return true;
 			}
 
@@ -486,7 +442,7 @@ public class Nodes
 
 		@Override
 		public @NonNull IteratorNodeRole asPhase(@NonNull Phase phase) {
-			return getIteratorNodeRole(phase, isClassNode());
+			return getIteratorNodeRole(phase, isClass());
 		}
 
 		@Override
@@ -581,7 +537,7 @@ public class Nodes
 
 		@Override
 		public @NonNull LetVariableNodeRole asPhase(@NonNull Phase phase) {
-			return getLetVariableNodeRole(phase, isNavigable(), isClassNode());
+			return getLetVariableNodeRole(phase, isNavigable(), isClass());
 		}
 
 		@Override
@@ -780,6 +736,25 @@ public class Nodes
 			boolean isClass = !(guardVariable.getType() instanceof DataType);
 			PatternNodeRole patternNodeRole = getPatternNodeRole(isEnforceable ? Phase.PREDICATED : Phase.LOADED, isClass, true, false);
 			return patternNodeRole.createNode(region, guardVariable);
+		}
+
+		public static @NonNull Node createRealizedDataTypeNode(@NonNull Region region, @NonNull Node sourceNode, @NonNull Property source2targetProperty) {
+			assert sourceNode.isClass();
+			SchedulerConstants schedulerConstants = region.getSchedulerConstants();
+			org.eclipse.ocl.pivot.Class type = (org.eclipse.ocl.pivot.Class)source2targetProperty.getType();
+			assert type != null;
+			Type elementType = QVTbaseUtil.getElementalType(type);
+			TypedModel typedModel = elementType instanceof DataType ? region.getSchedulerConstants().getDomainAnalysis().getPrimitiveTypeModel() : sourceNode.getClassDatumAnalysis().getTypedModel();
+			//				DomainUsage usage = region.getSchedulerConstants().getDomainAnalysis().getUsage(type);
+			//				assert usage != null;
+			//				TypedModel typedModel = usage.getTypedModel();
+			assert typedModel != null;
+			ClassDatum classDatum = schedulerConstants.getClassDatum(type, typedModel);
+			//				DomainUsage domainUsage = parentNode.getClassDatumAnalysis().getDomainUsage();
+			ClassDatumAnalysis classDatumAnalysis = schedulerConstants.getClassDatumAnalysis(classDatum);
+			String name = source2targetProperty.getName();
+			assert name != null;
+			return  REALIZED_DATATYPE_STEP.createNode(region, name, classDatumAnalysis);
 		}
 
 		public static @NonNull VariableNode createRealizedStepNode(@NonNull Region region, @NonNull Variable stepVariable) {
@@ -1029,7 +1004,7 @@ public class Nodes
 			}
 
 			@Override
-			public boolean isClassNode() {
+			public boolean isClass() {
 				return true;
 			}
 
@@ -1179,7 +1154,6 @@ public class Nodes
 	public static final @NonNull NullNodeRole NULL = new NullNodeRole();
 	//	public static final @NonNull PortNodeRoleFactory OUTPUT = new PortNodeRoleFactory(false);
 	public static final @NonNull ParameterNodeRoleFactory PARAMETER = new ParameterNodeRoleFactory(null);
-	public static final AttributeNodeRoleFactory.@NonNull RealizedDataTypeNodeRole REALIZED_DATATYPE = new AttributeNodeRoleFactory.RealizedDataTypeNodeRole();
 	public static final @NonNull StepNodeRoleFactory STEP = new StepNodeRoleFactory(null);
 	public static final @NonNull TrueNodeRole TRUE = new TrueNodeRole();
 	public static final @NonNull NodeRole UNKNOWN = new UnknownNodeRole();

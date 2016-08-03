@@ -251,7 +251,7 @@ public class QVTp2QVTs extends SchedulerConstants
 					secondaryRegions.add(secondaryRegion);
 				}
 				for (@NonNull Node predicatedNode : secondaryRegion.getMatchableNodes()) {
-					if (predicatedNode.isClassNode()) {							// Ignore nulls, attributes
+					if (predicatedNode.isClass()) {							// Ignore nulls, attributes
 						ClassDatumAnalysis predicatedClassDatumAnalysis = predicatedNode.getClassDatumAnalysis();
 						if (toOneReachableClasses.add(predicatedClassDatumAnalysis)) {
 							for (@NonNull MappingRegion consumingRegion : predicatedClassDatumAnalysis.getConsumingRegions()) {
@@ -263,7 +263,7 @@ public class QVTp2QVTs extends SchedulerConstants
 					}
 				}
 				for (@NonNull Node assignedNode : secondaryRegion.getComputedNodes()) {
-					if (assignedNode.isClassNode()) {							// Ignore nulls, attributes
+					if (assignedNode.isClass()) {							// Ignore nulls, attributes
 						ClassDatumAnalysis consumingClassDatumAnalysis = assignedNode.getClassDatumAnalysis();
 						if (toOneReachableClasses.add(consumingClassDatumAnalysis)) {
 							for (@NonNull MappingRegion consumingRegion : consumingClassDatumAnalysis.getConsumingRegions()) {

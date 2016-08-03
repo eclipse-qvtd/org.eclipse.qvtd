@@ -94,7 +94,7 @@ public interface Node extends ConnectionEnd, GraphStringBuilder.GraphNode, Namea
 	/**
 	 * Return true if this node is a Class object.
 	 */
-	boolean isClassNode();
+	boolean isClass();
 
 	boolean isComposed();
 
@@ -108,7 +108,7 @@ public interface Node extends ConnectionEnd, GraphStringBuilder.GraphNode, Namea
 	/**
 	 * Return true if this node is a DataType value.
 	 */
-	boolean isDataTypeNode();
+	boolean isDataType();
 
 	/**
 	 * Return true if this node is an OCL expression.

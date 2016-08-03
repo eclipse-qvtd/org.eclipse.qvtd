@@ -158,7 +158,7 @@ public abstract class AbstractMappingRegion extends AbstractRegion implements Ma
 		//
 		Map<@NonNull Node, @NonNull Set<@NonNull Node>> source2targetClosure = new HashMap<@NonNull Node, @NonNull Set<@NonNull Node>>();
 		for (@NonNull Node navigableNode : navigableNodes) {
-			if (navigableNode.isDataTypeNode()) {
+			if (navigableNode.isDataType()) {
 				continue;									// FIXME avoid even considering these nodes
 			}
 			Type type = navigableNode.getCompleteClass().getPrimaryClass();

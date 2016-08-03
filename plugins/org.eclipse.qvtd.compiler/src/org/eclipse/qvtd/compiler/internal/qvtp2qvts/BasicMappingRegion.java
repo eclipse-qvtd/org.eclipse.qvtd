@@ -309,7 +309,7 @@ public class BasicMappingRegion extends AbstractMappingRegion
 				Node targetNode = boundVariable != null ? getReferenceNode(boundVariable) : Nodes.NULL.createNode(this);
 				assert sourceNode.isGuardVariable();
 				assert (boundVariable == null) || targetNode.isGuardVariable();
-				assert sourceNode.isClassNode();
+				assert sourceNode.isClass();
 				if (!referredProperty.isIsMany()) {
 					Edge predicateEdge = sourceNode.getPredicateEdge(referredProperty);
 					if (predicateEdge == null) {

@@ -575,7 +575,7 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 		//
 		for (@NonNull Region region : getRegions()) {
 			for (@NonNull Node assignedNode : region.getAssignedNodes()) {
-				if (assignedNode.isClassNode()) {
+				if (assignedNode.isClass()) {
 					addProducedNode(assignedNode);
 				}
 			}

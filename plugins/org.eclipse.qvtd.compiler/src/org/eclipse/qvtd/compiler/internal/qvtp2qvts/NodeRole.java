@@ -38,11 +38,11 @@ public interface NodeRole extends Role
 
 	@Nullable String getStyle();
 
-	boolean isClassNode();
+	boolean isClass();
 
 	boolean isComposed();
 
-	boolean isDataTypeNode();
+	boolean isDataType();
 
 	boolean isExpression();
 

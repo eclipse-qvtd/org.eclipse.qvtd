@@ -281,7 +281,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 
 		@Override
 		public boolean apply(@NonNull Node node) {
-			return node.isRealized() && node.isClassNode() && !node.isOperation();
+			return node.isRealized() && node.isClass() && !node.isOperation();
 		}
 	}
 
@@ -1517,12 +1517,12 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 
 	@Deprecated
 	public @NonNull Node getAssignedAttributeNode(@NonNull Node parentNode, @NonNull Property property) {
-		assert parentNode.isClassNode();
+		assert parentNode.isClass();
 		assert property.getType() instanceof DataType;
 		Node node = parentNode.getNavigationTarget(property);
 		//		AbstractAttributeNode node = (AbstractAttributeNode)node2node.get(property);
 		if (node == null) {
-			node = Nodes.REALIZED_DATATYPE.createNode(parentNode.getRegion(), parentNode, property);
+			node = Nodes.PatternNodeRole.createRealizedDataTypeNode(parentNode.getRegion(), parentNode, property);
 			//			node2node.put(property, node);
 		}
 		return node;
@@ -2129,7 +2129,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 		}
 		for (@NonNull NavigationEdge calledEdge : calledNode.getNavigationEdges()) {
 			Node nextCalledNode = calledEdge.getTarget();
-			if (!nextCalledNode.isRealized() && !nextCalledNode.isDataTypeNode()) {  // FIXME why exclude AttributeNodes?
+			if (!nextCalledNode.isRealized() && !nextCalledNode.isDataType()) {  // FIXME why exclude AttributeNodes?
 				Edge nextCallingEdge = callingNode.getNavigationEdge(calledEdge.getProperty());
 				if (nextCallingEdge != null) {
 					Node nextCallingNode = nextCallingEdge.getTarget();
