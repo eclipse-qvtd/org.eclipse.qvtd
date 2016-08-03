@@ -20,6 +20,11 @@ public abstract class AbstractNodeRole extends AbstractRole implements NodeRole
 	}
 
 	@Override
+	public @NonNull AbstractNodeRole asPhase(@NonNull Phase phase) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
 	public @NonNull Integer getPenwidth() {
 		return isHead() /*&& !isResult()*/ ? HEAD_WIDTH : isGuardVariable() ? GUARD_WIDTH : LINE_WIDTH;
 	}

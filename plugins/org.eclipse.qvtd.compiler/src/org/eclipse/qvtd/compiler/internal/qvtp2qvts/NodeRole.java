@@ -19,6 +19,9 @@ import org.eclipse.ocl.pivot.TypedElement;
  */
 public interface NodeRole extends Role
 {
+	@Override
+	@NonNull NodeRole asPhase(@NonNull Phase phase);
+
 	@NonNull Node createNode(@NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis);
 
 	@NonNull Node createNode(@NonNull Region region, @NonNull String name, @NonNull TypedElement typedElement);

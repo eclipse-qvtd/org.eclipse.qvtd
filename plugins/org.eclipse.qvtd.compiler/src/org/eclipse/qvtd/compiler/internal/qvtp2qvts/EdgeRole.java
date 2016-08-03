@@ -36,6 +36,9 @@ public interface EdgeRole extends Role
 		@NonNull Edge createEdge(@NonNull Region region, @NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode);
 	}
 
+	@Override
+	@NonNull EdgeRole asPhase(@NonNull Phase phase);
+
 	@Nullable String getArrowhead();
 
 	@Nullable String getArrowtail();

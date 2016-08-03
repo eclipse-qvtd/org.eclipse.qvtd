@@ -39,14 +39,19 @@ public interface Role extends Comparable<Role>
 	 */
 	public enum Phase {
 		CONSTANT,		// Unequivocably known as compile time constant
-		LOADED,			// Known once input models loaded 
+		LOADED,			// Known once input models loaded
 		REALIZED,		// Known once a mapping has realized its results
 		PREDICATED,		// Not known, awaiting matching
 		OTHER			// Not known, nothing to do with mapping execution.
 	};
-	
+
 	/**
-	 * Return the color with which this glyph is drawn. 
+	 * Return a variant of this role suitable for phase.
+	 */
+	@NonNull Role asPhase(@NonNull Phase phase);
+
+	/**
+	 * Return the color with which this glyph is drawn.
 	 */
 	@NonNull String getColor();
 

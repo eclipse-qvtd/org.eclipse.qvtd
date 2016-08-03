@@ -610,6 +610,11 @@ public class Nodes
 		}
 
 		@Override
+		public @NonNull IteratorNodeRole asPhase(@NonNull Phase phase) {
+			return getIteratorNodeRole(phase, isClassNode());
+		}
+
+		@Override
 		public boolean isInternal() {
 			return true;
 		}
@@ -652,11 +657,11 @@ public class Nodes
 			//			}
 			boolean resolvedIsClassNode = !(letVariable.getType() instanceof DataType);
 			boolean resolvedIsNavigable = inNode.isNavigable();
-			LetVariableNodeRole nodeRole = getLetVariableNode(inNode.getNodeRole().getPhase(), resolvedIsNavigable, resolvedIsClassNode);
+			LetVariableNodeRole nodeRole = getLetVariableNodeRole(inNode.getNodeRole().getPhase(), resolvedIsNavigable, resolvedIsClassNode);
 			return nodeRole.createNode(region, letVariable);
 		}
 
-		public static @NonNull LetVariableNodeRole getLetVariableNode(@NonNull Phase phase, boolean isNavigable, boolean isClassNode) {
+		public static @NonNull LetVariableNodeRole getLetVariableNodeRole(@NonNull Phase phase, boolean isNavigable, boolean isClassNode) {
 			if (isNavigable) {
 				if (isClassNode) {
 					switch (phase) {
@@ -697,6 +702,11 @@ public class Nodes
 		protected LetVariableNodeRole(@NonNull Phase phase, boolean isNavigable, boolean isClassNode) {
 			super(phase, isClassNode);
 			this.isNavigable = isNavigable;
+		}
+
+		@Override
+		public @NonNull LetVariableNodeRole asPhase(@NonNull Phase phase) {
+			return getLetVariableNodeRole(phase, isNavigable(), isClassNode());
 		}
 
 		@Override
@@ -753,11 +763,12 @@ public class Nodes
 		private static final @NonNull OperationNodeRole REALIZED_OPERATION = new OperationNodeRole(Role.Phase.REALIZED);
 
 		public static @NonNull Node createOperationNode(@NonNull Region region, @NonNull String name, @NonNull TypedElement typedElement, @NonNull Node... argNodes) {
-			OperationNodeRole nodeRole = getOperationNodeRole(region, typedElement, argNodes);
+			Phase nodePhase = getOperationNodePhase(region, typedElement, argNodes);
+			OperationNodeRole nodeRole = getOperationNodeRole(nodePhase);
 			return nodeRole.createNode(region, name, typedElement);
 		}
 
-		public static @NonNull OperationNodeRole getOperationNodeRole(@NonNull Region region, @NonNull TypedElement typedElement, @NonNull Node... argNodes) {
+		public static @NonNull Phase getOperationNodePhase(@NonNull Region region, @NonNull TypedElement typedElement, @NonNull Node... argNodes) {
 			boolean isLoaded = false;
 			boolean isPredicated = false;
 			boolean isRealized = false;
@@ -784,21 +795,36 @@ public class Nodes
 				}
 			}
 			if (isRealized) {
-				return REALIZED_OPERATION;
+				return Phase.REALIZED;
 			}
 			else if (isPredicated) {
-				return PREDICATED_OPERATION;
+				return Phase.PREDICATED;
 			}
 			else if (isLoaded) {
-				return LOADED_OPERATION;
+				return Phase.LOADED;
 			}
 			else {
-				return CONSTANT_OPERATION;
+				return Phase.CONSTANT;
 			}
+		}
+
+		public static @NonNull OperationNodeRole getOperationNodeRole(@NonNull Phase phase) {
+			switch (phase) {
+				case CONSTANT: return CONSTANT_OPERATION;
+				case LOADED: return LOADED_OPERATION;
+				case PREDICATED: return PREDICATED_OPERATION;
+				case REALIZED: return REALIZED_OPERATION;
+			}
+			throw new UnsupportedOperationException();
 		}
 
 		protected OperationNodeRole(@NonNull Phase phase) {
 			super(phase);
+		}
+
+		@Override
+		public @NonNull OperationNodeRole asPhase(@NonNull Phase phase) {
+			return getOperationNodeRole(phase);
 		}
 
 		@Override

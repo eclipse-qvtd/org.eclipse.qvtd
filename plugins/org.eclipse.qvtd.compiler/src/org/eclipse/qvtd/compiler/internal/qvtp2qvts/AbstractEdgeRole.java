@@ -20,6 +20,11 @@ public abstract class AbstractEdgeRole extends AbstractRole implements EdgeRole
 	}
 
 	@Override
+	public @NonNull AbstractEdgeRole asPhase(@NonNull Phase phase) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
 	public @Nullable String getArrowhead() {
 		return null;
 	}

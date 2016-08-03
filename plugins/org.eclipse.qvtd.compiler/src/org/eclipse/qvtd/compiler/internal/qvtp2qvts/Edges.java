@@ -143,6 +143,11 @@ public class Edges
 		}
 
 		@Override
+		public @NonNull CastEdgeRole asPhase(@NonNull Phase phase) {
+			return getCastEdgeRole(phase, isNavigable());
+		}
+
+		@Override
 		public boolean isCast() {
 			return true;
 		}
@@ -182,6 +187,11 @@ public class Edges
 
 		private ExpressionEdgeRole(@NonNull Phase phase) {
 			super(phase);
+		}
+
+		@Override
+		public @NonNull ExpressionEdgeRole asPhase(@NonNull Phase phase) {
+			return getExpressionEdgeRole(phase);
 		}
 
 		@Override
@@ -229,6 +239,11 @@ public class Edges
 
 		private IteratedEdgeRole(@NonNull Phase phase) {
 			super(phase);
+		}
+
+		@Override
+		public @NonNull IteratedEdgeRole asPhase(@NonNull Phase phase) {
+			return getIteratedEdgeRole(phase);
 		}
 
 		@Override
@@ -307,6 +322,11 @@ public class Edges
 		}
 
 		@Override
+		public @NonNull NavigationEdgeRole asPhase(@NonNull Phase phase) {
+			return getNavigationEdgeRole(phase, isNavigable());
+		}
+
+		@Override
 		public @NonNull EdgeRole merge(@NonNull EdgeRole edgeRole) {
 			if (edgeRole instanceof NavigationEdgeRole) {
 				return RegionUtil.mergeToMoreKnownPhase(this, edgeRole);
@@ -341,6 +361,11 @@ public class Edges
 
 		private PredicateEdgeRole(@NonNull Phase phase) {
 			super(phase);
+		}
+
+		@Override
+		public @NonNull PredicateEdgeRole asPhase(@NonNull Phase phase) {
+			return getPredicateEdgeRole(phase);
 		}
 
 		@Override
