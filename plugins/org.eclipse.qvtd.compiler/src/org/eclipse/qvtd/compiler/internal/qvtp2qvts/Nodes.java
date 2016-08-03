@@ -156,7 +156,7 @@ public class Nodes
 
 			@Override
 			public @NonNull NodeRole merge(@NonNull NodeRole nodeRole) {
-				if (nodeRole == PatternNodeRole.REALIZED_DATATYPE_STEP) {
+				if (nodeRole == PatternNodeRole.REALIZED_UNNAVIGABLE_DATATYPE_STEP) {
 					return nodeRole;
 				}
 				if (getClass() != nodeRole.getClass()) {
@@ -178,7 +178,7 @@ public class Nodes
 			}
 
 			@Override
-			public boolean isGuardVariable() {
+			public boolean isGuard() {
 				return true;
 			}
 
@@ -719,22 +719,22 @@ public class Nodes
 
 	public static class PatternNodeRole extends AbstractVariableNodeRole
 	{
-		private static final @NonNull PatternNodeRole LOADED_CLASS_HEAD = new PatternNodeRole(Role.Phase.LOADED, true, true, true);
-		private static final @NonNull PatternNodeRole LOADED_DATATYPE_GUARD = new PatternNodeRole(Role.Phase.LOADED, false, true, false);
-		private static final @NonNull PatternNodeRole LOADED_CLASS_GUARD = new PatternNodeRole(Role.Phase.LOADED, true, true, false);
-		private static final @NonNull PatternNodeRole LOADED_DATATYPE_STEP = new PatternNodeRole(Role.Phase.LOADED, false, false, false);
-		private static final @NonNull PatternNodeRole LOADED_CLASS_STEP = new PatternNodeRole(Role.Phase.LOADED, true, false, false);
-		private static final @NonNull PatternNodeRole PREDICATED_CLASS_HEAD = new PatternNodeRole(Role.Phase.PREDICATED, true, true, true);
-		private static final @NonNull PatternNodeRole PREDICATED_DATATYPE_GUARD = new PatternNodeRole(Role.Phase.PREDICATED, false, true, false);
-		private static final @NonNull PatternNodeRole PREDICATED_CLASS_GUARD = new PatternNodeRole(Role.Phase.PREDICATED, true, true, false);
-		private static final @NonNull PatternNodeRole REALIZED_CLASS_STEP = new PatternNodeRole(Role.Phase.REALIZED, true, false, false);
-		private static final @NonNull PatternNodeRole REALIZED_DATATYPE_STEP = new PatternNodeRole(Role.Phase.REALIZED, false, false, false);
+		private static final @NonNull PatternNodeRole LOADED_NAVIGABLE_CLASS_HEAD = new PatternNodeRole(Role.Phase.LOADED, true, true, true, true);
+		private static final @NonNull PatternNodeRole LOADED_NAVIGABLE_DATATYPE_GUARD = new PatternNodeRole(Role.Phase.LOADED, false, true, true, false);
+		private static final @NonNull PatternNodeRole LOADED_NAVIGABLE_CLASS_GUARD = new PatternNodeRole(Role.Phase.LOADED, true, true, true, false);
+		private static final @NonNull PatternNodeRole LOADED_NAVIGABLE_DATATYPE_STEP = new PatternNodeRole(Role.Phase.LOADED, false, true, false, false);
+		private static final @NonNull PatternNodeRole LOADED_NAVIGABLE_CLASS_STEP = new PatternNodeRole(Role.Phase.LOADED, true, true, false, false);
+		private static final @NonNull PatternNodeRole PREDICATED_NAVIGABLE_CLASS_HEAD = new PatternNodeRole(Role.Phase.PREDICATED, true, true, true, true);
+		private static final @NonNull PatternNodeRole PREDICATED_NAVIGABLE_DATATYPE_GUARD = new PatternNodeRole(Role.Phase.PREDICATED, false, true, true, false);
+		private static final @NonNull PatternNodeRole PREDICATED_NAVIGABLE_CLASS_GUARD = new PatternNodeRole(Role.Phase.PREDICATED, true, true, true, false);
+		private static final @NonNull PatternNodeRole REALIZED_UNNAVIGABLE_CLASS_STEP = new PatternNodeRole(Role.Phase.REALIZED, true, false, false, false);
+		private static final @NonNull PatternNodeRole REALIZED_UNNAVIGABLE_DATATYPE_STEP = new PatternNodeRole(Role.Phase.REALIZED, false, false, false, false);
 
 		public static @NonNull VariableNode createGuardNode(@NonNull Region region, @NonNull VariableDeclaration guardVariable) {
 			DomainUsage domainUsage = region.getSchedulerConstants().getDomainUsage(guardVariable);
 			boolean isEnforceable = domainUsage.isOutput() || domainUsage.isMiddle();
 			boolean isClass = !(guardVariable.getType() instanceof DataType);
-			PatternNodeRole patternNodeRole = getPatternNodeRole(isEnforceable ? Phase.PREDICATED : Phase.LOADED, isClass, true, false);
+			PatternNodeRole patternNodeRole = getPatternNodeRole(isEnforceable ? Phase.PREDICATED : Phase.LOADED, isClass, true, true, false);
 			return patternNodeRole.createNode(region, guardVariable);
 		}
 
@@ -754,81 +754,117 @@ public class Nodes
 			ClassDatumAnalysis classDatumAnalysis = schedulerConstants.getClassDatumAnalysis(classDatum);
 			String name = source2targetProperty.getName();
 			assert name != null;
-			return  REALIZED_DATATYPE_STEP.createNode(region, name, classDatumAnalysis);
+			return  REALIZED_UNNAVIGABLE_DATATYPE_STEP.createNode(region, name, classDatumAnalysis);
 		}
 
 		public static @NonNull VariableNode createRealizedStepNode(@NonNull Region region, @NonNull Variable stepVariable) {
 			boolean isClass = !(stepVariable.getType() instanceof DataType);
-			PatternNodeRole patternNodeRole = getPatternNodeRole(Phase.REALIZED, isClass, false, false);
+			PatternNodeRole patternNodeRole = getPatternNodeRole(Phase.REALIZED, isClass, false, false, false);
 			return patternNodeRole.createNode(region, stepVariable);
 		}
 
 		public static @NonNull VariableNode createUnrealizedStepNode(@NonNull Region region, @NonNull VariableDeclaration stepVariable) {
 			boolean isClass = !(stepVariable.getType() instanceof DataType);
-			return (isClass ? LOADED_CLASS_STEP : LOADED_DATATYPE_STEP).createNode(region, stepVariable);
+			return (isClass ? LOADED_NAVIGABLE_CLASS_STEP : LOADED_NAVIGABLE_DATATYPE_STEP).createNode(region, stepVariable);
 		}
 
-		public static @NonNull PatternNodeRole getPatternNodeRole(@NonNull Phase phase, boolean isClass, boolean isGuard, boolean isHead) {
-			if (isHead) {
-				if (isClass) {
-					switch (phase) {
-						case LOADED: return LOADED_CLASS_HEAD;
-						case PREDICATED: return PREDICATED_CLASS_HEAD;
+		public static @NonNull PatternNodeRole getPatternNodeRole(@NonNull Phase phase, boolean isClass, boolean isNavigable, boolean isGuard, boolean isHead) {
+			if (isNavigable) {
+				if (isHead) {
+					if (isClass) {
+						switch (phase) {
+							case LOADED: return LOADED_NAVIGABLE_CLASS_HEAD;
+							case PREDICATED: return PREDICATED_NAVIGABLE_CLASS_HEAD;
+						}
+					}
+					else {
+						switch (phase) {
+						}
+					}
+				}
+				else if (isGuard) {
+					if (isClass) {
+						switch (phase) {
+							case LOADED: return LOADED_NAVIGABLE_CLASS_GUARD;
+							case PREDICATED: return PREDICATED_NAVIGABLE_CLASS_GUARD;
+						}
+					}
+					else {
+						switch (phase) {
+							case LOADED: return LOADED_NAVIGABLE_DATATYPE_GUARD;
+							case PREDICATED: return PREDICATED_NAVIGABLE_DATATYPE_GUARD;
+						}
 					}
 				}
 				else {
-					switch (phase) {
+					if (isClass) {
+						switch (phase) {
+							case LOADED: return LOADED_NAVIGABLE_CLASS_STEP;
+						}
 					}
-				}
-			}
-			else if (isGuard) {
-				if (isClass) {
-					switch (phase) {
-						case LOADED: return LOADED_CLASS_GUARD;
-						case PREDICATED: return PREDICATED_CLASS_GUARD;
-					}
-				}
-				else {
-					switch (phase) {
-						case LOADED: return LOADED_DATATYPE_GUARD;
-						case PREDICATED: return PREDICATED_DATATYPE_GUARD;
+					else {
+						switch (phase) {
+							case LOADED: return LOADED_NAVIGABLE_DATATYPE_STEP;
+						}
 					}
 				}
 			}
 			else {
-				if (isClass) {
-					switch (phase) {
-						case LOADED: return LOADED_CLASS_STEP;
-						case REALIZED: return REALIZED_CLASS_STEP;
+				if (isHead) {
+					if (isClass) {
+						switch (phase) {
+						}
+					}
+					else {
+						switch (phase) {
+						}
+					}
+				}
+				else if (isGuard) {
+					if (isClass) {
+						switch (phase) {
+						}
+					}
+					else {
+						switch (phase) {
+						}
 					}
 				}
 				else {
-					switch (phase) {
-						case LOADED: return LOADED_DATATYPE_STEP;
-						case REALIZED: return REALIZED_DATATYPE_STEP;
+					if (isClass) {
+						switch (phase) {
+							case REALIZED: return REALIZED_UNNAVIGABLE_CLASS_STEP;
+						}
+					}
+					else {
+						switch (phase) {
+							case REALIZED: return REALIZED_UNNAVIGABLE_DATATYPE_STEP;
+						}
 					}
 				}
 			}
 			throw new UnsupportedOperationException();
 		}
 
+		private final boolean isNavigable;
 		private final boolean isGuard;
 		private final boolean isHead;
 
-		private PatternNodeRole(@NonNull Phase phase, boolean isClass, boolean isGuard, boolean isHead) {
+		private PatternNodeRole(@NonNull Phase phase, boolean isClass, boolean isNavigable, boolean isGuard, boolean isHead) {
 			super(phase, isClass);
 			assert !(!isGuard && isHead);
+			this.isNavigable = isNavigable;
 			this.isGuard = isGuard;
 			this.isHead = isHead;
 		}
 
 		@Override
 		public @NonNull PatternNodeRole asPhase(@NonNull Phase phase) {
-			return getPatternNodeRole(phase, isClassNode, isGuard, isHead);
+			return getPatternNodeRole(phase, isClassNode, isNavigable, isGuard, isHead);
 		}
 
 		@Override
-		public boolean isGuardVariable() {
+		public boolean isGuard() {
 			return isGuard;
 		}
 
@@ -839,49 +875,42 @@ public class Nodes
 
 		@Override
 		public boolean isMatchable() {
-			return true;
-		}
-
-		@Override
-		public boolean isNavigable() {
 			return isGuard;
 		}
 
 		@Override
-		public @NonNull NodeRole merge(@NonNull NodeRole nodeRole) {  // FIXME Rationalize this legacy
-			if (isHead) {
-				if ((phase == Phase.LOADED) && (nodeRole.getPhase() == Phase.LOADED) && (nodeRole.isGuardVariable() && !nodeRole.isHead())) {
-					return nodeRole;
-				}
-				//				if ((phase == Phase.PREDICATED) && (nodeRole.getPhase() == Phase.PREDICATED) && (nodeRole instanceof GuardNodeRole)) {
-				//					return nodeRole;
-				//				}
+		public boolean isNavigable() {
+			return isNavigable;
+		}
+
+		@Override
+		public @NonNull NodeRole merge(@NonNull NodeRole nodeRole) {
+			assert isClass() == nodeRole.isClass();
+			Phase mergedPhase = RegionUtil.mergeToMoreKnownPhase(this, nodeRole).getPhase();
+			boolean mergedNavigable;
+			boolean mergedGuard;
+			boolean mergedHead;
+			if (mergedPhase == Phase.REALIZED) {
+				mergedNavigable = false;
+				mergedGuard = false;
+				mergedHead = false;
 			}
 			else {
-				if (nodeRole.isConstant()) {
-					return nodeRole;
-				}
-				if ((phase == nodeRole.getPhase()) && nodeRole.isHead()) {
-					return this;
-				}
-				//				if ((phase == Phase.PREDICATED) && (nodeRole.getPhase() == Phase.PREDICATED) && nodeRole.isHead()) {
-				//					return this;
-				//				}
+				mergedNavigable = isNavigable || nodeRole.isNavigable();
+				mergedGuard = isGuard || nodeRole.isGuard();
+				mergedHead = isHead && nodeRole.isHead();
 			}
-			if ((phase == Phase.PREDICATED) && !nodeRole.isGuardVariable() && nodeRole.isRealized()) { //((nodeRole == REALIZED_CLASS_STEP) || (nodeRole == REALIZED_DATATYPE_STEP))) {
-				return nodeRole;
-			}
-			return super.merge(nodeRole);
+			return getPatternNodeRole(mergedPhase, isClass(), mergedNavigable, mergedGuard, mergedHead);
 		}
 
 		@Override
 		public @NonNull NodeRole resetHead() {
-			return getPatternNodeRole(phase, isClassNode, isGuard, false);
+			return getPatternNodeRole(phase, isClassNode, isNavigable, isGuard, false);
 		}
 
 		@Override
 		public @NonNull NodeRole setHead() {
-			return getPatternNodeRole(phase, isClassNode, isGuard, true);
+			return getPatternNodeRole(phase, isClassNode, isNavigable, isGuard, true);
 		}
 
 		@Override
@@ -977,7 +1006,7 @@ public class Nodes
 
 		@Override
 		public @NonNull NodeRole merge(@NonNull NodeRole nodeRole) {
-			if (nodeRole.isGuardVariable() && !nodeRole.isExtraGuardVariable()) {
+			if (nodeRole.isGuard() && !nodeRole.isExtraGuardVariable()) {
 				return this;
 			}
 			if (nodeRole instanceof StepNodeRoleFactory.AbstractStepNodeRole) {

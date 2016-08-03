@@ -175,16 +175,6 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 		}
 	}
 
-	public static final class IsGuardVariableNodePredicate implements Predicate<@NonNull Node>
-	{
-		public static final @NonNull IsGuardVariableNodePredicate INSTANCE = new IsGuardVariableNodePredicate();
-
-		@Override
-		public boolean apply(@NonNull Node node) {
-			return node.isGuardVariable();
-		}
-	}
-
 	public static final class IsMatchableNodePredicate implements Predicate<@NonNull Node>
 	{
 		public static final @NonNull IsMatchableNodePredicate INSTANCE = new IsMatchableNodePredicate();
@@ -1709,11 +1699,6 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 	@Override
 	public final @NonNull Iterable<@NonNull Node> getGuardNodes() {
 		return Iterables.filter(nodes, IsGuardNodePredicate.INSTANCE);
-	}
-
-	@Override
-	public final @NonNull Iterable<@NonNull Node> getGuardVariableNodes() {
-		return Iterables.filter(nodes, IsGuardVariableNodePredicate.INSTANCE);
 	}
 
 	//	@Override

@@ -568,12 +568,7 @@ public abstract class AbstractNode implements Node
 
 	@Override
 	public boolean isGuard() {
-		return nodeRole.isGuardVariable() || nodeRole.isHead();
-	}
-
-	@Override
-	public boolean isGuardVariable() {
-		return nodeRole.isGuardVariable();
+		return nodeRole.isGuard();
 	}
 
 	@Override

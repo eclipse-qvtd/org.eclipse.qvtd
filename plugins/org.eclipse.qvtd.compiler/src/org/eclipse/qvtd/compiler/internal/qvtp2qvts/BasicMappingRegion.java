@@ -307,8 +307,8 @@ public class BasicMappingRegion extends AbstractMappingRegion
 				//		assert guardVariables.contains(sourceVariable);
 				Node sourceNode = getReferenceNode(sourceVariable);
 				Node targetNode = boundVariable != null ? getReferenceNode(boundVariable) : Nodes.NULL.createNode(this);
-				assert sourceNode.isGuardVariable();
-				assert (boundVariable == null) || targetNode.isGuardVariable();
+				assert sourceNode.isGuard();
+				assert (boundVariable == null) || targetNode.isGuard();
 				assert sourceNode.isClass();
 				if (!referredProperty.isIsMany()) {
 					Edge predicateEdge = sourceNode.getPredicateEdge(referredProperty);

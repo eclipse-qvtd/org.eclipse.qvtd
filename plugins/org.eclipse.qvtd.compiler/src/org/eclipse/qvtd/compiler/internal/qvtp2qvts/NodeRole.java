@@ -48,7 +48,7 @@ public interface NodeRole extends Role
 
 	boolean isExtraGuardVariable();
 
-	boolean isGuardVariable();
+	boolean isGuard();
 
 	boolean isHead();
 

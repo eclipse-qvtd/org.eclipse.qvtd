@@ -121,11 +121,6 @@ public interface Node extends ConnectionEnd, GraphStringBuilder.GraphNode, Namea
 	boolean isGuard();
 
 	/**
-	 * Return true if this node is a guard variable.
-	 */
-	boolean isGuardVariable();
-
-	/**
 	 * Return true if this node is part of a head group from which many other nodes are navigable.
 	 */
 	boolean isHead();
