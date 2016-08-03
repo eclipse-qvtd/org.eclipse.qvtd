@@ -766,16 +766,31 @@ public class Nodes
 		private static final @NonNull PatternNodeRole LOADED_CLASS_HEAD = new PatternNodeRole(Role.Phase.LOADED, true, true, true);
 		private static final @NonNull PatternNodeRole LOADED_DATATYPE_GUARD = new PatternNodeRole(Role.Phase.LOADED, false, true, false);
 		private static final @NonNull PatternNodeRole LOADED_CLASS_GUARD = new PatternNodeRole(Role.Phase.LOADED, true, true, false);
+		private static final @NonNull PatternNodeRole LOADED_DATATYPE_STEP = new PatternNodeRole(Role.Phase.LOADED, false, false, false);
+		private static final @NonNull PatternNodeRole LOADED_CLASS_STEP = new PatternNodeRole(Role.Phase.LOADED, true, false, false);
 		private static final @NonNull PatternNodeRole PREDICATED_CLASS_HEAD = new PatternNodeRole(Role.Phase.PREDICATED, true, true, true);
 		private static final @NonNull PatternNodeRole PREDICATED_DATATYPE_GUARD = new PatternNodeRole(Role.Phase.PREDICATED, false, true, false);
 		private static final @NonNull PatternNodeRole PREDICATED_CLASS_GUARD = new PatternNodeRole(Role.Phase.PREDICATED, true, true, false);
+		private static final @NonNull PatternNodeRole REALIZED_CLASS_STEP = new PatternNodeRole(Role.Phase.REALIZED, true, false, false);
+		private static final @NonNull PatternNodeRole REALIZED_DATATYPE_STEP = new PatternNodeRole(Role.Phase.REALIZED, false, false, false);
 
 		public static @NonNull VariableNode createGuardNode(@NonNull Region region, @NonNull VariableDeclaration guardVariable) {
 			DomainUsage domainUsage = region.getSchedulerConstants().getDomainUsage(guardVariable);
 			boolean isEnforceable = domainUsage.isOutput() || domainUsage.isMiddle();
 			boolean isClass = !(guardVariable.getType() instanceof DataType);
-			PatternNodeRole guardNodeRole = getPatternNodeRole(isEnforceable ? Phase.PREDICATED : Phase.LOADED, isClass, true, false);
-			return guardNodeRole.createNode(region, guardVariable);
+			PatternNodeRole patternNodeRole = getPatternNodeRole(isEnforceable ? Phase.PREDICATED : Phase.LOADED, isClass, true, false);
+			return patternNodeRole.createNode(region, guardVariable);
+		}
+
+		public static @NonNull VariableNode createRealizedStepNode(@NonNull Region region, @NonNull Variable stepVariable) {
+			boolean isClass = !(stepVariable.getType() instanceof DataType);
+			PatternNodeRole patternNodeRole = getPatternNodeRole(Phase.REALIZED, isClass, false, false);
+			return patternNodeRole.createNode(region, stepVariable);
+		}
+
+		public static @NonNull VariableNode createUnrealizedStepNode(@NonNull Region region, @NonNull VariableDeclaration stepVariable) {
+			boolean isClass = !(stepVariable.getType() instanceof DataType);
+			return (isClass ? LOADED_CLASS_STEP : LOADED_DATATYPE_STEP).createNode(region, stepVariable);
 		}
 
 		public static @NonNull PatternNodeRole getPatternNodeRole(@NonNull Phase phase, boolean isClass, boolean isGuard, boolean isHead) {
@@ -791,7 +806,7 @@ public class Nodes
 					}
 				}
 			}
-			else {
+			else if (isGuard) {
 				if (isClass) {
 					switch (phase) {
 						case LOADED: return LOADED_CLASS_GUARD;
@@ -802,6 +817,20 @@ public class Nodes
 					switch (phase) {
 						case LOADED: return LOADED_DATATYPE_GUARD;
 						case PREDICATED: return PREDICATED_DATATYPE_GUARD;
+					}
+				}
+			}
+			else {
+				if (isClass) {
+					switch (phase) {
+						case LOADED: return LOADED_CLASS_STEP;
+						case REALIZED: return REALIZED_CLASS_STEP;
+					}
+				}
+				else {
+					switch (phase) {
+						case LOADED: return LOADED_DATATYPE_STEP;
+						case REALIZED: return REALIZED_DATATYPE_STEP;
 					}
 				}
 			}
@@ -840,7 +869,7 @@ public class Nodes
 
 		@Override
 		public boolean isNavigable() {
-			return true;
+			return isGuard;
 		}
 
 		@Override
@@ -864,7 +893,7 @@ public class Nodes
 				//					return this;
 				//				}
 			}
-			if ((phase == Phase.PREDICATED) && (nodeRole == REALIZED_VARIABLE)) {
+			if ((phase == Phase.PREDICATED) && !nodeRole.isGuardVariable() && nodeRole.isRealized()) { //((nodeRole == REALIZED_CLASS_STEP) || (nodeRole == REALIZED_DATATYPE_STEP))) {
 				return nodeRole;
 			}
 			return super.merge(nodeRole);
@@ -882,7 +911,7 @@ public class Nodes
 
 		@Override
 		public String toString() {
-			return phase + (isClassNode ? "-Class" : "-DataType") + (isHead ? "Head-" : isGuard ? "Guard-" : "Pattern-") + getClass().getSimpleName();
+			return phase + (isClassNode ? "-Class" : "-DataType") + (isHead ? "Head-" : isGuard ? "Guard-" : "Step-") + getClass().getSimpleName();
 		}
 	}
 
@@ -1139,33 +1168,6 @@ public class Nodes
 		}
 	}
 
-	public static final class UnrealizedVariableNodeRoleFactory
-	{
-		private static final class UnrealizedVariableNodeRole extends AbstractVariableNodeRole
-		{
-			protected UnrealizedVariableNodeRole(boolean isClassNode) {
-				super(Role.Phase.LOADED, isClassNode);
-			}
-		}
-
-		private static final @NonNull UnrealizedVariableNodeRole UNREALIZED_DATATYPE_VARIABLE = new UnrealizedVariableNodeRole(false);
-		private static final @NonNull UnrealizedVariableNodeRole UNREALIZED_CLASS_VARIABLE = new UnrealizedVariableNodeRole(true);
-
-		private final @Nullable Boolean isClassNode;
-
-		public UnrealizedVariableNodeRoleFactory(@Nullable Boolean isClassNode) {
-			this.isClassNode = isClassNode;
-		}
-
-		public @NonNull Node createNode(@NonNull Region region, @NonNull Variable variable) {
-			Boolean resolvedIsClassNode = isClassNode;
-			if (resolvedIsClassNode == null) {
-				resolvedIsClassNode = !(variable.getType() instanceof DataType);
-			}
-			return (resolvedIsClassNode ? UNREALIZED_CLASS_VARIABLE : UNREALIZED_DATATYPE_VARIABLE).createNode(region, variable);
-		}
-	}
-
 	public static final @NonNull AttributeNodeRoleFactory ATTRIBUTE = new AttributeNodeRoleFactory(null);
 	public static final @NonNull NodeRole COMPOSING = new ComposingNodeRole();
 	public static final @NonNull ElementNodeRoleFactory ELEMENT = new ElementNodeRoleFactory();
@@ -1178,11 +1180,9 @@ public class Nodes
 	//	public static final @NonNull PortNodeRoleFactory OUTPUT = new PortNodeRoleFactory(false);
 	public static final @NonNull ParameterNodeRoleFactory PARAMETER = new ParameterNodeRoleFactory(null);
 	public static final AttributeNodeRoleFactory.@NonNull RealizedDataTypeNodeRole REALIZED_DATATYPE = new AttributeNodeRoleFactory.RealizedDataTypeNodeRole();
-	public static final @NonNull AbstractVariableNodeRole REALIZED_VARIABLE = new RealizedVariableNodeRole();
 	public static final @NonNull StepNodeRoleFactory STEP = new StepNodeRoleFactory(null);
 	public static final @NonNull TrueNodeRole TRUE = new TrueNodeRole();
 	public static final @NonNull NodeRole UNKNOWN = new UnknownNodeRole();
 	public static final @NonNull AttributeNodeRoleFactory UNNAVIGABLE_DATATYPE = new AttributeNodeRoleFactory(false);
 	public static final @NonNull StepNodeRoleFactory UNNAVIGABLE_STEP = new StepNodeRoleFactory(false);
-	public static final @NonNull UnrealizedVariableNodeRoleFactory UNREALIZED_VARIABLE = new UnrealizedVariableNodeRoleFactory(null);
 }
