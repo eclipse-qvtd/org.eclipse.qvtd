@@ -97,7 +97,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 
 		@Override
 		protected @NonNull Node createStepNode(@NonNull String name, @NonNull CallExp callExp, @NonNull Node sourceNode) {
-			return Nodes.UNNAVIGABLE_STEP.createNode(context, name, callExp, sourceNode);
+			return Nodes.PatternNodeRole.createStepNode(context, name, callExp, sourceNode, false);
 		}
 	}
 
@@ -258,7 +258,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 	}
 
 	protected @NonNull Node createAttributeNode(@NonNull Node sourceNode, @NonNull NavigationCallExp callExp) {
-		return Nodes.ATTRIBUTE.createNode(context, sourceNode, callExp);
+		return Nodes.PatternNodeRole.createDataTypeNode(context, sourceNode, callExp, null);
 	}
 
 	protected @NonNull Node createConnectedOperationNode(@NonNull String name, @NonNull TypedElement typedElement, @NonNull Node @NonNull ... sourceAndArgumentNodes) {
@@ -313,7 +313,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 	}
 
 	protected @NonNull Node createNavigableAttributeNode(@NonNull Node sourceNode, @NonNull Property source2targetProperty) {
-		return Nodes.NAVIGABLE_DATATYPE.createNode(context, sourceNode, source2targetProperty);
+		return Nodes.PatternNodeRole.createDataTypeNode(context, sourceNode, source2targetProperty, true);
 	}
 
 	protected @NonNull NavigationEdge createNavigableNavigationEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
@@ -351,11 +351,11 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 	}
 
 	protected @NonNull Node createPredicatedClassNode(@NonNull Node parentNode, @NonNull NavigationAssignment navigationAssignment) {
-		return Nodes.AttributeNodeRoleFactory.PREDICATED_CLASS.createNode(context, parentNode, navigationAssignment);
+		return Nodes.PREDICATED_CLASS.createNode(context, parentNode, navigationAssignment);
 	}
 
 	protected @NonNull Node createPredicatedClassNode(@NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
-		return Nodes.AttributeNodeRoleFactory.PREDICATED_CLASS.createNode(context, name, classDatumAnalysis);
+		return Nodes.PREDICATED_CLASS.createNode(context, name, classDatumAnalysis);
 	}
 
 	protected @NonNull Edge createRealizedArgumentEdge(@NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode) {
@@ -373,7 +373,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 	}
 
 	protected @NonNull Node createStepNode(@NonNull String name, @NonNull CallExp callExp, @NonNull Node sourceNode) {
-		return Nodes.STEP.createNode(context, name, callExp, sourceNode);
+		return Nodes.PatternNodeRole.createStepNode(context, name, callExp, sourceNode, sourceNode.isNavigable());
 	}
 
 	protected @Nullable Node findOperationNode(@NonNull String name, @NonNull Node @NonNull ... sourceAndArgumentNodes) {

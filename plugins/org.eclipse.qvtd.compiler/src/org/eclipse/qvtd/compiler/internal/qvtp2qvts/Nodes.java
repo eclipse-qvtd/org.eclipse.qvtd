@@ -69,223 +69,7 @@ public class Nodes
 
 		@Override
 		public boolean isClass() {
-			//			return !(classDatumAnalysis.getClassDatum().getType() instanceof DataType);
 			return isClassNode;
-		}
-	}
-
-	public static final class AttributeNodeRoleFactory
-	{
-		private static abstract class AbstractDataTypeNodeRole extends AbstractSimpleNodeRole
-		{
-			private final boolean isNavigable;
-
-			protected AbstractDataTypeNodeRole(@NonNull Phase phase, boolean isNavigable) {
-				super(phase);
-				this.isNavigable = isNavigable;
-			}
-
-			@Override
-			public boolean isDataType() {
-				return true;
-			}
-
-			@Override
-			public boolean isNavigable() {
-				return isNavigable;
-			}
-
-			@Override
-			public String toString() {
-				return phase + (isNavigable ? "-NAVIGABLE-" : "-UNNAVIGABLE-") + getClass().getSimpleName();
-			}
-		}
-
-		public static class DataTypeNodeRole extends AbstractDataTypeNodeRole
-		{
-			private boolean isDataType;
-
-			protected DataTypeNodeRole(@NonNull Phase phase, boolean isDataType, boolean isNavigable) {
-				super(phase, isNavigable);
-				this.isDataType = isDataType;
-			}
-
-			public @NonNull Node createNode(@NonNull Region region, @NonNull Node parentNode, @NonNull NavigationCallExp navigationCallExp) {
-				assert parentNode.isClass();
-				//				SchedulerConstants schedulerConstants = region.getSchedulerConstants();
-				Property referredProperty = PivotUtil.getReferredProperty(navigationCallExp);
-				assert referredProperty != null;
-				//				Type type = navigationCallExp.getType();
-				//				assert type != null;
-				//				ClassDatum classDatum = schedulerConstants.getClassDatum(type);
-				//				DomainUsage domainUsage = parentNode.getClassDatumAnalysis().getDomainUsage();
-				//				ClassDatumAnalysis classDatumAnalysis = schedulerConstants.getClassDatumAnalysis(classDatum, domainUsage);
-				String name = referredProperty.getName();
-				assert name != null;
-				return createNode(region, name, navigationCallExp);
-			}
-
-			public @NonNull Node createNode(@NonNull Region region, @NonNull Node parentNode, @NonNull Property property) {
-				//				assert parentNode.isClassNode();  -- computed attaributes have an operation parentNode
-				SchedulerConstants schedulerConstants = region.getSchedulerConstants();
-				org.eclipse.ocl.pivot.Class type = (org.eclipse.ocl.pivot.Class)property.getType();
-				assert type != null;
-				Type elementType = QVTbaseUtil.getElementalType(type);
-				TypedModel typedModel = elementType instanceof DataType ? region.getSchedulerConstants().getDomainAnalysis().getPrimitiveTypeModel() : parentNode.getClassDatumAnalysis().getTypedModel();
-				//				DomainUsage usage = region.getSchedulerConstants().getDomainAnalysis().getUsage(type);
-				//				assert usage != null;
-				//				TypedModel typedModel = usage.getTypedModel();
-				assert typedModel != null;
-				ClassDatum classDatum = schedulerConstants.getClassDatum(type, typedModel);
-				//				DomainUsage domainUsage = parentNode.getClassDatumAnalysis().getDomainUsage();
-				ClassDatumAnalysis classDatumAnalysis = schedulerConstants.getClassDatumAnalysis(classDatum);
-				String name = property.getName();
-				assert name != null;
-				return createNode(region, name, classDatumAnalysis);
-			}
-
-			@Override
-			public boolean isMatchable() {
-				return true;
-			}
-
-			@Override
-			public @Nullable String getStyle() {
-				return isDataType ? "rounded" : null;
-			}
-
-			@Override
-			public @NonNull NodeRole merge(@NonNull NodeRole nodeRole) {
-				if (nodeRole == PatternNodeRole.REALIZED_UNNAVIGABLE_DATATYPE_STEP) {
-					return nodeRole;
-				}
-				if (getClass() != nodeRole.getClass()) {
-					throw new IllegalStateException(this + " cannot be merged");
-				}
-				return this.compareTo(nodeRole) < 0 ? this : nodeRole;
-			}
-		}
-
-		public static class ExtraGuardNodeRole extends AbstractDataTypeNodeRole
-		{
-			protected ExtraGuardNodeRole() {
-				super(Role.Phase.PREDICATED, false);
-			}
-
-			@Override
-			public boolean isExtraGuardVariable() {
-				return true;
-			}
-
-			@Override
-			public boolean isGuard() {
-				return true;
-			}
-
-			@Override
-			public boolean isHead() {
-				return true;
-			}
-		}
-
-		public static final class PredicatedInternalNodeRole extends AbstractDataTypeNodeRole
-		{
-			protected PredicatedInternalNodeRole() {
-				super(Role.Phase.PREDICATED, false);
-			}
-
-			public @NonNull Node createNode(@NonNull Region region, @NonNull Node parentNode, @NonNull NavigationAssignment navigationAssignment) {
-				assert parentNode.isClass();
-				SchedulerConstants schedulerConstants = region.getSchedulerConstants();
-				Property property = QVTcoreBaseUtil.getTargetProperty(navigationAssignment);
-				assert property != null;
-				org.eclipse.ocl.pivot.Class type = (org.eclipse.ocl.pivot.Class)property.getType();
-				assert type != null;
-				TypedModel typedModel = parentNode.getClassDatumAnalysis().getTypedModel();
-				ClassDatum classDatum = schedulerConstants.getClassDatum(type, typedModel);
-				//				DomainUsage domainUsage = parentNode.getClassDatumAnalysis().getDomainUsage();
-				ClassDatumAnalysis classDatumAnalysis = schedulerConstants.getClassDatumAnalysis(classDatum);
-				String name = property.getName();
-				assert name != null;
-				return createNode(region, name, classDatumAnalysis);
-			}
-
-			@Override
-			public boolean isInternal() {
-				return true;
-			}
-
-			/*			@Override
-			public @NonNull NodeRole merge(@NonNull NodeRole nodeRole) {
-				if (nodeRole.getPhase() == Phase.PREDICATED) {
-					return this;
-				}
-				return super.merge(nodeRole);
-			} */
-
-			@Override
-			public String toString() {
-				return getClass().getSimpleName();
-			}
-		}
-
-		private static final @NonNull DataTypeNodeRole LOADED_NAVIGABLE_DATATYPE = new DataTypeNodeRole(Role.Phase.LOADED, true, true);
-		private static final @NonNull DataTypeNodeRole LOADED_UNNAVIGABLE_DATATYPE = new DataTypeNodeRole(Role.Phase.LOADED, true, false);
-		private static final @NonNull DataTypeNodeRole PREDICATED_NAVIGABLE_DATATYPE = new DataTypeNodeRole(Role.Phase.PREDICATED, true, true);
-		private static final @NonNull DataTypeNodeRole PREDICATED_UNNAVIGABLE_DATATYPE = new DataTypeNodeRole(Role.Phase.PREDICATED, true, false);
-		public static final @NonNull PredicatedInternalNodeRole PREDICATED_CLASS = new PredicatedInternalNodeRole();
-
-		private final @Nullable Boolean isNavigable;
-
-		public AttributeNodeRoleFactory(@Nullable Boolean isNavigable) {
-			this.isNavigable = isNavigable;
-		}
-
-		public @NonNull Node createNode(@NonNull Region region, @NonNull Node parentNode, @NonNull NavigationCallExp navigationCallExp) {
-			boolean resolvedNavigable = isNavigable != null ? isNavigable.booleanValue() : parentNode.isNavigable();
-			Property referredProperty = PivotUtil.getReferredProperty(navigationCallExp);
-			assert referredProperty != null;
-			boolean isDirty = region.getSchedulerConstants().isDirty(referredProperty);
-			DataTypeNodeRole attributeNodeRole = getAttributeNodeRole(parentNode, resolvedNavigable, isDirty);
-			if (attributeNodeRole != null) {
-				return attributeNodeRole.createNode(parentNode.getRegion(), parentNode, navigationCallExp);
-			}
-			if (parentNode.isRealized()) {
-				return PatternNodeRole.createRealizedDataTypeNode(parentNode.getRegion(), parentNode, referredProperty);
-			}
-			else {
-				throw new UnsupportedOperationException();
-			}
-		}
-
-		public @NonNull Node createNode(@NonNull Region region, @NonNull Node parentNode, @NonNull Property property) {
-			boolean resolvedNavigable = isNavigable != null ? isNavigable.booleanValue() : parentNode.isNavigable();
-			boolean isDirty = region.getSchedulerConstants().isDirty(property);
-			DataTypeNodeRole attributeNodeRole = getAttributeNodeRole(parentNode, resolvedNavigable, isDirty);
-			if (attributeNodeRole != null) {
-				return attributeNodeRole.createNode(parentNode.getRegion(), parentNode, property);
-			}
-			if (parentNode.isRealized()) {
-				return PatternNodeRole.createRealizedDataTypeNode(parentNode.getRegion(), parentNode, property);
-			}
-			else {
-				throw new UnsupportedOperationException();
-			}
-		}
-
-		private @Nullable DataTypeNodeRole getAttributeNodeRole(@NonNull Node sourceNode, boolean isNavigable, boolean isDirty) {
-			if (sourceNode.isLoaded()) {
-				if (!isDirty) {
-					return isNavigable ? LOADED_NAVIGABLE_DATATYPE : LOADED_UNNAVIGABLE_DATATYPE;
-				}
-				else {
-					return isNavigable ? PREDICATED_NAVIGABLE_DATATYPE : PREDICATED_UNNAVIGABLE_DATATYPE;
-				}
-			}
-			else if (sourceNode.isPredicated()) {
-				return isNavigable ? PREDICATED_NAVIGABLE_DATATYPE : PREDICATED_UNNAVIGABLE_DATATYPE;
-			}
-			return null;
 		}
 	}
 
@@ -361,9 +145,6 @@ public class Nodes
 				if (nodeRole.isHead()) {
 					return this;
 				}
-				if (nodeRole instanceof RealizedVariableNodeRole) {
-					return nodeRole;
-				}
 				return super.merge(nodeRole);
 			}
 		}
@@ -400,6 +181,33 @@ public class Nodes
 		@Override
 		public @NonNull String getShape() {
 			return "circle";
+		}
+	}
+
+	public static class ExtraGuardNodeRole extends AbstractSimpleNodeRole
+	{
+		protected ExtraGuardNodeRole() {
+			super(Role.Phase.PREDICATED);
+		}
+
+		@Override
+		public boolean isDataType() {
+			return true;
+		}
+
+		@Override
+		public boolean isExtraGuardVariable() {
+			return true;
+		}
+
+		@Override
+		public boolean isGuard() {
+			return true;
+		}
+
+		@Override
+		public boolean isHead() {
+			return true;
 		}
 	}
 
@@ -727,8 +535,63 @@ public class Nodes
 		private static final @NonNull PatternNodeRole PREDICATED_NAVIGABLE_CLASS_HEAD = new PatternNodeRole(Role.Phase.PREDICATED, true, true, true, true);
 		private static final @NonNull PatternNodeRole PREDICATED_NAVIGABLE_DATATYPE_GUARD = new PatternNodeRole(Role.Phase.PREDICATED, false, true, true, false);
 		private static final @NonNull PatternNodeRole PREDICATED_NAVIGABLE_CLASS_GUARD = new PatternNodeRole(Role.Phase.PREDICATED, true, true, true, false);
+		private static final @NonNull PatternNodeRole PREDICATED_NAVIGABLE_DATATYPE_STEP = new PatternNodeRole(Role.Phase.PREDICATED, false, true, false, false);
+		private static final @NonNull PatternNodeRole PREDICATED_NAVIGABLE_CLASS_STEP = new PatternNodeRole(Role.Phase.PREDICATED, true, true, false, false);
+		private static final @NonNull PatternNodeRole LOADED_UNNAVIGABLE_DATATYPE_STEP = new PatternNodeRole(Role.Phase.LOADED, false, false, false, false);
+		private static final @NonNull PatternNodeRole LOADED_UNNAVIGABLE_CLASS_STEP = new PatternNodeRole(Role.Phase.LOADED, true, false, false, false);
+		private static final @NonNull PatternNodeRole PREDICATED_UNNAVIGABLE_DATATYPE_STEP = new PatternNodeRole(Role.Phase.PREDICATED, false, false, false, false);
+		private static final @NonNull PatternNodeRole PREDICATED_UNNAVIGABLE_CLASS_STEP = new PatternNodeRole(Role.Phase.PREDICATED, true, false, false, false);
 		private static final @NonNull PatternNodeRole REALIZED_UNNAVIGABLE_CLASS_STEP = new PatternNodeRole(Role.Phase.REALIZED, true, false, false, false);
 		private static final @NonNull PatternNodeRole REALIZED_UNNAVIGABLE_DATATYPE_STEP = new PatternNodeRole(Role.Phase.REALIZED, false, false, false, false);
+
+		public static @NonNull Node createDataTypeNode(@NonNull Region region, @NonNull Node parentNode, @NonNull NavigationCallExp navigationCallExp, @Nullable Boolean isNavigable) {
+			boolean resolvedNavigable = isNavigable != null ? isNavigable.booleanValue() : parentNode.isNavigable();
+			Property referredProperty = PivotUtil.getReferredProperty(navigationCallExp);
+			assert referredProperty != null;
+			boolean isDirty = region.getSchedulerConstants().isDirty(referredProperty);
+			PatternNodeRole attributeNodeRole = getDataTypeNodeRole(parentNode, resolvedNavigable, isDirty);
+			if (attributeNodeRole != null) {
+				assert parentNode.isClass();
+				String name = referredProperty.getName();
+				assert name != null;
+				return attributeNodeRole.createNode(region, name, navigationCallExp);
+			}
+			if (parentNode.isRealized()) {
+				return createRealizedDataTypeNode(parentNode.getRegion(), parentNode, referredProperty);
+			}
+			else {
+				throw new UnsupportedOperationException();
+			}
+		}
+
+		public static @NonNull Node createDataTypeNode(@NonNull Region region, @NonNull Node parentNode, @NonNull Property property, @Nullable Boolean isNavigable) {
+			boolean resolvedNavigable = isNavigable != null ? isNavigable.booleanValue() : parentNode.isNavigable();
+			boolean isDirty = region.getSchedulerConstants().isDirty(property);
+			PatternNodeRole attributeNodeRole = getDataTypeNodeRole(parentNode, resolvedNavigable, isDirty);
+			if (attributeNodeRole != null) {
+				SchedulerConstants schedulerConstants = region.getSchedulerConstants();
+				org.eclipse.ocl.pivot.Class type = (org.eclipse.ocl.pivot.Class)property.getType();
+				assert type != null;
+				Type elementType = QVTbaseUtil.getElementalType(type);
+				TypedModel typedModel = elementType instanceof DataType ? region.getSchedulerConstants().getDomainAnalysis().getPrimitiveTypeModel() : parentNode.getClassDatumAnalysis().getTypedModel();
+				//				DomainUsage usage = region.getSchedulerConstants().getDomainAnalysis().getUsage(type);
+				//				assert usage != null;
+				//				TypedModel typedModel = usage.getTypedModel();
+				assert typedModel != null;
+				ClassDatum classDatum = schedulerConstants.getClassDatum(type, typedModel);
+				//				DomainUsage domainUsage = parentNode.getClassDatumAnalysis().getDomainUsage();
+				ClassDatumAnalysis classDatumAnalysis = schedulerConstants.getClassDatumAnalysis(classDatum);
+				String name = property.getName();
+				assert name != null;
+				return attributeNodeRole.createNode(region, name, classDatumAnalysis);
+			}
+			if (parentNode.isRealized()) {
+				return createRealizedDataTypeNode(parentNode.getRegion(), parentNode, property);
+			}
+			else {
+				throw new UnsupportedOperationException();
+			}
+		}
 
 		public static @NonNull VariableNode createGuardNode(@NonNull Region region, @NonNull VariableDeclaration guardVariable) {
 			DomainUsage domainUsage = region.getSchedulerConstants().getDomainUsage(guardVariable);
@@ -745,22 +608,46 @@ public class Nodes
 			assert type != null;
 			Type elementType = QVTbaseUtil.getElementalType(type);
 			TypedModel typedModel = elementType instanceof DataType ? region.getSchedulerConstants().getDomainAnalysis().getPrimitiveTypeModel() : sourceNode.getClassDatumAnalysis().getTypedModel();
-			//				DomainUsage usage = region.getSchedulerConstants().getDomainAnalysis().getUsage(type);
-			//				assert usage != null;
-			//				TypedModel typedModel = usage.getTypedModel();
 			assert typedModel != null;
 			ClassDatum classDatum = schedulerConstants.getClassDatum(type, typedModel);
-			//				DomainUsage domainUsage = parentNode.getClassDatumAnalysis().getDomainUsage();
 			ClassDatumAnalysis classDatumAnalysis = schedulerConstants.getClassDatumAnalysis(classDatum);
 			String name = source2targetProperty.getName();
 			assert name != null;
-			return  REALIZED_UNNAVIGABLE_DATATYPE_STEP.createNode(region, name, classDatumAnalysis);
+			return REALIZED_UNNAVIGABLE_DATATYPE_STEP.createNode(region, name, classDatumAnalysis);
 		}
 
 		public static @NonNull VariableNode createRealizedStepNode(@NonNull Region region, @NonNull Variable stepVariable) {
 			boolean isClass = !(stepVariable.getType() instanceof DataType);
 			PatternNodeRole patternNodeRole = getPatternNodeRole(Phase.REALIZED, isClass, false, false, false);
 			return patternNodeRole.createNode(region, stepVariable);
+		}
+
+		public static @NonNull Node createStepNode(@NonNull Region region, @NonNull String name, @NonNull CallExp callExp, @NonNull Node sourceNode, boolean isNavigable) {
+			DomainUsage domainUsage = region.getSchedulerConstants().getDomainUsage(callExp);
+			boolean isMiddleOrOutput = domainUsage.isOutput() || domainUsage.isMiddle();
+			boolean isDirty = false;
+			if (callExp instanceof NavigationCallExp) {
+				Property referredProperty = PivotUtil.getReferredProperty((NavigationCallExp)callExp);
+				isDirty = region.getSchedulerConstants().isDirty(referredProperty);
+			}
+			Phase phase = sourceNode.isPredicated() || isMiddleOrOutput || isDirty ? Phase.PREDICATED : Phase.LOADED;
+			PatternNodeRole stepNodeRole = getPatternNodeRole(phase, sourceNode.isClass(), isNavigable, false, false);
+			return stepNodeRole.createNode(region, name, callExp);
+		}
+
+		private static PatternNodeRole getDataTypeNodeRole(@NonNull Node sourceNode, boolean isNavigable, boolean isDirty) {
+			if (sourceNode.isLoaded()) {
+				if (!isDirty) {
+					return isNavigable ? LOADED_NAVIGABLE_DATATYPE_STEP : LOADED_UNNAVIGABLE_DATATYPE_STEP;
+				}
+				else {
+					return isNavigable ? PREDICATED_NAVIGABLE_DATATYPE_STEP : PREDICATED_UNNAVIGABLE_DATATYPE_STEP;
+				}
+			}
+			else if (sourceNode.isPredicated()) {
+				return isNavigable ? PREDICATED_NAVIGABLE_DATATYPE_STEP : PREDICATED_UNNAVIGABLE_DATATYPE_STEP;
+			}
+			return null;
 		}
 
 		public static @NonNull VariableNode createUnrealizedStepNode(@NonNull Region region, @NonNull VariableDeclaration stepVariable) {
@@ -800,44 +687,32 @@ public class Nodes
 					if (isClass) {
 						switch (phase) {
 							case LOADED: return LOADED_NAVIGABLE_CLASS_STEP;
+							case PREDICATED: return PREDICATED_NAVIGABLE_CLASS_STEP;
 						}
 					}
 					else {
 						switch (phase) {
 							case LOADED: return LOADED_NAVIGABLE_DATATYPE_STEP;
+							case PREDICATED: return PREDICATED_NAVIGABLE_DATATYPE_STEP;
 						}
 					}
 				}
 			}
 			else {
-				if (isHead) {
-					if (isClass) {
-						switch (phase) {
-						}
-					}
-					else {
-						switch (phase) {
-						}
-					}
-				}
-				else if (isGuard) {
-					if (isClass) {
-						switch (phase) {
-						}
-					}
-					else {
-						switch (phase) {
-						}
-					}
-				}
+				if (isHead) {}
+				else if (isGuard) {}
 				else {
 					if (isClass) {
 						switch (phase) {
+							case LOADED: return LOADED_UNNAVIGABLE_CLASS_STEP;
+							case PREDICATED: return PREDICATED_UNNAVIGABLE_CLASS_STEP;
 							case REALIZED: return REALIZED_UNNAVIGABLE_CLASS_STEP;
 						}
 					}
 					else {
 						switch (phase) {
+							case LOADED: return LOADED_UNNAVIGABLE_DATATYPE_STEP;
+							case PREDICATED: return PREDICATED_UNNAVIGABLE_DATATYPE_STEP;
 							case REALIZED: return REALIZED_UNNAVIGABLE_DATATYPE_STEP;
 						}
 					}
@@ -885,6 +760,7 @@ public class Nodes
 
 		@Override
 		public @NonNull NodeRole merge(@NonNull NodeRole nodeRole) {
+			assert nodeRole instanceof PatternNodeRole;
 			assert isClass() == nodeRole.isClass();
 			Phase mergedPhase = RegionUtil.mergeToMoreKnownPhase(this, nodeRole).getPhase();
 			boolean mergedNavigable;
@@ -915,7 +791,7 @@ public class Nodes
 
 		@Override
 		public String toString() {
-			return phase + (isClassNode ? "-Class" : "-DataType") + (isHead ? "Head-" : isGuard ? "Guard-" : "Step-") + getClass().getSimpleName();
+			return phase + (isNavigable ? "-Navigable" : "-Unnavigable") + (isClassNode ? "-Class" : "-DataType") + (isHead ? "Head-" : isGuard ? "Guard-" : "Step-") + getClass().getSimpleName();
 		}
 	}
 
@@ -998,135 +874,41 @@ public class Nodes
 		}
 	}
 
-	private static final class RealizedVariableNodeRole extends AbstractVariableNodeRole
+	public static final class PredicatedInternalNodeRole extends AbstractSimpleNodeRole
 	{
-		protected RealizedVariableNodeRole() {
-			super(Role.Phase.REALIZED, true);
+		protected PredicatedInternalNodeRole() {
+			super(Role.Phase.PREDICATED);
+		}
+
+		public @NonNull Node createNode(@NonNull Region region, @NonNull Node parentNode, @NonNull NavigationAssignment navigationAssignment) {
+			assert parentNode.isClass();
+			SchedulerConstants schedulerConstants = region.getSchedulerConstants();
+			Property property = QVTcoreBaseUtil.getTargetProperty(navigationAssignment);
+			assert property != null;
+			org.eclipse.ocl.pivot.Class type = (org.eclipse.ocl.pivot.Class)property.getType();
+			assert type != null;
+			TypedModel typedModel = parentNode.getClassDatumAnalysis().getTypedModel();
+			ClassDatum classDatum = schedulerConstants.getClassDatum(type, typedModel);
+			//				DomainUsage domainUsage = parentNode.getClassDatumAnalysis().getDomainUsage();
+			ClassDatumAnalysis classDatumAnalysis = schedulerConstants.getClassDatumAnalysis(classDatum);
+			String name = property.getName();
+			assert name != null;
+			return createNode(region, name, classDatumAnalysis);
 		}
 
 		@Override
-		public @NonNull NodeRole merge(@NonNull NodeRole nodeRole) {
-			if (nodeRole.isGuard() && !nodeRole.isExtraGuardVariable()) {
-				return this;
-			}
-			if (nodeRole instanceof StepNodeRoleFactory.AbstractStepNodeRole) {
-				return this;
-			}
-			return super.merge(nodeRole);
+		public boolean isDataType() {
+			return true;
+		}
+
+		@Override
+		public boolean isInternal() {
+			return true;
 		}
 
 		@Override
 		public String toString() {
 			return getClass().getSimpleName();
-		}
-	}
-
-	public static final class StepNodeRoleFactory
-	{
-		private static abstract class AbstractStepNodeRole extends AbstractSimpleNodeRole
-		{
-			private final boolean isNavigable;
-
-			protected AbstractStepNodeRole(@NonNull Phase phase, boolean isNavigable) {
-				super(phase);
-				this.isNavigable = isNavigable;
-			}
-
-			@Override
-			public boolean isClass() {
-				return true;
-			}
-
-			@Override
-			public boolean isMatchable() {
-				return true;
-			}
-
-			@Override
-			public boolean isNavigable() {
-				return isNavigable;
-			}
-
-			@Override
-			public String toString() {
-				return phase + (isNavigable ? "-NAVIGABLE-" : "-UNNAVIGABLE-") + getClass().getSimpleName();
-			}
-		}
-
-		private static final class LoadedStepNodeRole extends AbstractStepNodeRole
-		{
-			protected LoadedStepNodeRole(boolean isNavigable) {
-				super(Role.Phase.LOADED, isNavigable);
-			}
-
-			@Override
-			public @NonNull NodeRole merge(@NonNull NodeRole nodeRole) {
-				if (nodeRole.isHead()) {
-					return this;
-				}
-				return super.merge(nodeRole);
-			}
-		}
-
-		public static final class PredicatedStepNodeRole extends AbstractStepNodeRole
-		{
-			protected PredicatedStepNodeRole(boolean isNavigable) {
-				super(Role.Phase.PREDICATED, isNavigable);
-			}
-
-			@Override
-			public @NonNull NodeRole merge(@NonNull NodeRole nodeRole) {
-				if (nodeRole.isHead()) {
-					return this;
-				}
-				if (nodeRole instanceof RealizedVariableNodeRole) {
-					return nodeRole;
-				}
-				return super.merge(nodeRole);
-			}
-		}
-
-		private static final @NonNull LoadedStepNodeRole LOADED_NAVIGABLE_STEP = new LoadedStepNodeRole(true);
-		private static final @NonNull LoadedStepNodeRole LOADED_UNNAVIGABLE_STEP = new LoadedStepNodeRole(false);
-		private static final @NonNull PredicatedStepNodeRole PREDICATED_NAVIGABLE_STEP = new PredicatedStepNodeRole(true);
-		private static final @NonNull PredicatedStepNodeRole PREDICATED_UNNAVIGABLE_STEP = new PredicatedStepNodeRole(false);
-
-		private final @Nullable Boolean isNavigable;
-
-		public StepNodeRoleFactory(@Nullable Boolean isNavigable) {
-			this.isNavigable = isNavigable;
-		}
-
-		public @NonNull Node createNode(@NonNull Region region, @NonNull String name, @NonNull CallExp callExp, @NonNull Node sourceNode) {
-			boolean resolvedNavigable = isNavigable != null ? isNavigable.booleanValue() : sourceNode.isNavigable();
-			boolean isDirty = false;
-			DomainUsage domainUsage = region.getSchedulerConstants().getDomainUsage(callExp);
-			if (callExp instanceof NavigationCallExp) {
-				Property referredProperty = PivotUtil.getReferredProperty((NavigationCallExp)callExp);
-				isDirty = region.getSchedulerConstants().isDirty(referredProperty);
-			}
-			AbstractStepNodeRole stepNodeRole = getStepNodeRole(sourceNode, resolvedNavigable, isDirty, domainUsage.isOutput() || domainUsage.isMiddle());
-			return stepNodeRole.createNode(region, name, callExp);
-		}
-
-		/*		public @NonNull Node createNode(@NonNull Region region, @NonNull Node sourceNode, @NonNull Property property) {
-			boolean resolvedNavigable = isNavigable != null ? isNavigable.booleanValue() : sourceNode.isNavigable();
-			boolean isDirty = false;
-			DomainUsage domainUsage = region.getSchedulerConstants().getDomainUsage(property);
-			isDirty = region.getSchedulerConstants().isDirty(property);
-			String name = property.getName();
-			assert name != null;
-			AbstractStepNodeRole stepNodeRole = getStepNodeRole(sourceNode, resolvedNavigable, isDirty, domainUsage.isOutput() || domainUsage.isMiddle());
-			return stepNodeRole.createNode(region, name, property);
-		} */
-
-		private @NonNull AbstractStepNodeRole getStepNodeRole(@NonNull Node sourceNode, boolean isNavigable, boolean isDirty, boolean isMiddleOrOutput) {
-			if (sourceNode.isPredicated() || isMiddleOrOutput || isDirty) {
-				return isNavigable ? PREDICATED_NAVIGABLE_STEP : PREDICATED_UNNAVIGABLE_STEP;
-			}
-			else {
-				return isNavigable ? LOADED_NAVIGABLE_STEP : LOADED_UNNAVIGABLE_STEP;
-			}
 		}
 	}
 
@@ -1172,20 +954,15 @@ public class Nodes
 		}
 	}
 
-	public static final @NonNull AttributeNodeRoleFactory ATTRIBUTE = new AttributeNodeRoleFactory(null);
 	public static final @NonNull NodeRole COMPOSING = new ComposingNodeRole();
 	public static final @NonNull ElementNodeRoleFactory ELEMENT = new ElementNodeRoleFactory();
 	public static final @NonNull NodeRole ERROR = new ErrorNodeRole();
-	public static final @NonNull NodeRole EXTRA_GUARD = new AttributeNodeRoleFactory.ExtraGuardNodeRole();
+	public static final @NonNull NodeRole EXTRA_GUARD = new ExtraGuardNodeRole();
 	public static final @NonNull PortNodeRoleFactory INPUT = new PortNodeRoleFactory(); //true);
-	public static final @NonNull AttributeNodeRoleFactory NAVIGABLE_DATATYPE = new AttributeNodeRoleFactory(true);
-	public static final @NonNull StepNodeRoleFactory NAVIGABLE_STEP = new StepNodeRoleFactory(true);
 	public static final @NonNull NullNodeRole NULL = new NullNodeRole();
 	//	public static final @NonNull PortNodeRoleFactory OUTPUT = new PortNodeRoleFactory(false);
 	public static final @NonNull ParameterNodeRoleFactory PARAMETER = new ParameterNodeRoleFactory(null);
-	public static final @NonNull StepNodeRoleFactory STEP = new StepNodeRoleFactory(null);
+	public static final @NonNull PredicatedInternalNodeRole PREDICATED_CLASS = new PredicatedInternalNodeRole();
 	public static final @NonNull TrueNodeRole TRUE = new TrueNodeRole();
 	public static final @NonNull NodeRole UNKNOWN = new UnknownNodeRole();
-	public static final @NonNull AttributeNodeRoleFactory UNNAVIGABLE_DATATYPE = new AttributeNodeRoleFactory(false);
-	public static final @NonNull StepNodeRoleFactory UNNAVIGABLE_STEP = new StepNodeRoleFactory(false);
 }
