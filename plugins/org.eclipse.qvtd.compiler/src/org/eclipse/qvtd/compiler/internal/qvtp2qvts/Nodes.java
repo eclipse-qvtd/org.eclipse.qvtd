@@ -48,7 +48,7 @@ public class Nodes
 		return isNavigable ? NavigableEnum.NAVIGABLE : NavigableEnum.UNNAVIGABLE;
 	}
 
-	protected static abstract class AbstractSimpleNodeRole extends AbstractNodeRole
+	private static abstract class AbstractSimpleNodeRole extends AbstractNodeRole
 	{
 		protected AbstractSimpleNodeRole(@NonNull Phase phase) {
 			super(phase);
@@ -81,7 +81,7 @@ public class Nodes
 		}
 	}
 
-	protected static abstract class AbstractVariableNodeRole extends AbstractSimpleNodeRole
+	private static abstract class AbstractVariableNodeRole extends AbstractSimpleNodeRole
 	{
 		protected final @NonNull ClassableEnum classable;
 
@@ -824,12 +824,13 @@ public class Nodes
 		return patternNodeRole.createNode(region, stepVariable);
 	}
 
-	public static @NonNull TypedNode createNullNode(@NonNull Region region) {
-		return NullNodeRole.NULL.createNode(region, "«null»", region.getSchedulerConstants().getOclVoidClassDatumAnalysis());
-	}
-
-	public static @NonNull TypedNode createNullNode(@NonNull Region region, @NonNull TypedElement typedElement) {
-		return NullNodeRole.NULL.createNode(region, "«null»", typedElement);
+	public static @NonNull TypedNode createNullNode(@NonNull Region region, @Nullable TypedElement typedElement) {
+		if (typedElement != null) {
+			return NullNodeRole.NULL.createNode(region, "«null»", typedElement);
+		}
+		else {
+			return NullNodeRole.NULL.createNode(region, "«null»", region.getSchedulerConstants().getOclVoidClassDatumAnalysis());
+		}
 	}
 
 	public static @NonNull TypedNode createOperationElementNode(@NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis, @NonNull Node sourceNode) {

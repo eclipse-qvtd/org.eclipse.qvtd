@@ -114,9 +114,7 @@ public class RootCompositionRegion extends AbstractRegion
 			if (introducedNode == null) {
 				introducedNode = Nodes.createComposingNode(this, "«" + elementType.getName() + "-null»", childrenClassDatumAnalysis);
 				property2node.put(null, introducedNode);
-				EdgeRole.Phase edgePhase = Edges.NavigationEdgeRole.getNavigationEdgePhase(getNullNode(), introducedNode);
-				Edges.NavigationEdgeRole navigationEdgeRole = Edges.NavigationEdgeRole.getNavigationEdgeRole(edgePhase, true);
-				navigationEdgeRole.createEdge(getNullNode(), parent2childProperty, introducedNode);
+				Edges.createNavigableNavigationEdge(getNullNode(), parent2childProperty, introducedNode);
 			}
 		}
 		else if (containingClassDatumAnalysis != null) {								// Non-root oclContainer ownership
@@ -130,9 +128,7 @@ public class RootCompositionRegion extends AbstractRegion
 				introducedNode = Nodes.createComposingNode(this, "«" + elementType.getName() + "-oclContents»", childrenClassDatumAnalysis);
 				type2node.put(containingClassDatumAnalysis, introducedNode);
 				Node containerNode = Nodes.createComposingNode(this, "«" + containingClassDatumAnalysis.getCompleteClass().getName() + "-oclContainer»", containingClassDatumAnalysis);
-				EdgeRole.Phase edgePhase = Edges.NavigationEdgeRole.getNavigationEdgePhase(containerNode, introducedNode);
-				Edges.NavigationEdgeRole navigationEdgeRole = Edges.NavigationEdgeRole.getNavigationEdgeRole(edgePhase, true);
-				navigationEdgeRole.createEdge(containerNode, parent2childProperty, introducedNode);
+				Edges.createNavigableNavigationEdge(containerNode, parent2childProperty, introducedNode);
 			}
 		}
 		else {																			// Knonw distinctive containment
@@ -149,9 +145,7 @@ public class RootCompositionRegion extends AbstractRegion
 				assert owningClass != null;
 				containingClassDatumAnalysis = scheduler.getClassDatumAnalysis(owningClass, typedModel);
 				Node containerNode = Nodes.createComposingNode(this, "«" + owningClass.getName() + "-" + parent2childProperty.getName() + "»", containingClassDatumAnalysis);
-				EdgeRole.Phase edgePhase = Edges.NavigationEdgeRole.getNavigationEdgePhase(containerNode, introducedNode);
-				Edges.NavigationEdgeRole navigationEdgeRole = Edges.NavigationEdgeRole.getNavigationEdgeRole(edgePhase, true);
-				navigationEdgeRole.createEdge(containerNode, parent2childProperty, introducedNode);
+				Edges.createNavigableNavigationEdge(containerNode, parent2childProperty, introducedNode);
 			}
 		}
 		return introducedNode;
@@ -170,7 +164,7 @@ public class RootCompositionRegion extends AbstractRegion
 	private @NonNull Node getNullNode() {
 		Node nullNode2 = nullNode;
 		if (nullNode2 == null) {
-			nullNode = nullNode2 = Nodes.createNullNode(this);
+			nullNode = nullNode2 = Nodes.createNullNode(this, null);
 		}
 		return nullNode2;
 	}

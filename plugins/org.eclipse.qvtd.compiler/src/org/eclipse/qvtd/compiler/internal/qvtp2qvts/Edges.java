@@ -19,7 +19,7 @@ import org.eclipse.ocl.pivot.Property;
  */
 public class Edges
 {
-	protected abstract static class AbstractComputationEdgeRole extends AbstractEdgeRole implements EdgeRole.Simple
+	private abstract static class AbstractComputationEdgeRole extends AbstractEdgeRole implements EdgeRole.Simple
 	{
 		protected AbstractComputationEdgeRole(@NonNull Phase phase) {
 			super(phase);
@@ -36,7 +36,7 @@ public class Edges
 		}
 	}
 
-	protected abstract static class AbstractNavigationEdgeRole extends AbstractEdgeRole implements EdgeRole.Navigation
+	private abstract static class AbstractNavigationEdgeRole extends AbstractEdgeRole implements EdgeRole.Navigation
 	{
 		private final boolean isNavigable;
 
@@ -100,7 +100,7 @@ public class Edges
 		}
 	}
 
-	public static class CastEdgeRole extends AbstractNavigationEdgeRole
+	private static class CastEdgeRole extends AbstractNavigationEdgeRole
 	{
 		private static final @NonNull CastEdgeRole CONSTANT_NAVIGABLE_CAST = new CastEdgeRole(Role.Phase.CONSTANT, true);
 		private static final @NonNull CastEdgeRole CONSTANT_UNNAVIGABLE_CAST = new CastEdgeRole(Role.Phase.CONSTANT, false);
@@ -108,13 +108,6 @@ public class Edges
 		private static final @NonNull CastEdgeRole LOADED_UNNAVIGABLE_CAST = new CastEdgeRole(Role.Phase.LOADED, false);
 		private static final @NonNull CastEdgeRole PREDICATED_NAVIGABLE_CAST = new CastEdgeRole(Role.Phase.PREDICATED, true);
 		private static final @NonNull CastEdgeRole PREDICATED_UNNAVIGABLE_CAST = new CastEdgeRole(Role.Phase.PREDICATED, false);
-
-		public static @NonNull NavigationEdge createCastEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
-			boolean resolvedNavigation = /*isNavigable != null ? isNavigable.booleanValue() :*/ sourceNode.isNavigable();
-			EdgeRole.Phase phase = getCastEdgePhase(sourceNode, targetNode);
-			CastEdgeRole edgeRole = getCastEdgeRole(phase, resolvedNavigation);
-			return BasicNavigationEdge.createEdge(edgeRole, sourceNode, source2targetProperty, targetNode);
-		}
 
 		public static EdgeRole.@NonNull Phase getCastEdgePhase(@NonNull Node sourceNode, @NonNull Node targetNode) {
 			return RegionUtil.mergeToLessKnownPhase(sourceNode.getNodeRole(), targetNode.getNodeRole()).getPhase();
@@ -163,19 +156,14 @@ public class Edges
 		}
 	}
 
-	public static class ExpressionEdgeRole extends AbstractComputationEdgeRole
+	private static class ExpressionEdgeRole extends AbstractComputationEdgeRole
 	{
 		private static final @NonNull ExpressionEdgeRole CONSTANT_EXPRESSION = new ExpressionEdgeRole(Role.Phase.CONSTANT);
 		private static final @NonNull ExpressionEdgeRole LOADED_EXPRESSION = new ExpressionEdgeRole(Role.Phase.LOADED);
 		private static final @NonNull ExpressionEdgeRole PREDICATED_EXPRESSION = new ExpressionEdgeRole(Role.Phase.PREDICATED);
 		private static final @NonNull ExpressionEdgeRole REALIZED_EXPRESSION = new ExpressionEdgeRole(Role.Phase.REALIZED);
 
-		public static @NonNull Edge createExpressionEdge(@NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode) {
-			EdgeRole edgeRole = getExpressionEdgeRole(sourceNode.getNodeRole().getPhase());
-			return new BasicEdge(edgeRole, sourceNode, name, targetNode);
-		}
-
-		public static @NonNull ExpressionEdgeRole getExpressionEdgeRole(EdgeRole.@NonNull Phase phase) {
+		private static @NonNull ExpressionEdgeRole getExpressionEdgeRole(EdgeRole.@NonNull Phase phase) {
 			switch (phase) {
 				case CONSTANT: return CONSTANT_EXPRESSION;
 				case LOADED: return LOADED_EXPRESSION;
@@ -215,17 +203,12 @@ public class Edges
 		}
 	}
 
-	public static class IteratedEdgeRole extends AbstractComputationEdgeRole
+	private static class IteratedEdgeRole extends AbstractComputationEdgeRole
 	{
 		private static final @NonNull IteratedEdgeRole CONSTANT_ITERATED = new IteratedEdgeRole(Role.Phase.CONSTANT);
 		private static final @NonNull IteratedEdgeRole LOADED_ITERATED = new IteratedEdgeRole(Role.Phase.LOADED);
 		private static final @NonNull IteratedEdgeRole PREDICATED_ITERATED = new IteratedEdgeRole(Role.Phase.PREDICATED);
 		private static final @NonNull IteratedEdgeRole REALIZED_ITERATED = new IteratedEdgeRole(Role.Phase.REALIZED);
-
-		public static @NonNull Edge createIteratedEdge(@NonNull Node sourceNode,@NonNull Node targetNode) {
-			EdgeRole edgeRole = getIteratedEdgeRole(sourceNode.getNodeRole().getPhase());
-			return new BasicEdge(edgeRole, sourceNode, null, targetNode);
-		}
 
 		public static @NonNull IteratedEdgeRole getIteratedEdgeRole(EdgeRole.@NonNull Phase phase) {
 			switch (phase) {
@@ -257,7 +240,7 @@ public class Edges
 		}
 	}
 
-	public static class NavigationEdgeRole extends AbstractNavigationEdgeRole
+	private static class NavigationEdgeRole extends AbstractNavigationEdgeRole
 	{
 		private static final @NonNull NavigationEdgeRole CONSTANT_NAVIGABLE_NAVIGATION = new NavigationEdgeRole(Role.Phase.CONSTANT, true);
 		private static final @NonNull NavigationEdgeRole CONSTANT_UNNAVIGABLE_NAVIGATION = new NavigationEdgeRole(Role.Phase.CONSTANT, false);
@@ -266,33 +249,6 @@ public class Edges
 		private static final @NonNull NavigationEdgeRole PREDICATED_NAVIGABLE_NAVIGATION = new NavigationEdgeRole(Role.Phase.PREDICATED, true);
 		private static final @NonNull NavigationEdgeRole PREDICATED_UNNAVIGABLE_NAVIGATION = new NavigationEdgeRole(Role.Phase.PREDICATED, false);
 		private static final @NonNull NavigationEdgeRole REALIZED_NAVIGABLE_NAVIGATION = new NavigationEdgeRole(Role.Phase.REALIZED, true);
-
-		public static @NonNull NavigationEdge createNavigationEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
-			boolean resolvedNavigation = /*isNavigable != null ? isNavigable.booleanValue() :*/ sourceNode.isNavigable();
-			EdgeRole.Phase phase = getNavigationEdgePhase(sourceNode, targetNode);
-			NavigationEdgeRole edgeRole = getNavigationEdgeRole(phase, resolvedNavigation);
-			return BasicNavigationEdge.createEdge(edgeRole, sourceNode, source2targetProperty, targetNode);
-		}
-
-		/*		public static @NonNull NavigationEdge createNavigationEdge(@NonNull Region region, @NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
-			boolean resolvedNavigation = isNavigable != null ? isNavigable.booleanValue() : sourceNode.isNavigable();
-			if (sourceNode.isRealized() || targetNode.isRealized()) {
-				//				throw new UnsupportedOperationException();
-				return NavigationEdgeRole.REALIZED_NAVIGABLE_NAVIGATION.createEdge(region, sourceNode, source2targetProperty, targetNode);
-			}
-			else if (sourceNode.isPredicated() || targetNode.isPredicated()) {
-				return (resolvedNavigation ? NavigationEdgeRole.PREDICATED_NAVIGABLE_NAVIGATION : NavigationEdgeRole.PREDICATED_UNNAVIGABLE_NAVIGATION).createEdge(region, sourceNode, source2targetProperty, targetNode);
-			}
-			else if (sourceNode.isLoaded() || targetNode.isLoaded()) {
-				return (resolvedNavigation ? NavigationEdgeRole.LOADED_NAVIGABLE_NAVIGATION : NavigationEdgeRole.LOADED_UNNAVIGABLE_NAVIGATION).createEdge(region, sourceNode, source2targetProperty, targetNode);
-			}
-			else if (sourceNode.isConstant() || targetNode.isConstant()) {
-				return (resolvedNavigation ? NavigationEdgeRole.CONSTANT_NAVIGABLE_NAVIGATION : NavigationEdgeRole.CONSTANT_UNNAVIGABLE_NAVIGATION).createEdge(region, sourceNode, source2targetProperty, targetNode);
-			}
-			else {
-				throw new UnsupportedOperationException();
-			}
-		} */
 
 		public static EdgeRole.@NonNull Phase getNavigationEdgePhase(@NonNull Node sourceNode, @NonNull Node targetNode) {
 			return RegionUtil.mergeToLessKnownPhase(sourceNode.getNodeRole(), targetNode.getNodeRole()).getPhase();
@@ -337,17 +293,12 @@ public class Edges
 		}
 	}
 
-	public static class PredicateEdgeRole extends AbstractComputationEdgeRole
+	private static class PredicateEdgeRole extends AbstractComputationEdgeRole
 	{
 		private static final @NonNull PredicateEdgeRole CONSTANT_PREDICATE = new PredicateEdgeRole(Role.Phase.CONSTANT);
 		private static final @NonNull PredicateEdgeRole LOADED_PREDICATE = new PredicateEdgeRole(Role.Phase.LOADED);
 		private static final @NonNull PredicateEdgeRole PREDICATED_PREDICATE = new PredicateEdgeRole(Role.Phase.PREDICATED);
 		private static final @NonNull PredicateEdgeRole REALIZED_PREDICATE = new PredicateEdgeRole(Role.Phase.REALIZED);
-
-		public static @NonNull Edge createPredicateEdge(@NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode) {
-			EdgeRole edgeRole = getPredicateEdgeRole(sourceNode.getNodeRole().getPhase());
-			return new BasicEdge(edgeRole, sourceNode, name, targetNode);
-		}
 
 		public static @NonNull PredicateEdgeRole getPredicateEdgeRole(EdgeRole.@NonNull Phase phase) {
 			switch (phase) {
@@ -391,6 +342,9 @@ public class Edges
 
 	private static final class RecursionEdgeRole extends AbstractEdgeRole implements EdgeRole.Recursion
 	{
+		public static final EdgeRole.@NonNull Recursion PRIMARY_RECURSION = new RecursionEdgeRole(true);
+		public static final EdgeRole.@NonNull Recursion SECONDARY_RECURSION = new RecursionEdgeRole(false);
+
 		private boolean isPrimary;
 
 		protected RecursionEdgeRole(boolean isPrimary) {
@@ -428,6 +382,68 @@ public class Edges
 		}
 	}
 
-	public static final EdgeRole.@NonNull Recursion PRIMARY_RECURSION = new RecursionEdgeRole(true);
-	public static final EdgeRole.@NonNull Recursion SECONDARY_RECURSION = new RecursionEdgeRole(false);
+	public static @NonNull NavigationEdge createCastEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
+		boolean resolvedNavigation = /*isNavigable != null ? isNavigable.booleanValue() :*/ sourceNode.isNavigable();
+		EdgeRole.Phase phase = CastEdgeRole.getCastEdgePhase(sourceNode, targetNode);
+		CastEdgeRole edgeRole = CastEdgeRole.getCastEdgeRole(phase, resolvedNavigation);
+		return edgeRole.createEdge(sourceNode, source2targetProperty, targetNode);
+	}
+
+	public static @NonNull Edge createExpressionEdge(@NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode) {
+		ExpressionEdgeRole edgeRole = ExpressionEdgeRole.getExpressionEdgeRole(sourceNode.getNodeRole().getPhase());
+		return edgeRole.createEdge(sourceNode, name, targetNode);
+	}
+
+	public static @NonNull Edge createIteratedEdge(@NonNull Node sourceNode,@NonNull Node targetNode) {
+		IteratedEdgeRole edgeRole = IteratedEdgeRole.getIteratedEdgeRole(sourceNode.getNodeRole().getPhase());
+		return edgeRole.createEdge(sourceNode, null, targetNode);
+	}
+
+	public static @NonNull NavigationEdge createNavigableNavigationEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
+		EdgeRole.Phase edgePhase = NavigationEdgeRole.getNavigationEdgePhase(sourceNode, targetNode);
+		NavigationEdgeRole navigationEdgeRole = NavigationEdgeRole.getNavigationEdgeRole(edgePhase, true);
+		return navigationEdgeRole.createEdge(sourceNode, source2targetProperty, targetNode);
+	}
+
+	public static @NonNull NavigationEdge createNavigationEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
+		boolean resolvedNavigation = sourceNode.isNavigable();
+		EdgeRole.Phase phase = NavigationEdgeRole.getNavigationEdgePhase(sourceNode, targetNode);
+		NavigationEdgeRole edgeRole = NavigationEdgeRole.getNavigationEdgeRole(phase, resolvedNavigation);
+		return edgeRole.createEdge(sourceNode, source2targetProperty, targetNode);
+	}
+
+	public static @NonNull Edge createRealizedExpressionEdge(@NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode) {
+		ExpressionEdgeRole edgeRole = ExpressionEdgeRole.getExpressionEdgeRole(Role.Phase.REALIZED);
+		return edgeRole.createEdge(sourceNode, name, targetNode);
+	}
+
+	public static @NonNull Edge createPredicateEdge(@NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode) {
+		PredicateEdgeRole edgeRole = PredicateEdgeRole.getPredicateEdgeRole(sourceNode.getNodeRole().getPhase());
+		return edgeRole.createEdge(sourceNode, name, targetNode);
+	}
+
+	public static @NonNull Edge createPrimaryRecursionEdge(@NonNull Node sourceNode, @NonNull Node targetNode) {
+		return RecursionEdgeRole.PRIMARY_RECURSION.createEdge(sourceNode, targetNode);
+	}
+
+	public static @NonNull NavigationEdge createRealizedNavigationEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
+		NavigationEdgeRole navigationEdgeRole = NavigationEdgeRole.getNavigationEdgeRole(Role.Phase.REALIZED, true);	// FIXME make REALIZED edges unnavigable
+		return navigationEdgeRole.createEdge(sourceNode, source2targetProperty, targetNode);
+	}
+
+	public static @NonNull Edge createSecondaryRecursionEdge(@NonNull Node sourceNode, @NonNull Node targetNode) {
+		return RecursionEdgeRole.SECONDARY_RECURSION.createEdge(sourceNode, targetNode);
+	}
+
+	public static @NonNull NavigationEdge createUnnavigableCastEdge(@NonNull Node sourceNode, @NonNull Property castProperty, @NonNull Node castNode) {
+		EdgeRole.Phase phase = CastEdgeRole.getCastEdgePhase(sourceNode, castNode);
+		CastEdgeRole edgeRole = CastEdgeRole.getCastEdgeRole(phase, false);
+		return edgeRole.createEdge(sourceNode, castProperty, castNode);
+	}
+
+	public static @NonNull NavigationEdge createUnnavigableNavigationEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
+		EdgeRole.Phase edgePhase = NavigationEdgeRole.getNavigationEdgePhase(sourceNode, targetNode);
+		NavigationEdgeRole navigationEdgeRole = NavigationEdgeRole.getNavigationEdgeRole(edgePhase, false);
+		return navigationEdgeRole.createEdge(sourceNode, source2targetProperty, targetNode);
+	}
 }

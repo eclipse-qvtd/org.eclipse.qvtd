@@ -72,7 +72,7 @@ abstract class AbstractStage implements Stage
 	}
 
 	/**
-	 * Verify that the eaccumulator contributes exclusively new content.
+	 * Verify that the accumulator contributes exclusively new content.
 	 */
 	protected void checkAccumulated(@NonNull Set<@NonNull Node> actualNodes, @NonNull Iterable<@NonNull Node> expectedNodes) {
 		Set<@NonNull Node> expectedNodesSet = Sets.newHashSet(expectedNodes);

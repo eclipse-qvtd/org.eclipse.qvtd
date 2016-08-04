@@ -194,7 +194,7 @@ public class BasicMappingRegion extends AbstractMappingRegion
 			Node resultNode = expressionAnalyzer.analyze(conditionExpression);
 			if (!resultNode.isTrue()) {
 				Node trueNode = Nodes.createTrueNode(this);
-				Edges.PredicateEdgeRole.createPredicateEdge(resultNode, null, trueNode);
+				Edges.createPredicateEdge(resultNode, null, trueNode);
 			}
 			else {		// FIXME ?? do includes() here explicitly
 				resultNode.destroy();
@@ -306,14 +306,14 @@ public class BasicMappingRegion extends AbstractMappingRegion
 				//		assert guardVariables.contains(targetVariable);
 				//		assert guardVariables.contains(sourceVariable);
 				Node sourceNode = getReferenceNode(sourceVariable);
-				Node targetNode = boundVariable != null ? getReferenceNode(boundVariable) : Nodes.createNullNode(this);
+				Node targetNode = boundVariable != null ? getReferenceNode(boundVariable) : Nodes.createNullNode(this, null);
 				assert sourceNode.isGuard();
 				assert (boundVariable == null) || targetNode.isGuard();
 				assert sourceNode.isClass();
 				if (!referredProperty.isIsMany()) {
 					Edge predicateEdge = sourceNode.getPredicateEdge(referredProperty);
 					if (predicateEdge == null) {
-						Edges.NavigationEdgeRole.createNavigationEdge(sourceNode, referredProperty, targetNode);
+						Edges.createNavigationEdge(sourceNode, referredProperty, targetNode);
 					}
 					else {
 						assert predicateEdge.getTarget() == targetNode;
@@ -329,7 +329,7 @@ public class BasicMappingRegion extends AbstractMappingRegion
 		if ((ownedInit instanceof OperationCallExp) && initNode.isOperation()) {
 			if (QVTbaseUtil.isIdentification(((OperationCallExp)ownedInit).getReferredOperation())) {
 				Node stepNode = Nodes.createRealizedStepNode(this, variable);
-				Edges.ExpressionEdgeRole.createExpressionEdge(initNode, null, stepNode);
+				Edges.createExpressionEdge(initNode, null, stepNode);
 				initNode = stepNode;
 			}
 			//			else if (variable.getType() instanceof CollectionType) {
@@ -340,7 +340,7 @@ public class BasicMappingRegion extends AbstractMappingRegion
 			else {
 				//				Node stepNode = Nodes.STEP.createNode(this, variable.getName(), (OperationCallExp)ownedInit, initNode);
 				Node stepNode = Nodes.createLoadedStepNode(this, variable);
-				Edges.ExpressionEdgeRole.createExpressionEdge(initNode, null, stepNode);
+				Edges.createExpressionEdge(initNode, null, stepNode);
 				initNode = stepNode;
 			}
 		}
