@@ -120,7 +120,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 		Node targetNode = analyze(operationCallExp.getOwnedArguments().get(0));
 		String name = operationCallExp.getReferredOperation().getName();
 		createPredicateEdge(sourceNode, "«" + name + "»", targetNode);
-		return Nodes.TRUE.createNode(sourceNode.getRegion());
+		return Nodes.createTrueNode(sourceNode.getRegion());
 	}
 
 	private @NonNull Node analyzeOperationCallExp_oclAsType(@NonNull Node sourceNode, @NonNull OperationCallExp operationCallExp) {
@@ -293,7 +293,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 	}
 
 	protected @NonNull Node createErrorNode(@NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
-		return Nodes.ERROR.createNode(context, name, classDatumAnalysis);
+		return Nodes.createErrorNode(context, name, classDatumAnalysis);
 	}
 
 	protected @NonNull Edge createExpressionEdge(@NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode) {
@@ -340,7 +340,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 	}
 
 	protected @NonNull Node createNullNode(@NonNull TypedElement typedElement) {
-		return Nodes.NULL.createNode(context, typedElement);
+		return Nodes.createNullNode(context, typedElement);
 	}
 
 	protected @NonNull Node createOperationNode(@NonNull String name, @NonNull TypedElement typedElement, @NonNull Node @NonNull ... argNodes) {
@@ -352,11 +352,11 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 	}
 
 	protected @NonNull Node createPredicatedClassNode(@NonNull Node parentNode, @NonNull NavigationAssignment navigationAssignment) {
-		return Nodes.PREDICATED_CLASS.createNode(parentNode, navigationAssignment);
+		return Nodes.createPredicatedInternalClassNode(parentNode, navigationAssignment);
 	}
 
 	protected @NonNull Node createPredicatedClassNode(@NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
-		return Nodes.PREDICATED_CLASS.createNode(context, name, classDatumAnalysis);
+		return Nodes.createPredicatedInternalClassNode(context, name, classDatumAnalysis);
 	}
 
 	protected @NonNull Node createRealizedDataTypeNode(@NonNull Node sourceNode, @NonNull Property source2targetProperty) {

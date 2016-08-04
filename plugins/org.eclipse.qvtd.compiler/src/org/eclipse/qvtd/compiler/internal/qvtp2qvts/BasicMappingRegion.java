@@ -193,7 +193,7 @@ public class BasicMappingRegion extends AbstractMappingRegion
 			else { */
 			Node resultNode = expressionAnalyzer.analyze(conditionExpression);
 			if (!resultNode.isTrue()) {
-				Node trueNode = Nodes.TRUE.createNode(this);
+				Node trueNode = Nodes.createTrueNode(this);
 				Edges.PredicateEdgeRole.createPredicateEdge(resultNode, null, trueNode);
 			}
 			else {		// FIXME ?? do includes() here explicitly
@@ -306,7 +306,7 @@ public class BasicMappingRegion extends AbstractMappingRegion
 				//		assert guardVariables.contains(targetVariable);
 				//		assert guardVariables.contains(sourceVariable);
 				Node sourceNode = getReferenceNode(sourceVariable);
-				Node targetNode = boundVariable != null ? getReferenceNode(boundVariable) : Nodes.NULL.createNode(this);
+				Node targetNode = boundVariable != null ? getReferenceNode(boundVariable) : Nodes.createNullNode(this);
 				assert sourceNode.isGuard();
 				assert (boundVariable == null) || targetNode.isGuard();
 				assert sourceNode.isClass();
@@ -353,7 +353,7 @@ public class BasicMappingRegion extends AbstractMappingRegion
 		if (extraNodes == null) {
 			extraNodes = new ArrayList<>();
 		}
-		Node extraGuardNode = Nodes.EXTRA_GUARD.createNode(this, "«extra-" + (extraNodes.size()+1) + "»", classDatumAnalysis);
+		Node extraGuardNode = Nodes.createExtraGuardNode(this, "«extra-" + (extraNodes.size()+1) + "»", classDatumAnalysis);
 		extraNodes.add(extraGuardNode);
 		addHeadNode(extraGuardNode);
 		return extraGuardNode;
@@ -484,7 +484,7 @@ public class BasicMappingRegion extends AbstractMappingRegion
 		assert !(typedElement instanceof Property);		// Property entries should be AttributeNodes
 		Node node = getNode(typedElement);
 		if (node == null) {
-			node = Nodes.UNKNOWN.createNode(this, ClassUtil.nonNullState(typedElement.getType().toString()), typedElement);
+			node = Nodes.createUnknownNode(this, ClassUtil.nonNullState(typedElement.getType().toString()), typedElement);
 			//			node2node.put(typedElement, node);
 		}
 		return node;

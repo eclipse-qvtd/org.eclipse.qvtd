@@ -103,6 +103,8 @@ public class Nodes
 
 	private static final class ComposingNodeRole extends AbstractSimpleNodeRole
 	{
+		public static final @NonNull NodeRole COMPOSING = new ComposingNodeRole();
+
 		protected ComposingNodeRole() {
 			super(Role.Phase.LOADED);
 		}
@@ -118,80 +120,10 @@ public class Nodes
 		}
 	}
 
-	public static final class ElementNodeRoleFactory
-	{
-		private static abstract class AbstractElementNodeRole extends AbstractSimpleNodeRole
-		{
-			protected AbstractElementNodeRole(@NonNull Phase phase) {
-				super(phase);
-			}
-
-			@Override
-			public boolean isClass() {
-				return true;
-			}
-
-			@Override
-			public boolean isMatchable() {
-				return true;
-			}
-
-			@Override
-			public boolean isNavigable() {
-				return true;
-			}
-
-			@Override
-			public String toString() {
-				return getClass().getSimpleName();
-			}
-		}
-
-		private static final class LoadedElementNodeRole extends AbstractElementNodeRole
-		{
-			protected LoadedElementNodeRole() {
-				super(Role.Phase.LOADED);
-			}
-
-			@Override
-			public @NonNull NodeRole merge(@NonNull NodeRole nodeRole) {
-				if (nodeRole.isHead()) {
-					return this;
-				}
-				return super.merge(nodeRole);
-			}
-		}
-
-		public static final class PredicatedElementNodeRole extends AbstractElementNodeRole
-		{
-			protected PredicatedElementNodeRole() {
-				super(Role.Phase.PREDICATED);
-			}
-
-			@Override
-			public @NonNull NodeRole merge(@NonNull NodeRole nodeRole) {
-				if (nodeRole.isHead()) {
-					return this;
-				}
-				return super.merge(nodeRole);
-			}
-		}
-
-		private static final @NonNull LoadedElementNodeRole LOADED_ELEMENT = new LoadedElementNodeRole();
-		public static final @NonNull PredicatedElementNodeRole PREDICATED_ELEMENT = new PredicatedElementNodeRole();
-
-		public @NonNull Node createNode(@NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis, @NonNull Node sourceNode) {
-			if (sourceNode.isPredicated()) {
-				return PREDICATED_ELEMENT.createNode(region, name, classDatumAnalysis);
-			}
-			else {
-				return LOADED_ELEMENT.createNode(region, name, classDatumAnalysis);
-			}
-		}
-	}
-
 	private static final class ErrorNodeRole extends AbstractSimpleNodeRole
 	{
+		public static final @NonNull NodeRole ERROR = new ErrorNodeRole();
+
 		protected ErrorNodeRole() {
 			super(Role.Phase.OTHER);
 		}
@@ -212,8 +144,10 @@ public class Nodes
 		}
 	}
 
-	public static class ExtraGuardNodeRole extends AbstractSimpleNodeRole
+	private static class ExtraGuardNodeRole extends AbstractSimpleNodeRole
 	{
+		public static final @NonNull NodeRole EXTRA_GUARD = new ExtraGuardNodeRole();
+
 		protected ExtraGuardNodeRole() {
 			super(Role.Phase.PREDICATED);
 		}
@@ -231,6 +165,49 @@ public class Nodes
 		@Override
 		public boolean isGuard() {
 			return true;
+		}
+
+		@Override
+		public boolean isHead() {
+			return true;
+		}
+	}
+
+	private static final class InputNodeRole extends AbstractNodeRole
+	{
+		private static final @NonNull InputNodeRole CONSTANT_INPUT = new InputNodeRole(Role.Phase.CONSTANT); //, true);
+		private static final @NonNull InputNodeRole LOADED_INPUT = new InputNodeRole(Role.Phase.LOADED); //, true);
+		//		private static final @NonNull InputNodeRole PREDICATED_INPUT = new InputNodeRole(Role.Phase.PREDICATED); //, true);
+		//		private static final @NonNull InputNodeRole REALIZED_INPUT = new InputNodeRole(Role.Phase.REALIZED); //, true);
+
+		public static @NonNull Node createInputNode(@NonNull Region region, NodeRole.@NonNull Phase nodeRolePhase, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
+			switch (nodeRolePhase) {
+				case CONSTANT: return CONSTANT_INPUT.createNode(region, name, classDatumAnalysis);
+				case LOADED: return LOADED_INPUT.createNode(region, name, classDatumAnalysis);
+				//				case PREDICATED: return PREDICATED_INPUT.createNode(region, name, classDatumAnalysis);
+				//				case REALIZED: return REALIZED_INPUT.createNode(region, name, classDatumAnalysis);
+			}
+			throw new UnsupportedOperationException();
+		}
+
+		protected InputNodeRole(@NonNull Phase phase) {
+			super(phase);
+		}
+
+		@Override
+		public @NonNull Node createNode(@NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
+			throw new UnsupportedOperationException(); // FIXME Only used for obsolete cyclic regions.
+		}
+
+		@Override
+
+		public @NonNull Node createNode(@NonNull Region region, @NonNull String name, @NonNull TypedElement typedElement) {
+			throw new UnsupportedOperationException();
+		}
+
+		@Override
+		public @NonNull Integer getPenwidth() {
+			return Role.HEAD_WIDTH; //isHead ? Role.HEAD_WIDTH : Role.GUARD_WIDTH;
 		}
 
 		@Override
@@ -391,18 +368,12 @@ public class Nodes
 		}
 	}
 
-	public static class NullNodeRole extends AbstractSimpleNodeRole
+	private static class NullNodeRole extends AbstractSimpleNodeRole
 	{
-		protected NullNodeRole() {
+		private static final @NonNull NullNodeRole NULL = new NullNodeRole();
+
+		private NullNodeRole() {
 			super(Role.Phase.CONSTANT);
-		}
-
-		public @NonNull Node createNode(@NonNull Region region) {
-			return createNode(region, "«null»", region.getSchedulerConstants().getOclVoidClassDatumAnalysis());
-		}
-
-		public @NonNull Node createNode(@NonNull Region region, @NonNull TypedElement typedElement) {
-			return createNode(region, "«null»", typedElement);
 		}
 
 		@Override
@@ -513,39 +484,6 @@ public class Nodes
 		}
 	}
 
-	public static final class ParameterNodeRoleFactory
-	{
-		private static final class ParameterNodeRole extends AbstractVariableNodeRole
-		{
-			protected ParameterNodeRole(boolean isClass) {
-				super(Role.Phase.PREDICATED, asClassable(isClass));
-			}
-
-			@Override
-			public boolean isHead() {
-				return true;
-			}
-		}
-
-
-		private static final @NonNull ParameterNodeRole ATTRIBUTE_PARAMETER = new ParameterNodeRole(false);
-		private static final @NonNull ParameterNodeRole CLASS_PARAMETER = new ParameterNodeRole(true);
-
-		private final @Nullable Boolean isClassNode;
-
-		public ParameterNodeRoleFactory(@Nullable Boolean isClassNode) {
-			this.isClassNode = isClassNode;
-		}
-
-		public @NonNull Node createNode(@NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
-			Boolean resolvedIsClassNode = isClassNode;
-			if (resolvedIsClassNode == null) {
-				resolvedIsClassNode = !(classDatumAnalysis.getClassDatum().getType() instanceof DataType);
-			}
-			return (resolvedIsClassNode ? CLASS_PARAMETER : ATTRIBUTE_PARAMETER).createNode(region, name, classDatumAnalysis);
-		}
-	}
-
 	private static class PatternNodeRole extends AbstractVariableNodeRole
 	{
 		private static final @NonNull PatternNodeRole CONSTANT_UNNAVIGABLE_DATATYPE_STEP = new PatternNodeRole(Role.Phase.CONSTANT, ClassableEnum.DATATYPE, NavigableEnum.UNNAVIGABLE, GuardableEnum.STEP);
@@ -561,6 +499,8 @@ public class Nodes
 		private static final @NonNull PatternNodeRole PREDICATED_NAVIGABLE_CLASS_GUARD = new PatternNodeRole(Role.Phase.PREDICATED, ClassableEnum.CLASS, NavigableEnum.NAVIGABLE, GuardableEnum.GUARD);
 		private static final @NonNull PatternNodeRole PREDICATED_NAVIGABLE_DATATYPE_STEP = new PatternNodeRole(Role.Phase.PREDICATED, ClassableEnum.DATATYPE, NavigableEnum.NAVIGABLE, GuardableEnum.STEP);
 		private static final @NonNull PatternNodeRole PREDICATED_NAVIGABLE_CLASS_STEP = new PatternNodeRole(Role.Phase.PREDICATED, ClassableEnum.CLASS, NavigableEnum.NAVIGABLE, GuardableEnum.STEP);
+		private static final @NonNull PatternNodeRole PREDICATED_UNNAVIGABLE_DATATYPE_HEAD = new PatternNodeRole(Role.Phase.PREDICATED, ClassableEnum.DATATYPE, NavigableEnum.UNNAVIGABLE, GuardableEnum.HEAD);
+		private static final @NonNull PatternNodeRole PREDICATED_UNNAVIGABLE_CLASS_HEAD = new PatternNodeRole(Role.Phase.PREDICATED, ClassableEnum.CLASS, NavigableEnum.UNNAVIGABLE, GuardableEnum.HEAD);
 		private static final @NonNull PatternNodeRole PREDICATED_UNNAVIGABLE_DATATYPE_STEP = new PatternNodeRole(Role.Phase.PREDICATED, ClassableEnum.DATATYPE, NavigableEnum.UNNAVIGABLE, GuardableEnum.STEP);
 		private static final @NonNull PatternNodeRole PREDICATED_UNNAVIGABLE_CLASS_STEP = new PatternNodeRole(Role.Phase.PREDICATED, ClassableEnum.CLASS, NavigableEnum.UNNAVIGABLE, GuardableEnum.STEP);
 		private static final @NonNull PatternNodeRole REALIZED_UNNAVIGABLE_CLASS_STEP = new PatternNodeRole(Role.Phase.REALIZED, ClassableEnum.CLASS, NavigableEnum.UNNAVIGABLE, GuardableEnum.STEP);
@@ -647,6 +587,20 @@ public class Nodes
 				case UNNAVIGABLE: {
 					switch (guardable) {
 						case HEAD: {
+							switch (classable) {
+								case CLASS: {
+									switch (phase) {
+										case PREDICATED: return PREDICATED_UNNAVIGABLE_CLASS_HEAD;
+									}
+									break;
+								}
+								case DATATYPE: {
+									switch (phase) {
+										case PREDICATED: return PREDICATED_UNNAVIGABLE_DATATYPE_HEAD;
+									}
+									break;
+								}
+							}
 							break;
 						}
 						case GUARD: {
@@ -749,105 +703,13 @@ public class Nodes
 		}
 	}
 
-	public static final class PortNodeRoleFactory
+	// FIXME Can this be merged into PatternNodeRole ??
+	private static final class PredicatedInternalNodeRole extends AbstractSimpleNodeRole
 	{
-		private static final class PortNodeRole extends AbstractNodeRole
-		{
-			//			private final boolean isHead;
+		public static final @NonNull PredicatedInternalNodeRole PREDICATED_INTERNAL_CLASS = new PredicatedInternalNodeRole();
 
-			protected PortNodeRole(@NonNull Phase phase) { //, boolean isHead) {
-				super(phase);
-				//				this.isHead = isHead;
-			}
-
-			@Override
-			public @NonNull Node createNode(@NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
-				//				return new ComplexTypedNode(this, region, name, classDatumAnalysis);
-				throw new UnsupportedOperationException(); // FIXME Only used for obsolete cyclic regions.
-			}
-
-			@Override
-
-			public @NonNull Node createNode(@NonNull Region region, @NonNull String name, @NonNull TypedElement typedElement) {
-				throw new UnsupportedOperationException();
-			}
-
-			@Override
-			public @NonNull Integer getPenwidth() {
-				return Role.HEAD_WIDTH; //isHead ? Role.HEAD_WIDTH : Role.GUARD_WIDTH;
-			}
-
-			@Override
-			public boolean isHead() {
-				return true; //isHead;
-			}
-
-			//			@Override
-			//			public boolean isInput() {
-			//				return isHead;
-			//			}
-
-			//			@Override
-			//			public boolean isNavigable() {
-			//				return true;
-			//			}
-
-			//			@Override
-			//			public boolean isOutput() {
-			//				return !isHead;
-			//			}
-		}
-
-		private static final @NonNull PortNodeRole CONSTANT_INPUT = new PortNodeRole(Role.Phase.CONSTANT); //, true);
-		//		private static final @NonNull PortNodeRole CONSTANT_OUTPUT = new PortNodeRole(Role.Phase.CONSTANT, false);
-		private static final @NonNull PortNodeRole LOADED_INPUT = new PortNodeRole(Role.Phase.LOADED); //, true);
-		//		private static final @NonNull PortNodeRole LOADED_OUTPUT = new PortNodeRole(Role.Phase.LOADED, false);
-		private static final @NonNull PortNodeRole PREDICATED_INPUT = new PortNodeRole(Role.Phase.PREDICATED); //, true);
-		//		private static final @NonNull PortNodeRole PREDICATED_OUTPUT = new PortNodeRole(Role.Phase.PREDICATED, false);
-		private static final @NonNull PortNodeRole REALIZED_INPUT = new PortNodeRole(Role.Phase.REALIZED); //, true);
-		//		private static final @NonNull PortNodeRole REALIZED_OUTPUT = new PortNodeRole(Role.Phase.REALIZED, false);
-
-		//		private final boolean isHead;
-
-		public PortNodeRoleFactory(/*boolean isHead*/) {
-			//			this.isHead = isHead;
-		}
-
-		public @NonNull Node createNode(@NonNull Region region, NodeRole.@NonNull Phase nodeRolePhase, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
-			switch (nodeRolePhase) {
-				case CONSTANT: return CONSTANT_INPUT.createNode(region, name, classDatumAnalysis);
-				case LOADED: return LOADED_INPUT.createNode(region, name, classDatumAnalysis);
-				case PREDICATED: return PREDICATED_INPUT.createNode(region, name, classDatumAnalysis);
-				case REALIZED: return REALIZED_INPUT.createNode(region, name, classDatumAnalysis);
-				//				case CONSTANT: return (isHead ? CONSTANT_INPUT : CONSTANT_OUTPUT).createNode(region, name, classDatumAnalysis);
-				//				case LOADED: return (isHead ? LOADED_INPUT : LOADED_OUTPUT).createNode(region, name, classDatumAnalysis);
-				//				case PREDICATED: return (isHead ? PREDICATED_INPUT : PREDICATED_OUTPUT).createNode(region, name, classDatumAnalysis);
-				//				case REALIZED: return (isHead ? REALIZED_INPUT : REALIZED_OUTPUT).createNode(region, name, classDatumAnalysis);
-				default: throw new UnsupportedOperationException();
-			}
-		}
-	}
-
-	public static final class PredicatedInternalNodeRole extends AbstractSimpleNodeRole
-	{
-		protected PredicatedInternalNodeRole() {
+		private PredicatedInternalNodeRole() {
 			super(Role.Phase.PREDICATED);
-		}
-
-		public @NonNull Node createNode(@NonNull Node parentNode, @NonNull NavigationAssignment navigationAssignment) {
-			assert parentNode.isClass();
-			SchedulerConstants schedulerConstants = parentNode.getRegion().getSchedulerConstants();
-			Property property = QVTcoreBaseUtil.getTargetProperty(navigationAssignment);
-			assert property != null;
-			org.eclipse.ocl.pivot.Class type = (org.eclipse.ocl.pivot.Class)property.getType();
-			assert type != null;
-			TypedModel typedModel = parentNode.getClassDatumAnalysis().getTypedModel();
-			ClassDatum classDatum = schedulerConstants.getClassDatum(type, typedModel);
-			//				DomainUsage domainUsage = parentNode.getClassDatumAnalysis().getDomainUsage();
-			ClassDatumAnalysis classDatumAnalysis = schedulerConstants.getClassDatumAnalysis(classDatum);
-			String name = property.getName();
-			assert name != null;
-			return createNode(parentNode.getRegion(), name, classDatumAnalysis);
 		}
 
 		@Override
@@ -866,18 +728,12 @@ public class Nodes
 		}
 	}
 
-	public static final class TrueNodeRole extends AbstractSimpleNodeRole
+	private static final class TrueNodeRole extends AbstractSimpleNodeRole
 	{
-		protected TrueNodeRole() {
-			super(Role.Phase.CONSTANT);
-		}
+		private static final @NonNull TrueNodeRole TRUE = new TrueNodeRole();
 
-		public @NonNull Node createNode(@NonNull Region region) {
-			SchedulerConstants schedulerConstants = region.getSchedulerConstants();
-			org.eclipse.ocl.pivot.Class booleanType = schedulerConstants.getStandardLibrary().getBooleanType();
-			DomainUsage primitiveUsage = schedulerConstants.getDomainAnalysis().getPrimitiveUsage();
-			ClassDatumAnalysis classDatumAnalysis = schedulerConstants.getClassDatumAnalysis(booleanType, ClassUtil.nonNullState(primitiveUsage.getTypedModel(null)));
-			return createNode(region, "«true»", classDatumAnalysis);
+		private TrueNodeRole() {
+			super(Role.Phase.CONSTANT);
 		}
 
 		@Override
@@ -898,6 +754,8 @@ public class Nodes
 
 	private static final class UnknownNodeRole extends AbstractSimpleNodeRole
 	{
+		public static final @NonNull NodeRole UNKNOWN = new UnknownNodeRole();
+
 		protected UnknownNodeRole() {
 			super(Role.Phase.OTHER);
 		}
@@ -908,17 +766,9 @@ public class Nodes
 		}
 	}
 
-	public static final @NonNull NodeRole COMPOSING = new ComposingNodeRole();
-	public static final @NonNull ElementNodeRoleFactory ELEMENT = new ElementNodeRoleFactory();
-	public static final @NonNull NodeRole ERROR = new ErrorNodeRole();
-	public static final @NonNull NodeRole EXTRA_GUARD = new ExtraGuardNodeRole();
-	public static final @NonNull PortNodeRoleFactory INPUT = new PortNodeRoleFactory(); //true);
-	public static final @NonNull NullNodeRole NULL = new NullNodeRole();
-	//	public static final @NonNull PortNodeRoleFactory OUTPUT = new PortNodeRoleFactory(false);
-	public static final @NonNull ParameterNodeRoleFactory PARAMETER = new ParameterNodeRoleFactory(null);
-	public static final @NonNull PredicatedInternalNodeRole PREDICATED_CLASS = new PredicatedInternalNodeRole();
-	public static final @NonNull TrueNodeRole TRUE = new TrueNodeRole();
-	public static final @NonNull NodeRole UNKNOWN = new UnknownNodeRole();
+	public static @NonNull Node createComposingNode(@NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
+		return ComposingNodeRole.COMPOSING.createNode(region, name, classDatumAnalysis);
+	}
 
 	public static @NonNull TypedNode createDataTypeNode(@NonNull Node sourceNode, @NonNull Property property) {
 		PatternNodeRole patternNodeRole = PatternNodeRole.getDataTypeNodeRole(sourceNode, property);
@@ -934,6 +784,14 @@ public class Nodes
 		return patternNodeRole.createNode(sourceNode.getRegion(), name, navigationCallExp);
 	}
 
+	public static @NonNull Node createErrorNode(@NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
+		return ErrorNodeRole.ERROR.createNode(region, name, classDatumAnalysis);
+	}
+
+	public static @NonNull Node createExtraGuardNode(@NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
+		return ExtraGuardNodeRole.EXTRA_GUARD.createNode(region, name, classDatumAnalysis);
+	}
+
 	public static @NonNull VariableNode createGuardNode(@NonNull Region region, @NonNull VariableDeclaration variable) {
 		DomainUsage domainUsage = region.getSchedulerConstants().getDomainUsage(variable);
 		boolean isEnforceable = domainUsage.isOutput() || domainUsage.isMiddle();
@@ -941,6 +799,10 @@ public class Nodes
 		Role.Phase phase = isEnforceable ? Role.Phase.PREDICATED : Role.Phase.LOADED;
 		PatternNodeRole patternNodeRole = PatternNodeRole.getPatternNodeRole(phase, classable, NavigableEnum.NAVIGABLE, GuardableEnum.GUARD);
 		return patternNodeRole.createNode(region, variable);
+	}
+
+	public static @NonNull Node createInputNode(@NonNull Region region, NodeRole.@NonNull Phase nodeRolePhase, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
+		return InputNodeRole.createInputNode(region, nodeRolePhase, name, classDatumAnalysis);
 	}
 
 	public static @NonNull VariableNode createIteratorNode(@NonNull Variable iterator, @NonNull Node sourceNode) {
@@ -962,10 +824,49 @@ public class Nodes
 		return patternNodeRole.createNode(region, stepVariable);
 	}
 
+	public static @NonNull TypedNode createNullNode(@NonNull Region region) {
+		return NullNodeRole.NULL.createNode(region, "«null»", region.getSchedulerConstants().getOclVoidClassDatumAnalysis());
+	}
+
+	public static @NonNull TypedNode createNullNode(@NonNull Region region, @NonNull TypedElement typedElement) {
+		return NullNodeRole.NULL.createNode(region, "«null»", typedElement);
+	}
+
+	public static @NonNull TypedNode createOperationElementNode(@NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis, @NonNull Node sourceNode) {
+		PatternNodeRole patternNodeRole = PatternNodeRole.getPatternNodeRole(sourceNode.getNodeRole().getPhase(), ClassableEnum.DATATYPE, NavigableEnum.NAVIGABLE, GuardableEnum.STEP);
+		return patternNodeRole.createNode(region, name, classDatumAnalysis);
+	}
+
 	public static @NonNull TypedNode createOperationNode(@NonNull Region region, @NonNull String name, @NonNull TypedElement typedElement, @NonNull Node... argNodes) {
 		Role.Phase nodePhase = OperationNodeRole.getOperationNodePhase(region, typedElement, argNodes);
 		OperationNodeRole nodeRole = OperationNodeRole.getOperationNodeRole(nodePhase);
 		return nodeRole.createNode(region, name, typedElement);
+	}
+
+	public static @NonNull TypedNode createOperationParameterNode(@NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
+		ClassableEnum classable = asClassable(!(classDatumAnalysis.getClassDatum().getType() instanceof DataType));
+		PatternNodeRole patternNodeRole = PatternNodeRole.getPatternNodeRole(Role.Phase.PREDICATED, classable, NavigableEnum.UNNAVIGABLE, GuardableEnum.HEAD);
+		return patternNodeRole.createNode(region, name, classDatumAnalysis);
+	}
+
+	public static @NonNull Node createPredicatedInternalClassNode(@NonNull Node parentNode, @NonNull NavigationAssignment navigationAssignment) {
+		assert parentNode.isClass();
+		SchedulerConstants schedulerConstants = parentNode.getRegion().getSchedulerConstants();
+		Property property = QVTcoreBaseUtil.getTargetProperty(navigationAssignment);
+		assert property != null;
+		org.eclipse.ocl.pivot.Class type = (org.eclipse.ocl.pivot.Class)property.getType();
+		assert type != null;
+		TypedModel typedModel = parentNode.getClassDatumAnalysis().getTypedModel();
+		ClassDatum classDatum = schedulerConstants.getClassDatum(type, typedModel);
+		//				DomainUsage domainUsage = parentNode.getClassDatumAnalysis().getDomainUsage();
+		ClassDatumAnalysis classDatumAnalysis = schedulerConstants.getClassDatumAnalysis(classDatum);
+		String name = property.getName();
+		assert name != null;
+		return PredicatedInternalNodeRole.PREDICATED_INTERNAL_CLASS.createNode(parentNode.getRegion(), name, classDatumAnalysis);
+	}
+
+	public static @NonNull Node createPredicatedInternalClassNode(@NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
+		return PredicatedInternalNodeRole.PREDICATED_INTERNAL_CLASS.createNode(region, name, classDatumAnalysis);
 	}
 
 	public static @NonNull TypedNode createRealizedDataTypeNode(@NonNull Node sourceNode, @NonNull Property source2targetProperty) {
@@ -993,5 +894,17 @@ public class Nodes
 		ClassableEnum classable = asClassable(sourceNode.isClass());
 		PatternNodeRole stepNodeRole = PatternNodeRole.getPatternNodeRole(phase, classable, navigableEnum, GuardableEnum.STEP);
 		return stepNodeRole.createNode(region, name, callExp);
+	}
+
+	public static @NonNull TypedNode createTrueNode(@NonNull Region region) {
+		SchedulerConstants schedulerConstants = region.getSchedulerConstants();
+		org.eclipse.ocl.pivot.Class booleanType = schedulerConstants.getStandardLibrary().getBooleanType();
+		DomainUsage primitiveUsage = schedulerConstants.getDomainAnalysis().getPrimitiveUsage();
+		ClassDatumAnalysis classDatumAnalysis = schedulerConstants.getClassDatumAnalysis(booleanType, ClassUtil.nonNullState(primitiveUsage.getTypedModel(null)));
+		return TrueNodeRole.TRUE.createNode(region, "«true»", classDatumAnalysis);
+	}
+
+	public static @NonNull Node createUnknownNode(@NonNull  Region region, @NonNull String name, @NonNull TypedElement typedElement) {
+		return UnknownNodeRole.UNKNOWN.createNode(region, name, typedElement);
 	}
 }

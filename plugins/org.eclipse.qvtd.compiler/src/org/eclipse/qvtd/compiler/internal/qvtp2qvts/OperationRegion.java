@@ -153,7 +153,7 @@ public class OperationRegion extends AbstractRegion
 								Type elementType = ((CollectionType)primaryClass).getElementType();
 								TypedModel typedModel2 = classDatumAnalysis.getTypedModel();
 								ClassDatumAnalysis elementClassDatumAnalysis = schedulerConstants.getClassDatumAnalysis((@NonNull Class) elementType, typedModel2);
-								Node elementNode = Nodes.ELEMENT.createNode(this, name, elementClassDatumAnalysis, extraNode2);
+								Node elementNode = Nodes.createOperationElementNode(this, name, elementClassDatumAnalysis, extraNode2);
 								//(region, name, typedElement, argNodes)Node(region, name, callExp, sourceNode)Node(this, name, iterateProperty, extraNode2);
 								Edges.NavigationEdgeRole.createNavigationEdge(extraNode2, iterateProperty, elementNode);
 								extraNode2 = elementNode;
@@ -199,7 +199,7 @@ public class OperationRegion extends AbstractRegion
 		TypedModel typedModel = schedulerConstants.getDomainUsage(expression).getTypedModel(expression);
 		assert typedModel != null;
 		ClassDatumAnalysis classDatumAnalysis = schedulerConstants.getClassDatumAnalysis(type, typedModel);
-		Node parameterNode = Nodes.PARAMETER.createNode(this, name, classDatumAnalysis);
+		Node parameterNode = Nodes.createOperationParameterNode(this, name, classDatumAnalysis);
 		//		addVariableNode(variable, parameterNode);
 		headNodes.add(parameterNode);
 		parameter2node.put(variable, parameterNode);
@@ -213,7 +213,7 @@ public class OperationRegion extends AbstractRegion
 		TypedModel typedModel = schedulerConstants.getDomainUsage(variable).getTypedModel(variable);
 		assert typedModel != null;
 		ClassDatumAnalysis classDatumAnalysis = schedulerConstants.getClassDatumAnalysis(type, typedModel);
-		Node parameterNode = Nodes.PARAMETER.createNode(this, name, classDatumAnalysis);
+		Node parameterNode = Nodes.createOperationParameterNode(this, name, classDatumAnalysis);
 		//		addVariableNode(variable, parameterNode);
 		headNodes.add(parameterNode);
 		parameter2node.put(variable, parameterNode);
@@ -221,7 +221,7 @@ public class OperationRegion extends AbstractRegion
 	}
 
 	private @NonNull Node createParameterNode(@NonNull ClassDatumAnalysis classDatumAnalysis, @NonNull String name) {
-		Node parameterNode = Nodes.PARAMETER.createNode(this, name, classDatumAnalysis);
+		Node parameterNode = Nodes.createOperationParameterNode(this, name, classDatumAnalysis);
 		//		addVariableNode(variable, parameterNode);
 		headNodes.add(parameterNode);
 		return parameterNode;

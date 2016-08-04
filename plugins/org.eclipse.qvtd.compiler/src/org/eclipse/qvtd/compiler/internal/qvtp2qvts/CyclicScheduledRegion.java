@@ -243,7 +243,7 @@ public class CyclicScheduledRegion extends AbstractScheduledRegion
 		//	Create the head.
 		//
 		String name = "«head" + (headNodes.size() > 0 ? Integer.toString(headNodes.size()) : "") + "»";
-		Node headNode = Nodes.INPUT.createNode(this, nodeRolePhase, name, classDatumAnalysis);
+		Node headNode = Nodes.createInputNode(this, nodeRolePhase, name, classDatumAnalysis);
 		System.out.println("Create: " + headNode);
 		//
 		//	Create the external connection from the composite externalSources to the new head.
