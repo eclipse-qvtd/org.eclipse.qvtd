@@ -27,14 +27,14 @@ public class BasicNavigationEdge extends AbstractEdge implements NavigationEdge
 	 * Create, install and return the edgeRole edge for source2targetProperty from sourceNode to targetNode. If
 	 * source2targetProperty has an opposite, the opposite edge is also created and installed.
 	 */
-	public static @NonNull NavigationEdge createEdge(EdgeRole.@NonNull Navigation edgeRole, @NonNull Region region,
+	public static @NonNull NavigationEdge createEdge(EdgeRole.@NonNull Navigation edgeRole,
 			@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
-		BasicNavigationEdge forwardEdge = new BasicNavigationEdge(edgeRole, region, sourceNode, source2targetProperty, targetNode);
+		BasicNavigationEdge forwardEdge = new BasicNavigationEdge(edgeRole, sourceNode, source2targetProperty, targetNode);
 		Property target2sourceProperty = source2targetProperty.getOpposite();
 		if ((target2sourceProperty != null) && !targetNode.isNull()) {
 			assert targetNode.getNavigationEdge(target2sourceProperty) == null;
 			if (!source2targetProperty.isIsMany() && !target2sourceProperty.isIsMany() /*&& target2sourceProperty.isIsRequired()*/) {		// FIXME do we need stronger type conformance here ??
-				BasicNavigationEdge reverseEdge = new BasicNavigationEdge(edgeRole, region, targetNode, target2sourceProperty, sourceNode);
+				BasicNavigationEdge reverseEdge = new BasicNavigationEdge(edgeRole, targetNode, target2sourceProperty, sourceNode);
 				forwardEdge.oppositeEdge = reverseEdge;
 				reverseEdge.oppositeEdge = forwardEdge;
 				if (source2targetProperty.isIsImplicit()) {
@@ -63,9 +63,9 @@ public class BasicNavigationEdge extends AbstractEdge implements NavigationEdge
 	private @Nullable EdgeConnection incomingConnection = null;
 	private @Nullable List<@NonNull EdgeConnection> outgoingConnections = null;
 
-	private BasicNavigationEdge(EdgeRole.@NonNull Navigation edgeRole, @NonNull Region region,
+	private BasicNavigationEdge(EdgeRole.@NonNull Navigation edgeRole,
 			@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
-		super(edgeRole, region, sourceNode, source2targetProperty.getName(), targetNode);
+		super(edgeRole, sourceNode, source2targetProperty.getName(), targetNode);
 		this.source2targetProperty = source2targetProperty;
 		//		assert (source2targetProperty.eContainer() == null) || sourceNode.isClassNode();		// Pseudo navigations may be non-classes
 		//		assert !sourceNode.isOperation();			// FIXME testExample2_V2 violates this to cast an intermediate "if"

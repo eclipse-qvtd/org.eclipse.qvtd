@@ -453,7 +453,7 @@ public abstract class AbstractScheduledRegion extends AbstractRegion implements 
 						selectedSourceNodes.remove(sourceNode);
 						NodeConnection loopConection = getNodeConnection(selectedSourceNodes, classDatumAnalysis);
 						loopConection.addPassedTargetNode(targetNode);
-						Edges.PRIMARY_RECURSION.createEdge(loopRegion, sourceNode, targetNode);
+						Edges.PRIMARY_RECURSION.createEdge(sourceNode, targetNode);
 					}
 				}
 			}

@@ -21,19 +21,19 @@ public interface EdgeRole extends Role
 {
 	interface Navigation extends EdgeRole
 	{
-		@NonNull NavigationEdge createEdge(@NonNull Region region, @NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode);
+		@NonNull NavigationEdge createEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode);
 
 		@Nullable String getLabel(@NonNull Property source2targetProperty);
 	}
 
 	interface Recursion extends EdgeRole
 	{
-		@NonNull Edge createEdge(@NonNull Region region, @NonNull Node sourceNode, @NonNull Node targetNode);
+		@NonNull Edge createEdge(@NonNull Node sourceNode, @NonNull Node targetNode);
 	}
 
 	interface Simple extends EdgeRole
 	{
-		@NonNull Edge createEdge(@NonNull Region region, @NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode);
+		@NonNull Edge createEdge(@NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode);
 	}
 
 	@Override

@@ -194,7 +194,7 @@ public class BasicMappingRegion extends AbstractMappingRegion
 			Node resultNode = expressionAnalyzer.analyze(conditionExpression);
 			if (!resultNode.isTrue()) {
 				Node trueNode = Nodes.TRUE.createNode(this);
-				Edges.PredicateEdgeRole.createPredicateEdge(this, resultNode, null, trueNode);
+				Edges.PredicateEdgeRole.createPredicateEdge(resultNode, null, trueNode);
 			}
 			else {		// FIXME ?? do includes() here explicitly
 				resultNode.destroy();
@@ -313,7 +313,7 @@ public class BasicMappingRegion extends AbstractMappingRegion
 				if (!referredProperty.isIsMany()) {
 					Edge predicateEdge = sourceNode.getPredicateEdge(referredProperty);
 					if (predicateEdge == null) {
-						Edges.NavigationEdgeRole.createNavigationEdge(this, sourceNode, referredProperty, targetNode);
+						Edges.NavigationEdgeRole.createNavigationEdge(sourceNode, referredProperty, targetNode);
 					}
 					else {
 						assert predicateEdge.getTarget() == targetNode;
@@ -329,7 +329,7 @@ public class BasicMappingRegion extends AbstractMappingRegion
 		if ((ownedInit instanceof OperationCallExp) && initNode.isOperation()) {
 			if (QVTbaseUtil.isIdentification(((OperationCallExp)ownedInit).getReferredOperation())) {
 				Node stepNode = Nodes.PatternNodeRole.createRealizedStepNode(this, variable);
-				Edges.ExpressionEdgeRole.createExpressionEdge(this, initNode, null, stepNode);
+				Edges.ExpressionEdgeRole.createExpressionEdge(initNode, null, stepNode);
 				initNode = stepNode;
 			}
 			//			else if (variable.getType() instanceof CollectionType) {
@@ -340,7 +340,7 @@ public class BasicMappingRegion extends AbstractMappingRegion
 			else {
 				//				Node stepNode = Nodes.STEP.createNode(this, variable.getName(), (OperationCallExp)ownedInit, initNode);
 				Node stepNode = Nodes.PatternNodeRole.createUnrealizedStepNode(this, variable);
-				Edges.ExpressionEdgeRole.createExpressionEdge(this, initNode, null, stepNode);
+				Edges.ExpressionEdgeRole.createExpressionEdge(initNode, null, stepNode);
 				initNode = stepNode;
 			}
 		}

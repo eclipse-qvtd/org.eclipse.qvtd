@@ -66,8 +66,8 @@ public class OperationRegion extends AbstractRegion
 		Node extraNode;
 		extraNode = selfNode;
 		//
-		resultNode = Nodes.PatternNodeRole.createStepNode(this, "result", operationCallExp, extraNode, false);
-		Edges.ExpressionEdgeRole.createExpressionEdge(this, extraNode, null, resultNode);
+		resultNode = Nodes.PatternNodeRole.createStepNode("result", operationCallExp, extraNode, false);
+		Edges.ExpressionEdgeRole.createExpressionEdge(extraNode, null, resultNode);
 		//
 		List<Variable> ownedParameters = specification.getOwnedParameters();
 		List<OCLExpression> ownedArguments = operationCallExp.getOwnedArguments();
@@ -155,11 +155,11 @@ public class OperationRegion extends AbstractRegion
 								ClassDatumAnalysis elementClassDatumAnalysis = schedulerConstants.getClassDatumAnalysis((@NonNull Class) elementType, typedModel2);
 								Node elementNode = Nodes.ELEMENT.createNode(this, name, elementClassDatumAnalysis, extraNode2);
 								//(region, name, typedElement, argNodes)Node(region, name, callExp, sourceNode)Node(this, name, iterateProperty, extraNode2);
-								Edges.NavigationEdgeRole.createNavigationEdge(this, extraNode2, iterateProperty, elementNode);
+								Edges.NavigationEdgeRole.createNavigationEdge(extraNode2, iterateProperty, elementNode);
 								extraNode2 = elementNode;
 							}
-							Node nextNode = Nodes.PatternNodeRole.createDataTypeNode(this, extraNode2, navigationCallExp, false);
-							Edges.NavigationEdgeRole.createNavigationEdge(this, extraNode2, property, nextNode);
+							Node nextNode = Nodes.PatternNodeRole.createDataTypeNode(extraNode2, navigationCallExp, false);
+							Edges.NavigationEdgeRole.createNavigationEdge(extraNode2, property, nextNode);
 							extraNode2 = nextNode;
 						}
 					}

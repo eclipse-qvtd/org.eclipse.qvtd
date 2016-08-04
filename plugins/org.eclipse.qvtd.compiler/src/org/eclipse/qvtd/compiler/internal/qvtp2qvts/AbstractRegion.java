@@ -1512,7 +1512,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 		Node node = parentNode.getNavigationTarget(property);
 		//		AbstractAttributeNode node = (AbstractAttributeNode)node2node.get(property);
 		if (node == null) {
-			node = Nodes.PatternNodeRole.createRealizedDataTypeNode(parentNode.getRegion(), parentNode, property);
+			node = Nodes.PatternNodeRole.createRealizedDataTypeNode(parentNode, property);
 			//			node2node.put(property, node);
 		}
 		return node;
@@ -2379,7 +2379,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 							for (Map.@NonNull Entry<@NonNull Node, @NonNull Node> entry : bindings.entrySet()) {
 								@NonNull Node prevNode = entry.getKey();
 								@NonNull Node nextNode = entry.getValue();
-								(prevNode.isHead() ? Edges.PRIMARY_RECURSION : Edges.SECONDARY_RECURSION).createEdge(this, prevNode, nextNode);
+								(prevNode.isHead() ? Edges.PRIMARY_RECURSION : Edges.SECONDARY_RECURSION).createEdge(prevNode, nextNode);
 							}
 							return;				// FIXME can we have more than one recursion ??
 						}

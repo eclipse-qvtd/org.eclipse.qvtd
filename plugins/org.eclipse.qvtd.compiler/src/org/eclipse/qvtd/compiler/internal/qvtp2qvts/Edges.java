@@ -26,8 +26,8 @@ public class Edges
 		}
 
 		@Override
-		public @NonNull Edge createEdge(@NonNull Region region, @NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode) {
-			return new BasicEdge(this, region, sourceNode, name, targetNode);
+		public @NonNull Edge createEdge(@NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode) {
+			return new BasicEdge(this, sourceNode, name, targetNode);
 		}
 
 		@Override
@@ -46,8 +46,8 @@ public class Edges
 		}
 
 		@Override
-		public @NonNull NavigationEdge createEdge(@NonNull Region region, @NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
-			return BasicNavigationEdge.createEdge(this, region, sourceNode, source2targetProperty, targetNode);
+		public @NonNull NavigationEdge createEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
+			return BasicNavigationEdge.createEdge(this, sourceNode, source2targetProperty, targetNode);
 		}
 
 		@Override
@@ -109,11 +109,11 @@ public class Edges
 		private static final @NonNull CastEdgeRole PREDICATED_NAVIGABLE_CAST = new CastEdgeRole(Role.Phase.PREDICATED, true);
 		private static final @NonNull CastEdgeRole PREDICATED_UNNAVIGABLE_CAST = new CastEdgeRole(Role.Phase.PREDICATED, false);
 
-		public static @NonNull NavigationEdge createCastEdge(@NonNull Region region, @NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
+		public static @NonNull NavigationEdge createCastEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
 			boolean resolvedNavigation = /*isNavigable != null ? isNavigable.booleanValue() :*/ sourceNode.isNavigable();
 			EdgeRole.Phase phase = getCastEdgePhase(sourceNode, targetNode);
 			CastEdgeRole edgeRole = getCastEdgeRole(phase, resolvedNavigation);
-			return BasicNavigationEdge.createEdge(edgeRole, region, sourceNode, source2targetProperty, targetNode);
+			return BasicNavigationEdge.createEdge(edgeRole, sourceNode, source2targetProperty, targetNode);
 		}
 
 		public static EdgeRole.@NonNull Phase getCastEdgePhase(@NonNull Node sourceNode, @NonNull Node targetNode) {
@@ -170,9 +170,9 @@ public class Edges
 		private static final @NonNull ExpressionEdgeRole PREDICATED_EXPRESSION = new ExpressionEdgeRole(Role.Phase.PREDICATED);
 		private static final @NonNull ExpressionEdgeRole REALIZED_EXPRESSION = new ExpressionEdgeRole(Role.Phase.REALIZED);
 
-		public static @NonNull Edge createExpressionEdge(@NonNull Region region, @NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode) {
+		public static @NonNull Edge createExpressionEdge(@NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode) {
 			EdgeRole edgeRole = getExpressionEdgeRole(sourceNode.getNodeRole().getPhase());
-			return new BasicEdge(edgeRole, region, sourceNode, name, targetNode);
+			return new BasicEdge(edgeRole, sourceNode, name, targetNode);
 		}
 
 		public static @NonNull ExpressionEdgeRole getExpressionEdgeRole(EdgeRole.@NonNull Phase phase) {
@@ -222,9 +222,9 @@ public class Edges
 		private static final @NonNull IteratedEdgeRole PREDICATED_ITERATED = new IteratedEdgeRole(Role.Phase.PREDICATED);
 		private static final @NonNull IteratedEdgeRole REALIZED_ITERATED = new IteratedEdgeRole(Role.Phase.REALIZED);
 
-		public static @NonNull Edge createIteratedEdge(@NonNull Region region, @NonNull Node sourceNode,@NonNull Node targetNode) {
+		public static @NonNull Edge createIteratedEdge(@NonNull Node sourceNode,@NonNull Node targetNode) {
 			EdgeRole edgeRole = getIteratedEdgeRole(sourceNode.getNodeRole().getPhase());
-			return new BasicEdge(edgeRole, region, sourceNode, null, targetNode);
+			return new BasicEdge(edgeRole, sourceNode, null, targetNode);
 		}
 
 		public static @NonNull IteratedEdgeRole getIteratedEdgeRole(EdgeRole.@NonNull Phase phase) {
@@ -267,11 +267,11 @@ public class Edges
 		private static final @NonNull NavigationEdgeRole PREDICATED_UNNAVIGABLE_NAVIGATION = new NavigationEdgeRole(Role.Phase.PREDICATED, false);
 		private static final @NonNull NavigationEdgeRole REALIZED_NAVIGABLE_NAVIGATION = new NavigationEdgeRole(Role.Phase.REALIZED, true);
 
-		public static @NonNull NavigationEdge createNavigationEdge(@NonNull Region region, @NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
+		public static @NonNull NavigationEdge createNavigationEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
 			boolean resolvedNavigation = /*isNavigable != null ? isNavigable.booleanValue() :*/ sourceNode.isNavigable();
 			EdgeRole.Phase phase = getNavigationEdgePhase(sourceNode, targetNode);
 			NavigationEdgeRole edgeRole = getNavigationEdgeRole(phase, resolvedNavigation);
-			return BasicNavigationEdge.createEdge(edgeRole, region, sourceNode, source2targetProperty, targetNode);
+			return BasicNavigationEdge.createEdge(edgeRole, sourceNode, source2targetProperty, targetNode);
 		}
 
 		/*		public static @NonNull NavigationEdge createNavigationEdge(@NonNull Region region, @NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
@@ -344,9 +344,9 @@ public class Edges
 		private static final @NonNull PredicateEdgeRole PREDICATED_PREDICATE = new PredicateEdgeRole(Role.Phase.PREDICATED);
 		private static final @NonNull PredicateEdgeRole REALIZED_PREDICATE = new PredicateEdgeRole(Role.Phase.REALIZED);
 
-		public static @NonNull Edge createPredicateEdge(@NonNull Region region, @NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode) {
+		public static @NonNull Edge createPredicateEdge(@NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode) {
 			EdgeRole edgeRole = getPredicateEdgeRole(sourceNode.getNodeRole().getPhase());
-			return new BasicEdge(edgeRole, region, sourceNode, name, targetNode);
+			return new BasicEdge(edgeRole, sourceNode, name, targetNode);
 		}
 
 		public static @NonNull PredicateEdgeRole getPredicateEdgeRole(EdgeRole.@NonNull Phase phase) {
@@ -399,8 +399,8 @@ public class Edges
 		}
 
 		@Override
-		public @NonNull Edge createEdge(@NonNull Region region, @NonNull Node sourceNode, @NonNull Node targetNode) {
-			return new BasicEdge(this, region, sourceNode, null, targetNode);
+		public @NonNull Edge createEdge(@NonNull Node sourceNode, @NonNull Node targetNode) {
+			return new BasicEdge(this, sourceNode, null, targetNode);
 		}
 
 		@Override

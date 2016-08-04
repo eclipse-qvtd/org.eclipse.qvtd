@@ -116,7 +116,7 @@ public class RootCompositionRegion extends AbstractRegion
 				property2node.put(null, introducedNode);
 				EdgeRole.Phase edgePhase = Edges.NavigationEdgeRole.getNavigationEdgePhase(getNullNode(), introducedNode);
 				Edges.NavigationEdgeRole navigationEdgeRole = Edges.NavigationEdgeRole.getNavigationEdgeRole(edgePhase, true);
-				navigationEdgeRole.createEdge(this, getNullNode(), parent2childProperty, introducedNode);
+				navigationEdgeRole.createEdge(getNullNode(), parent2childProperty, introducedNode);
 			}
 		}
 		else if (containingClassDatumAnalysis != null) {								// Non-root oclContainer ownership
@@ -132,7 +132,7 @@ public class RootCompositionRegion extends AbstractRegion
 				Node containerNode = Nodes.COMPOSING.createNode(this, "«" + containingClassDatumAnalysis.getCompleteClass().getName() + "-oclContainer»", containingClassDatumAnalysis);
 				EdgeRole.Phase edgePhase = Edges.NavigationEdgeRole.getNavigationEdgePhase(containerNode, introducedNode);
 				Edges.NavigationEdgeRole navigationEdgeRole = Edges.NavigationEdgeRole.getNavigationEdgeRole(edgePhase, true);
-				navigationEdgeRole.createEdge(this, containerNode, parent2childProperty, introducedNode);
+				navigationEdgeRole.createEdge(containerNode, parent2childProperty, introducedNode);
 			}
 		}
 		else {																			// Knonw distinctive containment
@@ -151,7 +151,7 @@ public class RootCompositionRegion extends AbstractRegion
 				Node containerNode = Nodes.COMPOSING.createNode(this, "«" + owningClass.getName() + "-" + parent2childProperty.getName() + "»", containingClassDatumAnalysis);
 				EdgeRole.Phase edgePhase = Edges.NavigationEdgeRole.getNavigationEdgePhase(containerNode, introducedNode);
 				Edges.NavigationEdgeRole navigationEdgeRole = Edges.NavigationEdgeRole.getNavigationEdgeRole(edgePhase, true);
-				navigationEdgeRole.createEdge(this, containerNode, parent2childProperty, introducedNode);
+				navigationEdgeRole.createEdge(containerNode, parent2childProperty, introducedNode);
 			}
 		}
 		return introducedNode;

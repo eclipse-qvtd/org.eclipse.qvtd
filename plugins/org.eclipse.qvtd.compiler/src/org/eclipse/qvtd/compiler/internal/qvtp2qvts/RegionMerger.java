@@ -152,7 +152,7 @@ public class RegionMerger extends AbstractVisitor<@Nullable Visitable>
 			edgeRole = edgeRole != null ? edgeRole.merge(edgeRole2) : edgeRole2;
 		}
 		assert edgeRole != null;
-		return new BasicEdge(edgeRole, mergedRegion, mergedSourceNode, basicEdge.getName(), mergedTargetNode);
+		return new BasicEdge(edgeRole, mergedSourceNode, basicEdge.getName(), mergedTargetNode);
 	}
 
 	@Override
@@ -208,7 +208,7 @@ public class RegionMerger extends AbstractVisitor<@Nullable Visitable>
 			edgeRole = edgeRole != null ? edgeRole.merge(edgeRole2) : edgeRole2;
 		}
 		assert edgeRole != null;
-		return ((EdgeRole.Navigation)edgeRole).createEdge(mergedRegion, mergedSourceNode, navigationEdge.getProperty(), mergedTargetNode);
+		return ((EdgeRole.Navigation)edgeRole).createEdge(mergedSourceNode, navigationEdge.getProperty(), mergedTargetNode);
 	}
 
 	@Override

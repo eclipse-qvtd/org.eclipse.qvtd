@@ -26,9 +26,9 @@ public abstract class AbstractEdge implements Edge
 	private @NonNull Node targetNode;
 	protected final @Nullable String name;
 
-	protected AbstractEdge(@NonNull EdgeRole edgeRole, @NonNull Region region, @NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode) {
+	protected AbstractEdge(@NonNull EdgeRole edgeRole, @NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode) {
 		this.edgeRole = edgeRole;
-		this.region = region;
+		this.region = sourceNode.getRegion();
 		this.sourceNode = sourceNode;
 		this.name = name;
 		this.targetNode = targetNode;
