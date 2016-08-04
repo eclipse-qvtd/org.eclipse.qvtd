@@ -97,7 +97,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 
 		@Override
 		protected @NonNull Node createStepNode(@NonNull String name, @NonNull CallExp callExp, @NonNull Node sourceNode) {
-			return Nodes.PatternNodeRole.createStepNode(name, callExp, sourceNode, false);
+			return Nodes.createStepNode(name, callExp, sourceNode, false);
 		}
 	}
 
@@ -289,7 +289,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 	}
 
 	protected @NonNull Node createDataTypeNode(@NonNull Node sourceNode, @NonNull NavigationCallExp callExp) {
-		return Nodes.PatternNodeRole.createDataTypeNode(sourceNode, callExp, sourceNode.isNavigable());
+		return Nodes.createDataTypeNode(sourceNode, callExp);
 	}
 
 	protected @NonNull Node createErrorNode(@NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
@@ -305,15 +305,16 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 	}
 
 	protected @NonNull Node createIteratorNode(@NonNull Variable iterator, @NonNull Node sourceNode) {
-		return Nodes.IteratorNodeRole.createIteratorNode(iterator, sourceNode);
+		return Nodes.createIteratorNode(iterator, sourceNode);
 	}
 
 	protected @NonNull Node createLetNode(@NonNull Variable letVariable, @NonNull Node inNode) {
-		return Nodes.LetVariableNodeRole.createLetVariableNode(letVariable, inNode);
+		return Nodes.createLetVariableNode(letVariable, inNode);
 	}
 
-	protected @NonNull Node createNavigableAttributeNode(@NonNull Node sourceNode, @NonNull Property source2targetProperty) {
-		return Nodes.PatternNodeRole.createDataTypeNode(sourceNode, source2targetProperty, true);
+	protected @NonNull Node createNavigableDataTypeNode(@NonNull Node sourceNode, @NonNull Property source2targetProperty) {
+		assert sourceNode.isNavigable();
+		return Nodes.createDataTypeNode(sourceNode, source2targetProperty);
 	}
 
 	protected @NonNull NavigationEdge createNavigableNavigationEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
@@ -343,7 +344,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 	}
 
 	protected @NonNull Node createOperationNode(@NonNull String name, @NonNull TypedElement typedElement, @NonNull Node @NonNull ... argNodes) {
-		return Nodes.OperationNodeRole.createOperationNode(context, name, typedElement, argNodes);
+		return Nodes.createOperationNode(context, name, typedElement, argNodes);
 	}
 
 	protected @NonNull Edge createPredicateEdge(@NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode) {
@@ -359,7 +360,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 	}
 
 	protected @NonNull Node createRealizedDataTypeNode(@NonNull Node sourceNode, @NonNull Property source2targetProperty) {
-		return Nodes.PatternNodeRole.createRealizedDataTypeNode(sourceNode, source2targetProperty);
+		return Nodes.createRealizedDataTypeNode(sourceNode, source2targetProperty);
 	}
 
 	protected @NonNull Edge createRealizedExpressionEdge(@NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode) {
@@ -373,7 +374,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 	}
 
 	protected @NonNull Node createStepNode(@NonNull String name, @NonNull CallExp callExp, @NonNull Node sourceNode) {
-		return Nodes.PatternNodeRole.createStepNode(name, callExp, sourceNode, sourceNode.isNavigable());
+		return Nodes.createStepNode(name, callExp, sourceNode, sourceNode.isNavigable());
 	}
 
 	protected @Nullable Node findOperationNode(@NonNull String name, @NonNull Node @NonNull ... sourceAndArgumentNodes) {
@@ -452,7 +453,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 					stepNode = createRealizedDataTypeNode(sourceNode, source2targetProperty);
 				}
 				else {
-					stepNode = createNavigableAttributeNode(sourceNode, source2targetProperty);
+					stepNode = createNavigableDataTypeNode(sourceNode, source2targetProperty);
 				}
 				navigationEdge = createNavigationOrRealizedEdge(sourceNode, source2targetProperty, stepNode, navigationAssignment);
 				createExpressionEdge(targetNode, "«equals»", stepNode);

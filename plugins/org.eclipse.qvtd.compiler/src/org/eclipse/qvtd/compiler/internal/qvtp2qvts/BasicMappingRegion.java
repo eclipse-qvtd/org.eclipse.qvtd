@@ -211,7 +211,7 @@ public class BasicMappingRegion extends AbstractMappingRegion
 			for (@NonNull Variable guardVariable : ClassUtil.nullFree(guardPattern.getVariable())) {
 				Node guardNode = getNode(guardVariable);
 				assert guardNode == null;
-				guardNode = Nodes.PatternNodeRole.createGuardNode(this, guardVariable);
+				guardNode = Nodes.createGuardNode(this, guardVariable);
 				assert guardNode == getNode(guardVariable);
 			}
 		}
@@ -281,7 +281,7 @@ public class BasicMappingRegion extends AbstractMappingRegion
 			for (@NonNull RealizedVariable realizedVariable : ClassUtil.nullFree(bottomPattern.getRealizedVariable())) {
 				Node realizedNode = getNode(realizedVariable);
 				assert realizedNode == null;
-				realizedNode = Nodes.PatternNodeRole.createRealizedStepNode(this, realizedVariable);
+				realizedNode = Nodes.createRealizedStepNode(this, realizedVariable);
 				assert realizedNode == getNode(realizedVariable);
 			}
 		}
@@ -328,7 +328,7 @@ public class BasicMappingRegion extends AbstractMappingRegion
 		assert initNode != null;
 		if ((ownedInit instanceof OperationCallExp) && initNode.isOperation()) {
 			if (QVTbaseUtil.isIdentification(((OperationCallExp)ownedInit).getReferredOperation())) {
-				Node stepNode = Nodes.PatternNodeRole.createRealizedStepNode(this, variable);
+				Node stepNode = Nodes.createRealizedStepNode(this, variable);
 				Edges.ExpressionEdgeRole.createExpressionEdge(initNode, null, stepNode);
 				initNode = stepNode;
 			}
@@ -339,7 +339,7 @@ public class BasicMappingRegion extends AbstractMappingRegion
 			//			}
 			else {
 				//				Node stepNode = Nodes.STEP.createNode(this, variable.getName(), (OperationCallExp)ownedInit, initNode);
-				Node stepNode = Nodes.PatternNodeRole.createUnrealizedStepNode(this, variable);
+				Node stepNode = Nodes.createLoadedStepNode(this, variable);
 				Edges.ExpressionEdgeRole.createExpressionEdge(initNode, null, stepNode);
 				initNode = stepNode;
 			}

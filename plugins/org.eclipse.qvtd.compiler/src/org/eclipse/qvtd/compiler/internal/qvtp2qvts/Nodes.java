@@ -36,40 +36,68 @@ import org.eclipse.qvtd.pivot.schedule.ClassDatum;
  */
 public class Nodes
 {
-	public static abstract class AbstractSimpleNodeRole extends AbstractNodeRole
+	private static enum ClassableEnum { DATATYPE, CLASS };
+	private static enum GuardableEnum { STEP, GUARD, HEAD };
+	private static enum NavigableEnum { UNNAVIGABLE, NAVIGABLE };
+
+	private static @NonNull ClassableEnum asClassable(boolean isClass) {
+		return isClass ? ClassableEnum.CLASS : ClassableEnum.DATATYPE;
+	}
+
+	private static @NonNull NavigableEnum asNavigable(boolean isNavigable) {
+		return isNavigable ? NavigableEnum.NAVIGABLE : NavigableEnum.UNNAVIGABLE;
+	}
+
+	protected static abstract class AbstractSimpleNodeRole extends AbstractNodeRole
 	{
 		protected AbstractSimpleNodeRole(@NonNull Phase phase) {
 			super(phase);
 		}
 
-		@Override
-		public @NonNull Node createNode(@NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
+		public @NonNull TypedNode createNode(@NonNull Node sourceNode, @NonNull Property source2targetProperty) {
+			Region region = sourceNode.getRegion();
+			assert sourceNode.isClass();
+			SchedulerConstants schedulerConstants = region.getSchedulerConstants();
+			org.eclipse.ocl.pivot.Class type = (org.eclipse.ocl.pivot.Class)source2targetProperty.getType();
+			assert type != null;
+			Type elementType = QVTbaseUtil.getElementalType(type);
+			TypedModel typedModel = elementType instanceof DataType ? schedulerConstants.getDomainAnalysis().getPrimitiveTypeModel() : sourceNode.getClassDatumAnalysis().getTypedModel();
+			assert typedModel != null;
+			ClassDatum classDatum = schedulerConstants.getClassDatum(type, typedModel);
+			ClassDatumAnalysis classDatumAnalysis = schedulerConstants.getClassDatumAnalysis(classDatum);
+			String name = source2targetProperty.getName();
+			assert name != null;
 			return new TypedNode(this, region, name, classDatumAnalysis);
 		}
 
 		@Override
-		public @NonNull Node createNode(@NonNull Region region, @NonNull String name, @NonNull TypedElement typedElement) {
+		public @NonNull TypedNode createNode(@NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
+			return new TypedNode(this, region, name, classDatumAnalysis);
+		}
+
+		@Override
+		public @NonNull TypedNode createNode(@NonNull Region region, @NonNull String name, @NonNull TypedElement typedElement) {
 			return new TypedNode(this, region, name, typedElement);
 		}
 	}
 
-	public static abstract class AbstractVariableNodeRole extends AbstractSimpleNodeRole
+	protected static abstract class AbstractVariableNodeRole extends AbstractSimpleNodeRole
 	{
-		protected final boolean isClassNode;
+		protected final @NonNull ClassableEnum classable;
 
-		protected AbstractVariableNodeRole(@NonNull Phase phase, boolean isClassNode) {
+		protected AbstractVariableNodeRole(@NonNull Phase phase, @NonNull ClassableEnum classable) {
 			super(phase);
-			this.isClassNode = isClassNode;
+			this.classable = classable;
 		}
 
 		public @NonNull VariableNode createNode(@NonNull Region region, @NonNull VariableDeclaration variable) {
-			assert isClassNode == !(variable.getType() instanceof DataType);
+			assert isClass() == !(variable.getType() instanceof DataType);
 			return region.createVariableNode(this, variable);
 		}
 
 		@Override
 		public boolean isClass() {
-			return isClassNode;
+			return classable == ClassableEnum.CLASS;
 		}
 	}
 
@@ -211,46 +239,44 @@ public class Nodes
 		}
 	}
 
-	public static final class IteratorNodeRole extends AbstractVariableNodeRole
+	private static final class IteratorNodeRole extends AbstractVariableNodeRole
 	{
-		private static final @NonNull IteratorNodeRole CONSTANT_DATATYPE_ITERATOR = new IteratorNodeRole(Role.Phase.CONSTANT, false);
-		private static final @NonNull IteratorNodeRole CONSTANT_CLASS_ITERATOR = new IteratorNodeRole(Role.Phase.CONSTANT, true);
-		private static final @NonNull IteratorNodeRole LOADED_DATATYPE_ITERATOR = new IteratorNodeRole(Role.Phase.LOADED, false);
-		private static final @NonNull IteratorNodeRole LOADED_CLASS_ITERATOR = new IteratorNodeRole(Role.Phase.LOADED, true);
-		private static final @NonNull IteratorNodeRole PREDICATED_DATATYPE_ITERATOR = new IteratorNodeRole(Role.Phase.PREDICATED, false);
-		private static final @NonNull IteratorNodeRole PREDICATED_CLASS_ITERATOR = new IteratorNodeRole(Role.Phase.PREDICATED, true);
+		private static final @NonNull IteratorNodeRole CONSTANT_DATATYPE_ITERATOR = new IteratorNodeRole(Role.Phase.CONSTANT, ClassableEnum.DATATYPE);
+		private static final @NonNull IteratorNodeRole CONSTANT_CLASS_ITERATOR = new IteratorNodeRole(Role.Phase.CONSTANT, ClassableEnum.CLASS);
+		private static final @NonNull IteratorNodeRole LOADED_DATATYPE_ITERATOR = new IteratorNodeRole(Role.Phase.LOADED, ClassableEnum.DATATYPE);
+		private static final @NonNull IteratorNodeRole LOADED_CLASS_ITERATOR = new IteratorNodeRole(Role.Phase.LOADED, ClassableEnum.CLASS);
+		private static final @NonNull IteratorNodeRole PREDICATED_DATATYPE_ITERATOR = new IteratorNodeRole(Role.Phase.PREDICATED, ClassableEnum.DATATYPE);
+		private static final @NonNull IteratorNodeRole PREDICATED_CLASS_ITERATOR = new IteratorNodeRole(Role.Phase.PREDICATED, ClassableEnum.CLASS);
 
-		public static @NonNull Node createIteratorNode(@NonNull Variable iterator, @NonNull Node sourceNode) {
-			boolean resolvedIsClassNode = !(iterator.getType() instanceof DataType);
-			IteratorNodeRole nodeRole = getIteratorNodeRole(sourceNode.getNodeRole().getPhase(), resolvedIsClassNode);
-			return nodeRole.createNode(sourceNode.getRegion(), iterator);
-		}
-
-		public static @NonNull IteratorNodeRole getIteratorNodeRole(@NonNull Phase phase, boolean isClassNode) {
-			if (isClassNode) {
-				switch (phase) {
-					case CONSTANT: return CONSTANT_CLASS_ITERATOR;
-					case LOADED: return LOADED_CLASS_ITERATOR;
-					case PREDICATED: return PREDICATED_CLASS_ITERATOR;
+		public static @NonNull IteratorNodeRole getIteratorNodeRole(@NonNull Phase phase, @NonNull ClassableEnum classable) {
+			switch (classable) {
+				case CLASS: {
+					switch (phase) {
+						case CONSTANT: return CONSTANT_CLASS_ITERATOR;
+						case LOADED: return LOADED_CLASS_ITERATOR;
+						case PREDICATED: return PREDICATED_CLASS_ITERATOR;
+					}
+					break;
 				}
-			}
-			else {
-				switch (phase) {
-					case CONSTANT: return CONSTANT_DATATYPE_ITERATOR;
-					case LOADED: return LOADED_DATATYPE_ITERATOR;
-					case PREDICATED: return PREDICATED_DATATYPE_ITERATOR;
+				case DATATYPE:  {
+					switch (phase) {
+						case CONSTANT: return CONSTANT_DATATYPE_ITERATOR;
+						case LOADED: return LOADED_DATATYPE_ITERATOR;
+						case PREDICATED: return PREDICATED_DATATYPE_ITERATOR;
+					}
+					break;
 				}
 			}
 			throw new UnsupportedOperationException();
 		}
 
-		protected IteratorNodeRole(@NonNull Phase phase, boolean isClassNode) {
-			super(phase, isClassNode);
+		protected IteratorNodeRole(@NonNull Phase phase, @NonNull ClassableEnum classable) {
+			super(phase, classable);
 		}
 
 		@Override
 		public @NonNull IteratorNodeRole asPhase(@NonNull Phase phase) {
-			return getIteratorNodeRole(phase, isClass());
+			return getIteratorNodeRole(phase, classable);
 		}
 
 		@Override
@@ -274,78 +300,79 @@ public class Nodes
 		}
 	}
 
-	public static final class LetVariableNodeRole extends AbstractVariableNodeRole
+	private static final class LetVariableNodeRole extends AbstractVariableNodeRole
 	{
-		private static final @NonNull LetVariableNodeRole CONSTANT_NAVIGABLE_DATATYPE_LET = new LetVariableNodeRole(Role.Phase.CONSTANT, true, false);
-		private static final @NonNull LetVariableNodeRole CONSTANT_NAVIGABLE_CLASS_LET = new LetVariableNodeRole(Role.Phase.CONSTANT, true, true);
-		private static final @NonNull LetVariableNodeRole CONSTANT_UNNAVIGABLE_DATATYPE_LET = new LetVariableNodeRole(Role.Phase.CONSTANT, false, false);
-		private static final @NonNull LetVariableNodeRole CONSTANT_UNNAVIGABLE_CLASS_LET = new LetVariableNodeRole(Role.Phase.CONSTANT, false, true);
-		private static final @NonNull LetVariableNodeRole LOADED_NAVIGABLE_DATATYPE_LET = new LetVariableNodeRole(Role.Phase.LOADED, true, false);
-		private static final @NonNull LetVariableNodeRole LOADED_NAVIGABLE_CLASS_LET = new LetVariableNodeRole(Role.Phase.LOADED, true, true);
-		private static final @NonNull LetVariableNodeRole LOADED_UNNAVIGABLE_DATATYPE_LET = new LetVariableNodeRole(Role.Phase.LOADED, false, false);
-		private static final @NonNull LetVariableNodeRole LOADED_UNNAVIGABLE_CLASS_LET = new LetVariableNodeRole(Role.Phase.LOADED, false, true);
-		private static final @NonNull LetVariableNodeRole PREDICATED_NAVIGABLE_DATATYPE_LET = new LetVariableNodeRole(Role.Phase.PREDICATED, true, false);
-		private static final @NonNull LetVariableNodeRole PREDICATED_NAVIGABLE_CLASS_LET = new LetVariableNodeRole(Role.Phase.PREDICATED, true, true);
-		private static final @NonNull LetVariableNodeRole PREDICATED_UNNAVIGABLE_DATATYPE_LET = new LetVariableNodeRole(Role.Phase.PREDICATED, false, false);
-		private static final @NonNull LetVariableNodeRole PREDICATED_UNNAVIGABLE_CLASS_LET = new LetVariableNodeRole(Role.Phase.PREDICATED, false, true);
+		private static final @NonNull LetVariableNodeRole CONSTANT_NAVIGABLE_DATATYPE_LET = new LetVariableNodeRole(Role.Phase.CONSTANT, NavigableEnum.NAVIGABLE, ClassableEnum.DATATYPE);
+		private static final @NonNull LetVariableNodeRole CONSTANT_NAVIGABLE_CLASS_LET = new LetVariableNodeRole(Role.Phase.CONSTANT, NavigableEnum.NAVIGABLE, ClassableEnum.CLASS);
+		private static final @NonNull LetVariableNodeRole CONSTANT_UNNAVIGABLE_DATATYPE_LET = new LetVariableNodeRole(Role.Phase.CONSTANT, NavigableEnum.UNNAVIGABLE, ClassableEnum.DATATYPE);
+		private static final @NonNull LetVariableNodeRole CONSTANT_UNNAVIGABLE_CLASS_LET = new LetVariableNodeRole(Role.Phase.CONSTANT, NavigableEnum.UNNAVIGABLE, ClassableEnum.CLASS);
+		private static final @NonNull LetVariableNodeRole LOADED_NAVIGABLE_DATATYPE_LET = new LetVariableNodeRole(Role.Phase.LOADED, NavigableEnum.NAVIGABLE, ClassableEnum.DATATYPE);
+		private static final @NonNull LetVariableNodeRole LOADED_NAVIGABLE_CLASS_LET = new LetVariableNodeRole(Role.Phase.LOADED, NavigableEnum.NAVIGABLE, ClassableEnum.CLASS);
+		private static final @NonNull LetVariableNodeRole LOADED_UNNAVIGABLE_DATATYPE_LET = new LetVariableNodeRole(Role.Phase.LOADED, NavigableEnum.UNNAVIGABLE, ClassableEnum.DATATYPE);
+		private static final @NonNull LetVariableNodeRole LOADED_UNNAVIGABLE_CLASS_LET = new LetVariableNodeRole(Role.Phase.LOADED, NavigableEnum.UNNAVIGABLE, ClassableEnum.CLASS);
+		private static final @NonNull LetVariableNodeRole PREDICATED_NAVIGABLE_DATATYPE_LET = new LetVariableNodeRole(Role.Phase.PREDICATED, NavigableEnum.NAVIGABLE, ClassableEnum.DATATYPE);
+		private static final @NonNull LetVariableNodeRole PREDICATED_NAVIGABLE_CLASS_LET = new LetVariableNodeRole(Role.Phase.PREDICATED, NavigableEnum.NAVIGABLE, ClassableEnum.CLASS);
+		private static final @NonNull LetVariableNodeRole PREDICATED_UNNAVIGABLE_DATATYPE_LET = new LetVariableNodeRole(Role.Phase.PREDICATED, NavigableEnum.UNNAVIGABLE, ClassableEnum.DATATYPE);
+		private static final @NonNull LetVariableNodeRole PREDICATED_UNNAVIGABLE_CLASS_LET = new LetVariableNodeRole(Role.Phase.PREDICATED, NavigableEnum.UNNAVIGABLE, ClassableEnum.CLASS);
 
-		public static @NonNull Node createLetVariableNode(@NonNull Variable letVariable, @NonNull Node inNode) {
-			//			Boolean resolvedIsClassNode = isClassNode;
-			//			if (resolvedIsClassNode == null) {
-			//				resolvedIsClassNode = !(letVariable.getType() instanceof DataType);
-			//			}
-			boolean resolvedIsClassNode = !(letVariable.getType() instanceof DataType);
-			boolean resolvedIsNavigable = inNode.isNavigable();
-			LetVariableNodeRole nodeRole = getLetVariableNodeRole(inNode.getNodeRole().getPhase(), resolvedIsNavigable, resolvedIsClassNode);
-			return nodeRole.createNode(inNode.getRegion(), letVariable);
-		}
-
-		public static @NonNull LetVariableNodeRole getLetVariableNodeRole(@NonNull Phase phase, boolean isNavigable, boolean isClassNode) {
-			if (isNavigable) {
-				if (isClassNode) {
-					switch (phase) {
-						case CONSTANT: return CONSTANT_NAVIGABLE_CLASS_LET;
-						case LOADED: return LOADED_NAVIGABLE_CLASS_LET;
-						case PREDICATED: return PREDICATED_NAVIGABLE_CLASS_LET;
+		public static @NonNull LetVariableNodeRole getLetVariableNodeRole(@NonNull Phase phase, @NonNull NavigableEnum navigable, @NonNull ClassableEnum classable) {
+			switch (navigable) {
+				case NAVIGABLE: {
+					switch (classable) {
+						case CLASS: {
+							switch (phase) {
+								case CONSTANT: return CONSTANT_NAVIGABLE_CLASS_LET;
+								case LOADED: return LOADED_NAVIGABLE_CLASS_LET;
+								case PREDICATED: return PREDICATED_NAVIGABLE_CLASS_LET;
+							}
+							break;
+						}
+						case DATATYPE: {
+							switch (phase) {
+								case CONSTANT: return CONSTANT_NAVIGABLE_DATATYPE_LET;
+								case LOADED: return LOADED_NAVIGABLE_DATATYPE_LET;
+								case PREDICATED: return PREDICATED_NAVIGABLE_DATATYPE_LET;
+							}
+							break;
+						}
 					}
+					break;
 				}
-				else {
-					switch (phase) {
-						case CONSTANT: return CONSTANT_NAVIGABLE_DATATYPE_LET;
-						case LOADED: return LOADED_NAVIGABLE_DATATYPE_LET;
-						case PREDICATED: return PREDICATED_NAVIGABLE_DATATYPE_LET;
+				case UNNAVIGABLE: {
+					switch (classable) {
+						case CLASS: {
+							switch (phase) {
+								case CONSTANT: return CONSTANT_UNNAVIGABLE_CLASS_LET;
+								case LOADED: return LOADED_UNNAVIGABLE_CLASS_LET;
+								case PREDICATED: return PREDICATED_UNNAVIGABLE_CLASS_LET;
+							}
+							break;
+						}
+						case DATATYPE: {
+							switch (phase) {
+								case CONSTANT: return CONSTANT_UNNAVIGABLE_DATATYPE_LET;
+								case LOADED: return LOADED_UNNAVIGABLE_DATATYPE_LET;
+								case PREDICATED: return PREDICATED_UNNAVIGABLE_DATATYPE_LET;
+							}
+							break;
+						}
 					}
-				}
-			}
-			else {
-				if (isClassNode) {
-					switch (phase) {
-						case CONSTANT: return CONSTANT_UNNAVIGABLE_CLASS_LET;
-						case LOADED: return LOADED_UNNAVIGABLE_CLASS_LET;
-						case PREDICATED: return PREDICATED_UNNAVIGABLE_CLASS_LET;
-					}
-				}
-				else {
-					switch (phase) {
-						case CONSTANT: return CONSTANT_UNNAVIGABLE_DATATYPE_LET;
-						case LOADED: return LOADED_UNNAVIGABLE_DATATYPE_LET;
-						case PREDICATED: return PREDICATED_UNNAVIGABLE_DATATYPE_LET;
-					}
+					break;
 				}
 			}
 			throw new UnsupportedOperationException();
 		}
 
-		private boolean isNavigable;
+		private @NonNull NavigableEnum navigable;
 
-		protected LetVariableNodeRole(@NonNull Phase phase, boolean isNavigable, boolean isClassNode) {
-			super(phase, isClassNode);
-			this.isNavigable = isNavigable;
+		protected LetVariableNodeRole(@NonNull Phase phase, @NonNull NavigableEnum navigable, @NonNull ClassableEnum classable) {
+			super(phase, classable);
+			this.navigable = navigable;
 		}
 
 		@Override
 		public @NonNull LetVariableNodeRole asPhase(@NonNull Phase phase) {
-			return getLetVariableNodeRole(phase, isNavigable(), isClass());
+			return getLetVariableNodeRole(phase, navigable, classable);
 		}
 
 		@Override
@@ -355,12 +382,12 @@ public class Nodes
 
 		@Override
 		public boolean isNavigable() {
-			return isNavigable;
+			return navigable == NavigableEnum.NAVIGABLE;
 		}
 
 		@Override
 		public String toString() {
-			return phase + (isNavigable ? "-Navigable-" : "-Unnavigable-") + (isClassNode ? "Class-" : "DataType-") + getClass().getSimpleName();
+			return phase + (isNavigable() ? "-Navigable-" : "-Unnavigable-") + (isClass() ? "Class-" : "DataType-") + getClass().getSimpleName();
 		}
 	}
 
@@ -394,18 +421,12 @@ public class Nodes
 		}
 	}
 
-	public static class OperationNodeRole extends AbstractSimpleNodeRole
+	private static class OperationNodeRole extends AbstractSimpleNodeRole
 	{
 		private static final @NonNull OperationNodeRole CONSTANT_OPERATION = new OperationNodeRole(Role.Phase.CONSTANT);
 		private static final @NonNull OperationNodeRole LOADED_OPERATION = new OperationNodeRole(Role.Phase.LOADED);
 		private static final @NonNull OperationNodeRole PREDICATED_OPERATION = new OperationNodeRole(Role.Phase.PREDICATED);
 		private static final @NonNull OperationNodeRole REALIZED_OPERATION = new OperationNodeRole(Role.Phase.REALIZED);
-
-		public static @NonNull Node createOperationNode(@NonNull Region region, @NonNull String name, @NonNull TypedElement typedElement, @NonNull Node... argNodes) {
-			Phase nodePhase = getOperationNodePhase(region, typedElement, argNodes);
-			OperationNodeRole nodeRole = getOperationNodeRole(nodePhase);
-			return nodeRole.createNode(region, name, typedElement);
-		}
 
 		public static @NonNull Phase getOperationNodePhase(@NonNull Region region, @NonNull TypedElement typedElement, @NonNull Node... argNodes) {
 			boolean isLoaded = false;
@@ -496,8 +517,8 @@ public class Nodes
 	{
 		private static final class ParameterNodeRole extends AbstractVariableNodeRole
 		{
-			protected ParameterNodeRole(boolean isClassNode) {
-				super(Role.Phase.PREDICATED, isClassNode);
+			protected ParameterNodeRole(boolean isClass) {
+				super(Role.Phase.PREDICATED, asClassable(isClass));
 			}
 
 			@Override
@@ -525,236 +546,173 @@ public class Nodes
 		}
 	}
 
-	public static class PatternNodeRole extends AbstractVariableNodeRole
+	private static class PatternNodeRole extends AbstractVariableNodeRole
 	{
-		private static final @NonNull PatternNodeRole CONSTANT_UNNAVIGABLE_DATATYPE_STEP = new PatternNodeRole(Role.Phase.CONSTANT, false, false, false, false);
-		private static final @NonNull PatternNodeRole LOADED_NAVIGABLE_CLASS_HEAD = new PatternNodeRole(Role.Phase.LOADED, true, true, true, true);
-		private static final @NonNull PatternNodeRole LOADED_NAVIGABLE_DATATYPE_GUARD = new PatternNodeRole(Role.Phase.LOADED, false, true, true, false);
-		private static final @NonNull PatternNodeRole LOADED_NAVIGABLE_CLASS_GUARD = new PatternNodeRole(Role.Phase.LOADED, true, true, true, false);
-		private static final @NonNull PatternNodeRole LOADED_NAVIGABLE_DATATYPE_STEP = new PatternNodeRole(Role.Phase.LOADED, false, true, false, false);
-		private static final @NonNull PatternNodeRole LOADED_NAVIGABLE_CLASS_STEP = new PatternNodeRole(Role.Phase.LOADED, true, true, false, false);
-		private static final @NonNull PatternNodeRole LOADED_UNNAVIGABLE_DATATYPE_STEP = new PatternNodeRole(Role.Phase.LOADED, false, false, false, false);
-		private static final @NonNull PatternNodeRole LOADED_UNNAVIGABLE_CLASS_STEP = new PatternNodeRole(Role.Phase.LOADED, true, false, false, false);
-		private static final @NonNull PatternNodeRole PREDICATED_NAVIGABLE_CLASS_HEAD = new PatternNodeRole(Role.Phase.PREDICATED, true, true, true, true);
-		private static final @NonNull PatternNodeRole PREDICATED_NAVIGABLE_DATATYPE_GUARD = new PatternNodeRole(Role.Phase.PREDICATED, false, true, true, false);
-		private static final @NonNull PatternNodeRole PREDICATED_NAVIGABLE_CLASS_GUARD = new PatternNodeRole(Role.Phase.PREDICATED, true, true, true, false);
-		private static final @NonNull PatternNodeRole PREDICATED_NAVIGABLE_DATATYPE_STEP = new PatternNodeRole(Role.Phase.PREDICATED, false, true, false, false);
-		private static final @NonNull PatternNodeRole PREDICATED_NAVIGABLE_CLASS_STEP = new PatternNodeRole(Role.Phase.PREDICATED, true, true, false, false);
-		private static final @NonNull PatternNodeRole PREDICATED_UNNAVIGABLE_DATATYPE_STEP = new PatternNodeRole(Role.Phase.PREDICATED, false, false, false, false);
-		private static final @NonNull PatternNodeRole PREDICATED_UNNAVIGABLE_CLASS_STEP = new PatternNodeRole(Role.Phase.PREDICATED, true, false, false, false);
-		private static final @NonNull PatternNodeRole REALIZED_UNNAVIGABLE_CLASS_STEP = new PatternNodeRole(Role.Phase.REALIZED, true, false, false, false);
-		private static final @NonNull PatternNodeRole REALIZED_UNNAVIGABLE_DATATYPE_STEP = new PatternNodeRole(Role.Phase.REALIZED, false, false, false, false);
+		private static final @NonNull PatternNodeRole CONSTANT_UNNAVIGABLE_DATATYPE_STEP = new PatternNodeRole(Role.Phase.CONSTANT, ClassableEnum.DATATYPE, NavigableEnum.UNNAVIGABLE, GuardableEnum.STEP);
+		private static final @NonNull PatternNodeRole LOADED_NAVIGABLE_CLASS_HEAD = new PatternNodeRole(Role.Phase.LOADED, ClassableEnum.CLASS, NavigableEnum.NAVIGABLE, GuardableEnum.HEAD);
+		private static final @NonNull PatternNodeRole LOADED_NAVIGABLE_DATATYPE_GUARD = new PatternNodeRole(Role.Phase.LOADED, ClassableEnum.DATATYPE, NavigableEnum.NAVIGABLE, GuardableEnum.GUARD);
+		private static final @NonNull PatternNodeRole LOADED_NAVIGABLE_CLASS_GUARD = new PatternNodeRole(Role.Phase.LOADED, ClassableEnum.CLASS, NavigableEnum.NAVIGABLE, GuardableEnum.GUARD);
+		private static final @NonNull PatternNodeRole LOADED_NAVIGABLE_DATATYPE_STEP = new PatternNodeRole(Role.Phase.LOADED, ClassableEnum.DATATYPE, NavigableEnum.NAVIGABLE, GuardableEnum.STEP);
+		private static final @NonNull PatternNodeRole LOADED_NAVIGABLE_CLASS_STEP = new PatternNodeRole(Role.Phase.LOADED, ClassableEnum.CLASS, NavigableEnum.NAVIGABLE, GuardableEnum.STEP);
+		private static final @NonNull PatternNodeRole LOADED_UNNAVIGABLE_DATATYPE_STEP = new PatternNodeRole(Role.Phase.LOADED, ClassableEnum.DATATYPE, NavigableEnum.UNNAVIGABLE, GuardableEnum.STEP);
+		private static final @NonNull PatternNodeRole LOADED_UNNAVIGABLE_CLASS_STEP = new PatternNodeRole(Role.Phase.LOADED, ClassableEnum.CLASS, NavigableEnum.UNNAVIGABLE, GuardableEnum.STEP);
+		private static final @NonNull PatternNodeRole PREDICATED_NAVIGABLE_CLASS_HEAD = new PatternNodeRole(Role.Phase.PREDICATED, ClassableEnum.CLASS, NavigableEnum.NAVIGABLE, GuardableEnum.HEAD);
+		private static final @NonNull PatternNodeRole PREDICATED_NAVIGABLE_DATATYPE_GUARD = new PatternNodeRole(Role.Phase.PREDICATED, ClassableEnum.DATATYPE, NavigableEnum.NAVIGABLE, GuardableEnum.GUARD);
+		private static final @NonNull PatternNodeRole PREDICATED_NAVIGABLE_CLASS_GUARD = new PatternNodeRole(Role.Phase.PREDICATED, ClassableEnum.CLASS, NavigableEnum.NAVIGABLE, GuardableEnum.GUARD);
+		private static final @NonNull PatternNodeRole PREDICATED_NAVIGABLE_DATATYPE_STEP = new PatternNodeRole(Role.Phase.PREDICATED, ClassableEnum.DATATYPE, NavigableEnum.NAVIGABLE, GuardableEnum.STEP);
+		private static final @NonNull PatternNodeRole PREDICATED_NAVIGABLE_CLASS_STEP = new PatternNodeRole(Role.Phase.PREDICATED, ClassableEnum.CLASS, NavigableEnum.NAVIGABLE, GuardableEnum.STEP);
+		private static final @NonNull PatternNodeRole PREDICATED_UNNAVIGABLE_DATATYPE_STEP = new PatternNodeRole(Role.Phase.PREDICATED, ClassableEnum.DATATYPE, NavigableEnum.UNNAVIGABLE, GuardableEnum.STEP);
+		private static final @NonNull PatternNodeRole PREDICATED_UNNAVIGABLE_CLASS_STEP = new PatternNodeRole(Role.Phase.PREDICATED, ClassableEnum.CLASS, NavigableEnum.UNNAVIGABLE, GuardableEnum.STEP);
+		private static final @NonNull PatternNodeRole REALIZED_UNNAVIGABLE_CLASS_STEP = new PatternNodeRole(Role.Phase.REALIZED, ClassableEnum.CLASS, NavigableEnum.UNNAVIGABLE, GuardableEnum.STEP);
+		private static final @NonNull PatternNodeRole REALIZED_UNNAVIGABLE_DATATYPE_STEP = new PatternNodeRole(Role.Phase.REALIZED, ClassableEnum.DATATYPE, NavigableEnum.UNNAVIGABLE, GuardableEnum.STEP);
 
-		public static @NonNull Node createDataTypeNode(@NonNull Node parentNode, @NonNull NavigationCallExp navigationCallExp, boolean isNavigable) {
-			Region region = parentNode.getRegion();
-			Property referredProperty = PivotUtil.getReferredProperty(navigationCallExp);
-			assert referredProperty != null;
-			boolean isDirty = region.getSchedulerConstants().isDirty(referredProperty);
-			PatternNodeRole attributeNodeRole = getDataTypeNodeRole(parentNode, isNavigable, isDirty);
-			if (attributeNodeRole != null) {
-				assert parentNode.isClass();
-				String name = referredProperty.getName();
-				assert name != null;
-				return attributeNodeRole.createNode(region, name, navigationCallExp);
-			}
-			if (parentNode.isRealized()) {
-				return createRealizedDataTypeNode(parentNode, referredProperty);
-			}
-			else {
-				throw new UnsupportedOperationException();
-			}
-		}
-
-		public static @NonNull Node createDataTypeNode(@NonNull Node parentNode, @NonNull Property property, boolean isNavigable) {
-			Region region = parentNode.getRegion();
-			boolean isDirty = region.getSchedulerConstants().isDirty(property);
-			PatternNodeRole attributeNodeRole = getDataTypeNodeRole(parentNode, isNavigable, isDirty);
-			if (attributeNodeRole != null) {
-				ClassDatumAnalysis classDatumAnalysis = getClassDatumAnalysis(parentNode, property);
-				String name = property.getName();
-				assert name != null;
-				return attributeNodeRole.createNode(region, name, classDatumAnalysis);
-			}
-			if (parentNode.isRealized()) {
-				return createRealizedDataTypeNode(parentNode, property);
-			}
-			else {
-				throw new UnsupportedOperationException();
-			}
-		}
-
-		protected static @NonNull ClassDatumAnalysis getClassDatumAnalysis(@NonNull Node parentNode, @NonNull Property property) {
-			Region region = parentNode.getRegion();
-			SchedulerConstants schedulerConstants = region.getSchedulerConstants();
-			org.eclipse.ocl.pivot.Class type = (org.eclipse.ocl.pivot.Class)property.getType();
-			assert type != null;
-			Type elementType = QVTbaseUtil.getElementalType(type);
-			TypedModel typedModel = elementType instanceof DataType ? region.getSchedulerConstants().getDomainAnalysis().getPrimitiveTypeModel() : parentNode.getClassDatumAnalysis().getTypedModel();
-			assert typedModel != null;
-			ClassDatum classDatum = schedulerConstants.getClassDatum(type, typedModel);
-			ClassDatumAnalysis classDatumAnalysis = schedulerConstants.getClassDatumAnalysis(classDatum);
-			return classDatumAnalysis;
-		}
-
-		public static @NonNull VariableNode createGuardNode(@NonNull Region region, @NonNull VariableDeclaration guardVariable) {
-			DomainUsage domainUsage = region.getSchedulerConstants().getDomainUsage(guardVariable);
-			boolean isEnforceable = domainUsage.isOutput() || domainUsage.isMiddle();
-			boolean isClass = !(guardVariable.getType() instanceof DataType);
-			PatternNodeRole patternNodeRole = getPatternNodeRole(isEnforceable ? Phase.PREDICATED : Phase.LOADED, isClass, true, true, false);
-			return patternNodeRole.createNode(region, guardVariable);
-		}
-
-		public static @NonNull Node createRealizedDataTypeNode(@NonNull Node sourceNode, @NonNull Property source2targetProperty) {
-			Region region = sourceNode.getRegion();
-			assert sourceNode.isClass();
-			ClassDatumAnalysis classDatumAnalysis = getClassDatumAnalysis(sourceNode, source2targetProperty);
-			String name = source2targetProperty.getName();
-			assert name != null;
-			return REALIZED_UNNAVIGABLE_DATATYPE_STEP.createNode(region, name, classDatumAnalysis);
-		}
-
-		public static @NonNull VariableNode createRealizedStepNode(@NonNull Region region, @NonNull Variable stepVariable) {
-			boolean isClass = !(stepVariable.getType() instanceof DataType);
-			PatternNodeRole patternNodeRole = getPatternNodeRole(Phase.REALIZED, isClass, false, false, false);
-			return patternNodeRole.createNode(region, stepVariable);
-		}
-
-		public static @NonNull Node createStepNode(@NonNull String name, @NonNull CallExp callExp, @NonNull Node sourceNode, boolean isNavigable) {
-			Region region = sourceNode.getRegion();
-			DomainUsage domainUsage = region.getSchedulerConstants().getDomainUsage(callExp);
-			boolean isMiddleOrOutput = domainUsage.isOutput() || domainUsage.isMiddle();
-			boolean isDirty = false;
-			if (callExp instanceof NavigationCallExp) {
-				Property referredProperty = PivotUtil.getReferredProperty((NavigationCallExp)callExp);
-				isDirty = region.getSchedulerConstants().isDirty(referredProperty);
-			}
-			Phase phase = sourceNode.isPredicated() || isMiddleOrOutput || isDirty ? Phase.PREDICATED : Phase.LOADED;
-			PatternNodeRole stepNodeRole = getPatternNodeRole(phase, sourceNode.isClass(), isNavigable, false, false);
-			return stepNodeRole.createNode(region, name, callExp);
-		}
-
-		private static PatternNodeRole getDataTypeNodeRole(@NonNull Node sourceNode, boolean isNavigable, boolean isDirty) {
-			if (sourceNode.isLoaded()) {
-				if (!isDirty) {
-					return isNavigable ? LOADED_NAVIGABLE_DATATYPE_STEP : LOADED_UNNAVIGABLE_DATATYPE_STEP;
+		public static @NonNull PatternNodeRole getDataTypeNodeRole(@NonNull Node sourceNode, @NonNull Property property) {
+			Phase phase;
+			switch (sourceNode.getNodeRole().getPhase()) {
+				case REALIZED: phase = Phase.REALIZED; break;
+				case PREDICATED: phase = Phase.PREDICATED; break;
+				case LOADED: {
+					boolean isDirty = sourceNode.getRegion().getSchedulerConstants().isDirty(property);
+					phase = isDirty ? Phase.PREDICATED : Phase.LOADED; break;
 				}
-				else {
-					return isNavigable ? PREDICATED_NAVIGABLE_DATATYPE_STEP : PREDICATED_UNNAVIGABLE_DATATYPE_STEP;
-				}
+				case CONSTANT: phase = Phase.CONSTANT; break;
+				default: throw new UnsupportedOperationException();
 			}
-			else if (sourceNode.isPredicated()) {
-				return isNavigable ? PREDICATED_NAVIGABLE_DATATYPE_STEP : PREDICATED_UNNAVIGABLE_DATATYPE_STEP;
-			}
-			return null;
+			NavigableEnum navigableEnum = asNavigable(sourceNode.isNavigable());
+			return getPatternNodeRole(phase, ClassableEnum.DATATYPE, navigableEnum, GuardableEnum.STEP);
 		}
 
-		public static @NonNull VariableNode createUnrealizedStepNode(@NonNull Region region, @NonNull VariableDeclaration stepVariable) {
-			boolean isClass = !(stepVariable.getType() instanceof DataType);
-			return (isClass ? LOADED_NAVIGABLE_CLASS_STEP : LOADED_NAVIGABLE_DATATYPE_STEP).createNode(region, stepVariable);
-		}
-
-		public static @NonNull PatternNodeRole getPatternNodeRole(@NonNull Phase phase, boolean isClass, boolean isNavigable, boolean isGuard, boolean isHead) {
-			if (isNavigable) {
-				if (isHead) {
-					if (isClass) {
-						switch (phase) {
-							case LOADED: return LOADED_NAVIGABLE_CLASS_HEAD;
-							case PREDICATED: return PREDICATED_NAVIGABLE_CLASS_HEAD;
+		public static @NonNull PatternNodeRole getPatternNodeRole(@NonNull Phase phase, @NonNull ClassableEnum classable, @NonNull NavigableEnum navigable, @NonNull GuardableEnum guardable) {
+			switch (navigable) {
+				case NAVIGABLE: {
+					switch (guardable) {
+						case HEAD: {
+							switch (classable) {
+								case CLASS: {
+									switch (phase) {
+										case LOADED: return LOADED_NAVIGABLE_CLASS_HEAD;
+										case PREDICATED: return PREDICATED_NAVIGABLE_CLASS_HEAD;
+									}
+									break;
+								}
+								case DATATYPE: {
+									switch (phase) {
+									}
+									break;
+								}
+							}
+							break;
+						}
+						case GUARD: {
+							switch (classable) {
+								case CLASS: {
+									switch (phase) {
+										case LOADED: return LOADED_NAVIGABLE_CLASS_GUARD;
+										case PREDICATED: return PREDICATED_NAVIGABLE_CLASS_GUARD;
+									}
+									break;
+								}
+								case DATATYPE: {
+									switch (phase) {
+										case LOADED: return LOADED_NAVIGABLE_DATATYPE_GUARD;
+										case PREDICATED: return PREDICATED_NAVIGABLE_DATATYPE_GUARD;
+									}
+									break;
+								}
+							}
+							break;
+						}
+						case STEP: {
+							switch (classable) {
+								case CLASS: {
+									switch (phase) {
+										case LOADED: return LOADED_NAVIGABLE_CLASS_STEP;
+										case PREDICATED: return PREDICATED_NAVIGABLE_CLASS_STEP;
+									}
+									break;
+								}
+								case DATATYPE: {
+									switch (phase) {
+										case LOADED: return LOADED_NAVIGABLE_DATATYPE_STEP;
+										case PREDICATED: return PREDICATED_NAVIGABLE_DATATYPE_STEP;
+									}
+									break;
+								}
+							}
+							break;
 						}
 					}
-					else {
-						switch (phase) {
-						}
-					}
+					break;
 				}
-				else if (isGuard) {
-					if (isClass) {
-						switch (phase) {
-							case LOADED: return LOADED_NAVIGABLE_CLASS_GUARD;
-							case PREDICATED: return PREDICATED_NAVIGABLE_CLASS_GUARD;
+				case UNNAVIGABLE: {
+					switch (guardable) {
+						case HEAD: {
+							break;
+						}
+						case GUARD: {
+							break;
+						}
+						case STEP: {
+							switch (classable) {
+								case CLASS: {
+									switch (phase) {
+										case LOADED: return LOADED_UNNAVIGABLE_CLASS_STEP;
+										case PREDICATED: return PREDICATED_UNNAVIGABLE_CLASS_STEP;
+										case REALIZED: return REALIZED_UNNAVIGABLE_CLASS_STEP;
+									}
+									break;
+								}
+								case DATATYPE: {
+									switch (phase) {
+										case CONSTANT: return CONSTANT_UNNAVIGABLE_DATATYPE_STEP;
+										case LOADED: return LOADED_UNNAVIGABLE_DATATYPE_STEP;
+										case PREDICATED: return PREDICATED_UNNAVIGABLE_DATATYPE_STEP;
+										case REALIZED: return REALIZED_UNNAVIGABLE_DATATYPE_STEP;
+									}
+									break;
+								}
+							}
+							break;
 						}
 					}
-					else {
-						switch (phase) {
-							case LOADED: return LOADED_NAVIGABLE_DATATYPE_GUARD;
-							case PREDICATED: return PREDICATED_NAVIGABLE_DATATYPE_GUARD;
-						}
-					}
-				}
-				else {
-					if (isClass) {
-						switch (phase) {
-							case LOADED: return LOADED_NAVIGABLE_CLASS_STEP;
-							case PREDICATED: return PREDICATED_NAVIGABLE_CLASS_STEP;
-						}
-					}
-					else {
-						switch (phase) {
-							case LOADED: return LOADED_NAVIGABLE_DATATYPE_STEP;
-							case PREDICATED: return PREDICATED_NAVIGABLE_DATATYPE_STEP;
-						}
-					}
-				}
-			}
-			else {
-				if (isHead) {}
-				else if (isGuard) {}
-				else {
-					if (isClass) {
-						switch (phase) {
-							case LOADED: return LOADED_UNNAVIGABLE_CLASS_STEP;
-							case PREDICATED: return PREDICATED_UNNAVIGABLE_CLASS_STEP;
-							case REALIZED: return REALIZED_UNNAVIGABLE_CLASS_STEP;
-						}
-					}
-					else {
-						switch (phase) {
-							case CONSTANT: return CONSTANT_UNNAVIGABLE_DATATYPE_STEP;
-							case LOADED: return LOADED_UNNAVIGABLE_DATATYPE_STEP;
-							case PREDICATED: return PREDICATED_UNNAVIGABLE_DATATYPE_STEP;
-							case REALIZED: return REALIZED_UNNAVIGABLE_DATATYPE_STEP;
-						}
-					}
+					break;
 				}
 			}
 			throw new UnsupportedOperationException();
 		}
 
-		private final boolean isNavigable;
-		private final boolean isGuard;
-		private final boolean isHead;
+		private final @NonNull NavigableEnum navigable;
+		private final @NonNull GuardableEnum guardable;
 
-		private PatternNodeRole(@NonNull Phase phase, boolean isClass, boolean isNavigable, boolean isGuard, boolean isHead) {
-			super(phase, isClass);
-			assert !(!isGuard && isHead);
-			this.isNavigable = isNavigable;
-			this.isGuard = isGuard;
-			this.isHead = isHead;
+		private PatternNodeRole(@NonNull Phase phase, @NonNull ClassableEnum classable, @NonNull NavigableEnum navigable, @NonNull GuardableEnum guardable) {
+			super(phase, classable);
+			this.navigable = navigable;
+			this.guardable = guardable;
 		}
 
 		@Override
 		public @NonNull PatternNodeRole asPhase(@NonNull Phase phase) {
-			return getPatternNodeRole(phase, isClassNode, isNavigable, isGuard, isHead);
+			return getPatternNodeRole(phase, classable, navigable, guardable);
 		}
 
 		@Override
 		public boolean isGuard() {
-			return isGuard;
+			return guardable != GuardableEnum.STEP;
 		}
 
 		@Override
 		public boolean isHead() {
-			return isHead;
+			return guardable == GuardableEnum.HEAD;
 		}
 
 		@Override
 		public boolean isMatchable() {
-			return isGuard;
+			return isGuard();
 		}
 
 		@Override
 		public boolean isNavigable() {
-			return isNavigable;
+			return navigable == NavigableEnum.NAVIGABLE;
 		}
 
 		@Override
@@ -762,35 +720,32 @@ public class Nodes
 			assert nodeRole instanceof PatternNodeRole;
 			assert isClass() == nodeRole.isClass();
 			Phase mergedPhase = RegionUtil.mergeToMoreKnownPhase(this, nodeRole).getPhase();
-			boolean mergedNavigable;
-			boolean mergedGuard;
-			boolean mergedHead;
+			NavigableEnum mergedNavigable;
+			GuardableEnum mergedGuardable;
 			if (mergedPhase == Phase.REALIZED) {
-				mergedNavigable = false;
-				mergedGuard = false;
-				mergedHead = false;
+				mergedNavigable = NavigableEnum.UNNAVIGABLE;
+				mergedGuardable = GuardableEnum.STEP;
 			}
 			else {
-				mergedNavigable = isNavigable || nodeRole.isNavigable();
-				mergedGuard = isGuard || nodeRole.isGuard();
-				mergedHead = isHead && nodeRole.isHead();
+				mergedNavigable = asNavigable(isNavigable() || nodeRole.isNavigable());
+				mergedGuardable = (isHead() && nodeRole.isHead()) ? GuardableEnum.HEAD : isGuard() || nodeRole.isGuard() ? GuardableEnum.GUARD : GuardableEnum.STEP;
 			}
-			return getPatternNodeRole(mergedPhase, isClass(), mergedNavigable, mergedGuard, mergedHead);
+			return getPatternNodeRole(mergedPhase, classable, mergedNavigable, mergedGuardable);
 		}
 
 		@Override
 		public @NonNull NodeRole resetHead() {
-			return getPatternNodeRole(phase, isClassNode, isNavigable, isGuard, false);
+			return getPatternNodeRole(phase, classable, navigable, !isGuard() ? GuardableEnum.STEP : GuardableEnum.GUARD);
 		}
 
 		@Override
 		public @NonNull NodeRole setHead() {
-			return getPatternNodeRole(phase, isClassNode, isNavigable, isGuard, true);
+			return getPatternNodeRole(phase, classable, navigable, GuardableEnum.HEAD);
 		}
 
 		@Override
 		public String toString() {
-			return phase + (isNavigable ? "-Navigable" : "-Unnavigable") + (isClassNode ? "-Class" : "-DataType") + (isHead ? "Head-" : isGuard ? "Guard-" : "Step-") + getClass().getSimpleName();
+			return phase + (isNavigable() ? "-Navigable" : "-Unnavigable") + (isClass() ? "-Class" : "-DataType") + (isHead() ? "Head-" : isGuard() ? "Guard-" : "Step-") + getClass().getSimpleName();
 		}
 	}
 
@@ -964,4 +919,79 @@ public class Nodes
 	public static final @NonNull PredicatedInternalNodeRole PREDICATED_CLASS = new PredicatedInternalNodeRole();
 	public static final @NonNull TrueNodeRole TRUE = new TrueNodeRole();
 	public static final @NonNull NodeRole UNKNOWN = new UnknownNodeRole();
+
+	public static @NonNull TypedNode createDataTypeNode(@NonNull Node sourceNode, @NonNull Property property) {
+		PatternNodeRole patternNodeRole = PatternNodeRole.getDataTypeNodeRole(sourceNode, property);
+		return patternNodeRole.createNode(sourceNode, property);
+	}
+
+	public static @NonNull TypedNode createDataTypeNode(@NonNull Node sourceNode, @NonNull NavigationCallExp navigationCallExp) {
+		Property property = PivotUtil.getReferredProperty(navigationCallExp);
+		PatternNodeRole patternNodeRole = PatternNodeRole.getDataTypeNodeRole(sourceNode, property);
+		assert sourceNode.isClass();
+		String name = property.getName();
+		assert name != null;
+		return patternNodeRole.createNode(sourceNode.getRegion(), name, navigationCallExp);
+	}
+
+	public static @NonNull VariableNode createGuardNode(@NonNull Region region, @NonNull VariableDeclaration variable) {
+		DomainUsage domainUsage = region.getSchedulerConstants().getDomainUsage(variable);
+		boolean isEnforceable = domainUsage.isOutput() || domainUsage.isMiddle();
+		ClassableEnum classable = asClassable(!(variable.getType() instanceof DataType));
+		Role.Phase phase = isEnforceable ? Role.Phase.PREDICATED : Role.Phase.LOADED;
+		PatternNodeRole patternNodeRole = PatternNodeRole.getPatternNodeRole(phase, classable, NavigableEnum.NAVIGABLE, GuardableEnum.GUARD);
+		return patternNodeRole.createNode(region, variable);
+	}
+
+	public static @NonNull VariableNode createIteratorNode(@NonNull Variable iterator, @NonNull Node sourceNode) {
+		ClassableEnum classable = asClassable(!(iterator.getType() instanceof DataType));
+		IteratorNodeRole nodeRole = IteratorNodeRole.getIteratorNodeRole(sourceNode.getNodeRole().getPhase(), classable);
+		return nodeRole.createNode(sourceNode.getRegion(), iterator);
+	}
+
+	public static @NonNull VariableNode createLetVariableNode(@NonNull Variable letVariable, @NonNull Node inNode) {
+		ClassableEnum classable = asClassable(!(letVariable.getType() instanceof DataType));
+		NavigableEnum resolvedIsNavigable = asNavigable(inNode.isNavigable());
+		LetVariableNodeRole nodeRole = LetVariableNodeRole.getLetVariableNodeRole(inNode.getNodeRole().getPhase(), resolvedIsNavigable, classable);
+		return nodeRole.createNode(inNode.getRegion(), letVariable);
+	}
+
+	public static @NonNull VariableNode createLoadedStepNode(@NonNull Region region, @NonNull VariableDeclaration stepVariable) {
+		ClassableEnum classable = asClassable(!(stepVariable.getType() instanceof DataType));
+		PatternNodeRole patternNodeRole = PatternNodeRole.getPatternNodeRole(Role.Phase.LOADED, classable, NavigableEnum.NAVIGABLE, GuardableEnum.STEP);
+		return patternNodeRole.createNode(region, stepVariable);
+	}
+
+	public static @NonNull TypedNode createOperationNode(@NonNull Region region, @NonNull String name, @NonNull TypedElement typedElement, @NonNull Node... argNodes) {
+		Role.Phase nodePhase = OperationNodeRole.getOperationNodePhase(region, typedElement, argNodes);
+		OperationNodeRole nodeRole = OperationNodeRole.getOperationNodeRole(nodePhase);
+		return nodeRole.createNode(region, name, typedElement);
+	}
+
+	public static @NonNull TypedNode createRealizedDataTypeNode(@NonNull Node sourceNode, @NonNull Property source2targetProperty) {
+		PatternNodeRole patternNodeRole = PatternNodeRole.getPatternNodeRole(Role.Phase.REALIZED, ClassableEnum.DATATYPE, NavigableEnum.UNNAVIGABLE, GuardableEnum.STEP);
+		return patternNodeRole.createNode(sourceNode, source2targetProperty);
+	}
+
+	public static @NonNull VariableNode createRealizedStepNode(@NonNull Region region, @NonNull Variable stepVariable) {
+		ClassableEnum classable = asClassable(!(stepVariable.getType() instanceof DataType));
+		PatternNodeRole patternNodeRole = PatternNodeRole.getPatternNodeRole(Role.Phase.REALIZED, classable, NavigableEnum.UNNAVIGABLE, GuardableEnum.STEP);
+		return patternNodeRole.createNode(region, stepVariable);
+	}
+
+	public static @NonNull TypedNode createStepNode(@NonNull String name, @NonNull CallExp callExp, @NonNull Node sourceNode, boolean isNavigable) {
+		Region region = sourceNode.getRegion();
+		DomainUsage domainUsage = region.getSchedulerConstants().getDomainUsage(callExp);
+		boolean isMiddleOrOutput = domainUsage.isOutput() || domainUsage.isMiddle();
+		boolean isDirty = false;
+		if (callExp instanceof NavigationCallExp) {
+			Property referredProperty = PivotUtil.getReferredProperty((NavigationCallExp)callExp);
+			isDirty = region.getSchedulerConstants().isDirty(referredProperty);
+		}
+		Role.Phase phase = sourceNode.isPredicated() || isMiddleOrOutput || isDirty ? Role.Phase.PREDICATED : Role.Phase.LOADED;
+		NavigableEnum navigableEnum = isNavigable ? NavigableEnum.NAVIGABLE : NavigableEnum.UNNAVIGABLE;
+		ClassableEnum classable = asClassable(sourceNode.isClass());
+		PatternNodeRole stepNodeRole = PatternNodeRole.getPatternNodeRole(phase, classable, navigableEnum, GuardableEnum.STEP);
+		return stepNodeRole.createNode(region, name, callExp);
+	}
 }

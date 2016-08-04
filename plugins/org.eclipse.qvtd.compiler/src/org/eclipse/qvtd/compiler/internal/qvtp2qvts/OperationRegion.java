@@ -66,7 +66,7 @@ public class OperationRegion extends AbstractRegion
 		Node extraNode;
 		extraNode = selfNode;
 		//
-		resultNode = Nodes.PatternNodeRole.createStepNode("result", operationCallExp, extraNode, false);
+		resultNode = Nodes.createStepNode("result", operationCallExp, extraNode, false);
 		Edges.ExpressionEdgeRole.createExpressionEdge(extraNode, null, resultNode);
 		//
 		List<Variable> ownedParameters = specification.getOwnedParameters();
@@ -158,7 +158,8 @@ public class OperationRegion extends AbstractRegion
 								Edges.NavigationEdgeRole.createNavigationEdge(extraNode2, iterateProperty, elementNode);
 								extraNode2 = elementNode;
 							}
-							Node nextNode = Nodes.PatternNodeRole.createDataTypeNode(extraNode2, navigationCallExp, false);
+							assert !extraNode2.isNavigable();
+							Node nextNode = Nodes.createDataTypeNode(extraNode2, navigationCallExp);
 							Edges.NavigationEdgeRole.createNavigationEdge(extraNode2, property, nextNode);
 							extraNode2 = nextNode;
 						}

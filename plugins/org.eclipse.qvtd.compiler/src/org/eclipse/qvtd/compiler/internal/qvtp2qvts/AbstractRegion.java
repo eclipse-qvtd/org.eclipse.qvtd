@@ -1453,21 +1453,6 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 		}
 	} */
 
-	/*	protected @NonNull PredicateEdge createPredicateEdge(@NonNull ClassNode sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
-		PredicateEdge predicateEdge = new PredicateEdge(this, sourceNode, source2targetProperty, targetNode);
-		Property target2sourceProperty = source2targetProperty.getOpposite();
-		if ((target2sourceProperty != null) && target2sourceProperty.isIsComposite()) {
-			ClassNode composedNode = sourceNode;
-			Node composingNode = targetNode;			// May be NullNode
-			Property composingProperty = target2sourceProperty;
-			if (composingNode instanceof ClassNode) {
-				((ClassNode)composingNode).addComposingProperty2composedNode(composingProperty, composedNode);
-			}
-			composedNode.addComposingProperty2composingNode(composingProperty, composingNode);
-		}
-		return predicateEdge;
-	} */
-
 	@Override
 	public @NonNull VariableNode createVariableNode(@NonNull NodeRole nodeRole, @NonNull VariableDeclaration variable) {
 		return new VariableNode(nodeRole, this, variable);
@@ -1504,31 +1489,6 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 		}
 		return ancestors;
 	}
-
-	@Deprecated
-	public @NonNull Node getAssignedAttributeNode(@NonNull Node parentNode, @NonNull Property property) {
-		assert parentNode.isClass();
-		assert property.getType() instanceof DataType;
-		Node node = parentNode.getNavigationTarget(property);
-		//		AbstractAttributeNode node = (AbstractAttributeNode)node2node.get(property);
-		if (node == null) {
-			node = Nodes.PatternNodeRole.createRealizedDataTypeNode(parentNode, property);
-			//			node2node.put(property, node);
-		}
-		return node;
-	}
-
-	/*	public @NonNull Node getAssignedClassNode(@NonNull Node parentNode, @NonNull Property property) {
-		assert parentNode.isClassNode();
-		assert !(property.getType() instanceof DataType);
-		Node node = parentNode.getNavigationTarget(property);
-//		AbstractAttributeNode node = (AbstractAttributeNode)node2node.get(property);
-		if (node == null) {
-			node = Nodes.NAV.createNode(region, parentNode, navigationCallExp)Node(parentNode.getRegion(), parentNode, property);
-//			node2node.put(property, node);
-		}
-		return node;
-	} */
 
 	@Override
 	public final @NonNull Iterable<@NonNull Node> getAssignedNodes() {
