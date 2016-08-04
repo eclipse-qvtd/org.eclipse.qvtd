@@ -14,11 +14,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.BasicMappingRegion;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.MicroMappingRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.MultiRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.QVTp2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RootScheduledRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.ScheduledRegion;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.Partitioner;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.splitter.Split;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.splitter.Splitter;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
@@ -101,12 +104,12 @@ public class QVTs2QVTs extends QVTimperativeHelper
 
 	public @NonNull RootScheduledRegion transform(@NonNull MultiRegion multiRegion) {
 		List<@NonNull Region> activeRegions = multiRegion.getActiveRegions();
-		/*		for (@NonNull Region region : activeRegions) {
+		for (@NonNull Region region : activeRegions) {
 			if (region instanceof BasicMappingRegion) {
 				Partitioner partitioner = new Partitioner((BasicMappingRegion) region);
 				Iterable<@NonNull MicroMappingRegion> partitionedRegions = partitioner.partition();
 			}
-		} */
+		}
 		RootScheduledRegion rootRegion = createRootRegion(activeRegions);
 		rootRegion.createSchedule();
 		createSchedule(rootRegion);
