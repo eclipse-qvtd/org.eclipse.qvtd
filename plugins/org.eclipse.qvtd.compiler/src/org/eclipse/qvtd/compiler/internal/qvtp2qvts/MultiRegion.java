@@ -104,7 +104,7 @@ public class MultiRegion
 	//		return allRegions;
 	//	}
 
-	public void setActiveRegions(@NonNull Iterable<@NonNull Region> activeRegions) {	// FIXME eliminate
+	public void setActiveRegions(@NonNull Iterable<@NonNull ? extends Region> activeRegions) {	// FIXME eliminate
 		this.activeRegions = Lists.newArrayList(activeRegions);
 	}
 }

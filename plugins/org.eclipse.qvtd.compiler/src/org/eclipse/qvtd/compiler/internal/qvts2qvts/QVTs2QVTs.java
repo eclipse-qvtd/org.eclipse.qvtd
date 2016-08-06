@@ -27,6 +27,9 @@ import org.eclipse.qvtd.compiler.internal.qvts2qvts.splitter.Splitter;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeHelper;
 
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
+
 /**
  * QVTs2QVTi supervises the serialization of a QVTs schedule as a QVTi transformation.
  */
@@ -39,9 +42,9 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		this.rootName = rootName;
 	}
 
-	public @NonNull RootScheduledRegion createRootRegion(@NonNull List<@NonNull Region> allRegions) {
+	public @NonNull RootScheduledRegion createRootRegion(@NonNull Iterable<@NonNull ? extends Region> allRegions) {
 		RootScheduledRegion rootRegion = null;
-		for (@NonNull Region region : new ArrayList<@NonNull Region>(allRegions)) {
+		for (@NonNull Region region : Lists.newArrayList(allRegions)) {
 			if (region.getInvokingRegion() == null) {
 				if (rootRegion == null) {
 					rootRegion = new RootScheduledRegion(rootName, region);
@@ -103,14 +106,15 @@ public class QVTs2QVTs extends QVTimperativeHelper
 	}
 
 	public @NonNull RootScheduledRegion transform(@NonNull MultiRegion multiRegion) {
-		List<@NonNull Region> activeRegions = multiRegion.getActiveRegions();
+		Iterable<@NonNull ? extends Region> activeRegions = multiRegion.getActiveRegions();
+		List<@NonNull MicroMappingRegion> partitionedRegions = new ArrayList<>();
 		for (@NonNull Region region : activeRegions) {
 			if (region instanceof BasicMappingRegion) {
 				Partitioner partitioner = new Partitioner((BasicMappingRegion) region);
-				Iterable<@NonNull MicroMappingRegion> partitionedRegions = partitioner.partition();
+				Iterables.addAll(partitionedRegions, partitioner.partition());
 			}
 		}
-		RootScheduledRegion rootRegion = createRootRegion(activeRegions);
+		RootScheduledRegion rootRegion = createRootRegion(partitionedRegions);
 		rootRegion.createSchedule();
 		createSchedule(rootRegion);
 		return rootRegion;
