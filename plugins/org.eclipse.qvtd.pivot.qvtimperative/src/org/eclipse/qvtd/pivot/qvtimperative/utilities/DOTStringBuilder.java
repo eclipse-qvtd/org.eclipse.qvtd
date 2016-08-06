@@ -44,7 +44,7 @@ public class DOTStringBuilder implements GraphStringBuilder
 		//		newLine();		-- one line to facitate dual use of toString() in debugger
 		append("fontname=arial;");
 		//		newLine();
-		append("edge [fontname=arial,penwidth=2];");
+		append("edge [fontname=arial,penwidth=2,arrowsize=1.5];");
 		//		newLine();
 		append("node [shape=rectangle,fontname=arial,penwidth=2];");
 		//		newLine();
@@ -255,7 +255,6 @@ public class DOTStringBuilder implements GraphStringBuilder
 	@Override
 	public void setArrowtail(@NonNull String value) {
 		attributes.put("arrowtail", value);
-		attributes.put("arrowsize", "1.5");
 	}
 
 	@Override

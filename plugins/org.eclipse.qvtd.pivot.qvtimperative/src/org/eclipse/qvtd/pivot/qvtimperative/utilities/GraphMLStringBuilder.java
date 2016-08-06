@@ -77,7 +77,7 @@ public class GraphMLStringBuilder extends GraphMLBuilder implements GraphStringB
 		String shapeName = shape;
 		String fillColor = "#ffffff";
 		String lineColor = color;
-		LineType lineType = LineType.line;
+		//		LineType lineType = LineType.line;
 		Double width = Double.valueOf(penwidth);
 		s.pushTag("node");
 		s.appendElement("id", NODEID_PREFIX + id);
@@ -226,13 +226,13 @@ public class GraphMLStringBuilder extends GraphMLBuilder implements GraphStringB
 	@SuppressWarnings("null")
 	@Override
 	public void setStyle(@NonNull String style) {
-		if ("dashed".equals(style)) {
+		if (style.indexOf("dashed") >= 0) {
 			lineType = LineType.dashed;
 		}
-		else if ("dotted".equals(style)) {
+		else if (style.indexOf("dotted") >= 0) {
 			lineType = LineType.dotted;
 		}
-		if ("rounded".equals(style)) {
+		if (style.indexOf("rounded") >= 0) {
 			shape = ShapeType.roundrectangle.toString();
 		}
 	}
