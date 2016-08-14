@@ -60,7 +60,9 @@ import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMLHelperImpl;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.internal.resource.ProjectMap;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.uml2.uml.Association;
 import org.eclipse.uml2.uml.Classifier;
 import org.eclipse.uml2.uml.Comment;
@@ -88,9 +90,9 @@ import org.eclipse.uml2.uml.util.UMLUtil;
 //  -- See "How to get an image out of a Papyrus diagram ?" Papyrus newsgroup thread
 @SuppressWarnings("restriction")
 public class Ecore2UML {
-	
+
 	public static class MyConverter extends UMLUtil.Ecore2UMLConverter {
-		
+
 		public Element get(EObject eObject) {
 			return eModelElementToElementMap.get(eObject);
 		}
@@ -105,7 +107,7 @@ public class Ecore2UML {
 
 				if (eSuperPackage != null) {
 					((org.eclipse.uml2.uml.Package) doSwitch(eSuperPackage))
-						.getNestedPackages().add(package_);
+					.getNestedPackages().add(package_);
 				}
 			}
 
@@ -117,14 +119,14 @@ public class Ecore2UML {
 			return package_;
 		}
 	}
-	
+
 	public static class MyXMIResourceFactoryImpl extends XMIResourceFactoryImpl
 	{
 		@Override
 		public Resource createResource(URI uri) {
-		    return new MyXMIResourceImpl(uri);
+			return new MyXMIResourceImpl(uri);
 		}
-		
+
 	}
 
 	public static class MyXMIResourceImpl extends XMIResourceImpl
@@ -135,22 +137,22 @@ public class Ecore2UML {
 
 		@Override
 		protected XMLSave createXMLSave() {
-		    return new MyXMISaveImpl(createXMLHelper());
+			return new MyXMISaveImpl(createXMLHelper());
 		}
 
 		@Override
 		protected XMLSave createXMLSave(Map<?, ?> options) {
-		    if (options != null && Boolean.TRUE.equals(options.get(OPTION_SUPPRESS_XMI)))
-		    {
-		      return new MyXMISaveImpl(new XMLHelperImpl(this));
-		    }
-		    else
-		    {
-		      return super.createXMLSave(options);
-		    }
+			if (options != null && Boolean.TRUE.equals(options.get(OPTION_SUPPRESS_XMI)))
+			{
+				return new MyXMISaveImpl(new XMLHelperImpl(this));
+			}
+			else
+			{
+				return super.createXMLSave(options);
+			}
 		}
 	}
-	
+
 	public static class MyXMISaveImpl extends UMLSaveImpl
 	{
 		public MyXMISaveImpl(XMLHelper helper) {
@@ -173,7 +175,7 @@ public class Ecore2UML {
 
 	public static void main(String [ ] args) throws IOException {
 		ProjectMap projectMap = new ProjectMap(false);
-//		EcorePlugin.ExtensionProcessor.process(Ecore2UML.class.getClassLoader());
+		//		EcorePlugin.ExtensionProcessor.process(Ecore2UML.class.getClassLoader());
 		ResourceSet ecoreResourceSet = new ResourceSetImpl();
 		projectMap.initializeResourceSet(ecoreResourceSet);
 		ecoreResourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("ecore", new EcoreResourceFactoryImpl());
@@ -274,7 +276,7 @@ public class Ecore2UML {
 		for (Resource umlResource : umlResourceSet.getResources()) {
 			URI xmiURI = URI.createPlatformResourceURI("/org.eclipse.qvt/model/xmi/" + umlResource.getURI().trimFileExtension().lastSegment() + ".xmi", true);
 			XMIResource xmiResource = (XMIResource) xmiResourceSet.createResource(xmiURI);
-		    xmiResource.setXMIVersion("20131001");
+			xmiResource.setXMIVersion("20131001");
 			xmiResource.getContents().addAll(umlResource.getContents());
 			for (EObject eObject : new ArrayList<EObject>(xmiResource.getContents())) {
 				String nsPrefix = nsPrefixes.get(eObject);
@@ -324,7 +326,7 @@ public class Ecore2UML {
 		//
 		//	Create QVT.ecore
 		//
-		List<EObject> rootObjects = new ArrayList<EObject>();
+		List<@NonNull EObject> rootObjects = new ArrayList<>();
 		for (Resource ecoreResource : ecoreResourceSet.getResources()) {
 			rootObjects.addAll(ecoreResource.getContents());
 		}
@@ -380,9 +382,9 @@ public class Ecore2UML {
 					else if ("Integer".equals(eType.getName())) {
 						eTypedElement.setEType(EcorePackage.Literals.EINT);
 					}
-//					else if ("Real".equals(eType.getName())) {
-//						eTypedElement.setEType(EcorePackage.Literals.EDOUBLE);
-//					}
+					//					else if ("Real".equals(eType.getName())) {
+					//						eTypedElement.setEType(EcorePackage.Literals.EDOUBLE);
+					//					}
 					else if ("String".equals(eType.getName())) {
 						eTypedElement.setEType(EcorePackage.Literals.ESTRING);
 					}
@@ -429,10 +431,10 @@ public class Ecore2UML {
 				}
 			}
 		}
-//		ByteArrayOutputStream os = new ByteArrayOutputStream();
+		//		ByteArrayOutputStream os = new ByteArrayOutputStream();
 		emofResource.save(saveOptions);
-//		ByteArrayInputStream is = new ByteArrayInputStream(os.toByteArray());
-//		OutputStream s = URIConverter.WriteableOutputStream();
+		//		ByteArrayInputStream is = new ByteArrayInputStream(os.toByteArray());
+		//		OutputStream s = URIConverter.WriteableOutputStream();
 		Map<String, Object> emofSaveOptions = new HashMap<String, Object>();
 		xmiSaveOptions.put(XMIResource.OPTION_USE_XMI_TYPE, Boolean.TRUE);
 		xmiSaveOptions.put(XMLResource.OPTION_LINE_WIDTH, 132);
@@ -466,16 +468,16 @@ public class Ecore2UML {
 	}
 
 	public static void nameAssociations(Resource umlResource) {
-		List<List<? extends NamedElement>> listOfLists = new ArrayList<List<? extends NamedElement>>();
+		List<@NonNull List<@NonNull ? extends NamedElement>> listOfLists = new ArrayList<>();
 		for (Iterator<EObject> it = umlResource.getAllContents(); it.hasNext(); ) {
 			EObject eObject = it.next();
 			if (eObject instanceof Association) {
 				Association association = (Association) eObject;
-				List<String> endNames = new ArrayList<String>();
+				List<@NonNull String> endNames = new ArrayList<>();
 				for (Property end : association.getMemberEnds()) {
-					Type type = end.getClass_(); 
+					Type type = end.getClass_();
 					String name = (type != null ? (safeNameOf(type) + ".") : "") + safeNameOf(end);
-					endNames.add(name != null ? name : "$$null$$");
+					endNames.add(name);
 				}
 				Collections.sort(endNames);
 				StringBuilder s = new StringBuilder();
@@ -486,32 +488,32 @@ public class Ecore2UML {
 				association.setName(s.toString());
 			}
 		}
-		for (List<? extends NamedElement> list : listOfLists) {
+		for (List<@NonNull ? extends NamedElement> list : listOfLists) {
 			sortList(list);
 		}
 	}
 
 	public static void alphabeticize(Resource umlResource) {
-		List<List<? extends NamedElement>> listOfLists = new ArrayList<List<? extends NamedElement>>();
+		List<@NonNull List<@NonNull ? extends NamedElement>> listOfLists = new ArrayList<>();
 		for (Iterator<EObject> it = umlResource.getAllContents(); it.hasNext(); ) {
 			EObject eObject = it.next();
 			if (eObject instanceof org.eclipse.uml2.uml.Package) {
 				org.eclipse.uml2.uml.Package package_ = (org.eclipse.uml2.uml.Package) eObject;
-				listOfLists.add(package_.getNestedPackages());
-				listOfLists.add(package_.getOwnedTypes());
+				listOfLists.add(ClassUtil.nullFree(package_.getNestedPackages()));
+				listOfLists.add(ClassUtil.nullFree(package_.getOwnedTypes()));
 			}
 			else if (eObject instanceof org.eclipse.uml2.uml.Class) {
 				org.eclipse.uml2.uml.Class class_ = (org.eclipse.uml2.uml.Class) eObject;
-				listOfLists.add(class_.getGenerals());
-				listOfLists.add(class_.getOwnedAttributes());
-				listOfLists.add(class_.getOwnedOperations());
+				listOfLists.add(ClassUtil.nullFree(class_.getGenerals()));
+				listOfLists.add(ClassUtil.nullFree(class_.getOwnedAttributes()));
+				listOfLists.add(ClassUtil.nullFree(class_.getOwnedOperations()));
 			}
 		}
-		for (List<? extends NamedElement> list : listOfLists) {
+		for (List<@NonNull ? extends NamedElement> list : listOfLists) {
 			sortList(list);
 		}
 	}
-	
+
 
 	public static String safeNameOf(Object object) {
 		if (object == null) {
@@ -529,7 +531,7 @@ public class Ecore2UML {
 		}
 		return name;
 	}
-	
+
 
 	public static void assignIDs(Resource umlResource) {
 		UMLSwitch<String> idAssigner = new UMLSwitch<String>() {
@@ -576,7 +578,7 @@ public class Ecore2UML {
 			public String caseProperty(Property object) {
 				return safeNameOf(object.getOwner()) + "." + safeNameOf(object);
 			}
-			
+
 			@Override
 			public String casePackage(Package object) {
 				return object.getName();
@@ -599,7 +601,7 @@ public class Ecore2UML {
 				}
 				return safeNameOf(object);
 			}
-			
+
 		};
 		Map<String, EObject> assignedIds = new HashMap<String, EObject>();
 		for (Iterator<EObject> it = umlResource.getAllContents(); it.hasNext(); ) {
@@ -618,7 +620,7 @@ public class Ecore2UML {
 		}
 	}
 
-	protected static <T extends NamedElement> void sortList(List<T> list) {
+	protected static <@NonNull T extends NamedElement> void sortList(List<T> list) {
 		List<T> newList = new ArrayList<T>(list);
 		Collections.sort(newList, new Comparator<T>()
 		{

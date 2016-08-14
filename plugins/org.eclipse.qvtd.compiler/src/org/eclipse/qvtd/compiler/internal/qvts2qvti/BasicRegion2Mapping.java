@@ -346,7 +346,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 
 		@Override
 		public @NonNull OCLExpression visitIfExp(@NonNull IfExp pIfExp) {
-			PivotMetamodelManager metamodelManager = (PivotMetamodelManager)visitor.getMetamodelManager();
+			PivotMetamodelManager metamodelManager = visitor.getMetamodelManager();
 			return metamodelManager.createIfExp(createNonNull(pIfExp.getOwnedCondition()),
 				inlineExpressionCreator.createNonNull(pIfExp.getOwnedThen()),
 				inlineExpressionCreator.createNonNull(pIfExp.getOwnedElse()));

@@ -129,13 +129,13 @@ public abstract class QVTcoreBaseDeclarationVisitor extends QVTbaseDeclarationVi
 
 		public QVTcoreBaseAliasAnalysis(@NonNull Resource resource, @NonNull EnvironmentFactoryInternal environmentFactory) {
 			super(resource, environmentFactory);
- 		}
+		}
 	}
 
 	public QVTcoreBaseDeclarationVisitor(@NonNull AS2CSConversion context) {
 		super(context);
 	}
-	
+
 	protected void addClass(@NonNull PackageOwnerCS csParentPackage, @NonNull ClassCS csClass) {
 		/*if (csParentPackage instanceof AbstractTopLevelCS) {
 			((AbstractTopLevelCS)csParentPackage).getOwnedClasses().add(csClass);
@@ -147,7 +147,7 @@ public abstract class QVTcoreBaseDeclarationVisitor extends QVTbaseDeclarationVi
 			throw new UnsupportedOperationException(getClass().getSimpleName() + " addClass for a " + csClass.eClass().getName());
 		}
 	}
-	
+
 	protected void addPackage(@NonNull PackageOwnerCS csParentPackage, @NonNull QualifiedPackageCS csPackage) {
 		csParentPackage.getOwnedPackages().add(csPackage);
 	}
@@ -163,7 +163,7 @@ public abstract class QVTcoreBaseDeclarationVisitor extends QVTbaseDeclarationVi
 			throw new UnsupportedOperationException(getClass().getSimpleName() + " addClass for a " + csTransformation.eClass().getName());
 		}
 	}
-	
+
 	public void buildModel(@NonNull RootPackageCS csRootPackage, @NonNull Model asModel) {
 		for (org.eclipse.ocl.pivot.@NonNull Package asPackage : ClassUtil.nullFree(asModel.getOwnedPackages())) {
 			if (!Orphanage.isTypeOrphanage(asPackage)) {
@@ -171,7 +171,7 @@ public abstract class QVTcoreBaseDeclarationVisitor extends QVTbaseDeclarationVi
 			}
 		}
 	}
-	
+
 	private void buildPackage(@NonNull PackageOwnerCS csParentPackage, @Nullable List<@NonNull NamedElement> csParentPath, org.eclipse.ocl.pivot.@NonNull Package asPackage) {
 		if (needsQualifiedPackageCS(asPackage)) {
 			QualifiedPackageCS csPackage = context.visitDeclaration(QualifiedPackageCS.class, asPackage);
@@ -183,7 +183,7 @@ public abstract class QVTcoreBaseDeclarationVisitor extends QVTbaseDeclarationVi
 			csParentPath = null;
 		}
 		else {
-			List<@NonNull NamedElement> csPath = new ArrayList<@NonNull NamedElement>();
+			List<@NonNull NamedElement> csPath = new ArrayList<>();
 			if (csParentPath != null) {
 				csPath.addAll(csParentPath);
 			}
@@ -197,7 +197,7 @@ public abstract class QVTcoreBaseDeclarationVisitor extends QVTbaseDeclarationVi
 			buildClass(csParentPackage, csParentPath, asChildClass);
 		}
 	}
-	
+
 	private void buildClass(@NonNull PackageOwnerCS csParentPackage, @Nullable List<@NonNull NamedElement> csPath, org.eclipse.ocl.pivot.@NonNull Class asClass) {
 		ClassCS csClass = context.visitDeclaration(ClassCS.class, asClass);
 		if (csClass instanceof AbstractTransformationCS) {
@@ -264,7 +264,7 @@ public abstract class QVTcoreBaseDeclarationVisitor extends QVTbaseDeclarationVi
 	 * Post-processing sets up the AliasAdapter with the names from the Unit declarations
 	 */
 	@Override
-	public void postProcess(@NonNull BaseCSResource csResource, @NonNull Map<Namespace, List<String>> importedNamespaces) {
+	public void postProcess(@NonNull BaseCSResource csResource, @NonNull Map<@NonNull Namespace, @NonNull List<@NonNull String>> importedNamespaces) {
 		AliasAnalysis.dispose(csResource);
 		QVTcoreBaseAliasAnalysis aliasAdapter = QVTcoreBaseAliasAnalysis.getAdapter(csResource, context.getEnvironmentFactory());
 		List<EObject> contents = csResource.getContents();
@@ -377,25 +377,25 @@ public abstract class QVTcoreBaseDeclarationVisitor extends QVTbaseDeclarationVi
 
 	@Override
 	public ElementCS visitPackage(org.eclipse.ocl.pivot.@NonNull Package asPackage) {
-//		List<org.eclipse.ocl.pivot.@NonNull Class> asClasses = ClassUtil.nullFree(asPackage.getOwnedClasses());
-//		List<org.eclipse.ocl.pivot.@NonNull Package> asPackages = ClassUtil.nullFree(asPackage.getOwnedPackages());
-//		if (needsQualifiedPackageCS(asPackage)) {
-//			assert needsQualifiedPackageCS(asPackage);
-			QualifiedPackageCS csPackage = context.refreshNamedElement(QualifiedPackageCS.class, QVTbaseCSPackage.Literals.QUALIFIED_PACKAGE_CS, asPackage);
-//			context.refreshList(csPackage.getOwnedClasses(), context.visitDeclarations(ClassCS.class, asClasses, null));
-			csPackage.setNsPrefix(asPackage.getNsPrefix());
-			csPackage.setNsURI(asPackage.getURI());
-//			context.refreshList(csPackage.getOwnedPackages(), context.visitDeclarations(QualifiedPackageCS.class, asPackages, null));
-			return csPackage;
-//		}
-//		else {
-//			PackageCS csPackage = context.refreshNamedElement(PackageCS.class, BaseCSPackage.Literals.PACKAGE_CS, asPackage);
-//			context.refreshList(csPackage.getOwnedClasses(), context.visitDeclarations(ClassCS.class, asClasses, null));
-//			csPackage.setNsPrefix(asPackage.getNsPrefix());
-//			csPackage.setNsURI(asPackage.getURI());
-//			context.refreshList(csPackage.getOwnedPackages(), context.visitDeclarations(PackageCS.class, asPackages, null));
-//			return csPackage;
-//		}
+		//		List<org.eclipse.ocl.pivot.@NonNull Class> asClasses = ClassUtil.nullFree(asPackage.getOwnedClasses());
+		//		List<org.eclipse.ocl.pivot.@NonNull Package> asPackages = ClassUtil.nullFree(asPackage.getOwnedPackages());
+		//		if (needsQualifiedPackageCS(asPackage)) {
+		//			assert needsQualifiedPackageCS(asPackage);
+		QualifiedPackageCS csPackage = context.refreshNamedElement(QualifiedPackageCS.class, QVTbaseCSPackage.Literals.QUALIFIED_PACKAGE_CS, asPackage);
+		//			context.refreshList(csPackage.getOwnedClasses(), context.visitDeclarations(ClassCS.class, asClasses, null));
+		csPackage.setNsPrefix(asPackage.getNsPrefix());
+		csPackage.setNsURI(asPackage.getURI());
+		//			context.refreshList(csPackage.getOwnedPackages(), context.visitDeclarations(QualifiedPackageCS.class, asPackages, null));
+		return csPackage;
+		//		}
+		//		else {
+		//			PackageCS csPackage = context.refreshNamedElement(PackageCS.class, BaseCSPackage.Literals.PACKAGE_CS, asPackage);
+		//			context.refreshList(csPackage.getOwnedClasses(), context.visitDeclarations(ClassCS.class, asClasses, null));
+		//			csPackage.setNsPrefix(asPackage.getNsPrefix());
+		//			csPackage.setNsURI(asPackage.getURI());
+		//			context.refreshList(csPackage.getOwnedPackages(), context.visitDeclarations(PackageCS.class, asPackages, null));
+		//			return csPackage;
+		//		}
 	}
 
 	@Override
@@ -438,16 +438,16 @@ public abstract class QVTcoreBaseDeclarationVisitor extends QVTbaseDeclarationVi
 	@Override
 	public ElementCS visitTransformation(@NonNull Transformation asTransformation) {
 		TransformationCS csTransformation = context.refreshNamedElement(TransformationCS.class, QVTcoreBaseCSPackage.Literals.TRANSFORMATION_CS, asTransformation);
-//		csTransformation.setPivot(asTransformation);
-//		org.eclipse.ocl.pivot.Package owningPackage = asTransformation.getOwningPackage();
-//		if ((owningPackage == null) || "".equals(owningPackage.getName()) || (owningPackage.getName() == null)) {
-//			csTransformation.setOwnedPathName(null);
-//		}
-//		else {
-//			PathNameCS csPathName = BaseCSFactory.eINSTANCE.createPathNameCS();
-//			csTransformation.setOwnedPathName(csPathName);
-//			context.refreshPathName(csPathName, owningPackage, null);
-//		}
+		//		csTransformation.setPivot(asTransformation);
+		//		org.eclipse.ocl.pivot.Package owningPackage = asTransformation.getOwningPackage();
+		//		if ((owningPackage == null) || "".equals(owningPackage.getName()) || (owningPackage.getName() == null)) {
+		//			csTransformation.setOwnedPathName(null);
+		//		}
+		//		else {
+		//			PathNameCS csPathName = BaseCSFactory.eINSTANCE.createPathNameCS();
+		//			csTransformation.setOwnedPathName(csPathName);
+		//			context.refreshPathName(csPathName, owningPackage, null);
+		//		}
 		context.refreshList(csTransformation.getOwnedDirections(), context.visitDeclarations(DirectionCS.class, asTransformation.getModelParameter(), null));
 		return csTransformation;
 	}
@@ -457,9 +457,9 @@ public abstract class QVTcoreBaseDeclarationVisitor extends QVTbaseDeclarationVi
 		DirectionCS csDirection = context.refreshNamedElement(DirectionCS.class, QVTcoreBaseCSPackage.Literals.DIRECTION_CS, asTypedModel, null);
 		if ("".equals(asTypedModel.getName())) {
 			csDirection.setName(null);
-		}	
+		}
 		PivotUtilInternal.refreshList(csDirection.getImports(), asTypedModel.getUsedPackage());
-//		PivotUtil.refreshList(csDirection.getUses(), asTypedModel.getDependsOn());
+		//		PivotUtil.refreshList(csDirection.getUses(), asTypedModel.getDependsOn());
 		return csDirection;
 	}
 
