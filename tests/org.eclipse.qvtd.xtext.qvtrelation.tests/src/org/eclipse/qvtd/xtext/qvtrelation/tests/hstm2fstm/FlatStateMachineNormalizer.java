@@ -27,7 +27,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.xtext.tests.XtextTestCase.Normalizer;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.qvtd.pivot.qvtbase.utilities.TreeIterable;
+import org.eclipse.ocl.pivot.utilities.TreeIterable;
 import org.eclipse.qvtd.xtext.qvtimperative.tests.ModelNormalizer;
 
 /**

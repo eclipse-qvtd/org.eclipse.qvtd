@@ -19,7 +19,7 @@ import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.VariableDeclaration;
-import org.eclipse.qvtd.pivot.qvtbase.utilities.TreeIterable;
+import org.eclipse.ocl.pivot.utilities.TreeIterable;
 
 
 public class TestsXMLUtil {

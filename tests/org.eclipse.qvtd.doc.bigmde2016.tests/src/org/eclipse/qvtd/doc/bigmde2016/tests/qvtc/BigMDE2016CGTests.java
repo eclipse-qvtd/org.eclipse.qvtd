@@ -17,13 +17,10 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.m2m.qvt.oml.BasicModelExtent;
-import org.eclipse.m2m.qvt.oml.ModelExtent;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
+import org.eclipse.ocl.pivot.utilities.TreeIterable;
 import org.eclipse.qvtd.doc.bigmde2016.tests.FamiliesGenerator;
 import org.eclipse.qvtd.doc.bigmde2016.tests.PrintAndLog;
-import org.eclipse.qvtd.doc.bigmde2016.tests.qvto.QVToSimpleUMLGenerator;
-import org.eclipse.qvtd.pivot.qvtbase.utilities.TreeIterable;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePivotStandaloneSetup;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiTransformationExecutor;
@@ -43,33 +40,35 @@ import junit.framework.TestCase;
  * Source code for CG results in BigMDE 2016, Eclipse QVTC First Results paper.
  */
 public class BigMDE2016CGTests extends TestCase
-{ 
+{
 	public static void garbageCollect() throws InterruptedException {
 		for (int y = 0; y < 5; y++) {
 			System.gc();
 			Thread.sleep(100);
 		}
 	}
-	
+
+	@Override
 	@Before
-    public void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 		QVTimperativePivotStandaloneSetup.doSetup();
-    }
+	}
 
-    @After
-    public void tearDown() throws Exception {
+	@Override
+	@After
+	public void tearDown() throws Exception {
 		super.tearDown();
-    }
-    
-    @Test
-    public void testQVTcCompiler_Families_EcoreUtilCopy() throws Exception {
-    	PrintAndLog logger = new PrintAndLog("results/" + getName());
-    	logger.printf("%s\n", getName());
+	}
+
+	@Test
+	public void testQVTcCompiler_Families_EcoreUtilCopy() throws Exception {
+		PrintAndLog logger = new PrintAndLog("results/" + getName());
+		logger.printf("%s\n", getName());
 		QVTiEnvironmentFactory environmentFactory = new QVTiEnvironmentFactory(ProjectManager.NO_PROJECTS, null);
 		try {
-	        int[] tests = PrintAndLog.getTestSizes();
-	        for (int testSize : tests) {
+			int[] tests = PrintAndLog.getTestSizes();
+			for (int testSize : tests) {
 				Collection<@NonNull ? extends EObject> rootObjects = FamiliesGenerator.createFamiliesModel(testSize, 9);
 				garbageCollect();
 				logger.printf("%9d, ", 10*testSize);
@@ -78,22 +77,22 @@ public class BigMDE2016CGTests extends TestCase
 				long endTime = System.nanoTime();
 				logger.printf("%9.6f\n", (endTime - startTime) / 1.0e9);
 				assert rootObjects2.size() == testSize;
-	        }
+			}
 		}
 		finally {
 			environmentFactory.dispose();
 			logger.dispose();
 		}
 	}
-    
-    @Test
-    public void testQVTcCompiler_Families2Persons_CG() throws Exception {
-    	PrintAndLog logger = new PrintAndLog(getName());
-    	logger.printf("%s\n", getName());
+
+	@Test
+	public void testQVTcCompiler_Families2Persons_CG() throws Exception {
+		PrintAndLog logger = new PrintAndLog(getName());
+		logger.printf("%s\n", getName());
 		QVTiEnvironmentFactory environmentFactory = new QVTiEnvironmentFactory(ProjectManager.NO_PROJECTS, null);
 		try {
-	        int[] tests = PrintAndLog.getTestSizes();
-	        for (int testSize : tests) {
+			int[] tests = PrintAndLog.getTestSizes();
+			for (int testSize : tests) {
 				Iterable<@NonNull ? extends Object> rootObjects = FamiliesGenerator.createFamiliesModel(testSize, 9);
 				QVTiTransformationExecutor generatedExecutor = new QVTiTransformationExecutor(environmentFactory, Families2Persons.class);
 				Transformer transformer = generatedExecutor.getTransformer();
@@ -106,22 +105,22 @@ public class BigMDE2016CGTests extends TestCase
 				logger.printf("%9.6f\n", (endTime - startTime) / 1.0e9);
 				Collection<@NonNull Object> rootObjects2 = transformer.getRootObjects("person");
 				assert rootObjects2.size() == 9*testSize;
-	        }
+			}
 		}
 		finally {
 			environmentFactory.dispose();
 			logger.dispose();
 		}
 	}
-    
-    @Test
-    public void testQVTcCompiler_Families2Persons_ManualInPlace() throws Exception {
-    	PrintAndLog logger = new PrintAndLog(getName());
-    	logger.printf("%s\n", getName());
+
+	@Test
+	public void testQVTcCompiler_Families2Persons_ManualInPlace() throws Exception {
+		PrintAndLog logger = new PrintAndLog(getName());
+		logger.printf("%s\n", getName());
 		QVTiEnvironmentFactory environmentFactory = new QVTiEnvironmentFactory(ProjectManager.NO_PROJECTS, null);
 		try {
-	        int[] tests = PrintAndLog.getTestSizes();
-	        for (int testSize : tests) {
+			int[] tests = PrintAndLog.getTestSizes();
+			for (int testSize : tests) {
 				Iterable<@NonNull ? extends EObject> rootObjects = FamiliesGenerator.createFamiliesModel(testSize, 9);
 				garbageCollect();
 				logger.printf("%9d, ", 10*testSize);
@@ -137,21 +136,21 @@ public class BigMDE2016CGTests extends TestCase
 				long endTime = System.nanoTime();
 				logger.printf("%9.6f\n", (endTime - startTime) / 1.0e9);
 				assert members.size() == 9*testSize;
-	        }
+			}
 		}
 		finally {
 			environmentFactory.dispose();
 			logger.dispose();
 		}
 	}
-    @Test
-    public void testQVTcCompiler_Families2Persons_ManualCopy() throws Exception {
-    	PrintAndLog logger = new PrintAndLog(getName());
-    	logger.printf("%s\n", getName());
+	@Test
+	public void testQVTcCompiler_Families2Persons_ManualCopy() throws Exception {
+		PrintAndLog logger = new PrintAndLog(getName());
+		logger.printf("%s\n", getName());
 		QVTiEnvironmentFactory environmentFactory = new QVTiEnvironmentFactory(ProjectManager.NO_PROJECTS, null);
 		try {
-	        int[] tests = PrintAndLog.getTestSizes();
-	        for (int testSize : tests) {
+			int[] tests = PrintAndLog.getTestSizes();
+			for (int testSize : tests) {
 				Iterable<@NonNull ? extends EObject> rootObjects = FamiliesGenerator.createFamiliesModel(testSize, 9);
 				garbageCollect();
 				logger.printf("%9d, ", 10*testSize);
@@ -171,35 +170,35 @@ public class BigMDE2016CGTests extends TestCase
 				long endTime = System.nanoTime();
 				logger.printf("%9.6f\n", (endTime - startTime) / 1.0e9);
 				assert members.size() == 9*testSize;
-	        }
+			}
 		}
 		finally {
 			environmentFactory.dispose();
 			logger.dispose();
 		}
 	}
-    
-    private Member manualCopy(@NonNull Member oldMember) {
+
+	private Member manualCopy(@NonNull Member oldMember) {
 		Member newMember = FamiliesFactory.eINSTANCE.createMember();
 		newMember.setFirstName(oldMember.getFirstName());
 		return newMember;
 	}
 
 	@Test
-    public void testQVTcCompiler_UML2RDBMS_CG() throws Exception {
-    	PrintAndLog logger = new PrintAndLog(getName());
-    	logger.printf("%s\n", getName());
+	public void testQVTcCompiler_UML2RDBMS_CG() throws Exception {
+		PrintAndLog logger = new PrintAndLog(getName());
+		logger.printf("%s\n", getName());
 		QVTiEnvironmentFactory environmentFactory = new QVTiEnvironmentFactory(ProjectManager.NO_PROJECTS, null);
 		try {
-	       	QVTcSimpleUMLGenerator generator = new QVTcSimpleUMLGenerator();
-	        int[] tests = PrintAndLog.getTestSizes();
-	        for (int testSize : tests) {
-	        	int nPackages = testSize;
-	           	int nClasses = testSize * 8;
-	           	int nTypes = 0;//testSize;
-	           	int nProperties = 0;//testSize * 45;
-	           	int nAssociations = 0;//testSize * 45;
-	        	int nElements = nPackages + nClasses + nTypes + nProperties + nAssociations;
+			QVTcSimpleUMLGenerator generator = new QVTcSimpleUMLGenerator();
+			int[] tests = PrintAndLog.getTestSizes();
+			for (int testSize : tests) {
+				int nPackages = testSize;
+				int nClasses = testSize * 8;
+				int nTypes = 0;//testSize;
+				int nProperties = 0;//testSize * 45;
+				int nAssociations = 0;//testSize * 45;
+				int nElements = nPackages + nClasses + nTypes + nProperties + nAssociations;
 				Iterable<@NonNull ? extends Object> rootObjects = generator.createSimpleUMLModel(nPackages, nClasses, nTypes, nProperties, nAssociations);
 				QVTiTransformationExecutor generatedExecutor = new QVTiTransformationExecutor(environmentFactory, umlRdbms.class);
 				Transformer transformer = generatedExecutor.getTransformer();
@@ -211,7 +210,7 @@ public class BigMDE2016CGTests extends TestCase
 				long endTime = System.nanoTime();
 				logger.printf("%9.6f\n", (endTime - startTime) / 1.0e9);
 				Collection<@NonNull Object> rootObjects2 = transformer.getRootObjects("rdbms");
-//				assert rootObjects2.size() == 9*testSize;
+				//				assert rootObjects2.size() == 9*testSize;
 				int count = 0;
 				for (Object eObject1 : rootObjects2) {
 					for (EObject eObject2 : new TreeIterable((EObject)eObject1, true)) {
@@ -219,7 +218,7 @@ public class BigMDE2016CGTests extends TestCase
 					}
 				}
 				System.out.println(rootObjects2.size() + " => " + count);
-	        }
+			}
 		}
 		finally {
 			environmentFactory.dispose();
