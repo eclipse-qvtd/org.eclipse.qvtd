@@ -58,7 +58,6 @@ import org.eclipse.qvtd.xtext.qvtcore.tests.QVTcTestUtil;
 import org.eclipse.qvtd.xtext.qvtimperative.tests.ModelNormalizer;
 import org.eclipse.qvtd.xtext.qvtimperative.tests.QVTiTestUtil;
 import org.eclipse.qvtd.xtext.qvtrelation.tests.hstm2fstm.FlatStateMachineNormalizer;
-import org.eclipse.qvtd.xtext.qvtrelation.tests.rel2core.PivotNormalizer;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -557,7 +556,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 	}
 
-	@Test
+	/*	@Test
 	public void testQVTrCompiler_SimplerRel2Core_CG() throws Exception {
 		//		AbstractTransformer.EXCEPTIONS.setState(true);
 		//		AbstractTransformer.INVOCATIONS.setState(true);
@@ -592,5 +591,5 @@ public class QVTrCompilerTests extends LoadTestCase
 		finally {
 			myQVT.dispose();
 		}
-	}
+	} */
 }
