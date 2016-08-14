@@ -1015,10 +1015,10 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 	}
 
 	/**
-	 * Lazily create the name Property for a traceClass with a type.
-	 * @param isMany
+	 * Lazily create the name Property for a traceClass with a type. If manyTraces is set there may be many trace class instances referencing the same object through
+	 * the trace property and so the implicit opposite must be a Bag.
 	 */
-	/*public*/ @NonNull Property whenTraceProperty(@Nullable Domain rDomain, org.eclipse.ocl.pivot.@NonNull Class traceClass, @NonNull String name, @NonNull Type type, boolean isRequired, boolean isMany) {
+	/*public*/ @NonNull Property whenTraceProperty(@Nullable Domain rDomain, org.eclipse.ocl.pivot.@NonNull Class traceClass, @NonNull String name, @NonNull Type type, boolean isRequired, boolean manyTraces) {
 		Map<@NonNull String, @NonNull Property> name2traceProperty = traceClass2name2traceProperty.get(traceClass);
 		if (name2traceProperty == null) {
 			name2traceProperty = new HashMap<@NonNull String, @NonNull Property>();
@@ -1044,8 +1044,8 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 			if (!(type instanceof DataType)) {
 				Property oppositeProperty = PivotFactory.eINSTANCE.createProperty();
 				oppositeProperty.setName(traceClass.getName());		// FIXME unique, mutable Class
-				oppositeProperty.setType(isMany ? environmentFactory.getCompleteEnvironment().getSetType(traceClass, true, null, null) : traceClass);
-				oppositeProperty.setIsRequired(isMany);
+				oppositeProperty.setType(manyTraces ? environmentFactory.getCompleteEnvironment().getBagType(traceClass, true, null, null) : traceClass);
+				oppositeProperty.setIsRequired(manyTraces);
 				//				oppositeProperty.setType(traceClass);
 				//				oppositeProperty.setIsRequired(false);
 				oppositeProperty.setIsImplicit(true);
