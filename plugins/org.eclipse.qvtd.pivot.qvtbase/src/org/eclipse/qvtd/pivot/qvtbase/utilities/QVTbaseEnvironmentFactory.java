@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *     Adolfo Sanchez-Barbudo Herrera - initial API and implementation
  ******************************************************************************/
@@ -24,16 +24,17 @@ public class QVTbaseEnvironmentFactory extends AbstractEnvironmentFactory
 	public static abstract class CreateStrategy
 	{
 		public abstract @NonNull TemplateParameterSubstitutionVisitor createTemplateParameterSubstitutionVisitor(
-				@NonNull QVTbaseEnvironmentFactory environmentFactory, @Nullable Type selfType, @Nullable Type selfTypeValue);	
+				@NonNull QVTbaseEnvironmentFactory environmentFactory, @Nullable Type selfType, @Nullable Type selfTypeValue);
 	}
-	
+
 	private @Nullable CreateStrategy createStrategy = null;
-	
+
 	public QVTbaseEnvironmentFactory(@NonNull ProjectManager projectManager,
 			@Nullable ResourceSet externalResourceSet, @Nullable CreateStrategy createStrategy) {
 		super(projectManager, externalResourceSet);
 		this.createStrategy = createStrategy;
 		getStandardLibrary().setDefaultStandardLibraryURI(QVTbaseLibrary.STDLIB_URI);
+		QVTbaseUtil.initializeLoadOptionsToSupportSelfReferences(getResourceSet());		// TODO promote to Pivot
 	}
 
 	@Override
@@ -46,7 +47,7 @@ public class QVTbaseEnvironmentFactory extends AbstractEnvironmentFactory
 			return super.createTemplateParameterSubstitutionVisitor(selfType, selfTypeValue);
 		}
 	}
-	
+
 	public @Nullable CreateStrategy getCreateStrategy() {
 		return createStrategy;
 	}

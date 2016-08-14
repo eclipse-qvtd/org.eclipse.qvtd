@@ -22,6 +22,8 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CallExp;
@@ -58,7 +60,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 
-public class QVTbaseUtil
+public class QVTbaseUtil extends PivotUtil
 {
 	public static final class DomainNameComparator implements Comparator<@NonNull Domain>
 	{
@@ -316,6 +318,14 @@ public class QVTbaseUtil
 		return externalVariables;
 	}
 
+	/**
+	 * The default ResourceSet.getLoadOptions() do not support loading models that reference themselves.
+	 * Setting XMLResource.OPTION_DEFER_IDREF_RESOLUTION to true avoids this problem.
+	 * See Bug 499442.
+	 */
+	public static void initializeLoadOptionsToSupportSelfReferences(@NonNull ResourceSet resourceSet) {
+		resourceSet.getLoadOptions().put(XMLResource.OPTION_DEFER_IDREF_RESOLUTION, true);
+	}
 
 	/**
 	 * Return true if asOperation is an Identification - an operation whose result is a singleton object.
