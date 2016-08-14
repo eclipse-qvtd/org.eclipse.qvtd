@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
@@ -16,11 +16,11 @@ import org.eclipse.jdt.annotation.Nullable;
 
 /**
  * An ObjectManager supervises the state of relevant properties in objects used by a mapping invocation.
- * 
+ *
  * getting should be invoked as a pre-access guard to cause the invocation to fail if a not-ready property is accessed.
- * 
+ *
  * assigned should be invoked to invocation that a property whose access is guarded is now assigned.
- * 
+ *
  * @since 1.1
  * @noimplement clients should derive from AbstractObjectManager
  */
@@ -43,13 +43,13 @@ public interface ObjectManager extends ExecutionVisitable
 
 	@NonNull Iterable<@NonNull ? extends Object> getObjects();
 	@NonNull Iterable<@NonNull ? extends SlotState> getSlotStates(@NonNull Object object);
-	
+
 	/**
 	 * Throw an InvocationFailedException if the eFeature of eObject has not yet been assigned.
 	 * If isOpposite, the eFeature's opposite is to be be assessed.
 	 */
 	void getting(@NonNull Object eObject, /*@NonNull*/ EStructuralFeature eFeature, boolean isOpposite) throws InvocationFailedException;
-	
+
 	/**
 	 * Identify that the read of eFeature of eObject return ecoreValue.
 	 */

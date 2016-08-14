@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *     Horacio Hoyos - initial API and implementation
  ******************************************************************************/
@@ -23,6 +23,7 @@ import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.internal.evaluation.BasicEvaluationVisitor;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.CollectionValue;
@@ -69,14 +70,14 @@ import org.eclipse.qvtd.runtime.evaluation.InvocationFailedException;
 public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQVTiEvaluationVisitor
 {
 	protected final @NonNull QVTiExecutor executor;			// FIXME fold into templated context
-        
-    /**
-     * Instantiates a new qV tcore evaluation visitor impl.
-     */
-    public QVTiEvaluationVisitor(@NonNull QVTiExecutor executor) {
-        super(executor);
-        this.executor = executor;
-    }
+
+	/**
+	 * Instantiates a new qV tcore evaluation visitor impl.
+	 */
+	public QVTiEvaluationVisitor(@NonNull QVTiExecutor executor) {
+		super(executor);
+		this.executor = executor;
+	}
 
 	private @Nullable Object doConnectionAccumulation(@NonNull ConnectionVariable targetVariable, @NonNull OCLExpression valueExpression) {
 		try {
@@ -100,24 +101,24 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 		}
 	}
 
-    @Override
+	@Override
 	public @Nullable Object visitAssignment(@NonNull Assignment object) {
 		return visiting(object);
-    }
-	
+	}
+
 	@Override
 	public @Nullable Object visitBaseModel(@NonNull BaseModel object) {
 		return visiting(object);
 	}
 
-    @Override
-    public @Nullable Object visitBottomPattern(@NonNull BottomPattern object) {
+	@Override
+	public @Nullable Object visitBottomPattern(@NonNull BottomPattern object) {
 		return visiting(object);
-    }
+	}
 
-    @Override
+	@Override
 	public @Nullable Object visitConnectionAssignment(@NonNull ConnectionAssignment connectionAssignment) {
-    	ConnectionVariable targetVariable = connectionAssignment.getTargetVariable() ;
+		ConnectionVariable targetVariable = connectionAssignment.getTargetVariable() ;
 		if (targetVariable != null) {
 			OCLExpression valueExpression = connectionAssignment.getValue();
 			if (valueExpression != null) {
@@ -125,11 +126,11 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 			}
 		}
 		return null;
-    }
+	}
 
 	@Override
 	public @Nullable Object visitConnectionStatement(@NonNull ConnectionStatement connectionStatement) {
-    	ConnectionVariable targetVariable = connectionStatement.getTargetVariable() ;
+		ConnectionVariable targetVariable = connectionStatement.getTargetVariable() ;
 		if (targetVariable != null) {
 			OCLExpression valueExpression = connectionStatement.getValue();
 			if (valueExpression != null) {
@@ -154,15 +155,15 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 		return visiting(object);
 	}
 
-    @Override
+	@Override
 	public @Nullable Object visitCorePattern(@NonNull CorePattern object) {
 		return visiting(object);
-    }
+	}
 
-    @Override
+	@Override
 	public @Nullable Object visitEnforcementOperation(@NonNull EnforcementOperation object) {
 		return visiting(object);
-    }
+	}
 
 	@Override
 	public @Nullable Object visitFunction(@NonNull Function object) {
@@ -177,7 +178,7 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 	@Override
 	public @Nullable Object visitGuardPattern(@NonNull GuardPattern object) {
 		return visiting(object);
-    }
+	}
 
 	@Override
 	public @Nullable Object visitImperativeBottomPattern(@NonNull ImperativeBottomPattern object) {
@@ -189,19 +190,19 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 		return visitCoreDomain(object);
 	}
 
-    @Override
-    public @Nullable Object visitImperativeModel(@NonNull ImperativeModel imperativeModel) {
-    	for (org.eclipse.ocl.pivot.Package pkge : imperativeModel.getOwnedPackages()) {
-    		pkge.accept(undecoratedVisitor);
-    	}
-        return true;
-    }
+	@Override
+	public @Nullable Object visitImperativeModel(@NonNull ImperativeModel imperativeModel) {
+		for (org.eclipse.ocl.pivot.Package pkge : imperativeModel.getOwnedPackages()) {
+			pkge.accept(undecoratedVisitor);
+		}
+		return true;
+	}
 
 	@Override
 	public @Nullable Object visitImport(@NonNull Import object) {
 		return visiting(object);
 	}
-    
+
 	@Override
 	public @Nullable Object visitMapping(@NonNull Mapping mapping) {
 		return executor.internalExecuteMapping(mapping, undecoratedVisitor);
@@ -218,35 +219,35 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 		for (MappingCallBinding binding : mappingCall.getBinding()) {
 			Variable boundVariable = binding.getBoundVariable();
 			if (boundVariable == null) {
-				return null;		
+				return null;
 			}
 			Type varType = boundVariable.getType();
 			if (varType == null) {
-				return null;		
+				return null;
 			}
 			OCLExpression value = binding.getValue();
 			if (value == null) {
-				return null;		
+				return null;
 			}
 			Object valueOrValues = value.accept(undecoratedVisitor);
 			if (valueOrValues == null) {
-				return null;		
+				return null;
 			}
 			Type valueType = idResolver.getDynamicTypeOf(valueOrValues);
 			if (valueType.conformsTo(environmentFactory.getStandardLibrary(), varType)) {
 				boundValues[index++] = valueOrValues;
 			}
 			else {
-				return null;		
+				return null;
 			}
 		}
 		return executor.internalExecuteMappingCall(mappingCall, boundValues, undecoratedVisitor);
-    }
+	}
 
 	@Override
 	public @Nullable Object visitMappingCallBinding(@NonNull MappingCallBinding object) {
 		return visiting(object);	// MappingCallBinding is serviced by the parent MappingCall
-    }
+	}
 
 	@Override
 	public @Nullable Object visitMappingLoop(@NonNull MappingLoop mappingLoop) {
@@ -284,8 +285,8 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 	public @Nullable Object visitMappingStatement(@NonNull MappingStatement object) {
 		return visiting(object);	// MappingStatement is abstract
 	}
-    
-    @Override
+
+	@Override
 	public @Nullable Object visitNavigationAssignment(@NonNull NavigationAssignment navigationAssignment) {
 		Object slotObject = navigationAssignment.getSlotExpression().accept(undecoratedVisitor);
 		if (slotObject instanceof EObject) {
@@ -301,7 +302,7 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 					if (type instanceof CollectionType) {
 						boolean isOrdered = ((CollectionType)type).isOrdered();
 						if (isOrdered) {
-							
+
 						}
 					}
 				}
@@ -310,21 +311,23 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 			}
 			catch (InvocationFailedException e) {
 				executor.internalExecuteNavigationAssignment(navigationAssignment, slotObject, e, childKey);
-//				throw e;
+				//				throw e;
 			}
+			//		} else if (slotObject == null){
+			//			throw new InvalidValueException("Null source for '" + navigationAssignment.toString() + "'");
 		} else {
 			throw new IllegalArgumentException("Unsupported " + navigationAssignment.eClass().getName()
-				+ " specification. The assigment slot expression evaluates to non-ecore value");
+				+ " specification. The assignment slot expression '" + navigationAssignment.toString() + "'evaluates to non-ecore value: " + NameUtil.debugFullName(slotObject));
 		}
-        return true;
-	}
-    
-    @Override
-	public @Nullable Object visitOppositePropertyAssignment(@NonNull OppositePropertyAssignment navigationAssignment) {
-    	return visitNavigationAssignment(navigationAssignment);
+		return true;
 	}
 
-/*	@Override
+	@Override
+	public @Nullable Object visitOppositePropertyAssignment(@NonNull OppositePropertyAssignment navigationAssignment) {
+		return visitNavigationAssignment(navigationAssignment);
+	}
+
+	/*	@Override
 	public Object visitOppositePropertyCallExp(@NonNull OppositePropertyCallExp oppositePropertyCallExp) {
 		QVTiModelManager modelManager = (QVTiModelManager) context.getModelManager();
 		Integer cacheIndex = modelManager.getTransformationAnalysis().getCacheIndex(oppositePropertyCallExp);
@@ -346,10 +349,10 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 		throw new InvalidValueException("Failed to evaluate '" + oppositePropertyCallExp.getReferredProperty() + "'", sourceValue, oppositePropertyCallExp);
 	} */
 
-    @Override
-    public @Nullable Object visitPackage(org.eclipse.ocl.pivot.@NonNull Package pkge) {
-        return true;
-    }
+	@Override
+	public @Nullable Object visitPackage(org.eclipse.ocl.pivot.@NonNull Package pkge) {
+		return true;
+	}
 
 	@Override
 	public @Nullable Object visitPattern(@NonNull Pattern object) {
@@ -358,22 +361,22 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 
 	@Override
 	public @Nullable Object visitPredicate(@NonNull Predicate predicate) {
-        // Each predicate has a conditionExpression that is an OCLExpression
-        OCLExpression exp = predicate.getConditionExpression();
-        // The predicated is visited with a nested environment
-        Object expResult = exp.accept(undecoratedVisitor);
-        return expResult;
-	}
-    
-    @Override
-	public @Nullable Object visitPropertyAssignment(@NonNull PropertyAssignment navigationAssignment) {
-    	return visitNavigationAssignment(navigationAssignment);
+		// Each predicate has a conditionExpression that is an OCLExpression
+		OCLExpression exp = predicate.getConditionExpression();
+		// The predicated is visited with a nested environment
+		Object expResult = exp.accept(undecoratedVisitor);
+		return expResult;
 	}
 
-    @Override
+	@Override
+	public @Nullable Object visitPropertyAssignment(@NonNull PropertyAssignment navigationAssignment) {
+		return visitNavigationAssignment(navigationAssignment);
+	}
+
+	@Override
 	public @Nullable Object visitRealizedVariable(@NonNull RealizedVariable realizedVariable) {
 		return executor.internalExecuteRealizedVariable(realizedVariable, undecoratedVisitor);
-    }
+	}
 
 	@Override
 	public @Nullable Object visitRule(@NonNull Rule object) {
@@ -381,18 +384,18 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 	}
 
 	@Override
-    public @Nullable Object visitTransformation(@NonNull Transformation transformation) {
+	public @Nullable Object visitTransformation(@NonNull Transformation transformation) {
 		return executor.internalExecuteTransformation(transformation, undecoratedVisitor);
-    }
+	}
 
 	@Override
 	public @Nullable Object visitTypedModel(@NonNull TypedModel object) {
 		return visiting(object);
 	}
 
-    @Override
+	@Override
 	public @Nullable Object visitVariableAssignment(@NonNull VariableAssignment variableAssignment) {
-    	Variable targetVariable = variableAssignment.getTargetVariable() ;
+		Variable targetVariable = variableAssignment.getTargetVariable() ;
 		if (targetVariable != null) {
 			OCLExpression valueExpression = variableAssignment.getValue();
 			if (valueExpression != null) {
@@ -408,17 +411,17 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 			}
 		}
 		return null;
-    }
+	}
 
 	@Override
-	public @Nullable Object visitVariablePredicate(@NonNull VariablePredicate variablePredicate) {     
-        // Each predicate has a conditionExpression that is an OCLExpression
-        OCLExpression exp = variablePredicate.getConditionExpression();
-        if (exp == null) {
-        	return false;
-        }
+	public @Nullable Object visitVariablePredicate(@NonNull VariablePredicate variablePredicate) {
+		// Each predicate has a conditionExpression that is an OCLExpression
+		OCLExpression exp = variablePredicate.getConditionExpression();
+		if (exp == null) {
+			return false;
+		}
 		Object value = exp.accept(undecoratedVisitor);
-        Variable variable = variablePredicate.getTargetVariable();
+		Variable variable = variablePredicate.getTargetVariable();
 		Type guardType = variable.getType();
 		Type valueType = idResolver.getDynamicTypeOf(value);
 		if ((guardType != null) && valueType.conformsTo(standardLibrary, guardType)) {
@@ -427,6 +430,6 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 			// The initialisation fails, the guard is not met
 			return false;
 		}
-        return true;
+		return true;
 	}
 }
