@@ -22,11 +22,11 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.compiler.AbstractCompilerChain;
 import org.eclipse.qvtd.compiler.AbstractCompilerStep;
 import org.eclipse.qvtd.compiler.CompilerChain;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
-import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
 
 public class OCL2QVTiCompilerChain extends AbstractCompilerChain {
@@ -116,7 +116,7 @@ public class OCL2QVTiCompilerChain extends AbstractCompilerChain {
 	private void rewriteSafeNavigations(@NonNull Resource resource) {
 		for (EObject rootObject : resource.getContents()) {
 			if (rootObject instanceof Element) {
-				QVTbaseUtil.rewriteSafeNavigations(environmentFactory, (Element) rootObject);
+				PivotUtil.rewriteSafeNavigations(environmentFactory, (Element) rootObject);
 			}
 		}
 	}

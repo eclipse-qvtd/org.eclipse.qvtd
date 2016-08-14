@@ -51,7 +51,6 @@ import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
-import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcorebase.AbstractMapping;
 import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcorebase.NavigationAssignment;
@@ -84,18 +83,18 @@ public class QVTp2QVTg {
 		}
 		return propertyDatums;
 	}
-	
-	
+
+
 	private final @NonNull Schedule dg= ScheduleFactory.eINSTANCE.createSchedule();
-;
-	
+	;
+
 	// Caches
 	private Map<@NonNull TypedModel, Map<org.eclipse.ocl.pivot.Class, ClassDatum>> typedModel2class2datum = new HashMap<@NonNull TypedModel, Map<org.eclipse.ocl.pivot.Class, ClassDatum>>();
-	
+
 	private Map<AbstractMapping, List<OperationCallExp>> mapping2opCallExps = new HashMap<AbstractMapping, List<OperationCallExp>>();
 	private Map<AbstractMapping, List<@NonNull NavigationAssignment>> mapping2propAssigns = new HashMap<@NonNull AbstractMapping, List<@NonNull NavigationAssignment>>();
 	private Map<AbstractMapping, List<NavigationCallExp>> mapping2navCallExps = new HashMap<AbstractMapping, List<NavigationCallExp>>();
-	
+
 	private final @NonNull RootDomainUsageAnalysis domainUsageAnalysis;
 	private final @NonNull ClassRelationships classRelationships;
 
@@ -105,13 +104,13 @@ public class QVTp2QVTg {
 	}
 
 	private boolean assertValidTypedModel(@NonNull TypedModel typedModel, @NonNull Type aType) {
-		Type elementType = QVTbaseUtil.getElementalType(aType);
+		Type elementType = PivotUtil.getElementalType(aType);
 		if (elementType instanceof DataType) {
 			assert typedModel == domainUsageAnalysis.getPrimitiveTypeModel();
 		}
 		else {
 			assert typedModel != null;
-			/* FIXME waiting for BUG 485647 
+			/* FIXME waiting for BUG 485647
 			if (typedModel != domainUsageAnalysis.getPrimitiveTypeModel()) {			// Un'used' packages are primitive
 				Set<org.eclipse.ocl.pivot.Package> allUsedPackages = QVTbaseUtil.getAllUsedPackages(typedModel);
 				org.eclipse.ocl.pivot.Package containingPackage = PivotUtil.getContainingPackage(elementType);
@@ -133,7 +132,7 @@ public class QVTp2QVTg {
 		mapping2propAssigns.clear();
 		mapping2navCallExps.clear();
 	}
-	
+
 	private void computeInitialCaches(Transformation tx) {
 		for (Rule rule : tx.getRule()) {
 			AbstractMapping mapping = (AbstractMapping) rule;
@@ -164,17 +163,17 @@ public class QVTp2QVTg {
 				}
 			}
 		}
-		
+
 	}
 	public void run(@NonNull Resource qvtpModel, @NonNull Resource qvtsModel) {
 		clearCaches();
-				
+
 		for (EObject eObject : qvtpModel.getContents()) {
 			if (eObject instanceof BaseModel) {
 				transformPackages(((BaseModel)eObject).getOwnedPackages());
 			}
 		}
-		
+
 		// We add the result to the output result
 		qvtsModel.getContents().clear();
 		qvtsModel.getContents().add(dg);
@@ -199,39 +198,39 @@ public class QVTp2QVTg {
 	}
 
 	protected MappingAction createMappingAction(AbstractMapping mapping) {
-		
+
 		MappingAction ma = ScheduleFactory.eINSTANCE.createMappingAction();
-		
+
 		ma.setSchedule(dg);
 		ma.setMapping(mapping);
-	
+
 		for (@SuppressWarnings("null") @NonNull Variable inputVar : getInputVariables(mapping)) {
 			TypedModel typedModel = getTypedModel(inputVar);
 			ma.getParameters().add(createDataParameter(inputVar));
 			ma.getRequisites().add(getClassDatum(typedModel, ClassUtil.nonNullState((org.eclipse.ocl.pivot.Class)inputVar.getType())));
 
 		}
-		
+
 		for (@SuppressWarnings("null") @NonNull RealizedVariable outputVar : getOutputVariables(mapping)) {
 			TypedModel typedModel = getTypedModel(outputVar);
 			ma.getResults().add(createDataParameter(outputVar));
 			ma.getProductions().add(getClassDatum(typedModel, ClassUtil.nonNullState((org.eclipse.ocl.pivot.Class)outputVar.getType())));
 		}
-		
+
 		for (NavigationCallExp propRead : getPropertyNavigations(mapping)){
 			ma.getRequisites().add(getPropertyDatum(propRead));
 		}
-		
+
 		for (NavigationAssignment propWrite : getNavigationAssignments(mapping)){
 			ma.getProductions().addAll(getPropertyDatum(propWrite));
-			
+
 		}
-		
+
 		for (OperationCallExp opCall : getOperationCallExps(mapping)) {
 			org.eclipse.ocl.pivot.Class context = getContextType(opCall);
 			ma.getRequisites().addAll(getPropertyDatums(opCall, context, new HashMap<org.eclipse.ocl.pivot.Class, Set<Operation>>(), new HashMap<Variable, Set<org.eclipse.ocl.pivot.Class>>()));
 		}
-		
+
 		return ma;
 	}
 
@@ -239,7 +238,7 @@ public class QVTp2QVTg {
 		TypedModel typedModel = getTypedModel(variable);
 		DataParameter dp = ScheduleFactory.eINSTANCE.createDataParameter();
 		dp.setVariable(variable);
-		dp.setDatum(getClassDatum(typedModel, ClassUtil.nonNullState((org.eclipse.ocl.pivot.Class)variable.getType())));		
+		dp.setDatum(getClassDatum(typedModel, ClassUtil.nonNullState((org.eclipse.ocl.pivot.Class)variable.getType())));
 		return dp;
 	}
 
@@ -249,7 +248,7 @@ public class QVTp2QVTg {
 		cDatum.setSchedule(dg);
 		cDatum.setType(aClass);
 		cDatum.setTypedModel(typedModel);
-		if (!(aClass instanceof DataType)) { 
+		if (!(aClass instanceof DataType)) {
 			for (@SuppressWarnings("null") org.eclipse.ocl.pivot.@NonNull Class superClass : aClass.getSuperClasses()) {
 				ClassDatum superCDatum = getClassDatum(typedModel, superClass);
 				cDatum.getSuper().add(superCDatum);
@@ -288,14 +287,14 @@ public class QVTp2QVTg {
 		} */
 		return cDatum;
 	}
-	
+
 	public @NonNull ClassRelationships getClassRelationships() {
 		return classRelationships;
 	}
 
 	@NonNull
 	protected PropertyDatum createPropertyDatum(@NonNull TypedModel typedModel, org.eclipse.ocl.pivot.@NonNull Class context, Property property) {
-		
+
 		PropertyDatum pDatum = ScheduleFactory.eINSTANCE.createPropertyDatum();
 		ClassDatum classDatum = getClassDatum(typedModel, context);
 		pDatum.setTypedModel(classDatum.getTypedModel());
@@ -306,11 +305,11 @@ public class QVTp2QVTg {
 				PropertyDatum superPropDatum = getPropertyDatum(typedModel, superClass, property);
 				pDatum.getSuper().add(superPropDatum);
 			}
-			
+
 		}
 		return pDatum;
 	}
-	
+
 	@NonNull
 	protected PropertyDatum getPropertyDatum(@NonNull TypedModel typedModel, org.eclipse.ocl.pivot.@NonNull Class context, Property property) {
 		ClassDatum cDatum = getClassDatum(typedModel, context);
@@ -322,59 +321,59 @@ public class QVTp2QVTg {
 		// If not found we create it
 		return createPropertyDatum(typedModel, context, property);
 	}
-	
+
 	protected List<Variable> getInputVariables(AbstractMapping mapping) {
 
 		List<Variable> mInputVars = new ArrayList<Variable>();
 		mInputVars.addAll(mapping.getGuardPattern().getVariable());
-	
+
 		for (Domain domain : mapping.getDomain()) {
 			CoreDomain cDomain = (CoreDomain) domain;
 			mInputVars.addAll(cDomain.getGuardPattern().getVariable());
 		}
-		
+
 		// TODO what about refinements ?
 		return mInputVars;
 	}
-	
+
 	protected List<RealizedVariable> getOutputVariables(AbstractMapping mapping) {
 		List<RealizedVariable> mOutputVars = new ArrayList<RealizedVariable>();
 		mOutputVars.addAll(mapping.getBottomPattern().getRealizedVariable());
-		
+
 		for (Domain domain : mapping.getDomain()) {
 			CoreDomain cDomain = (CoreDomain) domain;
 			mOutputVars.addAll(cDomain.getBottomPattern().getRealizedVariable());
-		}	
-		
+		}
+
 		// TODO what about refinements ?
 		return mOutputVars;
 	}
-	
-	
+
+
 	// Property datum analysis
-	
-	protected List<NavigationCallExp> getPropertyNavigations(AbstractMapping mapping) {		
+
+	protected List<NavigationCallExp> getPropertyNavigations(AbstractMapping mapping) {
 		List<NavigationCallExp> navCallExps = mapping2navCallExps.get(mapping);
 		return navCallExps == null ? Collections.<NavigationCallExp>emptyList() : navCallExps;
 	}
 
-	protected List<@NonNull NavigationAssignment> getNavigationAssignments(AbstractMapping mapping) {	
+	protected List<@NonNull NavigationAssignment> getNavigationAssignments(AbstractMapping mapping) {
 		List<@NonNull NavigationAssignment> propAssigns = mapping2propAssigns.get(mapping);
 		return propAssigns == null ? Collections.<@NonNull NavigationAssignment>emptyList() : propAssigns;
 	}
-	
+
 	protected List<OperationCallExp> getOperationCallExps(AbstractMapping mapping) {
 		List<OperationCallExp> opCallExps = mapping2opCallExps.get(mapping);
 		return opCallExps == null ? Collections.<OperationCallExp>emptyList() : opCallExps;
 	}
-	
+
 	@NonNull
 	protected PropertyDatum getPropertyDatum(NavigationCallExp navCallExp) {
-		
+
 		org.eclipse.ocl.pivot.Class context = ClassUtil.nonNullState((org.eclipse.ocl.pivot.Class) navCallExp.getOwnedSource().getType());
 		return getPropertyDatum(navCallExp, context );
 	}
-	
+
 	@NonNull
 	protected PropertyDatum getPropertyDatum(@NonNull NavigationCallExp navCallExp, org.eclipse.ocl.pivot.@NonNull Class context) {
 		Property property = PivotUtil.getReferredProperty(navCallExp);
@@ -383,7 +382,7 @@ public class QVTp2QVTg {
 		TypedModel typedModel = getTypedModel(ownedSource);
 		return getPropertyDatum(typedModel, context, property);
 	}
-	
+
 	@NonNull
 	protected Set<PropertyDatum> getPropertyDatum(@NonNull NavigationAssignment propAssign) {
 		Set<PropertyDatum> result = new LinkedHashSet<PropertyDatum>();
@@ -420,9 +419,9 @@ public class QVTp2QVTg {
 		}
 		return result;
 	}
-	
+
 	private @NonNull Set<PropertyDatum> getPropertyDatums(OperationCallExp opCall, org.eclipse.ocl.pivot.Class context, Map<org.eclipse.ocl.pivot.Class, Set<Operation>> type2VisitedOps, Map<Variable, Set<org.eclipse.ocl.pivot.Class>> variable2BoundContext) {
-		
+
 		Set<Operation> visitedOps = type2VisitedOps.get(context);
 		if (visitedOps == null) {
 			visitedOps = new HashSet<Operation>();
@@ -440,20 +439,20 @@ public class QVTp2QVTg {
 						result.addAll(analyseOclContainerCall(typedModel, newContext));
 					}
 				}
-//				for (@SuppressWarnings("null") @NonNull TypedModel typedModel : getTypedModels(opCall)) {
-//					for (@SuppressWarnings("null") org.eclipse.ocl.pivot.@NonNull Class newContext : getComputedContexts(opCall, variable2BoundContext)) {
-//						result.addAll(analyseOclContainerCall(typedModel, newContext));
-//					}
-//				}
+				//				for (@SuppressWarnings("null") @NonNull TypedModel typedModel : getTypedModels(opCall)) {
+				//					for (@SuppressWarnings("null") org.eclipse.ocl.pivot.@NonNull Class newContext : getComputedContexts(opCall, variable2BoundContext)) {
+				//						result.addAll(analyseOclContainerCall(typedModel, newContext));
+				//					}
+				//				}
 			} else {
 				result.addAll(getPropertyDatums(op, context, type2VisitedOps));
 			}
 		}
 		return result;
 	}
-	
+
 	private @NonNull Set<PropertyDatum> getPropertyDatums(Operation op, org.eclipse.ocl.pivot.Class context, Map<org.eclipse.ocl.pivot.Class, Set<Operation>> type2VisitedOps) {
-		
+
 		Set<PropertyDatum> result = new LinkedHashSet<PropertyDatum>();
 		LanguageExpression langExp = op.getBodyExpression();
 		if (langExp instanceof ExpressionInOCL) {
@@ -522,23 +521,23 @@ public class QVTp2QVTg {
 			return domainUsageAnalysis.getUsage(element);
 		}
 	}
-	
+
 	private boolean isOclContainerOp(@NonNull Operation op) {
 		return op.getOperationId() == domainUsageAnalysis.getOclContainerId();
-//		return "oclContainer".equals(op.getName()) && op.getOwnedParameters().isEmpty();
+		//		return "oclContainer".equals(op.getName()) && op.getOwnedParameters().isEmpty();
 	}
 
 	private @NonNull Set<PropertyDatum> analyseOclContainerCall(@NonNull TypedModel typedModel, org.eclipse.ocl.pivot.@NonNull Class context) {
-		
+
 		Set<PropertyDatum> result = new LinkedHashSet<PropertyDatum>();
-		
+
 		for (@SuppressWarnings("null") org.eclipse.ocl.pivot.@NonNull Class parentClass : getContainingTypes(context)) {
 			for (Property prop : parentClass.getOwnedProperties()) {
 				if (prop.isIsComposite()) {
 					Set<org.eclipse.ocl.pivot.Class> allSuperAndSubClasses = getAllSuperAndSubClassesIncludingSelf(context);
 					if (allSuperAndSubClasses.contains(getElementClass(prop))) {
 						// self.print("\tOCL Container property  for ");
-						// prop.println(" : ");	
+						// prop.println(" : ");
 						// FIXME I'm getting non-deterministic QVTs 2 Graphml transformations
 						// when there are references to non-navigable (inexistent) properties
 						// in .oclas. Example3: Kiama
@@ -548,15 +547,15 @@ public class QVTp2QVTg {
 						//result.add(opposite.getOrCreatePropertyDatum(self));
 						result.add(getPropertyDatum(typedModel, parentClass, prop));
 					}
-				}	
 				}
-				
+			}
+
 		}
 		return result;
-		
+
 	}
 
-	
+
 	private void updateVariableBindings(LetExp letExp , Map<Variable, Set<org.eclipse.ocl.pivot.Class>> variable2BoundContext ) {
 
 		Variable variable = letExp.getOwnedVariable();
@@ -565,7 +564,7 @@ public class QVTp2QVTg {
 
 	// TODO cache
 	private Set<org.eclipse.ocl.pivot.Class> computeContexts(OCLExpression oclExp, Map<Variable, Set<org.eclipse.ocl.pivot.Class>> variable2BoundContext) {
-	
+
 		Set<org.eclipse.ocl.pivot.Class >result = new LinkedHashSet<org.eclipse.ocl.pivot.Class>();
 		if (oclExp instanceof VariableExp) {
 			VariableExp varExp = (VariableExp) oclExp;
@@ -577,7 +576,7 @@ public class QVTp2QVTg {
 			}
 		} else if (oclExp instanceof CallExp) {
 			CallExp callExp = (CallExp) oclExp;
-			if (callExp instanceof OperationCallExp && 
+			if (callExp instanceof OperationCallExp &&
 					isOclContainerOp(ClassUtil.nonNullState(((OperationCallExp)callExp).getReferredOperation()))) {
 				for(@SuppressWarnings("null") org.eclipse.ocl.pivot.@NonNull Class oclContainerOpContext : computeContexts(callExp.getOwnedSource(), variable2BoundContext)) {
 					result.addAll(getContainingTypes(oclContainerOpContext));
@@ -604,7 +603,7 @@ public class QVTp2QVTg {
 	private @NonNull Set<org.eclipse.ocl.pivot.Class> getContainingTypes(org.eclipse.ocl.pivot.@NonNull Class aClass) {
 		return classRelationships.getContainerClasses(aClass);
 	}
-	
+
 	private org.eclipse.ocl.pivot.Class getContextType(CallExp callExp) {
 		OCLExpression ownedSource = callExp.getOwnedSource();
 		if (ownedSource == null) {
@@ -616,30 +615,30 @@ public class QVTp2QVTg {
 		}
 		return type.isClass();
 	}
-	
+
 	private @NonNull Set<org.eclipse.ocl.pivot.Class> getAllSuperClasses(org.eclipse.ocl.pivot.@NonNull Class context) {
 		return classRelationships.getAllSuperClasses(context);
 	}
 
-//	private Set<Class> getAllSuperClassesIncludingSelf(Class context) {
-//		Set<Class> result = new LinkedHashSet<Class>();
-//		result.addAll(getAllSuperClasses(context));
-//		result.add(context);
-//		return result;
-//	}
+	//	private Set<Class> getAllSuperClassesIncludingSelf(Class context) {
+	//		Set<Class> result = new LinkedHashSet<Class>();
+	//		result.addAll(getAllSuperClasses(context));
+	//		result.add(context);
+	//		return result;
+	//	}
 
 	private @NonNull Set<org.eclipse.ocl.pivot.Class> getAllSubClasses(org.eclipse.ocl.pivot.@NonNull Class context) {
 		return classRelationships.getAllSubClasses(context);
 	}
 
-//	private Set<Class> getAllSubClassesIncludingSelf(Class context) {
-//		Set<Class> result = new LinkedHashSet<Class>();
-//		result.addAll(getAllSubClasses(context));
-//		result.add(context);
-//		return result;
-//	}
-	
-	private Set<org.eclipse.ocl.pivot.Class> getAllSuperAndSubClasses(org.eclipse.ocl.pivot.@NonNull Class context) {		
+	//	private Set<Class> getAllSubClassesIncludingSelf(Class context) {
+	//		Set<Class> result = new LinkedHashSet<Class>();
+	//		result.addAll(getAllSubClasses(context));
+	//		result.add(context);
+	//		return result;
+	//	}
+
+	private Set<org.eclipse.ocl.pivot.Class> getAllSuperAndSubClasses(org.eclipse.ocl.pivot.@NonNull Class context) {
 		Set<org.eclipse.ocl.pivot.Class> result = new LinkedHashSet<org.eclipse.ocl.pivot.Class>();
 		result.addAll(getAllSuperClasses(context));
 		result.addAll(getAllSubClasses(context));
@@ -651,11 +650,11 @@ public class QVTp2QVTg {
 		result.add(context);
 		return result;
 	}
-	
+
 	public @NonNull RootDomainUsageAnalysis getDomainUsageAnalysis() {
 		return domainUsageAnalysis;
 	}
-	
+
 	private org.eclipse.ocl.pivot.Class getElementClass(TypedElement tElement) {
 		Type type = tElement.getType();
 		if (type instanceof CollectionType) {

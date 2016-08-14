@@ -216,7 +216,7 @@ public abstract class SchedulerConstants
 	public @NonNull ClassDatum getClassDatum(@NonNull TypedElement asTypedElement) {
 		org.eclipse.ocl.pivot.Class asType = (org.eclipse.ocl.pivot.Class)asTypedElement.getType();
 		assert asType != null;
-		Type elementType = QVTbaseUtil.getElementalType(asType);
+		Type elementType = PivotUtil.getElementalType(asType);
 		TypedModel typedModel;
 		if (elementType instanceof DataType) {
 			typedModel = getDomainAnalysis().getPrimitiveTypeModel();

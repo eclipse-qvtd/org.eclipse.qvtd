@@ -60,7 +60,7 @@ public class Nodes
 			SchedulerConstants schedulerConstants = region.getSchedulerConstants();
 			org.eclipse.ocl.pivot.Class type = (org.eclipse.ocl.pivot.Class)source2targetProperty.getType();
 			assert type != null;
-			Type elementType = QVTbaseUtil.getElementalType(type);
+			Type elementType = PivotUtil.getElementalType(type);
 			TypedModel typedModel = elementType instanceof DataType ? schedulerConstants.getDomainAnalysis().getPrimitiveTypeModel() : sourceNode.getClassDatumAnalysis().getTypedModel();
 			assert typedModel != null;
 			ClassDatum classDatum = schedulerConstants.getClassDatum(type, typedModel);

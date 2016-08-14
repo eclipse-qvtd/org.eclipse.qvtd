@@ -37,7 +37,6 @@ import org.eclipse.ocl.pivot.utilities.PivotConstants;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.Region2Depth;
 import org.eclipse.qvtd.compiler.internal.utilities.SymbolNameBuilder;
-import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcorebase.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.schedule.AbstractDatum;
@@ -435,7 +434,7 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 	}
 
 	private void computeContainedClassDatumAnalysis2compositeProperties3(@NonNull Property asProperty, @NonNull DomainUsage domainUsage) {
-		Type asType = QVTbaseUtil.getElementalType(ClassUtil.nonNullState(asProperty.getType()));
+		Type asType = PivotUtil.getElementalType(ClassUtil.nonNullState(asProperty.getType()));
 		if (asType instanceof org.eclipse.ocl.pivot.Class) {
 			ClassDatumAnalysis classDatumAnalysis = getSchedulerConstants().getClassDatumAnalysis((Class) asType, ClassUtil.nonNullState(domainUsage.getTypedModel(null)));
 			Set<@NonNull Property> compositeProperties = containedClassDatumAnalysis2compositeProperties.get(classDatumAnalysis);

@@ -34,7 +34,6 @@ public class QVTbaseEnvironmentFactory extends AbstractEnvironmentFactory
 		super(projectManager, externalResourceSet);
 		this.createStrategy = createStrategy;
 		getStandardLibrary().setDefaultStandardLibraryURI(QVTbaseLibrary.STDLIB_URI);
-		QVTbaseUtil.initializeLoadOptionsToSupportSelfReferences(getResourceSet());		// TODO promote to Pivot
 	}
 
 	@Override
