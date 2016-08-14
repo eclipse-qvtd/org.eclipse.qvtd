@@ -39,40 +39,40 @@ import org.eclipse.qvtd.codegen.utilities.QVTiEquivalenceUtil;
  * CGValuedElementModelSpec supports generation of the many methods that contribute to the CGValuedElement.xxxx() method hierarchy.
  * <p>
  * The exposition here as a two-dimensional Java table provides a readable, type-checked presentation that would be harder to achieve
- * using a spreadsheet (poor checking) or a model (no 2D tools).  
+ * using a spreadsheet (poor checking) or a model (no 2D tools).
  */
 public class QVTdCGValuedElementModelSpec extends CGValuedElementModelSpec
 {
 	public static final @NonNull Ctl CTL_MEXP = new Ctl() { @Override
-	public @NonNull String generate(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
+		public @NonNull String generate(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
 		return "return " + classRef(MappingExpPlaces.class) + ".createMappingExpPlaces(element2place, this);";
 	}};
 
 	public static final @NonNull Inv INV_PRED = new Inv() {
 		@Override public @Nullable String generateGetInvalidValue(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
 			return classRef(CGInvalid.class) + " invalidValue = (conditionExpression != null) ? conditionExpression.getInvalidValue() : null;\n" +
-			"		if (invalidValue == null) {\n" +
-			"			invalidValue = (thenExpression != null) ? thenExpression.getInvalidValue() : null;\n" +
-			"		}\n" +
-			"		return invalidValue;";
+					"		if (invalidValue == null) {\n" +
+					"			invalidValue = (thenExpression != null) ? thenExpression.getInvalidValue() : null;\n" +
+					"		}\n" +
+					"		return invalidValue;";
 		}
 		@Override public @Nullable String generateIsInvalid(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
 			return null;
 		}
 		@Override public @Nullable String generateIsNonInvalid(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
-			return "return ((conditionExpression != null) && conditionExpression.isNonInvalid()) && ((thenExpression != null) && thenExpression.isNonInvalid());";	
+			return "return ((conditionExpression != null) && conditionExpression.isNonInvalid()) && ((thenExpression != null) && thenExpression.isNonInvalid());";
 		}
 	};
 
 	public static final @NonNull Log LOG_PRED = new Log() {
 		@Override public @NonNull String generateIsFalse(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
-			return "return ((conditionExpression != null) && conditionExpression.isFalse()) || ((thenExpression != null) && thenExpression.isFalse());";	
+			return "return ((conditionExpression != null) && conditionExpression.isFalse()) || ((thenExpression != null) && thenExpression.isFalse());";
 		}
 		@Override public @NonNull String generateIsTrue(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
-			return "return ((conditionExpression != null) && conditionExpression.isTrue()) && ((thenExpression != null) && thenExpression.isTrue());";	
+			return "return ((conditionExpression != null) && conditionExpression.isTrue()) && ((thenExpression != null) && thenExpression.isTrue());";
 		}
 	};
-	
+
 	public static final @NonNull Eq EQ_EQUIV = new Eq() {
 		@Override public @Nullable String generateIsEquivalentTo(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
 			return null;
@@ -84,31 +84,31 @@ public class QVTdCGValuedElementModelSpec extends CGValuedElementModelSpec
 	};
 
 	public static class Register {
-	  public Register() {
-//		new CGValuedElementModelSpec(CGVariable.class, "init",							null     , Ref.DELEG, null     , Nul.VAR  , Inv.VAR  , null     , null     , null     , null    , null     , null     , null     , null     , null     );
-		new QVTdCGValuedElementModelSpec(CGGuardVariable.class, null,					Box.UNBOX, null     , null     , Nul.NEVER, null     , Glo.FALSE, null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , null    );
-		new QVTdCGValuedElementModelSpec(CGConnectionVariable.class, null,				Box.BOX,   null     , null     , Nul.NEVER, null     , Glo.FALSE, null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , null    );
-		new QVTdCGValuedElementModelSpec(CGRealizedVariable.class, null,				Box.UNBOX, null     , null     , Nul.NEVER, null     , Glo.FALSE, null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , null    );
-		new QVTdCGValuedElementModelSpec(CGEcoreRealizedVariable.class, null,			null     , null     , null     , Nul.ASSRT, null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , null    );
+		public Register() {
+			//		new CGValuedElementModelSpec(CGVariable.class, "init",							null     , Ref.DELEG, null     , Nul.VAR  , Inv.VAR  , null     , null     , null     , null    , null     , null     , null     , null     , null     );
+			new QVTdCGValuedElementModelSpec(CGGuardVariable.class, null,					Box.UNBOX, null     , null     , Nul.NEVER, null     , Glo.FALSE, null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , null    );
+			new QVTdCGValuedElementModelSpec(CGConnectionVariable.class, null,				Box.BOX,   null     , null     , Nul.NEVER, null     , Glo.FALSE, null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , null    );
+			new QVTdCGValuedElementModelSpec(CGRealizedVariable.class, null,				Box.UNBOX, null     , null     , Nul.NEVER, null     , Glo.FALSE, null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , null    );
+			new QVTdCGValuedElementModelSpec(CGEcoreRealizedVariable.class, null,			null     , null     , null     , Nul.ASSRT, null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , null    );
 
-		new QVTdCGValuedElementModelSpec(CGFunctionCallExp.class, null,					Box.UNBOX, null     , null     , null     , null     , Glo.FALSE, null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , null    );
-		new QVTdCGValuedElementModelSpec(CGFunctionParameter.class, null,				Box.UNBOX, null     , null     , null     , null     , Glo.FALSE, null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , null    );
-		new QVTdCGValuedElementModelSpec(CGConnectionAssignment.class, "initValue",		Box.DELEG, null     , null     , null     , null     , Glo.FALSE, null     , null     , null    , null     , null     , null     , null     , null     , Com.FALSE, null     , Eq.UNSUP);
-		new QVTdCGValuedElementModelSpec(CGMappingCallBinding.class, "value",			Box.DELEG, null     , null     , null     , null     , Glo.FALSE, null     , null     , null    , null     , Val.DELEG, null     , null     , null     , Com.FALSE, null     , Eq.SELF );
-		new QVTdCGValuedElementModelSpec(CGMiddlePropertyCallExp.class, null,			Box.UNBOX, null     , null     , null     , null     , Glo.FALSE, null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , null    );
-		new QVTdCGValuedElementModelSpec(CGPropertyAssignment.class, "initValue",		Box.DELEG, null     , null     , null     , null     , Glo.FALSE, null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , EQ_EQUIV);
+			new QVTdCGValuedElementModelSpec(CGFunctionCallExp.class, null,					Box.UNBOX, null     , null     , null     , null     , Glo.FALSE, null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , null    );
+			new QVTdCGValuedElementModelSpec(CGFunctionParameter.class, null,				Box.UNBOX, null     , null     , null     , null     , Glo.FALSE, null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , null    );
+			new QVTdCGValuedElementModelSpec(CGConnectionAssignment.class, "initValue",		Box.DELEG, null     , null     , null     , null     , Glo.FALSE, null     , null     , null    , null     , null     , null     , null     , null     , Com.FALSE, null     , Eq.UNSUP);
+			new QVTdCGValuedElementModelSpec(CGMappingCallBinding.class, "value",			Box.DELEG, null     , null     , null     , null     , Glo.FALSE, null     , null     , null    , null     , Val.DELEG, null     , null     , null     , Com.FALSE, null     , Eq.SELF );
+			new QVTdCGValuedElementModelSpec(CGMiddlePropertyCallExp.class, null,			Box.UNBOX, null     , null     , null     , null     , Glo.FALSE, null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , null    );
+			new QVTdCGValuedElementModelSpec(CGPropertyAssignment.class, "initValue",		Box.DELEG, null     , null     , null     , null     , Glo.FALSE, null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , EQ_EQUIV);
 
-		new QVTdCGValuedElementModelSpec(CGFunction.class, null,						Box.BOX  , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , null    );
+			new QVTdCGValuedElementModelSpec(CGFunction.class, null,						Box.BOX  , null     , null     , Nul.ECORE, null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , null    );
 
-		new QVTdCGValuedElementModelSpec(CGMapping.class, null,							Box.ALL  , null     , null     , null     , null     , null     , null     , null     , Ct.TRUE , null     , null     , null     , Ctx.TRUE , Ctl.BODY , null     , null     , null    );
-		new QVTdCGValuedElementModelSpec(CGMappingExp.class, null,						Box.ALL  , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , CTL_MEXP , null     , null     , EQ_EQUIV);
-		new QVTdCGValuedElementModelSpec(CGSequence.class, null,						null,      null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , Eq.SELF );
+			new QVTdCGValuedElementModelSpec(CGMapping.class, null,							Box.ALL  , null     , null     , null     , null     , null     , null     , null     , Ct.TRUE , null     , null     , null     , Ctx.TRUE , Ctl.BODY , null     , null     , null    );
+			new QVTdCGValuedElementModelSpec(CGMappingExp.class, null,						Box.ALL  , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , CTL_MEXP , null     , null     , EQ_EQUIV);
+			new QVTdCGValuedElementModelSpec(CGSequence.class, null,						null,      null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , Eq.SELF );
 
-		new QVTdCGValuedElementModelSpec(CGMappingCall.class, null,						null     , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , Com.FALSE, null     , Eq.SELF );
-		new QVTdCGValuedElementModelSpec(CGMappingLoop.class, null,						null     , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , Com.FALSE, null     , Eq.SELF );
-	  }
+			new QVTdCGValuedElementModelSpec(CGMappingCall.class, null,						null     , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , Com.FALSE, null     , Eq.SELF );
+			new QVTdCGValuedElementModelSpec(CGMappingLoop.class, null,						null     , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , Com.FALSE, null     , Eq.SELF );
+		}
 	}
-	
+
 	protected QVTdCGValuedElementModelSpec(@NonNull Class<?> cgClass, @Nullable String delegate,
 			@Nullable Box box, @Nullable Ths ths, @Nullable Log log, @Nullable Nul nul, @Nullable Inv inv,
 			@Nullable Glo glo, @Nullable Inl inl, @Nullable Set set, @Nullable Ct ct, @Nullable Con con,

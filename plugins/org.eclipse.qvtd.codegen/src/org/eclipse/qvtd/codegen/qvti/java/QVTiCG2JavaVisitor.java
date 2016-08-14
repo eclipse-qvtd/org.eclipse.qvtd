@@ -732,6 +732,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 	} */
 
 	protected void doFunctionGetInstance(@NonNull CGFunction cgFunction, @NonNull String instanceName) {
+		js.append("@Override\n");
 		js.append("public ");
 		js.appendIsRequired(false);
 		js.append(" Object");
@@ -744,6 +745,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 	}
 
 	protected void doFunctionIsEqual(@NonNull CGFunction cgFunction, @NonNull String instanceName) {
+		js.append("@Override\n");
 		js.append("public boolean isEqual(");
 		js.appendIsRequired(true);
 		js.append(" ");
