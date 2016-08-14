@@ -81,7 +81,12 @@ public class Forward2ReverseNormalizer implements ModelNormalizer
 
 	@Override
 	public @NonNull List<Normalizer> normalize(@NonNull Resource resource) {
-		EObject eRoot = resource.getContents().get(0);
+		List<Normalizer> normalizers = new ArrayList<Normalizer>();
+		List<@NonNull EObject> contents = resource.getContents();
+		if (contents.isEmpty()) {
+			return normalizers;
+		}
+		EObject eRoot = contents.get(0);
 		EPackage ePackage = eRoot.eClass().getEPackage();
 		EClass elementClass = (EClass) ePackage.getEClassifier(DoublylinkedlistPackage.Literals.ELEMENT.getName());
 		assert elementClass != null;
@@ -92,7 +97,6 @@ public class Forward2ReverseNormalizer implements ModelNormalizer
 		EAttribute elementName = (EAttribute) elementClass.getEStructuralFeature(DoublylinkedlistPackage.Literals.ELEMENT__NAME.getName());
 		assert elementName != null;
 		ElementComparator elementComparator = new ElementComparator(elementName);
-		List<Normalizer> normalizers = new ArrayList<Normalizer>();
 		for (TreeIterator<EObject> tit = resource.getAllContents(); tit.hasNext(); ) {
 			EObject eObject = tit.next();
 			EClass eClass = eObject.eClass();

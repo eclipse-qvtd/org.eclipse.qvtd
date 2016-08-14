@@ -12,12 +12,14 @@ package org.eclipse.qvtd.pivot.qvtbase.utilities;
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
 /**
- * A TreeIterable supports use of the TreeIterator returned by EObject.eAllContents() as a conventional Iterable.
- * It's includeRoot option supports inclusion of the root object as is often more useful thatn the default
+ * A TreeIterable supports use of the TreeIterator returned by Resource.getAllConrents() or EObject.eAllContents()
+ * as a conventional Iterable.
+ * The includeRoot option supports inclusion of the root object as is often more useful than the default
  * exclusion by a TreeIterator.
  */
 public class TreeIterable implements Iterable<@NonNull EObject>
@@ -25,15 +27,15 @@ public class TreeIterable implements Iterable<@NonNull EObject>
 	private static class Iterator implements java.util.Iterator<@NonNull EObject>
 	{
 		protected @Nullable EObject firstEObject;
-		protected final @NonNull TreeIterator<@NonNull EObject> tit;;
-		
+		protected final @NonNull TreeIterator<@NonNull EObject> tit;
+
 		public Iterator(@NonNull EObject rootEObject, boolean includeRoot) {
 			this.firstEObject = includeRoot ? rootEObject : null;
 			@SuppressWarnings("null")
 			@NonNull TreeIterator<@NonNull EObject> eAllContents = (@NonNull TreeIterator<@NonNull EObject>)rootEObject.eAllContents();
 			this.tit = eAllContents;
 		}
-		
+
 		@Override
 		public boolean hasNext() {
 			return (firstEObject != null) || tit.hasNext();
@@ -53,16 +55,32 @@ public class TreeIterable implements Iterable<@NonNull EObject>
 		}
 	}
 
-	protected final @NonNull EObject rootEObject;
+	protected final @Nullable Resource resource;
+	protected final @Nullable EObject rootEObject;
 	protected final boolean includeRoot;
-	
+
 	public TreeIterable(@NonNull EObject rootEObject, boolean includeRoot) {
+		this.resource = null;
 		this.rootEObject = rootEObject;
 		this.includeRoot = includeRoot;
 	}
-	
+
+	public TreeIterable(@NonNull Resource resource) {
+		this.resource = resource;
+		this.rootEObject = null;
+		this.includeRoot = false;
+	}
+
 	@Override
-	public @NonNull Iterator iterator() {
-		return new Iterator(rootEObject, includeRoot);
+	public java.util.@NonNull Iterator<@NonNull EObject> iterator() {
+		if (resource != null) {
+			@SuppressWarnings("null")
+			@NonNull TreeIterator<@NonNull EObject> allContents = (@NonNull TreeIterator<@NonNull EObject>)resource.getAllContents();
+			return allContents;
+		}
+		else {
+			assert rootEObject != null;
+			return new Iterator(rootEObject, includeRoot);
+		}
 	}
 }

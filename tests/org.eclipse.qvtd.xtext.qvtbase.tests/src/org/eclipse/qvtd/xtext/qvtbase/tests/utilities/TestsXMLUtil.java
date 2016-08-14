@@ -13,14 +13,19 @@ package org.eclipse.qvtd.xtext.qvtbase.tests.utilities;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.VariableDeclaration;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.TreeIterable;
 
 
 public class TestsXMLUtil {
 
-	public final static @NonNull Map<Object, Object> defaultSavingOptions; 
-	
+	public final static @NonNull Map<Object, Object> defaultSavingOptions;
+
 	// FIXME use a better default strategy for the saving options
 	static {
 		defaultSavingOptions = new HashMap<Object, Object>();
@@ -29,6 +34,20 @@ public class TestsXMLUtil {
 		defaultSavingOptions.put(XMLResource.OPTION_SCHEMA_LOCATION, Boolean.TRUE);
 		defaultSavingOptions.put(XMLResource.OPTION_SCHEMA_LOCATION_IMPLEMENTATION, Boolean.TRUE);
 		defaultSavingOptions.put(XMLResource.OPTION_LINE_WIDTH, Integer.valueOf(132));
-		
+
+	}
+
+	public static void resetTransients(@NonNull Resource asResource) {
+		for (@NonNull EObject eObject : new TreeIterable(asResource)) {
+			if (eObject instanceof org.eclipse.ocl.pivot.Class) {
+				((org.eclipse.ocl.pivot.Class)eObject).setUnspecializedElement(null);		// Suppress transient value
+			}
+			else if (eObject instanceof VariableDeclaration) {
+				((VariableDeclaration)eObject).setTypeValue(null);		// Suppress transient value
+			}
+			else if (eObject instanceof OCLExpression) {
+				((OCLExpression)eObject).setTypeValue(null);		// Suppress transient value
+			}
+		}
 	}
 }

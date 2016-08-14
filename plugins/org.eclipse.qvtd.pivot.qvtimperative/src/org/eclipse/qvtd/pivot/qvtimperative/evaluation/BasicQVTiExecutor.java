@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *     E.D.Willink - initial API and implementation
  ******************************************************************************/
@@ -73,11 +73,11 @@ import org.eclipse.qvtd.runtime.evaluation.InvocationFailedException;
 
 public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 {
-    protected final @NonNull Transformation transformation;
-    private @Nullable QVTiTransformationAnalysis transformationAnalysis = null;
-    private @Nullable QVTiModelManager modelManager = null;
+	protected final @NonNull Transformation transformation;
+	private @Nullable QVTiTransformationAnalysis transformationAnalysis = null;
+	private @Nullable QVTiModelManager modelManager = null;
 
-    public BasicQVTiExecutor(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull Transformation transformation) {
+	public BasicQVTiExecutor(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull Transformation transformation) {
 		super(environmentFactory);
 		this.transformation = transformation;
 	}
@@ -92,25 +92,25 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 	@Override
 	protected EvaluationVisitor.@NonNull EvaluationVisitorExtension createEvaluationVisitor() {
 		IQVTiEvaluationVisitor visitor = new QVTiEvaluationVisitor(this);
-	    if (environmentFactory.isEvaluationTracingEnabled()) {
-	        // decorate the evaluation visitor with tracing support
-	        visitor = new QVTiTracingEvaluationVisitor(visitor);
-//	        ((QVTiTracingEvaluationVisitor)visitor).setVerboseLevel(QVTiTracingEvaluationVisitor.VERBOSE_LEVEL_HIGH);
-	    }
+		if (environmentFactory.isEvaluationTracingEnabled()) {
+			// decorate the evaluation visitor with tracing support
+			visitor = new QVTiTracingEvaluationVisitor(visitor);
+			//	        ((QVTiTracingEvaluationVisitor)visitor).setVerboseLevel(QVTiTracingEvaluationVisitor.VERBOSE_LEVEL_HIGH);
+		}
 		return visitor;
 	}
 
-    @Override
+	@Override
 	public void createModel(@NonNull String name, @NonNull URI modelURI, @Nullable String contentType) {
-        TypedModel typedModel = NameUtil.getNameable(transformation.getModelParameter(), name);
-        if (typedModel == null) {
-        	throw new IllegalStateException("Unknown TypedModel '" + name + "'");
-        }
-        Resource resource = environmentFactory.getResourceSet().createResource(modelURI, contentType);
-        if (resource != null) {
-        	getModelManager().addModel(typedModel, resource);
-        }
-    }
+		TypedModel typedModel = NameUtil.getNameable(transformation.getModelParameter(), name);
+		if (typedModel == null) {
+			throw new IllegalStateException("Unknown TypedModel '" + name + "'");
+		}
+		Resource resource = environmentFactory.getResourceSet().createResource(modelURI, contentType);
+		if (resource != null) {
+			getModelManager().addModel(typedModel, resource);
+		}
+	}
 
 	@Override
 	protected EvaluationEnvironment.@NonNull EvaluationEnvironmentExtension createNestedEvaluationEnvironment(EvaluationEnvironment.@NonNull EvaluationEnvironmentExtension evaluationEnvironment, @NonNull NamedElement executableObject, @Nullable OCLExpression callingObject) {
@@ -131,8 +131,8 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 			return super.createRootEvaluationEnvironment(executableObject);
 		}
 	}
-	
-	@Override	
+
+	@Override
 	public void dispose() {
 		if (modelManager != null) {
 			modelManager.dispose();
@@ -153,13 +153,13 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 					if (ownedInit != null) {
 						Object initValue = ownedInit.accept(undecoratedVisitor);
 						getEvaluationEnvironment().add(realizedVariable, initValue);
-				        replace(realizedVariable, initValue);
-				        Area area = ((BottomPattern)realizedVariable.eContainer()).getArea();
-				        TypedModel typedModel = QVTcoreBaseUtil.getTypedModel(area);
-				        assert typedModel != null;
+						replace(realizedVariable, initValue);
+						Area area = ((BottomPattern)realizedVariable.eContainer()).getArea();
+						TypedModel typedModel = QVTcoreBaseUtil.getTypedModel(area);
+						assert typedModel != null;
 						Object ecoreValue = getIdResolver().ecoreValueOf(null, initValue);
 						assert ecoreValue != null;
-				        getModelManager().addModelElement(typedModel, ecoreValue);
+						getModelManager().addModelElement(typedModel, ecoreValue);
 					}
 				}
 				for (RealizedVariable realizedVariable : enforceableBottomPattern.getRealizedVariable()) {
@@ -170,7 +170,7 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 			}
 		}
 		//
-        // property and connection assignments
+		// property and connection assignments
 		//
 		BottomPattern middleBottomPattern = mapping.getBottomPattern();
 		for (Assignment assignment : middleBottomPattern.getAssignment()) {
@@ -179,7 +179,7 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 			}
 		}
 		//
-        // enforcement operations
+		// enforcement operations
 		//
 		for (Domain domain : mapping.getDomain()) {
 			if (domain.isIsEnforceable()) {
@@ -190,17 +190,17 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 				}
 			}
 		}
-//		for (EnforcementOperation enforceOp : middleBottomPattern.getEnforcementOperation()) {
-//			enforceOp.accept(undecoratedVisitor);
-//		}
+		//		for (EnforcementOperation enforceOp : middleBottomPattern.getEnforcementOperation()) {
+		//			enforceOp.accept(undecoratedVisitor);
+		//		}
 	}
 
 	protected boolean doPredicatesAndEvaluations(@NonNull Mapping mapping, @NonNull EvaluationVisitor undecoratedVisitor) {
 		//
-        // middle guard predicates
+		// middle guard predicates
 		//
 		GuardPattern middleGuardPattern = mapping.getGuardPattern();
-//		assert middleGuardPattern.getVariable().isEmpty();		middle guards are connection variables
+		//		assert middleGuardPattern.getVariable().isEmpty();		middle guards are connection variables
 		for (@NonNull Predicate predicate : ClassUtil.nullFree(middleGuardPattern.getPredicate())) {
 			// If the predicate is not true, the binding is not valid
 			Object result = predicate.accept(undecoratedVisitor);
@@ -218,7 +218,7 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 				assert checkableBottomPattern.getEnforcementOperation().isEmpty();
 				assert checkableBottomPattern.getPredicate().isEmpty();
 				assert checkableBottomPattern.getRealizedVariable().isEmpty();
-//				assert checkableBottomPattern.getVariable().isEmpty();
+				//				assert checkableBottomPattern.getVariable().isEmpty();
 				for (@NonNull Variable rVar : ClassUtil.nullFree(checkableBottomPattern.getVariable())) {
 					OCLExpression ownedInit = rVar.getOwnedInit();
 					assert ownedInit == null;
@@ -244,7 +244,7 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 		assert middleBottomPattern.getEnforcementOperation().isEmpty();
 		assert middleBottomPattern.getRealizedVariable().isEmpty();
 		//
-        // variable declarations/initializations
+		// variable declarations/initializations
 		//
 		for (@NonNull Variable rVar : ClassUtil.nullFree(middleBottomPattern.getVariable())) {
 			if (rVar instanceof ConnectionVariable) {
@@ -273,7 +273,7 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 			}
 		}
 		//
-        // variable assignments
+		// variable assignments
 		//
 		for (@NonNull Assignment assignment : ClassUtil.nullFree(middleBottomPattern.getAssignment())) {
 			if (assignment instanceof VariableAssignment) {
@@ -281,7 +281,7 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 			}
 		}
 		//
-        // middle bottom predicates
+		// middle bottom predicates
 		//
 		for (@NonNull Predicate predicate : ClassUtil.nullFree(middleBottomPattern.getPredicate())) {
 			// If the predicate is not true, the binding is not valid
@@ -297,17 +297,17 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 	public Boolean execute() {
 		initializeEvaluationEnvironment(transformation);
 		getRootEvaluationEnvironment();
-        StandardLibraryInternal standardLibrary = environmentFactory.getStandardLibrary();
+		StandardLibraryInternal standardLibrary = environmentFactory.getStandardLibrary();
 		Variable ownedContext = QVTbaseUtil.getContextVariable(standardLibrary, transformation);
 		QVTiModelManager modelManager = getModelManager();
 		add(ownedContext, modelManager.getTransformationInstance(transformation));
-        for (TypedModel typedModel : transformation.getModelParameter()) {
-        	if (typedModel != null) {
-	            ownedContext = QVTbaseUtil.getContextVariable(standardLibrary, typedModel);
-	            add(ownedContext, modelManager.getTypedModelInstance(typedModel));
-        	}
-        }
-        return executeInternal();
+		for (TypedModel typedModel : transformation.getModelParameter()) {
+			if (typedModel != null) {
+				ownedContext = QVTbaseUtil.getContextVariable(standardLibrary, typedModel);
+				add(ownedContext, modelManager.getTypedModelInstance(typedModel));
+			}
+		}
+		return executeInternal();
 	}
 
 	protected Boolean executeInternal() {
@@ -329,13 +329,13 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 	 */
 	@Override
 	public @Nullable Resource getModel(@NonNull String name) {
-        TypedModel typedModel = NameUtil.getNameable(transformation.getModelParameter(), name);
-        if (typedModel == null) {
-        	throw new IllegalStateException("Unknown TypedModel '" + name + "'");
-        }
-        return getModelManager().getModel(typedModel);
-    }
-	
+		TypedModel typedModel = NameUtil.getNameable(transformation.getModelParameter(), name);
+		if (typedModel == null) {
+			throw new IllegalStateException("Unknown TypedModel '" + name + "'");
+		}
+		return getModelManager().getModel(typedModel);
+	}
+
 	@Override
 	public @NonNull QVTiModelManager getModelManager() {
 		QVTiModelManager modelManager2 = modelManager;
@@ -348,7 +348,7 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 	public @NonNull Transformation getTransformation() {
 		return transformation;
 	}
-	
+
 	public @NonNull QVTiTransformationAnalysis getTransformationAnalysis() {
 		QVTiTransformationAnalysis transformationAnalysis2 = transformationAnalysis;
 		if (transformationAnalysis2 == null) {
@@ -360,9 +360,9 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 
 	protected @Nullable Object internalExecuteFunctionCallExp(@NonNull OperationCallExp operationCallExp,
 			@NonNull Function referredFunction, @Nullable Object @NonNull [] boxedSourceAndArgumentValues) {
-//		PivotUtil.checkExpression(expressionInOCL);
+		//		PivotUtil.checkExpression(expressionInOCL);
 		EvaluationEnvironment nestedEvaluationEnvironment = pushEvaluationEnvironment(referredFunction, operationCallExp);
-//		nestedEvaluationEnvironment.add(ClassUtil.nonNullModel(expressionInOCL.getOwnedContext()), sourceValue);
+		//		nestedEvaluationEnvironment.add(ClassUtil.nonNullModel(expressionInOCL.getOwnedContext()), sourceValue);
 		List<Parameter> parameters = referredFunction.getOwnedParameters();
 		if (!parameters.isEmpty()) {
 			for (int i = 0; i < parameters.size(); i++) {
@@ -389,7 +389,7 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 			popEvaluationEnvironment();
 		}
 	}
-	
+
 	@Override
 	public @Nullable Object internalExecuteMappingCall(@NonNull MappingCall mappingCall, @NonNull Object @NonNull [] boundValues, @NonNull EvaluationVisitor undecoratedVisitor) {
 		Mapping calledMapping = mappingCall.getReferredMapping();
@@ -407,7 +407,7 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 				popEvaluationEnvironment();
 			}
 		}
-    	return true;
+		return true;
 	}
 
 	@Override
@@ -425,8 +425,8 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 		}
 		catch (Throwable e) {
 			// Mapping failure are just mappings that never happened.
-	    	AbstractTransformer.EXCEPTIONS.println("Execution failure in " + mapping.getName() + " : " + e);
-	    	return false;
+			AbstractTransformer.EXCEPTIONS.println("Execution failure in " + mapping.getName() + " : " + e);
+			return false;
 		}
 		//
 		//	Perform the instance model addition and property assignment only after all expressions have been evaluated
@@ -436,18 +436,18 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 		//
 		//	Invoke any corrolaries
 		//
- 		MappingStatement mappingStatement = mapping.getMappingStatement();
+		MappingStatement mappingStatement = mapping.getMappingStatement();
 		if (mappingStatement != null) {
 			mappingStatement.accept(undecoratedVisitor);
 		}
-        return true;
+		return true;
 	}
-	
+
 	@Override
 	public void internalExecuteNavigationAssignment(@NonNull NavigationAssignment navigationAssignment, @NonNull Object slotObject, @Nullable Object ecoreValue, @Nullable Object childKey) {
 		Property targetProperty = QVTcoreBaseUtil.getTargetProperty(navigationAssignment);
 		targetProperty.initValue(slotObject, ecoreValue);
-    	QVTiModelManager modelManager = getModelManager();
+		QVTiModelManager modelManager = getModelManager();
 		Integer cacheIndex = modelManager.getTransformationAnalysis().getCacheIndex(navigationAssignment);
 		if (cacheIndex != null) {
 			modelManager.setUnnavigableOpposite(cacheIndex, slotObject, ecoreValue);
@@ -468,80 +468,81 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 
 	@Override
 	public @Nullable Object internalExecuteRealizedVariable(@NonNull RealizedVariable realizedVariable, @NonNull EvaluationVisitor undecoratedVisitor) {
-        // Realized variables are in the mapping's target bottom pattern
-        // and create elements in the target model. The realized variables
-        // are being visited for each binding of variable in the mapping. 
-        Type type = realizedVariable.getType();
-        if (!(type instanceof org.eclipse.ocl.pivot.Class)) {
-        	return null;
-        }
-        Area area = ((BottomPattern)realizedVariable.eContainer()).getArea();
-        TypedModel typedModel = QVTcoreBaseUtil.getTypedModel(area);
-        assert typedModel != null;
+		// Realized variables are in the mapping's target bottom pattern
+		// and create elements in the target model. The realized variables
+		// are being visited for each binding of variable in the mapping.
+		Type type = realizedVariable.getType();
+		if (!(type instanceof org.eclipse.ocl.pivot.Class)) {
+			return null;
+		}
+		Area area = ((BottomPattern)realizedVariable.eContainer()).getArea();
+		TypedModel typedModel = QVTcoreBaseUtil.getTypedModel(area);
+		assert typedModel != null;
 		Object element = ((org.eclipse.ocl.pivot.Class)type).createInstance();
-        // Add the realize variable binding to the environment
-        replace(realizedVariable, element);
-        getModelManager().addModelElement(typedModel, element);
-        return element;
+		// Add the realize variable binding to the environment
+		replace(realizedVariable, element);
+		getModelManager().addModelElement(typedModel, element);
+		return element;
 	}
 
 	@Override
 	public @Nullable Object internalExecuteTransformation(@NonNull Transformation transformation, @NonNull EvaluationVisitor undecoratedVisitor) {
-        Rule rule = NameUtil.getNameable(transformation.getRule(), QVTimperativeUtil.ROOT_MAPPING_NAME);
-        if (rule == null) {
-        	throw new IllegalStateException("Transformation " + transformation.getName() + " has no root mapping");
-        }
-        CallExp callExp = PivotFactory.eINSTANCE.createOperationCallExp();		// FIXME TransformationCallExp
-        pushEvaluationEnvironment(rule, callExp);
-        try {
-        	rule.accept(undecoratedVisitor);
-        }
-        finally {
-        	popEvaluationEnvironment();
-        }
-        return true;
+		Rule rule = NameUtil.getNameable(transformation.getRule(), QVTimperativeUtil.ROOT_MAPPING_NAME);
+		if (rule == null) {
+			throw new IllegalStateException("Transformation " + transformation.getName() + " has no root mapping");
+		}
+		CallExp callExp = PivotFactory.eINSTANCE.createOperationCallExp();		// FIXME TransformationCallExp
+		pushEvaluationEnvironment(rule, callExp);
+		try {
+			rule.accept(undecoratedVisitor);
+		}
+		finally {
+			popEvaluationEnvironment();
+		}
+		return true;
 	}
 
 	/**
 	 * Loads the modelURI and binds it to the named TypedModel.
 	 */
-	public void loadModel(@NonNull String name, @NonNull URI modelURI) {
-        TypedModel typedModel = NameUtil.getNameable(transformation.getModelParameter(), name);
-        if (typedModel == null) {
-        	throw new IllegalStateException("Unknown TypedModel '" + name + "'");
-        }
-        Resource resource = environmentFactory.getResourceSet().getResource(modelURI, true);
-        if (resource != null) {
-        	getModelManager().addModel(typedModel, resource);
-        }
-    }
+	public @Nullable Resource loadModel(@NonNull String name, @NonNull URI modelURI) {
+		TypedModel typedModel = NameUtil.getNameable(transformation.getModelParameter(), name);
+		if (typedModel == null) {
+			throw new IllegalStateException("Unknown TypedModel '" + name + "'");
+		}
+		Resource resource = environmentFactory.getResourceSet().getResource(modelURI, true);
+		if (resource != null) {
+			getModelManager().addModel(typedModel, resource);
+		}
+		return resource;
+	}
 
 	@Override
 	public void loadModel(@NonNull String name, @NonNull URI modelURI, @Nullable String contentType) {
-        TypedModel typedModel = NameUtil.getNameable(transformation.getModelParameter(), name);
-        if (typedModel == null) {
-        	throw new IllegalStateException("Unknown TypedModel '" + name + "'");
-        }
-        Resource resource;
-        ResourceSet resourceSet = environmentFactory.getResourceSet();
+		TypedModel typedModel = NameUtil.getNameable(transformation.getModelParameter(), name);
+		if (typedModel == null) {
+			throw new IllegalStateException("Unknown TypedModel '" + name + "'");
+		}
+		Resource resource;
+		ResourceSet resourceSet = environmentFactory.getResourceSet();
 		if (contentType == null) {
-        	resource = resourceSet.getResource(modelURI, true);
-        }
-        else {
-        	resource = resourceSet.createResource(modelURI, contentType);
-        	try {
+			resource = resourceSet.getResource(modelURI, true);
+		}
+		else {
+			resource = resourceSet.createResource(modelURI, contentType);
+			try {
 				resource.load(null);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-        }
-        if (resource != null) {
-        	getModelManager().addModel(typedModel, resource);
-        }
-    }
+		}
+		if (resource != null) {
+			getModelManager().addModel(typedModel, resource);
+		}
+	}
 
-    @Override
+	@Override
 	public void replace(@NonNull TypedElement asVariable, @Nullable Object value) {
 		if (value == null) {
 			if (asVariable.isIsRequired()) {
@@ -559,41 +560,41 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 	}
 
 	public Resource saveModel(@NonNull String name, @NonNull URI modelURI, String contentType, @Nullable Map<?, ?> savingOptions) throws IOException {
-        TypedModel typedModel = NameUtil.getNameable(transformation.getModelParameter(), name);
-        if (typedModel == null) {
-        	throw new IllegalStateException("Unknown TypedModel '" + name + "'");
-        }
-    	Resource resource = getModelManager().getModel(typedModel);
-        if (resource == null) {
-        	resource = environmentFactory.getResourceSet().createResource(modelURI, contentType);
-        }
-        if (resource != null) {
-        	resource.save(savingOptions);
-        }
-        return resource;
-    }
+		TypedModel typedModel = NameUtil.getNameable(transformation.getModelParameter(), name);
+		if (typedModel == null) {
+			throw new IllegalStateException("Unknown TypedModel '" + name + "'");
+		}
+		Resource resource = getModelManager().getModel(typedModel);
+		if (resource == null) {
+			resource = environmentFactory.getResourceSet().createResource(modelURI, contentType);
+		}
+		if (resource != null) {
+			resource.save(savingOptions);
+		}
+		return resource;
+	}
 
 	@Override
 	public void saveModels() {
 		getModelManager().saveModels();
 	}
-	
+
 	public void saveModels(@Nullable Map<?, ?> savingOptions) {
 		getModelManager().saveModels(savingOptions);
 	}
-	
+
 	public void saveModels(@NonNull URI traceURI) {
 		this.saveModels(traceURI, null);
 	}
-	
+
 	public void saveModels(@NonNull URI traceURI, @Nullable Map<?, ?> savingOptions) {
 		this.saveModels(savingOptions);
 		getModelManager().saveMiddleModel(traceURI, savingOptions);
 	}
 
 	public void saveTransformation(Map<?,?> options) throws IOException {
-    	XMLResource resource = (XMLResource) transformation.eResource();
-//    	new AS2ID().assignIds(resource.getResourceSet());
+		XMLResource resource = (XMLResource) transformation.eResource();
+		//    	new AS2ID().assignIds(resource.getResourceSet());
 		resource.save(options);
 	}
 }

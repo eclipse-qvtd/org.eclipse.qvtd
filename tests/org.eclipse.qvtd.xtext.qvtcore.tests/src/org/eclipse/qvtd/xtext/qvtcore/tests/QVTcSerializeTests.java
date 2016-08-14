@@ -26,6 +26,7 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.pivot.utilities.PivotConstants;
 import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
+import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcore;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.TestsXMLUtil;
 import org.eclipse.qvtd.xtext.qvtcorecs.QVTcoreCSPackage;
@@ -48,7 +49,7 @@ public class QVTcSerializeTests extends LoadTestCase
 		assertSameModel(asResource1, asResource3);
 		ocl1.dispose();
 		ocl2.dispose();
-	}	
+	}
 
 	protected void doSerializeRoundTripFromCS(@NonNull String stem) throws Exception {
 		OCL ocl1 = OCL.newInstance(OCL.NO_PROJECTS);
@@ -59,20 +60,22 @@ public class QVTcSerializeTests extends LoadTestCase
 		doSerialize(inputURI, stem, referenceURI, null, true, true);
 		Resource asResource3 = doLoad_Concrete(ocl2, stem + ".serialized.qvtc", stem + ".serialized.qvtcas");
 		((Model)asResource3.getContents().get(0)).setExternalURI(((Model)asResource1.getContents().get(0)).getExternalURI());
+		TestsXMLUtil.resetTransients(asResource1);
+		TestsXMLUtil.resetTransients(asResource3);
 		assertSameModel(asResource1, asResource3);
 		ocl1.dispose();
 		ocl2.dispose();
-	}	
+	}
 
 	protected ASResource loadQVTiAS(@NonNull OCL ocl, @NonNull URI inputURI) {
 		Resource asResource = ocl.getMetamodelManager().getASResourceSet().getResource(inputURI, true);
-//		List<String> conversionErrors = new ArrayList<String>();
-//		RootPackageCS documentCS = Ecore2OCLinEcore.importFromEcore(resourceSet, null, ecoreResource);
-//		Resource eResource = documentCS.eResource();
+		//		List<String> conversionErrors = new ArrayList<String>();
+		//		RootPackageCS documentCS = Ecore2OCLinEcore.importFromEcore(resourceSet, null, ecoreResource);
+		//		Resource eResource = documentCS.eResource();
 		assertNoResourceErrors("Load failed", asResource);
-//		Resource xtextResource = resourceSet.createResource(outputURI, OCLinEcoreCSTPackage.eCONTENT_TYPE);
-//		XtextResource xtextResource = (XtextResource) resourceSet.createResource(outputURI);
-//		xtextResource.getContents().add(documentCS);
+		//		Resource xtextResource = resourceSet.createResource(outputURI, OCLinEcoreCSTPackage.eCONTENT_TYPE);
+		//		XtextResource xtextResource = (XtextResource) resourceSet.createResource(outputURI);
+		//		xtextResource.getContents().add(documentCS);
 		return (ASResource) asResource;
 	}
 
@@ -82,12 +85,12 @@ public class QVTcSerializeTests extends LoadTestCase
 		assertNoResourceErrors("Conversion failed", xtextResource);
 		//
 		//	CS save
-		//		
+		//
 		URI savedURI = ClassUtil.nonNullState(asResource.getURI());
 		asResource.setURI(outputURI.trimFileExtension().trimFileExtension().appendFileExtension(PivotConstants.OCL_AS_FILE_EXTENSION));
 		asResource.save(TestsXMLUtil.defaultSavingOptions);
 		asResource.setURI(savedURI);
-		
+
 		assertNoDiagnosticErrors("Concrete Syntax validation failed", xtextResource);
 		try {
 			xtextResource.save(TestsXMLUtil.defaultSavingOptions);
@@ -105,20 +108,20 @@ public class QVTcSerializeTests extends LoadTestCase
 
 	public XtextResource doSerialize(@NonNull URI inputURI, @NonNull String stem, @NonNull URI referenceURI, @Nullable Map<String, Object> options, boolean doCompare, boolean validateSaved) throws Exception {
 		ResourceSet resourceSet = new ResourceSetImpl();
-//		getProjectMap().initializeResourceSet(resourceSet);
+		//		getProjectMap().initializeResourceSet(resourceSet);
 		String outputName = stem + ".serialized.qvtc";
 		URI outputURI = getProjectFileURI(outputName);
 		//
 		//	Load QVTiAS
-		//		
-		OCL ocl = OCL.newInstance(OCL.NO_PROJECTS);
+		//
+		OCL ocl = QVTcore.newInstance(OCL.NO_PROJECTS);
 		try {
 			ASResource asResource = loadQVTiAS(ocl, inputURI);
 			assertNoResourceErrors("Normalisation failed", asResource);
 			assertNoValidationErrors("Normalisation invalid", asResource);
 			//
 			//	Pivot to CS
-			//		
+			//
 			XtextResource xtextResource = pivot2cs(ocl, resourceSet, asResource, outputURI);
 			resourceSet.getResources().clear();
 			return xtextResource;
@@ -128,26 +131,26 @@ public class QVTcSerializeTests extends LoadTestCase
 			ocl = null;
 		}
 	}
-	
+
 	@Override
 	public void setUp() throws Exception {
 		BaseLinkingService.DEBUG_RETRY.setState(true);
 		QVTcTestUtil.doQVTcoreSetup();
 		super.setUp();
 	}
-	
+
 	public void testSerialize_Class2RDBMS() throws Exception {
 		doSerializeRoundTripFromCS("Class2RDBMS/Class2RDBMS");
 	}
-	
+
 	public void testSerialize_platformResource_BaseCS2AS() throws Exception {
 		doSerializeRoundTripFromCS("platformResource/org.eclipse.ocl.xtext.base/model/BaseCS2AS.qvtp");
 	}
-	
-//	public void testSerialize_platformResource_Mini() throws Exception {
-//		doSerializeRoundTripFromCS("platformResource/org.eclipse.ocl.xtext.base/model/MiniBaseCS2AS.qvtp");
-//	}
-	
+
+	//	public void testSerialize_platformResource_Mini() throws Exception {
+	//		doSerializeRoundTripFromCS("platformResource/org.eclipse.ocl.xtext.base/model/MiniBaseCS2AS.qvtp");
+	//	}
+
 	/* FIXME get better source
 	public void testSerialize_Seq2Stm() throws Exception {
 		doSerializeRoundTripFromAS("Seq2Stm/SeqToStm");

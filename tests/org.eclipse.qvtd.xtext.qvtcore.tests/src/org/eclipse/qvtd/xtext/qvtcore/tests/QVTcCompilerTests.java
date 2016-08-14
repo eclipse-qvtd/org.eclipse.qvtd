@@ -229,14 +229,15 @@ public class QVTcCompilerTests extends LoadTestCase
 			}
 		}
 
-		public void loadInput(@NonNull String modelName, @NonNull String modelFile) {
+		public @Nullable Resource loadInput(@NonNull String modelName, @NonNull String modelFile) {
 			URI modelURI = samplesBaseUri.appendSegment(modelFile);
 			if (interpretedExecutor != null) {
-				interpretedExecutor.loadModel(modelName, modelURI);
+				return interpretedExecutor.loadModel(modelName, modelURI);
 			}
 			else {
 				Resource inputResource = getResourceSet().getResource(modelURI, true);
 				generatedExecutor.getTransformer().addRootObjects(modelName, ClassUtil.nullFree(inputResource.getContents()));
+				return inputResource;
 			}
 		}
 
@@ -405,11 +406,12 @@ public class QVTcCompilerTests extends LoadTestCase
 			//
 			Class<? extends Transformer> txClass = myQVT.buildTransformation("Forward2Reverse.qvtc", "reverse", "List2List.genmodel");
 			//
+			/* FIXME Bug 499432
 			myQVT.createGeneratedExecutor(txClass);
 			myQVT.loadInput("forward", "EmptyList.xmi");
 			myQVT.executeTransformation();
 			myQVT.saveOutput("reverse", "EmptyList_CG.xmi", "EmptyList_expected.xmi", Forward2ReverseNormalizer.INSTANCE);
-			//
+			 */			//
 			myQVT.createGeneratedExecutor(txClass);
 			myQVT.loadInput("forward", "OneElementList.xmi");
 			myQVT.executeTransformation();
@@ -435,7 +437,7 @@ public class QVTcCompilerTests extends LoadTestCase
 		//		AbstractTransformer.EXCEPTIONS.setState(true);
 		//		AbstractTransformer.INVOCATIONS.setState(true);
 		MyQVT myQVT = new MyQVT("hsv2hls");
-		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
+		//		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 		try {
 			Transformation asTransformation = myQVT.compileTransformation("HSV2HLS.qvtcas", "hls");
 			myQVT.createInterpretedExecutor(asTransformation);

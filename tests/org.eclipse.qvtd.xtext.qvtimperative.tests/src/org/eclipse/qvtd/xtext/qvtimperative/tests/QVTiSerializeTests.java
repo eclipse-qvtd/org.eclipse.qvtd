@@ -50,10 +50,12 @@ public class QVTiSerializeTests extends LoadTestCase
 		doSerialize(inputURI, stem, referenceURI, null, true, true);
 		Resource asResource3 = doLoad_Concrete(ocl2, stem + ".serialized.qvti", stem + ".serialized.qvtias");
 		((Model)asResource3.getContents().get(0)).setExternalURI(((Model)asResource1.getContents().get(0)).getExternalURI());
+		TestsXMLUtil.resetTransients(asResource1);
+		TestsXMLUtil.resetTransients(asResource3);
 		assertSameModel(asResource1, asResource3);
 		ocl1.dispose();
 		ocl2.dispose();
-	}	
+	}
 	protected void doSerializeRoundTripFromAS(@NonNull String stem) throws Exception {
 		OCL ocl1 = OCL.newInstance(OCL.NO_PROJECTS);
 		OCL ocl2 = OCL.newInstance(OCL.NO_PROJECTS);
@@ -66,17 +68,17 @@ public class QVTiSerializeTests extends LoadTestCase
 		assertSameModel(asResource1, asResource3);
 		ocl1.dispose();
 		ocl2.dispose();
-	}	
+	}
 
 	protected ASResource loadQVTiAS(@NonNull OCL ocl, @NonNull URI inputURI) {
 		Resource asResource = ocl.getMetamodelManager().getASResourceSet().getResource(inputURI, true);
-//		List<String> conversionErrors = new ArrayList<String>();
-//		RootPackageCS documentCS = Ecore2OCLinEcore.importFromEcore(resourceSet, null, ecoreResource);
-//		Resource eResource = documentCS.eResource();
+		//		List<String> conversionErrors = new ArrayList<String>();
+		//		RootPackageCS documentCS = Ecore2OCLinEcore.importFromEcore(resourceSet, null, ecoreResource);
+		//		Resource eResource = documentCS.eResource();
 		assertNoResourceErrors("Load failed", asResource);
-//		Resource xtextResource = resourceSet.createResource(outputURI, OCLinEcoreCSTPackage.eCONTENT_TYPE);
-//		XtextResource xtextResource = (XtextResource) resourceSet.createResource(outputURI);
-//		xtextResource.getContents().add(documentCS);
+		//		Resource xtextResource = resourceSet.createResource(outputURI, OCLinEcoreCSTPackage.eCONTENT_TYPE);
+		//		XtextResource xtextResource = (XtextResource) resourceSet.createResource(outputURI);
+		//		xtextResource.getContents().add(documentCS);
 		return (ASResource) asResource;
 	}
 
@@ -86,14 +88,14 @@ public class QVTiSerializeTests extends LoadTestCase
 		assertNoResourceErrors("Conversion failed", xtextResource);
 		//
 		//	CS save
-		//		
+		//
 		URI savedURI = ClassUtil.nonNullState(asResource.getURI());
 		asResource.setURI(outputURI.trimFileExtension().trimFileExtension().appendFileExtension(PivotConstants.OCL_AS_FILE_EXTENSION));
 		asResource.save(TestsXMLUtil.defaultSavingOptions);
 		asResource.setURI(savedURI);
-		
+
 		assertNoDiagnosticErrors("Concrete Syntax validation failed", xtextResource);
-		try {		
+		try {
 			xtextResource.save(TestsXMLUtil.defaultSavingOptions);
 		}
 		catch (Exception e) {
@@ -111,12 +113,12 @@ public class QVTiSerializeTests extends LoadTestCase
 	@SuppressWarnings("null")
 	public XtextResource doSerialize(@NonNull URI inputURI, @NonNull String stem, @NonNull URI referenceURI, @Nullable Map<String, Object> options, boolean doCompare, boolean validateSaved) throws Exception {
 		ResourceSet resourceSet = new ResourceSetImpl();
-//		getProjectMap().initializeResourceSet(resourceSet);
+		//		getProjectMap().initializeResourceSet(resourceSet);
 		String outputName = stem + ".serialized.qvti";
 		URI outputURI = getProjectFileURI(outputName);
 		//
 		//	Load QVTiAS
-		//		
+		//
 		OCL ocl = QVTbase.newInstance(OCL.NO_PROJECTS);
 		try {
 			ASResource asResource = loadQVTiAS(ocl, inputURI);
@@ -124,7 +126,7 @@ public class QVTiSerializeTests extends LoadTestCase
 			assertNoValidationErrors("Normalisation invalid", asResource);
 			//
 			//	Pivot to CS
-			//		
+			//
 			XtextResource xtextResource = pivot2cs(ocl, resourceSet, asResource, outputURI);
 			resourceSet.getResources().clear();
 			return xtextResource;
@@ -134,7 +136,7 @@ public class QVTiSerializeTests extends LoadTestCase
 			ocl = null;
 		}
 	}
-	
+
 	@Override
 	public void setUp() throws Exception {
 		BaseLinkingService.DEBUG_RETRY.setState(true);
@@ -142,59 +144,59 @@ public class QVTiSerializeTests extends LoadTestCase
 		QVTiTestUtil.doQVTimperativeSetup();
 		super.setUp();
 	}
-	
+
 	public void testSerialize_Constructors() throws Exception {
 		doSerializeRoundTrip("Constructors/Constructors");
 	}
-	
+
 	public void testSerialize_Dependencies() throws Exception {
 		doSerializeRoundTrip("Dependencies/Dependencies");
 	}
-	
+
 	public void testSerialize_Expressions() throws Exception {
 		doSerializeRoundTrip("Expressions/Expressions");
 	}
-	
+
 	public void testSerialize_Graph2GraphHierarchical() throws Exception {
 		doSerializeRoundTrip("Graph2GraphHierarchical/Graph2GraphHierarchical");
 	}
-	
+
 	public void testSerialize_Graph2GraphMinimal() throws Exception {
 		doSerializeRoundTrip("Graph2GraphMinimal/Graph2GraphMinimal");
 	}
-	
+
 	public void testSerialize_HSV2HLS_qvti() throws Exception {
 		doSerializeRoundTrip("HSV2HLS/HSV2HLS");
 	}
-	
+
 	public void testSerialize_HSV2HLSas_qvtias() throws Exception {
 		doSerialize("HSV2HLS/HSV2HLSas");
 	}
-	
+
 	public void testSerialize_KiamaRewrite_qvti() throws Exception {
 		doSerializeRoundTrip("KiamaRewrite/KiamaRewrite");
 	}
-	
+
 	public void testSerialize_ManualUML2RDBMS_qvti() throws Exception {
 		doSerializeRoundTrip("ManualUML2RDBMS/ManualUML2RDBMS");
 	}
-	
+
 	public void testSerialize_SimpleUML2RDBMS_qvti() throws Exception {
 		doSerializeRoundTrip("SimpleUML2RDBMS/SimpleUML2RDBMS");
 	}
-	
+
 	public void testSerialize_Tree2TallTree_qvti() throws Exception {
 		doSerializeRoundTrip("Tree2TallTree/Tree2TallTree");
 	}
-	
+
 	public void zztestSerialize_platformResource_BaseCS2AS() throws Exception {
 		doSerializeRoundTripFromAS("platformResource/org.eclipse.ocl.xtext.base/model/BaseCS2AS");
 	}
-	
+
 	public void zztestSerialize_platformResource_EssentialOCLCS2AS() throws Exception {
 		doSerializeRoundTripFromAS("platformResource/org.eclipse.ocl.xtext.essentialocl/model/EssentialOCLCS2AS");
 	}
-	
+
 	protected void doSerialize(@NonNull String stem) throws Exception {
 		URI inputURI = getProjectFileURI(stem + ".qvtias");
 		URI referenceURI = getProjectFileURI(stem + "ref..qvtias");
