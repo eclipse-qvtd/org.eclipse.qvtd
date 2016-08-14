@@ -44,6 +44,7 @@ public class BasicNodeConnection extends AbstractConnection<@NonNull Node> imple
 		this.classDatumAnalysis = classDatumAnalysis;
 		region.addNodeConnection(this);
 		for (@NonNull Node sourceNode : sourceNodes) {
+			//			assert !sourceNode.isConstant();
 			sourceNode.addOutgoingConnection(this);
 		}
 	}

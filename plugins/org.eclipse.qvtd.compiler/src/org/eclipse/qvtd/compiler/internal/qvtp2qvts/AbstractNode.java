@@ -634,7 +634,12 @@ public abstract class AbstractNode implements Node
 
 	@Override
 	public boolean isPredicated() {
-		return nodeRole.isPredicated();
+		if (nodeRole.isSpeculated()) {
+			return nodeRole.isPredicated();
+		}
+		else {
+			return nodeRole.isPredicated();
+		}
 	}
 
 	@Override
@@ -751,7 +756,7 @@ public abstract class AbstractNode implements Node
 	public void setLabel(@NonNull GraphStringBuilder s) {
 		StringBuilder n = new StringBuilder();
 		n.append(getName());
-		if (!isExpression() && !isNull() && !isTrue()) {
+		if (!isNull() && !isTrue()) {
 			n.append("\\n");
 			n.append(PrettyPrinter.printType(getCompleteClass().getPrimaryClass()));
 		}

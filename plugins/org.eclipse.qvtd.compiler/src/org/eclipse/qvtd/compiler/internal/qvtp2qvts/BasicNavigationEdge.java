@@ -69,6 +69,7 @@ public class BasicNavigationEdge extends AbstractEdge implements NavigationEdge
 		this.source2targetProperty = source2targetProperty;
 		//		assert (source2targetProperty.eContainer() == null) || sourceNode.isClassNode();		// Pseudo navigations may be non-classes
 		//		assert !sourceNode.isOperation();			// FIXME testExample2_V2 violates this to cast an intermediate "if"
+		//		assert !targetNode.isOperation();
 	}
 
 	@Override
@@ -219,5 +220,17 @@ public class BasicNavigationEdge extends AbstractEdge implements NavigationEdge
 		else {
 			appendEdgeWithNode(s);
 		}
+	}
+
+	@Override
+	public void setSource(@NonNull Node sourceNode) {
+		assert !sourceNode.isOperation();
+		super.setSource(sourceNode);
+	}
+
+	@Override
+	public void setTarget(@NonNull Node targetNode) {
+		assert !targetNode.isOperation();
+		super.setTarget(targetNode);
 	}
 }

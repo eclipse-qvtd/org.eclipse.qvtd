@@ -98,6 +98,11 @@ class BodyStage extends AbstractStage
 	 */
 	protected @NonNull Iterable<@NonNull Node> computeAllHeadNodes(@NonNull Iterable<@NonNull Node> requiredNodes) {
 		Set<@NonNull Node> nodeSet = Sets.newHashSet(visibleIteratorNodes);
+		for (@NonNull Node headNode : splitter.getRegion().getHeadNodes()) {
+			if (headNode.isSpeculated() || headNode.isPredicated()) {
+				nodeSet.add(headNode);
+			}
+		}
 		for (@NonNull Node node : requiredNodes) {
 			if (node.isHead()) {
 				nodeSet.add(node);
@@ -120,12 +125,8 @@ class BodyStage extends AbstractStage
 	 * The directly required nodes are the required nodes that are not head nodes.
 	 */
 	protected @NonNull Iterable<@NonNull Node> computeDirectlyRequiredNodes(@NonNull Iterable<@NonNull Node> requiredNodes) {
-		List<@NonNull Node> nodes = new ArrayList<>();
-		for (@NonNull Node node : requiredNodes) {
-			if (!node.isHead()) {
-				nodes.add(node);
-			}
-		}
+		List<@NonNull Node> nodes = Lists.newArrayList(requiredNodes);
+		CompilerUtil.removeAll(nodes, allHeadNodes);
 		Collections.sort(nodes, NameUtil.NAMEABLE_COMPARATOR);
 		return nodes;
 	}
@@ -154,14 +155,14 @@ class BodyStage extends AbstractStage
 
 	protected @NonNull Iterable<@NonNull Node> computeRealizedNodes() {
 		Region region = splitter.getRegion();
-		List<@NonNull Node> nodes = Lists.newArrayList(region.getRealizedNodes());
+		List<@NonNull Node> nodes = Lists.newArrayList(region.getRealizedOrSpeculationNodes());
 		Collections.sort(nodes, NameUtil.NAMEABLE_COMPARATOR);
 		return nodes;
 	}
 
 	/**
 	 * The required nodes are the sources of all realized navigation edges, and the transitive source
-	 * of all computations terminating in a relaized node.
+	 * of all computations terminating in a realized node.
 	 */
 	protected @NonNull Iterable<@NonNull Node> computeRequiredNodes() {
 		Set<@NonNull Node> requiredNodeSet = new HashSet<>();
@@ -214,6 +215,9 @@ class BodyStage extends AbstractStage
 
 	@Override
 	protected boolean isLive(@NonNull Node node, @NonNull Set<@NonNull Node> deadNodes) {
+		if (node.isHead()) {
+			return true;		// Head node is needed
+		}
 		if (node.isRealized()) {
 			return true;		// Realized node is needed
 		}

@@ -916,7 +916,7 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 			k -> {
 				List<Node> list = producedClassDatumAnalysis2realizedNodes.get(k);
 				assert list != null;
-				return String.valueOf(k) + " : " +
+				return k.getDomainUsage() + " " + String.valueOf(k) + " : " +
 				list.stream().map(
 					p -> p.getDisplayName()
 						).sorted().reduce("", stringJoin("\n\t\t")
@@ -1142,7 +1142,7 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 		for (@NonNull NavigationEdge realizedEdge : realizedEdges) {
 			Node targetNode = realizedEdge.getTarget();
 			CompleteClass realizedClass = targetNode.getCompleteClass();
-			if (realizedClass.conformsTo(requiredClass)) {
+			if (realizedClass.conformsTo(requiredClass) /*|| realizedClass.conformsTo(requiredClass.getBehavioralClass())*/) {
 				if (conformantRealizedEdges == null) {
 					conformantRealizedEdges = new ArrayList<@NonNull NavigationEdge>();
 				}

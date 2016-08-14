@@ -129,12 +129,12 @@ public interface Region extends Visitable, GraphNode, Nameable, Symbolable
 	@NonNull Iterable<@NonNull DatumConnection> getOutgoingConnections();
 	@NonNull Iterable<@NonNull NodeConnection> getOutgoingPassedConnections();
 	@NonNull Iterable<@NonNull NodeConnection> getOutgoingUsedConnections();
-	@NonNull Iterable<@NonNull Node> getPredicatedNodes();
+	@NonNull Iterable<@NonNull Node> getPatternNodes();
 	@NonNull Iterable<@NonNull NavigationEdge> getPredicatedNavigationEdges();
+	//	@NonNull Iterable<@NonNull Node> getPredicatedOrSpeculatedNodes();
 	@NonNull Iterable<@NonNull Edge> getRealizedEdges();
 	@NonNull Iterable<@NonNull NavigationEdge> getRealizedNavigationEdges();
-	@NonNull Iterable<@NonNull Node> getRealizedNodes();
-	@NonNull Iterable<@NonNull Node> getRealizedVariableNodes();
+	@NonNull Iterable<@NonNull Node> getRealizedOrSpeculationNodes();
 	@NonNull Iterable<@NonNull Edge> getRecursionEdges();
 	@NonNull List<@NonNull NodeConnection> getRootConnections();
 	@NonNull SchedulerConstants getSchedulerConstants();

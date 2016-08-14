@@ -148,6 +148,8 @@ abstract class AbstractStage implements Stage
 	@Override
 	public @NonNull String toString() {
 		StringBuilder s = new StringBuilder();
+		s.append(splitter.toString());
+		s.append(" ");
 		toString(s, 0);
 		return s.toString();
 	}

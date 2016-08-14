@@ -19,6 +19,7 @@ import org.eclipse.ocl.pivot.TypedElement;
  */
 public interface NodeRole extends Role
 {
+	@NonNull NodeRole asNavigable();
 	@Override
 	@NonNull NodeRole asPhase(@NonNull Phase phase);
 	@NonNull NodeRole asPredicated();

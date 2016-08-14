@@ -184,7 +184,7 @@ public interface Node extends ConnectionEnd, GraphStringBuilder.GraphNode, Namea
 	//	boolean isOutput();
 
 	/**
-	 * Return true if this node is a pattern variable.
+	 * Return true if this node is a pattern variable (class/datatype/null/true).
 	 */
 	boolean isPattern();
 

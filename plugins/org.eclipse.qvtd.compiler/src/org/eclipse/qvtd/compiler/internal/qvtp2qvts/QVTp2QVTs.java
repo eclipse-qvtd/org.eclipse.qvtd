@@ -187,6 +187,27 @@ public class QVTp2QVTs extends SchedulerConstants
 	}
 
 	/**
+	 * Return the nodes with region at which a suitably matching head og annother region might be merged.
+	 * The nodes must be bi-directionally one to one to respect 1:N trace node relationships.
+	 */
+	protected @NonNull Iterable<@NonNull Node> getMergeableNodes(@NonNull MappingRegion region) {
+		Set<@NonNull Node> mergeableNodes = new HashSet<>();
+		for (@NonNull Node node : region.getHeadNodes()) {
+			getMergeableNodes(mergeableNodes, node);
+		}
+		return mergeableNodes;
+	}
+	private void getMergeableNodes(@NonNull Set<@NonNull Node> mergeableNodes, @NonNull Node node) {
+		if (node.isMatchable() && node.isClass() && mergeableNodes.add(node)) {
+			for (@NonNull NavigationEdge edge : node.getNavigationEdges()) {
+				if (edge.getOppositeEdge() != null) {
+					getMergeableNodes(mergeableNodes, edge.getTarget());
+				}
+			}
+		}
+	}
+
+	/**
 	 * The primary region in a GuardedRegion must be single-headed. It may be multiply-produced, e.g. recursed.
 	 */
 	private boolean isEarlyMergePrimaryCandidate(@NonNull Region mappingRegion) {
@@ -250,7 +271,7 @@ public class QVTp2QVTs extends SchedulerConstants
 					}
 					secondaryRegions.add(secondaryRegion);
 				}
-				for (@NonNull Node predicatedNode : secondaryRegion.getMatchableNodes()) {
+				for (@NonNull Node predicatedNode : getMergeableNodes(secondaryRegion)) {
 					if (predicatedNode.isClass()) {							// Ignore nulls, attributes
 						ClassDatumAnalysis predicatedClassDatumAnalysis = predicatedNode.getClassDatumAnalysis();
 						if (toOneReachableClasses.add(predicatedClassDatumAnalysis)) {

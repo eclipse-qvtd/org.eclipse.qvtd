@@ -91,7 +91,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 
 		@Override
 		public boolean apply(@NonNull Node node) {
-			return node.isRealized();
+			return node.isRealized() || node.isSpeculation();
 		}
 	}
 
@@ -205,6 +205,16 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 		}
 	}
 
+	public static final class IsPatternNodePredicate implements Predicate<@NonNull Node>
+	{
+		public static final @NonNull IsPatternNodePredicate INSTANCE = new IsPatternNodePredicate();
+
+		@Override
+		public boolean apply(@NonNull Node node) {
+			return node.isPattern();
+		}
+	}
+
 	public static final class IsPredicatedEdgePredicate implements Predicate<@NonNull Edge>
 	{
 		public static final @NonNull IsPredicatedEdgePredicate INSTANCE = new IsPredicatedEdgePredicate();
@@ -222,16 +232,6 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 		@Override
 		public boolean apply(@NonNull Edge edge) {
 			return edge.isPredicated() && edge.isNavigation();
-		}
-	}
-
-	public static final class IsPredicatedNodePredicate implements Predicate<@NonNull Node>
-	{
-		public static final @NonNull IsPredicatedNodePredicate INSTANCE = new IsPredicatedNodePredicate();
-
-		@Override
-		public boolean apply(@NonNull Node node) {
-			return node.isPredicated();
 		}
 	}
 
@@ -255,23 +255,13 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 		}
 	}
 
-	public static final class IsRealizedNodePredicate implements Predicate<@NonNull Node>
+	public static final class IsRealizedOrSpeculationNodePredicate implements Predicate<@NonNull Node>
 	{
-		public static final @NonNull IsRealizedNodePredicate INSTANCE = new IsRealizedNodePredicate();
+		public static final @NonNull IsRealizedOrSpeculationNodePredicate INSTANCE = new IsRealizedOrSpeculationNodePredicate();
 
 		@Override
 		public boolean apply(@NonNull Node node) {
-			return node.isRealized();
-		}
-	}
-
-	public static final class IsRealizedVariableNodePredicate implements Predicate<@NonNull Node>
-	{
-		public static final @NonNull IsRealizedVariableNodePredicate INSTANCE = new IsRealizedVariableNodePredicate();
-
-		@Override
-		public boolean apply(@NonNull Node node) {
-			return node.isRealized() && node.isClass() && !node.isOperation();
+			return node.isRealized() || node.isSpeculation();
 		}
 	}
 
@@ -976,7 +966,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 		SymbolNameBuilder s = null;
 		Set<@NonNull Node> bestToOneSubRegion = null;
 		Node bestNamingNode = null;
-		for (@NonNull Node node : getRealizedNodes()) {
+		for (@NonNull Node node : getRealizedOrSpeculationNodes()) {
 			Set<@NonNull Node> toOneSubRegion = computeToOneSubRegion(new HashSet<@NonNull Node>(), node);
 			if ((bestToOneSubRegion == null) || (toOneSubRegion.size() > bestToOneSubRegion.size())) {
 				bestToOneSubRegion = toOneSubRegion;
@@ -1250,6 +1240,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 				if (headConnection == null) {
 					if (!headNode.getNodeRole().isExtraGuardVariable()) {	// We don't know if extra guards are needed or not
 						System.err.println("createHeadConnections abandoned for " + headNode + " of " + this);
+						headConnection = createHeadConnection(headNode);	// FIXME debugging
 						return null;										//  so matching only fails for unmatchable real heads
 					}
 				}
@@ -1675,10 +1666,12 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 				connections.add(connection);
 			}
 		}
-		for (@NonNull Node node : getPredicatedNodes()) {
-			NodeConnection connection = node.getIncomingUsedConnection();
-			if ((connection != null) && !connections.contains(connection)) {
-				connections.add(connection);
+		for (@NonNull Node node : getPatternNodes()) {
+			if (node.isLoaded() || node.isSpeculated() || node.isPredicated()) {	// A DataType may be loaded but subject to an edge predication
+				NodeConnection connection = node.getIncomingUsedConnection();
+				if ((connection != null) && !connections.contains(connection)) {
+					connections.add(connection);
+				}
 			}
 		}
 		for (@NonNull NavigationEdge edge : getPredicatedNavigationEdges()) {
@@ -1705,10 +1698,12 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 	@Override
 	public @NonNull Iterable<@NonNull NodeConnection> getIncomingUsedConnections() {			// FIXME cache
 		List<@NonNull NodeConnection> connections = new ArrayList<@NonNull NodeConnection>();
-		for (@NonNull Node node : getPredicatedNodes()) {
-			NodeConnection connection = node.getIncomingUsedConnection();
-			if (connection != null) {
-				connections.add(connection);
+		for (@NonNull Node node : getPatternNodes()) {
+			if (node.isLoaded() || node.isSpeculated() || node.isPredicated()) {	// A DataType may be loaded but subject to an edge predication
+				NodeConnection connection = node.getIncomingUsedConnection();
+				if (connection != null) {
+					connections.add(connection);
+				}
 			}
 		}
 		return connections;
@@ -1905,6 +1900,11 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 		}
 	}
 
+	@Override
+	public final @NonNull Iterable<@NonNull Node> getPatternNodes() {
+		return Iterables.filter(nodes, IsPatternNodePredicate.INSTANCE);
+	}
+
 	public final @NonNull Iterable<NavigationEdge> getPredicateEdges() {
 		@SuppressWarnings("unchecked")
 		@NonNull Iterable<@NonNull NavigationEdge> filter = (Iterable<@NonNull NavigationEdge>)(Object)Iterables.filter(edges, IsPredicatedEdgePredicate.INSTANCE);
@@ -1916,11 +1916,6 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 		@SuppressWarnings("unchecked")
 		@NonNull Iterable<@NonNull NavigationEdge> filter = (Iterable<@NonNull NavigationEdge>)(Object)Iterables.filter(edges, IsPredicatedNavigationEdgePredicate.INSTANCE);
 		return filter;
-	}
-
-	@Override
-	public final @NonNull Iterable<@NonNull Node> getPredicatedNodes() {
-		return Iterables.filter(nodes, IsPredicatedNodePredicate.INSTANCE);
 	}
 
 	@Override
@@ -1937,13 +1932,8 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 	}
 
 	@Override
-	public final @NonNull Iterable<@NonNull Node> getRealizedNodes() {
-		return Iterables.filter(nodes, IsRealizedNodePredicate.INSTANCE);
-	}
-
-	@Override
-	public final @NonNull Iterable<@NonNull Node> getRealizedVariableNodes() {
-		return Iterables.filter(nodes, IsRealizedVariableNodePredicate.INSTANCE);
+	public final @NonNull Iterable<@NonNull Node> getRealizedOrSpeculationNodes() {
+		return Iterables.filter(nodes, IsRealizedOrSpeculationNodePredicate.INSTANCE);
 	}
 
 	@Override
@@ -1989,10 +1979,12 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 	@Override
 	public @NonNull List<@NonNull NodeConnection> getUsedConnections() {			// FIXME cache
 		List<@NonNull NodeConnection> usedConnections = new ArrayList<@NonNull NodeConnection>();
-		for (@NonNull Node node : getPredicatedNodes()) {
-			NodeConnection connection = node.getIncomingUsedConnection();
-			if (connection != null) {
-				usedConnections.add(connection);
+		for (@NonNull Node node : getPatternNodes()) {
+			if (node.isLoaded() || node.isSpeculated() || node.isPredicated()) {	// A DataType may be loaded but subject to an edge predication
+				NodeConnection connection = node.getIncomingUsedConnection();
+				if (connection != null) {
+					usedConnections.add(connection);
+				}
 			}
 		}
 		return usedConnections;

@@ -34,7 +34,7 @@ class LoopStage extends HeadedStage
 		Node iteratedNode = getIteratedNode();
 		Node iteratorNode = getIteratorNode();
 		build(s, "iteration domain", Collections.singletonList(iteratedNode));
-		build(s, iteratorNode.isPredicated() ? "hazardous-iterator" : "safe-iterator", Collections.singletonList(iteratorNode));
+		build(s, iteratorNode.isSpeculated() || iteratorNode.isPredicated() ? "hazardous-iterator" : "safe-iterator", Collections.singletonList(iteratorNode));
 		return super.buildContents(s);
 	}
 

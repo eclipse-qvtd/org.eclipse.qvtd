@@ -13,8 +13,10 @@ package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Edge;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.MicroMappingRegion;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.EdgeRole;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NavigationEdge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NodeRole;
 
@@ -26,21 +28,19 @@ class SpeculationPartition extends AbstractPartition
 {
 	public SpeculationPartition(@NonNull Partitioner partitioner) {
 		super(partitioner);
+		@SuppressWarnings("unused") String name = partitioner.getRegion().getName();
 		//
 		//	The realized middle (trace) nodes become speculation nodes.
+		//	All traced loaded nodes are retained as is to be traced by the speculation.
+		//	NB. Unreachable loaded nodes are effectively predicates nd so are deferred.
 		//
 		for (@NonNull Node node : partitioner.getRealizedMiddleNodes()) {
 			if (node.isPattern() && node.isClass()) {		// FIXME UML2RDBMS experiment
 				NodeRole speculationNodeRole = node.getNodeRole().resetHead().asSpeculation();
 				addNode(node, speculationNodeRole);
-			}
-		}
-		//
-		//	Loaded pattern nodes are retained as is for the predicate.
-		//
-		for (@NonNull Node node : partitioner.getLoadedNodes()) {
-			if (node.isPattern() && node.isClass()) {
-				addNode(node, node.getNodeRole());
+				for (@NonNull NavigationEdge edge : node.getNavigationEdges()) {
+					addReachableConstantOrLoadedNodes(edge.getTarget());
+				}
 			}
 		}
 		//
@@ -57,11 +57,20 @@ class SpeculationPartition extends AbstractPartition
 		resolveEdgeRoles();
 	}
 
-	@Override
-	public @NonNull MicroMappingRegion createMicroMappingRegion(@NonNull String prefix, @NonNull String suffix) {
-		MicroMappingRegion microMappingRegion = super.createMicroMappingRegion(prefix, suffix);
-		microMappingRegion.getHeadNodes();
-		return microMappingRegion;
+	/**
+	 * Add all nodes, including node, that are constant or loaded and reachable by to-one navigation from node.
+	 */
+	protected void addReachableConstantOrLoadedNodes(@NonNull Node node) {
+		if (node.isConstant() || node.isLoaded()) {
+			if (!hasNode(node)) {
+				addNode(node, node.getNodeRole());
+				for (@NonNull NavigationEdge edge : node.getNavigationEdges()) {
+					if (edge.isConstant() || edge.isLoaded()) {
+						addReachableConstantOrLoadedNodes(edge.getTarget());
+					}
+				}
+			}
+		}
 	}
 
 	@Override
@@ -69,6 +78,28 @@ class SpeculationPartition extends AbstractPartition
 		if (edge.isPredicated()) {
 			return false;
 		}
+		if (edge.getTarget().isRealized()) {
+			return false;
+		}
 		return super.isComputable(sourceNodes, edge);
+	}
+
+	@Override
+	protected boolean resolveComputations(@NonNull Node targetNode) {
+		if (targetNode.isConstant() || targetNode.isLoaded()) {
+			return super.resolveComputations(targetNode);
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	protected @Nullable EdgeRole resolveEdgeRole(@NonNull NodeRole sourceNodeRole, @NonNull Edge edge, @NonNull NodeRole targetNodeRole) {
+		EdgeRole edgeRole = edge.getEdgeRole();
+		if (edgeRole.isRealized()) {
+			assert !partitioner.hasRealizedEdge(edge);
+		}
+		return edgeRole;
 	}
 }

@@ -395,6 +395,11 @@ public class Nodes
 		public boolean isNull() {
 			return true;
 		}
+
+		@Override
+		public boolean isPattern() {
+			return true;
+		}
 	}
 
 	private static class OperationNodeRole extends AbstractSimpleNodeRole
@@ -491,6 +496,7 @@ public class Nodes
 
 	private static class PatternNodeRole extends AbstractVariableNodeRole
 	{
+		private static final @NonNull PatternNodeRole CONSTANT_NAVIGABLE_DATATYPE_STEP = new PatternNodeRole(Role.Phase.CONSTANT, ClassableEnum.DATATYPE, NavigableEnum.NAVIGABLE, GuardableEnum.STEP);
 		private static final @NonNull PatternNodeRole CONSTANT_UNNAVIGABLE_DATATYPE_STEP = new PatternNodeRole(Role.Phase.CONSTANT, ClassableEnum.DATATYPE, NavigableEnum.UNNAVIGABLE, GuardableEnum.STEP);
 		private static final @NonNull PatternNodeRole LOADED_NAVIGABLE_CLASS_HEAD = new PatternNodeRole(Role.Phase.LOADED, ClassableEnum.CLASS, NavigableEnum.NAVIGABLE, GuardableEnum.HEAD);
 		private static final @NonNull PatternNodeRole LOADED_NAVIGABLE_DATATYPE_GUARD = new PatternNodeRole(Role.Phase.LOADED, ClassableEnum.DATATYPE, NavigableEnum.NAVIGABLE, GuardableEnum.GUARD);
@@ -508,6 +514,7 @@ public class Nodes
 		private static final @NonNull PatternNodeRole PREDICATED_UNNAVIGABLE_CLASS_HEAD = new PatternNodeRole(Role.Phase.PREDICATED, ClassableEnum.CLASS, NavigableEnum.UNNAVIGABLE, GuardableEnum.HEAD);
 		private static final @NonNull PatternNodeRole PREDICATED_UNNAVIGABLE_DATATYPE_STEP = new PatternNodeRole(Role.Phase.PREDICATED, ClassableEnum.DATATYPE, NavigableEnum.UNNAVIGABLE, GuardableEnum.STEP);
 		private static final @NonNull PatternNodeRole PREDICATED_UNNAVIGABLE_CLASS_STEP = new PatternNodeRole(Role.Phase.PREDICATED, ClassableEnum.CLASS, NavigableEnum.UNNAVIGABLE, GuardableEnum.STEP);
+		private static final @NonNull PatternNodeRole REALIZED_NAVIGABLE_DATATYPE_STEP = new PatternNodeRole(Role.Phase.REALIZED, ClassableEnum.DATATYPE, NavigableEnum.NAVIGABLE, GuardableEnum.STEP);
 		private static final @NonNull PatternNodeRole REALIZED_UNNAVIGABLE_CLASS_STEP = new PatternNodeRole(Role.Phase.REALIZED, ClassableEnum.CLASS, NavigableEnum.UNNAVIGABLE, GuardableEnum.STEP);
 		private static final @NonNull PatternNodeRole REALIZED_UNNAVIGABLE_DATATYPE_STEP = new PatternNodeRole(Role.Phase.REALIZED, ClassableEnum.DATATYPE, NavigableEnum.UNNAVIGABLE, GuardableEnum.STEP);
 		private static final @NonNull PatternNodeRole SPECULATED_NAVIGABLE_CLASS_HEAD = new PatternNodeRole(Role.Phase.SPECULATED, ClassableEnum.CLASS, NavigableEnum.NAVIGABLE, GuardableEnum.HEAD);
@@ -526,7 +533,7 @@ public class Nodes
 				case CONSTANT: phase = Phase.CONSTANT; break;
 				default: throw new UnsupportedOperationException();
 			}
-			NavigableEnum navigableEnum = asNavigable(sourceNode.isNavigable());
+			NavigableEnum navigableEnum = Nodes.asNavigable(sourceNode.isNavigable());
 			return getPatternNodeRole(phase, ClassableEnum.DATATYPE, navigableEnum, GuardableEnum.STEP);
 		}
 
@@ -584,8 +591,10 @@ public class Nodes
 								}
 								case DATATYPE: {
 									switch (phase) {
+										case CONSTANT: return CONSTANT_NAVIGABLE_DATATYPE_STEP;
 										case LOADED: return LOADED_NAVIGABLE_DATATYPE_STEP;
 										case PREDICATED: return PREDICATED_NAVIGABLE_DATATYPE_STEP;
+										case REALIZED: return REALIZED_NAVIGABLE_DATATYPE_STEP;
 									}
 									break;
 								}
@@ -656,6 +665,11 @@ public class Nodes
 		}
 
 		@Override
+		public @NonNull NodeRole asNavigable() {
+			return getPatternNodeRole(phase, classable, NavigableEnum.NAVIGABLE, guardable);
+		}
+
+		@Override
 		public @NonNull PatternNodeRole asPhase(@NonNull Phase phase) {
 			return getPatternNodeRole(phase, classable, navigable, guardable);
 		}
@@ -707,7 +721,7 @@ public class Nodes
 				mergedGuardable = GuardableEnum.STEP;
 			}
 			else {
-				mergedNavigable = asNavigable(isNavigable() || nodeRole.isNavigable());
+				mergedNavigable = Nodes.asNavigable(isNavigable() || nodeRole.isNavigable());
 				mergedGuardable = (isHead() && nodeRole.isHead()) ? GuardableEnum.HEAD : isGuard() || nodeRole.isGuard() ? GuardableEnum.GUARD : GuardableEnum.STEP;
 			}
 			return getPatternNodeRole(mergedPhase, classable, mergedNavigable, mergedGuardable);
@@ -749,6 +763,11 @@ public class Nodes
 		}
 
 		@Override
+		public boolean isPattern() {
+			return true;
+		}
+
+		@Override
 		public String toString() {
 			return getClass().getSimpleName();
 		}
@@ -763,12 +782,22 @@ public class Nodes
 		}
 
 		@Override
+		public @Nullable String getStyle() {
+			return null;
+		}
+
+		@Override
 		public boolean isHead() {
 			return true;
 		}
 
 		@Override
 		public boolean isMatchable() {
+			return true;
+		}
+
+		@Override
+		public boolean isPattern() {
 			return true;
 		}
 
@@ -808,6 +837,31 @@ public class Nodes
 		String name = property.getName();
 		assert name != null;
 		return patternNodeRole.createNode(sourceNode.getRegion(), name, navigationCallExp);
+	}
+
+	public static @NonNull Node createDataTypeNode(@NonNull Node targetNode, @NonNull NavigationAssignment navigationAssignment) {
+		Role.Phase phase;
+		switch (targetNode.getNodeRole().getPhase()) {
+			case REALIZED: phase = Role.Phase.REALIZED; break;
+			case PREDICATED: phase = Role.Phase.PREDICATED; break;
+			case LOADED: phase = Role.Phase.LOADED; break;
+			case CONSTANT: phase = Role.Phase.CONSTANT; break;
+			default: throw new UnsupportedOperationException();
+		}
+		PatternNodeRole patternNodeRole = PatternNodeRole.getPatternNodeRole(phase, ClassableEnum.DATATYPE, NavigableEnum.NAVIGABLE, GuardableEnum.STEP);
+		Property property = QVTcoreBaseUtil.getTargetProperty(navigationAssignment);
+		//		PatternNodeRole patternNodeRole = PatternNodeRole.getDataTypeNodeRole(targetNode, property);
+		//		assert sourceNode.isClass();
+		String name = property.getName();
+		assert name != null;
+		org.eclipse.ocl.pivot.Class type = (org.eclipse.ocl.pivot.Class)property.getType();
+		assert type != null;
+		TypedModel typedModel = targetNode.getClassDatumAnalysis().getTypedModel();
+		Region region = targetNode.getRegion();
+		ClassDatum classDatum = region.getSchedulerConstants().getClassDatum(type, typedModel);
+		//				DomainUsage domainUsage = parentNode.getClassDatumAnalysis().getDomainUsage();
+		ClassDatumAnalysis classDatumAnalysis = region.getSchedulerConstants().getClassDatumAnalysis(classDatum);
+		return patternNodeRole.createNode(region, name, classDatumAnalysis);
 	}
 
 	public static @NonNull Node createErrorNode(@NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
@@ -876,6 +930,12 @@ public class Nodes
 		return patternNodeRole.createNode(region, name, classDatumAnalysis);
 	}
 
+	public static @NonNull TypedNode createOperationResultNode(@NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis, @NonNull Node sourceNode) {
+		ClassableEnum classable = asClassable(!(classDatumAnalysis.getClassDatum().getType() instanceof DataType));
+		PatternNodeRole patternNodeRole = PatternNodeRole.getPatternNodeRole(sourceNode.getNodeRole().getPhase(), classable, NavigableEnum.UNNAVIGABLE, GuardableEnum.STEP);
+		return patternNodeRole.createNode(region, name, classDatumAnalysis);
+	}
+
 	public static @NonNull Node createPredicatedInternalClassNode(@NonNull Node parentNode, @NonNull NavigationAssignment navigationAssignment) {
 		assert parentNode.isClass();
 		SchedulerConstants schedulerConstants = parentNode.getRegion().getSchedulerConstants();
@@ -921,6 +981,11 @@ public class Nodes
 		ClassableEnum classable = asClassable(sourceNode.isClass());
 		PatternNodeRole stepNodeRole = PatternNodeRole.getPatternNodeRole(phase, classable, navigableEnum, GuardableEnum.STEP);
 		return stepNodeRole.createNode(region, name, callExp);
+	}
+
+	public static @NonNull Node createStepNode(@NonNull Region region, @NonNull TypedNode typedNode) {
+		NodeRole stepNodeRole = PatternNodeRole.getPatternNodeRole(Role.Phase.PREDICATED, asClassable(typedNode.isClass()), NavigableEnum.NAVIGABLE, GuardableEnum.STEP);
+		return stepNodeRole.createNode(region, typedNode.getName(), typedNode.getClassDatumAnalysis());
 	}
 
 	public static @NonNull TypedNode createTrueNode(@NonNull Region region) {

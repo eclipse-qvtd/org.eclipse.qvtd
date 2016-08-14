@@ -14,16 +14,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.BasicMappingRegion;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.MicroMappingRegion;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.MappingRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.MultiRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.QVTp2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RootScheduledRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.ScheduledRegion;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.Partitioner;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.splitter.Split;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.splitter.Splitter;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeHelper;
 
@@ -82,13 +79,13 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		//
 		//	Create the schedule for each directed acyclic scheduled region.
 		//
-		for (@NonNull Region region : rootScheduledRegion.getCallableRegions()) {
+		/*		for (@NonNull Region region : rootScheduledRegion.getCallableRegions()) {
 			Splitter splitter = new Splitter(region);
 			Split split = splitter.split();
 			if (split != null) {
 				//				split.install();
 			}
-		}
+		} */
 		//
 		//	Create the schedule for each directed acyclic scheduled region.
 		//
@@ -107,14 +104,17 @@ public class QVTs2QVTs extends QVTimperativeHelper
 
 	public @NonNull RootScheduledRegion transform(@NonNull MultiRegion multiRegion) {
 		Iterable<@NonNull ? extends Region> activeRegions = multiRegion.getActiveRegions();
-		List<@NonNull MicroMappingRegion> partitionedRegions = new ArrayList<>();
-		for (@NonNull Region region : activeRegions) {
-			if (region instanceof BasicMappingRegion) {
-				Partitioner partitioner = new Partitioner((BasicMappingRegion) region);
-				Iterables.addAll(partitionedRegions, partitioner.partition());
-			}
+		//		for (@NonNull Region region : activeRegions) {
+		//			System.out.println("activeRegions " + region);
+		//		}
+		Iterable<@NonNull MappingRegion> partitionedRegions = Partitioner.partition(activeRegions);
+		if (!Iterables.isEmpty(partitionedRegions)) {
+			//			for (@NonNull Region region : partitionedRegions) {
+			//				System.out.println("partitionedRegions " + region);
+			//			}
+			activeRegions = partitionedRegions;
 		}
-		RootScheduledRegion rootRegion = createRootRegion(partitionedRegions);
+		RootScheduledRegion rootRegion = createRootRegion(activeRegions);
 		rootRegion.createSchedule();
 		createSchedule(rootRegion);
 		return rootRegion;

@@ -308,6 +308,10 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 		return Nodes.createLetVariableNode(letVariable, inNode);
 	}
 
+	protected @NonNull Node createNavigableDataTypeNode(@NonNull Node targetNode, @NonNull NavigationAssignment navigationAssignment) {
+		return Nodes.createDataTypeNode(targetNode, navigationAssignment);
+	}
+
 	protected @NonNull Node createNavigableDataTypeNode(@NonNull Node sourceNode, @NonNull Property source2targetProperty) {
 		assert sourceNode.isNavigable();
 		return Nodes.createDataTypeNode(sourceNode, source2targetProperty);
@@ -423,14 +427,14 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 			return getNavigationEdgeToClass(sourceNode, source2targetProperty, targetNode, navigationAssignment);
 		}
 		else if (targetNode.isDataType()) {
-			return getNavigationEdgeToAttribute(sourceNode, source2targetProperty, targetNode, navigationAssignment);
+			return getNavigationEdgeToDataType(sourceNode, source2targetProperty, targetNode, navigationAssignment);
 		}
 		else {
 			return getNavigationEdgeToExpression(sourceNode, source2targetProperty, targetNode, navigationAssignment);
 		}
 	}
 
-	protected @NonNull NavigationEdge getNavigationEdgeToAttribute(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode, @Nullable NavigationAssignment navigationAssignment) {
+	protected @NonNull NavigationEdge getNavigationEdgeToDataType(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode, @Nullable NavigationAssignment navigationAssignment) {
 		assert targetNode.isDataType();
 		Type type = source2targetProperty.getType();
 		assert type instanceof DataType;
@@ -440,15 +444,23 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 				navigationEdge = createNavigationOrRealizedEdge(sourceNode, source2targetProperty, targetNode, navigationAssignment);
 			}
 			else {
-				Node stepNode;
-				if (navigationAssignment != null) {
-					stepNode = createRealizedDataTypeNode(sourceNode, source2targetProperty);
+				CompleteClass propertyCompleteClass = context.getSchedulerConstants().getClassDatumAnalysis(source2targetProperty).getCompleteClass();
+				CompleteClass valueCompleteClass = targetNode.getCompleteClass();
+				if (valueCompleteClass == propertyCompleteClass) {
+					navigationEdge = createNavigationOrRealizedEdge(sourceNode, source2targetProperty, targetNode, navigationAssignment);
 				}
 				else {
-					stepNode = createNavigableDataTypeNode(sourceNode, source2targetProperty);
+					if (navigationAssignment == null) {
+						Node stepNode = createNavigableDataTypeNode(sourceNode, source2targetProperty);
+						navigationEdge = createNavigationOrRealizedEdge(sourceNode, source2targetProperty, stepNode, navigationAssignment);
+						createExpressionEdge(targetNode, "«equals»", stepNode);
+					}
+					else {
+						Node stepNode = createNavigableDataTypeNode(targetNode, navigationAssignment);
+						navigationEdge = createNavigationOrRealizedEdge(sourceNode, source2targetProperty, stepNode, navigationAssignment);
+						createExpressionEdge(targetNode, "«equals»", stepNode);
+					}
 				}
-				navigationEdge = createNavigationOrRealizedEdge(sourceNode, source2targetProperty, stepNode, navigationAssignment);
-				createExpressionEdge(targetNode, "«equals»", stepNode);
 			}
 		}
 		else {
@@ -489,7 +501,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 			//			Node valueNode = navigationEdge.getTarget();
 			//			assert valueNode.isRealized();
 			Type type = source2targetProperty.getType();
-			if (type instanceof DataType) {
+			/*			if (type instanceof DataType) {
 				Node attributeNode = createRealizedDataTypeNode(sourceNode, source2targetProperty);
 				createExpressionEdge(targetNode, "«equals»", attributeNode);
 				targetNode = attributeNode;
@@ -498,7 +510,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 				Node stepNode = createPredicatedClassNode(sourceNode, navigationAssignment);
 				createExpressionEdge(targetNode, "«equals»", stepNode);
 				targetNode = stepNode;
-			}
+			} */
 			navigationEdge = createNavigationOrRealizedEdge(sourceNode, source2targetProperty, targetNode, navigationAssignment);
 			return navigationEdge;
 		}
@@ -692,7 +704,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 		if (!valueCompleteClass.conformsTo(targetCompleteClass)) {
 			if (targetCompleteClass.getPrimaryClass().getESObject() != EcorePackage.Literals.EOBJECT) {		// FIXME fudge for Adolfo's suspect tests
 				// FIXME we could synthesize a cast, but it's easier to do oclAsType() in QVTm/QVTp
-				if (!valueCompleteClass.conformsTo(targetCompleteClass)) {
+				if (!valueCompleteClass.conformsTo(targetCompleteClass) /*&& !valueCompleteClass.conformsTo(targetCompleteClass.getBehavioralClass())*/) {
 					throw new IllegalStateException("Incompatible types for " + asNavigationAssignment);
 				}
 			}

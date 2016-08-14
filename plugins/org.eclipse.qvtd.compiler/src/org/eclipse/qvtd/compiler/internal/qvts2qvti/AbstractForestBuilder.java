@@ -214,7 +214,7 @@ public abstract class AbstractForestBuilder implements Comparator<@NonNull Navig
 		return forwardEdges;
 	}
 
-	protected @Nullable NavigationEdge getParentEdge(@NonNull Node node) {
+	public @Nullable NavigationEdge getParentEdge(@NonNull Node node) {
 		return traversedNode2incomingEdge.get(node);
 	}
 

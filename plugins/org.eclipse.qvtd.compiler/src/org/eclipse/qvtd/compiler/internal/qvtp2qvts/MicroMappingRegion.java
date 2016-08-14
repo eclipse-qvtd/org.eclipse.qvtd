@@ -20,11 +20,11 @@ import org.eclipse.qvtd.pivot.schedule.MappingAction;
  */
 public class MicroMappingRegion extends AbstractMappingRegion
 {
-	protected final @NonNull BasicMappingRegion basicMappingRegion;
+	protected final @NonNull MappingRegion basicMappingRegion;
 	private final @NonNull String prefix;
 	private final @NonNull String suffix;
 
-	public MicroMappingRegion(@NonNull BasicMappingRegion basicMappingRegion, @NonNull String prefix, @NonNull String suffix) {
+	public MicroMappingRegion(@NonNull MappingRegion basicMappingRegion, @NonNull String prefix, @NonNull String suffix) {
 		super(basicMappingRegion.getMultiRegion());
 		this.basicMappingRegion = basicMappingRegion;
 		this.prefix = prefix;

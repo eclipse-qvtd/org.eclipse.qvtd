@@ -41,7 +41,11 @@ public class NavigationEdgeSorter
 
 	public static Iterable<@NonNull NavigationEdge> getSortedAssignments(@NonNull Iterable<@NonNull NavigationEdge> realizedNavigationEdges) {
 		NavigationEdgeSorter assignmentSorter = new NavigationEdgeSorter();
-		assignmentSorter.addAll(realizedNavigationEdges);
+		for (@NonNull NavigationEdge edge : realizedNavigationEdges) {
+			if (!edge.isSecondary()) {
+				assignmentSorter.add(edge);
+			}
+		}
 		return assignmentSorter.getSortedAssignments();
 	}
 
@@ -53,17 +57,15 @@ public class NavigationEdgeSorter
 	/**
 	 * Add all navigationEdges to the Map of analyzed edges.
 	 */
-	public void addAll(@NonNull Iterable<@NonNull NavigationEdge> navigationEdges) {
-		for (@NonNull NavigationEdge navigationEdge : navigationEdges) {
-			Set<@NonNull Node> sourceNodes = null;
-			if (navigationEdge.isRealized()) {
-				Node targetNode = navigationEdge.getTarget();
-				if (targetNode.isDataType()) {
-					sourceNodes = gatherSourceNodes(new HashSet<@NonNull Node>(), targetNode);
-				}
+	public void add(@NonNull NavigationEdge navigationEdge) {
+		Set<@NonNull Node> sourceNodes = null;
+		if (navigationEdge.isRealized()) {
+			Node targetNode = navigationEdge.getTarget();
+			if (targetNode.isDataType()) {
+				sourceNodes = gatherSourceNodes(new HashSet<@NonNull Node>(), targetNode);
 			}
-			edge2sourceNodes.put(navigationEdge, sourceNodes);
 		}
+		edge2sourceNodes.put(navigationEdge, sourceNodes);
 	}
 
 	private @NonNull Set<@NonNull Node> gatherSourceNodes(@NonNull Set<@NonNull Node> sourceNodes, @NonNull Node node) {

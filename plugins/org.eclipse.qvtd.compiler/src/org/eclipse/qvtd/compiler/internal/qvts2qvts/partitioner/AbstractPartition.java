@@ -26,6 +26,7 @@ import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NavigationEdge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NodeRole;
 import org.eclipse.qvtd.compiler.internal.qvts2qvti.AbstractForestBuilder;
+import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
@@ -84,13 +85,11 @@ abstract class AbstractPartition
 			}
 			case PREDICATED: {
 				assert newEdgeRole.isPredicated();
-				partitioner.addPredicatedEdge(edge);
 				break;
 			}
 			case REALIZED: {
 				if (!partitioner.hasRealizedEdge(edge)) {
 					assert newEdgeRole.isRealized();
-					partitioner.addRealizedEdge(edge);
 				}
 				else {
 					assert newEdgeRole.isPredicated();
@@ -101,6 +100,7 @@ abstract class AbstractPartition
 				throw new UnsupportedOperationException(getClass().getSimpleName() + ".addEdge " + edge);
 			}
 		}
+		partitioner.addEdge(edge, newEdgeRole,this);
 		edge2edgeRole.put(edge, newEdgeRole);
 	}
 
@@ -137,12 +137,61 @@ abstract class AbstractPartition
 				throw new UnsupportedOperationException(getClass().getSimpleName() + ".addNode " + node);
 			}
 		}
-		node2nodeRole.put(node, newNodeRole);
+		NodeRole oldNodeRole = node2nodeRole.put(node, newNodeRole);
+		assert (oldNodeRole == null) || (oldNodeRole == newNodeRole);
+	}
+
+	private @NonNull PartitionForest createForest() {
+		List<@NonNull NavigationEdge> navigableEdges = Lists.newArrayList(partitioner.getNavigableEdges());
+		for (@NonNull Edge edge : alreadyRealizedEdges) {
+			if (edge instanceof NavigationEdge) {
+				navigableEdges.add((NavigationEdge) edge);
+			}
+		}
+		return new PartitionForest(partitioner.getRealizedMiddleNodes(), navigableEdges);
 	}
 
 	public @NonNull MicroMappingRegion createMicroMappingRegion(@NonNull String prefix, @NonNull String suffix) {
 		PartitioningVisitor partitioningVisitor = PartitioningVisitor.createPartialRegion(partitioner.getRegion(), prefix, suffix, this);
-		return partitioningVisitor.getRegion();
+		MicroMappingRegion microMappingRegion = partitioningVisitor.getRegion();
+		microMappingRegion.getHeadNodes();
+		check(microMappingRegion);
+		return microMappingRegion;
+	}
+
+	private void check(@NonNull MicroMappingRegion region) {
+		Set<@NonNull Node> reachableNodes = new HashSet<>();
+		for (@NonNull Node node : region.getHeadNodes()) {
+			gatherReachables(reachableNodes, node);
+		}
+		Set<@NonNull Node> allNodes = Sets.newHashSet(region.getNodes());
+		if (!reachableNodes.equals(allNodes)) {
+			StringBuilder s = new StringBuilder();
+			Set<@NonNull Node> extraNodesSet = Sets.newHashSet(reachableNodes);
+			CompilerUtil.removeAll(extraNodesSet, allNodes);
+			for (@NonNull Node node : extraNodesSet) {
+				s.append("\nunexpected: ");
+				s.append(node);
+			}
+			Set<@NonNull Node> missingNodesSet = Sets.newHashSet(allNodes);
+			missingNodesSet.removeAll(reachableNodes);
+			for (@NonNull Node node : missingNodesSet) {
+				s.append("\nunreachable: ");
+				s.append(node);
+			}
+			assert false : "Bad nodes for " + region + s.toString();
+		}
+	}
+
+	private void gatherReachables(@NonNull Set<@NonNull Node> reachableNodes, @NonNull Node node) {
+		if (reachableNodes.add(node)) {
+			for (@NonNull Edge edge : node.getIncomingEdges()) {
+				gatherReachables(reachableNodes, edge.getSource());
+			}
+			for (@NonNull Edge edge : node.getOutgoingEdges()) {
+				gatherReachables(reachableNodes, edge.getTarget());
+			}
+		}
 	}
 
 	public @Nullable EdgeRole getEdgeRole(@NonNull Edge edge) {
@@ -153,17 +202,20 @@ abstract class AbstractPartition
 		return node2nodeRole.get(node);
 	}
 
-	protected @NonNull Iterable<@NonNull Node> getPredecessors(@NonNull Node targetNode) {
-		if (forest == null) {
-			List<@NonNull NavigationEdge> navigableEdges = Lists.newArrayList(partitioner.getNavigableEdges());
-			for (@NonNull Edge edge : alreadyRealizedEdges) {
-				if (edge instanceof NavigationEdge) {
-					navigableEdges.add((NavigationEdge) edge);
-				}
-			}
-			forest = new PartitionForest(partitioner.getRealizedMiddleNodes(), navigableEdges);
+	protected @Nullable NavigationEdge getParentEdge(@NonNull Node targetNode) {
+		PartitionForest forest2 = forest;
+		if (forest2 == null) {
+			forest = forest2 = createForest();
 		}
-		return forest.getPredecessors(targetNode);
+		return forest2.getParentEdge(targetNode);
+	}
+
+	protected @NonNull Iterable<@NonNull Node> getPredecessors(@NonNull Node targetNode) {
+		PartitionForest forest2 = forest;
+		if (forest2 == null) {
+			forest = forest2 = createForest();
+		}
+		return forest2.getPredecessors(targetNode);
 	}
 
 	private boolean hasEdge(@NonNull Edge edge) {
@@ -190,6 +242,13 @@ abstract class AbstractPartition
 			return false;
 		}
 		if (node.isOperation()) {
+			for (@NonNull Edge incomingEdge : node.getIncomingEdges()) {
+				if (incomingEdge.isComputation() && !isComputable(sourceNodes, incomingEdge)) {
+					return false;
+				}
+			}
+		}
+		else if (node.isPattern()) {
 			for (@NonNull Edge incomingEdge : node.getIncomingEdges()) {
 				if (incomingEdge.isComputation() && !isComputable(sourceNodes, incomingEdge)) {
 					return false;
@@ -247,75 +306,31 @@ abstract class AbstractPartition
 	} */
 
 	protected void resolveComputations() {
-		for (@NonNull Node targetNode : new ArrayList<>(node2nodeRole.keySet())) {
-			for (@NonNull Edge incomingEdge : targetNode.getIncomingEdges()) {		// Should be just one.
-				if (incomingEdge.isComputation()) {
-					Set<@NonNull Node> sourceNodes = new HashSet<>();
-					if (isComputable(sourceNodes, incomingEdge)) {
-						for (@NonNull Node sourceNode : sourceNodes) {
-							if (!hasNode(sourceNode)) {
-								addNode(sourceNode, sourceNode.getNodeRole());
-							}
-						}
-					}
-				}
-			}
+		for (@NonNull Node node : new ArrayList<>(node2nodeRole.keySet())) {
+			resolveComputations(node);
+			resolveNavigations(node);
 		}
-		/*		for (@NonNull Edge predicatedEdge : partitioner.getPredicatedEdges()) {
-			if (!partitioner.hasPredicatedEdge(predicatedEdge)) {
-				Node targetNode = predicatedEdge.getTarget();
-				if (!targetNode.isNavigable()) {
-					//					assert !targetNode.isOperation();
-					boolean isComputable = true;
-					Set<@NonNull Node> sourceNodes = new HashSet<>();
-					for (@NonNull Edge incomingEdge : targetNode.getIncomingEdges()) {		// Should be just one.
-						if (incomingEdge.isComputation() && !isComputable1(sourceNodes, incomingEdge)) {
-							isComputable = false;
-							break;
-						}
-					}
-					if (isComputable) {
-						for (@NonNull Node sourceNode : sourceNodes) {
-							if (!hasNode(sourceNode)) {
-								addNode(sourceNode, sourceNode.getNodeRole());
-							}
-						}
-					}
-				}
-			}
-		}
-		for (@NonNull NavigationEdge realizedEdge : partitioner.getRealizedEdges()) {
-			if (!partitioner.hasRealizedEdge(realizedEdge)) {
-				Node targetNode = realizedEdge.getTarget();
-				if (!targetNode.isNavigable()) {
-					assert !targetNode.isOperation();
-					boolean isComputable = true;
-					Set<@NonNull Node> sourceNodes = new HashSet<>();
-					for (@NonNull Edge incomingEdge : targetNode.getIncomingEdges()) {		// Should be just one.
-						if (incomingEdge.isComputation() && !isComputable2(sourceNodes, incomingEdge)) {
-							isComputable = false;
-							break;
-						}
-					}
-					if (isComputable) {
-						for (@NonNull Node sourceNode : sourceNodes) {
-							if (!hasNode(sourceNode)) {
-								addNode(sourceNode, sourceNode.getNodeRole());
-							}
-						}
-					}
-				}
-			}
-		} */
 	}
 
-	protected @Nullable EdgeRole resolveEdgeRole(@NonNull NodeRole sourceNodeRole, @NonNull Edge edge, @NonNull NodeRole targetNodeRole) {
-		EdgeRole edgeRole = edge.getEdgeRole();
-		if (edgeRole.isRealized() && partitioner.hasRealizedEdge(edge)) {
-			edgeRole = edgeRole.asPredicated();
+	protected boolean resolveComputations(@NonNull Node targetNode) {
+		boolean gotIt = false;
+		for (@NonNull Edge incomingEdge : targetNode.getIncomingEdges()) {		// Should be just one.
+			if (incomingEdge.isComputation()) {
+				Set<@NonNull Node> sourceNodes = new HashSet<>();
+				if (isComputable(sourceNodes, incomingEdge)) {
+					gotIt = true;
+					for (@NonNull Node sourceNode : sourceNodes) {
+						if (!hasNode(sourceNode)) {
+							addNode(sourceNode, sourceNode.getNodeRole());
+						}
+					}
+				}
+			}
 		}
-		return edgeRole;
+		return gotIt;
 	}
+
+	protected abstract @Nullable EdgeRole resolveEdgeRole(@NonNull NodeRole sourceNodeRole, @NonNull Edge edge, @NonNull NodeRole targetNodeRole);
 
 	/**
 	 * Resolve all the edges that have a source and target node by invoking resolveEdgeRole to determine
@@ -338,6 +353,21 @@ abstract class AbstractPartition
 							if (edgeRole != null) {
 								addEdge(edge, edgeRole);
 							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	protected void resolveNavigations(@NonNull Node node) {
+		for (@NonNull NavigationEdge edge : node.getNavigationEdges()) {
+			if (!partitioner.hasRealizedEdge(edge)) {
+				Node targetNode = edge.getTarget();
+				if (targetNode.isDataType()) {
+					if (resolveComputations(targetNode)) {
+						if (!hasNode(targetNode)) {
+							addNode(targetNode, targetNode.getNodeRole());
 						}
 					}
 				}

@@ -20,6 +20,11 @@ public abstract class AbstractNodeRole extends AbstractRole implements NodeRole
 	}
 
 	@Override
+	public @NonNull NodeRole asNavigable() {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
 	public @NonNull AbstractNodeRole asPhase(@NonNull Phase phase) {
 		throw new UnsupportedOperationException();
 	}
@@ -51,11 +56,12 @@ public abstract class AbstractNodeRole extends AbstractRole implements NodeRole
 
 	@Override
 	public @Nullable String getStyle() {
+		boolean isDashed = !isNavigable() && (isExpression() || !isRealized());
 		if (isDataType()) {
-			return isExpression() ? "\"rounded,dashed\"" : "rounded";
+			return isDashed ? "\"rounded,dashed\"" : "rounded";
 		}
 		else {
-			return isExpression() ? "dashed" : null;
+			return isDashed ? "dashed" : null;
 			//		return isNavigable() || isSpeculated() || isSpeculation() || isRealized() || isHead() ? null : "dashed";
 		}
 	}

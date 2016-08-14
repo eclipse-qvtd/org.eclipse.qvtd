@@ -21,10 +21,9 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.CollectionType;
-import org.eclipse.ocl.pivot.Type;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphStringBuilder;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Sets;
 
 public abstract class AbstractMappingRegion extends AbstractRegion implements MappingRegion
 {
@@ -33,20 +32,38 @@ public abstract class AbstractMappingRegion extends AbstractRegion implements Ma
 	 */
 	protected static final class HeadComparator implements Comparator<@NonNull Node>
 	{
-		private final @NonNull Map<@NonNull Node, @NonNull Set<@NonNull Node>> target2sourceClosure;
+		private final @NonNull Map<@NonNull Node, @NonNull Set<@NonNull Node>> targetFromSourceClosure;
 		private @Nullable Map<@NonNull Node, @NonNull Integer> node2implicity = null;
 
-		protected HeadComparator(@NonNull Map<@NonNull Node, @NonNull Set<@NonNull Node>> target2sourceClosure) {
-			this.target2sourceClosure = target2sourceClosure;
+		protected HeadComparator(@NonNull Map<@NonNull Node, @NonNull Set<@NonNull Node>> targetFromSourceClosure) {
+			this.targetFromSourceClosure = targetFromSourceClosure;
 		}
 
 		@Override
 		public int compare(@NonNull Node o1, @NonNull Node o2) {
 			//
+			//	Explicit head first
+			//
+			//			if (o1.isHead() != o2.isHead()) {
+			//				return o1.isHead() ? -1 : 1;
+			//			}
+			//
+			//	Speculated first
+			//
+			if (o1.isSpeculated() != o2.isSpeculated()) {
+				return o1.isSpeculated() ? -1 : 1;
+			}
+			//
+			//	Constant first - never happens
+			//
+			if (o1.isConstant() != o2.isConstant()) {
+				return o1.isConstant() ? -1 : 1;
+			}
+			//
 			//	Least reachable first
 			//
-			Set<@NonNull Node> set1 = target2sourceClosure.get(o1);
-			Set<@NonNull Node> set2 = target2sourceClosure.get(o2);
+			Set<@NonNull Node> set1 = targetFromSourceClosure.get(o1);
+			Set<@NonNull Node> set2 = targetFromSourceClosure.get(o2);
 			assert (set1 != null) && (set2 != null);
 			int l1 = set1.size();
 			int l2 = set2.size();
@@ -55,13 +72,16 @@ public abstract class AbstractMappingRegion extends AbstractRegion implements Ma
 				return diff;
 			}
 			//
-			//	Earliest phase first (prefers LOADED to PREDICATED)
+			//	Loaded first
 			//
-			int r1 = getPhase(o1.getNodeRole());
-			int r2 = getPhase(o2.getNodeRole());
-			diff = r1 - r2;
-			if (diff != 0) {
-				return diff;
+			if (o1.isLoaded() != o2.isLoaded()) {
+				return o1.isLoaded() ? -1 : 1;
+			}
+			//
+			//	Predicated first
+			//
+			if (o1.isPredicated() != o2.isPredicated()) {
+				return o1.isPredicated() ? -1 : 1;
 			}
 			//
 			//	Least implicit first (prefers middle to output)
@@ -88,7 +108,7 @@ public abstract class AbstractMappingRegion extends AbstractRegion implements Ma
 		private int getImplicity(@NonNull Node node) {
 			Map<@NonNull Node, @NonNull Integer> node2implicity2 = node2implicity;
 			if (node2implicity2 == null) {
-				node2implicity = node2implicity2 = new HashMap<@NonNull Node, @NonNull Integer>();
+				node2implicity = node2implicity2 = new HashMap<>();
 			}
 			Integer implicity = node2implicity2.get(node);
 			if (implicity == null) {
@@ -101,22 +121,6 @@ public abstract class AbstractMappingRegion extends AbstractRegion implements Ma
 				node2implicity2.put(node, implicity);
 			}
 			return implicity;
-		}
-
-		private int getPhase(@NonNull NodeRole nodeRole) {
-			if (nodeRole.isConstant()) {
-				return 0;
-			}
-			if (nodeRole.isLoaded()) {
-				return 1;
-			}
-			if (nodeRole.isPredicated()) {
-				return 2;
-			}
-			if (nodeRole.isRealized()) {
-				return 3;
-			}
-			return 4;
 		}
 	}
 
@@ -152,46 +156,65 @@ public abstract class AbstractMappingRegion extends AbstractRegion implements Ma
 	}
 
 	protected @NonNull List<@NonNull Node> computeHeadNodes() {
-		Iterable<@NonNull Node> navigableNodes = getNavigableNodes();		// Excludes, null, attributes, constants, operations
 		//
-		//	Compute the Set of all target nodes that can be reached by transitive to-one navigation from a particular source node.
+		//	A head node is reachable from very few nodes, typically just itself, occasionally from a small group of mutually bidirectional nodes,
+		//	so we searcvh for the least reachable nodes taking care to avoid hazrads from the source-to-target / target-source asymmetry.
 		//
-		Map<@NonNull Node, @NonNull Set<@NonNull Node>> source2targetClosure = new HashMap<@NonNull Node, @NonNull Set<@NonNull Node>>();
-		for (@NonNull Node navigableNode : navigableNodes) {
-			if (navigableNode.isDataType()) {
-				continue;									// FIXME avoid even considering these nodes
-			}
-			if (navigableNode.isSpeculation()) {
-				continue;									// FIXME avoid even considering these nodes
-			}
-			Type type = navigableNode.getCompleteClass().getPrimaryClass();
-			if (type instanceof CollectionType) {
-				System.err.println("No head created for CollectionType " + type + " in " + this);
-				continue;
-			}
-			Set<@NonNull Node> targetClosure = new HashSet<@NonNull Node>();
-			source2targetClosure.put(navigableNode, targetClosure);
-			targetClosure.add(navigableNode);
-			for (@NonNull Edge navigationEdge : navigableNode.getNavigationEdges()) {
-				if (!navigationEdge.isRealized()) {
-					targetClosure.add(navigationEdge.getTarget());
+		List<@NonNull Node> navigableNodes = new ArrayList<>();
+		for (@NonNull Node node : getNodes()) {
+			if (node.isPattern() && node.isNavigable() && node.isClass() && !node.isNull() && !node.isOperation()) {	// Excludes, null, attributes, constants, operations
+				if (node.isLoaded() || node.isPredicated() || node.isSpeculated()) {
+					navigableNodes.add(node);
 				}
 			}
-			for (@NonNull Edge computationEdge : navigableNode.getComputationEdges()) {
-				targetClosure.add(computationEdge.getSource());
-			}
 		}
+		//
+		//	Compute the Set of all source nodes from which each target can be reached by transitive to-one navigation.
+		//
+		Map<@NonNull Node, @NonNull Set<@NonNull Node>> targetFromSourceClosure = new HashMap<>();
+		for (@NonNull Node targetNode : navigableNodes) {
+			targetFromSourceClosure.put(targetNode, Sets.newHashSet(targetNode));
+		}
+		for (@NonNull Node sourceNode : navigableNodes) {
+			//			assert !navigableNode.isDataType();									// FIXME avoid even considering these nodes
+			//			assert !navigableNode.isSpeculation();								// FIXME avoid even considering these nodes
+			//			assert !navigableNode.isRealized();									// FIXME avoid even considering these nodes
+			//			Type type = navigableNode.getCompleteClass().getPrimaryClass();
+			//			assert !(type instanceof CollectionType);
+			//				System.err.println("No head created for CollectionType " + type + " in " + this);
+			//				continue;
+			//			}
+			//			Set<@NonNull Node> sourceClosure = new HashSet<>();
+			//			targetFromSourceClosure.put(navigableNode, targetClosure);
+			//			targetClosure.add(navigableNode);
+			for (@NonNull Edge navigationEdge : sourceNode.getNavigationEdges()) {
+				if (!navigationEdge.isRealized()) {
+					Node targetNode = navigationEdge.getTarget();
+					if (targetNode.isNavigable() && targetNode.isClass() && !targetNode.isNull()) {
+						Set<@NonNull Node> sourceClosure = targetFromSourceClosure.get(targetNode);
+						assert sourceClosure != null;
+						sourceClosure.add(sourceNode);
+					}
+				}
+			}
+			//			for (@NonNull Edge computationEdge : navigableNode.getComputationEdges()) {
+			//				targetClosure.add(computationEdge.getSource());
+			//			}
+		}
+		//
+		//	Ripple the local target-from-source closure to compute the overall target-from-source closure.
+		//
 		boolean isChanged = true;
 		while (isChanged) {
 			isChanged = false;
-			for (@NonNull Node sourceNode : navigableNodes) {
-				Set<Node> targetClosure = source2targetClosure.get(sourceNode);
-				if (targetClosure != null) {
-					for (@NonNull Node nextNode : new ArrayList<@NonNull Node>(targetClosure)) {
-						Set<@NonNull Node> nextTargetClosure = source2targetClosure.get(nextNode);
-						if ((nextTargetClosure != null) && targetClosure.addAll(nextTargetClosure)) {
-							isChanged = true;
-						}
+			for (@NonNull Node targetNode : navigableNodes) {
+				Set<@NonNull Node> sourceClosure = targetFromSourceClosure.get(targetNode);
+				assert sourceClosure != null;
+				for (@NonNull Node sourceNode : new ArrayList<>(sourceClosure)) {
+					Set<@NonNull Node> sourceSourceClosure = targetFromSourceClosure.get(sourceNode);
+					assert sourceSourceClosure != null;
+					if (sourceClosure.addAll(sourceSourceClosure)) {
+						isChanged = true;
 					}
 				}
 			}
@@ -199,44 +222,59 @@ public abstract class AbstractMappingRegion extends AbstractRegion implements Ma
 		//
 		//	Compute the inverse Set of all source nodes from which a particular target node can be reached by transitive to-one navigation.
 		//
-		final Map<@NonNull Node, @NonNull Set<@NonNull Node>> target2sourceClosure = new HashMap<@NonNull Node, @NonNull Set<@NonNull Node>>();
-		for (@NonNull Node targetNode : navigableNodes) {
-			Set<@NonNull Node> sourceClosure = new HashSet<@NonNull Node>();
-			target2sourceClosure.put(targetNode, sourceClosure);
-			sourceClosure.add(targetNode);
+		final Map<@NonNull Node, @NonNull Set<@NonNull Node>> source2targetClosure = new HashMap<>();
+		for (@NonNull Node sourceNode : navigableNodes) {
+			source2targetClosure.put(sourceNode, Sets.newHashSet(sourceNode));
 		}
-		for (@NonNull Node sourceNode : source2targetClosure.keySet()) {
-			Set<@NonNull Node> targetClosure = source2targetClosure.get(sourceNode);
-			assert targetClosure != null;
-			for (@NonNull Node targetNode : targetClosure) {
-				Set<@NonNull Node> sourceClosure = target2sourceClosure.get(targetNode);
-				if (sourceClosure != null) {
-					sourceClosure.add(sourceNode);
-				}
+		for (@NonNull Node targetNode : targetFromSourceClosure.keySet()) {
+			Set<@NonNull Node> sourceClosure = targetFromSourceClosure.get(targetNode);
+			assert sourceClosure != null;
+			for (@NonNull Node sourceNode : sourceClosure) {
+				Set<@NonNull Node> targetClosure = source2targetClosure.get(sourceNode);
+				assert targetClosure != null;
+				targetClosure.add(targetNode);
 			}
 		}
 		//
 		//	Sort the guardNodes into least reachable first order enabling the heads to be identified
 		//	by successive removal from the start of the list.
 		//
-		List<@NonNull Node> headLessNodes = new ArrayList<@NonNull Node>();
-		Iterables.addAll(headLessNodes, source2targetClosure.keySet());
-		Collections.sort(headLessNodes, new HeadComparator(target2sourceClosure));
+		List<@NonNull Node> headLessNodes = new ArrayList<>();
+		Iterables.addAll(headLessNodes, targetFromSourceClosure.keySet());
+		Collections.sort(headLessNodes, new HeadComparator(targetFromSourceClosure));
 		//
 		//	Loop to keep removing distinct inputs until all guard nodes are reachable from some head.
 		//
-		List<@NonNull Node> headNodes = new ArrayList<@NonNull Node>();
+		List<@NonNull Node> headNodes = new ArrayList<>();
 		while (!headLessNodes.isEmpty()) {
 			Node headNode = headLessNodes.remove(0);
 			assert headNode != null;
+			@SuppressWarnings("unused") Set<@NonNull Node> debugSourceClosure = targetFromSourceClosure.get(headNode);
 			Set<@NonNull Node> targetClosure = source2targetClosure.get(headNode);
 			assert targetClosure != null;
-			headNode.setHead();
-			headLessNodes.removeAll(targetClosure);
+			for (@NonNull Node node : targetClosure) {
+				if (node != headNode) {
+					node.resetHead();
+				}
+				else {
+					headNode.setHead();
+				}
+				headLessNodes.remove(node);
+			}
 			targetClosure.remove(headNode);
 			assert !headNodes.contains(headNode);
 			headNodes.add(headNode);
 		}
+		//
+		//	Check head node consistency
+		//
+		Set<@NonNull Node> debugHeadNodes = new HashSet<>();
+		for (@NonNull Node node : getNodes()) {
+			if (node.isHead() && !node.isTrue() && !node.getNodeRole().isExtraGuardVariable()) {
+				debugHeadNodes.add(node);
+			}
+		}
+		assert debugHeadNodes.equals(new HashSet<>(headNodes));
 		return headNodes;
 	}
 

@@ -11,7 +11,9 @@
 package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.MicroMappingRegion;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Edge;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.EdgeRole;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NavigationEdge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NodeRole;
@@ -31,11 +33,9 @@ class RealizedPartition extends AbstractPartition
 		Iterable<@NonNull Node> realizedOutputNodes = partitioner.getRealizedOutputNodes();
 		assert Iterables.isEmpty(predicatedMiddleNodes);
 		//
-		//	Loaded nodes are retained as is for the predicate.
+		//	The ends of loaded navigation edges are retained as is for the predicate.
 		//
-		for (@NonNull Node node : partitioner.getLoadedNodes()) {
-			addNode(node, node.getNodeRole());
-		}
+		addLoadedNavigationEdgeSourceAndTargetNodes();
 		//
 		//	The realized nodes are realized as is.
 		//
@@ -65,11 +65,23 @@ class RealizedPartition extends AbstractPartition
 		resolveEdgeRoles();
 	}
 
-	@Override
-	public @NonNull MicroMappingRegion createMicroMappingRegion(@NonNull String prefix, @NonNull String suffix) {
-		MicroMappingRegion microMappingRegion = super.createMicroMappingRegion(prefix, suffix);
-		microMappingRegion.getHeadNodes();
-		return microMappingRegion;
+	/**
+	 * Add the ends of all the loaded edges. This gathers the loaded PatternNodeRoles and also the
+	 * odd-valls such as Null nodes.
+	 */
+	protected void addLoadedNavigationEdgeSourceAndTargetNodes() {
+		for (@NonNull NavigationEdge edge : partitioner.getRegion().getNavigationEdges()) {
+			if (edge.isLoaded()) {
+				Node sourceNode = edge.getSource();
+				Node targetNode = edge.getTarget();
+				if (!hasNode(sourceNode)) {
+					addNode(sourceNode, sourceNode.getNodeRole());
+				}
+				if (!hasNode(targetNode)) {
+					addNode(targetNode, targetNode.getNodeRole());
+				}
+			}
+		}
 	}
 
 	private void gatherSourceNavigations(@NonNull Node targetNode, @NonNull NodeRole targetNodeRole) {
@@ -79,5 +91,14 @@ class RealizedPartition extends AbstractPartition
 				gatherSourceNavigations(sourceNode, sourceNode.getNodeRole());
 			}
 		}
+	}
+
+	@Override
+	protected @Nullable EdgeRole resolveEdgeRole(@NonNull NodeRole sourceNodeRole, @NonNull Edge edge, @NonNull NodeRole targetNodeRole) {
+		EdgeRole edgeRole = edge.getEdgeRole();
+		if (edgeRole.isRealized()) {
+			assert !partitioner.hasRealizedEdge(edge);
+		}
+		return edgeRole;
 	}
 }

@@ -977,7 +977,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 
 	/**
 	 * Recurse over the guard nodes and loaded/predicates region and convert the non-guard nodes to unrealized variables
-	 * and edges to predicates or inituializtions
+	 * and edges to predicates or initializations
 	 */
 	private void createNavigablePredicates() {
 		@SuppressWarnings("unused")String name = region.getName();
@@ -996,7 +996,9 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			OCLExpression source2targetExp = createCallExp(sourceExp, property);
 			Variable nodeVariable = node2variable.get(targetNode);
 			assert nodeVariable == null;
+			//			if (nodeVariable == null) {
 			createBottomVariable(targetNode, source2targetExp);
+			//			}
 		}
 		//
 		//	Convert the ordered non-forest edges to predicates.
@@ -1171,23 +1173,25 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 	}
 
 	private void createRealizedVariables() {
-		for (@NonNull Node node : region.getRealizedVariableNodes()) {
-			OCLExpression constructor = null;
-			for (Edge edge : node.getIncomingEdges()) {
-				if (edge.isExpression()) {
-					Node sourceNode = edge.getSource();
-					if (sourceNode.isOperation()) {
-						constructor = ((OperationCallExp)sourceNode.getTypedElements().iterator().next()).accept(expressionCreator);
+		for (@NonNull Node node : region.getRealizedOrSpeculationNodes()) {
+			if (node.isPattern() && node.isClass()) {
+				OCLExpression constructor = null;
+				for (Edge edge : node.getIncomingEdges()) {
+					if (edge.isExpression()) {
+						Node sourceNode = edge.getSource();
+						if (sourceNode.isOperation()) {
+							constructor = ((OperationCallExp)sourceNode.getTypedElements().iterator().next()).accept(expressionCreator);
+						}
 					}
 				}
+				ClassDatumAnalysis classDatumAnalysis = node.getClassDatumAnalysis();
+				BottomPattern bottomPattern = getArea(classDatumAnalysis).getBottomPattern();
+				RealizedVariable realizedVariable = QVTimperativeUtil.createRealizedVariable(getSafeName(node), classDatumAnalysis.getCompleteClass().getPrimaryClass());
+				realizedVariable.setOwnedInit(constructor);
+				bottomPattern.getRealizedVariable().add(realizedVariable);
+				Variable oldVariable = node2variable.put(node, realizedVariable);
+				assert oldVariable == null;
 			}
-			ClassDatumAnalysis classDatumAnalysis = node.getClassDatumAnalysis();
-			BottomPattern bottomPattern = getArea(classDatumAnalysis).getBottomPattern();
-			RealizedVariable realizedVariable = QVTimperativeUtil.createRealizedVariable(getSafeName(node), classDatumAnalysis.getCompleteClass().getPrimaryClass());
-			realizedVariable.setOwnedInit(constructor);
-			bottomPattern.getRealizedVariable().add(realizedVariable);
-			Variable oldVariable = node2variable.put(node, realizedVariable);
-			assert oldVariable == null;
 		}
 	}
 
@@ -1232,13 +1236,14 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		else {
 			Variable variable = node2variable.get(node);
 			if (variable == null) {
-				for (@NonNull Edge edge : node.getIncomingEdges()) {
-					if (edge.isExpression() || edge.isCast()) {
-						OCLExpression initExpression = edge.getSource().getTypedElements().iterator().next().accept(expressionCreator);
-						variable = createBottomVariable(node, initExpression);
-						break;
-					}
-				}
+				//				for (@NonNull Edge edge : node.getIncomingEdges()) {
+				//					if (edge.isExpression() || edge.isCast()) {
+				//				OCLExpression initExpression = edge.getSource().getTypedElements().iterator().next().accept(expressionCreator);
+				OCLExpression initExpression = node.getTypedElements().iterator().next().accept(expressionCreator);
+				variable = createBottomVariable(node, initExpression);
+				//						break;
+				//					}
+				//				}
 			}
 			if (variable == null) {
 				for (@NonNull Edge edge : node.getIncomingEdges()) {
