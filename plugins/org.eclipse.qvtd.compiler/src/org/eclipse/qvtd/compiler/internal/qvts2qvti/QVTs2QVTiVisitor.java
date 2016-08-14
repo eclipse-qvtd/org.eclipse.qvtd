@@ -28,16 +28,16 @@ import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.ocl.pivot.ids.OperationId;
+import org.eclipse.ocl.pivot.internal.manager.PivotMetamodelManager;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
-import org.eclipse.ocl.pivot.utilities.MetamodelManager;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.TracingOption;
 import org.eclipse.qvtd.compiler.CompilerConstants;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.AbstractRegion;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.BasicEdge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.BasicEdgeConnection;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.BasicNodeConnection;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.BasicEdge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.CyclicScheduledRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Edge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.MappingRegion;
@@ -259,8 +259,9 @@ public class QVTs2QVTiVisitor extends QVTimperativeHelper implements Visitor<Ele
 		return environmentFactory.getIdResolver().getOperation(oclAnyEqualsId);
 	}
 
-	public @NonNull MetamodelManager getMetamodelManager() {
-		return environmentFactory.getMetamodelManager();
+	@Override
+	public @NonNull PivotMetamodelManager getMetamodelManager() {
+		return super.getMetamodelManager();
 	}
 
 	public @NonNull Operation getNotEqualsOperation() {

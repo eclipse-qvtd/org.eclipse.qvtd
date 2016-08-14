@@ -59,17 +59,17 @@ public abstract class AbstractRegion2Mapping
 	protected final @NonNull QVTimperativeHelper helper;
 	protected final @NonNull Region region;
 	protected final @NonNull Mapping mapping;
-	
+
 	/**
 	 * Mapping from QVTp expression to Schedule Node.
 	 */
 	private final @NonNull Map<@NonNull TypedElement, @NonNull Node> qvtp2node = new HashMap<@NonNull TypedElement, @NonNull Node>();
-	
+
 	/**
 	 * Safe name for each node
 	 */
 	private final @NonNull Map<@NonNull Node, @NonNull String> node2name = new HashMap<@NonNull Node, @NonNull String>();
-	
+
 	/**
 	 * Safe name for each node
 	 */
@@ -95,7 +95,7 @@ public abstract class AbstractRegion2Mapping
 			}
 		}
 	}
-	
+
 	protected @NonNull CallExp createCallExp(@NonNull OCLExpression asSource, @NonNull Property asProperty) {
 		if (asProperty.eContainer() == null) {
 			Type asType = asProperty.getType();
@@ -144,7 +144,7 @@ public abstract class AbstractRegion2Mapping
 		return helper.createOperationCallExp(asSource, "oclAsType", asTypeExp);
 	}
 
-/*	protected @NonNull OperationCallExp createOperationCallExp(@NonNull OCLExpression asSource, @NonNull Operation asOperation, /*@NonNull* / OCLExpression... asArguments) {
+	/*	protected @NonNull OperationCallExp createOperationCallExp(@NonNull OCLExpression asSource, @NonNull Operation asOperation, /*@NonNull* / OCLExpression... asArguments) {
 		PivotMetamodelManager metamodelManager = getMetamodelManager();
 		StandardLibraryInternal standardLibrary = metamodelManager.getStandardLibrary();
 		@NonNull Operation asBestOperation = asOperation;
@@ -176,7 +176,7 @@ public abstract class AbstractRegion2Mapping
 		return asCallExp;
 	}
 
-	// FIXME Unify two createOperationCallExp's 
+	// FIXME Unify two createOperationCallExp's
 	protected @NonNull OperationCallExp createOperationCallExp(@Nullable OCLExpression asSource, @NonNull Operation asOperation, @NonNull List<OCLExpression> asArguments) {
 		Type formalType = asOperation.getType();
 		OperationCallExp asCallExp = PivotFactory.eINSTANCE.createOperationCallExp();
@@ -207,13 +207,13 @@ public abstract class AbstractRegion2Mapping
 
 	public abstract void createStatements();
 
-/*	private @NonNull OCLExpression createUnrealizedVariableExp(@NonNull Node node) {	// FIXME redundant
+	/*	private @NonNull OCLExpression createUnrealizedVariableExp(@NonNull Node node) {	// FIXME redundant
 		Variable variable = node2variable.get(node);
 		if (variable == null) {
 			ClassDatumAnalysis classDatumAnalysis = node.getClassDatumAnalysis();
 			BottomPattern bottomPattern = mapping/*getArea(classDatumAnalysis.getDomainUsage())* /.getBottomPattern();
 			OCLExpression initExpression = getExpression(node);
-			
+
 			variable = PivotUtil.createVariable(getName(node), classDatumAnalysis.getCompleteClass().getPrimaryClass(), true, initExpression);
 			bottomPattern.getVariable().add(variable);
 			node2variable.put(node, variable);
@@ -250,15 +250,15 @@ public abstract class AbstractRegion2Mapping
 		return connectionVariable;
 	}
 
-//	protected @NonNull Iterable<Region> getEarliestFirstCalledRegions() {
-//		return AbstractRegion.EarliestRegionComparator.sort(region.getCalledRegions());
-//	}
+	//	protected @NonNull Iterable<Region> getEarliestFirstCalledRegions() {
+	//		return AbstractRegion.EarliestRegionComparator.sort(region.getCalledRegions());
+	//	}
 
 	public abstract @NonNull List<@NonNull Node> getGuardNodes();
 
 	public abstract @NonNull Variable getGuardVariable(@NonNull Node node);
 
-/*	private @Nullable OCLExpression getInitExpression(@NonNull Node node) {		
+	/*	private @Nullable OCLExpression getInitExpression(@NonNull Node node) {
 		List<Edge> incomingEdges = node.getIncomingEdges();
 		if (incomingEdges != null) {
 			for (Edge edge : incomingEdges) {
@@ -279,9 +279,9 @@ public abstract class AbstractRegion2Mapping
 	}
 
 	protected @NonNull PivotMetamodelManager getMetamodelManager() {
-		return (PivotMetamodelManager)visitor.getMetamodelManager();
+		return visitor.getMetamodelManager();
 	}
-	
+
 	public @Nullable Node getNode(@Nullable TypedElement qvtpTypedElement) {
 		if (qvtpTypedElement instanceof VariableExp) {
 			return getNode(((VariableExp)qvtpTypedElement).getReferredVariable());
@@ -371,7 +371,7 @@ public abstract class AbstractRegion2Mapping
 
 	// FIXME temporary backward compatibility
 	protected void setLegacyIsPolled(@NonNull Mapping calledMapping, @NonNull MappingCallBinding mappingCallBinding) {
-/*		for (Domain domain : calledMapping.getDomain()) {
+		/*		for (Domain domain : calledMapping.getDomain()) {
 			if (domain instanceof ImperativeDomain) {
 				ImperativeDomain imperativeDomain = (ImperativeDomain)domain;
 				if (imperativeDomain.getCheckedProperties().size() > 0) {
