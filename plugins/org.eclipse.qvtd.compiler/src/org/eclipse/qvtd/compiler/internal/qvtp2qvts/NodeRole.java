@@ -31,24 +31,15 @@ public interface NodeRole extends Role
 	@NonNull Node createNode(@NonNull Region region, @NonNull String name, @NonNull TypedElement typedElement);
 
 	/**
-	 * Return the pen width with which this edge is drawn.
-	 */
-	@NonNull Integer getPenwidth();
-
-	/**
 	 * Return the shape or null for default.
 	 */
 	@Nullable String getShape();
-
-	//	@Nullable String getStyle();
 
 	boolean isComposed();
 
 	boolean isExpression();
 
 	boolean isExtraGuardVariable();
-
-	boolean isHead();
 
 	boolean isInternal();
 
@@ -68,14 +59,4 @@ public interface NodeRole extends Role
 	 * Return the merged role combining this role and nodeRole.
 	 */
 	@NonNull NodeRole merge(@NonNull NodeRole nodeRole);
-
-	/**
-	 * Redesignate a head node as not-a-head, typically following a multi-headed split.
-	 */
-	@NonNull NodeRole resetHead();
-
-	/**
-	 * Redesignate a guard node as a head.
-	 */
-	@NonNull NodeRole setHead();
 }

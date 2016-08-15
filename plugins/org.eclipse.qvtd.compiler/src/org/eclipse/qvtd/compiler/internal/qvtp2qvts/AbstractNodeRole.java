@@ -83,11 +83,6 @@ public abstract class AbstractNodeRole extends AbstractRole implements NodeRole
 	}
 
 	@Override
-	public @NonNull Integer getPenwidth() {
-		return isHead() /*&& !isResult()*/ ? HEAD_WIDTH : LINE_WIDTH;
-	}
-
-	@Override
 	public @Nullable String getShape() {
 		return null;
 	}
@@ -104,11 +99,6 @@ public abstract class AbstractNodeRole extends AbstractRole implements NodeRole
 
 	@Override
 	public boolean isExtraGuardVariable() {
-		return false;
-	}
-
-	@Override
-	public boolean isHead() {
 		return false;
 	}
 
@@ -153,21 +143,5 @@ public abstract class AbstractNodeRole extends AbstractRole implements NodeRole
 			return this;
 		}
 		throw new IllegalStateException(this + " cannot be merged with " + nodeRole);
-	}
-
-	@Override
-	public @NonNull NodeRole resetHead() {
-		if (!isHead()) {
-			return this;
-		}
-		throw new IllegalStateException(this + " cannot be reset as a non-head");
-	}
-
-	@Override
-	public @NonNull NodeRole setHead() {
-		if (isHead()) {
-			return this;
-		}
-		throw new IllegalStateException(this + " cannot be set as a head");
 	}
 }

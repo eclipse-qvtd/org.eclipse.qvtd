@@ -86,7 +86,7 @@ class RealizedPartition extends AbstractPartition
 
 	private void gatherSourceNavigations(@NonNull Node targetNode, @NonNull NodeRole targetNodeRole) {
 		if (!hasNode(targetNode)) {
-			addNode(targetNode, targetNodeRole.resetHead());
+			addNode(targetNode, targetNodeRole);
 			for (@NonNull Node sourceNode : getPredecessors(targetNode)) {
 				gatherSourceNavigations(sourceNode, sourceNode.getNodeRole());
 			}

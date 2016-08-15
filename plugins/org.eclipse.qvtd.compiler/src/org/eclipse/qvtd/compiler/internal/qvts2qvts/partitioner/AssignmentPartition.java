@@ -33,7 +33,7 @@ class AssignmentPartition extends AbstractPartition
 		//	The realized middle (trace) nodes become predicated head nodes.
 		//
 		for (@NonNull Node node : partitioner.getRealizedMiddleNodes()) {
-			addNode(node, node.getNodeRole().asPredicated().asNavigable().setHead());
+			addNode(node, node.getNodeRole().asPredicated().asNavigable()/*.setHead()*/);
 		}
 		//
 		//	The nodes that support identification of the realized edge are used as is.
@@ -52,7 +52,7 @@ class AssignmentPartition extends AbstractPartition
 			if (targetNodeRole.isRealized()) {
 				targetNodeRole = targetNodeRole.asPredicated().asNavigable();
 			}
-			addNode(targetNode, targetNodeRole.resetHead());
+			addNode(targetNode, targetNodeRole);
 			boolean hasPredecessor = false;
 			for (@NonNull Node sourceNode : getPredecessors(targetNode)) {
 				hasPredecessor = true;

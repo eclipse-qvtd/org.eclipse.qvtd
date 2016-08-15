@@ -131,7 +131,7 @@ class SpeculatedPartition extends AbstractPartition
 
 	private void gatherSourceNavigations(@NonNull Node targetNode, @NonNull NodeRole targetNodeRole) {
 		if (!hasNode(targetNode)) {
-			addNode(targetNode, targetNodeRole.resetHead());
+			addNode(targetNode, targetNodeRole);
 			if (!tracedInputNodes.contains(targetNode)) {
 				boolean hasPredecessor = false;
 				for (@NonNull Node sourceNode : getPredecessors(targetNode)) {
@@ -216,7 +216,7 @@ class SpeculatedPartition extends AbstractPartition
 		for (@NonNull Node node : partitioner.getPredicatedMiddleNodes()) {
 			NodeRole nodeRole = node.getNodeRole();
 			if (node.isPattern() && node.isClass()) {
-				nodeRole = nodeRole.resetHead().asSpeculated();
+				nodeRole = nodeRole.asSpeculated();
 			}
 			gatherSourceNavigations(node, nodeRole);
 		}
@@ -259,7 +259,7 @@ class SpeculatedPartition extends AbstractPartition
 		for (@NonNull Node node : partitioner.getRealizedMiddleNodes()) {
 			NodeRole nodeRole = node.getNodeRole();
 			if (node.isPattern() && node.isClass()) {
-				nodeRole = nodeRole.asSpeculated().asNavigable().setHead();
+				nodeRole = nodeRole.asSpeculated().asNavigable()/*.setHead()*/;
 			}
 			if (!hasNode(node)) {
 				addNode(node, nodeRole);

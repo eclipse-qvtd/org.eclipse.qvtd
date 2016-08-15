@@ -66,6 +66,7 @@ public abstract class AbstractNode implements Node
 	protected final @NonNull String name;
 	private @NonNull ClassDatumAnalysis classDatumAnalysis;
 	private final boolean isDataType;
+	private boolean isHead = false;
 	private @Nullable NodeConnection incomingConnection = null;
 	private @Nullable List<@NonNull Edge> incomingEdges = null;
 	private @Nullable List<@NonNull NodeConnection> outgoingConnections = null;
@@ -408,7 +409,7 @@ public abstract class AbstractNode implements Node
 	}
 
 	protected @NonNull Integer getPenwidth() {
-		return nodeRole.getPenwidth();
+		return isHead() ? Role.HEAD_WIDTH : Role.LINE_WIDTH;
 	}
 
 	@Override
@@ -532,7 +533,7 @@ public abstract class AbstractNode implements Node
 
 	@Override
 	public boolean isHead() {
-		return nodeRole.isHead();
+		return isHead;
 	}
 
 	@Override
@@ -676,12 +677,12 @@ public abstract class AbstractNode implements Node
 
 	@Override
 	public void resetHead() {
-		this.nodeRole = this.nodeRole.resetHead();
+		this.isHead = false;
 	}
 
 	@Override
 	public void setHead() {
-		this.nodeRole = this.nodeRole.setHead();
+		this.isHead = true;
 	}
 
 	public void setLabel(@NonNull GraphStringBuilder s) {

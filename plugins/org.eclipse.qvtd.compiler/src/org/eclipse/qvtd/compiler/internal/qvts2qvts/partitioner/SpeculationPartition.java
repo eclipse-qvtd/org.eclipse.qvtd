@@ -36,7 +36,7 @@ class SpeculationPartition extends AbstractPartition
 		//
 		for (@NonNull Node node : partitioner.getRealizedMiddleNodes()) {
 			if (node.isPattern() && node.isClass()) {		// FIXME UML2RDBMS experiment
-				NodeRole speculationNodeRole = node.getNodeRole().resetHead().asSpeculation();
+				NodeRole speculationNodeRole = node.getNodeRole().asSpeculation();
 				addNode(node, speculationNodeRole);
 				for (@NonNull NavigationEdge edge : node.getNavigationEdges()) {
 					addReachableConstantOrLoadedNodes(edge.getTarget());
