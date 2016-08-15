@@ -627,12 +627,21 @@ public class Nodes
 	}
 
 	// FIXME Can this be merged into PatternNodeRole ??
-	private static final class PredicatedInternalNodeRole extends AbstractSimpleNodeRole
+	private static final class PredicatedInternalNodeRole extends AbstractTypedNodeRole
 	{
-		public static final @NonNull PredicatedInternalNodeRole PREDICATED_INTERNAL_CLASS = new PredicatedInternalNodeRole();
+		private static final @NonNull PredicatedInternalNodeRole PREDICATED_INTERNAL_CLASS = new PredicatedInternalNodeRole(ClassableEnum.CLASS);
+		private static final @NonNull PredicatedInternalNodeRole PREDICATED_INTERNAL_DATATYPE = new PredicatedInternalNodeRole(ClassableEnum.DATATYPE);
 
-		private PredicatedInternalNodeRole() {
-			super(Role.Phase.PREDICATED);
+		public static @NonNull PredicatedInternalNodeRole getPredicatedInternalNodeRole(@NonNull ClassableEnum classable) {
+			switch (classable) {
+				case CLASS: return PREDICATED_INTERNAL_CLASS;
+				case DATATYPE: return PREDICATED_INTERNAL_DATATYPE;
+			}
+			throw new UnsupportedOperationException();
+		}
+
+		private PredicatedInternalNodeRole(@NonNull ClassableEnum classable) {
+			super(Role.Phase.PREDICATED, classable);
 		}
 
 		@Override
@@ -831,8 +840,10 @@ public class Nodes
 		return PredicatedInternalNodeRole.PREDICATED_INTERNAL_CLASS.createNode(parentNode.getRegion(), name, classDatumAnalysis);
 	}
 
-	public static @NonNull Node createPredicatedInternalClassNode(@NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
-		return PredicatedInternalNodeRole.PREDICATED_INTERNAL_CLASS.createNode(region, name, classDatumAnalysis);
+	public static @NonNull Node createPredicatedInternalNode(@NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
+		ClassableEnum classable = asClassable(classDatumAnalysis.getClassDatum().getType());
+		PredicatedInternalNodeRole predicatedInternalNodeRole = PredicatedInternalNodeRole.getPredicatedInternalNodeRole(classable);
+		return predicatedInternalNodeRole.createNode(region, name, classDatumAnalysis);
 	}
 
 	public static @NonNull TypedNode createRealizedDataTypeNode(@NonNull Node sourceNode, @NonNull Property source2targetProperty) {

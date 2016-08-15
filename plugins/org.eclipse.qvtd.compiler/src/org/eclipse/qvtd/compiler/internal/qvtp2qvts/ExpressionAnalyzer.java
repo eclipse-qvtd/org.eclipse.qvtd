@@ -353,8 +353,8 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 		return Nodes.createPredicatedInternalClassNode(parentNode, navigationAssignment);
 	}
 
-	protected @NonNull Node createPredicatedClassNode(@NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
-		return Nodes.createPredicatedInternalClassNode(context, name, classDatumAnalysis);
+	protected @NonNull Node createPredicatedInternalNode(@NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
+		return Nodes.createPredicatedInternalNode(context, name, classDatumAnalysis);
 	}
 
 	protected @NonNull Node createRealizedDataTypeNode(@NonNull Node sourceNode, @NonNull Property source2targetProperty) {
@@ -541,7 +541,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 				Node extraTargetNode = extraEdge.getTarget();
 				String name = extraTargetNode.getName();
 				ClassDatumAnalysis classDatumAnalysis = extraTargetNode.getClassDatumAnalysis();
-				Node instantiatedTargetNode = createPredicatedClassNode(name, classDatumAnalysis);
+				Node instantiatedTargetNode = createPredicatedInternalNode(name, classDatumAnalysis);
 				createNavigationEdge(instantiatedNode, extraEdge.getProperty(), instantiatedTargetNode);
 				instantiate(instantiatedTargetNode, extraTargetNode);
 			}
