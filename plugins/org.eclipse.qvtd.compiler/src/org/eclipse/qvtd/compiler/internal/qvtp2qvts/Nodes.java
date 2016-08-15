@@ -100,27 +100,31 @@ public class Nodes
 		}
 
 		@Override
-		public boolean isClass() {
+		public final boolean isClass() {
 			return classable == ClassableEnum.CLASS;
 		}
 
 		@Override
-		public boolean isDataType() {
+		public final boolean isDataType() {
 			return classable == ClassableEnum.DATATYPE;
 		}
 	}
 
-	private static final class ComposingNodeRole extends AbstractSimpleNodeRole
+	private static final class ComposingNodeRole extends AbstractTypedNodeRole
 	{
-		public static final @NonNull NodeRole COMPOSING = new ComposingNodeRole();
+		private static final @NonNull ComposingNodeRole COMPOSING_CLASS = new ComposingNodeRole(ClassableEnum.CLASS);
+		private static final @NonNull ComposingNodeRole COMPOSING_DATATYPE = new ComposingNodeRole(ClassableEnum.DATATYPE);
 
-		protected ComposingNodeRole() {
-			super(Role.Phase.LOADED);
+		public static @NonNull ComposingNodeRole getComposingNodeRole(@NonNull ClassableEnum classable) {
+			switch (classable) {
+				case CLASS: return COMPOSING_CLASS;
+				case DATATYPE: return COMPOSING_DATATYPE;
+			}
+			throw new UnsupportedOperationException();
 		}
 
-		@Override
-		public boolean isClass() {
-			return true;
+		protected ComposingNodeRole(@NonNull ClassableEnum classable) {
+			super(Role.Phase.LOADED, classable);
 		}
 
 		@Override
@@ -153,17 +157,21 @@ public class Nodes
 		}
 	}
 
-	private static class ExtraGuardNodeRole extends AbstractSimpleNodeRole
+	private static class ExtraGuardNodeRole extends AbstractTypedNodeRole
 	{
-		public static final @NonNull NodeRole EXTRA_GUARD = new ExtraGuardNodeRole();
+		private static final @NonNull ExtraGuardNodeRole EXTRA_CLASS_GUARD = new ExtraGuardNodeRole(ClassableEnum.CLASS);
+		private static final @NonNull ExtraGuardNodeRole EXTRA_DATATYPE_GUARD = new ExtraGuardNodeRole(ClassableEnum.DATATYPE);
 
-		protected ExtraGuardNodeRole() {
-			super(Role.Phase.PREDICATED);
+		public static @NonNull ExtraGuardNodeRole getExtraGuardNodeRole(@NonNull ClassableEnum classable) {
+			switch (classable) {
+				case CLASS: return EXTRA_CLASS_GUARD;
+				case DATATYPE: return EXTRA_DATATYPE_GUARD;
+			}
+			throw new UnsupportedOperationException();
 		}
 
-		@Override
-		public boolean isDataType() {
-			return true;
+		private ExtraGuardNodeRole(@NonNull ClassableEnum classable) {
+			super(Role.Phase.PREDICATED, classable);
 		}
 
 		@Override
@@ -295,12 +303,12 @@ public class Nodes
 		}
 
 		@Override
-		public boolean isNull() {
+		public boolean isClass() {
 			return true;
 		}
 
 		@Override
-		public boolean isPattern() {
+		public boolean isNull() {
 			return true;
 		}
 	}
@@ -436,22 +444,6 @@ public class Nodes
 		private static final @NonNull PatternNodeRole SPECULATED_NAVIGABLE_CLASS_STEP = new PatternNodeRole(Role.Phase.SPECULATED, ClassableEnum.CLASS, NavigableEnum.NAVIGABLE, HeadableEnum.STEP);
 		private static final @NonNull PatternNodeRole SPECULATION_NAVIGABLE_CLASS_STEP = new PatternNodeRole(Role.Phase.SPECULATION, ClassableEnum.CLASS, NavigableEnum.NAVIGABLE, HeadableEnum.STEP);
 
-		public static @NonNull PatternNodeRole getDataTypeNodeRole(@NonNull Node sourceNode, @NonNull Property property) {
-			Phase phase;
-			switch (sourceNode.getNodeRole().getPhase()) {
-				case REALIZED: phase = Phase.REALIZED; break;
-				case PREDICATED: phase = Phase.PREDICATED; break;
-				case LOADED: {
-					boolean isDirty = sourceNode.getRegion().getSchedulerConstants().isDirty(property);
-					phase = isDirty ? Phase.PREDICATED : Phase.LOADED; break;
-				}
-				case CONSTANT: phase = Phase.CONSTANT; break;
-				default: throw new UnsupportedOperationException();
-			}
-			NavigableEnum navigableEnum = Nodes.asNavigable(sourceNode.isNavigable());
-			return getPatternNodeRole(phase, ClassableEnum.DATATYPE, navigableEnum, HeadableEnum.STEP);
-		}
-
 		public static @NonNull PatternNodeRole getPatternNodeRole(@NonNull Phase phase, @NonNull ClassableEnum classable, @NonNull NavigableEnum navigable, @NonNull HeadableEnum guardable) {
 			switch (navigable) {
 				case NAVIGABLE: {
@@ -546,6 +538,22 @@ public class Nodes
 				}
 			}
 			throw new UnsupportedOperationException();
+		}
+
+		public static @NonNull PatternNodeRole getPatternNodeRole(@NonNull Node sourceNode, @NonNull Property property) {
+			Phase phase;
+			switch (sourceNode.getNodeRole().getPhase()) {
+				case REALIZED: phase = Phase.REALIZED; break;
+				case PREDICATED: phase = Phase.PREDICATED; break;
+				case LOADED: {
+					boolean isDirty = sourceNode.getRegion().getSchedulerConstants().isDirty(property);
+					phase = isDirty ? Phase.PREDICATED : Phase.LOADED; break;
+				}
+				case CONSTANT: phase = Phase.CONSTANT; break;
+				default: throw new UnsupportedOperationException();
+			}
+			NavigableEnum navigableEnum = Nodes.asNavigable(sourceNode.isNavigable());
+			return getPatternNodeRole(phase, asClassable(property.getType())/*ClassableEnum.DATATYPE*/, navigableEnum, HeadableEnum.STEP);
 		}
 
 		private final @NonNull NavigableEnum navigable;
@@ -645,11 +653,6 @@ public class Nodes
 		}
 
 		@Override
-		public boolean isDataType() {
-			return true;
-		}
-
-		@Override
 		public boolean isInternal() {
 			return true;
 		}
@@ -679,12 +682,12 @@ public class Nodes
 		}
 
 		@Override
-		public boolean isHead() {
+		public boolean isDataType() {
 			return true;
 		}
 
 		@Override
-		public boolean isPattern() {
+		public boolean isHead() {
 			return true;
 		}
 
@@ -709,17 +712,19 @@ public class Nodes
 	}
 
 	public static @NonNull Node createComposingNode(@NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
-		return ComposingNodeRole.COMPOSING.createNode(region, name, classDatumAnalysis);
+		ClassableEnum classable = asClassable(classDatumAnalysis.getClassDatum().getType());
+		ComposingNodeRole composingNodeRole = ComposingNodeRole.getComposingNodeRole(classable);
+		return composingNodeRole.createNode(region, name, classDatumAnalysis);
 	}
 
 	public static @NonNull TypedNode createDataTypeNode(@NonNull Node sourceNode, @NonNull Property property) {
-		PatternNodeRole patternNodeRole = PatternNodeRole.getDataTypeNodeRole(sourceNode, property);
+		PatternNodeRole patternNodeRole = PatternNodeRole.getPatternNodeRole(sourceNode, property);
 		return patternNodeRole.createNode(sourceNode, property);
 	}
 
 	public static @NonNull TypedNode createDataTypeNode(@NonNull Node sourceNode, @NonNull NavigationCallExp navigationCallExp) {
 		Property property = PivotUtil.getReferredProperty(navigationCallExp);
-		PatternNodeRole patternNodeRole = PatternNodeRole.getDataTypeNodeRole(sourceNode, property);
+		PatternNodeRole patternNodeRole = PatternNodeRole.getPatternNodeRole(sourceNode, property);
 		assert sourceNode.isClass();
 		String name = property.getName();
 		assert name != null;
@@ -755,8 +760,10 @@ public class Nodes
 		return ErrorNodeRole.ERROR.createNode(region, name, classDatumAnalysis);
 	}
 
-	public static @NonNull Node createExtraGuardNode(@NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
-		return ExtraGuardNodeRole.EXTRA_GUARD.createNode(region, name, classDatumAnalysis);
+	public static @NonNull TypedNode createExtraGuardNode(@NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
+		ClassableEnum classable = asClassable(classDatumAnalysis.getClassDatum().getType());
+		ExtraGuardNodeRole extraGuardNodeRole = ExtraGuardNodeRole.getExtraGuardNodeRole(classable);
+		return extraGuardNodeRole.createNode(region, name, classDatumAnalysis);
 	}
 
 	public static @NonNull Node createInputNode(@NonNull Region region, NodeRole.@NonNull Phase nodeRolePhase, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
@@ -840,7 +847,7 @@ public class Nodes
 		return PredicatedInternalNodeRole.PREDICATED_INTERNAL_CLASS.createNode(parentNode.getRegion(), name, classDatumAnalysis);
 	}
 
-	public static @NonNull Node createPredicatedInternalNode(@NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
+	public static @NonNull TypedNode createPredicatedInternalNode(@NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
 		ClassableEnum classable = asClassable(classDatumAnalysis.getClassDatum().getType());
 		PredicatedInternalNodeRole predicatedInternalNodeRole = PredicatedInternalNodeRole.getPredicatedInternalNodeRole(classable);
 		return predicatedInternalNodeRole.createNode(region, name, classDatumAnalysis);
@@ -868,7 +875,8 @@ public class Nodes
 		}
 		Role.Phase phase = sourceNode.isPredicated() || isMiddleOrOutput || isDirty ? Role.Phase.PREDICATED : Role.Phase.LOADED;
 		NavigableEnum navigableEnum = isNavigable ? NavigableEnum.NAVIGABLE : NavigableEnum.UNNAVIGABLE;
-		ClassableEnum classable = asClassable(sourceNode.isClass());
+		//		ClassableEnum classable = asClassable(sourceNode.isClass());
+		ClassableEnum classable = asClassable(callExp.getType());
 		PatternNodeRole stepNodeRole = PatternNodeRole.getPatternNodeRole(phase, classable, navigableEnum, HeadableEnum.STEP);
 		return stepNodeRole.createNode(region, name, callExp);
 	}

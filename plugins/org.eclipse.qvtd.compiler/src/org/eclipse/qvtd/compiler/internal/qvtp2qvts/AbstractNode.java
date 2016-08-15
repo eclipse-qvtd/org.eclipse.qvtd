@@ -78,6 +78,9 @@ public abstract class AbstractNode implements Node
 		this.name = name;
 		this.classDatumAnalysis = classDatumAnalysis;
 		region.addNode(this);
+		boolean isDataType = classDatumAnalysis.getClassDatum().getType() instanceof DataType;;
+		assert nodeRole.isDataType() == isDataType;
+		assert nodeRole.isClass() != isDataType;
 	}
 
 	@Override
@@ -491,22 +494,9 @@ public abstract class AbstractNode implements Node
 		return sources;
 	}
 
-	//	@Override
-	//	public boolean isCast() {
-	//		return false;
-	//	}
-
 	@Override
 	public final boolean isClass() {
-		boolean isClassNode1 = nodeRole.isClass();		// FIXME OperationNode / InternalNode
-		boolean isClassNode2 = !(classDatumAnalysis.getClassDatum().getType() instanceof DataType) && !isNull();// && !isOperation();
-		//FIXME		assert isClassNode1 == isClassNode2;
-		/*		if (isClassNode1 != isClassNode2) {
-			System.err.println("Inconsistent isClass for " + this);
-			isClassNode1 = nodeRole.isClass();
-			isClassNode2 = !(classDatumAnalysis.getClassDatum().getType() instanceof DataType) && !isNull();// && !isOperation();
-		} */
-		return isClassNode2;
+		return nodeRole.isClass();
 	}
 
 	@Override
@@ -521,15 +511,7 @@ public abstract class AbstractNode implements Node
 
 	@Override
 	public final boolean isDataType() {
-		boolean isDataTypeNode1 = nodeRole.isDataType();		// FIXME OperationNode
-		boolean isDataTypeNode2 = (classDatumAnalysis.getClassDatum().getType() instanceof DataType) && !isNull();
-		//FIXME		assert isDataTypeNode1 == isDataTypeNode2;
-		/*		if (isDataTypeNode1 != isDataTypeNode2) {
-			System.err.println("Inconsistent isDataType for " + this);
-			isDataTypeNode1 = nodeRole.isDataType();
-			isDataTypeNode2 = (classDatumAnalysis.getClassDatum().getType() instanceof DataType) && !isNull();
-		} */
-		return isDataTypeNode2;
+		return nodeRole.isDataType();
 	}
 
 	@Override
