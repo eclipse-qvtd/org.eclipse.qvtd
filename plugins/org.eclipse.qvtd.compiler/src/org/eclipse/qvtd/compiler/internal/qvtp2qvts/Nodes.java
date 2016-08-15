@@ -81,11 +81,11 @@ public class Nodes
 		}
 	}
 
-	private static abstract class AbstractVariableNodeRole extends AbstractSimpleNodeRole
+	private static abstract class AbstractTypedNodeRole extends AbstractSimpleNodeRole
 	{
 		protected final @NonNull ClassableEnum classable;
 
-		protected AbstractVariableNodeRole(@NonNull Phase phase, @NonNull ClassableEnum classable) {
+		protected AbstractTypedNodeRole(@NonNull Phase phase, @NonNull ClassableEnum classable) {
 			super(phase);
 			this.classable = classable;
 		}
@@ -221,7 +221,7 @@ public class Nodes
 		}
 	}
 
-	private static final class IteratorNodeRole extends AbstractVariableNodeRole
+	private static final class IteratorNodeRole extends AbstractTypedNodeRole
 	{
 		private static final @NonNull IteratorNodeRole CONSTANT_DATATYPE_ITERATOR = new IteratorNodeRole(Role.Phase.CONSTANT, ClassableEnum.DATATYPE);
 		private static final @NonNull IteratorNodeRole CONSTANT_CLASS_ITERATOR = new IteratorNodeRole(Role.Phase.CONSTANT, ClassableEnum.CLASS);
@@ -306,12 +306,16 @@ public class Nodes
 		}
 	}
 
-	private static class OperationNodeRole extends AbstractSimpleNodeRole
+	private static class OperationNodeRole extends AbstractTypedNodeRole
 	{
-		private static final @NonNull OperationNodeRole CONSTANT_OPERATION = new OperationNodeRole(Role.Phase.CONSTANT);
-		private static final @NonNull OperationNodeRole LOADED_OPERATION = new OperationNodeRole(Role.Phase.LOADED);
-		private static final @NonNull OperationNodeRole PREDICATED_OPERATION = new OperationNodeRole(Role.Phase.PREDICATED);
-		private static final @NonNull OperationNodeRole REALIZED_OPERATION = new OperationNodeRole(Role.Phase.REALIZED);
+		private static final @NonNull OperationNodeRole CONSTANT_CLASS_OPERATION = new OperationNodeRole(Role.Phase.CONSTANT, ClassableEnum.CLASS);
+		private static final @NonNull OperationNodeRole CONSTANT_DATATYPE_OPERATION = new OperationNodeRole(Role.Phase.CONSTANT, ClassableEnum.DATATYPE);
+		private static final @NonNull OperationNodeRole LOADED_CLASS_OPERATION = new OperationNodeRole(Role.Phase.LOADED, ClassableEnum.CLASS);
+		private static final @NonNull OperationNodeRole LOADED_DATATYPE_OPERATION = new OperationNodeRole(Role.Phase.LOADED, ClassableEnum.DATATYPE);
+		private static final @NonNull OperationNodeRole PREDICATED_CLASS_OPERATION = new OperationNodeRole(Role.Phase.PREDICATED, ClassableEnum.CLASS);
+		private static final @NonNull OperationNodeRole PREDICATED_DATATYPE_OPERATION = new OperationNodeRole(Role.Phase.PREDICATED, ClassableEnum.DATATYPE);
+		private static final @NonNull OperationNodeRole REALIZED_CLASS_OPERATION = new OperationNodeRole(Role.Phase.REALIZED, ClassableEnum.CLASS);
+		private static final @NonNull OperationNodeRole REALIZED_DATATYPE_OPERATION = new OperationNodeRole(Role.Phase.REALIZED, ClassableEnum.DATATYPE);
 
 		public static @NonNull Phase getOperationNodePhase(@NonNull Region region, @NonNull TypedElement typedElement, @NonNull Node... argNodes) {
 			boolean isLoaded = false;
@@ -353,23 +357,35 @@ public class Nodes
 			}
 		}
 
-		public static @NonNull OperationNodeRole getOperationNodeRole(@NonNull Phase phase) {
-			switch (phase) {
-				case CONSTANT: return CONSTANT_OPERATION;
-				case LOADED: return LOADED_OPERATION;
-				case PREDICATED: return PREDICATED_OPERATION;
-				case REALIZED: return REALIZED_OPERATION;
+		public static @NonNull OperationNodeRole getOperationNodeRole(@NonNull Phase phase, @NonNull ClassableEnum classable) {
+			switch (classable) {
+				case CLASS: {
+					switch (phase) {
+						case CONSTANT: return CONSTANT_CLASS_OPERATION;
+						case LOADED: return LOADED_CLASS_OPERATION;
+						case PREDICATED: return PREDICATED_CLASS_OPERATION;
+						case REALIZED: return REALIZED_CLASS_OPERATION;
+					}
+				}
+				case DATATYPE: {
+					switch (phase) {
+						case CONSTANT: return CONSTANT_DATATYPE_OPERATION;
+						case LOADED: return LOADED_DATATYPE_OPERATION;
+						case PREDICATED: return PREDICATED_DATATYPE_OPERATION;
+						case REALIZED: return REALIZED_DATATYPE_OPERATION;
+					}
+				}
 			}
 			throw new UnsupportedOperationException();
 		}
 
-		protected OperationNodeRole(@NonNull Phase phase) {
-			super(phase);
+		protected OperationNodeRole(@NonNull Phase phase, @NonNull ClassableEnum classable) {
+			super(phase, classable);
 		}
 
 		@Override
 		public @NonNull OperationNodeRole asPhase(@NonNull Phase phase) {
-			return getOperationNodeRole(phase);
+			return getOperationNodeRole(phase, classable);
 		}
 
 		@Override
@@ -391,9 +407,14 @@ public class Nodes
 		public boolean isOperation() {
 			return true;
 		}
+
+		@Override
+		public String toString() {
+			return phase + (isClass() ? "-Class-" : "-DataType-") + getClass().getSimpleName();
+		}
 	}
 
-	private static class PatternNodeRole extends AbstractVariableNodeRole
+	private static class PatternNodeRole extends AbstractTypedNodeRole
 	{
 		private static final @NonNull PatternNodeRole CONSTANT_NAVIGABLE_DATATYPE_STEP = new PatternNodeRole(Role.Phase.CONSTANT, ClassableEnum.DATATYPE, NavigableEnum.NAVIGABLE, GuardableEnum.STEP);
 		private static final @NonNull PatternNodeRole CONSTANT_UNNAVIGABLE_DATATYPE_STEP = new PatternNodeRole(Role.Phase.CONSTANT, ClassableEnum.DATATYPE, NavigableEnum.UNNAVIGABLE, GuardableEnum.STEP);
@@ -808,8 +829,9 @@ public class Nodes
 	}
 
 	public static @NonNull TypedNode createOperationNode(@NonNull Region region, @NonNull String name, @NonNull TypedElement typedElement, @NonNull Node... argNodes) {
+		ClassableEnum classable = asClassable(!(typedElement.getType() instanceof DataType));
 		Role.Phase nodePhase = OperationNodeRole.getOperationNodePhase(region, typedElement, argNodes);
-		OperationNodeRole nodeRole = OperationNodeRole.getOperationNodeRole(nodePhase);
+		OperationNodeRole nodeRole = OperationNodeRole.getOperationNodeRole(nodePhase, classable);
 		return nodeRole.createNode(region, name, typedElement);
 	}
 

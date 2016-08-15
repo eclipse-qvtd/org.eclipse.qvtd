@@ -82,10 +82,6 @@ public interface Region extends Visitable, GraphNode, Nameable, Symbolable
 	 */
 	int getFinalExecutionIndex();
 
-	/**
-	 * Return the Guard nodes of the region (GuardVariable or Composing)
-	 */
-	@NonNull Iterable<@NonNull Node> getGuardNodes();
 	@NonNull List<@NonNull Node> getHeadNodes();
 	@NonNull Iterable<@NonNull DatumConnection> getIncomingConnections();
 	@NonNull Iterable<@NonNull NodeConnection> getIncomingPassedConnections();

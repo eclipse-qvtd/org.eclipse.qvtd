@@ -96,12 +96,6 @@ public interface Edge extends GraphStringBuilder.GraphEdge, Nameable, Visitable
 	boolean isExpression();
 
 	/**
-	 * Return true if the source of this edge has a known value, because it is inherently constant, or
-	 * is available once sufficient input models have been loaded.
-	 */
-	boolean isKnown();
-
-	/**
 	 * Return true if this edge conveys a value that is loadable from an input model.
 	 */
 	boolean isLoaded();

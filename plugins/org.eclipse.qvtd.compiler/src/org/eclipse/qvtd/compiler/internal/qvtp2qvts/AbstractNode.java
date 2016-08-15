@@ -258,45 +258,11 @@ public abstract class AbstractNode implements Node
 		return classDatumAnalysis.getCompleteClass();
 	}
 
-	//	@Override
-	//	public @Nullable Edge getComposedOrderingEdge(@NonNull Node targetNode) {
-	//		for (Edge edge : getComposedOrderingEdges()) {
-	//			if (edge.getTarget() == targetNode) {
-	//				return edge;
-	//			}
-	//		}
-	//		return null;
-	//	}
-
-	//	@Override
-	//	public final @NonNull Iterable<Edge> getComposedOrderingEdges() {
-	//		@SuppressWarnings("null")
-	//		@NonNull Iterable<Edge> filter = Iterables.filter(getOutgoingEdges(), AbstractRegion.IsComposedOrderingEdgePredicate.INSTANCE);
-	//		return filter;
-	//	}
-
 	@Override
 	public final @NonNull Iterable<@NonNull Edge> getComputationEdges() {
 		@NonNull Iterable<@NonNull Edge> filter = Iterables.filter(getOutgoingEdges(), AbstractRegion.IsComputationEdgePredicate.INSTANCE);
 		return filter;
 	}
-
-	//	@Override
-	//	public @Nullable Edge getConsumedOrderingEdge(@NonNull Node targetNode) {
-	//		for (Edge edge : getConsumedOrderingEdges()) {
-	//			if (edge.getTarget() == targetNode) {
-	//				return edge;
-	//			}
-	//		}
-	//		return null;
-	//	}
-
-	//	@Override
-	//	public final @NonNull Iterable<Edge> getConsumedOrderingEdges() {
-	//		@SuppressWarnings("null")
-	//		@NonNull Iterable<Edge> filter = Iterables.filter(getOutgoingEdges(), AbstractRegion.IsConsumedOrderingEdgePredicate.INSTANCE);
-	//		return filter;
-	//	}
 
 	@Override
 	public @NonNull String getDisplayName() {
@@ -534,12 +500,12 @@ public abstract class AbstractNode implements Node
 	public final boolean isClass() {
 		boolean isClassNode1 = nodeRole.isClass();		// FIXME OperationNode / InternalNode
 		boolean isClassNode2 = !(classDatumAnalysis.getClassDatum().getType() instanceof DataType) && !isNull();// && !isOperation();
-		//		assert isClassNode1 == isClassNode2;
-		if (isClassNode1 != isClassNode2) {
-			//			System.err.println("Inconsistent isClassNode for " + this);
+		//FIXME		assert isClassNode1 == isClassNode2;
+		/*		if (isClassNode1 != isClassNode2) {
+			System.err.println("Inconsistent isClass for " + this);
 			isClassNode1 = nodeRole.isClass();
 			isClassNode2 = !(classDatumAnalysis.getClassDatum().getType() instanceof DataType) && !isNull();// && !isOperation();
-		}
+		} */
 		return isClassNode2;
 	}
 
@@ -555,9 +521,14 @@ public abstract class AbstractNode implements Node
 
 	@Override
 	public final boolean isDataType() {
-		//		boolean isAttributeNode1 = nodeRole.isAttributeNode();		// FIXME OperationNode
+		boolean isDataTypeNode1 = nodeRole.isDataType();		// FIXME OperationNode
 		boolean isDataTypeNode2 = (classDatumAnalysis.getClassDatum().getType() instanceof DataType) && !isNull();
-		//		assert isAttributeNode1 == isAttributeNode2;
+		//FIXME		assert isDataTypeNode1 == isDataTypeNode2;
+		/*		if (isDataTypeNode1 != isDataTypeNode2) {
+			System.err.println("Inconsistent isDataType for " + this);
+			isDataTypeNode1 = nodeRole.isDataType();
+			isDataTypeNode2 = (classDatumAnalysis.getClassDatum().getType() instanceof DataType) && !isNull();
+		} */
 		return isDataTypeNode2;
 	}
 
@@ -567,19 +538,9 @@ public abstract class AbstractNode implements Node
 	}
 
 	@Override
-	public boolean isGuard() {
-		return nodeRole.isGuard();
-	}
-
-	@Override
 	public boolean isHead() {
 		return nodeRole.isHead();
 	}
-
-	//	@Override
-	//	public boolean isInput() {
-	//		return nodeRole.isInput();
-	//	}
 
 	@Override
 	public boolean isInternal() {
@@ -592,14 +553,8 @@ public abstract class AbstractNode implements Node
 	}
 
 	@Override
-	public boolean isKnown() {
-		return nodeRole.isConstant() || nodeRole.isLoaded();
-	}
-
-	@Override
 	public boolean isLoaded() {
 		return nodeRole.isLoaded();
-		//		return classDatumAnalysis.getDomainUsage().isCheckable() && !isNull();
 	}
 
 	@Override
@@ -621,11 +576,6 @@ public abstract class AbstractNode implements Node
 	public boolean isPattern() {
 		return nodeRole.isPattern();
 	}
-
-	//	@Override
-	//	public boolean isOutput() {
-	//		return nodeRole.isOutput();
-	//	}
 
 	@Override
 	public boolean isPredicated() {
@@ -655,13 +605,6 @@ public abstract class AbstractNode implements Node
 	@Override
 	public boolean isTrue() {
 		return nodeRole.isTrue();
-	}
-
-	@Override
-	public void mergeRole(@NonNull NodeRole nodeRole) {
-		if (this.nodeRole != nodeRole) {
-			this.nodeRole = this.nodeRole.merge(nodeRole);
-		}
 	}
 
 	@Override

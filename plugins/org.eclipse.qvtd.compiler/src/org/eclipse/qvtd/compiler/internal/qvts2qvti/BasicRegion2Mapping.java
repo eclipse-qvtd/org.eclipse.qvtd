@@ -883,7 +883,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			}
 		}
 		guardNodes.addAll(headNodes);
-		for (@NonNull Node guardNode : region.getGuardNodes()) {
+		for (@NonNull Node guardNode : region.getOldNodes()) {
 			if (!guardNodes.contains(guardNode)) {
 				NodeConnection connection = guardNode.getIncomingUsedConnection();
 				if (connection != null) {				// null for LOADED

@@ -165,16 +165,6 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 		}
 	}
 
-	public static final class IsGuardNodePredicate implements Predicate<@NonNull Node>
-	{
-		public static final @NonNull IsGuardNodePredicate INSTANCE = new IsGuardNodePredicate();
-
-		@Override
-		public boolean apply(@NonNull Node node) {
-			return node.isGuard();
-		}
-	}
-
 	public static final class IsNavigableNodePredicate implements Predicate<@NonNull Node>
 	{
 		public static final @NonNull IsNavigableNodePredicate INSTANCE = new IsNavigableNodePredicate();
@@ -1648,16 +1638,6 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 	}
 
 	@Override
-	public final @NonNull Iterable<@NonNull Node> getGuardNodes() {
-		return Iterables.filter(nodes, IsGuardNodePredicate.INSTANCE);
-	}
-
-	//	@Override
-	//	public @NonNull List<@NonNull NodeConnection> getHeadConnections() {
-	//		return Scheduler.EMPTY_NODE_CONNECTION_LIST;
-	//	}
-
-	@Override
 	public @NonNull Iterable<@NonNull DatumConnection> getIncomingConnections() {		// FIXME cache
 		List<@NonNull DatumConnection> connections = new ArrayList<@NonNull DatumConnection>();
 		for (@NonNull Node headNode : getHeadNodes()) {
@@ -1773,51 +1753,6 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 	public @NonNull MappingRegion getMappingRegion(@NonNull AbstractAction action) {
 		return multiRegion.getMappingRegion(action);
 	}
-
-	/*	@Override
-	public final @NonNull Iterable<@NonNull Node> getMatchableNodes() {
-		Set<@NonNull Node> matchableNodes1 = Sets.newHashSet(getMatchableNodes1());
-		Set<@NonNull Node> matchableNodes2 = Sets.newHashSet(getMatchableNodes2());
-		if (!matchableNodes1.equals(matchableNodes2)) {
-			StringBuilder s = new StringBuilder();
-			Set<@NonNull Node> extraNodesSet = Sets.newHashSet(matchableNodes2);
-			CompilerUtil.removeAll(extraNodesSet, matchableNodes1);
-			for (@NonNull Node node : extraNodesSet) {
-				s.append("\n  extra: ");
-				s.append(node);
-			}
-			Set<@NonNull Node> missingEdgesSet = Sets.newHashSet(matchableNodes1);
-			missingEdgesSet.removeAll(matchableNodes2);
-			for (@NonNull Node node : missingEdgesSet) {
-				s.append("\n  missing: ");
-				s.append(node);
-			}
-			//			assert false : "Bad getMatchableNodes for " + this + s.toString();
-			System.out.println("Bad getMatchableNodes for " + this + s.toString());
-		}
-		return matchableNodes2;
-	}
-
-	private @NonNull Iterable<@NonNull Node> getMatchableNodes1() {
-		return Iterables.filter(nodes, IsMatchableNodePredicate.INSTANCE);
-	}
-	private @NonNull Iterable<@NonNull Node> getMatchableNodes2() {
-		List<@NonNull Node> matchableNodes = new ArrayList<>();
-		for (@NonNull Node node : getNodes()) {
-			if (!node.isRealized()) {
-				if (node.isTrue()) {
-					matchableNodes.add(node);
-				}
-				else if (node.isOperation()) {
-					matchableNodes.add(node);
-				}
-				else if (node.isPattern() && node.isClass()) {
-					matchableNodes.add(node);
-				}
-			}
-		}
-		return matchableNodes;
-	} */
 
 	@Override
 	public @NonNull MultiRegion getMultiRegion() {

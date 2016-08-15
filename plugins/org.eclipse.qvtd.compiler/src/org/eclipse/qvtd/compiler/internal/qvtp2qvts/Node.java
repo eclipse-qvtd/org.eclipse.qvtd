@@ -116,19 +116,9 @@ public interface Node extends ConnectionEnd, GraphStringBuilder.GraphNode, Namea
 	boolean isExpression();
 
 	/**
-	 * Return true if this node is a guard variable or composing head.
-	 */
-	boolean isGuard();
-
-	/**
 	 * Return true if this node is part of a head group from which many other nodes are navigable.
 	 */
 	boolean isHead();
-
-	/**
-	 * Return true if this node is an input port of a nested region.
-	 */
-	//	boolean isInput();
 
 	/**
 	 * Return true if this node's dependencies can be resolved within the containing region.
@@ -142,12 +132,6 @@ public interface Node extends ConnectionEnd, GraphStringBuilder.GraphNode, Namea
 	 * Return true if this node is a LoopExp iterator.
 	 */
 	boolean isIterator();
-
-	/**
-	 * Return true if this node has a known value, because it is inherently constant, or
-	 * is available once sufficient input models have been loaded.
-	 */
-	boolean isKnown();
 
 	/**
 	 * Return true if this node is part of the checkable input domain and so may be loaded at will to satisfy
@@ -168,11 +152,6 @@ public interface Node extends ConnectionEnd, GraphStringBuilder.GraphNode, Namea
 	boolean isNull();
 
 	boolean isOperation();
-
-	/**
-	 * Return true if this node is an output port of a nested region.
-	 */
-	//	boolean isOutput();
 
 	/**
 	 * Return true if this node is a pattern variable (class/datatype/null/true).
@@ -215,7 +194,6 @@ public interface Node extends ConnectionEnd, GraphStringBuilder.GraphNode, Namea
 	 */
 	boolean isTrue();
 
-	void mergeRole(@NonNull NodeRole nodeRole);
 	boolean refineClassDatumAnalysis(@NonNull ClassDatumAnalysis newClassDatumAnalysis);
 	void removeIncomingConnection(@NonNull NodeConnection connection);
 	void removeIncomingEdge(@NonNull Edge edge);

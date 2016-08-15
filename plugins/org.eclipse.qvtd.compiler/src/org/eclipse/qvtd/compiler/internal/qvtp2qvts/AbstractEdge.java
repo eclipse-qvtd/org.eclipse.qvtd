@@ -218,11 +218,6 @@ public abstract class AbstractEdge implements Edge
 	}
 
 	@Override
-	public boolean isKnown() {
-		return sourceNode.isKnown();
-	}
-
-	@Override
 	public boolean isLoaded() {
 		return edgeRole.isLoaded();
 	}
