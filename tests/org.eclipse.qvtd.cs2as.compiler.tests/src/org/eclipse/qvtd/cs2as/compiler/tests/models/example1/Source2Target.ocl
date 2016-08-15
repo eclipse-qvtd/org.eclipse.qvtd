@@ -7,26 +7,26 @@ package _source
 context SRoot
 def : ast() : _target::TRoot =
 	_target::TRoot {
-		ownedA = ownedX.ast() 
+		ownedA = ownedX.ast()->asOrderedSet() 
 	}
 context X
 def : ast() : _target::A =
 	if isA1()
 	then _target::A1 {
 		name = name, 
-	ownsB = ownsY.oclAsType(Y1).ast() 
+	ownsB = ownsY.oclAsType(Y1).ast()->asOrderedSet() 
 	}
 	else
 		if isA2()
 		then _target::A2 {
 			name = name, 
-		ownsC = ownsY.oclAsType(Y2).ast() 
+		ownsC = ownsY.oclAsType(Y2).ast()->asOrderedSet() 
 		}
 		else
 			if isA3()
 			then _target::A3 {
 				name = name, 
-			ownsC = ownsY.oclAsType(Y2).ast() 
+			ownsC = ownsY.oclAsType(Y2).ast()->asOrderedSet() 
 			}
 			else
 				invalid

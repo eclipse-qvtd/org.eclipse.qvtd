@@ -9,8 +9,8 @@ context X2
 def : ast() : tderived::A2 =
  	tderived::A2 {
 		name = name,		
-		ownsB = ownsY.ast(),
-		ownsD = ownsW.ast()
+		ownsB = ownsY.ast()->asOrderedSet(),
+		ownsD = ownsW.ast()->asOrderedSet()
 		
 	}
 

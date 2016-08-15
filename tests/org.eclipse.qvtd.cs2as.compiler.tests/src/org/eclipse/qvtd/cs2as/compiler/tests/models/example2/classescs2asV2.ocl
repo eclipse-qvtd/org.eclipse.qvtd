@@ -8,21 +8,21 @@ package cs
 context RootCS
 def : ast() : as::Root =
 	as::Root {
-		ownedPackages = ownedPackages.ast() 
+		ownedPackages = ownedPackages.ast()->asOrderedSet() 
 	}
 context PackageCS
 def : ast() : as::Package =
 	as::Package {
 		name = name, 
-	ownedClasses = ownedClasses.ast(), 
-	ownedPackages = ownedPackages.ast() 
+	ownedClasses = ownedClasses.ast()->asOrderedSet(), 
+	ownedPackages = ownedPackages.ast()->asOrderedSet() 
 	}
 context ClassCS
 def : ast() : as::Class =
 	as::Class {
 		name = name, 
-	ownedOperations = operations.ast(), 
-	ownedProperties = properties.ast(), 
+	ownedOperations = operations.ast()->asOrderedSet(), 
+	ownedProperties = properties.ast()->asOrderedSet(), 
 	superClass = if _extends = null then null else ast().lookupClass(_extends) endif 
 	}
 context PropertyCS
@@ -38,15 +38,15 @@ def : ast() : as::Operation =
 	type = ast().lookupClass(resultRef), 
 	ownedParameters = params->collect(x | classes::Parameter{
 					name = x
-				}), 
-	ownedExpressions = bodyExps.ast() 
+				})->asOrderedSet(), 
+	ownedExpressions = bodyExps.ast()->asOrderedSet() 
 	}
 context NameExpCS
 def : ast() : as::CallExp =
 	if isOpCallExp()
 	then as::OperationCallExp {
 		ownedCallExp = ownedNameExp?.ast(),
-		ownedArguments = roundedBrackets.args.ast(), 
+		ownedArguments = roundedBrackets.args.ast()->asOrderedSet(), 
 	referredOperation = if oclContainer().oclIsKindOf(NameExpCS) then ast().lookupOperationFrom(ast().owningSource.type, name, ast().oclAsType(as::OperationCallExp).ownedArguments) else ast().lookupOperation(name, ast().oclAsType(as::OperationCallExp).ownedArguments) endif, 
 	type = ast().oclAsType(as::OperationCallExp).referredOperation?.type
 	}

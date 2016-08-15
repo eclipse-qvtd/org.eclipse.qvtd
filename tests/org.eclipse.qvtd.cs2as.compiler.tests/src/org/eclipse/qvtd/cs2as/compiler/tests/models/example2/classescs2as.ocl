@@ -7,14 +7,14 @@ package cs
 context RootCS
 def : ast() : as::Root =
 	as::Root {
-		ownedPackages = ownedPackages.ast() 
+		ownedPackages = ownedPackages.ast()->asOrderedSet() 
 	}
 context PackageCS
 def : ast() : as::Package =
 	as::Package {
 		name = name, 
-	ownedClasses = ownedClasses.ast(),
-	ownedPackages = ownedPackages.ast()  
+	ownedClasses = ownedClasses.ast()->asOrderedSet(),
+	ownedPackages = ownedPackages.ast()->asOrderedSet()  
 	}
 context ClassCS
 def : ast() : classes::Class =

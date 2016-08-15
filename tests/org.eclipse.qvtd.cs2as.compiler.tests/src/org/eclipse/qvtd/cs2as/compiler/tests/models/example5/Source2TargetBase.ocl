@@ -6,14 +6,14 @@ package sbase
 context SRoot
 def : ast() : tbase::TRoot =
 	tbase::TRoot {
-		ownedA = ownedX.ast()
+		ownedA = ownedX.ast()->asOrderedSet()
 	}
 
 context X
 def : ast() : tbase::A =
  	tbase::A {
 		name = name,
-		ownsB = ownsY.ast()
+		ownsB = ownsY.ast()->asOrderedSet()
 	}
 
 
