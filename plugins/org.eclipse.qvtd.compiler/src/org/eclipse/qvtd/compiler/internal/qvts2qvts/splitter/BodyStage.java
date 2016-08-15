@@ -56,7 +56,7 @@ class BodyStage extends AbstractStage
 		//		this.stages = Lists.newArrayList(stages);
 		//		this.visibleIteratedNodes = computedVisibleIteratedNodes(stages);
 		this.visibleIteratorNodes = computedVisibleIteratorNodes(stages);
-		this.realizedNodes = computeRealizedNodes();
+		this.realizedNodes = computeNewNodes();
 		//
 		//	Determine the nodes needed to realize the realized nodes.
 		//
@@ -142,6 +142,13 @@ class BodyStage extends AbstractStage
 		return nodesList;
 	}
 
+	protected @NonNull Iterable<@NonNull Node> computeNewNodes() {
+		Region region = splitter.getRegion();
+		List<@NonNull Node> newNode = Lists.newArrayList(region.getNewNodes());
+		Collections.sort(newNode, NameUtil.NAMEABLE_COMPARATOR);
+		return newNode;
+	}
+
 	protected @NonNull Iterable<@NonNull Node> computeReachableNodes(@NonNull Iterable<@NonNull Node> requiredNodes) {
 		Set<@NonNull Node> reachableNodes = SplitterUtil.computeNavigableNodes(allHeadNodes);
 		//		assert reachableNodes.containsAll(requiredNodes);
@@ -151,13 +158,6 @@ class BodyStage extends AbstractStage
 		List<@NonNull Node> reachableNodesList = Lists.newArrayList(reachableNodes);
 		Collections.sort(reachableNodesList, NameUtil.NAMEABLE_COMPARATOR);
 		return reachableNodesList;
-	}
-
-	protected @NonNull Iterable<@NonNull Node> computeRealizedNodes() {
-		Region region = splitter.getRegion();
-		List<@NonNull Node> nodes = Lists.newArrayList(region.getRealizedOrSpeculationNodes());
-		Collections.sort(nodes, NameUtil.NAMEABLE_COMPARATOR);
-		return nodes;
 	}
 
 	/**

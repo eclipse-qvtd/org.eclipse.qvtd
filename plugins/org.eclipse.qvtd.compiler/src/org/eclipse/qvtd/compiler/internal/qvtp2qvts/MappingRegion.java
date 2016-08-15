@@ -16,7 +16,7 @@ import org.eclipse.qvtd.pivot.schedule.MappingAction;
 
 public interface MappingRegion extends Region
 {
-	@NonNull Iterable<@NonNull Node> getComputedNodes();
+	//	@NonNull Iterable<@NonNull Node> getComputedNodes();
 	@NonNull Iterable<@NonNull MappingAction> getMappingActions();
 	void writeDebugGraphs(@Nullable String context);
 }

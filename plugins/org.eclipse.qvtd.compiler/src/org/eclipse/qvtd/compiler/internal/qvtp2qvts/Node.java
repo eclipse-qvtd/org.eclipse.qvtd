@@ -158,15 +158,6 @@ public interface Node extends ConnectionEnd, GraphStringBuilder.GraphNode, Namea
 	boolean isLoaded();
 
 	/**
-	 * Return true if this node is part of the to-one navigation path that is matched as part of a mapping's predicate.
-	 *
-	 * Regions with conflicting isMatchable() nodes cannot be merged.
-	 *
-	 * ?? isConstant() || isLoaded() || isPredicated()
-	 */
-	boolean isMatchable();
-
-	/**
 	 * Return true if this node is part of the to-one navigation path that is navigated to determine the navigation heads.
 	 */
 	boolean isNavigable();

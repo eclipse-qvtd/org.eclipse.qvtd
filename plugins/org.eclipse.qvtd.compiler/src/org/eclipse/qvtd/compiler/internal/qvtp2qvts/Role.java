@@ -47,6 +47,8 @@ public interface Role extends Comparable<Role>
 		SPECULATION,	// Awaiting other mappings to speculate
 		SPECULATED,		// Known other mappings are speculating
 		OTHER			// Not known, nothing to do with mapping execution.
+		// NEW = REALIZED || SPECULATION
+		// OLD = CONSTANT || LOADED || PREDICATED || SPECULATED
 	};
 
 	/**

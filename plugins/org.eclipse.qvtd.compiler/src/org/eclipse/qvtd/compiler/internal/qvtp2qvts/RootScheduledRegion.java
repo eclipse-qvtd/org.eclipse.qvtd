@@ -321,7 +321,7 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 		//	class is part of the input model and is not an internal convenience.
 		//
 		for (@NonNull Region region : getRegions()) {
-			for (@NonNull Node predicatedNode : region.getMatchableNodes()) {
+			for (@NonNull Node predicatedNode : region.getOldNodes()) {
 				if (!predicatedNode.isHead()) {
 					if (!predicatedNode.isLoaded() && !predicatedNode.isConstant() && !predicatedNode.isInternal()) {
 						if (!isOnlyCastOrRecursed(predicatedNode)) {			// FIXME Eliminate cast nodes

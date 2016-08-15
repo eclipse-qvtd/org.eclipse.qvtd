@@ -521,30 +521,30 @@ public class BasicMappingRegion extends AbstractMappingRegion
 	}
 
 	public void registerConsumptionsAndProductions() {
-		for (@NonNull Node assignedNode : getComputedNodes()) {
-			ClassDatumAnalysis classDatumAnalysis = assignedNode.getClassDatumAnalysis();
-			classDatumAnalysis.addProduction(this, assignedNode);
+		for (@NonNull Node newNode : getNewNodes()) {
+			ClassDatumAnalysis classDatumAnalysis = newNode.getClassDatumAnalysis();
+			classDatumAnalysis.addProduction(this, newNode);
 			ClassDatum classDatum = classDatumAnalysis.getClassDatum();
 			for (@SuppressWarnings("null")@NonNull AbstractAction consumingAction : classDatum.getRequiredBy()) {
 				MappingRegion consumingRegion = multiRegion.getMappingRegion(consumingAction);
 				assert consumingRegion != null;
-				for (@NonNull Node consumingNode : consumingRegion.getMatchableNodes()) {
+				for (@NonNull Node consumingNode : consumingRegion.getOldNodes()) {
 					if (consumingNode.getCompleteClass() == classDatumAnalysis.getCompleteClass()) {		// FIXME inheritance
 						classDatumAnalysis.addConsumption(consumingRegion, consumingNode);
 					}
 				}
 			}
 		}
-		for (@NonNull Node predicatedNode : getMatchableNodes()) {
+		for (@NonNull Node predicatedNode : getOldNodes()) {
 			ClassDatumAnalysis classDatumAnalysis = predicatedNode.getClassDatumAnalysis();
 			classDatumAnalysis.addConsumption(this, predicatedNode);
 			ClassDatum classDatum = classDatumAnalysis.getClassDatum();
 			for (@SuppressWarnings("null")@NonNull AbstractAction introducingAction : classDatum.getProducedBy()) {
 				MappingRegion producingRegion = multiRegion.getMappingRegion(introducingAction);
 				assert producingRegion != null;
-				for (@NonNull Node assignedNode : producingRegion.getComputedNodes()) {
-					if (assignedNode.getCompleteClass() == classDatumAnalysis.getCompleteClass()) {		// FIXME inheritance
-						classDatumAnalysis.addProduction(producingRegion, assignedNode);
+				for (@NonNull Node newNode : producingRegion.getNewNodes()) {
+					if (newNode.getCompleteClass() == classDatumAnalysis.getCompleteClass()) {		// FIXME inheritance
+						classDatumAnalysis.addProduction(producingRegion, newNode);
 					}
 				}
 			}

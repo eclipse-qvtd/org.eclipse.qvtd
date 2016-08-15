@@ -145,7 +145,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 		}
 	}
 
-	public static final class IsComputedPredicate implements Predicate<@NonNull Node>
+	/*	public static final class IsComputedPredicate implements Predicate<@NonNull Node>
 	{
 		public static final @NonNull IsComputedPredicate INSTANCE = new IsComputedPredicate();
 
@@ -153,7 +153,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 		public boolean apply(@NonNull Node node) {
 			return node.isRealized();
 		}
-	}
+	} */
 
 	public static final class IsExpressionEdgePredicate implements Predicate<@NonNull Edge>
 	{
@@ -175,16 +175,6 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 		}
 	}
 
-	public static final class IsMatchableNodePredicate implements Predicate<@NonNull Node>
-	{
-		public static final @NonNull IsMatchableNodePredicate INSTANCE = new IsMatchableNodePredicate();
-
-		@Override
-		public boolean apply(@NonNull Node node) {
-			return node.isMatchable();
-		}
-	}
-
 	public static final class IsNavigableNodePredicate implements Predicate<@NonNull Node>
 	{
 		public static final @NonNull IsNavigableNodePredicate INSTANCE = new IsNavigableNodePredicate();
@@ -202,6 +192,26 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 		@Override
 		public boolean apply(@NonNull Edge edge) {
 			return edge.isNavigation();
+		}
+	}
+
+	public static final class IsNewNodePredicate implements Predicate<@NonNull Node>
+	{
+		public static final @NonNull IsNewNodePredicate INSTANCE = new IsNewNodePredicate();
+
+		@Override
+		public boolean apply(@NonNull Node node) {
+			return node.isRealized() || node.isSpeculation();
+		}
+	}
+
+	public static final class IsOldNodePredicate implements Predicate<@NonNull Node>
+	{
+		public static final @NonNull IsOldNodePredicate INSTANCE = new IsOldNodePredicate();
+
+		@Override
+		public boolean apply(@NonNull Node node) {
+			return node.isConstant() || node.isLoaded() || node.isPredicated() || node.isSpeculated();
 		}
 	}
 
@@ -252,16 +262,6 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 		@Override
 		public boolean apply(@NonNull Edge edge) {
 			return edge.isRealized() && edge.isNavigation();
-		}
-	}
-
-	public static final class IsRealizedOrSpeculationNodePredicate implements Predicate<@NonNull Node>
-	{
-		public static final @NonNull IsRealizedOrSpeculationNodePredicate INSTANCE = new IsRealizedOrSpeculationNodePredicate();
-
-		@Override
-		public boolean apply(@NonNull Node node) {
-			return node.isRealized() || node.isSpeculation();
 		}
 	}
 
@@ -966,16 +966,16 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 		SymbolNameBuilder s = null;
 		Set<@NonNull Node> bestToOneSubRegion = null;
 		Node bestNamingNode = null;
-		for (@NonNull Node node : getRealizedOrSpeculationNodes()) {
-			Set<@NonNull Node> toOneSubRegion = computeToOneSubRegion(new HashSet<@NonNull Node>(), node);
+		for (@NonNull Node newNode : getNewNodes()) {
+			Set<@NonNull Node> toOneSubRegion = computeToOneSubRegion(new HashSet<@NonNull Node>(), newNode);
 			if ((bestToOneSubRegion == null) || (toOneSubRegion.size() > bestToOneSubRegion.size())) {
 				bestToOneSubRegion = toOneSubRegion;
-				bestNamingNode = node;
+				bestNamingNode = newNode;
 			}
 			else if ((bestNamingNode != null) && (toOneSubRegion.size() == bestToOneSubRegion.size())) {
-				if (ClassUtil.safeCompareTo(bestNamingNode.getCompleteClass().getName(), node.getCompleteClass().getName()) > 0) {
+				if (ClassUtil.safeCompareTo(bestNamingNode.getCompleteClass().getName(), newNode.getCompleteClass().getName()) > 0) {
 					bestToOneSubRegion = toOneSubRegion;
-					bestNamingNode = node;
+					bestNamingNode = newNode;
 				}
 			}
 		}
@@ -1604,9 +1604,9 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 		return Iterables.filter(nodes, IsComposedNodePredicate.INSTANCE);
 	}
 
-	public final @NonNull Iterable<@NonNull Node> getComputedNodes() {
+	/*	public final @NonNull Iterable<@NonNull Node> getComputedNodes() {
 		return Iterables.filter(nodes, IsComputedPredicate.INSTANCE);
-	}
+	} */
 
 	/*	public final @NonNull Iterable<? extends Edge> getConsumedOrderingEdges() {
 		@SuppressWarnings("null")
@@ -1774,10 +1774,50 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 		return multiRegion.getMappingRegion(action);
 	}
 
-	@Override
+	/*	@Override
 	public final @NonNull Iterable<@NonNull Node> getMatchableNodes() {
+		Set<@NonNull Node> matchableNodes1 = Sets.newHashSet(getMatchableNodes1());
+		Set<@NonNull Node> matchableNodes2 = Sets.newHashSet(getMatchableNodes2());
+		if (!matchableNodes1.equals(matchableNodes2)) {
+			StringBuilder s = new StringBuilder();
+			Set<@NonNull Node> extraNodesSet = Sets.newHashSet(matchableNodes2);
+			CompilerUtil.removeAll(extraNodesSet, matchableNodes1);
+			for (@NonNull Node node : extraNodesSet) {
+				s.append("\n  extra: ");
+				s.append(node);
+			}
+			Set<@NonNull Node> missingEdgesSet = Sets.newHashSet(matchableNodes1);
+			missingEdgesSet.removeAll(matchableNodes2);
+			for (@NonNull Node node : missingEdgesSet) {
+				s.append("\n  missing: ");
+				s.append(node);
+			}
+			//			assert false : "Bad getMatchableNodes for " + this + s.toString();
+			System.out.println("Bad getMatchableNodes for " + this + s.toString());
+		}
+		return matchableNodes2;
+	}
+
+	private @NonNull Iterable<@NonNull Node> getMatchableNodes1() {
 		return Iterables.filter(nodes, IsMatchableNodePredicate.INSTANCE);
 	}
+	private @NonNull Iterable<@NonNull Node> getMatchableNodes2() {
+		List<@NonNull Node> matchableNodes = new ArrayList<>();
+		for (@NonNull Node node : getNodes()) {
+			if (!node.isRealized()) {
+				if (node.isTrue()) {
+					matchableNodes.add(node);
+				}
+				else if (node.isOperation()) {
+					matchableNodes.add(node);
+				}
+				else if (node.isPattern() && node.isClass()) {
+					matchableNodes.add(node);
+				}
+			}
+		}
+		return matchableNodes;
+	} */
 
 	@Override
 	public @NonNull MultiRegion getMultiRegion() {
@@ -1818,6 +1858,11 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 	//	}
 
 	@Override
+	public final @NonNull Iterable<@NonNull Node> getNewNodes() {
+		return Iterables.filter(nodes, IsNewNodePredicate.INSTANCE);
+	}
+
+	@Override
 	public @NonNull Collection<@NonNull Node> getNodes() {
 		return nodes;
 	}
@@ -1825,6 +1870,11 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 	@Override
 	public @NonNull Iterable<@NonNull DatumConnection> getNextConnections() {
 		return getOutgoingConnections();
+	}
+
+	@Override
+	public final @NonNull Iterable<@NonNull Node> getOldNodes() {
+		return Iterables.filter(nodes, IsOldNodePredicate.INSTANCE);
 	}
 
 	@Override
@@ -1929,11 +1979,6 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 		@SuppressWarnings("unchecked")
 		@NonNull Iterable<@NonNull NavigationEdge> filter = (Iterable<@NonNull NavigationEdge>)(Object)Iterables.filter(edges, IsRealizedNavigationEdgePredicate.INSTANCE);
 		return filter;
-	}
-
-	@Override
-	public final @NonNull Iterable<@NonNull Node> getRealizedOrSpeculationNodes() {
-		return Iterables.filter(nodes, IsRealizedOrSpeculationNodePredicate.INSTANCE);
 	}
 
 	@Override

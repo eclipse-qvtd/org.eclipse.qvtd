@@ -187,7 +187,7 @@ public class QVTp2QVTs extends SchedulerConstants
 	}
 
 	/**
-	 * Return the nodes with region at which a suitably matching head og annother region might be merged.
+	 * Return the nodes with region at which a suitably matching head of another region might be merged.
 	 * The nodes must be bi-directionally one to one to respect 1:N trace node relationships.
 	 */
 	protected @NonNull Iterable<@NonNull Node> getMergeableNodes(@NonNull MappingRegion region) {
@@ -198,13 +198,37 @@ public class QVTp2QVTs extends SchedulerConstants
 		return mergeableNodes;
 	}
 	private void getMergeableNodes(@NonNull Set<@NonNull Node> mergeableNodes, @NonNull Node node) {
-		if (node.isMatchable() && node.isClass() && mergeableNodes.add(node)) {
+		if (isMergeable(node.getNodeRole()) && mergeableNodes.add(node)) {
 			for (@NonNull NavigationEdge edge : node.getNavigationEdges()) {
 				if (edge.getOppositeEdge() != null) {
 					getMergeableNodes(mergeableNodes, edge.getTarget());
 				}
 			}
 		}
+	}
+	private boolean isMergeable(@NonNull NodeRole nodeRole) {
+		if (nodeRole.isRealized() || nodeRole.isSpeculation()) {
+			return false;
+		}
+		if (!nodeRole.isClass()) {
+			return false;
+		}
+		if (nodeRole.isLet()) {
+			return true;
+		}
+		if (nodeRole.isNull()) {
+			return true;
+		}
+		if (nodeRole.isOperation()) {
+			return true;
+		}
+		if (nodeRole.isTrue()) {
+			return true;
+		}
+		if (nodeRole.isPattern()) {
+			return nodeRole.isGuard();
+		}
+		return false;
 	}
 
 	/**
@@ -283,9 +307,9 @@ public class QVTp2QVTs extends SchedulerConstants
 						}
 					}
 				}
-				for (@NonNull Node assignedNode : secondaryRegion.getComputedNodes()) {
-					if (assignedNode.isClass()) {							// Ignore nulls, attributes
-						ClassDatumAnalysis consumingClassDatumAnalysis = assignedNode.getClassDatumAnalysis();
+				for (@NonNull Node newNode : secondaryRegion.getNewNodes()) {
+					if (newNode.isClass()) {							// Ignore nulls, attributes
+						ClassDatumAnalysis consumingClassDatumAnalysis = newNode.getClassDatumAnalysis();
 						if (toOneReachableClasses.add(consumingClassDatumAnalysis)) {
 							for (@NonNull MappingRegion consumingRegion : consumingClassDatumAnalysis.getConsumingRegions()) {
 								if (allConsumingRegions.add(consumingRegion)) {

@@ -112,7 +112,7 @@ public abstract class AbstractNodeRole extends AbstractRole implements NodeRole
 	}
 
 	@Override
-	public boolean isMatchable() {
+	public boolean isLet() {
 		return false;
 	}
 

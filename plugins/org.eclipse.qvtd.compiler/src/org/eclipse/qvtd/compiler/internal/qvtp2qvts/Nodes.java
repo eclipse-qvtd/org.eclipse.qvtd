@@ -358,7 +358,7 @@ public class Nodes
 		}
 
 		@Override
-		public boolean isMatchable() {
+		public boolean isLet() {
 			return true;
 		}
 
@@ -384,11 +384,6 @@ public class Nodes
 		@Override
 		public @Nullable String getStyle() {
 			return "rounded";
-		}
-
-		@Override
-		public boolean isMatchable() {
-			return true;
 		}
 
 		@Override
@@ -481,11 +476,6 @@ public class Nodes
 		@Override
 		public boolean isExpression() {
 			return true;
-		}
-
-		@Override
-		public boolean isMatchable() {
-			return phase != Role.Phase.REALIZED;
 		}
 
 		@Override
@@ -695,11 +685,6 @@ public class Nodes
 		}
 
 		@Override
-		public boolean isMatchable() {
-			return isGuard();
-		}
-
-		@Override
 		public boolean isNavigable() {
 			return navigable == NavigableEnum.NAVIGABLE;
 		}
@@ -788,11 +773,6 @@ public class Nodes
 
 		@Override
 		public boolean isHead() {
-			return true;
-		}
-
-		@Override
-		public boolean isMatchable() {
 			return true;
 		}
 

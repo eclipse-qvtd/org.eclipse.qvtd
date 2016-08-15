@@ -1173,10 +1173,10 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 	}
 
 	private void createRealizedVariables() {
-		for (@NonNull Node node : region.getRealizedOrSpeculationNodes()) {
-			if (node.isPattern() && node.isClass()) {
+		for (@NonNull Node newNode : region.getNewNodes()) {
+			if (newNode.isPattern() && newNode.isClass()) {
 				OCLExpression constructor = null;
-				for (Edge edge : node.getIncomingEdges()) {
+				for (Edge edge : newNode.getIncomingEdges()) {
 					if (edge.isExpression()) {
 						Node sourceNode = edge.getSource();
 						if (sourceNode.isOperation()) {
@@ -1184,12 +1184,12 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 						}
 					}
 				}
-				ClassDatumAnalysis classDatumAnalysis = node.getClassDatumAnalysis();
+				ClassDatumAnalysis classDatumAnalysis = newNode.getClassDatumAnalysis();
 				BottomPattern bottomPattern = getArea(classDatumAnalysis).getBottomPattern();
-				RealizedVariable realizedVariable = QVTimperativeUtil.createRealizedVariable(getSafeName(node), classDatumAnalysis.getCompleteClass().getPrimaryClass());
+				RealizedVariable realizedVariable = QVTimperativeUtil.createRealizedVariable(getSafeName(newNode), classDatumAnalysis.getCompleteClass().getPrimaryClass());
 				realizedVariable.setOwnedInit(constructor);
 				bottomPattern.getRealizedVariable().add(realizedVariable);
-				Variable oldVariable = node2variable.put(node, realizedVariable);
+				Variable oldVariable = node2variable.put(newNode, realizedVariable);
 				assert oldVariable == null;
 			}
 		}

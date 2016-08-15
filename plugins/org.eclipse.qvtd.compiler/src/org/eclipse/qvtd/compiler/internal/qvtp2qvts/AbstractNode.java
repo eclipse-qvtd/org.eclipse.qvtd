@@ -603,11 +603,6 @@ public abstract class AbstractNode implements Node
 	}
 
 	@Override
-	public boolean isMatchable() {
-		return nodeRole.isMatchable();
-	}
-
-	@Override
 	public boolean isNavigable() {
 		return nodeRole.isNavigable();
 	}

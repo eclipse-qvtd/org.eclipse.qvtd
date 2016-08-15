@@ -102,11 +102,6 @@ public interface Region extends Visitable, GraphNode, Nameable, Symbolable
 	@Nullable ScheduledRegion getInvokingRegion();
 	@NonNull List<@NonNull DatumConnection> getLoopingConnections();
 
-	/**
-	 * Return the nodes that are matched or evaluated by the region's predicate.
-	 */
-	@NonNull Iterable<@NonNull Node> getMatchableNodes();
-
 	@NonNull MultiRegion getMultiRegion();
 	@Override
 	@NonNull String getName();
@@ -115,6 +110,11 @@ public interface Region extends Visitable, GraphNode, Nameable, Symbolable
 	 */
 	@NonNull Iterable<@NonNull Node> getNavigableNodes();
 	@NonNull Iterable<@NonNull NavigationEdge> getNavigationEdges();
+
+	/**
+	 * Return all nodes created by this region. i.e. Speculation or Realized nodes.
+	 */
+	@NonNull Iterable<@NonNull Node> getNewNodes();
 	/**
 	 * Return all the next connections from this region to another region.
 	 * Where this is a hierarchical region the connections are those from the hierarchical head to its immediate internal regions.
@@ -122,6 +122,11 @@ public interface Region extends Visitable, GraphNode, Nameable, Symbolable
 	@NonNull Iterable<@NonNull DatumConnection> getNextConnections();
 
 	@NonNull Collection<@NonNull Node> getNodes();
+
+	/**
+	 * Return all nodes referenced by this region. i.e. Constant, Loaded, Predicated, Speculated nodes.
+	 */
+	@NonNull Iterable<@NonNull Node> getOldNodes();
 
 	/**
 	 * Return all connections from this (hierarchical) region to another (hierarchical) region.
@@ -134,7 +139,6 @@ public interface Region extends Visitable, GraphNode, Nameable, Symbolable
 	//	@NonNull Iterable<@NonNull Node> getPredicatedOrSpeculatedNodes();
 	@NonNull Iterable<@NonNull Edge> getRealizedEdges();
 	@NonNull Iterable<@NonNull NavigationEdge> getRealizedNavigationEdges();
-	@NonNull Iterable<@NonNull Node> getRealizedOrSpeculationNodes();
 	@NonNull Iterable<@NonNull Edge> getRecursionEdges();
 	@NonNull List<@NonNull NodeConnection> getRootConnections();
 	@NonNull SchedulerConstants getSchedulerConstants();
