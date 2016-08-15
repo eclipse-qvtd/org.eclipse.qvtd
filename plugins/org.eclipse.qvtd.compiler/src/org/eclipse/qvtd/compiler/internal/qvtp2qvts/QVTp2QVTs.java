@@ -206,7 +206,7 @@ public class QVTp2QVTs extends SchedulerConstants
 			}
 		}
 	}
-	private boolean isMergeable(@NonNull NodeRole nodeRole) {
+	private boolean isMergeable(@NonNull NodeRole nodeRole) {	// FIXME this is legacy creep
 		if (nodeRole.isRealized() || nodeRole.isSpeculation()) {
 			return false;
 		}
@@ -223,7 +223,7 @@ public class QVTp2QVTs extends SchedulerConstants
 			return true;
 		}
 		if (nodeRole.isPattern()) {
-			return nodeRole.isGuard();
+			return true;
 		}
 		return false;
 	}

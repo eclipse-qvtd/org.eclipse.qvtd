@@ -46,7 +46,7 @@ public abstract class AbstractNodeRole extends AbstractRole implements NodeRole
 
 	@Override
 	public @NonNull Integer getPenwidth() {
-		return isHead() /*&& !isResult()*/ ? HEAD_WIDTH : isGuard() ? GUARD_WIDTH : LINE_WIDTH;
+		return isHead() /*&& !isResult()*/ ? HEAD_WIDTH : LINE_WIDTH;
 	}
 
 	@Override
@@ -88,11 +88,6 @@ public abstract class AbstractNodeRole extends AbstractRole implements NodeRole
 
 	@Override
 	public boolean isExtraGuardVariable() {
-		return false;
-	}
-
-	@Override
-	public boolean isGuard() {
 		return false;
 	}
 

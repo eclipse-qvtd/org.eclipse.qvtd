@@ -195,7 +195,7 @@ public class BasicMappingRegion extends AbstractMappingRegion
 			for (@NonNull Variable guardVariable : ClassUtil.nullFree(guardPattern.getVariable())) {
 				Node guardNode = getNode(guardVariable);
 				assert guardNode == null;
-				guardNode = Nodes.createGuardNode(this, guardVariable);
+				guardNode = Nodes.createOldNode(this, guardVariable);
 				assert guardNode == getNode(guardVariable);
 			}
 		}

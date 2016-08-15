@@ -32,7 +32,6 @@ public interface Role extends Comparable<Role>
 	public static final @NonNull String SPECULATION_COLOR = "red";
 
 	public static final @NonNull Integer HEAD_WIDTH = 8;
-	public static final @NonNull Integer GUARD_WIDTH = 4;
 	public static final @NonNull Integer LINE_WIDTH = 2;
 
 	/**
