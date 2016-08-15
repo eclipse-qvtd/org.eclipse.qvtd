@@ -57,7 +57,7 @@ public class CyclicScheduledRegion2Mapping extends AbstractScheduledRegion2Mappi
 		 * The recursing type.
 		 */
 		private final @NonNull ClassDatumAnalysis classDatumAnalysis;
-		
+
 		/**
 		 * A distinctive number for distinctive auto-generated per-recursion names.
 		 */
@@ -101,35 +101,35 @@ public class CyclicScheduledRegion2Mapping extends AbstractScheduledRegion2Mappi
 			org.eclipse.ocl.pivot.Class elementType = classDatumAnalysis.getCompleteClass().getPrimaryClass();
 			guardVariable = PivotUtil.createVariable(getSafeName(headNode), elementType, false, null);
 			guardPattern.getVariable().add(guardVariable);
-			
+
 			Iterable<@NonNull NodeConnection> outgoingConnections = headNode.getOutgoingPassedConnections();
 			assert Iterables.size(outgoingConnections) == 1;
 			NodeConnection outgoingConnection = Iterables.get(outgoingConnections, 0);
-//			Class elementType = classDatumAnalysis.getCompleteClass().getPrimaryClass();
-//			Variable variable = PivotUtil.createVariable(getSafeName(headNode), elementType, false, null);
-//			guardPattern.getVariable().add(variable);
-//			Variable oldVariable = classDatumAnalysis2headVariable.put(classDatumAnalysis, variable);
-//			assert oldVariable == null;
+			//			Class elementType = classDatumAnalysis.getCompleteClass().getPrimaryClass();
+			//			Variable variable = PivotUtil.createVariable(getSafeName(headNode), elementType, false, null);
+			//			guardPattern.getVariable().add(variable);
+			//			Variable oldVariable = classDatumAnalysis2headVariable.put(classDatumAnalysis, variable);
+			//			assert oldVariable == null;
 			NodeConnection incomingConnection = headNode.getIncomingPassedConnection();
 			assert incomingConnection != null;
 			connection2variable.put(incomingConnection, guardVariable);
 			//
 			//	Create the local accumulation variable.
 			//
-//				Iterable<@NonNull NodeConnection> internallyPassedConnections = headNode.getOutgoingPassedConnections();
-//				assert Iterables.size(internallyPassedConnections) == 1;
-//				ClassDatumAnalysis incomingClassDatumAnalysis = incomingConnection.getClassDatumAnalysis();
-//				NodeConnection internallyPassedConnection = Iterables.get(internallyPassedConnections, 0);
-//				ClassDatumAnalysis outgoingClassDatumAnalysis = internallyPassedConnection.getClassDatumAnalysis();
-//				if ((outgoingClassDatumAnalysis == incomingClassDatumAnalysis)
-//				 && !incoming2outgoing.values().contains(internallyPassedConnection)) {	// Multiple should not occur, but line them up pair-wise
-//					incoming2outgoing.put(incomingConnection, internallyPassedConnection);
+			//				Iterable<@NonNull NodeConnection> internallyPassedConnections = headNode.getOutgoingPassedConnections();
+			//				assert Iterables.size(internallyPassedConnections) == 1;
+			//				ClassDatumAnalysis incomingClassDatumAnalysis = incomingConnection.getClassDatumAnalysis();
+			//				NodeConnection internallyPassedConnection = Iterables.get(internallyPassedConnections, 0);
+			//				ClassDatumAnalysis outgoingClassDatumAnalysis = internallyPassedConnection.getClassDatumAnalysis();
+			//				if ((outgoingClassDatumAnalysis == incomingClassDatumAnalysis)
+			//				 && !incoming2outgoing.values().contains(internallyPassedConnection)) {	// Multiple should not occur, but line them up pair-wise
+			//					incoming2outgoing.put(incomingConnection, internallyPassedConnection);
 			Type asType = getConnectionSourcesType(incomingConnection);
 			String localName = "«local" + (index > 0 ? Integer.toString(index) : "") + "»";
 			localVariable = helper.createConnectionVariable(localName, asType, null);
 			mapping.getBottomPattern().getVariable().add(localVariable);
 			connection2variable.put(outgoingConnection, localVariable);
-	//
+			//
 			if ((asType instanceof CollectionType) && ((CollectionType)asType).isUnique()) {
 				String newName = "«new" + (index > 0 ? Integer.toString(index) : "") + "»";
 				ConnectionVariable newVariable2 = newVariable = helper.createConnectionVariable(newName, asType, null);
@@ -169,7 +169,7 @@ public class CyclicScheduledRegion2Mapping extends AbstractScheduledRegion2Mappi
 		public void setAccumulatedConnection(@NonNull NodeConnection accumulatedConnection) {
 			this.accumulatedConnection = accumulatedConnection;
 			//
-			//	Select a/the outgoing recursive intermediate connection. 
+			//	Select a/the outgoing recursive intermediate connection.
 			//
 			NodeConnection intermediateConnection = accumulatedConnection;
 			ConnectionVariable accumulatedVariable2 = accumulatedVariable = createConnectionVariable(intermediateConnection);
@@ -177,14 +177,14 @@ public class CyclicScheduledRegion2Mapping extends AbstractScheduledRegion2Mappi
 			connection2variable.put(intermediateConnection, accumulatedVariable2);
 		}
 	}
-	
+
 	/**
 	 * The recursions.
 	 */
 	private final @NonNull Map<@NonNull ClassDatumAnalysis, @NonNull RecursionContext> classDatumAnalysis2recursion = new HashMap<@NonNull ClassDatumAnalysis, @NonNull RecursionContext>();
 
 	/**
-	 * True if all recursions use Set accumulators allowing the unqiueness to be determined by excliusion rather than 
+	 * True if all recursions use Set accumulators allowing the unqiueness to be determined by excliusion rather than
 	 * by re-invocation suppression.
 	 */
 	private boolean allRecursionsAreUnique = false;
@@ -252,7 +252,7 @@ public class CyclicScheduledRegion2Mapping extends AbstractScheduledRegion2Mappi
 	@Override
 	protected @NonNull OCLExpression createSelectByKind(@NonNull Node resultNode) {
 		throw new UnsupportedOperationException();
-/*		Variable resultVariable = classDatumAnalysis2headVariable.get(resultNode.getClassDatumAnalysis());
+		/*		Variable resultVariable = classDatumAnalysis2headVariable.get(resultNode.getClassDatumAnalysis());
 		if (resultVariable == null) {
 			OCLExpression asSource = createNullLiteralExp(); //PivotUtil.createVariableExp(getChildrenVariable());
 			CompleteClass sourceCompleteClass = resultNode.getCompleteClass();
@@ -287,11 +287,11 @@ public class CyclicScheduledRegion2Mapping extends AbstractScheduledRegion2Mappi
 				RecursionContext recursion = classDatumAnalysis2recursion.get(intermediateConnection.getClassDatumAnalysis());
 				if (recursion != null) {
 					Variable callingLocalVariable = recursion.getLocalVariable();
-//					NodeConnection tailConnection = recursion.getAccumulatedConnection();
-//					if (tailConnection != null) {
-						Variable calledTailVariable = calledRegion2Mapping.getConnectionVariable(intermediateConnection);
-						guardVariable2expression.put(calledTailVariable, PivotUtil.createVariableExp(callingLocalVariable));
-//					}
+					//					NodeConnection tailConnection = recursion.getAccumulatedConnection();
+					//					if (tailConnection != null) {
+					Variable calledTailVariable = calledRegion2Mapping.getConnectionVariable(intermediateConnection);
+					guardVariable2expression.put(calledTailVariable, PivotUtil.createVariableExp(callingLocalVariable));
+					//					}
 				}
 			}
 			mappingStatement = createCall(mappingStatement, callableRegion, guardVariable2expression);
@@ -313,8 +313,8 @@ public class CyclicScheduledRegion2Mapping extends AbstractScheduledRegion2Mappi
 					OperationCallExp excludingAllCallExp = PivotUtil.createOperationCallExp(localVariableExp, operation, resultVariableExp);
 					excludingAllCallExp.setType(localVariableExp.getType());
 					excludingAllCallExp.setIsRequired(localVariableExp.isIsRequired());
-					
-					
+
+
 					ConnectionStatement connectionStatement1 = QVTimperativeFactory.eINSTANCE.createConnectionStatement();
 					connectionStatement1.setTargetVariable(newVariable);
 					connectionStatement1.setValue(excludingAllCallExp);

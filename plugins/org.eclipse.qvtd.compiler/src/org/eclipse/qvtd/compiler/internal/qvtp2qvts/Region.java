@@ -86,7 +86,6 @@ public interface Region extends Visitable, GraphNode, Nameable, Symbolable
 	 * Return the Guard nodes of the region (GuardVariable or Composing)
 	 */
 	@NonNull Iterable<@NonNull Node> getGuardNodes();
-	//	@NonNull List<@NonNull NodeConnection> getHeadConnections();
 	@NonNull List<@NonNull Node> getHeadNodes();
 	@NonNull Iterable<@NonNull DatumConnection> getIncomingConnections();
 	@NonNull Iterable<@NonNull NodeConnection> getIncomingPassedConnections();
@@ -136,7 +135,6 @@ public interface Region extends Visitable, GraphNode, Nameable, Symbolable
 	@NonNull Iterable<@NonNull NodeConnection> getOutgoingUsedConnections();
 	@NonNull Iterable<@NonNull Node> getPatternNodes();
 	@NonNull Iterable<@NonNull NavigationEdge> getPredicatedNavigationEdges();
-	//	@NonNull Iterable<@NonNull Node> getPredicatedOrSpeculatedNodes();
 	@NonNull Iterable<@NonNull Edge> getRealizedEdges();
 	@NonNull Iterable<@NonNull NavigationEdge> getRealizedNavigationEdges();
 	@NonNull Iterable<@NonNull Edge> getRecursionEdges();

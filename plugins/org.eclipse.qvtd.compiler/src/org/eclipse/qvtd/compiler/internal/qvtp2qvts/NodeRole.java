@@ -60,8 +60,6 @@ public interface NodeRole extends Role
 
 	boolean isIterator();
 
-	boolean isLet();
-
 	boolean isNavigable();
 
 	boolean isNull();

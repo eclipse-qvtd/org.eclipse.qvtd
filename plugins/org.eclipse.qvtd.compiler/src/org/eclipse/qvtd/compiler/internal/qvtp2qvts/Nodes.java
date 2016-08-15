@@ -282,97 +282,6 @@ public class Nodes
 		}
 	}
 
-	private static final class LetVariableNodeRole extends AbstractVariableNodeRole
-	{
-		private static final @NonNull LetVariableNodeRole CONSTANT_NAVIGABLE_DATATYPE_LET = new LetVariableNodeRole(Role.Phase.CONSTANT, NavigableEnum.NAVIGABLE, ClassableEnum.DATATYPE);
-		private static final @NonNull LetVariableNodeRole CONSTANT_NAVIGABLE_CLASS_LET = new LetVariableNodeRole(Role.Phase.CONSTANT, NavigableEnum.NAVIGABLE, ClassableEnum.CLASS);
-		private static final @NonNull LetVariableNodeRole CONSTANT_UNNAVIGABLE_DATATYPE_LET = new LetVariableNodeRole(Role.Phase.CONSTANT, NavigableEnum.UNNAVIGABLE, ClassableEnum.DATATYPE);
-		private static final @NonNull LetVariableNodeRole CONSTANT_UNNAVIGABLE_CLASS_LET = new LetVariableNodeRole(Role.Phase.CONSTANT, NavigableEnum.UNNAVIGABLE, ClassableEnum.CLASS);
-		private static final @NonNull LetVariableNodeRole LOADED_NAVIGABLE_DATATYPE_LET = new LetVariableNodeRole(Role.Phase.LOADED, NavigableEnum.NAVIGABLE, ClassableEnum.DATATYPE);
-		private static final @NonNull LetVariableNodeRole LOADED_NAVIGABLE_CLASS_LET = new LetVariableNodeRole(Role.Phase.LOADED, NavigableEnum.NAVIGABLE, ClassableEnum.CLASS);
-		private static final @NonNull LetVariableNodeRole LOADED_UNNAVIGABLE_DATATYPE_LET = new LetVariableNodeRole(Role.Phase.LOADED, NavigableEnum.UNNAVIGABLE, ClassableEnum.DATATYPE);
-		private static final @NonNull LetVariableNodeRole LOADED_UNNAVIGABLE_CLASS_LET = new LetVariableNodeRole(Role.Phase.LOADED, NavigableEnum.UNNAVIGABLE, ClassableEnum.CLASS);
-		private static final @NonNull LetVariableNodeRole PREDICATED_NAVIGABLE_DATATYPE_LET = new LetVariableNodeRole(Role.Phase.PREDICATED, NavigableEnum.NAVIGABLE, ClassableEnum.DATATYPE);
-		private static final @NonNull LetVariableNodeRole PREDICATED_NAVIGABLE_CLASS_LET = new LetVariableNodeRole(Role.Phase.PREDICATED, NavigableEnum.NAVIGABLE, ClassableEnum.CLASS);
-		private static final @NonNull LetVariableNodeRole PREDICATED_UNNAVIGABLE_DATATYPE_LET = new LetVariableNodeRole(Role.Phase.PREDICATED, NavigableEnum.UNNAVIGABLE, ClassableEnum.DATATYPE);
-		private static final @NonNull LetVariableNodeRole PREDICATED_UNNAVIGABLE_CLASS_LET = new LetVariableNodeRole(Role.Phase.PREDICATED, NavigableEnum.UNNAVIGABLE, ClassableEnum.CLASS);
-
-		public static @NonNull LetVariableNodeRole getLetVariableNodeRole(@NonNull Phase phase, @NonNull NavigableEnum navigable, @NonNull ClassableEnum classable) {
-			switch (navigable) {
-				case NAVIGABLE: {
-					switch (classable) {
-						case CLASS: {
-							switch (phase) {
-								case CONSTANT: return CONSTANT_NAVIGABLE_CLASS_LET;
-								case LOADED: return LOADED_NAVIGABLE_CLASS_LET;
-								case PREDICATED: return PREDICATED_NAVIGABLE_CLASS_LET;
-							}
-							break;
-						}
-						case DATATYPE: {
-							switch (phase) {
-								case CONSTANT: return CONSTANT_NAVIGABLE_DATATYPE_LET;
-								case LOADED: return LOADED_NAVIGABLE_DATATYPE_LET;
-								case PREDICATED: return PREDICATED_NAVIGABLE_DATATYPE_LET;
-							}
-							break;
-						}
-					}
-					break;
-				}
-				case UNNAVIGABLE: {
-					switch (classable) {
-						case CLASS: {
-							switch (phase) {
-								case CONSTANT: return CONSTANT_UNNAVIGABLE_CLASS_LET;
-								case LOADED: return LOADED_UNNAVIGABLE_CLASS_LET;
-								case PREDICATED: return PREDICATED_UNNAVIGABLE_CLASS_LET;
-							}
-							break;
-						}
-						case DATATYPE: {
-							switch (phase) {
-								case CONSTANT: return CONSTANT_UNNAVIGABLE_DATATYPE_LET;
-								case LOADED: return LOADED_UNNAVIGABLE_DATATYPE_LET;
-								case PREDICATED: return PREDICATED_UNNAVIGABLE_DATATYPE_LET;
-							}
-							break;
-						}
-					}
-					break;
-				}
-			}
-			throw new UnsupportedOperationException();
-		}
-
-		private @NonNull NavigableEnum navigable;
-
-		protected LetVariableNodeRole(@NonNull Phase phase, @NonNull NavigableEnum navigable, @NonNull ClassableEnum classable) {
-			super(phase, classable);
-			this.navigable = navigable;
-		}
-
-		@Override
-		public @NonNull LetVariableNodeRole asPhase(@NonNull Phase phase) {
-			return getLetVariableNodeRole(phase, navigable, classable);
-		}
-
-		@Override
-		public boolean isLet() {
-			return true;
-		}
-
-		@Override
-		public boolean isNavigable() {
-			return navigable == NavigableEnum.NAVIGABLE;
-		}
-
-		@Override
-		public String toString() {
-			return phase + (isNavigable() ? "-Navigable-" : "-Unnavigable-") + (isClass() ? "Class-" : "DataType-") + getClass().getSimpleName();
-		}
-	}
-
 	private static class NullNodeRole extends AbstractSimpleNodeRole
 	{
 		private static final @NonNull NullNodeRole NULL = new NullNodeRole();
@@ -874,8 +783,8 @@ public class Nodes
 	public static @NonNull VariableNode createLetVariableNode(@NonNull Variable letVariable, @NonNull Node inNode) {
 		ClassableEnum classable = asClassable(!(letVariable.getType() instanceof DataType));
 		NavigableEnum resolvedIsNavigable = asNavigable(inNode.isNavigable());
-		LetVariableNodeRole nodeRole = LetVariableNodeRole.getLetVariableNodeRole(inNode.getNodeRole().getPhase(), resolvedIsNavigable, classable);
-		return nodeRole.createNode(inNode.getRegion(), letVariable);
+		PatternNodeRole patternNodeRole = PatternNodeRole.getPatternNodeRole(inNode.getNodeRole().getPhase(), classable, resolvedIsNavigable, GuardableEnum.STEP);
+		return patternNodeRole.createNode(inNode.getRegion(), letVariable);
 	}
 
 	public static @NonNull VariableNode createLoadedStepNode(@NonNull Region region, @NonNull VariableDeclaration stepVariable) {

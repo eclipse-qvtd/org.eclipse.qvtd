@@ -112,11 +112,6 @@ public abstract class AbstractNodeRole extends AbstractRole implements NodeRole
 	}
 
 	@Override
-	public boolean isLet() {
-		return false;
-	}
-
-	@Override
 	public boolean isNavigable() {
 		return false;
 	}
