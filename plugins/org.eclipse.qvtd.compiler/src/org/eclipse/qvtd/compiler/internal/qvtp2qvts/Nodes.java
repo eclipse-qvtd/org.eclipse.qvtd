@@ -13,12 +13,10 @@ package org.eclipse.qvtd.compiler.internal.qvtp2qvts;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CallExp;
-import org.eclipse.ocl.pivot.DataType;
 import org.eclipse.ocl.pivot.NavigationCallExp;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.Property;
-import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
@@ -43,51 +41,7 @@ public class Nodes
 		return isNavigable ? NavigableEnum.NAVIGABLE : NavigableEnum.UNNAVIGABLE;
 	}
 
-	private static abstract class AbstractSimpleNodeRole extends AbstractNodeRole
-	{
-		protected AbstractSimpleNodeRole(@NonNull Phase phase) {
-			super(phase);
-		}
-
-		public @NonNull TypedNode createNode(@NonNull Node sourceNode, @NonNull Property source2targetProperty) {
-			Region region = sourceNode.getRegion();
-			assert sourceNode.isClass();
-			SchedulerConstants schedulerConstants = region.getSchedulerConstants();
-			org.eclipse.ocl.pivot.Class type = (org.eclipse.ocl.pivot.Class)source2targetProperty.getType();
-			assert type != null;
-			Type elementType = PivotUtil.getElementalType(type);
-			TypedModel typedModel = elementType instanceof DataType ? schedulerConstants.getDomainAnalysis().getPrimitiveTypeModel() : sourceNode.getClassDatumAnalysis().getTypedModel();
-			assert typedModel != null;
-			ClassDatum classDatum = schedulerConstants.getClassDatum(type, typedModel);
-			ClassDatumAnalysis classDatumAnalysis = schedulerConstants.getClassDatumAnalysis(classDatum);
-			String name = source2targetProperty.getName();
-			assert name != null;
-			return new TypedNode(this, region, name, classDatumAnalysis);
-		}
-
-		@Override
-		public @NonNull TypedNode createNode(@NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
-			return new TypedNode(this, region, name, classDatumAnalysis);
-		}
-
-		@Override
-		public @NonNull TypedNode createNode(@NonNull Region region, @NonNull String name, @NonNull TypedElement typedElement) {
-			return new TypedNode(this, region, name, typedElement);
-		}
-	}
-
-	private static abstract class AbstractTypedNodeRole extends AbstractSimpleNodeRole
-	{
-		protected AbstractTypedNodeRole(@NonNull Phase phase) {
-			super(phase);
-		}
-
-		public @NonNull VariableNode createNode(@NonNull Region region, @NonNull VariableDeclaration variable) {
-			return region.createVariableNode(this, variable);
-		}
-	}
-
-	private static final class ComposingNodeRole extends AbstractTypedNodeRole
+	private static final class ComposingNodeRole extends AbstractNodeRole
 	{
 		private static final @NonNull ComposingNodeRole COMPOSING = new ComposingNodeRole();
 
@@ -105,7 +59,7 @@ public class Nodes
 		}
 	}
 
-	private static final class ErrorNodeRole extends AbstractSimpleNodeRole
+	private static final class ErrorNodeRole extends AbstractNodeRole
 	{
 		public static final @NonNull NodeRole ERROR = new ErrorNodeRole();
 
@@ -129,7 +83,7 @@ public class Nodes
 		}
 	}
 
-	private static class ExtraGuardNodeRole extends AbstractTypedNodeRole
+	private static class ExtraGuardNodeRole extends AbstractNodeRole
 	{
 		private static final @NonNull ExtraGuardNodeRole EXTRA_GUARD = new ExtraGuardNodeRole();
 
@@ -174,13 +128,12 @@ public class Nodes
 		}
 
 		@Override
-		public @NonNull Node createNode(@NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
+		public @NonNull TypedNode createNode(@NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
 			throw new UnsupportedOperationException(); // FIXME Only used for obsolete cyclic regions.
 		}
 
 		@Override
-
-		public @NonNull Node createNode(@NonNull Region region, @NonNull String name, @NonNull TypedElement typedElement) {
+		public @NonNull TypedNode createNode(@NonNull Region region, @NonNull String name, @NonNull TypedElement typedElement) {
 			throw new UnsupportedOperationException();
 		}
 
@@ -195,7 +148,7 @@ public class Nodes
 		}
 	}
 
-	private static final class IteratorNodeRole extends AbstractTypedNodeRole
+	private static final class IteratorNodeRole extends AbstractNodeRole
 	{
 		private static final @NonNull IteratorNodeRole CONSTANT_ITERATOR = new IteratorNodeRole(Role.Phase.CONSTANT);
 		private static final @NonNull IteratorNodeRole LOADED_ITERATOR = new IteratorNodeRole(Role.Phase.LOADED);
@@ -240,7 +193,7 @@ public class Nodes
 		}
 	}
 
-	private static class NullNodeRole extends AbstractSimpleNodeRole
+	private static class NullNodeRole extends AbstractNodeRole
 	{
 		private static final @NonNull NullNodeRole NULL = new NullNodeRole();
 
@@ -254,7 +207,7 @@ public class Nodes
 		}
 	}
 
-	private static class OperationNodeRole extends AbstractTypedNodeRole
+	private static class OperationNodeRole extends AbstractNodeRole
 	{
 		private static final @NonNull OperationNodeRole CONSTANT_OPERATION = new OperationNodeRole(Role.Phase.CONSTANT);
 		private static final @NonNull OperationNodeRole LOADED_OPERATION = new OperationNodeRole(Role.Phase.LOADED);
@@ -346,7 +299,7 @@ public class Nodes
 		}
 	}
 
-	private static class PatternNodeRole extends AbstractTypedNodeRole
+	private static class PatternNodeRole extends AbstractNodeRole
 	{
 		private static final @NonNull PatternNodeRole CONSTANT_NAVIGABLE_STEP = new PatternNodeRole(Role.Phase.CONSTANT, NavigableEnum.NAVIGABLE, HeadableEnum.STEP);
 		private static final @NonNull PatternNodeRole CONSTANT_UNNAVIGABLE_STEP = new PatternNodeRole(Role.Phase.CONSTANT, NavigableEnum.UNNAVIGABLE, HeadableEnum.STEP);
@@ -507,7 +460,7 @@ public class Nodes
 	}
 
 	// FIXME Can this be merged into PatternNodeRole ??
-	private static final class PredicatedInternalNodeRole extends AbstractTypedNodeRole
+	private static final class PredicatedInternalNodeRole extends AbstractNodeRole
 	{
 		private static final @NonNull PredicatedInternalNodeRole PREDICATED_INTERNAL = new PredicatedInternalNodeRole();
 
@@ -535,7 +488,7 @@ public class Nodes
 		}
 	}
 
-	private static final class TrueNodeRole extends AbstractSimpleNodeRole
+	private static final class TrueNodeRole extends AbstractNodeRole
 	{
 		private static final @NonNull TrueNodeRole TRUE = new TrueNodeRole();
 
@@ -554,7 +507,7 @@ public class Nodes
 		}
 	}
 
-	private static final class UnknownNodeRole extends AbstractSimpleNodeRole
+	private static final class UnknownNodeRole extends AbstractNodeRole
 	{
 		public static final @NonNull NodeRole UNKNOWN = new UnknownNodeRole();
 
@@ -742,19 +695,4 @@ public class Nodes
 	public static @NonNull Node createUnknownNode(@NonNull Region region, @NonNull String name, @NonNull TypedElement typedElement) {
 		return UnknownNodeRole.UNKNOWN.createNode(region, name, typedElement);
 	}
-
-	/*	public static @NonNull VariableNode createUnrealizedStepNode(@NonNull Region region, @NonNull VariableDeclaration stepVariable) {
-	/*	SchedulerConstants schedulerConstants = region.getSchedulerConstants();
-		org.eclipse.ocl.pivot.Class type = (org.eclipse.ocl.pivot.Class)stepVariable.getType();
-		assert type != null;
-		Type elementType = QVTbaseUtil.getElementalType(type);
-		TypedModel typedModel = elementType instanceof DataType ? schedulerConstants.getDomainAnalysis().getPrimitiveTypeModel() : sourceNode.getClassDatumAnalysis().getTypedModel();
-		assert typedModel != null;
-		ClassDatum classDatum = schedulerConstants.getClassDatum(type, typedModel);
-		ClassDatumAnalysis classDatumAnalysis = schedulerConstants.getClassDatumAnalysis(classDatum); * /
-	//	throw new UnsupportedOperationException();			// FIXME experimenting
-		ClassableEnum classable = asClassable(!(stepVariable.getType() instanceof DataType));
-		PatternNodeRole patternNodeRole = PatternNodeRole.getPatternNodeRole(Role.Phase.LOADDED, classable, NavigableEnum.NAVIGABLE, GuardableEnum.STEP);
-		return patternNodeRole.createNode(region, stepVariable);
-	} */
 }

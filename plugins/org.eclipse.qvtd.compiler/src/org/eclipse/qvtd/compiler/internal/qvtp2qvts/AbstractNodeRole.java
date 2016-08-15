@@ -12,6 +12,14 @@ package org.eclipse.qvtd.compiler.internal.qvtp2qvts;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.DataType;
+import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.Type;
+import org.eclipse.ocl.pivot.TypedElement;
+import org.eclipse.ocl.pivot.VariableDeclaration;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+import org.eclipse.qvtd.pivot.schedule.ClassDatum;
 
 public abstract class AbstractNodeRole extends AbstractRole implements NodeRole
 {
@@ -42,6 +50,36 @@ public abstract class AbstractNodeRole extends AbstractRole implements NodeRole
 	@Override
 	public @NonNull NodeRole asSpeculation() {
 		return asPhase(Phase.SPECULATION);
+	}
+
+	public @NonNull TypedNode createNode(@NonNull Node sourceNode, @NonNull Property source2targetProperty) {
+		Region region = sourceNode.getRegion();
+		assert sourceNode.isClass();
+		SchedulerConstants schedulerConstants = region.getSchedulerConstants();
+		org.eclipse.ocl.pivot.Class type = (org.eclipse.ocl.pivot.Class)source2targetProperty.getType();
+		assert type != null;
+		Type elementType = PivotUtil.getElementalType(type);
+		TypedModel typedModel = elementType instanceof DataType ? schedulerConstants.getDomainAnalysis().getPrimitiveTypeModel() : sourceNode.getClassDatumAnalysis().getTypedModel();
+		assert typedModel != null;
+		ClassDatum classDatum = schedulerConstants.getClassDatum(type, typedModel);
+		ClassDatumAnalysis classDatumAnalysis = schedulerConstants.getClassDatumAnalysis(classDatum);
+		String name = source2targetProperty.getName();
+		assert name != null;
+		return new TypedNode(this, region, name, classDatumAnalysis);
+	}
+
+	@Override
+	public @NonNull TypedNode createNode(@NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
+		return new TypedNode(this, region, name, classDatumAnalysis);
+	}
+
+	@Override
+	public @NonNull TypedNode createNode(@NonNull Region region, @NonNull String name, @NonNull TypedElement typedElement) {
+		return new TypedNode(this, region, name, typedElement);
+	}
+
+	public @NonNull VariableNode createNode(@NonNull Region region, @NonNull VariableDeclaration variable) {
+		return region.createVariableNode(this, variable);
 	}
 
 	@Override
