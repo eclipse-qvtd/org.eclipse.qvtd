@@ -55,29 +55,7 @@ public abstract class AbstractNodeRole extends AbstractRole implements NodeRole
 	}
 
 	@Override
-	public @Nullable String getStyle() {
-		boolean isDashed = !isNavigable() && (isExpression() || !isRealized());
-		if (isDataType()) {
-			return isDashed ? "\"rounded,dashed\"" : "rounded";
-		}
-		else {
-			return isDashed ? "dashed" : null;
-			//		return isNavigable() || isSpeculated() || isSpeculation() || isRealized() || isHead() ? null : "dashed";
-		}
-	}
-
-	@Override
-	public boolean isClass() {
-		return false;
-	}
-
-	@Override
 	public boolean isComposed() {
-		return false;
-	}
-
-	@Override
-	public boolean isDataType() {
 		return false;
 	}
 

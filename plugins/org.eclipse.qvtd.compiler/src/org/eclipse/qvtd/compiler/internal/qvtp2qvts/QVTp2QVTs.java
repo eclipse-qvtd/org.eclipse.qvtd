@@ -198,7 +198,7 @@ public class QVTp2QVTs extends SchedulerConstants
 		return mergeableNodes;
 	}
 	private void getMergeableNodes(@NonNull Set<@NonNull Node> mergeableNodes, @NonNull Node node) {
-		if (isMergeable(node.getNodeRole()) && mergeableNodes.add(node)) {
+		if (isMergeable(node) && mergeableNodes.add(node)) {
 			for (@NonNull NavigationEdge edge : node.getNavigationEdges()) {
 				if (edge.getOppositeEdge() != null) {
 					getMergeableNodes(mergeableNodes, edge.getTarget());
@@ -206,11 +206,12 @@ public class QVTp2QVTs extends SchedulerConstants
 			}
 		}
 	}
-	private boolean isMergeable(@NonNull NodeRole nodeRole) {	// FIXME this is legacy creep
+	private boolean isMergeable(@NonNull Node node) {	// FIXME this is legacy creep
+		NodeRole nodeRole = node.getNodeRole();
 		if (nodeRole.isRealized() || nodeRole.isSpeculation()) {
 			return false;
 		}
-		if (!nodeRole.isClass()) {
+		if (!node.isClass()) {
 			return false;
 		}
 		if (nodeRole.isNull()) {

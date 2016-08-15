@@ -40,13 +40,9 @@ public interface NodeRole extends Role
 	 */
 	@Nullable String getShape();
 
-	@Nullable String getStyle();
-
-	boolean isClass();
+	//	@Nullable String getStyle();
 
 	boolean isComposed();
-
-	boolean isDataType();
 
 	boolean isExpression();
 

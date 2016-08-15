@@ -64,12 +64,13 @@ public abstract class AbstractNode implements Node
 	private @NonNull NodeRole nodeRole;
 	protected final @NonNull Region region;
 	protected final @NonNull String name;
+	private @NonNull ClassDatumAnalysis classDatumAnalysis;
+	private final boolean isDataType;
 	private @Nullable NodeConnection incomingConnection = null;
 	private @Nullable List<@NonNull Edge> incomingEdges = null;
 	private @Nullable List<@NonNull NodeConnection> outgoingConnections = null;
 	private @Nullable List<@NonNull Edge> outgoingEdges = null;
 
-	private @NonNull ClassDatumAnalysis classDatumAnalysis;
 	private final @NonNull List<@NonNull TypedElement> typedElements = new ArrayList<@NonNull TypedElement>();
 
 	protected AbstractNode(@NonNull NodeRole nodeRole, @NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
@@ -77,10 +78,8 @@ public abstract class AbstractNode implements Node
 		this.region = region;
 		this.name = name;
 		this.classDatumAnalysis = classDatumAnalysis;
+		this.isDataType = classDatumAnalysis.getClassDatum().getType() instanceof DataType;;
 		region.addNode(this);
-		boolean isDataType = classDatumAnalysis.getClassDatum().getType() instanceof DataType;;
-		assert nodeRole.isDataType() == isDataType;
-		assert nodeRole.isClass() != isDataType;
 	}
 
 	@Override
@@ -472,7 +471,19 @@ public abstract class AbstractNode implements Node
 	}
 
 	protected @Nullable String getStyle() {
-		return nodeRole.getStyle();
+		if (isNull()) {
+			return "rounded";
+		}
+		if (isTrue()) {
+			return null;
+		}
+		boolean isDashed = !isNavigable() && (isExpression() || !isRealized());
+		if (isDataType()) {
+			return isDashed ? "\"rounded,dashed\"" : "rounded";
+		}
+		else {
+			return isDashed ? "dashed" : null;
+		}
 	}
 
 	@Override
@@ -496,7 +507,7 @@ public abstract class AbstractNode implements Node
 
 	@Override
 	public final boolean isClass() {
-		return nodeRole.isClass();
+		return !isDataType;
 	}
 
 	@Override
@@ -511,7 +522,7 @@ public abstract class AbstractNode implements Node
 
 	@Override
 	public final boolean isDataType() {
-		return nodeRole.isDataType();
+		return isDataType;
 	}
 
 	@Override
