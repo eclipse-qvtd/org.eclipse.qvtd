@@ -45,7 +45,7 @@ import org.eclipse.qvtd.xtext.qvtrelationcs.util.AbstractQVTrelationCSPostOrderV
 
 public class QVTrelationCSPostOrderVisitor extends AbstractQVTrelationCSPostOrderVisitor
 {
-/*	public static class ElementTemplateCompletion extends SingleContinuation<ElementTemplateCS>
+	/*	public static class ElementTemplateCompletion extends SingleContinuation<ElementTemplateCS>
 	{
 		public ElementTemplateCompletion(@NonNull CS2ASConversion context, @NonNull ElementTemplateCS csElement) {
 			super(context, null, null, csElement);
@@ -87,14 +87,14 @@ public class QVTrelationCSPostOrderVisitor extends AbstractQVTrelationCSPostOrde
 		public BasicContinuation<?> execute() {
 			Predicate pivotElement = PivotUtil.getPivot(Predicate.class, csElement);
 			ExpCS csExpr = csElement.getOwnedCondition();
-			OCLExpression conditionExpression = csExpr != null ? context.visitLeft2Right(OCLExpression.class, csExpr) : null;		
+			OCLExpression conditionExpression = csExpr != null ? context.visitLeft2Right(OCLExpression.class, csExpr) : null;
 			if (pivotElement != null) {
 				pivotElement.setConditionExpression(conditionExpression);
 			}
 			return null;
 		}
 	}
-	
+
 	public static class PropertyTemplateExpressionCompletion extends SingleContinuation<PropertyTemplateCS>
 	{
 		public PropertyTemplateExpressionCompletion(@NonNull CS2ASConversion context, @NonNull PropertyTemplateCS csElement) {
@@ -105,14 +105,14 @@ public class QVTrelationCSPostOrderVisitor extends AbstractQVTrelationCSPostOrde
 		public BasicContinuation<?> execute() {
 			PropertyTemplateItem pivotElement = PivotUtil.getPivot(PropertyTemplateItem.class, csElement);
 			ExpCS csExpression = csElement.getOwnedExpression();
-			OCLExpression oclExpression = csExpression != null ? context.visitLeft2Right(OCLExpression.class, csExpression) : null;		
+			OCLExpression oclExpression = csExpression != null ? context.visitLeft2Right(OCLExpression.class, csExpression) : null;
 			if (pivotElement != null) {
 				pivotElement.setValue(oclExpression);
 			}
 			return null;
 		}
 	}
-	
+
 	public static class QueryExpressionCompletion extends SingleContinuation<QueryCS>
 	{
 		public QueryExpressionCompletion(@NonNull CS2ASConversion context, @NonNull QueryCS csElement) {
@@ -123,7 +123,7 @@ public class QVTrelationCSPostOrderVisitor extends AbstractQVTrelationCSPostOrde
 		public BasicContinuation<?> execute() {
 			Function pivotElement = PivotUtil.getPivot(Function.class, csElement);
 			ExpCS csExpression = csElement.getOwnedExpression();
-			OCLExpression oclExpression = csExpression != null ? context.visitLeft2Right(OCLExpression.class, csExpression) : null;		
+			OCLExpression oclExpression = csExpression != null ? context.visitLeft2Right(OCLExpression.class, csExpression) : null;
 			if (pivotElement != null) {
 				pivotElement.setQueryExpression(oclExpression);
 			}
@@ -141,14 +141,14 @@ public class QVTrelationCSPostOrderVisitor extends AbstractQVTrelationCSPostOrde
 		public BasicContinuation<?> execute() {
 			RelationDomainAssignment pDomain = PivotUtil.getPivot(RelationDomainAssignment.class, csElement);
 			ExpCS csInitialiser = csElement.getOwnedInitExpression();
-			OCLExpression oclExpression = csInitialiser != null ? context.visitLeft2Right(OCLExpression.class, csInitialiser) : null;		
+			OCLExpression oclExpression = csInitialiser != null ? context.visitLeft2Right(OCLExpression.class, csInitialiser) : null;
 			if (pDomain != null) {
 				pDomain.setValueExp(oclExpression);
 			}
 			return null;
 		}
 	}
-	
+
 	public static class TemplateExpressionCompletion extends SingleContinuation<TemplateCS>
 	{
 		public TemplateExpressionCompletion(@NonNull CS2ASConversion context, @NonNull TemplateCS csElement) {
@@ -159,14 +159,14 @@ public class QVTrelationCSPostOrderVisitor extends AbstractQVTrelationCSPostOrde
 		public BasicContinuation<?> execute() {
 			TemplateExp pivotElement = PivotUtil.getPivot(TemplateExp.class, csElement);
 			ExpCS guardExpression = csElement.getOwnedGuardExpression();
-			OCLExpression oclExpression = guardExpression != null ? context.visitLeft2Right(OCLExpression.class, guardExpression) : null;		
+			OCLExpression oclExpression = guardExpression != null ? context.visitLeft2Right(OCLExpression.class, guardExpression) : null;
 			if (pivotElement != null) {
 				pivotElement.setWhere(oclExpression);
 			}
 			return null;
 		}
 	}
-	
+
 	public QVTrelationCSPostOrderVisitor(@NonNull CS2ASConversion context) {
 		super(context);
 	}
@@ -184,13 +184,13 @@ public class QVTrelationCSPostOrderVisitor extends AbstractQVTrelationCSPostOrde
 
 	@Override
 	public Continuation<?> visitElementTemplateCS(@NonNull ElementTemplateCS csElement) {
-//		Element pivotElement = PivotUtil.getPivot(Element.class, csElement);
-//		if ((pivotElement instanceof VariableExp) && (((VariableExp)pivotElement).getReferredVariable() != null)) {
-//			return new ElementTemplateCompletion(context, csElement);
-//		}
-//		else {
-			return null;
-//		}
+		//		Element pivotElement = PivotUtil.getPivot(Element.class, csElement);
+		//		if ((pivotElement instanceof VariableExp) && (((VariableExp)pivotElement).getReferredVariable() != null)) {
+		//			return new ElementTemplateCompletion(context, csElement);
+		//		}
+		//		else {
+		return null;
+		//		}
 	}
 
 	@Override
@@ -260,7 +260,12 @@ public class QVTrelationCSPostOrderVisitor extends AbstractQVTrelationCSPostOrde
 		for (VarDeclarationIdCS csVarDeclarationId : csElement.getOwnedVarDeclarationIds()) {
 			pivotVariable = PivotUtil.getPivot(Variable.class, csVarDeclarationId);
 			if (pivotVariable != null) {
-				context.setType(pivotVariable, pivotType, false);
+				if (ownedType != null) {
+					context.refreshRequiredType(pivotVariable, ownedType);
+				}
+				else {
+					context.setType(pivotVariable, pivotType, false);
+				}
 				pivotVariable.setOwnedInit(null);
 			}
 		}
