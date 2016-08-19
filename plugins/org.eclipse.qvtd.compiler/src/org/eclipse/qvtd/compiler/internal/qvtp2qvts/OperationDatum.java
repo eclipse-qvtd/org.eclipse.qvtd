@@ -18,12 +18,12 @@ import org.eclipse.qvtd.pivot.schedule.ClassDatum;
  * OperationDatum provides a hashed list of ClassDatums suitable for characterizing a specialized OperationRegion.
  * OperationDatums are suitable for use when indexing operation overloads.
  */
-public class OperationDatum implements IndexableIterable<ClassDatum>
+public class OperationDatum implements IndexableIterable<@NonNull ClassDatum>
 {
-	protected class Iterator implements java.util.Iterator<ClassDatum>
+	protected class Iterator implements java.util.Iterator<@NonNull ClassDatum>
 	{
 		private int index = 0;
-		
+
 		@Override
 		public boolean hasNext() {
 			return index < classDatums.length;
@@ -47,9 +47,9 @@ public class OperationDatum implements IndexableIterable<ClassDatum>
 	/**
 	 * Construct an OperationDatum for an Scheduler that has computed the hashCode for the classDatums.
 	 */
-	public OperationDatum(@NonNull QVTp2QVTs scheduler, @NonNull String name, @NonNull ClassDatum[] classDatums) {
+	public OperationDatum(@NonNull QVTp2QVTs scheduler, @NonNull String name, @NonNull ClassDatum @NonNull [] classDatums) {
 		int hashCode = name.hashCode();
-		for (ClassDatum classDatum : classDatums) {
+		for (@NonNull ClassDatum classDatum : classDatums) {
 			hashCode = 3 * hashCode + classDatum.hashCode();
 		}
 		this.hashCode = hashCode;
@@ -87,7 +87,7 @@ public class OperationDatum implements IndexableIterable<ClassDatum>
 		return parameterType;
 	}
 
-	public @NonNull ClassDatum[] get() {
+	public @NonNull ClassDatum @NonNull [] get() {
 		return classDatums;
 	}
 
@@ -98,7 +98,7 @@ public class OperationDatum implements IndexableIterable<ClassDatum>
 	}
 
 	@Override
-	public java.util.Iterator<ClassDatum> iterator() {
+	public java.util.@NonNull Iterator<@NonNull ClassDatum> iterator() {
 		return new Iterator();
 	}
 
@@ -108,7 +108,7 @@ public class OperationDatum implements IndexableIterable<ClassDatum>
 	}
 
 	@Override
-	public String toString() {
+	public @NonNull String toString() {
 		StringBuilder s = new StringBuilder();
 		s.append(name);
 		s.append('(');
