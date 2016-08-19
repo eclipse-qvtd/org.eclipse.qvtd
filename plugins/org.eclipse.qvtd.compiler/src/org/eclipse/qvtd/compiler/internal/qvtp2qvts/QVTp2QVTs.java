@@ -27,7 +27,6 @@ import org.eclipse.ocl.pivot.LanguageExpression;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
-import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
@@ -35,14 +34,11 @@ import org.eclipse.ocl.pivot.utilities.ParserException;
 import org.eclipse.ocl.pivot.utilities.TracingOption;
 import org.eclipse.qvtd.compiler.CompilerConstants;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.Region2Depth;
-import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.schedule.AbstractAction;
 import org.eclipse.qvtd.pivot.schedule.ClassDatum;
 import org.eclipse.qvtd.pivot.schedule.MappingAction;
 import org.eclipse.qvtd.pivot.schedule.Schedule;
 import org.eclipse.qvtd.pivot.schedule.utilities.DependencyUtil;
-
-import com.google.common.collect.Iterables;
 
 public class QVTp2QVTs extends SchedulerConstants
 {
@@ -106,17 +102,13 @@ public class QVTp2QVTs extends SchedulerConstants
 	}
 
 	private @NonNull OperationDatum createOperationDatum(@NonNull OperationCallExp operationCallExp) {
-		Iterable<@NonNull VariableDeclaration> externalVariables = QVTbaseUtil.getExternalVariables(operationCallExp);
 		List<@NonNull OCLExpression> ownedArguments = ClassUtil.nullFree(operationCallExp.getOwnedArguments());
-		@NonNull ClassDatum[] classDatums = new @NonNull ClassDatum[1 + ownedArguments.size() + Iterables.size(externalVariables)];
+		@NonNull ClassDatum[] classDatums = new @NonNull ClassDatum[1 + ownedArguments.size()];
 		int i = 0;
 		@SuppressWarnings("null")@NonNull OCLExpression source = operationCallExp.getOwnedSource();
 		classDatums[i++] = getClassDatum(source);
 		for (@NonNull OCLExpression argument : ownedArguments) {
 			classDatums[i++] = getClassDatum(argument);
-		}
-		for (@NonNull VariableDeclaration externalVariable : externalVariables) {
-			classDatums[i++] = getClassDatum(externalVariable);
 		}
 		String operationName = operationCallExp.getReferredOperation().getName();
 		assert operationName != null;
