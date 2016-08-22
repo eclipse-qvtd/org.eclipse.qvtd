@@ -61,7 +61,7 @@ class SpeculationPartition extends AbstractPartition
 	 * Add all nodes, including node, that are constant or loaded and reachable by to-one navigation from node.
 	 */
 	protected void addReachableConstantOrLoadedNodes(@NonNull Node node) {
-		if (node.isConstant() || node.isLoaded()) {
+		if (/*node.isMatched() &&*/ (node.isConstant() || node.isLoaded())) {
 			if (!hasNode(node)) {
 				addNode(node, node.getNodeRole());
 				for (@NonNull NavigationEdge edge : node.getNavigationEdges()) {

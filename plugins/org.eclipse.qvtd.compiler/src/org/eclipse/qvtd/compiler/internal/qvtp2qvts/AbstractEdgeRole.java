@@ -30,28 +30,8 @@ public abstract class AbstractEdgeRole extends AbstractRole implements EdgeRole
 	}
 
 	@Override
-	public @Nullable String getArrowhead() {
-		return null;
-	}
-
-	@Override
-	public @Nullable String getArrowtail() {
-		return null;
-	}
-
-	@Override
 	public @Nullable String getLabel() {
 		return null;
-	}
-
-	@Override
-	public @NonNull Integer getPenwidth() {
-		return LINE_WIDTH;
-	}
-
-	@Override
-	public @Nullable String getStyle() {
-		return isNavigable() ? null : "dashed";
 	}
 
 	@Override
@@ -70,7 +50,7 @@ public abstract class AbstractEdgeRole extends AbstractRole implements EdgeRole
 	}
 
 	@Override
-	public boolean isNavigable() {
+	public boolean isMatched() {
 		return false;
 	}
 

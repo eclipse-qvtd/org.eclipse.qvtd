@@ -66,6 +66,10 @@ public interface Role extends Comparable<Role>
 
 	boolean isLoaded();
 
+	boolean isNew();
+
+	boolean isOld();
+
 	boolean isPredicated();
 
 	boolean isSpeculated();

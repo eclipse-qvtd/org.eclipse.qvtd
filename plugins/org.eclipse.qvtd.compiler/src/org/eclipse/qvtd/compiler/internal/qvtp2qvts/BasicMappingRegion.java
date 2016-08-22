@@ -290,7 +290,7 @@ public class BasicMappingRegion extends AbstractMappingRegion
 				//		assert guardVariables.contains(targetVariable);
 				//		assert guardVariables.contains(sourceVariable);
 				Node sourceNode = getReferenceNode(sourceVariable);
-				Node targetNode = boundVariable != null ? getReferenceNode(boundVariable) : Nodes.createNullNode(this, null);
+				Node targetNode = boundVariable != null ? getReferenceNode(boundVariable) : Nodes.createNullNode(this, true, null);
 				//				assert sourceNode.isGuard();
 				//				assert (boundVariable == null) || targetNode.isGuard();
 				assert sourceNode.isClass();
@@ -313,7 +313,7 @@ public class BasicMappingRegion extends AbstractMappingRegion
 		if ((ownedInit instanceof OperationCallExp) && initNode.isOperation()) {
 			if (QVTbaseUtil.isIdentification(((OperationCallExp)ownedInit).getReferredOperation())) {
 				Node stepNode = Nodes.createRealizedStepNode(this, variable);
-				Edges.createExpressionEdge(initNode, null, stepNode);
+				Edges.createExpressionEdge(initNode, "«equals»", stepNode, true);
 				initNode = stepNode;
 			}
 			//			else if (variable.getType() instanceof CollectionType) {
@@ -324,7 +324,7 @@ public class BasicMappingRegion extends AbstractMappingRegion
 			else {
 				//				Node stepNode = Nodes.STEP.createNode(this, variable.getName(), (OperationCallExp)ownedInit, initNode);
 				Node stepNode = Nodes.createLoadedStepNode(this, variable);
-				Edges.createExpressionEdge(initNode, null, stepNode);
+				Edges.createExpressionEdge(initNode, "«equals»", stepNode, initNode.isMatched() && stepNode.isMatched());
 				initNode = stepNode;
 			}
 		}

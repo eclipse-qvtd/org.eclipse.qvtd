@@ -31,7 +31,7 @@ public class BasicNavigationEdge extends AbstractEdge implements NavigationEdge
 			@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
 		BasicNavigationEdge forwardEdge = new BasicNavigationEdge(edgeRole, sourceNode, source2targetProperty, targetNode);
 		Property target2sourceProperty = source2targetProperty.getOpposite();
-		if ((target2sourceProperty != null) && !targetNode.isNull()) {
+		if ((target2sourceProperty != null) && !targetNode.isExplicitNull()) {
 			assert (targetNode.getNavigationEdge(target2sourceProperty) == null) || target2sourceProperty.isIsMany();
 			if (!source2targetProperty.isIsMany() && !target2sourceProperty.isIsMany() /*&& target2sourceProperty.isIsRequired()*/) {		// FIXME do we need stronger type conformance here ??
 				BasicNavigationEdge reverseEdge = new BasicNavigationEdge(edgeRole, targetNode, target2sourceProperty, sourceNode);

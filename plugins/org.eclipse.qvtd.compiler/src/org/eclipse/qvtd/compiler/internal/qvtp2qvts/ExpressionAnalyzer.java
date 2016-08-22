@@ -53,6 +53,7 @@ import org.eclipse.ocl.pivot.ids.OperationId;
 import org.eclipse.ocl.pivot.internal.prettyprint.PrettyPrinter;
 import org.eclipse.ocl.pivot.util.Visitable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
@@ -69,11 +70,11 @@ import com.google.common.collect.Iterables;
 
 public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@NonNull Node, @NonNull BasicMappingRegion>
 {
-	private static final @Nullable String @NonNull [] ifArgNames = new @Nullable String[]{"«condition»", "«then»", "«else»"};
-	private static final @Nullable String @NonNull [] mapArgNames = new @Nullable String[]{"«key»", "«value»"};
-	private static final @Nullable String @NonNull [] nullArgNames = new @Nullable String[]{null};
-	private static final @Nullable String @NonNull [] rangeArgNames = new @Nullable String[]{"«first»", "«last»"};
-	private static final @Nullable String @NonNull [] srcArgNames = new @Nullable String[]{"«source»", "«arg»"};
+	private static final @NonNull String @NonNull [] ifArgNames = new @NonNull String[]{"«condition»", "«then»", "«else»"};
+	private static final @NonNull String @NonNull [] mapArgNames = new @NonNull String[]{"«key»", "«value»"};
+	private static final @NonNull String @NonNull [] nullArgNames = new @NonNull String[]{"«equals»"};
+	private static final @NonNull String @NonNull [] rangeArgNames = new @NonNull String[]{"«first»", "«last»"};
+	private static final @NonNull String @NonNull [] srcArgNames = new @NonNull String[]{"«source»", "«arg»"};
 
 	public class ConditionalExpressionAnalyzer extends ExpressionAnalyzer
 	{
@@ -83,27 +84,34 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 
 		@Override
 		protected @NonNull NavigationEdge createCastEdge(@NonNull Node sourceNode, @NonNull Property castProperty, @NonNull Node castNode) {
-			return Edges.createUnnavigableCastEdge(sourceNode, castProperty, castNode);
+			return Edges.createOptionalCastEdge(sourceNode, castProperty, castNode);
 		}
 
 		@Override
 		protected @NonNull NavigationEdge createNavigationEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
-			return Edges.createUnnavigableNavigationEdge(sourceNode, source2targetProperty, targetNode);
+			return Edges.createNavigationEdge(sourceNode, source2targetProperty, targetNode);
 		}
 
 		@Override
 		protected @NonNull Node createStepNode(@NonNull String name, @NonNull CallExp callExp, @NonNull Node sourceNode) {
 			return Nodes.createStepNode(name, callExp, sourceNode, false);
 		}
+
+		@Override
+		protected boolean isUnconditional() {
+			return false;
+		}
 	}
 
 	protected final @NonNull SchedulerConstants scheduler;
+	protected final @NonNull EnvironmentFactory environmentFactory;
 	private /*@LazyNonNull*/ ConditionalExpressionAnalyzer conditionalExpressionAnalyzer = null;
 	//	private /*@LazyNonNull*/ DependencyAnalyzer dependencyAnalyzer;
 
 	protected ExpressionAnalyzer(@NonNull BasicMappingRegion context) {
 		super(context);
 		this.scheduler = context.getSchedulerConstants();
+		this.environmentFactory = scheduler.getEnvironmentFactory();
 		//		this.dependencyAnalyzer = getDependencyAnalyzer();
 	}
 
@@ -125,7 +133,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 		//		}
 		Type type = operationCallExp.getType();
 		assert type != null;
-		CompleteClass requiredClass = scheduler.getEnvironmentFactory().getCompleteModel().getCompleteClass(type);
+		CompleteClass requiredClass = environmentFactory.getCompleteModel().getCompleteClass(type);
 		CompleteClass predicatedClass = sourceNode.getCompleteClass();
 		if (predicatedClass.conformsTo(requiredClass)) {
 			sourceNode.addTypedElement(operationCallExp);
@@ -266,16 +274,18 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 		return operationNode;
 	}
 
-	protected @NonNull Node createConnectedOperationNode(@NonNull String name, @Nullable String @NonNull[] argNames, @NonNull TypedElement typedElement, @NonNull Node @NonNull ... sourceAndArgumentNodes) {
+	protected @NonNull Node createConnectedOperationNode(@NonNull String name, @NonNull String @NonNull[] argNames, @NonNull TypedElement typedElement, @NonNull Node @NonNull ... sourceAndArgumentNodes) {
 		assert argNames.length == sourceAndArgumentNodes.length;
 		Node reusedNode = findOperationNode(name, sourceAndArgumentNodes);
 		if (reusedNode != null) {
 			reusedNode.addTypedElement(typedElement);
 			return reusedNode;
 		}
-		Node operationNode = createOperationNode(name, typedElement, sourceAndArgumentNodes);
+		boolean isMatched = Nodes.isMatched(typedElement);
+		ExpressionAnalyzer nestedAnalyzer = isMatched ? this : getConditionalExpressionAnalyzer();
+		Node operationNode = nestedAnalyzer.createOperationNode(name, typedElement, sourceAndArgumentNodes);
 		for (int i = 0; i < sourceAndArgumentNodes.length; i++) {
-			createExpressionEdge(ClassUtil.nonNullState(sourceAndArgumentNodes[i]), argNames[i], operationNode);
+			nestedAnalyzer.createExpressionEdge(ClassUtil.nonNullState(sourceAndArgumentNodes[i]), argNames[i], operationNode);
 		}
 		return operationNode;
 	}
@@ -292,12 +302,12 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 		return Nodes.createErrorNode(context, name, classDatumAnalysis);
 	}
 
-	protected @NonNull Edge createExpressionEdge(@NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode) {
-		return Edges.createExpressionEdge(sourceNode, name, targetNode);
+	protected @NonNull Edge createExpressionEdge(@NonNull Node sourceNode, @NonNull String name, @NonNull Node targetNode) {
+		return Edges.createExpressionEdge(sourceNode, name, targetNode, sourceNode.isMatched() && targetNode.isMatched() && isUnconditional());
 	}
 
-	protected @NonNull Edge createIteratedEdge(@NonNull Node sourceNode, @NonNull Node targetNode) {
-		return Edges.createIteratedEdge(sourceNode, targetNode);
+	protected @NonNull Edge createIteratedEdge(@NonNull Node sourceNode, @NonNull String name, @NonNull Node targetNode) {
+		return Edges.createIteratedEdge(sourceNode, name, targetNode);
 	}
 
 	protected @NonNull Node createIteratorNode(@NonNull Variable iterator, @NonNull Node sourceNode) {
@@ -313,12 +323,12 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 	}
 
 	protected @NonNull Node createNavigableDataTypeNode(@NonNull Node sourceNode, @NonNull Property source2targetProperty) {
-		assert sourceNode.isNavigable();
+		assert sourceNode.isMatched();
 		return Nodes.createDataTypeNode(sourceNode, source2targetProperty);
 	}
 
 	protected @NonNull NavigationEdge createNavigableNavigationEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
-		return Edges.createNavigableNavigationEdge(sourceNode, source2targetProperty, targetNode);
+		return Edges.createMatchedNavigationEdge(sourceNode, source2targetProperty, targetNode);
 	}
 
 	protected @NonNull NavigationEdge createNavigationEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
@@ -338,11 +348,11 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 	}
 
 	protected @NonNull Node createNullNode(@NonNull TypedElement typedElement) {
-		return Nodes.createNullNode(context, typedElement);
+		return Nodes.createNullNode(context, isUnconditional(), typedElement);
 	}
 
 	protected @NonNull Node createOperationNode(@NonNull String name, @NonNull TypedElement typedElement, @NonNull Node @NonNull ... argNodes) {
-		return Nodes.createOperationNode(context, name, typedElement, argNodes);
+		return Nodes.createOperationNode(context, isUnconditional(), name, typedElement, argNodes);
 	}
 
 	protected @NonNull Edge createPredicateEdge(@NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode) {
@@ -370,7 +380,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 	}
 
 	protected @NonNull Node createStepNode(@NonNull String name, @NonNull CallExp callExp, @NonNull Node sourceNode) {
-		return Nodes.createStepNode(name, callExp, sourceNode, sourceNode.isNavigable());
+		return Nodes.createStepNode(name, callExp, sourceNode, sourceNode.isMatched() && Nodes.isMatched(callExp));
 	}
 
 	protected @Nullable Node findOperationNode(@NonNull String name, @NonNull Node @NonNull ... sourceAndArgumentNodes) {
@@ -410,7 +420,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 	/*	protected @NonNull DependencyAnalyzer getDependencyAnalyzer() {
 		DependencyAnalyzer dependencyAnalyzer2 = dependencyAnalyzer;
 		if (dependencyAnalyzer2 == null) {
-			dependencyAnalyzer = dependencyAnalyzer2 = new DependencyAnalyzer(scheduler.getEnvironmentFactory(), scheduler.getDomainAnalysis());
+			dependencyAnalyzer = dependencyAnalyzer2 = new DependencyAnalyzer(environmentFactory, scheduler.getDomainAnalysis());
 		}
 		return dependencyAnalyzer2;
 	} */
@@ -420,7 +430,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 	 * re-using an already created edge if available, otherwise creating the edge.
 	 */
 	protected @NonNull NavigationEdge getNavigationEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode, @Nullable NavigationAssignment navigationAssignment) {
-		if (targetNode.isNull()) {
+		if (targetNode.isExplicitNull()) {
 			return getNavigationEdgeToNull(sourceNode, source2targetProperty, targetNode, navigationAssignment);
 		}
 		else if (targetNode.isClass() && !targetNode.isOperation()) {		// FIXME rationalize isXXX tests
@@ -521,17 +531,17 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 			assert valueNode.isRealized();
 			Type type = source2targetProperty.getType();
 			if (type instanceof DataType) {
-				createRealizedExpressionEdge(targetNode, null, valueNode);
+				createRealizedExpressionEdge(targetNode, "«equals»", valueNode);
 			}
 			else {
-				createExpressionEdge(targetNode, null, valueNode);
+				createExpressionEdge(targetNode, "«equals»", valueNode);
 			}
 			return navigationEdge;
 		}
 	}
 
 	protected @NonNull NavigationEdge getNavigationEdgeToNull(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode, @Nullable NavigationAssignment navigationAssignment) {
-		assert targetNode.isNull();
+		assert targetNode.isExplicitNull();
 		return createNavigationOrRealizedEdge(sourceNode, source2targetProperty, targetNode, navigationAssignment);
 	}
 
@@ -546,6 +556,10 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 				instantiate(instantiatedTargetNode, extraTargetNode);
 			}
 		}
+	}
+
+	protected boolean isUnconditional() {
+		return true;
 	}
 
 	@Override
@@ -639,7 +653,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 			Type iteratorType = iterator.getType();
 			assert iteratorType != null;
 			//			Property iterateProperty = context.getSchedulerConstants().getIterateProperty(iteratorType);
-			createIteratedEdge(sourceNode, iteratorNode);
+			createIteratedEdge(sourceNode, "«iterator»", iteratorNode);
 			argNodes[i++] = iteratorNode;
 		}
 		if (loopExp instanceof IterateExp) {
@@ -649,10 +663,10 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 			Type iteratorType = accumulator.getType();
 			assert iteratorType != null;
 			//			Property iterateProperty = context.getSchedulerConstants().getIterateProperty(iteratorType);
-			createIteratedEdge(sourceNode, iteratorNode);
+			createIteratedEdge(sourceNode, "«iterator»", iteratorNode);
 			argNodes[i++] = iteratorNode;
 		}
-		Node bodyNode = analyze(loopExp.getOwnedBody());
+		Node bodyNode = getConditionalExpressionAnalyzer().analyze(loopExp.getOwnedBody());
 		argNodes[0] = bodyNode;
 		String iterationName = "«" + loopExp.getReferredIteration().getName() + "»";
 		Node accumulateNode = createOperationNode(iterationName, loopExp, argNodes);
@@ -662,7 +676,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 		for (@NonNull Variable iterator : ownedIterators) {
 			Node iteratorNode = argNodes[i++];
 			assert iteratorNode != null;
-			createExpressionEdge(iteratorNode, iterator.getName() , accumulateNode);
+			createExpressionEdge(iteratorNode, "«" + iterator.getName() + "»", accumulateNode);
 		}
 		return accumulateNode;
 	}
@@ -695,12 +709,13 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 		assert slotNode.isClass();
 		Property property = QVTcoreBaseUtil.getTargetProperty(asNavigationAssignment);
 		assert property != null;
+		PivotUtil.rewriteSafeNavigations(environmentFactory, asNavigationAssignment.getValue());
 		Node targetNode = analyze(asNavigationAssignment.getValue());
 		NavigationEdge navigationEdge = getNavigationEdge(slotNode, property, targetNode, asNavigationAssignment);
 		Node valueNode = navigationEdge.getTarget();
 		CompleteClass valueCompleteClass = valueNode.getCompleteClass();
 		Type propertyType = ClassUtil.nonNullState(property.getType());
-		CompleteClass targetCompleteClass = scheduler.getEnvironmentFactory().getCompleteModel().getCompleteClass(propertyType);
+		CompleteClass targetCompleteClass = environmentFactory.getCompleteModel().getCompleteClass(propertyType);
 		if (!valueCompleteClass.conformsTo(targetCompleteClass)) {
 			if (targetCompleteClass.getPrimaryClass().getESObject() != EcorePackage.Literals.EOBJECT) {		// FIXME fudge for Adolfo's suspect tests
 				// FIXME we could synthesize a cast, but it's easier to do oclAsType() in QVTm/QVTp
@@ -759,6 +774,12 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 
 	@Override
 	public @NonNull Node visitOperationCallExp(@NonNull OperationCallExp operationCallExp) {
+		if (isUnconditional()) {
+			boolean isMatched = Nodes.isMatched(operationCallExp);
+			if (!isMatched) {
+				return getConditionalExpressionAnalyzer().visitOperationCallExp(operationCallExp);
+			}
+		}
 		assert !operationCallExp.isIsSafe();
 		Operation referredOperation = operationCallExp.getReferredOperation();
 		OCLExpression ownedSource = operationCallExp.getOwnedSource();
@@ -776,7 +797,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 			List<OCLExpression> ownedArguments = operationCallExp.getOwnedArguments();
 			int iSize = ownedArguments.size();
 			@NonNull Node[] argNodes = new @NonNull Node[iSize];
-			@Nullable String [] argNames = new @Nullable String[iSize];
+			@NonNull String [] argNames = new @NonNull String[iSize];
 			for (int i = 0; i < iSize; i++) {
 				argNodes[i] = analyze(ownedArguments.get(i));
 				argNames[i] = "«" + referredOperation.getOwnedParameters().get(i).getName() + "»";
@@ -806,7 +827,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 			List<OCLExpression> ownedArguments = operationCallExp.getOwnedArguments();
 			int iSize = ownedArguments.size();
 			@NonNull Node[] argNodes = new @NonNull Node[iSize+1];
-			@Nullable String [] argNames = new @Nullable String[iSize+1];
+			@NonNull String [] argNames = new @NonNull String[iSize+1];
 			argNodes[0] = sourceNode;
 			argNames[0] = "«self»";
 			for (int i = 0; i < iSize; i++) {
@@ -818,6 +839,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 			}
 			Node operationNode = findOperationNode(operationName, argNodes);
 			if (operationNode == null) {
+
 				operationNode = createOperationNode(operationName, operationCallExp, argNodes);
 				for (int i = 0; i <= iSize; i++) {
 					createExpressionEdge(argNodes[i], argNames[i], operationNode);
@@ -869,11 +891,11 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 		List<ShadowPart> ownedParts = shadowExp.getOwnedParts();
 		int iSize = ownedParts.size();
 		@NonNull Node [] partNodes = new @NonNull Node[iSize];
-		@Nullable String [] partNames = new @Nullable String[iSize];
+		@NonNull String [] partNames = new @NonNull String[iSize];
 		for (int i = 0; i < iSize; i++) {
 			ShadowPart shadowPart = ownedParts.get(i);
 			partNodes[i] = analyze(shadowPart);
-			partNames[i] = shadowPart.getName();
+			partNames[i] = ClassUtil.nonNullState(shadowPart.getName());
 		}
 		Node operationNode = createConnectedOperationNode(ClassUtil.nonNullState(shadowExp.getType().getName()), partNames, shadowExp, partNodes);
 		return operationNode;

@@ -101,9 +101,21 @@ public interface Edge extends GraphStringBuilder.GraphEdge, Nameable, Visitable
 	boolean isLoaded();
 
 	/**
-	 * Return true if this edge is part of the to-one navigation from a head.
+	 * Return true if after execution this edge exactly corresponds to a relationship between its matching ends.
+	 * Conversely return false if this edge is a conditional execution path or its ends my be optional nulls.
+	 * Collections are never null-valued, not even empty collections.
 	 */
-	boolean isNavigable();
+	boolean isMatched();
+
+	/**
+	 * Return true if this edge is for a speculation/realized relationship.
+	 */
+	boolean isNew();
+
+	/**
+	 * Return true if this edge is for a constant/loaded/predicated/speculated relationship.
+	 */
+	boolean isOld();
 
 	/**
 	 * Return true if this edge is a property navigation.

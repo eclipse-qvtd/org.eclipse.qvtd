@@ -19,7 +19,7 @@ import org.eclipse.ocl.pivot.TypedElement;
  */
 public interface NodeRole extends Role
 {
-	@NonNull NodeRole asNavigable();
+	//	@NonNull NodeRole asMatched();
 	@Override
 	@NonNull NodeRole asPhase(@NonNull Phase phase);
 	@NonNull NodeRole asPredicated();
@@ -37,6 +37,8 @@ public interface NodeRole extends Role
 
 	boolean isComposed();
 
+	boolean isExplicitNull();
+
 	boolean isExpression();
 
 	boolean isExtraGuardVariable();
@@ -45,9 +47,12 @@ public interface NodeRole extends Role
 
 	boolean isIterator();
 
-	boolean isNavigable();
-
-	boolean isNull();
+	/**
+	 * Return true if after execution a node with this role exactly corresponds to a non-null object or to a non-null value or to an explicit null.
+	 * Conversely return false if a node with this role is optionally null or part of a conditional expression evaluation.
+	 * Collections are never null-valued, not even empty collections.
+	 */
+	boolean isMatched();
 
 	boolean isOperation();
 

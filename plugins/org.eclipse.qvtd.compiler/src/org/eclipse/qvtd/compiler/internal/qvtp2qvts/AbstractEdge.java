@@ -36,6 +36,10 @@ public abstract class AbstractEdge implements Edge
 		region.addEdge(this);
 		sourceNode.addOutgoingEdge(this);
 		targetNode.addIncomingEdge(this);
+		//		if (!sourceNode.isNull()) {				// Root region anomally
+		//		if (!targetNode.isOperation()) {	// operations have distinct argument optionality
+		assert isMatched() == (sourceNode.isMatched() && targetNode.isMatched());
+		//		}
 	}
 
 	@Override
@@ -140,12 +144,12 @@ public abstract class AbstractEdge implements Edge
 
 	@Override
 	public String getArrowhead() {
-		return edgeRole.getArrowhead();
+		return null;
 	}
 
 	@Override
 	public String getArrowtail() {
-		return edgeRole.getArrowtail();
+		return isNavigation() ? "vee" : null;
 	}
 
 	@Override
@@ -174,8 +178,7 @@ public abstract class AbstractEdge implements Edge
 	}
 
 	public @NonNull Integer getPenwidth() {
-		Integer penwidth = edgeRole.getPenwidth();
-		return /*edgeRole.isRealized() ? 2*penwidth :*/ penwidth;
+		return isNavigation() ? 2*Role.LINE_WIDTH : Role.LINE_WIDTH;
 	}
 
 	@Override
@@ -189,7 +192,7 @@ public abstract class AbstractEdge implements Edge
 	}
 
 	public @Nullable String getStyle() {
-		return edgeRole.getStyle();
+		return isMatched() ? null : "dashed";
 	}
 
 	@Override
@@ -223,13 +226,23 @@ public abstract class AbstractEdge implements Edge
 	}
 
 	@Override
-	public boolean isNavigable() {
-		return edgeRole.isNavigable();
+	public boolean isMatched() {
+		return edgeRole.isMatched();
 	}
 
 	@Override
 	public boolean isNavigation() {
 		return edgeRole.isNavigation();
+	}
+
+	@Override
+	public boolean isNew() {
+		return edgeRole.isNew();
+	}
+
+	@Override
+	public boolean isOld() {
+		return edgeRole.isOld();
 	}
 
 	@Override

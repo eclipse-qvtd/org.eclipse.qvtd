@@ -50,9 +50,9 @@ class SpeculatedPartition extends AbstractPartition
 		//
 		resolveRealizedOutputNodes();
 		//
-		//	The ends of all predicated edges not predicated in the Speculation partition are added as is.
+		//	The ends of all matched predicated edges not already matched in the Speculation partition are added as is.
 		//
-		resolvePredicatedEdges();
+		resolveMatchedPredicatedEdges();
 		//
 		//	The non-corrolary, non-realized ends of all realized edges are added as is.
 		//
@@ -183,17 +183,9 @@ class SpeculatedPartition extends AbstractPartition
 		return edgeRole;
 	}
 
-
-	@Override
-	protected void resolveNavigations(@NonNull Node node) {
-		if (!node.isConstant() && !node.isLoaded()) {
-			super.resolveNavigations(node);
-		}
-	}
-
-	protected void resolvePredicatedEdges() {
+	protected void resolveMatchedPredicatedEdges() {
 		for (@NonNull Edge edge : partitioner.getPredicatedEdges()) {
-			if (!partitioner.hasPredicatedEdge(edge) && !partitioner.isCorrolary(edge)) {
+			if (edge.isMatched() && !partitioner.hasPredicatedEdge(edge) && !partitioner.isCorrolary(edge)) {
 				Node sourceNode = edge.getSource();
 				NodeRole sourceNodeRole = sourceNode.getNodeRole();
 				if (!sourceNodeRole.isRealized()) {
@@ -212,13 +204,22 @@ class SpeculatedPartition extends AbstractPartition
 		}
 	}
 
+	@Override
+	protected void resolveNavigations(@NonNull Node node) {
+		if (!node.isConstant() && !node.isLoaded()) {
+			super.resolveNavigations(node);
+		}
+	}
+
 	protected void resolvePredicatedMiddleNodes() {
 		for (@NonNull Node node : partitioner.getPredicatedMiddleNodes()) {
-			NodeRole nodeRole = node.getNodeRole();
-			if (node.isPattern() && node.isClass()) {
-				nodeRole = nodeRole.asSpeculated();
+			if (node.isMatched()) {
+				NodeRole nodeRole = node.getNodeRole();
+				if (node.isPattern() && node.isClass()) {
+					nodeRole = nodeRole.asSpeculated();
+				}
+				gatherSourceNavigations(node, nodeRole.asSpeculated());
 			}
-			gatherSourceNavigations(node, nodeRole);
 		}
 	}
 
@@ -257,16 +258,19 @@ class SpeculatedPartition extends AbstractPartition
 
 	protected void resolveRealizedMiddleNodes() {
 		for (@NonNull Node node : partitioner.getRealizedMiddleNodes()) {
-			NodeRole nodeRole = node.getNodeRole();
-			if (node.isPattern() && node.isClass()) {
-				nodeRole = nodeRole.asSpeculated().asNavigable()/*.setHead()*/;
-			}
-			if (!hasNode(node)) {
-				addNode(node, nodeRole);
-			}
-			for (@NonNull NavigationEdge edge : node.getNavigationEdges()) {
-				if (partitioner.hasRealizedEdge(edge)) {
-					tracedInputNodes.add(edge.getTarget());
+			if (node.isMatched() && node.isClass()) {
+				NodeRole nodeRole = node.getNodeRole();
+				//				assert nodeRole.isMatched();
+				assert node.isPattern();//
+				nodeRole = nodeRole.asSpeculated();
+				//				}
+				if (!hasNode(node)) {
+					addNode(node, nodeRole);
+				}
+				for (@NonNull NavigationEdge edge : node.getNavigationEdges()) {
+					if (partitioner.hasRealizedEdge(edge)) {
+						tracedInputNodes.add(edge.getTarget());
+					}
 				}
 			}
 		}

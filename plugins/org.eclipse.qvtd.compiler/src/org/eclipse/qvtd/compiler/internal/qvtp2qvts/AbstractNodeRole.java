@@ -27,10 +27,10 @@ public abstract class AbstractNodeRole extends AbstractRole implements NodeRole
 		super(phase);
 	}
 
-	@Override
-	public @NonNull NodeRole asNavigable() {
-		throw new UnsupportedOperationException();
-	}
+	//	@Override
+	//	public @NonNull NodeRole asMatched() {
+	//		throw new UnsupportedOperationException();
+	//	}
 
 	@Override
 	public @NonNull AbstractNodeRole asPhase(@NonNull Phase phase) {
@@ -93,6 +93,11 @@ public abstract class AbstractNodeRole extends AbstractRole implements NodeRole
 	}
 
 	@Override
+	public boolean isExplicitNull() {
+		return false;
+	}
+
+	@Override
 	public boolean isExpression() {
 		return false;
 	}
@@ -113,12 +118,7 @@ public abstract class AbstractNodeRole extends AbstractRole implements NodeRole
 	}
 
 	@Override
-	public boolean isNavigable() {
-		return false;
-	}
-
-	@Override
-	public boolean isNull() {
+	public boolean isMatched() {
 		return false;
 	}
 

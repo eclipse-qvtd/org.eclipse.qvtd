@@ -162,7 +162,7 @@ public abstract class AbstractMappingRegion extends AbstractRegion implements Ma
 		//
 		List<@NonNull Node> navigableNodes = new ArrayList<>();
 		for (@NonNull Node node : getNodes()) {
-			if (node.isPattern() && node.isNavigable() && node.isClass() && !node.isNull() && !node.isOperation()) {	// Excludes, null, attributes, constants, operations
+			if (node.isPattern() && node.isMatched() && node.isClass() && !node.isExplicitNull() && !node.isOperation()) {	// Excludes, null, attributes, constants, operations
 				if (node.isLoaded() || node.isPredicated() || node.isSpeculated()) {
 					navigableNodes.add(node);
 				}
@@ -190,7 +190,7 @@ public abstract class AbstractMappingRegion extends AbstractRegion implements Ma
 			for (@NonNull Edge navigationEdge : sourceNode.getNavigationEdges()) {
 				if (!navigationEdge.isRealized()) {
 					Node targetNode = navigationEdge.getTarget();
-					if (targetNode.isNavigable() && targetNode.isClass() && !targetNode.isNull()) {
+					if (targetNode.isMatched() && targetNode.isClass() && !targetNode.isExplicitNull()) {
 						Set<@NonNull Node> sourceClosure = targetFromSourceClosure.get(targetNode);
 						assert sourceClosure != null;
 						sourceClosure.add(sourceNode);
@@ -270,7 +270,13 @@ public abstract class AbstractMappingRegion extends AbstractRegion implements Ma
 		//
 		Set<@NonNull Node> debugHeadNodes = new HashSet<>();
 		for (@NonNull Node node : getNodes()) {
-			if (node.isHead() && !node.isTrue() && !node.getNodeRole().isExtraGuardVariable()) {
+			if (node.isTrue()  || node.getNodeRole().isExtraGuardVariable()) {
+				debugHeadNodes.add(node);
+				node.setHead();
+				assert !headNodes.contains(node);
+				headNodes.add(node);
+			}
+			else if (node.isHead()) {
 				debugHeadNodes.add(node);
 			}
 		}

@@ -162,7 +162,7 @@ class PartitioningVisitor extends AbstractVisitor<@Nullable Visitable>
 				if (edge.isNavigation() && edge.isRealized()) {
 					EdgeRole edgeRole = partition.getEdgeRole(edge);
 					if ((edgeRole != null) && edgeRole.isPredicated()) {
-						partialNode = (TypedNode) Nodes.createStepNode(partialRegion, typedNode);
+						partialNode = (TypedNode) Nodes.createStepNode(partialRegion, typedNode, nodeRole.isMatched());
 						break;
 					}
 				}

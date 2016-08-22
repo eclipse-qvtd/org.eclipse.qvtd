@@ -75,7 +75,7 @@ class NavigationForestBuilder extends AbstractForestBuilder
 	@Override
 	protected void addEdge(@NonNull NavigationEdge edge) {
 		if (edge.isRealized()) {}
-		else if (!edge.isNavigable()) {}
+		//		else if (!edge.isMatched()) {}
 		else if (edge.isCast()) {}
 		else {
 			assert !edge.isExpression();
@@ -83,7 +83,7 @@ class NavigationForestBuilder extends AbstractForestBuilder
 			//			Node sourceNode = edge.getSource();
 			//			navigableNodes.add(sourceNode);
 			Node targetNode = edge.getTarget();
-			if (targetNode.isNull()) {
+			if (targetNode.isExplicitNull()) {
 				//				untraversedEdges.add(edge);
 			}
 			else {

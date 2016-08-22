@@ -164,6 +164,15 @@ public abstract class AbstractNode implements Node
 	public void addTypedElement(@NonNull TypedElement typedElement) {
 		if (!typedElements.contains(typedElement)) {
 			typedElements.add(typedElement);
+			if (isPattern() && isMatched() && !isRealized() && (typedElements.size() == 1)) {
+				boolean isMatched = Nodes.isMatched(typedElement);
+				if (!isMatched) {
+					isMatched = Nodes.isMatched(typedElement);
+				}
+				if (!isMatched) {
+					region.getMultiRegion().getSchedulerConstants().addProblem(region.createWarning("Cannot add unmatched " + typedElement + " to " + this));
+				}
+			}
 		}
 	}
 
@@ -409,7 +418,7 @@ public abstract class AbstractNode implements Node
 	}
 
 	protected @NonNull Integer getPenwidth() {
-		return isHead() ? Role.HEAD_WIDTH : Role.LINE_WIDTH;
+		return isHead() ? Role.HEAD_WIDTH : !isExpression() ? 2*Role.LINE_WIDTH : Role.LINE_WIDTH;
 	}
 
 	@Override
@@ -472,13 +481,13 @@ public abstract class AbstractNode implements Node
 	}
 
 	protected @Nullable String getStyle() {
-		if (isNull()) {
-			return "rounded";
-		}
-		if (isTrue()) {
-			return null;
-		}
-		boolean isDashed = !isNavigable() && (isExpression() || !isRealized());
+		//		if (isNull()) {
+		//			return "rounded";
+		//		}
+		//		if (isTrue() || getNodeRole().isExtraGuardVariable()) {
+		//			return null;
+		//		}
+		boolean isDashed = !isMatched(); //!isRequired() && (isExpression() || !isRealized());
 		if (isDataType()) {
 			return isDashed ? "\"rounded,dashed\"" : "rounded";
 		}
@@ -527,6 +536,11 @@ public abstract class AbstractNode implements Node
 	}
 
 	@Override
+	public boolean isExplicitNull() {
+		return nodeRole.isExplicitNull();
+	}
+
+	@Override
 	public boolean isExpression() {
 		return nodeRole.isExpression();
 	}
@@ -552,13 +566,13 @@ public abstract class AbstractNode implements Node
 	}
 
 	@Override
-	public boolean isNavigable() {
-		return nodeRole.isNavigable();
+	public boolean isNew() {
+		return nodeRole.isNew();
 	}
 
 	@Override
-	public boolean isNull() {
-		return nodeRole.isNull();
+	public boolean isOld() {
+		return nodeRole.isOld();
 	}
 
 	@Override
@@ -584,6 +598,11 @@ public abstract class AbstractNode implements Node
 	@Override
 	public boolean isRealized() {
 		return nodeRole.isRealized();
+	}
+
+	@Override
+	public boolean isMatched() {
+		return nodeRole.isMatched();
 	}
 
 	@Override
@@ -688,7 +707,7 @@ public abstract class AbstractNode implements Node
 	public void setLabel(@NonNull GraphStringBuilder s) {
 		StringBuilder n = new StringBuilder();
 		n.append(getName());
-		if (!isNull() && !isTrue()) {
+		if (!isExplicitNull() && !isTrue()) {
 			n.append("\\n");
 			n.append(PrettyPrinter.printType(getCompleteClass().getPrimaryClass()));
 		}

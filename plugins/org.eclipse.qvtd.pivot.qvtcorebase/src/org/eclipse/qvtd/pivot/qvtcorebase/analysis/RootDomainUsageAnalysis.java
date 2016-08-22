@@ -30,6 +30,7 @@ import org.eclipse.ocl.pivot.CompletePackage;
 import org.eclipse.ocl.pivot.DataType;
 import org.eclipse.ocl.pivot.Detail;
 import org.eclipse.ocl.pivot.Element;
+import org.eclipse.ocl.pivot.NullLiteralExp;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
@@ -91,7 +92,9 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 					if (residue == 0) {
 						return RootDomainUsageAnalysis.this.getTypedModel(i);
 					}
-					System.err.println("Ambiguous TypedModel: " + this + " for " + LabelUtil.getLabel(context));
+					if (!(context instanceof NullLiteralExp)) {
+						System.err.println("Ambiguous TypedModel: " + this + " for " + LabelUtil.getLabel(context));
+					}
 					//					throw new IllegalStateException("Ambiguous TypedModel: " + this);
 					return RootDomainUsageAnalysis.this.getTypedModel(i);
 				}

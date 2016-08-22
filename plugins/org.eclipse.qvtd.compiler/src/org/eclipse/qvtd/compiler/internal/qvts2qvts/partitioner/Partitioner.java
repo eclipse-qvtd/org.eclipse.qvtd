@@ -18,6 +18,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.qvtd.compiler.CompilerProblem;
 import org.eclipse.qvtd.compiler.ProblemHandler;
@@ -204,18 +205,23 @@ public class Partitioner
 							}
 						}
 						if (edge.getTarget().isLoaded() && edge.getSource().getClassDatumAnalysis().getDomainUsage().isMiddle()) {
-							navigableEdges.add(navigationEdge);
+							//							navigableEdges.add(navigationEdge);
 						}
 					}
-					else if (edge.isNavigable() && !edge.isCast()) {
+					else if (edge.isMatched() && !edge.isCast()) {
 						assert !edge.isExpression();
 						assert !edge.isComputation();
 						Node targetNode = edge.getTarget();
-						if (!targetNode.isNull()) {
-							navigableEdges.add(navigationEdge);
+						if (!targetNode.isExplicitNull()) {
+							//							navigableEdges.add(navigationEdge);
 						}
 					}
 				}
+			}
+		}
+		for (@NonNull NavigationEdge edge : region.getNavigationEdges()) {
+			if (!edge.isSecondary() && !edge.isRealized()) {
+				navigableEdges.add(edge);
 			}
 		}
 	}
@@ -245,7 +251,7 @@ public class Partitioner
 						//						}
 						//					}
 					}
-					else if (!node.isNull()) {
+					else if (!node.isExplicitNull()) {
 						throw new IllegalStateException("middle node must be predicated or realized : " + node);
 					}
 
@@ -266,63 +272,83 @@ public class Partitioner
 
 	private void check() {
 		for (@NonNull Node node : region.getNodes()) {
-			if (node.isSpeculated() || node.isRealized()) {
-				assert hasRealizedNode(node) : "Should have realized " + node + " in " + region;
+			if ((node.isSpeculated() || node.isRealized()) && !hasRealizedNode(node)) {
+				problemHandler.addProblem(region.createError("Should have realized " + node));
 			}
 		}
 		Set<@NonNull Edge> allPrimaryEdges = new HashSet<>();
 		for (@NonNull Edge edge : region.getEdges()) {
 			if (!edge.isSecondary()) {
 				allPrimaryEdges.add(edge);
-				if (edge.isRealized()) {
-					assert hasRealizedEdge(edge) : "Should have realized " + edge + " in " + region;
+				if (edge.isRealized() && !hasRealizedEdge(edge)) {
+					problemHandler.addProblem(region.createError("Should have realized " + edge));
 				}
 			}
 		}
 		//
-		Set<@NonNull Edge> partitionedEdges = debugEdge2partitions.keySet();
+		Set<@NonNull Node> deadNodes = computeDeadNodes(region.getNodes());
+		Set<@NonNull Edge> deadEdges = computeDeadEdges(deadNodes);
+		allPrimaryEdges.removeAll(deadEdges);
+		Set<@NonNull Edge> partitionedEdges = new HashSet<>(debugEdge2partitions.keySet());
 		if (!partitionedEdges.equals(allPrimaryEdges)) {
-			StringBuilder s = null;
 			Set<@NonNull Edge> extraEdgesSet = Sets.newHashSet(partitionedEdges);
 			CompilerUtil.removeAll(extraEdgesSet, allPrimaryEdges);
 			for (@NonNull Edge edge : extraEdgesSet) {
-				if (s == null) {
-					s = new StringBuilder();
-				}
-				s.append("\nextra: ");
-				s.append(edge);
+				problemHandler.addProblem(region.createWarning("Extra " + edge));
 			}
 			Set<@NonNull Edge> missingEdgesSet = Sets.newHashSet(allPrimaryEdges);
 			missingEdgesSet.removeAll(partitionedEdges);
 			for (@NonNull Edge edge : missingEdgesSet) {
-				if (!isCorrolary(edge) && !isDead(edge)) {
-					if (s == null) {
-						s = new StringBuilder();
+				if (!isCorrolary(edge)) {// && !isDead(edge)) {
+					problemHandler.addProblem(region.createWarning("Missing " + edge));
 				}
-					s.append("\nmissing: ");
-					s.append(edge);
 			}
 		}
-			assert s == null : "Bad edges for " + region + s.toString();
-	}
 	}
 
-	private boolean isDead(@NonNull Edge edge) {
-		if (!edge.isExpression()) {
-			return false;
+	private @NonNull Set<@NonNull Edge> computeDeadEdges(@NonNull Iterable<@NonNull Node> deadNodes) {
+		Set<@NonNull Edge> deadEdges = new HashSet<>();
+		for (@NonNull Node node : deadNodes) {
+			deadEdges.addAll(node.getIncomingEdges());
+			deadEdges.addAll(node.getOutgoingEdges());
+		}
+		return deadEdges;
+	}
+
+	private @NonNull Set<@NonNull Node> computeDeadNodes(@NonNull Iterable<@NonNull Node> nodes) {
+		Set<@NonNull Node> deadNodes = new HashSet<>();
+		Set<@NonNull Node> moreDeadNodes = null;
+		for (@NonNull Node node : nodes) {
+			if (!node.isHead() && isDead(node, null)) {
+				if (moreDeadNodes == null) {
+					moreDeadNodes = new HashSet<>();
 				}
-		Node node = edge.getTarget();
-		for (@NonNull Edge incomingEdge : node.getIncomingEdges()) {
-			if (incomingEdge.isNavigable()) {
-				return false;
+				moreDeadNodes.add(node);
 			}
 		}
-		for (@NonNull Edge outgoingEdge : node.getOutgoingEdges()) {
-			if (!isDead(outgoingEdge)) {
-				return false;
+		if (moreDeadNodes == null) {
+			return deadNodes;
 		}
+		while (moreDeadNodes.size() > 0) {
+			deadNodes.addAll(moreDeadNodes);
+			List<@NonNull Node> moreDeadNodesList = new ArrayList<>(moreDeadNodes);
+			moreDeadNodes = null;
+			for (@NonNull Node deadNode : moreDeadNodesList) {
+				for (@NonNull Edge edge : deadNode.getIncomingEdges()) {
+					Node sourceNode = edge.getSource();
+					if (!sourceNode.isHead() && isDead(sourceNode, deadNodes)) {
+						if (moreDeadNodes == null) {
+							moreDeadNodes = new HashSet<>();
 						}
-		return true;
+						moreDeadNodes.add(sourceNode);
+					}
+				}
+			}
+			if (moreDeadNodes == null) {
+				break;
+			}
+		}
+		return deadNodes;
 	}
 
 	private @NonNull MicroMappingRegion createAssignmentRegion(@NonNull NavigationEdge outputEdge, int i) {
@@ -431,6 +457,45 @@ public class Partitioner
 		}
 		return corrolaryProperties.contains(((NavigationEdge)edge).getProperty());
 	}
+	private boolean isDead(@NonNull Node node, @Nullable Set<@NonNull Node> knownDeadNodes) {
+		if (node.isHead()) {
+			return false;
+		}
+		for (@NonNull Edge edge : node.getIncomingEdges()) {
+			if (edge.isNavigation()) {
+				if ((knownDeadNodes == null) || !knownDeadNodes.contains(edge.getSource())) {
+					return false;
+				}
+			}
+		}
+		for (@NonNull Edge edge : node.getOutgoingEdges()) {
+			if (edge.isNavigation() || edge.isExpression()) {
+				if ((knownDeadNodes == null) || !knownDeadNodes.contains(edge.getTarget())) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+
+
+	/*	private boolean isDead(@NonNull Edge edge) {
+		if (!edge.isExpression()) {
+			return false;
+		}
+		Node node = edge.getTarget();
+		for (@NonNull Edge incomingEdge : node.getIncomingEdges()) {
+			if ((incomingEdge != edge) && incomingEdge.isMatched()) {
+				return false;
+			}
+		}
+		for (@NonNull Edge outgoingEdge : node.getOutgoingEdges()) {
+			if (!isDead(outgoingEdge)) {
+				return false;
+			}
+		}
+		return true;
+	} */
 
 	public @NonNull Iterable<@NonNull MappingRegion> partition() {
 		//		System.out.println("    partition " + region);

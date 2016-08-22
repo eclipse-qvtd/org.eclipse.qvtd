@@ -406,12 +406,11 @@ public class QVTcCompilerTests extends LoadTestCase
 			//
 			Class<? extends Transformer> txClass = myQVT.buildTransformation("Forward2Reverse.qvtc", "reverse", "List2List.genmodel");
 			//
-			/* FIXME Bug 499432
 			myQVT.createGeneratedExecutor(txClass);
 			myQVT.loadInput("forward", "EmptyList.xmi");
 			myQVT.executeTransformation();
 			myQVT.saveOutput("reverse", "EmptyList_CG.xmi", "EmptyList_expected.xmi", Forward2ReverseNormalizer.INSTANCE);
-			 */			//
+			//
 			myQVT.createGeneratedExecutor(txClass);
 			myQVT.loadInput("forward", "OneElementList.xmi");
 			myQVT.executeTransformation();

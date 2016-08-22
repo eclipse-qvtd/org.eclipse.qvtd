@@ -40,27 +40,11 @@ public interface EdgeRole extends Role
 	@NonNull EdgeRole asPhase(@NonNull Phase phase);
 
 	@NonNull EdgeRole asPredicated();
-	//	@NonNull EdgeRole asSpeculated();
-	//	@NonNull EdgeRole asSpeculation();
-
-	@Nullable String getArrowhead();
-
-	@Nullable String getArrowtail();
 
 	/**
 	 * Return a label for the edge, null for none.
 	 */
 	@Nullable String getLabel();
-
-	/**
-	 * Return the pen width with which this edge is drawn.
-	 */
-	@NonNull Integer getPenwidth();
-
-	/**
-	 * Return the line style with which this edge is drawn, nullfor solid.
-	 */
-	@Nullable String getStyle();
 
 	boolean isCast();
 	boolean isComputation();
@@ -71,9 +55,11 @@ public interface EdgeRole extends Role
 	boolean isExpression();
 
 	/**
-	 * Return true if this edge forms part of the to-one navigation reachable from a head.
+	 * Return true if after execution an edge with this role exactly corresponds to a relationship between its matching ends.
+	 * Conversely return false if an edge with this role is a conditional execution path or its ends my be optional nulls.
+	 * Collections are never null-valued, not even empty collections.
 	 */
-	boolean isNavigable();
+	boolean isMatched();
 
 	/**
 	 * Return true if this edge represents a property navigation.

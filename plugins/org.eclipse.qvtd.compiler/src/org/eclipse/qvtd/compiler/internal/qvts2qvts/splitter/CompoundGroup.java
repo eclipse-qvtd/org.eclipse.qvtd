@@ -192,7 +192,7 @@ class CompoundGroup extends AbstractGroup
 		for (@NonNull Node nonOverlapNode : nonOverlapNodes) {
 			for (@NonNull NavigationEdge edge : nonOverlapNode.getNavigationEdges()) {
 				assert edge.getSource() == nonOverlapNode;
-				if (!edge.isRealized() && edge.isNavigable()) {
+				if (!edge.isRealized() && edge.isMatched()) {
 					Property property = edge.getProperty();
 					Property opposite = property.getOpposite();
 					if ((opposite != null) && opposite.isIsMany()) {

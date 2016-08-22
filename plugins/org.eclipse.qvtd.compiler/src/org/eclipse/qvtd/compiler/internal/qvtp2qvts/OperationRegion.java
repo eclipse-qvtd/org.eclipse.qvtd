@@ -67,7 +67,7 @@ public class OperationRegion extends AbstractRegion
 		extraNode = selfNode;
 		//
 		resultNode = Nodes.createStepNode("result", operationCallExp, extraNode, false);
-		Edges.createExpressionEdge(extraNode, null, resultNode);
+		Edges.createExpressionEdge(extraNode, "«equals»", resultNode, false);
 		//
 		List<Variable> ownedParameters = specification.getOwnedParameters();
 		List<OCLExpression> ownedArguments = operationCallExp.getOwnedArguments();
@@ -152,7 +152,7 @@ public class OperationRegion extends AbstractRegion
 								Edges.createNavigationEdge(extraNode2, iterateProperty, elementNode);
 								extraNode2 = elementNode;
 							}
-							assert !extraNode2.isNavigable();
+							//							assert !extraNode2.isMatched();
 							Node nextNode = Nodes.createDataTypeNode(extraNode2, navigationCallExp);
 							Edges.createNavigationEdge(extraNode2, property, nextNode);
 							extraNode2 = nextNode;

@@ -232,7 +232,7 @@ public class GraphMLStringBuilder extends GraphMLBuilder implements GraphStringB
 		else if (style.indexOf("dotted") >= 0) {
 			lineType = LineType.dotted;
 		}
-		if (style.indexOf("rounded") >= 0) {
+		if ("rectangle".equals(shape) && (style.indexOf("rounded") >= 0)) {
 			shape = ShapeType.roundrectangle.toString();
 		}
 	}

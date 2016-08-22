@@ -633,8 +633,10 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 
 		for (@NonNull Region region : getCallableRegions()) {
 			for (@NonNull Node node : region.getHeadNodes()) {
-				Node introducedNode = rootContainmentRegion.getIntroducerNode(node);
-				addIntroducedNode(introducedNode);
+				if (node.isLoaded()) {
+					Node introducedNode = rootContainmentRegion.getIntroducerNode(node);
+					addIntroducedNode(introducedNode);
+				}
 			}
 		}
 		/*		for (Map.Entry<@NonNull ClassDatumAnalysis, @NonNull List<@NonNull Node>> entry : consumedClassDatumAnalysis2headNodes.entrySet()) {

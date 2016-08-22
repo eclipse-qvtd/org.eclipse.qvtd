@@ -111,7 +111,13 @@ public interface Node extends ConnectionEnd, GraphStringBuilder.GraphNode, Namea
 	boolean isDataType();
 
 	/**
-	 * Return true if this node is an OCL expression.
+	 * Return true if this node is an explicitly null value.
+	 */
+	boolean isExplicitNull();
+
+	/**
+	 * Return true if this node is part of an OCL expression; an iteration or operation other than
+	 * oclAsType() / includes().
 	 */
 	boolean isExpression();
 
@@ -142,14 +148,21 @@ public interface Node extends ConnectionEnd, GraphStringBuilder.GraphNode, Namea
 	boolean isLoaded();
 
 	/**
-	 * Return true if this node is part of the to-one navigation path that is navigated to determine the navigation heads.
+	 * Return true if after execution this node exactly corresponds to a non-null object or to a non-null value or to an explicit null.
+	 * Conversely return false if this node is optionally null or part of a conditional expression evaluation.
+	 * Collections are never null-valued, not even empty collections.
 	 */
-	boolean isNavigable();
+	boolean isMatched();
 
 	/**
-	 * Return true if this node is a null value.
+	 * Return true if this node is for a speculation/realized element.
 	 */
-	boolean isNull();
+	boolean isNew();
+
+	/**
+	 * Return true if this node is for a constant/loaded/predicated/speculated element.
+	 */
+	boolean isOld();
 
 	boolean isOperation();
 

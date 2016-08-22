@@ -173,7 +173,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 
 		@Override
 		public boolean apply(@NonNull Node node) {
-			return node.isNavigable();
+			return node.isMatched();
 		}
 	}
 
@@ -523,7 +523,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 			if (edge != null) {
 				Node protoTarget = protoEdge.getTarget();
 				Node target = edge.getTarget();
-				if (target.isNull() != (protoTarget.isNull())) {
+				if (target.isExplicitNull() != (protoTarget.isExplicitNull())) {
 					return false;
 				}
 				sourceNode = target;
@@ -620,7 +620,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 						if (primaryTargetNode.getCompleteClass() != secondaryTargetNode.getCompleteClass()) {		// FIXME conforms
 							return false;
 						}
-						if (primaryTargetNode.isNull() != secondaryTargetNode.isNull()) {		// FIXME conforms
+						if (primaryTargetNode.isExplicitNull() != secondaryTargetNode.isExplicitNull()) {		// FIXME conforms
 							return false;
 						}
 					}
@@ -995,7 +995,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 				List<String> edgeNames = new ArrayList<String>();
 				for (@NonNull NavigationEdge edge : headNode.getNavigationEdges()) {
 					String propertyName = edge.getProperty().getName();
-					edgeNames.add(edge.getTarget().isNull() ? propertyName + "0" : propertyName);
+					edgeNames.add(edge.getTarget().isExplicitNull() ? propertyName + "0" : propertyName);
 				}
 				Collections.sort(edgeNames);
 				for (String edgeName : edgeNames) {
@@ -1233,11 +1233,11 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 	private @Nullable Iterable<@NonNull NodeConnection> createHeadConnections() {
 		List<@NonNull NodeConnection> headConnections = null;
 		for (@NonNull Node headNode : getHeadNodes()) {
-			if (/*headNode.isLoaded() &&*/ !headNode.isInternal()) {
+			if (/*headNode.isLoaded() &&*/ !headNode.isInternal() && !headNode.isTrue()) {
 				NodeConnection headConnection = createHeadConnection(headNode);
 				if (headConnection == null) {
 					if (!headNode.getNodeRole().isExtraGuardVariable()) {	// We don't know if extra guards are needed or not
-						System.err.println("createHeadConnections abandoned for " + headNode + " of " + this);
+						multiRegion.getSchedulerConstants().addProblem(createError("createHeadConnections abandoned for " + headNode));
 						headConnection = createHeadConnection(headNode);	// FIXME debugging
 						return null;										//  so matching only fails for unmatchable real heads
 					}
@@ -2064,7 +2064,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 				Edge nextCallingEdge = callingNode.getNavigationEdge(calledEdge.getProperty());
 				if (nextCallingEdge != null) {
 					Node nextCallingNode = nextCallingEdge.getTarget();
-					if ((nextCallingNode.isNull() != nextCalledNode.isNull())) {
+					if ((nextCallingNode.isExplicitNull() != nextCalledNode.isExplicitNull())) {
 						return false;
 					}
 					if (!isCompatiblePattern(nextCalledNode, nextCallingNode, called2calling)) {

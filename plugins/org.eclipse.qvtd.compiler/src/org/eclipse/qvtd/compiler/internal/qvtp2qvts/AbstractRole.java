@@ -54,6 +54,16 @@ public abstract class AbstractRole implements Role
 	}
 
 	@Override
+	public final boolean isNew() {
+		return (phase == Phase.SPECULATION) || (phase == Phase.REALIZED);
+	}
+
+	@Override
+	public final boolean isOld() {
+		return (phase == Phase.CONSTANT) || (phase == Phase.LOADED) || (phase == Phase.PREDICATED) || (phase == Phase.SPECULATED);
+	}
+
+	@Override
 	public final boolean isPredicated() {
 		return phase == Phase.PREDICATED;
 	}

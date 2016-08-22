@@ -60,7 +60,7 @@ class SplitterUtil
 	private static void computeComputableTargetNodes(@NonNull Set<@NonNull Node> computableTargetNodes, @NonNull Node sourceNode, @NonNull Set<@NonNull Node> unresolvedOperationNodes) {
 		if (computableTargetNodes.add(sourceNode)) {
 			for (@NonNull Edge edge : sourceNode.getOutgoingEdges()) {
-				if (edge.isComputation() || (edge.isNavigation() && !edge.isNavigable())) {
+				if (edge.isComputation() || (edge.isNavigation() && !edge.isMatched())) {
 					Node targetNode = edge.getTarget();
 					if (targetNode.isRealized() && targetNode.isOperation()) {
 						unresolvedOperationNodes.add(targetNode);		// Keys require an all-input check.
@@ -123,7 +123,7 @@ class SplitterUtil
 		if (reachableNodes.add(sourceNode)) {
 			for (@NonNull NavigationEdge edge : sourceNode.getNavigationEdges()) {
 				assert edge.getSource() == sourceNode;
-				if (!edge.isRealized() && edge.isNavigable()) {
+				if (!edge.isRealized() && edge.isMatched()) {
 					Node targetNode = edge.getTarget();
 					computeNavigableNodes(reachableNodes, targetNode);
 				}

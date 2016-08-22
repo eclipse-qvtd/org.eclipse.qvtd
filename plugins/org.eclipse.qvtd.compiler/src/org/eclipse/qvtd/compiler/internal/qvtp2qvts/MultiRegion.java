@@ -73,7 +73,7 @@ public class MultiRegion
 		return Iterables.filter(allRegions, OperationRegion.class);
 	}
 
-	public @NonNull SchedulerConstants getSchedulerConstants() {
+	public @NonNull QVTp2QVTs getSchedulerConstants() {
 		return qvtp2qvts;
 	}
 

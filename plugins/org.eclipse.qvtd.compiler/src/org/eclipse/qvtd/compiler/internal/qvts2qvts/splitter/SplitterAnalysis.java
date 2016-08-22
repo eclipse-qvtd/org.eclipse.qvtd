@@ -51,7 +51,7 @@ class SplitterAnalysis
 		//
 		List<@NonNull Node> headNodes = new ArrayList<>();
 		for (@NonNull Node headNode : region.getHeadNodes()) {
-			if (headNode.isNavigable()) {			// Ignore extra heads
+			if (headNode.isMatched()) {			// Ignore extra heads
 				headNodes.add(headNode);
 			}
 		}

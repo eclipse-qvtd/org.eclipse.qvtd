@@ -25,10 +25,12 @@ import org.eclipse.qvtd.pivot.qvtrelation.RelationImplementation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationModel;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
 import org.eclipse.qvtd.pivot.qvtrelation.util.QVTrelationVisitor;
+import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
+import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.utilities.QVTtemplatePrettyPrintVisitor;
 
 public class QVTrelationPrettyPrintVisitor extends QVTtemplatePrettyPrintVisitor implements QVTrelationVisitor<Object>
-{	
+{
 	public QVTrelationPrettyPrintVisitor(@NonNull PrettyPrinter context) {
 		super(context);
 	}
@@ -48,6 +50,14 @@ public class QVTrelationPrettyPrintVisitor extends QVTtemplatePrettyPrintVisitor
 	}
 
 	@Override
+	public Object visitObjectTemplateExp(@NonNull ObjectTemplateExp object) {
+		context.appendName(object);
+		context.append(" : ");
+		context.appendTypedMultiplicity(object);
+		return null;
+	}
+
+	@Override
 	public Object visitRelation(@NonNull Relation object) {
 		return super.visitRule(object);
 	}
@@ -58,7 +68,7 @@ public class QVTrelationPrettyPrintVisitor extends QVTtemplatePrettyPrintVisitor
 		Relation referredRelation = object.getReferredRelation();
 		context.appendName(referredRelation);
 		context.push("(", "");
-		String prefix = null; //$NON-NLS-1$
+		String prefix = null;
 		for (OCLExpression argument : arguments) {
 			if (prefix != null) {
 				context.next(null, prefix, " ");
@@ -96,5 +106,13 @@ public class QVTrelationPrettyPrintVisitor extends QVTtemplatePrettyPrintVisitor
 	@Override
 	public Object visitRelationalTransformation(@NonNull RelationalTransformation object) {
 		return super.visitTransformation(object);
+	}
+
+	@Override
+	public Object visitTemplateExp(@NonNull TemplateExp object) {
+		context.appendName(object);
+		context.append(" : ");
+		context.appendTypedMultiplicity(object);
+		return null;
 	}
 }

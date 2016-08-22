@@ -276,7 +276,7 @@ public class RootRegion2Mapping extends AbstractScheduledRegion2Mapping
 		Property child2parentProperty = edge.getProperty().getOpposite();
 		assert child2parentProperty != null;
 		OCLExpression propertyCallExp = helper.createNavigationCallExp(helper.createVariableExp(asIterator), child2parentProperty);
-		if (edge.getSource().isNull()) {
+		if (edge.getSource().isExplicitNull()) {
 			OCLExpression equalsExp = helper.createOperationCallExp(propertyCallExp, "=", helper.createNullLiteralExp());
 			initExpression = helper.createIteratorExp(initExpression, getSelectIteration(), Collections.singletonList(asIterator), equalsExp);
 		}

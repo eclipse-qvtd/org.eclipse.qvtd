@@ -10,13 +10,18 @@
  *******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.qvtp2qvts;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CallExp;
+import org.eclipse.ocl.pivot.CollectionType;
+import org.eclipse.ocl.pivot.IfExp;
+import org.eclipse.ocl.pivot.LoopExp;
 import org.eclipse.ocl.pivot.NavigationCallExp;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
@@ -47,7 +52,7 @@ public class Nodes
 		}
 
 		@Override
-		public boolean isNavigable() {
+		public boolean isMatched() {
 			return true;
 		}
 	}
@@ -146,6 +151,11 @@ public class Nodes
 		}
 
 		@Override
+		public boolean isExpression() {
+			return true;
+		}
+
+		@Override
 		public boolean isInternal() {
 			return true;
 		}
@@ -168,24 +178,46 @@ public class Nodes
 
 	private static class NullNodeRole extends AbstractNodeRole
 	{
-		private static final @NonNull NullNodeRole NULL = new NullNodeRole();
+		private static final @NonNull NullNodeRole NULL_MATCHED = new NullNodeRole(true);
+		private static final @NonNull NullNodeRole NULL_OPTIONAL = new NullNodeRole(false);
 
-		private NullNodeRole() {
+		protected final boolean isMatched;
+
+		public static @NonNull NullNodeRole getNullNodeRole(boolean isMatched) {
+			return isMatched ? NULL_MATCHED : NULL_OPTIONAL;
+		}
+
+		private NullNodeRole(boolean isMatched) {
 			super(Role.Phase.CONSTANT);
+			this.isMatched = isMatched;
 		}
 
 		@Override
-		public boolean isNull() {
+		public boolean isExplicitNull() {
 			return true;
+		}
+
+		@Override
+		public boolean isMatched() {
+			return isMatched;
+		}
+
+		@Override
+		public String toString() {
+			return phase + (isMatched() ? "-Matched-" : "-Optional-") + getClass().getSimpleName();
 		}
 	}
 
 	private static class OperationNodeRole extends AbstractNodeRole
 	{
-		private static final @NonNull OperationNodeRole CONSTANT_OPERATION = new OperationNodeRole(Role.Phase.CONSTANT);
-		private static final @NonNull OperationNodeRole LOADED_OPERATION = new OperationNodeRole(Role.Phase.LOADED);
-		private static final @NonNull OperationNodeRole PREDICATED_OPERATION = new OperationNodeRole(Role.Phase.PREDICATED);
-		private static final @NonNull OperationNodeRole REALIZED_OPERATION = new OperationNodeRole(Role.Phase.REALIZED);
+		private static final @NonNull OperationNodeRole CONSTANT_OPTIONAL_OPERATION = new OperationNodeRole(Role.Phase.CONSTANT, false);
+		private static final @NonNull OperationNodeRole CONSTANT_MATCHED_OPERATION = new OperationNodeRole(Role.Phase.CONSTANT, true);
+		private static final @NonNull OperationNodeRole LOADED_OPTIONAL_OPERATION = new OperationNodeRole(Role.Phase.LOADED, false);
+		private static final @NonNull OperationNodeRole LOADED_MATCHED_OPERATION = new OperationNodeRole(Role.Phase.LOADED, true);
+		private static final @NonNull OperationNodeRole PREDICATED_OPTIONAL_OPERATION = new OperationNodeRole(Role.Phase.PREDICATED, false);
+		private static final @NonNull OperationNodeRole PREDICATED_MATCHED_OPERATION = new OperationNodeRole(Role.Phase.PREDICATED, true);
+		private static final @NonNull OperationNodeRole REALIZED_OPTIONAL_OPERATION = new OperationNodeRole(Role.Phase.REALIZED, false);
+		private static final @NonNull OperationNodeRole REALIZED_MATCHED_OPERATION = new OperationNodeRole(Role.Phase.REALIZED, true);
 
 		public static @NonNull Phase getOperationNodePhase(@NonNull Region region, @NonNull TypedElement typedElement, @NonNull Node... argNodes) {
 			boolean isLoaded = false;
@@ -227,23 +259,36 @@ public class Nodes
 			}
 		}
 
-		public static @NonNull OperationNodeRole getOperationNodeRole(@NonNull Phase phase) {
-			switch (phase) {
-				case CONSTANT: return CONSTANT_OPERATION;
-				case LOADED: return LOADED_OPERATION;
-				case PREDICATED: return PREDICATED_OPERATION;
-				case REALIZED: return REALIZED_OPERATION;
+		public static @NonNull OperationNodeRole getOperationNodeRole(@NonNull Phase phase, boolean isMatched) {
+			if (isMatched) {
+				switch (phase) {
+					case CONSTANT: return CONSTANT_MATCHED_OPERATION;
+					case LOADED: return LOADED_MATCHED_OPERATION;
+					case PREDICATED: return PREDICATED_MATCHED_OPERATION;
+					case REALIZED: return REALIZED_MATCHED_OPERATION;
+				}
+			}
+			else {
+				switch (phase) {
+					case CONSTANT: return CONSTANT_OPTIONAL_OPERATION;
+					case LOADED: return LOADED_OPTIONAL_OPERATION;
+					case PREDICATED: return PREDICATED_OPTIONAL_OPERATION;
+					case REALIZED: return REALIZED_OPTIONAL_OPERATION;
+				}
 			}
 			throw new UnsupportedOperationException();
 		}
 
-		protected OperationNodeRole(@NonNull Phase phase) {
+		private final boolean isMatched;
+
+		protected OperationNodeRole(@NonNull Phase phase, boolean isMatched) {
 			super(phase);
+			this.isMatched = isMatched;
 		}
 
 		@Override
 		public @NonNull OperationNodeRole asPhase(@NonNull Phase phase) {
-			return getOperationNodeRole(phase);
+			return getOperationNodeRole(phase, isMatched);
 		}
 
 		@Override
@@ -257,46 +302,51 @@ public class Nodes
 		}
 
 		@Override
+		public boolean isMatched() {
+			return isMatched;
+		}
+
+		@Override
 		public boolean isOperation() {
 			return true;
 		}
 
 		@Override
 		public String toString() {
-			return phase + "-" + getClass().getSimpleName();
+			return phase + (isMatched() ? "-Matched-" : "-Optional-") + getClass().getSimpleName();
 		}
 	}
 
 	private static class PatternNodeRole extends AbstractNodeRole
 	{
-		private static final @NonNull PatternNodeRole CONSTANT_NAVIGABLE = new PatternNodeRole(Role.Phase.CONSTANT, true);
-		private static final @NonNull PatternNodeRole CONSTANT_UNNAVIGABLE = new PatternNodeRole(Role.Phase.CONSTANT, false);
-		private static final @NonNull PatternNodeRole LOADED_NAVIGABLE = new PatternNodeRole(Role.Phase.LOADED, true);
-		private static final @NonNull PatternNodeRole LOADED_UNNAVIGABLE = new PatternNodeRole(Role.Phase.LOADED, false);
-		private static final @NonNull PatternNodeRole PREDICATED_NAVIGABLE = new PatternNodeRole(Role.Phase.PREDICATED, true);
-		private static final @NonNull PatternNodeRole PREDICATED_UNNAVIGABLE = new PatternNodeRole(Role.Phase.PREDICATED, false);
-		private static final @NonNull PatternNodeRole REALIZED_NAVIGABLE = new PatternNodeRole(Role.Phase.REALIZED, true);
-		private static final @NonNull PatternNodeRole REALIZED_UNNAVIGABLE = new PatternNodeRole(Role.Phase.REALIZED, false);
-		private static final @NonNull PatternNodeRole SPECULATED_NAVIGABLE = new PatternNodeRole(Role.Phase.SPECULATED, true);
-		private static final @NonNull PatternNodeRole SPECULATION_NAVIGABLE = new PatternNodeRole(Role.Phase.SPECULATION, true);
+		private static final @NonNull PatternNodeRole CONSTANT_OPTIONAL = new PatternNodeRole(Role.Phase.CONSTANT, false);
+		private static final @NonNull PatternNodeRole CONSTANT_MATCHED = new PatternNodeRole(Role.Phase.CONSTANT, true);
+		private static final @NonNull PatternNodeRole LOADED_OPTIONAL = new PatternNodeRole(Role.Phase.LOADED, false);
+		private static final @NonNull PatternNodeRole LOADED_MATCHED = new PatternNodeRole(Role.Phase.LOADED, true);
+		private static final @NonNull PatternNodeRole PREDICATED_OPTIONAL = new PatternNodeRole(Role.Phase.PREDICATED, false);
+		private static final @NonNull PatternNodeRole PREDICATED_MATCHED = new PatternNodeRole(Role.Phase.PREDICATED, true);
+		private static final @NonNull PatternNodeRole REALIZED_OPTIONAL = new PatternNodeRole(Role.Phase.REALIZED, false);
+		private static final @NonNull PatternNodeRole REALIZED_MATCHED = new PatternNodeRole(Role.Phase.REALIZED, true);
+		private static final @NonNull PatternNodeRole SPECULATED_MATCHED = new PatternNodeRole(Role.Phase.SPECULATED, true);
+		private static final @NonNull PatternNodeRole SPECULATION_MATCHED = new PatternNodeRole(Role.Phase.SPECULATION, true);
 
-		public static @NonNull PatternNodeRole getPatternNodeRole(@NonNull Phase phase, boolean isNavigable) {
-			if (isNavigable) {
+		public static @NonNull PatternNodeRole getPatternNodeRole(@NonNull Phase phase, boolean isMatched) {
+			if (isMatched) {
 				switch (phase) {
-					case CONSTANT: return CONSTANT_NAVIGABLE;
-					case LOADED: return LOADED_NAVIGABLE;
-					case PREDICATED: return PREDICATED_NAVIGABLE;
-					case REALIZED: return REALIZED_NAVIGABLE;
-					case SPECULATED: return SPECULATED_NAVIGABLE;
-					case SPECULATION: return SPECULATION_NAVIGABLE;
+					case CONSTANT: return CONSTANT_MATCHED;
+					case LOADED: return LOADED_MATCHED;
+					case PREDICATED: return PREDICATED_MATCHED;
+					case REALIZED: return REALIZED_MATCHED;
+					case SPECULATED: return SPECULATED_MATCHED;
+					case SPECULATION: return SPECULATION_MATCHED;
 				}
 			}
 			else {
 				switch (phase) {
-					case CONSTANT: return CONSTANT_UNNAVIGABLE;
-					case LOADED: return LOADED_UNNAVIGABLE;
-					case PREDICATED: return PREDICATED_UNNAVIGABLE;
-					case REALIZED: return REALIZED_UNNAVIGABLE;
+					case CONSTANT: return CONSTANT_OPTIONAL;
+					case LOADED: return LOADED_OPTIONAL;
+					case PREDICATED: return PREDICATED_OPTIONAL;
+					case REALIZED: return REALIZED_OPTIONAL;
 				}
 			}
 			throw new UnsupportedOperationException();
@@ -314,24 +364,24 @@ public class Nodes
 				case CONSTANT: phase = Phase.CONSTANT; break;
 				default: throw new UnsupportedOperationException();
 			}
-			return getPatternNodeRole(phase, sourceNode.isNavigable());
+			return getPatternNodeRole(phase, sourceNode.isMatched() && Nodes.isMatched(property));
 		}
 
-		private final boolean isNavigable;
+		private final boolean isMatched;
 
-		private PatternNodeRole(@NonNull Phase phase, boolean isNavigable) {
+		private PatternNodeRole(@NonNull Phase phase, boolean isMatched) {
 			super(phase);
-			this.isNavigable = isNavigable;
+			this.isMatched = isMatched;
 		}
 
-		@Override
-		public @NonNull NodeRole asNavigable() {
-			return getPatternNodeRole(phase, true);
-		}
+		//		@Override
+		//		public @NonNull NodeRole asMatched() {
+		//			return getPatternNodeRole(phase, true);
+		//		}
 
 		@Override
 		public @NonNull PatternNodeRole asPhase(@NonNull Phase phase) {
-			return getPatternNodeRole(phase, isNavigable);
+			return getPatternNodeRole(phase, isMatched);
 		}
 
 		@Override
@@ -345,8 +395,8 @@ public class Nodes
 		}
 
 		@Override
-		public boolean isNavigable() {
-			return isNavigable;
+		public boolean isMatched() {
+			return isMatched;
 		}
 
 		@Override
@@ -358,19 +408,19 @@ public class Nodes
 		public @NonNull NodeRole merge(@NonNull NodeRole nodeRole) {
 			assert nodeRole instanceof PatternNodeRole;
 			Phase mergedPhase = RegionUtil.mergeToMoreKnownPhase(this, nodeRole).getPhase();
-			boolean mergedNavigable;
+			boolean mergedMatched;
 			if (mergedPhase == Phase.REALIZED) {
-				mergedNavigable = false;
+				mergedMatched = false;
 			}
 			else {
-				mergedNavigable = isNavigable() || nodeRole.isNavigable();
+				mergedMatched = isMatched() || nodeRole.isMatched();
 			}
-			return getPatternNodeRole(mergedPhase, mergedNavigable);
+			return getPatternNodeRole(mergedPhase, mergedMatched);
 		}
 
 		@Override
 		public String toString() {
-			return phase + (isNavigable() ? "-Navigable-" : "-Unnavigable-") + getClass().getSimpleName();
+			return phase + (isMatched() ? "-Matched-" : "-Optional-") + getClass().getSimpleName();
 		}
 	}
 
@@ -409,6 +459,11 @@ public class Nodes
 
 		private TrueNodeRole() {
 			super(Role.Phase.CONSTANT);
+		}
+
+		@Override
+		public boolean isMatched() {
+			return true;
 		}
 
 		@Override
@@ -496,7 +551,7 @@ public class Nodes
 	}
 
 	public static @NonNull VariableNode createLetVariableNode(@NonNull Variable letVariable, @NonNull Node inNode) {
-		PatternNodeRole patternNodeRole = PatternNodeRole.getPatternNodeRole(inNode.getNodeRole().getPhase(), inNode.isNavigable());
+		PatternNodeRole patternNodeRole = PatternNodeRole.getPatternNodeRole(inNode.getNodeRole().getPhase(), inNode.isMatched());
 		return patternNodeRole.createNode(inNode.getRegion(), letVariable);
 	}
 
@@ -505,12 +560,13 @@ public class Nodes
 		return patternNodeRole.createNode(region, stepVariable);
 	}
 
-	public static @NonNull TypedNode createNullNode(@NonNull Region region, @Nullable TypedElement typedElement) {
+	public static @NonNull TypedNode createNullNode(@NonNull Region region, boolean isMatched, @Nullable TypedElement typedElement) {
+		NullNodeRole nullNodeRole = NullNodeRole.getNullNodeRole(isMatched);
 		if (typedElement != null) {
-			return NullNodeRole.NULL.createNode(region, "«null»", typedElement);
+			return nullNodeRole.createNode(region, "«null»", typedElement);
 		}
 		else {
-			return NullNodeRole.NULL.createNode(region, "«null»", region.getSchedulerConstants().getOclVoidClassDatumAnalysis());
+			return nullNodeRole.createNode(region, "«null»", region.getSchedulerConstants().getOclVoidClassDatumAnalysis());
 		}
 	}
 
@@ -527,14 +583,14 @@ public class Nodes
 		return patternNodeRole.createNode(region, name, classDatumAnalysis);
 	}
 
-	public static @NonNull TypedNode createOperationNode(@NonNull Region region, @NonNull String name, @NonNull TypedElement typedElement, @NonNull Node... argNodes) {
+	public static @NonNull TypedNode createOperationNode(@NonNull Region region, boolean isMatched, @NonNull String name, @NonNull TypedElement typedElement, @NonNull Node... argNodes) {
 		Role.Phase nodePhase = OperationNodeRole.getOperationNodePhase(region, typedElement, argNodes);
-		OperationNodeRole nodeRole = OperationNodeRole.getOperationNodeRole(nodePhase);
+		OperationNodeRole nodeRole = OperationNodeRole.getOperationNodeRole(nodePhase, isMatched);
 		return nodeRole.createNode(region, name, typedElement);
 	}
 
 	public static @NonNull TypedNode createOperationParameterNode(@NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
-		PatternNodeRole patternNodeRole = PatternNodeRole.getPatternNodeRole(Role.Phase.PREDICATED, false);
+		PatternNodeRole patternNodeRole = PatternNodeRole.getPatternNodeRole(Role.Phase.PREDICATED, true);
 		TypedNode node = patternNodeRole.createNode(region, name, classDatumAnalysis);
 		node.setHead();
 		return node;
@@ -568,16 +624,16 @@ public class Nodes
 	}
 
 	public static @NonNull TypedNode createRealizedDataTypeNode(@NonNull Node sourceNode, @NonNull Property source2targetProperty) {
-		PatternNodeRole patternNodeRole = PatternNodeRole.getPatternNodeRole(Role.Phase.REALIZED, false);
+		PatternNodeRole patternNodeRole = PatternNodeRole.getPatternNodeRole(Role.Phase.REALIZED, sourceNode.isMatched());
 		return patternNodeRole.createNode(sourceNode, source2targetProperty);
 	}
 
 	public static @NonNull VariableNode createRealizedStepNode(@NonNull Region region, @NonNull Variable stepVariable) {
-		PatternNodeRole patternNodeRole = PatternNodeRole.getPatternNodeRole(Role.Phase.REALIZED, false);
+		PatternNodeRole patternNodeRole = PatternNodeRole.getPatternNodeRole(Role.Phase.REALIZED, true);
 		return patternNodeRole.createNode(region, stepVariable);
 	}
 
-	public static @NonNull TypedNode createStepNode(@NonNull String name, @NonNull CallExp callExp, @NonNull Node sourceNode, boolean isNavigable) {
+	public static @NonNull TypedNode createStepNode(@NonNull String name, @NonNull CallExp callExp, @NonNull Node sourceNode, boolean isMatched) {
 		Region region = sourceNode.getRegion();
 		DomainUsage domainUsage = region.getSchedulerConstants().getDomainUsage(callExp);
 		boolean isMiddleOrOutput = domainUsage.isOutput() || domainUsage.isMiddle();
@@ -587,12 +643,12 @@ public class Nodes
 			isDirty = region.getSchedulerConstants().isDirty(referredProperty);
 		}
 		Role.Phase phase = sourceNode.isPredicated() || isMiddleOrOutput || isDirty ? Role.Phase.PREDICATED : Role.Phase.LOADED;
-		PatternNodeRole stepNodeRole = PatternNodeRole.getPatternNodeRole(phase, isNavigable);
+		PatternNodeRole stepNodeRole = PatternNodeRole.getPatternNodeRole(phase, isMatched);
 		return stepNodeRole.createNode(region, name, callExp);
 	}
 
-	public static @NonNull Node createStepNode(@NonNull Region region, @NonNull TypedNode typedNode) {
-		NodeRole stepNodeRole = PatternNodeRole.getPatternNodeRole(Role.Phase.PREDICATED, true);
+	public static @NonNull Node createStepNode(@NonNull Region region, @NonNull TypedNode typedNode, boolean isMatched) {
+		NodeRole stepNodeRole = PatternNodeRole.getPatternNodeRole(Role.Phase.PREDICATED, isMatched);
 		return stepNodeRole.createNode(region, typedNode.getName(), typedNode.getClassDatumAnalysis());
 	}
 
@@ -608,5 +664,69 @@ public class Nodes
 
 	public static @NonNull Node createUnknownNode(@NonNull Region region, @NonNull String name, @NonNull TypedElement typedElement) {
 		return UnknownNodeRole.UNKNOWN.createNode(region, name, typedElement);
+	}
+
+	/*	public static boolean isOptional(@NonNull TypedElement typedElement) {
+		boolean isOptional1 = isOptional1(typedElement);
+		boolean isOptional2 = isOptional2(typedElement);
+		assert isOptional1 == isOptional2;
+		return isOptional1;
+	}
+	private static boolean isOptional1(@NonNull TypedElement typedElement) {
+		if (!typedElement.isIsRequired()) {
+			return true;
+		}
+		Type type = typedElement.getType();
+		if (!(type instanceof CollectionType)) {
+			return false;
+		}
+		IntegerValue lowerValue = ((CollectionType)type).getLowerValue();
+		return lowerValue.signum() <= 0;
+	} */
+	public static boolean isMatched(@NonNull TypedElement typedElement) {
+		boolean isMatched = false;
+		Type type = typedElement.getType();
+		if (type instanceof CollectionType) {
+			//			IntegerValue lowerValue = ((CollectionType)type).getLowerValue();
+			//			if (lowerValue.signum() > 0) {
+			isMatched = true;
+			assert typedElement.isIsRequired();
+			//			}
+		}
+		else {
+			isMatched = typedElement.isIsRequired();
+		}
+		if (!isMatched) {
+			return false;
+		}
+		return isUnconditional(typedElement);
+	}
+	public static boolean isUnconditional(@NonNull TypedElement typedElement) {
+		EObject eContainer = typedElement.eContainer();
+		if (eContainer instanceof IfExp) {
+			IfExp ifExp = (IfExp)eContainer;
+			if ((typedElement == ifExp.getOwnedThen()) || (typedElement == ifExp.getOwnedElse())) {
+				return false;
+			}
+		}
+		else if (eContainer instanceof LoopExp) {
+			LoopExp loopExp = (LoopExp)eContainer;
+			if (typedElement == loopExp.getOwnedBody()) {
+				return false;
+			}
+		}
+		if (eContainer instanceof TypedElement) {
+			return isUnconditional((TypedElement) eContainer);
+		}
+		return true;
+	}
+
+	public static boolean isUnconditional(@NonNull Edge edge) {
+		for (@NonNull TypedElement typedElement : edge.getSource().getTypedElements()) {
+			if (!isUnconditional(typedElement)) {
+				return false;
+			}
+		}
+		return true;
 	}
 }
