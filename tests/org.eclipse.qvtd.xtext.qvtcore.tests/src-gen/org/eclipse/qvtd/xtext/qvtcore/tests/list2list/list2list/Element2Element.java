@@ -46,7 +46,7 @@ public interface Element2Element extends EObject {
 	 * @see #setElement1(Element)
 	 * @see org.eclipse.qvtd.xtext.qvtcore.tests.list2list.list2list.List2listPackage#getElement2Element_Element1()
 	 * @model required="true"
-	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='middle1' upper='1'"
+	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='middle1' lower='1' upper='1'"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='forward'"
 	 * @generated
 	 */
@@ -74,7 +74,7 @@ public interface Element2Element extends EObject {
 	 * @see #setElement2(Element)
 	 * @see org.eclipse.qvtd.xtext.qvtcore.tests.list2list.list2list.List2listPackage#getElement2Element_Element2()
 	 * @model required="true"
-	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='middle2' upper='1'"
+	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='middle2' lower='1' upper='1'"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='reverse'"
 	 * @generated
 	 */

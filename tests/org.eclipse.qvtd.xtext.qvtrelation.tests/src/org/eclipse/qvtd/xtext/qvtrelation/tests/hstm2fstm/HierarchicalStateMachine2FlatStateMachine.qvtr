@@ -27,7 +27,7 @@ package org::eclipse::qvtd::xtext::qvtrelation::tests::hstm2fstm {
 		/**
 		 * Return the leafStates of a given hierarchicalState.
 		 */
-		query getLeafStates(hierarchicalState : hierMM::State) : Set(hierMM::State) {
+		query getLeafStates(hierarchicalState : hierMM::State[1]) : Set(hierMM::State) {
 			hierarchicalState->closure(nestedStates)?->select(nestedStates->isEmpty())
 		}
 
@@ -66,8 +66,8 @@ package org::eclipse::qvtd::xtext::qvtrelation::tests::hstm2fstm {
 		 */
 		top relation HierachicalTransition2FlatTransition
 		{
-			leafFromState : hierMM::State;
-			leafToState : hierMM::State;
+			leafFromState : hierMM::State[1];
+			leafToState : hierMM::State[1];
 			domain hier hierarchicalTransition : Transition {
 				owningStateMachine = hierarchicalStateMachine : StateMachine{},
 				name = transitionName : String{},

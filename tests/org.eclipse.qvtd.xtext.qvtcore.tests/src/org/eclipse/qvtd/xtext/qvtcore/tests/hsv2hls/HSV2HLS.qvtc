@@ -1,0 +1,108 @@
+import 'HSVTree.ecore#/';
+import 'HLSTree.ecore#/';
+import 'HSV2HLS.ecore#/';
+
+transformation hsv2hls
+{
+	hsv imports HSVTree;
+	hls imports HLSTree;
+	imports HSV2HLS;
+}
+
+map HSV2HLSRoot in hsv2hls
+{
+	check hsv(hsvRoot : HSVTree::HSVNode[1]
+	|
+		hsvRoot.parent = null;) {}
+	check enforce hls() {
+		realize hlsRoot : HLSTree::HLSNode[1]
+	|
+		hlsRoot.parent := null;
+	}
+
+	where() {
+		realize middleRoot : HSV2HLS::HSVNode2HLSNode[1]
+	|
+		middleRoot.parent := null;
+		middleRoot.hsv := hsvRoot;
+		middleRoot.hls := hlsRoot;
+	}
+
+	map
+	{
+
+		where() {
+			middleRoot.name := hsvRoot.name;
+			middleRoot.name := hlsRoot.name;
+			hsvRoot.name := middleRoot.name;
+			hlsRoot.name := middleRoot.name;
+			hsvRoot.hsv := rgb2hsv(middleRoot.rgb);
+			hlsRoot.hls := rgb2hls(middleRoot.rgb);
+			middleRoot.rgb := hsv2rgb(hsvRoot.hsv);
+			middleRoot.rgb := hls2rgb(hlsRoot.hls);
+		}
+	}
+}
+
+map HSV2HLSRecursion in hsv2hls
+{
+	check enforce hsv(hsvParent : HSVTree::HSVNode[1]
+	|) {
+		realize hsvNode : HSVTree::HSVNode[1]
+	|
+		hsvNode.parent := hsvParent;
+	}
+
+	check enforce hls(hlsParent : HLSTree::HLSNode[1]
+	|) {
+		realize hlsNode : HLSTree::HLSNode[1]
+	|
+		hlsNode.parent := hlsParent;
+	}
+
+	where(middleParent : HSV2HLS::HSVNode2HLSNode[1]
+	|
+		middleParent.hsv = hsvParent;
+		middleParent.hls = hlsParent;) {
+		realize middleNode : HSV2HLS::HSVNode2HLSNode[1]
+	|
+		middleNode.parent := middleParent;
+		middleNode.hsv := hsvNode;
+		middleNode.hls := hlsNode;
+	}
+
+	map
+	{
+
+		where() {
+			middleNode.name := hsvNode.name;
+			middleNode.name := hlsNode.name;
+			hlsNode.name := middleNode.name;
+			hsvNode.name := middleNode.name;
+			hsvNode.hsv := rgb2hsv(middleNode.rgb);
+			hlsNode.hls := rgb2hls(middleNode.rgb);
+			middleNode.rgb := hsv2rgb(hsvNode.hsv);
+			middleNode.rgb := hls2rgb(hlsNode.hls);
+		}
+	}
+}
+
+query hsv2hls::hls2rgb(color : HLSTree::HLS) : HSV2HLS::RGB[1]
+{
+	color
+}
+
+query hsv2hls::hsv2rgb(color : HSVTree::HSV) : HSV2HLS::RGB[1]
+{
+	color
+}
+
+query hsv2hls::rgb2hls(color : HSV2HLS::RGB) : HLSTree::HLS[1]
+{
+	color
+}
+
+query hsv2hls::rgb2hsv(color : HSV2HLS::RGB) : HSVTree::HSV[1]
+{
+	color
+}

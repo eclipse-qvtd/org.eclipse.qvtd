@@ -6,6 +6,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="list1" lowerBound="1" eType="ecore:EClass DoublyLinkedList.ecore#//DoublyLinkedList">
       <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
         <details key="body" value="middle1"/>
+        <details key="lower" value="1"/>
         <details key="upper" value="1"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/qvt#Domains">
@@ -15,6 +16,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="list2" lowerBound="1" eType="ecore:EClass DoublyLinkedList.ecore#//DoublyLinkedList">
       <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
         <details key="body" value="middle2"/>
+        <details key="lower" value="1"/>
         <details key="upper" value="1"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/qvt#Domains">
@@ -30,6 +32,7 @@
         eType="ecore:EClass DoublyLinkedList.ecore#//Element">
       <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
         <details key="body" value="middle1"/>
+        <details key="lower" value="1"/>
         <details key="upper" value="1"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/qvt#Domains">
@@ -40,6 +43,7 @@
         eType="ecore:EClass DoublyLinkedList.ecore#//Element">
       <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
         <details key="body" value="middle2"/>
+        <details key="lower" value="1"/>
         <details key="upper" value="1"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/qvt#Domains">

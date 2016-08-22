@@ -47,7 +47,7 @@
           <bottomPattern>
             <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Graph2Graph.name">
               <value xsi:type="pivot:OperationCallExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
-                  referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.String.toLowerCase">
+                  isSafe="true" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.String.toLowerCase">
                 <ownedSource xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
                     referredProperty="SimpleGraph.ecore.oclas#p.simplegraph.Graph.name">
                   <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleGraph.ecore.oclas#T.simplegraph.Graph" referredVariable="#qV..Upper2Lower.graph2graph.upperGraph.bottom.g1"/>
@@ -58,7 +58,7 @@
             </assignment>
             <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Graph2Graph.name">
               <value xsi:type="pivot:OperationCallExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
-                  referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.String.toUpperCase">
+                  isSafe="true" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.String.toUpperCase">
                 <ownedSource xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
                     referredProperty="SimpleGraph.ecore.oclas#p.simplegraph.Graph.name">
                   <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleGraph.ecore.oclas#T.simplegraph.Graph" referredVariable="#qV..Upper2Lower.graph2graph.lowerGraph.bottom.g2"/>
@@ -159,7 +159,7 @@
           <bottomPattern>
             <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Node2Node.label">
               <value xsi:type="pivot:OperationCallExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
-                  referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.String.toLowerCase">
+                  isSafe="true" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.String.toLowerCase">
                 <ownedSource xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
                     referredProperty="SimpleGraph.ecore.oclas#p.simplegraph.Node.label">
                   <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleGraph.ecore.oclas#T.simplegraph.Node" referredVariable="#qV..Upper2Lower.node2node.upperGraph.bottom.n1"/>
@@ -170,7 +170,7 @@
             </assignment>
             <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Node2Node.label">
               <value xsi:type="pivot:OperationCallExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
-                  referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.String.toUpperCase">
+                  isSafe="true" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.String.toUpperCase">
                 <ownedSource xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
                     referredProperty="SimpleGraph.ecore.oclas#p.simplegraph.Node.label">
                   <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleGraph.ecore.oclas#T.simplegraph.Node" referredVariable="#qV..Upper2Lower.node2node.lowerGraph.bottom.n2"/>
@@ -355,7 +355,7 @@
           <realizedVariable xmi:id="qV..Upper2Lower.edge2edge.bottom.e2e" name="e2e" type="pivot:Class SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Edge2Edge"/>
         </bottomPattern>
       </rule>
-      <ownedContext name="this"/>
+      <ownedContext xmi:id="qV..Upper2Lower.this" name="this"/>
     </ownedClasses>
   </ownedPackages>
 </qvtc:CoreModel>

@@ -48,7 +48,7 @@ public interface List2List extends EObject {
 	 * @see #setList1(DoublyLinkedList)
 	 * @see org.eclipse.qvtd.xtext.qvtcore.tests.list2list.list2list.List2listPackage#getList2List_List1()
 	 * @model required="true"
-	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='middle1' upper='1'"
+	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='middle1' lower='1' upper='1'"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='forward'"
 	 * @generated
 	 */
@@ -76,7 +76,7 @@ public interface List2List extends EObject {
 	 * @see #setList2(DoublyLinkedList)
 	 * @see org.eclipse.qvtd.xtext.qvtcore.tests.list2list.list2list.List2listPackage#getList2List_List2()
 	 * @model required="true"
-	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='middle2' upper='1'"
+	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='middle2' lower='1' upper='1'"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='reverse'"
 	 * @generated
 	 */

@@ -3,9 +3,9 @@ import 'SourceMM1.ecore'
 package source
 
 context X
-def : disambiguatesToA1 () : Boolean =
+def : disambiguatesToA1 () : Boolean[1] =
 	self.isA1
 
-def : disambiguatesToA2 () : Boolean =
+def : disambiguatesToA2 () : Boolean[1] =
 	self.isA2
 endpackage

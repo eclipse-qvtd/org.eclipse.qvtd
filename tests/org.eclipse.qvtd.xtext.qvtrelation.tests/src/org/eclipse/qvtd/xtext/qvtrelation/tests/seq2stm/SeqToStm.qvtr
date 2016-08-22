@@ -22,7 +22,7 @@ transformation org::eclipse::qvtd::xtext::qvtrelation::tests::seq2stm::SeqToStm(
 
      top relation InteractionToStateMachine
      {
-          sn: String;
+          sn: String[1];
 
           domain seqDgm i:Interaction{name = sn};
           enforce domain stm s:StateMachine{name = sn};
@@ -30,7 +30,7 @@ transformation org::eclipse::qvtd::xtext::qvtrelation::tests::seq2stm::SeqToStm(
      
      top relation StateToState
      {
-          sn: String;
+          sn: String[1];
 
           domain seqDgm 
           st1:State 
@@ -55,7 +55,7 @@ transformation org::eclipse::qvtd::xtext::qvtrelation::tests::seq2stm::SeqToStm(
      
      top relation MessageToTransition
      {
-          mid: String;
+          mid: String[1];
 
           domain seqDgm 
           m1:Message 

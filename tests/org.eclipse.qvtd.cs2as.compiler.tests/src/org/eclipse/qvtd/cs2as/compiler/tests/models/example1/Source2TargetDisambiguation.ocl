@@ -4,15 +4,15 @@ import 'Source2TargetLookup.ocl'
 package _source
 
 context X
-def : isA1() : Boolean =
+def : isA1() : Boolean[1] =
 	isA1
-def : isA2() : Boolean =
+def : isA2() : Boolean[1] =
 	isA2
-def : isA3() : Boolean =
+def : isA3() : Boolean[1] =
 	not (isA1 or isA2)
 context Z
-def : parentIsY1() : Boolean =
+def : parentIsY1() : Boolean[1] =
 	oclContainer().oclIsTypeOf(Y1)
-def : parentIsY2() : Boolean =
+def : parentIsY2() : Boolean[1] =
 	oclContainer().oclIsTypeOf(Y2)
 endpackage

@@ -323,6 +323,7 @@ public class List2listPackageImpl extends EPackageImpl implements List2listPacka
 		   source, 
 		   new String[] {
 			 "body", "middle1",
+			 "lower", "1",
 			 "upper", "1"
 		   });	
 		addAnnotation
@@ -330,6 +331,7 @@ public class List2listPackageImpl extends EPackageImpl implements List2listPacka
 		   source, 
 		   new String[] {
 			 "body", "middle2",
+			 "lower", "1",
 			 "upper", "1"
 		   });	
 		addAnnotation
@@ -337,6 +339,7 @@ public class List2listPackageImpl extends EPackageImpl implements List2listPacka
 		   source, 
 		   new String[] {
 			 "body", "middle1",
+			 "lower", "1",
 			 "upper", "1"
 		   });	
 		addAnnotation
@@ -344,6 +347,7 @@ public class List2listPackageImpl extends EPackageImpl implements List2listPacka
 		   source, 
 		   new String[] {
 			 "body", "middle2",
+			 "lower", "1",
 			 "upper", "1"
 		   });
 	}
