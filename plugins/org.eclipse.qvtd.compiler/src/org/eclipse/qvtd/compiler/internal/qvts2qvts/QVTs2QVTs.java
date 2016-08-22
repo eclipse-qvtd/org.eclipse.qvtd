@@ -21,7 +21,7 @@ import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RootScheduledRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.ScheduledRegion;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.Partitioner;
-import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeHelper;
 
 import com.google.common.collect.Iterables;
@@ -34,7 +34,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 {
 	protected final @NonNull String rootName;
 
-	public QVTs2QVTs(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull String rootName) {
+	public QVTs2QVTs(@NonNull QVTbaseEnvironmentFactory environmentFactory, @NonNull String rootName) {
 		super(environmentFactory);
 		this.rootName = rootName;
 	}

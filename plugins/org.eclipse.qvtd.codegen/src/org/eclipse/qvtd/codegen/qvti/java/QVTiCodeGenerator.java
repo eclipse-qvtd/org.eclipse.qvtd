@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
@@ -49,7 +49,7 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingLoop;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
 import org.eclipse.qvtd.codegen.utilities.QVTiCGModelResourceFactory;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
-import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiTransformationAnalysis;
 
 /**
@@ -57,7 +57,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiTransformationAnalysi
  * execute a QVTi transformation.
  */
 public class QVTiCodeGenerator extends JavaCodeGenerator
-{	
+{
 	protected final @NonNull QVTiAnalyzer cgAnalyzer;
 	protected final @NonNull Transformation transformation;
 	private/* @LazyNonNull*/ CGPackage cgPackage;
@@ -65,7 +65,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 	protected final @NonNull QVTiGlobalContext globalContext = new QVTiGlobalContext(this);
 	protected final @NonNull Map<Transformation, QVTiTransformationAnalysis> transformation2analysis = new HashMap<Transformation, QVTiTransformationAnalysis>();
 
-	public QVTiCodeGenerator(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull Transformation transformation) {
+	public QVTiCodeGenerator(@NonNull QVTbaseEnvironmentFactory environmentFactory, @NonNull Transformation transformation) {
 		super(environmentFactory);
 		QVTiCG2StringVisitor.FACTORY.getClass();
 		cgAnalyzer = new QVTiAnalyzer(this);
@@ -109,7 +109,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 				cgPackage2.getPackages().add(cgPackage);
 			}
 			cgPackage = cgPackage2;
-		}			
+		}
 		String packagePrefix = getOptions().getPackagePrefix();
 		if (packagePrefix != null) {
 			String[] segments = packagePrefix.split("\\.");
@@ -126,19 +126,19 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 	}
 
 	protected @NonNull CGPackage createCGPackage(org.eclipse.ocl.pivot.@NonNull Package asPackage) {
-		
+
 		// Target CG Package
 		CGPackage cgPackage = CGModelFactory.eINSTANCE.createCGPackage();
 		String name = asPackage.getName();
 		cgPackage.setName((name != null) && (name.length() > 0)? name : "_" + transformation.getName());
-		
+
 		// Parent CG Package
 		org.eclipse.ocl.pivot.Package asParentPackage = asPackage.getOwningPackage();
 		if (asParentPackage != null) {
 			CGPackage cgParentPackage = createCGPackage(asParentPackage);
 			cgParentPackage.getPackages().add(cgPackage);
 		}
-		
+
 		return cgPackage;
 	}
 
@@ -185,7 +185,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 				}
 				return super.getNameHint(anObject);
 			}
-			
+
 		};
 	}
 
@@ -230,11 +230,11 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 			cgPackage = cgPackage.getPackages().get(0);
 			appendSegmentName(s, cgPackage);
 		}
-		
+
 		s.append(transformation.getName());
 		return s.toString();
 	}
-	
+
 	private void appendSegmentName(@NonNull StringBuilder s, CGPackage sPackage) {
 		String pName = sPackage.getName();
 		if (pName != null && pName.length() > 0) {
@@ -244,7 +244,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 	}
 
 	public @NonNull QVTiTransformationAnalysis getTransformationAnalysis(@NonNull Transformation transformation) {
-//		Map<Transformation, QVTiTransformationAnalysis> transformation2analysis = new HashMap<Transformation, QVTiTransformationAnalysis>();
+		//		Map<Transformation, QVTiTransformationAnalysis> transformation2analysis = new HashMap<Transformation, QVTiTransformationAnalysis>();
 		QVTiTransformationAnalysis transformationAnalysis = transformation2analysis.get(transformation);
 		if (transformationAnalysis == null) {
 			transformationAnalysis = new QVTiTransformationAnalysis(getEnvironmentFactory());

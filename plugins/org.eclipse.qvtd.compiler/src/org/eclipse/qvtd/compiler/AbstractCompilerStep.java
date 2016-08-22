@@ -18,15 +18,15 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.CompilerChain.Key;
-import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
 
 public abstract class AbstractCompilerStep implements CompilerStep
 {
 	protected final @NonNull CompilerChain compilerChain;
-	protected final @NonNull QVTiEnvironmentFactory environmentFactory;
+	protected final @NonNull QVTbaseEnvironmentFactory environmentFactory;
 	protected final @NonNull String name;
 	protected final @NonNull String defaultExtension;
-	
+
 	protected AbstractCompilerStep(@NonNull CompilerChain compilerChain, @NonNull String stepName) {
 		this.compilerChain = compilerChain;
 		this.environmentFactory = compilerChain.getEnvironmentFactory();

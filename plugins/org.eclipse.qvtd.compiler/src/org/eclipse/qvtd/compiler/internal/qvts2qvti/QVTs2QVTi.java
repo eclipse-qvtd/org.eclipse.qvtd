@@ -33,14 +33,14 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.TreeIterable;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RootScheduledRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.QVTp2QVTs;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RootScheduledRegion;
 import org.eclipse.qvtd.compiler.internal.utilities.SymbolNameReservation;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
-import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeHelper;
 
 /**
@@ -48,7 +48,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeHelper;
  */
 public class QVTs2QVTi extends QVTimperativeHelper
 {
-	public QVTs2QVTi(@NonNull QVTiEnvironmentFactory environmentFactory) {
+	public QVTs2QVTi(@NonNull QVTbaseEnvironmentFactory environmentFactory) {
 		super(environmentFactory);
 	}
 
@@ -112,13 +112,13 @@ public class QVTs2QVTi extends QVTimperativeHelper
 			}
 		}
 		List<@NonNull Namespace> sortedImportedNamespaces = new ArrayList<@NonNull Namespace>(importedNamespaces);
-//			for (@NonNull TypedModel typedModel : ClassUtil.nullFree(qvtiTransformation.getModelParameter())) {
-//				for (Namespace importedNamespace : ClassUtil.nullFree(typedModel.getUsedPackage())) {
-//					if (!importedNamespaces.contains(importedNamespace)) {
-//						importedNamespaces.add(importedNamespace);
-//					}
-//				}
-//			}
+		//			for (@NonNull TypedModel typedModel : ClassUtil.nullFree(qvtiTransformation.getModelParameter())) {
+		//				for (Namespace importedNamespace : ClassUtil.nullFree(typedModel.getUsedPackage())) {
+		//					if (!importedNamespaces.contains(importedNamespace)) {
+		//						importedNamespaces.add(importedNamespace);
+		//					}
+		//				}
+		//			}
 		Collections.sort(sortedImportedNamespaces, NameUtil.NAMEABLE_COMPARATOR);
 		List<Import> ownedImports = model.getOwnedImports();
 		for (@NonNull Namespace importedNamespace : sortedImportedNamespaces) {
