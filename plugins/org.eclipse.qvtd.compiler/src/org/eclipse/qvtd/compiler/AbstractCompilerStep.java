@@ -27,11 +27,22 @@ public abstract class AbstractCompilerStep implements CompilerStep
 	protected final @NonNull String name;
 	protected final @NonNull String defaultExtension;
 
+	private /*@LazyNonNull*/ CompilerProblems compilerProblems = null;
+
 	protected AbstractCompilerStep(@NonNull CompilerChain compilerChain, @NonNull String stepName) {
 		this.compilerChain = compilerChain;
 		this.environmentFactory = compilerChain.getEnvironmentFactory();
 		this.name = stepName;
 		this.defaultExtension = ClassUtil.nonNullState(AbstractCompilerChain.getDefaultExtension(stepName));
+	}
+
+	@Override
+	public void addProblem(@NonNull CompilerProblem problem) {
+		CompilerProblems compilerProblems2 = compilerProblems;
+		if (compilerProblems2 == null) {
+			compilerProblems = compilerProblems2 = new CompilerProblems();
+		}
+		compilerProblems2.addProblem(problem);
 	}
 
 	protected void compiled(@NonNull Object object) {
@@ -51,6 +62,14 @@ public abstract class AbstractCompilerStep implements CompilerStep
 	protected @NonNull Resource createResource(@NonNull URI uri) throws IOException {
 		return compilerChain.createResource(uri);
 	}
+
+	/*	public @NonNull CompilerProblems getCompilerProblems() {
+		CompilerProblems compilerProblems2 = compilerProblems;
+		if (compilerProblems2 == null) {
+			compilerProblems = compilerProblems2 = new CompilerProblems();
+		}
+		return compilerProblems2;
+	} */
 
 	@Override
 	public @NonNull String getDefaultExtension() {
@@ -81,5 +100,11 @@ public abstract class AbstractCompilerStep implements CompilerStep
 		compilerChain.saveResource(asResource, stepKey);
 		compiled(stepKey, asResource);
 		return asResource;
+	}
+
+	public void throwCompilerChainExceptionForErrors() throws CompilerChainException {
+		if (compilerProblems != null) {
+			compilerProblems.throwCompilerChainExceptionForErrors();
+		}
 	}
 }

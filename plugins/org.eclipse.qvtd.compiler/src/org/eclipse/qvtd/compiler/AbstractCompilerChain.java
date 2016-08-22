@@ -42,8 +42,8 @@ import org.eclipse.qvtd.compiler.internal.qvtm2qvtp.QVTm2QVTp;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.ClassRelationships;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.MultiRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.QVTp2QVTg;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RootScheduledRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.QVTp2QVTs;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RootScheduledRegion;
 import org.eclipse.qvtd.compiler.internal.qvts2qvti.QVTs2QVTi;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.QVTs2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvtu2qvtm.QVTu2QVTm;
@@ -260,11 +260,13 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 			CreateStrategy savedStrategy = environmentFactory.setCreateStrategy(QVTcEnvironmentFactory.CREATE_STRATEGY);
 			try {
 				Schedule schedule = getSchedule(gResource);
-				QVTp2QVTs scheduler = new QVTp2QVTs(environmentFactory, schedule, qvtp2qvtg);
-				MultiRegion multiRegion = scheduler.transform();
-				String rootName = ClassUtil.nonNullState(scheduler.getDependencyGraph().eResource().getURI().trimFileExtension().trimFileExtension().lastSegment());
-				QVTs2QVTs qvts2qvts = new QVTs2QVTs(environmentFactory, rootName);
+				QVTp2QVTs qvtp2qvts = new QVTp2QVTs(this, environmentFactory, schedule, qvtp2qvtg);
+				MultiRegion multiRegion = qvtp2qvts.transform();
+				throwCompilerChainExceptionForErrors();
+				String rootName = ClassUtil.nonNullState(qvtp2qvts.getDependencyGraph().eResource().getURI().trimFileExtension().trimFileExtension().lastSegment());
+				QVTs2QVTs qvts2qvts = new QVTs2QVTs(this, environmentFactory, rootName);
 				RootScheduledRegion rootRegion = qvts2qvts.transform(multiRegion);
+				throwCompilerChainExceptionForErrors();
 				compiled(rootRegion);			// FIXME
 				//				saveResource(sResource, QVTS_STEP);
 				return rootRegion;
@@ -294,11 +296,13 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 			CreateStrategy savedStrategy = environmentFactory.setCreateStrategy(QVTcEnvironmentFactory.CREATE_STRATEGY);
 			try {
 				Resource iResource = createResource();
-				QVTs2QVTi tx = new QVTs2QVTi(environmentFactory);
+				QVTs2QVTi tx = new QVTs2QVTi(this, environmentFactory);
 				Model model = tx.transform(rootRegion);
 				iResource.getContents().add(model);
 				saveResource(iResource);
-				return getTransformation(iResource);
+				Transformation transformation = getTransformation(iResource);
+				throwCompilerChainExceptionForErrors();
+				return transformation;
 			}
 			finally {
 				environmentFactory.setCreateStrategy(savedStrategy);

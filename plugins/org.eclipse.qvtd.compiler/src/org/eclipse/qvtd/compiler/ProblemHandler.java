@@ -12,8 +12,7 @@ package org.eclipse.qvtd.compiler;
 
 import org.eclipse.jdt.annotation.NonNull;
 
-public interface CompilerStep extends ProblemHandler
+public interface ProblemHandler
 {
-	@NonNull String getDefaultExtension();
-	@NonNull String getName();
+	void addProblem(@NonNull CompilerProblem problem);
 }

@@ -33,6 +33,8 @@ import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.ParserException;
 import org.eclipse.ocl.pivot.utilities.TracingOption;
 import org.eclipse.qvtd.compiler.CompilerConstants;
+import org.eclipse.qvtd.compiler.CompilerProblem;
+import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.Region2Depth;
 import org.eclipse.qvtd.pivot.schedule.AbstractAction;
 import org.eclipse.qvtd.pivot.schedule.ClassDatum;
@@ -58,6 +60,8 @@ public class QVTp2QVTs extends SchedulerConstants
 	public static final @NonNull TracingOption REGION_STACK = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtp2qvts/regionStack");
 	public static final @NonNull TracingOption REGION_TRAVERSAL = new TracingOption(CompilerConstants.PLUGIN_ID, "qvtp2qvts/regionTraversal");
 
+	protected final @NonNull ProblemHandler problemHandler;
+
 	/**
 	 * The Region to which each action is allocated.
 	 */
@@ -65,8 +69,9 @@ public class QVTp2QVTs extends SchedulerConstants
 
 	private final @NonNull List<@NonNull AbstractAction> orderedActions;
 
-	public QVTp2QVTs(@NonNull EnvironmentFactory environmentFactory, @NonNull Schedule schedule, @NonNull QVTp2QVTg qvtp2qvtg) {
+	public QVTp2QVTs(@NonNull ProblemHandler problemHandler, @NonNull EnvironmentFactory environmentFactory, @NonNull Schedule schedule, @NonNull QVTp2QVTg qvtp2qvtg) {
 		super(environmentFactory, schedule, qvtp2qvtg);
+		this.problemHandler = problemHandler;
 		DependencyUtil.NaturalOrderer orderer = new DependencyUtil.NaturalOrderer(schedule);
 		List<@NonNull AbstractAction> orderedActions = orderer.computeOrdering();	// FIXME ??is this ordering still needed??
 		if (orderedActions == null) {
@@ -76,6 +81,10 @@ public class QVTp2QVTs extends SchedulerConstants
 	}
 
 	private Map<@NonNull OperationDatum, @NonNull OperationRegion> map = new HashMap<>();
+
+	public void addProblem(@NonNull CompilerProblem problem) {
+		problemHandler.addProblem(problem);
+	}
 
 	public @NonNull OperationRegion analyzeOperation(@NonNull MultiRegion multiRegion, @NonNull OperationCallExp operationCallExp) {
 		Operation operation = operationCallExp.getReferredOperation();

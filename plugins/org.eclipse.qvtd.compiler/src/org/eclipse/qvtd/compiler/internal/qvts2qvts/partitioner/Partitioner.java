@@ -19,6 +19,8 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.qvtd.compiler.CompilerProblem;
+import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Edge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.EdgeRole;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.MappingRegion;
@@ -69,7 +71,7 @@ public class Partitioner
 		return traceNodes;
 	} */
 
-	public static @NonNull Iterable<@NonNull MappingRegion> partition(@NonNull Iterable<@NonNull ? extends Region> activeRegions) {
+	public static @NonNull Iterable<@NonNull MappingRegion> partition(@NonNull ProblemHandler problemHandler, @NonNull Iterable<@NonNull ? extends Region> activeRegions) {
 		Set<@NonNull Property> corrolaryProperties = new HashSet<>();
 		for (@NonNull Region region : activeRegions) {
 			if (region instanceof MappingRegion) {
@@ -79,7 +81,7 @@ public class Partitioner
 		List<@NonNull MappingRegion> partitionedRegions = new ArrayList<>();
 		for (@NonNull Region region : activeRegions) {
 			if (region instanceof MappingRegion) {
-				Partitioner partitioner = new Partitioner((MappingRegion)region, corrolaryProperties);
+				Partitioner partitioner = new Partitioner(problemHandler, (MappingRegion)region, corrolaryProperties);
 				Iterables.addAll(partitionedRegions, partitioner.partition());
 			}
 		}
@@ -98,6 +100,7 @@ public class Partitioner
 		}
 	}
 
+	protected final @NonNull ProblemHandler problemHandler;
 	protected final @NonNull MappingRegion region;
 
 	/**
@@ -142,8 +145,9 @@ public class Partitioner
 
 	private final @NonNull Map<@NonNull Edge, @NonNull List<@NonNull AbstractPartition>> debugEdge2partitions = new HashMap<>();
 
-	public Partitioner(@NonNull MappingRegion region, @NonNull Set<@NonNull Property> corrolaryProperties) {
+	public Partitioner(@NonNull ProblemHandler problemHandler, @NonNull MappingRegion region, @NonNull Set<@NonNull Property> corrolaryProperties) {
 		//		super(getTraceNodes(region.getNodes()), getNavigableEdges(region.getNavigationEdges()));
+		this.problemHandler = problemHandler;
 		this.region = region;
 		this.corrolaryProperties = corrolaryProperties;
 		analyzeNodes();
@@ -168,6 +172,10 @@ public class Partitioner
 
 	public boolean addPredicatedNode(@NonNull Node node) {
 		return alreadyPredicatedNodes.add(node);
+	}
+
+	public void addProblem(@NonNull CompilerProblem problem) {
+		problemHandler.addProblem(problem);
 	}
 
 	public boolean addRealizedNode(@NonNull Node node) {
@@ -290,19 +298,19 @@ public class Partitioner
 				if (!isCorrolary(edge) && !isDead(edge)) {
 					if (s == null) {
 						s = new StringBuilder();
-					}
+				}
 					s.append("\nmissing: ");
 					s.append(edge);
-				}
 			}
-			assert s == null : "Bad edges for " + region + s.toString();
 		}
+			assert s == null : "Bad edges for " + region + s.toString();
+	}
 	}
 
 	private boolean isDead(@NonNull Edge edge) {
 		if (!edge.isExpression()) {
 			return false;
-		}
+				}
 		Node node = edge.getTarget();
 		for (@NonNull Edge incomingEdge : node.getIncomingEdges()) {
 			if (incomingEdge.isNavigable()) {
@@ -312,8 +320,8 @@ public class Partitioner
 		for (@NonNull Edge outgoingEdge : node.getOutgoingEdges()) {
 			if (!isDead(outgoingEdge)) {
 				return false;
-			}
 		}
+						}
 		return true;
 	}
 

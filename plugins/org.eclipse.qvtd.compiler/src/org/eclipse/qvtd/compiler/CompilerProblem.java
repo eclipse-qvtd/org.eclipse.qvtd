@@ -12,8 +12,9 @@ package org.eclipse.qvtd.compiler;
 
 import org.eclipse.jdt.annotation.NonNull;
 
-public interface CompilerStep extends ProblemHandler
+public interface CompilerProblem
 {
-	@NonNull String getDefaultExtension();
-	@NonNull String getName();
+	public enum Severity { ERROR, WARNING, INFO }
+
+	public @NonNull Severity getSeverity();;
 }

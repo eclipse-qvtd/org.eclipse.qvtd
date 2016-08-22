@@ -34,6 +34,8 @@ import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.TracingOption;
 import org.eclipse.qvtd.compiler.CompilerConstants;
+import org.eclipse.qvtd.compiler.CompilerProblem;
+import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.AbstractRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.BasicEdge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.BasicEdgeConnection;
@@ -67,6 +69,7 @@ public class QVTs2QVTiVisitor extends QVTimperativeHelper implements Visitor<Ele
 {
 	public static final @NonNull TracingOption POLLED_PROPERTIES = new TracingOption(CompilerConstants.PLUGIN_ID, "qvts2qvti/polledProperties");
 
+	protected final @NonNull ProblemHandler problemHandler;
 	protected final @NonNull Transformation qvtpTransformation;
 	protected final @NonNull SymbolNameReservation symbolNameReservation;
 
@@ -85,8 +88,9 @@ public class QVTs2QVTiVisitor extends QVTimperativeHelper implements Visitor<Ele
 
 	private /*@LazyNonNull*/ TypedModel qvtiMiddleTypedModel = null;
 
-	public QVTs2QVTiVisitor(@NonNull EnvironmentFactory environmentFactory, @NonNull Transformation qvtpTransformation, @NonNull SymbolNameReservation symbolNameReservation) {
+	public QVTs2QVTiVisitor(@NonNull ProblemHandler problemHandler, @NonNull EnvironmentFactory environmentFactory, @NonNull Transformation qvtpTransformation, @NonNull SymbolNameReservation symbolNameReservation) {
 		super(environmentFactory);
+		this.problemHandler = problemHandler;
 		this.qvtpTransformation = qvtpTransformation;
 		this.symbolNameReservation = symbolNameReservation;
 		String transformationName = qvtpTransformation.getName();
@@ -141,6 +145,10 @@ public class QVTs2QVTiVisitor extends QVTimperativeHelper implements Visitor<Ele
 			}
 		}
 	} */
+
+	public void addProblem(@NonNull CompilerProblem problem) {
+		problemHandler.addProblem(problem);
+	}
 
 	public @Nullable Operation create(@Nullable Operation pOperation) {
 		if (pOperation == null) {

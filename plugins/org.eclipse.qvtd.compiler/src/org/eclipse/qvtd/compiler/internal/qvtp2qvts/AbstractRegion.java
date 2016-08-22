@@ -29,6 +29,8 @@ import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
+import org.eclipse.ocl.pivot.utilities.StringUtil;
+import org.eclipse.qvtd.compiler.CompilerProblem;
 import org.eclipse.qvtd.compiler.internal.qvts2qvti.QVTs2QVTiVisitor;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.Region2Depth;
 import org.eclipse.qvtd.compiler.internal.utilities.SymbolNameBuilder;
@@ -1167,6 +1169,12 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 		}
 	}
 
+	@Override
+	public @NonNull RegionProblem createError(@NonNull String messageTemplate, Object... bindings) {
+		String boundMessage = StringUtil.bind(messageTemplate, bindings);
+		return new RegionProblem(CompilerProblem.Severity.ERROR, this, boundMessage);
+	}
+
 	/**
 	 * Create and return a NodeConnection to the nodes that can provide the sources for headNode.
 	 * Returns null if the pattern surrounding the headNode conflicts with the pattern
@@ -1437,6 +1445,12 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 	@Override
 	public @NonNull VariableNode createVariableNode(@NonNull NodeRole nodeRole, @NonNull VariableDeclaration variable) {
 		return new VariableNode(nodeRole, this, variable);
+	}
+
+	@Override
+	public @NonNull RegionProblem createWarning(@NonNull String messageTemplate, Object... bindings) {
+		String boundMessage = StringUtil.bind(messageTemplate, bindings);
+		return new RegionProblem(CompilerProblem.Severity.WARNING, this, boundMessage);
 	}
 
 	protected @Nullable Map<@NonNull Node, @NonNull Node> expandRecursion(@NonNull Node nextNode, @NonNull Node prevNode, @NonNull Map<@NonNull Node, @NonNull Node> bindings) {

@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.qvtd.compiler.CompilerChainException;
+import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.MappingRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.MultiRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.QVTp2QVTs;
@@ -32,10 +34,12 @@ import com.google.common.collect.Lists;
  */
 public class QVTs2QVTs extends QVTimperativeHelper
 {
+	protected final @NonNull ProblemHandler problemHandler;
 	protected final @NonNull String rootName;
 
-	public QVTs2QVTs(@NonNull QVTbaseEnvironmentFactory environmentFactory, @NonNull String rootName) {
+	public QVTs2QVTs(@NonNull ProblemHandler problemHandler, @NonNull QVTbaseEnvironmentFactory environmentFactory, @NonNull String rootName) {
 		super(environmentFactory);
+		this.problemHandler = problemHandler;
 		this.rootName = rootName;
 	}
 
@@ -102,12 +106,12 @@ public class QVTs2QVTs extends QVTimperativeHelper
 	protected void splitRegions() {
 	}
 
-	public @NonNull RootScheduledRegion transform(@NonNull MultiRegion multiRegion) {
+	public @NonNull RootScheduledRegion transform(@NonNull MultiRegion multiRegion) throws CompilerChainException {
 		Iterable<@NonNull ? extends Region> activeRegions = multiRegion.getActiveRegions();
 		//		for (@NonNull Region region : activeRegions) {
 		//			System.out.println("activeRegions " + region);
 		//		}
-		Iterable<@NonNull MappingRegion> partitionedRegions = Partitioner.partition(activeRegions);
+		Iterable<@NonNull MappingRegion> partitionedRegions = Partitioner.partition(problemHandler, activeRegions);
 		if (!Iterables.isEmpty(partitionedRegions)) {
 			//			for (@NonNull Region region : partitionedRegions) {
 			//				System.out.println("partitionedRegions " + region);

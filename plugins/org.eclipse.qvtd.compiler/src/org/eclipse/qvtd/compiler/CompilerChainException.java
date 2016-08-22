@@ -15,7 +15,7 @@ import java.io.IOException;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.utilities.StringUtil;
 
-public class CompilerChainException extends IOException
+public class CompilerChainException extends IOException implements CompilerProblem
 {
 	private static final long serialVersionUID = 1L;
 
@@ -29,5 +29,10 @@ public class CompilerChainException extends IOException
 
 	public CompilerChainException(@NonNull Throwable cause) {
 		super(cause);
+	}
+
+	@Override
+	public @NonNull Severity getSeverity() {
+		return Severity.ERROR;
 	}
 }

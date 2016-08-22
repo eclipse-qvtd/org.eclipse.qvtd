@@ -40,7 +40,9 @@ public interface Region extends Visitable, GraphNode, Nameable, Symbolable
 	void checkIncomingConnections();
 	void computeCheckedOrEnforcedEdges(@NonNull Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigationEdge>>> typedModel2property2predicatedEdges,
 			@NonNull Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigationEdge>>> typedModel2property2realizedEdges);
+	@NonNull RegionProblem createError(@NonNull String messageTemplate, Object... bindings);
 	void createIncomingConnections();
+	@NonNull RegionProblem createWarning(@NonNull String messageTemplate, Object... bindings);
 	@NonNull VariableNode createVariableNode(@NonNull NodeRole NodeRole, @NonNull VariableDeclaration variable);
 
 	/**
