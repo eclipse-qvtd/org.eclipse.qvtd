@@ -78,8 +78,8 @@ public class OperationRegion extends AbstractRegion
 		}
 		//
 		SchedulerConstants schedulerConstants = getSchedulerConstants();
-		//		DependencyAnalyzer dependencyAnalyzer = schedulerConstants.getDependencyAnalyzer();
-		DependencyAnalyzer dependencyAnalyzer = new DependencyAnalyzer(schedulerConstants);
+		DependencyAnalyzer dependencyAnalyzer = schedulerConstants.getDependencyAnalyzer();
+		//		DependencyAnalyzer dependencyAnalyzer = new DependencyAnalyzer(schedulerConstants);
 		//		dependencyAnalyzer.dump();
 		DependencyPaths paths = dependencyAnalyzer.analyzeOperation(operationCallExp);
 		//		dependencyAnalyzer.dump();

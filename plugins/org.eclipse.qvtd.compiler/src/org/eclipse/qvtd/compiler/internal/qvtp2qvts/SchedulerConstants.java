@@ -134,6 +134,8 @@ public abstract class SchedulerConstants
 	 */
 	private @NonNull SymbolNameReservation symbolNameReservation = new SymbolNameReservation();
 
+	private /*@LazyNonNull */ DependencyAnalyzer dependencyAnalyzer = null;
+
 	public SchedulerConstants(@NonNull EnvironmentFactory environmentFactory, @NonNull Schedule dependencyGraph, @NonNull QVTp2QVTg qvtp2qvtg) {
 		this.environmentFactory = environmentFactory;
 		this.dependencyGraph = dependencyGraph;
@@ -281,6 +283,14 @@ public abstract class SchedulerConstants
 
 	public @NonNull OperationId getCollectionSelectByKindId() {
 		return collectionSelectByKindId;
+	}
+
+	public @NonNull DependencyAnalyzer getDependencyAnalyzer() {
+		DependencyAnalyzer dependencyAnalyzer2 = dependencyAnalyzer;
+		if (dependencyAnalyzer2 == null) {
+			dependencyAnalyzer = dependencyAnalyzer2 = new DependencyAnalyzer(this);
+		}
+		return dependencyAnalyzer2;
 	}
 
 	public @NonNull Schedule getDependencyGraph() {
