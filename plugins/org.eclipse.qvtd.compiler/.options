@@ -4,7 +4,7 @@
 org.eclipse.qvtd.compiler/qvtp2qvts/dependency/call=false
 # Turn on tracing of the operation dependency analysis creating a new operation analysis
 org.eclipse.qvtd.compiler/qvtp2qvts/dependency/create=false
-# Turn on tracing of the operation dependency analysis successfully completing an operation analysis
+# Turn on tracing of the operation dependency analysis return from each successful analysis
 org.eclipse.qvtd.compiler/qvtp2qvts/dependency/finish=false
 # Turn on tracing of the operation dependency analysis hypothecating to break operation analysis loops
 org.eclipse.qvtd.compiler/qvtp2qvts/dependency/hypothecating=false
@@ -12,7 +12,7 @@ org.eclipse.qvtd.compiler/qvtp2qvts/dependency/hypothecating=false
 org.eclipse.qvtd.compiler/qvtp2qvts/dependency/pending=false
 # Turn on tracing of the operation dependency analysis addition of refining operation analysis
 org.eclipse.qvtd.compiler/qvtp2qvts/dependency/refining=false
-# Turn on tracing of the operation dependency analysis operation call returns
+# Turn on tracing of the operation dependency analysis return from each analysis (re-)attempt
 org.eclipse.qvtd.compiler/qvtp2qvts/dependency/return=false
 # Turn on tracing of the operation dependency analysis (re)starting an operation analysis
 org.eclipse.qvtd.compiler/qvtp2qvts/dependency/start=false
