@@ -14,7 +14,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.AbstractRole;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.EdgeRole;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Role;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Role.Phase;
 
 public class EdgeRoleImpl extends AbstractRole implements EdgeRole
 {
@@ -24,7 +23,7 @@ public class EdgeRoleImpl extends AbstractRole implements EdgeRole
 	private static final @NonNull EdgeRole REALIZED_EDGE = new EdgeRoleImpl(Role.Phase.REALIZED);
 	private static final @NonNull EdgeRole OTHER_EDGE = new EdgeRoleImpl(Role.Phase.OTHER);
 
-	public static @NonNull EdgeRole getEdgeRole(EdgeRole.@NonNull Phase phase) {
+	public static @NonNull EdgeRole getEdgeRole(Role.@NonNull Phase phase) {
 		switch (phase) {
 			case CONSTANT: return CONSTANT_EDGE;
 			case LOADED: return LOADED_EDGE;

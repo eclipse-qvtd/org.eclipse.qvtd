@@ -89,7 +89,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 
 		@Override
 		protected @NonNull Node createStepNode(@NonNull String name, @NonNull CallExp callExp, @NonNull Node sourceNode) {
-			return Nodes.createStepNode(name, callExp, sourceNode, false);
+			return RegionUtil.createStepNode(name, callExp, sourceNode, false);
 		}
 
 		@Override
@@ -119,7 +119,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 		Node targetNode = analyze(operationCallExp.getOwnedArguments().get(0));
 		String name = operationCallExp.getReferredOperation().getName();
 		createPredicateEdge(sourceNode, "«" + name + "»", targetNode);
-		return Nodes.createTrueNode(sourceNode.getRegion());
+		return RegionUtil.createTrueNode(sourceNode.getRegion());
 	}
 
 	private @NonNull Node analyzeOperationCallExp_oclAsType(@NonNull Node sourceNode, @NonNull OperationCallExp operationCallExp) {
@@ -221,7 +221,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 		assert name != null;
 		Node operationNode = findOperationNode(sourceNode, name);
 		if (operationNode == null) {
-			operationNode = Nodes.OPERATION.createNode(context, name, operationCallExp, sourceNode);
+			operationNode = RegionUtil.OPERATION.createNode(context, name, operationCallExp, sourceNode);
 			RegionUtil.ARGUMENT.createEdge(context, sourceNode, null, operationNode);
 		}
 		return operationNode; */
@@ -276,7 +276,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 			reusedNode.addTypedElement(typedElement);
 			return reusedNode;
 		}
-		boolean isMatched = Nodes.isMatched(typedElement);
+		boolean isMatched = RegionUtil.isMatched(typedElement);
 		ExpressionAnalyzer nestedAnalyzer = isMatched ? this : getConditionalExpressionAnalyzer();
 		Node operationNode = nestedAnalyzer.createOperationNode(name, typedElement, sourceAndArgumentNodes);
 		for (int i = 0; i < sourceAndArgumentNodes.length; i++) {
@@ -290,11 +290,11 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 	}
 
 	protected @NonNull Node createDataTypeNode(@NonNull Node sourceNode, @NonNull NavigationCallExp callExp) {
-		return Nodes.createDataTypeNode(sourceNode, callExp);
+		return RegionUtil.createDataTypeNode(sourceNode, callExp);
 	}
 
 	protected @NonNull Node createErrorNode(@NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
-		return Nodes.createErrorNode(context, name, classDatumAnalysis);
+		return RegionUtil.createErrorNode(context, name, classDatumAnalysis);
 	}
 
 	protected @NonNull Edge createExpressionEdge(@NonNull Node sourceNode, @NonNull String name, @NonNull Node targetNode) {
@@ -306,20 +306,20 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 	}
 
 	protected @NonNull Node createIteratorNode(@NonNull Variable iterator, @NonNull Node sourceNode) {
-		return Nodes.createIteratorNode(iterator, sourceNode);
+		return RegionUtil.createIteratorNode(iterator, sourceNode);
 	}
 
 	protected @NonNull Node createLetNode(@NonNull Variable letVariable, @NonNull Node inNode) {
-		return Nodes.createLetVariableNode(letVariable, inNode);
+		return RegionUtil.createLetVariableNode(letVariable, inNode);
 	}
 
 	protected @NonNull Node createNavigableDataTypeNode(@NonNull Node targetNode, @NonNull NavigationAssignment navigationAssignment) {
-		return Nodes.createDataTypeNode(targetNode, navigationAssignment);
+		return RegionUtil.createDataTypeNode(targetNode, navigationAssignment);
 	}
 
 	protected @NonNull Node createNavigableDataTypeNode(@NonNull Node sourceNode, @NonNull Property source2targetProperty) {
 		assert sourceNode.isMatched();
-		return Nodes.createDataTypeNode(sourceNode, source2targetProperty);
+		return RegionUtil.createDataTypeNode(sourceNode, source2targetProperty);
 	}
 
 	protected @NonNull NavigationEdge createNavigableNavigationEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
@@ -343,11 +343,11 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 	}
 
 	protected @NonNull Node createNullNode(@NonNull TypedElement typedElement) {
-		return Nodes.createNullNode(context, isUnconditional(), typedElement);
+		return RegionUtil.createNullNode(context, isUnconditional(), typedElement);
 	}
 
 	protected @NonNull Node createOperationNode(@NonNull String name, @NonNull TypedElement typedElement, @NonNull Node @NonNull ... argNodes) {
-		return Nodes.createOperationNode(context, isUnconditional(), name, typedElement, argNodes);
+		return RegionUtil.createOperationNode(context, isUnconditional(), name, typedElement, argNodes);
 	}
 
 	protected @NonNull Edge createPredicateEdge(@NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode) {
@@ -355,15 +355,15 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 	}
 
 	protected @NonNull Node createPredicatedClassNode(@NonNull Node parentNode, @NonNull NavigationAssignment navigationAssignment) {
-		return Nodes.createPredicatedInternalClassNode(parentNode, navigationAssignment);
+		return RegionUtil.createPredicatedInternalClassNode(parentNode, navigationAssignment);
 	}
 
 	protected @NonNull Node createPredicatedInternalNode(@NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
-		return Nodes.createPredicatedInternalNode(context, name, classDatumAnalysis);
+		return RegionUtil.createPredicatedInternalNode(context, name, classDatumAnalysis);
 	}
 
 	protected @NonNull Node createRealizedDataTypeNode(@NonNull Node sourceNode, @NonNull Property source2targetProperty) {
-		return Nodes.createRealizedDataTypeNode(sourceNode, source2targetProperty);
+		return RegionUtil.createRealizedDataTypeNode(sourceNode, source2targetProperty);
 	}
 
 	protected @NonNull Edge createRealizedExpressionEdge(@NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode) {
@@ -375,7 +375,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 	}
 
 	protected @NonNull Node createStepNode(@NonNull String name, @NonNull CallExp callExp, @NonNull Node sourceNode) {
-		return Nodes.createStepNode(name, callExp, sourceNode, sourceNode.isMatched() && Nodes.isMatched(callExp));
+		return RegionUtil.createStepNode(name, callExp, sourceNode, sourceNode.isMatched() && RegionUtil.isMatched(callExp));
 	}
 
 	protected @Nullable Node findOperationNode(@NonNull String name, @NonNull Node @NonNull ... sourceAndArgumentNodes) {
@@ -773,7 +773,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 	@Override
 	public @NonNull Node visitOperationCallExp(@NonNull OperationCallExp operationCallExp) {
 		if (isUnconditional()) {
-			boolean isMatched = Nodes.isMatched(operationCallExp);
+			boolean isMatched = RegionUtil.isMatched(operationCallExp);
 			if (!isMatched) {
 				return getConditionalExpressionAnalyzer().visitOperationCallExp(operationCallExp);
 			}

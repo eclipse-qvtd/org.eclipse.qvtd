@@ -12,10 +12,10 @@ package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 
 import java.util.HashMap;
 import java.util.Map;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.TypedElement;
-import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.AbstractVisitor;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.BasicEdge;
@@ -26,7 +26,7 @@ import org.eclipse.qvtd.compiler.internal.qvtp2qvts.MicroMappingRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NavigationEdge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NodeRole;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Nodes;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RegionUtil;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.TypedNode;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.VariableNode;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Visitable;
@@ -147,12 +147,12 @@ class PartitioningVisitor extends AbstractVisitor<@Nullable Visitable>
 	}
 
 	@Override
-	public @Nullable TypedNode visitTypedNode(@NonNull TypedNode typedNode) {
+	public @Nullable Node visitTypedNode(@NonNull TypedNode typedNode) {
 		NodeRole nodeRole = partition.getNodeRole(typedNode);
 		if (nodeRole == null) {
 			return null;
 		}
-		TypedNode partialNode = null;
+		Node partialNode = null;
 		if (typedNode.isOperation()) {
 			//
 			//	An operation result that is cached in the middle trace by a speculation partition
@@ -162,14 +162,14 @@ class PartitioningVisitor extends AbstractVisitor<@Nullable Visitable>
 				if (edge.isNavigation() && edge.isRealized()) {
 					EdgeRole edgeRole = partition.getEdgeRole(edge);
 					if ((edgeRole != null) && edgeRole.isPredicated()) {
-						partialNode = (TypedNode) Nodes.createStepNode(partialRegion, typedNode, nodeRole.isMatched());
+						partialNode = RegionUtil.createStepNode(partialRegion, typedNode, typedNode.isMatched());
 						break;
 					}
 				}
 			}
 		}
 		if (partialNode == null) {
-			partialNode = new TypedNode(nodeRole, partialRegion, typedNode.getName(), typedNode.getClassDatumAnalysis());
+			partialNode = typedNode.createNode(nodeRole, partialRegion);
 		}
 		oldNode2partialNode.put(typedNode, partialNode);
 		for (@NonNull TypedElement typedElement : typedNode.getTypedElements()) {
@@ -179,13 +179,12 @@ class PartitioningVisitor extends AbstractVisitor<@Nullable Visitable>
 	}
 
 	@Override
-	public @Nullable VariableNode visitVariableNode(@NonNull VariableNode variableNode) {
+	public @Nullable Node visitVariableNode(@NonNull VariableNode variableNode) {
 		NodeRole nodeRole = partition.getNodeRole(variableNode);
 		if (nodeRole == null) {
 			return null;
 		};
-		VariableDeclaration variableDeclaration = (VariableDeclaration)variableNode.getTypedElements().iterator().next();
-		VariableNode partialNode = partialRegion.createVariableNode(nodeRole, variableDeclaration);
+		Node partialNode = variableNode.createNode(nodeRole, partialRegion);
 		oldNode2partialNode.put(variableNode, partialNode);
 		for (@NonNull TypedElement typedElement : variableNode.getTypedElements()) {
 			partialNode.addTypedElement(typedElement);

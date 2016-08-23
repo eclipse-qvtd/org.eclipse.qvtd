@@ -436,6 +436,9 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 	}
 
 	@Override
+	public void addVariableNode(@NonNull VariableDeclaration typedElement, @NonNull Node simpleNode) {}
+
+	@Override
 	public void appendNode(@NonNull GraphStringBuilder s, @NonNull String nodeName) {
 		String name = getSymbolName() + "\\n " + getName();
 		String indexText = getIndexText();
@@ -1211,7 +1214,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 		//	Connect up the head
 		//
 		NodeConnection headConnection = invokingRegion2.getNodeConnection(headSources, classDatumAnalysis);
-		if (headNode.getNodeRole().isExtraGuardVariable()) {
+		if (headNode.isExtraGuardVariable()) {
 			headConnection.addUsedTargetNode(headNode, false);
 		}
 		else {
@@ -1236,7 +1239,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 			if (/*headNode.isLoaded() &&*/ !headNode.isInternal() && !headNode.isTrue()) {
 				NodeConnection headConnection = createHeadConnection(headNode);
 				if (headConnection == null) {
-					if (!headNode.getNodeRole().isExtraGuardVariable()) {	// We don't know if extra guards are needed or not
+					if (!headNode.isExtraGuardVariable()) {	// We don't know if extra guards are needed or not
 						multiRegion.getSchedulerConstants().addProblem(createError("createHeadConnections abandoned for " + headNode));
 						headConnection = createHeadConnection(headNode);	// FIXME debugging
 						return null;										//  so matching only fails for unmatchable real heads
@@ -1441,11 +1444,6 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 			}
 		}
 	} */
-
-	@Override
-	public @NonNull VariableNode createVariableNode(@NonNull NodeRole nodeRole, @NonNull VariableDeclaration variable) {
-		return new VariableNode(nodeRole, this, variable);
-	}
 
 	@Override
 	public @NonNull RegionProblem createWarning(@NonNull String messageTemplate, Object... bindings) {

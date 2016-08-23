@@ -27,7 +27,6 @@ import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NodeRole;
 import org.eclipse.qvtd.compiler.internal.qvts2qvti.AbstractForestBuilder;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
-
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 

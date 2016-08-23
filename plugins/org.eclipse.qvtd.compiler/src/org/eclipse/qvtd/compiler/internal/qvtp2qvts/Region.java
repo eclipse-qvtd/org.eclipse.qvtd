@@ -34,6 +34,7 @@ public interface Region extends Visitable, GraphNode, Nameable, Symbolable
 	void addIntermediateConnection(@NonNull NodeConnection connection);
 	void addNode(@NonNull Node node);
 	void addRootConnection(@NonNull NodeConnection connection);
+	void addVariableNode(@NonNull VariableDeclaration variable, @NonNull Node node);
 	void buildPredicatedNavigationEdgesIndex(@NonNull Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigationEdge>>> typedModel2property2predicatedEdges);
 	void buildRealizedNavigationEdgesIndex(@NonNull Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigationEdge>>> typedModel2property2realizedEdges);
 	@Nullable Map<@NonNull Node, @NonNull Node> canMerge(@NonNull Region secondaryRegion, @NonNull Region2Depth region2depths, boolean isLateMerge);
@@ -43,7 +44,6 @@ public interface Region extends Visitable, GraphNode, Nameable, Symbolable
 	@NonNull RegionProblem createError(@NonNull String messageTemplate, Object... bindings);
 	void createIncomingConnections();
 	@NonNull RegionProblem createWarning(@NonNull String messageTemplate, Object... bindings);
-	@NonNull VariableNode createVariableNode(@NonNull NodeRole NodeRole, @NonNull VariableDeclaration variable);
 
 	/**
 	 * Return all the nodes in this region that are call-tree ancestors of node.

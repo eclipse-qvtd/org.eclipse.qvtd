@@ -11,6 +11,7 @@
 package org.eclipse.qvtd.compiler.internal.qvtp2qvts;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 
@@ -19,17 +20,9 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
  * are possible. The analysis is associated with a particular sourceVariable from which a variety of further node analyses
  * are reachable by traversing some Property.
  */
-public class VariableNode extends AbstractNode
+public abstract class VariableNode extends AbstractNode
 {
-	protected final @NonNull VariableDeclaration variable;
-
-	public VariableNode(@NonNull NodeRole nodeRole, @NonNull Region region, @NonNull VariableDeclaration variable) {
-		super(nodeRole, region, ClassUtil.nonNullState(variable.getName()), region.getClassDatumAnalysis(variable));
-		this.variable = variable;
-		assert variable.eContainer() != null;
-		assert variable.getName() != null;
-		addTypedElement(variable);
-	}
+	private @Nullable VariableDeclaration variable;			// null is only permitted during construction
 
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
@@ -37,12 +30,20 @@ public class VariableNode extends AbstractNode
 	}
 
 	public @NonNull VariableDeclaration getVariable() {
-		return variable;
+		return ClassUtil.nonNullState(variable);
 	}
 
-	@SuppressWarnings("null")		// @NonNull may be null during construction
+	protected void initialize(@NonNull NodeRole nodeRole, @NonNull Region region, @NonNull VariableDeclaration variable) {
+		initialize(nodeRole, region, ClassUtil.nonNullState(variable.getName()), region.getClassDatumAnalysis(variable));
+		this.variable = variable;
+		assert variable.eContainer() != null;
+		assert variable.getName() != null;
+		addTypedElement(variable);
+		region.addVariableNode(variable, this);
+	}
+
 	@Override
 	public @NonNull String toString() {
-		return getNodeRole().toString() + "(" + (variable != null ? variable.toString() : name) + ")";
+		return getNodeRole().toString() + "(" + (variable != null ? variable.toString() : getName()) + ")";
 	}
 }

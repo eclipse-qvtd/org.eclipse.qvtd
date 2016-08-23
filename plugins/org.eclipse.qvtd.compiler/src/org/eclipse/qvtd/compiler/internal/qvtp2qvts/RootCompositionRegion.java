@@ -100,7 +100,7 @@ public class RootCompositionRegion extends AbstractRegion
 			}
 			introducedNode = type2node.get(null);
 			if (introducedNode == null) {
-				introducedNode = Nodes.createComposingNode(this, "«" + elementType.getName() + "»", childrenClassDatumAnalysis);
+				introducedNode = RegionUtil.createComposingNode(this, "«" + elementType.getName() + "»", childrenClassDatumAnalysis);
 				type2node.put(null, introducedNode);
 			}
 		}
@@ -112,7 +112,7 @@ public class RootCompositionRegion extends AbstractRegion
 			}
 			introducedNode = property2node.get(null);
 			if (introducedNode == null) {
-				introducedNode = Nodes.createComposingNode(this, "«" + elementType.getName() + "-null»", childrenClassDatumAnalysis);
+				introducedNode = RegionUtil.createComposingNode(this, "«" + elementType.getName() + "-null»", childrenClassDatumAnalysis);
 				property2node.put(null, introducedNode);
 				RegionUtil.createNavigationEdge(getNullNode(), parent2childProperty, introducedNode);
 			}
@@ -125,9 +125,9 @@ public class RootCompositionRegion extends AbstractRegion
 			}
 			introducedNode = type2node.get(containingClassDatumAnalysis);
 			if (introducedNode == null) {
-				introducedNode = Nodes.createComposingNode(this, "«" + elementType.getName() + "-oclContents»", childrenClassDatumAnalysis);
+				introducedNode = RegionUtil.createComposingNode(this, "«" + elementType.getName() + "-oclContents»", childrenClassDatumAnalysis);
 				type2node.put(containingClassDatumAnalysis, introducedNode);
-				Node containerNode = Nodes.createComposingNode(this, "«" + containingClassDatumAnalysis.getCompleteClass().getName() + "-oclContainer»", containingClassDatumAnalysis);
+				Node containerNode = RegionUtil.createComposingNode(this, "«" + containingClassDatumAnalysis.getCompleteClass().getName() + "-oclContainer»", containingClassDatumAnalysis);
 				RegionUtil.createNavigationEdge(containerNode, parent2childProperty, introducedNode);
 			}
 		}
@@ -139,12 +139,12 @@ public class RootCompositionRegion extends AbstractRegion
 			}
 			introducedNode = property2node.get(parent2childProperty);
 			if (introducedNode == null) {
-				introducedNode = Nodes.createComposingNode(this, "«" + elementType.getName() + "-" + parent2childProperty.getName() + "»", childrenClassDatumAnalysis);
+				introducedNode = RegionUtil.createComposingNode(this, "«" + elementType.getName() + "-" + parent2childProperty.getName() + "»", childrenClassDatumAnalysis);
 				property2node.put(parent2childProperty, introducedNode);
 				org.eclipse.ocl.pivot.Class owningClass = parent2childProperty.getOwningClass();
 				assert owningClass != null;
 				containingClassDatumAnalysis = scheduler.getClassDatumAnalysis(owningClass, typedModel);
-				Node containerNode = Nodes.createComposingNode(this, "«" + owningClass.getName() + "-" + parent2childProperty.getName() + "»", containingClassDatumAnalysis);
+				Node containerNode = RegionUtil.createComposingNode(this, "«" + owningClass.getName() + "-" + parent2childProperty.getName() + "»", containingClassDatumAnalysis);
 				RegionUtil.createNavigationEdge(containerNode, parent2childProperty, introducedNode);
 			}
 		}
@@ -164,7 +164,7 @@ public class RootCompositionRegion extends AbstractRegion
 	private @NonNull Node getNullNode() {
 		Node nullNode2 = nullNode;
 		if (nullNode2 == null) {
-			nullNode = nullNode2 = Nodes.createNullNode(this, true, null);
+			nullNode = nullNode2 = RegionUtil.createNullNode(this, true, null);
 		}
 		return nullNode2;
 	}

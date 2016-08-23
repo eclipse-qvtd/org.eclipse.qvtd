@@ -26,7 +26,7 @@ public abstract class AbstractRole implements Role
 	}
 
 	@Override
-	public @NonNull String getColor() {
+	public final @NonNull String getColor() {
 		switch (phase) {
 			case CONSTANT: return CONSTANT_COLOR;
 			case LOADED: return LOADED_COLOR;

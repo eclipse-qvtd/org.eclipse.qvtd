@@ -32,6 +32,11 @@ public interface Node extends ConnectionEnd, GraphStringBuilder.GraphNode, Namea
 	void addOutgoingConnection(@NonNull NodeConnection connection);
 	void addOutgoingEdge(@NonNull Edge edge);
 	void addTypedElement(@NonNull TypedElement typedElement);
+
+	/**
+	 * Create a new nodeRole node in region with the saem name, type etc as this node.
+	 */
+	@NonNull Node createNode(@NonNull NodeRole nodeRole, @NonNull Region region);
 	void destroy();
 
 	/**
@@ -120,6 +125,8 @@ public interface Node extends ConnectionEnd, GraphStringBuilder.GraphNode, Namea
 	 * oclAsType() / includes().
 	 */
 	boolean isExpression();
+
+	boolean isExtraGuardVariable();
 
 	/**
 	 * Return true if this node is part of a head group from which many other nodes are navigable.

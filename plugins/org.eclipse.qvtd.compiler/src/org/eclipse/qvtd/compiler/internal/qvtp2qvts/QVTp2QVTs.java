@@ -215,16 +215,16 @@ public class QVTp2QVTs extends SchedulerConstants
 		if (!node.isClass()) {
 			return false;
 		}
-		if (nodeRole.isExplicitNull()) {
+		if (node.isExplicitNull()) {
 			return true;
 		}
-		if (nodeRole.isOperation()) {
+		if (node.isOperation()) {
 			return true;
 		}
-		if (nodeRole.isTrue()) {
+		if (node.isTrue()) {
 			return true;
 		}
-		if (nodeRole.isPattern()) {
+		if (node.isPattern()) {
 			return true;
 		}
 		return false;

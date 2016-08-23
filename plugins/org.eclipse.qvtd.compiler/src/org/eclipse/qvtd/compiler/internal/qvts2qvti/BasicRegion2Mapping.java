@@ -73,8 +73,8 @@ import org.eclipse.qvtd.compiler.internal.qvtp2qvts.EdgeRole;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NavigationEdge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NodeConnection;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Nodes;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RegionUtil;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.SchedulerConstants;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
@@ -865,7 +865,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			headCallingRegions.add(region);
 		}
 		for (@NonNull Node headNode : region.getHeadNodes()) {
-			if (!headNode.isTrue() && !headNode.getNodeRole().isExtraGuardVariable()) {
+			if (!headNode.isTrue() && !headNode.isExtraGuardVariable()) {
 				Node bestHeadNode = null;
 				Iterable<@NonNull Node> callingSources = headNode.getPassedBindingSources();
 				if (!Iterables.isEmpty(callingSources)) {
@@ -890,7 +890,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 					Set<Region> guardCallingRegions = new HashSet<Region>();
 					boolean canBeGuard = true;
 					for (@NonNull Node callingSource : guardNode.getUsedBindingSources()) {
-						if (callingSource.getNodeRole().isComposed()) {
+						if (callingSource.isComposed()) {
 							canBeGuard = false;
 							break;
 						}
@@ -988,7 +988,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		for (@NonNull NavigationEdge edge : region.getNavigationEdges()) {
 			Node sourceNode = edge.getSource();
 			Node targetNode = edge.getTarget();
-			if (!sourceNode.isIterator() && !sourceNode.getNodeRole().isExtraGuardVariable() && !targetNode.isIterator() && Nodes.isUnconditional(edge)) {		// FIXME provide a better isExpression capability for pattern nodes
+			if (!sourceNode.isIterator() && !sourceNode.isExtraGuardVariable() && !targetNode.isIterator() && RegionUtil.isUnconditional(edge)) {		// FIXME provide a better isExpression capability for pattern nodes
 				forestEdges.add(edge);
 			}
 		}
@@ -1020,7 +1020,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		//
 		for (@NonNull NavigationEdge untraversedEdge : navigationForest.getGraphPredicates()) {
 			Node sourceNode = untraversedEdge.getSource();
-			if (!sourceNode.isInternal() && !sourceNode.getNodeRole().isExtraGuardVariable()) {
+			if (!sourceNode.isInternal() && !sourceNode.isExtraGuardVariable()) {
 				Node targetNode = untraversedEdge.getTarget();
 				Property property = untraversedEdge.getProperty();
 				OCLExpression sourceExp = createVariableExp(sourceNode);

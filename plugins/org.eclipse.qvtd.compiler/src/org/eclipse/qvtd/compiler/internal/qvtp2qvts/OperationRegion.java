@@ -66,7 +66,7 @@ public class OperationRegion extends AbstractRegion
 		Node extraNode;
 		extraNode = selfNode;
 		//
-		resultNode = Nodes.createStepNode("result", operationCallExp, extraNode, false);
+		resultNode = RegionUtil.createStepNode("result", operationCallExp, extraNode, false);
 		RegionUtil.createExpressionEdge(extraNode, "«equals»", resultNode);
 		//
 		List<Variable> ownedParameters = specification.getOwnedParameters();
@@ -140,20 +140,20 @@ public class OperationRegion extends AbstractRegion
 							//						assert typedModel != null;
 							//						stepType = propertyStep.getType();
 							//						classDatumAnalysis = schedulerConstants.getClassDatumAnalysis(stepType, typedModel);
-							//						Node nextNode = Nodes.StepNodeRoleFactory.PREDICATED_STEP.createNode(this, "next", classDatumAnalysis);
+							//						Node nextNode = RegionUtil.StepNodeRoleFactory.PREDICATED_STEP.createNode(this, "next", classDatumAnalysis);
 
 							if (primaryClass instanceof CollectionType) {
 								Property iterateProperty = schedulerConstants.getIterateProperty(primaryClass);
 								Type elementType = ((CollectionType)primaryClass).getElementType();
 								TypedModel typedModel2 = classDatumAnalysis.getTypedModel();
 								ClassDatumAnalysis elementClassDatumAnalysis = schedulerConstants.getClassDatumAnalysis((@NonNull Class) elementType, typedModel2);
-								Node elementNode = Nodes.createOperationElementNode(this, name, elementClassDatumAnalysis, extraNode2);
+								Node elementNode = RegionUtil.createOperationElementNode(this, name, elementClassDatumAnalysis, extraNode2);
 								//(region, name, typedElement, argNodes)Node(region, name, callExp, sourceNode)Node(this, name, iterateProperty, extraNode2);
 								RegionUtil.createNavigationEdge(extraNode2, iterateProperty, elementNode);
 								extraNode2 = elementNode;
 							}
 							//							assert !extraNode2.isMatched();
-							Node nextNode = Nodes.createDataTypeNode(extraNode2, navigationCallExp);			// FIXME re-use shared paths
+							Node nextNode = RegionUtil.createDataTypeNode(extraNode2, navigationCallExp);			// FIXME re-use shared paths
 							RegionUtil.createNavigationEdge(extraNode2, property, nextNode);
 							extraNode2 = nextNode;
 						}
@@ -189,7 +189,7 @@ public class OperationRegion extends AbstractRegion
 		TypedModel typedModel = schedulerConstants.getDomainUsage(expression).getTypedModel(expression);
 		assert typedModel != null;
 		ClassDatumAnalysis classDatumAnalysis = schedulerConstants.getClassDatumAnalysis(type, typedModel);
-		Node parameterNode = Nodes.createOperationParameterNode(this, name, classDatumAnalysis);
+		Node parameterNode = RegionUtil.createOperationParameterNode(this, name, classDatumAnalysis);
 		//		addVariableNode(variable, parameterNode);
 		headNodes.add(parameterNode);
 		parameter2node.put(variable, parameterNode);
@@ -197,7 +197,7 @@ public class OperationRegion extends AbstractRegion
 	}
 
 	private @NonNull Node createParameterNode(@NonNull ClassDatumAnalysis classDatumAnalysis, @NonNull String name) {
-		Node parameterNode = Nodes.createOperationParameterNode(this, name, classDatumAnalysis);
+		Node parameterNode = RegionUtil.createOperationParameterNode(this, name, classDatumAnalysis);
 		//		addVariableNode(variable, parameterNode);
 		headNodes.add(parameterNode);
 		return parameterNode;

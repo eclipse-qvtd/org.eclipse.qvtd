@@ -21,7 +21,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.TypedElement;
-import org.eclipse.ocl.pivot.VariableDeclaration;
 
 public class RegionMerger extends AbstractVisitor<@Nullable Visitable>
 {
@@ -212,13 +211,13 @@ public class RegionMerger extends AbstractVisitor<@Nullable Visitable>
 	}
 
 	@Override
-	public @NonNull TypedNode visitTypedNode(@NonNull TypedNode typedNode) {
+	public @NonNull Node visitTypedNode(@NonNull TypedNode typedNode) {
 		NodeRole nodeRole = typedNode.getNodeRole();
 		Node primaryNode = secondaryNode2primaryNode.get(typedNode);
 		if (primaryNode != null) {
 			nodeRole = nodeRole.merge(primaryNode.getNodeRole());
 		}
-		TypedNode mergedNode = new TypedNode(nodeRole, mergedRegion, typedNode.getName(), typedNode.getClassDatumAnalysis());
+		Node mergedNode = typedNode.createNode(nodeRole, mergedRegion);
 		oldNode2mergedNode.put(typedNode, mergedNode);
 		for (@NonNull TypedElement typedElement : typedNode.getTypedElements()) {
 			mergedNode.addTypedElement(typedElement);
@@ -233,14 +232,13 @@ public class RegionMerger extends AbstractVisitor<@Nullable Visitable>
 	}
 
 	@Override
-	public @NonNull VariableNode visitVariableNode(@NonNull VariableNode variableNode) {
+	public @NonNull Node visitVariableNode(@NonNull VariableNode variableNode) {
 		NodeRole nodeRole = variableNode.getNodeRole();
 		Node primaryNode = secondaryNode2primaryNode.get(variableNode);
 		if (primaryNode != null) {
 			nodeRole = nodeRole.merge(primaryNode.getNodeRole());
 		}
-		@NonNull VariableDeclaration variableDeclaration = (VariableDeclaration)variableNode.getTypedElements().iterator().next();
-		VariableNode mergedNode = mergedRegion.createVariableNode(nodeRole, variableDeclaration);
+		Node mergedNode = variableNode.createNode(nodeRole, mergedRegion);
 		oldNode2mergedNode.put(variableNode, mergedNode);
 		for (@NonNull TypedElement typedElement : variableNode.getTypedElements()) {
 			mergedNode.addTypedElement(typedElement);

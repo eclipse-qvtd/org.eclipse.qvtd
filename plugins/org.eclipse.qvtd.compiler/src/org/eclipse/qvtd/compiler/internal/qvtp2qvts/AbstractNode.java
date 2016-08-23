@@ -61,11 +61,11 @@ public abstract class AbstractNode implements Node
 		}
 	}
 
-	private @NonNull NodeRole nodeRole;
-	protected final @NonNull Region region;
-	protected final @NonNull String name;
-	private @NonNull ClassDatumAnalysis classDatumAnalysis;
-	private final boolean isDataType;
+	private @Nullable NodeRole nodeRole;						// null is only permitted during construction
+	private @Nullable Region region;							// null is only permitted during construction
+	private @Nullable String name;								// null is only permitted during construction
+	private @Nullable ClassDatumAnalysis classDatumAnalysis;	// null is only permitted during construction
+	private boolean isDataType;
 	private boolean isHead = false;
 	private @Nullable NodeConnection incomingConnection = null;
 	private @Nullable List<@NonNull Edge> incomingEdges = null;
@@ -74,17 +74,9 @@ public abstract class AbstractNode implements Node
 
 	private final @NonNull List<@NonNull TypedElement> typedElements = new ArrayList<@NonNull TypedElement>();
 
-	protected AbstractNode(@NonNull NodeRole nodeRole, @NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
-		this.nodeRole = nodeRole;
-		this.region = region;
-		this.name = name;
-		this.classDatumAnalysis = classDatumAnalysis;
-		this.isDataType = classDatumAnalysis.getClassDatum().getType() instanceof DataType;;
-		region.addNode(this);
-	}
-
 	@Override
 	public void destroy() {
+		assert region != null;
 		region.removeNode(this);
 		Connection incomingConnection2 = incomingConnection;
 		if (incomingConnection2 != null) {
@@ -164,13 +156,15 @@ public abstract class AbstractNode implements Node
 	public void addTypedElement(@NonNull TypedElement typedElement) {
 		if (!typedElements.contains(typedElement)) {
 			typedElements.add(typedElement);
-			if (isPattern() && isMatched() && !isRealized() && (typedElements.size() == 1) && !region.isOperationRegion()) {
-				boolean isMatched = Nodes.isMatched(typedElement);
+			Region region2 = region;
+			assert region2 != null;
+			if (isPattern() && isMatched() && !isRealized() && (typedElements.size() == 1) && !region2.isOperationRegion()) {
+				boolean isMatched = RegionUtil.isMatched(typedElement);
 				if (!isMatched) {
-					isMatched = Nodes.isMatched(typedElement);
+					isMatched = RegionUtil.isMatched(typedElement);
 				}
 				if (!isMatched) {
-					region.getMultiRegion().getSchedulerConstants().addProblem(region.createWarning("Cannot add unmatched " + typedElement + " to " + this));
+					region2.getMultiRegion().getSchedulerConstants().addProblem(region2.createWarning("Cannot add unmatched " + typedElement + " to " + this));
 				}
 			}
 		}
@@ -258,15 +252,17 @@ public abstract class AbstractNode implements Node
 
 	@Override
 	public final @NonNull ClassDatumAnalysis getClassDatumAnalysis() {
-		return classDatumAnalysis;
+		return ClassUtil.nonNullState(classDatumAnalysis);
 	}
 
 	protected @NonNull String getColor() {
+		assert nodeRole != null;
 		return nodeRole.getColor();
 	}
 
 	@Override
 	public @NonNull CompleteClass getCompleteClass() {
+		assert classDatumAnalysis != null;
 		return classDatumAnalysis.getCompleteClass();
 	}
 
@@ -278,6 +274,7 @@ public abstract class AbstractNode implements Node
 
 	@Override
 	public @NonNull String getDisplayName() {
+		assert region != null;
 		return region.getName() + "::" + getName();
 	}
 
@@ -320,7 +317,7 @@ public abstract class AbstractNode implements Node
 
 	@Override
 	public @NonNull String getName() {
-		return name;
+		return ClassUtil.nonNullState(name);
 	}
 
 	@Override
@@ -365,7 +362,7 @@ public abstract class AbstractNode implements Node
 
 	@Override
 	public @NonNull NodeRole getNodeRole() {
-		return nodeRole;
+		return ClassUtil.nonNullState(nodeRole);
 	}
 
 	@Override
@@ -462,7 +459,7 @@ public abstract class AbstractNode implements Node
 
 	@Override
 	public @NonNull Region getRegion() {
-		return region;
+		return ClassUtil.nonNullState(region);
 	}
 
 	@Override
@@ -473,11 +470,12 @@ public abstract class AbstractNode implements Node
 
 	@Override
 	public @NonNull SchedulerConstants getSchedulerConstants() {
+		assert region != null;
 		return region.getSchedulerConstants();
 	}
 
 	protected @Nullable String getShape() {
-		return nodeRole.getShape();
+		return null;
 	}
 
 	protected @Nullable String getStyle() {
@@ -515,6 +513,15 @@ public abstract class AbstractNode implements Node
 		return sources;
 	}
 
+	protected void initialize(@NonNull NodeRole nodeRole, @NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
+		this.nodeRole = nodeRole;
+		this.region = region;
+		this.name = name;
+		this.classDatumAnalysis = classDatumAnalysis;
+		this.isDataType = classDatumAnalysis.getClassDatum().getType() instanceof DataType;;
+		region.addNode(this);
+	}
+
 	@Override
 	public final boolean isClass() {
 		return !isDataType;
@@ -522,11 +529,12 @@ public abstract class AbstractNode implements Node
 
 	@Override
 	public boolean isComposed() {
-		return nodeRole.isComposed();
+		return false;
 	}
 
 	@Override
 	public boolean isConstant() {
+		assert nodeRole != null;
 		return nodeRole.isConstant();
 	}
 
@@ -537,12 +545,17 @@ public abstract class AbstractNode implements Node
 
 	@Override
 	public boolean isExplicitNull() {
-		return nodeRole.isExplicitNull();
+		return false;
 	}
 
 	@Override
 	public boolean isExpression() {
-		return nodeRole.isExpression();
+		return false;
+	}
+
+	@Override
+	public boolean isExtraGuardVariable() {
+		return false;
 	}
 
 	@Override
@@ -552,81 +565,92 @@ public abstract class AbstractNode implements Node
 
 	@Override
 	public boolean isInternal() {
-		return nodeRole.isInternal();
+		return false;
 	}
 
 	@Override
 	public boolean isIterator() {
-		return nodeRole.isIterator();
+		return false;
 	}
 
 	@Override
 	public boolean isLoaded() {
+		assert nodeRole != null;
 		return nodeRole.isLoaded();
 	}
 
 	@Override
+	public boolean isMatched() {
+		return false;
+	}
+
+	@Override
 	public boolean isNew() {
+		assert nodeRole != null;
 		return nodeRole.isNew();
 	}
 
 	@Override
 	public boolean isOld() {
+		assert nodeRole != null;
 		return nodeRole.isOld();
 	}
 
 	@Override
 	public boolean isOperation() {
-		return nodeRole.isOperation();
+		return false;
 	}
 
 	@Override
 	public boolean isPattern() {
-		return nodeRole.isPattern();
+		return false;
 	}
 
 	@Override
 	public boolean isPredicated() {
+		assert nodeRole != null;
 		if (nodeRole.isSpeculated()) {
+			assert nodeRole != null;
 			return nodeRole.isPredicated();
 		}
 		else {
+			assert nodeRole != null;
 			return nodeRole.isPredicated();
 		}
 	}
 
 	@Override
 	public boolean isRealized() {
+		assert nodeRole != null;
 		return nodeRole.isRealized();
 	}
 
 	@Override
-	public boolean isMatched() {
-		return nodeRole.isMatched();
-	}
-
-	@Override
 	public boolean isSpeculated() {
+		assert nodeRole != null;
 		return nodeRole.isSpeculated();
 	}
 
 	@Override
 	public boolean isSpeculation() {
+		assert nodeRole != null;
 		return nodeRole.isSpeculation();
 	}
 
 	@Override
 	public boolean isTrue() {
-		return nodeRole.isTrue();
+		return false;
 	}
 
 	@Override
 	public boolean refineClassDatumAnalysis(@NonNull ClassDatumAnalysis newClassDatumAnalysis) {
-		CompleteClass oldCompleteClass = classDatumAnalysis.getCompleteClass();
+		ClassDatumAnalysis classDatumAnalysis2 = classDatumAnalysis;
+		assert classDatumAnalysis2 != null;
+		CompleteClass oldCompleteClass = classDatumAnalysis2.getCompleteClass();
 		CompleteClass newCompleteClass = newClassDatumAnalysis.getCompleteClass();
 		if (oldCompleteClass.conformsTo(newCompleteClass)) {
 			RootDomainUsageAnalysis domainAnalysis = getSchedulerConstants().getDomainAnalysis();
-			DomainUsage.Internal oldDomainUsage = (Internal) classDatumAnalysis.getDomainUsage();
+			DomainUsage.Internal oldDomainUsage = (Internal) classDatumAnalysis2.getDomainUsage();
 			DomainUsage.Internal newDomainUsage = (Internal) newClassDatumAnalysis.getDomainUsage();
 			int refinedBitMask = oldDomainUsage.getMask() & newDomainUsage.getMask();
 			DomainUsage refinedDomainUsage = domainAnalysis.getConstantUsage(refinedBitMask);
@@ -637,7 +661,7 @@ public abstract class AbstractNode implements Node
 		}
 		else if (newCompleteClass.conformsTo(oldCompleteClass)) {
 			RootDomainUsageAnalysis domainAnalysis = getSchedulerConstants().getDomainAnalysis();
-			DomainUsage.Internal oldDomainUsage = (Internal) classDatumAnalysis.getDomainUsage();
+			DomainUsage.Internal oldDomainUsage = (Internal) classDatumAnalysis2.getDomainUsage();
 			DomainUsage.Internal newDomainUsage = (Internal) newClassDatumAnalysis.getDomainUsage();
 			int refinedBitMask = oldDomainUsage.getMask() & newDomainUsage.getMask();
 			DomainUsage refinedDomainUsage = domainAnalysis.getConstantUsage(refinedBitMask);
@@ -722,6 +746,6 @@ public abstract class AbstractNode implements Node
 
 	@Override
 	public @NonNull String toString() {
-		return nodeRole.toString() + "(" + getName() + " : " + classDatumAnalysis.toString() + ")";
+		return String.valueOf(nodeRole) + "(" + getName() + " : " + String.valueOf(classDatumAnalysis) + ")";
 	}
 }
