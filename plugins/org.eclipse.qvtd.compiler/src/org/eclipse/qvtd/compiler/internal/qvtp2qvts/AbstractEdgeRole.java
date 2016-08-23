@@ -11,7 +11,6 @@
 package org.eclipse.qvtd.compiler.internal.qvtp2qvts;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 
 public abstract class AbstractEdgeRole extends AbstractRole implements EdgeRole
 {
@@ -30,11 +29,6 @@ public abstract class AbstractEdgeRole extends AbstractRole implements EdgeRole
 	}
 
 	@Override
-	public @Nullable String getLabel() {
-		return null;
-	}
-
-	@Override
 	public boolean isCast() {
 		return false;
 	}
@@ -46,11 +40,6 @@ public abstract class AbstractEdgeRole extends AbstractRole implements EdgeRole
 
 	@Override
 	public boolean isExpression() {
-		return false;
-	}
-
-	@Override
-	public boolean isMatched() {
 		return false;
 	}
 

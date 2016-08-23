@@ -303,7 +303,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 	}
 
 	protected @NonNull Edge createExpressionEdge(@NonNull Node sourceNode, @NonNull String name, @NonNull Node targetNode) {
-		return Edges.createExpressionEdge(sourceNode, name, targetNode, sourceNode.isMatched() && targetNode.isMatched() && isUnconditional());
+		return Edges.createExpressionEdge(sourceNode, name, targetNode);
 	}
 
 	protected @NonNull Edge createIteratedEdge(@NonNull Node sourceNode, @NonNull String name, @NonNull Node targetNode) {
@@ -510,7 +510,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 			assert navigationEdge == null;
 			//			Node valueNode = navigationEdge.getTarget();
 			//			assert valueNode.isRealized();
-			Type type = source2targetProperty.getType();
+			//			Type type = source2targetProperty.getType();
 			/*			if (type instanceof DataType) {
 				Node attributeNode = createRealizedDataTypeNode(sourceNode, source2targetProperty);
 				createExpressionEdge(targetNode, "«equals»", attributeNode);
@@ -709,8 +709,11 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 		assert slotNode.isClass();
 		Property property = QVTcoreBaseUtil.getTargetProperty(asNavigationAssignment);
 		assert property != null;
-		PivotUtil.rewriteSafeNavigations(environmentFactory, asNavigationAssignment.getValue());
-		Node targetNode = analyze(asNavigationAssignment.getValue());
+		OCLExpression value = asNavigationAssignment.getValue();
+		if (value != null) {
+			PivotUtil.rewriteSafeNavigations(environmentFactory, value);
+		}
+		Node targetNode = analyze(value);
 		NavigationEdge navigationEdge = getNavigationEdge(slotNode, property, targetNode, asNavigationAssignment);
 		Node valueNode = navigationEdge.getTarget();
 		CompleteClass valueCompleteClass = valueNode.getCompleteClass();

@@ -41,11 +41,6 @@ public interface EdgeRole extends Role
 
 	@NonNull EdgeRole asPredicated();
 
-	/**
-	 * Return a label for the edge, null for none.
-	 */
-	@Nullable String getLabel();
-
 	boolean isCast();
 	boolean isComputation();
 
@@ -53,13 +48,6 @@ public interface EdgeRole extends Role
 	 * Return true if this edge is for an expression.
 	 */
 	boolean isExpression();
-
-	/**
-	 * Return true if after execution an edge with this role exactly corresponds to a relationship between its matching ends.
-	 * Conversely return false if an edge with this role is a conditional execution path or its ends my be optional nulls.
-	 * Collections are never null-valued, not even empty collections.
-	 */
-	boolean isMatched();
 
 	/**
 	 * Return true if this edge represents a property navigation.

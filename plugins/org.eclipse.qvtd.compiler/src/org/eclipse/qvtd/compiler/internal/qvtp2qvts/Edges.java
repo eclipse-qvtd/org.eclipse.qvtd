@@ -38,11 +38,8 @@ public class Edges
 
 	private abstract static class AbstractNavigationEdgeRole extends AbstractEdgeRole implements EdgeRole.Navigation
 	{
-		private final boolean isMatched;
-
-		protected AbstractNavigationEdgeRole(@NonNull Phase phase, boolean isMatched) {
+		protected AbstractNavigationEdgeRole(@NonNull Phase phase) {
 			super(phase);
-			this.isMatched = isMatched;
 		}
 
 		@Override
@@ -66,11 +63,6 @@ public class Edges
 		}
 
 		@Override
-		public final boolean isMatched() {
-			return isMatched;
-		}
-
-		@Override
 		public final boolean isNavigation() {
 			return true;
 		}
@@ -79,61 +71,39 @@ public class Edges
 		public @NonNull EdgeRole merge(@NonNull EdgeRole edgeRole) {
 			if (edgeRole instanceof AbstractNavigationEdgeRole) {
 				if (phase == ((AbstractNavigationEdgeRole)edgeRole).phase) {
-					if (isMatched) {
-						return this;
-					}
-					else if (edgeRole.isMatched()) {
-						return edgeRole;
-					}
+					return this;
 				}
 			}
 			return super.merge(edgeRole);
-		}
-
-		@Override
-		public String toString() {
-			return phase + (isMatched ? "-MATCHED-" : "-OPTIONAL-") + getClass().getSimpleName();
 		}
 	}
 
 	private static class CastEdgeRole extends AbstractNavigationEdgeRole
 	{
-		private static final @NonNull CastEdgeRole CONSTANT_MATCHED_CAST = new CastEdgeRole(Role.Phase.CONSTANT, true);
-		private static final @NonNull CastEdgeRole CONSTANT_OPTIONAL_CAST = new CastEdgeRole(Role.Phase.CONSTANT, false);
-		private static final @NonNull CastEdgeRole LOADED_MATCHED_CAST = new CastEdgeRole(Role.Phase.LOADED, true);
-		private static final @NonNull CastEdgeRole LOADED_OPTIONAL_CAST = new CastEdgeRole(Role.Phase.LOADED, false);
-		private static final @NonNull CastEdgeRole PREDICATED_MATCHED_CAST = new CastEdgeRole(Role.Phase.PREDICATED, true);
-		private static final @NonNull CastEdgeRole PREDICATED_OPTIONAL_CAST = new CastEdgeRole(Role.Phase.PREDICATED, false);
+		private static final @NonNull CastEdgeRole CONSTANT_MATCHED_CAST = new CastEdgeRole(Role.Phase.CONSTANT);
+		private static final @NonNull CastEdgeRole LOADED_MATCHED_CAST = new CastEdgeRole(Role.Phase.LOADED);
+		private static final @NonNull CastEdgeRole PREDICATED_MATCHED_CAST = new CastEdgeRole(Role.Phase.PREDICATED);
 
 		public static EdgeRole.@NonNull Phase getCastEdgePhase(@NonNull Node sourceNode, @NonNull Node targetNode) {
 			return RegionUtil.mergeToLessKnownPhase(sourceNode.getNodeRole(), targetNode.getNodeRole()).getPhase();
 		}
 
-		public static @NonNull CastEdgeRole getCastEdgeRole(EdgeRole.@NonNull Phase phase, boolean isMatched) {
-			if (isMatched) {
-				switch (phase) {
-					case CONSTANT: return CONSTANT_MATCHED_CAST;
-					case LOADED: return LOADED_MATCHED_CAST;
-					case PREDICATED: return PREDICATED_MATCHED_CAST;
-				}
-			}
-			else {
-				switch (phase) {
-					case CONSTANT: return CONSTANT_OPTIONAL_CAST;
-					case LOADED: return LOADED_OPTIONAL_CAST;
-					case PREDICATED: return PREDICATED_OPTIONAL_CAST;
-				}
+		public static @NonNull CastEdgeRole getCastEdgeRole(EdgeRole.@NonNull Phase phase) {
+			switch (phase) {
+				case CONSTANT: return CONSTANT_MATCHED_CAST;
+				case LOADED: return LOADED_MATCHED_CAST;
+				case PREDICATED: return PREDICATED_MATCHED_CAST;
 			}
 			throw new UnsupportedOperationException();
 		}
 
-		private CastEdgeRole(@NonNull Phase phase, boolean isMatched) {
-			super(phase, isMatched);
+		private CastEdgeRole(@NonNull Phase phase) {
+			super(phase);
 		}
 
 		@Override
 		public @NonNull CastEdgeRole asPhase(@NonNull Phase phase) {
-			return getCastEdgeRole(phase, isMatched());
+			return getCastEdgeRole(phase);
 		}
 
 		@Override
@@ -154,55 +124,33 @@ public class Edges
 
 	private static class ExpressionEdgeRole extends AbstractComputationEdgeRole
 	{
-		private static final @NonNull ExpressionEdgeRole CONSTANT_OPTIONAL_EXPRESSION = new ExpressionEdgeRole(Role.Phase.CONSTANT, false);
-		private static final @NonNull ExpressionEdgeRole CONSTANT_MATCHED_EXPRESSION = new ExpressionEdgeRole(Role.Phase.CONSTANT, true);
-		private static final @NonNull ExpressionEdgeRole LOADED_OPTIONAL_EXPRESSION = new ExpressionEdgeRole(Role.Phase.LOADED, false);
-		private static final @NonNull ExpressionEdgeRole LOADED_MATCHED_EXPRESSION = new ExpressionEdgeRole(Role.Phase.LOADED, true);
-		private static final @NonNull ExpressionEdgeRole PREDICATED_OPTIONAL_EXPRESSION = new ExpressionEdgeRole(Role.Phase.PREDICATED, false);
-		private static final @NonNull ExpressionEdgeRole PREDICATED_MATCHED_EXPRESSION = new ExpressionEdgeRole(Role.Phase.PREDICATED, true);
-		private static final @NonNull ExpressionEdgeRole REALIZED_OPTIONAL_EXPRESSION = new ExpressionEdgeRole(Role.Phase.REALIZED, false);
-		private static final @NonNull ExpressionEdgeRole REALIZED_MATCHED_EXPRESSION = new ExpressionEdgeRole(Role.Phase.REALIZED, true);
+		private static final @NonNull ExpressionEdgeRole CONSTANT_MATCHED_EXPRESSION = new ExpressionEdgeRole(Role.Phase.CONSTANT);
+		private static final @NonNull ExpressionEdgeRole LOADED_MATCHED_EXPRESSION = new ExpressionEdgeRole(Role.Phase.LOADED);
+		private static final @NonNull ExpressionEdgeRole PREDICATED_MATCHED_EXPRESSION = new ExpressionEdgeRole(Role.Phase.PREDICATED);
+		private static final @NonNull ExpressionEdgeRole REALIZED_MATCHED_EXPRESSION = new ExpressionEdgeRole(Role.Phase.REALIZED);
 
-		private static @NonNull ExpressionEdgeRole getExpressionEdgeRole(EdgeRole.@NonNull Phase phase, boolean isMatched) {
-			if (isMatched) {
-				switch (phase) {
-					case CONSTANT: return CONSTANT_MATCHED_EXPRESSION;
-					case LOADED: return LOADED_MATCHED_EXPRESSION;
-					case PREDICATED: return PREDICATED_MATCHED_EXPRESSION;
-					case REALIZED: return REALIZED_MATCHED_EXPRESSION;
-				}
-			}
-			else {
-				switch (phase) {
-					case CONSTANT: return CONSTANT_OPTIONAL_EXPRESSION;
-					case LOADED: return LOADED_OPTIONAL_EXPRESSION;
-					case PREDICATED: return PREDICATED_OPTIONAL_EXPRESSION;
-					case REALIZED: return REALIZED_OPTIONAL_EXPRESSION;
-				}
+		private static @NonNull ExpressionEdgeRole getExpressionEdgeRole(EdgeRole.@NonNull Phase phase) {
+			switch (phase) {
+				case CONSTANT: return CONSTANT_MATCHED_EXPRESSION;
+				case LOADED: return LOADED_MATCHED_EXPRESSION;
+				case PREDICATED: return PREDICATED_MATCHED_EXPRESSION;
+				case REALIZED: return REALIZED_MATCHED_EXPRESSION;
 			}
 			throw new UnsupportedOperationException();
 		}
 
-		private final boolean isMatched;
-
-		private ExpressionEdgeRole(@NonNull Phase phase, boolean isMatched) {
+		private ExpressionEdgeRole(@NonNull Phase phase) {
 			super(phase);
-			this.isMatched = isMatched;
 		}
 
 		@Override
 		public @NonNull ExpressionEdgeRole asPhase(@NonNull Phase phase) {
-			return getExpressionEdgeRole(phase, isMatched);
+			return getExpressionEdgeRole(phase);
 		}
 
 		@Override
 		public boolean isExpression() {
 			return true;
-		}
-
-		@Override
-		public final boolean isMatched() {
-			return isMatched;
 		}
 
 		@Override
@@ -213,11 +161,6 @@ public class Edges
 			else {
 				return super.merge(edgeRole);
 			}
-		}
-
-		@Override
-		public String toString() {
-			return phase + (isMatched ? "-MATCHED-" : "-OPTIONAL-") + getClass().getSimpleName();
 		}
 	}
 
@@ -260,46 +203,32 @@ public class Edges
 
 	private static class NavigationEdgeRole extends AbstractNavigationEdgeRole
 	{
-		private static final @NonNull NavigationEdgeRole CONSTANT_MATCHED_NAVIGATION = new NavigationEdgeRole(Role.Phase.CONSTANT, true);
-		private static final @NonNull NavigationEdgeRole CONSTANT_OPTIONAL_NAVIGATION = new NavigationEdgeRole(Role.Phase.CONSTANT, false);
-		private static final @NonNull NavigationEdgeRole LOADED_MATCHED_NAVIGATION = new NavigationEdgeRole(Role.Phase.LOADED, true);
-		private static final @NonNull NavigationEdgeRole LOADED_OPTIONAL_NAVIGATION = new NavigationEdgeRole(Role.Phase.LOADED, false);
-		private static final @NonNull NavigationEdgeRole PREDICATED_MATCHED_NAVIGATION = new NavigationEdgeRole(Role.Phase.PREDICATED, true);
-		private static final @NonNull NavigationEdgeRole PREDICATED_OPTIONAL_NAVIGATION = new NavigationEdgeRole(Role.Phase.PREDICATED, false);
-		private static final @NonNull NavigationEdgeRole REALIZED_MATCHED_NAVIGATION = new NavigationEdgeRole(Role.Phase.REALIZED, true);
-		private static final @NonNull NavigationEdgeRole REALIZED_OPTIONAL_NAVIGATION = new NavigationEdgeRole(Role.Phase.REALIZED, false);
+		private static final @NonNull NavigationEdgeRole CONSTANT_MATCHED_NAVIGATION = new NavigationEdgeRole(Role.Phase.CONSTANT);
+		private static final @NonNull NavigationEdgeRole LOADED_MATCHED_NAVIGATION = new NavigationEdgeRole(Role.Phase.LOADED);
+		private static final @NonNull NavigationEdgeRole PREDICATED_MATCHED_NAVIGATION = new NavigationEdgeRole(Role.Phase.PREDICATED);
+		private static final @NonNull NavigationEdgeRole REALIZED_MATCHED_NAVIGATION = new NavigationEdgeRole(Role.Phase.REALIZED);
 
 		public static EdgeRole.@NonNull Phase getNavigationEdgePhase(@NonNull Node sourceNode, @NonNull Node targetNode) {
 			return RegionUtil.mergeToLessKnownPhase(sourceNode.getNodeRole(), targetNode.getNodeRole()).getPhase();
 		}
 
-		public static @NonNull NavigationEdgeRole getNavigationEdgeRole(EdgeRole.@NonNull Phase phase, boolean isMatched) {
-			if (isMatched) {
-				switch (phase) {
-					case CONSTANT: return CONSTANT_MATCHED_NAVIGATION;
-					case LOADED: return LOADED_MATCHED_NAVIGATION;
-					case PREDICATED: return PREDICATED_MATCHED_NAVIGATION;
-					case REALIZED: return REALIZED_MATCHED_NAVIGATION;
-				}
-			}
-			else {
-				switch (phase) {
-					case CONSTANT: return CONSTANT_OPTIONAL_NAVIGATION;
-					case LOADED: return LOADED_OPTIONAL_NAVIGATION;
-					case PREDICATED: return PREDICATED_OPTIONAL_NAVIGATION;
-					case REALIZED: return REALIZED_OPTIONAL_NAVIGATION;
-				}
+		public static @NonNull NavigationEdgeRole getNavigationEdgeRole(EdgeRole.@NonNull Phase phase) {
+			switch (phase) {
+				case CONSTANT: return CONSTANT_MATCHED_NAVIGATION;
+				case LOADED: return LOADED_MATCHED_NAVIGATION;
+				case PREDICATED: return PREDICATED_MATCHED_NAVIGATION;
+				case REALIZED: return REALIZED_MATCHED_NAVIGATION;
 			}
 			throw new UnsupportedOperationException();
 		}
 
-		protected NavigationEdgeRole(@NonNull Phase phase, boolean isMatched) {
-			super(phase, isMatched);
+		protected NavigationEdgeRole(@NonNull Phase phase) {
+			super(phase);
 		}
 
 		@Override
 		public @NonNull NavigationEdgeRole asPhase(@NonNull Phase phase) {
-			return getNavigationEdgeRole(phase, isMatched());
+			return getNavigationEdgeRole(phase);
 		}
 
 		@Override
@@ -315,55 +244,33 @@ public class Edges
 
 	private static class PredicateEdgeRole extends AbstractComputationEdgeRole
 	{
-		private static final @NonNull PredicateEdgeRole CONSTANT_MATCHED_PREDICATE = new PredicateEdgeRole(Role.Phase.CONSTANT, true);
-		private static final @NonNull PredicateEdgeRole CONSTANT_OPTIONAL_PREDICATE = new PredicateEdgeRole(Role.Phase.CONSTANT, false);
-		private static final @NonNull PredicateEdgeRole LOADED_MATCHED_PREDICATE = new PredicateEdgeRole(Role.Phase.LOADED, true);
-		private static final @NonNull PredicateEdgeRole LOADED_OPTIONAL_PREDICATE = new PredicateEdgeRole(Role.Phase.LOADED, false);
-		private static final @NonNull PredicateEdgeRole PREDICATED_MATCHED_PREDICATE = new PredicateEdgeRole(Role.Phase.PREDICATED, true);
-		private static final @NonNull PredicateEdgeRole PREDICATED_OPTIONAL_PREDICATE = new PredicateEdgeRole(Role.Phase.PREDICATED, false);
-		private static final @NonNull PredicateEdgeRole REALIZED_MATCHED_PREDICATE = new PredicateEdgeRole(Role.Phase.REALIZED, true);
-		private static final @NonNull PredicateEdgeRole REALIZED_OPTIONAL_PREDICATE = new PredicateEdgeRole(Role.Phase.REALIZED, false);
+		private static final @NonNull PredicateEdgeRole CONSTANT_MATCHED_PREDICATE = new PredicateEdgeRole(Role.Phase.CONSTANT);
+		private static final @NonNull PredicateEdgeRole LOADED_MATCHED_PREDICATE = new PredicateEdgeRole(Role.Phase.LOADED);
+		private static final @NonNull PredicateEdgeRole PREDICATED_MATCHED_PREDICATE = new PredicateEdgeRole(Role.Phase.PREDICATED);
+		private static final @NonNull PredicateEdgeRole REALIZED_MATCHED_PREDICATE = new PredicateEdgeRole(Role.Phase.REALIZED);
 
-		public static @NonNull PredicateEdgeRole getPredicateEdgeRole(EdgeRole.@NonNull Phase phase, boolean isMatched) {
-			if (isMatched) {
-				switch (phase) {
-					case CONSTANT: return CONSTANT_MATCHED_PREDICATE;
-					case LOADED: return LOADED_MATCHED_PREDICATE;
-					case PREDICATED: return PREDICATED_MATCHED_PREDICATE;
-					case REALIZED: return REALIZED_MATCHED_PREDICATE;
-				}
-			}
-			else {
-				switch (phase) {
-					case CONSTANT: return CONSTANT_OPTIONAL_PREDICATE;
-					case LOADED: return LOADED_OPTIONAL_PREDICATE;
-					case PREDICATED: return PREDICATED_OPTIONAL_PREDICATE;
-					case REALIZED: return REALIZED_OPTIONAL_PREDICATE;
-				}
+		public static @NonNull PredicateEdgeRole getPredicateEdgeRole(EdgeRole.@NonNull Phase phase) {
+			switch (phase) {
+				case CONSTANT: return CONSTANT_MATCHED_PREDICATE;
+				case LOADED: return LOADED_MATCHED_PREDICATE;
+				case PREDICATED: return PREDICATED_MATCHED_PREDICATE;
+				case REALIZED: return REALIZED_MATCHED_PREDICATE;
 			}
 			throw new UnsupportedOperationException();
 		}
 
-		private final boolean isMatched;
-
-		private PredicateEdgeRole(@NonNull Phase phase, boolean isMatched) {
+		private PredicateEdgeRole(@NonNull Phase phase) {
 			super(phase);
-			this.isMatched = isMatched;
 		}
 
 		@Override
 		public @NonNull PredicateEdgeRole asPhase(@NonNull Phase phase) {
-			return getPredicateEdgeRole(phase, isMatched);
+			return getPredicateEdgeRole(phase);
 		}
 
 		@Override
 		public boolean isExpression() {
 			return true;			// FIXME
-		}
-
-		@Override
-		public boolean isMatched() {
-			return isMatched;
 		}
 
 		@Override
@@ -425,14 +332,13 @@ public class Edges
 	}
 
 	public static @NonNull NavigationEdge createCastEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
-		boolean isMatched = /*isRequired != null ? isRequired.booleanValue() :*/ sourceNode.isMatched();
 		EdgeRole.Phase phase = CastEdgeRole.getCastEdgePhase(sourceNode, targetNode);
-		CastEdgeRole edgeRole = CastEdgeRole.getCastEdgeRole(phase, isMatched);
+		CastEdgeRole edgeRole = CastEdgeRole.getCastEdgeRole(phase);
 		return edgeRole.createEdge(sourceNode, source2targetProperty, targetNode);
 	}
 
-	public static @NonNull Edge createExpressionEdge(@NonNull Node sourceNode, @NonNull String name, @NonNull Node targetNode, boolean isMatched) {
-		ExpressionEdgeRole edgeRole = ExpressionEdgeRole.getExpressionEdgeRole(sourceNode.getNodeRole().getPhase(), isMatched);
+	public static @NonNull Edge createExpressionEdge(@NonNull Node sourceNode, @NonNull String name, @NonNull Node targetNode) {
+		ExpressionEdgeRole edgeRole = ExpressionEdgeRole.getExpressionEdgeRole(sourceNode.getNodeRole().getPhase());
 		return edgeRole.createEdge(sourceNode, name, targetNode);
 	}
 
@@ -442,21 +348,19 @@ public class Edges
 	}
 
 	public static @NonNull NavigationEdge createNavigationEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
-		boolean isMatched = sourceNode.isMatched() && targetNode.isMatched();
 		EdgeRole.Phase phase = NavigationEdgeRole.getNavigationEdgePhase(sourceNode, targetNode);
-		NavigationEdgeRole edgeRole = NavigationEdgeRole.getNavigationEdgeRole(phase, isMatched);
+		NavigationEdgeRole edgeRole = NavigationEdgeRole.getNavigationEdgeRole(phase);
 		return edgeRole.createEdge(sourceNode, source2targetProperty, targetNode);
 	}
 
 	public static @NonNull NavigationEdge createOptionalCastEdge(@NonNull Node sourceNode, @NonNull Property castProperty, @NonNull Node castNode) {
 		EdgeRole.Phase phase = CastEdgeRole.getCastEdgePhase(sourceNode, castNode);
-		CastEdgeRole edgeRole = CastEdgeRole.getCastEdgeRole(phase, false);
+		CastEdgeRole edgeRole = CastEdgeRole.getCastEdgeRole(phase);
 		return edgeRole.createEdge(sourceNode, castProperty, castNode);
 	}
 
 	public static @NonNull Edge createPredicateEdge(@NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode) {
-		boolean isMatched = sourceNode.isMatched() && targetNode.isMatched();
-		PredicateEdgeRole edgeRole = PredicateEdgeRole.getPredicateEdgeRole(sourceNode.getNodeRole().getPhase(), isMatched);
+		PredicateEdgeRole edgeRole = PredicateEdgeRole.getPredicateEdgeRole(sourceNode.getNodeRole().getPhase());
 		return edgeRole.createEdge(sourceNode, name, targetNode);
 	}
 
@@ -465,19 +369,18 @@ public class Edges
 	}
 
 	public static @NonNull Edge createRealizedExpressionEdge(@NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode) {
-		ExpressionEdgeRole edgeRole = ExpressionEdgeRole.getExpressionEdgeRole(Role.Phase.REALIZED, true);
+		ExpressionEdgeRole edgeRole = ExpressionEdgeRole.getExpressionEdgeRole(Role.Phase.REALIZED);
 		return edgeRole.createEdge(sourceNode, name, targetNode);
 	}
 
 	public static @NonNull NavigationEdge createMatchedNavigationEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
 		EdgeRole.Phase edgePhase = NavigationEdgeRole.getNavigationEdgePhase(sourceNode, targetNode);
-		NavigationEdgeRole navigationEdgeRole = NavigationEdgeRole.getNavigationEdgeRole(edgePhase, true);
+		NavigationEdgeRole navigationEdgeRole = NavigationEdgeRole.getNavigationEdgeRole(edgePhase);
 		return navigationEdgeRole.createEdge(sourceNode, source2targetProperty, targetNode);
 	}
 
 	public static @NonNull NavigationEdge createRealizedNavigationEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
-		boolean isMatched = sourceNode.isMatched() && targetNode.isMatched();
-		NavigationEdgeRole navigationEdgeRole = NavigationEdgeRole.getNavigationEdgeRole(Role.Phase.REALIZED, isMatched);	// FIXME make REALIZED edges unnavigable
+		NavigationEdgeRole navigationEdgeRole = NavigationEdgeRole.getNavigationEdgeRole(Role.Phase.REALIZED);	// FIXME make REALIZED edges unnavigable
 		return navigationEdgeRole.createEdge(sourceNode, source2targetProperty, targetNode);
 	}
 

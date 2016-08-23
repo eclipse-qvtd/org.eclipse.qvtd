@@ -36,10 +36,6 @@ public abstract class AbstractEdge implements Edge
 		region.addEdge(this);
 		sourceNode.addOutgoingEdge(this);
 		targetNode.addIncomingEdge(this);
-		//		if (!sourceNode.isNull()) {				// Root region anomally
-		//		if (!targetNode.isOperation()) {	// operations have distinct argument optionality
-		assert isMatched() == (sourceNode.isMatched() && targetNode.isMatched());
-		//		}
 	}
 
 	@Override
@@ -226,8 +222,8 @@ public abstract class AbstractEdge implements Edge
 	}
 
 	@Override
-	public boolean isMatched() {
-		return edgeRole.isMatched();
+	public final boolean isMatched() {
+		return sourceNode.isMatched() && targetNode.isMatched();
 	}
 
 	@Override

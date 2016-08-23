@@ -345,7 +345,6 @@ abstract class AbstractPartition
 					if (targetNodeRole != null) {
 						EdgeRole edgeRole = resolveEdgeRole(sourceNodeRole, edge, targetNodeRole);
 						if (edgeRole != null) {
-							assert edgeRole.isMatched() == (sourceNodeRole.isMatched() && targetNodeRole.isMatched());
 							if (edgeRole.isRealized()) {
 								if (partitioner.hasRealizedEdge(edge)) {
 									edgeRole = null;
