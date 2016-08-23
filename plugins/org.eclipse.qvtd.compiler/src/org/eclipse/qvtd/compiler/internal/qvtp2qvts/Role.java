@@ -51,11 +51,6 @@ public interface Role extends Comparable<Role>
 	};
 
 	/**
-	 * Return a variant of this role suitable for phase.
-	 */
-	@NonNull Role asPhase(@NonNull Phase phase);
-
-	/**
 	 * Return the color with which this glyph is drawn.
 	 */
 	@NonNull String getColor();

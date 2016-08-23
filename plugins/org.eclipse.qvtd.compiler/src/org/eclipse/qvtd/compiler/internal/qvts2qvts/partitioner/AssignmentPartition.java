@@ -17,6 +17,8 @@ import org.eclipse.qvtd.compiler.internal.qvtp2qvts.EdgeRole;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NavigationEdge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NodeRole;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Role;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.EdgeRoleImpl;
 
 /**
  * The AssignmentPartition identifies the nodes and edges required by an assignment micro-mapping
@@ -73,7 +75,7 @@ class AssignmentPartition extends AbstractPartition
 	protected @Nullable EdgeRole resolveEdgeRole(@NonNull NodeRole sourceNodeRole, @NonNull Edge edge, @NonNull NodeRole targetNodeRole) {
 		EdgeRole edgeRole = edge.getEdgeRole();
 		if (edgeRole.isRealized() && partitioner.hasRealizedEdge(edge)) {
-			edgeRole = edgeRole.asPredicated();
+			edgeRole = EdgeRoleImpl.getEdgeRole(Role.Phase.PREDICATED);
 		}
 		return edgeRole;
 	}

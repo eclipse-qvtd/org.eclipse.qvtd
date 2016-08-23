@@ -21,6 +21,12 @@ public interface NavigationEdge extends Edge, ConnectionEnd
 	void addIncomingConnection(@NonNull EdgeConnection edgeConnection);
 	void addOutgoingConnection(@NonNull EdgeConnection edgeConnection);
 
+	/**
+	 * Create an edgeRole edge from sourceNode to targetNode with the same property as this edge.	 * @param edgeRole
+	 */
+	@Override
+	@NonNull NavigationEdge createEdge(@NonNull EdgeRole edgeRole, @NonNull Node sourceNode, @NonNull Node targetNode);
+
 	@Override
 	@NonNull NavigationEdge getForwardEdge();
 

@@ -11,14 +11,9 @@
 package org.eclipse.qvtd.compiler.internal.qvtp2qvts;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 
-public class BasicEdge extends AbstractEdge
+public abstract class BasicEdge extends AbstractEdge
 {
-	public BasicEdge(@NonNull EdgeRole edgeRole, @NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode) {
-		super(edgeRole, sourceNode, name, targetNode);
-	}
-
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
 		return visitor.visitBasicEdge(this);

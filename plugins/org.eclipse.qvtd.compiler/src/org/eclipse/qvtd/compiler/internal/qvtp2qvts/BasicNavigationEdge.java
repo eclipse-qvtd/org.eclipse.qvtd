@@ -16,39 +16,17 @@ import java.util.List;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphStringBuilder.GraphNode;
 
 import com.google.common.collect.Iterables;
 
-public class BasicNavigationEdge extends AbstractEdge implements NavigationEdge
+public abstract class BasicNavigationEdge extends AbstractEdge implements NavigationEdge
 {
-	/**
-	 * Create, install and return the edgeRole edge for source2targetProperty from sourceNode to targetNode. If
-	 * source2targetProperty has an opposite, the opposite edge is also created and installed.
-	 */
-	public static @NonNull NavigationEdge createEdge(EdgeRole.@NonNull Navigation edgeRole,
-			@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
-		BasicNavigationEdge forwardEdge = new BasicNavigationEdge(edgeRole, sourceNode, source2targetProperty, targetNode);
-		Property target2sourceProperty = source2targetProperty.getOpposite();
-		if ((target2sourceProperty != null) && !targetNode.isExplicitNull()) {
-			assert (targetNode.getNavigationEdge(target2sourceProperty) == null) || target2sourceProperty.isIsMany();
-			if (!source2targetProperty.isIsMany() && !target2sourceProperty.isIsMany() /*&& target2sourceProperty.isIsRequired()*/) {		// FIXME do we need stronger type conformance here ??
-				BasicNavigationEdge reverseEdge = new BasicNavigationEdge(edgeRole, targetNode, target2sourceProperty, sourceNode);
-				forwardEdge.oppositeEdge = reverseEdge;
-				reverseEdge.oppositeEdge = forwardEdge;
-				if (source2targetProperty.isIsImplicit()) {
-					forwardEdge.isSecondary = true;
-				}
-				else {
-					reverseEdge.isSecondary = true;
-				}
-			}
-		}
-		return forwardEdge;
-	}
 
-	protected final @NonNull Property source2targetProperty;
+	private @Nullable Property source2targetProperty = null;		// null is only permitted during construction
+
 
 	/**
 	 * Non-null if this edge is part of a bidirectional pair.
@@ -62,15 +40,6 @@ public class BasicNavigationEdge extends AbstractEdge implements NavigationEdge
 
 	private @Nullable EdgeConnection incomingConnection = null;
 	private @Nullable List<@NonNull EdgeConnection> outgoingConnections = null;
-
-	private BasicNavigationEdge(EdgeRole.@NonNull Navigation edgeRole,
-			@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
-		super(edgeRole, sourceNode, source2targetProperty.getName(), targetNode);
-		this.source2targetProperty = source2targetProperty;
-		//		assert (source2targetProperty.eContainer() == null) || sourceNode.isClassNode();		// Pseudo navigations may be non-classes
-		//		assert !sourceNode.isOperation();			// FIXME testExample2_V2 violates this to cast an intermediate "if"
-		//		assert !targetNode.isOperation();
-	}
 
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
@@ -141,12 +110,19 @@ public class BasicNavigationEdge extends AbstractEdge implements NavigationEdge
 
 	@Override
 	public @NonNull String getDisplayName() {
-		return source2targetProperty.getOwningClass().getName() + "::" + source2targetProperty.getName();
-	}
-
-	@Override
-	public EdgeRole.@NonNull Navigation getEdgeRole() {
-		return (EdgeRole.Navigation)super.getEdgeRole();
+		Property source2targetProperty2 = source2targetProperty;
+		if (source2targetProperty2 != null) {
+			org.eclipse.ocl.pivot.Class owningClass = source2targetProperty2.getOwningClass();
+			if (owningClass != null) {
+				return owningClass.getName() + "::" + source2targetProperty2.getName();
+			}
+			else {
+				return "" + source2targetProperty2.getName();
+			}
+		}
+		else {
+			return "null";
+		}
 	}
 
 	@Override
@@ -168,7 +144,17 @@ public class BasicNavigationEdge extends AbstractEdge implements NavigationEdge
 
 	@Override
 	public @Nullable String getLabel() {
-		return getEdgeRole().getLabel(source2targetProperty);
+		@Nullable
+		Property source2targetProperty2 = source2targetProperty;
+		if (source2targetProperty2 == null) {
+			return "null";
+		}
+		else if (source2targetProperty2.eContainer() != null) {
+			return source2targetProperty2.getName() + "\\n" + SchedulerConstants.getMultiplicity(source2targetProperty2);
+		}
+		else {
+			return source2targetProperty2.getName();
+		}
 	}
 
 	@Override
@@ -183,7 +169,23 @@ public class BasicNavigationEdge extends AbstractEdge implements NavigationEdge
 
 	@Override
 	public @NonNull Property getProperty() {
-		return source2targetProperty;
+		return ClassUtil.nonNullState(source2targetProperty);
+	}
+
+	protected void initialize(@NonNull EdgeRole edgeRole, @NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
+		initialize(edgeRole, sourceNode, source2targetProperty.getName(), targetNode);
+		setProperty(source2targetProperty);
+	}
+
+	protected void initializeOpposite(@NonNull BasicNavigationEdge oppositeEdge) {
+		this.oppositeEdge = oppositeEdge;
+		oppositeEdge.oppositeEdge = this;
+		if (this.getProperty().isIsImplicit()) {
+			this.isSecondary = true;
+		}
+		else {
+			oppositeEdge.isSecondary = true;
+		}
 	}
 
 	@Override
@@ -209,6 +211,10 @@ public class BasicNavigationEdge extends AbstractEdge implements NavigationEdge
 		//			assert wasRemoved;   -- destroy subverts this
 	}
 
+	public void setProperty(Property source2targetProperty) {
+		this.source2targetProperty = source2targetProperty;
+	}
+
 	@Override
 	public void toGraph(@NonNull GraphStringBuilder s) {
 		if (isSecondary()) {
@@ -222,15 +228,15 @@ public class BasicNavigationEdge extends AbstractEdge implements NavigationEdge
 		}
 	}
 
-	@Override
-	public void setSource(@NonNull Node sourceNode) {
-		assert !sourceNode.isOperation();
-		super.setSource(sourceNode);
-	}
+	//	@Override
+	//	public void setSource(@Nullable Node sourceNode) {
+	//		assert (sourceNode == null) || !sourceNode.isOperation();
+	//		super.setSource(sourceNode);
+	//	}
 
-	@Override
-	public void setTarget(@NonNull Node targetNode) {
-		assert !targetNode.isOperation();
-		super.setTarget(targetNode);
-	}
+	//	@Override
+	//	public void setTarget(@Nullable Node targetNode) {
+	//		assert (targetNode == null) || !targetNode.isOperation();
+	//		super.setTarget(targetNode);
+	//	}
 }

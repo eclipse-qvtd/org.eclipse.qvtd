@@ -2338,12 +2338,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 							for (Map.@NonNull Entry<@NonNull Node, @NonNull Node> entry : bindings.entrySet()) {
 								@NonNull Node prevNode = entry.getKey();
 								@NonNull Node nextNode = entry.getValue();
-								if (prevNode.isHead()) {
-									Edges.createPrimaryRecursionEdge(prevNode, nextNode);
-								}
-								else {
-									Edges.createSecondaryRecursionEdge(prevNode, nextNode);
-								}
+								RegionUtil.createRecursionEdge(prevNode, nextNode, prevNode.isHead());
 							}
 							return;				// FIXME can we have more than one recursion ??
 						}

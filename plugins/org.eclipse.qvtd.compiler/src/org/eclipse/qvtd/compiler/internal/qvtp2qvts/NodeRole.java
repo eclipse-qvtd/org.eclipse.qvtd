@@ -19,8 +19,6 @@ import org.eclipse.ocl.pivot.TypedElement;
  */
 public interface NodeRole extends Role
 {
-	//	@NonNull NodeRole asMatched();
-	@Override
 	@NonNull NodeRole asPhase(@NonNull Phase phase);
 	@NonNull NodeRole asPredicated();
 	@NonNull NodeRole asSpeculated();

@@ -156,20 +156,20 @@ public class BasicMappingRegion extends AbstractMappingRegion
 					Node rightNode = expressionAnalyzer.analyze(rightExpression);
 					if (leftNode != rightNode) {
 						if (leftNode.isKnown() && !(leftExpression instanceof NavigationCallExp)) {
-							Edges.ARGUMENT.createEdge(this, leftNode, "=", rightNode);
+							RegionUtil.ARGUMENT.createEdge(this, leftNode, "=", rightNode);
 						}
 						else if (rightNode.isKnown() && !(rightExpression instanceof NavigationCallExp)) {
-							Edges.ARGUMENT.createEdge(this, rightNode, "=", leftNode);
+							RegionUtil.ARGUMENT.createEdge(this, rightNode, "=", leftNode);
 						}
 						else if (leftNode.isKnown()) {
-							Edges.ARGUMENT.createEdge(this, leftNode, "=", rightNode);
+							RegionUtil.ARGUMENT.createEdge(this, leftNode, "=", rightNode);
 						}
 						else if (rightNode.isKnown()) {
-							Edges.ARGUMENT.createEdge(this, rightNode, "=", leftNode);
+							RegionUtil.ARGUMENT.createEdge(this, rightNode, "=", leftNode);
 						}
 						else {
-							Edges.BINDING.createEdge(this, leftNode, null, rightNode);			// FIXME
-							Edges.BINDING.createEdge(this, rightNode, null, leftNode);
+							RegionUtil.BINDING.createEdge(this, leftNode, null, rightNode);			// FIXME
+							RegionUtil.BINDING.createEdge(this, rightNode, null, leftNode);
 						}
 					}
 				}
@@ -178,7 +178,7 @@ public class BasicMappingRegion extends AbstractMappingRegion
 			Node resultNode = expressionAnalyzer.analyze(conditionExpression);
 			if (!resultNode.isTrue()) {
 				Node trueNode = Nodes.createTrueNode(this);
-				Edges.createPredicateEdge(resultNode, null, trueNode);
+				RegionUtil.createPredicateEdge(resultNode, null, trueNode);
 			}
 			else {		// FIXME ?? do includes() here explicitly
 				resultNode.destroy();
@@ -297,7 +297,7 @@ public class BasicMappingRegion extends AbstractMappingRegion
 				if (!referredProperty.isIsMany()) {
 					Edge predicateEdge = sourceNode.getPredicateEdge(referredProperty);
 					if (predicateEdge == null) {
-						Edges.createNavigationEdge(sourceNode, referredProperty, targetNode);
+						RegionUtil.createNavigationEdge(sourceNode, referredProperty, targetNode);
 					}
 					else {
 						assert predicateEdge.getTarget() == targetNode;
@@ -313,18 +313,18 @@ public class BasicMappingRegion extends AbstractMappingRegion
 		if ((ownedInit instanceof OperationCallExp) && initNode.isOperation()) {
 			if (QVTbaseUtil.isIdentification(((OperationCallExp)ownedInit).getReferredOperation())) {
 				Node stepNode = Nodes.createRealizedStepNode(this, variable);
-				Edges.createExpressionEdge(initNode, "«equals»", stepNode);
+				RegionUtil.createExpressionEdge(initNode, "«equals»", stepNode);
 				initNode = stepNode;
 			}
 			//			else if (variable.getType() instanceof CollectionType) {
 			//				Node stepNode = Nodes.ATTRIBUTE.createNode(this, variable, (OperationCallExp)ownedInit);
-			//				Edges.RESULT.createEdge(this, initNode, null, stepNode);
+			//				RegionUtil.RESULT.createEdge(this, initNode, null, stepNode);
 			//				initNode = stepNode;
 			//			}
 			else {
 				//				Node stepNode = Nodes.STEP.createNode(this, variable.getName(), (OperationCallExp)ownedInit, initNode);
 				Node stepNode = Nodes.createLoadedStepNode(this, variable);
-				Edges.createExpressionEdge(initNode, "«equals»", stepNode);
+				RegionUtil.createExpressionEdge(initNode, "«equals»", stepNode);
 				initNode = stepNode;
 			}
 		}

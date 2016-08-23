@@ -67,7 +67,7 @@ public class OperationRegion extends AbstractRegion
 		extraNode = selfNode;
 		//
 		resultNode = Nodes.createStepNode("result", operationCallExp, extraNode, false);
-		Edges.createExpressionEdge(extraNode, "«equals»", resultNode);
+		RegionUtil.createExpressionEdge(extraNode, "«equals»", resultNode);
 		//
 		List<Variable> ownedParameters = specification.getOwnedParameters();
 		List<OCLExpression> ownedArguments = operationCallExp.getOwnedArguments();
@@ -149,12 +149,12 @@ public class OperationRegion extends AbstractRegion
 								ClassDatumAnalysis elementClassDatumAnalysis = schedulerConstants.getClassDatumAnalysis((@NonNull Class) elementType, typedModel2);
 								Node elementNode = Nodes.createOperationElementNode(this, name, elementClassDatumAnalysis, extraNode2);
 								//(region, name, typedElement, argNodes)Node(region, name, callExp, sourceNode)Node(this, name, iterateProperty, extraNode2);
-								Edges.createNavigationEdge(extraNode2, iterateProperty, elementNode);
+								RegionUtil.createNavigationEdge(extraNode2, iterateProperty, elementNode);
 								extraNode2 = elementNode;
 							}
 							//							assert !extraNode2.isMatched();
 							Node nextNode = Nodes.createDataTypeNode(extraNode2, navigationCallExp);			// FIXME re-use shared paths
-							Edges.createNavigationEdge(extraNode2, property, nextNode);
+							RegionUtil.createNavigationEdge(extraNode2, property, nextNode);
 							extraNode2 = nextNode;
 						}
 					}

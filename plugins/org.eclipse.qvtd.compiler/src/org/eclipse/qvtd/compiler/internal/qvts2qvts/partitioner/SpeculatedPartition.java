@@ -21,6 +21,8 @@ import org.eclipse.qvtd.compiler.internal.qvtp2qvts.EdgeRole;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NavigationEdge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NodeRole;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Role;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.EdgeRoleImpl;
 
 /**
  * The SpeculatedPartition identifies the nodes and edges required by a speculated micro-mapping
@@ -177,7 +179,7 @@ class SpeculatedPartition extends AbstractPartition
 				edgeRole = null;		// Constant assignment already done in speculation partition. No need to predicate it with a constant to constant connection.
 			}
 			else {
-				edgeRole = edgeRole.asPredicated();
+				edgeRole = EdgeRoleImpl.getEdgeRole(Role.Phase.PREDICATED);
 			}
 		}
 		return edgeRole;

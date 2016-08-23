@@ -83,13 +83,8 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 		}
 
 		@Override
-		protected @NonNull NavigationEdge createCastEdge(@NonNull Node sourceNode, @NonNull Property castProperty, @NonNull Node castNode) {
-			return Edges.createOptionalCastEdge(sourceNode, castProperty, castNode);
-		}
-
-		@Override
 		protected @NonNull NavigationEdge createNavigationEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
-			return Edges.createNavigationEdge(sourceNode, source2targetProperty, targetNode);
+			return RegionUtil.createNavigationEdge(sourceNode, source2targetProperty, targetNode);
 		}
 
 		@Override
@@ -167,10 +162,10 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 		}
 		return castNode;
 		/*		OperationNode operationNode = new OperationNode(context, operationCallExp.getReferredOperation().getName(), context.getClassDatumAnalysis(operationCallExp));
-		Edges.ARGUMENT.createEdge(context, sourceNode, "source", operationNode);
+		RegionUtil.ARGUMENT.createEdge(context, sourceNode, "source", operationNode);
 		for (@SuppressWarnings("null")@NonNull OCLExpression argument : operationCallExp.getOwnedArguments()) {
 			Node argumentNode = analyze(argument);
-			Edges.ARGUMENT.createEdge(context, argumentNode, "arg", operationNode);
+			RegionUtil.ARGUMENT.createEdge(context, argumentNode, "arg", operationNode);
 		}
 		Type returnType = operationCallExp.getType();
 		if (returnType instanceof DataType) {
@@ -182,7 +177,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 			ClassDatumAnalysis classDatumAnalysis = scheduler.getClassDatumAnalysis(operationCallExp);
 			DomainClassNode resultNode = new DomainClassNode(context, "-result-", classDatumAnalysis);
 //			resultNode.setResult();
-			Edges.ARGUMENT.createEdge(context, operationNode, null, resultNode);
+			RegionUtil.ARGUMENT.createEdge(context, operationNode, null, resultNode);
 			return resultNode;
 		} */
 	}
@@ -227,7 +222,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 		Node operationNode = findOperationNode(sourceNode, name);
 		if (operationNode == null) {
 			operationNode = Nodes.OPERATION.createNode(context, name, operationCallExp, sourceNode);
-			Edges.ARGUMENT.createEdge(context, sourceNode, null, operationNode);
+			RegionUtil.ARGUMENT.createEdge(context, sourceNode, null, operationNode);
 		}
 		return operationNode; */
 		/*		Type type = operationCallExp.getType();
@@ -291,7 +286,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 	}
 
 	protected @NonNull NavigationEdge createCastEdge(@NonNull Node sourceNode, @NonNull Property castProperty, @NonNull Node castNode) {
-		return Edges.createCastEdge(sourceNode, castProperty, castNode);
+		return RegionUtil.createCastEdge(sourceNode, castProperty, castNode);
 	}
 
 	protected @NonNull Node createDataTypeNode(@NonNull Node sourceNode, @NonNull NavigationCallExp callExp) {
@@ -303,11 +298,11 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 	}
 
 	protected @NonNull Edge createExpressionEdge(@NonNull Node sourceNode, @NonNull String name, @NonNull Node targetNode) {
-		return Edges.createExpressionEdge(sourceNode, name, targetNode);
+		return RegionUtil.createExpressionEdge(sourceNode, name, targetNode);
 	}
 
 	protected @NonNull Edge createIteratedEdge(@NonNull Node sourceNode, @NonNull String name, @NonNull Node targetNode) {
-		return Edges.createIteratedEdge(sourceNode, name, targetNode);
+		return RegionUtil.createIteratedEdge(sourceNode, name, targetNode);
 	}
 
 	protected @NonNull Node createIteratorNode(@NonNull Variable iterator, @NonNull Node sourceNode) {
@@ -328,11 +323,11 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 	}
 
 	protected @NonNull NavigationEdge createNavigableNavigationEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
-		return Edges.createMatchedNavigationEdge(sourceNode, source2targetProperty, targetNode);
+		return RegionUtil.createNavigationEdge(sourceNode, source2targetProperty, targetNode);
 	}
 
 	protected @NonNull NavigationEdge createNavigationEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
-		return Edges.createNavigationEdge(sourceNode, source2targetProperty, targetNode);
+		return RegionUtil.createNavigationEdge(sourceNode, source2targetProperty, targetNode);
 	}
 
 	protected @NonNull NavigationEdge createNavigationOrRealizedEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode, @Nullable NavigationAssignment navigationAssignment) {
@@ -356,7 +351,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 	}
 
 	protected @NonNull Edge createPredicateEdge(@NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode) {
-		return Edges.createPredicateEdge(sourceNode, name, targetNode);
+		return RegionUtil.createPredicateEdge(sourceNode, name, targetNode);
 	}
 
 	protected @NonNull Node createPredicatedClassNode(@NonNull Node parentNode, @NonNull NavigationAssignment navigationAssignment) {
@@ -372,11 +367,11 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 	}
 
 	protected @NonNull Edge createRealizedExpressionEdge(@NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode) {
-		return Edges.createRealizedExpressionEdge(sourceNode, name, targetNode);
+		return RegionUtil.createRealizedExpressionEdge(sourceNode, name, targetNode);
 	}
 
 	protected @NonNull NavigationEdge createRealizedNavigationEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
-		return Edges.createRealizedNavigationEdge(sourceNode, source2targetProperty, targetNode);
+		return RegionUtil.createRealizedNavigationEdge(sourceNode, source2targetProperty, targetNode);
 	}
 
 	protected @NonNull Node createStepNode(@NonNull String name, @NonNull CallExp callExp, @NonNull Node sourceNode) {

@@ -114,7 +114,7 @@ public class RootCompositionRegion extends AbstractRegion
 			if (introducedNode == null) {
 				introducedNode = Nodes.createComposingNode(this, "«" + elementType.getName() + "-null»", childrenClassDatumAnalysis);
 				property2node.put(null, introducedNode);
-				Edges.createMatchedNavigationEdge(getNullNode(), parent2childProperty, introducedNode);
+				RegionUtil.createNavigationEdge(getNullNode(), parent2childProperty, introducedNode);
 			}
 		}
 		else if (containingClassDatumAnalysis != null) {								// Non-root oclContainer ownership
@@ -128,7 +128,7 @@ public class RootCompositionRegion extends AbstractRegion
 				introducedNode = Nodes.createComposingNode(this, "«" + elementType.getName() + "-oclContents»", childrenClassDatumAnalysis);
 				type2node.put(containingClassDatumAnalysis, introducedNode);
 				Node containerNode = Nodes.createComposingNode(this, "«" + containingClassDatumAnalysis.getCompleteClass().getName() + "-oclContainer»", containingClassDatumAnalysis);
-				Edges.createMatchedNavigationEdge(containerNode, parent2childProperty, introducedNode);
+				RegionUtil.createNavigationEdge(containerNode, parent2childProperty, introducedNode);
 			}
 		}
 		else {																			// Knonw distinctive containment
@@ -145,7 +145,7 @@ public class RootCompositionRegion extends AbstractRegion
 				assert owningClass != null;
 				containingClassDatumAnalysis = scheduler.getClassDatumAnalysis(owningClass, typedModel);
 				Node containerNode = Nodes.createComposingNode(this, "«" + owningClass.getName() + "-" + parent2childProperty.getName() + "»", containingClassDatumAnalysis);
-				Edges.createMatchedNavigationEdge(containerNode, parent2childProperty, introducedNode);
+				RegionUtil.createNavigationEdge(containerNode, parent2childProperty, introducedNode);
 			}
 		}
 		return introducedNode;

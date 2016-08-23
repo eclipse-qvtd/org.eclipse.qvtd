@@ -285,8 +285,8 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 				return clonedElement;
 			}
 			for (@NonNull Edge edge : node.getIncomingEdges()) {
-				EdgeRole edgeRole = edge.getEdgeRole();
-				if (edgeRole.isNavigation()) {
+				if (edge.isNavigation()) {
+					EdgeRole edgeRole = edge.getEdgeRole();
 					if (edgeRole.isLoaded()) {
 						OCLExpression source = getExpression(edge.getSource());
 						if (source != null) {
@@ -300,8 +300,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 				}
 			}
 			for (@NonNull Edge edge : node.getIncomingEdges()) {
-				EdgeRole edgeRole = edge.getEdgeRole();
-				if (edgeRole.isExpression()) {
+				if (edge.isExpression()) {
 					OCLExpression source = create(edge.getSource());
 					return source;
 				}

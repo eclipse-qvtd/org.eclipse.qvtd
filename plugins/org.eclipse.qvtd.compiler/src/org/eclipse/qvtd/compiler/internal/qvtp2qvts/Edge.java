@@ -20,6 +20,11 @@ import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphStringBuilder;
  */
 public interface Edge extends GraphStringBuilder.GraphEdge, Nameable, Visitable
 {
+	/**
+	 * Create an edgeRole edge from sourceNode to targetNode with the same name as this edge.
+	 */
+	@NonNull Edge createEdge(@NonNull EdgeRole edgeRole, @NonNull Node sourceNode, @NonNull Node targetNode);
+
 	void destroy();
 
 	/**

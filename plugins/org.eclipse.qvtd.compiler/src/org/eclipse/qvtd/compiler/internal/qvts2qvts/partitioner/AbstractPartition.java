@@ -64,7 +64,7 @@ abstract class AbstractPartition
 	protected final @NonNull Partitioner partitioner;
 	protected final @NonNull Iterable<@NonNull Edge> alreadyRealizedEdges;
 	private final @NonNull Map<@NonNull Node, @NonNull NodeRole> node2nodeRole = new HashMap<>();
-	private final @NonNull Map<@NonNull Edge, @NonNull EdgeRole> edge2edgeRole = new HashMap<>();
+	private final @NonNull Map<@NonNull Edge, org.eclipse.qvtd.compiler.internal.qvtp2qvts.EdgeRole> edge2edgeRole = new HashMap<>();
 	private /*@LazyNonNull*/ PartitionForest forest = null;
 
 	protected AbstractPartition(@NonNull Partitioner partitioner) {

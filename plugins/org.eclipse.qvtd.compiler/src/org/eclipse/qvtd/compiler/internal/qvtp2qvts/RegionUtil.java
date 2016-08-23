@@ -13,6 +13,14 @@ package org.eclipse.qvtd.compiler.internal.qvtp2qvts;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CompleteClass;
+import org.eclipse.ocl.pivot.Property;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.CastEdgeImpl;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.EdgeRoleImpl;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.ExpressionEdgeImpl;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.IteratedEdgeImpl;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.NavigationEdgeImpl;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.PredicateEdgeImpl;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.RecursionEdgeImpl;
 
 public class RegionUtil
 {
@@ -25,6 +33,47 @@ public class RegionUtil
 			}
 		}
 		return true;
+	}
+	public static @NonNull NavigationEdge createCastEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
+		EdgeRole.Phase phase = RegionUtil.mergeToLessKnownPhase(sourceNode.getNodeRole(), targetNode.getNodeRole()).getPhase();
+		EdgeRole edgeRole = EdgeRoleImpl.getEdgeRole(phase);
+		return CastEdgeImpl.createEdge(edgeRole, sourceNode, source2targetProperty, targetNode);
+	}
+
+	public static @NonNull Edge createExpressionEdge(@NonNull Node sourceNode, @NonNull String name, @NonNull Node targetNode) {
+		EdgeRole edgeRole = EdgeRoleImpl.getEdgeRole(sourceNode.getNodeRole().getPhase());
+		return ExpressionEdgeImpl.create(edgeRole, sourceNode, name, targetNode);
+	}
+
+	public static @NonNull Edge createIteratedEdge(@NonNull Node sourceNode, @NonNull String name,@NonNull Node targetNode) {
+		EdgeRole edgeRole = EdgeRoleImpl.getEdgeRole(sourceNode.getNodeRole().getPhase());
+		return IteratedEdgeImpl.create(edgeRole, sourceNode, name, targetNode);
+	}
+
+	public static @NonNull NavigationEdge createNavigationEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
+		EdgeRole.Phase phase = RegionUtil.mergeToLessKnownPhase(sourceNode.getNodeRole(), targetNode.getNodeRole()).getPhase();
+		EdgeRole edgeRole = EdgeRoleImpl.getEdgeRole(phase);
+		return NavigationEdgeImpl.createEdge(edgeRole, sourceNode, source2targetProperty, targetNode);
+	}
+
+	public static @NonNull Edge createPredicateEdge(@NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode) {
+		EdgeRole edgeRole = EdgeRoleImpl.getEdgeRole(sourceNode.getNodeRole().getPhase());
+		return PredicateEdgeImpl.create(edgeRole, sourceNode, name, targetNode);
+	}
+
+	public static @NonNull Edge createRealizedExpressionEdge(@NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode) {
+		EdgeRole edgeRole = EdgeRoleImpl.getEdgeRole(Role.Phase.REALIZED);
+		return ExpressionEdgeImpl.create(edgeRole, sourceNode, name, targetNode);
+	}
+
+	public static @NonNull NavigationEdge createRealizedNavigationEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
+		EdgeRole edgeRole = EdgeRoleImpl.getEdgeRole(Role.Phase.REALIZED);
+		return NavigationEdgeImpl.createEdge(edgeRole, sourceNode, source2targetProperty, targetNode);
+	}
+
+	public static @NonNull Edge createRecursionEdge(@NonNull Node sourceNode, @NonNull Node targetNode, boolean isPrimary) {
+		EdgeRole edgeRole = EdgeRoleImpl.getEdgeRole(Role.Phase.OTHER);
+		return RecursionEdgeImpl.create(edgeRole, sourceNode, targetNode, isPrimary);
 	}
 
 	/**
@@ -117,6 +166,7 @@ public class RegionUtil
 		}
 		return false;
 	}
+
 	public static <@NonNull R extends Role> R mergeToLessKnownPhase(R firstRole, R secondRole) {
 		if (firstRole.isRealized()) {
 			return firstRole;
