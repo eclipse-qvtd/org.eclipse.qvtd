@@ -21,19 +21,25 @@ public class PrintAndLog
 
 	public PrintAndLog(String testName) throws IOException {
 		String testSuiteName = System.getProperty("testSuiteName", null);
-		assert testSuiteName != null;
-		File file = new File("results/" + testSuiteName + ".csv");
-		file.getParentFile().mkdirs();
-		writer = new PrintWriter(new FileWriter(file));
+		//		assert testSuiteName != null;
+		if (testSuiteName != null) {
+			File file = new File("results/" + testSuiteName + ".csv");
+			file.getParentFile().mkdirs();
+			writer = new PrintWriter(new FileWriter(file));
+		}
 	}
 
 	public void dispose() throws IOException {
-		writer.close();
+		if (writer != null) {
+			writer.close();
+		}
 	}
 
 	public PrintStream printf(String format, Object ... args) {
-		writer.printf(format, args);
-		writer.flush();
+		if (writer != null) {
+			writer.printf(format, args);
+			writer.flush();
+		}
 		return System.out.printf(format, args);
 	}
 }

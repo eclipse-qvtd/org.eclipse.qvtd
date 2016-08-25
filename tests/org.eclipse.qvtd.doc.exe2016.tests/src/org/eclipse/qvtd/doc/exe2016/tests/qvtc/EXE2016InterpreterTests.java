@@ -11,6 +11,7 @@
 package org.eclipse.qvtd.doc.exe2016.tests.qvtc;
 
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.qvtd.doc.exe2016.tests.AbstractEXE2016CGTests;
 import org.eclipse.qvtd.doc.exe2016.tests.DoublyLinkedListGenerator;
 import org.eclipse.qvtd.doc.exe2016.tests.PrintAndLog;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
@@ -27,6 +28,7 @@ public class EXE2016InterpreterTests extends QVTcCompilerTests
 	@Override
 	@Test
 	public void testQVTcCompiler_Forward2Reverse() throws Exception {
+		DoublyLinkedListGenerator doublyLinkedListGenerator = new DoublyLinkedListGenerator();
 		PrintAndLog logger = new PrintAndLog("results/" + getName());
 		logger.printf("%s\n", getName());
 		//		AbstractTransformer.INVOCATIONS.setState(true);
@@ -41,10 +43,10 @@ public class EXE2016InterpreterTests extends QVTcCompilerTests
 				Resource inResource = interpretedExecutor.getModel("forward");
 				assert inResource != null;
 				inResource.getContents().clear();
-				inResource.getContents().addAll(DoublyLinkedListGenerator.createDoublyLinkedListModel(testSize));
+				inResource.getContents().addAll(doublyLinkedListGenerator.createDoublyLinkedListModel(testSize));
 				myQVT.createModel(QVTimperativeUtil.MIDDLE_DOMAIN_NAME, "Forward2Reverse_trace.xmi");
 				myQVT.createModel("reverse", "List_Interpreted.xmi");
-				EXE2016CGTests.garbageCollect();
+				AbstractEXE2016CGTests.garbageCollect();
 				logger.printf("%9d, ", testSize);
 				long startTime = System.nanoTime();
 				myQVT.executeTransformation();

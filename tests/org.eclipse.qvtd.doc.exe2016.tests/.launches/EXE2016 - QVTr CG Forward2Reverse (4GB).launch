@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <launchConfiguration type="org.eclipse.jdt.junit.launchconfig">
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
-<listEntry value="/org.eclipse.qvtd.doc.exe2016.tests/src/org/eclipse/qvtd/doc/exe2016/tests/qvtc/EXE2016_QVTc_Tests.java"/>
+<listEntry value="/org.eclipse.qvtd.doc.exe2016.tests/src/org/eclipse/qvtd/doc/exe2016/tests/qvtr/EXE2016_QVTr_Tests.java"/>
 </listAttribute>
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
 <listEntry value="1"/>
 </listAttribute>
 <stringAttribute key="org.eclipse.jdt.junit.CONTAINER" value=""/>
 <booleanAttribute key="org.eclipse.jdt.junit.KEEPRUNNING_ATTR" value="false"/>
-<stringAttribute key="org.eclipse.jdt.junit.TESTNAME" value="testQVTcCompiler_Forward2Reverse_CG"/>
+<stringAttribute key="org.eclipse.jdt.junit.TESTNAME" value="testQVTrCompiler_Forward2Reverse_CG"/>
 <stringAttribute key="org.eclipse.jdt.junit.TEST_KIND" value="org.eclipse.jdt.junit.loader.junit4"/>
-<stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="org.eclipse.qvtd.doc.exe2016.tests.qvtc.EXE2016_QVTc_Tests"/>
+<stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="org.eclipse.qvtd.doc.exe2016.tests.qvtr.EXE2016_QVTr_Tests"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="org.eclipse.qvtd.doc.exe2016.tests"/>
-<stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-DtestSuiteName=&quot;EXE2016 - QVTc CG Forward2Reverse (4GB)&quot;&#13;&#10;-Xmx4G"/>
+<stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-DtestSuiteName=&quot;EXE2016 - QVTr CG Forward2Reverse (4GB)&quot;&#13;&#10;-Xmx4G"/>
 </launchConfiguration>

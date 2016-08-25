@@ -26,19 +26,20 @@ import org.eclipse.m2m.qvt.oml.ModelExtent;
 import org.eclipse.m2m.qvt.oml.TransformationExecutor;
 import org.eclipse.m2m.qvt.oml.util.StringBufferLog;
 import org.eclipse.ocl.pivot.internal.resource.ProjectMap;
+import org.eclipse.qvtd.doc.exe2016.tests.AbstractEXE2016CGTests;
 import org.eclipse.qvtd.doc.exe2016.tests.DoublyLinkedListGenerator;
 import org.eclipse.qvtd.doc.exe2016.tests.PrintAndLog;
-import org.eclipse.qvtd.doc.exe2016.tests.qvtc.EXE2016CGTests;
 import org.eclipse.qvtd.xtext.qvtcore.tests.list2list.doublylinkedlist.DoublyLinkedList;
 import org.eclipse.qvtd.xtext.qvtcore.tests.list2list.doublylinkedlist.DoublylinkedlistPackage;
 import org.junit.Test;
 
 import junit.framework.TestCase;
 
-public class EXE2016QVToTests extends TestCase
+public class EXE2016_QVTo_Tests extends AbstractEXE2016CGTests
 {
 	@Test
 	public void testQVToCompiler_Forward2Reverse() throws Exception {
+		DoublyLinkedListGenerator doublyLinkedListGenerator = new DoublyLinkedListGenerator();
 		PrintAndLog logger = new PrintAndLog("results/" + getName());
 		logger.printf("%s\n", getName());
 		//		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("simpleuml", new XMIResourceFactoryImpl());
@@ -73,7 +74,7 @@ public class EXE2016QVToTests extends TestCase
 
 		int[] tests = PrintAndLog.getTestSizes();
 		for (int testSize : tests) {
-			List<@NonNull ? extends EObject> rootObjects = DoublyLinkedListGenerator.createDoublyLinkedListModel(testSize);
+			List<@NonNull ? extends EObject> rootObjects = doublyLinkedListGenerator.createDoublyLinkedListModel(testSize);
 			List<@NonNull ModelExtent> modelExtents = new ArrayList<@NonNull ModelExtent>();
 			modelExtents.add(new BasicModelExtent(rootObjects));
 			modelExtents.add(new BasicModelExtent());
@@ -82,7 +83,6 @@ public class EXE2016QVToTests extends TestCase
 			//		logger.info("Executing transformation '" + uri + "'");
 			ExecutionContextImpl executionContext = new ExecutionContextImpl();
 			executionContext.setLog(qvtoLog);
-			EXE2016CGTests.garbageCollect();
 			logger.printf("%9d, ", testSize);
 			long startTime = System.nanoTime();
 			ExecutionDiagnostic executionDiagnostic = transformationExecutor.execute(executionContext, modelExtents.toArray(new ModelExtent[modelExtents.size()]));
@@ -114,7 +114,7 @@ public class EXE2016QVToTests extends TestCase
 			Object rootObject = it.next();
 			assert !it.hasNext();
 			assert ((DoublyLinkedList)rootObject).getOwnedElements().size() == testSize-1;
-			DoublyLinkedListGenerator.checkModel((DoublyLinkedList) rootObject, testSize);
+			doublyLinkedListGenerator.checkModel((DoublyLinkedList) rootObject, testSize);
 			//			System.out.println(contents.size() + " => " + count);
 			//			Map<Object, Object> options = XMIUtil.createSaveOptions();
 			//			options.put(XMLResource.OPTION_USE_ENCODED_ATTRIBUTE_STYLE, Boolean.TRUE);

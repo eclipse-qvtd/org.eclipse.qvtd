@@ -13,20 +13,17 @@ import org.eclipse.epsilon.emc.emf.EmfModelFactory;
 import org.eclipse.epsilon.emc.emf.EmfModelFactory.AccessMode;
 import org.eclipse.epsilon.etl.EtlModule;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.qvtd.doc.exe2016.tests.AbstractEXE2016CGTests;
 import org.eclipse.qvtd.doc.exe2016.tests.DoublyLinkedListGenerator;
 import org.eclipse.qvtd.doc.exe2016.tests.PrintAndLog;
-import org.eclipse.qvtd.doc.exe2016.tests.qvtc.EXE2016CGTests;
 import org.eclipse.qvtd.xtext.qvtcore.tests.list2list.doublylinkedlist.DoublyLinkedList;
 import org.eclipse.qvtd.xtext.qvtcore.tests.list2list.doublylinkedlist.DoublylinkedlistPackage;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import junit.framework.TestCase;
-
-public class EXE2016_ETL_Tests extends TestCase {
-
-
+public class EXE2016_ETL_Tests extends AbstractEXE2016CGTests
+{
 	@Override
 	@Before
 	public void setUp() throws Exception {
@@ -50,6 +47,7 @@ public class EXE2016_ETL_Tests extends TestCase {
 
 	@Test
 	public void testQVTcCompiler_Forward2Reverse_ETL() throws Exception {
+		DoublyLinkedListGenerator doublyLinkedListGenerator = new DoublyLinkedListGenerator();
 		PrintAndLog logger = new PrintAndLog(getName());
 		logger.printf("%s\n", getName());
 		/*
@@ -77,7 +75,7 @@ public class EXE2016_ETL_Tests extends TestCase {
 				forwardListModel.setMetamodelUri(DoublylinkedlistPackage.eINSTANCE.getNsURI());
 				forwardListModel.setResource(new XMIResourceImpl());
 				AccessMode.READ_ONLY.applyTo(forwardListModel);
-				Collection<@NonNull ? extends EObject> rootObjects = DoublyLinkedListGenerator.createDoublyLinkedListModel(testSize);
+				Collection<@NonNull ? extends EObject> rootObjects = doublyLinkedListGenerator.createDoublyLinkedListModel(testSize);
 				forwardListModel.getResource().getContents().clear();
 				forwardListModel.getResource().getContents().addAll(rootObjects);
 				//				file = new File("src/org/eclipse/qvtd/doc/bigmde2016/tests/atl/samples-Persons.xmi");
@@ -95,7 +93,7 @@ public class EXE2016_ETL_Tests extends TestCase {
 				 * Execute
 				 */
 				logger.printf("%9d, ", testSize);
-				EXE2016CGTests.garbageCollect();
+				garbageCollect();
 				long startTime = System.nanoTime();
 				transformationLauncher.execute();
 				long endTime = System.nanoTime();
@@ -108,7 +106,7 @@ public class EXE2016_ETL_Tests extends TestCase {
 				Object rootObject = it.next();
 				assert !it.hasNext();
 				assert ((DoublyLinkedList)rootObject).getOwnedElements().size() == testSize-1;
-				DoublyLinkedListGenerator.checkModel((DoublyLinkedList) rootObject, testSize);
+				doublyLinkedListGenerator.checkModel((DoublyLinkedList) rootObject, testSize);
 				/*
 				 * Unload all models
 				 */
