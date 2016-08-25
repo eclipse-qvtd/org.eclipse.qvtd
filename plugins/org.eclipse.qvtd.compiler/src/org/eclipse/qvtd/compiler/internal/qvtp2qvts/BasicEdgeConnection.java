@@ -20,6 +20,8 @@ import org.eclipse.ocl.pivot.Property;
 import org.eclipse.qvtd.compiler.internal.utilities.SymbolNameBuilder;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphStringBuilder;
 
+import com.google.common.collect.Lists;
+
 /**
  * A RegionConnection supports a dependency between regions..
  */
@@ -163,6 +165,24 @@ public class BasicEdgeConnection extends AbstractConnection<@NonNull NavigationE
 		ConnectionRole oldRole = targetNode2role.remove(targetNode);
 		assert oldRole != null;
 	} */
+
+	private void removeTarget(@NonNull NavigationEdge targetEdge) {
+		ConnectionRole oldRole = targetEnd2role.remove(targetEdge);
+		assert oldRole != null;
+	}
+
+	@Override
+	public void removeTargetRegion(@NonNull Region targetRegion) {
+		for (@NonNull NavigationEdge targetEdge : Lists.newArrayList(getTargetEdges())) {
+			if (targetEdge.getRegion() == targetRegion) {
+				targetEdge.removeIncomingConnection(this);
+				removeTarget(targetEdge);
+			}
+		}
+		if (targetEnd2role.isEmpty()) {
+			destroy();
+		}
+	}
 
 	@Override
 	public void toCallGraph(@NonNull GraphStringBuilder s) {

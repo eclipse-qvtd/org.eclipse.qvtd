@@ -1628,6 +1628,19 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 		return cost;
 	}
 
+/*	public int getEarliestPassedConnectionSourceIndex() {
+		int earliestPassedConnectionSourceIndex = 0;
+		for (@NonNull NodeConnection passedConnection : getIncomingPassedConnections()) {
+			for (@NonNull Region sourceRegion : passedConnection.getSourceRegions()) {
+				int firstPassedConnectionSourceIndex = sourceRegion.getIndexes().get(0);
+				if (firstPassedConnectionSourceIndex > earliestPassedConnectionSourceIndex) { // Latest of multiple passed connections
+					earliestPassedConnectionSourceIndex = firstPassedConnectionSourceIndex;
+				}
+			}
+		}
+		return earliestPassedConnectionSourceIndex;
+	} */
+
 	@Override
 	public @NonNull Collection<@NonNull Edge> getEdges() {
 		return edges;

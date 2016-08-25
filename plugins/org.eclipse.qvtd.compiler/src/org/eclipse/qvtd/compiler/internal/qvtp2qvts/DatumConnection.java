@@ -38,13 +38,14 @@ public interface DatumConnection extends Connection
 	/**
 	 * Return true if this connection is from a nested region input port to the nested region's content.
 	 */
-//	boolean isInput();
+	//	boolean isInput();
 	boolean isMandatory();
-//	boolean isOutput();
+	//	boolean isOutput();
 
 	/**
 	 * Return true if this connection passes a value to a region head.
 	 */
 	boolean isPassed();
 	boolean isPassed(@NonNull Region targetRegion);
+	void removeTargetRegion(@NonNull Region region);
 }

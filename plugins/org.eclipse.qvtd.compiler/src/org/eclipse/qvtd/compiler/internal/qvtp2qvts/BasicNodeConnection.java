@@ -24,6 +24,7 @@ import org.eclipse.qvtd.compiler.internal.utilities.SymbolNameBuilder;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphStringBuilder;
 
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 
 public class BasicNodeConnection extends AbstractConnection<@NonNull Node> implements NodeConnection
 {
@@ -256,6 +257,19 @@ public class BasicNodeConnection extends AbstractConnection<@NonNull Node> imple
 	public void removeTarget(@NonNull Node targetNode) {
 		ConnectionRole oldRole = targetEnd2role.remove(targetNode);
 		assert oldRole != null;
+	}
+
+	@Override
+	public void removeTargetRegion(@NonNull Region targetRegion) {
+		for (@NonNull Node targetNode : Lists.newArrayList(getTargetNodes())) {
+			if (targetNode.getRegion() == targetRegion) {
+				targetNode.removeIncomingConnection(this);
+				removeTarget(targetNode);
+			}
+		}
+		if (targetEnd2role.isEmpty()) {
+			destroy();
+		}
 	}
 
 	@Override

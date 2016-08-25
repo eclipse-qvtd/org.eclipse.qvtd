@@ -205,8 +205,8 @@ public class BasicNavigationEdge extends AbstractEdge implements NavigationEdge
 		//		assert edge.getRegion() == getRegion();
 		List<EdgeConnection> outgoingConnections2 = outgoingConnections;
 		assert outgoingConnections2 != null;
-		boolean wasRemoved = outgoingConnections2.remove(edgeConnection);
-		assert wasRemoved;
+		@SuppressWarnings("unused")boolean wasRemoved = outgoingConnections2.remove(edgeConnection);
+		//			assert wasRemoved;   -- destroy subverts this
 	}
 
 	@Override

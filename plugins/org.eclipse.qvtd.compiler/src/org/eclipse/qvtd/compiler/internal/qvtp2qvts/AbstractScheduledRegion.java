@@ -126,6 +126,42 @@ public abstract class AbstractScheduledRegion extends AbstractRegion implements 
 			region.buildPredicatedNavigationEdgesIndex(typedModel2property2predicatedEdges);
 			region.buildRealizedNavigationEdgesIndex(typedModel2property2realizedEdges);
 		}
+		//
+		//	Eliminate dependencies that are satisfied by the linear invocation indexes.
+		//
+		for (@NonNull Region region : orderedRegions) {
+			//			int earliestPassedConnectionSourceIndex = region.getEarliestPassedConnectionSourceIndex();
+			int earliestIndex = region.getIndexes().get(0);
+			List<@NonNull DatumConnection> redundantConnections = null;
+			for (@NonNull DatumConnection usedConnection : region.getIncomingConnections()) {
+				if (!usedConnection.isPassed(region)) {
+					boolean isRedundant = true;
+					for (@NonNull Region sourceRegion : usedConnection.getSourceRegions()) {
+						List<@NonNull Integer> indexes = sourceRegion.getIndexes();
+						int lastIndex = indexes.get(indexes.size()-1);
+						if (lastIndex >= earliestIndex) {
+							isRedundant = false;
+							break;
+						}
+					}
+					if (isRedundant) {
+						if (redundantConnections == null) {
+							redundantConnections = new ArrayList<>();
+						}
+						redundantConnections.add(usedConnection);
+					}
+				}
+			}
+			if (redundantConnections != null) {
+				for (@NonNull DatumConnection redundantConnection : redundantConnections) {
+					redundantConnection.removeTargetRegion(region);
+				}
+			}
+		}
+		if (QVTp2QVTs.DEBUG_GRAPHS.isActive()) {
+			writeDebugGraphs("7-pruned", true, true, false);
+		}
+
 		for (@NonNull Region region : orderedRegions) {
 			region.computeCheckedOrEnforcedEdges(typedModel2property2predicatedEdges, typedModel2property2realizedEdges);
 		}
