@@ -73,7 +73,7 @@ public class RootCompositionRegion extends AbstractRegion
 		SchedulerConstants scheduler = getSchedulerConstants();
 		for (@NonNull NavigationEdge edge : consumerNode.getNavigationEdges()) {
 			Property property = edge.getProperty().getOpposite();
-			if ((property != null) && property.isIsComposite()) {
+			if ((property != null) && property.isIsComposite() && !property.isIsRequired()) {
 				containerEdge = edge;
 				parent2childProperty = property;
 				if (property == scheduler.getOclContainerProperty()) {
