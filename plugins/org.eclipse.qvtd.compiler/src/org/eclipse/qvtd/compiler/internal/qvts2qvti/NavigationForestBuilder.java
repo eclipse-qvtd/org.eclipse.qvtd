@@ -70,27 +70,18 @@ class NavigationForestBuilder extends AbstractForestBuilder
 
 	/**
 	 * Add a possible edge and end nodes categorizing a navigable edge as forward if it is a sole or primary edge,
-	 * reverse if it is a secondary edge or untraversed if it is to-null.
+	 * reverse if it is a secondary edge.
 	 */
 	@Override
 	protected void addEdge(@NonNull NavigationEdge edge) {
 		if (edge.isRealized()) {}
-		//		else if (!edge.isMatched()) {}
 		else if (edge.isCast()) {}
 		else {
 			assert !edge.isExpression();
 			assert !edge.isComputation();
-			//			Node sourceNode = edge.getSource();
-			//			navigableNodes.add(sourceNode);
 			Node targetNode = edge.getTarget();
-			if (targetNode.isExplicitNull()) {
-				//				untraversedEdges.add(edge);
-			}
-			else {
-				targetNode = RegionUtil.getCastTarget(targetNode);
-				super.addEdge(edge.getForwardEdge());
-				//				navigableNodes.add(targetNode);
-			}
+			targetNode = RegionUtil.getCastTarget(targetNode);
+			super.addEdge(edge.getForwardEdge());
 		}
 	}
 

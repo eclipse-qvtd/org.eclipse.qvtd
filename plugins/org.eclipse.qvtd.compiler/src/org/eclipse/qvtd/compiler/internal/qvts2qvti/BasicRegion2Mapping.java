@@ -1004,11 +1004,17 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			Property property = traversedEdge.getProperty();
 			OCLExpression sourceExp = createVariableExp(sourceNode);
 			OCLExpression source2targetExp = createCallExp(sourceExp, property);
-			Variable nodeVariable = node2variable.get(targetNode);
-			assert nodeVariable == null;
-			//			if (nodeVariable == null) {
-			createBottomVariable(targetNode, source2targetExp);
-			//			}
+			if (!targetNode.isExplicitNull()) {
+				Variable nodeVariable = node2variable.get(targetNode);
+				assert nodeVariable == null;
+				createBottomVariable(targetNode, source2targetExp);
+			}
+			else {
+				OCLExpression targetExp = helper.createNullLiteralExp();
+				OCLExpression conditionExpression = helper.createOperationCallExp(source2targetExp, "=", targetExp);
+				Predicate asPredicate = helper.createPredicate(conditionExpression);
+				addPredicate(asPredicate);
+			}
 		}
 		//
 		//	Convert the ordered non-forest edges to predicates.
@@ -1023,8 +1029,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			OCLExpression matchesExp = targetNode.isExplicitNull()
 					? helper.createOperationCallExp(source2targetExp, "=", targetExp)
 						: helper.createOperationCallExp(targetExp, "=", source2targetExp);
-					Predicate asPredicate = QVTbaseFactory.eINSTANCE.createPredicate();
-					asPredicate.setConditionExpression(matchesExp);
+					Predicate asPredicate = helper.createPredicate(matchesExp);
 					addPredicate(asPredicate);
 		}
 		/*		Set<@NonNull Node> reachableNodes = new HashSet<>(guardNodes);
