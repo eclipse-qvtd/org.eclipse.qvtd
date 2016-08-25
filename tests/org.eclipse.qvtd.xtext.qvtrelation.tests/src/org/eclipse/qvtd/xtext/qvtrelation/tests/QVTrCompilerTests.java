@@ -36,6 +36,7 @@ import org.eclipse.ocl.pivot.internal.manager.MetamodelManagerInternal;
 import org.eclipse.ocl.pivot.model.OCLstdlib;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
 import org.eclipse.qvtd.codegen.qvti.QVTiCodeGenOptions;
 import org.eclipse.qvtd.codegen.qvti.java.QVTiCodeGenerator;
@@ -43,7 +44,6 @@ import org.eclipse.qvtd.compiler.CompilerChain;
 import org.eclipse.qvtd.compiler.CompilerChain.Key;
 import org.eclipse.qvtd.compiler.QVTrCompilerChain;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.QVTp2QVTs;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.splitter.Splitter;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
@@ -57,6 +57,7 @@ import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.TestsXMLUtil;
 import org.eclipse.qvtd.xtext.qvtcore.tests.QVTcTestUtil;
 import org.eclipse.qvtd.xtext.qvtimperative.tests.ModelNormalizer;
 import org.eclipse.qvtd.xtext.qvtimperative.tests.QVTiTestUtil;
+import org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.Forward2ReverseNormalizer;
 import org.eclipse.qvtd.xtext.qvtrelation.tests.hstm2fstm.FlatStateMachineNormalizer;
 import org.junit.After;
 import org.junit.Before;
@@ -290,7 +291,10 @@ public class QVTrCompilerTests extends LoadTestCase
 				interpretedExecutor.loadModel(modelName, modelURI);
 			}
 			else {
-				Resource inputResource = /*getResourceSet()*/environmentFactory.getMetamodelManager().getASResourceSet().getResource(modelURI, true);
+				//				Resource inputResource = getResourceSet().getResource(modelURI, true);
+				ResourceSet resourceSet = environmentFactory.getMetamodelManager().getASResourceSet();		// FIXME get package registrations in exteranl RespurcSet
+				PivotUtil.initializeLoadOptionsToSupportSelfReferences(resourceSet);
+				Resource inputResource = resourceSet.getResource(modelURI, true);
 				generatedExecutor.getTransformer().addRootObjects(modelName, ClassUtil.nonNullState(inputResource.getContents()));
 			}
 		}
@@ -390,9 +394,52 @@ public class QVTrCompilerTests extends LoadTestCase
     } */
 
 	@Test
+	public void testQVTrCompiler_Forward2Reverse() throws Exception {
+		//		Splitter.RESULT.setState(true);
+		//		Splitter.STAGES.setState(true);
+		//		Scheduler.DEBUG_GRAPHS.setState(true);
+		//		AbstractTransformer.EXCEPTIONS.setState(true);
+		//		AbstractTransformer.INVOCATIONS.setState(true);
+		//   	QVTm2QVTp.PARTITIONING.setState(true);
+		//		QVTr2QVTc.VARIABLES.setState(true);
+		MyQVT myQVT = new MyQVT("forward2reverse");
+		//		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
+		try {
+			Transformation asTransformation = myQVT.compileTransformation("Forward2Reverse.qvtr", "reverse", PROJECT_NAME + ".Forward2Reverse", "http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/forward2reverse/Forward2Reverse");
+			//
+			myQVT.createInterpretedExecutor(asTransformation);
+			myQVT.loadInput("forward", "EmptyList.xmi");
+			myQVT.createModel("reverse", "EmptyList_Interpreted.xmi");
+			myQVT.executeTransformation();
+			myQVT.saveOutput("reverse", "EmptyList_Interpreted.xmi", "EmptyList_expected.xmi", Forward2ReverseNormalizer.INSTANCE);
+			//
+			myQVT.createInterpretedExecutor(asTransformation);
+			myQVT.loadInput("forward", "OneElementList.xmi");
+			myQVT.createModel("reverse", "OneElementList_Interpreted.xmi");
+			myQVT.executeTransformation();
+			myQVT.saveOutput("reverse", "OneElementList_Interpreted.xmi", "OneElementList_expected.xmi", Forward2ReverseNormalizer.INSTANCE);
+			//
+			myQVT.createInterpretedExecutor(asTransformation);
+			myQVT.loadInput("forward", "TwoElementList.xmi");
+			myQVT.createModel("reverse", "TwoElementList_Interpreted.xmi");
+			myQVT.executeTransformation();
+			myQVT.saveOutput("reverse", "TwoElementList_Interpreted.xmi", "TwoElementList_expected.xmi", Forward2ReverseNormalizer.INSTANCE);
+			//
+			myQVT.createInterpretedExecutor(asTransformation);
+			myQVT.loadInput("forward", "ThreeElementList.xmi");
+			myQVT.createModel("reverse", "ThreeElementList_Interpreted.xmi");
+			myQVT.executeTransformation();
+			myQVT.saveOutput("reverse", "ThreeElementList_Interpreted.xmi", "ThreeElementList_expected.xmi", Forward2ReverseNormalizer.INSTANCE);
+		}
+		finally {
+			myQVT.dispose();
+		}
+	}
+
+	@Test
 	public void testQVTrCompiler_Forward2Reverse_CG() throws Exception {
-		Splitter.RESULT.setState(true);
-		Splitter.STAGES.setState(true);
+		//		Splitter.RESULT.setState(true);
+		//		Splitter.STAGES.setState(true);
 		//		Scheduler.DEBUG_GRAPHS.setState(true);
 		//		AbstractTransformer.EXCEPTIONS.setState(true);
 		//		AbstractTransformer.INVOCATIONS.setState(true);
@@ -400,31 +447,29 @@ public class QVTrCompilerTests extends LoadTestCase
 		//		QVTr2QVTc.VARIABLES.setState(true);
 		MyQVT myQVT = new MyQVT("forward2reverse");
 		try {
-			@SuppressWarnings("unused")
 			Class<? extends Transformer> txClass = myQVT.buildTransformation("forward2reverse",
 				"Forward2Reverse.qvtr", "reverse",
 					"http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/forward2reverse/Forward2Reverse");//,
 			//					"FlatStateMachine.FlatStateMachinePackage", "HierarchicalStateMachine.HierarchicalStateMachinePackage");
-			//
-			/*			myQVT.createGeneratedExecutor(txClass);
+			myQVT.createGeneratedExecutor(txClass);
 			myQVT.loadInput("forward", "EmptyList.xmi");
 			myQVT.executeTransformation();
-			myQVT.saveOutput("reverse", "EmptyList_CG.xmi", "EmptyList_expected.xmi", null);//FlatStateMachineNormalizer.INSTANCE);
+			myQVT.saveOutput("reverse", "EmptyList_CG.xmi", "EmptyList_expected.xmi", Forward2ReverseNormalizer.INSTANCE);
 			//
 			myQVT.createGeneratedExecutor(txClass);
-			myQVT.loadInput("forward", "SimpleModel.xmi");
+			myQVT.loadInput("forward", "OneElementList.xmi");
 			myQVT.executeTransformation();
-			myQVT.saveOutput("reverse", "SimpleModel_CG.xmi", "SimpleModel_expected.xmi", FlatStateMachineNormalizer.INSTANCE);
+			myQVT.saveOutput("reverse", "OneElementList_CG.xmi", "OneElementList_expected.xmi", Forward2ReverseNormalizer.INSTANCE);
 			//
 			myQVT.createGeneratedExecutor(txClass);
-			myQVT.loadInput("forward", "LargerModel.xmi");
+			myQVT.loadInput("forward", "TwoElementList.xmi");
 			myQVT.executeTransformation();
-			myQVT.saveOutput("reverse", "LargerModel_CG.xmi", "LargerModel_expected.xmi", FlatStateMachineNormalizer.INSTANCE);
+			myQVT.saveOutput("reverse", "TwoElementList_CG.xmi", "TwoElementList_expected.xmi", Forward2ReverseNormalizer.INSTANCE);
 			//
-			//	        myQVT.createGeneratedExecutor(txClass);
-			//	    	myQVT.loadInput("seqDgm", "SeqUM.xmi");
-			//	    	myQVT.executeTransformation();
-			//			myQVT.saveOutput("stm", "StmcUM_CG.xmi", "StmcUM_expected.xmi", null); */
+			myQVT.createGeneratedExecutor(txClass);
+			myQVT.loadInput("forward", "ThreeElementList.xmi");
+			myQVT.executeTransformation();
+			myQVT.saveOutput("reverse", "ThreeElementList_CG.xmi", "ThreeElementList_expected.xmi", Forward2ReverseNormalizer.INSTANCE);
 		}
 		finally {
 			myQVT.dispose();
@@ -468,8 +513,8 @@ public class QVTrCompilerTests extends LoadTestCase
 
 	@Test
 	public void testQVTrCompiler_HierarchicalStateMachine2FlatStateMachine_CG() throws Exception {
-		Splitter.RESULT.setState(true);
-		Splitter.STAGES.setState(true);
+		//		Splitter.RESULT.setState(true);
+		//		Splitter.STAGES.setState(true);
 		//		Scheduler.DEBUG_GRAPHS.setState(true);
 		//		AbstractTransformer.EXCEPTIONS.setState(true);
 		//		AbstractTransformer.INVOCATIONS.setState(true);
@@ -530,8 +575,8 @@ public class QVTrCompilerTests extends LoadTestCase
 	@Test
 	public void testQVTrCompiler_SeqToStm_CG() throws Exception {
 		//		Splitter.GROUPS.setState(true);
-		Splitter.RESULT.setState(true);
-		Splitter.STAGES.setState(true);
+		//		Splitter.RESULT.setState(true);
+		//		Splitter.STAGES.setState(true);
 		//		AbstractTransformer.EXCEPTIONS.setState(true);
 		//		AbstractTransformer.INVOCATIONS.setState(true);
 		//   	QVTm2QVTp.PARTITIONING.setState(true);
