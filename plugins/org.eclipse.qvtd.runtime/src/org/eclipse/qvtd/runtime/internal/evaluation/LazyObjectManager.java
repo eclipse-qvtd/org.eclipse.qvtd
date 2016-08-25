@@ -794,7 +794,7 @@ public class LazyObjectManager extends AbstractObjectManager
 				//				}
 				else {						// Unidirectional non-containment EReference
 					if (ecoreValue != null) {
-						eOppositeReference = getEOppositeReference(eReference);
+						//						eOppositeReference = getEOppositeReference(eReference);
 						Map<@NonNull EStructuralFeature, @NonNull SlotState> oppositeObjectState = getObjectState(ecoreValue);
 						slotState = oppositeObjectState.get(eOppositeReference);
 						if (slotState == null) {
