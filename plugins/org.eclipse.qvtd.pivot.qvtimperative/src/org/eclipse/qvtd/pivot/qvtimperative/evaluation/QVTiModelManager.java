@@ -121,7 +121,6 @@ public class QVTiModelManager extends AbstractModelManager
 	 * @param element the element
 	 */
 	public void addModelElement(@NonNull TypedModel model, @NonNull Object element) {
-
 		List<@NonNull EObject> elements = modelElementsMap.get(model);
 		if (elements == null) {
 			Resource resource = modelResourceMap.get(model);

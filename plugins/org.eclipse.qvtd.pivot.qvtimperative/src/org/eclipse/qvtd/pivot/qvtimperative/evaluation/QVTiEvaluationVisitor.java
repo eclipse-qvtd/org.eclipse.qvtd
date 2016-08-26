@@ -96,7 +96,7 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 			return connectionCollection;
 		}
 		catch (RuntimeException e) {
-			context.replace(targetVariable, e);
+			((QVTiExecutor)context).replace(targetVariable, e, false);
 			throw e;
 		}
 	}
@@ -233,12 +233,18 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 			if (valueOrValues == null) {
 				return null;
 			}
-			Type valueType = idResolver.getDynamicTypeOf(valueOrValues);
-			if (valueType.conformsTo(environmentFactory.getStandardLibrary(), varType)) {
+			if (boundVariable instanceof ConnectionVariable) {
 				boundValues[index++] = valueOrValues;
+
 			}
 			else {
-				return null;
+				Type valueType = idResolver.getDynamicTypeOf(valueOrValues);
+				if (valueType.conformsTo(environmentFactory.getStandardLibrary(), varType)) {
+					boundValues[index++] = valueOrValues;
+				}
+				else {
+					return null;
+				}
 			}
 		}
 		return executor.internalExecuteMappingCall(mappingCall, boundValues, undecoratedVisitor);
@@ -257,7 +263,7 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 			if (iterators.size() > 0) {
 				Variable iterator = ClassUtil.nonNullState(iterators.get(0));
 				for (Object object : (Iterable<?>)inValues) {
-					context.replace(iterator, object);
+					((QVTiExecutor)context).replace(iterator, object, false);
 					mappingLoop.getOwnedBody().accept(undecoratedVisitor);
 				}
 			}
@@ -401,11 +407,11 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 			if (valueExpression != null) {
 				try {
 					Object value = valueExpression.accept(undecoratedVisitor);
-					context.replace(targetVariable, value);
+					((QVTiExecutor)context).replace(targetVariable, value, true);
 					return value;
 				}
 				catch (RuntimeException e) {
-					context.replace(targetVariable, e);
+					((QVTiExecutor)context).replace(targetVariable, e, false);
 					throw e;
 				}
 			}
@@ -425,7 +431,7 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 		Type guardType = variable.getType();
 		Type valueType = idResolver.getDynamicTypeOf(value);
 		if ((guardType != null) && valueType.conformsTo(standardLibrary, guardType)) {
-			context.replace(variable, value);
+			((QVTiExecutor)context).replace(variable, value, false);
 		} else {
 			// The initialisation fails, the guard is not met
 			return false;

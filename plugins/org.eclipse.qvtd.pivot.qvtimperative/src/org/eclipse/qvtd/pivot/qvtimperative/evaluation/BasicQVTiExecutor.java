@@ -234,7 +234,7 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 					OCLExpression ownedInit = rVar.getOwnedInit();
 					if (ownedInit != null) {
 						Object initValue = ownedInit.accept(undecoratedVisitor);
-						replace(rVar, initValue);
+						replace(rVar, initValue, true);
 					}
 				}
 			}
@@ -261,13 +261,13 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 				else {
 					accumulator = ValueUtil.createCollectionAccumulatorValue((CollectionTypeId) rVar.getTypeId());
 				}
-				replace(rVar, accumulator);
+				replace(rVar, accumulator, false);
 			}
 			else {
 				OCLExpression ownedInit = rVar.getOwnedInit();
 				if (ownedInit != null) {
 					Object initValue = ownedInit.accept(undecoratedVisitor);
-					replace(rVar, initValue);
+					replace(rVar, initValue, false);
 				}
 			}
 		}
@@ -407,7 +407,7 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 				int index = 0;
 				for (MappingCallBinding binding : mappingCall.getBinding()) {
 					Variable boundVariable = ClassUtil.nonNullState(binding.getBoundVariable());
-					replace(boundVariable, boundValues[index++]);
+					replace(boundVariable, boundValues[index++], !(boundVariable instanceof ConnectionVariable));
 				}
 				calledMapping.accept(undecoratedVisitor);
 			}
@@ -488,7 +488,7 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 		assert typedModel != null;
 		Object element = ((org.eclipse.ocl.pivot.Class)type).createInstance();
 		// Add the realize variable binding to the environment
-		replace(realizedVariable, element);
+		replace(realizedVariable, element, false);
 		getModelManager().addModelElement(typedModel, element);
 		return element;
 	}
@@ -551,8 +551,20 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 				throw new InvalidValueException("Attempted to assign null value to " + asVariable);
 			}
 		}
-		else if (!(value instanceof Throwable)){
+		super.replace(asVariable, value);
+	}
+
+	@Override
+	public void replace(@NonNull TypedElement asVariable, @Nullable Object value, boolean checkType) {
+		if (value == null) {
+			if (asVariable.isIsRequired()) {
+				throw new InvalidValueException("Attempted to assign null value to " + asVariable);
+			}
+		}
+		else if (checkType) {
 			Type valueType = getIdResolver().getDynamicTypeOf(value);
+			//			Type valueType2 = getIdResolver().getStaticTypeOf(value);
+			//			Type valueType = valueType1;
 			Type variableType = ClassUtil.nonNullState(asVariable.getType());
 			if (!valueType.conformsTo(getStandardLibrary(), variableType) && (variableType.getESObject() != EcorePackage.Literals.EOBJECT)) {	// FIXME EObject fudge for Adolfo's test models
 				throw new InvalidValueException("Attempted to assign incompatible value to " + asVariable);

@@ -14,6 +14,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.evaluation.EvaluationVisitor;
 import org.eclipse.ocl.pivot.internal.evaluation.ExecutorInternal;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
@@ -37,5 +38,6 @@ public interface QVTiExecutor extends ExecutorInternal
 	@Nullable Object internalExecuteRealizedVariable(@NonNull RealizedVariable realizedVariable, @NonNull EvaluationVisitor undecoratedVisitor);
 	@Nullable Object internalExecuteTransformation(@NonNull Transformation transformation, @NonNull EvaluationVisitor undecoratedVisitor);
 	void loadModel(@NonNull String inName, @NonNull URI inURI, @Nullable String contentType);
+	void replace(@NonNull TypedElement referredVariable, @Nullable Object value, boolean checkType);
 	void saveModels();
 }
