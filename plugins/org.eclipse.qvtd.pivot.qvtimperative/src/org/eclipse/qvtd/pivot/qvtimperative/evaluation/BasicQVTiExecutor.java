@@ -11,10 +11,12 @@
 package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
 
 import java.io.IOException;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -102,10 +104,7 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 
 	@Override
 	public void createModel(@NonNull String name, @NonNull URI modelURI, @Nullable String contentType) {
-		TypedModel typedModel = NameUtil.getNameable(transformation.getModelParameter(), name);
-		if (typedModel == null) {
-			throw new IllegalStateException("Unknown TypedModel '" + name + "'");
-		}
+		TypedModel typedModel = getTypedModel(name);
 		Resource resource = environmentFactory.getResourceSet().createResource(modelURI, contentType);
 		if (resource != null) {
 			getModelManager().addModel(typedModel, resource);
@@ -329,10 +328,7 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 	 */
 	@Override
 	public @Nullable Resource getModel(@NonNull String name) {
-		TypedModel typedModel = NameUtil.getNameable(transformation.getModelParameter(), name);
-		if (typedModel == null) {
-			throw new IllegalStateException("Unknown TypedModel '" + name + "'");
-		}
+		TypedModel typedModel = getTypedModel(name);
 		return getModelManager().getModel(typedModel);
 	}
 
@@ -343,6 +339,10 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 			modelManager = modelManager2 = new QVTiModelManager(getTransformationAnalysis());
 		}
 		return modelManager2;
+	}
+
+	public @NonNull Collection<@NonNull EObject> getRootObjects(@NonNull String name) {
+		return getModelManager().getRootObjects(getTypedModel(name));
 	}
 
 	public @NonNull Transformation getTransformation() {
@@ -356,6 +356,14 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 			transformationAnalysis2.analyzeTransformation(transformation);
 		}
 		return transformationAnalysis2;
+	}
+
+	public @NonNull TypedModel getTypedModel(@NonNull String name) {
+		TypedModel typedModel = NameUtil.getNameable(transformation.getModelParameter(), name);
+		if (typedModel == null) {
+			throw new IllegalStateException("Unknown TypedModel '" + name + "'");
+		}
+		return typedModel;
 	}
 
 	protected @Nullable Object internalExecuteFunctionCallExp(@NonNull OperationCallExp operationCallExp,
@@ -506,10 +514,7 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 	 * Loads the modelURI and binds it to the named TypedModel.
 	 */
 	public @Nullable Resource loadModel(@NonNull String name, @NonNull URI modelURI) {
-		TypedModel typedModel = NameUtil.getNameable(transformation.getModelParameter(), name);
-		if (typedModel == null) {
-			throw new IllegalStateException("Unknown TypedModel '" + name + "'");
-		}
+		TypedModel typedModel = getTypedModel(name);
 		Resource resource = environmentFactory.getResourceSet().getResource(modelURI, true);
 		if (resource != null) {
 			getModelManager().addModel(typedModel, resource);
@@ -519,10 +524,7 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 
 	@Override
 	public void loadModel(@NonNull String name, @NonNull URI modelURI, @Nullable String contentType) {
-		TypedModel typedModel = NameUtil.getNameable(transformation.getModelParameter(), name);
-		if (typedModel == null) {
-			throw new IllegalStateException("Unknown TypedModel '" + name + "'");
-		}
+		TypedModel typedModel = getTypedModel(name);
 		Resource resource;
 		ResourceSet resourceSet = environmentFactory.getResourceSet();
 		if (contentType == null) {
@@ -559,11 +561,13 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 		super.replace(asVariable, value);
 	}
 
+	//	@Override
+	public void saveContents() {
+		getModelManager().saveContents();
+	}
+
 	public Resource saveModel(@NonNull String name, @NonNull URI modelURI, String contentType, @Nullable Map<?, ?> savingOptions) throws IOException {
-		TypedModel typedModel = NameUtil.getNameable(transformation.getModelParameter(), name);
-		if (typedModel == null) {
-			throw new IllegalStateException("Unknown TypedModel '" + name + "'");
-		}
+		TypedModel typedModel = getTypedModel(name);
 		Resource resource = getModelManager().getModel(typedModel);
 		if (resource == null) {
 			resource = environmentFactory.getResourceSet().createResource(modelURI, contentType);

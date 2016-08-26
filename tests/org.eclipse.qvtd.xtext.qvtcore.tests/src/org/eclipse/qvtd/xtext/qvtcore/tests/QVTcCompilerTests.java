@@ -12,6 +12,7 @@ package org.eclipse.qvtd.xtext.qvtcore.tests;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -102,13 +103,17 @@ public class QVTcCompilerTests extends LoadTestCase
 			// Explicitly install the eInstances that would normally make it into the ProjectMap from extension point registrations.
 			// Test models are not registered via extension point so we have to do this manually.
 			//
-			ResourceSetImpl resourceSet = (ResourceSetImpl) getResourceSet();
+			ResourceSetImpl externalResourceSet = (ResourceSetImpl) getResourceSet();
+			ResourceSetImpl asResourceSet = (ResourceSetImpl) getMetamodelManager().getASResourceSet();
 			for (EPackage eInstance : eInstances) {
 				String nsURI = eInstance.getNsURI();
 				if (nsURI != null) {
 					nsURIs.add(nsURI);
 				}
-				resourceSet.getURIResourceMap().put(testFolderURI.appendSegment(eInstance.getName()+".ecore"), eInstance.eResource());
+				URI ecoreURI = testFolderURI.appendSegment(eInstance.getName() + ".ecore");
+				assert externalResourceSet.getURIConverter().exists(ecoreURI, null) : ecoreURI + " does not exist";
+				externalResourceSet.getURIResourceMap().put(ecoreURI, eInstance.eResource());
+				asResourceSet.getURIResourceMap().put(ecoreURI, eInstance.eResource());
 			}
 		}
 
@@ -199,7 +204,8 @@ public class QVTcCompilerTests extends LoadTestCase
 		public void executeTransformation() throws Exception {
 			if (interpretedExecutor != null) {
 				interpretedExecutor.execute();
-				interpretedExecutor.saveModels(TestsXMLUtil.defaultSavingOptions);
+				interpretedExecutor.saveContents();
+				//				interpretedExecutor.saveModels(TestsXMLUtil.defaultSavingOptions);
 			}
 			else {
 				Transformer transformer = generatedExecutor.getTransformer();
@@ -210,6 +216,15 @@ public class QVTcCompilerTests extends LoadTestCase
 		@Override
 		public @NonNull QVTiEnvironmentFactory getEnvironmentFactory() {
 			return super.getEnvironmentFactory();
+		}
+
+		public @NonNull Collection<@NonNull ? extends Object> getRootObjects(@NonNull String modelName) {
+			if (interpretedExecutor != null) {
+				return interpretedExecutor.getRootObjects(modelName);
+			}
+			else {
+				return generatedExecutor.getTransformer().getRootObjects(modelName);
+			}
 		}
 
 		public @NonNull Map<Object, Object> getSaveOptions() {
@@ -349,7 +364,7 @@ public class QVTcCompilerTests extends LoadTestCase
 	public void testQVTcCompiler_Forward2Reverse() throws Exception {
 		//    	QVTs2QVTiVisitor.POLLED_PROPERTIES.setState(true);
 		MyQVT myQVT = new MyQVT("forward2reverse");
-		//    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
+		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 		try {
 			Transformation asTransformation = myQVT.compileTransformation("Forward2Reverse.qvtc", "reverse");
 			//

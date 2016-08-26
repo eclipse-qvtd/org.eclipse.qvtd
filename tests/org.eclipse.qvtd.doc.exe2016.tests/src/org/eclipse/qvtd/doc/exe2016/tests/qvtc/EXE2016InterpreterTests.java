@@ -10,7 +10,10 @@
  *******************************************************************************/
 package org.eclipse.qvtd.doc.exe2016.tests.qvtc;
 
+import java.util.Collection;
+
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.qvtd.doc.exe2016.tests.AbstractEXE2016CGTests;
 import org.eclipse.qvtd.doc.exe2016.tests.DoublyLinkedListGenerator;
 import org.eclipse.qvtd.doc.exe2016.tests.PrintAndLog;
@@ -18,6 +21,9 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.xtext.qvtcore.tests.QVTcCompilerTests;
+import org.eclipse.qvtd.xtext.qvtcore.tests.list2list.doublylinkedlist.DoublyLinkedList;
+import org.eclipse.qvtd.xtext.qvtcore.tests.list2list.doublylinkedlist.DoublylinkedlistPackage;
+import org.eclipse.qvtd.xtext.qvtcore.tests.list2list.list2list.List2listPackage;
 import org.junit.Test;
 
 /**
@@ -32,7 +38,7 @@ public class EXE2016InterpreterTests extends QVTcCompilerTests
 		PrintAndLog logger = new PrintAndLog("results/" + getName());
 		logger.printf("%s\n", getName());
 		//		AbstractTransformer.INVOCATIONS.setState(true);
-		MyQVT myQVT = new MyQVT("forward2reverse");
+		MyQVT myQVT = new MyQVT("forward2reverse", DoublylinkedlistPackage.eINSTANCE, List2listPackage.eINSTANCE);
 		//    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 		try {
 			Transformation asTransformation = myQVT.compileTransformation("Forward2Reverse.qvtc", "reverse");
@@ -50,10 +56,47 @@ public class EXE2016InterpreterTests extends QVTcCompilerTests
 				logger.printf("%9d, ", testSize);
 				long startTime = System.nanoTime();
 				myQVT.executeTransformation();
+				Collection<@NonNull ?> rootObjects = myQVT.getRootObjects("reverse");
 				long endTime = System.nanoTime();
 				logger.printf("%9.6f\n", (endTime - startTime) / 1.0e9);
+				doublyLinkedListGenerator.checkModel((@NonNull DoublyLinkedList) rootObjects.iterator().next(), testSize);
 				//				myQVT.saveOutput("person", "Persons_Interpreted.xmi", "Persons_expected.xmi", Families2PersonsNormalizer.INSTANCE);
 			}
+		}
+		finally {
+			myQVT.dispose();
+			logger.dispose();
+		}
+	}
+
+	@Test
+	public void testQVTcCompiler_Forward2Reverse_1K() throws Exception {
+		DoublyLinkedListGenerator doublyLinkedListGenerator = new DoublyLinkedListGenerator();
+		PrintAndLog logger = new PrintAndLog("results/" + getName());
+		logger.printf("%s\n", getName());
+		//		AbstractTransformer.INVOCATIONS.setState(true);
+		MyQVT myQVT = new MyQVT("forward2reverse", DoublylinkedlistPackage.eINSTANCE, List2listPackage.eINSTANCE);
+		//		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
+		try {
+			Transformation asTransformation = myQVT.compileTransformation("Forward2Reverse.qvtc", "reverse");
+			int testSize = 1000;
+			BasicQVTiExecutor interpretedExecutor = myQVT.createInterpretedExecutor(asTransformation);
+			myQVT.loadInput("forward", "EmptyList.xmi");
+			Resource inResource = interpretedExecutor.getModel("forward");
+			assert inResource != null;
+			inResource.getContents().clear();
+			inResource.getContents().addAll(doublyLinkedListGenerator.createDoublyLinkedListModel(testSize));
+			myQVT.createModel(QVTimperativeUtil.MIDDLE_DOMAIN_NAME, "Forward2Reverse_trace.xmi");
+			myQVT.createModel("reverse", "List_Interpreted.xmi");
+			AbstractEXE2016CGTests.garbageCollect();
+			logger.printf("%9d, ", testSize);
+			long startTime = System.nanoTime();
+			myQVT.executeTransformation();
+			Collection<@NonNull ?> rootObjects = myQVT.getRootObjects("reverse");
+			long endTime = System.nanoTime();
+			logger.printf("%9.6f\n", (endTime - startTime) / 1.0e9);
+			doublyLinkedListGenerator.checkModel((@NonNull DoublyLinkedList) rootObjects.iterator().next(), testSize);
+			//				myQVT.saveOutput("person", "Persons_Interpreted.xmi", "Persons_expected.xmi", Families2PersonsNormalizer.INSTANCE);
 		}
 		finally {
 			myQVT.dispose();
