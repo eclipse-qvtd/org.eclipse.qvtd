@@ -14,7 +14,7 @@ package org.eclipse.qvtd.doc.minioclcs;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.doc.minioclcs.CallExpCS#getSource <em>Source</em>}</li>
- *   <li>{@link org.eclipse.qvtd.doc.minioclcs.CallExpCS#getNameExp <em>Name Exp</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.doc.minioclcs.CallExpCS#getNavExp <em>Nav Exp</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.doc.minioclcs.MinioclcsPackage#getCallExpCS()
@@ -50,29 +50,29 @@ public interface CallExpCS extends LogicExpCS
   void setSource(CallExpCS value);
 
   /**
-	 * Returns the value of the '<em><b>Name Exp</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Nav Exp</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Name Exp</em>' containment reference isn't clear,
+   * If the meaning of the '<em>Nav Exp</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-	 * @return the value of the '<em>Name Exp</em>' containment reference.
-	 * @see #setNameExp(NameExpCS)
-	 * @see org.eclipse.qvtd.doc.minioclcs.MinioclcsPackage#getCallExpCS_NameExp()
+	 * @return the value of the '<em>Nav Exp</em>' containment reference.
+	 * @see #setNavExp(NavigationExpCS)
+	 * @see org.eclipse.qvtd.doc.minioclcs.MinioclcsPackage#getCallExpCS_NavExp()
 	 * @model containment="true"
 	 * @generated
 	 */
-  NameExpCS getNameExp();
+  NavigationExpCS getNavExp();
 
   /**
-	 * Sets the value of the '{@link org.eclipse.qvtd.doc.minioclcs.CallExpCS#getNameExp <em>Name Exp</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.doc.minioclcs.CallExpCS#getNavExp <em>Nav Exp</em>}' containment reference.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Name Exp</em>' containment reference.
-	 * @see #getNameExp()
+	 * @param value the new value of the '<em>Nav Exp</em>' containment reference.
+	 * @see #getNavExp()
 	 * @generated
 	 */
-  void setNameExp(NameExpCS value);
+  void setNavExp(NavigationExpCS value);
 
 } // CallExpCS

@@ -5,15 +5,12 @@ package org.eclipse.qvtd.doc.minioclcs.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org.eclipse.qvtd.doc.minioclcs.CallExpCS;
 import org.eclipse.qvtd.doc.minioclcs.MinioclcsPackage;
-import org.eclipse.qvtd.doc.minioclcs.NameExpCS;
+import org.eclipse.qvtd.doc.minioclcs.NavigationExpCS;
 
 /**
  * <!-- begin-user-doc -->
@@ -24,7 +21,7 @@ import org.eclipse.qvtd.doc.minioclcs.NameExpCS;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.doc.minioclcs.impl.CallExpCSImpl#getSource <em>Source</em>}</li>
- *   <li>{@link org.eclipse.qvtd.doc.minioclcs.impl.CallExpCSImpl#getNameExp <em>Name Exp</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.doc.minioclcs.impl.CallExpCSImpl#getNavExp <em>Nav Exp</em>}</li>
  * </ul>
  *
  * @generated
@@ -42,14 +39,14 @@ public class CallExpCSImpl extends LogicExpCSImpl implements CallExpCS
   protected CallExpCS source;
 
   /**
-	 * The cached value of the '{@link #getNameExp() <em>Name Exp</em>}' containment reference.
+	 * The cached value of the '{@link #getNavExp() <em>Nav Exp</em>}' containment reference.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getNameExp()
+	 * @see #getNavExp()
 	 * @generated
 	 * @ordered
 	 */
-  protected NameExpCS nameExp;
+  protected NavigationExpCS navExp;
 
   /**
 	 * <!-- begin-user-doc -->
@@ -123,9 +120,9 @@ public class CallExpCSImpl extends LogicExpCSImpl implements CallExpCS
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public NameExpCS getNameExp()
+  public NavigationExpCS getNavExp()
   {
-		return nameExp;
+		return navExp;
 	}
 
   /**
@@ -133,12 +130,12 @@ public class CallExpCSImpl extends LogicExpCSImpl implements CallExpCS
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public NotificationChain basicSetNameExp(NameExpCS newNameExp, NotificationChain msgs)
+  public NotificationChain basicSetNavExp(NavigationExpCS newNavExp, NotificationChain msgs)
   {
-		NameExpCS oldNameExp = nameExp;
-		nameExp = newNameExp;
+		NavigationExpCS oldNavExp = navExp;
+		navExp = newNavExp;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MinioclcsPackage.CALL_EXP_CS__NAME_EXP, oldNameExp, newNameExp);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MinioclcsPackage.CALL_EXP_CS__NAV_EXP, oldNavExp, newNavExp);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -149,19 +146,19 @@ public class CallExpCSImpl extends LogicExpCSImpl implements CallExpCS
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void setNameExp(NameExpCS newNameExp)
+  public void setNavExp(NavigationExpCS newNavExp)
   {
-		if (newNameExp != nameExp) {
+		if (newNavExp != navExp) {
 			NotificationChain msgs = null;
-			if (nameExp != null)
-				msgs = ((InternalEObject)nameExp).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MinioclcsPackage.CALL_EXP_CS__NAME_EXP, null, msgs);
-			if (newNameExp != null)
-				msgs = ((InternalEObject)newNameExp).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MinioclcsPackage.CALL_EXP_CS__NAME_EXP, null, msgs);
-			msgs = basicSetNameExp(newNameExp, msgs);
+			if (navExp != null)
+				msgs = ((InternalEObject)navExp).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MinioclcsPackage.CALL_EXP_CS__NAV_EXP, null, msgs);
+			if (newNavExp != null)
+				msgs = ((InternalEObject)newNavExp).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MinioclcsPackage.CALL_EXP_CS__NAV_EXP, null, msgs);
+			msgs = basicSetNavExp(newNavExp, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MinioclcsPackage.CALL_EXP_CS__NAME_EXP, newNameExp, newNameExp));
+			eNotify(new ENotificationImpl(this, Notification.SET, MinioclcsPackage.CALL_EXP_CS__NAV_EXP, newNavExp, newNavExp));
 	}
 
   /**
@@ -175,8 +172,8 @@ public class CallExpCSImpl extends LogicExpCSImpl implements CallExpCS
 		switch (featureID) {
 			case MinioclcsPackage.CALL_EXP_CS__SOURCE:
 				return basicSetSource(null, msgs);
-			case MinioclcsPackage.CALL_EXP_CS__NAME_EXP:
-				return basicSetNameExp(null, msgs);
+			case MinioclcsPackage.CALL_EXP_CS__NAV_EXP:
+				return basicSetNavExp(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -192,8 +189,8 @@ public class CallExpCSImpl extends LogicExpCSImpl implements CallExpCS
 		switch (featureID) {
 			case MinioclcsPackage.CALL_EXP_CS__SOURCE:
 				return getSource();
-			case MinioclcsPackage.CALL_EXP_CS__NAME_EXP:
-				return getNameExp();
+			case MinioclcsPackage.CALL_EXP_CS__NAV_EXP:
+				return getNavExp();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -210,8 +207,8 @@ public class CallExpCSImpl extends LogicExpCSImpl implements CallExpCS
 			case MinioclcsPackage.CALL_EXP_CS__SOURCE:
 				setSource((CallExpCS)newValue);
 				return;
-			case MinioclcsPackage.CALL_EXP_CS__NAME_EXP:
-				setNameExp((NameExpCS)newValue);
+			case MinioclcsPackage.CALL_EXP_CS__NAV_EXP:
+				setNavExp((NavigationExpCS)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -229,8 +226,8 @@ public class CallExpCSImpl extends LogicExpCSImpl implements CallExpCS
 			case MinioclcsPackage.CALL_EXP_CS__SOURCE:
 				setSource((CallExpCS)null);
 				return;
-			case MinioclcsPackage.CALL_EXP_CS__NAME_EXP:
-				setNameExp((NameExpCS)null);
+			case MinioclcsPackage.CALL_EXP_CS__NAV_EXP:
+				setNavExp((NavigationExpCS)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -247,8 +244,8 @@ public class CallExpCSImpl extends LogicExpCSImpl implements CallExpCS
 		switch (featureID) {
 			case MinioclcsPackage.CALL_EXP_CS__SOURCE:
 				return source != null;
-			case MinioclcsPackage.CALL_EXP_CS__NAME_EXP:
-				return nameExp != null;
+			case MinioclcsPackage.CALL_EXP_CS__NAV_EXP:
+				return navExp != null;
 		}
 		return super.eIsSet(featureID);
 	}

@@ -42,6 +42,15 @@ public interface MinioclcsFactory extends EFactory
   PackageCS createPackageCS();
 
   /**
+	 * Returns a new object of class '<em>Classifier CS</em>'.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Classifier CS</em>'.
+	 * @generated
+	 */
+  ClassifierCS createClassifierCS();
+
+  /**
 	 * Returns a new object of class '<em>Class CS</em>'.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -51,6 +60,15 @@ public interface MinioclcsFactory extends EFactory
   ClassCS createClassCS();
 
   /**
+	 * Returns a new object of class '<em>Datatype CS</em>'.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Datatype CS</em>'.
+	 * @generated
+	 */
+  DatatypeCS createDatatypeCS();
+
+  /**
 	 * Returns a new object of class '<em>Property CS</em>'.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -58,6 +76,15 @@ public interface MinioclcsFactory extends EFactory
 	 * @generated
 	 */
   PropertyCS createPropertyCS();
+
+  /**
+	 * Returns a new object of class '<em>Multiplicity CS</em>'.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Multiplicity CS</em>'.
+	 * @generated
+	 */
+  MultiplicityCS createMultiplicityCS();
 
   /**
 	 * Returns a new object of class '<em>Operation CS</em>'.
@@ -132,6 +159,69 @@ public interface MinioclcsFactory extends EFactory
   PrimaryExpCS createPrimaryExpCS();
 
   /**
+	 * Returns a new object of class '<em>Self Exp CS</em>'.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Self Exp CS</em>'.
+	 * @generated
+	 */
+  SelfExpCS createSelfExpCS();
+
+  /**
+	 * Returns a new object of class '<em>Navigation Exp CS</em>'.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Navigation Exp CS</em>'.
+	 * @generated
+	 */
+  NavigationExpCS createNavigationExpCS();
+
+  /**
+	 * Returns a new object of class '<em>Loop Exp CS</em>'.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Loop Exp CS</em>'.
+	 * @generated
+	 */
+  LoopExpCS createLoopExpCS();
+
+  /**
+	 * Returns a new object of class '<em>Collect Exp CS</em>'.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Collect Exp CS</em>'.
+	 * @generated
+	 */
+  CollectExpCS createCollectExpCS();
+
+  /**
+	 * Returns a new object of class '<em>Iterator Var CS</em>'.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Iterator Var CS</em>'.
+	 * @generated
+	 */
+  IteratorVarCS createIteratorVarCS();
+
+  /**
+	 * Returns a new object of class '<em>Iterate Exp CS</em>'.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Iterate Exp CS</em>'.
+	 * @generated
+	 */
+  IterateExpCS createIterateExpCS();
+
+  /**
+	 * Returns a new object of class '<em>Acc Var CS</em>'.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Acc Var CS</em>'.
+	 * @generated
+	 */
+  AccVarCS createAccVarCS();
+
+  /**
 	 * Returns a new object of class '<em>Name Exp CS</em>'.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -168,15 +258,6 @@ public interface MinioclcsFactory extends EFactory
   IntLiteralExpCS createIntLiteralExpCS();
 
   /**
-	 * Returns a new object of class '<em>String Literal Exp CS</em>'.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @return a new object of class '<em>String Literal Exp CS</em>'.
-	 * @generated
-	 */
-  StringLiteralExpCS createStringLiteralExpCS();
-
-  /**
 	 * Returns a new object of class '<em>Boolean Literal Exp CS</em>'.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -184,6 +265,51 @@ public interface MinioclcsFactory extends EFactory
 	 * @generated
 	 */
   BooleanLiteralExpCS createBooleanLiteralExpCS();
+
+  /**
+	 * Returns a new object of class '<em>Null Literal Exp CS</em>'.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Null Literal Exp CS</em>'.
+	 * @generated
+	 */
+  NullLiteralExpCS createNullLiteralExpCS();
+
+  /**
+	 * Returns a new object of class '<em>Collection Literal Exp CS</em>'.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Collection Literal Exp CS</em>'.
+	 * @generated
+	 */
+  CollectionLiteralExpCS createCollectionLiteralExpCS();
+
+  /**
+	 * Returns a new object of class '<em>Collection Literal Part CS</em>'.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Collection Literal Part CS</em>'.
+	 * @generated
+	 */
+  CollectionLiteralPartCS createCollectionLiteralPartCS();
+
+  /**
+	 * Returns a new object of class '<em>Let Exp CS</em>'.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Let Exp CS</em>'.
+	 * @generated
+	 */
+  LetExpCS createLetExpCS();
+
+  /**
+	 * Returns a new object of class '<em>Let Var CS</em>'.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Let Var CS</em>'.
+	 * @generated
+	 */
+  LetVarCS createLetVarCS();
 
   /**
 	 * Returns a new object of class '<em>Path Name CS</em>'.

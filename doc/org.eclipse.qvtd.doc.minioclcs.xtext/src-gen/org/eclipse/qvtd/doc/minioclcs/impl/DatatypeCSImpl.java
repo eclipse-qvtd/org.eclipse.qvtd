@@ -4,55 +4,52 @@
 package org.eclipse.qvtd.doc.minioclcs.impl;
 
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
+import org.eclipse.qvtd.doc.minioclcs.DatatypeCS;
 import org.eclipse.qvtd.doc.minioclcs.MinioclcsPackage;
-import org.eclipse.qvtd.doc.minioclcs.StringLiteralExpCS;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>String Literal Exp CS</b></em>'.
+ * An implementation of the model object '<em><b>Datatype CS</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.doc.minioclcs.impl.StringLiteralExpCSImpl#getStringSymbol <em>String Symbol</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.doc.minioclcs.impl.DatatypeCSImpl#getTypeName <em>Type Name</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class StringLiteralExpCSImpl extends LiteralExpCSImpl implements StringLiteralExpCS
+public class DatatypeCSImpl extends ClassifierCSImpl implements DatatypeCS
 {
   /**
-	 * The default value of the '{@link #getStringSymbol() <em>String Symbol</em>}' attribute.
+	 * The default value of the '{@link #getTypeName() <em>Type Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getStringSymbol()
+	 * @see #getTypeName()
 	 * @generated
 	 * @ordered
 	 */
-  protected static final String STRING_SYMBOL_EDEFAULT = null;
+  protected static final String TYPE_NAME_EDEFAULT = null;
 
   /**
-	 * The cached value of the '{@link #getStringSymbol() <em>String Symbol</em>}' attribute.
+	 * The cached value of the '{@link #getTypeName() <em>Type Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getStringSymbol()
+	 * @see #getTypeName()
 	 * @generated
 	 * @ordered
 	 */
-  protected String stringSymbol = STRING_SYMBOL_EDEFAULT;
+  protected String typeName = TYPE_NAME_EDEFAULT;
 
   /**
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  protected StringLiteralExpCSImpl()
+  protected DatatypeCSImpl()
   {
 		super();
 	}
@@ -65,7 +62,7 @@ public class StringLiteralExpCSImpl extends LiteralExpCSImpl implements StringLi
   @Override
   protected EClass eStaticClass()
   {
-		return MinioclcsPackage.Literals.STRING_LITERAL_EXP_CS;
+		return MinioclcsPackage.Literals.DATATYPE_CS;
 	}
 
   /**
@@ -73,9 +70,9 @@ public class StringLiteralExpCSImpl extends LiteralExpCSImpl implements StringLi
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public String getStringSymbol()
+  public String getTypeName()
   {
-		return stringSymbol;
+		return typeName;
 	}
 
   /**
@@ -83,12 +80,12 @@ public class StringLiteralExpCSImpl extends LiteralExpCSImpl implements StringLi
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void setStringSymbol(String newStringSymbol)
+  public void setTypeName(String newTypeName)
   {
-		String oldStringSymbol = stringSymbol;
-		stringSymbol = newStringSymbol;
+		String oldTypeName = typeName;
+		typeName = newTypeName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MinioclcsPackage.STRING_LITERAL_EXP_CS__STRING_SYMBOL, oldStringSymbol, stringSymbol));
+			eNotify(new ENotificationImpl(this, Notification.SET, MinioclcsPackage.DATATYPE_CS__TYPE_NAME, oldTypeName, typeName));
 	}
 
   /**
@@ -100,8 +97,8 @@ public class StringLiteralExpCSImpl extends LiteralExpCSImpl implements StringLi
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
 		switch (featureID) {
-			case MinioclcsPackage.STRING_LITERAL_EXP_CS__STRING_SYMBOL:
-				return getStringSymbol();
+			case MinioclcsPackage.DATATYPE_CS__TYPE_NAME:
+				return getTypeName();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -115,8 +112,8 @@ public class StringLiteralExpCSImpl extends LiteralExpCSImpl implements StringLi
   public void eSet(int featureID, Object newValue)
   {
 		switch (featureID) {
-			case MinioclcsPackage.STRING_LITERAL_EXP_CS__STRING_SYMBOL:
-				setStringSymbol((String)newValue);
+			case MinioclcsPackage.DATATYPE_CS__TYPE_NAME:
+				setTypeName((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -131,8 +128,8 @@ public class StringLiteralExpCSImpl extends LiteralExpCSImpl implements StringLi
   public void eUnset(int featureID)
   {
 		switch (featureID) {
-			case MinioclcsPackage.STRING_LITERAL_EXP_CS__STRING_SYMBOL:
-				setStringSymbol(STRING_SYMBOL_EDEFAULT);
+			case MinioclcsPackage.DATATYPE_CS__TYPE_NAME:
+				setTypeName(TYPE_NAME_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -147,8 +144,8 @@ public class StringLiteralExpCSImpl extends LiteralExpCSImpl implements StringLi
   public boolean eIsSet(int featureID)
   {
 		switch (featureID) {
-			case MinioclcsPackage.STRING_LITERAL_EXP_CS__STRING_SYMBOL:
-				return STRING_SYMBOL_EDEFAULT == null ? stringSymbol != null : !STRING_SYMBOL_EDEFAULT.equals(stringSymbol);
+			case MinioclcsPackage.DATATYPE_CS__TYPE_NAME:
+				return TYPE_NAME_EDEFAULT == null ? typeName != null : !TYPE_NAME_EDEFAULT.equals(typeName);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -164,10 +161,10 @@ public class StringLiteralExpCSImpl extends LiteralExpCSImpl implements StringLi
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (stringSymbol: ");
-		result.append(stringSymbol);
+		result.append(" (typeName: ");
+		result.append(typeName);
 		result.append(')');
 		return result.toString();
 	}
 
-} //StringLiteralExpCSImpl
+} //DatatypeCSImpl

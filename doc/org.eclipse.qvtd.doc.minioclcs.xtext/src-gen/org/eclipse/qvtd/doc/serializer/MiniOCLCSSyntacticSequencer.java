@@ -3,25 +3,32 @@
  */
 package org.eclipse.qvtd.doc.serializer;
 
-import com.google.inject.Inject;
 import java.util.List;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.qvtd.doc.services.MiniOCLCSGrammarAccess;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.AbstractElementAlias;
+import org.eclipse.xtext.serializer.analysis.GrammarAlias.AlternativeAlias;
+import org.eclipse.xtext.serializer.analysis.GrammarAlias.TokenAlias;
+import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynNavigable;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynTransition;
 import org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer;
+
+import com.google.inject.Inject;
 
 @SuppressWarnings("all")
 public class MiniOCLCSSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected MiniOCLCSGrammarAccess grammarAccess;
+	protected AbstractElementAlias match_PropertyCS_AttributeKeyword_0_0_or_ContainmentKeyword_0_1_or_Cross_referenceKeyword_0_2;
 	
 	@Inject
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (MiniOCLCSGrammarAccess) access;
+		match_PropertyCS_AttributeKeyword_0_0_or_ContainmentKeyword_0_1_or_Cross_referenceKeyword_0_2 = new AlternativeAlias(false, false, new TokenAlias(false, false, grammarAccess.getPropertyCSAccess().getAttributeKeyword_0_0()), new TokenAlias(false, false, grammarAccess.getPropertyCSAccess().getContainmentKeyword_0_1()), new TokenAlias(false, false, grammarAccess.getPropertyCSAccess().getCross_referenceKeyword_0_2()));
 	}
 	
 	@Override
@@ -36,8 +43,21 @@ public class MiniOCLCSSyntacticSequencer extends AbstractSyntacticSequencer {
 		List<INode> transitionNodes = collectNodes(fromNode, toNode);
 		for (AbstractElementAlias syntax : transition.getAmbiguousSyntaxes()) {
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
-			acceptNodes(getLastNavigableState(), syntaxNodes);
+			if (match_PropertyCS_AttributeKeyword_0_0_or_ContainmentKeyword_0_1_or_Cross_referenceKeyword_0_2.equals(syntax))
+				emit_PropertyCS_AttributeKeyword_0_0_or_ContainmentKeyword_0_1_or_Cross_referenceKeyword_0_2(semanticObject, getLastNavigableState(), syntaxNodes);
+			else acceptNodes(getLastNavigableState(), syntaxNodes);
 		}
 	}
 
+	/**
+	 * Ambiguous syntax:
+	 *     'attribute' | 'containment' | 'cross_reference'
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     (rule start) (ambiguity) name=ID
+	 */
+	protected void emit_PropertyCS_AttributeKeyword_0_0_or_ContainmentKeyword_0_1_or_Cross_referenceKeyword_0_2(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
 }

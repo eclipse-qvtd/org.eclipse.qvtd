@@ -6,17 +6,11 @@ package org.eclipse.qvtd.doc.minioclcs.impl;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-
 import org.eclipse.qvtd.doc.minioclcs.MinioclcsPackage;
 import org.eclipse.qvtd.doc.minioclcs.PathElementCS;
 import org.eclipse.qvtd.doc.minioclcs.PathNameCS;
@@ -29,7 +23,6 @@ import org.eclipse.qvtd.doc.minioclcs.PathNameCS;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.doc.minioclcs.impl.PathNameCSImpl#getPath <em>Path</em>}</li>
  *   <li>{@link org.eclipse.qvtd.doc.minioclcs.impl.PathNameCSImpl#getPathElements <em>Path Elements</em>}</li>
  * </ul>
  *
@@ -37,16 +30,6 @@ import org.eclipse.qvtd.doc.minioclcs.PathNameCS;
  */
 public class PathNameCSImpl extends CSTraceImpl implements PathNameCS
 {
-  /**
-	 * The cached value of the '{@link #getPath() <em>Path</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @see #getPath()
-	 * @generated
-	 * @ordered
-	 */
-  protected EList<PathElementCS> path;
-
   /**
 	 * The cached value of the '{@link #getPathElements() <em>Path Elements</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -83,19 +66,6 @@ public class PathNameCSImpl extends CSTraceImpl implements PathNameCS
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EList<PathElementCS> getPath()
-  {
-		if (path == null) {
-			path = new EObjectContainmentEList<PathElementCS>(PathElementCS.class, this, MinioclcsPackage.PATH_NAME_CS__PATH);
-		}
-		return path;
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
   public EList<PathElementCS> getPathElements()
   {
 		if (pathElements == null) {
@@ -113,8 +83,6 @@ public class PathNameCSImpl extends CSTraceImpl implements PathNameCS
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
 		switch (featureID) {
-			case MinioclcsPackage.PATH_NAME_CS__PATH:
-				return ((InternalEList<?>)getPath()).basicRemove(otherEnd, msgs);
 			case MinioclcsPackage.PATH_NAME_CS__PATH_ELEMENTS:
 				return ((InternalEList<?>)getPathElements()).basicRemove(otherEnd, msgs);
 		}
@@ -130,8 +98,6 @@ public class PathNameCSImpl extends CSTraceImpl implements PathNameCS
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
 		switch (featureID) {
-			case MinioclcsPackage.PATH_NAME_CS__PATH:
-				return getPath();
 			case MinioclcsPackage.PATH_NAME_CS__PATH_ELEMENTS:
 				return getPathElements();
 		}
@@ -148,10 +114,6 @@ public class PathNameCSImpl extends CSTraceImpl implements PathNameCS
   public void eSet(int featureID, Object newValue)
   {
 		switch (featureID) {
-			case MinioclcsPackage.PATH_NAME_CS__PATH:
-				getPath().clear();
-				getPath().addAll((Collection<? extends PathElementCS>)newValue);
-				return;
 			case MinioclcsPackage.PATH_NAME_CS__PATH_ELEMENTS:
 				getPathElements().clear();
 				getPathElements().addAll((Collection<? extends PathElementCS>)newValue);
@@ -169,9 +131,6 @@ public class PathNameCSImpl extends CSTraceImpl implements PathNameCS
   public void eUnset(int featureID)
   {
 		switch (featureID) {
-			case MinioclcsPackage.PATH_NAME_CS__PATH:
-				getPath().clear();
-				return;
 			case MinioclcsPackage.PATH_NAME_CS__PATH_ELEMENTS:
 				getPathElements().clear();
 				return;
@@ -188,8 +147,6 @@ public class PathNameCSImpl extends CSTraceImpl implements PathNameCS
   public boolean eIsSet(int featureID)
   {
 		switch (featureID) {
-			case MinioclcsPackage.PATH_NAME_CS__PATH:
-				return path != null && !path.isEmpty();
 			case MinioclcsPackage.PATH_NAME_CS__PATH_ELEMENTS:
 				return pathElements != null && !pathElements.isEmpty();
 		}

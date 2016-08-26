@@ -5,6 +5,7 @@ package org.eclipse.qvtd.doc.minioclcs;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
@@ -65,7 +66,7 @@ public interface MinioclcsPackage extends EPackage
 	 * @see org.eclipse.qvtd.doc.minioclcs.impl.MinioclcsPackageImpl#getCSTrace()
 	 * @generated
 	 */
-	int CS_TRACE = 21;
+	int CS_TRACE = 35;
 
 		/**
 	 * The feature id for the '<em><b>Ast</b></em>' reference.
@@ -169,13 +170,13 @@ public interface MinioclcsPackage extends EPackage
   int PACKAGE_CS__PACKAGES = CS_TRACE_FEATURE_COUNT + 1;
 
   /**
-	 * The feature id for the '<em><b>Classes</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Classifiers</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-  int PACKAGE_CS__CLASSES = CS_TRACE_FEATURE_COUNT + 2;
+  int PACKAGE_CS__CLASSIFIERS = CS_TRACE_FEATURE_COUNT + 2;
 
   /**
 	 * The number of structural features of the '<em>Package CS</em>' class.
@@ -187,14 +188,14 @@ public interface MinioclcsPackage extends EPackage
   int PACKAGE_CS_FEATURE_COUNT = CS_TRACE_FEATURE_COUNT + 3;
 
   /**
-	 * The meta object id for the '{@link org.eclipse.qvtd.doc.minioclcs.impl.ClassCSImpl <em>Class CS</em>}' class.
+	 * The meta object id for the '{@link org.eclipse.qvtd.doc.minioclcs.impl.ClassifierCSImpl <em>Classifier CS</em>}' class.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.doc.minioclcs.impl.ClassCSImpl
-	 * @see org.eclipse.qvtd.doc.minioclcs.impl.MinioclcsPackageImpl#getClassCS()
+	 * @see org.eclipse.qvtd.doc.minioclcs.impl.ClassifierCSImpl
+	 * @see org.eclipse.qvtd.doc.minioclcs.impl.MinioclcsPackageImpl#getClassifierCS()
 	 * @generated
 	 */
-  int CLASS_CS = 2;
+  int CLASSIFIER_CS = 2;
 
   /**
 	 * The feature id for the '<em><b>Ast</b></em>' reference.
@@ -203,7 +204,7 @@ public interface MinioclcsPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS_CS__AST = CS_TRACE__AST;
+	int CLASSIFIER_CS__AST = CS_TRACE__AST;
 
 		/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -212,7 +213,44 @@ public interface MinioclcsPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-  int CLASS_CS__NAME = CS_TRACE_FEATURE_COUNT + 0;
+  int CLASSIFIER_CS__NAME = CS_TRACE_FEATURE_COUNT + 0;
+
+  /**
+	 * The number of structural features of the '<em>Classifier CS</em>' class.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int CLASSIFIER_CS_FEATURE_COUNT = CS_TRACE_FEATURE_COUNT + 1;
+
+  /**
+	 * The meta object id for the '{@link org.eclipse.qvtd.doc.minioclcs.impl.ClassCSImpl <em>Class CS</em>}' class.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.doc.minioclcs.impl.ClassCSImpl
+	 * @see org.eclipse.qvtd.doc.minioclcs.impl.MinioclcsPackageImpl#getClassCS()
+	 * @generated
+	 */
+  int CLASS_CS = 3;
+
+  /**
+	 * The feature id for the '<em><b>Ast</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_CS__AST = CLASSIFIER_CS__AST;
+
+		/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int CLASS_CS__NAME = CLASSIFIER_CS__NAME;
 
   /**
 	 * The feature id for the '<em><b>Extends</b></em>' containment reference.
@@ -221,7 +259,7 @@ public interface MinioclcsPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-  int CLASS_CS__EXTENDS = CS_TRACE_FEATURE_COUNT + 1;
+  int CLASS_CS__EXTENDS = CLASSIFIER_CS_FEATURE_COUNT + 0;
 
   /**
 	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.
@@ -230,7 +268,7 @@ public interface MinioclcsPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-  int CLASS_CS__PROPERTIES = CS_TRACE_FEATURE_COUNT + 2;
+  int CLASS_CS__PROPERTIES = CLASSIFIER_CS_FEATURE_COUNT + 1;
 
   /**
 	 * The feature id for the '<em><b>Operations</b></em>' containment reference list.
@@ -239,7 +277,7 @@ public interface MinioclcsPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-  int CLASS_CS__OPERATIONS = CS_TRACE_FEATURE_COUNT + 3;
+  int CLASS_CS__OPERATIONS = CLASSIFIER_CS_FEATURE_COUNT + 2;
 
   /**
 	 * The number of structural features of the '<em>Class CS</em>' class.
@@ -248,7 +286,53 @@ public interface MinioclcsPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-  int CLASS_CS_FEATURE_COUNT = CS_TRACE_FEATURE_COUNT + 4;
+  int CLASS_CS_FEATURE_COUNT = CLASSIFIER_CS_FEATURE_COUNT + 3;
+
+  /**
+	 * The meta object id for the '{@link org.eclipse.qvtd.doc.minioclcs.impl.DatatypeCSImpl <em>Datatype CS</em>}' class.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.doc.minioclcs.impl.DatatypeCSImpl
+	 * @see org.eclipse.qvtd.doc.minioclcs.impl.MinioclcsPackageImpl#getDatatypeCS()
+	 * @generated
+	 */
+  int DATATYPE_CS = 4;
+
+  /**
+	 * The feature id for the '<em><b>Ast</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATATYPE_CS__AST = CLASSIFIER_CS__AST;
+
+		/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int DATATYPE_CS__NAME = CLASSIFIER_CS__NAME;
+
+  /**
+	 * The feature id for the '<em><b>Type Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int DATATYPE_CS__TYPE_NAME = CLASSIFIER_CS_FEATURE_COUNT + 0;
+
+  /**
+	 * The number of structural features of the '<em>Datatype CS</em>' class.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int DATATYPE_CS_FEATURE_COUNT = CLASSIFIER_CS_FEATURE_COUNT + 1;
 
   /**
 	 * The meta object id for the '{@link org.eclipse.qvtd.doc.minioclcs.impl.PropertyCSImpl <em>Property CS</em>}' class.
@@ -258,7 +342,7 @@ public interface MinioclcsPackage extends EPackage
 	 * @see org.eclipse.qvtd.doc.minioclcs.impl.MinioclcsPackageImpl#getPropertyCS()
 	 * @generated
 	 */
-  int PROPERTY_CS = 3;
+  int PROPERTY_CS = 5;
 
   /**
 	 * The feature id for the '<em><b>Ast</b></em>' reference.
@@ -288,13 +372,95 @@ public interface MinioclcsPackage extends EPackage
   int PROPERTY_CS__TYPE_REF = CS_TRACE_FEATURE_COUNT + 1;
 
   /**
+	 * The feature id for the '<em><b>Multiplicity</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int PROPERTY_CS__MULTIPLICITY = CS_TRACE_FEATURE_COUNT + 2;
+
+  /**
 	 * The number of structural features of the '<em>Property CS</em>' class.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-  int PROPERTY_CS_FEATURE_COUNT = CS_TRACE_FEATURE_COUNT + 2;
+  int PROPERTY_CS_FEATURE_COUNT = CS_TRACE_FEATURE_COUNT + 3;
+
+  /**
+	 * The meta object id for the '{@link org.eclipse.qvtd.doc.minioclcs.impl.MultiplicityCSImpl <em>Multiplicity CS</em>}' class.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.doc.minioclcs.impl.MultiplicityCSImpl
+	 * @see org.eclipse.qvtd.doc.minioclcs.impl.MinioclcsPackageImpl#getMultiplicityCS()
+	 * @generated
+	 */
+  int MULTIPLICITY_CS = 6;
+
+  /**
+	 * The feature id for the '<em><b>Ast</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MULTIPLICITY_CS__AST = CS_TRACE__AST;
+
+		/**
+	 * The feature id for the '<em><b>Opt</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int MULTIPLICITY_CS__OPT = CS_TRACE_FEATURE_COUNT + 0;
+
+  /**
+	 * The feature id for the '<em><b>Mult</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int MULTIPLICITY_CS__MULT = CS_TRACE_FEATURE_COUNT + 1;
+
+  /**
+	 * The feature id for the '<em><b>Lower</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int MULTIPLICITY_CS__LOWER = CS_TRACE_FEATURE_COUNT + 2;
+
+  /**
+	 * The feature id for the '<em><b>Upper Int</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int MULTIPLICITY_CS__UPPER_INT = CS_TRACE_FEATURE_COUNT + 3;
+
+  /**
+	 * The feature id for the '<em><b>Upper Mult</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int MULTIPLICITY_CS__UPPER_MULT = CS_TRACE_FEATURE_COUNT + 4;
+
+  /**
+	 * The number of structural features of the '<em>Multiplicity CS</em>' class.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int MULTIPLICITY_CS_FEATURE_COUNT = CS_TRACE_FEATURE_COUNT + 5;
 
   /**
 	 * The meta object id for the '{@link org.eclipse.qvtd.doc.minioclcs.impl.OperationCSImpl <em>Operation CS</em>}' class.
@@ -304,7 +470,7 @@ public interface MinioclcsPackage extends EPackage
 	 * @see org.eclipse.qvtd.doc.minioclcs.impl.MinioclcsPackageImpl#getOperationCS()
 	 * @generated
 	 */
-  int OPERATION_CS = 4;
+  int OPERATION_CS = 7;
 
   /**
 	 * The feature id for the '<em><b>Ast</b></em>' reference.
@@ -368,7 +534,7 @@ public interface MinioclcsPackage extends EPackage
 	 * @see org.eclipse.qvtd.doc.minioclcs.impl.MinioclcsPackageImpl#getParameterCS()
 	 * @generated
 	 */
-  int PARAMETER_CS = 5;
+  int PARAMETER_CS = 8;
 
   /**
 	 * The feature id for the '<em><b>Ast</b></em>' reference.
@@ -414,7 +580,7 @@ public interface MinioclcsPackage extends EPackage
 	 * @see org.eclipse.qvtd.doc.minioclcs.impl.MinioclcsPackageImpl#getConstraintsDefCS()
 	 * @generated
 	 */
-  int CONSTRAINTS_DEF_CS = 6;
+  int CONSTRAINTS_DEF_CS = 9;
 
   /**
 	 * The feature id for the '<em><b>Ast</b></em>' reference.
@@ -460,7 +626,7 @@ public interface MinioclcsPackage extends EPackage
 	 * @see org.eclipse.qvtd.doc.minioclcs.impl.MinioclcsPackageImpl#getInvariantCS()
 	 * @generated
 	 */
-  int INVARIANT_CS = 7;
+  int INVARIANT_CS = 10;
 
   /**
 	 * The feature id for the '<em><b>Ast</b></em>' reference.
@@ -497,7 +663,7 @@ public interface MinioclcsPackage extends EPackage
 	 * @see org.eclipse.qvtd.doc.minioclcs.impl.MinioclcsPackageImpl#getExpCS()
 	 * @generated
 	 */
-  int EXP_CS = 8;
+  int EXP_CS = 11;
 
   /**
 	 * The feature id for the '<em><b>Ast</b></em>' reference.
@@ -525,7 +691,7 @@ public interface MinioclcsPackage extends EPackage
 	 * @see org.eclipse.qvtd.doc.minioclcs.impl.MinioclcsPackageImpl#getLogicExpCS()
 	 * @generated
 	 */
-  int LOGIC_EXP_CS = 9;
+  int LOGIC_EXP_CS = 12;
 
   /**
 	 * The feature id for the '<em><b>Ast</b></em>' reference.
@@ -580,7 +746,7 @@ public interface MinioclcsPackage extends EPackage
 	 * @see org.eclipse.qvtd.doc.minioclcs.impl.MinioclcsPackageImpl#getCallExpCS()
 	 * @generated
 	 */
-  int CALL_EXP_CS = 10;
+  int CALL_EXP_CS = 13;
 
   /**
 	 * The feature id for the '<em><b>Ast</b></em>' reference.
@@ -628,13 +794,13 @@ public interface MinioclcsPackage extends EPackage
   int CALL_EXP_CS__SOURCE = LOGIC_EXP_CS_FEATURE_COUNT + 0;
 
   /**
-	 * The feature id for the '<em><b>Name Exp</b></em>' containment reference.
+	 * The feature id for the '<em><b>Nav Exp</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-  int CALL_EXP_CS__NAME_EXP = LOGIC_EXP_CS_FEATURE_COUNT + 1;
+  int CALL_EXP_CS__NAV_EXP = LOGIC_EXP_CS_FEATURE_COUNT + 1;
 
   /**
 	 * The number of structural features of the '<em>Call Exp CS</em>' class.
@@ -653,7 +819,7 @@ public interface MinioclcsPackage extends EPackage
 	 * @see org.eclipse.qvtd.doc.minioclcs.impl.MinioclcsPackageImpl#getPrimaryExpCS()
 	 * @generated
 	 */
-  int PRIMARY_EXP_CS = 11;
+  int PRIMARY_EXP_CS = 14;
 
   /**
 	 * The feature id for the '<em><b>Ast</b></em>' reference.
@@ -701,13 +867,13 @@ public interface MinioclcsPackage extends EPackage
   int PRIMARY_EXP_CS__SOURCE = CALL_EXP_CS__SOURCE;
 
   /**
-	 * The feature id for the '<em><b>Name Exp</b></em>' containment reference.
+	 * The feature id for the '<em><b>Nav Exp</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-  int PRIMARY_EXP_CS__NAME_EXP = CALL_EXP_CS__NAME_EXP;
+  int PRIMARY_EXP_CS__NAV_EXP = CALL_EXP_CS__NAV_EXP;
 
   /**
 	 * The number of structural features of the '<em>Primary Exp CS</em>' class.
@@ -719,6 +885,355 @@ public interface MinioclcsPackage extends EPackage
   int PRIMARY_EXP_CS_FEATURE_COUNT = CALL_EXP_CS_FEATURE_COUNT + 0;
 
   /**
+	 * The meta object id for the '{@link org.eclipse.qvtd.doc.minioclcs.impl.SelfExpCSImpl <em>Self Exp CS</em>}' class.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.doc.minioclcs.impl.SelfExpCSImpl
+	 * @see org.eclipse.qvtd.doc.minioclcs.impl.MinioclcsPackageImpl#getSelfExpCS()
+	 * @generated
+	 */
+  int SELF_EXP_CS = 15;
+
+  /**
+	 * The feature id for the '<em><b>Ast</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SELF_EXP_CS__AST = PRIMARY_EXP_CS__AST;
+
+		/**
+	 * The feature id for the '<em><b>Left</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int SELF_EXP_CS__LEFT = PRIMARY_EXP_CS__LEFT;
+
+  /**
+	 * The feature id for the '<em><b>Op</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int SELF_EXP_CS__OP = PRIMARY_EXP_CS__OP;
+
+  /**
+	 * The feature id for the '<em><b>Right</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int SELF_EXP_CS__RIGHT = PRIMARY_EXP_CS__RIGHT;
+
+  /**
+	 * The feature id for the '<em><b>Source</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int SELF_EXP_CS__SOURCE = PRIMARY_EXP_CS__SOURCE;
+
+  /**
+	 * The feature id for the '<em><b>Nav Exp</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int SELF_EXP_CS__NAV_EXP = PRIMARY_EXP_CS__NAV_EXP;
+
+  /**
+	 * The number of structural features of the '<em>Self Exp CS</em>' class.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int SELF_EXP_CS_FEATURE_COUNT = PRIMARY_EXP_CS_FEATURE_COUNT + 0;
+
+  /**
+	 * The meta object id for the '{@link org.eclipse.qvtd.doc.minioclcs.impl.NavigationExpCSImpl <em>Navigation Exp CS</em>}' class.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.doc.minioclcs.impl.NavigationExpCSImpl
+	 * @see org.eclipse.qvtd.doc.minioclcs.impl.MinioclcsPackageImpl#getNavigationExpCS()
+	 * @generated
+	 */
+  int NAVIGATION_EXP_CS = 16;
+
+  /**
+	 * The feature id for the '<em><b>Ast</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAVIGATION_EXP_CS__AST = CS_TRACE__AST;
+
+		/**
+	 * The number of structural features of the '<em>Navigation Exp CS</em>' class.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int NAVIGATION_EXP_CS_FEATURE_COUNT = CS_TRACE_FEATURE_COUNT + 0;
+
+  /**
+	 * The meta object id for the '{@link org.eclipse.qvtd.doc.minioclcs.impl.LoopExpCSImpl <em>Loop Exp CS</em>}' class.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.doc.minioclcs.impl.LoopExpCSImpl
+	 * @see org.eclipse.qvtd.doc.minioclcs.impl.MinioclcsPackageImpl#getLoopExpCS()
+	 * @generated
+	 */
+  int LOOP_EXP_CS = 17;
+
+  /**
+	 * The feature id for the '<em><b>Ast</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOOP_EXP_CS__AST = NAVIGATION_EXP_CS__AST;
+
+		/**
+	 * The feature id for the '<em><b>It Var</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int LOOP_EXP_CS__IT_VAR = NAVIGATION_EXP_CS_FEATURE_COUNT + 0;
+
+  /**
+	 * The feature id for the '<em><b>Exp</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int LOOP_EXP_CS__EXP = NAVIGATION_EXP_CS_FEATURE_COUNT + 1;
+
+  /**
+	 * The number of structural features of the '<em>Loop Exp CS</em>' class.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int LOOP_EXP_CS_FEATURE_COUNT = NAVIGATION_EXP_CS_FEATURE_COUNT + 2;
+
+  /**
+	 * The meta object id for the '{@link org.eclipse.qvtd.doc.minioclcs.impl.CollectExpCSImpl <em>Collect Exp CS</em>}' class.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.doc.minioclcs.impl.CollectExpCSImpl
+	 * @see org.eclipse.qvtd.doc.minioclcs.impl.MinioclcsPackageImpl#getCollectExpCS()
+	 * @generated
+	 */
+  int COLLECT_EXP_CS = 18;
+
+  /**
+	 * The feature id for the '<em><b>Ast</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECT_EXP_CS__AST = LOOP_EXP_CS__AST;
+
+		/**
+	 * The feature id for the '<em><b>It Var</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int COLLECT_EXP_CS__IT_VAR = LOOP_EXP_CS__IT_VAR;
+
+  /**
+	 * The feature id for the '<em><b>Exp</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int COLLECT_EXP_CS__EXP = LOOP_EXP_CS__EXP;
+
+  /**
+	 * The number of structural features of the '<em>Collect Exp CS</em>' class.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int COLLECT_EXP_CS_FEATURE_COUNT = LOOP_EXP_CS_FEATURE_COUNT + 0;
+
+  /**
+	 * The meta object id for the '{@link org.eclipse.qvtd.doc.minioclcs.impl.IteratorVarCSImpl <em>Iterator Var CS</em>}' class.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.doc.minioclcs.impl.IteratorVarCSImpl
+	 * @see org.eclipse.qvtd.doc.minioclcs.impl.MinioclcsPackageImpl#getIteratorVarCS()
+	 * @generated
+	 */
+  int ITERATOR_VAR_CS = 19;
+
+  /**
+	 * The feature id for the '<em><b>Ast</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITERATOR_VAR_CS__AST = CS_TRACE__AST;
+
+		/**
+	 * The feature id for the '<em><b>It Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int ITERATOR_VAR_CS__IT_NAME = CS_TRACE_FEATURE_COUNT + 0;
+
+  /**
+	 * The feature id for the '<em><b>It Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int ITERATOR_VAR_CS__IT_TYPE = CS_TRACE_FEATURE_COUNT + 1;
+
+  /**
+	 * The number of structural features of the '<em>Iterator Var CS</em>' class.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int ITERATOR_VAR_CS_FEATURE_COUNT = CS_TRACE_FEATURE_COUNT + 2;
+
+  /**
+	 * The meta object id for the '{@link org.eclipse.qvtd.doc.minioclcs.impl.IterateExpCSImpl <em>Iterate Exp CS</em>}' class.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.doc.minioclcs.impl.IterateExpCSImpl
+	 * @see org.eclipse.qvtd.doc.minioclcs.impl.MinioclcsPackageImpl#getIterateExpCS()
+	 * @generated
+	 */
+  int ITERATE_EXP_CS = 20;
+
+  /**
+	 * The feature id for the '<em><b>Ast</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITERATE_EXP_CS__AST = LOOP_EXP_CS__AST;
+
+		/**
+	 * The feature id for the '<em><b>It Var</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int ITERATE_EXP_CS__IT_VAR = LOOP_EXP_CS__IT_VAR;
+
+  /**
+	 * The feature id for the '<em><b>Exp</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int ITERATE_EXP_CS__EXP = LOOP_EXP_CS__EXP;
+
+  /**
+	 * The feature id for the '<em><b>Acc Var</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int ITERATE_EXP_CS__ACC_VAR = LOOP_EXP_CS_FEATURE_COUNT + 0;
+
+  /**
+	 * The number of structural features of the '<em>Iterate Exp CS</em>' class.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int ITERATE_EXP_CS_FEATURE_COUNT = LOOP_EXP_CS_FEATURE_COUNT + 1;
+
+  /**
+	 * The meta object id for the '{@link org.eclipse.qvtd.doc.minioclcs.impl.AccVarCSImpl <em>Acc Var CS</em>}' class.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.doc.minioclcs.impl.AccVarCSImpl
+	 * @see org.eclipse.qvtd.doc.minioclcs.impl.MinioclcsPackageImpl#getAccVarCS()
+	 * @generated
+	 */
+  int ACC_VAR_CS = 21;
+
+  /**
+	 * The feature id for the '<em><b>Ast</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACC_VAR_CS__AST = CS_TRACE__AST;
+
+		/**
+	 * The feature id for the '<em><b>Acc Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int ACC_VAR_CS__ACC_NAME = CS_TRACE_FEATURE_COUNT + 0;
+
+  /**
+	 * The feature id for the '<em><b>Acc Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int ACC_VAR_CS__ACC_TYPE = CS_TRACE_FEATURE_COUNT + 1;
+
+  /**
+	 * The feature id for the '<em><b>Acc Init Exp</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int ACC_VAR_CS__ACC_INIT_EXP = CS_TRACE_FEATURE_COUNT + 2;
+
+  /**
+	 * The number of structural features of the '<em>Acc Var CS</em>' class.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int ACC_VAR_CS_FEATURE_COUNT = CS_TRACE_FEATURE_COUNT + 3;
+
+  /**
 	 * The meta object id for the '{@link org.eclipse.qvtd.doc.minioclcs.impl.NameExpCSImpl <em>Name Exp CS</em>}' class.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -726,7 +1241,7 @@ public interface MinioclcsPackage extends EPackage
 	 * @see org.eclipse.qvtd.doc.minioclcs.impl.MinioclcsPackageImpl#getNameExpCS()
 	 * @generated
 	 */
-  int NAME_EXP_CS = 12;
+  int NAME_EXP_CS = 22;
 
   /**
 	 * The feature id for the '<em><b>Ast</b></em>' reference.
@@ -774,13 +1289,13 @@ public interface MinioclcsPackage extends EPackage
   int NAME_EXP_CS__SOURCE = PRIMARY_EXP_CS__SOURCE;
 
   /**
-	 * The feature id for the '<em><b>Name Exp</b></em>' containment reference.
+	 * The feature id for the '<em><b>Nav Exp</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-  int NAME_EXP_CS__NAME_EXP = PRIMARY_EXP_CS__NAME_EXP;
+  int NAME_EXP_CS__NAV_EXP = PRIMARY_EXP_CS__NAV_EXP;
 
   /**
 	 * The feature id for the '<em><b>Exp Name</b></em>' containment reference.
@@ -817,7 +1332,7 @@ public interface MinioclcsPackage extends EPackage
 	 * @see org.eclipse.qvtd.doc.minioclcs.impl.MinioclcsPackageImpl#getRoundedBracketClauseCS()
 	 * @generated
 	 */
-  int ROUNDED_BRACKET_CLAUSE_CS = 13;
+  int ROUNDED_BRACKET_CLAUSE_CS = 23;
 
   /**
 	 * The feature id for the '<em><b>Ast</b></em>' reference.
@@ -854,7 +1369,7 @@ public interface MinioclcsPackage extends EPackage
 	 * @see org.eclipse.qvtd.doc.minioclcs.impl.MinioclcsPackageImpl#getLiteralExpCS()
 	 * @generated
 	 */
-  int LITERAL_EXP_CS = 14;
+  int LITERAL_EXP_CS = 24;
 
   /**
 	 * The feature id for the '<em><b>Ast</b></em>' reference.
@@ -902,13 +1417,13 @@ public interface MinioclcsPackage extends EPackage
   int LITERAL_EXP_CS__SOURCE = PRIMARY_EXP_CS__SOURCE;
 
   /**
-	 * The feature id for the '<em><b>Name Exp</b></em>' containment reference.
+	 * The feature id for the '<em><b>Nav Exp</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-  int LITERAL_EXP_CS__NAME_EXP = PRIMARY_EXP_CS__NAME_EXP;
+  int LITERAL_EXP_CS__NAV_EXP = PRIMARY_EXP_CS__NAV_EXP;
 
   /**
 	 * The number of structural features of the '<em>Literal Exp CS</em>' class.
@@ -927,7 +1442,7 @@ public interface MinioclcsPackage extends EPackage
 	 * @see org.eclipse.qvtd.doc.minioclcs.impl.MinioclcsPackageImpl#getIntLiteralExpCS()
 	 * @generated
 	 */
-  int INT_LITERAL_EXP_CS = 15;
+  int INT_LITERAL_EXP_CS = 25;
 
   /**
 	 * The feature id for the '<em><b>Ast</b></em>' reference.
@@ -975,13 +1490,13 @@ public interface MinioclcsPackage extends EPackage
   int INT_LITERAL_EXP_CS__SOURCE = LITERAL_EXP_CS__SOURCE;
 
   /**
-	 * The feature id for the '<em><b>Name Exp</b></em>' containment reference.
+	 * The feature id for the '<em><b>Nav Exp</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-  int INT_LITERAL_EXP_CS__NAME_EXP = LITERAL_EXP_CS__NAME_EXP;
+  int INT_LITERAL_EXP_CS__NAV_EXP = LITERAL_EXP_CS__NAV_EXP;
 
   /**
 	 * The feature id for the '<em><b>Int Symbol</b></em>' attribute.
@@ -1002,88 +1517,6 @@ public interface MinioclcsPackage extends EPackage
   int INT_LITERAL_EXP_CS_FEATURE_COUNT = LITERAL_EXP_CS_FEATURE_COUNT + 1;
 
   /**
-	 * The meta object id for the '{@link org.eclipse.qvtd.doc.minioclcs.impl.StringLiteralExpCSImpl <em>String Literal Exp CS</em>}' class.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.doc.minioclcs.impl.StringLiteralExpCSImpl
-	 * @see org.eclipse.qvtd.doc.minioclcs.impl.MinioclcsPackageImpl#getStringLiteralExpCS()
-	 * @generated
-	 */
-  int STRING_LITERAL_EXP_CS = 16;
-
-  /**
-	 * The feature id for the '<em><b>Ast</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRING_LITERAL_EXP_CS__AST = LITERAL_EXP_CS__AST;
-
-		/**
-	 * The feature id for the '<em><b>Left</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-  int STRING_LITERAL_EXP_CS__LEFT = LITERAL_EXP_CS__LEFT;
-
-  /**
-	 * The feature id for the '<em><b>Op</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-  int STRING_LITERAL_EXP_CS__OP = LITERAL_EXP_CS__OP;
-
-  /**
-	 * The feature id for the '<em><b>Right</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-  int STRING_LITERAL_EXP_CS__RIGHT = LITERAL_EXP_CS__RIGHT;
-
-  /**
-	 * The feature id for the '<em><b>Source</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-  int STRING_LITERAL_EXP_CS__SOURCE = LITERAL_EXP_CS__SOURCE;
-
-  /**
-	 * The feature id for the '<em><b>Name Exp</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-  int STRING_LITERAL_EXP_CS__NAME_EXP = LITERAL_EXP_CS__NAME_EXP;
-
-  /**
-	 * The feature id for the '<em><b>String Symbol</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-  int STRING_LITERAL_EXP_CS__STRING_SYMBOL = LITERAL_EXP_CS_FEATURE_COUNT + 0;
-
-  /**
-	 * The number of structural features of the '<em>String Literal Exp CS</em>' class.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-  int STRING_LITERAL_EXP_CS_FEATURE_COUNT = LITERAL_EXP_CS_FEATURE_COUNT + 1;
-
-  /**
 	 * The meta object id for the '{@link org.eclipse.qvtd.doc.minioclcs.impl.BooleanLiteralExpCSImpl <em>Boolean Literal Exp CS</em>}' class.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1091,7 +1524,7 @@ public interface MinioclcsPackage extends EPackage
 	 * @see org.eclipse.qvtd.doc.minioclcs.impl.MinioclcsPackageImpl#getBooleanLiteralExpCS()
 	 * @generated
 	 */
-  int BOOLEAN_LITERAL_EXP_CS = 17;
+  int BOOLEAN_LITERAL_EXP_CS = 26;
 
   /**
 	 * The feature id for the '<em><b>Ast</b></em>' reference.
@@ -1139,13 +1572,13 @@ public interface MinioclcsPackage extends EPackage
   int BOOLEAN_LITERAL_EXP_CS__SOURCE = LITERAL_EXP_CS__SOURCE;
 
   /**
-	 * The feature id for the '<em><b>Name Exp</b></em>' containment reference.
+	 * The feature id for the '<em><b>Nav Exp</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-  int BOOLEAN_LITERAL_EXP_CS__NAME_EXP = LITERAL_EXP_CS__NAME_EXP;
+  int BOOLEAN_LITERAL_EXP_CS__NAV_EXP = LITERAL_EXP_CS__NAV_EXP;
 
   /**
 	 * The number of structural features of the '<em>Boolean Literal Exp CS</em>' class.
@@ -1157,6 +1590,362 @@ public interface MinioclcsPackage extends EPackage
   int BOOLEAN_LITERAL_EXP_CS_FEATURE_COUNT = LITERAL_EXP_CS_FEATURE_COUNT + 0;
 
   /**
+	 * The meta object id for the '{@link org.eclipse.qvtd.doc.minioclcs.impl.NullLiteralExpCSImpl <em>Null Literal Exp CS</em>}' class.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.doc.minioclcs.impl.NullLiteralExpCSImpl
+	 * @see org.eclipse.qvtd.doc.minioclcs.impl.MinioclcsPackageImpl#getNullLiteralExpCS()
+	 * @generated
+	 */
+  int NULL_LITERAL_EXP_CS = 27;
+
+  /**
+	 * The feature id for the '<em><b>Ast</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NULL_LITERAL_EXP_CS__AST = LITERAL_EXP_CS__AST;
+
+		/**
+	 * The feature id for the '<em><b>Left</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int NULL_LITERAL_EXP_CS__LEFT = LITERAL_EXP_CS__LEFT;
+
+  /**
+	 * The feature id for the '<em><b>Op</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int NULL_LITERAL_EXP_CS__OP = LITERAL_EXP_CS__OP;
+
+  /**
+	 * The feature id for the '<em><b>Right</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int NULL_LITERAL_EXP_CS__RIGHT = LITERAL_EXP_CS__RIGHT;
+
+  /**
+	 * The feature id for the '<em><b>Source</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int NULL_LITERAL_EXP_CS__SOURCE = LITERAL_EXP_CS__SOURCE;
+
+  /**
+	 * The feature id for the '<em><b>Nav Exp</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int NULL_LITERAL_EXP_CS__NAV_EXP = LITERAL_EXP_CS__NAV_EXP;
+
+  /**
+	 * The number of structural features of the '<em>Null Literal Exp CS</em>' class.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int NULL_LITERAL_EXP_CS_FEATURE_COUNT = LITERAL_EXP_CS_FEATURE_COUNT + 0;
+
+  /**
+	 * The meta object id for the '{@link org.eclipse.qvtd.doc.minioclcs.impl.CollectionLiteralExpCSImpl <em>Collection Literal Exp CS</em>}' class.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.doc.minioclcs.impl.CollectionLiteralExpCSImpl
+	 * @see org.eclipse.qvtd.doc.minioclcs.impl.MinioclcsPackageImpl#getCollectionLiteralExpCS()
+	 * @generated
+	 */
+  int COLLECTION_LITERAL_EXP_CS = 28;
+
+  /**
+	 * The feature id for the '<em><b>Ast</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_LITERAL_EXP_CS__AST = LITERAL_EXP_CS__AST;
+
+		/**
+	 * The feature id for the '<em><b>Left</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int COLLECTION_LITERAL_EXP_CS__LEFT = LITERAL_EXP_CS__LEFT;
+
+  /**
+	 * The feature id for the '<em><b>Op</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int COLLECTION_LITERAL_EXP_CS__OP = LITERAL_EXP_CS__OP;
+
+  /**
+	 * The feature id for the '<em><b>Right</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int COLLECTION_LITERAL_EXP_CS__RIGHT = LITERAL_EXP_CS__RIGHT;
+
+  /**
+	 * The feature id for the '<em><b>Source</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int COLLECTION_LITERAL_EXP_CS__SOURCE = LITERAL_EXP_CS__SOURCE;
+
+  /**
+	 * The feature id for the '<em><b>Nav Exp</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int COLLECTION_LITERAL_EXP_CS__NAV_EXP = LITERAL_EXP_CS__NAV_EXP;
+
+  /**
+	 * The feature id for the '<em><b>Kind</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int COLLECTION_LITERAL_EXP_CS__KIND = LITERAL_EXP_CS_FEATURE_COUNT + 0;
+
+  /**
+	 * The feature id for the '<em><b>Parts</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int COLLECTION_LITERAL_EXP_CS__PARTS = LITERAL_EXP_CS_FEATURE_COUNT + 1;
+
+  /**
+	 * The number of structural features of the '<em>Collection Literal Exp CS</em>' class.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int COLLECTION_LITERAL_EXP_CS_FEATURE_COUNT = LITERAL_EXP_CS_FEATURE_COUNT + 2;
+
+  /**
+	 * The meta object id for the '{@link org.eclipse.qvtd.doc.minioclcs.impl.CollectionLiteralPartCSImpl <em>Collection Literal Part CS</em>}' class.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.doc.minioclcs.impl.CollectionLiteralPartCSImpl
+	 * @see org.eclipse.qvtd.doc.minioclcs.impl.MinioclcsPackageImpl#getCollectionLiteralPartCS()
+	 * @generated
+	 */
+  int COLLECTION_LITERAL_PART_CS = 29;
+
+  /**
+	 * The feature id for the '<em><b>Ast</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_LITERAL_PART_CS__AST = CS_TRACE__AST;
+
+		/**
+	 * The feature id for the '<em><b>First</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int COLLECTION_LITERAL_PART_CS__FIRST = CS_TRACE_FEATURE_COUNT + 0;
+
+  /**
+	 * The feature id for the '<em><b>Last</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int COLLECTION_LITERAL_PART_CS__LAST = CS_TRACE_FEATURE_COUNT + 1;
+
+  /**
+	 * The number of structural features of the '<em>Collection Literal Part CS</em>' class.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int COLLECTION_LITERAL_PART_CS_FEATURE_COUNT = CS_TRACE_FEATURE_COUNT + 2;
+
+  /**
+	 * The meta object id for the '{@link org.eclipse.qvtd.doc.minioclcs.impl.LetExpCSImpl <em>Let Exp CS</em>}' class.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.doc.minioclcs.impl.LetExpCSImpl
+	 * @see org.eclipse.qvtd.doc.minioclcs.impl.MinioclcsPackageImpl#getLetExpCS()
+	 * @generated
+	 */
+  int LET_EXP_CS = 30;
+
+  /**
+	 * The feature id for the '<em><b>Ast</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LET_EXP_CS__AST = PRIMARY_EXP_CS__AST;
+
+		/**
+	 * The feature id for the '<em><b>Left</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int LET_EXP_CS__LEFT = PRIMARY_EXP_CS__LEFT;
+
+  /**
+	 * The feature id for the '<em><b>Op</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int LET_EXP_CS__OP = PRIMARY_EXP_CS__OP;
+
+  /**
+	 * The feature id for the '<em><b>Right</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int LET_EXP_CS__RIGHT = PRIMARY_EXP_CS__RIGHT;
+
+  /**
+	 * The feature id for the '<em><b>Source</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int LET_EXP_CS__SOURCE = PRIMARY_EXP_CS__SOURCE;
+
+  /**
+	 * The feature id for the '<em><b>Nav Exp</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int LET_EXP_CS__NAV_EXP = PRIMARY_EXP_CS__NAV_EXP;
+
+  /**
+	 * The feature id for the '<em><b>Let Vars</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int LET_EXP_CS__LET_VARS = PRIMARY_EXP_CS_FEATURE_COUNT + 0;
+
+  /**
+	 * The feature id for the '<em><b>In Exp</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int LET_EXP_CS__IN_EXP = PRIMARY_EXP_CS_FEATURE_COUNT + 1;
+
+  /**
+	 * The number of structural features of the '<em>Let Exp CS</em>' class.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int LET_EXP_CS_FEATURE_COUNT = PRIMARY_EXP_CS_FEATURE_COUNT + 2;
+
+  /**
+	 * The meta object id for the '{@link org.eclipse.qvtd.doc.minioclcs.impl.LetVarCSImpl <em>Let Var CS</em>}' class.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.doc.minioclcs.impl.LetVarCSImpl
+	 * @see org.eclipse.qvtd.doc.minioclcs.impl.MinioclcsPackageImpl#getLetVarCS()
+	 * @generated
+	 */
+  int LET_VAR_CS = 31;
+
+  /**
+	 * The feature id for the '<em><b>Ast</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LET_VAR_CS__AST = CS_TRACE__AST;
+
+		/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int LET_VAR_CS__NAME = CS_TRACE_FEATURE_COUNT + 0;
+
+  /**
+	 * The feature id for the '<em><b>Type Ref</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int LET_VAR_CS__TYPE_REF = CS_TRACE_FEATURE_COUNT + 1;
+
+  /**
+	 * The feature id for the '<em><b>Init Exp</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int LET_VAR_CS__INIT_EXP = CS_TRACE_FEATURE_COUNT + 2;
+
+  /**
+	 * The number of structural features of the '<em>Let Var CS</em>' class.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int LET_VAR_CS_FEATURE_COUNT = CS_TRACE_FEATURE_COUNT + 3;
+
+  /**
 	 * The meta object id for the '{@link org.eclipse.qvtd.doc.minioclcs.impl.PathNameCSImpl <em>Path Name CS</em>}' class.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1164,7 +1953,7 @@ public interface MinioclcsPackage extends EPackage
 	 * @see org.eclipse.qvtd.doc.minioclcs.impl.MinioclcsPackageImpl#getPathNameCS()
 	 * @generated
 	 */
-  int PATH_NAME_CS = 18;
+  int PATH_NAME_CS = 32;
 
   /**
 	 * The feature id for the '<em><b>Ast</b></em>' reference.
@@ -1176,22 +1965,13 @@ public interface MinioclcsPackage extends EPackage
 	int PATH_NAME_CS__AST = CS_TRACE__AST;
 
 		/**
-	 * The feature id for the '<em><b>Path</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-  int PATH_NAME_CS__PATH = CS_TRACE_FEATURE_COUNT + 0;
-
-  /**
 	 * The feature id for the '<em><b>Path Elements</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-  int PATH_NAME_CS__PATH_ELEMENTS = CS_TRACE_FEATURE_COUNT + 1;
+  int PATH_NAME_CS__PATH_ELEMENTS = CS_TRACE_FEATURE_COUNT + 0;
 
   /**
 	 * The number of structural features of the '<em>Path Name CS</em>' class.
@@ -1200,7 +1980,7 @@ public interface MinioclcsPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-  int PATH_NAME_CS_FEATURE_COUNT = CS_TRACE_FEATURE_COUNT + 2;
+  int PATH_NAME_CS_FEATURE_COUNT = CS_TRACE_FEATURE_COUNT + 1;
 
   /**
 	 * The meta object id for the '{@link org.eclipse.qvtd.doc.minioclcs.impl.PathElementCSImpl <em>Path Element CS</em>}' class.
@@ -1210,7 +1990,7 @@ public interface MinioclcsPackage extends EPackage
 	 * @see org.eclipse.qvtd.doc.minioclcs.impl.MinioclcsPackageImpl#getPathElementCS()
 	 * @generated
 	 */
-  int PATH_ELEMENT_CS = 19;
+  int PATH_ELEMENT_CS = 33;
 
   /**
 	 * The feature id for the '<em><b>Ast</b></em>' reference.
@@ -1247,7 +2027,7 @@ public interface MinioclcsPackage extends EPackage
 	 * @see org.eclipse.qvtd.doc.minioclcs.impl.MinioclcsPackageImpl#getBooleanExpCS()
 	 * @generated
 	 */
-  int BOOLEAN_EXP_CS = 20;
+  int BOOLEAN_EXP_CS = 34;
 
   /**
 	 * The feature id for the '<em><b>Ast</b></em>' reference.
@@ -1295,13 +2075,13 @@ public interface MinioclcsPackage extends EPackage
   int BOOLEAN_EXP_CS__SOURCE = BOOLEAN_LITERAL_EXP_CS__SOURCE;
 
   /**
-	 * The feature id for the '<em><b>Name Exp</b></em>' containment reference.
+	 * The feature id for the '<em><b>Nav Exp</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-  int BOOLEAN_EXP_CS__NAME_EXP = BOOLEAN_LITERAL_EXP_CS__NAME_EXP;
+  int BOOLEAN_EXP_CS__NAV_EXP = BOOLEAN_LITERAL_EXP_CS__NAV_EXP;
 
   /**
 	 * The feature id for the '<em><b>Bool Symbol</b></em>' attribute.
@@ -1320,6 +2100,16 @@ public interface MinioclcsPackage extends EPackage
 	 * @ordered
 	 */
   int BOOLEAN_EXP_CS_FEATURE_COUNT = BOOLEAN_LITERAL_EXP_CS_FEATURE_COUNT + 1;
+
+  /**
+	 * The meta object id for the '{@link org.eclipse.qvtd.doc.minioclcs.CollectionKindCS <em>Collection Kind CS</em>}' enum.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.doc.minioclcs.CollectionKindCS
+	 * @see org.eclipse.qvtd.doc.minioclcs.impl.MinioclcsPackageImpl#getCollectionKindCS()
+	 * @generated
+	 */
+  int COLLECTION_KIND_CS = 36;
 
 
   /**
@@ -1387,15 +2177,36 @@ public interface MinioclcsPackage extends EPackage
   EReference getPackageCS_Packages();
 
   /**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.doc.minioclcs.PackageCS#getClasses <em>Classes</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.doc.minioclcs.PackageCS#getClassifiers <em>Classifiers</em>}'.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Classes</em>'.
-	 * @see org.eclipse.qvtd.doc.minioclcs.PackageCS#getClasses()
+	 * @return the meta object for the containment reference list '<em>Classifiers</em>'.
+	 * @see org.eclipse.qvtd.doc.minioclcs.PackageCS#getClassifiers()
 	 * @see #getPackageCS()
 	 * @generated
 	 */
-  EReference getPackageCS_Classes();
+  EReference getPackageCS_Classifiers();
+
+  /**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.doc.minioclcs.ClassifierCS <em>Classifier CS</em>}'.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Classifier CS</em>'.
+	 * @see org.eclipse.qvtd.doc.minioclcs.ClassifierCS
+	 * @generated
+	 */
+  EClass getClassifierCS();
+
+  /**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.doc.minioclcs.ClassifierCS#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see org.eclipse.qvtd.doc.minioclcs.ClassifierCS#getName()
+	 * @see #getClassifierCS()
+	 * @generated
+	 */
+  EAttribute getClassifierCS_Name();
 
   /**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.doc.minioclcs.ClassCS <em>Class CS</em>}'.
@@ -1406,17 +2217,6 @@ public interface MinioclcsPackage extends EPackage
 	 * @generated
 	 */
   EClass getClassCS();
-
-  /**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.doc.minioclcs.ClassCS#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see org.eclipse.qvtd.doc.minioclcs.ClassCS#getName()
-	 * @see #getClassCS()
-	 * @generated
-	 */
-  EAttribute getClassCS_Name();
 
   /**
 	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.doc.minioclcs.ClassCS#getExtends <em>Extends</em>}'.
@@ -1452,6 +2252,27 @@ public interface MinioclcsPackage extends EPackage
   EReference getClassCS_Operations();
 
   /**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.doc.minioclcs.DatatypeCS <em>Datatype CS</em>}'.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Datatype CS</em>'.
+	 * @see org.eclipse.qvtd.doc.minioclcs.DatatypeCS
+	 * @generated
+	 */
+  EClass getDatatypeCS();
+
+  /**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.doc.minioclcs.DatatypeCS#getTypeName <em>Type Name</em>}'.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Type Name</em>'.
+	 * @see org.eclipse.qvtd.doc.minioclcs.DatatypeCS#getTypeName()
+	 * @see #getDatatypeCS()
+	 * @generated
+	 */
+  EAttribute getDatatypeCS_TypeName();
+
+  /**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.doc.minioclcs.PropertyCS <em>Property CS</em>}'.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1482,6 +2303,82 @@ public interface MinioclcsPackage extends EPackage
 	 * @generated
 	 */
   EReference getPropertyCS_TypeRef();
+
+  /**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.doc.minioclcs.PropertyCS#getMultiplicity <em>Multiplicity</em>}'.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Multiplicity</em>'.
+	 * @see org.eclipse.qvtd.doc.minioclcs.PropertyCS#getMultiplicity()
+	 * @see #getPropertyCS()
+	 * @generated
+	 */
+  EReference getPropertyCS_Multiplicity();
+
+  /**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.doc.minioclcs.MultiplicityCS <em>Multiplicity CS</em>}'.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Multiplicity CS</em>'.
+	 * @see org.eclipse.qvtd.doc.minioclcs.MultiplicityCS
+	 * @generated
+	 */
+  EClass getMultiplicityCS();
+
+  /**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.doc.minioclcs.MultiplicityCS#isOpt <em>Opt</em>}'.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Opt</em>'.
+	 * @see org.eclipse.qvtd.doc.minioclcs.MultiplicityCS#isOpt()
+	 * @see #getMultiplicityCS()
+	 * @generated
+	 */
+  EAttribute getMultiplicityCS_Opt();
+
+  /**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.doc.minioclcs.MultiplicityCS#isMult <em>Mult</em>}'.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Mult</em>'.
+	 * @see org.eclipse.qvtd.doc.minioclcs.MultiplicityCS#isMult()
+	 * @see #getMultiplicityCS()
+	 * @generated
+	 */
+  EAttribute getMultiplicityCS_Mult();
+
+  /**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.doc.minioclcs.MultiplicityCS#getLower <em>Lower</em>}'.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Lower</em>'.
+	 * @see org.eclipse.qvtd.doc.minioclcs.MultiplicityCS#getLower()
+	 * @see #getMultiplicityCS()
+	 * @generated
+	 */
+  EAttribute getMultiplicityCS_Lower();
+
+  /**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.doc.minioclcs.MultiplicityCS#getUpperInt <em>Upper Int</em>}'.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Upper Int</em>'.
+	 * @see org.eclipse.qvtd.doc.minioclcs.MultiplicityCS#getUpperInt()
+	 * @see #getMultiplicityCS()
+	 * @generated
+	 */
+  EAttribute getMultiplicityCS_UpperInt();
+
+  /**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.doc.minioclcs.MultiplicityCS#isUpperMult <em>Upper Mult</em>}'.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Upper Mult</em>'.
+	 * @see org.eclipse.qvtd.doc.minioclcs.MultiplicityCS#isUpperMult()
+	 * @see #getMultiplicityCS()
+	 * @generated
+	 */
+  EAttribute getMultiplicityCS_UpperMult();
 
   /**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.doc.minioclcs.OperationCS <em>Operation CS</em>}'.
@@ -1697,15 +2594,15 @@ public interface MinioclcsPackage extends EPackage
   EReference getCallExpCS_Source();
 
   /**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.doc.minioclcs.CallExpCS#getNameExp <em>Name Exp</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.doc.minioclcs.CallExpCS#getNavExp <em>Nav Exp</em>}'.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Name Exp</em>'.
-	 * @see org.eclipse.qvtd.doc.minioclcs.CallExpCS#getNameExp()
+	 * @return the meta object for the containment reference '<em>Nav Exp</em>'.
+	 * @see org.eclipse.qvtd.doc.minioclcs.CallExpCS#getNavExp()
 	 * @see #getCallExpCS()
 	 * @generated
 	 */
-  EReference getCallExpCS_NameExp();
+  EReference getCallExpCS_NavExp();
 
   /**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.doc.minioclcs.PrimaryExpCS <em>Primary Exp CS</em>}'.
@@ -1716,6 +2613,164 @@ public interface MinioclcsPackage extends EPackage
 	 * @generated
 	 */
   EClass getPrimaryExpCS();
+
+  /**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.doc.minioclcs.SelfExpCS <em>Self Exp CS</em>}'.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Self Exp CS</em>'.
+	 * @see org.eclipse.qvtd.doc.minioclcs.SelfExpCS
+	 * @generated
+	 */
+  EClass getSelfExpCS();
+
+  /**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.doc.minioclcs.NavigationExpCS <em>Navigation Exp CS</em>}'.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Navigation Exp CS</em>'.
+	 * @see org.eclipse.qvtd.doc.minioclcs.NavigationExpCS
+	 * @generated
+	 */
+  EClass getNavigationExpCS();
+
+  /**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.doc.minioclcs.LoopExpCS <em>Loop Exp CS</em>}'.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Loop Exp CS</em>'.
+	 * @see org.eclipse.qvtd.doc.minioclcs.LoopExpCS
+	 * @generated
+	 */
+  EClass getLoopExpCS();
+
+  /**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.doc.minioclcs.LoopExpCS#getItVar <em>It Var</em>}'.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>It Var</em>'.
+	 * @see org.eclipse.qvtd.doc.minioclcs.LoopExpCS#getItVar()
+	 * @see #getLoopExpCS()
+	 * @generated
+	 */
+  EReference getLoopExpCS_ItVar();
+
+  /**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.doc.minioclcs.LoopExpCS#getExp <em>Exp</em>}'.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Exp</em>'.
+	 * @see org.eclipse.qvtd.doc.minioclcs.LoopExpCS#getExp()
+	 * @see #getLoopExpCS()
+	 * @generated
+	 */
+  EReference getLoopExpCS_Exp();
+
+  /**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.doc.minioclcs.CollectExpCS <em>Collect Exp CS</em>}'.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Collect Exp CS</em>'.
+	 * @see org.eclipse.qvtd.doc.minioclcs.CollectExpCS
+	 * @generated
+	 */
+  EClass getCollectExpCS();
+
+  /**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.doc.minioclcs.IteratorVarCS <em>Iterator Var CS</em>}'.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Iterator Var CS</em>'.
+	 * @see org.eclipse.qvtd.doc.minioclcs.IteratorVarCS
+	 * @generated
+	 */
+  EClass getIteratorVarCS();
+
+  /**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.doc.minioclcs.IteratorVarCS#getItName <em>It Name</em>}'.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>It Name</em>'.
+	 * @see org.eclipse.qvtd.doc.minioclcs.IteratorVarCS#getItName()
+	 * @see #getIteratorVarCS()
+	 * @generated
+	 */
+  EAttribute getIteratorVarCS_ItName();
+
+  /**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.doc.minioclcs.IteratorVarCS#getItType <em>It Type</em>}'.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>It Type</em>'.
+	 * @see org.eclipse.qvtd.doc.minioclcs.IteratorVarCS#getItType()
+	 * @see #getIteratorVarCS()
+	 * @generated
+	 */
+  EReference getIteratorVarCS_ItType();
+
+  /**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.doc.minioclcs.IterateExpCS <em>Iterate Exp CS</em>}'.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Iterate Exp CS</em>'.
+	 * @see org.eclipse.qvtd.doc.minioclcs.IterateExpCS
+	 * @generated
+	 */
+  EClass getIterateExpCS();
+
+  /**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.doc.minioclcs.IterateExpCS#getAccVar <em>Acc Var</em>}'.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Acc Var</em>'.
+	 * @see org.eclipse.qvtd.doc.minioclcs.IterateExpCS#getAccVar()
+	 * @see #getIterateExpCS()
+	 * @generated
+	 */
+  EReference getIterateExpCS_AccVar();
+
+  /**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.doc.minioclcs.AccVarCS <em>Acc Var CS</em>}'.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Acc Var CS</em>'.
+	 * @see org.eclipse.qvtd.doc.minioclcs.AccVarCS
+	 * @generated
+	 */
+  EClass getAccVarCS();
+
+  /**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.doc.minioclcs.AccVarCS#getAccName <em>Acc Name</em>}'.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Acc Name</em>'.
+	 * @see org.eclipse.qvtd.doc.minioclcs.AccVarCS#getAccName()
+	 * @see #getAccVarCS()
+	 * @generated
+	 */
+  EAttribute getAccVarCS_AccName();
+
+  /**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.doc.minioclcs.AccVarCS#getAccType <em>Acc Type</em>}'.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Acc Type</em>'.
+	 * @see org.eclipse.qvtd.doc.minioclcs.AccVarCS#getAccType()
+	 * @see #getAccVarCS()
+	 * @generated
+	 */
+  EReference getAccVarCS_AccType();
+
+  /**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.doc.minioclcs.AccVarCS#getAccInitExp <em>Acc Init Exp</em>}'.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Acc Init Exp</em>'.
+	 * @see org.eclipse.qvtd.doc.minioclcs.AccVarCS#getAccInitExp()
+	 * @see #getAccVarCS()
+	 * @generated
+	 */
+  EReference getAccVarCS_AccInitExp();
 
   /**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.doc.minioclcs.NameExpCS <em>Name Exp CS</em>}'.
@@ -1802,27 +2857,6 @@ public interface MinioclcsPackage extends EPackage
   EAttribute getIntLiteralExpCS_IntSymbol();
 
   /**
-	 * Returns the meta object for class '{@link org.eclipse.qvtd.doc.minioclcs.StringLiteralExpCS <em>String Literal Exp CS</em>}'.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>String Literal Exp CS</em>'.
-	 * @see org.eclipse.qvtd.doc.minioclcs.StringLiteralExpCS
-	 * @generated
-	 */
-  EClass getStringLiteralExpCS();
-
-  /**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.doc.minioclcs.StringLiteralExpCS#getStringSymbol <em>String Symbol</em>}'.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>String Symbol</em>'.
-	 * @see org.eclipse.qvtd.doc.minioclcs.StringLiteralExpCS#getStringSymbol()
-	 * @see #getStringLiteralExpCS()
-	 * @generated
-	 */
-  EAttribute getStringLiteralExpCS_StringSymbol();
-
-  /**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.doc.minioclcs.BooleanLiteralExpCS <em>Boolean Literal Exp CS</em>}'.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1833,6 +2867,155 @@ public interface MinioclcsPackage extends EPackage
   EClass getBooleanLiteralExpCS();
 
   /**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.doc.minioclcs.NullLiteralExpCS <em>Null Literal Exp CS</em>}'.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Null Literal Exp CS</em>'.
+	 * @see org.eclipse.qvtd.doc.minioclcs.NullLiteralExpCS
+	 * @generated
+	 */
+  EClass getNullLiteralExpCS();
+
+  /**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.doc.minioclcs.CollectionLiteralExpCS <em>Collection Literal Exp CS</em>}'.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Collection Literal Exp CS</em>'.
+	 * @see org.eclipse.qvtd.doc.minioclcs.CollectionLiteralExpCS
+	 * @generated
+	 */
+  EClass getCollectionLiteralExpCS();
+
+  /**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.doc.minioclcs.CollectionLiteralExpCS#getKind <em>Kind</em>}'.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Kind</em>'.
+	 * @see org.eclipse.qvtd.doc.minioclcs.CollectionLiteralExpCS#getKind()
+	 * @see #getCollectionLiteralExpCS()
+	 * @generated
+	 */
+  EAttribute getCollectionLiteralExpCS_Kind();
+
+  /**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.doc.minioclcs.CollectionLiteralExpCS#getParts <em>Parts</em>}'.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Parts</em>'.
+	 * @see org.eclipse.qvtd.doc.minioclcs.CollectionLiteralExpCS#getParts()
+	 * @see #getCollectionLiteralExpCS()
+	 * @generated
+	 */
+  EReference getCollectionLiteralExpCS_Parts();
+
+  /**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.doc.minioclcs.CollectionLiteralPartCS <em>Collection Literal Part CS</em>}'.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Collection Literal Part CS</em>'.
+	 * @see org.eclipse.qvtd.doc.minioclcs.CollectionLiteralPartCS
+	 * @generated
+	 */
+  EClass getCollectionLiteralPartCS();
+
+  /**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.doc.minioclcs.CollectionLiteralPartCS#getFirst <em>First</em>}'.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>First</em>'.
+	 * @see org.eclipse.qvtd.doc.minioclcs.CollectionLiteralPartCS#getFirst()
+	 * @see #getCollectionLiteralPartCS()
+	 * @generated
+	 */
+  EReference getCollectionLiteralPartCS_First();
+
+  /**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.doc.minioclcs.CollectionLiteralPartCS#getLast <em>Last</em>}'.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Last</em>'.
+	 * @see org.eclipse.qvtd.doc.minioclcs.CollectionLiteralPartCS#getLast()
+	 * @see #getCollectionLiteralPartCS()
+	 * @generated
+	 */
+  EReference getCollectionLiteralPartCS_Last();
+
+  /**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.doc.minioclcs.LetExpCS <em>Let Exp CS</em>}'.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Let Exp CS</em>'.
+	 * @see org.eclipse.qvtd.doc.minioclcs.LetExpCS
+	 * @generated
+	 */
+  EClass getLetExpCS();
+
+  /**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.doc.minioclcs.LetExpCS#getLetVars <em>Let Vars</em>}'.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Let Vars</em>'.
+	 * @see org.eclipse.qvtd.doc.minioclcs.LetExpCS#getLetVars()
+	 * @see #getLetExpCS()
+	 * @generated
+	 */
+  EReference getLetExpCS_LetVars();
+
+  /**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.doc.minioclcs.LetExpCS#getInExp <em>In Exp</em>}'.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>In Exp</em>'.
+	 * @see org.eclipse.qvtd.doc.minioclcs.LetExpCS#getInExp()
+	 * @see #getLetExpCS()
+	 * @generated
+	 */
+  EReference getLetExpCS_InExp();
+
+  /**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.doc.minioclcs.LetVarCS <em>Let Var CS</em>}'.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Let Var CS</em>'.
+	 * @see org.eclipse.qvtd.doc.minioclcs.LetVarCS
+	 * @generated
+	 */
+  EClass getLetVarCS();
+
+  /**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.doc.minioclcs.LetVarCS#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see org.eclipse.qvtd.doc.minioclcs.LetVarCS#getName()
+	 * @see #getLetVarCS()
+	 * @generated
+	 */
+  EAttribute getLetVarCS_Name();
+
+  /**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.doc.minioclcs.LetVarCS#getTypeRef <em>Type Ref</em>}'.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Type Ref</em>'.
+	 * @see org.eclipse.qvtd.doc.minioclcs.LetVarCS#getTypeRef()
+	 * @see #getLetVarCS()
+	 * @generated
+	 */
+  EReference getLetVarCS_TypeRef();
+
+  /**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.doc.minioclcs.LetVarCS#getInitExp <em>Init Exp</em>}'.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Init Exp</em>'.
+	 * @see org.eclipse.qvtd.doc.minioclcs.LetVarCS#getInitExp()
+	 * @see #getLetVarCS()
+	 * @generated
+	 */
+  EReference getLetVarCS_InitExp();
+
+  /**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.doc.minioclcs.PathNameCS <em>Path Name CS</em>}'.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1841,17 +3024,6 @@ public interface MinioclcsPackage extends EPackage
 	 * @generated
 	 */
   EClass getPathNameCS();
-
-  /**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.doc.minioclcs.PathNameCS#getPath <em>Path</em>}'.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Path</em>'.
-	 * @see org.eclipse.qvtd.doc.minioclcs.PathNameCS#getPath()
-	 * @see #getPathNameCS()
-	 * @generated
-	 */
-  EReference getPathNameCS_Path();
 
   /**
 	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.doc.minioclcs.PathNameCS#getPathElements <em>Path Elements</em>}'.
@@ -1928,6 +3100,16 @@ public interface MinioclcsPackage extends EPackage
 	EReference getCSTrace_Ast();
 
 		/**
+	 * Returns the meta object for enum '{@link org.eclipse.qvtd.doc.minioclcs.CollectionKindCS <em>Collection Kind CS</em>}'.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Collection Kind CS</em>'.
+	 * @see org.eclipse.qvtd.doc.minioclcs.CollectionKindCS
+	 * @generated
+	 */
+  EEnum getCollectionKindCS();
+
+  /**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -2003,12 +3185,30 @@ public interface MinioclcsPackage extends EPackage
     EReference PACKAGE_CS__PACKAGES = eINSTANCE.getPackageCS_Packages();
 
     /**
-		 * The meta object literal for the '<em><b>Classes</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Classifiers</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
 		 * @generated
 		 */
-    EReference PACKAGE_CS__CLASSES = eINSTANCE.getPackageCS_Classes();
+    EReference PACKAGE_CS__CLASSIFIERS = eINSTANCE.getPackageCS_Classifiers();
+
+    /**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.doc.minioclcs.impl.ClassifierCSImpl <em>Classifier CS</em>}' class.
+		 * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.doc.minioclcs.impl.ClassifierCSImpl
+		 * @see org.eclipse.qvtd.doc.minioclcs.impl.MinioclcsPackageImpl#getClassifierCS()
+		 * @generated
+		 */
+    EClass CLASSIFIER_CS = eINSTANCE.getClassifierCS();
+
+    /**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+		 * @generated
+		 */
+    EAttribute CLASSIFIER_CS__NAME = eINSTANCE.getClassifierCS_Name();
 
     /**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.doc.minioclcs.impl.ClassCSImpl <em>Class CS</em>}' class.
@@ -2019,14 +3219,6 @@ public interface MinioclcsPackage extends EPackage
 		 * @generated
 		 */
     EClass CLASS_CS = eINSTANCE.getClassCS();
-
-    /**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-		 * @generated
-		 */
-    EAttribute CLASS_CS__NAME = eINSTANCE.getClassCS_Name();
 
     /**
 		 * The meta object literal for the '<em><b>Extends</b></em>' containment reference feature.
@@ -2053,6 +3245,24 @@ public interface MinioclcsPackage extends EPackage
     EReference CLASS_CS__OPERATIONS = eINSTANCE.getClassCS_Operations();
 
     /**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.doc.minioclcs.impl.DatatypeCSImpl <em>Datatype CS</em>}' class.
+		 * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.doc.minioclcs.impl.DatatypeCSImpl
+		 * @see org.eclipse.qvtd.doc.minioclcs.impl.MinioclcsPackageImpl#getDatatypeCS()
+		 * @generated
+		 */
+    EClass DATATYPE_CS = eINSTANCE.getDatatypeCS();
+
+    /**
+		 * The meta object literal for the '<em><b>Type Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+		 * @generated
+		 */
+    EAttribute DATATYPE_CS__TYPE_NAME = eINSTANCE.getDatatypeCS_TypeName();
+
+    /**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.doc.minioclcs.impl.PropertyCSImpl <em>Property CS</em>}' class.
 		 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -2077,6 +3287,64 @@ public interface MinioclcsPackage extends EPackage
 		 * @generated
 		 */
     EReference PROPERTY_CS__TYPE_REF = eINSTANCE.getPropertyCS_TypeRef();
+
+    /**
+		 * The meta object literal for the '<em><b>Multiplicity</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+		 * @generated
+		 */
+    EReference PROPERTY_CS__MULTIPLICITY = eINSTANCE.getPropertyCS_Multiplicity();
+
+    /**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.doc.minioclcs.impl.MultiplicityCSImpl <em>Multiplicity CS</em>}' class.
+		 * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.doc.minioclcs.impl.MultiplicityCSImpl
+		 * @see org.eclipse.qvtd.doc.minioclcs.impl.MinioclcsPackageImpl#getMultiplicityCS()
+		 * @generated
+		 */
+    EClass MULTIPLICITY_CS = eINSTANCE.getMultiplicityCS();
+
+    /**
+		 * The meta object literal for the '<em><b>Opt</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+		 * @generated
+		 */
+    EAttribute MULTIPLICITY_CS__OPT = eINSTANCE.getMultiplicityCS_Opt();
+
+    /**
+		 * The meta object literal for the '<em><b>Mult</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+		 * @generated
+		 */
+    EAttribute MULTIPLICITY_CS__MULT = eINSTANCE.getMultiplicityCS_Mult();
+
+    /**
+		 * The meta object literal for the '<em><b>Lower</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+		 * @generated
+		 */
+    EAttribute MULTIPLICITY_CS__LOWER = eINSTANCE.getMultiplicityCS_Lower();
+
+    /**
+		 * The meta object literal for the '<em><b>Upper Int</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+		 * @generated
+		 */
+    EAttribute MULTIPLICITY_CS__UPPER_INT = eINSTANCE.getMultiplicityCS_UpperInt();
+
+    /**
+		 * The meta object literal for the '<em><b>Upper Mult</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+		 * @generated
+		 */
+    EAttribute MULTIPLICITY_CS__UPPER_MULT = eINSTANCE.getMultiplicityCS_UpperMult();
 
     /**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.doc.minioclcs.impl.OperationCSImpl <em>Operation CS</em>}' class.
@@ -2253,12 +3521,12 @@ public interface MinioclcsPackage extends EPackage
     EReference CALL_EXP_CS__SOURCE = eINSTANCE.getCallExpCS_Source();
 
     /**
-		 * The meta object literal for the '<em><b>Name Exp</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Nav Exp</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
 		 * @generated
 		 */
-    EReference CALL_EXP_CS__NAME_EXP = eINSTANCE.getCallExpCS_NameExp();
+    EReference CALL_EXP_CS__NAV_EXP = eINSTANCE.getCallExpCS_NavExp();
 
     /**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.doc.minioclcs.impl.PrimaryExpCSImpl <em>Primary Exp CS</em>}' class.
@@ -2269,6 +3537,140 @@ public interface MinioclcsPackage extends EPackage
 		 * @generated
 		 */
     EClass PRIMARY_EXP_CS = eINSTANCE.getPrimaryExpCS();
+
+    /**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.doc.minioclcs.impl.SelfExpCSImpl <em>Self Exp CS</em>}' class.
+		 * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.doc.minioclcs.impl.SelfExpCSImpl
+		 * @see org.eclipse.qvtd.doc.minioclcs.impl.MinioclcsPackageImpl#getSelfExpCS()
+		 * @generated
+		 */
+    EClass SELF_EXP_CS = eINSTANCE.getSelfExpCS();
+
+    /**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.doc.minioclcs.impl.NavigationExpCSImpl <em>Navigation Exp CS</em>}' class.
+		 * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.doc.minioclcs.impl.NavigationExpCSImpl
+		 * @see org.eclipse.qvtd.doc.minioclcs.impl.MinioclcsPackageImpl#getNavigationExpCS()
+		 * @generated
+		 */
+    EClass NAVIGATION_EXP_CS = eINSTANCE.getNavigationExpCS();
+
+    /**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.doc.minioclcs.impl.LoopExpCSImpl <em>Loop Exp CS</em>}' class.
+		 * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.doc.minioclcs.impl.LoopExpCSImpl
+		 * @see org.eclipse.qvtd.doc.minioclcs.impl.MinioclcsPackageImpl#getLoopExpCS()
+		 * @generated
+		 */
+    EClass LOOP_EXP_CS = eINSTANCE.getLoopExpCS();
+
+    /**
+		 * The meta object literal for the '<em><b>It Var</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+		 * @generated
+		 */
+    EReference LOOP_EXP_CS__IT_VAR = eINSTANCE.getLoopExpCS_ItVar();
+
+    /**
+		 * The meta object literal for the '<em><b>Exp</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+		 * @generated
+		 */
+    EReference LOOP_EXP_CS__EXP = eINSTANCE.getLoopExpCS_Exp();
+
+    /**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.doc.minioclcs.impl.CollectExpCSImpl <em>Collect Exp CS</em>}' class.
+		 * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.doc.minioclcs.impl.CollectExpCSImpl
+		 * @see org.eclipse.qvtd.doc.minioclcs.impl.MinioclcsPackageImpl#getCollectExpCS()
+		 * @generated
+		 */
+    EClass COLLECT_EXP_CS = eINSTANCE.getCollectExpCS();
+
+    /**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.doc.minioclcs.impl.IteratorVarCSImpl <em>Iterator Var CS</em>}' class.
+		 * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.doc.minioclcs.impl.IteratorVarCSImpl
+		 * @see org.eclipse.qvtd.doc.minioclcs.impl.MinioclcsPackageImpl#getIteratorVarCS()
+		 * @generated
+		 */
+    EClass ITERATOR_VAR_CS = eINSTANCE.getIteratorVarCS();
+
+    /**
+		 * The meta object literal for the '<em><b>It Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+		 * @generated
+		 */
+    EAttribute ITERATOR_VAR_CS__IT_NAME = eINSTANCE.getIteratorVarCS_ItName();
+
+    /**
+		 * The meta object literal for the '<em><b>It Type</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+		 * @generated
+		 */
+    EReference ITERATOR_VAR_CS__IT_TYPE = eINSTANCE.getIteratorVarCS_ItType();
+
+    /**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.doc.minioclcs.impl.IterateExpCSImpl <em>Iterate Exp CS</em>}' class.
+		 * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.doc.minioclcs.impl.IterateExpCSImpl
+		 * @see org.eclipse.qvtd.doc.minioclcs.impl.MinioclcsPackageImpl#getIterateExpCS()
+		 * @generated
+		 */
+    EClass ITERATE_EXP_CS = eINSTANCE.getIterateExpCS();
+
+    /**
+		 * The meta object literal for the '<em><b>Acc Var</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+		 * @generated
+		 */
+    EReference ITERATE_EXP_CS__ACC_VAR = eINSTANCE.getIterateExpCS_AccVar();
+
+    /**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.doc.minioclcs.impl.AccVarCSImpl <em>Acc Var CS</em>}' class.
+		 * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.doc.minioclcs.impl.AccVarCSImpl
+		 * @see org.eclipse.qvtd.doc.minioclcs.impl.MinioclcsPackageImpl#getAccVarCS()
+		 * @generated
+		 */
+    EClass ACC_VAR_CS = eINSTANCE.getAccVarCS();
+
+    /**
+		 * The meta object literal for the '<em><b>Acc Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+		 * @generated
+		 */
+    EAttribute ACC_VAR_CS__ACC_NAME = eINSTANCE.getAccVarCS_AccName();
+
+    /**
+		 * The meta object literal for the '<em><b>Acc Type</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+		 * @generated
+		 */
+    EReference ACC_VAR_CS__ACC_TYPE = eINSTANCE.getAccVarCS_AccType();
+
+    /**
+		 * The meta object literal for the '<em><b>Acc Init Exp</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+		 * @generated
+		 */
+    EReference ACC_VAR_CS__ACC_INIT_EXP = eINSTANCE.getAccVarCS_AccInitExp();
 
     /**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.doc.minioclcs.impl.NameExpCSImpl <em>Name Exp CS</em>}' class.
@@ -2343,24 +3745,6 @@ public interface MinioclcsPackage extends EPackage
     EAttribute INT_LITERAL_EXP_CS__INT_SYMBOL = eINSTANCE.getIntLiteralExpCS_IntSymbol();
 
     /**
-		 * The meta object literal for the '{@link org.eclipse.qvtd.doc.minioclcs.impl.StringLiteralExpCSImpl <em>String Literal Exp CS</em>}' class.
-		 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-		 * @see org.eclipse.qvtd.doc.minioclcs.impl.StringLiteralExpCSImpl
-		 * @see org.eclipse.qvtd.doc.minioclcs.impl.MinioclcsPackageImpl#getStringLiteralExpCS()
-		 * @generated
-		 */
-    EClass STRING_LITERAL_EXP_CS = eINSTANCE.getStringLiteralExpCS();
-
-    /**
-		 * The meta object literal for the '<em><b>String Symbol</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-		 * @generated
-		 */
-    EAttribute STRING_LITERAL_EXP_CS__STRING_SYMBOL = eINSTANCE.getStringLiteralExpCS_StringSymbol();
-
-    /**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.doc.minioclcs.impl.BooleanLiteralExpCSImpl <em>Boolean Literal Exp CS</em>}' class.
 		 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -2371,6 +3755,128 @@ public interface MinioclcsPackage extends EPackage
     EClass BOOLEAN_LITERAL_EXP_CS = eINSTANCE.getBooleanLiteralExpCS();
 
     /**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.doc.minioclcs.impl.NullLiteralExpCSImpl <em>Null Literal Exp CS</em>}' class.
+		 * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.doc.minioclcs.impl.NullLiteralExpCSImpl
+		 * @see org.eclipse.qvtd.doc.minioclcs.impl.MinioclcsPackageImpl#getNullLiteralExpCS()
+		 * @generated
+		 */
+    EClass NULL_LITERAL_EXP_CS = eINSTANCE.getNullLiteralExpCS();
+
+    /**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.doc.minioclcs.impl.CollectionLiteralExpCSImpl <em>Collection Literal Exp CS</em>}' class.
+		 * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.doc.minioclcs.impl.CollectionLiteralExpCSImpl
+		 * @see org.eclipse.qvtd.doc.minioclcs.impl.MinioclcsPackageImpl#getCollectionLiteralExpCS()
+		 * @generated
+		 */
+    EClass COLLECTION_LITERAL_EXP_CS = eINSTANCE.getCollectionLiteralExpCS();
+
+    /**
+		 * The meta object literal for the '<em><b>Kind</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+		 * @generated
+		 */
+    EAttribute COLLECTION_LITERAL_EXP_CS__KIND = eINSTANCE.getCollectionLiteralExpCS_Kind();
+
+    /**
+		 * The meta object literal for the '<em><b>Parts</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+		 * @generated
+		 */
+    EReference COLLECTION_LITERAL_EXP_CS__PARTS = eINSTANCE.getCollectionLiteralExpCS_Parts();
+
+    /**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.doc.minioclcs.impl.CollectionLiteralPartCSImpl <em>Collection Literal Part CS</em>}' class.
+		 * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.doc.minioclcs.impl.CollectionLiteralPartCSImpl
+		 * @see org.eclipse.qvtd.doc.minioclcs.impl.MinioclcsPackageImpl#getCollectionLiteralPartCS()
+		 * @generated
+		 */
+    EClass COLLECTION_LITERAL_PART_CS = eINSTANCE.getCollectionLiteralPartCS();
+
+    /**
+		 * The meta object literal for the '<em><b>First</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+		 * @generated
+		 */
+    EReference COLLECTION_LITERAL_PART_CS__FIRST = eINSTANCE.getCollectionLiteralPartCS_First();
+
+    /**
+		 * The meta object literal for the '<em><b>Last</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+		 * @generated
+		 */
+    EReference COLLECTION_LITERAL_PART_CS__LAST = eINSTANCE.getCollectionLiteralPartCS_Last();
+
+    /**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.doc.minioclcs.impl.LetExpCSImpl <em>Let Exp CS</em>}' class.
+		 * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.doc.minioclcs.impl.LetExpCSImpl
+		 * @see org.eclipse.qvtd.doc.minioclcs.impl.MinioclcsPackageImpl#getLetExpCS()
+		 * @generated
+		 */
+    EClass LET_EXP_CS = eINSTANCE.getLetExpCS();
+
+    /**
+		 * The meta object literal for the '<em><b>Let Vars</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+		 * @generated
+		 */
+    EReference LET_EXP_CS__LET_VARS = eINSTANCE.getLetExpCS_LetVars();
+
+    /**
+		 * The meta object literal for the '<em><b>In Exp</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+		 * @generated
+		 */
+    EReference LET_EXP_CS__IN_EXP = eINSTANCE.getLetExpCS_InExp();
+
+    /**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.doc.minioclcs.impl.LetVarCSImpl <em>Let Var CS</em>}' class.
+		 * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.doc.minioclcs.impl.LetVarCSImpl
+		 * @see org.eclipse.qvtd.doc.minioclcs.impl.MinioclcsPackageImpl#getLetVarCS()
+		 * @generated
+		 */
+    EClass LET_VAR_CS = eINSTANCE.getLetVarCS();
+
+    /**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+		 * @generated
+		 */
+    EAttribute LET_VAR_CS__NAME = eINSTANCE.getLetVarCS_Name();
+
+    /**
+		 * The meta object literal for the '<em><b>Type Ref</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+		 * @generated
+		 */
+    EReference LET_VAR_CS__TYPE_REF = eINSTANCE.getLetVarCS_TypeRef();
+
+    /**
+		 * The meta object literal for the '<em><b>Init Exp</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+		 * @generated
+		 */
+    EReference LET_VAR_CS__INIT_EXP = eINSTANCE.getLetVarCS_InitExp();
+
+    /**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.doc.minioclcs.impl.PathNameCSImpl <em>Path Name CS</em>}' class.
 		 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -2379,14 +3885,6 @@ public interface MinioclcsPackage extends EPackage
 		 * @generated
 		 */
     EClass PATH_NAME_CS = eINSTANCE.getPathNameCS();
-
-    /**
-		 * The meta object literal for the '<em><b>Path</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-		 * @generated
-		 */
-    EReference PATH_NAME_CS__PATH = eINSTANCE.getPathNameCS_Path();
 
     /**
 		 * The meta object literal for the '<em><b>Path Elements</b></em>' containment reference list feature.
@@ -2432,7 +3930,7 @@ public interface MinioclcsPackage extends EPackage
 		 */
     EAttribute BOOLEAN_EXP_CS__BOOL_SYMBOL = eINSTANCE.getBooleanExpCS_BoolSymbol();
 
-				/**
+    /**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.doc.minioclcs.impl.CSTraceImpl <em>CS Trace</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2449,6 +3947,16 @@ public interface MinioclcsPackage extends EPackage
 		 * @generated
 		 */
 		EReference CS_TRACE__AST = eINSTANCE.getCSTrace_Ast();
+
+				/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.doc.minioclcs.CollectionKindCS <em>Collection Kind CS</em>}' enum.
+		 * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.doc.minioclcs.CollectionKindCS
+		 * @see org.eclipse.qvtd.doc.minioclcs.impl.MinioclcsPackageImpl#getCollectionKindCS()
+		 * @generated
+		 */
+    EEnum COLLECTION_KIND_CS = eINSTANCE.getCollectionKindCS();
 
   }
 

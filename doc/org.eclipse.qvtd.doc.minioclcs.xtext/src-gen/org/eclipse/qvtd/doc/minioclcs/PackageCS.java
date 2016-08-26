@@ -5,8 +5,6 @@ package org.eclipse.qvtd.doc.minioclcs;
 
 import org.eclipse.emf.common.util.EList;
 
-import org.eclipse.emf.ecore.EObject;
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Package CS</b></em>'.
@@ -18,7 +16,7 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.doc.minioclcs.PackageCS#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.qvtd.doc.minioclcs.PackageCS#getPackages <em>Packages</em>}</li>
- *   <li>{@link org.eclipse.qvtd.doc.minioclcs.PackageCS#getClasses <em>Classes</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.doc.minioclcs.PackageCS#getClassifiers <em>Classifiers</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.doc.minioclcs.MinioclcsPackage#getPackageCS()
@@ -70,19 +68,19 @@ public interface PackageCS extends CSTrace
   EList<PackageCS> getPackages();
 
   /**
-	 * Returns the value of the '<em><b>Classes</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.qvtd.doc.minioclcs.ClassCS}.
+	 * Returns the value of the '<em><b>Classifiers</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.qvtd.doc.minioclcs.ClassifierCS}.
 	 * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Classes</em>' containment reference list isn't clear,
+   * If the meaning of the '<em>Classifiers</em>' containment reference list isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-	 * @return the value of the '<em>Classes</em>' containment reference list.
-	 * @see org.eclipse.qvtd.doc.minioclcs.MinioclcsPackage#getPackageCS_Classes()
+	 * @return the value of the '<em>Classifiers</em>' containment reference list.
+	 * @see org.eclipse.qvtd.doc.minioclcs.MinioclcsPackage#getPackageCS_Classifiers()
 	 * @model containment="true"
 	 * @generated
 	 */
-  EList<ClassCS> getClasses();
+  EList<ClassifierCS> getClassifiers();
 
 } // PackageCS

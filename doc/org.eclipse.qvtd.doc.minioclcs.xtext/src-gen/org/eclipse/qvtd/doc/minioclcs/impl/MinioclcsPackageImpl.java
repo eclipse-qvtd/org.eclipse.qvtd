@@ -5,27 +5,41 @@ package org.eclipse.qvtd.doc.minioclcs.impl;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcorePackage;
-
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
 import org.eclipse.qvtd.doc.miniocl.MiniOCLPackage;
+import org.eclipse.qvtd.doc.minioclcs.AccVarCS;
 import org.eclipse.qvtd.doc.minioclcs.BooleanExpCS;
 import org.eclipse.qvtd.doc.minioclcs.BooleanLiteralExpCS;
 import org.eclipse.qvtd.doc.minioclcs.CSTrace;
 import org.eclipse.qvtd.doc.minioclcs.CallExpCS;
 import org.eclipse.qvtd.doc.minioclcs.ClassCS;
+import org.eclipse.qvtd.doc.minioclcs.ClassifierCS;
+import org.eclipse.qvtd.doc.minioclcs.CollectExpCS;
+import org.eclipse.qvtd.doc.minioclcs.CollectionKindCS;
+import org.eclipse.qvtd.doc.minioclcs.CollectionLiteralExpCS;
+import org.eclipse.qvtd.doc.minioclcs.CollectionLiteralPartCS;
 import org.eclipse.qvtd.doc.minioclcs.ConstraintsDefCS;
+import org.eclipse.qvtd.doc.minioclcs.DatatypeCS;
 import org.eclipse.qvtd.doc.minioclcs.ExpCS;
 import org.eclipse.qvtd.doc.minioclcs.IntLiteralExpCS;
 import org.eclipse.qvtd.doc.minioclcs.InvariantCS;
+import org.eclipse.qvtd.doc.minioclcs.IterateExpCS;
+import org.eclipse.qvtd.doc.minioclcs.IteratorVarCS;
+import org.eclipse.qvtd.doc.minioclcs.LetExpCS;
+import org.eclipse.qvtd.doc.minioclcs.LetVarCS;
 import org.eclipse.qvtd.doc.minioclcs.LiteralExpCS;
 import org.eclipse.qvtd.doc.minioclcs.LogicExpCS;
+import org.eclipse.qvtd.doc.minioclcs.LoopExpCS;
 import org.eclipse.qvtd.doc.minioclcs.MinioclcsFactory;
 import org.eclipse.qvtd.doc.minioclcs.MinioclcsPackage;
+import org.eclipse.qvtd.doc.minioclcs.MultiplicityCS;
 import org.eclipse.qvtd.doc.minioclcs.NameExpCS;
+import org.eclipse.qvtd.doc.minioclcs.NavigationExpCS;
+import org.eclipse.qvtd.doc.minioclcs.NullLiteralExpCS;
 import org.eclipse.qvtd.doc.minioclcs.OperationCS;
 import org.eclipse.qvtd.doc.minioclcs.PackageCS;
 import org.eclipse.qvtd.doc.minioclcs.ParameterCS;
@@ -35,7 +49,7 @@ import org.eclipse.qvtd.doc.minioclcs.PrimaryExpCS;
 import org.eclipse.qvtd.doc.minioclcs.PropertyCS;
 import org.eclipse.qvtd.doc.minioclcs.RootCS;
 import org.eclipse.qvtd.doc.minioclcs.RoundedBracketClauseCS;
-import org.eclipse.qvtd.doc.minioclcs.StringLiteralExpCS;
+import org.eclipse.qvtd.doc.minioclcs.SelfExpCS;
 
 /**
  * <!-- begin-user-doc -->
@@ -64,6 +78,13 @@ public class MinioclcsPackageImpl extends EPackageImpl implements MinioclcsPacka
    * <!-- end-user-doc -->
 	 * @generated
 	 */
+  private EClass classifierCSEClass = null;
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
   private EClass classCSEClass = null;
 
   /**
@@ -71,7 +92,21 @@ public class MinioclcsPackageImpl extends EPackageImpl implements MinioclcsPacka
    * <!-- end-user-doc -->
 	 * @generated
 	 */
+  private EClass datatypeCSEClass = null;
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
   private EClass propertyCSEClass = null;
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  private EClass multiplicityCSEClass = null;
 
   /**
 	 * <!-- begin-user-doc -->
@@ -134,6 +169,55 @@ public class MinioclcsPackageImpl extends EPackageImpl implements MinioclcsPacka
    * <!-- end-user-doc -->
 	 * @generated
 	 */
+  private EClass selfExpCSEClass = null;
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  private EClass navigationExpCSEClass = null;
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  private EClass loopExpCSEClass = null;
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  private EClass collectExpCSEClass = null;
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  private EClass iteratorVarCSEClass = null;
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  private EClass iterateExpCSEClass = null;
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  private EClass accVarCSEClass = null;
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
   private EClass nameExpCSEClass = null;
 
   /**
@@ -162,14 +246,42 @@ public class MinioclcsPackageImpl extends EPackageImpl implements MinioclcsPacka
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  private EClass stringLiteralExpCSEClass = null;
+  private EClass booleanLiteralExpCSEClass = null;
 
   /**
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  private EClass booleanLiteralExpCSEClass = null;
+  private EClass nullLiteralExpCSEClass = null;
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  private EClass collectionLiteralExpCSEClass = null;
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  private EClass collectionLiteralPartCSEClass = null;
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  private EClass letExpCSEClass = null;
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  private EClass letVarCSEClass = null;
 
   /**
 	 * <!-- begin-user-doc -->
@@ -200,6 +312,13 @@ public class MinioclcsPackageImpl extends EPackageImpl implements MinioclcsPacka
 	private EClass csTraceEClass = null;
 
 		/**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  private EEnum collectionKindCSEEnum = null;
+
+  /**
 	 * Creates an instance of the model <b>Package</b>, registered with
 	 * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
 	 * package URI value.
@@ -332,9 +451,29 @@ public class MinioclcsPackageImpl extends EPackageImpl implements MinioclcsPacka
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EReference getPackageCS_Classes()
+  public EReference getPackageCS_Classifiers()
   {
 		return (EReference)packageCSEClass.getEStructuralFeatures().get(2);
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  public EClass getClassifierCS()
+  {
+		return classifierCSEClass;
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  public EAttribute getClassifierCS_Name()
+  {
+		return (EAttribute)classifierCSEClass.getEStructuralFeatures().get(0);
 	}
 
   /**
@@ -352,19 +491,9 @@ public class MinioclcsPackageImpl extends EPackageImpl implements MinioclcsPacka
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EAttribute getClassCS_Name()
-  {
-		return (EAttribute)classCSEClass.getEStructuralFeatures().get(0);
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
   public EReference getClassCS_Extends()
   {
-		return (EReference)classCSEClass.getEStructuralFeatures().get(1);
+		return (EReference)classCSEClass.getEStructuralFeatures().get(0);
 	}
 
   /**
@@ -374,7 +503,7 @@ public class MinioclcsPackageImpl extends EPackageImpl implements MinioclcsPacka
 	 */
   public EReference getClassCS_Properties()
   {
-		return (EReference)classCSEClass.getEStructuralFeatures().get(2);
+		return (EReference)classCSEClass.getEStructuralFeatures().get(1);
 	}
 
   /**
@@ -384,7 +513,27 @@ public class MinioclcsPackageImpl extends EPackageImpl implements MinioclcsPacka
 	 */
   public EReference getClassCS_Operations()
   {
-		return (EReference)classCSEClass.getEStructuralFeatures().get(3);
+		return (EReference)classCSEClass.getEStructuralFeatures().get(2);
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  public EClass getDatatypeCS()
+  {
+		return datatypeCSEClass;
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  public EAttribute getDatatypeCS_TypeName()
+  {
+		return (EAttribute)datatypeCSEClass.getEStructuralFeatures().get(0);
 	}
 
   /**
@@ -415,6 +564,76 @@ public class MinioclcsPackageImpl extends EPackageImpl implements MinioclcsPacka
   public EReference getPropertyCS_TypeRef()
   {
 		return (EReference)propertyCSEClass.getEStructuralFeatures().get(1);
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  public EReference getPropertyCS_Multiplicity()
+  {
+		return (EReference)propertyCSEClass.getEStructuralFeatures().get(2);
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  public EClass getMultiplicityCS()
+  {
+		return multiplicityCSEClass;
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  public EAttribute getMultiplicityCS_Opt()
+  {
+		return (EAttribute)multiplicityCSEClass.getEStructuralFeatures().get(0);
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  public EAttribute getMultiplicityCS_Mult()
+  {
+		return (EAttribute)multiplicityCSEClass.getEStructuralFeatures().get(1);
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  public EAttribute getMultiplicityCS_Lower()
+  {
+		return (EAttribute)multiplicityCSEClass.getEStructuralFeatures().get(2);
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  public EAttribute getMultiplicityCS_UpperInt()
+  {
+		return (EAttribute)multiplicityCSEClass.getEStructuralFeatures().get(3);
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  public EAttribute getMultiplicityCS_UpperMult()
+  {
+		return (EAttribute)multiplicityCSEClass.getEStructuralFeatures().get(4);
 	}
 
   /**
@@ -622,7 +841,7 @@ public class MinioclcsPackageImpl extends EPackageImpl implements MinioclcsPacka
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EReference getCallExpCS_NameExp()
+  public EReference getCallExpCS_NavExp()
   {
 		return (EReference)callExpCSEClass.getEStructuralFeatures().get(1);
 	}
@@ -635,6 +854,156 @@ public class MinioclcsPackageImpl extends EPackageImpl implements MinioclcsPacka
   public EClass getPrimaryExpCS()
   {
 		return primaryExpCSEClass;
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  public EClass getSelfExpCS()
+  {
+		return selfExpCSEClass;
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  public EClass getNavigationExpCS()
+  {
+		return navigationExpCSEClass;
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  public EClass getLoopExpCS()
+  {
+		return loopExpCSEClass;
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  public EReference getLoopExpCS_ItVar()
+  {
+		return (EReference)loopExpCSEClass.getEStructuralFeatures().get(0);
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  public EReference getLoopExpCS_Exp()
+  {
+		return (EReference)loopExpCSEClass.getEStructuralFeatures().get(1);
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  public EClass getCollectExpCS()
+  {
+		return collectExpCSEClass;
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  public EClass getIteratorVarCS()
+  {
+		return iteratorVarCSEClass;
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  public EAttribute getIteratorVarCS_ItName()
+  {
+		return (EAttribute)iteratorVarCSEClass.getEStructuralFeatures().get(0);
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  public EReference getIteratorVarCS_ItType()
+  {
+		return (EReference)iteratorVarCSEClass.getEStructuralFeatures().get(1);
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  public EClass getIterateExpCS()
+  {
+		return iterateExpCSEClass;
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  public EReference getIterateExpCS_AccVar()
+  {
+		return (EReference)iterateExpCSEClass.getEStructuralFeatures().get(0);
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  public EClass getAccVarCS()
+  {
+		return accVarCSEClass;
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  public EAttribute getAccVarCS_AccName()
+  {
+		return (EAttribute)accVarCSEClass.getEStructuralFeatures().get(0);
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  public EReference getAccVarCS_AccType()
+  {
+		return (EReference)accVarCSEClass.getEStructuralFeatures().get(1);
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  public EReference getAccVarCS_AccInitExp()
+  {
+		return (EReference)accVarCSEClass.getEStructuralFeatures().get(2);
 	}
 
   /**
@@ -722,29 +1091,149 @@ public class MinioclcsPackageImpl extends EPackageImpl implements MinioclcsPacka
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EClass getStringLiteralExpCS()
-  {
-		return stringLiteralExpCSEClass;
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public EAttribute getStringLiteralExpCS_StringSymbol()
-  {
-		return (EAttribute)stringLiteralExpCSEClass.getEStructuralFeatures().get(0);
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
   public EClass getBooleanLiteralExpCS()
   {
 		return booleanLiteralExpCSEClass;
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  public EClass getNullLiteralExpCS()
+  {
+		return nullLiteralExpCSEClass;
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  public EClass getCollectionLiteralExpCS()
+  {
+		return collectionLiteralExpCSEClass;
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  public EAttribute getCollectionLiteralExpCS_Kind()
+  {
+		return (EAttribute)collectionLiteralExpCSEClass.getEStructuralFeatures().get(0);
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  public EReference getCollectionLiteralExpCS_Parts()
+  {
+		return (EReference)collectionLiteralExpCSEClass.getEStructuralFeatures().get(1);
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  public EClass getCollectionLiteralPartCS()
+  {
+		return collectionLiteralPartCSEClass;
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  public EReference getCollectionLiteralPartCS_First()
+  {
+		return (EReference)collectionLiteralPartCSEClass.getEStructuralFeatures().get(0);
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  public EReference getCollectionLiteralPartCS_Last()
+  {
+		return (EReference)collectionLiteralPartCSEClass.getEStructuralFeatures().get(1);
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  public EClass getLetExpCS()
+  {
+		return letExpCSEClass;
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  public EReference getLetExpCS_LetVars()
+  {
+		return (EReference)letExpCSEClass.getEStructuralFeatures().get(0);
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  public EReference getLetExpCS_InExp()
+  {
+		return (EReference)letExpCSEClass.getEStructuralFeatures().get(1);
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  public EClass getLetVarCS()
+  {
+		return letVarCSEClass;
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  public EAttribute getLetVarCS_Name()
+  {
+		return (EAttribute)letVarCSEClass.getEStructuralFeatures().get(0);
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  public EReference getLetVarCS_TypeRef()
+  {
+		return (EReference)letVarCSEClass.getEStructuralFeatures().get(1);
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  public EReference getLetVarCS_InitExp()
+  {
+		return (EReference)letVarCSEClass.getEStructuralFeatures().get(2);
 	}
 
   /**
@@ -762,19 +1251,9 @@ public class MinioclcsPackageImpl extends EPackageImpl implements MinioclcsPacka
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EReference getPathNameCS_Path()
-  {
-		return (EReference)pathNameCSEClass.getEStructuralFeatures().get(0);
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
   public EReference getPathNameCS_PathElements()
   {
-		return (EReference)pathNameCSEClass.getEStructuralFeatures().get(1);
+		return (EReference)pathNameCSEClass.getEStructuralFeatures().get(0);
 	}
 
   /**
@@ -840,6 +1319,16 @@ public class MinioclcsPackageImpl extends EPackageImpl implements MinioclcsPacka
    * <!-- end-user-doc -->
 	 * @generated
 	 */
+  public EEnum getCollectionKindCS()
+  {
+		return collectionKindCSEEnum;
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
   public MinioclcsFactory getMinioclcsFactory()
   {
 		return (MinioclcsFactory)getEFactoryInstance();
@@ -872,17 +1361,30 @@ public class MinioclcsPackageImpl extends EPackageImpl implements MinioclcsPacka
 		packageCSEClass = createEClass(PACKAGE_CS);
 		createEAttribute(packageCSEClass, PACKAGE_CS__NAME);
 		createEReference(packageCSEClass, PACKAGE_CS__PACKAGES);
-		createEReference(packageCSEClass, PACKAGE_CS__CLASSES);
+		createEReference(packageCSEClass, PACKAGE_CS__CLASSIFIERS);
+
+		classifierCSEClass = createEClass(CLASSIFIER_CS);
+		createEAttribute(classifierCSEClass, CLASSIFIER_CS__NAME);
 
 		classCSEClass = createEClass(CLASS_CS);
-		createEAttribute(classCSEClass, CLASS_CS__NAME);
 		createEReference(classCSEClass, CLASS_CS__EXTENDS);
 		createEReference(classCSEClass, CLASS_CS__PROPERTIES);
 		createEReference(classCSEClass, CLASS_CS__OPERATIONS);
 
+		datatypeCSEClass = createEClass(DATATYPE_CS);
+		createEAttribute(datatypeCSEClass, DATATYPE_CS__TYPE_NAME);
+
 		propertyCSEClass = createEClass(PROPERTY_CS);
 		createEAttribute(propertyCSEClass, PROPERTY_CS__NAME);
 		createEReference(propertyCSEClass, PROPERTY_CS__TYPE_REF);
+		createEReference(propertyCSEClass, PROPERTY_CS__MULTIPLICITY);
+
+		multiplicityCSEClass = createEClass(MULTIPLICITY_CS);
+		createEAttribute(multiplicityCSEClass, MULTIPLICITY_CS__OPT);
+		createEAttribute(multiplicityCSEClass, MULTIPLICITY_CS__MULT);
+		createEAttribute(multiplicityCSEClass, MULTIPLICITY_CS__LOWER);
+		createEAttribute(multiplicityCSEClass, MULTIPLICITY_CS__UPPER_INT);
+		createEAttribute(multiplicityCSEClass, MULTIPLICITY_CS__UPPER_MULT);
 
 		operationCSEClass = createEClass(OPERATION_CS);
 		createEAttribute(operationCSEClass, OPERATION_CS__NAME);
@@ -910,9 +1412,31 @@ public class MinioclcsPackageImpl extends EPackageImpl implements MinioclcsPacka
 
 		callExpCSEClass = createEClass(CALL_EXP_CS);
 		createEReference(callExpCSEClass, CALL_EXP_CS__SOURCE);
-		createEReference(callExpCSEClass, CALL_EXP_CS__NAME_EXP);
+		createEReference(callExpCSEClass, CALL_EXP_CS__NAV_EXP);
 
 		primaryExpCSEClass = createEClass(PRIMARY_EXP_CS);
+
+		selfExpCSEClass = createEClass(SELF_EXP_CS);
+
+		navigationExpCSEClass = createEClass(NAVIGATION_EXP_CS);
+
+		loopExpCSEClass = createEClass(LOOP_EXP_CS);
+		createEReference(loopExpCSEClass, LOOP_EXP_CS__IT_VAR);
+		createEReference(loopExpCSEClass, LOOP_EXP_CS__EXP);
+
+		collectExpCSEClass = createEClass(COLLECT_EXP_CS);
+
+		iteratorVarCSEClass = createEClass(ITERATOR_VAR_CS);
+		createEAttribute(iteratorVarCSEClass, ITERATOR_VAR_CS__IT_NAME);
+		createEReference(iteratorVarCSEClass, ITERATOR_VAR_CS__IT_TYPE);
+
+		iterateExpCSEClass = createEClass(ITERATE_EXP_CS);
+		createEReference(iterateExpCSEClass, ITERATE_EXP_CS__ACC_VAR);
+
+		accVarCSEClass = createEClass(ACC_VAR_CS);
+		createEAttribute(accVarCSEClass, ACC_VAR_CS__ACC_NAME);
+		createEReference(accVarCSEClass, ACC_VAR_CS__ACC_TYPE);
+		createEReference(accVarCSEClass, ACC_VAR_CS__ACC_INIT_EXP);
 
 		nameExpCSEClass = createEClass(NAME_EXP_CS);
 		createEReference(nameExpCSEClass, NAME_EXP_CS__EXP_NAME);
@@ -926,13 +1450,28 @@ public class MinioclcsPackageImpl extends EPackageImpl implements MinioclcsPacka
 		intLiteralExpCSEClass = createEClass(INT_LITERAL_EXP_CS);
 		createEAttribute(intLiteralExpCSEClass, INT_LITERAL_EXP_CS__INT_SYMBOL);
 
-		stringLiteralExpCSEClass = createEClass(STRING_LITERAL_EXP_CS);
-		createEAttribute(stringLiteralExpCSEClass, STRING_LITERAL_EXP_CS__STRING_SYMBOL);
-
 		booleanLiteralExpCSEClass = createEClass(BOOLEAN_LITERAL_EXP_CS);
 
+		nullLiteralExpCSEClass = createEClass(NULL_LITERAL_EXP_CS);
+
+		collectionLiteralExpCSEClass = createEClass(COLLECTION_LITERAL_EXP_CS);
+		createEAttribute(collectionLiteralExpCSEClass, COLLECTION_LITERAL_EXP_CS__KIND);
+		createEReference(collectionLiteralExpCSEClass, COLLECTION_LITERAL_EXP_CS__PARTS);
+
+		collectionLiteralPartCSEClass = createEClass(COLLECTION_LITERAL_PART_CS);
+		createEReference(collectionLiteralPartCSEClass, COLLECTION_LITERAL_PART_CS__FIRST);
+		createEReference(collectionLiteralPartCSEClass, COLLECTION_LITERAL_PART_CS__LAST);
+
+		letExpCSEClass = createEClass(LET_EXP_CS);
+		createEReference(letExpCSEClass, LET_EXP_CS__LET_VARS);
+		createEReference(letExpCSEClass, LET_EXP_CS__IN_EXP);
+
+		letVarCSEClass = createEClass(LET_VAR_CS);
+		createEAttribute(letVarCSEClass, LET_VAR_CS__NAME);
+		createEReference(letVarCSEClass, LET_VAR_CS__TYPE_REF);
+		createEReference(letVarCSEClass, LET_VAR_CS__INIT_EXP);
+
 		pathNameCSEClass = createEClass(PATH_NAME_CS);
-		createEReference(pathNameCSEClass, PATH_NAME_CS__PATH);
 		createEReference(pathNameCSEClass, PATH_NAME_CS__PATH_ELEMENTS);
 
 		pathElementCSEClass = createEClass(PATH_ELEMENT_CS);
@@ -943,6 +1482,9 @@ public class MinioclcsPackageImpl extends EPackageImpl implements MinioclcsPacka
 
 		csTraceEClass = createEClass(CS_TRACE);
 		createEReference(csTraceEClass, CS_TRACE__AST);
+
+		// Create enums
+		collectionKindCSEEnum = createEEnum(COLLECTION_KIND_CS);
 	}
 
   /**
@@ -980,8 +1522,11 @@ public class MinioclcsPackageImpl extends EPackageImpl implements MinioclcsPacka
 		// Add supertypes to classes
 		rootCSEClass.getESuperTypes().add(this.getCSTrace());
 		packageCSEClass.getESuperTypes().add(this.getCSTrace());
-		classCSEClass.getESuperTypes().add(this.getCSTrace());
+		classifierCSEClass.getESuperTypes().add(this.getCSTrace());
+		classCSEClass.getESuperTypes().add(this.getClassifierCS());
+		datatypeCSEClass.getESuperTypes().add(this.getClassifierCS());
 		propertyCSEClass.getESuperTypes().add(this.getCSTrace());
+		multiplicityCSEClass.getESuperTypes().add(this.getCSTrace());
 		operationCSEClass.getESuperTypes().add(this.getCSTrace());
 		parameterCSEClass.getESuperTypes().add(this.getCSTrace());
 		constraintsDefCSEClass.getESuperTypes().add(this.getCSTrace());
@@ -990,12 +1535,24 @@ public class MinioclcsPackageImpl extends EPackageImpl implements MinioclcsPacka
 		logicExpCSEClass.getESuperTypes().add(this.getExpCS());
 		callExpCSEClass.getESuperTypes().add(this.getLogicExpCS());
 		primaryExpCSEClass.getESuperTypes().add(this.getCallExpCS());
+		selfExpCSEClass.getESuperTypes().add(this.getPrimaryExpCS());
+		navigationExpCSEClass.getESuperTypes().add(this.getCSTrace());
+		loopExpCSEClass.getESuperTypes().add(this.getNavigationExpCS());
+		collectExpCSEClass.getESuperTypes().add(this.getLoopExpCS());
+		iteratorVarCSEClass.getESuperTypes().add(this.getCSTrace());
+		iterateExpCSEClass.getESuperTypes().add(this.getLoopExpCS());
+		accVarCSEClass.getESuperTypes().add(this.getCSTrace());
 		nameExpCSEClass.getESuperTypes().add(this.getPrimaryExpCS());
+		nameExpCSEClass.getESuperTypes().add(this.getNavigationExpCS());
 		roundedBracketClauseCSEClass.getESuperTypes().add(this.getCSTrace());
 		literalExpCSEClass.getESuperTypes().add(this.getPrimaryExpCS());
 		intLiteralExpCSEClass.getESuperTypes().add(this.getLiteralExpCS());
-		stringLiteralExpCSEClass.getESuperTypes().add(this.getLiteralExpCS());
 		booleanLiteralExpCSEClass.getESuperTypes().add(this.getLiteralExpCS());
+		nullLiteralExpCSEClass.getESuperTypes().add(this.getLiteralExpCS());
+		collectionLiteralExpCSEClass.getESuperTypes().add(this.getLiteralExpCS());
+		collectionLiteralPartCSEClass.getESuperTypes().add(this.getCSTrace());
+		letExpCSEClass.getESuperTypes().add(this.getPrimaryExpCS());
+		letVarCSEClass.getESuperTypes().add(this.getCSTrace());
 		pathNameCSEClass.getESuperTypes().add(this.getCSTrace());
 		pathElementCSEClass.getESuperTypes().add(this.getCSTrace());
 		booleanExpCSEClass.getESuperTypes().add(this.getBooleanLiteralExpCS());
@@ -1008,17 +1565,30 @@ public class MinioclcsPackageImpl extends EPackageImpl implements MinioclcsPacka
 		initEClass(packageCSEClass, PackageCS.class, "PackageCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getPackageCS_Name(), theEcorePackage.getEString(), "name", null, 0, 1, PackageCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPackageCS_Packages(), this.getPackageCS(), null, "packages", null, 0, -1, PackageCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getPackageCS_Classes(), this.getClassCS(), null, "classes", null, 0, -1, PackageCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPackageCS_Classifiers(), this.getClassifierCS(), null, "classifiers", null, 0, -1, PackageCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(classifierCSEClass, ClassifierCS.class, "ClassifierCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getClassifierCS_Name(), theEcorePackage.getEString(), "name", null, 0, 1, ClassifierCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(classCSEClass, ClassCS.class, "ClassCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getClassCS_Name(), theEcorePackage.getEString(), "name", null, 0, 1, ClassCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getClassCS_Extends(), this.getPathNameCS(), null, "extends", null, 0, 1, ClassCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getClassCS_Properties(), this.getPropertyCS(), null, "properties", null, 0, -1, ClassCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getClassCS_Operations(), this.getOperationCS(), null, "operations", null, 0, -1, ClassCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEClass(datatypeCSEClass, DatatypeCS.class, "DatatypeCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getDatatypeCS_TypeName(), theEcorePackage.getEString(), "typeName", null, 0, 1, DatatypeCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		initEClass(propertyCSEClass, PropertyCS.class, "PropertyCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getPropertyCS_Name(), theEcorePackage.getEString(), "name", null, 0, 1, PropertyCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPropertyCS_TypeRef(), this.getPathNameCS(), null, "typeRef", null, 0, 1, PropertyCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPropertyCS_Multiplicity(), this.getMultiplicityCS(), null, "multiplicity", null, 0, 1, PropertyCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(multiplicityCSEClass, MultiplicityCS.class, "MultiplicityCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getMultiplicityCS_Opt(), theEcorePackage.getEBoolean(), "opt", null, 0, 1, MultiplicityCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMultiplicityCS_Mult(), theEcorePackage.getEBoolean(), "mult", null, 0, 1, MultiplicityCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMultiplicityCS_Lower(), theEcorePackage.getEInt(), "lower", null, 0, 1, MultiplicityCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMultiplicityCS_UpperInt(), theEcorePackage.getEInt(), "upperInt", null, 0, 1, MultiplicityCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMultiplicityCS_UpperMult(), theEcorePackage.getEBoolean(), "upperMult", null, 0, 1, MultiplicityCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(operationCSEClass, OperationCS.class, "OperationCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getOperationCS_Name(), theEcorePackage.getEString(), "name", null, 0, 1, OperationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1046,9 +1616,31 @@ public class MinioclcsPackageImpl extends EPackageImpl implements MinioclcsPacka
 
 		initEClass(callExpCSEClass, CallExpCS.class, "CallExpCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCallExpCS_Source(), this.getCallExpCS(), null, "source", null, 0, 1, CallExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getCallExpCS_NameExp(), this.getNameExpCS(), null, "nameExp", null, 0, 1, CallExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCallExpCS_NavExp(), this.getNavigationExpCS(), null, "navExp", null, 0, 1, CallExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(primaryExpCSEClass, PrimaryExpCS.class, "PrimaryExpCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(selfExpCSEClass, SelfExpCS.class, "SelfExpCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(navigationExpCSEClass, NavigationExpCS.class, "NavigationExpCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(loopExpCSEClass, LoopExpCS.class, "LoopExpCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getLoopExpCS_ItVar(), this.getIteratorVarCS(), null, "itVar", null, 0, 1, LoopExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getLoopExpCS_Exp(), this.getExpCS(), null, "exp", null, 0, 1, LoopExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(collectExpCSEClass, CollectExpCS.class, "CollectExpCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(iteratorVarCSEClass, IteratorVarCS.class, "IteratorVarCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getIteratorVarCS_ItName(), theEcorePackage.getEString(), "itName", null, 0, 1, IteratorVarCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getIteratorVarCS_ItType(), this.getPathNameCS(), null, "itType", null, 0, 1, IteratorVarCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(iterateExpCSEClass, IterateExpCS.class, "IterateExpCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getIterateExpCS_AccVar(), this.getAccVarCS(), null, "accVar", null, 0, 1, IterateExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(accVarCSEClass, AccVarCS.class, "AccVarCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getAccVarCS_AccName(), theEcorePackage.getEString(), "accName", null, 0, 1, AccVarCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAccVarCS_AccType(), this.getPathNameCS(), null, "accType", null, 0, 1, AccVarCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAccVarCS_AccInitExp(), this.getExpCS(), null, "accInitExp", null, 0, 1, AccVarCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(nameExpCSEClass, NameExpCS.class, "NameExpCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getNameExpCS_ExpName(), this.getPathNameCS(), null, "expName", null, 0, 1, NameExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1062,13 +1654,28 @@ public class MinioclcsPackageImpl extends EPackageImpl implements MinioclcsPacka
 		initEClass(intLiteralExpCSEClass, IntLiteralExpCS.class, "IntLiteralExpCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getIntLiteralExpCS_IntSymbol(), theEcorePackage.getEInt(), "intSymbol", null, 0, 1, IntLiteralExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(stringLiteralExpCSEClass, StringLiteralExpCS.class, "StringLiteralExpCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getStringLiteralExpCS_StringSymbol(), theEcorePackage.getEString(), "stringSymbol", null, 0, 1, StringLiteralExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
 		initEClass(booleanLiteralExpCSEClass, BooleanLiteralExpCS.class, "BooleanLiteralExpCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
+		initEClass(nullLiteralExpCSEClass, NullLiteralExpCS.class, "NullLiteralExpCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(collectionLiteralExpCSEClass, CollectionLiteralExpCS.class, "CollectionLiteralExpCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getCollectionLiteralExpCS_Kind(), this.getCollectionKindCS(), "kind", null, 0, 1, CollectionLiteralExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCollectionLiteralExpCS_Parts(), this.getCollectionLiteralPartCS(), null, "parts", null, 0, -1, CollectionLiteralExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(collectionLiteralPartCSEClass, CollectionLiteralPartCS.class, "CollectionLiteralPartCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getCollectionLiteralPartCS_First(), this.getExpCS(), null, "first", null, 0, 1, CollectionLiteralPartCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCollectionLiteralPartCS_Last(), this.getExpCS(), null, "last", null, 0, 1, CollectionLiteralPartCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(letExpCSEClass, LetExpCS.class, "LetExpCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getLetExpCS_LetVars(), this.getLetVarCS(), null, "letVars", null, 0, -1, LetExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getLetExpCS_InExp(), this.getExpCS(), null, "inExp", null, 0, 1, LetExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(letVarCSEClass, LetVarCS.class, "LetVarCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getLetVarCS_Name(), theEcorePackage.getEString(), "name", null, 0, 1, LetVarCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getLetVarCS_TypeRef(), this.getPathNameCS(), null, "typeRef", null, 0, 1, LetVarCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getLetVarCS_InitExp(), this.getExpCS(), null, "initExp", null, 0, 1, LetVarCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		initEClass(pathNameCSEClass, PathNameCS.class, "PathNameCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getPathNameCS_Path(), this.getPathElementCS(), null, "path", null, 0, -1, PathNameCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPathNameCS_PathElements(), this.getPathElementCS(), null, "pathElements", null, 0, -1, PathNameCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(pathElementCSEClass, PathElementCS.class, "PathElementCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1079,6 +1686,10 @@ public class MinioclcsPackageImpl extends EPackageImpl implements MinioclcsPacka
 
 		initEClass(csTraceEClass, CSTrace.class, "CSTrace", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCSTrace_Ast(), theMiniOCLPackage.getElement(), null, "ast", null, 0, 1, CSTrace.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		// Initialize enums and add enum literals
+		initEEnum(collectionKindCSEEnum, CollectionKindCS.class, "CollectionKindCS");
+		addEEnumLiteral(collectionKindCSEEnum, CollectionKindCS.COLLECTION);
 
 		// Create resource
 		createResource(eNS_URI);

@@ -7,19 +7,13 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-
-import org.eclipse.qvtd.doc.minioclcs.ClassCS;
+import org.eclipse.qvtd.doc.minioclcs.ClassifierCS;
 import org.eclipse.qvtd.doc.minioclcs.MinioclcsPackage;
 import org.eclipse.qvtd.doc.minioclcs.PackageCS;
 
@@ -33,7 +27,7 @@ import org.eclipse.qvtd.doc.minioclcs.PackageCS;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.doc.minioclcs.impl.PackageCSImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.qvtd.doc.minioclcs.impl.PackageCSImpl#getPackages <em>Packages</em>}</li>
- *   <li>{@link org.eclipse.qvtd.doc.minioclcs.impl.PackageCSImpl#getClasses <em>Classes</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.doc.minioclcs.impl.PackageCSImpl#getClassifiers <em>Classifiers</em>}</li>
  * </ul>
  *
  * @generated
@@ -71,14 +65,14 @@ public class PackageCSImpl extends CSTraceImpl implements PackageCS
   protected EList<PackageCS> packages;
 
   /**
-	 * The cached value of the '{@link #getClasses() <em>Classes</em>}' containment reference list.
+	 * The cached value of the '{@link #getClassifiers() <em>Classifiers</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getClasses()
+	 * @see #getClassifiers()
 	 * @generated
 	 * @ordered
 	 */
-  protected EList<ClassCS> classes;
+  protected EList<ClassifierCS> classifiers;
 
   /**
 	 * <!-- begin-user-doc -->
@@ -142,12 +136,12 @@ public class PackageCSImpl extends CSTraceImpl implements PackageCS
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EList<ClassCS> getClasses()
+  public EList<ClassifierCS> getClassifiers()
   {
-		if (classes == null) {
-			classes = new EObjectContainmentEList<ClassCS>(ClassCS.class, this, MinioclcsPackage.PACKAGE_CS__CLASSES);
+		if (classifiers == null) {
+			classifiers = new EObjectContainmentEList<ClassifierCS>(ClassifierCS.class, this, MinioclcsPackage.PACKAGE_CS__CLASSIFIERS);
 		}
-		return classes;
+		return classifiers;
 	}
 
   /**
@@ -161,8 +155,8 @@ public class PackageCSImpl extends CSTraceImpl implements PackageCS
 		switch (featureID) {
 			case MinioclcsPackage.PACKAGE_CS__PACKAGES:
 				return ((InternalEList<?>)getPackages()).basicRemove(otherEnd, msgs);
-			case MinioclcsPackage.PACKAGE_CS__CLASSES:
-				return ((InternalEList<?>)getClasses()).basicRemove(otherEnd, msgs);
+			case MinioclcsPackage.PACKAGE_CS__CLASSIFIERS:
+				return ((InternalEList<?>)getClassifiers()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -180,8 +174,8 @@ public class PackageCSImpl extends CSTraceImpl implements PackageCS
 				return getName();
 			case MinioclcsPackage.PACKAGE_CS__PACKAGES:
 				return getPackages();
-			case MinioclcsPackage.PACKAGE_CS__CLASSES:
-				return getClasses();
+			case MinioclcsPackage.PACKAGE_CS__CLASSIFIERS:
+				return getClassifiers();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -203,9 +197,9 @@ public class PackageCSImpl extends CSTraceImpl implements PackageCS
 				getPackages().clear();
 				getPackages().addAll((Collection<? extends PackageCS>)newValue);
 				return;
-			case MinioclcsPackage.PACKAGE_CS__CLASSES:
-				getClasses().clear();
-				getClasses().addAll((Collection<? extends ClassCS>)newValue);
+			case MinioclcsPackage.PACKAGE_CS__CLASSIFIERS:
+				getClassifiers().clear();
+				getClassifiers().addAll((Collection<? extends ClassifierCS>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -226,8 +220,8 @@ public class PackageCSImpl extends CSTraceImpl implements PackageCS
 			case MinioclcsPackage.PACKAGE_CS__PACKAGES:
 				getPackages().clear();
 				return;
-			case MinioclcsPackage.PACKAGE_CS__CLASSES:
-				getClasses().clear();
+			case MinioclcsPackage.PACKAGE_CS__CLASSIFIERS:
+				getClassifiers().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -246,8 +240,8 @@ public class PackageCSImpl extends CSTraceImpl implements PackageCS
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case MinioclcsPackage.PACKAGE_CS__PACKAGES:
 				return packages != null && !packages.isEmpty();
-			case MinioclcsPackage.PACKAGE_CS__CLASSES:
-				return classes != null && !classes.isEmpty();
+			case MinioclcsPackage.PACKAGE_CS__CLASSIFIERS:
+				return classifiers != null && !classifiers.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

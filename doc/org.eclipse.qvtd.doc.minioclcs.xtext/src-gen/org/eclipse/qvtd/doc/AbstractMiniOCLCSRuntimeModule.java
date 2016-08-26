@@ -3,10 +3,8 @@
  */
 package org.eclipse.qvtd.doc;
 
-import com.google.inject.Binder;
-import com.google.inject.Provider;
-import com.google.inject.name.Names;
 import java.util.Properties;
+
 import org.eclipse.qvtd.doc.generator.MiniOCLCSGenerator;
 import org.eclipse.qvtd.doc.parser.antlr.MiniOCLCSAntlrTokenFileProvider;
 import org.eclipse.qvtd.doc.parser.antlr.MiniOCLCSParser;
@@ -49,6 +47,10 @@ import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer;
 import org.eclipse.xtext.service.DefaultRuntimeModule;
 import org.eclipse.xtext.service.SingletonBinding;
+
+import com.google.inject.Binder;
+import com.google.inject.Provider;
+import com.google.inject.name.Names;
 
 /**
  * Manual modifications go to {@link MiniOCLCSRuntimeModule}.

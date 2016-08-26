@@ -5,8 +5,6 @@ package org.eclipse.qvtd.doc.minioclcs;
 
 import org.eclipse.emf.common.util.EList;
 
-import org.eclipse.emf.ecore.EObject;
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Path Name CS</b></em>'.
@@ -16,7 +14,6 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.doc.minioclcs.PathNameCS#getPath <em>Path</em>}</li>
  *   <li>{@link org.eclipse.qvtd.doc.minioclcs.PathNameCS#getPathElements <em>Path Elements</em>}</li>
  * </ul>
  *
@@ -26,22 +23,6 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface PathNameCS extends CSTrace
 {
-  /**
-	 * Returns the value of the '<em><b>Path</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.qvtd.doc.minioclcs.PathElementCS}.
-	 * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Path</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-	 * @return the value of the '<em>Path</em>' containment reference list.
-	 * @see org.eclipse.qvtd.doc.minioclcs.MinioclcsPackage#getPathNameCS_Path()
-	 * @model containment="true"
-	 * @generated
-	 */
-  EList<PathElementCS> getPath();
-
   /**
 	 * Returns the value of the '<em><b>Path Elements</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.doc.minioclcs.PathElementCS}.

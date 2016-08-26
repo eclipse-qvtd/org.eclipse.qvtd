@@ -4,14 +4,49 @@
 package org.eclipse.qvtd.doc.minioclcs.impl;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-
-import org.eclipse.qvtd.doc.minioclcs.*;
+import org.eclipse.qvtd.doc.minioclcs.AccVarCS;
+import org.eclipse.qvtd.doc.minioclcs.BooleanExpCS;
+import org.eclipse.qvtd.doc.minioclcs.BooleanLiteralExpCS;
+import org.eclipse.qvtd.doc.minioclcs.CallExpCS;
+import org.eclipse.qvtd.doc.minioclcs.ClassCS;
+import org.eclipse.qvtd.doc.minioclcs.ClassifierCS;
+import org.eclipse.qvtd.doc.minioclcs.CollectExpCS;
+import org.eclipse.qvtd.doc.minioclcs.CollectionKindCS;
+import org.eclipse.qvtd.doc.minioclcs.CollectionLiteralExpCS;
+import org.eclipse.qvtd.doc.minioclcs.CollectionLiteralPartCS;
+import org.eclipse.qvtd.doc.minioclcs.ConstraintsDefCS;
+import org.eclipse.qvtd.doc.minioclcs.DatatypeCS;
+import org.eclipse.qvtd.doc.minioclcs.ExpCS;
+import org.eclipse.qvtd.doc.minioclcs.IntLiteralExpCS;
+import org.eclipse.qvtd.doc.minioclcs.InvariantCS;
+import org.eclipse.qvtd.doc.minioclcs.IterateExpCS;
+import org.eclipse.qvtd.doc.minioclcs.IteratorVarCS;
+import org.eclipse.qvtd.doc.minioclcs.LetExpCS;
+import org.eclipse.qvtd.doc.minioclcs.LetVarCS;
+import org.eclipse.qvtd.doc.minioclcs.LiteralExpCS;
+import org.eclipse.qvtd.doc.minioclcs.LogicExpCS;
+import org.eclipse.qvtd.doc.minioclcs.LoopExpCS;
+import org.eclipse.qvtd.doc.minioclcs.MinioclcsFactory;
+import org.eclipse.qvtd.doc.minioclcs.MinioclcsPackage;
+import org.eclipse.qvtd.doc.minioclcs.MultiplicityCS;
+import org.eclipse.qvtd.doc.minioclcs.NameExpCS;
+import org.eclipse.qvtd.doc.minioclcs.NavigationExpCS;
+import org.eclipse.qvtd.doc.minioclcs.NullLiteralExpCS;
+import org.eclipse.qvtd.doc.minioclcs.OperationCS;
+import org.eclipse.qvtd.doc.minioclcs.PackageCS;
+import org.eclipse.qvtd.doc.minioclcs.ParameterCS;
+import org.eclipse.qvtd.doc.minioclcs.PathElementCS;
+import org.eclipse.qvtd.doc.minioclcs.PathNameCS;
+import org.eclipse.qvtd.doc.minioclcs.PrimaryExpCS;
+import org.eclipse.qvtd.doc.minioclcs.PropertyCS;
+import org.eclipse.qvtd.doc.minioclcs.RootCS;
+import org.eclipse.qvtd.doc.minioclcs.RoundedBracketClauseCS;
+import org.eclipse.qvtd.doc.minioclcs.SelfExpCS;
 
 /**
  * <!-- begin-user-doc -->
@@ -63,8 +98,11 @@ public class MinioclcsFactoryImpl extends EFactoryImpl implements MinioclcsFacto
 		switch (eClass.getClassifierID()) {
 			case MinioclcsPackage.ROOT_CS: return createRootCS();
 			case MinioclcsPackage.PACKAGE_CS: return createPackageCS();
+			case MinioclcsPackage.CLASSIFIER_CS: return createClassifierCS();
 			case MinioclcsPackage.CLASS_CS: return createClassCS();
+			case MinioclcsPackage.DATATYPE_CS: return createDatatypeCS();
 			case MinioclcsPackage.PROPERTY_CS: return createPropertyCS();
+			case MinioclcsPackage.MULTIPLICITY_CS: return createMultiplicityCS();
 			case MinioclcsPackage.OPERATION_CS: return createOperationCS();
 			case MinioclcsPackage.PARAMETER_CS: return createParameterCS();
 			case MinioclcsPackage.CONSTRAINTS_DEF_CS: return createConstraintsDefCS();
@@ -73,17 +111,60 @@ public class MinioclcsFactoryImpl extends EFactoryImpl implements MinioclcsFacto
 			case MinioclcsPackage.LOGIC_EXP_CS: return createLogicExpCS();
 			case MinioclcsPackage.CALL_EXP_CS: return createCallExpCS();
 			case MinioclcsPackage.PRIMARY_EXP_CS: return createPrimaryExpCS();
+			case MinioclcsPackage.SELF_EXP_CS: return createSelfExpCS();
+			case MinioclcsPackage.NAVIGATION_EXP_CS: return createNavigationExpCS();
+			case MinioclcsPackage.LOOP_EXP_CS: return createLoopExpCS();
+			case MinioclcsPackage.COLLECT_EXP_CS: return createCollectExpCS();
+			case MinioclcsPackage.ITERATOR_VAR_CS: return createIteratorVarCS();
+			case MinioclcsPackage.ITERATE_EXP_CS: return createIterateExpCS();
+			case MinioclcsPackage.ACC_VAR_CS: return createAccVarCS();
 			case MinioclcsPackage.NAME_EXP_CS: return createNameExpCS();
 			case MinioclcsPackage.ROUNDED_BRACKET_CLAUSE_CS: return createRoundedBracketClauseCS();
 			case MinioclcsPackage.LITERAL_EXP_CS: return createLiteralExpCS();
 			case MinioclcsPackage.INT_LITERAL_EXP_CS: return createIntLiteralExpCS();
-			case MinioclcsPackage.STRING_LITERAL_EXP_CS: return createStringLiteralExpCS();
 			case MinioclcsPackage.BOOLEAN_LITERAL_EXP_CS: return createBooleanLiteralExpCS();
+			case MinioclcsPackage.NULL_LITERAL_EXP_CS: return createNullLiteralExpCS();
+			case MinioclcsPackage.COLLECTION_LITERAL_EXP_CS: return createCollectionLiteralExpCS();
+			case MinioclcsPackage.COLLECTION_LITERAL_PART_CS: return createCollectionLiteralPartCS();
+			case MinioclcsPackage.LET_EXP_CS: return createLetExpCS();
+			case MinioclcsPackage.LET_VAR_CS: return createLetVarCS();
 			case MinioclcsPackage.PATH_NAME_CS: return createPathNameCS();
 			case MinioclcsPackage.PATH_ELEMENT_CS: return createPathElementCS();
 			case MinioclcsPackage.BOOLEAN_EXP_CS: return createBooleanExpCS();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+		}
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  @Override
+  public Object createFromString(EDataType eDataType, String initialValue)
+  {
+		switch (eDataType.getClassifierID()) {
+			case MinioclcsPackage.COLLECTION_KIND_CS:
+				return createCollectionKindCSFromString(eDataType, initialValue);
+			default:
+				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+		}
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  @Override
+  public String convertToString(EDataType eDataType, Object instanceValue)
+  {
+		switch (eDataType.getClassifierID()) {
+			case MinioclcsPackage.COLLECTION_KIND_CS:
+				return convertCollectionKindCSToString(eDataType, instanceValue);
+			default:
+				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
 	}
 
@@ -114,6 +195,17 @@ public class MinioclcsFactoryImpl extends EFactoryImpl implements MinioclcsFacto
    * <!-- end-user-doc -->
 	 * @generated
 	 */
+  public ClassifierCS createClassifierCS()
+  {
+		ClassifierCSImpl classifierCS = new ClassifierCSImpl();
+		return classifierCS;
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
   public ClassCS createClassCS()
   {
 		ClassCSImpl classCS = new ClassCSImpl();
@@ -125,10 +217,32 @@ public class MinioclcsFactoryImpl extends EFactoryImpl implements MinioclcsFacto
    * <!-- end-user-doc -->
 	 * @generated
 	 */
+  public DatatypeCS createDatatypeCS()
+  {
+		DatatypeCSImpl datatypeCS = new DatatypeCSImpl();
+		return datatypeCS;
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
   public PropertyCS createPropertyCS()
   {
 		PropertyCSImpl propertyCS = new PropertyCSImpl();
 		return propertyCS;
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  public MultiplicityCS createMultiplicityCS()
+  {
+		MultiplicityCSImpl multiplicityCS = new MultiplicityCSImpl();
+		return multiplicityCS;
 	}
 
   /**
@@ -224,6 +338,83 @@ public class MinioclcsFactoryImpl extends EFactoryImpl implements MinioclcsFacto
    * <!-- end-user-doc -->
 	 * @generated
 	 */
+  public SelfExpCS createSelfExpCS()
+  {
+		SelfExpCSImpl selfExpCS = new SelfExpCSImpl();
+		return selfExpCS;
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  public NavigationExpCS createNavigationExpCS()
+  {
+		NavigationExpCSImpl navigationExpCS = new NavigationExpCSImpl();
+		return navigationExpCS;
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  public LoopExpCS createLoopExpCS()
+  {
+		LoopExpCSImpl loopExpCS = new LoopExpCSImpl();
+		return loopExpCS;
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  public CollectExpCS createCollectExpCS()
+  {
+		CollectExpCSImpl collectExpCS = new CollectExpCSImpl();
+		return collectExpCS;
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  public IteratorVarCS createIteratorVarCS()
+  {
+		IteratorVarCSImpl iteratorVarCS = new IteratorVarCSImpl();
+		return iteratorVarCS;
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  public IterateExpCS createIterateExpCS()
+  {
+		IterateExpCSImpl iterateExpCS = new IterateExpCSImpl();
+		return iterateExpCS;
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  public AccVarCS createAccVarCS()
+  {
+		AccVarCSImpl accVarCS = new AccVarCSImpl();
+		return accVarCS;
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
   public NameExpCS createNameExpCS()
   {
 		NameExpCSImpl nameExpCS = new NameExpCSImpl();
@@ -268,10 +459,10 @@ public class MinioclcsFactoryImpl extends EFactoryImpl implements MinioclcsFacto
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public StringLiteralExpCS createStringLiteralExpCS()
+  public BooleanLiteralExpCS createBooleanLiteralExpCS()
   {
-		StringLiteralExpCSImpl stringLiteralExpCS = new StringLiteralExpCSImpl();
-		return stringLiteralExpCS;
+		BooleanLiteralExpCSImpl booleanLiteralExpCS = new BooleanLiteralExpCSImpl();
+		return booleanLiteralExpCS;
 	}
 
   /**
@@ -279,10 +470,54 @@ public class MinioclcsFactoryImpl extends EFactoryImpl implements MinioclcsFacto
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public BooleanLiteralExpCS createBooleanLiteralExpCS()
+  public NullLiteralExpCS createNullLiteralExpCS()
   {
-		BooleanLiteralExpCSImpl booleanLiteralExpCS = new BooleanLiteralExpCSImpl();
-		return booleanLiteralExpCS;
+		NullLiteralExpCSImpl nullLiteralExpCS = new NullLiteralExpCSImpl();
+		return nullLiteralExpCS;
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  public CollectionLiteralExpCS createCollectionLiteralExpCS()
+  {
+		CollectionLiteralExpCSImpl collectionLiteralExpCS = new CollectionLiteralExpCSImpl();
+		return collectionLiteralExpCS;
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  public CollectionLiteralPartCS createCollectionLiteralPartCS()
+  {
+		CollectionLiteralPartCSImpl collectionLiteralPartCS = new CollectionLiteralPartCSImpl();
+		return collectionLiteralPartCS;
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  public LetExpCS createLetExpCS()
+  {
+		LetExpCSImpl letExpCS = new LetExpCSImpl();
+		return letExpCS;
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  public LetVarCS createLetVarCS()
+  {
+		LetVarCSImpl letVarCS = new LetVarCSImpl();
+		return letVarCS;
 	}
 
   /**
@@ -316,6 +551,28 @@ public class MinioclcsFactoryImpl extends EFactoryImpl implements MinioclcsFacto
   {
 		BooleanExpCSImpl booleanExpCS = new BooleanExpCSImpl();
 		return booleanExpCS;
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  public CollectionKindCS createCollectionKindCSFromString(EDataType eDataType, String initialValue)
+  {
+		CollectionKindCS result = CollectionKindCS.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  public String convertCollectionKindCSToString(EDataType eDataType, Object instanceValue)
+  {
+		return instanceValue == null ? null : instanceValue.toString();
 	}
 
   /**

@@ -4,6 +4,7 @@
 package org.eclipse.qvtd.doc.parser.antlr;
 
 import java.io.InputStream;
+
 import org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider;
 
 public class MiniOCLCSAntlrTokenFileProvider implements IAntlrTokenFileProvider {

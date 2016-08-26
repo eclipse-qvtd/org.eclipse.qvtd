@@ -3,8 +3,6 @@
  */
 package org.eclipse.qvtd.doc.minioclcs;
 
-import org.eclipse.emf.ecore.EObject;
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Property CS</b></em>'.
@@ -16,6 +14,7 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.doc.minioclcs.PropertyCS#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.qvtd.doc.minioclcs.PropertyCS#getTypeRef <em>Type Ref</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.doc.minioclcs.PropertyCS#getMultiplicity <em>Multiplicity</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.doc.minioclcs.MinioclcsPackage#getPropertyCS()
@@ -75,5 +74,31 @@ public interface PropertyCS extends CSTrace
 	 * @generated
 	 */
   void setTypeRef(PathNameCS value);
+
+  /**
+	 * Returns the value of the '<em><b>Multiplicity</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Multiplicity</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+	 * @return the value of the '<em>Multiplicity</em>' containment reference.
+	 * @see #setMultiplicity(MultiplicityCS)
+	 * @see org.eclipse.qvtd.doc.minioclcs.MinioclcsPackage#getPropertyCS_Multiplicity()
+	 * @model containment="true"
+	 * @generated
+	 */
+  MultiplicityCS getMultiplicity();
+
+  /**
+	 * Sets the value of the '{@link org.eclipse.qvtd.doc.minioclcs.PropertyCS#getMultiplicity <em>Multiplicity</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Multiplicity</em>' containment reference.
+	 * @see #getMultiplicity()
+	 * @generated
+	 */
+  void setMultiplicity(MultiplicityCS value);
 
 } // PropertyCS

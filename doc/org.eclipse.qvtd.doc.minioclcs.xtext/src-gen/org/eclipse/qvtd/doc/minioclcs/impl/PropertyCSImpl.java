@@ -5,14 +5,11 @@ package org.eclipse.qvtd.doc.minioclcs.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
 import org.eclipse.qvtd.doc.minioclcs.MinioclcsPackage;
+import org.eclipse.qvtd.doc.minioclcs.MultiplicityCS;
 import org.eclipse.qvtd.doc.minioclcs.PathNameCS;
 import org.eclipse.qvtd.doc.minioclcs.PropertyCS;
 
@@ -26,6 +23,7 @@ import org.eclipse.qvtd.doc.minioclcs.PropertyCS;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.doc.minioclcs.impl.PropertyCSImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.qvtd.doc.minioclcs.impl.PropertyCSImpl#getTypeRef <em>Type Ref</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.doc.minioclcs.impl.PropertyCSImpl#getMultiplicity <em>Multiplicity</em>}</li>
  * </ul>
  *
  * @generated
@@ -61,6 +59,16 @@ public class PropertyCSImpl extends CSTraceImpl implements PropertyCS
 	 * @ordered
 	 */
   protected PathNameCS typeRef;
+
+  /**
+	 * The cached value of the '{@link #getMultiplicity() <em>Multiplicity</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @see #getMultiplicity()
+	 * @generated
+	 * @ordered
+	 */
+  protected MultiplicityCS multiplicity;
 
   /**
 	 * <!-- begin-user-doc -->
@@ -157,12 +165,60 @@ public class PropertyCSImpl extends CSTraceImpl implements PropertyCS
    * <!-- end-user-doc -->
 	 * @generated
 	 */
+  public MultiplicityCS getMultiplicity()
+  {
+		return multiplicity;
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  public NotificationChain basicSetMultiplicity(MultiplicityCS newMultiplicity, NotificationChain msgs)
+  {
+		MultiplicityCS oldMultiplicity = multiplicity;
+		multiplicity = newMultiplicity;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MinioclcsPackage.PROPERTY_CS__MULTIPLICITY, oldMultiplicity, newMultiplicity);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  public void setMultiplicity(MultiplicityCS newMultiplicity)
+  {
+		if (newMultiplicity != multiplicity) {
+			NotificationChain msgs = null;
+			if (multiplicity != null)
+				msgs = ((InternalEObject)multiplicity).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MinioclcsPackage.PROPERTY_CS__MULTIPLICITY, null, msgs);
+			if (newMultiplicity != null)
+				msgs = ((InternalEObject)newMultiplicity).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MinioclcsPackage.PROPERTY_CS__MULTIPLICITY, null, msgs);
+			msgs = basicSetMultiplicity(newMultiplicity, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, MinioclcsPackage.PROPERTY_CS__MULTIPLICITY, newMultiplicity, newMultiplicity));
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
 		switch (featureID) {
 			case MinioclcsPackage.PROPERTY_CS__TYPE_REF:
 				return basicSetTypeRef(null, msgs);
+			case MinioclcsPackage.PROPERTY_CS__MULTIPLICITY:
+				return basicSetMultiplicity(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -180,6 +236,8 @@ public class PropertyCSImpl extends CSTraceImpl implements PropertyCS
 				return getName();
 			case MinioclcsPackage.PROPERTY_CS__TYPE_REF:
 				return getTypeRef();
+			case MinioclcsPackage.PROPERTY_CS__MULTIPLICITY:
+				return getMultiplicity();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -198,6 +256,9 @@ public class PropertyCSImpl extends CSTraceImpl implements PropertyCS
 				return;
 			case MinioclcsPackage.PROPERTY_CS__TYPE_REF:
 				setTypeRef((PathNameCS)newValue);
+				return;
+			case MinioclcsPackage.PROPERTY_CS__MULTIPLICITY:
+				setMultiplicity((MultiplicityCS)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -218,6 +279,9 @@ public class PropertyCSImpl extends CSTraceImpl implements PropertyCS
 			case MinioclcsPackage.PROPERTY_CS__TYPE_REF:
 				setTypeRef((PathNameCS)null);
 				return;
+			case MinioclcsPackage.PROPERTY_CS__MULTIPLICITY:
+				setMultiplicity((MultiplicityCS)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -235,6 +299,8 @@ public class PropertyCSImpl extends CSTraceImpl implements PropertyCS
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case MinioclcsPackage.PROPERTY_CS__TYPE_REF:
 				return typeRef != null;
+			case MinioclcsPackage.PROPERTY_CS__MULTIPLICITY:
+				return multiplicity != null;
 		}
 		return super.eIsSet(featureID);
 	}

@@ -21,7 +21,7 @@ package org.eclipse.qvtd.doc.minioclcs;
  * @model
  * @generated
  */
-public interface NameExpCS extends PrimaryExpCS
+public interface NameExpCS extends PrimaryExpCS, NavigationExpCS
 {
   /**
 	 * Returns the value of the '<em><b>Exp Name</b></em>' containment reference.

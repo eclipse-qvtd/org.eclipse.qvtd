@@ -3,11 +3,12 @@
  */
 package org.eclipse.qvtd.doc.parser.antlr;
 
-import com.google.inject.Inject;
 import org.eclipse.qvtd.doc.parser.antlr.internal.InternalMiniOCLCSParser;
 import org.eclipse.qvtd.doc.services.MiniOCLCSGrammarAccess;
 import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+
+import com.google.inject.Inject;
 
 public class MiniOCLCSParser extends AbstractAntlrParser {
 
