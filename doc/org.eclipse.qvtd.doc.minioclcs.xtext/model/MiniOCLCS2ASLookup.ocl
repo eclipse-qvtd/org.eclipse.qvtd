@@ -102,7 +102,7 @@ def : lookupNamedElement(aPathElementCS : cs::PathElementCS) : NamedElement[?] =
    
 	
 context Package
-	
+   
 def : _lookupQualifiedPackage(pName : String) : Package[?] =
    let foundPackage = _lookupPackage(_qualified_env_Package(), pName)
    in  if foundPackage->isEmpty()
@@ -115,7 +115,7 @@ def : _qualified_env_Package() : lookup::LookupEnvironment =
    .addElements(ownedPackages)
 def : lookupQualifiedPackage(aPathElementCS : cs::PathElementCS) : Package[?] =
    _lookupQualifiedPackage(aPathElementCS.elementName)
-	
+   
 def : _lookupQualifiedClass(cName : String) : Class[?] =
    let foundClass = _lookupClass(_qualified_env_Class(), cName)
    in  if foundClass->isEmpty()
@@ -165,7 +165,7 @@ def : lookupPackage(segments : OrderedSet(cs::PathElementCS)) : Package[?] =
    endif
 	
 context Class
-	
+   
 def : _lookupQualifiedOperation(oName : String, args : OrderedSet(OCLExpression)) : Operation[?] =
    let foundOperation = _lookupOperation(_qualified_env_Operation(), oName, args)
    in  if foundOperation->isEmpty()
@@ -178,7 +178,7 @@ def : _qualified_env_Operation() : lookup::LookupEnvironment =
    .addElements(ownedOperations)
 def : lookupQualifiedOperation(aPathElementCS : cs::PathElementCS, args : OrderedSet(OCLExpression)) : Operation[?] =
    _lookupQualifiedOperation(aPathElementCS.elementName, args)
-	
+   
 def : _lookupQualifiedProperty(pName : String) : Property[?] =
    let foundProperty = _lookupProperty(_qualified_env_Property(), pName)
    in  if foundProperty->isEmpty()
@@ -382,19 +382,22 @@ def : _unqualified_env_Operation(child : ocl::OclElement) : lookup::LookupEnviro
       
 def : _unqualified_env_Property(child : ocl::OclElement) : lookup::LookupEnvironment =
    let superClasses = self->closure(superClass)
-   in
-      
+   in 
    parentEnv_Property().nestedEnv()
       .addElements(superClasses.ownedProperties)
       .nestedEnv()
       .addElements(ownedProperties)
       
 def : _exported_env_Operation(importer : ocl::OclElement) : lookup::LookupEnvironment =
+   let superClasses = self->closure(superClass)
+   in 
    let env = lookup::LookupEnvironment {}
    in env
       .addElements(ownedOperations)
    
 def : _exported_env_Property(importer : ocl::OclElement) : lookup::LookupEnvironment =
+   let superClasses = self->closure(superClass)
+   in 
    let env = lookup::LookupEnvironment {}
    in env
       .addElements(ownedProperties)

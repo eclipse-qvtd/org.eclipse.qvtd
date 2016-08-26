@@ -16,7 +16,7 @@ context PackageCS
 def : ast() : as::Package[1] =
 	as::Package {
 		name = name.toString(), -- FIXME bug 494252 
-	ownedClasses = classes.ast()->asOrderedSet(), -- FIXME remove asOrderedSet()
+	ownedClasses = classifiers.ast()->asOrderedSet(), -- FIXME remove asOrderedSet()
 	ownedPackages = packages.ast()->asOrderedSet()  -- FIXME remove asOrderedSet()
 	}
 	
@@ -32,6 +32,9 @@ def : ast() : as::Class[1] =
 --				.ast()->asOrderedSet(), -- FIXME remove asOrderedSet()
 		superClass = if _extends = null then null else ast().lookupClass(_extends) endif
 	}
+context ClassifierCS
+def : ast () : as::Class[1] =
+	null -- to be overriden
 	
 --context InvariantCS
 --def :  ast() : as::Constraint[1] =
@@ -74,8 +77,12 @@ def : ast() : as::OCLExpression[1] =
 	invalid -- to be overridden
 	
 context CallExpCS
-def : ast() : as::OCLExpression[1] =
-	nameExp.ast()
+def : ast() : as::CallExp[1] =
+	navExp.ast()
+	
+context NavigationExpCS
+def : ast() : as::CallExp =
+    null -- to be overriden 
 
 context NameExpCS
 def : ast() : as::OCLExpression[1] =
@@ -106,7 +113,7 @@ def : ast() : as::OCLExpression[1] =
 	}
 	else if isVariableExp() 
 	then as::VariableExp {
-		referredVariable = ast().lookupVariable(expName.path->first()), 
+		referredVariable = ast().lookupVariable(expName.pathElements->first()), 
 		type = ast().oclAsType(as::VariableExp).referredVariable.type
 	} 
 	else if isPropCallExpWithImplicitSource()

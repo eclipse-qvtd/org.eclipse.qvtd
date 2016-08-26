@@ -18,7 +18,7 @@ def : isNameExpOfACallExpCS() : Boolean =
 	-- in parentCallExpCS <> null and parentCallExpCS.nameExp = self
 	in if parentCallExpCS = null
 	   then false
-	   else parentCallExpCS.nameExp = self
+	   else parentCallExpCS.navExp = self
 	   endif
 	 
 endpackage

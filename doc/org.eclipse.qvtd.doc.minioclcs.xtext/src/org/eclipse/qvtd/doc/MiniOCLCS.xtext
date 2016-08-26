@@ -6,13 +6,17 @@ RootCS:
 	(packages+=PackageCS
 	| contraints+=ConstraintsDefCS)*
 ;
-	
+
 PackageCS:
 	'package' name=ID '{'
 		(packages+=PackageCS
-		|classes+=ClassCS
+		|classifiers+=ClassifierCS
 		)*
 	'}'
+;
+
+ClassifierCS:
+   ClassCS | DatatypeCS
 ;
 
 ClassCS:
@@ -22,15 +26,26 @@ ClassCS:
 	'}'
 ;
 
-PropertyCS:
-	'prop' name=ID ':' typeRef=PathNameCS ';'
+DatatypeCS:
+  'datatype' name=ID ':' typeName=STRING ';'
 ;
 
+PropertyCS:
+  ('attribute' | 'containment' | 'cross_reference')
+  name=ID ':' typeRef=PathNameCS
+  (multiplicity=MultiplicityCS)? ';'
+;
+
+MultiplicityCS:
+  '['
+  (opt?='?' | mult?='*' | (lower=INT '..' (upperInt=INT | upperMult?='*')))
+  ']'
+;
 OperationCS:
 	'op' name=ID
 	'(' (params+=ParameterCS (','params+=ParameterCS)*)? ')'
 	':' resultRef=PathNameCS
-	'=' body=ExpCS  
+	'=' body=ExpCS
 	';'
 ;
 
@@ -59,11 +74,39 @@ LogicExpCS:
 ;
 
 CallExpCS:
-	PrimaryExpCS ({CallExpCS.source=current} op=('.' | '->') nameExp=NameExpCS)*
+	PrimaryExpCS ({CallExpCS.source=current} op=('.' | '->') navExp=NavigationExpCS)*
 ;
 
 PrimaryExpCS:
-	NameExpCS | LiteralExpCS
+  SelfExpCS | NameExpCS | LiteralExpCS | LetExpCS
+;
+
+SelfExpCS:
+   {SelfExpCS} 'self'
+;
+
+NavigationExpCS:
+  LoopExpCS | NameExpCS
+;
+
+LoopExpCS:
+  CollectExpCS | IterateExpCS
+;
+
+CollectExpCS:
+  'collect' '(' (itVar=IteratorVarCS '|')? exp=ExpCS')'
+;
+
+IteratorVarCS:
+  itName = ID (':' itType=PathNameCS)?
+;
+
+IterateExpCS:
+  'iterate' '(' itVar=IteratorVarCS ';' accVar=AccVarCS '|' exp=ExpCS ')'
+;
+
+AccVarCS:
+  accName = ID (':' accType=PathNameCS)? '=' accInitExp=ExpCS
 ;
 
 NameExpCS:
@@ -74,31 +117,56 @@ NameExpCS:
 RoundedBracketClauseCS:
 	{RoundedBracketClauseCS}
 	'('
-		(args+=ExpCS (','args+=ExpCS)* )? 
+		(args+=ExpCS (','args+=ExpCS)* )?
 	')'
 ;
 
 LiteralExpCS:
-	IntLiteralExpCS | StringLiteralExpCS | BooleanLiteralExpCS
+	IntLiteralExpCS | BooleanLiteralExpCS | NullLiteralExpCS | CollectionLiteralExpCS
 ;
 
 IntLiteralExpCS :
 	intSymbol=INT
 ;
 
-StringLiteralExpCS:
-	stringSymbol=STRING
-;
-
 BooleanLiteralExpCS:
 	{BooleanExpCS}
 	(boolSymbol?='true'
 	| 'false')
-	;
+;
+
+NullLiteralExpCS:
+  {NullLiteralExpCS}
+	'null'
+;
+
+enum CollectionKindCS:
+  Collection='Collection'
+;
+
+CollectionLiteralExpCS:
+  kind=CollectionKindCS '{'
+  (parts+=CollectionLiteralPartCS)*
+  '}'
+;
+
+CollectionLiteralPartCS:
+  first=ExpCS
+  ('..' last=ExpCS)?
+;
+
+LetExpCS:
+  'let' letVars+=LetVarCS (',' letVars+=LetVarCS)*
+  'in' inExp=ExpCS
+;
+
+LetVarCS:
+  name=ID (':' typeRef=PathNameCS)? '=' initExp=ExpCS
+;
 
 PathNameCS :
-	path+=PathElementCS
-	('::'pathElements+=PathElementCS)*
+	  pathElements+=PathElementCS
+	  ('::'pathElements+=PathElementCS)*
 ;
 
 PathElementCS:
