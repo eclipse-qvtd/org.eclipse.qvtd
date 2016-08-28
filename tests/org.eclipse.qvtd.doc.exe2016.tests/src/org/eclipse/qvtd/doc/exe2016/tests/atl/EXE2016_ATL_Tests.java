@@ -20,8 +20,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.m2m.atl.core.IInjector;
 import org.eclipse.m2m.atl.core.emf.EMFInjector;
@@ -29,14 +27,6 @@ import org.eclipse.m2m.atl.core.emf.EMFModel;
 import org.eclipse.m2m.atl.core.emf.EMFModelFactory;
 import org.eclipse.m2m.atl.core.emf.EMFReferenceModel;
 import org.eclipse.m2m.atl.core.launch.ILauncher;
-import org.eclipse.m2m.atl.emftvm.EmftvmFactory;
-import org.eclipse.m2m.atl.emftvm.ExecEnv;
-import org.eclipse.m2m.atl.emftvm.Metamodel;
-import org.eclipse.m2m.atl.emftvm.Model;
-import org.eclipse.m2m.atl.emftvm.impl.resource.EMFTVMResourceFactoryImpl;
-import org.eclipse.m2m.atl.emftvm.util.DefaultModuleResolver;
-import org.eclipse.m2m.atl.emftvm.util.ModuleResolver;
-import org.eclipse.m2m.atl.emftvm.util.TimingData;
 import org.eclipse.m2m.atl.engine.emfvm.launch.EMFVMLauncher;
 import org.eclipse.qvtd.doc.exe2016.tests.AbstractEXE2016CGTests;
 import org.eclipse.qvtd.doc.exe2016.tests.DoublyLinkedListGenerator;
@@ -141,84 +131,6 @@ public class EXE2016_ATL_Tests extends AbstractEXE2016CGTests
 			 */
 			modelFactory.unload(forwardListMetamodel);
 			modelFactory.unload(reverseListMetamodel);
-			logger.dispose();
-		}
-	}
-
-	@Test
-	public void testQVTcCompiler_Forward2Reverse_EMFTVM() throws Exception {
-		DoublyLinkedListGenerator doublyLinkedListGenerator = new DoublyLinkedListGenerator();
-		PrintAndLog logger = new PrintAndLog(getName());
-		logger.printf("%s\n", getName());
-		try {
-			int[] tests = PrintAndLog.getTestSizes();
-			for (int testSize : tests) {
-
-				ExecEnv env = EmftvmFactory.eINSTANCE.createExecEnv();
-				ResourceSet resourceSet = new ResourceSetImpl();
-				resourceSet.getPackageRegistry().put(DoublylinkedlistPackage.eNS_URI, DoublylinkedlistPackage.eINSTANCE);
-				Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("xmi", new XMIResourceFactoryImpl());
-				Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("emftvm", new EMFTVMResourceFactoryImpl());
-
-				// Load metamodels
-				Metamodel metaModel = EmftvmFactory.eINSTANCE.createMetamodel();
-				metaModel.setResource(resourceSet.getResource(URI.createURI("http://www.eclipse.org/m2m/atl/2011/EMFTVM"), true));
-				env.registerMetaModel("METAMODEL", metaModel);
-				metaModel = EmftvmFactory.eINSTANCE.createMetamodel();
-				metaModel.setResource(resourceSet.getResource(URI.createURI(DoublylinkedlistPackage.eNS_URI), true));
-				env.registerMetaModel("ForwardList", metaModel);
-				env.registerMetaModel("ReverseList", metaModel);
-				Resource forwardResource = resourceSet.createResource(URI.createURI("src/org/eclipse/qvtd/doc/exe2016/tests/atl/samples-Families.xmi"));
-				try {
-					forwardResource.load(new InputStream() {
-						@Override
-						public int read()      { return -1; }
-						@Override
-						public int available() { return 0; }
-					}, null);
-				}
-				catch(Throwable e) {}
-				Model outModel = EmftvmFactory.eINSTANCE.createModel();
-				outModel.setResource(resourceSet.createResource(URI.createFileURI("out.xmi")));
-
-				//		try {
-				//	        int[] tests = PrintAndLog.getTestSizes();
-				//	        for (int testSize : tests) {
-				// Load models
-				Model inModel = EmftvmFactory.eINSTANCE.createModel();
-				forwardResource.getContents().clear();
-				outModel.getResource().getContents().clear();
-				env.clearModels();
-				garbageCollect();
-				Collection<@NonNull ? extends EObject> rootObjects = doublyLinkedListGenerator.createDoublyLinkedListModel(testSize);
-				forwardResource.getContents().addAll(rootObjects);
-				inModel.setResource(forwardResource);
-				env.registerInputModel("IN", inModel);
-				env.registerOutputModel("OUT", outModel);
-
-				// Load and run module
-				ModuleResolver mr = new DefaultModuleResolver("src/org/eclipse/qvtd/doc/exe2016/tests/atl/", new ResourceSetImpl());
-				TimingData td = new TimingData();
-				env.loadModule(mr, "Forward2Reverse");
-				td.finishLoading();
-				logger.printf("%9d, ", testSize);
-				garbageCollect();
-				long startTime = System.nanoTime();
-				env.run(td);
-				long endTime = System.nanoTime();
-				logger.printf("%9.6f\n", (endTime - startTime) / 1.0e9);
-				td.finish();
-
-				Resource reverseListResource = outModel.getResource();
-				Collection<@NonNull EObject> rootObjects2 = reverseListResource.getContents();
-				Iterator<@NonNull EObject> it = rootObjects2.iterator();
-				Object rootObject = it.next();
-				assert !it.hasNext();
-				assert ((DoublyLinkedList)rootObject).getOwnedElements().size() == testSize-1;
-				doublyLinkedListGenerator.checkModel((DoublyLinkedList) rootObject, testSize);
-			}
-		}
-		finally {
 			logger.dispose();
 		}
 	}

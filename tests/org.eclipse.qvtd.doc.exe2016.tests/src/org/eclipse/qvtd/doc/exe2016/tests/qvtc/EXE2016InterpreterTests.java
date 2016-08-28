@@ -70,7 +70,7 @@ public class EXE2016InterpreterTests extends QVTcCompilerTests
 	}
 
 	@Test
-	public void testQVTcCompiler_Forward2Reverse_1K() throws Exception {
+	public void testQVTcCompiler_Forward2Reverse_100K() throws Exception {
 		DoublyLinkedListGenerator doublyLinkedListGenerator = new DoublyLinkedListGenerator();
 		PrintAndLog logger = new PrintAndLog("results/" + getName());
 		logger.printf("%s\n", getName());
@@ -79,7 +79,7 @@ public class EXE2016InterpreterTests extends QVTcCompilerTests
 		//		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 		try {
 			Transformation asTransformation = myQVT.compileTransformation("Forward2Reverse.qvtc", "reverse");
-			int testSize = 1000;
+			int testSize = 100000;
 			BasicQVTiExecutor interpretedExecutor = myQVT.createInterpretedExecutor(asTransformation);
 			myQVT.loadInput("forward", "EmptyList.xmi");
 			Resource inResource = interpretedExecutor.getModel("forward");
