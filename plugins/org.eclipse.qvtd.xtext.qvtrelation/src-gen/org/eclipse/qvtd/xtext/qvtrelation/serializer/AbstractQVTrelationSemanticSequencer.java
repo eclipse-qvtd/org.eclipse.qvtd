@@ -874,7 +874,13 @@ public abstract class AbstractQVTrelationSemanticSequencer extends QVTbaseSemant
 	 *     QueryCS returns QueryCS
 	 *
 	 * Constraint:
-	 *     (name=UnrestrictedName (ownedParameters+=ParamDeclarationCS ownedParameters+=ParamDeclarationCS*)? ownedType=TypedRefCS ownedExpression=ExpCS?)
+	 *     (
+	 *         isTransient?='transient'? 
+	 *         name=UnrestrictedName 
+	 *         (ownedParameters+=ParamDeclarationCS ownedParameters+=ParamDeclarationCS*)? 
+	 *         ownedType=TypedRefCS 
+	 *         ownedExpression=ExpCS?
+	 *     )
 	 */
 	protected void sequence_QueryCS(ISerializationContext context, QueryCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

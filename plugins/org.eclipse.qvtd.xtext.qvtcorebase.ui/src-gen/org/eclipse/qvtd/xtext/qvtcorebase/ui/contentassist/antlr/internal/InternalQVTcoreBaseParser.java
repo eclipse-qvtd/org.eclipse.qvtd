@@ -66986,17 +66986,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__ScopeNameCS__OwnedPathElementsAssignment_0"
-    // InternalQVTcoreBase.g:22865:1: rule__ScopeNameCS__OwnedPathElementsAssignment_0 : ( ruleFirstPathElementCS ) ;
+    // InternalQVTcoreBase.g:22866:1: rule__ScopeNameCS__OwnedPathElementsAssignment_0 : ( ruleFirstPathElementCS ) ;
     public final void rule__ScopeNameCS__OwnedPathElementsAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:22869:1: ( ( ruleFirstPathElementCS ) )
-            // InternalQVTcoreBase.g:22870:1: ( ruleFirstPathElementCS )
+            // InternalQVTcoreBase.g:22870:1: ( ( ruleFirstPathElementCS ) )
+            // InternalQVTcoreBase.g:22871:1: ( ruleFirstPathElementCS )
             {
-            // InternalQVTcoreBase.g:22870:1: ( ruleFirstPathElementCS )
-            // InternalQVTcoreBase.g:22871:1: ruleFirstPathElementCS
+            // InternalQVTcoreBase.g:22871:1: ( ruleFirstPathElementCS )
+            // InternalQVTcoreBase.g:22872:1: ruleFirstPathElementCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getScopeNameCSAccess().getOwnedPathElementsFirstPathElementCSParserRuleCall_0_0()); 
@@ -67031,17 +67031,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__ScopeNameCS__OwnedPathElementsAssignment_2_0"
-    // InternalQVTcoreBase.g:22880:1: rule__ScopeNameCS__OwnedPathElementsAssignment_2_0 : ( ruleNextPathElementCS ) ;
+    // InternalQVTcoreBase.g:22881:1: rule__ScopeNameCS__OwnedPathElementsAssignment_2_0 : ( ruleNextPathElementCS ) ;
     public final void rule__ScopeNameCS__OwnedPathElementsAssignment_2_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:22884:1: ( ( ruleNextPathElementCS ) )
-            // InternalQVTcoreBase.g:22885:1: ( ruleNextPathElementCS )
+            // InternalQVTcoreBase.g:22885:1: ( ( ruleNextPathElementCS ) )
+            // InternalQVTcoreBase.g:22886:1: ( ruleNextPathElementCS )
             {
-            // InternalQVTcoreBase.g:22885:1: ( ruleNextPathElementCS )
-            // InternalQVTcoreBase.g:22886:1: ruleNextPathElementCS
+            // InternalQVTcoreBase.g:22886:1: ( ruleNextPathElementCS )
+            // InternalQVTcoreBase.g:22887:1: ruleNextPathElementCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getScopeNameCSAccess().getOwnedPathElementsNextPathElementCSParserRuleCall_2_0_0()); 
@@ -67076,17 +67076,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__TransformationCS__OwnedPathNameAssignment_1"
-    // InternalQVTcoreBase.g:22895:1: rule__TransformationCS__OwnedPathNameAssignment_1 : ( ruleScopeNameCS ) ;
+    // InternalQVTcoreBase.g:22896:1: rule__TransformationCS__OwnedPathNameAssignment_1 : ( ruleScopeNameCS ) ;
     public final void rule__TransformationCS__OwnedPathNameAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:22899:1: ( ( ruleScopeNameCS ) )
-            // InternalQVTcoreBase.g:22900:1: ( ruleScopeNameCS )
+            // InternalQVTcoreBase.g:22900:1: ( ( ruleScopeNameCS ) )
+            // InternalQVTcoreBase.g:22901:1: ( ruleScopeNameCS )
             {
-            // InternalQVTcoreBase.g:22900:1: ( ruleScopeNameCS )
-            // InternalQVTcoreBase.g:22901:1: ruleScopeNameCS
+            // InternalQVTcoreBase.g:22901:1: ( ruleScopeNameCS )
+            // InternalQVTcoreBase.g:22902:1: ruleScopeNameCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTransformationCSAccess().getOwnedPathNameScopeNameCSParserRuleCall_1_0()); 
@@ -67121,17 +67121,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__TransformationCS__NameAssignment_2"
-    // InternalQVTcoreBase.g:22910:1: rule__TransformationCS__NameAssignment_2 : ( ruleUnreservedName ) ;
+    // InternalQVTcoreBase.g:22911:1: rule__TransformationCS__NameAssignment_2 : ( ruleUnreservedName ) ;
     public final void rule__TransformationCS__NameAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:22914:1: ( ( ruleUnreservedName ) )
-            // InternalQVTcoreBase.g:22915:1: ( ruleUnreservedName )
+            // InternalQVTcoreBase.g:22915:1: ( ( ruleUnreservedName ) )
+            // InternalQVTcoreBase.g:22916:1: ( ruleUnreservedName )
             {
-            // InternalQVTcoreBase.g:22915:1: ( ruleUnreservedName )
-            // InternalQVTcoreBase.g:22916:1: ruleUnreservedName
+            // InternalQVTcoreBase.g:22916:1: ( ruleUnreservedName )
+            // InternalQVTcoreBase.g:22917:1: ruleUnreservedName
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTransformationCSAccess().getNameUnreservedNameParserRuleCall_2_0()); 
@@ -67166,17 +67166,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__TransformationCS__OwnedDirectionsAssignment_4_0"
-    // InternalQVTcoreBase.g:22925:1: rule__TransformationCS__OwnedDirectionsAssignment_4_0 : ( ruleDirectionCS ) ;
+    // InternalQVTcoreBase.g:22926:1: rule__TransformationCS__OwnedDirectionsAssignment_4_0 : ( ruleDirectionCS ) ;
     public final void rule__TransformationCS__OwnedDirectionsAssignment_4_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:22929:1: ( ( ruleDirectionCS ) )
-            // InternalQVTcoreBase.g:22930:1: ( ruleDirectionCS )
+            // InternalQVTcoreBase.g:22930:1: ( ( ruleDirectionCS ) )
+            // InternalQVTcoreBase.g:22931:1: ( ruleDirectionCS )
             {
-            // InternalQVTcoreBase.g:22930:1: ( ruleDirectionCS )
-            // InternalQVTcoreBase.g:22931:1: ruleDirectionCS
+            // InternalQVTcoreBase.g:22931:1: ( ruleDirectionCS )
+            // InternalQVTcoreBase.g:22932:1: ruleDirectionCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTransformationCSAccess().getOwnedDirectionsDirectionCSParserRuleCall_4_0_0()); 
@@ -67211,17 +67211,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__UnrealizedVariableCS__NameAssignment_0"
-    // InternalQVTcoreBase.g:22940:1: rule__UnrealizedVariableCS__NameAssignment_0 : ( ruleUnrestrictedName ) ;
+    // InternalQVTcoreBase.g:22941:1: rule__UnrealizedVariableCS__NameAssignment_0 : ( ruleUnrestrictedName ) ;
     public final void rule__UnrealizedVariableCS__NameAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:22944:1: ( ( ruleUnrestrictedName ) )
-            // InternalQVTcoreBase.g:22945:1: ( ruleUnrestrictedName )
+            // InternalQVTcoreBase.g:22945:1: ( ( ruleUnrestrictedName ) )
+            // InternalQVTcoreBase.g:22946:1: ( ruleUnrestrictedName )
             {
-            // InternalQVTcoreBase.g:22945:1: ( ruleUnrestrictedName )
-            // InternalQVTcoreBase.g:22946:1: ruleUnrestrictedName
+            // InternalQVTcoreBase.g:22946:1: ( ruleUnrestrictedName )
+            // InternalQVTcoreBase.g:22947:1: ruleUnrestrictedName
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getUnrealizedVariableCSAccess().getNameUnrestrictedNameParserRuleCall_0_0()); 
@@ -67256,17 +67256,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__UnrealizedVariableCS__OwnedTypeAssignment_1_1"
-    // InternalQVTcoreBase.g:22955:1: rule__UnrealizedVariableCS__OwnedTypeAssignment_1_1 : ( ruleTypeExpCS ) ;
+    // InternalQVTcoreBase.g:22956:1: rule__UnrealizedVariableCS__OwnedTypeAssignment_1_1 : ( ruleTypeExpCS ) ;
     public final void rule__UnrealizedVariableCS__OwnedTypeAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:22959:1: ( ( ruleTypeExpCS ) )
-            // InternalQVTcoreBase.g:22960:1: ( ruleTypeExpCS )
+            // InternalQVTcoreBase.g:22960:1: ( ( ruleTypeExpCS ) )
+            // InternalQVTcoreBase.g:22961:1: ( ruleTypeExpCS )
             {
-            // InternalQVTcoreBase.g:22960:1: ( ruleTypeExpCS )
-            // InternalQVTcoreBase.g:22961:1: ruleTypeExpCS
+            // InternalQVTcoreBase.g:22961:1: ( ruleTypeExpCS )
+            // InternalQVTcoreBase.g:22962:1: ruleTypeExpCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getUnrealizedVariableCSAccess().getOwnedTypeTypeExpCSParserRuleCall_1_1_0()); 
@@ -67301,17 +67301,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__UnrealizedVariableCS__OwnedInitExpressionAssignment_2_1"
-    // InternalQVTcoreBase.g:22970:1: rule__UnrealizedVariableCS__OwnedInitExpressionAssignment_2_1 : ( ruleExpCS ) ;
+    // InternalQVTcoreBase.g:22971:1: rule__UnrealizedVariableCS__OwnedInitExpressionAssignment_2_1 : ( ruleExpCS ) ;
     public final void rule__UnrealizedVariableCS__OwnedInitExpressionAssignment_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:22974:1: ( ( ruleExpCS ) )
-            // InternalQVTcoreBase.g:22975:1: ( ruleExpCS )
+            // InternalQVTcoreBase.g:22975:1: ( ( ruleExpCS ) )
+            // InternalQVTcoreBase.g:22976:1: ( ruleExpCS )
             {
-            // InternalQVTcoreBase.g:22975:1: ( ruleExpCS )
-            // InternalQVTcoreBase.g:22976:1: ruleExpCS
+            // InternalQVTcoreBase.g:22976:1: ( ruleExpCS )
+            // InternalQVTcoreBase.g:22977:1: ruleExpCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getUnrealizedVariableCSAccess().getOwnedInitExpressionExpCSParserRuleCall_2_1_0()); 
@@ -67346,17 +67346,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__RealizedVariableCS__NameAssignment_1"
-    // InternalQVTcoreBase.g:22985:1: rule__RealizedVariableCS__NameAssignment_1 : ( ruleUnrestrictedName ) ;
+    // InternalQVTcoreBase.g:22986:1: rule__RealizedVariableCS__NameAssignment_1 : ( ruleUnrestrictedName ) ;
     public final void rule__RealizedVariableCS__NameAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:22989:1: ( ( ruleUnrestrictedName ) )
-            // InternalQVTcoreBase.g:22990:1: ( ruleUnrestrictedName )
+            // InternalQVTcoreBase.g:22990:1: ( ( ruleUnrestrictedName ) )
+            // InternalQVTcoreBase.g:22991:1: ( ruleUnrestrictedName )
             {
-            // InternalQVTcoreBase.g:22990:1: ( ruleUnrestrictedName )
-            // InternalQVTcoreBase.g:22991:1: ruleUnrestrictedName
+            // InternalQVTcoreBase.g:22991:1: ( ruleUnrestrictedName )
+            // InternalQVTcoreBase.g:22992:1: ruleUnrestrictedName
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getRealizedVariableCSAccess().getNameUnrestrictedNameParserRuleCall_1_0()); 
@@ -67391,17 +67391,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__RealizedVariableCS__OwnedTypeAssignment_3"
-    // InternalQVTcoreBase.g:23000:1: rule__RealizedVariableCS__OwnedTypeAssignment_3 : ( ruleTypeExpCS ) ;
+    // InternalQVTcoreBase.g:23001:1: rule__RealizedVariableCS__OwnedTypeAssignment_3 : ( ruleTypeExpCS ) ;
     public final void rule__RealizedVariableCS__OwnedTypeAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:23004:1: ( ( ruleTypeExpCS ) )
-            // InternalQVTcoreBase.g:23005:1: ( ruleTypeExpCS )
+            // InternalQVTcoreBase.g:23005:1: ( ( ruleTypeExpCS ) )
+            // InternalQVTcoreBase.g:23006:1: ( ruleTypeExpCS )
             {
-            // InternalQVTcoreBase.g:23005:1: ( ruleTypeExpCS )
-            // InternalQVTcoreBase.g:23006:1: ruleTypeExpCS
+            // InternalQVTcoreBase.g:23006:1: ( ruleTypeExpCS )
+            // InternalQVTcoreBase.g:23007:1: ruleTypeExpCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getRealizedVariableCSAccess().getOwnedTypeTypeExpCSParserRuleCall_3_0()); 
@@ -67436,23 +67436,23 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__AttributeCS__QualifiersAssignment_0_0_0"
-    // InternalQVTcoreBase.g:23017:1: rule__AttributeCS__QualifiersAssignment_0_0_0 : ( ( 'static' ) ) ;
+    // InternalQVTcoreBase.g:23018:1: rule__AttributeCS__QualifiersAssignment_0_0_0 : ( ( 'static' ) ) ;
     public final void rule__AttributeCS__QualifiersAssignment_0_0_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:23021:1: ( ( ( 'static' ) ) )
-            // InternalQVTcoreBase.g:23022:1: ( ( 'static' ) )
+            // InternalQVTcoreBase.g:23022:1: ( ( ( 'static' ) ) )
+            // InternalQVTcoreBase.g:23023:1: ( ( 'static' ) )
             {
-            // InternalQVTcoreBase.g:23022:1: ( ( 'static' ) )
-            // InternalQVTcoreBase.g:23023:1: ( 'static' )
+            // InternalQVTcoreBase.g:23023:1: ( ( 'static' ) )
+            // InternalQVTcoreBase.g:23024:1: ( 'static' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeCSAccess().getQualifiersStaticKeyword_0_0_0_0()); 
             }
-            // InternalQVTcoreBase.g:23024:1: ( 'static' )
-            // InternalQVTcoreBase.g:23025:1: 'static'
+            // InternalQVTcoreBase.g:23025:1: ( 'static' )
+            // InternalQVTcoreBase.g:23026:1: 'static'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeCSAccess().getQualifiersStaticKeyword_0_0_0_0()); 
@@ -67489,23 +67489,23 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__AttributeCS__QualifiersAssignment_0_0_1"
-    // InternalQVTcoreBase.g:23040:1: rule__AttributeCS__QualifiersAssignment_0_0_1 : ( ( 'definition' ) ) ;
+    // InternalQVTcoreBase.g:23041:1: rule__AttributeCS__QualifiersAssignment_0_0_1 : ( ( 'definition' ) ) ;
     public final void rule__AttributeCS__QualifiersAssignment_0_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:23044:1: ( ( ( 'definition' ) ) )
-            // InternalQVTcoreBase.g:23045:1: ( ( 'definition' ) )
+            // InternalQVTcoreBase.g:23045:1: ( ( ( 'definition' ) ) )
+            // InternalQVTcoreBase.g:23046:1: ( ( 'definition' ) )
             {
-            // InternalQVTcoreBase.g:23045:1: ( ( 'definition' ) )
-            // InternalQVTcoreBase.g:23046:1: ( 'definition' )
+            // InternalQVTcoreBase.g:23046:1: ( ( 'definition' ) )
+            // InternalQVTcoreBase.g:23047:1: ( 'definition' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeCSAccess().getQualifiersDefinitionKeyword_0_0_1_0()); 
             }
-            // InternalQVTcoreBase.g:23047:1: ( 'definition' )
-            // InternalQVTcoreBase.g:23048:1: 'definition'
+            // InternalQVTcoreBase.g:23048:1: ( 'definition' )
+            // InternalQVTcoreBase.g:23049:1: 'definition'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeCSAccess().getQualifiersDefinitionKeyword_0_0_1_0()); 
@@ -67542,23 +67542,23 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__AttributeCS__QualifiersAssignment_0_1_0"
-    // InternalQVTcoreBase.g:23063:1: rule__AttributeCS__QualifiersAssignment_0_1_0 : ( ( 'definition' ) ) ;
+    // InternalQVTcoreBase.g:23064:1: rule__AttributeCS__QualifiersAssignment_0_1_0 : ( ( 'definition' ) ) ;
     public final void rule__AttributeCS__QualifiersAssignment_0_1_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:23067:1: ( ( ( 'definition' ) ) )
-            // InternalQVTcoreBase.g:23068:1: ( ( 'definition' ) )
+            // InternalQVTcoreBase.g:23068:1: ( ( ( 'definition' ) ) )
+            // InternalQVTcoreBase.g:23069:1: ( ( 'definition' ) )
             {
-            // InternalQVTcoreBase.g:23068:1: ( ( 'definition' ) )
-            // InternalQVTcoreBase.g:23069:1: ( 'definition' )
+            // InternalQVTcoreBase.g:23069:1: ( ( 'definition' ) )
+            // InternalQVTcoreBase.g:23070:1: ( 'definition' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeCSAccess().getQualifiersDefinitionKeyword_0_1_0_0()); 
             }
-            // InternalQVTcoreBase.g:23070:1: ( 'definition' )
-            // InternalQVTcoreBase.g:23071:1: 'definition'
+            // InternalQVTcoreBase.g:23071:1: ( 'definition' )
+            // InternalQVTcoreBase.g:23072:1: 'definition'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeCSAccess().getQualifiersDefinitionKeyword_0_1_0_0()); 
@@ -67595,23 +67595,23 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__AttributeCS__QualifiersAssignment_0_1_1"
-    // InternalQVTcoreBase.g:23086:1: rule__AttributeCS__QualifiersAssignment_0_1_1 : ( ( 'static' ) ) ;
+    // InternalQVTcoreBase.g:23087:1: rule__AttributeCS__QualifiersAssignment_0_1_1 : ( ( 'static' ) ) ;
     public final void rule__AttributeCS__QualifiersAssignment_0_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:23090:1: ( ( ( 'static' ) ) )
-            // InternalQVTcoreBase.g:23091:1: ( ( 'static' ) )
+            // InternalQVTcoreBase.g:23091:1: ( ( ( 'static' ) ) )
+            // InternalQVTcoreBase.g:23092:1: ( ( 'static' ) )
             {
-            // InternalQVTcoreBase.g:23091:1: ( ( 'static' ) )
-            // InternalQVTcoreBase.g:23092:1: ( 'static' )
+            // InternalQVTcoreBase.g:23092:1: ( ( 'static' ) )
+            // InternalQVTcoreBase.g:23093:1: ( 'static' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeCSAccess().getQualifiersStaticKeyword_0_1_1_0()); 
             }
-            // InternalQVTcoreBase.g:23093:1: ( 'static' )
-            // InternalQVTcoreBase.g:23094:1: 'static'
+            // InternalQVTcoreBase.g:23094:1: ( 'static' )
+            // InternalQVTcoreBase.g:23095:1: 'static'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeCSAccess().getQualifiersStaticKeyword_0_1_1_0()); 
@@ -67648,17 +67648,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__AttributeCS__NameAssignment_2"
-    // InternalQVTcoreBase.g:23109:1: rule__AttributeCS__NameAssignment_2 : ( ruleUnrestrictedName ) ;
+    // InternalQVTcoreBase.g:23110:1: rule__AttributeCS__NameAssignment_2 : ( ruleUnrestrictedName ) ;
     public final void rule__AttributeCS__NameAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:23113:1: ( ( ruleUnrestrictedName ) )
-            // InternalQVTcoreBase.g:23114:1: ( ruleUnrestrictedName )
+            // InternalQVTcoreBase.g:23114:1: ( ( ruleUnrestrictedName ) )
+            // InternalQVTcoreBase.g:23115:1: ( ruleUnrestrictedName )
             {
-            // InternalQVTcoreBase.g:23114:1: ( ruleUnrestrictedName )
-            // InternalQVTcoreBase.g:23115:1: ruleUnrestrictedName
+            // InternalQVTcoreBase.g:23115:1: ( ruleUnrestrictedName )
+            // InternalQVTcoreBase.g:23116:1: ruleUnrestrictedName
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeCSAccess().getNameUnrestrictedNameParserRuleCall_2_0()); 
@@ -67693,17 +67693,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__AttributeCS__OwnedTypeAssignment_3_1"
-    // InternalQVTcoreBase.g:23124:1: rule__AttributeCS__OwnedTypeAssignment_3_1 : ( ruleTypedMultiplicityRefCS ) ;
+    // InternalQVTcoreBase.g:23125:1: rule__AttributeCS__OwnedTypeAssignment_3_1 : ( ruleTypedMultiplicityRefCS ) ;
     public final void rule__AttributeCS__OwnedTypeAssignment_3_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:23128:1: ( ( ruleTypedMultiplicityRefCS ) )
-            // InternalQVTcoreBase.g:23129:1: ( ruleTypedMultiplicityRefCS )
+            // InternalQVTcoreBase.g:23129:1: ( ( ruleTypedMultiplicityRefCS ) )
+            // InternalQVTcoreBase.g:23130:1: ( ruleTypedMultiplicityRefCS )
             {
-            // InternalQVTcoreBase.g:23129:1: ( ruleTypedMultiplicityRefCS )
-            // InternalQVTcoreBase.g:23130:1: ruleTypedMultiplicityRefCS
+            // InternalQVTcoreBase.g:23130:1: ( ruleTypedMultiplicityRefCS )
+            // InternalQVTcoreBase.g:23131:1: ruleTypedMultiplicityRefCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeCSAccess().getOwnedTypeTypedMultiplicityRefCSParserRuleCall_3_1_0()); 
@@ -67738,17 +67738,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__AttributeCS__DefaultAssignment_4_1"
-    // InternalQVTcoreBase.g:23139:1: rule__AttributeCS__DefaultAssignment_4_1 : ( RULE_SINGLE_QUOTED_STRING ) ;
+    // InternalQVTcoreBase.g:23140:1: rule__AttributeCS__DefaultAssignment_4_1 : ( RULE_SINGLE_QUOTED_STRING ) ;
     public final void rule__AttributeCS__DefaultAssignment_4_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:23143:1: ( ( RULE_SINGLE_QUOTED_STRING ) )
-            // InternalQVTcoreBase.g:23144:1: ( RULE_SINGLE_QUOTED_STRING )
+            // InternalQVTcoreBase.g:23144:1: ( ( RULE_SINGLE_QUOTED_STRING ) )
+            // InternalQVTcoreBase.g:23145:1: ( RULE_SINGLE_QUOTED_STRING )
             {
-            // InternalQVTcoreBase.g:23144:1: ( RULE_SINGLE_QUOTED_STRING )
-            // InternalQVTcoreBase.g:23145:1: RULE_SINGLE_QUOTED_STRING
+            // InternalQVTcoreBase.g:23145:1: ( RULE_SINGLE_QUOTED_STRING )
+            // InternalQVTcoreBase.g:23146:1: RULE_SINGLE_QUOTED_STRING
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeCSAccess().getDefaultSINGLE_QUOTED_STRINGTerminalRuleCall_4_1_0()); 
@@ -67779,23 +67779,23 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__AttributeCS__QualifiersAssignment_5_1_0_0"
-    // InternalQVTcoreBase.g:23154:1: rule__AttributeCS__QualifiersAssignment_5_1_0_0 : ( ( 'derived' ) ) ;
+    // InternalQVTcoreBase.g:23155:1: rule__AttributeCS__QualifiersAssignment_5_1_0_0 : ( ( 'derived' ) ) ;
     public final void rule__AttributeCS__QualifiersAssignment_5_1_0_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:23158:1: ( ( ( 'derived' ) ) )
-            // InternalQVTcoreBase.g:23159:1: ( ( 'derived' ) )
+            // InternalQVTcoreBase.g:23159:1: ( ( ( 'derived' ) ) )
+            // InternalQVTcoreBase.g:23160:1: ( ( 'derived' ) )
             {
-            // InternalQVTcoreBase.g:23159:1: ( ( 'derived' ) )
-            // InternalQVTcoreBase.g:23160:1: ( 'derived' )
+            // InternalQVTcoreBase.g:23160:1: ( ( 'derived' ) )
+            // InternalQVTcoreBase.g:23161:1: ( 'derived' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeCSAccess().getQualifiersDerivedKeyword_5_1_0_0_0()); 
             }
-            // InternalQVTcoreBase.g:23161:1: ( 'derived' )
-            // InternalQVTcoreBase.g:23162:1: 'derived'
+            // InternalQVTcoreBase.g:23162:1: ( 'derived' )
+            // InternalQVTcoreBase.g:23163:1: 'derived'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeCSAccess().getQualifiersDerivedKeyword_5_1_0_0_0()); 
@@ -67832,23 +67832,23 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__AttributeCS__QualifiersAssignment_5_1_0_1"
-    // InternalQVTcoreBase.g:23177:1: rule__AttributeCS__QualifiersAssignment_5_1_0_1 : ( ( '!derived' ) ) ;
+    // InternalQVTcoreBase.g:23178:1: rule__AttributeCS__QualifiersAssignment_5_1_0_1 : ( ( '!derived' ) ) ;
     public final void rule__AttributeCS__QualifiersAssignment_5_1_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:23181:1: ( ( ( '!derived' ) ) )
-            // InternalQVTcoreBase.g:23182:1: ( ( '!derived' ) )
+            // InternalQVTcoreBase.g:23182:1: ( ( ( '!derived' ) ) )
+            // InternalQVTcoreBase.g:23183:1: ( ( '!derived' ) )
             {
-            // InternalQVTcoreBase.g:23182:1: ( ( '!derived' ) )
-            // InternalQVTcoreBase.g:23183:1: ( '!derived' )
+            // InternalQVTcoreBase.g:23183:1: ( ( '!derived' ) )
+            // InternalQVTcoreBase.g:23184:1: ( '!derived' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeCSAccess().getQualifiersDerivedKeyword_5_1_0_1_0()); 
             }
-            // InternalQVTcoreBase.g:23184:1: ( '!derived' )
-            // InternalQVTcoreBase.g:23185:1: '!derived'
+            // InternalQVTcoreBase.g:23185:1: ( '!derived' )
+            // InternalQVTcoreBase.g:23186:1: '!derived'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeCSAccess().getQualifiersDerivedKeyword_5_1_0_1_0()); 
@@ -67885,23 +67885,23 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__AttributeCS__QualifiersAssignment_5_1_0_2"
-    // InternalQVTcoreBase.g:23200:1: rule__AttributeCS__QualifiersAssignment_5_1_0_2 : ( ( 'id' ) ) ;
+    // InternalQVTcoreBase.g:23201:1: rule__AttributeCS__QualifiersAssignment_5_1_0_2 : ( ( 'id' ) ) ;
     public final void rule__AttributeCS__QualifiersAssignment_5_1_0_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:23204:1: ( ( ( 'id' ) ) )
-            // InternalQVTcoreBase.g:23205:1: ( ( 'id' ) )
+            // InternalQVTcoreBase.g:23205:1: ( ( ( 'id' ) ) )
+            // InternalQVTcoreBase.g:23206:1: ( ( 'id' ) )
             {
-            // InternalQVTcoreBase.g:23205:1: ( ( 'id' ) )
-            // InternalQVTcoreBase.g:23206:1: ( 'id' )
+            // InternalQVTcoreBase.g:23206:1: ( ( 'id' ) )
+            // InternalQVTcoreBase.g:23207:1: ( 'id' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeCSAccess().getQualifiersIdKeyword_5_1_0_2_0()); 
             }
-            // InternalQVTcoreBase.g:23207:1: ( 'id' )
-            // InternalQVTcoreBase.g:23208:1: 'id'
+            // InternalQVTcoreBase.g:23208:1: ( 'id' )
+            // InternalQVTcoreBase.g:23209:1: 'id'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeCSAccess().getQualifiersIdKeyword_5_1_0_2_0()); 
@@ -67938,23 +67938,23 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__AttributeCS__QualifiersAssignment_5_1_0_3"
-    // InternalQVTcoreBase.g:23223:1: rule__AttributeCS__QualifiersAssignment_5_1_0_3 : ( ( '!id' ) ) ;
+    // InternalQVTcoreBase.g:23224:1: rule__AttributeCS__QualifiersAssignment_5_1_0_3 : ( ( '!id' ) ) ;
     public final void rule__AttributeCS__QualifiersAssignment_5_1_0_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:23227:1: ( ( ( '!id' ) ) )
-            // InternalQVTcoreBase.g:23228:1: ( ( '!id' ) )
+            // InternalQVTcoreBase.g:23228:1: ( ( ( '!id' ) ) )
+            // InternalQVTcoreBase.g:23229:1: ( ( '!id' ) )
             {
-            // InternalQVTcoreBase.g:23228:1: ( ( '!id' ) )
-            // InternalQVTcoreBase.g:23229:1: ( '!id' )
+            // InternalQVTcoreBase.g:23229:1: ( ( '!id' ) )
+            // InternalQVTcoreBase.g:23230:1: ( '!id' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeCSAccess().getQualifiersIdKeyword_5_1_0_3_0()); 
             }
-            // InternalQVTcoreBase.g:23230:1: ( '!id' )
-            // InternalQVTcoreBase.g:23231:1: '!id'
+            // InternalQVTcoreBase.g:23231:1: ( '!id' )
+            // InternalQVTcoreBase.g:23232:1: '!id'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeCSAccess().getQualifiersIdKeyword_5_1_0_3_0()); 
@@ -67991,23 +67991,23 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__AttributeCS__QualifiersAssignment_5_1_0_4"
-    // InternalQVTcoreBase.g:23246:1: rule__AttributeCS__QualifiersAssignment_5_1_0_4 : ( ( 'ordered' ) ) ;
+    // InternalQVTcoreBase.g:23247:1: rule__AttributeCS__QualifiersAssignment_5_1_0_4 : ( ( 'ordered' ) ) ;
     public final void rule__AttributeCS__QualifiersAssignment_5_1_0_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:23250:1: ( ( ( 'ordered' ) ) )
-            // InternalQVTcoreBase.g:23251:1: ( ( 'ordered' ) )
+            // InternalQVTcoreBase.g:23251:1: ( ( ( 'ordered' ) ) )
+            // InternalQVTcoreBase.g:23252:1: ( ( 'ordered' ) )
             {
-            // InternalQVTcoreBase.g:23251:1: ( ( 'ordered' ) )
-            // InternalQVTcoreBase.g:23252:1: ( 'ordered' )
+            // InternalQVTcoreBase.g:23252:1: ( ( 'ordered' ) )
+            // InternalQVTcoreBase.g:23253:1: ( 'ordered' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeCSAccess().getQualifiersOrderedKeyword_5_1_0_4_0()); 
             }
-            // InternalQVTcoreBase.g:23253:1: ( 'ordered' )
-            // InternalQVTcoreBase.g:23254:1: 'ordered'
+            // InternalQVTcoreBase.g:23254:1: ( 'ordered' )
+            // InternalQVTcoreBase.g:23255:1: 'ordered'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeCSAccess().getQualifiersOrderedKeyword_5_1_0_4_0()); 
@@ -68044,23 +68044,23 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__AttributeCS__QualifiersAssignment_5_1_0_5"
-    // InternalQVTcoreBase.g:23269:1: rule__AttributeCS__QualifiersAssignment_5_1_0_5 : ( ( '!ordered' ) ) ;
+    // InternalQVTcoreBase.g:23270:1: rule__AttributeCS__QualifiersAssignment_5_1_0_5 : ( ( '!ordered' ) ) ;
     public final void rule__AttributeCS__QualifiersAssignment_5_1_0_5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:23273:1: ( ( ( '!ordered' ) ) )
-            // InternalQVTcoreBase.g:23274:1: ( ( '!ordered' ) )
+            // InternalQVTcoreBase.g:23274:1: ( ( ( '!ordered' ) ) )
+            // InternalQVTcoreBase.g:23275:1: ( ( '!ordered' ) )
             {
-            // InternalQVTcoreBase.g:23274:1: ( ( '!ordered' ) )
-            // InternalQVTcoreBase.g:23275:1: ( '!ordered' )
+            // InternalQVTcoreBase.g:23275:1: ( ( '!ordered' ) )
+            // InternalQVTcoreBase.g:23276:1: ( '!ordered' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeCSAccess().getQualifiersOrderedKeyword_5_1_0_5_0()); 
             }
-            // InternalQVTcoreBase.g:23276:1: ( '!ordered' )
-            // InternalQVTcoreBase.g:23277:1: '!ordered'
+            // InternalQVTcoreBase.g:23277:1: ( '!ordered' )
+            // InternalQVTcoreBase.g:23278:1: '!ordered'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeCSAccess().getQualifiersOrderedKeyword_5_1_0_5_0()); 
@@ -68097,23 +68097,23 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__AttributeCS__QualifiersAssignment_5_1_0_6"
-    // InternalQVTcoreBase.g:23292:1: rule__AttributeCS__QualifiersAssignment_5_1_0_6 : ( ( 'readonly' ) ) ;
+    // InternalQVTcoreBase.g:23293:1: rule__AttributeCS__QualifiersAssignment_5_1_0_6 : ( ( 'readonly' ) ) ;
     public final void rule__AttributeCS__QualifiersAssignment_5_1_0_6() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:23296:1: ( ( ( 'readonly' ) ) )
-            // InternalQVTcoreBase.g:23297:1: ( ( 'readonly' ) )
+            // InternalQVTcoreBase.g:23297:1: ( ( ( 'readonly' ) ) )
+            // InternalQVTcoreBase.g:23298:1: ( ( 'readonly' ) )
             {
-            // InternalQVTcoreBase.g:23297:1: ( ( 'readonly' ) )
-            // InternalQVTcoreBase.g:23298:1: ( 'readonly' )
+            // InternalQVTcoreBase.g:23298:1: ( ( 'readonly' ) )
+            // InternalQVTcoreBase.g:23299:1: ( 'readonly' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeCSAccess().getQualifiersReadonlyKeyword_5_1_0_6_0()); 
             }
-            // InternalQVTcoreBase.g:23299:1: ( 'readonly' )
-            // InternalQVTcoreBase.g:23300:1: 'readonly'
+            // InternalQVTcoreBase.g:23300:1: ( 'readonly' )
+            // InternalQVTcoreBase.g:23301:1: 'readonly'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeCSAccess().getQualifiersReadonlyKeyword_5_1_0_6_0()); 
@@ -68150,23 +68150,23 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__AttributeCS__QualifiersAssignment_5_1_0_7"
-    // InternalQVTcoreBase.g:23315:1: rule__AttributeCS__QualifiersAssignment_5_1_0_7 : ( ( '!readonly' ) ) ;
+    // InternalQVTcoreBase.g:23316:1: rule__AttributeCS__QualifiersAssignment_5_1_0_7 : ( ( '!readonly' ) ) ;
     public final void rule__AttributeCS__QualifiersAssignment_5_1_0_7() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:23319:1: ( ( ( '!readonly' ) ) )
-            // InternalQVTcoreBase.g:23320:1: ( ( '!readonly' ) )
+            // InternalQVTcoreBase.g:23320:1: ( ( ( '!readonly' ) ) )
+            // InternalQVTcoreBase.g:23321:1: ( ( '!readonly' ) )
             {
-            // InternalQVTcoreBase.g:23320:1: ( ( '!readonly' ) )
-            // InternalQVTcoreBase.g:23321:1: ( '!readonly' )
+            // InternalQVTcoreBase.g:23321:1: ( ( '!readonly' ) )
+            // InternalQVTcoreBase.g:23322:1: ( '!readonly' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeCSAccess().getQualifiersReadonlyKeyword_5_1_0_7_0()); 
             }
-            // InternalQVTcoreBase.g:23322:1: ( '!readonly' )
-            // InternalQVTcoreBase.g:23323:1: '!readonly'
+            // InternalQVTcoreBase.g:23323:1: ( '!readonly' )
+            // InternalQVTcoreBase.g:23324:1: '!readonly'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeCSAccess().getQualifiersReadonlyKeyword_5_1_0_7_0()); 
@@ -68203,23 +68203,23 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__AttributeCS__QualifiersAssignment_5_1_0_8"
-    // InternalQVTcoreBase.g:23338:1: rule__AttributeCS__QualifiersAssignment_5_1_0_8 : ( ( 'transient' ) ) ;
+    // InternalQVTcoreBase.g:23339:1: rule__AttributeCS__QualifiersAssignment_5_1_0_8 : ( ( 'transient' ) ) ;
     public final void rule__AttributeCS__QualifiersAssignment_5_1_0_8() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:23342:1: ( ( ( 'transient' ) ) )
-            // InternalQVTcoreBase.g:23343:1: ( ( 'transient' ) )
+            // InternalQVTcoreBase.g:23343:1: ( ( ( 'transient' ) ) )
+            // InternalQVTcoreBase.g:23344:1: ( ( 'transient' ) )
             {
-            // InternalQVTcoreBase.g:23343:1: ( ( 'transient' ) )
-            // InternalQVTcoreBase.g:23344:1: ( 'transient' )
+            // InternalQVTcoreBase.g:23344:1: ( ( 'transient' ) )
+            // InternalQVTcoreBase.g:23345:1: ( 'transient' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeCSAccess().getQualifiersTransientKeyword_5_1_0_8_0()); 
             }
-            // InternalQVTcoreBase.g:23345:1: ( 'transient' )
-            // InternalQVTcoreBase.g:23346:1: 'transient'
+            // InternalQVTcoreBase.g:23346:1: ( 'transient' )
+            // InternalQVTcoreBase.g:23347:1: 'transient'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeCSAccess().getQualifiersTransientKeyword_5_1_0_8_0()); 
@@ -68256,23 +68256,23 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__AttributeCS__QualifiersAssignment_5_1_0_9"
-    // InternalQVTcoreBase.g:23361:1: rule__AttributeCS__QualifiersAssignment_5_1_0_9 : ( ( '!transient' ) ) ;
+    // InternalQVTcoreBase.g:23362:1: rule__AttributeCS__QualifiersAssignment_5_1_0_9 : ( ( '!transient' ) ) ;
     public final void rule__AttributeCS__QualifiersAssignment_5_1_0_9() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:23365:1: ( ( ( '!transient' ) ) )
-            // InternalQVTcoreBase.g:23366:1: ( ( '!transient' ) )
+            // InternalQVTcoreBase.g:23366:1: ( ( ( '!transient' ) ) )
+            // InternalQVTcoreBase.g:23367:1: ( ( '!transient' ) )
             {
-            // InternalQVTcoreBase.g:23366:1: ( ( '!transient' ) )
-            // InternalQVTcoreBase.g:23367:1: ( '!transient' )
+            // InternalQVTcoreBase.g:23367:1: ( ( '!transient' ) )
+            // InternalQVTcoreBase.g:23368:1: ( '!transient' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeCSAccess().getQualifiersTransientKeyword_5_1_0_9_0()); 
             }
-            // InternalQVTcoreBase.g:23368:1: ( '!transient' )
-            // InternalQVTcoreBase.g:23369:1: '!transient'
+            // InternalQVTcoreBase.g:23369:1: ( '!transient' )
+            // InternalQVTcoreBase.g:23370:1: '!transient'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeCSAccess().getQualifiersTransientKeyword_5_1_0_9_0()); 
@@ -68309,23 +68309,23 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__AttributeCS__QualifiersAssignment_5_1_0_10"
-    // InternalQVTcoreBase.g:23384:1: rule__AttributeCS__QualifiersAssignment_5_1_0_10 : ( ( 'unique' ) ) ;
+    // InternalQVTcoreBase.g:23385:1: rule__AttributeCS__QualifiersAssignment_5_1_0_10 : ( ( 'unique' ) ) ;
     public final void rule__AttributeCS__QualifiersAssignment_5_1_0_10() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:23388:1: ( ( ( 'unique' ) ) )
-            // InternalQVTcoreBase.g:23389:1: ( ( 'unique' ) )
+            // InternalQVTcoreBase.g:23389:1: ( ( ( 'unique' ) ) )
+            // InternalQVTcoreBase.g:23390:1: ( ( 'unique' ) )
             {
-            // InternalQVTcoreBase.g:23389:1: ( ( 'unique' ) )
-            // InternalQVTcoreBase.g:23390:1: ( 'unique' )
+            // InternalQVTcoreBase.g:23390:1: ( ( 'unique' ) )
+            // InternalQVTcoreBase.g:23391:1: ( 'unique' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeCSAccess().getQualifiersUniqueKeyword_5_1_0_10_0()); 
             }
-            // InternalQVTcoreBase.g:23391:1: ( 'unique' )
-            // InternalQVTcoreBase.g:23392:1: 'unique'
+            // InternalQVTcoreBase.g:23392:1: ( 'unique' )
+            // InternalQVTcoreBase.g:23393:1: 'unique'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeCSAccess().getQualifiersUniqueKeyword_5_1_0_10_0()); 
@@ -68362,23 +68362,23 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__AttributeCS__QualifiersAssignment_5_1_0_11"
-    // InternalQVTcoreBase.g:23407:1: rule__AttributeCS__QualifiersAssignment_5_1_0_11 : ( ( '!unique' ) ) ;
+    // InternalQVTcoreBase.g:23408:1: rule__AttributeCS__QualifiersAssignment_5_1_0_11 : ( ( '!unique' ) ) ;
     public final void rule__AttributeCS__QualifiersAssignment_5_1_0_11() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:23411:1: ( ( ( '!unique' ) ) )
-            // InternalQVTcoreBase.g:23412:1: ( ( '!unique' ) )
+            // InternalQVTcoreBase.g:23412:1: ( ( ( '!unique' ) ) )
+            // InternalQVTcoreBase.g:23413:1: ( ( '!unique' ) )
             {
-            // InternalQVTcoreBase.g:23412:1: ( ( '!unique' ) )
-            // InternalQVTcoreBase.g:23413:1: ( '!unique' )
+            // InternalQVTcoreBase.g:23413:1: ( ( '!unique' ) )
+            // InternalQVTcoreBase.g:23414:1: ( '!unique' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeCSAccess().getQualifiersUniqueKeyword_5_1_0_11_0()); 
             }
-            // InternalQVTcoreBase.g:23414:1: ( '!unique' )
-            // InternalQVTcoreBase.g:23415:1: '!unique'
+            // InternalQVTcoreBase.g:23415:1: ( '!unique' )
+            // InternalQVTcoreBase.g:23416:1: '!unique'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeCSAccess().getQualifiersUniqueKeyword_5_1_0_11_0()); 
@@ -68415,23 +68415,23 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__AttributeCS__QualifiersAssignment_5_1_0_12"
-    // InternalQVTcoreBase.g:23430:1: rule__AttributeCS__QualifiersAssignment_5_1_0_12 : ( ( 'unsettable' ) ) ;
+    // InternalQVTcoreBase.g:23431:1: rule__AttributeCS__QualifiersAssignment_5_1_0_12 : ( ( 'unsettable' ) ) ;
     public final void rule__AttributeCS__QualifiersAssignment_5_1_0_12() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:23434:1: ( ( ( 'unsettable' ) ) )
-            // InternalQVTcoreBase.g:23435:1: ( ( 'unsettable' ) )
+            // InternalQVTcoreBase.g:23435:1: ( ( ( 'unsettable' ) ) )
+            // InternalQVTcoreBase.g:23436:1: ( ( 'unsettable' ) )
             {
-            // InternalQVTcoreBase.g:23435:1: ( ( 'unsettable' ) )
-            // InternalQVTcoreBase.g:23436:1: ( 'unsettable' )
+            // InternalQVTcoreBase.g:23436:1: ( ( 'unsettable' ) )
+            // InternalQVTcoreBase.g:23437:1: ( 'unsettable' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeCSAccess().getQualifiersUnsettableKeyword_5_1_0_12_0()); 
             }
-            // InternalQVTcoreBase.g:23437:1: ( 'unsettable' )
-            // InternalQVTcoreBase.g:23438:1: 'unsettable'
+            // InternalQVTcoreBase.g:23438:1: ( 'unsettable' )
+            // InternalQVTcoreBase.g:23439:1: 'unsettable'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeCSAccess().getQualifiersUnsettableKeyword_5_1_0_12_0()); 
@@ -68468,23 +68468,23 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__AttributeCS__QualifiersAssignment_5_1_0_13"
-    // InternalQVTcoreBase.g:23453:1: rule__AttributeCS__QualifiersAssignment_5_1_0_13 : ( ( '!unsettable' ) ) ;
+    // InternalQVTcoreBase.g:23454:1: rule__AttributeCS__QualifiersAssignment_5_1_0_13 : ( ( '!unsettable' ) ) ;
     public final void rule__AttributeCS__QualifiersAssignment_5_1_0_13() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:23457:1: ( ( ( '!unsettable' ) ) )
-            // InternalQVTcoreBase.g:23458:1: ( ( '!unsettable' ) )
+            // InternalQVTcoreBase.g:23458:1: ( ( ( '!unsettable' ) ) )
+            // InternalQVTcoreBase.g:23459:1: ( ( '!unsettable' ) )
             {
-            // InternalQVTcoreBase.g:23458:1: ( ( '!unsettable' ) )
-            // InternalQVTcoreBase.g:23459:1: ( '!unsettable' )
+            // InternalQVTcoreBase.g:23459:1: ( ( '!unsettable' ) )
+            // InternalQVTcoreBase.g:23460:1: ( '!unsettable' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeCSAccess().getQualifiersUnsettableKeyword_5_1_0_13_0()); 
             }
-            // InternalQVTcoreBase.g:23460:1: ( '!unsettable' )
-            // InternalQVTcoreBase.g:23461:1: '!unsettable'
+            // InternalQVTcoreBase.g:23461:1: ( '!unsettable' )
+            // InternalQVTcoreBase.g:23462:1: '!unsettable'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeCSAccess().getQualifiersUnsettableKeyword_5_1_0_13_0()); 
@@ -68521,23 +68521,23 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__AttributeCS__QualifiersAssignment_5_1_0_14"
-    // InternalQVTcoreBase.g:23476:1: rule__AttributeCS__QualifiersAssignment_5_1_0_14 : ( ( 'volatile' ) ) ;
+    // InternalQVTcoreBase.g:23477:1: rule__AttributeCS__QualifiersAssignment_5_1_0_14 : ( ( 'volatile' ) ) ;
     public final void rule__AttributeCS__QualifiersAssignment_5_1_0_14() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:23480:1: ( ( ( 'volatile' ) ) )
-            // InternalQVTcoreBase.g:23481:1: ( ( 'volatile' ) )
+            // InternalQVTcoreBase.g:23481:1: ( ( ( 'volatile' ) ) )
+            // InternalQVTcoreBase.g:23482:1: ( ( 'volatile' ) )
             {
-            // InternalQVTcoreBase.g:23481:1: ( ( 'volatile' ) )
-            // InternalQVTcoreBase.g:23482:1: ( 'volatile' )
+            // InternalQVTcoreBase.g:23482:1: ( ( 'volatile' ) )
+            // InternalQVTcoreBase.g:23483:1: ( 'volatile' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeCSAccess().getQualifiersVolatileKeyword_5_1_0_14_0()); 
             }
-            // InternalQVTcoreBase.g:23483:1: ( 'volatile' )
-            // InternalQVTcoreBase.g:23484:1: 'volatile'
+            // InternalQVTcoreBase.g:23484:1: ( 'volatile' )
+            // InternalQVTcoreBase.g:23485:1: 'volatile'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeCSAccess().getQualifiersVolatileKeyword_5_1_0_14_0()); 
@@ -68574,23 +68574,23 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__AttributeCS__QualifiersAssignment_5_1_0_15"
-    // InternalQVTcoreBase.g:23499:1: rule__AttributeCS__QualifiersAssignment_5_1_0_15 : ( ( '!volatile' ) ) ;
+    // InternalQVTcoreBase.g:23500:1: rule__AttributeCS__QualifiersAssignment_5_1_0_15 : ( ( '!volatile' ) ) ;
     public final void rule__AttributeCS__QualifiersAssignment_5_1_0_15() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:23503:1: ( ( ( '!volatile' ) ) )
-            // InternalQVTcoreBase.g:23504:1: ( ( '!volatile' ) )
+            // InternalQVTcoreBase.g:23504:1: ( ( ( '!volatile' ) ) )
+            // InternalQVTcoreBase.g:23505:1: ( ( '!volatile' ) )
             {
-            // InternalQVTcoreBase.g:23504:1: ( ( '!volatile' ) )
-            // InternalQVTcoreBase.g:23505:1: ( '!volatile' )
+            // InternalQVTcoreBase.g:23505:1: ( ( '!volatile' ) )
+            // InternalQVTcoreBase.g:23506:1: ( '!volatile' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeCSAccess().getQualifiersVolatileKeyword_5_1_0_15_0()); 
             }
-            // InternalQVTcoreBase.g:23506:1: ( '!volatile' )
-            // InternalQVTcoreBase.g:23507:1: '!volatile'
+            // InternalQVTcoreBase.g:23507:1: ( '!volatile' )
+            // InternalQVTcoreBase.g:23508:1: '!volatile'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeCSAccess().getQualifiersVolatileKeyword_5_1_0_15_0()); 
@@ -68627,17 +68627,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__AttributeCS__OwnedDefaultExpressionsAssignment_6_0_1_0_3"
-    // InternalQVTcoreBase.g:23522:1: rule__AttributeCS__OwnedDefaultExpressionsAssignment_6_0_1_0_3 : ( ruleSpecificationCS ) ;
+    // InternalQVTcoreBase.g:23523:1: rule__AttributeCS__OwnedDefaultExpressionsAssignment_6_0_1_0_3 : ( ruleSpecificationCS ) ;
     public final void rule__AttributeCS__OwnedDefaultExpressionsAssignment_6_0_1_0_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:23526:1: ( ( ruleSpecificationCS ) )
-            // InternalQVTcoreBase.g:23527:1: ( ruleSpecificationCS )
+            // InternalQVTcoreBase.g:23527:1: ( ( ruleSpecificationCS ) )
+            // InternalQVTcoreBase.g:23528:1: ( ruleSpecificationCS )
             {
-            // InternalQVTcoreBase.g:23527:1: ( ruleSpecificationCS )
-            // InternalQVTcoreBase.g:23528:1: ruleSpecificationCS
+            // InternalQVTcoreBase.g:23528:1: ( ruleSpecificationCS )
+            // InternalQVTcoreBase.g:23529:1: ruleSpecificationCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeCSAccess().getOwnedDefaultExpressionsSpecificationCSParserRuleCall_6_0_1_0_3_0()); 
@@ -68672,17 +68672,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__AttributeCS__OwnedDefaultExpressionsAssignment_6_0_1_1_3"
-    // InternalQVTcoreBase.g:23537:1: rule__AttributeCS__OwnedDefaultExpressionsAssignment_6_0_1_1_3 : ( ruleSpecificationCS ) ;
+    // InternalQVTcoreBase.g:23538:1: rule__AttributeCS__OwnedDefaultExpressionsAssignment_6_0_1_1_3 : ( ruleSpecificationCS ) ;
     public final void rule__AttributeCS__OwnedDefaultExpressionsAssignment_6_0_1_1_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:23541:1: ( ( ruleSpecificationCS ) )
-            // InternalQVTcoreBase.g:23542:1: ( ruleSpecificationCS )
+            // InternalQVTcoreBase.g:23542:1: ( ( ruleSpecificationCS ) )
+            // InternalQVTcoreBase.g:23543:1: ( ruleSpecificationCS )
             {
-            // InternalQVTcoreBase.g:23542:1: ( ruleSpecificationCS )
-            // InternalQVTcoreBase.g:23543:1: ruleSpecificationCS
+            // InternalQVTcoreBase.g:23543:1: ( ruleSpecificationCS )
+            // InternalQVTcoreBase.g:23544:1: ruleSpecificationCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeCSAccess().getOwnedDefaultExpressionsSpecificationCSParserRuleCall_6_0_1_1_3_0()); 
@@ -68717,23 +68717,23 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__DataTypeCS__IsPrimitiveAssignment_0"
-    // InternalQVTcoreBase.g:23552:1: rule__DataTypeCS__IsPrimitiveAssignment_0 : ( ( 'primitive' ) ) ;
+    // InternalQVTcoreBase.g:23553:1: rule__DataTypeCS__IsPrimitiveAssignment_0 : ( ( 'primitive' ) ) ;
     public final void rule__DataTypeCS__IsPrimitiveAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:23556:1: ( ( ( 'primitive' ) ) )
-            // InternalQVTcoreBase.g:23557:1: ( ( 'primitive' ) )
+            // InternalQVTcoreBase.g:23557:1: ( ( ( 'primitive' ) ) )
+            // InternalQVTcoreBase.g:23558:1: ( ( 'primitive' ) )
             {
-            // InternalQVTcoreBase.g:23557:1: ( ( 'primitive' ) )
-            // InternalQVTcoreBase.g:23558:1: ( 'primitive' )
+            // InternalQVTcoreBase.g:23558:1: ( ( 'primitive' ) )
+            // InternalQVTcoreBase.g:23559:1: ( 'primitive' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getDataTypeCSAccess().getIsPrimitivePrimitiveKeyword_0_0()); 
             }
-            // InternalQVTcoreBase.g:23559:1: ( 'primitive' )
-            // InternalQVTcoreBase.g:23560:1: 'primitive'
+            // InternalQVTcoreBase.g:23560:1: ( 'primitive' )
+            // InternalQVTcoreBase.g:23561:1: 'primitive'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getDataTypeCSAccess().getIsPrimitivePrimitiveKeyword_0_0()); 
@@ -68770,17 +68770,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__DataTypeCS__NameAssignment_2"
-    // InternalQVTcoreBase.g:23575:1: rule__DataTypeCS__NameAssignment_2 : ( ruleUnrestrictedName ) ;
+    // InternalQVTcoreBase.g:23576:1: rule__DataTypeCS__NameAssignment_2 : ( ruleUnrestrictedName ) ;
     public final void rule__DataTypeCS__NameAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:23579:1: ( ( ruleUnrestrictedName ) )
-            // InternalQVTcoreBase.g:23580:1: ( ruleUnrestrictedName )
+            // InternalQVTcoreBase.g:23580:1: ( ( ruleUnrestrictedName ) )
+            // InternalQVTcoreBase.g:23581:1: ( ruleUnrestrictedName )
             {
-            // InternalQVTcoreBase.g:23580:1: ( ruleUnrestrictedName )
-            // InternalQVTcoreBase.g:23581:1: ruleUnrestrictedName
+            // InternalQVTcoreBase.g:23581:1: ( ruleUnrestrictedName )
+            // InternalQVTcoreBase.g:23582:1: ruleUnrestrictedName
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getDataTypeCSAccess().getNameUnrestrictedNameParserRuleCall_2_0()); 
@@ -68815,17 +68815,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__DataTypeCS__OwnedSignatureAssignment_3"
-    // InternalQVTcoreBase.g:23590:1: rule__DataTypeCS__OwnedSignatureAssignment_3 : ( ruleTemplateSignatureCS ) ;
+    // InternalQVTcoreBase.g:23591:1: rule__DataTypeCS__OwnedSignatureAssignment_3 : ( ruleTemplateSignatureCS ) ;
     public final void rule__DataTypeCS__OwnedSignatureAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:23594:1: ( ( ruleTemplateSignatureCS ) )
-            // InternalQVTcoreBase.g:23595:1: ( ruleTemplateSignatureCS )
+            // InternalQVTcoreBase.g:23595:1: ( ( ruleTemplateSignatureCS ) )
+            // InternalQVTcoreBase.g:23596:1: ( ruleTemplateSignatureCS )
             {
-            // InternalQVTcoreBase.g:23595:1: ( ruleTemplateSignatureCS )
-            // InternalQVTcoreBase.g:23596:1: ruleTemplateSignatureCS
+            // InternalQVTcoreBase.g:23596:1: ( ruleTemplateSignatureCS )
+            // InternalQVTcoreBase.g:23597:1: ruleTemplateSignatureCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getDataTypeCSAccess().getOwnedSignatureTemplateSignatureCSParserRuleCall_3_0()); 
@@ -68860,17 +68860,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__DataTypeCS__InstanceClassNameAssignment_4_1"
-    // InternalQVTcoreBase.g:23605:1: rule__DataTypeCS__InstanceClassNameAssignment_4_1 : ( RULE_SINGLE_QUOTED_STRING ) ;
+    // InternalQVTcoreBase.g:23606:1: rule__DataTypeCS__InstanceClassNameAssignment_4_1 : ( RULE_SINGLE_QUOTED_STRING ) ;
     public final void rule__DataTypeCS__InstanceClassNameAssignment_4_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:23609:1: ( ( RULE_SINGLE_QUOTED_STRING ) )
-            // InternalQVTcoreBase.g:23610:1: ( RULE_SINGLE_QUOTED_STRING )
+            // InternalQVTcoreBase.g:23610:1: ( ( RULE_SINGLE_QUOTED_STRING ) )
+            // InternalQVTcoreBase.g:23611:1: ( RULE_SINGLE_QUOTED_STRING )
             {
-            // InternalQVTcoreBase.g:23610:1: ( RULE_SINGLE_QUOTED_STRING )
-            // InternalQVTcoreBase.g:23611:1: RULE_SINGLE_QUOTED_STRING
+            // InternalQVTcoreBase.g:23611:1: ( RULE_SINGLE_QUOTED_STRING )
+            // InternalQVTcoreBase.g:23612:1: RULE_SINGLE_QUOTED_STRING
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getDataTypeCSAccess().getInstanceClassNameSINGLE_QUOTED_STRINGTerminalRuleCall_4_1_0()); 
@@ -68901,23 +68901,23 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__DataTypeCS__IsSerializableAssignment_5_1_0"
-    // InternalQVTcoreBase.g:23620:1: rule__DataTypeCS__IsSerializableAssignment_5_1_0 : ( ( 'serializable' ) ) ;
+    // InternalQVTcoreBase.g:23621:1: rule__DataTypeCS__IsSerializableAssignment_5_1_0 : ( ( 'serializable' ) ) ;
     public final void rule__DataTypeCS__IsSerializableAssignment_5_1_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:23624:1: ( ( ( 'serializable' ) ) )
-            // InternalQVTcoreBase.g:23625:1: ( ( 'serializable' ) )
+            // InternalQVTcoreBase.g:23625:1: ( ( ( 'serializable' ) ) )
+            // InternalQVTcoreBase.g:23626:1: ( ( 'serializable' ) )
             {
-            // InternalQVTcoreBase.g:23625:1: ( ( 'serializable' ) )
-            // InternalQVTcoreBase.g:23626:1: ( 'serializable' )
+            // InternalQVTcoreBase.g:23626:1: ( ( 'serializable' ) )
+            // InternalQVTcoreBase.g:23627:1: ( 'serializable' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getDataTypeCSAccess().getIsSerializableSerializableKeyword_5_1_0_0()); 
             }
-            // InternalQVTcoreBase.g:23627:1: ( 'serializable' )
-            // InternalQVTcoreBase.g:23628:1: 'serializable'
+            // InternalQVTcoreBase.g:23628:1: ( 'serializable' )
+            // InternalQVTcoreBase.g:23629:1: 'serializable'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getDataTypeCSAccess().getIsSerializableSerializableKeyword_5_1_0_0()); 
@@ -68954,17 +68954,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__EnumerationCS__NameAssignment_1"
-    // InternalQVTcoreBase.g:23643:1: rule__EnumerationCS__NameAssignment_1 : ( ruleUnrestrictedName ) ;
+    // InternalQVTcoreBase.g:23644:1: rule__EnumerationCS__NameAssignment_1 : ( ruleUnrestrictedName ) ;
     public final void rule__EnumerationCS__NameAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:23647:1: ( ( ruleUnrestrictedName ) )
-            // InternalQVTcoreBase.g:23648:1: ( ruleUnrestrictedName )
+            // InternalQVTcoreBase.g:23648:1: ( ( ruleUnrestrictedName ) )
+            // InternalQVTcoreBase.g:23649:1: ( ruleUnrestrictedName )
             {
-            // InternalQVTcoreBase.g:23648:1: ( ruleUnrestrictedName )
-            // InternalQVTcoreBase.g:23649:1: ruleUnrestrictedName
+            // InternalQVTcoreBase.g:23649:1: ( ruleUnrestrictedName )
+            // InternalQVTcoreBase.g:23650:1: ruleUnrestrictedName
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getEnumerationCSAccess().getNameUnrestrictedNameParserRuleCall_1_0()); 
@@ -68999,17 +68999,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__EnumerationCS__OwnedSignatureAssignment_2"
-    // InternalQVTcoreBase.g:23658:1: rule__EnumerationCS__OwnedSignatureAssignment_2 : ( ruleTemplateSignatureCS ) ;
+    // InternalQVTcoreBase.g:23659:1: rule__EnumerationCS__OwnedSignatureAssignment_2 : ( ruleTemplateSignatureCS ) ;
     public final void rule__EnumerationCS__OwnedSignatureAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:23662:1: ( ( ruleTemplateSignatureCS ) )
-            // InternalQVTcoreBase.g:23663:1: ( ruleTemplateSignatureCS )
+            // InternalQVTcoreBase.g:23663:1: ( ( ruleTemplateSignatureCS ) )
+            // InternalQVTcoreBase.g:23664:1: ( ruleTemplateSignatureCS )
             {
-            // InternalQVTcoreBase.g:23663:1: ( ruleTemplateSignatureCS )
-            // InternalQVTcoreBase.g:23664:1: ruleTemplateSignatureCS
+            // InternalQVTcoreBase.g:23664:1: ( ruleTemplateSignatureCS )
+            // InternalQVTcoreBase.g:23665:1: ruleTemplateSignatureCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getEnumerationCSAccess().getOwnedSignatureTemplateSignatureCSParserRuleCall_2_0()); 
@@ -69044,17 +69044,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__EnumerationCS__InstanceClassNameAssignment_3_1"
-    // InternalQVTcoreBase.g:23673:1: rule__EnumerationCS__InstanceClassNameAssignment_3_1 : ( RULE_SINGLE_QUOTED_STRING ) ;
+    // InternalQVTcoreBase.g:23674:1: rule__EnumerationCS__InstanceClassNameAssignment_3_1 : ( RULE_SINGLE_QUOTED_STRING ) ;
     public final void rule__EnumerationCS__InstanceClassNameAssignment_3_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:23677:1: ( ( RULE_SINGLE_QUOTED_STRING ) )
-            // InternalQVTcoreBase.g:23678:1: ( RULE_SINGLE_QUOTED_STRING )
+            // InternalQVTcoreBase.g:23678:1: ( ( RULE_SINGLE_QUOTED_STRING ) )
+            // InternalQVTcoreBase.g:23679:1: ( RULE_SINGLE_QUOTED_STRING )
             {
-            // InternalQVTcoreBase.g:23678:1: ( RULE_SINGLE_QUOTED_STRING )
-            // InternalQVTcoreBase.g:23679:1: RULE_SINGLE_QUOTED_STRING
+            // InternalQVTcoreBase.g:23679:1: ( RULE_SINGLE_QUOTED_STRING )
+            // InternalQVTcoreBase.g:23680:1: RULE_SINGLE_QUOTED_STRING
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getEnumerationCSAccess().getInstanceClassNameSINGLE_QUOTED_STRINGTerminalRuleCall_3_1_0()); 
@@ -69085,23 +69085,23 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__EnumerationCS__IsSerializableAssignment_4_1_0"
-    // InternalQVTcoreBase.g:23688:1: rule__EnumerationCS__IsSerializableAssignment_4_1_0 : ( ( 'serializable' ) ) ;
+    // InternalQVTcoreBase.g:23689:1: rule__EnumerationCS__IsSerializableAssignment_4_1_0 : ( ( 'serializable' ) ) ;
     public final void rule__EnumerationCS__IsSerializableAssignment_4_1_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:23692:1: ( ( ( 'serializable' ) ) )
-            // InternalQVTcoreBase.g:23693:1: ( ( 'serializable' ) )
+            // InternalQVTcoreBase.g:23693:1: ( ( ( 'serializable' ) ) )
+            // InternalQVTcoreBase.g:23694:1: ( ( 'serializable' ) )
             {
-            // InternalQVTcoreBase.g:23693:1: ( ( 'serializable' ) )
-            // InternalQVTcoreBase.g:23694:1: ( 'serializable' )
+            // InternalQVTcoreBase.g:23694:1: ( ( 'serializable' ) )
+            // InternalQVTcoreBase.g:23695:1: ( 'serializable' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getEnumerationCSAccess().getIsSerializableSerializableKeyword_4_1_0_0()); 
             }
-            // InternalQVTcoreBase.g:23695:1: ( 'serializable' )
-            // InternalQVTcoreBase.g:23696:1: 'serializable'
+            // InternalQVTcoreBase.g:23696:1: ( 'serializable' )
+            // InternalQVTcoreBase.g:23697:1: 'serializable'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getEnumerationCSAccess().getIsSerializableSerializableKeyword_4_1_0_0()); 
@@ -69138,17 +69138,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__EnumerationCS__OwnedLiteralsAssignment_5_0_1"
-    // InternalQVTcoreBase.g:23711:1: rule__EnumerationCS__OwnedLiteralsAssignment_5_0_1 : ( ruleEnumerationLiteralCS ) ;
+    // InternalQVTcoreBase.g:23712:1: rule__EnumerationCS__OwnedLiteralsAssignment_5_0_1 : ( ruleEnumerationLiteralCS ) ;
     public final void rule__EnumerationCS__OwnedLiteralsAssignment_5_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:23715:1: ( ( ruleEnumerationLiteralCS ) )
-            // InternalQVTcoreBase.g:23716:1: ( ruleEnumerationLiteralCS )
+            // InternalQVTcoreBase.g:23716:1: ( ( ruleEnumerationLiteralCS ) )
+            // InternalQVTcoreBase.g:23717:1: ( ruleEnumerationLiteralCS )
             {
-            // InternalQVTcoreBase.g:23716:1: ( ruleEnumerationLiteralCS )
-            // InternalQVTcoreBase.g:23717:1: ruleEnumerationLiteralCS
+            // InternalQVTcoreBase.g:23717:1: ( ruleEnumerationLiteralCS )
+            // InternalQVTcoreBase.g:23718:1: ruleEnumerationLiteralCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getEnumerationCSAccess().getOwnedLiteralsEnumerationLiteralCSParserRuleCall_5_0_1_0()); 
@@ -69183,17 +69183,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__EnumerationLiteralCS__NameAssignment_0_0_1"
-    // InternalQVTcoreBase.g:23726:1: rule__EnumerationLiteralCS__NameAssignment_0_0_1 : ( ruleUnrestrictedName ) ;
+    // InternalQVTcoreBase.g:23727:1: rule__EnumerationLiteralCS__NameAssignment_0_0_1 : ( ruleUnrestrictedName ) ;
     public final void rule__EnumerationLiteralCS__NameAssignment_0_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:23730:1: ( ( ruleUnrestrictedName ) )
-            // InternalQVTcoreBase.g:23731:1: ( ruleUnrestrictedName )
+            // InternalQVTcoreBase.g:23731:1: ( ( ruleUnrestrictedName ) )
+            // InternalQVTcoreBase.g:23732:1: ( ruleUnrestrictedName )
             {
-            // InternalQVTcoreBase.g:23731:1: ( ruleUnrestrictedName )
-            // InternalQVTcoreBase.g:23732:1: ruleUnrestrictedName
+            // InternalQVTcoreBase.g:23732:1: ( ruleUnrestrictedName )
+            // InternalQVTcoreBase.g:23733:1: ruleUnrestrictedName
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getEnumerationLiteralCSAccess().getNameUnrestrictedNameParserRuleCall_0_0_1_0()); 
@@ -69228,17 +69228,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__EnumerationLiteralCS__NameAssignment_0_1"
-    // InternalQVTcoreBase.g:23741:1: rule__EnumerationLiteralCS__NameAssignment_0_1 : ( ruleEnumerationLiteralName ) ;
+    // InternalQVTcoreBase.g:23742:1: rule__EnumerationLiteralCS__NameAssignment_0_1 : ( ruleEnumerationLiteralName ) ;
     public final void rule__EnumerationLiteralCS__NameAssignment_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:23745:1: ( ( ruleEnumerationLiteralName ) )
-            // InternalQVTcoreBase.g:23746:1: ( ruleEnumerationLiteralName )
+            // InternalQVTcoreBase.g:23746:1: ( ( ruleEnumerationLiteralName ) )
+            // InternalQVTcoreBase.g:23747:1: ( ruleEnumerationLiteralName )
             {
-            // InternalQVTcoreBase.g:23746:1: ( ruleEnumerationLiteralName )
-            // InternalQVTcoreBase.g:23747:1: ruleEnumerationLiteralName
+            // InternalQVTcoreBase.g:23747:1: ( ruleEnumerationLiteralName )
+            // InternalQVTcoreBase.g:23748:1: ruleEnumerationLiteralName
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getEnumerationLiteralCSAccess().getNameEnumerationLiteralNameParserRuleCall_0_1_0()); 
@@ -69273,17 +69273,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__EnumerationLiteralCS__ValueAssignment_1_1"
-    // InternalQVTcoreBase.g:23756:1: rule__EnumerationLiteralCS__ValueAssignment_1_1 : ( ruleSIGNED ) ;
+    // InternalQVTcoreBase.g:23757:1: rule__EnumerationLiteralCS__ValueAssignment_1_1 : ( ruleSIGNED ) ;
     public final void rule__EnumerationLiteralCS__ValueAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:23760:1: ( ( ruleSIGNED ) )
-            // InternalQVTcoreBase.g:23761:1: ( ruleSIGNED )
+            // InternalQVTcoreBase.g:23761:1: ( ( ruleSIGNED ) )
+            // InternalQVTcoreBase.g:23762:1: ( ruleSIGNED )
             {
-            // InternalQVTcoreBase.g:23761:1: ( ruleSIGNED )
-            // InternalQVTcoreBase.g:23762:1: ruleSIGNED
+            // InternalQVTcoreBase.g:23762:1: ( ruleSIGNED )
+            // InternalQVTcoreBase.g:23763:1: ruleSIGNED
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getEnumerationLiteralCSAccess().getValueSIGNEDParserRuleCall_1_1_0()); 
@@ -69318,23 +69318,23 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__OperationCS__QualifiersAssignment_0_0_0"
-    // InternalQVTcoreBase.g:23771:1: rule__OperationCS__QualifiersAssignment_0_0_0 : ( ( 'static' ) ) ;
+    // InternalQVTcoreBase.g:23772:1: rule__OperationCS__QualifiersAssignment_0_0_0 : ( ( 'static' ) ) ;
     public final void rule__OperationCS__QualifiersAssignment_0_0_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:23775:1: ( ( ( 'static' ) ) )
-            // InternalQVTcoreBase.g:23776:1: ( ( 'static' ) )
+            // InternalQVTcoreBase.g:23776:1: ( ( ( 'static' ) ) )
+            // InternalQVTcoreBase.g:23777:1: ( ( 'static' ) )
             {
-            // InternalQVTcoreBase.g:23776:1: ( ( 'static' ) )
-            // InternalQVTcoreBase.g:23777:1: ( 'static' )
+            // InternalQVTcoreBase.g:23777:1: ( ( 'static' ) )
+            // InternalQVTcoreBase.g:23778:1: ( 'static' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getOperationCSAccess().getQualifiersStaticKeyword_0_0_0_0()); 
             }
-            // InternalQVTcoreBase.g:23778:1: ( 'static' )
-            // InternalQVTcoreBase.g:23779:1: 'static'
+            // InternalQVTcoreBase.g:23779:1: ( 'static' )
+            // InternalQVTcoreBase.g:23780:1: 'static'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getOperationCSAccess().getQualifiersStaticKeyword_0_0_0_0()); 
@@ -69371,23 +69371,23 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__OperationCS__QualifiersAssignment_0_0_1"
-    // InternalQVTcoreBase.g:23794:1: rule__OperationCS__QualifiersAssignment_0_0_1 : ( ( 'definition' ) ) ;
+    // InternalQVTcoreBase.g:23795:1: rule__OperationCS__QualifiersAssignment_0_0_1 : ( ( 'definition' ) ) ;
     public final void rule__OperationCS__QualifiersAssignment_0_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:23798:1: ( ( ( 'definition' ) ) )
-            // InternalQVTcoreBase.g:23799:1: ( ( 'definition' ) )
+            // InternalQVTcoreBase.g:23799:1: ( ( ( 'definition' ) ) )
+            // InternalQVTcoreBase.g:23800:1: ( ( 'definition' ) )
             {
-            // InternalQVTcoreBase.g:23799:1: ( ( 'definition' ) )
-            // InternalQVTcoreBase.g:23800:1: ( 'definition' )
+            // InternalQVTcoreBase.g:23800:1: ( ( 'definition' ) )
+            // InternalQVTcoreBase.g:23801:1: ( 'definition' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getOperationCSAccess().getQualifiersDefinitionKeyword_0_0_1_0()); 
             }
-            // InternalQVTcoreBase.g:23801:1: ( 'definition' )
-            // InternalQVTcoreBase.g:23802:1: 'definition'
+            // InternalQVTcoreBase.g:23802:1: ( 'definition' )
+            // InternalQVTcoreBase.g:23803:1: 'definition'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getOperationCSAccess().getQualifiersDefinitionKeyword_0_0_1_0()); 
@@ -69424,23 +69424,23 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__OperationCS__QualifiersAssignment_0_1_0"
-    // InternalQVTcoreBase.g:23817:1: rule__OperationCS__QualifiersAssignment_0_1_0 : ( ( 'definition' ) ) ;
+    // InternalQVTcoreBase.g:23818:1: rule__OperationCS__QualifiersAssignment_0_1_0 : ( ( 'definition' ) ) ;
     public final void rule__OperationCS__QualifiersAssignment_0_1_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:23821:1: ( ( ( 'definition' ) ) )
-            // InternalQVTcoreBase.g:23822:1: ( ( 'definition' ) )
+            // InternalQVTcoreBase.g:23822:1: ( ( ( 'definition' ) ) )
+            // InternalQVTcoreBase.g:23823:1: ( ( 'definition' ) )
             {
-            // InternalQVTcoreBase.g:23822:1: ( ( 'definition' ) )
-            // InternalQVTcoreBase.g:23823:1: ( 'definition' )
+            // InternalQVTcoreBase.g:23823:1: ( ( 'definition' ) )
+            // InternalQVTcoreBase.g:23824:1: ( 'definition' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getOperationCSAccess().getQualifiersDefinitionKeyword_0_1_0_0()); 
             }
-            // InternalQVTcoreBase.g:23824:1: ( 'definition' )
-            // InternalQVTcoreBase.g:23825:1: 'definition'
+            // InternalQVTcoreBase.g:23825:1: ( 'definition' )
+            // InternalQVTcoreBase.g:23826:1: 'definition'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getOperationCSAccess().getQualifiersDefinitionKeyword_0_1_0_0()); 
@@ -69477,23 +69477,23 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__OperationCS__QualifiersAssignment_0_1_1"
-    // InternalQVTcoreBase.g:23840:1: rule__OperationCS__QualifiersAssignment_0_1_1 : ( ( 'static' ) ) ;
+    // InternalQVTcoreBase.g:23841:1: rule__OperationCS__QualifiersAssignment_0_1_1 : ( ( 'static' ) ) ;
     public final void rule__OperationCS__QualifiersAssignment_0_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:23844:1: ( ( ( 'static' ) ) )
-            // InternalQVTcoreBase.g:23845:1: ( ( 'static' ) )
+            // InternalQVTcoreBase.g:23845:1: ( ( ( 'static' ) ) )
+            // InternalQVTcoreBase.g:23846:1: ( ( 'static' ) )
             {
-            // InternalQVTcoreBase.g:23845:1: ( ( 'static' ) )
-            // InternalQVTcoreBase.g:23846:1: ( 'static' )
+            // InternalQVTcoreBase.g:23846:1: ( ( 'static' ) )
+            // InternalQVTcoreBase.g:23847:1: ( 'static' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getOperationCSAccess().getQualifiersStaticKeyword_0_1_1_0()); 
             }
-            // InternalQVTcoreBase.g:23847:1: ( 'static' )
-            // InternalQVTcoreBase.g:23848:1: 'static'
+            // InternalQVTcoreBase.g:23848:1: ( 'static' )
+            // InternalQVTcoreBase.g:23849:1: 'static'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getOperationCSAccess().getQualifiersStaticKeyword_0_1_1_0()); 
@@ -69530,17 +69530,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__OperationCS__OwnedSignatureAssignment_2"
-    // InternalQVTcoreBase.g:23863:1: rule__OperationCS__OwnedSignatureAssignment_2 : ( ruleTemplateSignatureCS ) ;
+    // InternalQVTcoreBase.g:23864:1: rule__OperationCS__OwnedSignatureAssignment_2 : ( ruleTemplateSignatureCS ) ;
     public final void rule__OperationCS__OwnedSignatureAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:23867:1: ( ( ruleTemplateSignatureCS ) )
-            // InternalQVTcoreBase.g:23868:1: ( ruleTemplateSignatureCS )
+            // InternalQVTcoreBase.g:23868:1: ( ( ruleTemplateSignatureCS ) )
+            // InternalQVTcoreBase.g:23869:1: ( ruleTemplateSignatureCS )
             {
-            // InternalQVTcoreBase.g:23868:1: ( ruleTemplateSignatureCS )
-            // InternalQVTcoreBase.g:23869:1: ruleTemplateSignatureCS
+            // InternalQVTcoreBase.g:23869:1: ( ruleTemplateSignatureCS )
+            // InternalQVTcoreBase.g:23870:1: ruleTemplateSignatureCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getOperationCSAccess().getOwnedSignatureTemplateSignatureCSParserRuleCall_2_0()); 
@@ -69575,17 +69575,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__OperationCS__NameAssignment_3"
-    // InternalQVTcoreBase.g:23878:1: rule__OperationCS__NameAssignment_3 : ( ruleUnrestrictedName ) ;
+    // InternalQVTcoreBase.g:23879:1: rule__OperationCS__NameAssignment_3 : ( ruleUnrestrictedName ) ;
     public final void rule__OperationCS__NameAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:23882:1: ( ( ruleUnrestrictedName ) )
-            // InternalQVTcoreBase.g:23883:1: ( ruleUnrestrictedName )
+            // InternalQVTcoreBase.g:23883:1: ( ( ruleUnrestrictedName ) )
+            // InternalQVTcoreBase.g:23884:1: ( ruleUnrestrictedName )
             {
-            // InternalQVTcoreBase.g:23883:1: ( ruleUnrestrictedName )
-            // InternalQVTcoreBase.g:23884:1: ruleUnrestrictedName
+            // InternalQVTcoreBase.g:23884:1: ( ruleUnrestrictedName )
+            // InternalQVTcoreBase.g:23885:1: ruleUnrestrictedName
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getOperationCSAccess().getNameUnrestrictedNameParserRuleCall_3_0()); 
@@ -69620,17 +69620,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__OperationCS__OwnedParametersAssignment_5_0"
-    // InternalQVTcoreBase.g:23893:1: rule__OperationCS__OwnedParametersAssignment_5_0 : ( ruleParameterCS ) ;
+    // InternalQVTcoreBase.g:23894:1: rule__OperationCS__OwnedParametersAssignment_5_0 : ( ruleParameterCS ) ;
     public final void rule__OperationCS__OwnedParametersAssignment_5_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:23897:1: ( ( ruleParameterCS ) )
-            // InternalQVTcoreBase.g:23898:1: ( ruleParameterCS )
+            // InternalQVTcoreBase.g:23898:1: ( ( ruleParameterCS ) )
+            // InternalQVTcoreBase.g:23899:1: ( ruleParameterCS )
             {
-            // InternalQVTcoreBase.g:23898:1: ( ruleParameterCS )
-            // InternalQVTcoreBase.g:23899:1: ruleParameterCS
+            // InternalQVTcoreBase.g:23899:1: ( ruleParameterCS )
+            // InternalQVTcoreBase.g:23900:1: ruleParameterCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getOperationCSAccess().getOwnedParametersParameterCSParserRuleCall_5_0_0()); 
@@ -69665,17 +69665,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__OperationCS__OwnedParametersAssignment_5_1_1"
-    // InternalQVTcoreBase.g:23908:1: rule__OperationCS__OwnedParametersAssignment_5_1_1 : ( ruleParameterCS ) ;
+    // InternalQVTcoreBase.g:23909:1: rule__OperationCS__OwnedParametersAssignment_5_1_1 : ( ruleParameterCS ) ;
     public final void rule__OperationCS__OwnedParametersAssignment_5_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:23912:1: ( ( ruleParameterCS ) )
-            // InternalQVTcoreBase.g:23913:1: ( ruleParameterCS )
+            // InternalQVTcoreBase.g:23913:1: ( ( ruleParameterCS ) )
+            // InternalQVTcoreBase.g:23914:1: ( ruleParameterCS )
             {
-            // InternalQVTcoreBase.g:23913:1: ( ruleParameterCS )
-            // InternalQVTcoreBase.g:23914:1: ruleParameterCS
+            // InternalQVTcoreBase.g:23914:1: ( ruleParameterCS )
+            // InternalQVTcoreBase.g:23915:1: ruleParameterCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getOperationCSAccess().getOwnedParametersParameterCSParserRuleCall_5_1_1_0()); 
@@ -69710,17 +69710,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__OperationCS__OwnedTypeAssignment_7_1"
-    // InternalQVTcoreBase.g:23923:1: rule__OperationCS__OwnedTypeAssignment_7_1 : ( ruleTypedMultiplicityRefCS ) ;
+    // InternalQVTcoreBase.g:23924:1: rule__OperationCS__OwnedTypeAssignment_7_1 : ( ruleTypedMultiplicityRefCS ) ;
     public final void rule__OperationCS__OwnedTypeAssignment_7_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:23927:1: ( ( ruleTypedMultiplicityRefCS ) )
-            // InternalQVTcoreBase.g:23928:1: ( ruleTypedMultiplicityRefCS )
+            // InternalQVTcoreBase.g:23928:1: ( ( ruleTypedMultiplicityRefCS ) )
+            // InternalQVTcoreBase.g:23929:1: ( ruleTypedMultiplicityRefCS )
             {
-            // InternalQVTcoreBase.g:23928:1: ( ruleTypedMultiplicityRefCS )
-            // InternalQVTcoreBase.g:23929:1: ruleTypedMultiplicityRefCS
+            // InternalQVTcoreBase.g:23929:1: ( ruleTypedMultiplicityRefCS )
+            // InternalQVTcoreBase.g:23930:1: ruleTypedMultiplicityRefCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getOperationCSAccess().getOwnedTypeTypedMultiplicityRefCSParserRuleCall_7_1_0()); 
@@ -69755,17 +69755,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__OperationCS__OwnedExceptionsAssignment_8_1"
-    // InternalQVTcoreBase.g:23938:1: rule__OperationCS__OwnedExceptionsAssignment_8_1 : ( ruleTypedRefCS ) ;
+    // InternalQVTcoreBase.g:23939:1: rule__OperationCS__OwnedExceptionsAssignment_8_1 : ( ruleTypedRefCS ) ;
     public final void rule__OperationCS__OwnedExceptionsAssignment_8_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:23942:1: ( ( ruleTypedRefCS ) )
-            // InternalQVTcoreBase.g:23943:1: ( ruleTypedRefCS )
+            // InternalQVTcoreBase.g:23943:1: ( ( ruleTypedRefCS ) )
+            // InternalQVTcoreBase.g:23944:1: ( ruleTypedRefCS )
             {
-            // InternalQVTcoreBase.g:23943:1: ( ruleTypedRefCS )
-            // InternalQVTcoreBase.g:23944:1: ruleTypedRefCS
+            // InternalQVTcoreBase.g:23944:1: ( ruleTypedRefCS )
+            // InternalQVTcoreBase.g:23945:1: ruleTypedRefCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getOperationCSAccess().getOwnedExceptionsTypedRefCSParserRuleCall_8_1_0()); 
@@ -69800,17 +69800,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__OperationCS__OwnedExceptionsAssignment_8_2_1"
-    // InternalQVTcoreBase.g:23953:1: rule__OperationCS__OwnedExceptionsAssignment_8_2_1 : ( ruleTypedRefCS ) ;
+    // InternalQVTcoreBase.g:23954:1: rule__OperationCS__OwnedExceptionsAssignment_8_2_1 : ( ruleTypedRefCS ) ;
     public final void rule__OperationCS__OwnedExceptionsAssignment_8_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:23957:1: ( ( ruleTypedRefCS ) )
-            // InternalQVTcoreBase.g:23958:1: ( ruleTypedRefCS )
+            // InternalQVTcoreBase.g:23958:1: ( ( ruleTypedRefCS ) )
+            // InternalQVTcoreBase.g:23959:1: ( ruleTypedRefCS )
             {
-            // InternalQVTcoreBase.g:23958:1: ( ruleTypedRefCS )
-            // InternalQVTcoreBase.g:23959:1: ruleTypedRefCS
+            // InternalQVTcoreBase.g:23959:1: ( ruleTypedRefCS )
+            // InternalQVTcoreBase.g:23960:1: ruleTypedRefCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getOperationCSAccess().getOwnedExceptionsTypedRefCSParserRuleCall_8_2_1_0()); 
@@ -69845,23 +69845,23 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__OperationCS__QualifiersAssignment_9_1_0_0"
-    // InternalQVTcoreBase.g:23968:1: rule__OperationCS__QualifiersAssignment_9_1_0_0 : ( ( 'derived' ) ) ;
+    // InternalQVTcoreBase.g:23969:1: rule__OperationCS__QualifiersAssignment_9_1_0_0 : ( ( 'derived' ) ) ;
     public final void rule__OperationCS__QualifiersAssignment_9_1_0_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:23972:1: ( ( ( 'derived' ) ) )
-            // InternalQVTcoreBase.g:23973:1: ( ( 'derived' ) )
+            // InternalQVTcoreBase.g:23973:1: ( ( ( 'derived' ) ) )
+            // InternalQVTcoreBase.g:23974:1: ( ( 'derived' ) )
             {
-            // InternalQVTcoreBase.g:23973:1: ( ( 'derived' ) )
-            // InternalQVTcoreBase.g:23974:1: ( 'derived' )
+            // InternalQVTcoreBase.g:23974:1: ( ( 'derived' ) )
+            // InternalQVTcoreBase.g:23975:1: ( 'derived' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getOperationCSAccess().getQualifiersDerivedKeyword_9_1_0_0_0()); 
             }
-            // InternalQVTcoreBase.g:23975:1: ( 'derived' )
-            // InternalQVTcoreBase.g:23976:1: 'derived'
+            // InternalQVTcoreBase.g:23976:1: ( 'derived' )
+            // InternalQVTcoreBase.g:23977:1: 'derived'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getOperationCSAccess().getQualifiersDerivedKeyword_9_1_0_0_0()); 
@@ -69898,23 +69898,23 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__OperationCS__QualifiersAssignment_9_1_0_1"
-    // InternalQVTcoreBase.g:23991:1: rule__OperationCS__QualifiersAssignment_9_1_0_1 : ( ( '!derived' ) ) ;
+    // InternalQVTcoreBase.g:23992:1: rule__OperationCS__QualifiersAssignment_9_1_0_1 : ( ( '!derived' ) ) ;
     public final void rule__OperationCS__QualifiersAssignment_9_1_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:23995:1: ( ( ( '!derived' ) ) )
-            // InternalQVTcoreBase.g:23996:1: ( ( '!derived' ) )
+            // InternalQVTcoreBase.g:23996:1: ( ( ( '!derived' ) ) )
+            // InternalQVTcoreBase.g:23997:1: ( ( '!derived' ) )
             {
-            // InternalQVTcoreBase.g:23996:1: ( ( '!derived' ) )
-            // InternalQVTcoreBase.g:23997:1: ( '!derived' )
+            // InternalQVTcoreBase.g:23997:1: ( ( '!derived' ) )
+            // InternalQVTcoreBase.g:23998:1: ( '!derived' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getOperationCSAccess().getQualifiersDerivedKeyword_9_1_0_1_0()); 
             }
-            // InternalQVTcoreBase.g:23998:1: ( '!derived' )
-            // InternalQVTcoreBase.g:23999:1: '!derived'
+            // InternalQVTcoreBase.g:23999:1: ( '!derived' )
+            // InternalQVTcoreBase.g:24000:1: '!derived'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getOperationCSAccess().getQualifiersDerivedKeyword_9_1_0_1_0()); 
@@ -69951,23 +69951,23 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__OperationCS__QualifiersAssignment_9_1_0_2"
-    // InternalQVTcoreBase.g:24014:1: rule__OperationCS__QualifiersAssignment_9_1_0_2 : ( ( 'ordered' ) ) ;
+    // InternalQVTcoreBase.g:24015:1: rule__OperationCS__QualifiersAssignment_9_1_0_2 : ( ( 'ordered' ) ) ;
     public final void rule__OperationCS__QualifiersAssignment_9_1_0_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:24018:1: ( ( ( 'ordered' ) ) )
-            // InternalQVTcoreBase.g:24019:1: ( ( 'ordered' ) )
+            // InternalQVTcoreBase.g:24019:1: ( ( ( 'ordered' ) ) )
+            // InternalQVTcoreBase.g:24020:1: ( ( 'ordered' ) )
             {
-            // InternalQVTcoreBase.g:24019:1: ( ( 'ordered' ) )
-            // InternalQVTcoreBase.g:24020:1: ( 'ordered' )
+            // InternalQVTcoreBase.g:24020:1: ( ( 'ordered' ) )
+            // InternalQVTcoreBase.g:24021:1: ( 'ordered' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getOperationCSAccess().getQualifiersOrderedKeyword_9_1_0_2_0()); 
             }
-            // InternalQVTcoreBase.g:24021:1: ( 'ordered' )
-            // InternalQVTcoreBase.g:24022:1: 'ordered'
+            // InternalQVTcoreBase.g:24022:1: ( 'ordered' )
+            // InternalQVTcoreBase.g:24023:1: 'ordered'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getOperationCSAccess().getQualifiersOrderedKeyword_9_1_0_2_0()); 
@@ -70004,23 +70004,23 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__OperationCS__QualifiersAssignment_9_1_0_3"
-    // InternalQVTcoreBase.g:24037:1: rule__OperationCS__QualifiersAssignment_9_1_0_3 : ( ( '!ordered' ) ) ;
+    // InternalQVTcoreBase.g:24038:1: rule__OperationCS__QualifiersAssignment_9_1_0_3 : ( ( '!ordered' ) ) ;
     public final void rule__OperationCS__QualifiersAssignment_9_1_0_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:24041:1: ( ( ( '!ordered' ) ) )
-            // InternalQVTcoreBase.g:24042:1: ( ( '!ordered' ) )
+            // InternalQVTcoreBase.g:24042:1: ( ( ( '!ordered' ) ) )
+            // InternalQVTcoreBase.g:24043:1: ( ( '!ordered' ) )
             {
-            // InternalQVTcoreBase.g:24042:1: ( ( '!ordered' ) )
-            // InternalQVTcoreBase.g:24043:1: ( '!ordered' )
+            // InternalQVTcoreBase.g:24043:1: ( ( '!ordered' ) )
+            // InternalQVTcoreBase.g:24044:1: ( '!ordered' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getOperationCSAccess().getQualifiersOrderedKeyword_9_1_0_3_0()); 
             }
-            // InternalQVTcoreBase.g:24044:1: ( '!ordered' )
-            // InternalQVTcoreBase.g:24045:1: '!ordered'
+            // InternalQVTcoreBase.g:24045:1: ( '!ordered' )
+            // InternalQVTcoreBase.g:24046:1: '!ordered'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getOperationCSAccess().getQualifiersOrderedKeyword_9_1_0_3_0()); 
@@ -70057,23 +70057,23 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__OperationCS__QualifiersAssignment_9_1_0_4"
-    // InternalQVTcoreBase.g:24060:1: rule__OperationCS__QualifiersAssignment_9_1_0_4 : ( ( 'unique' ) ) ;
+    // InternalQVTcoreBase.g:24061:1: rule__OperationCS__QualifiersAssignment_9_1_0_4 : ( ( 'unique' ) ) ;
     public final void rule__OperationCS__QualifiersAssignment_9_1_0_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:24064:1: ( ( ( 'unique' ) ) )
-            // InternalQVTcoreBase.g:24065:1: ( ( 'unique' ) )
+            // InternalQVTcoreBase.g:24065:1: ( ( ( 'unique' ) ) )
+            // InternalQVTcoreBase.g:24066:1: ( ( 'unique' ) )
             {
-            // InternalQVTcoreBase.g:24065:1: ( ( 'unique' ) )
-            // InternalQVTcoreBase.g:24066:1: ( 'unique' )
+            // InternalQVTcoreBase.g:24066:1: ( ( 'unique' ) )
+            // InternalQVTcoreBase.g:24067:1: ( 'unique' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getOperationCSAccess().getQualifiersUniqueKeyword_9_1_0_4_0()); 
             }
-            // InternalQVTcoreBase.g:24067:1: ( 'unique' )
-            // InternalQVTcoreBase.g:24068:1: 'unique'
+            // InternalQVTcoreBase.g:24068:1: ( 'unique' )
+            // InternalQVTcoreBase.g:24069:1: 'unique'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getOperationCSAccess().getQualifiersUniqueKeyword_9_1_0_4_0()); 
@@ -70110,23 +70110,23 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__OperationCS__QualifiersAssignment_9_1_0_5"
-    // InternalQVTcoreBase.g:24083:1: rule__OperationCS__QualifiersAssignment_9_1_0_5 : ( ( '!unique' ) ) ;
+    // InternalQVTcoreBase.g:24084:1: rule__OperationCS__QualifiersAssignment_9_1_0_5 : ( ( '!unique' ) ) ;
     public final void rule__OperationCS__QualifiersAssignment_9_1_0_5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:24087:1: ( ( ( '!unique' ) ) )
-            // InternalQVTcoreBase.g:24088:1: ( ( '!unique' ) )
+            // InternalQVTcoreBase.g:24088:1: ( ( ( '!unique' ) ) )
+            // InternalQVTcoreBase.g:24089:1: ( ( '!unique' ) )
             {
-            // InternalQVTcoreBase.g:24088:1: ( ( '!unique' ) )
-            // InternalQVTcoreBase.g:24089:1: ( '!unique' )
+            // InternalQVTcoreBase.g:24089:1: ( ( '!unique' ) )
+            // InternalQVTcoreBase.g:24090:1: ( '!unique' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getOperationCSAccess().getQualifiersUniqueKeyword_9_1_0_5_0()); 
             }
-            // InternalQVTcoreBase.g:24090:1: ( '!unique' )
-            // InternalQVTcoreBase.g:24091:1: '!unique'
+            // InternalQVTcoreBase.g:24091:1: ( '!unique' )
+            // InternalQVTcoreBase.g:24092:1: '!unique'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getOperationCSAccess().getQualifiersUniqueKeyword_9_1_0_5_0()); 
@@ -70163,17 +70163,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__OperationCS__OwnedBodyExpressionsAssignment_10_0_1_3"
-    // InternalQVTcoreBase.g:24106:1: rule__OperationCS__OwnedBodyExpressionsAssignment_10_0_1_3 : ( ruleSpecificationCS ) ;
+    // InternalQVTcoreBase.g:24107:1: rule__OperationCS__OwnedBodyExpressionsAssignment_10_0_1_3 : ( ruleSpecificationCS ) ;
     public final void rule__OperationCS__OwnedBodyExpressionsAssignment_10_0_1_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:24110:1: ( ( ruleSpecificationCS ) )
-            // InternalQVTcoreBase.g:24111:1: ( ruleSpecificationCS )
+            // InternalQVTcoreBase.g:24111:1: ( ( ruleSpecificationCS ) )
+            // InternalQVTcoreBase.g:24112:1: ( ruleSpecificationCS )
             {
-            // InternalQVTcoreBase.g:24111:1: ( ruleSpecificationCS )
-            // InternalQVTcoreBase.g:24112:1: ruleSpecificationCS
+            // InternalQVTcoreBase.g:24112:1: ( ruleSpecificationCS )
+            // InternalQVTcoreBase.g:24113:1: ruleSpecificationCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getOperationCSAccess().getOwnedBodyExpressionsSpecificationCSParserRuleCall_10_0_1_3_0()); 
@@ -70208,17 +70208,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__ParameterCS__NameAssignment_0"
-    // InternalQVTcoreBase.g:24121:1: rule__ParameterCS__NameAssignment_0 : ( ruleUnrestrictedName ) ;
+    // InternalQVTcoreBase.g:24122:1: rule__ParameterCS__NameAssignment_0 : ( ruleUnrestrictedName ) ;
     public final void rule__ParameterCS__NameAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:24125:1: ( ( ruleUnrestrictedName ) )
-            // InternalQVTcoreBase.g:24126:1: ( ruleUnrestrictedName )
+            // InternalQVTcoreBase.g:24126:1: ( ( ruleUnrestrictedName ) )
+            // InternalQVTcoreBase.g:24127:1: ( ruleUnrestrictedName )
             {
-            // InternalQVTcoreBase.g:24126:1: ( ruleUnrestrictedName )
-            // InternalQVTcoreBase.g:24127:1: ruleUnrestrictedName
+            // InternalQVTcoreBase.g:24127:1: ( ruleUnrestrictedName )
+            // InternalQVTcoreBase.g:24128:1: ruleUnrestrictedName
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getParameterCSAccess().getNameUnrestrictedNameParserRuleCall_0_0()); 
@@ -70253,17 +70253,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__ParameterCS__OwnedTypeAssignment_1_1"
-    // InternalQVTcoreBase.g:24136:1: rule__ParameterCS__OwnedTypeAssignment_1_1 : ( ruleTypedMultiplicityRefCS ) ;
+    // InternalQVTcoreBase.g:24137:1: rule__ParameterCS__OwnedTypeAssignment_1_1 : ( ruleTypedMultiplicityRefCS ) ;
     public final void rule__ParameterCS__OwnedTypeAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:24140:1: ( ( ruleTypedMultiplicityRefCS ) )
-            // InternalQVTcoreBase.g:24141:1: ( ruleTypedMultiplicityRefCS )
+            // InternalQVTcoreBase.g:24141:1: ( ( ruleTypedMultiplicityRefCS ) )
+            // InternalQVTcoreBase.g:24142:1: ( ruleTypedMultiplicityRefCS )
             {
-            // InternalQVTcoreBase.g:24141:1: ( ruleTypedMultiplicityRefCS )
-            // InternalQVTcoreBase.g:24142:1: ruleTypedMultiplicityRefCS
+            // InternalQVTcoreBase.g:24142:1: ( ruleTypedMultiplicityRefCS )
+            // InternalQVTcoreBase.g:24143:1: ruleTypedMultiplicityRefCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getParameterCSAccess().getOwnedTypeTypedMultiplicityRefCSParserRuleCall_1_1_0()); 
@@ -70298,23 +70298,23 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__ParameterCS__QualifiersAssignment_2_1_0_0"
-    // InternalQVTcoreBase.g:24151:1: rule__ParameterCS__QualifiersAssignment_2_1_0_0 : ( ( 'ordered' ) ) ;
+    // InternalQVTcoreBase.g:24152:1: rule__ParameterCS__QualifiersAssignment_2_1_0_0 : ( ( 'ordered' ) ) ;
     public final void rule__ParameterCS__QualifiersAssignment_2_1_0_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:24155:1: ( ( ( 'ordered' ) ) )
-            // InternalQVTcoreBase.g:24156:1: ( ( 'ordered' ) )
+            // InternalQVTcoreBase.g:24156:1: ( ( ( 'ordered' ) ) )
+            // InternalQVTcoreBase.g:24157:1: ( ( 'ordered' ) )
             {
-            // InternalQVTcoreBase.g:24156:1: ( ( 'ordered' ) )
-            // InternalQVTcoreBase.g:24157:1: ( 'ordered' )
+            // InternalQVTcoreBase.g:24157:1: ( ( 'ordered' ) )
+            // InternalQVTcoreBase.g:24158:1: ( 'ordered' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getParameterCSAccess().getQualifiersOrderedKeyword_2_1_0_0_0()); 
             }
-            // InternalQVTcoreBase.g:24158:1: ( 'ordered' )
-            // InternalQVTcoreBase.g:24159:1: 'ordered'
+            // InternalQVTcoreBase.g:24159:1: ( 'ordered' )
+            // InternalQVTcoreBase.g:24160:1: 'ordered'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getParameterCSAccess().getQualifiersOrderedKeyword_2_1_0_0_0()); 
@@ -70351,23 +70351,23 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__ParameterCS__QualifiersAssignment_2_1_0_1"
-    // InternalQVTcoreBase.g:24174:1: rule__ParameterCS__QualifiersAssignment_2_1_0_1 : ( ( '!ordered' ) ) ;
+    // InternalQVTcoreBase.g:24175:1: rule__ParameterCS__QualifiersAssignment_2_1_0_1 : ( ( '!ordered' ) ) ;
     public final void rule__ParameterCS__QualifiersAssignment_2_1_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:24178:1: ( ( ( '!ordered' ) ) )
-            // InternalQVTcoreBase.g:24179:1: ( ( '!ordered' ) )
+            // InternalQVTcoreBase.g:24179:1: ( ( ( '!ordered' ) ) )
+            // InternalQVTcoreBase.g:24180:1: ( ( '!ordered' ) )
             {
-            // InternalQVTcoreBase.g:24179:1: ( ( '!ordered' ) )
-            // InternalQVTcoreBase.g:24180:1: ( '!ordered' )
+            // InternalQVTcoreBase.g:24180:1: ( ( '!ordered' ) )
+            // InternalQVTcoreBase.g:24181:1: ( '!ordered' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getParameterCSAccess().getQualifiersOrderedKeyword_2_1_0_1_0()); 
             }
-            // InternalQVTcoreBase.g:24181:1: ( '!ordered' )
-            // InternalQVTcoreBase.g:24182:1: '!ordered'
+            // InternalQVTcoreBase.g:24182:1: ( '!ordered' )
+            // InternalQVTcoreBase.g:24183:1: '!ordered'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getParameterCSAccess().getQualifiersOrderedKeyword_2_1_0_1_0()); 
@@ -70404,23 +70404,23 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__ParameterCS__QualifiersAssignment_2_1_0_2"
-    // InternalQVTcoreBase.g:24197:1: rule__ParameterCS__QualifiersAssignment_2_1_0_2 : ( ( 'unique' ) ) ;
+    // InternalQVTcoreBase.g:24198:1: rule__ParameterCS__QualifiersAssignment_2_1_0_2 : ( ( 'unique' ) ) ;
     public final void rule__ParameterCS__QualifiersAssignment_2_1_0_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:24201:1: ( ( ( 'unique' ) ) )
-            // InternalQVTcoreBase.g:24202:1: ( ( 'unique' ) )
+            // InternalQVTcoreBase.g:24202:1: ( ( ( 'unique' ) ) )
+            // InternalQVTcoreBase.g:24203:1: ( ( 'unique' ) )
             {
-            // InternalQVTcoreBase.g:24202:1: ( ( 'unique' ) )
-            // InternalQVTcoreBase.g:24203:1: ( 'unique' )
+            // InternalQVTcoreBase.g:24203:1: ( ( 'unique' ) )
+            // InternalQVTcoreBase.g:24204:1: ( 'unique' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getParameterCSAccess().getQualifiersUniqueKeyword_2_1_0_2_0()); 
             }
-            // InternalQVTcoreBase.g:24204:1: ( 'unique' )
-            // InternalQVTcoreBase.g:24205:1: 'unique'
+            // InternalQVTcoreBase.g:24205:1: ( 'unique' )
+            // InternalQVTcoreBase.g:24206:1: 'unique'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getParameterCSAccess().getQualifiersUniqueKeyword_2_1_0_2_0()); 
@@ -70457,23 +70457,23 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__ParameterCS__QualifiersAssignment_2_1_0_3"
-    // InternalQVTcoreBase.g:24220:1: rule__ParameterCS__QualifiersAssignment_2_1_0_3 : ( ( '!unique' ) ) ;
+    // InternalQVTcoreBase.g:24221:1: rule__ParameterCS__QualifiersAssignment_2_1_0_3 : ( ( '!unique' ) ) ;
     public final void rule__ParameterCS__QualifiersAssignment_2_1_0_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:24224:1: ( ( ( '!unique' ) ) )
-            // InternalQVTcoreBase.g:24225:1: ( ( '!unique' ) )
+            // InternalQVTcoreBase.g:24225:1: ( ( ( '!unique' ) ) )
+            // InternalQVTcoreBase.g:24226:1: ( ( '!unique' ) )
             {
-            // InternalQVTcoreBase.g:24225:1: ( ( '!unique' ) )
-            // InternalQVTcoreBase.g:24226:1: ( '!unique' )
+            // InternalQVTcoreBase.g:24226:1: ( ( '!unique' ) )
+            // InternalQVTcoreBase.g:24227:1: ( '!unique' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getParameterCSAccess().getQualifiersUniqueKeyword_2_1_0_3_0()); 
             }
-            // InternalQVTcoreBase.g:24227:1: ( '!unique' )
-            // InternalQVTcoreBase.g:24228:1: '!unique'
+            // InternalQVTcoreBase.g:24228:1: ( '!unique' )
+            // InternalQVTcoreBase.g:24229:1: '!unique'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getParameterCSAccess().getQualifiersUniqueKeyword_2_1_0_3_0()); 
@@ -70510,23 +70510,23 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__ReferenceCS__QualifiersAssignment_0_0_0"
-    // InternalQVTcoreBase.g:24243:1: rule__ReferenceCS__QualifiersAssignment_0_0_0 : ( ( 'static' ) ) ;
+    // InternalQVTcoreBase.g:24244:1: rule__ReferenceCS__QualifiersAssignment_0_0_0 : ( ( 'static' ) ) ;
     public final void rule__ReferenceCS__QualifiersAssignment_0_0_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:24247:1: ( ( ( 'static' ) ) )
-            // InternalQVTcoreBase.g:24248:1: ( ( 'static' ) )
+            // InternalQVTcoreBase.g:24248:1: ( ( ( 'static' ) ) )
+            // InternalQVTcoreBase.g:24249:1: ( ( 'static' ) )
             {
-            // InternalQVTcoreBase.g:24248:1: ( ( 'static' ) )
-            // InternalQVTcoreBase.g:24249:1: ( 'static' )
+            // InternalQVTcoreBase.g:24249:1: ( ( 'static' ) )
+            // InternalQVTcoreBase.g:24250:1: ( 'static' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceCSAccess().getQualifiersStaticKeyword_0_0_0_0()); 
             }
-            // InternalQVTcoreBase.g:24250:1: ( 'static' )
-            // InternalQVTcoreBase.g:24251:1: 'static'
+            // InternalQVTcoreBase.g:24251:1: ( 'static' )
+            // InternalQVTcoreBase.g:24252:1: 'static'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceCSAccess().getQualifiersStaticKeyword_0_0_0_0()); 
@@ -70563,23 +70563,23 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__ReferenceCS__QualifiersAssignment_0_0_1"
-    // InternalQVTcoreBase.g:24266:1: rule__ReferenceCS__QualifiersAssignment_0_0_1 : ( ( 'definition' ) ) ;
+    // InternalQVTcoreBase.g:24267:1: rule__ReferenceCS__QualifiersAssignment_0_0_1 : ( ( 'definition' ) ) ;
     public final void rule__ReferenceCS__QualifiersAssignment_0_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:24270:1: ( ( ( 'definition' ) ) )
-            // InternalQVTcoreBase.g:24271:1: ( ( 'definition' ) )
+            // InternalQVTcoreBase.g:24271:1: ( ( ( 'definition' ) ) )
+            // InternalQVTcoreBase.g:24272:1: ( ( 'definition' ) )
             {
-            // InternalQVTcoreBase.g:24271:1: ( ( 'definition' ) )
-            // InternalQVTcoreBase.g:24272:1: ( 'definition' )
+            // InternalQVTcoreBase.g:24272:1: ( ( 'definition' ) )
+            // InternalQVTcoreBase.g:24273:1: ( 'definition' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceCSAccess().getQualifiersDefinitionKeyword_0_0_1_0()); 
             }
-            // InternalQVTcoreBase.g:24273:1: ( 'definition' )
-            // InternalQVTcoreBase.g:24274:1: 'definition'
+            // InternalQVTcoreBase.g:24274:1: ( 'definition' )
+            // InternalQVTcoreBase.g:24275:1: 'definition'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceCSAccess().getQualifiersDefinitionKeyword_0_0_1_0()); 
@@ -70616,23 +70616,23 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__ReferenceCS__QualifiersAssignment_0_1_0"
-    // InternalQVTcoreBase.g:24289:1: rule__ReferenceCS__QualifiersAssignment_0_1_0 : ( ( 'definition' ) ) ;
+    // InternalQVTcoreBase.g:24290:1: rule__ReferenceCS__QualifiersAssignment_0_1_0 : ( ( 'definition' ) ) ;
     public final void rule__ReferenceCS__QualifiersAssignment_0_1_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:24293:1: ( ( ( 'definition' ) ) )
-            // InternalQVTcoreBase.g:24294:1: ( ( 'definition' ) )
+            // InternalQVTcoreBase.g:24294:1: ( ( ( 'definition' ) ) )
+            // InternalQVTcoreBase.g:24295:1: ( ( 'definition' ) )
             {
-            // InternalQVTcoreBase.g:24294:1: ( ( 'definition' ) )
-            // InternalQVTcoreBase.g:24295:1: ( 'definition' )
+            // InternalQVTcoreBase.g:24295:1: ( ( 'definition' ) )
+            // InternalQVTcoreBase.g:24296:1: ( 'definition' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceCSAccess().getQualifiersDefinitionKeyword_0_1_0_0()); 
             }
-            // InternalQVTcoreBase.g:24296:1: ( 'definition' )
-            // InternalQVTcoreBase.g:24297:1: 'definition'
+            // InternalQVTcoreBase.g:24297:1: ( 'definition' )
+            // InternalQVTcoreBase.g:24298:1: 'definition'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceCSAccess().getQualifiersDefinitionKeyword_0_1_0_0()); 
@@ -70669,23 +70669,23 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__ReferenceCS__QualifiersAssignment_0_1_1"
-    // InternalQVTcoreBase.g:24312:1: rule__ReferenceCS__QualifiersAssignment_0_1_1 : ( ( 'static' ) ) ;
+    // InternalQVTcoreBase.g:24313:1: rule__ReferenceCS__QualifiersAssignment_0_1_1 : ( ( 'static' ) ) ;
     public final void rule__ReferenceCS__QualifiersAssignment_0_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:24316:1: ( ( ( 'static' ) ) )
-            // InternalQVTcoreBase.g:24317:1: ( ( 'static' ) )
+            // InternalQVTcoreBase.g:24317:1: ( ( ( 'static' ) ) )
+            // InternalQVTcoreBase.g:24318:1: ( ( 'static' ) )
             {
-            // InternalQVTcoreBase.g:24317:1: ( ( 'static' ) )
-            // InternalQVTcoreBase.g:24318:1: ( 'static' )
+            // InternalQVTcoreBase.g:24318:1: ( ( 'static' ) )
+            // InternalQVTcoreBase.g:24319:1: ( 'static' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceCSAccess().getQualifiersStaticKeyword_0_1_1_0()); 
             }
-            // InternalQVTcoreBase.g:24319:1: ( 'static' )
-            // InternalQVTcoreBase.g:24320:1: 'static'
+            // InternalQVTcoreBase.g:24320:1: ( 'static' )
+            // InternalQVTcoreBase.g:24321:1: 'static'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceCSAccess().getQualifiersStaticKeyword_0_1_1_0()); 
@@ -70722,17 +70722,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__ReferenceCS__NameAssignment_2"
-    // InternalQVTcoreBase.g:24335:1: rule__ReferenceCS__NameAssignment_2 : ( ruleUnrestrictedName ) ;
+    // InternalQVTcoreBase.g:24336:1: rule__ReferenceCS__NameAssignment_2 : ( ruleUnrestrictedName ) ;
     public final void rule__ReferenceCS__NameAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:24339:1: ( ( ruleUnrestrictedName ) )
-            // InternalQVTcoreBase.g:24340:1: ( ruleUnrestrictedName )
+            // InternalQVTcoreBase.g:24340:1: ( ( ruleUnrestrictedName ) )
+            // InternalQVTcoreBase.g:24341:1: ( ruleUnrestrictedName )
             {
-            // InternalQVTcoreBase.g:24340:1: ( ruleUnrestrictedName )
-            // InternalQVTcoreBase.g:24341:1: ruleUnrestrictedName
+            // InternalQVTcoreBase.g:24341:1: ( ruleUnrestrictedName )
+            // InternalQVTcoreBase.g:24342:1: ruleUnrestrictedName
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceCSAccess().getNameUnrestrictedNameParserRuleCall_2_0()); 
@@ -70767,23 +70767,23 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__ReferenceCS__ReferredOppositeAssignment_3_1"
-    // InternalQVTcoreBase.g:24350:1: rule__ReferenceCS__ReferredOppositeAssignment_3_1 : ( ( ruleUnrestrictedName ) ) ;
+    // InternalQVTcoreBase.g:24351:1: rule__ReferenceCS__ReferredOppositeAssignment_3_1 : ( ( ruleUnrestrictedName ) ) ;
     public final void rule__ReferenceCS__ReferredOppositeAssignment_3_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:24354:1: ( ( ( ruleUnrestrictedName ) ) )
-            // InternalQVTcoreBase.g:24355:1: ( ( ruleUnrestrictedName ) )
+            // InternalQVTcoreBase.g:24355:1: ( ( ( ruleUnrestrictedName ) ) )
+            // InternalQVTcoreBase.g:24356:1: ( ( ruleUnrestrictedName ) )
             {
-            // InternalQVTcoreBase.g:24355:1: ( ( ruleUnrestrictedName ) )
-            // InternalQVTcoreBase.g:24356:1: ( ruleUnrestrictedName )
+            // InternalQVTcoreBase.g:24356:1: ( ( ruleUnrestrictedName ) )
+            // InternalQVTcoreBase.g:24357:1: ( ruleUnrestrictedName )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceCSAccess().getReferredOppositePropertyCrossReference_3_1_0()); 
             }
-            // InternalQVTcoreBase.g:24357:1: ( ruleUnrestrictedName )
-            // InternalQVTcoreBase.g:24358:1: ruleUnrestrictedName
+            // InternalQVTcoreBase.g:24358:1: ( ruleUnrestrictedName )
+            // InternalQVTcoreBase.g:24359:1: ruleUnrestrictedName
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceCSAccess().getReferredOppositePropertyUnrestrictedNameParserRuleCall_3_1_0_1()); 
@@ -70824,17 +70824,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__ReferenceCS__OwnedTypeAssignment_4_1"
-    // InternalQVTcoreBase.g:24369:1: rule__ReferenceCS__OwnedTypeAssignment_4_1 : ( ruleTypedMultiplicityRefCS ) ;
+    // InternalQVTcoreBase.g:24370:1: rule__ReferenceCS__OwnedTypeAssignment_4_1 : ( ruleTypedMultiplicityRefCS ) ;
     public final void rule__ReferenceCS__OwnedTypeAssignment_4_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:24373:1: ( ( ruleTypedMultiplicityRefCS ) )
-            // InternalQVTcoreBase.g:24374:1: ( ruleTypedMultiplicityRefCS )
+            // InternalQVTcoreBase.g:24374:1: ( ( ruleTypedMultiplicityRefCS ) )
+            // InternalQVTcoreBase.g:24375:1: ( ruleTypedMultiplicityRefCS )
             {
-            // InternalQVTcoreBase.g:24374:1: ( ruleTypedMultiplicityRefCS )
-            // InternalQVTcoreBase.g:24375:1: ruleTypedMultiplicityRefCS
+            // InternalQVTcoreBase.g:24375:1: ( ruleTypedMultiplicityRefCS )
+            // InternalQVTcoreBase.g:24376:1: ruleTypedMultiplicityRefCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceCSAccess().getOwnedTypeTypedMultiplicityRefCSParserRuleCall_4_1_0()); 
@@ -70869,17 +70869,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__ReferenceCS__DefaultAssignment_5_1"
-    // InternalQVTcoreBase.g:24384:1: rule__ReferenceCS__DefaultAssignment_5_1 : ( RULE_SINGLE_QUOTED_STRING ) ;
+    // InternalQVTcoreBase.g:24385:1: rule__ReferenceCS__DefaultAssignment_5_1 : ( RULE_SINGLE_QUOTED_STRING ) ;
     public final void rule__ReferenceCS__DefaultAssignment_5_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:24388:1: ( ( RULE_SINGLE_QUOTED_STRING ) )
-            // InternalQVTcoreBase.g:24389:1: ( RULE_SINGLE_QUOTED_STRING )
+            // InternalQVTcoreBase.g:24389:1: ( ( RULE_SINGLE_QUOTED_STRING ) )
+            // InternalQVTcoreBase.g:24390:1: ( RULE_SINGLE_QUOTED_STRING )
             {
-            // InternalQVTcoreBase.g:24389:1: ( RULE_SINGLE_QUOTED_STRING )
-            // InternalQVTcoreBase.g:24390:1: RULE_SINGLE_QUOTED_STRING
+            // InternalQVTcoreBase.g:24390:1: ( RULE_SINGLE_QUOTED_STRING )
+            // InternalQVTcoreBase.g:24391:1: RULE_SINGLE_QUOTED_STRING
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceCSAccess().getDefaultSINGLE_QUOTED_STRINGTerminalRuleCall_5_1_0()); 
@@ -70910,23 +70910,23 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__ReferenceCS__QualifiersAssignment_6_1_0_0"
-    // InternalQVTcoreBase.g:24399:1: rule__ReferenceCS__QualifiersAssignment_6_1_0_0 : ( ( 'composes' ) ) ;
+    // InternalQVTcoreBase.g:24400:1: rule__ReferenceCS__QualifiersAssignment_6_1_0_0 : ( ( 'composes' ) ) ;
     public final void rule__ReferenceCS__QualifiersAssignment_6_1_0_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:24403:1: ( ( ( 'composes' ) ) )
-            // InternalQVTcoreBase.g:24404:1: ( ( 'composes' ) )
+            // InternalQVTcoreBase.g:24404:1: ( ( ( 'composes' ) ) )
+            // InternalQVTcoreBase.g:24405:1: ( ( 'composes' ) )
             {
-            // InternalQVTcoreBase.g:24404:1: ( ( 'composes' ) )
-            // InternalQVTcoreBase.g:24405:1: ( 'composes' )
+            // InternalQVTcoreBase.g:24405:1: ( ( 'composes' ) )
+            // InternalQVTcoreBase.g:24406:1: ( 'composes' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceCSAccess().getQualifiersComposesKeyword_6_1_0_0_0()); 
             }
-            // InternalQVTcoreBase.g:24406:1: ( 'composes' )
-            // InternalQVTcoreBase.g:24407:1: 'composes'
+            // InternalQVTcoreBase.g:24407:1: ( 'composes' )
+            // InternalQVTcoreBase.g:24408:1: 'composes'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceCSAccess().getQualifiersComposesKeyword_6_1_0_0_0()); 
@@ -70963,23 +70963,23 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__ReferenceCS__QualifiersAssignment_6_1_0_1"
-    // InternalQVTcoreBase.g:24422:1: rule__ReferenceCS__QualifiersAssignment_6_1_0_1 : ( ( '!composes' ) ) ;
+    // InternalQVTcoreBase.g:24423:1: rule__ReferenceCS__QualifiersAssignment_6_1_0_1 : ( ( '!composes' ) ) ;
     public final void rule__ReferenceCS__QualifiersAssignment_6_1_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:24426:1: ( ( ( '!composes' ) ) )
-            // InternalQVTcoreBase.g:24427:1: ( ( '!composes' ) )
+            // InternalQVTcoreBase.g:24427:1: ( ( ( '!composes' ) ) )
+            // InternalQVTcoreBase.g:24428:1: ( ( '!composes' ) )
             {
-            // InternalQVTcoreBase.g:24427:1: ( ( '!composes' ) )
-            // InternalQVTcoreBase.g:24428:1: ( '!composes' )
+            // InternalQVTcoreBase.g:24428:1: ( ( '!composes' ) )
+            // InternalQVTcoreBase.g:24429:1: ( '!composes' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceCSAccess().getQualifiersComposesKeyword_6_1_0_1_0()); 
             }
-            // InternalQVTcoreBase.g:24429:1: ( '!composes' )
-            // InternalQVTcoreBase.g:24430:1: '!composes'
+            // InternalQVTcoreBase.g:24430:1: ( '!composes' )
+            // InternalQVTcoreBase.g:24431:1: '!composes'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceCSAccess().getQualifiersComposesKeyword_6_1_0_1_0()); 
@@ -71016,23 +71016,23 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__ReferenceCS__QualifiersAssignment_6_1_0_2"
-    // InternalQVTcoreBase.g:24445:1: rule__ReferenceCS__QualifiersAssignment_6_1_0_2 : ( ( 'derived' ) ) ;
+    // InternalQVTcoreBase.g:24446:1: rule__ReferenceCS__QualifiersAssignment_6_1_0_2 : ( ( 'derived' ) ) ;
     public final void rule__ReferenceCS__QualifiersAssignment_6_1_0_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:24449:1: ( ( ( 'derived' ) ) )
-            // InternalQVTcoreBase.g:24450:1: ( ( 'derived' ) )
+            // InternalQVTcoreBase.g:24450:1: ( ( ( 'derived' ) ) )
+            // InternalQVTcoreBase.g:24451:1: ( ( 'derived' ) )
             {
-            // InternalQVTcoreBase.g:24450:1: ( ( 'derived' ) )
-            // InternalQVTcoreBase.g:24451:1: ( 'derived' )
+            // InternalQVTcoreBase.g:24451:1: ( ( 'derived' ) )
+            // InternalQVTcoreBase.g:24452:1: ( 'derived' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceCSAccess().getQualifiersDerivedKeyword_6_1_0_2_0()); 
             }
-            // InternalQVTcoreBase.g:24452:1: ( 'derived' )
-            // InternalQVTcoreBase.g:24453:1: 'derived'
+            // InternalQVTcoreBase.g:24453:1: ( 'derived' )
+            // InternalQVTcoreBase.g:24454:1: 'derived'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceCSAccess().getQualifiersDerivedKeyword_6_1_0_2_0()); 
@@ -71069,23 +71069,23 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__ReferenceCS__QualifiersAssignment_6_1_0_3"
-    // InternalQVTcoreBase.g:24468:1: rule__ReferenceCS__QualifiersAssignment_6_1_0_3 : ( ( '!derived' ) ) ;
+    // InternalQVTcoreBase.g:24469:1: rule__ReferenceCS__QualifiersAssignment_6_1_0_3 : ( ( '!derived' ) ) ;
     public final void rule__ReferenceCS__QualifiersAssignment_6_1_0_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:24472:1: ( ( ( '!derived' ) ) )
-            // InternalQVTcoreBase.g:24473:1: ( ( '!derived' ) )
+            // InternalQVTcoreBase.g:24473:1: ( ( ( '!derived' ) ) )
+            // InternalQVTcoreBase.g:24474:1: ( ( '!derived' ) )
             {
-            // InternalQVTcoreBase.g:24473:1: ( ( '!derived' ) )
-            // InternalQVTcoreBase.g:24474:1: ( '!derived' )
+            // InternalQVTcoreBase.g:24474:1: ( ( '!derived' ) )
+            // InternalQVTcoreBase.g:24475:1: ( '!derived' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceCSAccess().getQualifiersDerivedKeyword_6_1_0_3_0()); 
             }
-            // InternalQVTcoreBase.g:24475:1: ( '!derived' )
-            // InternalQVTcoreBase.g:24476:1: '!derived'
+            // InternalQVTcoreBase.g:24476:1: ( '!derived' )
+            // InternalQVTcoreBase.g:24477:1: '!derived'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceCSAccess().getQualifiersDerivedKeyword_6_1_0_3_0()); 
@@ -71122,23 +71122,23 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__ReferenceCS__QualifiersAssignment_6_1_0_4"
-    // InternalQVTcoreBase.g:24491:1: rule__ReferenceCS__QualifiersAssignment_6_1_0_4 : ( ( 'ordered' ) ) ;
+    // InternalQVTcoreBase.g:24492:1: rule__ReferenceCS__QualifiersAssignment_6_1_0_4 : ( ( 'ordered' ) ) ;
     public final void rule__ReferenceCS__QualifiersAssignment_6_1_0_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:24495:1: ( ( ( 'ordered' ) ) )
-            // InternalQVTcoreBase.g:24496:1: ( ( 'ordered' ) )
+            // InternalQVTcoreBase.g:24496:1: ( ( ( 'ordered' ) ) )
+            // InternalQVTcoreBase.g:24497:1: ( ( 'ordered' ) )
             {
-            // InternalQVTcoreBase.g:24496:1: ( ( 'ordered' ) )
-            // InternalQVTcoreBase.g:24497:1: ( 'ordered' )
+            // InternalQVTcoreBase.g:24497:1: ( ( 'ordered' ) )
+            // InternalQVTcoreBase.g:24498:1: ( 'ordered' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceCSAccess().getQualifiersOrderedKeyword_6_1_0_4_0()); 
             }
-            // InternalQVTcoreBase.g:24498:1: ( 'ordered' )
-            // InternalQVTcoreBase.g:24499:1: 'ordered'
+            // InternalQVTcoreBase.g:24499:1: ( 'ordered' )
+            // InternalQVTcoreBase.g:24500:1: 'ordered'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceCSAccess().getQualifiersOrderedKeyword_6_1_0_4_0()); 
@@ -71175,23 +71175,23 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__ReferenceCS__QualifiersAssignment_6_1_0_5"
-    // InternalQVTcoreBase.g:24514:1: rule__ReferenceCS__QualifiersAssignment_6_1_0_5 : ( ( '!ordered' ) ) ;
+    // InternalQVTcoreBase.g:24515:1: rule__ReferenceCS__QualifiersAssignment_6_1_0_5 : ( ( '!ordered' ) ) ;
     public final void rule__ReferenceCS__QualifiersAssignment_6_1_0_5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:24518:1: ( ( ( '!ordered' ) ) )
-            // InternalQVTcoreBase.g:24519:1: ( ( '!ordered' ) )
+            // InternalQVTcoreBase.g:24519:1: ( ( ( '!ordered' ) ) )
+            // InternalQVTcoreBase.g:24520:1: ( ( '!ordered' ) )
             {
-            // InternalQVTcoreBase.g:24519:1: ( ( '!ordered' ) )
-            // InternalQVTcoreBase.g:24520:1: ( '!ordered' )
+            // InternalQVTcoreBase.g:24520:1: ( ( '!ordered' ) )
+            // InternalQVTcoreBase.g:24521:1: ( '!ordered' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceCSAccess().getQualifiersOrderedKeyword_6_1_0_5_0()); 
             }
-            // InternalQVTcoreBase.g:24521:1: ( '!ordered' )
-            // InternalQVTcoreBase.g:24522:1: '!ordered'
+            // InternalQVTcoreBase.g:24522:1: ( '!ordered' )
+            // InternalQVTcoreBase.g:24523:1: '!ordered'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceCSAccess().getQualifiersOrderedKeyword_6_1_0_5_0()); 
@@ -71228,23 +71228,23 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__ReferenceCS__QualifiersAssignment_6_1_0_6"
-    // InternalQVTcoreBase.g:24537:1: rule__ReferenceCS__QualifiersAssignment_6_1_0_6 : ( ( 'readonly' ) ) ;
+    // InternalQVTcoreBase.g:24538:1: rule__ReferenceCS__QualifiersAssignment_6_1_0_6 : ( ( 'readonly' ) ) ;
     public final void rule__ReferenceCS__QualifiersAssignment_6_1_0_6() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:24541:1: ( ( ( 'readonly' ) ) )
-            // InternalQVTcoreBase.g:24542:1: ( ( 'readonly' ) )
+            // InternalQVTcoreBase.g:24542:1: ( ( ( 'readonly' ) ) )
+            // InternalQVTcoreBase.g:24543:1: ( ( 'readonly' ) )
             {
-            // InternalQVTcoreBase.g:24542:1: ( ( 'readonly' ) )
-            // InternalQVTcoreBase.g:24543:1: ( 'readonly' )
+            // InternalQVTcoreBase.g:24543:1: ( ( 'readonly' ) )
+            // InternalQVTcoreBase.g:24544:1: ( 'readonly' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceCSAccess().getQualifiersReadonlyKeyword_6_1_0_6_0()); 
             }
-            // InternalQVTcoreBase.g:24544:1: ( 'readonly' )
-            // InternalQVTcoreBase.g:24545:1: 'readonly'
+            // InternalQVTcoreBase.g:24545:1: ( 'readonly' )
+            // InternalQVTcoreBase.g:24546:1: 'readonly'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceCSAccess().getQualifiersReadonlyKeyword_6_1_0_6_0()); 
@@ -71281,23 +71281,23 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__ReferenceCS__QualifiersAssignment_6_1_0_7"
-    // InternalQVTcoreBase.g:24560:1: rule__ReferenceCS__QualifiersAssignment_6_1_0_7 : ( ( '!readonly' ) ) ;
+    // InternalQVTcoreBase.g:24561:1: rule__ReferenceCS__QualifiersAssignment_6_1_0_7 : ( ( '!readonly' ) ) ;
     public final void rule__ReferenceCS__QualifiersAssignment_6_1_0_7() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:24564:1: ( ( ( '!readonly' ) ) )
-            // InternalQVTcoreBase.g:24565:1: ( ( '!readonly' ) )
+            // InternalQVTcoreBase.g:24565:1: ( ( ( '!readonly' ) ) )
+            // InternalQVTcoreBase.g:24566:1: ( ( '!readonly' ) )
             {
-            // InternalQVTcoreBase.g:24565:1: ( ( '!readonly' ) )
-            // InternalQVTcoreBase.g:24566:1: ( '!readonly' )
+            // InternalQVTcoreBase.g:24566:1: ( ( '!readonly' ) )
+            // InternalQVTcoreBase.g:24567:1: ( '!readonly' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceCSAccess().getQualifiersReadonlyKeyword_6_1_0_7_0()); 
             }
-            // InternalQVTcoreBase.g:24567:1: ( '!readonly' )
-            // InternalQVTcoreBase.g:24568:1: '!readonly'
+            // InternalQVTcoreBase.g:24568:1: ( '!readonly' )
+            // InternalQVTcoreBase.g:24569:1: '!readonly'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceCSAccess().getQualifiersReadonlyKeyword_6_1_0_7_0()); 
@@ -71334,23 +71334,23 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__ReferenceCS__QualifiersAssignment_6_1_0_8"
-    // InternalQVTcoreBase.g:24583:1: rule__ReferenceCS__QualifiersAssignment_6_1_0_8 : ( ( 'resolve' ) ) ;
+    // InternalQVTcoreBase.g:24584:1: rule__ReferenceCS__QualifiersAssignment_6_1_0_8 : ( ( 'resolve' ) ) ;
     public final void rule__ReferenceCS__QualifiersAssignment_6_1_0_8() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:24587:1: ( ( ( 'resolve' ) ) )
-            // InternalQVTcoreBase.g:24588:1: ( ( 'resolve' ) )
+            // InternalQVTcoreBase.g:24588:1: ( ( ( 'resolve' ) ) )
+            // InternalQVTcoreBase.g:24589:1: ( ( 'resolve' ) )
             {
-            // InternalQVTcoreBase.g:24588:1: ( ( 'resolve' ) )
-            // InternalQVTcoreBase.g:24589:1: ( 'resolve' )
+            // InternalQVTcoreBase.g:24589:1: ( ( 'resolve' ) )
+            // InternalQVTcoreBase.g:24590:1: ( 'resolve' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceCSAccess().getQualifiersResolveKeyword_6_1_0_8_0()); 
             }
-            // InternalQVTcoreBase.g:24590:1: ( 'resolve' )
-            // InternalQVTcoreBase.g:24591:1: 'resolve'
+            // InternalQVTcoreBase.g:24591:1: ( 'resolve' )
+            // InternalQVTcoreBase.g:24592:1: 'resolve'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceCSAccess().getQualifiersResolveKeyword_6_1_0_8_0()); 
@@ -71387,23 +71387,23 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__ReferenceCS__QualifiersAssignment_6_1_0_9"
-    // InternalQVTcoreBase.g:24606:1: rule__ReferenceCS__QualifiersAssignment_6_1_0_9 : ( ( '!resolve' ) ) ;
+    // InternalQVTcoreBase.g:24607:1: rule__ReferenceCS__QualifiersAssignment_6_1_0_9 : ( ( '!resolve' ) ) ;
     public final void rule__ReferenceCS__QualifiersAssignment_6_1_0_9() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:24610:1: ( ( ( '!resolve' ) ) )
-            // InternalQVTcoreBase.g:24611:1: ( ( '!resolve' ) )
+            // InternalQVTcoreBase.g:24611:1: ( ( ( '!resolve' ) ) )
+            // InternalQVTcoreBase.g:24612:1: ( ( '!resolve' ) )
             {
-            // InternalQVTcoreBase.g:24611:1: ( ( '!resolve' ) )
-            // InternalQVTcoreBase.g:24612:1: ( '!resolve' )
+            // InternalQVTcoreBase.g:24612:1: ( ( '!resolve' ) )
+            // InternalQVTcoreBase.g:24613:1: ( '!resolve' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceCSAccess().getQualifiersResolveKeyword_6_1_0_9_0()); 
             }
-            // InternalQVTcoreBase.g:24613:1: ( '!resolve' )
-            // InternalQVTcoreBase.g:24614:1: '!resolve'
+            // InternalQVTcoreBase.g:24614:1: ( '!resolve' )
+            // InternalQVTcoreBase.g:24615:1: '!resolve'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceCSAccess().getQualifiersResolveKeyword_6_1_0_9_0()); 
@@ -71440,23 +71440,23 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__ReferenceCS__QualifiersAssignment_6_1_0_10"
-    // InternalQVTcoreBase.g:24629:1: rule__ReferenceCS__QualifiersAssignment_6_1_0_10 : ( ( 'transient' ) ) ;
+    // InternalQVTcoreBase.g:24630:1: rule__ReferenceCS__QualifiersAssignment_6_1_0_10 : ( ( 'transient' ) ) ;
     public final void rule__ReferenceCS__QualifiersAssignment_6_1_0_10() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:24633:1: ( ( ( 'transient' ) ) )
-            // InternalQVTcoreBase.g:24634:1: ( ( 'transient' ) )
+            // InternalQVTcoreBase.g:24634:1: ( ( ( 'transient' ) ) )
+            // InternalQVTcoreBase.g:24635:1: ( ( 'transient' ) )
             {
-            // InternalQVTcoreBase.g:24634:1: ( ( 'transient' ) )
-            // InternalQVTcoreBase.g:24635:1: ( 'transient' )
+            // InternalQVTcoreBase.g:24635:1: ( ( 'transient' ) )
+            // InternalQVTcoreBase.g:24636:1: ( 'transient' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceCSAccess().getQualifiersTransientKeyword_6_1_0_10_0()); 
             }
-            // InternalQVTcoreBase.g:24636:1: ( 'transient' )
-            // InternalQVTcoreBase.g:24637:1: 'transient'
+            // InternalQVTcoreBase.g:24637:1: ( 'transient' )
+            // InternalQVTcoreBase.g:24638:1: 'transient'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceCSAccess().getQualifiersTransientKeyword_6_1_0_10_0()); 
@@ -71493,23 +71493,23 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__ReferenceCS__QualifiersAssignment_6_1_0_11"
-    // InternalQVTcoreBase.g:24652:1: rule__ReferenceCS__QualifiersAssignment_6_1_0_11 : ( ( '!transient' ) ) ;
+    // InternalQVTcoreBase.g:24653:1: rule__ReferenceCS__QualifiersAssignment_6_1_0_11 : ( ( '!transient' ) ) ;
     public final void rule__ReferenceCS__QualifiersAssignment_6_1_0_11() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:24656:1: ( ( ( '!transient' ) ) )
-            // InternalQVTcoreBase.g:24657:1: ( ( '!transient' ) )
+            // InternalQVTcoreBase.g:24657:1: ( ( ( '!transient' ) ) )
+            // InternalQVTcoreBase.g:24658:1: ( ( '!transient' ) )
             {
-            // InternalQVTcoreBase.g:24657:1: ( ( '!transient' ) )
-            // InternalQVTcoreBase.g:24658:1: ( '!transient' )
+            // InternalQVTcoreBase.g:24658:1: ( ( '!transient' ) )
+            // InternalQVTcoreBase.g:24659:1: ( '!transient' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceCSAccess().getQualifiersTransientKeyword_6_1_0_11_0()); 
             }
-            // InternalQVTcoreBase.g:24659:1: ( '!transient' )
-            // InternalQVTcoreBase.g:24660:1: '!transient'
+            // InternalQVTcoreBase.g:24660:1: ( '!transient' )
+            // InternalQVTcoreBase.g:24661:1: '!transient'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceCSAccess().getQualifiersTransientKeyword_6_1_0_11_0()); 
@@ -71546,23 +71546,23 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__ReferenceCS__QualifiersAssignment_6_1_0_12"
-    // InternalQVTcoreBase.g:24675:1: rule__ReferenceCS__QualifiersAssignment_6_1_0_12 : ( ( 'unique' ) ) ;
+    // InternalQVTcoreBase.g:24676:1: rule__ReferenceCS__QualifiersAssignment_6_1_0_12 : ( ( 'unique' ) ) ;
     public final void rule__ReferenceCS__QualifiersAssignment_6_1_0_12() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:24679:1: ( ( ( 'unique' ) ) )
-            // InternalQVTcoreBase.g:24680:1: ( ( 'unique' ) )
+            // InternalQVTcoreBase.g:24680:1: ( ( ( 'unique' ) ) )
+            // InternalQVTcoreBase.g:24681:1: ( ( 'unique' ) )
             {
-            // InternalQVTcoreBase.g:24680:1: ( ( 'unique' ) )
-            // InternalQVTcoreBase.g:24681:1: ( 'unique' )
+            // InternalQVTcoreBase.g:24681:1: ( ( 'unique' ) )
+            // InternalQVTcoreBase.g:24682:1: ( 'unique' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceCSAccess().getQualifiersUniqueKeyword_6_1_0_12_0()); 
             }
-            // InternalQVTcoreBase.g:24682:1: ( 'unique' )
-            // InternalQVTcoreBase.g:24683:1: 'unique'
+            // InternalQVTcoreBase.g:24683:1: ( 'unique' )
+            // InternalQVTcoreBase.g:24684:1: 'unique'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceCSAccess().getQualifiersUniqueKeyword_6_1_0_12_0()); 
@@ -71599,23 +71599,23 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__ReferenceCS__QualifiersAssignment_6_1_0_13"
-    // InternalQVTcoreBase.g:24698:1: rule__ReferenceCS__QualifiersAssignment_6_1_0_13 : ( ( '!unique' ) ) ;
+    // InternalQVTcoreBase.g:24699:1: rule__ReferenceCS__QualifiersAssignment_6_1_0_13 : ( ( '!unique' ) ) ;
     public final void rule__ReferenceCS__QualifiersAssignment_6_1_0_13() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:24702:1: ( ( ( '!unique' ) ) )
-            // InternalQVTcoreBase.g:24703:1: ( ( '!unique' ) )
+            // InternalQVTcoreBase.g:24703:1: ( ( ( '!unique' ) ) )
+            // InternalQVTcoreBase.g:24704:1: ( ( '!unique' ) )
             {
-            // InternalQVTcoreBase.g:24703:1: ( ( '!unique' ) )
-            // InternalQVTcoreBase.g:24704:1: ( '!unique' )
+            // InternalQVTcoreBase.g:24704:1: ( ( '!unique' ) )
+            // InternalQVTcoreBase.g:24705:1: ( '!unique' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceCSAccess().getQualifiersUniqueKeyword_6_1_0_13_0()); 
             }
-            // InternalQVTcoreBase.g:24705:1: ( '!unique' )
-            // InternalQVTcoreBase.g:24706:1: '!unique'
+            // InternalQVTcoreBase.g:24706:1: ( '!unique' )
+            // InternalQVTcoreBase.g:24707:1: '!unique'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceCSAccess().getQualifiersUniqueKeyword_6_1_0_13_0()); 
@@ -71652,23 +71652,23 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__ReferenceCS__QualifiersAssignment_6_1_0_14"
-    // InternalQVTcoreBase.g:24721:1: rule__ReferenceCS__QualifiersAssignment_6_1_0_14 : ( ( 'unsettable' ) ) ;
+    // InternalQVTcoreBase.g:24722:1: rule__ReferenceCS__QualifiersAssignment_6_1_0_14 : ( ( 'unsettable' ) ) ;
     public final void rule__ReferenceCS__QualifiersAssignment_6_1_0_14() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:24725:1: ( ( ( 'unsettable' ) ) )
-            // InternalQVTcoreBase.g:24726:1: ( ( 'unsettable' ) )
+            // InternalQVTcoreBase.g:24726:1: ( ( ( 'unsettable' ) ) )
+            // InternalQVTcoreBase.g:24727:1: ( ( 'unsettable' ) )
             {
-            // InternalQVTcoreBase.g:24726:1: ( ( 'unsettable' ) )
-            // InternalQVTcoreBase.g:24727:1: ( 'unsettable' )
+            // InternalQVTcoreBase.g:24727:1: ( ( 'unsettable' ) )
+            // InternalQVTcoreBase.g:24728:1: ( 'unsettable' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceCSAccess().getQualifiersUnsettableKeyword_6_1_0_14_0()); 
             }
-            // InternalQVTcoreBase.g:24728:1: ( 'unsettable' )
-            // InternalQVTcoreBase.g:24729:1: 'unsettable'
+            // InternalQVTcoreBase.g:24729:1: ( 'unsettable' )
+            // InternalQVTcoreBase.g:24730:1: 'unsettable'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceCSAccess().getQualifiersUnsettableKeyword_6_1_0_14_0()); 
@@ -71705,23 +71705,23 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__ReferenceCS__QualifiersAssignment_6_1_0_15"
-    // InternalQVTcoreBase.g:24744:1: rule__ReferenceCS__QualifiersAssignment_6_1_0_15 : ( ( '!unsettable' ) ) ;
+    // InternalQVTcoreBase.g:24745:1: rule__ReferenceCS__QualifiersAssignment_6_1_0_15 : ( ( '!unsettable' ) ) ;
     public final void rule__ReferenceCS__QualifiersAssignment_6_1_0_15() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:24748:1: ( ( ( '!unsettable' ) ) )
-            // InternalQVTcoreBase.g:24749:1: ( ( '!unsettable' ) )
+            // InternalQVTcoreBase.g:24749:1: ( ( ( '!unsettable' ) ) )
+            // InternalQVTcoreBase.g:24750:1: ( ( '!unsettable' ) )
             {
-            // InternalQVTcoreBase.g:24749:1: ( ( '!unsettable' ) )
-            // InternalQVTcoreBase.g:24750:1: ( '!unsettable' )
+            // InternalQVTcoreBase.g:24750:1: ( ( '!unsettable' ) )
+            // InternalQVTcoreBase.g:24751:1: ( '!unsettable' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceCSAccess().getQualifiersUnsettableKeyword_6_1_0_15_0()); 
             }
-            // InternalQVTcoreBase.g:24751:1: ( '!unsettable' )
-            // InternalQVTcoreBase.g:24752:1: '!unsettable'
+            // InternalQVTcoreBase.g:24752:1: ( '!unsettable' )
+            // InternalQVTcoreBase.g:24753:1: '!unsettable'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceCSAccess().getQualifiersUnsettableKeyword_6_1_0_15_0()); 
@@ -71758,23 +71758,23 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__ReferenceCS__QualifiersAssignment_6_1_0_16"
-    // InternalQVTcoreBase.g:24767:1: rule__ReferenceCS__QualifiersAssignment_6_1_0_16 : ( ( 'volatile' ) ) ;
+    // InternalQVTcoreBase.g:24768:1: rule__ReferenceCS__QualifiersAssignment_6_1_0_16 : ( ( 'volatile' ) ) ;
     public final void rule__ReferenceCS__QualifiersAssignment_6_1_0_16() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:24771:1: ( ( ( 'volatile' ) ) )
-            // InternalQVTcoreBase.g:24772:1: ( ( 'volatile' ) )
+            // InternalQVTcoreBase.g:24772:1: ( ( ( 'volatile' ) ) )
+            // InternalQVTcoreBase.g:24773:1: ( ( 'volatile' ) )
             {
-            // InternalQVTcoreBase.g:24772:1: ( ( 'volatile' ) )
-            // InternalQVTcoreBase.g:24773:1: ( 'volatile' )
+            // InternalQVTcoreBase.g:24773:1: ( ( 'volatile' ) )
+            // InternalQVTcoreBase.g:24774:1: ( 'volatile' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceCSAccess().getQualifiersVolatileKeyword_6_1_0_16_0()); 
             }
-            // InternalQVTcoreBase.g:24774:1: ( 'volatile' )
-            // InternalQVTcoreBase.g:24775:1: 'volatile'
+            // InternalQVTcoreBase.g:24775:1: ( 'volatile' )
+            // InternalQVTcoreBase.g:24776:1: 'volatile'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceCSAccess().getQualifiersVolatileKeyword_6_1_0_16_0()); 
@@ -71811,23 +71811,23 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__ReferenceCS__QualifiersAssignment_6_1_0_17"
-    // InternalQVTcoreBase.g:24790:1: rule__ReferenceCS__QualifiersAssignment_6_1_0_17 : ( ( '!volatile' ) ) ;
+    // InternalQVTcoreBase.g:24791:1: rule__ReferenceCS__QualifiersAssignment_6_1_0_17 : ( ( '!volatile' ) ) ;
     public final void rule__ReferenceCS__QualifiersAssignment_6_1_0_17() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:24794:1: ( ( ( '!volatile' ) ) )
-            // InternalQVTcoreBase.g:24795:1: ( ( '!volatile' ) )
+            // InternalQVTcoreBase.g:24795:1: ( ( ( '!volatile' ) ) )
+            // InternalQVTcoreBase.g:24796:1: ( ( '!volatile' ) )
             {
-            // InternalQVTcoreBase.g:24795:1: ( ( '!volatile' ) )
-            // InternalQVTcoreBase.g:24796:1: ( '!volatile' )
+            // InternalQVTcoreBase.g:24796:1: ( ( '!volatile' ) )
+            // InternalQVTcoreBase.g:24797:1: ( '!volatile' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceCSAccess().getQualifiersVolatileKeyword_6_1_0_17_0()); 
             }
-            // InternalQVTcoreBase.g:24797:1: ( '!volatile' )
-            // InternalQVTcoreBase.g:24798:1: '!volatile'
+            // InternalQVTcoreBase.g:24798:1: ( '!volatile' )
+            // InternalQVTcoreBase.g:24799:1: '!volatile'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceCSAccess().getQualifiersVolatileKeyword_6_1_0_17_0()); 
@@ -71864,17 +71864,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__ReferenceCS__OwnedDefaultExpressionsAssignment_7_0_1_0_3"
-    // InternalQVTcoreBase.g:24813:1: rule__ReferenceCS__OwnedDefaultExpressionsAssignment_7_0_1_0_3 : ( ruleSpecificationCS ) ;
+    // InternalQVTcoreBase.g:24814:1: rule__ReferenceCS__OwnedDefaultExpressionsAssignment_7_0_1_0_3 : ( ruleSpecificationCS ) ;
     public final void rule__ReferenceCS__OwnedDefaultExpressionsAssignment_7_0_1_0_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:24817:1: ( ( ruleSpecificationCS ) )
-            // InternalQVTcoreBase.g:24818:1: ( ruleSpecificationCS )
+            // InternalQVTcoreBase.g:24818:1: ( ( ruleSpecificationCS ) )
+            // InternalQVTcoreBase.g:24819:1: ( ruleSpecificationCS )
             {
-            // InternalQVTcoreBase.g:24818:1: ( ruleSpecificationCS )
-            // InternalQVTcoreBase.g:24819:1: ruleSpecificationCS
+            // InternalQVTcoreBase.g:24819:1: ( ruleSpecificationCS )
+            // InternalQVTcoreBase.g:24820:1: ruleSpecificationCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceCSAccess().getOwnedDefaultExpressionsSpecificationCSParserRuleCall_7_0_1_0_3_0()); 
@@ -71909,17 +71909,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__ReferenceCS__OwnedDefaultExpressionsAssignment_7_0_1_1_3"
-    // InternalQVTcoreBase.g:24828:1: rule__ReferenceCS__OwnedDefaultExpressionsAssignment_7_0_1_1_3 : ( ruleSpecificationCS ) ;
+    // InternalQVTcoreBase.g:24829:1: rule__ReferenceCS__OwnedDefaultExpressionsAssignment_7_0_1_1_3 : ( ruleSpecificationCS ) ;
     public final void rule__ReferenceCS__OwnedDefaultExpressionsAssignment_7_0_1_1_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:24832:1: ( ( ruleSpecificationCS ) )
-            // InternalQVTcoreBase.g:24833:1: ( ruleSpecificationCS )
+            // InternalQVTcoreBase.g:24833:1: ( ( ruleSpecificationCS ) )
+            // InternalQVTcoreBase.g:24834:1: ( ruleSpecificationCS )
             {
-            // InternalQVTcoreBase.g:24833:1: ( ruleSpecificationCS )
-            // InternalQVTcoreBase.g:24834:1: ruleSpecificationCS
+            // InternalQVTcoreBase.g:24834:1: ( ruleSpecificationCS )
+            // InternalQVTcoreBase.g:24835:1: ruleSpecificationCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceCSAccess().getOwnedDefaultExpressionsSpecificationCSParserRuleCall_7_0_1_1_3_0()); 
@@ -71954,17 +71954,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__SpecificationCS__OwnedExpressionAssignment_0"
-    // InternalQVTcoreBase.g:24843:1: rule__SpecificationCS__OwnedExpressionAssignment_0 : ( ruleExpCS ) ;
+    // InternalQVTcoreBase.g:24844:1: rule__SpecificationCS__OwnedExpressionAssignment_0 : ( ruleExpCS ) ;
     public final void rule__SpecificationCS__OwnedExpressionAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:24847:1: ( ( ruleExpCS ) )
-            // InternalQVTcoreBase.g:24848:1: ( ruleExpCS )
+            // InternalQVTcoreBase.g:24848:1: ( ( ruleExpCS ) )
+            // InternalQVTcoreBase.g:24849:1: ( ruleExpCS )
             {
-            // InternalQVTcoreBase.g:24848:1: ( ruleExpCS )
-            // InternalQVTcoreBase.g:24849:1: ruleExpCS
+            // InternalQVTcoreBase.g:24849:1: ( ruleExpCS )
+            // InternalQVTcoreBase.g:24850:1: ruleExpCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getSpecificationCSAccess().getOwnedExpressionExpCSParserRuleCall_0_0()); 
@@ -71999,17 +71999,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__SpecificationCS__ExprStringAssignment_1"
-    // InternalQVTcoreBase.g:24858:1: rule__SpecificationCS__ExprStringAssignment_1 : ( RULE_UNQUOTED_STRING ) ;
+    // InternalQVTcoreBase.g:24859:1: rule__SpecificationCS__ExprStringAssignment_1 : ( RULE_UNQUOTED_STRING ) ;
     public final void rule__SpecificationCS__ExprStringAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:24862:1: ( ( RULE_UNQUOTED_STRING ) )
-            // InternalQVTcoreBase.g:24863:1: ( RULE_UNQUOTED_STRING )
+            // InternalQVTcoreBase.g:24863:1: ( ( RULE_UNQUOTED_STRING ) )
+            // InternalQVTcoreBase.g:24864:1: ( RULE_UNQUOTED_STRING )
             {
-            // InternalQVTcoreBase.g:24863:1: ( RULE_UNQUOTED_STRING )
-            // InternalQVTcoreBase.g:24864:1: RULE_UNQUOTED_STRING
+            // InternalQVTcoreBase.g:24864:1: ( RULE_UNQUOTED_STRING )
+            // InternalQVTcoreBase.g:24865:1: RULE_UNQUOTED_STRING
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getSpecificationCSAccess().getExprStringUNQUOTED_STRINGTerminalRuleCall_1_0()); 
@@ -72040,23 +72040,23 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__StructuredClassCS__IsAbstractAssignment_0"
-    // InternalQVTcoreBase.g:24873:1: rule__StructuredClassCS__IsAbstractAssignment_0 : ( ( 'abstract' ) ) ;
+    // InternalQVTcoreBase.g:24874:1: rule__StructuredClassCS__IsAbstractAssignment_0 : ( ( 'abstract' ) ) ;
     public final void rule__StructuredClassCS__IsAbstractAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:24877:1: ( ( ( 'abstract' ) ) )
-            // InternalQVTcoreBase.g:24878:1: ( ( 'abstract' ) )
+            // InternalQVTcoreBase.g:24878:1: ( ( ( 'abstract' ) ) )
+            // InternalQVTcoreBase.g:24879:1: ( ( 'abstract' ) )
             {
-            // InternalQVTcoreBase.g:24878:1: ( ( 'abstract' ) )
-            // InternalQVTcoreBase.g:24879:1: ( 'abstract' )
+            // InternalQVTcoreBase.g:24879:1: ( ( 'abstract' ) )
+            // InternalQVTcoreBase.g:24880:1: ( 'abstract' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getStructuredClassCSAccess().getIsAbstractAbstractKeyword_0_0()); 
             }
-            // InternalQVTcoreBase.g:24880:1: ( 'abstract' )
-            // InternalQVTcoreBase.g:24881:1: 'abstract'
+            // InternalQVTcoreBase.g:24881:1: ( 'abstract' )
+            // InternalQVTcoreBase.g:24882:1: 'abstract'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getStructuredClassCSAccess().getIsAbstractAbstractKeyword_0_0()); 
@@ -72093,17 +72093,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__StructuredClassCS__NameAssignment_2"
-    // InternalQVTcoreBase.g:24896:1: rule__StructuredClassCS__NameAssignment_2 : ( ruleUnrestrictedName ) ;
+    // InternalQVTcoreBase.g:24897:1: rule__StructuredClassCS__NameAssignment_2 : ( ruleUnrestrictedName ) ;
     public final void rule__StructuredClassCS__NameAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:24900:1: ( ( ruleUnrestrictedName ) )
-            // InternalQVTcoreBase.g:24901:1: ( ruleUnrestrictedName )
+            // InternalQVTcoreBase.g:24901:1: ( ( ruleUnrestrictedName ) )
+            // InternalQVTcoreBase.g:24902:1: ( ruleUnrestrictedName )
             {
-            // InternalQVTcoreBase.g:24901:1: ( ruleUnrestrictedName )
-            // InternalQVTcoreBase.g:24902:1: ruleUnrestrictedName
+            // InternalQVTcoreBase.g:24902:1: ( ruleUnrestrictedName )
+            // InternalQVTcoreBase.g:24903:1: ruleUnrestrictedName
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getStructuredClassCSAccess().getNameUnrestrictedNameParserRuleCall_2_0()); 
@@ -72138,17 +72138,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__StructuredClassCS__OwnedSignatureAssignment_3"
-    // InternalQVTcoreBase.g:24911:1: rule__StructuredClassCS__OwnedSignatureAssignment_3 : ( ruleTemplateSignatureCS ) ;
+    // InternalQVTcoreBase.g:24912:1: rule__StructuredClassCS__OwnedSignatureAssignment_3 : ( ruleTemplateSignatureCS ) ;
     public final void rule__StructuredClassCS__OwnedSignatureAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:24915:1: ( ( ruleTemplateSignatureCS ) )
-            // InternalQVTcoreBase.g:24916:1: ( ruleTemplateSignatureCS )
+            // InternalQVTcoreBase.g:24916:1: ( ( ruleTemplateSignatureCS ) )
+            // InternalQVTcoreBase.g:24917:1: ( ruleTemplateSignatureCS )
             {
-            // InternalQVTcoreBase.g:24916:1: ( ruleTemplateSignatureCS )
-            // InternalQVTcoreBase.g:24917:1: ruleTemplateSignatureCS
+            // InternalQVTcoreBase.g:24917:1: ( ruleTemplateSignatureCS )
+            // InternalQVTcoreBase.g:24918:1: ruleTemplateSignatureCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getStructuredClassCSAccess().getOwnedSignatureTemplateSignatureCSParserRuleCall_3_0()); 
@@ -72183,17 +72183,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__StructuredClassCS__OwnedSuperTypesAssignment_4_1"
-    // InternalQVTcoreBase.g:24926:1: rule__StructuredClassCS__OwnedSuperTypesAssignment_4_1 : ( ruleTypedRefCS ) ;
+    // InternalQVTcoreBase.g:24927:1: rule__StructuredClassCS__OwnedSuperTypesAssignment_4_1 : ( ruleTypedRefCS ) ;
     public final void rule__StructuredClassCS__OwnedSuperTypesAssignment_4_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:24930:1: ( ( ruleTypedRefCS ) )
-            // InternalQVTcoreBase.g:24931:1: ( ruleTypedRefCS )
+            // InternalQVTcoreBase.g:24931:1: ( ( ruleTypedRefCS ) )
+            // InternalQVTcoreBase.g:24932:1: ( ruleTypedRefCS )
             {
-            // InternalQVTcoreBase.g:24931:1: ( ruleTypedRefCS )
-            // InternalQVTcoreBase.g:24932:1: ruleTypedRefCS
+            // InternalQVTcoreBase.g:24932:1: ( ruleTypedRefCS )
+            // InternalQVTcoreBase.g:24933:1: ruleTypedRefCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getStructuredClassCSAccess().getOwnedSuperTypesTypedRefCSParserRuleCall_4_1_0()); 
@@ -72228,17 +72228,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__StructuredClassCS__OwnedSuperTypesAssignment_4_2_1"
-    // InternalQVTcoreBase.g:24941:1: rule__StructuredClassCS__OwnedSuperTypesAssignment_4_2_1 : ( ruleTypedRefCS ) ;
+    // InternalQVTcoreBase.g:24942:1: rule__StructuredClassCS__OwnedSuperTypesAssignment_4_2_1 : ( ruleTypedRefCS ) ;
     public final void rule__StructuredClassCS__OwnedSuperTypesAssignment_4_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:24945:1: ( ( ruleTypedRefCS ) )
-            // InternalQVTcoreBase.g:24946:1: ( ruleTypedRefCS )
+            // InternalQVTcoreBase.g:24946:1: ( ( ruleTypedRefCS ) )
+            // InternalQVTcoreBase.g:24947:1: ( ruleTypedRefCS )
             {
-            // InternalQVTcoreBase.g:24946:1: ( ruleTypedRefCS )
-            // InternalQVTcoreBase.g:24947:1: ruleTypedRefCS
+            // InternalQVTcoreBase.g:24947:1: ( ruleTypedRefCS )
+            // InternalQVTcoreBase.g:24948:1: ruleTypedRefCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getStructuredClassCSAccess().getOwnedSuperTypesTypedRefCSParserRuleCall_4_2_1_0()); 
@@ -72273,17 +72273,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__StructuredClassCS__InstanceClassNameAssignment_5_1"
-    // InternalQVTcoreBase.g:24956:1: rule__StructuredClassCS__InstanceClassNameAssignment_5_1 : ( RULE_SINGLE_QUOTED_STRING ) ;
+    // InternalQVTcoreBase.g:24957:1: rule__StructuredClassCS__InstanceClassNameAssignment_5_1 : ( RULE_SINGLE_QUOTED_STRING ) ;
     public final void rule__StructuredClassCS__InstanceClassNameAssignment_5_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:24960:1: ( ( RULE_SINGLE_QUOTED_STRING ) )
-            // InternalQVTcoreBase.g:24961:1: ( RULE_SINGLE_QUOTED_STRING )
+            // InternalQVTcoreBase.g:24961:1: ( ( RULE_SINGLE_QUOTED_STRING ) )
+            // InternalQVTcoreBase.g:24962:1: ( RULE_SINGLE_QUOTED_STRING )
             {
-            // InternalQVTcoreBase.g:24961:1: ( RULE_SINGLE_QUOTED_STRING )
-            // InternalQVTcoreBase.g:24962:1: RULE_SINGLE_QUOTED_STRING
+            // InternalQVTcoreBase.g:24962:1: ( RULE_SINGLE_QUOTED_STRING )
+            // InternalQVTcoreBase.g:24963:1: RULE_SINGLE_QUOTED_STRING
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getStructuredClassCSAccess().getInstanceClassNameSINGLE_QUOTED_STRINGTerminalRuleCall_5_1_0()); 
@@ -72314,23 +72314,23 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__StructuredClassCS__IsInterfaceAssignment_6_1"
-    // InternalQVTcoreBase.g:24971:1: rule__StructuredClassCS__IsInterfaceAssignment_6_1 : ( ( 'interface' ) ) ;
+    // InternalQVTcoreBase.g:24972:1: rule__StructuredClassCS__IsInterfaceAssignment_6_1 : ( ( 'interface' ) ) ;
     public final void rule__StructuredClassCS__IsInterfaceAssignment_6_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:24975:1: ( ( ( 'interface' ) ) )
-            // InternalQVTcoreBase.g:24976:1: ( ( 'interface' ) )
+            // InternalQVTcoreBase.g:24976:1: ( ( ( 'interface' ) ) )
+            // InternalQVTcoreBase.g:24977:1: ( ( 'interface' ) )
             {
-            // InternalQVTcoreBase.g:24976:1: ( ( 'interface' ) )
-            // InternalQVTcoreBase.g:24977:1: ( 'interface' )
+            // InternalQVTcoreBase.g:24977:1: ( ( 'interface' ) )
+            // InternalQVTcoreBase.g:24978:1: ( 'interface' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getStructuredClassCSAccess().getIsInterfaceInterfaceKeyword_6_1_0()); 
             }
-            // InternalQVTcoreBase.g:24978:1: ( 'interface' )
-            // InternalQVTcoreBase.g:24979:1: 'interface'
+            // InternalQVTcoreBase.g:24979:1: ( 'interface' )
+            // InternalQVTcoreBase.g:24980:1: 'interface'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getStructuredClassCSAccess().getIsInterfaceInterfaceKeyword_6_1_0()); 
@@ -72367,17 +72367,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__StructuredClassCS__OwnedOperationsAssignment_7_0_1_0"
-    // InternalQVTcoreBase.g:24994:1: rule__StructuredClassCS__OwnedOperationsAssignment_7_0_1_0 : ( ruleOperationCS ) ;
+    // InternalQVTcoreBase.g:24995:1: rule__StructuredClassCS__OwnedOperationsAssignment_7_0_1_0 : ( ruleOperationCS ) ;
     public final void rule__StructuredClassCS__OwnedOperationsAssignment_7_0_1_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:24998:1: ( ( ruleOperationCS ) )
-            // InternalQVTcoreBase.g:24999:1: ( ruleOperationCS )
+            // InternalQVTcoreBase.g:24999:1: ( ( ruleOperationCS ) )
+            // InternalQVTcoreBase.g:25000:1: ( ruleOperationCS )
             {
-            // InternalQVTcoreBase.g:24999:1: ( ruleOperationCS )
-            // InternalQVTcoreBase.g:25000:1: ruleOperationCS
+            // InternalQVTcoreBase.g:25000:1: ( ruleOperationCS )
+            // InternalQVTcoreBase.g:25001:1: ruleOperationCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getStructuredClassCSAccess().getOwnedOperationsOperationCSParserRuleCall_7_0_1_0_0()); 
@@ -72412,17 +72412,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__StructuredClassCS__OwnedPropertiesAssignment_7_0_1_1"
-    // InternalQVTcoreBase.g:25009:1: rule__StructuredClassCS__OwnedPropertiesAssignment_7_0_1_1 : ( ruleStructuralFeatureCS ) ;
+    // InternalQVTcoreBase.g:25010:1: rule__StructuredClassCS__OwnedPropertiesAssignment_7_0_1_1 : ( ruleStructuralFeatureCS ) ;
     public final void rule__StructuredClassCS__OwnedPropertiesAssignment_7_0_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:25013:1: ( ( ruleStructuralFeatureCS ) )
-            // InternalQVTcoreBase.g:25014:1: ( ruleStructuralFeatureCS )
+            // InternalQVTcoreBase.g:25014:1: ( ( ruleStructuralFeatureCS ) )
+            // InternalQVTcoreBase.g:25015:1: ( ruleStructuralFeatureCS )
             {
-            // InternalQVTcoreBase.g:25014:1: ( ruleStructuralFeatureCS )
-            // InternalQVTcoreBase.g:25015:1: ruleStructuralFeatureCS
+            // InternalQVTcoreBase.g:25015:1: ( ruleStructuralFeatureCS )
+            // InternalQVTcoreBase.g:25016:1: ruleStructuralFeatureCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getStructuredClassCSAccess().getOwnedPropertiesStructuralFeatureCSParserRuleCall_7_0_1_1_0()); 
@@ -72457,17 +72457,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__TypedMultiplicityRefCS__OwnedMultiplicityAssignment_1"
-    // InternalQVTcoreBase.g:25024:1: rule__TypedMultiplicityRefCS__OwnedMultiplicityAssignment_1 : ( ruleMultiplicityCS ) ;
+    // InternalQVTcoreBase.g:25025:1: rule__TypedMultiplicityRefCS__OwnedMultiplicityAssignment_1 : ( ruleMultiplicityCS ) ;
     public final void rule__TypedMultiplicityRefCS__OwnedMultiplicityAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:25028:1: ( ( ruleMultiplicityCS ) )
-            // InternalQVTcoreBase.g:25029:1: ( ruleMultiplicityCS )
+            // InternalQVTcoreBase.g:25029:1: ( ( ruleMultiplicityCS ) )
+            // InternalQVTcoreBase.g:25030:1: ( ruleMultiplicityCS )
             {
-            // InternalQVTcoreBase.g:25029:1: ( ruleMultiplicityCS )
-            // InternalQVTcoreBase.g:25030:1: ruleMultiplicityCS
+            // InternalQVTcoreBase.g:25030:1: ( ruleMultiplicityCS )
+            // InternalQVTcoreBase.g:25031:1: ruleMultiplicityCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTypedMultiplicityRefCSAccess().getOwnedMultiplicityMultiplicityCSParserRuleCall_1_0()); 
@@ -72502,17 +72502,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__URIPathNameCS__OwnedPathElementsAssignment_0"
-    // InternalQVTcoreBase.g:25040:1: rule__URIPathNameCS__OwnedPathElementsAssignment_0 : ( ruleURIFirstPathElementCS ) ;
+    // InternalQVTcoreBase.g:25041:1: rule__URIPathNameCS__OwnedPathElementsAssignment_0 : ( ruleURIFirstPathElementCS ) ;
     public final void rule__URIPathNameCS__OwnedPathElementsAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:25044:1: ( ( ruleURIFirstPathElementCS ) )
-            // InternalQVTcoreBase.g:25045:1: ( ruleURIFirstPathElementCS )
+            // InternalQVTcoreBase.g:25045:1: ( ( ruleURIFirstPathElementCS ) )
+            // InternalQVTcoreBase.g:25046:1: ( ruleURIFirstPathElementCS )
             {
-            // InternalQVTcoreBase.g:25045:1: ( ruleURIFirstPathElementCS )
-            // InternalQVTcoreBase.g:25046:1: ruleURIFirstPathElementCS
+            // InternalQVTcoreBase.g:25046:1: ( ruleURIFirstPathElementCS )
+            // InternalQVTcoreBase.g:25047:1: ruleURIFirstPathElementCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getURIPathNameCSAccess().getOwnedPathElementsURIFirstPathElementCSParserRuleCall_0_0()); 
@@ -72547,17 +72547,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__URIPathNameCS__OwnedPathElementsAssignment_1_1"
-    // InternalQVTcoreBase.g:25055:1: rule__URIPathNameCS__OwnedPathElementsAssignment_1_1 : ( ruleNextPathElementCS ) ;
+    // InternalQVTcoreBase.g:25056:1: rule__URIPathNameCS__OwnedPathElementsAssignment_1_1 : ( ruleNextPathElementCS ) ;
     public final void rule__URIPathNameCS__OwnedPathElementsAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:25059:1: ( ( ruleNextPathElementCS ) )
-            // InternalQVTcoreBase.g:25060:1: ( ruleNextPathElementCS )
+            // InternalQVTcoreBase.g:25060:1: ( ( ruleNextPathElementCS ) )
+            // InternalQVTcoreBase.g:25061:1: ( ruleNextPathElementCS )
             {
-            // InternalQVTcoreBase.g:25060:1: ( ruleNextPathElementCS )
-            // InternalQVTcoreBase.g:25061:1: ruleNextPathElementCS
+            // InternalQVTcoreBase.g:25061:1: ( ruleNextPathElementCS )
+            // InternalQVTcoreBase.g:25062:1: ruleNextPathElementCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getURIPathNameCSAccess().getOwnedPathElementsNextPathElementCSParserRuleCall_1_1_0()); 
@@ -72592,23 +72592,23 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__URIFirstPathElementCS__ReferredElementAssignment_0"
-    // InternalQVTcoreBase.g:25070:1: rule__URIFirstPathElementCS__ReferredElementAssignment_0 : ( ( ruleUnrestrictedName ) ) ;
+    // InternalQVTcoreBase.g:25071:1: rule__URIFirstPathElementCS__ReferredElementAssignment_0 : ( ( ruleUnrestrictedName ) ) ;
     public final void rule__URIFirstPathElementCS__ReferredElementAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:25074:1: ( ( ( ruleUnrestrictedName ) ) )
-            // InternalQVTcoreBase.g:25075:1: ( ( ruleUnrestrictedName ) )
+            // InternalQVTcoreBase.g:25075:1: ( ( ( ruleUnrestrictedName ) ) )
+            // InternalQVTcoreBase.g:25076:1: ( ( ruleUnrestrictedName ) )
             {
-            // InternalQVTcoreBase.g:25075:1: ( ( ruleUnrestrictedName ) )
-            // InternalQVTcoreBase.g:25076:1: ( ruleUnrestrictedName )
+            // InternalQVTcoreBase.g:25076:1: ( ( ruleUnrestrictedName ) )
+            // InternalQVTcoreBase.g:25077:1: ( ruleUnrestrictedName )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getURIFirstPathElementCSAccess().getReferredElementNamedElementCrossReference_0_0()); 
             }
-            // InternalQVTcoreBase.g:25077:1: ( ruleUnrestrictedName )
-            // InternalQVTcoreBase.g:25078:1: ruleUnrestrictedName
+            // InternalQVTcoreBase.g:25078:1: ( ruleUnrestrictedName )
+            // InternalQVTcoreBase.g:25079:1: ruleUnrestrictedName
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getURIFirstPathElementCSAccess().getReferredElementNamedElementUnrestrictedNameParserRuleCall_0_0_1()); 
@@ -72649,23 +72649,23 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__URIFirstPathElementCS__ReferredElementAssignment_1_1"
-    // InternalQVTcoreBase.g:25089:1: rule__URIFirstPathElementCS__ReferredElementAssignment_1_1 : ( ( ruleURI ) ) ;
+    // InternalQVTcoreBase.g:25090:1: rule__URIFirstPathElementCS__ReferredElementAssignment_1_1 : ( ( ruleURI ) ) ;
     public final void rule__URIFirstPathElementCS__ReferredElementAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:25093:1: ( ( ( ruleURI ) ) )
-            // InternalQVTcoreBase.g:25094:1: ( ( ruleURI ) )
+            // InternalQVTcoreBase.g:25094:1: ( ( ( ruleURI ) ) )
+            // InternalQVTcoreBase.g:25095:1: ( ( ruleURI ) )
             {
-            // InternalQVTcoreBase.g:25094:1: ( ( ruleURI ) )
-            // InternalQVTcoreBase.g:25095:1: ( ruleURI )
+            // InternalQVTcoreBase.g:25095:1: ( ( ruleURI ) )
+            // InternalQVTcoreBase.g:25096:1: ( ruleURI )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getURIFirstPathElementCSAccess().getReferredElementNamespaceCrossReference_1_1_0()); 
             }
-            // InternalQVTcoreBase.g:25096:1: ( ruleURI )
-            // InternalQVTcoreBase.g:25097:1: ruleURI
+            // InternalQVTcoreBase.g:25097:1: ( ruleURI )
+            // InternalQVTcoreBase.g:25098:1: ruleURI
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getURIFirstPathElementCSAccess().getReferredElementNamespaceURIParserRuleCall_1_1_0_1()); 
@@ -72706,17 +72706,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__PrimitiveTypeCS__NameAssignment"
-    // InternalQVTcoreBase.g:25108:1: rule__PrimitiveTypeCS__NameAssignment : ( rulePrimitiveTypeIdentifier ) ;
+    // InternalQVTcoreBase.g:25109:1: rule__PrimitiveTypeCS__NameAssignment : ( rulePrimitiveTypeIdentifier ) ;
     public final void rule__PrimitiveTypeCS__NameAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:25112:1: ( ( rulePrimitiveTypeIdentifier ) )
-            // InternalQVTcoreBase.g:25113:1: ( rulePrimitiveTypeIdentifier )
+            // InternalQVTcoreBase.g:25113:1: ( ( rulePrimitiveTypeIdentifier ) )
+            // InternalQVTcoreBase.g:25114:1: ( rulePrimitiveTypeIdentifier )
             {
-            // InternalQVTcoreBase.g:25113:1: ( rulePrimitiveTypeIdentifier )
-            // InternalQVTcoreBase.g:25114:1: rulePrimitiveTypeIdentifier
+            // InternalQVTcoreBase.g:25114:1: ( rulePrimitiveTypeIdentifier )
+            // InternalQVTcoreBase.g:25115:1: rulePrimitiveTypeIdentifier
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getPrimitiveTypeCSAccess().getNamePrimitiveTypeIdentifierParserRuleCall_0()); 
@@ -72751,17 +72751,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__CollectionTypeCS__NameAssignment_0"
-    // InternalQVTcoreBase.g:25123:1: rule__CollectionTypeCS__NameAssignment_0 : ( ruleCollectionTypeIdentifier ) ;
+    // InternalQVTcoreBase.g:25124:1: rule__CollectionTypeCS__NameAssignment_0 : ( ruleCollectionTypeIdentifier ) ;
     public final void rule__CollectionTypeCS__NameAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:25127:1: ( ( ruleCollectionTypeIdentifier ) )
-            // InternalQVTcoreBase.g:25128:1: ( ruleCollectionTypeIdentifier )
+            // InternalQVTcoreBase.g:25128:1: ( ( ruleCollectionTypeIdentifier ) )
+            // InternalQVTcoreBase.g:25129:1: ( ruleCollectionTypeIdentifier )
             {
-            // InternalQVTcoreBase.g:25128:1: ( ruleCollectionTypeIdentifier )
-            // InternalQVTcoreBase.g:25129:1: ruleCollectionTypeIdentifier
+            // InternalQVTcoreBase.g:25129:1: ( ruleCollectionTypeIdentifier )
+            // InternalQVTcoreBase.g:25130:1: ruleCollectionTypeIdentifier
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getCollectionTypeCSAccess().getNameCollectionTypeIdentifierParserRuleCall_0_0()); 
@@ -72796,17 +72796,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__CollectionTypeCS__OwnedTypeAssignment_1_1"
-    // InternalQVTcoreBase.g:25138:1: rule__CollectionTypeCS__OwnedTypeAssignment_1_1 : ( ruleTypeExpCS ) ;
+    // InternalQVTcoreBase.g:25139:1: rule__CollectionTypeCS__OwnedTypeAssignment_1_1 : ( ruleTypeExpCS ) ;
     public final void rule__CollectionTypeCS__OwnedTypeAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:25142:1: ( ( ruleTypeExpCS ) )
-            // InternalQVTcoreBase.g:25143:1: ( ruleTypeExpCS )
+            // InternalQVTcoreBase.g:25143:1: ( ( ruleTypeExpCS ) )
+            // InternalQVTcoreBase.g:25144:1: ( ruleTypeExpCS )
             {
-            // InternalQVTcoreBase.g:25143:1: ( ruleTypeExpCS )
-            // InternalQVTcoreBase.g:25144:1: ruleTypeExpCS
+            // InternalQVTcoreBase.g:25144:1: ( ruleTypeExpCS )
+            // InternalQVTcoreBase.g:25145:1: ruleTypeExpCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getCollectionTypeCSAccess().getOwnedTypeTypeExpCSParserRuleCall_1_1_0()); 
@@ -72841,23 +72841,23 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__MapTypeCS__NameAssignment_0"
-    // InternalQVTcoreBase.g:25153:1: rule__MapTypeCS__NameAssignment_0 : ( ( 'Map' ) ) ;
+    // InternalQVTcoreBase.g:25154:1: rule__MapTypeCS__NameAssignment_0 : ( ( 'Map' ) ) ;
     public final void rule__MapTypeCS__NameAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:25157:1: ( ( ( 'Map' ) ) )
-            // InternalQVTcoreBase.g:25158:1: ( ( 'Map' ) )
+            // InternalQVTcoreBase.g:25158:1: ( ( ( 'Map' ) ) )
+            // InternalQVTcoreBase.g:25159:1: ( ( 'Map' ) )
             {
-            // InternalQVTcoreBase.g:25158:1: ( ( 'Map' ) )
-            // InternalQVTcoreBase.g:25159:1: ( 'Map' )
+            // InternalQVTcoreBase.g:25159:1: ( ( 'Map' ) )
+            // InternalQVTcoreBase.g:25160:1: ( 'Map' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getMapTypeCSAccess().getNameMapKeyword_0_0()); 
             }
-            // InternalQVTcoreBase.g:25160:1: ( 'Map' )
-            // InternalQVTcoreBase.g:25161:1: 'Map'
+            // InternalQVTcoreBase.g:25161:1: ( 'Map' )
+            // InternalQVTcoreBase.g:25162:1: 'Map'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getMapTypeCSAccess().getNameMapKeyword_0_0()); 
@@ -72894,17 +72894,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__MapTypeCS__OwnedKeyTypeAssignment_1_1"
-    // InternalQVTcoreBase.g:25176:1: rule__MapTypeCS__OwnedKeyTypeAssignment_1_1 : ( ruleTypeExpCS ) ;
+    // InternalQVTcoreBase.g:25177:1: rule__MapTypeCS__OwnedKeyTypeAssignment_1_1 : ( ruleTypeExpCS ) ;
     public final void rule__MapTypeCS__OwnedKeyTypeAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:25180:1: ( ( ruleTypeExpCS ) )
-            // InternalQVTcoreBase.g:25181:1: ( ruleTypeExpCS )
+            // InternalQVTcoreBase.g:25181:1: ( ( ruleTypeExpCS ) )
+            // InternalQVTcoreBase.g:25182:1: ( ruleTypeExpCS )
             {
-            // InternalQVTcoreBase.g:25181:1: ( ruleTypeExpCS )
-            // InternalQVTcoreBase.g:25182:1: ruleTypeExpCS
+            // InternalQVTcoreBase.g:25182:1: ( ruleTypeExpCS )
+            // InternalQVTcoreBase.g:25183:1: ruleTypeExpCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getMapTypeCSAccess().getOwnedKeyTypeTypeExpCSParserRuleCall_1_1_0()); 
@@ -72939,17 +72939,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__MapTypeCS__OwnedValueTypeAssignment_1_3"
-    // InternalQVTcoreBase.g:25191:1: rule__MapTypeCS__OwnedValueTypeAssignment_1_3 : ( ruleTypeExpCS ) ;
+    // InternalQVTcoreBase.g:25192:1: rule__MapTypeCS__OwnedValueTypeAssignment_1_3 : ( ruleTypeExpCS ) ;
     public final void rule__MapTypeCS__OwnedValueTypeAssignment_1_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:25195:1: ( ( ruleTypeExpCS ) )
-            // InternalQVTcoreBase.g:25196:1: ( ruleTypeExpCS )
+            // InternalQVTcoreBase.g:25196:1: ( ( ruleTypeExpCS ) )
+            // InternalQVTcoreBase.g:25197:1: ( ruleTypeExpCS )
             {
-            // InternalQVTcoreBase.g:25196:1: ( ruleTypeExpCS )
-            // InternalQVTcoreBase.g:25197:1: ruleTypeExpCS
+            // InternalQVTcoreBase.g:25197:1: ( ruleTypeExpCS )
+            // InternalQVTcoreBase.g:25198:1: ruleTypeExpCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getMapTypeCSAccess().getOwnedValueTypeTypeExpCSParserRuleCall_1_3_0()); 
@@ -72984,23 +72984,23 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__TupleTypeCS__NameAssignment_0"
-    // InternalQVTcoreBase.g:25206:1: rule__TupleTypeCS__NameAssignment_0 : ( ( 'Tuple' ) ) ;
+    // InternalQVTcoreBase.g:25207:1: rule__TupleTypeCS__NameAssignment_0 : ( ( 'Tuple' ) ) ;
     public final void rule__TupleTypeCS__NameAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:25210:1: ( ( ( 'Tuple' ) ) )
-            // InternalQVTcoreBase.g:25211:1: ( ( 'Tuple' ) )
+            // InternalQVTcoreBase.g:25211:1: ( ( ( 'Tuple' ) ) )
+            // InternalQVTcoreBase.g:25212:1: ( ( 'Tuple' ) )
             {
-            // InternalQVTcoreBase.g:25211:1: ( ( 'Tuple' ) )
-            // InternalQVTcoreBase.g:25212:1: ( 'Tuple' )
+            // InternalQVTcoreBase.g:25212:1: ( ( 'Tuple' ) )
+            // InternalQVTcoreBase.g:25213:1: ( 'Tuple' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTupleTypeCSAccess().getNameTupleKeyword_0_0()); 
             }
-            // InternalQVTcoreBase.g:25213:1: ( 'Tuple' )
-            // InternalQVTcoreBase.g:25214:1: 'Tuple'
+            // InternalQVTcoreBase.g:25214:1: ( 'Tuple' )
+            // InternalQVTcoreBase.g:25215:1: 'Tuple'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTupleTypeCSAccess().getNameTupleKeyword_0_0()); 
@@ -73037,17 +73037,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__TupleTypeCS__OwnedPartsAssignment_1_1_0"
-    // InternalQVTcoreBase.g:25229:1: rule__TupleTypeCS__OwnedPartsAssignment_1_1_0 : ( ruleTuplePartCS ) ;
+    // InternalQVTcoreBase.g:25230:1: rule__TupleTypeCS__OwnedPartsAssignment_1_1_0 : ( ruleTuplePartCS ) ;
     public final void rule__TupleTypeCS__OwnedPartsAssignment_1_1_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:25233:1: ( ( ruleTuplePartCS ) )
-            // InternalQVTcoreBase.g:25234:1: ( ruleTuplePartCS )
+            // InternalQVTcoreBase.g:25234:1: ( ( ruleTuplePartCS ) )
+            // InternalQVTcoreBase.g:25235:1: ( ruleTuplePartCS )
             {
-            // InternalQVTcoreBase.g:25234:1: ( ruleTuplePartCS )
-            // InternalQVTcoreBase.g:25235:1: ruleTuplePartCS
+            // InternalQVTcoreBase.g:25235:1: ( ruleTuplePartCS )
+            // InternalQVTcoreBase.g:25236:1: ruleTuplePartCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTupleTypeCSAccess().getOwnedPartsTuplePartCSParserRuleCall_1_1_0_0()); 
@@ -73082,17 +73082,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__TupleTypeCS__OwnedPartsAssignment_1_1_1_1"
-    // InternalQVTcoreBase.g:25244:1: rule__TupleTypeCS__OwnedPartsAssignment_1_1_1_1 : ( ruleTuplePartCS ) ;
+    // InternalQVTcoreBase.g:25245:1: rule__TupleTypeCS__OwnedPartsAssignment_1_1_1_1 : ( ruleTuplePartCS ) ;
     public final void rule__TupleTypeCS__OwnedPartsAssignment_1_1_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:25248:1: ( ( ruleTuplePartCS ) )
-            // InternalQVTcoreBase.g:25249:1: ( ruleTuplePartCS )
+            // InternalQVTcoreBase.g:25249:1: ( ( ruleTuplePartCS ) )
+            // InternalQVTcoreBase.g:25250:1: ( ruleTuplePartCS )
             {
-            // InternalQVTcoreBase.g:25249:1: ( ruleTuplePartCS )
-            // InternalQVTcoreBase.g:25250:1: ruleTuplePartCS
+            // InternalQVTcoreBase.g:25250:1: ( ruleTuplePartCS )
+            // InternalQVTcoreBase.g:25251:1: ruleTuplePartCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTupleTypeCSAccess().getOwnedPartsTuplePartCSParserRuleCall_1_1_1_1_0()); 
@@ -73127,17 +73127,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__TuplePartCS__NameAssignment_0"
-    // InternalQVTcoreBase.g:25259:1: rule__TuplePartCS__NameAssignment_0 : ( ruleUnrestrictedName ) ;
+    // InternalQVTcoreBase.g:25260:1: rule__TuplePartCS__NameAssignment_0 : ( ruleUnrestrictedName ) ;
     public final void rule__TuplePartCS__NameAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:25263:1: ( ( ruleUnrestrictedName ) )
-            // InternalQVTcoreBase.g:25264:1: ( ruleUnrestrictedName )
+            // InternalQVTcoreBase.g:25264:1: ( ( ruleUnrestrictedName ) )
+            // InternalQVTcoreBase.g:25265:1: ( ruleUnrestrictedName )
             {
-            // InternalQVTcoreBase.g:25264:1: ( ruleUnrestrictedName )
-            // InternalQVTcoreBase.g:25265:1: ruleUnrestrictedName
+            // InternalQVTcoreBase.g:25265:1: ( ruleUnrestrictedName )
+            // InternalQVTcoreBase.g:25266:1: ruleUnrestrictedName
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTuplePartCSAccess().getNameUnrestrictedNameParserRuleCall_0_0()); 
@@ -73172,17 +73172,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__TuplePartCS__OwnedTypeAssignment_2"
-    // InternalQVTcoreBase.g:25274:1: rule__TuplePartCS__OwnedTypeAssignment_2 : ( ruleTypeExpCS ) ;
+    // InternalQVTcoreBase.g:25275:1: rule__TuplePartCS__OwnedTypeAssignment_2 : ( ruleTypeExpCS ) ;
     public final void rule__TuplePartCS__OwnedTypeAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:25278:1: ( ( ruleTypeExpCS ) )
-            // InternalQVTcoreBase.g:25279:1: ( ruleTypeExpCS )
+            // InternalQVTcoreBase.g:25279:1: ( ( ruleTypeExpCS ) )
+            // InternalQVTcoreBase.g:25280:1: ( ruleTypeExpCS )
             {
-            // InternalQVTcoreBase.g:25279:1: ( ruleTypeExpCS )
-            // InternalQVTcoreBase.g:25280:1: ruleTypeExpCS
+            // InternalQVTcoreBase.g:25280:1: ( ruleTypeExpCS )
+            // InternalQVTcoreBase.g:25281:1: ruleTypeExpCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTuplePartCSAccess().getOwnedTypeTypeExpCSParserRuleCall_2_0()); 
@@ -73217,17 +73217,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__CollectionLiteralExpCS__OwnedTypeAssignment_0"
-    // InternalQVTcoreBase.g:25289:1: rule__CollectionLiteralExpCS__OwnedTypeAssignment_0 : ( ruleCollectionTypeCS ) ;
+    // InternalQVTcoreBase.g:25290:1: rule__CollectionLiteralExpCS__OwnedTypeAssignment_0 : ( ruleCollectionTypeCS ) ;
     public final void rule__CollectionLiteralExpCS__OwnedTypeAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:25293:1: ( ( ruleCollectionTypeCS ) )
-            // InternalQVTcoreBase.g:25294:1: ( ruleCollectionTypeCS )
+            // InternalQVTcoreBase.g:25294:1: ( ( ruleCollectionTypeCS ) )
+            // InternalQVTcoreBase.g:25295:1: ( ruleCollectionTypeCS )
             {
-            // InternalQVTcoreBase.g:25294:1: ( ruleCollectionTypeCS )
-            // InternalQVTcoreBase.g:25295:1: ruleCollectionTypeCS
+            // InternalQVTcoreBase.g:25295:1: ( ruleCollectionTypeCS )
+            // InternalQVTcoreBase.g:25296:1: ruleCollectionTypeCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getCollectionLiteralExpCSAccess().getOwnedTypeCollectionTypeCSParserRuleCall_0_0()); 
@@ -73262,17 +73262,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__CollectionLiteralExpCS__OwnedPartsAssignment_2_0"
-    // InternalQVTcoreBase.g:25304:1: rule__CollectionLiteralExpCS__OwnedPartsAssignment_2_0 : ( ruleCollectionLiteralPartCS ) ;
+    // InternalQVTcoreBase.g:25305:1: rule__CollectionLiteralExpCS__OwnedPartsAssignment_2_0 : ( ruleCollectionLiteralPartCS ) ;
     public final void rule__CollectionLiteralExpCS__OwnedPartsAssignment_2_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:25308:1: ( ( ruleCollectionLiteralPartCS ) )
-            // InternalQVTcoreBase.g:25309:1: ( ruleCollectionLiteralPartCS )
+            // InternalQVTcoreBase.g:25309:1: ( ( ruleCollectionLiteralPartCS ) )
+            // InternalQVTcoreBase.g:25310:1: ( ruleCollectionLiteralPartCS )
             {
-            // InternalQVTcoreBase.g:25309:1: ( ruleCollectionLiteralPartCS )
-            // InternalQVTcoreBase.g:25310:1: ruleCollectionLiteralPartCS
+            // InternalQVTcoreBase.g:25310:1: ( ruleCollectionLiteralPartCS )
+            // InternalQVTcoreBase.g:25311:1: ruleCollectionLiteralPartCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getCollectionLiteralExpCSAccess().getOwnedPartsCollectionLiteralPartCSParserRuleCall_2_0_0()); 
@@ -73307,17 +73307,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__CollectionLiteralExpCS__OwnedPartsAssignment_2_1_1"
-    // InternalQVTcoreBase.g:25319:1: rule__CollectionLiteralExpCS__OwnedPartsAssignment_2_1_1 : ( ruleCollectionLiteralPartCS ) ;
+    // InternalQVTcoreBase.g:25320:1: rule__CollectionLiteralExpCS__OwnedPartsAssignment_2_1_1 : ( ruleCollectionLiteralPartCS ) ;
     public final void rule__CollectionLiteralExpCS__OwnedPartsAssignment_2_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:25323:1: ( ( ruleCollectionLiteralPartCS ) )
-            // InternalQVTcoreBase.g:25324:1: ( ruleCollectionLiteralPartCS )
+            // InternalQVTcoreBase.g:25324:1: ( ( ruleCollectionLiteralPartCS ) )
+            // InternalQVTcoreBase.g:25325:1: ( ruleCollectionLiteralPartCS )
             {
-            // InternalQVTcoreBase.g:25324:1: ( ruleCollectionLiteralPartCS )
-            // InternalQVTcoreBase.g:25325:1: ruleCollectionLiteralPartCS
+            // InternalQVTcoreBase.g:25325:1: ( ruleCollectionLiteralPartCS )
+            // InternalQVTcoreBase.g:25326:1: ruleCollectionLiteralPartCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getCollectionLiteralExpCSAccess().getOwnedPartsCollectionLiteralPartCSParserRuleCall_2_1_1_0()); 
@@ -73352,17 +73352,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__CollectionLiteralPartCS__OwnedExpressionAssignment_0_0"
-    // InternalQVTcoreBase.g:25334:1: rule__CollectionLiteralPartCS__OwnedExpressionAssignment_0_0 : ( ruleExpCS ) ;
+    // InternalQVTcoreBase.g:25335:1: rule__CollectionLiteralPartCS__OwnedExpressionAssignment_0_0 : ( ruleExpCS ) ;
     public final void rule__CollectionLiteralPartCS__OwnedExpressionAssignment_0_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:25338:1: ( ( ruleExpCS ) )
-            // InternalQVTcoreBase.g:25339:1: ( ruleExpCS )
+            // InternalQVTcoreBase.g:25339:1: ( ( ruleExpCS ) )
+            // InternalQVTcoreBase.g:25340:1: ( ruleExpCS )
             {
-            // InternalQVTcoreBase.g:25339:1: ( ruleExpCS )
-            // InternalQVTcoreBase.g:25340:1: ruleExpCS
+            // InternalQVTcoreBase.g:25340:1: ( ruleExpCS )
+            // InternalQVTcoreBase.g:25341:1: ruleExpCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getCollectionLiteralPartCSAccess().getOwnedExpressionExpCSParserRuleCall_0_0_0()); 
@@ -73397,17 +73397,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__CollectionLiteralPartCS__OwnedLastExpressionAssignment_0_1_1"
-    // InternalQVTcoreBase.g:25349:1: rule__CollectionLiteralPartCS__OwnedLastExpressionAssignment_0_1_1 : ( ruleExpCS ) ;
+    // InternalQVTcoreBase.g:25350:1: rule__CollectionLiteralPartCS__OwnedLastExpressionAssignment_0_1_1 : ( ruleExpCS ) ;
     public final void rule__CollectionLiteralPartCS__OwnedLastExpressionAssignment_0_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:25353:1: ( ( ruleExpCS ) )
-            // InternalQVTcoreBase.g:25354:1: ( ruleExpCS )
+            // InternalQVTcoreBase.g:25354:1: ( ( ruleExpCS ) )
+            // InternalQVTcoreBase.g:25355:1: ( ruleExpCS )
             {
-            // InternalQVTcoreBase.g:25354:1: ( ruleExpCS )
-            // InternalQVTcoreBase.g:25355:1: ruleExpCS
+            // InternalQVTcoreBase.g:25355:1: ( ruleExpCS )
+            // InternalQVTcoreBase.g:25356:1: ruleExpCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getCollectionLiteralPartCSAccess().getOwnedLastExpressionExpCSParserRuleCall_0_1_1_0()); 
@@ -73442,17 +73442,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__CollectionLiteralPartCS__OwnedExpressionAssignment_1"
-    // InternalQVTcoreBase.g:25364:1: rule__CollectionLiteralPartCS__OwnedExpressionAssignment_1 : ( rulePatternExpCS ) ;
+    // InternalQVTcoreBase.g:25365:1: rule__CollectionLiteralPartCS__OwnedExpressionAssignment_1 : ( rulePatternExpCS ) ;
     public final void rule__CollectionLiteralPartCS__OwnedExpressionAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:25368:1: ( ( rulePatternExpCS ) )
-            // InternalQVTcoreBase.g:25369:1: ( rulePatternExpCS )
+            // InternalQVTcoreBase.g:25369:1: ( ( rulePatternExpCS ) )
+            // InternalQVTcoreBase.g:25370:1: ( rulePatternExpCS )
             {
-            // InternalQVTcoreBase.g:25369:1: ( rulePatternExpCS )
-            // InternalQVTcoreBase.g:25370:1: rulePatternExpCS
+            // InternalQVTcoreBase.g:25370:1: ( rulePatternExpCS )
+            // InternalQVTcoreBase.g:25371:1: rulePatternExpCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getCollectionLiteralPartCSAccess().getOwnedExpressionPatternExpCSParserRuleCall_1_0()); 
@@ -73487,17 +73487,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__CollectionPatternCS__OwnedTypeAssignment_0"
-    // InternalQVTcoreBase.g:25379:1: rule__CollectionPatternCS__OwnedTypeAssignment_0 : ( ruleCollectionTypeCS ) ;
+    // InternalQVTcoreBase.g:25380:1: rule__CollectionPatternCS__OwnedTypeAssignment_0 : ( ruleCollectionTypeCS ) ;
     public final void rule__CollectionPatternCS__OwnedTypeAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:25383:1: ( ( ruleCollectionTypeCS ) )
-            // InternalQVTcoreBase.g:25384:1: ( ruleCollectionTypeCS )
+            // InternalQVTcoreBase.g:25384:1: ( ( ruleCollectionTypeCS ) )
+            // InternalQVTcoreBase.g:25385:1: ( ruleCollectionTypeCS )
             {
-            // InternalQVTcoreBase.g:25384:1: ( ruleCollectionTypeCS )
-            // InternalQVTcoreBase.g:25385:1: ruleCollectionTypeCS
+            // InternalQVTcoreBase.g:25385:1: ( ruleCollectionTypeCS )
+            // InternalQVTcoreBase.g:25386:1: ruleCollectionTypeCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getCollectionPatternCSAccess().getOwnedTypeCollectionTypeCSParserRuleCall_0_0()); 
@@ -73532,17 +73532,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__CollectionPatternCS__OwnedPartsAssignment_2_0"
-    // InternalQVTcoreBase.g:25394:1: rule__CollectionPatternCS__OwnedPartsAssignment_2_0 : ( rulePatternExpCS ) ;
+    // InternalQVTcoreBase.g:25395:1: rule__CollectionPatternCS__OwnedPartsAssignment_2_0 : ( rulePatternExpCS ) ;
     public final void rule__CollectionPatternCS__OwnedPartsAssignment_2_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:25398:1: ( ( rulePatternExpCS ) )
-            // InternalQVTcoreBase.g:25399:1: ( rulePatternExpCS )
+            // InternalQVTcoreBase.g:25399:1: ( ( rulePatternExpCS ) )
+            // InternalQVTcoreBase.g:25400:1: ( rulePatternExpCS )
             {
-            // InternalQVTcoreBase.g:25399:1: ( rulePatternExpCS )
-            // InternalQVTcoreBase.g:25400:1: rulePatternExpCS
+            // InternalQVTcoreBase.g:25400:1: ( rulePatternExpCS )
+            // InternalQVTcoreBase.g:25401:1: rulePatternExpCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getCollectionPatternCSAccess().getOwnedPartsPatternExpCSParserRuleCall_2_0_0()); 
@@ -73577,17 +73577,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__CollectionPatternCS__OwnedPartsAssignment_2_1_1"
-    // InternalQVTcoreBase.g:25409:1: rule__CollectionPatternCS__OwnedPartsAssignment_2_1_1 : ( rulePatternExpCS ) ;
+    // InternalQVTcoreBase.g:25410:1: rule__CollectionPatternCS__OwnedPartsAssignment_2_1_1 : ( rulePatternExpCS ) ;
     public final void rule__CollectionPatternCS__OwnedPartsAssignment_2_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:25413:1: ( ( rulePatternExpCS ) )
-            // InternalQVTcoreBase.g:25414:1: ( rulePatternExpCS )
+            // InternalQVTcoreBase.g:25414:1: ( ( rulePatternExpCS ) )
+            // InternalQVTcoreBase.g:25415:1: ( rulePatternExpCS )
             {
-            // InternalQVTcoreBase.g:25414:1: ( rulePatternExpCS )
-            // InternalQVTcoreBase.g:25415:1: rulePatternExpCS
+            // InternalQVTcoreBase.g:25415:1: ( rulePatternExpCS )
+            // InternalQVTcoreBase.g:25416:1: rulePatternExpCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getCollectionPatternCSAccess().getOwnedPartsPatternExpCSParserRuleCall_2_1_1_0()); 
@@ -73622,17 +73622,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__CollectionPatternCS__RestVariableNameAssignment_2_2_1"
-    // InternalQVTcoreBase.g:25424:1: rule__CollectionPatternCS__RestVariableNameAssignment_2_2_1 : ( ruleIdentifier ) ;
+    // InternalQVTcoreBase.g:25425:1: rule__CollectionPatternCS__RestVariableNameAssignment_2_2_1 : ( ruleIdentifier ) ;
     public final void rule__CollectionPatternCS__RestVariableNameAssignment_2_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:25428:1: ( ( ruleIdentifier ) )
-            // InternalQVTcoreBase.g:25429:1: ( ruleIdentifier )
+            // InternalQVTcoreBase.g:25429:1: ( ( ruleIdentifier ) )
+            // InternalQVTcoreBase.g:25430:1: ( ruleIdentifier )
             {
-            // InternalQVTcoreBase.g:25429:1: ( ruleIdentifier )
-            // InternalQVTcoreBase.g:25430:1: ruleIdentifier
+            // InternalQVTcoreBase.g:25430:1: ( ruleIdentifier )
+            // InternalQVTcoreBase.g:25431:1: ruleIdentifier
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getCollectionPatternCSAccess().getRestVariableNameIdentifierParserRuleCall_2_2_1_0()); 
@@ -73667,23 +73667,23 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__ShadowPartCS__ReferredPropertyAssignment_0"
-    // InternalQVTcoreBase.g:25439:1: rule__ShadowPartCS__ReferredPropertyAssignment_0 : ( ( ruleUnrestrictedName ) ) ;
+    // InternalQVTcoreBase.g:25440:1: rule__ShadowPartCS__ReferredPropertyAssignment_0 : ( ( ruleUnrestrictedName ) ) ;
     public final void rule__ShadowPartCS__ReferredPropertyAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:25443:1: ( ( ( ruleUnrestrictedName ) ) )
-            // InternalQVTcoreBase.g:25444:1: ( ( ruleUnrestrictedName ) )
+            // InternalQVTcoreBase.g:25444:1: ( ( ( ruleUnrestrictedName ) ) )
+            // InternalQVTcoreBase.g:25445:1: ( ( ruleUnrestrictedName ) )
             {
-            // InternalQVTcoreBase.g:25444:1: ( ( ruleUnrestrictedName ) )
-            // InternalQVTcoreBase.g:25445:1: ( ruleUnrestrictedName )
+            // InternalQVTcoreBase.g:25445:1: ( ( ruleUnrestrictedName ) )
+            // InternalQVTcoreBase.g:25446:1: ( ruleUnrestrictedName )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getShadowPartCSAccess().getReferredPropertyPropertyCrossReference_0_0()); 
             }
-            // InternalQVTcoreBase.g:25446:1: ( ruleUnrestrictedName )
-            // InternalQVTcoreBase.g:25447:1: ruleUnrestrictedName
+            // InternalQVTcoreBase.g:25447:1: ( ruleUnrestrictedName )
+            // InternalQVTcoreBase.g:25448:1: ruleUnrestrictedName
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getShadowPartCSAccess().getReferredPropertyPropertyUnrestrictedNameParserRuleCall_0_0_1()); 
@@ -73724,23 +73724,23 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__ShadowPartCS__OwnedInitExpressionAssignment_2"
-    // InternalQVTcoreBase.g:25458:1: rule__ShadowPartCS__OwnedInitExpressionAssignment_2 : ( ( rule__ShadowPartCS__OwnedInitExpressionAlternatives_2_0 ) ) ;
+    // InternalQVTcoreBase.g:25459:1: rule__ShadowPartCS__OwnedInitExpressionAssignment_2 : ( ( rule__ShadowPartCS__OwnedInitExpressionAlternatives_2_0 ) ) ;
     public final void rule__ShadowPartCS__OwnedInitExpressionAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:25462:1: ( ( ( rule__ShadowPartCS__OwnedInitExpressionAlternatives_2_0 ) ) )
-            // InternalQVTcoreBase.g:25463:1: ( ( rule__ShadowPartCS__OwnedInitExpressionAlternatives_2_0 ) )
+            // InternalQVTcoreBase.g:25463:1: ( ( ( rule__ShadowPartCS__OwnedInitExpressionAlternatives_2_0 ) ) )
+            // InternalQVTcoreBase.g:25464:1: ( ( rule__ShadowPartCS__OwnedInitExpressionAlternatives_2_0 ) )
             {
-            // InternalQVTcoreBase.g:25463:1: ( ( rule__ShadowPartCS__OwnedInitExpressionAlternatives_2_0 ) )
-            // InternalQVTcoreBase.g:25464:1: ( rule__ShadowPartCS__OwnedInitExpressionAlternatives_2_0 )
+            // InternalQVTcoreBase.g:25464:1: ( ( rule__ShadowPartCS__OwnedInitExpressionAlternatives_2_0 ) )
+            // InternalQVTcoreBase.g:25465:1: ( rule__ShadowPartCS__OwnedInitExpressionAlternatives_2_0 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getShadowPartCSAccess().getOwnedInitExpressionAlternatives_2_0()); 
             }
-            // InternalQVTcoreBase.g:25465:1: ( rule__ShadowPartCS__OwnedInitExpressionAlternatives_2_0 )
-            // InternalQVTcoreBase.g:25465:2: rule__ShadowPartCS__OwnedInitExpressionAlternatives_2_0
+            // InternalQVTcoreBase.g:25466:1: ( rule__ShadowPartCS__OwnedInitExpressionAlternatives_2_0 )
+            // InternalQVTcoreBase.g:25466:2: rule__ShadowPartCS__OwnedInitExpressionAlternatives_2_0
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__ShadowPartCS__OwnedInitExpressionAlternatives_2_0();
@@ -73775,17 +73775,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__PatternExpCS__PatternVariableNameAssignment_0"
-    // InternalQVTcoreBase.g:25474:1: rule__PatternExpCS__PatternVariableNameAssignment_0 : ( ruleUnrestrictedName ) ;
+    // InternalQVTcoreBase.g:25475:1: rule__PatternExpCS__PatternVariableNameAssignment_0 : ( ruleUnrestrictedName ) ;
     public final void rule__PatternExpCS__PatternVariableNameAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:25478:1: ( ( ruleUnrestrictedName ) )
-            // InternalQVTcoreBase.g:25479:1: ( ruleUnrestrictedName )
+            // InternalQVTcoreBase.g:25479:1: ( ( ruleUnrestrictedName ) )
+            // InternalQVTcoreBase.g:25480:1: ( ruleUnrestrictedName )
             {
-            // InternalQVTcoreBase.g:25479:1: ( ruleUnrestrictedName )
-            // InternalQVTcoreBase.g:25480:1: ruleUnrestrictedName
+            // InternalQVTcoreBase.g:25480:1: ( ruleUnrestrictedName )
+            // InternalQVTcoreBase.g:25481:1: ruleUnrestrictedName
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getPatternExpCSAccess().getPatternVariableNameUnrestrictedNameParserRuleCall_0_0()); 
@@ -73820,17 +73820,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__PatternExpCS__OwnedPatternTypeAssignment_2"
-    // InternalQVTcoreBase.g:25489:1: rule__PatternExpCS__OwnedPatternTypeAssignment_2 : ( ruleTypeExpCS ) ;
+    // InternalQVTcoreBase.g:25490:1: rule__PatternExpCS__OwnedPatternTypeAssignment_2 : ( ruleTypeExpCS ) ;
     public final void rule__PatternExpCS__OwnedPatternTypeAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:25493:1: ( ( ruleTypeExpCS ) )
-            // InternalQVTcoreBase.g:25494:1: ( ruleTypeExpCS )
+            // InternalQVTcoreBase.g:25494:1: ( ( ruleTypeExpCS ) )
+            // InternalQVTcoreBase.g:25495:1: ( ruleTypeExpCS )
             {
-            // InternalQVTcoreBase.g:25494:1: ( ruleTypeExpCS )
-            // InternalQVTcoreBase.g:25495:1: ruleTypeExpCS
+            // InternalQVTcoreBase.g:25495:1: ( ruleTypeExpCS )
+            // InternalQVTcoreBase.g:25496:1: ruleTypeExpCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getPatternExpCSAccess().getOwnedPatternTypeTypeExpCSParserRuleCall_2_0()); 
@@ -73865,17 +73865,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__LambdaLiteralExpCS__OwnedExpressionCSAssignment_2"
-    // InternalQVTcoreBase.g:25504:1: rule__LambdaLiteralExpCS__OwnedExpressionCSAssignment_2 : ( ruleExpCS ) ;
+    // InternalQVTcoreBase.g:25505:1: rule__LambdaLiteralExpCS__OwnedExpressionCSAssignment_2 : ( ruleExpCS ) ;
     public final void rule__LambdaLiteralExpCS__OwnedExpressionCSAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:25508:1: ( ( ruleExpCS ) )
-            // InternalQVTcoreBase.g:25509:1: ( ruleExpCS )
+            // InternalQVTcoreBase.g:25509:1: ( ( ruleExpCS ) )
+            // InternalQVTcoreBase.g:25510:1: ( ruleExpCS )
             {
-            // InternalQVTcoreBase.g:25509:1: ( ruleExpCS )
-            // InternalQVTcoreBase.g:25510:1: ruleExpCS
+            // InternalQVTcoreBase.g:25510:1: ( ruleExpCS )
+            // InternalQVTcoreBase.g:25511:1: ruleExpCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getLambdaLiteralExpCSAccess().getOwnedExpressionCSExpCSParserRuleCall_2_0()); 
@@ -73910,17 +73910,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__MapLiteralExpCS__OwnedTypeAssignment_0"
-    // InternalQVTcoreBase.g:25519:1: rule__MapLiteralExpCS__OwnedTypeAssignment_0 : ( ruleMapTypeCS ) ;
+    // InternalQVTcoreBase.g:25520:1: rule__MapLiteralExpCS__OwnedTypeAssignment_0 : ( ruleMapTypeCS ) ;
     public final void rule__MapLiteralExpCS__OwnedTypeAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:25523:1: ( ( ruleMapTypeCS ) )
-            // InternalQVTcoreBase.g:25524:1: ( ruleMapTypeCS )
+            // InternalQVTcoreBase.g:25524:1: ( ( ruleMapTypeCS ) )
+            // InternalQVTcoreBase.g:25525:1: ( ruleMapTypeCS )
             {
-            // InternalQVTcoreBase.g:25524:1: ( ruleMapTypeCS )
-            // InternalQVTcoreBase.g:25525:1: ruleMapTypeCS
+            // InternalQVTcoreBase.g:25525:1: ( ruleMapTypeCS )
+            // InternalQVTcoreBase.g:25526:1: ruleMapTypeCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getMapLiteralExpCSAccess().getOwnedTypeMapTypeCSParserRuleCall_0_0()); 
@@ -73955,17 +73955,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__MapLiteralExpCS__OwnedPartsAssignment_2_0"
-    // InternalQVTcoreBase.g:25534:1: rule__MapLiteralExpCS__OwnedPartsAssignment_2_0 : ( ruleMapLiteralPartCS ) ;
+    // InternalQVTcoreBase.g:25535:1: rule__MapLiteralExpCS__OwnedPartsAssignment_2_0 : ( ruleMapLiteralPartCS ) ;
     public final void rule__MapLiteralExpCS__OwnedPartsAssignment_2_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:25538:1: ( ( ruleMapLiteralPartCS ) )
-            // InternalQVTcoreBase.g:25539:1: ( ruleMapLiteralPartCS )
+            // InternalQVTcoreBase.g:25539:1: ( ( ruleMapLiteralPartCS ) )
+            // InternalQVTcoreBase.g:25540:1: ( ruleMapLiteralPartCS )
             {
-            // InternalQVTcoreBase.g:25539:1: ( ruleMapLiteralPartCS )
-            // InternalQVTcoreBase.g:25540:1: ruleMapLiteralPartCS
+            // InternalQVTcoreBase.g:25540:1: ( ruleMapLiteralPartCS )
+            // InternalQVTcoreBase.g:25541:1: ruleMapLiteralPartCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getMapLiteralExpCSAccess().getOwnedPartsMapLiteralPartCSParserRuleCall_2_0_0()); 
@@ -74000,17 +74000,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__MapLiteralExpCS__OwnedPartsAssignment_2_1_1"
-    // InternalQVTcoreBase.g:25549:1: rule__MapLiteralExpCS__OwnedPartsAssignment_2_1_1 : ( ruleMapLiteralPartCS ) ;
+    // InternalQVTcoreBase.g:25550:1: rule__MapLiteralExpCS__OwnedPartsAssignment_2_1_1 : ( ruleMapLiteralPartCS ) ;
     public final void rule__MapLiteralExpCS__OwnedPartsAssignment_2_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:25553:1: ( ( ruleMapLiteralPartCS ) )
-            // InternalQVTcoreBase.g:25554:1: ( ruleMapLiteralPartCS )
+            // InternalQVTcoreBase.g:25554:1: ( ( ruleMapLiteralPartCS ) )
+            // InternalQVTcoreBase.g:25555:1: ( ruleMapLiteralPartCS )
             {
-            // InternalQVTcoreBase.g:25554:1: ( ruleMapLiteralPartCS )
-            // InternalQVTcoreBase.g:25555:1: ruleMapLiteralPartCS
+            // InternalQVTcoreBase.g:25555:1: ( ruleMapLiteralPartCS )
+            // InternalQVTcoreBase.g:25556:1: ruleMapLiteralPartCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getMapLiteralExpCSAccess().getOwnedPartsMapLiteralPartCSParserRuleCall_2_1_1_0()); 
@@ -74045,17 +74045,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__MapLiteralPartCS__OwnedKeyAssignment_0"
-    // InternalQVTcoreBase.g:25564:1: rule__MapLiteralPartCS__OwnedKeyAssignment_0 : ( ruleExpCS ) ;
+    // InternalQVTcoreBase.g:25565:1: rule__MapLiteralPartCS__OwnedKeyAssignment_0 : ( ruleExpCS ) ;
     public final void rule__MapLiteralPartCS__OwnedKeyAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:25568:1: ( ( ruleExpCS ) )
-            // InternalQVTcoreBase.g:25569:1: ( ruleExpCS )
+            // InternalQVTcoreBase.g:25569:1: ( ( ruleExpCS ) )
+            // InternalQVTcoreBase.g:25570:1: ( ruleExpCS )
             {
-            // InternalQVTcoreBase.g:25569:1: ( ruleExpCS )
-            // InternalQVTcoreBase.g:25570:1: ruleExpCS
+            // InternalQVTcoreBase.g:25570:1: ( ruleExpCS )
+            // InternalQVTcoreBase.g:25571:1: ruleExpCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getMapLiteralPartCSAccess().getOwnedKeyExpCSParserRuleCall_0_0()); 
@@ -74090,17 +74090,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__MapLiteralPartCS__OwnedValueAssignment_2"
-    // InternalQVTcoreBase.g:25579:1: rule__MapLiteralPartCS__OwnedValueAssignment_2 : ( ruleExpCS ) ;
+    // InternalQVTcoreBase.g:25580:1: rule__MapLiteralPartCS__OwnedValueAssignment_2 : ( ruleExpCS ) ;
     public final void rule__MapLiteralPartCS__OwnedValueAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:25583:1: ( ( ruleExpCS ) )
-            // InternalQVTcoreBase.g:25584:1: ( ruleExpCS )
+            // InternalQVTcoreBase.g:25584:1: ( ( ruleExpCS ) )
+            // InternalQVTcoreBase.g:25585:1: ( ruleExpCS )
             {
-            // InternalQVTcoreBase.g:25584:1: ( ruleExpCS )
-            // InternalQVTcoreBase.g:25585:1: ruleExpCS
+            // InternalQVTcoreBase.g:25585:1: ( ruleExpCS )
+            // InternalQVTcoreBase.g:25586:1: ruleExpCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getMapLiteralPartCSAccess().getOwnedValueExpCSParserRuleCall_2_0()); 
@@ -74135,17 +74135,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__TupleLiteralExpCS__OwnedPartsAssignment_2"
-    // InternalQVTcoreBase.g:25594:1: rule__TupleLiteralExpCS__OwnedPartsAssignment_2 : ( ruleTupleLiteralPartCS ) ;
+    // InternalQVTcoreBase.g:25595:1: rule__TupleLiteralExpCS__OwnedPartsAssignment_2 : ( ruleTupleLiteralPartCS ) ;
     public final void rule__TupleLiteralExpCS__OwnedPartsAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:25598:1: ( ( ruleTupleLiteralPartCS ) )
-            // InternalQVTcoreBase.g:25599:1: ( ruleTupleLiteralPartCS )
+            // InternalQVTcoreBase.g:25599:1: ( ( ruleTupleLiteralPartCS ) )
+            // InternalQVTcoreBase.g:25600:1: ( ruleTupleLiteralPartCS )
             {
-            // InternalQVTcoreBase.g:25599:1: ( ruleTupleLiteralPartCS )
-            // InternalQVTcoreBase.g:25600:1: ruleTupleLiteralPartCS
+            // InternalQVTcoreBase.g:25600:1: ( ruleTupleLiteralPartCS )
+            // InternalQVTcoreBase.g:25601:1: ruleTupleLiteralPartCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTupleLiteralExpCSAccess().getOwnedPartsTupleLiteralPartCSParserRuleCall_2_0()); 
@@ -74180,17 +74180,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__TupleLiteralExpCS__OwnedPartsAssignment_3_1"
-    // InternalQVTcoreBase.g:25609:1: rule__TupleLiteralExpCS__OwnedPartsAssignment_3_1 : ( ruleTupleLiteralPartCS ) ;
+    // InternalQVTcoreBase.g:25610:1: rule__TupleLiteralExpCS__OwnedPartsAssignment_3_1 : ( ruleTupleLiteralPartCS ) ;
     public final void rule__TupleLiteralExpCS__OwnedPartsAssignment_3_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:25613:1: ( ( ruleTupleLiteralPartCS ) )
-            // InternalQVTcoreBase.g:25614:1: ( ruleTupleLiteralPartCS )
+            // InternalQVTcoreBase.g:25614:1: ( ( ruleTupleLiteralPartCS ) )
+            // InternalQVTcoreBase.g:25615:1: ( ruleTupleLiteralPartCS )
             {
-            // InternalQVTcoreBase.g:25614:1: ( ruleTupleLiteralPartCS )
-            // InternalQVTcoreBase.g:25615:1: ruleTupleLiteralPartCS
+            // InternalQVTcoreBase.g:25615:1: ( ruleTupleLiteralPartCS )
+            // InternalQVTcoreBase.g:25616:1: ruleTupleLiteralPartCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTupleLiteralExpCSAccess().getOwnedPartsTupleLiteralPartCSParserRuleCall_3_1_0()); 
@@ -74225,17 +74225,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__TupleLiteralPartCS__NameAssignment_0"
-    // InternalQVTcoreBase.g:25624:1: rule__TupleLiteralPartCS__NameAssignment_0 : ( ruleUnrestrictedName ) ;
+    // InternalQVTcoreBase.g:25625:1: rule__TupleLiteralPartCS__NameAssignment_0 : ( ruleUnrestrictedName ) ;
     public final void rule__TupleLiteralPartCS__NameAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:25628:1: ( ( ruleUnrestrictedName ) )
-            // InternalQVTcoreBase.g:25629:1: ( ruleUnrestrictedName )
+            // InternalQVTcoreBase.g:25629:1: ( ( ruleUnrestrictedName ) )
+            // InternalQVTcoreBase.g:25630:1: ( ruleUnrestrictedName )
             {
-            // InternalQVTcoreBase.g:25629:1: ( ruleUnrestrictedName )
-            // InternalQVTcoreBase.g:25630:1: ruleUnrestrictedName
+            // InternalQVTcoreBase.g:25630:1: ( ruleUnrestrictedName )
+            // InternalQVTcoreBase.g:25631:1: ruleUnrestrictedName
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTupleLiteralPartCSAccess().getNameUnrestrictedNameParserRuleCall_0_0()); 
@@ -74270,17 +74270,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__TupleLiteralPartCS__OwnedTypeAssignment_1_1"
-    // InternalQVTcoreBase.g:25639:1: rule__TupleLiteralPartCS__OwnedTypeAssignment_1_1 : ( ruleTypeExpCS ) ;
+    // InternalQVTcoreBase.g:25640:1: rule__TupleLiteralPartCS__OwnedTypeAssignment_1_1 : ( ruleTypeExpCS ) ;
     public final void rule__TupleLiteralPartCS__OwnedTypeAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:25643:1: ( ( ruleTypeExpCS ) )
-            // InternalQVTcoreBase.g:25644:1: ( ruleTypeExpCS )
+            // InternalQVTcoreBase.g:25644:1: ( ( ruleTypeExpCS ) )
+            // InternalQVTcoreBase.g:25645:1: ( ruleTypeExpCS )
             {
-            // InternalQVTcoreBase.g:25644:1: ( ruleTypeExpCS )
-            // InternalQVTcoreBase.g:25645:1: ruleTypeExpCS
+            // InternalQVTcoreBase.g:25645:1: ( ruleTypeExpCS )
+            // InternalQVTcoreBase.g:25646:1: ruleTypeExpCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTupleLiteralPartCSAccess().getOwnedTypeTypeExpCSParserRuleCall_1_1_0()); 
@@ -74315,17 +74315,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__TupleLiteralPartCS__OwnedInitExpressionAssignment_3"
-    // InternalQVTcoreBase.g:25654:1: rule__TupleLiteralPartCS__OwnedInitExpressionAssignment_3 : ( ruleExpCS ) ;
+    // InternalQVTcoreBase.g:25655:1: rule__TupleLiteralPartCS__OwnedInitExpressionAssignment_3 : ( ruleExpCS ) ;
     public final void rule__TupleLiteralPartCS__OwnedInitExpressionAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:25658:1: ( ( ruleExpCS ) )
-            // InternalQVTcoreBase.g:25659:1: ( ruleExpCS )
+            // InternalQVTcoreBase.g:25659:1: ( ( ruleExpCS ) )
+            // InternalQVTcoreBase.g:25660:1: ( ruleExpCS )
             {
-            // InternalQVTcoreBase.g:25659:1: ( ruleExpCS )
-            // InternalQVTcoreBase.g:25660:1: ruleExpCS
+            // InternalQVTcoreBase.g:25660:1: ( ruleExpCS )
+            // InternalQVTcoreBase.g:25661:1: ruleExpCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTupleLiteralPartCSAccess().getOwnedInitExpressionExpCSParserRuleCall_3_0()); 
@@ -74360,17 +74360,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__NumberLiteralExpCS__SymbolAssignment"
-    // InternalQVTcoreBase.g:25669:1: rule__NumberLiteralExpCS__SymbolAssignment : ( ruleNUMBER_LITERAL ) ;
+    // InternalQVTcoreBase.g:25670:1: rule__NumberLiteralExpCS__SymbolAssignment : ( ruleNUMBER_LITERAL ) ;
     public final void rule__NumberLiteralExpCS__SymbolAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:25673:1: ( ( ruleNUMBER_LITERAL ) )
-            // InternalQVTcoreBase.g:25674:1: ( ruleNUMBER_LITERAL )
+            // InternalQVTcoreBase.g:25674:1: ( ( ruleNUMBER_LITERAL ) )
+            // InternalQVTcoreBase.g:25675:1: ( ruleNUMBER_LITERAL )
             {
-            // InternalQVTcoreBase.g:25674:1: ( ruleNUMBER_LITERAL )
-            // InternalQVTcoreBase.g:25675:1: ruleNUMBER_LITERAL
+            // InternalQVTcoreBase.g:25675:1: ( ruleNUMBER_LITERAL )
+            // InternalQVTcoreBase.g:25676:1: ruleNUMBER_LITERAL
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getNumberLiteralExpCSAccess().getSymbolNUMBER_LITERALParserRuleCall_0()); 
@@ -74405,17 +74405,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__StringLiteralExpCS__SegmentsAssignment"
-    // InternalQVTcoreBase.g:25684:1: rule__StringLiteralExpCS__SegmentsAssignment : ( ruleStringLiteral ) ;
+    // InternalQVTcoreBase.g:25685:1: rule__StringLiteralExpCS__SegmentsAssignment : ( ruleStringLiteral ) ;
     public final void rule__StringLiteralExpCS__SegmentsAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:25688:1: ( ( ruleStringLiteral ) )
-            // InternalQVTcoreBase.g:25689:1: ( ruleStringLiteral )
+            // InternalQVTcoreBase.g:25689:1: ( ( ruleStringLiteral ) )
+            // InternalQVTcoreBase.g:25690:1: ( ruleStringLiteral )
             {
-            // InternalQVTcoreBase.g:25689:1: ( ruleStringLiteral )
-            // InternalQVTcoreBase.g:25690:1: ruleStringLiteral
+            // InternalQVTcoreBase.g:25690:1: ( ruleStringLiteral )
+            // InternalQVTcoreBase.g:25691:1: ruleStringLiteral
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getStringLiteralExpCSAccess().getSegmentsStringLiteralParserRuleCall_0()); 
@@ -74450,23 +74450,23 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__BooleanLiteralExpCS__SymbolAssignment_0"
-    // InternalQVTcoreBase.g:25699:1: rule__BooleanLiteralExpCS__SymbolAssignment_0 : ( ( 'true' ) ) ;
+    // InternalQVTcoreBase.g:25700:1: rule__BooleanLiteralExpCS__SymbolAssignment_0 : ( ( 'true' ) ) ;
     public final void rule__BooleanLiteralExpCS__SymbolAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:25703:1: ( ( ( 'true' ) ) )
-            // InternalQVTcoreBase.g:25704:1: ( ( 'true' ) )
+            // InternalQVTcoreBase.g:25704:1: ( ( ( 'true' ) ) )
+            // InternalQVTcoreBase.g:25705:1: ( ( 'true' ) )
             {
-            // InternalQVTcoreBase.g:25704:1: ( ( 'true' ) )
-            // InternalQVTcoreBase.g:25705:1: ( 'true' )
+            // InternalQVTcoreBase.g:25705:1: ( ( 'true' ) )
+            // InternalQVTcoreBase.g:25706:1: ( 'true' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getBooleanLiteralExpCSAccess().getSymbolTrueKeyword_0_0()); 
             }
-            // InternalQVTcoreBase.g:25706:1: ( 'true' )
-            // InternalQVTcoreBase.g:25707:1: 'true'
+            // InternalQVTcoreBase.g:25707:1: ( 'true' )
+            // InternalQVTcoreBase.g:25708:1: 'true'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getBooleanLiteralExpCSAccess().getSymbolTrueKeyword_0_0()); 
@@ -74503,23 +74503,23 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__BooleanLiteralExpCS__SymbolAssignment_1"
-    // InternalQVTcoreBase.g:25722:1: rule__BooleanLiteralExpCS__SymbolAssignment_1 : ( ( 'false' ) ) ;
+    // InternalQVTcoreBase.g:25723:1: rule__BooleanLiteralExpCS__SymbolAssignment_1 : ( ( 'false' ) ) ;
     public final void rule__BooleanLiteralExpCS__SymbolAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:25726:1: ( ( ( 'false' ) ) )
-            // InternalQVTcoreBase.g:25727:1: ( ( 'false' ) )
+            // InternalQVTcoreBase.g:25727:1: ( ( ( 'false' ) ) )
+            // InternalQVTcoreBase.g:25728:1: ( ( 'false' ) )
             {
-            // InternalQVTcoreBase.g:25727:1: ( ( 'false' ) )
-            // InternalQVTcoreBase.g:25728:1: ( 'false' )
+            // InternalQVTcoreBase.g:25728:1: ( ( 'false' ) )
+            // InternalQVTcoreBase.g:25729:1: ( 'false' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getBooleanLiteralExpCSAccess().getSymbolFalseKeyword_1_0()); 
             }
-            // InternalQVTcoreBase.g:25729:1: ( 'false' )
-            // InternalQVTcoreBase.g:25730:1: 'false'
+            // InternalQVTcoreBase.g:25730:1: ( 'false' )
+            // InternalQVTcoreBase.g:25731:1: 'false'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getBooleanLiteralExpCSAccess().getSymbolFalseKeyword_1_0()); 
@@ -74556,17 +74556,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__TypeLiteralWithMultiplicityCS__OwnedMultiplicityAssignment_1"
-    // InternalQVTcoreBase.g:25745:1: rule__TypeLiteralWithMultiplicityCS__OwnedMultiplicityAssignment_1 : ( ruleMultiplicityCS ) ;
+    // InternalQVTcoreBase.g:25746:1: rule__TypeLiteralWithMultiplicityCS__OwnedMultiplicityAssignment_1 : ( ruleMultiplicityCS ) ;
     public final void rule__TypeLiteralWithMultiplicityCS__OwnedMultiplicityAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:25749:1: ( ( ruleMultiplicityCS ) )
-            // InternalQVTcoreBase.g:25750:1: ( ruleMultiplicityCS )
+            // InternalQVTcoreBase.g:25750:1: ( ( ruleMultiplicityCS ) )
+            // InternalQVTcoreBase.g:25751:1: ( ruleMultiplicityCS )
             {
-            // InternalQVTcoreBase.g:25750:1: ( ruleMultiplicityCS )
-            // InternalQVTcoreBase.g:25751:1: ruleMultiplicityCS
+            // InternalQVTcoreBase.g:25751:1: ( ruleMultiplicityCS )
+            // InternalQVTcoreBase.g:25752:1: ruleMultiplicityCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTypeLiteralWithMultiplicityCSAccess().getOwnedMultiplicityMultiplicityCSParserRuleCall_1_0()); 
@@ -74601,17 +74601,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__TypeLiteralExpCS__OwnedTypeAssignment"
-    // InternalQVTcoreBase.g:25760:1: rule__TypeLiteralExpCS__OwnedTypeAssignment : ( ruleTypeLiteralWithMultiplicityCS ) ;
+    // InternalQVTcoreBase.g:25761:1: rule__TypeLiteralExpCS__OwnedTypeAssignment : ( ruleTypeLiteralWithMultiplicityCS ) ;
     public final void rule__TypeLiteralExpCS__OwnedTypeAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:25764:1: ( ( ruleTypeLiteralWithMultiplicityCS ) )
-            // InternalQVTcoreBase.g:25765:1: ( ruleTypeLiteralWithMultiplicityCS )
+            // InternalQVTcoreBase.g:25765:1: ( ( ruleTypeLiteralWithMultiplicityCS ) )
+            // InternalQVTcoreBase.g:25766:1: ( ruleTypeLiteralWithMultiplicityCS )
             {
-            // InternalQVTcoreBase.g:25765:1: ( ruleTypeLiteralWithMultiplicityCS )
-            // InternalQVTcoreBase.g:25766:1: ruleTypeLiteralWithMultiplicityCS
+            // InternalQVTcoreBase.g:25766:1: ( ruleTypeLiteralWithMultiplicityCS )
+            // InternalQVTcoreBase.g:25767:1: ruleTypeLiteralWithMultiplicityCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTypeLiteralExpCSAccess().getOwnedTypeTypeLiteralWithMultiplicityCSParserRuleCall_0()); 
@@ -74646,17 +74646,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__TypeNameExpCS__OwnedPathNameAssignment_0"
-    // InternalQVTcoreBase.g:25775:1: rule__TypeNameExpCS__OwnedPathNameAssignment_0 : ( rulePathNameCS ) ;
+    // InternalQVTcoreBase.g:25776:1: rule__TypeNameExpCS__OwnedPathNameAssignment_0 : ( rulePathNameCS ) ;
     public final void rule__TypeNameExpCS__OwnedPathNameAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:25779:1: ( ( rulePathNameCS ) )
-            // InternalQVTcoreBase.g:25780:1: ( rulePathNameCS )
+            // InternalQVTcoreBase.g:25780:1: ( ( rulePathNameCS ) )
+            // InternalQVTcoreBase.g:25781:1: ( rulePathNameCS )
             {
-            // InternalQVTcoreBase.g:25780:1: ( rulePathNameCS )
-            // InternalQVTcoreBase.g:25781:1: rulePathNameCS
+            // InternalQVTcoreBase.g:25781:1: ( rulePathNameCS )
+            // InternalQVTcoreBase.g:25782:1: rulePathNameCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTypeNameExpCSAccess().getOwnedPathNamePathNameCSParserRuleCall_0_0()); 
@@ -74691,17 +74691,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__TypeNameExpCS__OwnedCurlyBracketedClauseAssignment_1_0"
-    // InternalQVTcoreBase.g:25790:1: rule__TypeNameExpCS__OwnedCurlyBracketedClauseAssignment_1_0 : ( ruleCurlyBracketedClauseCS ) ;
+    // InternalQVTcoreBase.g:25791:1: rule__TypeNameExpCS__OwnedCurlyBracketedClauseAssignment_1_0 : ( ruleCurlyBracketedClauseCS ) ;
     public final void rule__TypeNameExpCS__OwnedCurlyBracketedClauseAssignment_1_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:25794:1: ( ( ruleCurlyBracketedClauseCS ) )
-            // InternalQVTcoreBase.g:25795:1: ( ruleCurlyBracketedClauseCS )
+            // InternalQVTcoreBase.g:25795:1: ( ( ruleCurlyBracketedClauseCS ) )
+            // InternalQVTcoreBase.g:25796:1: ( ruleCurlyBracketedClauseCS )
             {
-            // InternalQVTcoreBase.g:25795:1: ( ruleCurlyBracketedClauseCS )
-            // InternalQVTcoreBase.g:25796:1: ruleCurlyBracketedClauseCS
+            // InternalQVTcoreBase.g:25796:1: ( ruleCurlyBracketedClauseCS )
+            // InternalQVTcoreBase.g:25797:1: ruleCurlyBracketedClauseCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTypeNameExpCSAccess().getOwnedCurlyBracketedClauseCurlyBracketedClauseCSParserRuleCall_1_0_0()); 
@@ -74736,17 +74736,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__TypeNameExpCS__OwnedPatternGuardAssignment_1_1_1"
-    // InternalQVTcoreBase.g:25805:1: rule__TypeNameExpCS__OwnedPatternGuardAssignment_1_1_1 : ( ruleExpCS ) ;
+    // InternalQVTcoreBase.g:25806:1: rule__TypeNameExpCS__OwnedPatternGuardAssignment_1_1_1 : ( ruleExpCS ) ;
     public final void rule__TypeNameExpCS__OwnedPatternGuardAssignment_1_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:25809:1: ( ( ruleExpCS ) )
-            // InternalQVTcoreBase.g:25810:1: ( ruleExpCS )
+            // InternalQVTcoreBase.g:25810:1: ( ( ruleExpCS ) )
+            // InternalQVTcoreBase.g:25811:1: ( ruleExpCS )
             {
-            // InternalQVTcoreBase.g:25810:1: ( ruleExpCS )
-            // InternalQVTcoreBase.g:25811:1: ruleExpCS
+            // InternalQVTcoreBase.g:25811:1: ( ruleExpCS )
+            // InternalQVTcoreBase.g:25812:1: ruleExpCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTypeNameExpCSAccess().getOwnedPatternGuardExpCSParserRuleCall_1_1_1_0()); 
@@ -74781,17 +74781,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__TypeExpCS__OwnedMultiplicityAssignment_1"
-    // InternalQVTcoreBase.g:25820:1: rule__TypeExpCS__OwnedMultiplicityAssignment_1 : ( ruleMultiplicityCS ) ;
+    // InternalQVTcoreBase.g:25821:1: rule__TypeExpCS__OwnedMultiplicityAssignment_1 : ( ruleMultiplicityCS ) ;
     public final void rule__TypeExpCS__OwnedMultiplicityAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:25824:1: ( ( ruleMultiplicityCS ) )
-            // InternalQVTcoreBase.g:25825:1: ( ruleMultiplicityCS )
+            // InternalQVTcoreBase.g:25825:1: ( ( ruleMultiplicityCS ) )
+            // InternalQVTcoreBase.g:25826:1: ( ruleMultiplicityCS )
             {
-            // InternalQVTcoreBase.g:25825:1: ( ruleMultiplicityCS )
-            // InternalQVTcoreBase.g:25826:1: ruleMultiplicityCS
+            // InternalQVTcoreBase.g:25826:1: ( ruleMultiplicityCS )
+            // InternalQVTcoreBase.g:25827:1: ruleMultiplicityCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTypeExpCSAccess().getOwnedMultiplicityMultiplicityCSParserRuleCall_1_0()); 
@@ -74826,17 +74826,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__ExpCS__NameAssignment_0_1_1"
-    // InternalQVTcoreBase.g:25835:1: rule__ExpCS__NameAssignment_0_1_1 : ( ruleBinaryOperatorName ) ;
+    // InternalQVTcoreBase.g:25836:1: rule__ExpCS__NameAssignment_0_1_1 : ( ruleBinaryOperatorName ) ;
     public final void rule__ExpCS__NameAssignment_0_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:25839:1: ( ( ruleBinaryOperatorName ) )
-            // InternalQVTcoreBase.g:25840:1: ( ruleBinaryOperatorName )
+            // InternalQVTcoreBase.g:25840:1: ( ( ruleBinaryOperatorName ) )
+            // InternalQVTcoreBase.g:25841:1: ( ruleBinaryOperatorName )
             {
-            // InternalQVTcoreBase.g:25840:1: ( ruleBinaryOperatorName )
-            // InternalQVTcoreBase.g:25841:1: ruleBinaryOperatorName
+            // InternalQVTcoreBase.g:25841:1: ( ruleBinaryOperatorName )
+            // InternalQVTcoreBase.g:25842:1: ruleBinaryOperatorName
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getExpCSAccess().getNameBinaryOperatorNameParserRuleCall_0_1_1_0()); 
@@ -74871,17 +74871,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__ExpCS__OwnedRightAssignment_0_1_2"
-    // InternalQVTcoreBase.g:25850:1: rule__ExpCS__OwnedRightAssignment_0_1_2 : ( ruleExpCS ) ;
+    // InternalQVTcoreBase.g:25851:1: rule__ExpCS__OwnedRightAssignment_0_1_2 : ( ruleExpCS ) ;
     public final void rule__ExpCS__OwnedRightAssignment_0_1_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:25854:1: ( ( ruleExpCS ) )
-            // InternalQVTcoreBase.g:25855:1: ( ruleExpCS )
+            // InternalQVTcoreBase.g:25855:1: ( ( ruleExpCS ) )
+            // InternalQVTcoreBase.g:25856:1: ( ruleExpCS )
             {
-            // InternalQVTcoreBase.g:25855:1: ( ruleExpCS )
-            // InternalQVTcoreBase.g:25856:1: ruleExpCS
+            // InternalQVTcoreBase.g:25856:1: ( ruleExpCS )
+            // InternalQVTcoreBase.g:25857:1: ruleExpCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getExpCSAccess().getOwnedRightExpCSParserRuleCall_0_1_2_0()); 
@@ -74916,17 +74916,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__PrefixedLetExpCS__NameAssignment_0_1"
-    // InternalQVTcoreBase.g:25865:1: rule__PrefixedLetExpCS__NameAssignment_0_1 : ( ruleUnaryOperatorName ) ;
+    // InternalQVTcoreBase.g:25866:1: rule__PrefixedLetExpCS__NameAssignment_0_1 : ( ruleUnaryOperatorName ) ;
     public final void rule__PrefixedLetExpCS__NameAssignment_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:25869:1: ( ( ruleUnaryOperatorName ) )
-            // InternalQVTcoreBase.g:25870:1: ( ruleUnaryOperatorName )
+            // InternalQVTcoreBase.g:25870:1: ( ( ruleUnaryOperatorName ) )
+            // InternalQVTcoreBase.g:25871:1: ( ruleUnaryOperatorName )
             {
-            // InternalQVTcoreBase.g:25870:1: ( ruleUnaryOperatorName )
-            // InternalQVTcoreBase.g:25871:1: ruleUnaryOperatorName
+            // InternalQVTcoreBase.g:25871:1: ( ruleUnaryOperatorName )
+            // InternalQVTcoreBase.g:25872:1: ruleUnaryOperatorName
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getPrefixedLetExpCSAccess().getNameUnaryOperatorNameParserRuleCall_0_1_0()); 
@@ -74961,17 +74961,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__PrefixedLetExpCS__OwnedRightAssignment_0_2"
-    // InternalQVTcoreBase.g:25880:1: rule__PrefixedLetExpCS__OwnedRightAssignment_0_2 : ( rulePrefixedLetExpCS ) ;
+    // InternalQVTcoreBase.g:25881:1: rule__PrefixedLetExpCS__OwnedRightAssignment_0_2 : ( rulePrefixedLetExpCS ) ;
     public final void rule__PrefixedLetExpCS__OwnedRightAssignment_0_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:25884:1: ( ( rulePrefixedLetExpCS ) )
-            // InternalQVTcoreBase.g:25885:1: ( rulePrefixedLetExpCS )
+            // InternalQVTcoreBase.g:25885:1: ( ( rulePrefixedLetExpCS ) )
+            // InternalQVTcoreBase.g:25886:1: ( rulePrefixedLetExpCS )
             {
-            // InternalQVTcoreBase.g:25885:1: ( rulePrefixedLetExpCS )
-            // InternalQVTcoreBase.g:25886:1: rulePrefixedLetExpCS
+            // InternalQVTcoreBase.g:25886:1: ( rulePrefixedLetExpCS )
+            // InternalQVTcoreBase.g:25887:1: rulePrefixedLetExpCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getPrefixedLetExpCSAccess().getOwnedRightPrefixedLetExpCSParserRuleCall_0_2_0()); 
@@ -75006,17 +75006,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__PrefixedPrimaryExpCS__NameAssignment_0_1"
-    // InternalQVTcoreBase.g:25895:1: rule__PrefixedPrimaryExpCS__NameAssignment_0_1 : ( ruleUnaryOperatorName ) ;
+    // InternalQVTcoreBase.g:25896:1: rule__PrefixedPrimaryExpCS__NameAssignment_0_1 : ( ruleUnaryOperatorName ) ;
     public final void rule__PrefixedPrimaryExpCS__NameAssignment_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:25899:1: ( ( ruleUnaryOperatorName ) )
-            // InternalQVTcoreBase.g:25900:1: ( ruleUnaryOperatorName )
+            // InternalQVTcoreBase.g:25900:1: ( ( ruleUnaryOperatorName ) )
+            // InternalQVTcoreBase.g:25901:1: ( ruleUnaryOperatorName )
             {
-            // InternalQVTcoreBase.g:25900:1: ( ruleUnaryOperatorName )
-            // InternalQVTcoreBase.g:25901:1: ruleUnaryOperatorName
+            // InternalQVTcoreBase.g:25901:1: ( ruleUnaryOperatorName )
+            // InternalQVTcoreBase.g:25902:1: ruleUnaryOperatorName
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getPrefixedPrimaryExpCSAccess().getNameUnaryOperatorNameParserRuleCall_0_1_0()); 
@@ -75051,17 +75051,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__PrefixedPrimaryExpCS__OwnedRightAssignment_0_2"
-    // InternalQVTcoreBase.g:25910:1: rule__PrefixedPrimaryExpCS__OwnedRightAssignment_0_2 : ( rulePrefixedPrimaryExpCS ) ;
+    // InternalQVTcoreBase.g:25911:1: rule__PrefixedPrimaryExpCS__OwnedRightAssignment_0_2 : ( rulePrefixedPrimaryExpCS ) ;
     public final void rule__PrefixedPrimaryExpCS__OwnedRightAssignment_0_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:25914:1: ( ( rulePrefixedPrimaryExpCS ) )
-            // InternalQVTcoreBase.g:25915:1: ( rulePrefixedPrimaryExpCS )
+            // InternalQVTcoreBase.g:25915:1: ( ( rulePrefixedPrimaryExpCS ) )
+            // InternalQVTcoreBase.g:25916:1: ( rulePrefixedPrimaryExpCS )
             {
-            // InternalQVTcoreBase.g:25915:1: ( rulePrefixedPrimaryExpCS )
-            // InternalQVTcoreBase.g:25916:1: rulePrefixedPrimaryExpCS
+            // InternalQVTcoreBase.g:25916:1: ( rulePrefixedPrimaryExpCS )
+            // InternalQVTcoreBase.g:25917:1: rulePrefixedPrimaryExpCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getPrefixedPrimaryExpCSAccess().getOwnedRightPrefixedPrimaryExpCSParserRuleCall_0_2_0()); 
@@ -75096,17 +75096,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__NameExpCS__OwnedPathNameAssignment_0"
-    // InternalQVTcoreBase.g:25925:1: rule__NameExpCS__OwnedPathNameAssignment_0 : ( rulePathNameCS ) ;
+    // InternalQVTcoreBase.g:25926:1: rule__NameExpCS__OwnedPathNameAssignment_0 : ( rulePathNameCS ) ;
     public final void rule__NameExpCS__OwnedPathNameAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:25929:1: ( ( rulePathNameCS ) )
-            // InternalQVTcoreBase.g:25930:1: ( rulePathNameCS )
+            // InternalQVTcoreBase.g:25930:1: ( ( rulePathNameCS ) )
+            // InternalQVTcoreBase.g:25931:1: ( rulePathNameCS )
             {
-            // InternalQVTcoreBase.g:25930:1: ( rulePathNameCS )
-            // InternalQVTcoreBase.g:25931:1: rulePathNameCS
+            // InternalQVTcoreBase.g:25931:1: ( rulePathNameCS )
+            // InternalQVTcoreBase.g:25932:1: rulePathNameCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getNameExpCSAccess().getOwnedPathNamePathNameCSParserRuleCall_0_0()); 
@@ -75141,17 +75141,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__NameExpCS__OwnedSquareBracketedClausesAssignment_1"
-    // InternalQVTcoreBase.g:25940:1: rule__NameExpCS__OwnedSquareBracketedClausesAssignment_1 : ( ruleSquareBracketedClauseCS ) ;
+    // InternalQVTcoreBase.g:25941:1: rule__NameExpCS__OwnedSquareBracketedClausesAssignment_1 : ( ruleSquareBracketedClauseCS ) ;
     public final void rule__NameExpCS__OwnedSquareBracketedClausesAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:25944:1: ( ( ruleSquareBracketedClauseCS ) )
-            // InternalQVTcoreBase.g:25945:1: ( ruleSquareBracketedClauseCS )
+            // InternalQVTcoreBase.g:25945:1: ( ( ruleSquareBracketedClauseCS ) )
+            // InternalQVTcoreBase.g:25946:1: ( ruleSquareBracketedClauseCS )
             {
-            // InternalQVTcoreBase.g:25945:1: ( ruleSquareBracketedClauseCS )
-            // InternalQVTcoreBase.g:25946:1: ruleSquareBracketedClauseCS
+            // InternalQVTcoreBase.g:25946:1: ( ruleSquareBracketedClauseCS )
+            // InternalQVTcoreBase.g:25947:1: ruleSquareBracketedClauseCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getNameExpCSAccess().getOwnedSquareBracketedClausesSquareBracketedClauseCSParserRuleCall_1_0()); 
@@ -75186,17 +75186,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__NameExpCS__OwnedRoundBracketedClauseAssignment_2"
-    // InternalQVTcoreBase.g:25955:1: rule__NameExpCS__OwnedRoundBracketedClauseAssignment_2 : ( ruleRoundBracketedClauseCS ) ;
+    // InternalQVTcoreBase.g:25956:1: rule__NameExpCS__OwnedRoundBracketedClauseAssignment_2 : ( ruleRoundBracketedClauseCS ) ;
     public final void rule__NameExpCS__OwnedRoundBracketedClauseAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:25959:1: ( ( ruleRoundBracketedClauseCS ) )
-            // InternalQVTcoreBase.g:25960:1: ( ruleRoundBracketedClauseCS )
+            // InternalQVTcoreBase.g:25960:1: ( ( ruleRoundBracketedClauseCS ) )
+            // InternalQVTcoreBase.g:25961:1: ( ruleRoundBracketedClauseCS )
             {
-            // InternalQVTcoreBase.g:25960:1: ( ruleRoundBracketedClauseCS )
-            // InternalQVTcoreBase.g:25961:1: ruleRoundBracketedClauseCS
+            // InternalQVTcoreBase.g:25961:1: ( ruleRoundBracketedClauseCS )
+            // InternalQVTcoreBase.g:25962:1: ruleRoundBracketedClauseCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getNameExpCSAccess().getOwnedRoundBracketedClauseRoundBracketedClauseCSParserRuleCall_2_0()); 
@@ -75231,17 +75231,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__NameExpCS__OwnedCurlyBracketedClauseAssignment_3"
-    // InternalQVTcoreBase.g:25970:1: rule__NameExpCS__OwnedCurlyBracketedClauseAssignment_3 : ( ruleCurlyBracketedClauseCS ) ;
+    // InternalQVTcoreBase.g:25971:1: rule__NameExpCS__OwnedCurlyBracketedClauseAssignment_3 : ( ruleCurlyBracketedClauseCS ) ;
     public final void rule__NameExpCS__OwnedCurlyBracketedClauseAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:25974:1: ( ( ruleCurlyBracketedClauseCS ) )
-            // InternalQVTcoreBase.g:25975:1: ( ruleCurlyBracketedClauseCS )
+            // InternalQVTcoreBase.g:25975:1: ( ( ruleCurlyBracketedClauseCS ) )
+            // InternalQVTcoreBase.g:25976:1: ( ruleCurlyBracketedClauseCS )
             {
-            // InternalQVTcoreBase.g:25975:1: ( ruleCurlyBracketedClauseCS )
-            // InternalQVTcoreBase.g:25976:1: ruleCurlyBracketedClauseCS
+            // InternalQVTcoreBase.g:25976:1: ( ruleCurlyBracketedClauseCS )
+            // InternalQVTcoreBase.g:25977:1: ruleCurlyBracketedClauseCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getNameExpCSAccess().getOwnedCurlyBracketedClauseCurlyBracketedClauseCSParserRuleCall_3_0()); 
@@ -75276,23 +75276,23 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__NameExpCS__IsPreAssignment_4_0"
-    // InternalQVTcoreBase.g:25985:1: rule__NameExpCS__IsPreAssignment_4_0 : ( ( '@' ) ) ;
+    // InternalQVTcoreBase.g:25986:1: rule__NameExpCS__IsPreAssignment_4_0 : ( ( '@' ) ) ;
     public final void rule__NameExpCS__IsPreAssignment_4_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:25989:1: ( ( ( '@' ) ) )
-            // InternalQVTcoreBase.g:25990:1: ( ( '@' ) )
+            // InternalQVTcoreBase.g:25990:1: ( ( ( '@' ) ) )
+            // InternalQVTcoreBase.g:25991:1: ( ( '@' ) )
             {
-            // InternalQVTcoreBase.g:25990:1: ( ( '@' ) )
-            // InternalQVTcoreBase.g:25991:1: ( '@' )
+            // InternalQVTcoreBase.g:25991:1: ( ( '@' ) )
+            // InternalQVTcoreBase.g:25992:1: ( '@' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getNameExpCSAccess().getIsPreCommercialAtKeyword_4_0_0()); 
             }
-            // InternalQVTcoreBase.g:25992:1: ( '@' )
-            // InternalQVTcoreBase.g:25993:1: '@'
+            // InternalQVTcoreBase.g:25993:1: ( '@' )
+            // InternalQVTcoreBase.g:25994:1: '@'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getNameExpCSAccess().getIsPreCommercialAtKeyword_4_0_0()); 
@@ -75329,17 +75329,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__CurlyBracketedClauseCS__OwnedPartsAssignment_2_0_0"
-    // InternalQVTcoreBase.g:26008:1: rule__CurlyBracketedClauseCS__OwnedPartsAssignment_2_0_0 : ( ruleShadowPartCS ) ;
+    // InternalQVTcoreBase.g:26009:1: rule__CurlyBracketedClauseCS__OwnedPartsAssignment_2_0_0 : ( ruleShadowPartCS ) ;
     public final void rule__CurlyBracketedClauseCS__OwnedPartsAssignment_2_0_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:26012:1: ( ( ruleShadowPartCS ) )
-            // InternalQVTcoreBase.g:26013:1: ( ruleShadowPartCS )
+            // InternalQVTcoreBase.g:26013:1: ( ( ruleShadowPartCS ) )
+            // InternalQVTcoreBase.g:26014:1: ( ruleShadowPartCS )
             {
-            // InternalQVTcoreBase.g:26013:1: ( ruleShadowPartCS )
-            // InternalQVTcoreBase.g:26014:1: ruleShadowPartCS
+            // InternalQVTcoreBase.g:26014:1: ( ruleShadowPartCS )
+            // InternalQVTcoreBase.g:26015:1: ruleShadowPartCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getCurlyBracketedClauseCSAccess().getOwnedPartsShadowPartCSParserRuleCall_2_0_0_0()); 
@@ -75374,17 +75374,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__CurlyBracketedClauseCS__OwnedPartsAssignment_2_0_1_1"
-    // InternalQVTcoreBase.g:26023:1: rule__CurlyBracketedClauseCS__OwnedPartsAssignment_2_0_1_1 : ( ruleShadowPartCS ) ;
+    // InternalQVTcoreBase.g:26024:1: rule__CurlyBracketedClauseCS__OwnedPartsAssignment_2_0_1_1 : ( ruleShadowPartCS ) ;
     public final void rule__CurlyBracketedClauseCS__OwnedPartsAssignment_2_0_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:26027:1: ( ( ruleShadowPartCS ) )
-            // InternalQVTcoreBase.g:26028:1: ( ruleShadowPartCS )
+            // InternalQVTcoreBase.g:26028:1: ( ( ruleShadowPartCS ) )
+            // InternalQVTcoreBase.g:26029:1: ( ruleShadowPartCS )
             {
-            // InternalQVTcoreBase.g:26028:1: ( ruleShadowPartCS )
-            // InternalQVTcoreBase.g:26029:1: ruleShadowPartCS
+            // InternalQVTcoreBase.g:26029:1: ( ruleShadowPartCS )
+            // InternalQVTcoreBase.g:26030:1: ruleShadowPartCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getCurlyBracketedClauseCSAccess().getOwnedPartsShadowPartCSParserRuleCall_2_0_1_1_0()); 
@@ -75419,17 +75419,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__CurlyBracketedClauseCS__ValueAssignment_2_1"
-    // InternalQVTcoreBase.g:26038:1: rule__CurlyBracketedClauseCS__ValueAssignment_2_1 : ( ruleStringLiteral ) ;
+    // InternalQVTcoreBase.g:26039:1: rule__CurlyBracketedClauseCS__ValueAssignment_2_1 : ( ruleStringLiteral ) ;
     public final void rule__CurlyBracketedClauseCS__ValueAssignment_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:26042:1: ( ( ruleStringLiteral ) )
-            // InternalQVTcoreBase.g:26043:1: ( ruleStringLiteral )
+            // InternalQVTcoreBase.g:26043:1: ( ( ruleStringLiteral ) )
+            // InternalQVTcoreBase.g:26044:1: ( ruleStringLiteral )
             {
-            // InternalQVTcoreBase.g:26043:1: ( ruleStringLiteral )
-            // InternalQVTcoreBase.g:26044:1: ruleStringLiteral
+            // InternalQVTcoreBase.g:26044:1: ( ruleStringLiteral )
+            // InternalQVTcoreBase.g:26045:1: ruleStringLiteral
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getCurlyBracketedClauseCSAccess().getValueStringLiteralParserRuleCall_2_1_0()); 
@@ -75464,17 +75464,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__RoundBracketedClauseCS__OwnedArgumentsAssignment_2_0"
-    // InternalQVTcoreBase.g:26053:1: rule__RoundBracketedClauseCS__OwnedArgumentsAssignment_2_0 : ( ruleNavigatingArgCS ) ;
+    // InternalQVTcoreBase.g:26054:1: rule__RoundBracketedClauseCS__OwnedArgumentsAssignment_2_0 : ( ruleNavigatingArgCS ) ;
     public final void rule__RoundBracketedClauseCS__OwnedArgumentsAssignment_2_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:26057:1: ( ( ruleNavigatingArgCS ) )
-            // InternalQVTcoreBase.g:26058:1: ( ruleNavigatingArgCS )
+            // InternalQVTcoreBase.g:26058:1: ( ( ruleNavigatingArgCS ) )
+            // InternalQVTcoreBase.g:26059:1: ( ruleNavigatingArgCS )
             {
-            // InternalQVTcoreBase.g:26058:1: ( ruleNavigatingArgCS )
-            // InternalQVTcoreBase.g:26059:1: ruleNavigatingArgCS
+            // InternalQVTcoreBase.g:26059:1: ( ruleNavigatingArgCS )
+            // InternalQVTcoreBase.g:26060:1: ruleNavigatingArgCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getRoundBracketedClauseCSAccess().getOwnedArgumentsNavigatingArgCSParserRuleCall_2_0_0()); 
@@ -75509,17 +75509,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__RoundBracketedClauseCS__OwnedArgumentsAssignment_2_1"
-    // InternalQVTcoreBase.g:26068:1: rule__RoundBracketedClauseCS__OwnedArgumentsAssignment_2_1 : ( ruleNavigatingCommaArgCS ) ;
+    // InternalQVTcoreBase.g:26069:1: rule__RoundBracketedClauseCS__OwnedArgumentsAssignment_2_1 : ( ruleNavigatingCommaArgCS ) ;
     public final void rule__RoundBracketedClauseCS__OwnedArgumentsAssignment_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:26072:1: ( ( ruleNavigatingCommaArgCS ) )
-            // InternalQVTcoreBase.g:26073:1: ( ruleNavigatingCommaArgCS )
+            // InternalQVTcoreBase.g:26073:1: ( ( ruleNavigatingCommaArgCS ) )
+            // InternalQVTcoreBase.g:26074:1: ( ruleNavigatingCommaArgCS )
             {
-            // InternalQVTcoreBase.g:26073:1: ( ruleNavigatingCommaArgCS )
-            // InternalQVTcoreBase.g:26074:1: ruleNavigatingCommaArgCS
+            // InternalQVTcoreBase.g:26074:1: ( ruleNavigatingCommaArgCS )
+            // InternalQVTcoreBase.g:26075:1: ruleNavigatingCommaArgCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getRoundBracketedClauseCSAccess().getOwnedArgumentsNavigatingCommaArgCSParserRuleCall_2_1_0()); 
@@ -75554,17 +75554,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__RoundBracketedClauseCS__OwnedArgumentsAssignment_2_2_0"
-    // InternalQVTcoreBase.g:26083:1: rule__RoundBracketedClauseCS__OwnedArgumentsAssignment_2_2_0 : ( ruleNavigatingSemiArgCS ) ;
+    // InternalQVTcoreBase.g:26084:1: rule__RoundBracketedClauseCS__OwnedArgumentsAssignment_2_2_0 : ( ruleNavigatingSemiArgCS ) ;
     public final void rule__RoundBracketedClauseCS__OwnedArgumentsAssignment_2_2_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:26087:1: ( ( ruleNavigatingSemiArgCS ) )
-            // InternalQVTcoreBase.g:26088:1: ( ruleNavigatingSemiArgCS )
+            // InternalQVTcoreBase.g:26088:1: ( ( ruleNavigatingSemiArgCS ) )
+            // InternalQVTcoreBase.g:26089:1: ( ruleNavigatingSemiArgCS )
             {
-            // InternalQVTcoreBase.g:26088:1: ( ruleNavigatingSemiArgCS )
-            // InternalQVTcoreBase.g:26089:1: ruleNavigatingSemiArgCS
+            // InternalQVTcoreBase.g:26089:1: ( ruleNavigatingSemiArgCS )
+            // InternalQVTcoreBase.g:26090:1: ruleNavigatingSemiArgCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getRoundBracketedClauseCSAccess().getOwnedArgumentsNavigatingSemiArgCSParserRuleCall_2_2_0_0()); 
@@ -75599,17 +75599,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__RoundBracketedClauseCS__OwnedArgumentsAssignment_2_2_1"
-    // InternalQVTcoreBase.g:26098:1: rule__RoundBracketedClauseCS__OwnedArgumentsAssignment_2_2_1 : ( ruleNavigatingCommaArgCS ) ;
+    // InternalQVTcoreBase.g:26099:1: rule__RoundBracketedClauseCS__OwnedArgumentsAssignment_2_2_1 : ( ruleNavigatingCommaArgCS ) ;
     public final void rule__RoundBracketedClauseCS__OwnedArgumentsAssignment_2_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:26102:1: ( ( ruleNavigatingCommaArgCS ) )
-            // InternalQVTcoreBase.g:26103:1: ( ruleNavigatingCommaArgCS )
+            // InternalQVTcoreBase.g:26103:1: ( ( ruleNavigatingCommaArgCS ) )
+            // InternalQVTcoreBase.g:26104:1: ( ruleNavigatingCommaArgCS )
             {
-            // InternalQVTcoreBase.g:26103:1: ( ruleNavigatingCommaArgCS )
-            // InternalQVTcoreBase.g:26104:1: ruleNavigatingCommaArgCS
+            // InternalQVTcoreBase.g:26104:1: ( ruleNavigatingCommaArgCS )
+            // InternalQVTcoreBase.g:26105:1: ruleNavigatingCommaArgCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getRoundBracketedClauseCSAccess().getOwnedArgumentsNavigatingCommaArgCSParserRuleCall_2_2_1_0()); 
@@ -75644,17 +75644,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__RoundBracketedClauseCS__OwnedArgumentsAssignment_2_3_0"
-    // InternalQVTcoreBase.g:26113:1: rule__RoundBracketedClauseCS__OwnedArgumentsAssignment_2_3_0 : ( ruleNavigatingBarArgCS ) ;
+    // InternalQVTcoreBase.g:26114:1: rule__RoundBracketedClauseCS__OwnedArgumentsAssignment_2_3_0 : ( ruleNavigatingBarArgCS ) ;
     public final void rule__RoundBracketedClauseCS__OwnedArgumentsAssignment_2_3_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:26117:1: ( ( ruleNavigatingBarArgCS ) )
-            // InternalQVTcoreBase.g:26118:1: ( ruleNavigatingBarArgCS )
+            // InternalQVTcoreBase.g:26118:1: ( ( ruleNavigatingBarArgCS ) )
+            // InternalQVTcoreBase.g:26119:1: ( ruleNavigatingBarArgCS )
             {
-            // InternalQVTcoreBase.g:26118:1: ( ruleNavigatingBarArgCS )
-            // InternalQVTcoreBase.g:26119:1: ruleNavigatingBarArgCS
+            // InternalQVTcoreBase.g:26119:1: ( ruleNavigatingBarArgCS )
+            // InternalQVTcoreBase.g:26120:1: ruleNavigatingBarArgCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getRoundBracketedClauseCSAccess().getOwnedArgumentsNavigatingBarArgCSParserRuleCall_2_3_0_0()); 
@@ -75689,17 +75689,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__RoundBracketedClauseCS__OwnedArgumentsAssignment_2_3_1"
-    // InternalQVTcoreBase.g:26128:1: rule__RoundBracketedClauseCS__OwnedArgumentsAssignment_2_3_1 : ( ruleNavigatingCommaArgCS ) ;
+    // InternalQVTcoreBase.g:26129:1: rule__RoundBracketedClauseCS__OwnedArgumentsAssignment_2_3_1 : ( ruleNavigatingCommaArgCS ) ;
     public final void rule__RoundBracketedClauseCS__OwnedArgumentsAssignment_2_3_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:26132:1: ( ( ruleNavigatingCommaArgCS ) )
-            // InternalQVTcoreBase.g:26133:1: ( ruleNavigatingCommaArgCS )
+            // InternalQVTcoreBase.g:26133:1: ( ( ruleNavigatingCommaArgCS ) )
+            // InternalQVTcoreBase.g:26134:1: ( ruleNavigatingCommaArgCS )
             {
-            // InternalQVTcoreBase.g:26133:1: ( ruleNavigatingCommaArgCS )
-            // InternalQVTcoreBase.g:26134:1: ruleNavigatingCommaArgCS
+            // InternalQVTcoreBase.g:26134:1: ( ruleNavigatingCommaArgCS )
+            // InternalQVTcoreBase.g:26135:1: ruleNavigatingCommaArgCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getRoundBracketedClauseCSAccess().getOwnedArgumentsNavigatingCommaArgCSParserRuleCall_2_3_1_0()); 
@@ -75734,17 +75734,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__SquareBracketedClauseCS__OwnedTermsAssignment_1"
-    // InternalQVTcoreBase.g:26143:1: rule__SquareBracketedClauseCS__OwnedTermsAssignment_1 : ( ruleExpCS ) ;
+    // InternalQVTcoreBase.g:26144:1: rule__SquareBracketedClauseCS__OwnedTermsAssignment_1 : ( ruleExpCS ) ;
     public final void rule__SquareBracketedClauseCS__OwnedTermsAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:26147:1: ( ( ruleExpCS ) )
-            // InternalQVTcoreBase.g:26148:1: ( ruleExpCS )
+            // InternalQVTcoreBase.g:26148:1: ( ( ruleExpCS ) )
+            // InternalQVTcoreBase.g:26149:1: ( ruleExpCS )
             {
-            // InternalQVTcoreBase.g:26148:1: ( ruleExpCS )
-            // InternalQVTcoreBase.g:26149:1: ruleExpCS
+            // InternalQVTcoreBase.g:26149:1: ( ruleExpCS )
+            // InternalQVTcoreBase.g:26150:1: ruleExpCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getSquareBracketedClauseCSAccess().getOwnedTermsExpCSParserRuleCall_1_0()); 
@@ -75779,17 +75779,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__SquareBracketedClauseCS__OwnedTermsAssignment_2_1"
-    // InternalQVTcoreBase.g:26158:1: rule__SquareBracketedClauseCS__OwnedTermsAssignment_2_1 : ( ruleExpCS ) ;
+    // InternalQVTcoreBase.g:26159:1: rule__SquareBracketedClauseCS__OwnedTermsAssignment_2_1 : ( ruleExpCS ) ;
     public final void rule__SquareBracketedClauseCS__OwnedTermsAssignment_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:26162:1: ( ( ruleExpCS ) )
-            // InternalQVTcoreBase.g:26163:1: ( ruleExpCS )
+            // InternalQVTcoreBase.g:26163:1: ( ( ruleExpCS ) )
+            // InternalQVTcoreBase.g:26164:1: ( ruleExpCS )
             {
-            // InternalQVTcoreBase.g:26163:1: ( ruleExpCS )
-            // InternalQVTcoreBase.g:26164:1: ruleExpCS
+            // InternalQVTcoreBase.g:26164:1: ( ruleExpCS )
+            // InternalQVTcoreBase.g:26165:1: ruleExpCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getSquareBracketedClauseCSAccess().getOwnedTermsExpCSParserRuleCall_2_1_0()); 
@@ -75824,17 +75824,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__NavigatingArgCS__OwnedNameExpressionAssignment_0_0"
-    // InternalQVTcoreBase.g:26173:1: rule__NavigatingArgCS__OwnedNameExpressionAssignment_0_0 : ( ruleNavigatingArgExpCS ) ;
+    // InternalQVTcoreBase.g:26174:1: rule__NavigatingArgCS__OwnedNameExpressionAssignment_0_0 : ( ruleNavigatingArgExpCS ) ;
     public final void rule__NavigatingArgCS__OwnedNameExpressionAssignment_0_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:26177:1: ( ( ruleNavigatingArgExpCS ) )
-            // InternalQVTcoreBase.g:26178:1: ( ruleNavigatingArgExpCS )
+            // InternalQVTcoreBase.g:26178:1: ( ( ruleNavigatingArgExpCS ) )
+            // InternalQVTcoreBase.g:26179:1: ( ruleNavigatingArgExpCS )
             {
-            // InternalQVTcoreBase.g:26178:1: ( ruleNavigatingArgExpCS )
-            // InternalQVTcoreBase.g:26179:1: ruleNavigatingArgExpCS
+            // InternalQVTcoreBase.g:26179:1: ( ruleNavigatingArgExpCS )
+            // InternalQVTcoreBase.g:26180:1: ruleNavigatingArgExpCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getNavigatingArgCSAccess().getOwnedNameExpressionNavigatingArgExpCSParserRuleCall_0_0_0()); 
@@ -75869,17 +75869,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__NavigatingArgCS__OwnedTypeAssignment_0_1_0_1"
-    // InternalQVTcoreBase.g:26188:1: rule__NavigatingArgCS__OwnedTypeAssignment_0_1_0_1 : ( ruleTypeExpCS ) ;
+    // InternalQVTcoreBase.g:26189:1: rule__NavigatingArgCS__OwnedTypeAssignment_0_1_0_1 : ( ruleTypeExpCS ) ;
     public final void rule__NavigatingArgCS__OwnedTypeAssignment_0_1_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:26192:1: ( ( ruleTypeExpCS ) )
-            // InternalQVTcoreBase.g:26193:1: ( ruleTypeExpCS )
+            // InternalQVTcoreBase.g:26193:1: ( ( ruleTypeExpCS ) )
+            // InternalQVTcoreBase.g:26194:1: ( ruleTypeExpCS )
             {
-            // InternalQVTcoreBase.g:26193:1: ( ruleTypeExpCS )
-            // InternalQVTcoreBase.g:26194:1: ruleTypeExpCS
+            // InternalQVTcoreBase.g:26194:1: ( ruleTypeExpCS )
+            // InternalQVTcoreBase.g:26195:1: ruleTypeExpCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getNavigatingArgCSAccess().getOwnedTypeTypeExpCSParserRuleCall_0_1_0_1_0()); 
@@ -75914,17 +75914,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__NavigatingArgCS__OwnedInitExpressionAssignment_0_1_0_2_1"
-    // InternalQVTcoreBase.g:26203:1: rule__NavigatingArgCS__OwnedInitExpressionAssignment_0_1_0_2_1 : ( ruleExpCS ) ;
+    // InternalQVTcoreBase.g:26204:1: rule__NavigatingArgCS__OwnedInitExpressionAssignment_0_1_0_2_1 : ( ruleExpCS ) ;
     public final void rule__NavigatingArgCS__OwnedInitExpressionAssignment_0_1_0_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:26207:1: ( ( ruleExpCS ) )
-            // InternalQVTcoreBase.g:26208:1: ( ruleExpCS )
+            // InternalQVTcoreBase.g:26208:1: ( ( ruleExpCS ) )
+            // InternalQVTcoreBase.g:26209:1: ( ruleExpCS )
             {
-            // InternalQVTcoreBase.g:26208:1: ( ruleExpCS )
-            // InternalQVTcoreBase.g:26209:1: ruleExpCS
+            // InternalQVTcoreBase.g:26209:1: ( ruleExpCS )
+            // InternalQVTcoreBase.g:26210:1: ruleExpCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getNavigatingArgCSAccess().getOwnedInitExpressionExpCSParserRuleCall_0_1_0_2_1_0()); 
@@ -75959,17 +75959,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__NavigatingArgCS__OwnedInitExpressionAssignment_0_1_1_1"
-    // InternalQVTcoreBase.g:26218:1: rule__NavigatingArgCS__OwnedInitExpressionAssignment_0_1_1_1 : ( ruleExpCS ) ;
+    // InternalQVTcoreBase.g:26219:1: rule__NavigatingArgCS__OwnedInitExpressionAssignment_0_1_1_1 : ( ruleExpCS ) ;
     public final void rule__NavigatingArgCS__OwnedInitExpressionAssignment_0_1_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:26222:1: ( ( ruleExpCS ) )
-            // InternalQVTcoreBase.g:26223:1: ( ruleExpCS )
+            // InternalQVTcoreBase.g:26223:1: ( ( ruleExpCS ) )
+            // InternalQVTcoreBase.g:26224:1: ( ruleExpCS )
             {
-            // InternalQVTcoreBase.g:26223:1: ( ruleExpCS )
-            // InternalQVTcoreBase.g:26224:1: ruleExpCS
+            // InternalQVTcoreBase.g:26224:1: ( ruleExpCS )
+            // InternalQVTcoreBase.g:26225:1: ruleExpCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getNavigatingArgCSAccess().getOwnedInitExpressionExpCSParserRuleCall_0_1_1_1_0()); 
@@ -76004,17 +76004,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__NavigatingArgCS__OwnedTypeAssignment_1_1"
-    // InternalQVTcoreBase.g:26233:1: rule__NavigatingArgCS__OwnedTypeAssignment_1_1 : ( ruleTypeExpCS ) ;
+    // InternalQVTcoreBase.g:26234:1: rule__NavigatingArgCS__OwnedTypeAssignment_1_1 : ( ruleTypeExpCS ) ;
     public final void rule__NavigatingArgCS__OwnedTypeAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:26237:1: ( ( ruleTypeExpCS ) )
-            // InternalQVTcoreBase.g:26238:1: ( ruleTypeExpCS )
+            // InternalQVTcoreBase.g:26238:1: ( ( ruleTypeExpCS ) )
+            // InternalQVTcoreBase.g:26239:1: ( ruleTypeExpCS )
             {
-            // InternalQVTcoreBase.g:26238:1: ( ruleTypeExpCS )
-            // InternalQVTcoreBase.g:26239:1: ruleTypeExpCS
+            // InternalQVTcoreBase.g:26239:1: ( ruleTypeExpCS )
+            // InternalQVTcoreBase.g:26240:1: ruleTypeExpCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getNavigatingArgCSAccess().getOwnedTypeTypeExpCSParserRuleCall_1_1_0()); 
@@ -76049,23 +76049,23 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__NavigatingBarArgCS__PrefixAssignment_0"
-    // InternalQVTcoreBase.g:26248:1: rule__NavigatingBarArgCS__PrefixAssignment_0 : ( ( '|' ) ) ;
+    // InternalQVTcoreBase.g:26249:1: rule__NavigatingBarArgCS__PrefixAssignment_0 : ( ( '|' ) ) ;
     public final void rule__NavigatingBarArgCS__PrefixAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:26252:1: ( ( ( '|' ) ) )
-            // InternalQVTcoreBase.g:26253:1: ( ( '|' ) )
+            // InternalQVTcoreBase.g:26253:1: ( ( ( '|' ) ) )
+            // InternalQVTcoreBase.g:26254:1: ( ( '|' ) )
             {
-            // InternalQVTcoreBase.g:26253:1: ( ( '|' ) )
-            // InternalQVTcoreBase.g:26254:1: ( '|' )
+            // InternalQVTcoreBase.g:26254:1: ( ( '|' ) )
+            // InternalQVTcoreBase.g:26255:1: ( '|' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getNavigatingBarArgCSAccess().getPrefixVerticalLineKeyword_0_0()); 
             }
-            // InternalQVTcoreBase.g:26255:1: ( '|' )
-            // InternalQVTcoreBase.g:26256:1: '|'
+            // InternalQVTcoreBase.g:26256:1: ( '|' )
+            // InternalQVTcoreBase.g:26257:1: '|'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getNavigatingBarArgCSAccess().getPrefixVerticalLineKeyword_0_0()); 
@@ -76102,17 +76102,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__NavigatingBarArgCS__OwnedNameExpressionAssignment_1"
-    // InternalQVTcoreBase.g:26271:1: rule__NavigatingBarArgCS__OwnedNameExpressionAssignment_1 : ( ruleNavigatingArgExpCS ) ;
+    // InternalQVTcoreBase.g:26272:1: rule__NavigatingBarArgCS__OwnedNameExpressionAssignment_1 : ( ruleNavigatingArgExpCS ) ;
     public final void rule__NavigatingBarArgCS__OwnedNameExpressionAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:26275:1: ( ( ruleNavigatingArgExpCS ) )
-            // InternalQVTcoreBase.g:26276:1: ( ruleNavigatingArgExpCS )
+            // InternalQVTcoreBase.g:26276:1: ( ( ruleNavigatingArgExpCS ) )
+            // InternalQVTcoreBase.g:26277:1: ( ruleNavigatingArgExpCS )
             {
-            // InternalQVTcoreBase.g:26276:1: ( ruleNavigatingArgExpCS )
-            // InternalQVTcoreBase.g:26277:1: ruleNavigatingArgExpCS
+            // InternalQVTcoreBase.g:26277:1: ( ruleNavigatingArgExpCS )
+            // InternalQVTcoreBase.g:26278:1: ruleNavigatingArgExpCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getNavigatingBarArgCSAccess().getOwnedNameExpressionNavigatingArgExpCSParserRuleCall_1_0()); 
@@ -76147,17 +76147,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__NavigatingBarArgCS__OwnedTypeAssignment_2_1"
-    // InternalQVTcoreBase.g:26286:1: rule__NavigatingBarArgCS__OwnedTypeAssignment_2_1 : ( ruleTypeExpCS ) ;
+    // InternalQVTcoreBase.g:26287:1: rule__NavigatingBarArgCS__OwnedTypeAssignment_2_1 : ( ruleTypeExpCS ) ;
     public final void rule__NavigatingBarArgCS__OwnedTypeAssignment_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:26290:1: ( ( ruleTypeExpCS ) )
-            // InternalQVTcoreBase.g:26291:1: ( ruleTypeExpCS )
+            // InternalQVTcoreBase.g:26291:1: ( ( ruleTypeExpCS ) )
+            // InternalQVTcoreBase.g:26292:1: ( ruleTypeExpCS )
             {
-            // InternalQVTcoreBase.g:26291:1: ( ruleTypeExpCS )
-            // InternalQVTcoreBase.g:26292:1: ruleTypeExpCS
+            // InternalQVTcoreBase.g:26292:1: ( ruleTypeExpCS )
+            // InternalQVTcoreBase.g:26293:1: ruleTypeExpCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getNavigatingBarArgCSAccess().getOwnedTypeTypeExpCSParserRuleCall_2_1_0()); 
@@ -76192,17 +76192,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__NavigatingBarArgCS__OwnedInitExpressionAssignment_2_2_1"
-    // InternalQVTcoreBase.g:26301:1: rule__NavigatingBarArgCS__OwnedInitExpressionAssignment_2_2_1 : ( ruleExpCS ) ;
+    // InternalQVTcoreBase.g:26302:1: rule__NavigatingBarArgCS__OwnedInitExpressionAssignment_2_2_1 : ( ruleExpCS ) ;
     public final void rule__NavigatingBarArgCS__OwnedInitExpressionAssignment_2_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:26305:1: ( ( ruleExpCS ) )
-            // InternalQVTcoreBase.g:26306:1: ( ruleExpCS )
+            // InternalQVTcoreBase.g:26306:1: ( ( ruleExpCS ) )
+            // InternalQVTcoreBase.g:26307:1: ( ruleExpCS )
             {
-            // InternalQVTcoreBase.g:26306:1: ( ruleExpCS )
-            // InternalQVTcoreBase.g:26307:1: ruleExpCS
+            // InternalQVTcoreBase.g:26307:1: ( ruleExpCS )
+            // InternalQVTcoreBase.g:26308:1: ruleExpCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getNavigatingBarArgCSAccess().getOwnedInitExpressionExpCSParserRuleCall_2_2_1_0()); 
@@ -76237,23 +76237,23 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__NavigatingCommaArgCS__PrefixAssignment_0"
-    // InternalQVTcoreBase.g:26316:1: rule__NavigatingCommaArgCS__PrefixAssignment_0 : ( ( ',' ) ) ;
+    // InternalQVTcoreBase.g:26317:1: rule__NavigatingCommaArgCS__PrefixAssignment_0 : ( ( ',' ) ) ;
     public final void rule__NavigatingCommaArgCS__PrefixAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:26320:1: ( ( ( ',' ) ) )
-            // InternalQVTcoreBase.g:26321:1: ( ( ',' ) )
+            // InternalQVTcoreBase.g:26321:1: ( ( ( ',' ) ) )
+            // InternalQVTcoreBase.g:26322:1: ( ( ',' ) )
             {
-            // InternalQVTcoreBase.g:26321:1: ( ( ',' ) )
-            // InternalQVTcoreBase.g:26322:1: ( ',' )
+            // InternalQVTcoreBase.g:26322:1: ( ( ',' ) )
+            // InternalQVTcoreBase.g:26323:1: ( ',' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getNavigatingCommaArgCSAccess().getPrefixCommaKeyword_0_0()); 
             }
-            // InternalQVTcoreBase.g:26323:1: ( ',' )
-            // InternalQVTcoreBase.g:26324:1: ','
+            // InternalQVTcoreBase.g:26324:1: ( ',' )
+            // InternalQVTcoreBase.g:26325:1: ','
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getNavigatingCommaArgCSAccess().getPrefixCommaKeyword_0_0()); 
@@ -76290,17 +76290,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__NavigatingCommaArgCS__OwnedNameExpressionAssignment_1"
-    // InternalQVTcoreBase.g:26339:1: rule__NavigatingCommaArgCS__OwnedNameExpressionAssignment_1 : ( ruleNavigatingArgExpCS ) ;
+    // InternalQVTcoreBase.g:26340:1: rule__NavigatingCommaArgCS__OwnedNameExpressionAssignment_1 : ( ruleNavigatingArgExpCS ) ;
     public final void rule__NavigatingCommaArgCS__OwnedNameExpressionAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:26343:1: ( ( ruleNavigatingArgExpCS ) )
-            // InternalQVTcoreBase.g:26344:1: ( ruleNavigatingArgExpCS )
+            // InternalQVTcoreBase.g:26344:1: ( ( ruleNavigatingArgExpCS ) )
+            // InternalQVTcoreBase.g:26345:1: ( ruleNavigatingArgExpCS )
             {
-            // InternalQVTcoreBase.g:26344:1: ( ruleNavigatingArgExpCS )
-            // InternalQVTcoreBase.g:26345:1: ruleNavigatingArgExpCS
+            // InternalQVTcoreBase.g:26345:1: ( ruleNavigatingArgExpCS )
+            // InternalQVTcoreBase.g:26346:1: ruleNavigatingArgExpCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getNavigatingCommaArgCSAccess().getOwnedNameExpressionNavigatingArgExpCSParserRuleCall_1_0()); 
@@ -76335,17 +76335,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__NavigatingCommaArgCS__OwnedTypeAssignment_2_0_1"
-    // InternalQVTcoreBase.g:26354:1: rule__NavigatingCommaArgCS__OwnedTypeAssignment_2_0_1 : ( ruleTypeExpCS ) ;
+    // InternalQVTcoreBase.g:26355:1: rule__NavigatingCommaArgCS__OwnedTypeAssignment_2_0_1 : ( ruleTypeExpCS ) ;
     public final void rule__NavigatingCommaArgCS__OwnedTypeAssignment_2_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:26358:1: ( ( ruleTypeExpCS ) )
-            // InternalQVTcoreBase.g:26359:1: ( ruleTypeExpCS )
+            // InternalQVTcoreBase.g:26359:1: ( ( ruleTypeExpCS ) )
+            // InternalQVTcoreBase.g:26360:1: ( ruleTypeExpCS )
             {
-            // InternalQVTcoreBase.g:26359:1: ( ruleTypeExpCS )
-            // InternalQVTcoreBase.g:26360:1: ruleTypeExpCS
+            // InternalQVTcoreBase.g:26360:1: ( ruleTypeExpCS )
+            // InternalQVTcoreBase.g:26361:1: ruleTypeExpCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getNavigatingCommaArgCSAccess().getOwnedTypeTypeExpCSParserRuleCall_2_0_1_0()); 
@@ -76380,17 +76380,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__NavigatingCommaArgCS__OwnedInitExpressionAssignment_2_0_2_1"
-    // InternalQVTcoreBase.g:26369:1: rule__NavigatingCommaArgCS__OwnedInitExpressionAssignment_2_0_2_1 : ( ruleExpCS ) ;
+    // InternalQVTcoreBase.g:26370:1: rule__NavigatingCommaArgCS__OwnedInitExpressionAssignment_2_0_2_1 : ( ruleExpCS ) ;
     public final void rule__NavigatingCommaArgCS__OwnedInitExpressionAssignment_2_0_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:26373:1: ( ( ruleExpCS ) )
-            // InternalQVTcoreBase.g:26374:1: ( ruleExpCS )
+            // InternalQVTcoreBase.g:26374:1: ( ( ruleExpCS ) )
+            // InternalQVTcoreBase.g:26375:1: ( ruleExpCS )
             {
-            // InternalQVTcoreBase.g:26374:1: ( ruleExpCS )
-            // InternalQVTcoreBase.g:26375:1: ruleExpCS
+            // InternalQVTcoreBase.g:26375:1: ( ruleExpCS )
+            // InternalQVTcoreBase.g:26376:1: ruleExpCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getNavigatingCommaArgCSAccess().getOwnedInitExpressionExpCSParserRuleCall_2_0_2_1_0()); 
@@ -76425,17 +76425,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__NavigatingCommaArgCS__OwnedInitExpressionAssignment_2_1_1"
-    // InternalQVTcoreBase.g:26384:1: rule__NavigatingCommaArgCS__OwnedInitExpressionAssignment_2_1_1 : ( ruleExpCS ) ;
+    // InternalQVTcoreBase.g:26385:1: rule__NavigatingCommaArgCS__OwnedInitExpressionAssignment_2_1_1 : ( ruleExpCS ) ;
     public final void rule__NavigatingCommaArgCS__OwnedInitExpressionAssignment_2_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:26388:1: ( ( ruleExpCS ) )
-            // InternalQVTcoreBase.g:26389:1: ( ruleExpCS )
+            // InternalQVTcoreBase.g:26389:1: ( ( ruleExpCS ) )
+            // InternalQVTcoreBase.g:26390:1: ( ruleExpCS )
             {
-            // InternalQVTcoreBase.g:26389:1: ( ruleExpCS )
-            // InternalQVTcoreBase.g:26390:1: ruleExpCS
+            // InternalQVTcoreBase.g:26390:1: ( ruleExpCS )
+            // InternalQVTcoreBase.g:26391:1: ruleExpCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getNavigatingCommaArgCSAccess().getOwnedInitExpressionExpCSParserRuleCall_2_1_1_0()); 
@@ -76470,23 +76470,23 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__NavigatingSemiArgCS__PrefixAssignment_0"
-    // InternalQVTcoreBase.g:26399:1: rule__NavigatingSemiArgCS__PrefixAssignment_0 : ( ( ';' ) ) ;
+    // InternalQVTcoreBase.g:26400:1: rule__NavigatingSemiArgCS__PrefixAssignment_0 : ( ( ';' ) ) ;
     public final void rule__NavigatingSemiArgCS__PrefixAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:26403:1: ( ( ( ';' ) ) )
-            // InternalQVTcoreBase.g:26404:1: ( ( ';' ) )
+            // InternalQVTcoreBase.g:26404:1: ( ( ( ';' ) ) )
+            // InternalQVTcoreBase.g:26405:1: ( ( ';' ) )
             {
-            // InternalQVTcoreBase.g:26404:1: ( ( ';' ) )
-            // InternalQVTcoreBase.g:26405:1: ( ';' )
+            // InternalQVTcoreBase.g:26405:1: ( ( ';' ) )
+            // InternalQVTcoreBase.g:26406:1: ( ';' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getNavigatingSemiArgCSAccess().getPrefixSemicolonKeyword_0_0()); 
             }
-            // InternalQVTcoreBase.g:26406:1: ( ';' )
-            // InternalQVTcoreBase.g:26407:1: ';'
+            // InternalQVTcoreBase.g:26407:1: ( ';' )
+            // InternalQVTcoreBase.g:26408:1: ';'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getNavigatingSemiArgCSAccess().getPrefixSemicolonKeyword_0_0()); 
@@ -76523,17 +76523,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__NavigatingSemiArgCS__OwnedNameExpressionAssignment_1"
-    // InternalQVTcoreBase.g:26422:1: rule__NavigatingSemiArgCS__OwnedNameExpressionAssignment_1 : ( ruleNavigatingArgExpCS ) ;
+    // InternalQVTcoreBase.g:26423:1: rule__NavigatingSemiArgCS__OwnedNameExpressionAssignment_1 : ( ruleNavigatingArgExpCS ) ;
     public final void rule__NavigatingSemiArgCS__OwnedNameExpressionAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:26426:1: ( ( ruleNavigatingArgExpCS ) )
-            // InternalQVTcoreBase.g:26427:1: ( ruleNavigatingArgExpCS )
+            // InternalQVTcoreBase.g:26427:1: ( ( ruleNavigatingArgExpCS ) )
+            // InternalQVTcoreBase.g:26428:1: ( ruleNavigatingArgExpCS )
             {
-            // InternalQVTcoreBase.g:26427:1: ( ruleNavigatingArgExpCS )
-            // InternalQVTcoreBase.g:26428:1: ruleNavigatingArgExpCS
+            // InternalQVTcoreBase.g:26428:1: ( ruleNavigatingArgExpCS )
+            // InternalQVTcoreBase.g:26429:1: ruleNavigatingArgExpCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getNavigatingSemiArgCSAccess().getOwnedNameExpressionNavigatingArgExpCSParserRuleCall_1_0()); 
@@ -76568,17 +76568,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__NavigatingSemiArgCS__OwnedTypeAssignment_2_1"
-    // InternalQVTcoreBase.g:26437:1: rule__NavigatingSemiArgCS__OwnedTypeAssignment_2_1 : ( ruleTypeExpCS ) ;
+    // InternalQVTcoreBase.g:26438:1: rule__NavigatingSemiArgCS__OwnedTypeAssignment_2_1 : ( ruleTypeExpCS ) ;
     public final void rule__NavigatingSemiArgCS__OwnedTypeAssignment_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:26441:1: ( ( ruleTypeExpCS ) )
-            // InternalQVTcoreBase.g:26442:1: ( ruleTypeExpCS )
+            // InternalQVTcoreBase.g:26442:1: ( ( ruleTypeExpCS ) )
+            // InternalQVTcoreBase.g:26443:1: ( ruleTypeExpCS )
             {
-            // InternalQVTcoreBase.g:26442:1: ( ruleTypeExpCS )
-            // InternalQVTcoreBase.g:26443:1: ruleTypeExpCS
+            // InternalQVTcoreBase.g:26443:1: ( ruleTypeExpCS )
+            // InternalQVTcoreBase.g:26444:1: ruleTypeExpCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getNavigatingSemiArgCSAccess().getOwnedTypeTypeExpCSParserRuleCall_2_1_0()); 
@@ -76613,17 +76613,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__NavigatingSemiArgCS__OwnedInitExpressionAssignment_2_2_1"
-    // InternalQVTcoreBase.g:26452:1: rule__NavigatingSemiArgCS__OwnedInitExpressionAssignment_2_2_1 : ( ruleExpCS ) ;
+    // InternalQVTcoreBase.g:26453:1: rule__NavigatingSemiArgCS__OwnedInitExpressionAssignment_2_2_1 : ( ruleExpCS ) ;
     public final void rule__NavigatingSemiArgCS__OwnedInitExpressionAssignment_2_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:26456:1: ( ( ruleExpCS ) )
-            // InternalQVTcoreBase.g:26457:1: ( ruleExpCS )
+            // InternalQVTcoreBase.g:26457:1: ( ( ruleExpCS ) )
+            // InternalQVTcoreBase.g:26458:1: ( ruleExpCS )
             {
-            // InternalQVTcoreBase.g:26457:1: ( ruleExpCS )
-            // InternalQVTcoreBase.g:26458:1: ruleExpCS
+            // InternalQVTcoreBase.g:26458:1: ( ruleExpCS )
+            // InternalQVTcoreBase.g:26459:1: ruleExpCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getNavigatingSemiArgCSAccess().getOwnedInitExpressionExpCSParserRuleCall_2_2_1_0()); 
@@ -76658,23 +76658,23 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__IfExpCS__OwnedConditionAssignment_1"
-    // InternalQVTcoreBase.g:26467:1: rule__IfExpCS__OwnedConditionAssignment_1 : ( ( rule__IfExpCS__OwnedConditionAlternatives_1_0 ) ) ;
+    // InternalQVTcoreBase.g:26468:1: rule__IfExpCS__OwnedConditionAssignment_1 : ( ( rule__IfExpCS__OwnedConditionAlternatives_1_0 ) ) ;
     public final void rule__IfExpCS__OwnedConditionAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:26471:1: ( ( ( rule__IfExpCS__OwnedConditionAlternatives_1_0 ) ) )
-            // InternalQVTcoreBase.g:26472:1: ( ( rule__IfExpCS__OwnedConditionAlternatives_1_0 ) )
+            // InternalQVTcoreBase.g:26472:1: ( ( ( rule__IfExpCS__OwnedConditionAlternatives_1_0 ) ) )
+            // InternalQVTcoreBase.g:26473:1: ( ( rule__IfExpCS__OwnedConditionAlternatives_1_0 ) )
             {
-            // InternalQVTcoreBase.g:26472:1: ( ( rule__IfExpCS__OwnedConditionAlternatives_1_0 ) )
-            // InternalQVTcoreBase.g:26473:1: ( rule__IfExpCS__OwnedConditionAlternatives_1_0 )
+            // InternalQVTcoreBase.g:26473:1: ( ( rule__IfExpCS__OwnedConditionAlternatives_1_0 ) )
+            // InternalQVTcoreBase.g:26474:1: ( rule__IfExpCS__OwnedConditionAlternatives_1_0 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getIfExpCSAccess().getOwnedConditionAlternatives_1_0()); 
             }
-            // InternalQVTcoreBase.g:26474:1: ( rule__IfExpCS__OwnedConditionAlternatives_1_0 )
-            // InternalQVTcoreBase.g:26474:2: rule__IfExpCS__OwnedConditionAlternatives_1_0
+            // InternalQVTcoreBase.g:26475:1: ( rule__IfExpCS__OwnedConditionAlternatives_1_0 )
+            // InternalQVTcoreBase.g:26475:2: rule__IfExpCS__OwnedConditionAlternatives_1_0
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__IfExpCS__OwnedConditionAlternatives_1_0();
@@ -76709,17 +76709,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__IfExpCS__OwnedThenExpressionAssignment_3"
-    // InternalQVTcoreBase.g:26483:1: rule__IfExpCS__OwnedThenExpressionAssignment_3 : ( ruleExpCS ) ;
+    // InternalQVTcoreBase.g:26484:1: rule__IfExpCS__OwnedThenExpressionAssignment_3 : ( ruleExpCS ) ;
     public final void rule__IfExpCS__OwnedThenExpressionAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:26487:1: ( ( ruleExpCS ) )
-            // InternalQVTcoreBase.g:26488:1: ( ruleExpCS )
+            // InternalQVTcoreBase.g:26488:1: ( ( ruleExpCS ) )
+            // InternalQVTcoreBase.g:26489:1: ( ruleExpCS )
             {
-            // InternalQVTcoreBase.g:26488:1: ( ruleExpCS )
-            // InternalQVTcoreBase.g:26489:1: ruleExpCS
+            // InternalQVTcoreBase.g:26489:1: ( ruleExpCS )
+            // InternalQVTcoreBase.g:26490:1: ruleExpCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getIfExpCSAccess().getOwnedThenExpressionExpCSParserRuleCall_3_0()); 
@@ -76754,17 +76754,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__IfExpCS__OwnedIfThenExpressionsAssignment_4"
-    // InternalQVTcoreBase.g:26498:1: rule__IfExpCS__OwnedIfThenExpressionsAssignment_4 : ( ruleElseIfThenExpCS ) ;
+    // InternalQVTcoreBase.g:26499:1: rule__IfExpCS__OwnedIfThenExpressionsAssignment_4 : ( ruleElseIfThenExpCS ) ;
     public final void rule__IfExpCS__OwnedIfThenExpressionsAssignment_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:26502:1: ( ( ruleElseIfThenExpCS ) )
-            // InternalQVTcoreBase.g:26503:1: ( ruleElseIfThenExpCS )
+            // InternalQVTcoreBase.g:26503:1: ( ( ruleElseIfThenExpCS ) )
+            // InternalQVTcoreBase.g:26504:1: ( ruleElseIfThenExpCS )
             {
-            // InternalQVTcoreBase.g:26503:1: ( ruleElseIfThenExpCS )
-            // InternalQVTcoreBase.g:26504:1: ruleElseIfThenExpCS
+            // InternalQVTcoreBase.g:26504:1: ( ruleElseIfThenExpCS )
+            // InternalQVTcoreBase.g:26505:1: ruleElseIfThenExpCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getIfExpCSAccess().getOwnedIfThenExpressionsElseIfThenExpCSParserRuleCall_4_0()); 
@@ -76799,17 +76799,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__IfExpCS__OwnedElseExpressionAssignment_6"
-    // InternalQVTcoreBase.g:26513:1: rule__IfExpCS__OwnedElseExpressionAssignment_6 : ( ruleExpCS ) ;
+    // InternalQVTcoreBase.g:26514:1: rule__IfExpCS__OwnedElseExpressionAssignment_6 : ( ruleExpCS ) ;
     public final void rule__IfExpCS__OwnedElseExpressionAssignment_6() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:26517:1: ( ( ruleExpCS ) )
-            // InternalQVTcoreBase.g:26518:1: ( ruleExpCS )
+            // InternalQVTcoreBase.g:26518:1: ( ( ruleExpCS ) )
+            // InternalQVTcoreBase.g:26519:1: ( ruleExpCS )
             {
-            // InternalQVTcoreBase.g:26518:1: ( ruleExpCS )
-            // InternalQVTcoreBase.g:26519:1: ruleExpCS
+            // InternalQVTcoreBase.g:26519:1: ( ruleExpCS )
+            // InternalQVTcoreBase.g:26520:1: ruleExpCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getIfExpCSAccess().getOwnedElseExpressionExpCSParserRuleCall_6_0()); 
@@ -76844,17 +76844,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__ElseIfThenExpCS__OwnedConditionAssignment_1"
-    // InternalQVTcoreBase.g:26528:1: rule__ElseIfThenExpCS__OwnedConditionAssignment_1 : ( ruleExpCS ) ;
+    // InternalQVTcoreBase.g:26529:1: rule__ElseIfThenExpCS__OwnedConditionAssignment_1 : ( ruleExpCS ) ;
     public final void rule__ElseIfThenExpCS__OwnedConditionAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:26532:1: ( ( ruleExpCS ) )
-            // InternalQVTcoreBase.g:26533:1: ( ruleExpCS )
+            // InternalQVTcoreBase.g:26533:1: ( ( ruleExpCS ) )
+            // InternalQVTcoreBase.g:26534:1: ( ruleExpCS )
             {
-            // InternalQVTcoreBase.g:26533:1: ( ruleExpCS )
-            // InternalQVTcoreBase.g:26534:1: ruleExpCS
+            // InternalQVTcoreBase.g:26534:1: ( ruleExpCS )
+            // InternalQVTcoreBase.g:26535:1: ruleExpCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getElseIfThenExpCSAccess().getOwnedConditionExpCSParserRuleCall_1_0()); 
@@ -76889,17 +76889,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__ElseIfThenExpCS__OwnedThenExpressionAssignment_3"
-    // InternalQVTcoreBase.g:26543:1: rule__ElseIfThenExpCS__OwnedThenExpressionAssignment_3 : ( ruleExpCS ) ;
+    // InternalQVTcoreBase.g:26544:1: rule__ElseIfThenExpCS__OwnedThenExpressionAssignment_3 : ( ruleExpCS ) ;
     public final void rule__ElseIfThenExpCS__OwnedThenExpressionAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:26547:1: ( ( ruleExpCS ) )
-            // InternalQVTcoreBase.g:26548:1: ( ruleExpCS )
+            // InternalQVTcoreBase.g:26548:1: ( ( ruleExpCS ) )
+            // InternalQVTcoreBase.g:26549:1: ( ruleExpCS )
             {
-            // InternalQVTcoreBase.g:26548:1: ( ruleExpCS )
-            // InternalQVTcoreBase.g:26549:1: ruleExpCS
+            // InternalQVTcoreBase.g:26549:1: ( ruleExpCS )
+            // InternalQVTcoreBase.g:26550:1: ruleExpCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getElseIfThenExpCSAccess().getOwnedThenExpressionExpCSParserRuleCall_3_0()); 
@@ -76934,17 +76934,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__LetExpCS__OwnedVariablesAssignment_1"
-    // InternalQVTcoreBase.g:26558:1: rule__LetExpCS__OwnedVariablesAssignment_1 : ( ruleLetVariableCS ) ;
+    // InternalQVTcoreBase.g:26559:1: rule__LetExpCS__OwnedVariablesAssignment_1 : ( ruleLetVariableCS ) ;
     public final void rule__LetExpCS__OwnedVariablesAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:26562:1: ( ( ruleLetVariableCS ) )
-            // InternalQVTcoreBase.g:26563:1: ( ruleLetVariableCS )
+            // InternalQVTcoreBase.g:26563:1: ( ( ruleLetVariableCS ) )
+            // InternalQVTcoreBase.g:26564:1: ( ruleLetVariableCS )
             {
-            // InternalQVTcoreBase.g:26563:1: ( ruleLetVariableCS )
-            // InternalQVTcoreBase.g:26564:1: ruleLetVariableCS
+            // InternalQVTcoreBase.g:26564:1: ( ruleLetVariableCS )
+            // InternalQVTcoreBase.g:26565:1: ruleLetVariableCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getLetExpCSAccess().getOwnedVariablesLetVariableCSParserRuleCall_1_0()); 
@@ -76979,17 +76979,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__LetExpCS__OwnedVariablesAssignment_2_1"
-    // InternalQVTcoreBase.g:26573:1: rule__LetExpCS__OwnedVariablesAssignment_2_1 : ( ruleLetVariableCS ) ;
+    // InternalQVTcoreBase.g:26574:1: rule__LetExpCS__OwnedVariablesAssignment_2_1 : ( ruleLetVariableCS ) ;
     public final void rule__LetExpCS__OwnedVariablesAssignment_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:26577:1: ( ( ruleLetVariableCS ) )
-            // InternalQVTcoreBase.g:26578:1: ( ruleLetVariableCS )
+            // InternalQVTcoreBase.g:26578:1: ( ( ruleLetVariableCS ) )
+            // InternalQVTcoreBase.g:26579:1: ( ruleLetVariableCS )
             {
-            // InternalQVTcoreBase.g:26578:1: ( ruleLetVariableCS )
-            // InternalQVTcoreBase.g:26579:1: ruleLetVariableCS
+            // InternalQVTcoreBase.g:26579:1: ( ruleLetVariableCS )
+            // InternalQVTcoreBase.g:26580:1: ruleLetVariableCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getLetExpCSAccess().getOwnedVariablesLetVariableCSParserRuleCall_2_1_0()); 
@@ -77024,17 +77024,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__LetExpCS__OwnedInExpressionAssignment_4"
-    // InternalQVTcoreBase.g:26588:1: rule__LetExpCS__OwnedInExpressionAssignment_4 : ( ruleExpCS ) ;
+    // InternalQVTcoreBase.g:26589:1: rule__LetExpCS__OwnedInExpressionAssignment_4 : ( ruleExpCS ) ;
     public final void rule__LetExpCS__OwnedInExpressionAssignment_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:26592:1: ( ( ruleExpCS ) )
-            // InternalQVTcoreBase.g:26593:1: ( ruleExpCS )
+            // InternalQVTcoreBase.g:26593:1: ( ( ruleExpCS ) )
+            // InternalQVTcoreBase.g:26594:1: ( ruleExpCS )
             {
-            // InternalQVTcoreBase.g:26593:1: ( ruleExpCS )
-            // InternalQVTcoreBase.g:26594:1: ruleExpCS
+            // InternalQVTcoreBase.g:26594:1: ( ruleExpCS )
+            // InternalQVTcoreBase.g:26595:1: ruleExpCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getLetExpCSAccess().getOwnedInExpressionExpCSParserRuleCall_4_0()); 
@@ -77069,17 +77069,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__LetVariableCS__NameAssignment_0"
-    // InternalQVTcoreBase.g:26603:1: rule__LetVariableCS__NameAssignment_0 : ( ruleUnrestrictedName ) ;
+    // InternalQVTcoreBase.g:26604:1: rule__LetVariableCS__NameAssignment_0 : ( ruleUnrestrictedName ) ;
     public final void rule__LetVariableCS__NameAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:26607:1: ( ( ruleUnrestrictedName ) )
-            // InternalQVTcoreBase.g:26608:1: ( ruleUnrestrictedName )
+            // InternalQVTcoreBase.g:26608:1: ( ( ruleUnrestrictedName ) )
+            // InternalQVTcoreBase.g:26609:1: ( ruleUnrestrictedName )
             {
-            // InternalQVTcoreBase.g:26608:1: ( ruleUnrestrictedName )
-            // InternalQVTcoreBase.g:26609:1: ruleUnrestrictedName
+            // InternalQVTcoreBase.g:26609:1: ( ruleUnrestrictedName )
+            // InternalQVTcoreBase.g:26610:1: ruleUnrestrictedName
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getLetVariableCSAccess().getNameUnrestrictedNameParserRuleCall_0_0()); 
@@ -77114,17 +77114,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__LetVariableCS__OwnedRoundBracketedClauseAssignment_1"
-    // InternalQVTcoreBase.g:26618:1: rule__LetVariableCS__OwnedRoundBracketedClauseAssignment_1 : ( ruleRoundBracketedClauseCS ) ;
+    // InternalQVTcoreBase.g:26619:1: rule__LetVariableCS__OwnedRoundBracketedClauseAssignment_1 : ( ruleRoundBracketedClauseCS ) ;
     public final void rule__LetVariableCS__OwnedRoundBracketedClauseAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:26622:1: ( ( ruleRoundBracketedClauseCS ) )
-            // InternalQVTcoreBase.g:26623:1: ( ruleRoundBracketedClauseCS )
+            // InternalQVTcoreBase.g:26623:1: ( ( ruleRoundBracketedClauseCS ) )
+            // InternalQVTcoreBase.g:26624:1: ( ruleRoundBracketedClauseCS )
             {
-            // InternalQVTcoreBase.g:26623:1: ( ruleRoundBracketedClauseCS )
-            // InternalQVTcoreBase.g:26624:1: ruleRoundBracketedClauseCS
+            // InternalQVTcoreBase.g:26624:1: ( ruleRoundBracketedClauseCS )
+            // InternalQVTcoreBase.g:26625:1: ruleRoundBracketedClauseCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getLetVariableCSAccess().getOwnedRoundBracketedClauseRoundBracketedClauseCSParserRuleCall_1_0()); 
@@ -77159,17 +77159,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__LetVariableCS__OwnedTypeAssignment_2_1"
-    // InternalQVTcoreBase.g:26633:1: rule__LetVariableCS__OwnedTypeAssignment_2_1 : ( ruleTypeExpCS ) ;
+    // InternalQVTcoreBase.g:26634:1: rule__LetVariableCS__OwnedTypeAssignment_2_1 : ( ruleTypeExpCS ) ;
     public final void rule__LetVariableCS__OwnedTypeAssignment_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:26637:1: ( ( ruleTypeExpCS ) )
-            // InternalQVTcoreBase.g:26638:1: ( ruleTypeExpCS )
+            // InternalQVTcoreBase.g:26638:1: ( ( ruleTypeExpCS ) )
+            // InternalQVTcoreBase.g:26639:1: ( ruleTypeExpCS )
             {
-            // InternalQVTcoreBase.g:26638:1: ( ruleTypeExpCS )
-            // InternalQVTcoreBase.g:26639:1: ruleTypeExpCS
+            // InternalQVTcoreBase.g:26639:1: ( ruleTypeExpCS )
+            // InternalQVTcoreBase.g:26640:1: ruleTypeExpCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getLetVariableCSAccess().getOwnedTypeTypeExpCSParserRuleCall_2_1_0()); 
@@ -77204,17 +77204,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__LetVariableCS__OwnedInitExpressionAssignment_4"
-    // InternalQVTcoreBase.g:26648:1: rule__LetVariableCS__OwnedInitExpressionAssignment_4 : ( ruleExpCS ) ;
+    // InternalQVTcoreBase.g:26649:1: rule__LetVariableCS__OwnedInitExpressionAssignment_4 : ( ruleExpCS ) ;
     public final void rule__LetVariableCS__OwnedInitExpressionAssignment_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:26652:1: ( ( ruleExpCS ) )
-            // InternalQVTcoreBase.g:26653:1: ( ruleExpCS )
+            // InternalQVTcoreBase.g:26653:1: ( ( ruleExpCS ) )
+            // InternalQVTcoreBase.g:26654:1: ( ruleExpCS )
             {
-            // InternalQVTcoreBase.g:26653:1: ( ruleExpCS )
-            // InternalQVTcoreBase.g:26654:1: ruleExpCS
+            // InternalQVTcoreBase.g:26654:1: ( ruleExpCS )
+            // InternalQVTcoreBase.g:26655:1: ruleExpCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getLetVariableCSAccess().getOwnedInitExpressionExpCSParserRuleCall_4_0()); 
@@ -77249,17 +77249,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__NestedExpCS__OwnedExpressionAssignment_1"
-    // InternalQVTcoreBase.g:26663:1: rule__NestedExpCS__OwnedExpressionAssignment_1 : ( ruleExpCS ) ;
+    // InternalQVTcoreBase.g:26664:1: rule__NestedExpCS__OwnedExpressionAssignment_1 : ( ruleExpCS ) ;
     public final void rule__NestedExpCS__OwnedExpressionAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:26667:1: ( ( ruleExpCS ) )
-            // InternalQVTcoreBase.g:26668:1: ( ruleExpCS )
+            // InternalQVTcoreBase.g:26668:1: ( ( ruleExpCS ) )
+            // InternalQVTcoreBase.g:26669:1: ( ruleExpCS )
             {
-            // InternalQVTcoreBase.g:26668:1: ( ruleExpCS )
-            // InternalQVTcoreBase.g:26669:1: ruleExpCS
+            // InternalQVTcoreBase.g:26669:1: ( ruleExpCS )
+            // InternalQVTcoreBase.g:26670:1: ruleExpCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getNestedExpCSAccess().getOwnedExpressionExpCSParserRuleCall_1_0()); 
@@ -77294,17 +77294,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__MultiplicityBoundsCS__LowerBoundAssignment_0"
-    // InternalQVTcoreBase.g:26678:1: rule__MultiplicityBoundsCS__LowerBoundAssignment_0 : ( ruleLOWER ) ;
+    // InternalQVTcoreBase.g:26679:1: rule__MultiplicityBoundsCS__LowerBoundAssignment_0 : ( ruleLOWER ) ;
     public final void rule__MultiplicityBoundsCS__LowerBoundAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:26682:1: ( ( ruleLOWER ) )
-            // InternalQVTcoreBase.g:26683:1: ( ruleLOWER )
+            // InternalQVTcoreBase.g:26683:1: ( ( ruleLOWER ) )
+            // InternalQVTcoreBase.g:26684:1: ( ruleLOWER )
             {
-            // InternalQVTcoreBase.g:26683:1: ( ruleLOWER )
-            // InternalQVTcoreBase.g:26684:1: ruleLOWER
+            // InternalQVTcoreBase.g:26684:1: ( ruleLOWER )
+            // InternalQVTcoreBase.g:26685:1: ruleLOWER
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getMultiplicityBoundsCSAccess().getLowerBoundLOWERParserRuleCall_0_0()); 
@@ -77339,17 +77339,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__MultiplicityBoundsCS__UpperBoundAssignment_1_1"
-    // InternalQVTcoreBase.g:26693:1: rule__MultiplicityBoundsCS__UpperBoundAssignment_1_1 : ( ruleUPPER ) ;
+    // InternalQVTcoreBase.g:26694:1: rule__MultiplicityBoundsCS__UpperBoundAssignment_1_1 : ( ruleUPPER ) ;
     public final void rule__MultiplicityBoundsCS__UpperBoundAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:26697:1: ( ( ruleUPPER ) )
-            // InternalQVTcoreBase.g:26698:1: ( ruleUPPER )
+            // InternalQVTcoreBase.g:26698:1: ( ( ruleUPPER ) )
+            // InternalQVTcoreBase.g:26699:1: ( ruleUPPER )
             {
-            // InternalQVTcoreBase.g:26698:1: ( ruleUPPER )
-            // InternalQVTcoreBase.g:26699:1: ruleUPPER
+            // InternalQVTcoreBase.g:26699:1: ( ruleUPPER )
+            // InternalQVTcoreBase.g:26700:1: ruleUPPER
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getMultiplicityBoundsCSAccess().getUpperBoundUPPERParserRuleCall_1_1_0()); 
@@ -77384,23 +77384,23 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__MultiplicityCS__IsNullFreeAssignment_2_1"
-    // InternalQVTcoreBase.g:26708:1: rule__MultiplicityCS__IsNullFreeAssignment_2_1 : ( ( '|1' ) ) ;
+    // InternalQVTcoreBase.g:26709:1: rule__MultiplicityCS__IsNullFreeAssignment_2_1 : ( ( '|1' ) ) ;
     public final void rule__MultiplicityCS__IsNullFreeAssignment_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:26712:1: ( ( ( '|1' ) ) )
-            // InternalQVTcoreBase.g:26713:1: ( ( '|1' ) )
+            // InternalQVTcoreBase.g:26713:1: ( ( ( '|1' ) ) )
+            // InternalQVTcoreBase.g:26714:1: ( ( '|1' ) )
             {
-            // InternalQVTcoreBase.g:26713:1: ( ( '|1' ) )
-            // InternalQVTcoreBase.g:26714:1: ( '|1' )
+            // InternalQVTcoreBase.g:26714:1: ( ( '|1' ) )
+            // InternalQVTcoreBase.g:26715:1: ( '|1' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getMultiplicityCSAccess().getIsNullFree1Keyword_2_1_0()); 
             }
-            // InternalQVTcoreBase.g:26715:1: ( '|1' )
-            // InternalQVTcoreBase.g:26716:1: '|1'
+            // InternalQVTcoreBase.g:26716:1: ( '|1' )
+            // InternalQVTcoreBase.g:26717:1: '|1'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getMultiplicityCSAccess().getIsNullFree1Keyword_2_1_0()); 
@@ -77437,23 +77437,23 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__MultiplicityStringCS__StringBoundsAssignment"
-    // InternalQVTcoreBase.g:26731:1: rule__MultiplicityStringCS__StringBoundsAssignment : ( ( rule__MultiplicityStringCS__StringBoundsAlternatives_0 ) ) ;
+    // InternalQVTcoreBase.g:26732:1: rule__MultiplicityStringCS__StringBoundsAssignment : ( ( rule__MultiplicityStringCS__StringBoundsAlternatives_0 ) ) ;
     public final void rule__MultiplicityStringCS__StringBoundsAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:26735:1: ( ( ( rule__MultiplicityStringCS__StringBoundsAlternatives_0 ) ) )
-            // InternalQVTcoreBase.g:26736:1: ( ( rule__MultiplicityStringCS__StringBoundsAlternatives_0 ) )
+            // InternalQVTcoreBase.g:26736:1: ( ( ( rule__MultiplicityStringCS__StringBoundsAlternatives_0 ) ) )
+            // InternalQVTcoreBase.g:26737:1: ( ( rule__MultiplicityStringCS__StringBoundsAlternatives_0 ) )
             {
-            // InternalQVTcoreBase.g:26736:1: ( ( rule__MultiplicityStringCS__StringBoundsAlternatives_0 ) )
-            // InternalQVTcoreBase.g:26737:1: ( rule__MultiplicityStringCS__StringBoundsAlternatives_0 )
+            // InternalQVTcoreBase.g:26737:1: ( ( rule__MultiplicityStringCS__StringBoundsAlternatives_0 ) )
+            // InternalQVTcoreBase.g:26738:1: ( rule__MultiplicityStringCS__StringBoundsAlternatives_0 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getMultiplicityStringCSAccess().getStringBoundsAlternatives_0()); 
             }
-            // InternalQVTcoreBase.g:26738:1: ( rule__MultiplicityStringCS__StringBoundsAlternatives_0 )
-            // InternalQVTcoreBase.g:26738:2: rule__MultiplicityStringCS__StringBoundsAlternatives_0
+            // InternalQVTcoreBase.g:26739:1: ( rule__MultiplicityStringCS__StringBoundsAlternatives_0 )
+            // InternalQVTcoreBase.g:26739:2: rule__MultiplicityStringCS__StringBoundsAlternatives_0
             {
             pushFollow(FollowSets000.FOLLOW_2);
             rule__MultiplicityStringCS__StringBoundsAlternatives_0();
@@ -77488,17 +77488,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__PathNameCS__OwnedPathElementsAssignment_0"
-    // InternalQVTcoreBase.g:26747:1: rule__PathNameCS__OwnedPathElementsAssignment_0 : ( ruleFirstPathElementCS ) ;
+    // InternalQVTcoreBase.g:26748:1: rule__PathNameCS__OwnedPathElementsAssignment_0 : ( ruleFirstPathElementCS ) ;
     public final void rule__PathNameCS__OwnedPathElementsAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:26751:1: ( ( ruleFirstPathElementCS ) )
-            // InternalQVTcoreBase.g:26752:1: ( ruleFirstPathElementCS )
+            // InternalQVTcoreBase.g:26752:1: ( ( ruleFirstPathElementCS ) )
+            // InternalQVTcoreBase.g:26753:1: ( ruleFirstPathElementCS )
             {
-            // InternalQVTcoreBase.g:26752:1: ( ruleFirstPathElementCS )
-            // InternalQVTcoreBase.g:26753:1: ruleFirstPathElementCS
+            // InternalQVTcoreBase.g:26753:1: ( ruleFirstPathElementCS )
+            // InternalQVTcoreBase.g:26754:1: ruleFirstPathElementCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getPathNameCSAccess().getOwnedPathElementsFirstPathElementCSParserRuleCall_0_0()); 
@@ -77533,17 +77533,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__PathNameCS__OwnedPathElementsAssignment_1_1"
-    // InternalQVTcoreBase.g:26762:1: rule__PathNameCS__OwnedPathElementsAssignment_1_1 : ( ruleNextPathElementCS ) ;
+    // InternalQVTcoreBase.g:26763:1: rule__PathNameCS__OwnedPathElementsAssignment_1_1 : ( ruleNextPathElementCS ) ;
     public final void rule__PathNameCS__OwnedPathElementsAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:26766:1: ( ( ruleNextPathElementCS ) )
-            // InternalQVTcoreBase.g:26767:1: ( ruleNextPathElementCS )
+            // InternalQVTcoreBase.g:26767:1: ( ( ruleNextPathElementCS ) )
+            // InternalQVTcoreBase.g:26768:1: ( ruleNextPathElementCS )
             {
-            // InternalQVTcoreBase.g:26767:1: ( ruleNextPathElementCS )
-            // InternalQVTcoreBase.g:26768:1: ruleNextPathElementCS
+            // InternalQVTcoreBase.g:26768:1: ( ruleNextPathElementCS )
+            // InternalQVTcoreBase.g:26769:1: ruleNextPathElementCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getPathNameCSAccess().getOwnedPathElementsNextPathElementCSParserRuleCall_1_1_0()); 
@@ -77578,23 +77578,23 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__FirstPathElementCS__ReferredElementAssignment"
-    // InternalQVTcoreBase.g:26777:1: rule__FirstPathElementCS__ReferredElementAssignment : ( ( ruleUnrestrictedName ) ) ;
+    // InternalQVTcoreBase.g:26778:1: rule__FirstPathElementCS__ReferredElementAssignment : ( ( ruleUnrestrictedName ) ) ;
     public final void rule__FirstPathElementCS__ReferredElementAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:26781:1: ( ( ( ruleUnrestrictedName ) ) )
-            // InternalQVTcoreBase.g:26782:1: ( ( ruleUnrestrictedName ) )
+            // InternalQVTcoreBase.g:26782:1: ( ( ( ruleUnrestrictedName ) ) )
+            // InternalQVTcoreBase.g:26783:1: ( ( ruleUnrestrictedName ) )
             {
-            // InternalQVTcoreBase.g:26782:1: ( ( ruleUnrestrictedName ) )
-            // InternalQVTcoreBase.g:26783:1: ( ruleUnrestrictedName )
+            // InternalQVTcoreBase.g:26783:1: ( ( ruleUnrestrictedName ) )
+            // InternalQVTcoreBase.g:26784:1: ( ruleUnrestrictedName )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getFirstPathElementCSAccess().getReferredElementNamedElementCrossReference_0()); 
             }
-            // InternalQVTcoreBase.g:26784:1: ( ruleUnrestrictedName )
-            // InternalQVTcoreBase.g:26785:1: ruleUnrestrictedName
+            // InternalQVTcoreBase.g:26785:1: ( ruleUnrestrictedName )
+            // InternalQVTcoreBase.g:26786:1: ruleUnrestrictedName
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getFirstPathElementCSAccess().getReferredElementNamedElementUnrestrictedNameParserRuleCall_0_1()); 
@@ -77635,23 +77635,23 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__NextPathElementCS__ReferredElementAssignment"
-    // InternalQVTcoreBase.g:26796:1: rule__NextPathElementCS__ReferredElementAssignment : ( ( ruleUnreservedName ) ) ;
+    // InternalQVTcoreBase.g:26797:1: rule__NextPathElementCS__ReferredElementAssignment : ( ( ruleUnreservedName ) ) ;
     public final void rule__NextPathElementCS__ReferredElementAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:26800:1: ( ( ( ruleUnreservedName ) ) )
-            // InternalQVTcoreBase.g:26801:1: ( ( ruleUnreservedName ) )
+            // InternalQVTcoreBase.g:26801:1: ( ( ( ruleUnreservedName ) ) )
+            // InternalQVTcoreBase.g:26802:1: ( ( ruleUnreservedName ) )
             {
-            // InternalQVTcoreBase.g:26801:1: ( ( ruleUnreservedName ) )
-            // InternalQVTcoreBase.g:26802:1: ( ruleUnreservedName )
+            // InternalQVTcoreBase.g:26802:1: ( ( ruleUnreservedName ) )
+            // InternalQVTcoreBase.g:26803:1: ( ruleUnreservedName )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getNextPathElementCSAccess().getReferredElementNamedElementCrossReference_0()); 
             }
-            // InternalQVTcoreBase.g:26803:1: ( ruleUnreservedName )
-            // InternalQVTcoreBase.g:26804:1: ruleUnreservedName
+            // InternalQVTcoreBase.g:26804:1: ( ruleUnreservedName )
+            // InternalQVTcoreBase.g:26805:1: ruleUnreservedName
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getNextPathElementCSAccess().getReferredElementNamedElementUnreservedNameParserRuleCall_0_1()); 
@@ -77692,17 +77692,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__TemplateBindingCS__OwnedSubstitutionsAssignment_0"
-    // InternalQVTcoreBase.g:26815:1: rule__TemplateBindingCS__OwnedSubstitutionsAssignment_0 : ( ruleTemplateParameterSubstitutionCS ) ;
+    // InternalQVTcoreBase.g:26816:1: rule__TemplateBindingCS__OwnedSubstitutionsAssignment_0 : ( ruleTemplateParameterSubstitutionCS ) ;
     public final void rule__TemplateBindingCS__OwnedSubstitutionsAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:26819:1: ( ( ruleTemplateParameterSubstitutionCS ) )
-            // InternalQVTcoreBase.g:26820:1: ( ruleTemplateParameterSubstitutionCS )
+            // InternalQVTcoreBase.g:26820:1: ( ( ruleTemplateParameterSubstitutionCS ) )
+            // InternalQVTcoreBase.g:26821:1: ( ruleTemplateParameterSubstitutionCS )
             {
-            // InternalQVTcoreBase.g:26820:1: ( ruleTemplateParameterSubstitutionCS )
-            // InternalQVTcoreBase.g:26821:1: ruleTemplateParameterSubstitutionCS
+            // InternalQVTcoreBase.g:26821:1: ( ruleTemplateParameterSubstitutionCS )
+            // InternalQVTcoreBase.g:26822:1: ruleTemplateParameterSubstitutionCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTemplateBindingCSAccess().getOwnedSubstitutionsTemplateParameterSubstitutionCSParserRuleCall_0_0()); 
@@ -77737,17 +77737,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__TemplateBindingCS__OwnedSubstitutionsAssignment_1_1"
-    // InternalQVTcoreBase.g:26830:1: rule__TemplateBindingCS__OwnedSubstitutionsAssignment_1_1 : ( ruleTemplateParameterSubstitutionCS ) ;
+    // InternalQVTcoreBase.g:26831:1: rule__TemplateBindingCS__OwnedSubstitutionsAssignment_1_1 : ( ruleTemplateParameterSubstitutionCS ) ;
     public final void rule__TemplateBindingCS__OwnedSubstitutionsAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:26834:1: ( ( ruleTemplateParameterSubstitutionCS ) )
-            // InternalQVTcoreBase.g:26835:1: ( ruleTemplateParameterSubstitutionCS )
+            // InternalQVTcoreBase.g:26835:1: ( ( ruleTemplateParameterSubstitutionCS ) )
+            // InternalQVTcoreBase.g:26836:1: ( ruleTemplateParameterSubstitutionCS )
             {
-            // InternalQVTcoreBase.g:26835:1: ( ruleTemplateParameterSubstitutionCS )
-            // InternalQVTcoreBase.g:26836:1: ruleTemplateParameterSubstitutionCS
+            // InternalQVTcoreBase.g:26836:1: ( ruleTemplateParameterSubstitutionCS )
+            // InternalQVTcoreBase.g:26837:1: ruleTemplateParameterSubstitutionCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTemplateBindingCSAccess().getOwnedSubstitutionsTemplateParameterSubstitutionCSParserRuleCall_1_1_0()); 
@@ -77782,17 +77782,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__TemplateBindingCS__OwnedMultiplicityAssignment_2"
-    // InternalQVTcoreBase.g:26845:1: rule__TemplateBindingCS__OwnedMultiplicityAssignment_2 : ( ruleMultiplicityCS ) ;
+    // InternalQVTcoreBase.g:26846:1: rule__TemplateBindingCS__OwnedMultiplicityAssignment_2 : ( ruleMultiplicityCS ) ;
     public final void rule__TemplateBindingCS__OwnedMultiplicityAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:26849:1: ( ( ruleMultiplicityCS ) )
-            // InternalQVTcoreBase.g:26850:1: ( ruleMultiplicityCS )
+            // InternalQVTcoreBase.g:26850:1: ( ( ruleMultiplicityCS ) )
+            // InternalQVTcoreBase.g:26851:1: ( ruleMultiplicityCS )
             {
-            // InternalQVTcoreBase.g:26850:1: ( ruleMultiplicityCS )
-            // InternalQVTcoreBase.g:26851:1: ruleMultiplicityCS
+            // InternalQVTcoreBase.g:26851:1: ( ruleMultiplicityCS )
+            // InternalQVTcoreBase.g:26852:1: ruleMultiplicityCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTemplateBindingCSAccess().getOwnedMultiplicityMultiplicityCSParserRuleCall_2_0()); 
@@ -77827,17 +77827,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__TemplateParameterSubstitutionCS__OwnedActualParameterAssignment"
-    // InternalQVTcoreBase.g:26860:1: rule__TemplateParameterSubstitutionCS__OwnedActualParameterAssignment : ( ruleTypeRefCS ) ;
+    // InternalQVTcoreBase.g:26861:1: rule__TemplateParameterSubstitutionCS__OwnedActualParameterAssignment : ( ruleTypeRefCS ) ;
     public final void rule__TemplateParameterSubstitutionCS__OwnedActualParameterAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:26864:1: ( ( ruleTypeRefCS ) )
-            // InternalQVTcoreBase.g:26865:1: ( ruleTypeRefCS )
+            // InternalQVTcoreBase.g:26865:1: ( ( ruleTypeRefCS ) )
+            // InternalQVTcoreBase.g:26866:1: ( ruleTypeRefCS )
             {
-            // InternalQVTcoreBase.g:26865:1: ( ruleTypeRefCS )
-            // InternalQVTcoreBase.g:26866:1: ruleTypeRefCS
+            // InternalQVTcoreBase.g:26866:1: ( ruleTypeRefCS )
+            // InternalQVTcoreBase.g:26867:1: ruleTypeRefCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTemplateParameterSubstitutionCSAccess().getOwnedActualParameterTypeRefCSParserRuleCall_0()); 
@@ -77872,17 +77872,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__TemplateSignatureCS__OwnedParametersAssignment_1"
-    // InternalQVTcoreBase.g:26875:1: rule__TemplateSignatureCS__OwnedParametersAssignment_1 : ( ruleTypeParameterCS ) ;
+    // InternalQVTcoreBase.g:26876:1: rule__TemplateSignatureCS__OwnedParametersAssignment_1 : ( ruleTypeParameterCS ) ;
     public final void rule__TemplateSignatureCS__OwnedParametersAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:26879:1: ( ( ruleTypeParameterCS ) )
-            // InternalQVTcoreBase.g:26880:1: ( ruleTypeParameterCS )
+            // InternalQVTcoreBase.g:26880:1: ( ( ruleTypeParameterCS ) )
+            // InternalQVTcoreBase.g:26881:1: ( ruleTypeParameterCS )
             {
-            // InternalQVTcoreBase.g:26880:1: ( ruleTypeParameterCS )
-            // InternalQVTcoreBase.g:26881:1: ruleTypeParameterCS
+            // InternalQVTcoreBase.g:26881:1: ( ruleTypeParameterCS )
+            // InternalQVTcoreBase.g:26882:1: ruleTypeParameterCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTemplateSignatureCSAccess().getOwnedParametersTypeParameterCSParserRuleCall_1_0()); 
@@ -77917,17 +77917,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__TemplateSignatureCS__OwnedParametersAssignment_2_1"
-    // InternalQVTcoreBase.g:26890:1: rule__TemplateSignatureCS__OwnedParametersAssignment_2_1 : ( ruleTypeParameterCS ) ;
+    // InternalQVTcoreBase.g:26891:1: rule__TemplateSignatureCS__OwnedParametersAssignment_2_1 : ( ruleTypeParameterCS ) ;
     public final void rule__TemplateSignatureCS__OwnedParametersAssignment_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:26894:1: ( ( ruleTypeParameterCS ) )
-            // InternalQVTcoreBase.g:26895:1: ( ruleTypeParameterCS )
+            // InternalQVTcoreBase.g:26895:1: ( ( ruleTypeParameterCS ) )
+            // InternalQVTcoreBase.g:26896:1: ( ruleTypeParameterCS )
             {
-            // InternalQVTcoreBase.g:26895:1: ( ruleTypeParameterCS )
-            // InternalQVTcoreBase.g:26896:1: ruleTypeParameterCS
+            // InternalQVTcoreBase.g:26896:1: ( ruleTypeParameterCS )
+            // InternalQVTcoreBase.g:26897:1: ruleTypeParameterCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTemplateSignatureCSAccess().getOwnedParametersTypeParameterCSParserRuleCall_2_1_0()); 
@@ -77962,17 +77962,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__TypeParameterCS__NameAssignment_0"
-    // InternalQVTcoreBase.g:26905:1: rule__TypeParameterCS__NameAssignment_0 : ( ruleUnrestrictedName ) ;
+    // InternalQVTcoreBase.g:26906:1: rule__TypeParameterCS__NameAssignment_0 : ( ruleUnrestrictedName ) ;
     public final void rule__TypeParameterCS__NameAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:26909:1: ( ( ruleUnrestrictedName ) )
-            // InternalQVTcoreBase.g:26910:1: ( ruleUnrestrictedName )
+            // InternalQVTcoreBase.g:26910:1: ( ( ruleUnrestrictedName ) )
+            // InternalQVTcoreBase.g:26911:1: ( ruleUnrestrictedName )
             {
-            // InternalQVTcoreBase.g:26910:1: ( ruleUnrestrictedName )
-            // InternalQVTcoreBase.g:26911:1: ruleUnrestrictedName
+            // InternalQVTcoreBase.g:26911:1: ( ruleUnrestrictedName )
+            // InternalQVTcoreBase.g:26912:1: ruleUnrestrictedName
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTypeParameterCSAccess().getNameUnrestrictedNameParserRuleCall_0_0()); 
@@ -78007,17 +78007,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__TypeParameterCS__OwnedExtendsAssignment_1_1"
-    // InternalQVTcoreBase.g:26920:1: rule__TypeParameterCS__OwnedExtendsAssignment_1_1 : ( ruleTypedRefCS ) ;
+    // InternalQVTcoreBase.g:26921:1: rule__TypeParameterCS__OwnedExtendsAssignment_1_1 : ( ruleTypedRefCS ) ;
     public final void rule__TypeParameterCS__OwnedExtendsAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:26924:1: ( ( ruleTypedRefCS ) )
-            // InternalQVTcoreBase.g:26925:1: ( ruleTypedRefCS )
+            // InternalQVTcoreBase.g:26925:1: ( ( ruleTypedRefCS ) )
+            // InternalQVTcoreBase.g:26926:1: ( ruleTypedRefCS )
             {
-            // InternalQVTcoreBase.g:26925:1: ( ruleTypedRefCS )
-            // InternalQVTcoreBase.g:26926:1: ruleTypedRefCS
+            // InternalQVTcoreBase.g:26926:1: ( ruleTypedRefCS )
+            // InternalQVTcoreBase.g:26927:1: ruleTypedRefCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTypeParameterCSAccess().getOwnedExtendsTypedRefCSParserRuleCall_1_1_0()); 
@@ -78052,17 +78052,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__TypeParameterCS__OwnedExtendsAssignment_1_2_1"
-    // InternalQVTcoreBase.g:26935:1: rule__TypeParameterCS__OwnedExtendsAssignment_1_2_1 : ( ruleTypedRefCS ) ;
+    // InternalQVTcoreBase.g:26936:1: rule__TypeParameterCS__OwnedExtendsAssignment_1_2_1 : ( ruleTypedRefCS ) ;
     public final void rule__TypeParameterCS__OwnedExtendsAssignment_1_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:26939:1: ( ( ruleTypedRefCS ) )
-            // InternalQVTcoreBase.g:26940:1: ( ruleTypedRefCS )
+            // InternalQVTcoreBase.g:26940:1: ( ( ruleTypedRefCS ) )
+            // InternalQVTcoreBase.g:26941:1: ( ruleTypedRefCS )
             {
-            // InternalQVTcoreBase.g:26940:1: ( ruleTypedRefCS )
-            // InternalQVTcoreBase.g:26941:1: ruleTypedRefCS
+            // InternalQVTcoreBase.g:26941:1: ( ruleTypedRefCS )
+            // InternalQVTcoreBase.g:26942:1: ruleTypedRefCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTypeParameterCSAccess().getOwnedExtendsTypedRefCSParserRuleCall_1_2_1_0()); 
@@ -78097,17 +78097,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__TypedTypeRefCS__OwnedPathNameAssignment_0"
-    // InternalQVTcoreBase.g:26950:1: rule__TypedTypeRefCS__OwnedPathNameAssignment_0 : ( rulePathNameCS ) ;
+    // InternalQVTcoreBase.g:26951:1: rule__TypedTypeRefCS__OwnedPathNameAssignment_0 : ( rulePathNameCS ) ;
     public final void rule__TypedTypeRefCS__OwnedPathNameAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:26954:1: ( ( rulePathNameCS ) )
-            // InternalQVTcoreBase.g:26955:1: ( rulePathNameCS )
+            // InternalQVTcoreBase.g:26955:1: ( ( rulePathNameCS ) )
+            // InternalQVTcoreBase.g:26956:1: ( rulePathNameCS )
             {
-            // InternalQVTcoreBase.g:26955:1: ( rulePathNameCS )
-            // InternalQVTcoreBase.g:26956:1: rulePathNameCS
+            // InternalQVTcoreBase.g:26956:1: ( rulePathNameCS )
+            // InternalQVTcoreBase.g:26957:1: rulePathNameCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTypedTypeRefCSAccess().getOwnedPathNamePathNameCSParserRuleCall_0_0()); 
@@ -78142,17 +78142,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__TypedTypeRefCS__OwnedBindingAssignment_1_1"
-    // InternalQVTcoreBase.g:26965:1: rule__TypedTypeRefCS__OwnedBindingAssignment_1_1 : ( ruleTemplateBindingCS ) ;
+    // InternalQVTcoreBase.g:26966:1: rule__TypedTypeRefCS__OwnedBindingAssignment_1_1 : ( ruleTemplateBindingCS ) ;
     public final void rule__TypedTypeRefCS__OwnedBindingAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:26969:1: ( ( ruleTemplateBindingCS ) )
-            // InternalQVTcoreBase.g:26970:1: ( ruleTemplateBindingCS )
+            // InternalQVTcoreBase.g:26970:1: ( ( ruleTemplateBindingCS ) )
+            // InternalQVTcoreBase.g:26971:1: ( ruleTemplateBindingCS )
             {
-            // InternalQVTcoreBase.g:26970:1: ( ruleTemplateBindingCS )
-            // InternalQVTcoreBase.g:26971:1: ruleTemplateBindingCS
+            // InternalQVTcoreBase.g:26971:1: ( ruleTemplateBindingCS )
+            // InternalQVTcoreBase.g:26972:1: ruleTemplateBindingCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTypedTypeRefCSAccess().getOwnedBindingTemplateBindingCSParserRuleCall_1_1_0()); 
@@ -78187,17 +78187,17 @@ public class InternalQVTcoreBaseParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__WildcardTypeRefCS__OwnedExtendsAssignment_2_1"
-    // InternalQVTcoreBase.g:26980:1: rule__WildcardTypeRefCS__OwnedExtendsAssignment_2_1 : ( ruleTypedRefCS ) ;
+    // InternalQVTcoreBase.g:26981:1: rule__WildcardTypeRefCS__OwnedExtendsAssignment_2_1 : ( ruleTypedRefCS ) ;
     public final void rule__WildcardTypeRefCS__OwnedExtendsAssignment_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalQVTcoreBase.g:26984:1: ( ( ruleTypedRefCS ) )
-            // InternalQVTcoreBase.g:26985:1: ( ruleTypedRefCS )
+            // InternalQVTcoreBase.g:26985:1: ( ( ruleTypedRefCS ) )
+            // InternalQVTcoreBase.g:26986:1: ( ruleTypedRefCS )
             {
-            // InternalQVTcoreBase.g:26985:1: ( ruleTypedRefCS )
-            // InternalQVTcoreBase.g:26986:1: ruleTypedRefCS
+            // InternalQVTcoreBase.g:26986:1: ( ruleTypedRefCS )
+            // InternalQVTcoreBase.g:26987:1: ruleTypedRefCS
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getWildcardTypeRefCSAccess().getOwnedExtendsTypedRefCSParserRuleCall_2_1_0()); 

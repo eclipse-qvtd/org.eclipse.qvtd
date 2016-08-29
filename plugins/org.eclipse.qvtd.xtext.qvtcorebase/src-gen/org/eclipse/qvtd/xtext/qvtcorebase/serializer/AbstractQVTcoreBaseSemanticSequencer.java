@@ -668,6 +668,7 @@ public abstract class AbstractQVTcoreBaseSemanticSequencer extends QVTbaseSemant
 	 *
 	 * Constraint:
 	 *     (
+	 *         isTransient?='transient'? 
 	 *         ownedPathName=ScopeNameCS 
 	 *         name=UnrestrictedName 
 	 *         (ownedParameters+=ParamDeclarationCS ownedParameters+=ParamDeclarationCS*)? 

@@ -22862,6 +22862,7 @@ finally {
 
 
 
+
 rule__ScopeNameCS__OwnedPathElementsAssignment_0
     @init {
 		int stackSize = keepStackSize();
