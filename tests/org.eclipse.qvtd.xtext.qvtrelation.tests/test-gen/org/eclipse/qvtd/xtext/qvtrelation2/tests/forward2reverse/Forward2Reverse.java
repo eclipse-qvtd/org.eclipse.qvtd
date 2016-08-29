@@ -65,8 +65,8 @@ public class Forward2Reverse extends AbstractTransformer
     public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId SET_CLSSid_Element = TypeId.SET.getSpecializedId(CLSSid_Element);
     public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId SET_CLSSid_Telement2element = TypeId.SET.getSpecializedId(CLSSid_Telement2element);
     public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId SET_CLSSid_Tlist2list = TypeId.SET.getSpecializedId(CLSSid_Tlist2list);
-    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue Set = ValueUtil.createSetOfEach(SET_CLSSid_Telement2element);
     public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue Set_0 = ValueUtil.createSetOfEach(SET_CLSSid_Tlist2list);
+    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue Set = ValueUtil.createSetOfEach(SET_CLSSid_Telement2element);
     
     /*
      * Property-source to Property-target unnavigable navigation caches
@@ -160,13 +160,13 @@ public class Forward2Reverse extends AbstractTransformer
             final /*@NonInvalid*/ org.eclipse.ocl.pivot.@org.eclipse.jdt.annotation.NonNull Class TYP_doublylinkedlist_c_c_Element_0 = idResolver.getClass(CLSSid_Element, null);
             final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull SetValue objectsOfKind_0 = ModelObjectsOfKindOperation.INSTANCE.evaluate(executor, SET_CLSSid_Element, models[1/*forward*/], TYP_doublylinkedlist_c_c_Element_0);
             // connection variables
-            final SetValue.@NonNull Accumulator jm_Telement2element_1 = (SetValue.Accumulator)ValueUtil.createCollectionAccumulatorValue(SET_CLSSid_Telement2element);
-            final SetValue.@NonNull Accumulator jm_Tlist2list_1 = (SetValue.Accumulator)ValueUtil.createCollectionAccumulatorValue(SET_CLSSid_Tlist2list);
-            final SetValue.@NonNull Accumulator ji_DoublyLinkedList = (SetValue.Accumulator)ValueUtil.createCollectionAccumulatorValue(SET_CLSSid_DoublyLinkedList);
+            final SetValue.@NonNull Accumulator jm_Telement2element_1 = createUnenforcedSetAccumulatorValue(SET_CLSSid_Telement2element);
+            final SetValue.@NonNull Accumulator jm_Tlist2list_1 = createUnenforcedSetAccumulatorValue(SET_CLSSid_Tlist2list);
+            final SetValue.@NonNull Accumulator ji_DoublyLinkedList = createUnenforcedSetAccumulatorValue(SET_CLSSid_DoublyLinkedList);
             for (org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.@org.eclipse.jdt.annotation.NonNull DoublyLinkedList iterator : ValueUtil.typedIterable(DoublyLinkedList.class, objectsOfKind)) {
                 ji_DoublyLinkedList.add(iterator);
             }
-            final SetValue.@NonNull Accumulator ji_Element = (SetValue.Accumulator)ValueUtil.createCollectionAccumulatorValue(SET_CLSSid_Element);
+            final SetValue.@NonNull Accumulator ji_Element = createUnenforcedSetAccumulatorValue(SET_CLSSid_Element);
             for (org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.@org.eclipse.jdt.annotation.NonNull Element iterator_0 : ValueUtil.typedIterable(Element.class, objectsOfKind_0)) {
                 ji_Element.add(iterator_0);
             }

@@ -54,6 +54,7 @@ import org.eclipse.ocl.pivot.NavigationCallExp;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.Parameter;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.SetType;
 import org.eclipse.ocl.pivot.ShadowExp;
 import org.eclipse.ocl.pivot.ShadowPart;
 import org.eclipse.ocl.pivot.Variable;
@@ -1748,17 +1749,24 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		if (cgAccumulators.size() > 0) {
 			js.append("// connection variables\n");
 			for (@NonNull CGAccumulator cgAccumulator : cgAccumulators) {
+				Element ast = cgAccumulator.getAst();
 				js.append("final ");
 				js.appendClassReference(null, cgAccumulator);
 				js.append(".");
 				js.appendIsRequired(true);
 				js.append(" Accumulator ");
 				js.appendValueName(cgAccumulator);
-				js.append(" = (");
-				js.appendClassReference(null, cgAccumulator);
-				js.append(".Accumulator)");
-				js.appendClassReference(ValueUtil.class);
-				js.append(".createCollectionAccumulatorValue(");
+				js.append(" = ");
+				if ((ast instanceof ConnectionVariable) && (((ConnectionVariable)ast).getType() instanceof SetType)) {
+					js.append("createUnenforcedSetAccumulatorValue(");
+				}
+				else {
+					js.append("(");
+					js.appendClassReference(null, cgAccumulator);
+					js.append(".Accumulator)");
+					js.appendClassReference(ValueUtil.class);
+					js.append(".createCollectionAccumulatorValue(");
+				}
 				js.appendValueName(cgAccumulator.getTypeId());
 				js.append(");\n");
 				//

@@ -33,14 +33,17 @@ import org.eclipse.ocl.pivot.evaluation.AbstractModelManager;
 import org.eclipse.ocl.pivot.evaluation.Evaluator;
 import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.ids.ClassId;
+import org.eclipse.ocl.pivot.ids.CollectionTypeId;
 import org.eclipse.ocl.pivot.ids.IdManager;
 import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.ids.PackageId;
 import org.eclipse.ocl.pivot.ids.PropertyId;
 import org.eclipse.ocl.pivot.ids.TypeId;
+import org.eclipse.ocl.pivot.internal.values.SetValueImpl;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
+import org.eclipse.ocl.pivot.values.SetValue;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTypedModelInstance;
 import org.eclipse.qvtd.runtime.evaluation.ExecutionVisitable;
@@ -292,6 +295,20 @@ public abstract class AbstractTransformerInternal extends AbstractModelManager i
 		}
 	}
 
+	private static class UnenforcedSetAccumulator extends SetValueImpl implements SetValue.Accumulator
+	{
+		public UnenforcedSetAccumulator(@NonNull CollectionTypeId typeId) {
+			super(typeId, new ArrayList<Object>());
+		}
+
+		@Override
+		@SuppressWarnings("unchecked")
+		public boolean add(@Nullable Object value) {
+			assert !((Collection<Object>)elements).contains(value);
+			return ((Collection<Object>)elements).add(value);
+		}
+	}
+
 	private static class UnmodifiableCollectionAsSet<T> implements Set<T>
 	{
 		protected final @NonNull Collection<@NonNull T> collection;
@@ -509,6 +526,10 @@ public abstract class AbstractTransformerInternal extends AbstractModelManager i
 	 */
 	protected @NonNull InvocationManager createInvocationManager() {
 		return new LazyInvocationManager();
+	}
+
+	protected SetValue.@NonNull Accumulator createUnenforcedSetAccumulatorValue(@NonNull CollectionTypeId typeId) {
+		return new UnenforcedSetAccumulator(typeId);
 	}
 
 	/**
