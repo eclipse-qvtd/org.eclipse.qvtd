@@ -1,0 +1,28 @@
+import  cs : 'generated/MiniOCLCS.ecore#/' 
+import  as : '/resource/org.eclipse.qvtd.doc.miniocl/model/MiniOCL.ecore#/' 
+import 'MiniOCLFullHelpers.ocl'
+import 'MiniOCLFullLookup.ocl'
+package cs
+
+context CollectionLiteralPartCS
+def : withoutLastExpression() : Boolean =
+	last = null
+def : withLastExpression() : Boolean =
+	last <> null
+context NameExpCS
+def : isOpCallExpWithExplicitSource() : Boolean =
+	roundedBrackets <> null and isNavExpOfACallExpCS()
+def : isOpCallExpWithImplicitSource() : Boolean =
+	roundedBrackets <> null and not isNavExpOfACallExpCS()
+def : isPropCallExpWithExplicitSource() : Boolean =
+	roundedBrackets = null and isNavExpOfACallExpCS()
+def : isVariableExp() : Boolean =
+	roundedBrackets = null and not isNavExpOfACallExpCS() and ast.lookupVariable(expName.pathElements->first()) <> null
+def : isPropCallExpWithImplicitSource() : Boolean =
+	roundedBrackets = null and not isNavExpOfACallExpCS() and ast.lookupProperty(expName) <> null
+context LetExpCS
+def : singleVarDecl() : Boolean =
+	letVars->size() = 1
+def : multipleVarDecls() : Boolean =
+	letVars->size() > 1
+endpackage

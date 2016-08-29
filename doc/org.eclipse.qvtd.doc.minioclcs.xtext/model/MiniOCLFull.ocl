@@ -1,0 +1,238 @@
+import  cs : 'generated/MiniOCLCS.ecore#/' 
+import  as : '/resource/org.eclipse.qvtd.doc.miniocl/model/MiniOCL.ecore#/' 
+import 'MiniOCLFullHelpers.ocl'
+import 'MiniOCLFullLookup.ocl'
+import 'MiniOCLFullDisambiguation.ocl'
+package cs
+
+context ExpCS
+def : ast() : as::OCLExpression =
+    null
+
+context NavigationExpCS
+def : ast() : as::CallExp =
+   null
+   
+context RootCS
+def : ast() : as::Root =
+as::Root {
+	ownedImports = imports.ast(), 
+ownedPackages = packages.ast(), 
+ownedConstraints = constraints.invariants.ast() 
+}
+context ImportCS
+def : ast() : as::Import =
+  as::Import {
+	alias = if alias = null then null else alias endif, 
+	uri = uri
+}
+
+context InvariantCS
+def : ast() : as::Constraint =
+as::Constraint {
+	ownedSpecification = as::ExpressionInOCL {
+				ownedBody = exp.ast(),
+				ownedSelfVar = as::Variable {
+							name = ' self' ,
+							type = ast().constrainedElement
+						}
+			}, 
+constrainedElement = ast().lookupClass(self.ConstraintsDefCS.typeRef) 
+}
+context PackageCS
+def : ast() : as::Package =
+as::Package {
+	name = name, 
+ownedPackages = packages.ast(), 
+ownedClasses = classes.ast() 
+}
+context ClassCS
+def : ast() : as::Class =
+as::Class {
+	name = name, 
+ownedProperties = properties.ast(), 
+ownedOperations = operations.ast(), 
+superClasses = if _extends->notEmpty() then _extends->collect(x | ast().lookupClass(x)) else OrderedSet { } endif 
+}
+context OperationCS
+def : ast() : as::Operation =
+as::Operation {
+	name = name, 
+type = ast().lookupClass(resultRef), 
+ownedParameters = params.ast(), 
+ownedBodyExpression = as::ExpressionInOCL {
+				ownedBody = _body.ast(),
+				ownedSelfVar = as::Variable {
+							name = ' self' ,
+							type = ast().owningClass
+						}
+			} 
+}
+context PropertyCS
+def : ast() : as::Property =
+as::Property {
+	name = name, 
+lowerBound = computeLowerBound(), 
+upperBound = computeUpperBound(), 
+type = ast().lookupClass(typeRef) 
+}
+context ParameterCS
+def : ast() : as::Variable =
+as::Variable {
+	name = name, 
+type = ast().lookupClass(typeRef) 
+}
+
+context CallExpCS
+def : ast() : as::CallExp =
+self.navExp.ast()
+context EqualityExpCS
+def : ast() : as::OperationCallExp =
+as::OperationCallExp {
+	ownedSource = left.ast(), 
+ownedArguments = right.ast(), 
+referredOperation = ast().lookupOperationFrom(ast().ownedSource.type, opName, ast().ownedArguments) 
+}
+context NameExpCS
+def : ast() : as::OperationCallExp =
+if isOpCallExpWithExplicitSource()
+then as::OperationCallExp {
+	ownedSource = parentAsCallExpCS()._source.ast(), 
+ownedArguments = roundedBrackets.args.ast(), 
+referredOperation = ast().lookupOperationFrom(ast().ownedSource.type, expName, ast().ownedArguments), 
+type = ast().referredOperation ?. type 
+}
+else
+	if isOpCallExpWithImplicitSource()
+	then as::OperationCallExp {
+		ownedSource = let referredVar  = ast().lookupVariable(' self' )
+		in as::VariableExp {
+					referredVariable = referredVar,
+					type = referredVar.type
+				}
+		, 
+	ownedArguments = roundedBrackets.args.ast(), 
+	referredOperation = ast().lookupOperationFrom(ast().ownedSource.type, expName, ast().ownedArguments), 
+	type = ast().referredOperation ?. type 
+	}
+	else
+		if isPropCallExpWithExplicitSource()
+		then as::PropertyCallExp {
+			ownedSource = parentAsCallExpCS()._source.ast(), 
+		referredProperty = ast().lookupPropertyFrom(ast().ownedSource.type, expName), 
+		type = ast().referredProperty ?. type 
+		}
+		else
+			if isVariableExp()
+			then as::VariableExp {
+				referredVariable = ast().lookupVariable(expName), 
+			type = ast().referredVariable.type 
+			}
+			else
+				if isPropCallExpWithImplicitSource()
+				then as::PropertyCallExp {
+					ownedSource = let referredVar  = ast().lookupVariable(' self' )
+					in as::VariableExp {
+								referredVariable = referredVar,
+								type = referredVar.type
+							}
+					, 
+				referredProperty = ast().lookupPropertyFrom(ast().ownedSource.type, expName), 
+				type = ast().referredProperty ?. type 
+				}
+				else
+					invalid
+				endif
+			endif
+		endif
+	endif
+endif
+context LetExpCS
+def : ast() : as::LetExp =
+if singleVarDecl()
+then as::LetExp {
+	ownedVariable = letVars->at(1).ast(), 
+ownedIn = inExp.ast(), 
+type = inExp.ast().type 
+}
+else
+	if multipleVarDecls()
+	then as::LetExp {
+		ownedVariable = letVars->first().ast(), 
+	ownedIn = letVars->excluding(letVars->first())->reverse()->iterate(x : LetVarCS ; acc : as::OCLExpression = inExp.ast() |
+						as::LetExp {
+									ownedVariable = x.ast(),
+									ownedIn = acc,
+									type = acc.type
+								}), 
+	type = inExp.ast().type 
+	}
+	else
+		invalid
+	endif
+endif
+context LetVarCS
+def : ast() : as::Variable =
+as::Variable {
+	name = name, 
+    ownedInitExp = initExp.ast(), 
+   type = if typeRef <> null then ast().lookupClass(typeRef) else ast().ownedInitExp.type endif 
+}
+context IterateExpCS
+def : ast() : as::IterateExp =
+as::IterateExp {
+	ownedIterator = itVar.ast(), 
+ownedResult = accVar.ast(), 
+ownedBody = exp.ast(), 
+type = ast().ownedResult.type 
+}
+context CollectExpCS
+def : ast() : as::IteratorExp =
+as::IteratorExp {
+	iterator = ' collect' , 
+ownedIterator = if itVar = null then as::Variable {
+				name = ' self' ,
+				type = ast().lookupClass(' OclAny' )
+			} else itVar.ast() endif, 
+ownedBody = exp.ast(), 
+type = ast().lookupClass(' Collection' ) 
+}
+context IteratorVarCS
+def : ast() : as::Variable =
+as::Variable {
+	name = itName, 
+	type = if itType <> null then ast().lookupClass(itType) else ast().lookupClass(' OclAny' ) endif 
+}
+context AccVarCS
+def : ast() : as::Variable =
+as::Variable {
+	name = accName, 
+ownedInitExp = accInitExp.ast(), 
+type = if accType <> null then ast().lookupClass(accType) else ast().ownedInitExp.type endif 
+}
+context CollectionLiteralExpCS
+def : ast() : as::CollectionLiteralExp =
+as::CollectionLiteralExp {
+	kind = kind, 
+ownedParts = parts.ast(), 
+type = ast().lookupClass(' Collection' ) 
+}
+context CollectionLiteralPartCS
+def : ast() : as::CollectionItem =
+if withoutLastExpression()
+then as::CollectionItem {
+	ownedItem = first.ast(), 
+type = ast().ownedItem.type 
+}
+else
+	if withLastExpression()
+	then as::CollectionRange {
+		ownedFirst = first, 
+	ownedLast = last, 
+	type = ast().ownedFirst.type 
+	}
+	else
+		invalid
+	endif
+endif
+endpackage

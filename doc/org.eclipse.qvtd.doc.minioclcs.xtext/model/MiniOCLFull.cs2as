@@ -1,0 +1,263 @@
+source cs : 'generated/MiniOCLCS.ecore#/'
+target as : '/resource/org.eclipse.qvtd.doc.miniocl/model/MiniOCL.ecore#/'
+
+helpers {
+  as::Class {
+    commonSupertype(another : Class) : Class :=
+      let allSupertypes = self->asOrderedSet()->closure(superClasses),
+          allOtherSupertypes = another->asOrderedSet()->closure(superClasses)
+      in allSupertypes->intersection(allOtherSupertypes)->any() ;
+    conformsTo(another : Class) : Boolean :=
+        self = another or 
+        superClasses->exists(conformsTo(another));
+  }
+  
+  as::NameExpCS {
+    parentAsCallExpCS() : CallExpCS :=
+      let container = self.oclContainer()
+      in if container.oclIsKindOf(CallExpCS)
+         then container.oclAsType(CallExpCS)
+         else null 
+         endif;
+    isNavExpOfACallExpCS() : Boolean :=
+      let parentCallExpCS = parentAsCallExpCS()
+      in parentCallExpCS <> null and parentCallExpCS.navExp = self;
+  }
+   
+}
+
+disambiguation {
+  CollectionLiteralPartCS   {
+    withoutLastExpression := last = null;
+    withLastExpression := last <> null;
+  }
+  
+  NameExpCS { -- Note: order of the disambiguation rules matters
+    isOpCallExpWithExplicitSource := 
+      roundedBrackets <> null and isNavExpOfACallExpCS();
+    isOpCallExpWithImplicitSource :=
+      roundedBrackets <> null and not isNavExpOfACallExpCS();
+    isPropCallExpWithExplicitSource := 
+      roundedBrackets = null and isNavExpOfACallExpCS();
+    isVariableExp := 
+      roundedBrackets = null and not isNavExpOfACallExpCS()
+      and lookup(Variable, expName) <> null;
+    isPropCallExpWithImplicitSource :=
+      roundedBrackets = null and not isNavExpOfACallExpCS()
+      and lookup(Property, expName) <> null;
+   }
+   
+  LetExpCS {
+    singleVarDecl := letVars->size() = 1;
+    multipleVarDecls := letVars->size() > 1;
+  }
+}
+
+mappings {
+  create Root from RootCS {
+     ownedImports := imports.trace;
+     ownedPackages := packages.trace;
+     ownedConstraints := constraints.invariants.trace;
+  }
+  create Constraint from InvariantCS {
+     ownedSpecification := as::ExpressionInOCL {
+               ownedBody = exp.trace,
+               ownedSelfVar =  as::Variable { name = 'self', 
+                                             type = trace.constrainedElement }
+               };
+     constrainedElement := lookup(Class, self.ConstraintsDefCS.typeRef);
+  }
+  create Package from PackageCS {
+    name := name;
+    ownedPackages := packages.trace;
+    ownedClasses  := classifiers.trace;
+  }
+  create Operation from OperationCS {
+    name := name;
+    type := lookup(Class, resultType);
+    ownedParameters := parameters.trace;    
+    ownedBodyExpression := as::ExpressionInOCL { 
+	      ownedBody = body.trace,
+	      ownedSelfVar = as::Variable {name = 'self' , type = trace.owningClass }
+    };
+  }
+  -- Expressions
+  refer CallExp from CallExpCS :=
+    self.navExp.trace;
+    
+  create OperationCallExp from EqualityExpCS {
+     ownedSource := left.trace;
+     ownedArguments := right.trace;
+     referredOperation := lookupExported(Operation, trace.ownedSource.type,
+                                         opName, trace.ownedArguments);
+  }
+-- TODO
+--  create VariableExp from NameExpCS
+--  when fall_back {
+--      referredVariable := null;
+--      type := lookup(Class, 'OclVoid');
+--  } 
+  create VariableExp from NameExpCS
+  when isVariableExp {
+    referredVariable := lookup(Variable, expName);
+    type := trace.referredVariable.type;
+  }  
+  create PropertyCallExp from NameExpCS
+  when isPropCallExpWithExplicitSource {
+    ownedSource := parentAsCallExpCS()._source.trace;
+    referredProperty := lookupExported(Property,trace.ownedSource.type,expName);
+    type := trace.referredProperty?.type;
+  }  
+  create PropertyCallExp from NameExpCS
+  when isPropCallExpWithImplicitSource {
+    ownedSource := let referredVar = lookup(Variable, 'self')
+                   in as::VariableExp {
+                        referredVariable = referredVar, 
+                        type = referredVar.type
+                   };
+    referredProperty := lookupExported(Property,trace.ownedSource.type,expName);
+    type := trace.referredProperty?.type;
+  }
+  create OperationCallExp from NameExpCS
+  when isOpCallExpWithExplicitSource {
+    ownedSource := parentAsCallExpCS()._source.trace;
+    ownedArguments := roundedBrackets.args.trace;
+    referredOperation := lookupExported(Operation,trace.ownedSource.type,
+                                       expName, trace.ownedArguments);
+    type := trace.referredOperation?.type;
+  }  
+  create OperationCallExp from NameExpCS
+  when isOpCallExpWithImplicitSource {
+    ownedSource := let referredVar = lookup(Variable, 'self')
+                   in as::VariableExp {
+                        referredVariable = referredVar,
+                        type = referredVar.type
+                   };
+    ownedArguments := roundedBrackets.args.trace;
+    referredOperation:= lookupExported(Operation,trace.ownedSource.type,
+                                       expName, trace.ownedArguments);
+    type := trace.referredOperation?.type;
+  }
+  
+  create LetExp from LetExpCS 
+  when singleVarDecl {
+    ownedVariable := letVars->at(1);
+    ownedIn  := inExp;
+    type := inExpression.trace.type;
+  }
+  create LetExp from LetExpCS
+  when multipleVarDecls  {
+    ownedVariable := letVars->first();
+    ownedIn  := letVars->excluding(letVars->first())->reverse()
+                       ->iterate(x : LetVarCS; acc : OCLExpression = inExp.trace |
+                                     as::LetExp {
+                                       ownedVar = x.trace,
+                                       ownedIn = acc,
+                                       type = acc.type
+                                     });
+    type := inExpression.trace.type;
+  }
+  
+  
+  create IterateExp from IterateExpCS {
+    ownedIterator := itVar.trace;
+    ownedResult := accVar.trace;
+    ownedBody := exp.trace;
+    type := trace.ownedResult.type;
+  }
+  
+  create IterationExp from CollectExpCS {
+    name := 'collect';
+    ownedIterator := if itVar = null
+                     then Variable { name='self', type=lookup(Class,'OclAny') }
+                     else itVar.trace
+                     endif;                     
+    ownedBody := exp.trace;
+    type := lookup(Class,'Collection');
+  }
+  
+  create CollectionLiteralExp from CollectionLiteralExpCS {
+    kind := kind;
+    ownedParts := parts.trace;
+    type := lookup(Class,'Collection');
+  }
+  create CollectionItem from CollectionLiteralPartCS  
+  when withoutLastExpression {
+    ownedItem := first.trace;
+    type := trace.ownedItem.type;
+  }
+  create CollectionRange from CollectionLiteralPartCS 
+  when withLastExpression {
+     ownedFirst := first;
+     ownedLast := last;
+     type := trace.ownedFirst.type;
+  }
+  
+}
+
+
+
+name_resolution {
+	targets {
+		NamedElement using name scaped_with '_';
+		Package qualifies Package using ownedPackages,
+					   Class using ownedClasses;
+		Class qualifies Operation using ownedOperations,
+					   Property using ownedProperties;
+		Operation filtered_by args : OrderedSet(OCLExpression)
+				when args->size() = ownedParameters->size() and
+		           arguments->forAll(x | 
+		                  let argIdx = arguments->indexOf(x)
+		                  in x.type.conformsTo(ownedParameters->at(argIdx).type));
+		Property;
+		Variable;
+	}
+	
+	inputs {
+		PathElementCS using elementName;
+		qualifier PathNameCS using pathElements;
+	}
+	
+	providers {
+		Root {
+			in current_scope provides adding
+				Package using ownedPackages, exported ownedImports
+				Constraint using ownedConstraints;
+		}
+		
+		Package {	
+			in current_scope provides occluding 
+				Package using ownedPackages
+				Class using ownedClasses;
+		}
+		
+		Class {
+			vars allSuperClasses = self->closure(superClass);
+			
+			in current_scope provides occluding
+				Operation using ownedOperations occluding allSuperClasses.ownedOperations
+				Property using ownedProperties occluding allSuperClasses.ownedProperties;
+				
+			in exported_scope provides
+				Operation using ownedOperations occluding allSuperClasses.ownedOperations
+				Property using ownedProperties occluding allSuperClasses.ownedOperations;
+		}
+		
+		
+		Operation {	
+			in current_scope provides occluding
+				Variable using ownedParameters;
+		}
+		
+		ExpressionInOCL {
+			in current_scope provides occluding
+				Variable using ownedSelfVar;
+		}
+		
+		LetExp {
+			in current_scope 
+			 for all excepting ownedVariable
+			    provides occluding Variable using  ownedVariable;
+		}
+	}
+}

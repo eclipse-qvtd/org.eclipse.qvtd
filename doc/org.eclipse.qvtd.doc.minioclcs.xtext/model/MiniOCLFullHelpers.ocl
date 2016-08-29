@@ -1,0 +1,29 @@
+import  cs : 'generated/MiniOCLCS.ecore#/' 
+import  as : '/resource/org.eclipse.qvtd.doc.miniocl/model/MiniOCL.ecore#/' 
+package cs
+
+context cs::NameExpCS
+def : parentAsCallExpCS() :CallExpCS =
+	let container  = self.oclContainer()
+	in if container.oclIsKindOf(CallExpCS) then container.oclAsType(CallExpCS) else null endif
+def : isNavExpOfACallExpCS() :Boolean =
+	let parentCallExpCS  = parentAsCallExpCS()
+	in parentCallExpCS <> null and parentCallExpCS.navExp = self
+context cs::PropertyCS
+def : computeLowerBound() :Integer =
+	if multiplicity = null then 0 else if multiplicity.opt then 0 else if multiplicity.mult then 0 else if multiplicity.mandatory <> 0 then multiplicity.mandatory else multiplicity.lowerInt endif endif endif endif
+def : computeUpperBound() :Integer =
+	if multiplicity = null then 1 else if multiplicity.opt then 1 else if multiplicity.mult then - 1 else if multiplicity.mandatory <> 0 then multiplicity.mandatory else if multiplicity.upperMult then - 1 else multiplicity.upperInt endif endif endif endif endif
+
+endpackage
+package as
+
+context as::Class
+def : commonSupertype(another : Class) :Class =
+	let allSupertypes  = self->asOrderedSet()->closure(superClasses)
+	, allOtherSupertypes  = another->asOrderedSet()->closure(superClasses)
+	in allSupertypes->intersection(allOtherSupertypes)->any(true)
+def : conformsTo(another : Class) :Boolean =
+	self = another or superClasses->exists(conformsTo(another))
+
+endpackage
