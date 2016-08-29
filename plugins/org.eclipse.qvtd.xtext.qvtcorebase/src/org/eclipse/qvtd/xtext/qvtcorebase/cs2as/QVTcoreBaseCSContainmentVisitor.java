@@ -66,7 +66,7 @@ public class QVTcoreBaseCSContainmentVisitor extends AbstractQVTcoreBaseCSContai
 	protected static class IsAssignmentPredicate implements com.google.common.base.Predicate<PredicateOrAssignmentCS>
 	{
 		public final static @NonNull IsAssignmentPredicate INSTANCE = new IsAssignmentPredicate();
-		
+
 		@Override
 		public boolean apply(PredicateOrAssignmentCS csAssignment) {
 			return csAssignment.getOwnedInitExpression() != null;
@@ -76,7 +76,7 @@ public class QVTcoreBaseCSContainmentVisitor extends AbstractQVTcoreBaseCSContai
 	protected static class IsPredicatePredicate implements com.google.common.base.Predicate<PredicateOrAssignmentCS>
 	{
 		public final static @NonNull IsPredicatePredicate INSTANCE = new IsPredicatePredicate();
-		
+
 		@Override
 		public boolean apply(PredicateOrAssignmentCS csAssignment) {
 			return csAssignment.getOwnedInitExpression() == null;
@@ -124,7 +124,7 @@ public class QVTcoreBaseCSContainmentVisitor extends AbstractQVTcoreBaseCSContai
 
 	public QVTcoreBaseCSContainmentVisitor(@NonNull CS2ASConversion context) {
 		super(context);
-	}	
+	}
 
 	protected @NonNull BottomPattern createBottomPattern(@NonNull BottomPatternCS csElement) {
 		return context.refreshModelElement(BottomPattern.class, QVTcoreBasePackage.Literals.BOTTOM_PATTERN, csElement);
@@ -254,7 +254,8 @@ public class QVTcoreBaseCSContainmentVisitor extends AbstractQVTcoreBaseCSContai
 			CS2AS.setElementType(pathName, QVTbasePackage.Literals.TRANSFORMATION, csElement, null);
 		}
 		@NonNull Function pivotElement = refreshNamedElement(Function.class, QVTbasePackage.Literals.FUNCTION, csElement);
-//		pivotElement.setIsStatic(true);
+		//		pivotElement.setIsStatic(true);
+		pivotElement.setIsTransient(csElement.isIsTransient());
 		context.refreshPivotList(FunctionParameter.class, pivotElement.getOwnedParameters(), csElement.getOwnedParameters());
 		return null;
 	}

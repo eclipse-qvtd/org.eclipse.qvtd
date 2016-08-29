@@ -312,13 +312,13 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 			List<Variable> rootVariables = new ArrayList<Variable>();
 			for (DomainPattern asPattern : asPatterns) {
 				if (asPattern != null) {
-//					List<@NonNull Variable> boundVariables = new ArrayList<@NonNull Variable>();
+					//					List<@NonNull Variable> boundVariables = new ArrayList<@NonNull Variable>();
 					TemplateExp asTemplate = asPattern.getTemplateExpression();
 					if (asTemplate != null) {
 						rootVariables.add(asTemplate.getBindsTo());
-//						gatherBoundVariables(boundVariables, asTemplate);
+						//						gatherBoundVariables(boundVariables, asTemplate);
 					}
-//					PivotUtilInternal.refreshList(asPattern.getBindsTo(), boundVariables);
+					//					PivotUtilInternal.refreshList(asPattern.getBindsTo(), boundVariables);
 				}
 			}
 			PivotUtilInternal.refreshList(pivotElement.getRootVariable(), rootVariables);
@@ -430,6 +430,7 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 	public Continuation<?> visitQueryCS(@NonNull QueryCS csElement) {
 		@NonNull Function pivotElement = refreshNamedElement(Function.class, QVTbasePackage.Literals.FUNCTION, csElement);
 		context.refreshPivotList(FunctionParameter.class, pivotElement.getOwnedParameters(), csElement.getOwnedParameters());
+		pivotElement.setIsTransient(csElement.isIsTransient());
 		return null;
 	}
 
@@ -477,12 +478,12 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 		//
 		//	Accumulate variables bound at template variables.
 		//
-//		for (@NonNull Domain domain : ClassUtil.nullFree(pivotElement.getDomain())) {
-//			RelationDomain relationDomain = (RelationDomain)domain;
-//			for (@NonNull DomainPattern pattern : ClassUtil.nullFree(relationDomain.getPattern())) {
-//				relationVariables.addAll(ClassUtil.nullFree(pattern.getBindsTo()));
-//			}
-//		}
+		//		for (@NonNull Domain domain : ClassUtil.nullFree(pivotElement.getDomain())) {
+		//			RelationDomain relationDomain = (RelationDomain)domain;
+		//			for (@NonNull DomainPattern pattern : ClassUtil.nullFree(relationDomain.getPattern())) {
+		//				relationVariables.addAll(ClassUtil.nullFree(pattern.getBindsTo()));
+		//			}
+		//		}
 		//
 		//	Resolve the special variables.
 		//

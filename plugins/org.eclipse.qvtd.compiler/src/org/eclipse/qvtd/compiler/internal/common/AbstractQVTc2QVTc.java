@@ -219,6 +219,7 @@ public abstract class AbstractQVTc2QVTc
 			fOut.setName(fIn.getName());
 			fOut.setIsRequired(fIn.isIsRequired());
 			fOut.setIsStatic(fIn.isIsStatic());
+			fOut.setIsTransient(fIn.isIsTransient());
 			fOut.setIsTypeof(fIn.isIsTypeof());
 			createAll(fIn.getOwnedParameters(), fOut.getOwnedParameters());
 			createAll(fIn.getOwnedComments(), fOut.getOwnedComments());

@@ -350,6 +350,7 @@ public abstract class QVTcoreBaseDeclarationVisitor extends QVTbaseDeclarationVi
 		csQuery.setOwnedPathName(createPathNameCS(asFunction.getOwningClass()));
 		context.refreshList(csQuery.getOwnedParameters(), context.visitDeclarations(ParamDeclarationCS.class, asFunction.getOwnedParameters(), null));
 		csQuery.setOwnedExpression(createExpCS(asFunction.getQueryExpression()));
+		csQuery.setIsTransient(asFunction.isIsTransient());
 		return csQuery;
 	}
 

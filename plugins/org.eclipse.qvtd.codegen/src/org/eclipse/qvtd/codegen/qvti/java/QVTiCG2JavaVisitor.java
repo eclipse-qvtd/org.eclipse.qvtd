@@ -1174,7 +1174,8 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 	}
 
 	protected boolean useCache(@NonNull CGFunction cgFunction) {
-		return true;
+		Element ast = cgFunction.getAst();
+		return !(ast instanceof Operation) || !((Operation)ast).isIsTransient();
 	}
 
 	protected @Nullable CGShadowExp useClass(@NonNull CGFunction cgFunction) {
