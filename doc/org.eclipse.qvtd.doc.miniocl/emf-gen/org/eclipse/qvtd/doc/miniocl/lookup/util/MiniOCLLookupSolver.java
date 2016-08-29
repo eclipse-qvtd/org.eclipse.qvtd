@@ -13,19 +13,19 @@ package	org.eclipse.qvtd.doc.miniocl.lookup.util;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.evaluation.Executor;
+import org.eclipse.qvtd.doc.miniocl.util.MiniOCLUnqualifiedClassLookupVisitor;
+import org.eclipse.qvtd.doc.miniocl.util.MiniOCLUnqualifiedOperationLookupVisitor;
+import org.eclipse.qvtd.doc.miniocl.util.MiniOCLUnqualifiedPackageLookupVisitor;
+import org.eclipse.qvtd.doc.miniocl.util.MiniOCLUnqualifiedVariableLookupVisitor;
+import org.eclipse.qvtd.doc.miniocl.util.MiniOCLUnqualifiedNamedElementLookupVisitor;
+import org.eclipse.qvtd.doc.miniocl.util.MiniOCLUnqualifiedPropertyLookupVisitor;
+import org.eclipse.qvtd.doc.miniocl.util.MiniOCLExportedPropertyLookupVisitor;
 import org.eclipse.qvtd.doc.miniocl.util.MiniOCLExportedOperationLookupVisitor;
 import org.eclipse.qvtd.doc.miniocl.util.MiniOCLExportedPackageLookupVisitor;
-import org.eclipse.qvtd.doc.miniocl.util.MiniOCLExportedPropertyLookupVisitor;
 import org.eclipse.qvtd.doc.miniocl.util.MiniOCLQualifiedClassLookupVisitor;
 import org.eclipse.qvtd.doc.miniocl.util.MiniOCLQualifiedOperationLookupVisitor;
 import org.eclipse.qvtd.doc.miniocl.util.MiniOCLQualifiedPackageLookupVisitor;
 import org.eclipse.qvtd.doc.miniocl.util.MiniOCLQualifiedPropertyLookupVisitor;
-import org.eclipse.qvtd.doc.miniocl.util.MiniOCLUnqualifiedClassLookupVisitor;
-import org.eclipse.qvtd.doc.miniocl.util.MiniOCLUnqualifiedNamedElementLookupVisitor;
-import org.eclipse.qvtd.doc.miniocl.util.MiniOCLUnqualifiedOperationLookupVisitor;
-import org.eclipse.qvtd.doc.miniocl.util.MiniOCLUnqualifiedPackageLookupVisitor;
-import org.eclipse.qvtd.doc.miniocl.util.MiniOCLUnqualifiedPropertyLookupVisitor;
-import org.eclipse.qvtd.doc.miniocl.util.MiniOCLUnqualifiedVariableLookupVisitor;
 
 
 public class MiniOCLLookupSolver {

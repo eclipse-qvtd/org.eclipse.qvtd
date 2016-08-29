@@ -6,22 +6,39 @@ import static org.eclipse.qvtd.doc.miniocl.MiniOCLPackage.CLASS;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
+import org.eclipse.qvtd.doc.miniocl.BooleanLiteralExp;
 import org.eclipse.qvtd.doc.miniocl.CallExp;
+import org.eclipse.qvtd.doc.miniocl.CollectionItem;
+import org.eclipse.qvtd.doc.miniocl.CollectionKind;
+import org.eclipse.qvtd.doc.miniocl.CollectionLiteralExp;
+import org.eclipse.qvtd.doc.miniocl.CollectionLiteralPart;
+import org.eclipse.qvtd.doc.miniocl.CollectionRange;
 import org.eclipse.qvtd.doc.miniocl.Constraint;
 import org.eclipse.qvtd.doc.miniocl.Element;
 import org.eclipse.qvtd.doc.miniocl.ExpressionInOCL;
 import org.eclipse.qvtd.doc.miniocl.Feature;
+import org.eclipse.qvtd.doc.miniocl.Import;
+import org.eclipse.qvtd.doc.miniocl.IntegerLiteralExp;
+import org.eclipse.qvtd.doc.miniocl.IterateExp;
+import org.eclipse.qvtd.doc.miniocl.IteratorExp;
+import org.eclipse.qvtd.doc.miniocl.LetExp;
+import org.eclipse.qvtd.doc.miniocl.LiteralExp;
+import org.eclipse.qvtd.doc.miniocl.LoopExp;
 import org.eclipse.qvtd.doc.miniocl.MiniOCLFactory;
 import org.eclipse.qvtd.doc.miniocl.MiniOCLPackage;
 import org.eclipse.qvtd.doc.miniocl.NamedElement;
 import org.eclipse.qvtd.doc.miniocl.Namespace;
+import org.eclipse.qvtd.doc.miniocl.NullLiteralExp;
 import org.eclipse.qvtd.doc.miniocl.OCLExpression;
+import org.eclipse.qvtd.doc.miniocl.OpaqueExpression;
 import org.eclipse.qvtd.doc.miniocl.Operation;
 import org.eclipse.qvtd.doc.miniocl.OperationCallExp;
 import org.eclipse.qvtd.doc.miniocl.Parameter;
+import org.eclipse.qvtd.doc.miniocl.PrimitiveLiteralExp;
 import org.eclipse.qvtd.doc.miniocl.Property;
 import org.eclipse.qvtd.doc.miniocl.PropertyCallExp;
 import org.eclipse.qvtd.doc.miniocl.Root;
@@ -42,6 +59,13 @@ public class MiniOCLPackageImpl extends EPackageImpl implements MiniOCLPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass booleanLiteralExpEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass elementEClass = null;
 
 	/**
@@ -50,6 +74,55 @@ public class MiniOCLPackageImpl extends EPackageImpl implements MiniOCLPackage {
 	 * @generated
 	 */
 	private EClass featureEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass importEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass integerLiteralExpEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass iteratorExpEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass iterateExpEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass letExpEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass literalExpEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass loopExpEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -70,7 +143,21 @@ public class MiniOCLPackageImpl extends EPackageImpl implements MiniOCLPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass nullLiteralExpEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass typedElementEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum collectionKindEEnum = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -92,6 +179,13 @@ public class MiniOCLPackageImpl extends EPackageImpl implements MiniOCLPackage {
 	 * @generated
 	 */
 	private EClass oclExpressionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass opaqueExpressionEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -126,6 +220,34 @@ public class MiniOCLPackageImpl extends EPackageImpl implements MiniOCLPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass collectionLiteralExpEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass collectionItemEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass collectionLiteralPartEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass collectionRangeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass propertyEClass = null;
 
 	/**
@@ -141,6 +263,13 @@ public class MiniOCLPackageImpl extends EPackageImpl implements MiniOCLPackage {
 	 * @generated
 	 */
 	private EClass parameterEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass primitiveLiteralExpEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -244,6 +373,24 @@ public class MiniOCLPackageImpl extends EPackageImpl implements MiniOCLPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getBooleanLiteralExp() {
+		return booleanLiteralExpEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getBooleanLiteralExp_BooleanSymbol() {
+		return (EAttribute)booleanLiteralExpEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getElement() {
 		return elementEClass;
 	}
@@ -255,6 +402,141 @@ public class MiniOCLPackageImpl extends EPackageImpl implements MiniOCLPackage {
 	 */
 	public EClass getFeature() {
 		return featureEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getImport() {
+		return importEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getImport_Uri() {
+		return (EAttribute)importEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getImport_Alias() {
+		return (EAttribute)importEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getIntegerLiteralExp() {
+		return integerLiteralExpEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getIntegerLiteralExp_IntegerSymbol() {
+		return (EAttribute)integerLiteralExpEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getIteratorExp() {
+		return iteratorExpEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getIterateExp() {
+		return iterateExpEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getIterateExp_OwnedResult() {
+		return (EReference)iterateExpEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getLetExp() {
+		return letExpEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getLetExp_OwnedIn() {
+		return (EReference)letExpEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getLetExp_OwnedVariable() {
+		return (EReference)letExpEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getLiteralExp() {
+		return literalExpEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getLoopExp() {
+		return loopExpEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getLoopExp_OwnedIterator() {
+		return (EReference)loopExpEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getLoopExp_OwnedBody() {
+		return (EReference)loopExpEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -289,6 +571,15 @@ public class MiniOCLPackageImpl extends EPackageImpl implements MiniOCLPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getNullLiteralExp() {
+		return nullLiteralExpEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getTypedElement() {
 		return typedElementEClass;
 	}
@@ -300,6 +591,15 @@ public class MiniOCLPackageImpl extends EPackageImpl implements MiniOCLPackage {
 	 */
 	public EReference getTypedElement_Type() {
 		return (EReference)typedElementEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EEnum getCollectionKind() {
+		return collectionKindEEnum;
 	}
 
 	/**
@@ -352,8 +652,35 @@ public class MiniOCLPackageImpl extends EPackageImpl implements MiniOCLPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getConstraint_ConstrainedElement() {
+		return (EReference)constraintEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getOCLExpression() {
 		return oclExpressionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getOpaqueExpression() {
+		return opaqueExpressionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getOpaqueExpression_Language() {
+		return (EAttribute)opaqueExpressionEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -388,8 +715,26 @@ public class MiniOCLPackageImpl extends EPackageImpl implements MiniOCLPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getRoot_OwnedPackages() {
+	public EReference getRoot_OwnedConstraints() {
 		return (EReference)rootEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getRoot_OwnedImports() {
+		return (EReference)rootEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getRoot_OwnedPackages() {
+		return (EReference)rootEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -433,7 +778,7 @@ public class MiniOCLPackageImpl extends EPackageImpl implements MiniOCLPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getClass_SuperClass() {
+	public EReference getClass_SuperClasses() {
 		return (EReference)classEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -460,8 +805,80 @@ public class MiniOCLPackageImpl extends EPackageImpl implements MiniOCLPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getClass_OwnedInvariants() {
-		return (EReference)classEClass.getEStructuralFeatures().get(3);
+	public EClass getCollectionLiteralExp() {
+		return collectionLiteralExpEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getCollectionLiteralExp_OwnedParts() {
+		return (EReference)collectionLiteralExpEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getCollectionLiteralExp_Kind() {
+		return (EAttribute)collectionLiteralExpEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getCollectionItem() {
+		return collectionItemEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getCollectionItem_OwnedItem() {
+		return (EReference)collectionItemEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getCollectionLiteralPart() {
+		return collectionLiteralPartEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getCollectionRange() {
+		return collectionRangeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getCollectionRange_OwnedFirst() {
+		return (EReference)collectionRangeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getCollectionRange_OwnedLast() {
+		return (EReference)collectionRangeEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -480,6 +897,24 @@ public class MiniOCLPackageImpl extends EPackageImpl implements MiniOCLPackage {
 	 */
 	public EReference getProperty_OwningClass() {
 		return (EReference)propertyEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getProperty_LowerBound() {
+		return (EAttribute)propertyEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getProperty_UpperBound() {
+		return (EAttribute)propertyEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -506,7 +941,7 @@ public class MiniOCLPackageImpl extends EPackageImpl implements MiniOCLPackage {
 	 * @generated
 	 */
 	public EReference getOperation_OwningClass() {
-		return (EReference)operationEClass.getEStructuralFeatures().get(1);
+		return (EReference)operationEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -515,7 +950,7 @@ public class MiniOCLPackageImpl extends EPackageImpl implements MiniOCLPackage {
 	 * @generated
 	 */
 	public EReference getOperation_OwnedBodyExpression() {
-		return (EReference)operationEClass.getEStructuralFeatures().get(2);
+		return (EReference)operationEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -525,6 +960,15 @@ public class MiniOCLPackageImpl extends EPackageImpl implements MiniOCLPackage {
 	 */
 	public EClass getParameter() {
 		return parameterEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getPrimitiveLiteralExp() {
+		return primitiveLiteralExpEClass;
 	}
 
 	/**
@@ -636,25 +1080,75 @@ public class MiniOCLPackageImpl extends EPackageImpl implements MiniOCLPackage {
 		isCreated = true;
 
 		// Create classes and their features
+		booleanLiteralExpEClass = createEClass(BOOLEAN_LITERAL_EXP);
+		createEAttribute(booleanLiteralExpEClass, BOOLEAN_LITERAL_EXP__BOOLEAN_SYMBOL);
+
 		callExpEClass = createEClass(CALL_EXP);
 		createEReference(callExpEClass, CALL_EXP__OWNED_SOURCE);
 
 		classEClass = createEClass(CLASS);
-		createEReference(classEClass, CLASS__SUPER_CLASS);
+		createEReference(classEClass, CLASS__SUPER_CLASSES);
 		createEReference(classEClass, CLASS__OWNED_OPERATIONS);
 		createEReference(classEClass, CLASS__OWNED_PROPERTIES);
-		createEReference(classEClass, CLASS__OWNED_INVARIANTS);
+
+		collectionLiteralExpEClass = createEClass(COLLECTION_LITERAL_EXP);
+		createEReference(collectionLiteralExpEClass, COLLECTION_LITERAL_EXP__OWNED_PARTS);
+		createEAttribute(collectionLiteralExpEClass, COLLECTION_LITERAL_EXP__KIND);
+
+		collectionItemEClass = createEClass(COLLECTION_ITEM);
+		createEReference(collectionItemEClass, COLLECTION_ITEM__OWNED_ITEM);
+
+		collectionLiteralPartEClass = createEClass(COLLECTION_LITERAL_PART);
+
+		collectionRangeEClass = createEClass(COLLECTION_RANGE);
+		createEReference(collectionRangeEClass, COLLECTION_RANGE__OWNED_FIRST);
+		createEReference(collectionRangeEClass, COLLECTION_RANGE__OWNED_LAST);
+
+		constraintEClass = createEClass(CONSTRAINT);
+		createEReference(constraintEClass, CONSTRAINT__OWNED_SPECIFICATION);
+		createEReference(constraintEClass, CONSTRAINT__CONSTRAINED_ELEMENT);
 
 		elementEClass = createEClass(ELEMENT);
 
+		expressionInOCLEClass = createEClass(EXPRESSION_IN_OCL);
+		createEReference(expressionInOCLEClass, EXPRESSION_IN_OCL__OWNED_SELF_VAR);
+		createEReference(expressionInOCLEClass, EXPRESSION_IN_OCL__OWNED_BODY);
+
 		featureEClass = createEClass(FEATURE);
+
+		importEClass = createEClass(IMPORT);
+		createEAttribute(importEClass, IMPORT__URI);
+		createEAttribute(importEClass, IMPORT__ALIAS);
+
+		integerLiteralExpEClass = createEClass(INTEGER_LITERAL_EXP);
+		createEAttribute(integerLiteralExpEClass, INTEGER_LITERAL_EXP__INTEGER_SYMBOL);
+
+		iteratorExpEClass = createEClass(ITERATOR_EXP);
+
+		iterateExpEClass = createEClass(ITERATE_EXP);
+		createEReference(iterateExpEClass, ITERATE_EXP__OWNED_RESULT);
+
+		letExpEClass = createEClass(LET_EXP);
+		createEReference(letExpEClass, LET_EXP__OWNED_IN);
+		createEReference(letExpEClass, LET_EXP__OWNED_VARIABLE);
+
+		literalExpEClass = createEClass(LITERAL_EXP);
+
+		loopExpEClass = createEClass(LOOP_EXP);
+		createEReference(loopExpEClass, LOOP_EXP__OWNED_ITERATOR);
+		createEReference(loopExpEClass, LOOP_EXP__OWNED_BODY);
 
 		namedElementEClass = createEClass(NAMED_ELEMENT);
 		createEAttribute(namedElementEClass, NAMED_ELEMENT__NAME);
 
 		namespaceEClass = createEClass(NAMESPACE);
 
+		nullLiteralExpEClass = createEClass(NULL_LITERAL_EXP);
+
 		oclExpressionEClass = createEClass(OCL_EXPRESSION);
+
+		opaqueExpressionEClass = createEClass(OPAQUE_EXPRESSION);
+		createEAttribute(opaqueExpressionEClass, OPAQUE_EXPRESSION__LANGUAGE);
 
 		operationCallExpEClass = createEClass(OPERATION_CALL_EXP);
 		createEReference(operationCallExpEClass, OPERATION_CALL_EXP__OWNED_ARGUMENTS);
@@ -662,8 +1156,8 @@ public class MiniOCLPackageImpl extends EPackageImpl implements MiniOCLPackage {
 
 		operationEClass = createEClass(OPERATION);
 		createEReference(operationEClass, OPERATION__OWNED_PARAMETERS);
-		createEReference(operationEClass, OPERATION__OWNING_CLASS);
 		createEReference(operationEClass, OPERATION__OWNED_BODY_EXPRESSION);
+		createEReference(operationEClass, OPERATION__OWNING_CLASS);
 
 		packageEClass = createEClass(PACKAGE);
 		createEReference(packageEClass, PACKAGE__OWNED_CLASSES);
@@ -671,13 +1165,19 @@ public class MiniOCLPackageImpl extends EPackageImpl implements MiniOCLPackage {
 
 		parameterEClass = createEClass(PARAMETER);
 
+		primitiveLiteralExpEClass = createEClass(PRIMITIVE_LITERAL_EXP);
+
 		propertyEClass = createEClass(PROPERTY);
 		createEReference(propertyEClass, PROPERTY__OWNING_CLASS);
+		createEAttribute(propertyEClass, PROPERTY__LOWER_BOUND);
+		createEAttribute(propertyEClass, PROPERTY__UPPER_BOUND);
 
 		propertyCallExpEClass = createEClass(PROPERTY_CALL_EXP);
 		createEReference(propertyCallExpEClass, PROPERTY_CALL_EXP__REFERRED_PROPERTY);
 
 		rootEClass = createEClass(ROOT);
+		createEReference(rootEClass, ROOT__OWNED_CONSTRAINTS);
+		createEReference(rootEClass, ROOT__OWNED_IMPORTS);
 		createEReference(rootEClass, ROOT__OWNED_PACKAGES);
 
 		variableEClass = createEClass(VARIABLE);
@@ -690,12 +1190,8 @@ public class MiniOCLPackageImpl extends EPackageImpl implements MiniOCLPackage {
 		typedElementEClass = createEClass(TYPED_ELEMENT);
 		createEReference(typedElementEClass, TYPED_ELEMENT__TYPE);
 
-		expressionInOCLEClass = createEClass(EXPRESSION_IN_OCL);
-		createEReference(expressionInOCLEClass, EXPRESSION_IN_OCL__OWNED_SELF_VAR);
-		createEReference(expressionInOCLEClass, EXPRESSION_IN_OCL__OWNED_BODY);
-
-		constraintEClass = createEClass(CONSTRAINT);
-		createEReference(constraintEClass, CONSTRAINT__OWNED_SPECIFICATION);
+		// Create enums
+		collectionKindEEnum = createEEnum(COLLECTION_KIND);
 	}
 
 	/**
@@ -726,19 +1222,35 @@ public class MiniOCLPackageImpl extends EPackageImpl implements MiniOCLPackage {
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
+		booleanLiteralExpEClass.getESuperTypes().add(this.getPrimitiveLiteralExp());
 		callExpEClass.getESuperTypes().add(this.getOCLExpression());
-		classEClass.getESuperTypes().add(this.getNamedElement());
+		classEClass.getESuperTypes().add(this.getNamespace());
+		collectionLiteralExpEClass.getESuperTypes().add(this.getLiteralExp());
+		collectionItemEClass.getESuperTypes().add(this.getCollectionLiteralPart());
+		collectionLiteralPartEClass.getESuperTypes().add(this.getTypedElement());
+		collectionRangeEClass.getESuperTypes().add(this.getCollectionLiteralPart());
+		constraintEClass.getESuperTypes().add(this.getNamedElement());
 		elementEClass.getESuperTypes().add(this.getVisitable());
+		expressionInOCLEClass.getESuperTypes().add(this.getOpaqueExpression());
 		featureEClass.getESuperTypes().add(this.getNamedElement());
 		featureEClass.getESuperTypes().add(this.getTypedElement());
+		importEClass.getESuperTypes().add(this.getElement());
+		integerLiteralExpEClass.getESuperTypes().add(this.getPrimitiveLiteralExp());
+		iteratorExpEClass.getESuperTypes().add(this.getLoopExp());
+		iterateExpEClass.getESuperTypes().add(this.getLoopExp());
+		letExpEClass.getESuperTypes().add(this.getOCLExpression());
+		literalExpEClass.getESuperTypes().add(this.getOCLExpression());
+		loopExpEClass.getESuperTypes().add(this.getCallExp());
 		namedElementEClass.getESuperTypes().add(this.getElement());
-		namespaceEClass.getESuperTypes().add(this.getElement());
+		namespaceEClass.getESuperTypes().add(this.getNamedElement());
+		nullLiteralExpEClass.getESuperTypes().add(this.getLiteralExp());
 		oclExpressionEClass.getESuperTypes().add(this.getTypedElement());
+		opaqueExpressionEClass.getESuperTypes().add(this.getTypedElement());
 		operationCallExpEClass.getESuperTypes().add(this.getCallExp());
 		operationEClass.getESuperTypes().add(this.getFeature());
-		packageEClass.getESuperTypes().add(this.getNamedElement());
 		packageEClass.getESuperTypes().add(this.getNamespace());
 		parameterEClass.getESuperTypes().add(this.getVariable());
+		primitiveLiteralExpEClass.getESuperTypes().add(this.getLiteralExp());
 		propertyEClass.getESuperTypes().add(this.getFeature());
 		propertyCallExpEClass.getESuperTypes().add(this.getCallExp());
 		rootEClass.getESuperTypes().add(this.getElement());
@@ -746,29 +1258,77 @@ public class MiniOCLPackageImpl extends EPackageImpl implements MiniOCLPackage {
 		variableEClass.getESuperTypes().add(this.getTypedElement());
 		variableExpEClass.getESuperTypes().add(this.getOCLExpression());
 		typedElementEClass.getESuperTypes().add(this.getElement());
-		expressionInOCLEClass.getESuperTypes().add(this.getElement());
-		constraintEClass.getESuperTypes().add(this.getNamedElement());
 
 		// Initialize classes, features, and operations; add parameters
+		initEClass(booleanLiteralExpEClass, BooleanLiteralExp.class, "BooleanLiteralExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getBooleanLiteralExp_BooleanSymbol(), ecorePackage.getEBoolean(), "booleanSymbol", null, 0, 1, BooleanLiteralExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		initEClass(callExpEClass, CallExp.class, "CallExp", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCallExp_OwnedSource(), this.getOCLExpression(), null, "ownedSource", null, 1, 1, CallExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(classEClass, org.eclipse.qvtd.doc.miniocl.Class.class, "Class", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getClass_SuperClass(), this.getClass_(), null, "superClass", null, 0, 1, org.eclipse.qvtd.doc.miniocl.Class.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getClass_SuperClasses(), this.getClass_(), null, "superClasses", null, 0, -1, org.eclipse.qvtd.doc.miniocl.Class.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getClass_OwnedOperations(), this.getOperation(), this.getOperation_OwningClass(), "ownedOperations", null, 0, -1, org.eclipse.qvtd.doc.miniocl.Class.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getClass_OwnedProperties(), this.getProperty(), null, "ownedProperties", null, 0, -1, org.eclipse.qvtd.doc.miniocl.Class.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getClass_OwnedInvariants(), this.getConstraint(), null, "ownedInvariants", null, 0, -1, org.eclipse.qvtd.doc.miniocl.Class.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getClass_OwnedProperties(), this.getProperty(), this.getProperty_OwningClass(), "ownedProperties", null, 0, -1, org.eclipse.qvtd.doc.miniocl.Class.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(collectionLiteralExpEClass, CollectionLiteralExp.class, "CollectionLiteralExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getCollectionLiteralExp_OwnedParts(), this.getCollectionLiteralPart(), null, "ownedParts", null, 0, -1, CollectionLiteralExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCollectionLiteralExp_Kind(), this.getCollectionKind(), "kind", null, 1, 1, CollectionLiteralExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(collectionItemEClass, CollectionItem.class, "CollectionItem", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getCollectionItem_OwnedItem(), this.getOCLExpression(), null, "ownedItem", null, 1, 1, CollectionItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(collectionLiteralPartEClass, CollectionLiteralPart.class, "CollectionLiteralPart", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(collectionRangeEClass, CollectionRange.class, "CollectionRange", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getCollectionRange_OwnedFirst(), this.getOCLExpression(), null, "ownedFirst", null, 1, 1, CollectionRange.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCollectionRange_OwnedLast(), this.getOCLExpression(), null, "ownedLast", null, 1, 1, CollectionRange.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(constraintEClass, Constraint.class, "Constraint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getConstraint_OwnedSpecification(), this.getExpressionInOCL(), null, "ownedSpecification", null, 1, 1, Constraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getConstraint_ConstrainedElement(), this.getClass_(), null, "constrainedElement", null, 1, 1, Constraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(elementEClass, Element.class, "Element", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
+		initEClass(expressionInOCLEClass, ExpressionInOCL.class, "ExpressionInOCL", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getExpressionInOCL_OwnedSelfVar(), this.getVariable(), null, "ownedSelfVar", null, 1, 1, ExpressionInOCL.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getExpressionInOCL_OwnedBody(), this.getOCLExpression(), null, "ownedBody", null, 1, 1, ExpressionInOCL.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		initEClass(featureEClass, Feature.class, "Feature", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(importEClass, Import.class, "Import", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getImport_Uri(), ecorePackage.getEString(), "uri", null, 0, 1, Import.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getImport_Alias(), ecorePackage.getEString(), "alias", null, 0, 1, Import.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(integerLiteralExpEClass, IntegerLiteralExp.class, "IntegerLiteralExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getIntegerLiteralExp_IntegerSymbol(), ecorePackage.getEInt(), "integerSymbol", null, 0, 1, IntegerLiteralExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(iteratorExpEClass, IteratorExp.class, "IteratorExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(iterateExpEClass, IterateExp.class, "IterateExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getIterateExp_OwnedResult(), this.getVariable(), null, "ownedResult", null, 1, 1, IterateExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(letExpEClass, LetExp.class, "LetExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getLetExp_OwnedIn(), this.getOCLExpression(), null, "ownedIn", null, 1, 1, LetExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getLetExp_OwnedVariable(), this.getVariable(), null, "ownedVariable", null, 1, 1, LetExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(literalExpEClass, LiteralExp.class, "LiteralExp", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(loopExpEClass, LoopExp.class, "LoopExp", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getLoopExp_OwnedIterator(), this.getVariable(), null, "ownedIterator", null, 1, 1, LoopExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getLoopExp_OwnedBody(), this.getOCLExpression(), null, "ownedBody", null, 1, 1, LoopExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(namedElementEClass, NamedElement.class, "NamedElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getNamedElement_Name(), ecorePackage.getEString(), "name", null, 0, 1, NamedElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(namespaceEClass, Namespace.class, "Namespace", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(oclExpressionEClass, OCLExpression.class, "OCLExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(nullLiteralExpEClass, NullLiteralExp.class, "NullLiteralExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(oclExpressionEClass, OCLExpression.class, "OCLExpression", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(opaqueExpressionEClass, OpaqueExpression.class, "OpaqueExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getOpaqueExpression_Language(), ecorePackage.getEString(), "language", null, 1, 1, OpaqueExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(operationCallExpEClass, OperationCallExp.class, "OperationCallExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getOperationCallExp_OwnedArguments(), this.getOCLExpression(), null, "ownedArguments", null, 0, -1, OperationCallExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -776,8 +1336,8 @@ public class MiniOCLPackageImpl extends EPackageImpl implements MiniOCLPackage {
 
 		initEClass(operationEClass, Operation.class, "Operation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getOperation_OwnedParameters(), this.getParameter(), null, "ownedParameters", null, 0, -1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getOperation_OwningClass(), this.getClass_(), this.getClass_OwnedOperations(), "owningClass", null, 0, 1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getOperation_OwnedBodyExpression(), this.getExpressionInOCL(), null, "ownedBodyExpression", null, 1, 1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getOperation_OwningClass(), this.getClass_(), this.getClass_OwnedOperations(), "owningClass", null, 0, 1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(packageEClass, org.eclipse.qvtd.doc.miniocl.Package.class, "Package", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getPackage_OwnedClasses(), this.getClass_(), null, "ownedClasses", null, 0, -1, org.eclipse.qvtd.doc.miniocl.Package.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -785,13 +1345,19 @@ public class MiniOCLPackageImpl extends EPackageImpl implements MiniOCLPackage {
 
 		initEClass(parameterEClass, Parameter.class, "Parameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
+		initEClass(primitiveLiteralExpEClass, PrimitiveLiteralExp.class, "PrimitiveLiteralExp", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
 		initEClass(propertyEClass, Property.class, "Property", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getProperty_OwningClass(), this.getClass_(), null, "owningClass", null, 0, 1, Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getProperty_OwningClass(), this.getClass_(), this.getClass_OwnedProperties(), "owningClass", null, 0, 1, Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getProperty_LowerBound(), ecorePackage.getEInt(), "lowerBound", null, 0, 1, Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getProperty_UpperBound(), ecorePackage.getEInt(), "upperBound", null, 0, 1, Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(propertyCallExpEClass, PropertyCallExp.class, "PropertyCallExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getPropertyCallExp_ReferredProperty(), this.getProperty(), null, "referredProperty", null, 1, 1, PropertyCallExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(rootEClass, Root.class, "Root", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getRoot_OwnedConstraints(), this.getConstraint(), null, "ownedConstraints", null, 0, -1, Root.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getRoot_OwnedImports(), this.getImport(), null, "ownedImports", null, 0, -1, Root.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRoot_OwnedPackages(), this.getPackage(), null, "ownedPackages", null, 0, -1, Root.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(variableEClass, Variable.class, "Variable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -804,12 +1370,9 @@ public class MiniOCLPackageImpl extends EPackageImpl implements MiniOCLPackage {
 		initEClass(typedElementEClass, TypedElement.class, "TypedElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTypedElement_Type(), this.getClass_(), null, "type", null, 1, 1, TypedElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(expressionInOCLEClass, ExpressionInOCL.class, "ExpressionInOCL", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getExpressionInOCL_OwnedSelfVar(), this.getVariable(), null, "ownedSelfVar", null, 1, 1, ExpressionInOCL.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getExpressionInOCL_OwnedBody(), this.getOCLExpression(), null, "ownedBody", null, 1, 1, ExpressionInOCL.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(constraintEClass, Constraint.class, "Constraint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getConstraint_OwnedSpecification(), this.getExpressionInOCL(), null, "ownedSpecification", null, 1, 1, Constraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		// Initialize enums and add enum literals
+		initEEnum(collectionKindEEnum, CollectionKind.class, "CollectionKind");
+		addEEnumLiteral(collectionKindEEnum, CollectionKind.COLLECTION);
 
 		// Create resource
 		createResource(eNS_URI);

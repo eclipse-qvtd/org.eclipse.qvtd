@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.evaluation.Executor;
+
 import org.eclipse.qvtd.doc.miniocl.NamedElement;
 import org.eclipse.qvtd.doc.miniocl.lookup.LookupEnvironment;
 import org.eclipse.qvtd.doc.miniocl.lookup.impl.LookupEnvironmentImpl;

@@ -31,6 +31,7 @@ context InvariantCS
 def : ast() : as::Constraint =
 as::Constraint {
 	ownedSpecification = as::ExpressionInOCL {
+				language = 'OCL',
 				ownedBody = exp.ast(),
 				ownedSelfVar = as::Variable {
 							name = ' self' ,
@@ -61,6 +62,7 @@ as::Operation {
 type = ast().lookupClass(resultRef), 
 ownedParameters = params.ast(), 
 ownedBodyExpression = as::ExpressionInOCL {
+				language = 'OCL',
 				ownedBody = _body.ast(),
 				ownedSelfVar = as::Variable {
 							name = ' self' ,
@@ -94,13 +96,13 @@ ownedArguments = right.ast(),
 referredOperation = ast().lookupOperationFrom(ast().ownedSource.type, opName, ast().ownedArguments) 
 }
 context NameExpCS
-def : ast() : as::OperationCallExp =
+def : ast() : as::OCLExpression =
 if isOpCallExpWithExplicitSource()
 then as::OperationCallExp {
 	ownedSource = parentAsCallExpCS()._source.ast(), 
 ownedArguments = roundedBrackets.args.ast(), 
-referredOperation = ast().lookupOperationFrom(ast().ownedSource.type, expName, ast().ownedArguments), 
-type = ast().referredOperation ?. type 
+referredOperation = ast().lookupOperationFrom(ast().oclAsType(as::OperationCallExp).ownedSource.type, expName, ast().oclAsType(as::OperationCallExp).ownedArguments), 
+type = ast().oclAsType(as::OperationCallExp).referredOperation ?. type 
 }
 else
 	if isOpCallExpWithImplicitSource()
@@ -112,21 +114,21 @@ else
 				}
 		, 
 	ownedArguments = roundedBrackets.args.ast(), 
-	referredOperation = ast().lookupOperationFrom(ast().ownedSource.type, expName, ast().ownedArguments), 
-	type = ast().referredOperation ?. type 
+	referredOperation = ast().lookupOperationFrom(ast().oclAsType(as::OperationCallExp).ownedSource.type, expName, ast().oclAsType(as::OperationCallExp).ownedArguments), 
+	type = ast().oclAsType(as::OperationCallExp).referredOperation ?. type 
 	}
 	else
 		if isPropCallExpWithExplicitSource()
 		then as::PropertyCallExp {
 			ownedSource = parentAsCallExpCS()._source.ast(), 
-		referredProperty = ast().lookupPropertyFrom(ast().ownedSource.type, expName), 
-		type = ast().referredProperty ?. type 
+		referredProperty = ast().lookupPropertyFrom(ast().oclAsType(as::PropertyCallExp).ownedSource.type, expName), 
+		type = ast().oclAsType(as::PropertyCallExp).referredProperty ?. type 
 		}
 		else
 			if isVariableExp()
 			then as::VariableExp {
-				referredVariable = ast().lookupVariable(expName), 
-			type = ast().referredVariable.type 
+				referredVariable = ast().lookupVariable(expName.pathElements->first()), 
+			type = ast().oclAsType(as::VariableExp).referredVariable.type 
 			}
 			else
 				if isPropCallExpWithImplicitSource()
@@ -137,8 +139,8 @@ else
 								type = referredVar.type
 							}
 					, 
-				referredProperty = ast().lookupPropertyFrom(ast().ownedSource.type, expName), 
-				type = ast().referredProperty ?. type 
+				referredProperty = ast().lookupPropertyFrom(ast().oclAsType(as::PropertyCallExp).ownedSource.type, expName), 
+				type = ast().oclAsType(as::PropertyCallExp).referredProperty ?. type 
 				}
 				else
 					invalid
@@ -218,18 +220,18 @@ ownedParts = parts.ast(),
 type = ast().lookupClass(' Collection' ) 
 }
 context CollectionLiteralPartCS
-def : ast() : as::CollectionItem =
+def : ast() : as::CollectionLiteralPart =
 if withoutLastExpression()
 then as::CollectionItem {
 	ownedItem = first.ast(), 
-type = ast().ownedItem.type 
+type = ast().oclAsType(as::CollectionItem).ownedItem.type 
 }
 else
 	if withLastExpression()
 	then as::CollectionRange {
 		ownedFirst = first, 
 	ownedLast = last, 
-	type = ast().ownedFirst.type 
+	type = ast().oclAsType(as::CollectionRange).ownedFirst.type 
 	}
 	else
 		invalid

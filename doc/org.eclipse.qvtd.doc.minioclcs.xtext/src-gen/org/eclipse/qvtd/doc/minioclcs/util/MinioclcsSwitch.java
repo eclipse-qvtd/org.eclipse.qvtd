@@ -5,45 +5,11 @@ package org.eclipse.qvtd.doc.minioclcs.util;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+
 import org.eclipse.emf.ecore.util.Switch;
+
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.qvtd.doc.minioclcs.AccVarCS;
-import org.eclipse.qvtd.doc.minioclcs.BooleanExpCS;
-import org.eclipse.qvtd.doc.minioclcs.BooleanLiteralExpCS;
-import org.eclipse.qvtd.doc.minioclcs.CSTrace;
-import org.eclipse.qvtd.doc.minioclcs.CallExpCS;
-import org.eclipse.qvtd.doc.minioclcs.ClassCS;
-import org.eclipse.qvtd.doc.minioclcs.ClassifierCS;
-import org.eclipse.qvtd.doc.minioclcs.CollectExpCS;
-import org.eclipse.qvtd.doc.minioclcs.CollectionLiteralExpCS;
-import org.eclipse.qvtd.doc.minioclcs.CollectionLiteralPartCS;
-import org.eclipse.qvtd.doc.minioclcs.ConstraintsDefCS;
-import org.eclipse.qvtd.doc.minioclcs.DatatypeCS;
-import org.eclipse.qvtd.doc.minioclcs.ExpCS;
-import org.eclipse.qvtd.doc.minioclcs.IntLiteralExpCS;
-import org.eclipse.qvtd.doc.minioclcs.InvariantCS;
-import org.eclipse.qvtd.doc.minioclcs.IterateExpCS;
-import org.eclipse.qvtd.doc.minioclcs.IteratorVarCS;
-import org.eclipse.qvtd.doc.minioclcs.LetExpCS;
-import org.eclipse.qvtd.doc.minioclcs.LetVarCS;
-import org.eclipse.qvtd.doc.minioclcs.LiteralExpCS;
-import org.eclipse.qvtd.doc.minioclcs.LogicExpCS;
-import org.eclipse.qvtd.doc.minioclcs.LoopExpCS;
-import org.eclipse.qvtd.doc.minioclcs.MinioclcsPackage;
-import org.eclipse.qvtd.doc.minioclcs.MultiplicityCS;
-import org.eclipse.qvtd.doc.minioclcs.NameExpCS;
-import org.eclipse.qvtd.doc.minioclcs.NavigationExpCS;
-import org.eclipse.qvtd.doc.minioclcs.NullLiteralExpCS;
-import org.eclipse.qvtd.doc.minioclcs.OperationCS;
-import org.eclipse.qvtd.doc.minioclcs.PackageCS;
-import org.eclipse.qvtd.doc.minioclcs.ParameterCS;
-import org.eclipse.qvtd.doc.minioclcs.PathElementCS;
-import org.eclipse.qvtd.doc.minioclcs.PathNameCS;
-import org.eclipse.qvtd.doc.minioclcs.PrimaryExpCS;
-import org.eclipse.qvtd.doc.minioclcs.PropertyCS;
-import org.eclipse.qvtd.doc.minioclcs.RootCS;
-import org.eclipse.qvtd.doc.minioclcs.RoundedBracketClauseCS;
-import org.eclipse.qvtd.doc.minioclcs.SelfExpCS;
+import org.eclipse.qvtd.doc.minioclcs.*;
 
 /**
  * <!-- begin-user-doc -->
@@ -113,6 +79,13 @@ public class MinioclcsSwitch<@Nullable T> extends Switch<T>
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case MinioclcsPackage.IMPORT_CS: {
+				ImportCS importCS = (ImportCS)theEObject;
+				T result = caseImportCS(importCS);
+				if (result == null) result = caseCSTrace(importCS);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case MinioclcsPackage.PACKAGE_CS: {
 				PackageCS packageCS = (PackageCS)theEObject;
 				T result = casePackageCS(packageCS);
@@ -120,26 +93,10 @@ public class MinioclcsSwitch<@Nullable T> extends Switch<T>
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case MinioclcsPackage.CLASSIFIER_CS: {
-				ClassifierCS classifierCS = (ClassifierCS)theEObject;
-				T result = caseClassifierCS(classifierCS);
-				if (result == null) result = caseCSTrace(classifierCS);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case MinioclcsPackage.CLASS_CS: {
 				ClassCS classCS = (ClassCS)theEObject;
 				T result = caseClassCS(classCS);
-				if (result == null) result = caseClassifierCS(classCS);
 				if (result == null) result = caseCSTrace(classCS);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case MinioclcsPackage.DATATYPE_CS: {
-				DatatypeCS datatypeCS = (DatatypeCS)theEObject;
-				T result = caseDatatypeCS(datatypeCS);
-				if (result == null) result = caseClassifierCS(datatypeCS);
-				if (result == null) result = caseCSTrace(datatypeCS);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -192,18 +149,18 @@ public class MinioclcsSwitch<@Nullable T> extends Switch<T>
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case MinioclcsPackage.LOGIC_EXP_CS: {
-				LogicExpCS logicExpCS = (LogicExpCS)theEObject;
-				T result = caseLogicExpCS(logicExpCS);
-				if (result == null) result = caseExpCS(logicExpCS);
-				if (result == null) result = caseCSTrace(logicExpCS);
+			case MinioclcsPackage.EQUALITY_EXP_CS: {
+				EqualityExpCS equalityExpCS = (EqualityExpCS)theEObject;
+				T result = caseEqualityExpCS(equalityExpCS);
+				if (result == null) result = caseExpCS(equalityExpCS);
+				if (result == null) result = caseCSTrace(equalityExpCS);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case MinioclcsPackage.CALL_EXP_CS: {
 				CallExpCS callExpCS = (CallExpCS)theEObject;
 				T result = caseCallExpCS(callExpCS);
-				if (result == null) result = caseLogicExpCS(callExpCS);
+				if (result == null) result = caseEqualityExpCS(callExpCS);
 				if (result == null) result = caseExpCS(callExpCS);
 				if (result == null) result = caseCSTrace(callExpCS);
 				if (result == null) result = defaultCase(theEObject);
@@ -213,7 +170,7 @@ public class MinioclcsSwitch<@Nullable T> extends Switch<T>
 				PrimaryExpCS primaryExpCS = (PrimaryExpCS)theEObject;
 				T result = casePrimaryExpCS(primaryExpCS);
 				if (result == null) result = caseCallExpCS(primaryExpCS);
-				if (result == null) result = caseLogicExpCS(primaryExpCS);
+				if (result == null) result = caseEqualityExpCS(primaryExpCS);
 				if (result == null) result = caseExpCS(primaryExpCS);
 				if (result == null) result = caseCSTrace(primaryExpCS);
 				if (result == null) result = defaultCase(theEObject);
@@ -224,7 +181,7 @@ public class MinioclcsSwitch<@Nullable T> extends Switch<T>
 				T result = caseSelfExpCS(selfExpCS);
 				if (result == null) result = casePrimaryExpCS(selfExpCS);
 				if (result == null) result = caseCallExpCS(selfExpCS);
-				if (result == null) result = caseLogicExpCS(selfExpCS);
+				if (result == null) result = caseEqualityExpCS(selfExpCS);
 				if (result == null) result = caseExpCS(selfExpCS);
 				if (result == null) result = caseCSTrace(selfExpCS);
 				if (result == null) result = defaultCase(theEObject);
@@ -283,7 +240,7 @@ public class MinioclcsSwitch<@Nullable T> extends Switch<T>
 				if (result == null) result = casePrimaryExpCS(nameExpCS);
 				if (result == null) result = caseNavigationExpCS(nameExpCS);
 				if (result == null) result = caseCallExpCS(nameExpCS);
-				if (result == null) result = caseLogicExpCS(nameExpCS);
+				if (result == null) result = caseEqualityExpCS(nameExpCS);
 				if (result == null) result = caseExpCS(nameExpCS);
 				if (result == null) result = caseCSTrace(nameExpCS);
 				if (result == null) result = defaultCase(theEObject);
@@ -301,7 +258,7 @@ public class MinioclcsSwitch<@Nullable T> extends Switch<T>
 				T result = caseLiteralExpCS(literalExpCS);
 				if (result == null) result = casePrimaryExpCS(literalExpCS);
 				if (result == null) result = caseCallExpCS(literalExpCS);
-				if (result == null) result = caseLogicExpCS(literalExpCS);
+				if (result == null) result = caseEqualityExpCS(literalExpCS);
 				if (result == null) result = caseExpCS(literalExpCS);
 				if (result == null) result = caseCSTrace(literalExpCS);
 				if (result == null) result = defaultCase(theEObject);
@@ -313,7 +270,7 @@ public class MinioclcsSwitch<@Nullable T> extends Switch<T>
 				if (result == null) result = caseLiteralExpCS(intLiteralExpCS);
 				if (result == null) result = casePrimaryExpCS(intLiteralExpCS);
 				if (result == null) result = caseCallExpCS(intLiteralExpCS);
-				if (result == null) result = caseLogicExpCS(intLiteralExpCS);
+				if (result == null) result = caseEqualityExpCS(intLiteralExpCS);
 				if (result == null) result = caseExpCS(intLiteralExpCS);
 				if (result == null) result = caseCSTrace(intLiteralExpCS);
 				if (result == null) result = defaultCase(theEObject);
@@ -325,7 +282,7 @@ public class MinioclcsSwitch<@Nullable T> extends Switch<T>
 				if (result == null) result = caseLiteralExpCS(booleanLiteralExpCS);
 				if (result == null) result = casePrimaryExpCS(booleanLiteralExpCS);
 				if (result == null) result = caseCallExpCS(booleanLiteralExpCS);
-				if (result == null) result = caseLogicExpCS(booleanLiteralExpCS);
+				if (result == null) result = caseEqualityExpCS(booleanLiteralExpCS);
 				if (result == null) result = caseExpCS(booleanLiteralExpCS);
 				if (result == null) result = caseCSTrace(booleanLiteralExpCS);
 				if (result == null) result = defaultCase(theEObject);
@@ -337,7 +294,7 @@ public class MinioclcsSwitch<@Nullable T> extends Switch<T>
 				if (result == null) result = caseLiteralExpCS(nullLiteralExpCS);
 				if (result == null) result = casePrimaryExpCS(nullLiteralExpCS);
 				if (result == null) result = caseCallExpCS(nullLiteralExpCS);
-				if (result == null) result = caseLogicExpCS(nullLiteralExpCS);
+				if (result == null) result = caseEqualityExpCS(nullLiteralExpCS);
 				if (result == null) result = caseExpCS(nullLiteralExpCS);
 				if (result == null) result = caseCSTrace(nullLiteralExpCS);
 				if (result == null) result = defaultCase(theEObject);
@@ -349,7 +306,7 @@ public class MinioclcsSwitch<@Nullable T> extends Switch<T>
 				if (result == null) result = caseLiteralExpCS(collectionLiteralExpCS);
 				if (result == null) result = casePrimaryExpCS(collectionLiteralExpCS);
 				if (result == null) result = caseCallExpCS(collectionLiteralExpCS);
-				if (result == null) result = caseLogicExpCS(collectionLiteralExpCS);
+				if (result == null) result = caseEqualityExpCS(collectionLiteralExpCS);
 				if (result == null) result = caseExpCS(collectionLiteralExpCS);
 				if (result == null) result = caseCSTrace(collectionLiteralExpCS);
 				if (result == null) result = defaultCase(theEObject);
@@ -367,7 +324,7 @@ public class MinioclcsSwitch<@Nullable T> extends Switch<T>
 				T result = caseLetExpCS(letExpCS);
 				if (result == null) result = casePrimaryExpCS(letExpCS);
 				if (result == null) result = caseCallExpCS(letExpCS);
-				if (result == null) result = caseLogicExpCS(letExpCS);
+				if (result == null) result = caseEqualityExpCS(letExpCS);
 				if (result == null) result = caseExpCS(letExpCS);
 				if (result == null) result = caseCSTrace(letExpCS);
 				if (result == null) result = defaultCase(theEObject);
@@ -401,7 +358,7 @@ public class MinioclcsSwitch<@Nullable T> extends Switch<T>
 				if (result == null) result = caseLiteralExpCS(booleanExpCS);
 				if (result == null) result = casePrimaryExpCS(booleanExpCS);
 				if (result == null) result = caseCallExpCS(booleanExpCS);
-				if (result == null) result = caseLogicExpCS(booleanExpCS);
+				if (result == null) result = caseEqualityExpCS(booleanExpCS);
 				if (result == null) result = caseExpCS(booleanExpCS);
 				if (result == null) result = caseCSTrace(booleanExpCS);
 				if (result == null) result = defaultCase(theEObject);
@@ -434,6 +391,22 @@ public class MinioclcsSwitch<@Nullable T> extends Switch<T>
 	}
 
   /**
+	 * Returns the result of interpreting the object as an instance of '<em>Import CS</em>'.
+	 * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Import CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+  public T caseImportCS(ImportCS object)
+  {
+		return null;
+	}
+
+  /**
 	 * Returns the result of interpreting the object as an instance of '<em>Package CS</em>'.
 	 * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -450,22 +423,6 @@ public class MinioclcsSwitch<@Nullable T> extends Switch<T>
 	}
 
   /**
-	 * Returns the result of interpreting the object as an instance of '<em>Classifier CS</em>'.
-	 * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Classifier CS</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-  public T caseClassifierCS(ClassifierCS object)
-  {
-		return null;
-	}
-
-  /**
 	 * Returns the result of interpreting the object as an instance of '<em>Class CS</em>'.
 	 * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -477,22 +434,6 @@ public class MinioclcsSwitch<@Nullable T> extends Switch<T>
 	 * @generated
 	 */
   public T caseClassCS(ClassCS object)
-  {
-		return null;
-	}
-
-  /**
-	 * Returns the result of interpreting the object as an instance of '<em>Datatype CS</em>'.
-	 * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Datatype CS</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-  public T caseDatatypeCS(DatatypeCS object)
   {
 		return null;
 	}
@@ -610,17 +551,17 @@ public class MinioclcsSwitch<@Nullable T> extends Switch<T>
 	}
 
   /**
-	 * Returns the result of interpreting the object as an instance of '<em>Logic Exp CS</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Equality Exp CS</em>'.
 	 * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Logic Exp CS</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Equality Exp CS</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-  public T caseLogicExpCS(LogicExpCS object)
+  public T caseEqualityExpCS(EqualityExpCS object)
   {
 		return null;
 	}

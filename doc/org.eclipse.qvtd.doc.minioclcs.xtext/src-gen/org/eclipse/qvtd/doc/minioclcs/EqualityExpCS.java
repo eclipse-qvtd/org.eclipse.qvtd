@@ -6,23 +6,23 @@ package org.eclipse.qvtd.doc.minioclcs;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Logic Exp CS</b></em>'.
+ * A representation of the model object '<em><b>Equality Exp CS</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.doc.minioclcs.LogicExpCS#getLeft <em>Left</em>}</li>
- *   <li>{@link org.eclipse.qvtd.doc.minioclcs.LogicExpCS#getOp <em>Op</em>}</li>
- *   <li>{@link org.eclipse.qvtd.doc.minioclcs.LogicExpCS#getRight <em>Right</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.doc.minioclcs.EqualityExpCS#getLeft <em>Left</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.doc.minioclcs.EqualityExpCS#getOpName <em>Op Name</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.doc.minioclcs.EqualityExpCS#getRight <em>Right</em>}</li>
  * </ul>
  *
- * @see org.eclipse.qvtd.doc.minioclcs.MinioclcsPackage#getLogicExpCS()
+ * @see org.eclipse.qvtd.doc.minioclcs.MinioclcsPackage#getEqualityExpCS()
  * @model
  * @generated
  */
-public interface LogicExpCS extends ExpCS
+public interface EqualityExpCS extends ExpCS
 {
   /**
 	 * Returns the value of the '<em><b>Left</b></em>' containment reference.
@@ -33,48 +33,48 @@ public interface LogicExpCS extends ExpCS
    * </p>
    * <!-- end-user-doc -->
 	 * @return the value of the '<em>Left</em>' containment reference.
-	 * @see #setLeft(LogicExpCS)
-	 * @see org.eclipse.qvtd.doc.minioclcs.MinioclcsPackage#getLogicExpCS_Left()
+	 * @see #setLeft(EqualityExpCS)
+	 * @see org.eclipse.qvtd.doc.minioclcs.MinioclcsPackage#getEqualityExpCS_Left()
 	 * @model containment="true"
 	 * @generated
 	 */
-  LogicExpCS getLeft();
+  EqualityExpCS getLeft();
 
   /**
-	 * Sets the value of the '{@link org.eclipse.qvtd.doc.minioclcs.LogicExpCS#getLeft <em>Left</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.doc.minioclcs.EqualityExpCS#getLeft <em>Left</em>}' containment reference.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Left</em>' containment reference.
 	 * @see #getLeft()
 	 * @generated
 	 */
-  void setLeft(LogicExpCS value);
+  void setLeft(EqualityExpCS value);
 
   /**
-	 * Returns the value of the '<em><b>Op</b></em>' attribute.
+	 * Returns the value of the '<em><b>Op Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Op</em>' attribute isn't clear,
+   * If the meaning of the '<em>Op Name</em>' attribute isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-	 * @return the value of the '<em>Op</em>' attribute.
-	 * @see #setOp(String)
-	 * @see org.eclipse.qvtd.doc.minioclcs.MinioclcsPackage#getLogicExpCS_Op()
+	 * @return the value of the '<em>Op Name</em>' attribute.
+	 * @see #setOpName(String)
+	 * @see org.eclipse.qvtd.doc.minioclcs.MinioclcsPackage#getEqualityExpCS_OpName()
 	 * @model
 	 * @generated
 	 */
-  String getOp();
+  String getOpName();
 
   /**
-	 * Sets the value of the '{@link org.eclipse.qvtd.doc.minioclcs.LogicExpCS#getOp <em>Op</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.qvtd.doc.minioclcs.EqualityExpCS#getOpName <em>Op Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Op</em>' attribute.
-	 * @see #getOp()
+	 * @param value the new value of the '<em>Op Name</em>' attribute.
+	 * @see #getOpName()
 	 * @generated
 	 */
-  void setOp(String value);
+  void setOpName(String value);
 
   /**
 	 * Returns the value of the '<em><b>Right</b></em>' containment reference.
@@ -86,14 +86,14 @@ public interface LogicExpCS extends ExpCS
    * <!-- end-user-doc -->
 	 * @return the value of the '<em>Right</em>' containment reference.
 	 * @see #setRight(CallExpCS)
-	 * @see org.eclipse.qvtd.doc.minioclcs.MinioclcsPackage#getLogicExpCS_Right()
+	 * @see org.eclipse.qvtd.doc.minioclcs.MinioclcsPackage#getEqualityExpCS_Right()
 	 * @model containment="true"
 	 * @generated
 	 */
   CallExpCS getRight();
 
   /**
-	 * Sets the value of the '{@link org.eclipse.qvtd.doc.minioclcs.LogicExpCS#getRight <em>Right</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.doc.minioclcs.EqualityExpCS#getRight <em>Right</em>}' containment reference.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Right</em>' containment reference.
@@ -102,4 +102,4 @@ public interface LogicExpCS extends ExpCS
 	 */
   void setRight(CallExpCS value);
 
-} // LogicExpCS
+} // EqualityExpCS

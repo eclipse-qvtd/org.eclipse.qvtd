@@ -10,7 +10,7 @@ package org.eclipse.qvtd.doc.miniocl;
  *
  *
  * @see org.eclipse.qvtd.doc.miniocl.MiniOCLPackage#getOCLExpression()
- * @model
+ * @model abstract="true"
  * @generated
  */
 public interface OCLExpression extends TypedElement {

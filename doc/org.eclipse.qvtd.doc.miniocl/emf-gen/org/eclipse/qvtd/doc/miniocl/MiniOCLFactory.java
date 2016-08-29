@@ -22,13 +22,13 @@ public interface MiniOCLFactory extends EFactory {
 	MiniOCLFactory eINSTANCE = org.eclipse.qvtd.doc.miniocl.impl.MiniOCLFactoryImpl.init();
 
 	/**
-	 * Returns a new object of class '<em>OCL Expression</em>'.
+	 * Returns a new object of class '<em>Boolean Literal Exp</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>OCL Expression</em>'.
+	 * @return a new object of class '<em>Boolean Literal Exp</em>'.
 	 * @generated
 	 */
-	OCLExpression createOCLExpression();
+	BooleanLiteralExp createBooleanLiteralExp();
 
 	/**
 	 * Returns a new object of class '<em>Root</em>'.
@@ -58,6 +58,33 @@ public interface MiniOCLFactory extends EFactory {
 	Class createClass();
 
 	/**
+	 * Returns a new object of class '<em>Collection Literal Exp</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Collection Literal Exp</em>'.
+	 * @generated
+	 */
+	CollectionLiteralExp createCollectionLiteralExp();
+
+	/**
+	 * Returns a new object of class '<em>Collection Item</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Collection Item</em>'.
+	 * @generated
+	 */
+	CollectionItem createCollectionItem();
+
+	/**
+	 * Returns a new object of class '<em>Collection Range</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Collection Range</em>'.
+	 * @generated
+	 */
+	CollectionRange createCollectionRange();
+
+	/**
 	 * Returns a new object of class '<em>Feature</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -65,6 +92,69 @@ public interface MiniOCLFactory extends EFactory {
 	 * @generated
 	 */
 	Feature createFeature();
+
+	/**
+	 * Returns a new object of class '<em>Import</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Import</em>'.
+	 * @generated
+	 */
+	Import createImport();
+
+	/**
+	 * Returns a new object of class '<em>Integer Literal Exp</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Integer Literal Exp</em>'.
+	 * @generated
+	 */
+	IntegerLiteralExp createIntegerLiteralExp();
+
+	/**
+	 * Returns a new object of class '<em>Iterator Exp</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Iterator Exp</em>'.
+	 * @generated
+	 */
+	IteratorExp createIteratorExp();
+
+	/**
+	 * Returns a new object of class '<em>Iterate Exp</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Iterate Exp</em>'.
+	 * @generated
+	 */
+	IterateExp createIterateExp();
+
+	/**
+	 * Returns a new object of class '<em>Let Exp</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Let Exp</em>'.
+	 * @generated
+	 */
+	LetExp createLetExp();
+
+	/**
+	 * Returns a new object of class '<em>Null Literal Exp</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Null Literal Exp</em>'.
+	 * @generated
+	 */
+	NullLiteralExp createNullLiteralExp();
+
+	/**
+	 * Returns a new object of class '<em>Opaque Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Opaque Expression</em>'.
+	 * @generated
+	 */
+	OpaqueExpression createOpaqueExpression();
 
 	/**
 	 * Returns a new object of class '<em>Property</em>'.

@@ -4,6 +4,7 @@
 package org.eclipse.qvtd.doc.minioclcs;
 
 import org.eclipse.emf.ecore.EObject;
+
 import org.eclipse.qvtd.doc.miniocl.Element;
 
 /**

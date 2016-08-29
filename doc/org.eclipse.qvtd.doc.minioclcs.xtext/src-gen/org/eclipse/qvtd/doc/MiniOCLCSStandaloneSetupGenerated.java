@@ -3,6 +3,8 @@
  */
 package org.eclipse.qvtd.doc;
 
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.qvtd.doc.minioclcs.MinioclcsPackage;
@@ -10,9 +12,6 @@ import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.common.TerminalsStandaloneSetup;
 import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
-
-import com.google.inject.Guice;
-import com.google.inject.Injector;
 
 @SuppressWarnings("all")
 public class MiniOCLCSStandaloneSetupGenerated implements ISetup {

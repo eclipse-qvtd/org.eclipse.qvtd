@@ -10,24 +10,24 @@
       <genEnumLiterals ecoreEnumLiteral="MiniOCLCS.ecore#//CollectionKindCS/Collection"/>
     </genEnums>
     <genClasses ecoreClass="MiniOCLCS.ecore#//RootCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MiniOCLCS.ecore#//RootCS/imports"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MiniOCLCS.ecore#//RootCS/packages"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MiniOCLCS.ecore#//RootCS/contraints"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MiniOCLCS.ecore#//RootCS/constraints"/>
+    </genClasses>
+    <genClasses ecoreClass="MiniOCLCS.ecore#//ImportCS">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MiniOCLCS.ecore#//ImportCS/alias"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MiniOCLCS.ecore#//ImportCS/uri"/>
     </genClasses>
     <genClasses ecoreClass="MiniOCLCS.ecore#//PackageCS">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MiniOCLCS.ecore#//PackageCS/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MiniOCLCS.ecore#//PackageCS/packages"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MiniOCLCS.ecore#//PackageCS/classifiers"/>
-    </genClasses>
-    <genClasses ecoreClass="MiniOCLCS.ecore#//ClassifierCS">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MiniOCLCS.ecore#//ClassifierCS/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MiniOCLCS.ecore#//PackageCS/classes"/>
     </genClasses>
     <genClasses ecoreClass="MiniOCLCS.ecore#//ClassCS">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MiniOCLCS.ecore#//ClassCS/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MiniOCLCS.ecore#//ClassCS/extends"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MiniOCLCS.ecore#//ClassCS/properties"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MiniOCLCS.ecore#//ClassCS/operations"/>
-    </genClasses>
-    <genClasses ecoreClass="MiniOCLCS.ecore#//DatatypeCS">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MiniOCLCS.ecore#//DatatypeCS/typeName"/>
     </genClasses>
     <genClasses ecoreClass="MiniOCLCS.ecore#//PropertyCS">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MiniOCLCS.ecore#//PropertyCS/name"/>
@@ -37,7 +37,8 @@
     <genClasses ecoreClass="MiniOCLCS.ecore#//MultiplicityCS">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MiniOCLCS.ecore#//MultiplicityCS/opt"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MiniOCLCS.ecore#//MultiplicityCS/mult"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MiniOCLCS.ecore#//MultiplicityCS/lower"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MiniOCLCS.ecore#//MultiplicityCS/mandatory"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MiniOCLCS.ecore#//MultiplicityCS/lowerInt"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MiniOCLCS.ecore#//MultiplicityCS/upperInt"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MiniOCLCS.ecore#//MultiplicityCS/upperMult"/>
     </genClasses>
@@ -59,10 +60,10 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MiniOCLCS.ecore#//InvariantCS/exp"/>
     </genClasses>
     <genClasses ecoreClass="MiniOCLCS.ecore#//ExpCS"/>
-    <genClasses ecoreClass="MiniOCLCS.ecore#//LogicExpCS">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MiniOCLCS.ecore#//LogicExpCS/left"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MiniOCLCS.ecore#//LogicExpCS/op"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MiniOCLCS.ecore#//LogicExpCS/right"/>
+    <genClasses ecoreClass="MiniOCLCS.ecore#//EqualityExpCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MiniOCLCS.ecore#//EqualityExpCS/left"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MiniOCLCS.ecore#//EqualityExpCS/opName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MiniOCLCS.ecore#//EqualityExpCS/right"/>
     </genClasses>
     <genClasses ecoreClass="MiniOCLCS.ecore#//CallExpCS">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MiniOCLCS.ecore#//CallExpCS/source"/>

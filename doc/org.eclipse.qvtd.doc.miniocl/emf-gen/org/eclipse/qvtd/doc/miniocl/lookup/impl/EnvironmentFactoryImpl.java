@@ -7,6 +7,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.eclipse.qvtd.doc.miniocl.lookup.*;
 import org.eclipse.qvtd.doc.miniocl.lookup.EnvironmentFactory;
 import org.eclipse.qvtd.doc.miniocl.lookup.EnvironmentPackage;
 import org.eclipse.qvtd.doc.miniocl.lookup.LookupEnvironment;

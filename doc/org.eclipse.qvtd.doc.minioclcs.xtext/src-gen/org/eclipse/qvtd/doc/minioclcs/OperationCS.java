@@ -5,6 +5,8 @@ package org.eclipse.qvtd.doc.minioclcs;
 
 import org.eclipse.emf.common.util.EList;
 
+import org.eclipse.emf.ecore.EObject;
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Operation CS</b></em>'.

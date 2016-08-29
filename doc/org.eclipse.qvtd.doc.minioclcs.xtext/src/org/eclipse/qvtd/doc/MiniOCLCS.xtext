@@ -3,21 +3,25 @@ grammar org.eclipse.qvtd.doc.MiniOCLCS with org.eclipse.xtext.common.Terminals
 generate minioclcs "http://www.eclipse.org/qvtd/doc/MiniOCLCS"
 
 RootCS:
+	imports+=ImportCS*
 	(packages+=PackageCS
-	| contraints+=ConstraintsDefCS)*
+	| constraints+=ConstraintsDefCS)*
 ;
-
+ImportCS:
+  'import' (alias=ID ':') uri=STRING ';'
+;
 PackageCS:
 	'package' name=ID '{'
 		(packages+=PackageCS
-		|classifiers+=ClassifierCS
+		//|classifiers+=ClassifierCS
+		| classes+=ClassCS
 		)*
 	'}'
 ;
 
-ClassifierCS:
-   ClassCS | DatatypeCS
-;
+//ClassifierCS:
+//   ClassCS | DatatypeCS
+//;
 
 ClassCS:
 	'class' name=ID ('extends' extends=PathNameCS)? '{'
@@ -26,19 +30,20 @@ ClassCS:
 	'}'
 ;
 
-DatatypeCS:
-  'datatype' name=ID ':' typeName=STRING ';'
-;
+//DatatypeCS:
+//  'datatype' name=ID ':' typeName=STRING ';'
+//;
 
 PropertyCS:
-  ('attribute' | 'containment' | 'cross_reference')
+  //('attribute' | 'containment' | 'cross_reference')
+  'prop'
   name=ID ':' typeRef=PathNameCS
   (multiplicity=MultiplicityCS)? ';'
 ;
 
 MultiplicityCS:
   '['
-  (opt?='?' | mult?='*' | (lower=INT '..' (upperInt=INT | upperMult?='*')))
+  (opt?='?' | mult?='*' | mandatory=INT |  (lowerInt=INT '..' (upperInt=INT | upperMult?='*')))
   ']'
 ;
 OperationCS:
@@ -53,7 +58,6 @@ ParameterCS:
 	name=ID ':' typeRef=PathNameCS
 ;
 
-
 ConstraintsDefCS:
 	'context' typeRef=PathNameCS '{'
 		(invariants+=InvariantCS)*
@@ -66,15 +70,15 @@ InvariantCS:
 
 // Expressions
 ExpCS:
-	LogicExpCS
+	EqualityExpCS
 ;
 
-LogicExpCS:
-	CallExpCS ({LogicExpCS.left=current} op=('=' | '<>') right=CallExpCS)*
+EqualityExpCS:
+	CallExpCS ({EqualityExpCS.left=current} opName=('=' | '<>') right=CallExpCS)*
 ;
 
 CallExpCS:
-	PrimaryExpCS ({CallExpCS.source=current} op=('.' | '->') navExp=NavigationExpCS)*
+	PrimaryExpCS ({CallExpCS.source=current} opName=('.' | '->') navExp=NavigationExpCS)*
 ;
 
 PrimaryExpCS:

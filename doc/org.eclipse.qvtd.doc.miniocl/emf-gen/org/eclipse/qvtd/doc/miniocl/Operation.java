@@ -14,8 +14,8 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.doc.miniocl.Operation#getOwnedParameters <em>Owned Parameters</em>}</li>
- *   <li>{@link org.eclipse.qvtd.doc.miniocl.Operation#getOwningClass <em>Owning Class</em>}</li>
  *   <li>{@link org.eclipse.qvtd.doc.miniocl.Operation#getOwnedBodyExpression <em>Owned Body Expression</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.doc.miniocl.Operation#getOwningClass <em>Owning Class</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.doc.miniocl.MiniOCLPackage#getOperation()

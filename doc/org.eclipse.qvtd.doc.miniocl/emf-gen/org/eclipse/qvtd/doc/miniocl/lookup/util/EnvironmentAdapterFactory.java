@@ -8,6 +8,7 @@ import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.evaluation.Executor;
+import org.eclipse.qvtd.doc.miniocl.lookup.*;
 import org.eclipse.qvtd.doc.miniocl.lookup.Env4CG;
 import org.eclipse.qvtd.doc.miniocl.lookup.EnvironmentPackage;
 import org.eclipse.qvtd.doc.miniocl.lookup.LookupEnvironment;

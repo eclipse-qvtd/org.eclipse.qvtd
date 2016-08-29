@@ -28,7 +28,7 @@ import org.eclipse.qvtd.doc.miniocl.util.Visitor;
  *
  * @generated
  */
-public class ExpressionInOCLImpl extends ElementImpl implements ExpressionInOCL {
+public class ExpressionInOCLImpl extends OpaqueExpressionImpl implements ExpressionInOCL {
 	/**
 	 * The cached value of the '{@link #getOwnedSelfVar() <em>Owned Self Var</em>}' containment reference.
 	 * <!-- begin-user-doc -->

@@ -3,6 +3,8 @@
  */
 package org.eclipse.qvtd.doc.minioclcs;
 
+import org.eclipse.emf.ecore.EObject;
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Multiplicity CS</b></em>'.
@@ -14,7 +16,8 @@ package org.eclipse.qvtd.doc.minioclcs;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.doc.minioclcs.MultiplicityCS#isOpt <em>Opt</em>}</li>
  *   <li>{@link org.eclipse.qvtd.doc.minioclcs.MultiplicityCS#isMult <em>Mult</em>}</li>
- *   <li>{@link org.eclipse.qvtd.doc.minioclcs.MultiplicityCS#getLower <em>Lower</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.doc.minioclcs.MultiplicityCS#getMandatory <em>Mandatory</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.doc.minioclcs.MultiplicityCS#getLowerInt <em>Lower Int</em>}</li>
  *   <li>{@link org.eclipse.qvtd.doc.minioclcs.MultiplicityCS#getUpperInt <em>Upper Int</em>}</li>
  *   <li>{@link org.eclipse.qvtd.doc.minioclcs.MultiplicityCS#isUpperMult <em>Upper Mult</em>}</li>
  * </ul>
@@ -78,30 +81,56 @@ public interface MultiplicityCS extends CSTrace
   void setMult(boolean value);
 
   /**
-	 * Returns the value of the '<em><b>Lower</b></em>' attribute.
+	 * Returns the value of the '<em><b>Mandatory</b></em>' attribute.
 	 * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Lower</em>' attribute isn't clear,
+   * If the meaning of the '<em>Mandatory</em>' attribute isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-	 * @return the value of the '<em>Lower</em>' attribute.
-	 * @see #setLower(int)
-	 * @see org.eclipse.qvtd.doc.minioclcs.MinioclcsPackage#getMultiplicityCS_Lower()
+	 * @return the value of the '<em>Mandatory</em>' attribute.
+	 * @see #setMandatory(int)
+	 * @see org.eclipse.qvtd.doc.minioclcs.MinioclcsPackage#getMultiplicityCS_Mandatory()
 	 * @model
 	 * @generated
 	 */
-  int getLower();
+  int getMandatory();
 
   /**
-	 * Sets the value of the '{@link org.eclipse.qvtd.doc.minioclcs.MultiplicityCS#getLower <em>Lower</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.qvtd.doc.minioclcs.MultiplicityCS#getMandatory <em>Mandatory</em>}' attribute.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Lower</em>' attribute.
-	 * @see #getLower()
+	 * @param value the new value of the '<em>Mandatory</em>' attribute.
+	 * @see #getMandatory()
 	 * @generated
 	 */
-  void setLower(int value);
+  void setMandatory(int value);
+
+  /**
+	 * Returns the value of the '<em><b>Lower Int</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Lower Int</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+	 * @return the value of the '<em>Lower Int</em>' attribute.
+	 * @see #setLowerInt(int)
+	 * @see org.eclipse.qvtd.doc.minioclcs.MinioclcsPackage#getMultiplicityCS_LowerInt()
+	 * @model
+	 * @generated
+	 */
+  int getLowerInt();
+
+  /**
+	 * Sets the value of the '{@link org.eclipse.qvtd.doc.minioclcs.MultiplicityCS#getLowerInt <em>Lower Int</em>}' attribute.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Lower Int</em>' attribute.
+	 * @see #getLowerInt()
+	 * @generated
+	 */
+  void setLowerInt(int value);
 
   /**
 	 * Returns the value of the '<em><b>Upper Int</b></em>' attribute.

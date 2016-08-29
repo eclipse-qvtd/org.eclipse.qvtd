@@ -373,7 +373,7 @@ def : _unqualified_env_Class(child : ocl::OclElement) : lookup::LookupEnvironmen
       
 context Class
 def : _unqualified_env_Operation(child : ocl::OclElement) : lookup::LookupEnvironment =
-   let superClasses = self->closure(superClass)
+   let superClasses = self->closure(superClasses)
    in 
    parentEnv_Operation().nestedEnv()
       .addElements(superClasses.ownedOperations)
@@ -381,7 +381,7 @@ def : _unqualified_env_Operation(child : ocl::OclElement) : lookup::LookupEnviro
       .addElements(ownedOperations)
       
 def : _unqualified_env_Property(child : ocl::OclElement) : lookup::LookupEnvironment =
-   let superClasses = self->closure(superClass)
+   let superClasses = self->closure(superClasses)
    in 
    parentEnv_Property().nestedEnv()
       .addElements(superClasses.ownedProperties)
@@ -389,14 +389,14 @@ def : _unqualified_env_Property(child : ocl::OclElement) : lookup::LookupEnviron
       .addElements(ownedProperties)
       
 def : _exported_env_Operation(importer : ocl::OclElement) : lookup::LookupEnvironment =
-   let superClasses = self->closure(superClass)
+   let superClasses = self->closure(superClasses)
    in 
    let env = lookup::LookupEnvironment {}
    in env
       .addElements(ownedOperations)
    
 def : _exported_env_Property(importer : ocl::OclElement) : lookup::LookupEnvironment =
-   let superClasses = self->closure(superClass)
+   let superClasses = self->closure(superClasses)
    in 
    let env = lookup::LookupEnvironment {}
    in env

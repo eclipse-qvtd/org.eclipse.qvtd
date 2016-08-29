@@ -28,7 +28,7 @@ import org.eclipse.qvtd.doc.miniocl.util.Visitor;
  *
  * @generated
  */
-public class PackageImpl extends NamedElementImpl implements org.eclipse.qvtd.doc.miniocl.Package {
+public class PackageImpl extends NamespaceImpl implements org.eclipse.qvtd.doc.miniocl.Package {
 	/**
 	 * The cached value of the '{@link #getOwnedClasses() <em>Owned Classes</em>}' containment reference list.
 	 * <!-- begin-user-doc -->

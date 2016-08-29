@@ -4,6 +4,7 @@
 package org.eclipse.qvtd.doc.minioclcs.impl;
 
 import org.eclipse.emf.ecore.EClass;
+
 import org.eclipse.qvtd.doc.minioclcs.CollectExpCS;
 import org.eclipse.qvtd.doc.minioclcs.MinioclcsPackage;
 

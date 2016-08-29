@@ -29,8 +29,8 @@ import org.eclipse.qvtd.doc.miniocl.util.Visitor;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.doc.miniocl.impl.OperationImpl#getOwnedParameters <em>Owned Parameters</em>}</li>
- *   <li>{@link org.eclipse.qvtd.doc.miniocl.impl.OperationImpl#getOwningClass <em>Owning Class</em>}</li>
  *   <li>{@link org.eclipse.qvtd.doc.miniocl.impl.OperationImpl#getOwnedBodyExpression <em>Owned Body Expression</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.doc.miniocl.impl.OperationImpl#getOwningClass <em>Owning Class</em>}</li>
  * </ul>
  *
  * @generated
@@ -197,10 +197,10 @@ public class OperationImpl extends FeatureImpl implements Operation {
 		switch (featureID) {
 			case MiniOCLPackage.OPERATION__OWNED_PARAMETERS:
 				return ((InternalEList<?>)getOwnedParameters()).basicRemove(otherEnd, msgs);
-			case MiniOCLPackage.OPERATION__OWNING_CLASS:
-				return basicSetOwningClass(null, msgs);
 			case MiniOCLPackage.OPERATION__OWNED_BODY_EXPRESSION:
 				return basicSetOwnedBodyExpression(null, msgs);
+			case MiniOCLPackage.OPERATION__OWNING_CLASS:
+				return basicSetOwningClass(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -229,10 +229,10 @@ public class OperationImpl extends FeatureImpl implements Operation {
 		switch (featureID) {
 			case MiniOCLPackage.OPERATION__OWNED_PARAMETERS:
 				return getOwnedParameters();
-			case MiniOCLPackage.OPERATION__OWNING_CLASS:
-				return getOwningClass();
 			case MiniOCLPackage.OPERATION__OWNED_BODY_EXPRESSION:
 				return getOwnedBodyExpression();
+			case MiniOCLPackage.OPERATION__OWNING_CLASS:
+				return getOwningClass();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -250,11 +250,11 @@ public class OperationImpl extends FeatureImpl implements Operation {
 				getOwnedParameters().clear();
 				getOwnedParameters().addAll((Collection<? extends Parameter>)newValue);
 				return;
-			case MiniOCLPackage.OPERATION__OWNING_CLASS:
-				setOwningClass((org.eclipse.qvtd.doc.miniocl.Class)newValue);
-				return;
 			case MiniOCLPackage.OPERATION__OWNED_BODY_EXPRESSION:
 				setOwnedBodyExpression((ExpressionInOCL)newValue);
+				return;
+			case MiniOCLPackage.OPERATION__OWNING_CLASS:
+				setOwningClass((org.eclipse.qvtd.doc.miniocl.Class)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -271,11 +271,11 @@ public class OperationImpl extends FeatureImpl implements Operation {
 			case MiniOCLPackage.OPERATION__OWNED_PARAMETERS:
 				getOwnedParameters().clear();
 				return;
-			case MiniOCLPackage.OPERATION__OWNING_CLASS:
-				setOwningClass((org.eclipse.qvtd.doc.miniocl.Class)null);
-				return;
 			case MiniOCLPackage.OPERATION__OWNED_BODY_EXPRESSION:
 				setOwnedBodyExpression((ExpressionInOCL)null);
+				return;
+			case MiniOCLPackage.OPERATION__OWNING_CLASS:
+				setOwningClass((org.eclipse.qvtd.doc.miniocl.Class)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -291,10 +291,10 @@ public class OperationImpl extends FeatureImpl implements Operation {
 		switch (featureID) {
 			case MiniOCLPackage.OPERATION__OWNED_PARAMETERS:
 				return ownedParameters != null && !ownedParameters.isEmpty();
-			case MiniOCLPackage.OPERATION__OWNING_CLASS:
-				return getOwningClass() != null;
 			case MiniOCLPackage.OPERATION__OWNED_BODY_EXPRESSION:
 				return ownedBodyExpression != null;
+			case MiniOCLPackage.OPERATION__OWNING_CLASS:
+				return getOwningClass() != null;
 		}
 		return super.eIsSet(featureID);
 	}

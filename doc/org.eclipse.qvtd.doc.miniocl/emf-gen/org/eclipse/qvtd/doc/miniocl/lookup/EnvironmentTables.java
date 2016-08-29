@@ -30,6 +30,7 @@ import org.eclipse.ocl.pivot.internal.library.executor.ExecutorTypeParameter;
 import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.pivot.utilities.TypeUtil;
 import org.eclipse.qvtd.doc.miniocl.MiniOCLTables;
+import org.eclipse.qvtd.doc.miniocl.lookup.EnvironmentTables;
 
 /**
  * EnvironmentTables provides the dispatch tables for the lookup for use by the OCL dispatcher.

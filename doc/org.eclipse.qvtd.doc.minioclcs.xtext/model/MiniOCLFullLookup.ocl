@@ -164,8 +164,8 @@ def : lookupPackage(segments : OrderedSet(cs::PathElementCS)) : Package[?] =
 	
 context Class
    
-def : _lookupQualifiedOperation(oName : String, args : OrderedSet(OCLExpression)) : Operation[?] =
-   let foundOperation = _lookupOperation(_qualified_env_Operation(), oName, args)
+def : _lookupQualifiedOperation(oName : String, arguments : OrderedSet(OCLExpression)) : Operation[?] =
+   let foundOperation = _lookupOperation(_qualified_env_Operation(), oName, arguments)
    in  if foundOperation->isEmpty()
       then null
       else foundOperation->first()
@@ -174,8 +174,8 @@ def : _qualified_env_Operation() : lookup::LookupEnvironment =
    let env = lookup::LookupEnvironment{}
    in env
    .addElements(ownedOperations)
-def : lookupQualifiedOperation(aPathElementCS : cs::PathElementCS, args : OrderedSet(OCLExpression)) : Operation[?] =
-   _lookupQualifiedOperation(aPathElementCS.elementName, args)
+def : lookupQualifiedOperation(aPathElementCS : cs::PathElementCS, arguments : OrderedSet(OCLExpression)) : Operation[?] =
+   _lookupQualifiedOperation(aPathElementCS.elementName, arguments)
    
 def : _lookupQualifiedProperty(pName : String) : Property[?] =
    let foundProperty = _lookupProperty(_qualified_env_Property(), pName)
@@ -227,45 +227,45 @@ def : lookupClass(segments : OrderedSet(cs::PathElementCS)) : Class[?] =
 	
 context Operation
    
-def : _appliesFilter_Operation(args : OrderedSet(OCLExpression)) : Boolean =
-   args->size() = ownedParameters->size() and args->forAll(x | let argIdx  = args->indexOf(x)
+def : _appliesFilter_Operation(arguments : OrderedSet(OCLExpression)) : Boolean =
+   ownedParameters->size() = arguments->size() and arguments->forAll(x | let argIdx  = arguments->indexOf(x)
    in x.type.conformsTo(ownedParameters->at(argIdx).type)
    )
 context Visitable
 -- Operation unqualified lookup
-def : _lookupOperation(env : lookup::LookupEnvironment, oName : String, args : OrderedSet(OCLExpression)) : OrderedSet(Operation) =
+def : _lookupOperation(env : lookup::LookupEnvironment, oName : String, arguments : OrderedSet(OCLExpression)) : OrderedSet(Operation) =
 let foundOperation = env.namedElements->selectByKind(Operation)->select(name = oName)
-                                         ->select(_appliesFilter_Operation(args))
+                                         ->select(_appliesFilter_Operation(arguments))
 in  if foundOperation->isEmpty() and not (env.parentEnv = null)
-   then _lookupOperation(env.parentEnv, oName, args)
+   then _lookupOperation(env.parentEnv, oName, arguments)
    else foundOperation
    endif
    
 -- Note: when calling this method, the source element of the argument passed to this method, will be the contextual 
 -- object on which error reports will be handled
-def : _lookupUnqualifiedOperation(oName : String, args : OrderedSet(OCLExpression)) : Operation[?] =
-let foundOperation = _lookupOperation(unqualified_env_Operation(), oName, args)
+def : _lookupUnqualifiedOperation(oName : String, arguments : OrderedSet(OCLExpression)) : Operation[?] =
+let foundOperation = _lookupOperation(unqualified_env_Operation(), oName, arguments)
 in  if foundOperation->isEmpty()
    then null
    else foundOperation->first() -- LookupVisitor will report ambiguous result
    endif
    
-def : lookupOperation(oName : String, args : OrderedSet(OCLExpression)) : Operation[?] =
-   _lookupUnqualifiedOperation(oName, args)
-def : lookupOperation(aPathElementCS : cs::PathElementCS, args : OrderedSet(OCLExpression)) : Operation[?] =
-   _lookupUnqualifiedOperation(aPathElementCS.elementName, args)
+def : lookupOperation(oName : String, arguments : OrderedSet(OCLExpression)) : Operation[?] =
+   _lookupUnqualifiedOperation(oName, arguments)
+def : lookupOperation(aPathElementCS : cs::PathElementCS, arguments : OrderedSet(OCLExpression)) : Operation[?] =
+   _lookupUnqualifiedOperation(aPathElementCS.elementName, arguments)
 -- End of Operation unqualified lookup 
    
 -- Operation qualified-name lookup
-def : lookupOperation(aPathNameCS : cs::PathNameCS, args : OrderedSet(OCLExpression)) : Operation[?] =
-   lookupOperation(aPathNameCS .pathElements, args)
+def : lookupOperation(aPathNameCS : cs::PathNameCS, arguments : OrderedSet(OCLExpression)) : Operation[?] =
+   lookupOperation(aPathNameCS .pathElements, arguments)
    
-def : lookupOperation(segments : OrderedSet(cs::PathElementCS), args : OrderedSet(OCLExpression)) : Operation[?] =
+def : lookupOperation(segments : OrderedSet(cs::PathElementCS), arguments : OrderedSet(OCLExpression)) : Operation[?] =
    if segments->size() = 1
-   then lookupOperation(segments->first(), args)
+   then lookupOperation(segments->first(), arguments)
    else let qualifierSegments = segments->subOrderedSet(1,segments->size()-1),
             qualifier = lookupClass(qualifierSegments)
-        in qualifier?.lookupQualifiedOperation(segments->last(), args)
+        in qualifier?.lookupQualifiedOperation(segments->last(), arguments)
    endif
 context Visitable
 -- Property unqualified lookup
@@ -377,15 +377,17 @@ def : _exported_env_Property(importer : ocl::OclElement) : lookup::LookupEnviron
       .addElements(ownedProperties)
    
    
-def : _lookupExportedOperation(importer : ocl::OclElement, oName : String, args : OrderedSet(OCLExpression)) : Operation[?] =
-   let foundOperation = _lookupOperation(_exported_env_Operation(importer), oName, args)
+def : _lookupExportedOperation(importer : ocl::OclElement, oName : String, arguments : OrderedSet(OCLExpression)) : Operation[?] =
+   let foundOperation = _lookupOperation(_exported_env_Operation(importer), oName, arguments)
    in  if foundOperation->isEmpty()
       then null
       else foundOperation->first()
       endif
-      
-def : lookupExportedOperation(importer : ocl::OclElement, aPathElementCS : cs::PathElementCS, args : OrderedSet(OCLExpression)) : Operation[?] =
-   _lookupExportedOperation(importer, aPathElementCS.elementName, args)
+def : lookupExportedOperation(oName : String, arguments : OrderedSet(OCLExpression)) : Operation[?] =
+   _lookupExportedOperation(oName, arguments)
+def : lookupExportedOperation(importer : ocl::OclElement, aPathElementCS : cs::PathElementCS, arguments : OrderedSet(OCLExpression)) : Operation[?] =
+   _lookupExportedOperation(importer, aPathElementCS.elementName, arguments)
+
    
 def : _lookupExportedProperty(importer : ocl::OclElement, pName : String) : Property[?] =
    let foundProperty = _lookupProperty(_exported_env_Property(importer), pName)
@@ -393,24 +395,26 @@ def : _lookupExportedProperty(importer : ocl::OclElement, pName : String) : Prop
       then null
       else foundProperty->first()
       endif
-      
+def : lookupExportedProperty(pName : String) : Property[?] =
+   _lookupExportedProperty(pName)
 def : lookupExportedProperty(importer : ocl::OclElement, aPathElementCS : cs::PathElementCS) : Property[?] =
    _lookupExportedProperty(importer, aPathElementCS.elementName)
+
 context Visitable
 -- Class exports Operation
    
-def : lookupOperationFrom(exporter : Class, aPathElementCS : cs::PathElementCS, args : OrderedSet(OCLExpression)) : Operation[?] =
-   exporter.lookupExportedOperation(self, aPathElementCS, args)
+def : lookupOperationFrom(exporter : Class, aPathElementCS : cs::PathElementCS, arguments : OrderedSet(OCLExpression)) : Operation[?] =
+   exporter.lookupExportedOperation(self, aPathElementCS, arguments)
 
-def : lookupOperationFrom(exporter : Class, aPathNameCS : cs::PathNameCS, args : OrderedSet(OCLExpression)) : Operation[?] =
-   lookupOperationFrom(exporter, aPathNameCS.pathElements, args)
+def : lookupOperationFrom(exporter : Class, aPathNameCS : cs::PathNameCS, arguments : OrderedSet(OCLExpression)) : Operation[?] =
+   lookupOperationFrom(exporter, aPathNameCS.pathElements, arguments)
 
-def : lookupOperationFrom(exporter : Class, segments : OrderedSet(cs::PathElementCS), args : OrderedSet(OCLExpression)) : Operation[?] =
+def : lookupOperationFrom(exporter : Class, segments : OrderedSet(cs::PathElementCS), arguments : OrderedSet(OCLExpression)) : Operation[?] =
    if segments->size() = 1
-   then lookupOperationFrom(exporter, segments->first(), args)
+   then lookupOperationFrom(exporter, segments->first(), arguments)
    else let qualifierSegments = segments->subOrderedSet(1,segments->size()-1),
             qualifier = lookupClass(qualifierSegments)
-        in qualifier?.lookupQualifiedOperation(segments->last(), args)
+        in qualifier?.lookupQualifiedOperation(segments->last(), arguments)
    endif
 -- Class exports Property
    

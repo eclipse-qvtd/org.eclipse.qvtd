@@ -10,16 +10,23 @@
 package org.eclipse.qvtd.doc.miniocl.lookup.util;
 
 import java.util.List;
-
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.evaluation.Executor;
+import org.eclipse.ocl.pivot.ids.ClassId;
+import org.eclipse.ocl.pivot.ids.CollectionTypeId;
 import org.eclipse.ocl.pivot.ids.IdManager;
+import org.eclipse.ocl.pivot.ids.IdResolver;
+import org.eclipse.ocl.pivot.ids.NsURIPackageId;
+import org.eclipse.ocl.pivot.ids.RootPackageId;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.library.collection.CollectionSizeOperation;
+import org.eclipse.ocl.pivot.values.IntegerValue;
+import org.eclipse.ocl.pivot.values.OrderedSetValue;
 import org.eclipse.qvtd.doc.miniocl.MiniOCLPackage;
 import org.eclipse.qvtd.doc.miniocl.OCLExpression;
 import org.eclipse.qvtd.doc.miniocl.Operation;
 import org.eclipse.qvtd.doc.miniocl.Parameter;
+import org.eclipse.qvtd.doc.miniocl.lookup.util.AbstractMiniOCLLookupFilter;
 
 public class OperationFilter
 	extends AbstractMiniOCLLookupFilter<Operation>

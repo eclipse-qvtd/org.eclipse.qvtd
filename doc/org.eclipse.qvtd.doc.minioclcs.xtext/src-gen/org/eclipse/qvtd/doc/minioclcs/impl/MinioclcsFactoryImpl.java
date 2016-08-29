@@ -7,46 +7,12 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
+
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-import org.eclipse.qvtd.doc.minioclcs.AccVarCS;
-import org.eclipse.qvtd.doc.minioclcs.BooleanExpCS;
-import org.eclipse.qvtd.doc.minioclcs.BooleanLiteralExpCS;
-import org.eclipse.qvtd.doc.minioclcs.CallExpCS;
-import org.eclipse.qvtd.doc.minioclcs.ClassCS;
-import org.eclipse.qvtd.doc.minioclcs.ClassifierCS;
-import org.eclipse.qvtd.doc.minioclcs.CollectExpCS;
-import org.eclipse.qvtd.doc.minioclcs.CollectionKindCS;
-import org.eclipse.qvtd.doc.minioclcs.CollectionLiteralExpCS;
-import org.eclipse.qvtd.doc.minioclcs.CollectionLiteralPartCS;
-import org.eclipse.qvtd.doc.minioclcs.ConstraintsDefCS;
-import org.eclipse.qvtd.doc.minioclcs.DatatypeCS;
-import org.eclipse.qvtd.doc.minioclcs.ExpCS;
-import org.eclipse.qvtd.doc.minioclcs.IntLiteralExpCS;
-import org.eclipse.qvtd.doc.minioclcs.InvariantCS;
-import org.eclipse.qvtd.doc.minioclcs.IterateExpCS;
-import org.eclipse.qvtd.doc.minioclcs.IteratorVarCS;
-import org.eclipse.qvtd.doc.minioclcs.LetExpCS;
-import org.eclipse.qvtd.doc.minioclcs.LetVarCS;
-import org.eclipse.qvtd.doc.minioclcs.LiteralExpCS;
-import org.eclipse.qvtd.doc.minioclcs.LogicExpCS;
-import org.eclipse.qvtd.doc.minioclcs.LoopExpCS;
-import org.eclipse.qvtd.doc.minioclcs.MinioclcsFactory;
-import org.eclipse.qvtd.doc.minioclcs.MinioclcsPackage;
-import org.eclipse.qvtd.doc.minioclcs.MultiplicityCS;
-import org.eclipse.qvtd.doc.minioclcs.NameExpCS;
-import org.eclipse.qvtd.doc.minioclcs.NavigationExpCS;
-import org.eclipse.qvtd.doc.minioclcs.NullLiteralExpCS;
-import org.eclipse.qvtd.doc.minioclcs.OperationCS;
-import org.eclipse.qvtd.doc.minioclcs.PackageCS;
-import org.eclipse.qvtd.doc.minioclcs.ParameterCS;
-import org.eclipse.qvtd.doc.minioclcs.PathElementCS;
-import org.eclipse.qvtd.doc.minioclcs.PathNameCS;
-import org.eclipse.qvtd.doc.minioclcs.PrimaryExpCS;
-import org.eclipse.qvtd.doc.minioclcs.PropertyCS;
-import org.eclipse.qvtd.doc.minioclcs.RootCS;
-import org.eclipse.qvtd.doc.minioclcs.RoundedBracketClauseCS;
-import org.eclipse.qvtd.doc.minioclcs.SelfExpCS;
+
+import org.eclipse.qvtd.doc.minioclcs.*;
 
 /**
  * <!-- begin-user-doc -->
@@ -97,10 +63,9 @@ public class MinioclcsFactoryImpl extends EFactoryImpl implements MinioclcsFacto
   {
 		switch (eClass.getClassifierID()) {
 			case MinioclcsPackage.ROOT_CS: return createRootCS();
+			case MinioclcsPackage.IMPORT_CS: return createImportCS();
 			case MinioclcsPackage.PACKAGE_CS: return createPackageCS();
-			case MinioclcsPackage.CLASSIFIER_CS: return createClassifierCS();
 			case MinioclcsPackage.CLASS_CS: return createClassCS();
-			case MinioclcsPackage.DATATYPE_CS: return createDatatypeCS();
 			case MinioclcsPackage.PROPERTY_CS: return createPropertyCS();
 			case MinioclcsPackage.MULTIPLICITY_CS: return createMultiplicityCS();
 			case MinioclcsPackage.OPERATION_CS: return createOperationCS();
@@ -108,7 +73,7 @@ public class MinioclcsFactoryImpl extends EFactoryImpl implements MinioclcsFacto
 			case MinioclcsPackage.CONSTRAINTS_DEF_CS: return createConstraintsDefCS();
 			case MinioclcsPackage.INVARIANT_CS: return createInvariantCS();
 			case MinioclcsPackage.EXP_CS: return createExpCS();
-			case MinioclcsPackage.LOGIC_EXP_CS: return createLogicExpCS();
+			case MinioclcsPackage.EQUALITY_EXP_CS: return createEqualityExpCS();
 			case MinioclcsPackage.CALL_EXP_CS: return createCallExpCS();
 			case MinioclcsPackage.PRIMARY_EXP_CS: return createPrimaryExpCS();
 			case MinioclcsPackage.SELF_EXP_CS: return createSelfExpCS();
@@ -184,6 +149,17 @@ public class MinioclcsFactoryImpl extends EFactoryImpl implements MinioclcsFacto
    * <!-- end-user-doc -->
 	 * @generated
 	 */
+  public ImportCS createImportCS()
+  {
+		ImportCSImpl importCS = new ImportCSImpl();
+		return importCS;
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
   public PackageCS createPackageCS()
   {
 		PackageCSImpl packageCS = new PackageCSImpl();
@@ -195,32 +171,10 @@ public class MinioclcsFactoryImpl extends EFactoryImpl implements MinioclcsFacto
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public ClassifierCS createClassifierCS()
-  {
-		ClassifierCSImpl classifierCS = new ClassifierCSImpl();
-		return classifierCS;
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
   public ClassCS createClassCS()
   {
 		ClassCSImpl classCS = new ClassCSImpl();
 		return classCS;
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public DatatypeCS createDatatypeCS()
-  {
-		DatatypeCSImpl datatypeCS = new DatatypeCSImpl();
-		return datatypeCS;
 	}
 
   /**
@@ -305,10 +259,10 @@ public class MinioclcsFactoryImpl extends EFactoryImpl implements MinioclcsFacto
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public LogicExpCS createLogicExpCS()
+  public EqualityExpCS createEqualityExpCS()
   {
-		LogicExpCSImpl logicExpCS = new LogicExpCSImpl();
-		return logicExpCS;
+		EqualityExpCSImpl equalityExpCS = new EqualityExpCSImpl();
+		return equalityExpCS;
 	}
 
   /**

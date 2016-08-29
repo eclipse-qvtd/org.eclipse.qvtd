@@ -33,6 +33,15 @@ public interface MinioclcsFactory extends EFactory
   RootCS createRootCS();
 
   /**
+	 * Returns a new object of class '<em>Import CS</em>'.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Import CS</em>'.
+	 * @generated
+	 */
+  ImportCS createImportCS();
+
+  /**
 	 * Returns a new object of class '<em>Package CS</em>'.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -42,15 +51,6 @@ public interface MinioclcsFactory extends EFactory
   PackageCS createPackageCS();
 
   /**
-	 * Returns a new object of class '<em>Classifier CS</em>'.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Classifier CS</em>'.
-	 * @generated
-	 */
-  ClassifierCS createClassifierCS();
-
-  /**
 	 * Returns a new object of class '<em>Class CS</em>'.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -58,15 +58,6 @@ public interface MinioclcsFactory extends EFactory
 	 * @generated
 	 */
   ClassCS createClassCS();
-
-  /**
-	 * Returns a new object of class '<em>Datatype CS</em>'.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Datatype CS</em>'.
-	 * @generated
-	 */
-  DatatypeCS createDatatypeCS();
 
   /**
 	 * Returns a new object of class '<em>Property CS</em>'.
@@ -132,13 +123,13 @@ public interface MinioclcsFactory extends EFactory
   ExpCS createExpCS();
 
   /**
-	 * Returns a new object of class '<em>Logic Exp CS</em>'.
+	 * Returns a new object of class '<em>Equality Exp CS</em>'.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Logic Exp CS</em>'.
+	 * @return a new object of class '<em>Equality Exp CS</em>'.
 	 * @generated
 	 */
-  LogicExpCS createLogicExpCS();
+  EqualityExpCS createEqualityExpCS();
 
   /**
 	 * Returns a new object of class '<em>Call Exp CS</em>'.

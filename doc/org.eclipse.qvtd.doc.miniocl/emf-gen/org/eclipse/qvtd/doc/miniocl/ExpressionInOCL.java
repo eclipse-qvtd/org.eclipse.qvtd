@@ -20,7 +20,7 @@ package org.eclipse.qvtd.doc.miniocl;
  * @model
  * @generated
  */
-public interface ExpressionInOCL extends Element {
+public interface ExpressionInOCL extends OpaqueExpression {
 	/**
 	 * Returns the value of the '<em><b>Owned Self Var</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

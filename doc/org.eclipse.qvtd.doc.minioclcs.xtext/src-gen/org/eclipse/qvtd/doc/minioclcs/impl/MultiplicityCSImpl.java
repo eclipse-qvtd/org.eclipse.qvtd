@@ -4,8 +4,12 @@
 package org.eclipse.qvtd.doc.minioclcs.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+
 import org.eclipse.emf.ecore.EClass;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+
 import org.eclipse.qvtd.doc.minioclcs.MinioclcsPackage;
 import org.eclipse.qvtd.doc.minioclcs.MultiplicityCS;
 
@@ -19,7 +23,8 @@ import org.eclipse.qvtd.doc.minioclcs.MultiplicityCS;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.doc.minioclcs.impl.MultiplicityCSImpl#isOpt <em>Opt</em>}</li>
  *   <li>{@link org.eclipse.qvtd.doc.minioclcs.impl.MultiplicityCSImpl#isMult <em>Mult</em>}</li>
- *   <li>{@link org.eclipse.qvtd.doc.minioclcs.impl.MultiplicityCSImpl#getLower <em>Lower</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.doc.minioclcs.impl.MultiplicityCSImpl#getMandatory <em>Mandatory</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.doc.minioclcs.impl.MultiplicityCSImpl#getLowerInt <em>Lower Int</em>}</li>
  *   <li>{@link org.eclipse.qvtd.doc.minioclcs.impl.MultiplicityCSImpl#getUpperInt <em>Upper Int</em>}</li>
  *   <li>{@link org.eclipse.qvtd.doc.minioclcs.impl.MultiplicityCSImpl#isUpperMult <em>Upper Mult</em>}</li>
  * </ul>
@@ -69,24 +74,44 @@ public class MultiplicityCSImpl extends CSTraceImpl implements MultiplicityCS
   protected boolean mult = MULT_EDEFAULT;
 
   /**
-	 * The default value of the '{@link #getLower() <em>Lower</em>}' attribute.
+	 * The default value of the '{@link #getMandatory() <em>Mandatory</em>}' attribute.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getLower()
+	 * @see #getMandatory()
 	 * @generated
 	 * @ordered
 	 */
-  protected static final int LOWER_EDEFAULT = 0;
+  protected static final int MANDATORY_EDEFAULT = 0;
 
   /**
-	 * The cached value of the '{@link #getLower() <em>Lower</em>}' attribute.
+	 * The cached value of the '{@link #getMandatory() <em>Mandatory</em>}' attribute.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getLower()
+	 * @see #getMandatory()
 	 * @generated
 	 * @ordered
 	 */
-  protected int lower = LOWER_EDEFAULT;
+  protected int mandatory = MANDATORY_EDEFAULT;
+
+  /**
+	 * The default value of the '{@link #getLowerInt() <em>Lower Int</em>}' attribute.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @see #getLowerInt()
+	 * @generated
+	 * @ordered
+	 */
+  protected static final int LOWER_INT_EDEFAULT = 0;
+
+  /**
+	 * The cached value of the '{@link #getLowerInt() <em>Lower Int</em>}' attribute.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @see #getLowerInt()
+	 * @generated
+	 * @ordered
+	 */
+  protected int lowerInt = LOWER_INT_EDEFAULT;
 
   /**
 	 * The default value of the '{@link #getUpperInt() <em>Upper Int</em>}' attribute.
@@ -200,9 +225,9 @@ public class MultiplicityCSImpl extends CSTraceImpl implements MultiplicityCS
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public int getLower()
+  public int getMandatory()
   {
-		return lower;
+		return mandatory;
 	}
 
   /**
@@ -210,12 +235,35 @@ public class MultiplicityCSImpl extends CSTraceImpl implements MultiplicityCS
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void setLower(int newLower)
+  public void setMandatory(int newMandatory)
   {
-		int oldLower = lower;
-		lower = newLower;
+		int oldMandatory = mandatory;
+		mandatory = newMandatory;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MinioclcsPackage.MULTIPLICITY_CS__LOWER, oldLower, lower));
+			eNotify(new ENotificationImpl(this, Notification.SET, MinioclcsPackage.MULTIPLICITY_CS__MANDATORY, oldMandatory, mandatory));
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  public int getLowerInt()
+  {
+		return lowerInt;
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  public void setLowerInt(int newLowerInt)
+  {
+		int oldLowerInt = lowerInt;
+		lowerInt = newLowerInt;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, MinioclcsPackage.MULTIPLICITY_CS__LOWER_INT, oldLowerInt, lowerInt));
 	}
 
   /**
@@ -277,8 +325,10 @@ public class MultiplicityCSImpl extends CSTraceImpl implements MultiplicityCS
 				return isOpt();
 			case MinioclcsPackage.MULTIPLICITY_CS__MULT:
 				return isMult();
-			case MinioclcsPackage.MULTIPLICITY_CS__LOWER:
-				return getLower();
+			case MinioclcsPackage.MULTIPLICITY_CS__MANDATORY:
+				return getMandatory();
+			case MinioclcsPackage.MULTIPLICITY_CS__LOWER_INT:
+				return getLowerInt();
 			case MinioclcsPackage.MULTIPLICITY_CS__UPPER_INT:
 				return getUpperInt();
 			case MinioclcsPackage.MULTIPLICITY_CS__UPPER_MULT:
@@ -302,8 +352,11 @@ public class MultiplicityCSImpl extends CSTraceImpl implements MultiplicityCS
 			case MinioclcsPackage.MULTIPLICITY_CS__MULT:
 				setMult((Boolean)newValue);
 				return;
-			case MinioclcsPackage.MULTIPLICITY_CS__LOWER:
-				setLower((Integer)newValue);
+			case MinioclcsPackage.MULTIPLICITY_CS__MANDATORY:
+				setMandatory((Integer)newValue);
+				return;
+			case MinioclcsPackage.MULTIPLICITY_CS__LOWER_INT:
+				setLowerInt((Integer)newValue);
 				return;
 			case MinioclcsPackage.MULTIPLICITY_CS__UPPER_INT:
 				setUpperInt((Integer)newValue);
@@ -330,8 +383,11 @@ public class MultiplicityCSImpl extends CSTraceImpl implements MultiplicityCS
 			case MinioclcsPackage.MULTIPLICITY_CS__MULT:
 				setMult(MULT_EDEFAULT);
 				return;
-			case MinioclcsPackage.MULTIPLICITY_CS__LOWER:
-				setLower(LOWER_EDEFAULT);
+			case MinioclcsPackage.MULTIPLICITY_CS__MANDATORY:
+				setMandatory(MANDATORY_EDEFAULT);
+				return;
+			case MinioclcsPackage.MULTIPLICITY_CS__LOWER_INT:
+				setLowerInt(LOWER_INT_EDEFAULT);
 				return;
 			case MinioclcsPackage.MULTIPLICITY_CS__UPPER_INT:
 				setUpperInt(UPPER_INT_EDEFAULT);
@@ -356,8 +412,10 @@ public class MultiplicityCSImpl extends CSTraceImpl implements MultiplicityCS
 				return opt != OPT_EDEFAULT;
 			case MinioclcsPackage.MULTIPLICITY_CS__MULT:
 				return mult != MULT_EDEFAULT;
-			case MinioclcsPackage.MULTIPLICITY_CS__LOWER:
-				return lower != LOWER_EDEFAULT;
+			case MinioclcsPackage.MULTIPLICITY_CS__MANDATORY:
+				return mandatory != MANDATORY_EDEFAULT;
+			case MinioclcsPackage.MULTIPLICITY_CS__LOWER_INT:
+				return lowerInt != LOWER_INT_EDEFAULT;
 			case MinioclcsPackage.MULTIPLICITY_CS__UPPER_INT:
 				return upperInt != UPPER_INT_EDEFAULT;
 			case MinioclcsPackage.MULTIPLICITY_CS__UPPER_MULT:
@@ -381,8 +439,10 @@ public class MultiplicityCSImpl extends CSTraceImpl implements MultiplicityCS
 		result.append(opt);
 		result.append(", mult: ");
 		result.append(mult);
-		result.append(", lower: ");
-		result.append(lower);
+		result.append(", mandatory: ");
+		result.append(mandatory);
+		result.append(", lowerInt: ");
+		result.append(lowerInt);
 		result.append(", upperInt: ");
 		result.append(upperInt);
 		result.append(", upperMult: ");

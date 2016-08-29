@@ -3,8 +3,8 @@
  */
 package org.eclipse.qvtd.doc.serializer;
 
+import com.google.inject.Inject;
 import java.util.Set;
-
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.qvtd.doc.minioclcs.AccVarCS;
@@ -15,14 +15,14 @@ import org.eclipse.qvtd.doc.minioclcs.CollectExpCS;
 import org.eclipse.qvtd.doc.minioclcs.CollectionLiteralExpCS;
 import org.eclipse.qvtd.doc.minioclcs.CollectionLiteralPartCS;
 import org.eclipse.qvtd.doc.minioclcs.ConstraintsDefCS;
-import org.eclipse.qvtd.doc.minioclcs.DatatypeCS;
+import org.eclipse.qvtd.doc.minioclcs.EqualityExpCS;
+import org.eclipse.qvtd.doc.minioclcs.ImportCS;
 import org.eclipse.qvtd.doc.minioclcs.IntLiteralExpCS;
 import org.eclipse.qvtd.doc.minioclcs.InvariantCS;
 import org.eclipse.qvtd.doc.minioclcs.IterateExpCS;
 import org.eclipse.qvtd.doc.minioclcs.IteratorVarCS;
 import org.eclipse.qvtd.doc.minioclcs.LetExpCS;
 import org.eclipse.qvtd.doc.minioclcs.LetVarCS;
-import org.eclipse.qvtd.doc.minioclcs.LogicExpCS;
 import org.eclipse.qvtd.doc.minioclcs.MinioclcsPackage;
 import org.eclipse.qvtd.doc.minioclcs.MultiplicityCS;
 import org.eclipse.qvtd.doc.minioclcs.NameExpCS;
@@ -44,8 +44,6 @@ import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
-
-import com.google.inject.Inject;
 
 @SuppressWarnings("all")
 public class MiniOCLCSSemanticSequencer extends AbstractDelegatingSemanticSequencer {
@@ -85,8 +83,11 @@ public class MiniOCLCSSemanticSequencer extends AbstractDelegatingSemanticSequen
 			case MinioclcsPackage.CONSTRAINTS_DEF_CS:
 				sequence_ConstraintsDefCS(context, (ConstraintsDefCS) semanticObject); 
 				return; 
-			case MinioclcsPackage.DATATYPE_CS:
-				sequence_DatatypeCS(context, (DatatypeCS) semanticObject); 
+			case MinioclcsPackage.EQUALITY_EXP_CS:
+				sequence_EqualityExpCS(context, (EqualityExpCS) semanticObject); 
+				return; 
+			case MinioclcsPackage.IMPORT_CS:
+				sequence_ImportCS(context, (ImportCS) semanticObject); 
 				return; 
 			case MinioclcsPackage.INT_LITERAL_EXP_CS:
 				sequence_IntLiteralExpCS(context, (IntLiteralExpCS) semanticObject); 
@@ -105,9 +106,6 @@ public class MiniOCLCSSemanticSequencer extends AbstractDelegatingSemanticSequen
 				return; 
 			case MinioclcsPackage.LET_VAR_CS:
 				sequence_LetVarCS(context, (LetVarCS) semanticObject); 
-				return; 
-			case MinioclcsPackage.LOGIC_EXP_CS:
-				sequence_LogicExpCS(context, (LogicExpCS) semanticObject); 
 				return; 
 			case MinioclcsPackage.MULTIPLICITY_CS:
 				sequence_MultiplicityCS(context, (MultiplicityCS) semanticObject); 
@@ -165,8 +163,8 @@ public class MiniOCLCSSemanticSequencer extends AbstractDelegatingSemanticSequen
 	/**
 	 * Contexts:
 	 *     ExpCS returns BooleanExpCS
-	 *     LogicExpCS returns BooleanExpCS
-	 *     LogicExpCS.LogicExpCS_1_0 returns BooleanExpCS
+	 *     EqualityExpCS returns BooleanExpCS
+	 *     EqualityExpCS.EqualityExpCS_1_0 returns BooleanExpCS
 	 *     CallExpCS returns BooleanExpCS
 	 *     CallExpCS.CallExpCS_1_0 returns BooleanExpCS
 	 *     PrimaryExpCS returns BooleanExpCS
@@ -184,13 +182,13 @@ public class MiniOCLCSSemanticSequencer extends AbstractDelegatingSemanticSequen
 	/**
 	 * Contexts:
 	 *     ExpCS returns CallExpCS
-	 *     LogicExpCS returns CallExpCS
-	 *     LogicExpCS.LogicExpCS_1_0 returns CallExpCS
+	 *     EqualityExpCS returns CallExpCS
+	 *     EqualityExpCS.EqualityExpCS_1_0 returns CallExpCS
 	 *     CallExpCS returns CallExpCS
 	 *     CallExpCS.CallExpCS_1_0 returns CallExpCS
 	 *
 	 * Constraint:
-	 *     (source=CallExpCS_CallExpCS_1_0 (op='.' | op='->') navExp=NavigationExpCS)
+	 *     (source=CallExpCS_CallExpCS_1_0 (opName='.' | opName='->') navExp=NavigationExpCS)
 	 */
 	protected void sequence_CallExpCS(ISerializationContext context, CallExpCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -199,7 +197,6 @@ public class MiniOCLCSSemanticSequencer extends AbstractDelegatingSemanticSequen
 	
 	/**
 	 * Contexts:
-	 *     ClassifierCS returns ClassCS
 	 *     ClassCS returns ClassCS
 	 *
 	 * Constraint:
@@ -227,8 +224,8 @@ public class MiniOCLCSSemanticSequencer extends AbstractDelegatingSemanticSequen
 	/**
 	 * Contexts:
 	 *     ExpCS returns CollectionLiteralExpCS
-	 *     LogicExpCS returns CollectionLiteralExpCS
-	 *     LogicExpCS.LogicExpCS_1_0 returns CollectionLiteralExpCS
+	 *     EqualityExpCS returns CollectionLiteralExpCS
+	 *     EqualityExpCS.EqualityExpCS_1_0 returns CollectionLiteralExpCS
 	 *     CallExpCS returns CollectionLiteralExpCS
 	 *     CallExpCS.CallExpCS_1_0 returns CollectionLiteralExpCS
 	 *     PrimaryExpCS returns CollectionLiteralExpCS
@@ -269,22 +266,35 @@ public class MiniOCLCSSemanticSequencer extends AbstractDelegatingSemanticSequen
 	
 	/**
 	 * Contexts:
-	 *     ClassifierCS returns DatatypeCS
-	 *     DatatypeCS returns DatatypeCS
+	 *     ExpCS returns EqualityExpCS
+	 *     EqualityExpCS returns EqualityExpCS
+	 *     EqualityExpCS.EqualityExpCS_1_0 returns EqualityExpCS
 	 *
 	 * Constraint:
-	 *     (name=ID typeName=STRING)
+	 *     (left=EqualityExpCS_EqualityExpCS_1_0 (opName='=' | opName='<>') right=CallExpCS)
 	 */
-	protected void sequence_DatatypeCS(ISerializationContext context, DatatypeCS semanticObject) {
+	protected void sequence_EqualityExpCS(ISerializationContext context, EqualityExpCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     ImportCS returns ImportCS
+	 *
+	 * Constraint:
+	 *     (alias=ID uri=STRING)
+	 */
+	protected void sequence_ImportCS(ISerializationContext context, ImportCS semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, MinioclcsPackage.Literals.CLASSIFIER_CS__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MinioclcsPackage.Literals.CLASSIFIER_CS__NAME));
-			if (transientValues.isValueTransient(semanticObject, MinioclcsPackage.Literals.DATATYPE_CS__TYPE_NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MinioclcsPackage.Literals.DATATYPE_CS__TYPE_NAME));
+			if (transientValues.isValueTransient(semanticObject, MinioclcsPackage.Literals.IMPORT_CS__ALIAS) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MinioclcsPackage.Literals.IMPORT_CS__ALIAS));
+			if (transientValues.isValueTransient(semanticObject, MinioclcsPackage.Literals.IMPORT_CS__URI) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MinioclcsPackage.Literals.IMPORT_CS__URI));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getDatatypeCSAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
-		feeder.accept(grammarAccess.getDatatypeCSAccess().getTypeNameSTRINGTerminalRuleCall_3_0(), semanticObject.getTypeName());
+		feeder.accept(grammarAccess.getImportCSAccess().getAliasIDTerminalRuleCall_1_0_0(), semanticObject.getAlias());
+		feeder.accept(grammarAccess.getImportCSAccess().getUriSTRINGTerminalRuleCall_2_0(), semanticObject.getUri());
 		feeder.finish();
 	}
 	
@@ -292,8 +302,8 @@ public class MiniOCLCSSemanticSequencer extends AbstractDelegatingSemanticSequen
 	/**
 	 * Contexts:
 	 *     ExpCS returns IntLiteralExpCS
-	 *     LogicExpCS returns IntLiteralExpCS
-	 *     LogicExpCS.LogicExpCS_1_0 returns IntLiteralExpCS
+	 *     EqualityExpCS returns IntLiteralExpCS
+	 *     EqualityExpCS.EqualityExpCS_1_0 returns IntLiteralExpCS
 	 *     CallExpCS returns IntLiteralExpCS
 	 *     CallExpCS.CallExpCS_1_0 returns IntLiteralExpCS
 	 *     PrimaryExpCS returns IntLiteralExpCS
@@ -373,8 +383,8 @@ public class MiniOCLCSSemanticSequencer extends AbstractDelegatingSemanticSequen
 	/**
 	 * Contexts:
 	 *     ExpCS returns LetExpCS
-	 *     LogicExpCS returns LetExpCS
-	 *     LogicExpCS.LogicExpCS_1_0 returns LetExpCS
+	 *     EqualityExpCS returns LetExpCS
+	 *     EqualityExpCS.EqualityExpCS_1_0 returns LetExpCS
 	 *     CallExpCS returns LetExpCS
 	 *     CallExpCS.CallExpCS_1_0 returns LetExpCS
 	 *     PrimaryExpCS returns LetExpCS
@@ -402,24 +412,10 @@ public class MiniOCLCSSemanticSequencer extends AbstractDelegatingSemanticSequen
 	
 	/**
 	 * Contexts:
-	 *     ExpCS returns LogicExpCS
-	 *     LogicExpCS returns LogicExpCS
-	 *     LogicExpCS.LogicExpCS_1_0 returns LogicExpCS
-	 *
-	 * Constraint:
-	 *     (left=LogicExpCS_LogicExpCS_1_0 (op='=' | op='<>') right=CallExpCS)
-	 */
-	protected void sequence_LogicExpCS(ISerializationContext context, LogicExpCS semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Contexts:
 	 *     MultiplicityCS returns MultiplicityCS
 	 *
 	 * Constraint:
-	 *     (opt?='?' | mult?='*' | (lower=INT (upperInt=INT | upperMult?='*')))
+	 *     (opt?='?' | mult?='*' | mandatory=INT | (lowerInt=INT (upperInt=INT | upperMult?='*')))
 	 */
 	protected void sequence_MultiplicityCS(ISerializationContext context, MultiplicityCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -429,8 +425,8 @@ public class MiniOCLCSSemanticSequencer extends AbstractDelegatingSemanticSequen
 	/**
 	 * Contexts:
 	 *     ExpCS returns NameExpCS
-	 *     LogicExpCS returns NameExpCS
-	 *     LogicExpCS.LogicExpCS_1_0 returns NameExpCS
+	 *     EqualityExpCS returns NameExpCS
+	 *     EqualityExpCS.EqualityExpCS_1_0 returns NameExpCS
 	 *     CallExpCS returns NameExpCS
 	 *     CallExpCS.CallExpCS_1_0 returns NameExpCS
 	 *     PrimaryExpCS returns NameExpCS
@@ -448,8 +444,8 @@ public class MiniOCLCSSemanticSequencer extends AbstractDelegatingSemanticSequen
 	/**
 	 * Contexts:
 	 *     ExpCS returns NullLiteralExpCS
-	 *     LogicExpCS returns NullLiteralExpCS
-	 *     LogicExpCS.LogicExpCS_1_0 returns NullLiteralExpCS
+	 *     EqualityExpCS returns NullLiteralExpCS
+	 *     EqualityExpCS.EqualityExpCS_1_0 returns NullLiteralExpCS
 	 *     CallExpCS returns NullLiteralExpCS
 	 *     CallExpCS.CallExpCS_1_0 returns NullLiteralExpCS
 	 *     PrimaryExpCS returns NullLiteralExpCS
@@ -481,7 +477,7 @@ public class MiniOCLCSSemanticSequencer extends AbstractDelegatingSemanticSequen
 	 *     PackageCS returns PackageCS
 	 *
 	 * Constraint:
-	 *     (name=ID (packages+=PackageCS | classifiers+=ClassifierCS)*)
+	 *     (name=ID (packages+=PackageCS | classes+=ClassCS)*)
 	 */
 	protected void sequence_PackageCS(ISerializationContext context, PackageCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -556,7 +552,7 @@ public class MiniOCLCSSemanticSequencer extends AbstractDelegatingSemanticSequen
 	 *     RootCS returns RootCS
 	 *
 	 * Constraint:
-	 *     (packages+=PackageCS | contraints+=ConstraintsDefCS)+
+	 *     (imports+=ImportCS+ | (imports+=ImportCS+ (packages+=PackageCS | constraints+=ConstraintsDefCS)+))?
 	 */
 	protected void sequence_RootCS(ISerializationContext context, RootCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -578,8 +574,8 @@ public class MiniOCLCSSemanticSequencer extends AbstractDelegatingSemanticSequen
 	/**
 	 * Contexts:
 	 *     ExpCS returns SelfExpCS
-	 *     LogicExpCS returns SelfExpCS
-	 *     LogicExpCS.LogicExpCS_1_0 returns SelfExpCS
+	 *     EqualityExpCS returns SelfExpCS
+	 *     EqualityExpCS.EqualityExpCS_1_0 returns SelfExpCS
 	 *     CallExpCS returns SelfExpCS
 	 *     CallExpCS.CallExpCS_1_0 returns SelfExpCS
 	 *     PrimaryExpCS returns SelfExpCS

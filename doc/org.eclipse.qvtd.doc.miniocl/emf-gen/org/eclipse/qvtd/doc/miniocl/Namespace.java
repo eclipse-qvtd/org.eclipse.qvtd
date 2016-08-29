@@ -13,5 +13,5 @@ package org.eclipse.qvtd.doc.miniocl;
  * @model abstract="true"
  * @generated
  */
-public interface Namespace extends Element {
+public interface Namespace extends NamedElement {
 } // Namespace

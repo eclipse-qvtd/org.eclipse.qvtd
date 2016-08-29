@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.qvtd.doc.miniocl.Constraint;
@@ -28,24 +29,23 @@ import org.eclipse.qvtd.doc.miniocl.util.Visitor;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.doc.miniocl.impl.ClassImpl#getSuperClass <em>Super Class</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.doc.miniocl.impl.ClassImpl#getSuperClasses <em>Super Classes</em>}</li>
  *   <li>{@link org.eclipse.qvtd.doc.miniocl.impl.ClassImpl#getOwnedOperations <em>Owned Operations</em>}</li>
  *   <li>{@link org.eclipse.qvtd.doc.miniocl.impl.ClassImpl#getOwnedProperties <em>Owned Properties</em>}</li>
- *   <li>{@link org.eclipse.qvtd.doc.miniocl.impl.ClassImpl#getOwnedInvariants <em>Owned Invariants</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class ClassImpl extends NamedElementImpl implements org.eclipse.qvtd.doc.miniocl.Class {
+public class ClassImpl extends NamespaceImpl implements org.eclipse.qvtd.doc.miniocl.Class {
 	/**
-	 * The cached value of the '{@link #getSuperClass() <em>Super Class</em>}' reference.
+	 * The cached value of the '{@link #getSuperClasses() <em>Super Classes</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getSuperClass()
+	 * @see #getSuperClasses()
 	 * @generated
 	 * @ordered
 	 */
-	protected org.eclipse.qvtd.doc.miniocl.Class superClass;
+	protected EList<org.eclipse.qvtd.doc.miniocl.Class> superClasses;
 
 	/**
 	 * The cached value of the '{@link #getOwnedOperations() <em>Owned Operations</em>}' containment reference list.
@@ -66,16 +66,6 @@ public class ClassImpl extends NamedElementImpl implements org.eclipse.qvtd.doc.
 	 * @ordered
 	 */
 	protected EList<Property> ownedProperties;
-
-	/**
-	 * The cached value of the '{@link #getOwnedInvariants() <em>Owned Invariants</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getOwnedInvariants()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Constraint> ownedInvariants;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -101,37 +91,11 @@ public class ClassImpl extends NamedElementImpl implements org.eclipse.qvtd.doc.
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public org.eclipse.qvtd.doc.miniocl.Class getSuperClass() {
-		if (superClass != null && superClass.eIsProxy()) {
-			InternalEObject oldSuperClass = (InternalEObject)superClass;
-			superClass = (org.eclipse.qvtd.doc.miniocl.Class)eResolveProxy(oldSuperClass);
-			if (superClass != oldSuperClass) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, MiniOCLPackage.CLASS__SUPER_CLASS, oldSuperClass, superClass));
-			}
+	public EList<org.eclipse.qvtd.doc.miniocl.Class> getSuperClasses() {
+		if (superClasses == null) {
+			superClasses = new EObjectResolvingEList<org.eclipse.qvtd.doc.miniocl.Class>(org.eclipse.qvtd.doc.miniocl.Class.class, this, MiniOCLPackage.CLASS__SUPER_CLASSES);
 		}
-		return superClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public org.eclipse.qvtd.doc.miniocl.Class basicGetSuperClass() {
-		return superClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setSuperClass(org.eclipse.qvtd.doc.miniocl.Class newSuperClass) {
-		org.eclipse.qvtd.doc.miniocl.Class oldSuperClass = superClass;
-		superClass = newSuperClass;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MiniOCLPackage.CLASS__SUPER_CLASS, oldSuperClass, superClass));
+		return superClasses;
 	}
 
 	/**
@@ -153,21 +117,9 @@ public class ClassImpl extends NamedElementImpl implements org.eclipse.qvtd.doc.
 	 */
 	public EList<Property> getOwnedProperties() {
 		if (ownedProperties == null) {
-			ownedProperties = new EObjectContainmentEList<Property>(Property.class, this, MiniOCLPackage.CLASS__OWNED_PROPERTIES);
+			ownedProperties = new EObjectContainmentWithInverseEList<Property>(Property.class, this, MiniOCLPackage.CLASS__OWNED_PROPERTIES, MiniOCLPackage.PROPERTY__OWNING_CLASS);
 		}
 		return ownedProperties;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<Constraint> getOwnedInvariants() {
-		if (ownedInvariants == null) {
-			ownedInvariants = new EObjectContainmentEList<Constraint>(Constraint.class, this, MiniOCLPackage.CLASS__OWNED_INVARIANTS);
-		}
-		return ownedInvariants;
 	}
 
 	/**
@@ -181,6 +133,8 @@ public class ClassImpl extends NamedElementImpl implements org.eclipse.qvtd.doc.
 		switch (featureID) {
 			case MiniOCLPackage.CLASS__OWNED_OPERATIONS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedOperations()).basicAdd(otherEnd, msgs);
+			case MiniOCLPackage.CLASS__OWNED_PROPERTIES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedProperties()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -197,8 +151,6 @@ public class ClassImpl extends NamedElementImpl implements org.eclipse.qvtd.doc.
 				return ((InternalEList<?>)getOwnedOperations()).basicRemove(otherEnd, msgs);
 			case MiniOCLPackage.CLASS__OWNED_PROPERTIES:
 				return ((InternalEList<?>)getOwnedProperties()).basicRemove(otherEnd, msgs);
-			case MiniOCLPackage.CLASS__OWNED_INVARIANTS:
-				return ((InternalEList<?>)getOwnedInvariants()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -211,15 +163,12 @@ public class ClassImpl extends NamedElementImpl implements org.eclipse.qvtd.doc.
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case MiniOCLPackage.CLASS__SUPER_CLASS:
-				if (resolve) return getSuperClass();
-				return basicGetSuperClass();
+			case MiniOCLPackage.CLASS__SUPER_CLASSES:
+				return getSuperClasses();
 			case MiniOCLPackage.CLASS__OWNED_OPERATIONS:
 				return getOwnedOperations();
 			case MiniOCLPackage.CLASS__OWNED_PROPERTIES:
 				return getOwnedProperties();
-			case MiniOCLPackage.CLASS__OWNED_INVARIANTS:
-				return getOwnedInvariants();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -233,8 +182,9 @@ public class ClassImpl extends NamedElementImpl implements org.eclipse.qvtd.doc.
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case MiniOCLPackage.CLASS__SUPER_CLASS:
-				setSuperClass((org.eclipse.qvtd.doc.miniocl.Class)newValue);
+			case MiniOCLPackage.CLASS__SUPER_CLASSES:
+				getSuperClasses().clear();
+				getSuperClasses().addAll((Collection<? extends org.eclipse.qvtd.doc.miniocl.Class>)newValue);
 				return;
 			case MiniOCLPackage.CLASS__OWNED_OPERATIONS:
 				getOwnedOperations().clear();
@@ -243,10 +193,6 @@ public class ClassImpl extends NamedElementImpl implements org.eclipse.qvtd.doc.
 			case MiniOCLPackage.CLASS__OWNED_PROPERTIES:
 				getOwnedProperties().clear();
 				getOwnedProperties().addAll((Collection<? extends Property>)newValue);
-				return;
-			case MiniOCLPackage.CLASS__OWNED_INVARIANTS:
-				getOwnedInvariants().clear();
-				getOwnedInvariants().addAll((Collection<? extends Constraint>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -260,17 +206,14 @@ public class ClassImpl extends NamedElementImpl implements org.eclipse.qvtd.doc.
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case MiniOCLPackage.CLASS__SUPER_CLASS:
-				setSuperClass((org.eclipse.qvtd.doc.miniocl.Class)null);
+			case MiniOCLPackage.CLASS__SUPER_CLASSES:
+				getSuperClasses().clear();
 				return;
 			case MiniOCLPackage.CLASS__OWNED_OPERATIONS:
 				getOwnedOperations().clear();
 				return;
 			case MiniOCLPackage.CLASS__OWNED_PROPERTIES:
 				getOwnedProperties().clear();
-				return;
-			case MiniOCLPackage.CLASS__OWNED_INVARIANTS:
-				getOwnedInvariants().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -284,14 +227,12 @@ public class ClassImpl extends NamedElementImpl implements org.eclipse.qvtd.doc.
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case MiniOCLPackage.CLASS__SUPER_CLASS:
-				return superClass != null;
+			case MiniOCLPackage.CLASS__SUPER_CLASSES:
+				return superClasses != null && !superClasses.isEmpty();
 			case MiniOCLPackage.CLASS__OWNED_OPERATIONS:
 				return ownedOperations != null && !ownedOperations.isEmpty();
 			case MiniOCLPackage.CLASS__OWNED_PROPERTIES:
 				return ownedProperties != null && !ownedProperties.isEmpty();
-			case MiniOCLPackage.CLASS__OWNED_INVARIANTS:
-				return ownedInvariants != null && !ownedInvariants.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

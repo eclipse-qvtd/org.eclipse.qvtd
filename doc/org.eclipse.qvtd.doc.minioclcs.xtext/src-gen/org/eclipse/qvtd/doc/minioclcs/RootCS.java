@@ -5,6 +5,8 @@ package org.eclipse.qvtd.doc.minioclcs;
 
 import org.eclipse.emf.common.util.EList;
 
+import org.eclipse.emf.ecore.EObject;
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Root CS</b></em>'.
@@ -14,8 +16,9 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * </p>
  * <ul>
+ *   <li>{@link org.eclipse.qvtd.doc.minioclcs.RootCS#getImports <em>Imports</em>}</li>
  *   <li>{@link org.eclipse.qvtd.doc.minioclcs.RootCS#getPackages <em>Packages</em>}</li>
- *   <li>{@link org.eclipse.qvtd.doc.minioclcs.RootCS#getContraints <em>Contraints</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.doc.minioclcs.RootCS#getConstraints <em>Constraints</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.doc.minioclcs.MinioclcsPackage#getRootCS()
@@ -24,6 +27,22 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface RootCS extends CSTrace
 {
+  /**
+	 * Returns the value of the '<em><b>Imports</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.qvtd.doc.minioclcs.ImportCS}.
+	 * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Imports</em>' containment reference list isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+	 * @return the value of the '<em>Imports</em>' containment reference list.
+	 * @see org.eclipse.qvtd.doc.minioclcs.MinioclcsPackage#getRootCS_Imports()
+	 * @model containment="true"
+	 * @generated
+	 */
+  EList<ImportCS> getImports();
+
   /**
 	 * Returns the value of the '<em><b>Packages</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.doc.minioclcs.PackageCS}.
@@ -41,19 +60,19 @@ public interface RootCS extends CSTrace
   EList<PackageCS> getPackages();
 
   /**
-	 * Returns the value of the '<em><b>Contraints</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Constraints</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.doc.minioclcs.ConstraintsDefCS}.
 	 * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Contraints</em>' containment reference list isn't clear,
+   * If the meaning of the '<em>Constraints</em>' containment reference list isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-	 * @return the value of the '<em>Contraints</em>' containment reference list.
-	 * @see org.eclipse.qvtd.doc.minioclcs.MinioclcsPackage#getRootCS_Contraints()
+	 * @return the value of the '<em>Constraints</em>' containment reference list.
+	 * @see org.eclipse.qvtd.doc.minioclcs.MinioclcsPackage#getRootCS_Constraints()
 	 * @model containment="true"
 	 * @generated
 	 */
-  EList<ConstraintsDefCS> getContraints();
+  EList<ConstraintsDefCS> getConstraints();
 
 } // RootCS

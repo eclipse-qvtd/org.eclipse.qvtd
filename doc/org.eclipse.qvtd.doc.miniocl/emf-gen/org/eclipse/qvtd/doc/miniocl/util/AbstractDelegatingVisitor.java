@@ -50,6 +50,11 @@ public abstract class AbstractDelegatingVisitor<R, C, @NonNull D extends Visitor
 	}
 
 	@Override
+	public R visitBooleanLiteralExp(org.eclipse.qvtd.doc.miniocl.@NonNull BooleanLiteralExp object) {
+		return delegate.visitBooleanLiteralExp(object);
+	}
+
+	@Override
 	public R visitCallExp(org.eclipse.qvtd.doc.miniocl.@NonNull CallExp object) {
 		return delegate.visitCallExp(object);
 	}
@@ -57,6 +62,26 @@ public abstract class AbstractDelegatingVisitor<R, C, @NonNull D extends Visitor
 	@Override
 	public R visitClass(org.eclipse.qvtd.doc.miniocl.@NonNull Class object) {
 		return delegate.visitClass(object);
+	}
+
+	@Override
+	public R visitCollectionItem(org.eclipse.qvtd.doc.miniocl.@NonNull CollectionItem object) {
+		return delegate.visitCollectionItem(object);
+	}
+
+	@Override
+	public R visitCollectionLiteralExp(org.eclipse.qvtd.doc.miniocl.@NonNull CollectionLiteralExp object) {
+		return delegate.visitCollectionLiteralExp(object);
+	}
+
+	@Override
+	public R visitCollectionLiteralPart(org.eclipse.qvtd.doc.miniocl.@NonNull CollectionLiteralPart object) {
+		return delegate.visitCollectionLiteralPart(object);
+	}
+
+	@Override
+	public R visitCollectionRange(org.eclipse.qvtd.doc.miniocl.@NonNull CollectionRange object) {
+		return delegate.visitCollectionRange(object);
 	}
 
 	@Override
@@ -80,6 +105,41 @@ public abstract class AbstractDelegatingVisitor<R, C, @NonNull D extends Visitor
 	}
 
 	@Override
+	public R visitImport(org.eclipse.qvtd.doc.miniocl.@NonNull Import object) {
+		return delegate.visitImport(object);
+	}
+
+	@Override
+	public R visitIntegerLiteralExp(org.eclipse.qvtd.doc.miniocl.@NonNull IntegerLiteralExp object) {
+		return delegate.visitIntegerLiteralExp(object);
+	}
+
+	@Override
+	public R visitIterateExp(org.eclipse.qvtd.doc.miniocl.@NonNull IterateExp object) {
+		return delegate.visitIterateExp(object);
+	}
+
+	@Override
+	public R visitIteratorExp(org.eclipse.qvtd.doc.miniocl.@NonNull IteratorExp object) {
+		return delegate.visitIteratorExp(object);
+	}
+
+	@Override
+	public R visitLetExp(org.eclipse.qvtd.doc.miniocl.@NonNull LetExp object) {
+		return delegate.visitLetExp(object);
+	}
+
+	@Override
+	public R visitLiteralExp(org.eclipse.qvtd.doc.miniocl.@NonNull LiteralExp object) {
+		return delegate.visitLiteralExp(object);
+	}
+
+	@Override
+	public R visitLoopExp(org.eclipse.qvtd.doc.miniocl.@NonNull LoopExp object) {
+		return delegate.visitLoopExp(object);
+	}
+
+	@Override
 	public R visitNamedElement(org.eclipse.qvtd.doc.miniocl.@NonNull NamedElement object) {
 		return delegate.visitNamedElement(object);
 	}
@@ -90,8 +150,18 @@ public abstract class AbstractDelegatingVisitor<R, C, @NonNull D extends Visitor
 	}
 
 	@Override
+	public R visitNullLiteralExp(org.eclipse.qvtd.doc.miniocl.@NonNull NullLiteralExp object) {
+		return delegate.visitNullLiteralExp(object);
+	}
+
+	@Override
 	public R visitOCLExpression(org.eclipse.qvtd.doc.miniocl.@NonNull OCLExpression object) {
 		return delegate.visitOCLExpression(object);
+	}
+
+	@Override
+	public R visitOpaqueExpression(org.eclipse.qvtd.doc.miniocl.@NonNull OpaqueExpression object) {
+		return delegate.visitOpaqueExpression(object);
 	}
 
 	@Override
@@ -112,6 +182,11 @@ public abstract class AbstractDelegatingVisitor<R, C, @NonNull D extends Visitor
 	@Override
 	public R visitParameter(org.eclipse.qvtd.doc.miniocl.@NonNull Parameter object) {
 		return delegate.visitParameter(object);
+	}
+
+	@Override
+	public R visitPrimitiveLiteralExp(org.eclipse.qvtd.doc.miniocl.@NonNull PrimitiveLiteralExp object) {
+		return delegate.visitPrimitiveLiteralExp(object);
 	}
 
 	@Override

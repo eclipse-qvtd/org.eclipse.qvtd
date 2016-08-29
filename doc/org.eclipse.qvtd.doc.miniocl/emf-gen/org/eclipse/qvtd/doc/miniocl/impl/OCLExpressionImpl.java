@@ -15,7 +15,7 @@ import org.eclipse.qvtd.doc.miniocl.util.Visitor;
  *
  * @generated
  */
-public class OCLExpressionImpl extends TypedElementImpl implements OCLExpression {
+public abstract class OCLExpressionImpl extends TypedElementImpl implements OCLExpression {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -33,15 +33,6 @@ public class OCLExpressionImpl extends TypedElementImpl implements OCLExpression
 	@Override
 	protected EClass eStaticClass() {
 		return MiniOCLPackage.Literals.OCL_EXPRESSION;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * @generated
-	 */
-	@Override
-	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return visitor.visitOCLExpression(this);
 	}
 
 } //OCLExpressionImpl

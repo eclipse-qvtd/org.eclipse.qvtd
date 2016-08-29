@@ -5,46 +5,13 @@ package org.eclipse.qvtd.doc.minioclcs.util;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
+
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
+
 import org.eclipse.emf.ecore.EObject;
+
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.qvtd.doc.minioclcs.AccVarCS;
-import org.eclipse.qvtd.doc.minioclcs.BooleanExpCS;
-import org.eclipse.qvtd.doc.minioclcs.BooleanLiteralExpCS;
-import org.eclipse.qvtd.doc.minioclcs.CSTrace;
-import org.eclipse.qvtd.doc.minioclcs.CallExpCS;
-import org.eclipse.qvtd.doc.minioclcs.ClassCS;
-import org.eclipse.qvtd.doc.minioclcs.ClassifierCS;
-import org.eclipse.qvtd.doc.minioclcs.CollectExpCS;
-import org.eclipse.qvtd.doc.minioclcs.CollectionLiteralExpCS;
-import org.eclipse.qvtd.doc.minioclcs.CollectionLiteralPartCS;
-import org.eclipse.qvtd.doc.minioclcs.ConstraintsDefCS;
-import org.eclipse.qvtd.doc.minioclcs.DatatypeCS;
-import org.eclipse.qvtd.doc.minioclcs.ExpCS;
-import org.eclipse.qvtd.doc.minioclcs.IntLiteralExpCS;
-import org.eclipse.qvtd.doc.minioclcs.InvariantCS;
-import org.eclipse.qvtd.doc.minioclcs.IterateExpCS;
-import org.eclipse.qvtd.doc.minioclcs.IteratorVarCS;
-import org.eclipse.qvtd.doc.minioclcs.LetExpCS;
-import org.eclipse.qvtd.doc.minioclcs.LetVarCS;
-import org.eclipse.qvtd.doc.minioclcs.LiteralExpCS;
-import org.eclipse.qvtd.doc.minioclcs.LogicExpCS;
-import org.eclipse.qvtd.doc.minioclcs.LoopExpCS;
-import org.eclipse.qvtd.doc.minioclcs.MinioclcsPackage;
-import org.eclipse.qvtd.doc.minioclcs.MultiplicityCS;
-import org.eclipse.qvtd.doc.minioclcs.NameExpCS;
-import org.eclipse.qvtd.doc.minioclcs.NavigationExpCS;
-import org.eclipse.qvtd.doc.minioclcs.NullLiteralExpCS;
-import org.eclipse.qvtd.doc.minioclcs.OperationCS;
-import org.eclipse.qvtd.doc.minioclcs.PackageCS;
-import org.eclipse.qvtd.doc.minioclcs.ParameterCS;
-import org.eclipse.qvtd.doc.minioclcs.PathElementCS;
-import org.eclipse.qvtd.doc.minioclcs.PathNameCS;
-import org.eclipse.qvtd.doc.minioclcs.PrimaryExpCS;
-import org.eclipse.qvtd.doc.minioclcs.PropertyCS;
-import org.eclipse.qvtd.doc.minioclcs.RootCS;
-import org.eclipse.qvtd.doc.minioclcs.RoundedBracketClauseCS;
-import org.eclipse.qvtd.doc.minioclcs.SelfExpCS;
+import org.eclipse.qvtd.doc.minioclcs.*;
 
 /**
  * <!-- begin-user-doc -->
@@ -110,20 +77,16 @@ public class MinioclcsAdapterFactory extends AdapterFactoryImpl
 				return createRootCSAdapter();
 			}
 			@Override
+			public Adapter caseImportCS(ImportCS object) {
+				return createImportCSAdapter();
+			}
+			@Override
 			public Adapter casePackageCS(PackageCS object) {
 				return createPackageCSAdapter();
 			}
 			@Override
-			public Adapter caseClassifierCS(ClassifierCS object) {
-				return createClassifierCSAdapter();
-			}
-			@Override
 			public Adapter caseClassCS(ClassCS object) {
 				return createClassCSAdapter();
-			}
-			@Override
-			public Adapter caseDatatypeCS(DatatypeCS object) {
-				return createDatatypeCSAdapter();
 			}
 			@Override
 			public Adapter casePropertyCS(PropertyCS object) {
@@ -154,8 +117,8 @@ public class MinioclcsAdapterFactory extends AdapterFactoryImpl
 				return createExpCSAdapter();
 			}
 			@Override
-			public Adapter caseLogicExpCS(LogicExpCS object) {
-				return createLogicExpCSAdapter();
+			public Adapter caseEqualityExpCS(EqualityExpCS object) {
+				return createEqualityExpCSAdapter();
 			}
 			@Override
 			public Adapter caseCallExpCS(CallExpCS object) {
@@ -286,6 +249,21 @@ public class MinioclcsAdapterFactory extends AdapterFactoryImpl
 	}
 
   /**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.doc.minioclcs.ImportCS <em>Import CS</em>}'.
+	 * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.doc.minioclcs.ImportCS
+	 * @generated
+	 */
+  public Adapter createImportCSAdapter()
+  {
+		return null;
+	}
+
+  /**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.doc.minioclcs.PackageCS <em>Package CS</em>}'.
 	 * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -301,21 +279,6 @@ public class MinioclcsAdapterFactory extends AdapterFactoryImpl
 	}
 
   /**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.doc.minioclcs.ClassifierCS <em>Classifier CS</em>}'.
-	 * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.doc.minioclcs.ClassifierCS
-	 * @generated
-	 */
-  public Adapter createClassifierCSAdapter()
-  {
-		return null;
-	}
-
-  /**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.doc.minioclcs.ClassCS <em>Class CS</em>}'.
 	 * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -326,21 +289,6 @@ public class MinioclcsAdapterFactory extends AdapterFactoryImpl
 	 * @generated
 	 */
   public Adapter createClassCSAdapter()
-  {
-		return null;
-	}
-
-  /**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.doc.minioclcs.DatatypeCS <em>Datatype CS</em>}'.
-	 * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.doc.minioclcs.DatatypeCS
-	 * @generated
-	 */
-  public Adapter createDatatypeCSAdapter()
   {
 		return null;
 	}
@@ -451,16 +399,16 @@ public class MinioclcsAdapterFactory extends AdapterFactoryImpl
 	}
 
   /**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.doc.minioclcs.LogicExpCS <em>Logic Exp CS</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.doc.minioclcs.EqualityExpCS <em>Equality Exp CS</em>}'.
 	 * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.doc.minioclcs.LogicExpCS
+	 * @see org.eclipse.qvtd.doc.minioclcs.EqualityExpCS
 	 * @generated
 	 */
-  public Adapter createLogicExpCSAdapter()
+  public Adapter createEqualityExpCSAdapter()
   {
 		return null;
 	}

@@ -7,18 +7,33 @@ import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.qvtd.doc.miniocl.BooleanLiteralExp;
 import org.eclipse.qvtd.doc.miniocl.CallExp;
+import org.eclipse.qvtd.doc.miniocl.CollectionItem;
+import org.eclipse.qvtd.doc.miniocl.CollectionLiteralExp;
+import org.eclipse.qvtd.doc.miniocl.CollectionLiteralPart;
+import org.eclipse.qvtd.doc.miniocl.CollectionRange;
 import org.eclipse.qvtd.doc.miniocl.Constraint;
 import org.eclipse.qvtd.doc.miniocl.Element;
 import org.eclipse.qvtd.doc.miniocl.ExpressionInOCL;
 import org.eclipse.qvtd.doc.miniocl.Feature;
+import org.eclipse.qvtd.doc.miniocl.Import;
+import org.eclipse.qvtd.doc.miniocl.IntegerLiteralExp;
+import org.eclipse.qvtd.doc.miniocl.IterateExp;
+import org.eclipse.qvtd.doc.miniocl.IteratorExp;
+import org.eclipse.qvtd.doc.miniocl.LetExp;
+import org.eclipse.qvtd.doc.miniocl.LiteralExp;
+import org.eclipse.qvtd.doc.miniocl.LoopExp;
 import org.eclipse.qvtd.doc.miniocl.MiniOCLPackage;
 import org.eclipse.qvtd.doc.miniocl.NamedElement;
 import org.eclipse.qvtd.doc.miniocl.Namespace;
+import org.eclipse.qvtd.doc.miniocl.NullLiteralExp;
 import org.eclipse.qvtd.doc.miniocl.OCLExpression;
+import org.eclipse.qvtd.doc.miniocl.OpaqueExpression;
 import org.eclipse.qvtd.doc.miniocl.Operation;
 import org.eclipse.qvtd.doc.miniocl.OperationCallExp;
 import org.eclipse.qvtd.doc.miniocl.Parameter;
+import org.eclipse.qvtd.doc.miniocl.PrimitiveLiteralExp;
 import org.eclipse.qvtd.doc.miniocl.Property;
 import org.eclipse.qvtd.doc.miniocl.PropertyCallExp;
 import org.eclipse.qvtd.doc.miniocl.Root;
@@ -83,6 +98,10 @@ public class MiniOCLAdapterFactory extends AdapterFactoryImpl {
 	protected MiniOCLSwitch<@Nullable Adapter> modelSwitch =
 		new MiniOCLSwitch<@Nullable Adapter>() {
 			@Override
+			public Adapter caseBooleanLiteralExp(BooleanLiteralExp object) {
+				return createBooleanLiteralExpAdapter();
+			}
+			@Override
 			public Adapter caseCallExp(CallExp object) {
 				return createCallExpAdapter();
 			}
@@ -91,12 +110,64 @@ public class MiniOCLAdapterFactory extends AdapterFactoryImpl {
 				return createClassAdapter();
 			}
 			@Override
+			public Adapter caseCollectionLiteralExp(CollectionLiteralExp object) {
+				return createCollectionLiteralExpAdapter();
+			}
+			@Override
+			public Adapter caseCollectionItem(CollectionItem object) {
+				return createCollectionItemAdapter();
+			}
+			@Override
+			public Adapter caseCollectionLiteralPart(CollectionLiteralPart object) {
+				return createCollectionLiteralPartAdapter();
+			}
+			@Override
+			public Adapter caseCollectionRange(CollectionRange object) {
+				return createCollectionRangeAdapter();
+			}
+			@Override
+			public Adapter caseConstraint(Constraint object) {
+				return createConstraintAdapter();
+			}
+			@Override
 			public Adapter caseElement(Element object) {
 				return createElementAdapter();
 			}
 			@Override
+			public Adapter caseExpressionInOCL(ExpressionInOCL object) {
+				return createExpressionInOCLAdapter();
+			}
+			@Override
 			public Adapter caseFeature(Feature object) {
 				return createFeatureAdapter();
+			}
+			@Override
+			public Adapter caseImport(Import object) {
+				return createImportAdapter();
+			}
+			@Override
+			public Adapter caseIntegerLiteralExp(IntegerLiteralExp object) {
+				return createIntegerLiteralExpAdapter();
+			}
+			@Override
+			public Adapter caseIteratorExp(IteratorExp object) {
+				return createIteratorExpAdapter();
+			}
+			@Override
+			public Adapter caseIterateExp(IterateExp object) {
+				return createIterateExpAdapter();
+			}
+			@Override
+			public Adapter caseLetExp(LetExp object) {
+				return createLetExpAdapter();
+			}
+			@Override
+			public Adapter caseLiteralExp(LiteralExp object) {
+				return createLiteralExpAdapter();
+			}
+			@Override
+			public Adapter caseLoopExp(LoopExp object) {
+				return createLoopExpAdapter();
 			}
 			@Override
 			public Adapter caseNamedElement(NamedElement object) {
@@ -107,8 +178,16 @@ public class MiniOCLAdapterFactory extends AdapterFactoryImpl {
 				return createNamespaceAdapter();
 			}
 			@Override
+			public Adapter caseNullLiteralExp(NullLiteralExp object) {
+				return createNullLiteralExpAdapter();
+			}
+			@Override
 			public Adapter caseOCLExpression(OCLExpression object) {
 				return createOCLExpressionAdapter();
+			}
+			@Override
+			public Adapter caseOpaqueExpression(OpaqueExpression object) {
+				return createOpaqueExpressionAdapter();
 			}
 			@Override
 			public Adapter caseOperationCallExp(OperationCallExp object) {
@@ -125,6 +204,10 @@ public class MiniOCLAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseParameter(Parameter object) {
 				return createParameterAdapter();
+			}
+			@Override
+			public Adapter casePrimitiveLiteralExp(PrimitiveLiteralExp object) {
+				return createPrimitiveLiteralExpAdapter();
 			}
 			@Override
 			public Adapter caseProperty(Property object) {
@@ -155,14 +238,6 @@ public class MiniOCLAdapterFactory extends AdapterFactoryImpl {
 				return createTypedElementAdapter();
 			}
 			@Override
-			public Adapter caseExpressionInOCL(ExpressionInOCL object) {
-				return createExpressionInOCLAdapter();
-			}
-			@Override
-			public Adapter caseConstraint(Constraint object) {
-				return createConstraintAdapter();
-			}
-			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -181,6 +256,20 @@ public class MiniOCLAdapterFactory extends AdapterFactoryImpl {
 		return modelSwitch.doSwitch((EObject)target);
 	}
 
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.doc.miniocl.BooleanLiteralExp <em>Boolean Literal Exp</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.doc.miniocl.BooleanLiteralExp
+	 * @generated
+	 */
+	public Adapter createBooleanLiteralExpAdapter() {
+		return null;
+	}
 
 	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.doc.miniocl.Element <em>Element</em>}'.
@@ -211,6 +300,104 @@ public class MiniOCLAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.doc.miniocl.Import <em>Import</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.doc.miniocl.Import
+	 * @generated
+	 */
+	public Adapter createImportAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.doc.miniocl.IntegerLiteralExp <em>Integer Literal Exp</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.doc.miniocl.IntegerLiteralExp
+	 * @generated
+	 */
+	public Adapter createIntegerLiteralExpAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.doc.miniocl.IteratorExp <em>Iterator Exp</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.doc.miniocl.IteratorExp
+	 * @generated
+	 */
+	public Adapter createIteratorExpAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.doc.miniocl.IterateExp <em>Iterate Exp</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.doc.miniocl.IterateExp
+	 * @generated
+	 */
+	public Adapter createIterateExpAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.doc.miniocl.LetExp <em>Let Exp</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.doc.miniocl.LetExp
+	 * @generated
+	 */
+	public Adapter createLetExpAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.doc.miniocl.LiteralExp <em>Literal Exp</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.doc.miniocl.LiteralExp
+	 * @generated
+	 */
+	public Adapter createLiteralExpAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.doc.miniocl.LoopExp <em>Loop Exp</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.doc.miniocl.LoopExp
+	 * @generated
+	 */
+	public Adapter createLoopExpAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.doc.miniocl.NamedElement <em>Named Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -235,6 +422,20 @@ public class MiniOCLAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createNamespaceAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.doc.miniocl.NullLiteralExp <em>Null Literal Exp</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.doc.miniocl.NullLiteralExp
+	 * @generated
+	 */
+	public Adapter createNullLiteralExpAdapter() {
 		return null;
 	}
 
@@ -295,6 +496,20 @@ public class MiniOCLAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.doc.miniocl.OpaqueExpression <em>Opaque Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.doc.miniocl.OpaqueExpression
+	 * @generated
+	 */
+	public Adapter createOpaqueExpressionAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.doc.miniocl.CallExp <em>Call Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -351,6 +566,62 @@ public class MiniOCLAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.doc.miniocl.CollectionLiteralExp <em>Collection Literal Exp</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.doc.miniocl.CollectionLiteralExp
+	 * @generated
+	 */
+	public Adapter createCollectionLiteralExpAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.doc.miniocl.CollectionItem <em>Collection Item</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.doc.miniocl.CollectionItem
+	 * @generated
+	 */
+	public Adapter createCollectionItemAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.doc.miniocl.CollectionLiteralPart <em>Collection Literal Part</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.doc.miniocl.CollectionLiteralPart
+	 * @generated
+	 */
+	public Adapter createCollectionLiteralPartAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.doc.miniocl.CollectionRange <em>Collection Range</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.doc.miniocl.CollectionRange
+	 * @generated
+	 */
+	public Adapter createCollectionRangeAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.doc.miniocl.Property <em>Property</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -389,6 +660,20 @@ public class MiniOCLAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createParameterAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.doc.miniocl.PrimitiveLiteralExp <em>Primitive Literal Exp</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.doc.miniocl.PrimitiveLiteralExp
+	 * @generated
+	 */
+	public Adapter createPrimitiveLiteralExpAdapter() {
 		return null;
 	}
 

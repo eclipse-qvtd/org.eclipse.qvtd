@@ -13,7 +13,7 @@ import org.eclipse.qvtd.doc.miniocl.Namespace;
  *
  * @generated
  */
-public abstract class NamespaceImpl extends ElementImpl implements Namespace {
+public abstract class NamespaceImpl extends NamedElementImpl implements Namespace {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

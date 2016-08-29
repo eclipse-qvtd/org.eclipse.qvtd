@@ -21,7 +21,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface Package extends NamedElement, Namespace {
+public interface Package extends Namespace {
 	/**
 	 * Returns the value of the '<em><b>Owned Classes</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.doc.miniocl.Class}.

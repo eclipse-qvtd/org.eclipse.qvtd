@@ -3,31 +3,32 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="minioclcs" nsURI="http://www.eclipse.org/qvtd/doc/MiniOCLCS"
     nsPrefix="minioclcs">
   <eClassifiers xsi:type="ecore:EClass" name="RootCS" eSuperTypes="#//CSTrace">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="imports" upperBound="-1"
+        eType="#//ImportCS" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="packages" upperBound="-1"
         eType="#//PackageCS" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="contraints" upperBound="-1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="constraints" upperBound="-1"
         eType="#//ConstraintsDefCS" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ImportCS" eSuperTypes="#//CSTrace">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="alias" eType="ecore:EDataType ../../../org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="uri" eType="ecore:EDataType ../../../org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PackageCS" eSuperTypes="#//CSTrace">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType ../../../org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="packages" upperBound="-1"
         eType="#//PackageCS" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="classifiers" upperBound="-1"
-        eType="#//ClassifierCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="classes" upperBound="-1"
+        eType="#//ClassCS" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ClassifierCS" eSuperTypes="#//CSTrace">
+  <eClassifiers xsi:type="ecore:EClass" name="ClassCS" eSuperTypes="#//CSTrace">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType ../../../org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ClassCS" eSuperTypes="#//ClassifierCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="extends" eType="#//PathNameCS"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="properties" upperBound="-1"
         eType="#//PropertyCS" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="operations" upperBound="-1"
         eType="#//OperationCS" containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="DatatypeCS" eSuperTypes="#//ClassifierCS">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="typeName" eType="ecore:EDataType ../../../org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PropertyCS" eSuperTypes="#//CSTrace">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType ../../../org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
@@ -39,7 +40,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="MultiplicityCS" eSuperTypes="#//CSTrace">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="opt" eType="ecore:EDataType ../../../org.eclipse.emf.ecore/model/Ecore.ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="mult" eType="ecore:EDataType ../../../org.eclipse.emf.ecore/model/Ecore.ecore#//EBoolean"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="lower" eType="ecore:EDataType ../../../org.eclipse.emf.ecore/model/Ecore.ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="mandatory" eType="ecore:EDataType ../../../org.eclipse.emf.ecore/model/Ecore.ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="lowerInt" eType="ecore:EDataType ../../../org.eclipse.emf.ecore/model/Ecore.ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="upperInt" eType="ecore:EDataType ../../../org.eclipse.emf.ecore/model/Ecore.ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="upperMult" eType="ecore:EDataType ../../../org.eclipse.emf.ecore/model/Ecore.ecore#//EBoolean"/>
   </eClassifiers>
@@ -67,14 +69,14 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="exp" eType="#//ExpCS" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ExpCS" eSuperTypes="#//CSTrace"/>
-  <eClassifiers xsi:type="ecore:EClass" name="LogicExpCS" eSuperTypes="#//ExpCS">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//LogicExpCS"
+  <eClassifiers xsi:type="ecore:EClass" name="EqualityExpCS" eSuperTypes="#//ExpCS">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//EqualityExpCS"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="op" eType="ecore:EDataType ../../../org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="opName" eType="ecore:EDataType ../../../org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="#//CallExpCS"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="CallExpCS" eSuperTypes="#//LogicExpCS">
+  <eClassifiers xsi:type="ecore:EClass" name="CallExpCS" eSuperTypes="#//EqualityExpCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="source" eType="#//CallExpCS"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="navExp" eType="#//NavigationExpCS"

@@ -7,12 +7,18 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
 import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+
 import org.eclipse.qvtd.doc.minioclcs.ClassCS;
 import org.eclipse.qvtd.doc.minioclcs.MinioclcsPackage;
 import org.eclipse.qvtd.doc.minioclcs.OperationCS;
@@ -27,6 +33,7 @@ import org.eclipse.qvtd.doc.minioclcs.PropertyCS;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link org.eclipse.qvtd.doc.minioclcs.impl.ClassCSImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.qvtd.doc.minioclcs.impl.ClassCSImpl#getExtends <em>Extends</em>}</li>
  *   <li>{@link org.eclipse.qvtd.doc.minioclcs.impl.ClassCSImpl#getProperties <em>Properties</em>}</li>
  *   <li>{@link org.eclipse.qvtd.doc.minioclcs.impl.ClassCSImpl#getOperations <em>Operations</em>}</li>
@@ -34,8 +41,28 @@ import org.eclipse.qvtd.doc.minioclcs.PropertyCS;
  *
  * @generated
  */
-public class ClassCSImpl extends ClassifierCSImpl implements ClassCS
+public class ClassCSImpl extends CSTraceImpl implements ClassCS
 {
+  /**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+  protected static final String NAME_EDEFAULT = null;
+
+  /**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+  protected String name = NAME_EDEFAULT;
+
   /**
 	 * The cached value of the '{@link #getExtends() <em>Extends</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -85,6 +112,29 @@ public class ClassCSImpl extends ClassifierCSImpl implements ClassCS
   protected EClass eStaticClass()
   {
 		return MinioclcsPackage.Literals.CLASS_CS;
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  public String getName()
+  {
+		return name;
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  public void setName(String newName)
+  {
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, MinioclcsPackage.CLASS_CS__NAME, oldName, name));
 	}
 
   /**
@@ -187,6 +237,8 @@ public class ClassCSImpl extends ClassifierCSImpl implements ClassCS
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
 		switch (featureID) {
+			case MinioclcsPackage.CLASS_CS__NAME:
+				return getName();
 			case MinioclcsPackage.CLASS_CS__EXTENDS:
 				return getExtends();
 			case MinioclcsPackage.CLASS_CS__PROPERTIES:
@@ -207,6 +259,9 @@ public class ClassCSImpl extends ClassifierCSImpl implements ClassCS
   public void eSet(int featureID, Object newValue)
   {
 		switch (featureID) {
+			case MinioclcsPackage.CLASS_CS__NAME:
+				setName((String)newValue);
+				return;
 			case MinioclcsPackage.CLASS_CS__EXTENDS:
 				setExtends((PathNameCS)newValue);
 				return;
@@ -231,6 +286,9 @@ public class ClassCSImpl extends ClassifierCSImpl implements ClassCS
   public void eUnset(int featureID)
   {
 		switch (featureID) {
+			case MinioclcsPackage.CLASS_CS__NAME:
+				setName(NAME_EDEFAULT);
+				return;
 			case MinioclcsPackage.CLASS_CS__EXTENDS:
 				setExtends((PathNameCS)null);
 				return;
@@ -253,6 +311,8 @@ public class ClassCSImpl extends ClassifierCSImpl implements ClassCS
   public boolean eIsSet(int featureID)
   {
 		switch (featureID) {
+			case MinioclcsPackage.CLASS_CS__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case MinioclcsPackage.CLASS_CS__EXTENDS:
 				return extends_ != null;
 			case MinioclcsPackage.CLASS_CS__PROPERTIES:
@@ -261,6 +321,23 @@ public class ClassCSImpl extends ClassifierCSImpl implements ClassCS
 				return operations != null && !operations.isEmpty();
 		}
 		return super.eIsSet(featureID);
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  @Override
+  public String toString()
+  {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (name: ");
+		result.append(name);
+		result.append(')');
+		return result.toString();
 	}
 
 } //ClassCSImpl

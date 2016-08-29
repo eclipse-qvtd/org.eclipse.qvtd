@@ -5,29 +5,32 @@ package org.eclipse.qvtd.doc.minioclcs.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
 import org.eclipse.qvtd.doc.minioclcs.CallExpCS;
-import org.eclipse.qvtd.doc.minioclcs.LogicExpCS;
+import org.eclipse.qvtd.doc.minioclcs.EqualityExpCS;
 import org.eclipse.qvtd.doc.minioclcs.MinioclcsPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Logic Exp CS</b></em>'.
+ * An implementation of the model object '<em><b>Equality Exp CS</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.doc.minioclcs.impl.LogicExpCSImpl#getLeft <em>Left</em>}</li>
- *   <li>{@link org.eclipse.qvtd.doc.minioclcs.impl.LogicExpCSImpl#getOp <em>Op</em>}</li>
- *   <li>{@link org.eclipse.qvtd.doc.minioclcs.impl.LogicExpCSImpl#getRight <em>Right</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.doc.minioclcs.impl.EqualityExpCSImpl#getLeft <em>Left</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.doc.minioclcs.impl.EqualityExpCSImpl#getOpName <em>Op Name</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.doc.minioclcs.impl.EqualityExpCSImpl#getRight <em>Right</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class LogicExpCSImpl extends ExpCSImpl implements LogicExpCS
+public class EqualityExpCSImpl extends ExpCSImpl implements EqualityExpCS
 {
   /**
 	 * The cached value of the '{@link #getLeft() <em>Left</em>}' containment reference.
@@ -37,27 +40,27 @@ public class LogicExpCSImpl extends ExpCSImpl implements LogicExpCS
 	 * @generated
 	 * @ordered
 	 */
-  protected LogicExpCS left;
+  protected EqualityExpCS left;
 
   /**
-	 * The default value of the '{@link #getOp() <em>Op</em>}' attribute.
+	 * The default value of the '{@link #getOpName() <em>Op Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getOp()
+	 * @see #getOpName()
 	 * @generated
 	 * @ordered
 	 */
-  protected static final String OP_EDEFAULT = null;
+  protected static final String OP_NAME_EDEFAULT = null;
 
   /**
-	 * The cached value of the '{@link #getOp() <em>Op</em>}' attribute.
+	 * The cached value of the '{@link #getOpName() <em>Op Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getOp()
+	 * @see #getOpName()
 	 * @generated
 	 * @ordered
 	 */
-  protected String op = OP_EDEFAULT;
+  protected String opName = OP_NAME_EDEFAULT;
 
   /**
 	 * The cached value of the '{@link #getRight() <em>Right</em>}' containment reference.
@@ -74,7 +77,7 @@ public class LogicExpCSImpl extends ExpCSImpl implements LogicExpCS
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  protected LogicExpCSImpl()
+  protected EqualityExpCSImpl()
   {
 		super();
 	}
@@ -87,7 +90,7 @@ public class LogicExpCSImpl extends ExpCSImpl implements LogicExpCS
   @Override
   protected EClass eStaticClass()
   {
-		return MinioclcsPackage.Literals.LOGIC_EXP_CS;
+		return MinioclcsPackage.Literals.EQUALITY_EXP_CS;
 	}
 
   /**
@@ -95,7 +98,7 @@ public class LogicExpCSImpl extends ExpCSImpl implements LogicExpCS
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public LogicExpCS getLeft()
+  public EqualityExpCS getLeft()
   {
 		return left;
 	}
@@ -105,12 +108,12 @@ public class LogicExpCSImpl extends ExpCSImpl implements LogicExpCS
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public NotificationChain basicSetLeft(LogicExpCS newLeft, NotificationChain msgs)
+  public NotificationChain basicSetLeft(EqualityExpCS newLeft, NotificationChain msgs)
   {
-		LogicExpCS oldLeft = left;
+		EqualityExpCS oldLeft = left;
 		left = newLeft;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MinioclcsPackage.LOGIC_EXP_CS__LEFT, oldLeft, newLeft);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MinioclcsPackage.EQUALITY_EXP_CS__LEFT, oldLeft, newLeft);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -121,19 +124,19 @@ public class LogicExpCSImpl extends ExpCSImpl implements LogicExpCS
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void setLeft(LogicExpCS newLeft)
+  public void setLeft(EqualityExpCS newLeft)
   {
 		if (newLeft != left) {
 			NotificationChain msgs = null;
 			if (left != null)
-				msgs = ((InternalEObject)left).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MinioclcsPackage.LOGIC_EXP_CS__LEFT, null, msgs);
+				msgs = ((InternalEObject)left).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MinioclcsPackage.EQUALITY_EXP_CS__LEFT, null, msgs);
 			if (newLeft != null)
-				msgs = ((InternalEObject)newLeft).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MinioclcsPackage.LOGIC_EXP_CS__LEFT, null, msgs);
+				msgs = ((InternalEObject)newLeft).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MinioclcsPackage.EQUALITY_EXP_CS__LEFT, null, msgs);
 			msgs = basicSetLeft(newLeft, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MinioclcsPackage.LOGIC_EXP_CS__LEFT, newLeft, newLeft));
+			eNotify(new ENotificationImpl(this, Notification.SET, MinioclcsPackage.EQUALITY_EXP_CS__LEFT, newLeft, newLeft));
 	}
 
   /**
@@ -141,9 +144,9 @@ public class LogicExpCSImpl extends ExpCSImpl implements LogicExpCS
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public String getOp()
+  public String getOpName()
   {
-		return op;
+		return opName;
 	}
 
   /**
@@ -151,12 +154,12 @@ public class LogicExpCSImpl extends ExpCSImpl implements LogicExpCS
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void setOp(String newOp)
+  public void setOpName(String newOpName)
   {
-		String oldOp = op;
-		op = newOp;
+		String oldOpName = opName;
+		opName = newOpName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MinioclcsPackage.LOGIC_EXP_CS__OP, oldOp, op));
+			eNotify(new ENotificationImpl(this, Notification.SET, MinioclcsPackage.EQUALITY_EXP_CS__OP_NAME, oldOpName, opName));
 	}
 
   /**
@@ -179,7 +182,7 @@ public class LogicExpCSImpl extends ExpCSImpl implements LogicExpCS
 		CallExpCS oldRight = right;
 		right = newRight;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MinioclcsPackage.LOGIC_EXP_CS__RIGHT, oldRight, newRight);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MinioclcsPackage.EQUALITY_EXP_CS__RIGHT, oldRight, newRight);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -195,14 +198,14 @@ public class LogicExpCSImpl extends ExpCSImpl implements LogicExpCS
 		if (newRight != right) {
 			NotificationChain msgs = null;
 			if (right != null)
-				msgs = ((InternalEObject)right).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MinioclcsPackage.LOGIC_EXP_CS__RIGHT, null, msgs);
+				msgs = ((InternalEObject)right).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MinioclcsPackage.EQUALITY_EXP_CS__RIGHT, null, msgs);
 			if (newRight != null)
-				msgs = ((InternalEObject)newRight).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MinioclcsPackage.LOGIC_EXP_CS__RIGHT, null, msgs);
+				msgs = ((InternalEObject)newRight).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MinioclcsPackage.EQUALITY_EXP_CS__RIGHT, null, msgs);
 			msgs = basicSetRight(newRight, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MinioclcsPackage.LOGIC_EXP_CS__RIGHT, newRight, newRight));
+			eNotify(new ENotificationImpl(this, Notification.SET, MinioclcsPackage.EQUALITY_EXP_CS__RIGHT, newRight, newRight));
 	}
 
   /**
@@ -214,9 +217,9 @@ public class LogicExpCSImpl extends ExpCSImpl implements LogicExpCS
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
 		switch (featureID) {
-			case MinioclcsPackage.LOGIC_EXP_CS__LEFT:
+			case MinioclcsPackage.EQUALITY_EXP_CS__LEFT:
 				return basicSetLeft(null, msgs);
-			case MinioclcsPackage.LOGIC_EXP_CS__RIGHT:
+			case MinioclcsPackage.EQUALITY_EXP_CS__RIGHT:
 				return basicSetRight(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -231,11 +234,11 @@ public class LogicExpCSImpl extends ExpCSImpl implements LogicExpCS
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
 		switch (featureID) {
-			case MinioclcsPackage.LOGIC_EXP_CS__LEFT:
+			case MinioclcsPackage.EQUALITY_EXP_CS__LEFT:
 				return getLeft();
-			case MinioclcsPackage.LOGIC_EXP_CS__OP:
-				return getOp();
-			case MinioclcsPackage.LOGIC_EXP_CS__RIGHT:
+			case MinioclcsPackage.EQUALITY_EXP_CS__OP_NAME:
+				return getOpName();
+			case MinioclcsPackage.EQUALITY_EXP_CS__RIGHT:
 				return getRight();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -250,13 +253,13 @@ public class LogicExpCSImpl extends ExpCSImpl implements LogicExpCS
   public void eSet(int featureID, Object newValue)
   {
 		switch (featureID) {
-			case MinioclcsPackage.LOGIC_EXP_CS__LEFT:
-				setLeft((LogicExpCS)newValue);
+			case MinioclcsPackage.EQUALITY_EXP_CS__LEFT:
+				setLeft((EqualityExpCS)newValue);
 				return;
-			case MinioclcsPackage.LOGIC_EXP_CS__OP:
-				setOp((String)newValue);
+			case MinioclcsPackage.EQUALITY_EXP_CS__OP_NAME:
+				setOpName((String)newValue);
 				return;
-			case MinioclcsPackage.LOGIC_EXP_CS__RIGHT:
+			case MinioclcsPackage.EQUALITY_EXP_CS__RIGHT:
 				setRight((CallExpCS)newValue);
 				return;
 		}
@@ -272,13 +275,13 @@ public class LogicExpCSImpl extends ExpCSImpl implements LogicExpCS
   public void eUnset(int featureID)
   {
 		switch (featureID) {
-			case MinioclcsPackage.LOGIC_EXP_CS__LEFT:
-				setLeft((LogicExpCS)null);
+			case MinioclcsPackage.EQUALITY_EXP_CS__LEFT:
+				setLeft((EqualityExpCS)null);
 				return;
-			case MinioclcsPackage.LOGIC_EXP_CS__OP:
-				setOp(OP_EDEFAULT);
+			case MinioclcsPackage.EQUALITY_EXP_CS__OP_NAME:
+				setOpName(OP_NAME_EDEFAULT);
 				return;
-			case MinioclcsPackage.LOGIC_EXP_CS__RIGHT:
+			case MinioclcsPackage.EQUALITY_EXP_CS__RIGHT:
 				setRight((CallExpCS)null);
 				return;
 		}
@@ -294,11 +297,11 @@ public class LogicExpCSImpl extends ExpCSImpl implements LogicExpCS
   public boolean eIsSet(int featureID)
   {
 		switch (featureID) {
-			case MinioclcsPackage.LOGIC_EXP_CS__LEFT:
+			case MinioclcsPackage.EQUALITY_EXP_CS__LEFT:
 				return left != null;
-			case MinioclcsPackage.LOGIC_EXP_CS__OP:
-				return OP_EDEFAULT == null ? op != null : !OP_EDEFAULT.equals(op);
-			case MinioclcsPackage.LOGIC_EXP_CS__RIGHT:
+			case MinioclcsPackage.EQUALITY_EXP_CS__OP_NAME:
+				return OP_NAME_EDEFAULT == null ? opName != null : !OP_NAME_EDEFAULT.equals(opName);
+			case MinioclcsPackage.EQUALITY_EXP_CS__RIGHT:
 				return right != null;
 		}
 		return super.eIsSet(featureID);
@@ -315,10 +318,10 @@ public class LogicExpCSImpl extends ExpCSImpl implements LogicExpCS
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (op: ");
-		result.append(op);
+		result.append(" (opName: ");
+		result.append(opName);
 		result.append(')');
 		return result.toString();
 	}
 
-} //LogicExpCSImpl
+} //EqualityExpCSImpl

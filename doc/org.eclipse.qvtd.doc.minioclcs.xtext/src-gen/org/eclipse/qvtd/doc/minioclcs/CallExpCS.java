@@ -21,7 +21,7 @@ package org.eclipse.qvtd.doc.minioclcs;
  * @model
  * @generated
  */
-public interface CallExpCS extends LogicExpCS
+public interface CallExpCS extends EqualityExpCS
 {
   /**
 	 * Returns the value of the '<em><b>Source</b></em>' containment reference.

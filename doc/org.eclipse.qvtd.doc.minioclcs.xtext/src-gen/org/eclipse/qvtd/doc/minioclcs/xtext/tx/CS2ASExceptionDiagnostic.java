@@ -20,6 +20,7 @@ package org.eclipse.qvtd.doc.minioclcs.xtext.tx;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.qvtd.doc.minioclcs.xtext.tx.CS2ASException;
 import org.eclipse.xtext.diagnostics.ExceptionDiagnostic;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;

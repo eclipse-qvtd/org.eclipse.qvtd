@@ -9,7 +9,9 @@ import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcorePackage;
+
 import org.eclipse.emf.ecore.impl.EPackageImpl;
+
 import org.eclipse.qvtd.doc.miniocl.MiniOCLPackage;
 import org.eclipse.qvtd.doc.minioclcs.AccVarCS;
 import org.eclipse.qvtd.doc.minioclcs.BooleanExpCS;
@@ -17,14 +19,14 @@ import org.eclipse.qvtd.doc.minioclcs.BooleanLiteralExpCS;
 import org.eclipse.qvtd.doc.minioclcs.CSTrace;
 import org.eclipse.qvtd.doc.minioclcs.CallExpCS;
 import org.eclipse.qvtd.doc.minioclcs.ClassCS;
-import org.eclipse.qvtd.doc.minioclcs.ClassifierCS;
 import org.eclipse.qvtd.doc.minioclcs.CollectExpCS;
 import org.eclipse.qvtd.doc.minioclcs.CollectionKindCS;
 import org.eclipse.qvtd.doc.minioclcs.CollectionLiteralExpCS;
 import org.eclipse.qvtd.doc.minioclcs.CollectionLiteralPartCS;
 import org.eclipse.qvtd.doc.minioclcs.ConstraintsDefCS;
-import org.eclipse.qvtd.doc.minioclcs.DatatypeCS;
+import org.eclipse.qvtd.doc.minioclcs.EqualityExpCS;
 import org.eclipse.qvtd.doc.minioclcs.ExpCS;
+import org.eclipse.qvtd.doc.minioclcs.ImportCS;
 import org.eclipse.qvtd.doc.minioclcs.IntLiteralExpCS;
 import org.eclipse.qvtd.doc.minioclcs.InvariantCS;
 import org.eclipse.qvtd.doc.minioclcs.IterateExpCS;
@@ -32,7 +34,6 @@ import org.eclipse.qvtd.doc.minioclcs.IteratorVarCS;
 import org.eclipse.qvtd.doc.minioclcs.LetExpCS;
 import org.eclipse.qvtd.doc.minioclcs.LetVarCS;
 import org.eclipse.qvtd.doc.minioclcs.LiteralExpCS;
-import org.eclipse.qvtd.doc.minioclcs.LogicExpCS;
 import org.eclipse.qvtd.doc.minioclcs.LoopExpCS;
 import org.eclipse.qvtd.doc.minioclcs.MinioclcsFactory;
 import org.eclipse.qvtd.doc.minioclcs.MinioclcsPackage;
@@ -71,6 +72,13 @@ public class MinioclcsPackageImpl extends EPackageImpl implements MinioclcsPacka
    * <!-- end-user-doc -->
 	 * @generated
 	 */
+  private EClass importCSEClass = null;
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
   private EClass packageCSEClass = null;
 
   /**
@@ -78,21 +86,7 @@ public class MinioclcsPackageImpl extends EPackageImpl implements MinioclcsPacka
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  private EClass classifierCSEClass = null;
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
   private EClass classCSEClass = null;
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  private EClass datatypeCSEClass = null;
 
   /**
 	 * <!-- begin-user-doc -->
@@ -148,7 +142,7 @@ public class MinioclcsPackageImpl extends EPackageImpl implements MinioclcsPacka
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  private EClass logicExpCSEClass = null;
+  private EClass equalityExpCSEClass = null;
 
   /**
 	 * <!-- begin-user-doc -->
@@ -401,7 +395,7 @@ public class MinioclcsPackageImpl extends EPackageImpl implements MinioclcsPacka
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EReference getRootCS_Packages()
+  public EReference getRootCS_Imports()
   {
 		return (EReference)rootCSEClass.getEStructuralFeatures().get(0);
 	}
@@ -411,9 +405,49 @@ public class MinioclcsPackageImpl extends EPackageImpl implements MinioclcsPacka
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EReference getRootCS_Contraints()
+  public EReference getRootCS_Packages()
   {
 		return (EReference)rootCSEClass.getEStructuralFeatures().get(1);
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  public EReference getRootCS_Constraints()
+  {
+		return (EReference)rootCSEClass.getEStructuralFeatures().get(2);
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  public EClass getImportCS()
+  {
+		return importCSEClass;
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  public EAttribute getImportCS_Alias()
+  {
+		return (EAttribute)importCSEClass.getEStructuralFeatures().get(0);
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  public EAttribute getImportCS_Uri()
+  {
+		return (EAttribute)importCSEClass.getEStructuralFeatures().get(1);
 	}
 
   /**
@@ -451,29 +485,9 @@ public class MinioclcsPackageImpl extends EPackageImpl implements MinioclcsPacka
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EReference getPackageCS_Classifiers()
+  public EReference getPackageCS_Classes()
   {
 		return (EReference)packageCSEClass.getEStructuralFeatures().get(2);
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public EClass getClassifierCS()
-  {
-		return classifierCSEClass;
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public EAttribute getClassifierCS_Name()
-  {
-		return (EAttribute)classifierCSEClass.getEStructuralFeatures().get(0);
 	}
 
   /**
@@ -491,9 +505,9 @@ public class MinioclcsPackageImpl extends EPackageImpl implements MinioclcsPacka
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EReference getClassCS_Extends()
+  public EAttribute getClassCS_Name()
   {
-		return (EReference)classCSEClass.getEStructuralFeatures().get(0);
+		return (EAttribute)classCSEClass.getEStructuralFeatures().get(0);
 	}
 
   /**
@@ -501,7 +515,7 @@ public class MinioclcsPackageImpl extends EPackageImpl implements MinioclcsPacka
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EReference getClassCS_Properties()
+  public EReference getClassCS_Extends()
   {
 		return (EReference)classCSEClass.getEStructuralFeatures().get(1);
 	}
@@ -511,7 +525,7 @@ public class MinioclcsPackageImpl extends EPackageImpl implements MinioclcsPacka
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EReference getClassCS_Operations()
+  public EReference getClassCS_Properties()
   {
 		return (EReference)classCSEClass.getEStructuralFeatures().get(2);
 	}
@@ -521,19 +535,9 @@ public class MinioclcsPackageImpl extends EPackageImpl implements MinioclcsPacka
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EClass getDatatypeCS()
+  public EReference getClassCS_Operations()
   {
-		return datatypeCSEClass;
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public EAttribute getDatatypeCS_TypeName()
-  {
-		return (EAttribute)datatypeCSEClass.getEStructuralFeatures().get(0);
+		return (EReference)classCSEClass.getEStructuralFeatures().get(3);
 	}
 
   /**
@@ -611,7 +615,7 @@ public class MinioclcsPackageImpl extends EPackageImpl implements MinioclcsPacka
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EAttribute getMultiplicityCS_Lower()
+  public EAttribute getMultiplicityCS_Mandatory()
   {
 		return (EAttribute)multiplicityCSEClass.getEStructuralFeatures().get(2);
 	}
@@ -621,7 +625,7 @@ public class MinioclcsPackageImpl extends EPackageImpl implements MinioclcsPacka
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EAttribute getMultiplicityCS_UpperInt()
+  public EAttribute getMultiplicityCS_LowerInt()
   {
 		return (EAttribute)multiplicityCSEClass.getEStructuralFeatures().get(3);
 	}
@@ -631,9 +635,19 @@ public class MinioclcsPackageImpl extends EPackageImpl implements MinioclcsPacka
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EAttribute getMultiplicityCS_UpperMult()
+  public EAttribute getMultiplicityCS_UpperInt()
   {
 		return (EAttribute)multiplicityCSEClass.getEStructuralFeatures().get(4);
+	}
+
+  /**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  public EAttribute getMultiplicityCS_UpperMult()
+  {
+		return (EAttribute)multiplicityCSEClass.getEStructuralFeatures().get(5);
 	}
 
   /**
@@ -781,9 +795,9 @@ public class MinioclcsPackageImpl extends EPackageImpl implements MinioclcsPacka
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EClass getLogicExpCS()
+  public EClass getEqualityExpCS()
   {
-		return logicExpCSEClass;
+		return equalityExpCSEClass;
 	}
 
   /**
@@ -791,9 +805,9 @@ public class MinioclcsPackageImpl extends EPackageImpl implements MinioclcsPacka
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EReference getLogicExpCS_Left()
+  public EReference getEqualityExpCS_Left()
   {
-		return (EReference)logicExpCSEClass.getEStructuralFeatures().get(0);
+		return (EReference)equalityExpCSEClass.getEStructuralFeatures().get(0);
 	}
 
   /**
@@ -801,9 +815,9 @@ public class MinioclcsPackageImpl extends EPackageImpl implements MinioclcsPacka
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EAttribute getLogicExpCS_Op()
+  public EAttribute getEqualityExpCS_OpName()
   {
-		return (EAttribute)logicExpCSEClass.getEStructuralFeatures().get(1);
+		return (EAttribute)equalityExpCSEClass.getEStructuralFeatures().get(1);
 	}
 
   /**
@@ -811,9 +825,9 @@ public class MinioclcsPackageImpl extends EPackageImpl implements MinioclcsPacka
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EReference getLogicExpCS_Right()
+  public EReference getEqualityExpCS_Right()
   {
-		return (EReference)logicExpCSEClass.getEStructuralFeatures().get(2);
+		return (EReference)equalityExpCSEClass.getEStructuralFeatures().get(2);
 	}
 
   /**
@@ -1355,24 +1369,24 @@ public class MinioclcsPackageImpl extends EPackageImpl implements MinioclcsPacka
 
 		// Create classes and their features
 		rootCSEClass = createEClass(ROOT_CS);
+		createEReference(rootCSEClass, ROOT_CS__IMPORTS);
 		createEReference(rootCSEClass, ROOT_CS__PACKAGES);
-		createEReference(rootCSEClass, ROOT_CS__CONTRAINTS);
+		createEReference(rootCSEClass, ROOT_CS__CONSTRAINTS);
+
+		importCSEClass = createEClass(IMPORT_CS);
+		createEAttribute(importCSEClass, IMPORT_CS__ALIAS);
+		createEAttribute(importCSEClass, IMPORT_CS__URI);
 
 		packageCSEClass = createEClass(PACKAGE_CS);
 		createEAttribute(packageCSEClass, PACKAGE_CS__NAME);
 		createEReference(packageCSEClass, PACKAGE_CS__PACKAGES);
-		createEReference(packageCSEClass, PACKAGE_CS__CLASSIFIERS);
-
-		classifierCSEClass = createEClass(CLASSIFIER_CS);
-		createEAttribute(classifierCSEClass, CLASSIFIER_CS__NAME);
+		createEReference(packageCSEClass, PACKAGE_CS__CLASSES);
 
 		classCSEClass = createEClass(CLASS_CS);
+		createEAttribute(classCSEClass, CLASS_CS__NAME);
 		createEReference(classCSEClass, CLASS_CS__EXTENDS);
 		createEReference(classCSEClass, CLASS_CS__PROPERTIES);
 		createEReference(classCSEClass, CLASS_CS__OPERATIONS);
-
-		datatypeCSEClass = createEClass(DATATYPE_CS);
-		createEAttribute(datatypeCSEClass, DATATYPE_CS__TYPE_NAME);
 
 		propertyCSEClass = createEClass(PROPERTY_CS);
 		createEAttribute(propertyCSEClass, PROPERTY_CS__NAME);
@@ -1382,7 +1396,8 @@ public class MinioclcsPackageImpl extends EPackageImpl implements MinioclcsPacka
 		multiplicityCSEClass = createEClass(MULTIPLICITY_CS);
 		createEAttribute(multiplicityCSEClass, MULTIPLICITY_CS__OPT);
 		createEAttribute(multiplicityCSEClass, MULTIPLICITY_CS__MULT);
-		createEAttribute(multiplicityCSEClass, MULTIPLICITY_CS__LOWER);
+		createEAttribute(multiplicityCSEClass, MULTIPLICITY_CS__MANDATORY);
+		createEAttribute(multiplicityCSEClass, MULTIPLICITY_CS__LOWER_INT);
 		createEAttribute(multiplicityCSEClass, MULTIPLICITY_CS__UPPER_INT);
 		createEAttribute(multiplicityCSEClass, MULTIPLICITY_CS__UPPER_MULT);
 
@@ -1405,10 +1420,10 @@ public class MinioclcsPackageImpl extends EPackageImpl implements MinioclcsPacka
 
 		expCSEClass = createEClass(EXP_CS);
 
-		logicExpCSEClass = createEClass(LOGIC_EXP_CS);
-		createEReference(logicExpCSEClass, LOGIC_EXP_CS__LEFT);
-		createEAttribute(logicExpCSEClass, LOGIC_EXP_CS__OP);
-		createEReference(logicExpCSEClass, LOGIC_EXP_CS__RIGHT);
+		equalityExpCSEClass = createEClass(EQUALITY_EXP_CS);
+		createEReference(equalityExpCSEClass, EQUALITY_EXP_CS__LEFT);
+		createEAttribute(equalityExpCSEClass, EQUALITY_EXP_CS__OP_NAME);
+		createEReference(equalityExpCSEClass, EQUALITY_EXP_CS__RIGHT);
 
 		callExpCSEClass = createEClass(CALL_EXP_CS);
 		createEReference(callExpCSEClass, CALL_EXP_CS__SOURCE);
@@ -1521,10 +1536,9 @@ public class MinioclcsPackageImpl extends EPackageImpl implements MinioclcsPacka
 
 		// Add supertypes to classes
 		rootCSEClass.getESuperTypes().add(this.getCSTrace());
+		importCSEClass.getESuperTypes().add(this.getCSTrace());
 		packageCSEClass.getESuperTypes().add(this.getCSTrace());
-		classifierCSEClass.getESuperTypes().add(this.getCSTrace());
-		classCSEClass.getESuperTypes().add(this.getClassifierCS());
-		datatypeCSEClass.getESuperTypes().add(this.getClassifierCS());
+		classCSEClass.getESuperTypes().add(this.getCSTrace());
 		propertyCSEClass.getESuperTypes().add(this.getCSTrace());
 		multiplicityCSEClass.getESuperTypes().add(this.getCSTrace());
 		operationCSEClass.getESuperTypes().add(this.getCSTrace());
@@ -1532,8 +1546,8 @@ public class MinioclcsPackageImpl extends EPackageImpl implements MinioclcsPacka
 		constraintsDefCSEClass.getESuperTypes().add(this.getCSTrace());
 		invariantCSEClass.getESuperTypes().add(this.getCSTrace());
 		expCSEClass.getESuperTypes().add(this.getCSTrace());
-		logicExpCSEClass.getESuperTypes().add(this.getExpCS());
-		callExpCSEClass.getESuperTypes().add(this.getLogicExpCS());
+		equalityExpCSEClass.getESuperTypes().add(this.getExpCS());
+		callExpCSEClass.getESuperTypes().add(this.getEqualityExpCS());
 		primaryExpCSEClass.getESuperTypes().add(this.getCallExpCS());
 		selfExpCSEClass.getESuperTypes().add(this.getPrimaryExpCS());
 		navigationExpCSEClass.getESuperTypes().add(this.getCSTrace());
@@ -1559,24 +1573,24 @@ public class MinioclcsPackageImpl extends EPackageImpl implements MinioclcsPacka
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(rootCSEClass, RootCS.class, "RootCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getRootCS_Imports(), this.getImportCS(), null, "imports", null, 0, -1, RootCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRootCS_Packages(), this.getPackageCS(), null, "packages", null, 0, -1, RootCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getRootCS_Contraints(), this.getConstraintsDefCS(), null, "contraints", null, 0, -1, RootCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getRootCS_Constraints(), this.getConstraintsDefCS(), null, "constraints", null, 0, -1, RootCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(importCSEClass, ImportCS.class, "ImportCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getImportCS_Alias(), theEcorePackage.getEString(), "alias", null, 0, 1, ImportCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getImportCS_Uri(), theEcorePackage.getEString(), "uri", null, 0, 1, ImportCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(packageCSEClass, PackageCS.class, "PackageCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getPackageCS_Name(), theEcorePackage.getEString(), "name", null, 0, 1, PackageCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPackageCS_Packages(), this.getPackageCS(), null, "packages", null, 0, -1, PackageCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getPackageCS_Classifiers(), this.getClassifierCS(), null, "classifiers", null, 0, -1, PackageCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(classifierCSEClass, ClassifierCS.class, "ClassifierCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getClassifierCS_Name(), theEcorePackage.getEString(), "name", null, 0, 1, ClassifierCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPackageCS_Classes(), this.getClassCS(), null, "classes", null, 0, -1, PackageCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(classCSEClass, ClassCS.class, "ClassCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getClassCS_Name(), theEcorePackage.getEString(), "name", null, 0, 1, ClassCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getClassCS_Extends(), this.getPathNameCS(), null, "extends", null, 0, 1, ClassCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getClassCS_Properties(), this.getPropertyCS(), null, "properties", null, 0, -1, ClassCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getClassCS_Operations(), this.getOperationCS(), null, "operations", null, 0, -1, ClassCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(datatypeCSEClass, DatatypeCS.class, "DatatypeCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getDatatypeCS_TypeName(), theEcorePackage.getEString(), "typeName", null, 0, 1, DatatypeCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(propertyCSEClass, PropertyCS.class, "PropertyCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getPropertyCS_Name(), theEcorePackage.getEString(), "name", null, 0, 1, PropertyCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1586,7 +1600,8 @@ public class MinioclcsPackageImpl extends EPackageImpl implements MinioclcsPacka
 		initEClass(multiplicityCSEClass, MultiplicityCS.class, "MultiplicityCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getMultiplicityCS_Opt(), theEcorePackage.getEBoolean(), "opt", null, 0, 1, MultiplicityCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMultiplicityCS_Mult(), theEcorePackage.getEBoolean(), "mult", null, 0, 1, MultiplicityCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getMultiplicityCS_Lower(), theEcorePackage.getEInt(), "lower", null, 0, 1, MultiplicityCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMultiplicityCS_Mandatory(), theEcorePackage.getEInt(), "mandatory", null, 0, 1, MultiplicityCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMultiplicityCS_LowerInt(), theEcorePackage.getEInt(), "lowerInt", null, 0, 1, MultiplicityCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMultiplicityCS_UpperInt(), theEcorePackage.getEInt(), "upperInt", null, 0, 1, MultiplicityCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMultiplicityCS_UpperMult(), theEcorePackage.getEBoolean(), "upperMult", null, 0, 1, MultiplicityCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -1609,10 +1624,10 @@ public class MinioclcsPackageImpl extends EPackageImpl implements MinioclcsPacka
 
 		initEClass(expCSEClass, ExpCS.class, "ExpCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(logicExpCSEClass, LogicExpCS.class, "LogicExpCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getLogicExpCS_Left(), this.getLogicExpCS(), null, "left", null, 0, 1, LogicExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getLogicExpCS_Op(), theEcorePackage.getEString(), "op", null, 0, 1, LogicExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getLogicExpCS_Right(), this.getCallExpCS(), null, "right", null, 0, 1, LogicExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(equalityExpCSEClass, EqualityExpCS.class, "EqualityExpCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getEqualityExpCS_Left(), this.getEqualityExpCS(), null, "left", null, 0, 1, EqualityExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getEqualityExpCS_OpName(), theEcorePackage.getEString(), "opName", null, 0, 1, EqualityExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getEqualityExpCS_Right(), this.getCallExpCS(), null, "right", null, 0, 1, EqualityExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(callExpCSEClass, CallExpCS.class, "CallExpCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCallExpCS_Source(), this.getCallExpCS(), null, "source", null, 0, 1, CallExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

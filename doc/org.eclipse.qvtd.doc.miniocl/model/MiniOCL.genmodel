@@ -15,43 +15,97 @@
   <foreignModel>MiniOCL.ecore</foreignModel>
   <genPackages prefix="MiniOCL" basePackage="org.eclipse.qvtd.doc" disposableProviderFactory="true"
       ecorePackage="MiniOCL.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="MiniOCL.ecore#//CollectionKind">
+      <genEnumLiterals ecoreEnumLiteral="MiniOCL.ecore#//CollectionKind/Collection"/>
+    </genEnums>
+    <genClasses ecoreClass="MiniOCL.ecore#//BooleanLiteralExp">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MiniOCL.ecore#//BooleanLiteralExp/booleanSymbol"/>
+    </genClasses>
     <genClasses image="false" ecoreClass="MiniOCL.ecore#//CallExp">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MiniOCL.ecore#//CallExp/ownedSource"/>
     </genClasses>
     <genClasses ecoreClass="MiniOCL.ecore#//Class">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference MiniOCL.ecore#//Class/superClass"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference MiniOCL.ecore#//Class/superClasses"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MiniOCL.ecore#//Class/ownedOperations"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MiniOCL.ecore#//Class/ownedProperties"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MiniOCL.ecore#//Class/ownedInvariants"/>
+    </genClasses>
+    <genClasses ecoreClass="MiniOCL.ecore#//CollectionLiteralExp">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MiniOCL.ecore#//CollectionLiteralExp/ownedParts"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MiniOCL.ecore#//CollectionLiteralExp/kind"/>
+    </genClasses>
+    <genClasses ecoreClass="MiniOCL.ecore#//CollectionItem">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MiniOCL.ecore#//CollectionItem/ownedItem"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="MiniOCL.ecore#//CollectionLiteralPart"/>
+    <genClasses ecoreClass="MiniOCL.ecore#//CollectionRange">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MiniOCL.ecore#//CollectionRange/ownedFirst"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MiniOCL.ecore#//CollectionRange/ownedLast"/>
+    </genClasses>
+    <genClasses ecoreClass="MiniOCL.ecore#//Constraint">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference MiniOCL.ecore#//Constraint/ownedSpecification"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference MiniOCL.ecore#//Constraint/constrainedElement"/>
     </genClasses>
     <genClasses image="false" ecoreClass="MiniOCL.ecore#//Element"/>
+    <genClasses ecoreClass="MiniOCL.ecore#//ExpressionInOCL">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference MiniOCL.ecore#//ExpressionInOCL/ownedSelfVar"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MiniOCL.ecore#//ExpressionInOCL/ownedBody"/>
+    </genClasses>
     <genClasses ecoreClass="MiniOCL.ecore#//Feature"/>
+    <genClasses ecoreClass="MiniOCL.ecore#//Import">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MiniOCL.ecore#//Import/uri"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MiniOCL.ecore#//Import/alias"/>
+    </genClasses>
+    <genClasses ecoreClass="MiniOCL.ecore#//IntegerLiteralExp">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MiniOCL.ecore#//IntegerLiteralExp/integerSymbol"/>
+    </genClasses>
+    <genClasses ecoreClass="MiniOCL.ecore#//IteratorExp"/>
+    <genClasses ecoreClass="MiniOCL.ecore#//IterateExp">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MiniOCL.ecore#//IterateExp/ownedResult"/>
+    </genClasses>
+    <genClasses ecoreClass="MiniOCL.ecore#//LetExp">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MiniOCL.ecore#//LetExp/ownedIn"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MiniOCL.ecore#//LetExp/ownedVariable"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="MiniOCL.ecore#//LiteralExp"/>
+    <genClasses image="false" ecoreClass="MiniOCL.ecore#//LoopExp">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MiniOCL.ecore#//LoopExp/ownedIterator"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference MiniOCL.ecore#//LoopExp/ownedBody"/>
+    </genClasses>
     <genClasses image="false" ecoreClass="MiniOCL.ecore#//NamedElement">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MiniOCL.ecore#//NamedElement/name"/>
     </genClasses>
     <genClasses image="false" ecoreClass="MiniOCL.ecore#//Namespace"/>
+    <genClasses ecoreClass="MiniOCL.ecore#//NullLiteralExp"/>
     <genClasses ecoreClass="MiniOCL.ecore#//OCLExpression"/>
+    <genClasses ecoreClass="MiniOCL.ecore#//OpaqueExpression">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MiniOCL.ecore#//OpaqueExpression/language"/>
+    </genClasses>
     <genClasses ecoreClass="MiniOCL.ecore#//OperationCallExp">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MiniOCL.ecore#//OperationCallExp/ownedArguments"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference MiniOCL.ecore#//OperationCallExp/referredOperation"/>
     </genClasses>
     <genClasses ecoreClass="MiniOCL.ecore#//Operation">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MiniOCL.ecore#//Operation/ownedParameters"/>
-      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference MiniOCL.ecore#//Operation/owningClass"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference MiniOCL.ecore#//Operation/ownedBodyExpression"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference MiniOCL.ecore#//Operation/owningClass"/>
     </genClasses>
     <genClasses ecoreClass="MiniOCL.ecore#//Package">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MiniOCL.ecore#//Package/ownedClasses"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MiniOCL.ecore#//Package/ownedPackages"/>
     </genClasses>
     <genClasses ecoreClass="MiniOCL.ecore#//Parameter"/>
+    <genClasses image="false" ecoreClass="MiniOCL.ecore#//PrimitiveLiteralExp"/>
     <genClasses ecoreClass="MiniOCL.ecore#//Property">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference MiniOCL.ecore#//Property/owningClass"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MiniOCL.ecore#//Property/lowerBound"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MiniOCL.ecore#//Property/upperBound"/>
     </genClasses>
     <genClasses ecoreClass="MiniOCL.ecore#//PropertyCallExp">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference MiniOCL.ecore#//PropertyCallExp/referredProperty"/>
     </genClasses>
     <genClasses ecoreClass="MiniOCL.ecore#//Root">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MiniOCL.ecore#//Root/ownedConstraints"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MiniOCL.ecore#//Root/ownedImports"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MiniOCL.ecore#//Root/ownedPackages"/>
     </genClasses>
     <genClasses ecoreClass="MiniOCL.ecore#//Variable"/>
@@ -61,13 +115,6 @@
     <genClasses image="false" ecoreClass="MiniOCL.ecore#//Visitable"/>
     <genClasses image="false" ecoreClass="MiniOCL.ecore#//TypedElement">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference MiniOCL.ecore#//TypedElement/type"/>
-    </genClasses>
-    <genClasses ecoreClass="MiniOCL.ecore#//ExpressionInOCL">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference MiniOCL.ecore#//ExpressionInOCL/ownedSelfVar"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MiniOCL.ecore#//ExpressionInOCL/ownedBody"/>
-    </genClasses>
-    <genClasses ecoreClass="MiniOCL.ecore#//Constraint">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference MiniOCL.ecore#//Constraint/ownedSpecification"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

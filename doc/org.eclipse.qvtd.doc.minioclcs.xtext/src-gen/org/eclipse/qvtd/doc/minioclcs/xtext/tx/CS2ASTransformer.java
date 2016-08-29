@@ -20,6 +20,8 @@ package org.eclipse.qvtd.doc.minioclcs.xtext.tx;
 
 import java.util.List;
 
+import org.eclipse.qvtd.doc.minioclcs.xtext.tx.Transformer;
+
 public interface CS2ASTransformer extends Transformer {
 
 	public List<CS2ASDiagnostic> getErrors();

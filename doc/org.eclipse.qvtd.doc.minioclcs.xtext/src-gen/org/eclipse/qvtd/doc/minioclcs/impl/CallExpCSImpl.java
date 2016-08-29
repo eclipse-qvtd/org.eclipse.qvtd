@@ -5,9 +5,12 @@ package org.eclipse.qvtd.doc.minioclcs.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
 import org.eclipse.qvtd.doc.minioclcs.CallExpCS;
 import org.eclipse.qvtd.doc.minioclcs.MinioclcsPackage;
 import org.eclipse.qvtd.doc.minioclcs.NavigationExpCS;
@@ -26,7 +29,7 @@ import org.eclipse.qvtd.doc.minioclcs.NavigationExpCS;
  *
  * @generated
  */
-public class CallExpCSImpl extends LogicExpCSImpl implements CallExpCS
+public class CallExpCSImpl extends EqualityExpCSImpl implements CallExpCS
 {
   /**
 	 * The cached value of the '{@link #getSource() <em>Source</em>}' containment reference.

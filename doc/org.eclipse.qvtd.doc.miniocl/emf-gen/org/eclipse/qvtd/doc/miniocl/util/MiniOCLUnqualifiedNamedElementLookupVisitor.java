@@ -12,9 +12,15 @@ package org.eclipse.qvtd.doc.miniocl.util;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.evaluation.Executor;
+import org.eclipse.ocl.pivot.ids.ClassId;
 import org.eclipse.ocl.pivot.ids.IdManager;
+import org.eclipse.ocl.pivot.ids.IdResolver;
+import org.eclipse.ocl.pivot.ids.RootPackageId;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.doc.miniocl.lookup.LookupEnvironment;
+import org.eclipse.qvtd.doc.miniocl.util.AbstractMiniOCLCommonLookupVisitor;
+import org.eclipse.qvtd.doc.miniocl.util.Visitable;
 
 public class MiniOCLUnqualifiedNamedElementLookupVisitor
 	extends AbstractMiniOCLCommonLookupVisitor

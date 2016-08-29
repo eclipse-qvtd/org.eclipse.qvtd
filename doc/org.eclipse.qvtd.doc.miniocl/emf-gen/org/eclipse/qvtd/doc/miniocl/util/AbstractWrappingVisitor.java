@@ -77,6 +77,18 @@ public abstract class AbstractWrappingVisitor<R, C, @NonNull D extends Visitor<R
 	}
 
 	@Override
+	public R visitBooleanLiteralExp(org.eclipse.qvtd.doc.miniocl.@NonNull BooleanLiteralExp object) {
+		@Nullable P prologue = preVisit(object);
+		try {
+			R result = delegate.visitBooleanLiteralExp(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
+	}
+
+	@Override
 	public R visitCallExp(org.eclipse.qvtd.doc.miniocl.@NonNull CallExp object) {
 		@Nullable P prologue = preVisit(object);
 		try {
@@ -93,6 +105,54 @@ public abstract class AbstractWrappingVisitor<R, C, @NonNull D extends Visitor<R
 		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitClass(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
+	}
+
+	@Override
+	public R visitCollectionItem(org.eclipse.qvtd.doc.miniocl.@NonNull CollectionItem object) {
+		@Nullable P prologue = preVisit(object);
+		try {
+			R result = delegate.visitCollectionItem(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
+	}
+
+	@Override
+	public R visitCollectionLiteralExp(org.eclipse.qvtd.doc.miniocl.@NonNull CollectionLiteralExp object) {
+		@Nullable P prologue = preVisit(object);
+		try {
+			R result = delegate.visitCollectionLiteralExp(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
+	}
+
+	@Override
+	public R visitCollectionLiteralPart(org.eclipse.qvtd.doc.miniocl.@NonNull CollectionLiteralPart object) {
+		@Nullable P prologue = preVisit(object);
+		try {
+			R result = delegate.visitCollectionLiteralPart(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
+	}
+
+	@Override
+	public R visitCollectionRange(org.eclipse.qvtd.doc.miniocl.@NonNull CollectionRange object) {
+		@Nullable P prologue = preVisit(object);
+		try {
+			R result = delegate.visitCollectionRange(object);
 			return postVisit(object, prologue, result);
 		}
 		catch (Throwable e) {
@@ -149,6 +209,90 @@ public abstract class AbstractWrappingVisitor<R, C, @NonNull D extends Visitor<R
 	}
 
 	@Override
+	public R visitImport(org.eclipse.qvtd.doc.miniocl.@NonNull Import object) {
+		@Nullable P prologue = preVisit(object);
+		try {
+			R result = delegate.visitImport(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
+	}
+
+	@Override
+	public R visitIntegerLiteralExp(org.eclipse.qvtd.doc.miniocl.@NonNull IntegerLiteralExp object) {
+		@Nullable P prologue = preVisit(object);
+		try {
+			R result = delegate.visitIntegerLiteralExp(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
+	}
+
+	@Override
+	public R visitIterateExp(org.eclipse.qvtd.doc.miniocl.@NonNull IterateExp object) {
+		@Nullable P prologue = preVisit(object);
+		try {
+			R result = delegate.visitIterateExp(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
+	}
+
+	@Override
+	public R visitIteratorExp(org.eclipse.qvtd.doc.miniocl.@NonNull IteratorExp object) {
+		@Nullable P prologue = preVisit(object);
+		try {
+			R result = delegate.visitIteratorExp(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
+	}
+
+	@Override
+	public R visitLetExp(org.eclipse.qvtd.doc.miniocl.@NonNull LetExp object) {
+		@Nullable P prologue = preVisit(object);
+		try {
+			R result = delegate.visitLetExp(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
+	}
+
+	@Override
+	public R visitLiteralExp(org.eclipse.qvtd.doc.miniocl.@NonNull LiteralExp object) {
+		@Nullable P prologue = preVisit(object);
+		try {
+			R result = delegate.visitLiteralExp(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
+	}
+
+	@Override
+	public R visitLoopExp(org.eclipse.qvtd.doc.miniocl.@NonNull LoopExp object) {
+		@Nullable P prologue = preVisit(object);
+		try {
+			R result = delegate.visitLoopExp(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
+	}
+
+	@Override
 	public R visitNamedElement(org.eclipse.qvtd.doc.miniocl.@NonNull NamedElement object) {
 		@Nullable P prologue = preVisit(object);
 		try {
@@ -173,10 +317,34 @@ public abstract class AbstractWrappingVisitor<R, C, @NonNull D extends Visitor<R
 	}
 
 	@Override
+	public R visitNullLiteralExp(org.eclipse.qvtd.doc.miniocl.@NonNull NullLiteralExp object) {
+		@Nullable P prologue = preVisit(object);
+		try {
+			R result = delegate.visitNullLiteralExp(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
+	}
+
+	@Override
 	public R visitOCLExpression(org.eclipse.qvtd.doc.miniocl.@NonNull OCLExpression object) {
 		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitOCLExpression(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
+	}
+
+	@Override
+	public R visitOpaqueExpression(org.eclipse.qvtd.doc.miniocl.@NonNull OpaqueExpression object) {
+		@Nullable P prologue = preVisit(object);
+		try {
+			R result = delegate.visitOpaqueExpression(object);
 			return postVisit(object, prologue, result);
 		}
 		catch (Throwable e) {
@@ -225,6 +393,18 @@ public abstract class AbstractWrappingVisitor<R, C, @NonNull D extends Visitor<R
 		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitParameter(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
+	}
+
+	@Override
+	public R visitPrimitiveLiteralExp(org.eclipse.qvtd.doc.miniocl.@NonNull PrimitiveLiteralExp object) {
+		@Nullable P prologue = preVisit(object);
+		try {
+			R result = delegate.visitPrimitiveLiteralExp(object);
 			return postVisit(object, prologue, result);
 		}
 		catch (Throwable e) {
