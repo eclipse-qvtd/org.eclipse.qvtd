@@ -80,7 +80,7 @@ PredicateCS: ownedCondition=ExpCS ';';
 //Assignement ::= [�default�] SlotOwnerOCLExpr�.�PropertyName �:=� ValueOCLExpr
 PredicateOrAssignmentCS: isDefault?='default'? ownedTarget=ExpCS (':=' ownedInitExpression=ExpCS)? ';';
 		
-QueryCS: 'query' ownedPathName=ScopeNameCS name=UnrestrictedName
+QueryCS: isTransient?='transient'? 'query' ownedPathName=ScopeNameCS name=UnrestrictedName
 		'(' (ownedParameters+=ParamDeclarationCS (',' ownedParameters+=ParamDeclarationCS)*)? ')'
 		':' ownedType=TypeExpCS (';' | '{' ownedExpression=ExpCS '}');
 //<query> ::= 'query' <PathNameCS> 

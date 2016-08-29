@@ -78,7 +78,7 @@ PropertyTemplateCS: (propertyId=[pivot::Property|UnrestrictedName]
 	| ('opposite' '(' ownedOppositePropertyId=PathNameCS ')'))
 	'=' ownedExpression=ExpCSOrTemplateCS;
 		
-QueryCS: 'query' name=UnrestrictedName 
+QueryCS: isTransient?='transient'? 'query' name=UnrestrictedName 
             '(' (ownedParameters+=ParamDeclarationCS (',' ownedParameters+=ParamDeclarationCS)*)? ')'
       	  ':' ownedType=TypedRefCS
             (';' | '{' ownedExpression=ExpCS '}');
