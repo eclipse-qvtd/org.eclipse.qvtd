@@ -25,6 +25,7 @@ import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.QueryCS#getOwnedParameters <em>Owned Parameters</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.QueryCS#getOwnedExpression <em>Owned Expression</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.QueryCS#isIsTransient <em>Is Transient</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getQueryCS()
@@ -73,5 +74,32 @@ public interface QueryCS extends TypedElementCS {
 	 * @generated
 	 */
 	void setOwnedExpression(ExpCS value);
+
+	/**
+	 * Returns the value of the '<em><b>Is Transient</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Is Transient</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Is Transient</em>' attribute.
+	 * @see #setIsTransient(boolean)
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getQueryCS_IsTransient()
+	 * @model default="false"
+	 * @generated
+	 */
+	boolean isIsTransient();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.QueryCS#isIsTransient <em>Is Transient</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Is Transient</em>' attribute.
+	 * @see #isIsTransient()
+	 * @generated
+	 */
+	void setIsTransient(boolean value);
 
 } // QueryCS

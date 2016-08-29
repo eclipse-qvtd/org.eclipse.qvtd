@@ -195,7 +195,7 @@ public class QVTcoreBaseCSPackageImpl extends EPackageImpl implements QVTcoreBas
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link QVTcoreBaseCSPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -228,7 +228,7 @@ public class QVTcoreBaseCSPackageImpl extends EPackageImpl implements QVTcoreBas
 		// Mark meta-data to indicate it can't be changed
 		theQVTcoreBaseCSPackage.freeze();
 
-  
+
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(QVTcoreBaseCSPackage.eNS_URI, theQVTcoreBaseCSPackage);
 		return theQVTcoreBaseCSPackage;
@@ -650,6 +650,16 @@ public class QVTcoreBaseCSPackageImpl extends EPackageImpl implements QVTcoreBas
 	 * @generated
 	 */
 	@Override
+	public EAttribute getQueryCS_IsTransient() {
+		return (EAttribute)queryCSEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getRealizeableVariableCS() {
 		return realizeableVariableCSEClass;
 	}
@@ -796,6 +806,7 @@ public class QVTcoreBaseCSPackageImpl extends EPackageImpl implements QVTcoreBas
 		createEReference(queryCSEClass, QUERY_CS__TRANSFORMATION);
 		createEReference(queryCSEClass, QUERY_CS__OWNED_PARAMETERS);
 		createEReference(queryCSEClass, QUERY_CS__OWNED_EXPRESSION);
+		createEAttribute(queryCSEClass, QUERY_CS__IS_TRANSIENT);
 
 		realizeableVariableCSEClass = createEClass(REALIZEABLE_VARIABLE_CS);
 
@@ -917,6 +928,7 @@ public class QVTcoreBaseCSPackageImpl extends EPackageImpl implements QVTcoreBas
 		initEReference(getQueryCS_Transformation(), theQVTbasePackage.getTransformation(), null, "transformation", null, 0, 1, QueryCS.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getQueryCS_OwnedParameters(), this.getParamDeclarationCS(), null, "ownedParameters", null, 0, -1, QueryCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getQueryCS_OwnedExpression(), theEssentialOCLCSPackage.getExpCS(), null, "ownedExpression", null, 0, 1, QueryCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getQueryCS_IsTransient(), ecorePackage.getEBoolean(), "isTransient", "false", 0, 1, QueryCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(realizeableVariableCSEClass, RealizeableVariableCS.class, "RealizeableVariableCS", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -944,16 +956,16 @@ public class QVTcoreBaseCSPackageImpl extends EPackageImpl implements QVTcoreBas
 	 * @generated
 	 */
 	protected void createImportAnnotations() {
-		String source = "http://www.eclipse.org/OCL/Import";	
+		String source = "http://www.eclipse.org/OCL/Import";
 		addAnnotation
-		  (this, 
-		   source, 
-		   new String[] {
-			 "basecs", "../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#/",
-			 "essentialoclcs", "../../org.eclipse.ocl.xtext.essentialocl/model/EssentialOCLCS.ecore#/",
-			 "qvtb", "../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#/",
-			 "qvtcb", "../../org.eclipse.qvtd.pivot.qvtcorebase/model/QVTcoreBase.ecore#/"
-		   });
+		(this,
+			source,
+			new String[] {
+				"basecs", "../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#/",
+				"essentialoclcs", "../../org.eclipse.ocl.xtext.essentialocl/model/EssentialOCLCS.ecore#/",
+				"qvtb", "../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#/",
+				"qvtcb", "../../org.eclipse.qvtd.pivot.qvtcorebase/model/QVTcoreBase.ecore#/"
+		});
 	}
 
 } //QVTcoreBaseCSTPackageImpl

@@ -1431,13 +1431,22 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 	int QUERY_CS__OWNED_EXPRESSION = BaseCSPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 3;
 
 	/**
+	 * The feature id for the '<em><b>Is Transient</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int QUERY_CS__IS_TRANSIENT = BaseCSPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 4;
+
+	/**
 	 * The number of structural features of the '<em>Query CS</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int QUERY_CS_FEATURE_COUNT = BaseCSPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 4;
+	int QUERY_CS_FEATURE_COUNT = BaseCSPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.impl.RealizeableVariableCSImpl <em>Realizeable Variable CS</em>}' class.
@@ -2324,6 +2333,17 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 	EReference getQueryCS_OwnedExpression();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.QueryCS#isIsTransient <em>Is Transient</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Is Transient</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.QueryCS#isIsTransient()
+	 * @see #getQueryCS()
+	 * @generated
+	 */
+	EAttribute getQueryCS_IsTransient();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.RealizeableVariableCS <em>Realizeable Variable CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2771,6 +2791,14 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 		 * @generated
 		 */
 		EReference QUERY_CS__OWNED_EXPRESSION = eINSTANCE.getQueryCS_OwnedExpression();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Transient</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute QUERY_CS__IS_TRANSIENT = eINSTANCE.getQueryCS_IsTransient();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.impl.RealizeableVariableCSImpl <em>Realizeable Variable CS</em>}' class.

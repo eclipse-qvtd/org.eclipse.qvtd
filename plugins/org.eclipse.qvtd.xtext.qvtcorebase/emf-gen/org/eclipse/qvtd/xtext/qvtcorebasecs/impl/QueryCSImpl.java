@@ -43,6 +43,7 @@ import org.eclipse.qvtd.xtext.qvtcorebasecs.util.QVTcoreBaseCSVisitor;
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.impl.QueryCSImpl#getTransformation <em>Transformation</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.impl.QueryCSImpl#getOwnedParameters <em>Owned Parameters</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.impl.QueryCSImpl#getOwnedExpression <em>Owned Expression</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.impl.QueryCSImpl#isIsTransient <em>Is Transient</em>}</li>
  * </ul>
  *
  * @generated
@@ -77,6 +78,26 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 	 * @ordered
 	 */
 	protected ExpCS ownedExpression;
+
+	/**
+	 * The default value of the '{@link #isIsTransient() <em>Is Transient</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsTransient()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean IS_TRANSIENT_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isIsTransient() <em>Is Transient</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsTransient()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean isTransient = IS_TRANSIENT_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -176,6 +197,8 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 				return getOwnedParameters();
 			case QVTcoreBaseCSPackage.QUERY_CS__OWNED_EXPRESSION:
 				return getOwnedExpression();
+			case QVTcoreBaseCSPackage.QUERY_CS__IS_TRANSIENT:
+				return isIsTransient();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -199,6 +222,9 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 			case QVTcoreBaseCSPackage.QUERY_CS__OWNED_EXPRESSION:
 				setOwnedExpression((ExpCS)newValue);
 				return;
+			case QVTcoreBaseCSPackage.QUERY_CS__IS_TRANSIENT:
+				setIsTransient((Boolean)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -220,6 +246,9 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 			case QVTcoreBaseCSPackage.QUERY_CS__OWNED_EXPRESSION:
 				setOwnedExpression((ExpCS)null);
 				return;
+			case QVTcoreBaseCSPackage.QUERY_CS__IS_TRANSIENT:
+				setIsTransient(IS_TRANSIENT_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -240,6 +269,8 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 				return ownedParameters != null && !ownedParameters.isEmpty();
 			case QVTcoreBaseCSPackage.QUERY_CS__OWNED_EXPRESSION:
 				return ownedExpression != null;
+			case QVTcoreBaseCSPackage.QUERY_CS__IS_TRANSIENT:
+				return isTransient != IS_TRANSIENT_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -324,5 +355,38 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 		}
 		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, QVTcoreBaseCSPackage.QUERY_CS__OWNED_EXPRESSION, newOwnedExpression, newOwnedExpression));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean isIsTransient() {
+		return isTransient;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setIsTransient(boolean newIsTransient) {
+		boolean oldIsTransient = isTransient;
+		isTransient = newIsTransient;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTcoreBaseCSPackage.QUERY_CS__IS_TRANSIENT, oldIsTransient, isTransient));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		return super.toString();
 	}
 } //QueryCSImpl

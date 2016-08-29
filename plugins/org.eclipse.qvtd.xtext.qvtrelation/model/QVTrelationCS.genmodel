@@ -69,6 +69,7 @@
     <genClasses ecoreClass="QVTrelationCS.ecore#//QueryCS">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTrelationCS.ecore#//QueryCS/ownedParameters"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTrelationCS.ecore#//QueryCS/ownedExpression"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTrelationCS.ecore#//QueryCS/isTransient"/>
     </genClasses>
     <genClasses ecoreClass="QVTrelationCS.ecore#//RelationCS">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTrelationCS.ecore#//RelationCS/isDefault"/>

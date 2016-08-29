@@ -29,6 +29,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.QueryCS#getTransformation <em>Transformation</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.QueryCS#getOwnedParameters <em>Owned Parameters</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.QueryCS#getOwnedExpression <em>Owned Expression</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.QueryCS#isIsTransient <em>Is Transient</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage#getQueryCS()
@@ -118,5 +119,32 @@ public interface QueryCS extends TypedElementCS {
 	 * @generated
 	 */
 	void setOwnedExpression(ExpCS value);
+
+	/**
+	 * Returns the value of the '<em><b>Is Transient</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Is Transient</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Is Transient</em>' attribute.
+	 * @see #setIsTransient(boolean)
+	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage#getQueryCS_IsTransient()
+	 * @model default="false"
+	 * @generated
+	 */
+	boolean isIsTransient();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.QueryCS#isIsTransient <em>Is Transient</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Is Transient</em>' attribute.
+	 * @see #isIsTransient()
+	 * @generated
+	 */
+	void setIsTransient(boolean value);
 
 } // QueryCS

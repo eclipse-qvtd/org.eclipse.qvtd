@@ -1811,13 +1811,22 @@ public interface QVTrelationCSPackage extends EPackage {
 	int QUERY_CS__OWNED_EXPRESSION = BaseCSPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Is Transient</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int QUERY_CS__IS_TRANSIENT = BaseCSPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Query CS</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int QUERY_CS_FEATURE_COUNT = BaseCSPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 2;
+	int QUERY_CS_FEATURE_COUNT = BaseCSPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.RelationCSImpl <em>Relation CS</em>}' class.
@@ -2832,6 +2841,17 @@ public interface QVTrelationCSPackage extends EPackage {
 	EReference getQueryCS_OwnedExpression();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.xtext.qvtrelationcs.QueryCS#isIsTransient <em>Is Transient</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Is Transient</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QueryCS#isIsTransient()
+	 * @see #getQueryCS()
+	 * @generated
+	 */
+	EAttribute getQueryCS_IsTransient();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS <em>Relation CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3494,6 +3514,14 @@ public interface QVTrelationCSPackage extends EPackage {
 		 * @generated
 		 */
 		EReference QUERY_CS__OWNED_EXPRESSION = eINSTANCE.getQueryCS_OwnedExpression();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Transient</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute QUERY_CS__IS_TRANSIENT = eINSTANCE.getQueryCS_IsTransient();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.RelationCSImpl <em>Relation CS</em>}' class.

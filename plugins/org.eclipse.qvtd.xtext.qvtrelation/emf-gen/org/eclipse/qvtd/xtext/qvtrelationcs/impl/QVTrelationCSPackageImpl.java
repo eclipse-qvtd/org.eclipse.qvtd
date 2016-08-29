@@ -235,7 +235,7 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link QVTrelationCSPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -268,7 +268,7 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 		// Mark meta-data to indicate it can't be changed
 		theQVTrelationCSPackage.freeze();
 
-  
+
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(QVTrelationCSPackage.eNS_URI, theQVTrelationCSPackage);
 		return theQVTrelationCSPackage;
@@ -710,6 +710,16 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 	 * @generated
 	 */
 	@Override
+	public EAttribute getQueryCS_IsTransient() {
+		return (EAttribute)queryCSEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getRelationCS() {
 		return relationCSEClass;
 	}
@@ -1040,6 +1050,7 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 		queryCSEClass = createEClass(QUERY_CS);
 		createEReference(queryCSEClass, QUERY_CS__OWNED_PARAMETERS);
 		createEReference(queryCSEClass, QUERY_CS__OWNED_EXPRESSION);
+		createEAttribute(queryCSEClass, QUERY_CS__IS_TRANSIENT);
 
 		relationCSEClass = createEClass(RELATION_CS);
 		createEAttribute(relationCSEClass, RELATION_CS__IS_DEFAULT);
@@ -1194,6 +1205,7 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 		initEClass(queryCSEClass, QueryCS.class, "QueryCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getQueryCS_OwnedParameters(), this.getParamDeclarationCS(), null, "ownedParameters", null, 0, -1, QueryCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getQueryCS_OwnedExpression(), theEssentialOCLCSPackage.getExpCS(), null, "ownedExpression", null, 0, 1, QueryCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getQueryCS_IsTransient(), ecorePackage.getEBoolean(), "isTransient", "false", 0, 1, QueryCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(relationCSEClass, RelationCS.class, "RelationCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getRelationCS_IsDefault(), ecorePackage.getEBoolean(), "isDefault", "false", 0, 1, RelationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
