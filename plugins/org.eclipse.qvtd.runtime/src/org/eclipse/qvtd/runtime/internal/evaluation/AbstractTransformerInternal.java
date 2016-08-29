@@ -401,6 +401,8 @@ public abstract class AbstractTransformerInternal extends AbstractModelManager i
 	protected final IdResolver.@NonNull IdResolverExtension idResolver;
 	protected final @NonNull Model @NonNull [] models;
 	protected final @NonNull Map<@NonNull String, @NonNull Integer> modelIndexes = new HashMap<>();
+	protected final boolean debugExceptions = AbstractTransformer.EXCEPTIONS.isActive();
+	protected final boolean debugInvocations = AbstractTransformer.INVOCATIONS.isActive();
 
 	/**
 	 * Unchanging configured list PropertyId for which unnavigable opposite navigation may occur indexed by the PropertyIndex for that PropertyId.
@@ -656,24 +658,34 @@ public abstract class AbstractTransformerInternal extends AbstractModelManager i
 			throw (InvocationFailedException)e;
 		}
 		else if (e instanceof AssertionError) {				// Debug case - assertion errors are diagnostic not catastrophic
-			AbstractTransformer.EXCEPTIONS.println("Execution failure in '" + mappingName + "' : " + e);
-			if (!AbstractTransformer.EXCEPTIONS.isActive()) {
+			if (debugExceptions) {
+				AbstractTransformer.EXCEPTIONS.println("Execution failure in '" + mappingName + "' : " + e);
+			}
+			else {
 				throw (AssertionError)e;					// But if the user isn't watching them they are fatal
 			}
 		}
 		else if (e instanceof Error) {						// Real errors are fatal
-			AbstractTransformer.EXCEPTIONS.println("Execution failure in '" + mappingName + "' : " + e);
+			if (debugExceptions) {
+				AbstractTransformer.EXCEPTIONS.println("Execution failure in '" + mappingName + "' : " + e);
+			}
 			throw (Error)e;
 		}
 		else { 												// Other failures are just mappings whose predicates were not satisfied.
 			if (e instanceof InvalidValueException) {		// Multiway branch to facilitate debugger breakpoints.
-				AbstractTransformer.EXCEPTIONS.println("Execution failure in '" + mappingName + "' : " + e);
+				if (debugExceptions) {
+					AbstractTransformer.EXCEPTIONS.println("Execution failure in '" + mappingName + "' : " + e);
+				}
 			}
 			else if (e instanceof NullPointerException) {
-				AbstractTransformer.EXCEPTIONS.println("Execution failure in '" + mappingName + "' : " + e);
+				if (debugExceptions) {
+					AbstractTransformer.EXCEPTIONS.println("Execution failure in '" + mappingName + "' : " + e);
+				}
 			}
 			else {
-				AbstractTransformer.EXCEPTIONS.println("Execution failure in '" + mappingName + "' : " + e);
+				if (debugExceptions) {
+					AbstractTransformer.EXCEPTIONS.println("Execution failure in '" + mappingName + "' : " + e);
+				}
 			}
 		}
 		return false;
@@ -685,7 +697,9 @@ public abstract class AbstractTransformerInternal extends AbstractModelManager i
 	 */
 	public <@Nullable T extends Invocation> void invoke(Invocation.@NonNull Constructor constructor, @NonNull Object @NonNull ... boundValues) {
 		@NonNull Invocation invocation = constructor.newInstance(boundValues);
-		AbstractTransformer.INVOCATIONS.println("invoke " + invocation);
+		if (debugInvocations) {
+			AbstractTransformer.INVOCATIONS.println("invoke " + invocation);
+		}
 		invocationManager.invoke(invocation, true);
 	}
 
@@ -695,7 +709,9 @@ public abstract class AbstractTransformerInternal extends AbstractModelManager i
 	public void invokeOnce(Invocation.@NonNull Constructor constructor, @NonNull Object @NonNull ... boundValues) {
 		@Nullable Invocation invocation = constructor.getFirstInvocation(boundValues);
 		if (invocation != null) {
-			AbstractTransformer.INVOCATIONS.println("invokeOnce " + invocation);
+			if (debugInvocations) {
+				AbstractTransformer.INVOCATIONS.println("invokeOnce " + invocation);
+			}
 			invocationManager.invoke(invocation, true);
 		}
 	}

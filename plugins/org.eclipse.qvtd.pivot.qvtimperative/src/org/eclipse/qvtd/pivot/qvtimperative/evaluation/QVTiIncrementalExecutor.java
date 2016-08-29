@@ -59,7 +59,7 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 {
 	/**
 	 * The run-time API version.
-	 * 
+	 *
 	 * @noreference this is solely for development usage.
 	 */
 	public static int RUN_TIME_EVALUATOR_API_VERSION = Transformer.RUN_TIME_EVALUATOR_API_VERSION_1_1_0_2;
@@ -69,7 +69,7 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 		INCREMENTAL,				// EvaluationStatus is created for all mapping elements
 		REPAIR						// EvaluationStatus is updated for all mapping elements
 	};
-	
+
 	protected final @NonNull Mode mode;
 	protected final @NonNull QVTiTransformationAnalysis transformationAnalysis;
 	protected final @NonNull InvocationManager invocationManager;
@@ -77,7 +77,7 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 	private Invocation.@Nullable Incremental currentInvocation = null;
 	private @Nullable Map<@NonNull Mapping, Invocation.@NonNull Constructor> mapping2invocationConstructor = null;
 	private @Nullable Map<@NonNull Operation, Computation.@NonNull Constructor> operation2computationConstructor = null;
-	
+
 	public QVTiIncrementalExecutor(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull Transformation transformation, @NonNull Mode mode) {
 		super(environmentFactory, transformation);
 		this.mode = mode;
@@ -117,7 +117,7 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 						public @Nullable Object getResult() {
 							return result;
 						}
-						
+
 						@Override
 						public boolean isEqual(@NonNull IdResolver idResolver, @Nullable Object @NonNull [] thoseValues) {
 							int iMax = thoseValues.length;
@@ -143,7 +143,7 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 			operation2computationConstructor2.put(asFunction, computationConstructor);
 		}
 		Computation computation = computationConstructor.getUniqueComputation(boxedSourceAndArgumentValues);
-		return computation.getResult();		
+		return computation.getResult();
 	}
 
 	@Override
@@ -179,7 +179,7 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 								currentInvocation = null;
 							}
 						}
-						
+
 						@Override
 						public boolean isEqual(@NonNull IdResolver idResolver, @NonNull Object @NonNull [] thoseValues) {
 							int iMax = thoseValues.length;
@@ -206,10 +206,12 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 		}
 		Invocation invocation = invocationConstructor.getFirstInvocation(boundValues);
 		if (invocation != null) {
-			AbstractTransformer.INVOCATIONS.println("invoke " + invocation);
+			if (debugInvocations) {
+				AbstractTransformer.INVOCATIONS.println("invoke " + invocation);
+			}
 			invocationManager.invoke(invocation, true);
 		}
-		return null;		
+		return null;
 	}
 
 	@Override
@@ -232,7 +234,7 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 		Mapping asMapping = QVTimperativeUtil.getContainingMapping(navigationCallExp);
 		Object ecoreValue;
 		if ((asMapping != null) && transformationAnalysis.isHazardousRead(asMapping, navigationCallExp)) {		// null within queries
-//			assert sourceValue != null;
+			//			assert sourceValue != null;
 			if (sourceValue == null) {
 				throw new InvalidValueException("Null source for '" + referredProperty + "'", sourceValue, navigationCallExp);
 			}
@@ -245,7 +247,9 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 			}
 			objectManager.getting(sourceValue, eFeature, isOpposite);
 			ecoreValue = super.internalExecuteNavigationCallExp(navigationCallExp, referredProperty, sourceValue);
-			AbstractTransformer.INVOCATIONS.println("got " + eFeature.getEContainingClass().getName() + "::" + eFeature.getName() + " for " + sourceValue + " = " + ecoreValue);
+			if (debugInvocations) {
+				AbstractTransformer.INVOCATIONS.println("got " + eFeature.getEContainingClass().getName() + "::" + eFeature.getName() + " for " + sourceValue + " = " + ecoreValue);
+			}
 		}
 		else {
 			ecoreValue = super.internalExecuteNavigationCallExp(navigationCallExp, referredProperty, sourceValue);
@@ -284,7 +288,7 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 			objectManager.assigned(currentInvocation2, sourceObject, eFeature, ecoreValue, childKey);
 		}
 	}
-	
+
 	@Override
 	public @Nullable Object internalExecuteRealizedVariable(@NonNull RealizedVariable realizedVariable, @NonNull EvaluationVisitor undecoratedVisitor) {
 		Object element = super.internalExecuteRealizedVariable(realizedVariable, undecoratedVisitor);
@@ -292,7 +296,7 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 			Invocation.Incremental currentInvocation2 = currentInvocation;
 			assert currentInvocation2 != null;
 			objectManager.created(currentInvocation2, element);
-/*			DomainUsage domainUsage = getEvaluationEnvironment().getUsageFor(realizedVariable);
+			/*			DomainUsage domainUsage = getEvaluationEnvironment().getUsageFor(realizedVariable);
 			ClassStatus classStatus = statusManager.getClassStatus(domainUsage, realizedVariable.getType(), (EObject)element);
 			MappingStatus mappingStatus = findMappingStatus();
 			assert mappingStatus != null;

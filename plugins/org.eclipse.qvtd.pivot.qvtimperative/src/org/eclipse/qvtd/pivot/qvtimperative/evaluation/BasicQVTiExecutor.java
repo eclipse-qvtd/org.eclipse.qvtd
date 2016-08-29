@@ -78,6 +78,8 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 	protected final @NonNull Transformation transformation;
 	private @Nullable QVTiTransformationAnalysis transformationAnalysis = null;
 	private @Nullable QVTiModelManager modelManager = null;
+	protected final boolean debugExceptions = AbstractTransformer.EXCEPTIONS.isActive();
+	protected final boolean debugInvocations = AbstractTransformer.INVOCATIONS.isActive();
 
 	public BasicQVTiExecutor(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull Transformation transformation) {
 		super(environmentFactory);
@@ -433,7 +435,9 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 		}
 		catch (Throwable e) {
 			// Mapping failure are just mappings that never happened.
-			AbstractTransformer.EXCEPTIONS.println("Execution failure in " + mapping.getName() + " : " + e);
+			if (debugExceptions) {
+				AbstractTransformer.EXCEPTIONS.println("Execution failure in " + mapping.getName() + " : " + e);
+			}
 			return false;
 		}
 		//
