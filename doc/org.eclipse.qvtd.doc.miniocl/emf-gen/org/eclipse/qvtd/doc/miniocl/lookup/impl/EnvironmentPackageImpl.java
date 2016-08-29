@@ -152,7 +152,7 @@ public class EnvironmentPackageImpl extends EPackageImpl implements EnvironmentP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EOperation getLookupEnvironment__AddElement__NamedElement() {
+	public EOperation getLookupEnvironment__AddElements__NamedElement() {
 		return lookupEnvironmentEClass.getEOperations().get(1);
 	}
 
@@ -224,7 +224,7 @@ public class EnvironmentPackageImpl extends EPackageImpl implements EnvironmentP
 		createEReference(lookupEnvironmentEClass, LOOKUP_ENVIRONMENT__NAMED_ELEMENTS);
 		createEReference(lookupEnvironmentEClass, LOOKUP_ENVIRONMENT__PARENT_ENV);
 		createEOperation(lookupEnvironmentEClass, LOOKUP_ENVIRONMENT___ADD_ELEMENTS__COLLECTION);
-		createEOperation(lookupEnvironmentEClass, LOOKUP_ENVIRONMENT___ADD_ELEMENT__NAMEDELEMENT);
+		createEOperation(lookupEnvironmentEClass, LOOKUP_ENVIRONMENT___ADD_ELEMENTS__NAMEDELEMENT);
 
 		env4CGEClass = createEClass(ENV4_CG);
 		createEOperation(env4CGEClass, ENV4_CG___HAS_FINAL_RESULT);
@@ -281,8 +281,8 @@ public class EnvironmentPackageImpl extends EPackageImpl implements EnvironmentP
 		g1.getETypeArguments().add(g2);
 		addEParameter(op, g1, "elements", 1, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = initEOperation(getLookupEnvironment__AddElement__NamedElement(), this.getLookupEnvironment(), "addElement", 1, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theMiniOCLPackage.getNamedElement(), "element", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = initEOperation(getLookupEnvironment__AddElements__NamedElement(), this.getLookupEnvironment(), "addElements", 1, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theMiniOCLPackage.getNamedElement(), "elements", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(env4CGEClass, Env4CG.class, "Env4CG", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

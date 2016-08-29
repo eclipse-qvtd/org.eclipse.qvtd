@@ -69,7 +69,6 @@ disambiguation {
     multipleVarDecls := letVars->size() > 1;
   }
 }
-
 mappings {
   create Root from RootCS {
      ownedImports := imports.trace;
@@ -106,7 +105,7 @@ mappings {
   create Operation from OperationCS {
     name := name;
     type := lookup(Class, resultRef);
-    ownedParameters := parameters.trace;    
+    ownedParameters := params.trace;    
     ownedBodyExpression := as::ExpressionInOCL {
           language = 'OCL',
           ownedBody = body.trace,
@@ -136,11 +135,11 @@ mappings {
                                          opName, trace.ownedArguments);
   }
 -- TODO
---  create VariableExp from NameExpCS
---  when fall_back {
---      referredVariable := null;
---      type := lookup(Class, 'OclVoid');
---  } 
+  create VariableExp from NameExpCS
+  when fall_back {
+      referredVariable := null;
+      type := lookup(Class, 'OclVoid');
+  } 
   create VariableExp from NameExpCS
   when isVariableExp {
     referredVariable := lookup(Variable, expName.pathElements->first());
@@ -215,7 +214,7 @@ mappings {
   }
   
   create IteratorExp from CollectExpCS {
-    name := 'collect';
+    iterator := 'collect';
     ownedIterator := if itVar = null
                      then as::Variable { name='self', type=lookup(Class,'OclAny') }
                      else itVar.trace

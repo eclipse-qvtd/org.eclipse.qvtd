@@ -463,6 +463,15 @@ public class MiniOCLPackageImpl extends EPackageImpl implements MiniOCLPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getIteratorExp_Iterator() {
+		return (EAttribute)iteratorExpEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getIterateExp() {
 		return iterateExpEClass;
 	}
@@ -1030,6 +1039,15 @@ public class MiniOCLPackageImpl extends EPackageImpl implements MiniOCLPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getVariable_OwnedInitExp() {
+		return (EReference)variableEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getVariableExp() {
 		return variableExpEClass;
 	}
@@ -1124,6 +1142,7 @@ public class MiniOCLPackageImpl extends EPackageImpl implements MiniOCLPackage {
 		createEAttribute(integerLiteralExpEClass, INTEGER_LITERAL_EXP__INTEGER_SYMBOL);
 
 		iteratorExpEClass = createEClass(ITERATOR_EXP);
+		createEAttribute(iteratorExpEClass, ITERATOR_EXP__ITERATOR);
 
 		iterateExpEClass = createEClass(ITERATE_EXP);
 		createEReference(iterateExpEClass, ITERATE_EXP__OWNED_RESULT);
@@ -1181,6 +1200,7 @@ public class MiniOCLPackageImpl extends EPackageImpl implements MiniOCLPackage {
 		createEReference(rootEClass, ROOT__OWNED_PACKAGES);
 
 		variableEClass = createEClass(VARIABLE);
+		createEReference(variableEClass, VARIABLE__OWNED_INIT_EXP);
 
 		variableExpEClass = createEClass(VARIABLE_EXP);
 		createEReference(variableExpEClass, VARIABLE_EXP__REFERRED_VARIABLE);
@@ -1304,6 +1324,7 @@ public class MiniOCLPackageImpl extends EPackageImpl implements MiniOCLPackage {
 		initEAttribute(getIntegerLiteralExp_IntegerSymbol(), ecorePackage.getEInt(), "integerSymbol", null, 0, 1, IntegerLiteralExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(iteratorExpEClass, IteratorExp.class, "IteratorExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getIteratorExp_Iterator(), ecorePackage.getEString(), "iterator", null, 0, 1, IteratorExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(iterateExpEClass, IterateExp.class, "IterateExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getIterateExp_OwnedResult(), this.getVariable(), null, "ownedResult", null, 1, 1, IterateExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1361,6 +1382,7 @@ public class MiniOCLPackageImpl extends EPackageImpl implements MiniOCLPackage {
 		initEReference(getRoot_OwnedPackages(), this.getPackage(), null, "ownedPackages", null, 0, -1, Root.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(variableEClass, Variable.class, "Variable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getVariable_OwnedInitExp(), this.getOCLExpression(), null, "ownedInitExp", null, 0, 1, Variable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(variableExpEClass, VariableExp.class, "VariableExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getVariableExp_ReferredVariable(), this.getVariable(), null, "referredVariable", null, 1, 1, VariableExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

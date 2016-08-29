@@ -22,19 +22,18 @@ ownedConstraints = constraints.invariants.ast()
 }
 context ImportCS
 def : ast() : as::Import =
-  as::Import {
+as::Import {
 	alias = if alias = null then null else alias endif, 
-	uri = uri
+uri = uri 
 }
-
 context InvariantCS
 def : ast() : as::Constraint =
 as::Constraint {
 	ownedSpecification = as::ExpressionInOCL {
-				language = 'OCL',
+				language = 'OCL' ,
 				ownedBody = exp.ast(),
 				ownedSelfVar = as::Variable {
-							name = ' self' ,
+							name = 'self' ,
 							type = ast().constrainedElement
 						}
 			}, 
@@ -62,13 +61,19 @@ as::Operation {
 type = ast().lookupClass(resultRef), 
 ownedParameters = params.ast(), 
 ownedBodyExpression = as::ExpressionInOCL {
-				language = 'OCL',
+				language = 'OCL' ,
 				ownedBody = _body.ast(),
 				ownedSelfVar = as::Variable {
-							name = ' self' ,
+							name = 'self' ,
 							type = ast().owningClass
 						}
 			} 
+}
+context ParameterCS
+def : ast() : as::Variable =
+as::Variable {
+	name = name, 
+type = ast().lookupClass(typeRef) 
 }
 context PropertyCS
 def : ast() : as::Property =
@@ -78,13 +83,6 @@ lowerBound = computeLowerBound(),
 upperBound = computeUpperBound(), 
 type = ast().lookupClass(typeRef) 
 }
-context ParameterCS
-def : ast() : as::Variable =
-as::Variable {
-	name = name, 
-type = ast().lookupClass(typeRef) 
-}
-
 context CallExpCS
 def : ast() : as::CallExp =
 self.navExp.ast()
@@ -143,7 +141,10 @@ else
 				type = ast().oclAsType(as::PropertyCallExp).referredProperty ?. type 
 				}
 				else
-					invalid
+					as::VariableExp {
+						referredVariable = null, 
+					type = ast().lookupClass(' OclVoid' ) 
+					}
 				endif
 			endif
 		endif
@@ -177,8 +178,8 @@ context LetVarCS
 def : ast() : as::Variable =
 as::Variable {
 	name = name, 
-    ownedInitExp = initExp.ast(), 
-   type = if typeRef <> null then ast().lookupClass(typeRef) else ast().ownedInitExp.type endif 
+ownedInitExp = initExp.ast(), 
+type = if typeRef <> null then ast().lookupClass(typeRef) else ast().ownedInitExp.type endif 
 }
 context IterateExpCS
 def : ast() : as::IterateExp =
@@ -203,7 +204,7 @@ context IteratorVarCS
 def : ast() : as::Variable =
 as::Variable {
 	name = itName, 
-	type = if itType <> null then ast().lookupClass(itType) else ast().lookupClass(' OclAny' ) endif 
+type = if itType <> null then ast().lookupClass(itType) else ast().lookupClass(' OclAny' ) endif 
 }
 context AccVarCS
 def : ast() : as::Variable =

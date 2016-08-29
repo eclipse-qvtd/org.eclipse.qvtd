@@ -383,8 +383,8 @@ def : _lookupExportedOperation(importer : ocl::OclElement, oName : String, argum
       then null
       else foundOperation->first()
       endif
-def : lookupExportedOperation(oName : String, arguments : OrderedSet(OCLExpression)) : Operation[?] =
-   _lookupExportedOperation(oName, arguments)
+def : lookupExportedOperation(importer : ocl::OclElement, oName : String, arguments : OrderedSet(OCLExpression)) : Operation[?] =
+   _lookupExportedOperation(importer, oName, arguments)
 def : lookupExportedOperation(importer : ocl::OclElement, aPathElementCS : cs::PathElementCS, arguments : OrderedSet(OCLExpression)) : Operation[?] =
    _lookupExportedOperation(importer, aPathElementCS.elementName, arguments)
 
@@ -395,17 +395,17 @@ def : _lookupExportedProperty(importer : ocl::OclElement, pName : String) : Prop
       then null
       else foundProperty->first()
       endif
-def : lookupExportedProperty(pName : String) : Property[?] =
-   _lookupExportedProperty(pName)
+def : lookupExportedProperty(importer : ocl::OclElement, pName : String) : Property[?] =
+   _lookupExportedProperty(importer, pName)
 def : lookupExportedProperty(importer : ocl::OclElement, aPathElementCS : cs::PathElementCS) : Property[?] =
    _lookupExportedProperty(importer, aPathElementCS.elementName)
 
 context Visitable
 -- Class exports Operation
-   
+def : lookupOperationFrom(exporter : Class , cName : String, arguments : OrderedSet(OCLExpression)) : Operation[?] =
+   exporter.lookupExportedOperation(self, cName, arguments)
 def : lookupOperationFrom(exporter : Class, aPathElementCS : cs::PathElementCS, arguments : OrderedSet(OCLExpression)) : Operation[?] =
    exporter.lookupExportedOperation(self, aPathElementCS, arguments)
-
 def : lookupOperationFrom(exporter : Class, aPathNameCS : cs::PathNameCS, arguments : OrderedSet(OCLExpression)) : Operation[?] =
    lookupOperationFrom(exporter, aPathNameCS.pathElements, arguments)
 
@@ -417,10 +417,10 @@ def : lookupOperationFrom(exporter : Class, segments : OrderedSet(cs::PathElemen
         in qualifier?.lookupQualifiedOperation(segments->last(), arguments)
    endif
 -- Class exports Property
-   
+def : lookupPropertyFrom(exporter : Class , cName : String) : Property[?] =
+   exporter.lookupExportedProperty(self, cName)
 def : lookupPropertyFrom(exporter : Class, aPathElementCS : cs::PathElementCS) : Property[?] =
    exporter.lookupExportedProperty(self, aPathElementCS)
-
 def : lookupPropertyFrom(exporter : Class, aPathNameCS : cs::PathNameCS) : Property[?] =
    lookupPropertyFrom(exporter, aPathNameCS.pathElements)
 
@@ -439,14 +439,14 @@ def : _unqualified_env_Variable(child : ocl::OclElement) : lookup::LookupEnviron
 context ExpressionInOCL
 def : _unqualified_env_Variable(child : ocl::OclElement) : lookup::LookupEnvironment =
    parentEnv_Variable().nestedEnv()
-      .addElement(ownedSelfVar)
+      .addElements(ownedSelfVar)
       
 context LetExp
 def : _unqualified_env_Variable(child : ocl::OclElement) : lookup::LookupEnvironment =
    if not (ownedVariable->includes(child)
       )
    then parentEnv_Variable().nestedEnv()
-      .addElement(ownedVariable)
+      .addElements(ownedVariable)
       
    else parentEnv_Variable()
    endif

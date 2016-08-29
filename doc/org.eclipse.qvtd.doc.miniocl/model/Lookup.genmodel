@@ -19,8 +19,8 @@
         <genParameters ecoreParameter="Lookup.ecore#//LookupEnvironment/addElements/elements"/>
         <genTypeParameters ecoreTypeParameter="Lookup.ecore#//LookupEnvironment/addElements/NE"/>
       </genOperations>
-      <genOperations ecoreOperation="Lookup.ecore#//LookupEnvironment/addElement">
-        <genParameters ecoreParameter="Lookup.ecore#//LookupEnvironment/addElement/element"/>
+      <genOperations ecoreOperation="Lookup.ecore#//LookupEnvironment/addElements.1">
+        <genParameters ecoreParameter="Lookup.ecore#//LookupEnvironment/addElements.1/elements"/>
       </genOperations>
     </genClasses>
     <genClasses image="false" ecoreClass="Lookup.ecore#//Env4CG">

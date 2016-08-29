@@ -58,7 +58,9 @@
     <genClasses ecoreClass="MiniOCL.ecore#//IntegerLiteralExp">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MiniOCL.ecore#//IntegerLiteralExp/integerSymbol"/>
     </genClasses>
-    <genClasses ecoreClass="MiniOCL.ecore#//IteratorExp"/>
+    <genClasses ecoreClass="MiniOCL.ecore#//IteratorExp">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MiniOCL.ecore#//IteratorExp/iterator"/>
+    </genClasses>
     <genClasses ecoreClass="MiniOCL.ecore#//IterateExp">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MiniOCL.ecore#//IterateExp/ownedResult"/>
     </genClasses>
@@ -108,7 +110,9 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MiniOCL.ecore#//Root/ownedImports"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MiniOCL.ecore#//Root/ownedPackages"/>
     </genClasses>
-    <genClasses ecoreClass="MiniOCL.ecore#//Variable"/>
+    <genClasses ecoreClass="MiniOCL.ecore#//Variable">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MiniOCL.ecore#//Variable/ownedInitExp"/>
+    </genClasses>
     <genClasses ecoreClass="MiniOCL.ecore#//VariableExp">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference MiniOCL.ecore#//VariableExp/referredVariable"/>
     </genClasses>

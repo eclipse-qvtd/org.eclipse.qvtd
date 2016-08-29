@@ -78,7 +78,7 @@ public class EnvironmentTables
 			Init.initStart();
 			EnvironmentTables.init();
 		}
-		public static final @NonNull ExecutorTypeParameter __LookupEnvironment__addElements_NE = new ExecutorTypeParameter(TypeId.T_1, "NE");
+		public static final @NonNull ExecutorTypeParameter __LookupEnvironment__0_addElements_NE = new ExecutorTypeParameter(TypeId.T_1, "NE");
 
 		static {
 			Init.initEnd();
@@ -164,7 +164,7 @@ public class EnvironmentTables
 			Fragments.init();
 		}
 
-		public static final @NonNull ParameterTypes _Collection__LookupEnvironment_addElements_NE__ = TypeUtil.createParameterTypes(new ExecutorSpecializedType("Collection", EnvironmentTables.TypeParameters.__LookupEnvironment__addElements_NE));
+		public static final @NonNull ParameterTypes _Collection__LookupEnvironment_0_addElements_NE__ = TypeUtil.createParameterTypes(new ExecutorSpecializedType("Collection", EnvironmentTables.TypeParameters.__LookupEnvironment__0_addElements_NE));
 		public static final @NonNull ParameterTypes _NamedElement = TypeUtil.createParameterTypes(MiniOCLTables.Types._NamedElement);
 
 		static {
@@ -191,10 +191,10 @@ public class EnvironmentTables
 		public static final @NonNull ExecutorOperation _Env4CG__hasFinalResult = new ExecutorOperation("hasFinalResult", TypeUtil.EMPTY_PARAMETER_TYPES, Types._Env4CG,
 			1, TemplateParameters.EMPTY_LIST, null);
 
-		public static final @NonNull ExecutorOperation _LookupEnvironment__addElement = new ExecutorOperation("addElement", Parameters._NamedElement, Types._LookupEnvironment,
-			0, TemplateParameters.EMPTY_LIST, null);
-		public static final @NonNull ExecutorOperation _LookupEnvironment__addElements = new ExecutorOperation("addElements", Parameters._Collection__LookupEnvironment_addElements_NE__, Types._LookupEnvironment,
-			1, TypeUtil.createTemplateParameters(TypeParameters.__LookupEnvironment__addElements_NE), null);
+		public static final @NonNull ExecutorOperation _LookupEnvironment__0_addElements = new ExecutorOperation("addElements", Parameters._Collection__LookupEnvironment_0_addElements_NE__, Types._LookupEnvironment,
+			0, TypeUtil.createTemplateParameters(TypeParameters.__LookupEnvironment__0_addElements_NE), null);
+		public static final @NonNull ExecutorOperation _LookupEnvironment__1_addElements = new ExecutorOperation("addElements", Parameters._NamedElement, Types._LookupEnvironment,
+			1, TemplateParameters.EMPTY_LIST, null);
 
 		static {
 			Init.initEnd();
@@ -349,8 +349,8 @@ public class EnvironmentTables
 		};
 
 		private static final @NonNull ExecutorOperation @NonNull [] _LookupEnvironment__LookupEnvironment = {
-			EnvironmentTables.Operations._LookupEnvironment__addElement /* addElement(NamedElement[?]) */,
-			EnvironmentTables.Operations._LookupEnvironment__addElements /* addElements(NE)(Collection(NE)) */
+			EnvironmentTables.Operations._LookupEnvironment__0_addElements /* addElements(NE)(Collection(NE)) */,
+			EnvironmentTables.Operations._LookupEnvironment__1_addElements /* addElements(NamedElement[?]) */
 		};
 		private static final @NonNull ExecutorOperation @NonNull [] _LookupEnvironment__Env4CG = {
 			EnvironmentTables.Operations._Env4CG__getExecutor /* getExecutor() */,

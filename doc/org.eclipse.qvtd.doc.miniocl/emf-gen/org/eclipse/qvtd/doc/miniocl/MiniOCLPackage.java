@@ -1241,13 +1241,22 @@ public interface MiniOCLPackage extends EPackage {
 	int ITERATOR_EXP__OWNED_BODY = LOOP_EXP__OWNED_BODY;
 
 	/**
+	 * The feature id for the '<em><b>Iterator</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITERATOR_EXP__ITERATOR = LOOP_EXP_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>Iterator Exp</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ITERATOR_EXP_FEATURE_COUNT = LOOP_EXP_FEATURE_COUNT + 0;
+	int ITERATOR_EXP_FEATURE_COUNT = LOOP_EXP_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of operations of the '<em>Iterator Exp</em>' class.
@@ -1584,13 +1593,22 @@ public interface MiniOCLPackage extends EPackage {
 	int VARIABLE__TYPE = NAMED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Owned Init Exp</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE__OWNED_INIT_EXP = NAMED_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Variable</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABLE_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 1;
+	int VARIABLE_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of operations of the '<em>Variable</em>' class.
@@ -1618,6 +1636,15 @@ public interface MiniOCLPackage extends EPackage {
 	 * @ordered
 	 */
 	int PARAMETER__TYPE = VARIABLE__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Owned Init Exp</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAMETER__OWNED_INIT_EXP = VARIABLE__OWNED_INIT_EXP;
 
 	/**
 	 * The number of structural features of the '<em>Parameter</em>' class.
@@ -1909,6 +1936,17 @@ public interface MiniOCLPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getIteratorExp();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.doc.miniocl.IteratorExp#getIterator <em>Iterator</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Iterator</em>'.
+	 * @see org.eclipse.qvtd.doc.miniocl.IteratorExp#getIterator()
+	 * @see #getIteratorExp()
+	 * @generated
+	 */
+	EAttribute getIteratorExp_Iterator();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.doc.miniocl.IterateExp <em>Iterate Exp</em>}'.
@@ -2576,6 +2614,17 @@ public interface MiniOCLPackage extends EPackage {
 	EClass getVariable();
 
 	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.doc.miniocl.Variable#getOwnedInitExp <em>Owned Init Exp</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Owned Init Exp</em>'.
+	 * @see org.eclipse.qvtd.doc.miniocl.Variable#getOwnedInitExp()
+	 * @see #getVariable()
+	 * @generated
+	 */
+	EReference getVariable_OwnedInitExp();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.doc.miniocl.VariableExp <em>Variable Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2721,6 +2770,14 @@ public interface MiniOCLPackage extends EPackage {
 		 * @generated
 		 */
 		EClass ITERATOR_EXP = eINSTANCE.getIteratorExp();
+
+		/**
+		 * The meta object literal for the '<em><b>Iterator</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ITERATOR_EXP__ITERATOR = eINSTANCE.getIteratorExp_Iterator();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.doc.miniocl.impl.IterateExpImpl <em>Iterate Exp</em>}' class.
@@ -3281,6 +3338,14 @@ public interface MiniOCLPackage extends EPackage {
 		 * @generated
 		 */
 		EClass VARIABLE = eINSTANCE.getVariable();
+
+		/**
+		 * The meta object literal for the '<em><b>Owned Init Exp</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference VARIABLE__OWNED_INIT_EXP = eINSTANCE.getVariable_OwnedInitExp();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.doc.miniocl.impl.VariableExpImpl <em>Variable Exp</em>}' class.

@@ -168,13 +168,13 @@ public interface EnvironmentPackage extends EPackage {
 	int LOOKUP_ENVIRONMENT___ADD_ELEMENTS__COLLECTION = ENV4_CG_OPERATION_COUNT + 0;
 
 	/**
-	 * The operation id for the '<em>Add Element</em>' operation.
+	 * The operation id for the '<em>Add Elements</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LOOKUP_ENVIRONMENT___ADD_ELEMENT__NAMEDELEMENT = ENV4_CG_OPERATION_COUNT + 1;
+	int LOOKUP_ENVIRONMENT___ADD_ELEMENTS__NAMEDELEMENT = ENV4_CG_OPERATION_COUNT + 1;
 
 	/**
 	 * The number of operations of the '<em>Lookup Environment</em>' class.
@@ -257,14 +257,14 @@ public interface EnvironmentPackage extends EPackage {
 	EOperation getLookupEnvironment__AddElements__Collection();
 
 	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvtd.doc.miniocl.lookup.LookupEnvironment#addElement(org.eclipse.qvtd.doc.miniocl.NamedElement) <em>Add Element</em>}' operation.
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.doc.miniocl.lookup.LookupEnvironment#addElements(org.eclipse.qvtd.doc.miniocl.NamedElement) <em>Add Elements</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Add Element</em>' operation.
-	 * @see org.eclipse.qvtd.doc.miniocl.lookup.LookupEnvironment#addElement(org.eclipse.qvtd.doc.miniocl.NamedElement)
+	 * @return the meta object for the '<em>Add Elements</em>' operation.
+	 * @see org.eclipse.qvtd.doc.miniocl.lookup.LookupEnvironment#addElements(org.eclipse.qvtd.doc.miniocl.NamedElement)
 	 * @generated
 	 */
-	EOperation getLookupEnvironment__AddElement__NamedElement();
+	EOperation getLookupEnvironment__AddElements__NamedElement();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.doc.miniocl.lookup.Env4CG <em>Env4 CG</em>}'.
@@ -365,12 +365,12 @@ public interface EnvironmentPackage extends EPackage {
 		EOperation LOOKUP_ENVIRONMENT___ADD_ELEMENTS__COLLECTION = eINSTANCE.getLookupEnvironment__AddElements__Collection();
 
 		/**
-		 * The meta object literal for the '<em><b>Add Element</b></em>' operation.
+		 * The meta object literal for the '<em><b>Add Elements</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EOperation LOOKUP_ENVIRONMENT___ADD_ELEMENT__NAMEDELEMENT = eINSTANCE.getLookupEnvironment__AddElement__NamedElement();
+		EOperation LOOKUP_ENVIRONMENT___ADD_ELEMENTS__NAMEDELEMENT = eINSTANCE.getLookupEnvironment__AddElements__NamedElement();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.doc.miniocl.lookup.Env4CG <em>Env4 CG</em>}' class.

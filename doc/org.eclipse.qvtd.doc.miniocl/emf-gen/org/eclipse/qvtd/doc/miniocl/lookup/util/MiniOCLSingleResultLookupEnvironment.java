@@ -60,7 +60,7 @@ public class MiniOCLSingleResultLookupEnvironment extends LookupEnvironmentImpl 
 	
 	@Override
 	@NonNull
-	public LookupEnvironment addElement(@Nullable NamedElement namedElement) {
+	public LookupEnvironment addElements(@Nullable NamedElement namedElement) {
 		if (namedElement != null) {
 			if (name.equals(namedElement.getName())) {
 				if (typeFilter.isInstance(namedElement)) {
@@ -84,7 +84,7 @@ public class MiniOCLSingleResultLookupEnvironment extends LookupEnvironmentImpl 
 		
 		if (namedElements != null) {
 			for (NamedElement namedElement : namedElements) {
-				addElement(namedElement);
+				addElements(namedElement);
 			}	
 		}
 		return this;

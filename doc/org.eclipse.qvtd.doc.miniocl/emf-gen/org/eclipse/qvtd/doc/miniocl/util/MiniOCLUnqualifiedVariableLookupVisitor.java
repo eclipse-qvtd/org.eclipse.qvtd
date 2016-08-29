@@ -21,12 +21,14 @@ import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.ids.NsURIPackageId;
 import org.eclipse.ocl.pivot.ids.RootPackageId;
 import org.eclipse.ocl.pivot.ids.TypeId;
+import org.eclipse.ocl.pivot.library.oclany.OclAnyUnsupportedOperation;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.qvtd.doc.miniocl.ExpressionInOCL;
 import org.eclipse.qvtd.doc.miniocl.MiniOCLPackage;
 import org.eclipse.qvtd.doc.miniocl.Operation;
 import org.eclipse.qvtd.doc.miniocl.Parameter;
-import org.eclipse.qvtd.doc.miniocl.Variable;
+import org.eclipse.qvtd.doc.miniocl.lookup.Env4CG;
 import org.eclipse.qvtd.doc.miniocl.lookup.EnvironmentPackage;
 import org.eclipse.qvtd.doc.miniocl.lookup.LookupEnvironment;
 import org.eclipse.qvtd.doc.miniocl.util.AbstractMiniOCLCommonLookupVisitor;
@@ -49,7 +51,6 @@ public class MiniOCLUnqualifiedVariableLookupVisitor
     public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_OclElement = PACKid_$metamodel$.getClassId("OclElement", 0);
     public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Operation = PACKid_http_c_s_s_www_eclipse_org_s_qvtd_s_doc_s_MiniOCL_s_1_0.getClassId("Operation", 0);
     public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Parameter = PACKid_http_c_s_s_www_eclipse_org_s_qvtd_s_doc_s_MiniOCL_s_1_0.getClassId("Parameter", 0);
-    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Variable = PACKid_http_c_s_s_www_eclipse_org_s_qvtd_s_doc_s_MiniOCL_s_1_0.getClassId("Variable", 0);
     public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_Parameter = TypeId.ORDERED_SET.getSpecializedId(CLSSid_Parameter);
     
     protected final /*@Thrown*/ org.eclipse.ocl.pivot.evaluation.@org.eclipse.jdt.annotation.NonNull Executor executor;
@@ -84,18 +85,15 @@ public class MiniOCLUnqualifiedVariableLookupVisitor
     /**
      * visitExpressionInOCL(element : miniocl::ExpressionInOCL[1]) : lookup::LookupEnvironment[?]
      * 
-     * _'null' : lookup::LookupEnvironment[1]
+     * _'null' : lookup::LookupEnvironment[?]
      */
     @Override
     public /*@NonInvalid*/ LookupEnvironment visitExpressionInOCL(final /*@NonInvalid*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.NonNull ExpressionInOCL element) {
-        @SuppressWarnings("null")
-        final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.@org.eclipse.jdt.annotation.NonNull Variable ownedSelfVar = element.getOwnedSelfVar();
-        @SuppressWarnings("null")
-        final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.lookup.@org.eclipse.jdt.annotation.NonNull LookupEnvironment inner = context.addElement(ownedSelfVar);
-        final /*@Thrown*/ boolean hasFinalResult = inner.hasFinalResult();
+        final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull InvalidValueException inner = ClassUtil.nonNullState((InvalidValueException)OclAnyUnsupportedOperation.INSTANCE.evaluate(executor, TypeId.OCL_INVALID, context));
+        final /*@Thrown*/ boolean hasFinalResult = ((Env4CG)inner).hasFinalResult();
         /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.lookup.@org.eclipse.jdt.annotation.Nullable LookupEnvironment symbol_0;
         if (hasFinalResult) {
-            symbol_0 = inner;
+            symbol_0 = (LookupEnvironment)inner;
         }
         else {
             final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.lookup.@org.eclipse.jdt.annotation.Nullable LookupEnvironment parentEnv = this.parentEnv(element);

@@ -604,6 +604,8 @@ public class MiniOCLTables
 
 		public static final @NonNull ExecutorProperty _IterateExp__ownedResult = new EcoreExecutorProperty(MiniOCLPackage.Literals.ITERATE_EXP__OWNED_RESULT, Types._IterateExp, 0);
 
+		public static final @NonNull ExecutorProperty _IteratorExp__iterator = new EcoreExecutorProperty(MiniOCLPackage.Literals.ITERATOR_EXP__ITERATOR, Types._IteratorExp, 0);
+
 		public static final @NonNull ExecutorProperty _LetExp__ownedIn = new EcoreExecutorProperty(MiniOCLPackage.Literals.LET_EXP__OWNED_IN, Types._LetExp, 0);
 		public static final @NonNull ExecutorProperty _LetExp__ownedVariable = new EcoreExecutorProperty(MiniOCLPackage.Literals.LET_EXP__OWNED_VARIABLE, Types._LetExp, 1);
 
@@ -620,6 +622,7 @@ public class MiniOCLTables
 		public static final @NonNull ExecutorProperty _OCLExpression__LetExp__ownedIn = new ExecutorPropertyWithImplementation("LetExp", Types._OCLExpression, 5, new EcoreLibraryOppositeProperty(MiniOCLPackage.Literals.LET_EXP__OWNED_IN));
 		public static final @NonNull ExecutorProperty _OCLExpression__LoopExp__ownedBody = new ExecutorPropertyWithImplementation("LoopExp", Types._OCLExpression, 6, new EcoreLibraryOppositeProperty(MiniOCLPackage.Literals.LOOP_EXP__OWNED_BODY));
 		public static final @NonNull ExecutorProperty _OCLExpression__OperationCallExp__ownedArguments = new ExecutorPropertyWithImplementation("OperationCallExp", Types._OCLExpression, 7, new EcoreLibraryOppositeProperty(MiniOCLPackage.Literals.OPERATION_CALL_EXP__OWNED_ARGUMENTS));
+		public static final @NonNull ExecutorProperty _OCLExpression__Variable__ownedInitExp = new ExecutorPropertyWithImplementation("Variable", Types._OCLExpression, 8, new EcoreLibraryOppositeProperty(MiniOCLPackage.Literals.VARIABLE__OWNED_INIT_EXP));
 
 		public static final @NonNull ExecutorProperty _OpaqueExpression__language = new EcoreExecutorProperty(MiniOCLPackage.Literals.OPAQUE_EXPRESSION__LANGUAGE, Types._OpaqueExpression, 0);
 
@@ -651,11 +654,12 @@ public class MiniOCLTables
 
 		public static final @NonNull ExecutorProperty _TypedElement__type = new EcoreExecutorProperty(MiniOCLPackage.Literals.TYPED_ELEMENT__TYPE, Types._TypedElement, 0);
 
-		public static final @NonNull ExecutorProperty _Variable__ExpressionInOCL__ownedSelfVar = new ExecutorPropertyWithImplementation("ExpressionInOCL", Types._Variable, 0, new EcoreLibraryOppositeProperty(MiniOCLPackage.Literals.EXPRESSION_IN_OCL__OWNED_SELF_VAR));
-		public static final @NonNull ExecutorProperty _Variable__IterateExp__ownedResult = new ExecutorPropertyWithImplementation("IterateExp", Types._Variable, 1, new EcoreLibraryOppositeProperty(MiniOCLPackage.Literals.ITERATE_EXP__OWNED_RESULT));
-		public static final @NonNull ExecutorProperty _Variable__LetExp__ownedVariable = new ExecutorPropertyWithImplementation("LetExp", Types._Variable, 2, new EcoreLibraryOppositeProperty(MiniOCLPackage.Literals.LET_EXP__OWNED_VARIABLE));
-		public static final @NonNull ExecutorProperty _Variable__LoopExp__ownedIterator = new ExecutorPropertyWithImplementation("LoopExp", Types._Variable, 3, new EcoreLibraryOppositeProperty(MiniOCLPackage.Literals.LOOP_EXP__OWNED_ITERATOR));
-		public static final @NonNull ExecutorProperty _Variable__VariableExp__referredVariable = new ExecutorPropertyWithImplementation("VariableExp", Types._Variable, 4, new EcoreLibraryOppositeProperty(MiniOCLPackage.Literals.VARIABLE_EXP__REFERRED_VARIABLE));
+		public static final @NonNull ExecutorProperty _Variable__ownedInitExp = new EcoreExecutorProperty(MiniOCLPackage.Literals.VARIABLE__OWNED_INIT_EXP, Types._Variable, 0);
+		public static final @NonNull ExecutorProperty _Variable__ExpressionInOCL__ownedSelfVar = new ExecutorPropertyWithImplementation("ExpressionInOCL", Types._Variable, 1, new EcoreLibraryOppositeProperty(MiniOCLPackage.Literals.EXPRESSION_IN_OCL__OWNED_SELF_VAR));
+		public static final @NonNull ExecutorProperty _Variable__IterateExp__ownedResult = new ExecutorPropertyWithImplementation("IterateExp", Types._Variable, 2, new EcoreLibraryOppositeProperty(MiniOCLPackage.Literals.ITERATE_EXP__OWNED_RESULT));
+		public static final @NonNull ExecutorProperty _Variable__LetExp__ownedVariable = new ExecutorPropertyWithImplementation("LetExp", Types._Variable, 3, new EcoreLibraryOppositeProperty(MiniOCLPackage.Literals.LET_EXP__OWNED_VARIABLE));
+		public static final @NonNull ExecutorProperty _Variable__LoopExp__ownedIterator = new ExecutorPropertyWithImplementation("LoopExp", Types._Variable, 4, new EcoreLibraryOppositeProperty(MiniOCLPackage.Literals.LOOP_EXP__OWNED_ITERATOR));
+		public static final @NonNull ExecutorProperty _Variable__VariableExp__referredVariable = new ExecutorPropertyWithImplementation("VariableExp", Types._Variable, 5, new EcoreLibraryOppositeProperty(MiniOCLPackage.Literals.VARIABLE_EXP__REFERRED_VARIABLE));
 
 		public static final @NonNull ExecutorProperty _VariableExp__referredVariable = new EcoreExecutorProperty(MiniOCLPackage.Literals.VARIABLE_EXP__REFERRED_VARIABLE, Types._VariableExp, 0);
 		static {
@@ -2629,7 +2633,8 @@ public class MiniOCLTables
 			MiniOCLTables.Properties._OCLExpression__ExpressionInOCL__ownedBody,
 			MiniOCLTables.Properties._OCLExpression__LetExp__ownedIn,
 			MiniOCLTables.Properties._OCLExpression__LoopExp__ownedBody,
-			MiniOCLTables.Properties._OCLExpression__OperationCallExp__ownedArguments
+			MiniOCLTables.Properties._OCLExpression__OperationCallExp__ownedArguments,
+			MiniOCLTables.Properties._OCLExpression__Variable__ownedInitExp
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _CallExp = {
@@ -2642,7 +2647,8 @@ public class MiniOCLTables
 			MiniOCLTables.Properties._OCLExpression__ExpressionInOCL__ownedBody,
 			MiniOCLTables.Properties._OCLExpression__LetExp__ownedIn,
 			MiniOCLTables.Properties._OCLExpression__LoopExp__ownedBody,
-			MiniOCLTables.Properties._OCLExpression__OperationCallExp__ownedArguments
+			MiniOCLTables.Properties._OCLExpression__OperationCallExp__ownedArguments,
+			MiniOCLTables.Properties._OCLExpression__Variable__ownedInitExp
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _Class = {
@@ -2675,7 +2681,8 @@ public class MiniOCLTables
 			MiniOCLTables.Properties._OCLExpression__ExpressionInOCL__ownedBody,
 			MiniOCLTables.Properties._OCLExpression__LetExp__ownedIn,
 			MiniOCLTables.Properties._OCLExpression__LoopExp__ownedBody,
-			MiniOCLTables.Properties._OCLExpression__OperationCallExp__ownedArguments
+			MiniOCLTables.Properties._OCLExpression__OperationCallExp__ownedArguments,
+			MiniOCLTables.Properties._OCLExpression__Variable__ownedInitExp
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _CollectionLiteralPart = {
@@ -2729,7 +2736,8 @@ public class MiniOCLTables
 			MiniOCLTables.Properties._OCLExpression__ExpressionInOCL__ownedBody,
 			MiniOCLTables.Properties._OCLExpression__LetExp__ownedIn,
 			MiniOCLTables.Properties._OCLExpression__LoopExp__ownedBody,
-			MiniOCLTables.Properties._OCLExpression__OperationCallExp__ownedArguments
+			MiniOCLTables.Properties._OCLExpression__OperationCallExp__ownedArguments,
+			MiniOCLTables.Properties._OCLExpression__Variable__ownedInitExp
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _IterateExp = {
@@ -2745,10 +2753,12 @@ public class MiniOCLTables
 			MiniOCLTables.Properties._OCLExpression__ExpressionInOCL__ownedBody,
 			MiniOCLTables.Properties._OCLExpression__LetExp__ownedIn,
 			MiniOCLTables.Properties._OCLExpression__LoopExp__ownedBody,
-			MiniOCLTables.Properties._OCLExpression__OperationCallExp__ownedArguments
+			MiniOCLTables.Properties._OCLExpression__OperationCallExp__ownedArguments,
+			MiniOCLTables.Properties._OCLExpression__Variable__ownedInitExp
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _IteratorExp = {
+			MiniOCLTables.Properties._IteratorExp__iterator,
 			MiniOCLTables.Properties._LoopExp__ownedBody,
 			MiniOCLTables.Properties._LoopExp__ownedIterator,
 			MiniOCLTables.Properties._CallExp__ownedSource,
@@ -2760,7 +2770,8 @@ public class MiniOCLTables
 			MiniOCLTables.Properties._OCLExpression__ExpressionInOCL__ownedBody,
 			MiniOCLTables.Properties._OCLExpression__LetExp__ownedIn,
 			MiniOCLTables.Properties._OCLExpression__LoopExp__ownedBody,
-			MiniOCLTables.Properties._OCLExpression__OperationCallExp__ownedArguments
+			MiniOCLTables.Properties._OCLExpression__OperationCallExp__ownedArguments,
+			MiniOCLTables.Properties._OCLExpression__Variable__ownedInitExp
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _LetExp = {
@@ -2774,7 +2785,8 @@ public class MiniOCLTables
 			MiniOCLTables.Properties._OCLExpression__ExpressionInOCL__ownedBody,
 			MiniOCLTables.Properties._OCLExpression__LetExp__ownedIn,
 			MiniOCLTables.Properties._OCLExpression__LoopExp__ownedBody,
-			MiniOCLTables.Properties._OCLExpression__OperationCallExp__ownedArguments
+			MiniOCLTables.Properties._OCLExpression__OperationCallExp__ownedArguments,
+			MiniOCLTables.Properties._OCLExpression__Variable__ownedInitExp
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _LiteralExp = {
@@ -2786,7 +2798,8 @@ public class MiniOCLTables
 			MiniOCLTables.Properties._OCLExpression__ExpressionInOCL__ownedBody,
 			MiniOCLTables.Properties._OCLExpression__LetExp__ownedIn,
 			MiniOCLTables.Properties._OCLExpression__LoopExp__ownedBody,
-			MiniOCLTables.Properties._OCLExpression__OperationCallExp__ownedArguments
+			MiniOCLTables.Properties._OCLExpression__OperationCallExp__ownedArguments,
+			MiniOCLTables.Properties._OCLExpression__Variable__ownedInitExp
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _LoopExp = {
@@ -2801,7 +2814,8 @@ public class MiniOCLTables
 			MiniOCLTables.Properties._OCLExpression__ExpressionInOCL__ownedBody,
 			MiniOCLTables.Properties._OCLExpression__LetExp__ownedIn,
 			MiniOCLTables.Properties._OCLExpression__LoopExp__ownedBody,
-			MiniOCLTables.Properties._OCLExpression__OperationCallExp__ownedArguments
+			MiniOCLTables.Properties._OCLExpression__OperationCallExp__ownedArguments,
+			MiniOCLTables.Properties._OCLExpression__Variable__ownedInitExp
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _NamedElement = {
@@ -2821,7 +2835,8 @@ public class MiniOCLTables
 			MiniOCLTables.Properties._OCLExpression__ExpressionInOCL__ownedBody,
 			MiniOCLTables.Properties._OCLExpression__LetExp__ownedIn,
 			MiniOCLTables.Properties._OCLExpression__LoopExp__ownedBody,
-			MiniOCLTables.Properties._OCLExpression__OperationCallExp__ownedArguments
+			MiniOCLTables.Properties._OCLExpression__OperationCallExp__ownedArguments,
+			MiniOCLTables.Properties._OCLExpression__Variable__ownedInitExp
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _OCLExpression = {
@@ -2833,7 +2848,8 @@ public class MiniOCLTables
 			MiniOCLTables.Properties._OCLExpression__ExpressionInOCL__ownedBody,
 			MiniOCLTables.Properties._OCLExpression__LetExp__ownedIn,
 			MiniOCLTables.Properties._OCLExpression__LoopExp__ownedBody,
-			MiniOCLTables.Properties._OCLExpression__OperationCallExp__ownedArguments
+			MiniOCLTables.Properties._OCLExpression__OperationCallExp__ownedArguments,
+			MiniOCLTables.Properties._OCLExpression__Variable__ownedInitExp
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _OpaqueExpression = {
@@ -2862,7 +2878,8 @@ public class MiniOCLTables
 			MiniOCLTables.Properties._OCLExpression__ExpressionInOCL__ownedBody,
 			MiniOCLTables.Properties._OCLExpression__LetExp__ownedIn,
 			MiniOCLTables.Properties._OCLExpression__LoopExp__ownedBody,
-			MiniOCLTables.Properties._OCLExpression__OperationCallExp__ownedArguments
+			MiniOCLTables.Properties._OCLExpression__OperationCallExp__ownedArguments,
+			MiniOCLTables.Properties._OCLExpression__Variable__ownedInitExp
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _Package = {
@@ -2875,6 +2892,7 @@ public class MiniOCLTables
 
 		private static final @NonNull ExecutorProperty @NonNull [] _Parameter = {
 			MiniOCLTables.Properties._NamedElement__name,
+			MiniOCLTables.Properties._Variable__ownedInitExp,
 			MiniOCLTables.Properties._TypedElement__type,
 			MiniOCLTables.Properties._Variable__ExpressionInOCL__ownedSelfVar,
 			MiniOCLTables.Properties._Variable__IterateExp__ownedResult,
@@ -2893,7 +2911,8 @@ public class MiniOCLTables
 			MiniOCLTables.Properties._OCLExpression__ExpressionInOCL__ownedBody,
 			MiniOCLTables.Properties._OCLExpression__LetExp__ownedIn,
 			MiniOCLTables.Properties._OCLExpression__LoopExp__ownedBody,
-			MiniOCLTables.Properties._OCLExpression__OperationCallExp__ownedArguments
+			MiniOCLTables.Properties._OCLExpression__OperationCallExp__ownedArguments,
+			MiniOCLTables.Properties._OCLExpression__Variable__ownedInitExp
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _Property = {
@@ -2916,7 +2935,8 @@ public class MiniOCLTables
 			MiniOCLTables.Properties._OCLExpression__ExpressionInOCL__ownedBody,
 			MiniOCLTables.Properties._OCLExpression__LetExp__ownedIn,
 			MiniOCLTables.Properties._OCLExpression__LoopExp__ownedBody,
-			MiniOCLTables.Properties._OCLExpression__OperationCallExp__ownedArguments
+			MiniOCLTables.Properties._OCLExpression__OperationCallExp__ownedArguments,
+			MiniOCLTables.Properties._OCLExpression__Variable__ownedInitExp
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _Root = {
@@ -2931,6 +2951,7 @@ public class MiniOCLTables
 
 		private static final @NonNull ExecutorProperty @NonNull [] _Variable = {
 			MiniOCLTables.Properties._NamedElement__name,
+			MiniOCLTables.Properties._Variable__ownedInitExp,
 			MiniOCLTables.Properties._TypedElement__type,
 			MiniOCLTables.Properties._Variable__ExpressionInOCL__ownedSelfVar,
 			MiniOCLTables.Properties._Variable__IterateExp__ownedResult,
@@ -2949,7 +2970,8 @@ public class MiniOCLTables
 			MiniOCLTables.Properties._OCLExpression__ExpressionInOCL__ownedBody,
 			MiniOCLTables.Properties._OCLExpression__LetExp__ownedIn,
 			MiniOCLTables.Properties._OCLExpression__LoopExp__ownedBody,
-			MiniOCLTables.Properties._OCLExpression__OperationCallExp__ownedArguments
+			MiniOCLTables.Properties._OCLExpression__OperationCallExp__ownedArguments,
+			MiniOCLTables.Properties._OCLExpression__Variable__ownedInitExp
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _Visitable = {};

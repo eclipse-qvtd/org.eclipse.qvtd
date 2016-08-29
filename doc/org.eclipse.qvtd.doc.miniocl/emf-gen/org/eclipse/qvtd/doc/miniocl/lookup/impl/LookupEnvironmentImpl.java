@@ -165,11 +165,11 @@ public class LookupEnvironmentImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public LookupEnvironment addElement(final NamedElement element) {
+	public LookupEnvironment addElements(final NamedElement elements) {
 		/**
 		 * 
 		 * LookupEnvironment{
-		 *   namedElements = namedElements->including(element), parentEnv = parentEnv
+		 *   namedElements = namedElements->including(elements), parentEnv = parentEnv
 		 * }
 		 */
 		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
@@ -181,7 +181,7 @@ public class LookupEnvironmentImpl extends MinimalEObjectImpl.Container implemen
 		@SuppressWarnings("null")
 		final /*@Thrown*/ java.util.@NonNull List<NamedElement> namedElements = this.getNamedElements();
 		final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_namedElements = idResolver.createOrderedSetOfAll(EnvironmentTables.ORD_CLSSid_NamedElement, namedElements);
-		final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue including = (OrderedSetValue)CollectionIncludingOperation.INSTANCE.evaluate(BOXED_namedElements, element);
+		final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue including = (OrderedSetValue)CollectionIncludingOperation.INSTANCE.evaluate(BOXED_namedElements, elements);
 		final List<NamedElement> UNBOXED_including = including.asEcoreObjects(idResolver, NamedElement.class);
 		assert UNBOXED_including != null;
 		CTORid_namedElements.initValue(symbol_0, UNBOXED_including);
@@ -290,8 +290,8 @@ public class LookupEnvironmentImpl extends MinimalEObjectImpl.Container implemen
 		switch (operationID) {
 			case EnvironmentPackage.LOOKUP_ENVIRONMENT___ADD_ELEMENTS__COLLECTION:
 				return addElements((Collection)arguments.get(0));
-			case EnvironmentPackage.LOOKUP_ENVIRONMENT___ADD_ELEMENT__NAMEDELEMENT:
-				return addElement((NamedElement)arguments.get(0));
+			case EnvironmentPackage.LOOKUP_ENVIRONMENT___ADD_ELEMENTS__NAMEDELEMENT:
+				return addElements((NamedElement)arguments.get(0));
 			case EnvironmentPackage.LOOKUP_ENVIRONMENT___HAS_FINAL_RESULT:
 				return hasFinalResult();
 			case EnvironmentPackage.LOOKUP_ENVIRONMENT___GET_EXECUTOR:
