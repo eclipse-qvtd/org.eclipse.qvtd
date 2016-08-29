@@ -8,9 +8,9 @@
 </listAttribute>
 <stringAttribute key="org.eclipse.jdt.junit.CONTAINER" value=""/>
 <booleanAttribute key="org.eclipse.jdt.junit.KEEPRUNNING_ATTR" value="false"/>
-<stringAttribute key="org.eclipse.jdt.junit.TESTNAME" value="testQVTcCompiler_Families2Persons_ManualInPlace"/>
+<stringAttribute key="org.eclipse.jdt.junit.TESTNAME" value="testQVTcCompiler_Families2Persons_ManualCopy"/>
 <stringAttribute key="org.eclipse.jdt.junit.TEST_KIND" value="org.eclipse.jdt.junit.loader.junit4"/>
 <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="org.eclipse.qvtd.doc.bigmde2016.tests.qvtc.BigMDE2016CGTests"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="org.eclipse.qvtd.doc.bigmde2016.tests"/>
-<stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-DtestSuiteName=&quot;QVTc - BigMDE2016 - Families2Persons_ManualInPlace (4GB)&quot;&#13;&#10;-ea -Xmx4G"/>
+<stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-DtestSuiteName=&quot;ManualCopy - BigMDE2016 - Families2Persons (4GB)&quot;&#13;&#10;-Xmx4G"/>
 </launchConfiguration>

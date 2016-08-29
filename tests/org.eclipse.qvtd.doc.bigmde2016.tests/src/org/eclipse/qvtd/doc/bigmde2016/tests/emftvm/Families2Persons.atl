@@ -1,3 +1,6 @@
+-- @atlcompiler emftvm
+-- @path Families=/org.eclipse.qvtd.xtext.qvtcore.tests/src/org/eclipse/qvtd/xtext/qvtcore/tests/families2persons/Families.ecore
+-- @path Persons=/org.eclipse.qvtd.xtext.qvtcore.tests/src/org/eclipse/qvtd/xtext/qvtcore/tests/families2persons/Persons.ecore
 
 module Families2Persons;
 create OUT : Persons from IN : Families;
