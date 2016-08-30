@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
@@ -23,12 +23,12 @@ import org.eclipse.ocl.pivot.Property;
 /**
  * A QVTiGlobalContext maintains the Java-specific global context for generation of QVTi code.
  */
-public class QVTiGlobalContext extends JavaGlobalContext<QVTiCodeGenerator>
+public class QVTiGlobalContext extends JavaGlobalContext<@NonNull QVTiCodeGenerator>
 {
 	public static final @NonNull String MODELS_NAME = "models";
-	
+
 	/**
-	 * Map from an oppositeProperty that requites a cache to the global name of that cache. 
+	 * Map from an oppositeProperty that requites a cache to the global name of that cache.
 	 */
 	private /*@LazyNonNull*/ Map<@NonNull Property, @NonNull String> oppositeProperty2oppositeCacheName = null;
 
@@ -50,7 +50,7 @@ public class QVTiGlobalContext extends JavaGlobalContext<QVTiCodeGenerator>
 		assert name != null;
 		return name;
 	}
-	
+
 	@Override
 	protected @NonNull QVTiLocalContext createNestedContext(@NonNull CGElement cgScope) {
 		return new QVTiLocalContext(this, cgScope);

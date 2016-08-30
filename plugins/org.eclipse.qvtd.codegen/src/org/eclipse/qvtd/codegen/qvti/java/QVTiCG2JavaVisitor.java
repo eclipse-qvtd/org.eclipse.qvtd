@@ -1412,7 +1412,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 
 	@Override
 	public @NonNull Boolean visitCGFunction(@NonNull CGFunction cgFunction) {
-		JavaLocalContext<?> localContext2 = globalContext.getLocalContext(cgFunction);
+		JavaLocalContext<@NonNull ?> localContext2 = globalContext.getLocalContext(cgFunction);
 		if (localContext2 != null) {
 			localContext = localContext2;
 			//			localContext.
@@ -1422,7 +1422,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 				js.appendCommentWithOCL(null, cgFunction.getAst());
 				CGShadowExp cgShadowExp = useClass(cgFunction);
 				if (cgShadowExp != null) {
-					JavaLocalContext<?> functionContext = ClassUtil.nonNullState(globalContext.getLocalContext(cgFunction));
+					JavaLocalContext<@NonNull ?> functionContext = ClassUtil.nonNullState(globalContext.getLocalContext(cgFunction));
 					String instanceName = functionContext.getNameManagerContext().getSymbolName(cgFunction.getBody(), "instance");
 					//					Type
 					js.append("protected class ");
@@ -1445,7 +1445,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 					js.append("}\n");
 				}
 				else if (useCache(cgFunction)) {
-					JavaLocalContext<?> functionContext = ClassUtil.nonNullState(globalContext.getLocalContext(cgFunction));
+					JavaLocalContext<@NonNull ?> functionContext = ClassUtil.nonNullState(globalContext.getLocalContext(cgFunction));
 					String instanceName = functionContext.getNameManagerContext().getSymbolName(cgFunction.getBody(), "instance");
 					CGClass cgClass = ClassUtil.nonNullState(CGUtil.getContainingClass(cgFunction));
 					js.append("protected class ");
@@ -1576,7 +1576,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		js.append(")");
 		if (isIdentifiedInstance) {
 			js.append(")");
-			JavaLocalContext<?> functionContext = ClassUtil.nonNullState(globalContext.getLocalContext(cgFunction));
+			JavaLocalContext<@NonNull ?> functionContext = ClassUtil.nonNullState(globalContext.getLocalContext(cgFunction));
 			String instanceName = functionContext.getNameManagerContext().getSymbolName(cgFunction.getBody(), "instance");
 			//			js.append(".getInstance()");
 			js.append(".");
@@ -1598,7 +1598,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 
 	@Override
 	public @NonNull Boolean visitCGMapping(@NonNull CGMapping cgMapping) {
-		JavaLocalContext<?> localContext2 = globalContext.getLocalContext(cgMapping);
+		JavaLocalContext<@NonNull ?> localContext2 = globalContext.getLocalContext(cgMapping);
 		if (localContext2 != null) {
 			localContext = localContext2;
 			try {
