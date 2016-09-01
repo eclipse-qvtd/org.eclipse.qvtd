@@ -79,7 +79,7 @@ map primitiveToName in umlRdbms
 		realize p2n : SimpleUML2RDBMS::PrimitiveToName
 	|
 		p2n.owner := p2s;
-		p2n.primitive := prim;
+		p2n._primitive := prim;
 		p2n.typeName := sqlType;
 	}
 }
@@ -381,7 +381,7 @@ map attributes in umlRdbms refines flattening
 	|) {
 		realize fa : SimpleUML2RDBMS::FromAttribute
 	|
-		fa.attribute := a;
+		fa._attribute := a;
 		fa.owner := fao;
 	}
 
@@ -421,7 +421,7 @@ map primitiveAttribute in umlRdbms refines attributes
 
 	where(p2n : SimpleUML2RDBMS::PrimitiveToName
 	|
-		p2n.primitive = t;) {
+		p2n._primitive = t;) {
 		realize fa : SimpleUML2RDBMS::AttributeToColumn
 	|
 		fa.type := p2n;
@@ -444,7 +444,7 @@ map complexAttributeAttributes in umlRdbms refines attributes
 
 	where(fao : SimpleUML2RDBMS::NonLeafAttribute
 	|
-		fao.attribute = ca;) {}
+		fao._attribute = ca;) {}
 
 	map
 	{
