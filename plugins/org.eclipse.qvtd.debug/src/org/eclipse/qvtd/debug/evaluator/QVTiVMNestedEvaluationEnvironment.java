@@ -24,7 +24,7 @@ import org.eclipse.ocl.examples.debug.vm.utils.VMRuntimeException;
 import org.eclipse.ocl.examples.debug.vm.utils.VMStackTraceBuilder;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.NamedElement;
-import org.eclipse.ocl.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.qvtd.debug.vm.QVTiVariableFinder;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
@@ -34,12 +34,12 @@ public class QVTiVMNestedEvaluationEnvironment extends QVTiNestedEvaluationEnvir
 {
 	private @NonNull Element myCurrentIP;
 	private @NonNull NamedElement myOperation;		// Redundant if final
-    private final int myStackDepth;
+	private final int myStackDepth;
 	private final long id;
 	private final @NonNull Stack<StepperEntry> stepperStack = new Stack<StepperEntry>();
-    
-	public QVTiVMNestedEvaluationEnvironment(@NonNull QVTiVMEvaluationEnvironment evaluationEnvironment, @NonNull NamedElement executableObject, @Nullable OCLExpression callingObject, long id) {
-		super(evaluationEnvironment, executableObject, callingObject);
+
+	public QVTiVMNestedEvaluationEnvironment(@NonNull QVTiVMEvaluationEnvironment evaluationEnvironment, @NonNull NamedElement executableObject, @Nullable TypedElement caller, long id) {
+		super(evaluationEnvironment, executableObject, caller);
 		myStackDepth = evaluationEnvironment.getDepth() + 1;
 		this.id = id;
 		this.myOperation = executableObject;
@@ -50,7 +50,7 @@ public class QVTiVMNestedEvaluationEnvironment extends QVTiNestedEvaluationEnvir
 	public @NonNull QVTiVMEvaluationEnvironment createClonedEvaluationEnvironment() {
 		throw new UnsupportedOperationException();
 	}
-	
+
 	@Override
 	public @NonNull VariableFinder createVariableFinder(boolean isStoreValues) {
 		return new QVTiVariableFinder(this, isStoreValues);
@@ -63,14 +63,14 @@ public class QVTiVMNestedEvaluationEnvironment extends QVTiNestedEvaluationEnvir
 
 	@Override
 	public @NonNull UnitLocation getCurrentLocation() {
-//		if (myCurrentIP == null) {
-//			return null;
-//		}
-//		else {
+		//		if (myCurrentIP == null) {
+		//			return null;
+		//		}
+		//		else {
 		int startPosition = ASTBindingHelper.getStartPosition(myCurrentIP);
 		int endPosition = ASTBindingHelper.getEndPosition(myCurrentIP);
-			return new UnitLocation(startPosition, endPosition, this, myCurrentIP); 
-//		}
+		return new UnitLocation(startPosition, endPosition, this, myCurrentIP);
+		//		}
 	}
 
 	@Override
@@ -88,10 +88,10 @@ public class QVTiVMNestedEvaluationEnvironment extends QVTiNestedEvaluationEnvir
 		return myStackDepth;
 	}
 
-//    @Override
-//    public QvtRuntimeException getException() {
-//		return rootEvaluationEnvironment.getException();
-//    }
+	//    @Override
+	//    public QvtRuntimeException getException() {
+	//		return rootEvaluationEnvironment.getException();
+	//    }
 
 	@Override
 	public long getID() {
@@ -127,11 +127,11 @@ public class QVTiVMNestedEvaluationEnvironment extends QVTiNestedEvaluationEnvir
 	public boolean isDeferredExecution() {
 		return getVMRootEvaluationEnvironment().isDeferredExecution();
 	}
-    
-    @Override
+
+	@Override
 	public void processDeferredTasks() {
-    	getVMRootEvaluationEnvironment().processDeferredTasks();
-    }
+		getVMRootEvaluationEnvironment().processDeferredTasks();
+	}
 
 	@Override
 	public @NonNull Element setCurrentIP(@NonNull Element element) {
@@ -153,7 +153,7 @@ public class QVTiVMNestedEvaluationEnvironment extends QVTiNestedEvaluationEnvir
 		} catch (Exception e) {
 			getDebugCore().error("Failed to build QVT stack trace", e); //$NON-NLS-1$
 		}
-		
+
 		throw exception;
 	}
 }

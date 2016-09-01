@@ -125,7 +125,7 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 								return false;
 							}
 							for (int i = 0; i < iMax; i++) {
-								if (!ClassUtil.safeEquals(theseValues[i], thoseValues[i])) {
+								if (!idResolver.oclEquals(theseValues[i], thoseValues[i])) {
 									return false;
 								}
 							}
@@ -187,7 +187,7 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 								return false;
 							}
 							for (int i = 0; i < iMax; i++) {
-								if (!ClassUtil.safeEquals(theseValues[i], thoseValues[i])) {
+								if (!idResolver.oclEquals(theseValues[i], thoseValues[i])) {
 									return false;
 								}
 							}

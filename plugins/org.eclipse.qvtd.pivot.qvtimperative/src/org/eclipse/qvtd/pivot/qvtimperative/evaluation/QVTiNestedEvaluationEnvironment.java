@@ -14,9 +14,9 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.NamedElement;
-import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
+import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.ocl.pivot.internal.evaluation.BasicEvaluationEnvironment;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
@@ -27,9 +27,9 @@ public class QVTiNestedEvaluationEnvironment extends BasicEvaluationEnvironment 
 {
 	protected final @NonNull QVTiRootEvaluationEnvironment rootEvaluationEnvironment;
 	private @Nullable DomainUsageAnalysis usageAnalysis;
-	
-	public QVTiNestedEvaluationEnvironment(@NonNull QVTiEvaluationEnvironment evaluationEnvironment, @NonNull NamedElement executableObject, @Nullable OCLExpression callingObject) {
-		super(evaluationEnvironment, executableObject, callingObject);
+
+	public QVTiNestedEvaluationEnvironment(@NonNull QVTiEvaluationEnvironment evaluationEnvironment, @NonNull NamedElement executableObject, @Nullable TypedElement caller) {
+		super(evaluationEnvironment, executableObject, caller);
 		rootEvaluationEnvironment = evaluationEnvironment.getRootEvaluationEnvironment();
 	}
 
@@ -60,8 +60,8 @@ public class QVTiNestedEvaluationEnvironment extends BasicEvaluationEnvironment 
 		DomainUsage domainUsage = null;
 		DomainUsageAnalysis usageAnalysis2 = usageAnalysis;
 		if (usageAnalysis2 == null) {
-			if (callingObject instanceof OperationCallExp) {
-				OperationCallExp operationCallExp = (OperationCallExp)callingObject;
+			if (caller instanceof OperationCallExp) {
+				OperationCallExp operationCallExp = (OperationCallExp)caller;
 				Operation referredOperation = operationCallExp.getReferredOperation();
 				if (referredOperation != null) {
 					usageAnalysis = usageAnalysis2 = getExecutor().getModelManager().getTransformationAnalysis().getDomainUsageAnalysis().getAnalysis(referredOperation);

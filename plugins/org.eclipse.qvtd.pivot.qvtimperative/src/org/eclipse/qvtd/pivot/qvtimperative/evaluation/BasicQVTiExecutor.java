@@ -114,12 +114,12 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 	}
 
 	@Override
-	protected EvaluationEnvironment.@NonNull EvaluationEnvironmentExtension createNestedEvaluationEnvironment(EvaluationEnvironment.@NonNull EvaluationEnvironmentExtension evaluationEnvironment, @NonNull NamedElement executableObject, @Nullable OCLExpression callingObject) {
+	protected EvaluationEnvironment.@NonNull EvaluationEnvironmentExtension createNestedEvaluationEnvironment(EvaluationEnvironment.@NonNull EvaluationEnvironmentExtension evaluationEnvironment, @NonNull NamedElement executableObject, @Nullable TypedElement caller) {
 		if (evaluationEnvironment instanceof QVTiEvaluationEnvironment) {
-			return new QVTiNestedEvaluationEnvironment((QVTiEvaluationEnvironment) evaluationEnvironment, executableObject, callingObject);
+			return new QVTiNestedEvaluationEnvironment((QVTiEvaluationEnvironment) evaluationEnvironment, executableObject, caller);
 		}
 		else{
-			return super.createNestedEvaluationEnvironment(evaluationEnvironment, executableObject, callingObject);
+			return super.createNestedEvaluationEnvironment(evaluationEnvironment, executableObject, caller);
 		}
 	}
 
@@ -371,7 +371,7 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 	protected @Nullable Object internalExecuteFunctionCallExp(@NonNull OperationCallExp operationCallExp,
 			@NonNull Function referredFunction, @Nullable Object @NonNull [] boxedSourceAndArgumentValues) {
 		//		PivotUtil.checkExpression(expressionInOCL);
-		EvaluationEnvironment nestedEvaluationEnvironment = pushEvaluationEnvironment(referredFunction, operationCallExp);
+		EvaluationEnvironment nestedEvaluationEnvironment = pushEvaluationEnvironment(referredFunction, (TypedElement)operationCallExp);
 		//		nestedEvaluationEnvironment.add(ClassUtil.nonNullModel(expressionInOCL.getOwnedContext()), sourceValue);
 		List<Parameter> parameters = referredFunction.getOwnedParameters();
 		if (!parameters.isEmpty()) {
@@ -404,7 +404,7 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 	public @Nullable Object internalExecuteMappingCall(@NonNull MappingCall mappingCall, @NonNull Object @NonNull [] boundValues, @NonNull EvaluationVisitor undecoratedVisitor) {
 		Mapping calledMapping = mappingCall.getReferredMapping();
 		if (calledMapping != null) {
-			pushEvaluationEnvironment(calledMapping, mappingCall);
+			pushEvaluationEnvironment(calledMapping, (TypedElement)mappingCall);
 			try {
 				int index = 0;
 				for (MappingCallBinding binding : mappingCall.getBinding()) {
@@ -504,7 +504,7 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 			throw new IllegalStateException("Transformation " + transformation.getName() + " has no root mapping");
 		}
 		CallExp callExp = PivotFactory.eINSTANCE.createOperationCallExp();		// FIXME TransformationCallExp
-		pushEvaluationEnvironment(rule, callExp);
+		pushEvaluationEnvironment(rule, (TypedElement)callExp);
 		try {
 			rule.accept(undecoratedVisitor);
 		}
