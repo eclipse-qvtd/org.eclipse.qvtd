@@ -153,7 +153,7 @@ public class OperationRegion extends AbstractRegion
 								extraNode2 = elementNode;
 							}
 							//							assert !extraNode2.isMatched();
-							Node nextNode = Nodes.createDataTypeNode(extraNode2, navigationCallExp);
+							Node nextNode = Nodes.createDataTypeNode(extraNode2, navigationCallExp);			// FIXME re-use shared paths
 							Edges.createNavigationEdge(extraNode2, property, nextNode);
 							extraNode2 = nextNode;
 						}

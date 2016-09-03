@@ -164,7 +164,7 @@ public abstract class AbstractNode implements Node
 	public void addTypedElement(@NonNull TypedElement typedElement) {
 		if (!typedElements.contains(typedElement)) {
 			typedElements.add(typedElement);
-			if (isPattern() && isMatched() && !isRealized() && (typedElements.size() == 1)) {
+			if (isPattern() && isMatched() && !isRealized() && (typedElements.size() == 1) && !region.isOperationRegion()) {
 				boolean isMatched = Nodes.isMatched(typedElement);
 				if (!isMatched) {
 					isMatched = Nodes.isMatched(typedElement);
