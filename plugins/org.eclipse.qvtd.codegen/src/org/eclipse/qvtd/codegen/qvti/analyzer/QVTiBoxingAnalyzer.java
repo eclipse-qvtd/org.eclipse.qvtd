@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
@@ -85,11 +85,14 @@ public class QVTiBoxingAnalyzer extends BoxingAnalyzer implements QVTiCGModelVis
 	@Override
 	public Object visitCGEcorePropertyAssignment(@NonNull CGEcorePropertyAssignment cgEcorePropertyAssignment) {
 		EStructuralFeature eStructuralFeature = cgEcorePropertyAssignment.getEStructuralFeature();
-		boolean isRequired = eStructuralFeature.isRequired();
 		rewriteAsEcore(cgEcorePropertyAssignment.getSlotValue(), eStructuralFeature.getEContainingClass());
 		rewriteAsEcore(cgEcorePropertyAssignment.getInitValue(), eStructuralFeature.getEType());
-		if (isRequired) {
-			rewriteAsGuarded(cgEcorePropertyAssignment.getInitValue(), false, "value for " + cgEcorePropertyAssignment.getReferredProperty() + " assignment");
+		if (eStructuralFeature.isRequired()) {
+			CGValuedElement cgInit = cgEcorePropertyAssignment.getInitValue();
+			TypeDescriptor typeDescriptor = cgInit != null ? codeGenerator.getTypeDescriptor(cgInit) : null;
+			if ((typeDescriptor == null) || !typeDescriptor.isPrimitive()) {
+				rewriteAsGuarded(cgInit, false, "value for " + cgEcorePropertyAssignment.getReferredProperty() + " assignment");
+			}
 		}
 		return visitCGPropertyAssignment(cgEcorePropertyAssignment);
 	}
@@ -161,7 +164,7 @@ public class QVTiBoxingAnalyzer extends BoxingAnalyzer implements QVTiCGModelVis
 	@Override
 	public Object visitCGMappingLoop(@NonNull CGMappingLoop cgMappingLoop) {
 		visitCGIterationCallExp(cgMappingLoop);
-//		rewriteAsUnboxed(cgMappingLoop.getSource());
+		//		rewriteAsUnboxed(cgMappingLoop.getSource());
 		return null;
 	}
 
