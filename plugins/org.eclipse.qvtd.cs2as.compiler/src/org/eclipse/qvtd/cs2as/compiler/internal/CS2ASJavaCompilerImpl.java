@@ -337,10 +337,10 @@ public class CS2ASJavaCompilerImpl implements CS2ASJavaCompiler {
 
 		protected boolean isLookupOp(Operation op) {
 
-			String opName = op.getName();
-			if (opName != null && opName.startsWith("_lookup"))	{// FIXME
-				return true;
-			}
+//			String opName = op.getName();
+//			if (opName != null && opName.startsWith("_lookup"))	{// FIXME
+//				return false;
+//			}
 			return false;
 		}
 	}
