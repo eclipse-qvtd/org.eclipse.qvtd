@@ -1021,16 +1021,22 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		//
 		for (@NonNull NavigationEdge untraversedEdge : navigationForest.getGraphPredicates()) {
 			Node sourceNode = untraversedEdge.getSource();
-			Node targetNode = untraversedEdge.getTarget();
-			Property property = untraversedEdge.getProperty();
-			OCLExpression sourceExp = createVariableExp(sourceNode);
-			OCLExpression targetExp = createVariableExp(targetNode);
-			OCLExpression source2targetExp = createCallExp(sourceExp, property);
-			OCLExpression matchesExp = targetNode.isExplicitNull()
-					? helper.createOperationCallExp(source2targetExp, "=", targetExp)
-						: helper.createOperationCallExp(targetExp, "=", source2targetExp);
-					Predicate asPredicate = helper.createPredicate(matchesExp);
-					addPredicate(asPredicate);
+			if (!sourceNode.isInternal()) {
+				Node targetNode = untraversedEdge.getTarget();
+				Property property = untraversedEdge.getProperty();
+				OCLExpression sourceExp = createVariableExp(sourceNode);
+				OCLExpression targetExp = createVariableExp(targetNode);
+				OCLExpression source2targetExp = createCallExp(sourceExp, property);
+				OCLExpression matchesExp;
+				if (targetNode.isExplicitNull()) {
+					matchesExp = helper.createOperationCallExp(source2targetExp, "=", targetExp);
+				}
+				else {
+					matchesExp = helper.createOperationCallExp(targetExp, "=", source2targetExp);
+				}
+				Predicate asPredicate = helper.createPredicate(matchesExp);
+				addPredicate(asPredicate);
+			}
 		}
 		/*		Set<@NonNull Node> reachableNodes = new HashSet<>(guardNodes);
 		List<@NonNull Node> sourcesList = new ArrayList<>(guardNodes);
