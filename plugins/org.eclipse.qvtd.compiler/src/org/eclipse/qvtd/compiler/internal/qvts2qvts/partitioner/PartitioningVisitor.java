@@ -18,18 +18,16 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.AbstractVisitor;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.BasicEdge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Edge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.EdgeRole;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.MappingRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.MicroMappingRegion;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NavigationEdge;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NavigableEdge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NodeRole;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RegionUtil;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.TypedNode;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.VariableNode;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Visitable;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.VariableNodeImpl;
 
 /**
  * The PartitioningVisitor performs the selective clone of a region, selecting and possibly reclassifying
@@ -85,23 +83,23 @@ class PartitioningVisitor extends AbstractVisitor<@Nullable Visitable>
 	}
 
 	@Override
-	public @Nullable Edge visitBasicEdge(@NonNull BasicEdge basicEdge) {
-		if (basicEdge.isSecondary()) {
+	public @Nullable Edge visitEdge(@NonNull Edge edge) {
+		if (edge.isSecondary()) {
 			return null;
 		}
-		Node partialSourceNode = oldNode2partialNode.get(basicEdge.getSource());
+		Node partialSourceNode = oldNode2partialNode.get(edge.getSource());
 		if (partialSourceNode == null) {
 			return null;
 		}
-		Node partialTargetNode = oldNode2partialNode.get(basicEdge.getTarget());
+		Node partialTargetNode = oldNode2partialNode.get(edge.getTarget());
 		if (partialTargetNode == null) {
 			return null;
 		}
-		EdgeRole edgeRole = partition.getEdgeRole(basicEdge);
+		EdgeRole edgeRole = partition.getEdgeRole(edge);
 		if (edgeRole == null) {
 			return null;
 		}
-		return basicEdge.createEdge(edgeRole, partialSourceNode, partialTargetNode);
+		return edge.createEdge(edgeRole, partialSourceNode, partialTargetNode);
 	}
 
 	@Override
@@ -127,59 +125,59 @@ class PartitioningVisitor extends AbstractVisitor<@Nullable Visitable>
 	}
 
 	@Override
-	public @Nullable NavigationEdge visitNavigationEdge(@NonNull NavigationEdge navigationEdge) {
-		if (navigationEdge.isSecondary()) {
+	public @Nullable NavigableEdge visitNavigableEdge(@NonNull NavigableEdge navigableEdge) {
+		if (navigableEdge.isSecondary()) {
 			return null;
 		}
-		Node partialSourceNode = oldNode2partialNode.get(navigationEdge.getSource());
+		Node partialSourceNode = oldNode2partialNode.get(navigableEdge.getSource());
 		if (partialSourceNode == null) {
 			return null;
 		}
-		Node partialTargetNode = oldNode2partialNode.get(navigationEdge.getTarget());
+		Node partialTargetNode = oldNode2partialNode.get(navigableEdge.getTarget());
 		if (partialTargetNode == null) {
 			return null;
 		}
-		EdgeRole edgeRole = partition.getEdgeRole(navigationEdge);
+		EdgeRole edgeRole = partition.getEdgeRole(navigableEdge);
 		if (edgeRole == null) {
 			return null;
 		}
-		return navigationEdge.createEdge(edgeRole, partialSourceNode, partialTargetNode);
+		return navigableEdge.createEdge(edgeRole, partialSourceNode, partialTargetNode);
 	}
 
 	@Override
-	public @Nullable Node visitTypedNode(@NonNull TypedNode typedNode) {
-		NodeRole nodeRole = partition.getNodeRole(typedNode);
+	public @Nullable Node visitNode(@NonNull Node node) {
+		NodeRole nodeRole = partition.getNodeRole(node);
 		if (nodeRole == null) {
 			return null;
 		}
 		Node partialNode = null;
-		if (typedNode.isOperation()) {
+		if (node.isOperation()) {
 			//
 			//	An operation result that is cached in the middle trace by a speculation partition
 			//	must be converted to a step node when re-accessed by a speculated partition.
 			//
-			for (@NonNull Edge edge : typedNode.getIncomingEdges()) {
+			for (@NonNull Edge edge : node.getIncomingEdges()) {
 				if (edge.isNavigation() && edge.isRealized()) {
 					EdgeRole edgeRole = partition.getEdgeRole(edge);
 					if ((edgeRole != null) && edgeRole.isPredicated()) {
-						partialNode = RegionUtil.createStepNode(partialRegion, typedNode, typedNode.isMatched());
+						partialNode = RegionUtil.createStepNode(partialRegion, node, node.isMatched());
 						break;
 					}
 				}
 			}
 		}
 		if (partialNode == null) {
-			partialNode = typedNode.createNode(nodeRole, partialRegion);
+			partialNode = node.createNode(nodeRole, partialRegion);
 		}
-		oldNode2partialNode.put(typedNode, partialNode);
-		for (@NonNull TypedElement typedElement : typedNode.getTypedElements()) {
+		oldNode2partialNode.put(node, partialNode);
+		for (@NonNull TypedElement typedElement : node.getTypedElements()) {
 			partialNode.addTypedElement(typedElement);
 		}
 		return partialNode;
 	}
 
 	@Override
-	public @Nullable Node visitVariableNode(@NonNull VariableNode variableNode) {
+	public @Nullable Node visitVariableNode(@NonNull VariableNodeImpl variableNode) {
 		NodeRole nodeRole = partition.getNodeRole(variableNode);
 		if (nodeRole == null) {
 			return null;

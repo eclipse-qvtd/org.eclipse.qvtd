@@ -8,15 +8,16 @@
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
-package org.eclipse.qvtd.compiler.internal.qvtp2qvts;
+package org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Role;
 
-public abstract class AbstractRole implements Role
+public abstract class AbstractRoleImpl implements Role
 {
 	protected final Role.@NonNull Phase phase;
 
-	protected AbstractRole(@NonNull Phase phase) {
+	protected AbstractRoleImpl(@NonNull Phase phase) {
 		this.phase = phase;
 	}
 

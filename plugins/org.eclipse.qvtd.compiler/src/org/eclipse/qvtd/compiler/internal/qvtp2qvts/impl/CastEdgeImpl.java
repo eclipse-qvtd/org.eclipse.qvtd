@@ -12,12 +12,11 @@ package org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Property;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.BasicNavigationEdge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.EdgeRole;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NavigationEdge;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NavigableEdge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
 
-public class CastEdgeImpl extends BasicNavigationEdge
+public class CastEdgeImpl extends NavigableEdgeImpl
 {
 	private static @NonNull CastEdgeImpl create(@NonNull EdgeRole edgeRole, @NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
 		CastEdgeImpl edge = new CastEdgeImpl();
@@ -29,7 +28,7 @@ public class CastEdgeImpl extends BasicNavigationEdge
 	 * Create, install and return the edgeRole edge for source2targetProperty from sourceNode to targetNode. If
 	 * source2targetProperty has an opposite, the opposite edge is also created and installed.
 	 */
-	public static @NonNull NavigationEdge createEdge(@NonNull EdgeRole edgeRole,
+	public static @NonNull NavigableEdge createEdge(@NonNull EdgeRole edgeRole,
 			@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
 		CastEdgeImpl forwardEdge = create(edgeRole, sourceNode, source2targetProperty, targetNode);
 		Property target2sourceProperty = source2targetProperty.getOpposite();
@@ -44,7 +43,7 @@ public class CastEdgeImpl extends BasicNavigationEdge
 	}
 
 	@Override
-	public @NonNull NavigationEdge createEdge(@NonNull EdgeRole edgeRole, @NonNull Node sourceNode, @NonNull Node targetNode) {
+	public @NonNull NavigableEdge createEdge(@NonNull EdgeRole edgeRole, @NonNull Node sourceNode, @NonNull Node targetNode) {
 		return createEdge(edgeRole, sourceNode, getProperty(), targetNode);
 	}
 

@@ -14,7 +14,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Edge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.EdgeRole;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NavigationEdge;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NavigableEdge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NodeRole;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Role;
@@ -26,9 +26,9 @@ import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.EdgeRoleImpl;
  */
 class AssignmentPartition extends AbstractPartition
 {
-	protected final @NonNull NavigationEdge realizedEdge;
+	protected final @NonNull NavigableEdge realizedEdge;
 
-	public AssignmentPartition(@NonNull Partitioner partitioner, @NonNull NavigationEdge realizedEdge) {
+	public AssignmentPartition(@NonNull Partitioner partitioner, @NonNull NavigableEdge realizedEdge) {
 		super(partitioner);
 		this.realizedEdge = realizedEdge;
 		//
@@ -61,7 +61,7 @@ class AssignmentPartition extends AbstractPartition
 				gatherSourceNavigations(sourceNode);
 			}
 			if (!hasPredecessor && targetNode.isPredicated()) {			// Must be the wrong end of a 1:N navigation
-				for (@NonNull NavigationEdge edge : targetNode.getNavigationEdges()) {
+				for (@NonNull NavigableEdge edge : targetNode.getNavigationEdges()) {
 					if (edge.isPredicated() && (edge.getOppositeEdge() == null)) {
 						Node nonUnitSourceNode = edge.getTarget();
 						gatherSourceNavigations(nonUnitSourceNode);

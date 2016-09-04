@@ -8,19 +8,22 @@
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
-package org.eclipse.qvtd.compiler.internal.qvtp2qvts;
+package org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NodeRole;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Visitor;
 
 /**
  * VariableNode provides the non-terminal analysis and status of a Variable from which navigations
  * are possible. The analysis is associated with a particular sourceVariable from which a variety of further node analyses
  * are reachable by traversing some Property.
  */
-public abstract class VariableNode extends AbstractNode
+public abstract class VariableNodeImpl extends NodeImpl
 {
 	private @Nullable VariableDeclaration variable;			// null is only permitted during construction
 
@@ -44,6 +47,6 @@ public abstract class VariableNode extends AbstractNode
 
 	@Override
 	public @NonNull String toString() {
-		return getNodeRole().toString() + "(" + (variable != null ? variable.toString() : getName()) + ")";
+		return getNodeRole().getPhase() + "-" + getClass().getSimpleName().replace("Impl",  "") + "(" + (variable != null ? variable.toString() : getName()) + ")";
 	}
 }

@@ -16,7 +16,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Edge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.EdgeRole;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NavigationEdge;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NavigableEdge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NodeRole;
 
@@ -38,7 +38,7 @@ class SpeculationPartition extends AbstractPartition
 			if (node.isPattern() && node.isClass()) {		// FIXME UML2RDBMS experiment
 				NodeRole speculationNodeRole = node.getNodeRole().asSpeculation();
 				addNode(node, speculationNodeRole);
-				for (@NonNull NavigationEdge edge : node.getNavigationEdges()) {
+				for (@NonNull NavigableEdge edge : node.getNavigationEdges()) {
 					addReachableConstantOrLoadedNodes(edge.getTarget());
 				}
 			}
@@ -64,7 +64,7 @@ class SpeculationPartition extends AbstractPartition
 		if (/*node.isMatched() &&*/ (node.isConstant() || node.isLoaded())) {
 			if (!hasNode(node)) {
 				addNode(node, node.getNodeRole());
-				for (@NonNull NavigationEdge edge : node.getNavigationEdges()) {
+				for (@NonNull NavigableEdge edge : node.getNavigationEdges()) {
 					if (edge.isConstant() || edge.isLoaded()) {
 						addReachableConstantOrLoadedNodes(edge.getTarget());
 					}

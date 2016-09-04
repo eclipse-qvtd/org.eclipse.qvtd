@@ -8,7 +8,7 @@
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
-package org.eclipse.qvtd.compiler.internal.qvtp2qvts;
+package org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,12 +17,18 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.EdgeConnection;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.EdgeRole;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NavigableEdge;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.SchedulerConstants;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Visitor;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphStringBuilder.GraphNode;
 
 import com.google.common.collect.Iterables;
 
-public abstract class BasicNavigationEdge extends AbstractEdge implements NavigationEdge
+public abstract class NavigableEdgeImpl extends EdgeImpl implements NavigableEdge
 {
 
 	private @Nullable Property source2targetProperty = null;		// null is only permitted during construction
@@ -31,7 +37,7 @@ public abstract class BasicNavigationEdge extends AbstractEdge implements Naviga
 	/**
 	 * Non-null if this edge is part of a bidirectional pair.
 	 */
-	private @Nullable NavigationEdge oppositeEdge = null;
+	private @Nullable NavigableEdge oppositeEdge = null;
 
 	/**
 	 * True if this edge is the auto-created second half of a bidirectional pair.
@@ -43,7 +49,7 @@ public abstract class BasicNavigationEdge extends AbstractEdge implements Naviga
 
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return visitor.visitNavigationEdge(this);
+		return visitor.visitNavigableEdge(this);
 	}
 
 	@Override
@@ -72,7 +78,7 @@ public abstract class BasicNavigationEdge extends AbstractEdge implements Naviga
 	public void appendEdgeAttributes(@NonNull GraphStringBuilder s, @NonNull GraphNode source, @NonNull GraphNode target) {
 		s.setColor(getColor());
 		@Nullable
-		NavigationEdge oppositeEdge2 = oppositeEdge;
+		NavigableEdge oppositeEdge2 = oppositeEdge;
 		if (oppositeEdge2 != null) {
 			String oppositeLabel = oppositeEdge2.getLabel();
 			if ((oppositeLabel != null) && !oppositeEdge2.getProperty().getName().equals(((Node)source).getClassDatumAnalysis().getCompleteClass().getName())) {
@@ -98,7 +104,7 @@ public abstract class BasicNavigationEdge extends AbstractEdge implements Naviga
 
 	@Override
 	public void destroy() {
-		NavigationEdge oppositeEdge = this.oppositeEdge;
+		NavigableEdge oppositeEdge = this.oppositeEdge;
 		if (oppositeEdge != null) {
 			this.oppositeEdge = null;
 			oppositeEdge.destroy();
@@ -126,7 +132,7 @@ public abstract class BasicNavigationEdge extends AbstractEdge implements Naviga
 	}
 
 	@Override
-	public @NonNull NavigationEdge getForwardEdge() {
+	public @NonNull NavigableEdge getForwardEdge() {
 		if (isSecondary) {
 			assert oppositeEdge != null;
 			return oppositeEdge;
@@ -158,7 +164,7 @@ public abstract class BasicNavigationEdge extends AbstractEdge implements Naviga
 	}
 
 	@Override
-	public @Nullable NavigationEdge getOppositeEdge() {
+	public @Nullable NavigableEdge getOppositeEdge() {
 		return oppositeEdge;
 	}
 
@@ -177,7 +183,7 @@ public abstract class BasicNavigationEdge extends AbstractEdge implements Naviga
 		setProperty(source2targetProperty);
 	}
 
-	protected void initializeOpposite(@NonNull BasicNavigationEdge oppositeEdge) {
+	protected void initializeOpposite(@NonNull NavigableEdgeImpl oppositeEdge) {
 		this.oppositeEdge = oppositeEdge;
 		oppositeEdge.oppositeEdge = this;
 		if (this.getProperty().isIsImplicit()) {

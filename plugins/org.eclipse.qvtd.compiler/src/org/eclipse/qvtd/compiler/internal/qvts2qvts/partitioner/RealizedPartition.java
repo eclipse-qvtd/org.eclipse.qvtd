@@ -14,7 +14,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Edge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.EdgeRole;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NavigationEdge;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NavigableEdge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NodeRole;
 
@@ -41,7 +41,7 @@ class RealizedPartition extends AbstractPartition
 		//
 		for (@NonNull Node node : Iterables.concat(realizedMiddleNodes, realizedOutputNodes)) {
 			gatherSourceNavigations(node, node.getNodeRole());
-			for (@NonNull NavigationEdge navigationEdge : node.getNavigationEdges()) {
+			for (@NonNull NavigableEdge navigationEdge : node.getNavigationEdges()) {
 				if (navigationEdge.isRealized()) {
 					Node targetNode = navigationEdge.getTarget();
 					NodeRole targetNodeRole = targetNode.getNodeRole();
@@ -70,7 +70,7 @@ class RealizedPartition extends AbstractPartition
 	 * odd-valls such as Null nodes.
 	 */
 	protected void addLoadedNavigationEdgeSourceAndTargetNodes() {
-		for (@NonNull NavigationEdge edge : partitioner.getRegion().getNavigationEdges()) {
+		for (@NonNull NavigableEdge edge : partitioner.getRegion().getNavigationEdges()) {
 			if (edge.isLoaded()) {
 				Node sourceNode = edge.getSource();
 				Node targetNode = edge.getTarget();

@@ -8,18 +8,25 @@
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
-package org.eclipse.qvtd.compiler.internal.qvtp2qvts;
+package org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Edge;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.EdgeRole;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RegionUtil;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Role;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Visitor;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphStringBuilder.GraphNode;
 
 /**
  * AbstractEdge.
  */
-public abstract class AbstractEdge implements Edge
+public abstract class EdgeImpl implements Edge
 {
 	private @Nullable EdgeRole edgeRole = null;		// null is only permitted during construction
 	private @Nullable Node sourceNode = null;		// null is only permitted during construction
@@ -292,6 +299,11 @@ public abstract class AbstractEdge implements Edge
 		return false;
 	}
 
+	@Override
+	public boolean isSecondary() {
+		return false;
+	}
+
 	protected void mergeRole(@NonNull EdgeRole edgeRole) {
 		if (this.edgeRole != edgeRole) {
 			assert this.edgeRole != null;
@@ -354,7 +366,9 @@ public abstract class AbstractEdge implements Edge
 	@Override
 	public @NonNull String toString() {
 		StringBuilder s = new StringBuilder();
-		s.append(String.valueOf(edgeRole));
+		s.append(getEdgeRole().getPhase());
+		s.append("-");
+		s.append(getClass().getSimpleName().replace("Impl",  ""));
 		s.append("(");
 		s.append(String.valueOf(sourceNode));
 		s.append("=>");

@@ -120,7 +120,7 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 	/**
 	 * The Realized Edges that produce each PropertyDatum (or its opposite).
 	 */
-	private final @NonNull Map<@NonNull PropertyDatum, @NonNull List<@NonNull NavigationEdge>> producedPropertyDatum2realizedEdges = new HashMap<@NonNull PropertyDatum, @NonNull List<@NonNull NavigationEdge>>();
+	private final @NonNull Map<@NonNull PropertyDatum, @NonNull List<@NonNull NavigableEdge>> producedPropertyDatum2realizedEdges = new HashMap<@NonNull PropertyDatum, @NonNull List<@NonNull NavigableEdge>>();
 
 	private final @NonNull RootCompositionRegion rootContainmentRegion = new RootCompositionRegion(multiRegion);
 
@@ -240,7 +240,7 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 		nodes.add(introducedNode);
 	}
 
-	private void addProducedEdge(@NonNull NavigationEdge producedEdge) {
+	private void addProducedEdge(@NonNull NavigableEdge producedEdge) {
 		PropertyDatum propertyDatum = getPropertyDatum(producedEdge);
 		if (propertyDatum == null) {
 			propertyDatum = getPropertyDatum(producedEdge);		// FIXME debugging
@@ -248,10 +248,10 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 		assert propertyDatum != null;
 		addProducedEdge(producedEdge, propertyDatum);
 	}
-	private void addProducedEdge(@NonNull NavigationEdge producedEdge, @NonNull PropertyDatum propertyDatum) {
-		List<@NonNull NavigationEdge> edges = producedPropertyDatum2realizedEdges.get(propertyDatum);
+	private void addProducedEdge(@NonNull NavigableEdge producedEdge, @NonNull PropertyDatum propertyDatum) {
+		List<@NonNull NavigableEdge> edges = producedPropertyDatum2realizedEdges.get(propertyDatum);
 		if (edges == null) {
-			edges = new ArrayList<@NonNull NavigationEdge>();
+			edges = new ArrayList<@NonNull NavigableEdge>();
 			producedPropertyDatum2realizedEdges.put(propertyDatum, edges);
 		}
 		if (!edges.contains(producedEdge)) {
@@ -578,7 +578,7 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 					addProducedNode(assignedNode);
 				}
 			}
-			for (@NonNull NavigationEdge realizedNavigationEdge : region.getRealizedNavigationEdges()) {
+			for (@NonNull NavigableEdge realizedNavigationEdge : region.getRealizedNavigationEdges()) {
 				addProducedEdge(realizedNavigationEdge);
 			}
 		}
@@ -944,9 +944,9 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 	 * FIXME In the event that the ends of the realized edges are realized variables, we do know the precise
 	 * type and could filter accordingly; a not-yet-exploited optimisation.
 	 */
-	private @Nullable Iterable<@NonNull NavigationEdge> getCompositeRealizedEdges(@NonNull NavigationEdge predicatedEdge) {
-		Set<@NonNull NavigationEdge> realizedEdges = null;
-		for (Map.Entry<@NonNull PropertyDatum, @NonNull List<@NonNull NavigationEdge>> entry : producedPropertyDatum2realizedEdges.entrySet()) {
+	private @Nullable Iterable<@NonNull NavigableEdge> getCompositeRealizedEdges(@NonNull NavigableEdge predicatedEdge) {
+		Set<@NonNull NavigableEdge> realizedEdges = null;
+		for (Map.Entry<@NonNull PropertyDatum, @NonNull List<@NonNull NavigableEdge>> entry : producedPropertyDatum2realizedEdges.entrySet()) {
 			Property property = entry.getKey().getProperty();
 			if (property != null) {
 				@Nullable Property compositeProperty = null;
@@ -961,7 +961,7 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 				}
 				if (compositeProperty != null) {
 					if (realizedEdges == null) {
-						realizedEdges = new HashSet<@NonNull NavigationEdge>();
+						realizedEdges = new HashSet<@NonNull NavigableEdge>();
 					}
 					realizedEdges.addAll(entry.getValue());
 				}
@@ -1060,7 +1060,7 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 		return name;
 	}
 
-	protected @Nullable PropertyDatum getPropertyDatum(@NonNull NavigationEdge producedEdge) {
+	protected @Nullable PropertyDatum getPropertyDatum(@NonNull NavigableEdge producedEdge) {
 		assert !producedEdge.isCast();				// Handled by caller
 		Property property = producedEdge.getProperty();
 		ClassDatumAnalysis classDatumAnalysis = producedEdge.getSource().getClassDatumAnalysis();
@@ -1121,7 +1121,7 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 		return null;
 	}
 
-	public @Nullable Iterable<@NonNull NavigationEdge> getRealizedEdges(@NonNull NavigationEdge edge, @NonNull ClassDatumAnalysis requiredClassDatumAnalysis) {
+	public @Nullable Iterable<@NonNull NavigableEdge> getRealizedEdges(@NonNull NavigableEdge edge, @NonNull ClassDatumAnalysis requiredClassDatumAnalysis) {
 		Property property = edge.getProperty();
 		if (property.eContainer() == null) {			// Ignore pseudo-properties such as «iterate»
 			return null;
@@ -1134,18 +1134,18 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 			propertyDatum = getPropertyDatum(edge);				// FIXME debugging
 		}
 		assert propertyDatum != null;
-		Iterable<@NonNull NavigationEdge> realizedEdges = producedPropertyDatum2realizedEdges.get(propertyDatum);
+		Iterable<@NonNull NavigableEdge> realizedEdges = producedPropertyDatum2realizedEdges.get(propertyDatum);
 		if (realizedEdges == null) {
 			return null;
 		}
 		CompleteClass requiredClass = requiredClassDatumAnalysis.getCompleteClass();
-		List<@NonNull NavigationEdge> conformantRealizedEdges = null;
-		for (@NonNull NavigationEdge realizedEdge : realizedEdges) {
+		List<@NonNull NavigableEdge> conformantRealizedEdges = null;
+		for (@NonNull NavigableEdge realizedEdge : realizedEdges) {
 			Node targetNode = realizedEdge.getTarget();
 			CompleteClass realizedClass = targetNode.getCompleteClass();
 			if (realizedClass.conformsTo(requiredClass) /*|| realizedClass.conformsTo(requiredClass.getBehavioralClass())*/) {
 				if (conformantRealizedEdges == null) {
-					conformantRealizedEdges = new ArrayList<@NonNull NavigationEdge>();
+					conformantRealizedEdges = new ArrayList<@NonNull NavigableEdge>();
 				}
 				conformantRealizedEdges.add(realizedEdge);
 			}

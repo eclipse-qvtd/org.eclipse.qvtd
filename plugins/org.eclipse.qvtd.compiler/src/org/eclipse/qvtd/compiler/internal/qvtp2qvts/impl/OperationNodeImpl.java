@@ -12,11 +12,11 @@ package org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.ClassDatumAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NodeRole;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.TypedNode;
 
-public class OperationNodeImpl extends TypedNode
+public class OperationNodeImpl extends NodeImpl
 {
 	public static @NonNull OperationNodeImpl create(@NonNull NodeRole nodeRole, @NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis, boolean isMatched) {
 		OperationNodeImpl node = new OperationNodeImpl();
@@ -28,7 +28,7 @@ public class OperationNodeImpl extends TypedNode
 	private boolean isMatched;
 
 	@Override
-	public @NonNull TypedNode createNode(@NonNull NodeRole nodeRole, @NonNull Region region) {
+	public @NonNull Node createNode(@NonNull NodeRole nodeRole, @NonNull Region region) {
 		return create(nodeRole, region, getName(), getClassDatumAnalysis(), isMatched);
 	}
 

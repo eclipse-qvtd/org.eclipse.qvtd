@@ -16,7 +16,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
 
-public interface NavigationEdge extends Edge, ConnectionEnd
+public interface NavigableEdge extends Edge, ConnectionEnd
 {
 	void addIncomingConnection(@NonNull EdgeConnection edgeConnection);
 	void addOutgoingConnection(@NonNull EdgeConnection edgeConnection);
@@ -25,17 +25,17 @@ public interface NavigationEdge extends Edge, ConnectionEnd
 	 * Create an edgeRole edge from sourceNode to targetNode with the same property as this edge.	 * @param edgeRole
 	 */
 	@Override
-	@NonNull NavigationEdge createEdge(@NonNull EdgeRole edgeRole, @NonNull Node sourceNode, @NonNull Node targetNode);
+	@NonNull NavigableEdge createEdge(@NonNull EdgeRole edgeRole, @NonNull Node sourceNode, @NonNull Node targetNode);
 
 	@Override
-	@NonNull NavigationEdge getForwardEdge();
+	@NonNull NavigableEdge getForwardEdge();
 
 	@Nullable EdgeConnection getIncomingConnection();
 
 	/**
 	 * Return the other edge in a pair of bidirectionally to-one edges, or null if unidirectional.
 	 */
-	@Nullable NavigationEdge getOppositeEdge();
+	@Nullable NavigableEdge getOppositeEdge();
 
 	@NonNull List<@NonNull EdgeConnection> getOutgoingConnections();
 

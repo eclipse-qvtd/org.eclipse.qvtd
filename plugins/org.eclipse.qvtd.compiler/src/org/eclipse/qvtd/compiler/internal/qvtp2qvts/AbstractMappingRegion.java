@@ -114,7 +114,7 @@ public abstract class AbstractMappingRegion extends AbstractRegion implements Ma
 			Integer implicity = node2implicity2.get(node);
 			if (implicity == null) {
 				implicity = 0;
-				for (@NonNull NavigationEdge e : node.getNavigationEdges()) {
+				for (@NonNull NavigableEdge e : node.getNavigationEdges()) {
 					if (e.getProperty().isIsImplicit()) {
 						implicity++;
 					}
@@ -271,7 +271,7 @@ public abstract class AbstractMappingRegion extends AbstractRegion implements Ma
 		//
 		Set<@NonNull Node> debugHeadNodes = new HashSet<>();
 		for (@NonNull Node node : getNodes()) {
-			if (node.isTrue() || node.isExtraGuardVariable()) {
+			if (node.isTrue() || node.isExtraGuard()) {
 				debugHeadNodes.add(node);
 				node.setHead();
 				assert !headNodes.contains(node);

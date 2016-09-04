@@ -21,6 +21,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.TypedElement;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.VariableNodeImpl;
 
 public class RegionMerger extends AbstractVisitor<@Nullable Visitable>
 {
@@ -115,11 +116,11 @@ public class RegionMerger extends AbstractVisitor<@Nullable Visitable>
 	}
 
 	private boolean sameEdge(@NonNull Edge newEdge, @NonNull Iterable<@NonNull Edge> oldEdges) {
-		if (newEdge instanceof NavigationEdge) {
-			Property newProperty = ((NavigationEdge)newEdge).getProperty();
+		if (newEdge instanceof NavigableEdge) {
+			Property newProperty = ((NavigableEdge)newEdge).getProperty();
 			for (@NonNull Edge oldEdge : oldEdges) {
-				if (oldEdge instanceof NavigationEdge) {
-					Property oldProperty = ((NavigationEdge)oldEdge).getProperty();
+				if (oldEdge instanceof NavigableEdge) {
+					Property oldProperty = ((NavigableEdge)oldEdge).getProperty();
 					if (oldProperty == newProperty) {
 						return true;
 					}
@@ -139,19 +140,19 @@ public class RegionMerger extends AbstractVisitor<@Nullable Visitable>
 	}
 
 	@Override
-	public @NonNull Visitable visitBasicEdge(@NonNull BasicEdge basicEdge) {
-		Node mergedSourceNode = oldNode2mergedNode.get(basicEdge.getSource());
-		Node mergedTargetNode = oldNode2mergedNode.get(basicEdge.getTarget());
+	public @NonNull Visitable visitEdge(@NonNull Edge edge) {
+		Node mergedSourceNode = oldNode2mergedNode.get(edge.getSource());
+		Node mergedTargetNode = oldNode2mergedNode.get(edge.getTarget());
 		assert (mergedSourceNode != null) && (mergedTargetNode != null);
 		EdgeRole edgeRole = null;
-		List<@NonNull Edge> oldEdges = oldEdge2oldEdges.get(basicEdge);
+		List<@NonNull Edge> oldEdges = oldEdge2oldEdges.get(edge);
 		assert oldEdges != null;
 		for (@NonNull Edge oldEdge : oldEdges) {
 			EdgeRole edgeRole2 = oldEdge.getEdgeRole();
 			edgeRole = edgeRole != null ? RegionUtil.mergeToMoreKnownPhase(edgeRole, edgeRole2) : edgeRole2;
 		}
 		assert edgeRole != null;
-		return basicEdge.createEdge(edgeRole, mergedSourceNode, mergedTargetNode);
+		return edge.createEdge(edgeRole, mergedSourceNode, mergedTargetNode);
 	}
 
 	@Override
@@ -192,7 +193,7 @@ public class RegionMerger extends AbstractVisitor<@Nullable Visitable>
 	}
 
 	@Override
-	public @Nullable Visitable visitNavigationEdge(@NonNull NavigationEdge navigationEdge) {
+	public @Nullable Visitable visitNavigableEdge(@NonNull NavigableEdge navigationEdge) {
 		if (navigationEdge.isSecondary()) {
 			return null;
 		}
@@ -211,15 +212,15 @@ public class RegionMerger extends AbstractVisitor<@Nullable Visitable>
 	}
 
 	@Override
-	public @NonNull Node visitTypedNode(@NonNull TypedNode typedNode) {
-		NodeRole nodeRole = typedNode.getNodeRole();
-		Node primaryNode = secondaryNode2primaryNode.get(typedNode);
+	public @NonNull Node visitNode(@NonNull Node node) {
+		NodeRole nodeRole = node.getNodeRole();
+		Node primaryNode = secondaryNode2primaryNode.get(node);
 		if (primaryNode != null) {
 			nodeRole = nodeRole.merge(primaryNode.getNodeRole());
 		}
-		Node mergedNode = typedNode.createNode(nodeRole, mergedRegion);
-		oldNode2mergedNode.put(typedNode, mergedNode);
-		for (@NonNull TypedElement typedElement : typedNode.getTypedElements()) {
+		Node mergedNode = node.createNode(nodeRole, mergedRegion);
+		oldNode2mergedNode.put(node, mergedNode);
+		for (@NonNull TypedElement typedElement : node.getTypedElements()) {
 			mergedNode.addTypedElement(typedElement);
 		}
 		if (primaryNode != null) {
@@ -232,7 +233,7 @@ public class RegionMerger extends AbstractVisitor<@Nullable Visitable>
 	}
 
 	@Override
-	public @NonNull Node visitVariableNode(@NonNull VariableNode variableNode) {
+	public @NonNull Node visitVariableNode(@NonNull VariableNodeImpl variableNode) {
 		NodeRole nodeRole = variableNode.getNodeRole();
 		Node primaryNode = secondaryNode2primaryNode.get(variableNode);
 		if (primaryNode != null) {

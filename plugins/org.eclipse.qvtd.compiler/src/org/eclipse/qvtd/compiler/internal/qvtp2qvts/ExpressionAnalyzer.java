@@ -83,7 +83,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 		}
 
 		@Override
-		protected @NonNull NavigationEdge createNavigationEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
+		protected @NonNull NavigableEdge createNavigationEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
 			return RegionUtil.createNavigationEdge(sourceNode, source2targetProperty, targetNode);
 		}
 
@@ -134,7 +134,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 			sourceNode.addTypedElement(operationCallExp);
 			return sourceNode;											// Skip cast if already conformant, typically a redundant cast daisy chain
 		}
-		for (@NonNull NavigationEdge castEdge : sourceNode.getCastEdges()) {
+		for (@NonNull NavigableEdge castEdge : sourceNode.getCastEdges()) {
 			Node targetNode = castEdge.getTarget();
 			predicatedClass = targetNode.getCompleteClass();
 			if (predicatedClass.conformsTo(requiredClass)) {
@@ -285,7 +285,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 		return operationNode;
 	}
 
-	protected @NonNull NavigationEdge createCastEdge(@NonNull Node sourceNode, @NonNull Property castProperty, @NonNull Node castNode) {
+	protected @NonNull NavigableEdge createCastEdge(@NonNull Node sourceNode, @NonNull Property castProperty, @NonNull Node castNode) {
 		return RegionUtil.createCastEdge(sourceNode, castProperty, castNode);
 	}
 
@@ -322,16 +322,16 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 		return RegionUtil.createDataTypeNode(sourceNode, source2targetProperty);
 	}
 
-	protected @NonNull NavigationEdge createNavigableNavigationEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
+	protected @NonNull NavigableEdge createNavigableNavigationEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
 		return RegionUtil.createNavigationEdge(sourceNode, source2targetProperty, targetNode);
 	}
 
-	protected @NonNull NavigationEdge createNavigationEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
+	protected @NonNull NavigableEdge createNavigationEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
 		return RegionUtil.createNavigationEdge(sourceNode, source2targetProperty, targetNode);
 	}
 
-	protected @NonNull NavigationEdge createNavigationOrRealizedEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode, @Nullable NavigationAssignment navigationAssignment) {
-		NavigationEdge navigationEdge = sourceNode.getNavigationEdge(source2targetProperty);
+	protected @NonNull NavigableEdge createNavigationOrRealizedEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode, @Nullable NavigationAssignment navigationAssignment) {
+		NavigableEdge navigationEdge = sourceNode.getNavigationEdge(source2targetProperty);
 		assert navigationEdge == null;
 		if ((navigationAssignment != null) || context.isPropertyAssignment(sourceNode, source2targetProperty)) {
 			navigationEdge = createRealizedNavigationEdge(sourceNode, source2targetProperty, targetNode);
@@ -370,7 +370,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 		return RegionUtil.createRealizedExpressionEdge(sourceNode, name, targetNode);
 	}
 
-	protected @NonNull NavigationEdge createRealizedNavigationEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
+	protected @NonNull NavigableEdge createRealizedNavigationEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
 		return RegionUtil.createRealizedNavigationEdge(sourceNode, source2targetProperty, targetNode);
 	}
 
@@ -424,7 +424,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 	 * Return the navigation edge suitable for navigating from sourceNode to targetNode via source2targetProperty,
 	 * re-using an already created edge if available, otherwise creating the edge.
 	 */
-	protected @NonNull NavigationEdge getNavigationEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode, @Nullable NavigationAssignment navigationAssignment) {
+	protected @NonNull NavigableEdge getNavigationEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode, @Nullable NavigationAssignment navigationAssignment) {
 		if (targetNode.isExplicitNull()) {
 			return getNavigationEdgeToNull(sourceNode, source2targetProperty, targetNode, navigationAssignment);
 		}
@@ -439,11 +439,11 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 		}
 	}
 
-	protected @NonNull NavigationEdge getNavigationEdgeToDataType(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode, @Nullable NavigationAssignment navigationAssignment) {
+	protected @NonNull NavigableEdge getNavigationEdgeToDataType(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode, @Nullable NavigationAssignment navigationAssignment) {
 		assert targetNode.isDataType();
 		Type type = source2targetProperty.getType();
 		assert type instanceof DataType;
-		NavigationEdge navigationEdge = sourceNode.getNavigationEdge(source2targetProperty);
+		NavigableEdge navigationEdge = sourceNode.getNavigationEdge(source2targetProperty);
 		if (navigationEdge == null) {
 			if (!targetNode.isOperation()) {
 				navigationEdge = createNavigationOrRealizedEdge(sourceNode, source2targetProperty, targetNode, navigationAssignment);
@@ -477,9 +477,9 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 		return navigationEdge;
 	}
 
-	protected @NonNull NavigationEdge getNavigationEdgeToClass(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode, @Nullable NavigationAssignment navigationAssignment) {
+	protected @NonNull NavigableEdge getNavigationEdgeToClass(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode, @Nullable NavigationAssignment navigationAssignment) {
 		assert targetNode.isClass();
-		NavigationEdge navigationEdge = sourceNode.getNavigationEdge(source2targetProperty);
+		NavigableEdge navigationEdge = sourceNode.getNavigationEdge(source2targetProperty);
 		if (navigationEdge != null) {
 			Node target = navigationEdge.getTarget();
 			if (target != targetNode) {
@@ -498,10 +498,10 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 		return navigationEdge;
 	}
 
-	protected @NonNull NavigationEdge getNavigationEdgeToExpression(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode, @Nullable NavigationAssignment navigationAssignment) {
+	protected @NonNull NavigableEdge getNavigationEdgeToExpression(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode, @Nullable NavigationAssignment navigationAssignment) {
 		assert targetNode.isExpression();
 		if (navigationAssignment != null) {
-			NavigationEdge navigationEdge = sourceNode.getNavigationEdge(source2targetProperty);
+			NavigableEdge navigationEdge = sourceNode.getNavigationEdge(source2targetProperty);
 			assert navigationEdge == null;
 			//			Node valueNode = navigationEdge.getTarget();
 			//			assert valueNode.isRealized();
@@ -520,7 +520,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 			return navigationEdge;
 		}
 		else {
-			NavigationEdge navigationEdge = sourceNode.getNavigationEdge(source2targetProperty);
+			NavigableEdge navigationEdge = sourceNode.getNavigationEdge(source2targetProperty);
 			assert navigationEdge != null;
 			Node valueNode = navigationEdge.getTarget();
 			assert valueNode.isRealized();
@@ -535,13 +535,13 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 		}
 	}
 
-	protected @NonNull NavigationEdge getNavigationEdgeToNull(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode, @Nullable NavigationAssignment navigationAssignment) {
+	protected @NonNull NavigableEdge getNavigationEdgeToNull(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode, @Nullable NavigationAssignment navigationAssignment) {
 		assert targetNode.isExplicitNull();
 		return createNavigationOrRealizedEdge(sourceNode, source2targetProperty, targetNode, navigationAssignment);
 	}
 
 	private void instantiate(@NonNull Node instantiatedNode, @NonNull Node extraNode) {
-		for (@NonNull NavigationEdge extraEdge : extraNode.getNavigationEdges()) {
+		for (@NonNull NavigableEdge extraEdge : extraNode.getNavigationEdges()) {
 			if (!extraEdge.isSecondary()) {
 				Node extraTargetNode = extraEdge.getTarget();
 				String name = extraTargetNode.getName();
@@ -709,7 +709,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 			PivotUtil.rewriteSafeNavigations(environmentFactory, value);
 		}
 		Node targetNode = analyze(value);
-		NavigationEdge navigationEdge = getNavigationEdge(slotNode, property, targetNode, asNavigationAssignment);
+		NavigableEdge navigationEdge = getNavigationEdge(slotNode, property, targetNode, asNavigationAssignment);
 		Node valueNode = navigationEdge.getTarget();
 		CompleteClass valueCompleteClass = valueNode.getCompleteClass();
 		Type propertyType = ClassUtil.nonNullState(property.getType());
@@ -735,7 +735,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 		Node sourceNode = analyze(ownedSource);
 		if (sourceNode.isClass()) {
 			if (!referredProperty.isIsMany()) {
-				NavigationEdge navigationEdge = sourceNode.getNavigationEdge(referredProperty);
+				NavigableEdge navigationEdge = sourceNode.getNavigationEdge(referredProperty);
 				if (navigationEdge != null) {
 					return navigationEdge.getTarget();
 				}

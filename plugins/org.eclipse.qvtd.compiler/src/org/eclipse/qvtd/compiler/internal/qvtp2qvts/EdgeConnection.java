@@ -21,12 +21,12 @@ import org.eclipse.ocl.pivot.Property;
  */
 public interface EdgeConnection extends DatumConnection
 {
-	void addUsedTargetEdge(@NonNull NavigationEdge targetEdge, boolean mustBeLater);
+	void addUsedTargetEdge(@NonNull NavigableEdge targetEdge, boolean mustBeLater);
 	@NonNull Property getProperty();
 	@Override
-	@NonNull Iterable<@NonNull NavigationEdge> getSources();
-	@NonNull ConnectionRole getConnectionRole(@NonNull NavigationEdge targetEdge);
-	@NonNull Iterable<@NonNull NavigationEdge> getTargetEdges();
+	@NonNull Iterable<@NonNull NavigableEdge> getSources();
+	@NonNull ConnectionRole getConnectionRole(@NonNull NavigableEdge targetEdge);
+	@NonNull Iterable<@NonNull NavigableEdge> getTargetEdges();
 	@Override
-	@NonNull Map<@NonNull NavigationEdge, @NonNull ConnectionRole> getTargets();
+	@NonNull Map<@NonNull NavigableEdge, @NonNull ConnectionRole> getTargets();
 }

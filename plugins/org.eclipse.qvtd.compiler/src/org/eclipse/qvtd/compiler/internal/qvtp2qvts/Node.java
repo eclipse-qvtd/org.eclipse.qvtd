@@ -46,8 +46,8 @@ public interface Node extends ConnectionEnd, GraphStringBuilder.GraphNode, Namea
 	void getAllAncestors(@NonNull Set<@NonNull Node> ancestors);
 	@NonNull Iterable<@NonNull Edge> getArgumentEdges();
 	@Nullable Edge getAssignmentEdge(@NonNull Property source2targetProperty);
-	@NonNull Iterable<@NonNull NavigationEdge> getAssignmentEdges();
-	@NonNull Iterable<@NonNull NavigationEdge> getCastEdges();
+	@NonNull Iterable<@NonNull NavigableEdge> getAssignmentEdges();
+	@NonNull Iterable<@NonNull NavigableEdge> getCastEdges();
 	@NonNull ClassDatumAnalysis getClassDatumAnalysis();
 	@NonNull CompleteClass getCompleteClass();
 	@NonNull Iterable<@NonNull Edge> getComputationEdges();
@@ -58,8 +58,8 @@ public interface Node extends ConnectionEnd, GraphStringBuilder.GraphNode, Namea
 	@NonNull String getLabel();
 	@Override
 	@NonNull String getName();
-	@Nullable NavigationEdge getNavigationEdge(@NonNull Property source2targetProperty);
-	@NonNull Iterable<@NonNull NavigationEdge> getNavigationEdges();
+	@Nullable NavigableEdge getNavigationEdge(@NonNull Property source2targetProperty);
+	@NonNull Iterable<@NonNull NavigableEdge> getNavigationEdges();
 	@Nullable Node getNavigationTarget(@NonNull Property source2targetProperty);
 	@NonNull Iterable<@NonNull Node> getNavigationTargets();
 	@NonNull NodeRole getNodeRole();
@@ -79,7 +79,7 @@ public interface Node extends ConnectionEnd, GraphStringBuilder.GraphNode, Namea
 	 */
 	@NonNull Iterable<@NonNull Node> getPassedBindingTargets();
 	@Nullable Edge getPredicateEdge(@NonNull Property source2targetProperty);
-	@NonNull Iterable<@NonNull NavigationEdge> getPredicateEdges();
+	@NonNull Iterable<@NonNull NavigableEdge> getPredicateEdges();
 	@NonNull Iterable<@NonNull Edge> getRecursionEdges();
 
 	/**
@@ -126,7 +126,7 @@ public interface Node extends ConnectionEnd, GraphStringBuilder.GraphNode, Namea
 	 */
 	boolean isExpression();
 
-	boolean isExtraGuardVariable();
+	boolean isExtraGuard();
 
 	/**
 	 * Return true if this node is part of a head group from which many other nodes are navigable.

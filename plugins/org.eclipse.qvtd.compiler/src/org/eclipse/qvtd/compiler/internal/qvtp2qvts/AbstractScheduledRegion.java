@@ -51,7 +51,7 @@ public abstract class AbstractScheduledRegion extends AbstractRegion implements 
 	/**
 	 * The edge connections that unite a set of sources via a shared connection.
 	 */
-	private final @NonNull Map<@NonNull Set<@NonNull NavigationEdge>, @NonNull EdgeConnection> edges2edgeConnection = new HashMap<@NonNull Set<@NonNull NavigationEdge>, @NonNull EdgeConnection>();
+	private final @NonNull Map<@NonNull Set<@NonNull NavigableEdge>, @NonNull EdgeConnection> edges2edgeConnection = new HashMap<@NonNull Set<@NonNull NavigableEdge>, @NonNull EdgeConnection>();
 
 	public AbstractScheduledRegion(@NonNull MultiRegion multiRegion) {
 		super(multiRegion);
@@ -119,8 +119,8 @@ public abstract class AbstractScheduledRegion extends AbstractRegion implements 
 		//
 		//	Index all predicated and realized edges by typed model and property.
 		//
-		Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigationEdge>>> typedModel2property2predicatedEdges = new HashMap<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigationEdge>>>();
-		Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigationEdge>>> typedModel2property2realizedEdges = new HashMap<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigationEdge>>>();
+		Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>>> typedModel2property2predicatedEdges = new HashMap<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>>>();
+		Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>>> typedModel2property2realizedEdges = new HashMap<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>>>();
 		for (@NonNull Region region : orderedRegions) {
 			QVTs2QVTiVisitor.POLLED_PROPERTIES.println("building indexes for " + region + " " + region.getIndexRangeText());
 			region.buildPredicatedNavigationEdgesIndex(typedModel2property2predicatedEdges);
@@ -338,8 +338,8 @@ public abstract class AbstractScheduledRegion extends AbstractRegion implements 
 	}
 
 	@Override
-	public @NonNull EdgeConnection getEdgeConnection(@NonNull Iterable<@NonNull NavigationEdge> sourceEdges, @NonNull Property property) {
-		Set<@NonNull NavigationEdge> sourceSet = Sets.newHashSet(sourceEdges);
+	public @NonNull EdgeConnection getEdgeConnection(@NonNull Iterable<@NonNull NavigableEdge> sourceEdges, @NonNull Property property) {
+		Set<@NonNull NavigableEdge> sourceSet = Sets.newHashSet(sourceEdges);
 		EdgeConnection connection = edges2edgeConnection.get(sourceSet);
 		if (connection == null) {
 			SymbolNameBuilder s = new SymbolNameBuilder();
@@ -419,10 +419,10 @@ public abstract class AbstractScheduledRegion extends AbstractRegion implements 
 		}
 		else if (connection instanceof EdgeConnection) {
 			EdgeConnection edgeConnection = (EdgeConnection)connection;
-			for (@NonNull NavigationEdge targetEdge : edgeConnection.getTargetEdges()) {
+			for (@NonNull NavigableEdge targetEdge : edgeConnection.getTargetEdges()) {
 				targetEdge.removeIncomingConnection(edgeConnection);
 			}
-			for (@NonNull NavigationEdge sourceEdge : edgeConnection.getSources()) {
+			for (@NonNull NavigableEdge sourceEdge : edgeConnection.getSources()) {
 				sourceEdge.removeOutgoingConnection(edgeConnection);
 			}
 		}

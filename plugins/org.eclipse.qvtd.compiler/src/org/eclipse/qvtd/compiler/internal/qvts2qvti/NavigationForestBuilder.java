@@ -18,7 +18,7 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NavigationEdge;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NavigableEdge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RegionUtil;
 
@@ -38,9 +38,9 @@ class NavigationForestBuilder extends AbstractForestBuilder
 	/**
 	 * The edges that are not traversed while locating each node.
 	 */
-	private final @NonNull Set<@NonNull NavigationEdge> untraversedEdges = new HashSet<>();
+	private final @NonNull Set<@NonNull NavigableEdge> untraversedEdges = new HashSet<>();
 
-	public NavigationForestBuilder(@NonNull Iterable<@NonNull Node> rootNodes, @NonNull Iterable<@NonNull NavigationEdge> navigationEdges) {
+	public NavigationForestBuilder(@NonNull Iterable<@NonNull Node> rootNodes, @NonNull Iterable<@NonNull NavigableEdge> navigationEdges) {
 		super(rootNodes, navigationEdges);
 		//
 		//	Traverse the attributes too.
@@ -57,10 +57,10 @@ class NavigationForestBuilder extends AbstractForestBuilder
 		//
 		//	Identify the remaining untraversed edges that are not used to reach nodes and so must be reified as predicates to check nodes.
 		//
-		Set<@NonNull NavigationEdge> predicateEdges = Sets.newHashSet(getForwardEdges());
-		for (@NonNull NavigationEdge traversedEdge : getTraversedEdges()) {
+		Set<@NonNull NavigableEdge> predicateEdges = Sets.newHashSet(getForwardEdges());
+		for (@NonNull NavigableEdge traversedEdge : getTraversedEdges()) {
 			predicateEdges.remove(traversedEdge);
-			NavigationEdge oppositeEdge = traversedEdge.getOppositeEdge();
+			NavigableEdge oppositeEdge = traversedEdge.getOppositeEdge();
 			if (oppositeEdge != null) {
 				predicateEdges.remove(oppositeEdge);
 			}
@@ -73,7 +73,7 @@ class NavigationForestBuilder extends AbstractForestBuilder
 	 * reverse if it is a secondary edge.
 	 */
 	@Override
-	protected void addEdge(@NonNull NavigationEdge edge) {
+	protected void addEdge(@NonNull NavigableEdge edge) {
 		if (edge.isRealized()) {}
 		else if (edge.isCast()) {}
 		else {
@@ -88,8 +88,8 @@ class NavigationForestBuilder extends AbstractForestBuilder
 	/**
 	 *	Return a shallowest first then alphabetical ordering of the traversal edges of the forest.
 	 */
-	public @NonNull List<@NonNull NavigationEdge> getForestNavigations() {
-		List<@NonNull NavigationEdge> forestNavigations = Lists.newArrayList(getTraversedEdges());
+	public @NonNull List<@NonNull NavigableEdge> getForestNavigations() {
+		List<@NonNull NavigableEdge> forestNavigations = Lists.newArrayList(getTraversedEdges());
 		Collections.sort(forestNavigations, this);
 		return forestNavigations;
 	}
@@ -97,9 +97,9 @@ class NavigationForestBuilder extends AbstractForestBuilder
 	/**
 	 *	Return an alphabetical ordering of the residual edges to be checked as predicates.
 	 */
-	public @NonNull List<@NonNull NavigationEdge> getGraphPredicates() {
-		List<@NonNull NavigationEdge> graphPredicateEdges = new ArrayList<>();
-		for (@NonNull NavigationEdge untraversedEdge : untraversedEdges) {
+	public @NonNull List<@NonNull NavigableEdge> getGraphPredicates() {
+		List<@NonNull NavigableEdge> graphPredicateEdges = new ArrayList<>();
+		for (@NonNull NavigableEdge untraversedEdge : untraversedEdges) {
 			graphPredicateEdges.add(untraversedEdge);
 		}
 		Collections.sort(graphPredicateEdges, NameUtil.NAMEABLE_COMPARATOR);

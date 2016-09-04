@@ -11,11 +11,10 @@
 package org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.AbstractRole;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.EdgeRole;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Role;
 
-public class EdgeRoleImpl extends AbstractRole implements EdgeRole
+public class EdgeRoleImpl extends AbstractRoleImpl implements EdgeRole
 {
 	private static final @NonNull EdgeRole CONSTANT_EDGE = new EdgeRoleImpl(Role.Phase.CONSTANT);
 	private static final @NonNull EdgeRole LOADED_EDGE = new EdgeRoleImpl(Role.Phase.LOADED);

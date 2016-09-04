@@ -8,7 +8,7 @@
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
-package org.eclipse.qvtd.compiler.internal.qvtp2qvts;
+package org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -25,6 +25,20 @@ import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.internal.prettyprint.PrettyPrinter;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.AbstractRegion;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.ClassDatumAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Connection;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Edge;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NavigableEdge;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NodeConnection;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NodeRole;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RegionUtil;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Role;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RootScheduledRegion;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.SchedulerConstants;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Visitor;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtcorebase.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtcorebase.analysis.DomainUsage.Internal;
@@ -37,7 +51,7 @@ import com.google.common.collect.Iterables;
  * AbstractNode provides the analysis and status of a node in the pattern match or construction of a Mapping
  * or Composite Region.
  */
-public abstract class AbstractNode implements Node
+public abstract class NodeImpl implements Node
 {
 	public static final class NodeComparator implements Comparator<@NonNull Node>
 	{
@@ -75,31 +89,8 @@ public abstract class AbstractNode implements Node
 	private final @NonNull List<@NonNull TypedElement> typedElements = new ArrayList<@NonNull TypedElement>();
 
 	@Override
-	public void destroy() {
-		assert region != null;
-		region.removeNode(this);
-		Connection incomingConnection2 = incomingConnection;
-		if (incomingConnection2 != null) {
-			incomingConnection2.destroy();
-		}
-		List<NodeConnection> outgoingConnections2 = outgoingConnections;
-		if (outgoingConnections2 != null) {
-			while (!outgoingConnections2.isEmpty()) {
-				outgoingConnections2.get(0).destroy();
-			}
-		}
-		List<Edge> incomingEdges2 = incomingEdges;
-		if (incomingEdges2 != null) {
-			while (!incomingEdges2.isEmpty()) {
-				incomingEdges2.get(0).destroy();
-			}
-		}
-		List<Edge> outgoingEdges2 = outgoingEdges;
-		if (outgoingEdges2 != null) {
-			while (!outgoingEdges2.isEmpty()) {
-				outgoingEdges2.get(0).destroy();
-			}
-		}
+	public <R> R accept(@NonNull Visitor<R> visitor) {
+		return visitor.visitNode(this);
 	}
 
 	@Override
@@ -195,6 +186,34 @@ public abstract class AbstractNode implements Node
 	}
 
 	@Override
+	public void destroy() {
+		assert region != null;
+		region.removeNode(this);
+		Connection incomingConnection2 = incomingConnection;
+		if (incomingConnection2 != null) {
+			incomingConnection2.destroy();
+		}
+		List<NodeConnection> outgoingConnections2 = outgoingConnections;
+		if (outgoingConnections2 != null) {
+			while (!outgoingConnections2.isEmpty()) {
+				outgoingConnections2.get(0).destroy();
+			}
+		}
+		List<Edge> incomingEdges2 = incomingEdges;
+		if (incomingEdges2 != null) {
+			while (!incomingEdges2.isEmpty()) {
+				incomingEdges2.get(0).destroy();
+			}
+		}
+		List<Edge> outgoingEdges2 = outgoingEdges;
+		if (outgoingEdges2 != null) {
+			while (!outgoingEdges2.isEmpty()) {
+				outgoingEdges2.get(0).destroy();
+			}
+		}
+	}
+
+	@Override
 	public void getAllAncestors(@NonNull Set<@NonNull Node> ancestors) {
 		if (ancestors.add(this)) {
 			Region region = getRegion();
@@ -215,8 +234,8 @@ public abstract class AbstractNode implements Node
 	@Override
 	public final @Nullable Edge getAssignmentEdge(@NonNull Property source2targetProperty) {
 		for (Edge edge : getOutgoingEdges()) {
-			if (edge.isRealized() && (edge instanceof NavigationEdge)) {
-				if (((NavigationEdge)edge).getProperty() == source2targetProperty) {
+			if (edge.isRealized() && (edge instanceof NavigableEdge)) {
+				if (((NavigableEdge)edge).getProperty() == source2targetProperty) {
 					return edge;
 				}
 			}
@@ -225,16 +244,16 @@ public abstract class AbstractNode implements Node
 	}
 
 	@Override
-	public final @NonNull Iterable<@NonNull NavigationEdge> getAssignmentEdges() {
+	public final @NonNull Iterable<@NonNull NavigableEdge> getAssignmentEdges() {
 		@SuppressWarnings("unchecked")
-		Iterable<@NonNull NavigationEdge> filter = (Iterable<@NonNull NavigationEdge>)(Object)Iterables.filter(getOutgoingEdges(), AbstractRegion.IsAssignmentEdgePredicate.INSTANCE);
+		Iterable<@NonNull NavigableEdge> filter = (Iterable<@NonNull NavigableEdge>)(Object)Iterables.filter(getOutgoingEdges(), AbstractRegion.IsAssignmentEdgePredicate.INSTANCE);
 		return filter;
 	}
 
 	@Override
-	public final @NonNull Iterable<@NonNull NavigationEdge> getCastEdges() {
+	public final @NonNull Iterable<@NonNull NavigableEdge> getCastEdges() {
 		@SuppressWarnings("unchecked")
-		@NonNull Iterable<@NonNull NavigationEdge> filter = (Iterable<@NonNull NavigationEdge>)(Object)Iterables.filter(getOutgoingEdges(), AbstractRegion.IsCastEdgePredicate.INSTANCE);
+		@NonNull Iterable<@NonNull NavigableEdge> filter = (Iterable<@NonNull NavigableEdge>)(Object)Iterables.filter(getOutgoingEdges(), AbstractRegion.IsCastEdgePredicate.INSTANCE);
 		return filter;
 	}
 
@@ -321,10 +340,10 @@ public abstract class AbstractNode implements Node
 	}
 
 	@Override
-	public @Nullable NavigationEdge getNavigationEdge(@NonNull Property source2targetProperty) {
+	public @Nullable NavigableEdge getNavigationEdge(@NonNull Property source2targetProperty) {
 		for (@NonNull Edge edge : getOutgoingEdges()) {
-			if (edge instanceof NavigationEdge) {
-				NavigationEdge navigationEdge = (NavigationEdge)edge;
+			if (edge instanceof NavigableEdge) {
+				NavigableEdge navigationEdge = (NavigableEdge)edge;
 				if (navigationEdge.getProperty() == source2targetProperty) {
 					return navigationEdge;
 				}
@@ -334,17 +353,17 @@ public abstract class AbstractNode implements Node
 	}
 
 	@Override
-	public final @NonNull Iterable<@NonNull NavigationEdge> getNavigationEdges() {
+	public final @NonNull Iterable<@NonNull NavigableEdge> getNavigationEdges() {
 		@SuppressWarnings("unchecked")
-		@NonNull Iterable<@NonNull NavigationEdge> filter = (Iterable<@NonNull NavigationEdge>)(Object)Iterables.filter(getOutgoingEdges(), AbstractRegion.IsNavigationEdgePredicate.INSTANCE);
+		@NonNull Iterable<@NonNull NavigableEdge> filter = (Iterable<@NonNull NavigableEdge>)(Object)Iterables.filter(getOutgoingEdges(), AbstractRegion.IsNavigationEdgePredicate.INSTANCE);
 		return filter;
 	}
 
 	@Override
 	public @Nullable Node getNavigationTarget(@NonNull Property source2targetProperty) {
 		for (@NonNull Edge edge : getOutgoingEdges()) {
-			if (edge instanceof NavigationEdge) {
-				NavigationEdge navigationEdge = (NavigationEdge)edge;
+			if (edge instanceof NavigableEdge) {
+				NavigableEdge navigationEdge = (NavigableEdge)edge;
 				if (navigationEdge.getProperty() == source2targetProperty) {
 					return navigationEdge.getTarget();
 				}
@@ -421,8 +440,8 @@ public abstract class AbstractNode implements Node
 	@Override
 	public final @Nullable Edge getPredicateEdge(@NonNull Property source2targetProperty) {
 		for (@NonNull Edge edge : getOutgoingEdges()) {
-			if (edge.isPredicated() && (edge instanceof NavigationEdge)) {
-				if (((NavigationEdge)edge).getProperty() == source2targetProperty) {
+			if (edge.isPredicated() && (edge instanceof NavigableEdge)) {
+				if (((NavigableEdge)edge).getProperty() == source2targetProperty) {
 					return edge;
 				}
 			}
@@ -431,9 +450,9 @@ public abstract class AbstractNode implements Node
 	}
 
 	@Override
-	public final @NonNull Iterable<@NonNull NavigationEdge> getPredicateEdges() {
+	public final @NonNull Iterable<@NonNull NavigableEdge> getPredicateEdges() {
 		@SuppressWarnings("unchecked")
-		Iterable<@NonNull NavigationEdge> filter = (Iterable<@NonNull NavigationEdge>)(Object)Iterables.filter(getOutgoingEdges(), AbstractRegion.IsPredicatedEdgePredicate.INSTANCE);
+		Iterable<@NonNull NavigableEdge> filter = (Iterable<@NonNull NavigableEdge>)(Object)Iterables.filter(getOutgoingEdges(), AbstractRegion.IsPredicatedEdgePredicate.INSTANCE);
 		return filter;
 	}
 
@@ -554,7 +573,7 @@ public abstract class AbstractNode implements Node
 	}
 
 	@Override
-	public boolean isExtraGuardVariable() {
+	public boolean isExtraGuard() {
 		return false;
 	}
 
@@ -746,6 +765,15 @@ public abstract class AbstractNode implements Node
 
 	@Override
 	public @NonNull String toString() {
-		return String.valueOf(nodeRole) + "(" + getName() + " : " + String.valueOf(classDatumAnalysis) + ")";
+		StringBuilder s = new StringBuilder();
+		s.append(getNodeRole().getPhase());
+		s.append("-");
+		s.append(getClass().getSimpleName().replace("Impl",  ""));
+		s.append("(");
+		s.append(getName());
+		s.append(" : ");
+		s.append(String.valueOf(classDatumAnalysis));
+		s.append(")");
+		return s.toString();
 	}
 }

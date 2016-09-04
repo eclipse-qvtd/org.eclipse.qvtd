@@ -12,11 +12,11 @@ package org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.ClassDatumAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NodeRole;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.TypedNode;
 
-public class PredicatedInternalNodeImpl extends TypedNode
+public class PredicatedInternalNodeImpl extends NodeImpl
 {
 	public static @NonNull PredicatedInternalNodeImpl create(@NonNull NodeRole nodeRole, @NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
 		PredicatedInternalNodeImpl node = new PredicatedInternalNodeImpl();
@@ -25,7 +25,7 @@ public class PredicatedInternalNodeImpl extends TypedNode
 	}
 
 	@Override
-	public @NonNull TypedNode createNode(@NonNull NodeRole nodeRole, @NonNull Region region) {
+	public @NonNull Node createNode(@NonNull NodeRole nodeRole, @NonNull Region region) {
 		return create(nodeRole, region, getName(), getClassDatumAnalysis());
 	}
 

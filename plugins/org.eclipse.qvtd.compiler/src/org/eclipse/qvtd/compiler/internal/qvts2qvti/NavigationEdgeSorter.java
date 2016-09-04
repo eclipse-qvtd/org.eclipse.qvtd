@@ -12,7 +12,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Edge;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NavigationEdge;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NavigableEdge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
 import com.google.common.collect.Lists;
 
@@ -22,10 +22,10 @@ import com.google.common.collect.Lists;
  */
 public class NavigationEdgeSorter
 {
-	public class SourceNodeSizeComparator implements Comparator<@NonNull NavigationEdge>
+	public class SourceNodeSizeComparator implements Comparator<@NonNull NavigableEdge>
 	{
 		@Override
-		public int compare(@NonNull NavigationEdge o1, @NonNull NavigationEdge o2) {
+		public int compare(@NonNull NavigableEdge o1, @NonNull NavigableEdge o2) {
 			Set<@NonNull Node> s1 = edge2sourceNodes.get(o1);
 			Set<@NonNull Node> s2 = edge2sourceNodes.get(o2);
 			int i1 = s1 != null ? s1.size() : 0;
@@ -39,9 +39,9 @@ public class NavigationEdgeSorter
 		}
 	}
 
-	public static Iterable<@NonNull NavigationEdge> getSortedAssignments(@NonNull Iterable<@NonNull NavigationEdge> realizedNavigationEdges) {
+	public static Iterable<@NonNull NavigableEdge> getSortedAssignments(@NonNull Iterable<@NonNull NavigableEdge> realizedNavigationEdges) {
 		NavigationEdgeSorter assignmentSorter = new NavigationEdgeSorter();
-		for (@NonNull NavigationEdge edge : realizedNavigationEdges) {
+		for (@NonNull NavigableEdge edge : realizedNavigationEdges) {
 			if (!edge.isSecondary()) {
 				assignmentSorter.add(edge);
 			}
@@ -52,12 +52,12 @@ public class NavigationEdgeSorter
 	/**
 	 * Map from each edge to the computational source nodes of the edge's target.
 	 */
-	protected final @NonNull Map<@NonNull NavigationEdge, @Nullable Set<@NonNull Node>> edge2sourceNodes = new HashMap<>();
+	protected final @NonNull Map<@NonNull NavigableEdge, @Nullable Set<@NonNull Node>> edge2sourceNodes = new HashMap<>();
 
 	/**
 	 * Add all navigationEdges to the Map of analyzed edges.
 	 */
-	public void add(@NonNull NavigationEdge navigationEdge) {
+	public void add(@NonNull NavigableEdge navigationEdge) {
 		Set<@NonNull Node> sourceNodes = null;
 		if (navigationEdge.isRealized()) {
 			Node targetNode = navigationEdge.getTarget();
@@ -82,8 +82,8 @@ public class NavigationEdgeSorter
 	/**
 	 * Return the edges in fewest dependencies first order.
 	 */
-	public @NonNull Iterable<@NonNull NavigationEdge> getSortedAssignments() {
-		List<@NonNull NavigationEdge> sortedEdges = Lists.newArrayList(edge2sourceNodes.keySet());
+	public @NonNull Iterable<@NonNull NavigableEdge> getSortedAssignments() {
+		List<@NonNull NavigableEdge> sortedEdges = Lists.newArrayList(edge2sourceNodes.keySet());
 		Collections.sort(sortedEdges, new SourceNodeSizeComparator());
 		return sortedEdges;
 	}

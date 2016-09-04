@@ -14,9 +14,8 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NodeRole;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.VariableNode;
 
-public class PatternVariableNodeImpl extends VariableNode
+public class PatternVariableNodeImpl extends VariableNodeImpl
 {
 	/*	public static @NonNull PatternNodeImpl create(@NonNull NodeRole nodeRole, @NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis, boolean isMatched) {
 		PatternNodeImpl node = new PatternNodeImpl();
@@ -25,7 +24,7 @@ public class PatternVariableNodeImpl extends VariableNode
 		return node;
 	} */
 
-	public static @NonNull VariableNode create(@NonNull NodeRole nodeRole, @NonNull Region region, @NonNull VariableDeclaration variable, boolean isMatched) {
+	public static @NonNull VariableNodeImpl create(@NonNull NodeRole nodeRole, @NonNull Region region, @NonNull VariableDeclaration variable, boolean isMatched) {
 		PatternVariableNodeImpl node = new PatternVariableNodeImpl();
 		node.initialize(nodeRole, region, variable);
 		node.isMatched = isMatched;
@@ -36,7 +35,7 @@ public class PatternVariableNodeImpl extends VariableNode
 	private boolean isMatched;
 
 	@Override
-	public @NonNull VariableNode createNode(@NonNull NodeRole nodeRole, @NonNull Region region) {
+	public @NonNull VariableNodeImpl createNode(@NonNull NodeRole nodeRole, @NonNull Region region) {
 		return create(nodeRole, region, getVariable(), isMatched);
 	}
 

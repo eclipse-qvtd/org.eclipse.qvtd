@@ -23,7 +23,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Edge;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NavigationEdge;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NavigableEdge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 
@@ -190,7 +190,7 @@ class CompoundGroup extends AbstractGroup
 	 */
 	protected void createBoundaries(@NonNull SimpleGroup sourceGroup, @NonNull Iterable<@NonNull Node> nonOverlapNodes) {
 		for (@NonNull Node nonOverlapNode : nonOverlapNodes) {
-			for (@NonNull NavigationEdge edge : nonOverlapNode.getNavigationEdges()) {
+			for (@NonNull NavigableEdge edge : nonOverlapNode.getNavigationEdges()) {
 				assert edge.getSource() == nonOverlapNode;
 				if (!edge.isRealized() && edge.isMatched()) {
 					Property property = edge.getProperty();

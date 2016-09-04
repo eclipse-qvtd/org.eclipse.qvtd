@@ -26,7 +26,7 @@ import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Edge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.EdgeRole;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.MappingRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.MicroMappingRegion;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NavigationEdge;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NavigableEdge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.QVTp2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
@@ -92,7 +92,7 @@ public class Partitioner
 	private static void gatherCorrolaries(@NonNull Set<@NonNull Property> corrolaryProperties, @NonNull MappingRegion region) {
 		for (@NonNull Node node : region.getNodes()) {
 			if (!node.isTrue() && node.isPattern() && node.isRealized() && node.getClassDatumAnalysis().getDomainUsage().isMiddle()) {
-				for (@NonNull NavigationEdge edge : node.getNavigationEdges()) {
+				for (@NonNull NavigableEdge edge : node.getNavigationEdges()) {
 					if (edge.isRealized() && edge.getTarget().isRealized()) {
 						corrolaryProperties.add(edge.getProperty());
 					}
@@ -113,9 +113,9 @@ public class Partitioner
 	private final @NonNull List<@NonNull Node> predicatedOutputNodes = new ArrayList<>();
 	private final @NonNull List<@NonNull Node> realizedMiddleNodes = new ArrayList<>();
 	private final @NonNull List<@NonNull Node> realizedOutputNodes = new ArrayList<>();
-	private final @NonNull Set<@NonNull NavigationEdge> navigableEdges = new HashSet<>();
-	private final @NonNull Set<@NonNull NavigationEdge> realizedEdges = new HashSet<>();
-	private final @NonNull List<@NonNull NavigationEdge> realizedOutputEdges = new ArrayList<>();
+	private final @NonNull Set<@NonNull NavigableEdge> navigableEdges = new HashSet<>();
+	private final @NonNull Set<@NonNull NavigableEdge> realizedEdges = new HashSet<>();
+	private final @NonNull List<@NonNull NavigableEdge> realizedOutputEdges = new ArrayList<>();
 	private final @NonNull List<@NonNull Node> trueNodes = new ArrayList<>();
 	private boolean hasLoadedNodes = false;
 
@@ -194,7 +194,7 @@ public class Partitioner
 					predicatedEdges.add(edge);
 				}
 				if (edge.isNavigation()) {
-					NavigationEdge navigationEdge = (NavigationEdge) edge;
+					NavigableEdge navigationEdge = (NavigableEdge) edge;
 					if (edge.isRealized()) {
 						realizedEdges.add(navigationEdge);
 						Node sourceNode = edge.getSource();
@@ -219,7 +219,7 @@ public class Partitioner
 				}
 			}
 		}
-		for (@NonNull NavigationEdge edge : region.getNavigationEdges()) {
+		for (@NonNull NavigableEdge edge : region.getNavigationEdges()) {
 			if (!edge.isSecondary() && !edge.isRealized()) {
 				navigableEdges.add(edge);
 			}
@@ -351,7 +351,7 @@ public class Partitioner
 		return deadNodes;
 	}
 
-	private @NonNull MicroMappingRegion createAssignmentRegion(@NonNull NavigationEdge outputEdge, int i) {
+	private @NonNull MicroMappingRegion createAssignmentRegion(@NonNull NavigableEdge outputEdge, int i) {
 		AssignmentPartition realizedPartition = new AssignmentPartition(this, outputEdge);
 		MicroMappingRegion microMappingRegion = realizedPartition.createMicroMappingRegion("«edge" + i + "»", ".p" + i);
 		if (QVTp2QVTs.DEBUG_GRAPHS.isActive()) {
@@ -395,7 +395,7 @@ public class Partitioner
 		return alreadyRealizedEdges;
 	}
 
-	public @NonNull Iterable<@NonNull NavigationEdge> getNavigableEdges() {
+	public @NonNull Iterable<@NonNull NavigableEdge> getNavigableEdges() {
 		return navigableEdges;
 	}
 
@@ -411,7 +411,7 @@ public class Partitioner
 		return predicatedOutputNodes;
 	}
 
-	public @NonNull Iterable<@NonNull NavigationEdge> getRealizedEdges() {
+	public @NonNull Iterable<@NonNull NavigableEdge> getRealizedEdges() {
 		return realizedEdges;
 	}
 
@@ -455,7 +455,7 @@ public class Partitioner
 		if (!edge.isNavigation()) {
 			return false;
 		}
-		return corrolaryProperties.contains(((NavigationEdge)edge).getProperty());
+		return corrolaryProperties.contains(((NavigableEdge)edge).getProperty());
 	}
 	private boolean isDead(@NonNull Node node, @Nullable Set<@NonNull Node> knownDeadNodes) {
 		if (node.isHead()) {
@@ -515,7 +515,7 @@ public class Partitioner
 					regions.add(createSpeculationRegion());
 					regions.add(createSpeculatedRegion());
 				}
-				for (@NonNull NavigationEdge outputEdge : realizedOutputEdges) {
+				for (@NonNull NavigableEdge outputEdge : realizedOutputEdges) {
 					if (!hasRealizedEdge(outputEdge)) {
 						regions.add(createAssignmentRegion(outputEdge, regions.size()));
 					}

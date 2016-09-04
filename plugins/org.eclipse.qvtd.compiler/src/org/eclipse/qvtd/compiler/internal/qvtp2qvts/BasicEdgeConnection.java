@@ -25,16 +25,16 @@ import com.google.common.collect.Lists;
 /**
  * A RegionConnection supports a dependency between regions..
  */
-public class BasicEdgeConnection extends AbstractConnection<@NonNull NavigationEdge> implements EdgeConnection
+public class BasicEdgeConnection extends AbstractConnection<@NonNull NavigableEdge> implements EdgeConnection
 {
 	protected final @NonNull Property property;
 
-	public BasicEdgeConnection(@NonNull ScheduledRegion region, @NonNull Set<@NonNull NavigationEdge> sourceEdges, @NonNull SymbolNameBuilder symbolNameBuilder, @NonNull Property property) {
+	public BasicEdgeConnection(@NonNull ScheduledRegion region, @NonNull Set<@NonNull NavigableEdge> sourceEdges, @NonNull SymbolNameBuilder symbolNameBuilder, @NonNull Property property) {
 		super(region, sourceEdges, symbolNameBuilder);
 		this.property = property;
 		assert !property.isIsImplicit();
 		region.addEdgeConnection(this);
-		for (@NonNull NavigationEdge sourceEdge : sourceEdges) {
+		for (@NonNull NavigableEdge sourceEdge : sourceEdges) {
 			sourceEdge.addOutgoingConnection(this);
 		}
 	}
@@ -45,7 +45,7 @@ public class BasicEdgeConnection extends AbstractConnection<@NonNull NavigationE
 	}
 
 	@Override
-	public void addUsedTargetEdge(@NonNull NavigationEdge targetEdge, boolean mustBeLater) {
+	public void addUsedTargetEdge(@NonNull NavigableEdge targetEdge, boolean mustBeLater) {
 		//		if (getSourceRegions().contains(targetEdge.getRegion())) {
 		//			System.out.println("Cyclic dependency arbitrarily ignored: " + this);
 		//			mergeRole(Connections.PREFERRED_EDGE);
@@ -60,10 +60,10 @@ public class BasicEdgeConnection extends AbstractConnection<@NonNull NavigationE
 
 	@Override
 	public void destroy() {
-		for (@NonNull NavigationEdge sourceEdge : sourceEnds) {
+		for (@NonNull NavigableEdge sourceEdge : sourceEnds) {
 			sourceEdge.removeOutgoingConnection(this);
 		}
-		for (@NonNull NavigationEdge targetNode : targetEnd2role.keySet()) {
+		for (@NonNull NavigableEdge targetNode : targetEnd2role.keySet()) {
 			targetNode.removeIncomingConnection(this);
 		}
 		super.destroy();
@@ -77,28 +77,28 @@ public class BasicEdgeConnection extends AbstractConnection<@NonNull NavigationE
 	@Override
 	public @NonNull Iterable<@NonNull Node> getSourceNodes() {
 		List<@NonNull Node> sourceNodes = new ArrayList<@NonNull Node>();
-		for (@NonNull NavigationEdge sourceEdge : sourceEnds) {
+		for (@NonNull NavigableEdge sourceEdge : sourceEnds) {
 			sourceNodes.add(sourceEdge.getSource());
 		}
 		return sourceNodes;
 	}
 
 	@Override
-	public @NonNull Iterable<@NonNull NavigationEdge> getTargetEdges() {
+	public @NonNull Iterable<@NonNull NavigableEdge> getTargetEdges() {
 		return targetEnd2role.keySet();
 	}
 
 	@Override
 	public @NonNull Iterable<@NonNull Node> getTargetNodes() {
 		List<@NonNull Node> targetNodes = new ArrayList<@NonNull Node>();
-		for (@NonNull NavigationEdge targetEdge : targetEnd2role.keySet()) {
+		for (@NonNull NavigableEdge targetEdge : targetEnd2role.keySet()) {
 			targetNodes.add(targetEdge.getTarget());
 		}
 		return targetNodes;
 	}
 
 	@Override
-	public @NonNull Map<@NonNull NavigationEdge, @NonNull ConnectionRole> getTargets() {
+	public @NonNull Map<@NonNull NavigableEdge, @NonNull ConnectionRole> getTargets() {
 		return targetEnd2role;
 	}
 
@@ -166,14 +166,14 @@ public class BasicEdgeConnection extends AbstractConnection<@NonNull NavigationE
 		assert oldRole != null;
 	} */
 
-	private void removeTarget(@NonNull NavigationEdge targetEdge) {
+	private void removeTarget(@NonNull NavigableEdge targetEdge) {
 		ConnectionRole oldRole = targetEnd2role.remove(targetEdge);
 		assert oldRole != null;
 	}
 
 	@Override
 	public void removeTargetRegion(@NonNull Region targetRegion) {
-		for (@NonNull NavigationEdge targetEdge : Lists.newArrayList(getTargetEdges())) {
+		for (@NonNull NavigableEdge targetEdge : Lists.newArrayList(getTargetEdges())) {
 			if (targetEdge.getRegion() == targetRegion) {
 				targetEdge.removeIncomingConnection(this);
 				removeTarget(targetEdge);
@@ -207,16 +207,16 @@ public class BasicEdgeConnection extends AbstractConnection<@NonNull NavigationE
 	@Override
 	public void toGraph(@NonNull GraphStringBuilder s) {
 		if (isEdge2Edge()) {
-			NavigationEdge sourceEdge = sourceEnds.iterator().next();
-			NavigationEdge targetEdge = targetEnd2role.keySet().iterator().next();
+			NavigableEdge sourceEdge = sourceEnds.iterator().next();
+			NavigableEdge targetEdge = targetEnd2role.keySet().iterator().next();
 			s.appendEdge(sourceEdge.getTarget(), this, targetEdge.getTarget());
 		}
 		else {
 			s.appendNode(this);
-			for (@NonNull NavigationEdge source : getSources()) {
+			for (@NonNull NavigableEdge source : getSources()) {
 				s.appendEdge(source.getTarget(), this, this);
 			}
-			for (@NonNull NavigationEdge target : getTargetEdges()) {
+			for (@NonNull NavigableEdge target : getTargetEdges()) {
 				ConnectionRole role = targetEnd2role.get(target);
 				assert role != null;
 				s.appendEdge(this, role, target.getTarget());

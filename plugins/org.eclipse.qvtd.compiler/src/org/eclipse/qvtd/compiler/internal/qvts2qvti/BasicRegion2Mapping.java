@@ -70,7 +70,7 @@ import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.ClassDatumAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Edge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.EdgeRole;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NavigationEdge;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NavigableEdge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NodeConnection;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
@@ -290,12 +290,12 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 					if (edgeRole.isLoaded()) {
 						OCLExpression source = getExpression(edge.getSource());
 						if (source != null) {
-							return PivotUtil.createNavigationCallExp(source, ((NavigationEdge)edge).getProperty());
+							return PivotUtil.createNavigationCallExp(source, ((NavigableEdge)edge).getProperty());
 						}
 					}
 					else if (edgeRole.isPredicated()) {
 						OCLExpression source = create(edge.getSource());
-						return PivotUtil.createNavigationCallExp(source, ((NavigationEdge)edge).getProperty());
+						return PivotUtil.createNavigationCallExp(source, ((NavigableEdge)edge).getProperty());
 					}
 				}
 			}
@@ -725,9 +725,9 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		return variable;
 	}
 
-	private void createClassPropertyAssignments(@NonNull Iterable<@NonNull List<@NonNull NavigationEdge>> classAssignments) {
-		for (@NonNull List<@NonNull NavigationEdge> edges : classAssignments) {
-			for (@NonNull NavigationEdge edge : edges) {
+	private void createClassPropertyAssignments(@NonNull Iterable<@NonNull List<@NonNull NavigableEdge>> classAssignments) {
+		for (@NonNull List<@NonNull NavigableEdge> edges : classAssignments) {
+			for (@NonNull NavigableEdge edge : edges) {
 				Node sourceNode = edge.getSource();
 				Node targetNode = edge.getTarget();
 				OCLExpression slotVariableExp = createVariableExp(sourceNode);
@@ -865,7 +865,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			headCallingRegions.add(region);
 		}
 		for (@NonNull Node headNode : region.getHeadNodes()) {
-			if (!headNode.isTrue() && !headNode.isExtraGuardVariable()) {
+			if (!headNode.isTrue() && !headNode.isExtraGuard()) {
 				Node bestHeadNode = null;
 				Iterable<@NonNull Node> callingSources = headNode.getPassedBindingSources();
 				if (!Iterables.isEmpty(callingSources)) {
@@ -984,11 +984,11 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		//
 		//	Create the navigation forest for the guardNodes roots and navigation edges.
 		//
-		List<@NonNull NavigationEdge> forestEdges = new ArrayList<>();
-		for (@NonNull NavigationEdge edge : region.getNavigationEdges()) {
+		List<@NonNull NavigableEdge> forestEdges = new ArrayList<>();
+		for (@NonNull NavigableEdge edge : region.getNavigationEdges()) {
 			Node sourceNode = edge.getSource();
 			Node targetNode = edge.getTarget();
-			if (!sourceNode.isIterator() && !sourceNode.isExtraGuardVariable() && !targetNode.isIterator() && RegionUtil.isUnconditional(edge)) {		// FIXME provide a better isExpression capability for pattern nodes
+			if (!sourceNode.isIterator() && !sourceNode.isExtraGuard() && !targetNode.isIterator() && RegionUtil.isUnconditional(edge)) {		// FIXME provide a better isExpression capability for pattern nodes
 				forestEdges.add(edge);
 			}
 		}
@@ -997,7 +997,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		//
 		//	Convert the ordered forest edges to unrealized variables and initializers.
 		//
-		for (@NonNull NavigationEdge traversedEdge : navigationForest.getForestNavigations()) {
+		for (@NonNull NavigableEdge traversedEdge : navigationForest.getForestNavigations()) {
 			Node sourceNode = traversedEdge.getSource();
 			Node targetNode = traversedEdge.getTarget();
 			Property property = traversedEdge.getProperty();
@@ -1018,9 +1018,9 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		//
 		//	Convert the ordered non-forest edges to predicates.
 		//
-		for (@NonNull NavigationEdge untraversedEdge : navigationForest.getGraphPredicates()) {
+		for (@NonNull NavigableEdge untraversedEdge : navigationForest.getGraphPredicates()) {
 			Node sourceNode = untraversedEdge.getSource();
-			if (!sourceNode.isInternal() && !sourceNode.isExtraGuardVariable()) {
+			if (!sourceNode.isInternal() && !sourceNode.isExtraGuard()) {
 				Node targetNode = untraversedEdge.getTarget();
 				Property property = untraversedEdge.getProperty();
 				OCLExpression sourceExp = createVariableExp(sourceNode);
@@ -1132,17 +1132,17 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			TypedModel qvtiTypedModel = visitor.getQVTiTypedModel(qvtpTypedModel);
 			ImperativeDomain domain = typedModel2domain.get(qvtiTypedModel);
 			ImperativeArea imperativeArea = domain != null ? (ImperativeArea)domain : mapping;
-			Iterable<@NonNull NavigationEdge> checkedEdges = region.getCheckedEdges(qvtpTypedModel);
+			Iterable<@NonNull NavigableEdge> checkedEdges = region.getCheckedEdges(qvtpTypedModel);
 			if (checkedEdges != null) {
 				List<Property> checkedProperties = imperativeArea.getCheckedProperties();
-				for (NavigationEdge checkedEdge : checkedEdges) {
+				for (NavigableEdge checkedEdge : checkedEdges) {
 					checkedProperties.add(checkedEdge.getProperty());
 				}
 			}
-			Iterable<@NonNull NavigationEdge> enforcedEdges = region.getEnforcedEdges(qvtpTypedModel);
+			Iterable<@NonNull NavigableEdge> enforcedEdges = region.getEnforcedEdges(qvtpTypedModel);
 			if (enforcedEdges != null) {
 				List<@NonNull Property> enforcedProperties = ClassUtil.nullFree(imperativeArea.getEnforcedProperties());
-				for (@NonNull NavigationEdge enforcedEdge : enforcedEdges) {
+				for (@NonNull NavigableEdge enforcedEdge : enforcedEdges) {
 					enforcedProperties.add(enforcedEdge.getProperty());
 				}
 			}
@@ -1150,9 +1150,9 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 	}
 
 	private void createPropertyAssignments() {
-		Map<@NonNull Node, @NonNull List<@NonNull NavigationEdge>> classAssignments = null;
+		Map<@NonNull Node, @NonNull List<@NonNull NavigableEdge>> classAssignments = null;
 		ImperativeBottomPattern bottomPattern = (ImperativeBottomPattern) mapping.getBottomPattern();
-		for (@NonNull NavigationEdge edge : NavigationEdgeSorter.getSortedAssignments(region.getRealizedNavigationEdges())) {
+		for (@NonNull NavigableEdge edge : NavigationEdgeSorter.getSortedAssignments(region.getRealizedNavigationEdges())) {
 			Node sourceNode = edge.getSource();
 			Node targetNode = edge.getTarget();
 			if (targetNode.isDataType()) {
@@ -1174,7 +1174,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 				if (classAssignments == null) {
 					classAssignments = new HashMap<>();
 				}
-				List<@NonNull NavigationEdge> edges = classAssignments.get(sourceNode);
+				List<@NonNull NavigableEdge> edges = classAssignments.get(sourceNode);
 				if (edges == null) {
 					edges = new ArrayList<>();
 					classAssignments.put(sourceNode, edges);
@@ -1184,7 +1184,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		}
 		if (classAssignments != null) {
 			pruneClassAssignments(classAssignments);
-			Collection<@NonNull List<@NonNull NavigationEdge>> values = classAssignments.values();
+			Collection<@NonNull List<@NonNull NavigableEdge>> values = classAssignments.values();
 			createClassPropertyAssignments(values);
 		}
 		@SuppressWarnings("null")
@@ -1372,17 +1372,17 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 	/**
 	 * Filter classAssignments to retain only one of each opposite-property assignment pair.
 	 */
-	private void pruneClassAssignments(@NonNull Map<@NonNull Node, @NonNull List<@NonNull NavigationEdge>> classAssignments) {
+	private void pruneClassAssignments(@NonNull Map<@NonNull Node, @NonNull List<@NonNull NavigableEdge>> classAssignments) {
 		for (@NonNull Node sourceNode : new ArrayList<>(classAssignments.keySet())) {
-			List<@NonNull NavigationEdge> forwardEdges = classAssignments.get(sourceNode);
+			List<@NonNull NavigableEdge> forwardEdges = classAssignments.get(sourceNode);
 			assert forwardEdges != null;
 			for (int iForward = forwardEdges.size()-1; iForward >= 0; iForward--) {
-				NavigationEdge forwardEdge = forwardEdges.get(iForward);
+				NavigableEdge forwardEdge = forwardEdges.get(iForward);
 				Node targetNode = forwardEdge.getTarget();
-				List<@NonNull NavigationEdge> reverseEdges = classAssignments.get(targetNode);
+				List<@NonNull NavigableEdge> reverseEdges = classAssignments.get(targetNode);
 				if (reverseEdges != null) {
 					for (int iReverse = reverseEdges.size()-1; iReverse >= 0; iReverse--) {
-						NavigationEdge reverseEdge = reverseEdges.get(iReverse);
+						NavigableEdge reverseEdge = reverseEdges.get(iReverse);
 						if (sourceNode == reverseEdge.getTarget()) {
 							Property forwardProperty = forwardEdge.getProperty();
 							Property reverseProperty = reverseEdge.getProperty();

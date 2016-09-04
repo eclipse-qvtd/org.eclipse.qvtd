@@ -14,9 +14,8 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NodeRole;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.VariableNode;
 
-public class IteratorNodeImpl extends VariableNode
+public class IteratorNodeImpl extends VariableNodeImpl
 {
 	/*	public static @NonNull PatternNodeImpl create(@NonNull NodeRole nodeRole, @NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis, boolean isMatched) {
 		PatternNodeImpl node = new PatternNodeImpl();
@@ -25,14 +24,14 @@ public class IteratorNodeImpl extends VariableNode
 		return node;
 	} */
 
-	public static @NonNull VariableNode create(@NonNull NodeRole nodeRole, @NonNull Region region, @NonNull VariableDeclaration variable) {
+	public static @NonNull VariableNodeImpl create(@NonNull NodeRole nodeRole, @NonNull Region region, @NonNull VariableDeclaration variable) {
 		IteratorNodeImpl node = new IteratorNodeImpl();
 		node.initialize(nodeRole, region, variable);
 		return node;
 	}
 
 	@Override
-	public @NonNull VariableNode createNode(@NonNull NodeRole nodeRole, @NonNull Region region) {
+	public @NonNull VariableNodeImpl createNode(@NonNull NodeRole nodeRole, @NonNull Region region) {
 		return create(nodeRole, region, getVariable());
 	}
 

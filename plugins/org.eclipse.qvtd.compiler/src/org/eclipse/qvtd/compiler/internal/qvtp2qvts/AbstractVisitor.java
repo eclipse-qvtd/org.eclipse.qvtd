@@ -11,6 +11,7 @@
 package org.eclipse.qvtd.compiler.internal.qvtp2qvts;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.VariableNodeImpl;
 
 public abstract class AbstractVisitor<R> implements Visitor<R>
 {
@@ -29,11 +30,6 @@ public abstract class AbstractVisitor<R> implements Visitor<R>
 	@Override
 	public R visiting(@NonNull Visitable visitable) {
 		throw new UnsupportedOperationException(getClass().getSimpleName() + ": " + visitable.getClass().getSimpleName());
-	}
-
-	@Override
-	public R visitBasicEdge(@NonNull BasicEdge basicSimpleEdge) {
-		return visitEdge(basicSimpleEdge);
 	}
 
 	@Override
@@ -62,7 +58,7 @@ public abstract class AbstractVisitor<R> implements Visitor<R>
 	}
 
 	@Override
-	public R visitNavigationEdge(@NonNull NavigationEdge navigationEdge) {
+	public R visitNavigableEdge(@NonNull NavigableEdge navigationEdge) {
 		return visitEdge(navigationEdge);
 	}
 
@@ -92,12 +88,7 @@ public abstract class AbstractVisitor<R> implements Visitor<R>
 	}
 
 	@Override
-	public R visitTypedNode(@NonNull TypedNode typedNode) {
-		return visitNode(typedNode);
-	}
-
-	@Override
-	public R visitVariableNode(@NonNull VariableNode variableNode) {
+	public R visitVariableNode(@NonNull VariableNodeImpl variableNode) {
 		return visitNode(variableNode);
 	}
 }

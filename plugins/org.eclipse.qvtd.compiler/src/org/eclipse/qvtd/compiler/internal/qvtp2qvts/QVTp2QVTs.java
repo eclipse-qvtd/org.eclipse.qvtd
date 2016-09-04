@@ -200,7 +200,7 @@ public class QVTp2QVTs extends SchedulerConstants
 	}
 	private void getMergeableNodes(@NonNull Set<@NonNull Node> mergeableNodes, @NonNull Node node) {
 		if (isMergeable(node) && mergeableNodes.add(node)) {
-			for (@NonNull NavigationEdge edge : node.getNavigationEdges()) {
+			for (@NonNull NavigableEdge edge : node.getNavigationEdges()) {
 				if (edge.getOppositeEdge() != null) {
 					getMergeableNodes(mergeableNodes, edge.getTarget());
 				}

@@ -12,11 +12,11 @@ package org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.BasicEdge;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Edge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.EdgeRole;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
 
-public class PredicateEdgeImpl extends BasicEdge
+public class PredicateEdgeImpl extends EdgeImpl
 {
 	public static @NonNull PredicateEdgeImpl create(@NonNull EdgeRole edgeRole, @NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode) {
 		PredicateEdgeImpl edge = new PredicateEdgeImpl();
@@ -25,7 +25,7 @@ public class PredicateEdgeImpl extends BasicEdge
 	}
 
 	@Override
-	public @NonNull BasicEdge createEdge(@NonNull EdgeRole edgeRole, @NonNull Node sourceNode, @NonNull Node targetNode) {
+	public @NonNull Edge createEdge(@NonNull EdgeRole edgeRole, @NonNull Node sourceNode, @NonNull Node targetNode) {
 		return create(edgeRole, sourceNode, getName(), targetNode);
 	}
 

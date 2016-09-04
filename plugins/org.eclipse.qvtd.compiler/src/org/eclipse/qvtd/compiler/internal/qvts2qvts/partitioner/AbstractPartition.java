@@ -22,7 +22,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Edge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.EdgeRole;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.MicroMappingRegion;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NavigationEdge;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NavigableEdge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NodeRole;
 import org.eclipse.qvtd.compiler.internal.qvts2qvti.AbstractForestBuilder;
@@ -34,13 +34,13 @@ abstract class AbstractPartition
 {
 	protected static class PartitionForest extends AbstractForestBuilder
 	{
-		protected PartitionForest(@NonNull Iterable<@NonNull Node> rootNodes, @NonNull Iterable<@NonNull NavigationEdge> edges) {
+		protected PartitionForest(@NonNull Iterable<@NonNull Node> rootNodes, @NonNull Iterable<@NonNull NavigableEdge> edges) {
 			super(rootNodes, edges);
 		}
 
 		protected @NonNull Iterable<@NonNull Node> getPredecessors(@NonNull Node targetNode) {
 			Set<@NonNull Node> sourceNodes = new HashSet<>();
-			NavigationEdge parentEdge = getParentEdge(targetNode);
+			NavigableEdge parentEdge = getParentEdge(targetNode);
 			if (parentEdge != null) {
 				//			Integer targetDepth = getDepth(targetNode);
 				//			assert targetDepth != null;
@@ -141,10 +141,10 @@ abstract class AbstractPartition
 	}
 
 	private @NonNull PartitionForest createForest() {
-		List<@NonNull NavigationEdge> navigableEdges = Lists.newArrayList(partitioner.getNavigableEdges());
+		List<@NonNull NavigableEdge> navigableEdges = Lists.newArrayList(partitioner.getNavigableEdges());
 		for (@NonNull Edge edge : alreadyRealizedEdges) {
-			if (edge instanceof NavigationEdge) {
-				navigableEdges.add((NavigationEdge) edge);
+			if (edge instanceof NavigableEdge) {
+				navigableEdges.add((NavigableEdge) edge);
 			}
 		}
 		return new PartitionForest(partitioner.getRealizedMiddleNodes(), navigableEdges);
@@ -201,7 +201,7 @@ abstract class AbstractPartition
 		return node2nodeRole.get(node);
 	}
 
-	protected @Nullable NavigationEdge getParentEdge(@NonNull Node targetNode) {
+	protected @Nullable NavigableEdge getParentEdge(@NonNull Node targetNode) {
 		PartitionForest forest2 = forest;
 		if (forest2 == null) {
 			forest = forest2 = createForest();
@@ -360,7 +360,7 @@ abstract class AbstractPartition
 	}
 
 	protected void resolveNavigations(@NonNull Node node) {
-		for (@NonNull NavigationEdge edge : node.getNavigationEdges()) {
+		for (@NonNull NavigableEdge edge : node.getNavigationEdges()) {
 			if (!partitioner.hasRealizedEdge(edge)) {
 				Node targetNode = edge.getTarget();
 				if (targetNode.isDataType()) {

@@ -8,19 +8,22 @@
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
-package org.eclipse.qvtd.compiler.internal.qvtp2qvts;
+package org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NodeRole;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RegionUtil;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Role;
 
-public class AbstractNodeRole extends AbstractRole implements NodeRole
+public class NodeRoleImpl extends AbstractRoleImpl implements NodeRole
 {
-	private static final @NonNull NodeRole CONSTANT_NODE = new AbstractNodeRole(Role.Phase.CONSTANT);
-	private static final @NonNull NodeRole LOADED_NODE = new AbstractNodeRole(Role.Phase.LOADED);
-	private static final @NonNull NodeRole PREDICATED_NODE = new AbstractNodeRole(Role.Phase.PREDICATED);
-	private static final @NonNull NodeRole REALIZED_NODE = new AbstractNodeRole(Role.Phase.REALIZED);
-	private static final @NonNull NodeRole SPECULATED_NODE = new AbstractNodeRole(Role.Phase.SPECULATED);
-	private static final @NonNull NodeRole SPECULATION_NODE = new AbstractNodeRole(Role.Phase.SPECULATION);
-	private static final @NonNull NodeRole OTHER_NODE = new AbstractNodeRole(Role.Phase.OTHER);
+	private static final @NonNull NodeRole CONSTANT_NODE = new NodeRoleImpl(Role.Phase.CONSTANT);
+	private static final @NonNull NodeRole LOADED_NODE = new NodeRoleImpl(Role.Phase.LOADED);
+	private static final @NonNull NodeRole PREDICATED_NODE = new NodeRoleImpl(Role.Phase.PREDICATED);
+	private static final @NonNull NodeRole REALIZED_NODE = new NodeRoleImpl(Role.Phase.REALIZED);
+	private static final @NonNull NodeRole SPECULATED_NODE = new NodeRoleImpl(Role.Phase.SPECULATED);
+	private static final @NonNull NodeRole SPECULATION_NODE = new NodeRoleImpl(Role.Phase.SPECULATION);
+	private static final @NonNull NodeRole OTHER_NODE = new NodeRoleImpl(Role.Phase.OTHER);
 
 	public static @NonNull NodeRole getNodeRole(Role.@NonNull Phase phase) {
 		switch (phase) {
@@ -35,7 +38,7 @@ public class AbstractNodeRole extends AbstractRole implements NodeRole
 		throw new UnsupportedOperationException();
 	}
 
-	protected AbstractNodeRole(@NonNull Phase phase) {
+	protected NodeRoleImpl(@NonNull Phase phase) {
 		super(phase);
 	}
 

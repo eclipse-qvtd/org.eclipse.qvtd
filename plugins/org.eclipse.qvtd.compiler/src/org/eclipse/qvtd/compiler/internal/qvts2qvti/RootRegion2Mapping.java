@@ -43,7 +43,7 @@ import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.TypeUtil;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.ClassDatumAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Edge;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NavigationEdge;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NavigableEdge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NodeConnection;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
@@ -156,7 +156,7 @@ public class RootRegion2Mapping extends AbstractScheduledRegion2Mapping
 				List<@NonNull Edge> incomingEdges = regionNode.getIncomingEdges();
 				switch (incomingEdges.size()) {
 					case 0: break;
-					case 1: initExpression = getFilteredExpression(initExpression, (NavigationEdge) incomingEdges.get(0)); break;
+					case 1: initExpression = getFilteredExpression(initExpression, (NavigableEdge) incomingEdges.get(0)); break;
 					default: assert false;
 				}
 				connection2variable.put(rootConnection, createRootConnectionVariable(bottomPattern, name, commonType, initExpression));
@@ -267,7 +267,7 @@ public class RootRegion2Mapping extends AbstractScheduledRegion2Mapping
 		mapping.setMappingStatement(mappingStatement);
 	}
 
-	private @NonNull OCLExpression getFilteredExpression(@NonNull OCLExpression initExpression, @NonNull NavigationEdge edge) {
+	private @NonNull OCLExpression getFilteredExpression(@NonNull OCLExpression initExpression, @NonNull NavigableEdge edge) {
 		Type collectionType = initExpression.getType();
 		assert collectionType != null;
 		Type elementType = ((CollectionType)collectionType).getElementType();

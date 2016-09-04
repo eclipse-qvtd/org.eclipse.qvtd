@@ -18,7 +18,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Edge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.EdgeRole;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NavigationEdge;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NavigableEdge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NodeRole;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Role;
@@ -100,13 +100,13 @@ class SpeculatedPartition extends AbstractPartition
 				// OK to defer
 			}
 			else if (incomingEdge.isNavigation() && !incomingEdge.isSecondary() && incomingEdge.isPredicated()) {
-				NavigationEdge navigationEdge = (NavigationEdge) incomingEdge;
+				NavigableEdge navigationEdge = (NavigableEdge) incomingEdge;
 				Property middle2outputProperty = navigationEdge.getProperty();
 				if (partitioner.isCorrolary(incomingEdge)) {
 					assert corrolaryProperty == null;
 					Node sourceNode = navigationEdge.getSource();
 					while (true) {
-						NavigationEdge parentEdge = getParentEdge(sourceNode);
+						NavigableEdge parentEdge = getParentEdge(sourceNode);
 						if (parentEdge == null) {
 							break;
 						}
@@ -141,7 +141,7 @@ class SpeculatedPartition extends AbstractPartition
 					gatherSourceNavigations(sourceNode, sourceNode.getNodeRole());
 				}
 				if (!hasPredecessor && targetNode.isPredicated()) {			// Must be the wrong end of a 1:N navigation
-					for (@NonNull NavigationEdge edge : targetNode.getNavigationEdges()) {
+					for (@NonNull NavigableEdge edge : targetNode.getNavigationEdges()) {
 						if (edge.isPredicated() && (edge.getOppositeEdge() == null)) {
 							Node nonUnitSourceNode = edge.getTarget();
 							gatherSourceNavigations(nonUnitSourceNode, nonUnitSourceNode.getNodeRole());
@@ -269,7 +269,7 @@ class SpeculatedPartition extends AbstractPartition
 				if (!hasNode(node)) {
 					addNode(node, nodeRole);
 				}
-				for (@NonNull NavigationEdge edge : node.getNavigationEdges()) {
+				for (@NonNull NavigableEdge edge : node.getNavigationEdges()) {
 					if (partitioner.hasRealizedEdge(edge)) {
 						tracedInputNodes.add(edge.getTarget());
 					}
@@ -281,7 +281,7 @@ class SpeculatedPartition extends AbstractPartition
 	protected void resolveRealizedOutputNodes() {
 		for (@NonNull Node node : partitioner.getRealizedOutputNodes()) {
 			gatherSourceNavigations(node, node.getNodeRole());
-			for (@NonNull NavigationEdge navigationEdge : node.getNavigationEdges()) {
+			for (@NonNull NavigableEdge navigationEdge : node.getNavigationEdges()) {
 				if (navigationEdge.isRealized()) {
 					Node targetNode = navigationEdge.getTarget();
 					NodeRole targetNodeRole = targetNode.getNodeRole();

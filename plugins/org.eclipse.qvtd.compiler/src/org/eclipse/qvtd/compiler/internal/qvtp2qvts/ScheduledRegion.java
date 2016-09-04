@@ -29,7 +29,7 @@ public interface ScheduledRegion extends Region
 	@NonNull NodeConnection getAttributeConnection(@NonNull Iterable<@NonNull Node> sourceNodes, @NonNull CompleteClass owningClass, @NonNull Property property, @NonNull ClassDatumAnalysis classDatumAnalysis);
 	@NonNull Iterable<@NonNull Region> getCallableRegions();
 	@NonNull Collection<@NonNull Connection> getConnections();
-	@NonNull EdgeConnection getEdgeConnection(@NonNull Iterable<@NonNull NavigationEdge> sourceEdges, @NonNull Property property);
+	@NonNull EdgeConnection getEdgeConnection(@NonNull Iterable<@NonNull NavigableEdge> sourceEdges, @NonNull Property property);
 	@NonNull Iterable<@NonNull EdgeConnection> getEdgeConnections();
 	@NonNull NodeConnection getNodeConnection(@NonNull Iterable<@NonNull Node> sourceNodes, @NonNull ClassDatumAnalysis classDatumAnalysis);
 	@NonNull Iterable<@NonNull NodeConnection> getNodeConnections();

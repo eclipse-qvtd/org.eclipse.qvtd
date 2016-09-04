@@ -29,18 +29,18 @@ public interface Region extends Visitable, GraphNode, Nameable, Symbolable
 {
 	void addCallToChild(@NonNull Region region);
 	void addEdge(@NonNull Edge edge);
-	void addEnforcedEdge(@NonNull NavigationEdge realizedEdge);
+	void addEnforcedEdge(@NonNull NavigableEdge realizedEdge);
 	boolean addIndex(int index);
 	void addIntermediateConnection(@NonNull NodeConnection connection);
 	void addNode(@NonNull Node node);
 	void addRootConnection(@NonNull NodeConnection connection);
 	void addVariableNode(@NonNull VariableDeclaration variable, @NonNull Node node);
-	void buildPredicatedNavigationEdgesIndex(@NonNull Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigationEdge>>> typedModel2property2predicatedEdges);
-	void buildRealizedNavigationEdgesIndex(@NonNull Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigationEdge>>> typedModel2property2realizedEdges);
+	void buildPredicatedNavigationEdgesIndex(@NonNull Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>>> typedModel2property2predicatedEdges);
+	void buildRealizedNavigationEdgesIndex(@NonNull Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>>> typedModel2property2realizedEdges);
 	@Nullable Map<@NonNull Node, @NonNull Node> canMerge(@NonNull Region secondaryRegion, @NonNull Region2Depth region2depths, boolean isLateMerge);
 	void checkIncomingConnections();
-	void computeCheckedOrEnforcedEdges(@NonNull Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigationEdge>>> typedModel2property2predicatedEdges,
-			@NonNull Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigationEdge>>> typedModel2property2realizedEdges);
+	void computeCheckedOrEnforcedEdges(@NonNull Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>>> typedModel2property2predicatedEdges,
+			@NonNull Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>>> typedModel2property2realizedEdges);
 	@NonNull RegionProblem createError(@NonNull String messageTemplate, Object... bindings);
 	void createIncomingConnections();
 	@NonNull RegionProblem createWarning(@NonNull String messageTemplate, Object... bindings);
@@ -70,12 +70,12 @@ public interface Region extends Visitable, GraphNode, Nameable, Symbolable
 	 * Return the regions the call this region.
 	 */
 	@NonNull Iterable<@NonNull Region> getCallingRegions();
-	@Nullable Iterable<@NonNull NavigationEdge> getCheckedEdges(@NonNull TypedModel typedModel);
+	@Nullable Iterable<@NonNull NavigableEdge> getCheckedEdges(@NonNull TypedModel typedModel);
 	@NonNull ClassDatumAnalysis getClassDatumAnalysis(@NonNull TypedElement typedElement);
 	@NonNull String getColor();
 	@NonNull Iterable<@NonNull Node> getComposedNodes();
 	@NonNull Collection<@NonNull Edge> getEdges();
-	@Nullable Iterable<@NonNull NavigationEdge> getEnforcedEdges(@NonNull TypedModel typedModel);
+	@Nullable Iterable<@NonNull NavigableEdge> getEnforcedEdges(@NonNull TypedModel typedModel);
 
 	@NonNull Iterable<@NonNull Edge> getExpressionEdges();
 
@@ -106,7 +106,7 @@ public interface Region extends Visitable, GraphNode, Nameable, Symbolable
 	 * Return the nodes that are navigated by navigation from the region's guards.
 	 */
 	@NonNull Iterable<@NonNull Node> getNavigableNodes();
-	@NonNull Iterable<@NonNull NavigationEdge> getNavigationEdges();
+	@NonNull Iterable<@NonNull NavigableEdge> getNavigationEdges();
 
 	/**
 	 * Return all nodes created by this region. i.e. Speculation or Realized nodes.
@@ -132,9 +132,9 @@ public interface Region extends Visitable, GraphNode, Nameable, Symbolable
 	@NonNull Iterable<@NonNull NodeConnection> getOutgoingPassedConnections();
 	@NonNull Iterable<@NonNull NodeConnection> getOutgoingUsedConnections();
 	@NonNull Iterable<@NonNull Node> getPatternNodes();
-	@NonNull Iterable<@NonNull NavigationEdge> getPredicatedNavigationEdges();
+	@NonNull Iterable<@NonNull NavigableEdge> getPredicatedNavigationEdges();
 	@NonNull Iterable<@NonNull Edge> getRealizedEdges();
-	@NonNull Iterable<@NonNull NavigationEdge> getRealizedNavigationEdges();
+	@NonNull Iterable<@NonNull NavigableEdge> getRealizedNavigationEdges();
 	@NonNull Iterable<@NonNull Edge> getRecursionEdges();
 	@NonNull List<@NonNull NodeConnection> getRootConnections();
 	@NonNull SchedulerConstants getSchedulerConstants();

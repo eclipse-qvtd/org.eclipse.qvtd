@@ -37,22 +37,20 @@ import org.eclipse.qvtd.compiler.CompilerConstants;
 import org.eclipse.qvtd.compiler.CompilerProblem;
 import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.AbstractRegion;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.BasicEdge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.BasicEdgeConnection;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.BasicNodeConnection;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.CyclicScheduledRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Edge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.MappingRegion;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NavigationEdge;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NavigableEdge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.OperationRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RootCompositionRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RootScheduledRegion;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.TypedNode;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.VariableNode;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Visitable;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Visitor;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.VariableNodeImpl;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.Region2Depth;
 import org.eclipse.qvtd.compiler.internal.utilities.SymbolNameBuilder;
 import org.eclipse.qvtd.compiler.internal.utilities.SymbolNameReservation;
@@ -339,11 +337,6 @@ public class QVTs2QVTiVisitor extends QVTimperativeHelper implements Visitor<Ele
 	}
 
 	@Override
-	public Element visitBasicEdge(@NonNull BasicEdge basicEdge) {
-		return visitEdge(basicEdge);
-	}
-
-	@Override
 	public Element visitBasicEdgeConnection(@NonNull BasicEdgeConnection basicEdgeConnection) {
 		return visiting(basicEdgeConnection);
 	}
@@ -394,8 +387,8 @@ public class QVTs2QVTiVisitor extends QVTimperativeHelper implements Visitor<Ele
 	}
 
 	@Override
-	public Element visitNavigationEdge(@NonNull NavigationEdge navigationEdge) {
-		return visitEdge(navigationEdge);
+	public Element visitNavigableEdge(@NonNull NavigableEdge navigableEdge) {
+		return visitEdge(navigableEdge);
 	}
 
 	@Override
@@ -504,12 +497,7 @@ public class QVTs2QVTiVisitor extends QVTimperativeHelper implements Visitor<Ele
 	}
 
 	@Override
-	public Element visitTypedNode(@NonNull TypedNode typedNode) {
-		return visitNode(typedNode);
-	}
-
-	@Override
-	public Element visitVariableNode(@NonNull VariableNode variableNode) {
+	public Element visitVariableNode(@NonNull VariableNodeImpl variableNode) {
 		return visitNode(variableNode);
 	}
 }

@@ -39,6 +39,7 @@ import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.InputNodeImpl;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.IteratedEdgeImpl;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.IteratorNodeImpl;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.NavigationEdgeImpl;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.NodeRoleImpl;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.NullNodeImpl;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.OperationNodeImpl;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.PatternTypedNodeImpl;
@@ -48,6 +49,7 @@ import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.PredicatedInternalNodeI
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.RecursionEdgeImpl;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.TrueNodeImpl;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.UnknownNodeImpl;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.VariableNodeImpl;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcorebase.NavigationAssignment;
@@ -67,23 +69,23 @@ public class RegionUtil
 		}
 		return true;
 	}
-	public static @NonNull NavigationEdge createCastEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
+	public static @NonNull NavigableEdge createCastEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
 		EdgeRole.Phase phase = mergeToLessKnownPhase(sourceNode.getNodeRole(), targetNode.getNodeRole()).getPhase();
 		EdgeRole edgeRole = EdgeRoleImpl.getEdgeRole(phase);
 		return CastEdgeImpl.createEdge(edgeRole, sourceNode, source2targetProperty, targetNode);
 	}
 
 	public static @NonNull Node createComposingNode(@NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
-		NodeRole nodeRole = AbstractNodeRole.getNodeRole(Role.Phase.LOADED);
+		NodeRole nodeRole = NodeRoleImpl.getNodeRole(Role.Phase.LOADED);
 		return ComposedNodeImpl.create(nodeRole, region, name, classDatumAnalysis);
 	}
 
-	public static @NonNull TypedNode createDataTypeNode(@NonNull Node sourceNode, @NonNull Property property) {
+	public static @NonNull Node createDataTypeNode(@NonNull Node sourceNode, @NonNull Property property) {
 		NodeRole nodeRole = getPatternNodeRole(sourceNode, property);
 		return createPatternNode(nodeRole, sourceNode, property, sourceNode.isMatched() && isMatched(property));
 	}
 
-	public static @NonNull TypedNode createDataTypeNode(@NonNull Node sourceNode, @NonNull NavigationCallExp navigationCallExp) {
+	public static @NonNull Node createDataTypeNode(@NonNull Node sourceNode, @NonNull NavigationCallExp navigationCallExp) {
 		Property property = PivotUtil.getReferredProperty(navigationCallExp);
 		boolean isMatched = sourceNode.isMatched() && isMatched(property);
 		NodeRole nodeRole = getPatternNodeRole(sourceNode, property);
@@ -91,7 +93,7 @@ public class RegionUtil
 		String name = property.getName();
 		assert name != null;
 		Region region = sourceNode.getRegion();
-		TypedNode node = PatternTypedNodeImpl.create(nodeRole, region, name, region.getClassDatumAnalysis(navigationCallExp), isMatched);
+		Node node = PatternTypedNodeImpl.create(nodeRole, region, name, region.getClassDatumAnalysis(navigationCallExp), isMatched);
 		node.addTypedElement(navigationCallExp);
 		return node;
 	}
@@ -113,8 +115,8 @@ public class RegionUtil
 		return PatternTypedNodeImpl.create(nodeRole, region, name, classDatumAnalysis, true);
 	}
 
-	public static @NonNull TypedNode createErrorNode(@NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
-		NodeRole nodeRole = AbstractNodeRole.getNodeRole(Role.Phase.OTHER);
+	public static @NonNull Node createErrorNode(@NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
+		NodeRole nodeRole = NodeRoleImpl.getNodeRole(Role.Phase.OTHER);
 		return ErrorNodeImpl.create(nodeRole, region, name, classDatumAnalysis);
 	}
 
@@ -123,15 +125,15 @@ public class RegionUtil
 		return ExpressionEdgeImpl.create(edgeRole, sourceNode, name, targetNode);
 	}
 
-	public static @NonNull TypedNode createExtraGuardNode(@NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
-		NodeRole nodeRole = AbstractNodeRole.getNodeRole(Role.Phase.PREDICATED);
-		TypedNode node = ExtraGuardNodeImpl.create(nodeRole, region, name, classDatumAnalysis);
+	public static @NonNull Node createExtraGuardNode(@NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
+		NodeRole nodeRole = NodeRoleImpl.getNodeRole(Role.Phase.PREDICATED);
+		Node node = ExtraGuardNodeImpl.create(nodeRole, region, name, classDatumAnalysis);
 		node.setHead();
 		return node;
 	}
 
-	public static @NonNull TypedNode createInputNode(@NonNull Region region, NodeRole.@NonNull Phase nodeRolePhase, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
-		NodeRole nodeRole = AbstractNodeRole.getNodeRole(nodeRolePhase);
+	public static @NonNull Node createInputNode(@NonNull Region region, NodeRole.@NonNull Phase nodeRolePhase, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
+		NodeRole nodeRole = NodeRoleImpl.getNodeRole(nodeRolePhase);
 		return InputNodeImpl.create(nodeRole, region, name, classDatumAnalysis);
 	}
 
@@ -140,29 +142,29 @@ public class RegionUtil
 		return IteratedEdgeImpl.create(edgeRole, sourceNode, name, targetNode);
 	}
 
-	public static @NonNull VariableNode createIteratorNode(@NonNull Variable iterator, @NonNull Node sourceNode) {
-		NodeRole nodeRole = AbstractNodeRole.getNodeRole(sourceNode.getNodeRole().getPhase());
+	public static @NonNull VariableNodeImpl createIteratorNode(@NonNull Variable iterator, @NonNull Node sourceNode) {
+		NodeRole nodeRole = NodeRoleImpl.getNodeRole(sourceNode.getNodeRole().getPhase());
 		return IteratorNodeImpl.create(nodeRole, sourceNode.getRegion(), iterator);
 	}
 
-	public static @NonNull VariableNode createLetVariableNode(@NonNull Variable letVariable, @NonNull Node inNode) {
-		NodeRole nodeRole = AbstractNodeRole.getNodeRole(inNode.getNodeRole().getPhase());
+	public static @NonNull VariableNodeImpl createLetVariableNode(@NonNull Variable letVariable, @NonNull Node inNode) {
+		NodeRole nodeRole = NodeRoleImpl.getNodeRole(inNode.getNodeRole().getPhase());
 		return PatternVariableNodeImpl.create(nodeRole, inNode.getRegion(), letVariable, inNode.isMatched());
 	}
 
-	public static @NonNull VariableNode createLoadedStepNode(@NonNull Region region, @NonNull VariableDeclaration stepVariable) {
-		NodeRole nodeRole = AbstractNodeRole.getNodeRole(Role.Phase.LOADED);
+	public static @NonNull VariableNodeImpl createLoadedStepNode(@NonNull Region region, @NonNull VariableDeclaration stepVariable) {
+		NodeRole nodeRole = NodeRoleImpl.getNodeRole(Role.Phase.LOADED);
 		return PatternVariableNodeImpl.create(nodeRole, region, stepVariable, true);
 	}
 
-	public static @NonNull NavigationEdge createNavigationEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
+	public static @NonNull NavigableEdge createNavigationEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
 		EdgeRole.Phase phase = mergeToLessKnownPhase(sourceNode.getNodeRole(), targetNode.getNodeRole()).getPhase();
 		EdgeRole edgeRole = EdgeRoleImpl.getEdgeRole(phase);
 		return NavigationEdgeImpl.createEdge(edgeRole, sourceNode, source2targetProperty, targetNode);
 	}
 
-	public static @NonNull TypedNode createNullNode(@NonNull Region region, boolean isMatched, @Nullable TypedElement typedElement) {
-		NodeRole nodeRole = AbstractNodeRole.getNodeRole(Role.Phase.CONSTANT);
+	public static @NonNull Node createNullNode(@NonNull Region region, boolean isMatched, @Nullable TypedElement typedElement) {
+		NodeRole nodeRole = NodeRoleImpl.getNodeRole(Role.Phase.CONSTANT);
 		if (typedElement != null) {
 			NullNodeImpl node = NullNodeImpl.create(nodeRole, region, "«null»", region.getClassDatumAnalysis(typedElement), isMatched);
 			node.addTypedElement(typedElement);
@@ -173,40 +175,40 @@ public class RegionUtil
 		}
 	}
 
-	public static @NonNull VariableNode createOldNode(@NonNull Region region, @NonNull VariableDeclaration variable) {
+	public static @NonNull VariableNodeImpl createOldNode(@NonNull Region region, @NonNull VariableDeclaration variable) {
 		DomainUsage domainUsage = region.getSchedulerConstants().getDomainUsage(variable);
 		boolean isEnforceable = domainUsage.isOutput() || domainUsage.isMiddle();
 		Role.Phase phase = isEnforceable ? Role.Phase.PREDICATED : Role.Phase.LOADED;
-		NodeRole nodeRole = AbstractNodeRole.getNodeRole(phase);
+		NodeRole nodeRole = NodeRoleImpl.getNodeRole(phase);
 		return PatternVariableNodeImpl.create(nodeRole, region, variable, true);
 	}
 
-	public static @NonNull TypedNode createOperationElementNode(@NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis, @NonNull Node sourceNode) {
-		NodeRole nodeRole = AbstractNodeRole.getNodeRole(sourceNode.getNodeRole().getPhase());
+	public static @NonNull Node createOperationElementNode(@NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis, @NonNull Node sourceNode) {
+		NodeRole nodeRole = NodeRoleImpl.getNodeRole(sourceNode.getNodeRole().getPhase());
 		return PatternTypedNodeImpl.create(nodeRole, region, name, classDatumAnalysis, true);
 	}
 
-	public static @NonNull TypedNode createOperationNode(@NonNull Region region, boolean isMatched, @NonNull String name, @NonNull TypedElement typedElement, @NonNull Node... argNodes) {
+	public static @NonNull Node createOperationNode(@NonNull Region region, boolean isMatched, @NonNull String name, @NonNull TypedElement typedElement, @NonNull Node... argNodes) {
 		Role.Phase nodePhase = getOperationNodePhase(region, typedElement, argNodes);
-		NodeRole nodeRole = AbstractNodeRole.getNodeRole(nodePhase);
-		TypedNode node = OperationNodeImpl.create(nodeRole, region, name, region.getClassDatumAnalysis(typedElement), isMatched);
+		NodeRole nodeRole = NodeRoleImpl.getNodeRole(nodePhase);
+		Node node = OperationNodeImpl.create(nodeRole, region, name, region.getClassDatumAnalysis(typedElement), isMatched);
 		node.addTypedElement(typedElement);
 		return node;
 	}
 
-	public static @NonNull TypedNode createOperationParameterNode(@NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
-		NodeRole nodeRole = AbstractNodeRole.getNodeRole(Role.Phase.PREDICATED);
-		TypedNode node = PatternTypedNodeImpl.create(nodeRole, region, name, classDatumAnalysis, true);
+	public static @NonNull Node createOperationParameterNode(@NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
+		NodeRole nodeRole = NodeRoleImpl.getNodeRole(Role.Phase.PREDICATED);
+		Node node = PatternTypedNodeImpl.create(nodeRole, region, name, classDatumAnalysis, true);
 		node.setHead();
 		return node;
 	}
 
-	public static @NonNull TypedNode createOperationResultNode(@NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis, @NonNull Node sourceNode) {
-		NodeRole nodeRole = AbstractNodeRole.getNodeRole(sourceNode.getNodeRole().getPhase());
+	public static @NonNull Node createOperationResultNode(@NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis, @NonNull Node sourceNode) {
+		NodeRole nodeRole = NodeRoleImpl.getNodeRole(sourceNode.getNodeRole().getPhase());
 		return PatternTypedNodeImpl.create(nodeRole, region, name, classDatumAnalysis, false);
 	}
 
-	public static @NonNull TypedNode createPatternNode(@NonNull NodeRole nodeRole, @NonNull Node sourceNode, @NonNull Property source2targetProperty, boolean isMatched) {
+	public static @NonNull Node createPatternNode(@NonNull NodeRole nodeRole, @NonNull Node sourceNode, @NonNull Property source2targetProperty, boolean isMatched) {
 		Region region = sourceNode.getRegion();
 		assert sourceNode.isClass();
 		SchedulerConstants schedulerConstants = region.getSchedulerConstants();
@@ -240,17 +242,17 @@ public class RegionUtil
 		ClassDatumAnalysis classDatumAnalysis = schedulerConstants.getClassDatumAnalysis(classDatum);
 		String name = property.getName();
 		assert name != null;
-		NodeRole nodeRole = AbstractNodeRole.getNodeRole(Role.Phase.PREDICATED);
+		NodeRole nodeRole = NodeRoleImpl.getNodeRole(Role.Phase.PREDICATED);
 		return PredicatedInternalNodeImpl.create(nodeRole, parentNode.getRegion(), name, classDatumAnalysis);
 	}
 
-	public static @NonNull TypedNode createPredicatedInternalNode(@NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
-		NodeRole nodeRole = AbstractNodeRole.getNodeRole(Role.Phase.PREDICATED);
+	public static @NonNull Node createPredicatedInternalNode(@NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
+		NodeRole nodeRole = NodeRoleImpl.getNodeRole(Role.Phase.PREDICATED);
 		return PredicatedInternalNodeImpl.create(nodeRole, region, name, classDatumAnalysis);
 	}
 
-	public static @NonNull TypedNode createRealizedDataTypeNode(@NonNull Node sourceNode, @NonNull Property source2targetProperty) {
-		NodeRole nodeRole = AbstractNodeRole.getNodeRole(Role.Phase.REALIZED);
+	public static @NonNull Node createRealizedDataTypeNode(@NonNull Node sourceNode, @NonNull Property source2targetProperty) {
+		NodeRole nodeRole = NodeRoleImpl.getNodeRole(Role.Phase.REALIZED);
 		return createPatternNode(nodeRole, sourceNode, source2targetProperty, sourceNode.isMatched());
 	}
 
@@ -259,13 +261,13 @@ public class RegionUtil
 		return ExpressionEdgeImpl.create(edgeRole, sourceNode, name, targetNode);
 	}
 
-	public static @NonNull NavigationEdge createRealizedNavigationEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
+	public static @NonNull NavigableEdge createRealizedNavigationEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
 		EdgeRole edgeRole = EdgeRoleImpl.getEdgeRole(Role.Phase.REALIZED);
 		return NavigationEdgeImpl.createEdge(edgeRole, sourceNode, source2targetProperty, targetNode);
 	}
 
-	public static @NonNull VariableNode createRealizedStepNode(@NonNull Region region, @NonNull Variable stepVariable) {
-		NodeRole nodeRole = AbstractNodeRole.getNodeRole(Role.Phase.REALIZED);
+	public static @NonNull VariableNodeImpl createRealizedStepNode(@NonNull Region region, @NonNull Variable stepVariable) {
+		NodeRole nodeRole = NodeRoleImpl.getNodeRole(Role.Phase.REALIZED);
 		return PatternVariableNodeImpl.create(nodeRole, region, stepVariable, true);
 	}
 
@@ -274,7 +276,7 @@ public class RegionUtil
 		return RecursionEdgeImpl.create(edgeRole, sourceNode, targetNode, isPrimary);
 	}
 
-	public static @NonNull TypedNode createStepNode(@NonNull String name, @NonNull CallExp callExp, @NonNull Node sourceNode, boolean isMatched) {
+	public static @NonNull Node createStepNode(@NonNull String name, @NonNull CallExp callExp, @NonNull Node sourceNode, boolean isMatched) {
 		Region region = sourceNode.getRegion();
 		DomainUsage domainUsage = region.getSchedulerConstants().getDomainUsage(callExp);
 		boolean isMiddleOrOutput = domainUsage.isOutput() || domainUsage.isMiddle();
@@ -284,40 +286,40 @@ public class RegionUtil
 			isDirty = region.getSchedulerConstants().isDirty(referredProperty);
 		}
 		Role.Phase phase = sourceNode.isPredicated() || isMiddleOrOutput || isDirty ? Role.Phase.PREDICATED : Role.Phase.LOADED;
-		NodeRole stepNodeRole = AbstractNodeRole.getNodeRole(phase);
-		TypedNode node = PatternTypedNodeImpl.create(stepNodeRole, region, name, region.getClassDatumAnalysis(callExp), isMatched);
+		NodeRole stepNodeRole = NodeRoleImpl.getNodeRole(phase);
+		Node node = PatternTypedNodeImpl.create(stepNodeRole, region, name, region.getClassDatumAnalysis(callExp), isMatched);
 		node.addTypedElement(callExp);
 		return node;
 	}
 
-	public static @NonNull Node createStepNode(@NonNull Region region, @NonNull TypedNode typedNode, boolean isMatched) {
-		NodeRole stepNodeRole = AbstractNodeRole.getNodeRole(Role.Phase.PREDICATED);
+	public static @NonNull Node createStepNode(@NonNull Region region, @NonNull Node typedNode, boolean isMatched) {
+		NodeRole stepNodeRole = NodeRoleImpl.getNodeRole(Role.Phase.PREDICATED);
 		return PatternTypedNodeImpl.create(stepNodeRole, region, typedNode.getName(), typedNode.getClassDatumAnalysis(), isMatched);
 	}
 
-	public static @NonNull TypedNode createTrueNode(@NonNull Region region) {
+	public static @NonNull Node createTrueNode(@NonNull Region region) {
 		SchedulerConstants schedulerConstants = region.getSchedulerConstants();
 		org.eclipse.ocl.pivot.Class booleanType = schedulerConstants.getStandardLibrary().getBooleanType();
 		DomainUsage primitiveUsage = schedulerConstants.getDomainAnalysis().getPrimitiveUsage();
 		ClassDatumAnalysis classDatumAnalysis = schedulerConstants.getClassDatumAnalysis(booleanType, ClassUtil.nonNullState(primitiveUsage.getTypedModel(null)));
-		NodeRole nodeRole = AbstractNodeRole.getNodeRole(Role.Phase.CONSTANT);
-		TypedNode node = TrueNodeImpl.create(nodeRole, region, "«true»", classDatumAnalysis);
+		NodeRole nodeRole = NodeRoleImpl.getNodeRole(Role.Phase.CONSTANT);
+		Node node = TrueNodeImpl.create(nodeRole, region, "«true»", classDatumAnalysis);
 		node.setHead();
 		return node;
 	}
 
-	public static @NonNull TypedNode createUnknownNode(@NonNull Region region, @NonNull String name, @NonNull TypedElement typedElement) {
-		NodeRole nodeRole = AbstractNodeRole.getNodeRole(Role.Phase.OTHER);
+	public static @NonNull Node createUnknownNode(@NonNull Region region, @NonNull String name, @NonNull TypedElement typedElement) {
+		NodeRole nodeRole = NodeRoleImpl.getNodeRole(Role.Phase.OTHER);
 		return UnknownNodeImpl.create(nodeRole, region, name, region.getClassDatumAnalysis(typedElement));
 	}
 
 	/**
 	 * Return the edge unless it is subject to a cast chain in which case return the final cast.
 	 */
-	public static @NonNull NavigationEdge getCastTarget(@NonNull NavigationEdge edge) {
-		@NonNull NavigationEdge sourceEdge = edge;
+	public static @NonNull NavigableEdge getCastTarget(@NonNull NavigableEdge edge) {
+		@NonNull NavigableEdge sourceEdge = edge;
 		while (true) {
-			@Nullable NavigationEdge targetEdge = null;
+			@Nullable NavigableEdge targetEdge = null;
 			for (@NonNull Edge nextEdge : sourceEdge.getTarget().getOutgoingEdges()) {
 				if (nextEdge.isRecursion()) {
 					continue;
@@ -328,7 +330,7 @@ public class RegionUtil
 				if (targetEdge != null) {			// FIXME multi-cast support
 					return sourceEdge;
 				}
-				targetEdge = (@Nullable NavigationEdge) nextEdge;
+				targetEdge = (NavigableEdge) nextEdge;
 			}
 			if (targetEdge == null) {
 				return sourceEdge;
@@ -415,13 +417,13 @@ public class RegionUtil
 			case CONSTANT: phase = Role.Phase.CONSTANT; break;
 			default: throw new UnsupportedOperationException();
 		}
-		return AbstractNodeRole.getNodeRole(phase);
+		return NodeRoleImpl.getNodeRole(phase);
 	}
 
 	/**
 	 * Return true if the source of thatEdge is compatible with the source of thisEdge.
 	 */
-	public static boolean isConformantSource(@NonNull NavigationEdge thatEdge, @NonNull NavigationEdge thisEdge) {
+	public static boolean isConformantSource(@NonNull NavigableEdge thatEdge, @NonNull NavigableEdge thisEdge) {
 		Node thatSource = thatEdge.getSource();
 		CompleteClass thatType = thatSource.getCompleteClass();
 		CompleteClass thisType = thisEdge.getSource().getCompleteClass();
@@ -440,7 +442,7 @@ public class RegionUtil
 	/**
 	 * Return true if the target of thatEdge is compatible with the target of thisEdge.
 	 */
-	public static boolean isConformantTarget(@NonNull NavigationEdge thatEdge, @NonNull NavigationEdge thisEdge) {
+	public static boolean isConformantTarget(@NonNull NavigableEdge thatEdge, @NonNull NavigableEdge thisEdge) {
 		Node thatTarget = getCastTarget(thatEdge.getTarget());
 		Node thisTarget = getCastTarget(thisEdge.getTarget());
 		CompleteClass thatType = thatTarget.getCompleteClass();

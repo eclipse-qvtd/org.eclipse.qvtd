@@ -67,11 +67,11 @@ public class RootCompositionRegion extends AbstractRegion
 		//
 		//	Identify the containment pattern.
 		//
-		NavigationEdge containerEdge = null;
+		NavigableEdge containerEdge = null;
 		Property parent2childProperty = null;
 		ClassDatumAnalysis containingClassDatumAnalysis = null;
 		SchedulerConstants scheduler = getSchedulerConstants();
-		for (@NonNull NavigationEdge edge : consumerNode.getNavigationEdges()) {
+		for (@NonNull NavigableEdge edge : consumerNode.getNavigationEdges()) {
 			Property property = edge.getProperty().getOpposite();
 			if ((property != null) && property.isIsComposite() && !property.isIsRequired()) {
 				containerEdge = edge;

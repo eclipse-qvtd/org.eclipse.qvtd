@@ -18,28 +18,28 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NavigationEdge;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NavigableEdge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RegionUtil;
 
 import com.google.common.collect.Sets;
 
-public abstract class AbstractForestBuilder implements Comparator<@NonNull NavigationEdge>
+public abstract class AbstractForestBuilder implements Comparator<@NonNull NavigableEdge>
 {
 	/**
 	 * The preferred non-secondary edges to be used in the tree.
 	 */
-	private final @NonNull Set<@NonNull NavigationEdge> forwardEdges = new HashSet<>();
+	private final @NonNull Set<@NonNull NavigableEdge> forwardEdges = new HashSet<>();
 
 	/**
 	 * Edges that have no opposite.
 	 */
-	private final @NonNull Set<@NonNull NavigationEdge> manyToOneEdges = new HashSet<>();
+	private final @NonNull Set<@NonNull NavigableEdge> manyToOneEdges = new HashSet<>();
 
 	/**
 	 * The edges that are traversed while locating each node and their depth in the traversal forest, 0 at edge sourced by root.
 	 */
-	private final @NonNull Map<@NonNull NavigationEdge, @NonNull Integer> traversedEdge2depth = new HashMap<>();
+	private final @NonNull Map<@NonNull NavigableEdge, @NonNull Integer> traversedEdge2depth = new HashMap<>();
 
 	/**
 	 * The nodes that are traversed while locating each node and their depth in the traversal forest, 0 at root.
@@ -49,13 +49,13 @@ public abstract class AbstractForestBuilder implements Comparator<@NonNull Navig
 	/**
 	 * The incoming edge for each node in the traversal forest, null at a root.
 	 */
-	private final @NonNull Map<@NonNull Node, @Nullable NavigationEdge> traversedNode2incomingEdge = new HashMap<>();
+	private final @NonNull Map<@NonNull Node, @Nullable NavigableEdge> traversedNode2incomingEdge = new HashMap<>();
 
-	protected AbstractForestBuilder(@NonNull Iterable<@NonNull Node> rootNodes, @NonNull Iterable<@NonNull NavigationEdge> edges) {
+	protected AbstractForestBuilder(@NonNull Iterable<@NonNull Node> rootNodes, @NonNull Iterable<@NonNull NavigableEdge> edges) {
 		for (@NonNull Node rootNode : rootNodes) {
 			traversedNode2incomingEdge.put(rootNode, null);
 		}
-		for (@NonNull NavigationEdge edge : edges) {
+		for (@NonNull NavigableEdge edge : edges) {
 			addEdge(edge);
 		}
 		//
@@ -64,7 +64,7 @@ public abstract class AbstractForestBuilder implements Comparator<@NonNull Navig
 		analyze(traversedNode2incomingEdge.keySet());
 	}
 
-	protected void addEdge(@NonNull NavigationEdge edge) {
+	protected void addEdge(@NonNull NavigableEdge edge) {
 		if (!edge.isSecondary()) {
 			forwardEdges.add(edge);
 			if ((edge.getSource().isClass()) && (edge.getOppositeEdge() == null)) {
@@ -88,7 +88,7 @@ public abstract class AbstractForestBuilder implements Comparator<@NonNull Navig
 			Set<@NonNull Node> moreMoreNodes = new HashSet<>();
 			for (@NonNull Node sourceNode : moreNodes) {
 				//				traversedNode2depth.put(sourceNode, depth);
-				for (@NonNull NavigationEdge forwardEdge : sourceNode.getNavigationEdges()) {
+				for (@NonNull NavigableEdge forwardEdge : sourceNode.getNavigationEdges()) {
 					if (forwardEdges.contains(forwardEdge)) {
 						Node targetNode = RegionUtil.getCastTarget(forwardEdge.getTarget());
 						if (!traversedNode2incomingEdge.containsKey(targetNode)) {
@@ -103,8 +103,8 @@ public abstract class AbstractForestBuilder implements Comparator<@NonNull Navig
 				//
 				//	If no forward edge makes progress, select just one backward edge instead.
 				//
-				for (@NonNull NavigationEdge forwardEdge : forwardEdges) {		// FIXME maintain reducing list of possibles
-					@Nullable NavigationEdge backwardEdge = forwardEdge.getOppositeEdge();
+				for (@NonNull NavigableEdge forwardEdge : forwardEdges) {		// FIXME maintain reducing list of possibles
+					@Nullable NavigableEdge backwardEdge = forwardEdge.getOppositeEdge();
 					if (backwardEdge != null) {
 						Node sourceNode = backwardEdge.getSource();
 						if (traversedNode2incomingEdge.containsKey(sourceNode)) {
@@ -122,7 +122,7 @@ public abstract class AbstractForestBuilder implements Comparator<@NonNull Navig
 					//
 					//	If no backward edge makes progress, select just one inverse edge instead.
 					//
-					for (@NonNull NavigationEdge manyToOneEdge : manyToOneEdges) {		// FIXME maintain reducing list of possibles
+					for (@NonNull NavigableEdge manyToOneEdge : manyToOneEdges) {		// FIXME maintain reducing list of possibles
 						Node sourceNode = manyToOneEdge.getTarget();
 						if (traversedNode2incomingEdge.containsKey(sourceNode)) {
 							Node targetNode = manyToOneEdge.getSource();
@@ -194,7 +194,7 @@ public abstract class AbstractForestBuilder implements Comparator<@NonNull Navig
 	 *	Support the shallowest first then alphabetical ordering of the traversal edges of the forest.
 	 */
 	@Override
-	public int compare(@NonNull NavigationEdge o1, @NonNull NavigationEdge o2) {
+	public int compare(@NonNull NavigableEdge o1, @NonNull NavigableEdge o2) {
 		Integer d1 = traversedEdge2depth.get(o1);
 		Integer d2 = traversedEdge2depth.get(o2);
 		assert (d1 != null) && (d2 != null);
@@ -210,15 +210,15 @@ public abstract class AbstractForestBuilder implements Comparator<@NonNull Navig
 	//		return traversedNode2depth.get(node);
 	//	}
 
-	protected @NonNull Iterable<@NonNull NavigationEdge> getForwardEdges() {
+	protected @NonNull Iterable<@NonNull NavigableEdge> getForwardEdges() {
 		return forwardEdges;
 	}
 
-	public @Nullable NavigationEdge getParentEdge(@NonNull Node node) {
+	public @Nullable NavigableEdge getParentEdge(@NonNull Node node) {
 		return traversedNode2incomingEdge.get(node);
 	}
 
-	protected @NonNull Iterable<@NonNull NavigationEdge> getTraversedEdges() {
+	protected @NonNull Iterable<@NonNull NavigableEdge> getTraversedEdges() {
 		return traversedEdge2depth.keySet();
 	}
 }
