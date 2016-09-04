@@ -1021,7 +1021,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		//
 		for (@NonNull NavigationEdge untraversedEdge : navigationForest.getGraphPredicates()) {
 			Node sourceNode = untraversedEdge.getSource();
-			if (!sourceNode.isInternal()) {
+			if (!sourceNode.isInternal() && !sourceNode.getNodeRole().isExtraGuardVariable()) {
 				Node targetNode = untraversedEdge.getTarget();
 				Property property = untraversedEdge.getProperty();
 				OCLExpression sourceExp = createVariableExp(sourceNode);
