@@ -39,6 +39,7 @@ import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.ids.PackageId;
 import org.eclipse.ocl.pivot.ids.PropertyId;
 import org.eclipse.ocl.pivot.ids.TypeId;
+import org.eclipse.ocl.pivot.internal.evaluation.EvaluationCache;
 import org.eclipse.ocl.pivot.internal.values.SetValueImpl;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
@@ -447,6 +448,11 @@ public abstract class AbstractTransformerInternal extends AbstractModelManager i
 	 */
 	protected final @NonNull ObjectManager objectManager;
 
+	/**
+	 * Cache of operation evaluations.
+	 */
+	protected final @NonNull EvaluationCache evaluationCache;
+
 	protected AbstractTransformerInternal(@NonNull Executor executor, @NonNull String @NonNull [] modelNames,
 			@NonNull PropertyId @Nullable [] propertyIndex2propertyId, @NonNull ClassId @Nullable [] classIndex2classId, int @Nullable [] @NonNull [] classIndex2allClassIndexes) {
 		this.executor = executor;
@@ -454,6 +460,7 @@ public abstract class AbstractTransformerInternal extends AbstractModelManager i
 		this.idResolver = (IdResolver.IdResolverExtension)executor.getIdResolver();
 		this.invocationManager = createInvocationManager();
 		this.objectManager = createObjectManager();
+		this.evaluationCache = createEvaluationCache();
 		this.models = new @NonNull Model @NonNull [modelNames.length];
 		for (int i = 0; i < modelNames.length; i++) {
 			String modelName = modelNames[i];
@@ -521,6 +528,13 @@ public abstract class AbstractTransformerInternal extends AbstractModelManager i
 			throw new IllegalStateException("Unknown model name '" + modelName + "'");
 		}
 		models[modelIndex].addRootObjects(eRootObjects);
+	}
+
+	/**
+	 * Create the evaluationCache. Creates a EvaluationCache by default.
+	 */
+	protected @NonNull EvaluationCache createEvaluationCache() {
+		return new EvaluationCache(executor);
 	}
 
 	/**
