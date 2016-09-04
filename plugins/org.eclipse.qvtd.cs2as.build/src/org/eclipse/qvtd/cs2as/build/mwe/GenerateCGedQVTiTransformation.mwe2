@@ -42,6 +42,8 @@ var javaPackage = ""
 
 var tracePropertyName = "ast"
 
+var boolean debug = false
+
 
 Workflow {
 
@@ -53,5 +55,6 @@ Workflow {
 		lookupResolverClassName = lookupResolverClassName
 		lookupResultItfName = lookupResultItfName 
 		tracePropertyName = tracePropertyName
+		debug = debug
 	}
 }

@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *     Adolfo Sanchez-Barbudo Herrera (University of York) - initial API and implementation
  *******************************************************************************/
@@ -33,10 +33,11 @@ public  class GenerateCGedQVTiTransformation extends AbstractWorkflowComponent
 	protected static boolean isDefined(final String string) {
 		return (!Objects.equals(string, null));
 	}
-	
+
 	protected String projectName;
 	protected String oclFileURI;
 	protected ResourceSet resourceSet;
+	protected boolean debug = false;
 	protected String javaFolder = "src-gen/";
 	protected String javaPackage = "";
 	protected String lookupResolverClassName;
@@ -49,30 +50,32 @@ public  class GenerateCGedQVTiTransformation extends AbstractWorkflowComponent
 		if (!isDefined(oclFileURI)) {
 			issues.addError(this, "OCL document URI not specified.");
 		}
-		
+
 		if (!isDefined(lookupResolverClassName)) {
 			issues.addError(this, "Fully qualified name of the Loookup Visitor java class not specified");
 		}
-		
+
 		if (!isDefined(lookupResultItfName)) {
 			issues.addError(this, "Fully qualified name of the Named Element interface not specified");
 		}
 	}
-	
-	 
 
 
-	
+
+
+
 	@Override
 	protected void invokeInternal(WorkflowContext ctx, ProgressMonitor monitor, Issues issues) {
 
 		try {
 			URI oclDocURI = URI.createURI(oclFileURI);
 			CS2ASJavaCompilerParameters cgParams = createParameters();
-			createCompiler().compileTransformation(resourceSet, cgParams, traceabilityPropName, oclDocURI);
+			OCL2QVTiCGTxCompiler createCompiler = createCompiler();
+			createCompiler.setDebug(debug);
+			createCompiler.compileTransformation(resourceSet, cgParams, traceabilityPropName, oclDocURI);
 		} catch (Exception e) {
 			issues.addError(this, "Error while executing " + GenerateCGedQVTiTransformation.class.getName(), null, e, null);
-		}		
+		}
 	}
 
 	protected OCL2QVTiCGTxCompiler createCompiler() {
@@ -83,13 +86,20 @@ public  class GenerateCGedQVTiTransformation extends AbstractWorkflowComponent
 	}
 
 	/**
+	 * (Optional) Enable debug outputs such as schedule graphs.
+	 */
+	public void setDebug(final boolean debug) {
+		this.debug = debug;
+	}
+
+	/**
 	 * (Optional) The folder within the project that forms the root of EMF
 	 * generated sources. (default is "src-gen/")
 	 */
 	public void setJavaFolder(final String javaFolder) {
 		this.javaFolder = javaFolder.endsWith(BACKSLASH) ? javaFolder : javaFolder.concat(BACKSLASH);
 	}
-	
+
 	/**
 	 * (Optional) The folder within the project that forms the root of EMF
 	 * generated sources. (default is "")
@@ -99,26 +109,26 @@ public  class GenerateCGedQVTiTransformation extends AbstractWorkflowComponent
 	}
 
 	/**
-	 * (Mandatory) The OCL document URI corresponding to the CS2AS description  
+	 * (Mandatory) The OCL document URI corresponding to the CS2AS description
 	 */
 	public void setOclDocURI(final String oclDocURI) {
 		this.oclFileURI = oclDocURI;
 	}
-	
+
 	/**
-	 * (Mandatory) The fully qualified class name of the Lookup Resolver java class  
+	 * (Mandatory) The fully qualified class name of the Lookup Resolver java class
 	 */
 	public void setLookupResolverClassName(final String visitorClassName) {
 		this.lookupResolverClassName = visitorClassName;
 	}
-	
+
 	/**
-	 * (Mandatory) The fully qualified interface name of the Lookup Result java interface  
+	 * (Mandatory) The fully qualified interface name of the Lookup Result java interface
 	 */
 	public void setLookupResultItfName(final String namedElementItfName) {
 		this.lookupResultItfName = namedElementItfName;
 	}
-	
+
 	/**
 	 * An optional ResourceSet that MWE components may share to reduce model
 	 * loading.
@@ -126,14 +136,14 @@ public  class GenerateCGedQVTiTransformation extends AbstractWorkflowComponent
 	public void setResourceSet(final ResourceSet resourceSet) {
 		this.resourceSet = resourceSet;
 	}
-	
+
 	/**
 	 * An optional saving options used when serialising EMF resources. (default is {@link XMIUtil#createSaveOptions()})
 	 */
 	public void setSavingOptions(final Map<?, ?> savingOptions) {
 		this.savingOptions = savingOptions;
 	}
-	
+
 
 	/**
 	 * An optional CS2AS traceability property name (default is "ast")
@@ -141,6 +151,6 @@ public  class GenerateCGedQVTiTransformation extends AbstractWorkflowComponent
 	public void setTracePropertyName(final String tracePropName) {
 		this.traceabilityPropName = tracePropName;
 	}
-	
-	
+
+
 }
