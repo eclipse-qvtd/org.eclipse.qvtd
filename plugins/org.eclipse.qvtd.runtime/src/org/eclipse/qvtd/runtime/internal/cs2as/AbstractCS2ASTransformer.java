@@ -23,11 +23,11 @@ import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
 
 
 public abstract class AbstractCS2ASTransformer extends AbstractTransformer
-	implements CS2ASTransformer
+implements CS2ASTransformer
 {
 
-	private final List<CS2ASDiagnostic> txErrors = new ArrayList<CS2ASDiagnostic>(); 
-	
+	private final List<CS2ASDiagnostic> txErrors = new ArrayList<CS2ASDiagnostic>();
+
 	protected AbstractCS2ASTransformer(@NonNull Executor executor, @NonNull String @NonNull [] modelNames,
 			@NonNull PropertyId @Nullable [] propertyIndex2propertyId, @NonNull ClassId @Nullable [] classIndex2classId, int @Nullable [] @NonNull [] classIndex2allClassIndexes) {
 		super(executor, modelNames, propertyIndex2propertyId, classIndex2classId, classIndex2allClassIndexes);
@@ -36,34 +36,39 @@ public abstract class AbstractCS2ASTransformer extends AbstractTransformer
 	protected @NonNull RuntimeException throwNull(@NonNull EObject csObject, @NonNull String message) {
 		throw new CS2ASException(csObject, message);
 	}
-	
-	protected void handleLookupError(EObject sourceObject, String lookupHint) {
-		handleError(sourceObject, "''" + lookupHint +"'' not found");
+
+	protected void handleLookupError(@Nullable String mentor, String lookupHint) {
+		throw new RuntimeException(mentor + lookupHint);
 	}
-	
+
 	protected void handleLookupError(EObject sourceObject, EObject lookupHint) {
 		handleError(sourceObject, "''" + lookupHint.toString() +"'' not found");
 	}
-	
+
+	protected void handleLookupError(@Nullable Object aPathElementCS_0,
+			@Nullable String name_1) {
+		throw new RuntimeException(aPathElementCS_0 + name_1);
+	}
+
 	protected void handleLookupError(List<? extends EObject> sourceObjects, EObject lookupHint) {
 		int hintPos = sourceObjects.indexOf(lookupHint);
 		switch (hintPos)  {
 			case -1:
 			case 0:
-					hintPos = 0; // For safety, the default will be the first one
-					break;
+				hintPos = 0; // For safety, the default will be the first one
+				break;
 			default:
-					// We assume the element from which we report is the previous one of the lookupHint
-					hintPos = hintPos -1;
+				// We assume the element from which we report is the previous one of the lookupHint
+				hintPos = hintPos -1;
 		}
-		
-		handleError(sourceObjects.get(hintPos), "''" + lookupHint.toString() +"'' not found"); 
+
+		handleError(sourceObjects.get(hintPos), "''" + lookupHint.toString() +"'' not found");
 	}
-	
+
 	protected void handleError(EObject sourceObject, String errorMessage) {
 		txErrors.add(new CS2ASDiagnostic(sourceObject, errorMessage));
 	}
-	
+
 	@Override
 	public List<CS2ASDiagnostic> getErrors() {
 		return txErrors;
