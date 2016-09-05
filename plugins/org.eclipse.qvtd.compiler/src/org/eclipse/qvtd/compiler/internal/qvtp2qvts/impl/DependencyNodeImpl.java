@@ -16,10 +16,10 @@ import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NodeRole;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
 
-public class PredicatedInternalNodeImpl extends NodeImpl
+public class DependencyNodeImpl extends NodeImpl
 {
-	public static @NonNull PredicatedInternalNodeImpl create(@NonNull NodeRole nodeRole, @NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
-		PredicatedInternalNodeImpl node = new PredicatedInternalNodeImpl();
+	public static @NonNull DependencyNodeImpl create(@NonNull NodeRole nodeRole, @NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
+		DependencyNodeImpl node = new DependencyNodeImpl();
 		node.initialize(nodeRole, region, name, classDatumAnalysis);
 		return node;
 	}
@@ -30,12 +30,7 @@ public class PredicatedInternalNodeImpl extends NodeImpl
 	}
 
 	@Override
-	public boolean isInternal() {
-		return true;
-	}
-
-	@Override
-	public boolean isPattern() {
+	public boolean isDependency() {
 		return true;
 	}
 }

@@ -17,13 +17,6 @@ import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
 
 public class IteratorNodeImpl extends VariableNodeImpl
 {
-	/*	public static @NonNull PatternNodeImpl create(@NonNull NodeRole nodeRole, @NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis, boolean isMatched) {
-		PatternNodeImpl node = new PatternNodeImpl();
-		node.initialize(nodeRole, region, name, classDatumAnalysis);
-		node.isMatched = isMatched;
-		return node;
-	} */
-
 	public static @NonNull VariableNodeImpl create(@NonNull NodeRole nodeRole, @NonNull Region region, @NonNull VariableDeclaration variable) {
 		IteratorNodeImpl node = new IteratorNodeImpl();
 		node.initialize(nodeRole, region, variable);
@@ -37,11 +30,6 @@ public class IteratorNodeImpl extends VariableNodeImpl
 
 	@Override
 	public boolean isExpression() {
-		return true;
-	}
-
-	@Override
-	public boolean isInternal() {
 		return true;
 	}
 

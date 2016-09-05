@@ -271,7 +271,7 @@ public abstract class AbstractMappingRegion extends AbstractRegion implements Ma
 		//
 		Set<@NonNull Node> debugHeadNodes = new HashSet<>();
 		for (@NonNull Node node : getNodes()) {
-			if (node.isTrue() || node.isExtraGuard()) {
+			if (node.isTrue() || node.isDependency()) {
 				debugHeadNodes.add(node);
 				node.setHead();
 				assert !headNodes.contains(node);

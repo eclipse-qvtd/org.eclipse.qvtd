@@ -116,6 +116,12 @@ public interface Node extends ConnectionEnd, GraphStringBuilder.GraphNode, Namea
 	boolean isDataType();
 
 	/**
+	 * Return true if this node is a dependency; something from another region used by a computation for this node's region.
+	 * A tree of dependency nodes and edges may provide an incoming edge for an operation to express the hidden computations of the operation.
+	 */
+	boolean isDependency();
+
+	/**
 	 * Return true if this node is an explicitly null value.
 	 */
 	boolean isExplicitNull();
@@ -126,20 +132,10 @@ public interface Node extends ConnectionEnd, GraphStringBuilder.GraphNode, Namea
 	 */
 	boolean isExpression();
 
-	boolean isExtraGuard();
-
 	/**
 	 * Return true if this node is part of a head group from which many other nodes are navigable.
 	 */
 	boolean isHead();
-
-	/**
-	 * Return true if this node's dependencies can be resolved within the containing region.
-	 * This occurs for 1:N navigations such as an iteration result that computes multiple
-	 * results dependent on multiple internally navigable inputs. No need for extra inputs to
-	 * be passed; just a need for the navigable inputs to exist.
-	 */
-	boolean isInternal();
 
 	/**
 	 * Return true if this node is a LoopExp iterator.

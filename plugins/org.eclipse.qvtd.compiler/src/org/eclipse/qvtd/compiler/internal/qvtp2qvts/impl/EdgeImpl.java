@@ -137,6 +137,8 @@ public abstract class EdgeImpl implements Edge
 		region.addEdge(this);
 		sourceNode2.addOutgoingEdge(this);
 		targetNode2.addIncomingEdge(this);
+		assert !sourceNode2.isDependency() || targetNode2.isDependency() || targetNode2.isOperation();	// sourceNode2.isDependency() implies (targetNode2.isDependency() or targetNode2.isOperation())
+		assert !targetNode2.isDependency() || sourceNode2.isDependency();								// targetNode2.isDependency() implies sourceNode2.isDependency()
 	}
 
 	@Override
@@ -242,6 +244,11 @@ public abstract class EdgeImpl implements Edge
 	public boolean isConstant() {
 		assert edgeRole != null;
 		return edgeRole.isConstant();
+	}
+
+	@Override
+	public final boolean isDependency() {
+		return ClassUtil.nonNullState(sourceNode).isDependency();
 	}
 
 	@Override

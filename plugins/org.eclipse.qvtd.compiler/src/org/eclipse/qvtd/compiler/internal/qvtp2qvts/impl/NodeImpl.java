@@ -563,6 +563,11 @@ public abstract class NodeImpl implements Node
 	}
 
 	@Override
+	public boolean isDependency() {
+		return false;
+	}
+
+	@Override
 	public boolean isExplicitNull() {
 		return false;
 	}
@@ -573,18 +578,8 @@ public abstract class NodeImpl implements Node
 	}
 
 	@Override
-	public boolean isExtraGuard() {
-		return false;
-	}
-
-	@Override
 	public boolean isHead() {
 		return isHead;
-	}
-
-	@Override
-	public boolean isInternal() {
-		return false;
 	}
 
 	@Override

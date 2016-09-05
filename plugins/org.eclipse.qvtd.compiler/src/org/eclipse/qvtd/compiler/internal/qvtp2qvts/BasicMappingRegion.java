@@ -93,9 +93,9 @@ public class BasicMappingRegion extends AbstractMappingRegion
 	private final @NonNull Map<@NonNull VariableDeclaration, @NonNull Node> variable2node = new HashMap<>();
 
 	/**
-	 * The extra guards to accommodate operation content.
+	 * The dependency heads to accommodate operation content.
 	 */
-	private /*@LazyNonNull*/ List<@NonNull Node> extraNodes = null;
+	private /*@LazyNonNull*/ List<@NonNull Node> dependencyHeadNodes = null;
 
 	private BasicMappingRegion(@NonNull MultiRegion multiRegion, @NonNull MappingAction mappingAction) {
 		super(multiRegion);
@@ -334,21 +334,22 @@ public class BasicMappingRegion extends AbstractMappingRegion
 		return initNode;
 	}
 
-	public @NonNull Node createExtraGuard(@NonNull ClassDatumAnalysis classDatumAnalysis) {
-		if (extraNodes == null) {
-			extraNodes = new ArrayList<>();
+	public @NonNull Node createDependencyHead(@NonNull ClassDatumAnalysis classDatumAnalysis) {
+		if (dependencyHeadNodes == null) {
+			dependencyHeadNodes = new ArrayList<>();
 		}
-		Node extraGuardNode = RegionUtil.createExtraGuardNode(this, "«extra-" + (extraNodes.size()+1) + "»", classDatumAnalysis);
-		extraNodes.add(extraGuardNode);
-		addHeadNode(extraGuardNode);
-		return extraGuardNode;
+		Node dependencyHeadNode = RegionUtil.createDependencyNode(this, "«extra-" + (dependencyHeadNodes.size()+1) + "»", classDatumAnalysis);
+		dependencyHeadNode.setHead();
+		dependencyHeadNodes.add(dependencyHeadNode);
+		addHeadNode(dependencyHeadNode);
+		return dependencyHeadNode;
 	}
 
-	public @Nullable Node getExtraGuard(@NonNull ClassDatumAnalysis classDatumAnalysis) {
-		if (extraNodes != null) {
-			for (@NonNull Node extraNode : extraNodes) {
-				if (extraNode.getClassDatumAnalysis() == classDatumAnalysis) {
-					return extraNode;
+	public @Nullable Node getDependencyHead(@NonNull ClassDatumAnalysis classDatumAnalysis) {
+		if (dependencyHeadNodes != null) {
+			for (@NonNull Node dependencyHeadNode : dependencyHeadNodes) {
+				if (dependencyHeadNode.getClassDatumAnalysis() == classDatumAnalysis) {
+					return dependencyHeadNode;
 				}
 			}
 		}

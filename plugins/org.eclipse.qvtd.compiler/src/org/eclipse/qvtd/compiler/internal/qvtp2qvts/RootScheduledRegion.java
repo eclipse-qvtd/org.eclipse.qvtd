@@ -323,7 +323,7 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 		for (@NonNull Region region : getRegions()) {
 			for (@NonNull Node predicatedNode : region.getOldNodes()) {
 				if (!predicatedNode.isHead()) {
-					if (!predicatedNode.isLoaded() && !predicatedNode.isConstant() && !predicatedNode.isInternal()) {
+					if (!predicatedNode.isLoaded() && !predicatedNode.isConstant() && !predicatedNode.isDependency()) {
 						if (!isOnlyCastOrRecursed(predicatedNode)) {			// FIXME Eliminate cast nodes
 							addConsumedNode(predicatedNode);
 						}
@@ -341,8 +341,7 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 				}
 			}
 			for (@NonNull Node headNode : region.getHeadNodes()) {
-				//				if (headNode.isKnown() && !headNode.isInternal()) {
-				if (headNode.isLoaded() && !headNode.isInternal()) {
+				if (headNode.isLoaded() && !headNode.isDependency()) {
 					addConsumedNode(headNode);
 				}
 			}

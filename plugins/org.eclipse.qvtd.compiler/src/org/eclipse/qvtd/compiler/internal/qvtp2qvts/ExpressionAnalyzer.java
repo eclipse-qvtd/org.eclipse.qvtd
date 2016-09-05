@@ -293,6 +293,10 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 		return RegionUtil.createDataTypeNode(sourceNode, callExp);
 	}
 
+	protected @NonNull Node createDependencyNode(@NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
+		return RegionUtil.createDependencyNode(context, name, classDatumAnalysis);
+	}
+
 	protected @NonNull Node createErrorNode(@NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
 		return RegionUtil.createErrorNode(context, name, classDatumAnalysis);
 	}
@@ -355,11 +359,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 	}
 
 	protected @NonNull Node createPredicatedClassNode(@NonNull Node parentNode, @NonNull NavigationAssignment navigationAssignment) {
-		return RegionUtil.createPredicatedInternalClassNode(parentNode, navigationAssignment);
-	}
-
-	protected @NonNull Node createPredicatedInternalNode(@NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
-		return RegionUtil.createPredicatedInternalNode(context, name, classDatumAnalysis);
+		return RegionUtil.createDependencyClassNode(parentNode, navigationAssignment);
 	}
 
 	protected @NonNull Node createRealizedDataTypeNode(@NonNull Node sourceNode, @NonNull Property source2targetProperty) {
@@ -540,15 +540,15 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 		return createNavigationOrRealizedEdge(sourceNode, source2targetProperty, targetNode, navigationAssignment);
 	}
 
-	private void instantiate(@NonNull Node instantiatedNode, @NonNull Node extraNode) {
-		for (@NonNull NavigableEdge extraEdge : extraNode.getNavigationEdges()) {
-			if (!extraEdge.isSecondary()) {
-				Node extraTargetNode = extraEdge.getTarget();
-				String name = extraTargetNode.getName();
-				ClassDatumAnalysis classDatumAnalysis = extraTargetNode.getClassDatumAnalysis();
-				Node instantiatedTargetNode = createPredicatedInternalNode(name, classDatumAnalysis);
-				createNavigationEdge(instantiatedNode, extraEdge.getProperty(), instantiatedTargetNode);
-				instantiate(instantiatedTargetNode, extraTargetNode);
+	private void instantiate(@NonNull Node instantiatedNode, @NonNull Node referenceNode) {
+		for (@NonNull NavigableEdge referenceEdge : referenceNode.getNavigationEdges()) {
+			if (!referenceEdge.isSecondary()) {
+				Node referenceTargetNode = referenceEdge.getTarget();
+				String name = referenceTargetNode.getName();
+				ClassDatumAnalysis classDatumAnalysis = referenceTargetNode.getClassDatumAnalysis();
+				Node instantiatedTargetNode = createDependencyNode(name, classDatumAnalysis);
+				createNavigationEdge(instantiatedNode, referenceEdge.getProperty(), instantiatedTargetNode);
+				instantiate(instantiatedTargetNode, referenceTargetNode);
 			}
 		}
 	}
@@ -844,15 +844,15 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTimperativeVisitor<@N
 				}
 				if (referredOperation.getBodyExpression() != null) {
 					OperationRegion operationRegion = context.getMultiRegion().analyzeOperation(operationCallExp);
-					List<@NonNull Node> extraNodes = operationRegion.getExtraNodes();
-					if (extraNodes.size() > 0) {
-						for (@NonNull Node extraNode : extraNodes) {
-							ClassDatumAnalysis classDatumAnalysis = extraNode.getClassDatumAnalysis();
-							Node extraGuard = context.getExtraGuard(classDatumAnalysis);
-							if (extraGuard == null) {
-								extraGuard = context.createExtraGuard(classDatumAnalysis);
-								createExpressionEdge(extraGuard, extraGuard.getName(), operationNode);
-								instantiate(extraGuard, extraNode);
+					List<@NonNull Node> referenceNodes = operationRegion.getDependencyNodes();
+					if (referenceNodes.size() > 0) {
+						for (@NonNull Node referenceNode : referenceNodes) {
+							ClassDatumAnalysis classDatumAnalysis = referenceNode.getClassDatumAnalysis();
+							Node dependencyHead = context.getDependencyHead(classDatumAnalysis);
+							if (dependencyHead == null) {
+								dependencyHead = context.createDependencyHead(classDatumAnalysis);
+								createExpressionEdge(dependencyHead, dependencyHead.getName(), operationNode);
+								instantiate(dependencyHead, referenceNode);
 							}
 						}
 					}

@@ -1214,7 +1214,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 		//	Connect up the head
 		//
 		NodeConnection headConnection = invokingRegion2.getNodeConnection(headSources, classDatumAnalysis);
-		if (headNode.isExtraGuard()) {
+		if (headNode.isDependency()) {
 			headConnection.addUsedTargetNode(headNode, false);
 		}
 		else {
@@ -1236,10 +1236,10 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 	private @Nullable Iterable<@NonNull NodeConnection> createHeadConnections() {
 		List<@NonNull NodeConnection> headConnections = null;
 		for (@NonNull Node headNode : getHeadNodes()) {
-			if (/*headNode.isLoaded() &&*/ !headNode.isInternal() && !headNode.isTrue()) {
+			if (/*headNode.isLoaded() &&*/ !headNode.isDependency() && !headNode.isTrue()) {
 				NodeConnection headConnection = createHeadConnection(headNode);
 				if (headConnection == null) {
-					if (!headNode.isExtraGuard()) {	// We don't know if extra guards are needed or not
+					if (!headNode.isDependency()) {	// We don't know if dependency heads are needed or not
 						multiRegion.getSchedulerConstants().addProblem(createError("createHeadConnections abandoned for " + headNode));
 						headConnection = createHeadConnection(headNode);	// FIXME debugging
 						return null;										//  so matching only fails for unmatchable real heads
@@ -1280,7 +1280,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 	 * Each head node has a passed connection from its sources.
 	 * Consistently related nodes navigable from the head have a bindable connection to the correspondingly related sources.
 	 * Inconsistently related nodes navigable from the head have a computable connection to all compatibly typed sources.
-	 * Unrelated nodes such as the internals of computations are not connected; their dependencies should be in extra heads.
+	 * Unrelated nodes such as the internals of computations are not connected; their dependencies should be in dependency heads.
 	 * Edges dependent on realization elsewhere are represented by connection from all head nodes of the dependent region
 	 * to all heads of the realizing region.
 	 */
@@ -1626,7 +1626,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 		return cost;
 	}
 
-/*	public int getEarliestPassedConnectionSourceIndex() {
+	/*	public int getEarliestPassedConnectionSourceIndex() {
 		int earliestPassedConnectionSourceIndex = 0;
 		for (@NonNull NodeConnection passedConnection : getIncomingPassedConnections()) {
 			for (@NonNull Region sourceRegion : passedConnection.getSourceRegions()) {
@@ -1671,11 +1671,13 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 				connections.add(connection);
 			}
 		}
-		for (@NonNull Node node : getPatternNodes()) {
-			if (node.isLoaded() || node.isSpeculated() || node.isPredicated()) {	// A DataType may be loaded but subject to an edge predication
-				NodeConnection connection = node.getIncomingUsedConnection();
-				if ((connection != null) && !connections.contains(connection)) {
-					connections.add(connection);
+		for (@NonNull Node node : getNodes()) {
+			if (node.isDependency() || node.isPattern()) {
+				if (node.isLoaded() || node.isSpeculated() || node.isPredicated()) {	// A DataType may be loaded but subject to an edge predication
+					NodeConnection connection = node.getIncomingUsedConnection();
+					if ((connection != null) && !connections.contains(connection)) {
+						connections.add(connection);
+					}
 				}
 			}
 		}

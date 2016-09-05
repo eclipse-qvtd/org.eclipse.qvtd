@@ -96,6 +96,12 @@ public interface Edge extends GraphStringBuilder.GraphEdge, Nameable, Visitable
 	boolean isConstant();
 
 	/**
+	 * Return true if this edge is a dependency echoing that in an instantiated operation. A tree of dependency
+	 * nodes and edges may provide an incoming edge for an operation to express the hidden computations of the operation.
+	 */
+	boolean isDependency();
+
+	/**
 	 * Return true if this edge is for an expression.
 	 */
 	boolean isExpression();

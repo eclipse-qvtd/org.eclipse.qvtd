@@ -49,7 +49,7 @@ public class OperationRegion extends AbstractRegion
 	protected final @NonNull String name;
 	private final @NonNull List<@NonNull Node> headNodes = new ArrayList<>();
 	private final @NonNull Node resultNode;
-	private final @NonNull List<@NonNull Node> extraNodes = new ArrayList<>();
+	private final @NonNull List<@NonNull Node> dependencyNodes = new ArrayList<>();
 	private final @NonNull Map<@NonNull VariableDeclaration, @NonNull Node> parameter2node = new HashMap<>();
 
 	protected OperationRegion(@NonNull MultiRegion multiRegion, @NonNull OperationDatum operationDatum, @NonNull ExpressionInOCL specification, @NonNull OperationCallExp operationCallExp) {//, @NonNull Node sourceNode) {
@@ -63,11 +63,11 @@ public class OperationRegion extends AbstractRegion
 		OCLExpression source = operationCallExp.getOwnedSource();
 		assert source != null;
 		Node selfNode = createParameterNode(selfVariable, ClassUtil.nonNullState(selfVariable.getName()), source);
-		Node extraNode;
-		extraNode = selfNode;
+		Node dependencyNode;
+		dependencyNode = selfNode;
 		//
-		resultNode = RegionUtil.createStepNode("result", operationCallExp, extraNode, false);
-		RegionUtil.createExpressionEdge(extraNode, "«equals»", resultNode);
+		resultNode = RegionUtil.createStepNode("result", operationCallExp, dependencyNode, false);
+		RegionUtil.createExpressionEdge(dependencyNode, "«equals»", resultNode);
 		//
 		List<Variable> ownedParameters = specification.getOwnedParameters();
 		List<OCLExpression> ownedArguments = operationCallExp.getOwnedArguments();
@@ -115,21 +115,21 @@ public class OperationRegion extends AbstractRegion
 						//					OCLExpression source = operationCallExp.getOwnedSource();
 						//					assert source != null;
 						//					createParameterNode(selfVariable, selfVariable.getName(), source);
-						Node extraNode2;
+						Node dependencyNode2;
 						if (classStep.isParameter()) {
-							extraNode2 = parameter2node.get(classStep.getElement());
-							assert extraNode2 != null;
+							dependencyNode2 = parameter2node.get(classStep.getElement());
+							assert dependencyNode2 != null;
 						}
 						else {
-							extraNode2 = classDatumAnalysis2node.get(classDatumAnalysis);
-							if (extraNode2 == null) {
+							dependencyNode2 = classDatumAnalysis2node.get(classDatumAnalysis);
+							if (dependencyNode2 == null) {
 								assert !"OclVoid".equals(stepType.getName());
-								extraNode2 = createParameterNode(classDatumAnalysis, "extra2_" + stepType.getName());
-								classDatumAnalysis2node.put(classDatumAnalysis, extraNode2);
-								extraNodes.add(extraNode2);
+								dependencyNode2 = createParameterNode(classDatumAnalysis, "extra2_" + stepType.getName());
+								classDatumAnalysis2node.put(classDatumAnalysis, dependencyNode2);
+								dependencyNodes.add(dependencyNode2);
 							}
 						}
-						//					extraNodes.add(extraNode);
+						//					dependencyNodes.add(dependencyNode);
 						for (int i = 1; i < steps.size(); i++) {
 							DependencyStep step = steps.get(i);
 							Property property = step.getProperty();
@@ -147,15 +147,15 @@ public class OperationRegion extends AbstractRegion
 								Type elementType = ((CollectionType)primaryClass).getElementType();
 								TypedModel typedModel2 = classDatumAnalysis.getTypedModel();
 								ClassDatumAnalysis elementClassDatumAnalysis = schedulerConstants.getClassDatumAnalysis((@NonNull Class) elementType, typedModel2);
-								Node elementNode = RegionUtil.createOperationElementNode(this, name, elementClassDatumAnalysis, extraNode2);
-								//(region, name, typedElement, argNodes)Node(region, name, callExp, sourceNode)Node(this, name, iterateProperty, extraNode2);
-								RegionUtil.createNavigationEdge(extraNode2, iterateProperty, elementNode);
-								extraNode2 = elementNode;
+								Node elementNode = RegionUtil.createOperationElementNode(this, name, elementClassDatumAnalysis, dependencyNode2);
+								//(region, name, typedElement, argNodes)Node(region, name, callExp, sourceNode)Node(this, name, iterateProperty, dependencyNode2);
+								RegionUtil.createNavigationEdge(dependencyNode2, iterateProperty, elementNode);
+								dependencyNode2 = elementNode;
 							}
-							//							assert !extraNode2.isMatched();
-							Node nextNode = RegionUtil.createDataTypeNode(extraNode2, navigationCallExp);			// FIXME re-use shared paths
-							RegionUtil.createNavigationEdge(extraNode2, property, nextNode);
-							extraNode2 = nextNode;
+							//							assert !dependencyNode2.isMatched();
+							Node nextNode = RegionUtil.createDataTypeNode(dependencyNode2, navigationCallExp);			// FIXME re-use shared paths
+							RegionUtil.createNavigationEdge(dependencyNode2, property, nextNode);
+							dependencyNode2 = nextNode;
 						}
 					}
 				}
@@ -203,8 +203,8 @@ public class OperationRegion extends AbstractRegion
 		return parameterNode;
 	}
 
-	public @NonNull List<@NonNull Node> getExtraNodes() {
-		return extraNodes;
+	public @NonNull List<@NonNull Node> getDependencyNodes() {
+		return dependencyNodes;
 	}
 
 	@Override

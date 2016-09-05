@@ -34,7 +34,7 @@ import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.ComposedNodeImpl;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.EdgeRoleImpl;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.ErrorNodeImpl;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.ExpressionEdgeImpl;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.ExtraGuardNodeImpl;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.DependencyNodeImpl;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.InputNodeImpl;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.IteratedEdgeImpl;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.IteratorNodeImpl;
@@ -45,7 +45,6 @@ import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.OperationNodeImpl;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.PatternTypedNodeImpl;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.PatternVariableNodeImpl;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.PredicateEdgeImpl;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.PredicatedInternalNodeImpl;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.RecursionEdgeImpl;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.TrueNodeImpl;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.UnknownNodeImpl;
@@ -115,6 +114,27 @@ public class RegionUtil
 		return PatternTypedNodeImpl.create(nodeRole, region, name, classDatumAnalysis, true);
 	}
 
+	public static @NonNull Node createDependencyClassNode(@NonNull Node parentNode, @NonNull NavigationAssignment navigationAssignment) {
+		assert parentNode.isClass();
+		SchedulerConstants schedulerConstants = parentNode.getRegion().getSchedulerConstants();
+		Property property = QVTcoreBaseUtil.getTargetProperty(navigationAssignment);
+		assert property != null;
+		org.eclipse.ocl.pivot.Class type = (org.eclipse.ocl.pivot.Class)property.getType();
+		assert type != null;
+		TypedModel typedModel = parentNode.getClassDatumAnalysis().getTypedModel();
+		ClassDatum classDatum = schedulerConstants.getClassDatum(type, typedModel);
+		//				DomainUsage domainUsage = parentNode.getClassDatumAnalysis().getDomainUsage();
+		ClassDatumAnalysis classDatumAnalysis = schedulerConstants.getClassDatumAnalysis(classDatum);
+		String name = property.getName();
+		assert name != null;
+		return createDependencyNode(parentNode.getRegion(), name, classDatumAnalysis);
+	}
+
+	public static @NonNull Node createDependencyNode(@NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
+		NodeRole nodeRole = NodeRoleImpl.getNodeRole(Role.Phase.PREDICATED);
+		return DependencyNodeImpl.create(nodeRole, region, name, classDatumAnalysis);
+	}
+
 	public static @NonNull Node createErrorNode(@NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
 		NodeRole nodeRole = NodeRoleImpl.getNodeRole(Role.Phase.OTHER);
 		return ErrorNodeImpl.create(nodeRole, region, name, classDatumAnalysis);
@@ -123,13 +143,6 @@ public class RegionUtil
 	public static @NonNull Edge createExpressionEdge(@NonNull Node sourceNode, @NonNull String name, @NonNull Node targetNode) {
 		EdgeRole edgeRole = EdgeRoleImpl.getEdgeRole(sourceNode.getNodeRole().getPhase());
 		return ExpressionEdgeImpl.create(edgeRole, sourceNode, name, targetNode);
-	}
-
-	public static @NonNull Node createExtraGuardNode(@NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
-		NodeRole nodeRole = NodeRoleImpl.getNodeRole(Role.Phase.PREDICATED);
-		Node node = ExtraGuardNodeImpl.create(nodeRole, region, name, classDatumAnalysis);
-		node.setHead();
-		return node;
 	}
 
 	public static @NonNull Node createInputNode(@NonNull Region region, NodeRole.@NonNull Phase nodeRolePhase, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
@@ -227,28 +240,6 @@ public class RegionUtil
 	public static @NonNull Edge createPredicateEdge(@NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode) {
 		EdgeRole edgeRole = EdgeRoleImpl.getEdgeRole(sourceNode.getNodeRole().getPhase());
 		return PredicateEdgeImpl.create(edgeRole, sourceNode, name, targetNode);
-	}
-
-	public static @NonNull Node createPredicatedInternalClassNode(@NonNull Node parentNode, @NonNull NavigationAssignment navigationAssignment) {
-		assert parentNode.isClass();
-		SchedulerConstants schedulerConstants = parentNode.getRegion().getSchedulerConstants();
-		Property property = QVTcoreBaseUtil.getTargetProperty(navigationAssignment);
-		assert property != null;
-		org.eclipse.ocl.pivot.Class type = (org.eclipse.ocl.pivot.Class)property.getType();
-		assert type != null;
-		TypedModel typedModel = parentNode.getClassDatumAnalysis().getTypedModel();
-		ClassDatum classDatum = schedulerConstants.getClassDatum(type, typedModel);
-		//				DomainUsage domainUsage = parentNode.getClassDatumAnalysis().getDomainUsage();
-		ClassDatumAnalysis classDatumAnalysis = schedulerConstants.getClassDatumAnalysis(classDatum);
-		String name = property.getName();
-		assert name != null;
-		NodeRole nodeRole = NodeRoleImpl.getNodeRole(Role.Phase.PREDICATED);
-		return PredicatedInternalNodeImpl.create(nodeRole, parentNode.getRegion(), name, classDatumAnalysis);
-	}
-
-	public static @NonNull Node createPredicatedInternalNode(@NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
-		NodeRole nodeRole = NodeRoleImpl.getNodeRole(Role.Phase.PREDICATED);
-		return PredicatedInternalNodeImpl.create(nodeRole, region, name, classDatumAnalysis);
 	}
 
 	public static @NonNull Node createRealizedDataTypeNode(@NonNull Node sourceNode, @NonNull Property source2targetProperty) {

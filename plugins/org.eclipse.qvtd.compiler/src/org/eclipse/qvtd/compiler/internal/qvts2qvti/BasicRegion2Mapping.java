@@ -865,7 +865,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			headCallingRegions.add(region);
 		}
 		for (@NonNull Node headNode : region.getHeadNodes()) {
-			if (!headNode.isTrue() && !headNode.isExtraGuard()) {
+			if (!headNode.isTrue() && !headNode.isDependency()) {
 				Node bestHeadNode = null;
 				Iterable<@NonNull Node> callingSources = headNode.getPassedBindingSources();
 				if (!Iterables.isEmpty(callingSources)) {
@@ -988,7 +988,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		for (@NonNull NavigableEdge edge : region.getNavigationEdges()) {
 			Node sourceNode = edge.getSource();
 			Node targetNode = edge.getTarget();
-			if (!sourceNode.isIterator() && !sourceNode.isExtraGuard() && !targetNode.isIterator() && RegionUtil.isUnconditional(edge)) {		// FIXME provide a better isExpression capability for pattern nodes
+			if (!sourceNode.isIterator() && !sourceNode.isDependency() && !targetNode.isIterator() && RegionUtil.isUnconditional(edge)) {		// FIXME provide a better isExpression capability for pattern nodes
 				forestEdges.add(edge);
 			}
 		}
@@ -1020,7 +1020,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		//
 		for (@NonNull NavigableEdge untraversedEdge : navigationForest.getGraphPredicates()) {
 			Node sourceNode = untraversedEdge.getSource();
-			if (!sourceNode.isInternal() && !sourceNode.isExtraGuard()) {
+			if (!sourceNode.isDependency()) {
 				Node targetNode = untraversedEdge.getTarget();
 				Property property = untraversedEdge.getProperty();
 				OCLExpression sourceExp = createVariableExp(sourceNode);
@@ -1393,10 +1393,10 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 								else if (reverseProperty.isIsImplicit()) {
 									reverseEdges.remove(reverseEdge);
 								}
-								else if (sourceNode.isInternal()) {
+								else if (sourceNode.isDependency()) {
 									forwardEdges.remove(forwardEdge);
 								}
-								else if (targetNode.isInternal()) {
+								else if (targetNode.isDependency()) {
 									reverseEdges.remove(reverseEdge);
 								}
 								else {		// FIXME do we prefer either direction ?
