@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
@@ -153,10 +153,10 @@ public class QVTiFieldingAnalyzer extends FieldingAnalyzer
 			return visitCGNamedElement(object);
 		}
 	}
-	
+
 	public static class QVTiRewriteVisitor extends RewriteVisitor implements QVTiCGModelVisitor<Boolean>
 	{
-		public QVTiRewriteVisitor(@NonNull QVTiAnalyzer context, @NonNull Set<CGVariable> caughtVariables) {
+		public QVTiRewriteVisitor(@NonNull QVTiAnalyzer context, @NonNull Set<@NonNull CGVariable> caughtVariables) {
 			super(context, caughtVariables);
 		}
 
@@ -227,17 +227,17 @@ public class QVTiFieldingAnalyzer extends FieldingAnalyzer
 
 		@Override
 		public Boolean visitCGMappingLoop(@NonNull CGMappingLoop cgElement) {
-//			return visitCGIterationCallExp(object);
+			//			return visitCGIterationCallExp(object);
 			rewriteAsThrown(cgElement.getSource());
 			for (CGIterator cgIterator : cgElement.getIterators()) {
 				cgIterator.accept(this);
 			}
-//			if (cgElement.getReferredIteration().isValidating()) {
-//				rewriteAsCaught(cgElement.getBody());
-//			}
-//			else {
-				rewriteAsThrown(cgElement.getBody());
-//			}
+			//			if (cgElement.getReferredIteration().isValidating()) {
+			//				rewriteAsCaught(cgElement.getBody());
+			//			}
+			//			else {
+			rewriteAsThrown(cgElement.getBody());
+			//			}
 			cgElement.setCaught(false);
 			return false;
 		}
@@ -277,7 +277,7 @@ public class QVTiFieldingAnalyzer extends FieldingAnalyzer
 			return visitCGNamedElement(object);
 		}
 	}
-	
+
 	public QVTiFieldingAnalyzer(@NonNull QVTiAnalyzer analyzer) {
 		super(analyzer);
 	}
@@ -288,7 +288,7 @@ public class QVTiFieldingAnalyzer extends FieldingAnalyzer
 	}
 
 	@Override
-	protected @NonNull RewriteVisitor createRewriteVisitor(@NonNull Set<CGVariable> caughtVariables) {
+	protected @NonNull RewriteVisitor createRewriteVisitor(@NonNull Set<@NonNull CGVariable> caughtVariables) {
 		return new QVTiRewriteVisitor((QVTiAnalyzer) analyzer, caughtVariables);
 	}
 }

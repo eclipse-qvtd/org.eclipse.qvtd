@@ -91,7 +91,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 		return new QVTiCG2JavaPreVisitor(getGlobalContext());
 	}
 
-	protected @NonNull QVTiCG2JavaVisitor createCG2JavaVisitor(@NonNull CGPackage cgPackage, @Nullable List<CGValuedElement> sortedGlobals) {
+	protected @NonNull QVTiCG2JavaVisitor createCG2JavaVisitor(@NonNull CGPackage cgPackage, @Nullable List<@NonNull CGValuedElement> sortedGlobals) {
 		return new QVTiCG2JavaVisitor(this, cgPackage, sortedGlobals);
 	}
 
@@ -147,7 +147,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 		CGPackage cgPackage2 = createCGPackage();
 		cgPackage = cgPackage2;
 		optimize(cgPackage2);
-		List<CGValuedElement> sortedGlobals = prepareGlobals();
+		List<@NonNull CGValuedElement> sortedGlobals = prepareGlobals();
 		QVTiCG2JavaVisitor generator = createCG2JavaVisitor(cgPackage2, sortedGlobals);
 		generator.safeVisit(cgPackage2);
 		Set<String> allImports = generator.getAllImports();

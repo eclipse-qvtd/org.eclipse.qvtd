@@ -84,7 +84,7 @@ public class CS2ASJavaCompilerImpl implements CS2ASJavaCompiler {
 		}
 
 		@Override
-		protected @NonNull QVTiCG2JavaVisitor createCG2JavaVisitor(@NonNull CGPackage cgPackage, @Nullable List<CGValuedElement> sortedGlobals) {
+		protected @NonNull QVTiCG2JavaVisitor createCG2JavaVisitor(@NonNull CGPackage cgPackage, @Nullable List<@NonNull CGValuedElement> sortedGlobals) {
 			return new CS2ASCG2JavaVisitor(this, cgPackage, sortedGlobals);
 		}
 
@@ -140,7 +140,7 @@ public class CS2ASJavaCompilerImpl implements CS2ASJavaCompiler {
 	{
 		private static final String LOOKUP_SOLVER_FIELD_NAME = "lookupSolver";
 
-		protected CS2ASCG2JavaVisitor(@NonNull QVTiCodeGenerator codeGenerator, @NonNull CGPackage cgPackage, @Nullable List<CGValuedElement> sortedGlobals) {
+		protected CS2ASCG2JavaVisitor(@NonNull QVTiCodeGenerator codeGenerator, @NonNull CGPackage cgPackage, @Nullable List<@NonNull CGValuedElement> sortedGlobals) {
 			super(codeGenerator, cgPackage, sortedGlobals);
 		}
 
@@ -170,17 +170,17 @@ public class CS2ASJavaCompilerImpl implements CS2ASJavaCompiler {
 
 		@Override
 		@Nullable
-		public Boolean visitCGLookupCallExp(CGLookupCallExp cgCall) {
+		public Boolean visitCGLookupCallExp(@NonNull CGLookupCallExp cgCall) {
 			CS2ASJavaCompilerParameters params = ((CS2ASJavaCodeGenerator)getCodeGenerator()).getCGParameters();
 
-			CGValuedElement cgSource = cgCall.getSource(); // FIXME to skip env() call. Remove env() call
+			CGValuedElement cgSource = ClassUtil.nonNullState(cgCall.getSource()); // FIXME to skip env() call. Remove env() call
 			TypeDescriptor typeDescriptor = context.getTypeDescriptor(cgCall);
 			if (!js.appendLocalStatements(cgSource)) {
 				return false;
 			}
 
 
-			List<CGValuedElement> cgArguments = cgCall.getArguments();
+			List<@NonNull CGValuedElement> cgArguments = ClassUtil.nullFree(cgCall.getArguments());
 			for (@NonNull CGValuedElement cgArgument : cgArguments) {
 				CGValuedElement argument = getExpression(cgArgument);
 				if (!js.appendLocalStatements(argument)) {
@@ -255,7 +255,7 @@ public class CS2ASJavaCompilerImpl implements CS2ASJavaCompiler {
 			CS2ASJavaCompilerParameters params = ((CS2ASJavaCodeGenerator)getCodeGenerator()).getCGParameters();
 			String lookupSolver = params.getLookupSolverClassName();
 
-			if (lookupSolver != null && !"".equals(lookupSolver)) {
+			if (!"".equals(lookupSolver)) {
 				js.append("private final ");
 				js.appendClassReference(lookupSolver);
 				js.append(" ");
@@ -291,7 +291,7 @@ public class CS2ASJavaCompilerImpl implements CS2ASJavaCompiler {
 
 	protected static class CS2ASAS2CGVisitor extends QVTiAS2CGVisitor {
 
-		public CS2ASAS2CGVisitor(QVTiAnalyzer analyzer, QVTiGlobalContext globalContext) {
+		public CS2ASAS2CGVisitor(@NonNull QVTiAnalyzer analyzer, @NonNull QVTiGlobalContext globalContext) {
 			super(analyzer, globalContext);
 		}
 
@@ -327,13 +327,13 @@ public class CS2ASJavaCompilerImpl implements CS2ASJavaCompiler {
 	protected static class CS2ASAnalysisVisitor extends QVTiAnalysisVisitor
 	implements CS2ASCGModelVisitor<Object> {
 
-		public CS2ASAnalysisVisitor(QVTiAnalyzer analyzer) {
+		public CS2ASAnalysisVisitor(@NonNull QVTiAnalyzer analyzer) {
 			super(analyzer);
 		}
 
 		@Override
 		@Nullable
-		public Object visitCGLookupCallExp(CGLookupCallExp object) {
+		public Object visitCGLookupCallExp(@NonNull CGLookupCallExp object) {
 			return visitCGOperationCallExp(object);
 		}
 	}
@@ -341,13 +341,13 @@ public class CS2ASJavaCompilerImpl implements CS2ASJavaCompiler {
 	protected static class CS2ASBoxingAnalyser extends QVTiBoxingAnalyzer
 	implements CS2ASCGModelVisitor<Object> {
 
-		public CS2ASBoxingAnalyser(QVTiAnalyzer analyzer) {
+		public CS2ASBoxingAnalyser(@NonNull QVTiAnalyzer analyzer) {
 			super(analyzer);
 		}
 
 		@Override
 		@Nullable
-		public Object visitCGLookupCallExp(CGLookupCallExp object) {
+		public Object visitCGLookupCallExp(@NonNull CGLookupCallExp object) {
 			super.visitCGOperationCallExp(object);
 			CGValuedElement cgSource = object.getSource();
 			rewriteAsGuarded(cgSource, isSafe(object), "source for '" + object.getReferredOperation() + "'");
@@ -365,13 +365,13 @@ public class CS2ASJavaCompilerImpl implements CS2ASJavaCompiler {
 
 		protected static class CS2ASAnalysisVisitor extends QVTiFieldingAnalyzer.QVTiAnalysisVisitor
 		implements CS2ASCGModelVisitor<Set<CGVariable>> {
-			public CS2ASAnalysisVisitor(QVTiFieldingAnalyzer context) {
+			public CS2ASAnalysisVisitor(@NonNull QVTiFieldingAnalyzer context) {
 				super(context);
 			}
 
 			@Override
 			@Nullable
-			public Set<CGVariable> visitCGLookupCallExp(CGLookupCallExp object) {
+			public Set<CGVariable> visitCGLookupCallExp(@NonNull CGLookupCallExp object) {
 				return visitCGOperationCallExp(object);
 			}
 		}
@@ -384,14 +384,14 @@ public class CS2ASJavaCompilerImpl implements CS2ASJavaCompiler {
 
 			@Override
 			@Nullable
-			public Boolean visitCGLookupCallExp(CGLookupCallExp object) {
+			public Boolean visitCGLookupCallExp(@NonNull CGLookupCallExp object) {
 				return visitCGOperationCallExp(object);
 			}
 		}
 
 
 
-		public CS2ASFieldingAnalyser(QVTiAnalyzer analyzer) {
+		public CS2ASFieldingAnalyser(@NonNull QVTiAnalyzer analyzer) {
 			super(analyzer);
 		}
 
@@ -401,7 +401,7 @@ public class CS2ASJavaCompilerImpl implements CS2ASJavaCompiler {
 		}
 
 		@Override
-		protected @NonNull RewriteVisitor createRewriteVisitor(@NonNull Set<CGVariable> caughtVariables) {
+		protected @NonNull RewriteVisitor createRewriteVisitor(@NonNull Set<@NonNull CGVariable> caughtVariables) {
 			return new CS2ASRewriteVisitor((QVTiAnalyzer)analyzer, caughtVariables);
 		}
 	}
@@ -410,13 +410,13 @@ public class CS2ASJavaCompilerImpl implements CS2ASJavaCompiler {
 	protected static class CS2ASCG2JavaPreVisitor extends QVTiCG2JavaPreVisitor
 	implements CS2ASCGModelVisitor<Object> {
 
-		public CS2ASCG2JavaPreVisitor(QVTiGlobalContext globalContext) {
+		public CS2ASCG2JavaPreVisitor(@NonNull QVTiGlobalContext globalContext) {
 			super(globalContext);
 		}
 
 		@Override
 		@Nullable
-		public Object visitCGLookupCallExp(CGLookupCallExp object) {
+		public Object visitCGLookupCallExp(@NonNull CGLookupCallExp object) {
 			return visitCGOperationCallExp(object);
 		}
 	}
@@ -424,7 +424,7 @@ public class CS2ASJavaCompilerImpl implements CS2ASJavaCompiler {
 	protected static class CS2ASReferencesVisitor extends QVTiReferencesVisitor
 	implements CS2ASCGModelVisitor<@NonNull List<@Nullable Object>> {
 
-		protected static CS2ASReferencesVisitor INSTANCE = new CS2ASReferencesVisitor(new Object());
+		protected static final @NonNull CS2ASReferencesVisitor INSTANCE = new CS2ASReferencesVisitor(new Object());
 
 		public CS2ASReferencesVisitor(@Nullable Object context) {
 			super(context);
@@ -439,13 +439,13 @@ public class CS2ASJavaCompilerImpl implements CS2ASJavaCompiler {
 	protected static class CS2ASDependencyVisitor extends QVTiDependencyVisitor
 	implements CS2ASCGModelVisitor<Object> {
 
-		public CS2ASDependencyVisitor(QVTiAnalyzer analyzer, QVTiGlobalContext globalContext, GlobalPlace globalPlace) {
+		public CS2ASDependencyVisitor(@NonNull QVTiAnalyzer analyzer, @NonNull QVTiGlobalContext globalContext, @NonNull GlobalPlace globalPlace) {
 			super(analyzer, globalContext, globalPlace);
 		}
 
 		@Override
 		@Nullable
-		public Object visitCGLookupCallExp(CGLookupCallExp object) {
+		public Object visitCGLookupCallExp(@NonNull CGLookupCallExp object) {
 			return visitCGOperationCallExp(object);
 		}
 	}
@@ -456,7 +456,7 @@ public class CS2ASJavaCompilerImpl implements CS2ASJavaCompiler {
 	protected Class<? extends CS2ASTransformer> compileTransformation(@NonNull File explicitClassPath, @NonNull QVTiCodeGenerator cg) throws Exception {
 		String qualifiedClassName = cg.getQualifiedName();
 		String javaCodeSource = cg.generateClassFile();
-		OCL2JavaFileObject.saveClass(explicitClassPath.toString(), qualifiedClassName, javaCodeSource);
+		OCL2JavaFileObject.saveClass(String.valueOf(explicitClassPath), qualifiedClassName, javaCodeSource);
 		@SuppressWarnings("unchecked")
 		Class<? extends CS2ASTransformer> txClass = (Class<? extends CS2ASTransformer>) OCL2JavaFileObject.loadExplicitClass(explicitClassPath, qualifiedClassName);
 		return txClass;
@@ -487,14 +487,11 @@ public class CS2ASJavaCompilerImpl implements CS2ASJavaCompiler {
 		options.setPackagePrefix(params.getPackageName());
 		cg.generateClassFile();
 		String savePath = params.getSavePath();
-		if (savePath != null) {
-			cg.saveSourceFile(savePath);
-			if (log != null) {
-				log.info("Saved " + savePath + cg.getQualifiedName());
-			}
-
+		cg.saveSourceFile(savePath);
+		if (log != null) {
+			log.info("Saved " + savePath + cg.getQualifiedName());
 		}
-		return compileTransformation(new File(new File(savePath).getParentFile(), "bin"), cg);
+		return ClassUtil.nonNullState(compileTransformation(new File(new File(savePath).getParentFile(), "bin"), cg));
 	}
 
 	public void setLog(@Nullable Log log) {

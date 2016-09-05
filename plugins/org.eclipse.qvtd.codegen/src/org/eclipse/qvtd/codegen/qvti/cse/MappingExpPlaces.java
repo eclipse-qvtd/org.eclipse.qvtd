@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
@@ -13,6 +13,7 @@ package org.eclipse.qvtd.codegen.qvti.cse;
 import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cse.AbstractPlace;
@@ -27,7 +28,7 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp;
  */
 public class MappingExpPlaces
 {
-	public static @NonNull LocalPlace createMappingExpPlaces(@NonNull Map<CGElement, AbstractPlace> element2place, @NonNull CGMappingExp cgMappingExp) {
+	public static @NonNull LocalPlace createMappingExpPlaces(@NonNull Map<@Nullable CGElement, @NonNull AbstractPlace> element2place, @NonNull CGMappingExp cgMappingExp) {
 		ControlPlace mapExpPlace = ControlPlace.getControlPlace(element2place, cgMappingExp);
 		CGValuedElement cgBody = cgMappingExp.getBody();
 		if (cgBody != null) {
@@ -36,7 +37,7 @@ public class MappingExpPlaces
 		}
 		return mapExpPlace;
 	}
-	
+
 	/**
 	 * A BodyPlace describes the then CG tree for body statements.
 	 */

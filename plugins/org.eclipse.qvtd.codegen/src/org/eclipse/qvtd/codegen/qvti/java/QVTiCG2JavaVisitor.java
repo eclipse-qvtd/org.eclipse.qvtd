@@ -140,14 +140,14 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 
 	protected final @NonNull QVTiAnalyzer analyzer;
 	protected final @NonNull CGPackage cgPackage;
-	protected final @Nullable List<CGValuedElement> sortedGlobals;
+	protected final @Nullable Iterable<@NonNull CGValuedElement> sortedGlobals;
 	protected boolean isIncremental = false;
 	protected boolean alwaysUseClasses = false;
 	protected boolean useGot = true;
 	protected QVTiTransformationAnalysis transformationAnalysis;
 
 	public QVTiCG2JavaVisitor(@NonNull QVTiCodeGenerator codeGenerator, @NonNull CGPackage cgPackage,
-			@Nullable List<CGValuedElement> sortedGlobals) {
+			@Nullable Iterable<@NonNull CGValuedElement> sortedGlobals) {
 		super(codeGenerator);
 		this.analyzer = codeGenerator.getAnalyzer();
 		this.cgPackage = cgPackage;

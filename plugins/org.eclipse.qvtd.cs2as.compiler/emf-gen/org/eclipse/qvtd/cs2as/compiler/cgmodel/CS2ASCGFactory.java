@@ -13,6 +13,7 @@
 package org.eclipse.qvtd.cs2as.compiler.cgmodel;
 
 import org.eclipse.emf.ecore.EFactory;
+import org.eclipse.jdt.annotation.NonNull;
 
 /**
  * <!-- begin-user-doc -->
@@ -38,7 +39,7 @@ public interface CS2ASCGFactory extends EFactory {
 	 * @return a new object of class '<em>CG Lookup Call Exp</em>'.
 	 * @generated
 	 */
-	CGLookupCallExp createCGLookupCallExp();
+	@NonNull CGLookupCallExp createCGLookupCallExp();
 
 	/**
 	 * Returns the package supported by this factory.

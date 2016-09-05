@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.qvtd.cs2as.compiler.cgmodel.*;
 
 /**
@@ -77,7 +78,7 @@ public class CS2ASCGFactoryImpl extends EFactoryImpl implements CS2ASCGFactory {
 	 * @generated
 	 */
 	@Override
-	public CGLookupCallExp createCGLookupCallExp() {
+	public @NonNull CGLookupCallExp createCGLookupCallExp() {
 		CGLookupCallExpImpl cgLookupCallExp = new CGLookupCallExpImpl();
 		return cgLookupCallExp;
 	}
