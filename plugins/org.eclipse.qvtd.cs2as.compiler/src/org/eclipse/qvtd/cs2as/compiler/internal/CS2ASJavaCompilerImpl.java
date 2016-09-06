@@ -37,9 +37,6 @@ import org.eclipse.ocl.examples.codegen.java.CG2JavaPreVisitor;
 import org.eclipse.ocl.examples.codegen.java.JavaConstants;
 import org.eclipse.ocl.examples.codegen.java.types.UnboxedDescriptor;
 import org.eclipse.ocl.examples.codegen.utilities.CGModelResourceFactory;
-import org.eclipse.ocl.pivot.OCLExpression;
-import org.eclipse.ocl.pivot.Operation;
-import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.Parameter;
 import org.eclipse.ocl.pivot.ids.ElementId;
 import org.eclipse.ocl.pivot.ids.TypeId;
@@ -62,7 +59,6 @@ import org.eclipse.qvtd.codegen.utilities.QVTiCGUtil;
 import org.eclipse.qvtd.cs2as.compiler.CS2ASJavaCompiler;
 import org.eclipse.qvtd.cs2as.compiler.CS2ASJavaCompilerParameters;
 import org.eclipse.qvtd.cs2as.compiler.cgmodel.CGLookupCallExp;
-import org.eclipse.qvtd.cs2as.compiler.cgmodel.CS2ASCGFactory;
 import org.eclipse.qvtd.cs2as.compiler.cgmodel.util.CS2ASCGModelVisitor;
 import org.eclipse.qvtd.cs2as.compiler.internal.utilities.CS2ASCGModelResourceFactory;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
@@ -314,34 +310,6 @@ public class CS2ASJavaCompilerImpl implements CS2ASJavaCompiler {
 
 		public CS2ASAS2CGVisitor(@NonNull QVTiAnalyzer analyzer, @NonNull QVTiGlobalContext globalContext) {
 			super(analyzer, globalContext);
-		}
-
-		@Override
-		protected @NonNull CGValuedElement generateOperationCallExp(@Nullable CGValuedElement cgSource, @NonNull OperationCallExp asOperationCallExp) {
-
-			Operation asOperation = asOperationCallExp.getReferredOperation();
-			if (isLookupOp(asOperation)) {
-				CGLookupCallExp cgLookupCallExp = CS2ASCGFactory.eINSTANCE.createCGLookupCallExp();
-				setAst(cgLookupCallExp, asOperationCallExp);
-				cgLookupCallExp.setName(asOperation.getName());
-				cgLookupCallExp.setSource(cgSource);
-				for (OCLExpression arg :  asOperationCallExp.getOwnedArguments()) {
-					CGValuedElement cgArg = doVisit(CGValuedElement.class, arg);
-					cgLookupCallExp.getArguments().add(cgArg);
-				}
-				cgLookupCallExp.setReferredOperation(asOperation);
-				return  cgLookupCallExp;
-			}
-			return super.generateOperationCallExp(cgSource, asOperationCallExp);
-		}
-
-		protected boolean isLookupOp(Operation op) {
-
-//			String opName = op.getName();
-//			if (opName != null && opName.startsWith("_lookup"))	{// FIXME
-//				return false;
-//			}
-			return false;
 		}
 	}
 

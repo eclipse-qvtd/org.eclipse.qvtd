@@ -52,6 +52,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiIncrementalExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiTransformationExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
+import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
 import org.eclipse.qvtd.runtime.evaluation.TransformationExecutor;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
@@ -63,6 +64,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import cg._Source2Target_qvtp_qvtcas.Source2Target_qvtp_qvtcas;
 import example1.source.SourcePackage;
 import example1.target.TargetPackage;
 import example2.classes.ClassesPackage;
@@ -179,7 +181,6 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 			return qvtiTransf;
 		}
 
-
 		protected void loadEcoreFile(String ecoreFileName, EPackage ePackage) {
 			URI fileURI = baseURI.appendSegment(ecoreFileName);
 			ResourceSet rSet = getResourceSet();
@@ -278,6 +279,31 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		myQVT.executeModelsTX_CG(txClass, "model1");
 		myQVT.executeModelsTX_CG(txClass, "model2");
 		myQVT.executeModelsTX_CG(txClass, "model3");
+		myQVT.dispose();
+	}
+	@Test
+	public void testExample1_CG2() throws Exception {
+		OCLstdlibPackage.eINSTANCE.getName();
+		AbstractTransformer.EXCEPTIONS.setState(true);
+		AbstractTransformer.INVOCATIONS.setState(true);
+		//		DependencyAnalyzer.CALL.setState(true);
+		//		DependencyAnalyzer.CREATE.setState(true);
+		//		DependencyAnalyzer.FINISH.setState(true);
+		//		DependencyAnalyzer.PENDING.setState(true);
+		//		DependencyAnalyzer.REFINING.setState(true);
+		//		DependencyAnalyzer.RETURN.setState(true);
+		//		DependencyAnalyzer.START.setState(true);
+		MyQVT myQVT = new MyQVT("example1");
+		myQVT.loadGenModels("SourceMM1.genmodel", "TargetMM1.genmodel");
+		//		myQVT.executeNewOCL2QVTi_CompilerChain2("Source2Target.ocl");
+		//		CS2ASJavaCompilerParameters cgParams = new CS2ASJavaCompilerParametersImpl(
+		//			"example1.target.lookup.util.TargetLookupSolver",
+		//			"example1.target.lookup.util.TargetLookupResult",
+		//			TESTS_GEN_PATH, TESTS_PACKAGE_NAME);
+		Class<? extends Transformer> txClass = Source2Target_qvtp_qvtcas.class;
+		myQVT.executeModelsTX_CG(txClass, "model1");
+		//		myQVT.executeModelsTX_CG(txClass, "model2");
+		//		myQVT.executeModelsTX_CG(txClass, "model3");
 		myQVT.dispose();
 	}
 
