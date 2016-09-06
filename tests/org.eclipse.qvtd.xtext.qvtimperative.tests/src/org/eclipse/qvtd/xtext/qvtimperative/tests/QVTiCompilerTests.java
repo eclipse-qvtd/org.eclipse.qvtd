@@ -117,9 +117,10 @@ public class QVTiCompilerTests extends LoadTestCase
 			return asResource;
 		}
 
-		protected @NonNull Class<? extends Transformer> generateCode(@NonNull Transformation asTransformation) throws Exception {
+		protected @NonNull Class<? extends Transformer> generateCode(@NonNull Transformation asTransformation, boolean isIncremental) throws Exception {
 			QVTiCodeGenerator cg = new QVTiCodeGenerator(getEnvironmentFactory(), asTransformation);
 			QVTiCodeGenOptions options = cg.getOptions();
+			options.setIsIncremental(isIncremental);
 			options.setUseNullAnnotations(true);
 			options.setPackagePrefix("cg_qvtimperative_tests");
 			cg.generateClassFile();
@@ -220,7 +221,7 @@ public class QVTiCompilerTests extends LoadTestCase
 		URI outputModelURI = getProjectFileURI("HSV2HLS/HLSNode.xmi");
 		URI referenceModelURI = getProjectFileURI("HSV2HLS/HLSNodeValidate.xmi");
 		Transformation asTransformation = myQVT.loadTransformation(transformURI, genModelURI);
-		Class<? extends Transformer> txClass = myQVT.generateCode(asTransformation);
+		Class<? extends Transformer> txClass = myQVT.generateCode(asTransformation, false);
 		Transformer tx = myQVT.createTransformer(txClass);
 		myQVT.loadInput(tx, "hsv", inputModelURI);
 		tx.run();
@@ -233,7 +234,7 @@ public class QVTiCompilerTests extends LoadTestCase
 		URI transformURI = getProjectFileURI("ClassesCS2AS/ClassesCS2AS.qvti");
 		URI genModelURI = getProjectFileURI("ClassesCS2AS/ClassesCS2AS.genmodel");
 		Transformation asTransformation = myQVT.loadTransformation(transformURI, genModelURI);
-		myQVT.generateCode(asTransformation);
+		myQVT.generateCode(asTransformation, false);
 		myQVT.dispose();
 	}
 
@@ -245,7 +246,7 @@ public class QVTiCompilerTests extends LoadTestCase
 		URI outputModelURI = getProjectFileURI("ClassesCS2AS/bug459225/example_output.xmi");
 		URI referenceModelURI = getProjectFileURI("ClassesCS2AS/bug459225/example_output_ref.xmi");
 		Transformation asTransformation = myQVT.loadTransformation(transformURI, genModelURI);
-		Class<? extends Transformer> txClass = myQVT.generateCode(asTransformation);
+		Class<? extends Transformer> txClass = myQVT.generateCode(asTransformation, false);
 		Transformer tx = myQVT.createTransformer(txClass);
 		myQVT.loadInput(tx, "leftCS", inputModelURI);
 		tx.run();
@@ -261,7 +262,7 @@ public class QVTiCompilerTests extends LoadTestCase
 		URI outputModelURI = getProjectFileURI("ManualUML2RDBMS/ManualRDBMSPeople.xmi");
 		URI referenceModelURI = getProjectFileURI("ManualUML2RDBMS/ManualRDBMSPeopleValidate.xmi");
 		Transformation asTransformation = myQVT.loadTransformation(transformURI, genModelURI);
-		Class<? extends Transformer> txClass = myQVT.generateCode(asTransformation);
+		Class<? extends Transformer> txClass = myQVT.generateCode(asTransformation, false);
 		Transformer tx = myQVT.createTransformer(txClass);
 		myQVT.loadInput(tx, "uml", inputModelURI);
 		tx.run();
@@ -277,7 +278,7 @@ public class QVTiCompilerTests extends LoadTestCase
 		URI outputModelURI = getProjectFileURI("SimpleUML2RDBMS/SimpleRDBMSPeople.xmi");
 		URI referenceModelURI = getProjectFileURI("SimpleUML2RDBMS/SimpleRDBMSPeopleValidate.xmi");
 		Transformation asTransformation = myQVT.loadTransformation(transformURI, genModelURI);
-		Class<? extends Transformer> txClass = myQVT.generateCode(asTransformation);
+		Class<? extends Transformer> txClass = myQVT.generateCode(asTransformation, false);
 		Transformer tx = myQVT.createTransformer(txClass);
 		myQVT.loadInput(tx, "uml", inputModelURI);
 		tx.run();
@@ -294,7 +295,24 @@ public class QVTiCompilerTests extends LoadTestCase
 		URI outputModelURI = getProjectFileURI("Tree2TallTree/Tree2TallTree.xmi");
 		URI referenceModelURI = getProjectFileURI("Tree2TallTree/TallTreeValidate.xmi");
 		Transformation asTransformation = myQVT.loadTransformation(transformURI, genModelURI);
-		Class<? extends Transformer> txClass = myQVT.generateCode(asTransformation);
+		Class<? extends Transformer> txClass = myQVT.generateCode(asTransformation, false);
+		Transformer tx = myQVT.createTransformer(txClass);
+		myQVT.loadInput(tx, "tree", inputModelURI);
+		tx.run();
+		myQVT.saveOutput(tx, "talltree", outputModelURI, referenceModelURI, null);
+		myQVT.dispose();
+	}
+
+	public void testCG_Tree2TallTree_Incremental_qvti() throws Exception {
+		//		AbstractTransformer.INVOCATIONS.setState(true);
+		MyQVT myQVT = createQVT();
+		URI genModelURI = getProjectFileURI("Tree2TallTree/Tree2TallTree.genmodel");
+		URI transformURI = getProjectFileURI("Tree2TallTree/Tree2TallTree.qvti");
+		URI inputModelURI = getProjectFileURI("Tree2TallTree/Tree.xmi");
+		URI outputModelURI = getProjectFileURI("Tree2TallTree/Tree2TallTree.xmi");
+		URI referenceModelURI = getProjectFileURI("Tree2TallTree/TallTreeValidate.xmi");
+		Transformation asTransformation = myQVT.loadTransformation(transformURI, genModelURI);
+		Class<? extends Transformer> txClass = myQVT.generateCode(asTransformation, true);
 		Transformer tx = myQVT.createTransformer(txClass);
 		myQVT.loadInput(tx, "tree", inputModelURI);
 		tx.run();

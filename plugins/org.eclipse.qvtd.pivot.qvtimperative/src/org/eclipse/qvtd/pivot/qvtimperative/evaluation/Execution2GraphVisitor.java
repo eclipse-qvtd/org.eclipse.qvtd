@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *     E.D.Willink - initial API and implementation
  ******************************************************************************/
@@ -73,15 +73,15 @@ public class Execution2GraphVisitor extends AbstractExecutionVisitor<String>
 	protected static @NonNull String NULL_PLACEHOLDER = "\"<null>\""; //$NON-NLS-1$
 
 	protected final @NonNull GraphStringBuilder context;
-	
-	private Map<AssociationStatus, String> associationId = new HashMap<AssociationStatus, String>();
-	private Map<ClassStatus, String> classId = new HashMap<ClassStatus, String>();
-	private Map<Invocation, GraphNode> invocation2node = new HashMap<Invocation, GraphNode>();
-	private Map<Object, GraphNode> object2node = new HashMap<Object, GraphNode>();
-	private Map<SlotState, GraphNode> slot2node = new HashMap<SlotState, GraphNode>();
-//	private Map<String, String> propertyId2associationId = new HashMap<String, String>();
-//	private Map<String, PropertyStatus> associationId2propertyStatus = new HashMap<String, PropertyStatus>();
-	
+
+	private Map<@NonNull AssociationStatus, @NonNull String> associationId = new HashMap<>();
+	private Map<@NonNull ClassStatus, @NonNull String> classId = new HashMap<>();
+	private Map<@NonNull Invocation, @NonNull GraphNode> invocation2node = new HashMap<>();
+	private Map<@NonNull Object, @NonNull GraphNode> object2node = new HashMap<>();
+	private Map<@NonNull SlotState, @NonNull GraphNode> slot2node = new HashMap<>();
+	//	private Map<@NonNull String, @NonNull String> propertyId2associationId = new HashMap<>();
+	//	private Map<@NonNull String, @NonNull PropertyStatus> associationId2propertyStatus = new HashMap<>();
+
 	public Execution2GraphVisitor(@NonNull GraphStringBuilder s) {
 		this.context = s;
 	}
@@ -98,7 +98,7 @@ public class Execution2GraphVisitor extends AbstractExecutionVisitor<String>
 			return associationStatus.isIsOutput() ? "#cc80ff" : "#cc0000";
 		}
 	}
-	
+
 	protected @NonNull String getAssociationId(@NonNull AssociationStatus object) {
 		String id = associationId.get(object);
 		if (id == null) {
@@ -137,7 +137,7 @@ public class Execution2GraphVisitor extends AbstractExecutionVisitor<String>
 			return classStatus.isIsOutput() ? "#cc80ff" : "#cc0000";
 		}
 	}
-	
+
 	protected @NonNull String getClassId(@NonNull ClassStatus object) {
 		String id = classId.get(object);
 		if (id == null) {
@@ -150,14 +150,14 @@ public class Execution2GraphVisitor extends AbstractExecutionVisitor<String>
 	protected @NonNull GraphNode getInvocationNode(@NonNull Invocation object) {
 		GraphNode node = invocation2node.get(object);
 		if (node == null) {
-//			id = object.getReferredMappingCall().getReferredMapping().getName() + "-" + (mappingId.size() + 1);
+			//			id = object.getReferredMappingCall().getReferredMapping().getName() + "-" + (mappingId.size() + 1);
 			final String label;
 			if (object instanceof EObject) {
 				label = ((EObject)object).eClass().getName() + "-" + (invocation2node.size() + 1);
 			}
 			else {
 				label = object.toString().replace("@",  "\n@");
-//				label = object.getClass().getSimpleName() + "-" + (invocation2node.size() + 1);
+				//				label = object.getClass().getSimpleName() + "-" + (invocation2node.size() + 1);
 			}
 			node = new GraphNode()
 			{
@@ -166,7 +166,7 @@ public class Execution2GraphVisitor extends AbstractExecutionVisitor<String>
 					s.setLabel(label);
 					s.setShape("hexagon");
 					s.setColor("orange");
-//					context.appendNode(mappingId, "hexagon", "#ffcc00", 30, 150, mappingId.replace("-",  "\n"));
+					//					context.appendNode(mappingId, "hexagon", "#ffcc00", 30, 150, mappingId.replace("-",  "\n"));
 					s.appendAttributedNode(nodeName);
 				}
 			};
@@ -176,17 +176,17 @@ public class Execution2GraphVisitor extends AbstractExecutionVisitor<String>
 		return node;
 	}
 
-	protected @NonNull GraphNode getObjectNode(@NonNull Object object) {
+	protected @NonNull GraphNode getObjectNode(@NonNull Object object, @NonNull String color) {
 		GraphNode node = object2node.get(object);
 		if (node == null) {
-//			id = object.getReferredMappingCall().getReferredMapping().getName() + "-" + (mappingId.size() + 1);
+			//			id = object.getReferredMappingCall().getReferredMapping().getName() + "-" + (mappingId.size() + 1);
 			final String label;
 			if (object instanceof EObject) {
 				label = ((EObject)object).eClass().getName() + "-" + (object2node.size() + 1);
 			}
 			else {
 				label = object.toString().replace("@",  "\n@");
-//				label = object.getClass().getSimpleName() + "-" + (invocation2node.size() + 1);
+				//				label = object.getClass().getSimpleName() + "-" + (invocation2node.size() + 1);
 			}
 			node = new GraphNode()
 			{
@@ -194,7 +194,7 @@ public class Execution2GraphVisitor extends AbstractExecutionVisitor<String>
 				public void appendNode(@NonNull GraphStringBuilder s, @NonNull String nodeName) {
 					s.setLabel(label);
 					s.setShape("rectangle");
-					s.setColor("blue");
+					s.setColor(color);
 					s.appendAttributedNode(nodeName);
 				}
 			};
@@ -216,7 +216,7 @@ public class Execution2GraphVisitor extends AbstractExecutionVisitor<String>
 		}
 	}
 
-	protected @NonNull GraphNode getSlotNode(SlotState.@NonNull Incremental object) {
+	protected @NonNull GraphNode getSlotNode(SlotState.@NonNull Incremental object, @NonNull String color) {
 		if (object.getValue() != null) {
 			object = object.getPrimarySlotState();
 		}
@@ -240,7 +240,7 @@ public class Execution2GraphVisitor extends AbstractExecutionVisitor<String>
 					if (eFeature instanceof EAttribute) {
 						s.setStyle("rounded");
 					}
-					s.setColor("blue");
+					s.setColor(color);
 					s.appendAttributedNode(nodeName);
 				}
 			};
@@ -250,13 +250,13 @@ public class Execution2GraphVisitor extends AbstractExecutionVisitor<String>
 		return node;
 	}
 
-/*	@Override
+	/*	@Override
 	public String visiting(@NonNull EvaluationElement visitable) {
 //		append(visitable.getClass().getName());
 		return null;
 	} */
 
-/*	@Override
+	/*	@Override
 	public @Nullable String visitAssociationStatus(@NonNull AssociationStatus object) {
 		String associationId = getAssociationId(object);
 		String fillColor = object.isIsError() ? "#ff0000" : getAssociationColor(object);
@@ -277,7 +277,7 @@ public class Execution2GraphVisitor extends AbstractExecutionVisitor<String>
 		return null;
 	} */
 
-/*	@Override
+	/*	@Override
 	public @Nullable String visitAttributeStatus(@NonNull AttributeStatus object) {
 		ClassStatus classStatus = object.getOwningClassStatus();
 		assert classStatus != null;
@@ -301,7 +301,7 @@ public class Execution2GraphVisitor extends AbstractExecutionVisitor<String>
 		return null;
 	} */
 
-/*	@Override
+	/*	@Override
 	public @Nullable String visitClassStatus(@NonNull ClassStatus object) {
 		String classId = getClassId(object);
 		context.appendNode(classId, "rectangle", getClassColor(object), 30, 120, classId.replace("-",  "\n"));
@@ -313,8 +313,9 @@ public class Execution2GraphVisitor extends AbstractExecutionVisitor<String>
 
 	@Override
 	public @Nullable String visitInvocation(@NonNull Invocation object) {
+		@SuppressWarnings("unused")
 		GraphNode invocationNode = getInvocationNode(object);
-/*		context.appendNode(mappingId, "hexagon", "#ffcc00", 30, 150, mappingId.replace("-",  "\n"));
+		/*		context.appendNode(mappingId, "hexagon", "#ffcc00", 30, 150, mappingId.replace("-",  "\n"));
 		for (ElementStatus inputStatus : object.getInputs()) {
 			if (inputStatus instanceof ClassStatus) {
 				ClassStatus classStatus = (ClassStatus)inputStatus;
@@ -344,28 +345,28 @@ public class Execution2GraphVisitor extends AbstractExecutionVisitor<String>
 
 	@Override
 	public @Nullable String visitInvocationManager(@NonNull InvocationManager object) {
-//		context.open();
-//			for (ClassStatus classStatus : object.getOwnedClassStatuses()) {
-//				classStatus.accept(this);
-//			}
-//			for (MappingStatus mappingStatus : object.getOwnedMappingStatuses()) {
-//				mappingStatus.accept(this);
-//			}
-//			for (AssociationStatus associationStatus : object.getOwnedAssociationStatuses()) {
-//				associationStatus.accept(this);
-//			}
-//		context.close();
+		//		context.open();
+		//			for (ClassStatus classStatus : object.getOwnedClassStatuses()) {
+		//				classStatus.accept(this);
+		//			}
+		//			for (MappingStatus mappingStatus : object.getOwnedMappingStatuses()) {
+		//				mappingStatus.accept(this);
+		//			}
+		//			for (AssociationStatus associationStatus : object.getOwnedAssociationStatuses()) {
+		//				associationStatus.accept(this);
+		//			}
+		//		context.close();
 		return null;
 	}
 
 	@Override
 	public @Nullable String visitObjectManager(@NonNull ObjectManager objectManager) {
-		Set<Invocation.@NonNull Incremental> allInvocations = new HashSet<Invocation.@NonNull Incremental>();
-		Set<SlotState.@NonNull Incremental> allSlots = new HashSet<SlotState.@NonNull Incremental>();
-		Map<@NonNull Object, List<SlotState.@NonNull Incremental>> object2slots = new HashMap<@NonNull Object, List<SlotState.@NonNull Incremental>>();
-		for (Object object : objectManager.getObjects()) {
-			List<SlotState.Incremental> objectSlots = new ArrayList<SlotState.Incremental>();
-			for (SlotState slotState : objectManager.getSlotStates(object)) {
+		Set<Invocation.@NonNull Incremental> allInvocations = new HashSet<>();
+		Set<SlotState.@NonNull Incremental> allSlots = new HashSet<>();
+		Map<@NonNull Object, @NonNull List<SlotState.@NonNull Incremental>> object2slots = new HashMap<>();
+		for (@NonNull Object object : objectManager.getObjects()) {
+			List<SlotState.@NonNull Incremental> objectSlots = new ArrayList<>();
+			for (@NonNull SlotState slotState : objectManager.getSlotStates(object)) {
 				if (slotState instanceof SlotState.Incremental) {
 					allSlots.add((SlotState.Incremental)slotState);
 					objectSlots.add((SlotState.Incremental)slotState);
@@ -381,28 +382,28 @@ public class Execution2GraphVisitor extends AbstractExecutionVisitor<String>
 		for (Invocation.@NonNull Incremental invocation : allInvocations) {
 			invocation.accept(this);
 			GraphNode invocationNode = getInvocationNode(invocation);
-			for (Object createdObject : invocation.getCreatedObjects()) {
-				GraphNode objectNode = getObjectNode(createdObject);
+			for (@NonNull Object createdObject : invocation.getCreatedObjects()) {
+				GraphNode objectNode = getObjectNode(createdObject, "green");
 				appendEdge(invocationNode, objectNode, "green");
 			}
 		}
 		for (SlotState.@NonNull Incremental slotState : allSlots) {
-			GraphNode slotNode = getSlotNode(slotState);
+			GraphNode slotNode = getSlotNode(slotState, "green");
 			slotState.accept(this);
-			for (Invocation invocation : slotState.getSources()) {
+			for (@NonNull Invocation invocation : slotState.getSources()) {
 				appendEdge(getInvocationNode(invocation), slotNode, "green");
 			}
-			for (Invocation invocation : slotState.getTargets()) {
+			for (@NonNull Invocation invocation : slotState.getTargets()) {
 				appendEdge(slotNode, getInvocationNode(invocation), "cyan");
 			}
 			Iterables.addAll(allInvocations, slotState.getTargets());
 		}
-		for (Object object : objectManager.getObjects()) {
-			GraphNode objectNode = getObjectNode(object);
+		for (@NonNull Object object : objectManager.getObjects()) {
+			GraphNode objectNode = getObjectNode(object, "blue");
 			List<SlotState.@NonNull Incremental> slots = object2slots.get(object);
 			if (slots != null) {
 				for (SlotState.@NonNull Incremental slotState : slots) {
-					GraphNode slotNode = getSlotNode(slotState);
+					GraphNode slotNode = getSlotNode(slotState, "blue");
 					slotState.accept(this);
 					appendEdge(objectNode, slotNode, "blue");
 				}
@@ -413,7 +414,7 @@ public class Execution2GraphVisitor extends AbstractExecutionVisitor<String>
 
 	@Override
 	public @Nullable String visitSlotState(@NonNull SlotState object) {
-		GraphNode slotNode = getSlotNode((SlotState.@NonNull Incremental) object);
+		//		GraphNode slotNode = getSlotNode((SlotState.@NonNull Incremental) object, "orange");
 		return null;
 	}
 
@@ -422,7 +423,7 @@ public class Execution2GraphVisitor extends AbstractExecutionVisitor<String>
 		return null;
 	}
 
-/*	@Override
+	/*	@Override
 	public @Nullable String visitTransformationStatus(@NonNull TransformationStatus object) {
 		context.open();
 			for (ClassStatus classStatus : object.getOwnedClassStatuses()) {

@@ -40,9 +40,9 @@ import org.eclipse.qvtd.debug.QVTiDebugPlugin;
 import org.eclipse.qvtd.debug.core.QVTiDebugCore;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
-import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiExecutor;
+import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiIncrementalExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 
 public class QVTiLaunchConfigurationDelegate extends LaunchConfigurationDelegate implements QVTiLaunchConstants
@@ -51,7 +51,7 @@ public class QVTiLaunchConfigurationDelegate extends LaunchConfigurationDelegate
 	protected static final IStatus fgLaunchErrorStatus = new Status(IStatus.ERROR, QVTiDebugPlugin.PLUGIN_ID, LAUNCH_ERROR_CODE, "Launch configuration error", null); //$NON-NLS-1$
 
 	protected @NonNull QVTiExecutor createExecutor(@NonNull QVTiEnvironmentFactory envFactory, @NonNull ImperativeTransformation transformation) {
-		return new BasicQVTiExecutor(envFactory, transformation);
+		return new QVTiIncrementalExecutor(envFactory, transformation, QVTiIncrementalExecutor.Mode.LAZY);
 	}
 
 	protected @NonNull QVTiDebugCore getDebugCore() {

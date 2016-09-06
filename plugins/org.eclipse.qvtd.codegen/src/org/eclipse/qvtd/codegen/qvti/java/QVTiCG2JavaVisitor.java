@@ -405,6 +405,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 	}
 
 	protected void doCreateIncrementalManagers() {
+		js.append("@Override\n");
 		js.append("protected ");
 		js.appendIsRequired(true);
 		js.append(" ");
@@ -417,6 +418,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		js.popIndentation();
 		js.append("}\n");
 		js.append("\n");
+		js.append("@Override\n");
 		js.append("protected ");
 		js.appendIsRequired(true);
 		js.append(" ");
@@ -856,7 +858,12 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		if (useGot) {
 			EPackage ePackage = ClassUtil.nonNullModel(eStructuralFeature.getEContainingClass().getEPackage());
 			//
-			js.append("objectManager.got(this, ");
+			js.append("objectManager.got(");
+			if (localPrefix != null) {
+				js.append(localPrefix);
+				js.append(".");
+			}
+			js.append("this, ");
 			js.appendValueName(source);
 			js.append(", ");
 			js.appendClassReference(genModelHelper.getQualifiedPackageInterfaceName(ePackage));
@@ -869,6 +876,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 	}
 
 	protected void doIsEqual(@NonNull List<@NonNull ? extends CGParameter> cgFreeVariables) {
+		js.append("@Override\n");
 		js.append("public boolean isEqual(");
 		js.appendIsRequired(true);
 		js.append(" ");
@@ -880,14 +888,19 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		js.append(" [] thoseValues) {\n");
 		js.pushIndentation(null);
 		js.append("return ");
-		int index = 0;
-		for (@NonNull CGParameter cgFreeVariable : cgFreeVariables) {
-			if (index > 0) {
-				js.append("\n    && ");
+		if (cgFreeVariables.size() > 0) {
+			int index = 0;
+			for (@NonNull CGParameter cgFreeVariable : cgFreeVariables) {
+				if (index > 0) {
+					js.append("\n    && ");
+				}
+				js.append("idResolver.oclEquals(");
+				js.append(cgFreeVariable.getValueName());
+				js.append(", thoseValues[" + index++ + "])");
 			}
-			js.append("idResolver.oclEquals(");
-			js.append(cgFreeVariable.getValueName());
-			js.append(", thoseValues[" + index++ + "])");
+		}
+		else {
+			js.append("true");
 		}
 		js.append(";\n");
 		js.popIndentation();
@@ -908,7 +921,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			js.pushIndentation(null);
 			String savedLocalPrefix = localPrefix;
 			try {
-				localPrefix = hasMappingClass ? cgMapping.getTransformation().getName() : localPrefix;
+				localPrefix = hasMappingClass ? getMappingName(cgMapping) : localPrefix;
 				if (!cgBody.isInlined()) {
 					cgBody.accept(this);
 				}
@@ -1109,8 +1122,18 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		js.append("public boolean run() {\n");
 		js.pushIndentation(null);
 		js.append("return ");
-		js.append(getMappingName(cgRootMapping));
-		js.append("() && invocationManager.flush();\n");
+		if (isIncremental) {
+			js.append("new ");
+			js.append(getMappingName(cgRootMapping));
+			js.append("(new ");
+			js.appendIsRequired(true);
+			js.append(" Object[0]).execute()");
+		}
+		else {
+			js.append(getMappingName(cgRootMapping));
+			js.append("()");
+		}
+		js.append(" && invocationManager.flush();\n");
 		js.popIndentation();
 		js.append("}\n");
 	}
@@ -1615,7 +1638,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 				List<@NonNull CGGuardVariable> cgFreeVariables = ClassUtil.nullFree(cgMapping.getFreeVariables());
 				//
 				js.appendCommentWithOCL(null, cgMapping.getAst());
-				if (useClass(cgMapping) && (cgFreeVariables.size() > 0)) {
+				if (useClass(cgMapping) /*&& (cgFreeVariables.size() > 0)*/) {
 					js.append("protected class ");
 					js.append(getMappingName(cgMapping));
 					js.append(" extends ");
@@ -1631,6 +1654,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 					js.append("\n");
 					doMappingConstructor(cgMapping);
 					js.append("\n");
+					js.append("@Override\n");
 					js.append("public boolean execute() ");
 					doMappingBody(cgMapping, true);
 					js.append("\n");

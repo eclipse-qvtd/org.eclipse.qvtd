@@ -104,7 +104,7 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 			@NonNull Function asFunction, @Nullable Object @NonNull [] boxedSourceAndArgumentValues) {
 		Map<@NonNull Operation, Computation.@NonNull Constructor> operation2computationConstructor2 = operation2computationConstructor;
 		if (operation2computationConstructor2 == null) {
-			operation2computationConstructor = operation2computationConstructor2 = new HashMap<@NonNull Operation, Computation.@NonNull Constructor>();
+			operation2computationConstructor = operation2computationConstructor2 = new HashMap<>();
 		}
 		Computation.Constructor computationConstructor = operation2computationConstructor2.get(asFunction);
 		if (computationConstructor == null) {
@@ -159,7 +159,7 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 		}
 		Map<@NonNull Mapping, Invocation.@NonNull Constructor> mapping2invocationConstructor2 = mapping2invocationConstructor;
 		if (mapping2invocationConstructor2 == null) {
-			mapping2invocationConstructor = mapping2invocationConstructor2 = new HashMap<@NonNull Mapping, Invocation.@NonNull Constructor>();
+			mapping2invocationConstructor = mapping2invocationConstructor2 = new HashMap<>();
 		}
 		Invocation.Constructor invocationConstructor = mapping2invocationConstructor2.get(asMapping);
 		if (invocationConstructor == null) {
@@ -199,7 +199,7 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 
 						@Override
 						public String toString() {
-							return mappingCall.getReferredMapping().getName() + "@" + Integer.toHexString(System.identityHashCode(this));
+							return mappingCall.getReferredMapping().getName();// + "@" + Integer.toHexString(System.identityHashCode(this));
 						}
 					};
 					return invocation;

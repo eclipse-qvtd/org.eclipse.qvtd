@@ -46,7 +46,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
-import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiIncrementalExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
@@ -486,8 +485,9 @@ public class QVTiInterpreterTests extends LoadTestCase
 		assertLoadable(ClassUtil.nonNullState(txURI));
 
 		QVTiEnvironmentFactory environmentFactory = myQVT.getEnvironmentFactory();
-		BasicQVTiExecutor testExecutor =  new BasicQVTiExecutor(environmentFactory,
-			(@NonNull ImperativeTransformation) ClassUtil.nonNullState(loadTransformation(environmentFactory.getMetamodelManager(), txURI)));
+		QVTiIncrementalExecutor testExecutor =  new QVTiIncrementalExecutor(environmentFactory,
+			(ImperativeTransformation) ClassUtil.nonNullState(loadTransformation(environmentFactory.getMetamodelManager(), txURI)),
+			QVTiIncrementalExecutor.Mode.LAZY);
 
 		URI csModelURI = baseURI.appendSegment("example_input.xmi");
 		URI asModelURI = baseURI.appendSegment("example_output.xmi");

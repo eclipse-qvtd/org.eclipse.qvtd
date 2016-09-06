@@ -32,6 +32,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
+import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiIncrementalExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiTransformationExecutor;
 import org.eclipse.qvtd.runtime.evaluation.TransformationExecutor;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
@@ -58,7 +59,7 @@ public class ExecutionBenchmarks extends LoadTestCase {
 		}
 
 		public @NonNull BasicQVTiExecutor createEvaluator(@NonNull ImperativeTransformation transformation) {
-			return new BasicQVTiExecutor(getEnvironmentFactory(), transformation);
+			return new QVTiIncrementalExecutor(getEnvironmentFactory(), transformation, QVTiIncrementalExecutor.Mode.LAZY);
 		}
 
 		public @NonNull TransformationExecutor createEvaluator(@NonNull Class<? extends Transformer> txClass) throws ReflectiveOperationException {
@@ -183,8 +184,6 @@ public class ExecutionBenchmarks extends LoadTestCase {
 
 	private void trackExample_Interpreted(MyQVT qvt, @NonNull ImperativeTransformation tx, URI baseURI, String modelName,
 			Map<String, List<Integer>> results)  throws Exception  {
-
-
 		long initStamp = System.currentTimeMillis();
 		executeModelsTX_Interpreted(qvt, tx, baseURI, modelName);
 		long finalStamp = System.currentTimeMillis();

@@ -65,7 +65,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
 import org.eclipse.qvtd.runtime.evaluation.InvocationFailedException;
 
-public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
+public abstract class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 {
 	protected final @NonNull ImperativeTransformation transformation;
 	private @Nullable QVTiTransformationAnalysis transformationAnalysis = null;

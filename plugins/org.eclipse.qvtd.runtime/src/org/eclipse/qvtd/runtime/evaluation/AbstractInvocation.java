@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
@@ -36,7 +36,7 @@ public abstract class AbstractInvocation extends AbstractInvocationInternal
 		@Override
 		public void addCreatedObject(@NonNull Object createdObject) {
 			if (createdObjects == null) {
-				createdObjects = new HashSet<@NonNull Object>();
+				createdObjects = new HashSet<>();
 			}
 			createdObjects.add(createdObject);
 		}
@@ -44,7 +44,7 @@ public abstract class AbstractInvocation extends AbstractInvocationInternal
 		@Override
 		public void addReadSlot(SlotState.@NonNull Incremental readSlot) {
 			if (readSlots == null) {
-				readSlots = new HashSet<SlotState.@NonNull Incremental>();
+				readSlots = new HashSet<>();
 			}
 			readSlots.add(readSlot);
 			readSlot.addTargetInternal(this);
@@ -53,7 +53,7 @@ public abstract class AbstractInvocation extends AbstractInvocationInternal
 		@Override
 		public void addWriteSlot(SlotState.@NonNull Incremental writeSlot) {
 			if (writeSlots == null) {
-				writeSlots = new HashSet<SlotState.@NonNull Incremental>();
+				writeSlots = new HashSet<>();
 			}
 			writeSlots.add(writeSlot);
 			writeSlot.addSourceInternal(this);
