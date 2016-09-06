@@ -200,9 +200,9 @@ public class QVTiInterpreterTests extends LoadTestCase
 
 		public void writeExecutionGraphMLfile(@NonNull String suffix) {
 			@SuppressWarnings("null")@NonNull URI baseURI = getTransformation().eResource().getURI();
-			URI dotURI = URI.createURI(getTransformation().getName().replace("\n",  "_").replace("\\n",  "_") + suffix + ".graphml").resolve(baseURI);
+			URI graphmlURI = URI.createURI(getTransformation().getName().replace("\n",  "_").replace("\\n",  "_") + suffix + ".graphml").resolve(baseURI);
 			try {
-				OutputStream outputStream = URIConverter.INSTANCE.createOutputStream(dotURI);
+				OutputStream outputStream = URIConverter.INSTANCE.createOutputStream(graphmlURI);
 				GraphMLStringBuilder s = new GraphMLStringBuilder();
 				createGraph(s);
 				outputStream.write(s.toString().getBytes());
@@ -363,8 +363,8 @@ public class QVTiInterpreterTests extends LoadTestCase
 	/**
 	 * Test tree2talltree using the LAZY evaluator.
 	 */
-	// FIXME    @Test
-	public void zztestTree2TallTreeLazy() throws Exception {
+	@Test
+	public void testTree2TallTreeLazy() throws Exception {
 		AbstractTransformer.INVOCATIONS.setState(true);
 		MyQVT myQVT = createQVT();
 		//    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
