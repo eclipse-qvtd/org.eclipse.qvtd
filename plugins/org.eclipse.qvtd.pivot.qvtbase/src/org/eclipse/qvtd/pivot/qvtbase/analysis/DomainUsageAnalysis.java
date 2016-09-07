@@ -8,7 +8,7 @@
  * Contributors:
  *     E.D.Willink - initial API and implementation
  *******************************************************************************/
-package org.eclipse.qvtd.pivot.qvtcorebase.analysis;
+package org.eclipse.qvtd.pivot.qvtbase.analysis;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -38,7 +38,7 @@ import org.eclipse.ocl.pivot.Element;
  * <p>
  * <p>
  * AbstractDomainUsageAnalysis provides shared functionality for the overall analysis and for nested operational analyses.
- * An analysis should be started by creating a derived RootDomainUsageAnalaysis such as QVTcoreDomainUsageAnalaysis or 
+ * An analysis should be started by creating a derived RootDomainUsageAnalaysis such as QVTcoreDomainUsageAnalaysis or
  * QVTimperativeDomainUsageAnalaysis and then invoking analyzeTransformation. The returned map identifies the usage for all elements
  * in the transformation.
  */
@@ -48,13 +48,18 @@ public interface DomainUsageAnalysis
 	 * Return the DomainUsage bit mask for an AST element or null if not determined.
 	 */
 	@Nullable DomainUsage basicGetUsage(@Nullable Element element);
-	
+
 	/**
 	 * Return the DomainUsage bit mask for an AST element.
 	 */
 	@NonNull DomainUsage getUsage(@NonNull Element element);
-	
+
 	public interface Internal extends DomainUsageAnalysis {
 		@NonNull DomainUsage visit(@Nullable Element element);
+	}
+
+	public interface Root extends DomainUsageAnalysis {
+		@NonNull DomainUsage getConstantUsage(int bitMask);
+		//		boolean isDirty(@NonNull Property property);
 	}
 }

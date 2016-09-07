@@ -19,7 +19,7 @@ import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.internal.complete.StandardLibraryInternal;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
-import org.eclipse.qvtd.pivot.qvtcorebase.analysis.DomainUsage;
+import org.eclipse.qvtd.pivot.qvtbase.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtcorebase.analysis.RootDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionStatement;
@@ -39,7 +39,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
 /**
  * A QVTimperativeDomainUsageAnalysis identifies a constrained domain result from the DomainUsageAnalysis of an OCL AST node.
  */
-public class QVTimperativeDomainUsageAnalysis extends RootDomainUsageAnalysis implements QVTimperativeVisitor<@NonNull DomainUsage>
+public class QVTimperativeDomainUsageAnalysis extends RootDomainUsageAnalysis implements QVTimperativeVisitor<org.eclipse.qvtd.pivot.qvtbase.analysis.DomainUsage>
 {
 	public QVTimperativeDomainUsageAnalysis(@NonNull EnvironmentFactory environmentFactory) {
 		super(environmentFactory);

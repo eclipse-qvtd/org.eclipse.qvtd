@@ -15,7 +15,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.internal.evaluation.BasicEvaluationEnvironment;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
-import org.eclipse.qvtd.pivot.qvtcorebase.analysis.DomainUsage;
+import org.eclipse.qvtd.pivot.qvtbase.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeDomainUsageAnalysis;
 
 public class QVTiRootEvaluationEnvironment extends BasicEvaluationEnvironment implements QVTiEvaluationEnvironment

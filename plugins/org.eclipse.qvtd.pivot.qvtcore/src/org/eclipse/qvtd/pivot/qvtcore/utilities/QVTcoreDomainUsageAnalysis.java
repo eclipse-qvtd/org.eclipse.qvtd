@@ -13,16 +13,16 @@ package org.eclipse.qvtd.pivot.qvtcore.utilities;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
+import org.eclipse.qvtd.pivot.qvtbase.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtcore.CoreModel;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtcore.util.QVTcoreVisitor;
-import org.eclipse.qvtd.pivot.qvtcorebase.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtcorebase.analysis.RootDomainUsageAnalysis;
 
 /**
  * A QVTcoreDomainUsageAnalysis identifies a constrained domain result from the DomainUsageAnalysis of an OCL AST node.
  */
-public class QVTcoreDomainUsageAnalysis extends RootDomainUsageAnalysis implements QVTcoreVisitor<@NonNull DomainUsage>
+public class QVTcoreDomainUsageAnalysis extends RootDomainUsageAnalysis implements QVTcoreVisitor<org.eclipse.qvtd.pivot.qvtbase.analysis.DomainUsage>
 {
 	public QVTcoreDomainUsageAnalysis(@NonNull EnvironmentFactory environmentFactory) {
 		super(environmentFactory);

@@ -19,8 +19,8 @@ import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.ocl.pivot.internal.evaluation.BasicEvaluationEnvironment;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
-import org.eclipse.qvtd.pivot.qvtcorebase.analysis.DomainUsage;
-import org.eclipse.qvtd.pivot.qvtcorebase.analysis.DomainUsageAnalysis;
+import org.eclipse.qvtd.pivot.qvtbase.analysis.DomainUsage;
+import org.eclipse.qvtd.pivot.qvtbase.analysis.DomainUsageAnalysis;
 
 public class QVTiNestedEvaluationEnvironment extends BasicEvaluationEnvironment implements QVTiEvaluationEnvironment
 {

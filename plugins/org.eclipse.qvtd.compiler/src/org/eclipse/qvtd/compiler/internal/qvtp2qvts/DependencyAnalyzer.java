@@ -73,11 +73,11 @@ import org.eclipse.qvtd.compiler.CompilerConstants;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.AssignmentSorter.ToStringComparator;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtbase.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcorebase.CorePattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.OppositePropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
-import org.eclipse.qvtd.pivot.qvtcorebase.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtcorebase.analysis.RootDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtimperative.util.AbstractExtendingQVTimperativeVisitor;
 
@@ -1291,7 +1291,7 @@ public class DependencyAnalyzer
 	private final @NonNull Map<@NonNull List<@Nullable Object>, @NonNull DependencyPaths> content2path = new HashMap<>();
 	private final @NonNull DependencyPaths emptyDependencyPaths = createDependencyPaths(null, null);
 	private final @NonNull Map<@NonNull OperationId, @NonNull Map<@NonNull List<@NonNull DependencyPaths>, @NonNull OperationAnalysis>> operation2paths2analysis = new HashMap<>();
-	private final @NonNull Map<@NonNull DomainUsage, @NonNull DependencyStepFactory> usage2factory = new HashMap<>();
+	private final @NonNull Map<org.eclipse.qvtd.pivot.qvtbase.analysis.DomainUsage, @NonNull DependencyStepFactory> usage2factory = new HashMap<>();
 	private final @NonNull FinalAnalysis finalAnalysis;
 	protected final @NonNull CompleteClass oclVoidCompleteClass;
 	protected final @NonNull CompleteClass oclInvalidCompleteClass;

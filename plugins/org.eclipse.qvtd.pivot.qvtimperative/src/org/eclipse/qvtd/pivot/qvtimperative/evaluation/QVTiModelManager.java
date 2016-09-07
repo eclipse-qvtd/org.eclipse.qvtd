@@ -38,7 +38,7 @@ import org.eclipse.ocl.pivot.utilities.ParserException;
 import org.eclipse.ocl.pivot.utilities.XMIUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
-import org.eclipse.qvtd.pivot.qvtcorebase.analysis.DomainUsage;
+import org.eclipse.qvtd.pivot.qvtbase.analysis.DomainUsage;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTransformationInstance;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTypedModelInstance;
 import org.eclipse.qvtd.runtime.evaluation.TransformationInstance;

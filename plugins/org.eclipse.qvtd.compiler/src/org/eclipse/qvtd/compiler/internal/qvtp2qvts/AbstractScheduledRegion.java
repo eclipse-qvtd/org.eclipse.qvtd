@@ -25,7 +25,7 @@ import org.eclipse.ocl.pivot.Property;
 import org.eclipse.qvtd.compiler.internal.qvts2qvti.QVTs2QVTiVisitor;
 import org.eclipse.qvtd.compiler.internal.utilities.SymbolNameBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
-import org.eclipse.qvtd.pivot.qvtcorebase.analysis.DomainUsage;
+import org.eclipse.qvtd.pivot.qvtbase.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphStringBuilder;
 
 import com.google.common.collect.Iterables;

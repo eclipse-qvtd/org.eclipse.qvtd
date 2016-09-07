@@ -40,8 +40,8 @@ import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RootScheduledRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.SchedulerConstants;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Visitor;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
-import org.eclipse.qvtd.pivot.qvtcorebase.analysis.DomainUsage;
-import org.eclipse.qvtd.pivot.qvtcorebase.analysis.DomainUsage.Internal;
+import org.eclipse.qvtd.pivot.qvtbase.analysis.DomainUsage;
+import org.eclipse.qvtd.pivot.qvtbase.analysis.DomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtcorebase.analysis.RootDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphStringBuilder;
 
@@ -663,9 +663,9 @@ public abstract class NodeImpl implements Node
 		CompleteClass oldCompleteClass = classDatumAnalysis2.getCompleteClass();
 		CompleteClass newCompleteClass = newClassDatumAnalysis.getCompleteClass();
 		if (oldCompleteClass.conformsTo(newCompleteClass)) {
-			RootDomainUsageAnalysis domainAnalysis = getSchedulerConstants().getDomainAnalysis();
-			DomainUsage.Internal oldDomainUsage = (Internal) classDatumAnalysis2.getDomainUsage();
-			DomainUsage.Internal newDomainUsage = (Internal) newClassDatumAnalysis.getDomainUsage();
+			DomainUsageAnalysis.Root domainAnalysis = getSchedulerConstants().getDomainAnalysis();
+			DomainUsage.Internal oldDomainUsage = (DomainUsage.Internal) classDatumAnalysis2.getDomainUsage();
+			DomainUsage.Internal newDomainUsage = (DomainUsage.Internal) newClassDatumAnalysis.getDomainUsage();
 			int refinedBitMask = oldDomainUsage.getMask() & newDomainUsage.getMask();
 			DomainUsage refinedDomainUsage = domainAnalysis.getConstantUsage(refinedBitMask);
 			TypedModel refinedTypedModel = refinedDomainUsage.getTypedModel(oldCompleteClass);
@@ -674,9 +674,9 @@ public abstract class NodeImpl implements Node
 			return true;
 		}
 		else if (newCompleteClass.conformsTo(oldCompleteClass)) {
-			RootDomainUsageAnalysis domainAnalysis = getSchedulerConstants().getDomainAnalysis();
-			DomainUsage.Internal oldDomainUsage = (Internal) classDatumAnalysis2.getDomainUsage();
-			DomainUsage.Internal newDomainUsage = (Internal) newClassDatumAnalysis.getDomainUsage();
+			DomainUsageAnalysis.Root domainAnalysis = getSchedulerConstants().getDomainAnalysis();
+			DomainUsage.Internal oldDomainUsage = (DomainUsage.Internal) classDatumAnalysis2.getDomainUsage();
+			DomainUsage.Internal newDomainUsage = (DomainUsage.Internal) newClassDatumAnalysis.getDomainUsage();
 			int refinedBitMask = oldDomainUsage.getMask() & newDomainUsage.getMask();
 			DomainUsage refinedDomainUsage = domainAnalysis.getConstantUsage(refinedBitMask);
 			TypedModel refinedTypedModel = refinedDomainUsage.getTypedModel(newCompleteClass);
