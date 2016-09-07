@@ -54,7 +54,6 @@ def: mapping : qvtimperative::Mapping = rule.oclAsType(qvtimperative::Mapping)
 inv CheckableXorEnforceable: isCheckable xor isEnforceable
 inv NoSideBottomPatternVariables: bottomPattern.variable->isEmpty()
 inv NoSideBottomPatternAssignments: bottomPattern.assignment->isEmpty()
-inv NoSideBottomPatternEnforcements: bottomPattern.enforcementOperation->isEmpty()
 
 context PropertyAssignment
 inv IsNotReadOnly: not targetProperty.isReadOnly
