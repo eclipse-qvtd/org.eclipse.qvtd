@@ -41,15 +41,15 @@ endpackage
 package qvtimperative
 
 context Area
-def: mapping : qvtimperative::Mapping = if oclIsKindOf(qvtimperative::Mapping) then self else oclAsType(CoreDomain).rule endif.oclAsType(qvtimperative::Mapping)
+def: mapping : qvtimperative::Mapping = if oclIsKindOf(qvtimperative::Mapping) then self else oclAsType(ImperativeDomain).rule endif.oclAsType(qvtimperative::Mapping)
 def: isMiddle : Boolean = oclIsKindOf(qvtimperative::Mapping)
-def: isSource : Boolean = oclIsKindOf(CoreDomain) and oclAsType(CoreDomain).isCheckable
-def: isTarget : Boolean = oclIsKindOf(CoreDomain) and oclAsType(CoreDomain).isEnforceable
+def: isSource : Boolean = oclIsKindOf(ImperativeDomain) and oclAsType(ImperativeDomain).isCheckable
+def: isTarget : Boolean = oclIsKindOf(ImperativeDomain) and oclAsType(ImperativeDomain).isEnforceable
 
 --context BottomPattern
 --inv UniquePropertyAssignments: assignment->select(PropertyAssignment)->isUnique(a : PropertyAssignment | a.targetProperty)	-- FIXME redundant "a : PropertyAssignment | a."
 
-context CoreDomain
+context ImperativeDomain
 def: mapping : qvtimperative::Mapping = rule.oclAsType(qvtimperative::Mapping)
 inv CheckableXorEnforceable: isCheckable xor isEnforceable
 inv NoSideBottomPatternVariables: bottomPattern.variable->isEmpty()

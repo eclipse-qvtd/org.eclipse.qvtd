@@ -43,7 +43,7 @@ ConnectionStatementCS: targetVariable=[pivot::Variable|UnrestrictedName] '+=' ow
 	
 DirectionCS: {DirectionCS} name=UnrestrictedName?
 	'imports' imports+=[pivot::Package|UnrestrictedName] (',' imports+=[pivot::Package|UnrestrictedName])*
-	('uses' uses+=[qvtimperative::CoreDomain|UnrestrictedName] (',' uses+=[qvtimperative::CoreDomain|UnrestrictedName])*)?
+	('uses' uses+=[qvtimperative::ImperativeDomain|UnrestrictedName] (',' uses+=[qvtimperative::ImperativeDomain|UnrestrictedName])*)?
 ;
 	
 GuardPatternCS:		// Bug 466385 explains the redundancy below
@@ -60,8 +60,6 @@ GuardPatternCS:		// Bug 466385 explains the redundancy below
 	
 //Variable := VariableName �:� TypeDeclaration
 GuardVariableCS returns UnrealizedVariableCS: name=UnrestrictedName ':' ownedType=TypeExpCS;
-
-ImperativePredicateOrAssignmentCS: isDefault?='default'? ownedTarget=ExpCS ((':='|isAccumulate?='+=') ownedInitExpression=ExpCS)? ';';
 
 ImportCS returns base::ImportCS:
 	'import' (name=Identifier ':')? ownedPathName=URIPathNameCS (isAll?='::' '*')? ';';
@@ -83,7 +81,7 @@ MappingSequenceCS: ownedMappingStatements+=MappingStatementCS+;
 	
 MappingStatementCS: ConnectionStatementCS | MappingCallCS | MappingLoopCS;
 	
-MiddleDomainCS returns ImperativeDomainCS:
+MiddleDomainCS returns DomainCS:
 	('{' ('check' checkedProperties+=PathNameCS (',' checkedProperties+=PathNameCS)*)?
 	('enforce' enforcedProperties+=PathNameCS (',' enforcedProperties+=PathNameCS)*)? '}')?
 	ownedGuardPattern=MiddleGuardPatternCS ownedBottomPattern=MiddleBottomPatternCS
@@ -92,11 +90,11 @@ MiddleDomainCS returns ImperativeDomainCS:
 MiddleBottomPatternCS returns BottomPatternCS:		// Bug 466385 explains the redundancy below
 	(
 		'{' ownedUnrealizedVariables+=UnrealizedVariableCS (',' ownedUnrealizedVariables+=UnrealizedVariableCS)*
-		'|' ownedConstraints+=ImperativePredicateOrAssignmentCS* '}'
+		'|' ownedConstraints+=PredicateOrAssignmentCS* '}'
 	) | (
 		'{' ownedUnrealizedVariables+=UnrealizedVariableCS (',' ownedUnrealizedVariables+=UnrealizedVariableCS)* '}'
 	) | (
-		'{' ownedConstraints+=ImperativePredicateOrAssignmentCS+ '}'
+		'{' ownedConstraints+=PredicateOrAssignmentCS+ '}'
 	) | (
 		{BottomPatternCS} '{' '}'
 	)
@@ -124,7 +122,8 @@ PredicateCS: ownedCondition=ExpCS ';';
 //Constraint ::= Predicate | Assignment
 //Predicate ::= BooleanOCLExpr
 //Assignement ::= [�default�] SlotOwnerOCLExpr�.�PropertyName �:=� ValueOCLExpr
-PredicateOrAssignmentCS: isDefault?='default'? ownedTarget=ExpCS (':=' ownedInitExpression=ExpCS)? ';';
+
+PredicateOrAssignmentCS: isDefault?='default'? ownedTarget=ExpCS ((':='|isAccumulate?='+=') ownedInitExpression=ExpCS)? ';';
 		
 QueryCS: isTransient?='transient'? 'query' ownedPathName=ScopeNameCS name=UnrestrictedName
 		'(' (ownedParameters+=ParamDeclarationCS (',' ownedParameters+=ParamDeclarationCS)*)? ')'
@@ -134,14 +133,14 @@ QueryCS: isTransient?='transient'? 'query' ownedPathName=ScopeNameCS name=Unrest
 //      	  ':' <TypeCS>
 //            (';' | '{' <OCLExpressionCS> '}')
 
-RealizedVariableCS returns ImperativeRealizedVariableCS:
+RealizedVariableCS:
 	'realize' name=UnrestrictedName ':' ownedType=TypeExpCS (':=' ownedInitExpression=ExpCS)?
 ;
 
 ScopeNameCS returns base::PathNameCS:
 	ownedPathElements+=FirstPathElementCS '::' (ownedPathElements+=NextPathElementCS '::')*;
 	
-SourceDomainCS returns ImperativeDomainCS: isCheck?='check' direction=[qvtbase::TypedModel|UnrestrictedName]
+SourceDomainCS returns DomainCS: isCheck?='check' direction=[qvtbase::TypedModel|UnrestrictedName]
 	('{' ('check' checkedProperties+=PathNameCS (',' checkedProperties+=PathNameCS)*)?
 	('enforce' enforcedProperties+=PathNameCS (',' enforcedProperties+=PathNameCS)*)? '}')?
 	ownedGuardPattern=SourceGuardPatternCS ownedBottomPattern=SourceBottomPatternCS
@@ -160,7 +159,7 @@ SourceGuardPatternCS returns GuardPatternCS:
 TransformationCS:
 	'transformation' ownedPathName=ScopeNameCS? name=UnreservedName '{' (ownedDirections+=DirectionCS ';')* '}';
 	
-TargetDomainCS returns ImperativeDomainCS: isEnforce?='enforce' direction=[qvtbase::TypedModel|UnrestrictedName]
+TargetDomainCS returns DomainCS: isEnforce?='enforce' direction=[qvtbase::TypedModel|UnrestrictedName]
 	('{' ('check' checkedProperties+=PathNameCS (',' checkedProperties+=PathNameCS)*)?
 	('enforce' enforcedProperties+=PathNameCS (',' enforcedProperties+=PathNameCS)*)? '}')?
 	ownedGuardPattern=TargetGuardPatternCS ownedBottomPattern=TargetBottomPatternCS

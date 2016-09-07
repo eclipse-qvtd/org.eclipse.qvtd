@@ -23,18 +23,12 @@
   <eClassifiers xsi:type="ecore:EClass" name="DirectionCS" eSuperTypes="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//NamedElementCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="imports" upperBound="-1"
         eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//Package"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="uses" upperBound="-1" eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperative.ecore#//CoreDomain"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="uses" upperBound="-1" eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperative.ecore#//ImperativeDomain"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DomainCS" eSuperTypes="#//AreaCS">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isCheck" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isEnforce" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="direction" eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#//TypedModel"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="GuardPatternCS" eSuperTypes="#//PatternCS">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedPredicates" upperBound="-1"
-        eType="#//PredicateCS" containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ImperativeDomainCS" eSuperTypes="#//DomainCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="checkedProperties" ordered="false"
         upperBound="-1" eType="ecore:EClass ../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//PathNameCS"
         containment="true">
@@ -50,13 +44,9 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ImperativePredicateOrAssignmentCS" eSuperTypes="#//PredicateOrAssignmentCS">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAccumulate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
-        defaultValueLiteral="false"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ImperativeRealizedVariableCS" eSuperTypes="#//RealizedVariableCS">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedInitExpression" eType="ecore:EClass ../../org.eclipse.ocl.xtext.essentialocl/model/EssentialOCLCS.ecore#//ExpCS"
-        containment="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="GuardPatternCS" eSuperTypes="#//PatternCS">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedPredicates" upperBound="-1"
+        eType="#//PredicateCS" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MappingCS" eSuperTypes="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//NamedElementCS">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isDefault" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
@@ -123,6 +113,8 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PredicateOrAssignmentCS" eSuperTypes="../../org.eclipse.ocl.xtext.essentialocl/model/EssentialOCLCS.ecore#//ExpCS">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAccumulate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isDefault" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedTarget" lowerBound="1"
         eType="ecore:EClass ../../org.eclipse.ocl.xtext.essentialocl/model/EssentialOCLCS.ecore#//ExpCS"
@@ -144,7 +136,10 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RealizeableVariableCS" abstract="true"
       eSuperTypes="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//TypedElementCS"/>
-  <eClassifiers xsi:type="ecore:EClass" name="RealizedVariableCS" eSuperTypes="#//RealizeableVariableCS"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RealizedVariableCS" eSuperTypes="#//RealizeableVariableCS">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedInitExpression" eType="ecore:EClass ../../org.eclipse.ocl.xtext.essentialocl/model/EssentialOCLCS.ecore#//ExpCS"
+        containment="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TopLevelCS" eSuperTypes="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//RootPackageCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedMappings" upperBound="-1"
         eType="#//MappingCS" containment="true"/>

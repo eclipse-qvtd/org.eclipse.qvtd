@@ -35,19 +35,11 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperativeCS.ecore#//DomainCS/isCheck"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperativeCS.ecore#//DomainCS/isEnforce"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//DomainCS/direction"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//DomainCS/checkedProperties"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//DomainCS/enforcedProperties"/>
     </genClasses>
     <genClasses ecoreClass="QVTimperativeCS.ecore#//GuardPatternCS">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//GuardPatternCS/ownedPredicates"/>
-    </genClasses>
-    <genClasses ecoreClass="QVTimperativeCS.ecore#//ImperativeDomainCS">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//ImperativeDomainCS/checkedProperties"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//ImperativeDomainCS/enforcedProperties"/>
-    </genClasses>
-    <genClasses ecoreClass="QVTimperativeCS.ecore#//ImperativePredicateOrAssignmentCS">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperativeCS.ecore#//ImperativePredicateOrAssignmentCS/isAccumulate"/>
-    </genClasses>
-    <genClasses ecoreClass="QVTimperativeCS.ecore#//ImperativeRealizedVariableCS">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//ImperativeRealizedVariableCS/ownedInitExpression"/>
     </genClasses>
     <genClasses ecoreClass="QVTimperativeCS.ecore#//MappingCS">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperativeCS.ecore#//MappingCS/isDefault"/>
@@ -87,6 +79,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//PredicateCS/ownedCondition"/>
     </genClasses>
     <genClasses ecoreClass="QVTimperativeCS.ecore#//PredicateOrAssignmentCS">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperativeCS.ecore#//PredicateOrAssignmentCS/isAccumulate"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperativeCS.ecore#//PredicateOrAssignmentCS/isDefault"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//PredicateOrAssignmentCS/ownedTarget"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//PredicateOrAssignmentCS/ownedInitExpression"/>
@@ -99,7 +92,9 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperativeCS.ecore#//QueryCS/isTransient"/>
     </genClasses>
     <genClasses image="false" ecoreClass="QVTimperativeCS.ecore#//RealizeableVariableCS"/>
-    <genClasses ecoreClass="QVTimperativeCS.ecore#//RealizedVariableCS"/>
+    <genClasses ecoreClass="QVTimperativeCS.ecore#//RealizedVariableCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//RealizedVariableCS/ownedInitExpression"/>
+    </genClasses>
     <genClasses ecoreClass="QVTimperativeCS.ecore#//TopLevelCS">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//TopLevelCS/ownedMappings"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//TopLevelCS/ownedQueries"/>
