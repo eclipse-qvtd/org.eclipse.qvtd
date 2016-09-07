@@ -8,7 +8,7 @@
  * Contributors:
  *     E.D.Willink - initial API and implementation
  *******************************************************************************/
-package org.eclipse.qvtd.pivot.qvtimperative.utilities;
+package org.eclipse.qvtd.pivot.qvtbase.graphs;
 
 import java.util.ArrayList;
 import java.util.HashMap;

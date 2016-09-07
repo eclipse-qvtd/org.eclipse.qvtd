@@ -18,7 +18,7 @@ import java.util.Set;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.qvtd.compiler.internal.utilities.SymbolNameBuilder;
-import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphStringBuilder;
+import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 
 import com.google.common.collect.Lists;
 

@@ -11,8 +11,8 @@
 package org.eclipse.qvtd.compiler.internal.utilities;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.qvtd.pivot.qvtimperative.utilities.DOTStringBuilder;
-import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphStringBuilder;
+import org.eclipse.qvtd.pivot.qvtbase.graphs.DOTStringBuilder;
+import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 
 /**
  * Debug assist. An instance of ToDOT may be used to provide a debugger facility to serialize a

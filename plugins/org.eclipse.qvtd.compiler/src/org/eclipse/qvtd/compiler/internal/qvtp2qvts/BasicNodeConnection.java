@@ -21,7 +21,7 @@ import org.eclipse.ocl.pivot.CompleteEnvironment;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.qvtd.compiler.internal.utilities.SymbolNameBuilder;
-import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphStringBuilder;
+import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;

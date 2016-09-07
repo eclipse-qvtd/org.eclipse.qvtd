@@ -22,8 +22,8 @@ import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.Region2Depth;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
-import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphStringBuilder;
-import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphStringBuilder.GraphNode;
+import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
+import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphNode;
 
 public interface Region extends Visitable, GraphNode, Nameable, Symbolable
 {

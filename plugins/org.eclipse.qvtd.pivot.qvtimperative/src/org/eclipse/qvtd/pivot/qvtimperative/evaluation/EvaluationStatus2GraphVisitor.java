@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphBuilder;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.AssociationStatus;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.AttributeStatus;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.ClassStatus;
@@ -28,7 +29,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.MappingStatus;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.PropertyStatus;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.TransformationStatus;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.util.AbstractExtendingEvaluationStatusVisitor;
-import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphBuilder;
 
 public class EvaluationStatus2GraphVisitor extends AbstractExtendingEvaluationStatusVisitor<String, GraphBuilder>
 {

@@ -20,8 +20,8 @@ import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RegionUtil;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Role;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Visitor;
-import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphStringBuilder;
-import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphStringBuilder.GraphNode;
+import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
+import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphNode;
 
 /**
  * AbstractEdge.

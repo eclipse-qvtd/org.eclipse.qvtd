@@ -42,8 +42,8 @@ import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Visitor;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtbase.analysis.DomainUsageAnalysis;
+import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtcorebase.analysis.RootDomainUsageAnalysis;
-import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphStringBuilder;
 
 import com.google.common.collect.Iterables;
 

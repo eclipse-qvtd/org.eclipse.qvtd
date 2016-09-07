@@ -12,8 +12,8 @@ package org.eclipse.qvtd.compiler.internal.qvtp2qvts;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphStringBuilder;
-import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphStringBuilder.GraphNode;
+import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
+import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphNode;
 
 abstract class AbstractConnectionRole implements ConnectionRole
 {

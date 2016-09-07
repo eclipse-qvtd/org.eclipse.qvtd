@@ -36,10 +36,10 @@ import org.eclipse.qvtd.compiler.internal.qvtp2qvts.DependencyAnalyzer.Dependenc
 import org.eclipse.qvtd.compiler.internal.utilities.SymbolNameBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.analysis.DomainUsage;
+import org.eclipse.qvtd.pivot.qvtbase.graphs.DOTStringBuilder;
+import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphMLStringBuilder;
+import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtcorebase.analysis.RootDomainUsageAnalysis;
-import org.eclipse.qvtd.pivot.qvtimperative.utilities.DOTStringBuilder;
-import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphMLStringBuilder;
-import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphStringBuilder;
 
 import com.google.common.collect.Iterables;
 

@@ -23,8 +23,8 @@ import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NavigableEdge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.SchedulerConstants;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Visitor;
-import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphStringBuilder;
-import org.eclipse.qvtd.pivot.qvtimperative.utilities.GraphStringBuilder.GraphNode;
+import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
+import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphNode;
 
 import com.google.common.collect.Iterables;
 
