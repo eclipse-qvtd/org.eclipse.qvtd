@@ -24,7 +24,7 @@ import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphMLBuilder.ArrowType;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphMLBuilder.LineType;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphMLBuilder.ShapeType;
-import org.eclipse.qvtd.pivot.qvtcorebase.AbstractMapping;
+import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.schedule.AbstractAction;
 import org.eclipse.qvtd.pivot.schedule.MappingAction;
 import org.eclipse.qvtd.pivot.schedule.ParameterDerivation;
@@ -33,63 +33,63 @@ import org.eclipse.qvtd.pivot.schedule.ScheduleElement;
 import org.eclipse.qvtd.pivot.schedule.util.AbstractExtendingScheduleVisitor;
 
 public class ScheduleToCallGraph extends AbstractExtendingScheduleVisitor<String, GraphBuilder> {
-	
+
 	private final List<@NonNull String> SOL_BASE = Arrays.asList("#fdf6e3", "#eee8d5", "#93a1a1", "#839496", "#657b83", "#586e75", "#073642", "#002b36");
-//	private final int SOL_BACKROUND = 0;
+	//	private final int SOL_BACKROUND = 0;
 	private final int SOL_BACKROUND_HL = 1;
-//	private final int SOL_SECONDARY = 2;
-//	private final int SOL_NONE = 3;
+	//	private final int SOL_SECONDARY = 2;
+	//	private final int SOL_NONE = 3;
 	private final int SOL_PRIMARY = 4;
-//	private final int SOL_OPTIONAL = 5;
-	
-//	@NonNull private final String SOL_YELLOW = "#b58900";
+	//	private final int SOL_OPTIONAL = 5;
+
+	//	@NonNull private final String SOL_YELLOW = "#b58900";
 	@NonNull private final String SOL_ORANGE = "#cb4b16";
-//	@NonNull private final String SOL_RED = "#dc322f";
-//	@NonNull private final String SOL_MAGENTA = "#d33682";
-//	@NonNull private final String SOL_VIOLET = "#6c71c4";
-//	@NonNull private final String SOL_BLUE = "#268bd2";
-//	@NonNull private final String SOL_CYAN = "#2aa198";
-//	@NonNull private final String SOL_GREEN = "#859900";
-	
+	//	@NonNull private final String SOL_RED = "#dc322f";
+	//	@NonNull private final String SOL_MAGENTA = "#d33682";
+	//	@NonNull private final String SOL_VIOLET = "#6c71c4";
+	//	@NonNull private final String SOL_BLUE = "#268bd2";
+	//	@NonNull private final String SOL_CYAN = "#2aa198";
+	//	@NonNull private final String SOL_GREEN = "#859900";
+
 	@NonNull private final String NODE_FILL_COLOR;
-	
+
 	@NonNull private final String MAPPING_ACTION_COLOR = SOL_ORANGE;
 	@SuppressWarnings("null")
 	@NonNull private final String MAPPING_ACTION_SHAPE = ShapeType.hexagon.name();
-//	@NonNull private final String LOOP_SHAPE = ShapeType.rectangle.name();
-	
-//	@NonNull private final String SUPER_EDGE_COLOR;
+	//	@NonNull private final String LOOP_SHAPE = ShapeType.rectangle.name();
+
+	//	@NonNull private final String SUPER_EDGE_COLOR;
 	@NonNull private final String PRODUCTION_EDGE_COLOR;
-//	@NonNull private final String REQUISITE_EDGE_COLOR = SOL_GREEN;
-@SuppressWarnings("null")
+	//	@NonNull private final String REQUISITE_EDGE_COLOR = SOL_GREEN;
+	@SuppressWarnings("null")
 	//	@NonNull private final String REQUISITE_MULTIPLE_EDGE_COLOR = SOL_RED;
 	@NonNull private final String DEPENDENCY_ARROW_END = ArrowType.standard.name();
-//	@NonNull private final String DEPENDENCY_LOOP_ARROW_END = ArrowType.transparent_circle.name();
-//	@NonNull private final String SUPER_ARROW_END = ArrowType.delta.name();
-	
-	
+	//	@NonNull private final String DEPENDENCY_LOOP_ARROW_END = ArrowType.transparent_circle.name();
+	//	@NonNull private final String SUPER_ARROW_END = ArrowType.delta.name();
+
+
 	private Map<MutiNamedElementKeyImpl, Integer> nodeOrder = new HashMap<MutiNamedElementKeyImpl, Integer>();
 	//private Map<CoreDomain, String> domainColor = new HashMap<CoreDomain, String>();
 	private List<String> outputDirection;
 	private boolean onlyClassDatums;
-//	private int loopNodeId;
-	
+	//	private int loopNodeId;
+
 	public ScheduleToCallGraph(@NonNull GraphBuilder context) {
 		this(context, false);
 	}
-	
+
 	public ScheduleToCallGraph(@NonNull GraphBuilder context, boolean darkTheme) {
 		super(context);
 		if (darkTheme) {
 			Collections.reverse(SOL_BASE);
 		}
 		NODE_FILL_COLOR = SOL_BASE.get(SOL_BACKROUND_HL);
-//		SUPER_EDGE_COLOR = SOL_BASE.get(SOL_SECONDARY);
+		//		SUPER_EDGE_COLOR = SOL_BASE.get(SOL_SECONDARY);
 		PRODUCTION_EDGE_COLOR = SOL_BASE.get(SOL_PRIMARY);
 	}
 
 	protected @NonNull String getMappingLabel(@NonNull MappingAction object) {
-		String id = object.getMapping().getName() + "\n" + "(" + object.getOrder() + ")"; 
+		String id = object.getMapping().getName() + "\n" + "(" + object.getOrder() + ")";
 		return id;
 	}
 
@@ -114,18 +114,18 @@ public class ScheduleToCallGraph extends AbstractExtendingScheduleVisitor<String
 			this.outputDirection = new ArrayList<String>();
 		return this.outputDirection;
 	}
-	
-//	private String getPropertyId(PropertyDatum object) {
-//		String id = //object.getDomain().getName() + "\n" +
-//				object.getClassDatum().getType().getName() + "\n." + object.getProperty().getName();
-//		return id;
-//	}
-	
-//	private boolean nodeExists(@NonNull NamedElement... elements) {
-//		MutiNamedElementKeyImpl key = new MutiNamedElementKeyImpl(elements);
-//		return nodeOrder.containsKey(key);
-//	}
-	
+
+	//	private String getPropertyId(PropertyDatum object) {
+	//		String id = //object.getDomain().getName() + "\n" +
+	//				object.getClassDatum().getType().getName() + "\n." + object.getProperty().getName();
+	//		return id;
+	//	}
+
+	//	private boolean nodeExists(@NonNull NamedElement... elements) {
+	//		MutiNamedElementKeyImpl key = new MutiNamedElementKeyImpl(elements);
+	//		return nodeOrder.containsKey(key);
+	//	}
+
 	@Override
 	@Nullable
 	public String visiting(@NonNull ScheduleElement visitable) {
@@ -134,10 +134,10 @@ public class ScheduleToCallGraph extends AbstractExtendingScheduleVisitor<String
 
 	@Override
 	public @Nullable String visitMappingAction(@NonNull MappingAction object) {
-		
+
 		String mappingLabel;
 		@NonNull String order;
-		AbstractMapping mapping = object.getMapping();
+		Mapping mapping = object.getMapping();
 		if (mapping != null) {
 			mappingLabel = getMappingLabel(object);
 			order = String.valueOf(getNodeOrder(mapping));
@@ -147,7 +147,7 @@ public class ScheduleToCallGraph extends AbstractExtendingScheduleVisitor<String
 			order  = "0";
 		}
 		context.appendNode(order, MAPPING_ACTION_SHAPE, NODE_FILL_COLOR, mappingLabel, MAPPING_ACTION_COLOR);
-//		String lineType = LineType.line.name();
+		//		String lineType = LineType.line.name();
 		int childCount = 0;
 		for (AbstractAction mc : object.getChildren()) {
 			@SuppressWarnings("unused")
@@ -165,36 +165,36 @@ public class ScheduleToCallGraph extends AbstractExtendingScheduleVisitor<String
 					//context.appendNode(pdOrder, LOOP_SHAPE, NODE_FILL_COLOR, mappingLabel, MAPPING_ACTION_COLOR);
 					loopVars.append(sep);
 					loopVars.append(pd.getSecondaryParameter().getDataParameter().getVariable().getName());
-				    sep = ",";
+					sep = ",";
 				}
 			}
 			String targetId = null;
-			AbstractMapping childMapping = ((MappingAction) mc).getMapping();
+			Mapping childMapping = ((MappingAction) mc).getMapping();
 			assert childMapping != null;
 			targetId = String.valueOf(getNodeOrder(childMapping));
 			assert targetId != null;
 			context.appendEdge(order,
-					targetId,
-					PRODUCTION_EDGE_COLOR,
-					String.valueOf(LineType.line.name()),
-					String.valueOf(ArrowType.none.name()),
-					DEPENDENCY_ARROW_END,
-					loopVars.toString() + "(" + String.valueOf(childCount++) + ")");
+				targetId,
+				PRODUCTION_EDGE_COLOR,
+				String.valueOf(LineType.line.name()),
+				String.valueOf(ArrowType.none.name()),
+				DEPENDENCY_ARROW_END,
+				loopVars.toString() + "(" + String.valueOf(childCount++) + ")");
 		}
 		return null;
 	}
 
 	@Override
 	public @Nullable String visitSchedule(@NonNull Schedule object) {
-		
+
 		context.open();
 		// First the datums so the nodes exist
-//		loopNodeId = object.getActions().size()+1;
+		//		loopNodeId = object.getActions().size()+1;
 		for (AbstractAction aa : object.getActions()) {
 			if (aa instanceof MappingAction) {
 				MappingAction ma = (MappingAction) aa;
 				//if (ma.getMapping() != null)
-					visitMappingAction(ma);
+				visitMappingAction(ma);
 			}
 		}
 		context.close();

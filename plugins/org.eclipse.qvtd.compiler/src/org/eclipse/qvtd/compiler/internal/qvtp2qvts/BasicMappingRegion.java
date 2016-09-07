@@ -35,7 +35,7 @@ import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
-import org.eclipse.qvtd.pivot.qvtcorebase.AbstractMapping;
+import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtcorebase.Assignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
@@ -100,7 +100,7 @@ public class BasicMappingRegion extends AbstractMappingRegion
 	private BasicMappingRegion(@NonNull MultiRegion multiRegion, @NonNull MappingAction mappingAction) {
 		super(multiRegion);
 		this.mappingAction = mappingAction;
-		AbstractMapping mapping = mappingAction.getMapping();
+		Mapping mapping = mappingAction.getMapping();
 		assert mapping != null;
 		//
 		guardPatterns.add(ClassUtil.nonNull(mapping.getGuardPattern()));
@@ -356,7 +356,7 @@ public class BasicMappingRegion extends AbstractMappingRegion
 		return null;
 	}
 
-	public @NonNull AbstractMapping getMapping() {
+	public @NonNull Mapping getMapping() {
 		return ClassUtil.nonNullState(mappingAction.getMapping());
 	}
 

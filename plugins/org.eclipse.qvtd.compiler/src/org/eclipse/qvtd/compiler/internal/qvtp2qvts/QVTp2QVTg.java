@@ -54,7 +54,6 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtbase.analysis.DomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
-import org.eclipse.qvtd.pivot.qvtcorebase.AbstractMapping;
 import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcorebase.NavigationAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
@@ -92,9 +91,9 @@ public class QVTp2QVTg {
 	// Caches
 	private Map<@NonNull TypedModel, Map<org.eclipse.ocl.pivot.Class, ClassDatum>> typedModel2class2datum = new HashMap<@NonNull TypedModel, Map<org.eclipse.ocl.pivot.Class, ClassDatum>>();
 
-	private Map<AbstractMapping, List<OperationCallExp>> mapping2opCallExps = new HashMap<AbstractMapping, List<OperationCallExp>>();
-	private Map<AbstractMapping, List<@NonNull NavigationAssignment>> mapping2propAssigns = new HashMap<@NonNull AbstractMapping, List<@NonNull NavigationAssignment>>();
-	private Map<AbstractMapping, List<NavigationCallExp>> mapping2navCallExps = new HashMap<AbstractMapping, List<NavigationCallExp>>();
+	private Map<Mapping, List<OperationCallExp>> mapping2opCallExps = new HashMap<>();
+	private Map<Mapping, List<@NonNull NavigationAssignment>> mapping2propAssigns = new HashMap<>();
+	private Map<Mapping, List<NavigationCallExp>> mapping2navCallExps = new HashMap<>();
 
 	private final @NonNull RootDomainUsageAnalysis domainUsageAnalysis;
 	private final @NonNull ClassRelationships classRelationships;
@@ -136,7 +135,7 @@ public class QVTp2QVTg {
 
 	private void computeInitialCaches(Transformation tx) {
 		for (Rule rule : tx.getRule()) {
-			AbstractMapping mapping = (AbstractMapping) rule;
+			Mapping mapping = (Mapping) rule;
 			TreeIterator<EObject> it = mapping.eAllContents();
 			while (it.hasNext()) {
 				EObject eObj = it.next();
@@ -323,7 +322,7 @@ public class QVTp2QVTg {
 		return createPropertyDatum(typedModel, context, property);
 	}
 
-	protected List<Variable> getInputVariables(AbstractMapping mapping) {
+	protected List<Variable> getInputVariables(Mapping mapping) {
 
 		List<Variable> mInputVars = new ArrayList<Variable>();
 		mInputVars.addAll(mapping.getGuardPattern().getVariable());
@@ -337,7 +336,7 @@ public class QVTp2QVTg {
 		return mInputVars;
 	}
 
-	protected List<RealizedVariable> getOutputVariables(AbstractMapping mapping) {
+	protected List<RealizedVariable> getOutputVariables(Mapping mapping) {
 		List<RealizedVariable> mOutputVars = new ArrayList<RealizedVariable>();
 		mOutputVars.addAll(mapping.getBottomPattern().getRealizedVariable());
 
@@ -353,17 +352,17 @@ public class QVTp2QVTg {
 
 	// Property datum analysis
 
-	protected List<NavigationCallExp> getPropertyNavigations(AbstractMapping mapping) {
+	protected List<NavigationCallExp> getPropertyNavigations(Mapping mapping) {
 		List<NavigationCallExp> navCallExps = mapping2navCallExps.get(mapping);
 		return navCallExps == null ? Collections.<NavigationCallExp>emptyList() : navCallExps;
 	}
 
-	protected List<@NonNull NavigationAssignment> getNavigationAssignments(AbstractMapping mapping) {
+	protected List<@NonNull NavigationAssignment> getNavigationAssignments(Mapping mapping) {
 		List<@NonNull NavigationAssignment> propAssigns = mapping2propAssigns.get(mapping);
 		return propAssigns == null ? Collections.<@NonNull NavigationAssignment>emptyList() : propAssigns;
 	}
 
-	protected List<OperationCallExp> getOperationCallExps(AbstractMapping mapping) {
+	protected List<OperationCallExp> getOperationCallExps(Mapping mapping) {
 		List<OperationCallExp> opCallExps = mapping2opCallExps.get(mapping);
 		return opCallExps == null ? Collections.<OperationCallExp>emptyList() : opCallExps;
 	}
