@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <qvtc:CoreModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pivot="http://www.eclipse.org/ocl/2015/Pivot"
-    xmlns:qvtb="http://www.eclipse.org/qvt/2015/QVTbase" xmlns:qvtc="http://www.eclipse.org/qvt/2015/QVTcore" xmlns:qvtcb="http://www.eclipse.org/qvt/2015/QVTcoreBase"
-    xsi:schemaLocation="http://www.eclipse.org/ocl/2015/Pivot java://org.eclipse.ocl.pivot.PivotPackage http://www.eclipse.org/qvt/2015/QVTbase java://org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage http://www.eclipse.org/qvt/2015/QVTcore java://org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage http://www.eclipse.org/qvt/2015/QVTcoreBase java://org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage"
+    xmlns:qvtb="http://www.eclipse.org/qvt/2015/QVTbase" xmlns:qvtc="http://www.eclipse.org/qvt/2015/QVTcore"
+    xsi:schemaLocation="http://www.eclipse.org/ocl/2015/Pivot java://org.eclipse.ocl.pivot.PivotPackage http://www.eclipse.org/qvt/2015/QVTbase java://org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage http://www.eclipse.org/qvt/2015/QVTcore java://org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage"
     name="Families2Persons.qvtc" externalURI="platform:/resource/org.eclipse.qvtd.examples.qvtcore/qvtcsrc/Families2Persons/Families2Persons.qvtc">
   <ownedImports name="fMM" importedNamespace="pivot:Package Families.ecore.oclas#P.Families"/>
   <ownedImports name="pMM" importedNamespace="pivot:Package Persons.ecore.oclas#P.Persons"/>
@@ -124,7 +124,7 @@
       <modelParameter xmi:id="qT..F2P.person" name="person" usedPackage="Persons.ecore.oclas#P.Persons"/>
       <modelParameter usedPackage="Families2Persons.ecore.oclas#P.Families2Persons"/>
       <rule xsi:type="qvtc:Mapping" name="Member2Male">
-        <domain xsi:type="qvtcb:CoreDomain" isCheckable="true" isEnforceable="false" typedModel="#qT..F2P.family">
+        <domain xsi:type="qvtc:CoreDomain" isCheckable="true" isEnforceable="false" typedModel="#qT..F2P.family">
           <guardPattern>
             <predicate>
               <conditionExpression xsi:type="pivot:OperationCallExp" name="not" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
@@ -139,7 +139,7 @@
           </guardPattern>
           <bottomPattern/>
         </domain>
-        <domain xsi:type="qvtcb:CoreDomain" isCheckable="false" isEnforceable="true" typedModel="#qT..F2P.person">
+        <domain xsi:type="qvtc:CoreDomain" isCheckable="false" isEnforceable="true" typedModel="#qT..F2P.person">
           <guardPattern/>
           <bottomPattern>
             <realizedVariable xmi:id="qV..F2P.Member2Male.person.bottom.t" name="t" type="pivot:Class Persons.ecore.oclas#T.Persons.Male"/>
@@ -147,12 +147,12 @@
         </domain>
         <guardPattern/>
         <bottomPattern>
-          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="Families2Persons.ecore.oclas#p.Families2Persons.MemberToPerson.member">
+          <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" targetProperty="Families2Persons.ecore.oclas#p.Families2Persons.MemberToPerson.member">
             <value xsi:type="pivot:VariableExp" type="pivot:Class Families.ecore.oclas#T.Families.Member" referredVariable="#qV..F2P.Member2Male.family.guard.s"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class Families2Persons.ecore.oclas#T.Families2Persons.Member2Male"
                 referredVariable="#qV..F2P.Member2Male.bottom.m2m"/>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="Families2Persons.ecore.oclas#p.Families2Persons.MemberToPerson.person">
+          <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" targetProperty="Families2Persons.ecore.oclas#p.Families2Persons.MemberToPerson.person">
             <value xsi:type="pivot:VariableExp" type="pivot:Class Persons.ecore.oclas#T.Persons.Male" referredVariable="#qV..F2P.Member2Male.person.bottom.t"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class Families2Persons.ecore.oclas#T.Families2Persons.Member2Male"
                 referredVariable="#qV..F2P.Member2Male.bottom.m2m"/>
@@ -162,7 +162,7 @@
         <local>
           <guardPattern/>
           <bottomPattern>
-            <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="Persons.ecore.oclas#p.Persons.Person.fullName">
+            <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" targetProperty="Persons.ecore.oclas#p.Persons.Person.fullName">
               <value xsi:type="pivot:OperationCallExp" name="+" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
                   referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.String.%43%..ocl.String">
                 <ownedSource xsi:type="pivot:OperationCallExp" name="+" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
@@ -185,7 +185,7 @@
         </local>
       </rule>
       <rule xsi:type="qvtc:Mapping" name="Member2Female">
-        <domain xsi:type="qvtcb:CoreDomain" isCheckable="true" isEnforceable="false" typedModel="#qT..F2P.family">
+        <domain xsi:type="qvtc:CoreDomain" isCheckable="true" isEnforceable="false" typedModel="#qT..F2P.family">
           <guardPattern>
             <predicate>
               <conditionExpression xsi:type="pivot:OperationCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
@@ -197,7 +197,7 @@
           </guardPattern>
           <bottomPattern/>
         </domain>
-        <domain xsi:type="qvtcb:CoreDomain" isCheckable="false" isEnforceable="true" typedModel="#qT..F2P.person">
+        <domain xsi:type="qvtc:CoreDomain" isCheckable="false" isEnforceable="true" typedModel="#qT..F2P.person">
           <guardPattern/>
           <bottomPattern>
             <realizedVariable xmi:id="qV..F2P.Member2Female.person.bottom.t" name="t" type="pivot:Class Persons.ecore.oclas#T.Persons.Female"/>
@@ -205,12 +205,12 @@
         </domain>
         <guardPattern/>
         <bottomPattern>
-          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="Families2Persons.ecore.oclas#p.Families2Persons.MemberToPerson.member">
+          <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" targetProperty="Families2Persons.ecore.oclas#p.Families2Persons.MemberToPerson.member">
             <value xsi:type="pivot:VariableExp" type="pivot:Class Families.ecore.oclas#T.Families.Member" referredVariable="#qV..F2P.Member2Female.family.guard.s"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class Families2Persons.ecore.oclas#T.Families2Persons.Member2Female"
                 referredVariable="#qV..F2P.Member2Female.bottom.m2m"/>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="Families2Persons.ecore.oclas#p.Families2Persons.MemberToPerson.person">
+          <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" targetProperty="Families2Persons.ecore.oclas#p.Families2Persons.MemberToPerson.person">
             <value xsi:type="pivot:VariableExp" type="pivot:Class Persons.ecore.oclas#T.Persons.Female" referredVariable="#qV..F2P.Member2Female.person.bottom.t"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class Families2Persons.ecore.oclas#T.Families2Persons.Member2Female"
                 referredVariable="#qV..F2P.Member2Female.bottom.m2m"/>
@@ -220,7 +220,7 @@
         <local>
           <guardPattern/>
           <bottomPattern>
-            <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="Persons.ecore.oclas#p.Persons.Person.fullName">
+            <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" targetProperty="Persons.ecore.oclas#p.Persons.Person.fullName">
               <value xsi:type="pivot:OperationCallExp" name="+" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
                   referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.String.%43%..ocl.String">
                 <ownedSource xsi:type="pivot:OperationCallExp" name="+" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <qvti:ImperativeModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pivot="http://www.eclipse.org/ocl/2015/Pivot"
-    xmlns:qvtb="http://www.eclipse.org/qvt/2015/QVTbase" xmlns:qvtcb="http://www.eclipse.org/qvt/2015/QVTcoreBase" xmlns:qvti="http://www.eclipse.org/qvt/2015/QVTimperative"
-    xsi:schemaLocation="http://www.eclipse.org/ocl/2015/Pivot java://org.eclipse.ocl.pivot.PivotPackage http://www.eclipse.org/qvt/2015/QVTbase java://org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage http://www.eclipse.org/qvt/2015/QVTcoreBase java://org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage http://www.eclipse.org/qvt/2015/QVTimperative java://org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage"
+    xmlns:qvtb="http://www.eclipse.org/qvt/2015/QVTbase" xmlns:qvti="http://www.eclipse.org/qvt/2015/QVTimperative"
+    xsi:schemaLocation="http://www.eclipse.org/ocl/2015/Pivot java://org.eclipse.ocl.pivot.PivotPackage http://www.eclipse.org/qvt/2015/QVTbase java://org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage http://www.eclipse.org/qvt/2015/QVTimperative java://org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage"
     name="BaseCS2AS.qvtias" externalURI="platform:/resource/org.eclipse.ocl.xtext.base/model/BaseCS2AS.qvtias">
   <ownedImports importedNamespace="pivot:Package BaseCS.ecore.oclas#P.basecs"/>
   <ownedImports importedNamespace="pivot:Library http://www.eclipse.org/ocl/2015/Library.oclas#P.ocl"/>
@@ -973,28 +973,28 @@
               <ownedIterators name="1_" isRequired="false" type="pivot:Class BaseCS.ecore.oclas#T.basecs.DetailCS"/>
             </ownedInit>
           </variable>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.NamedElement.name">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.NamedElement.name">
             <value xsi:type="pivot:VariableExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_AnnotationCS_name_ownedAnnotations_ownedContents.bottom.name"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Annotation"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_AnnotationCS_name_ownedAnnotations_ownedContents.bottom.aAnnotation"/>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Element.ownedAnnotations">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Element.ownedAnnotations">
             <value xsi:type="pivot:VariableExp" type="#//@ownedPackages.1/@ownedClasses.54" referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_AnnotationCS_name_ownedAnnotations_ownedContents.bottom.%171%collect%187%2"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Annotation"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_AnnotationCS_name_ownedAnnotations_ownedContents.bottom.aAnnotation"/>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Annotation.ownedContents">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Annotation.ownedContents">
             <value xsi:type="pivot:VariableExp" type="#//@ownedPackages.1/@ownedClasses.54" referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_AnnotationCS_name_ownedAnnotations_ownedContents.bottom.%171%collect%187%"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Annotation"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_AnnotationCS_name_ownedAnnotations_ownedContents.bottom.aAnnotation"/>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Annotation.ownedDetails">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Annotation.ownedDetails">
             <value xsi:type="pivot:VariableExp" type="#//@ownedPackages.1/@ownedClasses.56" referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_AnnotationCS_name_ownedAnnotations_ownedContents.bottom.%171%collect%187%3"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Annotation"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_AnnotationCS_name_ownedAnnotations_ownedContents.bottom.aAnnotation"/>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Annotation.references">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Annotation.references">
             <value xsi:type="pivot:VariableExp" type="#//@ownedPackages.1/@ownedClasses.54" referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_AnnotationCS_name_ownedAnnotations_ownedContents.bottom.%171%collect%187%1"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Annotation"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_AnnotationCS_name_ownedAnnotations_ownedContents.bottom.aAnnotation"/>
@@ -1017,7 +1017,7 @@
         </domain>
         <guardPattern/>
         <bottomPattern xsi:type="qvti:ImperativeBottomPattern" orderedAssignment="#//@ownedPackages.0/@ownedClasses.0/@rule.2/@bottomPattern/@assignment.0">
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="BaseCS.ecore.oclas#p.basecs.PivotableElementCS.pivot">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="BaseCS.ecore.oclas#p.basecs.PivotableElementCS.pivot">
             <value xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Annotation"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_AnnotationCS_pivot.rightAS.bottom.rAnnotation"/>
             <slotExpression xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class BaseCS.ecore.oclas#T.basecs.AnnotationCS"
@@ -1163,54 +1163,54 @@
               <ownedIterators name="1_" isRequired="false" type="pivot:Class BaseCS.ecore.oclas#T.basecs.AnnotationElementCS"/>
             </ownedInit>
           </variable>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Property.defaultValueString">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Property.defaultValueString">
             <value xsi:type="pivot:VariableExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_AttributeCS_default_name_ownedAnnotations_pivot_.bottom.default"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Property"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_AttributeCS_default_name_ownedAnnotations_pivot_.bottom.aProperty"/>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Property.isDerived">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Property.isDerived">
             <value xsi:type="pivot:VariableExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean" referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_AttributeCS_default_name_ownedAnnotations_pivot_.bottom.includes3"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Property"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_AttributeCS_default_name_ownedAnnotations_pivot_.bottom.aProperty"/>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Property.isID">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Property.isID">
             <value xsi:type="pivot:VariableExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean" referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_AttributeCS_default_name_ownedAnnotations_pivot_.bottom.includes5"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Property"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_AttributeCS_default_name_ownedAnnotations_pivot_.bottom.aProperty"/>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Property.isReadOnly">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Property.isReadOnly">
             <value xsi:type="pivot:VariableExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean" referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_AttributeCS_default_name_ownedAnnotations_pivot_.bottom.includes"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Property"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_AttributeCS_default_name_ownedAnnotations_pivot_.bottom.aProperty"/>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Feature.isStatic">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Feature.isStatic">
             <value xsi:type="pivot:VariableExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean" referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_AttributeCS_default_name_ownedAnnotations_pivot_.bottom.includes6"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Property"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_AttributeCS_default_name_ownedAnnotations_pivot_.bottom.aProperty"/>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Property.isTransient">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Property.isTransient">
             <value xsi:type="pivot:VariableExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean" referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_AttributeCS_default_name_ownedAnnotations_pivot_.bottom.includes4"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Property"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_AttributeCS_default_name_ownedAnnotations_pivot_.bottom.aProperty"/>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Property.isUnsettable">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Property.isUnsettable">
             <value xsi:type="pivot:VariableExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean" referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_AttributeCS_default_name_ownedAnnotations_pivot_.bottom.includes1"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Property"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_AttributeCS_default_name_ownedAnnotations_pivot_.bottom.aProperty"/>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Property.isVolatile">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Property.isVolatile">
             <value xsi:type="pivot:VariableExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean" referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_AttributeCS_default_name_ownedAnnotations_pivot_.bottom.includes2"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Property"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_AttributeCS_default_name_ownedAnnotations_pivot_.bottom.aProperty"/>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.NamedElement.name">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.NamedElement.name">
             <value xsi:type="pivot:VariableExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_AttributeCS_default_name_ownedAnnotations_pivot_.bottom.name"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Property"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_AttributeCS_default_name_ownedAnnotations_pivot_.bottom.aProperty"/>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Element.ownedAnnotations">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Element.ownedAnnotations">
             <value xsi:type="pivot:VariableExp" type="#//@ownedPackages.1/@ownedClasses.54" referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_AttributeCS_default_name_ownedAnnotations_pivot_.bottom.%171%collect%187%"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Property"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_AttributeCS_default_name_ownedAnnotations_pivot_.bottom.aProperty"/>
@@ -1277,7 +1277,7 @@
               <ownedArguments xsi:type="pivot:TypeExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class" referredType="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.LanguageExpression"/>
             </ownedInit>
           </variable>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Property.ownedExpression">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Property.ownedExpression">
             <value xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.LanguageExpression"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_AttributeCS_ownedDefaultExpressions_pivot.bottom.ownedExpression"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Property"
@@ -1339,7 +1339,7 @@
               <ownedArguments xsi:type="pivot:TypeExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class" referredType="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class"/>
             </ownedInit>
           </variable>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.TypedElement.type">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.TypedElement.type">
             <value xsi:type="pivot:VariableExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class" referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_AttributeCS_ownedType_pivot.bottom.aClass"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Property"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_AttributeCS_ownedType_pivot.bottom.aProperty"/>
@@ -1362,7 +1362,7 @@
         </domain>
         <guardPattern/>
         <bottomPattern xsi:type="qvti:ImperativeBottomPattern" orderedAssignment="#//@ownedPackages.0/@ownedClasses.0/@rule.6/@bottomPattern/@assignment.0">
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="BaseCS.ecore.oclas#p.basecs.PivotableElementCS.pivot">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="BaseCS.ecore.oclas#p.basecs.PivotableElementCS.pivot">
             <value xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Property"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_AttributeCS_pivot.rightAS.bottom.rProperty"/>
             <slotExpression xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class BaseCS.ecore.oclas#T.basecs.AttributeCS"
@@ -1427,7 +1427,7 @@
               <ownedArguments xsi:type="pivot:TypeExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class" referredType="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.LanguageExpression"/>
             </ownedInit>
           </variable>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Constraint.ownedSpecification">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Constraint.ownedSpecification">
             <value xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.LanguageExpression"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_ConstraintCS_ownedSpecification_pivot.bottom.aLanguageExpression"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Constraint"
@@ -1451,7 +1451,7 @@
         </domain>
         <guardPattern/>
         <bottomPattern xsi:type="qvti:ImperativeBottomPattern" orderedAssignment="#//@ownedPackages.0/@ownedClasses.0/@rule.8/@bottomPattern/@assignment.0">
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="BaseCS.ecore.oclas#p.basecs.PivotableElementCS.pivot">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="BaseCS.ecore.oclas#p.basecs.PivotableElementCS.pivot">
             <value xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Constraint"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_ConstraintCS_pivot.rightAS.bottom.rConstraint"/>
             <slotExpression xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class BaseCS.ecore.oclas#T.basecs.ConstraintCS"
@@ -1564,35 +1564,35 @@
               </ownedParts>
             </ownedInit>
           </variable>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Class.instanceClassName">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Class.instanceClassName">
             <value xsi:type="pivot:VariableExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_DataTypeCS_instanceClassName_isSerializable_name.bottom.instanceClassName"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.DataType"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_DataTypeCS_instanceClassName_isSerializable_name.bottom.aDataType"/>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.DataType.isSerializable">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.DataType.isSerializable">
             <value xsi:type="pivot:VariableExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_DataTypeCS_instanceClassName_isSerializable_name.bottom.isSerializable"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.DataType"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_DataTypeCS_instanceClassName_isSerializable_name.bottom.aDataType"/>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.NamedElement.name">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.NamedElement.name">
             <value xsi:type="pivot:VariableExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_DataTypeCS_instanceClassName_isSerializable_name.bottom.name"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.DataType"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_DataTypeCS_instanceClassName_isSerializable_name.bottom.aDataType"/>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Element.ownedAnnotations">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Element.ownedAnnotations">
             <value xsi:type="pivot:VariableExp" type="#//@ownedPackages.1/@ownedClasses.54" referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_DataTypeCS_instanceClassName_isSerializable_name.bottom.%171%collect%187%1"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.DataType"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_DataTypeCS_instanceClassName_isSerializable_name.bottom.aDataType"/>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Class.ownedInvariants">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Class.ownedInvariants">
             <value xsi:type="pivot:VariableExp" type="#//@ownedPackages.1/@ownedClasses.65" referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_DataTypeCS_instanceClassName_isSerializable_name.bottom.%171%collect%187%"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.DataType"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_DataTypeCS_instanceClassName_isSerializable_name.bottom.aDataType"/>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Class.superClasses">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Class.superClasses">
             <value xsi:type="pivot:VariableExp" type="#//@ownedPackages.1/@ownedClasses.67" referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_DataTypeCS_instanceClassName_isSerializable_name.bottom.Set"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.DataType"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_DataTypeCS_instanceClassName_isSerializable_name.bottom.aDataType"/>
@@ -1675,12 +1675,12 @@
               <ownedArguments xsi:type="pivot:TypeExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class" referredType="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.DataType"/>
             </ownedInit>
           </variable>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.TemplateSignature.ownedParameters">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.TemplateSignature.ownedParameters">
             <value xsi:type="pivot:VariableExp" type="#//@ownedPackages.1/@ownedClasses.70" referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_DataTypeCS_ownedSignature_pivot.bottom.%171%collect%187%"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.TemplateSignature"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_DataTypeCS_ownedSignature_pivot.bottom.aTemplateSignature"/>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.TemplateSignature.owningElement">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.TemplateSignature.owningElement">
             <value xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.DataType"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_DataTypeCS_ownedSignature_pivot.bottom.aDataType"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.TemplateSignature"
@@ -1704,7 +1704,7 @@
         </domain>
         <guardPattern/>
         <bottomPattern xsi:type="qvti:ImperativeBottomPattern" orderedAssignment="#//@ownedPackages.0/@ownedClasses.0/@rule.11/@bottomPattern/@assignment.0">
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="BaseCS.ecore.oclas#p.basecs.PivotableElementCS.pivot">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="BaseCS.ecore.oclas#p.basecs.PivotableElementCS.pivot">
             <value xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.DataType"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_DataTypeCS_pivot.rightAS.bottom.rDataType"/>
             <slotExpression xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class BaseCS.ecore.oclas#T.basecs.DataTypeCS"
@@ -1753,13 +1753,13 @@
               <ownedArguments xsi:type="pivot:TypeExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class" referredType="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Detail"/>
             </ownedInit>
           </variable>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.NamedElement.name">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.NamedElement.name">
             <value xsi:type="pivot:VariableExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_DetailCS_name_pivot_values.bottom.name"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Detail"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_DetailCS_name_pivot_values.bottom.aDetail"/>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Detail.values">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Detail.values">
             <value xsi:type="pivot:VariableExp" type="#//@ownedPackages.1/@ownedClasses.58" referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_DetailCS_name_pivot_values.bottom.values"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Detail"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_DetailCS_name_pivot_values.bottom.aDetail"/>
@@ -1781,7 +1781,7 @@
         </domain>
         <guardPattern/>
         <bottomPattern xsi:type="qvti:ImperativeBottomPattern" orderedAssignment="#//@ownedPackages.0/@ownedClasses.0/@rule.13/@bottomPattern/@assignment.0">
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="BaseCS.ecore.oclas#p.basecs.PivotableElementCS.pivot">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="BaseCS.ecore.oclas#p.basecs.PivotableElementCS.pivot">
             <value xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Detail"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_DetailCS_pivot.rightAS.bottom.rDetail"/>
             <slotExpression xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class BaseCS.ecore.oclas#T.basecs.DetailCS" referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_DetailCS_pivot.leftCS.guard.lDetailCS"/>
@@ -1923,40 +1923,40 @@
               <ownedIterators name="1_" isRequired="false" type="pivot:Class BaseCS.ecore.oclas#T.basecs.AnnotationElementCS"/>
             </ownedInit>
           </variable>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Class.instanceClassName">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Class.instanceClassName">
             <value xsi:type="pivot:VariableExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_EnumerationCS_instanceClassName_isSerializable_n.bottom.instanceClassName"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Enumeration"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_EnumerationCS_instanceClassName_isSerializable_n.bottom.aEnumeration"/>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.DataType.isSerializable">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.DataType.isSerializable">
             <value xsi:type="pivot:VariableExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_EnumerationCS_instanceClassName_isSerializable_n.bottom.isSerializable"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Enumeration"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_EnumerationCS_instanceClassName_isSerializable_n.bottom.aEnumeration"/>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.NamedElement.name">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.NamedElement.name">
             <value xsi:type="pivot:VariableExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_EnumerationCS_instanceClassName_isSerializable_n.bottom.name"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Enumeration"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_EnumerationCS_instanceClassName_isSerializable_n.bottom.aEnumeration"/>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Element.ownedAnnotations">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Element.ownedAnnotations">
             <value xsi:type="pivot:VariableExp" type="#//@ownedPackages.1/@ownedClasses.54" referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_EnumerationCS_instanceClassName_isSerializable_n.bottom.%171%collect%187%2"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Enumeration"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_EnumerationCS_instanceClassName_isSerializable_n.bottom.aEnumeration"/>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Class.ownedInvariants">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Class.ownedInvariants">
             <value xsi:type="pivot:VariableExp" type="#//@ownedPackages.1/@ownedClasses.65" referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_EnumerationCS_instanceClassName_isSerializable_n.bottom.%171%collect%187%1"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Enumeration"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_EnumerationCS_instanceClassName_isSerializable_n.bottom.aEnumeration"/>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Enumeration.ownedLiterals">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Enumeration.ownedLiterals">
             <value xsi:type="pivot:VariableExp" type="#//@ownedPackages.1/@ownedClasses.74" referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_EnumerationCS_instanceClassName_isSerializable_n.bottom.%171%collect%187%"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Enumeration"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_EnumerationCS_instanceClassName_isSerializable_n.bottom.aEnumeration"/>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Class.superClasses">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Class.superClasses">
             <value xsi:type="pivot:VariableExp" type="#//@ownedPackages.1/@ownedClasses.67" referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_EnumerationCS_instanceClassName_isSerializable_n.bottom.Set"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Enumeration"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_EnumerationCS_instanceClassName_isSerializable_n.bottom.aEnumeration"/>
@@ -2020,7 +2020,7 @@
               <ownedArguments xsi:type="pivot:TypeExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class" referredType="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.TemplateSignature"/>
             </ownedInit>
           </variable>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.TemplateableElement.ownedSignature">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.TemplateableElement.ownedSignature">
             <value xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.TemplateSignature"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_EnumerationCS_ownedSignature_pivot.bottom.aTemplateSignature"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Enumeration"
@@ -2045,7 +2045,7 @@
         </domain>
         <guardPattern/>
         <bottomPattern xsi:type="qvti:ImperativeBottomPattern" orderedAssignment="#//@ownedPackages.0/@ownedClasses.0/@rule.16/@bottomPattern/@assignment.0">
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="BaseCS.ecore.oclas#p.basecs.PivotableElementCS.pivot">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="BaseCS.ecore.oclas#p.basecs.PivotableElementCS.pivot">
             <value xsi:type="pivot:VariableExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Enumeration" referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_EnumerationCS_pivot.rightAS.bottom.rEnumeration"/>
             <slotExpression xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class BaseCS.ecore.oclas#T.basecs.EnumerationCS"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_EnumerationCS_pivot.leftCS.guard.lEnumerationCS"/>
@@ -2120,18 +2120,18 @@
               <ownedIterators name="1_" isRequired="false" type="pivot:Class BaseCS.ecore.oclas#T.basecs.AnnotationElementCS"/>
             </ownedInit>
           </variable>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.NamedElement.name">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.NamedElement.name">
             <value xsi:type="pivot:VariableExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_EnumerationLiteralCS_name_ownedAnnotations_pivot.bottom.name"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.EnumerationLiteral"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_EnumerationLiteralCS_name_ownedAnnotations_pivot.bottom.aEnumerationLiteral"/>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Element.ownedAnnotations">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Element.ownedAnnotations">
             <value xsi:type="pivot:VariableExp" type="#//@ownedPackages.1/@ownedClasses.54" referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_EnumerationLiteralCS_name_ownedAnnotations_pivot.bottom.%171%collect%187%"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.EnumerationLiteral"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_EnumerationLiteralCS_name_ownedAnnotations_pivot.bottom.aEnumerationLiteral"/>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.EnumerationLiteral.value">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.EnumerationLiteral.value">
             <value xsi:type="pivot:VariableExp" isRequired="false" type="pivot:DataType http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EInt"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_EnumerationLiteralCS_name_ownedAnnotations_pivot.bottom.value"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.EnumerationLiteral"
@@ -2156,7 +2156,7 @@
         </domain>
         <guardPattern/>
         <bottomPattern xsi:type="qvti:ImperativeBottomPattern" orderedAssignment="#//@ownedPackages.0/@ownedClasses.0/@rule.18/@bottomPattern/@assignment.0">
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="BaseCS.ecore.oclas#p.basecs.PivotableElementCS.pivot">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="BaseCS.ecore.oclas#p.basecs.PivotableElementCS.pivot">
             <value xsi:type="pivot:VariableExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.EnumerationLiteral"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_EnumerationLiteralCS_pivot.rightAS.bottom.rEnumerationLiteral"/>
             <slotExpression xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class BaseCS.ecore.oclas#T.basecs.EnumerationLiteralCS"
@@ -2200,7 +2200,7 @@
               <ownedArguments xsi:type="pivot:TypeExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class" referredType="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Import"/>
             </ownedInit>
           </variable>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.NamedElement.name">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.NamedElement.name">
             <value xsi:type="pivot:VariableExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_ImportCS_name_pivot.bottom.name"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Import"
@@ -2252,7 +2252,7 @@
               <ownedArguments xsi:type="pivot:VariableExp" type="pivot:Class BaseCS.ecore.oclas#T.basecs.PathNameCS" referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_ImportCS_ownedPathName_pivot.bottom.ownedPathName"/>
             </ownedInit>
           </variable>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Import.importedNamespace">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Import.importedNamespace">
             <value xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Namespace"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_ImportCS_ownedPathName_pivot.bottom.importedNamespace"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Import"
@@ -2275,7 +2275,7 @@
         </domain>
         <guardPattern/>
         <bottomPattern xsi:type="qvti:ImperativeBottomPattern" orderedAssignment="#//@ownedPackages.0/@ownedClasses.0/@rule.21/@bottomPattern/@assignment.0">
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="BaseCS.ecore.oclas#p.basecs.PivotableElementCS.pivot">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="BaseCS.ecore.oclas#p.basecs.PivotableElementCS.pivot">
             <value xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Import"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_ImportCS_pivot.rightAS.bottom.rImport"/>
             <slotExpression xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class BaseCS.ecore.oclas#T.basecs.ImportCS" referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_ImportCS_pivot.leftCS.guard.lImportCS"/>
@@ -2347,13 +2347,13 @@
               <ownedIterators name="1_" isRequired="false" type="pivot:Class BaseCS.ecore.oclas#T.basecs.TypedRefCS"/>
             </ownedInit>
           </variable>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.NamedElement.name">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.NamedElement.name">
             <value xsi:type="pivot:VariableExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_LambdaTypeCS_name_ownedParameterTypes_pivot.bottom.name"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.LambdaType"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_LambdaTypeCS_name_ownedParameterTypes_pivot.bottom.aLambdaType"/>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.LambdaType.parameterType">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.LambdaType.parameterType">
             <value xsi:type="pivot:VariableExp" type="#//@ownedPackages.1/@ownedClasses.78" referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_LambdaTypeCS_name_ownedParameterTypes_pivot.bottom.%171%collect%187%"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.LambdaType"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_LambdaTypeCS_name_ownedParameterTypes_pivot.bottom.aLambdaType"/>
@@ -2415,7 +2415,7 @@
               <ownedArguments xsi:type="pivot:TypeExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class" referredType="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class"/>
             </ownedInit>
           </variable>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.LambdaType.contextType">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.LambdaType.contextType">
             <value xsi:type="pivot:VariableExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class" referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_LambdaTypeCS_ownedContextType_pivot.bottom.aClass"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.LambdaType"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_LambdaTypeCS_ownedContextType_pivot.bottom.aLambdaType"/>
@@ -2477,7 +2477,7 @@
               <ownedArguments xsi:type="pivot:TypeExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class" referredType="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class"/>
             </ownedInit>
           </variable>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.LambdaType.resultType">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.LambdaType.resultType">
             <value xsi:type="pivot:VariableExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class" referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_LambdaTypeCS_ownedResultType_pivot.bottom.aClass"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.LambdaType"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_LambdaTypeCS_ownedResultType_pivot.bottom.aLambdaType"/>
@@ -2500,7 +2500,7 @@
         </domain>
         <guardPattern/>
         <bottomPattern xsi:type="qvti:ImperativeBottomPattern" orderedAssignment="#//@ownedPackages.0/@ownedClasses.0/@rule.25/@bottomPattern/@assignment.0">
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="BaseCS.ecore.oclas#p.basecs.PivotableElementCS.pivot">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="BaseCS.ecore.oclas#p.basecs.PivotableElementCS.pivot">
             <value xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.LambdaType"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_LambdaTypeCS_pivot.rightAS.bottom.rLambdaType"/>
             <slotExpression xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class BaseCS.ecore.oclas#T.basecs.LambdaTypeCS"
@@ -2680,38 +2680,38 @@
               <ownedIterators name="1_" isRequired="false" type="pivot:Class BaseCS.ecore.oclas#T.basecs.ConstraintCS"/>
             </ownedInit>
           </variable>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Feature.isStatic">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Feature.isStatic">
             <value xsi:type="pivot:VariableExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean" referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_OperationCS_name_ownedAnnotations_ownedException.bottom.includes"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Operation"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_OperationCS_name_ownedAnnotations_ownedException.bottom.aOperation"/>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.NamedElement.name">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.NamedElement.name">
             <value xsi:type="pivot:VariableExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_OperationCS_name_ownedAnnotations_ownedException.bottom.name"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Operation"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_OperationCS_name_ownedAnnotations_ownedException.bottom.aOperation"/>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Element.ownedAnnotations">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Element.ownedAnnotations">
             <value xsi:type="pivot:VariableExp" type="#//@ownedPackages.1/@ownedClasses.54" referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_OperationCS_name_ownedAnnotations_ownedException.bottom.%171%collect%187%3"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Operation"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_OperationCS_name_ownedAnnotations_ownedException.bottom.aOperation"/>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Operation.ownedParameters">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Operation.ownedParameters">
             <value xsi:type="pivot:VariableExp" type="#//@ownedPackages.1/@ownedClasses.82" referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_OperationCS_name_ownedAnnotations_ownedException.bottom.%171%collect%187%1"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Operation"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_OperationCS_name_ownedAnnotations_ownedException.bottom.aOperation"/>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Operation.ownedPostconditions">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Operation.ownedPostconditions">
             <value xsi:type="pivot:VariableExp" type="#//@ownedPackages.1/@ownedClasses.65" referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_OperationCS_name_ownedAnnotations_ownedException.bottom.%171%collect%187%2"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Operation"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_OperationCS_name_ownedAnnotations_ownedException.bottom.aOperation"/>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Operation.ownedPreconditions">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Operation.ownedPreconditions">
             <value xsi:type="pivot:VariableExp" type="#//@ownedPackages.1/@ownedClasses.65" referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_OperationCS_name_ownedAnnotations_ownedException.bottom.%171%collect%187%4"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Operation"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_OperationCS_name_ownedAnnotations_ownedException.bottom.aOperation"/>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Operation.raisedExceptions">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Operation.raisedExceptions">
             <value xsi:type="pivot:VariableExp" type="#//@ownedPackages.1/@ownedClasses.78" referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_OperationCS_name_ownedAnnotations_ownedException.bottom.%171%collect%187%"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Operation"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_OperationCS_name_ownedAnnotations_ownedException.bottom.aOperation"/>
@@ -2778,7 +2778,7 @@
               <ownedArguments xsi:type="pivot:TypeExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class" referredType="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.LanguageExpression"/>
             </ownedInit>
           </variable>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Operation.bodyExpression">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Operation.bodyExpression">
             <value xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.LanguageExpression"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_OperationCS_ownedBodyExpressions_pivot.bottom.bodyExpression"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Operation"
@@ -2843,7 +2843,7 @@
               <ownedArguments xsi:type="pivot:TypeExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class" referredType="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.TemplateSignature"/>
             </ownedInit>
           </variable>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.TemplateableElement.ownedSignature">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.TemplateableElement.ownedSignature">
             <value xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.TemplateSignature"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_OperationCS_ownedSignature_pivot.bottom.aTemplateSignature"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Operation"
@@ -2905,7 +2905,7 @@
               <ownedArguments xsi:type="pivot:TypeExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class" referredType="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class"/>
             </ownedInit>
           </variable>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.TypedElement.type">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.TypedElement.type">
             <value xsi:type="pivot:VariableExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class" referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_OperationCS_ownedType_pivot.bottom.aClass"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Operation"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_OperationCS_ownedType_pivot.bottom.aOperation"/>
@@ -2928,7 +2928,7 @@
         </domain>
         <guardPattern/>
         <bottomPattern xsi:type="qvti:ImperativeBottomPattern" orderedAssignment="#//@ownedPackages.0/@ownedClasses.0/@rule.30/@bottomPattern/@assignment.0">
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="BaseCS.ecore.oclas#p.basecs.PivotableElementCS.pivot">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="BaseCS.ecore.oclas#p.basecs.PivotableElementCS.pivot">
             <value xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Operation"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_OperationCS_pivot.rightAS.bottom.rOperation"/>
             <slotExpression xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class BaseCS.ecore.oclas#T.basecs.OperationCS"
@@ -3053,35 +3053,35 @@
               <ownedIterators name="1_" isRequired="false" type="pivot:Class BaseCS.ecore.oclas#T.basecs.AnnotationElementCS"/>
             </ownedInit>
           </variable>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Package.URI">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Package.URI">
             <value xsi:type="pivot:VariableExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_PackageCS_name_nsPrefix_nsURI_ownedAnnotations_o.bottom.nsURI"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Package"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_PackageCS_name_nsPrefix_nsURI_ownedAnnotations_o.bottom.aPackage"/>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.NamedElement.name">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.NamedElement.name">
             <value xsi:type="pivot:VariableExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_PackageCS_name_nsPrefix_nsURI_ownedAnnotations_o.bottom.name"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Package"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_PackageCS_name_nsPrefix_nsURI_ownedAnnotations_o.bottom.aPackage"/>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Package.nsPrefix">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Package.nsPrefix">
             <value xsi:type="pivot:VariableExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_PackageCS_name_nsPrefix_nsURI_ownedAnnotations_o.bottom.nsPrefix"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Package"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_PackageCS_name_nsPrefix_nsURI_ownedAnnotations_o.bottom.aPackage"/>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Element.ownedAnnotations">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Element.ownedAnnotations">
             <value xsi:type="pivot:VariableExp" type="#//@ownedPackages.1/@ownedClasses.54" referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_PackageCS_name_nsPrefix_nsURI_ownedAnnotations_o.bottom.%171%collect%187%2"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Package"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_PackageCS_name_nsPrefix_nsURI_ownedAnnotations_o.bottom.aPackage"/>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Package.ownedClasses">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Package.ownedClasses">
             <value xsi:type="pivot:VariableExp" type="#//@ownedPackages.1/@ownedClasses.78" referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_PackageCS_name_nsPrefix_nsURI_ownedAnnotations_o.bottom.%171%collect%187%1"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Package"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_PackageCS_name_nsPrefix_nsURI_ownedAnnotations_o.bottom.aPackage"/>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Package.ownedPackages">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Package.ownedPackages">
             <value xsi:type="pivot:VariableExp" type="#//@ownedPackages.1/@ownedClasses.88" referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_PackageCS_name_nsPrefix_nsURI_ownedAnnotations_o.bottom.%171%collect%187%"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Package"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_PackageCS_name_nsPrefix_nsURI_ownedAnnotations_o.bottom.aPackage"/>
@@ -3104,7 +3104,7 @@
         </domain>
         <guardPattern/>
         <bottomPattern xsi:type="qvti:ImperativeBottomPattern" orderedAssignment="#//@ownedPackages.0/@ownedClasses.0/@rule.32/@bottomPattern/@assignment.0">
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="BaseCS.ecore.oclas#p.basecs.PivotableElementCS.pivot">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="BaseCS.ecore.oclas#p.basecs.PivotableElementCS.pivot">
             <value xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Package"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_PackageCS_pivot.rightAS.bottom.rPackage"/>
             <slotExpression xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class BaseCS.ecore.oclas#T.basecs.PackageCS" referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_PackageCS_pivot.leftCS.guard.lPackageCS"/>
@@ -3170,13 +3170,13 @@
               <ownedIterators name="1_" isRequired="false" type="pivot:Class BaseCS.ecore.oclas#T.basecs.AnnotationElementCS"/>
             </ownedInit>
           </variable>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.NamedElement.name">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.NamedElement.name">
             <value xsi:type="pivot:VariableExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_ParameterCS_name_ownedAnnotations_pivot.bottom.name"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Parameter"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_ParameterCS_name_ownedAnnotations_pivot.bottom.aParameter"/>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Element.ownedAnnotations">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Element.ownedAnnotations">
             <value xsi:type="pivot:VariableExp" type="#//@ownedPackages.1/@ownedClasses.54" referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_ParameterCS_name_ownedAnnotations_pivot.bottom.%171%collect%187%"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Parameter"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_ParameterCS_name_ownedAnnotations_pivot.bottom.aParameter"/>
@@ -3237,7 +3237,7 @@
               <ownedArguments xsi:type="pivot:TypeExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class" referredType="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class"/>
             </ownedInit>
           </variable>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.TypedElement.type">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.TypedElement.type">
             <value xsi:type="pivot:VariableExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class" referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_ParameterCS_ownedType_pivot.bottom.aClass"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Parameter"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_ParameterCS_ownedType_pivot.bottom.aParameter"/>
@@ -3260,7 +3260,7 @@
         </domain>
         <guardPattern/>
         <bottomPattern xsi:type="qvti:ImperativeBottomPattern" orderedAssignment="#//@ownedPackages.0/@ownedClasses.0/@rule.35/@bottomPattern/@assignment.0">
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="BaseCS.ecore.oclas#p.basecs.PivotableElementCS.pivot">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="BaseCS.ecore.oclas#p.basecs.PivotableElementCS.pivot">
             <value xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Parameter"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_ParameterCS_pivot.rightAS.bottom.rParameter"/>
             <slotExpression xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class BaseCS.ecore.oclas#T.basecs.ParameterCS"
@@ -3307,7 +3307,7 @@
               <ownedArguments xsi:type="pivot:TypeExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class" referredType="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.PrimitiveType"/>
             </ownedInit>
           </variable>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.NamedElement.name">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.NamedElement.name">
             <value xsi:type="pivot:VariableExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_PrimitiveTypeRefCS_name_pivot.bottom.name"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.PrimitiveType"
@@ -3332,7 +3332,7 @@
         </domain>
         <guardPattern/>
         <bottomPattern xsi:type="qvti:ImperativeBottomPattern" orderedAssignment="#//@ownedPackages.0/@ownedClasses.0/@rule.37/@bottomPattern/@assignment.0">
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="BaseCS.ecore.oclas#p.basecs.PivotableElementCS.pivot">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="BaseCS.ecore.oclas#p.basecs.PivotableElementCS.pivot">
             <value xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.PrimitiveType"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_PrimitiveTypeRefCS_pivot.rightAS.bottom.rPrimitiveType"/>
             <slotExpression xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class BaseCS.ecore.oclas#T.basecs.PrimitiveTypeRefCS"
@@ -3508,65 +3508,65 @@
                   stringSymbol="readonly"/>
             </ownedInit>
           </variable>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Property.defaultValueString">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Property.defaultValueString">
             <value xsi:type="pivot:VariableExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_ReferenceCS_default_name_ownedAnnotations_pivot_.bottom.default"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Property"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_ReferenceCS_default_name_ownedAnnotations_pivot_.bottom.aProperty"/>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Property.isComposite">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Property.isComposite">
             <value xsi:type="pivot:VariableExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean" referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_ReferenceCS_default_name_ownedAnnotations_pivot_.bottom.includes"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Property"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_ReferenceCS_default_name_ownedAnnotations_pivot_.bottom.aProperty"/>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Property.isDerived">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Property.isDerived">
             <value xsi:type="pivot:VariableExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean" referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_ReferenceCS_default_name_ownedAnnotations_pivot_.bottom.includes2"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Property"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_ReferenceCS_default_name_ownedAnnotations_pivot_.bottom.aProperty"/>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Property.isReadOnly">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Property.isReadOnly">
             <value xsi:type="pivot:VariableExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean" referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_ReferenceCS_default_name_ownedAnnotations_pivot_.bottom.includes6"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Property"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_ReferenceCS_default_name_ownedAnnotations_pivot_.bottom.aProperty"/>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Property.isResolveProxies">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Property.isResolveProxies">
             <value xsi:type="pivot:VariableExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_ReferenceCS_default_name_ownedAnnotations_pivot_.bottom.not"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Property"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_ReferenceCS_default_name_ownedAnnotations_pivot_.bottom.aProperty"/>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Feature.isStatic">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Feature.isStatic">
             <value xsi:type="pivot:VariableExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean" referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_ReferenceCS_default_name_ownedAnnotations_pivot_.bottom.includes4"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Property"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_ReferenceCS_default_name_ownedAnnotations_pivot_.bottom.aProperty"/>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Property.isTransient">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Property.isTransient">
             <value xsi:type="pivot:VariableExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean" referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_ReferenceCS_default_name_ownedAnnotations_pivot_.bottom.includes3"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Property"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_ReferenceCS_default_name_ownedAnnotations_pivot_.bottom.aProperty"/>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Property.isUnsettable">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Property.isUnsettable">
             <value xsi:type="pivot:VariableExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean" referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_ReferenceCS_default_name_ownedAnnotations_pivot_.bottom.includes1"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Property"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_ReferenceCS_default_name_ownedAnnotations_pivot_.bottom.aProperty"/>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Property.isVolatile">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Property.isVolatile">
             <value xsi:type="pivot:VariableExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean" referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_ReferenceCS_default_name_ownedAnnotations_pivot_.bottom.includes5"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Property"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_ReferenceCS_default_name_ownedAnnotations_pivot_.bottom.aProperty"/>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Property.keys">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Property.keys">
             <value xsi:type="pivot:VariableExp" type="#//@ownedPackages.1/@ownedClasses.90" referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_ReferenceCS_default_name_ownedAnnotations_pivot_.bottom.referredKeys"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Property"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_ReferenceCS_default_name_ownedAnnotations_pivot_.bottom.aProperty"/>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.NamedElement.name">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.NamedElement.name">
             <value xsi:type="pivot:VariableExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_ReferenceCS_default_name_ownedAnnotations_pivot_.bottom.name"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Property"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_ReferenceCS_default_name_ownedAnnotations_pivot_.bottom.aProperty"/>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Element.ownedAnnotations">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Element.ownedAnnotations">
             <value xsi:type="pivot:VariableExp" type="#//@ownedPackages.1/@ownedClasses.54" referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_ReferenceCS_default_name_ownedAnnotations_pivot_.bottom.%171%collect%187%"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Property"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_ReferenceCS_default_name_ownedAnnotations_pivot_.bottom.aProperty"/>
@@ -3655,7 +3655,7 @@
               </ownedThen>
             </ownedInit>
           </variable>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Property.ownedExpression">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Property.ownedExpression">
             <value xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.LanguageExpression"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_ReferenceCS_ownedDefaultExpressions_ownedDefault.bottom.ownedExpression"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Property"
@@ -3717,7 +3717,7 @@
               <ownedArguments xsi:type="pivot:TypeExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class" referredType="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class"/>
             </ownedInit>
           </variable>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.TypedElement.type">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.TypedElement.type">
             <value xsi:type="pivot:VariableExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class" referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_ReferenceCS_ownedType_pivot.bottom.aClass"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Property"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_ReferenceCS_ownedType_pivot.bottom.aProperty"/>
@@ -3826,7 +3826,7 @@
                   referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_ReferenceCS_ownedType_pivot_referredOpposite.bottom.referredOpposite"/>
             </ownedInit>
           </variable>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Property.opposite">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Property.opposite">
             <value xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Property"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_ReferenceCS_ownedType_pivot_referredOpposite.bottom.opposite"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Property"
@@ -3850,7 +3850,7 @@
         </domain>
         <guardPattern/>
         <bottomPattern xsi:type="qvti:ImperativeBottomPattern" orderedAssignment="#//@ownedPackages.0/@ownedClasses.0/@rule.42/@bottomPattern/@assignment.0">
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="BaseCS.ecore.oclas#p.basecs.PivotableElementCS.pivot">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="BaseCS.ecore.oclas#p.basecs.PivotableElementCS.pivot">
             <value xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Property"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_ReferenceCS_pivot.rightAS.bottom.rProperty"/>
             <slotExpression xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class BaseCS.ecore.oclas#T.basecs.ReferenceCS"
@@ -3938,12 +3938,12 @@
               <ownedIterators name="1_" isRequired="false" type="pivot:Class BaseCS.ecore.oclas#T.basecs.PackageCS"/>
             </ownedInit>
           </variable>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Model.ownedImports">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Model.ownedImports">
             <value xsi:type="pivot:VariableExp" type="#//@ownedPackages.1/@ownedClasses.94" referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_RootPackageCS_ownedImports_ownedPackages_pivot.bottom.%171%collect%187%"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Model"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_RootPackageCS_ownedImports_ownedPackages_pivot.bottom.aModel"/>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Model.ownedPackages">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Model.ownedPackages">
             <value xsi:type="pivot:VariableExp" type="#//@ownedPackages.1/@ownedClasses.88" referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_RootPackageCS_ownedImports_ownedPackages_pivot.bottom.%171%collect%187%1"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Model"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_RootPackageCS_ownedImports_ownedPackages_pivot.bottom.aModel"/>
@@ -3966,7 +3966,7 @@
         </domain>
         <guardPattern/>
         <bottomPattern xsi:type="qvti:ImperativeBottomPattern" orderedAssignment="#//@ownedPackages.0/@ownedClasses.0/@rule.44/@bottomPattern/@assignment.0">
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="BaseCS.ecore.oclas#p.basecs.PivotableElementCS.pivot">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="BaseCS.ecore.oclas#p.basecs.PivotableElementCS.pivot">
             <value xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Model" referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_RootPackageCS_pivot.rightAS.bottom.rModel"/>
             <slotExpression xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class BaseCS.ecore.oclas#T.basecs.RootPackageCS"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_RootPackageCS_pivot.leftCS.guard.lRootPackageCS"/>
@@ -4014,7 +4014,7 @@
               <ownedArguments xsi:type="pivot:TypeExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class" referredType="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.ExpressionInOCL"/>
             </ownedInit>
           </variable>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.LanguageExpression.body">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.LanguageExpression.body">
             <value xsi:type="pivot:VariableExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_SpecificationCS_exprString_pivot.bottom.exprString"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.ExpressionInOCL"
@@ -4039,7 +4039,7 @@
         </domain>
         <guardPattern/>
         <bottomPattern xsi:type="qvti:ImperativeBottomPattern" orderedAssignment="#//@ownedPackages.0/@ownedClasses.0/@rule.46/@bottomPattern/@assignment.0">
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="BaseCS.ecore.oclas#p.basecs.PivotableElementCS.pivot">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="BaseCS.ecore.oclas#p.basecs.PivotableElementCS.pivot">
             <value xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.ExpressionInOCL"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_SpecificationCS_pivot.rightAS.bottom.rExpressionInOCL"/>
             <slotExpression xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class BaseCS.ecore.oclas#T.basecs.SpecificationCS"
@@ -4242,51 +4242,51 @@
               <ownedIterators name="1_" isRequired="false" type="pivot:Class BaseCS.ecore.oclas#T.basecs.ConstraintCS"/>
             </ownedInit>
           </variable>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Class.instanceClassName">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Class.instanceClassName">
             <value xsi:type="pivot:VariableExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_StructuredClassCS_instanceClassName_isAbstract_i.bottom.instanceClassName"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_StructuredClassCS_instanceClassName_isAbstract_i.bottom.aClass"/>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Class.isAbstract">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Class.isAbstract">
             <value xsi:type="pivot:VariableExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_StructuredClassCS_instanceClassName_isAbstract_i.bottom.isAbstract"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_StructuredClassCS_instanceClassName_isAbstract_i.bottom.aClass"/>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Class.isInterface">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Class.isInterface">
             <value xsi:type="pivot:VariableExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_StructuredClassCS_instanceClassName_isAbstract_i.bottom.isInterface"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_StructuredClassCS_instanceClassName_isAbstract_i.bottom.aClass"/>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.NamedElement.name">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.NamedElement.name">
             <value xsi:type="pivot:VariableExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_StructuredClassCS_instanceClassName_isAbstract_i.bottom.name"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_StructuredClassCS_instanceClassName_isAbstract_i.bottom.aClass"/>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Element.ownedAnnotations">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Element.ownedAnnotations">
             <value xsi:type="pivot:VariableExp" type="#//@ownedPackages.1/@ownedClasses.54" referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_StructuredClassCS_instanceClassName_isAbstract_i.bottom.%171%collect%187%1"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_StructuredClassCS_instanceClassName_isAbstract_i.bottom.aClass"/>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Class.ownedInvariants">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Class.ownedInvariants">
             <value xsi:type="pivot:VariableExp" type="#//@ownedPackages.1/@ownedClasses.65" referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_StructuredClassCS_instanceClassName_isAbstract_i.bottom.%171%collect%187%3"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_StructuredClassCS_instanceClassName_isAbstract_i.bottom.aClass"/>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Class.ownedOperations">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Class.ownedOperations">
             <value xsi:type="pivot:VariableExp" type="#//@ownedPackages.1/@ownedClasses.100" referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_StructuredClassCS_instanceClassName_isAbstract_i.bottom.%171%collect%187%"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_StructuredClassCS_instanceClassName_isAbstract_i.bottom.aClass"/>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Class.ownedProperties">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Class.ownedProperties">
             <value xsi:type="pivot:VariableExp" type="#//@ownedPackages.1/@ownedClasses.104" referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_StructuredClassCS_instanceClassName_isAbstract_i.bottom.%171%collect%187%2"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_StructuredClassCS_instanceClassName_isAbstract_i.bottom.aClass"/>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Class.superClasses">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Class.superClasses">
             <value xsi:type="pivot:VariableExp" type="#//@ownedPackages.1/@ownedClasses.102" referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_StructuredClassCS_instanceClassName_isAbstract_i.bottom.if"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_StructuredClassCS_instanceClassName_isAbstract_i.bottom.aClass"/>
@@ -4350,7 +4350,7 @@
               <ownedArguments xsi:type="pivot:TypeExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class" referredType="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.TemplateSignature"/>
             </ownedInit>
           </variable>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.TemplateableElement.ownedSignature">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.TemplateableElement.ownedSignature">
             <value xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.TemplateSignature"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_StructuredClassCS_ownedSignature_pivot.bottom.aTemplateSignature"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class"
@@ -4374,7 +4374,7 @@
         </domain>
         <guardPattern/>
         <bottomPattern xsi:type="qvti:ImperativeBottomPattern" orderedAssignment="#//@ownedPackages.0/@ownedClasses.0/@rule.49/@bottomPattern/@assignment.0">
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="BaseCS.ecore.oclas#p.basecs.PivotableElementCS.pivot">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="BaseCS.ecore.oclas#p.basecs.PivotableElementCS.pivot">
             <value xsi:type="pivot:VariableExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class" referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_StructuredClassCS_pivot.rightAS.bottom.rClass"/>
             <slotExpression xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class BaseCS.ecore.oclas#T.basecs.StructuredClassCS"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_StructuredClassCS_pivot.leftCS.guard.lStructuredClassCS"/>
@@ -4438,7 +4438,7 @@
               <ownedIterators name="1_" isRequired="false" type="pivot:Class BaseCS.ecore.oclas#T.basecs.TemplateParameterSubstitutionCS"/>
             </ownedInit>
           </variable>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.TemplateBinding.ownedSubstitutions">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.TemplateBinding.ownedSubstitutions">
             <value xsi:type="pivot:VariableExp" type="#//@ownedPackages.1/@ownedClasses.108" referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_TemplateBindingCS_ownedSubstitutions_pivot.bottom.%171%collect%187%"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.TemplateBinding"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_TemplateBindingCS_ownedSubstitutions_pivot.bottom.aTemplateBinding"/>
@@ -4462,7 +4462,7 @@
         </domain>
         <guardPattern/>
         <bottomPattern xsi:type="qvti:ImperativeBottomPattern" orderedAssignment="#//@ownedPackages.0/@ownedClasses.0/@rule.51/@bottomPattern/@assignment.0">
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="BaseCS.ecore.oclas#p.basecs.PivotableElementCS.pivot">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="BaseCS.ecore.oclas#p.basecs.PivotableElementCS.pivot">
             <value xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.TemplateBinding"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_TemplateBindingCS_pivot.rightAS.bottom.rTemplateBinding"/>
             <slotExpression xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class BaseCS.ecore.oclas#T.basecs.TemplateBindingCS"
@@ -4528,7 +4528,7 @@
               <ownedArguments xsi:type="pivot:TypeExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class" referredType="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class"/>
             </ownedInit>
           </variable>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.TemplateParameterSubstitution.actual">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.TemplateParameterSubstitution.actual">
             <value xsi:type="pivot:VariableExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class" referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_TemplateParameterSubstitutionCS_ownedActualParam.bottom.aClass"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.TemplateParameterSubstitution"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_TemplateParameterSubstitutionCS_ownedActualParam.bottom.aTemplateParameterSubstitution"/>
@@ -4639,7 +4639,7 @@
                   referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_TemplateParameterSubstitutionCS_owningBinding_pi.bottom.indexOf"/>
             </ownedInit>
           </variable>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.TemplateParameterSubstitution.formal">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.TemplateParameterSubstitution.formal">
             <value xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.TemplateParameter"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_TemplateParameterSubstitutionCS_owningBinding_pi.bottom.formal"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.TemplateParameterSubstitution"
@@ -4664,7 +4664,7 @@
         </domain>
         <guardPattern/>
         <bottomPattern xsi:type="qvti:ImperativeBottomPattern" orderedAssignment="#//@ownedPackages.0/@ownedClasses.0/@rule.54/@bottomPattern/@assignment.0">
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="BaseCS.ecore.oclas#p.basecs.PivotableElementCS.pivot">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="BaseCS.ecore.oclas#p.basecs.PivotableElementCS.pivot">
             <value xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.TemplateParameterSubstitution"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_TemplateParameterSubstitutionCS_pivot.rightAS.bottom.rTemplateParameterSubstitution"/>
             <slotExpression xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class BaseCS.ecore.oclas#T.basecs.TemplateParameterSubstitutionCS"
@@ -4689,7 +4689,7 @@
         </domain>
         <guardPattern/>
         <bottomPattern xsi:type="qvti:ImperativeBottomPattern" orderedAssignment="#//@ownedPackages.0/@ownedClasses.0/@rule.55/@bottomPattern/@assignment.0">
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="BaseCS.ecore.oclas#p.basecs.PivotableElementCS.pivot">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="BaseCS.ecore.oclas#p.basecs.PivotableElementCS.pivot">
             <value xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.TemplateSignature"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_TemplateSignatureCS_pivot.rightAS.bottom.rTemplateSignature"/>
             <slotExpression xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class BaseCS.ecore.oclas#T.basecs.TemplateSignatureCS"
@@ -4736,7 +4736,7 @@
               <ownedArguments xsi:type="pivot:TypeExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class" referredType="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Property"/>
             </ownedInit>
           </variable>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.NamedElement.name">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.NamedElement.name">
             <value xsi:type="pivot:VariableExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_TuplePartCS_name_pivot.bottom.name"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Property"
@@ -4798,7 +4798,7 @@
               <ownedArguments xsi:type="pivot:TypeExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class" referredType="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class"/>
             </ownedInit>
           </variable>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.TypedElement.type">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.TypedElement.type">
             <value xsi:type="pivot:VariableExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class" referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_TuplePartCS_ownedType_pivot.bottom.aClass"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Property"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_TuplePartCS_ownedType_pivot.bottom.aProperty"/>
@@ -4821,7 +4821,7 @@
         </domain>
         <guardPattern/>
         <bottomPattern xsi:type="qvti:ImperativeBottomPattern" orderedAssignment="#//@ownedPackages.0/@ownedClasses.0/@rule.58/@bottomPattern/@assignment.0">
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="BaseCS.ecore.oclas#p.basecs.PivotableElementCS.pivot">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="BaseCS.ecore.oclas#p.basecs.PivotableElementCS.pivot">
             <value xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Property"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_TuplePartCS_pivot.rightAS.bottom.rProperty"/>
             <slotExpression xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class BaseCS.ecore.oclas#T.basecs.TuplePartCS"
@@ -4891,13 +4891,13 @@
               <ownedIterators name="1_" isRequired="false" type="pivot:Class BaseCS.ecore.oclas#T.basecs.TuplePartCS"/>
             </ownedInit>
           </variable>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.NamedElement.name">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.NamedElement.name">
             <value xsi:type="pivot:VariableExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_TupleTypeCS_name_ownedParts_pivot.bottom.name"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.TupleType"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_TupleTypeCS_name_ownedParts_pivot.bottom.aTupleType"/>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Class.ownedProperties">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.Class.ownedProperties">
             <value xsi:type="pivot:VariableExp" type="#//@ownedPackages.1/@ownedClasses.104" referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_TupleTypeCS_name_ownedParts_pivot.bottom.%171%collect%187%"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.TupleType"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_TupleTypeCS_name_ownedParts_pivot.bottom.aTupleType"/>
@@ -4920,7 +4920,7 @@
         </domain>
         <guardPattern/>
         <bottomPattern xsi:type="qvti:ImperativeBottomPattern" orderedAssignment="#//@ownedPackages.0/@ownedClasses.0/@rule.60/@bottomPattern/@assignment.0">
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="BaseCS.ecore.oclas#p.basecs.PivotableElementCS.pivot">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="BaseCS.ecore.oclas#p.basecs.PivotableElementCS.pivot">
             <value xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.TupleType"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_TupleTypeCS_pivot.rightAS.bottom.rTupleType"/>
             <slotExpression xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class BaseCS.ecore.oclas#T.basecs.TupleTypeCS"
@@ -4993,12 +4993,12 @@
               <ownedIterators name="1_" isRequired="false" type="pivot:Class BaseCS.ecore.oclas#T.basecs.TypedRefCS"/>
             </ownedInit>
           </variable>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.TemplateParameter.constrainingClasses">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.TemplateParameter.constrainingClasses">
             <value xsi:type="pivot:VariableExp" type="#//@ownedPackages.1/@ownedClasses.78" referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_TypeParameterCS_name_ownedExtends_pivot.bottom.%171%collect%187%"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.TemplateParameter"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_TypeParameterCS_name_ownedExtends_pivot.bottom.aTemplateParameter"/>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.NamedElement.name">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#p.pivot.NamedElement.name">
             <value xsi:type="pivot:VariableExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_TypeParameterCS_name_ownedExtends_pivot.bottom.name"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.TemplateParameter"
@@ -5023,7 +5023,7 @@
         </domain>
         <guardPattern/>
         <bottomPattern xsi:type="qvti:ImperativeBottomPattern" orderedAssignment="#//@ownedPackages.0/@ownedClasses.0/@rule.62/@bottomPattern/@assignment.0">
-          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="BaseCS.ecore.oclas#p.basecs.PivotableElementCS.pivot">
+          <assignment xsi:type="qvtc:PropertyAssignment" targetProperty="BaseCS.ecore.oclas#p.basecs.PivotableElementCS.pivot">
             <value xsi:type="pivot:VariableExp" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.TemplateParameter"
                 referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.m_TypeParameterCS_pivot.rightAS.bottom.rTemplateParameter"/>
             <slotExpression xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class BaseCS.ecore.oclas#T.basecs.TypeParameterCS"

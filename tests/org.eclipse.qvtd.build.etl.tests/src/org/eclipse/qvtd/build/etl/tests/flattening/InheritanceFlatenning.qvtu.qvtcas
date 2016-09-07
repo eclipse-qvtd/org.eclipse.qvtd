@@ -39,14 +39,14 @@
     <modelParameter name="final" usedPackage="../UmlToRdbms/SimpleUML.ecore.oclas#P.simpleuml"/>
     <modelParameter usedPackage="SimpleUmlToFlatUml.ecore.oclas#P.simpleumltoflatuml"/>
     <rule xsi:type="qvtc:Mapping" name="UmlElementToUmlElement" specification="#//@nestedPackage.0/@rule.1 #//@nestedPackage.0/@rule.2 #//@nestedPackage.0/@rule.3">
-      <domain xsi:type="qvtcb:CoreDomain" name="origin" isCheckable="false" isEnforceable="false"
+      <domain xsi:type="qvtc:CoreDomain" name="origin" isCheckable="false" isEnforceable="false"
           typedModel="#//@nestedPackage.0/@modelParameter.0">
         <guardPattern/>
         <bottomPattern>
           <variable name="se" type="../UmlToRdbms/SimpleUML.ecore.oclas#T.simpleuml.UMLModelElement"/>
         </bottomPattern>
       </domain>
-      <domain xsi:type="qvtcb:CoreDomain" name="final" isCheckable="false" isEnforceable="true"
+      <domain xsi:type="qvtc:CoreDomain" name="final" isCheckable="false" isEnforceable="true"
           typedModel="#//@nestedPackage.0/@modelParameter.1">
         <guardPattern/>
         <bottomPattern>
@@ -84,7 +84,7 @@
       <local>
         <guardPattern/>
         <bottomPattern>
-          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleUmlToFlatUml.ecore.oclas#p.simpleumltoflatuml.UmlModelElementT.name">
+          <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" targetProperty="SimpleUmlToFlatUml.ecore.oclas#p.simpleumltoflatuml.UmlModelElementT.name">
             <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
                 referredProperty="../UmlToRdbms/SimpleUML.ecore.oclas#p.simpleuml.UMLModelElement.name">
               <source xsi:type="pivot:VariableExp" type="../UmlToRdbms/SimpleUML.ecore.oclas#T.simpleuml.UMLModelElement"
@@ -93,7 +93,7 @@
             <slotExpression xsi:type="pivot:VariableExp" type="SimpleUmlToFlatUml.ecore.oclas#T.simpleumltoflatuml.UmlModelElementT"
                 referredVariable="#//@nestedPackage.0/@rule.0/@bottomPattern/@realizedVariable.0"/>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="../UmlToRdbms/SimpleUML.ecore.oclas#p.simpleuml.UMLModelElement.name">
+          <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" targetProperty="../UmlToRdbms/SimpleUML.ecore.oclas#p.simpleuml.UMLModelElement.name">
             <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
                 referredProperty="SimpleUmlToFlatUml.ecore.oclas#p.simpleumltoflatuml.UmlModelElementT.name">
               <source xsi:type="pivot:VariableExp" type="SimpleUmlToFlatUml.ecore.oclas#T.simpleumltoflatuml.UmlModelElementT"
@@ -102,7 +102,7 @@
             <slotExpression xsi:type="pivot:VariableExp" type="../UmlToRdbms/SimpleUML.ecore.oclas#T.simpleuml.UMLModelElement"
                 referredVariable="#//@nestedPackage.0/@rule.0/@domain.1/@bottomPattern/@realizedVariable.0"/>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleUmlToFlatUml.ecore.oclas#p.simpleumltoflatuml.UmlModelElementT.kind">
+          <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" targetProperty="SimpleUmlToFlatUml.ecore.oclas#p.simpleumltoflatuml.UmlModelElementT.kind">
             <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
                 referredProperty="../UmlToRdbms/SimpleUML.ecore.oclas#p.simpleuml.UMLModelElement.kind">
               <source xsi:type="pivot:VariableExp" type="../UmlToRdbms/SimpleUML.ecore.oclas#T.simpleuml.UMLModelElement"
@@ -111,7 +111,7 @@
             <slotExpression xsi:type="pivot:VariableExp" type="SimpleUmlToFlatUml.ecore.oclas#T.simpleumltoflatuml.UmlModelElementT"
                 referredVariable="#//@nestedPackage.0/@rule.0/@bottomPattern/@realizedVariable.0"/>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="../UmlToRdbms/SimpleUML.ecore.oclas#p.simpleuml.UMLModelElement.kind">
+          <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" targetProperty="../UmlToRdbms/SimpleUML.ecore.oclas#p.simpleuml.UMLModelElement.kind">
             <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
                 referredProperty="SimpleUmlToFlatUml.ecore.oclas#p.simpleumltoflatuml.UmlModelElementT.kind">
               <source xsi:type="pivot:VariableExp" type="SimpleUmlToFlatUml.ecore.oclas#T.simpleumltoflatuml.UmlModelElementT"
@@ -124,14 +124,14 @@
       </local>
     </rule>
     <rule xsi:type="qvtc:Mapping" name="PackageToPackage" refinement="#//@nestedPackage.0/@rule.0">
-      <domain xsi:type="qvtcb:CoreDomain" name="origin" isCheckable="false" isEnforceable="false"
+      <domain xsi:type="qvtc:CoreDomain" name="origin" isCheckable="false" isEnforceable="false"
           typedModel="#//@nestedPackage.0/@modelParameter.0">
         <guardPattern/>
         <bottomPattern>
           <variable name="se" type="../UmlToRdbms/SimpleUML.ecore.oclas#T.simpleuml.Package"/>
         </bottomPattern>
       </domain>
-      <domain xsi:type="qvtcb:CoreDomain" name="final" isCheckable="false" isEnforceable="true"
+      <domain xsi:type="qvtc:CoreDomain" name="final" isCheckable="false" isEnforceable="true"
           typedModel="#//@nestedPackage.0/@modelParameter.1">
         <guardPattern/>
         <bottomPattern>
@@ -144,7 +144,7 @@
       </bottomPattern>
     </rule>
     <rule xsi:type="qvtc:Mapping" name="ClassToClass" refinement="#//@nestedPackage.0/@rule.0">
-      <domain xsi:type="qvtcb:CoreDomain" name="origin" isCheckable="false" isEnforceable="false"
+      <domain xsi:type="qvtc:CoreDomain" name="origin" isCheckable="false" isEnforceable="false"
           typedModel="#//@nestedPackage.0/@modelParameter.0">
         <guardPattern>
           <variable name="sp" type="../UmlToRdbms/SimpleUML.ecore.oclas#T.simpleuml.Package"/>
@@ -165,7 +165,7 @@
           <variable name="se" type="../UmlToRdbms/SimpleUML.ecore.oclas#T.simpleuml.Class"/>
         </bottomPattern>
       </domain>
-      <domain xsi:type="qvtcb:CoreDomain" name="final" isCheckable="false" isEnforceable="true"
+      <domain xsi:type="qvtc:CoreDomain" name="final" isCheckable="false" isEnforceable="true"
           typedModel="#//@nestedPackage.0/@modelParameter.1">
         <guardPattern>
           <variable name="tp" type="../UmlToRdbms/SimpleUML.ecore.oclas#T.simpleuml.Package"/>
@@ -214,13 +214,13 @@
                 referredVariable="#//@nestedPackage.0/@rule.2/@guardPattern/@variable.0"/>
           </conditionExpression>
         </predicate>
-        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleUmlToFlatUml.ecore.oclas#p.simpleumltoflatuml.UmlModelElementT.origin">
+        <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" targetProperty="SimpleUmlToFlatUml.ecore.oclas#p.simpleumltoflatuml.UmlModelElementT.origin">
           <value xsi:type="pivot:VariableExp" type="../UmlToRdbms/SimpleUML.ecore.oclas#T.simpleuml.Class"
               referredVariable="#//@nestedPackage.0/@rule.2/@domain.0/@bottomPattern/@variable.0"/>
           <slotExpression xsi:type="pivot:VariableExp" type="SimpleUmlToFlatUml.ecore.oclas#T.simpleumltoflatuml.ClassT"
               referredVariable="#//@nestedPackage.0/@rule.2/@bottomPattern/@realizedVariable.0"/>
         </assignment>
-        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleUmlToFlatUml.ecore.oclas#p.simpleumltoflatuml.UmlModelElementT.final">
+        <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" targetProperty="SimpleUmlToFlatUml.ecore.oclas#p.simpleumltoflatuml.UmlModelElementT.final">
           <value xsi:type="pivot:VariableExp" type="../UmlToRdbms/SimpleUML.ecore.oclas#T.simpleuml.Class"
               referredVariable="#//@nestedPackage.0/@rule.2/@domain.1/@bottomPattern/@realizedVariable.0"/>
           <slotExpression xsi:type="pivot:VariableExp" type="SimpleUmlToFlatUml.ecore.oclas#T.simpleumltoflatuml.ClassT"
@@ -230,7 +230,7 @@
       </bottomPattern>
     </rule>
     <rule xsi:type="qvtc:Mapping" name="AttributeToAttribute" refinement="#//@nestedPackage.0/@rule.0">
-      <domain xsi:type="qvtcb:CoreDomain" name="origin" isCheckable="false" isEnforceable="false"
+      <domain xsi:type="qvtc:CoreDomain" name="origin" isCheckable="false" isEnforceable="false"
           typedModel="#//@nestedPackage.0/@modelParameter.0">
         <guardPattern>
           <variable name="sc" type="../UmlToRdbms/SimpleUML.ecore.oclas#T.simpleuml.Class"/>
@@ -251,13 +251,13 @@
           <variable name="se" type="../UmlToRdbms/SimpleUML.ecore.oclas#T.simpleuml.Attribute"/>
         </bottomPattern>
       </domain>
-      <domain xsi:type="qvtcb:CoreDomain" name="final" isCheckable="false" isEnforceable="true"
+      <domain xsi:type="qvtc:CoreDomain" name="final" isCheckable="false" isEnforceable="true"
           typedModel="#//@nestedPackage.0/@modelParameter.1">
         <guardPattern>
           <variable name="tc" type="../UmlToRdbms/SimpleUML.ecore.oclas#T.simpleuml.Class"/>
         </guardPattern>
         <bottomPattern>
-          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="../UmlToRdbms/SimpleUML.ecore.oclas#p.simpleuml.Attribute.owner">
+          <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" targetProperty="../UmlToRdbms/SimpleUML.ecore.oclas#p.simpleuml.Attribute.owner">
             <value xsi:type="pivot:VariableExp" type="../UmlToRdbms/SimpleUML.ecore.oclas#T.simpleuml.Class"
                 referredVariable="#//@nestedPackage.0/@rule.3/@domain.1/@guardPattern/@variable.0"/>
             <slotExpression xsi:type="pivot:VariableExp" type="../UmlToRdbms/SimpleUML.ecore.oclas#T.simpleuml.Attribute"
@@ -294,7 +294,7 @@
         <variable name="c2c" type="SimpleUmlToFlatUml.ecore.oclas#T.simpleumltoflatuml.ClassT"/>
       </guardPattern>
       <bottomPattern>
-        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleUmlToFlatUml.ecore.oclas#p.simpleumltoflatuml.AttributeT.owner">
+        <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" targetProperty="SimpleUmlToFlatUml.ecore.oclas#p.simpleumltoflatuml.AttributeT.owner">
           <value xsi:type="pivot:VariableExp" type="SimpleUmlToFlatUml.ecore.oclas#T.simpleumltoflatuml.ClassT"
               referredVariable="#//@nestedPackage.0/@rule.3/@guardPattern/@variable.0"/>
           <slotExpression xsi:type="pivot:VariableExp" type="SimpleUmlToFlatUml.ecore.oclas#T.simpleumltoflatuml.AttributeT"
@@ -320,7 +320,7 @@
               </argument>
             </conditionExpression>
           </predicate>
-          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleUmlToFlatUml.ecore.oclas#p.simpleumltoflatuml.AttributeT.type">
+          <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" targetProperty="SimpleUmlToFlatUml.ecore.oclas#p.simpleumltoflatuml.AttributeT.type">
             <value xsi:type="pivot:PropertyCallExp" type="../UmlToRdbms/SimpleUML.ecore.oclas#T.simpleuml.Classifier"
                 referredProperty="../UmlToRdbms/SimpleUML.ecore.oclas#p.simpleuml.Attribute.type">
               <source xsi:type="pivot:VariableExp" type="../UmlToRdbms/SimpleUML.ecore.oclas#T.simpleuml.Attribute"
@@ -333,7 +333,7 @@
       </local>
     </rule>
     <rule xsi:type="qvtc:Mapping" name="ClassInheritance">
-      <domain xsi:type="qvtcb:CoreDomain" name="origin" isCheckable="false" isEnforceable="false"
+      <domain xsi:type="qvtc:CoreDomain" name="origin" isCheckable="false" isEnforceable="false"
           typedModel="#//@nestedPackage.0/@modelParameter.0">
         <guardPattern>
           <variable name="gc" type="../UmlToRdbms/SimpleUML.ecore.oclas#T.simpleuml.Class"/>
@@ -373,13 +373,13 @@
           <variable name="c2c" type="SimpleUmlToFlatUml.ecore.oclas#T.simpleumltoflatuml.ClassT"/>
         </guardPattern>
         <bottomPattern>
-          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleUmlToFlatUml.ecore.oclas#p.simpleumltoflatuml.ClassTHierarchy.classT">
+          <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" targetProperty="SimpleUmlToFlatUml.ecore.oclas#p.simpleumltoflatuml.ClassTHierarchy.classT">
             <value xsi:type="pivot:VariableExp" type="SimpleUmlToFlatUml.ecore.oclas#T.simpleumltoflatuml.ClassT"
                 referredVariable="#//@nestedPackage.0/@rule.4/@local.0/@guardPattern/@variable.0"/>
             <slotExpression xsi:type="pivot:VariableExp" type="SimpleUmlToFlatUml.ecore.oclas#T.simpleumltoflatuml.ClassTHierarchy"
                 referredVariable="#//@nestedPackage.0/@rule.4/@local.0/@bottomPattern/@realizedVariable.0"/>
           </assignment>
-          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleUmlToFlatUml.ecore.oclas#p.simpleumltoflatuml.ClassTHierarchy.general">
+          <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" targetProperty="SimpleUmlToFlatUml.ecore.oclas#p.simpleumltoflatuml.ClassTHierarchy.general">
             <value xsi:type="pivot:VariableExp" type="../UmlToRdbms/SimpleUML.ecore.oclas#T.simpleuml.Class"
                 referredVariable="#//@nestedPackage.0/@rule.4/@domain.0/@guardPattern/@variable.0"/>
             <slotExpression xsi:type="pivot:VariableExp" type="SimpleUmlToFlatUml.ecore.oclas#T.simpleumltoflatuml.ClassTHierarchy"
@@ -390,7 +390,7 @@
       </local>
     </rule>
     <rule xsi:type="qvtc:Mapping" name="AttributeInheritance">
-      <domain xsi:type="qvtcb:CoreDomain" name="origin" isCheckable="false" isEnforceable="false"
+      <domain xsi:type="qvtc:CoreDomain" name="origin" isCheckable="false" isEnforceable="false"
           typedModel="#//@nestedPackage.0/@modelParameter.0">
         <guardPattern>
           <variable name="gc" type="../UmlToRdbms/SimpleUML.ecore.oclas#T.simpleuml.Class"/>
@@ -411,13 +411,13 @@
           <variable name="sa" type="../UmlToRdbms/SimpleUML.ecore.oclas#T.simpleuml.Attribute"/>
         </bottomPattern>
       </domain>
-      <domain xsi:type="qvtcb:CoreDomain" name="final" isCheckable="false" isEnforceable="true"
+      <domain xsi:type="qvtc:CoreDomain" name="final" isCheckable="false" isEnforceable="true"
           typedModel="#//@nestedPackage.0/@modelParameter.1">
         <guardPattern>
           <variable name="tc" type="../UmlToRdbms/SimpleUML.ecore.oclas#T.simpleuml.Class"/>
         </guardPattern>
         <bottomPattern>
-          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="../UmlToRdbms/SimpleUML.ecore.oclas#p.simpleuml.Attribute.owner">
+          <assignment xsi:type="qvtc:PropertyAssignment" isDefault="false" targetProperty="../UmlToRdbms/SimpleUML.ecore.oclas#p.simpleuml.Attribute.owner">
             <value xsi:type="pivot:VariableExp" type="../UmlToRdbms/SimpleUML.ecore.oclas#T.simpleuml.Class"
                 referredVariable="#//@nestedPackage.0/@rule.5/@domain.1/@guardPattern/@variable.0"/>
             <slotExpression xsi:type="pivot:VariableExp" type="../UmlToRdbms/SimpleUML.ecore.oclas#T.simpleuml.Attribute"

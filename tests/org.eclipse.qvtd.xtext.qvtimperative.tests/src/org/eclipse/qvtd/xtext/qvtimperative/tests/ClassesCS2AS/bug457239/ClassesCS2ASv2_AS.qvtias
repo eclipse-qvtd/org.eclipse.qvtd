@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <qvti:ImperativeModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:pivot="http://www.eclipse.org/ocl/2015/Pivot" xmlns:qvtb="http://www.eclipse.org/qvt/2015/QVTbase"
-    xmlns:qvtcb="http://www.eclipse.org/qvt/2015/QVTcoreBase" xmlns:qvti="http://www.eclipse.org/qvt/2015/QVTimperative"
-    xsi:schemaLocation="http://www.eclipse.org/ocl/2015/Pivot java://org.eclipse.ocl.pivot.PivotPackage http://www.eclipse.org/qvt/2015/QVTbase java://org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage http://www.eclipse.org/qvt/2015/QVTcoreBase java://org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage http://www.eclipse.org/qvt/2015/QVTimperative java://org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage"
+    xmlns:qvti="http://www.eclipse.org/qvt/2015/QVTimperative"
+    xsi:schemaLocation="http://www.eclipse.org/ocl/2015/Pivot java://org.eclipse.ocl.pivot.PivotPackage http://www.eclipse.org/qvt/2015/QVTbase java://org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage http://www.eclipse.org/qvt/2015/QVTimperative java://org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage"
     name="ClassesCS2ASv2.qvti" externalURI="platform:/resource/org.eclipse.qvtd.xtext.qvtimperative.tests/src/org/eclipse/qvtd/xtext/qvtimperative/tests/ClassesCS2AS/bug457239/ClassesCS2ASv2.qvti">
   <ownedImports name="classes" importedNamespace="pivot:Model ../Classes.ecore.oclas#/"/>
   <ownedImports name="classescs" importedNamespace="pivot:Model ../ClassesCS.ecore.oclas#/"/>
@@ -13,7 +13,7 @@
       <modelParameter xmi:id="qT..classescs2as.leftCS" name="leftCS" usedPackage="../ClassesCS.ecore.oclas#P.classescs"/>
       <modelParameter xmi:id="qT..classescs2as.rightAS" name="rightAS" usedPackage="../Classes.ecore.oclas#P.classes"/>
       <rule xsi:type="qvti:Mapping" xmi:id="m..classescs2as.createPackage" name="createPackage">
-        <domain xsi:type="qvtcb:CoreDomain" isCheckable="true" isEnforceable="false"
+        <domain xsi:type="qvti:CoreDomain" isCheckable="true" isEnforceable="false"
             typedModel="#qT..classescs2as.leftCS">
           <guardPattern>
             <variable xmi:id="qV..classescs2as.createPackage.leftCS.guard.packageCS"
@@ -21,7 +21,7 @@
           </guardPattern>
           <bottomPattern/>
         </domain>
-        <domain xsi:type="qvtcb:CoreDomain" isCheckable="false" isEnforceable="true"
+        <domain xsi:type="qvti:CoreDomain" isCheckable="false" isEnforceable="true"
             typedModel="#qT..classescs2as.rightAS">
           <guardPattern/>
           <bottomPattern>
@@ -31,7 +31,7 @@
         </domain>
         <guardPattern/>
         <bottomPattern>
-          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="../Classes.ecore.oclas#p.classes.NamedElement.name">
+          <assignment xsi:type="qvti:PropertyAssignment" isDefault="false" targetProperty="../Classes.ecore.oclas#p.classes.NamedElement.name">
             <value xsi:type="pivot:IfExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String">
               <ownedCondition xsi:type="pivot:OperationCallExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
                   referredOperation="helpers.ocl.oclas#o.ocl.OclElement.aBooleanElementOp">
