@@ -182,13 +182,14 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public Transformation getTransformation() {
-		// TODO: implement this method to return the 'Transformation' reference
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+		if (ownedPathName == null) {
+			return null;
+		}
+		return (Transformation) ownedPathName.getReferredElement();
 	}
 
 	/**

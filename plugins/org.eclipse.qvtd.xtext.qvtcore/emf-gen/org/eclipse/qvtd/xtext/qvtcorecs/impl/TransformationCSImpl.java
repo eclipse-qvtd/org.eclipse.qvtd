@@ -85,13 +85,14 @@ public class TransformationCSImpl extends AbstractTransformationCSImpl implement
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public org.eclipse.ocl.pivot.Package getPackage() {
-		// TODO: implement this method to return the 'Package' reference
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+		if (ownedPathName == null) {
+			return null;
+		}
+		return (org.eclipse.ocl.pivot.Package) ownedPathName.getReferredElement();
 	}
 
 	/**
