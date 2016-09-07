@@ -27,8 +27,8 @@ public class QVTimperativePivotScoping
 	public static void init() {
 		Map<EClassifier, Attribution> registry = Attribution.REGISTRY;
 		registry.put(QVTimperativePackage.Literals.BOTTOM_PATTERN, QVTimperativeBottomPatternAttribution.INSTANCE);
-		registry.put(QVTimperativePackage.Literals.CORE_DOMAIN, CoreDomainAttribution.INSTANCE);
 		registry.put(QVTimperativePackage.Literals.GUARD_PATTERN, QVTimperativeGuardPatternAttribution.INSTANCE);
+		registry.put(QVTimperativePackage.Literals.IMPERATIVE_DOMAIN, CoreDomainAttribution.INSTANCE);
 		registry.put(QVTimperativePackage.Literals.MAPPING, MappingAttribution.INSTANCE);
 		registry.put(QVTimperativePackage.Literals.MAPPING_CALL_BINDING, MappingCallBindingAttribution.INSTANCE);
 		registry.put(QVTimperativePackage.Literals.MAPPING_LOOP, MappingLoopAttribution.INSTANCE);

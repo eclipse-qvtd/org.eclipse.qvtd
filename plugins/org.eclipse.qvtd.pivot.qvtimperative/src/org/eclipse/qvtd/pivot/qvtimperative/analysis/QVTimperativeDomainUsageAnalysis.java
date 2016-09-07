@@ -23,8 +23,6 @@ import org.eclipse.qvtd.pivot.qvtbase.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeBottomPattern;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
@@ -66,16 +64,6 @@ public class QVTimperativeDomainUsageAnalysis extends RootDomainUsageAnalysis im
 	@Override
 	public @NonNull DomainUsage visitConnectionVariable(@NonNull ConnectionVariable object) {
 		return visitVariable(object);
-	}
-
-	@Override
-	public @NonNull DomainUsage visitImperativeBottomPattern(@NonNull ImperativeBottomPattern object) {
-		return visitBottomPattern(object);
-	}
-
-	@Override
-	public @NonNull DomainUsage visitImperativeDomain(@NonNull ImperativeDomain object) {
-		return visitCoreDomain(object);
 	}
 
 	@Override

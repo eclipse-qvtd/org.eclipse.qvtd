@@ -50,10 +50,8 @@ import org.eclipse.qvtd.pivot.qvtimperative.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
-import org.eclipse.qvtd.pivot.qvtimperative.CoreDomain;
-import org.eclipse.qvtd.pivot.qvtimperative.GuardPattern;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeBottomPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
+import org.eclipse.qvtd.pivot.qvtimperative.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
@@ -71,8 +69,6 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.ConnectionStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DomainCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.GuardPatternCS;
-import org.eclipse.qvtd.xtext.qvtimperativecs.ImperativePredicateOrAssignmentCS;
-import org.eclipse.qvtd.xtext.qvtimperativecs.ImperativeRealizedVariableCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallCS;
@@ -87,7 +83,7 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.RealizedVariableCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.TopLevelCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.TransformationCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.UnrealizedVariableCS;
-import org.eclipse.qvtd.xtext.qvtimperativecs.impl.ImperativeDomainCSImpl;
+import org.eclipse.qvtd.xtext.qvtimperativecs.impl.DomainCSImpl;
 import org.eclipse.qvtd.xtext.qvtimperativecs.util.AbstractQVTimperativeCSContainmentVisitor;
 
 import com.google.common.collect.Iterables;
@@ -138,7 +134,7 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 
 		@Override
 		public BasicContinuation<?> execute() {
-			CoreDomain pDomain = PivotUtil.getPivot(CoreDomain.class, csElement);
+			ImperativeDomain pDomain = PivotUtil.getPivot(ImperativeDomain.class, csElement);
 			if (pDomain != null) {
 				TypedModel direction = csElement.getDirection();
 				if (direction == null) {
@@ -218,7 +214,7 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 
 	@Override
 	public Continuation<?> visitBottomPatternCS(@NonNull BottomPatternCS csElement) {
-		BottomPattern pBottomPattern = context.refreshModelElement(ImperativeBottomPattern.class, QVTimperativePackage.Literals.IMPERATIVE_BOTTOM_PATTERN, csElement);
+		BottomPattern pBottomPattern = context.refreshModelElement(BottomPattern.class, QVTimperativePackage.Literals.BOTTOM_PATTERN, csElement);
 		context.refreshPivotList(RealizedVariable.class, pBottomPattern.getRealizedVariable(), csElement.getOwnedRealizedVariables());
 		context.refreshPivotList(Variable.class, pBottomPattern.getVariable(), csElement.getOwnedUnrealizedVariables());
 		context.refreshPivotList(Assignment.class, pBottomPattern.getAssignment(), Iterables.filter(csElement.getOwnedConstraints(), IsAssignmentPredicate.INSTANCE));
@@ -250,7 +246,7 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 		if ((eContainer instanceof MappingCS) && (((MappingCS)eContainer).getOwnedMiddle() == csElement)) {
 			return null;
 		}
-		CoreDomain pivotElement = context.refreshModelElement(ImperativeDomain.class, QVTimperativePackage.Literals.IMPERATIVE_DOMAIN, csElement);
+		ImperativeDomain pivotElement = context.refreshModelElement(ImperativeDomain.class, QVTimperativePackage.Literals.IMPERATIVE_DOMAIN, csElement);
 		pivotElement.setIsCheckable(csElement.isIsCheck());
 		pivotElement.setIsEnforceable(csElement.isIsEnforce());
 		pivotElement.setBottomPattern(PivotUtil.getPivot(BottomPattern.class, csElement.getOwnedBottomPattern()));
@@ -269,33 +265,6 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 	}
 
 	@Override
-	public @Nullable Continuation<?> visitImperativePredicateOrAssignmentCS(@NonNull ImperativePredicateOrAssignmentCS csElement) {
-		ExpCS csTarget = csElement.getOwnedTarget();
-		EObject eContainer = csElement.eContainer();
-		if ((csElement.getOwnedInitExpression() == null) || (eContainer instanceof GuardPatternCS)) {
-			context.refreshModelElement(Predicate.class, QVTbasePackage.Literals.PREDICATE, csElement);
-		}
-		else if (csTarget instanceof NameExpCS) {
-			if (csElement.isIsAccumulate()) {
-				context.refreshModelElement(ConnectionAssignment.class, QVTimperativePackage.Literals.CONNECTION_ASSIGNMENT, csElement);
-			}
-			else {
-				context.refreshModelElement(VariableAssignment.class, QVTimperativePackage.Literals.VARIABLE_ASSIGNMENT, csElement);
-			}
-		}
-		else {
-			context.refreshModelElement(PropertyAssignment.class, QVTimperativePackage.Literals.PROPERTY_ASSIGNMENT, csElement);
-		}
-		return null;
-	}
-
-	@Override
-	public Continuation<?> visitImperativeRealizedVariableCS(@NonNull ImperativeRealizedVariableCS csElement) {
-		refreshNamedElement(RealizedVariable.class, QVTimperativePackage.Literals.REALIZED_VARIABLE, csElement);
-		return null;
-	}
-
-	@Override
 	public Continuation<?> visitMappingCS(@NonNull MappingCS csElement) {
 		@NonNull Mapping pivotElement = refreshNamedElement(Mapping.class, QVTimperativePackage.Literals.MAPPING, csElement);
 		DomainCS csMiddle = csElement.getOwnedMiddle();
@@ -306,7 +275,7 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 		else {
 			BottomPattern bottomPattern = pivotElement.getBottomPattern();
 			if (bottomPattern == null) {
-				bottomPattern = QVTimperativeFactory.eINSTANCE.createImperativeBottomPattern();
+				bottomPattern = QVTimperativeFactory.eINSTANCE.createBottomPattern();
 				bottomPattern.getAssignment().clear();
 				bottomPattern.getBindsTo().clear();
 				bottomPattern.getPredicate().clear();
@@ -323,7 +292,7 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 				pivotElement.setGuardPattern(guardPattern);
 			}
 		}
-		context.refreshPivotList(CoreDomain.class, pivotElement.getDomain(), csElement.getOwnedDomains());
+		context.refreshPivotList(ImperativeDomain.class, pivotElement.getDomain(), csElement.getOwnedDomains());
 		pivotElement.setMappingStatement(PivotUtil.getPivot(MappingStatement.class, csElement.getOwnedMappingSequence()));
 		pivotElement.setIsDefault(csElement.isIsDefault());
 		return null;
@@ -380,14 +349,19 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 	}
 
 	@Override
-	public Continuation<?> visitPredicateOrAssignmentCS(@NonNull PredicateOrAssignmentCS csElement) {
+	public @Nullable Continuation<?> visitPredicateOrAssignmentCS(@NonNull PredicateOrAssignmentCS csElement) {
 		ExpCS csTarget = csElement.getOwnedTarget();
 		EObject eContainer = csElement.eContainer();
 		if ((csElement.getOwnedInitExpression() == null) || (eContainer instanceof GuardPatternCS)) {
 			context.refreshModelElement(Predicate.class, QVTbasePackage.Literals.PREDICATE, csElement);
 		}
 		else if (csTarget instanceof NameExpCS) {
-			context.refreshModelElement(VariableAssignment.class, QVTimperativePackage.Literals.VARIABLE_ASSIGNMENT, csElement);
+			if (csElement.isIsAccumulate()) {
+				context.refreshModelElement(ConnectionAssignment.class, QVTimperativePackage.Literals.CONNECTION_ASSIGNMENT, csElement);
+			}
+			else {
+				context.refreshModelElement(VariableAssignment.class, QVTimperativePackage.Literals.VARIABLE_ASSIGNMENT, csElement);
+			}
 		}
 		else {
 			context.refreshModelElement(PropertyAssignment.class, QVTimperativePackage.Literals.PROPERTY_ASSIGNMENT, csElement);
@@ -454,8 +428,8 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 		EObject eContainer = csElement.eContainer();
 		if ((eContainer instanceof PatternCS) && !(csElement.getOwnedType() instanceof PrimitiveTypeRefCS)) {		// FIXME need clearer syntax
 			EObject eContainerContainer = eContainer.eContainer();
-			if (eContainerContainer instanceof ImperativeDomainCSImpl) {
-				TypedModel typedModel = ((ImperativeDomainCSImpl)eContainerContainer).basicGetDirection();
+			if (eContainerContainer instanceof DomainCSImpl) {
+				TypedModel typedModel = ((DomainCSImpl)eContainerContainer).basicGetDirection();
 				if (typedModel == null) {
 					refreshNamedElement(ConnectionVariable.class, QVTimperativePackage.Literals.CONNECTION_VARIABLE, csElement);
 					return null;

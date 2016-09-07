@@ -25,11 +25,9 @@ import org.eclipse.qvtd.pivot.qvtimperative.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
-import org.eclipse.qvtd.pivot.qvtimperative.CoreDomain;
-import org.eclipse.qvtd.pivot.qvtimperative.CorePattern;
-import org.eclipse.qvtd.pivot.qvtimperative.GuardPattern;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeBottomPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativePattern;
+import org.eclipse.qvtd.pivot.qvtimperative.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
@@ -114,18 +112,6 @@ public class QVTimperativePrettyPrintVisitor extends QVTbasePrettyPrintVisitor i
 	}
 
 	@Override
-	public Object visitCoreDomain(@NonNull CoreDomain object) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Object visitCorePattern(@NonNull CorePattern object) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public Object visitGuardPattern(@NonNull GuardPattern pGuardPattern) {
 		for (Variable pVariable : pGuardPattern.getVariable()) {
 			safeVisit(pVariable);
@@ -142,19 +128,19 @@ public class QVTimperativePrettyPrintVisitor extends QVTbasePrettyPrintVisitor i
 	}
 
 	@Override
-	public Object visitImperativeBottomPattern(@NonNull ImperativeBottomPattern object) {
-		return visitBottomPattern(object);
-	}
-
-	@Override
-	public @Nullable Object visitImperativeDomain(@NonNull ImperativeDomain object) {
-		return visitCoreDomain(object);
+	public Object visitImperativeDomain(@NonNull ImperativeDomain object) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
 	public Object visitImperativeModel(@NonNull ImperativeModel object) {
-		// TODO Auto-generated method stub
-		return null;
+		return visitModel(object);
+	}
+
+	@Override
+	public Object visitImperativePattern(@NonNull ImperativePattern object) {
+		return visitPattern(object);
 	}
 
 	@Override
@@ -166,9 +152,9 @@ public class QVTimperativePrettyPrintVisitor extends QVTbasePrettyPrintVisitor i
 		context.append(" {");
 		context.push("", "");
 		for (Domain pDomain : pMapping.getDomain()) {
-			if (pDomain instanceof CoreDomain) {
+			if (pDomain instanceof ImperativeDomain) {
 				context.appendName(pDomain);
-				doArea((CoreDomain)pDomain);
+				doArea((ImperativeDomain)pDomain);
 			}
 		}
 		context.append("where");

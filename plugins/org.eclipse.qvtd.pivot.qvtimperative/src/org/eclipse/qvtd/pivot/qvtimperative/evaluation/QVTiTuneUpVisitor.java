@@ -41,8 +41,8 @@ import org.eclipse.qvtd.pivot.qvtimperative.Assignment;
 import org.eclipse.qvtd.pivot.qvtimperative.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionStatement;
-import org.eclipse.qvtd.pivot.qvtimperative.CoreDomain;
-import org.eclipse.qvtd.pivot.qvtimperative.CorePattern;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativePattern;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
@@ -176,20 +176,6 @@ public class QVTiTuneUpVisitor extends AbstractExtendingQVTimperativeVisitor<Boo
 	}
 
 	@Override
-	public @Nullable Boolean visitCoreDomain(@NonNull CoreDomain object) {
-		object.getGuardPattern().accept(this);
-		object.getBottomPattern().accept(this);
-		return Boolean.TRUE;
-	}
-
-	@Override
-	public Boolean visitCorePattern(@NonNull CorePattern object) {
-		List<@NonNull Variable> variables = ClassUtil.nullFree(object.getVariable());
-		QVTimperativeUtil.sortPatternVariables(variables);
-		return Boolean.TRUE;
-	}
-
-	@Override
 	public @Nullable Boolean visitIfExp(@NonNull IfExp object) {
 		OCLExpression ownedCondition = object.getOwnedCondition();
 		OCLExpression ownedThen = object.getOwnedThen();
@@ -203,6 +189,20 @@ public class QVTiTuneUpVisitor extends AbstractExtendingQVTimperativeVisitor<Boo
 		if ((ownedElse != null) && (ownedElse.accept(this) != Boolean.TRUE)) {
 			return Boolean.FALSE;
 		}
+		return Boolean.TRUE;
+	}
+
+	@Override
+	public @Nullable Boolean visitImperativeDomain(@NonNull ImperativeDomain object) {
+		object.getGuardPattern().accept(this);
+		object.getBottomPattern().accept(this);
+		return Boolean.TRUE;
+	}
+
+	@Override
+	public Boolean visitImperativePattern(@NonNull ImperativePattern object) {
+		List<@NonNull Variable> variables = ClassUtil.nullFree(object.getVariable());
+		QVTimperativeUtil.sortPatternVariables(variables);
 		return Boolean.TRUE;
 	}
 

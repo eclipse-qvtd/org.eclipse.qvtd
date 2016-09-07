@@ -103,7 +103,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.Area;
 import org.eclipse.qvtd.pivot.qvtimperative.Assignment;
 import org.eclipse.qvtd.pivot.qvtimperative.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeArea;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
@@ -1198,7 +1197,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			isHazardous = true;
 		}
 		for (Domain domain : asMapping.getDomain()) {
-			if ((domain instanceof ImperativeArea) && (((ImperativeArea)domain).getCheckedProperties().size() > 0)) {
+			if ((domain instanceof Area) && (((Area)domain).getCheckedProperties().size() > 0)) {
 				isHazardous = true;
 				break;
 			}

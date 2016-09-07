@@ -46,8 +46,6 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtimperative.Area;
-import org.eclipse.qvtd.pivot.qvtimperative.CoreDomain;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeArea;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
@@ -535,7 +533,7 @@ public class QVTiTransformationAnalysis
 			TypedModel typedModel = domainUsage1.getTypedModel(asSource);
 			if (typedModel != null) {
 				Area area = QVTimperativeUtil.getArea(asMapping, typedModel);
-				if ((area instanceof ImperativeArea) && ((ImperativeArea)area).getCheckedProperties().contains(asProperty)) {
+				if (area.getCheckedProperties().contains(asProperty)) {
 					return true;
 				}
 			}
@@ -546,7 +544,7 @@ public class QVTiTransformationAnalysis
 			TypedModel typedModel = domainUsage2.getTypedModel(asProperty);
 			if (typedModel != null) {
 				Area area = QVTimperativeUtil.getArea(asMapping, typedModel);
-				if ((area instanceof ImperativeArea) && ((ImperativeArea)area).getCheckedProperties().contains(asOppositeProperty)) {
+				if (area.getCheckedProperties().contains(asOppositeProperty)) {
 					return true;
 				}
 			}
@@ -564,21 +562,19 @@ public class QVTiTransformationAnalysis
 				Area area = null;
 				for (Domain domain : asMapping.getDomain()) {
 					if (domain.getTypedModel() == typedModel) {
-						area = (CoreDomain)domain;
+						area = (ImperativeDomain)domain;
 						break;
 					}
 				}
 				if (area == null) {
 					area = asMapping;
 				}
-				if (area instanceof ImperativeArea) {
-					List<Property> enforcedProperties = ((ImperativeArea)area).getEnforcedProperties();
-					if (enforcedProperties.contains(asProperty)) {
-						return true;
-					}
-					if (enforcedProperties.contains(asProperty.getOpposite())) {
-						return true;
-					}
+				List<Property> enforcedProperties = area.getEnforcedProperties();
+				if (enforcedProperties.contains(asProperty)) {
+					return true;
+				}
+				if (enforcedProperties.contains(asProperty.getOpposite())) {
+					return true;
 				}
 			}
 		}

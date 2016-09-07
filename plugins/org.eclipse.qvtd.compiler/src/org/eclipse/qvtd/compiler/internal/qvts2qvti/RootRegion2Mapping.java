@@ -53,8 +53,8 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
-import org.eclipse.qvtd.pivot.qvtimperative.CoreDomain;
-import org.eclipse.qvtd.pivot.qvtimperative.CorePattern;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativePattern;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 
@@ -91,7 +91,7 @@ public class RootRegion2Mapping extends AbstractScheduledRegion2Mapping
 			}
 		}
 		for (@NonNull TypedModel qvtiTypedModel : checkableTypedModels) {
-			CoreDomain domain = QVTimperativeUtil.createImperativeDomain(qvtiTypedModel);
+			ImperativeDomain domain = QVTimperativeUtil.createImperativeDomain(qvtiTypedModel);
 			domain.setIsCheckable(true);
 			mapping.getDomain().add(domain);
 			//			CoreDomain oldDomain = typedModel2domain.put(qvtiTypedModel, domain);
@@ -131,7 +131,7 @@ public class RootRegion2Mapping extends AbstractScheduledRegion2Mapping
 		return helper.createVariableExp(allInstancesVariable);
 	}
 
-	private @NonNull ConnectionVariable createRootConnectionVariable(@NonNull CorePattern pattern, @NonNull String name, @NonNull Type type, @Nullable OCLExpression initExpression) {
+	private @NonNull ConnectionVariable createRootConnectionVariable(@NonNull ImperativePattern pattern, @NonNull String name, @NonNull Type type, @Nullable OCLExpression initExpression) {
 		//		Type variableType = visitor.getEnvironmentFactory().getCompleteEnvironment().getSetType(node.getCompleteClass().getPrimaryClass(), true, null, null);
 		//		assert variableType != null;
 		ConnectionVariable variable = helper.createConnectionVariable(getSafeName(name), type, initExpression);

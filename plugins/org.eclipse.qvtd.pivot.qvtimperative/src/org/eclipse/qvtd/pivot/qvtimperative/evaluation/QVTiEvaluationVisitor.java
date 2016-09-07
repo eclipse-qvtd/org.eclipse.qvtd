@@ -42,11 +42,9 @@ import org.eclipse.qvtd.pivot.qvtimperative.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
-import org.eclipse.qvtd.pivot.qvtimperative.CoreDomain;
-import org.eclipse.qvtd.pivot.qvtimperative.CorePattern;
-import org.eclipse.qvtd.pivot.qvtimperative.GuardPattern;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeBottomPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativePattern;
+import org.eclipse.qvtd.pivot.qvtimperative.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
@@ -145,17 +143,7 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 	}
 
 	@Override
-	public @Nullable Object visitCoreDomain(@NonNull CoreDomain object) {
-		return visiting(object);
-	}
-
-	@Override
 	public @Nullable Object visitDomain(@NonNull Domain object) {
-		return visiting(object);
-	}
-
-	@Override
-	public @Nullable Object visitCorePattern(@NonNull CorePattern object) {
 		return visiting(object);
 	}
 
@@ -175,13 +163,8 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 	}
 
 	@Override
-	public @Nullable Object visitImperativeBottomPattern(@NonNull ImperativeBottomPattern object) {
-		return visitBottomPattern(object);
-	}
-
-	@Override
 	public @Nullable Object visitImperativeDomain(@NonNull ImperativeDomain object) {
-		return visitCoreDomain(object);
+		return visiting(object);
 	}
 
 	@Override
@@ -190,6 +173,11 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 			pkge.accept(undecoratedVisitor);
 		}
 		return true;
+	}
+
+	@Override
+	public @Nullable Object visitImperativePattern(@NonNull ImperativePattern object) {
+		return visiting(object);
 	}
 
 	@Override

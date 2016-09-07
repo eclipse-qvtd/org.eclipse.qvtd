@@ -22,11 +22,9 @@ import org.eclipse.qvtd.pivot.qvtimperative.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
-import org.eclipse.qvtd.pivot.qvtimperative.CoreDomain;
-import org.eclipse.qvtd.pivot.qvtimperative.CorePattern;
-import org.eclipse.qvtd.pivot.qvtimperative.GuardPattern;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeBottomPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativePattern;
+import org.eclipse.qvtd.pivot.qvtimperative.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
@@ -111,19 +109,6 @@ public class QVTimperativeToStringVisitor extends QVTbaseToStringVisitor impleme
 	}
 
 	@Override
-	public String visitCoreDomain(@NonNull CoreDomain object) {
-		appendQualifiedName(object);
-		return null;
-	}
-
-	@Override
-	public String visitCorePattern(@NonNull CorePattern object) {
-		append("CorePattern ");
-		//		appendName(object);
-		return null;
-	}
-
-	@Override
 	public String visitGuardPattern(@NonNull GuardPattern object) {
 		appendQualifiedName((NamedElement)object.getArea());
 		append("$Guard");
@@ -131,18 +116,21 @@ public class QVTimperativeToStringVisitor extends QVTbaseToStringVisitor impleme
 	}
 
 	@Override
-	public @Nullable String visitImperativeBottomPattern(@NonNull ImperativeBottomPattern object) {
-		return visitBottomPattern(object);
-	}
-
-	@Override
-	public @Nullable String visitImperativeDomain(@NonNull ImperativeDomain object) {
-		return visitCoreDomain(object);
+	public String visitImperativeDomain(@NonNull ImperativeDomain object) {
+		appendQualifiedName(object);
+		return null;
 	}
 
 	@Override
 	public @Nullable String visitImperativeModel(@NonNull ImperativeModel object) {
 		return visitModel(object);
+	}
+
+	@Override
+	public String visitImperativePattern(@NonNull ImperativePattern object) {
+		append("ImperativePattern ");
+		//		appendName(object);
+		return null;
 	}
 
 	@Override

@@ -32,7 +32,7 @@ import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtimperative.Assignment;
-import org.eclipse.qvtd.pivot.qvtimperative.CoreDomain;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
@@ -181,24 +181,12 @@ public abstract class QVTiAbstractTracingEvaluationVisitor extends QVTiEvaluatio
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEvaluationVisitorDecorator#visitCoreDomain(org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain)
-	 */
-	@Override
-	public @Nullable Object visitCoreDomain(@NonNull CoreDomain coreDomain) {
-		logger.info(getIndent() + "CoreDomain " + coreDomain.getName());
-		indentLevel++;
-		Object result = delegate.visitCoreDomain(coreDomain);
-		indentLevel--;
-		return result;
-	}
-
-	/* (non-Javadoc)
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEvaluationVisitorDecorator#visitGuardPattern(org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern)
 	 */
 	@Override
 	public @Nullable Object visitGuardPattern(@NonNull GuardPattern guardPattern) {
 
-		if (guardPattern.getArea() instanceof CoreDomain) {
+		if (guardPattern.getArea() instanceof ImperativeDomain) {
 			logger.info(getIndent() + "Visiting CoreDomain GuardPattern");
 		}
 		if (guardPattern.getArea() instanceof Mapping) {
@@ -231,6 +219,18 @@ public abstract class QVTiAbstractTracingEvaluationVisitor extends QVTiEvaluatio
 		} else {
 			logger.info(getIndent() + "GuardPattern result: " + result);
 		}
+		indentLevel--;
+		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEvaluationVisitorDecorator#visitCoreDomain(org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain)
+	 */
+	@Override
+	public @Nullable Object visitImperativeDomain(@NonNull ImperativeDomain coreDomain) {
+		logger.info(getIndent() + "ImperativeDomain " + coreDomain.getName());
+		indentLevel++;
+		Object result = delegate.visitImperativeDomain(coreDomain);
 		indentLevel--;
 		return result;
 	}

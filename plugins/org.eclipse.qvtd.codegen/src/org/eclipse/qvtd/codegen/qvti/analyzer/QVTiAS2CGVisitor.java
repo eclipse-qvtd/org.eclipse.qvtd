@@ -108,11 +108,9 @@ import org.eclipse.qvtd.pivot.qvtimperative.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
-import org.eclipse.qvtd.pivot.qvtimperative.CoreDomain;
-import org.eclipse.qvtd.pivot.qvtimperative.CorePattern;
-import org.eclipse.qvtd.pivot.qvtimperative.GuardPattern;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeBottomPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativePattern;
+import org.eclipse.qvtd.pivot.qvtimperative.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
@@ -319,8 +317,8 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 					pBottomPatterns.add(pBottomPattern);
 				}
 				for (@NonNull Domain pDomain : ClassUtil.nullFree(asMapping.getDomain())) {
-					if (pDomain instanceof CoreDomain) {
-						pBottomPattern = ((CoreDomain)pDomain).getBottomPattern();
+					if (pDomain instanceof ImperativeDomain) {
+						pBottomPattern = ((ImperativeDomain)pDomain).getBottomPattern();
 						if (pBottomPattern != null) {
 							pBottomPatterns.add(pBottomPattern);
 						}
@@ -416,8 +414,8 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 					guardPatterns.add(pGuardPattern);
 				}
 				for (@NonNull Domain pDomain : ClassUtil.nullFree(asMapping.getDomain())) {
-					if (pDomain instanceof CoreDomain) {
-						GuardPattern guardPattern = ((CoreDomain)pDomain).getGuardPattern();
+					if (pDomain instanceof ImperativeDomain) {
+						GuardPattern guardPattern = ((ImperativeDomain)pDomain).getGuardPattern();
 						if (guardPattern != null) {
 							guardPatterns.add(guardPattern);
 						}
@@ -756,16 +754,6 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 	}
 
 	@Override
-	public @Nullable CGNamedElement visitCoreDomain(@NonNull CoreDomain object) {
-		return visiting(object);
-	}
-
-	@Override
-	public @Nullable CGNamedElement visitCorePattern(@NonNull CorePattern object) {
-		return visiting(object);
-	}
-
-	@Override
 	public @Nullable CGNamedElement visitDomain(@NonNull Domain object) {
 		return visiting(object);
 	}
@@ -810,17 +798,17 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 	}
 
 	@Override
-	public @Nullable CGNamedElement visitImperativeBottomPattern(@NonNull ImperativeBottomPattern object) {
-		return visitBottomPattern(object);
-	}
-
-	@Override
 	public @Nullable CGNamedElement visitImperativeDomain(@NonNull ImperativeDomain object) {
-		return visitCoreDomain(object);
+		return visiting(object);
 	}
 
 	@Override
 	public @Nullable CGNamedElement visitImperativeModel(@NonNull ImperativeModel object) {
+		return visiting(object);
+	}
+
+	@Override
+	public @Nullable CGNamedElement visitImperativePattern(@NonNull ImperativePattern object) {
 		return visiting(object);
 	}
 

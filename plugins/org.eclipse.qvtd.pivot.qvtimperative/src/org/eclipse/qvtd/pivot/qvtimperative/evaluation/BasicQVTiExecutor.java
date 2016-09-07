@@ -58,7 +58,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.Area;
 import org.eclipse.qvtd.pivot.qvtimperative.Assignment;
 import org.eclipse.qvtd.pivot.qvtimperative.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
-import org.eclipse.qvtd.pivot.qvtimperative.CoreDomain;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
@@ -145,7 +145,7 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 		//
 		for (Domain domain : mapping.getDomain()) {
 			if (domain.isIsEnforceable()) {
-				CoreDomain enforceableDomain = (CoreDomain)domain;
+				ImperativeDomain enforceableDomain = (ImperativeDomain)domain;
 				BottomPattern enforceableBottomPattern = enforceableDomain.getBottomPattern();
 				for (RealizedVariable realizedVariable : enforceableBottomPattern.getRealizedVariable()) {
 					OCLExpression ownedInit = realizedVariable.getOwnedInit();
@@ -194,7 +194,7 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 		}
 		for (@NonNull Domain domain : ClassUtil.nullFree(mapping.getDomain())) {
 			if (!domain.isIsEnforceable()) {
-				CoreDomain checkableDomain = (CoreDomain)domain;
+				ImperativeDomain checkableDomain = (ImperativeDomain)domain;
 				GuardPattern checkableGuardPattern = checkableDomain.getGuardPattern();
 				assert checkableGuardPattern.getPredicate().isEmpty();
 				BottomPattern checkableBottomPattern = checkableDomain.getBottomPattern();
@@ -208,7 +208,7 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 				}
 			}
 			else {
-				CoreDomain enforceableDomain = (CoreDomain)domain;
+				ImperativeDomain enforceableDomain = (ImperativeDomain)domain;
 				GuardPattern enforceableGuardPattern = enforceableDomain.getGuardPattern();
 				assert enforceableGuardPattern.getPredicate().isEmpty();
 				BottomPattern enforceableBottomPattern = enforceableDomain.getBottomPattern();

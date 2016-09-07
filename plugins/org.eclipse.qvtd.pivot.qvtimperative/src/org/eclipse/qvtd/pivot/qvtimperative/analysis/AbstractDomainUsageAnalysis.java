@@ -80,7 +80,7 @@ import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.Area;
 import org.eclipse.qvtd.pivot.qvtimperative.Assignment;
 import org.eclipse.qvtd.pivot.qvtimperative.BottomPattern;
-import org.eclipse.qvtd.pivot.qvtimperative.CoreDomain;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.NavigationAssignment;
@@ -250,9 +250,9 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTim
 	protected void setBoundVariablesUsages(@NonNull Rule rule) {
 		DomainUsage primitiveUsage = getRootAnalysis().getPrimitiveUsage();
 		for (Domain domain : rule.getDomain()) {
-			if (domain instanceof CoreDomain) {
+			if (domain instanceof ImperativeDomain) {
 				DomainUsage usage = visit(domain.getTypedModel());
-				for (Variable variable : ((CoreDomain)domain).getGuardPattern().getVariable()) {
+				for (Variable variable : ((ImperativeDomain)domain).getGuardPattern().getVariable()) {
 					if (variable != null) {
 						DomainUsage variableUsage = visit(variable.getType());
 						if (variableUsage != primitiveUsage) {
@@ -416,14 +416,6 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTim
 	public @NonNull DomainUsage visitCollectionType(@NonNull CollectionType object) {
 		return visit(object.getElementType());
 	}
-	@Override
-	public @NonNull DomainUsage visitCoreDomain(@NonNull CoreDomain object) {
-		DomainUsage usage = visit(object.getTypedModel());
-		setUsage(object, usage);
-		visit(object.getGuardPattern());
-		visit(object.getBottomPattern());
-		return usage;
-	}
 
 	@Override
 	public @NonNull DomainUsage visitExpressionInOCL(@NonNull ExpressionInOCL object) {
@@ -482,6 +474,15 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTim
 			visit(predicate);
 		}
 		return domainUsage;
+	}
+
+	@Override
+	public @NonNull DomainUsage visitImperativeDomain(@NonNull ImperativeDomain object) {
+		DomainUsage usage = visit(object.getTypedModel());
+		setUsage(object, usage);
+		visit(object.getGuardPattern());
+		visit(object.getBottomPattern());
+		return usage;
 	}
 
 	@Override

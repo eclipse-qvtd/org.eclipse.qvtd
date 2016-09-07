@@ -83,7 +83,7 @@ public class QVTtemplateAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	protected QVTtemplateSwitch<@Nullable Adapter> modelSwitch =
-		new QVTtemplateSwitch<@Nullable Adapter>() {
+			new QVTtemplateSwitch<@Nullable Adapter>() {
 			@Override
 			public Adapter caseCollectionTemplateExp(CollectionTemplateExp object) {
 				return createCollectionTemplateExpAdapter();

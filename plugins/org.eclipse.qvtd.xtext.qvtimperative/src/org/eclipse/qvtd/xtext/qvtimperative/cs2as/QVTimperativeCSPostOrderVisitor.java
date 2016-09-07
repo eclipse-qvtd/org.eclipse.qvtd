@@ -53,7 +53,6 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.ConnectionStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DomainCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.GuardPatternCS;
-import org.eclipse.qvtd.xtext.qvtimperativecs.ImperativeRealizedVariableCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingLoopCS;
@@ -218,19 +217,6 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 	}
 
 	@Override
-	public Continuation<?> visitImperativeRealizedVariableCS(@NonNull ImperativeRealizedVariableCS csElement) {
-		RealizedVariable asRealizedVariable = PivotUtil.getPivot(RealizedVariable.class, csElement);
-		if (asRealizedVariable != null) {
-			ExpCS expression = csElement.getOwnedInitExpression();
-			if (expression != null) {
-				OCLExpression target = context.visitLeft2Right(OCLExpression.class, expression);
-				asRealizedVariable.setOwnedInit(target);
-			}
-		}
-		return null;
-	}
-
-	@Override
 	public Continuation<?> visitMappingCS(@NonNull MappingCS csElement) {
 		Mapping asMapping = PivotUtil.getPivot(Mapping.class, csElement);
 		if (asMapping != null) {
@@ -352,7 +338,15 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 	}
 
 	@Override
-	public Continuation<?> visitRealizedVariableCS(@NonNull RealizedVariableCS object) {
+	public Continuation<?> visitRealizedVariableCS(@NonNull RealizedVariableCS csElement) {
+		RealizedVariable asRealizedVariable = PivotUtil.getPivot(RealizedVariable.class, csElement);
+		if (asRealizedVariable != null) {
+			ExpCS expression = csElement.getOwnedInitExpression();
+			if (expression != null) {
+				OCLExpression target = context.visitLeft2Right(OCLExpression.class, expression);
+				asRealizedVariable.setOwnedInit(target);
+			}
+		}
 		return null;
 	}
 

@@ -20,7 +20,7 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.Area;
 import org.eclipse.qvtd.pivot.qvtimperative.BottomPattern;
-import org.eclipse.qvtd.pivot.qvtimperative.CoreDomain;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 
 public class QVTimperativeBottomPatternAttribution extends AbstractAttribution
@@ -35,7 +35,7 @@ public class QVTimperativeBottomPatternAttribution extends AbstractAttribution
 			mapping = (Mapping)area;;
 		}
 		else {
-			CoreDomain domain = (CoreDomain)area;
+			ImperativeDomain domain = (ImperativeDomain)area;
 			mapping = (Mapping) domain.getRule();
 		}
 		QVTimperativeEnvironmentUtil.addMiddleBottomVariables(environmentView, mapping);

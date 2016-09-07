@@ -53,7 +53,7 @@ import org.eclipse.qvtd.pivot.qvtbase.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtbase.analysis.DomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.Area;
-import org.eclipse.qvtd.pivot.qvtimperative.CoreDomain;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
@@ -526,7 +526,7 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 			return getPrimitiveUsage();
 		}
 		Area area = QVTimperativeUtil.getContainingArea(asCallExp);
-		if (area instanceof CoreDomain) {
+		if (area instanceof ImperativeDomain) {
 			DomainUsage areaUsage = getUsage(area);
 			return intersection(sourceUsage, areaUsage);
 		}

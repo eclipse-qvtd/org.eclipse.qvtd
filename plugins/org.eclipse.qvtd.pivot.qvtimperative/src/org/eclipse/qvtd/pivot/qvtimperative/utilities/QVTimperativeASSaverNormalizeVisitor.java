@@ -21,7 +21,7 @@ import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtimperative.Assignment;
 import org.eclipse.qvtd.pivot.qvtimperative.BottomPattern;
-import org.eclipse.qvtd.pivot.qvtimperative.CorePattern;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativePattern;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.util.AbstractQVTimperativeASSaverNormalizeVisitor;
 
@@ -54,7 +54,7 @@ public class QVTimperativeASSaverNormalizeVisitor extends AbstractQVTimperativeA
 	}
 
 	@Override
-	public @Nullable Object visitCorePattern(@NonNull CorePattern object) {
+	public @Nullable Object visitImperativePattern(@NonNull ImperativePattern object) {
 		ClassUtil.sort(ClassUtil.nullFree(object.getPredicate()), PredicateComparator.INSTANCE);
 		QVTimperativeUtil.sortPatternVariables(ClassUtil.nullFree(object.getVariable()));
 		return super.visitPattern(object);

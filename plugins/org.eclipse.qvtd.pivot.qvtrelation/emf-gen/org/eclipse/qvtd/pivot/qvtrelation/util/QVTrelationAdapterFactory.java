@@ -97,7 +97,7 @@ public class QVTrelationAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	protected QVTrelationSwitch<@Nullable Adapter> modelSwitch =
-		new QVTrelationSwitch<@Nullable Adapter>() {
+			new QVTrelationSwitch<@Nullable Adapter>() {
 			@Override
 			public Adapter caseDomainPattern(DomainPattern object) {
 				return createDomainPatternAdapter();

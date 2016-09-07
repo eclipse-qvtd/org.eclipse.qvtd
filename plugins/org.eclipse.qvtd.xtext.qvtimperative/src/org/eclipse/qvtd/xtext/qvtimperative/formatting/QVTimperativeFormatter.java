@@ -16,7 +16,6 @@ import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.ConnectionStatementCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.DirectionCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.GuardPatternCSElements;
-import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.ImperativePredicateOrAssignmentCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.ImportCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.MappingCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.MappingCallBindingCSElements;
@@ -220,10 +219,6 @@ public class QVTimperativeFormatter extends AbstractEssentialOCLFormatter
 			setNoSpaceLineWrap(c, a.getSemicolonKeyword_3());
 		}
 		{
-			ImperativePredicateOrAssignmentCSElements a = f.getImperativePredicateOrAssignmentCSAccess();
-			setNoSpaceLineWrap(c, a.getSemicolonKeyword_3());
-		}
-		{
 			MappingCSElements a = f.getMappingCSAccess();
 			c.setLinewrap(2).before(a.getMapKeyword_2());
 			c.setNoSpace().before(a.getSemicolonKeyword_6_2());
@@ -326,6 +321,10 @@ public class QVTimperativeFormatter extends AbstractEssentialOCLFormatter
 			//
 			c.setIndentation(a.getLeftParenthesisKeyword_0_0(), a.getRightParenthesisKeyword_0_5());
 			c.setNoSpace().between(a.getLeftParenthesisKeyword_0_0(), a.getRightParenthesisKeyword_0_5());
+		}
+		{
+			PredicateOrAssignmentCSElements a = f.getPredicateOrAssignmentCSAccess();
+			setNoSpaceLineWrap(c, a.getSemicolonKeyword_3());
 		}
 		{
 			RealizedVariableCSElements a = f.getRealizedVariableCSAccess();

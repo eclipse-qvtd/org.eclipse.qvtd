@@ -76,11 +76,9 @@ import org.eclipse.qvtd.pivot.qvtimperative.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
-import org.eclipse.qvtd.pivot.qvtimperative.CoreDomain;
-import org.eclipse.qvtd.pivot.qvtimperative.CorePattern;
-import org.eclipse.qvtd.pivot.qvtimperative.GuardPattern;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeBottomPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativePattern;
+import org.eclipse.qvtd.pivot.qvtimperative.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
@@ -105,9 +103,6 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.ConnectionStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DomainCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.GuardPatternCS;
-import org.eclipse.qvtd.xtext.qvtimperativecs.ImperativeDomainCS;
-import org.eclipse.qvtd.xtext.qvtimperativecs.ImperativePredicateOrAssignmentCS;
-import org.eclipse.qvtd.xtext.qvtimperativecs.ImperativeRealizedVariableCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallCS;
@@ -120,6 +115,7 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.PredicateOrAssignmentCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSFactory;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QueryCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.RealizedVariableCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.TopLevelCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.TransformationCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.UnrealizedVariableCS;
@@ -244,8 +240,8 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 		}
 	}
 
-	protected @NonNull ImperativeDomainCS createCoreDomain(@NonNull CoreDomain asCoreDomain) {
-		return context.refreshElement(ImperativeDomainCS.class, QVTimperativeCSPackage.Literals.IMPERATIVE_DOMAIN_CS, asCoreDomain);
+	protected @NonNull DomainCS createCoreDomain(@NonNull ImperativeDomain asCoreDomain) {
+		return context.refreshElement(DomainCS.class, QVTimperativeCSPackage.Literals.DOMAIN_CS, asCoreDomain);
 	}
 
 	protected void gatherTransformations(@NonNull List<Transformation> asTransformations, @NonNull List<Package> ownedPackages) {
@@ -390,11 +386,11 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 		if (asArea instanceof Mapping) {
 			List<Element> asConstraints = new ArrayList<Element>(asBottomPattern.getAssignment());
 			asConstraints.addAll(asBottomPattern.getPredicate());
-			context.refreshList(csBottomPattern.getOwnedConstraints(), context.visitDeclarations(ImperativePredicateOrAssignmentCS.class, asConstraints, null));
+			context.refreshList(csBottomPattern.getOwnedConstraints(), context.visitDeclarations(PredicateOrAssignmentCS.class, asConstraints, null));
 			context.refreshList(csBottomPattern.getOwnedUnrealizedVariables(), context.visitDeclarations(UnrealizedVariableCS.class, asBottomPattern.getVariable(), null));
 		}
 		else {
-			context.refreshList(csBottomPattern.getOwnedRealizedVariables(), context.visitDeclarations(ImperativeRealizedVariableCS.class, asBottomPattern.getRealizedVariable(), null));
+			context.refreshList(csBottomPattern.getOwnedRealizedVariables(), context.visitDeclarations(RealizedVariableCS.class, asBottomPattern.getRealizedVariable(), null));
 			context.refreshList(csBottomPattern.getOwnedUnrealizedVariables(), context.visitDeclarations(UnrealizedVariableCS.class, asBottomPattern.getVariable(), null));
 		}
 		return csBottomPattern;
@@ -402,7 +398,7 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 
 	@Override
 	public ElementCS visitConnectionAssignment(@NonNull ConnectionAssignment asConnectionAssignment) {
-		ImperativePredicateOrAssignmentCS csAssignment = context.refreshElement(ImperativePredicateOrAssignmentCS.class, QVTimperativeCSPackage.Literals.IMPERATIVE_PREDICATE_OR_ASSIGNMENT_CS, asConnectionAssignment);
+		PredicateOrAssignmentCS csAssignment = context.refreshElement(PredicateOrAssignmentCS.class, QVTimperativeCSPackage.Literals.PREDICATE_OR_ASSIGNMENT_CS, asConnectionAssignment);
 		csAssignment.setPivot(asConnectionAssignment);
 		Variable asVariable = asConnectionAssignment.getTargetVariable();
 		if (asVariable != null) {
@@ -431,23 +427,6 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 	@Override
 	public ElementCS visitConnectionVariable(@NonNull ConnectionVariable object) {
 		return visitVariable(object);
-	}
-
-	@Override
-	public ElementCS visitCoreDomain(@NonNull CoreDomain asCoreDomain) {
-		DomainCS csDomain = createCoreDomain(asCoreDomain);
-		csDomain.setPivot(asCoreDomain);
-		csDomain.setOwnedBottomPattern(context.visitDeclaration(BottomPatternCS.class, asCoreDomain.getBottomPattern()));
-		csDomain.setOwnedGuardPattern(context.visitDeclaration(GuardPatternCS.class, asCoreDomain.getGuardPattern()));
-		csDomain.setIsCheck(asCoreDomain.isIsCheckable());
-		csDomain.setDirection(asCoreDomain.getTypedModel());
-		csDomain.setIsEnforce(asCoreDomain.isIsEnforceable());
-		return csDomain;
-	}
-
-	@Override
-	public ElementCS visitCorePattern(@NonNull CorePattern object) {
-		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -487,17 +466,18 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 	}
 
 	@Override
-	public ElementCS visitImperativeBottomPattern(@NonNull ImperativeBottomPattern object) {
-		return visitBottomPattern(object);
-	}
-
-	@Override
-	public ElementCS visitImperativeDomain(@NonNull ImperativeDomain asImperativeDomain) {
-		ImperativeDomainCS csDomain = (ImperativeDomainCS) visitCoreDomain(asImperativeDomain);
-		Transformation asTransformation = QVTbaseUtil.getContainingTransformation(asImperativeDomain);
+	public ElementCS visitImperativeDomain(@NonNull ImperativeDomain asCoreDomain) {
+		DomainCS csDomain = createCoreDomain(asCoreDomain);
+		csDomain.setPivot(asCoreDomain);
+		csDomain.setOwnedBottomPattern(context.visitDeclaration(BottomPatternCS.class, asCoreDomain.getBottomPattern()));
+		csDomain.setOwnedGuardPattern(context.visitDeclaration(GuardPatternCS.class, asCoreDomain.getGuardPattern()));
+		csDomain.setIsCheck(asCoreDomain.isIsCheckable());
+		csDomain.setDirection(asCoreDomain.getTypedModel());
+		csDomain.setIsEnforce(asCoreDomain.isIsEnforceable());
+		Transformation asTransformation = QVTbaseUtil.getContainingTransformation(asCoreDomain);
 		assert asTransformation != null;
-		refreshUsedProperties(asTransformation, csDomain.getCheckedProperties(), ClassUtil.nullFree(asImperativeDomain.getCheckedProperties()));
-		refreshUsedProperties(asTransformation, csDomain.getEnforcedProperties(), ClassUtil.nullFree(asImperativeDomain.getEnforcedProperties()));
+		refreshUsedProperties(asTransformation, csDomain.getCheckedProperties(), ClassUtil.nullFree(asCoreDomain.getCheckedProperties()));
+		refreshUsedProperties(asTransformation, csDomain.getEnforcedProperties(), ClassUtil.nullFree(asCoreDomain.getEnforcedProperties()));
 		return csDomain;
 	}
 
@@ -549,6 +529,11 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 	}
 
 	@Override
+	public ElementCS visitImperativePattern(@NonNull ImperativePattern object) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
 	public ElementCS visitMapping(@NonNull Mapping asMapping) {
 		MappingCS csMapping = context.refreshNamedElement(MappingCS.class, QVTimperativeCSPackage.Literals.MAPPING_CS, asMapping);
 		csMapping.setPivot(asMapping);
@@ -556,7 +541,7 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 		refreshOwnedInTransformation(csMapping, asMapping);
 		refreshUsedTypes(csMapping, asMapping);
 		context.refreshList(csMapping.getOwnedDomains(), context.visitDeclarations(DomainCS.class, asMapping.getDomain(), null));
-		ImperativeDomainCS csDomain = context.refreshElement(ImperativeDomainCS.class, QVTimperativeCSPackage.Literals.IMPERATIVE_DOMAIN_CS, asMapping);
+		DomainCS csDomain = context.refreshElement(DomainCS.class, QVTimperativeCSPackage.Literals.DOMAIN_CS, asMapping);
 		csDomain.setPivot(null);		// stop comment duplication
 		csDomain.setOwnedBottomPattern(context.visitDeclaration(BottomPatternCS.class, asMapping.getBottomPattern()));
 		csDomain.setOwnedGuardPattern(context.visitDeclaration(GuardPatternCS.class, asMapping.getGuardPattern()));
@@ -702,7 +687,7 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 		if (eContainer instanceof BottomPattern) {
 			Area area = ((BottomPattern)eContainer).getArea();
 			if (area instanceof Mapping) {
-				ImperativePredicateOrAssignmentCS csPredicate = context.refreshElement(ImperativePredicateOrAssignmentCS.class, QVTimperativeCSPackage.Literals.IMPERATIVE_PREDICATE_OR_ASSIGNMENT_CS, asPredicate);
+				PredicateOrAssignmentCS csPredicate = context.refreshElement(PredicateOrAssignmentCS.class, QVTimperativeCSPackage.Literals.PREDICATE_OR_ASSIGNMENT_CS, asPredicate);
 				csPredicate.setPivot(asPredicate);
 				csPredicate.setOwnedTarget(createExpCS(asPredicate.getConditionExpression()));
 				return csPredicate;
@@ -724,7 +709,7 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 
 	@Override
 	public ElementCS visitPropertyAssignment(@NonNull PropertyAssignment asPropertyAssignment) {
-		PredicateOrAssignmentCS csAssignment = context.refreshElement(ImperativePredicateOrAssignmentCS.class, QVTimperativeCSPackage.Literals.IMPERATIVE_PREDICATE_OR_ASSIGNMENT_CS, asPropertyAssignment);
+		PredicateOrAssignmentCS csAssignment = context.refreshElement(PredicateOrAssignmentCS.class, QVTimperativeCSPackage.Literals.PREDICATE_OR_ASSIGNMENT_CS, asPropertyAssignment);
 		csAssignment.setPivot(asPropertyAssignment);
 		ExpCS csSlotExp = createExpCS(asPropertyAssignment.getSlotExpression());
 		NameExpCS csPropName = createNameExpCS(asPropertyAssignment.getTargetProperty());
@@ -736,7 +721,7 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 
 	@Override
 	public ElementCS visitRealizedVariable(@NonNull RealizedVariable asRealizedVariable) {
-		ImperativeRealizedVariableCS csRealizedVariable = context.refreshNamedElement(ImperativeRealizedVariableCS.class, QVTimperativeCSPackage.Literals.IMPERATIVE_REALIZED_VARIABLE_CS, asRealizedVariable);
+		RealizedVariableCS csRealizedVariable = context.refreshNamedElement(RealizedVariableCS.class, QVTimperativeCSPackage.Literals.REALIZED_VARIABLE_CS, asRealizedVariable);
 		csRealizedVariable.setPivot(asRealizedVariable);
 		csRealizedVariable.setOwnedType(createTypeRefCS(asRealizedVariable.getType(), getScope(asRealizedVariable)));
 		csRealizedVariable.setOwnedInitExpression(context.visitDeclaration(ExpCS.class, asRealizedVariable.getOwnedInit()));
@@ -851,7 +836,7 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 			return csUnrealizedVariable;
 		}
 		else {
-			if (asVariable.eContainer() instanceof CorePattern) {
+			if (asVariable.eContainer() instanceof ImperativePattern) {
 				UnrealizedVariableCS csUnrealizedVariable = refreshTypedElement(UnrealizedVariableCS.class, QVTimperativeCSPackage.Literals.UNREALIZED_VARIABLE_CS, asVariable);
 				csUnrealizedVariable.setOwnedInitExpression(context.visitDeclaration(ExpCS.class, asVariable.getOwnedInit()));
 				return csUnrealizedVariable;
@@ -864,7 +849,7 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 
 	@Override
 	public ElementCS visitVariableAssignment(@NonNull VariableAssignment asVariableAssignment) {
-		ImperativePredicateOrAssignmentCS csAssignment = context.refreshElement(ImperativePredicateOrAssignmentCS.class, QVTimperativeCSPackage.Literals.IMPERATIVE_PREDICATE_OR_ASSIGNMENT_CS, asVariableAssignment);
+		PredicateOrAssignmentCS csAssignment = context.refreshElement(PredicateOrAssignmentCS.class, QVTimperativeCSPackage.Literals.PREDICATE_OR_ASSIGNMENT_CS, asVariableAssignment);
 		csAssignment.setPivot(asVariableAssignment);
 		Variable asVariable = asVariableAssignment.getTargetVariable();
 		if (asVariable != null) {

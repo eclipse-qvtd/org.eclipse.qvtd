@@ -16,7 +16,7 @@ import org.eclipse.ocl.pivot.internal.scoping.EnvironmentView;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.BottomPattern;
-import org.eclipse.qvtd.pivot.qvtimperative.CoreDomain;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 
@@ -47,8 +47,8 @@ public class QVTimperativeEnvironmentUtil
 			environmentView.addNamedElements(guardPattern.getVariable());
 		}
 		for (Domain aDomain : mapping.getDomain()) {
-			if (aDomain instanceof CoreDomain) {
-				CoreDomain domain = (CoreDomain)aDomain;
+			if (aDomain instanceof ImperativeDomain) {
+				ImperativeDomain domain = (ImperativeDomain)aDomain;
 				if (bottomToo) {
 					BottomPattern bottomPattern = domain.getBottomPattern();
 					if (bottomPattern != null) {
@@ -78,8 +78,8 @@ public class QVTimperativeEnvironmentUtil
 
 	private static void addSideVariables(@NonNull EnvironmentView environmentView, @NonNull Mapping mapping, @Nullable TypedModel typedModel, boolean bottomToo) {
 		for (Domain aDomain : mapping.getDomain()) {
-			if (aDomain instanceof CoreDomain) {
-				CoreDomain domain = (CoreDomain)aDomain;
+			if (aDomain instanceof ImperativeDomain) {
+				ImperativeDomain domain = (ImperativeDomain)aDomain;
 				if ((typedModel == null) || (domain.getTypedModel() == typedModel)) {
 					if (bottomToo) {
 						BottomPattern bottomPattern = domain.getBottomPattern();

@@ -28,7 +28,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.BottomPattern;
-import org.eclipse.qvtd.pivot.qvtimperative.CoreDomain;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
@@ -76,8 +76,8 @@ public class QVTiMainTab extends MainTab implements QVTiLaunchConstants
 			if (rule instanceof Mapping) {
 				Mapping mapping = (Mapping)rule;
 				for (Domain domain : mapping.getDomain()) {
-					if (domain instanceof CoreDomain) {
-						CoreDomain coreDomain = (CoreDomain)domain;
+					if (domain instanceof ImperativeDomain) {
+						ImperativeDomain coreDomain = (ImperativeDomain)domain;
 						BottomPattern bottomPattern = coreDomain.getBottomPattern();
 						assert bottomPattern != null;
 						TypedModel typedModel = coreDomain.getTypedModel();

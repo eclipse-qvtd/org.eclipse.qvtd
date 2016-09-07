@@ -30,8 +30,8 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Assignment;
 import org.eclipse.qvtd.pivot.qvtimperative.BottomPattern;
-import org.eclipse.qvtd.pivot.qvtimperative.CoreDomain;
-import org.eclipse.qvtd.pivot.qvtimperative.CorePattern;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativePattern;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
@@ -230,24 +230,8 @@ implements IQVTiEvaluationVisitor {
 	 * Delegates to my decorated visitor.
 	 */
 	@Override
-	public @Nullable Object visitCoreDomain(@NonNull CoreDomain coreDomain) {
-		return delegate.visitCoreDomain(coreDomain);
-	}
-
-	/**
-	 * Delegates to my decorated visitor.
-	 */
-	@Override
 	public @Nullable Object visitDomain(@NonNull Domain domain) {
 		return delegate.visitDomain(domain);
-	}
-
-	/**
-	 * Delegates to my decorated visitor.
-	 */
-	@Override
-	public @Nullable Object visitCorePattern(@NonNull CorePattern corePattern) {
-		return delegate.visitCorePattern(corePattern);
 	}
 
 	/**
@@ -272,6 +256,22 @@ implements IQVTiEvaluationVisitor {
 	@Override
 	public @Nullable Object visitGuardPattern(@NonNull GuardPattern guardPattern) {
 		return delegate.visitGuardPattern(guardPattern);
+	}
+
+	/**
+	 * Delegates to my decorated visitor.
+	 */
+	@Override
+	public @Nullable Object visitImperativePattern(@NonNull ImperativePattern corePattern) {
+		return delegate.visitImperativePattern(corePattern);
+	}
+
+	/**
+	 * Delegates to my decorated visitor.
+	 */
+	@Override
+	public @Nullable Object visitImperativeDomain(@NonNull ImperativeDomain coreDomain) {
+		return delegate.visitImperativeDomain(coreDomain);
 	}
 
 	/**

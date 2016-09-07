@@ -20,8 +20,8 @@ import org.eclipse.ocl.pivot.internal.utilities.AS2XMIid;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtimperative.Assignment;
 import org.eclipse.qvtd.pivot.qvtimperative.BottomPattern;
-import org.eclipse.qvtd.pivot.qvtimperative.CoreDomain;
-import org.eclipse.qvtd.pivot.qvtimperative.CorePattern;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativePattern;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
@@ -75,12 +75,12 @@ public class QVTimperativeAS2XMIidVisitor extends AbstractQVTimperativeAS2XMIidV
 	}
 
 	@Override
-	public @Nullable Boolean visitCoreDomain(@NonNull CoreDomain asCoreDomain) {
+	public @Nullable Boolean visitImperativeDomain(@NonNull ImperativeDomain asImperativeDomain) {
 		return null;
 	}
 
 	@Override
-	public @Nullable Boolean visitCorePattern(@NonNull CorePattern asCorePattern) {
+	public @Nullable Boolean visitImperativePattern(@NonNull ImperativePattern asImperativePattern) {
 		return null;
 	}
 
@@ -109,7 +109,7 @@ public class QVTimperativeAS2XMIidVisitor extends AbstractQVTimperativeAS2XMIidV
 
 	@Override
 	public @Nullable Boolean visitRealizedVariable(@NonNull RealizedVariable object) {
-		if (object.eContainer() instanceof CorePattern) {
+		if (object.eContainer() instanceof ImperativePattern) {
 			Rule rule = QVTimperativeUtil.getContainingRule(object);
 			if((rule != null) && (rule.getName() != null)) {
 				String name = object.getName();

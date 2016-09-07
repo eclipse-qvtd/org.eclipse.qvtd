@@ -35,7 +35,7 @@ import org.eclipse.ocl.xtext.essentialoclcs.VariableCS;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeArea;
+import org.eclipse.qvtd.pivot.qvtimperative.Area;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
@@ -45,7 +45,6 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.BottomPatternCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DomainCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.GuardPatternCS;
-import org.eclipse.qvtd.xtext.qvtimperativecs.ImperativeDomainCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallCS;
@@ -182,12 +181,12 @@ public class QVTimperativeCSPreOrderVisitor extends AbstractQVTimperativeCSPreOr
 		}
 	}
 
-	private void refreshUsedProperties(@NonNull ImperativeDomainCS csImperativeDomain,
+	private void refreshUsedProperties(@NonNull DomainCS csDomain,
 			/*@NonNull*/ List<Property> asProperties, /*@NonNull*/ List<PathNameCS> csProperties) {
 		List<Property> properties = new ArrayList<Property>();
 		for (PathNameCS csPathName : csProperties) {
 			if (csPathName != null) {
-				Property asProperty = lookupProperty(csImperativeDomain, csPathName, null);
+				Property asProperty = lookupProperty(csDomain, csPathName, null);
 				if (asProperty != null) {
 					properties.add(asProperty);
 				}
@@ -207,22 +206,17 @@ public class QVTimperativeCSPreOrderVisitor extends AbstractQVTimperativeCSPreOr
 	}
 
 	@Override
-	public Continuation<?> visitDomainCS(@NonNull DomainCS csElement) {
+	public @Nullable Continuation<?> visitDomainCS(@NonNull DomainCS csDomain) {
+		Area asArea = PivotUtil.getPivot(Area.class, csDomain);
+		if (asArea != null) {
+			refreshUsedProperties(csDomain, asArea.getCheckedProperties(), csDomain.getCheckedProperties());
+			refreshUsedProperties(csDomain, asArea.getEnforcedProperties(), csDomain.getEnforcedProperties());
+		}
 		return null;
 	}
 
 	@Override
 	public Continuation<?> visitGuardPatternCS(@NonNull GuardPatternCS csElement) {
-		return null;
-	}
-
-	@Override
-	public @Nullable Continuation<?> visitImperativeDomainCS(@NonNull ImperativeDomainCS csImperativeDomain) {
-		ImperativeArea asArea = PivotUtil.getPivot(ImperativeArea.class, csImperativeDomain);
-		if (asArea != null) {
-			refreshUsedProperties(csImperativeDomain, asArea.getCheckedProperties(), csImperativeDomain.getCheckedProperties());
-			refreshUsedProperties(csImperativeDomain, asArea.getEnforcedProperties(), csImperativeDomain.getEnforcedProperties());
-		}
 		return null;
 	}
 

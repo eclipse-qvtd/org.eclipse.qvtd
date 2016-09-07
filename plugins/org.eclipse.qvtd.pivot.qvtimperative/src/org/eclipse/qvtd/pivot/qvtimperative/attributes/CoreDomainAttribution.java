@@ -19,7 +19,7 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
-import org.eclipse.qvtd.pivot.qvtimperative.CoreDomain;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 
 public class CoreDomainAttribution extends AbstractAttribution
 {
@@ -27,7 +27,7 @@ public class CoreDomainAttribution extends AbstractAttribution
 
 	@Override
 	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
-		CoreDomain targetElement = (CoreDomain)target;
+		ImperativeDomain targetElement = (ImperativeDomain)target;
 		TypedModel typedModel = targetElement.getTypedModel();
 		if (typedModel != null) {
 			for (org.eclipse.ocl.pivot.Package pPackage : ClassUtil.nullFree(typedModel.getUsedPackage())) {

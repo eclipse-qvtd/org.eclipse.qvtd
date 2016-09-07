@@ -36,8 +36,8 @@ import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
-import org.eclipse.qvtd.pivot.qvtimperative.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
+import org.eclipse.qvtd.pivot.qvtimperative.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
@@ -192,7 +192,7 @@ public class CyclicScheduledRegion2Mapping extends AbstractScheduledRegion2Mappi
 	/**
 	 * Cache of the domains created for each recursiing typed model
 	 */
-	private final @NonNull Map<@NonNull TypedModel, @NonNull ImperativeDomain> typedModel2domain = new HashMap<@NonNull TypedModel, @NonNull ImperativeDomain>();
+	private final @NonNull Map<@NonNull TypedModel, @NonNull ImperativeDomain> typedModel2domain = new HashMap<>();
 
 	public CyclicScheduledRegion2Mapping(@NonNull QVTs2QVTiVisitor visitor, @NonNull CyclicScheduledRegion region) {
 		super(visitor, region);

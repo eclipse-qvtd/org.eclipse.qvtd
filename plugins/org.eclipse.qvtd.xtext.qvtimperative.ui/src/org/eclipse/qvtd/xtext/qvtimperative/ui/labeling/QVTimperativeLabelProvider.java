@@ -21,8 +21,8 @@ import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtimperative.Assignment;
 import org.eclipse.qvtd.pivot.qvtimperative.BottomPattern;
-import org.eclipse.qvtd.pivot.qvtimperative.CoreDomain;
-import org.eclipse.qvtd.pivot.qvtimperative.CorePattern;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativePattern;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
@@ -60,11 +60,11 @@ public class QVTimperativeLabelProvider extends QVTbaseLabelProvider
 		return QVTIMPERATIVE_UI_ICONS + "BottomPattern.gif";
 	}
 
-	protected String image(CoreDomain ele) {
+	protected String image(ImperativeDomain ele) {
 		return QVTIMPERATIVE_UI_ICONS + "CoreDomain.gif";
 	}
 
-	protected String image(CorePattern ele) {
+	protected String image(ImperativePattern ele) {
 		return QVTIMPERATIVE_UI_ICONS + "CorePattern.gif";
 	}
 
@@ -112,7 +112,7 @@ public class QVTimperativeLabelProvider extends QVTbaseLabelProvider
 		return "«bottom»";
 	}
 
-	protected String text(CoreDomain ele) {
+	protected String text(ImperativeDomain ele) {
 		StringBuilder s = new StringBuilder();
 		if (ele.isIsCheckable()) {
 			s.append("«checkable» ");

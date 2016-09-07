@@ -48,9 +48,8 @@ import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory.CreateStrategy;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.Area;
-import org.eclipse.qvtd.pivot.qvtimperative.CoreDomain;
-import org.eclipse.qvtd.pivot.qvtimperative.CorePattern;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativePattern;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
@@ -134,7 +133,7 @@ public class QVTimperativeUtil extends QVTbaseUtil
 		ImperativeDomain coreDomain = QVTimperativeFactory.eINSTANCE.createImperativeDomain();
 		coreDomain.setName(typedModel.getName());
 		coreDomain.setTypedModel(typedModel);
-		coreDomain.setBottomPattern(QVTimperativeFactory.eINSTANCE.createImperativeBottomPattern());
+		coreDomain.setBottomPattern(QVTimperativeFactory.eINSTANCE.createBottomPattern());
 		coreDomain.setGuardPattern(QVTimperativeFactory.eINSTANCE.createGuardPattern());
 		return coreDomain;
 	}
@@ -153,7 +152,7 @@ public class QVTimperativeUtil extends QVTbaseUtil
 	public static @NonNull Mapping createMapping(@NonNull String name) {
 		Mapping mapping = QVTimperativeFactory.eINSTANCE.createMapping();
 		mapping.setName(name);
-		mapping.setBottomPattern(QVTimperativeFactory.eINSTANCE.createImperativeBottomPattern());
+		mapping.setBottomPattern(QVTimperativeFactory.eINSTANCE.createBottomPattern());
 		mapping.setGuardPattern(QVTimperativeFactory.eINSTANCE.createGuardPattern());
 		return mapping;
 	}
@@ -246,7 +245,7 @@ public class QVTimperativeUtil extends QVTbaseUtil
 	public static @NonNull Area getArea(@NonNull Mapping mapping, @NonNull TypedModel typedModel) {
 		for (Domain domain : mapping.getDomain()) {
 			if (domain.getTypedModel() == typedModel) {
-				return (CoreDomain)domain;
+				return (ImperativeDomain)domain;
 			}
 		}
 		return mapping;
@@ -284,17 +283,17 @@ public class QVTimperativeUtil extends QVTbaseUtil
 		return null;
 	}
 
-	public static @Nullable CorePattern getContainingPattern(@Nullable EObject eObject) {
+	public static @Nullable ImperativePattern getContainingPattern(@Nullable EObject eObject) {
 		for ( ; eObject != null; eObject = eObject.eContainer()) {
-			if (eObject instanceof CorePattern) {
-				return (CorePattern) eObject;
+			if (eObject instanceof ImperativePattern) {
+				return (ImperativePattern) eObject;
 			}
 		}
 		return null;
 	}
 
-	public static @Nullable CoreDomain getDomain(@NonNull Mapping rule, @NonNull TypedModel typedModel) {
-		return (CoreDomain)getDomain((Rule)rule, typedModel);
+	public static @Nullable ImperativeDomain getDomain(@NonNull Mapping rule, @NonNull TypedModel typedModel) {
+		return (ImperativeDomain)getDomain((Rule)rule, typedModel);
 	}
 
 	public static @NonNull Property getTargetProperty(@NonNull NavigationAssignment asNavigationAssignment) {
@@ -309,8 +308,8 @@ public class QVTimperativeUtil extends QVTbaseUtil
 	}
 
 	public static @Nullable TypedModel getTypedModel(@Nullable Area area) {
-		if (area instanceof CoreDomain) {
-			return ((CoreDomain)area).getTypedModel();
+		if (area instanceof ImperativeDomain) {
+			return ((ImperativeDomain)area).getTypedModel();
 		}
 		else {
 			return null;
@@ -409,7 +408,7 @@ public class QVTimperativeUtil extends QVTbaseUtil
 		Set<Variable> asGuardVariables = new HashSet<Variable>();
 		asGuardVariables.addAll(asMapping.getGuardPattern().getVariable());
 		for (Domain asDomain : asMapping.getDomain()) {
-			asGuardVariables.addAll(((CoreDomain)asDomain).getGuardPattern().getVariable());
+			asGuardVariables.addAll(((ImperativeDomain)asDomain).getGuardPattern().getVariable());
 		}
 		List<VariableDeclaration> pendingVariables = new ArrayList<VariableDeclaration>();
 		Map<VariableDeclaration, VariablePredicate> variable2predicate = new HashMap<VariableDeclaration, VariablePredicate>();

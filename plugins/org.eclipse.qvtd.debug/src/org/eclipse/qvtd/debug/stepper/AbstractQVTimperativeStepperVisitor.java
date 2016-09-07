@@ -42,27 +42,27 @@ implements QVTimperativeVisitor<IStepper>
 
 	@Override
 	public @Nullable IStepper visitBottomPattern(org.eclipse.qvtd.pivot.qvtimperative.@NonNull BottomPattern object) {
-		return visitCorePattern(object);
-	}
-
-	@Override
-	public @Nullable IStepper visitCoreDomain(org.eclipse.qvtd.pivot.qvtimperative.@NonNull CoreDomain object) {
-		return visitDomain(object);
-	}
-
-	@Override
-	public @Nullable IStepper visitCorePattern(org.eclipse.qvtd.pivot.qvtimperative.@NonNull CorePattern object) {
-		return visitPattern(object);
+		return visitImperativePattern(object);
 	}
 
 	@Override
 	public @Nullable IStepper visitGuardPattern(org.eclipse.qvtd.pivot.qvtimperative.@NonNull GuardPattern object) {
-		return visitCorePattern(object);
+		return visitImperativePattern(object);
+	}
+
+	@Override
+	public @Nullable IStepper visitImperativeDomain(org.eclipse.qvtd.pivot.qvtimperative.@NonNull ImperativeDomain object) {
+		return visitDomain(object);
 	}
 
 	@Override
 	public @Nullable IStepper visitImperativeModel(org.eclipse.qvtd.pivot.qvtimperative.@NonNull ImperativeModel object) {
 		return visitBaseModel(object);
+	}
+
+	@Override
+	public @Nullable IStepper visitImperativePattern(org.eclipse.qvtd.pivot.qvtimperative.@NonNull ImperativePattern object) {
+		return visitPattern(object);
 	}
 
 	@Override

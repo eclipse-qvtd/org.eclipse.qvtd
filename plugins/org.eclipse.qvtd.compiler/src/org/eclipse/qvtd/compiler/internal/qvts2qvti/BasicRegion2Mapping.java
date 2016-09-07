@@ -88,10 +88,8 @@ import org.eclipse.qvtd.pivot.qvtimperative.Area;
 import org.eclipse.qvtd.pivot.qvtimperative.Assignment;
 import org.eclipse.qvtd.pivot.qvtimperative.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
-import org.eclipse.qvtd.pivot.qvtimperative.GuardPattern;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeArea;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeBottomPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
+import org.eclipse.qvtd.pivot.qvtimperative.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.PropertyAssignment;
@@ -1131,7 +1129,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		for (@NonNull TypedModel qvtpTypedModel : anyUsage.getTypedModels()) {
 			TypedModel qvtiTypedModel = visitor.getQVTiTypedModel(qvtpTypedModel);
 			ImperativeDomain domain = typedModel2domain.get(qvtiTypedModel);
-			ImperativeArea imperativeArea = domain != null ? (ImperativeArea)domain : mapping;
+			Area imperativeArea = domain != null ? (Area)domain : mapping;
 			Iterable<@NonNull NavigableEdge> checkedEdges = region.getCheckedEdges(qvtpTypedModel);
 			if (checkedEdges != null) {
 				List<Property> checkedProperties = imperativeArea.getCheckedProperties();
@@ -1151,7 +1149,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 
 	private void createPropertyAssignments() {
 		Map<@NonNull Node, @NonNull List<@NonNull NavigableEdge>> classAssignments = null;
-		ImperativeBottomPattern bottomPattern = (ImperativeBottomPattern) mapping.getBottomPattern();
+		BottomPattern bottomPattern = mapping.getBottomPattern();
 		for (@NonNull NavigableEdge edge : NavigationEdgeSorter.getSortedAssignments(region.getRealizedNavigationEdges())) {
 			Node sourceNode = edge.getSource();
 			Node targetNode = edge.getTarget();
@@ -1188,7 +1186,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			createClassPropertyAssignments(values);
 		}
 		@SuppressWarnings("null")
-		@NonNull EList<@NonNull Assignment> bottomAssignments = bottomPattern.getOrderedAssignment();
+		@NonNull EList<@NonNull Assignment> bottomAssignments = bottomPattern.getAssignment();
 		ECollections.sort(bottomAssignments, new AssignmentComparator(bottomAssignments));
 	}
 

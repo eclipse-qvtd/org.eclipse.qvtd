@@ -19,7 +19,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.Area;
-import org.eclipse.qvtd.pivot.qvtimperative.CoreDomain;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 
@@ -44,7 +44,7 @@ public class QVTimperativeGuardPatternAttribution extends AbstractAttribution
 			}
 		}
 		else {
-			CoreDomain domain = (CoreDomain)area;
+			ImperativeDomain domain = (ImperativeDomain)area;
 			mapping = (Mapping) domain.getRule();
 		}
 		QVTimperativeEnvironmentUtil.addMiddleGuardVariables(environmentView, mapping);

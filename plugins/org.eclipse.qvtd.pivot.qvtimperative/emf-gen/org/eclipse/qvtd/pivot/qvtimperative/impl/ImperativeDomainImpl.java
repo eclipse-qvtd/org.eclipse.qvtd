@@ -1,7 +1,7 @@
 /**
  * <copyright>
  *
- * Copyright (c) 2013, 2015 Willink Transformations and others.
+ * Copyright (c) 2013, 2017 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -36,7 +36,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Imperative Domain</b></em>'.
+ * An implementation of the model object '<em><b>Core Domain</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
@@ -401,4 +401,4 @@ public class ImperativeDomainImpl extends DomainImpl implements ImperativeDomain
 		return (R) ((QVTimperativeVisitor<?>)visitor).visitImperativeDomain(this);
 	}
 
-} //ImperativeDomainImpl
+} //CoreDomainImpl
