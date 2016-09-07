@@ -28,7 +28,7 @@ import org.eclipse.jdt.annotation.Nullable;
  */
  @Deprecated
 public abstract class AbstractNullQVTimperativeVisitor<@Nullable R, C>
-	extends org.eclipse.qvtd.pivot.qvtcorebase.util.AbstractNullQVTcoreBaseVisitor<R, C> implements QVTimperativeVisitor<R>
+	extends org.eclipse.qvtd.pivot.qvtbase.util.AbstractNullQVTbaseVisitor<R, C> implements QVTimperativeVisitor<R>
 {
 	/**
 	 * Initializes me with an initial value for my result.
@@ -38,6 +38,16 @@ public abstract class AbstractNullQVTimperativeVisitor<@Nullable R, C>
 	protected AbstractNullQVTimperativeVisitor(C context) {
 		super(context);
 	}	
+
+	@Override
+	public R visitAssignment(org.eclipse.qvtd.pivot.qvtimperative.@NonNull Assignment object) {
+		return null;
+	}
+
+	@Override
+	public R visitBottomPattern(org.eclipse.qvtd.pivot.qvtimperative.@NonNull BottomPattern object) {
+		return null;
+	}
 
 	@Override
 	public R visitConnectionAssignment(org.eclipse.qvtd.pivot.qvtimperative.@NonNull ConnectionAssignment object) {
@@ -51,6 +61,26 @@ public abstract class AbstractNullQVTimperativeVisitor<@Nullable R, C>
 
 	@Override
 	public R visitConnectionVariable(org.eclipse.qvtd.pivot.qvtimperative.@NonNull ConnectionVariable object) {
+		return null;
+	}
+
+	@Override
+	public R visitCoreDomain(org.eclipse.qvtd.pivot.qvtimperative.@NonNull CoreDomain object) {
+		return null;
+	}
+
+	@Override
+	public R visitCorePattern(org.eclipse.qvtd.pivot.qvtimperative.@NonNull CorePattern object) {
+		return null;
+	}
+
+	@Override
+	public R visitEnforcementOperation(org.eclipse.qvtd.pivot.qvtimperative.@NonNull EnforcementOperation object) {
+		return null;
+	}
+
+	@Override
+	public R visitGuardPattern(org.eclipse.qvtd.pivot.qvtimperative.@NonNull GuardPattern object) {
 		return null;
 	}
 
@@ -96,6 +126,31 @@ public abstract class AbstractNullQVTimperativeVisitor<@Nullable R, C>
 
 	@Override
 	public R visitMappingStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull MappingStatement object) {
+		return null;
+	}
+
+	@Override
+	public R visitNavigationAssignment(org.eclipse.qvtd.pivot.qvtimperative.@NonNull NavigationAssignment object) {
+		return null;
+	}
+
+	@Override
+	public R visitOppositePropertyAssignment(org.eclipse.qvtd.pivot.qvtimperative.@NonNull OppositePropertyAssignment object) {
+		return null;
+	}
+
+	@Override
+	public R visitPropertyAssignment(org.eclipse.qvtd.pivot.qvtimperative.@NonNull PropertyAssignment object) {
+		return null;
+	}
+
+	@Override
+	public R visitRealizedVariable(org.eclipse.qvtd.pivot.qvtimperative.@NonNull RealizedVariable object) {
+		return null;
+	}
+
+	@Override
+	public R visitVariableAssignment(org.eclipse.qvtd.pivot.qvtimperative.@NonNull VariableAssignment object) {
 		return null;
 	}
 

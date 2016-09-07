@@ -27,7 +27,7 @@ import org.eclipse.jdt.annotation.NonNull;
  * suitable first super class, the method delegates to visiting().
  */
 public abstract class AbstractExtendingQVTimperativeVisitor<R, C>
-	extends org.eclipse.qvtd.pivot.qvtcorebase.util.AbstractExtendingQVTcoreBaseVisitor<R, C>
+	extends org.eclipse.qvtd.pivot.qvtbase.util.AbstractExtendingQVTbaseVisitor<R, C>
 	implements QVTimperativeVisitor<R>
 {
 	/**
@@ -38,6 +38,16 @@ public abstract class AbstractExtendingQVTimperativeVisitor<R, C>
 	protected AbstractExtendingQVTimperativeVisitor(C context) {
 		super(context);
 	}	
+
+	@Override
+	public R visitAssignment(org.eclipse.qvtd.pivot.qvtimperative.@NonNull Assignment object) {
+		return visitElement(object);
+	}
+
+	@Override
+	public R visitBottomPattern(org.eclipse.qvtd.pivot.qvtimperative.@NonNull BottomPattern object) {
+		return visitCorePattern(object);
+	}
 
 	@Override
 	public R visitConnectionAssignment(org.eclipse.qvtd.pivot.qvtimperative.@NonNull ConnectionAssignment object) {
@@ -52,6 +62,26 @@ public abstract class AbstractExtendingQVTimperativeVisitor<R, C>
 	@Override
 	public R visitConnectionVariable(org.eclipse.qvtd.pivot.qvtimperative.@NonNull ConnectionVariable object) {
 		return visitVariable(object);
+	}
+
+	@Override
+	public R visitCoreDomain(org.eclipse.qvtd.pivot.qvtimperative.@NonNull CoreDomain object) {
+		return visitDomain(object);
+	}
+
+	@Override
+	public R visitCorePattern(org.eclipse.qvtd.pivot.qvtimperative.@NonNull CorePattern object) {
+		return visitPattern(object);
+	}
+
+	@Override
+	public R visitEnforcementOperation(org.eclipse.qvtd.pivot.qvtimperative.@NonNull EnforcementOperation object) {
+		return visitElement(object);
+	}
+
+	@Override
+	public R visitGuardPattern(org.eclipse.qvtd.pivot.qvtimperative.@NonNull GuardPattern object) {
+		return visitCorePattern(object);
 	}
 
 	@Override
@@ -97,6 +127,31 @@ public abstract class AbstractExtendingQVTimperativeVisitor<R, C>
 	@Override
 	public R visitMappingStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull MappingStatement object) {
 		return visitOCLExpression(object);
+	}
+
+	@Override
+	public R visitNavigationAssignment(org.eclipse.qvtd.pivot.qvtimperative.@NonNull NavigationAssignment object) {
+		return visitAssignment(object);
+	}
+
+	@Override
+	public R visitOppositePropertyAssignment(org.eclipse.qvtd.pivot.qvtimperative.@NonNull OppositePropertyAssignment object) {
+		return visitNavigationAssignment(object);
+	}
+
+	@Override
+	public R visitPropertyAssignment(org.eclipse.qvtd.pivot.qvtimperative.@NonNull PropertyAssignment object) {
+		return visitNavigationAssignment(object);
+	}
+
+	@Override
+	public R visitRealizedVariable(org.eclipse.qvtd.pivot.qvtimperative.@NonNull RealizedVariable object) {
+		return visitVariable(object);
+	}
+
+	@Override
+	public R visitVariableAssignment(org.eclipse.qvtd.pivot.qvtimperative.@NonNull VariableAssignment object) {
+		return visitAssignment(object);
 	}
 
 	@Override

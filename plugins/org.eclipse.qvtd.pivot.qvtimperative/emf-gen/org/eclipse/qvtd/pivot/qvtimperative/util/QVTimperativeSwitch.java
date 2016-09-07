@@ -31,14 +31,15 @@ import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
-import org.eclipse.qvtd.pivot.qvtcorebase.AbstractMapping;
-import org.eclipse.qvtd.pivot.qvtcorebase.Area;
-import org.eclipse.qvtd.pivot.qvtcorebase.Assignment;
-import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
-import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
-import org.eclipse.qvtd.pivot.qvtcorebase.CorePattern;
 import org.eclipse.qvtd.pivot.qvtimperative.*;
+import org.eclipse.qvtd.pivot.qvtimperative.ConnectionAssignment;
+import org.eclipse.qvtd.pivot.qvtimperative.ConnectionStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.EnforcementOperation;
+import org.eclipse.qvtd.pivot.qvtimperative.GuardPattern;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeArea;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeBottomPattern;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
@@ -46,7 +47,12 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingSequence;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.NavigationAssignment;
+import org.eclipse.qvtd.pivot.qvtimperative.OppositePropertyAssignment;
+import org.eclipse.qvtd.pivot.qvtimperative.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
+import org.eclipse.qvtd.pivot.qvtimperative.RealizedVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.VariableAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.VariablePredicate;
 
 /**
@@ -106,6 +112,32 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
+			case QVTimperativePackage.AREA: {
+				Area area = (Area)theEObject;
+				T result = caseArea(area);
+				if (result == null) result = caseElement(area);
+				if (result == null) result = caseVisitable(area);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case QVTimperativePackage.ASSIGNMENT: {
+				Assignment assignment = (Assignment)theEObject;
+				T result = caseAssignment(assignment);
+				if (result == null) result = caseElement(assignment);
+				if (result == null) result = caseVisitable(assignment);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case QVTimperativePackage.BOTTOM_PATTERN: {
+				BottomPattern bottomPattern = (BottomPattern)theEObject;
+				T result = caseBottomPattern(bottomPattern);
+				if (result == null) result = caseCorePattern(bottomPattern);
+				if (result == null) result = casePattern(bottomPattern);
+				if (result == null) result = caseElement(bottomPattern);
+				if (result == null) result = caseVisitable(bottomPattern);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case QVTimperativePackage.CONNECTION_ASSIGNMENT: {
 				ConnectionAssignment connectionAssignment = (ConnectionAssignment)theEObject;
 				T result = caseConnectionAssignment(connectionAssignment);
@@ -138,6 +170,46 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = caseElement(connectionVariable);
 				if (result == null) result = caseNameable(connectionVariable);
 				if (result == null) result = caseVisitable(connectionVariable);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case QVTimperativePackage.CORE_DOMAIN: {
+				CoreDomain coreDomain = (CoreDomain)theEObject;
+				T result = caseCoreDomain(coreDomain);
+				if (result == null) result = caseDomain(coreDomain);
+				if (result == null) result = caseArea(coreDomain);
+				if (result == null) result = caseNamedElement(coreDomain);
+				if (result == null) result = caseReferringElement(coreDomain);
+				if (result == null) result = caseElement(coreDomain);
+				if (result == null) result = caseNameable(coreDomain);
+				if (result == null) result = caseVisitable(coreDomain);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case QVTimperativePackage.CORE_PATTERN: {
+				CorePattern corePattern = (CorePattern)theEObject;
+				T result = caseCorePattern(corePattern);
+				if (result == null) result = casePattern(corePattern);
+				if (result == null) result = caseElement(corePattern);
+				if (result == null) result = caseVisitable(corePattern);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case QVTimperativePackage.ENFORCEMENT_OPERATION: {
+				EnforcementOperation enforcementOperation = (EnforcementOperation)theEObject;
+				T result = caseEnforcementOperation(enforcementOperation);
+				if (result == null) result = caseElement(enforcementOperation);
+				if (result == null) result = caseVisitable(enforcementOperation);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case QVTimperativePackage.GUARD_PATTERN: {
+				GuardPattern guardPattern = (GuardPattern)theEObject;
+				T result = caseGuardPattern(guardPattern);
+				if (result == null) result = caseCorePattern(guardPattern);
+				if (result == null) result = casePattern(guardPattern);
+				if (result == null) result = caseElement(guardPattern);
+				if (result == null) result = caseVisitable(guardPattern);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -192,11 +264,10 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 			case QVTimperativePackage.MAPPING: {
 				Mapping mapping = (Mapping)theEObject;
 				T result = caseMapping(mapping);
-				if (result == null) result = caseAbstractMapping(mapping);
-				if (result == null) result = caseImperativeArea(mapping);
 				if (result == null) result = caseRule(mapping);
-				if (result == null) result = caseArea(mapping);
+				if (result == null) result = caseImperativeArea(mapping);
 				if (result == null) result = caseNamedElement(mapping);
+				if (result == null) result = caseArea(mapping);
 				if (result == null) result = caseElement(mapping);
 				if (result == null) result = caseNameable(mapping);
 				if (result == null) result = caseVisitable(mapping);
@@ -264,6 +335,57 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case QVTimperativePackage.NAVIGATION_ASSIGNMENT: {
+				NavigationAssignment navigationAssignment = (NavigationAssignment)theEObject;
+				T result = caseNavigationAssignment(navigationAssignment);
+				if (result == null) result = caseAssignment(navigationAssignment);
+				if (result == null) result = caseElement(navigationAssignment);
+				if (result == null) result = caseVisitable(navigationAssignment);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case QVTimperativePackage.OPPOSITE_PROPERTY_ASSIGNMENT: {
+				OppositePropertyAssignment oppositePropertyAssignment = (OppositePropertyAssignment)theEObject;
+				T result = caseOppositePropertyAssignment(oppositePropertyAssignment);
+				if (result == null) result = caseNavigationAssignment(oppositePropertyAssignment);
+				if (result == null) result = caseAssignment(oppositePropertyAssignment);
+				if (result == null) result = caseElement(oppositePropertyAssignment);
+				if (result == null) result = caseVisitable(oppositePropertyAssignment);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case QVTimperativePackage.PROPERTY_ASSIGNMENT: {
+				PropertyAssignment propertyAssignment = (PropertyAssignment)theEObject;
+				T result = casePropertyAssignment(propertyAssignment);
+				if (result == null) result = caseNavigationAssignment(propertyAssignment);
+				if (result == null) result = caseAssignment(propertyAssignment);
+				if (result == null) result = caseElement(propertyAssignment);
+				if (result == null) result = caseVisitable(propertyAssignment);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case QVTimperativePackage.REALIZED_VARIABLE: {
+				RealizedVariable realizedVariable = (RealizedVariable)theEObject;
+				T result = caseRealizedVariable(realizedVariable);
+				if (result == null) result = caseVariable(realizedVariable);
+				if (result == null) result = caseVariableDeclaration(realizedVariable);
+				if (result == null) result = caseTypedElement(realizedVariable);
+				if (result == null) result = caseNamedElement(realizedVariable);
+				if (result == null) result = caseElement(realizedVariable);
+				if (result == null) result = caseNameable(realizedVariable);
+				if (result == null) result = caseVisitable(realizedVariable);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case QVTimperativePackage.VARIABLE_ASSIGNMENT: {
+				VariableAssignment variableAssignment = (VariableAssignment)theEObject;
+				T result = caseVariableAssignment(variableAssignment);
+				if (result == null) result = caseAssignment(variableAssignment);
+				if (result == null) result = caseElement(variableAssignment);
+				if (result == null) result = caseVisitable(variableAssignment);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case QVTimperativePackage.VARIABLE_PREDICATE: {
 				VariablePredicate variablePredicate = (VariablePredicate)theEObject;
 				T result = caseVariablePredicate(variablePredicate);
@@ -275,6 +397,51 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 			}
 			default: return defaultCase(theEObject);
 		}
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Area</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Area</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseArea(Area object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Assignment</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Assignment</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAssignment(Assignment object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Bottom Pattern</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Bottom Pattern</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseBottomPattern(BottomPattern object) {
+		return null;
 	}
 
 	/**
@@ -319,6 +486,66 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseConnectionVariable(ConnectionVariable object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Core Domain</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Core Domain</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCoreDomain(CoreDomain object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Core Pattern</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Core Pattern</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCorePattern(CorePattern object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Enforcement Operation</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Enforcement Operation</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseEnforcementOperation(EnforcementOperation object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Guard Pattern</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Guard Pattern</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseGuardPattern(GuardPattern object) {
 		return null;
 	}
 
@@ -379,36 +606,6 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseImperativeModel(ImperativeModel object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Area</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Area</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseArea(Area object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Abstract Mapping</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Abstract Mapping</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseAbstractMapping(AbstractMapping object) {
 		return null;
 	}
 
@@ -503,6 +700,81 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Navigation Assignment</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Navigation Assignment</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseNavigationAssignment(NavigationAssignment object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Opposite Property Assignment</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Opposite Property Assignment</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseOppositePropertyAssignment(OppositePropertyAssignment object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Property Assignment</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Property Assignment</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePropertyAssignment(PropertyAssignment object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Realized Variable</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Realized Variable</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseRealizedVariable(RealizedVariable object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Variable Assignment</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Variable Assignment</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseVariableAssignment(VariableAssignment object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Variable Predicate</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -548,21 +820,6 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Assignment</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Assignment</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseAssignment(Assignment object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Pattern</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -574,36 +831,6 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T casePattern(Pattern object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Core Pattern</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Core Pattern</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseCorePattern(CorePattern object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Bottom Pattern</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Bottom Pattern</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseBottomPattern(BottomPattern object) {
 		return null;
 	}
 
@@ -784,21 +1011,6 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseDomain(Domain object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Core Domain</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Core Domain</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseCoreDomain(CoreDomain object) {
 		return null;
 	}
 

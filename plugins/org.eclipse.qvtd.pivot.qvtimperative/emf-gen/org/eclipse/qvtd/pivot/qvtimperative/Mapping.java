@@ -12,7 +12,7 @@ package org.eclipse.qvtd.pivot.qvtimperative;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.ocl.pivot.OCLExpression;
-import org.eclipse.qvtd.pivot.qvtcorebase.AbstractMapping;
+import org.eclipse.qvtd.pivot.qvtbase.Rule;
 
 /**
  * <!-- begin-user-doc -->
@@ -37,7 +37,7 @@ import org.eclipse.qvtd.pivot.qvtcorebase.AbstractMapping;
  * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getMapping()
  * @generated
  */
-public interface Mapping extends AbstractMapping, ImperativeArea {
+public interface Mapping extends Rule, ImperativeArea {
 	/**
 	 * Returns the value of the '<em><b>Mapping Statement</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
@@ -101,12 +101,5 @@ public interface Mapping extends AbstractMapping, ImperativeArea {
 	 * @generated
 	 */
 	void setOwnedKeyExpression(OCLExpression value);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	EList<Mapping> getAllMappings();
 
 } // Mapping

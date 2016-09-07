@@ -781,7 +781,6 @@ public class EvaluationStatusPackageImpl extends EPackageImpl implements Evaluat
 		   new String[] {
 			 "ecore", "http://www.eclipse.org/emf/2002/Ecore",
 			 "qvtb", "../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#/",
-			 "qvtcb", "../../org.eclipse.qvtd.pivot.qvtcorebase/model/QVTcoreBase.ecore#/",
 			 "qvti", "QVTimperative.ecore#/"
 		   });
 	}

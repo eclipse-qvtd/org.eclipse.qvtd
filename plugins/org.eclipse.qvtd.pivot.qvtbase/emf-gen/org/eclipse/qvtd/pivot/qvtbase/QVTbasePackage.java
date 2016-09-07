@@ -436,6 +436,15 @@ public interface QVTbasePackage extends EPackage {
 	int FUNCTION__IS_INVALIDATING = PivotPackage.OPERATION__IS_INVALIDATING;
 
 	/**
+	 * The feature id for the '<em><b>Is Transient</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FUNCTION__IS_TRANSIENT = PivotPackage.OPERATION__IS_TRANSIENT;
+
+	/**
 	 * The feature id for the '<em><b>Is Typeof</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

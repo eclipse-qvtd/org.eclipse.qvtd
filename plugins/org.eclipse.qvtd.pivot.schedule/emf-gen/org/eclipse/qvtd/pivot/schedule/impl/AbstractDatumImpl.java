@@ -80,7 +80,7 @@ public abstract class AbstractDatumImpl extends ScheduleElementImpl implements A
 	 * @generated
 	 * @ordered
 	 */
-	protected CoreDomain domain;
+	protected org.eclipse.qvtd.pivot.qvtcore.CoreDomain domain;
 
 	/**
 	 * The cached value of the '{@link #getProducedBy() <em>Produced By</em>}' reference list.
@@ -172,10 +172,10 @@ public abstract class AbstractDatumImpl extends ScheduleElementImpl implements A
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public CoreDomain getDomainGen() {
+	public org.eclipse.qvtd.pivot.qvtcore.CoreDomain getDomainGen() {
 		if (domain != null && domain.eIsProxy()) {
 			InternalEObject oldDomain = (InternalEObject)domain;
-			domain = (CoreDomain)eResolveProxy(oldDomain);
+			domain = (org.eclipse.qvtd.pivot.qvtcore.CoreDomain)eResolveProxy(oldDomain);
 			if (domain != oldDomain) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, SchedulePackage.ABSTRACT_DATUM__DOMAIN, oldDomain, domain));
@@ -201,7 +201,7 @@ public abstract class AbstractDatumImpl extends ScheduleElementImpl implements A
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public CoreDomain basicGetDomain() {
+	public org.eclipse.qvtd.pivot.qvtcore.CoreDomain basicGetDomain() {
 		return domain;
 	}
 
@@ -210,12 +210,13 @@ public abstract class AbstractDatumImpl extends ScheduleElementImpl implements A
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setDomainGen(CoreDomain newDomain) {
-		CoreDomain oldDomain = domain;
+	public void setDomain(org.eclipse.qvtd.pivot.qvtcore.CoreDomain newDomain) {
+		org.eclipse.qvtd.pivot.qvtcore.CoreDomain oldDomain = domain;
 		domain = newDomain;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, SchedulePackage.ABSTRACT_DATUM__DOMAIN, oldDomain, domain));
 	}
+
 	@Override
 	public void setDomain(CoreDomain newDomain) {
 		setDomainGen(newDomain);
@@ -457,7 +458,7 @@ public abstract class AbstractDatumImpl extends ScheduleElementImpl implements A
 				getSub().addAll((Collection<? extends AbstractDatum>)newValue);
 				return;
 			case SchedulePackage.ABSTRACT_DATUM__DOMAIN:
-				setDomain((CoreDomain)newValue);
+				setDomain((org.eclipse.qvtd.pivot.qvtcore.CoreDomain)newValue);
 				return;
 			case SchedulePackage.ABSTRACT_DATUM__PRODUCED_BY:
 				getProducedBy().clear();
@@ -496,7 +497,7 @@ public abstract class AbstractDatumImpl extends ScheduleElementImpl implements A
 				getSub().clear();
 				return;
 			case SchedulePackage.ABSTRACT_DATUM__DOMAIN:
-				setDomain((CoreDomain)null);
+				setDomain((org.eclipse.qvtd.pivot.qvtcore.CoreDomain)null);
 				return;
 			case SchedulePackage.ABSTRACT_DATUM__PRODUCED_BY:
 				getProducedBy().clear();

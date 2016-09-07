@@ -11,6 +11,7 @@
 package org.eclipse.qvtd.pivot.qvtcore;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtcorebase.AbstractMapping;
 
 /**
@@ -32,7 +33,7 @@ import org.eclipse.qvtd.pivot.qvtcorebase.AbstractMapping;
  * @model
  * @generated
  */
-public interface Mapping extends AbstractMapping {
+public interface Mapping extends Rule, Area {
 	/**
 	 * Returns the value of the '<em><b>Context</b></em>' container reference.
 	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtcore.Mapping#getLocal <em>Local</em>}'.
@@ -117,13 +118,5 @@ public interface Mapping extends AbstractMapping {
 	 */
 	@Override
 	EList<Mapping> getRefinement();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model kind="operation" ordered="false"
-	 * @generated
-	 */
-	EList<Mapping> getAllMappings();
 
 } // Mapping

@@ -11,11 +11,13 @@
 package org.eclipse.qvtd.pivot.qvtcore.impl;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.qvtd.pivot.qvtcore.*;
 import org.eclipse.qvtd.pivot.qvtcore.CoreModel;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcoreFactory;
@@ -65,11 +67,70 @@ public class QVTcoreFactoryImpl extends EFactoryImpl implements QVTcoreFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
+			case QVTcorePackage.BOTTOM_PATTERN: return createBottomPattern();
+			case QVTcorePackage.CORE_DOMAIN: return createCoreDomain();
 			case QVTcorePackage.CORE_MODEL: return createCoreModel();
+			case QVTcorePackage.CORE_PATTERN: return createCorePattern();
+			case QVTcorePackage.ENFORCEMENT_OPERATION: return createEnforcementOperation();
+			case QVTcorePackage.GUARD_PATTERN: return createGuardPattern();
 			case QVTcorePackage.MAPPING: return createMapping();
+			case QVTcorePackage.OPPOSITE_PROPERTY_ASSIGNMENT: return createOppositePropertyAssignment();
+			case QVTcorePackage.PROPERTY_ASSIGNMENT: return createPropertyAssignment();
+			case QVTcorePackage.REALIZED_VARIABLE: return createRealizedVariable();
+			case QVTcorePackage.VARIABLE_ASSIGNMENT: return createVariableAssignment();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object createFromString(EDataType eDataType, String initialValue) {
+		switch (eDataType.getClassifierID()) {
+			case QVTcorePackage.ENFORCEMENT_MODE:
+				return createEnforcementModeFromString(eDataType, initialValue);
+			default:
+				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String convertToString(EDataType eDataType, Object instanceValue) {
+		switch (eDataType.getClassifierID()) {
+			case QVTcorePackage.ENFORCEMENT_MODE:
+				return convertEnforcementModeToString(eDataType, instanceValue);
+			default:
+				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public BottomPattern createBottomPattern() {
+		BottomPatternImpl bottomPattern = new BottomPatternImpl();
+		return bottomPattern;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CoreDomain createCoreDomain() {
+		CoreDomainImpl coreDomain = new CoreDomainImpl();
+		return coreDomain;
 	}
 
 	/**
@@ -88,10 +149,100 @@ public class QVTcoreFactoryImpl extends EFactoryImpl implements QVTcoreFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public CorePattern createCorePattern() {
+		CorePatternImpl corePattern = new CorePatternImpl();
+		return corePattern;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EnforcementOperation createEnforcementOperation() {
+		EnforcementOperationImpl enforcementOperation = new EnforcementOperationImpl();
+		return enforcementOperation;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public GuardPattern createGuardPattern() {
+		GuardPatternImpl guardPattern = new GuardPatternImpl();
+		return guardPattern;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public @NonNull Mapping createMapping() {
 		MappingImpl mapping = new MappingImpl();
 		return mapping;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public OppositePropertyAssignment createOppositePropertyAssignment() {
+		OppositePropertyAssignmentImpl oppositePropertyAssignment = new OppositePropertyAssignmentImpl();
+		return oppositePropertyAssignment;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public PropertyAssignment createPropertyAssignment() {
+		PropertyAssignmentImpl propertyAssignment = new PropertyAssignmentImpl();
+		return propertyAssignment;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public RealizedVariable createRealizedVariable() {
+		RealizedVariableImpl realizedVariable = new RealizedVariableImpl();
+		return realizedVariable;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public VariableAssignment createVariableAssignment() {
+		VariableAssignmentImpl variableAssignment = new VariableAssignmentImpl();
+		return variableAssignment;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EnforcementMode createEnforcementModeFromString(EDataType eDataType, String initialValue) {
+		EnforcementMode result = EnforcementMode.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertEnforcementModeToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
 	}
 
 	/**

@@ -27,7 +27,7 @@ import org.eclipse.jdt.annotation.NonNull;
  * suitable first super class, the method delegates to visiting().
  */
 public abstract class AbstractExtendingQVTcoreVisitor<R, C>
-	extends org.eclipse.qvtd.pivot.qvtcorebase.util.AbstractExtendingQVTcoreBaseVisitor<R, C>
+	extends org.eclipse.qvtd.pivot.qvtbase.util.AbstractExtendingQVTbaseVisitor<R, C>
 	implements QVTcoreVisitor<R>
 {
 	/**
@@ -40,12 +40,67 @@ public abstract class AbstractExtendingQVTcoreVisitor<R, C>
 	}	
 
 	@Override
+	public R visitAssignment(org.eclipse.qvtd.pivot.qvtcore.@NonNull Assignment object) {
+		return visitElement(object);
+	}
+
+	@Override
+	public R visitBottomPattern(org.eclipse.qvtd.pivot.qvtcore.@NonNull BottomPattern object) {
+		return visitCorePattern(object);
+	}
+
+	@Override
+	public R visitCoreDomain(org.eclipse.qvtd.pivot.qvtcore.@NonNull CoreDomain object) {
+		return visitDomain(object);
+	}
+
+	@Override
 	public R visitCoreModel(org.eclipse.qvtd.pivot.qvtcore.@NonNull CoreModel object) {
 		return visitBaseModel(object);
 	}
 
 	@Override
+	public R visitCorePattern(org.eclipse.qvtd.pivot.qvtcore.@NonNull CorePattern object) {
+		return visitPattern(object);
+	}
+
+	@Override
+	public R visitEnforcementOperation(org.eclipse.qvtd.pivot.qvtcore.@NonNull EnforcementOperation object) {
+		return visitElement(object);
+	}
+
+	@Override
+	public R visitGuardPattern(org.eclipse.qvtd.pivot.qvtcore.@NonNull GuardPattern object) {
+		return visitCorePattern(object);
+	}
+
+	@Override
 	public R visitMapping(org.eclipse.qvtd.pivot.qvtcore.@NonNull Mapping object) {
 		return visitRule(object);
+	}
+
+	@Override
+	public R visitNavigationAssignment(org.eclipse.qvtd.pivot.qvtcore.@NonNull NavigationAssignment object) {
+		return visitAssignment(object);
+	}
+
+	@Override
+	public R visitOppositePropertyAssignment(org.eclipse.qvtd.pivot.qvtcore.@NonNull OppositePropertyAssignment object) {
+		return visitNavigationAssignment(object);
+	}
+
+	@Override
+	public R visitPropertyAssignment(org.eclipse.qvtd.pivot.qvtcore.@NonNull PropertyAssignment object) {
+		return visitNavigationAssignment(object);
+	}
+
+	@Override
+	public R visitRealizedVariable(org.eclipse.qvtd.pivot.qvtcore.@NonNull RealizedVariable object) {
+		return visitVariable(object);
+	}
+
+	@Override
+	public R visitVariableAssignment(org.eclipse.qvtd.pivot.qvtcore.@NonNull VariableAssignment object) {
+		return visitAssignment(object);
 	}
 }

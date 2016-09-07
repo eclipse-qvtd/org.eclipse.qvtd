@@ -11,9 +11,9 @@
 package org.eclipse.qvtd.pivot.qvtimperative.impl;
 
 import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -22,14 +22,11 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Property;
-import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtbase.impl.RuleImpl;
-import org.eclipse.qvtd.pivot.qvtcorebase.AbstractMapping;
-import org.eclipse.qvtd.pivot.qvtcorebase.Area;
-import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
-import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
-import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage;
+import org.eclipse.qvtd.pivot.qvtimperative.Area;
+import org.eclipse.qvtd.pivot.qvtimperative.BottomPattern;
+import org.eclipse.qvtd.pivot.qvtimperative.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeArea;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
@@ -180,9 +177,9 @@ public class MappingImpl extends RuleImpl implements Mapping {
 		if (newGuardPattern != guardPattern) {
 			NotificationChain msgs = null;
 			if (guardPattern != null)
-				msgs = ((InternalEObject)guardPattern).eInverseRemove(this, QVTcoreBasePackage.GUARD_PATTERN__AREA, GuardPattern.class, msgs);
+				msgs = ((InternalEObject)guardPattern).eInverseRemove(this, QVTimperativePackage.GUARD_PATTERN__AREA, GuardPattern.class, msgs);
 			if (newGuardPattern != null)
-				msgs = ((InternalEObject)newGuardPattern).eInverseAdd(this, QVTcoreBasePackage.GUARD_PATTERN__AREA, GuardPattern.class, msgs);
+				msgs = ((InternalEObject)newGuardPattern).eInverseAdd(this, QVTimperativePackage.GUARD_PATTERN__AREA, GuardPattern.class, msgs);
 			msgs = basicSetGuardPattern(newGuardPattern, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
@@ -225,9 +222,9 @@ public class MappingImpl extends RuleImpl implements Mapping {
 		if (newBottomPattern != bottomPattern) {
 			NotificationChain msgs = null;
 			if (bottomPattern != null)
-				msgs = ((InternalEObject)bottomPattern).eInverseRemove(this, QVTcoreBasePackage.BOTTOM_PATTERN__AREA, BottomPattern.class, msgs);
+				msgs = ((InternalEObject)bottomPattern).eInverseRemove(this, QVTimperativePackage.BOTTOM_PATTERN__AREA, BottomPattern.class, msgs);
 			if (newBottomPattern != null)
-				msgs = ((InternalEObject)newBottomPattern).eInverseAdd(this, QVTcoreBasePackage.BOTTOM_PATTERN__AREA, BottomPattern.class, msgs);
+				msgs = ((InternalEObject)newBottomPattern).eInverseAdd(this, QVTimperativePackage.BOTTOM_PATTERN__AREA, BottomPattern.class, msgs);
 			msgs = basicSetBottomPattern(newBottomPattern, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
@@ -362,30 +359,6 @@ public class MappingImpl extends RuleImpl implements Mapping {
 		}
 		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.MAPPING__OWNED_KEY_EXPRESSION, newOwnedKeyExpression, newOwnedKeyExpression));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EList<Mapping> getAllMappings() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EList<Variable> getAllVariables() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
 	}
 
 	/**
@@ -559,8 +532,8 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
 		if (baseClass == Area.class) {
 			switch (derivedFeatureID) {
-				case QVTimperativePackage.MAPPING__GUARD_PATTERN: return QVTcoreBasePackage.AREA__GUARD_PATTERN;
-				case QVTimperativePackage.MAPPING__BOTTOM_PATTERN: return QVTcoreBasePackage.AREA__BOTTOM_PATTERN;
+				case QVTimperativePackage.MAPPING__GUARD_PATTERN: return QVTimperativePackage.AREA__GUARD_PATTERN;
+				case QVTimperativePackage.MAPPING__BOTTOM_PATTERN: return QVTimperativePackage.AREA__BOTTOM_PATTERN;
 				default: return -1;
 			}
 		}
@@ -583,8 +556,8 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
 		if (baseClass == Area.class) {
 			switch (baseFeatureID) {
-				case QVTcoreBasePackage.AREA__GUARD_PATTERN: return QVTimperativePackage.MAPPING__GUARD_PATTERN;
-				case QVTcoreBasePackage.AREA__BOTTOM_PATTERN: return QVTimperativePackage.MAPPING__BOTTOM_PATTERN;
+				case QVTimperativePackage.AREA__GUARD_PATTERN: return QVTimperativePackage.MAPPING__GUARD_PATTERN;
+				case QVTimperativePackage.AREA__BOTTOM_PATTERN: return QVTimperativePackage.MAPPING__BOTTOM_PATTERN;
 				default: return -1;
 			}
 		}
@@ -607,42 +580,5 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
 		return (R) ((QVTimperativeVisitor<?>)visitor).visitMapping(this);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	@Override
-	public AbstractMapping getContext() {
-		return null;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	private static EList<AbstractMapping> NO_MAPPINGS = new BasicEList<AbstractMapping>();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	@Override
-	public EList<AbstractMapping> getRefinement() {
-		return NO_MAPPINGS;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	@Override
-	public EList<AbstractMapping> getSpecification() {
-		return NO_MAPPINGS;
 	}
 } //MappingImpl

@@ -21,7 +21,7 @@ import java.lang.Boolean;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.internal.utilities.AS2XMIid;
-import org.eclipse.qvtd.pivot.qvtcorebase.utilities.QVTcoreBaseAS2XMIidVisitor;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseAS2XMIidVisitor;
 
 /**
  * An AbstractQVTcoreAS2XMIidVisitor provides a default implementation for each
@@ -31,7 +31,7 @@ import org.eclipse.qvtd.pivot.qvtcorebase.utilities.QVTcoreBaseAS2XMIidVisitor;
  * suitable first super class, the method delegates to visiting().
  */
 public abstract class AbstractQVTcoreAS2XMIidVisitor
-	extends QVTcoreBaseAS2XMIidVisitor
+	extends QVTbaseAS2XMIidVisitor
 	implements QVTcoreVisitor<Boolean>
 {
 	/**
@@ -44,12 +44,67 @@ public abstract class AbstractQVTcoreAS2XMIidVisitor
 	}	
 
 	@Override
+	public @Nullable Boolean visitAssignment(org.eclipse.qvtd.pivot.qvtcore.@NonNull Assignment object) {
+		return visitElement(object);
+	}
+
+	@Override
+	public @Nullable Boolean visitBottomPattern(org.eclipse.qvtd.pivot.qvtcore.@NonNull BottomPattern object) {
+		return visitCorePattern(object);
+	}
+
+	@Override
+	public @Nullable Boolean visitCoreDomain(org.eclipse.qvtd.pivot.qvtcore.@NonNull CoreDomain object) {
+		return visitDomain(object);
+	}
+
+	@Override
 	public @Nullable Boolean visitCoreModel(org.eclipse.qvtd.pivot.qvtcore.@NonNull CoreModel object) {
 		return visitBaseModel(object);
 	}
 
 	@Override
+	public @Nullable Boolean visitCorePattern(org.eclipse.qvtd.pivot.qvtcore.@NonNull CorePattern object) {
+		return visitPattern(object);
+	}
+
+	@Override
+	public @Nullable Boolean visitEnforcementOperation(org.eclipse.qvtd.pivot.qvtcore.@NonNull EnforcementOperation object) {
+		return visitElement(object);
+	}
+
+	@Override
+	public @Nullable Boolean visitGuardPattern(org.eclipse.qvtd.pivot.qvtcore.@NonNull GuardPattern object) {
+		return visitCorePattern(object);
+	}
+
+	@Override
 	public @Nullable Boolean visitMapping(org.eclipse.qvtd.pivot.qvtcore.@NonNull Mapping object) {
 		return visitRule(object);
+	}
+
+	@Override
+	public @Nullable Boolean visitNavigationAssignment(org.eclipse.qvtd.pivot.qvtcore.@NonNull NavigationAssignment object) {
+		return visitAssignment(object);
+	}
+
+	@Override
+	public @Nullable Boolean visitOppositePropertyAssignment(org.eclipse.qvtd.pivot.qvtcore.@NonNull OppositePropertyAssignment object) {
+		return visitNavigationAssignment(object);
+	}
+
+	@Override
+	public @Nullable Boolean visitPropertyAssignment(org.eclipse.qvtd.pivot.qvtcore.@NonNull PropertyAssignment object) {
+		return visitNavigationAssignment(object);
+	}
+
+	@Override
+	public @Nullable Boolean visitRealizedVariable(org.eclipse.qvtd.pivot.qvtcore.@NonNull RealizedVariable object) {
+		return visitVariable(object);
+	}
+
+	@Override
+	public @Nullable Boolean visitVariableAssignment(org.eclipse.qvtd.pivot.qvtcore.@NonNull VariableAssignment object) {
+		return visitAssignment(object);
 	}
 }

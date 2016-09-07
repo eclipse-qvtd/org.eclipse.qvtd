@@ -31,6 +31,24 @@ public interface QVTcoreFactory extends EFactory {
 	QVTcoreFactory eINSTANCE = org.eclipse.qvtd.pivot.qvtcore.impl.QVTcoreFactoryImpl.init();
 
 	/**
+	 * Returns a new object of class '<em>Bottom Pattern</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Bottom Pattern</em>'.
+	 * @generated
+	 */
+	BottomPattern createBottomPattern();
+
+	/**
+	 * Returns a new object of class '<em>Core Domain</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Core Domain</em>'.
+	 * @generated
+	 */
+	CoreDomain createCoreDomain();
+
+	/**
 	 * Returns a new object of class '<em>Core Model</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -40,6 +58,33 @@ public interface QVTcoreFactory extends EFactory {
 	@NonNull CoreModel createCoreModel();
 
 	/**
+	 * Returns a new object of class '<em>Core Pattern</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Core Pattern</em>'.
+	 * @generated
+	 */
+	CorePattern createCorePattern();
+
+	/**
+	 * Returns a new object of class '<em>Enforcement Operation</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Enforcement Operation</em>'.
+	 * @generated
+	 */
+	EnforcementOperation createEnforcementOperation();
+
+	/**
+	 * Returns a new object of class '<em>Guard Pattern</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Guard Pattern</em>'.
+	 * @generated
+	 */
+	GuardPattern createGuardPattern();
+
+	/**
 	 * Returns a new object of class '<em>Mapping</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -47,6 +92,42 @@ public interface QVTcoreFactory extends EFactory {
 	 * @generated
 	 */
 	@NonNull Mapping createMapping();
+
+	/**
+	 * Returns a new object of class '<em>Opposite Property Assignment</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Opposite Property Assignment</em>'.
+	 * @generated
+	 */
+	OppositePropertyAssignment createOppositePropertyAssignment();
+
+	/**
+	 * Returns a new object of class '<em>Property Assignment</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Property Assignment</em>'.
+	 * @generated
+	 */
+	PropertyAssignment createPropertyAssignment();
+
+	/**
+	 * Returns a new object of class '<em>Realized Variable</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Realized Variable</em>'.
+	 * @generated
+	 */
+	RealizedVariable createRealizedVariable();
+
+	/**
+	 * Returns a new object of class '<em>Variable Assignment</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Variable Assignment</em>'.
+	 * @generated
+	 */
+	VariableAssignment createVariableAssignment();
 
 	/**
 	 * Returns the package supported by this factory.

@@ -31,7 +31,7 @@ import org.eclipse.emf.ecore.EReference;
  * <!-- end-model-doc -->
  * @see org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.EvaluationStatusFactory
  * @model kind="package"
- *        annotation="http://www.eclipse.org/OCL/Import ecore='http://www.eclipse.org/emf/2002/Ecore' qvtb='../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#/' qvtcb='../../org.eclipse.qvtd.pivot.qvtcorebase/model/QVTcoreBase.ecore#/' qvti='QVTimperative.ecore#/'"
+ *        annotation="http://www.eclipse.org/OCL/Import ecore='http://www.eclipse.org/emf/2002/Ecore' qvtb='../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#/' qvti='QVTimperative.ecore#/'"
  * @generated
  */
 public interface EvaluationStatusPackage extends EPackage {

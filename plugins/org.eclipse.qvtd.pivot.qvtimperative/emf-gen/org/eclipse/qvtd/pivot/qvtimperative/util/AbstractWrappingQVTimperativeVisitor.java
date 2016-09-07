@@ -24,11 +24,35 @@ import org.eclipse.jdt.annotation.Nullable;
  * An AbstractWrappingQVTimperativeVisitor delegates all visits wrapping the delegation in a call to a preVisit function and a postVisit function.
  */
 public abstract class AbstractWrappingQVTimperativeVisitor<R, C, @NonNull D extends QVTimperativeVisitor<R>, P>
-	extends org.eclipse.qvtd.pivot.qvtcorebase.util.AbstractWrappingQVTcoreBaseVisitor<R, C, D, P>
+	extends org.eclipse.qvtd.pivot.qvtbase.util.AbstractWrappingQVTbaseVisitor<R, C, D, P>
 	implements QVTimperativeVisitor<R>
 {
 	protected AbstractWrappingQVTimperativeVisitor(@NonNull D delegate, C context) {
 		super(delegate, context);
+	}
+
+	@Override
+	public R visitAssignment(org.eclipse.qvtd.pivot.qvtimperative.@NonNull Assignment object) {
+		@Nullable P prologue = preVisit(object);
+		try {
+			R result = delegate.visitAssignment(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
+	}
+
+	@Override
+	public R visitBottomPattern(org.eclipse.qvtd.pivot.qvtimperative.@NonNull BottomPattern object) {
+		@Nullable P prologue = preVisit(object);
+		try {
+			R result = delegate.visitBottomPattern(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
 	}
 
 	@Override
@@ -60,6 +84,54 @@ public abstract class AbstractWrappingQVTimperativeVisitor<R, C, @NonNull D exte
 		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitConnectionVariable(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
+	}
+
+	@Override
+	public R visitCoreDomain(org.eclipse.qvtd.pivot.qvtimperative.@NonNull CoreDomain object) {
+		@Nullable P prologue = preVisit(object);
+		try {
+			R result = delegate.visitCoreDomain(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
+	}
+
+	@Override
+	public R visitCorePattern(org.eclipse.qvtd.pivot.qvtimperative.@NonNull CorePattern object) {
+		@Nullable P prologue = preVisit(object);
+		try {
+			R result = delegate.visitCorePattern(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
+	}
+
+	@Override
+	public R visitEnforcementOperation(org.eclipse.qvtd.pivot.qvtimperative.@NonNull EnforcementOperation object) {
+		@Nullable P prologue = preVisit(object);
+		try {
+			R result = delegate.visitEnforcementOperation(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
+	}
+
+	@Override
+	public R visitGuardPattern(org.eclipse.qvtd.pivot.qvtimperative.@NonNull GuardPattern object) {
+		@Nullable P prologue = preVisit(object);
+		try {
+			R result = delegate.visitGuardPattern(object);
 			return postVisit(object, prologue, result);
 		}
 		catch (Throwable e) {
@@ -168,6 +240,66 @@ public abstract class AbstractWrappingQVTimperativeVisitor<R, C, @NonNull D exte
 		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitMappingStatement(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
+	}
+
+	@Override
+	public R visitNavigationAssignment(org.eclipse.qvtd.pivot.qvtimperative.@NonNull NavigationAssignment object) {
+		@Nullable P prologue = preVisit(object);
+		try {
+			R result = delegate.visitNavigationAssignment(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
+	}
+
+	@Override
+	public R visitOppositePropertyAssignment(org.eclipse.qvtd.pivot.qvtimperative.@NonNull OppositePropertyAssignment object) {
+		@Nullable P prologue = preVisit(object);
+		try {
+			R result = delegate.visitOppositePropertyAssignment(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
+	}
+
+	@Override
+	public R visitPropertyAssignment(org.eclipse.qvtd.pivot.qvtimperative.@NonNull PropertyAssignment object) {
+		@Nullable P prologue = preVisit(object);
+		try {
+			R result = delegate.visitPropertyAssignment(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
+	}
+
+	@Override
+	public R visitRealizedVariable(org.eclipse.qvtd.pivot.qvtimperative.@NonNull RealizedVariable object) {
+		@Nullable P prologue = preVisit(object);
+		try {
+			R result = delegate.visitRealizedVariable(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
+	}
+
+	@Override
+	public R visitVariableAssignment(org.eclipse.qvtd.pivot.qvtimperative.@NonNull VariableAssignment object) {
+		@Nullable P prologue = preVisit(object);
+		try {
+			R result = delegate.visitVariableAssignment(object);
 			return postVisit(object, prologue, result);
 		}
 		catch (Throwable e) {

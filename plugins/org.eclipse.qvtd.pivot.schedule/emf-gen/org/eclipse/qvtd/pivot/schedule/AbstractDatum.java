@@ -86,12 +86,12 @@ public interface AbstractDatum extends ScheduleElement {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Domain</em>' reference.
-	 * @see #setDomain(CoreDomain)
+	 * @see #setDomain(org.eclipse.qvtd.pivot.qvtcore.CoreDomain)
 	 * @see org.eclipse.qvtd.pivot.schedule.SchedulePackage#getAbstractDatum_Domain()
 	 * @model
 	 * @generated
 	 */
-	CoreDomain getDomain();
+	org.eclipse.qvtd.pivot.qvtcore.CoreDomain getDomain();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.schedule.AbstractDatum#getDomain <em>Domain</em>}' reference.
@@ -101,7 +101,7 @@ public interface AbstractDatum extends ScheduleElement {
 	 * @see #getDomain()
 	 * @generated
 	 */
-	void setDomain(CoreDomain value);
+	void setDomain(org.eclipse.qvtd.pivot.qvtcore.CoreDomain value);
 
 	/**
 	 * Returns the value of the '<em><b>Typed Model</b></em>' reference.

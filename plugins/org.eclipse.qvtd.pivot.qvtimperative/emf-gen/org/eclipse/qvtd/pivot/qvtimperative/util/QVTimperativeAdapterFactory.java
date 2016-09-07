@@ -32,14 +32,15 @@ import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
-import org.eclipse.qvtd.pivot.qvtcorebase.AbstractMapping;
-import org.eclipse.qvtd.pivot.qvtcorebase.Area;
-import org.eclipse.qvtd.pivot.qvtcorebase.Assignment;
-import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
-import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
-import org.eclipse.qvtd.pivot.qvtcorebase.CorePattern;
 import org.eclipse.qvtd.pivot.qvtimperative.*;
+import org.eclipse.qvtd.pivot.qvtimperative.ConnectionAssignment;
+import org.eclipse.qvtd.pivot.qvtimperative.ConnectionStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.EnforcementOperation;
+import org.eclipse.qvtd.pivot.qvtimperative.GuardPattern;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeArea;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeBottomPattern;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
@@ -47,7 +48,12 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingSequence;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.NavigationAssignment;
+import org.eclipse.qvtd.pivot.qvtimperative.OppositePropertyAssignment;
+import org.eclipse.qvtd.pivot.qvtimperative.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
+import org.eclipse.qvtd.pivot.qvtimperative.RealizedVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.VariableAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.VariablePredicate;
 
 /**
@@ -105,7 +111,19 @@ public class QVTimperativeAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	protected QVTimperativeSwitch<@Nullable Adapter> modelSwitch =
-		new QVTimperativeSwitch<@Nullable Adapter>() {
+			new QVTimperativeSwitch<@Nullable Adapter>() {
+			@Override
+			public Adapter caseArea(Area object) {
+				return createAreaAdapter();
+			}
+			@Override
+			public Adapter caseAssignment(Assignment object) {
+				return createAssignmentAdapter();
+			}
+			@Override
+			public Adapter caseBottomPattern(BottomPattern object) {
+				return createBottomPatternAdapter();
+			}
 			@Override
 			public Adapter caseConnectionAssignment(ConnectionAssignment object) {
 				return createConnectionAssignmentAdapter();
@@ -117,6 +135,22 @@ public class QVTimperativeAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseConnectionVariable(ConnectionVariable object) {
 				return createConnectionVariableAdapter();
+			}
+			@Override
+			public Adapter caseCoreDomain(CoreDomain object) {
+				return createCoreDomainAdapter();
+			}
+			@Override
+			public Adapter caseCorePattern(CorePattern object) {
+				return createCorePatternAdapter();
+			}
+			@Override
+			public Adapter caseEnforcementOperation(EnforcementOperation object) {
+				return createEnforcementOperationAdapter();
+			}
+			@Override
+			public Adapter caseGuardPattern(GuardPattern object) {
+				return createGuardPatternAdapter();
 			}
 			@Override
 			public Adapter caseImperativeArea(ImperativeArea object) {
@@ -159,6 +193,26 @@ public class QVTimperativeAdapterFactory extends AdapterFactoryImpl {
 				return createMappingStatementAdapter();
 			}
 			@Override
+			public Adapter caseNavigationAssignment(NavigationAssignment object) {
+				return createNavigationAssignmentAdapter();
+			}
+			@Override
+			public Adapter caseOppositePropertyAssignment(OppositePropertyAssignment object) {
+				return createOppositePropertyAssignmentAdapter();
+			}
+			@Override
+			public Adapter casePropertyAssignment(PropertyAssignment object) {
+				return createPropertyAssignmentAdapter();
+			}
+			@Override
+			public Adapter caseRealizedVariable(RealizedVariable object) {
+				return createRealizedVariableAdapter();
+			}
+			@Override
+			public Adapter caseVariableAssignment(VariableAssignment object) {
+				return createVariableAssignmentAdapter();
+			}
+			@Override
 			public Adapter caseVariablePredicate(VariablePredicate object) {
 				return createVariablePredicateAdapter();
 			}
@@ -171,8 +225,8 @@ public class QVTimperativeAdapterFactory extends AdapterFactoryImpl {
 				return createElementAdapter();
 			}
 			@Override
-			public Adapter caseAssignment(Assignment object) {
-				return createAssignmentAdapter();
+			public Adapter casePattern(Pattern object) {
+				return createPatternAdapter();
 			}
 			@Override
 			public Adapter caseNameable(Nameable object) {
@@ -199,32 +253,12 @@ public class QVTimperativeAdapterFactory extends AdapterFactoryImpl {
 				return createVariableAdapter();
 			}
 			@Override
-			public Adapter caseArea(Area object) {
-				return createAreaAdapter();
-			}
-			@Override
-			public Adapter casePattern(Pattern object) {
-				return createPatternAdapter();
-			}
-			@Override
-			public Adapter caseCorePattern(CorePattern object) {
-				return createCorePatternAdapter();
-			}
-			@Override
-			public Adapter caseBottomPattern(BottomPattern object) {
-				return createBottomPatternAdapter();
-			}
-			@Override
 			public Adapter caseReferringElement(ReferringElement object) {
 				return createReferringElementAdapter();
 			}
 			@Override
 			public Adapter caseDomain(Domain object) {
 				return createDomainAdapter();
-			}
-			@Override
-			public Adapter caseCoreDomain(CoreDomain object) {
-				return createCoreDomainAdapter();
 			}
 			@Override
 			public Adapter caseNamespace(Namespace object) {
@@ -241,10 +275,6 @@ public class QVTimperativeAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseRule(Rule object) {
 				return createRuleAdapter();
-			}
-			@Override
-			public Adapter caseAbstractMapping(AbstractMapping object) {
-				return createAbstractMappingAdapter();
 			}
 			@Override
 			public Adapter caseCallExp(CallExp object) {
@@ -373,30 +403,16 @@ public class QVTimperativeAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtcorebase.Area <em>Area</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtimperative.Area <em>Area</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.pivot.qvtcorebase.Area
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.Area
 	 * @generated
 	 */
 	public Adapter createAreaAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtcorebase.AbstractMapping <em>Abstract Mapping</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.pivot.qvtcorebase.AbstractMapping
-	 * @generated
-	 */
-	public Adapter createAbstractMappingAdapter() {
 		return null;
 	}
 
@@ -485,6 +501,76 @@ public class QVTimperativeAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtimperative.NavigationAssignment <em>Navigation Assignment</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.NavigationAssignment
+	 * @generated
+	 */
+	public Adapter createNavigationAssignmentAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtimperative.OppositePropertyAssignment <em>Opposite Property Assignment</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.OppositePropertyAssignment
+	 * @generated
+	 */
+	public Adapter createOppositePropertyAssignmentAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtimperative.PropertyAssignment <em>Property Assignment</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.PropertyAssignment
+	 * @generated
+	 */
+	public Adapter createPropertyAssignmentAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtimperative.RealizedVariable <em>Realized Variable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.RealizedVariable
+	 * @generated
+	 */
+	public Adapter createRealizedVariableAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtimperative.VariableAssignment <em>Variable Assignment</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.VariableAssignment
+	 * @generated
+	 */
+	public Adapter createVariableAssignmentAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtimperative.VariablePredicate <em>Variable Predicate</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -527,13 +613,13 @@ public class QVTimperativeAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtcorebase.Assignment <em>Assignment</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtimperative.Assignment <em>Assignment</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.pivot.qvtcorebase.Assignment
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.Assignment
 	 * @generated
 	 */
 	public Adapter createAssignmentAdapter() {
@@ -555,13 +641,13 @@ public class QVTimperativeAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtcorebase.CorePattern <em>Core Pattern</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtimperative.CorePattern <em>Core Pattern</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.pivot.qvtcorebase.CorePattern
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.CorePattern
 	 * @generated
 	 */
 	public Adapter createCorePatternAdapter() {
@@ -569,13 +655,41 @@ public class QVTimperativeAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern <em>Bottom Pattern</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtimperative.EnforcementOperation <em>Enforcement Operation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.EnforcementOperation
+	 * @generated
+	 */
+	public Adapter createEnforcementOperationAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtimperative.GuardPattern <em>Guard Pattern</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.GuardPattern
+	 * @generated
+	 */
+	public Adapter createGuardPatternAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtimperative.BottomPattern <em>Bottom Pattern</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.BottomPattern
 	 * @generated
 	 */
 	public Adapter createBottomPatternAdapter() {
@@ -751,13 +865,13 @@ public class QVTimperativeAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain <em>Core Domain</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtimperative.CoreDomain <em>Core Domain</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.CoreDomain
 	 * @generated
 	 */
 	public Adapter createCoreDomainAdapter() {

@@ -23,7 +23,7 @@ package	org.eclipse.qvtd.pivot.qvtimperative.util;
  * but n implementations of the visitXXX methods..
  */
 public abstract class AbstractQVTimperativeVisitor<R, C>
-	extends org.eclipse.qvtd.pivot.qvtcorebase.util.AbstractQVTcoreBaseVisitor<R, C>
+	extends org.eclipse.qvtd.pivot.qvtbase.util.AbstractQVTbaseVisitor<R, C>
 	implements QVTimperativeVisitor<R>
 {
 	/**

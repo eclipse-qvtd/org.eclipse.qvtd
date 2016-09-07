@@ -21,7 +21,7 @@ import java.lang.Object;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.internal.resource.ASSaver;
-import org.eclipse.qvtd.pivot.qvtcorebase.utilities.QVTcoreBaseASSaverLocateVisitor;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseASSaverLocateVisitor;
 
 /**
  * An AbstractQVTimperativeASSaverLocateVisitor provides a default implementation for each
@@ -31,7 +31,7 @@ import org.eclipse.qvtd.pivot.qvtcorebase.utilities.QVTcoreBaseASSaverLocateVisi
  * suitable first super class, the method delegates to visiting().
  */
 public abstract class AbstractQVTimperativeASSaverLocateVisitor
-	extends QVTcoreBaseASSaverLocateVisitor
+	extends QVTbaseASSaverLocateVisitor
 	implements QVTimperativeVisitor<Object>
 {
 	/**
@@ -42,6 +42,16 @@ public abstract class AbstractQVTimperativeASSaverLocateVisitor
 	protected AbstractQVTimperativeASSaverLocateVisitor(@NonNull ASSaver context) {
 		super(context);
 	}	
+
+	@Override
+	public @Nullable Object visitAssignment(org.eclipse.qvtd.pivot.qvtimperative.@NonNull Assignment object) {
+		return visitElement(object);
+	}
+
+	@Override
+	public @Nullable Object visitBottomPattern(org.eclipse.qvtd.pivot.qvtimperative.@NonNull BottomPattern object) {
+		return visitCorePattern(object);
+	}
 
 	@Override
 	public @Nullable Object visitConnectionAssignment(org.eclipse.qvtd.pivot.qvtimperative.@NonNull ConnectionAssignment object) {
@@ -56,6 +66,26 @@ public abstract class AbstractQVTimperativeASSaverLocateVisitor
 	@Override
 	public @Nullable Object visitConnectionVariable(org.eclipse.qvtd.pivot.qvtimperative.@NonNull ConnectionVariable object) {
 		return visitVariable(object);
+	}
+
+	@Override
+	public @Nullable Object visitCoreDomain(org.eclipse.qvtd.pivot.qvtimperative.@NonNull CoreDomain object) {
+		return visitDomain(object);
+	}
+
+	@Override
+	public @Nullable Object visitCorePattern(org.eclipse.qvtd.pivot.qvtimperative.@NonNull CorePattern object) {
+		return visitPattern(object);
+	}
+
+	@Override
+	public @Nullable Object visitEnforcementOperation(org.eclipse.qvtd.pivot.qvtimperative.@NonNull EnforcementOperation object) {
+		return visitElement(object);
+	}
+
+	@Override
+	public @Nullable Object visitGuardPattern(org.eclipse.qvtd.pivot.qvtimperative.@NonNull GuardPattern object) {
+		return visitCorePattern(object);
 	}
 
 	@Override
@@ -101,6 +131,31 @@ public abstract class AbstractQVTimperativeASSaverLocateVisitor
 	@Override
 	public @Nullable Object visitMappingStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull MappingStatement object) {
 		return visitOCLExpression(object);
+	}
+
+	@Override
+	public @Nullable Object visitNavigationAssignment(org.eclipse.qvtd.pivot.qvtimperative.@NonNull NavigationAssignment object) {
+		return visitAssignment(object);
+	}
+
+	@Override
+	public @Nullable Object visitOppositePropertyAssignment(org.eclipse.qvtd.pivot.qvtimperative.@NonNull OppositePropertyAssignment object) {
+		return visitNavigationAssignment(object);
+	}
+
+	@Override
+	public @Nullable Object visitPropertyAssignment(org.eclipse.qvtd.pivot.qvtimperative.@NonNull PropertyAssignment object) {
+		return visitNavigationAssignment(object);
+	}
+
+	@Override
+	public @Nullable Object visitRealizedVariable(org.eclipse.qvtd.pivot.qvtimperative.@NonNull RealizedVariable object) {
+		return visitVariable(object);
+	}
+
+	@Override
+	public @Nullable Object visitVariableAssignment(org.eclipse.qvtd.pivot.qvtimperative.@NonNull VariableAssignment object) {
+		return visitAssignment(object);
 	}
 
 	@Override
