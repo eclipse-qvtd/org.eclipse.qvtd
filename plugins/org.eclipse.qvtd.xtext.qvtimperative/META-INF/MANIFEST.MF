@@ -26,5 +26,5 @@ Export-Package: org.eclipse.qvtd.xtext.qvtimperative,
 Require-Bundle: org.eclipse.core.runtime;bundle-version="[3.5.0,4.0.0)",
  org.eclipse.xtext;bundle-version="[2.10.0,3.0.0)",
  org.eclipse.qvtd.pivot.qvtimperative;bundle-version="[0.14.0,1.0.0)";visibility:=reexport,
- org.eclipse.qvtd.xtext.qvtcorebase;bundle-version="[0.14.0,1.0.0)";visibility:=reexport
+ org.eclipse.qvtd.xtext.qvtbase;bundle-version="[0.14.0,1.0.0)";visibility:=reexport
 Import-Package: org.apache.log4j

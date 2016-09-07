@@ -16,7 +16,6 @@ import org.eclipse.ocl.xtext.oclinecore.OCLinEcoreStandaloneSetup;
 import org.eclipse.ocl.xtext.oclstdlib.OCLstdlibStandaloneSetup;
 import org.eclipse.qvtd.xtext.qvtbase.QVTbaseGrammarResource;
 import org.eclipse.qvtd.xtext.qvtcore.QVTcoreGrammarResource;
-import org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBaseGrammarResource;
 import org.eclipse.qvtd.xtext.qvtimperative.QVTimperativeGrammarResource;
 import org.eclipse.qvtd.xtext.qvtrelation.QVTrelationGrammarResource;
 
@@ -37,28 +36,24 @@ public class GrammarTests extends AbstractGrammarTests
 	protected void tearDown() throws Exception {
 		super.tearDown();
 	}
-	
+
 	/**
 	 * Checks that the local *.xtextbin is the same as the pre-compiled Java implementation.
-	 * 
+	 *
 	 * FIXME check the library/model version instead.
 	 */
 	public void testGrammar_QVTbase() throws Exception {
 		doTestGrammar(QVTbaseGrammarResource.class.getResource("QVTbase.xtextbin"), QVTbaseGrammarResource.INSTANCE);
 	}
-	
+
 	public void testGrammar_QVTcore() throws Exception {
 		doTestGrammar(QVTcoreGrammarResource.class.getResource("QVTcore.xtextbin"), QVTcoreGrammarResource.INSTANCE);
 	}
-	
-	public void testGrammar_QVTcoreBase() throws Exception {
-		doTestGrammar(QVTcoreBaseGrammarResource.class.getResource("QVTcoreBase.xtextbin"), QVTcoreBaseGrammarResource.INSTANCE);
-	}
-	
+
 	public void testGrammar_QVTimperative() throws Exception {
 		doTestGrammar(QVTimperativeGrammarResource.class.getResource("QVTimperative.xtextbin"), QVTimperativeGrammarResource.INSTANCE);
 	}
-	
+
 	public void testGrammar_QVTrelation() throws Exception {
 		doTestGrammar(QVTrelationGrammarResource.class.getResource("QVTrelation.xtextbin"), QVTrelationGrammarResource.INSTANCE);
 	}

@@ -32,22 +32,36 @@ import org.eclipse.ocl.xtext.basecs.ElementCS;
 import org.eclipse.ocl.xtext.basecs.PathNameCS;
 import org.eclipse.ocl.xtext.basecs.TypedRefCS;
 import org.eclipse.ocl.xtext.essentialoclcs.VariableCS;
+import org.eclipse.qvtd.pivot.qvtbase.Function;
+import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
+import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeArea;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
+import org.eclipse.qvtd.xtext.qvtimperativecs.BottomPatternCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.DomainCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.EnforcementOperationCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.GuardPatternCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.ImperativeDomainCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingLoopCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.ParamDeclarationCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.PredicateCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.PredicateOrAssignmentCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.QueryCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.RealizeableVariableCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.TopLevelCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.TransformationCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.util.AbstractQVTimperativeCSPreOrderVisitor;
 
 public class QVTimperativeCSPreOrderVisitor extends AbstractQVTimperativeCSPreOrderVisitor
-{	
+{
 	public static class MappingLoopIteratorCompletion extends SingleContinuation<MappingLoopCS>
 	{
 		protected static PivotDependency[] computeDependencies(@NonNull MappingLoopCS csElement) {
@@ -82,6 +96,54 @@ public class QVTimperativeCSPreOrderVisitor extends AbstractQVTimperativeCSPreOr
 		}
 	}
 
+	public static class ParamDeclarationCompletion extends SingleContinuation<ParamDeclarationCS>
+	{
+		public ParamDeclarationCompletion(@NonNull CS2ASConversion context, @NonNull ParamDeclarationCS csElement) {
+			super(context, null, null, csElement, new PivotDependency(csElement.getOwnedType()));
+		}
+
+		@Override
+		public BasicContinuation<?> execute() {
+			FunctionParameter pivotElement = PivotUtil.getPivot(FunctionParameter.class, csElement);
+			if (pivotElement != null) {
+				context.refreshRequiredType(pivotElement, csElement);
+			}
+			return null;
+		}
+	}
+
+	public static class QueryCompletion extends SingleContinuation<QueryCS>
+	{
+		public QueryCompletion(@NonNull CS2ASConversion context, @NonNull QueryCS csElement) {
+			super(context, null, null, csElement, new PivotDependency(csElement.getOwnedType()));
+		}
+
+		@Override
+		public BasicContinuation<?> execute() {
+			Function pivotElement = PivotUtil.getPivot(Function.class, csElement);
+			if (pivotElement != null) {
+				context.refreshRequiredType(pivotElement, csElement);
+			}
+			return null;
+		}
+	}
+
+	public static class RealizeableVariableCompletion extends SingleContinuation<RealizeableVariableCS>
+	{
+		public RealizeableVariableCompletion(@NonNull CS2ASConversion context, @NonNull RealizeableVariableCS csElement) {
+			super(context, null, null, csElement, new PivotDependency(csElement.getOwnedType()));
+		}
+
+		@Override
+		public BasicContinuation<?> execute() {
+			Variable pivotElement = PivotUtil.getPivot(Variable.class, csElement);
+			if (pivotElement != null) {
+				context.refreshRequiredType(pivotElement, csElement);
+			}
+			return null;
+		}
+	}
+
 	public QVTimperativeCSPreOrderVisitor(@NonNull CS2ASConversion context) {
 		super(context);
 	}
@@ -108,6 +170,8 @@ public class QVTimperativeCSPreOrderVisitor extends AbstractQVTimperativeCSPreOr
 		}
 	}
 
+
+
 	protected @Nullable Property lookupProperty(@NonNull ElementCS csElement, @NonNull PathNameCS csPathName, @Nullable ScopeFilter scopeFilter) {
 		CS2AS.setElementType(csPathName, PivotPackage.Literals.PROPERTY, csElement, scopeFilter);
 		Element namedElement = csPathName.getReferredElement();
@@ -131,6 +195,31 @@ public class QVTimperativeCSPreOrderVisitor extends AbstractQVTimperativeCSPreOr
 			}
 		}
 		context.refreshList(asProperties, properties);
+	}
+
+	@Override
+	public Continuation<?> visitBottomPatternCS(@NonNull BottomPatternCS csElement) {
+		return null;
+	}
+
+	@Override
+	public Continuation<?> visitDirectionCS(@NonNull DirectionCS csElement) {
+		return null;
+	}
+
+	@Override
+	public Continuation<?> visitDomainCS(@NonNull DomainCS csElement) {
+		return null;
+	}
+
+	@Override
+	public Continuation<?> visitEnforcementOperationCS(@NonNull EnforcementOperationCS csElement) {
+		return null;
+	}
+
+	@Override
+	public Continuation<?> visitGuardPatternCS(@NonNull GuardPatternCS csElement) {
+		return null;
 	}
 
 	@Override
@@ -189,7 +278,46 @@ public class QVTimperativeCSPreOrderVisitor extends AbstractQVTimperativeCSPreOr
 	}
 
 	@Override
+	public Continuation<?> visitParamDeclarationCS(@NonNull ParamDeclarationCS csElement) {
+		return new ParamDeclarationCompletion(context, csElement);
+	}
+
+	@Override
+	public Continuation<?> visitPredicateCS(@NonNull PredicateCS csElement) {
+		return null;
+	}
+
+	@Override
+	public Continuation<?> visitPredicateOrAssignmentCS(@NonNull PredicateOrAssignmentCS csElement) {
+		return null;
+	}
+
+	@Override
+	public Continuation<?> visitQueryCS(@NonNull QueryCS csElement) {
+		return new QueryCompletion(context, csElement);
+	}
+
+	@Override
+	public Continuation<?> visitRealizeableVariableCS(@NonNull RealizeableVariableCS csElement) {
+		return new RealizeableVariableCompletion(context, csElement);
+	}
+
+	@Override
 	public Continuation<?> visitTopLevelCS(@NonNull TopLevelCS csElement) {
+		return null;
+	}
+
+	@Override
+	public Continuation<?> visitTransformationCS(@NonNull TransformationCS csElement) {
+		Transformation pivotElement = PivotUtil.getPivot(Transformation.class, csElement);
+		if (pivotElement != null) {
+			List<org.eclipse.ocl.pivot.Class> superClasses = pivotElement.getSuperClasses();
+			//			context.refreshList(Type.class, superClasses, csElement.getOwnedSuperType());
+			if (superClasses.isEmpty()) {
+				org.eclipse.ocl.pivot.Class oclElementType = context.getMetamodelManager().getStandardLibrary().getOclElementType();
+				pivotElement.getSuperClasses().add(oclElementType);
+			}
+		}
 		return null;
 	}
 }

@@ -10,27 +10,46 @@
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtimperative.cs2as;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Import;
+import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
+import org.eclipse.ocl.xtext.base.cs2as.BasicContinuation;
+import org.eclipse.ocl.xtext.base.cs2as.CS2AS;
 import org.eclipse.ocl.xtext.base.cs2as.CS2ASConversion;
 import org.eclipse.ocl.xtext.base.cs2as.Continuation;
+import org.eclipse.ocl.xtext.base.cs2as.SingleContinuation;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
+import org.eclipse.ocl.xtext.basecs.PathNameCS;
 import org.eclipse.ocl.xtext.basecs.PrimitiveTypeRefCS;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
 import org.eclipse.ocl.xtext.essentialoclcs.NameExpCS;
+import org.eclipse.qvtd.pivot.qvtbase.Function;
+import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
+import org.eclipse.qvtd.pivot.qvtbase.Rule;
+import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
+import org.eclipse.qvtd.pivot.qvtcorebase.AbstractMapping;
+import org.eclipse.qvtd.pivot.qvtcorebase.Assignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
+import org.eclipse.qvtd.pivot.qvtcorebase.EnforcementOperation;
 import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBaseFactory;
@@ -51,15 +70,12 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingSequence;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
-import org.eclipse.qvtd.xtext.qvtcorebasecs.BottomPatternCS;
-import org.eclipse.qvtd.xtext.qvtcorebasecs.DirectionCS;
-import org.eclipse.qvtd.xtext.qvtcorebasecs.DomainCS;
-import org.eclipse.qvtd.xtext.qvtcorebasecs.GuardPatternCS;
-import org.eclipse.qvtd.xtext.qvtcorebasecs.PatternCS;
-import org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateCS;
-import org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateOrAssignmentCS;
-import org.eclipse.qvtd.xtext.qvtcorebasecs.UnrealizedVariableCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.BottomPatternCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.ConnectionStatementCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.DomainCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.EnforcementOperationCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.GuardPatternCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.ImperativePredicateOrAssignmentCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.ImperativeRealizedVariableCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS;
@@ -67,24 +83,162 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingLoopCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingSequenceCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.ParamDeclarationCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.PatternCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.PredicateCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.PredicateOrAssignmentCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.QueryCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.RealizedVariableCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.TopLevelCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.TransformationCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.UnrealizedVariableCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.impl.ImperativeDomainCSImpl;
 import org.eclipse.qvtd.xtext.qvtimperativecs.util.AbstractQVTimperativeCSContainmentVisitor;
 
+import com.google.common.collect.Iterables;
+
 public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSContainmentVisitor
 {
+	protected static class IsAssignmentPredicate implements com.google.common.base.Predicate<PredicateOrAssignmentCS>
+	{
+		public final static @NonNull IsAssignmentPredicate INSTANCE = new IsAssignmentPredicate();
+
+		@Override
+		public boolean apply(PredicateOrAssignmentCS csAssignment) {
+			return csAssignment.getOwnedInitExpression() != null;
+		}
+	}
+
+	protected static class IsPredicatePredicate implements com.google.common.base.Predicate<PredicateOrAssignmentCS>
+	{
+		public final static @NonNull IsPredicatePredicate INSTANCE = new IsPredicatePredicate();
+
+		@Override
+		public boolean apply(PredicateOrAssignmentCS csAssignment) {
+			return csAssignment.getOwnedInitExpression() == null;
+		}
+	}
+
+	protected static class DirectionContentContinuation extends SingleContinuation<DirectionCS>
+	{
+		private DirectionContentContinuation(@NonNull CS2ASConversion context, @NonNull DirectionCS csElement) {
+			super(context, null, null, csElement);
+		}
+
+		@Override
+		public BasicContinuation<?> execute() {
+			TypedModel pTypedModel = PivotUtil.getPivot(TypedModel.class, csElement);
+			if (pTypedModel != null) {
+				PivotUtilInternal.refreshList(pTypedModel.getUsedPackage(), csElement.getImports());
+			}
+			return null;
+		}
+	}
+
+	protected static class DomainContentContinuation extends SingleContinuation<DomainCS>
+	{
+		private DomainContentContinuation(@NonNull CS2ASConversion context, @NonNull DomainCS csElement) {
+			super(context, null, null, csElement);
+		}
+
+		@Override
+		public BasicContinuation<?> execute() {
+			CoreDomain pDomain = PivotUtil.getPivot(CoreDomain.class, csElement);
+			if (pDomain != null) {
+				TypedModel direction = csElement.getDirection();
+				if (direction == null) {
+					Transformation transformation = QVTbaseUtil.getContainingTransformation(pDomain);
+					if (transformation != null) {
+						direction = transformation.getModelParameter(null);
+					}
+				}
+				pDomain.setTypedModel(direction);
+			}
+			return null;
+		}
+	}
+
 	public QVTimperativeCSContainmentVisitor(@NonNull CS2ASConversion context) {
 		super(context);
-	}	
+	}
 
-	@Override
 	protected @NonNull ImperativeBottomPattern createBottomPattern(@NonNull BottomPatternCS csElement) {
 		return context.refreshModelElement(ImperativeBottomPattern.class, QVTimperativePackage.Literals.IMPERATIVE_BOTTOM_PATTERN, csElement);
 	}
 
-	@Override
 	protected @NonNull ImperativeDomain createDomain(@NonNull DomainCS csElement) {
 		return context.refreshModelElement(ImperativeDomain.class, QVTimperativePackage.Literals.IMPERATIVE_DOMAIN, csElement);
+	}
+
+	protected void resolveTransformationMappings(@NonNull Iterable<? extends @NonNull MappingCS> csMappings) {
+		Map<@NonNull Transformation, List<@NonNull AbstractMapping>> tx2mappings = new HashMap<@NonNull Transformation, List<@NonNull AbstractMapping>>();
+		for (@NonNull MappingCS csMapping : csMappings) {
+			PathNameCS csInPathName = csMapping.getOwnedInPathName();
+			if (csInPathName != null) {
+				Transformation asTransformation = lookupTransformation(csMapping, csInPathName, null);
+				if (asTransformation != null) {
+					AbstractMapping asMapping = PivotUtil.getPivot(AbstractMapping.class, csMapping);
+					if (asMapping != null) {
+						List<@NonNull AbstractMapping> asMappings = tx2mappings.get(asTransformation);
+						if (asMappings == null) {
+							asMappings = new ArrayList<@NonNull AbstractMapping>();
+							tx2mappings.put(asTransformation, asMappings);
+						}
+						asMappings.add(asMapping);
+					}
+				}
+			}
+		}
+		for (@NonNull Transformation asTransformation : tx2mappings.keySet()) {
+			List<@NonNull AbstractMapping> asMappings = tx2mappings.get(asTransformation);
+			List<Rule> asRules = asTransformation.getRule();
+			if (asMappings != null) {
+				PivotUtilInternal.refreshList(asRules, asMappings);
+			}
+			else {
+				asRules.clear();
+			}
+		}
+	}
+
+	protected void resolveTransformationQueries(@NonNull Iterable<@NonNull QueryCS> csQueries) {
+		Map<@NonNull Transformation, List<@NonNull Function>> tx2qMap = new HashMap<@NonNull Transformation, List<@NonNull Function>>();
+		for (@NonNull QueryCS csQuery : csQueries) {
+			Transformation asTransformation = csQuery.getTransformation();
+			if (asTransformation != null) {
+				Function asQuery = PivotUtil.getPivot(Function.class,  csQuery);
+				if (asQuery != null) {
+					List<@NonNull Function> asQueries = tx2qMap.get(asTransformation);
+					if (asQueries == null) {
+						asQueries = new ArrayList<@NonNull Function>();
+						tx2qMap.put(asTransformation, asQueries);
+					}
+					asQueries.add(asQuery);
+				}
+			}
+		}
+		for (Transformation asTransformation : tx2qMap.keySet()) {
+			List<@NonNull Function> asQueries = tx2qMap.get(asTransformation);
+			List<Operation> asOperations = asTransformation.getOwnedOperations();
+			if (asQueries != null) {
+				PivotUtilInternal.refreshList(asOperations, asQueries);
+			}
+			else {
+				asOperations.clear();
+			}
+		}
+	}
+
+	@Override
+	public Continuation<?> visitBottomPatternCS(@NonNull BottomPatternCS csElement) {
+		@NonNull BottomPattern pBottomPattern = createBottomPattern(csElement);
+		context.refreshPivotList(RealizedVariable.class, pBottomPattern.getRealizedVariable(), csElement.getOwnedRealizedVariables());
+		context.refreshPivotList(Variable.class, pBottomPattern.getVariable(), csElement.getOwnedUnrealizedVariables());
+		context.refreshPivotList(EnforcementOperation.class, pBottomPattern.getEnforcementOperation(), csElement.getOwnedEnforcementOperations());
+		context.refreshPivotList(Assignment.class, pBottomPattern.getAssignment(), Iterables.filter(csElement.getOwnedConstraints(), IsAssignmentPredicate.INSTANCE));
+		context.refreshPivotList(Predicate.class, pBottomPattern.getPredicate(), Iterables.filter(csElement.getOwnedConstraints(), IsPredicatePredicate.INSTANCE));
+		context.refreshComments(pBottomPattern, csElement);
+		return null;
 	}
 
 	@Override
@@ -95,12 +249,43 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 
 	@Override
 	public Continuation<?> visitDirectionCS(@NonNull DirectionCS csElement) {
-		Continuation<?> continuation = super.visitDirectionCS(csElement);
+		refreshNamedElement(TypedModel.class, QVTbasePackage.Literals.TYPED_MODEL, csElement);
+		Continuation<?> continuation = new DirectionContentContinuation(context, csElement);
 		TypedModel asTypedModel = PivotUtil.getPivot(TypedModel.class, csElement);
 		if (asTypedModel != null) {
 			QVTbaseUtil.getContextVariable(standardLibrary, asTypedModel);
 		}
 		return continuation;
+	}
+
+	@Override
+	public Continuation<?> visitDomainCS(@NonNull DomainCS csElement) {
+		EObject eContainer = csElement.eContainer();
+		if ((eContainer instanceof MappingCS) && (((MappingCS)eContainer).getOwnedMiddle() == csElement)) {
+			return null;
+		}
+		@NonNull CoreDomain pivotElement = createDomain(csElement);
+		pivotElement.setIsCheckable(csElement.isIsCheck());
+		pivotElement.setIsEnforceable(csElement.isIsEnforce());
+		pivotElement.setBottomPattern(PivotUtil.getPivot(BottomPattern.class, csElement.getOwnedBottomPattern()));
+		pivotElement.setGuardPattern(PivotUtil.getPivot(GuardPattern.class, csElement.getOwnedGuardPattern()));
+		context.refreshComments(pivotElement, csElement);
+		return new DomainContentContinuation(context, csElement);
+	}
+
+	@Override
+	public Continuation<?> visitEnforcementOperationCS(@NonNull EnforcementOperationCS csElement) {
+		context.refreshModelElement(EnforcementOperation.class, QVTcoreBasePackage.Literals.ENFORCEMENT_OPERATION, csElement);
+		return null;
+	}
+
+	@Override
+	public Continuation<?> visitGuardPatternCS(@NonNull GuardPatternCS csElement) {
+		@NonNull GuardPattern pGuardPattern = context.refreshModelElement(GuardPattern.class, QVTcoreBasePackage.Literals.GUARD_PATTERN, csElement);
+		context.refreshPivotList(Variable.class, pGuardPattern.getVariable(), csElement.getOwnedUnrealizedVariables());
+		context.refreshPivotList(Predicate.class, pGuardPattern.getPredicate(), csElement.getOwnedPredicates());
+		context.refreshComments(pGuardPattern, csElement);
+		return null;
 	}
 
 	@Override
@@ -189,9 +374,9 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 		pivotElement.getOwnedIterators().clear();
 		pivotElement.getOwnedIterators().add(iterator);
 		pivotElement.setOwnedBody(PivotUtil.getPivot(MappingStatement.class, csMappingLoop.getOwnedMappingSequence()));
-//		CollectionType collectionType = metamodelManager.getCollectionType();
-//		DomainOperation forAllIteration = ClassUtil.getNamedElement(collectionType.getLocalOperations(), "forAll");
-//		pivotElement.setReferredIteration((Iteration) forAllIteration);
+		//		CollectionType collectionType = metamodelManager.getCollectionType();
+		//		DomainOperation forAllIteration = ClassUtil.getNamedElement(collectionType.getLocalOperations(), "forAll");
+		//		pivotElement.setReferredIteration((Iteration) forAllIteration);
 		context.refreshComments(pivotElement, csMappingLoop);
 		return null;
 	}
@@ -200,6 +385,12 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 	public Continuation<?> visitMappingSequenceCS(@NonNull MappingSequenceCS csMappingSequence) {
 		@NonNull MappingSequence pivotElement = context.refreshModelElement(MappingSequence.class, QVTimperativePackage.Literals.MAPPING_SEQUENCE, csMappingSequence);
 		context.refreshPivotList(MappingStatement.class, pivotElement.getMappingStatements(), csMappingSequence.getOwnedMappingStatements());
+		return null;
+	}
+
+	@Override
+	public Continuation<?> visitParamDeclarationCS(@NonNull ParamDeclarationCS csElement) {
+		refreshNamedElement(FunctionParameter.class, QVTbasePackage.Literals.FUNCTION_PARAMETER, csElement);
 		return null;
 	}
 
@@ -226,6 +417,25 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 	}
 
 	@Override
+	public Continuation<?> visitQueryCS(@NonNull QueryCS csElement) {
+		PathNameCS pathName = csElement.getOwnedPathName();
+		if (pathName != null) {
+			CS2AS.setElementType(pathName, QVTbasePackage.Literals.TRANSFORMATION, csElement, null);
+		}
+		@NonNull Function pivotElement = refreshNamedElement(Function.class, QVTbasePackage.Literals.FUNCTION, csElement);
+		//		pivotElement.setIsStatic(true);
+		pivotElement.setIsTransient(csElement.isIsTransient());
+		context.refreshPivotList(FunctionParameter.class, pivotElement.getOwnedParameters(), csElement.getOwnedParameters());
+		return null;
+	}
+
+	@Override
+	public Continuation<?> visitRealizedVariableCS(@NonNull RealizedVariableCS csElement) {
+		refreshNamedElement(RealizedVariable.class, QVTcoreBasePackage.Literals.REALIZED_VARIABLE, csElement);
+		return null;
+	}
+
+	@Override
 	public Continuation<?> visitTopLevelCS(@NonNull TopLevelCS csElement) {
 		importPackages(csElement);
 		@NonNull ImperativeModel asModel = refreshRoot(ImperativeModel.class, QVTimperativePackage.Literals.IMPERATIVE_MODEL, csElement);
@@ -235,14 +445,28 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 		Resource eResource = csElement.eResource();
 		if (eResource instanceof BaseCSResource) {
 			context.installRootElement((BaseCSResource)eResource, asModel);		// Ensure containment viable for imported library type references
-//			importPackages(csElement);			// FIXME This has to be after refreshPackage which is irregular and prevents local realization of ImportCS etc
+			//			importPackages(csElement);			// FIXME This has to be after refreshPackage which is irregular and prevents local realization of ImportCS etc
 		}
 		//
 		resolveTransformationMappings(ClassUtil.nullFree(csElement.getOwnedMappings()));
 		resolveTransformationQueries(ClassUtil.nullFree(csElement.getOwnedQueries()));
-//		context.addMappings(ClassUtil.nullFree(csElement.getOwnedMappings()));
-//		context.addQueries(ClassUtil.nullFree(csElement.getOwnedQueries()));
-//		context.installTransformationStructure();
+		//		context.addMappings(ClassUtil.nullFree(csElement.getOwnedMappings()));
+		//		context.addQueries(ClassUtil.nullFree(csElement.getOwnedQueries()));
+		//		context.installTransformationStructure();
+		return null;
+	}
+
+	@Override
+	public Continuation<?> visitTransformationCS(@NonNull TransformationCS csElement) {
+		PathNameCS pathName = csElement.getOwnedPathName();
+		if (pathName != null) {
+			CS2AS.setElementType(pathName, PivotPackage.Literals.NAMESPACE, csElement, null);
+		}
+		@SuppressWarnings("null") @NonNull EClass eClass = QVTbasePackage.Literals.TRANSFORMATION;
+		Transformation asTransformation = refreshNamedElement(Transformation.class, eClass, csElement);
+		refreshClassifier(asTransformation, csElement);
+		context.refreshPivotList(TypedModel.class, asTransformation.getModelParameter(), csElement.getOwnedDirections());
+		QVTbaseUtil.getContextVariable(standardLibrary, asTransformation);
 		return null;
 	}
 
@@ -262,4 +486,5 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 		refreshNamedElement(Variable.class, PivotPackage.Literals.VARIABLE, csElement);
 		return null;
 	}
+
 }

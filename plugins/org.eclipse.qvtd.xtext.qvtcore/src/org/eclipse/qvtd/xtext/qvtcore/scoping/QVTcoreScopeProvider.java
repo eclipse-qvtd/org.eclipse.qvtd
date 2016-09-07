@@ -10,15 +10,15 @@
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtcore.scoping;
 
-import org.eclipse.qvtd.xtext.qvtcorebase.scoping.QVTcoreBaseScopeProvider;
+import org.eclipse.qvtd.xtext.qvtbase.scoping.QVTbaseScopeProvider;
 
 /**
  * This class contains custom scoping description.
- * 
+ *
  * see : http://www.eclipse.org/Xtext/documentation/latest/xtext.html#scoping
- * on how and when to use it 
+ * on how and when to use it
  *
  */
-public class QVTcoreScopeProvider extends QVTcoreBaseScopeProvider {
+public class QVTcoreScopeProvider extends QVTbaseScopeProvider {
 
 }

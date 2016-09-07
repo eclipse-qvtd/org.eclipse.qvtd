@@ -10,25 +10,25 @@
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtcore.ui.labeling;
 
-import org.eclipse.qvtd.xtext.qvtcorebase.ui.labeling.QVTcoreBaseDescriptionLabelProvider;
+import org.eclipse.ocl.xtext.essentialocl.ui.labeling.EssentialOCLDescriptionLabelProvider;
 
 /**
  * Provides labels for a IEObjectDescriptions and IResourceDescriptions.
- * 
+ *
  * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#labelProvider
  */
-public class QVTcoreDescriptionLabelProvider extends QVTcoreBaseDescriptionLabelProvider {
+public class QVTcoreDescriptionLabelProvider extends EssentialOCLDescriptionLabelProvider {
 
-/*
+	/*
 	//Labels and icons can be computed like this:
-	
+
 	String text(IEObjectDescription ele) {
 	  return "my "+ele.getName();
 	}
-	 
+
     String image(IEObjectDescription ele) {
       return ele.getEClass().getName() + ".gif";
-    }	 
-*/
+    }
+	 */
 
 }
