@@ -10,12 +10,8 @@
  *******************************************************************************/
 package org.eclipse.qvtd.doc.bigmde2016.tests.emftvm;
 
-import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.Collection;
-import java.util.HashMap;
-
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -24,12 +20,6 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.m2m.atl.core.IInjector;
-import org.eclipse.m2m.atl.core.emf.EMFInjector;
-import org.eclipse.m2m.atl.core.emf.EMFModel;
-import org.eclipse.m2m.atl.core.emf.EMFModelFactory;
-import org.eclipse.m2m.atl.core.emf.EMFReferenceModel;
-import org.eclipse.m2m.atl.core.launch.ILauncher;
 import org.eclipse.m2m.atl.emftvm.EmftvmFactory;
 import org.eclipse.m2m.atl.emftvm.ExecEnv;
 import org.eclipse.m2m.atl.emftvm.Metamodel;
@@ -38,7 +28,6 @@ import org.eclipse.m2m.atl.emftvm.impl.resource.EMFTVMResourceFactoryImpl;
 import org.eclipse.m2m.atl.emftvm.util.DefaultModuleResolver;
 import org.eclipse.m2m.atl.emftvm.util.ModuleResolver;
 import org.eclipse.m2m.atl.emftvm.util.TimingData;
-import org.eclipse.m2m.atl.engine.emfvm.launch.EMFVMLauncher;
 import org.eclipse.qvtd.doc.bigmde2016.tests.FamiliesGenerator;
 import org.eclipse.qvtd.doc.bigmde2016.tests.PrintAndLog;
 import org.eclipse.qvtd.doc.bigmde2016.tests.qvtc.BigMDE2016CGTests;

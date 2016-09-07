@@ -33,8 +33,6 @@ import org.eclipse.qvtd.xtext.qvtcore.tests.list2list.doublylinkedlist.DoublyLin
 import org.eclipse.qvtd.xtext.qvtcore.tests.list2list.doublylinkedlist.DoublylinkedlistPackage;
 import org.junit.Test;
 
-import junit.framework.TestCase;
-
 public class EXE2016_QVTo_Tests extends AbstractEXE2016CGTests
 {
 	@Test

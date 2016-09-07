@@ -11,8 +11,6 @@
 package org.eclipse.qvtd.doc.exe2016.tests.manual;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -24,8 +22,6 @@ import org.eclipse.qvtd.doc.exe2016.tests.DoublyLinkedListGenerator;
 import org.eclipse.qvtd.doc.exe2016.tests.PrintAndLog;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePivotStandaloneSetup;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
-import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiTransformationExecutor;
-import org.eclipse.qvtd.runtime.evaluation.Transformer;
 import org.eclipse.qvtd.xtext.qvtcore.tests.list2list.doublylinkedlist.DoublyLinkedList;
 import org.eclipse.qvtd.xtext.qvtcore.tests.list2list.doublylinkedlist.DoublylinkedlistFactory;
 import org.eclipse.qvtd.xtext.qvtcore.tests.list2list.doublylinkedlist.Element;
