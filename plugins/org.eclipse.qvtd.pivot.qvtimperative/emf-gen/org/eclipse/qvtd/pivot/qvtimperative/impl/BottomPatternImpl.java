@@ -18,30 +18,21 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
-
 import org.eclipse.jdt.annotation.NonNull;
-
 import org.eclipse.ocl.pivot.util.Visitor;
-
 import org.eclipse.qvtd.pivot.qvtimperative.Area;
 import org.eclipse.qvtd.pivot.qvtimperative.Assignment;
 import org.eclipse.qvtd.pivot.qvtimperative.BottomPattern;
-import org.eclipse.qvtd.pivot.qvtimperative.EnforcementOperation;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.RealizedVariable;
-
 import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
 
 /**
@@ -54,7 +45,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.BottomPatternImpl#getArea <em>Area</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.BottomPatternImpl#getAssignment <em>Assignment</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.BottomPatternImpl#getEnforcementOperation <em>Enforcement Operation</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.BottomPatternImpl#getRealizedVariable <em>Realized Variable</em>}</li>
  * </ul>
  *
@@ -70,16 +60,6 @@ public class BottomPatternImpl extends CorePatternImpl implements BottomPattern 
 	 * @ordered
 	 */
 	protected EList<Assignment> assignment;
-
-	/**
-	 * The cached value of the '{@link #getEnforcementOperation() <em>Enforcement Operation</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getEnforcementOperation()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<EnforcementOperation> enforcementOperation;
 
 	/**
 	 * The cached value of the '{@link #getRealizedVariable() <em>Realized Variable</em>}' containment reference list.
@@ -172,19 +152,6 @@ public class BottomPatternImpl extends CorePatternImpl implements BottomPattern 
 	 * @generated
 	 */
 	@Override
-	public EList<EnforcementOperation> getEnforcementOperation() {
-		if (enforcementOperation == null) {
-			enforcementOperation = new EObjectContainmentWithInverseEList<EnforcementOperation>(EnforcementOperation.class, this, QVTimperativePackage.BOTTOM_PATTERN__ENFORCEMENT_OPERATION, QVTimperativePackage.ENFORCEMENT_OPERATION__BOTTOM_PATTERN);
-		}
-		return enforcementOperation;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EList<RealizedVariable> getRealizedVariable() {
 		if (realizedVariable == null) {
 			realizedVariable = new EObjectContainmentEList<RealizedVariable>(RealizedVariable.class, this, QVTimperativePackage.BOTTOM_PATTERN__REALIZED_VARIABLE);
@@ -207,8 +174,6 @@ public class BottomPatternImpl extends CorePatternImpl implements BottomPattern 
 				return basicSetArea((Area)otherEnd, msgs);
 			case QVTimperativePackage.BOTTOM_PATTERN__ASSIGNMENT:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getAssignment()).basicAdd(otherEnd, msgs);
-			case QVTimperativePackage.BOTTOM_PATTERN__ENFORCEMENT_OPERATION:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getEnforcementOperation()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -225,8 +190,6 @@ public class BottomPatternImpl extends CorePatternImpl implements BottomPattern 
 				return basicSetArea(null, msgs);
 			case QVTimperativePackage.BOTTOM_PATTERN__ASSIGNMENT:
 				return ((InternalEList<?>)getAssignment()).basicRemove(otherEnd, msgs);
-			case QVTimperativePackage.BOTTOM_PATTERN__ENFORCEMENT_OPERATION:
-				return ((InternalEList<?>)getEnforcementOperation()).basicRemove(otherEnd, msgs);
 			case QVTimperativePackage.BOTTOM_PATTERN__REALIZED_VARIABLE:
 				return ((InternalEList<?>)getRealizedVariable()).basicRemove(otherEnd, msgs);
 		}
@@ -259,8 +222,6 @@ public class BottomPatternImpl extends CorePatternImpl implements BottomPattern 
 				return getArea();
 			case QVTimperativePackage.BOTTOM_PATTERN__ASSIGNMENT:
 				return getAssignment();
-			case QVTimperativePackage.BOTTOM_PATTERN__ENFORCEMENT_OPERATION:
-				return getEnforcementOperation();
 			case QVTimperativePackage.BOTTOM_PATTERN__REALIZED_VARIABLE:
 				return getRealizedVariable();
 		}
@@ -282,10 +243,6 @@ public class BottomPatternImpl extends CorePatternImpl implements BottomPattern 
 			case QVTimperativePackage.BOTTOM_PATTERN__ASSIGNMENT:
 				getAssignment().clear();
 				getAssignment().addAll((Collection<? extends Assignment>)newValue);
-				return;
-			case QVTimperativePackage.BOTTOM_PATTERN__ENFORCEMENT_OPERATION:
-				getEnforcementOperation().clear();
-				getEnforcementOperation().addAll((Collection<? extends EnforcementOperation>)newValue);
 				return;
 			case QVTimperativePackage.BOTTOM_PATTERN__REALIZED_VARIABLE:
 				getRealizedVariable().clear();
@@ -309,9 +266,6 @@ public class BottomPatternImpl extends CorePatternImpl implements BottomPattern 
 			case QVTimperativePackage.BOTTOM_PATTERN__ASSIGNMENT:
 				getAssignment().clear();
 				return;
-			case QVTimperativePackage.BOTTOM_PATTERN__ENFORCEMENT_OPERATION:
-				getEnforcementOperation().clear();
-				return;
 			case QVTimperativePackage.BOTTOM_PATTERN__REALIZED_VARIABLE:
 				getRealizedVariable().clear();
 				return;
@@ -331,8 +285,6 @@ public class BottomPatternImpl extends CorePatternImpl implements BottomPattern 
 				return getArea() != null;
 			case QVTimperativePackage.BOTTOM_PATTERN__ASSIGNMENT:
 				return assignment != null && !assignment.isEmpty();
-			case QVTimperativePackage.BOTTOM_PATTERN__ENFORCEMENT_OPERATION:
-				return enforcementOperation != null && !enforcementOperation.isEmpty();
 			case QVTimperativePackage.BOTTOM_PATTERN__REALIZED_VARIABLE:
 				return realizedVariable != null && !realizedVariable.isEmpty();
 		}

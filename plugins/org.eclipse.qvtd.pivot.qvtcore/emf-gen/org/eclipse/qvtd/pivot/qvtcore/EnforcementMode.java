@@ -88,9 +88,9 @@ public enum EnforcementMode implements Enumerator {
 	 */
 	private static final EnforcementMode[] VALUES_ARRAY =
 			new EnforcementMode[] {
-				CREATION,
-				DELETION,
-	};
+			CREATION,
+			DELETION,
+		};
 
 	/**
 	 * A public read-only list of all the '<em><b>Enforcement Mode</b></em>' enumerators.
@@ -192,7 +192,7 @@ public enum EnforcementMode implements Enumerator {
 	 */
 	@Override
 	public int getValue() {
-		return value;
+	  return value;
 	}
 
 	/**
@@ -202,7 +202,7 @@ public enum EnforcementMode implements Enumerator {
 	 */
 	@Override
 	public String getName() {
-		return name;
+	  return name;
 	}
 
 	/**
@@ -212,7 +212,7 @@ public enum EnforcementMode implements Enumerator {
 	 */
 	@Override
 	public String getLiteral() {
-		return literal;
+	  return literal;
 	}
 
 	/**

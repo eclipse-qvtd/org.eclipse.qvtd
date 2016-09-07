@@ -75,11 +75,6 @@ public abstract class AbstractExtendingQVTimperativeVisitor<R, C>
 	}
 
 	@Override
-	public R visitEnforcementOperation(org.eclipse.qvtd.pivot.qvtimperative.@NonNull EnforcementOperation object) {
-		return visitElement(object);
-	}
-
-	@Override
 	public R visitGuardPattern(org.eclipse.qvtd.pivot.qvtimperative.@NonNull GuardPattern object) {
 		return visitCorePattern(object);
 	}

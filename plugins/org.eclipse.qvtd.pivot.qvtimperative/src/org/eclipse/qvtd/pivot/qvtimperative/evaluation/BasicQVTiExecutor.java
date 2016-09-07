@@ -59,7 +59,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.Assignment;
 import org.eclipse.qvtd.pivot.qvtimperative.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.CoreDomain;
-import org.eclipse.qvtd.pivot.qvtimperative.EnforcementOperation;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
@@ -178,21 +177,6 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 				assignment.accept(undecoratedVisitor);
 			}
 		}
-		//
-		// enforcement operations
-		//
-		for (Domain domain : mapping.getDomain()) {
-			if (domain.isIsEnforceable()) {
-				CoreDomain enforceableDomain = (CoreDomain)domain;
-				BottomPattern enforceableBottomPattern = enforceableDomain.getBottomPattern();
-				for (EnforcementOperation enforceOp : enforceableBottomPattern.getEnforcementOperation()) {
-					enforceOp.accept(undecoratedVisitor);
-				}
-			}
-		}
-		//		for (EnforcementOperation enforceOp : middleBottomPattern.getEnforcementOperation()) {
-		//			enforceOp.accept(undecoratedVisitor);
-		//		}
 	}
 
 	protected boolean doPredicatesAndEvaluations(@NonNull Mapping mapping, @NonNull EvaluationVisitor undecoratedVisitor) {
@@ -215,7 +199,6 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 				assert checkableGuardPattern.getPredicate().isEmpty();
 				BottomPattern checkableBottomPattern = checkableDomain.getBottomPattern();
 				assert checkableBottomPattern.getAssignment().isEmpty();
-				assert checkableBottomPattern.getEnforcementOperation().isEmpty();
 				assert checkableBottomPattern.getPredicate().isEmpty();
 				assert checkableBottomPattern.getRealizedVariable().isEmpty();
 				//				assert checkableBottomPattern.getVariable().isEmpty();
@@ -241,7 +224,6 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 			}
 		}
 		BottomPattern middleBottomPattern = mapping.getBottomPattern();
-		assert middleBottomPattern.getEnforcementOperation().isEmpty();
 		assert middleBottomPattern.getRealizedVariable().isEmpty();
 		//
 		// variable declarations/initializations

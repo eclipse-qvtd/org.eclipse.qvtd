@@ -26,7 +26,6 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.BottomPatternCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.ConnectionStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DomainCS;
-import org.eclipse.qvtd.xtext.qvtimperativecs.EnforcementOperationCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.GuardPatternCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.ImperativeDomainCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.ImperativePredicateOrAssignmentCS;
@@ -91,13 +90,6 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	 * @generated
 	 */
 	private EClass domainCSEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass enforcementOperationCSEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -352,7 +344,7 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	 * @generated
 	 */
 	@Override
-	public EReference getBottomPatternCS_OwnedEnforcementOperations() {
+	public EReference getBottomPatternCS_OwnedRealizedVariables() {
 		return (EReference)bottomPatternCSEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -362,18 +354,8 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	 * @generated
 	 */
 	@Override
-	public EReference getBottomPatternCS_OwnedRealizedVariables() {
-		return (EReference)bottomPatternCSEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EReference getBottomPatternCS_OwnedConstraints() {
-		return (EReference)bottomPatternCSEClass.getEStructuralFeatures().get(2);
+		return (EReference)bottomPatternCSEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -474,36 +456,6 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	@Override
 	public EReference getDomainCS_Direction() {
 		return (EReference)domainCSEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getEnforcementOperationCS() {
-		return enforcementOperationCSEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EAttribute getEnforcementOperationCS_IsDeletion() {
-		return (EAttribute)enforcementOperationCSEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getEnforcementOperationCS_OwnedOperationCall() {
-		return (EReference)enforcementOperationCSEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1140,7 +1092,6 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		createEReference(areaCSEClass, AREA_CS__OWNED_BOTTOM_PATTERN);
 
 		bottomPatternCSEClass = createEClass(BOTTOM_PATTERN_CS);
-		createEReference(bottomPatternCSEClass, BOTTOM_PATTERN_CS__OWNED_ENFORCEMENT_OPERATIONS);
 		createEReference(bottomPatternCSEClass, BOTTOM_PATTERN_CS__OWNED_REALIZED_VARIABLES);
 		createEReference(bottomPatternCSEClass, BOTTOM_PATTERN_CS__OWNED_CONSTRAINTS);
 
@@ -1156,10 +1107,6 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		createEAttribute(domainCSEClass, DOMAIN_CS__IS_CHECK);
 		createEAttribute(domainCSEClass, DOMAIN_CS__IS_ENFORCE);
 		createEReference(domainCSEClass, DOMAIN_CS__DIRECTION);
-
-		enforcementOperationCSEClass = createEClass(ENFORCEMENT_OPERATION_CS);
-		createEAttribute(enforcementOperationCSEClass, ENFORCEMENT_OPERATION_CS__IS_DELETION);
-		createEReference(enforcementOperationCSEClass, ENFORCEMENT_OPERATION_CS__OWNED_OPERATION_CALL);
 
 		guardPatternCSEClass = createEClass(GUARD_PATTERN_CS);
 		createEReference(guardPatternCSEClass, GUARD_PATTERN_CS__OWNED_PREDICATES);
@@ -1283,7 +1230,6 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		connectionStatementCSEClass.getESuperTypes().add(this.getMappingStatementCS());
 		directionCSEClass.getESuperTypes().add(theBaseCSPackage.getNamedElementCS());
 		domainCSEClass.getESuperTypes().add(this.getAreaCS());
-		enforcementOperationCSEClass.getESuperTypes().add(theBaseCSPackage.getModelElementCS());
 		guardPatternCSEClass.getESuperTypes().add(this.getPatternCS());
 		imperativeDomainCSEClass.getESuperTypes().add(this.getDomainCS());
 		imperativePredicateOrAssignmentCSEClass.getESuperTypes().add(this.getPredicateOrAssignmentCS());
@@ -1311,7 +1257,6 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		initEReference(getAreaCS_OwnedBottomPattern(), this.getBottomPatternCS(), null, "ownedBottomPattern", null, 0, 1, AreaCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(bottomPatternCSEClass, BottomPatternCS.class, "BottomPatternCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getBottomPatternCS_OwnedEnforcementOperations(), this.getEnforcementOperationCS(), null, "ownedEnforcementOperations", null, 0, -1, BottomPatternCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getBottomPatternCS_OwnedRealizedVariables(), this.getRealizedVariableCS(), null, "ownedRealizedVariables", null, 0, -1, BottomPatternCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getBottomPatternCS_OwnedConstraints(), this.getPredicateOrAssignmentCS(), null, "ownedConstraints", null, 0, -1, BottomPatternCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -1327,10 +1272,6 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		initEAttribute(getDomainCS_IsCheck(), ecorePackage.getEBoolean(), "isCheck", null, 0, 1, DomainCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getDomainCS_IsEnforce(), ecorePackage.getEBoolean(), "isEnforce", null, 0, 1, DomainCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDomainCS_Direction(), theQVTbasePackage.getTypedModel(), null, "direction", null, 0, 1, DomainCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(enforcementOperationCSEClass, EnforcementOperationCS.class, "EnforcementOperationCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getEnforcementOperationCS_IsDeletion(), ecorePackage.getEBoolean(), "isDeletion", null, 0, 1, EnforcementOperationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getEnforcementOperationCS_OwnedOperationCall(), theEssentialOCLCSPackage.getNameExpCS(), null, "ownedOperationCall", null, 0, 1, EnforcementOperationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(guardPatternCSEClass, GuardPatternCS.class, "GuardPatternCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getGuardPatternCS_OwnedPredicates(), this.getPredicateCS(), null, "ownedPredicates", null, 0, -1, GuardPatternCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

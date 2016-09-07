@@ -18,10 +18,6 @@
   <genPackages prefix="QVTimperative" basePackage="org.eclipse.qvtd.pivot" disposableProviderFactory="true"
       contentTypeIdentifier="org.eclipse.qvtd.qvtimperative" fileExtensions="qvtias"
       ecorePackage="QVTimperative.ecore#/">
-    <genEnums typeSafeEnumCompatible="false" ecoreEnum="QVTimperative.ecore#//EnforcementMode">
-      <genEnumLiterals ecoreEnumLiteral="QVTimperative.ecore#//EnforcementMode/Creation"/>
-      <genEnumLiterals ecoreEnumLiteral="QVTimperative.ecore#//EnforcementMode/Deletion"/>
-    </genEnums>
     <genClasses image="false" ecoreClass="QVTimperative.ecore#//Area">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//Area/guardPattern"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//Area/bottomPattern"/>
@@ -34,7 +30,6 @@
     <genClasses ecoreClass="QVTimperative.ecore#//BottomPattern">
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference QVTimperative.ecore#//BottomPattern/area"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//BottomPattern/assignment"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//BottomPattern/enforcementOperation"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//BottomPattern/realizedVariable"/>
     </genClasses>
     <genClasses ecoreClass="QVTimperative.ecore#//ConnectionAssignment">
@@ -49,11 +44,6 @@
     <genClasses ecoreClass="QVTimperative.ecore#//CorePattern">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//CorePattern/variable"/>
       <genOperations ecoreOperation="QVTimperative.ecore#//CorePattern/getArea"/>
-    </genClasses>
-    <genClasses ecoreClass="QVTimperative.ecore#//EnforcementOperation">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperative.ecore#//EnforcementOperation/enforcementMode"/>
-      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference QVTimperative.ecore#//EnforcementOperation/bottomPattern"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//EnforcementOperation/operationCallExp"/>
     </genClasses>
     <genClasses ecoreClass="QVTimperative.ecore#//GuardPattern">
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference QVTimperative.ecore#//GuardPattern/area"/>

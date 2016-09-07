@@ -81,11 +81,6 @@ public abstract class AbstractQVTimperativeASSaverNormalizeVisitor
 	}
 
 	@Override
-	public @Nullable Object visitEnforcementOperation(org.eclipse.qvtd.pivot.qvtimperative.@NonNull EnforcementOperation object) {
-		return visitElement(object);
-	}
-
-	@Override
 	public @Nullable Object visitGuardPattern(org.eclipse.qvtd.pivot.qvtimperative.@NonNull GuardPattern object) {
 		return visitCorePattern(object);
 	}

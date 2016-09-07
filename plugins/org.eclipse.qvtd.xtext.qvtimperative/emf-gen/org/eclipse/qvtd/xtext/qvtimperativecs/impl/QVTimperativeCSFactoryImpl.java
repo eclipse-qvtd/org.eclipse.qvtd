@@ -66,7 +66,6 @@ public class QVTimperativeCSFactoryImpl extends EFactoryImpl implements QVTimper
 			case QVTimperativeCSPackage.CONNECTION_STATEMENT_CS: return createConnectionStatementCS();
 			case QVTimperativeCSPackage.DIRECTION_CS: return createDirectionCS();
 			case QVTimperativeCSPackage.DOMAIN_CS: return createDomainCS();
-			case QVTimperativeCSPackage.ENFORCEMENT_OPERATION_CS: return createEnforcementOperationCS();
 			case QVTimperativeCSPackage.GUARD_PATTERN_CS: return createGuardPatternCS();
 			case QVTimperativeCSPackage.IMPERATIVE_DOMAIN_CS: return createImperativeDomainCS();
 			case QVTimperativeCSPackage.IMPERATIVE_PREDICATE_OR_ASSIGNMENT_CS: return createImperativePredicateOrAssignmentCS();
@@ -131,17 +130,6 @@ public class QVTimperativeCSFactoryImpl extends EFactoryImpl implements QVTimper
 	public @NonNull DomainCS createDomainCS() {
 		DomainCSImpl domainCS = new DomainCSImpl();
 		return domainCS;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public @NonNull EnforcementOperationCS createEnforcementOperationCS() {
-		EnforcementOperationCSImpl enforcementOperationCS = new EnforcementOperationCSImpl();
-		return enforcementOperationCS;
 	}
 
 	/**

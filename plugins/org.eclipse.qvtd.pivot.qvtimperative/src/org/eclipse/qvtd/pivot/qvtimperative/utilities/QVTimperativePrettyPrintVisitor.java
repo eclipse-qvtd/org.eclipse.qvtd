@@ -27,7 +27,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.ConnectionStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.CorePattern;
-import org.eclipse.qvtd.pivot.qvtimperative.EnforcementOperation;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeBottomPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
@@ -122,12 +121,6 @@ public class QVTimperativePrettyPrintVisitor extends QVTbasePrettyPrintVisitor i
 
 	@Override
 	public Object visitCorePattern(@NonNull CorePattern object) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Object visitEnforcementOperation(@NonNull EnforcementOperation object) {
 		// TODO Auto-generated method stub
 		return null;
 	}

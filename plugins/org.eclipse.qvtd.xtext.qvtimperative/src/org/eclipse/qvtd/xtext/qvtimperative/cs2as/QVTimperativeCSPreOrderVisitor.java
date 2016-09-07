@@ -44,7 +44,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.xtext.qvtimperativecs.BottomPatternCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DomainCS;
-import org.eclipse.qvtd.xtext.qvtimperativecs.EnforcementOperationCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.GuardPatternCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.ImperativeDomainCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS;
@@ -209,11 +208,6 @@ public class QVTimperativeCSPreOrderVisitor extends AbstractQVTimperativeCSPreOr
 
 	@Override
 	public Continuation<?> visitDomainCS(@NonNull DomainCS csElement) {
-		return null;
-	}
-
-	@Override
-	public Continuation<?> visitEnforcementOperationCS(@NonNull EnforcementOperationCS csElement) {
 		return null;
 	}
 

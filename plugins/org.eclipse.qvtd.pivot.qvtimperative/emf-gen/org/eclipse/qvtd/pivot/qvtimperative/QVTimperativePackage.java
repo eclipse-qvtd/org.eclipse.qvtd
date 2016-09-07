@@ -12,7 +12,6 @@ package org.eclipse.qvtd.pivot.qvtimperative;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jdt.annotation.NonNull;
@@ -32,18 +31,18 @@ import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
  * <!-- end-user-doc -->
  * <!-- begin-model-doc -->
  * The Package for an Imperative QVT transformation.
- * 
+ *
  * An Imperative QVT trabsformation is expected to be created by an autogenerator that observes the following run-time restrictions:
- * 
+ *
  * A mapping that my be re-invoked must have MappingCall.isInfinite set for every possible invocation.
- * 
+ *
  * A mapping that reads object slots before they are guaranteed to have been assigned must declare the slots property in a corresponding ImperativeArea.checkedProperties entry.
- * 
+ *
  * A mapping that assigns an object slot that any mapping may access before assignment is guaranteed must declare declare the slots property in a corresponding ImperativeArea.enforcedProperties entry.
- * 
+ *
  * All reads by Functions/Queries must be guaranteed to succeed; i.e. the invoking mapping must check readiness before calling the query.
- * 
- * All writes to multi-valued properties must be guaranteed to occur before any read of the property. 
+ *
+ * All writes to multi-valued properties must be guaranteed to occur before any read of the property.
  * <!-- end-model-doc -->
  * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeFactory
  * @generated
@@ -418,22 +417,13 @@ public interface QVTimperativePackage extends EPackage {
 	int BOTTOM_PATTERN__ASSIGNMENT = CORE_PATTERN_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Enforcement Operation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BOTTOM_PATTERN__ENFORCEMENT_OPERATION = CORE_PATTERN_FEATURE_COUNT + 2;
-
-	/**
 	 * The feature id for the '<em><b>Realized Variable</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BOTTOM_PATTERN__REALIZED_VARIABLE = CORE_PATTERN_FEATURE_COUNT + 3;
+	int BOTTOM_PATTERN__REALIZED_VARIABLE = CORE_PATTERN_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Bottom Pattern</em>' class.
@@ -442,7 +432,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BOTTOM_PATTERN_FEATURE_COUNT = CORE_PATTERN_FEATURE_COUNT + 4;
+	int BOTTOM_PATTERN_FEATURE_COUNT = CORE_PATTERN_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.ConnectionAssignmentImpl <em>Connection Assignment</em>}' class.
@@ -543,7 +533,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.QVTimperativePackageImpl#getImperativeArea()
 	 * @generated
 	 */
-	int IMPERATIVE_AREA = 10;
+	int IMPERATIVE_AREA = 9;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.ImperativeBottomPatternImpl <em>Imperative Bottom Pattern</em>}' class.
@@ -553,7 +543,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.QVTimperativePackageImpl#getImperativeBottomPattern()
 	 * @generated
 	 */
-	int IMPERATIVE_BOTTOM_PATTERN = 11;
+	int IMPERATIVE_BOTTOM_PATTERN = 10;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.ImperativeDomainImpl <em>Imperative Domain</em>}' class.
@@ -563,7 +553,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.QVTimperativePackageImpl#getImperativeDomain()
 	 * @generated
 	 */
-	int IMPERATIVE_DOMAIN = 12;
+	int IMPERATIVE_DOMAIN = 11;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.ImperativeModelImpl <em>Imperative Model</em>}' class.
@@ -573,7 +563,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.QVTimperativePackageImpl#getImperativeModel()
 	 * @generated
 	 */
-	int IMPERATIVE_MODEL = 13;
+	int IMPERATIVE_MODEL = 12;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingImpl <em>Mapping</em>}' class.
@@ -583,7 +573,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.QVTimperativePackageImpl#getMapping()
 	 * @generated
 	 */
-	int MAPPING = 14;
+	int MAPPING = 13;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingStatementImpl <em>Mapping Statement</em>}' class.
@@ -593,7 +583,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.QVTimperativePackageImpl#getMappingStatement()
 	 * @generated
 	 */
-	int MAPPING_STATEMENT = 19;
+	int MAPPING_STATEMENT = 18;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -1049,88 +1039,6 @@ public interface QVTimperativePackage extends EPackage {
 	int CORE_DOMAIN_FEATURE_COUNT = QVTbasePackage.DOMAIN_FEATURE_COUNT + 2;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.EnforcementOperationImpl <em>Enforcement Operation</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.EnforcementOperationImpl
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.QVTimperativePackageImpl#getEnforcementOperation()
-	 * @generated
-	 */
-	int ENFORCEMENT_OPERATION = 8;
-
-	/**
-	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENFORCEMENT_OPERATION__ANNOTATING_COMMENTS = PivotPackage.ELEMENT__ANNOTATING_COMMENTS;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENFORCEMENT_OPERATION__OWNED_ANNOTATIONS = PivotPackage.ELEMENT__OWNED_ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENFORCEMENT_OPERATION__OWNED_COMMENTS = PivotPackage.ELEMENT__OWNED_COMMENTS;
-
-	/**
-	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENFORCEMENT_OPERATION__OWNED_EXTENSIONS = PivotPackage.ELEMENT__OWNED_EXTENSIONS;
-
-	/**
-	 * The feature id for the '<em><b>Enforcement Mode</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENFORCEMENT_OPERATION__ENFORCEMENT_MODE = PivotPackage.ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Bottom Pattern</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENFORCEMENT_OPERATION__BOTTOM_PATTERN = PivotPackage.ELEMENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Operation Call Exp</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENFORCEMENT_OPERATION__OPERATION_CALL_EXP = PivotPackage.ELEMENT_FEATURE_COUNT + 2;
-
-	/**
-	 * The number of structural features of the '<em>Enforcement Operation</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENFORCEMENT_OPERATION_FEATURE_COUNT = PivotPackage.ELEMENT_FEATURE_COUNT + 3;
-
-	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.GuardPatternImpl <em>Guard Pattern</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1138,7 +1046,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.QVTimperativePackageImpl#getGuardPattern()
 	 * @generated
 	 */
-	int GUARD_PATTERN = 9;
+	int GUARD_PATTERN = 8;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -1382,15 +1290,6 @@ public interface QVTimperativePackage extends EPackage {
 	 * @ordered
 	 */
 	int IMPERATIVE_BOTTOM_PATTERN__ASSIGNMENT = BOTTOM_PATTERN__ASSIGNMENT;
-
-	/**
-	 * The feature id for the '<em><b>Enforcement Operation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IMPERATIVE_BOTTOM_PATTERN__ENFORCEMENT_OPERATION = BOTTOM_PATTERN__ENFORCEMENT_OPERATION;
 
 	/**
 	 * The feature id for the '<em><b>Realized Variable</b></em>' containment reference list.
@@ -1805,7 +1704,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.QVTimperativePackageImpl#getMappingCall()
 	 * @generated
 	 */
-	int MAPPING_CALL = 15;
+	int MAPPING_CALL = 14;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -1932,7 +1831,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.QVTimperativePackageImpl#getMappingCallBinding()
 	 * @generated
 	 */
-	int MAPPING_CALL_BINDING = 16;
+	int MAPPING_CALL_BINDING = 15;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -2023,7 +1922,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.QVTimperativePackageImpl#getMappingLoop()
 	 * @generated
 	 */
-	int MAPPING_LOOP = 17;
+	int MAPPING_LOOP = 16;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -2168,7 +2067,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.QVTimperativePackageImpl#getMappingSequence()
 	 * @generated
 	 */
-	int MAPPING_SEQUENCE = 18;
+	int MAPPING_SEQUENCE = 17;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -2277,7 +2176,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.QVTimperativePackageImpl#getNavigationAssignment()
 	 * @generated
 	 */
-	int NAVIGATION_ASSIGNMENT = 20;
+	int NAVIGATION_ASSIGNMENT = 19;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -2368,7 +2267,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.QVTimperativePackageImpl#getOppositePropertyAssignment()
 	 * @generated
 	 */
-	int OPPOSITE_PROPERTY_ASSIGNMENT = 21;
+	int OPPOSITE_PROPERTY_ASSIGNMENT = 20;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -2468,7 +2367,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.QVTimperativePackageImpl#getPropertyAssignment()
 	 * @generated
 	 */
-	int PROPERTY_ASSIGNMENT = 22;
+	int PROPERTY_ASSIGNMENT = 21;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -2568,7 +2467,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.QVTimperativePackageImpl#getRealizedVariable()
 	 * @generated
 	 */
-	int REALIZED_VARIABLE = 23;
+	int REALIZED_VARIABLE = 22;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -2695,7 +2594,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.QVTimperativePackageImpl#getVariableAssignment()
 	 * @generated
 	 */
-	int VARIABLE_ASSIGNMENT = 24;
+	int VARIABLE_ASSIGNMENT = 23;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -2786,7 +2685,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.QVTimperativePackageImpl#getVariablePredicate()
 	 * @generated
 	 */
-	int VARIABLE_PREDICATE = 25;
+	int VARIABLE_PREDICATE = 24;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -2859,16 +2758,6 @@ public interface QVTimperativePackage extends EPackage {
 	 * @ordered
 	 */
 	int VARIABLE_PREDICATE_FEATURE_COUNT = QVTbasePackage.PREDICATE_FEATURE_COUNT + 1;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtimperative.EnforcementMode <em>Enforcement Mode</em>}' enum.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.EnforcementMode
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.QVTimperativePackageImpl#getEnforcementMode()
-	 * @generated
-	 */
-	int ENFORCEMENT_MODE = 26;
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtimperative.Area <em>Area</em>}'.
@@ -2978,17 +2867,6 @@ public interface QVTimperativePackage extends EPackage {
 	EReference getBottomPattern_Assignment();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.pivot.qvtimperative.BottomPattern#getEnforcementOperation <em>Enforcement Operation</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Enforcement Operation</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.BottomPattern#getEnforcementOperation()
-	 * @see #getBottomPattern()
-	 * @generated
-	 */
-	EReference getBottomPattern_EnforcementOperation();
-
-	/**
 	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.pivot.qvtimperative.BottomPattern#getRealizedVariable <em>Realized Variable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3092,49 +2970,6 @@ public interface QVTimperativePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getCorePattern_Variable();
-
-	/**
-	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtimperative.EnforcementOperation <em>Enforcement Operation</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Enforcement Operation</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.EnforcementOperation
-	 * @generated
-	 */
-	EClass getEnforcementOperation();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtimperative.EnforcementOperation#getEnforcementMode <em>Enforcement Mode</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Enforcement Mode</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.EnforcementOperation#getEnforcementMode()
-	 * @see #getEnforcementOperation()
-	 * @generated
-	 */
-	EAttribute getEnforcementOperation_EnforcementMode();
-
-	/**
-	 * Returns the meta object for the container reference '{@link org.eclipse.qvtd.pivot.qvtimperative.EnforcementOperation#getBottomPattern <em>Bottom Pattern</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Bottom Pattern</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.EnforcementOperation#getBottomPattern()
-	 * @see #getEnforcementOperation()
-	 * @generated
-	 */
-	EReference getEnforcementOperation_BottomPattern();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.pivot.qvtimperative.EnforcementOperation#getOperationCallExp <em>Operation Call Exp</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Operation Call Exp</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.EnforcementOperation#getOperationCallExp()
-	 * @see #getEnforcementOperation()
-	 * @generated
-	 */
-	EReference getEnforcementOperation_OperationCallExp();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtimperative.GuardPattern <em>Guard Pattern</em>}'.
@@ -3549,16 +3384,6 @@ public interface QVTimperativePackage extends EPackage {
 	EReference getVariablePredicate_TargetVariable();
 
 	/**
-	 * Returns the meta object for enum '{@link org.eclipse.qvtd.pivot.qvtimperative.EnforcementMode <em>Enforcement Mode</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for enum '<em>Enforcement Mode</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.EnforcementMode
-	 * @generated
-	 */
-	EEnum getEnforcementMode();
-
-	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3667,14 +3492,6 @@ public interface QVTimperativePackage extends EPackage {
 		EReference BOTTOM_PATTERN__ASSIGNMENT = eINSTANCE.getBottomPattern_Assignment();
 
 		/**
-		 * The meta object literal for the '<em><b>Enforcement Operation</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference BOTTOM_PATTERN__ENFORCEMENT_OPERATION = eINSTANCE.getBottomPattern_EnforcementOperation();
-
-		/**
 		 * The meta object literal for the '<em><b>Realized Variable</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3763,40 +3580,6 @@ public interface QVTimperativePackage extends EPackage {
 		 * @generated
 		 */
 		EReference CORE_PATTERN__VARIABLE = eINSTANCE.getCorePattern_Variable();
-
-		/**
-		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.EnforcementOperationImpl <em>Enforcement Operation</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.EnforcementOperationImpl
-		 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.QVTimperativePackageImpl#getEnforcementOperation()
-		 * @generated
-		 */
-		EClass ENFORCEMENT_OPERATION = eINSTANCE.getEnforcementOperation();
-
-		/**
-		 * The meta object literal for the '<em><b>Enforcement Mode</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ENFORCEMENT_OPERATION__ENFORCEMENT_MODE = eINSTANCE.getEnforcementOperation_EnforcementMode();
-
-		/**
-		 * The meta object literal for the '<em><b>Bottom Pattern</b></em>' container reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ENFORCEMENT_OPERATION__BOTTOM_PATTERN = eINSTANCE.getEnforcementOperation_BottomPattern();
-
-		/**
-		 * The meta object literal for the '<em><b>Operation Call Exp</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ENFORCEMENT_OPERATION__OPERATION_CALL_EXP = eINSTANCE.getEnforcementOperation_OperationCallExp();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.GuardPatternImpl <em>Guard Pattern</em>}' class.
@@ -4143,16 +3926,6 @@ public interface QVTimperativePackage extends EPackage {
 		 * @generated
 		 */
 		EReference VARIABLE_PREDICATE__TARGET_VARIABLE = eINSTANCE.getVariablePredicate_TargetVariable();
-
-		/**
-		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtimperative.EnforcementMode <em>Enforcement Mode</em>}' enum.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipse.qvtd.pivot.qvtimperative.EnforcementMode
-		 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.QVTimperativePackageImpl#getEnforcementMode()
-		 * @generated
-		 */
-		EEnum ENFORCEMENT_MODE = eINSTANCE.getEnforcementMode();
 
 	}
 

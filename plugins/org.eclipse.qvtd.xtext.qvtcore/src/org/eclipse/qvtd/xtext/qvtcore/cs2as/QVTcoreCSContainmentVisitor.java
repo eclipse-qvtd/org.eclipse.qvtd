@@ -138,14 +138,6 @@ public class QVTcoreCSContainmentVisitor extends AbstractQVTcoreCSContainmentVis
 		super(context);
 	}
 
-	protected @NonNull BottomPattern createBottomPattern(@NonNull BottomPatternCS csElement) {
-		return context.refreshModelElement(BottomPattern.class, QVTcorePackage.Literals.BOTTOM_PATTERN, csElement);
-	}
-
-	protected @NonNull CoreDomain createDomain(@NonNull DomainCS csElement) {
-		return context.refreshModelElement(CoreDomain.class, QVTcorePackage.Literals.CORE_DOMAIN, csElement);
-	}
-
 	protected void resolveTransformationMappings(@NonNull Iterable<? extends @NonNull MappingCS> csMappings) {
 		Map<@NonNull Transformation, List<@NonNull Mapping>> tx2mappings = new HashMap<@NonNull Transformation, List<@NonNull Mapping>>();
 		for (@NonNull MappingCS csMapping : csMappings) {
@@ -207,7 +199,7 @@ public class QVTcoreCSContainmentVisitor extends AbstractQVTcoreCSContainmentVis
 
 	@Override
 	public Continuation<?> visitBottomPatternCS(@NonNull BottomPatternCS csElement) {
-		@NonNull BottomPattern pBottomPattern = createBottomPattern(csElement);
+		BottomPattern pBottomPattern = context.refreshModelElement(BottomPattern.class, QVTcorePackage.Literals.BOTTOM_PATTERN, csElement);
 		context.refreshPivotList(RealizedVariable.class, pBottomPattern.getRealizedVariable(), csElement.getOwnedRealizedVariables());
 		context.refreshPivotList(Variable.class, pBottomPattern.getVariable(), csElement.getOwnedUnrealizedVariables());
 		context.refreshPivotList(EnforcementOperation.class, pBottomPattern.getEnforcementOperation(), csElement.getOwnedEnforcementOperations());
@@ -229,7 +221,7 @@ public class QVTcoreCSContainmentVisitor extends AbstractQVTcoreCSContainmentVis
 		if ((eContainer instanceof MappingCS) && (((MappingCS)eContainer).getOwnedMiddle() == csElement)) {
 			return null;
 		}
-		@NonNull CoreDomain pivotElement = createDomain(csElement);
+		CoreDomain pivotElement = context.refreshModelElement(CoreDomain.class, QVTcorePackage.Literals.CORE_DOMAIN, csElement);
 		pivotElement.setIsCheckable(csElement.isIsCheck());
 		pivotElement.setIsEnforceable(csElement.isIsEnforce());
 		pivotElement.setBottomPattern(PivotUtil.getPivot(BottomPattern.class, csElement.getOwnedBottomPattern()));

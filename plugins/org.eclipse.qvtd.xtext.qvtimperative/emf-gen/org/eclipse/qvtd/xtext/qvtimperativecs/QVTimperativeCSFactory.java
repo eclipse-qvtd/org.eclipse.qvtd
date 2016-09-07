@@ -67,15 +67,6 @@ public interface QVTimperativeCSFactory extends EFactory {
 	@NonNull DomainCS createDomainCS();
 
 	/**
-	 * Returns a new object of class '<em>Enforcement Operation CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Enforcement Operation CS</em>'.
-	 * @generated
-	 */
-	@NonNull EnforcementOperationCS createEnforcementOperationCS();
-
-	/**
 	 * Returns a new object of class '<em>Guard Pattern CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

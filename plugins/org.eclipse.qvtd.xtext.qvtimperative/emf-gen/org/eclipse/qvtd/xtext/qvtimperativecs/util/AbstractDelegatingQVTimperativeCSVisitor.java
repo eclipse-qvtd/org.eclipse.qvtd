@@ -61,11 +61,6 @@ public abstract class AbstractDelegatingQVTimperativeCSVisitor<R, C, @NonNull D 
 	}
 
 	@Override
-	public R visitEnforcementOperationCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull EnforcementOperationCS object) {
-		return delegate.visitEnforcementOperationCS(object);
-	}
-
-	@Override
 	public R visitGuardPatternCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull GuardPatternCS object) {
 		return delegate.visitGuardPatternCS(object);
 	}

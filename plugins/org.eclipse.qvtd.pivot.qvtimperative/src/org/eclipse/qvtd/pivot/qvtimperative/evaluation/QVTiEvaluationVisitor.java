@@ -44,7 +44,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.ConnectionStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.CorePattern;
-import org.eclipse.qvtd.pivot.qvtimperative.EnforcementOperation;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeBottomPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
@@ -157,11 +156,6 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 
 	@Override
 	public @Nullable Object visitCorePattern(@NonNull CorePattern object) {
-		return visiting(object);
-	}
-
-	@Override
-	public @Nullable Object visitEnforcementOperation(@NonNull EnforcementOperation object) {
 		return visiting(object);
 	}
 

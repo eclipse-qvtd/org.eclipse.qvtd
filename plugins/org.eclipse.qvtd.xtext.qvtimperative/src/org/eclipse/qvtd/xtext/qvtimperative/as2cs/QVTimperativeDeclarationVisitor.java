@@ -78,7 +78,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.ConnectionStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.CorePattern;
-import org.eclipse.qvtd.pivot.qvtimperative.EnforcementOperation;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeBottomPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
@@ -454,11 +453,6 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 	@Override
 	public ElementCS visitDomain(@NonNull Domain object) {
 		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public ElementCS visitEnforcementOperation(@NonNull EnforcementOperation object) {
-		throw new UnsupportedOperationException();			// FIXME
 	}
 
 	@Override

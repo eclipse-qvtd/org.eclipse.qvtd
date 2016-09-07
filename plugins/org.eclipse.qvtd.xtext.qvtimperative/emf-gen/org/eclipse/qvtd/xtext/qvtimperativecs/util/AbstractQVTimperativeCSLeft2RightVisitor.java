@@ -69,11 +69,6 @@ public abstract class AbstractQVTimperativeCSLeft2RightVisitor
 	}
 
 	@Override
-	public @Nullable Element visitEnforcementOperationCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull EnforcementOperationCS csElement) {
-		return visitModelElementCS(csElement);
-	}
-
-	@Override
 	public @Nullable Element visitGuardPatternCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull GuardPatternCS csElement) {
 		return visitPatternCS(csElement);
 	}

@@ -24,7 +24,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.ConnectionStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.CorePattern;
-import org.eclipse.qvtd.pivot.qvtimperative.EnforcementOperation;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeBottomPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
@@ -120,13 +119,6 @@ public class QVTimperativeToStringVisitor extends QVTbaseToStringVisitor impleme
 	@Override
 	public String visitCorePattern(@NonNull CorePattern object) {
 		append("CorePattern ");
-		//		appendName(object);
-		return null;
-	}
-
-	@Override
-	public String visitEnforcementOperation(@NonNull EnforcementOperation object) {
-		append("EnforcementOperation ");
 		//		appendName(object);
 		return null;
 	}

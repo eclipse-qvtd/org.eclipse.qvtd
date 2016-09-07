@@ -153,17 +153,6 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTimperativeCSPackage.ENFORCEMENT_OPERATION_CS: {
-				EnforcementOperationCS enforcementOperationCS = (EnforcementOperationCS)theEObject;
-				T result = caseEnforcementOperationCS(enforcementOperationCS);
-				if (result == null) result = caseModelElementCS(enforcementOperationCS);
-				if (result == null) result = casePivotableElementCS(enforcementOperationCS);
-				if (result == null) result = caseElementCS(enforcementOperationCS);
-				if (result == null) result = casePivotable(enforcementOperationCS);
-				if (result == null) result = caseVisitableCS(enforcementOperationCS);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case QVTimperativeCSPackage.GUARD_PATTERN_CS: {
 				GuardPatternCS guardPatternCS = (GuardPatternCS)theEObject;
 				T result = caseGuardPatternCS(guardPatternCS);
@@ -506,21 +495,6 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseDomainCS(DomainCS object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Enforcement Operation CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Enforcement Operation CS</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseEnforcementOperationCS(EnforcementOperationCS object) {
 		return null;
 	}
 

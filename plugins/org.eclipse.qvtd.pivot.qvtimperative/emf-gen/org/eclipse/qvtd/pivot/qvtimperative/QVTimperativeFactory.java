@@ -85,15 +85,6 @@ public interface QVTimperativeFactory extends EFactory {
 	CorePattern createCorePattern();
 
 	/**
-	 * Returns a new object of class '<em>Enforcement Operation</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Enforcement Operation</em>'.
-	 * @generated
-	 */
-	EnforcementOperation createEnforcementOperation();
-
-	/**
 	 * Returns a new object of class '<em>Guard Pattern</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

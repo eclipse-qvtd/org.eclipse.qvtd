@@ -32,7 +32,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.Assignment;
 import org.eclipse.qvtd.pivot.qvtimperative.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.CorePattern;
-import org.eclipse.qvtd.pivot.qvtimperative.EnforcementOperation;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
@@ -249,14 +248,6 @@ implements IQVTiEvaluationVisitor {
 	@Override
 	public @Nullable Object visitCorePattern(@NonNull CorePattern corePattern) {
 		return delegate.visitCorePattern(corePattern);
-	}
-
-	/**
-	 * Delegates to my decorated visitor.
-	 */
-	@Override
-	public @Nullable Object visitEnforcementOperation(@NonNull EnforcementOperation enforcementOperation) {
-		return delegate.visitEnforcementOperation(enforcementOperation);
 	}
 
 	/**

@@ -23,7 +23,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.Assignment;
 import org.eclipse.qvtd.pivot.qvtimperative.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.CorePattern;
-import org.eclipse.qvtd.pivot.qvtimperative.EnforcementOperation;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
@@ -75,10 +74,6 @@ public class QVTimperativeLabelProvider extends QVTbaseLabelProvider
 
 	protected String image(DomainCS ele) {
 		return QVTIMPERATIVE_UI_ICONS + "CoreDomain.gif";
-	}
-
-	protected String image(EnforcementOperation ele) {
-		return QVTIMPERATIVE_UI_ICONS + "EnforcementOperation.gif";
 	}
 
 	protected String image(GuardPattern ele) {

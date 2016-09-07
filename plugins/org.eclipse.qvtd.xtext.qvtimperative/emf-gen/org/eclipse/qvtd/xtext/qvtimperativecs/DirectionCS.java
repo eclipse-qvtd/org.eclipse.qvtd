@@ -16,6 +16,7 @@ package org.eclipse.qvtd.xtext.qvtimperativecs;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.ocl.xtext.basecs.NamedElementCS;
+import org.eclipse.qvtd.pivot.qvtimperative.CoreDomain;
 
 /**
  * <!-- begin-user-doc -->
@@ -65,6 +66,6 @@ public interface DirectionCS extends NamedElementCS {
 	 * @model
 	 * @generated
 	 */
-	EList<org.eclipse.qvtd.pivot.qvtimperative.CoreDomain> getUses();
+	EList<CoreDomain> getUses();
 
 } // DirectionCS

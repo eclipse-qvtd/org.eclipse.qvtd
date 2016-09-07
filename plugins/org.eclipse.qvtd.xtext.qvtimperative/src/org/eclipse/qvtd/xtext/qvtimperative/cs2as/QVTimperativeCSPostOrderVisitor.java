@@ -52,7 +52,6 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.BottomPatternCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.ConnectionStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DomainCS;
-import org.eclipse.qvtd.xtext.qvtimperativecs.EnforcementOperationCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.GuardPatternCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.ImperativeRealizedVariableCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS;
@@ -206,11 +205,6 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 
 	@Override
 	public Continuation<?> visitDomainCS(@NonNull DomainCS csElement) {
-		return null;
-	}
-
-	@Override
-	public Continuation<?> visitEnforcementOperationCS(@NonNull EnforcementOperationCS object) {
 		return null;
 	}
 

@@ -79,11 +79,6 @@ public abstract class AbstractQVTimperativeAS2XMIidVisitor
 	}
 
 	@Override
-	public @Nullable Boolean visitEnforcementOperation(org.eclipse.qvtd.pivot.qvtimperative.@NonNull EnforcementOperation object) {
-		return visitElement(object);
-	}
-
-	@Override
 	public @Nullable Boolean visitGuardPattern(org.eclipse.qvtd.pivot.qvtimperative.@NonNull GuardPattern object) {
 		return visitCorePattern(object);
 	}

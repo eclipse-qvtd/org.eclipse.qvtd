@@ -51,7 +51,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.ConnectionAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.CoreDomain;
-import org.eclipse.qvtd.pivot.qvtimperative.EnforcementOperation;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeBottomPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
@@ -71,7 +70,6 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.BottomPatternCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.ConnectionStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DomainCS;
-import org.eclipse.qvtd.xtext.qvtimperativecs.EnforcementOperationCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.GuardPatternCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.ImperativePredicateOrAssignmentCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.ImperativeRealizedVariableCS;
@@ -159,14 +157,6 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 		super(context);
 	}
 
-	protected @NonNull ImperativeBottomPattern createBottomPattern(@NonNull BottomPatternCS csElement) {
-		return context.refreshModelElement(ImperativeBottomPattern.class, QVTimperativePackage.Literals.IMPERATIVE_BOTTOM_PATTERN, csElement);
-	}
-
-	protected @NonNull ImperativeDomain createDomain(@NonNull DomainCS csElement) {
-		return context.refreshModelElement(ImperativeDomain.class, QVTimperativePackage.Literals.IMPERATIVE_DOMAIN, csElement);
-	}
-
 	protected void resolveTransformationMappings(@NonNull Iterable<? extends @NonNull MappingCS> csMappings) {
 		Map<@NonNull Transformation, List<@NonNull Mapping>> tx2mappings = new HashMap<@NonNull Transformation, List<@NonNull Mapping>>();
 		for (@NonNull MappingCS csMapping : csMappings) {
@@ -228,10 +218,9 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 
 	@Override
 	public Continuation<?> visitBottomPatternCS(@NonNull BottomPatternCS csElement) {
-		@NonNull BottomPattern pBottomPattern = createBottomPattern(csElement);
+		BottomPattern pBottomPattern = context.refreshModelElement(ImperativeBottomPattern.class, QVTimperativePackage.Literals.IMPERATIVE_BOTTOM_PATTERN, csElement);
 		context.refreshPivotList(RealizedVariable.class, pBottomPattern.getRealizedVariable(), csElement.getOwnedRealizedVariables());
 		context.refreshPivotList(Variable.class, pBottomPattern.getVariable(), csElement.getOwnedUnrealizedVariables());
-		context.refreshPivotList(EnforcementOperation.class, pBottomPattern.getEnforcementOperation(), csElement.getOwnedEnforcementOperations());
 		context.refreshPivotList(Assignment.class, pBottomPattern.getAssignment(), Iterables.filter(csElement.getOwnedConstraints(), IsAssignmentPredicate.INSTANCE));
 		context.refreshPivotList(Predicate.class, pBottomPattern.getPredicate(), Iterables.filter(csElement.getOwnedConstraints(), IsPredicatePredicate.INSTANCE));
 		context.refreshComments(pBottomPattern, csElement);
@@ -261,19 +250,13 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 		if ((eContainer instanceof MappingCS) && (((MappingCS)eContainer).getOwnedMiddle() == csElement)) {
 			return null;
 		}
-		@NonNull CoreDomain pivotElement = createDomain(csElement);
+		CoreDomain pivotElement = context.refreshModelElement(ImperativeDomain.class, QVTimperativePackage.Literals.IMPERATIVE_DOMAIN, csElement);
 		pivotElement.setIsCheckable(csElement.isIsCheck());
 		pivotElement.setIsEnforceable(csElement.isIsEnforce());
 		pivotElement.setBottomPattern(PivotUtil.getPivot(BottomPattern.class, csElement.getOwnedBottomPattern()));
 		pivotElement.setGuardPattern(PivotUtil.getPivot(GuardPattern.class, csElement.getOwnedGuardPattern()));
 		context.refreshComments(pivotElement, csElement);
 		return new DomainContentContinuation(context, csElement);
-	}
-
-	@Override
-	public Continuation<?> visitEnforcementOperationCS(@NonNull EnforcementOperationCS csElement) {
-		context.refreshModelElement(EnforcementOperation.class, QVTimperativePackage.Literals.ENFORCEMENT_OPERATION, csElement);
-		return null;
 	}
 
 	@Override
@@ -326,7 +309,6 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 				bottomPattern = QVTimperativeFactory.eINSTANCE.createImperativeBottomPattern();
 				bottomPattern.getAssignment().clear();
 				bottomPattern.getBindsTo().clear();
-				bottomPattern.getEnforcementOperation().clear();
 				bottomPattern.getPredicate().clear();
 				bottomPattern.getRealizedVariable().clear();
 				bottomPattern.getVariable().clear();

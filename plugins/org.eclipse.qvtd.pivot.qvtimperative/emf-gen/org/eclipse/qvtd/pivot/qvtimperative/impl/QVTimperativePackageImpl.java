@@ -12,7 +12,6 @@ package org.eclipse.qvtd.pivot.qvtimperative.impl;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
@@ -26,8 +25,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.ConnectionStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.CorePattern;
-import org.eclipse.qvtd.pivot.qvtimperative.EnforcementMode;
-import org.eclipse.qvtd.pivot.qvtimperative.EnforcementOperation;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeArea;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeBottomPattern;
@@ -110,13 +107,6 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * @generated
 	 */
 	private EClass corePatternEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass enforcementOperationEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -238,13 +228,6 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	private EClass variablePredicateEClass = null;
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EEnum enforcementModeEEnum = null;
-
-	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
 	 * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
 	 * package URI value.
@@ -272,7 +255,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link QVTimperativePackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -303,7 +286,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		// Mark meta-data to indicate it can't be changed
 		theQVTimperativePackage.freeze();
 
-  
+
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(QVTimperativePackage.eNS_URI, theQVTimperativePackage);
 		return theQVTimperativePackage;
@@ -415,18 +398,8 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * @generated
 	 */
 	@Override
-	public EReference getBottomPattern_EnforcementOperation() {
-		return (EReference)bottomPatternEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EReference getBottomPattern_RealizedVariable() {
-		return (EReference)bottomPatternEClass.getEStructuralFeatures().get(3);
+		return (EReference)bottomPatternEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -517,46 +490,6 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	@Override
 	public EReference getCorePattern_Variable() {
 		return (EReference)corePatternEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getEnforcementOperation() {
-		return enforcementOperationEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EAttribute getEnforcementOperation_EnforcementMode() {
-		return (EAttribute)enforcementOperationEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getEnforcementOperation_BottomPattern() {
-		return (EReference)enforcementOperationEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getEnforcementOperation_OperationCallExp() {
-		return (EReference)enforcementOperationEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -955,16 +888,6 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * @generated
 	 */
 	@Override
-	public EEnum getEnforcementMode() {
-		return enforcementModeEEnum;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public QVTimperativeFactory getQVTimperativeFactory() {
 		return (QVTimperativeFactory)getEFactoryInstance();
 	}
@@ -1000,7 +923,6 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		bottomPatternEClass = createEClass(BOTTOM_PATTERN);
 		createEReference(bottomPatternEClass, BOTTOM_PATTERN__AREA);
 		createEReference(bottomPatternEClass, BOTTOM_PATTERN__ASSIGNMENT);
-		createEReference(bottomPatternEClass, BOTTOM_PATTERN__ENFORCEMENT_OPERATION);
 		createEReference(bottomPatternEClass, BOTTOM_PATTERN__REALIZED_VARIABLE);
 
 		connectionAssignmentEClass = createEClass(CONNECTION_ASSIGNMENT);
@@ -1016,11 +938,6 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 
 		corePatternEClass = createEClass(CORE_PATTERN);
 		createEReference(corePatternEClass, CORE_PATTERN__VARIABLE);
-
-		enforcementOperationEClass = createEClass(ENFORCEMENT_OPERATION);
-		createEAttribute(enforcementOperationEClass, ENFORCEMENT_OPERATION__ENFORCEMENT_MODE);
-		createEReference(enforcementOperationEClass, ENFORCEMENT_OPERATION__BOTTOM_PATTERN);
-		createEReference(enforcementOperationEClass, ENFORCEMENT_OPERATION__OPERATION_CALL_EXP);
 
 		guardPatternEClass = createEClass(GUARD_PATTERN);
 		createEReference(guardPatternEClass, GUARD_PATTERN__AREA);
@@ -1077,9 +994,6 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 
 		variablePredicateEClass = createEClass(VARIABLE_PREDICATE);
 		createEReference(variablePredicateEClass, VARIABLE_PREDICATE__TARGET_VARIABLE);
-
-		// Create enums
-		enforcementModeEEnum = createEEnum(ENFORCEMENT_MODE);
 	}
 
 	/**
@@ -1123,7 +1037,6 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		coreDomainEClass.getESuperTypes().add(theQVTbasePackage.getDomain());
 		coreDomainEClass.getESuperTypes().add(this.getArea());
 		corePatternEClass.getESuperTypes().add(theQVTbasePackage.getPattern());
-		enforcementOperationEClass.getESuperTypes().add(thePivotPackage.getElement());
 		guardPatternEClass.getESuperTypes().add(this.getCorePattern());
 		imperativeAreaEClass.getESuperTypes().add(this.getArea());
 		imperativeBottomPatternEClass.getESuperTypes().add(this.getBottomPattern());
@@ -1159,7 +1072,6 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		initEClass(bottomPatternEClass, BottomPattern.class, "BottomPattern", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getBottomPattern_Area(), this.getArea(), this.getArea_BottomPattern(), "area", null, 1, 1, BottomPattern.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getBottomPattern_Assignment(), this.getAssignment(), this.getAssignment_BottomPattern(), "assignment", null, 0, -1, BottomPattern.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEReference(getBottomPattern_EnforcementOperation(), this.getEnforcementOperation(), this.getEnforcementOperation_BottomPattern(), "enforcementOperation", null, 0, -1, BottomPattern.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getBottomPattern_RealizedVariable(), this.getRealizedVariable(), null, "realizedVariable", null, 0, -1, BottomPattern.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		initEClass(connectionAssignmentEClass, ConnectionAssignment.class, "ConnectionAssignment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1177,11 +1089,6 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		initEReference(getCorePattern_Variable(), thePivotPackage.getVariable(), null, "variable", null, 0, -1, CorePattern.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		addEOperation(corePatternEClass, this.getArea(), "getArea", 1, 1, IS_UNIQUE, IS_ORDERED);
-
-		initEClass(enforcementOperationEClass, EnforcementOperation.class, "EnforcementOperation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getEnforcementOperation_EnforcementMode(), this.getEnforcementMode(), "enforcementMode", null, 0, 1, EnforcementOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getEnforcementOperation_BottomPattern(), this.getBottomPattern(), this.getBottomPattern_EnforcementOperation(), "bottomPattern", null, 0, 1, EnforcementOperation.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getEnforcementOperation_OperationCallExp(), thePivotPackage.getOperationCallExp(), null, "operationCallExp", null, 1, 1, EnforcementOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(guardPatternEClass, GuardPattern.class, "GuardPattern", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getGuardPattern_Area(), this.getArea(), this.getArea_GuardPattern(), "area", null, 1, 1, GuardPattern.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1239,11 +1146,6 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		initEClass(variablePredicateEClass, VariablePredicate.class, "VariablePredicate", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getVariablePredicate_TargetVariable(), thePivotPackage.getVariable(), null, "targetVariable", null, 1, 1, VariablePredicate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		// Initialize enums and add enum literals
-		initEEnum(enforcementModeEEnum, EnforcementMode.class, "EnforcementMode");
-		addEEnumLiteral(enforcementModeEEnum, EnforcementMode.CREATION);
-		addEEnumLiteral(enforcementModeEEnum, EnforcementMode.DELETION);
-
 		// Create resource
 		createResource(eNS_URI);
 
@@ -1261,13 +1163,13 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * @generated
 	 */
 	protected void createImportAnnotations() {
-		String source = "http://www.eclipse.org/OCL/Import";	
+		String source = "http://www.eclipse.org/OCL/Import";
 		addAnnotation
-		  (this, 
-		   source, 
-		   new String[] {
-			 "qvtb", "../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#/"
-		   });
+		(this,
+			source,
+			new String[] {
+				"qvtb", "../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#/"
+		});
 	}
 
 	/**
@@ -1277,61 +1179,61 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * @generated
 	 */
 	protected void createEmofAnnotations() {
-		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";	
+		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";
 		addAnnotation
-		  (getAssignment_Value(), 
-		   source, 
-		   new String[] {
-			 "body", "valueAssignment"
-		   });	
+		(getAssignment_Value(),
+			source,
+			new String[] {
+				"body", "valueAssignment"
+		});
 		addAnnotation
-		  (getConnectionAssignment_TargetVariable(), 
-		   source, 
-		   new String[] {
-			 "body", "assignment"
-		   });	
+		(getConnectionAssignment_TargetVariable(),
+			source,
+			new String[] {
+				"body", "assignment"
+		});
 		addAnnotation
-		  (getConnectionStatement_TargetVariable(), 
-		   source, 
-		   new String[] {
-			 "body", "assignment"
-		   });	
+		(getConnectionStatement_TargetVariable(),
+			source,
+			new String[] {
+				"body", "assignment"
+		});
 		addAnnotation
-		  (getConnectionStatement_Value(), 
-		   source, 
-		   new String[] {
-			 "body", "valueAssignment"
-		   });	
+		(getConnectionStatement_Value(),
+			source,
+			new String[] {
+				"body", "valueAssignment"
+		});
 		addAnnotation
-		  (getNavigationAssignment_SlotExpression(), 
-		   source, 
-		   new String[] {
-			 "body", "slotAssignment"
-		   });	
+		(getNavigationAssignment_SlotExpression(),
+			source,
+			new String[] {
+				"body", "slotAssignment"
+		});
 		addAnnotation
-		  (getOppositePropertyAssignment_TargetProperty(), 
-		   source, 
-		   new String[] {
-			 "body", "assignment"
-		   });	
+		(getOppositePropertyAssignment_TargetProperty(),
+			source,
+			new String[] {
+				"body", "assignment"
+		});
 		addAnnotation
-		  (getPropertyAssignment_TargetProperty(), 
-		   source, 
-		   new String[] {
-			 "body", "assignment"
-		   });	
+		(getPropertyAssignment_TargetProperty(),
+			source,
+			new String[] {
+				"body", "assignment"
+		});
 		addAnnotation
-		  (getVariableAssignment_TargetVariable(), 
-		   source, 
-		   new String[] {
-			 "body", "assignment"
-		   });	
+		(getVariableAssignment_TargetVariable(),
+			source,
+			new String[] {
+				"body", "assignment"
+		});
 		addAnnotation
-		  (getVariablePredicate_TargetVariable(), 
-		   source, 
-		   new String[] {
-			 "body", "predicate"
-		   });
+		(getVariablePredicate_TargetVariable(),
+			source,
+			new String[] {
+				"body", "predicate"
+		});
 	}
 
 } //QVTimperativePackageImpl

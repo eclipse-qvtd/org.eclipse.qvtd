@@ -173,7 +173,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getPatternCS()
 	 * @generated
 	 */
-	int PATTERN_CS = 17;
+	int PATTERN_CS = 16;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -303,22 +303,13 @@ public interface QVTimperativeCSPackage extends EPackage {
 	int BOTTOM_PATTERN_CS__OWNED_UNREALIZED_VARIABLES = PATTERN_CS__OWNED_UNREALIZED_VARIABLES;
 
 	/**
-	 * The feature id for the '<em><b>Owned Enforcement Operations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BOTTOM_PATTERN_CS__OWNED_ENFORCEMENT_OPERATIONS = PATTERN_CS_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Owned Realized Variables</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BOTTOM_PATTERN_CS__OWNED_REALIZED_VARIABLES = PATTERN_CS_FEATURE_COUNT + 1;
+	int BOTTOM_PATTERN_CS__OWNED_REALIZED_VARIABLES = PATTERN_CS_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Owned Constraints</b></em>' containment reference list.
@@ -327,7 +318,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BOTTOM_PATTERN_CS__OWNED_CONSTRAINTS = PATTERN_CS_FEATURE_COUNT + 2;
+	int BOTTOM_PATTERN_CS__OWNED_CONSTRAINTS = PATTERN_CS_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Bottom Pattern CS</em>' class.
@@ -336,7 +327,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BOTTOM_PATTERN_CS_FEATURE_COUNT = PATTERN_CS_FEATURE_COUNT + 3;
+	int BOTTOM_PATTERN_CS_FEATURE_COUNT = PATTERN_CS_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCSImpl <em>Mapping CS</em>}' class.
@@ -346,7 +337,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getMappingCS()
 	 * @generated
 	 */
-	int MAPPING_CS = 10;
+	int MAPPING_CS = 9;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCallBindingCSImpl <em>Mapping Call Binding CS</em>}' class.
@@ -356,7 +347,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getMappingCallBindingCS()
 	 * @generated
 	 */
-	int MAPPING_CALL_BINDING_CS = 11;
+	int MAPPING_CALL_BINDING_CS = 10;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingStatementCSImpl <em>Mapping Statement CS</em>}' class.
@@ -366,7 +357,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getMappingStatementCS()
 	 * @generated
 	 */
-	int MAPPING_STATEMENT_CS = 15;
+	int MAPPING_STATEMENT_CS = 14;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCallCSImpl <em>Mapping Call CS</em>}' class.
@@ -376,7 +367,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getMappingCallCS()
 	 * @generated
 	 */
-	int MAPPING_CALL_CS = 12;
+	int MAPPING_CALL_CS = 11;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingSequenceCSImpl <em>Mapping Sequence CS</em>}' class.
@@ -386,7 +377,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getMappingSequenceCS()
 	 * @generated
 	 */
-	int MAPPING_SEQUENCE_CS = 14;
+	int MAPPING_SEQUENCE_CS = 13;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingLoopCSImpl <em>Mapping Loop CS</em>}' class.
@@ -396,7 +387,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getMappingLoopCS()
 	 * @generated
 	 */
-	int MAPPING_LOOP_CS = 13;
+	int MAPPING_LOOP_CS = 12;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.TopLevelCSImpl <em>Top Level CS</em>}' class.
@@ -406,7 +397,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getTopLevelCS()
 	 * @generated
 	 */
-	int TOP_LEVEL_CS = 23;
+	int TOP_LEVEL_CS = 22;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.ImperativeDomainCSImpl <em>Imperative Domain CS</em>}' class.
@@ -416,7 +407,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getImperativeDomainCS()
 	 * @generated
 	 */
-	int IMPERATIVE_DOMAIN_CS = 7;
+	int IMPERATIVE_DOMAIN_CS = 6;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.ImperativePredicateOrAssignmentCSImpl <em>Imperative Predicate Or Assignment CS</em>}' class.
@@ -426,7 +417,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getImperativePredicateOrAssignmentCS()
 	 * @generated
 	 */
-	int IMPERATIVE_PREDICATE_OR_ASSIGNMENT_CS = 8;
+	int IMPERATIVE_PREDICATE_OR_ASSIGNMENT_CS = 7;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -774,88 +765,6 @@ public interface QVTimperativeCSPackage extends EPackage {
 	int DOMAIN_CS_FEATURE_COUNT = AREA_CS_FEATURE_COUNT + 3;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.EnforcementOperationCSImpl <em>Enforcement Operation CS</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.EnforcementOperationCSImpl
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getEnforcementOperationCS()
-	 * @generated
-	 */
-	int ENFORCEMENT_OPERATION_CS = 5;
-
-	/**
-	 * The feature id for the '<em><b>Csi</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENFORCEMENT_OPERATION_CS__CSI = BaseCSPackage.MODEL_ELEMENT_CS__CSI;
-
-	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENFORCEMENT_OPERATION_CS__PARENT = BaseCSPackage.MODEL_ELEMENT_CS__PARENT;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENFORCEMENT_OPERATION_CS__PIVOT = BaseCSPackage.MODEL_ELEMENT_CS__PIVOT;
-
-	/**
-	 * The feature id for the '<em><b>Original Xmi Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENFORCEMENT_OPERATION_CS__ORIGINAL_XMI_ID = BaseCSPackage.MODEL_ELEMENT_CS__ORIGINAL_XMI_ID;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENFORCEMENT_OPERATION_CS__OWNED_ANNOTATIONS = BaseCSPackage.MODEL_ELEMENT_CS__OWNED_ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Is Deletion</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENFORCEMENT_OPERATION_CS__IS_DELETION = BaseCSPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Owned Operation Call</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENFORCEMENT_OPERATION_CS__OWNED_OPERATION_CALL = BaseCSPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 1;
-
-	/**
-	 * The number of structural features of the '<em>Enforcement Operation CS</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENFORCEMENT_OPERATION_CS_FEATURE_COUNT = BaseCSPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 2;
-
-	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.GuardPatternCSImpl <em>Guard Pattern CS</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -863,7 +772,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getGuardPatternCS()
 	 * @generated
 	 */
-	int GUARD_PATTERN_CS = 6;
+	int GUARD_PATTERN_CS = 5;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -1071,7 +980,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getPredicateOrAssignmentCS()
 	 * @generated
 	 */
-	int PREDICATE_OR_ASSIGNMENT_CS = 19;
+	int PREDICATE_OR_ASSIGNMENT_CS = 18;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -1378,7 +1287,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getRealizeableVariableCS()
 	 * @generated
 	 */
-	int REALIZEABLE_VARIABLE_CS = 21;
+	int REALIZEABLE_VARIABLE_CS = 20;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -1478,7 +1387,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getRealizedVariableCS()
 	 * @generated
 	 */
-	int REALIZED_VARIABLE_CS = 22;
+	int REALIZED_VARIABLE_CS = 21;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -1578,7 +1487,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getImperativeRealizedVariableCS()
 	 * @generated
 	 */
-	int IMPERATIVE_REALIZED_VARIABLE_CS = 9;
+	int IMPERATIVE_REALIZED_VARIABLE_CS = 8;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -2200,7 +2109,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getParamDeclarationCS()
 	 * @generated
 	 */
-	int PARAM_DECLARATION_CS = 16;
+	int PARAM_DECLARATION_CS = 15;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -2300,7 +2209,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getPredicateCS()
 	 * @generated
 	 */
-	int PREDICATE_CS = 18;
+	int PREDICATE_CS = 17;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -2436,7 +2345,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getQueryCS()
 	 * @generated
 	 */
-	int QUERY_CS = 20;
+	int QUERY_CS = 19;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -2680,7 +2589,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getTransformationCS()
 	 * @generated
 	 */
-	int TRANSFORMATION_CS = 24;
+	int TRANSFORMATION_CS = 23;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -2816,7 +2725,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getUnrealizedVariableCS()
 	 * @generated
 	 */
-	int UNREALIZED_VARIABLE_CS = 25;
+	int UNREALIZED_VARIABLE_CS = 24;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -2960,17 +2869,6 @@ public interface QVTimperativeCSPackage extends EPackage {
 	EClass getBottomPatternCS();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtimperativecs.BottomPatternCS#getOwnedEnforcementOperations <em>Owned Enforcement Operations</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Owned Enforcement Operations</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.BottomPatternCS#getOwnedEnforcementOperations()
-	 * @see #getBottomPatternCS()
-	 * @generated
-	 */
-	EReference getBottomPatternCS_OwnedEnforcementOperations();
-
-	/**
 	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtimperativecs.BottomPatternCS#getOwnedRealizedVariables <em>Owned Realized Variables</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3098,38 +2996,6 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getDomainCS_Direction();
-
-	/**
-	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.EnforcementOperationCS <em>Enforcement Operation CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Enforcement Operation CS</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.EnforcementOperationCS
-	 * @generated
-	 */
-	EClass getEnforcementOperationCS();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.xtext.qvtimperativecs.EnforcementOperationCS#isIsDeletion <em>Is Deletion</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Is Deletion</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.EnforcementOperationCS#isIsDeletion()
-	 * @see #getEnforcementOperationCS()
-	 * @generated
-	 */
-	EAttribute getEnforcementOperationCS_IsDeletion();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtimperativecs.EnforcementOperationCS#getOwnedOperationCall <em>Owned Operation Call</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Owned Operation Call</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.EnforcementOperationCS#getOwnedOperationCall()
-	 * @see #getEnforcementOperationCS()
-	 * @generated
-	 */
-	EReference getEnforcementOperationCS_OwnedOperationCall();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.GuardPatternCS <em>Guard Pattern CS</em>}'.
@@ -3830,14 +3696,6 @@ public interface QVTimperativeCSPackage extends EPackage {
 		EClass BOTTOM_PATTERN_CS = eINSTANCE.getBottomPatternCS();
 
 		/**
-		 * The meta object literal for the '<em><b>Owned Enforcement Operations</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference BOTTOM_PATTERN_CS__OWNED_ENFORCEMENT_OPERATIONS = eINSTANCE.getBottomPatternCS_OwnedEnforcementOperations();
-
-		/**
 		 * The meta object literal for the '<em><b>Owned Realized Variables</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3938,32 +3796,6 @@ public interface QVTimperativeCSPackage extends EPackage {
 		 * @generated
 		 */
 		EReference DOMAIN_CS__DIRECTION = eINSTANCE.getDomainCS_Direction();
-
-		/**
-		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.EnforcementOperationCSImpl <em>Enforcement Operation CS</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.EnforcementOperationCSImpl
-		 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getEnforcementOperationCS()
-		 * @generated
-		 */
-		EClass ENFORCEMENT_OPERATION_CS = eINSTANCE.getEnforcementOperationCS();
-
-		/**
-		 * The meta object literal for the '<em><b>Is Deletion</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ENFORCEMENT_OPERATION_CS__IS_DELETION = eINSTANCE.getEnforcementOperationCS_IsDeletion();
-
-		/**
-		 * The meta object literal for the '<em><b>Owned Operation Call</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ENFORCEMENT_OPERATION_CS__OWNED_OPERATION_CALL = eINSTANCE.getEnforcementOperationCS_OwnedOperationCall();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.GuardPatternCSImpl <em>Guard Pattern CS</em>}' class.

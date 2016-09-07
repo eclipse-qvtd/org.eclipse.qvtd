@@ -56,11 +56,6 @@ implements QVTimperativeVisitor<IStepper>
 	}
 
 	@Override
-	public @Nullable IStepper visitEnforcementOperation(org.eclipse.qvtd.pivot.qvtimperative.@NonNull EnforcementOperation object) {
-		return visitElement(object);
-	}
-
-	@Override
 	public @Nullable IStepper visitGuardPattern(org.eclipse.qvtd.pivot.qvtimperative.@NonNull GuardPattern object) {
 		return visitCorePattern(object);
 	}

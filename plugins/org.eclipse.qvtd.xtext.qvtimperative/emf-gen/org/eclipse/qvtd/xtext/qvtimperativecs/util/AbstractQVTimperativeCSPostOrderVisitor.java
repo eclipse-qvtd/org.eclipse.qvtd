@@ -69,11 +69,6 @@ public abstract class AbstractQVTimperativeCSPostOrderVisitor
 	}
 
 	@Override
-	public @Nullable Continuation<?> visitEnforcementOperationCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull EnforcementOperationCS csElement) {
-		return visitModelElementCS(csElement);
-	}
-
-	@Override
 	public @Nullable Continuation<?> visitGuardPatternCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull GuardPatternCS csElement) {
 		return visitPatternCS(csElement);
 	}
