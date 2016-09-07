@@ -19,7 +19,6 @@ module GenerateQVTdAllEditors
  */
 Workflow {
   component = @GenerateQVTbaseEditor {}
-  component = @GenerateQVTcoreBaseEditor {}
   component = @GenerateQVTcoreEditor {}
   component = @GenerateQVTimperativeEditor {}
   component = @GenerateQVTrelationEditor {}

@@ -22,7 +22,6 @@ Workflow {
   component = @GenerateQVTdEvaluationStatusModels {}
   component = @GenerateQVTdCSModels {}
   component = @GenerateQVTdCGModels {}
-  component = @GenerateQVTcoreBaseEditor {}
   component = @GenerateQVTcoreEditor {}
   component = @GenerateQVTimperativeEditor {}
   component = @GenerateQVTrelationEditor {}
