@@ -52,7 +52,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="InputAction" eSuperTypes="#//AbstractAction"/>
   <eClassifiers xsi:type="ecore:EClass" name="MappingAction" eSuperTypes="#//AbstractAction">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="mapping" eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtcorebase/model/QVTcoreBase.ecore#//AbstractMapping"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="mapping" eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtcore/model/QVTcore.ecore#//Mapping"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="OutputAction" eSuperTypes="#//AbstractAction"/>
   <eClassifiers xsi:type="ecore:EClass" name="ParameterDerivation" eSuperTypes="#//ScheduleElement">
