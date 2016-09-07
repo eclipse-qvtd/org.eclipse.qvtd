@@ -23,16 +23,14 @@ import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtbase.impl.RuleImpl;
+import org.eclipse.qvtd.pivot.qvtcore.Area;
+import org.eclipse.qvtd.pivot.qvtcore.BottomPattern;
+import org.eclipse.qvtd.pivot.qvtcore.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
 import org.eclipse.qvtd.pivot.qvtcore.util.QVTcoreVisitor;
-import org.eclipse.qvtd.pivot.qvtcorebase.Area;
-import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
-import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
-import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -61,7 +59,7 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	 * @generated
 	 * @ordered
 	 */
-	protected org.eclipse.qvtd.pivot.qvtcore.GuardPattern guardPattern;
+	protected GuardPattern guardPattern;
 
 	/**
 	 * The cached value of the '{@link #getBottomPattern() <em>Bottom Pattern</em>}' containment reference.
@@ -71,7 +69,7 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	 * @generated
 	 * @ordered
 	 */
-	protected org.eclipse.qvtd.pivot.qvtcore.BottomPattern bottomPattern;
+	protected BottomPattern bottomPattern;
 
 	/**
 	 * The cached value of the '{@link #getLocal() <em>Local</em>}' containment reference list.
@@ -128,7 +126,7 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	 * @generated
 	 */
 	@Override
-	public org.eclipse.qvtd.pivot.qvtcore.GuardPattern getGuardPattern() {
+	public GuardPattern getGuardPattern() {
 		return guardPattern;
 	}
 
@@ -137,8 +135,8 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetGuardPattern(org.eclipse.qvtd.pivot.qvtcore.GuardPattern newGuardPattern, NotificationChain msgs) {
-		org.eclipse.qvtd.pivot.qvtcore.GuardPattern oldGuardPattern = guardPattern;
+	public NotificationChain basicSetGuardPattern(GuardPattern newGuardPattern, NotificationChain msgs) {
+		GuardPattern oldGuardPattern = guardPattern;
 		guardPattern = newGuardPattern;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTcorePackage.MAPPING__GUARD_PATTERN, oldGuardPattern, newGuardPattern);
@@ -152,13 +150,14 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setGuardPattern(org.eclipse.qvtd.pivot.qvtcore.GuardPattern newGuardPattern) {
+	@Override
+	public void setGuardPattern(GuardPattern newGuardPattern) {
 		if (newGuardPattern != guardPattern) {
 			NotificationChain msgs = null;
 			if (guardPattern != null)
-				msgs = ((InternalEObject)guardPattern).eInverseRemove(this, QVTcorePackage.GUARD_PATTERN__AREA, org.eclipse.qvtd.pivot.qvtcore.GuardPattern.class, msgs);
+				msgs = ((InternalEObject)guardPattern).eInverseRemove(this, QVTcorePackage.GUARD_PATTERN__AREA, GuardPattern.class, msgs);
 			if (newGuardPattern != null)
-				msgs = ((InternalEObject)newGuardPattern).eInverseAdd(this, QVTcorePackage.GUARD_PATTERN__AREA, org.eclipse.qvtd.pivot.qvtcore.GuardPattern.class, msgs);
+				msgs = ((InternalEObject)newGuardPattern).eInverseAdd(this, QVTcorePackage.GUARD_PATTERN__AREA, GuardPattern.class, msgs);
 			msgs = basicSetGuardPattern(newGuardPattern, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
@@ -172,7 +171,7 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	 * @generated
 	 */
 	@Override
-	public org.eclipse.qvtd.pivot.qvtcore.BottomPattern getBottomPattern() {
+	public BottomPattern getBottomPattern() {
 		return bottomPattern;
 	}
 
@@ -181,8 +180,8 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetBottomPattern(org.eclipse.qvtd.pivot.qvtcore.BottomPattern newBottomPattern, NotificationChain msgs) {
-		org.eclipse.qvtd.pivot.qvtcore.BottomPattern oldBottomPattern = bottomPattern;
+	public NotificationChain basicSetBottomPattern(BottomPattern newBottomPattern, NotificationChain msgs) {
+		BottomPattern oldBottomPattern = bottomPattern;
 		bottomPattern = newBottomPattern;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTcorePackage.MAPPING__BOTTOM_PATTERN, oldBottomPattern, newBottomPattern);
@@ -196,13 +195,14 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setBottomPattern(org.eclipse.qvtd.pivot.qvtcore.BottomPattern newBottomPattern) {
+	@Override
+	public void setBottomPattern(BottomPattern newBottomPattern) {
 		if (newBottomPattern != bottomPattern) {
 			NotificationChain msgs = null;
 			if (bottomPattern != null)
-				msgs = ((InternalEObject)bottomPattern).eInverseRemove(this, QVTcorePackage.BOTTOM_PATTERN__AREA, org.eclipse.qvtd.pivot.qvtcore.BottomPattern.class, msgs);
+				msgs = ((InternalEObject)bottomPattern).eInverseRemove(this, QVTcorePackage.BOTTOM_PATTERN__AREA, BottomPattern.class, msgs);
 			if (newBottomPattern != null)
-				msgs = ((InternalEObject)newBottomPattern).eInverseAdd(this, QVTcorePackage.BOTTOM_PATTERN__AREA, org.eclipse.qvtd.pivot.qvtcore.BottomPattern.class, msgs);
+				msgs = ((InternalEObject)newBottomPattern).eInverseAdd(this, QVTcorePackage.BOTTOM_PATTERN__AREA, BottomPattern.class, msgs);
 			msgs = basicSetBottomPattern(newBottomPattern, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
@@ -304,11 +304,11 @@ public class MappingImpl extends RuleImpl implements Mapping {
 			case QVTcorePackage.MAPPING__GUARD_PATTERN:
 				if (guardPattern != null)
 					msgs = ((InternalEObject)guardPattern).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTcorePackage.MAPPING__GUARD_PATTERN, null, msgs);
-				return basicSetGuardPattern((org.eclipse.qvtd.pivot.qvtcore.GuardPattern)otherEnd, msgs);
+				return basicSetGuardPattern((GuardPattern)otherEnd, msgs);
 			case QVTcorePackage.MAPPING__BOTTOM_PATTERN:
 				if (bottomPattern != null)
 					msgs = ((InternalEObject)bottomPattern).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTcorePackage.MAPPING__BOTTOM_PATTERN, null, msgs);
-				return basicSetBottomPattern((org.eclipse.qvtd.pivot.qvtcore.BottomPattern)otherEnd, msgs);
+				return basicSetBottomPattern((BottomPattern)otherEnd, msgs);
 			case QVTcorePackage.MAPPING__CONTEXT:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
@@ -395,10 +395,10 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case QVTcorePackage.MAPPING__GUARD_PATTERN:
-				setGuardPattern((org.eclipse.qvtd.pivot.qvtcore.GuardPattern)newValue);
+				setGuardPattern((GuardPattern)newValue);
 				return;
 			case QVTcorePackage.MAPPING__BOTTOM_PATTERN:
-				setBottomPattern((org.eclipse.qvtd.pivot.qvtcore.BottomPattern)newValue);
+				setBottomPattern((BottomPattern)newValue);
 				return;
 			case QVTcorePackage.MAPPING__CONTEXT:
 				setContext((Mapping)newValue);
@@ -428,10 +428,10 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case QVTcorePackage.MAPPING__GUARD_PATTERN:
-				setGuardPattern((org.eclipse.qvtd.pivot.qvtcore.GuardPattern)null);
+				setGuardPattern((GuardPattern)null);
 				return;
 			case QVTcorePackage.MAPPING__BOTTOM_PATTERN:
-				setBottomPattern((org.eclipse.qvtd.pivot.qvtcore.BottomPattern)null);
+				setBottomPattern((BottomPattern)null);
 				return;
 			case QVTcorePackage.MAPPING__CONTEXT:
 				setContext((Mapping)null);
@@ -480,7 +480,7 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	 */
 	@Override
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-		if (baseClass == org.eclipse.qvtd.pivot.qvtcore.Area.class) {
+		if (baseClass == Area.class) {
 			switch (derivedFeatureID) {
 				case QVTcorePackage.MAPPING__GUARD_PATTERN: return QVTcorePackage.AREA__GUARD_PATTERN;
 				case QVTcorePackage.MAPPING__BOTTOM_PATTERN: return QVTcorePackage.AREA__BOTTOM_PATTERN;
@@ -497,7 +497,7 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	 */
 	@Override
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-		if (baseClass == org.eclipse.qvtd.pivot.qvtcore.Area.class) {
+		if (baseClass == Area.class) {
 			switch (baseFeatureID) {
 				case QVTcorePackage.AREA__GUARD_PATTERN: return QVTcorePackage.MAPPING__GUARD_PATTERN;
 				case QVTcorePackage.AREA__BOTTOM_PATTERN: return QVTcorePackage.MAPPING__BOTTOM_PATTERN;

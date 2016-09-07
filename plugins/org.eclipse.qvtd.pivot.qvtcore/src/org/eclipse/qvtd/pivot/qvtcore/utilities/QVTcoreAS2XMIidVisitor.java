@@ -16,16 +16,15 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.internal.utilities.AS2XMIid;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
+import org.eclipse.qvtd.pivot.qvtcore.Assignment;
+import org.eclipse.qvtd.pivot.qvtcore.BottomPattern;
+import org.eclipse.qvtd.pivot.qvtcore.CoreDomain;
+import org.eclipse.qvtd.pivot.qvtcore.CorePattern;
+import org.eclipse.qvtd.pivot.qvtcore.EnforcementOperation;
+import org.eclipse.qvtd.pivot.qvtcore.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
+import org.eclipse.qvtd.pivot.qvtcore.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtcore.util.AbstractQVTcoreAS2XMIidVisitor;
-import org.eclipse.qvtd.pivot.qvtcorebase.Assignment;
-import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
-import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
-import org.eclipse.qvtd.pivot.qvtcorebase.CorePattern;
-import org.eclipse.qvtd.pivot.qvtcorebase.EnforcementOperation;
-import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
-import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
-import org.eclipse.qvtd.pivot.qvtcorebase.utilities.QVTcoreBaseUtil;
 
 public class QVTcoreAS2XMIidVisitor extends AbstractQVTcoreAS2XMIidVisitor
 {
@@ -83,7 +82,7 @@ public class QVTcoreAS2XMIidVisitor extends AbstractQVTcoreAS2XMIidVisitor
 	@Override
 	public @Nullable Boolean visitRealizedVariable(@NonNull RealizedVariable object) {
 		if (object.eContainer() instanceof CorePattern) {
-			Rule rule = QVTcoreBaseUtil.getContainingRule(object);
+			Rule rule = QVTcoreUtil.getContainingRule(object);
 			if((rule != null) && (rule.getName() != null)) {
 				String name = object.getName();
 				if (name != null) {
@@ -101,7 +100,7 @@ public class QVTcoreAS2XMIidVisitor extends AbstractQVTcoreAS2XMIidVisitor
 	public @Nullable Boolean visitVariable(@NonNull Variable object) {
 		EObject eContainer = object.eContainer();
 		if (eContainer instanceof CorePattern) {
-			Rule rule = QVTcoreBaseUtil.getContainingRule(object);
+			Rule rule = QVTcoreUtil.getContainingRule(object);
 			if((rule != null) && (rule.getName() != null)) {
 				String name = object.getName();
 				if (name != null) {

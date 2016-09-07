@@ -41,20 +41,19 @@ import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
+import org.eclipse.qvtd.pivot.qvtcore.Area;
+import org.eclipse.qvtd.pivot.qvtcore.Assignment;
+import org.eclipse.qvtd.pivot.qvtcore.BottomPattern;
+import org.eclipse.qvtd.pivot.qvtcore.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcore.CoreModel;
+import org.eclipse.qvtd.pivot.qvtcore.CorePattern;
+import org.eclipse.qvtd.pivot.qvtcore.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
+import org.eclipse.qvtd.pivot.qvtcore.NavigationAssignment;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcoreFactory;
+import org.eclipse.qvtd.pivot.qvtcore.RealizedVariable;
+import org.eclipse.qvtd.pivot.qvtcore.VariableAssignment;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
-import org.eclipse.qvtd.pivot.qvtcorebase.Area;
-import org.eclipse.qvtd.pivot.qvtcorebase.Assignment;
-import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
-import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
-import org.eclipse.qvtd.pivot.qvtcorebase.CorePattern;
-import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
-import org.eclipse.qvtd.pivot.qvtcorebase.NavigationAssignment;
-import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBaseFactory;
-import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
-import org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment;
 
 import com.google.common.collect.Iterables;
 
@@ -285,7 +284,7 @@ public class QVTu2QVTm extends AbstractQVTc2QVTc
 		}
 
 		protected void synthesize(@NonNull Area mArea) {
-			GuardPattern mGuardPattern = QVTcoreBaseFactory.eINSTANCE.createGuardPattern();
+			GuardPattern mGuardPattern = QVTcoreFactory.eINSTANCE.createGuardPattern();
 			mArea.setGuardPattern(mGuardPattern);
 			createVisitor.createAll(guardPredicates, mGuardPattern.getPredicate());
 			if (navigationAssignmentsAsPredicates != null) {
@@ -298,7 +297,7 @@ public class QVTu2QVTm extends AbstractQVTc2QVTc
 				}
 			}
 			//
-			BottomPattern mBottomPattern = QVTcoreBaseFactory.eINSTANCE.createBottomPattern();
+			BottomPattern mBottomPattern = QVTcoreFactory.eINSTANCE.createBottomPattern();
 			mArea.setBottomPattern(mBottomPattern);
 			createVisitor.createAll(bottomPredicates, mBottomPattern.getPredicate());
 			synthesizeNavigationAssignments(mBottomPattern.getAssignment());
@@ -446,7 +445,7 @@ public class QVTu2QVTm extends AbstractQVTc2QVTc
 		}
 
 		public @NonNull CoreDomain synthesize() {
-			CoreDomain mDomain = QVTcoreBaseFactory.eINSTANCE.createCoreDomain();
+			CoreDomain mDomain = QVTcoreFactory.eINSTANCE.createCoreDomain();
 			//			mDomain.setTypedModel(uTypedModel);
 			mDomain.setName(uTypedModel.getName());
 			boolean isCheckable = uExampleDomain.isIsCheckable();
@@ -689,9 +688,9 @@ public class QVTu2QVTm extends AbstractQVTc2QVTc
 			List<@NonNull VariableAssignment> assignments2 = assignments;
 			List<@NonNull Variable> variables2 = variables;
 			if (variables2 != null) {
-				Variable mVariable = QVTcoreBaseFactory.eINSTANCE.createRealizedVariable();
+				Variable mVariable = QVTcoreFactory.eINSTANCE.createRealizedVariable();
 				if (isRealized) {
-					RealizedVariable realizedVariable = QVTcoreBaseFactory.eINSTANCE.createRealizedVariable();
+					RealizedVariable realizedVariable = QVTcoreFactory.eINSTANCE.createRealizedVariable();
 					mVariable = realizedVariable;
 					mArea.getBottomPattern().getRealizedVariable().add(realizedVariable);
 				}

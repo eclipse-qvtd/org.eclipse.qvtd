@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *     E.D.Willink - initial API and implementation
  ******************************************************************************/
@@ -13,8 +13,8 @@ package org.eclipse.qvtd.compiler.internal.qvtr2qvtc;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Variable;
-import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
-import org.eclipse.qvtd.pivot.qvtcorebase.CorePattern;
+import org.eclipse.qvtd.pivot.qvtcore.CoreDomain;
+import org.eclipse.qvtd.pivot.qvtcore.CorePattern;
 
 /**
  * A ThisVariableAnalysis describes the 'this' variable in relation and core transformations.

@@ -13,9 +13,8 @@
 package org.eclipse.qvtd.pivot.schedule;
 
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
-import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
+import org.eclipse.qvtd.pivot.qvtcore.CoreDomain;
 
 /**
  * <!-- begin-user-doc -->
@@ -86,12 +85,12 @@ public interface AbstractDatum extends ScheduleElement {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Domain</em>' reference.
-	 * @see #setDomain(org.eclipse.qvtd.pivot.qvtcore.CoreDomain)
+	 * @see #setDomain(CoreDomain)
 	 * @see org.eclipse.qvtd.pivot.schedule.SchedulePackage#getAbstractDatum_Domain()
 	 * @model
 	 * @generated
 	 */
-	org.eclipse.qvtd.pivot.qvtcore.CoreDomain getDomain();
+	CoreDomain getDomain();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.schedule.AbstractDatum#getDomain <em>Domain</em>}' reference.
@@ -101,7 +100,7 @@ public interface AbstractDatum extends ScheduleElement {
 	 * @see #getDomain()
 	 * @generated
 	 */
-	void setDomain(org.eclipse.qvtd.pivot.qvtcore.CoreDomain value);
+	void setDomain(CoreDomain value);
 
 	/**
 	 * Returns the value of the '<em><b>Typed Model</b></em>' reference.

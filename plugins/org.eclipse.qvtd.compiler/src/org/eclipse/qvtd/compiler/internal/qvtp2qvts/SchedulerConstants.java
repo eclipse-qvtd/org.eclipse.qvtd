@@ -47,7 +47,7 @@ import org.eclipse.qvtd.pivot.qvtbase.analysis.DomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.DOTStringBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphMLStringBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
-import org.eclipse.qvtd.pivot.qvtcorebase.analysis.RootDomainUsageAnalysis;
+import org.eclipse.qvtd.pivot.qvtcore.analysis.RootDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.pivot.schedule.AbstractDatum;
 import org.eclipse.qvtd.pivot.schedule.ClassDatum;

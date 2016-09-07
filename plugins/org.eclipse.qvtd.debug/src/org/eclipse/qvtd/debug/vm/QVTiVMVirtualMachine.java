@@ -39,7 +39,7 @@ import org.eclipse.qvtd.debug.core.QVTiDebugCore;
 import org.eclipse.qvtd.debug.core.QVTiEvaluationContext;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
-import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
+import org.eclipse.qvtd.pivot.qvtimperative.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 
@@ -156,7 +156,7 @@ public class QVTiVMVirtualMachine extends VMVirtualMachine
 		Element element = location.getElement();
 		StringBuilder s = new StringBuilder();
 		appendElementSignature(s, element);
-		String operSignature = s.toString(); //MessageFormat.format("<{0}>", moduleName); 
+		String operSignature = s.toString(); //MessageFormat.format("<{0}>", moduleName);
 
 		List<VMVariableData> vars = VariableFinder.newInstance(evalEnv, false).getVariables();
 		@SuppressWarnings("null")@NonNull String locationString = location.getURI().toString();

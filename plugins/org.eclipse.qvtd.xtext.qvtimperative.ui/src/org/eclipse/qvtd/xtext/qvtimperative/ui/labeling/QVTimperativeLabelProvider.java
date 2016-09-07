@@ -10,6 +10,7 @@
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtimperative.ui.labeling;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Namespace;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
@@ -18,20 +19,20 @@ import org.eclipse.ocl.pivot.internal.prettyprint.PrettyPrinter;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
-import org.eclipse.qvtd.pivot.qvtcorebase.Assignment;
-import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
-import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
-import org.eclipse.qvtd.pivot.qvtcorebase.CorePattern;
-import org.eclipse.qvtd.pivot.qvtcorebase.EnforcementOperation;
-import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
-import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
-import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
-import org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment;
+import org.eclipse.qvtd.pivot.qvtimperative.Assignment;
+import org.eclipse.qvtd.pivot.qvtimperative.BottomPattern;
+import org.eclipse.qvtd.pivot.qvtimperative.CoreDomain;
+import org.eclipse.qvtd.pivot.qvtimperative.CorePattern;
+import org.eclipse.qvtd.pivot.qvtimperative.EnforcementOperation;
+import org.eclipse.qvtd.pivot.qvtimperative.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingSequence;
+import org.eclipse.qvtd.pivot.qvtimperative.PropertyAssignment;
+import org.eclipse.qvtd.pivot.qvtimperative.RealizedVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.VariableAssignment;
 import org.eclipse.qvtd.xtext.qvtbase.ui.labeling.QVTbaseLabelProvider;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DomainCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.TopLevelCS;
@@ -48,7 +49,7 @@ public class QVTimperativeLabelProvider extends QVTbaseLabelProvider
 	public static final String QVTIMPERATIVE_UI_ICONS = "/org.eclipse.qvtd.xtext.qvtimperative.ui/icons/";
 
 	@Inject
-	public QVTimperativeLabelProvider(org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider delegate) {
+	public QVTimperativeLabelProvider(org.eclipse.emf.edit.ui.provider.@NonNull AdapterFactoryLabelProvider delegate) {
 		super(delegate);
 	}
 

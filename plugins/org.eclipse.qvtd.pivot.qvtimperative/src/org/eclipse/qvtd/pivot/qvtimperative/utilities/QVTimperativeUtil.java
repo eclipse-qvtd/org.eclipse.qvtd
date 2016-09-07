@@ -47,15 +47,9 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory.CreateStrategy;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
-import org.eclipse.qvtd.pivot.qvtcorebase.AbstractMapping;
-import org.eclipse.qvtd.pivot.qvtcorebase.Area;
-import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
-import org.eclipse.qvtd.pivot.qvtcorebase.CorePattern;
-import org.eclipse.qvtd.pivot.qvtcorebase.NavigationAssignment;
-import org.eclipse.qvtd.pivot.qvtcorebase.OppositePropertyAssignment;
-import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
-import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBaseFactory;
-import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.Area;
+import org.eclipse.qvtd.pivot.qvtimperative.CoreDomain;
+import org.eclipse.qvtd.pivot.qvtimperative.CorePattern;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
@@ -64,7 +58,11 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingSequence;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.NavigationAssignment;
+import org.eclipse.qvtd.pivot.qvtimperative.OppositePropertyAssignment;
+import org.eclipse.qvtd.pivot.qvtimperative.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeFactory;
+import org.eclipse.qvtd.pivot.qvtimperative.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.VariablePredicate;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 
@@ -137,7 +135,7 @@ public class QVTimperativeUtil extends QVTbaseUtil
 		coreDomain.setName(typedModel.getName());
 		coreDomain.setTypedModel(typedModel);
 		coreDomain.setBottomPattern(QVTimperativeFactory.eINSTANCE.createImperativeBottomPattern());
-		coreDomain.setGuardPattern(QVTcoreBaseFactory.eINSTANCE.createGuardPattern());
+		coreDomain.setGuardPattern(QVTimperativeFactory.eINSTANCE.createGuardPattern());
 		return coreDomain;
 	}
 
@@ -156,7 +154,7 @@ public class QVTimperativeUtil extends QVTbaseUtil
 		Mapping mapping = QVTimperativeFactory.eINSTANCE.createMapping();
 		mapping.setName(name);
 		mapping.setBottomPattern(QVTimperativeFactory.eINSTANCE.createImperativeBottomPattern());
-		mapping.setGuardPattern(QVTcoreBaseFactory.eINSTANCE.createGuardPattern());
+		mapping.setGuardPattern(QVTimperativeFactory.eINSTANCE.createGuardPattern());
 		return mapping;
 	}
 
@@ -210,7 +208,7 @@ public class QVTimperativeUtil extends QVTbaseUtil
 	}
 
 	public static @NonNull PropertyAssignment createPropertyAssignment(@NonNull OCLExpression slotExpression, @NonNull Property targetProperty, @NonNull OCLExpression value) {
-		PropertyAssignment propertyAssignment = QVTcoreBaseFactory.eINSTANCE.createPropertyAssignment();
+		PropertyAssignment propertyAssignment = QVTimperativeFactory.eINSTANCE.createPropertyAssignment();
 		propertyAssignment.setSlotExpression(slotExpression);
 		propertyAssignment.setTargetProperty(targetProperty);
 		propertyAssignment.setValue(value);
@@ -226,7 +224,7 @@ public class QVTimperativeUtil extends QVTbaseUtil
 	} */
 
 	public static @NonNull RealizedVariable createRealizedVariable(@NonNull String name, @NonNull Type type) {
-		RealizedVariable realizedVariable = QVTcoreBaseFactory.eINSTANCE.createRealizedVariable();
+		RealizedVariable realizedVariable = QVTimperativeFactory.eINSTANCE.createRealizedVariable();
 		realizedVariable.setName(name);
 		realizedVariable.setType(type);
 		realizedVariable.setIsRequired(true);
@@ -245,7 +243,7 @@ public class QVTimperativeUtil extends QVTbaseUtil
 		return typedModel;
 	}
 
-	public static @NonNull Area getArea(@NonNull AbstractMapping mapping, @NonNull TypedModel typedModel) {
+	public static @NonNull Area getArea(@NonNull Mapping mapping, @NonNull TypedModel typedModel) {
 		for (Domain domain : mapping.getDomain()) {
 			if (domain.getTypedModel() == typedModel) {
 				return (CoreDomain)domain;
@@ -295,7 +293,7 @@ public class QVTimperativeUtil extends QVTbaseUtil
 		return null;
 	}
 
-	public static @Nullable CoreDomain getDomain(@NonNull AbstractMapping rule, @NonNull TypedModel typedModel) {
+	public static @Nullable CoreDomain getDomain(@NonNull Mapping rule, @NonNull TypedModel typedModel) {
 		return (CoreDomain)getDomain((Rule)rule, typedModel);
 	}
 

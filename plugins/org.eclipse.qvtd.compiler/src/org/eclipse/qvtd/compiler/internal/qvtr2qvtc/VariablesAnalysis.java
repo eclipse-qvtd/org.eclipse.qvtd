@@ -38,16 +38,16 @@ import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
+import org.eclipse.qvtd.pivot.qvtcore.Assignment;
+import org.eclipse.qvtd.pivot.qvtcore.BottomPattern;
+import org.eclipse.qvtd.pivot.qvtcore.CoreDomain;
+import org.eclipse.qvtd.pivot.qvtcore.CorePattern;
+import org.eclipse.qvtd.pivot.qvtcore.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
+import org.eclipse.qvtd.pivot.qvtcore.NavigationAssignment;
+import org.eclipse.qvtd.pivot.qvtcore.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreHelper;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
-import org.eclipse.qvtd.pivot.qvtcorebase.Assignment;
-import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
-import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
-import org.eclipse.qvtd.pivot.qvtcorebase.CorePattern;
-import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
-import org.eclipse.qvtd.pivot.qvtcorebase.NavigationAssignment;
-import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationCallExp;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
@@ -350,7 +350,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		}
 	}
 
-	public void assertNewAssignment(@NonNull List<Assignment> oldAssignments, @NonNull NavigationAssignment newAssignment) {
+	public void assertNewAssignment(@NonNull List<@NonNull Assignment> oldAssignments, @NonNull NavigationAssignment newAssignment) {
 		//		if ("tr.action := sm".equals(newAssignment.toString())) {
 		//			newAssignment.toString();
 		//		}

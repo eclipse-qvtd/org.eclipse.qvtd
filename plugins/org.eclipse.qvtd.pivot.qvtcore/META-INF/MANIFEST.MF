@@ -8,6 +8,7 @@ Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.eclipse.qvtd.pivot.qvtcore,
+ org.eclipse.qvtd.pivot.qvtcore.analysis,
  org.eclipse.qvtd.pivot.qvtcore.attributes,
  org.eclipse.qvtd.pivot.qvtcore.impl,
  org.eclipse.qvtd.pivot.qvtcore.scoping,

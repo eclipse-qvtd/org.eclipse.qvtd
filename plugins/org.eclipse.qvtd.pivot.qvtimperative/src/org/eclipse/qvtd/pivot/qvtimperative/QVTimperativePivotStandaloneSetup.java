@@ -18,7 +18,7 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.labels.LabelGeneratorRegistry;
 import org.eclipse.qvtd.runtime.labels.QVTiLabelGenerators;
-import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePivotStandaloneSetup;
+import org.eclipse.qvtd.pivot.qvtbase.QVTbasePivotStandaloneSetup;
 import org.eclipse.qvtd.pivot.qvtimperative.model.QVTimperativeLibrary;
 import org.eclipse.qvtd.pivot.qvtimperative.scoping.QVTimperativePivotScoping;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeASResourceFactory;
@@ -42,7 +42,7 @@ public class QVTimperativePivotStandaloneSetup
 
 	public static void init() {
 		QVTimperativeLibrary.lazyInstall();
-		QVTcoreBasePivotStandaloneSetup.doSetup();
+		QVTbasePivotStandaloneSetup.doSetup();
 		QVTimperativePivotScoping.init();
 		QVTimperativeASResourceFactory.getInstance();
 		QVTimperativeToStringVisitor.FACTORY.getClass();

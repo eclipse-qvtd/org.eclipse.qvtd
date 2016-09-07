@@ -38,15 +38,14 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory.CreateStrategy;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
+import org.eclipse.qvtd.pivot.qvtcore.Area;
+import org.eclipse.qvtd.pivot.qvtcore.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcore.CoreModel;
+import org.eclipse.qvtd.pivot.qvtcore.CorePattern;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
-import org.eclipse.qvtd.pivot.qvtcorebase.AbstractMapping;
-import org.eclipse.qvtd.pivot.qvtcorebase.Area;
-import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
-import org.eclipse.qvtd.pivot.qvtcorebase.CorePattern;
-import org.eclipse.qvtd.pivot.qvtcorebase.NavigationAssignment;
-import org.eclipse.qvtd.pivot.qvtcorebase.OppositePropertyAssignment;
-import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
+import org.eclipse.qvtd.pivot.qvtcore.NavigationAssignment;
+import org.eclipse.qvtd.pivot.qvtcore.OppositePropertyAssignment;
+import org.eclipse.qvtd.pivot.qvtcore.PropertyAssignment;
 
 public class QVTcoreUtil extends QVTbaseUtil
 {
@@ -86,7 +85,7 @@ public class QVTcoreUtil extends QVTbaseUtil
 		return allMappings;
 	}
 
-	public static @NonNull Area getArea(@NonNull AbstractMapping mapping, @NonNull TypedModel typedModel) {
+	public static @NonNull Area getArea(@NonNull Mapping mapping, @NonNull TypedModel typedModel) {
 		for (Domain domain : mapping.getDomain()) {
 			if (domain.getTypedModel() == typedModel) {
 				return (CoreDomain)domain;
@@ -122,7 +121,7 @@ public class QVTcoreUtil extends QVTbaseUtil
 		return null;
 	}
 
-	public static @Nullable CoreDomain getDomain(@NonNull AbstractMapping rule, @NonNull TypedModel typedModel) {
+	public static @Nullable CoreDomain getDomain(@NonNull Mapping rule, @NonNull TypedModel typedModel) {
 		return (CoreDomain)getDomain((Rule)rule, typedModel);
 	}
 

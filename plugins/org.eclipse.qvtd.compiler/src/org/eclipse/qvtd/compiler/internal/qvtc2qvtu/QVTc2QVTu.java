@@ -41,22 +41,21 @@ import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbaseFactory;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtcore.Area;
+import org.eclipse.qvtd.pivot.qvtcore.Assignment;
+import org.eclipse.qvtd.pivot.qvtcore.BottomPattern;
+import org.eclipse.qvtd.pivot.qvtcore.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcore.CoreModel;
+import org.eclipse.qvtd.pivot.qvtcore.CorePattern;
+import org.eclipse.qvtd.pivot.qvtcore.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
+import org.eclipse.qvtd.pivot.qvtcore.NavigationAssignment;
+import org.eclipse.qvtd.pivot.qvtcore.OppositePropertyAssignment;
+import org.eclipse.qvtd.pivot.qvtcore.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcoreFactory;
-import org.eclipse.qvtd.pivot.qvtcorebase.Area;
-import org.eclipse.qvtd.pivot.qvtcorebase.Assignment;
-import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
-import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
-import org.eclipse.qvtd.pivot.qvtcorebase.CorePattern;
-import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
-import org.eclipse.qvtd.pivot.qvtcorebase.NavigationAssignment;
-import org.eclipse.qvtd.pivot.qvtcorebase.OppositePropertyAssignment;
-import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
-import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBaseFactory;
-import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
-import org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment;
-import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
+import org.eclipse.qvtd.pivot.qvtcore.RealizedVariable;
+import org.eclipse.qvtd.pivot.qvtcore.VariableAssignment;
+import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
 
 /**
  * QVTc2QVTu transforms a QVTc transformation to impose the single direction defined by a QVTuConfiguration.
@@ -170,7 +169,7 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 		}
 
 		private @Nullable Area basicGetArea(@Nullable VariableDeclaration variable) {
-			return QVTimperativeUtil.getContainingArea(variable);
+			return QVTcoreUtil.getContainingArea(variable);
 		}
 
 		//
@@ -209,7 +208,7 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 			// A backward "p.q := v" rewrites as a forward "v := p.q".
 			//
 			if (isInputDomain(targetArea) && (value instanceof VariableExp) && anyReferencedMiddleDomainVariables(value)) {		// isMtoL
-				VariableAssignment vaOut = QVTcoreBaseFactory.eINSTANCE.createVariableAssignment();
+				VariableAssignment vaOut = QVTcoreFactory.eINSTANCE.createVariableAssignment();
 				context.addTrace(paIn, vaOut);
 				return vaOut;
 			}
@@ -292,7 +291,7 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 		}
 
 		private @NonNull Area getContainingArea(@NonNull VariableDeclaration variable) {
-			Area targetArea = QVTimperativeUtil.getContainingArea(variable);
+			Area targetArea = QVTcoreUtil.getContainingArea(variable);
 			assert targetArea != null;
 			return targetArea;
 		}
@@ -332,7 +331,7 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 			if (variable == null) {
 				return false;
 			}
-			CorePattern pattern = QVTimperativeUtil.getContainingPattern(variable);
+			CorePattern pattern = QVTcoreUtil.getContainingPattern(variable);
 			if (!(pattern instanceof BottomPattern)) {
 				return false;
 			}

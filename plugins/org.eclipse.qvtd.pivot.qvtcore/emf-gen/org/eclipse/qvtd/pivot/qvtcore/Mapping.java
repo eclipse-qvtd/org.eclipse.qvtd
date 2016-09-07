@@ -12,7 +12,6 @@ package org.eclipse.qvtd.pivot.qvtcore;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
-import org.eclipse.qvtd.pivot.qvtcorebase.AbstractMapping;
 
 /**
  * <!-- begin-user-doc -->
@@ -50,7 +49,6 @@ public interface Mapping extends Rule, Area {
 	 * @model opposite="local" transient="false" ordered="false"
 	 * @generated
 	 */
-	@Override
 	Mapping getContext();
 
 	/**
@@ -79,7 +77,6 @@ public interface Mapping extends Rule, Area {
 	 * @model opposite="refinement" ordered="false"
 	 * @generated
 	 */
-	@Override
 	EList<Mapping> getSpecification();
 
 	/**
@@ -114,9 +111,7 @@ public interface Mapping extends Rule, Area {
 	 * @see org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage#getMapping_Refinement()
 	 * @see org.eclipse.qvtd.pivot.qvtcore.Mapping#getSpecification
 	 * @model opposite="specification" ordered="false"
-	 * @generated NOT
 	 */
-	@Override
 	EList<Mapping> getRefinement();
 
 } // Mapping

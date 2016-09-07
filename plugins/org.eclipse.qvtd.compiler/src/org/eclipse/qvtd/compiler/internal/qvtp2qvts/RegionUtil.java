@@ -31,10 +31,10 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.CastEdgeImpl;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.ComposedNodeImpl;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.DependencyNodeImpl;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.EdgeRoleImpl;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.ErrorNodeImpl;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.ExpressionEdgeImpl;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.DependencyNodeImpl;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.InputNodeImpl;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.IteratedEdgeImpl;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.IteratorNodeImpl;
@@ -52,8 +52,8 @@ import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.VariableNodeImpl;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
+import org.eclipse.qvtd.pivot.qvtcore.NavigationAssignment;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
-import org.eclipse.qvtd.pivot.qvtcorebase.NavigationAssignment;
 import org.eclipse.qvtd.pivot.schedule.ClassDatum;
 
 public class RegionUtil

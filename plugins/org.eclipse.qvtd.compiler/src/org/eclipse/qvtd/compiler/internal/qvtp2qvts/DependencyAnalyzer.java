@@ -75,11 +75,11 @@ import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
-import org.eclipse.qvtd.pivot.qvtcorebase.CorePattern;
-import org.eclipse.qvtd.pivot.qvtcorebase.OppositePropertyAssignment;
-import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
-import org.eclipse.qvtd.pivot.qvtcorebase.analysis.RootDomainUsageAnalysis;
-import org.eclipse.qvtd.pivot.qvtimperative.util.AbstractExtendingQVTimperativeVisitor;
+import org.eclipse.qvtd.pivot.qvtcore.CorePattern;
+import org.eclipse.qvtd.pivot.qvtcore.OppositePropertyAssignment;
+import org.eclipse.qvtd.pivot.qvtcore.PropertyAssignment;
+import org.eclipse.qvtd.pivot.qvtcore.analysis.RootDomainUsageAnalysis;
+import org.eclipse.qvtd.pivot.qvtcore.util.AbstractExtendingQVTcoreVisitor;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -511,7 +511,7 @@ public class DependencyAnalyzer
 	 * A DependencyAnalyzerVisitor performs a analyzed exection of a QVTi expression propagating the set of retured and used paths as
 	 * the analysis result.
 	 */
-	protected class DependencyAnalyzerVisitor extends AbstractExtendingQVTimperativeVisitor<@Nullable DependencyPaths, @Nullable Object>
+	protected class DependencyAnalyzerVisitor extends AbstractExtendingQVTcoreVisitor<@Nullable DependencyPaths, @Nullable Object>
 	{
 		private final @NonNull AbstractOperationAnalysis analysis;
 		private final boolean exactResult;

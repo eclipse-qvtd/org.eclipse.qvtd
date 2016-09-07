@@ -56,22 +56,21 @@ import org.eclipse.qvtd.pivot.qvtbase.QVTbaseFactory;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
+import org.eclipse.qvtd.pivot.qvtcore.BottomPattern;
+import org.eclipse.qvtd.pivot.qvtcore.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcore.CoreModel;
+import org.eclipse.qvtd.pivot.qvtcore.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
+import org.eclipse.qvtd.pivot.qvtcore.NavigationAssignment;
+import org.eclipse.qvtd.pivot.qvtcore.OppositePropertyAssignment;
+import org.eclipse.qvtd.pivot.qvtcore.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcoreFactory;
+import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
+import org.eclipse.qvtd.pivot.qvtcore.RealizedVariable;
+import org.eclipse.qvtd.pivot.qvtcore.VariableAssignment;
 import org.eclipse.qvtd.pivot.qvtcore.util.AbstractExtendingQVTcoreVisitor;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreHelper;
-import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
-import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
-import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
-import org.eclipse.qvtd.pivot.qvtcorebase.NavigationAssignment;
-import org.eclipse.qvtd.pivot.qvtcorebase.OppositePropertyAssignment;
-import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
-import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBaseFactory;
-import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage;
-import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
-import org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment;
-import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
+import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
 
 /**
  * AbstractQVTc2QVTc provides shared functionality for steps in the QVTC/QVTu/QVTm chain.
@@ -168,7 +167,7 @@ public abstract class AbstractQVTc2QVTc
 
 		@Override
 		public @NonNull BottomPattern visitBottomPattern(@NonNull BottomPattern bIn) {
-			BottomPattern bOut = QVTcoreBaseFactory.eINSTANCE.createBottomPattern();
+			BottomPattern bOut = QVTcoreFactory.eINSTANCE.createBottomPattern();
 			context.addTrace(bIn, bOut);
 			doAssignments(bIn, bOut);
 			createAll(bIn.getPredicate(), bOut.getPredicate());
@@ -189,7 +188,7 @@ public abstract class AbstractQVTc2QVTc
 
 		@Override
 		public @NonNull CoreDomain visitCoreDomain(@NonNull CoreDomain dIn) {
-			CoreDomain dOut = QVTcoreBaseFactory.eINSTANCE.createCoreDomain();
+			CoreDomain dOut = QVTcoreFactory.eINSTANCE.createCoreDomain();
 			context.addTrace(dIn, dOut);
 			dOut.setIsCheckable(dIn.isIsCheckable());
 			dOut.setIsEnforceable(dIn.isIsEnforceable());
@@ -240,7 +239,7 @@ public abstract class AbstractQVTc2QVTc
 
 		@Override
 		public @NonNull GuardPattern visitGuardPattern(@NonNull GuardPattern gIn) {
-			GuardPattern gOut = QVTcoreBaseFactory.eINSTANCE.createGuardPattern();
+			GuardPattern gOut = QVTcoreFactory.eINSTANCE.createGuardPattern();
 			context.addTrace(gIn, gOut);
 			createAll(gIn.getPredicate(), gOut.getPredicate());
 			createAll(gIn.getVariable(), gOut.getVariable());
@@ -271,9 +270,9 @@ public abstract class AbstractQVTc2QVTc
 
 		@Override
 		public @Nullable Element visitOppositePropertyAssignment(@NonNull OppositePropertyAssignment paIn) {
-			OppositePropertyAssignment paOut = QVTcoreBaseFactory.eINSTANCE.createOppositePropertyAssignment();
+			OppositePropertyAssignment paOut = QVTcoreFactory.eINSTANCE.createOppositePropertyAssignment();
 			context.addTrace(paIn, paOut);
-			if (paIn.eIsSet(QVTcoreBasePackage.Literals.ASSIGNMENT__IS_DEFAULT)) {
+			if (paIn.eIsSet(QVTcorePackage.Literals.ASSIGNMENT__IS_DEFAULT)) {
 				paOut.setIsDefault(paIn.isIsDefault());
 			}
 			paOut.setTargetProperty(paIn.getTargetProperty());
@@ -304,9 +303,9 @@ public abstract class AbstractQVTc2QVTc
 
 		@Override
 		public @Nullable Element visitPropertyAssignment(@NonNull PropertyAssignment paIn) {
-			PropertyAssignment paOut = QVTcoreBaseFactory.eINSTANCE.createPropertyAssignment();
+			PropertyAssignment paOut = QVTcoreFactory.eINSTANCE.createPropertyAssignment();
 			context.addTrace(paIn, paOut);
-			if (paIn.eIsSet(QVTcoreBasePackage.Literals.ASSIGNMENT__IS_DEFAULT)) {
+			if (paIn.eIsSet(QVTcorePackage.Literals.ASSIGNMENT__IS_DEFAULT)) {
 				paOut.setIsDefault(paIn.isIsDefault());
 			}
 			paOut.setTargetProperty(paIn.getTargetProperty());
@@ -316,7 +315,7 @@ public abstract class AbstractQVTc2QVTc
 
 		@Override
 		public @NonNull Variable visitRealizedVariable(@NonNull RealizedVariable rvIn) {
-			Variable rvOut = QVTcoreBaseFactory.eINSTANCE.createRealizedVariable();
+			Variable rvOut = QVTcoreFactory.eINSTANCE.createRealizedVariable();
 			context.addTrace(rvIn, rvOut);
 			rvOut.setName(rvIn.getName());
 			rvOut.setIsImplicit(rvIn.isIsImplicit());
@@ -344,7 +343,7 @@ public abstract class AbstractQVTc2QVTc
 			context.addTrace(tmIn, tmOut);
 			String name = tmIn.getName();
 			if (name == null) {
-				//				name = QVTimperativeUtil.MIDDLE_DOMAIN_NAME;
+				//				name = QVTcoreUtil.MIDDLE_DOMAIN_NAME;
 				context.setMiddleTypedModelTarget(tmOut);
 			}
 			tmOut.setName(name);
@@ -364,7 +363,7 @@ public abstract class AbstractQVTc2QVTc
 
 		@Override
 		public @Nullable Element visitVariableAssignment(@NonNull VariableAssignment vaIn) {
-			VariableAssignment vaOut = QVTcoreBaseFactory.eINSTANCE.createVariableAssignment();
+			VariableAssignment vaOut = QVTcoreFactory.eINSTANCE.createVariableAssignment();
 			context.addTrace(vaIn, vaOut);
 			vaOut.setIsDefault(vaIn.isIsDefault());
 			createAll(vaIn.getOwnedComments(), vaOut.getOwnedComments());
@@ -407,7 +406,7 @@ public abstract class AbstractQVTc2QVTc
 
 		protected Object convertToPredicate(@NonNull NavigationAssignment paIn, @NonNull Predicate pOut) {
 			OCLExpression slotExpression = copy(paIn.getSlotExpression());
-			Property targetProperty = QVTimperativeUtil.getTargetProperty(paIn);
+			Property targetProperty = QVTcoreUtil.getTargetProperty(paIn);
 			assert (slotExpression != null) && (targetProperty != null);
 			OCLExpression valueExpression = copy(paIn.getValue());
 			NavigationCallExp propertyCallExp = context.getHelper().createNavigationCallExp(slotExpression, targetProperty);
@@ -430,7 +429,7 @@ public abstract class AbstractQVTc2QVTc
 			Variable vOut = context.equivalentTarget((Variable)vIn);
 			vaOut.setTargetVariable(vOut);
 			OCLExpression slotExpression = copy(paIn.getSlotExpression());
-			Property targetProperty = QVTimperativeUtil.getTargetProperty(paIn);
+			Property targetProperty = QVTcoreUtil.getTargetProperty(paIn);
 			assert (slotExpression != null) && (targetProperty != null);
 			NavigationCallExp propertyCallExp = context.getHelper().createNavigationCallExp(slotExpression, targetProperty);
 			context.addTrace(paIn, propertyCallExp);

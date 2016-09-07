@@ -13,11 +13,11 @@ package	org.eclipse.qvtd.pivot.qvtcore.utilities;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.internal.utilities.AS2Moniker;
+import org.eclipse.qvtd.pivot.qvtcore.Assignment;
+import org.eclipse.qvtd.pivot.qvtcore.BottomPattern;
+import org.eclipse.qvtd.pivot.qvtcore.EnforcementOperation;
+import org.eclipse.qvtd.pivot.qvtcore.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtcore.util.AbstractQVTcoreAS2MonikerVisitor;
-import org.eclipse.qvtd.pivot.qvtcorebase.Assignment;
-import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
-import org.eclipse.qvtd.pivot.qvtcorebase.EnforcementOperation;
-import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
 
 public class QVTcoreAS2MonikerVisitor extends AbstractQVTcoreAS2MonikerVisitor
 {

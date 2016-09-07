@@ -45,20 +45,14 @@ import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
-import org.eclipse.qvtd.pivot.qvtcorebase.AbstractMapping;
-import org.eclipse.qvtd.pivot.qvtcorebase.Assignment;
-import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
-import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
-import org.eclipse.qvtd.pivot.qvtcorebase.EnforcementOperation;
-import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
-import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
-import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBaseFactory;
-import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage;
-import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
-import org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment;
+import org.eclipse.qvtd.pivot.qvtimperative.Assignment;
+import org.eclipse.qvtd.pivot.qvtimperative.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.CoreDomain;
+import org.eclipse.qvtd.pivot.qvtimperative.EnforcementOperation;
+import org.eclipse.qvtd.pivot.qvtimperative.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeBottomPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
@@ -68,8 +62,11 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingSequence;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
+import org.eclipse.qvtd.pivot.qvtimperative.RealizedVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.VariableAssignment;
 import org.eclipse.qvtd.xtext.qvtimperativecs.BottomPatternCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.ConnectionStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS;
@@ -171,17 +168,17 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 	}
 
 	protected void resolveTransformationMappings(@NonNull Iterable<? extends @NonNull MappingCS> csMappings) {
-		Map<@NonNull Transformation, List<@NonNull AbstractMapping>> tx2mappings = new HashMap<@NonNull Transformation, List<@NonNull AbstractMapping>>();
+		Map<@NonNull Transformation, List<@NonNull Mapping>> tx2mappings = new HashMap<@NonNull Transformation, List<@NonNull Mapping>>();
 		for (@NonNull MappingCS csMapping : csMappings) {
 			PathNameCS csInPathName = csMapping.getOwnedInPathName();
 			if (csInPathName != null) {
 				Transformation asTransformation = lookupTransformation(csMapping, csInPathName, null);
 				if (asTransformation != null) {
-					AbstractMapping asMapping = PivotUtil.getPivot(AbstractMapping.class, csMapping);
+					Mapping asMapping = PivotUtil.getPivot(Mapping.class, csMapping);
 					if (asMapping != null) {
-						List<@NonNull AbstractMapping> asMappings = tx2mappings.get(asTransformation);
+						List<@NonNull Mapping> asMappings = tx2mappings.get(asTransformation);
 						if (asMappings == null) {
-							asMappings = new ArrayList<@NonNull AbstractMapping>();
+							asMappings = new ArrayList<@NonNull Mapping>();
 							tx2mappings.put(asTransformation, asMappings);
 						}
 						asMappings.add(asMapping);
@@ -190,7 +187,7 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 			}
 		}
 		for (@NonNull Transformation asTransformation : tx2mappings.keySet()) {
-			List<@NonNull AbstractMapping> asMappings = tx2mappings.get(asTransformation);
+			List<@NonNull Mapping> asMappings = tx2mappings.get(asTransformation);
 			List<Rule> asRules = asTransformation.getRule();
 			if (asMappings != null) {
 				PivotUtilInternal.refreshList(asRules, asMappings);
@@ -275,13 +272,13 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 
 	@Override
 	public Continuation<?> visitEnforcementOperationCS(@NonNull EnforcementOperationCS csElement) {
-		context.refreshModelElement(EnforcementOperation.class, QVTcoreBasePackage.Literals.ENFORCEMENT_OPERATION, csElement);
+		context.refreshModelElement(EnforcementOperation.class, QVTimperativePackage.Literals.ENFORCEMENT_OPERATION, csElement);
 		return null;
 	}
 
 	@Override
 	public Continuation<?> visitGuardPatternCS(@NonNull GuardPatternCS csElement) {
-		@NonNull GuardPattern pGuardPattern = context.refreshModelElement(GuardPattern.class, QVTcoreBasePackage.Literals.GUARD_PATTERN, csElement);
+		@NonNull GuardPattern pGuardPattern = context.refreshModelElement(GuardPattern.class, QVTimperativePackage.Literals.GUARD_PATTERN, csElement);
 		context.refreshPivotList(Variable.class, pGuardPattern.getVariable(), csElement.getOwnedUnrealizedVariables());
 		context.refreshPivotList(Predicate.class, pGuardPattern.getPredicate(), csElement.getOwnedPredicates());
 		context.refreshComments(pGuardPattern, csElement);
@@ -300,18 +297,18 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 				context.refreshModelElement(ConnectionAssignment.class, QVTimperativePackage.Literals.CONNECTION_ASSIGNMENT, csElement);
 			}
 			else {
-				context.refreshModelElement(VariableAssignment.class, QVTcoreBasePackage.Literals.VARIABLE_ASSIGNMENT, csElement);
+				context.refreshModelElement(VariableAssignment.class, QVTimperativePackage.Literals.VARIABLE_ASSIGNMENT, csElement);
 			}
 		}
 		else {
-			context.refreshModelElement(PropertyAssignment.class, QVTcoreBasePackage.Literals.PROPERTY_ASSIGNMENT, csElement);
+			context.refreshModelElement(PropertyAssignment.class, QVTimperativePackage.Literals.PROPERTY_ASSIGNMENT, csElement);
 		}
 		return null;
 	}
 
 	@Override
 	public Continuation<?> visitImperativeRealizedVariableCS(@NonNull ImperativeRealizedVariableCS csElement) {
-		refreshNamedElement(RealizedVariable.class, QVTcoreBasePackage.Literals.REALIZED_VARIABLE, csElement);
+		refreshNamedElement(RealizedVariable.class, QVTimperativePackage.Literals.REALIZED_VARIABLE, csElement);
 		return null;
 	}
 
@@ -337,7 +334,7 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 			}
 			GuardPattern guardPattern = pivotElement.getGuardPattern();
 			if (guardPattern == null) {
-				guardPattern = QVTcoreBaseFactory.eINSTANCE.createGuardPattern();
+				guardPattern = QVTimperativeFactory.eINSTANCE.createGuardPattern();
 				guardPattern.getBindsTo().clear();
 				guardPattern.getPredicate().clear();
 				guardPattern.getVariable().clear();
@@ -408,10 +405,10 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 			context.refreshModelElement(Predicate.class, QVTbasePackage.Literals.PREDICATE, csElement);
 		}
 		else if (csTarget instanceof NameExpCS) {
-			context.refreshModelElement(VariableAssignment.class, QVTcoreBasePackage.Literals.VARIABLE_ASSIGNMENT, csElement);
+			context.refreshModelElement(VariableAssignment.class, QVTimperativePackage.Literals.VARIABLE_ASSIGNMENT, csElement);
 		}
 		else {
-			context.refreshModelElement(PropertyAssignment.class, QVTcoreBasePackage.Literals.PROPERTY_ASSIGNMENT, csElement);
+			context.refreshModelElement(PropertyAssignment.class, QVTimperativePackage.Literals.PROPERTY_ASSIGNMENT, csElement);
 		}
 		return null;
 	}
@@ -431,7 +428,7 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 
 	@Override
 	public Continuation<?> visitRealizedVariableCS(@NonNull RealizedVariableCS csElement) {
-		refreshNamedElement(RealizedVariable.class, QVTcoreBasePackage.Literals.REALIZED_VARIABLE, csElement);
+		refreshNamedElement(RealizedVariable.class, QVTimperativePackage.Literals.REALIZED_VARIABLE, csElement);
 		return null;
 	}
 

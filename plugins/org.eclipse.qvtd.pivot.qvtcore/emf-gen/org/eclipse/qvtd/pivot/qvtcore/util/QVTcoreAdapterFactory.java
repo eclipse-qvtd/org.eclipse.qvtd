@@ -30,11 +30,20 @@ import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtcore.*;
+import org.eclipse.qvtd.pivot.qvtcore.Assignment;
+import org.eclipse.qvtd.pivot.qvtcore.BottomPattern;
+import org.eclipse.qvtd.pivot.qvtcore.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcore.CoreModel;
+import org.eclipse.qvtd.pivot.qvtcore.CorePattern;
+import org.eclipse.qvtd.pivot.qvtcore.EnforcementOperation;
+import org.eclipse.qvtd.pivot.qvtcore.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
+import org.eclipse.qvtd.pivot.qvtcore.NavigationAssignment;
+import org.eclipse.qvtd.pivot.qvtcore.OppositePropertyAssignment;
+import org.eclipse.qvtd.pivot.qvtcore.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
-import org.eclipse.qvtd.pivot.qvtcorebase.AbstractMapping;
-import org.eclipse.qvtd.pivot.qvtcorebase.Area;
+import org.eclipse.qvtd.pivot.qvtcore.RealizedVariable;
+import org.eclipse.qvtd.pivot.qvtcore.VariableAssignment;
 
 /**
  * <!-- begin-user-doc -->
@@ -91,9 +100,9 @@ public class QVTcoreAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	protected QVTcoreSwitch<@Nullable Adapter> modelSwitch =
-		new QVTcoreSwitch<@Nullable Adapter>() {
+			new QVTcoreSwitch<@Nullable Adapter>() {
 			@Override
-			public Adapter caseArea(org.eclipse.qvtd.pivot.qvtcore.Area object) {
+			public Adapter caseArea(Area object) {
 				return createAreaAdapter();
 			}
 			@Override

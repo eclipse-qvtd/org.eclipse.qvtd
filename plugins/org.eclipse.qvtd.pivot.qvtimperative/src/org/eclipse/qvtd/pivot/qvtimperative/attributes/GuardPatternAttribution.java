@@ -18,10 +18,10 @@ import org.eclipse.ocl.pivot.internal.scoping.ScopeView;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
-import org.eclipse.qvtd.pivot.qvtcorebase.AbstractMapping;
-import org.eclipse.qvtd.pivot.qvtcorebase.Area;
-import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
-import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
+import org.eclipse.qvtd.pivot.qvtimperative.Area;
+import org.eclipse.qvtd.pivot.qvtimperative.CoreDomain;
+import org.eclipse.qvtd.pivot.qvtimperative.GuardPattern;
+import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 
 public class GuardPatternAttribution extends AbstractAttribution
 {
@@ -30,8 +30,8 @@ public class GuardPatternAttribution extends AbstractAttribution
 	@Override
 	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
 		Area area = ((GuardPattern)target).getArea();
-		if (area instanceof AbstractMapping) {
-			AbstractMapping mapping = (AbstractMapping)area;;
+		if (area instanceof Mapping) {
+			Mapping mapping = (Mapping)area;;
 			Transformation transformation = QVTbaseUtil.getContainingTransformation(mapping);
 			if (transformation != null) {
 				for (TypedModel typedModel : transformation.getModelParameter()) {
@@ -46,7 +46,7 @@ public class GuardPatternAttribution extends AbstractAttribution
 		else {
 			CoreDomain domain = (CoreDomain)area;
 			TypedModel typedModel = domain.getTypedModel();
-			AbstractMapping mapping = (AbstractMapping) domain.getRule();
+			Mapping mapping = (Mapping) domain.getRule();
 			QVTimperativeEnvironmentUtil.addSideGuardVariables(environmentView, mapping, typedModel);
 		}
 		return scopeView.getParent();

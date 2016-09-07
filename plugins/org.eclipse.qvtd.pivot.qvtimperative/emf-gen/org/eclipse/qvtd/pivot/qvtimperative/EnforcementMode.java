@@ -1,15 +1,15 @@
 /**
  * <copyright>
- * 
+ *
  * Copyright (c) 2013, 2017 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
- * 
+ *
  * </copyright>
  */
 package org.eclipse.qvtd.pivot.qvtimperative;
@@ -84,10 +84,10 @@ public enum EnforcementMode implements Enumerator {
 	 * @generated
 	 */
 	private static final EnforcementMode[] VALUES_ARRAY =
-		new EnforcementMode[] {
-			CREATION,
-			DELETION,
-		};
+			new EnforcementMode[] {
+				CREATION,
+				DELETION,
+	};
 
 	/**
 	 * A public read-only list of all the '<em><b>Enforcement Mode</b></em>' enumerators.
@@ -187,8 +187,9 @@ public enum EnforcementMode implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public int getValue() {
-	  return value;
+		return value;
 	}
 
 	/**
@@ -196,8 +197,9 @@ public enum EnforcementMode implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
-	  return name;
+		return name;
 	}
 
 	/**
@@ -205,8 +207,9 @@ public enum EnforcementMode implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getLiteral() {
-	  return literal;
+		return literal;
 	}
 
 	/**
@@ -219,5 +222,5 @@ public enum EnforcementMode implements Enumerator {
 	public String toString() {
 		return literal;
 	}
-	
+
 } //EnforcementMode

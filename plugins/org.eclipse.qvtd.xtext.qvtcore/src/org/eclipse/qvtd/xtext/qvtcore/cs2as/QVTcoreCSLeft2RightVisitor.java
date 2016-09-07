@@ -37,7 +37,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
-import org.eclipse.qvtd.pivot.qvtcorebase.AbstractMapping;
+import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.xtext.qvtcorecs.MappingCS;
 import org.eclipse.qvtd.xtext.qvtcorecs.QueryCS;
 import org.eclipse.qvtd.xtext.qvtcorecs.util.AbstractQVTcoreCSLeft2RightVisitor;
@@ -55,7 +55,7 @@ public class QVTcoreCSLeft2RightVisitor extends AbstractQVTcoreCSLeft2RightVisit
 			@Override
 			protected boolean doNext(@NonNull ElementCS csParent, @NonNull ElementCS csChild) {
 				if (csParent instanceof MappingCS) {
-					AbstractMapping asMapping = PivotUtil.getPivot(AbstractMapping.class, (MappingCS)csParent);
+					Mapping asMapping = PivotUtil.getPivot(Mapping.class, (MappingCS)csParent);
 					if (asMapping != null) {
 						Transformation asTransformation = QVTbaseUtil.getContainingTransformation(asMapping);
 						if (asTransformation != null) {
@@ -87,7 +87,7 @@ public class QVTcoreCSLeft2RightVisitor extends AbstractQVTcoreCSLeft2RightVisit
 			@Override
 			protected boolean doNext(@NonNull ElementCS csParent, @NonNull ElementCS csChild) {
 				if (csParent instanceof MappingCS) {
-					AbstractMapping asContext = PivotUtil.getPivot(AbstractMapping.class, (MappingCS)csParent);
+					Mapping asContext = PivotUtil.getPivot(Mapping.class, (MappingCS)csParent);
 					if (asContext != null) {
 						Variable asVariable = asContext.getTransformation().getOwnedContext();
 						if (asVariable != null) {

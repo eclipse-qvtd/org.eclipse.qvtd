@@ -1,15 +1,15 @@
 /**
  * <copyright>
- * 
+ *
  * Copyright (c) 2013, 2017 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
- * 
+ *
  * </copyright>
  */
 package org.eclipse.qvtd.pivot.qvtcore.impl;
@@ -109,6 +109,7 @@ public class EnforcementOperationImpl extends ElementImpl implements Enforcement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EnforcementMode getEnforcementMode() {
 		return enforcementMode;
 	}
@@ -118,6 +119,7 @@ public class EnforcementOperationImpl extends ElementImpl implements Enforcement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setEnforcementMode(EnforcementMode newEnforcementMode) {
 		EnforcementMode oldEnforcementMode = enforcementMode;
 		enforcementMode = newEnforcementMode == null ? ENFORCEMENT_MODE_EDEFAULT : newEnforcementMode;
@@ -130,6 +132,7 @@ public class EnforcementOperationImpl extends ElementImpl implements Enforcement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public BottomPattern getBottomPattern() {
 		if (eContainerFeatureID() != QVTcorePackage.ENFORCEMENT_OPERATION__BOTTOM_PATTERN) return null;
 		return (BottomPattern)eInternalContainer();
@@ -150,6 +153,7 @@ public class EnforcementOperationImpl extends ElementImpl implements Enforcement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setBottomPattern(BottomPattern newBottomPattern) {
 		if (newBottomPattern != eInternalContainer() || (eContainerFeatureID() != QVTcorePackage.ENFORCEMENT_OPERATION__BOTTOM_PATTERN && newBottomPattern != null)) {
 			if (EcoreUtil.isAncestor(this, newBottomPattern))
@@ -171,6 +175,7 @@ public class EnforcementOperationImpl extends ElementImpl implements Enforcement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public OperationCallExp getOperationCallExp() {
 		return operationCallExp;
 	}
@@ -195,6 +200,7 @@ public class EnforcementOperationImpl extends ElementImpl implements Enforcement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setOperationCallExp(OperationCallExp newOperationCallExp) {
 		if (newOperationCallExp != operationCallExp) {
 			NotificationChain msgs = null;
@@ -214,6 +220,7 @@ public class EnforcementOperationImpl extends ElementImpl implements Enforcement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String toString() {
 		return super.toString();
 	}

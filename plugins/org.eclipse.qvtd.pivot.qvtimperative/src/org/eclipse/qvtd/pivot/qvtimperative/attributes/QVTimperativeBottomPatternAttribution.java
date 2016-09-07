@@ -18,10 +18,10 @@ import org.eclipse.ocl.pivot.internal.scoping.ScopeView;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
-import org.eclipse.qvtd.pivot.qvtcorebase.AbstractMapping;
-import org.eclipse.qvtd.pivot.qvtcorebase.Area;
-import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
-import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
+import org.eclipse.qvtd.pivot.qvtimperative.Area;
+import org.eclipse.qvtd.pivot.qvtimperative.BottomPattern;
+import org.eclipse.qvtd.pivot.qvtimperative.CoreDomain;
+import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 
 public class QVTimperativeBottomPatternAttribution extends AbstractAttribution
 {
@@ -30,16 +30,16 @@ public class QVTimperativeBottomPatternAttribution extends AbstractAttribution
 	@Override
 	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
 		Area area = ((BottomPattern)target).getArea();
-		AbstractMapping mapping;
-		if (area instanceof AbstractMapping) {
-			mapping = (AbstractMapping)area;;
+		Mapping mapping;
+		if (area instanceof Mapping) {
+			mapping = (Mapping)area;;
 		}
 		else {
 			CoreDomain domain = (CoreDomain)area;
-			mapping = (AbstractMapping) domain.getRule();
+			mapping = (Mapping) domain.getRule();
 		}
 		QVTimperativeEnvironmentUtil.addMiddleBottomVariables(environmentView, mapping);
-		if (!environmentView.hasFinalResult() && (area instanceof AbstractMapping)) {
+		if (!environmentView.hasFinalResult() && (area instanceof Mapping)) {
 			Transformation transformation = QVTbaseUtil.getContainingTransformation(mapping);
 			if (transformation != null) {
 				for (TypedModel typedModel : transformation.getModelParameter()) {

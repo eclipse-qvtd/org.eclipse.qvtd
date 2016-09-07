@@ -39,7 +39,7 @@ import org.eclipse.qvtd.pivot.qvtbase.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.DOTStringBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphMLStringBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
-import org.eclipse.qvtd.pivot.qvtcorebase.analysis.RootDomainUsageAnalysis;
+import org.eclipse.qvtd.pivot.qvtcore.analysis.RootDomainUsageAnalysis;
 
 import com.google.common.collect.Iterables;
 

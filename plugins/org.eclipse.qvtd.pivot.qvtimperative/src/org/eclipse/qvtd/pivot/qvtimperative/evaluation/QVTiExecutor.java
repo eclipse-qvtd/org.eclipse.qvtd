@@ -18,10 +18,10 @@ import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.evaluation.EvaluationVisitor;
 import org.eclipse.ocl.pivot.internal.evaluation.ExecutorInternal;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
-import org.eclipse.qvtd.pivot.qvtcorebase.NavigationAssignment;
-import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
+import org.eclipse.qvtd.pivot.qvtimperative.NavigationAssignment;
+import org.eclipse.qvtd.pivot.qvtimperative.RealizedVariable;
 
 public interface QVTiExecutor extends ExecutorInternal
 {

@@ -1,15 +1,15 @@
 /**
  * <copyright>
- * 
+ *
  * Copyright (c) 2013, 2017 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
- * 
+ *
  * </copyright>
  */
 package org.eclipse.qvtd.pivot.qvtcore.impl;
@@ -72,6 +72,7 @@ public class GuardPatternImpl extends CorePatternImpl implements GuardPattern {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Area getArea() {
 		if (eContainerFeatureID() != QVTcorePackage.GUARD_PATTERN__AREA) return null;
 		return (Area)eInternalContainer();
@@ -92,6 +93,7 @@ public class GuardPatternImpl extends CorePatternImpl implements GuardPattern {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setArea(Area newArea) {
 		if (newArea != eInternalContainer() || (eContainerFeatureID() != QVTcorePackage.GUARD_PATTERN__AREA && newArea != null)) {
 			if (EcoreUtil.isAncestor(this, newArea))

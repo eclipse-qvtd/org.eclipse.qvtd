@@ -118,7 +118,8 @@ public class QVTcoreFactoryImpl extends EFactoryImpl implements QVTcoreFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public BottomPattern createBottomPattern() {
+	@Override
+	public @NonNull BottomPattern createBottomPattern() {
 		BottomPatternImpl bottomPattern = new BottomPatternImpl();
 		return bottomPattern;
 	}
@@ -128,7 +129,8 @@ public class QVTcoreFactoryImpl extends EFactoryImpl implements QVTcoreFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public CoreDomain createCoreDomain() {
+	@Override
+	public @NonNull CoreDomain createCoreDomain() {
 		CoreDomainImpl coreDomain = new CoreDomainImpl();
 		return coreDomain;
 	}
@@ -149,7 +151,8 @@ public class QVTcoreFactoryImpl extends EFactoryImpl implements QVTcoreFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public CorePattern createCorePattern() {
+	@Override
+	public @NonNull CorePattern createCorePattern() {
 		CorePatternImpl corePattern = new CorePatternImpl();
 		return corePattern;
 	}
@@ -159,7 +162,8 @@ public class QVTcoreFactoryImpl extends EFactoryImpl implements QVTcoreFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EnforcementOperation createEnforcementOperation() {
+	@Override
+	public @NonNull EnforcementOperation createEnforcementOperation() {
 		EnforcementOperationImpl enforcementOperation = new EnforcementOperationImpl();
 		return enforcementOperation;
 	}
@@ -169,7 +173,8 @@ public class QVTcoreFactoryImpl extends EFactoryImpl implements QVTcoreFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public GuardPattern createGuardPattern() {
+	@Override
+	public @NonNull GuardPattern createGuardPattern() {
 		GuardPatternImpl guardPattern = new GuardPatternImpl();
 		return guardPattern;
 	}
@@ -190,7 +195,8 @@ public class QVTcoreFactoryImpl extends EFactoryImpl implements QVTcoreFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OppositePropertyAssignment createOppositePropertyAssignment() {
+	@Override
+	public @NonNull OppositePropertyAssignment createOppositePropertyAssignment() {
 		OppositePropertyAssignmentImpl oppositePropertyAssignment = new OppositePropertyAssignmentImpl();
 		return oppositePropertyAssignment;
 	}
@@ -200,7 +206,8 @@ public class QVTcoreFactoryImpl extends EFactoryImpl implements QVTcoreFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public PropertyAssignment createPropertyAssignment() {
+	@Override
+	public @NonNull PropertyAssignment createPropertyAssignment() {
 		PropertyAssignmentImpl propertyAssignment = new PropertyAssignmentImpl();
 		return propertyAssignment;
 	}
@@ -210,7 +217,8 @@ public class QVTcoreFactoryImpl extends EFactoryImpl implements QVTcoreFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public RealizedVariable createRealizedVariable() {
+	@Override
+	public @NonNull RealizedVariable createRealizedVariable() {
 		RealizedVariableImpl realizedVariable = new RealizedVariableImpl();
 		return realizedVariable;
 	}
@@ -220,7 +228,8 @@ public class QVTcoreFactoryImpl extends EFactoryImpl implements QVTcoreFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public VariableAssignment createVariableAssignment() {
+	@Override
+	public @NonNull VariableAssignment createVariableAssignment() {
 		VariableAssignmentImpl variableAssignment = new VariableAssignmentImpl();
 		return variableAssignment;
 	}

@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
@@ -27,14 +27,14 @@ import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.TreeIterable;
-import org.eclipse.qvtd.pivot.qvtcorebase.Assignment;
-import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
-import org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment;
+import org.eclipse.qvtd.pivot.qvtimperative.Assignment;
+import org.eclipse.qvtd.pivot.qvtimperative.PropertyAssignment;
+import org.eclipse.qvtd.pivot.qvtimperative.VariableAssignment;
 
 /**
  * AssignmentComparator supports sorting an assignment list into VariableAssignments first, least dependent first, alphabetical order.
  */
-public class AssignmentComparator implements Comparator<@NonNull Assignment> 
+public class AssignmentComparator implements Comparator<@NonNull Assignment>
 {
 	private final @NonNull List<@NonNull Assignment> assignments;
 	private @Nullable Map<@NonNull Variable, @NonNull Set<@NonNull Variable>> variable2referencedVariables = null;

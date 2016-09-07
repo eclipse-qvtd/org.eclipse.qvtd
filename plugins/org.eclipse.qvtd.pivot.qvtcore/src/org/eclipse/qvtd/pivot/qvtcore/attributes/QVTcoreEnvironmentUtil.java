@@ -15,20 +15,20 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.internal.scoping.EnvironmentView;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
-import org.eclipse.qvtd.pivot.qvtcorebase.AbstractMapping;
-import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
-import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
-import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
+import org.eclipse.qvtd.pivot.qvtcore.BottomPattern;
+import org.eclipse.qvtd.pivot.qvtcore.CoreDomain;
+import org.eclipse.qvtd.pivot.qvtcore.GuardPattern;
+import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 
 public class QVTcoreEnvironmentUtil
 {
-	public static void addMiddleBottomVariables(@NonNull EnvironmentView environmentView, @Nullable AbstractMapping mapping) {
+	public static void addMiddleBottomVariables(@NonNull EnvironmentView environmentView, @Nullable Mapping mapping) {
 		for (; mapping != null; mapping = mapping.getContext()) {
 			addMiddleVariables(environmentView, mapping, true);
 		}
 	}
 
-	public static void addMiddleGuardVariables(@NonNull EnvironmentView environmentView, @Nullable AbstractMapping mapping) {
+	public static void addMiddleGuardVariables(@NonNull EnvironmentView environmentView, @Nullable Mapping mapping) {
 		if (mapping != null) {
 			addMiddleVariables(environmentView, mapping, false);
 			for (mapping = mapping.getContext(); mapping != null; mapping = mapping.getContext()) {
@@ -37,7 +37,7 @@ public class QVTcoreEnvironmentUtil
 		}
 	}
 
-	private static void addMiddleVariables(@NonNull EnvironmentView environmentView, @NonNull AbstractMapping mapping, boolean bottomToo) {
+	private static void addMiddleVariables(@NonNull EnvironmentView environmentView, @NonNull Mapping mapping, boolean bottomToo) {
 		if (bottomToo) {
 			BottomPattern bottomPattern = mapping.getBottomPattern();
 			if (bottomPattern != null) {
@@ -65,18 +65,18 @@ public class QVTcoreEnvironmentUtil
 				}
 			}
 		}
-		for (@SuppressWarnings("null")@NonNull AbstractMapping refinedMapping : mapping.getSpecification()) {
+		for (@SuppressWarnings("null")@NonNull Mapping refinedMapping : mapping.getSpecification()) {
 			addMiddleVariables(environmentView, refinedMapping, bottomToo);
 		}
 	}
 
-	public static void addSideBottomVariables(@NonNull EnvironmentView environmentView, @Nullable AbstractMapping mapping, @Nullable TypedModel typedModel) {
+	public static void addSideBottomVariables(@NonNull EnvironmentView environmentView, @Nullable Mapping mapping, @Nullable TypedModel typedModel) {
 		for (; mapping != null; mapping = mapping.getContext()) {
 			addSideVariables(environmentView, mapping, typedModel, true);
 		}
 	}
 
-	public static void addSideGuardVariables(@NonNull EnvironmentView environmentView, @Nullable AbstractMapping mapping, @Nullable TypedModel typedModel) {
+	public static void addSideGuardVariables(@NonNull EnvironmentView environmentView, @Nullable Mapping mapping, @Nullable TypedModel typedModel) {
 		if (mapping != null) {
 			addSideVariables(environmentView, mapping, typedModel, false);
 			for (mapping = mapping.getContext(); mapping != null; mapping = mapping.getContext()) {
@@ -85,7 +85,7 @@ public class QVTcoreEnvironmentUtil
 		}
 	}
 
-	private static void addSideVariables(@NonNull EnvironmentView environmentView, @NonNull AbstractMapping mapping, @Nullable TypedModel typedModel, boolean bottomToo) {
+	private static void addSideVariables(@NonNull EnvironmentView environmentView, @NonNull Mapping mapping, @Nullable TypedModel typedModel, boolean bottomToo) {
 		for (Domain aDomain : mapping.getDomain()) {
 			if (aDomain instanceof CoreDomain) {
 				CoreDomain domain = (CoreDomain)aDomain;
@@ -105,7 +105,7 @@ public class QVTcoreEnvironmentUtil
 				}
 			}
 		}
-		for (@SuppressWarnings("null")@NonNull AbstractMapping refinedMapping : mapping.getSpecification()) {
+		for (@SuppressWarnings("null")@NonNull Mapping refinedMapping : mapping.getSpecification()) {
 			addSideVariables(environmentView, refinedMapping, typedModel, bottomToo);
 		}
 	}

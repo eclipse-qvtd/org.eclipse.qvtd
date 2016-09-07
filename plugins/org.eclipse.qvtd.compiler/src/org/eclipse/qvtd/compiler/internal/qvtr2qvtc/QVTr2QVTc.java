@@ -88,15 +88,14 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
+import org.eclipse.qvtd.pivot.qvtcore.BottomPattern;
+import org.eclipse.qvtd.pivot.qvtcore.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcore.CoreModel;
+import org.eclipse.qvtd.pivot.qvtcore.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcoreFactory;
+import org.eclipse.qvtd.pivot.qvtcore.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreHelper;
-import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
-import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
-import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
-import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBaseFactory;
-import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
 import org.eclipse.qvtd.pivot.qvtrelation.Key;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
@@ -311,14 +310,14 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 	}
 
 	public @NonNull CoreDomain createCoreDomain(@NonNull TypedModel typedModel) {
-		CoreDomain coreDomain = QVTcoreBaseFactory.eINSTANCE.createCoreDomain();
+		CoreDomain coreDomain = QVTcoreFactory.eINSTANCE.createCoreDomain();
 		coreDomain.setTypedModel(typedModel);
 		coreDomain.setName(ClassUtil.nonNullState(typedModel.getName()));
 		//			putTrace(coreDomain, coreRule);
-		GuardPattern guardPattern = QVTcoreBaseFactory.eINSTANCE.createGuardPattern();
+		GuardPattern guardPattern = QVTcoreFactory.eINSTANCE.createGuardPattern();
 		coreDomain.setGuardPattern(guardPattern);
 		//			putTrace(guardPattern, coreRule);
-		BottomPattern bottomPattern = QVTcoreBaseFactory.eINSTANCE.createBottomPattern();
+		BottomPattern bottomPattern = QVTcoreFactory.eINSTANCE.createBottomPattern();
 		coreDomain.setBottomPattern(bottomPattern);
 		return coreDomain;
 	}
@@ -364,7 +363,7 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 	}
 
 	public @NonNull RealizedVariable createRealizedVariable(@NonNull String name, @NonNull Type type) {
-		RealizedVariable realizedVariable = QVTcoreBaseFactory.eINSTANCE.createRealizedVariable();
+		RealizedVariable realizedVariable = QVTcoreFactory.eINSTANCE.createRealizedVariable();
 		realizedVariable.setName(name);
 		realizedVariable.setType(type);
 		realizedVariable.setIsRequired(true);

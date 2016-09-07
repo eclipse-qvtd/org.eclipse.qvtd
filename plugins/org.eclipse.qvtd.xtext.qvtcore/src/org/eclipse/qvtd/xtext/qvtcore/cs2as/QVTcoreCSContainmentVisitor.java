@@ -43,20 +43,18 @@ import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
+import org.eclipse.qvtd.pivot.qvtcore.Assignment;
+import org.eclipse.qvtd.pivot.qvtcore.BottomPattern;
+import org.eclipse.qvtd.pivot.qvtcore.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcore.CoreModel;
+import org.eclipse.qvtd.pivot.qvtcore.EnforcementOperation;
+import org.eclipse.qvtd.pivot.qvtcore.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
+import org.eclipse.qvtd.pivot.qvtcore.PropertyAssignment;
+import org.eclipse.qvtd.pivot.qvtcore.QVTcoreFactory;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
-import org.eclipse.qvtd.pivot.qvtcorebase.AbstractMapping;
-import org.eclipse.qvtd.pivot.qvtcorebase.Assignment;
-import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
-import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
-import org.eclipse.qvtd.pivot.qvtcorebase.EnforcementOperation;
-import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
-import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
-import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBaseFactory;
-import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage;
-import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
-import org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment;
+import org.eclipse.qvtd.pivot.qvtcore.RealizedVariable;
+import org.eclipse.qvtd.pivot.qvtcore.VariableAssignment;
 import org.eclipse.qvtd.xtext.qvtcorecs.BottomPatternCS;
 import org.eclipse.qvtd.xtext.qvtcorecs.DirectionCS;
 import org.eclipse.qvtd.xtext.qvtcorecs.DomainCS;
@@ -141,25 +139,25 @@ public class QVTcoreCSContainmentVisitor extends AbstractQVTcoreCSContainmentVis
 	}
 
 	protected @NonNull BottomPattern createBottomPattern(@NonNull BottomPatternCS csElement) {
-		return context.refreshModelElement(BottomPattern.class, QVTcoreBasePackage.Literals.BOTTOM_PATTERN, csElement);
+		return context.refreshModelElement(BottomPattern.class, QVTcorePackage.Literals.BOTTOM_PATTERN, csElement);
 	}
 
 	protected @NonNull CoreDomain createDomain(@NonNull DomainCS csElement) {
-		return context.refreshModelElement(CoreDomain.class, QVTcoreBasePackage.Literals.CORE_DOMAIN, csElement);
+		return context.refreshModelElement(CoreDomain.class, QVTcorePackage.Literals.CORE_DOMAIN, csElement);
 	}
 
 	protected void resolveTransformationMappings(@NonNull Iterable<? extends @NonNull MappingCS> csMappings) {
-		Map<@NonNull Transformation, List<@NonNull AbstractMapping>> tx2mappings = new HashMap<@NonNull Transformation, List<@NonNull AbstractMapping>>();
+		Map<@NonNull Transformation, List<@NonNull Mapping>> tx2mappings = new HashMap<@NonNull Transformation, List<@NonNull Mapping>>();
 		for (@NonNull MappingCS csMapping : csMappings) {
 			PathNameCS csInPathName = csMapping.getOwnedInPathName();
 			if (csInPathName != null) {
 				Transformation asTransformation = lookupTransformation(csMapping, csInPathName, null);
 				if (asTransformation != null) {
-					AbstractMapping asMapping = PivotUtil.getPivot(AbstractMapping.class, csMapping);
+					Mapping asMapping = PivotUtil.getPivot(Mapping.class, csMapping);
 					if (asMapping != null) {
-						List<@NonNull AbstractMapping> asMappings = tx2mappings.get(asTransformation);
+						List<@NonNull Mapping> asMappings = tx2mappings.get(asTransformation);
 						if (asMappings == null) {
-							asMappings = new ArrayList<@NonNull AbstractMapping>();
+							asMappings = new ArrayList<@NonNull Mapping>();
 							tx2mappings.put(asTransformation, asMappings);
 						}
 						asMappings.add(asMapping);
@@ -168,7 +166,7 @@ public class QVTcoreCSContainmentVisitor extends AbstractQVTcoreCSContainmentVis
 			}
 		}
 		for (@NonNull Transformation asTransformation : tx2mappings.keySet()) {
-			List<@NonNull AbstractMapping> asMappings = tx2mappings.get(asTransformation);
+			List<@NonNull Mapping> asMappings = tx2mappings.get(asTransformation);
 			List<Rule> asRules = asTransformation.getRule();
 			if (asMappings != null) {
 				PivotUtilInternal.refreshList(asRules, asMappings);
@@ -242,13 +240,13 @@ public class QVTcoreCSContainmentVisitor extends AbstractQVTcoreCSContainmentVis
 
 	@Override
 	public Continuation<?> visitEnforcementOperationCS(@NonNull EnforcementOperationCS csElement) {
-		context.refreshModelElement(EnforcementOperation.class, QVTcoreBasePackage.Literals.ENFORCEMENT_OPERATION, csElement);
+		context.refreshModelElement(EnforcementOperation.class, QVTcorePackage.Literals.ENFORCEMENT_OPERATION, csElement);
 		return null;
 	}
 
 	@Override
 	public Continuation<?> visitGuardPatternCS(@NonNull GuardPatternCS csElement) {
-		@NonNull GuardPattern pGuardPattern = context.refreshModelElement(GuardPattern.class, QVTcoreBasePackage.Literals.GUARD_PATTERN, csElement);
+		@NonNull GuardPattern pGuardPattern = context.refreshModelElement(GuardPattern.class, QVTcorePackage.Literals.GUARD_PATTERN, csElement);
 		context.refreshPivotList(Variable.class, pGuardPattern.getVariable(), csElement.getOwnedUnrealizedVariables());
 		context.refreshPivotList(Predicate.class, pGuardPattern.getPredicate(), csElement.getOwnedPredicates());
 		context.refreshComments(pGuardPattern, csElement);
@@ -276,7 +274,7 @@ public class QVTcoreCSContainmentVisitor extends AbstractQVTcoreCSContainmentVis
 		else {
 			BottomPattern bottomPattern = pivotElement.getBottomPattern();
 			if (bottomPattern == null) {
-				bottomPattern = QVTcoreBaseFactory.eINSTANCE.createBottomPattern();
+				bottomPattern = QVTcoreFactory.eINSTANCE.createBottomPattern();
 				bottomPattern.getAssignment().clear();
 				bottomPattern.getBindsTo().clear();
 				bottomPattern.getEnforcementOperation().clear();
@@ -287,7 +285,7 @@ public class QVTcoreCSContainmentVisitor extends AbstractQVTcoreCSContainmentVis
 			}
 			GuardPattern guardPattern = pivotElement.getGuardPattern();
 			if (guardPattern == null) {
-				guardPattern = QVTcoreBaseFactory.eINSTANCE.createGuardPattern();
+				guardPattern = QVTcoreFactory.eINSTANCE.createGuardPattern();
 				guardPattern.getBindsTo().clear();
 				guardPattern.getPredicate().clear();
 				guardPattern.getVariable().clear();
@@ -319,10 +317,10 @@ public class QVTcoreCSContainmentVisitor extends AbstractQVTcoreCSContainmentVis
 			context.refreshModelElement(Predicate.class, QVTbasePackage.Literals.PREDICATE, csElement);
 		}
 		else if (csTarget instanceof NameExpCS) {
-			context.refreshModelElement(VariableAssignment.class, QVTcoreBasePackage.Literals.VARIABLE_ASSIGNMENT, csElement);
+			context.refreshModelElement(VariableAssignment.class, QVTcorePackage.Literals.VARIABLE_ASSIGNMENT, csElement);
 		}
 		else {
-			context.refreshModelElement(PropertyAssignment.class, QVTcoreBasePackage.Literals.PROPERTY_ASSIGNMENT, csElement);
+			context.refreshModelElement(PropertyAssignment.class, QVTcorePackage.Literals.PROPERTY_ASSIGNMENT, csElement);
 		}
 		return null;
 	}
@@ -342,7 +340,7 @@ public class QVTcoreCSContainmentVisitor extends AbstractQVTcoreCSContainmentVis
 
 	@Override
 	public Continuation<?> visitRealizedVariableCS(@NonNull RealizedVariableCS csElement) {
-		refreshNamedElement(RealizedVariable.class, QVTcoreBasePackage.Literals.REALIZED_VARIABLE, csElement);
+		refreshNamedElement(RealizedVariable.class, QVTcorePackage.Literals.REALIZED_VARIABLE, csElement);
 		return null;
 	}
 

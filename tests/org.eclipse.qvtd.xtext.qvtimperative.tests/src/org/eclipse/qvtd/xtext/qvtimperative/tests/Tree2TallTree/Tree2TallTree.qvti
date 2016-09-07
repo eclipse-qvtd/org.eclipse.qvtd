@@ -65,7 +65,7 @@ map MiddleNode2TallNode in Tree2TallTree {
 	where() {
 		node2tallNode.tallNode := tallNode;
 		tallNode.name := node2tallNode.name;
-		tallNode.children := node2tallNode.children?.tallNode;
+		tallNode.children := node2tallNode.children?.tallNode->asSet();
 		tallNode.height := if node2tallNode.children->notEmpty() then node2tallNode.children.tallNode.height->max() + 1 else 0 endif;
 	}
 }

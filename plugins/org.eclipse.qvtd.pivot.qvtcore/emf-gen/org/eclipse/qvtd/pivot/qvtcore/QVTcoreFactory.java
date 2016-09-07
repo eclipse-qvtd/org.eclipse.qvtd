@@ -37,7 +37,7 @@ public interface QVTcoreFactory extends EFactory {
 	 * @return a new object of class '<em>Bottom Pattern</em>'.
 	 * @generated
 	 */
-	BottomPattern createBottomPattern();
+	@NonNull BottomPattern createBottomPattern();
 
 	/**
 	 * Returns a new object of class '<em>Core Domain</em>'.
@@ -46,7 +46,7 @@ public interface QVTcoreFactory extends EFactory {
 	 * @return a new object of class '<em>Core Domain</em>'.
 	 * @generated
 	 */
-	CoreDomain createCoreDomain();
+	@NonNull CoreDomain createCoreDomain();
 
 	/**
 	 * Returns a new object of class '<em>Core Model</em>'.
@@ -64,7 +64,7 @@ public interface QVTcoreFactory extends EFactory {
 	 * @return a new object of class '<em>Core Pattern</em>'.
 	 * @generated
 	 */
-	CorePattern createCorePattern();
+	@NonNull CorePattern createCorePattern();
 
 	/**
 	 * Returns a new object of class '<em>Enforcement Operation</em>'.
@@ -73,7 +73,7 @@ public interface QVTcoreFactory extends EFactory {
 	 * @return a new object of class '<em>Enforcement Operation</em>'.
 	 * @generated
 	 */
-	EnforcementOperation createEnforcementOperation();
+	@NonNull EnforcementOperation createEnforcementOperation();
 
 	/**
 	 * Returns a new object of class '<em>Guard Pattern</em>'.
@@ -82,7 +82,7 @@ public interface QVTcoreFactory extends EFactory {
 	 * @return a new object of class '<em>Guard Pattern</em>'.
 	 * @generated
 	 */
-	GuardPattern createGuardPattern();
+	@NonNull GuardPattern createGuardPattern();
 
 	/**
 	 * Returns a new object of class '<em>Mapping</em>'.
@@ -100,7 +100,7 @@ public interface QVTcoreFactory extends EFactory {
 	 * @return a new object of class '<em>Opposite Property Assignment</em>'.
 	 * @generated
 	 */
-	OppositePropertyAssignment createOppositePropertyAssignment();
+	@NonNull OppositePropertyAssignment createOppositePropertyAssignment();
 
 	/**
 	 * Returns a new object of class '<em>Property Assignment</em>'.
@@ -109,7 +109,7 @@ public interface QVTcoreFactory extends EFactory {
 	 * @return a new object of class '<em>Property Assignment</em>'.
 	 * @generated
 	 */
-	PropertyAssignment createPropertyAssignment();
+	@NonNull PropertyAssignment createPropertyAssignment();
 
 	/**
 	 * Returns a new object of class '<em>Realized Variable</em>'.
@@ -118,7 +118,7 @@ public interface QVTcoreFactory extends EFactory {
 	 * @return a new object of class '<em>Realized Variable</em>'.
 	 * @generated
 	 */
-	RealizedVariable createRealizedVariable();
+	@NonNull RealizedVariable createRealizedVariable();
 
 	/**
 	 * Returns a new object of class '<em>Variable Assignment</em>'.
@@ -127,7 +127,7 @@ public interface QVTcoreFactory extends EFactory {
 	 * @return a new object of class '<em>Variable Assignment</em>'.
 	 * @generated
 	 */
-	VariableAssignment createVariableAssignment();
+	@NonNull VariableAssignment createVariableAssignment();
 
 	/**
 	 * Returns the package supported by this factory.

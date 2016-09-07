@@ -45,11 +45,11 @@ import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtbase.analysis.DomainUsageAnalysis;
-import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage;
+import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
+import org.eclipse.qvtd.pivot.qvtimperative.analysis.QVTimperativeDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
-import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeDomainUsageAnalysis;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.TestsXMLUtil;
 
@@ -63,7 +63,7 @@ import test.middle.HSV2HLS.HSV2HLSPackage;
 public class QVTiDomainUsageTests extends LoadTestCase
 {
 	@SuppressWarnings("unused")private static ComposedEValidator makeSureRequiredBundleIsLoaded = null;
-	
+
 	protected static class MyQVT extends OCLInternal
 	{
 		public MyQVT(@NonNull QVTiEnvironmentFactory environmentFactory) {
@@ -101,7 +101,7 @@ public class QVTiDomainUsageTests extends LoadTestCase
 					assert eObject != null;
 					DomainUsage usage = operationAnalysis.getUsage((Element)eObject);
 					assert usage != null : "No nested usage for " + eObject.eClass().getName() + " " + eObject;
-//					assert usage instanceof DomainUsageConstant : "Variable usage for " + eObject;
+					//					assert usage instanceof DomainUsageConstant : "Variable usage for " + eObject;
 					List<Element> list = usage2elements.get(usage);
 					if (list == null) {
 						list = new ArrayList<Element>();
@@ -119,7 +119,7 @@ public class QVTiDomainUsageTests extends LoadTestCase
 		public @NonNull QVTiEnvironmentFactory getEnvironmentFactory() {
 			return (QVTiEnvironmentFactory) super.getEnvironmentFactory();
 		}
-		
+
 		public void printAnalysis(@NonNull Map<DomainUsage, List<Element>> usage2elements) {
 			@SuppressWarnings("unchecked")Set<DomainUsage.Internal> keySet = (Set<DomainUsage.Internal>)(Set<?>)usage2elements.keySet();
 			List<DomainUsage.Internal> sortedUsages = new ArrayList<DomainUsage.Internal>(keySet);
@@ -139,12 +139,12 @@ public class QVTiDomainUsageTests extends LoadTestCase
 			}
 		}
 	}
-	
+
 	protected static class MyQVTiEnvironmentFactory extends QVTiEnvironmentFactory
 	{
 		public MyQVTiEnvironmentFactory(@NonNull ProjectManager projectMap, @Nullable ResourceSet externalResourceSet) {
 			super(projectMap, externalResourceSet);
-	    	setEvaluationTracingEnabled(true);
+			setEvaluationTracingEnabled(true);
 		}
 	}
 
@@ -170,32 +170,32 @@ public class QVTiDomainUsageTests extends LoadTestCase
 		assert xtextResource != null;
 		assertNoResourceErrors("Load failed", xtextResource);
 		ASResource asResource = xtextResource.getASResource();
-//		assertNoUnresolvedProxies("Unresolved proxies", xtextResource);
-//		System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " validate()");
+		//		assertNoUnresolvedProxies("Unresolved proxies", xtextResource);
+		//		System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " validate()");
 		assertNoValidationErrors("Validation errors", xtextResource.getContents().get(0));
-//		System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " validated()");
+		//		System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " validated()");
 		saveAsXMI(xtextResource, cstURI);
 		asResource.setURI(pivotURI);
-	    
-	    TestUtil.doCompleteOCLSetup();
-	    URI oclURI = ClassUtil.nonNullState(URI.createPlatformResourceURI("/org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperative.ocl", true));
-//		CompleteOCLEObjectValidator completeOCLEObjectValidator1 = new CompleteOCLEObjectValidator(QVTimperativePackage.eINSTANCE, oclURI, metamodelManager);
-		CompleteOCLEObjectValidator completeOCLEObjectValidator2 = new CompleteOCLEObjectValidator(ClassUtil.nonNullState(QVTcoreBasePackage.eINSTANCE), oclURI, myQVT.getEnvironmentFactory());
-//		CompleteOCLEObjectValidator completeOCLEObjectValidator3 = new CompleteOCLEObjectValidator(QVTbasePackage.eINSTANCE, oclURI, metamodelManager);
-//		completeOCLEObjectValidator1.initialize();
+
+		TestUtil.doCompleteOCLSetup();
+		URI oclURI = ClassUtil.nonNullState(URI.createPlatformResourceURI("/org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperative.ocl", true));
+		//		CompleteOCLEObjectValidator completeOCLEObjectValidator1 = new CompleteOCLEObjectValidator(QVTimperativePackage.eINSTANCE, oclURI, metamodelManager);
+		CompleteOCLEObjectValidator completeOCLEObjectValidator2 = new CompleteOCLEObjectValidator(ClassUtil.nonNullState(QVTimperativePackage.eINSTANCE), oclURI, myQVT.getEnvironmentFactory());
+		//		CompleteOCLEObjectValidator completeOCLEObjectValidator3 = new CompleteOCLEObjectValidator(QVTbasePackage.eINSTANCE, oclURI, metamodelManager);
+		//		completeOCLEObjectValidator1.initialize();
 		completeOCLEObjectValidator2.initialize();
-//		completeOCLEObjectValidator3.initialize();
+		//		completeOCLEObjectValidator3.initialize();
 		PivotEObjectValidator.install(ClassUtil.nonNullState(asResource.getResourceSet()), myQVT.getEnvironmentFactory());
 		PivotEObjectValidator.install(ClassUtil.nonNullState(QVTbasePackage.eINSTANCE), null);
-		PivotEObjectValidator.install(ClassUtil.nonNullState(QVTcoreBasePackage.eINSTANCE), null);
+		PivotEObjectValidator.install(ClassUtil.nonNullState(QVTcorePackage.eINSTANCE), null);
 		PivotEObjectValidator.install(ClassUtil.nonNullState(QVTimperativePackage.eINSTANCE), null);
-	    
+
 		assertNoValidationErrors("Pivot validation errors", asResource.getContents().get(0));
 		asResource.save(getSaveOptions());
 		return asResource;
 	}
 
-	protected @NonNull Map<Object, Object> getSaveOptions() {		
+	protected @NonNull Map<Object, Object> getSaveOptions() {
 		return TestsXMLUtil.defaultSavingOptions;
 	}
 
@@ -205,21 +205,21 @@ public class QVTiDomainUsageTests extends LoadTestCase
 		packageRegistry.put(HSVTreePackage.eNS_URI, HSVTreePackage.eINSTANCE);
 		packageRegistry.put(HSV2HLSPackage.eNS_URI, HSV2HLSPackage.eINSTANCE);
 		packageRegistry.put(HLSTreePackage.eNS_URI, HLSTreePackage.eINSTANCE);
-    	MyQVT myQVT = createQVT();
+		MyQVT myQVT = createQVT();
 		URI transformURI = getProjectFileURI("HSV2HLS/HSV2HLS.qvti");
 		Transformation asTransformation = loadTransformation(myQVT, transformURI);
 		myQVT.checkAnalysis(asTransformation, false);
-        myQVT.dispose();
+		myQVT.dispose();
 	}
-	
+
 	public void testDomainUsage_ClassesCS2AS_qvti() throws Exception {
-    	MyQVT myQVT = createQVT();
+		MyQVT myQVT = createQVT();
 		URI transformURI = getProjectFileURI("ClassesCS2AS/ClassesCS2AS.qvti");
 		Transformation asTransformation = loadTransformation(myQVT, transformURI);
 		myQVT.checkAnalysis(asTransformation, false);
-        myQVT.dispose();
+		myQVT.dispose();
 	}
-	
+
 	public void testDomainUsage_ClassesCS2AS_bug459225() throws Exception {
 		TestUtil.doCompleteOCLSetup();
 		MyQVT myQVT = createQVT();
@@ -228,7 +228,7 @@ public class QVTiDomainUsageTests extends LoadTestCase
 		packageRegistry.put(HSVTreePackage.eNS_URI, HSVTreePackage.eINSTANCE);
 		packageRegistry.put(HSV2HLSPackage.eNS_URI, HSV2HLSPackage.eINSTANCE);
 		packageRegistry.put(HLSTreePackage.eNS_URI, HLSTreePackage.eINSTANCE);
-		
+
 		URI transformURI = getProjectFileURI("ClassesCS2AS/bug459225/ClassesCS2AS.qvti");
 		Transformation asTransformation = loadTransformation(myQVT, transformURI);
 		myQVT.checkAnalysis(asTransformation, false);
@@ -236,27 +236,27 @@ public class QVTiDomainUsageTests extends LoadTestCase
 	}
 
 	public void testDomainUsage_Graph2GraphMinimal_qvti() throws Exception {
-    	MyQVT myQVT = createQVT();
+		MyQVT myQVT = createQVT();
 		URI transformURI = getProjectFileURI("Graph2GraphMinimal/Graph2GraphMinimal.qvti");
 		Transformation asTransformation = loadTransformation(myQVT, transformURI);
 		myQVT.checkAnalysis(asTransformation, false);
-        myQVT.dispose();
+		myQVT.dispose();
 	}
 
 	public void testDomainUsage_ManualUML2RDBMS_qvti() throws Exception {
-    	MyQVT myQVT = createQVT();
+		MyQVT myQVT = createQVT();
 		URI transformURI = getProjectFileURI("ManualUML2RDBMS/ManualUML2RDBMS.qvti");
 		Transformation asTransformation = loadTransformation(myQVT, transformURI);
 		myQVT.checkAnalysis(asTransformation, false);
-        myQVT.dispose();
+		myQVT.dispose();
 	}
 
 	public void testCG_SimpleUML2RDBMS_qvti() throws Exception {
-    	MyQVT myQVT = createQVT();
+		MyQVT myQVT = createQVT();
 		URI transformURI = getProjectFileURI("SimpleUML2RDBMS/SimpleUML2RDBMS.qvti");
 		Transformation asTransformation = loadTransformation(myQVT, transformURI);
 		myQVT.checkAnalysis(asTransformation, false);
-        myQVT.dispose();
+		myQVT.dispose();
 	}
 
 	protected @NonNull Transformation loadTransformation(@NonNull MyQVT myQVT, @NonNull URI transformURI) throws Exception {

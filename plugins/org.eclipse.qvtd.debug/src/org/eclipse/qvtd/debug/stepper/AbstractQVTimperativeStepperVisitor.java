@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
@@ -23,17 +23,47 @@ import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
  * suitable first super class, the method delegates to visiting().
  */
 public abstract class AbstractQVTimperativeStepperVisitor
-	extends AbstractQVTcoreBaseStepperVisitor
-	implements QVTimperativeVisitor<IStepper>
+extends AbstractQVTbaseStepperVisitor
+implements QVTimperativeVisitor<IStepper>
 {
 	/**
 	 * Initializes me with an initial value for my result.
-	 * 
+	 *
 	 * @param context my initial result value
 	 */
 	protected AbstractQVTimperativeStepperVisitor(@NonNull Object context) {
 		super(context);
-	}	
+	}
+
+	@Override
+	public @Nullable IStepper visitAssignment(org.eclipse.qvtd.pivot.qvtimperative.@NonNull Assignment object) {
+		return visitElement(object);
+	}
+
+	@Override
+	public @Nullable IStepper visitBottomPattern(org.eclipse.qvtd.pivot.qvtimperative.@NonNull BottomPattern object) {
+		return visitCorePattern(object);
+	}
+
+	@Override
+	public @Nullable IStepper visitCoreDomain(org.eclipse.qvtd.pivot.qvtimperative.@NonNull CoreDomain object) {
+		return visitDomain(object);
+	}
+
+	@Override
+	public @Nullable IStepper visitCorePattern(org.eclipse.qvtd.pivot.qvtimperative.@NonNull CorePattern object) {
+		return visitPattern(object);
+	}
+
+	@Override
+	public @Nullable IStepper visitEnforcementOperation(org.eclipse.qvtd.pivot.qvtimperative.@NonNull EnforcementOperation object) {
+		return visitElement(object);
+	}
+
+	@Override
+	public @Nullable IStepper visitGuardPattern(org.eclipse.qvtd.pivot.qvtimperative.@NonNull GuardPattern object) {
+		return visitCorePattern(object);
+	}
 
 	@Override
 	public @Nullable IStepper visitImperativeModel(org.eclipse.qvtd.pivot.qvtimperative.@NonNull ImperativeModel object) {
@@ -53,6 +83,31 @@ public abstract class AbstractQVTimperativeStepperVisitor
 	@Override
 	public @Nullable IStepper visitMappingCallBinding(org.eclipse.qvtd.pivot.qvtimperative.@NonNull MappingCallBinding object) {
 		return visitElement(object);
+	}
+
+	@Override
+	public @Nullable IStepper visitNavigationAssignment(org.eclipse.qvtd.pivot.qvtimperative.@NonNull NavigationAssignment object) {
+		return visitAssignment(object);
+	}
+
+	@Override
+	public @Nullable IStepper visitOppositePropertyAssignment(org.eclipse.qvtd.pivot.qvtimperative.@NonNull OppositePropertyAssignment object) {
+		return visitNavigationAssignment(object);
+	}
+
+	@Override
+	public @Nullable IStepper visitPropertyAssignment(org.eclipse.qvtd.pivot.qvtimperative.@NonNull PropertyAssignment object) {
+		return visitNavigationAssignment(object);
+	}
+
+	@Override
+	public @Nullable IStepper visitRealizedVariable(org.eclipse.qvtd.pivot.qvtimperative.@NonNull RealizedVariable object) {
+		return visitVariable(object);
+	}
+
+	@Override
+	public @Nullable IStepper visitVariableAssignment(org.eclipse.qvtd.pivot.qvtimperative.@NonNull VariableAssignment object) {
+		return visitAssignment(object);
 	}
 
 	@Override

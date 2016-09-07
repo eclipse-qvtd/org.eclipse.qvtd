@@ -30,11 +30,11 @@ import org.eclipse.ocl.xtext.essentialocl.utilities.EssentialOCLCSResource;
 import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+import org.eclipse.qvtd.pivot.qvtcore.CorePattern;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
+import org.eclipse.qvtd.pivot.qvtcore.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreASResourceFactory;
-import org.eclipse.qvtd.pivot.qvtcorebase.CorePattern;
-import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
 import org.eclipse.qvtd.xtext.qvtcore.as2cs.QVTcoreAS2CS;
 import org.eclipse.qvtd.xtext.qvtcore.cs2as.QVTcoreCS2AS;
 

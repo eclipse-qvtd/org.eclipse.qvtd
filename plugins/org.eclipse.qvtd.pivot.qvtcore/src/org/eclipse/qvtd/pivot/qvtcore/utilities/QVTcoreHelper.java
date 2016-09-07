@@ -18,16 +18,15 @@ import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseHelper;
+import org.eclipse.qvtd.pivot.qvtcore.BottomPattern;
+import org.eclipse.qvtd.pivot.qvtcore.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
+import org.eclipse.qvtd.pivot.qvtcore.NavigationAssignment;
+import org.eclipse.qvtd.pivot.qvtcore.OppositePropertyAssignment;
+import org.eclipse.qvtd.pivot.qvtcore.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcoreFactory;
-import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
-import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
-import org.eclipse.qvtd.pivot.qvtcorebase.NavigationAssignment;
-import org.eclipse.qvtd.pivot.qvtcorebase.OppositePropertyAssignment;
-import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
-import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBaseFactory;
-import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
-import org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment;
+import org.eclipse.qvtd.pivot.qvtcore.RealizedVariable;
+import org.eclipse.qvtd.pivot.qvtcore.VariableAssignment;
 
 /**
  * QVTcoreHelper provides helper routines to assist creation of QVTcore model elements.
@@ -41,9 +40,9 @@ public class QVTcoreHelper extends QVTbaseHelper
 	public @NonNull Mapping createMapping(@Nullable String name) {
 		Mapping coreMapping = QVTcoreFactory.eINSTANCE.createMapping();
 		coreMapping.setName(name);
-		GuardPattern guardPattern = QVTcoreBaseFactory.eINSTANCE.createGuardPattern();
+		GuardPattern guardPattern = QVTcoreFactory.eINSTANCE.createGuardPattern();
 		coreMapping.setGuardPattern(guardPattern);
-		BottomPattern bottomPattern = QVTcoreBaseFactory.eINSTANCE.createBottomPattern();
+		BottomPattern bottomPattern = QVTcoreFactory.eINSTANCE.createBottomPattern();
 		coreMapping.setBottomPattern(bottomPattern);
 		return coreMapping;
 	}
@@ -51,12 +50,12 @@ public class QVTcoreHelper extends QVTbaseHelper
 	public @NonNull NavigationAssignment createNavigationAssignment(@NonNull OCLExpression asSlotExpression, @NonNull Property asProperty, @NonNull OCLExpression asValueExpression) {
 		NavigationAssignment asNavigationAssignment;
 		if (asProperty.isIsImplicit()) {
-			OppositePropertyAssignment asPropertyAssignment = QVTcoreBaseFactory.eINSTANCE.createOppositePropertyAssignment();
+			OppositePropertyAssignment asPropertyAssignment = QVTcoreFactory.eINSTANCE.createOppositePropertyAssignment();
 			asPropertyAssignment.setTargetProperty(asProperty.getOpposite());
 			asNavigationAssignment = asPropertyAssignment;
 		}
 		else {
-			PropertyAssignment asPropertyAssignment = QVTcoreBaseFactory.eINSTANCE.createPropertyAssignment();
+			PropertyAssignment asPropertyAssignment = QVTcoreFactory.eINSTANCE.createPropertyAssignment();
 			asPropertyAssignment.setTargetProperty(asProperty);
 			asNavigationAssignment = asPropertyAssignment;
 		}
@@ -66,7 +65,7 @@ public class QVTcoreHelper extends QVTbaseHelper
 	}
 
 	public @NonNull RealizedVariable createRealizedVariable(@NonNull String name, @NonNull Type type) {
-		RealizedVariable realizedVariable = QVTcoreBaseFactory.eINSTANCE.createRealizedVariable();
+		RealizedVariable realizedVariable = QVTcoreFactory.eINSTANCE.createRealizedVariable();
 		realizedVariable.setName(name);
 		realizedVariable.setType(type);
 		realizedVariable.setIsRequired(true);;
@@ -74,7 +73,7 @@ public class QVTcoreHelper extends QVTbaseHelper
 	}
 
 	public @NonNull VariableAssignment createVariableAssignment(@NonNull Variable asVariable, @NonNull OCLExpression asValueExpression) {
-		VariableAssignment asVariableAssignment = QVTcoreBaseFactory.eINSTANCE.createVariableAssignment();
+		VariableAssignment asVariableAssignment = QVTcoreFactory.eINSTANCE.createVariableAssignment();
 		asVariableAssignment.setTargetVariable(asVariable);
 		asVariableAssignment.setValue(asValueExpression);
 		return asVariableAssignment;

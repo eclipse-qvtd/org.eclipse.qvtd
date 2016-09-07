@@ -1,15 +1,15 @@
 /**
  * <copyright>
- * 
+ *
  * Copyright (c) 2013, 2017 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
- * 
+ *
  * </copyright>
  */
 package org.eclipse.qvtd.pivot.qvtimperative.impl;
@@ -115,6 +115,7 @@ public class BottomPatternImpl extends CorePatternImpl implements BottomPattern 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Area getArea() {
 		if (eContainerFeatureID() != QVTimperativePackage.BOTTOM_PATTERN__AREA) return null;
 		return (Area)eInternalContainer();
@@ -135,6 +136,7 @@ public class BottomPatternImpl extends CorePatternImpl implements BottomPattern 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setArea(Area newArea) {
 		if (newArea != eInternalContainer() || (eContainerFeatureID() != QVTimperativePackage.BOTTOM_PATTERN__AREA && newArea != null)) {
 			if (EcoreUtil.isAncestor(this, newArea))
@@ -156,6 +158,7 @@ public class BottomPatternImpl extends CorePatternImpl implements BottomPattern 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Assignment> getAssignment() {
 		if (assignment == null) {
 			assignment = new EObjectContainmentWithInverseEList<Assignment>(Assignment.class, this, QVTimperativePackage.BOTTOM_PATTERN__ASSIGNMENT, QVTimperativePackage.ASSIGNMENT__BOTTOM_PATTERN);
@@ -168,6 +171,7 @@ public class BottomPatternImpl extends CorePatternImpl implements BottomPattern 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<EnforcementOperation> getEnforcementOperation() {
 		if (enforcementOperation == null) {
 			enforcementOperation = new EObjectContainmentWithInverseEList<EnforcementOperation>(EnforcementOperation.class, this, QVTimperativePackage.BOTTOM_PATTERN__ENFORCEMENT_OPERATION, QVTimperativePackage.ENFORCEMENT_OPERATION__BOTTOM_PATTERN);
@@ -180,6 +184,7 @@ public class BottomPatternImpl extends CorePatternImpl implements BottomPattern 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<RealizedVariable> getRealizedVariable() {
 		if (realizedVariable == null) {
 			realizedVariable = new EObjectContainmentEList<RealizedVariable>(RealizedVariable.class, this, QVTimperativePackage.BOTTOM_PATTERN__REALIZED_VARIABLE);

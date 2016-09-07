@@ -24,14 +24,14 @@ import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
-import org.eclipse.qvtd.pivot.qvtcorebase.Area;
-import org.eclipse.qvtd.pivot.qvtcorebase.Assignment;
-import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
-import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
-import org.eclipse.qvtd.pivot.qvtcorebase.CorePattern;
-import org.eclipse.qvtd.pivot.qvtcorebase.NavigationAssignment;
-import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
-import org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment;
+import org.eclipse.qvtd.pivot.qvtcore.Area;
+import org.eclipse.qvtd.pivot.qvtcore.Assignment;
+import org.eclipse.qvtd.pivot.qvtcore.BottomPattern;
+import org.eclipse.qvtd.pivot.qvtcore.CoreDomain;
+import org.eclipse.qvtd.pivot.qvtcore.CorePattern;
+import org.eclipse.qvtd.pivot.qvtcore.NavigationAssignment;
+import org.eclipse.qvtd.pivot.qvtcore.RealizedVariable;
+import org.eclipse.qvtd.pivot.qvtcore.VariableAssignment;
 import org.eclipse.qvtd.pivot.qvtrelation.Key;
 import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
@@ -77,7 +77,7 @@ public class RelationVariableAnalysis extends AbstractVariableAnalysis
 			}
 		}
 		Variable cVariable2 = getCoreVariable();
-		List<Assignment> cMiddleBottomAssignments = variablesAnalysis.getMiddleBottomPattern().getAssignment();
+		List<@NonNull Assignment> cMiddleBottomAssignments = variablesAnalysis.getMiddleBottomPattern().getAssignment();
 		if (!targetProperty.isIsMany() || (cExpression.getType() instanceof CollectionType)) {
 			VariableExp cSlotVariableExp = variablesAnalysis.createVariableExp(cVariable2);
 			NavigationAssignment cAssignment = variablesAnalysis.createNavigationAssignment(cSlotVariableExp, targetProperty, cExpression);

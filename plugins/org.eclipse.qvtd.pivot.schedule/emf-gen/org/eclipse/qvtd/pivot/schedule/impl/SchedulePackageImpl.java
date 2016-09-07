@@ -20,7 +20,6 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
-import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage;
 import org.eclipse.qvtd.pivot.schedule.AbstractAction;
 import org.eclipse.qvtd.pivot.schedule.AbstractDatum;
 import org.eclipse.qvtd.pivot.schedule.ClassDatum;

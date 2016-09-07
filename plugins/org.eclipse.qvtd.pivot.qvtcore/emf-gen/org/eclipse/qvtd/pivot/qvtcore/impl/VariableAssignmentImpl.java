@@ -1,15 +1,15 @@
 /**
  * <copyright>
- * 
+ *
  * Copyright (c) 2013, 2017 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
- * 
+ *
  * </copyright>
  */
 package org.eclipse.qvtd.pivot.qvtcore.impl;
@@ -80,6 +80,7 @@ public class VariableAssignmentImpl extends AssignmentImpl implements VariableAs
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Variable getTargetVariable() {
 		if (targetVariable != null && targetVariable.eIsProxy()) {
 			InternalEObject oldTargetVariable = (InternalEObject)targetVariable;
@@ -106,6 +107,7 @@ public class VariableAssignmentImpl extends AssignmentImpl implements VariableAs
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setTargetVariable(Variable newTargetVariable) {
 		Variable oldTargetVariable = targetVariable;
 		targetVariable = newTargetVariable;

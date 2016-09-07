@@ -15,6 +15,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.internal.scoping.Attribution;
 import org.eclipse.ocl.pivot.internal.scoping.EnvironmentView;
@@ -25,14 +26,13 @@ import org.eclipse.qvtd.pivot.qvtcore.attributes.CoreDomainAttribution;
 import org.eclipse.qvtd.pivot.qvtcore.attributes.GuardPatternAttribution;
 import org.eclipse.qvtd.pivot.qvtcore.attributes.MappingAttribution;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
-import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage;
 
 public class QVTcorePivotScoping
 {
-	private static final class GuardVariableDisambiguator implements Comparator<Variable>
+	private static final class GuardVariableDisambiguator implements Comparator<@NonNull Variable>
 	{
 		@Override
-		public int compare(Variable match1, Variable match2) {
+		public int compare(@NonNull Variable match1, @NonNull Variable match2) {
 			Mapping mapping1 = QVTcoreUtil.getContainingMapping(match1);
 			if (mapping1 == null) {
 				return 1;				// match2 inferior
@@ -54,9 +54,9 @@ public class QVTcorePivotScoping
 	}
 	public static void init() {
 		Map<EClassifier, Attribution> registry = Attribution.REGISTRY;
-		registry.put(QVTcoreBasePackage.Literals.BOTTOM_PATTERN, BottomPatternAttribution.INSTANCE);
-		registry.put(QVTcoreBasePackage.Literals.CORE_DOMAIN, CoreDomainAttribution.INSTANCE);
-		registry.put(QVTcoreBasePackage.Literals.GUARD_PATTERN, GuardPatternAttribution.INSTANCE);
+		registry.put(QVTcorePackage.Literals.BOTTOM_PATTERN, BottomPatternAttribution.INSTANCE);
+		registry.put(QVTcorePackage.Literals.CORE_DOMAIN, CoreDomainAttribution.INSTANCE);
+		registry.put(QVTcorePackage.Literals.GUARD_PATTERN, GuardPatternAttribution.INSTANCE);
 		registry.put(QVTcorePackage.Literals.MAPPING, MappingAttribution.INSTANCE);
 		EnvironmentView.addDisambiguator(Variable.class, new GuardVariableDisambiguator());
 	}

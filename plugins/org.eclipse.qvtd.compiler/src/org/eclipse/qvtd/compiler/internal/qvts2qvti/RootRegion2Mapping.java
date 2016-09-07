@@ -51,10 +51,10 @@ import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RootCompositionRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.SchedulerConstants;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
-import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
-import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
-import org.eclipse.qvtd.pivot.qvtcorebase.CorePattern;
+import org.eclipse.qvtd.pivot.qvtimperative.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.CoreDomain;
+import org.eclipse.qvtd.pivot.qvtimperative.CorePattern;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 
@@ -69,9 +69,9 @@ public class RootRegion2Mapping extends AbstractScheduledRegion2Mapping
 	 * Mapping from the scheduled Nodes to their QVTi variables.
 	 */
 	private final @NonNull Map<@NonNull Node, @NonNull Variable> node2variable = new HashMap<@NonNull Node, @NonNull Variable>();
-//	private Variable rootsVariable = null;
+	//	private Variable rootsVariable = null;
 
-//	private final @NonNull Map<@NonNull NodeConnection, @NonNull ConnectionVariable> connection2variable = new HashMap<@NonNull NodeConnection, @NonNull ConnectionVariable>();
+	//	private final @NonNull Map<@NonNull NodeConnection, @NonNull ConnectionVariable> connection2variable = new HashMap<@NonNull NodeConnection, @NonNull ConnectionVariable>();
 
 	public RootRegion2Mapping(@NonNull QVTs2QVTiVisitor visitor, @NonNull RootCompositionRegion region) {
 		super(visitor, region);
@@ -94,10 +94,10 @@ public class RootRegion2Mapping extends AbstractScheduledRegion2Mapping
 			CoreDomain domain = QVTimperativeUtil.createImperativeDomain(qvtiTypedModel);
 			domain.setIsCheckable(true);
 			mapping.getDomain().add(domain);
-//			CoreDomain oldDomain = typedModel2domain.put(qvtiTypedModel, domain);
-//			assert oldDomain == null;
+			//			CoreDomain oldDomain = typedModel2domain.put(qvtiTypedModel, domain);
+			//			assert oldDomain == null;
 		}
-/*		for (ConnectionRegion connectionRegion : rootConnections) {
+		/*		for (ConnectionRegion connectionRegion : rootConnections) {
 			SimpleNode connectionNode = connectionRegion.getConnectionNode();
 			CompleteClass completeClass = connectionNode.getCompleteClass();
 //			NullLiteralExp initExpression = ValueUtil.createSetOfEach((CollectionTypeId)completeClass.getPrimaryClass().getTypeId());
@@ -130,14 +130,14 @@ public class RootRegion2Mapping extends AbstractScheduledRegion2Mapping
 		}
 		return helper.createVariableExp(allInstancesVariable);
 	}
-	
+
 	private @NonNull ConnectionVariable createRootConnectionVariable(@NonNull CorePattern pattern, @NonNull String name, @NonNull Type type, @Nullable OCLExpression initExpression) {
-//		Type variableType = visitor.getEnvironmentFactory().getCompleteEnvironment().getSetType(node.getCompleteClass().getPrimaryClass(), true, null, null);
-//		assert variableType != null;
+		//		Type variableType = visitor.getEnvironmentFactory().getCompleteEnvironment().getSetType(node.getCompleteClass().getPrimaryClass(), true, null, null);
+		//		assert variableType != null;
 		ConnectionVariable variable = helper.createConnectionVariable(getSafeName(name), type, initExpression);
 		pattern.getVariable().add(variable);
-//		Variable oldVariable = node2variable.put(node, variable);
-//		assert oldVariable == null;
+		//		Variable oldVariable = node2variable.put(node, variable);
+		//		assert oldVariable == null;
 		return variable;
 	}
 
@@ -182,7 +182,7 @@ public class RootRegion2Mapping extends AbstractScheduledRegion2Mapping
 	@Override
 	protected @NonNull OCLExpression createSelectByKind(@NonNull Node resultNode) {
 		throw new UnsupportedOperationException();
-/*		Variable resultVariable = node2variable.get(resultNode);
+		/*		Variable resultVariable = node2variable.get(resultNode);
 		if (resultVariable == null) {
 			OCLExpression asSource = getRootsVariable(resultNode);
 			CompleteClass sourceCompleteClass = resultNode.getCompleteClass();
@@ -201,9 +201,9 @@ public class RootRegion2Mapping extends AbstractScheduledRegion2Mapping
 
 	@Override
 	public void createStatements() {
-//		BottomPattern bottomPattern = mapping.getBottomPattern();
+		//		BottomPattern bottomPattern = mapping.getBottomPattern();
 		createRootConnectionVariables();
-/*		//
+		/*		//
 		//	Cache the children in a middle bottom pattern variable.
 		//
 		OCLExpression parentExpression = createVariableExp(headNode);
@@ -219,8 +219,8 @@ public class RootRegion2Mapping extends AbstractScheduledRegion2Mapping
 		//
 		//	Create union assignments for connections.
 		//
-//		if (connection2variable != null) {
-/*			Operation asOperation = NameUtil.getNameable(visitor.getStandardLibrary().getCollectionType().getOwnedOperations(), "union");
+		//		if (connection2variable != null) {
+		/*			Operation asOperation = NameUtil.getNameable(visitor.getStandardLibrary().getCollectionType().getOwnedOperations(), "union");
 			for (Node node : region.getNodes()) {
 				if (node.isComposed()) {
 					for (InterRegionEdge edge : node.getOutgoingPassedBindingEdges()) {
@@ -242,7 +242,7 @@ public class RootRegion2Mapping extends AbstractScheduledRegion2Mapping
 			bottomPattern.getVariable().addAll(connection2variable.values());
 //		} */
 		MappingStatement mappingStatement = null;
-/*		ChainNode chain = visitor.getChain(region);
+		/*		ChainNode chain = visitor.getChain(region);
 		for (ChainNode child : chain.getChildren()) {
 			Region calledRegion = child.getRegion();
 			if (!calledRegion.isConnectionRegion()) {
@@ -281,7 +281,7 @@ public class RootRegion2Mapping extends AbstractScheduledRegion2Mapping
 			initExpression = helper.createIteratorExp(initExpression, getSelectIteration(), Collections.singletonList(asIterator), equalsExp);
 		}
 		else {
-//			OCLExpression equalsExp = helper.createOperationCallExp(propertyCallExp, getOclIsKindOfOperation(), createTypeExp());
+			//			OCLExpression equalsExp = helper.createOperationCallExp(propertyCallExp, getOclIsKindOfOperation(), createTypeExp());
 			OCLExpression notEqualsExp = helper.createOperationCallExp(propertyCallExp, "<>", helper.createNullLiteralExp());
 			initExpression = helper.createIteratorExp(initExpression, getSelectIteration(), Collections.singletonList(asIterator), notEqualsExp);
 		}
@@ -300,7 +300,7 @@ public class RootRegion2Mapping extends AbstractScheduledRegion2Mapping
 		return variable;
 	}
 
-/*	private @NonNull OCLExpression getRootsVariable(@NonNull Node resultNode) {	// FIXME compute input typed model
+	/*	private @NonNull OCLExpression getRootsVariable(@NonNull Node resultNode) {	// FIXME compute input typed model
 		Variable rootsVariable2 = rootsVariable;
 		if (rootsVariable2 == null) {
 			StandardLibraryInternal standardLibrary = (StandardLibraryInternal)visitor.getStandardLibrary();
