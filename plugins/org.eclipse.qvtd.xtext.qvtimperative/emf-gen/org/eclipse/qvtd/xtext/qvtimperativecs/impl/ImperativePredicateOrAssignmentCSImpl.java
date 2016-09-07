@@ -40,7 +40,7 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
  *
  * @generated
  */
-public class ImperativePredicateOrAssignmentCSImpl extends org.eclipse.qvtd.xtext.qvtimperativecs.impl.PredicateOrAssignmentCSImpl implements ImperativePredicateOrAssignmentCS {
+public class ImperativePredicateOrAssignmentCSImpl extends PredicateOrAssignmentCSImpl implements ImperativePredicateOrAssignmentCS {
 	/**
 	 * The default value of the '{@link #isIsAccumulate() <em>Is Accumulate</em>}' attribute.
 	 * <!-- begin-user-doc -->

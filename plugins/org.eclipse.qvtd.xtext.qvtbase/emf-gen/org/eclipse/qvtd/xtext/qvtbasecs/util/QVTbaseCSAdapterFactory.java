@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  */
@@ -93,89 +93,89 @@ public class QVTbaseCSAdapterFactory extends AdapterFactoryImpl
 	 * @generated
 	 */
 	protected QVTbaseCSSwitch<@Nullable Adapter> modelSwitch =
-		new QVTbaseCSSwitch<@Nullable Adapter>()
+			new QVTbaseCSSwitch<@Nullable Adapter>()
+	{
+		@Override
+		public Adapter caseAbstractTransformationCS(AbstractTransformationCS object)
 		{
-			@Override
-			public Adapter caseAbstractTransformationCS(AbstractTransformationCS object)
-			{
-				return createAbstractTransformationCSAdapter();
-			}
-			@Override
-			public Adapter caseQualifiedPackageCS(QualifiedPackageCS object)
-			{
-				return createQualifiedPackageCSAdapter();
-			}
-			@Override
-			public Adapter caseVisitableCS(VisitableCS object)
-			{
-				return createVisitableCSAdapter();
-			}
-			@Override
-			public Adapter caseElementCS(ElementCS object)
-			{
-				return createElementCSAdapter();
-			}
-			@Override
-			public Adapter casePivotable(Pivotable object)
-			{
-				return createPivotableAdapter();
-			}
-			@Override
-			public Adapter casePivotableElementCS(PivotableElementCS object)
-			{
-				return createPivotableElementCSAdapter();
-			}
-			@Override
-			public Adapter caseModelElementCS(ModelElementCS object)
-			{
-				return createModelElementCSAdapter();
-			}
-			@Override
-			public Adapter caseNameable(Nameable object)
-			{
-				return createNameableAdapter();
-			}
-			@Override
-			public Adapter caseNamedElementCS(NamedElementCS object)
-			{
-				return createNamedElementCSAdapter();
-			}
-			@Override
-			public Adapter caseTypeCS(TypeCS object)
-			{
-				return createTypeCSAdapter();
-			}
-			@Override
-			public Adapter caseTemplateableElementCS(TemplateableElementCS object)
-			{
-				return createTemplateableElementCSAdapter();
-			}
-			@Override
-			public Adapter caseClassCS(ClassCS object)
-			{
-				return createClassCSAdapter();
-			}
-			@Override
-			public Adapter casePackageOwnerCS(PackageOwnerCS object)
-			{
-				return createPackageOwnerCSAdapter();
-			}
-			@Override
-			public Adapter caseNamespaceCS(NamespaceCS object)
-			{
-				return createNamespaceCSAdapter();
-			}
-			@Override
-			public Adapter casePackageCS(PackageCS object)
-			{
-				return createPackageCSAdapter();
-			}
-			@Override
-			public Adapter defaultCase(EObject object)
-			{
-				return createEObjectAdapter();
-			}
-		};
+			return createAbstractTransformationCSAdapter();
+		}
+		@Override
+		public Adapter caseQualifiedPackageCS(QualifiedPackageCS object)
+		{
+			return createQualifiedPackageCSAdapter();
+		}
+		@Override
+		public Adapter caseVisitableCS(VisitableCS object)
+		{
+			return createVisitableCSAdapter();
+		}
+		@Override
+		public Adapter caseElementCS(ElementCS object)
+		{
+			return createElementCSAdapter();
+		}
+		@Override
+		public Adapter casePivotable(Pivotable object)
+		{
+			return createPivotableAdapter();
+		}
+		@Override
+		public Adapter casePivotableElementCS(PivotableElementCS object)
+		{
+			return createPivotableElementCSAdapter();
+		}
+		@Override
+		public Adapter caseModelElementCS(ModelElementCS object)
+		{
+			return createModelElementCSAdapter();
+		}
+		@Override
+		public Adapter caseNameable(Nameable object)
+		{
+			return createNameableAdapter();
+		}
+		@Override
+		public Adapter caseNamedElementCS(NamedElementCS object)
+		{
+			return createNamedElementCSAdapter();
+		}
+		@Override
+		public Adapter caseTypeCS(TypeCS object)
+		{
+			return createTypeCSAdapter();
+		}
+		@Override
+		public Adapter caseTemplateableElementCS(TemplateableElementCS object)
+		{
+			return createTemplateableElementCSAdapter();
+		}
+		@Override
+		public Adapter caseClassCS(ClassCS object)
+		{
+			return createClassCSAdapter();
+		}
+		@Override
+		public Adapter casePackageOwnerCS(PackageOwnerCS object)
+		{
+			return createPackageOwnerCSAdapter();
+		}
+		@Override
+		public Adapter caseNamespaceCS(NamespaceCS object)
+		{
+			return createNamespaceCSAdapter();
+		}
+		@Override
+		public Adapter casePackageCS(PackageCS object)
+		{
+			return createPackageCSAdapter();
+		}
+		@Override
+		public Adapter defaultCase(EObject object)
+		{
+			return createEObjectAdapter();
+		}
+	};
 
 	/**
 	 * Creates an adapter for the <code>target</code>.

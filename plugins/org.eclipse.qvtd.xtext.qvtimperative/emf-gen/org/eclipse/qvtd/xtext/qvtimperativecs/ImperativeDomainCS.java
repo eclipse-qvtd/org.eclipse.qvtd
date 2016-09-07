@@ -35,7 +35,7 @@ import org.eclipse.ocl.xtext.basecs.PathNameCS;
  * @model
  * @generated
  */
-public interface ImperativeDomainCS extends org.eclipse.qvtd.xtext.qvtimperativecs.DomainCS {
+public interface ImperativeDomainCS extends DomainCS {
 	/**
 	 * Returns the value of the '<em><b>Checked Properties</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.ocl.xtext.basecs.PathNameCS}.

@@ -90,7 +90,7 @@ public class QVTimperativeCSAdapterFactory extends AdapterFactoryImpl {
 	protected QVTimperativeCSSwitch<@Nullable Adapter> modelSwitch =
 		new QVTimperativeCSSwitch<@Nullable Adapter>() {
 			@Override
-			public Adapter caseAreaCS(org.eclipse.qvtd.xtext.qvtimperativecs.AreaCS object) {
+			public Adapter caseAreaCS(AreaCS object) {
 				return createAreaCSAdapter();
 			}
 			@Override
@@ -106,7 +106,7 @@ public class QVTimperativeCSAdapterFactory extends AdapterFactoryImpl {
 				return createDirectionCSAdapter();
 			}
 			@Override
-			public Adapter caseDomainCS(org.eclipse.qvtd.xtext.qvtimperativecs.DomainCS object) {
+			public Adapter caseDomainCS(DomainCS object) {
 				return createDomainCSAdapter();
 			}
 			@Override
@@ -166,7 +166,7 @@ public class QVTimperativeCSAdapterFactory extends AdapterFactoryImpl {
 				return createPredicateCSAdapter();
 			}
 			@Override
-			public Adapter casePredicateOrAssignmentCS(org.eclipse.qvtd.xtext.qvtimperativecs.PredicateOrAssignmentCS object) {
+			public Adapter casePredicateOrAssignmentCS(PredicateOrAssignmentCS object) {
 				return createPredicateOrAssignmentCSAdapter();
 			}
 			@Override
@@ -174,11 +174,11 @@ public class QVTimperativeCSAdapterFactory extends AdapterFactoryImpl {
 				return createQueryCSAdapter();
 			}
 			@Override
-			public Adapter caseRealizeableVariableCS(org.eclipse.qvtd.xtext.qvtimperativecs.RealizeableVariableCS object) {
+			public Adapter caseRealizeableVariableCS(RealizeableVariableCS object) {
 				return createRealizeableVariableCSAdapter();
 			}
 			@Override
-			public Adapter caseRealizedVariableCS(org.eclipse.qvtd.xtext.qvtimperativecs.RealizedVariableCS object) {
+			public Adapter caseRealizedVariableCS(RealizedVariableCS object) {
 				return createRealizedVariableCSAdapter();
 			}
 			@Override

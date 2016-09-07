@@ -32,7 +32,7 @@ import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
  * @model
  * @generated
  */
-public interface ImperativeRealizedVariableCS extends org.eclipse.qvtd.xtext.qvtimperativecs.RealizedVariableCS {
+public interface ImperativeRealizedVariableCS extends RealizedVariableCS {
 	/**
 	 * Returns the value of the '<em><b>Owned Init Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

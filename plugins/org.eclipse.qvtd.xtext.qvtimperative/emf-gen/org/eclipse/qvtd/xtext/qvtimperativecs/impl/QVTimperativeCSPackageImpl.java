@@ -50,10 +50,6 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.RealizedVariableCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.TopLevelCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.TransformationCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.UnrealizedVariableCS;
-import qvtcore.QvtcorePackage;
-import qvtcore.impl.QvtcorePackageImpl;
-import qvtcorecs.QvtcorecsPackage;
-import qvtcorecs.impl.QvtcorecsPackageImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -272,7 +268,7 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 *
+	 * 
 	 * <p>This method is used to initialize {@link QVTimperativeCSPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -296,24 +292,16 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		QVTimperativePackage.eINSTANCE.eClass();
 		QVTbaseCSPackage.eINSTANCE.eClass();
 
-		// Obtain or create and register interdependencies
-		QvtcorecsPackageImpl theQvtcorecsPackage = (QvtcorecsPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(QvtcorecsPackage.eNS_URI) instanceof QvtcorecsPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(QvtcorecsPackage.eNS_URI) : QvtcorecsPackage.eINSTANCE);
-		QvtcorePackageImpl theQvtcorePackage = (QvtcorePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(QvtcorePackage.eNS_URI) instanceof QvtcorePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(QvtcorePackage.eNS_URI) : QvtcorePackage.eINSTANCE);
-
 		// Create package meta-data objects
 		theQVTimperativeCSPackage.createPackageContents();
-		theQvtcorecsPackage.createPackageContents();
-		theQvtcorePackage.createPackageContents();
 
 		// Initialize created meta-data
 		theQVTimperativeCSPackage.initializePackageContents();
-		theQvtcorecsPackage.initializePackageContents();
-		theQvtcorePackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
 		theQVTimperativeCSPackage.freeze();
 
-
+  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(QVTimperativeCSPackage.eNS_URI, theQVTimperativeCSPackage);
 		return theQVTimperativeCSPackage;

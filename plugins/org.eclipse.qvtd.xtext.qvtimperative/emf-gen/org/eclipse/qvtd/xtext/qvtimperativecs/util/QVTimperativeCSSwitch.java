@@ -90,7 +90,7 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
 			case QVTimperativeCSPackage.AREA_CS: {
-				org.eclipse.qvtd.xtext.qvtimperativecs.AreaCS areaCS = (org.eclipse.qvtd.xtext.qvtimperativecs.AreaCS)theEObject;
+				AreaCS areaCS = (AreaCS)theEObject;
 				T result = caseAreaCS(areaCS);
 				if (result == null) result = caseNamedElementCS(areaCS);
 				if (result == null) result = caseModelElementCS(areaCS);
@@ -140,7 +140,7 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 				return result;
 			}
 			case QVTimperativeCSPackage.DOMAIN_CS: {
-				org.eclipse.qvtd.xtext.qvtimperativecs.DomainCS domainCS = (org.eclipse.qvtd.xtext.qvtimperativecs.DomainCS)theEObject;
+				DomainCS domainCS = (DomainCS)theEObject;
 				T result = caseDomainCS(domainCS);
 				if (result == null) result = caseAreaCS(domainCS);
 				if (result == null) result = caseNamedElementCS(domainCS);
@@ -330,7 +330,7 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 				return result;
 			}
 			case QVTimperativeCSPackage.PREDICATE_OR_ASSIGNMENT_CS: {
-				org.eclipse.qvtd.xtext.qvtimperativecs.PredicateOrAssignmentCS predicateOrAssignmentCS = (org.eclipse.qvtd.xtext.qvtimperativecs.PredicateOrAssignmentCS)theEObject;
+				PredicateOrAssignmentCS predicateOrAssignmentCS = (PredicateOrAssignmentCS)theEObject;
 				T result = casePredicateOrAssignmentCS(predicateOrAssignmentCS);
 				if (result == null) result = caseExpCS(predicateOrAssignmentCS);
 				if (result == null) result = caseModelElementCS(predicateOrAssignmentCS);
@@ -356,7 +356,7 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 				return result;
 			}
 			case QVTimperativeCSPackage.REALIZEABLE_VARIABLE_CS: {
-				org.eclipse.qvtd.xtext.qvtimperativecs.RealizeableVariableCS realizeableVariableCS = (org.eclipse.qvtd.xtext.qvtimperativecs.RealizeableVariableCS)theEObject;
+				RealizeableVariableCS realizeableVariableCS = (RealizeableVariableCS)theEObject;
 				T result = caseRealizeableVariableCS(realizeableVariableCS);
 				if (result == null) result = caseTypedElementCS(realizeableVariableCS);
 				if (result == null) result = caseNamedElementCS(realizeableVariableCS);
@@ -370,7 +370,7 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 				return result;
 			}
 			case QVTimperativeCSPackage.REALIZED_VARIABLE_CS: {
-				org.eclipse.qvtd.xtext.qvtimperativecs.RealizedVariableCS realizedVariableCS = (org.eclipse.qvtd.xtext.qvtimperativecs.RealizedVariableCS)theEObject;
+				RealizedVariableCS realizedVariableCS = (RealizedVariableCS)theEObject;
 				T result = caseRealizedVariableCS(realizedVariableCS);
 				if (result == null) result = caseRealizeableVariableCS(realizedVariableCS);
 				if (result == null) result = caseTypedElementCS(realizedVariableCS);
@@ -445,7 +445,7 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseAreaCS(org.eclipse.qvtd.xtext.qvtimperativecs.AreaCS object) {
+	public T caseAreaCS(AreaCS object) {
 		return null;
 	}
 
@@ -505,7 +505,7 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseDomainCS(org.eclipse.qvtd.xtext.qvtimperativecs.DomainCS object) {
+	public T caseDomainCS(DomainCS object) {
 		return null;
 	}
 
@@ -685,7 +685,7 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T casePredicateOrAssignmentCS(org.eclipse.qvtd.xtext.qvtimperativecs.PredicateOrAssignmentCS object) {
+	public T casePredicateOrAssignmentCS(PredicateOrAssignmentCS object) {
 		return null;
 	}
 
@@ -715,7 +715,7 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseRealizeableVariableCS(org.eclipse.qvtd.xtext.qvtimperativecs.RealizeableVariableCS object) {
+	public T caseRealizeableVariableCS(RealizeableVariableCS object) {
 		return null;
 	}
 
@@ -730,7 +730,7 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseRealizedVariableCS(org.eclipse.qvtd.xtext.qvtimperativecs.RealizedVariableCS object) {
+	public T caseRealizedVariableCS(RealizedVariableCS object) {
 		return null;
 	}
 

@@ -46,7 +46,7 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
  *
  * @generated
  */
-public class ImperativeRealizedVariableCSImpl extends org.eclipse.qvtd.xtext.qvtimperativecs.impl.RealizedVariableCSImpl implements ImperativeRealizedVariableCS {
+public class ImperativeRealizedVariableCSImpl extends RealizedVariableCSImpl implements ImperativeRealizedVariableCS {
 	/**
 	 * The cached value of the '{@link #getOwnedInitExpression() <em>Owned Init Expression</em>}' containment reference.
 	 * <!-- begin-user-doc -->
