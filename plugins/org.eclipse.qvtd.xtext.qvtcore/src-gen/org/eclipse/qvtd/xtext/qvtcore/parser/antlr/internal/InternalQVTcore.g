@@ -103,7 +103,7 @@ ruleTopLevelCS returns [EObject current=null]
        			$current, 
        			"ownedImports",
         		lv_ownedImports_0_0, 
-        		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.ImportCS");
+        		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.ImportCS");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -121,7 +121,7 @@ ruleTopLevelCS returns [EObject current=null]
        			$current, 
        			"ownedPackages",
         		lv_ownedPackages_1_0, 
-        		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.QualifiedPackageCS");
+        		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.QualifiedPackageCS");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -140,7 +140,7 @@ ruleTopLevelCS returns [EObject current=null]
        			$current, 
        			"ownedTransformations",
         		lv_ownedTransformations_2_0, 
-        		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.TransformationCS");
+        		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.TransformationCS");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -178,211 +178,12 @@ ruleTopLevelCS returns [EObject current=null]
        			$current, 
        			"ownedQueries",
         		lv_ownedQueries_4_0, 
-        		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.QueryCS");
+        		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.QueryCS");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
 ))*)
-;
-
-
-
-
-
-// Entry rule entryRuleMappingCS
-entryRuleMappingCS returns [EObject current=null] 
-	:
-	{ newCompositeNode(grammarAccess.getMappingCSRule()); }
-	 iv_ruleMappingCS=ruleMappingCS 
-	 { $current=$iv_ruleMappingCS.current; } 
-	 EOF 
-;
-
-// Rule MappingCS
-ruleMappingCS returns [EObject current=null] 
-    @init { enterRule(); 
-    }
-    @after { leaveRule(); }:
-((
-	{ 
-	  /* */ 
-	}
-    {
-        $current = forceCreateModelElement(
-            grammarAccess.getMappingCSAccess().getMappingCSAction_0(),
-            $current);
-    }
-)(
-(
-		lv_isDefault_1_0=	'default' 
-    {
-        newLeafNode(lv_isDefault_1_0, grammarAccess.getMappingCSAccess().getIsDefaultDefaultKeyword_1_0());
-    }
- 
-	    {
-	        if ($current==null) {
-	            $current = createModelElement(grammarAccess.getMappingCSRule());
-	        }
-       		setWithLastConsumed($current, "isDefault", true, "default");
-	    }
-
-)
-)?	otherlv_2='map' 
-    {
-    	newLeafNode(otherlv_2, grammarAccess.getMappingCSAccess().getMapKeyword_2());
-    }
-(
-(
-		{ 
-	        newCompositeNode(grammarAccess.getMappingCSAccess().getNameUnrestrictedNameParserRuleCall_3_0()); 
-	    }
-		lv_name_3_0=ruleUnrestrictedName		{
-	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getMappingCSRule());
-	        }
-       		set(
-       			$current, 
-       			"name",
-        		lv_name_3_0, 
-        		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.UnrestrictedName");
-	        afterParserOrEnumRuleCall();
-	    }
-
-)
-)?(	otherlv_4='in' 
-    {
-    	newLeafNode(otherlv_4, grammarAccess.getMappingCSAccess().getInKeyword_4_0());
-    }
-(
-(
-		{ 
-	        newCompositeNode(grammarAccess.getMappingCSAccess().getOwnedInPathNamePathNameCSParserRuleCall_4_1_0()); 
-	    }
-		lv_ownedInPathName_5_0=rulePathNameCS		{
-	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getMappingCSRule());
-	        }
-       		set(
-       			$current, 
-       			"ownedInPathName",
-        		lv_ownedInPathName_5_0, 
-        		"org.eclipse.ocl.xtext.base.Base.PathNameCS");
-	        afterParserOrEnumRuleCall();
-	    }
-
-)
-))?(	otherlv_6='refines' 
-    {
-    	newLeafNode(otherlv_6, grammarAccess.getMappingCSAccess().getRefinesKeyword_5_0());
-    }
-(
-(
-		{ 
-		  /* */ 
-		}
-		{
-			if ($current==null) {
-	            $current = createModelElement(grammarAccess.getMappingCSRule());
-	        }
-        }
-		{ 
-	        newCompositeNode(grammarAccess.getMappingCSAccess().getRefinesMappingCrossReference_5_1_0()); 
-	    }
-		ruleUnrestrictedName		{ 
-	        afterParserOrEnumRuleCall();
-	    }
-
-)
-)(	otherlv_8=',' 
-    {
-    	newLeafNode(otherlv_8, grammarAccess.getMappingCSAccess().getCommaKeyword_5_2_0());
-    }
-(
-(
-		{ 
-		  /* */ 
-		}
-		{
-			if ($current==null) {
-	            $current = createModelElement(grammarAccess.getMappingCSRule());
-	        }
-        }
-		{ 
-	        newCompositeNode(grammarAccess.getMappingCSAccess().getRefinesMappingCrossReference_5_2_1_0()); 
-	    }
-		ruleUnrestrictedName		{ 
-	        afterParserOrEnumRuleCall();
-	    }
-
-)
-))*)?	otherlv_10='{' 
-    {
-    	newLeafNode(otherlv_10, grammarAccess.getMappingCSAccess().getLeftCurlyBracketKeyword_6());
-    }
-(
-(
-		{ 
-	        newCompositeNode(grammarAccess.getMappingCSAccess().getOwnedDomainsNamedDomainCSParserRuleCall_7_0()); 
-	    }
-		lv_ownedDomains_11_0=ruleNamedDomainCS		{
-	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getMappingCSRule());
-	        }
-       		add(
-       			$current, 
-       			"ownedDomains",
-        		lv_ownedDomains_11_0, 
-        		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.NamedDomainCS");
-	        afterParserOrEnumRuleCall();
-	    }
-
-)
-)*(	otherlv_12='where' 
-    {
-    	newLeafNode(otherlv_12, grammarAccess.getMappingCSAccess().getWhereKeyword_8_0());
-    }
-(
-(
-		{ 
-	        newCompositeNode(grammarAccess.getMappingCSAccess().getOwnedMiddleUnnamedDomainCSParserRuleCall_8_1_0()); 
-	    }
-		lv_ownedMiddle_13_0=ruleUnnamedDomainCS		{
-	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getMappingCSRule());
-	        }
-       		set(
-       			$current, 
-       			"ownedMiddle",
-        		lv_ownedMiddle_13_0, 
-        		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.UnnamedDomainCS");
-	        afterParserOrEnumRuleCall();
-	    }
-
-)
-))?(
-(
-		{ 
-	        newCompositeNode(grammarAccess.getMappingCSAccess().getOwnedComposedMappingsMappingCSParserRuleCall_9_0()); 
-	    }
-		lv_ownedComposedMappings_14_0=ruleMappingCS		{
-	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getMappingCSRule());
-	        }
-       		add(
-       			$current, 
-       			"ownedComposedMappings",
-        		lv_ownedComposedMappings_14_0, 
-        		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.MappingCS");
-	        afterParserOrEnumRuleCall();
-	    }
-
-)
-)*	otherlv_15='}' 
-    {
-    	newLeafNode(otherlv_15, grammarAccess.getMappingCSAccess().getRightCurlyBracketKeyword_10());
-    }
-)
 ;
 
 
@@ -420,7 +221,7 @@ ruleBottomPatternCS returns [EObject current=null]
        			$current, 
        			"ownedUnrealizedVariables",
         		lv_ownedUnrealizedVariables_1_0, 
-        		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.UnrealizedVariableCS");
+        		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.UnrealizedVariableCS");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -439,7 +240,7 @@ ruleBottomPatternCS returns [EObject current=null]
        			$current, 
        			"ownedRealizedVariables",
         		lv_ownedRealizedVariables_2_0, 
-        		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.RealizedVariableCS");
+        		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.RealizedVariableCS");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -461,7 +262,7 @@ ruleBottomPatternCS returns [EObject current=null]
        			$current, 
        			"ownedUnrealizedVariables",
         		lv_ownedUnrealizedVariables_4_0, 
-        		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.UnrealizedVariableCS");
+        		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.UnrealizedVariableCS");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -480,7 +281,7 @@ ruleBottomPatternCS returns [EObject current=null]
        			$current, 
        			"ownedRealizedVariables",
         		lv_ownedRealizedVariables_5_0, 
-        		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.RealizedVariableCS");
+        		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.RealizedVariableCS");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -502,7 +303,7 @@ ruleBottomPatternCS returns [EObject current=null]
        			$current, 
        			"ownedConstraints",
         		lv_ownedConstraints_7_0, 
-        		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.PredicateOrAssignmentCS");
+        		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.PredicateOrAssignmentCS");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -529,7 +330,7 @@ ruleBottomPatternCS returns [EObject current=null]
        			$current, 
        			"ownedUnrealizedVariables",
         		lv_ownedUnrealizedVariables_10_0, 
-        		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.UnrealizedVariableCS");
+        		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.UnrealizedVariableCS");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -548,7 +349,7 @@ ruleBottomPatternCS returns [EObject current=null]
        			$current, 
        			"ownedRealizedVariables",
         		lv_ownedRealizedVariables_11_0, 
-        		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.RealizedVariableCS");
+        		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.RealizedVariableCS");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -570,7 +371,7 @@ ruleBottomPatternCS returns [EObject current=null]
        			$current, 
        			"ownedUnrealizedVariables",
         		lv_ownedUnrealizedVariables_13_0, 
-        		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.UnrealizedVariableCS");
+        		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.UnrealizedVariableCS");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -589,7 +390,7 @@ ruleBottomPatternCS returns [EObject current=null]
        			$current, 
        			"ownedRealizedVariables",
         		lv_ownedRealizedVariables_14_0, 
-        		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.RealizedVariableCS");
+        		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.RealizedVariableCS");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -616,7 +417,7 @@ ruleBottomPatternCS returns [EObject current=null]
        			$current, 
        			"ownedConstraints",
         		lv_ownedConstraints_17_0, 
-        		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.PredicateOrAssignmentCS");
+        		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.PredicateOrAssignmentCS");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -686,7 +487,7 @@ ruleDirectionCS returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.UnrestrictedName");
+        		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.UnrestrictedName");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -817,7 +618,7 @@ ruleGuardPatternCS returns [EObject current=null]
        			$current, 
        			"ownedUnrealizedVariables",
         		lv_ownedUnrealizedVariables_1_0, 
-        		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.GuardVariableCS");
+        		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.GuardVariableCS");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -839,7 +640,7 @@ ruleGuardPatternCS returns [EObject current=null]
        			$current, 
        			"ownedUnrealizedVariables",
         		lv_ownedUnrealizedVariables_3_0, 
-        		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.GuardVariableCS");
+        		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.GuardVariableCS");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -861,7 +662,7 @@ ruleGuardPatternCS returns [EObject current=null]
        			$current, 
        			"ownedPredicates",
         		lv_ownedPredicates_5_0, 
-        		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.PredicateCS");
+        		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.PredicateCS");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -888,7 +689,7 @@ ruleGuardPatternCS returns [EObject current=null]
        			$current, 
        			"ownedUnrealizedVariables",
         		lv_ownedUnrealizedVariables_8_0, 
-        		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.GuardVariableCS");
+        		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.GuardVariableCS");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -910,7 +711,7 @@ ruleGuardPatternCS returns [EObject current=null]
        			$current, 
        			"ownedUnrealizedVariables",
         		lv_ownedUnrealizedVariables_10_0, 
-        		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.GuardVariableCS");
+        		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.GuardVariableCS");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -937,7 +738,7 @@ ruleGuardPatternCS returns [EObject current=null]
        			$current, 
        			"ownedPredicates",
         		lv_ownedPredicates_13_0, 
-        		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.PredicateCS");
+        		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.PredicateCS");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -998,7 +799,7 @@ ruleGuardVariableCS returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_0_0, 
-        		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.UnrestrictedName");
+        		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.UnrestrictedName");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1120,6 +921,205 @@ ruleImportCS returns [EObject current=null]
 
 
 
+// Entry rule entryRuleMappingCS
+entryRuleMappingCS returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getMappingCSRule()); }
+	 iv_ruleMappingCS=ruleMappingCS 
+	 { $current=$iv_ruleMappingCS.current; } 
+	 EOF 
+;
+
+// Rule MappingCS
+ruleMappingCS returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+((
+	{ 
+	  /* */ 
+	}
+    {
+        $current = forceCreateModelElement(
+            grammarAccess.getMappingCSAccess().getMappingCSAction_0(),
+            $current);
+    }
+)(
+(
+		lv_isDefault_1_0=	'default' 
+    {
+        newLeafNode(lv_isDefault_1_0, grammarAccess.getMappingCSAccess().getIsDefaultDefaultKeyword_1_0());
+    }
+ 
+	    {
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getMappingCSRule());
+	        }
+       		setWithLastConsumed($current, "isDefault", true, "default");
+	    }
+
+)
+)?	otherlv_2='map' 
+    {
+    	newLeafNode(otherlv_2, grammarAccess.getMappingCSAccess().getMapKeyword_2());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getMappingCSAccess().getNameUnrestrictedNameParserRuleCall_3_0()); 
+	    }
+		lv_name_3_0=ruleUnrestrictedName		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getMappingCSRule());
+	        }
+       		set(
+       			$current, 
+       			"name",
+        		lv_name_3_0, 
+        		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.UnrestrictedName");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)?(	otherlv_4='in' 
+    {
+    	newLeafNode(otherlv_4, grammarAccess.getMappingCSAccess().getInKeyword_4_0());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getMappingCSAccess().getOwnedInPathNamePathNameCSParserRuleCall_4_1_0()); 
+	    }
+		lv_ownedInPathName_5_0=rulePathNameCS		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getMappingCSRule());
+	        }
+       		set(
+       			$current, 
+       			"ownedInPathName",
+        		lv_ownedInPathName_5_0, 
+        		"org.eclipse.ocl.xtext.base.Base.PathNameCS");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+))?(	otherlv_6='refines' 
+    {
+    	newLeafNode(otherlv_6, grammarAccess.getMappingCSAccess().getRefinesKeyword_5_0());
+    }
+(
+(
+		{ 
+		  /* */ 
+		}
+		{
+			if ($current==null) {
+	            $current = createModelElement(grammarAccess.getMappingCSRule());
+	        }
+        }
+		{ 
+	        newCompositeNode(grammarAccess.getMappingCSAccess().getRefinesMappingCrossReference_5_1_0()); 
+	    }
+		ruleUnrestrictedName		{ 
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)(	otherlv_8=',' 
+    {
+    	newLeafNode(otherlv_8, grammarAccess.getMappingCSAccess().getCommaKeyword_5_2_0());
+    }
+(
+(
+		{ 
+		  /* */ 
+		}
+		{
+			if ($current==null) {
+	            $current = createModelElement(grammarAccess.getMappingCSRule());
+	        }
+        }
+		{ 
+	        newCompositeNode(grammarAccess.getMappingCSAccess().getRefinesMappingCrossReference_5_2_1_0()); 
+	    }
+		ruleUnrestrictedName		{ 
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+))*)?	otherlv_10='{' 
+    {
+    	newLeafNode(otherlv_10, grammarAccess.getMappingCSAccess().getLeftCurlyBracketKeyword_6());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getMappingCSAccess().getOwnedDomainsNamedDomainCSParserRuleCall_7_0()); 
+	    }
+		lv_ownedDomains_11_0=ruleNamedDomainCS		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getMappingCSRule());
+	        }
+       		add(
+       			$current, 
+       			"ownedDomains",
+        		lv_ownedDomains_11_0, 
+        		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.NamedDomainCS");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)*(	otherlv_12='where' 
+    {
+    	newLeafNode(otherlv_12, grammarAccess.getMappingCSAccess().getWhereKeyword_8_0());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getMappingCSAccess().getOwnedMiddleUnnamedDomainCSParserRuleCall_8_1_0()); 
+	    }
+		lv_ownedMiddle_13_0=ruleUnnamedDomainCS		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getMappingCSRule());
+	        }
+       		set(
+       			$current, 
+       			"ownedMiddle",
+        		lv_ownedMiddle_13_0, 
+        		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.UnnamedDomainCS");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+))?(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getMappingCSAccess().getOwnedComposedMappingsMappingCSParserRuleCall_9_0()); 
+	    }
+		lv_ownedComposedMappings_14_0=ruleMappingCS		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getMappingCSRule());
+	        }
+       		add(
+       			$current, 
+       			"ownedComposedMappings",
+        		lv_ownedComposedMappings_14_0, 
+        		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.MappingCS");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)*	otherlv_15='}' 
+    {
+    	newLeafNode(otherlv_15, grammarAccess.getMappingCSAccess().getRightCurlyBracketKeyword_10());
+    }
+)
+;
+
+
+
+
+
 // Entry rule entryRuleNamedDomainCS
 entryRuleNamedDomainCS returns [EObject current=null] 
 	:
@@ -1195,7 +1195,7 @@ ruleNamedDomainCS returns [EObject current=null]
        			$current, 
        			"ownedGuardPattern",
         		lv_ownedGuardPattern_3_0, 
-        		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.GuardPatternCS");
+        		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.GuardPatternCS");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1213,7 +1213,7 @@ ruleNamedDomainCS returns [EObject current=null]
        			$current, 
        			"ownedBottomPattern",
         		lv_ownedBottomPattern_4_0, 
-        		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.BottomPatternCS");
+        		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.BottomPatternCS");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1256,7 +1256,7 @@ ruleQualifiedPackageCS returns [EObject current=null]
        			$current, 
        			"ownedPathName",
         		lv_ownedPathName_1_0, 
-        		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.ScopeNameCS");
+        		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.ScopeNameCS");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1274,7 +1274,7 @@ ruleQualifiedPackageCS returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_2_0, 
-        		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.UnrestrictedName");
+        		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.UnrestrictedName");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1296,7 +1296,7 @@ ruleQualifiedPackageCS returns [EObject current=null]
        			$current, 
        			"nsPrefix",
         		lv_nsPrefix_4_0, 
-        		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.UnrestrictedName");
+        		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.UnrestrictedName");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1340,7 +1340,7 @@ ruleQualifiedPackageCS returns [EObject current=null]
        			$current, 
        			"ownedPackages",
         		lv_ownedPackages_8_0, 
-        		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.QualifiedPackageCS");
+        		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.QualifiedPackageCS");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1375,7 +1375,7 @@ ruleQualifiedPackageCS returns [EObject current=null]
        			$current, 
        			"ownedClasses",
         		lv_ownedClasses_9_2, 
-        		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.TransformationCS");
+        		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.TransformationCS");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1425,7 +1425,7 @@ ruleParamDeclarationCS returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_0_0, 
-        		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.UnrestrictedName");
+        		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.UnrestrictedName");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1628,7 +1628,7 @@ ruleQueryCS returns [EObject current=null]
        			$current, 
        			"ownedPathName",
         		lv_ownedPathName_2_0, 
-        		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.ScopeNameCS");
+        		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.ScopeNameCS");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1646,7 +1646,7 @@ ruleQueryCS returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_3_0, 
-        		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.UnrestrictedName");
+        		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.UnrestrictedName");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1668,7 +1668,7 @@ ruleQueryCS returns [EObject current=null]
        			$current, 
        			"ownedParameters",
         		lv_ownedParameters_5_0, 
-        		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.ParamDeclarationCS");
+        		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.ParamDeclarationCS");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1690,7 +1690,7 @@ ruleQueryCS returns [EObject current=null]
        			$current, 
        			"ownedParameters",
         		lv_ownedParameters_7_0, 
-        		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.ParamDeclarationCS");
+        		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.ParamDeclarationCS");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1855,7 +1855,7 @@ ruleTransformationCS returns [EObject current=null]
        			$current, 
        			"ownedPathName",
         		lv_ownedPathName_1_0, 
-        		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.ScopeNameCS");
+        		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.ScopeNameCS");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1895,7 +1895,7 @@ ruleTransformationCS returns [EObject current=null]
        			$current, 
        			"ownedDirections",
         		lv_ownedDirections_4_0, 
-        		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.DirectionCS");
+        		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.DirectionCS");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1942,7 +1942,7 @@ ruleUnrealizedVariableCS returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_0_0, 
-        		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.UnrestrictedName");
+        		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.UnrestrictedName");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -2029,7 +2029,7 @@ ruleRealizedVariableCS returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.UnrestrictedName");
+        		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.UnrestrictedName");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -2099,7 +2099,7 @@ ruleUnnamedDomainCS returns [EObject current=null]
        			$current, 
        			"ownedGuardPattern",
         		lv_ownedGuardPattern_1_0, 
-        		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.GuardPatternCS");
+        		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.GuardPatternCS");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -2117,7 +2117,7 @@ ruleUnnamedDomainCS returns [EObject current=null]
        			$current, 
        			"ownedBottomPattern",
         		lv_ownedBottomPattern_2_0, 
-        		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.BottomPatternCS");
+        		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.BottomPatternCS");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -2330,7 +2330,7 @@ ruleAttributeCS returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_5_0, 
-        		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.UnrestrictedName");
+        		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.UnrestrictedName");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -2854,7 +2854,7 @@ ruleDataTypeCS returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_2_0, 
-        		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.UnrestrictedName");
+        		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.UnrestrictedName");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -2978,7 +2978,7 @@ ruleEnumerationCS returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.UnrestrictedName");
+        		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.UnrestrictedName");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -3120,7 +3120,7 @@ ruleEnumerationLiteralCS returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.UnrestrictedName");
+        		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.UnrestrictedName");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -3296,7 +3296,7 @@ ruleOperationCS returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_6_0, 
-        		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.UnrestrictedName");
+        		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.UnrestrictedName");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -3610,7 +3610,7 @@ ruleParameterCS returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_0_0, 
-        		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.UnrestrictedName");
+        		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.UnrestrictedName");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -3819,7 +3819,7 @@ ruleReferenceCS returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_5_0, 
-        		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.UnrestrictedName");
+        		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.UnrestrictedName");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -4396,7 +4396,7 @@ ruleStructuredClassCS returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_2_0, 
-        		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.UnrestrictedName");
+        		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.UnrestrictedName");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -5764,7 +5764,7 @@ ruleTuplePartCS returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_0_0, 
-        		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.UnrestrictedName");
+        		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.UnrestrictedName");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -6180,7 +6180,7 @@ rulePatternExpCS returns [EObject current=null]
        			$current, 
        			"patternVariableName",
         		lv_patternVariableName_0_0, 
-        		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.UnrestrictedName");
+        		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.UnrestrictedName");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -6611,7 +6611,7 @@ ruleTupleLiteralPartCS returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_0_0, 
-        		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.UnrestrictedName");
+        		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.UnrestrictedName");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -8829,7 +8829,7 @@ ruleLetVariableCS returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_0_0, 
-        		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.UnrestrictedName");
+        		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.UnrestrictedName");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -9535,7 +9535,7 @@ ruleTypeParameterCS returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_0_0, 
-        		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.UnrestrictedName");
+        		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.UnrestrictedName");
 	        afterParserOrEnumRuleCall();
 	    }
 

@@ -11,8 +11,8 @@
 '!volatile'=126
 '#'=88
 '&&'=107
-'('=72
-')'=73
+'('=70
+')'=71
 '*'=32
 '+'=34
 '++'=92
@@ -22,7 +22,7 @@
 '.'=45
 '..'=91
 '/'=33
-':'=74
+':'=72
 '::'=77
 ':='=76
 ';'=17
@@ -79,7 +79,7 @@
 'implies'=44
 'import'=20
 'imports'=21
-'in'=68
+'in'=73
 'initial'=79
 'interface'=134
 'invalid'=95
@@ -113,13 +113,13 @@
 'unsettable'=123
 'uses'=28
 'volatile'=125
-'where'=70
+'where'=74
 'xor'=43
 '{'=66
-'|'=71
+'|'=67
 '|1'=138
 '|?'=64
-'}'=67
+'}'=68
 RULE_ANY_OTHER=16
 RULE_DOUBLE_QUOTED_STRING=11
 RULE_ESCAPED_CHARACTER=9

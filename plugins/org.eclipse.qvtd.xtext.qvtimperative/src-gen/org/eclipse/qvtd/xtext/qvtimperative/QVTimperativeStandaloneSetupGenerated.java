@@ -25,7 +25,7 @@ public class QVTimperativeStandaloneSetupGenerated implements ISetup {
 
 	@Override
 	public Injector createInjectorAndDoEMFRegistration() {
-		org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBaseStandaloneSetup.doSetup();
+		org.eclipse.qvtd.xtext.qvtbase.QVTbaseStandaloneSetup.doSetup();
 
 		Injector injector = createInjector();
 		register(injector);

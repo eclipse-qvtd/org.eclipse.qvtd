@@ -32,7 +32,7 @@ import java.util.HashMap;
 @SuppressWarnings("all")
 public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_SINGLE_QUOTED_STRING", "RULE_UNQUOTED_STRING", "RULE_INT", "RULE_SIMPLE_ID", "RULE_ESCAPED_ID", "RULE_ESCAPED_CHARACTER", "RULE_LETTER_CHARACTER", "RULE_DOUBLE_QUOTED_STRING", "RULE_ML_SINGLE_QUOTED_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'default'", "'map'", "'in'", "'refines'", "','", "'{'", "'where'", "'}'", "'|'", "'imports'", "'uses'", "'('", "')'", "':'", "'import'", "'::'", "'*'", "';'", "'check'", "'enforce'", "'package'", "'='", "':='", "'transient'", "'query'", "'transformation'", "'realize'", "'library'", "'static'", "'definition'", "'attribute'", "'derived'", "'!derived'", "'id'", "'!id'", "'ordered'", "'!ordered'", "'readonly'", "'!readonly'", "'!transient'", "'unique'", "'!unique'", "'unsettable'", "'!unsettable'", "'volatile'", "'!volatile'", "'initial'", "'derivation'", "'primitive'", "'datatype'", "'serializable'", "'!serializable'", "'enum'", "'literal'", "'operation'", "'throws'", "'body'", "'property'", "'#'", "'composes'", "'!composes'", "'resolve'", "'!resolve'", "'abstract'", "'class'", "'extends'", "'interface'", "'-'", "'not'", "'/'", "'+'", "'>'", "'<'", "'>='", "'<='", "'<>'", "'and'", "'or'", "'xor'", "'implies'", "'.'", "'->'", "'?.'", "'?->'", "'Map'", "'Tuple'", "'Boolean'", "'Integer'", "'Real'", "'String'", "'UnlimitedNatural'", "'OclAny'", "'OclInvalid'", "'OclVoid'", "'Set'", "'Bag'", "'Sequence'", "'Collection'", "'OrderedSet'", "'..'", "'++'", "'Lambda'", "'<-'", "'true'", "'false'", "'invalid'", "'null'", "'@'", "'pre'", "'['", "']'", "'if'", "'then'", "'else'", "'endif'", "'elseif'", "'let'", "'self'", "'|?'", "'|1'", "'?'", "'&&'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_SINGLE_QUOTED_STRING", "RULE_UNQUOTED_STRING", "RULE_INT", "RULE_SIMPLE_ID", "RULE_ESCAPED_ID", "RULE_ESCAPED_CHARACTER", "RULE_LETTER_CHARACTER", "RULE_DOUBLE_QUOTED_STRING", "RULE_ML_SINGLE_QUOTED_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'{'", "','", "'|'", "'}'", "'imports'", "'uses'", "'('", "')'", "':'", "'import'", "'::'", "'*'", "';'", "'default'", "'map'", "'in'", "'refines'", "'where'", "'check'", "'enforce'", "'package'", "'='", "':='", "'transient'", "'query'", "'transformation'", "'realize'", "'library'", "'static'", "'definition'", "'attribute'", "'derived'", "'!derived'", "'id'", "'!id'", "'ordered'", "'!ordered'", "'readonly'", "'!readonly'", "'!transient'", "'unique'", "'!unique'", "'unsettable'", "'!unsettable'", "'volatile'", "'!volatile'", "'initial'", "'derivation'", "'primitive'", "'datatype'", "'serializable'", "'!serializable'", "'enum'", "'literal'", "'operation'", "'throws'", "'body'", "'property'", "'#'", "'composes'", "'!composes'", "'resolve'", "'!resolve'", "'abstract'", "'class'", "'extends'", "'interface'", "'-'", "'not'", "'/'", "'+'", "'>'", "'<'", "'>='", "'<='", "'<>'", "'and'", "'or'", "'xor'", "'implies'", "'.'", "'->'", "'?.'", "'?->'", "'Map'", "'Tuple'", "'Boolean'", "'Integer'", "'Real'", "'String'", "'UnlimitedNatural'", "'OclAny'", "'OclInvalid'", "'OclVoid'", "'Set'", "'Bag'", "'Sequence'", "'Collection'", "'OrderedSet'", "'..'", "'++'", "'Lambda'", "'<-'", "'true'", "'false'", "'invalid'", "'null'", "'@'", "'pre'", "'['", "']'", "'if'", "'then'", "'else'", "'endif'", "'elseif'", "'let'", "'self'", "'|?'", "'|1'", "'?'", "'&&'"
     };
     public static final int T__50=50;
     public static final int T__59=59;
@@ -285,7 +285,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                 int alt1=2;
                 int LA1_0 = input.LA(1);
 
-                if ( (LA1_0==31) ) {
+                if ( (LA1_0==26) ) {
                     alt1=1;
                 }
 
@@ -316,7 +316,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             	             			current, 
             	             			"ownedImports",
             	              		lv_ownedImports_0_0, 
-            	              		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.ImportCS");
+            	              		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.ImportCS");
             	      	        afterParserOrEnumRuleCall();
             	      	    
             	    }
@@ -347,8 +347,8 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     alt2=2;
                     }
                     break;
-                case 17:
-                case 18:
+                case 30:
+                case 31:
                     {
                     alt2=3;
                     }
@@ -391,7 +391,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             	             			current, 
             	             			"ownedPackages",
             	              		lv_ownedPackages_1_0, 
-            	              		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.QualifiedPackageCS");
+            	              		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.QualifiedPackageCS");
             	      	        afterParserOrEnumRuleCall();
             	      	    
             	    }
@@ -432,7 +432,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             	             			current, 
             	             			"ownedTransformations",
             	              		lv_ownedTransformations_2_0, 
-            	              		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.TransformationCS");
+            	              		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.TransformationCS");
             	      	        afterParserOrEnumRuleCall();
             	      	    
             	    }
@@ -514,7 +514,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             	             			current, 
             	             			"ownedQueries",
             	              		lv_ownedQueries_4_0, 
-            	              		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.QueryCS");
+            	              		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.QueryCS");
             	      	        afterParserOrEnumRuleCall();
             	      	    
             	    }
@@ -555,598 +555,8 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
     // $ANTLR end "ruleTopLevelCS"
 
 
-    // $ANTLR start "entryRuleMappingCS"
-    // InternalQVTcore.g:194:1: entryRuleMappingCS returns [EObject current=null] : iv_ruleMappingCS= ruleMappingCS EOF ;
-    public final EObject entryRuleMappingCS() throws RecognitionException {
-        EObject current = null;
-
-        EObject iv_ruleMappingCS = null;
-
-
-        try {
-            // InternalQVTcore.g:195:2: (iv_ruleMappingCS= ruleMappingCS EOF )
-            // InternalQVTcore.g:196:2: iv_ruleMappingCS= ruleMappingCS EOF
-            {
-            if ( state.backtracking==0 ) {
-               newCompositeNode(grammarAccess.getMappingCSRule()); 
-            }
-            pushFollow(FollowSets000.FOLLOW_1);
-            iv_ruleMappingCS=ruleMappingCS();
-
-            state._fsp--;
-            if (state.failed) return current;
-            if ( state.backtracking==0 ) {
-               current =iv_ruleMappingCS; 
-            }
-            match(input,EOF,FollowSets000.FOLLOW_2); if (state.failed) return current;
-
-            }
-
-        }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
-                appendSkippedTokens();
-            } 
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "entryRuleMappingCS"
-
-
-    // $ANTLR start "ruleMappingCS"
-    // InternalQVTcore.g:203:1: ruleMappingCS returns [EObject current=null] : ( () ( (lv_isDefault_1_0= 'default' ) )? otherlv_2= 'map' ( (lv_name_3_0= ruleUnrestrictedName ) )? (otherlv_4= 'in' ( (lv_ownedInPathName_5_0= rulePathNameCS ) ) )? (otherlv_6= 'refines' ( ( ruleUnrestrictedName ) ) (otherlv_8= ',' ( ( ruleUnrestrictedName ) ) )* )? otherlv_10= '{' ( (lv_ownedDomains_11_0= ruleNamedDomainCS ) )* (otherlv_12= 'where' ( (lv_ownedMiddle_13_0= ruleUnnamedDomainCS ) ) )? ( (lv_ownedComposedMappings_14_0= ruleMappingCS ) )* otherlv_15= '}' ) ;
-    public final EObject ruleMappingCS() throws RecognitionException {
-        EObject current = null;
-
-        Token lv_isDefault_1_0=null;
-        Token otherlv_2=null;
-        Token otherlv_4=null;
-        Token otherlv_6=null;
-        Token otherlv_8=null;
-        Token otherlv_10=null;
-        Token otherlv_12=null;
-        Token otherlv_15=null;
-        AntlrDatatypeRuleToken lv_name_3_0 = null;
-
-        EObject lv_ownedInPathName_5_0 = null;
-
-        EObject lv_ownedDomains_11_0 = null;
-
-        EObject lv_ownedMiddle_13_0 = null;
-
-        EObject lv_ownedComposedMappings_14_0 = null;
-
-
-         enterRule(); 
-            
-        try {
-            // InternalQVTcore.g:206:28: ( ( () ( (lv_isDefault_1_0= 'default' ) )? otherlv_2= 'map' ( (lv_name_3_0= ruleUnrestrictedName ) )? (otherlv_4= 'in' ( (lv_ownedInPathName_5_0= rulePathNameCS ) ) )? (otherlv_6= 'refines' ( ( ruleUnrestrictedName ) ) (otherlv_8= ',' ( ( ruleUnrestrictedName ) ) )* )? otherlv_10= '{' ( (lv_ownedDomains_11_0= ruleNamedDomainCS ) )* (otherlv_12= 'where' ( (lv_ownedMiddle_13_0= ruleUnnamedDomainCS ) ) )? ( (lv_ownedComposedMappings_14_0= ruleMappingCS ) )* otherlv_15= '}' ) )
-            // InternalQVTcore.g:207:1: ( () ( (lv_isDefault_1_0= 'default' ) )? otherlv_2= 'map' ( (lv_name_3_0= ruleUnrestrictedName ) )? (otherlv_4= 'in' ( (lv_ownedInPathName_5_0= rulePathNameCS ) ) )? (otherlv_6= 'refines' ( ( ruleUnrestrictedName ) ) (otherlv_8= ',' ( ( ruleUnrestrictedName ) ) )* )? otherlv_10= '{' ( (lv_ownedDomains_11_0= ruleNamedDomainCS ) )* (otherlv_12= 'where' ( (lv_ownedMiddle_13_0= ruleUnnamedDomainCS ) ) )? ( (lv_ownedComposedMappings_14_0= ruleMappingCS ) )* otherlv_15= '}' )
-            {
-            // InternalQVTcore.g:207:1: ( () ( (lv_isDefault_1_0= 'default' ) )? otherlv_2= 'map' ( (lv_name_3_0= ruleUnrestrictedName ) )? (otherlv_4= 'in' ( (lv_ownedInPathName_5_0= rulePathNameCS ) ) )? (otherlv_6= 'refines' ( ( ruleUnrestrictedName ) ) (otherlv_8= ',' ( ( ruleUnrestrictedName ) ) )* )? otherlv_10= '{' ( (lv_ownedDomains_11_0= ruleNamedDomainCS ) )* (otherlv_12= 'where' ( (lv_ownedMiddle_13_0= ruleUnnamedDomainCS ) ) )? ( (lv_ownedComposedMappings_14_0= ruleMappingCS ) )* otherlv_15= '}' )
-            // InternalQVTcore.g:207:2: () ( (lv_isDefault_1_0= 'default' ) )? otherlv_2= 'map' ( (lv_name_3_0= ruleUnrestrictedName ) )? (otherlv_4= 'in' ( (lv_ownedInPathName_5_0= rulePathNameCS ) ) )? (otherlv_6= 'refines' ( ( ruleUnrestrictedName ) ) (otherlv_8= ',' ( ( ruleUnrestrictedName ) ) )* )? otherlv_10= '{' ( (lv_ownedDomains_11_0= ruleNamedDomainCS ) )* (otherlv_12= 'where' ( (lv_ownedMiddle_13_0= ruleUnnamedDomainCS ) ) )? ( (lv_ownedComposedMappings_14_0= ruleMappingCS ) )* otherlv_15= '}'
-            {
-            // InternalQVTcore.g:207:2: ()
-            // InternalQVTcore.g:208:2: 
-            {
-            if ( state.backtracking==0 ) {
-               
-              	  /* */ 
-              	
-            }
-            if ( state.backtracking==0 ) {
-
-                      current = forceCreateModelElement(
-                          grammarAccess.getMappingCSAccess().getMappingCSAction_0(),
-                          current);
-                  
-            }
-
-            }
-
-            // InternalQVTcore.g:216:2: ( (lv_isDefault_1_0= 'default' ) )?
-            int alt3=2;
-            int LA3_0 = input.LA(1);
-
-            if ( (LA3_0==17) ) {
-                alt3=1;
-            }
-            switch (alt3) {
-                case 1 :
-                    // InternalQVTcore.g:217:1: (lv_isDefault_1_0= 'default' )
-                    {
-                    // InternalQVTcore.g:217:1: (lv_isDefault_1_0= 'default' )
-                    // InternalQVTcore.g:218:3: lv_isDefault_1_0= 'default'
-                    {
-                    lv_isDefault_1_0=(Token)match(input,17,FollowSets000.FOLLOW_5); if (state.failed) return current;
-                    if ( state.backtracking==0 ) {
-
-                              newLeafNode(lv_isDefault_1_0, grammarAccess.getMappingCSAccess().getIsDefaultDefaultKeyword_1_0());
-                          
-                    }
-                    if ( state.backtracking==0 ) {
-
-                      	        if (current==null) {
-                      	            current = createModelElement(grammarAccess.getMappingCSRule());
-                      	        }
-                             		setWithLastConsumed(current, "isDefault", true, "default");
-                      	    
-                    }
-
-                    }
-
-
-                    }
-                    break;
-
-            }
-
-            otherlv_2=(Token)match(input,18,FollowSets000.FOLLOW_6); if (state.failed) return current;
-            if ( state.backtracking==0 ) {
-
-                  	newLeafNode(otherlv_2, grammarAccess.getMappingCSAccess().getMapKeyword_2());
-                  
-            }
-            // InternalQVTcore.g:235:1: ( (lv_name_3_0= ruleUnrestrictedName ) )?
-            int alt4=2;
-            int LA4_0 = input.LA(1);
-
-            if ( ((LA4_0>=RULE_SIMPLE_ID && LA4_0<=RULE_ESCAPED_ID)||LA4_0==18||(LA4_0>=26 && LA4_0<=27)||LA4_0==31||(LA4_0>=35 && LA4_0<=36)||(LA4_0>=41 && LA4_0<=44)) ) {
-                alt4=1;
-            }
-            else if ( (LA4_0==20) ) {
-                int LA4_2 = input.LA(2);
-
-                if ( (LA4_2==19||LA4_2==22) ) {
-                    alt4=1;
-                }
-                else if ( (LA4_2==20) ) {
-                    int LA4_4 = input.LA(3);
-
-                    if ( ((LA4_4>=RULE_SIMPLE_ID && LA4_4<=RULE_ESCAPED_ID)||LA4_4==18||LA4_4==20||(LA4_4>=26 && LA4_4<=27)||LA4_4==31||(LA4_4>=35 && LA4_4<=36)||(LA4_4>=41 && LA4_4<=44)) ) {
-                        alt4=1;
-                    }
-                }
-            }
-            switch (alt4) {
-                case 1 :
-                    // InternalQVTcore.g:236:1: (lv_name_3_0= ruleUnrestrictedName )
-                    {
-                    // InternalQVTcore.g:236:1: (lv_name_3_0= ruleUnrestrictedName )
-                    // InternalQVTcore.g:237:3: lv_name_3_0= ruleUnrestrictedName
-                    {
-                    if ( state.backtracking==0 ) {
-                       
-                      	        newCompositeNode(grammarAccess.getMappingCSAccess().getNameUnrestrictedNameParserRuleCall_3_0()); 
-                      	    
-                    }
-                    pushFollow(FollowSets000.FOLLOW_7);
-                    lv_name_3_0=ruleUnrestrictedName();
-
-                    state._fsp--;
-                    if (state.failed) return current;
-                    if ( state.backtracking==0 ) {
-
-                      	        if (current==null) {
-                      	            current = createModelElementForParent(grammarAccess.getMappingCSRule());
-                      	        }
-                             		set(
-                             			current, 
-                             			"name",
-                              		lv_name_3_0, 
-                              		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.UnrestrictedName");
-                      	        afterParserOrEnumRuleCall();
-                      	    
-                    }
-
-                    }
-
-
-                    }
-                    break;
-
-            }
-
-            // InternalQVTcore.g:253:3: (otherlv_4= 'in' ( (lv_ownedInPathName_5_0= rulePathNameCS ) ) )?
-            int alt5=2;
-            int LA5_0 = input.LA(1);
-
-            if ( (LA5_0==19) ) {
-                alt5=1;
-            }
-            switch (alt5) {
-                case 1 :
-                    // InternalQVTcore.g:253:5: otherlv_4= 'in' ( (lv_ownedInPathName_5_0= rulePathNameCS ) )
-                    {
-                    otherlv_4=(Token)match(input,19,FollowSets000.FOLLOW_8); if (state.failed) return current;
-                    if ( state.backtracking==0 ) {
-
-                          	newLeafNode(otherlv_4, grammarAccess.getMappingCSAccess().getInKeyword_4_0());
-                          
-                    }
-                    // InternalQVTcore.g:257:1: ( (lv_ownedInPathName_5_0= rulePathNameCS ) )
-                    // InternalQVTcore.g:258:1: (lv_ownedInPathName_5_0= rulePathNameCS )
-                    {
-                    // InternalQVTcore.g:258:1: (lv_ownedInPathName_5_0= rulePathNameCS )
-                    // InternalQVTcore.g:259:3: lv_ownedInPathName_5_0= rulePathNameCS
-                    {
-                    if ( state.backtracking==0 ) {
-                       
-                      	        newCompositeNode(grammarAccess.getMappingCSAccess().getOwnedInPathNamePathNameCSParserRuleCall_4_1_0()); 
-                      	    
-                    }
-                    pushFollow(FollowSets000.FOLLOW_9);
-                    lv_ownedInPathName_5_0=rulePathNameCS();
-
-                    state._fsp--;
-                    if (state.failed) return current;
-                    if ( state.backtracking==0 ) {
-
-                      	        if (current==null) {
-                      	            current = createModelElementForParent(grammarAccess.getMappingCSRule());
-                      	        }
-                             		set(
-                             			current, 
-                             			"ownedInPathName",
-                              		lv_ownedInPathName_5_0, 
-                              		"org.eclipse.ocl.xtext.base.Base.PathNameCS");
-                      	        afterParserOrEnumRuleCall();
-                      	    
-                    }
-
-                    }
-
-
-                    }
-
-
-                    }
-                    break;
-
-            }
-
-            // InternalQVTcore.g:275:4: (otherlv_6= 'refines' ( ( ruleUnrestrictedName ) ) (otherlv_8= ',' ( ( ruleUnrestrictedName ) ) )* )?
-            int alt7=2;
-            int LA7_0 = input.LA(1);
-
-            if ( (LA7_0==20) ) {
-                alt7=1;
-            }
-            switch (alt7) {
-                case 1 :
-                    // InternalQVTcore.g:275:6: otherlv_6= 'refines' ( ( ruleUnrestrictedName ) ) (otherlv_8= ',' ( ( ruleUnrestrictedName ) ) )*
-                    {
-                    otherlv_6=(Token)match(input,20,FollowSets000.FOLLOW_8); if (state.failed) return current;
-                    if ( state.backtracking==0 ) {
-
-                          	newLeafNode(otherlv_6, grammarAccess.getMappingCSAccess().getRefinesKeyword_5_0());
-                          
-                    }
-                    // InternalQVTcore.g:279:1: ( ( ruleUnrestrictedName ) )
-                    // InternalQVTcore.g:280:1: ( ruleUnrestrictedName )
-                    {
-                    // InternalQVTcore.g:280:1: ( ruleUnrestrictedName )
-                    // InternalQVTcore.g:281:3: ruleUnrestrictedName
-                    {
-                    if ( state.backtracking==0 ) {
-                       
-                      		  /* */ 
-                      		
-                    }
-                    if ( state.backtracking==0 ) {
-
-                      			if (current==null) {
-                      	            current = createModelElement(grammarAccess.getMappingCSRule());
-                      	        }
-                              
-                    }
-                    if ( state.backtracking==0 ) {
-                       
-                      	        newCompositeNode(grammarAccess.getMappingCSAccess().getRefinesMappingCrossReference_5_1_0()); 
-                      	    
-                    }
-                    pushFollow(FollowSets000.FOLLOW_10);
-                    ruleUnrestrictedName();
-
-                    state._fsp--;
-                    if (state.failed) return current;
-                    if ( state.backtracking==0 ) {
-                       
-                      	        afterParserOrEnumRuleCall();
-                      	    
-                    }
-
-                    }
-
-
-                    }
-
-                    // InternalQVTcore.g:297:2: (otherlv_8= ',' ( ( ruleUnrestrictedName ) ) )*
-                    loop6:
-                    do {
-                        int alt6=2;
-                        int LA6_0 = input.LA(1);
-
-                        if ( (LA6_0==21) ) {
-                            alt6=1;
-                        }
-
-
-                        switch (alt6) {
-                    	case 1 :
-                    	    // InternalQVTcore.g:297:4: otherlv_8= ',' ( ( ruleUnrestrictedName ) )
-                    	    {
-                    	    otherlv_8=(Token)match(input,21,FollowSets000.FOLLOW_8); if (state.failed) return current;
-                    	    if ( state.backtracking==0 ) {
-
-                    	          	newLeafNode(otherlv_8, grammarAccess.getMappingCSAccess().getCommaKeyword_5_2_0());
-                    	          
-                    	    }
-                    	    // InternalQVTcore.g:301:1: ( ( ruleUnrestrictedName ) )
-                    	    // InternalQVTcore.g:302:1: ( ruleUnrestrictedName )
-                    	    {
-                    	    // InternalQVTcore.g:302:1: ( ruleUnrestrictedName )
-                    	    // InternalQVTcore.g:303:3: ruleUnrestrictedName
-                    	    {
-                    	    if ( state.backtracking==0 ) {
-                    	       
-                    	      		  /* */ 
-                    	      		
-                    	    }
-                    	    if ( state.backtracking==0 ) {
-
-                    	      			if (current==null) {
-                    	      	            current = createModelElement(grammarAccess.getMappingCSRule());
-                    	      	        }
-                    	              
-                    	    }
-                    	    if ( state.backtracking==0 ) {
-                    	       
-                    	      	        newCompositeNode(grammarAccess.getMappingCSAccess().getRefinesMappingCrossReference_5_2_1_0()); 
-                    	      	    
-                    	    }
-                    	    pushFollow(FollowSets000.FOLLOW_10);
-                    	    ruleUnrestrictedName();
-
-                    	    state._fsp--;
-                    	    if (state.failed) return current;
-                    	    if ( state.backtracking==0 ) {
-                    	       
-                    	      	        afterParserOrEnumRuleCall();
-                    	      	    
-                    	    }
-
-                    	    }
-
-
-                    	    }
-
-
-                    	    }
-                    	    break;
-
-                    	default :
-                    	    break loop6;
-                        }
-                    } while (true);
-
-
-                    }
-                    break;
-
-            }
-
-            otherlv_10=(Token)match(input,22,FollowSets000.FOLLOW_11); if (state.failed) return current;
-            if ( state.backtracking==0 ) {
-
-                  	newLeafNode(otherlv_10, grammarAccess.getMappingCSAccess().getLeftCurlyBracketKeyword_6());
-                  
-            }
-            // InternalQVTcore.g:323:1: ( (lv_ownedDomains_11_0= ruleNamedDomainCS ) )*
-            loop8:
-            do {
-                int alt8=2;
-                int LA8_0 = input.LA(1);
-
-                if ( (LA8_0==18) ) {
-                    int LA8_2 = input.LA(2);
-
-                    if ( (LA8_2==28) ) {
-                        alt8=1;
-                    }
-
-
-                }
-                else if ( ((LA8_0>=RULE_SIMPLE_ID && LA8_0<=RULE_ESCAPED_ID)||LA8_0==20||(LA8_0>=26 && LA8_0<=27)||LA8_0==31||(LA8_0>=35 && LA8_0<=36)||(LA8_0>=41 && LA8_0<=44)) ) {
-                    alt8=1;
-                }
-
-
-                switch (alt8) {
-            	case 1 :
-            	    // InternalQVTcore.g:324:1: (lv_ownedDomains_11_0= ruleNamedDomainCS )
-            	    {
-            	    // InternalQVTcore.g:324:1: (lv_ownedDomains_11_0= ruleNamedDomainCS )
-            	    // InternalQVTcore.g:325:3: lv_ownedDomains_11_0= ruleNamedDomainCS
-            	    {
-            	    if ( state.backtracking==0 ) {
-            	       
-            	      	        newCompositeNode(grammarAccess.getMappingCSAccess().getOwnedDomainsNamedDomainCSParserRuleCall_7_0()); 
-            	      	    
-            	    }
-            	    pushFollow(FollowSets000.FOLLOW_11);
-            	    lv_ownedDomains_11_0=ruleNamedDomainCS();
-
-            	    state._fsp--;
-            	    if (state.failed) return current;
-            	    if ( state.backtracking==0 ) {
-
-            	      	        if (current==null) {
-            	      	            current = createModelElementForParent(grammarAccess.getMappingCSRule());
-            	      	        }
-            	             		add(
-            	             			current, 
-            	             			"ownedDomains",
-            	              		lv_ownedDomains_11_0, 
-            	              		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.NamedDomainCS");
-            	      	        afterParserOrEnumRuleCall();
-            	      	    
-            	    }
-
-            	    }
-
-
-            	    }
-            	    break;
-
-            	default :
-            	    break loop8;
-                }
-            } while (true);
-
-            // InternalQVTcore.g:341:3: (otherlv_12= 'where' ( (lv_ownedMiddle_13_0= ruleUnnamedDomainCS ) ) )?
-            int alt9=2;
-            int LA9_0 = input.LA(1);
-
-            if ( (LA9_0==23) ) {
-                alt9=1;
-            }
-            switch (alt9) {
-                case 1 :
-                    // InternalQVTcore.g:341:5: otherlv_12= 'where' ( (lv_ownedMiddle_13_0= ruleUnnamedDomainCS ) )
-                    {
-                    otherlv_12=(Token)match(input,23,FollowSets000.FOLLOW_12); if (state.failed) return current;
-                    if ( state.backtracking==0 ) {
-
-                          	newLeafNode(otherlv_12, grammarAccess.getMappingCSAccess().getWhereKeyword_8_0());
-                          
-                    }
-                    // InternalQVTcore.g:345:1: ( (lv_ownedMiddle_13_0= ruleUnnamedDomainCS ) )
-                    // InternalQVTcore.g:346:1: (lv_ownedMiddle_13_0= ruleUnnamedDomainCS )
-                    {
-                    // InternalQVTcore.g:346:1: (lv_ownedMiddle_13_0= ruleUnnamedDomainCS )
-                    // InternalQVTcore.g:347:3: lv_ownedMiddle_13_0= ruleUnnamedDomainCS
-                    {
-                    if ( state.backtracking==0 ) {
-                       
-                      	        newCompositeNode(grammarAccess.getMappingCSAccess().getOwnedMiddleUnnamedDomainCSParserRuleCall_8_1_0()); 
-                      	    
-                    }
-                    pushFollow(FollowSets000.FOLLOW_13);
-                    lv_ownedMiddle_13_0=ruleUnnamedDomainCS();
-
-                    state._fsp--;
-                    if (state.failed) return current;
-                    if ( state.backtracking==0 ) {
-
-                      	        if (current==null) {
-                      	            current = createModelElementForParent(grammarAccess.getMappingCSRule());
-                      	        }
-                             		set(
-                             			current, 
-                             			"ownedMiddle",
-                              		lv_ownedMiddle_13_0, 
-                              		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.UnnamedDomainCS");
-                      	        afterParserOrEnumRuleCall();
-                      	    
-                    }
-
-                    }
-
-
-                    }
-
-
-                    }
-                    break;
-
-            }
-
-            // InternalQVTcore.g:363:4: ( (lv_ownedComposedMappings_14_0= ruleMappingCS ) )*
-            loop10:
-            do {
-                int alt10=2;
-                int LA10_0 = input.LA(1);
-
-                if ( ((LA10_0>=17 && LA10_0<=18)) ) {
-                    alt10=1;
-                }
-
-
-                switch (alt10) {
-            	case 1 :
-            	    // InternalQVTcore.g:364:1: (lv_ownedComposedMappings_14_0= ruleMappingCS )
-            	    {
-            	    // InternalQVTcore.g:364:1: (lv_ownedComposedMappings_14_0= ruleMappingCS )
-            	    // InternalQVTcore.g:365:3: lv_ownedComposedMappings_14_0= ruleMappingCS
-            	    {
-            	    if ( state.backtracking==0 ) {
-            	       
-            	      	        newCompositeNode(grammarAccess.getMappingCSAccess().getOwnedComposedMappingsMappingCSParserRuleCall_9_0()); 
-            	      	    
-            	    }
-            	    pushFollow(FollowSets000.FOLLOW_13);
-            	    lv_ownedComposedMappings_14_0=ruleMappingCS();
-
-            	    state._fsp--;
-            	    if (state.failed) return current;
-            	    if ( state.backtracking==0 ) {
-
-            	      	        if (current==null) {
-            	      	            current = createModelElementForParent(grammarAccess.getMappingCSRule());
-            	      	        }
-            	             		add(
-            	             			current, 
-            	             			"ownedComposedMappings",
-            	              		lv_ownedComposedMappings_14_0, 
-            	              		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.MappingCS");
-            	      	        afterParserOrEnumRuleCall();
-            	      	    
-            	    }
-
-            	    }
-
-
-            	    }
-            	    break;
-
-            	default :
-            	    break loop10;
-                }
-            } while (true);
-
-            otherlv_15=(Token)match(input,24,FollowSets000.FOLLOW_2); if (state.failed) return current;
-            if ( state.backtracking==0 ) {
-
-                  	newLeafNode(otherlv_15, grammarAccess.getMappingCSAccess().getRightCurlyBracketKeyword_10());
-                  
-            }
-
-            }
-
-
-            }
-
-            if ( state.backtracking==0 ) {
-               leaveRule(); 
-            }
-        }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
-                appendSkippedTokens();
-            } 
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "ruleMappingCS"
-
-
     // $ANTLR start "entryRuleBottomPatternCS"
-    // InternalQVTcore.g:393:1: entryRuleBottomPatternCS returns [EObject current=null] : iv_ruleBottomPatternCS= ruleBottomPatternCS EOF ;
+    // InternalQVTcore.g:194:1: entryRuleBottomPatternCS returns [EObject current=null] : iv_ruleBottomPatternCS= ruleBottomPatternCS EOF ;
     public final EObject entryRuleBottomPatternCS() throws RecognitionException {
         EObject current = null;
 
@@ -1154,8 +564,8 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalQVTcore.g:394:2: (iv_ruleBottomPatternCS= ruleBottomPatternCS EOF )
-            // InternalQVTcore.g:395:2: iv_ruleBottomPatternCS= ruleBottomPatternCS EOF
+            // InternalQVTcore.g:195:2: (iv_ruleBottomPatternCS= ruleBottomPatternCS EOF )
+            // InternalQVTcore.g:196:2: iv_ruleBottomPatternCS= ruleBottomPatternCS EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getBottomPatternCSRule()); 
@@ -1186,7 +596,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleBottomPatternCS"
-    // InternalQVTcore.g:402:1: ruleBottomPatternCS returns [EObject current=null] : ( (otherlv_0= '{' ( ( (lv_ownedUnrealizedVariables_1_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_2_0= ruleRealizedVariableCS ) ) ) (otherlv_3= ',' ( ( (lv_ownedUnrealizedVariables_4_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_5_0= ruleRealizedVariableCS ) ) ) )* otherlv_6= '|' ( (lv_ownedConstraints_7_0= rulePredicateOrAssignmentCS ) )* otherlv_8= '}' ) | (otherlv_9= '{' ( ( (lv_ownedUnrealizedVariables_10_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_11_0= ruleRealizedVariableCS ) ) ) (otherlv_12= ',' ( ( (lv_ownedUnrealizedVariables_13_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_14_0= ruleRealizedVariableCS ) ) ) )* otherlv_15= '}' ) | (otherlv_16= '{' ( (lv_ownedConstraints_17_0= rulePredicateOrAssignmentCS ) )+ otherlv_18= '}' ) | ( () otherlv_20= '{' otherlv_21= '}' ) ) ;
+    // InternalQVTcore.g:203:1: ruleBottomPatternCS returns [EObject current=null] : ( (otherlv_0= '{' ( ( (lv_ownedUnrealizedVariables_1_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_2_0= ruleRealizedVariableCS ) ) ) (otherlv_3= ',' ( ( (lv_ownedUnrealizedVariables_4_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_5_0= ruleRealizedVariableCS ) ) ) )* otherlv_6= '|' ( (lv_ownedConstraints_7_0= rulePredicateOrAssignmentCS ) )* otherlv_8= '}' ) | (otherlv_9= '{' ( ( (lv_ownedUnrealizedVariables_10_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_11_0= ruleRealizedVariableCS ) ) ) (otherlv_12= ',' ( ( (lv_ownedUnrealizedVariables_13_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_14_0= ruleRealizedVariableCS ) ) ) )* otherlv_15= '}' ) | (otherlv_16= '{' ( (lv_ownedConstraints_17_0= rulePredicateOrAssignmentCS ) )+ otherlv_18= '}' ) | ( () otherlv_20= '{' otherlv_21= '}' ) ) ;
     public final EObject ruleBottomPatternCS() throws RecognitionException {
         EObject current = null;
 
@@ -1225,32 +635,32 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // InternalQVTcore.g:405:28: ( ( (otherlv_0= '{' ( ( (lv_ownedUnrealizedVariables_1_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_2_0= ruleRealizedVariableCS ) ) ) (otherlv_3= ',' ( ( (lv_ownedUnrealizedVariables_4_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_5_0= ruleRealizedVariableCS ) ) ) )* otherlv_6= '|' ( (lv_ownedConstraints_7_0= rulePredicateOrAssignmentCS ) )* otherlv_8= '}' ) | (otherlv_9= '{' ( ( (lv_ownedUnrealizedVariables_10_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_11_0= ruleRealizedVariableCS ) ) ) (otherlv_12= ',' ( ( (lv_ownedUnrealizedVariables_13_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_14_0= ruleRealizedVariableCS ) ) ) )* otherlv_15= '}' ) | (otherlv_16= '{' ( (lv_ownedConstraints_17_0= rulePredicateOrAssignmentCS ) )+ otherlv_18= '}' ) | ( () otherlv_20= '{' otherlv_21= '}' ) ) )
-            // InternalQVTcore.g:406:1: ( (otherlv_0= '{' ( ( (lv_ownedUnrealizedVariables_1_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_2_0= ruleRealizedVariableCS ) ) ) (otherlv_3= ',' ( ( (lv_ownedUnrealizedVariables_4_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_5_0= ruleRealizedVariableCS ) ) ) )* otherlv_6= '|' ( (lv_ownedConstraints_7_0= rulePredicateOrAssignmentCS ) )* otherlv_8= '}' ) | (otherlv_9= '{' ( ( (lv_ownedUnrealizedVariables_10_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_11_0= ruleRealizedVariableCS ) ) ) (otherlv_12= ',' ( ( (lv_ownedUnrealizedVariables_13_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_14_0= ruleRealizedVariableCS ) ) ) )* otherlv_15= '}' ) | (otherlv_16= '{' ( (lv_ownedConstraints_17_0= rulePredicateOrAssignmentCS ) )+ otherlv_18= '}' ) | ( () otherlv_20= '{' otherlv_21= '}' ) )
+            // InternalQVTcore.g:206:28: ( ( (otherlv_0= '{' ( ( (lv_ownedUnrealizedVariables_1_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_2_0= ruleRealizedVariableCS ) ) ) (otherlv_3= ',' ( ( (lv_ownedUnrealizedVariables_4_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_5_0= ruleRealizedVariableCS ) ) ) )* otherlv_6= '|' ( (lv_ownedConstraints_7_0= rulePredicateOrAssignmentCS ) )* otherlv_8= '}' ) | (otherlv_9= '{' ( ( (lv_ownedUnrealizedVariables_10_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_11_0= ruleRealizedVariableCS ) ) ) (otherlv_12= ',' ( ( (lv_ownedUnrealizedVariables_13_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_14_0= ruleRealizedVariableCS ) ) ) )* otherlv_15= '}' ) | (otherlv_16= '{' ( (lv_ownedConstraints_17_0= rulePredicateOrAssignmentCS ) )+ otherlv_18= '}' ) | ( () otherlv_20= '{' otherlv_21= '}' ) ) )
+            // InternalQVTcore.g:207:1: ( (otherlv_0= '{' ( ( (lv_ownedUnrealizedVariables_1_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_2_0= ruleRealizedVariableCS ) ) ) (otherlv_3= ',' ( ( (lv_ownedUnrealizedVariables_4_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_5_0= ruleRealizedVariableCS ) ) ) )* otherlv_6= '|' ( (lv_ownedConstraints_7_0= rulePredicateOrAssignmentCS ) )* otherlv_8= '}' ) | (otherlv_9= '{' ( ( (lv_ownedUnrealizedVariables_10_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_11_0= ruleRealizedVariableCS ) ) ) (otherlv_12= ',' ( ( (lv_ownedUnrealizedVariables_13_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_14_0= ruleRealizedVariableCS ) ) ) )* otherlv_15= '}' ) | (otherlv_16= '{' ( (lv_ownedConstraints_17_0= rulePredicateOrAssignmentCS ) )+ otherlv_18= '}' ) | ( () otherlv_20= '{' otherlv_21= '}' ) )
             {
-            // InternalQVTcore.g:406:1: ( (otherlv_0= '{' ( ( (lv_ownedUnrealizedVariables_1_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_2_0= ruleRealizedVariableCS ) ) ) (otherlv_3= ',' ( ( (lv_ownedUnrealizedVariables_4_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_5_0= ruleRealizedVariableCS ) ) ) )* otherlv_6= '|' ( (lv_ownedConstraints_7_0= rulePredicateOrAssignmentCS ) )* otherlv_8= '}' ) | (otherlv_9= '{' ( ( (lv_ownedUnrealizedVariables_10_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_11_0= ruleRealizedVariableCS ) ) ) (otherlv_12= ',' ( ( (lv_ownedUnrealizedVariables_13_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_14_0= ruleRealizedVariableCS ) ) ) )* otherlv_15= '}' ) | (otherlv_16= '{' ( (lv_ownedConstraints_17_0= rulePredicateOrAssignmentCS ) )+ otherlv_18= '}' ) | ( () otherlv_20= '{' otherlv_21= '}' ) )
-            int alt19=4;
-            int LA19_0 = input.LA(1);
+            // InternalQVTcore.g:207:1: ( (otherlv_0= '{' ( ( (lv_ownedUnrealizedVariables_1_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_2_0= ruleRealizedVariableCS ) ) ) (otherlv_3= ',' ( ( (lv_ownedUnrealizedVariables_4_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_5_0= ruleRealizedVariableCS ) ) ) )* otherlv_6= '|' ( (lv_ownedConstraints_7_0= rulePredicateOrAssignmentCS ) )* otherlv_8= '}' ) | (otherlv_9= '{' ( ( (lv_ownedUnrealizedVariables_10_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_11_0= ruleRealizedVariableCS ) ) ) (otherlv_12= ',' ( ( (lv_ownedUnrealizedVariables_13_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_14_0= ruleRealizedVariableCS ) ) ) )* otherlv_15= '}' ) | (otherlv_16= '{' ( (lv_ownedConstraints_17_0= rulePredicateOrAssignmentCS ) )+ otherlv_18= '}' ) | ( () otherlv_20= '{' otherlv_21= '}' ) )
+            int alt11=4;
+            int LA11_0 = input.LA(1);
 
-            if ( (LA19_0==22) ) {
-                int LA19_1 = input.LA(2);
+            if ( (LA11_0==17) ) {
+                int LA11_1 = input.LA(2);
 
-                if ( (synpred18_InternalQVTcore()) ) {
-                    alt19=1;
+                if ( (synpred10_InternalQVTcore()) ) {
+                    alt11=1;
                 }
-                else if ( (synpred22_InternalQVTcore()) ) {
-                    alt19=2;
+                else if ( (synpred14_InternalQVTcore()) ) {
+                    alt11=2;
                 }
-                else if ( (synpred24_InternalQVTcore()) ) {
-                    alt19=3;
+                else if ( (synpred16_InternalQVTcore()) ) {
+                    alt11=3;
                 }
                 else if ( (true) ) {
-                    alt19=4;
+                    alt11=4;
                 }
                 else {
                     if (state.backtracking>0) {state.failed=true; return current;}
                     NoViableAltException nvae =
-                        new NoViableAltException("", 19, 1, input);
+                        new NoViableAltException("", 11, 1, input);
 
                     throw nvae;
                 }
@@ -1258,43 +668,43 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             else {
                 if (state.backtracking>0) {state.failed=true; return current;}
                 NoViableAltException nvae =
-                    new NoViableAltException("", 19, 0, input);
+                    new NoViableAltException("", 11, 0, input);
 
                 throw nvae;
             }
-            switch (alt19) {
+            switch (alt11) {
                 case 1 :
-                    // InternalQVTcore.g:406:2: (otherlv_0= '{' ( ( (lv_ownedUnrealizedVariables_1_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_2_0= ruleRealizedVariableCS ) ) ) (otherlv_3= ',' ( ( (lv_ownedUnrealizedVariables_4_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_5_0= ruleRealizedVariableCS ) ) ) )* otherlv_6= '|' ( (lv_ownedConstraints_7_0= rulePredicateOrAssignmentCS ) )* otherlv_8= '}' )
+                    // InternalQVTcore.g:207:2: (otherlv_0= '{' ( ( (lv_ownedUnrealizedVariables_1_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_2_0= ruleRealizedVariableCS ) ) ) (otherlv_3= ',' ( ( (lv_ownedUnrealizedVariables_4_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_5_0= ruleRealizedVariableCS ) ) ) )* otherlv_6= '|' ( (lv_ownedConstraints_7_0= rulePredicateOrAssignmentCS ) )* otherlv_8= '}' )
                     {
-                    // InternalQVTcore.g:406:2: (otherlv_0= '{' ( ( (lv_ownedUnrealizedVariables_1_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_2_0= ruleRealizedVariableCS ) ) ) (otherlv_3= ',' ( ( (lv_ownedUnrealizedVariables_4_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_5_0= ruleRealizedVariableCS ) ) ) )* otherlv_6= '|' ( (lv_ownedConstraints_7_0= rulePredicateOrAssignmentCS ) )* otherlv_8= '}' )
-                    // InternalQVTcore.g:406:4: otherlv_0= '{' ( ( (lv_ownedUnrealizedVariables_1_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_2_0= ruleRealizedVariableCS ) ) ) (otherlv_3= ',' ( ( (lv_ownedUnrealizedVariables_4_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_5_0= ruleRealizedVariableCS ) ) ) )* otherlv_6= '|' ( (lv_ownedConstraints_7_0= rulePredicateOrAssignmentCS ) )* otherlv_8= '}'
+                    // InternalQVTcore.g:207:2: (otherlv_0= '{' ( ( (lv_ownedUnrealizedVariables_1_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_2_0= ruleRealizedVariableCS ) ) ) (otherlv_3= ',' ( ( (lv_ownedUnrealizedVariables_4_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_5_0= ruleRealizedVariableCS ) ) ) )* otherlv_6= '|' ( (lv_ownedConstraints_7_0= rulePredicateOrAssignmentCS ) )* otherlv_8= '}' )
+                    // InternalQVTcore.g:207:4: otherlv_0= '{' ( ( (lv_ownedUnrealizedVariables_1_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_2_0= ruleRealizedVariableCS ) ) ) (otherlv_3= ',' ( ( (lv_ownedUnrealizedVariables_4_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_5_0= ruleRealizedVariableCS ) ) ) )* otherlv_6= '|' ( (lv_ownedConstraints_7_0= rulePredicateOrAssignmentCS ) )* otherlv_8= '}'
                     {
-                    otherlv_0=(Token)match(input,22,FollowSets000.FOLLOW_8); if (state.failed) return current;
+                    otherlv_0=(Token)match(input,17,FollowSets000.FOLLOW_5); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_0, grammarAccess.getBottomPatternCSAccess().getLeftCurlyBracketKeyword_0_0());
                           
                     }
-                    // InternalQVTcore.g:410:1: ( ( (lv_ownedUnrealizedVariables_1_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_2_0= ruleRealizedVariableCS ) ) )
-                    int alt11=2;
-                    int LA11_0 = input.LA(1);
+                    // InternalQVTcore.g:211:1: ( ( (lv_ownedUnrealizedVariables_1_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_2_0= ruleRealizedVariableCS ) ) )
+                    int alt3=2;
+                    int LA3_0 = input.LA(1);
 
-                    if ( ((LA11_0>=RULE_SIMPLE_ID && LA11_0<=RULE_ESCAPED_ID)||LA11_0==18||LA11_0==20||(LA11_0>=26 && LA11_0<=27)||LA11_0==31||(LA11_0>=35 && LA11_0<=36)||(LA11_0>=41 && LA11_0<=42)||LA11_0==44) ) {
-                        alt11=1;
+                    if ( ((LA3_0>=RULE_SIMPLE_ID && LA3_0<=RULE_ESCAPED_ID)||(LA3_0>=21 && LA3_0<=22)||LA3_0==26||LA3_0==31||LA3_0==33||(LA3_0>=35 && LA3_0<=36)||(LA3_0>=41 && LA3_0<=42)||LA3_0==44) ) {
+                        alt3=1;
                     }
-                    else if ( (LA11_0==43) ) {
-                        int LA11_2 = input.LA(2);
+                    else if ( (LA3_0==43) ) {
+                        int LA3_2 = input.LA(2);
 
-                        if ( ((LA11_2>=RULE_SIMPLE_ID && LA11_2<=RULE_ESCAPED_ID)||LA11_2==18||LA11_2==20||(LA11_2>=26 && LA11_2<=27)||LA11_2==31||(LA11_2>=35 && LA11_2<=36)||(LA11_2>=41 && LA11_2<=44)) ) {
-                            alt11=2;
+                        if ( ((LA3_2>=RULE_SIMPLE_ID && LA3_2<=RULE_ESCAPED_ID)||(LA3_2>=21 && LA3_2<=22)||LA3_2==26||LA3_2==31||LA3_2==33||(LA3_2>=35 && LA3_2<=36)||(LA3_2>=41 && LA3_2<=44)) ) {
+                            alt3=2;
                         }
-                        else if ( (LA11_2==21||LA11_2==25||LA11_2==30||LA11_2==39) ) {
-                            alt11=1;
+                        else if ( ((LA3_2>=18 && LA3_2<=19)||LA3_2==25||LA3_2==39) ) {
+                            alt3=1;
                         }
                         else {
                             if (state.backtracking>0) {state.failed=true; return current;}
                             NoViableAltException nvae =
-                                new NoViableAltException("", 11, 2, input);
+                                new NoViableAltException("", 3, 2, input);
 
                             throw nvae;
                         }
@@ -1302,26 +712,26 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     else {
                         if (state.backtracking>0) {state.failed=true; return current;}
                         NoViableAltException nvae =
-                            new NoViableAltException("", 11, 0, input);
+                            new NoViableAltException("", 3, 0, input);
 
                         throw nvae;
                     }
-                    switch (alt11) {
+                    switch (alt3) {
                         case 1 :
-                            // InternalQVTcore.g:410:2: ( (lv_ownedUnrealizedVariables_1_0= ruleUnrealizedVariableCS ) )
+                            // InternalQVTcore.g:211:2: ( (lv_ownedUnrealizedVariables_1_0= ruleUnrealizedVariableCS ) )
                             {
-                            // InternalQVTcore.g:410:2: ( (lv_ownedUnrealizedVariables_1_0= ruleUnrealizedVariableCS ) )
-                            // InternalQVTcore.g:411:1: (lv_ownedUnrealizedVariables_1_0= ruleUnrealizedVariableCS )
+                            // InternalQVTcore.g:211:2: ( (lv_ownedUnrealizedVariables_1_0= ruleUnrealizedVariableCS ) )
+                            // InternalQVTcore.g:212:1: (lv_ownedUnrealizedVariables_1_0= ruleUnrealizedVariableCS )
                             {
-                            // InternalQVTcore.g:411:1: (lv_ownedUnrealizedVariables_1_0= ruleUnrealizedVariableCS )
-                            // InternalQVTcore.g:412:3: lv_ownedUnrealizedVariables_1_0= ruleUnrealizedVariableCS
+                            // InternalQVTcore.g:212:1: (lv_ownedUnrealizedVariables_1_0= ruleUnrealizedVariableCS )
+                            // InternalQVTcore.g:213:3: lv_ownedUnrealizedVariables_1_0= ruleUnrealizedVariableCS
                             {
                             if ( state.backtracking==0 ) {
                                
                               	        newCompositeNode(grammarAccess.getBottomPatternCSAccess().getOwnedUnrealizedVariablesUnrealizedVariableCSParserRuleCall_0_1_0_0()); 
                               	    
                             }
-                            pushFollow(FollowSets000.FOLLOW_14);
+                            pushFollow(FollowSets000.FOLLOW_6);
                             lv_ownedUnrealizedVariables_1_0=ruleUnrealizedVariableCS();
 
                             state._fsp--;
@@ -1335,7 +745,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                                      			current, 
                                      			"ownedUnrealizedVariables",
                                       		lv_ownedUnrealizedVariables_1_0, 
-                                      		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.UnrealizedVariableCS");
+                                      		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.UnrealizedVariableCS");
                               	        afterParserOrEnumRuleCall();
                               	    
                             }
@@ -1349,20 +759,20 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                             }
                             break;
                         case 2 :
-                            // InternalQVTcore.g:429:6: ( (lv_ownedRealizedVariables_2_0= ruleRealizedVariableCS ) )
+                            // InternalQVTcore.g:230:6: ( (lv_ownedRealizedVariables_2_0= ruleRealizedVariableCS ) )
                             {
-                            // InternalQVTcore.g:429:6: ( (lv_ownedRealizedVariables_2_0= ruleRealizedVariableCS ) )
-                            // InternalQVTcore.g:430:1: (lv_ownedRealizedVariables_2_0= ruleRealizedVariableCS )
+                            // InternalQVTcore.g:230:6: ( (lv_ownedRealizedVariables_2_0= ruleRealizedVariableCS ) )
+                            // InternalQVTcore.g:231:1: (lv_ownedRealizedVariables_2_0= ruleRealizedVariableCS )
                             {
-                            // InternalQVTcore.g:430:1: (lv_ownedRealizedVariables_2_0= ruleRealizedVariableCS )
-                            // InternalQVTcore.g:431:3: lv_ownedRealizedVariables_2_0= ruleRealizedVariableCS
+                            // InternalQVTcore.g:231:1: (lv_ownedRealizedVariables_2_0= ruleRealizedVariableCS )
+                            // InternalQVTcore.g:232:3: lv_ownedRealizedVariables_2_0= ruleRealizedVariableCS
                             {
                             if ( state.backtracking==0 ) {
                                
                               	        newCompositeNode(grammarAccess.getBottomPatternCSAccess().getOwnedRealizedVariablesRealizedVariableCSParserRuleCall_0_1_1_0()); 
                               	    
                             }
-                            pushFollow(FollowSets000.FOLLOW_14);
+                            pushFollow(FollowSets000.FOLLOW_6);
                             lv_ownedRealizedVariables_2_0=ruleRealizedVariableCS();
 
                             state._fsp--;
@@ -1376,7 +786,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                                      			current, 
                                      			"ownedRealizedVariables",
                                       		lv_ownedRealizedVariables_2_0, 
-                                      		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.RealizedVariableCS");
+                                      		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.RealizedVariableCS");
                               	        afterParserOrEnumRuleCall();
                               	    
                             }
@@ -1392,47 +802,47 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // InternalQVTcore.g:447:3: (otherlv_3= ',' ( ( (lv_ownedUnrealizedVariables_4_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_5_0= ruleRealizedVariableCS ) ) ) )*
-                    loop13:
+                    // InternalQVTcore.g:248:3: (otherlv_3= ',' ( ( (lv_ownedUnrealizedVariables_4_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_5_0= ruleRealizedVariableCS ) ) ) )*
+                    loop5:
                     do {
-                        int alt13=2;
-                        int LA13_0 = input.LA(1);
+                        int alt5=2;
+                        int LA5_0 = input.LA(1);
 
-                        if ( (LA13_0==21) ) {
-                            alt13=1;
+                        if ( (LA5_0==18) ) {
+                            alt5=1;
                         }
 
 
-                        switch (alt13) {
+                        switch (alt5) {
                     	case 1 :
-                    	    // InternalQVTcore.g:447:5: otherlv_3= ',' ( ( (lv_ownedUnrealizedVariables_4_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_5_0= ruleRealizedVariableCS ) ) )
+                    	    // InternalQVTcore.g:248:5: otherlv_3= ',' ( ( (lv_ownedUnrealizedVariables_4_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_5_0= ruleRealizedVariableCS ) ) )
                     	    {
-                    	    otherlv_3=(Token)match(input,21,FollowSets000.FOLLOW_8); if (state.failed) return current;
+                    	    otherlv_3=(Token)match(input,18,FollowSets000.FOLLOW_5); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
 
                     	          	newLeafNode(otherlv_3, grammarAccess.getBottomPatternCSAccess().getCommaKeyword_0_2_0());
                     	          
                     	    }
-                    	    // InternalQVTcore.g:451:1: ( ( (lv_ownedUnrealizedVariables_4_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_5_0= ruleRealizedVariableCS ) ) )
-                    	    int alt12=2;
-                    	    int LA12_0 = input.LA(1);
+                    	    // InternalQVTcore.g:252:1: ( ( (lv_ownedUnrealizedVariables_4_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_5_0= ruleRealizedVariableCS ) ) )
+                    	    int alt4=2;
+                    	    int LA4_0 = input.LA(1);
 
-                    	    if ( ((LA12_0>=RULE_SIMPLE_ID && LA12_0<=RULE_ESCAPED_ID)||LA12_0==18||LA12_0==20||(LA12_0>=26 && LA12_0<=27)||LA12_0==31||(LA12_0>=35 && LA12_0<=36)||(LA12_0>=41 && LA12_0<=42)||LA12_0==44) ) {
-                    	        alt12=1;
+                    	    if ( ((LA4_0>=RULE_SIMPLE_ID && LA4_0<=RULE_ESCAPED_ID)||(LA4_0>=21 && LA4_0<=22)||LA4_0==26||LA4_0==31||LA4_0==33||(LA4_0>=35 && LA4_0<=36)||(LA4_0>=41 && LA4_0<=42)||LA4_0==44) ) {
+                    	        alt4=1;
                     	    }
-                    	    else if ( (LA12_0==43) ) {
-                    	        int LA12_2 = input.LA(2);
+                    	    else if ( (LA4_0==43) ) {
+                    	        int LA4_2 = input.LA(2);
 
-                    	        if ( ((LA12_2>=RULE_SIMPLE_ID && LA12_2<=RULE_ESCAPED_ID)||LA12_2==18||LA12_2==20||(LA12_2>=26 && LA12_2<=27)||LA12_2==31||(LA12_2>=35 && LA12_2<=36)||(LA12_2>=41 && LA12_2<=44)) ) {
-                    	            alt12=2;
+                    	        if ( ((LA4_2>=RULE_SIMPLE_ID && LA4_2<=RULE_ESCAPED_ID)||(LA4_2>=21 && LA4_2<=22)||LA4_2==26||LA4_2==31||LA4_2==33||(LA4_2>=35 && LA4_2<=36)||(LA4_2>=41 && LA4_2<=44)) ) {
+                    	            alt4=2;
                     	        }
-                    	        else if ( (LA12_2==21||LA12_2==25||LA12_2==30||LA12_2==39) ) {
-                    	            alt12=1;
+                    	        else if ( ((LA4_2>=18 && LA4_2<=19)||LA4_2==25||LA4_2==39) ) {
+                    	            alt4=1;
                     	        }
                     	        else {
                     	            if (state.backtracking>0) {state.failed=true; return current;}
                     	            NoViableAltException nvae =
-                    	                new NoViableAltException("", 12, 2, input);
+                    	                new NoViableAltException("", 4, 2, input);
 
                     	            throw nvae;
                     	        }
@@ -1440,26 +850,26 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	    else {
                     	        if (state.backtracking>0) {state.failed=true; return current;}
                     	        NoViableAltException nvae =
-                    	            new NoViableAltException("", 12, 0, input);
+                    	            new NoViableAltException("", 4, 0, input);
 
                     	        throw nvae;
                     	    }
-                    	    switch (alt12) {
+                    	    switch (alt4) {
                     	        case 1 :
-                    	            // InternalQVTcore.g:451:2: ( (lv_ownedUnrealizedVariables_4_0= ruleUnrealizedVariableCS ) )
+                    	            // InternalQVTcore.g:252:2: ( (lv_ownedUnrealizedVariables_4_0= ruleUnrealizedVariableCS ) )
                     	            {
-                    	            // InternalQVTcore.g:451:2: ( (lv_ownedUnrealizedVariables_4_0= ruleUnrealizedVariableCS ) )
-                    	            // InternalQVTcore.g:452:1: (lv_ownedUnrealizedVariables_4_0= ruleUnrealizedVariableCS )
+                    	            // InternalQVTcore.g:252:2: ( (lv_ownedUnrealizedVariables_4_0= ruleUnrealizedVariableCS ) )
+                    	            // InternalQVTcore.g:253:1: (lv_ownedUnrealizedVariables_4_0= ruleUnrealizedVariableCS )
                     	            {
-                    	            // InternalQVTcore.g:452:1: (lv_ownedUnrealizedVariables_4_0= ruleUnrealizedVariableCS )
-                    	            // InternalQVTcore.g:453:3: lv_ownedUnrealizedVariables_4_0= ruleUnrealizedVariableCS
+                    	            // InternalQVTcore.g:253:1: (lv_ownedUnrealizedVariables_4_0= ruleUnrealizedVariableCS )
+                    	            // InternalQVTcore.g:254:3: lv_ownedUnrealizedVariables_4_0= ruleUnrealizedVariableCS
                     	            {
                     	            if ( state.backtracking==0 ) {
                     	               
                     	              	        newCompositeNode(grammarAccess.getBottomPatternCSAccess().getOwnedUnrealizedVariablesUnrealizedVariableCSParserRuleCall_0_2_1_0_0()); 
                     	              	    
                     	            }
-                    	            pushFollow(FollowSets000.FOLLOW_14);
+                    	            pushFollow(FollowSets000.FOLLOW_6);
                     	            lv_ownedUnrealizedVariables_4_0=ruleUnrealizedVariableCS();
 
                     	            state._fsp--;
@@ -1473,7 +883,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	                     			current, 
                     	                     			"ownedUnrealizedVariables",
                     	                      		lv_ownedUnrealizedVariables_4_0, 
-                    	                      		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.UnrealizedVariableCS");
+                    	                      		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.UnrealizedVariableCS");
                     	              	        afterParserOrEnumRuleCall();
                     	              	    
                     	            }
@@ -1487,20 +897,20 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	            }
                     	            break;
                     	        case 2 :
-                    	            // InternalQVTcore.g:470:6: ( (lv_ownedRealizedVariables_5_0= ruleRealizedVariableCS ) )
+                    	            // InternalQVTcore.g:271:6: ( (lv_ownedRealizedVariables_5_0= ruleRealizedVariableCS ) )
                     	            {
-                    	            // InternalQVTcore.g:470:6: ( (lv_ownedRealizedVariables_5_0= ruleRealizedVariableCS ) )
-                    	            // InternalQVTcore.g:471:1: (lv_ownedRealizedVariables_5_0= ruleRealizedVariableCS )
+                    	            // InternalQVTcore.g:271:6: ( (lv_ownedRealizedVariables_5_0= ruleRealizedVariableCS ) )
+                    	            // InternalQVTcore.g:272:1: (lv_ownedRealizedVariables_5_0= ruleRealizedVariableCS )
                     	            {
-                    	            // InternalQVTcore.g:471:1: (lv_ownedRealizedVariables_5_0= ruleRealizedVariableCS )
-                    	            // InternalQVTcore.g:472:3: lv_ownedRealizedVariables_5_0= ruleRealizedVariableCS
+                    	            // InternalQVTcore.g:272:1: (lv_ownedRealizedVariables_5_0= ruleRealizedVariableCS )
+                    	            // InternalQVTcore.g:273:3: lv_ownedRealizedVariables_5_0= ruleRealizedVariableCS
                     	            {
                     	            if ( state.backtracking==0 ) {
                     	               
                     	              	        newCompositeNode(grammarAccess.getBottomPatternCSAccess().getOwnedRealizedVariablesRealizedVariableCSParserRuleCall_0_2_1_1_0()); 
                     	              	    
                     	            }
-                    	            pushFollow(FollowSets000.FOLLOW_14);
+                    	            pushFollow(FollowSets000.FOLLOW_6);
                     	            lv_ownedRealizedVariables_5_0=ruleRealizedVariableCS();
 
                     	            state._fsp--;
@@ -1514,7 +924,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	                     			current, 
                     	                     			"ownedRealizedVariables",
                     	                      		lv_ownedRealizedVariables_5_0, 
-                    	                      		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.RealizedVariableCS");
+                    	                      		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.RealizedVariableCS");
                     	              	        afterParserOrEnumRuleCall();
                     	              	    
                     	            }
@@ -1535,40 +945,40 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	    break;
 
                     	default :
-                    	    break loop13;
+                    	    break loop5;
                         }
                     } while (true);
 
-                    otherlv_6=(Token)match(input,25,FollowSets000.FOLLOW_15); if (state.failed) return current;
+                    otherlv_6=(Token)match(input,19,FollowSets000.FOLLOW_7); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_6, grammarAccess.getBottomPatternCSAccess().getVerticalLineKeyword_0_3());
                           
                     }
-                    // InternalQVTcore.g:492:1: ( (lv_ownedConstraints_7_0= rulePredicateOrAssignmentCS ) )*
-                    loop14:
+                    // InternalQVTcore.g:293:1: ( (lv_ownedConstraints_7_0= rulePredicateOrAssignmentCS ) )*
+                    loop6:
                     do {
-                        int alt14=2;
-                        int LA14_0 = input.LA(1);
+                        int alt6=2;
+                        int LA6_0 = input.LA(1);
 
-                        if ( (LA14_0==RULE_SINGLE_QUOTED_STRING||(LA14_0>=RULE_INT && LA14_0<=RULE_ESCAPED_ID)||(LA14_0>=17 && LA14_0<=18)||LA14_0==20||(LA14_0>=26 && LA14_0<=28)||LA14_0==31||LA14_0==33||(LA14_0>=35 && LA14_0<=36)||(LA14_0>=41 && LA14_0<=44)||(LA14_0>=84 && LA14_0<=85)||(LA14_0>=101 && LA14_0<=115)||LA14_0==118||(LA14_0>=120 && LA14_0<=123)||LA14_0==128||(LA14_0>=133 && LA14_0<=134)) ) {
-                            alt14=1;
+                        if ( (LA6_0==RULE_SINGLE_QUOTED_STRING||(LA6_0>=RULE_INT && LA6_0<=RULE_ESCAPED_ID)||(LA6_0>=21 && LA6_0<=23)||LA6_0==26||LA6_0==28||(LA6_0>=30 && LA6_0<=31)||LA6_0==33||(LA6_0>=35 && LA6_0<=36)||(LA6_0>=41 && LA6_0<=44)||(LA6_0>=84 && LA6_0<=85)||(LA6_0>=101 && LA6_0<=115)||LA6_0==118||(LA6_0>=120 && LA6_0<=123)||LA6_0==128||(LA6_0>=133 && LA6_0<=134)) ) {
+                            alt6=1;
                         }
 
 
-                        switch (alt14) {
+                        switch (alt6) {
                     	case 1 :
-                    	    // InternalQVTcore.g:493:1: (lv_ownedConstraints_7_0= rulePredicateOrAssignmentCS )
+                    	    // InternalQVTcore.g:294:1: (lv_ownedConstraints_7_0= rulePredicateOrAssignmentCS )
                     	    {
-                    	    // InternalQVTcore.g:493:1: (lv_ownedConstraints_7_0= rulePredicateOrAssignmentCS )
-                    	    // InternalQVTcore.g:494:3: lv_ownedConstraints_7_0= rulePredicateOrAssignmentCS
+                    	    // InternalQVTcore.g:294:1: (lv_ownedConstraints_7_0= rulePredicateOrAssignmentCS )
+                    	    // InternalQVTcore.g:295:3: lv_ownedConstraints_7_0= rulePredicateOrAssignmentCS
                     	    {
                     	    if ( state.backtracking==0 ) {
                     	       
                     	      	        newCompositeNode(grammarAccess.getBottomPatternCSAccess().getOwnedConstraintsPredicateOrAssignmentCSParserRuleCall_0_4_0()); 
                     	      	    
                     	    }
-                    	    pushFollow(FollowSets000.FOLLOW_15);
+                    	    pushFollow(FollowSets000.FOLLOW_7);
                     	    lv_ownedConstraints_7_0=rulePredicateOrAssignmentCS();
 
                     	    state._fsp--;
@@ -1582,7 +992,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	             			current, 
                     	             			"ownedConstraints",
                     	              		lv_ownedConstraints_7_0, 
-                    	              		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.PredicateOrAssignmentCS");
+                    	              		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.PredicateOrAssignmentCS");
                     	      	        afterParserOrEnumRuleCall();
                     	      	    
                     	    }
@@ -1594,11 +1004,11 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	    break;
 
                     	default :
-                    	    break loop14;
+                    	    break loop6;
                         }
                     } while (true);
 
-                    otherlv_8=(Token)match(input,24,FollowSets000.FOLLOW_2); if (state.failed) return current;
+                    otherlv_8=(Token)match(input,20,FollowSets000.FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_8, grammarAccess.getBottomPatternCSAccess().getRightCurlyBracketKeyword_0_5());
@@ -1611,37 +1021,37 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalQVTcore.g:515:6: (otherlv_9= '{' ( ( (lv_ownedUnrealizedVariables_10_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_11_0= ruleRealizedVariableCS ) ) ) (otherlv_12= ',' ( ( (lv_ownedUnrealizedVariables_13_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_14_0= ruleRealizedVariableCS ) ) ) )* otherlv_15= '}' )
+                    // InternalQVTcore.g:316:6: (otherlv_9= '{' ( ( (lv_ownedUnrealizedVariables_10_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_11_0= ruleRealizedVariableCS ) ) ) (otherlv_12= ',' ( ( (lv_ownedUnrealizedVariables_13_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_14_0= ruleRealizedVariableCS ) ) ) )* otherlv_15= '}' )
                     {
-                    // InternalQVTcore.g:515:6: (otherlv_9= '{' ( ( (lv_ownedUnrealizedVariables_10_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_11_0= ruleRealizedVariableCS ) ) ) (otherlv_12= ',' ( ( (lv_ownedUnrealizedVariables_13_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_14_0= ruleRealizedVariableCS ) ) ) )* otherlv_15= '}' )
-                    // InternalQVTcore.g:515:8: otherlv_9= '{' ( ( (lv_ownedUnrealizedVariables_10_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_11_0= ruleRealizedVariableCS ) ) ) (otherlv_12= ',' ( ( (lv_ownedUnrealizedVariables_13_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_14_0= ruleRealizedVariableCS ) ) ) )* otherlv_15= '}'
+                    // InternalQVTcore.g:316:6: (otherlv_9= '{' ( ( (lv_ownedUnrealizedVariables_10_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_11_0= ruleRealizedVariableCS ) ) ) (otherlv_12= ',' ( ( (lv_ownedUnrealizedVariables_13_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_14_0= ruleRealizedVariableCS ) ) ) )* otherlv_15= '}' )
+                    // InternalQVTcore.g:316:8: otherlv_9= '{' ( ( (lv_ownedUnrealizedVariables_10_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_11_0= ruleRealizedVariableCS ) ) ) (otherlv_12= ',' ( ( (lv_ownedUnrealizedVariables_13_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_14_0= ruleRealizedVariableCS ) ) ) )* otherlv_15= '}'
                     {
-                    otherlv_9=(Token)match(input,22,FollowSets000.FOLLOW_8); if (state.failed) return current;
+                    otherlv_9=(Token)match(input,17,FollowSets000.FOLLOW_5); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_9, grammarAccess.getBottomPatternCSAccess().getLeftCurlyBracketKeyword_1_0());
                           
                     }
-                    // InternalQVTcore.g:519:1: ( ( (lv_ownedUnrealizedVariables_10_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_11_0= ruleRealizedVariableCS ) ) )
-                    int alt15=2;
-                    int LA15_0 = input.LA(1);
+                    // InternalQVTcore.g:320:1: ( ( (lv_ownedUnrealizedVariables_10_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_11_0= ruleRealizedVariableCS ) ) )
+                    int alt7=2;
+                    int LA7_0 = input.LA(1);
 
-                    if ( ((LA15_0>=RULE_SIMPLE_ID && LA15_0<=RULE_ESCAPED_ID)||LA15_0==18||LA15_0==20||(LA15_0>=26 && LA15_0<=27)||LA15_0==31||(LA15_0>=35 && LA15_0<=36)||(LA15_0>=41 && LA15_0<=42)||LA15_0==44) ) {
-                        alt15=1;
+                    if ( ((LA7_0>=RULE_SIMPLE_ID && LA7_0<=RULE_ESCAPED_ID)||(LA7_0>=21 && LA7_0<=22)||LA7_0==26||LA7_0==31||LA7_0==33||(LA7_0>=35 && LA7_0<=36)||(LA7_0>=41 && LA7_0<=42)||LA7_0==44) ) {
+                        alt7=1;
                     }
-                    else if ( (LA15_0==43) ) {
-                        int LA15_2 = input.LA(2);
+                    else if ( (LA7_0==43) ) {
+                        int LA7_2 = input.LA(2);
 
-                        if ( ((LA15_2>=RULE_SIMPLE_ID && LA15_2<=RULE_ESCAPED_ID)||LA15_2==18||LA15_2==20||(LA15_2>=26 && LA15_2<=27)||LA15_2==31||(LA15_2>=35 && LA15_2<=36)||(LA15_2>=41 && LA15_2<=44)) ) {
-                            alt15=2;
+                        if ( ((LA7_2>=RULE_SIMPLE_ID && LA7_2<=RULE_ESCAPED_ID)||(LA7_2>=21 && LA7_2<=22)||LA7_2==26||LA7_2==31||LA7_2==33||(LA7_2>=35 && LA7_2<=36)||(LA7_2>=41 && LA7_2<=44)) ) {
+                            alt7=2;
                         }
-                        else if ( (LA15_2==21||LA15_2==24||LA15_2==30||LA15_2==39) ) {
-                            alt15=1;
+                        else if ( (LA7_2==18||LA7_2==20||LA7_2==25||LA7_2==39) ) {
+                            alt7=1;
                         }
                         else {
                             if (state.backtracking>0) {state.failed=true; return current;}
                             NoViableAltException nvae =
-                                new NoViableAltException("", 15, 2, input);
+                                new NoViableAltException("", 7, 2, input);
 
                             throw nvae;
                         }
@@ -1649,26 +1059,26 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     else {
                         if (state.backtracking>0) {state.failed=true; return current;}
                         NoViableAltException nvae =
-                            new NoViableAltException("", 15, 0, input);
+                            new NoViableAltException("", 7, 0, input);
 
                         throw nvae;
                     }
-                    switch (alt15) {
+                    switch (alt7) {
                         case 1 :
-                            // InternalQVTcore.g:519:2: ( (lv_ownedUnrealizedVariables_10_0= ruleUnrealizedVariableCS ) )
+                            // InternalQVTcore.g:320:2: ( (lv_ownedUnrealizedVariables_10_0= ruleUnrealizedVariableCS ) )
                             {
-                            // InternalQVTcore.g:519:2: ( (lv_ownedUnrealizedVariables_10_0= ruleUnrealizedVariableCS ) )
-                            // InternalQVTcore.g:520:1: (lv_ownedUnrealizedVariables_10_0= ruleUnrealizedVariableCS )
+                            // InternalQVTcore.g:320:2: ( (lv_ownedUnrealizedVariables_10_0= ruleUnrealizedVariableCS ) )
+                            // InternalQVTcore.g:321:1: (lv_ownedUnrealizedVariables_10_0= ruleUnrealizedVariableCS )
                             {
-                            // InternalQVTcore.g:520:1: (lv_ownedUnrealizedVariables_10_0= ruleUnrealizedVariableCS )
-                            // InternalQVTcore.g:521:3: lv_ownedUnrealizedVariables_10_0= ruleUnrealizedVariableCS
+                            // InternalQVTcore.g:321:1: (lv_ownedUnrealizedVariables_10_0= ruleUnrealizedVariableCS )
+                            // InternalQVTcore.g:322:3: lv_ownedUnrealizedVariables_10_0= ruleUnrealizedVariableCS
                             {
                             if ( state.backtracking==0 ) {
                                
                               	        newCompositeNode(grammarAccess.getBottomPatternCSAccess().getOwnedUnrealizedVariablesUnrealizedVariableCSParserRuleCall_1_1_0_0()); 
                               	    
                             }
-                            pushFollow(FollowSets000.FOLLOW_16);
+                            pushFollow(FollowSets000.FOLLOW_8);
                             lv_ownedUnrealizedVariables_10_0=ruleUnrealizedVariableCS();
 
                             state._fsp--;
@@ -1682,7 +1092,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                                      			current, 
                                      			"ownedUnrealizedVariables",
                                       		lv_ownedUnrealizedVariables_10_0, 
-                                      		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.UnrealizedVariableCS");
+                                      		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.UnrealizedVariableCS");
                               	        afterParserOrEnumRuleCall();
                               	    
                             }
@@ -1696,20 +1106,20 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                             }
                             break;
                         case 2 :
-                            // InternalQVTcore.g:538:6: ( (lv_ownedRealizedVariables_11_0= ruleRealizedVariableCS ) )
+                            // InternalQVTcore.g:339:6: ( (lv_ownedRealizedVariables_11_0= ruleRealizedVariableCS ) )
                             {
-                            // InternalQVTcore.g:538:6: ( (lv_ownedRealizedVariables_11_0= ruleRealizedVariableCS ) )
-                            // InternalQVTcore.g:539:1: (lv_ownedRealizedVariables_11_0= ruleRealizedVariableCS )
+                            // InternalQVTcore.g:339:6: ( (lv_ownedRealizedVariables_11_0= ruleRealizedVariableCS ) )
+                            // InternalQVTcore.g:340:1: (lv_ownedRealizedVariables_11_0= ruleRealizedVariableCS )
                             {
-                            // InternalQVTcore.g:539:1: (lv_ownedRealizedVariables_11_0= ruleRealizedVariableCS )
-                            // InternalQVTcore.g:540:3: lv_ownedRealizedVariables_11_0= ruleRealizedVariableCS
+                            // InternalQVTcore.g:340:1: (lv_ownedRealizedVariables_11_0= ruleRealizedVariableCS )
+                            // InternalQVTcore.g:341:3: lv_ownedRealizedVariables_11_0= ruleRealizedVariableCS
                             {
                             if ( state.backtracking==0 ) {
                                
                               	        newCompositeNode(grammarAccess.getBottomPatternCSAccess().getOwnedRealizedVariablesRealizedVariableCSParserRuleCall_1_1_1_0()); 
                               	    
                             }
-                            pushFollow(FollowSets000.FOLLOW_16);
+                            pushFollow(FollowSets000.FOLLOW_8);
                             lv_ownedRealizedVariables_11_0=ruleRealizedVariableCS();
 
                             state._fsp--;
@@ -1723,7 +1133,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                                      			current, 
                                      			"ownedRealizedVariables",
                                       		lv_ownedRealizedVariables_11_0, 
-                                      		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.RealizedVariableCS");
+                                      		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.RealizedVariableCS");
                               	        afterParserOrEnumRuleCall();
                               	    
                             }
@@ -1739,47 +1149,47 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // InternalQVTcore.g:556:3: (otherlv_12= ',' ( ( (lv_ownedUnrealizedVariables_13_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_14_0= ruleRealizedVariableCS ) ) ) )*
-                    loop17:
+                    // InternalQVTcore.g:357:3: (otherlv_12= ',' ( ( (lv_ownedUnrealizedVariables_13_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_14_0= ruleRealizedVariableCS ) ) ) )*
+                    loop9:
                     do {
-                        int alt17=2;
-                        int LA17_0 = input.LA(1);
+                        int alt9=2;
+                        int LA9_0 = input.LA(1);
 
-                        if ( (LA17_0==21) ) {
-                            alt17=1;
+                        if ( (LA9_0==18) ) {
+                            alt9=1;
                         }
 
 
-                        switch (alt17) {
+                        switch (alt9) {
                     	case 1 :
-                    	    // InternalQVTcore.g:556:5: otherlv_12= ',' ( ( (lv_ownedUnrealizedVariables_13_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_14_0= ruleRealizedVariableCS ) ) )
+                    	    // InternalQVTcore.g:357:5: otherlv_12= ',' ( ( (lv_ownedUnrealizedVariables_13_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_14_0= ruleRealizedVariableCS ) ) )
                     	    {
-                    	    otherlv_12=(Token)match(input,21,FollowSets000.FOLLOW_8); if (state.failed) return current;
+                    	    otherlv_12=(Token)match(input,18,FollowSets000.FOLLOW_5); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
 
                     	          	newLeafNode(otherlv_12, grammarAccess.getBottomPatternCSAccess().getCommaKeyword_1_2_0());
                     	          
                     	    }
-                    	    // InternalQVTcore.g:560:1: ( ( (lv_ownedUnrealizedVariables_13_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_14_0= ruleRealizedVariableCS ) ) )
-                    	    int alt16=2;
-                    	    int LA16_0 = input.LA(1);
+                    	    // InternalQVTcore.g:361:1: ( ( (lv_ownedUnrealizedVariables_13_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_14_0= ruleRealizedVariableCS ) ) )
+                    	    int alt8=2;
+                    	    int LA8_0 = input.LA(1);
 
-                    	    if ( ((LA16_0>=RULE_SIMPLE_ID && LA16_0<=RULE_ESCAPED_ID)||LA16_0==18||LA16_0==20||(LA16_0>=26 && LA16_0<=27)||LA16_0==31||(LA16_0>=35 && LA16_0<=36)||(LA16_0>=41 && LA16_0<=42)||LA16_0==44) ) {
-                    	        alt16=1;
+                    	    if ( ((LA8_0>=RULE_SIMPLE_ID && LA8_0<=RULE_ESCAPED_ID)||(LA8_0>=21 && LA8_0<=22)||LA8_0==26||LA8_0==31||LA8_0==33||(LA8_0>=35 && LA8_0<=36)||(LA8_0>=41 && LA8_0<=42)||LA8_0==44) ) {
+                    	        alt8=1;
                     	    }
-                    	    else if ( (LA16_0==43) ) {
-                    	        int LA16_2 = input.LA(2);
+                    	    else if ( (LA8_0==43) ) {
+                    	        int LA8_2 = input.LA(2);
 
-                    	        if ( ((LA16_2>=RULE_SIMPLE_ID && LA16_2<=RULE_ESCAPED_ID)||LA16_2==18||LA16_2==20||(LA16_2>=26 && LA16_2<=27)||LA16_2==31||(LA16_2>=35 && LA16_2<=36)||(LA16_2>=41 && LA16_2<=44)) ) {
-                    	            alt16=2;
+                    	        if ( ((LA8_2>=RULE_SIMPLE_ID && LA8_2<=RULE_ESCAPED_ID)||(LA8_2>=21 && LA8_2<=22)||LA8_2==26||LA8_2==31||LA8_2==33||(LA8_2>=35 && LA8_2<=36)||(LA8_2>=41 && LA8_2<=44)) ) {
+                    	            alt8=2;
                     	        }
-                    	        else if ( (LA16_2==21||LA16_2==24||LA16_2==30||LA16_2==39) ) {
-                    	            alt16=1;
+                    	        else if ( (LA8_2==18||LA8_2==20||LA8_2==25||LA8_2==39) ) {
+                    	            alt8=1;
                     	        }
                     	        else {
                     	            if (state.backtracking>0) {state.failed=true; return current;}
                     	            NoViableAltException nvae =
-                    	                new NoViableAltException("", 16, 2, input);
+                    	                new NoViableAltException("", 8, 2, input);
 
                     	            throw nvae;
                     	        }
@@ -1787,26 +1197,26 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	    else {
                     	        if (state.backtracking>0) {state.failed=true; return current;}
                     	        NoViableAltException nvae =
-                    	            new NoViableAltException("", 16, 0, input);
+                    	            new NoViableAltException("", 8, 0, input);
 
                     	        throw nvae;
                     	    }
-                    	    switch (alt16) {
+                    	    switch (alt8) {
                     	        case 1 :
-                    	            // InternalQVTcore.g:560:2: ( (lv_ownedUnrealizedVariables_13_0= ruleUnrealizedVariableCS ) )
+                    	            // InternalQVTcore.g:361:2: ( (lv_ownedUnrealizedVariables_13_0= ruleUnrealizedVariableCS ) )
                     	            {
-                    	            // InternalQVTcore.g:560:2: ( (lv_ownedUnrealizedVariables_13_0= ruleUnrealizedVariableCS ) )
-                    	            // InternalQVTcore.g:561:1: (lv_ownedUnrealizedVariables_13_0= ruleUnrealizedVariableCS )
+                    	            // InternalQVTcore.g:361:2: ( (lv_ownedUnrealizedVariables_13_0= ruleUnrealizedVariableCS ) )
+                    	            // InternalQVTcore.g:362:1: (lv_ownedUnrealizedVariables_13_0= ruleUnrealizedVariableCS )
                     	            {
-                    	            // InternalQVTcore.g:561:1: (lv_ownedUnrealizedVariables_13_0= ruleUnrealizedVariableCS )
-                    	            // InternalQVTcore.g:562:3: lv_ownedUnrealizedVariables_13_0= ruleUnrealizedVariableCS
+                    	            // InternalQVTcore.g:362:1: (lv_ownedUnrealizedVariables_13_0= ruleUnrealizedVariableCS )
+                    	            // InternalQVTcore.g:363:3: lv_ownedUnrealizedVariables_13_0= ruleUnrealizedVariableCS
                     	            {
                     	            if ( state.backtracking==0 ) {
                     	               
                     	              	        newCompositeNode(grammarAccess.getBottomPatternCSAccess().getOwnedUnrealizedVariablesUnrealizedVariableCSParserRuleCall_1_2_1_0_0()); 
                     	              	    
                     	            }
-                    	            pushFollow(FollowSets000.FOLLOW_16);
+                    	            pushFollow(FollowSets000.FOLLOW_8);
                     	            lv_ownedUnrealizedVariables_13_0=ruleUnrealizedVariableCS();
 
                     	            state._fsp--;
@@ -1820,7 +1230,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	                     			current, 
                     	                     			"ownedUnrealizedVariables",
                     	                      		lv_ownedUnrealizedVariables_13_0, 
-                    	                      		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.UnrealizedVariableCS");
+                    	                      		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.UnrealizedVariableCS");
                     	              	        afterParserOrEnumRuleCall();
                     	              	    
                     	            }
@@ -1834,20 +1244,20 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	            }
                     	            break;
                     	        case 2 :
-                    	            // InternalQVTcore.g:579:6: ( (lv_ownedRealizedVariables_14_0= ruleRealizedVariableCS ) )
+                    	            // InternalQVTcore.g:380:6: ( (lv_ownedRealizedVariables_14_0= ruleRealizedVariableCS ) )
                     	            {
-                    	            // InternalQVTcore.g:579:6: ( (lv_ownedRealizedVariables_14_0= ruleRealizedVariableCS ) )
-                    	            // InternalQVTcore.g:580:1: (lv_ownedRealizedVariables_14_0= ruleRealizedVariableCS )
+                    	            // InternalQVTcore.g:380:6: ( (lv_ownedRealizedVariables_14_0= ruleRealizedVariableCS ) )
+                    	            // InternalQVTcore.g:381:1: (lv_ownedRealizedVariables_14_0= ruleRealizedVariableCS )
                     	            {
-                    	            // InternalQVTcore.g:580:1: (lv_ownedRealizedVariables_14_0= ruleRealizedVariableCS )
-                    	            // InternalQVTcore.g:581:3: lv_ownedRealizedVariables_14_0= ruleRealizedVariableCS
+                    	            // InternalQVTcore.g:381:1: (lv_ownedRealizedVariables_14_0= ruleRealizedVariableCS )
+                    	            // InternalQVTcore.g:382:3: lv_ownedRealizedVariables_14_0= ruleRealizedVariableCS
                     	            {
                     	            if ( state.backtracking==0 ) {
                     	               
                     	              	        newCompositeNode(grammarAccess.getBottomPatternCSAccess().getOwnedRealizedVariablesRealizedVariableCSParserRuleCall_1_2_1_1_0()); 
                     	              	    
                     	            }
-                    	            pushFollow(FollowSets000.FOLLOW_16);
+                    	            pushFollow(FollowSets000.FOLLOW_8);
                     	            lv_ownedRealizedVariables_14_0=ruleRealizedVariableCS();
 
                     	            state._fsp--;
@@ -1861,7 +1271,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	                     			current, 
                     	                     			"ownedRealizedVariables",
                     	                      		lv_ownedRealizedVariables_14_0, 
-                    	                      		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.RealizedVariableCS");
+                    	                      		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.RealizedVariableCS");
                     	              	        afterParserOrEnumRuleCall();
                     	              	    
                     	            }
@@ -1882,11 +1292,11 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	    break;
 
                     	default :
-                    	    break loop17;
+                    	    break loop9;
                         }
                     } while (true);
 
-                    otherlv_15=(Token)match(input,24,FollowSets000.FOLLOW_2); if (state.failed) return current;
+                    otherlv_15=(Token)match(input,20,FollowSets000.FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_15, grammarAccess.getBottomPatternCSAccess().getRightCurlyBracketKeyword_1_3());
@@ -1899,42 +1309,42 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // InternalQVTcore.g:602:6: (otherlv_16= '{' ( (lv_ownedConstraints_17_0= rulePredicateOrAssignmentCS ) )+ otherlv_18= '}' )
+                    // InternalQVTcore.g:403:6: (otherlv_16= '{' ( (lv_ownedConstraints_17_0= rulePredicateOrAssignmentCS ) )+ otherlv_18= '}' )
                     {
-                    // InternalQVTcore.g:602:6: (otherlv_16= '{' ( (lv_ownedConstraints_17_0= rulePredicateOrAssignmentCS ) )+ otherlv_18= '}' )
-                    // InternalQVTcore.g:602:8: otherlv_16= '{' ( (lv_ownedConstraints_17_0= rulePredicateOrAssignmentCS ) )+ otherlv_18= '}'
+                    // InternalQVTcore.g:403:6: (otherlv_16= '{' ( (lv_ownedConstraints_17_0= rulePredicateOrAssignmentCS ) )+ otherlv_18= '}' )
+                    // InternalQVTcore.g:403:8: otherlv_16= '{' ( (lv_ownedConstraints_17_0= rulePredicateOrAssignmentCS ) )+ otherlv_18= '}'
                     {
-                    otherlv_16=(Token)match(input,22,FollowSets000.FOLLOW_17); if (state.failed) return current;
+                    otherlv_16=(Token)match(input,17,FollowSets000.FOLLOW_9); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_16, grammarAccess.getBottomPatternCSAccess().getLeftCurlyBracketKeyword_2_0());
                           
                     }
-                    // InternalQVTcore.g:606:1: ( (lv_ownedConstraints_17_0= rulePredicateOrAssignmentCS ) )+
-                    int cnt18=0;
-                    loop18:
+                    // InternalQVTcore.g:407:1: ( (lv_ownedConstraints_17_0= rulePredicateOrAssignmentCS ) )+
+                    int cnt10=0;
+                    loop10:
                     do {
-                        int alt18=2;
-                        int LA18_0 = input.LA(1);
+                        int alt10=2;
+                        int LA10_0 = input.LA(1);
 
-                        if ( (LA18_0==RULE_SINGLE_QUOTED_STRING||(LA18_0>=RULE_INT && LA18_0<=RULE_ESCAPED_ID)||(LA18_0>=17 && LA18_0<=18)||LA18_0==20||(LA18_0>=26 && LA18_0<=28)||LA18_0==31||LA18_0==33||(LA18_0>=35 && LA18_0<=36)||(LA18_0>=41 && LA18_0<=44)||(LA18_0>=84 && LA18_0<=85)||(LA18_0>=101 && LA18_0<=115)||LA18_0==118||(LA18_0>=120 && LA18_0<=123)||LA18_0==128||(LA18_0>=133 && LA18_0<=134)) ) {
-                            alt18=1;
+                        if ( (LA10_0==RULE_SINGLE_QUOTED_STRING||(LA10_0>=RULE_INT && LA10_0<=RULE_ESCAPED_ID)||(LA10_0>=21 && LA10_0<=23)||LA10_0==26||LA10_0==28||(LA10_0>=30 && LA10_0<=31)||LA10_0==33||(LA10_0>=35 && LA10_0<=36)||(LA10_0>=41 && LA10_0<=44)||(LA10_0>=84 && LA10_0<=85)||(LA10_0>=101 && LA10_0<=115)||LA10_0==118||(LA10_0>=120 && LA10_0<=123)||LA10_0==128||(LA10_0>=133 && LA10_0<=134)) ) {
+                            alt10=1;
                         }
 
 
-                        switch (alt18) {
+                        switch (alt10) {
                     	case 1 :
-                    	    // InternalQVTcore.g:607:1: (lv_ownedConstraints_17_0= rulePredicateOrAssignmentCS )
+                    	    // InternalQVTcore.g:408:1: (lv_ownedConstraints_17_0= rulePredicateOrAssignmentCS )
                     	    {
-                    	    // InternalQVTcore.g:607:1: (lv_ownedConstraints_17_0= rulePredicateOrAssignmentCS )
-                    	    // InternalQVTcore.g:608:3: lv_ownedConstraints_17_0= rulePredicateOrAssignmentCS
+                    	    // InternalQVTcore.g:408:1: (lv_ownedConstraints_17_0= rulePredicateOrAssignmentCS )
+                    	    // InternalQVTcore.g:409:3: lv_ownedConstraints_17_0= rulePredicateOrAssignmentCS
                     	    {
                     	    if ( state.backtracking==0 ) {
                     	       
                     	      	        newCompositeNode(grammarAccess.getBottomPatternCSAccess().getOwnedConstraintsPredicateOrAssignmentCSParserRuleCall_2_1_0()); 
                     	      	    
                     	    }
-                    	    pushFollow(FollowSets000.FOLLOW_15);
+                    	    pushFollow(FollowSets000.FOLLOW_7);
                     	    lv_ownedConstraints_17_0=rulePredicateOrAssignmentCS();
 
                     	    state._fsp--;
@@ -1948,7 +1358,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	             			current, 
                     	             			"ownedConstraints",
                     	              		lv_ownedConstraints_17_0, 
-                    	              		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.PredicateOrAssignmentCS");
+                    	              		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.PredicateOrAssignmentCS");
                     	      	        afterParserOrEnumRuleCall();
                     	      	    
                     	    }
@@ -1960,16 +1370,16 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	    break;
 
                     	default :
-                    	    if ( cnt18 >= 1 ) break loop18;
+                    	    if ( cnt10 >= 1 ) break loop10;
                     	    if (state.backtracking>0) {state.failed=true; return current;}
                                 EarlyExitException eee =
-                                    new EarlyExitException(18, input);
+                                    new EarlyExitException(10, input);
                                 throw eee;
                         }
-                        cnt18++;
+                        cnt10++;
                     } while (true);
 
-                    otherlv_18=(Token)match(input,24,FollowSets000.FOLLOW_2); if (state.failed) return current;
+                    otherlv_18=(Token)match(input,20,FollowSets000.FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_18, grammarAccess.getBottomPatternCSAccess().getRightCurlyBracketKeyword_2_2());
@@ -1982,13 +1392,13 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 4 :
-                    // InternalQVTcore.g:629:6: ( () otherlv_20= '{' otherlv_21= '}' )
+                    // InternalQVTcore.g:430:6: ( () otherlv_20= '{' otherlv_21= '}' )
                     {
-                    // InternalQVTcore.g:629:6: ( () otherlv_20= '{' otherlv_21= '}' )
-                    // InternalQVTcore.g:629:7: () otherlv_20= '{' otherlv_21= '}'
+                    // InternalQVTcore.g:430:6: ( () otherlv_20= '{' otherlv_21= '}' )
+                    // InternalQVTcore.g:430:7: () otherlv_20= '{' otherlv_21= '}'
                     {
-                    // InternalQVTcore.g:629:7: ()
-                    // InternalQVTcore.g:630:2: 
+                    // InternalQVTcore.g:430:7: ()
+                    // InternalQVTcore.g:431:2: 
                     {
                     if ( state.backtracking==0 ) {
                        
@@ -2005,13 +1415,13 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    otherlv_20=(Token)match(input,22,FollowSets000.FOLLOW_18); if (state.failed) return current;
+                    otherlv_20=(Token)match(input,17,FollowSets000.FOLLOW_10); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_20, grammarAccess.getBottomPatternCSAccess().getLeftCurlyBracketKeyword_3_1());
                           
                     }
-                    otherlv_21=(Token)match(input,24,FollowSets000.FOLLOW_2); if (state.failed) return current;
+                    otherlv_21=(Token)match(input,20,FollowSets000.FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_21, grammarAccess.getBottomPatternCSAccess().getRightCurlyBracketKeyword_3_2());
@@ -2046,7 +1456,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleDirectionCS"
-    // InternalQVTcore.g:654:1: entryRuleDirectionCS returns [EObject current=null] : iv_ruleDirectionCS= ruleDirectionCS EOF ;
+    // InternalQVTcore.g:455:1: entryRuleDirectionCS returns [EObject current=null] : iv_ruleDirectionCS= ruleDirectionCS EOF ;
     public final EObject entryRuleDirectionCS() throws RecognitionException {
         EObject current = null;
 
@@ -2054,8 +1464,8 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalQVTcore.g:655:2: (iv_ruleDirectionCS= ruleDirectionCS EOF )
-            // InternalQVTcore.g:656:2: iv_ruleDirectionCS= ruleDirectionCS EOF
+            // InternalQVTcore.g:456:2: (iv_ruleDirectionCS= ruleDirectionCS EOF )
+            // InternalQVTcore.g:457:2: iv_ruleDirectionCS= ruleDirectionCS EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getDirectionCSRule()); 
@@ -2086,7 +1496,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleDirectionCS"
-    // InternalQVTcore.g:663:1: ruleDirectionCS returns [EObject current=null] : ( () ( (lv_name_1_0= ruleUnrestrictedName ) )? otherlv_2= 'imports' ( ( ruleUnrestrictedName ) ) (otherlv_4= ',' ( ( ruleUnrestrictedName ) ) )* (otherlv_6= 'uses' ( ( ruleUnrestrictedName ) ) (otherlv_8= ',' ( ( ruleUnrestrictedName ) ) )* )? ) ;
+    // InternalQVTcore.g:464:1: ruleDirectionCS returns [EObject current=null] : ( () ( (lv_name_1_0= ruleUnrestrictedName ) )? otherlv_2= 'imports' ( ( ruleUnrestrictedName ) ) (otherlv_4= ',' ( ( ruleUnrestrictedName ) ) )* (otherlv_6= 'uses' ( ( ruleUnrestrictedName ) ) (otherlv_8= ',' ( ( ruleUnrestrictedName ) ) )* )? ) ;
     public final EObject ruleDirectionCS() throws RecognitionException {
         EObject current = null;
 
@@ -2100,14 +1510,14 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // InternalQVTcore.g:666:28: ( ( () ( (lv_name_1_0= ruleUnrestrictedName ) )? otherlv_2= 'imports' ( ( ruleUnrestrictedName ) ) (otherlv_4= ',' ( ( ruleUnrestrictedName ) ) )* (otherlv_6= 'uses' ( ( ruleUnrestrictedName ) ) (otherlv_8= ',' ( ( ruleUnrestrictedName ) ) )* )? ) )
-            // InternalQVTcore.g:667:1: ( () ( (lv_name_1_0= ruleUnrestrictedName ) )? otherlv_2= 'imports' ( ( ruleUnrestrictedName ) ) (otherlv_4= ',' ( ( ruleUnrestrictedName ) ) )* (otherlv_6= 'uses' ( ( ruleUnrestrictedName ) ) (otherlv_8= ',' ( ( ruleUnrestrictedName ) ) )* )? )
+            // InternalQVTcore.g:467:28: ( ( () ( (lv_name_1_0= ruleUnrestrictedName ) )? otherlv_2= 'imports' ( ( ruleUnrestrictedName ) ) (otherlv_4= ',' ( ( ruleUnrestrictedName ) ) )* (otherlv_6= 'uses' ( ( ruleUnrestrictedName ) ) (otherlv_8= ',' ( ( ruleUnrestrictedName ) ) )* )? ) )
+            // InternalQVTcore.g:468:1: ( () ( (lv_name_1_0= ruleUnrestrictedName ) )? otherlv_2= 'imports' ( ( ruleUnrestrictedName ) ) (otherlv_4= ',' ( ( ruleUnrestrictedName ) ) )* (otherlv_6= 'uses' ( ( ruleUnrestrictedName ) ) (otherlv_8= ',' ( ( ruleUnrestrictedName ) ) )* )? )
             {
-            // InternalQVTcore.g:667:1: ( () ( (lv_name_1_0= ruleUnrestrictedName ) )? otherlv_2= 'imports' ( ( ruleUnrestrictedName ) ) (otherlv_4= ',' ( ( ruleUnrestrictedName ) ) )* (otherlv_6= 'uses' ( ( ruleUnrestrictedName ) ) (otherlv_8= ',' ( ( ruleUnrestrictedName ) ) )* )? )
-            // InternalQVTcore.g:667:2: () ( (lv_name_1_0= ruleUnrestrictedName ) )? otherlv_2= 'imports' ( ( ruleUnrestrictedName ) ) (otherlv_4= ',' ( ( ruleUnrestrictedName ) ) )* (otherlv_6= 'uses' ( ( ruleUnrestrictedName ) ) (otherlv_8= ',' ( ( ruleUnrestrictedName ) ) )* )?
+            // InternalQVTcore.g:468:1: ( () ( (lv_name_1_0= ruleUnrestrictedName ) )? otherlv_2= 'imports' ( ( ruleUnrestrictedName ) ) (otherlv_4= ',' ( ( ruleUnrestrictedName ) ) )* (otherlv_6= 'uses' ( ( ruleUnrestrictedName ) ) (otherlv_8= ',' ( ( ruleUnrestrictedName ) ) )* )? )
+            // InternalQVTcore.g:468:2: () ( (lv_name_1_0= ruleUnrestrictedName ) )? otherlv_2= 'imports' ( ( ruleUnrestrictedName ) ) (otherlv_4= ',' ( ( ruleUnrestrictedName ) ) )* (otherlv_6= 'uses' ( ( ruleUnrestrictedName ) ) (otherlv_8= ',' ( ( ruleUnrestrictedName ) ) )* )?
             {
-            // InternalQVTcore.g:667:2: ()
-            // InternalQVTcore.g:668:2: 
+            // InternalQVTcore.g:468:2: ()
+            // InternalQVTcore.g:469:2: 
             {
             if ( state.backtracking==0 ) {
                
@@ -2124,51 +1534,51 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalQVTcore.g:676:2: ( (lv_name_1_0= ruleUnrestrictedName ) )?
-            int alt20=2;
-            int LA20_0 = input.LA(1);
+            // InternalQVTcore.g:477:2: ( (lv_name_1_0= ruleUnrestrictedName ) )?
+            int alt12=2;
+            int LA12_0 = input.LA(1);
 
-            if ( ((LA20_0>=RULE_SIMPLE_ID && LA20_0<=RULE_ESCAPED_ID)||LA20_0==18||LA20_0==20||LA20_0==27||LA20_0==31||(LA20_0>=35 && LA20_0<=36)||(LA20_0>=41 && LA20_0<=44)) ) {
-                alt20=1;
+            if ( ((LA12_0>=RULE_SIMPLE_ID && LA12_0<=RULE_ESCAPED_ID)||LA12_0==22||LA12_0==26||LA12_0==31||LA12_0==33||(LA12_0>=35 && LA12_0<=36)||(LA12_0>=41 && LA12_0<=44)) ) {
+                alt12=1;
             }
-            else if ( (LA20_0==26) ) {
-                int LA20_2 = input.LA(2);
+            else if ( (LA12_0==21) ) {
+                int LA12_2 = input.LA(2);
 
-                if ( (LA20_2==26) ) {
-                    int LA20_3 = input.LA(3);
+                if ( (LA12_2==21) ) {
+                    int LA12_3 = input.LA(3);
 
-                    if ( (LA20_3==27) ) {
-                        int LA20_5 = input.LA(4);
+                    if ( (LA12_3==22) ) {
+                        int LA12_5 = input.LA(4);
 
-                        if ( (LA20_5==27) ) {
-                            int LA20_6 = input.LA(5);
+                        if ( (LA12_5==22) ) {
+                            int LA12_6 = input.LA(5);
 
-                            if ( ((LA20_6>=RULE_SIMPLE_ID && LA20_6<=RULE_ESCAPED_ID)||LA20_6==18||LA20_6==20||(LA20_6>=26 && LA20_6<=27)||LA20_6==31||(LA20_6>=35 && LA20_6<=36)||(LA20_6>=41 && LA20_6<=44)) ) {
-                                alt20=1;
+                            if ( ((LA12_6>=RULE_SIMPLE_ID && LA12_6<=RULE_ESCAPED_ID)||(LA12_6>=21 && LA12_6<=22)||LA12_6==26||LA12_6==31||LA12_6==33||(LA12_6>=35 && LA12_6<=36)||(LA12_6>=41 && LA12_6<=44)) ) {
+                                alt12=1;
                             }
                         }
-                        else if ( (LA20_5==EOF||LA20_5==21||LA20_5==34) ) {
-                            alt20=1;
+                        else if ( (LA12_5==EOF||LA12_5==18||LA12_5==29) ) {
+                            alt12=1;
                         }
                     }
-                    else if ( ((LA20_3>=RULE_SIMPLE_ID && LA20_3<=RULE_ESCAPED_ID)||LA20_3==18||LA20_3==20||LA20_3==26||LA20_3==31||(LA20_3>=35 && LA20_3<=36)||(LA20_3>=41 && LA20_3<=44)) ) {
-                        alt20=1;
+                    else if ( ((LA12_3>=RULE_SIMPLE_ID && LA12_3<=RULE_ESCAPED_ID)||LA12_3==21||LA12_3==26||LA12_3==31||LA12_3==33||(LA12_3>=35 && LA12_3<=36)||(LA12_3>=41 && LA12_3<=44)) ) {
+                        alt12=1;
                     }
                 }
             }
-            switch (alt20) {
+            switch (alt12) {
                 case 1 :
-                    // InternalQVTcore.g:677:1: (lv_name_1_0= ruleUnrestrictedName )
+                    // InternalQVTcore.g:478:1: (lv_name_1_0= ruleUnrestrictedName )
                     {
-                    // InternalQVTcore.g:677:1: (lv_name_1_0= ruleUnrestrictedName )
-                    // InternalQVTcore.g:678:3: lv_name_1_0= ruleUnrestrictedName
+                    // InternalQVTcore.g:478:1: (lv_name_1_0= ruleUnrestrictedName )
+                    // InternalQVTcore.g:479:3: lv_name_1_0= ruleUnrestrictedName
                     {
                     if ( state.backtracking==0 ) {
                        
                       	        newCompositeNode(grammarAccess.getDirectionCSAccess().getNameUnrestrictedNameParserRuleCall_1_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_19);
+                    pushFollow(FollowSets000.FOLLOW_11);
                     lv_name_1_0=ruleUnrestrictedName();
 
                     state._fsp--;
@@ -2182,7 +1592,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                              			current, 
                              			"name",
                               		lv_name_1_0, 
-                              		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.UnrestrictedName");
+                              		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.UnrestrictedName");
                       	        afterParserOrEnumRuleCall();
                       	    
                     }
@@ -2195,17 +1605,17 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_2=(Token)match(input,26,FollowSets000.FOLLOW_8); if (state.failed) return current;
+            otherlv_2=(Token)match(input,21,FollowSets000.FOLLOW_5); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_2, grammarAccess.getDirectionCSAccess().getImportsKeyword_2());
                   
             }
-            // InternalQVTcore.g:698:1: ( ( ruleUnrestrictedName ) )
-            // InternalQVTcore.g:699:1: ( ruleUnrestrictedName )
+            // InternalQVTcore.g:499:1: ( ( ruleUnrestrictedName ) )
+            // InternalQVTcore.g:500:1: ( ruleUnrestrictedName )
             {
-            // InternalQVTcore.g:699:1: ( ruleUnrestrictedName )
-            // InternalQVTcore.g:700:3: ruleUnrestrictedName
+            // InternalQVTcore.g:500:1: ( ruleUnrestrictedName )
+            // InternalQVTcore.g:501:3: ruleUnrestrictedName
             {
             if ( state.backtracking==0 ) {
                
@@ -2224,7 +1634,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getDirectionCSAccess().getImportsPackageCrossReference_3_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_20);
+            pushFollow(FollowSets000.FOLLOW_12);
             ruleUnrestrictedName();
 
             state._fsp--;
@@ -2240,32 +1650,32 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalQVTcore.g:716:2: (otherlv_4= ',' ( ( ruleUnrestrictedName ) ) )*
-            loop21:
+            // InternalQVTcore.g:517:2: (otherlv_4= ',' ( ( ruleUnrestrictedName ) ) )*
+            loop13:
             do {
-                int alt21=2;
-                int LA21_0 = input.LA(1);
+                int alt13=2;
+                int LA13_0 = input.LA(1);
 
-                if ( (LA21_0==21) ) {
-                    alt21=1;
+                if ( (LA13_0==18) ) {
+                    alt13=1;
                 }
 
 
-                switch (alt21) {
+                switch (alt13) {
             	case 1 :
-            	    // InternalQVTcore.g:716:4: otherlv_4= ',' ( ( ruleUnrestrictedName ) )
+            	    // InternalQVTcore.g:517:4: otherlv_4= ',' ( ( ruleUnrestrictedName ) )
             	    {
-            	    otherlv_4=(Token)match(input,21,FollowSets000.FOLLOW_8); if (state.failed) return current;
+            	    otherlv_4=(Token)match(input,18,FollowSets000.FOLLOW_5); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	          	newLeafNode(otherlv_4, grammarAccess.getDirectionCSAccess().getCommaKeyword_4_0());
             	          
             	    }
-            	    // InternalQVTcore.g:720:1: ( ( ruleUnrestrictedName ) )
-            	    // InternalQVTcore.g:721:1: ( ruleUnrestrictedName )
+            	    // InternalQVTcore.g:521:1: ( ( ruleUnrestrictedName ) )
+            	    // InternalQVTcore.g:522:1: ( ruleUnrestrictedName )
             	    {
-            	    // InternalQVTcore.g:721:1: ( ruleUnrestrictedName )
-            	    // InternalQVTcore.g:722:3: ruleUnrestrictedName
+            	    // InternalQVTcore.g:522:1: ( ruleUnrestrictedName )
+            	    // InternalQVTcore.g:523:3: ruleUnrestrictedName
             	    {
             	    if ( state.backtracking==0 ) {
             	       
@@ -2284,7 +1694,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             	      	        newCompositeNode(grammarAccess.getDirectionCSAccess().getImportsPackageCrossReference_4_1_0()); 
             	      	    
             	    }
-            	    pushFollow(FollowSets000.FOLLOW_20);
+            	    pushFollow(FollowSets000.FOLLOW_12);
             	    ruleUnrestrictedName();
 
             	    state._fsp--;
@@ -2305,32 +1715,32 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    break loop21;
+            	    break loop13;
                 }
             } while (true);
 
-            // InternalQVTcore.g:738:4: (otherlv_6= 'uses' ( ( ruleUnrestrictedName ) ) (otherlv_8= ',' ( ( ruleUnrestrictedName ) ) )* )?
-            int alt23=2;
-            int LA23_0 = input.LA(1);
+            // InternalQVTcore.g:539:4: (otherlv_6= 'uses' ( ( ruleUnrestrictedName ) ) (otherlv_8= ',' ( ( ruleUnrestrictedName ) ) )* )?
+            int alt15=2;
+            int LA15_0 = input.LA(1);
 
-            if ( (LA23_0==27) ) {
-                alt23=1;
+            if ( (LA15_0==22) ) {
+                alt15=1;
             }
-            switch (alt23) {
+            switch (alt15) {
                 case 1 :
-                    // InternalQVTcore.g:738:6: otherlv_6= 'uses' ( ( ruleUnrestrictedName ) ) (otherlv_8= ',' ( ( ruleUnrestrictedName ) ) )*
+                    // InternalQVTcore.g:539:6: otherlv_6= 'uses' ( ( ruleUnrestrictedName ) ) (otherlv_8= ',' ( ( ruleUnrestrictedName ) ) )*
                     {
-                    otherlv_6=(Token)match(input,27,FollowSets000.FOLLOW_8); if (state.failed) return current;
+                    otherlv_6=(Token)match(input,22,FollowSets000.FOLLOW_5); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_6, grammarAccess.getDirectionCSAccess().getUsesKeyword_5_0());
                           
                     }
-                    // InternalQVTcore.g:742:1: ( ( ruleUnrestrictedName ) )
-                    // InternalQVTcore.g:743:1: ( ruleUnrestrictedName )
+                    // InternalQVTcore.g:543:1: ( ( ruleUnrestrictedName ) )
+                    // InternalQVTcore.g:544:1: ( ruleUnrestrictedName )
                     {
-                    // InternalQVTcore.g:743:1: ( ruleUnrestrictedName )
-                    // InternalQVTcore.g:744:3: ruleUnrestrictedName
+                    // InternalQVTcore.g:544:1: ( ruleUnrestrictedName )
+                    // InternalQVTcore.g:545:3: ruleUnrestrictedName
                     {
                     if ( state.backtracking==0 ) {
                        
@@ -2349,7 +1759,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                       	        newCompositeNode(grammarAccess.getDirectionCSAccess().getUsesCoreDomainCrossReference_5_1_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_21);
+                    pushFollow(FollowSets000.FOLLOW_13);
                     ruleUnrestrictedName();
 
                     state._fsp--;
@@ -2365,32 +1775,32 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // InternalQVTcore.g:760:2: (otherlv_8= ',' ( ( ruleUnrestrictedName ) ) )*
-                    loop22:
+                    // InternalQVTcore.g:561:2: (otherlv_8= ',' ( ( ruleUnrestrictedName ) ) )*
+                    loop14:
                     do {
-                        int alt22=2;
-                        int LA22_0 = input.LA(1);
+                        int alt14=2;
+                        int LA14_0 = input.LA(1);
 
-                        if ( (LA22_0==21) ) {
-                            alt22=1;
+                        if ( (LA14_0==18) ) {
+                            alt14=1;
                         }
 
 
-                        switch (alt22) {
+                        switch (alt14) {
                     	case 1 :
-                    	    // InternalQVTcore.g:760:4: otherlv_8= ',' ( ( ruleUnrestrictedName ) )
+                    	    // InternalQVTcore.g:561:4: otherlv_8= ',' ( ( ruleUnrestrictedName ) )
                     	    {
-                    	    otherlv_8=(Token)match(input,21,FollowSets000.FOLLOW_8); if (state.failed) return current;
+                    	    otherlv_8=(Token)match(input,18,FollowSets000.FOLLOW_5); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
 
                     	          	newLeafNode(otherlv_8, grammarAccess.getDirectionCSAccess().getCommaKeyword_5_2_0());
                     	          
                     	    }
-                    	    // InternalQVTcore.g:764:1: ( ( ruleUnrestrictedName ) )
-                    	    // InternalQVTcore.g:765:1: ( ruleUnrestrictedName )
+                    	    // InternalQVTcore.g:565:1: ( ( ruleUnrestrictedName ) )
+                    	    // InternalQVTcore.g:566:1: ( ruleUnrestrictedName )
                     	    {
-                    	    // InternalQVTcore.g:765:1: ( ruleUnrestrictedName )
-                    	    // InternalQVTcore.g:766:3: ruleUnrestrictedName
+                    	    // InternalQVTcore.g:566:1: ( ruleUnrestrictedName )
+                    	    // InternalQVTcore.g:567:3: ruleUnrestrictedName
                     	    {
                     	    if ( state.backtracking==0 ) {
                     	       
@@ -2409,7 +1819,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	      	        newCompositeNode(grammarAccess.getDirectionCSAccess().getUsesCoreDomainCrossReference_5_2_1_0()); 
                     	      	    
                     	    }
-                    	    pushFollow(FollowSets000.FOLLOW_21);
+                    	    pushFollow(FollowSets000.FOLLOW_13);
                     	    ruleUnrestrictedName();
 
                     	    state._fsp--;
@@ -2430,7 +1840,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	    break;
 
                     	default :
-                    	    break loop22;
+                    	    break loop14;
                         }
                     } while (true);
 
@@ -2463,7 +1873,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleGuardPatternCS"
-    // InternalQVTcore.g:790:1: entryRuleGuardPatternCS returns [EObject current=null] : iv_ruleGuardPatternCS= ruleGuardPatternCS EOF ;
+    // InternalQVTcore.g:591:1: entryRuleGuardPatternCS returns [EObject current=null] : iv_ruleGuardPatternCS= ruleGuardPatternCS EOF ;
     public final EObject entryRuleGuardPatternCS() throws RecognitionException {
         EObject current = null;
 
@@ -2471,8 +1881,8 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalQVTcore.g:791:2: (iv_ruleGuardPatternCS= ruleGuardPatternCS EOF )
-            // InternalQVTcore.g:792:2: iv_ruleGuardPatternCS= ruleGuardPatternCS EOF
+            // InternalQVTcore.g:592:2: (iv_ruleGuardPatternCS= ruleGuardPatternCS EOF )
+            // InternalQVTcore.g:593:2: iv_ruleGuardPatternCS= ruleGuardPatternCS EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getGuardPatternCSRule()); 
@@ -2503,7 +1913,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleGuardPatternCS"
-    // InternalQVTcore.g:799:1: ruleGuardPatternCS returns [EObject current=null] : ( (otherlv_0= '(' ( (lv_ownedUnrealizedVariables_1_0= ruleGuardVariableCS ) ) (otherlv_2= ',' ( (lv_ownedUnrealizedVariables_3_0= ruleGuardVariableCS ) ) )* otherlv_4= '|' ( (lv_ownedPredicates_5_0= rulePredicateCS ) )* otherlv_6= ')' ) | (otherlv_7= '(' ( (lv_ownedUnrealizedVariables_8_0= ruleGuardVariableCS ) ) (otherlv_9= ',' ( (lv_ownedUnrealizedVariables_10_0= ruleGuardVariableCS ) ) )* otherlv_11= ')' ) | (otherlv_12= '(' ( (lv_ownedPredicates_13_0= rulePredicateCS ) )+ otherlv_14= ')' ) | ( () otherlv_16= '(' otherlv_17= ')' ) ) ;
+    // InternalQVTcore.g:600:1: ruleGuardPatternCS returns [EObject current=null] : ( (otherlv_0= '(' ( (lv_ownedUnrealizedVariables_1_0= ruleGuardVariableCS ) ) (otherlv_2= ',' ( (lv_ownedUnrealizedVariables_3_0= ruleGuardVariableCS ) ) )* otherlv_4= '|' ( (lv_ownedPredicates_5_0= rulePredicateCS ) )* otherlv_6= ')' ) | (otherlv_7= '(' ( (lv_ownedUnrealizedVariables_8_0= ruleGuardVariableCS ) ) (otherlv_9= ',' ( (lv_ownedUnrealizedVariables_10_0= ruleGuardVariableCS ) ) )* otherlv_11= ')' ) | (otherlv_12= '(' ( (lv_ownedPredicates_13_0= rulePredicateCS ) )+ otherlv_14= ')' ) | ( () otherlv_16= '(' otherlv_17= ')' ) ) ;
     public final EObject ruleGuardPatternCS() throws RecognitionException {
         EObject current = null;
 
@@ -2534,32 +1944,32 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // InternalQVTcore.g:802:28: ( ( (otherlv_0= '(' ( (lv_ownedUnrealizedVariables_1_0= ruleGuardVariableCS ) ) (otherlv_2= ',' ( (lv_ownedUnrealizedVariables_3_0= ruleGuardVariableCS ) ) )* otherlv_4= '|' ( (lv_ownedPredicates_5_0= rulePredicateCS ) )* otherlv_6= ')' ) | (otherlv_7= '(' ( (lv_ownedUnrealizedVariables_8_0= ruleGuardVariableCS ) ) (otherlv_9= ',' ( (lv_ownedUnrealizedVariables_10_0= ruleGuardVariableCS ) ) )* otherlv_11= ')' ) | (otherlv_12= '(' ( (lv_ownedPredicates_13_0= rulePredicateCS ) )+ otherlv_14= ')' ) | ( () otherlv_16= '(' otherlv_17= ')' ) ) )
-            // InternalQVTcore.g:803:1: ( (otherlv_0= '(' ( (lv_ownedUnrealizedVariables_1_0= ruleGuardVariableCS ) ) (otherlv_2= ',' ( (lv_ownedUnrealizedVariables_3_0= ruleGuardVariableCS ) ) )* otherlv_4= '|' ( (lv_ownedPredicates_5_0= rulePredicateCS ) )* otherlv_6= ')' ) | (otherlv_7= '(' ( (lv_ownedUnrealizedVariables_8_0= ruleGuardVariableCS ) ) (otherlv_9= ',' ( (lv_ownedUnrealizedVariables_10_0= ruleGuardVariableCS ) ) )* otherlv_11= ')' ) | (otherlv_12= '(' ( (lv_ownedPredicates_13_0= rulePredicateCS ) )+ otherlv_14= ')' ) | ( () otherlv_16= '(' otherlv_17= ')' ) )
+            // InternalQVTcore.g:603:28: ( ( (otherlv_0= '(' ( (lv_ownedUnrealizedVariables_1_0= ruleGuardVariableCS ) ) (otherlv_2= ',' ( (lv_ownedUnrealizedVariables_3_0= ruleGuardVariableCS ) ) )* otherlv_4= '|' ( (lv_ownedPredicates_5_0= rulePredicateCS ) )* otherlv_6= ')' ) | (otherlv_7= '(' ( (lv_ownedUnrealizedVariables_8_0= ruleGuardVariableCS ) ) (otherlv_9= ',' ( (lv_ownedUnrealizedVariables_10_0= ruleGuardVariableCS ) ) )* otherlv_11= ')' ) | (otherlv_12= '(' ( (lv_ownedPredicates_13_0= rulePredicateCS ) )+ otherlv_14= ')' ) | ( () otherlv_16= '(' otherlv_17= ')' ) ) )
+            // InternalQVTcore.g:604:1: ( (otherlv_0= '(' ( (lv_ownedUnrealizedVariables_1_0= ruleGuardVariableCS ) ) (otherlv_2= ',' ( (lv_ownedUnrealizedVariables_3_0= ruleGuardVariableCS ) ) )* otherlv_4= '|' ( (lv_ownedPredicates_5_0= rulePredicateCS ) )* otherlv_6= ')' ) | (otherlv_7= '(' ( (lv_ownedUnrealizedVariables_8_0= ruleGuardVariableCS ) ) (otherlv_9= ',' ( (lv_ownedUnrealizedVariables_10_0= ruleGuardVariableCS ) ) )* otherlv_11= ')' ) | (otherlv_12= '(' ( (lv_ownedPredicates_13_0= rulePredicateCS ) )+ otherlv_14= ')' ) | ( () otherlv_16= '(' otherlv_17= ')' ) )
             {
-            // InternalQVTcore.g:803:1: ( (otherlv_0= '(' ( (lv_ownedUnrealizedVariables_1_0= ruleGuardVariableCS ) ) (otherlv_2= ',' ( (lv_ownedUnrealizedVariables_3_0= ruleGuardVariableCS ) ) )* otherlv_4= '|' ( (lv_ownedPredicates_5_0= rulePredicateCS ) )* otherlv_6= ')' ) | (otherlv_7= '(' ( (lv_ownedUnrealizedVariables_8_0= ruleGuardVariableCS ) ) (otherlv_9= ',' ( (lv_ownedUnrealizedVariables_10_0= ruleGuardVariableCS ) ) )* otherlv_11= ')' ) | (otherlv_12= '(' ( (lv_ownedPredicates_13_0= rulePredicateCS ) )+ otherlv_14= ')' ) | ( () otherlv_16= '(' otherlv_17= ')' ) )
-            int alt28=4;
-            int LA28_0 = input.LA(1);
+            // InternalQVTcore.g:604:1: ( (otherlv_0= '(' ( (lv_ownedUnrealizedVariables_1_0= ruleGuardVariableCS ) ) (otherlv_2= ',' ( (lv_ownedUnrealizedVariables_3_0= ruleGuardVariableCS ) ) )* otherlv_4= '|' ( (lv_ownedPredicates_5_0= rulePredicateCS ) )* otherlv_6= ')' ) | (otherlv_7= '(' ( (lv_ownedUnrealizedVariables_8_0= ruleGuardVariableCS ) ) (otherlv_9= ',' ( (lv_ownedUnrealizedVariables_10_0= ruleGuardVariableCS ) ) )* otherlv_11= ')' ) | (otherlv_12= '(' ( (lv_ownedPredicates_13_0= rulePredicateCS ) )+ otherlv_14= ')' ) | ( () otherlv_16= '(' otherlv_17= ')' ) )
+            int alt20=4;
+            int LA20_0 = input.LA(1);
 
-            if ( (LA28_0==28) ) {
-                int LA28_1 = input.LA(2);
+            if ( (LA20_0==23) ) {
+                int LA20_1 = input.LA(2);
 
-                if ( (synpred31_InternalQVTcore()) ) {
-                    alt28=1;
+                if ( (synpred23_InternalQVTcore()) ) {
+                    alt20=1;
                 }
-                else if ( (synpred33_InternalQVTcore()) ) {
-                    alt28=2;
+                else if ( (synpred25_InternalQVTcore()) ) {
+                    alt20=2;
                 }
-                else if ( (synpred35_InternalQVTcore()) ) {
-                    alt28=3;
+                else if ( (synpred27_InternalQVTcore()) ) {
+                    alt20=3;
                 }
                 else if ( (true) ) {
-                    alt28=4;
+                    alt20=4;
                 }
                 else {
                     if (state.backtracking>0) {state.failed=true; return current;}
                     NoViableAltException nvae =
-                        new NoViableAltException("", 28, 1, input);
+                        new NoViableAltException("", 20, 1, input);
 
                     throw nvae;
                 }
@@ -2567,35 +1977,35 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             else {
                 if (state.backtracking>0) {state.failed=true; return current;}
                 NoViableAltException nvae =
-                    new NoViableAltException("", 28, 0, input);
+                    new NoViableAltException("", 20, 0, input);
 
                 throw nvae;
             }
-            switch (alt28) {
+            switch (alt20) {
                 case 1 :
-                    // InternalQVTcore.g:803:2: (otherlv_0= '(' ( (lv_ownedUnrealizedVariables_1_0= ruleGuardVariableCS ) ) (otherlv_2= ',' ( (lv_ownedUnrealizedVariables_3_0= ruleGuardVariableCS ) ) )* otherlv_4= '|' ( (lv_ownedPredicates_5_0= rulePredicateCS ) )* otherlv_6= ')' )
+                    // InternalQVTcore.g:604:2: (otherlv_0= '(' ( (lv_ownedUnrealizedVariables_1_0= ruleGuardVariableCS ) ) (otherlv_2= ',' ( (lv_ownedUnrealizedVariables_3_0= ruleGuardVariableCS ) ) )* otherlv_4= '|' ( (lv_ownedPredicates_5_0= rulePredicateCS ) )* otherlv_6= ')' )
                     {
-                    // InternalQVTcore.g:803:2: (otherlv_0= '(' ( (lv_ownedUnrealizedVariables_1_0= ruleGuardVariableCS ) ) (otherlv_2= ',' ( (lv_ownedUnrealizedVariables_3_0= ruleGuardVariableCS ) ) )* otherlv_4= '|' ( (lv_ownedPredicates_5_0= rulePredicateCS ) )* otherlv_6= ')' )
-                    // InternalQVTcore.g:803:4: otherlv_0= '(' ( (lv_ownedUnrealizedVariables_1_0= ruleGuardVariableCS ) ) (otherlv_2= ',' ( (lv_ownedUnrealizedVariables_3_0= ruleGuardVariableCS ) ) )* otherlv_4= '|' ( (lv_ownedPredicates_5_0= rulePredicateCS ) )* otherlv_6= ')'
+                    // InternalQVTcore.g:604:2: (otherlv_0= '(' ( (lv_ownedUnrealizedVariables_1_0= ruleGuardVariableCS ) ) (otherlv_2= ',' ( (lv_ownedUnrealizedVariables_3_0= ruleGuardVariableCS ) ) )* otherlv_4= '|' ( (lv_ownedPredicates_5_0= rulePredicateCS ) )* otherlv_6= ')' )
+                    // InternalQVTcore.g:604:4: otherlv_0= '(' ( (lv_ownedUnrealizedVariables_1_0= ruleGuardVariableCS ) ) (otherlv_2= ',' ( (lv_ownedUnrealizedVariables_3_0= ruleGuardVariableCS ) ) )* otherlv_4= '|' ( (lv_ownedPredicates_5_0= rulePredicateCS ) )* otherlv_6= ')'
                     {
-                    otherlv_0=(Token)match(input,28,FollowSets000.FOLLOW_8); if (state.failed) return current;
+                    otherlv_0=(Token)match(input,23,FollowSets000.FOLLOW_5); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_0, grammarAccess.getGuardPatternCSAccess().getLeftParenthesisKeyword_0_0());
                           
                     }
-                    // InternalQVTcore.g:807:1: ( (lv_ownedUnrealizedVariables_1_0= ruleGuardVariableCS ) )
-                    // InternalQVTcore.g:808:1: (lv_ownedUnrealizedVariables_1_0= ruleGuardVariableCS )
+                    // InternalQVTcore.g:608:1: ( (lv_ownedUnrealizedVariables_1_0= ruleGuardVariableCS ) )
+                    // InternalQVTcore.g:609:1: (lv_ownedUnrealizedVariables_1_0= ruleGuardVariableCS )
                     {
-                    // InternalQVTcore.g:808:1: (lv_ownedUnrealizedVariables_1_0= ruleGuardVariableCS )
-                    // InternalQVTcore.g:809:3: lv_ownedUnrealizedVariables_1_0= ruleGuardVariableCS
+                    // InternalQVTcore.g:609:1: (lv_ownedUnrealizedVariables_1_0= ruleGuardVariableCS )
+                    // InternalQVTcore.g:610:3: lv_ownedUnrealizedVariables_1_0= ruleGuardVariableCS
                     {
                     if ( state.backtracking==0 ) {
                        
                       	        newCompositeNode(grammarAccess.getGuardPatternCSAccess().getOwnedUnrealizedVariablesGuardVariableCSParserRuleCall_0_1_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_14);
+                    pushFollow(FollowSets000.FOLLOW_6);
                     lv_ownedUnrealizedVariables_1_0=ruleGuardVariableCS();
 
                     state._fsp--;
@@ -2609,7 +2019,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                              			current, 
                              			"ownedUnrealizedVariables",
                               		lv_ownedUnrealizedVariables_1_0, 
-                              		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.GuardVariableCS");
+                              		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.GuardVariableCS");
                       	        afterParserOrEnumRuleCall();
                       	    
                     }
@@ -2619,39 +2029,39 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // InternalQVTcore.g:825:2: (otherlv_2= ',' ( (lv_ownedUnrealizedVariables_3_0= ruleGuardVariableCS ) ) )*
-                    loop24:
+                    // InternalQVTcore.g:626:2: (otherlv_2= ',' ( (lv_ownedUnrealizedVariables_3_0= ruleGuardVariableCS ) ) )*
+                    loop16:
                     do {
-                        int alt24=2;
-                        int LA24_0 = input.LA(1);
+                        int alt16=2;
+                        int LA16_0 = input.LA(1);
 
-                        if ( (LA24_0==21) ) {
-                            alt24=1;
+                        if ( (LA16_0==18) ) {
+                            alt16=1;
                         }
 
 
-                        switch (alt24) {
+                        switch (alt16) {
                     	case 1 :
-                    	    // InternalQVTcore.g:825:4: otherlv_2= ',' ( (lv_ownedUnrealizedVariables_3_0= ruleGuardVariableCS ) )
+                    	    // InternalQVTcore.g:626:4: otherlv_2= ',' ( (lv_ownedUnrealizedVariables_3_0= ruleGuardVariableCS ) )
                     	    {
-                    	    otherlv_2=(Token)match(input,21,FollowSets000.FOLLOW_8); if (state.failed) return current;
+                    	    otherlv_2=(Token)match(input,18,FollowSets000.FOLLOW_5); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
 
                     	          	newLeafNode(otherlv_2, grammarAccess.getGuardPatternCSAccess().getCommaKeyword_0_2_0());
                     	          
                     	    }
-                    	    // InternalQVTcore.g:829:1: ( (lv_ownedUnrealizedVariables_3_0= ruleGuardVariableCS ) )
-                    	    // InternalQVTcore.g:830:1: (lv_ownedUnrealizedVariables_3_0= ruleGuardVariableCS )
+                    	    // InternalQVTcore.g:630:1: ( (lv_ownedUnrealizedVariables_3_0= ruleGuardVariableCS ) )
+                    	    // InternalQVTcore.g:631:1: (lv_ownedUnrealizedVariables_3_0= ruleGuardVariableCS )
                     	    {
-                    	    // InternalQVTcore.g:830:1: (lv_ownedUnrealizedVariables_3_0= ruleGuardVariableCS )
-                    	    // InternalQVTcore.g:831:3: lv_ownedUnrealizedVariables_3_0= ruleGuardVariableCS
+                    	    // InternalQVTcore.g:631:1: (lv_ownedUnrealizedVariables_3_0= ruleGuardVariableCS )
+                    	    // InternalQVTcore.g:632:3: lv_ownedUnrealizedVariables_3_0= ruleGuardVariableCS
                     	    {
                     	    if ( state.backtracking==0 ) {
                     	       
                     	      	        newCompositeNode(grammarAccess.getGuardPatternCSAccess().getOwnedUnrealizedVariablesGuardVariableCSParserRuleCall_0_2_1_0()); 
                     	      	    
                     	    }
-                    	    pushFollow(FollowSets000.FOLLOW_14);
+                    	    pushFollow(FollowSets000.FOLLOW_6);
                     	    lv_ownedUnrealizedVariables_3_0=ruleGuardVariableCS();
 
                     	    state._fsp--;
@@ -2665,7 +2075,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	             			current, 
                     	             			"ownedUnrealizedVariables",
                     	              		lv_ownedUnrealizedVariables_3_0, 
-                    	              		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.GuardVariableCS");
+                    	              		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.GuardVariableCS");
                     	      	        afterParserOrEnumRuleCall();
                     	      	    
                     	    }
@@ -2680,40 +2090,40 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	    break;
 
                     	default :
-                    	    break loop24;
+                    	    break loop16;
                         }
                     } while (true);
 
-                    otherlv_4=(Token)match(input,25,FollowSets000.FOLLOW_22); if (state.failed) return current;
+                    otherlv_4=(Token)match(input,19,FollowSets000.FOLLOW_14); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_4, grammarAccess.getGuardPatternCSAccess().getVerticalLineKeyword_0_3());
                           
                     }
-                    // InternalQVTcore.g:851:1: ( (lv_ownedPredicates_5_0= rulePredicateCS ) )*
-                    loop25:
+                    // InternalQVTcore.g:652:1: ( (lv_ownedPredicates_5_0= rulePredicateCS ) )*
+                    loop17:
                     do {
-                        int alt25=2;
-                        int LA25_0 = input.LA(1);
+                        int alt17=2;
+                        int LA17_0 = input.LA(1);
 
-                        if ( (LA25_0==RULE_SINGLE_QUOTED_STRING||(LA25_0>=RULE_INT && LA25_0<=RULE_ESCAPED_ID)||LA25_0==18||LA25_0==20||(LA25_0>=26 && LA25_0<=28)||LA25_0==31||LA25_0==33||(LA25_0>=35 && LA25_0<=36)||(LA25_0>=41 && LA25_0<=44)||(LA25_0>=84 && LA25_0<=85)||(LA25_0>=101 && LA25_0<=115)||LA25_0==118||(LA25_0>=120 && LA25_0<=123)||LA25_0==128||(LA25_0>=133 && LA25_0<=134)) ) {
-                            alt25=1;
+                        if ( (LA17_0==RULE_SINGLE_QUOTED_STRING||(LA17_0>=RULE_INT && LA17_0<=RULE_ESCAPED_ID)||(LA17_0>=21 && LA17_0<=23)||LA17_0==26||LA17_0==28||LA17_0==31||LA17_0==33||(LA17_0>=35 && LA17_0<=36)||(LA17_0>=41 && LA17_0<=44)||(LA17_0>=84 && LA17_0<=85)||(LA17_0>=101 && LA17_0<=115)||LA17_0==118||(LA17_0>=120 && LA17_0<=123)||LA17_0==128||(LA17_0>=133 && LA17_0<=134)) ) {
+                            alt17=1;
                         }
 
 
-                        switch (alt25) {
+                        switch (alt17) {
                     	case 1 :
-                    	    // InternalQVTcore.g:852:1: (lv_ownedPredicates_5_0= rulePredicateCS )
+                    	    // InternalQVTcore.g:653:1: (lv_ownedPredicates_5_0= rulePredicateCS )
                     	    {
-                    	    // InternalQVTcore.g:852:1: (lv_ownedPredicates_5_0= rulePredicateCS )
-                    	    // InternalQVTcore.g:853:3: lv_ownedPredicates_5_0= rulePredicateCS
+                    	    // InternalQVTcore.g:653:1: (lv_ownedPredicates_5_0= rulePredicateCS )
+                    	    // InternalQVTcore.g:654:3: lv_ownedPredicates_5_0= rulePredicateCS
                     	    {
                     	    if ( state.backtracking==0 ) {
                     	       
                     	      	        newCompositeNode(grammarAccess.getGuardPatternCSAccess().getOwnedPredicatesPredicateCSParserRuleCall_0_4_0()); 
                     	      	    
                     	    }
-                    	    pushFollow(FollowSets000.FOLLOW_22);
+                    	    pushFollow(FollowSets000.FOLLOW_14);
                     	    lv_ownedPredicates_5_0=rulePredicateCS();
 
                     	    state._fsp--;
@@ -2727,7 +2137,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	             			current, 
                     	             			"ownedPredicates",
                     	              		lv_ownedPredicates_5_0, 
-                    	              		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.PredicateCS");
+                    	              		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.PredicateCS");
                     	      	        afterParserOrEnumRuleCall();
                     	      	    
                     	    }
@@ -2739,11 +2149,11 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	    break;
 
                     	default :
-                    	    break loop25;
+                    	    break loop17;
                         }
                     } while (true);
 
-                    otherlv_6=(Token)match(input,29,FollowSets000.FOLLOW_2); if (state.failed) return current;
+                    otherlv_6=(Token)match(input,24,FollowSets000.FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_6, grammarAccess.getGuardPatternCSAccess().getRightParenthesisKeyword_0_5());
@@ -2756,29 +2166,29 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalQVTcore.g:874:6: (otherlv_7= '(' ( (lv_ownedUnrealizedVariables_8_0= ruleGuardVariableCS ) ) (otherlv_9= ',' ( (lv_ownedUnrealizedVariables_10_0= ruleGuardVariableCS ) ) )* otherlv_11= ')' )
+                    // InternalQVTcore.g:675:6: (otherlv_7= '(' ( (lv_ownedUnrealizedVariables_8_0= ruleGuardVariableCS ) ) (otherlv_9= ',' ( (lv_ownedUnrealizedVariables_10_0= ruleGuardVariableCS ) ) )* otherlv_11= ')' )
                     {
-                    // InternalQVTcore.g:874:6: (otherlv_7= '(' ( (lv_ownedUnrealizedVariables_8_0= ruleGuardVariableCS ) ) (otherlv_9= ',' ( (lv_ownedUnrealizedVariables_10_0= ruleGuardVariableCS ) ) )* otherlv_11= ')' )
-                    // InternalQVTcore.g:874:8: otherlv_7= '(' ( (lv_ownedUnrealizedVariables_8_0= ruleGuardVariableCS ) ) (otherlv_9= ',' ( (lv_ownedUnrealizedVariables_10_0= ruleGuardVariableCS ) ) )* otherlv_11= ')'
+                    // InternalQVTcore.g:675:6: (otherlv_7= '(' ( (lv_ownedUnrealizedVariables_8_0= ruleGuardVariableCS ) ) (otherlv_9= ',' ( (lv_ownedUnrealizedVariables_10_0= ruleGuardVariableCS ) ) )* otherlv_11= ')' )
+                    // InternalQVTcore.g:675:8: otherlv_7= '(' ( (lv_ownedUnrealizedVariables_8_0= ruleGuardVariableCS ) ) (otherlv_9= ',' ( (lv_ownedUnrealizedVariables_10_0= ruleGuardVariableCS ) ) )* otherlv_11= ')'
                     {
-                    otherlv_7=(Token)match(input,28,FollowSets000.FOLLOW_8); if (state.failed) return current;
+                    otherlv_7=(Token)match(input,23,FollowSets000.FOLLOW_5); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_7, grammarAccess.getGuardPatternCSAccess().getLeftParenthesisKeyword_1_0());
                           
                     }
-                    // InternalQVTcore.g:878:1: ( (lv_ownedUnrealizedVariables_8_0= ruleGuardVariableCS ) )
-                    // InternalQVTcore.g:879:1: (lv_ownedUnrealizedVariables_8_0= ruleGuardVariableCS )
+                    // InternalQVTcore.g:679:1: ( (lv_ownedUnrealizedVariables_8_0= ruleGuardVariableCS ) )
+                    // InternalQVTcore.g:680:1: (lv_ownedUnrealizedVariables_8_0= ruleGuardVariableCS )
                     {
-                    // InternalQVTcore.g:879:1: (lv_ownedUnrealizedVariables_8_0= ruleGuardVariableCS )
-                    // InternalQVTcore.g:880:3: lv_ownedUnrealizedVariables_8_0= ruleGuardVariableCS
+                    // InternalQVTcore.g:680:1: (lv_ownedUnrealizedVariables_8_0= ruleGuardVariableCS )
+                    // InternalQVTcore.g:681:3: lv_ownedUnrealizedVariables_8_0= ruleGuardVariableCS
                     {
                     if ( state.backtracking==0 ) {
                        
                       	        newCompositeNode(grammarAccess.getGuardPatternCSAccess().getOwnedUnrealizedVariablesGuardVariableCSParserRuleCall_1_1_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_23);
+                    pushFollow(FollowSets000.FOLLOW_15);
                     lv_ownedUnrealizedVariables_8_0=ruleGuardVariableCS();
 
                     state._fsp--;
@@ -2792,7 +2202,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                              			current, 
                              			"ownedUnrealizedVariables",
                               		lv_ownedUnrealizedVariables_8_0, 
-                              		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.GuardVariableCS");
+                              		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.GuardVariableCS");
                       	        afterParserOrEnumRuleCall();
                       	    
                     }
@@ -2802,39 +2212,39 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // InternalQVTcore.g:896:2: (otherlv_9= ',' ( (lv_ownedUnrealizedVariables_10_0= ruleGuardVariableCS ) ) )*
-                    loop26:
+                    // InternalQVTcore.g:697:2: (otherlv_9= ',' ( (lv_ownedUnrealizedVariables_10_0= ruleGuardVariableCS ) ) )*
+                    loop18:
                     do {
-                        int alt26=2;
-                        int LA26_0 = input.LA(1);
+                        int alt18=2;
+                        int LA18_0 = input.LA(1);
 
-                        if ( (LA26_0==21) ) {
-                            alt26=1;
+                        if ( (LA18_0==18) ) {
+                            alt18=1;
                         }
 
 
-                        switch (alt26) {
+                        switch (alt18) {
                     	case 1 :
-                    	    // InternalQVTcore.g:896:4: otherlv_9= ',' ( (lv_ownedUnrealizedVariables_10_0= ruleGuardVariableCS ) )
+                    	    // InternalQVTcore.g:697:4: otherlv_9= ',' ( (lv_ownedUnrealizedVariables_10_0= ruleGuardVariableCS ) )
                     	    {
-                    	    otherlv_9=(Token)match(input,21,FollowSets000.FOLLOW_8); if (state.failed) return current;
+                    	    otherlv_9=(Token)match(input,18,FollowSets000.FOLLOW_5); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
 
                     	          	newLeafNode(otherlv_9, grammarAccess.getGuardPatternCSAccess().getCommaKeyword_1_2_0());
                     	          
                     	    }
-                    	    // InternalQVTcore.g:900:1: ( (lv_ownedUnrealizedVariables_10_0= ruleGuardVariableCS ) )
-                    	    // InternalQVTcore.g:901:1: (lv_ownedUnrealizedVariables_10_0= ruleGuardVariableCS )
+                    	    // InternalQVTcore.g:701:1: ( (lv_ownedUnrealizedVariables_10_0= ruleGuardVariableCS ) )
+                    	    // InternalQVTcore.g:702:1: (lv_ownedUnrealizedVariables_10_0= ruleGuardVariableCS )
                     	    {
-                    	    // InternalQVTcore.g:901:1: (lv_ownedUnrealizedVariables_10_0= ruleGuardVariableCS )
-                    	    // InternalQVTcore.g:902:3: lv_ownedUnrealizedVariables_10_0= ruleGuardVariableCS
+                    	    // InternalQVTcore.g:702:1: (lv_ownedUnrealizedVariables_10_0= ruleGuardVariableCS )
+                    	    // InternalQVTcore.g:703:3: lv_ownedUnrealizedVariables_10_0= ruleGuardVariableCS
                     	    {
                     	    if ( state.backtracking==0 ) {
                     	       
                     	      	        newCompositeNode(grammarAccess.getGuardPatternCSAccess().getOwnedUnrealizedVariablesGuardVariableCSParserRuleCall_1_2_1_0()); 
                     	      	    
                     	    }
-                    	    pushFollow(FollowSets000.FOLLOW_23);
+                    	    pushFollow(FollowSets000.FOLLOW_15);
                     	    lv_ownedUnrealizedVariables_10_0=ruleGuardVariableCS();
 
                     	    state._fsp--;
@@ -2848,7 +2258,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	             			current, 
                     	             			"ownedUnrealizedVariables",
                     	              		lv_ownedUnrealizedVariables_10_0, 
-                    	              		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.GuardVariableCS");
+                    	              		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.GuardVariableCS");
                     	      	        afterParserOrEnumRuleCall();
                     	      	    
                     	    }
@@ -2863,11 +2273,11 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	    break;
 
                     	default :
-                    	    break loop26;
+                    	    break loop18;
                         }
                     } while (true);
 
-                    otherlv_11=(Token)match(input,29,FollowSets000.FOLLOW_2); if (state.failed) return current;
+                    otherlv_11=(Token)match(input,24,FollowSets000.FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_11, grammarAccess.getGuardPatternCSAccess().getRightParenthesisKeyword_1_3());
@@ -2880,42 +2290,42 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // InternalQVTcore.g:923:6: (otherlv_12= '(' ( (lv_ownedPredicates_13_0= rulePredicateCS ) )+ otherlv_14= ')' )
+                    // InternalQVTcore.g:724:6: (otherlv_12= '(' ( (lv_ownedPredicates_13_0= rulePredicateCS ) )+ otherlv_14= ')' )
                     {
-                    // InternalQVTcore.g:923:6: (otherlv_12= '(' ( (lv_ownedPredicates_13_0= rulePredicateCS ) )+ otherlv_14= ')' )
-                    // InternalQVTcore.g:923:8: otherlv_12= '(' ( (lv_ownedPredicates_13_0= rulePredicateCS ) )+ otherlv_14= ')'
+                    // InternalQVTcore.g:724:6: (otherlv_12= '(' ( (lv_ownedPredicates_13_0= rulePredicateCS ) )+ otherlv_14= ')' )
+                    // InternalQVTcore.g:724:8: otherlv_12= '(' ( (lv_ownedPredicates_13_0= rulePredicateCS ) )+ otherlv_14= ')'
                     {
-                    otherlv_12=(Token)match(input,28,FollowSets000.FOLLOW_17); if (state.failed) return current;
+                    otherlv_12=(Token)match(input,23,FollowSets000.FOLLOW_9); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_12, grammarAccess.getGuardPatternCSAccess().getLeftParenthesisKeyword_2_0());
                           
                     }
-                    // InternalQVTcore.g:927:1: ( (lv_ownedPredicates_13_0= rulePredicateCS ) )+
-                    int cnt27=0;
-                    loop27:
+                    // InternalQVTcore.g:728:1: ( (lv_ownedPredicates_13_0= rulePredicateCS ) )+
+                    int cnt19=0;
+                    loop19:
                     do {
-                        int alt27=2;
-                        int LA27_0 = input.LA(1);
+                        int alt19=2;
+                        int LA19_0 = input.LA(1);
 
-                        if ( (LA27_0==RULE_SINGLE_QUOTED_STRING||(LA27_0>=RULE_INT && LA27_0<=RULE_ESCAPED_ID)||LA27_0==18||LA27_0==20||(LA27_0>=26 && LA27_0<=28)||LA27_0==31||LA27_0==33||(LA27_0>=35 && LA27_0<=36)||(LA27_0>=41 && LA27_0<=44)||(LA27_0>=84 && LA27_0<=85)||(LA27_0>=101 && LA27_0<=115)||LA27_0==118||(LA27_0>=120 && LA27_0<=123)||LA27_0==128||(LA27_0>=133 && LA27_0<=134)) ) {
-                            alt27=1;
+                        if ( (LA19_0==RULE_SINGLE_QUOTED_STRING||(LA19_0>=RULE_INT && LA19_0<=RULE_ESCAPED_ID)||(LA19_0>=21 && LA19_0<=23)||LA19_0==26||LA19_0==28||LA19_0==31||LA19_0==33||(LA19_0>=35 && LA19_0<=36)||(LA19_0>=41 && LA19_0<=44)||(LA19_0>=84 && LA19_0<=85)||(LA19_0>=101 && LA19_0<=115)||LA19_0==118||(LA19_0>=120 && LA19_0<=123)||LA19_0==128||(LA19_0>=133 && LA19_0<=134)) ) {
+                            alt19=1;
                         }
 
 
-                        switch (alt27) {
+                        switch (alt19) {
                     	case 1 :
-                    	    // InternalQVTcore.g:928:1: (lv_ownedPredicates_13_0= rulePredicateCS )
+                    	    // InternalQVTcore.g:729:1: (lv_ownedPredicates_13_0= rulePredicateCS )
                     	    {
-                    	    // InternalQVTcore.g:928:1: (lv_ownedPredicates_13_0= rulePredicateCS )
-                    	    // InternalQVTcore.g:929:3: lv_ownedPredicates_13_0= rulePredicateCS
+                    	    // InternalQVTcore.g:729:1: (lv_ownedPredicates_13_0= rulePredicateCS )
+                    	    // InternalQVTcore.g:730:3: lv_ownedPredicates_13_0= rulePredicateCS
                     	    {
                     	    if ( state.backtracking==0 ) {
                     	       
                     	      	        newCompositeNode(grammarAccess.getGuardPatternCSAccess().getOwnedPredicatesPredicateCSParserRuleCall_2_1_0()); 
                     	      	    
                     	    }
-                    	    pushFollow(FollowSets000.FOLLOW_22);
+                    	    pushFollow(FollowSets000.FOLLOW_14);
                     	    lv_ownedPredicates_13_0=rulePredicateCS();
 
                     	    state._fsp--;
@@ -2929,7 +2339,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	             			current, 
                     	             			"ownedPredicates",
                     	              		lv_ownedPredicates_13_0, 
-                    	              		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.PredicateCS");
+                    	              		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.PredicateCS");
                     	      	        afterParserOrEnumRuleCall();
                     	      	    
                     	    }
@@ -2941,16 +2351,16 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	    break;
 
                     	default :
-                    	    if ( cnt27 >= 1 ) break loop27;
+                    	    if ( cnt19 >= 1 ) break loop19;
                     	    if (state.backtracking>0) {state.failed=true; return current;}
                                 EarlyExitException eee =
-                                    new EarlyExitException(27, input);
+                                    new EarlyExitException(19, input);
                                 throw eee;
                         }
-                        cnt27++;
+                        cnt19++;
                     } while (true);
 
-                    otherlv_14=(Token)match(input,29,FollowSets000.FOLLOW_2); if (state.failed) return current;
+                    otherlv_14=(Token)match(input,24,FollowSets000.FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_14, grammarAccess.getGuardPatternCSAccess().getRightParenthesisKeyword_2_2());
@@ -2963,13 +2373,13 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 4 :
-                    // InternalQVTcore.g:950:6: ( () otherlv_16= '(' otherlv_17= ')' )
+                    // InternalQVTcore.g:751:6: ( () otherlv_16= '(' otherlv_17= ')' )
                     {
-                    // InternalQVTcore.g:950:6: ( () otherlv_16= '(' otherlv_17= ')' )
-                    // InternalQVTcore.g:950:7: () otherlv_16= '(' otherlv_17= ')'
+                    // InternalQVTcore.g:751:6: ( () otherlv_16= '(' otherlv_17= ')' )
+                    // InternalQVTcore.g:751:7: () otherlv_16= '(' otherlv_17= ')'
                     {
-                    // InternalQVTcore.g:950:7: ()
-                    // InternalQVTcore.g:951:2: 
+                    // InternalQVTcore.g:751:7: ()
+                    // InternalQVTcore.g:752:2: 
                     {
                     if ( state.backtracking==0 ) {
                        
@@ -2986,13 +2396,13 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    otherlv_16=(Token)match(input,28,FollowSets000.FOLLOW_24); if (state.failed) return current;
+                    otherlv_16=(Token)match(input,23,FollowSets000.FOLLOW_16); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_16, grammarAccess.getGuardPatternCSAccess().getLeftParenthesisKeyword_3_1());
                           
                     }
-                    otherlv_17=(Token)match(input,29,FollowSets000.FOLLOW_2); if (state.failed) return current;
+                    otherlv_17=(Token)match(input,24,FollowSets000.FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_17, grammarAccess.getGuardPatternCSAccess().getRightParenthesisKeyword_3_2());
@@ -3027,7 +2437,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleGuardVariableCS"
-    // InternalQVTcore.g:975:1: entryRuleGuardVariableCS returns [EObject current=null] : iv_ruleGuardVariableCS= ruleGuardVariableCS EOF ;
+    // InternalQVTcore.g:776:1: entryRuleGuardVariableCS returns [EObject current=null] : iv_ruleGuardVariableCS= ruleGuardVariableCS EOF ;
     public final EObject entryRuleGuardVariableCS() throws RecognitionException {
         EObject current = null;
 
@@ -3035,8 +2445,8 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalQVTcore.g:976:2: (iv_ruleGuardVariableCS= ruleGuardVariableCS EOF )
-            // InternalQVTcore.g:977:2: iv_ruleGuardVariableCS= ruleGuardVariableCS EOF
+            // InternalQVTcore.g:777:2: (iv_ruleGuardVariableCS= ruleGuardVariableCS EOF )
+            // InternalQVTcore.g:778:2: iv_ruleGuardVariableCS= ruleGuardVariableCS EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getGuardVariableCSRule()); 
@@ -3067,7 +2477,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleGuardVariableCS"
-    // InternalQVTcore.g:984:1: ruleGuardVariableCS returns [EObject current=null] : ( ( (lv_name_0_0= ruleUnrestrictedName ) ) otherlv_1= ':' ( (lv_ownedType_2_0= ruleTypeExpCS ) ) ) ;
+    // InternalQVTcore.g:785:1: ruleGuardVariableCS returns [EObject current=null] : ( ( (lv_name_0_0= ruleUnrestrictedName ) ) otherlv_1= ':' ( (lv_ownedType_2_0= ruleTypeExpCS ) ) ) ;
     public final EObject ruleGuardVariableCS() throws RecognitionException {
         EObject current = null;
 
@@ -3080,24 +2490,24 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // InternalQVTcore.g:987:28: ( ( ( (lv_name_0_0= ruleUnrestrictedName ) ) otherlv_1= ':' ( (lv_ownedType_2_0= ruleTypeExpCS ) ) ) )
-            // InternalQVTcore.g:988:1: ( ( (lv_name_0_0= ruleUnrestrictedName ) ) otherlv_1= ':' ( (lv_ownedType_2_0= ruleTypeExpCS ) ) )
+            // InternalQVTcore.g:788:28: ( ( ( (lv_name_0_0= ruleUnrestrictedName ) ) otherlv_1= ':' ( (lv_ownedType_2_0= ruleTypeExpCS ) ) ) )
+            // InternalQVTcore.g:789:1: ( ( (lv_name_0_0= ruleUnrestrictedName ) ) otherlv_1= ':' ( (lv_ownedType_2_0= ruleTypeExpCS ) ) )
             {
-            // InternalQVTcore.g:988:1: ( ( (lv_name_0_0= ruleUnrestrictedName ) ) otherlv_1= ':' ( (lv_ownedType_2_0= ruleTypeExpCS ) ) )
-            // InternalQVTcore.g:988:2: ( (lv_name_0_0= ruleUnrestrictedName ) ) otherlv_1= ':' ( (lv_ownedType_2_0= ruleTypeExpCS ) )
+            // InternalQVTcore.g:789:1: ( ( (lv_name_0_0= ruleUnrestrictedName ) ) otherlv_1= ':' ( (lv_ownedType_2_0= ruleTypeExpCS ) ) )
+            // InternalQVTcore.g:789:2: ( (lv_name_0_0= ruleUnrestrictedName ) ) otherlv_1= ':' ( (lv_ownedType_2_0= ruleTypeExpCS ) )
             {
-            // InternalQVTcore.g:988:2: ( (lv_name_0_0= ruleUnrestrictedName ) )
-            // InternalQVTcore.g:989:1: (lv_name_0_0= ruleUnrestrictedName )
+            // InternalQVTcore.g:789:2: ( (lv_name_0_0= ruleUnrestrictedName ) )
+            // InternalQVTcore.g:790:1: (lv_name_0_0= ruleUnrestrictedName )
             {
-            // InternalQVTcore.g:989:1: (lv_name_0_0= ruleUnrestrictedName )
-            // InternalQVTcore.g:990:3: lv_name_0_0= ruleUnrestrictedName
+            // InternalQVTcore.g:790:1: (lv_name_0_0= ruleUnrestrictedName )
+            // InternalQVTcore.g:791:3: lv_name_0_0= ruleUnrestrictedName
             {
             if ( state.backtracking==0 ) {
                
               	        newCompositeNode(grammarAccess.getGuardVariableCSAccess().getNameUnrestrictedNameParserRuleCall_0_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_25);
+            pushFollow(FollowSets000.FOLLOW_17);
             lv_name_0_0=ruleUnrestrictedName();
 
             state._fsp--;
@@ -3111,7 +2521,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                      			current, 
                      			"name",
                       		lv_name_0_0, 
-                      		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.UnrestrictedName");
+                      		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.UnrestrictedName");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -3121,17 +2531,17 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,30,FollowSets000.FOLLOW_26); if (state.failed) return current;
+            otherlv_1=(Token)match(input,25,FollowSets000.FOLLOW_18); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_1, grammarAccess.getGuardVariableCSAccess().getColonKeyword_1());
                   
             }
-            // InternalQVTcore.g:1010:1: ( (lv_ownedType_2_0= ruleTypeExpCS ) )
-            // InternalQVTcore.g:1011:1: (lv_ownedType_2_0= ruleTypeExpCS )
+            // InternalQVTcore.g:811:1: ( (lv_ownedType_2_0= ruleTypeExpCS ) )
+            // InternalQVTcore.g:812:1: (lv_ownedType_2_0= ruleTypeExpCS )
             {
-            // InternalQVTcore.g:1011:1: (lv_ownedType_2_0= ruleTypeExpCS )
-            // InternalQVTcore.g:1012:3: lv_ownedType_2_0= ruleTypeExpCS
+            // InternalQVTcore.g:812:1: (lv_ownedType_2_0= ruleTypeExpCS )
+            // InternalQVTcore.g:813:3: lv_ownedType_2_0= ruleTypeExpCS
             {
             if ( state.backtracking==0 ) {
                
@@ -3185,7 +2595,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleImportCS"
-    // InternalQVTcore.g:1036:1: entryRuleImportCS returns [EObject current=null] : iv_ruleImportCS= ruleImportCS EOF ;
+    // InternalQVTcore.g:837:1: entryRuleImportCS returns [EObject current=null] : iv_ruleImportCS= ruleImportCS EOF ;
     public final EObject entryRuleImportCS() throws RecognitionException {
         EObject current = null;
 
@@ -3193,8 +2603,8 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalQVTcore.g:1037:2: (iv_ruleImportCS= ruleImportCS EOF )
-            // InternalQVTcore.g:1038:2: iv_ruleImportCS= ruleImportCS EOF
+            // InternalQVTcore.g:838:2: (iv_ruleImportCS= ruleImportCS EOF )
+            // InternalQVTcore.g:839:2: iv_ruleImportCS= ruleImportCS EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getImportCSRule()); 
@@ -3225,7 +2635,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleImportCS"
-    // InternalQVTcore.g:1045:1: ruleImportCS returns [EObject current=null] : (otherlv_0= 'import' ( ( (lv_name_1_0= ruleIdentifier ) ) otherlv_2= ':' )? ( (lv_ownedPathName_3_0= ruleURIPathNameCS ) ) ( ( (lv_isAll_4_0= '::' ) ) otherlv_5= '*' )? otherlv_6= ';' ) ;
+    // InternalQVTcore.g:846:1: ruleImportCS returns [EObject current=null] : (otherlv_0= 'import' ( ( (lv_name_1_0= ruleIdentifier ) ) otherlv_2= ':' )? ( (lv_ownedPathName_3_0= ruleURIPathNameCS ) ) ( ( (lv_isAll_4_0= '::' ) ) otherlv_5= '*' )? otherlv_6= ';' ) ;
     public final EObject ruleImportCS() throws RecognitionException {
         EObject current = null;
 
@@ -3242,52 +2652,52 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // InternalQVTcore.g:1048:28: ( (otherlv_0= 'import' ( ( (lv_name_1_0= ruleIdentifier ) ) otherlv_2= ':' )? ( (lv_ownedPathName_3_0= ruleURIPathNameCS ) ) ( ( (lv_isAll_4_0= '::' ) ) otherlv_5= '*' )? otherlv_6= ';' ) )
-            // InternalQVTcore.g:1049:1: (otherlv_0= 'import' ( ( (lv_name_1_0= ruleIdentifier ) ) otherlv_2= ':' )? ( (lv_ownedPathName_3_0= ruleURIPathNameCS ) ) ( ( (lv_isAll_4_0= '::' ) ) otherlv_5= '*' )? otherlv_6= ';' )
+            // InternalQVTcore.g:849:28: ( (otherlv_0= 'import' ( ( (lv_name_1_0= ruleIdentifier ) ) otherlv_2= ':' )? ( (lv_ownedPathName_3_0= ruleURIPathNameCS ) ) ( ( (lv_isAll_4_0= '::' ) ) otherlv_5= '*' )? otherlv_6= ';' ) )
+            // InternalQVTcore.g:850:1: (otherlv_0= 'import' ( ( (lv_name_1_0= ruleIdentifier ) ) otherlv_2= ':' )? ( (lv_ownedPathName_3_0= ruleURIPathNameCS ) ) ( ( (lv_isAll_4_0= '::' ) ) otherlv_5= '*' )? otherlv_6= ';' )
             {
-            // InternalQVTcore.g:1049:1: (otherlv_0= 'import' ( ( (lv_name_1_0= ruleIdentifier ) ) otherlv_2= ':' )? ( (lv_ownedPathName_3_0= ruleURIPathNameCS ) ) ( ( (lv_isAll_4_0= '::' ) ) otherlv_5= '*' )? otherlv_6= ';' )
-            // InternalQVTcore.g:1049:3: otherlv_0= 'import' ( ( (lv_name_1_0= ruleIdentifier ) ) otherlv_2= ':' )? ( (lv_ownedPathName_3_0= ruleURIPathNameCS ) ) ( ( (lv_isAll_4_0= '::' ) ) otherlv_5= '*' )? otherlv_6= ';'
+            // InternalQVTcore.g:850:1: (otherlv_0= 'import' ( ( (lv_name_1_0= ruleIdentifier ) ) otherlv_2= ':' )? ( (lv_ownedPathName_3_0= ruleURIPathNameCS ) ) ( ( (lv_isAll_4_0= '::' ) ) otherlv_5= '*' )? otherlv_6= ';' )
+            // InternalQVTcore.g:850:3: otherlv_0= 'import' ( ( (lv_name_1_0= ruleIdentifier ) ) otherlv_2= ':' )? ( (lv_ownedPathName_3_0= ruleURIPathNameCS ) ) ( ( (lv_isAll_4_0= '::' ) ) otherlv_5= '*' )? otherlv_6= ';'
             {
-            otherlv_0=(Token)match(input,31,FollowSets000.FOLLOW_27); if (state.failed) return current;
+            otherlv_0=(Token)match(input,26,FollowSets000.FOLLOW_19); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_0, grammarAccess.getImportCSAccess().getImportKeyword_0());
                   
             }
-            // InternalQVTcore.g:1053:1: ( ( (lv_name_1_0= ruleIdentifier ) ) otherlv_2= ':' )?
-            int alt29=2;
-            int LA29_0 = input.LA(1);
+            // InternalQVTcore.g:854:1: ( ( (lv_name_1_0= ruleIdentifier ) ) otherlv_2= ':' )?
+            int alt21=2;
+            int LA21_0 = input.LA(1);
 
-            if ( (LA29_0==RULE_SIMPLE_ID) ) {
-                int LA29_1 = input.LA(2);
+            if ( (LA21_0==RULE_SIMPLE_ID) ) {
+                int LA21_1 = input.LA(2);
 
-                if ( (LA29_1==30) ) {
-                    alt29=1;
+                if ( (LA21_1==25) ) {
+                    alt21=1;
                 }
             }
-            else if ( (LA29_0==RULE_ESCAPED_ID) ) {
-                int LA29_2 = input.LA(2);
+            else if ( (LA21_0==RULE_ESCAPED_ID) ) {
+                int LA21_2 = input.LA(2);
 
-                if ( (LA29_2==30) ) {
-                    alt29=1;
+                if ( (LA21_2==25) ) {
+                    alt21=1;
                 }
             }
-            switch (alt29) {
+            switch (alt21) {
                 case 1 :
-                    // InternalQVTcore.g:1053:2: ( (lv_name_1_0= ruleIdentifier ) ) otherlv_2= ':'
+                    // InternalQVTcore.g:854:2: ( (lv_name_1_0= ruleIdentifier ) ) otherlv_2= ':'
                     {
-                    // InternalQVTcore.g:1053:2: ( (lv_name_1_0= ruleIdentifier ) )
-                    // InternalQVTcore.g:1054:1: (lv_name_1_0= ruleIdentifier )
+                    // InternalQVTcore.g:854:2: ( (lv_name_1_0= ruleIdentifier ) )
+                    // InternalQVTcore.g:855:1: (lv_name_1_0= ruleIdentifier )
                     {
-                    // InternalQVTcore.g:1054:1: (lv_name_1_0= ruleIdentifier )
-                    // InternalQVTcore.g:1055:3: lv_name_1_0= ruleIdentifier
+                    // InternalQVTcore.g:855:1: (lv_name_1_0= ruleIdentifier )
+                    // InternalQVTcore.g:856:3: lv_name_1_0= ruleIdentifier
                     {
                     if ( state.backtracking==0 ) {
                        
                       	        newCompositeNode(grammarAccess.getImportCSAccess().getNameIdentifierParserRuleCall_1_0_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_25);
+                    pushFollow(FollowSets000.FOLLOW_17);
                     lv_name_1_0=ruleIdentifier();
 
                     state._fsp--;
@@ -3311,7 +2721,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    otherlv_2=(Token)match(input,30,FollowSets000.FOLLOW_27); if (state.failed) return current;
+                    otherlv_2=(Token)match(input,25,FollowSets000.FOLLOW_19); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_2, grammarAccess.getImportCSAccess().getColonKeyword_1_1());
@@ -3323,18 +2733,18 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalQVTcore.g:1075:3: ( (lv_ownedPathName_3_0= ruleURIPathNameCS ) )
-            // InternalQVTcore.g:1076:1: (lv_ownedPathName_3_0= ruleURIPathNameCS )
+            // InternalQVTcore.g:876:3: ( (lv_ownedPathName_3_0= ruleURIPathNameCS ) )
+            // InternalQVTcore.g:877:1: (lv_ownedPathName_3_0= ruleURIPathNameCS )
             {
-            // InternalQVTcore.g:1076:1: (lv_ownedPathName_3_0= ruleURIPathNameCS )
-            // InternalQVTcore.g:1077:3: lv_ownedPathName_3_0= ruleURIPathNameCS
+            // InternalQVTcore.g:877:1: (lv_ownedPathName_3_0= ruleURIPathNameCS )
+            // InternalQVTcore.g:878:3: lv_ownedPathName_3_0= ruleURIPathNameCS
             {
             if ( state.backtracking==0 ) {
                
               	        newCompositeNode(grammarAccess.getImportCSAccess().getOwnedPathNameURIPathNameCSParserRuleCall_2_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_28);
+            pushFollow(FollowSets000.FOLLOW_20);
             lv_ownedPathName_3_0=ruleURIPathNameCS();
 
             state._fsp--;
@@ -3358,24 +2768,24 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalQVTcore.g:1093:2: ( ( (lv_isAll_4_0= '::' ) ) otherlv_5= '*' )?
-            int alt30=2;
-            int LA30_0 = input.LA(1);
+            // InternalQVTcore.g:894:2: ( ( (lv_isAll_4_0= '::' ) ) otherlv_5= '*' )?
+            int alt22=2;
+            int LA22_0 = input.LA(1);
 
-            if ( (LA30_0==32) ) {
-                alt30=1;
+            if ( (LA22_0==27) ) {
+                alt22=1;
             }
-            switch (alt30) {
+            switch (alt22) {
                 case 1 :
-                    // InternalQVTcore.g:1093:3: ( (lv_isAll_4_0= '::' ) ) otherlv_5= '*'
+                    // InternalQVTcore.g:894:3: ( (lv_isAll_4_0= '::' ) ) otherlv_5= '*'
                     {
-                    // InternalQVTcore.g:1093:3: ( (lv_isAll_4_0= '::' ) )
-                    // InternalQVTcore.g:1094:1: (lv_isAll_4_0= '::' )
+                    // InternalQVTcore.g:894:3: ( (lv_isAll_4_0= '::' ) )
+                    // InternalQVTcore.g:895:1: (lv_isAll_4_0= '::' )
                     {
-                    // InternalQVTcore.g:1094:1: (lv_isAll_4_0= '::' )
-                    // InternalQVTcore.g:1095:3: lv_isAll_4_0= '::'
+                    // InternalQVTcore.g:895:1: (lv_isAll_4_0= '::' )
+                    // InternalQVTcore.g:896:3: lv_isAll_4_0= '::'
                     {
-                    lv_isAll_4_0=(Token)match(input,32,FollowSets000.FOLLOW_29); if (state.failed) return current;
+                    lv_isAll_4_0=(Token)match(input,27,FollowSets000.FOLLOW_21); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               newLeafNode(lv_isAll_4_0, grammarAccess.getImportCSAccess().getIsAllColonColonKeyword_3_0_0());
@@ -3395,7 +2805,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    otherlv_5=(Token)match(input,33,FollowSets000.FOLLOW_30); if (state.failed) return current;
+                    otherlv_5=(Token)match(input,28,FollowSets000.FOLLOW_22); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_5, grammarAccess.getImportCSAccess().getAsteriskKeyword_3_1());
@@ -3407,7 +2817,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_6=(Token)match(input,34,FollowSets000.FOLLOW_2); if (state.failed) return current;
+            otherlv_6=(Token)match(input,29,FollowSets000.FOLLOW_2); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_6, grammarAccess.getImportCSAccess().getSemicolonKeyword_4());
@@ -3433,6 +2843,596 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
         return current;
     }
     // $ANTLR end "ruleImportCS"
+
+
+    // $ANTLR start "entryRuleMappingCS"
+    // InternalQVTcore.g:925:1: entryRuleMappingCS returns [EObject current=null] : iv_ruleMappingCS= ruleMappingCS EOF ;
+    public final EObject entryRuleMappingCS() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleMappingCS = null;
+
+
+        try {
+            // InternalQVTcore.g:926:2: (iv_ruleMappingCS= ruleMappingCS EOF )
+            // InternalQVTcore.g:927:2: iv_ruleMappingCS= ruleMappingCS EOF
+            {
+            if ( state.backtracking==0 ) {
+               newCompositeNode(grammarAccess.getMappingCSRule()); 
+            }
+            pushFollow(FollowSets000.FOLLOW_1);
+            iv_ruleMappingCS=ruleMappingCS();
+
+            state._fsp--;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               current =iv_ruleMappingCS; 
+            }
+            match(input,EOF,FollowSets000.FOLLOW_2); if (state.failed) return current;
+
+            }
+
+        }
+         
+            catch (RecognitionException re) { 
+                recover(input,re); 
+                appendSkippedTokens();
+            } 
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRuleMappingCS"
+
+
+    // $ANTLR start "ruleMappingCS"
+    // InternalQVTcore.g:934:1: ruleMappingCS returns [EObject current=null] : ( () ( (lv_isDefault_1_0= 'default' ) )? otherlv_2= 'map' ( (lv_name_3_0= ruleUnrestrictedName ) )? (otherlv_4= 'in' ( (lv_ownedInPathName_5_0= rulePathNameCS ) ) )? (otherlv_6= 'refines' ( ( ruleUnrestrictedName ) ) (otherlv_8= ',' ( ( ruleUnrestrictedName ) ) )* )? otherlv_10= '{' ( (lv_ownedDomains_11_0= ruleNamedDomainCS ) )* (otherlv_12= 'where' ( (lv_ownedMiddle_13_0= ruleUnnamedDomainCS ) ) )? ( (lv_ownedComposedMappings_14_0= ruleMappingCS ) )* otherlv_15= '}' ) ;
+    public final EObject ruleMappingCS() throws RecognitionException {
+        EObject current = null;
+
+        Token lv_isDefault_1_0=null;
+        Token otherlv_2=null;
+        Token otherlv_4=null;
+        Token otherlv_6=null;
+        Token otherlv_8=null;
+        Token otherlv_10=null;
+        Token otherlv_12=null;
+        Token otherlv_15=null;
+        AntlrDatatypeRuleToken lv_name_3_0 = null;
+
+        EObject lv_ownedInPathName_5_0 = null;
+
+        EObject lv_ownedDomains_11_0 = null;
+
+        EObject lv_ownedMiddle_13_0 = null;
+
+        EObject lv_ownedComposedMappings_14_0 = null;
+
+
+         enterRule(); 
+            
+        try {
+            // InternalQVTcore.g:937:28: ( ( () ( (lv_isDefault_1_0= 'default' ) )? otherlv_2= 'map' ( (lv_name_3_0= ruleUnrestrictedName ) )? (otherlv_4= 'in' ( (lv_ownedInPathName_5_0= rulePathNameCS ) ) )? (otherlv_6= 'refines' ( ( ruleUnrestrictedName ) ) (otherlv_8= ',' ( ( ruleUnrestrictedName ) ) )* )? otherlv_10= '{' ( (lv_ownedDomains_11_0= ruleNamedDomainCS ) )* (otherlv_12= 'where' ( (lv_ownedMiddle_13_0= ruleUnnamedDomainCS ) ) )? ( (lv_ownedComposedMappings_14_0= ruleMappingCS ) )* otherlv_15= '}' ) )
+            // InternalQVTcore.g:938:1: ( () ( (lv_isDefault_1_0= 'default' ) )? otherlv_2= 'map' ( (lv_name_3_0= ruleUnrestrictedName ) )? (otherlv_4= 'in' ( (lv_ownedInPathName_5_0= rulePathNameCS ) ) )? (otherlv_6= 'refines' ( ( ruleUnrestrictedName ) ) (otherlv_8= ',' ( ( ruleUnrestrictedName ) ) )* )? otherlv_10= '{' ( (lv_ownedDomains_11_0= ruleNamedDomainCS ) )* (otherlv_12= 'where' ( (lv_ownedMiddle_13_0= ruleUnnamedDomainCS ) ) )? ( (lv_ownedComposedMappings_14_0= ruleMappingCS ) )* otherlv_15= '}' )
+            {
+            // InternalQVTcore.g:938:1: ( () ( (lv_isDefault_1_0= 'default' ) )? otherlv_2= 'map' ( (lv_name_3_0= ruleUnrestrictedName ) )? (otherlv_4= 'in' ( (lv_ownedInPathName_5_0= rulePathNameCS ) ) )? (otherlv_6= 'refines' ( ( ruleUnrestrictedName ) ) (otherlv_8= ',' ( ( ruleUnrestrictedName ) ) )* )? otherlv_10= '{' ( (lv_ownedDomains_11_0= ruleNamedDomainCS ) )* (otherlv_12= 'where' ( (lv_ownedMiddle_13_0= ruleUnnamedDomainCS ) ) )? ( (lv_ownedComposedMappings_14_0= ruleMappingCS ) )* otherlv_15= '}' )
+            // InternalQVTcore.g:938:2: () ( (lv_isDefault_1_0= 'default' ) )? otherlv_2= 'map' ( (lv_name_3_0= ruleUnrestrictedName ) )? (otherlv_4= 'in' ( (lv_ownedInPathName_5_0= rulePathNameCS ) ) )? (otherlv_6= 'refines' ( ( ruleUnrestrictedName ) ) (otherlv_8= ',' ( ( ruleUnrestrictedName ) ) )* )? otherlv_10= '{' ( (lv_ownedDomains_11_0= ruleNamedDomainCS ) )* (otherlv_12= 'where' ( (lv_ownedMiddle_13_0= ruleUnnamedDomainCS ) ) )? ( (lv_ownedComposedMappings_14_0= ruleMappingCS ) )* otherlv_15= '}'
+            {
+            // InternalQVTcore.g:938:2: ()
+            // InternalQVTcore.g:939:2: 
+            {
+            if ( state.backtracking==0 ) {
+               
+              	  /* */ 
+              	
+            }
+            if ( state.backtracking==0 ) {
+
+                      current = forceCreateModelElement(
+                          grammarAccess.getMappingCSAccess().getMappingCSAction_0(),
+                          current);
+                  
+            }
+
+            }
+
+            // InternalQVTcore.g:947:2: ( (lv_isDefault_1_0= 'default' ) )?
+            int alt23=2;
+            int LA23_0 = input.LA(1);
+
+            if ( (LA23_0==30) ) {
+                alt23=1;
+            }
+            switch (alt23) {
+                case 1 :
+                    // InternalQVTcore.g:948:1: (lv_isDefault_1_0= 'default' )
+                    {
+                    // InternalQVTcore.g:948:1: (lv_isDefault_1_0= 'default' )
+                    // InternalQVTcore.g:949:3: lv_isDefault_1_0= 'default'
+                    {
+                    lv_isDefault_1_0=(Token)match(input,30,FollowSets000.FOLLOW_23); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                              newLeafNode(lv_isDefault_1_0, grammarAccess.getMappingCSAccess().getIsDefaultDefaultKeyword_1_0());
+                          
+                    }
+                    if ( state.backtracking==0 ) {
+
+                      	        if (current==null) {
+                      	            current = createModelElement(grammarAccess.getMappingCSRule());
+                      	        }
+                             		setWithLastConsumed(current, "isDefault", true, "default");
+                      	    
+                    }
+
+                    }
+
+
+                    }
+                    break;
+
+            }
+
+            otherlv_2=(Token)match(input,31,FollowSets000.FOLLOW_24); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+                  	newLeafNode(otherlv_2, grammarAccess.getMappingCSAccess().getMapKeyword_2());
+                  
+            }
+            // InternalQVTcore.g:966:1: ( (lv_name_3_0= ruleUnrestrictedName ) )?
+            int alt24=2;
+            int LA24_0 = input.LA(1);
+
+            if ( ((LA24_0>=RULE_SIMPLE_ID && LA24_0<=RULE_ESCAPED_ID)||(LA24_0>=21 && LA24_0<=22)||LA24_0==26||LA24_0==31||(LA24_0>=35 && LA24_0<=36)||(LA24_0>=41 && LA24_0<=44)) ) {
+                alt24=1;
+            }
+            else if ( (LA24_0==33) ) {
+                int LA24_2 = input.LA(2);
+
+                if ( (LA24_2==17||LA24_2==32) ) {
+                    alt24=1;
+                }
+                else if ( (LA24_2==33) ) {
+                    int LA24_4 = input.LA(3);
+
+                    if ( ((LA24_4>=RULE_SIMPLE_ID && LA24_4<=RULE_ESCAPED_ID)||(LA24_4>=21 && LA24_4<=22)||LA24_4==26||LA24_4==31||LA24_4==33||(LA24_4>=35 && LA24_4<=36)||(LA24_4>=41 && LA24_4<=44)) ) {
+                        alt24=1;
+                    }
+                }
+            }
+            switch (alt24) {
+                case 1 :
+                    // InternalQVTcore.g:967:1: (lv_name_3_0= ruleUnrestrictedName )
+                    {
+                    // InternalQVTcore.g:967:1: (lv_name_3_0= ruleUnrestrictedName )
+                    // InternalQVTcore.g:968:3: lv_name_3_0= ruleUnrestrictedName
+                    {
+                    if ( state.backtracking==0 ) {
+                       
+                      	        newCompositeNode(grammarAccess.getMappingCSAccess().getNameUnrestrictedNameParserRuleCall_3_0()); 
+                      	    
+                    }
+                    pushFollow(FollowSets000.FOLLOW_25);
+                    lv_name_3_0=ruleUnrestrictedName();
+
+                    state._fsp--;
+                    if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      	        if (current==null) {
+                      	            current = createModelElementForParent(grammarAccess.getMappingCSRule());
+                      	        }
+                             		set(
+                             			current, 
+                             			"name",
+                              		lv_name_3_0, 
+                              		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.UnrestrictedName");
+                      	        afterParserOrEnumRuleCall();
+                      	    
+                    }
+
+                    }
+
+
+                    }
+                    break;
+
+            }
+
+            // InternalQVTcore.g:984:3: (otherlv_4= 'in' ( (lv_ownedInPathName_5_0= rulePathNameCS ) ) )?
+            int alt25=2;
+            int LA25_0 = input.LA(1);
+
+            if ( (LA25_0==32) ) {
+                alt25=1;
+            }
+            switch (alt25) {
+                case 1 :
+                    // InternalQVTcore.g:984:5: otherlv_4= 'in' ( (lv_ownedInPathName_5_0= rulePathNameCS ) )
+                    {
+                    otherlv_4=(Token)match(input,32,FollowSets000.FOLLOW_18); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                          	newLeafNode(otherlv_4, grammarAccess.getMappingCSAccess().getInKeyword_4_0());
+                          
+                    }
+                    // InternalQVTcore.g:988:1: ( (lv_ownedInPathName_5_0= rulePathNameCS ) )
+                    // InternalQVTcore.g:989:1: (lv_ownedInPathName_5_0= rulePathNameCS )
+                    {
+                    // InternalQVTcore.g:989:1: (lv_ownedInPathName_5_0= rulePathNameCS )
+                    // InternalQVTcore.g:990:3: lv_ownedInPathName_5_0= rulePathNameCS
+                    {
+                    if ( state.backtracking==0 ) {
+                       
+                      	        newCompositeNode(grammarAccess.getMappingCSAccess().getOwnedInPathNamePathNameCSParserRuleCall_4_1_0()); 
+                      	    
+                    }
+                    pushFollow(FollowSets000.FOLLOW_26);
+                    lv_ownedInPathName_5_0=rulePathNameCS();
+
+                    state._fsp--;
+                    if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      	        if (current==null) {
+                      	            current = createModelElementForParent(grammarAccess.getMappingCSRule());
+                      	        }
+                             		set(
+                             			current, 
+                             			"ownedInPathName",
+                              		lv_ownedInPathName_5_0, 
+                              		"org.eclipse.ocl.xtext.base.Base.PathNameCS");
+                      	        afterParserOrEnumRuleCall();
+                      	    
+                    }
+
+                    }
+
+
+                    }
+
+
+                    }
+                    break;
+
+            }
+
+            // InternalQVTcore.g:1006:4: (otherlv_6= 'refines' ( ( ruleUnrestrictedName ) ) (otherlv_8= ',' ( ( ruleUnrestrictedName ) ) )* )?
+            int alt27=2;
+            int LA27_0 = input.LA(1);
+
+            if ( (LA27_0==33) ) {
+                alt27=1;
+            }
+            switch (alt27) {
+                case 1 :
+                    // InternalQVTcore.g:1006:6: otherlv_6= 'refines' ( ( ruleUnrestrictedName ) ) (otherlv_8= ',' ( ( ruleUnrestrictedName ) ) )*
+                    {
+                    otherlv_6=(Token)match(input,33,FollowSets000.FOLLOW_5); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                          	newLeafNode(otherlv_6, grammarAccess.getMappingCSAccess().getRefinesKeyword_5_0());
+                          
+                    }
+                    // InternalQVTcore.g:1010:1: ( ( ruleUnrestrictedName ) )
+                    // InternalQVTcore.g:1011:1: ( ruleUnrestrictedName )
+                    {
+                    // InternalQVTcore.g:1011:1: ( ruleUnrestrictedName )
+                    // InternalQVTcore.g:1012:3: ruleUnrestrictedName
+                    {
+                    if ( state.backtracking==0 ) {
+                       
+                      		  /* */ 
+                      		
+                    }
+                    if ( state.backtracking==0 ) {
+
+                      			if (current==null) {
+                      	            current = createModelElement(grammarAccess.getMappingCSRule());
+                      	        }
+                              
+                    }
+                    if ( state.backtracking==0 ) {
+                       
+                      	        newCompositeNode(grammarAccess.getMappingCSAccess().getRefinesMappingCrossReference_5_1_0()); 
+                      	    
+                    }
+                    pushFollow(FollowSets000.FOLLOW_27);
+                    ruleUnrestrictedName();
+
+                    state._fsp--;
+                    if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+                       
+                      	        afterParserOrEnumRuleCall();
+                      	    
+                    }
+
+                    }
+
+
+                    }
+
+                    // InternalQVTcore.g:1028:2: (otherlv_8= ',' ( ( ruleUnrestrictedName ) ) )*
+                    loop26:
+                    do {
+                        int alt26=2;
+                        int LA26_0 = input.LA(1);
+
+                        if ( (LA26_0==18) ) {
+                            alt26=1;
+                        }
+
+
+                        switch (alt26) {
+                    	case 1 :
+                    	    // InternalQVTcore.g:1028:4: otherlv_8= ',' ( ( ruleUnrestrictedName ) )
+                    	    {
+                    	    otherlv_8=(Token)match(input,18,FollowSets000.FOLLOW_5); if (state.failed) return current;
+                    	    if ( state.backtracking==0 ) {
+
+                    	          	newLeafNode(otherlv_8, grammarAccess.getMappingCSAccess().getCommaKeyword_5_2_0());
+                    	          
+                    	    }
+                    	    // InternalQVTcore.g:1032:1: ( ( ruleUnrestrictedName ) )
+                    	    // InternalQVTcore.g:1033:1: ( ruleUnrestrictedName )
+                    	    {
+                    	    // InternalQVTcore.g:1033:1: ( ruleUnrestrictedName )
+                    	    // InternalQVTcore.g:1034:3: ruleUnrestrictedName
+                    	    {
+                    	    if ( state.backtracking==0 ) {
+                    	       
+                    	      		  /* */ 
+                    	      		
+                    	    }
+                    	    if ( state.backtracking==0 ) {
+
+                    	      			if (current==null) {
+                    	      	            current = createModelElement(grammarAccess.getMappingCSRule());
+                    	      	        }
+                    	              
+                    	    }
+                    	    if ( state.backtracking==0 ) {
+                    	       
+                    	      	        newCompositeNode(grammarAccess.getMappingCSAccess().getRefinesMappingCrossReference_5_2_1_0()); 
+                    	      	    
+                    	    }
+                    	    pushFollow(FollowSets000.FOLLOW_27);
+                    	    ruleUnrestrictedName();
+
+                    	    state._fsp--;
+                    	    if (state.failed) return current;
+                    	    if ( state.backtracking==0 ) {
+                    	       
+                    	      	        afterParserOrEnumRuleCall();
+                    	      	    
+                    	    }
+
+                    	    }
+
+
+                    	    }
+
+
+                    	    }
+                    	    break;
+
+                    	default :
+                    	    break loop26;
+                        }
+                    } while (true);
+
+
+                    }
+                    break;
+
+            }
+
+            otherlv_10=(Token)match(input,17,FollowSets000.FOLLOW_28); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+                  	newLeafNode(otherlv_10, grammarAccess.getMappingCSAccess().getLeftCurlyBracketKeyword_6());
+                  
+            }
+            // InternalQVTcore.g:1054:1: ( (lv_ownedDomains_11_0= ruleNamedDomainCS ) )*
+            loop28:
+            do {
+                int alt28=2;
+                int LA28_0 = input.LA(1);
+
+                if ( (LA28_0==31) ) {
+                    int LA28_2 = input.LA(2);
+
+                    if ( (LA28_2==23) ) {
+                        alt28=1;
+                    }
+
+
+                }
+                else if ( ((LA28_0>=RULE_SIMPLE_ID && LA28_0<=RULE_ESCAPED_ID)||(LA28_0>=21 && LA28_0<=22)||LA28_0==26||LA28_0==33||(LA28_0>=35 && LA28_0<=36)||(LA28_0>=41 && LA28_0<=44)) ) {
+                    alt28=1;
+                }
+
+
+                switch (alt28) {
+            	case 1 :
+            	    // InternalQVTcore.g:1055:1: (lv_ownedDomains_11_0= ruleNamedDomainCS )
+            	    {
+            	    // InternalQVTcore.g:1055:1: (lv_ownedDomains_11_0= ruleNamedDomainCS )
+            	    // InternalQVTcore.g:1056:3: lv_ownedDomains_11_0= ruleNamedDomainCS
+            	    {
+            	    if ( state.backtracking==0 ) {
+            	       
+            	      	        newCompositeNode(grammarAccess.getMappingCSAccess().getOwnedDomainsNamedDomainCSParserRuleCall_7_0()); 
+            	      	    
+            	    }
+            	    pushFollow(FollowSets000.FOLLOW_28);
+            	    lv_ownedDomains_11_0=ruleNamedDomainCS();
+
+            	    state._fsp--;
+            	    if (state.failed) return current;
+            	    if ( state.backtracking==0 ) {
+
+            	      	        if (current==null) {
+            	      	            current = createModelElementForParent(grammarAccess.getMappingCSRule());
+            	      	        }
+            	             		add(
+            	             			current, 
+            	             			"ownedDomains",
+            	              		lv_ownedDomains_11_0, 
+            	              		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.NamedDomainCS");
+            	      	        afterParserOrEnumRuleCall();
+            	      	    
+            	    }
+
+            	    }
+
+
+            	    }
+            	    break;
+
+            	default :
+            	    break loop28;
+                }
+            } while (true);
+
+            // InternalQVTcore.g:1072:3: (otherlv_12= 'where' ( (lv_ownedMiddle_13_0= ruleUnnamedDomainCS ) ) )?
+            int alt29=2;
+            int LA29_0 = input.LA(1);
+
+            if ( (LA29_0==34) ) {
+                alt29=1;
+            }
+            switch (alt29) {
+                case 1 :
+                    // InternalQVTcore.g:1072:5: otherlv_12= 'where' ( (lv_ownedMiddle_13_0= ruleUnnamedDomainCS ) )
+                    {
+                    otherlv_12=(Token)match(input,34,FollowSets000.FOLLOW_29); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                          	newLeafNode(otherlv_12, grammarAccess.getMappingCSAccess().getWhereKeyword_8_0());
+                          
+                    }
+                    // InternalQVTcore.g:1076:1: ( (lv_ownedMiddle_13_0= ruleUnnamedDomainCS ) )
+                    // InternalQVTcore.g:1077:1: (lv_ownedMiddle_13_0= ruleUnnamedDomainCS )
+                    {
+                    // InternalQVTcore.g:1077:1: (lv_ownedMiddle_13_0= ruleUnnamedDomainCS )
+                    // InternalQVTcore.g:1078:3: lv_ownedMiddle_13_0= ruleUnnamedDomainCS
+                    {
+                    if ( state.backtracking==0 ) {
+                       
+                      	        newCompositeNode(grammarAccess.getMappingCSAccess().getOwnedMiddleUnnamedDomainCSParserRuleCall_8_1_0()); 
+                      	    
+                    }
+                    pushFollow(FollowSets000.FOLLOW_30);
+                    lv_ownedMiddle_13_0=ruleUnnamedDomainCS();
+
+                    state._fsp--;
+                    if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      	        if (current==null) {
+                      	            current = createModelElementForParent(grammarAccess.getMappingCSRule());
+                      	        }
+                             		set(
+                             			current, 
+                             			"ownedMiddle",
+                              		lv_ownedMiddle_13_0, 
+                              		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.UnnamedDomainCS");
+                      	        afterParserOrEnumRuleCall();
+                      	    
+                    }
+
+                    }
+
+
+                    }
+
+
+                    }
+                    break;
+
+            }
+
+            // InternalQVTcore.g:1094:4: ( (lv_ownedComposedMappings_14_0= ruleMappingCS ) )*
+            loop30:
+            do {
+                int alt30=2;
+                int LA30_0 = input.LA(1);
+
+                if ( ((LA30_0>=30 && LA30_0<=31)) ) {
+                    alt30=1;
+                }
+
+
+                switch (alt30) {
+            	case 1 :
+            	    // InternalQVTcore.g:1095:1: (lv_ownedComposedMappings_14_0= ruleMappingCS )
+            	    {
+            	    // InternalQVTcore.g:1095:1: (lv_ownedComposedMappings_14_0= ruleMappingCS )
+            	    // InternalQVTcore.g:1096:3: lv_ownedComposedMappings_14_0= ruleMappingCS
+            	    {
+            	    if ( state.backtracking==0 ) {
+            	       
+            	      	        newCompositeNode(grammarAccess.getMappingCSAccess().getOwnedComposedMappingsMappingCSParserRuleCall_9_0()); 
+            	      	    
+            	    }
+            	    pushFollow(FollowSets000.FOLLOW_30);
+            	    lv_ownedComposedMappings_14_0=ruleMappingCS();
+
+            	    state._fsp--;
+            	    if (state.failed) return current;
+            	    if ( state.backtracking==0 ) {
+
+            	      	        if (current==null) {
+            	      	            current = createModelElementForParent(grammarAccess.getMappingCSRule());
+            	      	        }
+            	             		add(
+            	             			current, 
+            	             			"ownedComposedMappings",
+            	              		lv_ownedComposedMappings_14_0, 
+            	              		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.MappingCS");
+            	      	        afterParserOrEnumRuleCall();
+            	      	    
+            	    }
+
+            	    }
+
+
+            	    }
+            	    break;
+
+            	default :
+            	    break loop30;
+                }
+            } while (true);
+
+            otherlv_15=(Token)match(input,20,FollowSets000.FOLLOW_2); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+                  	newLeafNode(otherlv_15, grammarAccess.getMappingCSAccess().getRightCurlyBracketKeyword_10());
+                  
+            }
+
+            }
+
+
+            }
+
+            if ( state.backtracking==0 ) {
+               leaveRule(); 
+            }
+        }
+         
+            catch (RecognitionException re) { 
+                recover(input,re); 
+                appendSkippedTokens();
+            } 
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleMappingCS"
 
 
     // $ANTLR start "entryRuleNamedDomainCS"
@@ -3503,7 +3503,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             if ( (LA31_0==35) ) {
                 int LA31_1 = input.LA(2);
 
-                if ( ((LA31_1>=RULE_SIMPLE_ID && LA31_1<=RULE_ESCAPED_ID)||LA31_1==18||LA31_1==20||(LA31_1>=26 && LA31_1<=27)||LA31_1==31||(LA31_1>=35 && LA31_1<=36)||(LA31_1>=41 && LA31_1<=44)) ) {
+                if ( ((LA31_1>=RULE_SIMPLE_ID && LA31_1<=RULE_ESCAPED_ID)||(LA31_1>=21 && LA31_1<=22)||LA31_1==26||LA31_1==31||LA31_1==33||(LA31_1>=35 && LA31_1<=36)||(LA31_1>=41 && LA31_1<=44)) ) {
                     alt31=1;
                 }
             }
@@ -3514,7 +3514,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     // InternalQVTcore.g:1138:1: (lv_isCheck_0_0= 'check' )
                     // InternalQVTcore.g:1139:3: lv_isCheck_0_0= 'check'
                     {
-                    lv_isCheck_0_0=(Token)match(input,35,FollowSets000.FOLLOW_8); if (state.failed) return current;
+                    lv_isCheck_0_0=(Token)match(input,35,FollowSets000.FOLLOW_5); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               newLeafNode(lv_isCheck_0_0, grammarAccess.getNamedDomainCSAccess().getIsCheckCheckKeyword_0_0());
@@ -3544,7 +3544,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             if ( (LA32_0==36) ) {
                 int LA32_1 = input.LA(2);
 
-                if ( ((LA32_1>=RULE_SIMPLE_ID && LA32_1<=RULE_ESCAPED_ID)||LA32_1==18||LA32_1==20||(LA32_1>=26 && LA32_1<=27)||LA32_1==31||(LA32_1>=35 && LA32_1<=36)||(LA32_1>=41 && LA32_1<=44)) ) {
+                if ( ((LA32_1>=RULE_SIMPLE_ID && LA32_1<=RULE_ESCAPED_ID)||(LA32_1>=21 && LA32_1<=22)||LA32_1==26||LA32_1==31||LA32_1==33||(LA32_1>=35 && LA32_1<=36)||(LA32_1>=41 && LA32_1<=44)) ) {
                     alt32=1;
                 }
             }
@@ -3555,7 +3555,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     // InternalQVTcore.g:1153:1: (lv_isEnforce_1_0= 'enforce' )
                     // InternalQVTcore.g:1154:3: lv_isEnforce_1_0= 'enforce'
                     {
-                    lv_isEnforce_1_0=(Token)match(input,36,FollowSets000.FOLLOW_8); if (state.failed) return current;
+                    lv_isEnforce_1_0=(Token)match(input,36,FollowSets000.FOLLOW_5); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               newLeafNode(lv_isEnforce_1_0, grammarAccess.getNamedDomainCSAccess().getIsEnforceEnforceKeyword_1_0());
@@ -3601,7 +3601,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getNamedDomainCSAccess().getDirectionTypedModelCrossReference_2_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_12);
+            pushFollow(FollowSets000.FOLLOW_29);
             ruleUnrestrictedName();
 
             state._fsp--;
@@ -3642,7 +3642,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                      			current, 
                      			"ownedGuardPattern",
                       		lv_ownedGuardPattern_3_0, 
-                      		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.GuardPatternCS");
+                      		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.GuardPatternCS");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -3677,7 +3677,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                      			current, 
                      			"ownedBottomPattern",
                       		lv_ownedBottomPattern_4_0, 
-                      		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.BottomPatternCS");
+                      		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.BottomPatternCS");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -3784,7 +3784,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             // InternalQVTcore.g:1242:1: (otherlv_0= 'package' ( (lv_ownedPathName_1_0= ruleScopeNameCS ) )? ( (lv_name_2_0= ruleUnrestrictedName ) ) (otherlv_3= ':' ( (lv_nsPrefix_4_0= ruleUnrestrictedName ) ) )? (otherlv_5= '=' ( (lv_nsURI_6_0= ruleURI ) ) )? ( (otherlv_7= '{' ( ( (lv_ownedPackages_8_0= ruleQualifiedPackageCS ) ) | ( ( (lv_ownedClasses_9_1= ruleClassCS | lv_ownedClasses_9_2= ruleTransformationCS ) ) ) )* otherlv_10= '}' ) | otherlv_11= ';' ) )
             // InternalQVTcore.g:1242:3: otherlv_0= 'package' ( (lv_ownedPathName_1_0= ruleScopeNameCS ) )? ( (lv_name_2_0= ruleUnrestrictedName ) ) (otherlv_3= ':' ( (lv_nsPrefix_4_0= ruleUnrestrictedName ) ) )? (otherlv_5= '=' ( (lv_nsURI_6_0= ruleURI ) ) )? ( (otherlv_7= '{' ( ( (lv_ownedPackages_8_0= ruleQualifiedPackageCS ) ) | ( ( (lv_ownedClasses_9_1= ruleClassCS | lv_ownedClasses_9_2= ruleTransformationCS ) ) ) )* otherlv_10= '}' ) | otherlv_11= ';' )
             {
-            otherlv_0=(Token)match(input,37,FollowSets000.FOLLOW_8); if (state.failed) return current;
+            otherlv_0=(Token)match(input,37,FollowSets000.FOLLOW_18); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_0, grammarAccess.getQualifiedPackageCSAccess().getPackageKeyword_0());
@@ -3805,7 +3805,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                       	        newCompositeNode(grammarAccess.getQualifiedPackageCSAccess().getOwnedPathNameScopeNameCSParserRuleCall_1_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_8);
+                    pushFollow(FollowSets000.FOLLOW_5);
                     lv_ownedPathName_1_0=ruleScopeNameCS();
 
                     state._fsp--;
@@ -3819,7 +3819,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                              			current, 
                              			"ownedPathName",
                               		lv_ownedPathName_1_0, 
-                              		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.ScopeNameCS");
+                              		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.ScopeNameCS");
                       	        afterParserOrEnumRuleCall();
                       	    
                     }
@@ -3857,7 +3857,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                      			current, 
                      			"name",
                       		lv_name_2_0, 
-                      		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.UnrestrictedName");
+                      		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.UnrestrictedName");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -3871,14 +3871,14 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             int alt34=2;
             int LA34_0 = input.LA(1);
 
-            if ( (LA34_0==30) ) {
+            if ( (LA34_0==25) ) {
                 alt34=1;
             }
             switch (alt34) {
                 case 1 :
                     // InternalQVTcore.g:1282:4: otherlv_3= ':' ( (lv_nsPrefix_4_0= ruleUnrestrictedName ) )
                     {
-                    otherlv_3=(Token)match(input,30,FollowSets000.FOLLOW_8); if (state.failed) return current;
+                    otherlv_3=(Token)match(input,25,FollowSets000.FOLLOW_5); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_3, grammarAccess.getQualifiedPackageCSAccess().getColonKeyword_3_0());
@@ -3909,7 +3909,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                              			current, 
                              			"nsPrefix",
                               		lv_nsPrefix_4_0, 
-                              		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.UnrestrictedName");
+                              		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.UnrestrictedName");
                       	        afterParserOrEnumRuleCall();
                       	    
                     }
@@ -3936,7 +3936,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // InternalQVTcore.g:1304:6: otherlv_5= '=' ( (lv_nsURI_6_0= ruleURI ) )
                     {
-                    otherlv_5=(Token)match(input,38,FollowSets000.FOLLOW_27); if (state.failed) return current;
+                    otherlv_5=(Token)match(input,38,FollowSets000.FOLLOW_19); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_5, grammarAccess.getQualifiedPackageCSAccess().getEqualsSignKeyword_4_0());
@@ -3987,10 +3987,10 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             int alt38=2;
             int LA38_0 = input.LA(1);
 
-            if ( (LA38_0==22) ) {
+            if ( (LA38_0==17) ) {
                 alt38=1;
             }
-            else if ( (LA38_0==34) ) {
+            else if ( (LA38_0==29) ) {
                 alt38=2;
             }
             else {
@@ -4007,7 +4007,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     // InternalQVTcore.g:1326:5: (otherlv_7= '{' ( ( (lv_ownedPackages_8_0= ruleQualifiedPackageCS ) ) | ( ( (lv_ownedClasses_9_1= ruleClassCS | lv_ownedClasses_9_2= ruleTransformationCS ) ) ) )* otherlv_10= '}' )
                     // InternalQVTcore.g:1326:7: otherlv_7= '{' ( ( (lv_ownedPackages_8_0= ruleQualifiedPackageCS ) ) | ( ( (lv_ownedClasses_9_1= ruleClassCS | lv_ownedClasses_9_2= ruleTransformationCS ) ) ) )* otherlv_10= '}'
                     {
-                    otherlv_7=(Token)match(input,22,FollowSets000.FOLLOW_35); if (state.failed) return current;
+                    otherlv_7=(Token)match(input,17,FollowSets000.FOLLOW_35); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_7, grammarAccess.getQualifiedPackageCSAccess().getLeftCurlyBracketKeyword_5_0_0());
@@ -4056,7 +4056,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	             			current, 
                     	             			"ownedPackages",
                     	              		lv_ownedPackages_8_0, 
-                    	              		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.QualifiedPackageCS");
+                    	              		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.QualifiedPackageCS");
                     	      	        afterParserOrEnumRuleCall();
                     	      	    
                     	    }
@@ -4147,7 +4147,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	                     			current, 
                     	                     			"ownedClasses",
                     	                      		lv_ownedClasses_9_2, 
-                    	                      		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.TransformationCS");
+                    	                      		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.TransformationCS");
                     	              	        afterParserOrEnumRuleCall();
                     	              	    
                     	            }
@@ -4172,7 +4172,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                         }
                     } while (true);
 
-                    otherlv_10=(Token)match(input,24,FollowSets000.FOLLOW_2); if (state.failed) return current;
+                    otherlv_10=(Token)match(input,20,FollowSets000.FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_10, grammarAccess.getQualifiedPackageCSAccess().getRightCurlyBracketKeyword_5_0_2());
@@ -4187,7 +4187,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                 case 2 :
                     // InternalQVTcore.g:1390:7: otherlv_11= ';'
                     {
-                    otherlv_11=(Token)match(input,34,FollowSets000.FOLLOW_2); if (state.failed) return current;
+                    otherlv_11=(Token)match(input,29,FollowSets000.FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_11, grammarAccess.getQualifiedPackageCSAccess().getSemicolonKeyword_5_1());
@@ -4292,7 +4292,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getParamDeclarationCSAccess().getNameUnrestrictedNameParserRuleCall_0_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_25);
+            pushFollow(FollowSets000.FOLLOW_17);
             lv_name_0_0=ruleUnrestrictedName();
 
             state._fsp--;
@@ -4306,7 +4306,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                      			current, 
                      			"name",
                       		lv_name_0_0, 
-                      		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.UnrestrictedName");
+                      		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.UnrestrictedName");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -4316,7 +4316,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,30,FollowSets000.FOLLOW_26); if (state.failed) return current;
+            otherlv_1=(Token)match(input,25,FollowSets000.FOLLOW_18); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_1, grammarAccess.getParamDeclarationCSAccess().getColonKeyword_1());
@@ -4448,7 +4448,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getPredicateCSAccess().getOwnedConditionExpCSParserRuleCall_0_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_30);
+            pushFollow(FollowSets000.FOLLOW_22);
             lv_ownedCondition_0_0=ruleExpCS();
 
             state._fsp--;
@@ -4472,7 +4472,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,34,FollowSets000.FOLLOW_2); if (state.failed) return current;
+            otherlv_1=(Token)match(input,29,FollowSets000.FOLLOW_2); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_1, grammarAccess.getPredicateCSAccess().getSemicolonKeyword_1());
@@ -4566,7 +4566,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             int alt39=2;
             int LA39_0 = input.LA(1);
 
-            if ( (LA39_0==17) ) {
+            if ( (LA39_0==30) ) {
                 alt39=1;
             }
             switch (alt39) {
@@ -4576,7 +4576,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     // InternalQVTcore.g:1520:1: (lv_isDefault_0_0= 'default' )
                     // InternalQVTcore.g:1521:3: lv_isDefault_0_0= 'default'
                     {
-                    lv_isDefault_0_0=(Token)match(input,17,FollowSets000.FOLLOW_17); if (state.failed) return current;
+                    lv_isDefault_0_0=(Token)match(input,30,FollowSets000.FOLLOW_9); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               newLeafNode(lv_isDefault_0_0, grammarAccess.getPredicateOrAssignmentCSAccess().getIsDefaultDefaultKeyword_0_0());
@@ -4645,7 +4645,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // InternalQVTcore.g:1552:4: otherlv_2= ':=' ( (lv_ownedInitExpression_3_0= ruleExpCS ) )
                     {
-                    otherlv_2=(Token)match(input,39,FollowSets000.FOLLOW_17); if (state.failed) return current;
+                    otherlv_2=(Token)match(input,39,FollowSets000.FOLLOW_9); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_2, grammarAccess.getPredicateOrAssignmentCSAccess().getColonEqualsSignKeyword_2_0());
@@ -4662,7 +4662,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                       	        newCompositeNode(grammarAccess.getPredicateOrAssignmentCSAccess().getOwnedInitExpressionExpCSParserRuleCall_2_1_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_30);
+                    pushFollow(FollowSets000.FOLLOW_22);
                     lv_ownedInitExpression_3_0=ruleExpCS();
 
                     state._fsp--;
@@ -4692,7 +4692,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_4=(Token)match(input,34,FollowSets000.FOLLOW_2); if (state.failed) return current;
+            otherlv_4=(Token)match(input,29,FollowSets000.FOLLOW_2); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_4, grammarAccess.getPredicateOrAssignmentCSAccess().getSemicolonKeyword_3());
@@ -4833,7 +4833,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,41,FollowSets000.FOLLOW_8); if (state.failed) return current;
+            otherlv_1=(Token)match(input,41,FollowSets000.FOLLOW_18); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_1, grammarAccess.getQueryCSAccess().getQueryKeyword_1());
@@ -4850,7 +4850,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getQueryCSAccess().getOwnedPathNameScopeNameCSParserRuleCall_2_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_8);
+            pushFollow(FollowSets000.FOLLOW_5);
             lv_ownedPathName_2_0=ruleScopeNameCS();
 
             state._fsp--;
@@ -4864,7 +4864,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                      			current, 
                      			"ownedPathName",
                       		lv_ownedPathName_2_0, 
-                      		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.ScopeNameCS");
+                      		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.ScopeNameCS");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -4885,7 +4885,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getQueryCSAccess().getNameUnrestrictedNameParserRuleCall_3_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_12);
+            pushFollow(FollowSets000.FOLLOW_29);
             lv_name_3_0=ruleUnrestrictedName();
 
             state._fsp--;
@@ -4899,7 +4899,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                      			current, 
                      			"name",
                       		lv_name_3_0, 
-                      		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.UnrestrictedName");
+                      		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.UnrestrictedName");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -4909,7 +4909,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_4=(Token)match(input,28,FollowSets000.FOLLOW_38); if (state.failed) return current;
+            otherlv_4=(Token)match(input,23,FollowSets000.FOLLOW_38); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_4, grammarAccess.getQueryCSAccess().getLeftParenthesisKeyword_4());
@@ -4919,7 +4919,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             int alt43=2;
             int LA43_0 = input.LA(1);
 
-            if ( ((LA43_0>=RULE_SIMPLE_ID && LA43_0<=RULE_ESCAPED_ID)||LA43_0==18||LA43_0==20||(LA43_0>=26 && LA43_0<=27)||LA43_0==31||(LA43_0>=35 && LA43_0<=36)||(LA43_0>=41 && LA43_0<=44)) ) {
+            if ( ((LA43_0>=RULE_SIMPLE_ID && LA43_0<=RULE_ESCAPED_ID)||(LA43_0>=21 && LA43_0<=22)||LA43_0==26||LA43_0==31||LA43_0==33||(LA43_0>=35 && LA43_0<=36)||(LA43_0>=41 && LA43_0<=44)) ) {
                 alt43=1;
             }
             switch (alt43) {
@@ -4937,7 +4937,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                       	        newCompositeNode(grammarAccess.getQueryCSAccess().getOwnedParametersParamDeclarationCSParserRuleCall_5_0_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_23);
+                    pushFollow(FollowSets000.FOLLOW_15);
                     lv_ownedParameters_5_0=ruleParamDeclarationCS();
 
                     state._fsp--;
@@ -4951,7 +4951,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                              			current, 
                              			"ownedParameters",
                               		lv_ownedParameters_5_0, 
-                              		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.ParamDeclarationCS");
+                              		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.ParamDeclarationCS");
                       	        afterParserOrEnumRuleCall();
                       	    
                     }
@@ -4967,7 +4967,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                         int alt42=2;
                         int LA42_0 = input.LA(1);
 
-                        if ( (LA42_0==21) ) {
+                        if ( (LA42_0==18) ) {
                             alt42=1;
                         }
 
@@ -4976,7 +4976,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	case 1 :
                     	    // InternalQVTcore.g:1676:4: otherlv_6= ',' ( (lv_ownedParameters_7_0= ruleParamDeclarationCS ) )
                     	    {
-                    	    otherlv_6=(Token)match(input,21,FollowSets000.FOLLOW_8); if (state.failed) return current;
+                    	    otherlv_6=(Token)match(input,18,FollowSets000.FOLLOW_5); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
 
                     	          	newLeafNode(otherlv_6, grammarAccess.getQueryCSAccess().getCommaKeyword_5_1_0());
@@ -4993,7 +4993,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	      	        newCompositeNode(grammarAccess.getQueryCSAccess().getOwnedParametersParamDeclarationCSParserRuleCall_5_1_1_0()); 
                     	      	    
                     	    }
-                    	    pushFollow(FollowSets000.FOLLOW_23);
+                    	    pushFollow(FollowSets000.FOLLOW_15);
                     	    lv_ownedParameters_7_0=ruleParamDeclarationCS();
 
                     	    state._fsp--;
@@ -5007,7 +5007,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	             			current, 
                     	             			"ownedParameters",
                     	              		lv_ownedParameters_7_0, 
-                    	              		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.ParamDeclarationCS");
+                    	              		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.ParamDeclarationCS");
                     	      	        afterParserOrEnumRuleCall();
                     	      	    
                     	    }
@@ -5032,13 +5032,13 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_8=(Token)match(input,29,FollowSets000.FOLLOW_25); if (state.failed) return current;
+            otherlv_8=(Token)match(input,24,FollowSets000.FOLLOW_17); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_8, grammarAccess.getQueryCSAccess().getRightParenthesisKeyword_6());
                   
             }
-            otherlv_9=(Token)match(input,30,FollowSets000.FOLLOW_26); if (state.failed) return current;
+            otherlv_9=(Token)match(input,25,FollowSets000.FOLLOW_18); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_9, grammarAccess.getQueryCSAccess().getColonKeyword_7());
@@ -5083,10 +5083,10 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             int alt44=2;
             int LA44_0 = input.LA(1);
 
-            if ( (LA44_0==34) ) {
+            if ( (LA44_0==29) ) {
                 alt44=1;
             }
-            else if ( (LA44_0==22) ) {
+            else if ( (LA44_0==17) ) {
                 alt44=2;
             }
             else {
@@ -5100,7 +5100,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // InternalQVTcore.g:1724:4: otherlv_11= ';'
                     {
-                    otherlv_11=(Token)match(input,34,FollowSets000.FOLLOW_2); if (state.failed) return current;
+                    otherlv_11=(Token)match(input,29,FollowSets000.FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_11, grammarAccess.getQueryCSAccess().getSemicolonKeyword_9_0());
@@ -5115,7 +5115,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     // InternalQVTcore.g:1729:6: (otherlv_12= '{' ( (lv_ownedExpression_13_0= ruleExpCS ) ) otherlv_14= '}' )
                     // InternalQVTcore.g:1729:8: otherlv_12= '{' ( (lv_ownedExpression_13_0= ruleExpCS ) ) otherlv_14= '}'
                     {
-                    otherlv_12=(Token)match(input,22,FollowSets000.FOLLOW_17); if (state.failed) return current;
+                    otherlv_12=(Token)match(input,17,FollowSets000.FOLLOW_9); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_12, grammarAccess.getQueryCSAccess().getLeftCurlyBracketKeyword_9_1_0());
@@ -5132,7 +5132,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                       	        newCompositeNode(grammarAccess.getQueryCSAccess().getOwnedExpressionExpCSParserRuleCall_9_1_1_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_18);
+                    pushFollow(FollowSets000.FOLLOW_10);
                     lv_ownedExpression_13_0=ruleExpCS();
 
                     state._fsp--;
@@ -5156,7 +5156,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    otherlv_14=(Token)match(input,24,FollowSets000.FOLLOW_2); if (state.failed) return current;
+                    otherlv_14=(Token)match(input,20,FollowSets000.FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_14, grammarAccess.getQueryCSAccess().getRightCurlyBracketKeyword_9_1_2());
@@ -5289,7 +5289,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,32,FollowSets000.FOLLOW_40); if (state.failed) return current;
+            otherlv_1=(Token)match(input,27,FollowSets000.FOLLOW_40); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_1, grammarAccess.getScopeNameCSAccess().getColonColonKeyword_1());
@@ -5339,7 +5339,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
             	    }
 
-            	    otherlv_3=(Token)match(input,32,FollowSets000.FOLLOW_40); if (state.failed) return current;
+            	    otherlv_3=(Token)match(input,27,FollowSets000.FOLLOW_40); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	          	newLeafNode(otherlv_3, grammarAccess.getScopeNameCSAccess().getColonColonKeyword_2_1());
@@ -5441,7 +5441,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             // InternalQVTcore.g:1841:1: (otherlv_0= 'transformation' ( (lv_ownedPathName_1_0= ruleScopeNameCS ) )? ( (lv_name_2_0= ruleUnreservedName ) ) otherlv_3= '{' ( ( (lv_ownedDirections_4_0= ruleDirectionCS ) ) otherlv_5= ';' )* otherlv_6= '}' )
             // InternalQVTcore.g:1841:3: otherlv_0= 'transformation' ( (lv_ownedPathName_1_0= ruleScopeNameCS ) )? ( (lv_name_2_0= ruleUnreservedName ) ) otherlv_3= '{' ( ( (lv_ownedDirections_4_0= ruleDirectionCS ) ) otherlv_5= ';' )* otherlv_6= '}'
             {
-            otherlv_0=(Token)match(input,42,FollowSets000.FOLLOW_26); if (state.failed) return current;
+            otherlv_0=(Token)match(input,42,FollowSets000.FOLLOW_18); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_0, grammarAccess.getTransformationCSAccess().getTransformationKeyword_0());
@@ -5462,7 +5462,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                       	        newCompositeNode(grammarAccess.getTransformationCSAccess().getOwnedPathNameScopeNameCSParserRuleCall_1_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_26);
+                    pushFollow(FollowSets000.FOLLOW_41);
                     lv_ownedPathName_1_0=ruleScopeNameCS();
 
                     state._fsp--;
@@ -5476,7 +5476,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                              			current, 
                              			"ownedPathName",
                               		lv_ownedPathName_1_0, 
-                              		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.ScopeNameCS");
+                              		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.ScopeNameCS");
                       	        afterParserOrEnumRuleCall();
                       	    
                     }
@@ -5524,7 +5524,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_3=(Token)match(input,22,FollowSets000.FOLLOW_41); if (state.failed) return current;
+            otherlv_3=(Token)match(input,17,FollowSets000.FOLLOW_42); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_3, grammarAccess.getTransformationCSAccess().getLeftCurlyBracketKeyword_3());
@@ -5536,7 +5536,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                 int alt47=2;
                 int LA47_0 = input.LA(1);
 
-                if ( ((LA47_0>=RULE_SIMPLE_ID && LA47_0<=RULE_ESCAPED_ID)||LA47_0==18||LA47_0==20||(LA47_0>=26 && LA47_0<=27)||LA47_0==31||(LA47_0>=35 && LA47_0<=36)||(LA47_0>=41 && LA47_0<=44)) ) {
+                if ( ((LA47_0>=RULE_SIMPLE_ID && LA47_0<=RULE_ESCAPED_ID)||(LA47_0>=21 && LA47_0<=22)||LA47_0==26||LA47_0==31||LA47_0==33||(LA47_0>=35 && LA47_0<=36)||(LA47_0>=41 && LA47_0<=44)) ) {
                     alt47=1;
                 }
 
@@ -5556,7 +5556,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             	      	        newCompositeNode(grammarAccess.getTransformationCSAccess().getOwnedDirectionsDirectionCSParserRuleCall_4_0_0()); 
             	      	    
             	    }
-            	    pushFollow(FollowSets000.FOLLOW_30);
+            	    pushFollow(FollowSets000.FOLLOW_22);
             	    lv_ownedDirections_4_0=ruleDirectionCS();
 
             	    state._fsp--;
@@ -5570,7 +5570,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             	             			current, 
             	             			"ownedDirections",
             	              		lv_ownedDirections_4_0, 
-            	              		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.DirectionCS");
+            	              		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.DirectionCS");
             	      	        afterParserOrEnumRuleCall();
             	      	    
             	    }
@@ -5580,7 +5580,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
             	    }
 
-            	    otherlv_5=(Token)match(input,34,FollowSets000.FOLLOW_41); if (state.failed) return current;
+            	    otherlv_5=(Token)match(input,29,FollowSets000.FOLLOW_42); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	          	newLeafNode(otherlv_5, grammarAccess.getTransformationCSAccess().getSemicolonKeyword_4_1());
@@ -5595,7 +5595,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                 }
             } while (true);
 
-            otherlv_6=(Token)match(input,24,FollowSets000.FOLLOW_2); if (state.failed) return current;
+            otherlv_6=(Token)match(input,20,FollowSets000.FOLLOW_2); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_6, grammarAccess.getTransformationCSAccess().getRightCurlyBracketKeyword_5());
@@ -5697,7 +5697,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getUnrealizedVariableCSAccess().getNameUnrestrictedNameParserRuleCall_0_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_42);
+            pushFollow(FollowSets000.FOLLOW_43);
             lv_name_0_0=ruleUnrestrictedName();
 
             state._fsp--;
@@ -5711,7 +5711,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                      			current, 
                      			"name",
                       		lv_name_0_0, 
-                      		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.UnrestrictedName");
+                      		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.UnrestrictedName");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -5725,14 +5725,14 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             int alt48=2;
             int LA48_0 = input.LA(1);
 
-            if ( (LA48_0==30) ) {
+            if ( (LA48_0==25) ) {
                 alt48=1;
             }
             switch (alt48) {
                 case 1 :
                     // InternalQVTcore.g:1950:4: otherlv_1= ':' ( (lv_ownedType_2_0= ruleTypeExpCS ) )
                     {
-                    otherlv_1=(Token)match(input,30,FollowSets000.FOLLOW_26); if (state.failed) return current;
+                    otherlv_1=(Token)match(input,25,FollowSets000.FOLLOW_18); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_1, grammarAccess.getUnrealizedVariableCSAccess().getColonKeyword_1_0());
@@ -5749,7 +5749,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                       	        newCompositeNode(grammarAccess.getUnrealizedVariableCSAccess().getOwnedTypeTypeExpCSParserRuleCall_1_1_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_43);
+                    pushFollow(FollowSets000.FOLLOW_44);
                     lv_ownedType_2_0=ruleTypeExpCS();
 
                     state._fsp--;
@@ -5790,7 +5790,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // InternalQVTcore.g:1972:6: otherlv_3= ':=' ( (lv_ownedInitExpression_4_0= ruleExpCS ) )
                     {
-                    otherlv_3=(Token)match(input,39,FollowSets000.FOLLOW_17); if (state.failed) return current;
+                    otherlv_3=(Token)match(input,39,FollowSets000.FOLLOW_9); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_3, grammarAccess.getUnrealizedVariableCSAccess().getColonEqualsSignKeyword_2_0());
@@ -5920,7 +5920,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             // InternalQVTcore.g:2015:1: (otherlv_0= 'realize' ( (lv_name_1_0= ruleUnrestrictedName ) ) otherlv_2= ':' ( (lv_ownedType_3_0= ruleTypeExpCS ) ) )
             // InternalQVTcore.g:2015:3: otherlv_0= 'realize' ( (lv_name_1_0= ruleUnrestrictedName ) ) otherlv_2= ':' ( (lv_ownedType_3_0= ruleTypeExpCS ) )
             {
-            otherlv_0=(Token)match(input,43,FollowSets000.FOLLOW_8); if (state.failed) return current;
+            otherlv_0=(Token)match(input,43,FollowSets000.FOLLOW_5); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_0, grammarAccess.getRealizedVariableCSAccess().getRealizeKeyword_0());
@@ -5937,7 +5937,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getRealizedVariableCSAccess().getNameUnrestrictedNameParserRuleCall_1_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_25);
+            pushFollow(FollowSets000.FOLLOW_17);
             lv_name_1_0=ruleUnrestrictedName();
 
             state._fsp--;
@@ -5951,7 +5951,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                      			current, 
                      			"name",
                       		lv_name_1_0, 
-                      		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.UnrestrictedName");
+                      		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.UnrestrictedName");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -5961,7 +5961,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_2=(Token)match(input,30,FollowSets000.FOLLOW_26); if (state.failed) return current;
+            otherlv_2=(Token)match(input,25,FollowSets000.FOLLOW_18); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_2, grammarAccess.getRealizedVariableCSAccess().getColonKeyword_2());
@@ -6126,7 +6126,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                      			current, 
                      			"ownedGuardPattern",
                       		lv_ownedGuardPattern_1_0, 
-                      		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.GuardPatternCS");
+                      		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.GuardPatternCS");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -6161,7 +6161,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                      			current, 
                      			"ownedBottomPattern",
                       		lv_ownedBottomPattern_2_0, 
-                      		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.BottomPatternCS");
+                      		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.BottomPatternCS");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -6267,12 +6267,12 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                 alt50=3;
                 }
                 break;
-            case 31:
+            case 26:
                 {
                 alt50=4;
                 }
                 break;
-            case 26:
+            case 21:
                 {
                 alt50=5;
                 }
@@ -6282,7 +6282,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                 alt50=6;
                 }
                 break;
-            case 18:
+            case 31:
                 {
                 alt50=7;
                 }
@@ -6297,7 +6297,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                 alt50=9;
                 }
                 break;
-            case 20:
+            case 33:
                 {
                 alt50=10;
                 }
@@ -6307,7 +6307,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                 alt50=11;
                 }
                 break;
-            case 27:
+            case 22:
                 {
                 alt50=12;
                 }
@@ -6376,7 +6376,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                 case 4 :
                     // InternalQVTcore.g:2173:2: kw= 'import'
                     {
-                    kw=(Token)match(input,31,FollowSets000.FOLLOW_2); if (state.failed) return current;
+                    kw=(Token)match(input,26,FollowSets000.FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -6389,7 +6389,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                 case 5 :
                     // InternalQVTcore.g:2180:2: kw= 'imports'
                     {
-                    kw=(Token)match(input,26,FollowSets000.FOLLOW_2); if (state.failed) return current;
+                    kw=(Token)match(input,21,FollowSets000.FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -6415,7 +6415,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                 case 7 :
                     // InternalQVTcore.g:2194:2: kw= 'map'
                     {
-                    kw=(Token)match(input,18,FollowSets000.FOLLOW_2); if (state.failed) return current;
+                    kw=(Token)match(input,31,FollowSets000.FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -6454,7 +6454,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                 case 10 :
                     // InternalQVTcore.g:2215:2: kw= 'refines'
                     {
-                    kw=(Token)match(input,20,FollowSets000.FOLLOW_2); if (state.failed) return current;
+                    kw=(Token)match(input,33,FollowSets000.FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -6480,7 +6480,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                 case 12 :
                     // InternalQVTcore.g:2229:2: kw= 'uses'
                     {
-                    kw=(Token)match(input,27,FollowSets000.FOLLOW_2); if (state.failed) return current;
+                    kw=(Token)match(input,22,FollowSets000.FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -6634,7 +6634,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     // InternalQVTcore.g:2256:1: (lv_qualifiers_0_0= 'static' )
                     // InternalQVTcore.g:2257:3: lv_qualifiers_0_0= 'static'
                     {
-                    lv_qualifiers_0_0=(Token)match(input,45,FollowSets000.FOLLOW_44); if (state.failed) return current;
+                    lv_qualifiers_0_0=(Token)match(input,45,FollowSets000.FOLLOW_45); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               newLeafNode(lv_qualifiers_0_0, grammarAccess.getAttributeCSAccess().getQualifiersStaticKeyword_0_0_0_0());
@@ -6668,7 +6668,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                             // InternalQVTcore.g:2271:1: (lv_qualifiers_1_0= 'definition' )
                             // InternalQVTcore.g:2272:3: lv_qualifiers_1_0= 'definition'
                             {
-                            lv_qualifiers_1_0=(Token)match(input,46,FollowSets000.FOLLOW_45); if (state.failed) return current;
+                            lv_qualifiers_1_0=(Token)match(input,46,FollowSets000.FOLLOW_46); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
 
                                       newLeafNode(lv_qualifiers_1_0, grammarAccess.getAttributeCSAccess().getQualifiersDefinitionKeyword_0_0_1_0());
@@ -6709,7 +6709,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     // InternalQVTcore.g:2287:1: (lv_qualifiers_2_0= 'definition' )
                     // InternalQVTcore.g:2288:3: lv_qualifiers_2_0= 'definition'
                     {
-                    lv_qualifiers_2_0=(Token)match(input,46,FollowSets000.FOLLOW_46); if (state.failed) return current;
+                    lv_qualifiers_2_0=(Token)match(input,46,FollowSets000.FOLLOW_47); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               newLeafNode(lv_qualifiers_2_0, grammarAccess.getAttributeCSAccess().getQualifiersDefinitionKeyword_0_1_0_0());
@@ -6743,7 +6743,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                             // InternalQVTcore.g:2302:1: (lv_qualifiers_3_0= 'static' )
                             // InternalQVTcore.g:2303:3: lv_qualifiers_3_0= 'static'
                             {
-                            lv_qualifiers_3_0=(Token)match(input,45,FollowSets000.FOLLOW_45); if (state.failed) return current;
+                            lv_qualifiers_3_0=(Token)match(input,45,FollowSets000.FOLLOW_46); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
 
                                       newLeafNode(lv_qualifiers_3_0, grammarAccess.getAttributeCSAccess().getQualifiersStaticKeyword_0_1_1_0());
@@ -6775,7 +6775,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_4=(Token)match(input,47,FollowSets000.FOLLOW_8); if (state.failed) return current;
+            otherlv_4=(Token)match(input,47,FollowSets000.FOLLOW_5); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_4, grammarAccess.getAttributeCSAccess().getAttributeKeyword_1());
@@ -6806,7 +6806,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                      			current, 
                      			"name",
                       		lv_name_5_0, 
-                      		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.UnrestrictedName");
+                      		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.UnrestrictedName");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -6820,14 +6820,14 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             int alt54=2;
             int LA54_0 = input.LA(1);
 
-            if ( (LA54_0==30) ) {
+            if ( (LA54_0==25) ) {
                 alt54=1;
             }
             switch (alt54) {
                 case 1 :
                     // InternalQVTcore.g:2338:4: otherlv_6= ':' ( (lv_ownedType_7_0= ruleTypedMultiplicityRefCS ) )
                     {
-                    otherlv_6=(Token)match(input,30,FollowSets000.FOLLOW_8); if (state.failed) return current;
+                    otherlv_6=(Token)match(input,25,FollowSets000.FOLLOW_18); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_6, grammarAccess.getAttributeCSAccess().getColonKeyword_3_0());
@@ -6885,7 +6885,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // InternalQVTcore.g:2360:6: otherlv_8= '=' ( (lv_default_9_0= RULE_SINGLE_QUOTED_STRING ) )
                     {
-                    otherlv_8=(Token)match(input,38,FollowSets000.FOLLOW_47); if (state.failed) return current;
+                    otherlv_8=(Token)match(input,38,FollowSets000.FOLLOW_48); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_8, grammarAccess.getAttributeCSAccess().getEqualsSignKeyword_4_0());
@@ -6931,7 +6931,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             int alt59=2;
             int LA59_0 = input.LA(1);
 
-            if ( (LA59_0==22) ) {
+            if ( (LA59_0==17) ) {
                 int LA59_1 = input.LA(2);
 
                 if ( (LA59_1==40||(LA59_1>=48 && LA59_1<=62)) ) {
@@ -6942,7 +6942,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // InternalQVTcore.g:2382:6: otherlv_10= '{' ( ( ( (lv_qualifiers_11_0= 'derived' ) ) | ( (lv_qualifiers_12_0= '!derived' ) ) | ( (lv_qualifiers_13_0= 'id' ) ) | ( (lv_qualifiers_14_0= '!id' ) ) | ( (lv_qualifiers_15_0= 'ordered' ) ) | ( (lv_qualifiers_16_0= '!ordered' ) ) | ( (lv_qualifiers_17_0= 'readonly' ) ) | ( (lv_qualifiers_18_0= '!readonly' ) ) | ( (lv_qualifiers_19_0= 'transient' ) ) | ( (lv_qualifiers_20_0= '!transient' ) ) | ( (lv_qualifiers_21_0= 'unique' ) ) | ( (lv_qualifiers_22_0= '!unique' ) ) | ( (lv_qualifiers_23_0= 'unsettable' ) ) | ( (lv_qualifiers_24_0= '!unsettable' ) ) | ( (lv_qualifiers_25_0= 'volatile' ) ) | ( (lv_qualifiers_26_0= '!volatile' ) ) ) (otherlv_27= ',' )? )+ otherlv_28= '}'
                     {
-                    otherlv_10=(Token)match(input,22,FollowSets000.FOLLOW_48); if (state.failed) return current;
+                    otherlv_10=(Token)match(input,17,FollowSets000.FOLLOW_49); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_10, grammarAccess.getAttributeCSAccess().getLeftCurlyBracketKeyword_5_0());
@@ -7065,7 +7065,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	            // InternalQVTcore.g:2387:1: (lv_qualifiers_11_0= 'derived' )
                     	            // InternalQVTcore.g:2388:3: lv_qualifiers_11_0= 'derived'
                     	            {
-                    	            lv_qualifiers_11_0=(Token)match(input,48,FollowSets000.FOLLOW_49); if (state.failed) return current;
+                    	            lv_qualifiers_11_0=(Token)match(input,48,FollowSets000.FOLLOW_50); if (state.failed) return current;
                     	            if ( state.backtracking==0 ) {
 
                     	                      newLeafNode(lv_qualifiers_11_0, grammarAccess.getAttributeCSAccess().getQualifiersDerivedKeyword_5_1_0_0_0());
@@ -7097,7 +7097,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	            // InternalQVTcore.g:2403:1: (lv_qualifiers_12_0= '!derived' )
                     	            // InternalQVTcore.g:2404:3: lv_qualifiers_12_0= '!derived'
                     	            {
-                    	            lv_qualifiers_12_0=(Token)match(input,49,FollowSets000.FOLLOW_49); if (state.failed) return current;
+                    	            lv_qualifiers_12_0=(Token)match(input,49,FollowSets000.FOLLOW_50); if (state.failed) return current;
                     	            if ( state.backtracking==0 ) {
 
                     	                      newLeafNode(lv_qualifiers_12_0, grammarAccess.getAttributeCSAccess().getQualifiersDerivedKeyword_5_1_0_1_0());
@@ -7129,7 +7129,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	            // InternalQVTcore.g:2419:1: (lv_qualifiers_13_0= 'id' )
                     	            // InternalQVTcore.g:2420:3: lv_qualifiers_13_0= 'id'
                     	            {
-                    	            lv_qualifiers_13_0=(Token)match(input,50,FollowSets000.FOLLOW_49); if (state.failed) return current;
+                    	            lv_qualifiers_13_0=(Token)match(input,50,FollowSets000.FOLLOW_50); if (state.failed) return current;
                     	            if ( state.backtracking==0 ) {
 
                     	                      newLeafNode(lv_qualifiers_13_0, grammarAccess.getAttributeCSAccess().getQualifiersIdKeyword_5_1_0_2_0());
@@ -7161,7 +7161,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	            // InternalQVTcore.g:2435:1: (lv_qualifiers_14_0= '!id' )
                     	            // InternalQVTcore.g:2436:3: lv_qualifiers_14_0= '!id'
                     	            {
-                    	            lv_qualifiers_14_0=(Token)match(input,51,FollowSets000.FOLLOW_49); if (state.failed) return current;
+                    	            lv_qualifiers_14_0=(Token)match(input,51,FollowSets000.FOLLOW_50); if (state.failed) return current;
                     	            if ( state.backtracking==0 ) {
 
                     	                      newLeafNode(lv_qualifiers_14_0, grammarAccess.getAttributeCSAccess().getQualifiersIdKeyword_5_1_0_3_0());
@@ -7193,7 +7193,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	            // InternalQVTcore.g:2451:1: (lv_qualifiers_15_0= 'ordered' )
                     	            // InternalQVTcore.g:2452:3: lv_qualifiers_15_0= 'ordered'
                     	            {
-                    	            lv_qualifiers_15_0=(Token)match(input,52,FollowSets000.FOLLOW_49); if (state.failed) return current;
+                    	            lv_qualifiers_15_0=(Token)match(input,52,FollowSets000.FOLLOW_50); if (state.failed) return current;
                     	            if ( state.backtracking==0 ) {
 
                     	                      newLeafNode(lv_qualifiers_15_0, grammarAccess.getAttributeCSAccess().getQualifiersOrderedKeyword_5_1_0_4_0());
@@ -7225,7 +7225,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	            // InternalQVTcore.g:2467:1: (lv_qualifiers_16_0= '!ordered' )
                     	            // InternalQVTcore.g:2468:3: lv_qualifiers_16_0= '!ordered'
                     	            {
-                    	            lv_qualifiers_16_0=(Token)match(input,53,FollowSets000.FOLLOW_49); if (state.failed) return current;
+                    	            lv_qualifiers_16_0=(Token)match(input,53,FollowSets000.FOLLOW_50); if (state.failed) return current;
                     	            if ( state.backtracking==0 ) {
 
                     	                      newLeafNode(lv_qualifiers_16_0, grammarAccess.getAttributeCSAccess().getQualifiersOrderedKeyword_5_1_0_5_0());
@@ -7257,7 +7257,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	            // InternalQVTcore.g:2483:1: (lv_qualifiers_17_0= 'readonly' )
                     	            // InternalQVTcore.g:2484:3: lv_qualifiers_17_0= 'readonly'
                     	            {
-                    	            lv_qualifiers_17_0=(Token)match(input,54,FollowSets000.FOLLOW_49); if (state.failed) return current;
+                    	            lv_qualifiers_17_0=(Token)match(input,54,FollowSets000.FOLLOW_50); if (state.failed) return current;
                     	            if ( state.backtracking==0 ) {
 
                     	                      newLeafNode(lv_qualifiers_17_0, grammarAccess.getAttributeCSAccess().getQualifiersReadonlyKeyword_5_1_0_6_0());
@@ -7289,7 +7289,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	            // InternalQVTcore.g:2499:1: (lv_qualifiers_18_0= '!readonly' )
                     	            // InternalQVTcore.g:2500:3: lv_qualifiers_18_0= '!readonly'
                     	            {
-                    	            lv_qualifiers_18_0=(Token)match(input,55,FollowSets000.FOLLOW_49); if (state.failed) return current;
+                    	            lv_qualifiers_18_0=(Token)match(input,55,FollowSets000.FOLLOW_50); if (state.failed) return current;
                     	            if ( state.backtracking==0 ) {
 
                     	                      newLeafNode(lv_qualifiers_18_0, grammarAccess.getAttributeCSAccess().getQualifiersReadonlyKeyword_5_1_0_7_0());
@@ -7321,7 +7321,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	            // InternalQVTcore.g:2515:1: (lv_qualifiers_19_0= 'transient' )
                     	            // InternalQVTcore.g:2516:3: lv_qualifiers_19_0= 'transient'
                     	            {
-                    	            lv_qualifiers_19_0=(Token)match(input,40,FollowSets000.FOLLOW_49); if (state.failed) return current;
+                    	            lv_qualifiers_19_0=(Token)match(input,40,FollowSets000.FOLLOW_50); if (state.failed) return current;
                     	            if ( state.backtracking==0 ) {
 
                     	                      newLeafNode(lv_qualifiers_19_0, grammarAccess.getAttributeCSAccess().getQualifiersTransientKeyword_5_1_0_8_0());
@@ -7353,7 +7353,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	            // InternalQVTcore.g:2531:1: (lv_qualifiers_20_0= '!transient' )
                     	            // InternalQVTcore.g:2532:3: lv_qualifiers_20_0= '!transient'
                     	            {
-                    	            lv_qualifiers_20_0=(Token)match(input,56,FollowSets000.FOLLOW_49); if (state.failed) return current;
+                    	            lv_qualifiers_20_0=(Token)match(input,56,FollowSets000.FOLLOW_50); if (state.failed) return current;
                     	            if ( state.backtracking==0 ) {
 
                     	                      newLeafNode(lv_qualifiers_20_0, grammarAccess.getAttributeCSAccess().getQualifiersTransientKeyword_5_1_0_9_0());
@@ -7385,7 +7385,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	            // InternalQVTcore.g:2547:1: (lv_qualifiers_21_0= 'unique' )
                     	            // InternalQVTcore.g:2548:3: lv_qualifiers_21_0= 'unique'
                     	            {
-                    	            lv_qualifiers_21_0=(Token)match(input,57,FollowSets000.FOLLOW_49); if (state.failed) return current;
+                    	            lv_qualifiers_21_0=(Token)match(input,57,FollowSets000.FOLLOW_50); if (state.failed) return current;
                     	            if ( state.backtracking==0 ) {
 
                     	                      newLeafNode(lv_qualifiers_21_0, grammarAccess.getAttributeCSAccess().getQualifiersUniqueKeyword_5_1_0_10_0());
@@ -7417,7 +7417,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	            // InternalQVTcore.g:2563:1: (lv_qualifiers_22_0= '!unique' )
                     	            // InternalQVTcore.g:2564:3: lv_qualifiers_22_0= '!unique'
                     	            {
-                    	            lv_qualifiers_22_0=(Token)match(input,58,FollowSets000.FOLLOW_49); if (state.failed) return current;
+                    	            lv_qualifiers_22_0=(Token)match(input,58,FollowSets000.FOLLOW_50); if (state.failed) return current;
                     	            if ( state.backtracking==0 ) {
 
                     	                      newLeafNode(lv_qualifiers_22_0, grammarAccess.getAttributeCSAccess().getQualifiersUniqueKeyword_5_1_0_11_0());
@@ -7449,7 +7449,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	            // InternalQVTcore.g:2579:1: (lv_qualifiers_23_0= 'unsettable' )
                     	            // InternalQVTcore.g:2580:3: lv_qualifiers_23_0= 'unsettable'
                     	            {
-                    	            lv_qualifiers_23_0=(Token)match(input,59,FollowSets000.FOLLOW_49); if (state.failed) return current;
+                    	            lv_qualifiers_23_0=(Token)match(input,59,FollowSets000.FOLLOW_50); if (state.failed) return current;
                     	            if ( state.backtracking==0 ) {
 
                     	                      newLeafNode(lv_qualifiers_23_0, grammarAccess.getAttributeCSAccess().getQualifiersUnsettableKeyword_5_1_0_12_0());
@@ -7481,7 +7481,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	            // InternalQVTcore.g:2595:1: (lv_qualifiers_24_0= '!unsettable' )
                     	            // InternalQVTcore.g:2596:3: lv_qualifiers_24_0= '!unsettable'
                     	            {
-                    	            lv_qualifiers_24_0=(Token)match(input,60,FollowSets000.FOLLOW_49); if (state.failed) return current;
+                    	            lv_qualifiers_24_0=(Token)match(input,60,FollowSets000.FOLLOW_50); if (state.failed) return current;
                     	            if ( state.backtracking==0 ) {
 
                     	                      newLeafNode(lv_qualifiers_24_0, grammarAccess.getAttributeCSAccess().getQualifiersUnsettableKeyword_5_1_0_13_0());
@@ -7513,7 +7513,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	            // InternalQVTcore.g:2611:1: (lv_qualifiers_25_0= 'volatile' )
                     	            // InternalQVTcore.g:2612:3: lv_qualifiers_25_0= 'volatile'
                     	            {
-                    	            lv_qualifiers_25_0=(Token)match(input,61,FollowSets000.FOLLOW_49); if (state.failed) return current;
+                    	            lv_qualifiers_25_0=(Token)match(input,61,FollowSets000.FOLLOW_50); if (state.failed) return current;
                     	            if ( state.backtracking==0 ) {
 
                     	                      newLeafNode(lv_qualifiers_25_0, grammarAccess.getAttributeCSAccess().getQualifiersVolatileKeyword_5_1_0_14_0());
@@ -7545,7 +7545,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	            // InternalQVTcore.g:2627:1: (lv_qualifiers_26_0= '!volatile' )
                     	            // InternalQVTcore.g:2628:3: lv_qualifiers_26_0= '!volatile'
                     	            {
-                    	            lv_qualifiers_26_0=(Token)match(input,62,FollowSets000.FOLLOW_49); if (state.failed) return current;
+                    	            lv_qualifiers_26_0=(Token)match(input,62,FollowSets000.FOLLOW_50); if (state.failed) return current;
                     	            if ( state.backtracking==0 ) {
 
                     	                      newLeafNode(lv_qualifiers_26_0, grammarAccess.getAttributeCSAccess().getQualifiersVolatileKeyword_5_1_0_15_0());
@@ -7575,14 +7575,14 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	    int alt57=2;
                     	    int LA57_0 = input.LA(1);
 
-                    	    if ( (LA57_0==21) ) {
+                    	    if ( (LA57_0==18) ) {
                     	        alt57=1;
                     	    }
                     	    switch (alt57) {
                     	        case 1 :
                     	            // InternalQVTcore.g:2641:5: otherlv_27= ','
                     	            {
-                    	            otherlv_27=(Token)match(input,21,FollowSets000.FOLLOW_50); if (state.failed) return current;
+                    	            otherlv_27=(Token)match(input,18,FollowSets000.FOLLOW_51); if (state.failed) return current;
                     	            if ( state.backtracking==0 ) {
 
                     	                  	newLeafNode(otherlv_27, grammarAccess.getAttributeCSAccess().getCommaKeyword_5_1_1());
@@ -7608,7 +7608,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                         cnt58++;
                     } while (true);
 
-                    otherlv_28=(Token)match(input,24,FollowSets000.FOLLOW_34); if (state.failed) return current;
+                    otherlv_28=(Token)match(input,20,FollowSets000.FOLLOW_34); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_28, grammarAccess.getAttributeCSAccess().getRightCurlyBracketKeyword_5_2());
@@ -7624,10 +7624,10 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             int alt65=2;
             int LA65_0 = input.LA(1);
 
-            if ( (LA65_0==22) ) {
+            if ( (LA65_0==17) ) {
                 alt65=1;
             }
-            else if ( (LA65_0==34) ) {
+            else if ( (LA65_0==29) ) {
                 alt65=2;
             }
             else {
@@ -7644,7 +7644,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     // InternalQVTcore.g:2649:4: (otherlv_29= '{' ( (otherlv_30= 'initial' ( ruleUnrestrictedName )? otherlv_32= ':' ( (lv_ownedDefaultExpressions_33_0= ruleSpecificationCS ) )? otherlv_34= ';' ) | (otherlv_35= 'derivation' ( ruleUnrestrictedName )? otherlv_37= ':' ( (lv_ownedDefaultExpressions_38_0= ruleSpecificationCS ) )? otherlv_39= ';' ) )* otherlv_40= '}' )
                     // InternalQVTcore.g:2649:6: otherlv_29= '{' ( (otherlv_30= 'initial' ( ruleUnrestrictedName )? otherlv_32= ':' ( (lv_ownedDefaultExpressions_33_0= ruleSpecificationCS ) )? otherlv_34= ';' ) | (otherlv_35= 'derivation' ( ruleUnrestrictedName )? otherlv_37= ':' ( (lv_ownedDefaultExpressions_38_0= ruleSpecificationCS ) )? otherlv_39= ';' ) )* otherlv_40= '}'
                     {
-                    otherlv_29=(Token)match(input,22,FollowSets000.FOLLOW_51); if (state.failed) return current;
+                    otherlv_29=(Token)match(input,17,FollowSets000.FOLLOW_52); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_29, grammarAccess.getAttributeCSAccess().getLeftCurlyBracketKeyword_6_0_0());
@@ -7671,7 +7671,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	    // InternalQVTcore.g:2653:2: (otherlv_30= 'initial' ( ruleUnrestrictedName )? otherlv_32= ':' ( (lv_ownedDefaultExpressions_33_0= ruleSpecificationCS ) )? otherlv_34= ';' )
                     	    // InternalQVTcore.g:2653:4: otherlv_30= 'initial' ( ruleUnrestrictedName )? otherlv_32= ':' ( (lv_ownedDefaultExpressions_33_0= ruleSpecificationCS ) )? otherlv_34= ';'
                     	    {
-                    	    otherlv_30=(Token)match(input,63,FollowSets000.FOLLOW_52); if (state.failed) return current;
+                    	    otherlv_30=(Token)match(input,63,FollowSets000.FOLLOW_53); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
 
                     	          	newLeafNode(otherlv_30, grammarAccess.getAttributeCSAccess().getInitialKeyword_6_0_1_0_0());
@@ -7681,7 +7681,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	    int alt60=2;
                     	    int LA60_0 = input.LA(1);
 
-                    	    if ( ((LA60_0>=RULE_SIMPLE_ID && LA60_0<=RULE_ESCAPED_ID)||LA60_0==18||LA60_0==20||(LA60_0>=26 && LA60_0<=27)||LA60_0==31||(LA60_0>=35 && LA60_0<=36)||(LA60_0>=41 && LA60_0<=44)) ) {
+                    	    if ( ((LA60_0>=RULE_SIMPLE_ID && LA60_0<=RULE_ESCAPED_ID)||(LA60_0>=21 && LA60_0<=22)||LA60_0==26||LA60_0==31||LA60_0==33||(LA60_0>=35 && LA60_0<=36)||(LA60_0>=41 && LA60_0<=44)) ) {
                     	        alt60=1;
                     	    }
                     	    switch (alt60) {
@@ -7698,7 +7698,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	                      newCompositeNode(grammarAccess.getAttributeCSAccess().getUnrestrictedNameParserRuleCall_6_0_1_0_1()); 
                     	                  
                     	            }
-                    	            pushFollow(FollowSets000.FOLLOW_25);
+                    	            pushFollow(FollowSets000.FOLLOW_17);
                     	            ruleUnrestrictedName();
 
                     	            state._fsp--;
@@ -7714,7 +7714,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
                     	    }
 
-                    	    otherlv_32=(Token)match(input,30,FollowSets000.FOLLOW_53); if (state.failed) return current;
+                    	    otherlv_32=(Token)match(input,25,FollowSets000.FOLLOW_54); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
 
                     	          	newLeafNode(otherlv_32, grammarAccess.getAttributeCSAccess().getColonKeyword_6_0_1_0_2());
@@ -7724,7 +7724,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	    int alt61=2;
                     	    int LA61_0 = input.LA(1);
 
-                    	    if ( ((LA61_0>=RULE_SINGLE_QUOTED_STRING && LA61_0<=RULE_ESCAPED_ID)||LA61_0==18||LA61_0==20||(LA61_0>=26 && LA61_0<=28)||LA61_0==31||LA61_0==33||(LA61_0>=35 && LA61_0<=36)||(LA61_0>=41 && LA61_0<=44)||(LA61_0>=84 && LA61_0<=85)||(LA61_0>=101 && LA61_0<=115)||LA61_0==118||(LA61_0>=120 && LA61_0<=123)||LA61_0==128||(LA61_0>=133 && LA61_0<=134)) ) {
+                    	    if ( ((LA61_0>=RULE_SINGLE_QUOTED_STRING && LA61_0<=RULE_ESCAPED_ID)||(LA61_0>=21 && LA61_0<=23)||LA61_0==26||LA61_0==28||LA61_0==31||LA61_0==33||(LA61_0>=35 && LA61_0<=36)||(LA61_0>=41 && LA61_0<=44)||(LA61_0>=84 && LA61_0<=85)||(LA61_0>=101 && LA61_0<=115)||LA61_0==118||(LA61_0>=120 && LA61_0<=123)||LA61_0==128||(LA61_0>=133 && LA61_0<=134)) ) {
                     	        alt61=1;
                     	    }
                     	    switch (alt61) {
@@ -7739,7 +7739,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	              	        newCompositeNode(grammarAccess.getAttributeCSAccess().getOwnedDefaultExpressionsSpecificationCSParserRuleCall_6_0_1_0_3_0()); 
                     	              	    
                     	            }
-                    	            pushFollow(FollowSets000.FOLLOW_30);
+                    	            pushFollow(FollowSets000.FOLLOW_22);
                     	            lv_ownedDefaultExpressions_33_0=ruleSpecificationCS();
 
                     	            state._fsp--;
@@ -7766,7 +7766,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
                     	    }
 
-                    	    otherlv_34=(Token)match(input,34,FollowSets000.FOLLOW_51); if (state.failed) return current;
+                    	    otherlv_34=(Token)match(input,29,FollowSets000.FOLLOW_52); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
 
                     	          	newLeafNode(otherlv_34, grammarAccess.getAttributeCSAccess().getSemicolonKeyword_6_0_1_0_4());
@@ -7784,7 +7784,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	    // InternalQVTcore.g:2695:6: (otherlv_35= 'derivation' ( ruleUnrestrictedName )? otherlv_37= ':' ( (lv_ownedDefaultExpressions_38_0= ruleSpecificationCS ) )? otherlv_39= ';' )
                     	    // InternalQVTcore.g:2695:8: otherlv_35= 'derivation' ( ruleUnrestrictedName )? otherlv_37= ':' ( (lv_ownedDefaultExpressions_38_0= ruleSpecificationCS ) )? otherlv_39= ';'
                     	    {
-                    	    otherlv_35=(Token)match(input,64,FollowSets000.FOLLOW_52); if (state.failed) return current;
+                    	    otherlv_35=(Token)match(input,64,FollowSets000.FOLLOW_53); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
 
                     	          	newLeafNode(otherlv_35, grammarAccess.getAttributeCSAccess().getDerivationKeyword_6_0_1_1_0());
@@ -7794,7 +7794,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	    int alt62=2;
                     	    int LA62_0 = input.LA(1);
 
-                    	    if ( ((LA62_0>=RULE_SIMPLE_ID && LA62_0<=RULE_ESCAPED_ID)||LA62_0==18||LA62_0==20||(LA62_0>=26 && LA62_0<=27)||LA62_0==31||(LA62_0>=35 && LA62_0<=36)||(LA62_0>=41 && LA62_0<=44)) ) {
+                    	    if ( ((LA62_0>=RULE_SIMPLE_ID && LA62_0<=RULE_ESCAPED_ID)||(LA62_0>=21 && LA62_0<=22)||LA62_0==26||LA62_0==31||LA62_0==33||(LA62_0>=35 && LA62_0<=36)||(LA62_0>=41 && LA62_0<=44)) ) {
                     	        alt62=1;
                     	    }
                     	    switch (alt62) {
@@ -7811,7 +7811,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	                      newCompositeNode(grammarAccess.getAttributeCSAccess().getUnrestrictedNameParserRuleCall_6_0_1_1_1()); 
                     	                  
                     	            }
-                    	            pushFollow(FollowSets000.FOLLOW_25);
+                    	            pushFollow(FollowSets000.FOLLOW_17);
                     	            ruleUnrestrictedName();
 
                     	            state._fsp--;
@@ -7827,7 +7827,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
                     	    }
 
-                    	    otherlv_37=(Token)match(input,30,FollowSets000.FOLLOW_53); if (state.failed) return current;
+                    	    otherlv_37=(Token)match(input,25,FollowSets000.FOLLOW_54); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
 
                     	          	newLeafNode(otherlv_37, grammarAccess.getAttributeCSAccess().getColonKeyword_6_0_1_1_2());
@@ -7837,7 +7837,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	    int alt63=2;
                     	    int LA63_0 = input.LA(1);
 
-                    	    if ( ((LA63_0>=RULE_SINGLE_QUOTED_STRING && LA63_0<=RULE_ESCAPED_ID)||LA63_0==18||LA63_0==20||(LA63_0>=26 && LA63_0<=28)||LA63_0==31||LA63_0==33||(LA63_0>=35 && LA63_0<=36)||(LA63_0>=41 && LA63_0<=44)||(LA63_0>=84 && LA63_0<=85)||(LA63_0>=101 && LA63_0<=115)||LA63_0==118||(LA63_0>=120 && LA63_0<=123)||LA63_0==128||(LA63_0>=133 && LA63_0<=134)) ) {
+                    	    if ( ((LA63_0>=RULE_SINGLE_QUOTED_STRING && LA63_0<=RULE_ESCAPED_ID)||(LA63_0>=21 && LA63_0<=23)||LA63_0==26||LA63_0==28||LA63_0==31||LA63_0==33||(LA63_0>=35 && LA63_0<=36)||(LA63_0>=41 && LA63_0<=44)||(LA63_0>=84 && LA63_0<=85)||(LA63_0>=101 && LA63_0<=115)||LA63_0==118||(LA63_0>=120 && LA63_0<=123)||LA63_0==128||(LA63_0>=133 && LA63_0<=134)) ) {
                     	        alt63=1;
                     	    }
                     	    switch (alt63) {
@@ -7852,7 +7852,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	              	        newCompositeNode(grammarAccess.getAttributeCSAccess().getOwnedDefaultExpressionsSpecificationCSParserRuleCall_6_0_1_1_3_0()); 
                     	              	    
                     	            }
-                    	            pushFollow(FollowSets000.FOLLOW_30);
+                    	            pushFollow(FollowSets000.FOLLOW_22);
                     	            lv_ownedDefaultExpressions_38_0=ruleSpecificationCS();
 
                     	            state._fsp--;
@@ -7879,7 +7879,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
                     	    }
 
-                    	    otherlv_39=(Token)match(input,34,FollowSets000.FOLLOW_51); if (state.failed) return current;
+                    	    otherlv_39=(Token)match(input,29,FollowSets000.FOLLOW_52); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
 
                     	          	newLeafNode(otherlv_39, grammarAccess.getAttributeCSAccess().getSemicolonKeyword_6_0_1_1_4());
@@ -7897,7 +7897,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                         }
                     } while (true);
 
-                    otherlv_40=(Token)match(input,24,FollowSets000.FOLLOW_2); if (state.failed) return current;
+                    otherlv_40=(Token)match(input,20,FollowSets000.FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_40, grammarAccess.getAttributeCSAccess().getRightCurlyBracketKeyword_6_0_2());
@@ -7912,7 +7912,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                 case 2 :
                     // InternalQVTcore.g:2741:7: otherlv_41= ';'
                     {
-                    otherlv_41=(Token)match(input,34,FollowSets000.FOLLOW_2); if (state.failed) return current;
+                    otherlv_41=(Token)match(input,29,FollowSets000.FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_41, grammarAccess.getAttributeCSAccess().getSemicolonKeyword_6_1());
@@ -8220,7 +8220,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     // InternalQVTcore.g:2826:1: (lv_isPrimitive_0_0= 'primitive' )
                     // InternalQVTcore.g:2827:3: lv_isPrimitive_0_0= 'primitive'
                     {
-                    lv_isPrimitive_0_0=(Token)match(input,65,FollowSets000.FOLLOW_54); if (state.failed) return current;
+                    lv_isPrimitive_0_0=(Token)match(input,65,FollowSets000.FOLLOW_55); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               newLeafNode(lv_isPrimitive_0_0, grammarAccess.getDataTypeCSAccess().getIsPrimitivePrimitiveKeyword_0_0());
@@ -8243,7 +8243,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,66,FollowSets000.FOLLOW_8); if (state.failed) return current;
+            otherlv_1=(Token)match(input,66,FollowSets000.FOLLOW_5); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_1, grammarAccess.getDataTypeCSAccess().getDatatypeKeyword_1());
@@ -8260,7 +8260,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getDataTypeCSAccess().getNameUnrestrictedNameParserRuleCall_2_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_55);
+            pushFollow(FollowSets000.FOLLOW_56);
             lv_name_2_0=ruleUnrestrictedName();
 
             state._fsp--;
@@ -8274,7 +8274,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                      			current, 
                      			"name",
                       		lv_name_2_0, 
-                      		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.UnrestrictedName");
+                      		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.UnrestrictedName");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -8288,7 +8288,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             int alt68=2;
             int LA68_0 = input.LA(1);
 
-            if ( (LA68_0==28) ) {
+            if ( (LA68_0==23) ) {
                 alt68=1;
             }
             switch (alt68) {
@@ -8303,7 +8303,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                       	        newCompositeNode(grammarAccess.getDataTypeCSAccess().getOwnedSignatureTemplateSignatureCSParserRuleCall_3_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_56);
+                    pushFollow(FollowSets000.FOLLOW_57);
                     lv_ownedSignature_3_0=ruleTemplateSignatureCS();
 
                     state._fsp--;
@@ -8334,14 +8334,14 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             int alt69=2;
             int LA69_0 = input.LA(1);
 
-            if ( (LA69_0==30) ) {
+            if ( (LA69_0==25) ) {
                 alt69=1;
             }
             switch (alt69) {
                 case 1 :
                     // InternalQVTcore.g:2880:5: otherlv_4= ':' ( (lv_instanceClassName_5_0= RULE_SINGLE_QUOTED_STRING ) )
                     {
-                    otherlv_4=(Token)match(input,30,FollowSets000.FOLLOW_47); if (state.failed) return current;
+                    otherlv_4=(Token)match(input,25,FollowSets000.FOLLOW_48); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_4, grammarAccess.getDataTypeCSAccess().getColonKeyword_4_0());
@@ -8387,16 +8387,16 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             int alt71=2;
             int LA71_0 = input.LA(1);
 
-            if ( (LA71_0==22) ) {
+            if ( (LA71_0==17) ) {
                 int LA71_1 = input.LA(2);
 
                 if ( ((LA71_1>=67 && LA71_1<=68)) ) {
                     alt71=1;
                 }
-                else if ( (LA71_1==24) ) {
+                else if ( (LA71_1==20) ) {
                     int LA71_4 = input.LA(3);
 
-                    if ( (LA71_4==22||LA71_4==34) ) {
+                    if ( (LA71_4==17||LA71_4==29) ) {
                         alt71=1;
                     }
                 }
@@ -8405,7 +8405,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // InternalQVTcore.g:2902:6: otherlv_6= '{' ( ( (lv_isSerializable_7_0= 'serializable' ) ) | otherlv_8= '!serializable' )? otherlv_9= '}'
                     {
-                    otherlv_6=(Token)match(input,22,FollowSets000.FOLLOW_57); if (state.failed) return current;
+                    otherlv_6=(Token)match(input,17,FollowSets000.FOLLOW_58); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_6, grammarAccess.getDataTypeCSAccess().getLeftCurlyBracketKeyword_5_0());
@@ -8431,7 +8431,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                             // InternalQVTcore.g:2907:1: (lv_isSerializable_7_0= 'serializable' )
                             // InternalQVTcore.g:2908:3: lv_isSerializable_7_0= 'serializable'
                             {
-                            lv_isSerializable_7_0=(Token)match(input,67,FollowSets000.FOLLOW_18); if (state.failed) return current;
+                            lv_isSerializable_7_0=(Token)match(input,67,FollowSets000.FOLLOW_10); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
 
                                       newLeafNode(lv_isSerializable_7_0, grammarAccess.getDataTypeCSAccess().getIsSerializableSerializableKeyword_5_1_0_0());
@@ -8457,7 +8457,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                         case 2 :
                             // InternalQVTcore.g:2922:7: otherlv_8= '!serializable'
                             {
-                            otherlv_8=(Token)match(input,68,FollowSets000.FOLLOW_18); if (state.failed) return current;
+                            otherlv_8=(Token)match(input,68,FollowSets000.FOLLOW_10); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
 
                                   	newLeafNode(otherlv_8, grammarAccess.getDataTypeCSAccess().getSerializableKeyword_5_1_1());
@@ -8469,7 +8469,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    otherlv_9=(Token)match(input,24,FollowSets000.FOLLOW_34); if (state.failed) return current;
+                    otherlv_9=(Token)match(input,20,FollowSets000.FOLLOW_34); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_9, grammarAccess.getDataTypeCSAccess().getRightCurlyBracketKeyword_5_2());
@@ -8485,10 +8485,10 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             int alt72=2;
             int LA72_0 = input.LA(1);
 
-            if ( (LA72_0==22) ) {
+            if ( (LA72_0==17) ) {
                 alt72=1;
             }
-            else if ( (LA72_0==34) ) {
+            else if ( (LA72_0==29) ) {
                 alt72=2;
             }
             else {
@@ -8505,13 +8505,13 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     // InternalQVTcore.g:2930:4: (otherlv_10= '{' otherlv_11= '}' )
                     // InternalQVTcore.g:2930:6: otherlv_10= '{' otherlv_11= '}'
                     {
-                    otherlv_10=(Token)match(input,22,FollowSets000.FOLLOW_18); if (state.failed) return current;
+                    otherlv_10=(Token)match(input,17,FollowSets000.FOLLOW_10); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_10, grammarAccess.getDataTypeCSAccess().getLeftCurlyBracketKeyword_6_0_0());
                           
                     }
-                    otherlv_11=(Token)match(input,24,FollowSets000.FOLLOW_2); if (state.failed) return current;
+                    otherlv_11=(Token)match(input,20,FollowSets000.FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_11, grammarAccess.getDataTypeCSAccess().getRightCurlyBracketKeyword_6_0_1());
@@ -8526,7 +8526,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                 case 2 :
                     // InternalQVTcore.g:2939:7: otherlv_12= ';'
                     {
-                    otherlv_12=(Token)match(input,34,FollowSets000.FOLLOW_2); if (state.failed) return current;
+                    otherlv_12=(Token)match(input,29,FollowSets000.FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_12, grammarAccess.getDataTypeCSAccess().getSemicolonKeyword_6_1());
@@ -8631,7 +8631,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             // InternalQVTcore.g:2964:1: (otherlv_0= 'enum' ( (lv_name_1_0= ruleUnrestrictedName ) ) ( (lv_ownedSignature_2_0= ruleTemplateSignatureCS ) )? (otherlv_3= ':' ( (lv_instanceClassName_4_0= RULE_SINGLE_QUOTED_STRING ) ) )? (otherlv_5= '{' ( ( (lv_isSerializable_6_0= 'serializable' ) ) | otherlv_7= '!serializable' )? otherlv_8= '}' )? ( (otherlv_9= '{' ( (lv_ownedLiterals_10_0= ruleEnumerationLiteralCS ) )* otherlv_11= '}' ) | otherlv_12= ';' ) )
             // InternalQVTcore.g:2964:3: otherlv_0= 'enum' ( (lv_name_1_0= ruleUnrestrictedName ) ) ( (lv_ownedSignature_2_0= ruleTemplateSignatureCS ) )? (otherlv_3= ':' ( (lv_instanceClassName_4_0= RULE_SINGLE_QUOTED_STRING ) ) )? (otherlv_5= '{' ( ( (lv_isSerializable_6_0= 'serializable' ) ) | otherlv_7= '!serializable' )? otherlv_8= '}' )? ( (otherlv_9= '{' ( (lv_ownedLiterals_10_0= ruleEnumerationLiteralCS ) )* otherlv_11= '}' ) | otherlv_12= ';' )
             {
-            otherlv_0=(Token)match(input,69,FollowSets000.FOLLOW_8); if (state.failed) return current;
+            otherlv_0=(Token)match(input,69,FollowSets000.FOLLOW_5); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_0, grammarAccess.getEnumerationCSAccess().getEnumKeyword_0());
@@ -8648,7 +8648,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getEnumerationCSAccess().getNameUnrestrictedNameParserRuleCall_1_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_55);
+            pushFollow(FollowSets000.FOLLOW_56);
             lv_name_1_0=ruleUnrestrictedName();
 
             state._fsp--;
@@ -8662,7 +8662,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                      			current, 
                      			"name",
                       		lv_name_1_0, 
-                      		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.UnrestrictedName");
+                      		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.UnrestrictedName");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -8676,7 +8676,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             int alt73=2;
             int LA73_0 = input.LA(1);
 
-            if ( (LA73_0==28) ) {
+            if ( (LA73_0==23) ) {
                 alt73=1;
             }
             switch (alt73) {
@@ -8691,7 +8691,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                       	        newCompositeNode(grammarAccess.getEnumerationCSAccess().getOwnedSignatureTemplateSignatureCSParserRuleCall_2_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_56);
+                    pushFollow(FollowSets000.FOLLOW_57);
                     lv_ownedSignature_2_0=ruleTemplateSignatureCS();
 
                     state._fsp--;
@@ -8722,14 +8722,14 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             int alt74=2;
             int LA74_0 = input.LA(1);
 
-            if ( (LA74_0==30) ) {
+            if ( (LA74_0==25) ) {
                 alt74=1;
             }
             switch (alt74) {
                 case 1 :
                     // InternalQVTcore.g:3004:5: otherlv_3= ':' ( (lv_instanceClassName_4_0= RULE_SINGLE_QUOTED_STRING ) )
                     {
-                    otherlv_3=(Token)match(input,30,FollowSets000.FOLLOW_47); if (state.failed) return current;
+                    otherlv_3=(Token)match(input,25,FollowSets000.FOLLOW_48); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_3, grammarAccess.getEnumerationCSAccess().getColonKeyword_3_0());
@@ -8775,16 +8775,16 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             int alt76=2;
             int LA76_0 = input.LA(1);
 
-            if ( (LA76_0==22) ) {
+            if ( (LA76_0==17) ) {
                 int LA76_1 = input.LA(2);
 
                 if ( ((LA76_1>=67 && LA76_1<=68)) ) {
                     alt76=1;
                 }
-                else if ( (LA76_1==24) ) {
+                else if ( (LA76_1==20) ) {
                     int LA76_4 = input.LA(3);
 
-                    if ( (LA76_4==22||LA76_4==34) ) {
+                    if ( (LA76_4==17||LA76_4==29) ) {
                         alt76=1;
                     }
                 }
@@ -8793,7 +8793,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // InternalQVTcore.g:3026:6: otherlv_5= '{' ( ( (lv_isSerializable_6_0= 'serializable' ) ) | otherlv_7= '!serializable' )? otherlv_8= '}'
                     {
-                    otherlv_5=(Token)match(input,22,FollowSets000.FOLLOW_57); if (state.failed) return current;
+                    otherlv_5=(Token)match(input,17,FollowSets000.FOLLOW_58); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_5, grammarAccess.getEnumerationCSAccess().getLeftCurlyBracketKeyword_4_0());
@@ -8819,7 +8819,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                             // InternalQVTcore.g:3031:1: (lv_isSerializable_6_0= 'serializable' )
                             // InternalQVTcore.g:3032:3: lv_isSerializable_6_0= 'serializable'
                             {
-                            lv_isSerializable_6_0=(Token)match(input,67,FollowSets000.FOLLOW_18); if (state.failed) return current;
+                            lv_isSerializable_6_0=(Token)match(input,67,FollowSets000.FOLLOW_10); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
 
                                       newLeafNode(lv_isSerializable_6_0, grammarAccess.getEnumerationCSAccess().getIsSerializableSerializableKeyword_4_1_0_0());
@@ -8845,7 +8845,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                         case 2 :
                             // InternalQVTcore.g:3046:7: otherlv_7= '!serializable'
                             {
-                            otherlv_7=(Token)match(input,68,FollowSets000.FOLLOW_18); if (state.failed) return current;
+                            otherlv_7=(Token)match(input,68,FollowSets000.FOLLOW_10); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
 
                                   	newLeafNode(otherlv_7, grammarAccess.getEnumerationCSAccess().getSerializableKeyword_4_1_1());
@@ -8857,7 +8857,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    otherlv_8=(Token)match(input,24,FollowSets000.FOLLOW_34); if (state.failed) return current;
+                    otherlv_8=(Token)match(input,20,FollowSets000.FOLLOW_34); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_8, grammarAccess.getEnumerationCSAccess().getRightCurlyBracketKeyword_4_2());
@@ -8873,10 +8873,10 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             int alt78=2;
             int LA78_0 = input.LA(1);
 
-            if ( (LA78_0==22) ) {
+            if ( (LA78_0==17) ) {
                 alt78=1;
             }
-            else if ( (LA78_0==34) ) {
+            else if ( (LA78_0==29) ) {
                 alt78=2;
             }
             else {
@@ -8893,7 +8893,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     // InternalQVTcore.g:3054:4: (otherlv_9= '{' ( (lv_ownedLiterals_10_0= ruleEnumerationLiteralCS ) )* otherlv_11= '}' )
                     // InternalQVTcore.g:3054:6: otherlv_9= '{' ( (lv_ownedLiterals_10_0= ruleEnumerationLiteralCS ) )* otherlv_11= '}'
                     {
-                    otherlv_9=(Token)match(input,22,FollowSets000.FOLLOW_58); if (state.failed) return current;
+                    otherlv_9=(Token)match(input,17,FollowSets000.FOLLOW_59); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_9, grammarAccess.getEnumerationCSAccess().getLeftCurlyBracketKeyword_5_0_0());
@@ -8922,7 +8922,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	      	        newCompositeNode(grammarAccess.getEnumerationCSAccess().getOwnedLiteralsEnumerationLiteralCSParserRuleCall_5_0_1_0()); 
                     	      	    
                     	    }
-                    	    pushFollow(FollowSets000.FOLLOW_58);
+                    	    pushFollow(FollowSets000.FOLLOW_59);
                     	    lv_ownedLiterals_10_0=ruleEnumerationLiteralCS();
 
                     	    state._fsp--;
@@ -8952,7 +8952,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                         }
                     } while (true);
 
-                    otherlv_11=(Token)match(input,24,FollowSets000.FOLLOW_2); if (state.failed) return current;
+                    otherlv_11=(Token)match(input,20,FollowSets000.FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_11, grammarAccess.getEnumerationCSAccess().getRightCurlyBracketKeyword_5_0_2());
@@ -8967,7 +8967,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                 case 2 :
                     // InternalQVTcore.g:3081:7: otherlv_12= ';'
                     {
-                    otherlv_12=(Token)match(input,34,FollowSets000.FOLLOW_2); if (state.failed) return current;
+                    otherlv_12=(Token)match(input,29,FollowSets000.FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_12, grammarAccess.getEnumerationCSAccess().getSemicolonKeyword_5_1());
@@ -9091,7 +9091,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     // InternalQVTcore.g:3106:3: (otherlv_0= 'literal' ( (lv_name_1_0= ruleUnrestrictedName ) ) )
                     // InternalQVTcore.g:3106:5: otherlv_0= 'literal' ( (lv_name_1_0= ruleUnrestrictedName ) )
                     {
-                    otherlv_0=(Token)match(input,70,FollowSets000.FOLLOW_8); if (state.failed) return current;
+                    otherlv_0=(Token)match(input,70,FollowSets000.FOLLOW_5); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_0, grammarAccess.getEnumerationLiteralCSAccess().getLiteralKeyword_0_0_0());
@@ -9122,7 +9122,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                              			current, 
                              			"name",
                               		lv_name_1_0, 
-                              		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.UnrestrictedName");
+                              		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.UnrestrictedName");
                       	        afterParserOrEnumRuleCall();
                       	    
                     }
@@ -9193,7 +9193,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // InternalQVTcore.g:3147:5: otherlv_3= '=' ( (lv_value_4_0= ruleSIGNED ) )
                     {
-                    otherlv_3=(Token)match(input,38,FollowSets000.FOLLOW_59); if (state.failed) return current;
+                    otherlv_3=(Token)match(input,38,FollowSets000.FOLLOW_60); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_3, grammarAccess.getEnumerationLiteralCSAccess().getEqualsSignKeyword_1_0());
@@ -9244,10 +9244,10 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             int alt81=2;
             int LA81_0 = input.LA(1);
 
-            if ( (LA81_0==22) ) {
+            if ( (LA81_0==17) ) {
                 alt81=1;
             }
-            else if ( (LA81_0==34) ) {
+            else if ( (LA81_0==29) ) {
                 alt81=2;
             }
             else {
@@ -9264,13 +9264,13 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     // InternalQVTcore.g:3169:5: (otherlv_5= '{' otherlv_6= '}' )
                     // InternalQVTcore.g:3169:7: otherlv_5= '{' otherlv_6= '}'
                     {
-                    otherlv_5=(Token)match(input,22,FollowSets000.FOLLOW_18); if (state.failed) return current;
+                    otherlv_5=(Token)match(input,17,FollowSets000.FOLLOW_10); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_5, grammarAccess.getEnumerationLiteralCSAccess().getLeftCurlyBracketKeyword_2_0_0());
                           
                     }
-                    otherlv_6=(Token)match(input,24,FollowSets000.FOLLOW_2); if (state.failed) return current;
+                    otherlv_6=(Token)match(input,20,FollowSets000.FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_6, grammarAccess.getEnumerationLiteralCSAccess().getRightCurlyBracketKeyword_2_0_1());
@@ -9285,7 +9285,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                 case 2 :
                     // InternalQVTcore.g:3178:7: otherlv_7= ';'
                     {
-                    otherlv_7=(Token)match(input,34,FollowSets000.FOLLOW_2); if (state.failed) return current;
+                    otherlv_7=(Token)match(input,29,FollowSets000.FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_7, grammarAccess.getEnumerationLiteralCSAccess().getSemicolonKeyword_2_1());
@@ -9439,7 +9439,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     // InternalQVTcore.g:3204:1: (lv_qualifiers_0_0= 'static' )
                     // InternalQVTcore.g:3205:3: lv_qualifiers_0_0= 'static'
                     {
-                    lv_qualifiers_0_0=(Token)match(input,45,FollowSets000.FOLLOW_60); if (state.failed) return current;
+                    lv_qualifiers_0_0=(Token)match(input,45,FollowSets000.FOLLOW_61); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               newLeafNode(lv_qualifiers_0_0, grammarAccess.getOperationCSAccess().getQualifiersStaticKeyword_0_0_0_0());
@@ -9473,7 +9473,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                             // InternalQVTcore.g:3219:1: (lv_qualifiers_1_0= 'definition' )
                             // InternalQVTcore.g:3220:3: lv_qualifiers_1_0= 'definition'
                             {
-                            lv_qualifiers_1_0=(Token)match(input,46,FollowSets000.FOLLOW_61); if (state.failed) return current;
+                            lv_qualifiers_1_0=(Token)match(input,46,FollowSets000.FOLLOW_62); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
 
                                       newLeafNode(lv_qualifiers_1_0, grammarAccess.getOperationCSAccess().getQualifiersDefinitionKeyword_0_0_1_0());
@@ -9514,7 +9514,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     // InternalQVTcore.g:3235:1: (lv_qualifiers_2_0= 'definition' )
                     // InternalQVTcore.g:3236:3: lv_qualifiers_2_0= 'definition'
                     {
-                    lv_qualifiers_2_0=(Token)match(input,46,FollowSets000.FOLLOW_62); if (state.failed) return current;
+                    lv_qualifiers_2_0=(Token)match(input,46,FollowSets000.FOLLOW_63); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               newLeafNode(lv_qualifiers_2_0, grammarAccess.getOperationCSAccess().getQualifiersDefinitionKeyword_0_1_0_0());
@@ -9548,7 +9548,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                             // InternalQVTcore.g:3250:1: (lv_qualifiers_3_0= 'static' )
                             // InternalQVTcore.g:3251:3: lv_qualifiers_3_0= 'static'
                             {
-                            lv_qualifiers_3_0=(Token)match(input,45,FollowSets000.FOLLOW_61); if (state.failed) return current;
+                            lv_qualifiers_3_0=(Token)match(input,45,FollowSets000.FOLLOW_62); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
 
                                       newLeafNode(lv_qualifiers_3_0, grammarAccess.getOperationCSAccess().getQualifiersStaticKeyword_0_1_1_0());
@@ -9580,7 +9580,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_4=(Token)match(input,71,FollowSets000.FOLLOW_63); if (state.failed) return current;
+            otherlv_4=(Token)match(input,71,FollowSets000.FOLLOW_64); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_4, grammarAccess.getOperationCSAccess().getOperationKeyword_1());
@@ -9590,7 +9590,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             int alt85=2;
             int LA85_0 = input.LA(1);
 
-            if ( (LA85_0==28) ) {
+            if ( (LA85_0==23) ) {
                 alt85=1;
             }
             switch (alt85) {
@@ -9605,7 +9605,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                       	        newCompositeNode(grammarAccess.getOperationCSAccess().getOwnedSignatureTemplateSignatureCSParserRuleCall_2_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_8);
+                    pushFollow(FollowSets000.FOLLOW_5);
                     lv_ownedSignature_5_0=ruleTemplateSignatureCS();
 
                     state._fsp--;
@@ -9643,7 +9643,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getOperationCSAccess().getNameUnrestrictedNameParserRuleCall_3_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_12);
+            pushFollow(FollowSets000.FOLLOW_29);
             lv_name_6_0=ruleUnrestrictedName();
 
             state._fsp--;
@@ -9657,7 +9657,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                      			current, 
                      			"name",
                       		lv_name_6_0, 
-                      		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.UnrestrictedName");
+                      		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.UnrestrictedName");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -9667,7 +9667,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_7=(Token)match(input,28,FollowSets000.FOLLOW_38); if (state.failed) return current;
+            otherlv_7=(Token)match(input,23,FollowSets000.FOLLOW_38); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_7, grammarAccess.getOperationCSAccess().getLeftParenthesisKeyword_4());
@@ -9677,7 +9677,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             int alt87=2;
             int LA87_0 = input.LA(1);
 
-            if ( ((LA87_0>=RULE_SIMPLE_ID && LA87_0<=RULE_ESCAPED_ID)||LA87_0==18||LA87_0==20||(LA87_0>=26 && LA87_0<=27)||LA87_0==31||(LA87_0>=35 && LA87_0<=36)||(LA87_0>=41 && LA87_0<=44)) ) {
+            if ( ((LA87_0>=RULE_SIMPLE_ID && LA87_0<=RULE_ESCAPED_ID)||(LA87_0>=21 && LA87_0<=22)||LA87_0==26||LA87_0==31||LA87_0==33||(LA87_0>=35 && LA87_0<=36)||(LA87_0>=41 && LA87_0<=44)) ) {
                 alt87=1;
             }
             switch (alt87) {
@@ -9695,7 +9695,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                       	        newCompositeNode(grammarAccess.getOperationCSAccess().getOwnedParametersParameterCSParserRuleCall_5_0_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_23);
+                    pushFollow(FollowSets000.FOLLOW_15);
                     lv_ownedParameters_8_0=ruleParameterCS();
 
                     state._fsp--;
@@ -9725,7 +9725,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                         int alt86=2;
                         int LA86_0 = input.LA(1);
 
-                        if ( (LA86_0==21) ) {
+                        if ( (LA86_0==18) ) {
                             alt86=1;
                         }
 
@@ -9734,7 +9734,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	case 1 :
                     	    // InternalQVTcore.g:3326:4: otherlv_9= ',' ( (lv_ownedParameters_10_0= ruleParameterCS ) )
                     	    {
-                    	    otherlv_9=(Token)match(input,21,FollowSets000.FOLLOW_8); if (state.failed) return current;
+                    	    otherlv_9=(Token)match(input,18,FollowSets000.FOLLOW_5); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
 
                     	          	newLeafNode(otherlv_9, grammarAccess.getOperationCSAccess().getCommaKeyword_5_1_0());
@@ -9751,7 +9751,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	      	        newCompositeNode(grammarAccess.getOperationCSAccess().getOwnedParametersParameterCSParserRuleCall_5_1_1_0()); 
                     	      	    
                     	    }
-                    	    pushFollow(FollowSets000.FOLLOW_23);
+                    	    pushFollow(FollowSets000.FOLLOW_15);
                     	    lv_ownedParameters_10_0=ruleParameterCS();
 
                     	    state._fsp--;
@@ -9790,7 +9790,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_11=(Token)match(input,29,FollowSets000.FOLLOW_64); if (state.failed) return current;
+            otherlv_11=(Token)match(input,24,FollowSets000.FOLLOW_65); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_11, grammarAccess.getOperationCSAccess().getRightParenthesisKeyword_6());
@@ -9800,14 +9800,14 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             int alt88=2;
             int LA88_0 = input.LA(1);
 
-            if ( (LA88_0==30) ) {
+            if ( (LA88_0==25) ) {
                 alt88=1;
             }
             switch (alt88) {
                 case 1 :
                     // InternalQVTcore.g:3352:3: otherlv_12= ':' ( (lv_ownedType_13_0= ruleTypedMultiplicityRefCS ) )
                     {
-                    otherlv_12=(Token)match(input,30,FollowSets000.FOLLOW_8); if (state.failed) return current;
+                    otherlv_12=(Token)match(input,25,FollowSets000.FOLLOW_18); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_12, grammarAccess.getOperationCSAccess().getColonKeyword_7_0());
@@ -9824,7 +9824,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                       	        newCompositeNode(grammarAccess.getOperationCSAccess().getOwnedTypeTypedMultiplicityRefCSParserRuleCall_7_1_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_65);
+                    pushFollow(FollowSets000.FOLLOW_66);
                     lv_ownedType_13_0=ruleTypedMultiplicityRefCS();
 
                     state._fsp--;
@@ -9865,7 +9865,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // InternalQVTcore.g:3374:6: otherlv_14= 'throws' ( (lv_ownedExceptions_15_0= ruleTypedRefCS ) ) (otherlv_16= ',' ( (lv_ownedExceptions_17_0= ruleTypedRefCS ) ) )*
                     {
-                    otherlv_14=(Token)match(input,72,FollowSets000.FOLLOW_8); if (state.failed) return current;
+                    otherlv_14=(Token)match(input,72,FollowSets000.FOLLOW_18); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_14, grammarAccess.getOperationCSAccess().getThrowsKeyword_8_0());
@@ -9882,7 +9882,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                       	        newCompositeNode(grammarAccess.getOperationCSAccess().getOwnedExceptionsTypedRefCSParserRuleCall_8_1_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_66);
+                    pushFollow(FollowSets000.FOLLOW_67);
                     lv_ownedExceptions_15_0=ruleTypedRefCS();
 
                     state._fsp--;
@@ -9912,7 +9912,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                         int alt89=2;
                         int LA89_0 = input.LA(1);
 
-                        if ( (LA89_0==21) ) {
+                        if ( (LA89_0==18) ) {
                             alt89=1;
                         }
 
@@ -9921,7 +9921,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	case 1 :
                     	    // InternalQVTcore.g:3396:4: otherlv_16= ',' ( (lv_ownedExceptions_17_0= ruleTypedRefCS ) )
                     	    {
-                    	    otherlv_16=(Token)match(input,21,FollowSets000.FOLLOW_8); if (state.failed) return current;
+                    	    otherlv_16=(Token)match(input,18,FollowSets000.FOLLOW_18); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
 
                     	          	newLeafNode(otherlv_16, grammarAccess.getOperationCSAccess().getCommaKeyword_8_2_0());
@@ -9938,7 +9938,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	      	        newCompositeNode(grammarAccess.getOperationCSAccess().getOwnedExceptionsTypedRefCSParserRuleCall_8_2_1_0()); 
                     	      	    
                     	    }
-                    	    pushFollow(FollowSets000.FOLLOW_66);
+                    	    pushFollow(FollowSets000.FOLLOW_67);
                     	    lv_ownedExceptions_17_0=ruleTypedRefCS();
 
                     	    state._fsp--;
@@ -9981,7 +9981,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             int alt94=2;
             int LA94_0 = input.LA(1);
 
-            if ( (LA94_0==22) ) {
+            if ( (LA94_0==17) ) {
                 int LA94_1 = input.LA(2);
 
                 if ( ((LA94_1>=48 && LA94_1<=49)||(LA94_1>=52 && LA94_1<=53)||(LA94_1>=57 && LA94_1<=58)) ) {
@@ -9992,7 +9992,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // InternalQVTcore.g:3418:8: otherlv_18= '{' ( ( ( (lv_qualifiers_19_0= 'derived' ) ) | ( (lv_qualifiers_20_0= '!derived' ) ) | ( (lv_qualifiers_21_0= 'ordered' ) ) | ( (lv_qualifiers_22_0= '!ordered' ) ) | ( (lv_qualifiers_23_0= 'unique' ) ) | ( (lv_qualifiers_24_0= '!unique' ) ) ) (otherlv_25= ',' )? )+ otherlv_26= '}'
                     {
-                    otherlv_18=(Token)match(input,22,FollowSets000.FOLLOW_67); if (state.failed) return current;
+                    otherlv_18=(Token)match(input,17,FollowSets000.FOLLOW_68); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_18, grammarAccess.getOperationCSAccess().getLeftCurlyBracketKeyword_9_0());
@@ -10065,7 +10065,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	            // InternalQVTcore.g:3423:1: (lv_qualifiers_19_0= 'derived' )
                     	            // InternalQVTcore.g:3424:3: lv_qualifiers_19_0= 'derived'
                     	            {
-                    	            lv_qualifiers_19_0=(Token)match(input,48,FollowSets000.FOLLOW_68); if (state.failed) return current;
+                    	            lv_qualifiers_19_0=(Token)match(input,48,FollowSets000.FOLLOW_69); if (state.failed) return current;
                     	            if ( state.backtracking==0 ) {
 
                     	                      newLeafNode(lv_qualifiers_19_0, grammarAccess.getOperationCSAccess().getQualifiersDerivedKeyword_9_1_0_0_0());
@@ -10097,7 +10097,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	            // InternalQVTcore.g:3439:1: (lv_qualifiers_20_0= '!derived' )
                     	            // InternalQVTcore.g:3440:3: lv_qualifiers_20_0= '!derived'
                     	            {
-                    	            lv_qualifiers_20_0=(Token)match(input,49,FollowSets000.FOLLOW_68); if (state.failed) return current;
+                    	            lv_qualifiers_20_0=(Token)match(input,49,FollowSets000.FOLLOW_69); if (state.failed) return current;
                     	            if ( state.backtracking==0 ) {
 
                     	                      newLeafNode(lv_qualifiers_20_0, grammarAccess.getOperationCSAccess().getQualifiersDerivedKeyword_9_1_0_1_0());
@@ -10129,7 +10129,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	            // InternalQVTcore.g:3455:1: (lv_qualifiers_21_0= 'ordered' )
                     	            // InternalQVTcore.g:3456:3: lv_qualifiers_21_0= 'ordered'
                     	            {
-                    	            lv_qualifiers_21_0=(Token)match(input,52,FollowSets000.FOLLOW_68); if (state.failed) return current;
+                    	            lv_qualifiers_21_0=(Token)match(input,52,FollowSets000.FOLLOW_69); if (state.failed) return current;
                     	            if ( state.backtracking==0 ) {
 
                     	                      newLeafNode(lv_qualifiers_21_0, grammarAccess.getOperationCSAccess().getQualifiersOrderedKeyword_9_1_0_2_0());
@@ -10161,7 +10161,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	            // InternalQVTcore.g:3471:1: (lv_qualifiers_22_0= '!ordered' )
                     	            // InternalQVTcore.g:3472:3: lv_qualifiers_22_0= '!ordered'
                     	            {
-                    	            lv_qualifiers_22_0=(Token)match(input,53,FollowSets000.FOLLOW_68); if (state.failed) return current;
+                    	            lv_qualifiers_22_0=(Token)match(input,53,FollowSets000.FOLLOW_69); if (state.failed) return current;
                     	            if ( state.backtracking==0 ) {
 
                     	                      newLeafNode(lv_qualifiers_22_0, grammarAccess.getOperationCSAccess().getQualifiersOrderedKeyword_9_1_0_3_0());
@@ -10193,7 +10193,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	            // InternalQVTcore.g:3487:1: (lv_qualifiers_23_0= 'unique' )
                     	            // InternalQVTcore.g:3488:3: lv_qualifiers_23_0= 'unique'
                     	            {
-                    	            lv_qualifiers_23_0=(Token)match(input,57,FollowSets000.FOLLOW_68); if (state.failed) return current;
+                    	            lv_qualifiers_23_0=(Token)match(input,57,FollowSets000.FOLLOW_69); if (state.failed) return current;
                     	            if ( state.backtracking==0 ) {
 
                     	                      newLeafNode(lv_qualifiers_23_0, grammarAccess.getOperationCSAccess().getQualifiersUniqueKeyword_9_1_0_4_0());
@@ -10225,7 +10225,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	            // InternalQVTcore.g:3503:1: (lv_qualifiers_24_0= '!unique' )
                     	            // InternalQVTcore.g:3504:3: lv_qualifiers_24_0= '!unique'
                     	            {
-                    	            lv_qualifiers_24_0=(Token)match(input,58,FollowSets000.FOLLOW_68); if (state.failed) return current;
+                    	            lv_qualifiers_24_0=(Token)match(input,58,FollowSets000.FOLLOW_69); if (state.failed) return current;
                     	            if ( state.backtracking==0 ) {
 
                     	                      newLeafNode(lv_qualifiers_24_0, grammarAccess.getOperationCSAccess().getQualifiersUniqueKeyword_9_1_0_5_0());
@@ -10255,14 +10255,14 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	    int alt92=2;
                     	    int LA92_0 = input.LA(1);
 
-                    	    if ( (LA92_0==21) ) {
+                    	    if ( (LA92_0==18) ) {
                     	        alt92=1;
                     	    }
                     	    switch (alt92) {
                     	        case 1 :
                     	            // InternalQVTcore.g:3517:5: otherlv_25= ','
                     	            {
-                    	            otherlv_25=(Token)match(input,21,FollowSets000.FOLLOW_69); if (state.failed) return current;
+                    	            otherlv_25=(Token)match(input,18,FollowSets000.FOLLOW_70); if (state.failed) return current;
                     	            if ( state.backtracking==0 ) {
 
                     	                  	newLeafNode(otherlv_25, grammarAccess.getOperationCSAccess().getCommaKeyword_9_1_1());
@@ -10288,7 +10288,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                         cnt93++;
                     } while (true);
 
-                    otherlv_26=(Token)match(input,24,FollowSets000.FOLLOW_34); if (state.failed) return current;
+                    otherlv_26=(Token)match(input,20,FollowSets000.FOLLOW_34); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_26, grammarAccess.getOperationCSAccess().getRightCurlyBracketKeyword_9_2());
@@ -10304,10 +10304,10 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             int alt98=2;
             int LA98_0 = input.LA(1);
 
-            if ( (LA98_0==22) ) {
+            if ( (LA98_0==17) ) {
                 alt98=1;
             }
-            else if ( (LA98_0==34) ) {
+            else if ( (LA98_0==29) ) {
                 alt98=2;
             }
             else {
@@ -10324,7 +10324,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     // InternalQVTcore.g:3525:4: (otherlv_27= '{' (otherlv_28= 'body' ( ruleUnrestrictedName )? otherlv_30= ':' ( (lv_ownedBodyExpressions_31_0= ruleSpecificationCS ) )? otherlv_32= ';' )* otherlv_33= '}' )
                     // InternalQVTcore.g:3525:6: otherlv_27= '{' (otherlv_28= 'body' ( ruleUnrestrictedName )? otherlv_30= ':' ( (lv_ownedBodyExpressions_31_0= ruleSpecificationCS ) )? otherlv_32= ';' )* otherlv_33= '}'
                     {
-                    otherlv_27=(Token)match(input,22,FollowSets000.FOLLOW_70); if (state.failed) return current;
+                    otherlv_27=(Token)match(input,17,FollowSets000.FOLLOW_71); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_27, grammarAccess.getOperationCSAccess().getLeftCurlyBracketKeyword_10_0_0());
@@ -10345,7 +10345,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	case 1 :
                     	    // InternalQVTcore.g:3529:3: otherlv_28= 'body' ( ruleUnrestrictedName )? otherlv_30= ':' ( (lv_ownedBodyExpressions_31_0= ruleSpecificationCS ) )? otherlv_32= ';'
                     	    {
-                    	    otherlv_28=(Token)match(input,73,FollowSets000.FOLLOW_52); if (state.failed) return current;
+                    	    otherlv_28=(Token)match(input,73,FollowSets000.FOLLOW_53); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
 
                     	          	newLeafNode(otherlv_28, grammarAccess.getOperationCSAccess().getBodyKeyword_10_0_1_0());
@@ -10355,7 +10355,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	    int alt95=2;
                     	    int LA95_0 = input.LA(1);
 
-                    	    if ( ((LA95_0>=RULE_SIMPLE_ID && LA95_0<=RULE_ESCAPED_ID)||LA95_0==18||LA95_0==20||(LA95_0>=26 && LA95_0<=27)||LA95_0==31||(LA95_0>=35 && LA95_0<=36)||(LA95_0>=41 && LA95_0<=44)) ) {
+                    	    if ( ((LA95_0>=RULE_SIMPLE_ID && LA95_0<=RULE_ESCAPED_ID)||(LA95_0>=21 && LA95_0<=22)||LA95_0==26||LA95_0==31||LA95_0==33||(LA95_0>=35 && LA95_0<=36)||(LA95_0>=41 && LA95_0<=44)) ) {
                     	        alt95=1;
                     	    }
                     	    switch (alt95) {
@@ -10372,7 +10372,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	                      newCompositeNode(grammarAccess.getOperationCSAccess().getUnrestrictedNameParserRuleCall_10_0_1_1()); 
                     	                  
                     	            }
-                    	            pushFollow(FollowSets000.FOLLOW_25);
+                    	            pushFollow(FollowSets000.FOLLOW_17);
                     	            ruleUnrestrictedName();
 
                     	            state._fsp--;
@@ -10388,7 +10388,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
                     	    }
 
-                    	    otherlv_30=(Token)match(input,30,FollowSets000.FOLLOW_53); if (state.failed) return current;
+                    	    otherlv_30=(Token)match(input,25,FollowSets000.FOLLOW_54); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
 
                     	          	newLeafNode(otherlv_30, grammarAccess.getOperationCSAccess().getColonKeyword_10_0_1_2());
@@ -10398,7 +10398,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	    int alt96=2;
                     	    int LA96_0 = input.LA(1);
 
-                    	    if ( ((LA96_0>=RULE_SINGLE_QUOTED_STRING && LA96_0<=RULE_ESCAPED_ID)||LA96_0==18||LA96_0==20||(LA96_0>=26 && LA96_0<=28)||LA96_0==31||LA96_0==33||(LA96_0>=35 && LA96_0<=36)||(LA96_0>=41 && LA96_0<=44)||(LA96_0>=84 && LA96_0<=85)||(LA96_0>=101 && LA96_0<=115)||LA96_0==118||(LA96_0>=120 && LA96_0<=123)||LA96_0==128||(LA96_0>=133 && LA96_0<=134)) ) {
+                    	    if ( ((LA96_0>=RULE_SINGLE_QUOTED_STRING && LA96_0<=RULE_ESCAPED_ID)||(LA96_0>=21 && LA96_0<=23)||LA96_0==26||LA96_0==28||LA96_0==31||LA96_0==33||(LA96_0>=35 && LA96_0<=36)||(LA96_0>=41 && LA96_0<=44)||(LA96_0>=84 && LA96_0<=85)||(LA96_0>=101 && LA96_0<=115)||LA96_0==118||(LA96_0>=120 && LA96_0<=123)||LA96_0==128||(LA96_0>=133 && LA96_0<=134)) ) {
                     	        alt96=1;
                     	    }
                     	    switch (alt96) {
@@ -10413,7 +10413,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	              	        newCompositeNode(grammarAccess.getOperationCSAccess().getOwnedBodyExpressionsSpecificationCSParserRuleCall_10_0_1_3_0()); 
                     	              	    
                     	            }
-                    	            pushFollow(FollowSets000.FOLLOW_30);
+                    	            pushFollow(FollowSets000.FOLLOW_22);
                     	            lv_ownedBodyExpressions_31_0=ruleSpecificationCS();
 
                     	            state._fsp--;
@@ -10440,7 +10440,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
                     	    }
 
-                    	    otherlv_32=(Token)match(input,34,FollowSets000.FOLLOW_70); if (state.failed) return current;
+                    	    otherlv_32=(Token)match(input,29,FollowSets000.FOLLOW_71); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
 
                     	          	newLeafNode(otherlv_32, grammarAccess.getOperationCSAccess().getSemicolonKeyword_10_0_1_4());
@@ -10455,7 +10455,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                         }
                     } while (true);
 
-                    otherlv_33=(Token)match(input,24,FollowSets000.FOLLOW_2); if (state.failed) return current;
+                    otherlv_33=(Token)match(input,20,FollowSets000.FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_33, grammarAccess.getOperationCSAccess().getRightCurlyBracketKeyword_10_0_2());
@@ -10470,7 +10470,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                 case 2 :
                     // InternalQVTcore.g:3575:7: otherlv_34= ';'
                     {
-                    otherlv_34=(Token)match(input,34,FollowSets000.FOLLOW_2); if (state.failed) return current;
+                    otherlv_34=(Token)match(input,29,FollowSets000.FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_34, grammarAccess.getOperationCSAccess().getSemicolonKeyword_10_1());
@@ -10584,7 +10584,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getParameterCSAccess().getNameUnrestrictedNameParserRuleCall_0_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_71);
+            pushFollow(FollowSets000.FOLLOW_72);
             lv_name_0_0=ruleUnrestrictedName();
 
             state._fsp--;
@@ -10598,7 +10598,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                      			current, 
                      			"name",
                       		lv_name_0_0, 
-                      		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.UnrestrictedName");
+                      		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.UnrestrictedName");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -10612,14 +10612,14 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             int alt99=2;
             int LA99_0 = input.LA(1);
 
-            if ( (LA99_0==30) ) {
+            if ( (LA99_0==25) ) {
                 alt99=1;
             }
             switch (alt99) {
                 case 1 :
                     // InternalQVTcore.g:3618:4: otherlv_1= ':' ( (lv_ownedType_2_0= ruleTypedMultiplicityRefCS ) )
                     {
-                    otherlv_1=(Token)match(input,30,FollowSets000.FOLLOW_8); if (state.failed) return current;
+                    otherlv_1=(Token)match(input,25,FollowSets000.FOLLOW_18); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_1, grammarAccess.getParameterCSAccess().getColonKeyword_1_0());
@@ -10636,7 +10636,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                       	        newCompositeNode(grammarAccess.getParameterCSAccess().getOwnedTypeTypedMultiplicityRefCSParserRuleCall_1_1_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_72);
+                    pushFollow(FollowSets000.FOLLOW_73);
                     lv_ownedType_2_0=ruleTypedMultiplicityRefCS();
 
                     state._fsp--;
@@ -10670,7 +10670,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             int alt103=2;
             int LA103_0 = input.LA(1);
 
-            if ( (LA103_0==22) ) {
+            if ( (LA103_0==17) ) {
                 int LA103_1 = input.LA(2);
 
                 if ( ((LA103_1>=52 && LA103_1<=53)||(LA103_1>=57 && LA103_1<=58)) ) {
@@ -10681,7 +10681,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // InternalQVTcore.g:3640:6: otherlv_3= '{' ( ( ( (lv_qualifiers_4_0= 'ordered' ) ) | ( (lv_qualifiers_5_0= '!ordered' ) ) | ( (lv_qualifiers_6_0= 'unique' ) ) | ( (lv_qualifiers_7_0= '!unique' ) ) ) (otherlv_8= ',' )? )+ otherlv_9= '}'
                     {
-                    otherlv_3=(Token)match(input,22,FollowSets000.FOLLOW_73); if (state.failed) return current;
+                    otherlv_3=(Token)match(input,17,FollowSets000.FOLLOW_74); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_3, grammarAccess.getParameterCSAccess().getLeftCurlyBracketKeyword_2_0());
@@ -10744,7 +10744,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	            // InternalQVTcore.g:3645:1: (lv_qualifiers_4_0= 'ordered' )
                     	            // InternalQVTcore.g:3646:3: lv_qualifiers_4_0= 'ordered'
                     	            {
-                    	            lv_qualifiers_4_0=(Token)match(input,52,FollowSets000.FOLLOW_74); if (state.failed) return current;
+                    	            lv_qualifiers_4_0=(Token)match(input,52,FollowSets000.FOLLOW_75); if (state.failed) return current;
                     	            if ( state.backtracking==0 ) {
 
                     	                      newLeafNode(lv_qualifiers_4_0, grammarAccess.getParameterCSAccess().getQualifiersOrderedKeyword_2_1_0_0_0());
@@ -10776,7 +10776,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	            // InternalQVTcore.g:3661:1: (lv_qualifiers_5_0= '!ordered' )
                     	            // InternalQVTcore.g:3662:3: lv_qualifiers_5_0= '!ordered'
                     	            {
-                    	            lv_qualifiers_5_0=(Token)match(input,53,FollowSets000.FOLLOW_74); if (state.failed) return current;
+                    	            lv_qualifiers_5_0=(Token)match(input,53,FollowSets000.FOLLOW_75); if (state.failed) return current;
                     	            if ( state.backtracking==0 ) {
 
                     	                      newLeafNode(lv_qualifiers_5_0, grammarAccess.getParameterCSAccess().getQualifiersOrderedKeyword_2_1_0_1_0());
@@ -10808,7 +10808,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	            // InternalQVTcore.g:3677:1: (lv_qualifiers_6_0= 'unique' )
                     	            // InternalQVTcore.g:3678:3: lv_qualifiers_6_0= 'unique'
                     	            {
-                    	            lv_qualifiers_6_0=(Token)match(input,57,FollowSets000.FOLLOW_74); if (state.failed) return current;
+                    	            lv_qualifiers_6_0=(Token)match(input,57,FollowSets000.FOLLOW_75); if (state.failed) return current;
                     	            if ( state.backtracking==0 ) {
 
                     	                      newLeafNode(lv_qualifiers_6_0, grammarAccess.getParameterCSAccess().getQualifiersUniqueKeyword_2_1_0_2_0());
@@ -10840,7 +10840,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	            // InternalQVTcore.g:3693:1: (lv_qualifiers_7_0= '!unique' )
                     	            // InternalQVTcore.g:3694:3: lv_qualifiers_7_0= '!unique'
                     	            {
-                    	            lv_qualifiers_7_0=(Token)match(input,58,FollowSets000.FOLLOW_74); if (state.failed) return current;
+                    	            lv_qualifiers_7_0=(Token)match(input,58,FollowSets000.FOLLOW_75); if (state.failed) return current;
                     	            if ( state.backtracking==0 ) {
 
                     	                      newLeafNode(lv_qualifiers_7_0, grammarAccess.getParameterCSAccess().getQualifiersUniqueKeyword_2_1_0_3_0());
@@ -10870,14 +10870,14 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	    int alt101=2;
                     	    int LA101_0 = input.LA(1);
 
-                    	    if ( (LA101_0==21) ) {
+                    	    if ( (LA101_0==18) ) {
                     	        alt101=1;
                     	    }
                     	    switch (alt101) {
                     	        case 1 :
                     	            // InternalQVTcore.g:3707:5: otherlv_8= ','
                     	            {
-                    	            otherlv_8=(Token)match(input,21,FollowSets000.FOLLOW_75); if (state.failed) return current;
+                    	            otherlv_8=(Token)match(input,18,FollowSets000.FOLLOW_76); if (state.failed) return current;
                     	            if ( state.backtracking==0 ) {
 
                     	                  	newLeafNode(otherlv_8, grammarAccess.getParameterCSAccess().getCommaKeyword_2_1_1());
@@ -10903,7 +10903,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                         cnt102++;
                     } while (true);
 
-                    otherlv_9=(Token)match(input,24,FollowSets000.FOLLOW_72); if (state.failed) return current;
+                    otherlv_9=(Token)match(input,20,FollowSets000.FOLLOW_73); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_9, grammarAccess.getParameterCSAccess().getRightCurlyBracketKeyword_2_2());
@@ -10919,20 +10919,20 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             int alt104=2;
             int LA104_0 = input.LA(1);
 
-            if ( (LA104_0==22) ) {
+            if ( (LA104_0==17) ) {
                 alt104=1;
             }
             switch (alt104) {
                 case 1 :
                     // InternalQVTcore.g:3715:5: otherlv_10= '{' otherlv_11= '}'
                     {
-                    otherlv_10=(Token)match(input,22,FollowSets000.FOLLOW_18); if (state.failed) return current;
+                    otherlv_10=(Token)match(input,17,FollowSets000.FOLLOW_10); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_10, grammarAccess.getParameterCSAccess().getLeftCurlyBracketKeyword_3_0());
                           
                     }
-                    otherlv_11=(Token)match(input,24,FollowSets000.FOLLOW_2); if (state.failed) return current;
+                    otherlv_11=(Token)match(input,20,FollowSets000.FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_11, grammarAccess.getParameterCSAccess().getRightCurlyBracketKeyword_3_1());
@@ -11091,7 +11091,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     // InternalQVTcore.g:3745:1: (lv_qualifiers_0_0= 'static' )
                     // InternalQVTcore.g:3746:3: lv_qualifiers_0_0= 'static'
                     {
-                    lv_qualifiers_0_0=(Token)match(input,45,FollowSets000.FOLLOW_76); if (state.failed) return current;
+                    lv_qualifiers_0_0=(Token)match(input,45,FollowSets000.FOLLOW_77); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               newLeafNode(lv_qualifiers_0_0, grammarAccess.getReferenceCSAccess().getQualifiersStaticKeyword_0_0_0_0());
@@ -11125,7 +11125,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                             // InternalQVTcore.g:3760:1: (lv_qualifiers_1_0= 'definition' )
                             // InternalQVTcore.g:3761:3: lv_qualifiers_1_0= 'definition'
                             {
-                            lv_qualifiers_1_0=(Token)match(input,46,FollowSets000.FOLLOW_77); if (state.failed) return current;
+                            lv_qualifiers_1_0=(Token)match(input,46,FollowSets000.FOLLOW_78); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
 
                                       newLeafNode(lv_qualifiers_1_0, grammarAccess.getReferenceCSAccess().getQualifiersDefinitionKeyword_0_0_1_0());
@@ -11166,7 +11166,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     // InternalQVTcore.g:3776:1: (lv_qualifiers_2_0= 'definition' )
                     // InternalQVTcore.g:3777:3: lv_qualifiers_2_0= 'definition'
                     {
-                    lv_qualifiers_2_0=(Token)match(input,46,FollowSets000.FOLLOW_78); if (state.failed) return current;
+                    lv_qualifiers_2_0=(Token)match(input,46,FollowSets000.FOLLOW_79); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               newLeafNode(lv_qualifiers_2_0, grammarAccess.getReferenceCSAccess().getQualifiersDefinitionKeyword_0_1_0_0());
@@ -11200,7 +11200,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                             // InternalQVTcore.g:3791:1: (lv_qualifiers_3_0= 'static' )
                             // InternalQVTcore.g:3792:3: lv_qualifiers_3_0= 'static'
                             {
-                            lv_qualifiers_3_0=(Token)match(input,45,FollowSets000.FOLLOW_77); if (state.failed) return current;
+                            lv_qualifiers_3_0=(Token)match(input,45,FollowSets000.FOLLOW_78); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
 
                                       newLeafNode(lv_qualifiers_3_0, grammarAccess.getReferenceCSAccess().getQualifiersStaticKeyword_0_1_1_0());
@@ -11232,7 +11232,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_4=(Token)match(input,74,FollowSets000.FOLLOW_8); if (state.failed) return current;
+            otherlv_4=(Token)match(input,74,FollowSets000.FOLLOW_5); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_4, grammarAccess.getReferenceCSAccess().getPropertyKeyword_1());
@@ -11249,7 +11249,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getReferenceCSAccess().getNameUnrestrictedNameParserRuleCall_2_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_79);
+            pushFollow(FollowSets000.FOLLOW_80);
             lv_name_5_0=ruleUnrestrictedName();
 
             state._fsp--;
@@ -11263,7 +11263,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                      			current, 
                      			"name",
                       		lv_name_5_0, 
-                      		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.UnrestrictedName");
+                      		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.UnrestrictedName");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -11284,7 +11284,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // InternalQVTcore.g:3827:4: otherlv_6= '#' ( ( ruleUnrestrictedName ) )
                     {
-                    otherlv_6=(Token)match(input,75,FollowSets000.FOLLOW_8); if (state.failed) return current;
+                    otherlv_6=(Token)match(input,75,FollowSets000.FOLLOW_5); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_6, grammarAccess.getReferenceCSAccess().getNumberSignKeyword_3_0());
@@ -11339,14 +11339,14 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             int alt109=2;
             int LA109_0 = input.LA(1);
 
-            if ( (LA109_0==30) ) {
+            if ( (LA109_0==25) ) {
                 alt109=1;
             }
             switch (alt109) {
                 case 1 :
                     // InternalQVTcore.g:3849:6: otherlv_8= ':' ( (lv_ownedType_9_0= ruleTypedMultiplicityRefCS ) )
                     {
-                    otherlv_8=(Token)match(input,30,FollowSets000.FOLLOW_8); if (state.failed) return current;
+                    otherlv_8=(Token)match(input,25,FollowSets000.FOLLOW_18); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_8, grammarAccess.getReferenceCSAccess().getColonKeyword_4_0());
@@ -11404,7 +11404,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // InternalQVTcore.g:3871:6: otherlv_10= '=' ( (lv_default_11_0= RULE_SINGLE_QUOTED_STRING ) )
                     {
-                    otherlv_10=(Token)match(input,38,FollowSets000.FOLLOW_47); if (state.failed) return current;
+                    otherlv_10=(Token)match(input,38,FollowSets000.FOLLOW_48); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_10, grammarAccess.getReferenceCSAccess().getEqualsSignKeyword_5_0());
@@ -11450,7 +11450,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             int alt114=2;
             int LA114_0 = input.LA(1);
 
-            if ( (LA114_0==22) ) {
+            if ( (LA114_0==17) ) {
                 int LA114_1 = input.LA(2);
 
                 if ( (LA114_1==40||(LA114_1>=48 && LA114_1<=49)||(LA114_1>=52 && LA114_1<=62)||(LA114_1>=76 && LA114_1<=79)) ) {
@@ -11461,7 +11461,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // InternalQVTcore.g:3893:6: otherlv_12= '{' ( ( ( (lv_qualifiers_13_0= 'composes' ) ) | ( (lv_qualifiers_14_0= '!composes' ) ) | ( (lv_qualifiers_15_0= 'derived' ) ) | ( (lv_qualifiers_16_0= '!derived' ) ) | ( (lv_qualifiers_17_0= 'ordered' ) ) | ( (lv_qualifiers_18_0= '!ordered' ) ) | ( (lv_qualifiers_19_0= 'readonly' ) ) | ( (lv_qualifiers_20_0= '!readonly' ) ) | ( (lv_qualifiers_21_0= 'resolve' ) ) | ( (lv_qualifiers_22_0= '!resolve' ) ) | ( (lv_qualifiers_23_0= 'transient' ) ) | ( (lv_qualifiers_24_0= '!transient' ) ) | ( (lv_qualifiers_25_0= 'unique' ) ) | ( (lv_qualifiers_26_0= '!unique' ) ) | ( (lv_qualifiers_27_0= 'unsettable' ) ) | ( (lv_qualifiers_28_0= '!unsettable' ) ) | ( (lv_qualifiers_29_0= 'volatile' ) ) | ( (lv_qualifiers_30_0= '!volatile' ) ) ) (otherlv_31= ',' )? )+ otherlv_32= '}'
                     {
-                    otherlv_12=(Token)match(input,22,FollowSets000.FOLLOW_80); if (state.failed) return current;
+                    otherlv_12=(Token)match(input,17,FollowSets000.FOLLOW_81); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_12, grammarAccess.getReferenceCSAccess().getLeftCurlyBracketKeyword_6_0());
@@ -11594,7 +11594,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	            // InternalQVTcore.g:3898:1: (lv_qualifiers_13_0= 'composes' )
                     	            // InternalQVTcore.g:3899:3: lv_qualifiers_13_0= 'composes'
                     	            {
-                    	            lv_qualifiers_13_0=(Token)match(input,76,FollowSets000.FOLLOW_81); if (state.failed) return current;
+                    	            lv_qualifiers_13_0=(Token)match(input,76,FollowSets000.FOLLOW_82); if (state.failed) return current;
                     	            if ( state.backtracking==0 ) {
 
                     	                      newLeafNode(lv_qualifiers_13_0, grammarAccess.getReferenceCSAccess().getQualifiersComposesKeyword_6_1_0_0_0());
@@ -11626,7 +11626,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	            // InternalQVTcore.g:3914:1: (lv_qualifiers_14_0= '!composes' )
                     	            // InternalQVTcore.g:3915:3: lv_qualifiers_14_0= '!composes'
                     	            {
-                    	            lv_qualifiers_14_0=(Token)match(input,77,FollowSets000.FOLLOW_81); if (state.failed) return current;
+                    	            lv_qualifiers_14_0=(Token)match(input,77,FollowSets000.FOLLOW_82); if (state.failed) return current;
                     	            if ( state.backtracking==0 ) {
 
                     	                      newLeafNode(lv_qualifiers_14_0, grammarAccess.getReferenceCSAccess().getQualifiersComposesKeyword_6_1_0_1_0());
@@ -11658,7 +11658,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	            // InternalQVTcore.g:3930:1: (lv_qualifiers_15_0= 'derived' )
                     	            // InternalQVTcore.g:3931:3: lv_qualifiers_15_0= 'derived'
                     	            {
-                    	            lv_qualifiers_15_0=(Token)match(input,48,FollowSets000.FOLLOW_81); if (state.failed) return current;
+                    	            lv_qualifiers_15_0=(Token)match(input,48,FollowSets000.FOLLOW_82); if (state.failed) return current;
                     	            if ( state.backtracking==0 ) {
 
                     	                      newLeafNode(lv_qualifiers_15_0, grammarAccess.getReferenceCSAccess().getQualifiersDerivedKeyword_6_1_0_2_0());
@@ -11690,7 +11690,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	            // InternalQVTcore.g:3946:1: (lv_qualifiers_16_0= '!derived' )
                     	            // InternalQVTcore.g:3947:3: lv_qualifiers_16_0= '!derived'
                     	            {
-                    	            lv_qualifiers_16_0=(Token)match(input,49,FollowSets000.FOLLOW_81); if (state.failed) return current;
+                    	            lv_qualifiers_16_0=(Token)match(input,49,FollowSets000.FOLLOW_82); if (state.failed) return current;
                     	            if ( state.backtracking==0 ) {
 
                     	                      newLeafNode(lv_qualifiers_16_0, grammarAccess.getReferenceCSAccess().getQualifiersDerivedKeyword_6_1_0_3_0());
@@ -11722,7 +11722,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	            // InternalQVTcore.g:3962:1: (lv_qualifiers_17_0= 'ordered' )
                     	            // InternalQVTcore.g:3963:3: lv_qualifiers_17_0= 'ordered'
                     	            {
-                    	            lv_qualifiers_17_0=(Token)match(input,52,FollowSets000.FOLLOW_81); if (state.failed) return current;
+                    	            lv_qualifiers_17_0=(Token)match(input,52,FollowSets000.FOLLOW_82); if (state.failed) return current;
                     	            if ( state.backtracking==0 ) {
 
                     	                      newLeafNode(lv_qualifiers_17_0, grammarAccess.getReferenceCSAccess().getQualifiersOrderedKeyword_6_1_0_4_0());
@@ -11754,7 +11754,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	            // InternalQVTcore.g:3978:1: (lv_qualifiers_18_0= '!ordered' )
                     	            // InternalQVTcore.g:3979:3: lv_qualifiers_18_0= '!ordered'
                     	            {
-                    	            lv_qualifiers_18_0=(Token)match(input,53,FollowSets000.FOLLOW_81); if (state.failed) return current;
+                    	            lv_qualifiers_18_0=(Token)match(input,53,FollowSets000.FOLLOW_82); if (state.failed) return current;
                     	            if ( state.backtracking==0 ) {
 
                     	                      newLeafNode(lv_qualifiers_18_0, grammarAccess.getReferenceCSAccess().getQualifiersOrderedKeyword_6_1_0_5_0());
@@ -11786,7 +11786,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	            // InternalQVTcore.g:3994:1: (lv_qualifiers_19_0= 'readonly' )
                     	            // InternalQVTcore.g:3995:3: lv_qualifiers_19_0= 'readonly'
                     	            {
-                    	            lv_qualifiers_19_0=(Token)match(input,54,FollowSets000.FOLLOW_81); if (state.failed) return current;
+                    	            lv_qualifiers_19_0=(Token)match(input,54,FollowSets000.FOLLOW_82); if (state.failed) return current;
                     	            if ( state.backtracking==0 ) {
 
                     	                      newLeafNode(lv_qualifiers_19_0, grammarAccess.getReferenceCSAccess().getQualifiersReadonlyKeyword_6_1_0_6_0());
@@ -11818,7 +11818,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	            // InternalQVTcore.g:4010:1: (lv_qualifiers_20_0= '!readonly' )
                     	            // InternalQVTcore.g:4011:3: lv_qualifiers_20_0= '!readonly'
                     	            {
-                    	            lv_qualifiers_20_0=(Token)match(input,55,FollowSets000.FOLLOW_81); if (state.failed) return current;
+                    	            lv_qualifiers_20_0=(Token)match(input,55,FollowSets000.FOLLOW_82); if (state.failed) return current;
                     	            if ( state.backtracking==0 ) {
 
                     	                      newLeafNode(lv_qualifiers_20_0, grammarAccess.getReferenceCSAccess().getQualifiersReadonlyKeyword_6_1_0_7_0());
@@ -11850,7 +11850,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	            // InternalQVTcore.g:4026:1: (lv_qualifiers_21_0= 'resolve' )
                     	            // InternalQVTcore.g:4027:3: lv_qualifiers_21_0= 'resolve'
                     	            {
-                    	            lv_qualifiers_21_0=(Token)match(input,78,FollowSets000.FOLLOW_81); if (state.failed) return current;
+                    	            lv_qualifiers_21_0=(Token)match(input,78,FollowSets000.FOLLOW_82); if (state.failed) return current;
                     	            if ( state.backtracking==0 ) {
 
                     	                      newLeafNode(lv_qualifiers_21_0, grammarAccess.getReferenceCSAccess().getQualifiersResolveKeyword_6_1_0_8_0());
@@ -11882,7 +11882,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	            // InternalQVTcore.g:4042:1: (lv_qualifiers_22_0= '!resolve' )
                     	            // InternalQVTcore.g:4043:3: lv_qualifiers_22_0= '!resolve'
                     	            {
-                    	            lv_qualifiers_22_0=(Token)match(input,79,FollowSets000.FOLLOW_81); if (state.failed) return current;
+                    	            lv_qualifiers_22_0=(Token)match(input,79,FollowSets000.FOLLOW_82); if (state.failed) return current;
                     	            if ( state.backtracking==0 ) {
 
                     	                      newLeafNode(lv_qualifiers_22_0, grammarAccess.getReferenceCSAccess().getQualifiersResolveKeyword_6_1_0_9_0());
@@ -11914,7 +11914,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	            // InternalQVTcore.g:4058:1: (lv_qualifiers_23_0= 'transient' )
                     	            // InternalQVTcore.g:4059:3: lv_qualifiers_23_0= 'transient'
                     	            {
-                    	            lv_qualifiers_23_0=(Token)match(input,40,FollowSets000.FOLLOW_81); if (state.failed) return current;
+                    	            lv_qualifiers_23_0=(Token)match(input,40,FollowSets000.FOLLOW_82); if (state.failed) return current;
                     	            if ( state.backtracking==0 ) {
 
                     	                      newLeafNode(lv_qualifiers_23_0, grammarAccess.getReferenceCSAccess().getQualifiersTransientKeyword_6_1_0_10_0());
@@ -11946,7 +11946,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	            // InternalQVTcore.g:4074:1: (lv_qualifiers_24_0= '!transient' )
                     	            // InternalQVTcore.g:4075:3: lv_qualifiers_24_0= '!transient'
                     	            {
-                    	            lv_qualifiers_24_0=(Token)match(input,56,FollowSets000.FOLLOW_81); if (state.failed) return current;
+                    	            lv_qualifiers_24_0=(Token)match(input,56,FollowSets000.FOLLOW_82); if (state.failed) return current;
                     	            if ( state.backtracking==0 ) {
 
                     	                      newLeafNode(lv_qualifiers_24_0, grammarAccess.getReferenceCSAccess().getQualifiersTransientKeyword_6_1_0_11_0());
@@ -11978,7 +11978,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	            // InternalQVTcore.g:4090:1: (lv_qualifiers_25_0= 'unique' )
                     	            // InternalQVTcore.g:4091:3: lv_qualifiers_25_0= 'unique'
                     	            {
-                    	            lv_qualifiers_25_0=(Token)match(input,57,FollowSets000.FOLLOW_81); if (state.failed) return current;
+                    	            lv_qualifiers_25_0=(Token)match(input,57,FollowSets000.FOLLOW_82); if (state.failed) return current;
                     	            if ( state.backtracking==0 ) {
 
                     	                      newLeafNode(lv_qualifiers_25_0, grammarAccess.getReferenceCSAccess().getQualifiersUniqueKeyword_6_1_0_12_0());
@@ -12010,7 +12010,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	            // InternalQVTcore.g:4106:1: (lv_qualifiers_26_0= '!unique' )
                     	            // InternalQVTcore.g:4107:3: lv_qualifiers_26_0= '!unique'
                     	            {
-                    	            lv_qualifiers_26_0=(Token)match(input,58,FollowSets000.FOLLOW_81); if (state.failed) return current;
+                    	            lv_qualifiers_26_0=(Token)match(input,58,FollowSets000.FOLLOW_82); if (state.failed) return current;
                     	            if ( state.backtracking==0 ) {
 
                     	                      newLeafNode(lv_qualifiers_26_0, grammarAccess.getReferenceCSAccess().getQualifiersUniqueKeyword_6_1_0_13_0());
@@ -12042,7 +12042,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	            // InternalQVTcore.g:4122:1: (lv_qualifiers_27_0= 'unsettable' )
                     	            // InternalQVTcore.g:4123:3: lv_qualifiers_27_0= 'unsettable'
                     	            {
-                    	            lv_qualifiers_27_0=(Token)match(input,59,FollowSets000.FOLLOW_81); if (state.failed) return current;
+                    	            lv_qualifiers_27_0=(Token)match(input,59,FollowSets000.FOLLOW_82); if (state.failed) return current;
                     	            if ( state.backtracking==0 ) {
 
                     	                      newLeafNode(lv_qualifiers_27_0, grammarAccess.getReferenceCSAccess().getQualifiersUnsettableKeyword_6_1_0_14_0());
@@ -12074,7 +12074,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	            // InternalQVTcore.g:4138:1: (lv_qualifiers_28_0= '!unsettable' )
                     	            // InternalQVTcore.g:4139:3: lv_qualifiers_28_0= '!unsettable'
                     	            {
-                    	            lv_qualifiers_28_0=(Token)match(input,60,FollowSets000.FOLLOW_81); if (state.failed) return current;
+                    	            lv_qualifiers_28_0=(Token)match(input,60,FollowSets000.FOLLOW_82); if (state.failed) return current;
                     	            if ( state.backtracking==0 ) {
 
                     	                      newLeafNode(lv_qualifiers_28_0, grammarAccess.getReferenceCSAccess().getQualifiersUnsettableKeyword_6_1_0_15_0());
@@ -12106,7 +12106,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	            // InternalQVTcore.g:4154:1: (lv_qualifiers_29_0= 'volatile' )
                     	            // InternalQVTcore.g:4155:3: lv_qualifiers_29_0= 'volatile'
                     	            {
-                    	            lv_qualifiers_29_0=(Token)match(input,61,FollowSets000.FOLLOW_81); if (state.failed) return current;
+                    	            lv_qualifiers_29_0=(Token)match(input,61,FollowSets000.FOLLOW_82); if (state.failed) return current;
                     	            if ( state.backtracking==0 ) {
 
                     	                      newLeafNode(lv_qualifiers_29_0, grammarAccess.getReferenceCSAccess().getQualifiersVolatileKeyword_6_1_0_16_0());
@@ -12138,7 +12138,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	            // InternalQVTcore.g:4170:1: (lv_qualifiers_30_0= '!volatile' )
                     	            // InternalQVTcore.g:4171:3: lv_qualifiers_30_0= '!volatile'
                     	            {
-                    	            lv_qualifiers_30_0=(Token)match(input,62,FollowSets000.FOLLOW_81); if (state.failed) return current;
+                    	            lv_qualifiers_30_0=(Token)match(input,62,FollowSets000.FOLLOW_82); if (state.failed) return current;
                     	            if ( state.backtracking==0 ) {
 
                     	                      newLeafNode(lv_qualifiers_30_0, grammarAccess.getReferenceCSAccess().getQualifiersVolatileKeyword_6_1_0_17_0());
@@ -12168,14 +12168,14 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	    int alt112=2;
                     	    int LA112_0 = input.LA(1);
 
-                    	    if ( (LA112_0==21) ) {
+                    	    if ( (LA112_0==18) ) {
                     	        alt112=1;
                     	    }
                     	    switch (alt112) {
                     	        case 1 :
                     	            // InternalQVTcore.g:4184:5: otherlv_31= ','
                     	            {
-                    	            otherlv_31=(Token)match(input,21,FollowSets000.FOLLOW_82); if (state.failed) return current;
+                    	            otherlv_31=(Token)match(input,18,FollowSets000.FOLLOW_83); if (state.failed) return current;
                     	            if ( state.backtracking==0 ) {
 
                     	                  	newLeafNode(otherlv_31, grammarAccess.getReferenceCSAccess().getCommaKeyword_6_1_1());
@@ -12201,7 +12201,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                         cnt113++;
                     } while (true);
 
-                    otherlv_32=(Token)match(input,24,FollowSets000.FOLLOW_34); if (state.failed) return current;
+                    otherlv_32=(Token)match(input,20,FollowSets000.FOLLOW_34); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_32, grammarAccess.getReferenceCSAccess().getRightCurlyBracketKeyword_6_2());
@@ -12217,10 +12217,10 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             int alt120=2;
             int LA120_0 = input.LA(1);
 
-            if ( (LA120_0==22) ) {
+            if ( (LA120_0==17) ) {
                 alt120=1;
             }
-            else if ( (LA120_0==34) ) {
+            else if ( (LA120_0==29) ) {
                 alt120=2;
             }
             else {
@@ -12237,7 +12237,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     // InternalQVTcore.g:4192:4: (otherlv_33= '{' ( (otherlv_34= 'initial' ( ruleUnrestrictedName )? otherlv_36= ':' ( (lv_ownedDefaultExpressions_37_0= ruleSpecificationCS ) )? otherlv_38= ';' ) | (otherlv_39= 'derivation' ( ruleUnrestrictedName )? otherlv_41= ':' ( (lv_ownedDefaultExpressions_42_0= ruleSpecificationCS ) )? otherlv_43= ';' ) )* otherlv_44= '}' )
                     // InternalQVTcore.g:4192:6: otherlv_33= '{' ( (otherlv_34= 'initial' ( ruleUnrestrictedName )? otherlv_36= ':' ( (lv_ownedDefaultExpressions_37_0= ruleSpecificationCS ) )? otherlv_38= ';' ) | (otherlv_39= 'derivation' ( ruleUnrestrictedName )? otherlv_41= ':' ( (lv_ownedDefaultExpressions_42_0= ruleSpecificationCS ) )? otherlv_43= ';' ) )* otherlv_44= '}'
                     {
-                    otherlv_33=(Token)match(input,22,FollowSets000.FOLLOW_51); if (state.failed) return current;
+                    otherlv_33=(Token)match(input,17,FollowSets000.FOLLOW_52); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_33, grammarAccess.getReferenceCSAccess().getLeftCurlyBracketKeyword_7_0_0());
@@ -12264,7 +12264,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	    // InternalQVTcore.g:4196:2: (otherlv_34= 'initial' ( ruleUnrestrictedName )? otherlv_36= ':' ( (lv_ownedDefaultExpressions_37_0= ruleSpecificationCS ) )? otherlv_38= ';' )
                     	    // InternalQVTcore.g:4196:4: otherlv_34= 'initial' ( ruleUnrestrictedName )? otherlv_36= ':' ( (lv_ownedDefaultExpressions_37_0= ruleSpecificationCS ) )? otherlv_38= ';'
                     	    {
-                    	    otherlv_34=(Token)match(input,63,FollowSets000.FOLLOW_52); if (state.failed) return current;
+                    	    otherlv_34=(Token)match(input,63,FollowSets000.FOLLOW_53); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
 
                     	          	newLeafNode(otherlv_34, grammarAccess.getReferenceCSAccess().getInitialKeyword_7_0_1_0_0());
@@ -12274,7 +12274,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	    int alt115=2;
                     	    int LA115_0 = input.LA(1);
 
-                    	    if ( ((LA115_0>=RULE_SIMPLE_ID && LA115_0<=RULE_ESCAPED_ID)||LA115_0==18||LA115_0==20||(LA115_0>=26 && LA115_0<=27)||LA115_0==31||(LA115_0>=35 && LA115_0<=36)||(LA115_0>=41 && LA115_0<=44)) ) {
+                    	    if ( ((LA115_0>=RULE_SIMPLE_ID && LA115_0<=RULE_ESCAPED_ID)||(LA115_0>=21 && LA115_0<=22)||LA115_0==26||LA115_0==31||LA115_0==33||(LA115_0>=35 && LA115_0<=36)||(LA115_0>=41 && LA115_0<=44)) ) {
                     	        alt115=1;
                     	    }
                     	    switch (alt115) {
@@ -12291,7 +12291,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	                      newCompositeNode(grammarAccess.getReferenceCSAccess().getUnrestrictedNameParserRuleCall_7_0_1_0_1()); 
                     	                  
                     	            }
-                    	            pushFollow(FollowSets000.FOLLOW_25);
+                    	            pushFollow(FollowSets000.FOLLOW_17);
                     	            ruleUnrestrictedName();
 
                     	            state._fsp--;
@@ -12307,7 +12307,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
                     	    }
 
-                    	    otherlv_36=(Token)match(input,30,FollowSets000.FOLLOW_53); if (state.failed) return current;
+                    	    otherlv_36=(Token)match(input,25,FollowSets000.FOLLOW_54); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
 
                     	          	newLeafNode(otherlv_36, grammarAccess.getReferenceCSAccess().getColonKeyword_7_0_1_0_2());
@@ -12317,7 +12317,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	    int alt116=2;
                     	    int LA116_0 = input.LA(1);
 
-                    	    if ( ((LA116_0>=RULE_SINGLE_QUOTED_STRING && LA116_0<=RULE_ESCAPED_ID)||LA116_0==18||LA116_0==20||(LA116_0>=26 && LA116_0<=28)||LA116_0==31||LA116_0==33||(LA116_0>=35 && LA116_0<=36)||(LA116_0>=41 && LA116_0<=44)||(LA116_0>=84 && LA116_0<=85)||(LA116_0>=101 && LA116_0<=115)||LA116_0==118||(LA116_0>=120 && LA116_0<=123)||LA116_0==128||(LA116_0>=133 && LA116_0<=134)) ) {
+                    	    if ( ((LA116_0>=RULE_SINGLE_QUOTED_STRING && LA116_0<=RULE_ESCAPED_ID)||(LA116_0>=21 && LA116_0<=23)||LA116_0==26||LA116_0==28||LA116_0==31||LA116_0==33||(LA116_0>=35 && LA116_0<=36)||(LA116_0>=41 && LA116_0<=44)||(LA116_0>=84 && LA116_0<=85)||(LA116_0>=101 && LA116_0<=115)||LA116_0==118||(LA116_0>=120 && LA116_0<=123)||LA116_0==128||(LA116_0>=133 && LA116_0<=134)) ) {
                     	        alt116=1;
                     	    }
                     	    switch (alt116) {
@@ -12332,7 +12332,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	              	        newCompositeNode(grammarAccess.getReferenceCSAccess().getOwnedDefaultExpressionsSpecificationCSParserRuleCall_7_0_1_0_3_0()); 
                     	              	    
                     	            }
-                    	            pushFollow(FollowSets000.FOLLOW_30);
+                    	            pushFollow(FollowSets000.FOLLOW_22);
                     	            lv_ownedDefaultExpressions_37_0=ruleSpecificationCS();
 
                     	            state._fsp--;
@@ -12359,7 +12359,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
                     	    }
 
-                    	    otherlv_38=(Token)match(input,34,FollowSets000.FOLLOW_51); if (state.failed) return current;
+                    	    otherlv_38=(Token)match(input,29,FollowSets000.FOLLOW_52); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
 
                     	          	newLeafNode(otherlv_38, grammarAccess.getReferenceCSAccess().getSemicolonKeyword_7_0_1_0_4());
@@ -12377,7 +12377,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	    // InternalQVTcore.g:4238:6: (otherlv_39= 'derivation' ( ruleUnrestrictedName )? otherlv_41= ':' ( (lv_ownedDefaultExpressions_42_0= ruleSpecificationCS ) )? otherlv_43= ';' )
                     	    // InternalQVTcore.g:4238:8: otherlv_39= 'derivation' ( ruleUnrestrictedName )? otherlv_41= ':' ( (lv_ownedDefaultExpressions_42_0= ruleSpecificationCS ) )? otherlv_43= ';'
                     	    {
-                    	    otherlv_39=(Token)match(input,64,FollowSets000.FOLLOW_52); if (state.failed) return current;
+                    	    otherlv_39=(Token)match(input,64,FollowSets000.FOLLOW_53); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
 
                     	          	newLeafNode(otherlv_39, grammarAccess.getReferenceCSAccess().getDerivationKeyword_7_0_1_1_0());
@@ -12387,7 +12387,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	    int alt117=2;
                     	    int LA117_0 = input.LA(1);
 
-                    	    if ( ((LA117_0>=RULE_SIMPLE_ID && LA117_0<=RULE_ESCAPED_ID)||LA117_0==18||LA117_0==20||(LA117_0>=26 && LA117_0<=27)||LA117_0==31||(LA117_0>=35 && LA117_0<=36)||(LA117_0>=41 && LA117_0<=44)) ) {
+                    	    if ( ((LA117_0>=RULE_SIMPLE_ID && LA117_0<=RULE_ESCAPED_ID)||(LA117_0>=21 && LA117_0<=22)||LA117_0==26||LA117_0==31||LA117_0==33||(LA117_0>=35 && LA117_0<=36)||(LA117_0>=41 && LA117_0<=44)) ) {
                     	        alt117=1;
                     	    }
                     	    switch (alt117) {
@@ -12404,7 +12404,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	                      newCompositeNode(grammarAccess.getReferenceCSAccess().getUnrestrictedNameParserRuleCall_7_0_1_1_1()); 
                     	                  
                     	            }
-                    	            pushFollow(FollowSets000.FOLLOW_25);
+                    	            pushFollow(FollowSets000.FOLLOW_17);
                     	            ruleUnrestrictedName();
 
                     	            state._fsp--;
@@ -12420,7 +12420,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
                     	    }
 
-                    	    otherlv_41=(Token)match(input,30,FollowSets000.FOLLOW_53); if (state.failed) return current;
+                    	    otherlv_41=(Token)match(input,25,FollowSets000.FOLLOW_54); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
 
                     	          	newLeafNode(otherlv_41, grammarAccess.getReferenceCSAccess().getColonKeyword_7_0_1_1_2());
@@ -12430,7 +12430,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	    int alt118=2;
                     	    int LA118_0 = input.LA(1);
 
-                    	    if ( ((LA118_0>=RULE_SINGLE_QUOTED_STRING && LA118_0<=RULE_ESCAPED_ID)||LA118_0==18||LA118_0==20||(LA118_0>=26 && LA118_0<=28)||LA118_0==31||LA118_0==33||(LA118_0>=35 && LA118_0<=36)||(LA118_0>=41 && LA118_0<=44)||(LA118_0>=84 && LA118_0<=85)||(LA118_0>=101 && LA118_0<=115)||LA118_0==118||(LA118_0>=120 && LA118_0<=123)||LA118_0==128||(LA118_0>=133 && LA118_0<=134)) ) {
+                    	    if ( ((LA118_0>=RULE_SINGLE_QUOTED_STRING && LA118_0<=RULE_ESCAPED_ID)||(LA118_0>=21 && LA118_0<=23)||LA118_0==26||LA118_0==28||LA118_0==31||LA118_0==33||(LA118_0>=35 && LA118_0<=36)||(LA118_0>=41 && LA118_0<=44)||(LA118_0>=84 && LA118_0<=85)||(LA118_0>=101 && LA118_0<=115)||LA118_0==118||(LA118_0>=120 && LA118_0<=123)||LA118_0==128||(LA118_0>=133 && LA118_0<=134)) ) {
                     	        alt118=1;
                     	    }
                     	    switch (alt118) {
@@ -12445,7 +12445,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	              	        newCompositeNode(grammarAccess.getReferenceCSAccess().getOwnedDefaultExpressionsSpecificationCSParserRuleCall_7_0_1_1_3_0()); 
                     	              	    
                     	            }
-                    	            pushFollow(FollowSets000.FOLLOW_30);
+                    	            pushFollow(FollowSets000.FOLLOW_22);
                     	            lv_ownedDefaultExpressions_42_0=ruleSpecificationCS();
 
                     	            state._fsp--;
@@ -12472,7 +12472,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
                     	    }
 
-                    	    otherlv_43=(Token)match(input,34,FollowSets000.FOLLOW_51); if (state.failed) return current;
+                    	    otherlv_43=(Token)match(input,29,FollowSets000.FOLLOW_52); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
 
                     	          	newLeafNode(otherlv_43, grammarAccess.getReferenceCSAccess().getSemicolonKeyword_7_0_1_1_4());
@@ -12490,7 +12490,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                         }
                     } while (true);
 
-                    otherlv_44=(Token)match(input,24,FollowSets000.FOLLOW_2); if (state.failed) return current;
+                    otherlv_44=(Token)match(input,20,FollowSets000.FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_44, grammarAccess.getReferenceCSAccess().getRightCurlyBracketKeyword_7_0_2());
@@ -12505,7 +12505,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                 case 2 :
                     // InternalQVTcore.g:4284:7: otherlv_45= ';'
                     {
-                    otherlv_45=(Token)match(input,34,FollowSets000.FOLLOW_2); if (state.failed) return current;
+                    otherlv_45=(Token)match(input,29,FollowSets000.FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_45, grammarAccess.getReferenceCSAccess().getSemicolonKeyword_7_1());
@@ -12598,7 +12598,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             int alt121=2;
             int LA121_0 = input.LA(1);
 
-            if ( (LA121_0==RULE_SINGLE_QUOTED_STRING||(LA121_0>=RULE_INT && LA121_0<=RULE_ESCAPED_ID)||LA121_0==18||LA121_0==20||(LA121_0>=26 && LA121_0<=28)||LA121_0==31||LA121_0==33||(LA121_0>=35 && LA121_0<=36)||(LA121_0>=41 && LA121_0<=44)||(LA121_0>=84 && LA121_0<=85)||(LA121_0>=101 && LA121_0<=115)||LA121_0==118||(LA121_0>=120 && LA121_0<=123)||LA121_0==128||(LA121_0>=133 && LA121_0<=134)) ) {
+            if ( (LA121_0==RULE_SINGLE_QUOTED_STRING||(LA121_0>=RULE_INT && LA121_0<=RULE_ESCAPED_ID)||(LA121_0>=21 && LA121_0<=23)||LA121_0==26||LA121_0==28||LA121_0==31||LA121_0==33||(LA121_0>=35 && LA121_0<=36)||(LA121_0>=41 && LA121_0<=44)||(LA121_0>=84 && LA121_0<=85)||(LA121_0>=101 && LA121_0<=115)||LA121_0==118||(LA121_0>=120 && LA121_0<=123)||LA121_0==128||(LA121_0>=133 && LA121_0<=134)) ) {
                 alt121=1;
             }
             else if ( (LA121_0==RULE_UNQUOTED_STRING) ) {
@@ -12804,7 +12804,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     // InternalQVTcore.g:4368:1: (lv_isAbstract_0_0= 'abstract' )
                     // InternalQVTcore.g:4369:3: lv_isAbstract_0_0= 'abstract'
                     {
-                    lv_isAbstract_0_0=(Token)match(input,80,FollowSets000.FOLLOW_83); if (state.failed) return current;
+                    lv_isAbstract_0_0=(Token)match(input,80,FollowSets000.FOLLOW_84); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               newLeafNode(lv_isAbstract_0_0, grammarAccess.getStructuredClassCSAccess().getIsAbstractAbstractKeyword_0_0());
@@ -12827,7 +12827,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,81,FollowSets000.FOLLOW_8); if (state.failed) return current;
+            otherlv_1=(Token)match(input,81,FollowSets000.FOLLOW_5); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_1, grammarAccess.getStructuredClassCSAccess().getClassKeyword_1());
@@ -12844,7 +12844,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getStructuredClassCSAccess().getNameUnrestrictedNameParserRuleCall_2_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_84);
+            pushFollow(FollowSets000.FOLLOW_85);
             lv_name_2_0=ruleUnrestrictedName();
 
             state._fsp--;
@@ -12858,7 +12858,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                      			current, 
                      			"name",
                       		lv_name_2_0, 
-                      		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.UnrestrictedName");
+                      		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.UnrestrictedName");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -12872,7 +12872,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             int alt123=2;
             int LA123_0 = input.LA(1);
 
-            if ( (LA123_0==28) ) {
+            if ( (LA123_0==23) ) {
                 alt123=1;
             }
             switch (alt123) {
@@ -12887,7 +12887,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                       	        newCompositeNode(grammarAccess.getStructuredClassCSAccess().getOwnedSignatureTemplateSignatureCSParserRuleCall_3_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_85);
+                    pushFollow(FollowSets000.FOLLOW_86);
                     lv_ownedSignature_3_0=ruleTemplateSignatureCS();
 
                     state._fsp--;
@@ -12925,7 +12925,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // InternalQVTcore.g:4422:5: otherlv_4= 'extends' ( (lv_ownedSuperTypes_5_0= ruleTypedRefCS ) ) (otherlv_6= ',' ( (lv_ownedSuperTypes_7_0= ruleTypedRefCS ) ) )*
                     {
-                    otherlv_4=(Token)match(input,82,FollowSets000.FOLLOW_8); if (state.failed) return current;
+                    otherlv_4=(Token)match(input,82,FollowSets000.FOLLOW_18); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_4, grammarAccess.getStructuredClassCSAccess().getExtendsKeyword_4_0());
@@ -12942,7 +12942,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                       	        newCompositeNode(grammarAccess.getStructuredClassCSAccess().getOwnedSuperTypesTypedRefCSParserRuleCall_4_1_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_86);
+                    pushFollow(FollowSets000.FOLLOW_87);
                     lv_ownedSuperTypes_5_0=ruleTypedRefCS();
 
                     state._fsp--;
@@ -12972,7 +12972,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                         int alt124=2;
                         int LA124_0 = input.LA(1);
 
-                        if ( (LA124_0==21) ) {
+                        if ( (LA124_0==18) ) {
                             alt124=1;
                         }
 
@@ -12981,7 +12981,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	case 1 :
                     	    // InternalQVTcore.g:4444:4: otherlv_6= ',' ( (lv_ownedSuperTypes_7_0= ruleTypedRefCS ) )
                     	    {
-                    	    otherlv_6=(Token)match(input,21,FollowSets000.FOLLOW_8); if (state.failed) return current;
+                    	    otherlv_6=(Token)match(input,18,FollowSets000.FOLLOW_18); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
 
                     	          	newLeafNode(otherlv_6, grammarAccess.getStructuredClassCSAccess().getCommaKeyword_4_2_0());
@@ -12998,7 +12998,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	      	        newCompositeNode(grammarAccess.getStructuredClassCSAccess().getOwnedSuperTypesTypedRefCSParserRuleCall_4_2_1_0()); 
                     	      	    
                     	    }
-                    	    pushFollow(FollowSets000.FOLLOW_86);
+                    	    pushFollow(FollowSets000.FOLLOW_87);
                     	    lv_ownedSuperTypes_7_0=ruleTypedRefCS();
 
                     	    state._fsp--;
@@ -13041,14 +13041,14 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             int alt126=2;
             int LA126_0 = input.LA(1);
 
-            if ( (LA126_0==30) ) {
+            if ( (LA126_0==25) ) {
                 alt126=1;
             }
             switch (alt126) {
                 case 1 :
                     // InternalQVTcore.g:4466:8: otherlv_8= ':' ( (lv_instanceClassName_9_0= RULE_SINGLE_QUOTED_STRING ) )
                     {
-                    otherlv_8=(Token)match(input,30,FollowSets000.FOLLOW_47); if (state.failed) return current;
+                    otherlv_8=(Token)match(input,25,FollowSets000.FOLLOW_48); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_8, grammarAccess.getStructuredClassCSAccess().getColonKeyword_5_0());
@@ -13094,16 +13094,16 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             int alt128=2;
             int LA128_0 = input.LA(1);
 
-            if ( (LA128_0==22) ) {
+            if ( (LA128_0==17) ) {
                 int LA128_1 = input.LA(2);
 
                 if ( (LA128_1==83) ) {
                     alt128=1;
                 }
-                else if ( (LA128_1==24) ) {
+                else if ( (LA128_1==20) ) {
                     int LA128_4 = input.LA(3);
 
-                    if ( (LA128_4==22||LA128_4==34) ) {
+                    if ( (LA128_4==17||LA128_4==29) ) {
                         alt128=1;
                     }
                 }
@@ -13112,7 +13112,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // InternalQVTcore.g:4488:6: otherlv_10= '{' ( (lv_isInterface_11_0= 'interface' ) )? otherlv_12= '}'
                     {
-                    otherlv_10=(Token)match(input,22,FollowSets000.FOLLOW_87); if (state.failed) return current;
+                    otherlv_10=(Token)match(input,17,FollowSets000.FOLLOW_88); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_10, grammarAccess.getStructuredClassCSAccess().getLeftCurlyBracketKeyword_6_0());
@@ -13132,7 +13132,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                             // InternalQVTcore.g:4493:1: (lv_isInterface_11_0= 'interface' )
                             // InternalQVTcore.g:4494:3: lv_isInterface_11_0= 'interface'
                             {
-                            lv_isInterface_11_0=(Token)match(input,83,FollowSets000.FOLLOW_18); if (state.failed) return current;
+                            lv_isInterface_11_0=(Token)match(input,83,FollowSets000.FOLLOW_10); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
 
                                       newLeafNode(lv_isInterface_11_0, grammarAccess.getStructuredClassCSAccess().getIsInterfaceInterfaceKeyword_6_1_0());
@@ -13155,7 +13155,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    otherlv_12=(Token)match(input,24,FollowSets000.FOLLOW_34); if (state.failed) return current;
+                    otherlv_12=(Token)match(input,20,FollowSets000.FOLLOW_34); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_12, grammarAccess.getStructuredClassCSAccess().getRightCurlyBracketKeyword_6_2());
@@ -13171,10 +13171,10 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             int alt130=2;
             int LA130_0 = input.LA(1);
 
-            if ( (LA130_0==22) ) {
+            if ( (LA130_0==17) ) {
                 alt130=1;
             }
-            else if ( (LA130_0==34) ) {
+            else if ( (LA130_0==29) ) {
                 alt130=2;
             }
             else {
@@ -13191,7 +13191,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     // InternalQVTcore.g:4511:4: (otherlv_13= '{' ( ( (lv_ownedOperations_14_0= ruleOperationCS ) ) | ( (lv_ownedProperties_15_0= ruleStructuralFeatureCS ) ) )* otherlv_16= '}' )
                     // InternalQVTcore.g:4511:6: otherlv_13= '{' ( ( (lv_ownedOperations_14_0= ruleOperationCS ) ) | ( (lv_ownedProperties_15_0= ruleStructuralFeatureCS ) ) )* otherlv_16= '}'
                     {
-                    otherlv_13=(Token)match(input,22,FollowSets000.FOLLOW_88); if (state.failed) return current;
+                    otherlv_13=(Token)match(input,17,FollowSets000.FOLLOW_89); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_13, grammarAccess.getStructuredClassCSAccess().getLeftCurlyBracketKeyword_7_0_0());
@@ -13297,7 +13297,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	      	        newCompositeNode(grammarAccess.getStructuredClassCSAccess().getOwnedOperationsOperationCSParserRuleCall_7_0_1_0_0()); 
                     	      	    
                     	    }
-                    	    pushFollow(FollowSets000.FOLLOW_88);
+                    	    pushFollow(FollowSets000.FOLLOW_89);
                     	    lv_ownedOperations_14_0=ruleOperationCS();
 
                     	    state._fsp--;
@@ -13338,7 +13338,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	      	        newCompositeNode(grammarAccess.getStructuredClassCSAccess().getOwnedPropertiesStructuralFeatureCSParserRuleCall_7_0_1_1_0()); 
                     	      	    
                     	    }
-                    	    pushFollow(FollowSets000.FOLLOW_88);
+                    	    pushFollow(FollowSets000.FOLLOW_89);
                     	    lv_ownedProperties_15_0=ruleStructuralFeatureCS();
 
                     	    state._fsp--;
@@ -13371,7 +13371,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                         }
                     } while (true);
 
-                    otherlv_16=(Token)match(input,24,FollowSets000.FOLLOW_2); if (state.failed) return current;
+                    otherlv_16=(Token)match(input,20,FollowSets000.FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_16, grammarAccess.getStructuredClassCSAccess().getRightCurlyBracketKeyword_7_0_2());
@@ -13386,7 +13386,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                 case 2 :
                     // InternalQVTcore.g:4557:7: otherlv_17= ';'
                     {
-                    otherlv_17=(Token)match(input,34,FollowSets000.FOLLOW_2); if (state.failed) return current;
+                    otherlv_17=(Token)match(input,29,FollowSets000.FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_17, grammarAccess.getStructuredClassCSAccess().getSemicolonKeyword_7_1());
@@ -13489,7 +13489,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                       newCompositeNode(grammarAccess.getTypedMultiplicityRefCSAccess().getTypedRefCSParserRuleCall_0()); 
                   
             }
-            pushFollow(FollowSets000.FOLLOW_89);
+            pushFollow(FollowSets000.FOLLOW_90);
             this_TypedRefCS_0=ruleTypedRefCS();
 
             state._fsp--;
@@ -13967,7 +13967,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // InternalQVTcore.g:4712:2: kw= '-'
                     {
-                    kw=(Token)match(input,84,FollowSets000.FOLLOW_90); if (state.failed) return current;
+                    kw=(Token)match(input,84,FollowSets000.FOLLOW_91); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -14188,7 +14188,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             // InternalQVTcore.g:4783:1: (kw= '*' | kw= '/' | kw= '+' | kw= '-' | kw= '>' | kw= '<' | kw= '>=' | kw= '<=' | kw= '=' | kw= '<>' | kw= 'and' | kw= 'or' | kw= 'xor' | kw= 'implies' )
             int alt135=14;
             switch ( input.LA(1) ) {
-            case 33:
+            case 28:
                 {
                 alt135=1;
                 }
@@ -14270,7 +14270,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // InternalQVTcore.g:4784:2: kw= '*'
                     {
-                    kw=(Token)match(input,33,FollowSets000.FOLLOW_2); if (state.failed) return current;
+                    kw=(Token)match(input,28,FollowSets000.FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -14690,7 +14690,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             int alt137=2;
             int LA137_0 = input.LA(1);
 
-            if ( (LA137_0==33||LA137_0==38||LA137_0==84||(LA137_0>=86 && LA137_0<=96)) ) {
+            if ( (LA137_0==28||LA137_0==38||LA137_0==84||(LA137_0>=86 && LA137_0<=96)) ) {
                 alt137=1;
             }
             else if ( ((LA137_0>=97 && LA137_0<=100)) ) {
@@ -15214,11 +15214,11 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             switch ( input.LA(1) ) {
             case RULE_SIMPLE_ID:
             case RULE_ESCAPED_ID:
-            case 18:
-            case 20:
+            case 21:
+            case 22:
             case 26:
-            case 27:
             case 31:
+            case 33:
             case 35:
             case 36:
             case 41:
@@ -15559,7 +15559,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getURIPathNameCSAccess().getOwnedPathElementsURIFirstPathElementCSParserRuleCall_0_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_91);
+            pushFollow(FollowSets000.FOLLOW_92);
             lv_ownedPathElements_0_0=ruleURIFirstPathElementCS();
 
             state._fsp--;
@@ -15589,10 +15589,10 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                 int alt139=2;
                 int LA139_0 = input.LA(1);
 
-                if ( (LA139_0==32) ) {
+                if ( (LA139_0==27) ) {
                     int LA139_1 = input.LA(2);
 
-                    if ( ((LA139_1>=RULE_SIMPLE_ID && LA139_1<=RULE_ESCAPED_ID)||LA139_1==18||LA139_1==20||(LA139_1>=26 && LA139_1<=27)||LA139_1==31||(LA139_1>=35 && LA139_1<=36)||(LA139_1>=41 && LA139_1<=44)||(LA139_1>=101 && LA139_1<=115)) ) {
+                    if ( ((LA139_1>=RULE_SIMPLE_ID && LA139_1<=RULE_ESCAPED_ID)||(LA139_1>=21 && LA139_1<=22)||LA139_1==26||LA139_1==31||LA139_1==33||(LA139_1>=35 && LA139_1<=36)||(LA139_1>=41 && LA139_1<=44)||(LA139_1>=101 && LA139_1<=115)) ) {
                         alt139=1;
                     }
 
@@ -15604,7 +15604,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             	case 1 :
             	    // InternalQVTcore.g:5241:4: otherlv_1= '::' ( (lv_ownedPathElements_2_0= ruleNextPathElementCS ) )
             	    {
-            	    otherlv_1=(Token)match(input,32,FollowSets000.FOLLOW_26); if (state.failed) return current;
+            	    otherlv_1=(Token)match(input,27,FollowSets000.FOLLOW_41); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	          	newLeafNode(otherlv_1, grammarAccess.getURIPathNameCSAccess().getColonColonKeyword_1_0());
@@ -15621,7 +15621,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             	      	        newCompositeNode(grammarAccess.getURIPathNameCSAccess().getOwnedPathElementsNextPathElementCSParserRuleCall_1_1_0()); 
             	      	    
             	    }
-            	    pushFollow(FollowSets000.FOLLOW_91);
+            	    pushFollow(FollowSets000.FOLLOW_92);
             	    lv_ownedPathElements_2_0=ruleNextPathElementCS();
 
             	    state._fsp--;
@@ -15731,7 +15731,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             int alt140=2;
             int LA140_0 = input.LA(1);
 
-            if ( ((LA140_0>=RULE_SIMPLE_ID && LA140_0<=RULE_ESCAPED_ID)||LA140_0==18||LA140_0==20||(LA140_0>=26 && LA140_0<=27)||LA140_0==31||(LA140_0>=35 && LA140_0<=36)||(LA140_0>=41 && LA140_0<=44)) ) {
+            if ( ((LA140_0>=RULE_SIMPLE_ID && LA140_0<=RULE_ESCAPED_ID)||(LA140_0>=21 && LA140_0<=22)||LA140_0==26||LA140_0==31||LA140_0==33||(LA140_0>=35 && LA140_0<=36)||(LA140_0>=41 && LA140_0<=44)) ) {
                 alt140=1;
             }
             else if ( (LA140_0==RULE_SINGLE_QUOTED_STRING) ) {
@@ -16469,7 +16469,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getCollectionTypeCSAccess().getNameCollectionTypeIdentifierParserRuleCall_0_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_92);
+            pushFollow(FollowSets000.FOLLOW_93);
             lv_name_0_0=ruleCollectionTypeIdentifier();
 
             state._fsp--;
@@ -16497,14 +16497,14 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             int alt143=2;
             int LA143_0 = input.LA(1);
 
-            if ( (LA143_0==28) ) {
+            if ( (LA143_0==23) ) {
                 alt143=1;
             }
             switch (alt143) {
                 case 1 :
                     // InternalQVTcore.g:5539:4: otherlv_1= '(' ( (lv_ownedType_2_0= ruleTypeExpCS ) ) otherlv_3= ')'
                     {
-                    otherlv_1=(Token)match(input,28,FollowSets000.FOLLOW_26); if (state.failed) return current;
+                    otherlv_1=(Token)match(input,23,FollowSets000.FOLLOW_18); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_1, grammarAccess.getCollectionTypeCSAccess().getLeftParenthesisKeyword_1_0());
@@ -16521,7 +16521,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                       	        newCompositeNode(grammarAccess.getCollectionTypeCSAccess().getOwnedTypeTypeExpCSParserRuleCall_1_1_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_24);
+                    pushFollow(FollowSets000.FOLLOW_16);
                     lv_ownedType_2_0=ruleTypeExpCS();
 
                     state._fsp--;
@@ -16545,7 +16545,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    otherlv_3=(Token)match(input,29,FollowSets000.FOLLOW_2); if (state.failed) return current;
+                    otherlv_3=(Token)match(input,24,FollowSets000.FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_3, grammarAccess.getCollectionTypeCSAccess().getRightParenthesisKeyword_1_2());
@@ -16648,7 +16648,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             // InternalQVTcore.g:5587:1: (lv_name_0_0= 'Map' )
             // InternalQVTcore.g:5588:3: lv_name_0_0= 'Map'
             {
-            lv_name_0_0=(Token)match(input,101,FollowSets000.FOLLOW_92); if (state.failed) return current;
+            lv_name_0_0=(Token)match(input,101,FollowSets000.FOLLOW_93); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                       newLeafNode(lv_name_0_0, grammarAccess.getMapTypeCSAccess().getNameMapKeyword_0_0());
@@ -16672,14 +16672,14 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             int alt144=2;
             int LA144_0 = input.LA(1);
 
-            if ( (LA144_0==28) ) {
+            if ( (LA144_0==23) ) {
                 alt144=1;
             }
             switch (alt144) {
                 case 1 :
                     // InternalQVTcore.g:5601:4: otherlv_1= '(' ( (lv_ownedKeyType_2_0= ruleTypeExpCS ) ) otherlv_3= ',' ( (lv_ownedValueType_4_0= ruleTypeExpCS ) ) otherlv_5= ')'
                     {
-                    otherlv_1=(Token)match(input,28,FollowSets000.FOLLOW_26); if (state.failed) return current;
+                    otherlv_1=(Token)match(input,23,FollowSets000.FOLLOW_18); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_1, grammarAccess.getMapTypeCSAccess().getLeftParenthesisKeyword_1_0());
@@ -16696,7 +16696,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                       	        newCompositeNode(grammarAccess.getMapTypeCSAccess().getOwnedKeyTypeTypeExpCSParserRuleCall_1_1_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_93);
+                    pushFollow(FollowSets000.FOLLOW_94);
                     lv_ownedKeyType_2_0=ruleTypeExpCS();
 
                     state._fsp--;
@@ -16720,7 +16720,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    otherlv_3=(Token)match(input,21,FollowSets000.FOLLOW_26); if (state.failed) return current;
+                    otherlv_3=(Token)match(input,18,FollowSets000.FOLLOW_18); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_3, grammarAccess.getMapTypeCSAccess().getCommaKeyword_1_2());
@@ -16737,7 +16737,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                       	        newCompositeNode(grammarAccess.getMapTypeCSAccess().getOwnedValueTypeTypeExpCSParserRuleCall_1_3_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_24);
+                    pushFollow(FollowSets000.FOLLOW_16);
                     lv_ownedValueType_4_0=ruleTypeExpCS();
 
                     state._fsp--;
@@ -16761,7 +16761,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    otherlv_5=(Token)match(input,29,FollowSets000.FOLLOW_2); if (state.failed) return current;
+                    otherlv_5=(Token)match(input,24,FollowSets000.FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_5, grammarAccess.getMapTypeCSAccess().getRightParenthesisKeyword_1_4());
@@ -16864,7 +16864,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             // InternalQVTcore.g:5671:1: (lv_name_0_0= 'Tuple' )
             // InternalQVTcore.g:5672:3: lv_name_0_0= 'Tuple'
             {
-            lv_name_0_0=(Token)match(input,102,FollowSets000.FOLLOW_92); if (state.failed) return current;
+            lv_name_0_0=(Token)match(input,102,FollowSets000.FOLLOW_93); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                       newLeafNode(lv_name_0_0, grammarAccess.getTupleTypeCSAccess().getNameTupleKeyword_0_0());
@@ -16888,14 +16888,14 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             int alt147=2;
             int LA147_0 = input.LA(1);
 
-            if ( (LA147_0==28) ) {
+            if ( (LA147_0==23) ) {
                 alt147=1;
             }
             switch (alt147) {
                 case 1 :
                     // InternalQVTcore.g:5685:4: otherlv_1= '(' ( ( (lv_ownedParts_2_0= ruleTuplePartCS ) ) (otherlv_3= ',' ( (lv_ownedParts_4_0= ruleTuplePartCS ) ) )* )? otherlv_5= ')'
                     {
-                    otherlv_1=(Token)match(input,28,FollowSets000.FOLLOW_38); if (state.failed) return current;
+                    otherlv_1=(Token)match(input,23,FollowSets000.FOLLOW_38); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_1, grammarAccess.getTupleTypeCSAccess().getLeftParenthesisKeyword_1_0());
@@ -16905,7 +16905,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     int alt146=2;
                     int LA146_0 = input.LA(1);
 
-                    if ( ((LA146_0>=RULE_SIMPLE_ID && LA146_0<=RULE_ESCAPED_ID)||LA146_0==18||LA146_0==20||(LA146_0>=26 && LA146_0<=27)||LA146_0==31||(LA146_0>=35 && LA146_0<=36)||(LA146_0>=41 && LA146_0<=44)) ) {
+                    if ( ((LA146_0>=RULE_SIMPLE_ID && LA146_0<=RULE_ESCAPED_ID)||(LA146_0>=21 && LA146_0<=22)||LA146_0==26||LA146_0==31||LA146_0==33||(LA146_0>=35 && LA146_0<=36)||(LA146_0>=41 && LA146_0<=44)) ) {
                         alt146=1;
                     }
                     switch (alt146) {
@@ -16923,7 +16923,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                               	        newCompositeNode(grammarAccess.getTupleTypeCSAccess().getOwnedPartsTuplePartCSParserRuleCall_1_1_0_0()); 
                               	    
                             }
-                            pushFollow(FollowSets000.FOLLOW_23);
+                            pushFollow(FollowSets000.FOLLOW_15);
                             lv_ownedParts_2_0=ruleTuplePartCS();
 
                             state._fsp--;
@@ -16953,7 +16953,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                                 int alt145=2;
                                 int LA145_0 = input.LA(1);
 
-                                if ( (LA145_0==21) ) {
+                                if ( (LA145_0==18) ) {
                                     alt145=1;
                                 }
 
@@ -16962,7 +16962,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                             	case 1 :
                             	    // InternalQVTcore.g:5707:4: otherlv_3= ',' ( (lv_ownedParts_4_0= ruleTuplePartCS ) )
                             	    {
-                            	    otherlv_3=(Token)match(input,21,FollowSets000.FOLLOW_8); if (state.failed) return current;
+                            	    otherlv_3=(Token)match(input,18,FollowSets000.FOLLOW_5); if (state.failed) return current;
                             	    if ( state.backtracking==0 ) {
 
                             	          	newLeafNode(otherlv_3, grammarAccess.getTupleTypeCSAccess().getCommaKeyword_1_1_1_0());
@@ -16979,7 +16979,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                             	      	        newCompositeNode(grammarAccess.getTupleTypeCSAccess().getOwnedPartsTuplePartCSParserRuleCall_1_1_1_1_0()); 
                             	      	    
                             	    }
-                            	    pushFollow(FollowSets000.FOLLOW_23);
+                            	    pushFollow(FollowSets000.FOLLOW_15);
                             	    lv_ownedParts_4_0=ruleTuplePartCS();
 
                             	    state._fsp--;
@@ -17018,7 +17018,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    otherlv_5=(Token)match(input,29,FollowSets000.FOLLOW_2); if (state.failed) return current;
+                    otherlv_5=(Token)match(input,24,FollowSets000.FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_5, grammarAccess.getTupleTypeCSAccess().getRightParenthesisKeyword_1_2());
@@ -17123,7 +17123,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getTuplePartCSAccess().getNameUnrestrictedNameParserRuleCall_0_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_25);
+            pushFollow(FollowSets000.FOLLOW_17);
             lv_name_0_0=ruleUnrestrictedName();
 
             state._fsp--;
@@ -17137,7 +17137,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                      			current, 
                      			"name",
                       		lv_name_0_0, 
-                      		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.UnrestrictedName");
+                      		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.UnrestrictedName");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -17147,7 +17147,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,30,FollowSets000.FOLLOW_26); if (state.failed) return current;
+            otherlv_1=(Token)match(input,25,FollowSets000.FOLLOW_18); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_1, grammarAccess.getTuplePartCSAccess().getColonKeyword_1());
@@ -17309,7 +17309,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,22,FollowSets000.FOLLOW_94); if (state.failed) return current;
+            otherlv_1=(Token)match(input,17,FollowSets000.FOLLOW_95); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_1, grammarAccess.getCollectionLiteralExpCSAccess().getLeftCurlyBracketKeyword_1());
@@ -17319,7 +17319,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             int alt149=2;
             int LA149_0 = input.LA(1);
 
-            if ( (LA149_0==RULE_SINGLE_QUOTED_STRING||(LA149_0>=RULE_INT && LA149_0<=RULE_ESCAPED_ID)||LA149_0==18||LA149_0==20||(LA149_0>=26 && LA149_0<=28)||(LA149_0>=30 && LA149_0<=31)||LA149_0==33||(LA149_0>=35 && LA149_0<=36)||(LA149_0>=41 && LA149_0<=44)||(LA149_0>=84 && LA149_0<=85)||(LA149_0>=101 && LA149_0<=115)||LA149_0==118||(LA149_0>=120 && LA149_0<=123)||LA149_0==128||(LA149_0>=133 && LA149_0<=134)) ) {
+            if ( (LA149_0==RULE_SINGLE_QUOTED_STRING||(LA149_0>=RULE_INT && LA149_0<=RULE_ESCAPED_ID)||(LA149_0>=21 && LA149_0<=23)||(LA149_0>=25 && LA149_0<=26)||LA149_0==28||LA149_0==31||LA149_0==33||(LA149_0>=35 && LA149_0<=36)||(LA149_0>=41 && LA149_0<=44)||(LA149_0>=84 && LA149_0<=85)||(LA149_0>=101 && LA149_0<=115)||LA149_0==118||(LA149_0>=120 && LA149_0<=123)||LA149_0==128||(LA149_0>=133 && LA149_0<=134)) ) {
                 alt149=1;
             }
             switch (alt149) {
@@ -17337,7 +17337,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                       	        newCompositeNode(grammarAccess.getCollectionLiteralExpCSAccess().getOwnedPartsCollectionLiteralPartCSParserRuleCall_2_0_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_16);
+                    pushFollow(FollowSets000.FOLLOW_8);
                     lv_ownedParts_2_0=ruleCollectionLiteralPartCS();
 
                     state._fsp--;
@@ -17367,7 +17367,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                         int alt148=2;
                         int LA148_0 = input.LA(1);
 
-                        if ( (LA148_0==21) ) {
+                        if ( (LA148_0==18) ) {
                             alt148=1;
                         }
 
@@ -17376,7 +17376,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	case 1 :
                     	    // InternalQVTcore.g:5855:4: otherlv_3= ',' ( (lv_ownedParts_4_0= ruleCollectionLiteralPartCS ) )
                     	    {
-                    	    otherlv_3=(Token)match(input,21,FollowSets000.FOLLOW_95); if (state.failed) return current;
+                    	    otherlv_3=(Token)match(input,18,FollowSets000.FOLLOW_96); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
 
                     	          	newLeafNode(otherlv_3, grammarAccess.getCollectionLiteralExpCSAccess().getCommaKeyword_2_1_0());
@@ -17393,7 +17393,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	      	        newCompositeNode(grammarAccess.getCollectionLiteralExpCSAccess().getOwnedPartsCollectionLiteralPartCSParserRuleCall_2_1_1_0()); 
                     	      	    
                     	    }
-                    	    pushFollow(FollowSets000.FOLLOW_16);
+                    	    pushFollow(FollowSets000.FOLLOW_8);
                     	    lv_ownedParts_4_0=ruleCollectionLiteralPartCS();
 
                     	    state._fsp--;
@@ -17432,7 +17432,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_5=(Token)match(input,24,FollowSets000.FOLLOW_2); if (state.failed) return current;
+            otherlv_5=(Token)match(input,20,FollowSets000.FOLLOW_2); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_5, grammarAccess.getCollectionLiteralExpCSAccess().getRightCurlyBracketKeyword_3());
@@ -17540,7 +17540,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                       	        newCompositeNode(grammarAccess.getCollectionLiteralPartCSAccess().getOwnedExpressionExpCSParserRuleCall_0_0_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_96);
+                    pushFollow(FollowSets000.FOLLOW_97);
                     lv_ownedExpression_0_0=ruleExpCS();
 
                     state._fsp--;
@@ -17575,7 +17575,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                         case 1 :
                             // InternalQVTcore.g:5920:4: otherlv_1= '..' ( (lv_ownedLastExpression_2_0= ruleExpCS ) )
                             {
-                            otherlv_1=(Token)match(input,116,FollowSets000.FOLLOW_17); if (state.failed) return current;
+                            otherlv_1=(Token)match(input,116,FollowSets000.FOLLOW_9); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
 
                                   	newLeafNode(otherlv_1, grammarAccess.getCollectionLiteralPartCSAccess().getFullStopFullStopKeyword_0_1_0());
@@ -17793,7 +17793,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,22,FollowSets000.FOLLOW_94); if (state.failed) return current;
+            otherlv_1=(Token)match(input,17,FollowSets000.FOLLOW_95); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_1, grammarAccess.getCollectionPatternCSAccess().getLeftCurlyBracketKeyword_1());
@@ -17803,7 +17803,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             int alt153=2;
             int LA153_0 = input.LA(1);
 
-            if ( ((LA153_0>=RULE_SIMPLE_ID && LA153_0<=RULE_ESCAPED_ID)||LA153_0==18||LA153_0==20||(LA153_0>=26 && LA153_0<=27)||(LA153_0>=30 && LA153_0<=31)||(LA153_0>=35 && LA153_0<=36)||(LA153_0>=41 && LA153_0<=44)) ) {
+            if ( ((LA153_0>=RULE_SIMPLE_ID && LA153_0<=RULE_ESCAPED_ID)||(LA153_0>=21 && LA153_0<=22)||(LA153_0>=25 && LA153_0<=26)||LA153_0==31||LA153_0==33||(LA153_0>=35 && LA153_0<=36)||(LA153_0>=41 && LA153_0<=44)) ) {
                 alt153=1;
             }
             switch (alt153) {
@@ -17821,7 +17821,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                       	        newCompositeNode(grammarAccess.getCollectionPatternCSAccess().getOwnedPartsPatternExpCSParserRuleCall_2_0_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_97);
+                    pushFollow(FollowSets000.FOLLOW_98);
                     lv_ownedParts_2_0=rulePatternExpCS();
 
                     state._fsp--;
@@ -17851,7 +17851,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                         int alt152=2;
                         int LA152_0 = input.LA(1);
 
-                        if ( (LA152_0==21) ) {
+                        if ( (LA152_0==18) ) {
                             alt152=1;
                         }
 
@@ -17860,7 +17860,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	case 1 :
                     	    // InternalQVTcore.g:6022:4: otherlv_3= ',' ( (lv_ownedParts_4_0= rulePatternExpCS ) )
                     	    {
-                    	    otherlv_3=(Token)match(input,21,FollowSets000.FOLLOW_95); if (state.failed) return current;
+                    	    otherlv_3=(Token)match(input,18,FollowSets000.FOLLOW_96); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
 
                     	          	newLeafNode(otherlv_3, grammarAccess.getCollectionPatternCSAccess().getCommaKeyword_2_1_0());
@@ -17877,7 +17877,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	      	        newCompositeNode(grammarAccess.getCollectionPatternCSAccess().getOwnedPartsPatternExpCSParserRuleCall_2_1_1_0()); 
                     	      	    
                     	    }
-                    	    pushFollow(FollowSets000.FOLLOW_97);
+                    	    pushFollow(FollowSets000.FOLLOW_98);
                     	    lv_ownedParts_4_0=rulePatternExpCS();
 
                     	    state._fsp--;
@@ -17913,7 +17913,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     // InternalQVTcore.g:6044:4: (otherlv_5= '++' ( (lv_restVariableName_6_0= ruleIdentifier ) ) )
                     // InternalQVTcore.g:6044:6: otherlv_5= '++' ( (lv_restVariableName_6_0= ruleIdentifier ) )
                     {
-                    otherlv_5=(Token)match(input,117,FollowSets000.FOLLOW_98); if (state.failed) return current;
+                    otherlv_5=(Token)match(input,117,FollowSets000.FOLLOW_99); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_5, grammarAccess.getCollectionPatternCSAccess().getPlusSignPlusSignKeyword_2_2_0());
@@ -17930,7 +17930,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                       	        newCompositeNode(grammarAccess.getCollectionPatternCSAccess().getRestVariableNameIdentifierParserRuleCall_2_2_1_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_18);
+                    pushFollow(FollowSets000.FOLLOW_10);
                     lv_restVariableName_6_0=ruleIdentifier();
 
                     state._fsp--;
@@ -17963,7 +17963,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_7=(Token)match(input,24,FollowSets000.FOLLOW_2); if (state.failed) return current;
+            otherlv_7=(Token)match(input,20,FollowSets000.FOLLOW_2); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_7, grammarAccess.getCollectionPatternCSAccess().getRightCurlyBracketKeyword_3());
@@ -18074,7 +18074,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getShadowPartCSAccess().getReferredPropertyPropertyCrossReference_0_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_99);
+            pushFollow(FollowSets000.FOLLOW_100);
             ruleUnrestrictedName();
 
             state._fsp--;
@@ -18090,7 +18090,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,38,FollowSets000.FOLLOW_95); if (state.failed) return current;
+            otherlv_1=(Token)match(input,38,FollowSets000.FOLLOW_96); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_1, grammarAccess.getShadowPartCSAccess().getEqualsSignKeyword_1());
@@ -18259,7 +18259,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             int alt155=2;
             int LA155_0 = input.LA(1);
 
-            if ( ((LA155_0>=RULE_SIMPLE_ID && LA155_0<=RULE_ESCAPED_ID)||LA155_0==18||LA155_0==20||(LA155_0>=26 && LA155_0<=27)||LA155_0==31||(LA155_0>=35 && LA155_0<=36)||(LA155_0>=41 && LA155_0<=44)) ) {
+            if ( ((LA155_0>=RULE_SIMPLE_ID && LA155_0<=RULE_ESCAPED_ID)||(LA155_0>=21 && LA155_0<=22)||LA155_0==26||LA155_0==31||LA155_0==33||(LA155_0>=35 && LA155_0<=36)||(LA155_0>=41 && LA155_0<=44)) ) {
                 alt155=1;
             }
             switch (alt155) {
@@ -18274,7 +18274,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                       	        newCompositeNode(grammarAccess.getPatternExpCSAccess().getPatternVariableNameUnrestrictedNameParserRuleCall_0_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_25);
+                    pushFollow(FollowSets000.FOLLOW_17);
                     lv_patternVariableName_0_0=ruleUnrestrictedName();
 
                     state._fsp--;
@@ -18288,7 +18288,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                              			current, 
                              			"patternVariableName",
                               		lv_patternVariableName_0_0, 
-                              		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.UnrestrictedName");
+                              		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.UnrestrictedName");
                       	        afterParserOrEnumRuleCall();
                       	    
                     }
@@ -18301,7 +18301,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,30,FollowSets000.FOLLOW_26); if (state.failed) return current;
+            otherlv_1=(Token)match(input,25,FollowSets000.FOLLOW_18); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_1, grammarAccess.getPatternExpCSAccess().getColonKeyword_1());
@@ -18430,7 +18430,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                   	newLeafNode(otherlv_0, grammarAccess.getLambdaLiteralExpCSAccess().getLambdaKeyword_0());
                   
             }
-            otherlv_1=(Token)match(input,22,FollowSets000.FOLLOW_17); if (state.failed) return current;
+            otherlv_1=(Token)match(input,17,FollowSets000.FOLLOW_9); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_1, grammarAccess.getLambdaLiteralExpCSAccess().getLeftCurlyBracketKeyword_1());
@@ -18447,7 +18447,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getLambdaLiteralExpCSAccess().getOwnedExpressionCSExpCSParserRuleCall_2_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_18);
+            pushFollow(FollowSets000.FOLLOW_10);
             lv_ownedExpressionCS_2_0=ruleExpCS();
 
             state._fsp--;
@@ -18471,7 +18471,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_3=(Token)match(input,24,FollowSets000.FOLLOW_2); if (state.failed) return current;
+            otherlv_3=(Token)match(input,20,FollowSets000.FOLLOW_2); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_3, grammarAccess.getLambdaLiteralExpCSAccess().getRightCurlyBracketKeyword_3());
@@ -18598,7 +18598,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,22,FollowSets000.FOLLOW_15); if (state.failed) return current;
+            otherlv_1=(Token)match(input,17,FollowSets000.FOLLOW_7); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_1, grammarAccess.getMapLiteralExpCSAccess().getLeftCurlyBracketKeyword_1());
@@ -18608,7 +18608,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             int alt157=2;
             int LA157_0 = input.LA(1);
 
-            if ( (LA157_0==RULE_SINGLE_QUOTED_STRING||(LA157_0>=RULE_INT && LA157_0<=RULE_ESCAPED_ID)||LA157_0==18||LA157_0==20||(LA157_0>=26 && LA157_0<=28)||LA157_0==31||LA157_0==33||(LA157_0>=35 && LA157_0<=36)||(LA157_0>=41 && LA157_0<=44)||(LA157_0>=84 && LA157_0<=85)||(LA157_0>=101 && LA157_0<=115)||LA157_0==118||(LA157_0>=120 && LA157_0<=123)||LA157_0==128||(LA157_0>=133 && LA157_0<=134)) ) {
+            if ( (LA157_0==RULE_SINGLE_QUOTED_STRING||(LA157_0>=RULE_INT && LA157_0<=RULE_ESCAPED_ID)||(LA157_0>=21 && LA157_0<=23)||LA157_0==26||LA157_0==28||LA157_0==31||LA157_0==33||(LA157_0>=35 && LA157_0<=36)||(LA157_0>=41 && LA157_0<=44)||(LA157_0>=84 && LA157_0<=85)||(LA157_0>=101 && LA157_0<=115)||LA157_0==118||(LA157_0>=120 && LA157_0<=123)||LA157_0==128||(LA157_0>=133 && LA157_0<=134)) ) {
                 alt157=1;
             }
             switch (alt157) {
@@ -18626,7 +18626,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                       	        newCompositeNode(grammarAccess.getMapLiteralExpCSAccess().getOwnedPartsMapLiteralPartCSParserRuleCall_2_0_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_16);
+                    pushFollow(FollowSets000.FOLLOW_8);
                     lv_ownedParts_2_0=ruleMapLiteralPartCS();
 
                     state._fsp--;
@@ -18656,7 +18656,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                         int alt156=2;
                         int LA156_0 = input.LA(1);
 
-                        if ( (LA156_0==21) ) {
+                        if ( (LA156_0==18) ) {
                             alt156=1;
                         }
 
@@ -18665,7 +18665,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	case 1 :
                     	    // InternalQVTcore.g:6322:4: otherlv_3= ',' ( (lv_ownedParts_4_0= ruleMapLiteralPartCS ) )
                     	    {
-                    	    otherlv_3=(Token)match(input,21,FollowSets000.FOLLOW_17); if (state.failed) return current;
+                    	    otherlv_3=(Token)match(input,18,FollowSets000.FOLLOW_9); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
 
                     	          	newLeafNode(otherlv_3, grammarAccess.getMapLiteralExpCSAccess().getCommaKeyword_2_1_0());
@@ -18682,7 +18682,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	      	        newCompositeNode(grammarAccess.getMapLiteralExpCSAccess().getOwnedPartsMapLiteralPartCSParserRuleCall_2_1_1_0()); 
                     	      	    
                     	    }
-                    	    pushFollow(FollowSets000.FOLLOW_16);
+                    	    pushFollow(FollowSets000.FOLLOW_8);
                     	    lv_ownedParts_4_0=ruleMapLiteralPartCS();
 
                     	    state._fsp--;
@@ -18721,7 +18721,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_5=(Token)match(input,24,FollowSets000.FOLLOW_2); if (state.failed) return current;
+            otherlv_5=(Token)match(input,20,FollowSets000.FOLLOW_2); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_5, grammarAccess.getMapLiteralExpCSAccess().getRightCurlyBracketKeyword_3());
@@ -18820,7 +18820,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getMapLiteralPartCSAccess().getOwnedKeyExpCSParserRuleCall_0_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_100);
+            pushFollow(FollowSets000.FOLLOW_101);
             lv_ownedKey_0_0=ruleExpCS();
 
             state._fsp--;
@@ -18844,7 +18844,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,119,FollowSets000.FOLLOW_17); if (state.failed) return current;
+            otherlv_1=(Token)match(input,119,FollowSets000.FOLLOW_9); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_1, grammarAccess.getMapLiteralPartCSAccess().getLessThanSignHyphenMinusKeyword_1());
@@ -18990,7 +18990,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                 alt158=3;
                 }
                 break;
-            case 33:
+            case 28:
                 {
                 alt158=4;
                 }
@@ -19267,7 +19267,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                   	newLeafNode(otherlv_0, grammarAccess.getTupleLiteralExpCSAccess().getTupleKeyword_0());
                   
             }
-            otherlv_1=(Token)match(input,22,FollowSets000.FOLLOW_8); if (state.failed) return current;
+            otherlv_1=(Token)match(input,17,FollowSets000.FOLLOW_5); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_1, grammarAccess.getTupleLiteralExpCSAccess().getLeftCurlyBracketKeyword_1());
@@ -19284,7 +19284,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getTupleLiteralExpCSAccess().getOwnedPartsTupleLiteralPartCSParserRuleCall_2_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_16);
+            pushFollow(FollowSets000.FOLLOW_8);
             lv_ownedParts_2_0=ruleTupleLiteralPartCS();
 
             state._fsp--;
@@ -19314,7 +19314,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                 int alt159=2;
                 int LA159_0 = input.LA(1);
 
-                if ( (LA159_0==21) ) {
+                if ( (LA159_0==18) ) {
                     alt159=1;
                 }
 
@@ -19323,7 +19323,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             	case 1 :
             	    // InternalQVTcore.g:6554:4: otherlv_3= ',' ( (lv_ownedParts_4_0= ruleTupleLiteralPartCS ) )
             	    {
-            	    otherlv_3=(Token)match(input,21,FollowSets000.FOLLOW_8); if (state.failed) return current;
+            	    otherlv_3=(Token)match(input,18,FollowSets000.FOLLOW_5); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	          	newLeafNode(otherlv_3, grammarAccess.getTupleLiteralExpCSAccess().getCommaKeyword_3_0());
@@ -19340,7 +19340,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             	      	        newCompositeNode(grammarAccess.getTupleLiteralExpCSAccess().getOwnedPartsTupleLiteralPartCSParserRuleCall_3_1_0()); 
             	      	    
             	    }
-            	    pushFollow(FollowSets000.FOLLOW_16);
+            	    pushFollow(FollowSets000.FOLLOW_8);
             	    lv_ownedParts_4_0=ruleTupleLiteralPartCS();
 
             	    state._fsp--;
@@ -19373,7 +19373,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                 }
             } while (true);
 
-            otherlv_5=(Token)match(input,24,FollowSets000.FOLLOW_2); if (state.failed) return current;
+            otherlv_5=(Token)match(input,20,FollowSets000.FOLLOW_2); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_5, grammarAccess.getTupleLiteralExpCSAccess().getRightCurlyBracketKeyword_4());
@@ -19475,7 +19475,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getTupleLiteralPartCSAccess().getNameUnrestrictedNameParserRuleCall_0_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_101);
+            pushFollow(FollowSets000.FOLLOW_102);
             lv_name_0_0=ruleUnrestrictedName();
 
             state._fsp--;
@@ -19489,7 +19489,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                      			current, 
                      			"name",
                       		lv_name_0_0, 
-                      		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.UnrestrictedName");
+                      		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.UnrestrictedName");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -19503,14 +19503,14 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             int alt160=2;
             int LA160_0 = input.LA(1);
 
-            if ( (LA160_0==30) ) {
+            if ( (LA160_0==25) ) {
                 alt160=1;
             }
             switch (alt160) {
                 case 1 :
                     // InternalQVTcore.g:6619:4: otherlv_1= ':' ( (lv_ownedType_2_0= ruleTypeExpCS ) )
                     {
-                    otherlv_1=(Token)match(input,30,FollowSets000.FOLLOW_26); if (state.failed) return current;
+                    otherlv_1=(Token)match(input,25,FollowSets000.FOLLOW_18); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_1, grammarAccess.getTupleLiteralPartCSAccess().getColonKeyword_1_0());
@@ -19527,7 +19527,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                       	        newCompositeNode(grammarAccess.getTupleLiteralPartCSAccess().getOwnedTypeTypeExpCSParserRuleCall_1_1_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_99);
+                    pushFollow(FollowSets000.FOLLOW_100);
                     lv_ownedType_2_0=ruleTypeExpCS();
 
                     state._fsp--;
@@ -19557,7 +19557,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_3=(Token)match(input,38,FollowSets000.FOLLOW_17); if (state.failed) return current;
+            otherlv_3=(Token)match(input,38,FollowSets000.FOLLOW_9); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_3, grammarAccess.getTupleLiteralPartCSAccess().getEqualsSignKeyword_2());
@@ -19806,7 +19806,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             	      	        newCompositeNode(grammarAccess.getStringLiteralExpCSAccess().getSegmentsStringLiteralParserRuleCall_0()); 
             	      	    
             	    }
-            	    pushFollow(FollowSets000.FOLLOW_102);
+            	    pushFollow(FollowSets000.FOLLOW_103);
             	    lv_segments_0_0=ruleStringLiteral();
 
             	    state._fsp--;
@@ -20092,7 +20092,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,33,FollowSets000.FOLLOW_2); if (state.failed) return current;
+            otherlv_1=(Token)match(input,28,FollowSets000.FOLLOW_2); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_1, grammarAccess.getUnlimitedNaturalLiteralExpCSAccess().getAsteriskKeyword_1());
@@ -20626,7 +20626,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                       newCompositeNode(grammarAccess.getTypeLiteralWithMultiplicityCSAccess().getTypeLiteralCSParserRuleCall_0()); 
                   
             }
-            pushFollow(FollowSets000.FOLLOW_89);
+            pushFollow(FollowSets000.FOLLOW_90);
             this_TypeLiteralCS_0=ruleTypeLiteralCS();
 
             state._fsp--;
@@ -20887,7 +20887,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getTypeNameExpCSAccess().getOwnedPathNamePathNameCSParserRuleCall_0_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_72);
+            pushFollow(FollowSets000.FOLLOW_73);
             lv_ownedPathName_0_0=rulePathNameCS();
 
             state._fsp--;
@@ -20929,7 +20929,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                       	        newCompositeNode(grammarAccess.getTypeNameExpCSAccess().getOwnedCurlyBracketedClauseCurlyBracketedClauseCSParserRuleCall_1_0_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_72);
+                    pushFollow(FollowSets000.FOLLOW_73);
                     lv_ownedCurlyBracketedClause_1_0=ruleCurlyBracketedClauseCS();
 
                     state._fsp--;
@@ -20960,7 +20960,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                         case 1 :
                             // InternalQVTcore.g:7114:4: otherlv_2= '{' ( (lv_ownedPatternGuard_3_0= ruleExpCS ) ) otherlv_4= '}'
                             {
-                            otherlv_2=(Token)match(input,22,FollowSets000.FOLLOW_17); if (state.failed) return current;
+                            otherlv_2=(Token)match(input,17,FollowSets000.FOLLOW_9); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
 
                                   	newLeafNode(otherlv_2, grammarAccess.getTypeNameExpCSAccess().getLeftCurlyBracketKeyword_1_1_0());
@@ -20977,7 +20977,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                               	        newCompositeNode(grammarAccess.getTypeNameExpCSAccess().getOwnedPatternGuardExpCSParserRuleCall_1_1_1_0()); 
                               	    
                             }
-                            pushFollow(FollowSets000.FOLLOW_18);
+                            pushFollow(FollowSets000.FOLLOW_10);
                             lv_ownedPatternGuard_3_0=ruleExpCS();
 
                             state._fsp--;
@@ -21001,7 +21001,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
                             }
 
-                            otherlv_4=(Token)match(input,24,FollowSets000.FOLLOW_2); if (state.failed) return current;
+                            otherlv_4=(Token)match(input,20,FollowSets000.FOLLOW_2); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
 
                                   	newLeafNode(otherlv_4, grammarAccess.getTypeNameExpCSAccess().getRightCurlyBracketKeyword_1_1_2());
@@ -21121,7 +21121,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                               newCompositeNode(grammarAccess.getTypeExpCSAccess().getTypeNameExpCSParserRuleCall_0_0()); 
                           
                     }
-                    pushFollow(FollowSets000.FOLLOW_89);
+                    pushFollow(FollowSets000.FOLLOW_90);
                     this_TypeNameExpCS_0=ruleTypeNameExpCS();
 
                     state._fsp--;
@@ -21148,7 +21148,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                               newCompositeNode(grammarAccess.getTypeExpCSAccess().getTypeLiteralCSParserRuleCall_0_1()); 
                           
                     }
-                    pushFollow(FollowSets000.FOLLOW_89);
+                    pushFollow(FollowSets000.FOLLOW_90);
                     this_TypeLiteralCS_1=ruleTypeLiteralCS();
 
                     state._fsp--;
@@ -21175,7 +21175,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                               newCompositeNode(grammarAccess.getTypeExpCSAccess().getCollectionPatternCSParserRuleCall_0_2()); 
                           
                     }
-                    pushFollow(FollowSets000.FOLLOW_89);
+                    pushFollow(FollowSets000.FOLLOW_90);
                     this_CollectionPatternCS_2=ruleCollectionPatternCS();
 
                     state._fsp--;
@@ -21340,7 +21340,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                               newCompositeNode(grammarAccess.getExpCSAccess().getPrefixedPrimaryExpCSParserRuleCall_0_0()); 
                           
                     }
-                    pushFollow(FollowSets000.FOLLOW_103);
+                    pushFollow(FollowSets000.FOLLOW_104);
                     this_PrefixedPrimaryExpCS_0=rulePrefixedPrimaryExpCS();
 
                     state._fsp--;
@@ -21355,7 +21355,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     int alt169=2;
                     int LA169_0 = input.LA(1);
 
-                    if ( (LA169_0==33||LA169_0==38||LA169_0==84||(LA169_0>=86 && LA169_0<=100)) ) {
+                    if ( (LA169_0==28||LA169_0==38||LA169_0==84||(LA169_0>=86 && LA169_0<=100)) ) {
                         alt169=1;
                     }
                     switch (alt169) {
@@ -21391,7 +21391,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                               	        newCompositeNode(grammarAccess.getExpCSAccess().getNameBinaryOperatorNameParserRuleCall_0_1_1_0()); 
                               	    
                             }
-                            pushFollow(FollowSets000.FOLLOW_17);
+                            pushFollow(FollowSets000.FOLLOW_9);
                             lv_name_2_0=ruleBinaryOperatorName();
 
                             state._fsp--;
@@ -21622,7 +21622,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                       	        newCompositeNode(grammarAccess.getPrefixedLetExpCSAccess().getNameUnaryOperatorNameParserRuleCall_0_1_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_17);
+                    pushFollow(FollowSets000.FOLLOW_9);
                     lv_name_1_0=ruleUnaryOperatorName();
 
                     state._fsp--;
@@ -21801,7 +21801,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             if ( ((LA172_0>=84 && LA172_0<=85)) ) {
                 alt172=1;
             }
-            else if ( (LA172_0==RULE_SINGLE_QUOTED_STRING||(LA172_0>=RULE_INT && LA172_0<=RULE_ESCAPED_ID)||LA172_0==18||LA172_0==20||(LA172_0>=26 && LA172_0<=28)||LA172_0==31||LA172_0==33||(LA172_0>=35 && LA172_0<=36)||(LA172_0>=41 && LA172_0<=44)||(LA172_0>=101 && LA172_0<=115)||LA172_0==118||(LA172_0>=120 && LA172_0<=123)||LA172_0==128||LA172_0==134) ) {
+            else if ( (LA172_0==RULE_SINGLE_QUOTED_STRING||(LA172_0>=RULE_INT && LA172_0<=RULE_ESCAPED_ID)||(LA172_0>=21 && LA172_0<=23)||LA172_0==26||LA172_0==28||LA172_0==31||LA172_0==33||(LA172_0>=35 && LA172_0<=36)||(LA172_0>=41 && LA172_0<=44)||(LA172_0>=101 && LA172_0<=115)||LA172_0==118||(LA172_0>=120 && LA172_0<=123)||LA172_0==128||LA172_0==134) ) {
                 alt172=2;
             }
             else {
@@ -21847,7 +21847,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                       	        newCompositeNode(grammarAccess.getPrefixedPrimaryExpCSAccess().getNameUnaryOperatorNameParserRuleCall_0_1_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_104);
+                    pushFollow(FollowSets000.FOLLOW_18);
                     lv_name_1_0=ruleUnaryOperatorName();
 
                     state._fsp--;
@@ -22486,7 +22486,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             int alt175=2;
             int LA175_0 = input.LA(1);
 
-            if ( (LA175_0==28) ) {
+            if ( (LA175_0==23) ) {
                 alt175=1;
             }
             switch (alt175) {
@@ -22532,7 +22532,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             int alt176=2;
             int LA176_0 = input.LA(1);
 
-            if ( (LA176_0==22) ) {
+            if ( (LA176_0==17) ) {
                 alt176=1;
             }
             switch (alt176) {
@@ -22727,7 +22727,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,22,FollowSets000.FOLLOW_109); if (state.failed) return current;
+            otherlv_1=(Token)match(input,17,FollowSets000.FOLLOW_109); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_1, grammarAccess.getCurlyBracketedClauseCSAccess().getLeftCurlyBracketKeyword_1());
@@ -22737,7 +22737,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             int alt180=2;
             int LA180_0 = input.LA(1);
 
-            if ( ((LA180_0>=RULE_SIMPLE_ID && LA180_0<=RULE_ESCAPED_ID)||LA180_0==18||LA180_0==20||LA180_0==24||(LA180_0>=26 && LA180_0<=27)||LA180_0==31||(LA180_0>=35 && LA180_0<=36)||(LA180_0>=41 && LA180_0<=44)) ) {
+            if ( ((LA180_0>=RULE_SIMPLE_ID && LA180_0<=RULE_ESCAPED_ID)||(LA180_0>=20 && LA180_0<=22)||LA180_0==26||LA180_0==31||LA180_0==33||(LA180_0>=35 && LA180_0<=36)||(LA180_0>=41 && LA180_0<=44)) ) {
                 alt180=1;
             }
             else if ( (LA180_0==RULE_SINGLE_QUOTED_STRING) ) {
@@ -22758,7 +22758,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     int alt179=2;
                     int LA179_0 = input.LA(1);
 
-                    if ( ((LA179_0>=RULE_SIMPLE_ID && LA179_0<=RULE_ESCAPED_ID)||LA179_0==18||LA179_0==20||(LA179_0>=26 && LA179_0<=27)||LA179_0==31||(LA179_0>=35 && LA179_0<=36)||(LA179_0>=41 && LA179_0<=44)) ) {
+                    if ( ((LA179_0>=RULE_SIMPLE_ID && LA179_0<=RULE_ESCAPED_ID)||(LA179_0>=21 && LA179_0<=22)||LA179_0==26||LA179_0==31||LA179_0==33||(LA179_0>=35 && LA179_0<=36)||(LA179_0>=41 && LA179_0<=44)) ) {
                         alt179=1;
                     }
                     switch (alt179) {
@@ -22776,7 +22776,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                               	        newCompositeNode(grammarAccess.getCurlyBracketedClauseCSAccess().getOwnedPartsShadowPartCSParserRuleCall_2_0_0_0()); 
                               	    
                             }
-                            pushFollow(FollowSets000.FOLLOW_16);
+                            pushFollow(FollowSets000.FOLLOW_8);
                             lv_ownedParts_2_0=ruleShadowPartCS();
 
                             state._fsp--;
@@ -22806,7 +22806,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                                 int alt178=2;
                                 int LA178_0 = input.LA(1);
 
-                                if ( (LA178_0==21) ) {
+                                if ( (LA178_0==18) ) {
                                     alt178=1;
                                 }
 
@@ -22815,7 +22815,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                             	case 1 :
                             	    // InternalQVTcore.g:7780:4: otherlv_3= ',' ( (lv_ownedParts_4_0= ruleShadowPartCS ) )
                             	    {
-                            	    otherlv_3=(Token)match(input,21,FollowSets000.FOLLOW_8); if (state.failed) return current;
+                            	    otherlv_3=(Token)match(input,18,FollowSets000.FOLLOW_5); if (state.failed) return current;
                             	    if ( state.backtracking==0 ) {
 
                             	          	newLeafNode(otherlv_3, grammarAccess.getCurlyBracketedClauseCSAccess().getCommaKeyword_2_0_1_0());
@@ -22832,7 +22832,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                             	      	        newCompositeNode(grammarAccess.getCurlyBracketedClauseCSAccess().getOwnedPartsShadowPartCSParserRuleCall_2_0_1_1_0()); 
                             	      	    
                             	    }
-                            	    pushFollow(FollowSets000.FOLLOW_16);
+                            	    pushFollow(FollowSets000.FOLLOW_8);
                             	    lv_ownedParts_4_0=ruleShadowPartCS();
 
                             	    state._fsp--;
@@ -22888,7 +22888,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                       	        newCompositeNode(grammarAccess.getCurlyBracketedClauseCSAccess().getValueStringLiteralParserRuleCall_2_1_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_18);
+                    pushFollow(FollowSets000.FOLLOW_10);
                     lv_value_5_0=ruleStringLiteral();
 
                     state._fsp--;
@@ -22918,7 +22918,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_6=(Token)match(input,24,FollowSets000.FOLLOW_2); if (state.failed) return current;
+            otherlv_6=(Token)match(input,20,FollowSets000.FOLLOW_2); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_6, grammarAccess.getCurlyBracketedClauseCSAccess().getRightCurlyBracketKeyword_3());
@@ -23033,7 +23033,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,28,FollowSets000.FOLLOW_110); if (state.failed) return current;
+            otherlv_1=(Token)match(input,23,FollowSets000.FOLLOW_110); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_1, grammarAccess.getRoundBracketedClauseCSAccess().getLeftParenthesisKeyword_1());
@@ -23043,7 +23043,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             int alt186=2;
             int LA186_0 = input.LA(1);
 
-            if ( (LA186_0==RULE_SINGLE_QUOTED_STRING||(LA186_0>=RULE_INT && LA186_0<=RULE_ESCAPED_ID)||LA186_0==18||LA186_0==20||(LA186_0>=26 && LA186_0<=28)||(LA186_0>=30 && LA186_0<=31)||LA186_0==33||(LA186_0>=35 && LA186_0<=36)||(LA186_0>=41 && LA186_0<=44)||(LA186_0>=84 && LA186_0<=85)||(LA186_0>=101 && LA186_0<=115)||LA186_0==118||(LA186_0>=120 && LA186_0<=123)||LA186_0==128||(LA186_0>=133 && LA186_0<=134)) ) {
+            if ( (LA186_0==RULE_SINGLE_QUOTED_STRING||(LA186_0>=RULE_INT && LA186_0<=RULE_ESCAPED_ID)||(LA186_0>=21 && LA186_0<=23)||(LA186_0>=25 && LA186_0<=26)||LA186_0==28||LA186_0==31||LA186_0==33||(LA186_0>=35 && LA186_0<=36)||(LA186_0>=41 && LA186_0<=44)||(LA186_0>=84 && LA186_0<=85)||(LA186_0>=101 && LA186_0<=115)||LA186_0==118||(LA186_0>=120 && LA186_0<=123)||LA186_0==128||(LA186_0>=133 && LA186_0<=134)) ) {
                 alt186=1;
             }
             switch (alt186) {
@@ -23091,7 +23091,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                         int alt181=2;
                         int LA181_0 = input.LA(1);
 
-                        if ( (LA181_0==21) ) {
+                        if ( (LA181_0==18) ) {
                             alt181=1;
                         }
 
@@ -23142,7 +23142,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     int alt183=2;
                     int LA183_0 = input.LA(1);
 
-                    if ( (LA183_0==34) ) {
+                    if ( (LA183_0==29) ) {
                         alt183=1;
                     }
                     switch (alt183) {
@@ -23190,7 +23190,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                                 int alt182=2;
                                 int LA182_0 = input.LA(1);
 
-                                if ( (LA182_0==21) ) {
+                                if ( (LA182_0==18) ) {
                                     alt182=1;
                                 }
 
@@ -23249,7 +23249,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                         int alt185=2;
                         int LA185_0 = input.LA(1);
 
-                        if ( (LA185_0==25) ) {
+                        if ( (LA185_0==19) ) {
                             alt185=1;
                         }
 
@@ -23299,7 +23299,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	        int alt184=2;
                     	        int LA184_0 = input.LA(1);
 
-                    	        if ( (LA184_0==21) ) {
+                    	        if ( (LA184_0==18) ) {
                     	            alt184=1;
                     	        }
 
@@ -23361,7 +23361,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_8=(Token)match(input,29,FollowSets000.FOLLOW_2); if (state.failed) return current;
+            otherlv_8=(Token)match(input,24,FollowSets000.FOLLOW_2); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_8, grammarAccess.getRoundBracketedClauseCSAccess().getRightParenthesisKeyword_3());
@@ -23451,7 +23451,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             // InternalQVTcore.g:7992:1: (otherlv_0= '[' ( (lv_ownedTerms_1_0= ruleExpCS ) ) (otherlv_2= ',' ( (lv_ownedTerms_3_0= ruleExpCS ) ) )* otherlv_4= ']' )
             // InternalQVTcore.g:7992:3: otherlv_0= '[' ( (lv_ownedTerms_1_0= ruleExpCS ) ) (otherlv_2= ',' ( (lv_ownedTerms_3_0= ruleExpCS ) ) )* otherlv_4= ']'
             {
-            otherlv_0=(Token)match(input,126,FollowSets000.FOLLOW_17); if (state.failed) return current;
+            otherlv_0=(Token)match(input,126,FollowSets000.FOLLOW_9); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_0, grammarAccess.getSquareBracketedClauseCSAccess().getLeftSquareBracketKeyword_0());
@@ -23498,7 +23498,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                 int alt187=2;
                 int LA187_0 = input.LA(1);
 
-                if ( (LA187_0==21) ) {
+                if ( (LA187_0==18) ) {
                     alt187=1;
                 }
 
@@ -23507,7 +23507,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             	case 1 :
             	    // InternalQVTcore.g:8014:4: otherlv_2= ',' ( (lv_ownedTerms_3_0= ruleExpCS ) )
             	    {
-            	    otherlv_2=(Token)match(input,21,FollowSets000.FOLLOW_17); if (state.failed) return current;
+            	    otherlv_2=(Token)match(input,18,FollowSets000.FOLLOW_9); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	          	newLeafNode(otherlv_2, grammarAccess.getSquareBracketedClauseCSAccess().getCommaKeyword_2_0());
@@ -23655,10 +23655,10 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             int alt190=2;
             int LA190_0 = input.LA(1);
 
-            if ( (LA190_0==RULE_SINGLE_QUOTED_STRING||(LA190_0>=RULE_INT && LA190_0<=RULE_ESCAPED_ID)||LA190_0==18||LA190_0==20||(LA190_0>=26 && LA190_0<=28)||LA190_0==31||LA190_0==33||(LA190_0>=35 && LA190_0<=36)||(LA190_0>=41 && LA190_0<=44)||(LA190_0>=84 && LA190_0<=85)||(LA190_0>=101 && LA190_0<=115)||LA190_0==118||(LA190_0>=120 && LA190_0<=123)||LA190_0==128||(LA190_0>=133 && LA190_0<=134)) ) {
+            if ( (LA190_0==RULE_SINGLE_QUOTED_STRING||(LA190_0>=RULE_INT && LA190_0<=RULE_ESCAPED_ID)||(LA190_0>=21 && LA190_0<=23)||LA190_0==26||LA190_0==28||LA190_0==31||LA190_0==33||(LA190_0>=35 && LA190_0<=36)||(LA190_0>=41 && LA190_0<=44)||(LA190_0>=84 && LA190_0<=85)||(LA190_0>=101 && LA190_0<=115)||LA190_0==118||(LA190_0>=120 && LA190_0<=123)||LA190_0==128||(LA190_0>=133 && LA190_0<=134)) ) {
                 alt190=1;
             }
-            else if ( (LA190_0==30) ) {
+            else if ( (LA190_0==25) ) {
                 alt190=2;
             }
             else {
@@ -23714,10 +23714,10 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     int alt189=3;
                     int LA189_0 = input.LA(1);
 
-                    if ( (LA189_0==30) ) {
+                    if ( (LA189_0==25) ) {
                         alt189=1;
                     }
-                    else if ( (LA189_0==19) ) {
+                    else if ( (LA189_0==32) ) {
                         alt189=2;
                     }
                     switch (alt189) {
@@ -23727,7 +23727,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                             // InternalQVTcore.g:8079:3: (otherlv_1= ':' ( (lv_ownedType_2_0= ruleTypeExpCS ) ) (otherlv_3= '=' ( (lv_ownedInitExpression_4_0= ruleExpCS ) ) )? )
                             // InternalQVTcore.g:8079:5: otherlv_1= ':' ( (lv_ownedType_2_0= ruleTypeExpCS ) ) (otherlv_3= '=' ( (lv_ownedInitExpression_4_0= ruleExpCS ) ) )?
                             {
-                            otherlv_1=(Token)match(input,30,FollowSets000.FOLLOW_26); if (state.failed) return current;
+                            otherlv_1=(Token)match(input,25,FollowSets000.FOLLOW_18); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
 
                                   	newLeafNode(otherlv_1, grammarAccess.getNavigatingArgCSAccess().getColonKeyword_0_1_0_0());
@@ -23779,7 +23779,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                                 case 1 :
                                     // InternalQVTcore.g:8101:4: otherlv_3= '=' ( (lv_ownedInitExpression_4_0= ruleExpCS ) )
                                     {
-                                    otherlv_3=(Token)match(input,38,FollowSets000.FOLLOW_17); if (state.failed) return current;
+                                    otherlv_3=(Token)match(input,38,FollowSets000.FOLLOW_9); if (state.failed) return current;
                                     if ( state.backtracking==0 ) {
 
                                           	newLeafNode(otherlv_3, grammarAccess.getNavigatingArgCSAccess().getEqualsSignKeyword_0_1_0_2_0());
@@ -23838,7 +23838,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                             // InternalQVTcore.g:8124:6: (otherlv_5= 'in' ( (lv_ownedInitExpression_6_0= ruleExpCS ) ) )
                             // InternalQVTcore.g:8124:8: otherlv_5= 'in' ( (lv_ownedInitExpression_6_0= ruleExpCS ) )
                             {
-                            otherlv_5=(Token)match(input,19,FollowSets000.FOLLOW_17); if (state.failed) return current;
+                            otherlv_5=(Token)match(input,32,FollowSets000.FOLLOW_9); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
 
                                   	newLeafNode(otherlv_5, grammarAccess.getNavigatingArgCSAccess().getInKeyword_0_1_1_0());
@@ -23900,7 +23900,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     // InternalQVTcore.g:8147:6: (otherlv_7= ':' ( (lv_ownedType_8_0= ruleTypeExpCS ) ) )
                     // InternalQVTcore.g:8147:8: otherlv_7= ':' ( (lv_ownedType_8_0= ruleTypeExpCS ) )
                     {
-                    otherlv_7=(Token)match(input,30,FollowSets000.FOLLOW_26); if (state.failed) return current;
+                    otherlv_7=(Token)match(input,25,FollowSets000.FOLLOW_18); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_7, grammarAccess.getNavigatingArgCSAccess().getColonKeyword_1_0());
@@ -24039,7 +24039,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             // InternalQVTcore.g:8191:1: (lv_prefix_0_0= '|' )
             // InternalQVTcore.g:8192:3: lv_prefix_0_0= '|'
             {
-            lv_prefix_0_0=(Token)match(input,25,FollowSets000.FOLLOW_17); if (state.failed) return current;
+            lv_prefix_0_0=(Token)match(input,19,FollowSets000.FOLLOW_9); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                       newLeafNode(lv_prefix_0_0, grammarAccess.getNavigatingBarArgCSAccess().getPrefixVerticalLineKeyword_0_0());
@@ -24098,14 +24098,14 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             int alt192=2;
             int LA192_0 = input.LA(1);
 
-            if ( (LA192_0==30) ) {
+            if ( (LA192_0==25) ) {
                 alt192=1;
             }
             switch (alt192) {
                 case 1 :
                     // InternalQVTcore.g:8223:4: otherlv_2= ':' ( (lv_ownedType_3_0= ruleTypeExpCS ) ) (otherlv_4= '=' ( (lv_ownedInitExpression_5_0= ruleExpCS ) ) )?
                     {
-                    otherlv_2=(Token)match(input,30,FollowSets000.FOLLOW_26); if (state.failed) return current;
+                    otherlv_2=(Token)match(input,25,FollowSets000.FOLLOW_18); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_2, grammarAccess.getNavigatingBarArgCSAccess().getColonKeyword_2_0());
@@ -24157,7 +24157,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                         case 1 :
                             // InternalQVTcore.g:8245:4: otherlv_4= '=' ( (lv_ownedInitExpression_5_0= ruleExpCS ) )
                             {
-                            otherlv_4=(Token)match(input,38,FollowSets000.FOLLOW_17); if (state.failed) return current;
+                            otherlv_4=(Token)match(input,38,FollowSets000.FOLLOW_9); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
 
                                   	newLeafNode(otherlv_4, grammarAccess.getNavigatingBarArgCSAccess().getEqualsSignKeyword_2_2_0());
@@ -24305,7 +24305,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             // InternalQVTcore.g:8289:1: (lv_prefix_0_0= ',' )
             // InternalQVTcore.g:8290:3: lv_prefix_0_0= ','
             {
-            lv_prefix_0_0=(Token)match(input,21,FollowSets000.FOLLOW_17); if (state.failed) return current;
+            lv_prefix_0_0=(Token)match(input,18,FollowSets000.FOLLOW_9); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                       newLeafNode(lv_prefix_0_0, grammarAccess.getNavigatingCommaArgCSAccess().getPrefixCommaKeyword_0_0());
@@ -24364,10 +24364,10 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             int alt194=3;
             int LA194_0 = input.LA(1);
 
-            if ( (LA194_0==30) ) {
+            if ( (LA194_0==25) ) {
                 alt194=1;
             }
-            else if ( (LA194_0==19) ) {
+            else if ( (LA194_0==32) ) {
                 alt194=2;
             }
             switch (alt194) {
@@ -24377,7 +24377,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     // InternalQVTcore.g:8321:3: (otherlv_2= ':' ( (lv_ownedType_3_0= ruleTypeExpCS ) ) (otherlv_4= '=' ( (lv_ownedInitExpression_5_0= ruleExpCS ) ) )? )
                     // InternalQVTcore.g:8321:5: otherlv_2= ':' ( (lv_ownedType_3_0= ruleTypeExpCS ) ) (otherlv_4= '=' ( (lv_ownedInitExpression_5_0= ruleExpCS ) ) )?
                     {
-                    otherlv_2=(Token)match(input,30,FollowSets000.FOLLOW_26); if (state.failed) return current;
+                    otherlv_2=(Token)match(input,25,FollowSets000.FOLLOW_18); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_2, grammarAccess.getNavigatingCommaArgCSAccess().getColonKeyword_2_0_0());
@@ -24429,7 +24429,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                         case 1 :
                             // InternalQVTcore.g:8343:4: otherlv_4= '=' ( (lv_ownedInitExpression_5_0= ruleExpCS ) )
                             {
-                            otherlv_4=(Token)match(input,38,FollowSets000.FOLLOW_17); if (state.failed) return current;
+                            otherlv_4=(Token)match(input,38,FollowSets000.FOLLOW_9); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
 
                                   	newLeafNode(otherlv_4, grammarAccess.getNavigatingCommaArgCSAccess().getEqualsSignKeyword_2_0_2_0());
@@ -24488,7 +24488,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     // InternalQVTcore.g:8366:6: (otherlv_6= 'in' ( (lv_ownedInitExpression_7_0= ruleExpCS ) ) )
                     // InternalQVTcore.g:8366:8: otherlv_6= 'in' ( (lv_ownedInitExpression_7_0= ruleExpCS ) )
                     {
-                    otherlv_6=(Token)match(input,19,FollowSets000.FOLLOW_17); if (state.failed) return current;
+                    otherlv_6=(Token)match(input,32,FollowSets000.FOLLOW_9); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_6, grammarAccess.getNavigatingCommaArgCSAccess().getInKeyword_2_1_0());
@@ -24630,7 +24630,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             // InternalQVTcore.g:8410:1: (lv_prefix_0_0= ';' )
             // InternalQVTcore.g:8411:3: lv_prefix_0_0= ';'
             {
-            lv_prefix_0_0=(Token)match(input,34,FollowSets000.FOLLOW_17); if (state.failed) return current;
+            lv_prefix_0_0=(Token)match(input,29,FollowSets000.FOLLOW_9); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                       newLeafNode(lv_prefix_0_0, grammarAccess.getNavigatingSemiArgCSAccess().getPrefixSemicolonKeyword_0_0());
@@ -24689,14 +24689,14 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             int alt196=2;
             int LA196_0 = input.LA(1);
 
-            if ( (LA196_0==30) ) {
+            if ( (LA196_0==25) ) {
                 alt196=1;
             }
             switch (alt196) {
                 case 1 :
                     // InternalQVTcore.g:8442:4: otherlv_2= ':' ( (lv_ownedType_3_0= ruleTypeExpCS ) ) (otherlv_4= '=' ( (lv_ownedInitExpression_5_0= ruleExpCS ) ) )?
                     {
-                    otherlv_2=(Token)match(input,30,FollowSets000.FOLLOW_26); if (state.failed) return current;
+                    otherlv_2=(Token)match(input,25,FollowSets000.FOLLOW_18); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_2, grammarAccess.getNavigatingSemiArgCSAccess().getColonKeyword_2_0());
@@ -24748,7 +24748,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                         case 1 :
                             // InternalQVTcore.g:8464:4: otherlv_4= '=' ( (lv_ownedInitExpression_5_0= ruleExpCS ) )
                             {
-                            otherlv_4=(Token)match(input,38,FollowSets000.FOLLOW_17); if (state.failed) return current;
+                            otherlv_4=(Token)match(input,38,FollowSets000.FOLLOW_9); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
 
                                   	newLeafNode(otherlv_4, grammarAccess.getNavigatingSemiArgCSAccess().getEqualsSignKeyword_2_2_0());
@@ -24986,7 +24986,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             // InternalQVTcore.g:8540:1: (otherlv_0= 'if' ( ( (lv_ownedCondition_1_1= ruleExpCS | lv_ownedCondition_1_2= rulePatternExpCS ) ) ) otherlv_2= 'then' ( (lv_ownedThenExpression_3_0= ruleExpCS ) ) ( (lv_ownedIfThenExpressions_4_0= ruleElseIfThenExpCS ) )* otherlv_5= 'else' ( (lv_ownedElseExpression_6_0= ruleExpCS ) ) otherlv_7= 'endif' )
             // InternalQVTcore.g:8540:3: otherlv_0= 'if' ( ( (lv_ownedCondition_1_1= ruleExpCS | lv_ownedCondition_1_2= rulePatternExpCS ) ) ) otherlv_2= 'then' ( (lv_ownedThenExpression_3_0= ruleExpCS ) ) ( (lv_ownedIfThenExpressions_4_0= ruleElseIfThenExpCS ) )* otherlv_5= 'else' ( (lv_ownedElseExpression_6_0= ruleExpCS ) ) otherlv_7= 'endif'
             {
-            otherlv_0=(Token)match(input,128,FollowSets000.FOLLOW_95); if (state.failed) return current;
+            otherlv_0=(Token)match(input,128,FollowSets000.FOLLOW_96); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_0, grammarAccess.getIfExpCSAccess().getIfKeyword_0());
@@ -25069,7 +25069,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_2=(Token)match(input,129,FollowSets000.FOLLOW_17); if (state.failed) return current;
+            otherlv_2=(Token)match(input,129,FollowSets000.FOLLOW_9); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_2, grammarAccess.getIfExpCSAccess().getThenKeyword_2());
@@ -25163,7 +25163,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                 }
             } while (true);
 
-            otherlv_5=(Token)match(input,130,FollowSets000.FOLLOW_17); if (state.failed) return current;
+            otherlv_5=(Token)match(input,130,FollowSets000.FOLLOW_9); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_5, grammarAccess.getIfExpCSAccess().getElseKeyword_5());
@@ -25293,7 +25293,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             // InternalQVTcore.g:8667:1: (otherlv_0= 'elseif' ( (lv_ownedCondition_1_0= ruleExpCS ) ) otherlv_2= 'then' ( (lv_ownedThenExpression_3_0= ruleExpCS ) ) )
             // InternalQVTcore.g:8667:3: otherlv_0= 'elseif' ( (lv_ownedCondition_1_0= ruleExpCS ) ) otherlv_2= 'then' ( (lv_ownedThenExpression_3_0= ruleExpCS ) )
             {
-            otherlv_0=(Token)match(input,132,FollowSets000.FOLLOW_17); if (state.failed) return current;
+            otherlv_0=(Token)match(input,132,FollowSets000.FOLLOW_9); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_0, grammarAccess.getElseIfThenExpCSAccess().getElseifKeyword_0());
@@ -25334,7 +25334,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_2=(Token)match(input,129,FollowSets000.FOLLOW_17); if (state.failed) return current;
+            otherlv_2=(Token)match(input,129,FollowSets000.FOLLOW_9); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_2, grammarAccess.getElseIfThenExpCSAccess().getThenKeyword_2());
@@ -25461,7 +25461,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             // InternalQVTcore.g:8732:1: (otherlv_0= 'let' ( (lv_ownedVariables_1_0= ruleLetVariableCS ) ) (otherlv_2= ',' ( (lv_ownedVariables_3_0= ruleLetVariableCS ) ) )* otherlv_4= 'in' ( (lv_ownedInExpression_5_0= ruleExpCS ) ) )
             // InternalQVTcore.g:8732:3: otherlv_0= 'let' ( (lv_ownedVariables_1_0= ruleLetVariableCS ) ) (otherlv_2= ',' ( (lv_ownedVariables_3_0= ruleLetVariableCS ) ) )* otherlv_4= 'in' ( (lv_ownedInExpression_5_0= ruleExpCS ) )
             {
-            otherlv_0=(Token)match(input,133,FollowSets000.FOLLOW_8); if (state.failed) return current;
+            otherlv_0=(Token)match(input,133,FollowSets000.FOLLOW_5); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_0, grammarAccess.getLetExpCSAccess().getLetKeyword_0());
@@ -25508,7 +25508,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                 int alt199=2;
                 int LA199_0 = input.LA(1);
 
-                if ( (LA199_0==21) ) {
+                if ( (LA199_0==18) ) {
                     alt199=1;
                 }
 
@@ -25517,7 +25517,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             	case 1 :
             	    // InternalQVTcore.g:8754:4: otherlv_2= ',' ( (lv_ownedVariables_3_0= ruleLetVariableCS ) )
             	    {
-            	    otherlv_2=(Token)match(input,21,FollowSets000.FOLLOW_8); if (state.failed) return current;
+            	    otherlv_2=(Token)match(input,18,FollowSets000.FOLLOW_5); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	          	newLeafNode(otherlv_2, grammarAccess.getLetExpCSAccess().getCommaKeyword_2_0());
@@ -25567,7 +25567,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                 }
             } while (true);
 
-            otherlv_4=(Token)match(input,19,FollowSets000.FOLLOW_17); if (state.failed) return current;
+            otherlv_4=(Token)match(input,32,FollowSets000.FOLLOW_9); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_4, grammarAccess.getLetExpCSAccess().getInKeyword_3());
@@ -25720,7 +25720,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                      			current, 
                      			"name",
                       		lv_name_0_0, 
-                      		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.UnrestrictedName");
+                      		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.UnrestrictedName");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -25734,7 +25734,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             int alt200=2;
             int LA200_0 = input.LA(1);
 
-            if ( (LA200_0==28) ) {
+            if ( (LA200_0==23) ) {
                 alt200=1;
             }
             switch (alt200) {
@@ -25749,7 +25749,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                       	        newCompositeNode(grammarAccess.getLetVariableCSAccess().getOwnedRoundBracketedClauseRoundBracketedClauseCSParserRuleCall_1_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_101);
+                    pushFollow(FollowSets000.FOLLOW_102);
                     lv_ownedRoundBracketedClause_1_0=ruleRoundBracketedClauseCS();
 
                     state._fsp--;
@@ -25780,14 +25780,14 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             int alt201=2;
             int LA201_0 = input.LA(1);
 
-            if ( (LA201_0==30) ) {
+            if ( (LA201_0==25) ) {
                 alt201=1;
             }
             switch (alt201) {
                 case 1 :
                     // InternalQVTcore.g:8855:5: otherlv_2= ':' ( (lv_ownedType_3_0= ruleTypeExpCS ) )
                     {
-                    otherlv_2=(Token)match(input,30,FollowSets000.FOLLOW_26); if (state.failed) return current;
+                    otherlv_2=(Token)match(input,25,FollowSets000.FOLLOW_18); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_2, grammarAccess.getLetVariableCSAccess().getColonKeyword_2_0());
@@ -25804,7 +25804,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                       	        newCompositeNode(grammarAccess.getLetVariableCSAccess().getOwnedTypeTypeExpCSParserRuleCall_2_1_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_99);
+                    pushFollow(FollowSets000.FOLLOW_100);
                     lv_ownedType_3_0=ruleTypeExpCS();
 
                     state._fsp--;
@@ -25834,7 +25834,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_4=(Token)match(input,38,FollowSets000.FOLLOW_17); if (state.failed) return current;
+            otherlv_4=(Token)match(input,38,FollowSets000.FOLLOW_9); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_4, grammarAccess.getLetVariableCSAccess().getEqualsSignKeyword_3());
@@ -25956,7 +25956,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             // InternalQVTcore.g:8920:1: (otherlv_0= '(' ( (lv_ownedExpression_1_0= ruleExpCS ) ) otherlv_2= ')' )
             // InternalQVTcore.g:8920:3: otherlv_0= '(' ( (lv_ownedExpression_1_0= ruleExpCS ) ) otherlv_2= ')'
             {
-            otherlv_0=(Token)match(input,28,FollowSets000.FOLLOW_17); if (state.failed) return current;
+            otherlv_0=(Token)match(input,23,FollowSets000.FOLLOW_9); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_0, grammarAccess.getNestedExpCSAccess().getLeftParenthesisKeyword_0());
@@ -25973,7 +25973,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getNestedExpCSAccess().getOwnedExpressionExpCSParserRuleCall_1_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_24);
+            pushFollow(FollowSets000.FOLLOW_16);
             lv_ownedExpression_1_0=ruleExpCS();
 
             state._fsp--;
@@ -25997,7 +25997,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_2=(Token)match(input,29,FollowSets000.FOLLOW_2); if (state.failed) return current;
+            otherlv_2=(Token)match(input,24,FollowSets000.FOLLOW_2); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_2, grammarAccess.getNestedExpCSAccess().getRightParenthesisKeyword_2());
@@ -26198,7 +26198,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getMultiplicityBoundsCSAccess().getLowerBoundLOWERParserRuleCall_0_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_96);
+            pushFollow(FollowSets000.FOLLOW_97);
             lv_lowerBound_0_0=ruleLOWER();
 
             state._fsp--;
@@ -26378,7 +26378,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             if ( (LA203_0==RULE_INT) ) {
                 alt203=1;
             }
-            else if ( (LA203_0==33||LA203_0==87||LA203_0==137) ) {
+            else if ( (LA203_0==28||LA203_0==87||LA203_0==137) ) {
                 alt203=2;
             }
             else {
@@ -26596,7 +26596,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             // InternalQVTcore.g:9138:1: (lv_stringBounds_0_1= '*' | lv_stringBounds_0_2= '+' | lv_stringBounds_0_3= '?' )
             int alt205=3;
             switch ( input.LA(1) ) {
-            case 33:
+            case 28:
                 {
                 alt205=1;
                 }
@@ -26623,7 +26623,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // InternalQVTcore.g:9139:3: lv_stringBounds_0_1= '*'
                     {
-                    lv_stringBounds_0_1=(Token)match(input,33,FollowSets000.FOLLOW_2); if (state.failed) return current;
+                    lv_stringBounds_0_1=(Token)match(input,28,FollowSets000.FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               newLeafNode(lv_stringBounds_0_1, grammarAccess.getMultiplicityStringCSAccess().getStringBoundsAsteriskKeyword_0_0());
@@ -26779,7 +26779,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getPathNameCSAccess().getOwnedPathElementsFirstPathElementCSParserRuleCall_0_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_91);
+            pushFollow(FollowSets000.FOLLOW_92);
             lv_ownedPathElements_0_0=ruleFirstPathElementCS();
 
             state._fsp--;
@@ -26809,7 +26809,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                 int alt206=2;
                 int LA206_0 = input.LA(1);
 
-                if ( (LA206_0==32) ) {
+                if ( (LA206_0==27) ) {
                     alt206=1;
                 }
 
@@ -26818,7 +26818,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             	case 1 :
             	    // InternalQVTcore.g:9217:4: otherlv_1= '::' ( (lv_ownedPathElements_2_0= ruleNextPathElementCS ) )
             	    {
-            	    otherlv_1=(Token)match(input,32,FollowSets000.FOLLOW_26); if (state.failed) return current;
+            	    otherlv_1=(Token)match(input,27,FollowSets000.FOLLOW_41); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	          	newLeafNode(otherlv_1, grammarAccess.getPathNameCSAccess().getColonColonKeyword_1_0());
@@ -26835,7 +26835,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             	      	        newCompositeNode(grammarAccess.getPathNameCSAccess().getOwnedPathElementsNextPathElementCSParserRuleCall_1_1_0()); 
             	      	    
             	    }
-            	    pushFollow(FollowSets000.FOLLOW_91);
+            	    pushFollow(FollowSets000.FOLLOW_92);
             	    lv_ownedPathElements_2_0=ruleNextPathElementCS();
 
             	    state._fsp--;
@@ -27211,7 +27211,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                 int alt207=2;
                 int LA207_0 = input.LA(1);
 
-                if ( (LA207_0==21) ) {
+                if ( (LA207_0==18) ) {
                     alt207=1;
                 }
 
@@ -27220,7 +27220,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             	case 1 :
             	    // InternalQVTcore.g:9356:4: otherlv_1= ',' ( (lv_ownedSubstitutions_2_0= ruleTemplateParameterSubstitutionCS ) )
             	    {
-            	    otherlv_1=(Token)match(input,21,FollowSets000.FOLLOW_127); if (state.failed) return current;
+            	    otherlv_1=(Token)match(input,18,FollowSets000.FOLLOW_127); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	          	newLeafNode(otherlv_1, grammarAccess.getTemplateBindingCSAccess().getCommaKeyword_1_0());
@@ -27508,7 +27508,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             // InternalQVTcore.g:9456:1: (otherlv_0= '(' ( (lv_ownedParameters_1_0= ruleTypeParameterCS ) ) (otherlv_2= ',' ( (lv_ownedParameters_3_0= ruleTypeParameterCS ) ) )* otherlv_4= ')' )
             // InternalQVTcore.g:9456:3: otherlv_0= '(' ( (lv_ownedParameters_1_0= ruleTypeParameterCS ) ) (otherlv_2= ',' ( (lv_ownedParameters_3_0= ruleTypeParameterCS ) ) )* otherlv_4= ')'
             {
-            otherlv_0=(Token)match(input,28,FollowSets000.FOLLOW_8); if (state.failed) return current;
+            otherlv_0=(Token)match(input,23,FollowSets000.FOLLOW_5); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_0, grammarAccess.getTemplateSignatureCSAccess().getLeftParenthesisKeyword_0());
@@ -27525,7 +27525,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getTemplateSignatureCSAccess().getOwnedParametersTypeParameterCSParserRuleCall_1_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_23);
+            pushFollow(FollowSets000.FOLLOW_15);
             lv_ownedParameters_1_0=ruleTypeParameterCS();
 
             state._fsp--;
@@ -27555,7 +27555,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                 int alt209=2;
                 int LA209_0 = input.LA(1);
 
-                if ( (LA209_0==21) ) {
+                if ( (LA209_0==18) ) {
                     alt209=1;
                 }
 
@@ -27564,7 +27564,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             	case 1 :
             	    // InternalQVTcore.g:9478:4: otherlv_2= ',' ( (lv_ownedParameters_3_0= ruleTypeParameterCS ) )
             	    {
-            	    otherlv_2=(Token)match(input,21,FollowSets000.FOLLOW_8); if (state.failed) return current;
+            	    otherlv_2=(Token)match(input,18,FollowSets000.FOLLOW_5); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	          	newLeafNode(otherlv_2, grammarAccess.getTemplateSignatureCSAccess().getCommaKeyword_2_0());
@@ -27581,7 +27581,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             	      	        newCompositeNode(grammarAccess.getTemplateSignatureCSAccess().getOwnedParametersTypeParameterCSParserRuleCall_2_1_0()); 
             	      	    
             	    }
-            	    pushFollow(FollowSets000.FOLLOW_23);
+            	    pushFollow(FollowSets000.FOLLOW_15);
             	    lv_ownedParameters_3_0=ruleTypeParameterCS();
 
             	    state._fsp--;
@@ -27614,7 +27614,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                 }
             } while (true);
 
-            otherlv_4=(Token)match(input,29,FollowSets000.FOLLOW_2); if (state.failed) return current;
+            otherlv_4=(Token)match(input,24,FollowSets000.FOLLOW_2); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_4, grammarAccess.getTemplateSignatureCSAccess().getRightParenthesisKeyword_3());
@@ -27730,7 +27730,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                      			current, 
                      			"name",
                       		lv_name_0_0, 
-                      		"org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase.UnrestrictedName");
+                      		"org.eclipse.qvtd.xtext.qvtcore.QVTcore.UnrestrictedName");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -27751,7 +27751,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // InternalQVTcore.g:9543:4: otherlv_1= 'extends' ( (lv_ownedExtends_2_0= ruleTypedRefCS ) ) (otherlv_3= '&&' ( (lv_ownedExtends_4_0= ruleTypedRefCS ) ) )*
                     {
-                    otherlv_1=(Token)match(input,82,FollowSets000.FOLLOW_8); if (state.failed) return current;
+                    otherlv_1=(Token)match(input,82,FollowSets000.FOLLOW_18); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_1, grammarAccess.getTypeParameterCSAccess().getExtendsKeyword_1_0());
@@ -27807,7 +27807,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                     	case 1 :
                     	    // InternalQVTcore.g:9565:4: otherlv_3= '&&' ( (lv_ownedExtends_4_0= ruleTypedRefCS ) )
                     	    {
-                    	    otherlv_3=(Token)match(input,138,FollowSets000.FOLLOW_8); if (state.failed) return current;
+                    	    otherlv_3=(Token)match(input,138,FollowSets000.FOLLOW_18); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
 
                     	          	newLeafNode(otherlv_3, grammarAccess.getTypeParameterCSAccess().getAmpersandAmpersandKeyword_1_2_0());
@@ -27945,7 +27945,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             int alt212=2;
             int LA212_0 = input.LA(1);
 
-            if ( ((LA212_0>=RULE_SIMPLE_ID && LA212_0<=RULE_ESCAPED_ID)||LA212_0==18||LA212_0==20||(LA212_0>=26 && LA212_0<=27)||LA212_0==31||(LA212_0>=35 && LA212_0<=36)||(LA212_0>=41 && LA212_0<=44)) ) {
+            if ( ((LA212_0>=RULE_SIMPLE_ID && LA212_0<=RULE_ESCAPED_ID)||(LA212_0>=21 && LA212_0<=22)||LA212_0==26||LA212_0==31||LA212_0==33||(LA212_0>=35 && LA212_0<=36)||(LA212_0>=41 && LA212_0<=44)) ) {
                 alt212=1;
             }
             else if ( (LA212_0==137) ) {
@@ -28201,7 +28201,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
               	        newCompositeNode(grammarAccess.getTypedTypeRefCSAccess().getOwnedPathNamePathNameCSParserRuleCall_0_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_92);
+            pushFollow(FollowSets000.FOLLOW_93);
             lv_ownedPathName_0_0=rulePathNameCS();
 
             state._fsp--;
@@ -28229,14 +28229,14 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             int alt213=2;
             int LA213_0 = input.LA(1);
 
-            if ( (LA213_0==28) ) {
+            if ( (LA213_0==23) ) {
                 alt213=1;
             }
             switch (alt213) {
                 case 1 :
                     // InternalQVTcore.g:9705:4: otherlv_1= '(' ( (lv_ownedBinding_2_0= ruleTemplateBindingCS ) ) otherlv_3= ')'
                     {
-                    otherlv_1=(Token)match(input,28,FollowSets000.FOLLOW_127); if (state.failed) return current;
+                    otherlv_1=(Token)match(input,23,FollowSets000.FOLLOW_127); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_1, grammarAccess.getTypedTypeRefCSAccess().getLeftParenthesisKeyword_1_0());
@@ -28253,7 +28253,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                       	        newCompositeNode(grammarAccess.getTypedTypeRefCSAccess().getOwnedBindingTemplateBindingCSParserRuleCall_1_1_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_24);
+                    pushFollow(FollowSets000.FOLLOW_16);
                     lv_ownedBinding_2_0=ruleTemplateBindingCS();
 
                     state._fsp--;
@@ -28277,7 +28277,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    otherlv_3=(Token)match(input,29,FollowSets000.FOLLOW_2); if (state.failed) return current;
+                    otherlv_3=(Token)match(input,24,FollowSets000.FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_3, grammarAccess.getTypedTypeRefCSAccess().getRightParenthesisKeyword_1_2());
@@ -28405,7 +28405,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // InternalQVTcore.g:9765:3: otherlv_2= 'extends' ( (lv_ownedExtends_3_0= ruleTypedRefCS ) )
                     {
-                    otherlv_2=(Token)match(input,82,FollowSets000.FOLLOW_8); if (state.failed) return current;
+                    otherlv_2=(Token)match(input,82,FollowSets000.FOLLOW_18); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_2, grammarAccess.getWildcardTypeRefCSAccess().getExtendsKeyword_2_0());
@@ -29005,7 +29005,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             if ( (LA216_0==RULE_INT) ) {
                 alt216=1;
             }
-            else if ( (LA216_0==33) ) {
+            else if ( (LA216_0==28) ) {
                 alt216=2;
             }
             else {
@@ -29036,7 +29036,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                 case 2 :
                     // InternalQVTcore.g:9969:2: kw= '*'
                     {
-                    kw=(Token)match(input,33,FollowSets000.FOLLOW_2); if (state.failed) return current;
+                    kw=(Token)match(input,28,FollowSets000.FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -29150,8 +29150,8 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
     }
     // $ANTLR end "ruleURI"
 
-    // $ANTLR start synpred18_InternalQVTcore
-    public final void synpred18_InternalQVTcore_fragment() throws RecognitionException {   
+    // $ANTLR start synpred10_InternalQVTcore
+    public final void synpred10_InternalQVTcore_fragment() throws RecognitionException {   
         Token otherlv_0=null;
         Token otherlv_3=null;
         Token otherlv_6=null;
@@ -29167,33 +29167,33 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
         EObject lv_ownedConstraints_7_0 = null;
 
 
-        // InternalQVTcore.g:406:2: ( (otherlv_0= '{' ( ( (lv_ownedUnrealizedVariables_1_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_2_0= ruleRealizedVariableCS ) ) ) (otherlv_3= ',' ( ( (lv_ownedUnrealizedVariables_4_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_5_0= ruleRealizedVariableCS ) ) ) )* otherlv_6= '|' ( (lv_ownedConstraints_7_0= rulePredicateOrAssignmentCS ) )* otherlv_8= '}' ) )
-        // InternalQVTcore.g:406:2: (otherlv_0= '{' ( ( (lv_ownedUnrealizedVariables_1_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_2_0= ruleRealizedVariableCS ) ) ) (otherlv_3= ',' ( ( (lv_ownedUnrealizedVariables_4_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_5_0= ruleRealizedVariableCS ) ) ) )* otherlv_6= '|' ( (lv_ownedConstraints_7_0= rulePredicateOrAssignmentCS ) )* otherlv_8= '}' )
+        // InternalQVTcore.g:207:2: ( (otherlv_0= '{' ( ( (lv_ownedUnrealizedVariables_1_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_2_0= ruleRealizedVariableCS ) ) ) (otherlv_3= ',' ( ( (lv_ownedUnrealizedVariables_4_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_5_0= ruleRealizedVariableCS ) ) ) )* otherlv_6= '|' ( (lv_ownedConstraints_7_0= rulePredicateOrAssignmentCS ) )* otherlv_8= '}' ) )
+        // InternalQVTcore.g:207:2: (otherlv_0= '{' ( ( (lv_ownedUnrealizedVariables_1_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_2_0= ruleRealizedVariableCS ) ) ) (otherlv_3= ',' ( ( (lv_ownedUnrealizedVariables_4_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_5_0= ruleRealizedVariableCS ) ) ) )* otherlv_6= '|' ( (lv_ownedConstraints_7_0= rulePredicateOrAssignmentCS ) )* otherlv_8= '}' )
         {
-        // InternalQVTcore.g:406:2: (otherlv_0= '{' ( ( (lv_ownedUnrealizedVariables_1_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_2_0= ruleRealizedVariableCS ) ) ) (otherlv_3= ',' ( ( (lv_ownedUnrealizedVariables_4_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_5_0= ruleRealizedVariableCS ) ) ) )* otherlv_6= '|' ( (lv_ownedConstraints_7_0= rulePredicateOrAssignmentCS ) )* otherlv_8= '}' )
-        // InternalQVTcore.g:406:4: otherlv_0= '{' ( ( (lv_ownedUnrealizedVariables_1_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_2_0= ruleRealizedVariableCS ) ) ) (otherlv_3= ',' ( ( (lv_ownedUnrealizedVariables_4_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_5_0= ruleRealizedVariableCS ) ) ) )* otherlv_6= '|' ( (lv_ownedConstraints_7_0= rulePredicateOrAssignmentCS ) )* otherlv_8= '}'
+        // InternalQVTcore.g:207:2: (otherlv_0= '{' ( ( (lv_ownedUnrealizedVariables_1_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_2_0= ruleRealizedVariableCS ) ) ) (otherlv_3= ',' ( ( (lv_ownedUnrealizedVariables_4_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_5_0= ruleRealizedVariableCS ) ) ) )* otherlv_6= '|' ( (lv_ownedConstraints_7_0= rulePredicateOrAssignmentCS ) )* otherlv_8= '}' )
+        // InternalQVTcore.g:207:4: otherlv_0= '{' ( ( (lv_ownedUnrealizedVariables_1_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_2_0= ruleRealizedVariableCS ) ) ) (otherlv_3= ',' ( ( (lv_ownedUnrealizedVariables_4_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_5_0= ruleRealizedVariableCS ) ) ) )* otherlv_6= '|' ( (lv_ownedConstraints_7_0= rulePredicateOrAssignmentCS ) )* otherlv_8= '}'
         {
-        otherlv_0=(Token)match(input,22,FollowSets000.FOLLOW_8); if (state.failed) return ;
-        // InternalQVTcore.g:410:1: ( ( (lv_ownedUnrealizedVariables_1_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_2_0= ruleRealizedVariableCS ) ) )
-        int alt219=2;
-        int LA219_0 = input.LA(1);
+        otherlv_0=(Token)match(input,17,FollowSets000.FOLLOW_5); if (state.failed) return ;
+        // InternalQVTcore.g:211:1: ( ( (lv_ownedUnrealizedVariables_1_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_2_0= ruleRealizedVariableCS ) ) )
+        int alt218=2;
+        int LA218_0 = input.LA(1);
 
-        if ( ((LA219_0>=RULE_SIMPLE_ID && LA219_0<=RULE_ESCAPED_ID)||LA219_0==18||LA219_0==20||(LA219_0>=26 && LA219_0<=27)||LA219_0==31||(LA219_0>=35 && LA219_0<=36)||(LA219_0>=41 && LA219_0<=42)||LA219_0==44) ) {
-            alt219=1;
+        if ( ((LA218_0>=RULE_SIMPLE_ID && LA218_0<=RULE_ESCAPED_ID)||(LA218_0>=21 && LA218_0<=22)||LA218_0==26||LA218_0==31||LA218_0==33||(LA218_0>=35 && LA218_0<=36)||(LA218_0>=41 && LA218_0<=42)||LA218_0==44) ) {
+            alt218=1;
         }
-        else if ( (LA219_0==43) ) {
-            int LA219_2 = input.LA(2);
+        else if ( (LA218_0==43) ) {
+            int LA218_2 = input.LA(2);
 
-            if ( ((LA219_2>=RULE_SIMPLE_ID && LA219_2<=RULE_ESCAPED_ID)||LA219_2==18||LA219_2==20||(LA219_2>=26 && LA219_2<=27)||LA219_2==31||(LA219_2>=35 && LA219_2<=36)||(LA219_2>=41 && LA219_2<=44)) ) {
-                alt219=2;
+            if ( ((LA218_2>=RULE_SIMPLE_ID && LA218_2<=RULE_ESCAPED_ID)||(LA218_2>=21 && LA218_2<=22)||LA218_2==26||LA218_2==31||LA218_2==33||(LA218_2>=35 && LA218_2<=36)||(LA218_2>=41 && LA218_2<=44)) ) {
+                alt218=2;
             }
-            else if ( (LA219_2==21||LA219_2==25||LA219_2==30||LA219_2==39) ) {
-                alt219=1;
+            else if ( ((LA218_2>=18 && LA218_2<=19)||LA218_2==25||LA218_2==39) ) {
+                alt218=1;
             }
             else {
                 if (state.backtracking>0) {state.failed=true; return ;}
                 NoViableAltException nvae =
-                    new NoViableAltException("", 219, 2, input);
+                    new NoViableAltException("", 218, 2, input);
 
                 throw nvae;
             }
@@ -29201,26 +29201,26 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
         else {
             if (state.backtracking>0) {state.failed=true; return ;}
             NoViableAltException nvae =
-                new NoViableAltException("", 219, 0, input);
+                new NoViableAltException("", 218, 0, input);
 
             throw nvae;
         }
-        switch (alt219) {
+        switch (alt218) {
             case 1 :
-                // InternalQVTcore.g:410:2: ( (lv_ownedUnrealizedVariables_1_0= ruleUnrealizedVariableCS ) )
+                // InternalQVTcore.g:211:2: ( (lv_ownedUnrealizedVariables_1_0= ruleUnrealizedVariableCS ) )
                 {
-                // InternalQVTcore.g:410:2: ( (lv_ownedUnrealizedVariables_1_0= ruleUnrealizedVariableCS ) )
-                // InternalQVTcore.g:411:1: (lv_ownedUnrealizedVariables_1_0= ruleUnrealizedVariableCS )
+                // InternalQVTcore.g:211:2: ( (lv_ownedUnrealizedVariables_1_0= ruleUnrealizedVariableCS ) )
+                // InternalQVTcore.g:212:1: (lv_ownedUnrealizedVariables_1_0= ruleUnrealizedVariableCS )
                 {
-                // InternalQVTcore.g:411:1: (lv_ownedUnrealizedVariables_1_0= ruleUnrealizedVariableCS )
-                // InternalQVTcore.g:412:3: lv_ownedUnrealizedVariables_1_0= ruleUnrealizedVariableCS
+                // InternalQVTcore.g:212:1: (lv_ownedUnrealizedVariables_1_0= ruleUnrealizedVariableCS )
+                // InternalQVTcore.g:213:3: lv_ownedUnrealizedVariables_1_0= ruleUnrealizedVariableCS
                 {
                 if ( state.backtracking==0 ) {
                    
                   	        newCompositeNode(grammarAccess.getBottomPatternCSAccess().getOwnedUnrealizedVariablesUnrealizedVariableCSParserRuleCall_0_1_0_0()); 
                   	    
                 }
-                pushFollow(FollowSets000.FOLLOW_14);
+                pushFollow(FollowSets000.FOLLOW_6);
                 lv_ownedUnrealizedVariables_1_0=ruleUnrealizedVariableCS();
 
                 state._fsp--;
@@ -29235,20 +29235,20 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                 }
                 break;
             case 2 :
-                // InternalQVTcore.g:429:6: ( (lv_ownedRealizedVariables_2_0= ruleRealizedVariableCS ) )
+                // InternalQVTcore.g:230:6: ( (lv_ownedRealizedVariables_2_0= ruleRealizedVariableCS ) )
                 {
-                // InternalQVTcore.g:429:6: ( (lv_ownedRealizedVariables_2_0= ruleRealizedVariableCS ) )
-                // InternalQVTcore.g:430:1: (lv_ownedRealizedVariables_2_0= ruleRealizedVariableCS )
+                // InternalQVTcore.g:230:6: ( (lv_ownedRealizedVariables_2_0= ruleRealizedVariableCS ) )
+                // InternalQVTcore.g:231:1: (lv_ownedRealizedVariables_2_0= ruleRealizedVariableCS )
                 {
-                // InternalQVTcore.g:430:1: (lv_ownedRealizedVariables_2_0= ruleRealizedVariableCS )
-                // InternalQVTcore.g:431:3: lv_ownedRealizedVariables_2_0= ruleRealizedVariableCS
+                // InternalQVTcore.g:231:1: (lv_ownedRealizedVariables_2_0= ruleRealizedVariableCS )
+                // InternalQVTcore.g:232:3: lv_ownedRealizedVariables_2_0= ruleRealizedVariableCS
                 {
                 if ( state.backtracking==0 ) {
                    
                   	        newCompositeNode(grammarAccess.getBottomPatternCSAccess().getOwnedRealizedVariablesRealizedVariableCSParserRuleCall_0_1_1_0()); 
                   	    
                 }
-                pushFollow(FollowSets000.FOLLOW_14);
+                pushFollow(FollowSets000.FOLLOW_6);
                 lv_ownedRealizedVariables_2_0=ruleRealizedVariableCS();
 
                 state._fsp--;
@@ -29265,42 +29265,42 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
         }
 
-        // InternalQVTcore.g:447:3: (otherlv_3= ',' ( ( (lv_ownedUnrealizedVariables_4_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_5_0= ruleRealizedVariableCS ) ) ) )*
-        loop221:
+        // InternalQVTcore.g:248:3: (otherlv_3= ',' ( ( (lv_ownedUnrealizedVariables_4_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_5_0= ruleRealizedVariableCS ) ) ) )*
+        loop220:
         do {
-            int alt221=2;
-            int LA221_0 = input.LA(1);
+            int alt220=2;
+            int LA220_0 = input.LA(1);
 
-            if ( (LA221_0==21) ) {
-                alt221=1;
+            if ( (LA220_0==18) ) {
+                alt220=1;
             }
 
 
-            switch (alt221) {
+            switch (alt220) {
         	case 1 :
-        	    // InternalQVTcore.g:447:5: otherlv_3= ',' ( ( (lv_ownedUnrealizedVariables_4_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_5_0= ruleRealizedVariableCS ) ) )
+        	    // InternalQVTcore.g:248:5: otherlv_3= ',' ( ( (lv_ownedUnrealizedVariables_4_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_5_0= ruleRealizedVariableCS ) ) )
         	    {
-        	    otherlv_3=(Token)match(input,21,FollowSets000.FOLLOW_8); if (state.failed) return ;
-        	    // InternalQVTcore.g:451:1: ( ( (lv_ownedUnrealizedVariables_4_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_5_0= ruleRealizedVariableCS ) ) )
-        	    int alt220=2;
-        	    int LA220_0 = input.LA(1);
+        	    otherlv_3=(Token)match(input,18,FollowSets000.FOLLOW_5); if (state.failed) return ;
+        	    // InternalQVTcore.g:252:1: ( ( (lv_ownedUnrealizedVariables_4_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_5_0= ruleRealizedVariableCS ) ) )
+        	    int alt219=2;
+        	    int LA219_0 = input.LA(1);
 
-        	    if ( ((LA220_0>=RULE_SIMPLE_ID && LA220_0<=RULE_ESCAPED_ID)||LA220_0==18||LA220_0==20||(LA220_0>=26 && LA220_0<=27)||LA220_0==31||(LA220_0>=35 && LA220_0<=36)||(LA220_0>=41 && LA220_0<=42)||LA220_0==44) ) {
-        	        alt220=1;
+        	    if ( ((LA219_0>=RULE_SIMPLE_ID && LA219_0<=RULE_ESCAPED_ID)||(LA219_0>=21 && LA219_0<=22)||LA219_0==26||LA219_0==31||LA219_0==33||(LA219_0>=35 && LA219_0<=36)||(LA219_0>=41 && LA219_0<=42)||LA219_0==44) ) {
+        	        alt219=1;
         	    }
-        	    else if ( (LA220_0==43) ) {
-        	        int LA220_2 = input.LA(2);
+        	    else if ( (LA219_0==43) ) {
+        	        int LA219_2 = input.LA(2);
 
-        	        if ( ((LA220_2>=RULE_SIMPLE_ID && LA220_2<=RULE_ESCAPED_ID)||LA220_2==18||LA220_2==20||(LA220_2>=26 && LA220_2<=27)||LA220_2==31||(LA220_2>=35 && LA220_2<=36)||(LA220_2>=41 && LA220_2<=44)) ) {
-        	            alt220=2;
+        	        if ( ((LA219_2>=RULE_SIMPLE_ID && LA219_2<=RULE_ESCAPED_ID)||(LA219_2>=21 && LA219_2<=22)||LA219_2==26||LA219_2==31||LA219_2==33||(LA219_2>=35 && LA219_2<=36)||(LA219_2>=41 && LA219_2<=44)) ) {
+        	            alt219=2;
         	        }
-        	        else if ( (LA220_2==21||LA220_2==25||LA220_2==30||LA220_2==39) ) {
-        	            alt220=1;
+        	        else if ( ((LA219_2>=18 && LA219_2<=19)||LA219_2==25||LA219_2==39) ) {
+        	            alt219=1;
         	        }
         	        else {
         	            if (state.backtracking>0) {state.failed=true; return ;}
         	            NoViableAltException nvae =
-        	                new NoViableAltException("", 220, 2, input);
+        	                new NoViableAltException("", 219, 2, input);
 
         	            throw nvae;
         	        }
@@ -29308,26 +29308,26 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
         	    else {
         	        if (state.backtracking>0) {state.failed=true; return ;}
         	        NoViableAltException nvae =
-        	            new NoViableAltException("", 220, 0, input);
+        	            new NoViableAltException("", 219, 0, input);
 
         	        throw nvae;
         	    }
-        	    switch (alt220) {
+        	    switch (alt219) {
         	        case 1 :
-        	            // InternalQVTcore.g:451:2: ( (lv_ownedUnrealizedVariables_4_0= ruleUnrealizedVariableCS ) )
+        	            // InternalQVTcore.g:252:2: ( (lv_ownedUnrealizedVariables_4_0= ruleUnrealizedVariableCS ) )
         	            {
-        	            // InternalQVTcore.g:451:2: ( (lv_ownedUnrealizedVariables_4_0= ruleUnrealizedVariableCS ) )
-        	            // InternalQVTcore.g:452:1: (lv_ownedUnrealizedVariables_4_0= ruleUnrealizedVariableCS )
+        	            // InternalQVTcore.g:252:2: ( (lv_ownedUnrealizedVariables_4_0= ruleUnrealizedVariableCS ) )
+        	            // InternalQVTcore.g:253:1: (lv_ownedUnrealizedVariables_4_0= ruleUnrealizedVariableCS )
         	            {
-        	            // InternalQVTcore.g:452:1: (lv_ownedUnrealizedVariables_4_0= ruleUnrealizedVariableCS )
-        	            // InternalQVTcore.g:453:3: lv_ownedUnrealizedVariables_4_0= ruleUnrealizedVariableCS
+        	            // InternalQVTcore.g:253:1: (lv_ownedUnrealizedVariables_4_0= ruleUnrealizedVariableCS )
+        	            // InternalQVTcore.g:254:3: lv_ownedUnrealizedVariables_4_0= ruleUnrealizedVariableCS
         	            {
         	            if ( state.backtracking==0 ) {
         	               
         	              	        newCompositeNode(grammarAccess.getBottomPatternCSAccess().getOwnedUnrealizedVariablesUnrealizedVariableCSParserRuleCall_0_2_1_0_0()); 
         	              	    
         	            }
-        	            pushFollow(FollowSets000.FOLLOW_14);
+        	            pushFollow(FollowSets000.FOLLOW_6);
         	            lv_ownedUnrealizedVariables_4_0=ruleUnrealizedVariableCS();
 
         	            state._fsp--;
@@ -29342,20 +29342,20 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
         	            }
         	            break;
         	        case 2 :
-        	            // InternalQVTcore.g:470:6: ( (lv_ownedRealizedVariables_5_0= ruleRealizedVariableCS ) )
+        	            // InternalQVTcore.g:271:6: ( (lv_ownedRealizedVariables_5_0= ruleRealizedVariableCS ) )
         	            {
-        	            // InternalQVTcore.g:470:6: ( (lv_ownedRealizedVariables_5_0= ruleRealizedVariableCS ) )
-        	            // InternalQVTcore.g:471:1: (lv_ownedRealizedVariables_5_0= ruleRealizedVariableCS )
+        	            // InternalQVTcore.g:271:6: ( (lv_ownedRealizedVariables_5_0= ruleRealizedVariableCS ) )
+        	            // InternalQVTcore.g:272:1: (lv_ownedRealizedVariables_5_0= ruleRealizedVariableCS )
         	            {
-        	            // InternalQVTcore.g:471:1: (lv_ownedRealizedVariables_5_0= ruleRealizedVariableCS )
-        	            // InternalQVTcore.g:472:3: lv_ownedRealizedVariables_5_0= ruleRealizedVariableCS
+        	            // InternalQVTcore.g:272:1: (lv_ownedRealizedVariables_5_0= ruleRealizedVariableCS )
+        	            // InternalQVTcore.g:273:3: lv_ownedRealizedVariables_5_0= ruleRealizedVariableCS
         	            {
         	            if ( state.backtracking==0 ) {
         	               
         	              	        newCompositeNode(grammarAccess.getBottomPatternCSAccess().getOwnedRealizedVariablesRealizedVariableCSParserRuleCall_0_2_1_1_0()); 
         	              	    
         	            }
-        	            pushFollow(FollowSets000.FOLLOW_14);
+        	            pushFollow(FollowSets000.FOLLOW_6);
         	            lv_ownedRealizedVariables_5_0=ruleRealizedVariableCS();
 
         	            state._fsp--;
@@ -29377,35 +29377,35 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
         	    break;
 
         	default :
-        	    break loop221;
+        	    break loop220;
             }
         } while (true);
 
-        otherlv_6=(Token)match(input,25,FollowSets000.FOLLOW_15); if (state.failed) return ;
-        // InternalQVTcore.g:492:1: ( (lv_ownedConstraints_7_0= rulePredicateOrAssignmentCS ) )*
-        loop222:
+        otherlv_6=(Token)match(input,19,FollowSets000.FOLLOW_7); if (state.failed) return ;
+        // InternalQVTcore.g:293:1: ( (lv_ownedConstraints_7_0= rulePredicateOrAssignmentCS ) )*
+        loop221:
         do {
-            int alt222=2;
-            int LA222_0 = input.LA(1);
+            int alt221=2;
+            int LA221_0 = input.LA(1);
 
-            if ( (LA222_0==RULE_SINGLE_QUOTED_STRING||(LA222_0>=RULE_INT && LA222_0<=RULE_ESCAPED_ID)||(LA222_0>=17 && LA222_0<=18)||LA222_0==20||(LA222_0>=26 && LA222_0<=28)||LA222_0==31||LA222_0==33||(LA222_0>=35 && LA222_0<=36)||(LA222_0>=41 && LA222_0<=44)||(LA222_0>=84 && LA222_0<=85)||(LA222_0>=101 && LA222_0<=115)||LA222_0==118||(LA222_0>=120 && LA222_0<=123)||LA222_0==128||(LA222_0>=133 && LA222_0<=134)) ) {
-                alt222=1;
+            if ( (LA221_0==RULE_SINGLE_QUOTED_STRING||(LA221_0>=RULE_INT && LA221_0<=RULE_ESCAPED_ID)||(LA221_0>=21 && LA221_0<=23)||LA221_0==26||LA221_0==28||(LA221_0>=30 && LA221_0<=31)||LA221_0==33||(LA221_0>=35 && LA221_0<=36)||(LA221_0>=41 && LA221_0<=44)||(LA221_0>=84 && LA221_0<=85)||(LA221_0>=101 && LA221_0<=115)||LA221_0==118||(LA221_0>=120 && LA221_0<=123)||LA221_0==128||(LA221_0>=133 && LA221_0<=134)) ) {
+                alt221=1;
             }
 
 
-            switch (alt222) {
+            switch (alt221) {
         	case 1 :
-        	    // InternalQVTcore.g:493:1: (lv_ownedConstraints_7_0= rulePredicateOrAssignmentCS )
+        	    // InternalQVTcore.g:294:1: (lv_ownedConstraints_7_0= rulePredicateOrAssignmentCS )
         	    {
-        	    // InternalQVTcore.g:493:1: (lv_ownedConstraints_7_0= rulePredicateOrAssignmentCS )
-        	    // InternalQVTcore.g:494:3: lv_ownedConstraints_7_0= rulePredicateOrAssignmentCS
+        	    // InternalQVTcore.g:294:1: (lv_ownedConstraints_7_0= rulePredicateOrAssignmentCS )
+        	    // InternalQVTcore.g:295:3: lv_ownedConstraints_7_0= rulePredicateOrAssignmentCS
         	    {
         	    if ( state.backtracking==0 ) {
         	       
         	      	        newCompositeNode(grammarAccess.getBottomPatternCSAccess().getOwnedConstraintsPredicateOrAssignmentCSParserRuleCall_0_4_0()); 
         	      	    
         	    }
-        	    pushFollow(FollowSets000.FOLLOW_15);
+        	    pushFollow(FollowSets000.FOLLOW_7);
         	    lv_ownedConstraints_7_0=rulePredicateOrAssignmentCS();
 
         	    state._fsp--;
@@ -29418,21 +29418,21 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
         	    break;
 
         	default :
-        	    break loop222;
+        	    break loop221;
             }
         } while (true);
 
-        otherlv_8=(Token)match(input,24,FollowSets000.FOLLOW_2); if (state.failed) return ;
+        otherlv_8=(Token)match(input,20,FollowSets000.FOLLOW_2); if (state.failed) return ;
 
         }
 
 
         }
     }
-    // $ANTLR end synpred18_InternalQVTcore
+    // $ANTLR end synpred10_InternalQVTcore
 
-    // $ANTLR start synpred22_InternalQVTcore
-    public final void synpred22_InternalQVTcore_fragment() throws RecognitionException {   
+    // $ANTLR start synpred14_InternalQVTcore
+    public final void synpred14_InternalQVTcore_fragment() throws RecognitionException {   
         Token otherlv_9=null;
         Token otherlv_12=null;
         Token otherlv_15=null;
@@ -29445,33 +29445,33 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
         EObject lv_ownedRealizedVariables_14_0 = null;
 
 
-        // InternalQVTcore.g:515:6: ( (otherlv_9= '{' ( ( (lv_ownedUnrealizedVariables_10_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_11_0= ruleRealizedVariableCS ) ) ) (otherlv_12= ',' ( ( (lv_ownedUnrealizedVariables_13_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_14_0= ruleRealizedVariableCS ) ) ) )* otherlv_15= '}' ) )
-        // InternalQVTcore.g:515:6: (otherlv_9= '{' ( ( (lv_ownedUnrealizedVariables_10_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_11_0= ruleRealizedVariableCS ) ) ) (otherlv_12= ',' ( ( (lv_ownedUnrealizedVariables_13_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_14_0= ruleRealizedVariableCS ) ) ) )* otherlv_15= '}' )
+        // InternalQVTcore.g:316:6: ( (otherlv_9= '{' ( ( (lv_ownedUnrealizedVariables_10_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_11_0= ruleRealizedVariableCS ) ) ) (otherlv_12= ',' ( ( (lv_ownedUnrealizedVariables_13_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_14_0= ruleRealizedVariableCS ) ) ) )* otherlv_15= '}' ) )
+        // InternalQVTcore.g:316:6: (otherlv_9= '{' ( ( (lv_ownedUnrealizedVariables_10_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_11_0= ruleRealizedVariableCS ) ) ) (otherlv_12= ',' ( ( (lv_ownedUnrealizedVariables_13_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_14_0= ruleRealizedVariableCS ) ) ) )* otherlv_15= '}' )
         {
-        // InternalQVTcore.g:515:6: (otherlv_9= '{' ( ( (lv_ownedUnrealizedVariables_10_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_11_0= ruleRealizedVariableCS ) ) ) (otherlv_12= ',' ( ( (lv_ownedUnrealizedVariables_13_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_14_0= ruleRealizedVariableCS ) ) ) )* otherlv_15= '}' )
-        // InternalQVTcore.g:515:8: otherlv_9= '{' ( ( (lv_ownedUnrealizedVariables_10_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_11_0= ruleRealizedVariableCS ) ) ) (otherlv_12= ',' ( ( (lv_ownedUnrealizedVariables_13_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_14_0= ruleRealizedVariableCS ) ) ) )* otherlv_15= '}'
+        // InternalQVTcore.g:316:6: (otherlv_9= '{' ( ( (lv_ownedUnrealizedVariables_10_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_11_0= ruleRealizedVariableCS ) ) ) (otherlv_12= ',' ( ( (lv_ownedUnrealizedVariables_13_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_14_0= ruleRealizedVariableCS ) ) ) )* otherlv_15= '}' )
+        // InternalQVTcore.g:316:8: otherlv_9= '{' ( ( (lv_ownedUnrealizedVariables_10_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_11_0= ruleRealizedVariableCS ) ) ) (otherlv_12= ',' ( ( (lv_ownedUnrealizedVariables_13_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_14_0= ruleRealizedVariableCS ) ) ) )* otherlv_15= '}'
         {
-        otherlv_9=(Token)match(input,22,FollowSets000.FOLLOW_8); if (state.failed) return ;
-        // InternalQVTcore.g:519:1: ( ( (lv_ownedUnrealizedVariables_10_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_11_0= ruleRealizedVariableCS ) ) )
-        int alt224=2;
-        int LA224_0 = input.LA(1);
+        otherlv_9=(Token)match(input,17,FollowSets000.FOLLOW_5); if (state.failed) return ;
+        // InternalQVTcore.g:320:1: ( ( (lv_ownedUnrealizedVariables_10_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_11_0= ruleRealizedVariableCS ) ) )
+        int alt223=2;
+        int LA223_0 = input.LA(1);
 
-        if ( ((LA224_0>=RULE_SIMPLE_ID && LA224_0<=RULE_ESCAPED_ID)||LA224_0==18||LA224_0==20||(LA224_0>=26 && LA224_0<=27)||LA224_0==31||(LA224_0>=35 && LA224_0<=36)||(LA224_0>=41 && LA224_0<=42)||LA224_0==44) ) {
-            alt224=1;
+        if ( ((LA223_0>=RULE_SIMPLE_ID && LA223_0<=RULE_ESCAPED_ID)||(LA223_0>=21 && LA223_0<=22)||LA223_0==26||LA223_0==31||LA223_0==33||(LA223_0>=35 && LA223_0<=36)||(LA223_0>=41 && LA223_0<=42)||LA223_0==44) ) {
+            alt223=1;
         }
-        else if ( (LA224_0==43) ) {
-            int LA224_2 = input.LA(2);
+        else if ( (LA223_0==43) ) {
+            int LA223_2 = input.LA(2);
 
-            if ( ((LA224_2>=RULE_SIMPLE_ID && LA224_2<=RULE_ESCAPED_ID)||LA224_2==18||LA224_2==20||(LA224_2>=26 && LA224_2<=27)||LA224_2==31||(LA224_2>=35 && LA224_2<=36)||(LA224_2>=41 && LA224_2<=44)) ) {
-                alt224=2;
+            if ( ((LA223_2>=RULE_SIMPLE_ID && LA223_2<=RULE_ESCAPED_ID)||(LA223_2>=21 && LA223_2<=22)||LA223_2==26||LA223_2==31||LA223_2==33||(LA223_2>=35 && LA223_2<=36)||(LA223_2>=41 && LA223_2<=44)) ) {
+                alt223=2;
             }
-            else if ( (LA224_2==21||LA224_2==24||LA224_2==30||LA224_2==39) ) {
-                alt224=1;
+            else if ( (LA223_2==18||LA223_2==20||LA223_2==25||LA223_2==39) ) {
+                alt223=1;
             }
             else {
                 if (state.backtracking>0) {state.failed=true; return ;}
                 NoViableAltException nvae =
-                    new NoViableAltException("", 224, 2, input);
+                    new NoViableAltException("", 223, 2, input);
 
                 throw nvae;
             }
@@ -29479,26 +29479,26 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
         else {
             if (state.backtracking>0) {state.failed=true; return ;}
             NoViableAltException nvae =
-                new NoViableAltException("", 224, 0, input);
+                new NoViableAltException("", 223, 0, input);
 
             throw nvae;
         }
-        switch (alt224) {
+        switch (alt223) {
             case 1 :
-                // InternalQVTcore.g:519:2: ( (lv_ownedUnrealizedVariables_10_0= ruleUnrealizedVariableCS ) )
+                // InternalQVTcore.g:320:2: ( (lv_ownedUnrealizedVariables_10_0= ruleUnrealizedVariableCS ) )
                 {
-                // InternalQVTcore.g:519:2: ( (lv_ownedUnrealizedVariables_10_0= ruleUnrealizedVariableCS ) )
-                // InternalQVTcore.g:520:1: (lv_ownedUnrealizedVariables_10_0= ruleUnrealizedVariableCS )
+                // InternalQVTcore.g:320:2: ( (lv_ownedUnrealizedVariables_10_0= ruleUnrealizedVariableCS ) )
+                // InternalQVTcore.g:321:1: (lv_ownedUnrealizedVariables_10_0= ruleUnrealizedVariableCS )
                 {
-                // InternalQVTcore.g:520:1: (lv_ownedUnrealizedVariables_10_0= ruleUnrealizedVariableCS )
-                // InternalQVTcore.g:521:3: lv_ownedUnrealizedVariables_10_0= ruleUnrealizedVariableCS
+                // InternalQVTcore.g:321:1: (lv_ownedUnrealizedVariables_10_0= ruleUnrealizedVariableCS )
+                // InternalQVTcore.g:322:3: lv_ownedUnrealizedVariables_10_0= ruleUnrealizedVariableCS
                 {
                 if ( state.backtracking==0 ) {
                    
                   	        newCompositeNode(grammarAccess.getBottomPatternCSAccess().getOwnedUnrealizedVariablesUnrealizedVariableCSParserRuleCall_1_1_0_0()); 
                   	    
                 }
-                pushFollow(FollowSets000.FOLLOW_16);
+                pushFollow(FollowSets000.FOLLOW_8);
                 lv_ownedUnrealizedVariables_10_0=ruleUnrealizedVariableCS();
 
                 state._fsp--;
@@ -29513,20 +29513,20 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                 }
                 break;
             case 2 :
-                // InternalQVTcore.g:538:6: ( (lv_ownedRealizedVariables_11_0= ruleRealizedVariableCS ) )
+                // InternalQVTcore.g:339:6: ( (lv_ownedRealizedVariables_11_0= ruleRealizedVariableCS ) )
                 {
-                // InternalQVTcore.g:538:6: ( (lv_ownedRealizedVariables_11_0= ruleRealizedVariableCS ) )
-                // InternalQVTcore.g:539:1: (lv_ownedRealizedVariables_11_0= ruleRealizedVariableCS )
+                // InternalQVTcore.g:339:6: ( (lv_ownedRealizedVariables_11_0= ruleRealizedVariableCS ) )
+                // InternalQVTcore.g:340:1: (lv_ownedRealizedVariables_11_0= ruleRealizedVariableCS )
                 {
-                // InternalQVTcore.g:539:1: (lv_ownedRealizedVariables_11_0= ruleRealizedVariableCS )
-                // InternalQVTcore.g:540:3: lv_ownedRealizedVariables_11_0= ruleRealizedVariableCS
+                // InternalQVTcore.g:340:1: (lv_ownedRealizedVariables_11_0= ruleRealizedVariableCS )
+                // InternalQVTcore.g:341:3: lv_ownedRealizedVariables_11_0= ruleRealizedVariableCS
                 {
                 if ( state.backtracking==0 ) {
                    
                   	        newCompositeNode(grammarAccess.getBottomPatternCSAccess().getOwnedRealizedVariablesRealizedVariableCSParserRuleCall_1_1_1_0()); 
                   	    
                 }
-                pushFollow(FollowSets000.FOLLOW_16);
+                pushFollow(FollowSets000.FOLLOW_8);
                 lv_ownedRealizedVariables_11_0=ruleRealizedVariableCS();
 
                 state._fsp--;
@@ -29543,42 +29543,42 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
         }
 
-        // InternalQVTcore.g:556:3: (otherlv_12= ',' ( ( (lv_ownedUnrealizedVariables_13_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_14_0= ruleRealizedVariableCS ) ) ) )*
-        loop226:
+        // InternalQVTcore.g:357:3: (otherlv_12= ',' ( ( (lv_ownedUnrealizedVariables_13_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_14_0= ruleRealizedVariableCS ) ) ) )*
+        loop225:
         do {
-            int alt226=2;
-            int LA226_0 = input.LA(1);
+            int alt225=2;
+            int LA225_0 = input.LA(1);
 
-            if ( (LA226_0==21) ) {
-                alt226=1;
+            if ( (LA225_0==18) ) {
+                alt225=1;
             }
 
 
-            switch (alt226) {
+            switch (alt225) {
         	case 1 :
-        	    // InternalQVTcore.g:556:5: otherlv_12= ',' ( ( (lv_ownedUnrealizedVariables_13_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_14_0= ruleRealizedVariableCS ) ) )
+        	    // InternalQVTcore.g:357:5: otherlv_12= ',' ( ( (lv_ownedUnrealizedVariables_13_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_14_0= ruleRealizedVariableCS ) ) )
         	    {
-        	    otherlv_12=(Token)match(input,21,FollowSets000.FOLLOW_8); if (state.failed) return ;
-        	    // InternalQVTcore.g:560:1: ( ( (lv_ownedUnrealizedVariables_13_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_14_0= ruleRealizedVariableCS ) ) )
-        	    int alt225=2;
-        	    int LA225_0 = input.LA(1);
+        	    otherlv_12=(Token)match(input,18,FollowSets000.FOLLOW_5); if (state.failed) return ;
+        	    // InternalQVTcore.g:361:1: ( ( (lv_ownedUnrealizedVariables_13_0= ruleUnrealizedVariableCS ) ) | ( (lv_ownedRealizedVariables_14_0= ruleRealizedVariableCS ) ) )
+        	    int alt224=2;
+        	    int LA224_0 = input.LA(1);
 
-        	    if ( ((LA225_0>=RULE_SIMPLE_ID && LA225_0<=RULE_ESCAPED_ID)||LA225_0==18||LA225_0==20||(LA225_0>=26 && LA225_0<=27)||LA225_0==31||(LA225_0>=35 && LA225_0<=36)||(LA225_0>=41 && LA225_0<=42)||LA225_0==44) ) {
-        	        alt225=1;
+        	    if ( ((LA224_0>=RULE_SIMPLE_ID && LA224_0<=RULE_ESCAPED_ID)||(LA224_0>=21 && LA224_0<=22)||LA224_0==26||LA224_0==31||LA224_0==33||(LA224_0>=35 && LA224_0<=36)||(LA224_0>=41 && LA224_0<=42)||LA224_0==44) ) {
+        	        alt224=1;
         	    }
-        	    else if ( (LA225_0==43) ) {
-        	        int LA225_2 = input.LA(2);
+        	    else if ( (LA224_0==43) ) {
+        	        int LA224_2 = input.LA(2);
 
-        	        if ( ((LA225_2>=RULE_SIMPLE_ID && LA225_2<=RULE_ESCAPED_ID)||LA225_2==18||LA225_2==20||(LA225_2>=26 && LA225_2<=27)||LA225_2==31||(LA225_2>=35 && LA225_2<=36)||(LA225_2>=41 && LA225_2<=44)) ) {
-        	            alt225=2;
+        	        if ( ((LA224_2>=RULE_SIMPLE_ID && LA224_2<=RULE_ESCAPED_ID)||(LA224_2>=21 && LA224_2<=22)||LA224_2==26||LA224_2==31||LA224_2==33||(LA224_2>=35 && LA224_2<=36)||(LA224_2>=41 && LA224_2<=44)) ) {
+        	            alt224=2;
         	        }
-        	        else if ( (LA225_2==21||LA225_2==24||LA225_2==30||LA225_2==39) ) {
-        	            alt225=1;
+        	        else if ( (LA224_2==18||LA224_2==20||LA224_2==25||LA224_2==39) ) {
+        	            alt224=1;
         	        }
         	        else {
         	            if (state.backtracking>0) {state.failed=true; return ;}
         	            NoViableAltException nvae =
-        	                new NoViableAltException("", 225, 2, input);
+        	                new NoViableAltException("", 224, 2, input);
 
         	            throw nvae;
         	        }
@@ -29586,26 +29586,26 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
         	    else {
         	        if (state.backtracking>0) {state.failed=true; return ;}
         	        NoViableAltException nvae =
-        	            new NoViableAltException("", 225, 0, input);
+        	            new NoViableAltException("", 224, 0, input);
 
         	        throw nvae;
         	    }
-        	    switch (alt225) {
+        	    switch (alt224) {
         	        case 1 :
-        	            // InternalQVTcore.g:560:2: ( (lv_ownedUnrealizedVariables_13_0= ruleUnrealizedVariableCS ) )
+        	            // InternalQVTcore.g:361:2: ( (lv_ownedUnrealizedVariables_13_0= ruleUnrealizedVariableCS ) )
         	            {
-        	            // InternalQVTcore.g:560:2: ( (lv_ownedUnrealizedVariables_13_0= ruleUnrealizedVariableCS ) )
-        	            // InternalQVTcore.g:561:1: (lv_ownedUnrealizedVariables_13_0= ruleUnrealizedVariableCS )
+        	            // InternalQVTcore.g:361:2: ( (lv_ownedUnrealizedVariables_13_0= ruleUnrealizedVariableCS ) )
+        	            // InternalQVTcore.g:362:1: (lv_ownedUnrealizedVariables_13_0= ruleUnrealizedVariableCS )
         	            {
-        	            // InternalQVTcore.g:561:1: (lv_ownedUnrealizedVariables_13_0= ruleUnrealizedVariableCS )
-        	            // InternalQVTcore.g:562:3: lv_ownedUnrealizedVariables_13_0= ruleUnrealizedVariableCS
+        	            // InternalQVTcore.g:362:1: (lv_ownedUnrealizedVariables_13_0= ruleUnrealizedVariableCS )
+        	            // InternalQVTcore.g:363:3: lv_ownedUnrealizedVariables_13_0= ruleUnrealizedVariableCS
         	            {
         	            if ( state.backtracking==0 ) {
         	               
         	              	        newCompositeNode(grammarAccess.getBottomPatternCSAccess().getOwnedUnrealizedVariablesUnrealizedVariableCSParserRuleCall_1_2_1_0_0()); 
         	              	    
         	            }
-        	            pushFollow(FollowSets000.FOLLOW_16);
+        	            pushFollow(FollowSets000.FOLLOW_8);
         	            lv_ownedUnrealizedVariables_13_0=ruleUnrealizedVariableCS();
 
         	            state._fsp--;
@@ -29620,20 +29620,20 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
         	            }
         	            break;
         	        case 2 :
-        	            // InternalQVTcore.g:579:6: ( (lv_ownedRealizedVariables_14_0= ruleRealizedVariableCS ) )
+        	            // InternalQVTcore.g:380:6: ( (lv_ownedRealizedVariables_14_0= ruleRealizedVariableCS ) )
         	            {
-        	            // InternalQVTcore.g:579:6: ( (lv_ownedRealizedVariables_14_0= ruleRealizedVariableCS ) )
-        	            // InternalQVTcore.g:580:1: (lv_ownedRealizedVariables_14_0= ruleRealizedVariableCS )
+        	            // InternalQVTcore.g:380:6: ( (lv_ownedRealizedVariables_14_0= ruleRealizedVariableCS ) )
+        	            // InternalQVTcore.g:381:1: (lv_ownedRealizedVariables_14_0= ruleRealizedVariableCS )
         	            {
-        	            // InternalQVTcore.g:580:1: (lv_ownedRealizedVariables_14_0= ruleRealizedVariableCS )
-        	            // InternalQVTcore.g:581:3: lv_ownedRealizedVariables_14_0= ruleRealizedVariableCS
+        	            // InternalQVTcore.g:381:1: (lv_ownedRealizedVariables_14_0= ruleRealizedVariableCS )
+        	            // InternalQVTcore.g:382:3: lv_ownedRealizedVariables_14_0= ruleRealizedVariableCS
         	            {
         	            if ( state.backtracking==0 ) {
         	               
         	              	        newCompositeNode(grammarAccess.getBottomPatternCSAccess().getOwnedRealizedVariablesRealizedVariableCSParserRuleCall_1_2_1_1_0()); 
         	              	    
         	            }
-        	            pushFollow(FollowSets000.FOLLOW_16);
+        	            pushFollow(FollowSets000.FOLLOW_8);
         	            lv_ownedRealizedVariables_14_0=ruleRealizedVariableCS();
 
         	            state._fsp--;
@@ -29655,58 +29655,58 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
         	    break;
 
         	default :
-        	    break loop226;
+        	    break loop225;
             }
         } while (true);
 
-        otherlv_15=(Token)match(input,24,FollowSets000.FOLLOW_2); if (state.failed) return ;
+        otherlv_15=(Token)match(input,20,FollowSets000.FOLLOW_2); if (state.failed) return ;
 
         }
 
 
         }
     }
-    // $ANTLR end synpred22_InternalQVTcore
+    // $ANTLR end synpred14_InternalQVTcore
 
-    // $ANTLR start synpred24_InternalQVTcore
-    public final void synpred24_InternalQVTcore_fragment() throws RecognitionException {   
+    // $ANTLR start synpred16_InternalQVTcore
+    public final void synpred16_InternalQVTcore_fragment() throws RecognitionException {   
         Token otherlv_16=null;
         Token otherlv_18=null;
         EObject lv_ownedConstraints_17_0 = null;
 
 
-        // InternalQVTcore.g:602:6: ( (otherlv_16= '{' ( (lv_ownedConstraints_17_0= rulePredicateOrAssignmentCS ) )+ otherlv_18= '}' ) )
-        // InternalQVTcore.g:602:6: (otherlv_16= '{' ( (lv_ownedConstraints_17_0= rulePredicateOrAssignmentCS ) )+ otherlv_18= '}' )
+        // InternalQVTcore.g:403:6: ( (otherlv_16= '{' ( (lv_ownedConstraints_17_0= rulePredicateOrAssignmentCS ) )+ otherlv_18= '}' ) )
+        // InternalQVTcore.g:403:6: (otherlv_16= '{' ( (lv_ownedConstraints_17_0= rulePredicateOrAssignmentCS ) )+ otherlv_18= '}' )
         {
-        // InternalQVTcore.g:602:6: (otherlv_16= '{' ( (lv_ownedConstraints_17_0= rulePredicateOrAssignmentCS ) )+ otherlv_18= '}' )
-        // InternalQVTcore.g:602:8: otherlv_16= '{' ( (lv_ownedConstraints_17_0= rulePredicateOrAssignmentCS ) )+ otherlv_18= '}'
+        // InternalQVTcore.g:403:6: (otherlv_16= '{' ( (lv_ownedConstraints_17_0= rulePredicateOrAssignmentCS ) )+ otherlv_18= '}' )
+        // InternalQVTcore.g:403:8: otherlv_16= '{' ( (lv_ownedConstraints_17_0= rulePredicateOrAssignmentCS ) )+ otherlv_18= '}'
         {
-        otherlv_16=(Token)match(input,22,FollowSets000.FOLLOW_17); if (state.failed) return ;
-        // InternalQVTcore.g:606:1: ( (lv_ownedConstraints_17_0= rulePredicateOrAssignmentCS ) )+
-        int cnt227=0;
-        loop227:
+        otherlv_16=(Token)match(input,17,FollowSets000.FOLLOW_9); if (state.failed) return ;
+        // InternalQVTcore.g:407:1: ( (lv_ownedConstraints_17_0= rulePredicateOrAssignmentCS ) )+
+        int cnt226=0;
+        loop226:
         do {
-            int alt227=2;
-            int LA227_0 = input.LA(1);
+            int alt226=2;
+            int LA226_0 = input.LA(1);
 
-            if ( (LA227_0==RULE_SINGLE_QUOTED_STRING||(LA227_0>=RULE_INT && LA227_0<=RULE_ESCAPED_ID)||(LA227_0>=17 && LA227_0<=18)||LA227_0==20||(LA227_0>=26 && LA227_0<=28)||LA227_0==31||LA227_0==33||(LA227_0>=35 && LA227_0<=36)||(LA227_0>=41 && LA227_0<=44)||(LA227_0>=84 && LA227_0<=85)||(LA227_0>=101 && LA227_0<=115)||LA227_0==118||(LA227_0>=120 && LA227_0<=123)||LA227_0==128||(LA227_0>=133 && LA227_0<=134)) ) {
-                alt227=1;
+            if ( (LA226_0==RULE_SINGLE_QUOTED_STRING||(LA226_0>=RULE_INT && LA226_0<=RULE_ESCAPED_ID)||(LA226_0>=21 && LA226_0<=23)||LA226_0==26||LA226_0==28||(LA226_0>=30 && LA226_0<=31)||LA226_0==33||(LA226_0>=35 && LA226_0<=36)||(LA226_0>=41 && LA226_0<=44)||(LA226_0>=84 && LA226_0<=85)||(LA226_0>=101 && LA226_0<=115)||LA226_0==118||(LA226_0>=120 && LA226_0<=123)||LA226_0==128||(LA226_0>=133 && LA226_0<=134)) ) {
+                alt226=1;
             }
 
 
-            switch (alt227) {
+            switch (alt226) {
         	case 1 :
-        	    // InternalQVTcore.g:607:1: (lv_ownedConstraints_17_0= rulePredicateOrAssignmentCS )
+        	    // InternalQVTcore.g:408:1: (lv_ownedConstraints_17_0= rulePredicateOrAssignmentCS )
         	    {
-        	    // InternalQVTcore.g:607:1: (lv_ownedConstraints_17_0= rulePredicateOrAssignmentCS )
-        	    // InternalQVTcore.g:608:3: lv_ownedConstraints_17_0= rulePredicateOrAssignmentCS
+        	    // InternalQVTcore.g:408:1: (lv_ownedConstraints_17_0= rulePredicateOrAssignmentCS )
+        	    // InternalQVTcore.g:409:3: lv_ownedConstraints_17_0= rulePredicateOrAssignmentCS
         	    {
         	    if ( state.backtracking==0 ) {
         	       
         	      	        newCompositeNode(grammarAccess.getBottomPatternCSAccess().getOwnedConstraintsPredicateOrAssignmentCSParserRuleCall_2_1_0()); 
         	      	    
         	    }
-        	    pushFollow(FollowSets000.FOLLOW_15);
+        	    pushFollow(FollowSets000.FOLLOW_7);
         	    lv_ownedConstraints_17_0=rulePredicateOrAssignmentCS();
 
         	    state._fsp--;
@@ -29719,26 +29719,26 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
         	    break;
 
         	default :
-        	    if ( cnt227 >= 1 ) break loop227;
+        	    if ( cnt226 >= 1 ) break loop226;
         	    if (state.backtracking>0) {state.failed=true; return ;}
                     EarlyExitException eee =
-                        new EarlyExitException(227, input);
+                        new EarlyExitException(226, input);
                     throw eee;
             }
-            cnt227++;
+            cnt226++;
         } while (true);
 
-        otherlv_18=(Token)match(input,24,FollowSets000.FOLLOW_2); if (state.failed) return ;
+        otherlv_18=(Token)match(input,20,FollowSets000.FOLLOW_2); if (state.failed) return ;
 
         }
 
 
         }
     }
-    // $ANTLR end synpred24_InternalQVTcore
+    // $ANTLR end synpred16_InternalQVTcore
 
-    // $ANTLR start synpred31_InternalQVTcore
-    public final void synpred31_InternalQVTcore_fragment() throws RecognitionException {   
+    // $ANTLR start synpred23_InternalQVTcore
+    public final void synpred23_InternalQVTcore_fragment() throws RecognitionException {   
         Token otherlv_0=null;
         Token otherlv_2=null;
         Token otherlv_4=null;
@@ -29750,25 +29750,25 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
         EObject lv_ownedPredicates_5_0 = null;
 
 
-        // InternalQVTcore.g:803:2: ( (otherlv_0= '(' ( (lv_ownedUnrealizedVariables_1_0= ruleGuardVariableCS ) ) (otherlv_2= ',' ( (lv_ownedUnrealizedVariables_3_0= ruleGuardVariableCS ) ) )* otherlv_4= '|' ( (lv_ownedPredicates_5_0= rulePredicateCS ) )* otherlv_6= ')' ) )
-        // InternalQVTcore.g:803:2: (otherlv_0= '(' ( (lv_ownedUnrealizedVariables_1_0= ruleGuardVariableCS ) ) (otherlv_2= ',' ( (lv_ownedUnrealizedVariables_3_0= ruleGuardVariableCS ) ) )* otherlv_4= '|' ( (lv_ownedPredicates_5_0= rulePredicateCS ) )* otherlv_6= ')' )
+        // InternalQVTcore.g:604:2: ( (otherlv_0= '(' ( (lv_ownedUnrealizedVariables_1_0= ruleGuardVariableCS ) ) (otherlv_2= ',' ( (lv_ownedUnrealizedVariables_3_0= ruleGuardVariableCS ) ) )* otherlv_4= '|' ( (lv_ownedPredicates_5_0= rulePredicateCS ) )* otherlv_6= ')' ) )
+        // InternalQVTcore.g:604:2: (otherlv_0= '(' ( (lv_ownedUnrealizedVariables_1_0= ruleGuardVariableCS ) ) (otherlv_2= ',' ( (lv_ownedUnrealizedVariables_3_0= ruleGuardVariableCS ) ) )* otherlv_4= '|' ( (lv_ownedPredicates_5_0= rulePredicateCS ) )* otherlv_6= ')' )
         {
-        // InternalQVTcore.g:803:2: (otherlv_0= '(' ( (lv_ownedUnrealizedVariables_1_0= ruleGuardVariableCS ) ) (otherlv_2= ',' ( (lv_ownedUnrealizedVariables_3_0= ruleGuardVariableCS ) ) )* otherlv_4= '|' ( (lv_ownedPredicates_5_0= rulePredicateCS ) )* otherlv_6= ')' )
-        // InternalQVTcore.g:803:4: otherlv_0= '(' ( (lv_ownedUnrealizedVariables_1_0= ruleGuardVariableCS ) ) (otherlv_2= ',' ( (lv_ownedUnrealizedVariables_3_0= ruleGuardVariableCS ) ) )* otherlv_4= '|' ( (lv_ownedPredicates_5_0= rulePredicateCS ) )* otherlv_6= ')'
+        // InternalQVTcore.g:604:2: (otherlv_0= '(' ( (lv_ownedUnrealizedVariables_1_0= ruleGuardVariableCS ) ) (otherlv_2= ',' ( (lv_ownedUnrealizedVariables_3_0= ruleGuardVariableCS ) ) )* otherlv_4= '|' ( (lv_ownedPredicates_5_0= rulePredicateCS ) )* otherlv_6= ')' )
+        // InternalQVTcore.g:604:4: otherlv_0= '(' ( (lv_ownedUnrealizedVariables_1_0= ruleGuardVariableCS ) ) (otherlv_2= ',' ( (lv_ownedUnrealizedVariables_3_0= ruleGuardVariableCS ) ) )* otherlv_4= '|' ( (lv_ownedPredicates_5_0= rulePredicateCS ) )* otherlv_6= ')'
         {
-        otherlv_0=(Token)match(input,28,FollowSets000.FOLLOW_8); if (state.failed) return ;
-        // InternalQVTcore.g:807:1: ( (lv_ownedUnrealizedVariables_1_0= ruleGuardVariableCS ) )
-        // InternalQVTcore.g:808:1: (lv_ownedUnrealizedVariables_1_0= ruleGuardVariableCS )
+        otherlv_0=(Token)match(input,23,FollowSets000.FOLLOW_5); if (state.failed) return ;
+        // InternalQVTcore.g:608:1: ( (lv_ownedUnrealizedVariables_1_0= ruleGuardVariableCS ) )
+        // InternalQVTcore.g:609:1: (lv_ownedUnrealizedVariables_1_0= ruleGuardVariableCS )
         {
-        // InternalQVTcore.g:808:1: (lv_ownedUnrealizedVariables_1_0= ruleGuardVariableCS )
-        // InternalQVTcore.g:809:3: lv_ownedUnrealizedVariables_1_0= ruleGuardVariableCS
+        // InternalQVTcore.g:609:1: (lv_ownedUnrealizedVariables_1_0= ruleGuardVariableCS )
+        // InternalQVTcore.g:610:3: lv_ownedUnrealizedVariables_1_0= ruleGuardVariableCS
         {
         if ( state.backtracking==0 ) {
            
           	        newCompositeNode(grammarAccess.getGuardPatternCSAccess().getOwnedUnrealizedVariablesGuardVariableCSParserRuleCall_0_1_0()); 
           	    
         }
-        pushFollow(FollowSets000.FOLLOW_14);
+        pushFollow(FollowSets000.FOLLOW_6);
         lv_ownedUnrealizedVariables_1_0=ruleGuardVariableCS();
 
         state._fsp--;
@@ -29779,34 +29779,34 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
         }
 
-        // InternalQVTcore.g:825:2: (otherlv_2= ',' ( (lv_ownedUnrealizedVariables_3_0= ruleGuardVariableCS ) ) )*
-        loop229:
+        // InternalQVTcore.g:626:2: (otherlv_2= ',' ( (lv_ownedUnrealizedVariables_3_0= ruleGuardVariableCS ) ) )*
+        loop228:
         do {
-            int alt229=2;
-            int LA229_0 = input.LA(1);
+            int alt228=2;
+            int LA228_0 = input.LA(1);
 
-            if ( (LA229_0==21) ) {
-                alt229=1;
+            if ( (LA228_0==18) ) {
+                alt228=1;
             }
 
 
-            switch (alt229) {
+            switch (alt228) {
         	case 1 :
-        	    // InternalQVTcore.g:825:4: otherlv_2= ',' ( (lv_ownedUnrealizedVariables_3_0= ruleGuardVariableCS ) )
+        	    // InternalQVTcore.g:626:4: otherlv_2= ',' ( (lv_ownedUnrealizedVariables_3_0= ruleGuardVariableCS ) )
         	    {
-        	    otherlv_2=(Token)match(input,21,FollowSets000.FOLLOW_8); if (state.failed) return ;
-        	    // InternalQVTcore.g:829:1: ( (lv_ownedUnrealizedVariables_3_0= ruleGuardVariableCS ) )
-        	    // InternalQVTcore.g:830:1: (lv_ownedUnrealizedVariables_3_0= ruleGuardVariableCS )
+        	    otherlv_2=(Token)match(input,18,FollowSets000.FOLLOW_5); if (state.failed) return ;
+        	    // InternalQVTcore.g:630:1: ( (lv_ownedUnrealizedVariables_3_0= ruleGuardVariableCS ) )
+        	    // InternalQVTcore.g:631:1: (lv_ownedUnrealizedVariables_3_0= ruleGuardVariableCS )
         	    {
-        	    // InternalQVTcore.g:830:1: (lv_ownedUnrealizedVariables_3_0= ruleGuardVariableCS )
-        	    // InternalQVTcore.g:831:3: lv_ownedUnrealizedVariables_3_0= ruleGuardVariableCS
+        	    // InternalQVTcore.g:631:1: (lv_ownedUnrealizedVariables_3_0= ruleGuardVariableCS )
+        	    // InternalQVTcore.g:632:3: lv_ownedUnrealizedVariables_3_0= ruleGuardVariableCS
         	    {
         	    if ( state.backtracking==0 ) {
         	       
         	      	        newCompositeNode(grammarAccess.getGuardPatternCSAccess().getOwnedUnrealizedVariablesGuardVariableCSParserRuleCall_0_2_1_0()); 
         	      	    
         	    }
-        	    pushFollow(FollowSets000.FOLLOW_14);
+        	    pushFollow(FollowSets000.FOLLOW_6);
         	    lv_ownedUnrealizedVariables_3_0=ruleGuardVariableCS();
 
         	    state._fsp--;
@@ -29822,35 +29822,35 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
         	    break;
 
         	default :
-        	    break loop229;
+        	    break loop228;
             }
         } while (true);
 
-        otherlv_4=(Token)match(input,25,FollowSets000.FOLLOW_22); if (state.failed) return ;
-        // InternalQVTcore.g:851:1: ( (lv_ownedPredicates_5_0= rulePredicateCS ) )*
-        loop230:
+        otherlv_4=(Token)match(input,19,FollowSets000.FOLLOW_14); if (state.failed) return ;
+        // InternalQVTcore.g:652:1: ( (lv_ownedPredicates_5_0= rulePredicateCS ) )*
+        loop229:
         do {
-            int alt230=2;
-            int LA230_0 = input.LA(1);
+            int alt229=2;
+            int LA229_0 = input.LA(1);
 
-            if ( (LA230_0==RULE_SINGLE_QUOTED_STRING||(LA230_0>=RULE_INT && LA230_0<=RULE_ESCAPED_ID)||LA230_0==18||LA230_0==20||(LA230_0>=26 && LA230_0<=28)||LA230_0==31||LA230_0==33||(LA230_0>=35 && LA230_0<=36)||(LA230_0>=41 && LA230_0<=44)||(LA230_0>=84 && LA230_0<=85)||(LA230_0>=101 && LA230_0<=115)||LA230_0==118||(LA230_0>=120 && LA230_0<=123)||LA230_0==128||(LA230_0>=133 && LA230_0<=134)) ) {
-                alt230=1;
+            if ( (LA229_0==RULE_SINGLE_QUOTED_STRING||(LA229_0>=RULE_INT && LA229_0<=RULE_ESCAPED_ID)||(LA229_0>=21 && LA229_0<=23)||LA229_0==26||LA229_0==28||LA229_0==31||LA229_0==33||(LA229_0>=35 && LA229_0<=36)||(LA229_0>=41 && LA229_0<=44)||(LA229_0>=84 && LA229_0<=85)||(LA229_0>=101 && LA229_0<=115)||LA229_0==118||(LA229_0>=120 && LA229_0<=123)||LA229_0==128||(LA229_0>=133 && LA229_0<=134)) ) {
+                alt229=1;
             }
 
 
-            switch (alt230) {
+            switch (alt229) {
         	case 1 :
-        	    // InternalQVTcore.g:852:1: (lv_ownedPredicates_5_0= rulePredicateCS )
+        	    // InternalQVTcore.g:653:1: (lv_ownedPredicates_5_0= rulePredicateCS )
         	    {
-        	    // InternalQVTcore.g:852:1: (lv_ownedPredicates_5_0= rulePredicateCS )
-        	    // InternalQVTcore.g:853:3: lv_ownedPredicates_5_0= rulePredicateCS
+        	    // InternalQVTcore.g:653:1: (lv_ownedPredicates_5_0= rulePredicateCS )
+        	    // InternalQVTcore.g:654:3: lv_ownedPredicates_5_0= rulePredicateCS
         	    {
         	    if ( state.backtracking==0 ) {
         	       
         	      	        newCompositeNode(grammarAccess.getGuardPatternCSAccess().getOwnedPredicatesPredicateCSParserRuleCall_0_4_0()); 
         	      	    
         	    }
-        	    pushFollow(FollowSets000.FOLLOW_22);
+        	    pushFollow(FollowSets000.FOLLOW_14);
         	    lv_ownedPredicates_5_0=rulePredicateCS();
 
         	    state._fsp--;
@@ -29863,21 +29863,21 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
         	    break;
 
         	default :
-        	    break loop230;
+        	    break loop229;
             }
         } while (true);
 
-        otherlv_6=(Token)match(input,29,FollowSets000.FOLLOW_2); if (state.failed) return ;
+        otherlv_6=(Token)match(input,24,FollowSets000.FOLLOW_2); if (state.failed) return ;
 
         }
 
 
         }
     }
-    // $ANTLR end synpred31_InternalQVTcore
+    // $ANTLR end synpred23_InternalQVTcore
 
-    // $ANTLR start synpred33_InternalQVTcore
-    public final void synpred33_InternalQVTcore_fragment() throws RecognitionException {   
+    // $ANTLR start synpred25_InternalQVTcore
+    public final void synpred25_InternalQVTcore_fragment() throws RecognitionException {   
         Token otherlv_7=null;
         Token otherlv_9=null;
         Token otherlv_11=null;
@@ -29886,25 +29886,25 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
         EObject lv_ownedUnrealizedVariables_10_0 = null;
 
 
-        // InternalQVTcore.g:874:6: ( (otherlv_7= '(' ( (lv_ownedUnrealizedVariables_8_0= ruleGuardVariableCS ) ) (otherlv_9= ',' ( (lv_ownedUnrealizedVariables_10_0= ruleGuardVariableCS ) ) )* otherlv_11= ')' ) )
-        // InternalQVTcore.g:874:6: (otherlv_7= '(' ( (lv_ownedUnrealizedVariables_8_0= ruleGuardVariableCS ) ) (otherlv_9= ',' ( (lv_ownedUnrealizedVariables_10_0= ruleGuardVariableCS ) ) )* otherlv_11= ')' )
+        // InternalQVTcore.g:675:6: ( (otherlv_7= '(' ( (lv_ownedUnrealizedVariables_8_0= ruleGuardVariableCS ) ) (otherlv_9= ',' ( (lv_ownedUnrealizedVariables_10_0= ruleGuardVariableCS ) ) )* otherlv_11= ')' ) )
+        // InternalQVTcore.g:675:6: (otherlv_7= '(' ( (lv_ownedUnrealizedVariables_8_0= ruleGuardVariableCS ) ) (otherlv_9= ',' ( (lv_ownedUnrealizedVariables_10_0= ruleGuardVariableCS ) ) )* otherlv_11= ')' )
         {
-        // InternalQVTcore.g:874:6: (otherlv_7= '(' ( (lv_ownedUnrealizedVariables_8_0= ruleGuardVariableCS ) ) (otherlv_9= ',' ( (lv_ownedUnrealizedVariables_10_0= ruleGuardVariableCS ) ) )* otherlv_11= ')' )
-        // InternalQVTcore.g:874:8: otherlv_7= '(' ( (lv_ownedUnrealizedVariables_8_0= ruleGuardVariableCS ) ) (otherlv_9= ',' ( (lv_ownedUnrealizedVariables_10_0= ruleGuardVariableCS ) ) )* otherlv_11= ')'
+        // InternalQVTcore.g:675:6: (otherlv_7= '(' ( (lv_ownedUnrealizedVariables_8_0= ruleGuardVariableCS ) ) (otherlv_9= ',' ( (lv_ownedUnrealizedVariables_10_0= ruleGuardVariableCS ) ) )* otherlv_11= ')' )
+        // InternalQVTcore.g:675:8: otherlv_7= '(' ( (lv_ownedUnrealizedVariables_8_0= ruleGuardVariableCS ) ) (otherlv_9= ',' ( (lv_ownedUnrealizedVariables_10_0= ruleGuardVariableCS ) ) )* otherlv_11= ')'
         {
-        otherlv_7=(Token)match(input,28,FollowSets000.FOLLOW_8); if (state.failed) return ;
-        // InternalQVTcore.g:878:1: ( (lv_ownedUnrealizedVariables_8_0= ruleGuardVariableCS ) )
-        // InternalQVTcore.g:879:1: (lv_ownedUnrealizedVariables_8_0= ruleGuardVariableCS )
+        otherlv_7=(Token)match(input,23,FollowSets000.FOLLOW_5); if (state.failed) return ;
+        // InternalQVTcore.g:679:1: ( (lv_ownedUnrealizedVariables_8_0= ruleGuardVariableCS ) )
+        // InternalQVTcore.g:680:1: (lv_ownedUnrealizedVariables_8_0= ruleGuardVariableCS )
         {
-        // InternalQVTcore.g:879:1: (lv_ownedUnrealizedVariables_8_0= ruleGuardVariableCS )
-        // InternalQVTcore.g:880:3: lv_ownedUnrealizedVariables_8_0= ruleGuardVariableCS
+        // InternalQVTcore.g:680:1: (lv_ownedUnrealizedVariables_8_0= ruleGuardVariableCS )
+        // InternalQVTcore.g:681:3: lv_ownedUnrealizedVariables_8_0= ruleGuardVariableCS
         {
         if ( state.backtracking==0 ) {
            
           	        newCompositeNode(grammarAccess.getGuardPatternCSAccess().getOwnedUnrealizedVariablesGuardVariableCSParserRuleCall_1_1_0()); 
           	    
         }
-        pushFollow(FollowSets000.FOLLOW_23);
+        pushFollow(FollowSets000.FOLLOW_15);
         lv_ownedUnrealizedVariables_8_0=ruleGuardVariableCS();
 
         state._fsp--;
@@ -29915,34 +29915,34 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
         }
 
-        // InternalQVTcore.g:896:2: (otherlv_9= ',' ( (lv_ownedUnrealizedVariables_10_0= ruleGuardVariableCS ) ) )*
-        loop231:
+        // InternalQVTcore.g:697:2: (otherlv_9= ',' ( (lv_ownedUnrealizedVariables_10_0= ruleGuardVariableCS ) ) )*
+        loop230:
         do {
-            int alt231=2;
-            int LA231_0 = input.LA(1);
+            int alt230=2;
+            int LA230_0 = input.LA(1);
 
-            if ( (LA231_0==21) ) {
-                alt231=1;
+            if ( (LA230_0==18) ) {
+                alt230=1;
             }
 
 
-            switch (alt231) {
+            switch (alt230) {
         	case 1 :
-        	    // InternalQVTcore.g:896:4: otherlv_9= ',' ( (lv_ownedUnrealizedVariables_10_0= ruleGuardVariableCS ) )
+        	    // InternalQVTcore.g:697:4: otherlv_9= ',' ( (lv_ownedUnrealizedVariables_10_0= ruleGuardVariableCS ) )
         	    {
-        	    otherlv_9=(Token)match(input,21,FollowSets000.FOLLOW_8); if (state.failed) return ;
-        	    // InternalQVTcore.g:900:1: ( (lv_ownedUnrealizedVariables_10_0= ruleGuardVariableCS ) )
-        	    // InternalQVTcore.g:901:1: (lv_ownedUnrealizedVariables_10_0= ruleGuardVariableCS )
+        	    otherlv_9=(Token)match(input,18,FollowSets000.FOLLOW_5); if (state.failed) return ;
+        	    // InternalQVTcore.g:701:1: ( (lv_ownedUnrealizedVariables_10_0= ruleGuardVariableCS ) )
+        	    // InternalQVTcore.g:702:1: (lv_ownedUnrealizedVariables_10_0= ruleGuardVariableCS )
         	    {
-        	    // InternalQVTcore.g:901:1: (lv_ownedUnrealizedVariables_10_0= ruleGuardVariableCS )
-        	    // InternalQVTcore.g:902:3: lv_ownedUnrealizedVariables_10_0= ruleGuardVariableCS
+        	    // InternalQVTcore.g:702:1: (lv_ownedUnrealizedVariables_10_0= ruleGuardVariableCS )
+        	    // InternalQVTcore.g:703:3: lv_ownedUnrealizedVariables_10_0= ruleGuardVariableCS
         	    {
         	    if ( state.backtracking==0 ) {
         	       
         	      	        newCompositeNode(grammarAccess.getGuardPatternCSAccess().getOwnedUnrealizedVariablesGuardVariableCSParserRuleCall_1_2_1_0()); 
         	      	    
         	    }
-        	    pushFollow(FollowSets000.FOLLOW_23);
+        	    pushFollow(FollowSets000.FOLLOW_15);
         	    lv_ownedUnrealizedVariables_10_0=ruleGuardVariableCS();
 
         	    state._fsp--;
@@ -29958,58 +29958,58 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
         	    break;
 
         	default :
-        	    break loop231;
+        	    break loop230;
             }
         } while (true);
 
-        otherlv_11=(Token)match(input,29,FollowSets000.FOLLOW_2); if (state.failed) return ;
+        otherlv_11=(Token)match(input,24,FollowSets000.FOLLOW_2); if (state.failed) return ;
 
         }
 
 
         }
     }
-    // $ANTLR end synpred33_InternalQVTcore
+    // $ANTLR end synpred25_InternalQVTcore
 
-    // $ANTLR start synpred35_InternalQVTcore
-    public final void synpred35_InternalQVTcore_fragment() throws RecognitionException {   
+    // $ANTLR start synpred27_InternalQVTcore
+    public final void synpred27_InternalQVTcore_fragment() throws RecognitionException {   
         Token otherlv_12=null;
         Token otherlv_14=null;
         EObject lv_ownedPredicates_13_0 = null;
 
 
-        // InternalQVTcore.g:923:6: ( (otherlv_12= '(' ( (lv_ownedPredicates_13_0= rulePredicateCS ) )+ otherlv_14= ')' ) )
-        // InternalQVTcore.g:923:6: (otherlv_12= '(' ( (lv_ownedPredicates_13_0= rulePredicateCS ) )+ otherlv_14= ')' )
+        // InternalQVTcore.g:724:6: ( (otherlv_12= '(' ( (lv_ownedPredicates_13_0= rulePredicateCS ) )+ otherlv_14= ')' ) )
+        // InternalQVTcore.g:724:6: (otherlv_12= '(' ( (lv_ownedPredicates_13_0= rulePredicateCS ) )+ otherlv_14= ')' )
         {
-        // InternalQVTcore.g:923:6: (otherlv_12= '(' ( (lv_ownedPredicates_13_0= rulePredicateCS ) )+ otherlv_14= ')' )
-        // InternalQVTcore.g:923:8: otherlv_12= '(' ( (lv_ownedPredicates_13_0= rulePredicateCS ) )+ otherlv_14= ')'
+        // InternalQVTcore.g:724:6: (otherlv_12= '(' ( (lv_ownedPredicates_13_0= rulePredicateCS ) )+ otherlv_14= ')' )
+        // InternalQVTcore.g:724:8: otherlv_12= '(' ( (lv_ownedPredicates_13_0= rulePredicateCS ) )+ otherlv_14= ')'
         {
-        otherlv_12=(Token)match(input,28,FollowSets000.FOLLOW_17); if (state.failed) return ;
-        // InternalQVTcore.g:927:1: ( (lv_ownedPredicates_13_0= rulePredicateCS ) )+
-        int cnt232=0;
-        loop232:
+        otherlv_12=(Token)match(input,23,FollowSets000.FOLLOW_9); if (state.failed) return ;
+        // InternalQVTcore.g:728:1: ( (lv_ownedPredicates_13_0= rulePredicateCS ) )+
+        int cnt231=0;
+        loop231:
         do {
-            int alt232=2;
-            int LA232_0 = input.LA(1);
+            int alt231=2;
+            int LA231_0 = input.LA(1);
 
-            if ( (LA232_0==RULE_SINGLE_QUOTED_STRING||(LA232_0>=RULE_INT && LA232_0<=RULE_ESCAPED_ID)||LA232_0==18||LA232_0==20||(LA232_0>=26 && LA232_0<=28)||LA232_0==31||LA232_0==33||(LA232_0>=35 && LA232_0<=36)||(LA232_0>=41 && LA232_0<=44)||(LA232_0>=84 && LA232_0<=85)||(LA232_0>=101 && LA232_0<=115)||LA232_0==118||(LA232_0>=120 && LA232_0<=123)||LA232_0==128||(LA232_0>=133 && LA232_0<=134)) ) {
-                alt232=1;
+            if ( (LA231_0==RULE_SINGLE_QUOTED_STRING||(LA231_0>=RULE_INT && LA231_0<=RULE_ESCAPED_ID)||(LA231_0>=21 && LA231_0<=23)||LA231_0==26||LA231_0==28||LA231_0==31||LA231_0==33||(LA231_0>=35 && LA231_0<=36)||(LA231_0>=41 && LA231_0<=44)||(LA231_0>=84 && LA231_0<=85)||(LA231_0>=101 && LA231_0<=115)||LA231_0==118||(LA231_0>=120 && LA231_0<=123)||LA231_0==128||(LA231_0>=133 && LA231_0<=134)) ) {
+                alt231=1;
             }
 
 
-            switch (alt232) {
+            switch (alt231) {
         	case 1 :
-        	    // InternalQVTcore.g:928:1: (lv_ownedPredicates_13_0= rulePredicateCS )
+        	    // InternalQVTcore.g:729:1: (lv_ownedPredicates_13_0= rulePredicateCS )
         	    {
-        	    // InternalQVTcore.g:928:1: (lv_ownedPredicates_13_0= rulePredicateCS )
-        	    // InternalQVTcore.g:929:3: lv_ownedPredicates_13_0= rulePredicateCS
+        	    // InternalQVTcore.g:729:1: (lv_ownedPredicates_13_0= rulePredicateCS )
+        	    // InternalQVTcore.g:730:3: lv_ownedPredicates_13_0= rulePredicateCS
         	    {
         	    if ( state.backtracking==0 ) {
         	       
         	      	        newCompositeNode(grammarAccess.getGuardPatternCSAccess().getOwnedPredicatesPredicateCSParserRuleCall_2_1_0()); 
         	      	    
         	    }
-        	    pushFollow(FollowSets000.FOLLOW_22);
+        	    pushFollow(FollowSets000.FOLLOW_14);
         	    lv_ownedPredicates_13_0=rulePredicateCS();
 
         	    state._fsp--;
@@ -30022,23 +30022,23 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
         	    break;
 
         	default :
-        	    if ( cnt232 >= 1 ) break loop232;
+        	    if ( cnt231 >= 1 ) break loop231;
         	    if (state.backtracking>0) {state.failed=true; return ;}
                     EarlyExitException eee =
-                        new EarlyExitException(232, input);
+                        new EarlyExitException(231, input);
                     throw eee;
             }
-            cnt232++;
+            cnt231++;
         } while (true);
 
-        otherlv_14=(Token)match(input,29,FollowSets000.FOLLOW_2); if (state.failed) return ;
+        otherlv_14=(Token)match(input,24,FollowSets000.FOLLOW_2); if (state.failed) return ;
 
         }
 
 
         }
     }
-    // $ANTLR end synpred35_InternalQVTcore
+    // $ANTLR end synpred27_InternalQVTcore
 
     // $ANTLR start synpred260_InternalQVTcore
     public final void synpred260_InternalQVTcore_fragment() throws RecognitionException {   
@@ -30050,7 +30050,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
         // InternalQVTcore.g:7114:4: (otherlv_2= '{' ( (lv_ownedPatternGuard_3_0= ruleExpCS ) ) otherlv_4= '}' )
         // InternalQVTcore.g:7114:4: otherlv_2= '{' ( (lv_ownedPatternGuard_3_0= ruleExpCS ) ) otherlv_4= '}'
         {
-        otherlv_2=(Token)match(input,22,FollowSets000.FOLLOW_17); if (state.failed) return ;
+        otherlv_2=(Token)match(input,17,FollowSets000.FOLLOW_9); if (state.failed) return ;
         // InternalQVTcore.g:7118:1: ( (lv_ownedPatternGuard_3_0= ruleExpCS ) )
         // InternalQVTcore.g:7119:1: (lv_ownedPatternGuard_3_0= ruleExpCS )
         {
@@ -30062,7 +30062,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
           	        newCompositeNode(grammarAccess.getTypeNameExpCSAccess().getOwnedPatternGuardExpCSParserRuleCall_1_1_1_0()); 
           	    
         }
-        pushFollow(FollowSets000.FOLLOW_18);
+        pushFollow(FollowSets000.FOLLOW_10);
         lv_ownedPatternGuard_3_0=ruleExpCS();
 
         state._fsp--;
@@ -30073,7 +30073,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
         }
 
-        otherlv_4=(Token)match(input,24,FollowSets000.FOLLOW_2); if (state.failed) return ;
+        otherlv_4=(Token)match(input,20,FollowSets000.FOLLOW_2); if (state.failed) return ;
 
         }
     }
@@ -30102,7 +30102,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
           	        newCompositeNode(grammarAccess.getTypeNameExpCSAccess().getOwnedCurlyBracketedClauseCurlyBracketedClauseCSParserRuleCall_1_0_0()); 
           	    
         }
-        pushFollow(FollowSets000.FOLLOW_72);
+        pushFollow(FollowSets000.FOLLOW_73);
         lv_ownedCurlyBracketedClause_1_0=ruleCurlyBracketedClauseCS();
 
         state._fsp--;
@@ -30117,14 +30117,14 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
         int alt301=2;
         int LA301_0 = input.LA(1);
 
-        if ( (LA301_0==22) ) {
+        if ( (LA301_0==17) ) {
             alt301=1;
         }
         switch (alt301) {
             case 1 :
                 // InternalQVTcore.g:7114:4: otherlv_2= '{' ( (lv_ownedPatternGuard_3_0= ruleExpCS ) ) otherlv_4= '}'
                 {
-                otherlv_2=(Token)match(input,22,FollowSets000.FOLLOW_17); if (state.failed) return ;
+                otherlv_2=(Token)match(input,17,FollowSets000.FOLLOW_9); if (state.failed) return ;
                 // InternalQVTcore.g:7118:1: ( (lv_ownedPatternGuard_3_0= ruleExpCS ) )
                 // InternalQVTcore.g:7119:1: (lv_ownedPatternGuard_3_0= ruleExpCS )
                 {
@@ -30136,7 +30136,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                   	        newCompositeNode(grammarAccess.getTypeNameExpCSAccess().getOwnedPatternGuardExpCSParserRuleCall_1_1_1_0()); 
                   	    
                 }
-                pushFollow(FollowSets000.FOLLOW_18);
+                pushFollow(FollowSets000.FOLLOW_10);
                 lv_ownedPatternGuard_3_0=ruleExpCS();
 
                 state._fsp--;
@@ -30147,7 +30147,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
                 }
 
-                otherlv_4=(Token)match(input,24,FollowSets000.FOLLOW_2); if (state.failed) return ;
+                otherlv_4=(Token)match(input,20,FollowSets000.FOLLOW_2); if (state.failed) return ;
 
                 }
                 break;
@@ -30202,7 +30202,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
           	  /* */ 
           	
         }
-        pushFollow(FollowSets000.FOLLOW_103);
+        pushFollow(FollowSets000.FOLLOW_104);
         this_PrefixedPrimaryExpCS_0=rulePrefixedPrimaryExpCS();
 
         state._fsp--;
@@ -30211,7 +30211,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
         int alt302=2;
         int LA302_0 = input.LA(1);
 
-        if ( (LA302_0==33||LA302_0==38||LA302_0==84||(LA302_0>=86 && LA302_0<=100)) ) {
+        if ( (LA302_0==28||LA302_0==38||LA302_0==84||(LA302_0>=86 && LA302_0<=100)) ) {
             alt302=1;
         }
         switch (alt302) {
@@ -30240,7 +30240,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
                   	        newCompositeNode(grammarAccess.getExpCSAccess().getNameBinaryOperatorNameParserRuleCall_0_1_1_0()); 
                   	    
                 }
-                pushFollow(FollowSets000.FOLLOW_17);
+                pushFollow(FollowSets000.FOLLOW_9);
                 lv_name_2_0=ruleBinaryOperatorName();
 
                 state._fsp--;
@@ -30381,6 +30381,34 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
 
     // Delegated rules
 
+    public final boolean synpred25_InternalQVTcore() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred25_InternalQVTcore_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred10_InternalQVTcore() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred10_InternalQVTcore_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
     public final boolean synpred273_InternalQVTcore() {
         state.backtracking++;
         int start = input.mark();
@@ -30423,67 +30451,11 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
         state.failed=false;
         return success;
     }
-    public final boolean synpred33_InternalQVTcore() {
+    public final boolean synpred27_InternalQVTcore() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred33_InternalQVTcore_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred18_InternalQVTcore() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred18_InternalQVTcore_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred24_InternalQVTcore() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred24_InternalQVTcore_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred35_InternalQVTcore() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred35_InternalQVTcore_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred31_InternalQVTcore() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred31_InternalQVTcore_fragment(); // can never throw exception
+            synpred27_InternalQVTcore_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -30521,6 +30493,34 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
         state.failed=false;
         return success;
     }
+    public final boolean synpred16_InternalQVTcore() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred16_InternalQVTcore_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred23_InternalQVTcore() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred23_InternalQVTcore_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
     public final boolean synpred274_InternalQVTcore() {
         state.backtracking++;
         int start = input.mark();
@@ -30549,11 +30549,11 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
         state.failed=false;
         return success;
     }
-    public final boolean synpred22_InternalQVTcore() {
+    public final boolean synpred14_InternalQVTcore() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred22_InternalQVTcore_fragment(); // can never throw exception
+            synpred14_InternalQVTcore_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -30591,25 +30591,25 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
     protected DFA173 dfa173 = new DFA173(this);
     protected DFA197 dfa197 = new DFA197(this);
     static final String dfa_1s = "\20\uffff";
-    static final String dfa_2s = "\1\7\15\26\2\uffff";
+    static final String dfa_2s = "\1\7\15\21\2\uffff";
     static final String dfa_3s = "\1\54\15\46\2\uffff";
     static final String dfa_4s = "\16\uffff\1\2\1\1";
     static final String dfa_5s = "\20\uffff}>";
     static final String[] dfa_6s = {
-            "\1\1\1\2\11\uffff\1\10\1\uffff\1\13\5\uffff\1\6\1\15\3\uffff\1\5\3\uffff\1\3\1\4\4\uffff\1\11\1\14\1\12\1\7",
-            "\1\16\7\uffff\1\16\1\uffff\1\17\1\uffff\1\16\3\uffff\1\16",
-            "\1\16\7\uffff\1\16\1\uffff\1\17\1\uffff\1\16\3\uffff\1\16",
-            "\1\16\7\uffff\1\16\1\uffff\1\17\1\uffff\1\16\3\uffff\1\16",
-            "\1\16\7\uffff\1\16\1\uffff\1\17\1\uffff\1\16\3\uffff\1\16",
-            "\1\16\7\uffff\1\16\1\uffff\1\17\1\uffff\1\16\3\uffff\1\16",
-            "\1\16\7\uffff\1\16\1\uffff\1\17\1\uffff\1\16\3\uffff\1\16",
-            "\1\16\7\uffff\1\16\1\uffff\1\17\1\uffff\1\16\3\uffff\1\16",
-            "\1\16\7\uffff\1\16\1\uffff\1\17\1\uffff\1\16\3\uffff\1\16",
-            "\1\16\7\uffff\1\16\1\uffff\1\17\1\uffff\1\16\3\uffff\1\16",
-            "\1\16\7\uffff\1\16\1\uffff\1\17\1\uffff\1\16\3\uffff\1\16",
-            "\1\16\7\uffff\1\16\1\uffff\1\17\1\uffff\1\16\3\uffff\1\16",
-            "\1\16\7\uffff\1\16\1\uffff\1\17\1\uffff\1\16\3\uffff\1\16",
-            "\1\16\7\uffff\1\16\1\uffff\1\17\1\uffff\1\16\3\uffff\1\16",
+            "\1\1\1\2\14\uffff\1\6\1\15\3\uffff\1\5\4\uffff\1\10\1\uffff\1\13\1\uffff\1\3\1\4\4\uffff\1\11\1\14\1\12\1\7",
+            "\1\16\7\uffff\1\16\1\uffff\1\17\1\uffff\1\16\10\uffff\1\16",
+            "\1\16\7\uffff\1\16\1\uffff\1\17\1\uffff\1\16\10\uffff\1\16",
+            "\1\16\7\uffff\1\16\1\uffff\1\17\1\uffff\1\16\10\uffff\1\16",
+            "\1\16\7\uffff\1\16\1\uffff\1\17\1\uffff\1\16\10\uffff\1\16",
+            "\1\16\7\uffff\1\16\1\uffff\1\17\1\uffff\1\16\10\uffff\1\16",
+            "\1\16\7\uffff\1\16\1\uffff\1\17\1\uffff\1\16\10\uffff\1\16",
+            "\1\16\7\uffff\1\16\1\uffff\1\17\1\uffff\1\16\10\uffff\1\16",
+            "\1\16\7\uffff\1\16\1\uffff\1\17\1\uffff\1\16\10\uffff\1\16",
+            "\1\16\7\uffff\1\16\1\uffff\1\17\1\uffff\1\16\10\uffff\1\16",
+            "\1\16\7\uffff\1\16\1\uffff\1\17\1\uffff\1\16\10\uffff\1\16",
+            "\1\16\7\uffff\1\16\1\uffff\1\17\1\uffff\1\16\10\uffff\1\16",
+            "\1\16\7\uffff\1\16\1\uffff\1\17\1\uffff\1\16\10\uffff\1\16",
+            "\1\16\7\uffff\1\16\1\uffff\1\17\1\uffff\1\16\10\uffff\1\16",
             "",
             ""
     };
@@ -30640,25 +30640,25 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
     }
     static final String dfa_7s = "\37\uffff";
     static final String dfa_8s = "\1\16\36\uffff";
-    static final String dfa_9s = "\1\7\15\26\1\uffff\17\26\1\uffff";
-    static final String dfa_10s = "\1\163\15\46\1\uffff\17\40\1\uffff";
+    static final String dfa_9s = "\1\7\15\21\1\uffff\17\21\1\uffff";
+    static final String dfa_10s = "\1\163\15\46\1\uffff\17\33\1\uffff";
     static final String dfa_11s = "\16\uffff\1\2\17\uffff\1\1";
     static final String dfa_12s = "\37\uffff}>";
     static final String[] dfa_13s = {
-            "\1\1\1\2\11\uffff\1\10\1\uffff\1\13\5\uffff\1\6\1\15\3\uffff\1\5\3\uffff\1\3\1\4\4\uffff\1\11\1\14\1\12\1\7\70\uffff\1\34\1\35\1\24\1\25\1\26\1\27\1\30\1\31\1\32\1\33\1\17\1\20\1\21\1\22\1\23",
-            "\1\16\5\uffff\1\16\1\uffff\1\16\1\uffff\1\36\1\uffff\1\16\3\uffff\1\16",
-            "\1\16\5\uffff\1\16\1\uffff\1\16\1\uffff\1\36\1\uffff\1\16\3\uffff\1\16",
-            "\1\16\5\uffff\1\16\1\uffff\1\16\1\uffff\1\36\1\uffff\1\16\3\uffff\1\16",
-            "\1\16\5\uffff\1\16\1\uffff\1\16\1\uffff\1\36\1\uffff\1\16\3\uffff\1\16",
-            "\1\16\5\uffff\1\16\1\uffff\1\16\1\uffff\1\36\1\uffff\1\16\3\uffff\1\16",
-            "\1\16\5\uffff\1\16\1\uffff\1\16\1\uffff\1\36\1\uffff\1\16\3\uffff\1\16",
-            "\1\16\5\uffff\1\16\1\uffff\1\16\1\uffff\1\36\1\uffff\1\16\3\uffff\1\16",
-            "\1\16\5\uffff\1\16\1\uffff\1\16\1\uffff\1\36\1\uffff\1\16\3\uffff\1\16",
-            "\1\16\5\uffff\1\16\1\uffff\1\16\1\uffff\1\36\1\uffff\1\16\3\uffff\1\16",
-            "\1\16\5\uffff\1\16\1\uffff\1\16\1\uffff\1\36\1\uffff\1\16\3\uffff\1\16",
-            "\1\16\5\uffff\1\16\1\uffff\1\16\1\uffff\1\36\1\uffff\1\16\3\uffff\1\16",
-            "\1\16\5\uffff\1\16\1\uffff\1\16\1\uffff\1\36\1\uffff\1\16\3\uffff\1\16",
-            "\1\16\5\uffff\1\16\1\uffff\1\16\1\uffff\1\36\1\uffff\1\16\3\uffff\1\16",
+            "\1\1\1\2\14\uffff\1\6\1\15\3\uffff\1\5\4\uffff\1\10\1\uffff\1\13\1\uffff\1\3\1\4\4\uffff\1\11\1\14\1\12\1\7\70\uffff\1\34\1\35\1\24\1\25\1\26\1\27\1\30\1\31\1\32\1\33\1\17\1\20\1\21\1\22\1\23",
+            "\1\16\5\uffff\1\16\1\uffff\1\16\1\uffff\1\36\1\uffff\1\16\10\uffff\1\16",
+            "\1\16\5\uffff\1\16\1\uffff\1\16\1\uffff\1\36\1\uffff\1\16\10\uffff\1\16",
+            "\1\16\5\uffff\1\16\1\uffff\1\16\1\uffff\1\36\1\uffff\1\16\10\uffff\1\16",
+            "\1\16\5\uffff\1\16\1\uffff\1\16\1\uffff\1\36\1\uffff\1\16\10\uffff\1\16",
+            "\1\16\5\uffff\1\16\1\uffff\1\16\1\uffff\1\36\1\uffff\1\16\10\uffff\1\16",
+            "\1\16\5\uffff\1\16\1\uffff\1\16\1\uffff\1\36\1\uffff\1\16\10\uffff\1\16",
+            "\1\16\5\uffff\1\16\1\uffff\1\16\1\uffff\1\36\1\uffff\1\16\10\uffff\1\16",
+            "\1\16\5\uffff\1\16\1\uffff\1\16\1\uffff\1\36\1\uffff\1\16\10\uffff\1\16",
+            "\1\16\5\uffff\1\16\1\uffff\1\16\1\uffff\1\36\1\uffff\1\16\10\uffff\1\16",
+            "\1\16\5\uffff\1\16\1\uffff\1\16\1\uffff\1\36\1\uffff\1\16\10\uffff\1\16",
+            "\1\16\5\uffff\1\16\1\uffff\1\16\1\uffff\1\36\1\uffff\1\16\10\uffff\1\16",
+            "\1\16\5\uffff\1\16\1\uffff\1\16\1\uffff\1\36\1\uffff\1\16\10\uffff\1\16",
+            "\1\16\5\uffff\1\16\1\uffff\1\16\1\uffff\1\36\1\uffff\1\16\10\uffff\1\16",
             "",
             "\1\16\11\uffff\1\36",
             "\1\16\11\uffff\1\36",
@@ -30703,9 +30703,9 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             return "()* loopback of 1798:1: ( ( (lv_ownedPathElements_2_0= ruleNextPathElementCS ) ) otherlv_3= '::' )*";
         }
     }
-    static final String dfa_14s = "\1\163\15\40\2\uffff";
+    static final String dfa_14s = "\1\163\15\33\2\uffff";
     static final String[] dfa_15s = {
-            "\1\1\1\2\11\uffff\1\10\1\uffff\1\13\5\uffff\1\6\1\15\3\uffff\1\5\3\uffff\1\3\1\4\4\uffff\1\11\1\14\1\12\1\7\70\uffff\17\16",
+            "\1\1\1\2\14\uffff\1\6\1\15\3\uffff\1\5\4\uffff\1\10\1\uffff\1\13\1\uffff\1\3\1\4\4\uffff\1\11\1\14\1\12\1\7\70\uffff\17\16",
             "\1\16\11\uffff\1\17",
             "\1\16\11\uffff\1\17",
             "\1\16\11\uffff\1\17",
@@ -30743,25 +30743,25 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
         }
     }
     static final String dfa_16s = "\2\uffff\15\1\1\uffff";
-    static final String dfa_17s = "\1\4\1\uffff\15\25\1\uffff";
+    static final String dfa_17s = "\1\4\1\uffff\15\21\1\uffff";
     static final String dfa_18s = "\1\u0086\1\uffff\15\176\1\uffff";
     static final String dfa_19s = "\1\uffff\1\1\15\uffff\1\2";
     static final String[] dfa_20s = {
-            "\1\1\1\uffff\1\1\1\2\1\3\11\uffff\1\11\1\uffff\1\14\5\uffff\1\7\1\16\1\1\1\uffff\1\17\1\6\1\uffff\1\1\1\uffff\1\4\1\5\4\uffff\1\12\1\15\1\13\1\10\47\uffff\2\1\17\uffff\17\1\2\uffff\1\1\1\uffff\4\1\4\uffff\1\1\4\uffff\2\1",
+            "\1\1\1\uffff\1\1\1\2\1\3\14\uffff\1\7\1\16\1\1\1\uffff\1\17\1\6\1\uffff\1\1\2\uffff\1\11\1\uffff\1\14\1\uffff\1\4\1\5\4\uffff\1\12\1\15\1\13\1\10\47\uffff\2\1\17\uffff\17\1\2\uffff\1\1\1\uffff\4\1\4\uffff\1\1\4\uffff\2\1",
             "",
-            "\2\1\1\uffff\1\1\3\uffff\1\1\1\uffff\1\17\1\uffff\2\1\4\uffff\1\1\55\uffff\1\1\1\uffff\17\1\17\uffff\1\1\7\uffff\1\1\1\uffff\1\1",
-            "\2\1\1\uffff\1\1\3\uffff\1\1\1\uffff\1\17\1\uffff\2\1\4\uffff\1\1\55\uffff\1\1\1\uffff\17\1\17\uffff\1\1\7\uffff\1\1\1\uffff\1\1",
-            "\2\1\1\uffff\1\1\3\uffff\1\1\1\uffff\1\17\1\uffff\2\1\4\uffff\1\1\55\uffff\1\1\1\uffff\17\1\17\uffff\1\1\7\uffff\1\1\1\uffff\1\1",
-            "\2\1\1\uffff\1\1\3\uffff\1\1\1\uffff\1\17\1\uffff\2\1\4\uffff\1\1\55\uffff\1\1\1\uffff\17\1\17\uffff\1\1\7\uffff\1\1\1\uffff\1\1",
-            "\2\1\1\uffff\1\1\3\uffff\1\1\1\uffff\1\17\1\uffff\2\1\4\uffff\1\1\55\uffff\1\1\1\uffff\17\1\17\uffff\1\1\7\uffff\1\1\1\uffff\1\1",
-            "\2\1\1\uffff\1\1\3\uffff\1\1\1\uffff\1\17\1\uffff\2\1\4\uffff\1\1\55\uffff\1\1\1\uffff\17\1\17\uffff\1\1\7\uffff\1\1\1\uffff\1\1",
-            "\2\1\1\uffff\1\1\3\uffff\1\1\1\uffff\1\17\1\uffff\2\1\4\uffff\1\1\55\uffff\1\1\1\uffff\17\1\17\uffff\1\1\7\uffff\1\1\1\uffff\1\1",
-            "\2\1\1\uffff\1\1\3\uffff\1\1\1\uffff\1\17\1\uffff\2\1\4\uffff\1\1\55\uffff\1\1\1\uffff\17\1\17\uffff\1\1\7\uffff\1\1\1\uffff\1\1",
-            "\2\1\1\uffff\1\1\3\uffff\1\1\1\uffff\1\17\1\uffff\2\1\4\uffff\1\1\55\uffff\1\1\1\uffff\17\1\17\uffff\1\1\7\uffff\1\1\1\uffff\1\1",
-            "\2\1\1\uffff\1\1\3\uffff\1\1\1\uffff\1\17\1\uffff\2\1\4\uffff\1\1\55\uffff\1\1\1\uffff\17\1\17\uffff\1\1\7\uffff\1\1\1\uffff\1\1",
-            "\2\1\1\uffff\1\1\3\uffff\1\1\1\uffff\1\17\1\uffff\2\1\4\uffff\1\1\55\uffff\1\1\1\uffff\17\1\17\uffff\1\1\7\uffff\1\1\1\uffff\1\1",
-            "\2\1\1\uffff\1\1\3\uffff\1\1\1\uffff\1\17\1\uffff\2\1\4\uffff\1\1\55\uffff\1\1\1\uffff\17\1\17\uffff\1\1\7\uffff\1\1\1\uffff\1\1",
-            "\2\1\1\uffff\1\1\3\uffff\1\1\1\uffff\1\17\1\uffff\2\1\4\uffff\1\1\55\uffff\1\1\1\uffff\17\1\17\uffff\1\1\7\uffff\1\1\1\uffff\1\1",
+            "\2\1\1\uffff\1\1\2\uffff\1\1\1\uffff\1\17\1\uffff\2\1\11\uffff\1\1\55\uffff\1\1\1\uffff\17\1\17\uffff\1\1\7\uffff\1\1\1\uffff\1\1",
+            "\2\1\1\uffff\1\1\2\uffff\1\1\1\uffff\1\17\1\uffff\2\1\11\uffff\1\1\55\uffff\1\1\1\uffff\17\1\17\uffff\1\1\7\uffff\1\1\1\uffff\1\1",
+            "\2\1\1\uffff\1\1\2\uffff\1\1\1\uffff\1\17\1\uffff\2\1\11\uffff\1\1\55\uffff\1\1\1\uffff\17\1\17\uffff\1\1\7\uffff\1\1\1\uffff\1\1",
+            "\2\1\1\uffff\1\1\2\uffff\1\1\1\uffff\1\17\1\uffff\2\1\11\uffff\1\1\55\uffff\1\1\1\uffff\17\1\17\uffff\1\1\7\uffff\1\1\1\uffff\1\1",
+            "\2\1\1\uffff\1\1\2\uffff\1\1\1\uffff\1\17\1\uffff\2\1\11\uffff\1\1\55\uffff\1\1\1\uffff\17\1\17\uffff\1\1\7\uffff\1\1\1\uffff\1\1",
+            "\2\1\1\uffff\1\1\2\uffff\1\1\1\uffff\1\17\1\uffff\2\1\11\uffff\1\1\55\uffff\1\1\1\uffff\17\1\17\uffff\1\1\7\uffff\1\1\1\uffff\1\1",
+            "\2\1\1\uffff\1\1\2\uffff\1\1\1\uffff\1\17\1\uffff\2\1\11\uffff\1\1\55\uffff\1\1\1\uffff\17\1\17\uffff\1\1\7\uffff\1\1\1\uffff\1\1",
+            "\2\1\1\uffff\1\1\2\uffff\1\1\1\uffff\1\17\1\uffff\2\1\11\uffff\1\1\55\uffff\1\1\1\uffff\17\1\17\uffff\1\1\7\uffff\1\1\1\uffff\1\1",
+            "\2\1\1\uffff\1\1\2\uffff\1\1\1\uffff\1\17\1\uffff\2\1\11\uffff\1\1\55\uffff\1\1\1\uffff\17\1\17\uffff\1\1\7\uffff\1\1\1\uffff\1\1",
+            "\2\1\1\uffff\1\1\2\uffff\1\1\1\uffff\1\17\1\uffff\2\1\11\uffff\1\1\55\uffff\1\1\1\uffff\17\1\17\uffff\1\1\7\uffff\1\1\1\uffff\1\1",
+            "\2\1\1\uffff\1\1\2\uffff\1\1\1\uffff\1\17\1\uffff\2\1\11\uffff\1\1\55\uffff\1\1\1\uffff\17\1\17\uffff\1\1\7\uffff\1\1\1\uffff\1\1",
+            "\2\1\1\uffff\1\1\2\uffff\1\1\1\uffff\1\17\1\uffff\2\1\11\uffff\1\1\55\uffff\1\1\1\uffff\17\1\17\uffff\1\1\7\uffff\1\1\1\uffff\1\1",
+            "\2\1\1\uffff\1\1\2\uffff\1\1\1\uffff\1\17\1\uffff\2\1\11\uffff\1\1\55\uffff\1\1\1\uffff\17\1\17\uffff\1\1\7\uffff\1\1\1\uffff\1\1",
             ""
     };
     static final short[] dfa_16 = DFA.unpackEncodedString(dfa_16s);
@@ -30788,21 +30788,21 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
         }
     }
     static final String[] dfa_21s = {
-            "\1\1\1\uffff\1\1\1\2\1\3\11\uffff\1\11\1\uffff\1\14\5\uffff\1\7\1\16\1\1\1\uffff\1\17\1\6\1\uffff\1\1\1\uffff\1\4\1\5\4\uffff\1\12\1\15\1\13\1\10\47\uffff\2\1\17\uffff\17\1\2\uffff\1\1\1\uffff\4\1\4\uffff\1\1\4\uffff\2\1",
+            "\1\1\1\uffff\1\1\1\2\1\3\14\uffff\1\7\1\16\1\1\1\uffff\1\17\1\6\1\uffff\1\1\2\uffff\1\11\1\uffff\1\14\1\uffff\1\4\1\5\4\uffff\1\12\1\15\1\13\1\10\47\uffff\2\1\17\uffff\17\1\2\uffff\1\1\1\uffff\4\1\4\uffff\1\1\4\uffff\2\1",
             "",
-            "\2\1\1\uffff\1\1\3\uffff\1\1\1\uffff\1\17\1\uffff\2\1\4\uffff\1\1\55\uffff\1\1\1\uffff\17\1\27\uffff\1\1\1\uffff\1\1",
-            "\2\1\1\uffff\1\1\3\uffff\1\1\1\uffff\1\17\1\uffff\2\1\4\uffff\1\1\55\uffff\1\1\1\uffff\17\1\27\uffff\1\1\1\uffff\1\1",
-            "\2\1\1\uffff\1\1\3\uffff\1\1\1\uffff\1\17\1\uffff\2\1\4\uffff\1\1\55\uffff\1\1\1\uffff\17\1\27\uffff\1\1\1\uffff\1\1",
-            "\2\1\1\uffff\1\1\3\uffff\1\1\1\uffff\1\17\1\uffff\2\1\4\uffff\1\1\55\uffff\1\1\1\uffff\17\1\27\uffff\1\1\1\uffff\1\1",
-            "\2\1\1\uffff\1\1\3\uffff\1\1\1\uffff\1\17\1\uffff\2\1\4\uffff\1\1\55\uffff\1\1\1\uffff\17\1\27\uffff\1\1\1\uffff\1\1",
-            "\2\1\1\uffff\1\1\3\uffff\1\1\1\uffff\1\17\1\uffff\2\1\4\uffff\1\1\55\uffff\1\1\1\uffff\17\1\27\uffff\1\1\1\uffff\1\1",
-            "\2\1\1\uffff\1\1\3\uffff\1\1\1\uffff\1\17\1\uffff\2\1\4\uffff\1\1\55\uffff\1\1\1\uffff\17\1\27\uffff\1\1\1\uffff\1\1",
-            "\2\1\1\uffff\1\1\3\uffff\1\1\1\uffff\1\17\1\uffff\2\1\4\uffff\1\1\55\uffff\1\1\1\uffff\17\1\27\uffff\1\1\1\uffff\1\1",
-            "\2\1\1\uffff\1\1\3\uffff\1\1\1\uffff\1\17\1\uffff\2\1\4\uffff\1\1\55\uffff\1\1\1\uffff\17\1\27\uffff\1\1\1\uffff\1\1",
-            "\2\1\1\uffff\1\1\3\uffff\1\1\1\uffff\1\17\1\uffff\2\1\4\uffff\1\1\55\uffff\1\1\1\uffff\17\1\27\uffff\1\1\1\uffff\1\1",
-            "\2\1\1\uffff\1\1\3\uffff\1\1\1\uffff\1\17\1\uffff\2\1\4\uffff\1\1\55\uffff\1\1\1\uffff\17\1\27\uffff\1\1\1\uffff\1\1",
-            "\2\1\1\uffff\1\1\3\uffff\1\1\1\uffff\1\17\1\uffff\2\1\4\uffff\1\1\55\uffff\1\1\1\uffff\17\1\27\uffff\1\1\1\uffff\1\1",
-            "\2\1\1\uffff\1\1\3\uffff\1\1\1\uffff\1\17\1\uffff\2\1\4\uffff\1\1\55\uffff\1\1\1\uffff\17\1\27\uffff\1\1\1\uffff\1\1",
+            "\2\1\1\uffff\1\1\2\uffff\1\1\1\uffff\1\17\1\uffff\2\1\11\uffff\1\1\55\uffff\1\1\1\uffff\17\1\27\uffff\1\1\1\uffff\1\1",
+            "\2\1\1\uffff\1\1\2\uffff\1\1\1\uffff\1\17\1\uffff\2\1\11\uffff\1\1\55\uffff\1\1\1\uffff\17\1\27\uffff\1\1\1\uffff\1\1",
+            "\2\1\1\uffff\1\1\2\uffff\1\1\1\uffff\1\17\1\uffff\2\1\11\uffff\1\1\55\uffff\1\1\1\uffff\17\1\27\uffff\1\1\1\uffff\1\1",
+            "\2\1\1\uffff\1\1\2\uffff\1\1\1\uffff\1\17\1\uffff\2\1\11\uffff\1\1\55\uffff\1\1\1\uffff\17\1\27\uffff\1\1\1\uffff\1\1",
+            "\2\1\1\uffff\1\1\2\uffff\1\1\1\uffff\1\17\1\uffff\2\1\11\uffff\1\1\55\uffff\1\1\1\uffff\17\1\27\uffff\1\1\1\uffff\1\1",
+            "\2\1\1\uffff\1\1\2\uffff\1\1\1\uffff\1\17\1\uffff\2\1\11\uffff\1\1\55\uffff\1\1\1\uffff\17\1\27\uffff\1\1\1\uffff\1\1",
+            "\2\1\1\uffff\1\1\2\uffff\1\1\1\uffff\1\17\1\uffff\2\1\11\uffff\1\1\55\uffff\1\1\1\uffff\17\1\27\uffff\1\1\1\uffff\1\1",
+            "\2\1\1\uffff\1\1\2\uffff\1\1\1\uffff\1\17\1\uffff\2\1\11\uffff\1\1\55\uffff\1\1\1\uffff\17\1\27\uffff\1\1\1\uffff\1\1",
+            "\2\1\1\uffff\1\1\2\uffff\1\1\1\uffff\1\17\1\uffff\2\1\11\uffff\1\1\55\uffff\1\1\1\uffff\17\1\27\uffff\1\1\1\uffff\1\1",
+            "\2\1\1\uffff\1\1\2\uffff\1\1\1\uffff\1\17\1\uffff\2\1\11\uffff\1\1\55\uffff\1\1\1\uffff\17\1\27\uffff\1\1\1\uffff\1\1",
+            "\2\1\1\uffff\1\1\2\uffff\1\1\1\uffff\1\17\1\uffff\2\1\11\uffff\1\1\55\uffff\1\1\1\uffff\17\1\27\uffff\1\1\1\uffff\1\1",
+            "\2\1\1\uffff\1\1\2\uffff\1\1\1\uffff\1\17\1\uffff\2\1\11\uffff\1\1\55\uffff\1\1\1\uffff\17\1\27\uffff\1\1\1\uffff\1\1",
+            "\2\1\1\uffff\1\1\2\uffff\1\1\1\uffff\1\17\1\uffff\2\1\11\uffff\1\1\55\uffff\1\1\1\uffff\17\1\27\uffff\1\1\1\uffff\1\1",
             ""
     };
     static final short[][] dfa_21 = unpackEncodedStringArray(dfa_21s);
@@ -30826,12 +30826,12 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
     }
     static final String dfa_22s = "\16\uffff";
     static final String dfa_23s = "\1\2\15\uffff";
-    static final String dfa_24s = "\1\25\1\0\14\uffff";
+    static final String dfa_24s = "\1\21\1\0\14\uffff";
     static final String dfa_25s = "\1\u0081\1\0\14\uffff";
     static final String dfa_26s = "\2\uffff\1\2\12\uffff\1\1";
     static final String dfa_27s = "\1\uffff\1\0\14\uffff}>";
     static final String[] dfa_28s = {
-            "\1\2\1\1\1\uffff\2\2\3\uffff\1\2\4\uffff\1\2\3\uffff\2\2\115\uffff\1\2\10\uffff\1\2\2\uffff\1\2",
+            "\1\1\3\2\3\uffff\1\2\4\uffff\1\2\10\uffff\2\2\115\uffff\1\2\10\uffff\1\2\2\uffff\1\2",
             "\1\uffff",
             "",
             "",
@@ -30948,7 +30948,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
     static final String dfa_32s = "\1\uffff\1\1\14\uffff\1\2\16\uffff\1\3";
     static final String dfa_33s = "\26\uffff\1\0\1\1\1\2\1\3\1\4\3\uffff}>";
     static final String[] dfa_34s = {
-            "\2\1\11\uffff\1\1\1\uffff\1\1\5\uffff\2\1\3\uffff\1\1\3\uffff\2\1\4\uffff\4\1\70\uffff\12\16\1\26\1\27\1\30\1\31\1\32",
+            "\2\1\14\uffff\2\1\3\uffff\1\1\4\uffff\1\1\1\uffff\1\1\1\uffff\2\1\4\uffff\4\1\70\uffff\12\16\1\26\1\27\1\30\1\31\1\32",
             "",
             "",
             "",
@@ -31096,7 +31096,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
     static final String dfa_38s = "\3\uffff\1\1\46\uffff\1\2";
     static final String dfa_39s = "\1\uffff\1\0\1\1\50\uffff}>";
     static final String[] dfa_40s = {
-            "\1\3\1\uffff\3\3\11\uffff\1\3\1\uffff\1\3\5\uffff\3\3\2\uffff\1\3\1\uffff\1\3\1\uffff\2\3\4\uffff\4\3\47\uffff\1\1\1\2\17\uffff\17\3\2\uffff\1\3\1\uffff\4\3\4\uffff\1\3\4\uffff\1\52\1\3",
+            "\1\3\1\uffff\3\3\14\uffff\3\3\2\uffff\1\3\1\uffff\1\3\2\uffff\1\3\1\uffff\1\3\1\uffff\2\3\4\uffff\4\3\47\uffff\1\1\1\2\17\uffff\17\3\2\uffff\1\3\1\uffff\4\3\4\uffff\1\3\4\uffff\1\52\1\3",
             "\1\uffff",
             "\1\uffff",
             "",
@@ -31211,7 +31211,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
     static final String dfa_43s = "\1\uffff\1\1\1\2\1\3\1\4\15\uffff\1\10\1\11\7\uffff\1\12\14\uffff\1\5\1\6\1\7";
     static final String dfa_44s = "\13\uffff\1\0\1\1\1\2\1\3\1\4\1\5\1\6\31\uffff}>";
     static final String[] dfa_45s = {
-            "\1\4\1\uffff\1\4\2\33\11\uffff\1\33\1\uffff\1\33\5\uffff\2\33\1\1\2\uffff\1\33\1\uffff\1\4\1\uffff\2\33\4\uffff\4\33\70\uffff\1\14\1\13\10\23\1\15\1\16\1\17\1\20\1\21\2\uffff\1\22\1\uffff\4\4\4\uffff\1\2\5\uffff\1\3",
+            "\1\4\1\uffff\1\4\2\33\14\uffff\2\33\1\1\2\uffff\1\33\1\uffff\1\4\2\uffff\1\33\1\uffff\1\33\1\uffff\2\33\4\uffff\4\33\70\uffff\1\14\1\13\10\23\1\15\1\16\1\17\1\20\1\21\2\uffff\1\22\1\uffff\4\4\4\uffff\1\2\5\uffff\1\3",
             "",
             "",
             "",
@@ -31394,29 +31394,27 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             throw nvae;
         }
     }
-    static final String dfa_46s = "\1\4\1\uffff\15\26\1\uffff";
-    static final String dfa_47s = "\1\u0086\1\uffff\15\u0081\1\uffff";
-    static final String[] dfa_48s = {
-            "\1\1\1\uffff\1\1\1\2\1\3\11\uffff\1\11\1\uffff\1\14\5\uffff\1\7\1\16\1\1\1\uffff\1\17\1\6\1\uffff\1\1\1\uffff\1\4\1\5\4\uffff\1\12\1\15\1\13\1\10\47\uffff\2\1\17\uffff\17\1\2\uffff\1\1\1\uffff\4\1\4\uffff\1\1\4\uffff\2\1",
+    static final String dfa_46s = "\1\u0086\1\uffff\15\u0081\1\uffff";
+    static final String[] dfa_47s = {
+            "\1\1\1\uffff\1\1\1\2\1\3\14\uffff\1\7\1\16\1\1\1\uffff\1\17\1\6\1\uffff\1\1\2\uffff\1\11\1\uffff\1\14\1\uffff\1\4\1\5\4\uffff\1\12\1\15\1\13\1\10\47\uffff\2\1\17\uffff\17\1\2\uffff\1\1\1\uffff\4\1\4\uffff\1\1\4\uffff\2\1",
             "",
-            "\1\1\5\uffff\1\1\1\uffff\1\17\1\uffff\2\1\4\uffff\1\1\55\uffff\1\1\1\uffff\17\1\27\uffff\1\1\1\uffff\1\1\2\uffff\1\1",
-            "\1\1\5\uffff\1\1\1\uffff\1\17\1\uffff\2\1\4\uffff\1\1\55\uffff\1\1\1\uffff\17\1\27\uffff\1\1\1\uffff\1\1\2\uffff\1\1",
-            "\1\1\5\uffff\1\1\1\uffff\1\17\1\uffff\2\1\4\uffff\1\1\55\uffff\1\1\1\uffff\17\1\27\uffff\1\1\1\uffff\1\1\2\uffff\1\1",
-            "\1\1\5\uffff\1\1\1\uffff\1\17\1\uffff\2\1\4\uffff\1\1\55\uffff\1\1\1\uffff\17\1\27\uffff\1\1\1\uffff\1\1\2\uffff\1\1",
-            "\1\1\5\uffff\1\1\1\uffff\1\17\1\uffff\2\1\4\uffff\1\1\55\uffff\1\1\1\uffff\17\1\27\uffff\1\1\1\uffff\1\1\2\uffff\1\1",
-            "\1\1\5\uffff\1\1\1\uffff\1\17\1\uffff\2\1\4\uffff\1\1\55\uffff\1\1\1\uffff\17\1\27\uffff\1\1\1\uffff\1\1\2\uffff\1\1",
-            "\1\1\5\uffff\1\1\1\uffff\1\17\1\uffff\2\1\4\uffff\1\1\55\uffff\1\1\1\uffff\17\1\27\uffff\1\1\1\uffff\1\1\2\uffff\1\1",
-            "\1\1\5\uffff\1\1\1\uffff\1\17\1\uffff\2\1\4\uffff\1\1\55\uffff\1\1\1\uffff\17\1\27\uffff\1\1\1\uffff\1\1\2\uffff\1\1",
-            "\1\1\5\uffff\1\1\1\uffff\1\17\1\uffff\2\1\4\uffff\1\1\55\uffff\1\1\1\uffff\17\1\27\uffff\1\1\1\uffff\1\1\2\uffff\1\1",
-            "\1\1\5\uffff\1\1\1\uffff\1\17\1\uffff\2\1\4\uffff\1\1\55\uffff\1\1\1\uffff\17\1\27\uffff\1\1\1\uffff\1\1\2\uffff\1\1",
-            "\1\1\5\uffff\1\1\1\uffff\1\17\1\uffff\2\1\4\uffff\1\1\55\uffff\1\1\1\uffff\17\1\27\uffff\1\1\1\uffff\1\1\2\uffff\1\1",
-            "\1\1\5\uffff\1\1\1\uffff\1\17\1\uffff\2\1\4\uffff\1\1\55\uffff\1\1\1\uffff\17\1\27\uffff\1\1\1\uffff\1\1\2\uffff\1\1",
-            "\1\1\5\uffff\1\1\1\uffff\1\17\1\uffff\2\1\4\uffff\1\1\55\uffff\1\1\1\uffff\17\1\27\uffff\1\1\1\uffff\1\1\2\uffff\1\1",
+            "\1\1\5\uffff\1\1\1\uffff\1\17\1\uffff\2\1\11\uffff\1\1\55\uffff\1\1\1\uffff\17\1\27\uffff\1\1\1\uffff\1\1\2\uffff\1\1",
+            "\1\1\5\uffff\1\1\1\uffff\1\17\1\uffff\2\1\11\uffff\1\1\55\uffff\1\1\1\uffff\17\1\27\uffff\1\1\1\uffff\1\1\2\uffff\1\1",
+            "\1\1\5\uffff\1\1\1\uffff\1\17\1\uffff\2\1\11\uffff\1\1\55\uffff\1\1\1\uffff\17\1\27\uffff\1\1\1\uffff\1\1\2\uffff\1\1",
+            "\1\1\5\uffff\1\1\1\uffff\1\17\1\uffff\2\1\11\uffff\1\1\55\uffff\1\1\1\uffff\17\1\27\uffff\1\1\1\uffff\1\1\2\uffff\1\1",
+            "\1\1\5\uffff\1\1\1\uffff\1\17\1\uffff\2\1\11\uffff\1\1\55\uffff\1\1\1\uffff\17\1\27\uffff\1\1\1\uffff\1\1\2\uffff\1\1",
+            "\1\1\5\uffff\1\1\1\uffff\1\17\1\uffff\2\1\11\uffff\1\1\55\uffff\1\1\1\uffff\17\1\27\uffff\1\1\1\uffff\1\1\2\uffff\1\1",
+            "\1\1\5\uffff\1\1\1\uffff\1\17\1\uffff\2\1\11\uffff\1\1\55\uffff\1\1\1\uffff\17\1\27\uffff\1\1\1\uffff\1\1\2\uffff\1\1",
+            "\1\1\5\uffff\1\1\1\uffff\1\17\1\uffff\2\1\11\uffff\1\1\55\uffff\1\1\1\uffff\17\1\27\uffff\1\1\1\uffff\1\1\2\uffff\1\1",
+            "\1\1\5\uffff\1\1\1\uffff\1\17\1\uffff\2\1\11\uffff\1\1\55\uffff\1\1\1\uffff\17\1\27\uffff\1\1\1\uffff\1\1\2\uffff\1\1",
+            "\1\1\5\uffff\1\1\1\uffff\1\17\1\uffff\2\1\11\uffff\1\1\55\uffff\1\1\1\uffff\17\1\27\uffff\1\1\1\uffff\1\1\2\uffff\1\1",
+            "\1\1\5\uffff\1\1\1\uffff\1\17\1\uffff\2\1\11\uffff\1\1\55\uffff\1\1\1\uffff\17\1\27\uffff\1\1\1\uffff\1\1\2\uffff\1\1",
+            "\1\1\5\uffff\1\1\1\uffff\1\17\1\uffff\2\1\11\uffff\1\1\55\uffff\1\1\1\uffff\17\1\27\uffff\1\1\1\uffff\1\1\2\uffff\1\1",
+            "\1\1\5\uffff\1\1\1\uffff\1\17\1\uffff\2\1\11\uffff\1\1\55\uffff\1\1\1\uffff\17\1\27\uffff\1\1\1\uffff\1\1\2\uffff\1\1",
             ""
     };
     static final char[] dfa_46 = DFA.unpackEncodedStringToUnsignedChars(dfa_46s);
-    static final char[] dfa_47 = DFA.unpackEncodedStringToUnsignedChars(dfa_47s);
-    static final short[][] dfa_48 = unpackEncodedStringArray(dfa_48s);
+    static final short[][] dfa_47 = unpackEncodedStringArray(dfa_47s);
 
     class DFA197 extends DFA {
 
@@ -31425,11 +31423,11 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
             this.decisionNumber = 197;
             this.eot = dfa_1;
             this.eof = dfa_1;
-            this.min = dfa_46;
-            this.max = dfa_47;
+            this.min = dfa_17;
+            this.max = dfa_46;
             this.accept = dfa_19;
             this.special = dfa_5;
-            this.transition = dfa_48;
+            this.transition = dfa_47;
         }
         public String getDescription() {
             return "8546:1: (lv_ownedCondition_1_1= ruleExpCS | lv_ownedCondition_1_2= rulePatternExpCS )";
@@ -31441,131 +31439,131 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
     private static class FollowSets000 {
         public static final BitSet FOLLOW_1 = new BitSet(new long[]{0x0000000000000000L});
         public static final BitSet FOLLOW_2 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x0000072080060002L});
-        public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0000072000060002L});
-        public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x0000000000040000L});
-        public static final BitSet FOLLOW_6 = new BitSet(new long[]{0x00001E188C5C0180L});
-        public static final BitSet FOLLOW_7 = new BitSet(new long[]{0x0000000000580000L});
-        public static final BitSet FOLLOW_8 = new BitSet(new long[]{0x00001E188C140180L});
-        public static final BitSet FOLLOW_9 = new BitSet(new long[]{0x0000000000500000L});
-        public static final BitSet FOLLOW_10 = new BitSet(new long[]{0x0000000000600000L});
-        public static final BitSet FOLLOW_11 = new BitSet(new long[]{0x00001E188D960180L});
-        public static final BitSet FOLLOW_12 = new BitSet(new long[]{0x0000000010000000L});
-        public static final BitSet FOLLOW_13 = new BitSet(new long[]{0x0000000001060000L});
-        public static final BitSet FOLLOW_14 = new BitSet(new long[]{0x0000000002200000L});
-        public static final BitSet FOLLOW_15 = new BitSet(new long[]{0x00001E1A9D1601D0L,0x0F4FFFE000300000L,0x0000000000000061L});
-        public static final BitSet FOLLOW_16 = new BitSet(new long[]{0x0000000001200000L});
-        public static final BitSet FOLLOW_17 = new BitSet(new long[]{0x00001E1A9C1601D0L,0x0F4FFFE000300000L,0x0000000000000061L});
-        public static final BitSet FOLLOW_18 = new BitSet(new long[]{0x0000000001000000L});
-        public static final BitSet FOLLOW_19 = new BitSet(new long[]{0x0000000004000000L});
-        public static final BitSet FOLLOW_20 = new BitSet(new long[]{0x0000000008200002L});
-        public static final BitSet FOLLOW_21 = new BitSet(new long[]{0x0000000000200002L});
-        public static final BitSet FOLLOW_22 = new BitSet(new long[]{0x00001E1ABC1601D0L,0x0F4FFFE000300000L,0x0000000000000061L});
-        public static final BitSet FOLLOW_23 = new BitSet(new long[]{0x0000000020200000L});
-        public static final BitSet FOLLOW_24 = new BitSet(new long[]{0x0000000020000000L});
-        public static final BitSet FOLLOW_25 = new BitSet(new long[]{0x0000000040000000L});
-        public static final BitSet FOLLOW_26 = new BitSet(new long[]{0x00001E188C140180L,0x000FFFE000000000L});
-        public static final BitSet FOLLOW_27 = new BitSet(new long[]{0x00001E188C140190L});
-        public static final BitSet FOLLOW_28 = new BitSet(new long[]{0x0000000500000000L});
-        public static final BitSet FOLLOW_29 = new BitSet(new long[]{0x0000000200000000L});
-        public static final BitSet FOLLOW_30 = new BitSet(new long[]{0x0000000400000000L});
-        public static final BitSet FOLLOW_31 = new BitSet(new long[]{0x0000000000400000L});
-        public static final BitSet FOLLOW_32 = new BitSet(new long[]{0x0000004440400000L});
-        public static final BitSet FOLLOW_33 = new BitSet(new long[]{0x0000004400400000L});
-        public static final BitSet FOLLOW_34 = new BitSet(new long[]{0x0000000400400000L});
-        public static final BitSet FOLLOW_35 = new BitSet(new long[]{0x0000042001000000L,0x0000000000030026L});
-        public static final BitSet FOLLOW_36 = new BitSet(new long[]{0x0000008400000000L});
+        public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x00000720C4000002L});
+        public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x00000720C0000002L});
+        public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x00001E1A84600180L});
+        public static final BitSet FOLLOW_6 = new BitSet(new long[]{0x00000000000C0000L});
+        public static final BitSet FOLLOW_7 = new BitSet(new long[]{0x00001E1AD4F001D0L,0x0F4FFFE000300000L,0x0000000000000061L});
+        public static final BitSet FOLLOW_8 = new BitSet(new long[]{0x0000000000140000L});
+        public static final BitSet FOLLOW_9 = new BitSet(new long[]{0x00001E1AD4E001D0L,0x0F4FFFE000300000L,0x0000000000000061L});
+        public static final BitSet FOLLOW_10 = new BitSet(new long[]{0x0000000000100000L});
+        public static final BitSet FOLLOW_11 = new BitSet(new long[]{0x0000000000200000L});
+        public static final BitSet FOLLOW_12 = new BitSet(new long[]{0x0000000000440002L});
+        public static final BitSet FOLLOW_13 = new BitSet(new long[]{0x0000000000040002L});
+        public static final BitSet FOLLOW_14 = new BitSet(new long[]{0x00001E1AD5E001D0L,0x0F4FFFE000300000L,0x0000000000000061L});
+        public static final BitSet FOLLOW_15 = new BitSet(new long[]{0x0000000001040000L});
+        public static final BitSet FOLLOW_16 = new BitSet(new long[]{0x0000000001000000L});
+        public static final BitSet FOLLOW_17 = new BitSet(new long[]{0x0000000002000000L});
+        public static final BitSet FOLLOW_18 = new BitSet(new long[]{0x00001E1A94E001D0L,0x0F4FFFE000300000L,0x0000000000000041L});
+        public static final BitSet FOLLOW_19 = new BitSet(new long[]{0x00001E1A84600190L});
+        public static final BitSet FOLLOW_20 = new BitSet(new long[]{0x0000000028000000L});
+        public static final BitSet FOLLOW_21 = new BitSet(new long[]{0x0000000010000000L});
+        public static final BitSet FOLLOW_22 = new BitSet(new long[]{0x0000000020000000L});
+        public static final BitSet FOLLOW_23 = new BitSet(new long[]{0x0000000080000000L});
+        public static final BitSet FOLLOW_24 = new BitSet(new long[]{0x00001E1B84620180L});
+        public static final BitSet FOLLOW_25 = new BitSet(new long[]{0x0000000300020000L});
+        public static final BitSet FOLLOW_26 = new BitSet(new long[]{0x0000000200020000L});
+        public static final BitSet FOLLOW_27 = new BitSet(new long[]{0x0000000000060000L});
+        public static final BitSet FOLLOW_28 = new BitSet(new long[]{0x00001E1EC4700180L});
+        public static final BitSet FOLLOW_29 = new BitSet(new long[]{0x0000000000800000L});
+        public static final BitSet FOLLOW_30 = new BitSet(new long[]{0x00000000C0100000L});
+        public static final BitSet FOLLOW_31 = new BitSet(new long[]{0x0000000000020000L});
+        public static final BitSet FOLLOW_32 = new BitSet(new long[]{0x0000004022020000L});
+        public static final BitSet FOLLOW_33 = new BitSet(new long[]{0x0000004020020000L});
+        public static final BitSet FOLLOW_34 = new BitSet(new long[]{0x0000000020020000L});
+        public static final BitSet FOLLOW_35 = new BitSet(new long[]{0x0000042000100000L,0x0000000000030026L});
+        public static final BitSet FOLLOW_36 = new BitSet(new long[]{0x0000008020000000L});
         public static final BitSet FOLLOW_37 = new BitSet(new long[]{0x0000020000000000L});
-        public static final BitSet FOLLOW_38 = new BitSet(new long[]{0x00001E18AC140180L});
-        public static final BitSet FOLLOW_39 = new BitSet(new long[]{0x0000000100000000L});
-        public static final BitSet FOLLOW_40 = new BitSet(new long[]{0x00001E188C140182L,0x000FFFE000000000L});
-        public static final BitSet FOLLOW_41 = new BitSet(new long[]{0x00001E188D140180L});
-        public static final BitSet FOLLOW_42 = new BitSet(new long[]{0x0000008040000002L});
-        public static final BitSet FOLLOW_43 = new BitSet(new long[]{0x0000008000000002L});
-        public static final BitSet FOLLOW_44 = new BitSet(new long[]{0x0000C00000000000L});
-        public static final BitSet FOLLOW_45 = new BitSet(new long[]{0x0000800000000000L});
-        public static final BitSet FOLLOW_46 = new BitSet(new long[]{0x0000A00000000000L});
-        public static final BitSet FOLLOW_47 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_48 = new BitSet(new long[]{0x7FFF010000000000L});
-        public static final BitSet FOLLOW_49 = new BitSet(new long[]{0x7FFF010001200000L});
-        public static final BitSet FOLLOW_50 = new BitSet(new long[]{0x7FFF010001000000L});
-        public static final BitSet FOLLOW_51 = new BitSet(new long[]{0x8000000001000000L,0x0000000000000001L});
-        public static final BitSet FOLLOW_52 = new BitSet(new long[]{0x00001E18CC140180L});
-        public static final BitSet FOLLOW_53 = new BitSet(new long[]{0x00001E1E9C1601F0L,0x0F4FFFE000300000L,0x0000000000000061L});
-        public static final BitSet FOLLOW_54 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000004L});
-        public static final BitSet FOLLOW_55 = new BitSet(new long[]{0x0000000450400000L});
-        public static final BitSet FOLLOW_56 = new BitSet(new long[]{0x0000000440400000L});
-        public static final BitSet FOLLOW_57 = new BitSet(new long[]{0x0000000001000000L,0x0000000000000018L});
-        public static final BitSet FOLLOW_58 = new BitSet(new long[]{0x0000000001000180L,0x0000000000000040L});
-        public static final BitSet FOLLOW_59 = new BitSet(new long[]{0x0000000000000040L,0x0000000000100000L});
-        public static final BitSet FOLLOW_60 = new BitSet(new long[]{0x0000400000000000L,0x0000000000000080L});
-        public static final BitSet FOLLOW_61 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000080L});
-        public static final BitSet FOLLOW_62 = new BitSet(new long[]{0x0000200000000000L,0x0000000000000080L});
-        public static final BitSet FOLLOW_63 = new BitSet(new long[]{0x00001E189C140180L});
-        public static final BitSet FOLLOW_64 = new BitSet(new long[]{0x0000000440400000L,0x0000000000000100L});
-        public static final BitSet FOLLOW_65 = new BitSet(new long[]{0x0000000400400000L,0x0000000000000100L});
-        public static final BitSet FOLLOW_66 = new BitSet(new long[]{0x0000000400600000L});
-        public static final BitSet FOLLOW_67 = new BitSet(new long[]{0x0633000000000000L});
-        public static final BitSet FOLLOW_68 = new BitSet(new long[]{0x0633000001200000L});
-        public static final BitSet FOLLOW_69 = new BitSet(new long[]{0x0633000001000000L});
-        public static final BitSet FOLLOW_70 = new BitSet(new long[]{0x0000000001000000L,0x0000000000000200L});
-        public static final BitSet FOLLOW_71 = new BitSet(new long[]{0x0000000040400002L});
-        public static final BitSet FOLLOW_72 = new BitSet(new long[]{0x0000000000400002L});
-        public static final BitSet FOLLOW_73 = new BitSet(new long[]{0x0630000000000000L});
-        public static final BitSet FOLLOW_74 = new BitSet(new long[]{0x0630000001200000L});
-        public static final BitSet FOLLOW_75 = new BitSet(new long[]{0x0630000001000000L});
-        public static final BitSet FOLLOW_76 = new BitSet(new long[]{0x0000400000000000L,0x0000000000000400L});
-        public static final BitSet FOLLOW_77 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000400L});
-        public static final BitSet FOLLOW_78 = new BitSet(new long[]{0x0000200000000000L,0x0000000000000400L});
-        public static final BitSet FOLLOW_79 = new BitSet(new long[]{0x0000004440400000L,0x0000000000000800L});
-        public static final BitSet FOLLOW_80 = new BitSet(new long[]{0x7FF3010000000000L,0x000000000000F000L});
-        public static final BitSet FOLLOW_81 = new BitSet(new long[]{0x7FF3010001200000L,0x000000000000F000L});
-        public static final BitSet FOLLOW_82 = new BitSet(new long[]{0x7FF3010001000000L,0x000000000000F000L});
-        public static final BitSet FOLLOW_83 = new BitSet(new long[]{0x0000000000000000L,0x0000000000020000L});
-        public static final BitSet FOLLOW_84 = new BitSet(new long[]{0x0000000450400000L,0x0000000000040000L});
-        public static final BitSet FOLLOW_85 = new BitSet(new long[]{0x0000000440400000L,0x0000000000040000L});
-        public static final BitSet FOLLOW_86 = new BitSet(new long[]{0x0000000440600000L});
-        public static final BitSet FOLLOW_87 = new BitSet(new long[]{0x0000000001000000L,0x0000000000080000L});
-        public static final BitSet FOLLOW_88 = new BitSet(new long[]{0x0000E00001000000L,0x0000000000000480L});
-        public static final BitSet FOLLOW_89 = new BitSet(new long[]{0x0000000000000002L,0x4000000000000000L});
-        public static final BitSet FOLLOW_90 = new BitSet(new long[]{0x0000000000000040L});
-        public static final BitSet FOLLOW_91 = new BitSet(new long[]{0x0000000100000002L});
-        public static final BitSet FOLLOW_92 = new BitSet(new long[]{0x0000000010000002L});
-        public static final BitSet FOLLOW_93 = new BitSet(new long[]{0x0000000000200000L});
-        public static final BitSet FOLLOW_94 = new BitSet(new long[]{0x00001E1ADD1601D0L,0x0F4FFFE000300000L,0x0000000000000061L});
-        public static final BitSet FOLLOW_95 = new BitSet(new long[]{0x00001E1ADC1601D0L,0x0F4FFFE000300000L,0x0000000000000061L});
-        public static final BitSet FOLLOW_96 = new BitSet(new long[]{0x0000000000000002L,0x0010000000000000L});
-        public static final BitSet FOLLOW_97 = new BitSet(new long[]{0x0000000000200000L,0x0020000000000000L});
-        public static final BitSet FOLLOW_98 = new BitSet(new long[]{0x0000000000000180L});
-        public static final BitSet FOLLOW_99 = new BitSet(new long[]{0x0000004000000000L});
-        public static final BitSet FOLLOW_100 = new BitSet(new long[]{0x0000000000000000L,0x0080000000000000L});
-        public static final BitSet FOLLOW_101 = new BitSet(new long[]{0x0000004040000000L});
-        public static final BitSet FOLLOW_102 = new BitSet(new long[]{0x0000000000000012L});
-        public static final BitSet FOLLOW_103 = new BitSet(new long[]{0x0000004200000002L,0x0000001FFFD00000L});
-        public static final BitSet FOLLOW_104 = new BitSet(new long[]{0x00001E1A9C1401D0L,0x0F4FFFE000300000L,0x0000000000000041L});
-        public static final BitSet FOLLOW_105 = new BitSet(new long[]{0x0000000010400002L,0x5000000000000000L});
-        public static final BitSet FOLLOW_106 = new BitSet(new long[]{0x0000000000400002L,0x1000000000000000L});
+        public static final BitSet FOLLOW_38 = new BitSet(new long[]{0x00001E1A85600180L});
+        public static final BitSet FOLLOW_39 = new BitSet(new long[]{0x0000000008000000L});
+        public static final BitSet FOLLOW_40 = new BitSet(new long[]{0x00001E1A84600182L,0x000FFFE000000000L});
+        public static final BitSet FOLLOW_41 = new BitSet(new long[]{0x00001E1A84600180L,0x000FFFE000000000L});
+        public static final BitSet FOLLOW_42 = new BitSet(new long[]{0x00001E1A84700180L});
+        public static final BitSet FOLLOW_43 = new BitSet(new long[]{0x0000008002000002L});
+        public static final BitSet FOLLOW_44 = new BitSet(new long[]{0x0000008000000002L});
+        public static final BitSet FOLLOW_45 = new BitSet(new long[]{0x0000C00000000000L});
+        public static final BitSet FOLLOW_46 = new BitSet(new long[]{0x0000800000000000L});
+        public static final BitSet FOLLOW_47 = new BitSet(new long[]{0x0000A00000000000L});
+        public static final BitSet FOLLOW_48 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_49 = new BitSet(new long[]{0x7FFF010000000000L});
+        public static final BitSet FOLLOW_50 = new BitSet(new long[]{0x7FFF010000140000L});
+        public static final BitSet FOLLOW_51 = new BitSet(new long[]{0x7FFF010000100000L});
+        public static final BitSet FOLLOW_52 = new BitSet(new long[]{0x8000000000100000L,0x0000000000000001L});
+        public static final BitSet FOLLOW_53 = new BitSet(new long[]{0x00001E1A86600180L});
+        public static final BitSet FOLLOW_54 = new BitSet(new long[]{0x00001E1AF4E001F0L,0x0F4FFFE000300000L,0x0000000000000061L});
+        public static final BitSet FOLLOW_55 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000004L});
+        public static final BitSet FOLLOW_56 = new BitSet(new long[]{0x0000000022820000L});
+        public static final BitSet FOLLOW_57 = new BitSet(new long[]{0x0000000022020000L});
+        public static final BitSet FOLLOW_58 = new BitSet(new long[]{0x0000000000100000L,0x0000000000000018L});
+        public static final BitSet FOLLOW_59 = new BitSet(new long[]{0x0000000000100180L,0x0000000000000040L});
+        public static final BitSet FOLLOW_60 = new BitSet(new long[]{0x0000000000000040L,0x0000000000100000L});
+        public static final BitSet FOLLOW_61 = new BitSet(new long[]{0x0000400000000000L,0x0000000000000080L});
+        public static final BitSet FOLLOW_62 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000080L});
+        public static final BitSet FOLLOW_63 = new BitSet(new long[]{0x0000200000000000L,0x0000000000000080L});
+        public static final BitSet FOLLOW_64 = new BitSet(new long[]{0x00001E1A84E00180L});
+        public static final BitSet FOLLOW_65 = new BitSet(new long[]{0x0000000022020000L,0x0000000000000100L});
+        public static final BitSet FOLLOW_66 = new BitSet(new long[]{0x0000000020020000L,0x0000000000000100L});
+        public static final BitSet FOLLOW_67 = new BitSet(new long[]{0x0000000020060000L});
+        public static final BitSet FOLLOW_68 = new BitSet(new long[]{0x0633000000000000L});
+        public static final BitSet FOLLOW_69 = new BitSet(new long[]{0x0633000000140000L});
+        public static final BitSet FOLLOW_70 = new BitSet(new long[]{0x0633000000100000L});
+        public static final BitSet FOLLOW_71 = new BitSet(new long[]{0x0000000000100000L,0x0000000000000200L});
+        public static final BitSet FOLLOW_72 = new BitSet(new long[]{0x0000000002020002L});
+        public static final BitSet FOLLOW_73 = new BitSet(new long[]{0x0000000000020002L});
+        public static final BitSet FOLLOW_74 = new BitSet(new long[]{0x0630000000000000L});
+        public static final BitSet FOLLOW_75 = new BitSet(new long[]{0x0630000000140000L});
+        public static final BitSet FOLLOW_76 = new BitSet(new long[]{0x0630000000100000L});
+        public static final BitSet FOLLOW_77 = new BitSet(new long[]{0x0000400000000000L,0x0000000000000400L});
+        public static final BitSet FOLLOW_78 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000400L});
+        public static final BitSet FOLLOW_79 = new BitSet(new long[]{0x0000200000000000L,0x0000000000000400L});
+        public static final BitSet FOLLOW_80 = new BitSet(new long[]{0x0000004022020000L,0x0000000000000800L});
+        public static final BitSet FOLLOW_81 = new BitSet(new long[]{0x7FF3010000000000L,0x000000000000F000L});
+        public static final BitSet FOLLOW_82 = new BitSet(new long[]{0x7FF3010000140000L,0x000000000000F000L});
+        public static final BitSet FOLLOW_83 = new BitSet(new long[]{0x7FF3010000100000L,0x000000000000F000L});
+        public static final BitSet FOLLOW_84 = new BitSet(new long[]{0x0000000000000000L,0x0000000000020000L});
+        public static final BitSet FOLLOW_85 = new BitSet(new long[]{0x0000000022820000L,0x0000000000040000L});
+        public static final BitSet FOLLOW_86 = new BitSet(new long[]{0x0000000022020000L,0x0000000000040000L});
+        public static final BitSet FOLLOW_87 = new BitSet(new long[]{0x0000000022060000L});
+        public static final BitSet FOLLOW_88 = new BitSet(new long[]{0x0000000000100000L,0x0000000000080000L});
+        public static final BitSet FOLLOW_89 = new BitSet(new long[]{0x0000E00000100000L,0x0000000000000480L});
+        public static final BitSet FOLLOW_90 = new BitSet(new long[]{0x0000000000000002L,0x4000000000000000L});
+        public static final BitSet FOLLOW_91 = new BitSet(new long[]{0x0000000000000040L});
+        public static final BitSet FOLLOW_92 = new BitSet(new long[]{0x0000000008000002L});
+        public static final BitSet FOLLOW_93 = new BitSet(new long[]{0x0000000000800002L});
+        public static final BitSet FOLLOW_94 = new BitSet(new long[]{0x0000000000040000L});
+        public static final BitSet FOLLOW_95 = new BitSet(new long[]{0x00001E1AD6F001D0L,0x0F4FFFE000300000L,0x0000000000000061L});
+        public static final BitSet FOLLOW_96 = new BitSet(new long[]{0x00001E1AD6E001D0L,0x0F4FFFE000300000L,0x0000000000000061L});
+        public static final BitSet FOLLOW_97 = new BitSet(new long[]{0x0000000000000002L,0x0010000000000000L});
+        public static final BitSet FOLLOW_98 = new BitSet(new long[]{0x0000000000040000L,0x0020000000000000L});
+        public static final BitSet FOLLOW_99 = new BitSet(new long[]{0x0000000000000180L});
+        public static final BitSet FOLLOW_100 = new BitSet(new long[]{0x0000004000000000L});
+        public static final BitSet FOLLOW_101 = new BitSet(new long[]{0x0000000000000000L,0x0080000000000000L});
+        public static final BitSet FOLLOW_102 = new BitSet(new long[]{0x0000004002000000L});
+        public static final BitSet FOLLOW_103 = new BitSet(new long[]{0x0000000000000012L});
+        public static final BitSet FOLLOW_104 = new BitSet(new long[]{0x0000004010000002L,0x0000001FFFD00000L});
+        public static final BitSet FOLLOW_105 = new BitSet(new long[]{0x0000000000820002L,0x5000000000000000L});
+        public static final BitSet FOLLOW_106 = new BitSet(new long[]{0x0000000000020002L,0x1000000000000000L});
         public static final BitSet FOLLOW_107 = new BitSet(new long[]{0x0000000000000002L,0x1000000000000000L});
         public static final BitSet FOLLOW_108 = new BitSet(new long[]{0x0000000000000000L,0x2000000000000000L});
-        public static final BitSet FOLLOW_109 = new BitSet(new long[]{0x00001E188D140190L});
-        public static final BitSet FOLLOW_110 = new BitSet(new long[]{0x00001E1AFC1601D0L,0x0F4FFFE000300000L,0x0000000000000061L});
-        public static final BitSet FOLLOW_111 = new BitSet(new long[]{0x0000000422200000L});
-        public static final BitSet FOLLOW_112 = new BitSet(new long[]{0x0000000022200000L});
-        public static final BitSet FOLLOW_113 = new BitSet(new long[]{0x0000000000200000L,0x8000000000000000L});
-        public static final BitSet FOLLOW_114 = new BitSet(new long[]{0x0000000040080002L});
+        public static final BitSet FOLLOW_109 = new BitSet(new long[]{0x00001E1A84700190L});
+        public static final BitSet FOLLOW_110 = new BitSet(new long[]{0x00001E1AD7E001D0L,0x0F4FFFE000300000L,0x0000000000000061L});
+        public static final BitSet FOLLOW_111 = new BitSet(new long[]{0x00000000210C0000L});
+        public static final BitSet FOLLOW_112 = new BitSet(new long[]{0x00000000010C0000L});
+        public static final BitSet FOLLOW_113 = new BitSet(new long[]{0x0000000000040000L,0x8000000000000000L});
+        public static final BitSet FOLLOW_114 = new BitSet(new long[]{0x0000000102000002L});
         public static final BitSet FOLLOW_115 = new BitSet(new long[]{0x0000004000000002L});
-        public static final BitSet FOLLOW_116 = new BitSet(new long[]{0x0000000040000002L});
+        public static final BitSet FOLLOW_116 = new BitSet(new long[]{0x0000000002000002L});
         public static final BitSet FOLLOW_117 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x0000000000000002L});
         public static final BitSet FOLLOW_118 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x0000000000000014L});
         public static final BitSet FOLLOW_119 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000000L,0x0000000000000008L});
-        public static final BitSet FOLLOW_120 = new BitSet(new long[]{0x0000000000280000L});
-        public static final BitSet FOLLOW_121 = new BitSet(new long[]{0x0000004050000000L});
-        public static final BitSet FOLLOW_122 = new BitSet(new long[]{0x0000000200000040L});
-        public static final BitSet FOLLOW_123 = new BitSet(new long[]{0x0000000200000040L,0x0000000000800000L,0x0000000000000200L});
+        public static final BitSet FOLLOW_120 = new BitSet(new long[]{0x0000000100040000L});
+        public static final BitSet FOLLOW_121 = new BitSet(new long[]{0x0000004002800000L});
+        public static final BitSet FOLLOW_122 = new BitSet(new long[]{0x0000000010000040L});
+        public static final BitSet FOLLOW_123 = new BitSet(new long[]{0x0000000010000040L,0x0000000000800000L,0x0000000000000200L});
         public static final BitSet FOLLOW_124 = new BitSet(new long[]{0x0000000000000000L,0x8000000000000000L,0x0000000000000180L});
         public static final BitSet FOLLOW_125 = new BitSet(new long[]{0x0000000000000000L,0x8000000000000000L});
-        public static final BitSet FOLLOW_126 = new BitSet(new long[]{0x0000000000200002L,0x4000000000000000L});
-        public static final BitSet FOLLOW_127 = new BitSet(new long[]{0x00001E188C140180L,0x0000000000000000L,0x0000000000000200L});
+        public static final BitSet FOLLOW_126 = new BitSet(new long[]{0x0000000000040002L,0x4000000000000000L});
+        public static final BitSet FOLLOW_127 = new BitSet(new long[]{0x00001E1A94E001D0L,0x0F4FFFE000300000L,0x0000000000000241L});
         public static final BitSet FOLLOW_128 = new BitSet(new long[]{0x0000000000000002L,0x0000000000040000L});
         public static final BitSet FOLLOW_129 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000000L,0x0000000000000400L});
     }

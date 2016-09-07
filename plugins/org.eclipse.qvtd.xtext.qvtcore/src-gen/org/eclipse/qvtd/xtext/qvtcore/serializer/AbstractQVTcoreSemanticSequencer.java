@@ -74,32 +74,33 @@ import org.eclipse.ocl.xtext.essentialoclcs.TupleLiteralPartCS;
 import org.eclipse.ocl.xtext.essentialoclcs.TypeLiteralExpCS;
 import org.eclipse.ocl.xtext.essentialoclcs.TypeNameExpCS;
 import org.eclipse.ocl.xtext.essentialoclcs.UnlimitedNaturalLiteralExpCS;
+import org.eclipse.qvtd.xtext.qvtbase.serializer.QVTbaseSemanticSequencer;
 import org.eclipse.qvtd.xtext.qvtbasecs.QVTbaseCSPackage;
 import org.eclipse.qvtd.xtext.qvtbasecs.QualifiedPackageCS;
 import org.eclipse.qvtd.xtext.qvtcore.services.QVTcoreGrammarAccess;
-import org.eclipse.qvtd.xtext.qvtcorebase.serializer.QVTcoreBaseSemanticSequencer;
-import org.eclipse.qvtd.xtext.qvtcorebasecs.BottomPatternCS;
-import org.eclipse.qvtd.xtext.qvtcorebasecs.DirectionCS;
-import org.eclipse.qvtd.xtext.qvtcorebasecs.DomainCS;
-import org.eclipse.qvtd.xtext.qvtcorebasecs.GuardPatternCS;
-import org.eclipse.qvtd.xtext.qvtcorebasecs.ParamDeclarationCS;
-import org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateCS;
-import org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateOrAssignmentCS;
-import org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage;
-import org.eclipse.qvtd.xtext.qvtcorebasecs.QueryCS;
-import org.eclipse.qvtd.xtext.qvtcorebasecs.RealizedVariableCS;
-import org.eclipse.qvtd.xtext.qvtcorebasecs.TransformationCS;
-import org.eclipse.qvtd.xtext.qvtcorebasecs.UnrealizedVariableCS;
+import org.eclipse.qvtd.xtext.qvtcorecs.BottomPatternCS;
+import org.eclipse.qvtd.xtext.qvtcorecs.DirectionCS;
+import org.eclipse.qvtd.xtext.qvtcorecs.DomainCS;
+import org.eclipse.qvtd.xtext.qvtcorecs.GuardPatternCS;
 import org.eclipse.qvtd.xtext.qvtcorecs.MappingCS;
+import org.eclipse.qvtd.xtext.qvtcorecs.ParamDeclarationCS;
+import org.eclipse.qvtd.xtext.qvtcorecs.PredicateCS;
+import org.eclipse.qvtd.xtext.qvtcorecs.PredicateOrAssignmentCS;
 import org.eclipse.qvtd.xtext.qvtcorecs.QVTcoreCSPackage;
+import org.eclipse.qvtd.xtext.qvtcorecs.QueryCS;
+import org.eclipse.qvtd.xtext.qvtcorecs.RealizedVariableCS;
 import org.eclipse.qvtd.xtext.qvtcorecs.TopLevelCS;
+import org.eclipse.qvtd.xtext.qvtcorecs.TransformationCS;
+import org.eclipse.qvtd.xtext.qvtcorecs.UnrealizedVariableCS;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Parameter;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.serializer.ISerializationContext;
+import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
+import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 
 @SuppressWarnings("all")
-public abstract class AbstractQVTcoreSemanticSequencer extends QVTcoreBaseSemanticSequencer {
+public abstract class AbstractQVTcoreSemanticSequencer extends QVTbaseSemanticSequencer {
 
 	@Inject
 	private QVTcoreGrammarAccess grammarAccess;
@@ -431,15 +432,15 @@ public abstract class AbstractQVTcoreSemanticSequencer extends QVTcoreBaseSemant
 				sequence_QualifiedPackageCS(context, (QualifiedPackageCS) semanticObject); 
 				return; 
 			}
-		else if (epackage == QVTcoreBaseCSPackage.eINSTANCE)
+		else if (epackage == QVTcoreCSPackage.eINSTANCE)
 			switch (semanticObject.eClass().getClassifierID()) {
-			case QVTcoreBaseCSPackage.BOTTOM_PATTERN_CS:
+			case QVTcoreCSPackage.BOTTOM_PATTERN_CS:
 				sequence_BottomPatternCS(context, (BottomPatternCS) semanticObject); 
 				return; 
-			case QVTcoreBaseCSPackage.DIRECTION_CS:
+			case QVTcoreCSPackage.DIRECTION_CS:
 				sequence_DirectionCS(context, (DirectionCS) semanticObject); 
 				return; 
-			case QVTcoreBaseCSPackage.DOMAIN_CS:
+			case QVTcoreCSPackage.DOMAIN_CS:
 				if (rule == grammarAccess.getNamedDomainCSRule()) {
 					sequence_NamedDomainCS(context, (DomainCS) semanticObject); 
 					return; 
@@ -449,28 +450,34 @@ public abstract class AbstractQVTcoreSemanticSequencer extends QVTcoreBaseSemant
 					return; 
 				}
 				else break;
-			case QVTcoreBaseCSPackage.GUARD_PATTERN_CS:
+			case QVTcoreCSPackage.GUARD_PATTERN_CS:
 				sequence_GuardPatternCS(context, (GuardPatternCS) semanticObject); 
 				return; 
-			case QVTcoreBaseCSPackage.PARAM_DECLARATION_CS:
+			case QVTcoreCSPackage.MAPPING_CS:
+				sequence_MappingCS(context, (MappingCS) semanticObject); 
+				return; 
+			case QVTcoreCSPackage.PARAM_DECLARATION_CS:
 				sequence_ParamDeclarationCS(context, (ParamDeclarationCS) semanticObject); 
 				return; 
-			case QVTcoreBaseCSPackage.PREDICATE_CS:
+			case QVTcoreCSPackage.PREDICATE_CS:
 				sequence_PredicateCS(context, (PredicateCS) semanticObject); 
 				return; 
-			case QVTcoreBaseCSPackage.PREDICATE_OR_ASSIGNMENT_CS:
+			case QVTcoreCSPackage.PREDICATE_OR_ASSIGNMENT_CS:
 				sequence_PredicateOrAssignmentCS(context, (PredicateOrAssignmentCS) semanticObject); 
 				return; 
-			case QVTcoreBaseCSPackage.QUERY_CS:
+			case QVTcoreCSPackage.QUERY_CS:
 				sequence_QueryCS(context, (QueryCS) semanticObject); 
 				return; 
-			case QVTcoreBaseCSPackage.REALIZED_VARIABLE_CS:
+			case QVTcoreCSPackage.REALIZED_VARIABLE_CS:
 				sequence_RealizedVariableCS(context, (RealizedVariableCS) semanticObject); 
 				return; 
-			case QVTcoreBaseCSPackage.TRANSFORMATION_CS:
+			case QVTcoreCSPackage.TOP_LEVEL_CS:
+				sequence_TopLevelCS(context, (TopLevelCS) semanticObject); 
+				return; 
+			case QVTcoreCSPackage.TRANSFORMATION_CS:
 				sequence_TransformationCS(context, (TransformationCS) semanticObject); 
 				return; 
-			case QVTcoreBaseCSPackage.UNREALIZED_VARIABLE_CS:
+			case QVTcoreCSPackage.UNREALIZED_VARIABLE_CS:
 				if (rule == grammarAccess.getGuardVariableCSRule()) {
 					sequence_GuardVariableCS(context, (UnrealizedVariableCS) semanticObject); 
 					return; 
@@ -481,18 +488,100 @@ public abstract class AbstractQVTcoreSemanticSequencer extends QVTcoreBaseSemant
 				}
 				else break;
 			}
-		else if (epackage == QVTcoreCSPackage.eINSTANCE)
-			switch (semanticObject.eClass().getClassifierID()) {
-			case QVTcoreCSPackage.MAPPING_CS:
-				sequence_MappingCS(context, (MappingCS) semanticObject); 
-				return; 
-			case QVTcoreCSPackage.TOP_LEVEL_CS:
-				sequence_TopLevelCS(context, (TopLevelCS) semanticObject); 
-				return; 
-			}
 		if (errorAcceptor != null)
 			errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}
+	
+	/**
+	 * Contexts:
+	 *     BottomPatternCS returns BottomPatternCS
+	 *
+	 * Constraint:
+	 *     (
+	 *         (
+	 *             (ownedUnrealizedVariables+=UnrealizedVariableCS | ownedRealizedVariables+=RealizedVariableCS) 
+	 *             ownedUnrealizedVariables+=UnrealizedVariableCS? 
+	 *             (ownedRealizedVariables+=RealizedVariableCS? ownedUnrealizedVariables+=UnrealizedVariableCS?)* 
+	 *             ownedConstraints+=PredicateOrAssignmentCS*
+	 *         ) | 
+	 *         (
+	 *             (ownedUnrealizedVariables+=UnrealizedVariableCS | ownedRealizedVariables+=RealizedVariableCS) 
+	 *             ownedUnrealizedVariables+=UnrealizedVariableCS? 
+	 *             (ownedRealizedVariables+=RealizedVariableCS? ownedUnrealizedVariables+=UnrealizedVariableCS?)*
+	 *         ) | 
+	 *         ownedConstraints+=PredicateOrAssignmentCS+
+	 *     )?
+	 */
+	protected void sequence_BottomPatternCS(ISerializationContext context, BottomPatternCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     DirectionCS returns DirectionCS
+	 *
+	 * Constraint:
+	 *     (
+	 *         name=UnrestrictedName? 
+	 *         imports+=[Package|UnrestrictedName] 
+	 *         imports+=[Package|UnrestrictedName]* 
+	 *         (uses+=[CoreDomain|UnrestrictedName] uses+=[CoreDomain|UnrestrictedName]*)?
+	 *     )
+	 */
+	protected void sequence_DirectionCS(ISerializationContext context, DirectionCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     GuardPatternCS returns GuardPatternCS
+	 *
+	 * Constraint:
+	 *     (
+	 *         (ownedUnrealizedVariables+=GuardVariableCS ownedUnrealizedVariables+=GuardVariableCS* ownedPredicates+=PredicateCS*) | 
+	 *         (ownedUnrealizedVariables+=GuardVariableCS ownedUnrealizedVariables+=GuardVariableCS*) | 
+	 *         ownedPredicates+=PredicateCS+
+	 *     )?
+	 */
+	protected void sequence_GuardPatternCS(ISerializationContext context, GuardPatternCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     GuardVariableCS returns UnrealizedVariableCS
+	 *
+	 * Constraint:
+	 *     (name=UnrestrictedName ownedType=TypeExpCS)
+	 */
+	protected void sequence_GuardVariableCS(ISerializationContext context, UnrealizedVariableCS semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, BaseCSPackage.Literals.NAMED_ELEMENT_CS__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BaseCSPackage.Literals.NAMED_ELEMENT_CS__NAME));
+			if (transientValues.isValueTransient(semanticObject, BaseCSPackage.Literals.TYPED_ELEMENT_CS__OWNED_TYPE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BaseCSPackage.Literals.TYPED_ELEMENT_CS__OWNED_TYPE));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getGuardVariableCSAccess().getNameUnrestrictedNameParserRuleCall_0_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getGuardVariableCSAccess().getOwnedTypeTypeExpCSParserRuleCall_2_0(), semanticObject.getOwnedType());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     ImportCS returns ImportCS
+	 *
+	 * Constraint:
+	 *     (name=Identifier? ownedPathName=URIPathNameCS isAll?='::'?)
+	 */
+	protected void sequence_ImportCS(ISerializationContext context, ImportCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
 	
 	/**
 	 * Contexts:
@@ -516,6 +605,145 @@ public abstract class AbstractQVTcoreSemanticSequencer extends QVTcoreBaseSemant
 	
 	/**
 	 * Contexts:
+	 *     NamedDomainCS returns DomainCS
+	 *
+	 * Constraint:
+	 *     (
+	 *         isCheck?='check'? 
+	 *         isEnforce?='enforce'? 
+	 *         direction=[TypedModel|UnrestrictedName] 
+	 *         ownedGuardPattern=GuardPatternCS 
+	 *         ownedBottomPattern=BottomPatternCS
+	 *     )
+	 */
+	protected void sequence_NamedDomainCS(ISerializationContext context, DomainCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     ParamDeclarationCS returns ParamDeclarationCS
+	 *
+	 * Constraint:
+	 *     (name=UnrestrictedName ownedType=TypeExpCS)
+	 */
+	protected void sequence_ParamDeclarationCS(ISerializationContext context, ParamDeclarationCS semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, BaseCSPackage.Literals.NAMED_ELEMENT_CS__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BaseCSPackage.Literals.NAMED_ELEMENT_CS__NAME));
+			if (transientValues.isValueTransient(semanticObject, BaseCSPackage.Literals.TYPED_ELEMENT_CS__OWNED_TYPE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BaseCSPackage.Literals.TYPED_ELEMENT_CS__OWNED_TYPE));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getParamDeclarationCSAccess().getNameUnrestrictedNameParserRuleCall_0_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getParamDeclarationCSAccess().getOwnedTypeTypeExpCSParserRuleCall_2_0(), semanticObject.getOwnedType());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     PredicateCS returns PredicateCS
+	 *
+	 * Constraint:
+	 *     ownedCondition=ExpCS
+	 */
+	protected void sequence_PredicateCS(ISerializationContext context, PredicateCS semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, QVTcoreCSPackage.Literals.PREDICATE_CS__OWNED_CONDITION) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, QVTcoreCSPackage.Literals.PREDICATE_CS__OWNED_CONDITION));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getPredicateCSAccess().getOwnedConditionExpCSParserRuleCall_0_0(), semanticObject.getOwnedCondition());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     PredicateOrAssignmentCS returns PredicateOrAssignmentCS
+	 *
+	 * Constraint:
+	 *     (isDefault?='default'? ownedTarget=ExpCS ownedInitExpression=ExpCS?)
+	 */
+	protected void sequence_PredicateOrAssignmentCS(ISerializationContext context, PredicateOrAssignmentCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     QualifiedPackageCS returns QualifiedPackageCS
+	 *
+	 * Constraint:
+	 *     (
+	 *         ownedPathName=ScopeNameCS? 
+	 *         name=UnrestrictedName 
+	 *         nsPrefix=UnrestrictedName? 
+	 *         nsURI=URI? 
+	 *         (ownedPackages+=QualifiedPackageCS | ownedClasses+=ClassCS | ownedClasses+=TransformationCS)*
+	 *     )
+	 */
+	protected void sequence_QualifiedPackageCS(ISerializationContext context, QualifiedPackageCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     QueryCS returns QueryCS
+	 *
+	 * Constraint:
+	 *     (
+	 *         isTransient?='transient'? 
+	 *         ownedPathName=ScopeNameCS 
+	 *         name=UnrestrictedName 
+	 *         (ownedParameters+=ParamDeclarationCS ownedParameters+=ParamDeclarationCS*)? 
+	 *         ownedType=TypeExpCS 
+	 *         ownedExpression=ExpCS?
+	 *     )
+	 */
+	protected void sequence_QueryCS(ISerializationContext context, QueryCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     RealizedVariableCS returns RealizedVariableCS
+	 *
+	 * Constraint:
+	 *     (name=UnrestrictedName ownedType=TypeExpCS)
+	 */
+	protected void sequence_RealizedVariableCS(ISerializationContext context, RealizedVariableCS semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, BaseCSPackage.Literals.NAMED_ELEMENT_CS__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BaseCSPackage.Literals.NAMED_ELEMENT_CS__NAME));
+			if (transientValues.isValueTransient(semanticObject, BaseCSPackage.Literals.TYPED_ELEMENT_CS__OWNED_TYPE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BaseCSPackage.Literals.TYPED_ELEMENT_CS__OWNED_TYPE));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getRealizedVariableCSAccess().getNameUnrestrictedNameParserRuleCall_1_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getRealizedVariableCSAccess().getOwnedTypeTypeExpCSParserRuleCall_3_0(), semanticObject.getOwnedType());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     ScopeNameCS returns PathNameCS
+	 *
+	 * Constraint:
+	 *     (ownedPathElements+=FirstPathElementCS ownedPathElements+=NextPathElementCS*)
+	 */
+	protected void sequence_ScopeNameCS(ISerializationContext context, PathNameCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     TopLevelCS returns TopLevelCS
 	 *
 	 * Constraint:
@@ -528,6 +756,51 @@ public abstract class AbstractQVTcoreSemanticSequencer extends QVTcoreBaseSemant
 	 *     )?
 	 */
 	protected void sequence_TopLevelCS(ISerializationContext context, TopLevelCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     TransformationCS returns TransformationCS
+	 *
+	 * Constraint:
+	 *     (ownedPathName=ScopeNameCS? name=UnreservedName ownedDirections+=DirectionCS*)
+	 */
+	protected void sequence_TransformationCS(ISerializationContext context, TransformationCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     UnnamedDomainCS returns DomainCS
+	 *
+	 * Constraint:
+	 *     (ownedGuardPattern=GuardPatternCS ownedBottomPattern=BottomPatternCS)
+	 */
+	protected void sequence_UnnamedDomainCS(ISerializationContext context, DomainCS semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, QVTcoreCSPackage.Literals.AREA_CS__OWNED_GUARD_PATTERN) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, QVTcoreCSPackage.Literals.AREA_CS__OWNED_GUARD_PATTERN));
+			if (transientValues.isValueTransient(semanticObject, QVTcoreCSPackage.Literals.AREA_CS__OWNED_BOTTOM_PATTERN) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, QVTcoreCSPackage.Literals.AREA_CS__OWNED_BOTTOM_PATTERN));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getUnnamedDomainCSAccess().getOwnedGuardPatternGuardPatternCSParserRuleCall_1_0(), semanticObject.getOwnedGuardPattern());
+		feeder.accept(grammarAccess.getUnnamedDomainCSAccess().getOwnedBottomPatternBottomPatternCSParserRuleCall_2_0(), semanticObject.getOwnedBottomPattern());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     UnrealizedVariableCS returns UnrealizedVariableCS
+	 *
+	 * Constraint:
+	 *     (name=UnrestrictedName ownedType=TypeExpCS? ownedInitExpression=ExpCS?)
+	 */
+	protected void sequence_UnrealizedVariableCS(ISerializationContext context, UnrealizedVariableCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
