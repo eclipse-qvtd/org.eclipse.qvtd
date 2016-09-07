@@ -31,12 +31,12 @@ import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.TreeIterable;
+import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
 import org.eclipse.qvtd.pivot.qvtcorebase.Assignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.CorePattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.NavigationAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment;
-import org.eclipse.qvtd.pivot.qvtcorebase.utilities.QVTcoreBaseUtil;
 
 /**
  * AssignmentSorter supports ordering the incoming Assignments so that they can be converted to QVTs form
@@ -108,7 +108,7 @@ public class AssignmentSorter
 						property2navigationAssignable = new HashMap<>();
 						realizedVariable2property2navigationAssignment.put(targetVariable, property2navigationAssignable);
 					}
-					Property targetProperty = QVTcoreBaseUtil.getTargetProperty(navigationAssignment);
+					Property targetProperty = QVTcoreUtil.getTargetProperty(navigationAssignment);
 					NavigationAssignment oldAssignment = property2navigationAssignable.put(targetProperty, navigationAssignment);
 					assert oldAssignment == null;
 				}

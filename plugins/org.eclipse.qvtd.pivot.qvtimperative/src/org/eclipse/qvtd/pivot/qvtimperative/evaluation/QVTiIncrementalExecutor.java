@@ -32,7 +32,6 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtcorebase.NavigationAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
-import org.eclipse.qvtd.pivot.qvtcorebase.utilities.QVTcoreBaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
@@ -273,14 +272,14 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 			Mapping asMapping = QVTimperativeUtil.getContainingMapping(navigationAssignment);
 			assert asMapping != null;
 			if (transformationAnalysis.isHazardousWrite(asMapping, navigationAssignment)) {
-				Property targetProperty = QVTcoreBaseUtil.getTargetProperty(navigationAssignment);
+				Property targetProperty = QVTimperativeUtil.getTargetProperty(navigationAssignment);
 				assert targetProperty != null;
 				EStructuralFeature eFeature = (EStructuralFeature)targetProperty.getESObject();
 				objectManager.assigned(sourceObject, eFeature, ecoreValue, childKey);
 			}
 		}
 		else {
-			Property targetProperty = QVTcoreBaseUtil.getTargetProperty(navigationAssignment);
+			Property targetProperty = QVTimperativeUtil.getTargetProperty(navigationAssignment);
 			assert targetProperty != null;
 			EStructuralFeature eFeature = (EStructuralFeature)targetProperty.getESObject();
 			Invocation.Incremental currentInvocation2 = currentInvocation;

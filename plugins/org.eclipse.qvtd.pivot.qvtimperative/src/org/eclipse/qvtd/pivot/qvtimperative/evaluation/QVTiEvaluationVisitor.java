@@ -48,7 +48,6 @@ import org.eclipse.qvtd.pivot.qvtcorebase.OppositePropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment;
-import org.eclipse.qvtd.pivot.qvtcorebase.utilities.QVTcoreBaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
@@ -62,6 +61,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingSequence;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.VariablePredicate;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.runtime.evaluation.InvocationFailedException;
 
 /**
@@ -299,7 +299,7 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 			Integer childKey = null;
 			try {
 				Object boxedValue = navigationAssignment.getValue().accept(undecoratedVisitor);
-				Property targetProperty = QVTcoreBaseUtil.getTargetProperty(navigationAssignment);
+				Property targetProperty = QVTimperativeUtil.getTargetProperty(navigationAssignment);
 				Class<?> instanceClass = PivotUtil.getEcoreInstanceClass(targetProperty);
 				Object ecoreValue = idResolver.ecoreValueOf(instanceClass, boxedValue);
 				Property oppositeProperty = targetProperty.getOpposite();

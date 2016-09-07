@@ -114,7 +114,6 @@ import org.eclipse.qvtd.pivot.qvtcorebase.OppositePropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment;
-import org.eclipse.qvtd.pivot.qvtcorebase.utilities.QVTcoreBaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
@@ -685,7 +684,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 	}
 
 	protected @NonNull CGTypedModel getTypedModel(@NonNull Variable pVariable) {
-		Area pArea = ClassUtil.nonNullState(QVTcoreBaseUtil.getContainingArea(pVariable));
+		Area pArea = ClassUtil.nonNullState(QVTimperativeUtil.getContainingArea(pVariable));
 		TypedModel asTypedModel = null;
 		if (pArea instanceof Domain) {
 			asTypedModel = ClassUtil.nonNullState(((Domain)pArea).getTypedModel());
@@ -942,7 +941,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 			CGMiddlePropertyAssignment cgPropertyAssignment = QVTiCGModelFactory.eINSTANCE.createCGMiddlePropertyAssignment();
 			setAst(cgPropertyAssignment, asNavigationAssignment);
 			cgPropertyAssignment.setSlotValue(doVisit(CGValuedElement.class, asNavigationAssignment.getSlotExpression()));
-			Property asProperty = QVTcoreBaseUtil.getTargetProperty(asNavigationAssignment);
+			Property asProperty = QVTimperativeUtil.getTargetProperty(asNavigationAssignment);
 			cgPropertyAssignment.setReferredProperty(asProperty);
 			//			cgPredicate.setName(asPredicate.getName());
 			cgPropertyAssignment.setTypeId(analyzer.getTypeId(TypeId.OCL_VOID));
@@ -960,7 +959,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 			return cgPropertyAssignment;
 		}
 		else {
-			Property asTargetProperty = QVTcoreBaseUtil.getTargetProperty(asNavigationAssignment);
+			Property asTargetProperty = QVTimperativeUtil.getTargetProperty(asNavigationAssignment);
 			LibraryProperty libraryProperty = metamodelManager.getImplementation(asNavigationAssignment, null, asTargetProperty);
 			CGPropertyAssignment cgPropertyAssignment = null;
 			if (isEcoreProperty(libraryProperty)) {

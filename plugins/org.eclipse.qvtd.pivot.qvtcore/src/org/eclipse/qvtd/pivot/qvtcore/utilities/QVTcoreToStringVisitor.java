@@ -12,24 +12,36 @@ package org.eclipse.qvtd.pivot.qvtcore.utilities;
 
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.utilities.ToStringVisitor;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseToStringVisitor;
 import org.eclipse.qvtd.pivot.qvtcore.CoreModel;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
 import org.eclipse.qvtd.pivot.qvtcore.util.QVTcoreVisitor;
-import org.eclipse.qvtd.pivot.qvtcorebase.utilities.QVTcoreBaseToStringVisitor;
+import org.eclipse.qvtd.pivot.qvtcorebase.Assignment;
+import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
+import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
+import org.eclipse.qvtd.pivot.qvtcorebase.CorePattern;
+import org.eclipse.qvtd.pivot.qvtcorebase.EnforcementOperation;
+import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
+import org.eclipse.qvtd.pivot.qvtcorebase.NavigationAssignment;
+import org.eclipse.qvtd.pivot.qvtcorebase.OppositePropertyAssignment;
+import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
+import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
+import org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment;
 
 /**
  * Converts an OCL expression to a string for debugging. This is not intended to
  * be used by client applications as an AST-to-text transformation.
  */
-public class QVTcoreToStringVisitor extends QVTcoreBaseToStringVisitor implements QVTcoreVisitor<String>
+public class QVTcoreToStringVisitor extends QVTbaseToStringVisitor implements QVTcoreVisitor<String>
 {
-	protected static class QVTcoreToStringFactory implements QVTcoreBaseToStringVisitor.Factory
+	protected static class QVTcoreToStringFactory implements QVTbaseToStringVisitor.Factory
 	{
 		protected QVTcoreToStringFactory() {
 			ToStringVisitor.addFactory(this);
-			QVTcoreBaseToStringVisitor.FACTORY.getClass();
+			QVTbaseToStringVisitor.FACTORY.getClass();
 		}
 
 		@Override
@@ -52,14 +64,90 @@ public class QVTcoreToStringVisitor extends QVTcoreBaseToStringVisitor implement
 	}
 
 	@Override
+	public String visitAssignment(@NonNull Assignment object) {
+		append("Assignment ");
+		//		appendName(object);
+		return null;
+	}
+
+	@Override
+	public String visitBottomPattern(@NonNull BottomPattern object) {
+		appendQualifiedName((NamedElement)object.getArea());
+		append("$Bottom");
+		return null;
+	}
+
+	@Override
+	public String visitCoreDomain(@NonNull CoreDomain object) {
+		appendQualifiedName(object);
+		return null;
+	}
+
+	@Override
 	public String visitCoreModel(@NonNull CoreModel object) {
 		return visitModel(object);
+	}
+
+	@Override
+	public String visitCorePattern(@NonNull CorePattern object) {
+		append("CorePattern ");
+		//		appendName(object);
+		return null;
+	}
+
+	@Override
+	public String visitEnforcementOperation(@NonNull EnforcementOperation object) {
+		append("EnforcementOperation ");
+		//		appendName(object);
+		return null;
+	}
+
+	@Override
+	public String visitGuardPattern(@NonNull GuardPattern object) {
+		appendQualifiedName((NamedElement)object.getArea());
+		append("$Guard");
+		return null;
 	}
 
 	@Override
 	public String visitMapping(@NonNull Mapping object) {
 		append("mapping ");
 		appendName(object);
+		return null;
+	}
+
+	@Override
+	public String visitNavigationAssignment(@NonNull NavigationAssignment asNavigationAssignment) {
+		safeVisit(asNavigationAssignment.getSlotExpression());
+		append(".");
+		appendName(QVTcoreUtil.getTargetProperty(asNavigationAssignment));
+		append(" := ");
+		safeVisit(asNavigationAssignment.getValue());
+		return null;
+	}
+
+	@Override
+	public String visitOppositePropertyAssignment(@NonNull OppositePropertyAssignment asNavigationAssignment) {
+		return visitNavigationAssignment(asNavigationAssignment);
+	}
+
+	@Override
+	public String visitPropertyAssignment(@NonNull PropertyAssignment asNavigationAssignment) {
+		return visitNavigationAssignment(asNavigationAssignment);
+	}
+
+	@Override
+	public String visitRealizedVariable(@NonNull RealizedVariable variable) {
+		//		append("realized ");
+		visitVariable(variable);
+		return null;
+	}
+
+	@Override
+	public String visitVariableAssignment(@NonNull VariableAssignment variableAssignment) {
+		appendName(variableAssignment.getTargetVariable());
+		append(" := ");
+		safeVisit(variableAssignment.getValue());
 		return null;
 	}
 }

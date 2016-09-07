@@ -8,7 +8,7 @@
  * Contributors:
  *     E.D.Willink - initial API and implementation
  *******************************************************************************/
-package org.eclipse.qvtd.pivot.qvtcorebase.attributes;
+package org.eclipse.qvtd.pivot.qvtimperative.attributes;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;

@@ -13,15 +13,27 @@ package org.eclipse.qvtd.pivot.qvtimperative.utilities;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.utilities.ToStringVisitor;
-import org.eclipse.qvtd.pivot.qvtcorebase.utilities.QVTcoreBaseToStringVisitor;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeBottomPattern;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseToStringVisitor;
+import org.eclipse.qvtd.pivot.qvtcorebase.Assignment;
+import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
+import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
+import org.eclipse.qvtd.pivot.qvtcorebase.CorePattern;
+import org.eclipse.qvtd.pivot.qvtcorebase.EnforcementOperation;
+import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
+import org.eclipse.qvtd.pivot.qvtcorebase.NavigationAssignment;
+import org.eclipse.qvtd.pivot.qvtcorebase.OppositePropertyAssignment;
+import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
+import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
+import org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeBottomPattern;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
@@ -36,13 +48,13 @@ import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
  * Converts an OCL expression to a string for debugging. This is not intended to
  * be used by client applications as an AST-to-text transformation.
  */
-public class QVTimperativeToStringVisitor extends QVTcoreBaseToStringVisitor implements QVTimperativeVisitor<String>
+public class QVTimperativeToStringVisitor extends QVTbaseToStringVisitor implements QVTimperativeVisitor<String>
 {
-	protected static class QVTimperativeToStringFactory implements QVTcoreBaseToStringVisitor.Factory
+	protected static class QVTimperativeToStringFactory implements QVTbaseToStringVisitor.Factory
 	{
 		protected QVTimperativeToStringFactory() {
 			ToStringVisitor.addFactory(this);
-			QVTcoreBaseToStringVisitor.FACTORY.getClass();
+			QVTbaseToStringVisitor.FACTORY.getClass();
 		}
 
 		@Override
@@ -65,6 +77,20 @@ public class QVTimperativeToStringVisitor extends QVTcoreBaseToStringVisitor imp
 	}
 
 	@Override
+	public String visitAssignment(@NonNull Assignment object) {
+		append("Assignment ");
+		//		appendName(object);
+		return null;
+	}
+
+	@Override
+	public String visitBottomPattern(@NonNull BottomPattern object) {
+		appendQualifiedName((NamedElement)object.getArea());
+		append("$Bottom");
+		return null;
+	}
+
+	@Override
 	public @Nullable String visitConnectionAssignment(@NonNull ConnectionAssignment connectionAssignment) {
 		appendName(connectionAssignment.getTargetVariable());
 		append(" += ");
@@ -83,6 +109,33 @@ public class QVTimperativeToStringVisitor extends QVTcoreBaseToStringVisitor imp
 	@Override
 	public @Nullable String visitConnectionVariable(@NonNull ConnectionVariable object) {
 		return visitVariable(object);
+	}
+
+	@Override
+	public String visitCoreDomain(@NonNull CoreDomain object) {
+		appendQualifiedName(object);
+		return null;
+	}
+
+	@Override
+	public String visitCorePattern(@NonNull CorePattern object) {
+		append("CorePattern ");
+		//		appendName(object);
+		return null;
+	}
+
+	@Override
+	public String visitEnforcementOperation(@NonNull EnforcementOperation object) {
+		append("EnforcementOperation ");
+		//		appendName(object);
+		return null;
+	}
+
+	@Override
+	public String visitGuardPattern(@NonNull GuardPattern object) {
+		appendQualifiedName((NamedElement)object.getArea());
+		append("$Guard");
+		return null;
 	}
 
 	@Override
@@ -154,6 +207,41 @@ public class QVTimperativeToStringVisitor extends QVTcoreBaseToStringVisitor imp
 
 	@Override
 	public @Nullable String visitMappingStatement(@NonNull MappingStatement object) {
+		return null;
+	}
+
+	@Override
+	public String visitNavigationAssignment(@NonNull NavigationAssignment asNavigationAssignment) {
+		safeVisit(asNavigationAssignment.getSlotExpression());
+		append(".");
+		appendName(QVTimperativeUtil.getTargetProperty(asNavigationAssignment));
+		append(" := ");
+		safeVisit(asNavigationAssignment.getValue());
+		return null;
+	}
+
+	@Override
+	public String visitOppositePropertyAssignment(@NonNull OppositePropertyAssignment asNavigationAssignment) {
+		return visitNavigationAssignment(asNavigationAssignment);
+	}
+
+	@Override
+	public String visitPropertyAssignment(@NonNull PropertyAssignment asNavigationAssignment) {
+		return visitNavigationAssignment(asNavigationAssignment);
+	}
+
+	@Override
+	public String visitRealizedVariable(@NonNull RealizedVariable variable) {
+		//		append("realized ");
+		visitVariable(variable);
+		return null;
+	}
+
+	@Override
+	public String visitVariableAssignment(@NonNull VariableAssignment variableAssignment) {
+		appendName(variableAssignment.getTargetVariable());
+		append(" := ");
+		safeVisit(variableAssignment.getValue());
 		return null;
 	}
 

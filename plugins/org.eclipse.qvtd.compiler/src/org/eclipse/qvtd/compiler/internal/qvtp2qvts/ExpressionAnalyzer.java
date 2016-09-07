@@ -61,10 +61,10 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcore.util.AbstractExtendingQVTcoreVisitor;
+import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
 import org.eclipse.qvtd.pivot.qvtcorebase.NavigationAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.OppositePropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
-import org.eclipse.qvtd.pivot.qvtcorebase.utilities.QVTcoreBaseUtil;
 
 import com.google.common.collect.Iterables;
 
@@ -702,7 +702,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@NonNull
 	public @NonNull Node visitNavigationAssignment(@NonNull NavigationAssignment asNavigationAssignment) {
 		Node slotNode = analyze(asNavigationAssignment.getSlotExpression());
 		assert slotNode.isClass();
-		Property property = QVTcoreBaseUtil.getTargetProperty(asNavigationAssignment);
+		Property property = QVTcoreUtil.getTargetProperty(asNavigationAssignment);
 		assert property != null;
 		OCLExpression value = asNavigationAssignment.getValue();
 		if (value != null) {

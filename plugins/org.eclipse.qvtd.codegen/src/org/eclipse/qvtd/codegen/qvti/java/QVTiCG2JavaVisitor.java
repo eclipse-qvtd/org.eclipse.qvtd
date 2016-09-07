@@ -105,7 +105,6 @@ import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.NavigationAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
-import org.eclipse.qvtd.pivot.qvtcorebase.utilities.QVTcoreBaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeArea;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
@@ -191,7 +190,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 
 	protected void doAddRealization(@NonNull CGRealizedVariable cgRealizedVariable) {
 		RealizedVariable pRealizedVariable = (RealizedVariable)cgRealizedVariable.getAst();
-		Area pArea = QVTcoreBaseUtil.getContainingArea(pRealizedVariable);
+		Area pArea = QVTimperativeUtil.getContainingArea(pRealizedVariable);
 		if (pArea != null) {
 			BottomPattern pBottomPattern = pArea.getBottomPattern();
 			if (pBottomPattern != null) {

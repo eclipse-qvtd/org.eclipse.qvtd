@@ -36,6 +36,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
+import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
 import org.eclipse.qvtd.pivot.qvtcorebase.Assignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
@@ -43,7 +44,6 @@ import org.eclipse.qvtd.pivot.qvtcorebase.CorePattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.NavigationAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
-import org.eclipse.qvtd.pivot.qvtcorebase.utilities.QVTcoreBaseUtil;
 import org.eclipse.qvtd.pivot.schedule.AbstractAction;
 import org.eclipse.qvtd.pivot.schedule.ClassDatum;
 import org.eclipse.qvtd.pivot.schedule.MappingAction;
@@ -503,7 +503,7 @@ public class BasicMappingRegion extends AbstractMappingRegion
 	public boolean isPropertyAssignment(@NonNull Node sourceNode, @NonNull Property source2targetProperty) {
 		if (sourceNode.isRealized()) {
 			for (@NonNull NavigationAssignment navigationAssignment : navigationAssignments) {
-				Property navigationProperty = QVTcoreBaseUtil.getTargetProperty(navigationAssignment);
+				Property navigationProperty = QVTcoreUtil.getTargetProperty(navigationAssignment);
 				if (source2targetProperty == navigationProperty) {		// ??? opposites ??? do they even exist ???
 					Node slotNode = expressionAnalyzer.analyze(navigationAssignment.getSlotExpression());
 					if (slotNode == sourceNode) {

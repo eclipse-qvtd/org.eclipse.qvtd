@@ -63,7 +63,6 @@ import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.NavigationAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment;
-import org.eclipse.qvtd.pivot.qvtcorebase.utilities.QVTcoreBaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
@@ -156,7 +155,7 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 						getEvaluationEnvironment().add(realizedVariable, initValue);
 						replace(realizedVariable, initValue);
 						Area area = ((BottomPattern)realizedVariable.eContainer()).getArea();
-						TypedModel typedModel = QVTcoreBaseUtil.getTypedModel(area);
+						TypedModel typedModel = QVTimperativeUtil.getTypedModel(area);
 						assert typedModel != null;
 						Object ecoreValue = getIdResolver().ecoreValueOf(null, initValue);
 						assert ecoreValue != null;
@@ -457,7 +456,7 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 
 	@Override
 	public void internalExecuteNavigationAssignment(@NonNull NavigationAssignment navigationAssignment, @NonNull Object slotObject, @Nullable Object ecoreValue, @Nullable Object childKey) {
-		Property targetProperty = QVTcoreBaseUtil.getTargetProperty(navigationAssignment);
+		Property targetProperty = QVTimperativeUtil.getTargetProperty(navigationAssignment);
 		targetProperty.initValue(slotObject, ecoreValue);
 		QVTiModelManager modelManager = getModelManager();
 		Integer cacheIndex = modelManager.getTransformationAnalysis().getCacheIndex(navigationAssignment);
@@ -488,7 +487,7 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 			return null;
 		}
 		Area area = ((BottomPattern)realizedVariable.eContainer()).getArea();
-		TypedModel typedModel = QVTcoreBaseUtil.getTypedModel(area);
+		TypedModel typedModel = QVTimperativeUtil.getTypedModel(area);
 		assert typedModel != null;
 		Object element = ((org.eclipse.ocl.pivot.Class)type).createInstance();
 		// Add the realize variable binding to the environment

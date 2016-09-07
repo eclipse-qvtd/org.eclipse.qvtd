@@ -8,7 +8,7 @@
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
-package org.eclipse.qvtd.pivot.qvtcorebase.utilities;
+package org.eclipse.qvtd.pivot.qvtimperative.utilities;
 
 import java.util.ArrayList;
 import java.util.Comparator;

@@ -52,8 +52,8 @@ import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.VariableNodeImpl;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
+import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
 import org.eclipse.qvtd.pivot.qvtcorebase.NavigationAssignment;
-import org.eclipse.qvtd.pivot.qvtcorebase.utilities.QVTcoreBaseUtil;
 import org.eclipse.qvtd.pivot.schedule.ClassDatum;
 
 public class RegionUtil
@@ -99,7 +99,7 @@ public class RegionUtil
 
 	public static @NonNull Node createDataTypeNode(@NonNull Node targetNode, @NonNull NavigationAssignment navigationAssignment) {
 		NodeRole nodeRole = targetNode.getNodeRole();
-		Property property = QVTcoreBaseUtil.getTargetProperty(navigationAssignment);
+		Property property = QVTcoreUtil.getTargetProperty(navigationAssignment);
 		//		PatternNodeRole nodeRole = PatternNodeRole.getDataTypeNodeRole(targetNode, property);
 		//		assert sourceNode.isClass();
 		String name = property.getName();
@@ -117,7 +117,7 @@ public class RegionUtil
 	public static @NonNull Node createDependencyClassNode(@NonNull Node parentNode, @NonNull NavigationAssignment navigationAssignment) {
 		assert parentNode.isClass();
 		SchedulerConstants schedulerConstants = parentNode.getRegion().getSchedulerConstants();
-		Property property = QVTcoreBaseUtil.getTargetProperty(navigationAssignment);
+		Property property = QVTcoreUtil.getTargetProperty(navigationAssignment);
 		assert property != null;
 		org.eclipse.ocl.pivot.Class type = (org.eclipse.ocl.pivot.Class)property.getType();
 		assert type != null;

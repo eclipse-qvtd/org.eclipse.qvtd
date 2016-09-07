@@ -15,7 +15,6 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePivotStandaloneSetup;
-import org.eclipse.qvtd.pivot.qvtcorebase.scoping.QVTcoreBasePivotScoping;
 import org.eclipse.qvtd.pivot.qvtcorebase.utilities.QVTcoreBaseToStringVisitor;
 
 import com.google.inject.Guice;
@@ -27,7 +26,7 @@ import com.google.inject.Injector;
 public class QVTcoreBasePivotStandaloneSetup
 {
 	private static Injector injector = null;
-	
+
 	public static void doSetup() {
 		if (injector == null) {
 			injector = new QVTcoreBasePivotStandaloneSetup().createInjectorAndDoEMFRegistration();
@@ -36,10 +35,9 @@ public class QVTcoreBasePivotStandaloneSetup
 
 	public static void init() {
 		QVTbasePivotStandaloneSetup.doSetup();
-		QVTcoreBasePivotScoping.init();
 		QVTcoreBaseToStringVisitor.FACTORY.getClass();
 	}
-	
+
 	/**
 	 * Return the Injector for this plugin.
 	 */
@@ -75,12 +73,12 @@ public class QVTcoreBasePivotStandaloneSetup
 		register(injector);
 		return injector;
 	}
-	
+
 	public void register(Injector injector) {
-//		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);
-//		org.eclipse.xtext.resource.IResourceServiceProvider serviceProvider = injector.getInstance(org.eclipse.xtext.resource.IResourceServiceProvider.class);
-//		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("essentialocl", resourceFactory);
-//		org.eclipse.xtext.resource.IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().put("essentialocl", serviceProvider);
+		//		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);
+		//		org.eclipse.xtext.resource.IResourceServiceProvider serviceProvider = injector.getInstance(org.eclipse.xtext.resource.IResourceServiceProvider.class);
+		//		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("essentialocl", resourceFactory);
+		//		org.eclipse.xtext.resource.IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().put("essentialocl", serviceProvider);
 	}
 }
 

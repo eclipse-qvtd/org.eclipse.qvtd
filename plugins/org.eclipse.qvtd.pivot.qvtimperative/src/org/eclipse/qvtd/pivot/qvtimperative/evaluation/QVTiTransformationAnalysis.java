@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *     E.D.Willink - initial API and implementation
  ******************************************************************************/
@@ -49,13 +49,13 @@ import org.eclipse.qvtd.pivot.qvtcorebase.Area;
 import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcorebase.NavigationAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
-import org.eclipse.qvtd.pivot.qvtcorebase.utilities.QVTcoreBaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeArea;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeDomainUsageAnalysis;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 
 /**
  * QVTiTransformationAnalysis accumulates salient characteristics of one or more
@@ -70,9 +70,9 @@ import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeDomainUsageAn
 public class QVTiTransformationAnalysis
 {
 	protected final @NonNull EnvironmentFactoryInternal environmentFactory;
-	
+
 	/**
-	 * Analysis of domains applicable to each transformation element. 
+	 * Analysis of domains applicable to each transformation element.
 	 */
 	private final @NonNull QVTimperativeDomainUsageAnalysis domainAnalysis;
 
@@ -134,7 +134,7 @@ public class QVTiTransformationAnalysis
 	private final @NonNull Map<Type, List<Type>> parentClass2childClasses = new HashMap<Type, List<Type>>();
 
 	public QVTiTransformationAnalysis(@NonNull EnvironmentFactoryInternal environmentFactory) {
-	    this.environmentFactory = environmentFactory;
+		this.environmentFactory = environmentFactory;
 		this.domainAnalysis = new QVTimperativeDomainUsageAnalysis(environmentFactory);
 	}
 
@@ -149,10 +149,10 @@ public class QVTiTransformationAnalysis
 			allInstancesClasses.add((org.eclipse.ocl.pivot.Class)asType);
 		}
 	}
-	
+
 	protected @NonNull Integer allocateCacheIndex(@Nullable OCLExpression sourceExpression, @NonNull Property navigableProperty) {
 		Integer cacheIndex = property2cacheIndex.get(navigableProperty);
-		if (cacheIndex == null) { 
+		if (cacheIndex == null) {
 			Integer size = property2cacheIndex.size();
 			property2cacheIndex.put(navigableProperty, size);
 			if (sourceExpression != null) {
@@ -165,7 +165,7 @@ public class QVTiTransformationAnalysis
 		}
 		return cacheIndex;
 	}
-	
+
 	private @NonNull Set<NavigationCallExp> analyzeMappingPropertyAccesses(@NonNull Mapping mapping) {
 		Set<NavigationCallExp> accessedProperties = mapping2property.get(mapping);
 		if (accessedProperties != null) {
@@ -176,7 +176,7 @@ public class QVTiTransformationAnalysis
 		analyzeTree(accessedProperties, mapping.eAllContents());
 		return accessedProperties;
 	}
-	
+
 	private @NonNull Set<PropertyAssignment> analyzeMappingPropertyAssignments(@NonNull Mapping mapping) {
 		Set<PropertyAssignment> assignedProperties = mapping2propertyAssignments.get(mapping);
 		if (assignedProperties == null) {
@@ -345,7 +345,7 @@ public class QVTiTransformationAnalysis
 					}
 				}
 			}
-/*			else if (eObject instanceof OppositePropertyCallExp) {
+			/*			else if (eObject instanceof OppositePropertyCallExp) {
 				OppositePropertyCallExp oppositePropertyCallExp = (OppositePropertyCallExp)eObject;
 				Property referredProperty = oppositePropertyCallExp.getReferredProperty();
 				if (referredProperty != null) {
@@ -389,7 +389,7 @@ public class QVTiTransformationAnalysis
 	public @NonNull Map<@NonNull Property, @NonNull Integer> getCaches() {
 		return property2cacheIndex;
 	}
-	
+
 	public @NonNull QVTimperativeDomainUsageAnalysis getDomainUsageAnalysis() {
 		return domainAnalysis;
 	}
@@ -434,10 +434,10 @@ public class QVTiTransformationAnalysis
 	public @NonNull MetamodelManagerInternal getMetamodelManager() {
 		return environmentFactory.getMetamodelManager();
 	}
-	
-/*	protected int getOppositeCacheIndex(@NonNull Property oppositeProperty) {
+
+	/*	protected int getOppositeCacheIndex(@NonNull Property oppositeProperty) {
 		Integer cacheIndex = opposite2cacheIndex.get(oppositeProperty);
-		if (cacheIndex == null) { 
+		if (cacheIndex == null) {
 			cacheIndex = opposite2cacheIndex.size();
 			opposite2cacheIndex.put(oppositeProperty, cacheIndex);
 		}
@@ -534,7 +534,7 @@ public class QVTiTransformationAnalysis
 		if (domainUsage1 != null) {
 			TypedModel typedModel = domainUsage1.getTypedModel(asSource);
 			if (typedModel != null) {
-				Area area = QVTcoreBaseUtil.getArea(asMapping, typedModel);
+				Area area = QVTimperativeUtil.getArea(asMapping, typedModel);
 				if ((area instanceof ImperativeArea) && ((ImperativeArea)area).getCheckedProperties().contains(asProperty)) {
 					return true;
 				}
@@ -545,7 +545,7 @@ public class QVTiTransformationAnalysis
 		if (domainUsage2 != null) {
 			TypedModel typedModel = domainUsage2.getTypedModel(asProperty);
 			if (typedModel != null) {
-				Area area = QVTcoreBaseUtil.getArea(asMapping, typedModel);
+				Area area = QVTimperativeUtil.getArea(asMapping, typedModel);
 				if ((area instanceof ImperativeArea) && ((ImperativeArea)area).getCheckedProperties().contains(asOppositeProperty)) {
 					return true;
 				}
@@ -555,7 +555,7 @@ public class QVTiTransformationAnalysis
 	}
 
 	public boolean isHazardousWrite(@NonNull Mapping asMapping, @NonNull NavigationAssignment asNavigationAssignment) {
-		Property asProperty = QVTcoreBaseUtil.getTargetProperty(asNavigationAssignment);
+		Property asProperty = QVTimperativeUtil.getTargetProperty(asNavigationAssignment);
 		OCLExpression asSource = asNavigationAssignment.getSlotExpression();
 		DomainUsage domainUsage = getDomainUsageAnalysis().basicGetUsage(asSource);
 		if (domainUsage != null) {

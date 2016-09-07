@@ -91,7 +91,6 @@ import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment;
-import org.eclipse.qvtd.pivot.qvtcorebase.utilities.AssignmentComparator;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeArea;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeBottomPattern;
@@ -99,6 +98,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.util.AbstractExtendingQVTimperativeVisitor;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.AssignmentComparator;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 
 import com.google.common.collect.Iterables;

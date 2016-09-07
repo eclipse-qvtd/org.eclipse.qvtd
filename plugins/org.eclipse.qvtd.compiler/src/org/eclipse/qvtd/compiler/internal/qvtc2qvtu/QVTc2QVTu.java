@@ -56,7 +56,7 @@ import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBaseFactory;
 import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment;
-import org.eclipse.qvtd.pivot.qvtcorebase.utilities.QVTcoreBaseUtil;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 
 /**
  * QVTc2QVTu transforms a QVTc transformation to impose the single direction defined by a QVTuConfiguration.
@@ -127,50 +127,50 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 			return false;
 		}
 
-	    /**
-	     * Create an ocl expression from an assignment than can be used as the
-	     * condition expression of a predicate.
-	     *
-	     * @param aIn the a in
-	     * @param environmentFactory the environment factory
-	     * @return the operation call exp
-	     */
-	    private OperationCallExp assignmentToOclExp(@NonNull Assignment aIn) {
-	        OperationCallExp exp = PivotFactory.eINSTANCE.createOperationCallExp();
-	        for (Operation op : environmentFactory.getStandardLibrary().getOclAnyType().getOwnedOperations()) {
-	            if (op.getName().equals("=")) {
-	                exp.setReferredOperation(op);
-	                exp.setName(op.getName());
-	                exp.setType(op.getType());
-	                break;
-	            }
-	        }
-	        exp.getOwnedArguments().add(EcoreUtil.copy(aIn.getValue()));
-	        if (aIn instanceof PropertyAssignment) {
-	            PropertyCallExp sourceExp = PivotFactory.eINSTANCE.createPropertyCallExp();
-	            PropertyAssignment paIn = (PropertyAssignment) aIn;
+		/**
+		 * Create an ocl expression from an assignment than can be used as the
+		 * condition expression of a predicate.
+		 *
+		 * @param aIn the a in
+		 * @param environmentFactory the environment factory
+		 * @return the operation call exp
+		 */
+		private OperationCallExp assignmentToOclExp(@NonNull Assignment aIn) {
+			OperationCallExp exp = PivotFactory.eINSTANCE.createOperationCallExp();
+			for (Operation op : environmentFactory.getStandardLibrary().getOclAnyType().getOwnedOperations()) {
+				if (op.getName().equals("=")) {
+					exp.setReferredOperation(op);
+					exp.setName(op.getName());
+					exp.setType(op.getType());
+					break;
+				}
+			}
+			exp.getOwnedArguments().add(EcoreUtil.copy(aIn.getValue()));
+			if (aIn instanceof PropertyAssignment) {
+				PropertyCallExp sourceExp = PivotFactory.eINSTANCE.createPropertyCallExp();
+				PropertyAssignment paIn = (PropertyAssignment) aIn;
 				sourceExp.setReferredProperty(paIn.getTargetProperty());
-	            sourceExp.setType(paIn.getTargetProperty().getType());
-	            sourceExp.setOwnedSource(EcoreUtil.copy(paIn.getSlotExpression()));
-	            exp.setOwnedSource(sourceExp);
-	        } else if (aIn instanceof OppositePropertyAssignment) {
-	            OppositePropertyCallExp sourceExp = PivotFactory.eINSTANCE.createOppositePropertyCallExp();
-	            OppositePropertyAssignment opaIn = (OppositePropertyAssignment) aIn;
+				sourceExp.setType(paIn.getTargetProperty().getType());
+				sourceExp.setOwnedSource(EcoreUtil.copy(paIn.getSlotExpression()));
+				exp.setOwnedSource(sourceExp);
+			} else if (aIn instanceof OppositePropertyAssignment) {
+				OppositePropertyCallExp sourceExp = PivotFactory.eINSTANCE.createOppositePropertyCallExp();
+				OppositePropertyAssignment opaIn = (OppositePropertyAssignment) aIn;
 				sourceExp.setReferredProperty(opaIn.getTargetProperty());
-	            sourceExp.setType(opaIn.getTargetProperty().getType());
-	            sourceExp.setOwnedSource(EcoreUtil.copy(opaIn.getSlotExpression()));
-	            exp.setOwnedSource(sourceExp);
-	        } else { // aIn instanceof VariableAssignment
-	            VariableExp varExp = PivotFactory.eINSTANCE.createVariableExp();
-	            varExp.setIsImplicit(false);
-	            varExp.setReferredVariable(((VariableAssignment) aIn).getTargetVariable());
-	            exp.setOwnedSource(varExp);
-	        }
-	        return exp;
-	    }
+				sourceExp.setType(opaIn.getTargetProperty().getType());
+				sourceExp.setOwnedSource(EcoreUtil.copy(opaIn.getSlotExpression()));
+				exp.setOwnedSource(sourceExp);
+			} else { // aIn instanceof VariableAssignment
+				VariableExp varExp = PivotFactory.eINSTANCE.createVariableExp();
+				varExp.setIsImplicit(false);
+				varExp.setReferredVariable(((VariableAssignment) aIn).getTargetVariable());
+				exp.setOwnedSource(varExp);
+			}
+			return exp;
+		}
 
 		private @Nullable Area basicGetArea(@Nullable VariableDeclaration variable) {
-			return QVTcoreBaseUtil.getContainingArea(variable);
+			return QVTimperativeUtil.getContainingArea(variable);
 		}
 
 		//
@@ -203,15 +203,15 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 			OCLExpression slotExpression = paIn.getSlotExpression();
 			OCLExpression value = paIn.getValue();
 			assert (slotExpression != null) && (value != null);
-//			Area sourceArea = getSourceVariableArea(value);
+			//			Area sourceArea = getSourceVariableArea(value);
 			Area targetArea = getSourceVariableArea(slotExpression);
 			//
-			// A backward "p.q := v" rewrites as a forward "v := p.q". 
+			// A backward "p.q := v" rewrites as a forward "v := p.q".
 			//
 			if (isInputDomain(targetArea) && (value instanceof VariableExp) && anyReferencedMiddleDomainVariables(value)) {		// isMtoL
 				VariableAssignment vaOut = QVTcoreBaseFactory.eINSTANCE.createVariableAssignment();
 				context.addTrace(paIn, vaOut);
-	            return vaOut;
+				return vaOut;
 			}
 			if (isNonOutputDomain(targetArea) &&								// is RtoM or MtoL or RtoL
 					!(value instanceof VariableExp) &&			// why?
@@ -222,9 +222,9 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 			if (isInputDomain(targetArea) && (targetArea instanceof Mapping) && anyReferencedBottomMiddleDomainVariables(value)) {	// isMtoM
 				return null;
 			}
-/*			if (isInputDomain(sourceArea)) {
+			/*			if (isInputDomain(sourceArea)) {
 				VariableDeclaration referredVariable = getReferredMappingVariable(value);
-				if (isMiddleDomainVariable(referredVariable)) {	
+				if (isMiddleDomainVariable(referredVariable)) {
 //					return null;
 				}
 //				if (referredVariable != null) {
@@ -236,7 +236,7 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 			}
 			if (isMiddleDomain(sourceArea)) {								// isLocaltoM
 				VariableDeclaration referredVariable = getReferredMappingVariable(value);
-				if (isMiddleDomainVariable(referredVariable)) {	
+				if (isMiddleDomainVariable(referredVariable)) {
 					return null;
 				}
 //				if (referredVariable != null) {
@@ -249,10 +249,10 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 
 			if (isInputDomain(targetArea) && anyReferencedMiddleDomainVariables(value)) {		// isMtoL
 				// Assignments to Predicates
-//				Predicate pOut = QVTbaseFactory.eINSTANCE.createPredicate();
-//				context.addTrace(paIn, pOut);
-//	            pOut.setConditionExpression(MtcUtil.assignmentToOclExp(paIn, environmentFactory));
-//	            return pOut;
+				//				Predicate pOut = QVTbaseFactory.eINSTANCE.createPredicate();
+				//				context.addTrace(paIn, pOut);
+				//	            pOut.setConditionExpression(MtcUtil.assignmentToOclExp(paIn, environmentFactory));
+				//	            return pOut;
 				return null;
 			}
 			if (isInputDomain(targetArea) && allReferencedVariablesInInputDomain(paIn)) {
@@ -260,17 +260,17 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 				Predicate pOut = QVTbaseFactory.eINSTANCE.createPredicate();
 				context.addTrace(paIn, pOut);
 				pOut.setConditionExpression(assignmentToOclExp(paIn));
-	            return pOut;
+				return pOut;
 			}
 			NavigationAssignment paOut = paIn instanceof OppositePropertyAssignment
 					? (NavigationAssignment) super.visitOppositePropertyAssignment((@NonNull OppositePropertyAssignment) paIn)
-					: (NavigationAssignment) super.visitPropertyAssignment((@NonNull PropertyAssignment) paIn);
-			assert paOut != null;
-			if (qvtuConfiguration.isCheckMode() && paIn.isIsDefault() && isOutputDomain(paIn.getBottomPattern().getArea())) {
-				// Default assignments
-				paOut.setIsDefault(false);
-			}
-			return paOut;
+						: (NavigationAssignment) super.visitPropertyAssignment((@NonNull PropertyAssignment) paIn);
+					assert paOut != null;
+					if (qvtuConfiguration.isCheckMode() && paIn.isIsDefault() && isOutputDomain(paIn.getBottomPattern().getArea())) {
+						// Default assignments
+						paOut.setIsDefault(false);
+					}
+					return paOut;
 		}
 
 		//
@@ -292,7 +292,7 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 		}
 
 		private @NonNull Area getContainingArea(@NonNull VariableDeclaration variable) {
-			Area targetArea = QVTcoreBaseUtil.getContainingArea(variable);
+			Area targetArea = QVTimperativeUtil.getContainingArea(variable);
 			assert targetArea != null;
 			return targetArea;
 		}
@@ -316,7 +316,7 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 
 		private @Nullable Area getSourceVariableArea(@Nullable OCLExpression exp) {
 			if (exp instanceof VariableExp) {
-				Variable expV = (Variable) ((VariableExp)exp).getReferredVariable(); 
+				Variable expV = (Variable) ((VariableExp)exp).getReferredVariable();
 				return basicGetArea(expV);
 			} else if (exp instanceof CallExp) {
 				return getSourceVariableArea(((CallExp) exp).getOwnedSource());
@@ -332,7 +332,7 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 			if (variable == null) {
 				return false;
 			}
-			CorePattern pattern = QVTcoreBaseUtil.getContainingPattern(variable);
+			CorePattern pattern = QVTimperativeUtil.getContainingPattern(variable);
 			if (!(pattern instanceof BottomPattern)) {
 				return false;
 			}
@@ -388,7 +388,7 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 			}
 			@NonNull Mapping mOut = QVTcoreFactory.eINSTANCE.createMapping();
 			doMapping(mIn, mOut);
-	        return mOut;
+			return mOut;
 		}
 
 		@Override
@@ -401,24 +401,24 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 		//
 		@Override
 		public @Nullable Element visitPredicate(@NonNull Predicate pIn) {
-//			boolean oldResult = true;
-//			if ((pIn.getPattern() instanceof BottomPattern) && allReferencedVariablesInOutputDomain(pIn)) {
-//				oldResult = false;
-//			}
-//			else if ((pIn.getPattern() instanceof BottomPattern) && anyReferencedVariableInMiddleOrOutputDomain(pIn)) {
-//				oldResult = false;
-//			}
+			//			boolean oldResult = true;
+			//			if ((pIn.getPattern() instanceof BottomPattern) && allReferencedVariablesInOutputDomain(pIn)) {
+			//				oldResult = false;
+			//			}
+			//			else if ((pIn.getPattern() instanceof BottomPattern) && anyReferencedVariableInMiddleOrOutputDomain(pIn)) {
+			//				oldResult = false;
+			//			}
 			if ((pIn.getPattern() instanceof BottomPattern) && !allReferencedVariablesInInputDomain(pIn)) {
-//				assert !oldResult;
+				//				assert !oldResult;
 				return null;
 			}
-//			if (!oldResult) {
-//				anyReferencedNonInputDomainVariables2(pIn);
-//				allReferencedVariablesInOutputDomain(pIn);
-//				anyReferencedVariableInMiddleOrOutputDomain(pIn);
-//			}
-//			assert oldResult;
-/*			OCLExpression conditionExpression = pIn.getConditionExpression();
+			//			if (!oldResult) {
+			//				anyReferencedNonInputDomainVariables2(pIn);
+			//				allReferencedVariablesInOutputDomain(pIn);
+			//				anyReferencedVariableInMiddleOrOutputDomain(pIn);
+			//			}
+			//			assert oldResult;
+			/*			OCLExpression conditionExpression = pIn.getConditionExpression();
 			if (conditionExpression instanceof OperationCallExp) {
 				OperationCallExp callExp = (OperationCallExp)conditionExpression;
 				if ("=".equals(callExp.getReferredOperation().getName()) && (callExp.getOwnedArguments().size() == 1)) {		// FIXME more accuracy
@@ -457,7 +457,7 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 				vOut.setName(rvIn.getName());
 				vOut.setType(rvIn.getType());
 				vOut.setIsRequired(rvIn.isIsRequired());
-		        return vOut;
+				return vOut;
 			}
 			else {
 				return super.visitRealizedVariable(rvIn);
@@ -479,19 +479,19 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 			if (isInputDomain(targetArea) && !allReferencedVariablesInInputDomain(value)) {	// an output-to-input assignment
 				return null;
 			}
-//			if (isInputDomain1(targetArea) && anyReferencedMiddleDomainVariables(value)) {	// isMtoL
-//				return null;
-//			}
-//			if (isMiddleDomain(targetArea) /*&& !(value instanceof VariableExp)*/ && allMatchReferencedOutputDomainVariables(value)) {	// isRtoM
-//				return null;
-//			}
-//			if ((targetArea instanceof Mapping) && anyReferencedBottomMiddleDomainVariables(value)) {	// isMtoM
-//				return null;
-//			}
+			//			if (isInputDomain1(targetArea) && anyReferencedMiddleDomainVariables(value)) {	// isMtoL
+			//				return null;
+			//			}
+			//			if (isMiddleDomain(targetArea) /*&& !(value instanceof VariableExp)*/ && allMatchReferencedOutputDomainVariables(value)) {	// isRtoM
+			//				return null;
+			//			}
+			//			if ((targetArea instanceof Mapping) && anyReferencedBottomMiddleDomainVariables(value)) {	// isMtoM
+			//				return null;
+			//			}
 			return super.visitVariableAssignment(vaIn);
 		}
 	}
-	
+
 	protected class UpdateVisitor extends AbstractUpdateVisitor<@NonNull QVTc2QVTu>
 	{
 		public UpdateVisitor(@NonNull QVTc2QVTu context) {
@@ -507,7 +507,7 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 		}
 
 		/*
-		 * Override to handle the backward "p.q := v" rewrite as "v := p.q". 
+		 * Override to handle the backward "p.q := v" rewrite as "v := p.q".
 		 */
 		@Override
 		public @Nullable Object visitVariableAssignment(@NonNull VariableAssignment vaOut) {
@@ -519,25 +519,25 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 				return super.visitVariableAssignment(vaOut);
 			}
 		}
-	 }
-	
+	}
+
 	private enum DomainMode {
 		INPUT,
 		MIDDLE,
 		OUTPUT
 	}
-	
+
 	private static final int IS_INPUT_MASK = 1;
 	private static final int IS_OUTPUT_MASK = 2;
-	
+
 	private enum MappingMode {
 		NULL(0),
 		LEFT2MIDDLE(IS_INPUT_MASK),
 		MIDDLE2RIGHT(IS_OUTPUT_MASK),
 		LEFT2RIGHT(IS_INPUT_MASK | IS_OUTPUT_MASK);
-		
+
 		private int flags;
-		
+
 		private MappingMode(int flags) { this.flags = flags; }
 
 		private @NonNull MappingMode get(int flagsUnion) {
@@ -556,7 +556,7 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 		public @NonNull MappingMode asOutput() {
 			return get(flags | IS_OUTPUT_MASK);
 		}
-		
+
 		public boolean hasInputDomain() { return (flags & IS_INPUT_MASK) != 0; }
 		public boolean hasOutputDomain() { return (flags & IS_OUTPUT_MASK) != 0; }
 
@@ -566,7 +566,7 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 	}
 
 	private final @NonNull QVTuConfiguration qvtuConfiguration;
-	
+
 	/**
 	 * Cached INPUT/MIDDLE/OUTPUT state of each Area, aggregating refined and/or local states.
 	 */
@@ -579,7 +579,7 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 
 	public QVTc2QVTu(@NonNull EnvironmentFactory environmentFactory, @NonNull QVTuConfiguration qvtuConfiguration) {
 		super(environmentFactory);
-        this.qvtuConfiguration = qvtuConfiguration;
+		this.qvtuConfiguration = qvtuConfiguration;
 	}
 
 	@Override
@@ -637,7 +637,7 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 		}
 		return mergedMode;
 	}
-	
+
 	private boolean isInputDomain(@Nullable Area area) {
 		if (area == null) {
 			return false;
@@ -655,7 +655,7 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 		assert domainMode != null;
 		return domainMode == DomainMode.MIDDLE;
 	}
-	
+
 	private boolean isNonOutputDomain(@Nullable Area area) {
 		if (area == null) {
 			return false;
@@ -664,7 +664,7 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 		assert domainMode != null;
 		return domainMode != DomainMode.OUTPUT;
 	}
-	
+
 	private boolean isOutputDomain(@Nullable Area area) {
 		if (area == null) {
 			return false;

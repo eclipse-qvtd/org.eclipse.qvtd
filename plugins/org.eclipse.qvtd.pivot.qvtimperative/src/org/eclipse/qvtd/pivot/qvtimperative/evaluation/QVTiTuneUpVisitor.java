@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *	 E.D.Willink - initial API and implementation
  ******************************************************************************/
@@ -44,7 +44,6 @@ import org.eclipse.qvtd.pivot.qvtcorebase.CorePattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBaseFactory;
 import org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment;
-import org.eclipse.qvtd.pivot.qvtcorebase.utilities.QVTcoreBaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
@@ -68,7 +67,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 public class QVTiTuneUpVisitor extends AbstractExtendingQVTimperativeVisitor<Boolean, Object>
 {
 	public static final @NonNull QVTiTuneUpVisitor INSTANCE = new QVTiTuneUpVisitor(QVTiTuneUpVisitor.class);
-	
+
 	protected QVTiTuneUpVisitor(@NonNull Object context) {
 		super(context);
 	}
@@ -186,7 +185,7 @@ public class QVTiTuneUpVisitor extends AbstractExtendingQVTimperativeVisitor<Boo
 	@Override
 	public Boolean visitCorePattern(@NonNull CorePattern object) {
 		List<@NonNull Variable> variables = ClassUtil.nullFree(object.getVariable());
-		QVTcoreBaseUtil.sortPatternVariables(variables);
+		QVTimperativeUtil.sortPatternVariables(variables);
 		return Boolean.TRUE;
 	}
 

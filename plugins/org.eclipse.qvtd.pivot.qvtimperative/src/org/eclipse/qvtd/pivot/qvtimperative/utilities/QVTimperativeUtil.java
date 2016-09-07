@@ -38,18 +38,24 @@ import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
+import org.eclipse.ocl.pivot.utilities.TreeIterable;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbaseFactory;
+import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory.CreateStrategy;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
+import org.eclipse.qvtd.pivot.qvtcorebase.AbstractMapping;
 import org.eclipse.qvtd.pivot.qvtcorebase.Area;
 import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
+import org.eclipse.qvtd.pivot.qvtcorebase.CorePattern;
+import org.eclipse.qvtd.pivot.qvtcorebase.NavigationAssignment;
+import org.eclipse.qvtd.pivot.qvtcorebase.OppositePropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBaseFactory;
 import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
-import org.eclipse.qvtd.pivot.qvtcorebase.utilities.QVTcoreBaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
@@ -62,9 +68,9 @@ import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.VariablePredicate;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 
-public class QVTimperativeUtil extends QVTcoreBaseUtil
+public class QVTimperativeUtil extends QVTbaseUtil
 {
-    /** The name of the root mapping */
+	/** The name of the root mapping */
 	public static final @NonNull String ROOT_MAPPING_NAME = "__root__";
 	public static final @NonNull String MIDDLE_DOMAIN_NAME = "middle";
 
@@ -78,6 +84,29 @@ public class QVTimperativeUtil extends QVTcoreBaseUtil
 			Variable v2 = o2.getBoundVariable();
 			String n1 = v1 != null ? v1.getName() : null;
 			String n2 = v2 != null ? v2.getName() : null;
+			return ClassUtil.safeCompareTo(n1, n2);
+		}
+	}
+
+	protected static class PatternVariableComparator implements Comparator<@NonNull Variable>
+	{
+		private final @NonNull Map<@NonNull Variable, @Nullable List<@NonNull VariableDeclaration>> def2refs;
+
+		protected PatternVariableComparator(@NonNull Map<@NonNull Variable, @Nullable List<@NonNull VariableDeclaration>> def2refs) {
+			this.def2refs = def2refs;
+		}
+
+		@Override
+		public int compare(@NonNull Variable o1, @NonNull Variable o2) {
+			List<@NonNull VariableDeclaration> l1 = def2refs.get(o1);
+			List<@NonNull VariableDeclaration> l2 = def2refs.get(o2);
+			int s1 = l1 != null ? l1.size() : 0;
+			int s2 = l2 != null ? l2.size() : 0;
+			if (s1 != s2) {
+				return s1 - s2;
+			}
+			String n1 = o1.getName();
+			String n2 = o2.getName();
 			return ClassUtil.safeCompareTo(n1, n2);
 		}
 	}
@@ -160,7 +189,7 @@ public class QVTimperativeUtil extends QVTcoreBaseUtil
 		return mappingSequence;
 	}
 
-/*	public static @NonNull OperationCallExp createOperationCallExp(@NonNull OCLExpression sourceExp, @NonNull Operation operation, OCLExpression... arguments) {
+	/*	public static @NonNull OperationCallExp createOperationCallExp(@NonNull OCLExpression sourceExp, @NonNull Operation operation, OCLExpression... arguments) {
 		OperationCallExp exp = PivotFactory.eINSTANCE.createOperationCallExp();
 		exp.setOwnedSource(sourceExp);
 		exp.setReferredOperation(operation);
@@ -188,7 +217,7 @@ public class QVTimperativeUtil extends QVTcoreBaseUtil
 		return propertyAssignment;
 	}
 
-/*	public static @NonNull PropertyCallExp createPropertyCallExp(@NonNull OCLExpression source, @NonNull Property property) {
+	/*	public static @NonNull PropertyCallExp createPropertyCallExp(@NonNull OCLExpression source, @NonNull Property property) {
 		PropertyCallExp propertyCallExp = PivotFactory.eINSTANCE.createPropertyCallExp();
 		propertyCallExp.setOwnedSource(source);
 		propertyCallExp.setReferredProperty(property);
@@ -216,7 +245,25 @@ public class QVTimperativeUtil extends QVTcoreBaseUtil
 		return typedModel;
 	}
 
-/*	public static @NonNull Variable createVariable(@NonNull String name, @NonNull Type type) {
+	public static @NonNull Area getArea(@NonNull AbstractMapping mapping, @NonNull TypedModel typedModel) {
+		for (Domain domain : mapping.getDomain()) {
+			if (domain.getTypedModel() == typedModel) {
+				return (CoreDomain)domain;
+			}
+		}
+		return mapping;
+	}
+
+	public static @Nullable Area getContainingArea(@Nullable EObject eObject) {
+		for ( ; eObject != null; eObject = eObject.eContainer()) {
+			if (eObject instanceof Area) {
+				return (Area) eObject;
+			}
+		}
+		return null;
+	}
+
+	/*	public static @NonNull Variable createVariable(@NonNull String name, @NonNull Type type) {
 		Variable bodyIt = PivotFactory.eINSTANCE.createVariable();
 		bodyIt.setName(name);
 		bodyIt.setType(type);
@@ -239,6 +286,39 @@ public class QVTimperativeUtil extends QVTcoreBaseUtil
 		return null;
 	}
 
+	public static @Nullable CorePattern getContainingPattern(@Nullable EObject eObject) {
+		for ( ; eObject != null; eObject = eObject.eContainer()) {
+			if (eObject instanceof CorePattern) {
+				return (CorePattern) eObject;
+			}
+		}
+		return null;
+	}
+
+	public static @Nullable CoreDomain getDomain(@NonNull AbstractMapping rule, @NonNull TypedModel typedModel) {
+		return (CoreDomain)getDomain((Rule)rule, typedModel);
+	}
+
+	public static @NonNull Property getTargetProperty(@NonNull NavigationAssignment asNavigationAssignment) {
+		if (asNavigationAssignment instanceof PropertyAssignment) {
+			return ClassUtil.nonNullState(((PropertyAssignment)asNavigationAssignment).getTargetProperty());
+		}
+		else if (asNavigationAssignment instanceof OppositePropertyAssignment) {
+			Property referredProperty = ClassUtil.nonNullState(((OppositePropertyAssignment)asNavigationAssignment).getTargetProperty());
+			return ClassUtil.nonNullState(referredProperty.getOpposite());
+		}
+		throw new UnsupportedOperationException("Unsupported " + asNavigationAssignment.eClass().getName());
+	}
+
+	public static @Nullable TypedModel getTypedModel(@Nullable Area area) {
+		if (area instanceof CoreDomain) {
+			return ((CoreDomain)area).getTypedModel();
+		}
+		else {
+			return null;
+		}
+	}
+
 	public static boolean isPrimitiveVariable(@NonNull Variable asVariable) {
 		Area asArea = QVTimperativeUtil.getContainingArea(asVariable);
 		if ((asArea instanceof Mapping) && !(asVariable.getType() instanceof CollectionType))  {
@@ -254,6 +334,73 @@ public class QVTimperativeUtil extends QVTcoreBaseUtil
 		}
 		finally {
 			environmentFactory.setCreateStrategy(savedStrategy);
+		}
+	}
+
+	/**
+	 * Sort the pattern variables into a least referenced foirst then alphabetical order.
+	 */
+	public static void sortPatternVariables(@NonNull List<@NonNull Variable> variables) {
+		if (variables.size() > 1) {
+			final Map<@NonNull Variable, @Nullable List<@NonNull VariableDeclaration>> def2refs = new HashMap<@NonNull Variable, @Nullable List<@NonNull VariableDeclaration>>();
+			//
+			// Initialize the def2refs.keySet as a fast is-a-pattern-variable lookup.
+			//
+			for (@NonNull Variable variable : variables) {
+				def2refs.put(variable, null);
+			}
+			//
+			// Initialize the def2refs.values with the directly referenced pattern variables.
+			//
+			for (@NonNull Variable variable : variables) {
+				List<@NonNull VariableDeclaration> refs = null;
+				OCLExpression initExpression = variable.getOwnedInit();
+				if (initExpression != null) {
+					for (@NonNull EObject eObject : new TreeIterable(initExpression, true)) {
+						if (eObject instanceof VariableExp) {
+							VariableDeclaration referredVariable = ((VariableExp)eObject).getReferredVariable();
+							assert referredVariable != null;
+							if (def2refs.containsKey(referredVariable)) {
+								if (refs == null) {
+									refs = new ArrayList<@NonNull VariableDeclaration>();
+									def2refs.put(variable, refs);
+								}
+								if (!refs.contains(referredVariable)) {
+									refs.add(referredVariable);
+								}
+							}
+						}
+					}
+				}
+			}
+			//
+			// Recursively expand the def2refs.values to the closure of the directly referenced pattern variables.
+			//
+			boolean changed = true;
+			while (changed) {
+				changed = false;
+				for (@NonNull Variable variable : def2refs.keySet()) {
+					List<@NonNull VariableDeclaration> refs = def2refs.get(variable);
+					if (refs != null) {
+						for (int i = 0; i < refs.size(); i++) {
+							VariableDeclaration ref = refs.get(i);
+							List<@NonNull VariableDeclaration> refRefs = def2refs.get(ref);
+							if (refRefs != null) {
+								for (@NonNull VariableDeclaration refRef : refRefs) {
+									if (!refs.contains(refRef)) {
+										refs.add(refRef);
+										changed = true;
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			//
+			// Sort the variables fewest references first then alphabetically.
+			//
+			ClassUtil.sort(variables, new PatternVariableComparator(def2refs));
 		}
 	}
 
@@ -325,9 +472,10 @@ public class QVTimperativeUtil extends QVTcoreBaseUtil
 				for (VariablePredicate asVariablePredicate : predicate2variables.keySet()) {
 					asSortedVariablePredicates.add(asVariablePredicate);
 				}
-				break;			// FIXME error message for cycle 
+				break;			// FIXME error message for cycle
 			}
 		}
 		return asSortedVariablePredicates;
 	}
+
 }

@@ -55,7 +55,6 @@ import org.eclipse.qvtd.pivot.qvtcorebase.NavigationAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBaseFactory;
 import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment;
-import org.eclipse.qvtd.pivot.qvtcorebase.utilities.QVTcoreBaseUtil;
 
 import com.google.common.collect.Iterables;
 
@@ -107,9 +106,9 @@ public class QVTu2QVTm extends AbstractQVTc2QVTc
 		@Override
 		public @Nullable Mapping visitMapping(@NonNull Mapping mIn) {
 			assert !isFoldable(mIn);
-//			if (/*isAbstract(mIn) ||*/ isFoldable(mIn)) {
-//				return null;
-//			}
+			//			if (/*isAbstract(mIn) ||*/ isFoldable(mIn)) {
+			//				return null;
+			//			}
 			if (!context.isRequired(mIn)) {
 				return null;
 			}
@@ -120,8 +119,8 @@ public class QVTu2QVTm extends AbstractQVTc2QVTc
 				if (!mergedMapping.analyze()) {
 					return null;
 				}
-		        mergedMapping.synthesize(mMapping);
-		        return mMapping;
+				mergedMapping.synthesize(mMapping);
+				return mMapping;
 			}
 			finally {
 				context.popScope();
@@ -140,7 +139,7 @@ public class QVTu2QVTm extends AbstractQVTc2QVTc
 		private @Nullable LinkedHashMap<@NonNull String, @NonNull MergedVariable> variableName2mergedVariables = null;
 		private @Nullable LinkedHashMap<@NonNull String, @NonNull List<@NonNull NavigationAssignment>> variableName_property2navigationAssignments = null;
 		private @Nullable List<@NonNull NavigationAssignment> navigationAssignmentsAsPredicates = null;
-		
+
 		protected MergedArea(@NonNull CreateVisitor createVisitor) {
 			this.createVisitor = createVisitor;
 		}
@@ -222,7 +221,7 @@ public class QVTu2QVTm extends AbstractQVTc2QVTc
 					}
 					else {
 						OCLExpression eIn = paIn.getSlotExpression();
-						Property targetProperty = QVTcoreBaseUtil.getTargetProperty(paIn);
+						Property targetProperty = QVTcoreUtil.getTargetProperty(paIn);
 						if (eIn instanceof VariableExp) {
 							VariableDeclaration vIn = ((VariableExp)eIn).getReferredVariable();
 							String key = vIn.getName() + "%" + targetProperty.toString();
@@ -342,24 +341,24 @@ public class QVTu2QVTm extends AbstractQVTc2QVTc
 			}
 		}
 	}
-	
+
 	protected static class MergedDomain extends MergedArea
 	{
 		/**
 		 * The merged mapping to which this merged domain contributes.
 		 */
 		protected final @NonNull MergedMapping mergedMapping;
-		
+
 		/**
 		 * The typed model that identifies this domain.
 		 */
 		protected final @NonNull TypedModel uTypedModel;
-		
+
 		/**
 		 * A domain, not necessarily from the root or local mapping that has the check/enfoprce flags.
 		 */
 		protected final @NonNull CoreDomain uExampleDomain;
-		
+
 		/**
 		 * The local domain for the local mapping., which may be null if there is no local domain.
 		 */
@@ -379,7 +378,7 @@ public class QVTu2QVTm extends AbstractQVTc2QVTc
 		 * All refined QVTi CoreDomains (including this domain) that merge into the QVTm CoreDomain.
 		 */
 		private final @NonNull List<@NonNull CoreDomain> siblingDomains = new ArrayList<@NonNull CoreDomain>();
-		
+
 		public MergedDomain(@NonNull CreateVisitor createVisitor, @NonNull MergedMapping mergedMapping, @NonNull TypedModel uTypedModel, @NonNull CoreDomain uExampleDomain) {
 			super(createVisitor);
 			this.mergedMapping = mergedMapping;
@@ -391,34 +390,34 @@ public class QVTu2QVTm extends AbstractQVTc2QVTc
 		@Override
 		public boolean analyze() {
 			for (@NonNull Mapping childMapping : mergedMapping.getChildAreas()) {
-				CoreDomain childDomain = QVTcoreBaseUtil.getDomain(childMapping, uTypedModel);
+				CoreDomain childDomain = QVTcoreUtil.getDomain(childMapping, uTypedModel);
 				if (childDomain != null) {
 					childDomains.add(childDomain);
 				}
 			}
 			for (@NonNull Mapping parentMapping : mergedMapping.getParentAreas()) {
-				CoreDomain parentDomain = QVTcoreBaseUtil.getDomain(parentMapping, uTypedModel);
+				CoreDomain parentDomain = QVTcoreUtil.getDomain(parentMapping, uTypedModel);
 				if (parentDomain != null) {
 					parentDomains.add(parentDomain);
 				}
 			}
 			for (@NonNull Mapping siblingMapping : mergedMapping.getSiblingAreas()) {
-				CoreDomain siblingDomain = QVTcoreBaseUtil.getDomain(siblingMapping, uTypedModel);
+				CoreDomain siblingDomain = QVTcoreUtil.getDomain(siblingMapping, uTypedModel);
 				if (siblingDomain != null) {
 					siblingDomains.add(siblingDomain);
 				}
 			}
-	        return super.analyze();
+			return super.analyze();
 		}
 
-//		@Override
-//		protected @NonNull CoreDomain zzgetArea() {
-//			return uNonLocalDomain;
-//		}
+		//		@Override
+		//		protected @NonNull CoreDomain zzgetArea() {
+		//			return uNonLocalDomain;
+		//		}
 
 		@Override
 		protected @Nullable CoreDomain getArea(@NonNull Mapping uMapping) {
-			return QVTcoreBaseUtil.getDomain(uMapping, uTypedModel);
+			return QVTcoreUtil.getDomain(uMapping, uTypedModel);
 		}
 
 		@Override
@@ -448,7 +447,7 @@ public class QVTu2QVTm extends AbstractQVTc2QVTc
 
 		public @NonNull CoreDomain synthesize() {
 			CoreDomain mDomain = QVTcoreBaseFactory.eINSTANCE.createCoreDomain();
-//			mDomain.setTypedModel(uTypedModel);
+			//			mDomain.setTypedModel(uTypedModel);
 			mDomain.setName(uTypedModel.getName());
 			boolean isCheckable = uExampleDomain.isIsCheckable();
 			boolean isEnforceable = uExampleDomain.isIsEnforceable();
@@ -501,12 +500,12 @@ public class QVTu2QVTm extends AbstractQVTc2QVTc
 		 * All refined QVTi Mappings (including this domain) that merge into the QVTm Mappings.
 		 */
 		private final @NonNull List<@NonNull Mapping> siblingMappings = new ArrayList<@NonNull Mapping>();
-		
+
 		/**
 		 * The merge for each domain.
 		 */
 		private final @NonNull Map<@Nullable TypedModel, @NonNull MergedDomain> uTypedModel2mergedDomain = new HashMap<@Nullable TypedModel, @NonNull MergedDomain>();
-		
+
 		public MergedMapping(@NonNull CreateVisitor createVisitor, @NonNull Mapping uMapping) {
 			super(createVisitor);
 			this.uMapping = uMapping;
@@ -515,29 +514,29 @@ public class QVTu2QVTm extends AbstractQVTc2QVTc
 		@Override
 		public boolean analyze() {
 			@SuppressWarnings("unused") String name = uMapping.getName();
-        	computeChildMappings(childMappings, uMapping);
+			computeChildMappings(childMappings, uMapping);
 			computeSiblingMappings(siblingMappings, uMapping);
-	        for (@NonNull Mapping contextMapping : siblingMappings) {
-	        	if (contextMapping != uMapping) {			// FIXME Legacy order
-	        		computeChildMappings(childMappings, contextMapping);
-	        	}
-	        }
-	        computeParentMappings(parentMappings, uMapping);
-	        for (@NonNull Mapping uMapping : Iterables.concat(siblingMappings, parentMappings, childMappings)) {
-	        	for (@NonNull Domain uDomain : ClassUtil.nullFree(uMapping.getDomain())) {
+			for (@NonNull Mapping contextMapping : siblingMappings) {
+				if (contextMapping != uMapping) {			// FIXME Legacy order
+					computeChildMappings(childMappings, contextMapping);
+				}
+			}
+			computeParentMappings(parentMappings, uMapping);
+			for (@NonNull Mapping uMapping : Iterables.concat(siblingMappings, parentMappings, childMappings)) {
+				for (@NonNull Domain uDomain : ClassUtil.nullFree(uMapping.getDomain())) {
 					TypedModel uTypedModel = uDomain.getTypedModel();
 					assert uTypedModel != null;
 					if (uTypedModel2mergedDomain.get(uTypedModel) == null) {
 						uTypedModel2mergedDomain.put(uTypedModel, new MergedDomain(createVisitor, this, uTypedModel, (@NonNull CoreDomain) uDomain));
 					}
-	        	}
-	        }
-	        for (@NonNull MergedDomain mergedDomain : uTypedModel2mergedDomain.values()) {
-	        	if (!mergedDomain.analyze()) {
-	        		return false;
-	        	}
-	        }
-	        return super.analyze();
+				}
+			}
+			for (@NonNull MergedDomain mergedDomain : uTypedModel2mergedDomain.values()) {
+				if (!mergedDomain.analyze()) {
+					return false;
+				}
+			}
+			return super.analyze();
 		}
 
 		private void computeChildMappings(@NonNull List<@NonNull Mapping> childMappings, @NonNull Mapping parentMapping) {
@@ -559,7 +558,7 @@ public class QVTu2QVTm extends AbstractQVTc2QVTc
 			}
 		}
 
-	    private void computeSiblingMappings(@NonNull List<@NonNull Mapping> siblingMappings, @NonNull Mapping refinedMapping) {
+		private void computeSiblingMappings(@NonNull List<@NonNull Mapping> siblingMappings, @NonNull Mapping refinedMapping) {
 			if (!siblingMappings.contains(refinedMapping)) {		// FIXME cannot be cyclic
 				siblingMappings.add(refinedMapping);
 				for (@NonNull Mapping specificationMapping : ClassUtil.nullFree(refinedMapping.getSpecification())) {
@@ -567,7 +566,7 @@ public class QVTu2QVTm extends AbstractQVTc2QVTc
 					computeSiblingMappings(siblingMappings, specificationMapping);
 				}
 			}
-	    }
+		}
 
 		@Override
 		protected @Nullable Mapping getArea(@NonNull Mapping uMapping) {
@@ -608,16 +607,16 @@ public class QVTu2QVTm extends AbstractQVTc2QVTc
 		public void synthesize(@NonNull Mapping mMapping) {
 			String name = createVisitor.getContext().getMappingName(uMapping);
 			mMapping.setName(name);
-	        super.synthesize(mMapping);
-	    	Transformation uTransformation = QVTbaseUtil.getContainingTransformation(uMapping);
-	    	assert uTransformation != null;
+			super.synthesize(mMapping);
+			Transformation uTransformation = QVTbaseUtil.getContainingTransformation(uMapping);
+			assert uTransformation != null;
 			for (@NonNull TypedModel uTypedModel : ClassUtil.nullFree(uTransformation.getModelParameter())) {
-	    		MergedDomain mergedDomain = uTypedModel2mergedDomain.get(uTypedModel);
-	    		if (mergedDomain != null) {
-	    			CoreDomain mDomain = mergedDomain.synthesize();
+				MergedDomain mergedDomain = uTypedModel2mergedDomain.get(uTypedModel);
+				if (mergedDomain != null) {
+					CoreDomain mDomain = mergedDomain.synthesize();
 					mMapping.getDomain().add(mDomain);
-	    		}
-	    	}
+				}
+			}
 		}
 
 		@Override
@@ -639,7 +638,7 @@ public class QVTu2QVTm extends AbstractQVTc2QVTc
 		private boolean isRequired = false;
 		private @Nullable List<@NonNull Variable> variables = null;
 		private @Nullable List<@NonNull VariableAssignment> assignments = null;
-		
+
 		protected MergedVariable(@NonNull MergedArea mergedArea, @NonNull String name) {
 			this.createVisitor = mergedArea.getCreateVisitor();
 			this.mergedArea = mergedArea;
@@ -685,7 +684,7 @@ public class QVTu2QVTm extends AbstractQVTc2QVTc
 				assert mergedType2.conformsTo(completeType);
 			}
 		}
-		
+
 		public void synthesize(@NonNull Area mArea) {
 			List<@NonNull VariableAssignment> assignments2 = assignments;
 			List<@NonNull Variable> variables2 = variables;
@@ -734,7 +733,7 @@ public class QVTu2QVTm extends AbstractQVTc2QVTc
 				VariableAssignment mVariableAssignment = createVisitor.create(assignments2.get(0));
 				assert mVariableAssignment != null;
 				for (@NonNull VariableAssignment uVariableAssignment : assignments2) {
-//					createVisitor.getContext().addTrace(uVariableAssignment, mVariableAssignment);
+					//					createVisitor.getContext().addTrace(uVariableAssignment, mVariableAssignment);
 				}
 			}
 		}
@@ -759,8 +758,8 @@ public class QVTu2QVTm extends AbstractQVTc2QVTc
 				return null;
 			}
 			else if (mVariable.eContainer() instanceof CorePattern) {
-		        Variable uVariable = context.equivalentSource(mVariable);
-		        mVariable.setOwnedInit(createCastCopy(uVariable.getOwnedInit(), uVariable.getType()));
+				Variable uVariable = context.equivalentSource(mVariable);
+				mVariable.setOwnedInit(createCastCopy(uVariable.getOwnedInit(), uVariable.getType()));
 				return null;
 			}
 			else {
@@ -773,42 +772,42 @@ public class QVTu2QVTm extends AbstractQVTc2QVTc
 	{
 		void update(@NonNull UpdateVisitor updateVisitor);
 	}
-	
-    /**
-     * A local mapping may be folded into its context if it has no guard variables or predicates and so cannot execute independently of its context. 
-     */
-    private static boolean isFoldable(@NonNull Mapping mapping) {
-    	if (mapping.getContext() == null) {
-    		return false;
-    	}
-        assert mapping.getSpecification().isEmpty() : " Local mappings cannot be a refinement.";
-        GuardPattern guardPattern = mapping.getGuardPattern();
+
+	/**
+	 * A local mapping may be folded into its context if it has no guard variables or predicates and so cannot execute independently of its context.
+	 */
+	private static boolean isFoldable(@NonNull Mapping mapping) {
+		if (mapping.getContext() == null) {
+			return false;
+		}
+		assert mapping.getSpecification().isEmpty() : " Local mappings cannot be a refinement.";
+		GuardPattern guardPattern = mapping.getGuardPattern();
 		if (guardPattern.getVariable().size() > 0) {
-        	return false;
-        }
-        if (guardPattern.getPredicate().size() > 0) {
-        	return false;
-        }
-        for (Domain d : mapping.getDomain()) {
-        	CoreDomain cd = (CoreDomain)d;
-            guardPattern = cd.getGuardPattern();
+			return false;
+		}
+		if (guardPattern.getPredicate().size() > 0) {
+			return false;
+		}
+		for (Domain d : mapping.getDomain()) {
+			CoreDomain cd = (CoreDomain)d;
+			guardPattern = cd.getGuardPattern();
 			if (guardPattern.getVariable().size() > 0) {
-            	return false;
-            }
-            if (guardPattern.getPredicate().size() > 0) {
-            	return false;
-            }
-        }
-        return true;
-    }
-	
+				return false;
+			}
+			if (guardPattern.getPredicate().size() > 0) {
+				return false;
+			}
+		}
+		return true;
+	}
+
 	private final @NonNull Map<@NonNull Element, @NonNull Updater> element2updater = new HashMap<@NonNull Element, @NonNull Updater>();
-	
+
 	private final @NonNull SymbolNameReservation symbolNameReservation = new SymbolNameReservation();
 
-    public QVTu2QVTm(@NonNull EnvironmentFactory environmentFactory) {
-        super(environmentFactory);
-    }
+	public QVTu2QVTm(@NonNull EnvironmentFactory environmentFactory) {
+		super(environmentFactory);
+	}
 
 	public void addUpdater(@NonNull Element mElement, @NonNull Updater updater) {
 		Updater oldUpdater = element2updater.put(mElement, updater);
@@ -863,27 +862,27 @@ public class QVTu2QVTm extends AbstractQVTc2QVTc
 		return element2updater.get(mElement);
 	}
 
-    private boolean hasVariables(Area a) {
-        return !(a.getGuardPattern().getVariable().isEmpty() ||
-                a.getBottomPattern().getVariable().isEmpty() ||
-                a.getBottomPattern().getRealizedVariable().isEmpty());
-    }
+	private boolean hasVariables(Area a) {
+		return !(a.getGuardPattern().getVariable().isEmpty() ||
+				a.getBottomPattern().getVariable().isEmpty() ||
+				a.getBottomPattern().getRealizedVariable().isEmpty());
+	}
 
-    /**
-     * Return false if the mapping can be omitted, either because it is not refined or because it contributes no variables.
-     */
-    private boolean isRequired(@NonNull Mapping m) {
-        List<@NonNull Mapping> refinements = ClassUtil.nullFree(m.getRefinement());
+	/**
+	 * Return false if the mapping can be omitted, either because it is not refined or because it contributes no variables.
+	 */
+	private boolean isRequired(@NonNull Mapping m) {
+		List<@NonNull Mapping> refinements = ClassUtil.nullFree(m.getRefinement());
 		if (refinements.isEmpty())
-            return true;
-        for (@NonNull Mapping refining : refinements) {
-            for (Domain rd : refining.getDomain()) {
-                if (hasVariables((Area) rd))
-                    return true;
-            }
-            if (hasVariables(m))
-                return true;
-        }
-        return false;
-    }
+			return true;
+		for (@NonNull Mapping refining : refinements) {
+			for (Domain rd : refining.getDomain()) {
+				if (hasVariables((Area) rd))
+					return true;
+			}
+			if (hasVariables(m))
+				return true;
+		}
+		return false;
+	}
 }

@@ -54,11 +54,11 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtbase.analysis.DomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
+import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
 import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcorebase.NavigationAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtcorebase.analysis.RootDomainUsageAnalysis;
-import org.eclipse.qvtd.pivot.qvtcorebase.utilities.QVTcoreBaseUtil;
 import org.eclipse.qvtd.pivot.schedule.AbstractDatum;
 import org.eclipse.qvtd.pivot.schedule.ClassDatum;
 import org.eclipse.qvtd.pivot.schedule.DataParameter;
@@ -386,7 +386,7 @@ public class QVTp2QVTg {
 	@NonNull
 	protected Set<PropertyDatum> getPropertyDatum(@NonNull NavigationAssignment propAssign) {
 		Set<PropertyDatum> result = new LinkedHashSet<PropertyDatum>();
-		Property targetProp = QVTcoreBaseUtil.getTargetProperty(propAssign);
+		Property targetProp = QVTcoreUtil.getTargetProperty(propAssign);
 		OCLExpression slotExpression = ClassUtil.nonNullState(propAssign.getSlotExpression());
 		TypedModel typedModel = getTypedModel(slotExpression);
 		PropertyDatum targetDatum = getPropertyDatum(typedModel, ClassUtil.nonNullState(slotExpression.getType().isClass()), targetProp);

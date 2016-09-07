@@ -20,36 +20,43 @@ import org.eclipse.ocl.pivot.internal.scoping.Attribution;
 import org.eclipse.ocl.pivot.internal.scoping.EnvironmentView;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
+import org.eclipse.qvtd.pivot.qvtcore.attributes.BottomPatternAttribution;
+import org.eclipse.qvtd.pivot.qvtcore.attributes.CoreDomainAttribution;
+import org.eclipse.qvtd.pivot.qvtcore.attributes.GuardPatternAttribution;
 import org.eclipse.qvtd.pivot.qvtcore.attributes.MappingAttribution;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
+import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage;
 
 public class QVTcorePivotScoping
-{	
+{
 	private static final class GuardVariableDisambiguator implements Comparator<Variable>
 	{
 		@Override
 		public int compare(Variable match1, Variable match2) {
 			Mapping mapping1 = QVTcoreUtil.getContainingMapping(match1);
 			if (mapping1 == null) {
-				return 1;				// match2 inferior			
+				return 1;				// match2 inferior
 			}
 			Mapping mapping2 = QVTcoreUtil.getContainingMapping(match2);
 			if (mapping2 == null) {
-				return -1;				// match1 inferior			
+				return -1;				// match1 inferior
 			}
 			Set<Mapping> refinedMappings1 = QVTcoreUtil.getAllRefinedMappings(mapping1);
 			if (refinedMappings1.contains(mapping2)) {
-				return 1;				// match2 inferior			
+				return 1;				// match2 inferior
 			}
 			Set<Mapping> refinedMappings2 = QVTcoreUtil.getAllRefinedMappings(mapping2);
 			if (refinedMappings2.contains(mapping1)) {
-				return -1;				// match1 inferior			
+				return -1;				// match1 inferior
 			}
 			return 0;
 		}
 	}
 	public static void init() {
 		Map<EClassifier, Attribution> registry = Attribution.REGISTRY;
+		registry.put(QVTcoreBasePackage.Literals.BOTTOM_PATTERN, BottomPatternAttribution.INSTANCE);
+		registry.put(QVTcoreBasePackage.Literals.CORE_DOMAIN, CoreDomainAttribution.INSTANCE);
+		registry.put(QVTcoreBasePackage.Literals.GUARD_PATTERN, GuardPatternAttribution.INSTANCE);
 		registry.put(QVTcorePackage.Literals.MAPPING, MappingAttribution.INSTANCE);
 		EnvironmentView.addDisambiguator(Variable.class, new GuardVariableDisambiguator());
 	}

@@ -13,9 +13,17 @@ package org.eclipse.qvtd.pivot.qvtimperative.utilities;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
+import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
-import org.eclipse.qvtd.pivot.qvtcorebase.utilities.QVTcoreBaseHelper;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseHelper;
+import org.eclipse.qvtd.pivot.qvtcorebase.NavigationAssignment;
+import org.eclipse.qvtd.pivot.qvtcorebase.OppositePropertyAssignment;
+import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
+import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBaseFactory;
+import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
+import org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeFactory;
@@ -23,7 +31,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeFactory;
 /**
  * QVTimperativeHelper provides helper routines to assist creation of QVTimperative model elements.
  */
-public class QVTimperativeHelper extends QVTcoreBaseHelper
+public class QVTimperativeHelper extends QVTbaseHelper
 {
 	public QVTimperativeHelper(@NonNull EnvironmentFactory environmentFactory) {
 		super(environmentFactory);
@@ -43,5 +51,37 @@ public class QVTimperativeHelper extends QVTcoreBaseHelper
 		asVariable.setIsRequired(true);
 		asVariable.setOwnedInit(initExpression);
 		return asVariable;
+	}
+
+	public @NonNull NavigationAssignment createNavigationAssignment(@NonNull OCLExpression asSlotExpression, @NonNull Property asProperty, @NonNull OCLExpression asValueExpression) {
+		NavigationAssignment asNavigationAssignment;
+		if (asProperty.isIsImplicit()) {
+			OppositePropertyAssignment asPropertyAssignment = QVTcoreBaseFactory.eINSTANCE.createOppositePropertyAssignment();
+			asPropertyAssignment.setTargetProperty(asProperty.getOpposite());
+			asNavigationAssignment = asPropertyAssignment;
+		}
+		else {
+			PropertyAssignment asPropertyAssignment = QVTcoreBaseFactory.eINSTANCE.createPropertyAssignment();
+			asPropertyAssignment.setTargetProperty(asProperty);
+			asNavigationAssignment = asPropertyAssignment;
+		}
+		asNavigationAssignment.setSlotExpression(asSlotExpression);
+		asNavigationAssignment.setValue(asValueExpression);
+		return asNavigationAssignment;
+	}
+
+	public @NonNull RealizedVariable createRealizedVariable(@NonNull String name, @NonNull Type type) {
+		RealizedVariable realizedVariable = QVTcoreBaseFactory.eINSTANCE.createRealizedVariable();
+		realizedVariable.setName(name);
+		realizedVariable.setType(type);
+		realizedVariable.setIsRequired(true);;
+		return realizedVariable;
+	}
+
+	public @NonNull VariableAssignment createVariableAssignment(@NonNull Variable asVariable, @NonNull OCLExpression asValueExpression) {
+		VariableAssignment asVariableAssignment = QVTcoreBaseFactory.eINSTANCE.createVariableAssignment();
+		asVariableAssignment.setTargetVariable(asVariable);
+		asVariableAssignment.setValue(asValueExpression);
+		return asVariableAssignment;
 	}
 }

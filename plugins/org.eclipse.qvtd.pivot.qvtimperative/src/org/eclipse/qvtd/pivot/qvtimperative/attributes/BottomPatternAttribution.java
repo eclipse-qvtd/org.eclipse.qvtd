@@ -8,7 +8,7 @@
  * Contributors:
  *     E.D.Willink - initial API and implementation
  *******************************************************************************/
-package org.eclipse.qvtd.pivot.qvtcorebase.attributes;
+package org.eclipse.qvtd.pivot.qvtimperative.attributes;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
@@ -20,16 +20,16 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcorebase.AbstractMapping;
 import org.eclipse.qvtd.pivot.qvtcorebase.Area;
+import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
-import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
 
-public class GuardPatternAttribution extends AbstractAttribution
+public class BottomPatternAttribution extends AbstractAttribution
 {
-	public static final GuardPatternAttribution INSTANCE = new GuardPatternAttribution();
+	public static final BottomPatternAttribution INSTANCE = new BottomPatternAttribution();
 
 	@Override
 	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
-		Area area = ((GuardPattern)target).getArea();
+		Area area = ((BottomPattern)target).getArea();
 		if (area instanceof AbstractMapping) {
 			AbstractMapping mapping = (AbstractMapping)area;;
 			Transformation transformation = QVTbaseUtil.getContainingTransformation(mapping);
@@ -41,13 +41,13 @@ public class GuardPatternAttribution extends AbstractAttribution
 					}
 				}
 			}
-			QVTcoreBaseEnvironmentUtil.addMiddleGuardVariables(environmentView, mapping);
+			QVTimperativeEnvironmentUtil.addMiddleBottomVariables(environmentView, mapping);
 		}
 		else {
 			CoreDomain domain = (CoreDomain)area;
 			TypedModel typedModel = domain.getTypedModel();
 			AbstractMapping mapping = (AbstractMapping) domain.getRule();
-			QVTcoreBaseEnvironmentUtil.addSideGuardVariables(environmentView, mapping, typedModel);
+			QVTimperativeEnvironmentUtil.addSideBottomVariables(environmentView, mapping, typedModel);
 		}
 		return scopeView.getParent();
 	}

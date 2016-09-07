@@ -71,7 +71,7 @@ import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBaseFactory;
 import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage;
 import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment;
-import org.eclipse.qvtd.pivot.qvtcorebase.utilities.QVTcoreBaseUtil;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 
 /**
  * AbstractQVTc2QVTc provides shared functionality for steps in the QVTC/QVTu/QVTm chain.
@@ -407,7 +407,7 @@ public abstract class AbstractQVTc2QVTc
 
 		protected Object convertToPredicate(@NonNull NavigationAssignment paIn, @NonNull Predicate pOut) {
 			OCLExpression slotExpression = copy(paIn.getSlotExpression());
-			Property targetProperty = QVTcoreBaseUtil.getTargetProperty(paIn);
+			Property targetProperty = QVTimperativeUtil.getTargetProperty(paIn);
 			assert (slotExpression != null) && (targetProperty != null);
 			OCLExpression valueExpression = copy(paIn.getValue());
 			NavigationCallExp propertyCallExp = context.getHelper().createNavigationCallExp(slotExpression, targetProperty);
@@ -430,7 +430,7 @@ public abstract class AbstractQVTc2QVTc
 			Variable vOut = context.equivalentTarget((Variable)vIn);
 			vaOut.setTargetVariable(vOut);
 			OCLExpression slotExpression = copy(paIn.getSlotExpression());
-			Property targetProperty = QVTcoreBaseUtil.getTargetProperty(paIn);
+			Property targetProperty = QVTimperativeUtil.getTargetProperty(paIn);
 			assert (slotExpression != null) && (targetProperty != null);
 			NavigationCallExp propertyCallExp = context.getHelper().createNavigationCallExp(slotExpression, targetProperty);
 			context.addTrace(paIn, propertyCallExp);
