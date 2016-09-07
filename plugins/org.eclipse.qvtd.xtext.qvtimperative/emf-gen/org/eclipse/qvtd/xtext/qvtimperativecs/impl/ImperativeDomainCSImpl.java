@@ -32,8 +32,6 @@ import org.eclipse.ocl.xtext.basecs.PathNameCS;
 
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
 
-import org.eclipse.qvtd.xtext.qvtcorebasecs.impl.DomainCSImpl;
-
 import org.eclipse.qvtd.xtext.qvtimperativecs.ImperativeDomainCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage;
 
@@ -53,7 +51,7 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
  *
  * @generated
  */
-public class ImperativeDomainCSImpl extends DomainCSImpl implements ImperativeDomainCS {
+public class ImperativeDomainCSImpl extends org.eclipse.qvtd.xtext.qvtimperativecs.impl.DomainCSImpl implements ImperativeDomainCS {
 	/**
 	 * The cached value of the '{@link #getCheckedProperties() <em>Checked Properties</em>}' containment reference list.
 	 * <!-- begin-user-doc -->

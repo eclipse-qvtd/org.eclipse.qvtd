@@ -23,7 +23,7 @@ import org.eclipse.jdt.annotation.NonNull;
  * An AbstractDelegatingQVTimperativeCSVisitor delegates all visits.
  */
 public abstract class AbstractDelegatingQVTimperativeCSVisitor<R, C, @NonNull D extends QVTimperativeCSVisitor<R>>
-	extends org.eclipse.qvtd.xtext.qvtcorebasecs.util.AbstractDelegatingQVTcoreBaseCSVisitor<R, C, D>
+	extends org.eclipse.qvtd.xtext.qvtbasecs.util.AbstractDelegatingQVTbaseCSVisitor<R, C, D>
 	implements QVTimperativeCSVisitor<R>
 {
 	protected AbstractDelegatingQVTimperativeCSVisitor(@NonNull D delegate, C context) {
@@ -36,8 +36,38 @@ public abstract class AbstractDelegatingQVTimperativeCSVisitor<R, C, @NonNull D 
 	}
 
 	@Override
+	public R visitAreaCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull AreaCS object) {
+		return delegate.visitAreaCS(object);
+	}
+
+	@Override
+	public R visitBottomPatternCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull BottomPatternCS object) {
+		return delegate.visitBottomPatternCS(object);
+	}
+
+	@Override
 	public R visitConnectionStatementCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull ConnectionStatementCS object) {
 		return delegate.visitConnectionStatementCS(object);
+	}
+
+	@Override
+	public R visitDirectionCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull DirectionCS object) {
+		return delegate.visitDirectionCS(object);
+	}
+
+	@Override
+	public R visitDomainCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull DomainCS object) {
+		return delegate.visitDomainCS(object);
+	}
+
+	@Override
+	public R visitEnforcementOperationCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull EnforcementOperationCS object) {
+		return delegate.visitEnforcementOperationCS(object);
+	}
+
+	@Override
+	public R visitGuardPatternCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull GuardPatternCS object) {
+		return delegate.visitGuardPatternCS(object);
 	}
 
 	@Override
@@ -86,7 +116,52 @@ public abstract class AbstractDelegatingQVTimperativeCSVisitor<R, C, @NonNull D 
 	}
 
 	@Override
+	public R visitParamDeclarationCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull ParamDeclarationCS object) {
+		return delegate.visitParamDeclarationCS(object);
+	}
+
+	@Override
+	public R visitPatternCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull PatternCS object) {
+		return delegate.visitPatternCS(object);
+	}
+
+	@Override
+	public R visitPredicateCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull PredicateCS object) {
+		return delegate.visitPredicateCS(object);
+	}
+
+	@Override
+	public R visitPredicateOrAssignmentCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull PredicateOrAssignmentCS object) {
+		return delegate.visitPredicateOrAssignmentCS(object);
+	}
+
+	@Override
+	public R visitQueryCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull QueryCS object) {
+		return delegate.visitQueryCS(object);
+	}
+
+	@Override
+	public R visitRealizeableVariableCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull RealizeableVariableCS object) {
+		return delegate.visitRealizeableVariableCS(object);
+	}
+
+	@Override
+	public R visitRealizedVariableCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull RealizedVariableCS object) {
+		return delegate.visitRealizedVariableCS(object);
+	}
+
+	@Override
 	public R visitTopLevelCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull TopLevelCS object) {
 		return delegate.visitTopLevelCS(object);
+	}
+
+	@Override
+	public R visitTransformationCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull TransformationCS object) {
+		return delegate.visitTransformationCS(object);
+	}
+
+	@Override
+	public R visitUnrealizedVariableCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull UnrealizedVariableCS object) {
+		return delegate.visitUnrealizedVariableCS(object);
 	}
 }

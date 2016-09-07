@@ -15,12 +15,71 @@
   <foreignModel>QVTcoreCS.ecore</foreignModel>
   <genPackages prefix="QVTcoreCS" basePackage="org.eclipse.qvtd.xtext" disposableProviderFactory="true"
       fileExtensions="qvtccs" ecorePackage="QVTcoreCS.ecore#/">
+    <genClasses image="false" ecoreClass="QVTcoreCS.ecore#//AreaCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcoreCS.ecore#//AreaCS/ownedGuardPattern"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcoreCS.ecore#//AreaCS/ownedBottomPattern"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTcoreCS.ecore#//BottomPatternCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcoreCS.ecore#//BottomPatternCS/ownedEnforcementOperations"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcoreCS.ecore#//BottomPatternCS/ownedRealizedVariables"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcoreCS.ecore#//BottomPatternCS/ownedConstraints"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTcoreCS.ecore#//DirectionCS">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTcoreCS.ecore#//DirectionCS/imports"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTcoreCS.ecore#//DirectionCS/uses"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTcoreCS.ecore#//DomainCS">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTcoreCS.ecore#//DomainCS/isCheck"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTcoreCS.ecore#//DomainCS/isEnforce"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTcoreCS.ecore#//DomainCS/direction"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTcoreCS.ecore#//EnforcementOperationCS">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTcoreCS.ecore#//EnforcementOperationCS/isDeletion"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcoreCS.ecore#//EnforcementOperationCS/ownedOperationCall"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTcoreCS.ecore#//GuardPatternCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcoreCS.ecore#//GuardPatternCS/ownedPredicates"/>
+    </genClasses>
     <genClasses ecoreClass="QVTcoreCS.ecore#//MappingCS">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTcoreCS.ecore#//MappingCS/isDefault"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcoreCS.ecore#//MappingCS/ownedComposedMappings"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcoreCS.ecore#//MappingCS/ownedDomains"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcoreCS.ecore#//MappingCS/ownedInPathName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcoreCS.ecore#//MappingCS/ownedMiddle"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTcoreCS.ecore#//MappingCS/refines"/>
     </genClasses>
+    <genClasses ecoreClass="QVTcoreCS.ecore#//ParamDeclarationCS"/>
+    <genClasses image="false" ecoreClass="QVTcoreCS.ecore#//PatternCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcoreCS.ecore#//PatternCS/ownedUnrealizedVariables"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTcoreCS.ecore#//PredicateCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcoreCS.ecore#//PredicateCS/ownedCondition"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTcoreCS.ecore#//PredicateOrAssignmentCS">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTcoreCS.ecore#//PredicateOrAssignmentCS/isDefault"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcoreCS.ecore#//PredicateOrAssignmentCS/ownedTarget"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcoreCS.ecore#//PredicateOrAssignmentCS/ownedInitExpression"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTcoreCS.ecore#//QueryCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcoreCS.ecore#//QueryCS/ownedPathName"/>
+      <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference QVTcoreCS.ecore#//QueryCS/transformation"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcoreCS.ecore#//QueryCS/ownedParameters"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcoreCS.ecore#//QueryCS/ownedExpression"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTcoreCS.ecore#//QueryCS/isTransient"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="QVTcoreCS.ecore#//RealizeableVariableCS"/>
+    <genClasses ecoreClass="QVTcoreCS.ecore#//RealizedVariableCS"/>
     <genClasses ecoreClass="QVTcoreCS.ecore#//TopLevelCS">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcoreCS.ecore#//TopLevelCS/ownedMappings"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcoreCS.ecore#//TopLevelCS/ownedQueries"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcoreCS.ecore#//TopLevelCS/ownedTransformations"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTcoreCS.ecore#//TransformationCS">
+      <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference QVTcoreCS.ecore#//TransformationCS/package"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcoreCS.ecore#//TransformationCS/ownedDirections"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTcoreCS.ecore#//UnrealizedVariableCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcoreCS.ecore#//UnrealizedVariableCS/ownedInitExpression"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

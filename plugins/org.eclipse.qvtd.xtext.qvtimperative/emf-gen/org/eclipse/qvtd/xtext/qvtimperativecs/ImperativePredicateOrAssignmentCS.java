@@ -14,8 +14,6 @@
  */
 package org.eclipse.qvtd.xtext.qvtimperativecs;
 
-import org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateOrAssignmentCS;
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Imperative Predicate Or Assignment CS</b></em>'.
@@ -32,7 +30,7 @@ import org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateOrAssignmentCS;
  * @model
  * @generated
  */
-public interface ImperativePredicateOrAssignmentCS extends PredicateOrAssignmentCS {
+public interface ImperativePredicateOrAssignmentCS extends org.eclipse.qvtd.xtext.qvtimperativecs.PredicateOrAssignmentCS {
 	/**
 	 * Returns the value of the '<em><b>Is Accumulate</b></em>' attribute.
 	 * The default value is <code>"false"</code>.

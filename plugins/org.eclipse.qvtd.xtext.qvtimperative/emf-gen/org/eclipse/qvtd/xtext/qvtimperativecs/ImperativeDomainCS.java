@@ -18,8 +18,6 @@ import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.ocl.xtext.basecs.PathNameCS;
 
-import org.eclipse.qvtd.xtext.qvtcorebasecs.DomainCS;
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Imperative Domain CS</b></em>'.
@@ -37,7 +35,7 @@ import org.eclipse.qvtd.xtext.qvtcorebasecs.DomainCS;
  * @model
  * @generated
  */
-public interface ImperativeDomainCS extends DomainCS {
+public interface ImperativeDomainCS extends org.eclipse.qvtd.xtext.qvtimperativecs.DomainCS {
 	/**
 	 * Returns the value of the '<em><b>Checked Properties</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.ocl.xtext.basecs.PathNameCS}.

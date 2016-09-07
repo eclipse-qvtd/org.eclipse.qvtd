@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.util.Switch;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.ocl.pivot.utilities.Pivotable;
+import org.eclipse.ocl.xtext.basecs.ClassCS;
 import org.eclipse.ocl.xtext.basecs.ElementCS;
 import org.eclipse.ocl.xtext.basecs.ModelElementCS;
 import org.eclipse.ocl.xtext.basecs.NamedElementCS;
@@ -23,16 +24,12 @@ import org.eclipse.ocl.xtext.basecs.PackageOwnerCS;
 import org.eclipse.ocl.xtext.basecs.PivotableElementCS;
 import org.eclipse.ocl.xtext.basecs.RootCS;
 import org.eclipse.ocl.xtext.basecs.RootPackageCS;
+import org.eclipse.ocl.xtext.basecs.TemplateableElementCS;
+import org.eclipse.ocl.xtext.basecs.TypeCS;
 import org.eclipse.ocl.xtext.basecs.TypedElementCS;
 import org.eclipse.ocl.xtext.basecs.util.VisitableCS;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
-import org.eclipse.qvtd.xtext.qvtcorebasecs.AbstractMappingCS;
-import org.eclipse.qvtd.xtext.qvtcorebasecs.AbstractTopLevelCS;
-import org.eclipse.qvtd.xtext.qvtcorebasecs.AreaCS;
-import org.eclipse.qvtd.xtext.qvtcorebasecs.DomainCS;
-import org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateOrAssignmentCS;
-import org.eclipse.qvtd.xtext.qvtcorebasecs.RealizeableVariableCS;
-import org.eclipse.qvtd.xtext.qvtcorebasecs.RealizedVariableCS;
+import org.eclipse.qvtd.xtext.qvtbasecs.AbstractTransformationCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.*;
 
 /**
@@ -92,6 +89,31 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
+			case QVTimperativeCSPackage.AREA_CS: {
+				org.eclipse.qvtd.xtext.qvtimperativecs.AreaCS areaCS = (org.eclipse.qvtd.xtext.qvtimperativecs.AreaCS)theEObject;
+				T result = caseAreaCS(areaCS);
+				if (result == null) result = caseNamedElementCS(areaCS);
+				if (result == null) result = caseModelElementCS(areaCS);
+				if (result == null) result = caseNameable(areaCS);
+				if (result == null) result = casePivotableElementCS(areaCS);
+				if (result == null) result = caseElementCS(areaCS);
+				if (result == null) result = casePivotable(areaCS);
+				if (result == null) result = caseVisitableCS(areaCS);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case QVTimperativeCSPackage.BOTTOM_PATTERN_CS: {
+				BottomPatternCS bottomPatternCS = (BottomPatternCS)theEObject;
+				T result = caseBottomPatternCS(bottomPatternCS);
+				if (result == null) result = casePatternCS(bottomPatternCS);
+				if (result == null) result = caseModelElementCS(bottomPatternCS);
+				if (result == null) result = casePivotableElementCS(bottomPatternCS);
+				if (result == null) result = caseElementCS(bottomPatternCS);
+				if (result == null) result = casePivotable(bottomPatternCS);
+				if (result == null) result = caseVisitableCS(bottomPatternCS);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case QVTimperativeCSPackage.CONNECTION_STATEMENT_CS: {
 				ConnectionStatementCS connectionStatementCS = (ConnectionStatementCS)theEObject;
 				T result = caseConnectionStatementCS(connectionStatementCS);
@@ -101,6 +123,56 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = caseElementCS(connectionStatementCS);
 				if (result == null) result = casePivotable(connectionStatementCS);
 				if (result == null) result = caseVisitableCS(connectionStatementCS);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case QVTimperativeCSPackage.DIRECTION_CS: {
+				DirectionCS directionCS = (DirectionCS)theEObject;
+				T result = caseDirectionCS(directionCS);
+				if (result == null) result = caseNamedElementCS(directionCS);
+				if (result == null) result = caseModelElementCS(directionCS);
+				if (result == null) result = caseNameable(directionCS);
+				if (result == null) result = casePivotableElementCS(directionCS);
+				if (result == null) result = caseElementCS(directionCS);
+				if (result == null) result = casePivotable(directionCS);
+				if (result == null) result = caseVisitableCS(directionCS);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case QVTimperativeCSPackage.DOMAIN_CS: {
+				org.eclipse.qvtd.xtext.qvtimperativecs.DomainCS domainCS = (org.eclipse.qvtd.xtext.qvtimperativecs.DomainCS)theEObject;
+				T result = caseDomainCS(domainCS);
+				if (result == null) result = caseAreaCS(domainCS);
+				if (result == null) result = caseNamedElementCS(domainCS);
+				if (result == null) result = caseModelElementCS(domainCS);
+				if (result == null) result = caseNameable(domainCS);
+				if (result == null) result = casePivotableElementCS(domainCS);
+				if (result == null) result = caseElementCS(domainCS);
+				if (result == null) result = casePivotable(domainCS);
+				if (result == null) result = caseVisitableCS(domainCS);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case QVTimperativeCSPackage.ENFORCEMENT_OPERATION_CS: {
+				EnforcementOperationCS enforcementOperationCS = (EnforcementOperationCS)theEObject;
+				T result = caseEnforcementOperationCS(enforcementOperationCS);
+				if (result == null) result = caseModelElementCS(enforcementOperationCS);
+				if (result == null) result = casePivotableElementCS(enforcementOperationCS);
+				if (result == null) result = caseElementCS(enforcementOperationCS);
+				if (result == null) result = casePivotable(enforcementOperationCS);
+				if (result == null) result = caseVisitableCS(enforcementOperationCS);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case QVTimperativeCSPackage.GUARD_PATTERN_CS: {
+				GuardPatternCS guardPatternCS = (GuardPatternCS)theEObject;
+				T result = caseGuardPatternCS(guardPatternCS);
+				if (result == null) result = casePatternCS(guardPatternCS);
+				if (result == null) result = caseModelElementCS(guardPatternCS);
+				if (result == null) result = casePivotableElementCS(guardPatternCS);
+				if (result == null) result = caseElementCS(guardPatternCS);
+				if (result == null) result = casePivotable(guardPatternCS);
+				if (result == null) result = caseVisitableCS(guardPatternCS);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -151,7 +223,6 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 			case QVTimperativeCSPackage.MAPPING_CS: {
 				MappingCS mappingCS = (MappingCS)theEObject;
 				T result = caseMappingCS(mappingCS);
-				if (result == null) result = caseAbstractMappingCS(mappingCS);
 				if (result == null) result = caseNamedElementCS(mappingCS);
 				if (result == null) result = caseModelElementCS(mappingCS);
 				if (result == null) result = caseNameable(mappingCS);
@@ -221,10 +292,101 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case QVTimperativeCSPackage.PARAM_DECLARATION_CS: {
+				ParamDeclarationCS paramDeclarationCS = (ParamDeclarationCS)theEObject;
+				T result = caseParamDeclarationCS(paramDeclarationCS);
+				if (result == null) result = caseTypedElementCS(paramDeclarationCS);
+				if (result == null) result = caseNamedElementCS(paramDeclarationCS);
+				if (result == null) result = caseModelElementCS(paramDeclarationCS);
+				if (result == null) result = caseNameable(paramDeclarationCS);
+				if (result == null) result = casePivotableElementCS(paramDeclarationCS);
+				if (result == null) result = caseElementCS(paramDeclarationCS);
+				if (result == null) result = casePivotable(paramDeclarationCS);
+				if (result == null) result = caseVisitableCS(paramDeclarationCS);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case QVTimperativeCSPackage.PATTERN_CS: {
+				PatternCS patternCS = (PatternCS)theEObject;
+				T result = casePatternCS(patternCS);
+				if (result == null) result = caseModelElementCS(patternCS);
+				if (result == null) result = casePivotableElementCS(patternCS);
+				if (result == null) result = caseElementCS(patternCS);
+				if (result == null) result = casePivotable(patternCS);
+				if (result == null) result = caseVisitableCS(patternCS);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case QVTimperativeCSPackage.PREDICATE_CS: {
+				PredicateCS predicateCS = (PredicateCS)theEObject;
+				T result = casePredicateCS(predicateCS);
+				if (result == null) result = caseExpCS(predicateCS);
+				if (result == null) result = caseModelElementCS(predicateCS);
+				if (result == null) result = casePivotableElementCS(predicateCS);
+				if (result == null) result = caseElementCS(predicateCS);
+				if (result == null) result = casePivotable(predicateCS);
+				if (result == null) result = caseVisitableCS(predicateCS);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case QVTimperativeCSPackage.PREDICATE_OR_ASSIGNMENT_CS: {
+				org.eclipse.qvtd.xtext.qvtimperativecs.PredicateOrAssignmentCS predicateOrAssignmentCS = (org.eclipse.qvtd.xtext.qvtimperativecs.PredicateOrAssignmentCS)theEObject;
+				T result = casePredicateOrAssignmentCS(predicateOrAssignmentCS);
+				if (result == null) result = caseExpCS(predicateOrAssignmentCS);
+				if (result == null) result = caseModelElementCS(predicateOrAssignmentCS);
+				if (result == null) result = casePivotableElementCS(predicateOrAssignmentCS);
+				if (result == null) result = caseElementCS(predicateOrAssignmentCS);
+				if (result == null) result = casePivotable(predicateOrAssignmentCS);
+				if (result == null) result = caseVisitableCS(predicateOrAssignmentCS);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case QVTimperativeCSPackage.QUERY_CS: {
+				QueryCS queryCS = (QueryCS)theEObject;
+				T result = caseQueryCS(queryCS);
+				if (result == null) result = caseTypedElementCS(queryCS);
+				if (result == null) result = caseNamedElementCS(queryCS);
+				if (result == null) result = caseModelElementCS(queryCS);
+				if (result == null) result = caseNameable(queryCS);
+				if (result == null) result = casePivotableElementCS(queryCS);
+				if (result == null) result = caseElementCS(queryCS);
+				if (result == null) result = casePivotable(queryCS);
+				if (result == null) result = caseVisitableCS(queryCS);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case QVTimperativeCSPackage.REALIZEABLE_VARIABLE_CS: {
+				org.eclipse.qvtd.xtext.qvtimperativecs.RealizeableVariableCS realizeableVariableCS = (org.eclipse.qvtd.xtext.qvtimperativecs.RealizeableVariableCS)theEObject;
+				T result = caseRealizeableVariableCS(realizeableVariableCS);
+				if (result == null) result = caseTypedElementCS(realizeableVariableCS);
+				if (result == null) result = caseNamedElementCS(realizeableVariableCS);
+				if (result == null) result = caseModelElementCS(realizeableVariableCS);
+				if (result == null) result = caseNameable(realizeableVariableCS);
+				if (result == null) result = casePivotableElementCS(realizeableVariableCS);
+				if (result == null) result = caseElementCS(realizeableVariableCS);
+				if (result == null) result = casePivotable(realizeableVariableCS);
+				if (result == null) result = caseVisitableCS(realizeableVariableCS);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case QVTimperativeCSPackage.REALIZED_VARIABLE_CS: {
+				org.eclipse.qvtd.xtext.qvtimperativecs.RealizedVariableCS realizedVariableCS = (org.eclipse.qvtd.xtext.qvtimperativecs.RealizedVariableCS)theEObject;
+				T result = caseRealizedVariableCS(realizedVariableCS);
+				if (result == null) result = caseRealizeableVariableCS(realizedVariableCS);
+				if (result == null) result = caseTypedElementCS(realizedVariableCS);
+				if (result == null) result = caseNamedElementCS(realizedVariableCS);
+				if (result == null) result = caseModelElementCS(realizedVariableCS);
+				if (result == null) result = caseNameable(realizedVariableCS);
+				if (result == null) result = casePivotableElementCS(realizedVariableCS);
+				if (result == null) result = caseElementCS(realizedVariableCS);
+				if (result == null) result = casePivotable(realizedVariableCS);
+				if (result == null) result = caseVisitableCS(realizedVariableCS);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case QVTimperativeCSPackage.TOP_LEVEL_CS: {
 				TopLevelCS topLevelCS = (TopLevelCS)theEObject;
 				T result = caseTopLevelCS(topLevelCS);
-				if (result == null) result = caseAbstractTopLevelCS(topLevelCS);
 				if (result == null) result = caseRootPackageCS(topLevelCS);
 				if (result == null) result = casePackageOwnerCS(topLevelCS);
 				if (result == null) result = caseRootCS(topLevelCS);
@@ -236,8 +398,70 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case QVTimperativeCSPackage.TRANSFORMATION_CS: {
+				TransformationCS transformationCS = (TransformationCS)theEObject;
+				T result = caseTransformationCS(transformationCS);
+				if (result == null) result = caseAbstractTransformationCS(transformationCS);
+				if (result == null) result = caseClassCS(transformationCS);
+				if (result == null) result = caseNamedElementCS(transformationCS);
+				if (result == null) result = caseTypeCS(transformationCS);
+				if (result == null) result = caseTemplateableElementCS(transformationCS);
+				if (result == null) result = caseModelElementCS(transformationCS);
+				if (result == null) result = caseNameable(transformationCS);
+				if (result == null) result = casePivotableElementCS(transformationCS);
+				if (result == null) result = caseElementCS(transformationCS);
+				if (result == null) result = casePivotable(transformationCS);
+				if (result == null) result = caseVisitableCS(transformationCS);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case QVTimperativeCSPackage.UNREALIZED_VARIABLE_CS: {
+				UnrealizedVariableCS unrealizedVariableCS = (UnrealizedVariableCS)theEObject;
+				T result = caseUnrealizedVariableCS(unrealizedVariableCS);
+				if (result == null) result = caseRealizeableVariableCS(unrealizedVariableCS);
+				if (result == null) result = caseTypedElementCS(unrealizedVariableCS);
+				if (result == null) result = caseNamedElementCS(unrealizedVariableCS);
+				if (result == null) result = caseModelElementCS(unrealizedVariableCS);
+				if (result == null) result = caseNameable(unrealizedVariableCS);
+				if (result == null) result = casePivotableElementCS(unrealizedVariableCS);
+				if (result == null) result = caseElementCS(unrealizedVariableCS);
+				if (result == null) result = casePivotable(unrealizedVariableCS);
+				if (result == null) result = caseVisitableCS(unrealizedVariableCS);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Area CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Area CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAreaCS(org.eclipse.qvtd.xtext.qvtimperativecs.AreaCS object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Bottom Pattern CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Bottom Pattern CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseBottomPatternCS(BottomPatternCS object) {
+		return null;
 	}
 
 	/**
@@ -252,6 +476,66 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseConnectionStatementCS(ConnectionStatementCS object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Direction CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Direction CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDirectionCS(DirectionCS object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Domain CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Domain CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDomainCS(org.eclipse.qvtd.xtext.qvtimperativecs.DomainCS object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Enforcement Operation CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Enforcement Operation CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseEnforcementOperationCS(EnforcementOperationCS object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Guard Pattern CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Guard Pattern CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseGuardPatternCS(GuardPatternCS object) {
 		return null;
 	}
 
@@ -346,6 +630,111 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Param Declaration CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Param Declaration CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseParamDeclarationCS(ParamDeclarationCS object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Pattern CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Pattern CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePatternCS(PatternCS object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Predicate CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Predicate CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePredicateCS(PredicateCS object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Predicate Or Assignment CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Predicate Or Assignment CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePredicateOrAssignmentCS(org.eclipse.qvtd.xtext.qvtimperativecs.PredicateOrAssignmentCS object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Query CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Query CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseQueryCS(QueryCS object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Realizeable Variable CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Realizeable Variable CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseRealizeableVariableCS(org.eclipse.qvtd.xtext.qvtimperativecs.RealizeableVariableCS object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Realized Variable CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Realized Variable CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseRealizedVariableCS(org.eclipse.qvtd.xtext.qvtimperativecs.RealizedVariableCS object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Top Level CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -357,6 +746,36 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseTopLevelCS(TopLevelCS object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Transformation CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Transformation CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTransformationCS(TransformationCS object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Unrealized Variable CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Unrealized Variable CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseUnrealizedVariableCS(UnrealizedVariableCS object) {
 		return null;
 	}
 
@@ -511,21 +930,6 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Abstract Mapping CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Abstract Mapping CS</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseAbstractMappingCS(AbstractMappingCS object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Exp CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -541,21 +945,6 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Predicate Or Assignment CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Predicate Or Assignment CS</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T casePredicateOrAssignmentCS(PredicateOrAssignmentCS object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Typed Element CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -567,36 +956,6 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseTypedElementCS(TypedElementCS object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Realizeable Variable CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Realizeable Variable CS</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseRealizeableVariableCS(RealizeableVariableCS object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Realized Variable CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Realized Variable CS</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseRealizedVariableCS(RealizedVariableCS object) {
 		return null;
 	}
 
@@ -646,47 +1005,62 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Abstract Top Level CS</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Type CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Abstract Top Level CS</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Type CS</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseAbstractTopLevelCS(AbstractTopLevelCS object) {
+	public T caseTypeCS(TypeCS object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Area CS</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Templateable Element CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Area CS</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Templateable Element CS</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseAreaCS(AreaCS object) {
+	public T caseTemplateableElementCS(TemplateableElementCS object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Domain CS</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Class CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Domain CS</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Class CS</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseDomainCS(DomainCS object) {
+	public T caseClassCS(ClassCS object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Abstract Transformation CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Abstract Transformation CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAbstractTransformationCS(AbstractTransformationCS object) {
 		return null;
 	}
 

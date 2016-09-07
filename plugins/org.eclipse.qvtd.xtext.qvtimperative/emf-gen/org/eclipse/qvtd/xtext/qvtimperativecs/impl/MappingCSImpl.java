@@ -21,9 +21,10 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.xtext.basecs.PathNameCS;
+import org.eclipse.ocl.xtext.basecs.impl.NamedElementCSImpl;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
-import org.eclipse.qvtd.xtext.qvtcorebasecs.impl.AbstractMappingCSImpl;
+import org.eclipse.qvtd.xtext.qvtimperativecs.DomainCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingSequenceCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage;
@@ -37,14 +38,54 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCSImpl#isIsDefault <em>Is Default</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCSImpl#getOwnedDomains <em>Owned Domains</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCSImpl#getOwnedInPathName <em>Owned In Path Name</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCSImpl#getOwnedKeyExpression <em>Owned Key Expression</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCSImpl#getOwnedMappingSequence <em>Owned Mapping Sequence</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCSImpl#getOwnedMiddle <em>Owned Middle</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCSImpl#getOwnedUsesPathNames <em>Owned Uses Path Names</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class MappingCSImpl extends AbstractMappingCSImpl implements MappingCS {
+public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
+	/**
+	 * The default value of the '{@link #isIsDefault() <em>Is Default</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsDefault()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean IS_DEFAULT_EDEFAULT = false;
+	/**
+	 * The cached value of the '{@link #isIsDefault() <em>Is Default</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsDefault()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean isDefault = IS_DEFAULT_EDEFAULT;
+	/**
+	 * The cached value of the '{@link #getOwnedDomains() <em>Owned Domains</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOwnedDomains()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<DomainCS> ownedDomains;
+	/**
+	 * The cached value of the '{@link #getOwnedInPathName() <em>Owned In Path Name</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOwnedInPathName()
+	 * @generated
+	 * @ordered
+	 */
+	protected PathNameCS ownedInPathName;
 	/**
 	 * The cached value of the '{@link #getOwnedKeyExpression() <em>Owned Key Expression</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -63,6 +104,15 @@ public class MappingCSImpl extends AbstractMappingCSImpl implements MappingCS {
 	 * @ordered
 	 */
 	protected MappingSequenceCS ownedMappingSequence;
+	/**
+	 * The cached value of the '{@link #getOwnedMiddle() <em>Owned Middle</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOwnedMiddle()
+	 * @generated
+	 * @ordered
+	 */
+	protected DomainCS ownedMiddle;
 	/**
 	 * The cached value of the '{@link #getOwnedUsesPathNames() <em>Owned Uses Path Names</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -89,6 +139,87 @@ public class MappingCSImpl extends AbstractMappingCSImpl implements MappingCS {
 	@Override
 	protected EClass eStaticClass() {
 		return QVTimperativeCSPackage.Literals.MAPPING_CS;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean isIsDefault() {
+		return isDefault;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setIsDefault(boolean newIsDefault) {
+		boolean oldIsDefault = isDefault;
+		isDefault = newIsDefault;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.MAPPING_CS__IS_DEFAULT, oldIsDefault, isDefault));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EList<DomainCS> getOwnedDomains() {
+		if (ownedDomains == null) {
+			ownedDomains = new EObjectContainmentEList<DomainCS>(DomainCS.class, this, QVTimperativeCSPackage.MAPPING_CS__OWNED_DOMAINS);
+		}
+		return ownedDomains;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public PathNameCS getOwnedInPathName() {
+		return ownedInPathName;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetOwnedInPathName(PathNameCS newOwnedInPathName, NotificationChain msgs) {
+		PathNameCS oldOwnedInPathName = ownedInPathName;
+		ownedInPathName = newOwnedInPathName;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.MAPPING_CS__OWNED_IN_PATH_NAME, oldOwnedInPathName, newOwnedInPathName);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setOwnedInPathName(PathNameCS newOwnedInPathName) {
+		if (newOwnedInPathName != ownedInPathName) {
+			NotificationChain msgs = null;
+			if (ownedInPathName != null)
+				msgs = ((InternalEObject)ownedInPathName).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTimperativeCSPackage.MAPPING_CS__OWNED_IN_PATH_NAME, null, msgs);
+			if (newOwnedInPathName != null)
+				msgs = ((InternalEObject)newOwnedInPathName).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTimperativeCSPackage.MAPPING_CS__OWNED_IN_PATH_NAME, null, msgs);
+			msgs = basicSetOwnedInPathName(newOwnedInPathName, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.MAPPING_CS__OWNED_IN_PATH_NAME, newOwnedInPathName, newOwnedInPathName));
 	}
 
 	/**
@@ -187,6 +318,51 @@ public class MappingCSImpl extends AbstractMappingCSImpl implements MappingCS {
 	 * @generated
 	 */
 	@Override
+	public DomainCS getOwnedMiddle() {
+		return ownedMiddle;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetOwnedMiddle(DomainCS newOwnedMiddle, NotificationChain msgs) {
+		DomainCS oldOwnedMiddle = ownedMiddle;
+		ownedMiddle = newOwnedMiddle;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.MAPPING_CS__OWNED_MIDDLE, oldOwnedMiddle, newOwnedMiddle);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setOwnedMiddle(DomainCS newOwnedMiddle) {
+		if (newOwnedMiddle != ownedMiddle) {
+			NotificationChain msgs = null;
+			if (ownedMiddle != null)
+				msgs = ((InternalEObject)ownedMiddle).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTimperativeCSPackage.MAPPING_CS__OWNED_MIDDLE, null, msgs);
+			if (newOwnedMiddle != null)
+				msgs = ((InternalEObject)newOwnedMiddle).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTimperativeCSPackage.MAPPING_CS__OWNED_MIDDLE, null, msgs);
+			msgs = basicSetOwnedMiddle(newOwnedMiddle, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.MAPPING_CS__OWNED_MIDDLE, newOwnedMiddle, newOwnedMiddle));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EList<PathNameCS> getOwnedUsesPathNames() {
 		if (ownedUsesPathNames == null) {
 			ownedUsesPathNames = new EObjectContainmentEList<PathNameCS>(PathNameCS.class, this, QVTimperativeCSPackage.MAPPING_CS__OWNED_USES_PATH_NAMES);
@@ -200,12 +376,28 @@ public class MappingCSImpl extends AbstractMappingCSImpl implements MappingCS {
 	 * @generated
 	 */
 	@Override
+	public String toString() {
+		return super.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case QVTimperativeCSPackage.MAPPING_CS__OWNED_DOMAINS:
+				return ((InternalEList<?>)getOwnedDomains()).basicRemove(otherEnd, msgs);
+			case QVTimperativeCSPackage.MAPPING_CS__OWNED_IN_PATH_NAME:
+				return basicSetOwnedInPathName(null, msgs);
 			case QVTimperativeCSPackage.MAPPING_CS__OWNED_KEY_EXPRESSION:
 				return basicSetOwnedKeyExpression(null, msgs);
 			case QVTimperativeCSPackage.MAPPING_CS__OWNED_MAPPING_SEQUENCE:
 				return basicSetOwnedMappingSequence(null, msgs);
+			case QVTimperativeCSPackage.MAPPING_CS__OWNED_MIDDLE:
+				return basicSetOwnedMiddle(null, msgs);
 			case QVTimperativeCSPackage.MAPPING_CS__OWNED_USES_PATH_NAMES:
 				return ((InternalEList<?>)getOwnedUsesPathNames()).basicRemove(otherEnd, msgs);
 		}
@@ -220,10 +412,18 @@ public class MappingCSImpl extends AbstractMappingCSImpl implements MappingCS {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case QVTimperativeCSPackage.MAPPING_CS__IS_DEFAULT:
+				return isIsDefault();
+			case QVTimperativeCSPackage.MAPPING_CS__OWNED_DOMAINS:
+				return getOwnedDomains();
+			case QVTimperativeCSPackage.MAPPING_CS__OWNED_IN_PATH_NAME:
+				return getOwnedInPathName();
 			case QVTimperativeCSPackage.MAPPING_CS__OWNED_KEY_EXPRESSION:
 				return getOwnedKeyExpression();
 			case QVTimperativeCSPackage.MAPPING_CS__OWNED_MAPPING_SEQUENCE:
 				return getOwnedMappingSequence();
+			case QVTimperativeCSPackage.MAPPING_CS__OWNED_MIDDLE:
+				return getOwnedMiddle();
 			case QVTimperativeCSPackage.MAPPING_CS__OWNED_USES_PATH_NAMES:
 				return getOwnedUsesPathNames();
 		}
@@ -239,11 +439,24 @@ public class MappingCSImpl extends AbstractMappingCSImpl implements MappingCS {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case QVTimperativeCSPackage.MAPPING_CS__IS_DEFAULT:
+				setIsDefault((Boolean)newValue);
+				return;
+			case QVTimperativeCSPackage.MAPPING_CS__OWNED_DOMAINS:
+				getOwnedDomains().clear();
+				getOwnedDomains().addAll((Collection<? extends DomainCS>)newValue);
+				return;
+			case QVTimperativeCSPackage.MAPPING_CS__OWNED_IN_PATH_NAME:
+				setOwnedInPathName((PathNameCS)newValue);
+				return;
 			case QVTimperativeCSPackage.MAPPING_CS__OWNED_KEY_EXPRESSION:
 				setOwnedKeyExpression((ExpCS)newValue);
 				return;
 			case QVTimperativeCSPackage.MAPPING_CS__OWNED_MAPPING_SEQUENCE:
 				setOwnedMappingSequence((MappingSequenceCS)newValue);
+				return;
+			case QVTimperativeCSPackage.MAPPING_CS__OWNED_MIDDLE:
+				setOwnedMiddle((DomainCS)newValue);
 				return;
 			case QVTimperativeCSPackage.MAPPING_CS__OWNED_USES_PATH_NAMES:
 				getOwnedUsesPathNames().clear();
@@ -261,11 +474,23 @@ public class MappingCSImpl extends AbstractMappingCSImpl implements MappingCS {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case QVTimperativeCSPackage.MAPPING_CS__IS_DEFAULT:
+				setIsDefault(IS_DEFAULT_EDEFAULT);
+				return;
+			case QVTimperativeCSPackage.MAPPING_CS__OWNED_DOMAINS:
+				getOwnedDomains().clear();
+				return;
+			case QVTimperativeCSPackage.MAPPING_CS__OWNED_IN_PATH_NAME:
+				setOwnedInPathName((PathNameCS)null);
+				return;
 			case QVTimperativeCSPackage.MAPPING_CS__OWNED_KEY_EXPRESSION:
 				setOwnedKeyExpression((ExpCS)null);
 				return;
 			case QVTimperativeCSPackage.MAPPING_CS__OWNED_MAPPING_SEQUENCE:
 				setOwnedMappingSequence((MappingSequenceCS)null);
+				return;
+			case QVTimperativeCSPackage.MAPPING_CS__OWNED_MIDDLE:
+				setOwnedMiddle((DomainCS)null);
 				return;
 			case QVTimperativeCSPackage.MAPPING_CS__OWNED_USES_PATH_NAMES:
 				getOwnedUsesPathNames().clear();
@@ -282,10 +507,18 @@ public class MappingCSImpl extends AbstractMappingCSImpl implements MappingCS {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case QVTimperativeCSPackage.MAPPING_CS__IS_DEFAULT:
+				return isDefault != IS_DEFAULT_EDEFAULT;
+			case QVTimperativeCSPackage.MAPPING_CS__OWNED_DOMAINS:
+				return ownedDomains != null && !ownedDomains.isEmpty();
+			case QVTimperativeCSPackage.MAPPING_CS__OWNED_IN_PATH_NAME:
+				return ownedInPathName != null;
 			case QVTimperativeCSPackage.MAPPING_CS__OWNED_KEY_EXPRESSION:
 				return ownedKeyExpression != null;
 			case QVTimperativeCSPackage.MAPPING_CS__OWNED_MAPPING_SEQUENCE:
 				return ownedMappingSequence != null;
+			case QVTimperativeCSPackage.MAPPING_CS__OWNED_MIDDLE:
+				return ownedMiddle != null;
 			case QVTimperativeCSPackage.MAPPING_CS__OWNED_USES_PATH_NAMES:
 				return ownedUsesPathNames != null && !ownedUsesPathNames.isEmpty();
 		}

@@ -16,8 +16,6 @@ package org.eclipse.qvtd.xtext.qvtimperativecs;
 
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
 
-import org.eclipse.qvtd.xtext.qvtcorebasecs.RealizedVariableCS;
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Imperative Realized Variable CS</b></em>'.
@@ -34,7 +32,7 @@ import org.eclipse.qvtd.xtext.qvtcorebasecs.RealizedVariableCS;
  * @model
  * @generated
  */
-public interface ImperativeRealizedVariableCS extends RealizedVariableCS {
+public interface ImperativeRealizedVariableCS extends org.eclipse.qvtd.xtext.qvtimperativecs.RealizedVariableCS {
 	/**
 	 * Returns the value of the '<em><b>Owned Init Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.ocl.pivot.utilities.Pivotable;
+import org.eclipse.ocl.xtext.basecs.ClassCS;
 import org.eclipse.ocl.xtext.basecs.ElementCS;
 import org.eclipse.ocl.xtext.basecs.ModelElementCS;
 import org.eclipse.ocl.xtext.basecs.NamedElementCS;
@@ -24,16 +25,12 @@ import org.eclipse.ocl.xtext.basecs.PackageOwnerCS;
 import org.eclipse.ocl.xtext.basecs.PivotableElementCS;
 import org.eclipse.ocl.xtext.basecs.RootCS;
 import org.eclipse.ocl.xtext.basecs.RootPackageCS;
+import org.eclipse.ocl.xtext.basecs.TemplateableElementCS;
+import org.eclipse.ocl.xtext.basecs.TypeCS;
 import org.eclipse.ocl.xtext.basecs.TypedElementCS;
 import org.eclipse.ocl.xtext.basecs.util.VisitableCS;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
-import org.eclipse.qvtd.xtext.qvtcorebasecs.AbstractMappingCS;
-import org.eclipse.qvtd.xtext.qvtcorebasecs.AbstractTopLevelCS;
-import org.eclipse.qvtd.xtext.qvtcorebasecs.AreaCS;
-import org.eclipse.qvtd.xtext.qvtcorebasecs.DomainCS;
-import org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateOrAssignmentCS;
-import org.eclipse.qvtd.xtext.qvtcorebasecs.RealizeableVariableCS;
-import org.eclipse.qvtd.xtext.qvtcorebasecs.RealizedVariableCS;
+import org.eclipse.qvtd.xtext.qvtbasecs.AbstractTransformationCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.*;
 
 /**
@@ -93,8 +90,32 @@ public class QVTimperativeCSAdapterFactory extends AdapterFactoryImpl {
 	protected QVTimperativeCSSwitch<@Nullable Adapter> modelSwitch =
 		new QVTimperativeCSSwitch<@Nullable Adapter>() {
 			@Override
+			public Adapter caseAreaCS(org.eclipse.qvtd.xtext.qvtimperativecs.AreaCS object) {
+				return createAreaCSAdapter();
+			}
+			@Override
+			public Adapter caseBottomPatternCS(BottomPatternCS object) {
+				return createBottomPatternCSAdapter();
+			}
+			@Override
 			public Adapter caseConnectionStatementCS(ConnectionStatementCS object) {
 				return createConnectionStatementCSAdapter();
+			}
+			@Override
+			public Adapter caseDirectionCS(DirectionCS object) {
+				return createDirectionCSAdapter();
+			}
+			@Override
+			public Adapter caseDomainCS(org.eclipse.qvtd.xtext.qvtimperativecs.DomainCS object) {
+				return createDomainCSAdapter();
+			}
+			@Override
+			public Adapter caseEnforcementOperationCS(EnforcementOperationCS object) {
+				return createEnforcementOperationCSAdapter();
+			}
+			@Override
+			public Adapter caseGuardPatternCS(GuardPatternCS object) {
+				return createGuardPatternCSAdapter();
 			}
 			@Override
 			public Adapter caseImperativeDomainCS(ImperativeDomainCS object) {
@@ -133,8 +154,44 @@ public class QVTimperativeCSAdapterFactory extends AdapterFactoryImpl {
 				return createMappingStatementCSAdapter();
 			}
 			@Override
+			public Adapter caseParamDeclarationCS(ParamDeclarationCS object) {
+				return createParamDeclarationCSAdapter();
+			}
+			@Override
+			public Adapter casePatternCS(PatternCS object) {
+				return createPatternCSAdapter();
+			}
+			@Override
+			public Adapter casePredicateCS(PredicateCS object) {
+				return createPredicateCSAdapter();
+			}
+			@Override
+			public Adapter casePredicateOrAssignmentCS(org.eclipse.qvtd.xtext.qvtimperativecs.PredicateOrAssignmentCS object) {
+				return createPredicateOrAssignmentCSAdapter();
+			}
+			@Override
+			public Adapter caseQueryCS(QueryCS object) {
+				return createQueryCSAdapter();
+			}
+			@Override
+			public Adapter caseRealizeableVariableCS(org.eclipse.qvtd.xtext.qvtimperativecs.RealizeableVariableCS object) {
+				return createRealizeableVariableCSAdapter();
+			}
+			@Override
+			public Adapter caseRealizedVariableCS(org.eclipse.qvtd.xtext.qvtimperativecs.RealizedVariableCS object) {
+				return createRealizedVariableCSAdapter();
+			}
+			@Override
 			public Adapter caseTopLevelCS(TopLevelCS object) {
 				return createTopLevelCSAdapter();
+			}
+			@Override
+			public Adapter caseTransformationCS(TransformationCS object) {
+				return createTransformationCSAdapter();
+			}
+			@Override
+			public Adapter caseUnrealizedVariableCS(UnrealizedVariableCS object) {
+				return createUnrealizedVariableCSAdapter();
 			}
 			@Override
 			public Adapter caseVisitableCS(VisitableCS object) {
@@ -165,36 +222,12 @@ public class QVTimperativeCSAdapterFactory extends AdapterFactoryImpl {
 				return createNamedElementCSAdapter();
 			}
 			@Override
-			public Adapter caseAreaCS(AreaCS object) {
-				return createAreaCSAdapter();
-			}
-			@Override
-			public Adapter caseDomainCS(DomainCS object) {
-				return createDomainCSAdapter();
-			}
-			@Override
 			public Adapter caseExpCS(ExpCS object) {
 				return createExpCSAdapter();
 			}
 			@Override
-			public Adapter casePredicateOrAssignmentCS(PredicateOrAssignmentCS object) {
-				return createPredicateOrAssignmentCSAdapter();
-			}
-			@Override
 			public Adapter caseTypedElementCS(TypedElementCS object) {
 				return createTypedElementCSAdapter();
-			}
-			@Override
-			public Adapter caseRealizeableVariableCS(RealizeableVariableCS object) {
-				return createRealizeableVariableCSAdapter();
-			}
-			@Override
-			public Adapter caseRealizedVariableCS(RealizedVariableCS object) {
-				return createRealizedVariableCSAdapter();
-			}
-			@Override
-			public Adapter caseAbstractMappingCS(AbstractMappingCS object) {
-				return createAbstractMappingCSAdapter();
 			}
 			@Override
 			public Adapter casePackageOwnerCS(PackageOwnerCS object) {
@@ -209,8 +242,20 @@ public class QVTimperativeCSAdapterFactory extends AdapterFactoryImpl {
 				return createRootPackageCSAdapter();
 			}
 			@Override
-			public Adapter caseAbstractTopLevelCS(AbstractTopLevelCS object) {
-				return createAbstractTopLevelCSAdapter();
+			public Adapter caseTypeCS(TypeCS object) {
+				return createTypeCSAdapter();
+			}
+			@Override
+			public Adapter caseTemplateableElementCS(TemplateableElementCS object) {
+				return createTemplateableElementCSAdapter();
+			}
+			@Override
+			public Adapter caseClassCS(ClassCS object) {
+				return createClassCSAdapter();
+			}
+			@Override
+			public Adapter caseAbstractTransformationCS(AbstractTransformationCS object) {
+				return createAbstractTransformationCSAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -243,6 +288,20 @@ public class QVTimperativeCSAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createConnectionStatementCSAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS <em>Direction CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS
+	 * @generated
+	 */
+	public Adapter createDirectionCSAdapter() {
 		return null;
 	}
 
@@ -331,6 +390,48 @@ public class QVTimperativeCSAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.ParamDeclarationCS <em>Param Declaration CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.ParamDeclarationCS
+	 * @generated
+	 */
+	public Adapter createParamDeclarationCSAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.PatternCS <em>Pattern CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.PatternCS
+	 * @generated
+	 */
+	public Adapter createPatternCSAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.PredicateCS <em>Predicate CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.PredicateCS
+	 * @generated
+	 */
+	public Adapter createPredicateCSAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.TopLevelCS <em>Top Level CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -341,6 +442,34 @@ public class QVTimperativeCSAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createTopLevelCSAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.TransformationCS <em>Transformation CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.TransformationCS
+	 * @generated
+	 */
+	public Adapter createTransformationCSAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.UnrealizedVariableCS <em>Unrealized Variable CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.UnrealizedVariableCS
+	 * @generated
+	 */
+	public Adapter createUnrealizedVariableCSAdapter() {
 		return null;
 	}
 
@@ -485,20 +614,6 @@ public class QVTimperativeCSAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.AbstractMappingCS <em>Abstract Mapping CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.AbstractMappingCS
-	 * @generated
-	 */
-	public Adapter createAbstractMappingCSAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.xtext.essentialoclcs.ExpCS <em>Exp CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -513,16 +628,30 @@ public class QVTimperativeCSAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateOrAssignmentCS <em>Predicate Or Assignment CS</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.PredicateOrAssignmentCS <em>Predicate Or Assignment CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateOrAssignmentCS
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.PredicateOrAssignmentCS
 	 * @generated
 	 */
 	public Adapter createPredicateOrAssignmentCSAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.QueryCS <em>Query CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QueryCS
+	 * @generated
+	 */
+	public Adapter createQueryCSAdapter() {
 		return null;
 	}
 
@@ -541,13 +670,13 @@ public class QVTimperativeCSAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.RealizeableVariableCS <em>Realizeable Variable CS</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.RealizeableVariableCS <em>Realizeable Variable CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.RealizeableVariableCS
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.RealizeableVariableCS
 	 * @generated
 	 */
 	public Adapter createRealizeableVariableCSAdapter() {
@@ -555,13 +684,13 @@ public class QVTimperativeCSAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.RealizedVariableCS <em>Realized Variable CS</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.RealizedVariableCS <em>Realized Variable CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.RealizedVariableCS
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.RealizedVariableCS
 	 * @generated
 	 */
 	public Adapter createRealizedVariableCSAdapter() {
@@ -611,27 +740,69 @@ public class QVTimperativeCSAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.AbstractTopLevelCS <em>Abstract Top Level CS</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.xtext.basecs.TypeCS <em>Type CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.AbstractTopLevelCS
+	 * @see org.eclipse.ocl.xtext.basecs.TypeCS
 	 * @generated
 	 */
-	public Adapter createAbstractTopLevelCSAdapter() {
+	public Adapter createTypeCSAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.AreaCS <em>Area CS</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.xtext.basecs.TemplateableElementCS <em>Templateable Element CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.AreaCS
+	 * @see org.eclipse.ocl.xtext.basecs.TemplateableElementCS
+	 * @generated
+	 */
+	public Adapter createTemplateableElementCSAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.xtext.basecs.ClassCS <em>Class CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.ocl.xtext.basecs.ClassCS
+	 * @generated
+	 */
+	public Adapter createClassCSAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtbasecs.AbstractTransformationCS <em>Abstract Transformation CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.xtext.qvtbasecs.AbstractTransformationCS
+	 * @generated
+	 */
+	public Adapter createAbstractTransformationCSAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.AreaCS <em>Area CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.AreaCS
 	 * @generated
 	 */
 	public Adapter createAreaCSAdapter() {
@@ -639,16 +810,58 @@ public class QVTimperativeCSAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.DomainCS <em>Domain CS</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.BottomPatternCS <em>Bottom Pattern CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.DomainCS
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.BottomPatternCS
+	 * @generated
+	 */
+	public Adapter createBottomPatternCSAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.DomainCS <em>Domain CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.DomainCS
 	 * @generated
 	 */
 	public Adapter createDomainCSAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.EnforcementOperationCS <em>Enforcement Operation CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.EnforcementOperationCS
+	 * @generated
+	 */
+	public Adapter createEnforcementOperationCSAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.GuardPatternCS <em>Guard Pattern CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.GuardPatternCS
+	 * @generated
+	 */
+	public Adapter createGuardPatternCSAdapter() {
 		return null;
 	}
 

@@ -28,7 +28,7 @@ import org.eclipse.jdt.annotation.Nullable;
  */
  @Deprecated
 public abstract class AbstractNullQVTcoreCSVisitor<@Nullable R, C>
-	extends org.eclipse.qvtd.xtext.qvtcorebasecs.util.AbstractNullQVTcoreBaseCSVisitor<R, C> implements QVTcoreCSVisitor<R>
+	extends org.eclipse.qvtd.xtext.qvtbasecs.util.AbstractNullQVTbaseCSVisitor<R, C> implements QVTcoreCSVisitor<R>
 {
 	/**
 	 * Initializes me with an initial value for my result.
@@ -40,12 +40,87 @@ public abstract class AbstractNullQVTcoreCSVisitor<@Nullable R, C>
 	}	
 
 	@Override
+	public R visitAreaCS(org.eclipse.qvtd.xtext.qvtcorecs.@NonNull AreaCS object) {
+		return null;
+	}
+
+	@Override
+	public R visitBottomPatternCS(org.eclipse.qvtd.xtext.qvtcorecs.@NonNull BottomPatternCS object) {
+		return null;
+	}
+
+	@Override
+	public R visitDirectionCS(org.eclipse.qvtd.xtext.qvtcorecs.@NonNull DirectionCS object) {
+		return null;
+	}
+
+	@Override
+	public R visitDomainCS(org.eclipse.qvtd.xtext.qvtcorecs.@NonNull DomainCS object) {
+		return null;
+	}
+
+	@Override
+	public R visitEnforcementOperationCS(org.eclipse.qvtd.xtext.qvtcorecs.@NonNull EnforcementOperationCS object) {
+		return null;
+	}
+
+	@Override
+	public R visitGuardPatternCS(org.eclipse.qvtd.xtext.qvtcorecs.@NonNull GuardPatternCS object) {
+		return null;
+	}
+
+	@Override
 	public R visitMappingCS(org.eclipse.qvtd.xtext.qvtcorecs.@NonNull MappingCS object) {
 		return null;
 	}
 
 	@Override
+	public R visitParamDeclarationCS(org.eclipse.qvtd.xtext.qvtcorecs.@NonNull ParamDeclarationCS object) {
+		return null;
+	}
+
+	@Override
+	public R visitPatternCS(org.eclipse.qvtd.xtext.qvtcorecs.@NonNull PatternCS object) {
+		return null;
+	}
+
+	@Override
+	public R visitPredicateCS(org.eclipse.qvtd.xtext.qvtcorecs.@NonNull PredicateCS object) {
+		return null;
+	}
+
+	@Override
+	public R visitPredicateOrAssignmentCS(org.eclipse.qvtd.xtext.qvtcorecs.@NonNull PredicateOrAssignmentCS object) {
+		return null;
+	}
+
+	@Override
+	public R visitQueryCS(org.eclipse.qvtd.xtext.qvtcorecs.@NonNull QueryCS object) {
+		return null;
+	}
+
+	@Override
+	public R visitRealizeableVariableCS(org.eclipse.qvtd.xtext.qvtcorecs.@NonNull RealizeableVariableCS object) {
+		return null;
+	}
+
+	@Override
+	public R visitRealizedVariableCS(org.eclipse.qvtd.xtext.qvtcorecs.@NonNull RealizedVariableCS object) {
+		return null;
+	}
+
+	@Override
 	public R visitTopLevelCS(org.eclipse.qvtd.xtext.qvtcorecs.@NonNull TopLevelCS object) {
+		return null;
+	}
+
+	@Override
+	public R visitTransformationCS(org.eclipse.qvtd.xtext.qvtcorecs.@NonNull TransformationCS object) {
+		return null;
+	}
+
+	@Override
+	public R visitUnrealizedVariableCS(org.eclipse.qvtd.xtext.qvtcorecs.@NonNull UnrealizedVariableCS object) {
 		return null;
 	}
 }

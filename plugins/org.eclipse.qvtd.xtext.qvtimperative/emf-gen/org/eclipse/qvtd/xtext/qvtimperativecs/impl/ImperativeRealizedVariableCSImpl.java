@@ -28,8 +28,6 @@ import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
 
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
 
-import org.eclipse.qvtd.xtext.qvtcorebasecs.impl.RealizedVariableCSImpl;
-
 import org.eclipse.qvtd.xtext.qvtimperativecs.ImperativeRealizedVariableCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage;
 
@@ -48,7 +46,7 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
  *
  * @generated
  */
-public class ImperativeRealizedVariableCSImpl extends RealizedVariableCSImpl implements ImperativeRealizedVariableCS {
+public class ImperativeRealizedVariableCSImpl extends org.eclipse.qvtd.xtext.qvtimperativecs.impl.RealizedVariableCSImpl implements ImperativeRealizedVariableCS {
 	/**
 	 * The cached value of the '{@link #getOwnedInitExpression() <em>Owned Init Expression</em>}' containment reference.
 	 * <!-- begin-user-doc -->

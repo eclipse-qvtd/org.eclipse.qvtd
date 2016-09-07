@@ -22,7 +22,6 @@ import org.eclipse.jdt.annotation.NonNull;
 
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
 
-import org.eclipse.qvtd.xtext.qvtcorebasecs.impl.PredicateOrAssignmentCSImpl;
 import org.eclipse.qvtd.xtext.qvtimperativecs.ImperativePredicateOrAssignmentCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage;
 
@@ -41,7 +40,7 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
  *
  * @generated
  */
-public class ImperativePredicateOrAssignmentCSImpl extends PredicateOrAssignmentCSImpl implements ImperativePredicateOrAssignmentCS {
+public class ImperativePredicateOrAssignmentCSImpl extends org.eclipse.qvtd.xtext.qvtimperativecs.impl.PredicateOrAssignmentCSImpl implements ImperativePredicateOrAssignmentCS {
 	/**
 	 * The default value of the '{@link #isIsAccumulate() <em>Is Accumulate</em>}' attribute.
 	 * <!-- begin-user-doc -->
