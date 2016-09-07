@@ -38,18 +38,10 @@ Workflow {
     	baseGenModelFile = "model/BaseCS.genmodel"
     }
     component = @SubGenerateCSModel { resourceSet = resourceSet
-    	projectName = "org.eclipse.qvtd.xtext.qvtcorebase"
-    	genModelFile = "model/QVTcoreBaseCS.genmodel"
-    	superProjectName = "org.eclipse.qvtd.xtext.qvtbase"
-    	superGenModelFile = "model/QVTbaseCS.genmodel"
-    	baseProjectName = "org.eclipse.ocl.xtext.base"
-    	baseGenModelFile = "model/BaseCS.genmodel"
-    }
-    component = @SubGenerateCSModel { resourceSet = resourceSet
     	projectName = "org.eclipse.qvtd.xtext.qvtimperative"
     	genModelFile = "model/QVTimperativeCS.genmodel"
-    	superProjectName = "org.eclipse.qvtd.xtext.qvtcorebase"
-    	superGenModelFile = "model/QVTcoreBaseCS.genmodel"
+    	superProjectName = "org.eclipse.qvtd.xtext.qvtbase"
+    	superGenModelFile = "model/QVTbaseCS.genmodel"
     	baseProjectName = "org.eclipse.ocl.xtext.base"
     	baseGenModelFile = "model/BaseCS.genmodel"
     }

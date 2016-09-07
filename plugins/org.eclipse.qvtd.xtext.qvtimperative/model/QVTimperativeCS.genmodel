@@ -3,7 +3,7 @@
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="&lt;copyright>&#xD;&#xA;&#xD;&#xA;Copyright (c) 2013, 2017 Willink Transformations and others.&#xD;&#xA;All rights reserved. This program and the accompanying materials&#xD;&#xA;are made available under the terms of the Eclipse Public License v1.0&#xD;&#xA;which accompanies this distribution, and is available at&#xD;&#xA;http://www.eclipse.org/legal/epl-v10.html&#xD;&#xA;&#xD;&#xA;Contributors:&#xD;&#xA;  E.D.Willink - Initial API and implementation&#xD;&#xA;&#xD;&#xA;&lt;/copyright>"
     modelDirectory="/org.eclipse.qvtd.xtext.qvtimperative/emf-gen" modelPluginID="org.eclipse.qvtd.xtext.qvtimperative"
     modelName="QVTimperativeCS" modelPluginClass="" importerID="org.eclipse.emf.importer.ecore"
-    complianceLevel="8.0" copyrightFields="false" runtimeVersion="2.7" usedGenPackages="../../org.eclipse.ocl.xtext.base/model/BaseCS.genmodel#//basecs ../../org.eclipse.ocl.xtext.essentialocl/model/EssentialOCLCS.genmodel#//essentialoclcs ../../org.eclipse.ocl.pivot/model/Pivot.genmodel#//pivot ../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.genmodel#//qvtbase ../../org.eclipse.qvtd.pivot.qvtcorebase/model/QVTcoreBase.genmodel#//qvtcorebase ../../org.eclipse.qvtd.xtext.qvtcorebase/model/QVTcoreBaseCS.genmodel#//qvtcorebasecs ../../org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperative.genmodel#//qvtimperative ../../org.eclipse.qvtd.xtext.qvtbase/model/QVTbaseCS.genmodel#//qvtbasecs">
+    complianceLevel="8.0" copyrightFields="false" runtimeVersion="2.7" usedGenPackages="../../org.eclipse.ocl.xtext.base/model/BaseCS.genmodel#//basecs ../../org.eclipse.ocl.xtext.essentialocl/model/EssentialOCLCS.genmodel#//essentialoclcs ../../org.eclipse.ocl.pivot/model/Pivot.genmodel#//pivot ../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.genmodel#//qvtbase ../../org.eclipse.qvtd.pivot.qvtcorebase/model/QVTcoreBase.genmodel#//qvtcorebase ../../org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperative.genmodel#//qvtimperative ../../org.eclipse.qvtd.xtext.qvtbase/model/QVTbaseCS.genmodel#//qvtbasecs">
   <genAnnotations source="http://www.eclipse.org/OCL/GenModel">
     <details key="Use Null Annotations" value="true"/>
   </genAnnotations>
@@ -15,9 +15,34 @@
   <foreignModel>QVTimperativeCS.ecore</foreignModel>
   <genPackages prefix="QVTimperativeCS" basePackage="org.eclipse.qvtd.xtext" disposableProviderFactory="true"
       fileExtensions="qvtics" ecorePackage="QVTimperativeCS.ecore#/">
+    <genClasses image="false" ecoreClass="QVTimperativeCS.ecore#//AreaCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//AreaCS/ownedGuardPattern"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//AreaCS/ownedBottomPattern"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTimperativeCS.ecore#//BottomPatternCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//BottomPatternCS/ownedEnforcementOperations"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//BottomPatternCS/ownedRealizedVariables"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//BottomPatternCS/ownedConstraints"/>
+    </genClasses>
     <genClasses ecoreClass="QVTimperativeCS.ecore#//ConnectionStatementCS">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//ConnectionStatementCS/ownedExpression"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//ConnectionStatementCS/targetVariable"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTimperativeCS.ecore#//DirectionCS">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//DirectionCS/imports"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//DirectionCS/uses"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTimperativeCS.ecore#//DomainCS">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperativeCS.ecore#//DomainCS/isCheck"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperativeCS.ecore#//DomainCS/isEnforce"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//DomainCS/direction"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTimperativeCS.ecore#//EnforcementOperationCS">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperativeCS.ecore#//EnforcementOperationCS/isDeletion"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//EnforcementOperationCS/ownedOperationCall"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTimperativeCS.ecore#//GuardPatternCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//GuardPatternCS/ownedPredicates"/>
     </genClasses>
     <genClasses ecoreClass="QVTimperativeCS.ecore#//ImperativeDomainCS">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//ImperativeDomainCS/checkedProperties"/>
@@ -30,8 +55,12 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//ImperativeRealizedVariableCS/ownedInitExpression"/>
     </genClasses>
     <genClasses ecoreClass="QVTimperativeCS.ecore#//MappingCS">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperativeCS.ecore#//MappingCS/isDefault"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//MappingCS/ownedDomains"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//MappingCS/ownedInPathName"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//MappingCS/ownedKeyExpression"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//MappingCS/ownedMappingSequence"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//MappingCS/ownedMiddle"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//MappingCS/ownedUsesPathNames"/>
     </genClasses>
     <genClasses ecoreClass="QVTimperativeCS.ecore#//MappingCallBindingCS">
@@ -55,8 +84,106 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//MappingSequenceCS/ownedMappingStatements"/>
     </genClasses>
     <genClasses image="false" ecoreClass="QVTimperativeCS.ecore#//MappingStatementCS"/>
+    <genClasses ecoreClass="QVTimperativeCS.ecore#//ParamDeclarationCS"/>
+    <genClasses image="false" ecoreClass="QVTimperativeCS.ecore#//PatternCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//PatternCS/ownedUnrealizedVariables"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTimperativeCS.ecore#//PredicateCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//PredicateCS/ownedCondition"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTimperativeCS.ecore#//PredicateOrAssignmentCS">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperativeCS.ecore#//PredicateOrAssignmentCS/isDefault"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//PredicateOrAssignmentCS/ownedTarget"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//PredicateOrAssignmentCS/ownedInitExpression"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTimperativeCS.ecore#//QueryCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//QueryCS/ownedPathName"/>
+      <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//QueryCS/transformation"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//QueryCS/ownedParameters"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//QueryCS/ownedExpression"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperativeCS.ecore#//QueryCS/isTransient"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="QVTimperativeCS.ecore#//RealizeableVariableCS"/>
+    <genClasses ecoreClass="QVTimperativeCS.ecore#//RealizedVariableCS"/>
     <genClasses ecoreClass="QVTimperativeCS.ecore#//TopLevelCS">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//TopLevelCS/ownedMappings"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//TopLevelCS/ownedQueries"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//TopLevelCS/ownedTransformations"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTimperativeCS.ecore#//TransformationCS">
+      <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//TransformationCS/package"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//TransformationCS/ownedDirections"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTimperativeCS.ecore#//UnrealizedVariableCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//UnrealizedVariableCS/ownedInitExpression"/>
+    </genClasses>
+  </genPackages>
+  <genPackages prefix="Qvtcorecs" ecorePackage="../../org.eclipse.qvtd.xtext.qvtcore/model/QVTcoreCS.ecore#/">
+    <genClasses image="false" ecoreClass="../../org.eclipse.qvtd.xtext.qvtcore/model/QVTcoreCS.ecore#//AreaCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ../../org.eclipse.qvtd.xtext.qvtcore/model/QVTcoreCS.ecore#//AreaCS/ownedGuardPattern"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ../../org.eclipse.qvtd.xtext.qvtcore/model/QVTcoreCS.ecore#//AreaCS/ownedBottomPattern"/>
+    </genClasses>
+    <genClasses ecoreClass="../../org.eclipse.qvtd.xtext.qvtcore/model/QVTcoreCS.ecore#//BottomPatternCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ../../org.eclipse.qvtd.xtext.qvtcore/model/QVTcoreCS.ecore#//BottomPatternCS/ownedEnforcementOperations"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ../../org.eclipse.qvtd.xtext.qvtcore/model/QVTcoreCS.ecore#//BottomPatternCS/ownedRealizedVariables"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ../../org.eclipse.qvtd.xtext.qvtcore/model/QVTcoreCS.ecore#//BottomPatternCS/ownedConstraints"/>
+    </genClasses>
+    <genClasses ecoreClass="../../org.eclipse.qvtd.xtext.qvtcore/model/QVTcoreCS.ecore#//DirectionCS">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ../../org.eclipse.qvtd.xtext.qvtcore/model/QVTcoreCS.ecore#//DirectionCS/imports"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ../../org.eclipse.qvtd.xtext.qvtcore/model/QVTcoreCS.ecore#//DirectionCS/uses"/>
+    </genClasses>
+    <genClasses ecoreClass="../../org.eclipse.qvtd.xtext.qvtcore/model/QVTcoreCS.ecore#//DomainCS">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../org.eclipse.qvtd.xtext.qvtcore/model/QVTcoreCS.ecore#//DomainCS/isCheck"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../org.eclipse.qvtd.xtext.qvtcore/model/QVTcoreCS.ecore#//DomainCS/isEnforce"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ../../org.eclipse.qvtd.xtext.qvtcore/model/QVTcoreCS.ecore#//DomainCS/direction"/>
+    </genClasses>
+    <genClasses ecoreClass="../../org.eclipse.qvtd.xtext.qvtcore/model/QVTcoreCS.ecore#//EnforcementOperationCS">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../org.eclipse.qvtd.xtext.qvtcore/model/QVTcoreCS.ecore#//EnforcementOperationCS/isDeletion"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ../../org.eclipse.qvtd.xtext.qvtcore/model/QVTcoreCS.ecore#//EnforcementOperationCS/ownedOperationCall"/>
+    </genClasses>
+    <genClasses ecoreClass="../../org.eclipse.qvtd.xtext.qvtcore/model/QVTcoreCS.ecore#//GuardPatternCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ../../org.eclipse.qvtd.xtext.qvtcore/model/QVTcoreCS.ecore#//GuardPatternCS/ownedPredicates"/>
+    </genClasses>
+    <genClasses ecoreClass="../../org.eclipse.qvtd.xtext.qvtcore/model/QVTcoreCS.ecore#//MappingCS">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../org.eclipse.qvtd.xtext.qvtcore/model/QVTcoreCS.ecore#//MappingCS/isDefault"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ../../org.eclipse.qvtd.xtext.qvtcore/model/QVTcoreCS.ecore#//MappingCS/ownedComposedMappings"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ../../org.eclipse.qvtd.xtext.qvtcore/model/QVTcoreCS.ecore#//MappingCS/ownedDomains"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ../../org.eclipse.qvtd.xtext.qvtcore/model/QVTcoreCS.ecore#//MappingCS/ownedInPathName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ../../org.eclipse.qvtd.xtext.qvtcore/model/QVTcoreCS.ecore#//MappingCS/ownedMiddle"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ../../org.eclipse.qvtd.xtext.qvtcore/model/QVTcoreCS.ecore#//MappingCS/refines"/>
+    </genClasses>
+    <genClasses ecoreClass="../../org.eclipse.qvtd.xtext.qvtcore/model/QVTcoreCS.ecore#//ParamDeclarationCS"/>
+    <genClasses image="false" ecoreClass="../../org.eclipse.qvtd.xtext.qvtcore/model/QVTcoreCS.ecore#//PatternCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ../../org.eclipse.qvtd.xtext.qvtcore/model/QVTcoreCS.ecore#//PatternCS/ownedUnrealizedVariables"/>
+    </genClasses>
+    <genClasses ecoreClass="../../org.eclipse.qvtd.xtext.qvtcore/model/QVTcoreCS.ecore#//PredicateCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ../../org.eclipse.qvtd.xtext.qvtcore/model/QVTcoreCS.ecore#//PredicateCS/ownedCondition"/>
+    </genClasses>
+    <genClasses ecoreClass="../../org.eclipse.qvtd.xtext.qvtcore/model/QVTcoreCS.ecore#//PredicateOrAssignmentCS">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../org.eclipse.qvtd.xtext.qvtcore/model/QVTcoreCS.ecore#//PredicateOrAssignmentCS/isDefault"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ../../org.eclipse.qvtd.xtext.qvtcore/model/QVTcoreCS.ecore#//PredicateOrAssignmentCS/ownedTarget"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ../../org.eclipse.qvtd.xtext.qvtcore/model/QVTcoreCS.ecore#//PredicateOrAssignmentCS/ownedInitExpression"/>
+    </genClasses>
+    <genClasses ecoreClass="../../org.eclipse.qvtd.xtext.qvtcore/model/QVTcoreCS.ecore#//QueryCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ../../org.eclipse.qvtd.xtext.qvtcore/model/QVTcoreCS.ecore#//QueryCS/ownedPathName"/>
+      <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference ../../org.eclipse.qvtd.xtext.qvtcore/model/QVTcoreCS.ecore#//QueryCS/transformation"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ../../org.eclipse.qvtd.xtext.qvtcore/model/QVTcoreCS.ecore#//QueryCS/ownedParameters"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ../../org.eclipse.qvtd.xtext.qvtcore/model/QVTcoreCS.ecore#//QueryCS/ownedExpression"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../org.eclipse.qvtd.xtext.qvtcore/model/QVTcoreCS.ecore#//QueryCS/isTransient"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="../../org.eclipse.qvtd.xtext.qvtcore/model/QVTcoreCS.ecore#//RealizeableVariableCS"/>
+    <genClasses ecoreClass="../../org.eclipse.qvtd.xtext.qvtcore/model/QVTcoreCS.ecore#//RealizedVariableCS"/>
+    <genClasses ecoreClass="../../org.eclipse.qvtd.xtext.qvtcore/model/QVTcoreCS.ecore#//TopLevelCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ../../org.eclipse.qvtd.xtext.qvtcore/model/QVTcoreCS.ecore#//TopLevelCS/ownedMappings"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ../../org.eclipse.qvtd.xtext.qvtcore/model/QVTcoreCS.ecore#//TopLevelCS/ownedQueries"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ../../org.eclipse.qvtd.xtext.qvtcore/model/QVTcoreCS.ecore#//TopLevelCS/ownedTransformations"/>
+    </genClasses>
+    <genClasses ecoreClass="../../org.eclipse.qvtd.xtext.qvtcore/model/QVTcoreCS.ecore#//TransformationCS">
+      <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference ../../org.eclipse.qvtd.xtext.qvtcore/model/QVTcoreCS.ecore#//TransformationCS/package"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ../../org.eclipse.qvtd.xtext.qvtcore/model/QVTcoreCS.ecore#//TransformationCS/ownedDirections"/>
+    </genClasses>
+    <genClasses ecoreClass="../../org.eclipse.qvtd.xtext.qvtcore/model/QVTcoreCS.ecore#//UnrealizedVariableCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ../../org.eclipse.qvtd.xtext.qvtcore/model/QVTcoreCS.ecore#//UnrealizedVariableCS/ownedInitExpression"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>
