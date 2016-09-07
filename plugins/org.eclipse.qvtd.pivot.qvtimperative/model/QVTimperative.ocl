@@ -1,5 +1,4 @@
 import 'platform:/resource/org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperative.ecore'
-import 'platform:/resource/org.eclipse.qvtd.pivot.qvtcorebase/model/QVTcoreBase.ecore'
 import 'platform:/resource/org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore'
 --import 'http://www.eclipse.org/ocl/2015/Pivot'
 
@@ -12,8 +11,8 @@ endpackage
 package qvtimperative
 
 context Mapping
-def: allAreas : Set(qvtcorebase::Area) = self.domain.oclAsType(qvtcorebase::Area)->asSet()->including(self)
-def: allGuardPatterns : Set(qvtcorebase::GuardPattern) = allAreas.guardPattern->asSet()
+def: allAreas : Set(qvtimperative::Area) = self.domain.oclAsType(qvtimperative::Area)->asSet()->including(self)
+def: allGuardPatterns : Set(qvtimperative::GuardPattern) = allAreas.guardPattern->asSet()
 def: guardVariables : Set(ocl::Variable) = allGuardPatterns.variable->asSet()
 def: boundGuardVariables : Set(ocl::Variable) = allGuardPatterns.predicate->selectByKind(VariablePredicate).targetVariable->asSet()
 /* Mapping guard variables that are assigned  */
@@ -39,7 +38,7 @@ inv CompatibleBinding: value.type.conformsTo(boundVariable.type) or boundVariabl
 
 endpackage
 
-package qvtcorebase
+package qvtimperative
 
 context Area
 def: mapping : qvtimperative::Mapping = if oclIsKindOf(qvtimperative::Mapping) then self else oclAsType(CoreDomain).rule endif.oclAsType(qvtimperative::Mapping)

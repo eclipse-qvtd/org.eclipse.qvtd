@@ -16,7 +16,6 @@ import "platform:/resource/org.eclipse.ocl.xtext.base/model/BaseCS.ecore" as bas
 import "platform:/resource/org.eclipse.ocl.xtext.essentialocl/model/EssentialOCLCS.ecore" as essentialocl
 import "platform:/resource/org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore" as qvtbase
 import "platform:/resource/org.eclipse.qvtd.xtext.qvtbase/model/QVTbaseCS.ecore" as qvtbasecs
-import "platform:/resource/org.eclipse.qvtd.pivot.qvtcorebase/model/QVTcoreBase.ecore" as qvtcorebase
 import "platform:/resource/org.eclipse.qvtd.pivot.qvtcore/model/QVTcore.ecore" as qvtcore
 import "platform:/resource/org.eclipse.qvtd.xtext.qvtcore/model/QVTcoreCS.ecore"
 
@@ -42,7 +41,7 @@ BottomPatternCS:		// Bug 466385 explains the redundancy below
 	
 DirectionCS: {DirectionCS} name=UnrestrictedName?
 	'imports' imports+=[pivot::Package|UnrestrictedName] (',' imports+=[pivot::Package|UnrestrictedName])*
-	('uses' uses+=[qvtcorebase::CoreDomain|UnrestrictedName] (',' uses+=[qvtcorebase::CoreDomain|UnrestrictedName])*)?
+	('uses' uses+=[qvtcore::CoreDomain|UnrestrictedName] (',' uses+=[qvtcore::CoreDomain|UnrestrictedName])*)?
 ;
 	
 //EnforcementOperationCS: ('creation'|'deletion') ExpCS ';';

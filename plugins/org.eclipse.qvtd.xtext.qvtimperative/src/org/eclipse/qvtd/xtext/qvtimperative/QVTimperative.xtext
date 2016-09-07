@@ -16,7 +16,6 @@ import "platform:/resource/org.eclipse.ocl.xtext.base/model/BaseCS.ecore" as bas
 import "platform:/resource/org.eclipse.ocl.xtext.essentialocl/model/EssentialOCLCS.ecore" as essentialocl
 import "platform:/resource/org.eclipse.qvtd.xtext.qvtbase/model/QVTbaseCS.ecore" as qvtbasecs
 import "platform:/resource/org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore" as qvtbase
-import "platform:/resource/org.eclipse.qvtd.pivot.qvtcorebase/model/QVTcoreBase.ecore" as qvtcorebase
 import "platform:/resource/org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperative.ecore" as qvtimperative
 import "platform:/resource/org.eclipse.qvtd.xtext.qvtimperative/model/QVTimperativeCS.ecore"
 
@@ -44,7 +43,7 @@ ConnectionStatementCS: targetVariable=[pivot::Variable|UnrestrictedName] '+=' ow
 	
 DirectionCS: {DirectionCS} name=UnrestrictedName?
 	'imports' imports+=[pivot::Package|UnrestrictedName] (',' imports+=[pivot::Package|UnrestrictedName])*
-	('uses' uses+=[qvtcorebase::CoreDomain|UnrestrictedName] (',' uses+=[qvtcorebase::CoreDomain|UnrestrictedName])*)?
+	('uses' uses+=[qvtimperative::CoreDomain|UnrestrictedName] (',' uses+=[qvtimperative::CoreDomain|UnrestrictedName])*)?
 ;
 	
 GuardPatternCS:		// Bug 466385 explains the redundancy below

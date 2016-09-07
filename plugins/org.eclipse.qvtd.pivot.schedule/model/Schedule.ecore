@@ -6,7 +6,7 @@
         eType="#//AbstractDatum" eOpposite="#//AbstractDatum/sub"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="sub" upperBound="-1" eType="#//AbstractDatum"
         eOpposite="#//AbstractDatum/super"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="domain" eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtcorebase/model/QVTcoreBase.ecore#//CoreDomain"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="domain" eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtcore/model/QVTcore.ecore#//CoreDomain"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="producedBy" upperBound="-1"
         eType="#//AbstractAction" eOpposite="#//AbstractAction/productions"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="requiredBy" upperBound="-1"

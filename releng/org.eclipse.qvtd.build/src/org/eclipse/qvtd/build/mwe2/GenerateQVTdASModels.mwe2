@@ -60,26 +60,18 @@ Workflow {
 //    	}
     }
     component = @SubGenerateASModel { resourceSet = resourceSet
-    	projectName = "org.eclipse.qvtd.pivot.qvtcorebase"
-    	genModelFile =  "model/QVTcoreBase.genmodel"
+    	projectName = "org.eclipse.qvtd.pivot.qvtcore"
+    	genModelFile =  "model/QVTcore.genmodel"
     	superProjectName = "org.eclipse.qvtd.pivot.qvtbase"
     	superGenModelFile = "model/QVTbase.genmodel"
     	baseProjectName = "org.eclipse.ocl.pivot"
     	baseGenModelFile = "model/Pivot.genmodel"
     }
     component = @SubGenerateASModel { resourceSet = resourceSet
-    	projectName = "org.eclipse.qvtd.pivot.qvtcore"
-    	genModelFile =  "model/QVTcore.genmodel"
-    	superProjectName = "org.eclipse.qvtd.pivot.qvtcorebase"
-    	superGenModelFile = "model/QVTcoreBase.genmodel"
-    	baseProjectName = "org.eclipse.ocl.pivot"
-    	baseGenModelFile = "model/Pivot.genmodel"
-    }
-    component = @SubGenerateASModel { resourceSet = resourceSet
     	projectName = "org.eclipse.qvtd.pivot.qvtimperative"
     	genModelFile =  "model/QVTimperative.genmodel"
-    	superProjectName = "org.eclipse.qvtd.pivot.qvtcorebase"
-    	superGenModelFile = "model/QVTcoreBase.genmodel"
+    	superProjectName = "org.eclipse.qvtd.pivot.qvtbase"
+    	superGenModelFile = "model/QVTbase.genmodel"
     	baseProjectName = "org.eclipse.ocl.pivot"
     	baseGenModelFile = "model/Pivot.genmodel"
     }

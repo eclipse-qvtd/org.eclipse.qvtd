@@ -3,7 +3,7 @@
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="&lt;copyright>&#xD;&#xA;&#xD;&#xA;Copyright (c) 2013, 2017 Willink Transformations and others.&#xD;&#xA;All rights reserved. This program and the accompanying materials&#xD;&#xA;are made available under the terms of the Eclipse Public License v1.0&#xD;&#xA;which accompanies this distribution, and is available at&#xD;&#xA;http://www.eclipse.org/legal/epl-v10.html&#xD;&#xA;&#xD;&#xA;Contributors:&#xD;&#xA;  E.D.Willink - Initial API and implementation&#xD;&#xA;&#xD;&#xA;&lt;/copyright>"
     modelDirectory="/org.eclipse.qvtd.pivot.qvtimperative/emf-gen" modelPluginID="org.eclipse.qvtd.pivot.qvtimperative"
     modelName="QVTimperative" suppressEMFModelTags="true" importerID="org.eclipse.emf.importer.ecore"
-    complianceLevel="8.0" copyrightFields="false" runtimeVersion="2.7" usedGenPackages="../../org.eclipse.ocl.pivot/model/Pivot.genmodel#//pivot ../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.genmodel#//qvtbase ../../org.eclipse.qvtd.pivot.qvtcorebase/model/QVTcoreBase.genmodel#//qvtcorebase"
+    complianceLevel="8.0" copyrightFields="false" runtimeVersion="2.7" usedGenPackages="../../org.eclipse.ocl.pivot/model/Pivot.genmodel#//pivot ../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.genmodel#//qvtbase"
     classNamePattern="">
   <genAnnotations source="http://www.eclipse.org/OCL/GenModel">
     <details key="Use Delegates" value="false"/>
@@ -18,6 +18,25 @@
   <genPackages prefix="QVTimperative" basePackage="org.eclipse.qvtd.pivot" disposableProviderFactory="true"
       contentTypeIdentifier="org.eclipse.qvtd.qvtimperative" fileExtensions="qvtias"
       ecorePackage="QVTimperative.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="QVTimperative.ecore#//EnforcementMode">
+      <genEnumLiterals ecoreEnumLiteral="QVTimperative.ecore#//EnforcementMode/Creation"/>
+      <genEnumLiterals ecoreEnumLiteral="QVTimperative.ecore#//EnforcementMode/Deletion"/>
+    </genEnums>
+    <genClasses image="false" ecoreClass="QVTimperative.ecore#//Area">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//Area/guardPattern"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//Area/bottomPattern"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="QVTimperative.ecore#//Assignment">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference QVTimperative.ecore#//Assignment/bottomPattern"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//Assignment/value"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperative.ecore#//Assignment/isDefault"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTimperative.ecore#//BottomPattern">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference QVTimperative.ecore#//BottomPattern/area"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//BottomPattern/assignment"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//BottomPattern/enforcementOperation"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//BottomPattern/realizedVariable"/>
+    </genClasses>
     <genClasses ecoreClass="QVTimperative.ecore#//ConnectionAssignment">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//ConnectionAssignment/targetVariable"/>
     </genClasses>
@@ -26,6 +45,19 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//ConnectionStatement/value"/>
     </genClasses>
     <genClasses ecoreClass="QVTimperative.ecore#//ConnectionVariable"/>
+    <genClasses ecoreClass="QVTimperative.ecore#//CoreDomain"/>
+    <genClasses ecoreClass="QVTimperative.ecore#//CorePattern">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//CorePattern/variable"/>
+      <genOperations ecoreOperation="QVTimperative.ecore#//CorePattern/getArea"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTimperative.ecore#//EnforcementOperation">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperative.ecore#//EnforcementOperation/enforcementMode"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference QVTimperative.ecore#//EnforcementOperation/bottomPattern"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//EnforcementOperation/operationCallExp"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTimperative.ecore#//GuardPattern">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference QVTimperative.ecore#//GuardPattern/area"/>
+    </genClasses>
     <genClasses image="false" ecoreClass="QVTimperative.ecore#//ImperativeArea">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//ImperativeArea/checkedProperties"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//ImperativeArea/enforcedProperties"/>
@@ -39,7 +71,6 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//Mapping/mappingStatement"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//Mapping/polledClasses"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//Mapping/ownedKeyExpression"/>
-      <genOperations ecoreOperation="QVTimperative.ecore#//Mapping/getAllMappings"/>
     </genClasses>
     <genClasses ecoreClass="QVTimperative.ecore#//MappingCall">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//MappingCall/binding"/>
@@ -60,6 +91,19 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//MappingSequence/mappingStatements"/>
     </genClasses>
     <genClasses image="false" ecoreClass="QVTimperative.ecore#//MappingStatement"/>
+    <genClasses image="false" ecoreClass="QVTimperative.ecore#//NavigationAssignment">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//NavigationAssignment/slotExpression"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTimperative.ecore#//OppositePropertyAssignment">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//OppositePropertyAssignment/targetProperty"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTimperative.ecore#//PropertyAssignment">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//PropertyAssignment/targetProperty"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTimperative.ecore#//RealizedVariable"/>
+    <genClasses ecoreClass="QVTimperative.ecore#//VariableAssignment">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//VariableAssignment/targetVariable"/>
+    </genClasses>
     <genClasses ecoreClass="QVTimperative.ecore#//VariablePredicate">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//VariablePredicate/targetVariable"/>
     </genClasses>

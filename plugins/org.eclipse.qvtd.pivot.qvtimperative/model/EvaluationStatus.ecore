@@ -8,7 +8,6 @@
   <eAnnotations source="http://www.eclipse.org/OCL/Import">
     <details key="ecore" value="http://www.eclipse.org/emf/2002/Ecore"/>
     <details key="qvtb" value="../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#/"/>
-    <details key="qvtcb" value="../../org.eclipse.qvtd.pivot.qvtcorebase/model/QVTcoreBase.ecore#/"/>
     <details key="qvti" value="QVTimperative.ecore#/"/>
   </eAnnotations>
   <eClassifiers xsi:type="ecore:EClass" name="AssociationStatus" eSuperTypes="#//PropertyStatus">
