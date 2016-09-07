@@ -1,24 +1,21 @@
 /**
  * <copyright>
- * 
+ *
  * Copyright (c) 2013, 2017 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
- * 
+ *
  * </copyright>
  */
 package org.eclipse.qvtd.xtext.qvtimperativecs;
 
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.ocl.xtext.basecs.NamedElementCS;
-
-import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
 
 /**
  * <!-- begin-user-doc -->
@@ -56,7 +53,7 @@ public interface DirectionCS extends NamedElementCS {
 
 	/**
 	 * Returns the value of the '<em><b>Uses</b></em>' reference list.
-	 * The list contents are of type {@link org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain}.
+	 * The list contents are of type {@link org.eclipse.qvtd.pivot.qvtimperative.CoreDomain}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Uses</em>' reference list isn't clear,
@@ -68,6 +65,6 @@ public interface DirectionCS extends NamedElementCS {
 	 * @model
 	 * @generated
 	 */
-	EList<CoreDomain> getUses();
+	EList<org.eclipse.qvtd.pivot.qvtimperative.CoreDomain> getUses();
 
 } // DirectionCS

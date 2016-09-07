@@ -17,22 +17,13 @@ package org.eclipse.qvtd.xtext.qvtcorecs.impl;
 import java.util.Collection;
 
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
-
 import org.eclipse.jdt.annotation.NonNull;
-
 import org.eclipse.ocl.xtext.basecs.impl.NamedElementCSImpl;
-
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
-
-import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
-
 import org.eclipse.qvtd.xtext.qvtcorecs.DirectionCS;
 import org.eclipse.qvtd.xtext.qvtcorecs.QVTcoreCSPackage;
-
 import org.eclipse.qvtd.xtext.qvtcorecs.util.QVTcoreCSVisitor;
 
 /**
@@ -68,7 +59,7 @@ public class DirectionCSImpl extends NamedElementCSImpl implements DirectionCS {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<CoreDomain> uses;
+	protected EList<org.eclipse.qvtd.pivot.qvtcore.CoreDomain> uses;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -108,9 +99,9 @@ public class DirectionCSImpl extends NamedElementCSImpl implements DirectionCS {
 	 * @generated
 	 */
 	@Override
-	public EList<CoreDomain> getUses() {
+	public EList<org.eclipse.qvtd.pivot.qvtcore.CoreDomain> getUses() {
 		if (uses == null) {
-			uses = new EObjectResolvingEList<CoreDomain>(CoreDomain.class, this, QVTcoreCSPackage.DIRECTION_CS__USES);
+			uses = new EObjectResolvingEList<org.eclipse.qvtd.pivot.qvtcore.CoreDomain>(org.eclipse.qvtd.pivot.qvtcore.CoreDomain.class, this, QVTcoreCSPackage.DIRECTION_CS__USES);
 		}
 		return uses;
 	}
@@ -146,7 +137,7 @@ public class DirectionCSImpl extends NamedElementCSImpl implements DirectionCS {
 				return;
 			case QVTcoreCSPackage.DIRECTION_CS__USES:
 				getUses().clear();
-				getUses().addAll((Collection<? extends CoreDomain>)newValue);
+				getUses().addAll((Collection<? extends org.eclipse.qvtd.pivot.qvtcore.CoreDomain>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
