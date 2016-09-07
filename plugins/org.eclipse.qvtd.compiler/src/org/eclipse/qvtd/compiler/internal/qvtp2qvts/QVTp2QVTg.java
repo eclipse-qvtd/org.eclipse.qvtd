@@ -53,6 +53,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtbase.analysis.DomainUsageAnalysis;
+import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtcorebase.AbstractMapping;
 import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcorebase.NavigationAssignment;
@@ -193,11 +194,11 @@ public class QVTp2QVTg {
 	protected void transformTransformation(@NonNull Transformation pTransformation) {
 		computeInitialCaches(pTransformation);
 		for (Rule pRule : pTransformation.getRule()) {
-			createMappingAction((AbstractMapping) pRule);
+			createMappingAction((Mapping) pRule);
 		}
 	}
 
-	protected MappingAction createMappingAction(AbstractMapping mapping) {
+	protected MappingAction createMappingAction(Mapping mapping) {
 
 		MappingAction ma = ScheduleFactory.eINSTANCE.createMappingAction();
 
