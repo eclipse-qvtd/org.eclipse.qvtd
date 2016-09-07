@@ -17,7 +17,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.qvtd.pivot.qvtcorebase.AbstractMapping;
+import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.schedule.MappingAction;
 import org.eclipse.qvtd.pivot.schedule.SchedulePackage;
 import org.eclipse.qvtd.pivot.schedule.util.ScheduleVisitor;
@@ -44,7 +44,7 @@ public class MappingActionImpl extends AbstractActionImpl implements MappingActi
 	 * @generated
 	 * @ordered
 	 */
-	protected AbstractMapping mapping;
+	protected Mapping mapping;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -71,10 +71,10 @@ public class MappingActionImpl extends AbstractActionImpl implements MappingActi
 	 * @generated
 	 */
 	@Override
-	public AbstractMapping getMapping() {
+	public Mapping getMapping() {
 		if (mapping != null && mapping.eIsProxy()) {
 			InternalEObject oldMapping = (InternalEObject)mapping;
-			mapping = (AbstractMapping)eResolveProxy(oldMapping);
+			mapping = (Mapping)eResolveProxy(oldMapping);
 			if (mapping != oldMapping) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, SchedulePackage.MAPPING_ACTION__MAPPING, oldMapping, mapping));
@@ -88,7 +88,7 @@ public class MappingActionImpl extends AbstractActionImpl implements MappingActi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public AbstractMapping basicGetMapping() {
+	public Mapping basicGetMapping() {
 		return mapping;
 	}
 
@@ -98,8 +98,8 @@ public class MappingActionImpl extends AbstractActionImpl implements MappingActi
 	 * @generated
 	 */
 	@Override
-	public void setMapping(AbstractMapping newMapping) {
-		AbstractMapping oldMapping = mapping;
+	public void setMapping(Mapping newMapping) {
+		Mapping oldMapping = mapping;
 		mapping = newMapping;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, SchedulePackage.MAPPING_ACTION__MAPPING, oldMapping, mapping));
@@ -129,7 +129,7 @@ public class MappingActionImpl extends AbstractActionImpl implements MappingActi
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case SchedulePackage.MAPPING_ACTION__MAPPING:
-				setMapping((AbstractMapping)newValue);
+				setMapping((Mapping)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -144,7 +144,7 @@ public class MappingActionImpl extends AbstractActionImpl implements MappingActi
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case SchedulePackage.MAPPING_ACTION__MAPPING:
-				setMapping((AbstractMapping)null);
+				setMapping((Mapping)null);
 				return;
 		}
 		super.eUnset(featureID);
