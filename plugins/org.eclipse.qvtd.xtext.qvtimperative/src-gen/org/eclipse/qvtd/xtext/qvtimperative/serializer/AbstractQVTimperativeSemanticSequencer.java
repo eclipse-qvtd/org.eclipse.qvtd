@@ -88,7 +88,6 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingLoopCS;
-import org.eclipse.qvtd.xtext.qvtimperativecs.MappingSequenceCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.ParamDeclarationCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.PredicateCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.PredicateOrAssignmentCS;
@@ -516,9 +515,6 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 			case QVTimperativeCSPackage.MAPPING_LOOP_CS:
 				sequence_MappingLoopCS(context, (MappingLoopCS) semanticObject); 
 				return; 
-			case QVTimperativeCSPackage.MAPPING_SEQUENCE_CS:
-				sequence_MappingSequenceCS(context, (MappingSequenceCS) semanticObject); 
-				return; 
 			case QVTimperativeCSPackage.PARAM_DECLARATION_CS:
 				sequence_ParamDeclarationCS(context, (ParamDeclarationCS) semanticObject); 
 				return; 
@@ -584,6 +580,7 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 	 * Contexts:
 	 *     ConnectionStatementCS returns ConnectionStatementCS
 	 *     MappingStatementCS returns ConnectionStatementCS
+	 *     StatementCS returns ConnectionStatementCS
 	 *
 	 * Constraint:
 	 *     (targetVariable=[Variable|UnrestrictedName] ownedExpression=ExpCS)
@@ -682,7 +679,7 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 	 *         ownedKeyExpression=ExpCS? 
 	 *         (ownedDomains+=SourceDomainCS | ownedDomains+=TargetDomainCS)* 
 	 *         ownedMiddle=MiddleDomainCS? 
-	 *         ownedMappingSequence=MappingSequenceCS?
+	 *         ownedStatements+=StatementCS*
 	 *     )
 	 */
 	protected void sequence_MappingCS(ISerializationContext context, MappingCS semanticObject) {
@@ -706,6 +703,7 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 	 * Contexts:
 	 *     MappingCallCS returns MappingCallCS
 	 *     MappingStatementCS returns MappingCallCS
+	 *     StatementCS returns MappingCallCS
 	 *
 	 * Constraint:
 	 *     (isInfinite?='infinite'? ownedPathName=PathNameCS ownedBindings+=MappingCallBindingCS*)
@@ -731,35 +729,12 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 	 * Contexts:
 	 *     MappingLoopCS returns MappingLoopCS
 	 *     MappingStatementCS returns MappingLoopCS
+	 *     StatementCS returns MappingLoopCS
 	 *
 	 * Constraint:
-	 *     (ownedIterator=MappingIteratorCS ownedInExpression=ExpCS ownedMappingSequence=MappingSequenceCS)
+	 *     (ownedIterator=MappingIteratorCS ownedInExpression=ExpCS ownedMappingStatements+=MappingStatementCS+)
 	 */
 	protected void sequence_MappingLoopCS(ISerializationContext context, MappingLoopCS semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, QVTimperativeCSPackage.Literals.MAPPING_LOOP_CS__OWNED_ITERATOR) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, QVTimperativeCSPackage.Literals.MAPPING_LOOP_CS__OWNED_ITERATOR));
-			if (transientValues.isValueTransient(semanticObject, QVTimperativeCSPackage.Literals.MAPPING_LOOP_CS__OWNED_IN_EXPRESSION) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, QVTimperativeCSPackage.Literals.MAPPING_LOOP_CS__OWNED_IN_EXPRESSION));
-			if (transientValues.isValueTransient(semanticObject, QVTimperativeCSPackage.Literals.MAPPING_LOOP_CS__OWNED_MAPPING_SEQUENCE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, QVTimperativeCSPackage.Literals.MAPPING_LOOP_CS__OWNED_MAPPING_SEQUENCE));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getMappingLoopCSAccess().getOwnedIteratorMappingIteratorCSParserRuleCall_1_0(), semanticObject.getOwnedIterator());
-		feeder.accept(grammarAccess.getMappingLoopCSAccess().getOwnedInExpressionExpCSParserRuleCall_3_0(), semanticObject.getOwnedInExpression());
-		feeder.accept(grammarAccess.getMappingLoopCSAccess().getOwnedMappingSequenceMappingSequenceCSParserRuleCall_5_0(), semanticObject.getOwnedMappingSequence());
-		feeder.finish();
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     MappingSequenceCS returns MappingSequenceCS
-	 *
-	 * Constraint:
-	 *     ownedMappingStatements+=MappingStatementCS+
-	 */
-	protected void sequence_MappingSequenceCS(ISerializationContext context, MappingSequenceCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

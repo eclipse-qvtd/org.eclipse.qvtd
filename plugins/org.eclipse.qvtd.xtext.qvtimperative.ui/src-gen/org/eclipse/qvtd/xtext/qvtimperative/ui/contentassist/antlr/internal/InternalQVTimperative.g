@@ -400,41 +400,6 @@ finally {
 
 
 
-// Entry rule entryRuleMappingSequenceCS
-entryRuleMappingSequenceCS 
-:
-{ before(grammarAccess.getMappingSequenceCSRule()); }
-	 ruleMappingSequenceCS
-{ after(grammarAccess.getMappingSequenceCSRule()); } 
-	 EOF 
-;
-
-// Rule MappingSequenceCS
-ruleMappingSequenceCS
-    @init {
-		int stackSize = keepStackSize();
-    }
-	:
-(
-(
-{ before(grammarAccess.getMappingSequenceCSAccess().getOwnedMappingStatementsAssignment()); }
-(rule__MappingSequenceCS__OwnedMappingStatementsAssignment)
-{ after(grammarAccess.getMappingSequenceCSAccess().getOwnedMappingStatementsAssignment()); }
-)
-(
-{ before(grammarAccess.getMappingSequenceCSAccess().getOwnedMappingStatementsAssignment()); }
-(rule__MappingSequenceCS__OwnedMappingStatementsAssignment)*
-{ after(grammarAccess.getMappingSequenceCSAccess().getOwnedMappingStatementsAssignment()); }
-)
-)
-
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-
-
 // Entry rule entryRuleMappingStatementCS
 entryRuleMappingStatementCS 
 :
@@ -820,6 +785,34 @@ ruleSourceGuardPatternCS
 { before(grammarAccess.getSourceGuardPatternCSAccess().getGroup()); }
 (rule__SourceGuardPatternCS__Group__0)
 { after(grammarAccess.getSourceGuardPatternCSAccess().getGroup()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+
+// Entry rule entryRuleStatementCS
+entryRuleStatementCS 
+:
+{ before(grammarAccess.getStatementCSRule()); }
+	 ruleStatementCS
+{ after(grammarAccess.getStatementCSRule()); } 
+	 EOF 
+;
+
+// Rule StatementCS
+ruleStatementCS
+    @init {
+		int stackSize = keepStackSize();
+    }
+	:
+(
+{ before(grammarAccess.getStatementCSAccess().getMappingStatementCSParserRuleCall()); }
+	ruleMappingStatementCS
+{ after(grammarAccess.getStatementCSAccess().getMappingStatementCSParserRuleCall()); }
 )
 
 ;
@@ -8531,9 +8524,9 @@ rule__MappingCS__Group__10__Impl
     }
 :
 (
-{ before(grammarAccess.getMappingCSAccess().getOwnedMappingSequenceAssignment_10()); }
-(rule__MappingCS__OwnedMappingSequenceAssignment_10)?
-{ after(grammarAccess.getMappingCSAccess().getOwnedMappingSequenceAssignment_10()); }
+{ before(grammarAccess.getMappingCSAccess().getOwnedStatementsAssignment_10()); }
+(rule__MappingCS__OwnedStatementsAssignment_10)*
+{ after(grammarAccess.getMappingCSAccess().getOwnedStatementsAssignment_10()); }
 )
 
 ;
@@ -9493,9 +9486,16 @@ rule__MappingLoopCS__Group__5__Impl
     }
 :
 (
-{ before(grammarAccess.getMappingLoopCSAccess().getOwnedMappingSequenceAssignment_5()); }
-(rule__MappingLoopCS__OwnedMappingSequenceAssignment_5)
-{ after(grammarAccess.getMappingLoopCSAccess().getOwnedMappingSequenceAssignment_5()); }
+(
+{ before(grammarAccess.getMappingLoopCSAccess().getOwnedMappingStatementsAssignment_5()); }
+(rule__MappingLoopCS__OwnedMappingStatementsAssignment_5)
+{ after(grammarAccess.getMappingLoopCSAccess().getOwnedMappingStatementsAssignment_5()); }
+)
+(
+{ before(grammarAccess.getMappingLoopCSAccess().getOwnedMappingStatementsAssignment_5()); }
+(rule__MappingLoopCS__OwnedMappingStatementsAssignment_5)*
+{ after(grammarAccess.getMappingLoopCSAccess().getOwnedMappingStatementsAssignment_5()); }
+)
 )
 
 ;
@@ -29675,14 +29675,14 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__MappingCS__OwnedMappingSequenceAssignment_10
+rule__MappingCS__OwnedStatementsAssignment_10
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getMappingCSAccess().getOwnedMappingSequenceMappingSequenceCSParserRuleCall_10_0()); }
-	ruleMappingSequenceCS{ after(grammarAccess.getMappingCSAccess().getOwnedMappingSequenceMappingSequenceCSParserRuleCall_10_0()); }
+{ before(grammarAccess.getMappingCSAccess().getOwnedStatementsStatementCSParserRuleCall_10_0()); }
+	ruleStatementCS{ after(grammarAccess.getMappingCSAccess().getOwnedStatementsStatementCSParserRuleCall_10_0()); }
 )
 
 ;
@@ -29830,14 +29830,14 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__MappingLoopCS__OwnedMappingSequenceAssignment_5
+rule__MappingLoopCS__OwnedMappingStatementsAssignment_5
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getMappingLoopCSAccess().getOwnedMappingSequenceMappingSequenceCSParserRuleCall_5_0()); }
-	ruleMappingSequenceCS{ after(grammarAccess.getMappingLoopCSAccess().getOwnedMappingSequenceMappingSequenceCSParserRuleCall_5_0()); }
+{ before(grammarAccess.getMappingLoopCSAccess().getOwnedMappingStatementsMappingStatementCSParserRuleCall_5_0()); }
+	ruleMappingStatementCS{ after(grammarAccess.getMappingLoopCSAccess().getOwnedMappingStatementsMappingStatementCSParserRuleCall_5_0()); }
 )
 
 ;
@@ -29868,21 +29868,6 @@ rule__MappingIteratorCS__OwnedTypeAssignment_1_1
 (
 { before(grammarAccess.getMappingIteratorCSAccess().getOwnedTypeTypeExpCSParserRuleCall_1_1_0()); }
 	ruleTypeExpCS{ after(grammarAccess.getMappingIteratorCSAccess().getOwnedTypeTypeExpCSParserRuleCall_1_1_0()); }
-)
-
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-rule__MappingSequenceCS__OwnedMappingStatementsAssignment
-    @init {
-		int stackSize = keepStackSize();
-    }
-:
-(
-{ before(grammarAccess.getMappingSequenceCSAccess().getOwnedMappingStatementsMappingStatementCSParserRuleCall_0()); }
-	ruleMappingStatementCS{ after(grammarAccess.getMappingSequenceCSAccess().getOwnedMappingStatementsMappingStatementCSParserRuleCall_0()); }
 )
 
 ;
