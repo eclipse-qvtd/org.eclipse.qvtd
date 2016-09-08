@@ -16,7 +16,7 @@ package org.eclipse.qvtd.xtext.qvtimperativecs;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.ocl.xtext.basecs.NamedElementCS;
-import org.eclipse.qvtd.pivot.qvtimperative.CoreDomain;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 
 /**
  * <!-- begin-user-doc -->
@@ -54,7 +54,7 @@ public interface DirectionCS extends NamedElementCS {
 
 	/**
 	 * Returns the value of the '<em><b>Uses</b></em>' reference list.
-	 * The list contents are of type {@link org.eclipse.qvtd.pivot.qvtimperative.CoreDomain}.
+	 * The list contents are of type {@link org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Uses</em>' reference list isn't clear,
@@ -66,6 +66,6 @@ public interface DirectionCS extends NamedElementCS {
 	 * @model
 	 * @generated
 	 */
-	EList<CoreDomain> getUses();
+	EList<ImperativeDomain> getUses();
 
 } // DirectionCS

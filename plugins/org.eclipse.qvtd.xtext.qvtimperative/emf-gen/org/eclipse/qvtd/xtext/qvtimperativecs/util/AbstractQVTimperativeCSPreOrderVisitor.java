@@ -74,21 +74,6 @@ public abstract class AbstractQVTimperativeCSPreOrderVisitor
 	}
 
 	@Override
-	public @Nullable Continuation<?> visitImperativeDomainCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull ImperativeDomainCS csElement) {
-		return visitDomainCS(csElement);
-	}
-
-	@Override
-	public @Nullable Continuation<?> visitImperativePredicateOrAssignmentCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull ImperativePredicateOrAssignmentCS csElement) {
-		return visitPredicateOrAssignmentCS(csElement);
-	}
-
-	@Override
-	public @Nullable Continuation<?> visitImperativeRealizedVariableCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull ImperativeRealizedVariableCS csElement) {
-		return visitRealizedVariableCS(csElement);
-	}
-
-	@Override
 	public @Nullable Continuation<?> visitMappingCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull MappingCS csElement) {
 		return visitNamedElementCS(csElement);
 	}

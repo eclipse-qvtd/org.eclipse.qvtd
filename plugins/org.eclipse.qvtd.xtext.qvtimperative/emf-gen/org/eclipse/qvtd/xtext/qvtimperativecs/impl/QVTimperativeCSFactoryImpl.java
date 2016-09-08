@@ -67,9 +67,6 @@ public class QVTimperativeCSFactoryImpl extends EFactoryImpl implements QVTimper
 			case QVTimperativeCSPackage.DIRECTION_CS: return createDirectionCS();
 			case QVTimperativeCSPackage.DOMAIN_CS: return createDomainCS();
 			case QVTimperativeCSPackage.GUARD_PATTERN_CS: return createGuardPatternCS();
-			case QVTimperativeCSPackage.IMPERATIVE_DOMAIN_CS: return createImperativeDomainCS();
-			case QVTimperativeCSPackage.IMPERATIVE_PREDICATE_OR_ASSIGNMENT_CS: return createImperativePredicateOrAssignmentCS();
-			case QVTimperativeCSPackage.IMPERATIVE_REALIZED_VARIABLE_CS: return createImperativeRealizedVariableCS();
 			case QVTimperativeCSPackage.MAPPING_CS: return createMappingCS();
 			case QVTimperativeCSPackage.MAPPING_CALL_BINDING_CS: return createMappingCallBindingCS();
 			case QVTimperativeCSPackage.MAPPING_CALL_CS: return createMappingCallCS();
@@ -284,39 +281,6 @@ public class QVTimperativeCSFactoryImpl extends EFactoryImpl implements QVTimper
 	public @NonNull UnrealizedVariableCS createUnrealizedVariableCS() {
 		UnrealizedVariableCSImpl unrealizedVariableCS = new UnrealizedVariableCSImpl();
 		return unrealizedVariableCS;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public @NonNull ImperativeDomainCS createImperativeDomainCS() {
-		ImperativeDomainCSImpl imperativeDomainCS = new ImperativeDomainCSImpl();
-		return imperativeDomainCS;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public @NonNull ImperativePredicateOrAssignmentCS createImperativePredicateOrAssignmentCS() {
-		ImperativePredicateOrAssignmentCSImpl imperativePredicateOrAssignmentCS = new ImperativePredicateOrAssignmentCSImpl();
-		return imperativePredicateOrAssignmentCS;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public @NonNull ImperativeRealizedVariableCS createImperativeRealizedVariableCS() {
-		ImperativeRealizedVariableCSImpl imperativeRealizedVariableCS = new ImperativeRealizedVariableCSImpl();
-		return imperativeRealizedVariableCS;
 	}
 
 	/**

@@ -165,50 +165,6 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTimperativeCSPackage.IMPERATIVE_DOMAIN_CS: {
-				ImperativeDomainCS imperativeDomainCS = (ImperativeDomainCS)theEObject;
-				T result = caseImperativeDomainCS(imperativeDomainCS);
-				if (result == null) result = caseDomainCS(imperativeDomainCS);
-				if (result == null) result = caseAreaCS(imperativeDomainCS);
-				if (result == null) result = caseNamedElementCS(imperativeDomainCS);
-				if (result == null) result = caseModelElementCS(imperativeDomainCS);
-				if (result == null) result = caseNameable(imperativeDomainCS);
-				if (result == null) result = casePivotableElementCS(imperativeDomainCS);
-				if (result == null) result = caseElementCS(imperativeDomainCS);
-				if (result == null) result = casePivotable(imperativeDomainCS);
-				if (result == null) result = caseVisitableCS(imperativeDomainCS);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case QVTimperativeCSPackage.IMPERATIVE_PREDICATE_OR_ASSIGNMENT_CS: {
-				ImperativePredicateOrAssignmentCS imperativePredicateOrAssignmentCS = (ImperativePredicateOrAssignmentCS)theEObject;
-				T result = caseImperativePredicateOrAssignmentCS(imperativePredicateOrAssignmentCS);
-				if (result == null) result = casePredicateOrAssignmentCS(imperativePredicateOrAssignmentCS);
-				if (result == null) result = caseExpCS(imperativePredicateOrAssignmentCS);
-				if (result == null) result = caseModelElementCS(imperativePredicateOrAssignmentCS);
-				if (result == null) result = casePivotableElementCS(imperativePredicateOrAssignmentCS);
-				if (result == null) result = caseElementCS(imperativePredicateOrAssignmentCS);
-				if (result == null) result = casePivotable(imperativePredicateOrAssignmentCS);
-				if (result == null) result = caseVisitableCS(imperativePredicateOrAssignmentCS);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case QVTimperativeCSPackage.IMPERATIVE_REALIZED_VARIABLE_CS: {
-				ImperativeRealizedVariableCS imperativeRealizedVariableCS = (ImperativeRealizedVariableCS)theEObject;
-				T result = caseImperativeRealizedVariableCS(imperativeRealizedVariableCS);
-				if (result == null) result = caseRealizedVariableCS(imperativeRealizedVariableCS);
-				if (result == null) result = caseRealizeableVariableCS(imperativeRealizedVariableCS);
-				if (result == null) result = caseTypedElementCS(imperativeRealizedVariableCS);
-				if (result == null) result = caseNamedElementCS(imperativeRealizedVariableCS);
-				if (result == null) result = caseModelElementCS(imperativeRealizedVariableCS);
-				if (result == null) result = caseNameable(imperativeRealizedVariableCS);
-				if (result == null) result = casePivotableElementCS(imperativeRealizedVariableCS);
-				if (result == null) result = caseElementCS(imperativeRealizedVariableCS);
-				if (result == null) result = casePivotable(imperativeRealizedVariableCS);
-				if (result == null) result = caseVisitableCS(imperativeRealizedVariableCS);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case QVTimperativeCSPackage.MAPPING_CS: {
 				MappingCS mappingCS = (MappingCS)theEObject;
 				T result = caseMappingCS(mappingCS);
@@ -750,51 +706,6 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseUnrealizedVariableCS(UnrealizedVariableCS object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Imperative Domain CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Imperative Domain CS</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseImperativeDomainCS(ImperativeDomainCS object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Imperative Predicate Or Assignment CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Imperative Predicate Or Assignment CS</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseImperativePredicateOrAssignmentCS(ImperativePredicateOrAssignmentCS object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Imperative Realized Variable CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Imperative Realized Variable CS</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseImperativeRealizedVariableCS(ImperativeRealizedVariableCS object) {
 		return null;
 	}
 

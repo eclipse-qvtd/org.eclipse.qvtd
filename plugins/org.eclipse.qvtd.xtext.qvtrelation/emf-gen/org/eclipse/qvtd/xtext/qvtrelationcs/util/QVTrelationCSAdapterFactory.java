@@ -110,7 +110,7 @@ public class QVTrelationCSAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	protected QVTrelationCSSwitch<@Nullable Adapter> modelSwitch =
-		new QVTrelationCSSwitch<@Nullable Adapter>() {
+			new QVTrelationCSSwitch<@Nullable Adapter>() {
 			@Override
 			public Adapter caseAbstractDomainCS(AbstractDomainCS object) {
 				return createAbstractDomainCSAdapter();

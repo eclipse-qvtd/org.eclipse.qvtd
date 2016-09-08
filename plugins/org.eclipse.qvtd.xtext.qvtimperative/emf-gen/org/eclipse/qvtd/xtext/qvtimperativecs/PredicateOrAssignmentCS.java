@@ -25,6 +25,7 @@ import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
  * The following features are supported:
  * </p>
  * <ul>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.PredicateOrAssignmentCS#isIsAccumulate <em>Is Accumulate</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.PredicateOrAssignmentCS#isIsDefault <em>Is Default</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.PredicateOrAssignmentCS#getOwnedTarget <em>Owned Target</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.PredicateOrAssignmentCS#getOwnedInitExpression <em>Owned Init Expression</em>}</li>
@@ -35,6 +36,33 @@ import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
  * @generated
  */
 public interface PredicateOrAssignmentCS extends ExpCS {
+	/**
+	 * Returns the value of the '<em><b>Is Accumulate</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Is Accumulate</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Is Accumulate</em>' attribute.
+	 * @see #setIsAccumulate(boolean)
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getPredicateOrAssignmentCS_IsAccumulate()
+	 * @model default="false"
+	 * @generated
+	 */
+	boolean isIsAccumulate();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.PredicateOrAssignmentCS#isIsAccumulate <em>Is Accumulate</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Is Accumulate</em>' attribute.
+	 * @see #isIsAccumulate()
+	 * @generated
+	 */
+	void setIsAccumulate(boolean value);
+
 	/**
 	 * Returns the value of the '<em><b>Is Default</b></em>' attribute.
 	 * <!-- begin-user-doc -->

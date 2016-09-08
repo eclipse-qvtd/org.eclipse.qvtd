@@ -114,18 +114,6 @@ public class QVTimperativeCSAdapterFactory extends AdapterFactoryImpl {
 				return createGuardPatternCSAdapter();
 			}
 			@Override
-			public Adapter caseImperativeDomainCS(ImperativeDomainCS object) {
-				return createImperativeDomainCSAdapter();
-			}
-			@Override
-			public Adapter caseImperativePredicateOrAssignmentCS(ImperativePredicateOrAssignmentCS object) {
-				return createImperativePredicateOrAssignmentCSAdapter();
-			}
-			@Override
-			public Adapter caseImperativeRealizedVariableCS(ImperativeRealizedVariableCS object) {
-				return createImperativeRealizedVariableCSAdapter();
-			}
-			@Override
 			public Adapter caseMappingCS(MappingCS object) {
 				return createMappingCSAdapter();
 			}
@@ -466,48 +454,6 @@ public class QVTimperativeCSAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createUnrealizedVariableCSAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.ImperativeDomainCS <em>Imperative Domain CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.ImperativeDomainCS
-	 * @generated
-	 */
-	public Adapter createImperativeDomainCSAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.ImperativePredicateOrAssignmentCS <em>Imperative Predicate Or Assignment CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.ImperativePredicateOrAssignmentCS
-	 * @generated
-	 */
-	public Adapter createImperativePredicateOrAssignmentCSAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.ImperativeRealizedVariableCS <em>Imperative Realized Variable CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.ImperativeRealizedVariableCS
-	 * @generated
-	 */
-	public Adapter createImperativeRealizedVariableCSAdapter() {
 		return null;
 	}
 
