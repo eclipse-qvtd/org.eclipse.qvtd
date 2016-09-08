@@ -84,9 +84,6 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.ConnectionStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DomainCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.GuardPatternCS;
-import org.eclipse.qvtd.xtext.qvtimperativecs.ImperativeDomainCS;
-import org.eclipse.qvtd.xtext.qvtimperativecs.ImperativePredicateOrAssignmentCS;
-import org.eclipse.qvtd.xtext.qvtimperativecs.ImperativeRealizedVariableCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallCS;
@@ -97,6 +94,7 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.PredicateCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.PredicateOrAssignmentCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QueryCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.RealizedVariableCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.TopLevelCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.TransformationCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.UnrealizedVariableCS;
@@ -470,8 +468,20 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 				sequence_DirectionCS(context, (DirectionCS) semanticObject); 
 				return; 
 			case QVTimperativeCSPackage.DOMAIN_CS:
-				if (rule == grammarAccess.getNamedDomainCSRule()) {
+				if (rule == grammarAccess.getMiddleDomainCSRule()) {
+					sequence_MiddleDomainCS(context, (DomainCS) semanticObject); 
+					return; 
+				}
+				else if (rule == grammarAccess.getNamedDomainCSRule()) {
 					sequence_NamedDomainCS(context, (DomainCS) semanticObject); 
+					return; 
+				}
+				else if (rule == grammarAccess.getSourceDomainCSRule()) {
+					sequence_SourceDomainCS(context, (DomainCS) semanticObject); 
+					return; 
+				}
+				else if (rule == grammarAccess.getTargetDomainCSRule()) {
+					sequence_TargetDomainCS(context, (DomainCS) semanticObject); 
 					return; 
 				}
 				else if (rule == grammarAccess.getUnnamedDomainCSRule()) {
@@ -494,26 +504,6 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 					return; 
 				}
 				else break;
-			case QVTimperativeCSPackage.IMPERATIVE_DOMAIN_CS:
-				if (rule == grammarAccess.getMiddleDomainCSRule()) {
-					sequence_MiddleDomainCS(context, (ImperativeDomainCS) semanticObject); 
-					return; 
-				}
-				else if (rule == grammarAccess.getSourceDomainCSRule()) {
-					sequence_SourceDomainCS(context, (ImperativeDomainCS) semanticObject); 
-					return; 
-				}
-				else if (rule == grammarAccess.getTargetDomainCSRule()) {
-					sequence_TargetDomainCS(context, (ImperativeDomainCS) semanticObject); 
-					return; 
-				}
-				else break;
-			case QVTimperativeCSPackage.IMPERATIVE_PREDICATE_OR_ASSIGNMENT_CS:
-				sequence_ImperativePredicateOrAssignmentCS(context, (ImperativePredicateOrAssignmentCS) semanticObject); 
-				return; 
-			case QVTimperativeCSPackage.IMPERATIVE_REALIZED_VARIABLE_CS:
-				sequence_RealizedVariableCS(context, (ImperativeRealizedVariableCS) semanticObject); 
-				return; 
 			case QVTimperativeCSPackage.MAPPING_CS:
 				sequence_MappingCS(context, (MappingCS) semanticObject); 
 				return; 
@@ -540,6 +530,9 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 				return; 
 			case QVTimperativeCSPackage.QUERY_CS:
 				sequence_QueryCS(context, (QueryCS) semanticObject); 
+				return; 
+			case QVTimperativeCSPackage.REALIZED_VARIABLE_CS:
+				sequence_RealizedVariableCS(context, (RealizedVariableCS) semanticObject); 
 				return; 
 			case QVTimperativeCSPackage.TOP_LEVEL_CS:
 				sequence_TopLevelCS(context, (TopLevelCS) semanticObject); 
@@ -618,7 +611,7 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 	 *         name=UnrestrictedName? 
 	 *         imports+=[Package|UnrestrictedName] 
 	 *         imports+=[Package|UnrestrictedName]* 
-	 *         (uses+=[CoreDomain|UnrestrictedName] uses+=[CoreDomain|UnrestrictedName]*)?
+	 *         (uses+=[ImperativeDomain|UnrestrictedName] uses+=[ImperativeDomain|UnrestrictedName]*)?
 	 *     )
 	 */
 	protected void sequence_DirectionCS(ISerializationContext context, DirectionCS semanticObject) {
@@ -661,18 +654,6 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 		feeder.accept(grammarAccess.getGuardVariableCSAccess().getNameUnrestrictedNameParserRuleCall_0_0(), semanticObject.getName());
 		feeder.accept(grammarAccess.getGuardVariableCSAccess().getOwnedTypeTypeExpCSParserRuleCall_2_0(), semanticObject.getOwnedType());
 		feeder.finish();
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     ImperativePredicateOrAssignmentCS returns ImperativePredicateOrAssignmentCS
-	 *
-	 * Constraint:
-	 *     (isDefault?='default'? ownedTarget=ExpCS (isAccumulate?='+='? ownedInitExpression=ExpCS)?)
-	 */
-	protected void sequence_ImperativePredicateOrAssignmentCS(ISerializationContext context, ImperativePredicateOrAssignmentCS semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -789,13 +770,9 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 	 *
 	 * Constraint:
 	 *     (
-	 *         (
-	 *             ownedUnrealizedVariables+=UnrealizedVariableCS 
-	 *             ownedUnrealizedVariables+=UnrealizedVariableCS* 
-	 *             ownedConstraints+=ImperativePredicateOrAssignmentCS*
-	 *         ) | 
+	 *         (ownedUnrealizedVariables+=UnrealizedVariableCS ownedUnrealizedVariables+=UnrealizedVariableCS* ownedConstraints+=PredicateOrAssignmentCS*) | 
 	 *         (ownedUnrealizedVariables+=UnrealizedVariableCS ownedUnrealizedVariables+=UnrealizedVariableCS*) | 
-	 *         ownedConstraints+=ImperativePredicateOrAssignmentCS+
+	 *         ownedConstraints+=PredicateOrAssignmentCS+
 	 *     )?
 	 */
 	protected void sequence_MiddleBottomPatternCS(ISerializationContext context, BottomPatternCS semanticObject) {
@@ -805,7 +782,7 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 	
 	/**
 	 * Contexts:
-	 *     MiddleDomainCS returns ImperativeDomainCS
+	 *     MiddleDomainCS returns DomainCS
 	 *
 	 * Constraint:
 	 *     (
@@ -815,7 +792,7 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 	 *         ownedBottomPattern=MiddleBottomPatternCS
 	 *     )
 	 */
-	protected void sequence_MiddleDomainCS(ISerializationContext context, ImperativeDomainCS semanticObject) {
+	protected void sequence_MiddleDomainCS(ISerializationContext context, DomainCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -882,7 +859,7 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 	 *     PredicateOrAssignmentCS returns PredicateOrAssignmentCS
 	 *
 	 * Constraint:
-	 *     (isDefault?='default'? ownedTarget=ExpCS ownedInitExpression=ExpCS?)
+	 *     (isDefault?='default'? ownedTarget=ExpCS (isAccumulate?='+='? ownedInitExpression=ExpCS)?)
 	 */
 	protected void sequence_PredicateOrAssignmentCS(ISerializationContext context, PredicateOrAssignmentCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -928,12 +905,12 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 	
 	/**
 	 * Contexts:
-	 *     RealizedVariableCS returns ImperativeRealizedVariableCS
+	 *     RealizedVariableCS returns RealizedVariableCS
 	 *
 	 * Constraint:
 	 *     (name=UnrestrictedName ownedType=TypeExpCS ownedInitExpression=ExpCS?)
 	 */
-	protected void sequence_RealizedVariableCS(ISerializationContext context, ImperativeRealizedVariableCS semanticObject) {
+	protected void sequence_RealizedVariableCS(ISerializationContext context, RealizedVariableCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -964,7 +941,7 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 	
 	/**
 	 * Contexts:
-	 *     SourceDomainCS returns ImperativeDomainCS
+	 *     SourceDomainCS returns DomainCS
 	 *
 	 * Constraint:
 	 *     (
@@ -976,7 +953,7 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 	 *         ownedBottomPattern=SourceBottomPatternCS
 	 *     )
 	 */
-	protected void sequence_SourceDomainCS(ISerializationContext context, ImperativeDomainCS semanticObject) {
+	protected void sequence_SourceDomainCS(ISerializationContext context, DomainCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -1011,7 +988,7 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 	
 	/**
 	 * Contexts:
-	 *     TargetDomainCS returns ImperativeDomainCS
+	 *     TargetDomainCS returns DomainCS
 	 *
 	 * Constraint:
 	 *     (
@@ -1023,7 +1000,7 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 	 *         ownedBottomPattern=TargetBottomPatternCS
 	 *     )
 	 */
-	protected void sequence_TargetDomainCS(ISerializationContext context, ImperativeDomainCS semanticObject) {
+	protected void sequence_TargetDomainCS(ISerializationContext context, DomainCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
