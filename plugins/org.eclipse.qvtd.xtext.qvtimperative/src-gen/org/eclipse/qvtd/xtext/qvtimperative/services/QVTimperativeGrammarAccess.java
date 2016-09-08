@@ -281,6 +281,18 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		public Keyword getRightCurlyBracketKeyword_3_2() { return cRightCurlyBracketKeyword_3_2; }
 	}
 
+	public class BottomStatementCSElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvtd.xtext.qvtimperative.QVTimperative.BottomStatementCS");
+		private final RuleCall cSetStatementCSParserRuleCall = (RuleCall)rule.eContents().get(1);
+		
+		//BottomStatementCS StatementCS:
+		//	SetStatementCS
+		@Override public ParserRule getRule() { return rule; }
+
+		//SetStatementCS
+		public RuleCall getSetStatementCSParserRuleCall() { return cSetStatementCSParserRuleCall; }
+	}
+
 	public class ConnectionStatementCSElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvtd.xtext.qvtimperative.QVTimperative.ConnectionStatementCS");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -319,6 +331,30 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 
 		//';'
 		public Keyword getSemicolonKeyword_3() { return cSemicolonKeyword_3; }
+	}
+
+	public class ControlStatementCSElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvtd.xtext.qvtimperative.QVTimperative.ControlStatementCS");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cConnectionStatementCSParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cMappingCallCSParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cMappingLoopCSParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		
+		//ControlStatementCS MappingStatementCS:
+		//	ConnectionStatementCS | MappingCallCS | MappingLoopCS
+		@Override public ParserRule getRule() { return rule; }
+
+		//ConnectionStatementCS | MappingCallCS | MappingLoopCS
+		public Alternatives getAlternatives() { return cAlternatives; }
+
+		//ConnectionStatementCS
+		public RuleCall getConnectionStatementCSParserRuleCall_0() { return cConnectionStatementCSParserRuleCall_0; }
+
+		//MappingCallCS
+		public RuleCall getMappingCallCSParserRuleCall_1() { return cMappingCallCSParserRuleCall_1; }
+
+		//MappingLoopCS
+		public RuleCall getMappingLoopCSParserRuleCall_2() { return cMappingLoopCSParserRuleCall_2; }
 	}
 
 	public class DirectionCSElements extends AbstractParserRuleElementFinder {
@@ -695,20 +731,22 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cOwnedMiddleAssignment_9_1 = (Assignment)cGroup_9.eContents().get(1);
 		private final RuleCall cOwnedMiddleMiddleDomainCSParserRuleCall_9_1_0 = (RuleCall)cOwnedMiddleAssignment_9_1.eContents().get(0);
 		private final Assignment cOwnedStatementsAssignment_10 = (Assignment)cGroup.eContents().get(10);
-		private final RuleCall cOwnedStatementsStatementCSParserRuleCall_10_0 = (RuleCall)cOwnedStatementsAssignment_10.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_11 = (Keyword)cGroup.eContents().get(11);
+		private final RuleCall cOwnedStatementsBottomStatementCSParserRuleCall_10_0 = (RuleCall)cOwnedStatementsAssignment_10.eContents().get(0);
+		private final Assignment cOwnedStatementsAssignment_11 = (Assignment)cGroup.eContents().get(11);
+		private final RuleCall cOwnedStatementsControlStatementCSParserRuleCall_11_0 = (RuleCall)cOwnedStatementsAssignment_11.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_12 = (Keyword)cGroup.eContents().get(12);
 		
 		//MappingCS:
 		//	{MappingCS} isDefault?='default'? 'map' name=UnrestrictedName ('in' ownedInPathName=PathNameCS)? ('uses'
 		//	ownedUsesPathNames+=PathNameCS (',' ownedUsesPathNames+=PathNameCS)*)? ('key' ownedKeyExpression=ExpCS ';')? '{'
-		//	ownedDomains+=(SourceDomainCS | TargetDomainCS)* ('where' ownedMiddle=MiddleDomainCS)? ownedStatements+=StatementCS*
-		//	'}';
+		//	ownedDomains+=(SourceDomainCS | TargetDomainCS)* ('where' ownedMiddle=MiddleDomainCS)?
+		//	ownedStatements+=BottomStatementCS* ownedStatements+=ControlStatementCS* '}';
 		@Override public ParserRule getRule() { return rule; }
 
 		//{MappingCS} isDefault?='default'? 'map' name=UnrestrictedName ('in' ownedInPathName=PathNameCS)? ('uses'
 		//ownedUsesPathNames+=PathNameCS (',' ownedUsesPathNames+=PathNameCS)*)? ('key' ownedKeyExpression=ExpCS ';')? '{'
-		//ownedDomains+=(SourceDomainCS | TargetDomainCS)* ('where' ownedMiddle=MiddleDomainCS)? ownedStatements+=StatementCS*
-		//'}'
+		//ownedDomains+=(SourceDomainCS | TargetDomainCS)* ('where' ownedMiddle=MiddleDomainCS)?
+		//ownedStatements+=BottomStatementCS* ownedStatements+=ControlStatementCS* '}'
 		public Group getGroup() { return cGroup; }
 
 		//{MappingCS}
@@ -807,14 +845,20 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		//MiddleDomainCS
 		public RuleCall getOwnedMiddleMiddleDomainCSParserRuleCall_9_1_0() { return cOwnedMiddleMiddleDomainCSParserRuleCall_9_1_0; }
 
-		//ownedStatements+=StatementCS*
+		//ownedStatements+=BottomStatementCS*
 		public Assignment getOwnedStatementsAssignment_10() { return cOwnedStatementsAssignment_10; }
 
-		//StatementCS
-		public RuleCall getOwnedStatementsStatementCSParserRuleCall_10_0() { return cOwnedStatementsStatementCSParserRuleCall_10_0; }
+		//BottomStatementCS
+		public RuleCall getOwnedStatementsBottomStatementCSParserRuleCall_10_0() { return cOwnedStatementsBottomStatementCSParserRuleCall_10_0; }
+
+		//ownedStatements+=ControlStatementCS*
+		public Assignment getOwnedStatementsAssignment_11() { return cOwnedStatementsAssignment_11; }
+
+		//ControlStatementCS
+		public RuleCall getOwnedStatementsControlStatementCSParserRuleCall_11_0() { return cOwnedStatementsControlStatementCSParserRuleCall_11_0; }
 
 		//'}'
-		public Keyword getRightCurlyBracketKeyword_11() { return cRightCurlyBracketKeyword_11; }
+		public Keyword getRightCurlyBracketKeyword_12() { return cRightCurlyBracketKeyword_12; }
 	}
 
 	public class MappingCallCSElements extends AbstractParserRuleElementFinder {
@@ -932,15 +976,15 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cOwnedInExpressionExpCSParserRuleCall_3_0 = (RuleCall)cOwnedInExpressionAssignment_3.eContents().get(0);
 		private final Keyword cLeftCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		private final Assignment cOwnedMappingStatementsAssignment_5 = (Assignment)cGroup.eContents().get(5);
-		private final RuleCall cOwnedMappingStatementsMappingStatementCSParserRuleCall_5_0 = (RuleCall)cOwnedMappingStatementsAssignment_5.eContents().get(0);
+		private final RuleCall cOwnedMappingStatementsControlStatementCSParserRuleCall_5_0 = (RuleCall)cOwnedMappingStatementsAssignment_5.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
 		
 		//MappingLoopCS:
-		//	'for' ownedIterator=MappingIteratorCS 'in' ownedInExpression=ExpCS '{' ownedMappingStatements+=MappingStatementCS+
+		//	'for' ownedIterator=MappingIteratorCS 'in' ownedInExpression=ExpCS '{' ownedMappingStatements+=ControlStatementCS+
 		//	'}';
 		@Override public ParserRule getRule() { return rule; }
 
-		//'for' ownedIterator=MappingIteratorCS 'in' ownedInExpression=ExpCS '{' ownedMappingStatements+=MappingStatementCS+ '}'
+		//'for' ownedIterator=MappingIteratorCS 'in' ownedInExpression=ExpCS '{' ownedMappingStatements+=ControlStatementCS+ '}'
 		public Group getGroup() { return cGroup; }
 
 		//'for'
@@ -964,11 +1008,11 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_4() { return cLeftCurlyBracketKeyword_4; }
 
-		//ownedMappingStatements+=MappingStatementCS+
+		//ownedMappingStatements+=ControlStatementCS+
 		public Assignment getOwnedMappingStatementsAssignment_5() { return cOwnedMappingStatementsAssignment_5; }
 
-		//MappingStatementCS
-		public RuleCall getOwnedMappingStatementsMappingStatementCSParserRuleCall_5_0() { return cOwnedMappingStatementsMappingStatementCSParserRuleCall_5_0; }
+		//ControlStatementCS
+		public RuleCall getOwnedMappingStatementsControlStatementCSParserRuleCall_5_0() { return cOwnedMappingStatementsControlStatementCSParserRuleCall_5_0; }
 
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_6() { return cRightCurlyBracketKeyword_6; }
@@ -1008,30 +1052,6 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 
 		//TypeExpCS
 		public RuleCall getOwnedTypeTypeExpCSParserRuleCall_1_1_0() { return cOwnedTypeTypeExpCSParserRuleCall_1_1_0; }
-	}
-
-	public class MappingStatementCSElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvtd.xtext.qvtimperative.QVTimperative.MappingStatementCS");
-		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cConnectionStatementCSParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cMappingCallCSParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
-		private final RuleCall cMappingLoopCSParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
-		
-		//MappingStatementCS:
-		//	ConnectionStatementCS | MappingCallCS | MappingLoopCS;
-		@Override public ParserRule getRule() { return rule; }
-
-		//ConnectionStatementCS | MappingCallCS | MappingLoopCS
-		public Alternatives getAlternatives() { return cAlternatives; }
-
-		//ConnectionStatementCS
-		public RuleCall getConnectionStatementCSParserRuleCall_0() { return cConnectionStatementCSParserRuleCall_0; }
-
-		//MappingCallCS
-		public RuleCall getMappingCallCSParserRuleCall_1() { return cMappingCallCSParserRuleCall_1; }
-
-		//MappingLoopCS
-		public RuleCall getMappingLoopCSParserRuleCall_2() { return cMappingLoopCSParserRuleCall_2; }
 	}
 
 	public class MiddleDomainCSElements extends AbstractParserRuleElementFinder {
@@ -1805,6 +1825,68 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		public Keyword getColonColonKeyword_2_1() { return cColonColonKeyword_2_1; }
 	}
 
+	public class SetStatementCSElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvtd.xtext.qvtimperative.QVTimperative.SetStatementCS");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cSetKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cReferredVariableAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final CrossReference cReferredVariableVariableCrossReference_1_0 = (CrossReference)cReferredVariableAssignment_1.eContents().get(0);
+		private final RuleCall cReferredVariableVariableUnrestrictedNameParserRuleCall_1_0_1 = (RuleCall)cReferredVariableVariableCrossReference_1_0.eContents().get(1);
+		private final Keyword cFullStopKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cReferredPropertyAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final CrossReference cReferredPropertyPropertyCrossReference_3_0 = (CrossReference)cReferredPropertyAssignment_3.eContents().get(0);
+		private final RuleCall cReferredPropertyPropertyUnrestrictedNameParserRuleCall_3_0_1 = (RuleCall)cReferredPropertyPropertyCrossReference_3_0.eContents().get(1);
+		private final Keyword cColonEqualsSignKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Assignment cOwnedInitExpressionAssignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final RuleCall cOwnedInitExpressionExpCSParserRuleCall_5_0 = (RuleCall)cOwnedInitExpressionAssignment_5.eContents().get(0);
+		private final Keyword cSemicolonKeyword_6 = (Keyword)cGroup.eContents().get(6);
+		
+		//SetStatementCS:
+		//	'set' referredVariable=[pivot::Variable|UnrestrictedName] '.' referredProperty=[pivot::Property|UnrestrictedName]
+		//	':=' ownedInitExpression=ExpCS ';';
+		@Override public ParserRule getRule() { return rule; }
+
+		//'set' referredVariable=[pivot::Variable|UnrestrictedName] '.' referredProperty=[pivot::Property|UnrestrictedName] ':='
+		//ownedInitExpression=ExpCS ';'
+		public Group getGroup() { return cGroup; }
+
+		//'set'
+		public Keyword getSetKeyword_0() { return cSetKeyword_0; }
+
+		//referredVariable=[pivot::Variable|UnrestrictedName]
+		public Assignment getReferredVariableAssignment_1() { return cReferredVariableAssignment_1; }
+
+		//[pivot::Variable|UnrestrictedName]
+		public CrossReference getReferredVariableVariableCrossReference_1_0() { return cReferredVariableVariableCrossReference_1_0; }
+
+		//UnrestrictedName
+		public RuleCall getReferredVariableVariableUnrestrictedNameParserRuleCall_1_0_1() { return cReferredVariableVariableUnrestrictedNameParserRuleCall_1_0_1; }
+
+		//'.'
+		public Keyword getFullStopKeyword_2() { return cFullStopKeyword_2; }
+
+		//referredProperty=[pivot::Property|UnrestrictedName]
+		public Assignment getReferredPropertyAssignment_3() { return cReferredPropertyAssignment_3; }
+
+		//[pivot::Property|UnrestrictedName]
+		public CrossReference getReferredPropertyPropertyCrossReference_3_0() { return cReferredPropertyPropertyCrossReference_3_0; }
+
+		//UnrestrictedName
+		public RuleCall getReferredPropertyPropertyUnrestrictedNameParserRuleCall_3_0_1() { return cReferredPropertyPropertyUnrestrictedNameParserRuleCall_3_0_1; }
+
+		//':='
+		public Keyword getColonEqualsSignKeyword_4() { return cColonEqualsSignKeyword_4; }
+
+		//ownedInitExpression=ExpCS
+		public Assignment getOwnedInitExpressionAssignment_5() { return cOwnedInitExpressionAssignment_5; }
+
+		//ExpCS
+		public RuleCall getOwnedInitExpressionExpCSParserRuleCall_5_0() { return cOwnedInitExpressionExpCSParserRuleCall_5_0; }
+
+		//';'
+		public Keyword getSemicolonKeyword_6() { return cSemicolonKeyword_6; }
+	}
+
 	public class SourceDomainCSElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvtd.xtext.qvtimperative.QVTimperative.SourceDomainCS");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -2044,14 +2126,14 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 
 	public class StatementCSElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvtd.xtext.qvtimperative.QVTimperative.StatementCS");
-		private final RuleCall cMappingStatementCSParserRuleCall = (RuleCall)rule.eContents().get(1);
+		private final RuleCall cControlStatementCSParserRuleCall = (RuleCall)rule.eContents().get(1);
 		
 		//StatementCS:
-		//	MappingStatementCS;
+		//	ControlStatementCS;
 		@Override public ParserRule getRule() { return rule; }
 
-		//MappingStatementCS
-		public RuleCall getMappingStatementCSParserRuleCall() { return cMappingStatementCSParserRuleCall; }
+		//ControlStatementCS
+		public RuleCall getControlStatementCSParserRuleCall() { return cControlStatementCSParserRuleCall; }
 	}
 
 	public class TransformationCSElements extends AbstractParserRuleElementFinder {
@@ -2533,7 +2615,9 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	
 	private final TopLevelCSElements pTopLevelCS;
 	private final BottomPatternCSElements pBottomPatternCS;
+	private final BottomStatementCSElements pBottomStatementCS;
 	private final ConnectionStatementCSElements pConnectionStatementCS;
+	private final ControlStatementCSElements pControlStatementCS;
 	private final DirectionCSElements pDirectionCS;
 	private final GuardPatternCSElements pGuardPatternCS;
 	private final GuardVariableCSElements pGuardVariableCS;
@@ -2543,7 +2627,6 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	private final MappingCallBindingCSElements pMappingCallBindingCS;
 	private final MappingLoopCSElements pMappingLoopCS;
 	private final MappingIteratorCSElements pMappingIteratorCS;
-	private final MappingStatementCSElements pMappingStatementCS;
 	private final MiddleDomainCSElements pMiddleDomainCS;
 	private final MiddleBottomPatternCSElements pMiddleBottomPatternCS;
 	private final MiddleGuardPatternCSElements pMiddleGuardPatternCS;
@@ -2555,6 +2638,7 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	private final QueryCSElements pQueryCS;
 	private final RealizedVariableCSElements pRealizedVariableCS;
 	private final ScopeNameCSElements pScopeNameCS;
+	private final SetStatementCSElements pSetStatementCS;
 	private final SourceDomainCSElements pSourceDomainCS;
 	private final SourceBottomPatternCSElements pSourceBottomPatternCS;
 	private final SourceGuardPatternCSElements pSourceGuardPatternCS;
@@ -2586,7 +2670,9 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		this.gaBase = gaBase;
 		this.pTopLevelCS = new TopLevelCSElements();
 		this.pBottomPatternCS = new BottomPatternCSElements();
+		this.pBottomStatementCS = new BottomStatementCSElements();
 		this.pConnectionStatementCS = new ConnectionStatementCSElements();
+		this.pControlStatementCS = new ControlStatementCSElements();
 		this.pDirectionCS = new DirectionCSElements();
 		this.pGuardPatternCS = new GuardPatternCSElements();
 		this.pGuardVariableCS = new GuardVariableCSElements();
@@ -2596,7 +2682,6 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		this.pMappingCallBindingCS = new MappingCallBindingCSElements();
 		this.pMappingLoopCS = new MappingLoopCSElements();
 		this.pMappingIteratorCS = new MappingIteratorCSElements();
-		this.pMappingStatementCS = new MappingStatementCSElements();
 		this.pMiddleDomainCS = new MiddleDomainCSElements();
 		this.pMiddleBottomPatternCS = new MiddleBottomPatternCSElements();
 		this.pMiddleGuardPatternCS = new MiddleGuardPatternCSElements();
@@ -2608,6 +2693,7 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		this.pQueryCS = new QueryCSElements();
 		this.pRealizedVariableCS = new RealizedVariableCSElements();
 		this.pScopeNameCS = new ScopeNameCSElements();
+		this.pSetStatementCS = new SetStatementCSElements();
 		this.pSourceDomainCS = new SourceDomainCSElements();
 		this.pSourceBottomPatternCS = new SourceBottomPatternCSElements();
 		this.pSourceGuardPatternCS = new SourceGuardPatternCSElements();
@@ -2682,6 +2768,16 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		return getBottomPatternCSAccess().getRule();
 	}
 
+	//BottomStatementCS StatementCS:
+	//	SetStatementCS
+	public BottomStatementCSElements getBottomStatementCSAccess() {
+		return pBottomStatementCS;
+	}
+	
+	public ParserRule getBottomStatementCSRule() {
+		return getBottomStatementCSAccess().getRule();
+	}
+
 	//ConnectionStatementCS:
 	//	targetVariable=[pivot::Variable|UnrestrictedName] '+=' ownedExpression=ExpCS ';';
 	public ConnectionStatementCSElements getConnectionStatementCSAccess() {
@@ -2690,6 +2786,16 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getConnectionStatementCSRule() {
 		return getConnectionStatementCSAccess().getRule();
+	}
+
+	//ControlStatementCS MappingStatementCS:
+	//	ConnectionStatementCS | MappingCallCS | MappingLoopCS
+	public ControlStatementCSElements getControlStatementCSAccess() {
+		return pControlStatementCS;
+	}
+	
+	public ParserRule getControlStatementCSRule() {
+		return getControlStatementCSAccess().getRule();
 	}
 
 	//DirectionCS:
@@ -2740,8 +2846,8 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	//MappingCS:
 	//	{MappingCS} isDefault?='default'? 'map' name=UnrestrictedName ('in' ownedInPathName=PathNameCS)? ('uses'
 	//	ownedUsesPathNames+=PathNameCS (',' ownedUsesPathNames+=PathNameCS)*)? ('key' ownedKeyExpression=ExpCS ';')? '{'
-	//	ownedDomains+=(SourceDomainCS | TargetDomainCS)* ('where' ownedMiddle=MiddleDomainCS)? ownedStatements+=StatementCS*
-	//	'}';
+	//	ownedDomains+=(SourceDomainCS | TargetDomainCS)* ('where' ownedMiddle=MiddleDomainCS)?
+	//	ownedStatements+=BottomStatementCS* ownedStatements+=ControlStatementCS* '}';
 	public MappingCSElements getMappingCSAccess() {
 		return pMappingCS;
 	}
@@ -2771,7 +2877,7 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//MappingLoopCS:
-	//	'for' ownedIterator=MappingIteratorCS 'in' ownedInExpression=ExpCS '{' ownedMappingStatements+=MappingStatementCS+
+	//	'for' ownedIterator=MappingIteratorCS 'in' ownedInExpression=ExpCS '{' ownedMappingStatements+=ControlStatementCS+
 	//	'}';
 	public MappingLoopCSElements getMappingLoopCSAccess() {
 		return pMappingLoopCS;
@@ -2789,16 +2895,6 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getMappingIteratorCSRule() {
 		return getMappingIteratorCSAccess().getRule();
-	}
-
-	//MappingStatementCS:
-	//	ConnectionStatementCS | MappingCallCS | MappingLoopCS;
-	public MappingStatementCSElements getMappingStatementCSAccess() {
-		return pMappingStatementCS;
-	}
-	
-	public ParserRule getMappingStatementCSRule() {
-		return getMappingStatementCSAccess().getRule();
 	}
 
 	//MiddleDomainCS DomainCS:
@@ -2929,6 +3025,17 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		return getScopeNameCSAccess().getRule();
 	}
 
+	//SetStatementCS:
+	//	'set' referredVariable=[pivot::Variable|UnrestrictedName] '.' referredProperty=[pivot::Property|UnrestrictedName]
+	//	':=' ownedInitExpression=ExpCS ';';
+	public SetStatementCSElements getSetStatementCSAccess() {
+		return pSetStatementCS;
+	}
+	
+	public ParserRule getSetStatementCSRule() {
+		return getSetStatementCSAccess().getRule();
+	}
+
 	//SourceDomainCS DomainCS:
 	//	isCheck?='check' direction=[qvtbase::TypedModel|UnrestrictedName] ('{' ('check' checkedProperties+=PathNameCS (','
 	//	checkedProperties+=PathNameCS)*)? ('enforce' enforcedProperties+=PathNameCS (',' enforcedProperties+=PathNameCS)*)?
@@ -2964,7 +3071,7 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//StatementCS:
-	//	MappingStatementCS;
+	//	ControlStatementCS;
 	public StatementCSElements getStatementCSAccess() {
 		return pStatementCS;
 	}
