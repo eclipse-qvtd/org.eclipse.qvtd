@@ -38,8 +38,12 @@ BottomPatternCS:		// Bug 466385 explains the redundancy below
 		{BottomPatternCS} '{' '}'
 	)
 ;
+	
+BottomStatementCS returns StatementCS: SetStatementCS;
 
 ConnectionStatementCS: targetVariable=[pivot::Variable|UnrestrictedName] '+=' ownedExpression=ExpCS ';';
+	
+ControlStatementCS returns MappingStatementCS: ConnectionStatementCS | MappingCallCS | MappingLoopCS;
 	
 DirectionCS: {DirectionCS} name=UnrestrictedName?
 	'imports' imports+=[pivot::Package|UnrestrictedName] (',' imports+=[pivot::Package|UnrestrictedName])*
@@ -66,18 +70,17 @@ ImportCS returns base::ImportCS:
 
 MappingCS: {MappingCS} isDefault?='default'? 'map' name=UnrestrictedName ('in' ownedInPathName=PathNameCS)?
 	('uses' ownedUsesPathNames+=PathNameCS (',' ownedUsesPathNames+=PathNameCS)*)? ('key' ownedKeyExpression=ExpCS ';')?
-	'{' ownedDomains+=(SourceDomainCS | TargetDomainCS)* ('where' ownedMiddle=MiddleDomainCS)? ownedStatements+=StatementCS* '}';
+	'{' ownedDomains+=(SourceDomainCS | TargetDomainCS)* ('where' ownedMiddle=MiddleDomainCS)?
+	ownedStatements+=BottomStatementCS* ownedStatements+=ControlStatementCS* '}';
 	
 MappingCallCS: {MappingCallCS} isInfinite?='infinite'? 'call' ownedPathName=PathNameCS
 	'{' ownedBindings+=MappingCallBindingCS* '}';
 
 MappingCallBindingCS: referredVariable=[pivot::Variable|UnrestrictedName] (':='|isPolled?='?=') ownedValue=ExpCS ';';
 	
-MappingLoopCS: 'for' ownedIterator=MappingIteratorCS 'in' ownedInExpression=ExpCS '{' ownedMappingStatements+=MappingStatementCS+ '}';
+MappingLoopCS: 'for' ownedIterator=MappingIteratorCS 'in' ownedInExpression=ExpCS '{' ownedMappingStatements+=ControlStatementCS+ '}';
 	
 MappingIteratorCS returns essentialocl::VariableCS: name=UnrestrictedName (':' ownedType=TypeExpCS)?;
-	
-MappingStatementCS: ConnectionStatementCS | MappingCallCS | MappingLoopCS;
 	
 MiddleDomainCS returns DomainCS:
 	('{' ('check' checkedProperties+=PathNameCS (',' checkedProperties+=PathNameCS)*)?
@@ -137,6 +140,8 @@ RealizedVariableCS:
 
 ScopeNameCS returns base::PathNameCS:
 	ownedPathElements+=FirstPathElementCS '::' (ownedPathElements+=NextPathElementCS '::')*;
+
+SetStatementCS: 'set' referredVariable=[pivot::Variable|UnrestrictedName] '.' referredProperty=[pivot::Property|UnrestrictedName] ':=' ownedInitExpression=ExpCS ';';
 	
 SourceDomainCS returns DomainCS: isCheck?='check' direction=[qvtbase::TypedModel|UnrestrictedName]
 	('{' ('check' checkedProperties+=PathNameCS (',' checkedProperties+=PathNameCS)*)?
@@ -154,7 +159,7 @@ SourceGuardPatternCS returns GuardPatternCS:
 	{GuardPatternCS} '(' (ownedUnrealizedVariables+=UnrealizedVariableCS (',' ownedUnrealizedVariables+=UnrealizedVariableCS)*)? ')'
 ;
 	
-StatementCS: MappingStatementCS;
+StatementCS: ControlStatementCS;
 
 TransformationCS:
 	'transformation' ownedPathName=ScopeNameCS? name=UnreservedName '{' (ownedDirections+=DirectionCS ';')* '}';

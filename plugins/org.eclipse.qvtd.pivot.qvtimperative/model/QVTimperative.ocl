@@ -52,10 +52,10 @@ def: isTarget : Boolean = oclIsKindOf(ImperativeDomain) and oclAsType(Imperative
 context ImperativeDomain
 def: mapping : qvtimperative::Mapping = rule.oclAsType(qvtimperative::Mapping)
 inv CheckableXorEnforceable: isCheckable xor isEnforceable
-inv NoSideBottomPatternVariables: bottomPattern.variable->isEmpty()
+--inv NoSideBottomPatternVariables: bottomPattern.variable->isEmpty()
 inv NoSideBottomPatternAssignments: bottomPattern.assignment->isEmpty()
 
-context PropertyAssignment
+context SetStatement
 inv IsNotReadOnly: not targetProperty.isReadOnly
 inv PropertyOfSlot(slotExpression.type.name + ' must conform to ' + targetProperty.owningClass.name): slotExpression.type.conformsTo(targetProperty.owningClass)
 inv CompatibleType(value.type.name + ' must conform to ' + targetProperty.type.name): value.type.conformsTo(targetProperty.type)

@@ -92,6 +92,11 @@
     <genClasses ecoreClass="QVTimperativeCS.ecore#//RealizedVariableCS">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//RealizedVariableCS/ownedInitExpression"/>
     </genClasses>
+    <genClasses ecoreClass="QVTimperativeCS.ecore#//SetStatementCS">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//SetStatementCS/referredProperty"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//SetStatementCS/referredVariable"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//SetStatementCS/ownedInitExpression"/>
+    </genClasses>
     <genClasses image="false" ecoreClass="QVTimperativeCS.ecore#//StatementCS"/>
     <genClasses ecoreClass="QVTimperativeCS.ecore#//TopLevelCS">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//TopLevelCS/ownedMappings"/>

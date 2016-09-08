@@ -51,26 +51,22 @@
       <rule xsi:type="qvti:Mapping" xmi:id="m..classescs2as.__root__" name="__root__">
         <guardPattern/>
         <bottomPattern/>
-        <mappingStatement xsi:type="qvti:MappingSequence">
-          <mappingStatements xsi:type="qvti:MappingLoop">
+          <ownedStatements xsi:type="qvti:MappingLoop">
             <ownedSource xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.0"
                 referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclElement.allInstances">
               <ownedSource xsi:type="pivot:TypeExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class"
                   referredType="pivot:Class ../ClassesCS.ecore.oclas#T.classescs.PackageCS"/>
             </ownedSource>
-            <ownedBody xsi:type="qvti:MappingSequence">
-              <mappingStatements xsi:type="qvti:MappingCall" referredMapping="#m..classescs2as.createPackage">
+              <ownedMappingStatements xsi:type="qvti:MappingCall" referredMapping="#m..classescs2as.createPackage">
                 <binding boundVariable="#qV..classescs2as.createPackage.leftCS.guard.packageCS">
                   <value xsi:type="pivot:VariableExp" type="pivot:Class ../ClassesCS.ecore.oclas#T.classescs.PackageCS"
                       referredVariable="#i..classescs2as.__root__.0.0.packageCS"/>
                 </binding>
-              </mappingStatements>
-            </ownedBody>
+              </ownedMappingStatements>
             <ownedIterators xmi:id="i..classescs2as.__root__.0.0.packageCS" name="packageCS"
                 type="pivot:Class ../ClassesCS.ecore.oclas#T.classescs.PackageCS"/>
-          </mappingStatements>
-        </mappingStatement>
-      </rule>
+          </ownedStatements>
+       </rule>
     </ownedClasses>
   </ownedPackages>
   <ownedPackages xmi:id="P.$$" name="$$" URI="http://www.eclipse.org/ocl/2015/Orphanage"

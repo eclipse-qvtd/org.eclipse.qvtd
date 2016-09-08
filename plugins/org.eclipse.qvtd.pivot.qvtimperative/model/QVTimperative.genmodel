@@ -34,8 +34,10 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//BottomPattern/assignment"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//BottomPattern/realizedVariable"/>
     </genClasses>
+    <genClasses image="false" ecoreClass="QVTimperative.ecore#//BottomStatement"/>
     <genClasses ecoreClass="QVTimperative.ecore#//ConnectionAssignment">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//ConnectionAssignment/targetVariable"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperative.ecore#//ConnectionAssignment/isEnforceadUnqiue"/>
     </genClasses>
     <genClasses ecoreClass="QVTimperative.ecore#//ConnectionStatement">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//ConnectionStatement/targetVariable"/>
@@ -73,16 +75,13 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//MappingLoop/ownedSource"/>
     </genClasses>
     <genClasses image="false" ecoreClass="QVTimperative.ecore#//MappingStatement"/>
-    <genClasses image="false" ecoreClass="QVTimperative.ecore#//NavigationAssignment">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//NavigationAssignment/slotExpression"/>
-    </genClasses>
-    <genClasses ecoreClass="QVTimperative.ecore#//OppositePropertyAssignment">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//OppositePropertyAssignment/targetProperty"/>
-    </genClasses>
-    <genClasses ecoreClass="QVTimperative.ecore#//PropertyAssignment">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//PropertyAssignment/targetProperty"/>
-    </genClasses>
     <genClasses ecoreClass="QVTimperative.ecore#//RealizedVariable"/>
+    <genClasses ecoreClass="QVTimperative.ecore#//SetStatement">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//SetStatement/slotExpression"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//SetStatement/targetProperty"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//SetStatement/value"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperative.ecore#//SetStatement/isOpposite"/>
+    </genClasses>
     <genClasses image="false" ecoreClass="QVTimperative.ecore#//Statement"/>
     <genClasses ecoreClass="QVTimperative.ecore#//VariableAssignment">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//VariableAssignment/targetVariable"/>

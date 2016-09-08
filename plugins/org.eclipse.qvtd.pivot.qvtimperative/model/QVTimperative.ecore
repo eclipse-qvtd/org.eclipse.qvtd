@@ -47,6 +47,11 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="realizedVariable" ordered="false"
         upperBound="-1" eType="#//RealizedVariable" containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BottomStatement" abstract="true" eSuperTypes="#//Statement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="A MappingCall specifies the invocation of a referredMapping with a set of bindings&#xA;of the bound variables of the referredMapping to values provided in the invocation.&#xA;Where Collections of values are provided for isLoop bindings, a distinct invocation&#xA;is performed for each distinct permutation of Collection elements."/>
+    </eAnnotations>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ConnectionAssignment" eSuperTypes="#//Assignment">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="A ConnectionAssignment assigns initial values to a ConnectionVariable."/>
@@ -57,6 +62,8 @@
         <details key="body" value="assignment"/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isEnforceadUnqiue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        unsettable="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ConnectionStatement" eSuperTypes="#//MappingStatement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -180,33 +187,30 @@
       <details key="documentation" value="A MappingCall specifies the invocation of a referredMapping with a set of bindings&#xA;of the bound variables of the referredMapping to values provided in the invocation.&#xA;Where Collections of values are provided for isLoop bindings, a distinct invocation&#xA;is performed for each distinct permutation of Collection elements."/>
     </eAnnotations>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="NavigationAssignment" abstract="true"
-      eSuperTypes="#//Assignment">
+  <eClassifiers xsi:type="ecore:EClass" name="RealizedVariable" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#//Variable"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SetStatement" eSuperTypes="#//BottomStatement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="slotExpression" lowerBound="1"
-        eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//OCLExpression"
+        eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//VariableExp"
         containment="true">
       <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
         <details key="body" value="slotAssignment"/>
       </eAnnotations>
     </eStructuralFeatures>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="OppositePropertyAssignment" eSuperTypes="#//NavigationAssignment">
     <eStructuralFeatures xsi:type="ecore:EReference" name="targetProperty" lowerBound="1"
         eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//Property">
       <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
         <details key="body" value="assignment"/>
       </eAnnotations>
     </eStructuralFeatures>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="PropertyAssignment" eSuperTypes="#//NavigationAssignment">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="targetProperty" lowerBound="1"
-        eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//Property">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//OCLExpression"
+        containment="true">
       <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
-        <details key="body" value="assignment"/>
+        <details key="body" value="valueAssignment"/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isOpposite" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        unsettable="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="RealizedVariable" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#//Variable"/>
   <eClassifiers xsi:type="ecore:EClass" name="Statement" abstract="true" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#//NamedElement"/>
   <eClassifiers xsi:type="ecore:EClass" name="VariableAssignment" eSuperTypes="#//Assignment">
     <eStructuralFeatures xsi:type="ecore:EReference" name="targetVariable" lowerBound="1"

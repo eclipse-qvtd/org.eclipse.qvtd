@@ -49,8 +49,7 @@
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class HSV2HLS.ecore.oclas#T.HSV2HLS.HSVNode2HLSNode" referredVariable="#qV..hsv2hls.HSV2HLSRoot_LM.middle.bottom.middleRoot"/>
           </assignment>
         </bottomPattern>
-        <mappingStatement xsi:type="qvti:MappingSequence">
-          <mappingStatements xsi:type="qvti:MappingCall" referredMapping="#m..hsv2hls.HSV2HLSRecursion_LM">
+          <ownedStatements xsi:type="qvti:MappingCall" referredMapping="#m..hsv2hls.HSV2HLSRecursion_LM">
             <binding boundVariable="#qV..hsv2hls.HSV2HLSRecursion_LM.hsv.guard.hsvNode">
               <value xsi:type="pivot:VariableExp" type="pivot:Class HSVTree.ecore.oclas#T.HSVTree.HSVNode" referredVariable="#qV..hsv2hls.HSV2HLSRoot_LM.hsv.guard.hsvRoot"/>
             </binding>
@@ -62,14 +61,13 @@
                 <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class HSVTree.ecore.oclas#T.HSVTree.HSVNode" referredVariable="#qV..hsv2hls.HSV2HLSRoot_LM.hsv.guard.hsvRoot"/>
               </value>
             </binding>
-          </mappingStatements>
-          <mappingStatements xsi:type="qvti:MappingCall" referredMapping="#m..hsv2hls.HSV2HLSRoot_MR">
+          </ownedStatements>
+          <ownedStatements xsi:type="qvti:MappingCall" referredMapping="#m..hsv2hls.HSV2HLSRoot_MR">
             <binding boundVariable="#qV..hsv2hls.HSV2HLSRoot_MR.middle.guard.middleRoot">
               <value xsi:type="pivot:VariableExp" type="pivot:Class HSV2HLS.ecore.oclas#T.HSV2HLS.HSVNode2HLSNode" referredVariable="#qV..hsv2hls.HSV2HLSRoot_LM.middle.bottom.middleRoot"/>
             </binding>
-          </mappingStatements>
-        </mappingStatement>
-      </rule>
+          </ownedStatements>
+       </rule>
       <rule xsi:type="qvti:Mapping" xmi:id="m..hsv2hls.HSV2HLSRoot_MR" name="HSV2HLSRoot_MR">
         <domain xsi:type="qvti:ImperativeDomain" name="hls" isCheckable="false" isEnforceable="true" typedModel="#qT..hsv2hls.hls">
           <guardPattern/>
@@ -101,7 +99,7 @@
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class HLSTree.ecore.oclas#T.HLSTree.HLSNode" referredVariable="#qV..hsv2hls.HSV2HLSRoot_MR.hls.bottom.hlsRoot"/>
           </assignment>
         </bottomPattern>
-        <mappingStatement xsi:type="qvti:MappingCall" referredMapping="#m..hsv2hls.HSV2HLSRecursion_MR">
+        <ownedStatements xsi:type="qvti:MappingCall" referredMapping="#m..hsv2hls.HSV2HLSRecursion_MR">
           <binding boundVariable="#qV..hsv2hls.HSV2HLSRecursion_MR.middle.guard.middleNode">
             <value xsi:type="pivot:VariableExp" type="pivot:Class HSV2HLS.ecore.oclas#T.HSV2HLS.HSVNode2HLSNode" referredVariable="#qV..hsv2hls.HSV2HLSRoot_MR.middle.guard.middleRoot"/>
           </binding>
@@ -113,7 +111,7 @@
               <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class HSV2HLS.ecore.oclas#T.HSV2HLS.HSVNode2HLSNode" referredVariable="#qV..hsv2hls.HSV2HLSRoot_MR.middle.guard.middleRoot"/>
             </value>
           </binding>
-        </mappingStatement>
+        </ownedStatements>
       </rule>
       <rule xsi:type="qvti:Mapping" xmi:id="m..hsv2hls.HSV2HLSRecursion_LM" name="HSV2HLSRecursion_LM">
         <domain xsi:type="qvti:ImperativeDomain" name="hsv" isCheckable="true" isEnforceable="false" typedModel="#qT..hsv2hls.hsv">
@@ -168,7 +166,7 @@
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class HSV2HLS.ecore.oclas#T.HSV2HLS.HSVNode2HLSNode" referredVariable="#qV..hsv2hls.HSV2HLSRecursion_LM.middle.bottom.middleNode"/>
           </assignment>
         </bottomPattern>
-        <mappingStatement xsi:type="qvti:MappingCall" referredMapping="#m..hsv2hls.HSV2HLSRecursion_LM">
+        <ownedStatements xsi:type="qvti:MappingCall" referredMapping="#m..hsv2hls.HSV2HLSRecursion_LM">
           <binding boundVariable="#qV..hsv2hls.HSV2HLSRecursion_LM.hsv.guard.hsvNode">
             <value xsi:type="pivot:VariableExp" type="pivot:Class HSVTree.ecore.oclas#T.HSVTree.HSVNode" referredVariable="#qV..hsv2hls.HSV2HLSRecursion_LM.hsv.guard.hsvNode"/>
           </binding>
@@ -180,7 +178,7 @@
               <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class HSVTree.ecore.oclas#T.HSVTree.HSVNode" referredVariable="#qV..hsv2hls.HSV2HLSRecursion_LM.hsv.guard.hsvNode"/>
             </value>
           </binding>
-        </mappingStatement>
+        </ownedStatements>
       </rule>
       <rule xsi:type="qvti:Mapping" xmi:id="m..hsv2hls.HSV2HLSRecursion_MR" name="HSV2HLSRecursion_MR">
         <domain xsi:type="qvti:ImperativeDomain" name="hls" isCheckable="false" isEnforceable="true" typedModel="#qT..hsv2hls.hls">
@@ -235,7 +233,7 @@
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class HLSTree.ecore.oclas#T.HLSTree.HLSNode" referredVariable="#qV..hsv2hls.HSV2HLSRecursion_MR.hls.bottom.hlsNode"/>
           </assignment>
         </bottomPattern>
-        <mappingStatement xsi:type="qvti:MappingCall" referredMapping="#m..hsv2hls.HSV2HLSRecursion_MR">
+        <ownedStatements xsi:type="qvti:MappingCall" referredMapping="#m..hsv2hls.HSV2HLSRecursion_MR">
           <binding boundVariable="#qV..hsv2hls.HSV2HLSRecursion_MR.middle.guard.middleNode">
             <value xsi:type="pivot:VariableExp" type="pivot:Class HSV2HLS.ecore.oclas#T.HSV2HLS.HSVNode2HLSNode" referredVariable="#qV..hsv2hls.HSV2HLSRecursion_MR.middle.guard.middleParent"/>
           </binding>
@@ -247,24 +245,22 @@
               <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class HSV2HLS.ecore.oclas#T.HSV2HLS.HSVNode2HLSNode" referredVariable="#qV..hsv2hls.HSV2HLSRecursion_MR.middle.guard.middleParent"/>
             </value>
           </binding>
-        </mappingStatement>
+        </ownedStatements>
       </rule>
       <rule xsi:type="qvti:Mapping" xmi:id="m..hsv2hls.__root__" name="__root__">
         <guardPattern/>
         <bottomPattern xsi:type="qvti:BottomPattern"/>
-        <mappingStatement xsi:type="qvti:MappingLoop">
+        <ownedStatements xsi:type="qvti:MappingLoop">
           <ownedSource xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.0" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclElement.allInstances">
             <ownedSource xsi:type="pivot:TypeExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class" referredType="pivot:Class HSVTree.ecore.oclas#T.HSVTree.HSVNode"/>
           </ownedSource>
-          <ownedBody xsi:type="qvti:MappingSequence">
-            <mappingStatements xsi:type="qvti:MappingCall" referredMapping="#m..hsv2hls.HSV2HLSRoot_LM">
+            <ownedMappingStatements xsi:type="qvti:MappingCall" referredMapping="#m..hsv2hls.HSV2HLSRoot_LM">
               <binding boundVariable="#qV..hsv2hls.HSV2HLSRoot_LM.hsv.guard.hsvRoot">
                 <value xsi:type="pivot:VariableExp" type="pivot:Class HSVTree.ecore.oclas#T.HSVTree.HSVNode" referredVariable="#i..hsv2hls.__root__.0._hsvRoot_HSVNode"/>
               </binding>
-            </mappingStatements>
-          </ownedBody>
+            </ownedMappingStatements>
           <ownedIterators xmi:id="i..hsv2hls.__root__.0._hsvRoot_HSVNode" name="_hsvRoot_HSVNode" type="pivot:Class HSVTree.ecore.oclas#T.HSVTree.HSVNode"/>
-        </mappingStatement>
+        </ownedStatements>
       </rule>
     </ownedClasses>
   </ownedPackages>
