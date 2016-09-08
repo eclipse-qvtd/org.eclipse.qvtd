@@ -10,8 +10,6 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtimperative;
 
-import org.eclipse.ocl.pivot.OCLExpression;
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Mapping Statement</b></em>'.
@@ -28,6 +26,6 @@ import org.eclipse.ocl.pivot.OCLExpression;
  * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getMappingStatement()
  * @generated
  */
-public interface MappingStatement extends OCLExpression {
+public interface MappingStatement extends Statement {
 
 } // MappingStatement

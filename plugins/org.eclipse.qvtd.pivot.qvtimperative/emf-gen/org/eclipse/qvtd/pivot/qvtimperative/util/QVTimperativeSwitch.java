@@ -14,12 +14,10 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.CallExp;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.Namespace;
-import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.ReferringElement;
 import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.Variable;
@@ -31,6 +29,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
+import org.eclipse.qvtd.pivot.qvtimperative.*;
 import org.eclipse.qvtd.pivot.qvtimperative.Area;
 import org.eclipse.qvtd.pivot.qvtimperative.Assignment;
 import org.eclipse.qvtd.pivot.qvtimperative.BottomPattern;
@@ -45,7 +44,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
-import org.eclipse.qvtd.pivot.qvtimperative.MappingSequence;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.NavigationAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.OppositePropertyAssignment;
@@ -151,8 +149,7 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 				ConnectionStatement connectionStatement = (ConnectionStatement)theEObject;
 				T result = caseConnectionStatement(connectionStatement);
 				if (result == null) result = caseMappingStatement(connectionStatement);
-				if (result == null) result = caseOCLExpression(connectionStatement);
-				if (result == null) result = caseTypedElement(connectionStatement);
+				if (result == null) result = caseStatement(connectionStatement);
 				if (result == null) result = caseNamedElement(connectionStatement);
 				if (result == null) result = caseElement(connectionStatement);
 				if (result == null) result = caseNameable(connectionStatement);
@@ -235,8 +232,7 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 				T result = caseMappingCall(mappingCall);
 				if (result == null) result = caseMappingStatement(mappingCall);
 				if (result == null) result = caseReferringElement(mappingCall);
-				if (result == null) result = caseOCLExpression(mappingCall);
-				if (result == null) result = caseTypedElement(mappingCall);
+				if (result == null) result = caseStatement(mappingCall);
 				if (result == null) result = caseNamedElement(mappingCall);
 				if (result == null) result = caseElement(mappingCall);
 				if (result == null) result = caseNameable(mappingCall);
@@ -255,10 +251,8 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 			case QVTimperativePackage.MAPPING_LOOP: {
 				MappingLoop mappingLoop = (MappingLoop)theEObject;
 				T result = caseMappingLoop(mappingLoop);
-				if (result == null) result = caseCallExp(mappingLoop);
 				if (result == null) result = caseMappingStatement(mappingLoop);
-				if (result == null) result = caseOCLExpression(mappingLoop);
-				if (result == null) result = caseTypedElement(mappingLoop);
+				if (result == null) result = caseStatement(mappingLoop);
 				if (result == null) result = caseNamedElement(mappingLoop);
 				if (result == null) result = caseElement(mappingLoop);
 				if (result == null) result = caseNameable(mappingLoop);
@@ -266,24 +260,10 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTimperativePackage.MAPPING_SEQUENCE: {
-				MappingSequence mappingSequence = (MappingSequence)theEObject;
-				T result = caseMappingSequence(mappingSequence);
-				if (result == null) result = caseMappingStatement(mappingSequence);
-				if (result == null) result = caseOCLExpression(mappingSequence);
-				if (result == null) result = caseTypedElement(mappingSequence);
-				if (result == null) result = caseNamedElement(mappingSequence);
-				if (result == null) result = caseElement(mappingSequence);
-				if (result == null) result = caseNameable(mappingSequence);
-				if (result == null) result = caseVisitable(mappingSequence);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case QVTimperativePackage.MAPPING_STATEMENT: {
 				MappingStatement mappingStatement = (MappingStatement)theEObject;
 				T result = caseMappingStatement(mappingStatement);
-				if (result == null) result = caseOCLExpression(mappingStatement);
-				if (result == null) result = caseTypedElement(mappingStatement);
+				if (result == null) result = caseStatement(mappingStatement);
 				if (result == null) result = caseNamedElement(mappingStatement);
 				if (result == null) result = caseElement(mappingStatement);
 				if (result == null) result = caseNameable(mappingStatement);
@@ -330,6 +310,16 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = caseElement(realizedVariable);
 				if (result == null) result = caseNameable(realizedVariable);
 				if (result == null) result = caseVisitable(realizedVariable);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case QVTimperativePackage.STATEMENT: {
+				Statement statement = (Statement)theEObject;
+				T result = caseStatement(statement);
+				if (result == null) result = caseNamedElement(statement);
+				if (result == null) result = caseElement(statement);
+				if (result == null) result = caseNameable(statement);
+				if (result == null) result = caseVisitable(statement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -566,21 +556,6 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Mapping Sequence</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Mapping Sequence</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseMappingSequence(MappingSequence object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Mapping Statement</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -652,6 +627,21 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseRealizedVariable(RealizedVariable object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Statement</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Statement</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseStatement(Statement object) {
 		return null;
 	}
 
@@ -836,21 +826,6 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>OCL Expression</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>OCL Expression</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseOCLExpression(OCLExpression object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Variable Declaration</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -907,21 +882,6 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseDomain(Domain object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Call Exp</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Call Exp</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseCallExp(CallExp object) {
 		return null;
 	}
 

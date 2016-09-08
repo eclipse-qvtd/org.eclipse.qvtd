@@ -105,17 +105,12 @@ public abstract class AbstractQVTimperativeAS2XMIidVisitor
 
 	@Override
 	public @Nullable Boolean visitMappingLoop(org.eclipse.qvtd.pivot.qvtimperative.@NonNull MappingLoop object) {
-		return visitCallExp(object);
-	}
-
-	@Override
-	public @Nullable Boolean visitMappingSequence(org.eclipse.qvtd.pivot.qvtimperative.@NonNull MappingSequence object) {
 		return visitMappingStatement(object);
 	}
 
 	@Override
 	public @Nullable Boolean visitMappingStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull MappingStatement object) {
-		return visitOCLExpression(object);
+		return visitStatement(object);
 	}
 
 	@Override
@@ -136,6 +131,11 @@ public abstract class AbstractQVTimperativeAS2XMIidVisitor
 	@Override
 	public @Nullable Boolean visitRealizedVariable(org.eclipse.qvtd.pivot.qvtimperative.@NonNull RealizedVariable object) {
 		return visitVariable(object);
+	}
+
+	@Override
+	public @Nullable Boolean visitStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull Statement object) {
+		return visitNamedElement(object);
 	}
 
 	@Override

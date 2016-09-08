@@ -105,11 +105,6 @@ public abstract class AbstractNullQVTimperativeVisitor<@Nullable R, C>
 	}
 
 	@Override
-	public R visitMappingSequence(org.eclipse.qvtd.pivot.qvtimperative.@NonNull MappingSequence object) {
-		return null;
-	}
-
-	@Override
 	public R visitMappingStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull MappingStatement object) {
 		return null;
 	}
@@ -131,6 +126,11 @@ public abstract class AbstractNullQVTimperativeVisitor<@Nullable R, C>
 
 	@Override
 	public R visitRealizedVariable(org.eclipse.qvtd.pivot.qvtimperative.@NonNull RealizedVariable object) {
+		return null;
+	}
+
+	@Override
+	public R visitStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull Statement object) {
 		return null;
 	}
 

@@ -16,23 +16,24 @@ package org.eclipse.qvtd.pivot.qvtimperative.impl;
 
 import org.eclipse.emf.ecore.EClass;
 
-import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
+import org.eclipse.ocl.pivot.internal.NamedElementImpl;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
+import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Mapping Statement</b></em>'.
+ * An implementation of the model object '<em><b>Statement</b></em>'.
  * <!-- end-user-doc -->
  *
  * @generated
  */
-public abstract class MappingStatementImpl extends StatementImpl implements MappingStatement {
+public abstract class StatementImpl extends NamedElementImpl implements Statement {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected MappingStatementImpl() {
+	protected StatementImpl() {
 		super();
 	}
 
@@ -43,8 +44,8 @@ public abstract class MappingStatementImpl extends StatementImpl implements Mapp
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return QVTimperativePackage.Literals.MAPPING_STATEMENT;
+		return QVTimperativePackage.Literals.STATEMENT;
 	}
 
 
-} //MappingStatementImpl
+} //StatementImpl

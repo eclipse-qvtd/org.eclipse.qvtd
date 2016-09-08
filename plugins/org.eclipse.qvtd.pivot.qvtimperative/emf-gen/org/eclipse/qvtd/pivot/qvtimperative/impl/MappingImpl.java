@@ -18,7 +18,9 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Property;
@@ -28,8 +30,8 @@ import org.eclipse.qvtd.pivot.qvtimperative.Area;
 import org.eclipse.qvtd.pivot.qvtimperative.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
-import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
+import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
 
 /**
@@ -44,7 +46,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingImpl#getBottomPattern <em>Bottom Pattern</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingImpl#getCheckedProperties <em>Checked Properties</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingImpl#getEnforcedProperties <em>Enforced Properties</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingImpl#getMappingStatement <em>Mapping Statement</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingImpl#getOwnedStatements <em>Owned Statements</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingImpl#getPolledClasses <em>Polled Classes</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingImpl#getOwnedKeyExpression <em>Owned Key Expression</em>}</li>
  * </ul>
@@ -93,14 +95,14 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	protected EList<Property> enforcedProperties;
 
 	/**
-	 * The cached value of the '{@link #getMappingStatement() <em>Mapping Statement</em>}' containment reference.
+	 * The cached value of the '{@link #getOwnedStatements() <em>Owned Statements</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getMappingStatement()
+	 * @see #getOwnedStatements()
 	 * @generated
 	 * @ordered
 	 */
-	protected MappingStatement mappingStatement;
+	protected EList<Statement> ownedStatements;
 
 	/**
 	 * The cached value of the '{@link #getPolledClasses() <em>Polled Classes</em>}' reference list.
@@ -263,43 +265,11 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	 * @generated
 	 */
 	@Override
-	public MappingStatement getMappingStatement() {
-		return mappingStatement;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetMappingStatement(MappingStatement newMappingStatement, NotificationChain msgs) {
-		MappingStatement oldMappingStatement = mappingStatement;
-		mappingStatement = newMappingStatement;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTimperativePackage.MAPPING__MAPPING_STATEMENT, oldMappingStatement, newMappingStatement);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
+	public EList<Statement> getOwnedStatements() {
+		if (ownedStatements == null) {
+			ownedStatements = new EObjectContainmentEList<Statement>(Statement.class, this, QVTimperativePackage.MAPPING__OWNED_STATEMENTS);
 		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setMappingStatement(MappingStatement newMappingStatement) {
-		if (newMappingStatement != mappingStatement) {
-			NotificationChain msgs = null;
-			if (mappingStatement != null)
-				msgs = ((InternalEObject)mappingStatement).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTimperativePackage.MAPPING__MAPPING_STATEMENT, null, msgs);
-			if (newMappingStatement != null)
-				msgs = ((InternalEObject)newMappingStatement).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTimperativePackage.MAPPING__MAPPING_STATEMENT, null, msgs);
-			msgs = basicSetMappingStatement(newMappingStatement, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.MAPPING__MAPPING_STATEMENT, newMappingStatement, newMappingStatement));
+		return ownedStatements;
 	}
 
 	/**
@@ -392,8 +362,8 @@ public class MappingImpl extends RuleImpl implements Mapping {
 				return basicSetGuardPattern(null, msgs);
 			case QVTimperativePackage.MAPPING__BOTTOM_PATTERN:
 				return basicSetBottomPattern(null, msgs);
-			case QVTimperativePackage.MAPPING__MAPPING_STATEMENT:
-				return basicSetMappingStatement(null, msgs);
+			case QVTimperativePackage.MAPPING__OWNED_STATEMENTS:
+				return ((InternalEList<?>)getOwnedStatements()).basicRemove(otherEnd, msgs);
 			case QVTimperativePackage.MAPPING__OWNED_KEY_EXPRESSION:
 				return basicSetOwnedKeyExpression(null, msgs);
 		}
@@ -416,8 +386,8 @@ public class MappingImpl extends RuleImpl implements Mapping {
 				return getCheckedProperties();
 			case QVTimperativePackage.MAPPING__ENFORCED_PROPERTIES:
 				return getEnforcedProperties();
-			case QVTimperativePackage.MAPPING__MAPPING_STATEMENT:
-				return getMappingStatement();
+			case QVTimperativePackage.MAPPING__OWNED_STATEMENTS:
+				return getOwnedStatements();
 			case QVTimperativePackage.MAPPING__POLLED_CLASSES:
 				return getPolledClasses();
 			case QVTimperativePackage.MAPPING__OWNED_KEY_EXPRESSION:
@@ -449,8 +419,9 @@ public class MappingImpl extends RuleImpl implements Mapping {
 				getEnforcedProperties().clear();
 				getEnforcedProperties().addAll((Collection<? extends Property>)newValue);
 				return;
-			case QVTimperativePackage.MAPPING__MAPPING_STATEMENT:
-				setMappingStatement((MappingStatement)newValue);
+			case QVTimperativePackage.MAPPING__OWNED_STATEMENTS:
+				getOwnedStatements().clear();
+				getOwnedStatements().addAll((Collection<? extends Statement>)newValue);
 				return;
 			case QVTimperativePackage.MAPPING__POLLED_CLASSES:
 				getPolledClasses().clear();
@@ -483,8 +454,8 @@ public class MappingImpl extends RuleImpl implements Mapping {
 			case QVTimperativePackage.MAPPING__ENFORCED_PROPERTIES:
 				getEnforcedProperties().clear();
 				return;
-			case QVTimperativePackage.MAPPING__MAPPING_STATEMENT:
-				setMappingStatement((MappingStatement)null);
+			case QVTimperativePackage.MAPPING__OWNED_STATEMENTS:
+				getOwnedStatements().clear();
 				return;
 			case QVTimperativePackage.MAPPING__POLLED_CLASSES:
 				getPolledClasses().clear();
@@ -512,8 +483,8 @@ public class MappingImpl extends RuleImpl implements Mapping {
 				return checkedProperties != null && !checkedProperties.isEmpty();
 			case QVTimperativePackage.MAPPING__ENFORCED_PROPERTIES:
 				return enforcedProperties != null && !enforcedProperties.isEmpty();
-			case QVTimperativePackage.MAPPING__MAPPING_STATEMENT:
-				return mappingStatement != null;
+			case QVTimperativePackage.MAPPING__OWNED_STATEMENTS:
+				return ownedStatements != null && !ownedStatements.isEmpty();
 			case QVTimperativePackage.MAPPING__POLLED_CLASSES:
 				return polledClasses != null && !polledClasses.isEmpty();
 			case QVTimperativePackage.MAPPING__OWNED_KEY_EXPRESSION:

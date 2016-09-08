@@ -29,7 +29,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Rule;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.Mapping#getMappingStatement <em>Mapping Statement</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.Mapping#getOwnedStatements <em>Owned Statements</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.Mapping#getPolledClasses <em>Polled Classes</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.Mapping#getOwnedKeyExpression <em>Owned Key Expression</em>}</li>
  * </ul>
@@ -39,29 +39,19 @@ import org.eclipse.qvtd.pivot.qvtbase.Rule;
  */
 public interface Mapping extends Rule, Area {
 	/**
-	 * Returns the value of the '<em><b>Mapping Statement</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Owned Statements</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.qvtd.pivot.qvtimperative.Statement}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Mapping Statement</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Owned Statements</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Mapping Statement</em>' containment reference.
-	 * @see #setMappingStatement(MappingStatement)
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getMapping_MappingStatement()
+	 * @return the value of the '<em>Owned Statements</em>' containment reference list.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getMapping_OwnedStatements()
 	 * @generated
 	 */
-	MappingStatement getMappingStatement();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtimperative.Mapping#getMappingStatement <em>Mapping Statement</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Mapping Statement</em>' containment reference.
-	 * @see #getMappingStatement()
-	 * @generated
-	 */
-	void setMappingStatement(MappingStatement value);
+	EList<Statement> getOwnedStatements();
 
 	/**
 	 * Returns the value of the '<em><b>Polled Classes</b></em>' reference list.

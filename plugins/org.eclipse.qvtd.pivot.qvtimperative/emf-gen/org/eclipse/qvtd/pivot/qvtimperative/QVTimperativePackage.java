@@ -31,18 +31,18 @@ import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
  * <!-- end-user-doc -->
  * <!-- begin-model-doc -->
  * The Package for an Imperative QVT transformation.
- *
+ * 
  * An Imperative QVT trabsformation is expected to be created by an autogenerator that observes the following run-time restrictions:
- *
+ * 
  * A mapping that my be re-invoked must have MappingCall.isInfinite set for every possible invocation.
- *
+ * 
  * A mapping that reads object slots before they are guaranteed to have been assigned must declare the slots property in a corresponding ImperativeArea.checkedProperties entry.
- *
+ * 
  * A mapping that assigns an object slot that any mapping may access before assignment is guaranteed must declare declare the slots property in a corresponding ImperativeArea.enforcedProperties entry.
- *
+ * 
  * All reads by Functions/Queries must be guaranteed to succeed; i.e. the invoking mapping must check readiness before calling the query.
- *
- * All writes to multi-valued properties must be guaranteed to occur before any read of the property.
+ * 
+ * All writes to multi-valued properties must be guaranteed to occur before any read of the property. 
  * <!-- end-model-doc -->
  * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeFactory
  * @generated
@@ -571,97 +571,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.QVTimperativePackageImpl#getMappingStatement()
 	 * @generated
 	 */
-	int MAPPING_STATEMENT = 15;
-
-	/**
-	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAPPING_STATEMENT__ANNOTATING_COMMENTS = PivotPackage.OCL_EXPRESSION__ANNOTATING_COMMENTS;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAPPING_STATEMENT__OWNED_ANNOTATIONS = PivotPackage.OCL_EXPRESSION__OWNED_ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAPPING_STATEMENT__OWNED_COMMENTS = PivotPackage.OCL_EXPRESSION__OWNED_COMMENTS;
-
-	/**
-	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAPPING_STATEMENT__OWNED_EXTENSIONS = PivotPackage.OCL_EXPRESSION__OWNED_EXTENSIONS;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAPPING_STATEMENT__NAME = PivotPackage.OCL_EXPRESSION__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Is Many</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAPPING_STATEMENT__IS_MANY = PivotPackage.OCL_EXPRESSION__IS_MANY;
-
-	/**
-	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAPPING_STATEMENT__IS_REQUIRED = PivotPackage.OCL_EXPRESSION__IS_REQUIRED;
-
-	/**
-	 * The feature id for the '<em><b>Type</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAPPING_STATEMENT__TYPE = PivotPackage.OCL_EXPRESSION__TYPE;
-
-	/**
-	 * The feature id for the '<em><b>Type Value</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAPPING_STATEMENT__TYPE_VALUE = PivotPackage.OCL_EXPRESSION__TYPE_VALUE;
-
-	/**
-	 * The number of structural features of the '<em>Mapping Statement</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAPPING_STATEMENT_FEATURE_COUNT = PivotPackage.OCL_EXPRESSION_FEATURE_COUNT + 0;
+	int MAPPING_STATEMENT = 14;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.ConnectionStatementImpl <em>Connection Statement</em>}' class.
@@ -672,6 +582,224 @@ public interface QVTimperativePackage extends EPackage {
 	 * @generated
 	 */
 	int CONNECTION_STATEMENT = 4;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.ConnectionVariableImpl <em>Connection Variable</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.ConnectionVariableImpl
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.QVTimperativePackageImpl#getConnectionVariable()
+	 * @generated
+	 */
+	int CONNECTION_VARIABLE = 5;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.GuardPatternImpl <em>Guard Pattern</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.GuardPatternImpl
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.QVTimperativePackageImpl#getGuardPattern()
+	 * @generated
+	 */
+	int GUARD_PATTERN = 6;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.ImperativeDomainImpl <em>Imperative Domain</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.ImperativeDomainImpl
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.QVTimperativePackageImpl#getImperativeDomain()
+	 * @generated
+	 */
+	int IMPERATIVE_DOMAIN = 7;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingCallImpl <em>Mapping Call</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.MappingCallImpl
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.QVTimperativePackageImpl#getMappingCall()
+	 * @generated
+	 */
+	int MAPPING_CALL = 11;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingCallBindingImpl <em>Mapping Call Binding</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.MappingCallBindingImpl
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.QVTimperativePackageImpl#getMappingCallBinding()
+	 * @generated
+	 */
+	int MAPPING_CALL_BINDING = 12;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingLoopImpl <em>Mapping Loop</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.MappingLoopImpl
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.QVTimperativePackageImpl#getMappingLoop()
+	 * @generated
+	 */
+	int MAPPING_LOOP = 13;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.NavigationAssignmentImpl <em>Navigation Assignment</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.NavigationAssignmentImpl
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.QVTimperativePackageImpl#getNavigationAssignment()
+	 * @generated
+	 */
+	int NAVIGATION_ASSIGNMENT = 15;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.OppositePropertyAssignmentImpl <em>Opposite Property Assignment</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.OppositePropertyAssignmentImpl
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.QVTimperativePackageImpl#getOppositePropertyAssignment()
+	 * @generated
+	 */
+	int OPPOSITE_PROPERTY_ASSIGNMENT = 16;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.PropertyAssignmentImpl <em>Property Assignment</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.PropertyAssignmentImpl
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.QVTimperativePackageImpl#getPropertyAssignment()
+	 * @generated
+	 */
+	int PROPERTY_ASSIGNMENT = 17;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.RealizedVariableImpl <em>Realized Variable</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.RealizedVariableImpl
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.QVTimperativePackageImpl#getRealizedVariable()
+	 * @generated
+	 */
+	int REALIZED_VARIABLE = 18;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.StatementImpl <em>Statement</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.StatementImpl
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.QVTimperativePackageImpl#getStatement()
+	 * @generated
+	 */
+	int STATEMENT = 19;
+
+	/**
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATEMENT__ANNOTATING_COMMENTS = PivotPackage.NAMED_ELEMENT__ANNOTATING_COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATEMENT__OWNED_ANNOTATIONS = PivotPackage.NAMED_ELEMENT__OWNED_ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATEMENT__OWNED_COMMENTS = PivotPackage.NAMED_ELEMENT__OWNED_COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATEMENT__OWNED_EXTENSIONS = PivotPackage.NAMED_ELEMENT__OWNED_EXTENSIONS;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATEMENT__NAME = PivotPackage.NAMED_ELEMENT__NAME;
+
+	/**
+	 * The number of structural features of the '<em>Statement</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATEMENT_FEATURE_COUNT = PivotPackage.NAMED_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_STATEMENT__ANNOTATING_COMMENTS = STATEMENT__ANNOTATING_COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_STATEMENT__OWNED_ANNOTATIONS = STATEMENT__OWNED_ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_STATEMENT__OWNED_COMMENTS = STATEMENT__OWNED_COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_STATEMENT__OWNED_EXTENSIONS = STATEMENT__OWNED_EXTENSIONS;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_STATEMENT__NAME = STATEMENT__NAME;
+
+	/**
+	 * The number of structural features of the '<em>Mapping Statement</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_STATEMENT_FEATURE_COUNT = STATEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -719,42 +847,6 @@ public interface QVTimperativePackage extends EPackage {
 	int CONNECTION_STATEMENT__NAME = MAPPING_STATEMENT__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Is Many</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONNECTION_STATEMENT__IS_MANY = MAPPING_STATEMENT__IS_MANY;
-
-	/**
-	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONNECTION_STATEMENT__IS_REQUIRED = MAPPING_STATEMENT__IS_REQUIRED;
-
-	/**
-	 * The feature id for the '<em><b>Type</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONNECTION_STATEMENT__TYPE = MAPPING_STATEMENT__TYPE;
-
-	/**
-	 * The feature id for the '<em><b>Type Value</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONNECTION_STATEMENT__TYPE_VALUE = MAPPING_STATEMENT__TYPE_VALUE;
-
-	/**
 	 * The feature id for the '<em><b>Target Variable</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -780,16 +872,6 @@ public interface QVTimperativePackage extends EPackage {
 	 * @ordered
 	 */
 	int CONNECTION_STATEMENT_FEATURE_COUNT = MAPPING_STATEMENT_FEATURE_COUNT + 2;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.ConnectionVariableImpl <em>Connection Variable</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.ConnectionVariableImpl
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.QVTimperativePackageImpl#getConnectionVariable()
-	 * @generated
-	 */
-	int CONNECTION_VARIABLE = 5;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -909,16 +991,6 @@ public interface QVTimperativePackage extends EPackage {
 	int CONNECTION_VARIABLE_FEATURE_COUNT = PivotPackage.VARIABLE_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.GuardPatternImpl <em>Guard Pattern</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.GuardPatternImpl
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.QVTimperativePackageImpl#getGuardPattern()
-	 * @generated
-	 */
-	int GUARD_PATTERN = 6;
-
-	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -998,16 +1070,6 @@ public interface QVTimperativePackage extends EPackage {
 	 * @ordered
 	 */
 	int GUARD_PATTERN_FEATURE_COUNT = IMPERATIVE_PATTERN_FEATURE_COUNT + 1;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.ImperativeDomainImpl <em>Imperative Domain</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.ImperativeDomainImpl
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.QVTimperativePackageImpl#getImperativeDomain()
-	 * @generated
-	 */
-	int IMPERATIVE_DOMAIN = 7;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -1352,13 +1414,13 @@ public interface QVTimperativePackage extends EPackage {
 	int MAPPING__ENFORCED_PROPERTIES = QVTbasePackage.RULE_FEATURE_COUNT + 3;
 
 	/**
-	 * The feature id for the '<em><b>Mapping Statement</b></em>' containment reference.
+	 * The feature id for the '<em><b>Owned Statements</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING__MAPPING_STATEMENT = QVTbasePackage.RULE_FEATURE_COUNT + 4;
+	int MAPPING__OWNED_STATEMENTS = QVTbasePackage.RULE_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Polled Classes</b></em>' reference list.
@@ -1386,16 +1448,6 @@ public interface QVTimperativePackage extends EPackage {
 	 * @ordered
 	 */
 	int MAPPING_FEATURE_COUNT = QVTbasePackage.RULE_FEATURE_COUNT + 7;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingCallImpl <em>Mapping Call</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.MappingCallImpl
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.QVTimperativePackageImpl#getMappingCall()
-	 * @generated
-	 */
-	int MAPPING_CALL = 11;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -1443,42 +1495,6 @@ public interface QVTimperativePackage extends EPackage {
 	int MAPPING_CALL__NAME = MAPPING_STATEMENT__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Is Many</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAPPING_CALL__IS_MANY = MAPPING_STATEMENT__IS_MANY;
-
-	/**
-	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAPPING_CALL__IS_REQUIRED = MAPPING_STATEMENT__IS_REQUIRED;
-
-	/**
-	 * The feature id for the '<em><b>Type</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAPPING_CALL__TYPE = MAPPING_STATEMENT__TYPE;
-
-	/**
-	 * The feature id for the '<em><b>Type Value</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAPPING_CALL__TYPE_VALUE = MAPPING_STATEMENT__TYPE_VALUE;
-
-	/**
 	 * The feature id for the '<em><b>Binding</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1513,16 +1529,6 @@ public interface QVTimperativePackage extends EPackage {
 	 * @ordered
 	 */
 	int MAPPING_CALL_FEATURE_COUNT = MAPPING_STATEMENT_FEATURE_COUNT + 3;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingCallBindingImpl <em>Mapping Call Binding</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.MappingCallBindingImpl
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.QVTimperativePackageImpl#getMappingCallBinding()
-	 * @generated
-	 */
-	int MAPPING_CALL_BINDING = 12;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -1606,23 +1612,13 @@ public interface QVTimperativePackage extends EPackage {
 	int MAPPING_CALL_BINDING_FEATURE_COUNT = PivotPackage.ELEMENT_FEATURE_COUNT + 4;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingLoopImpl <em>Mapping Loop</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.MappingLoopImpl
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.QVTimperativePackageImpl#getMappingLoop()
-	 * @generated
-	 */
-	int MAPPING_LOOP = 13;
-
-	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_LOOP__ANNOTATING_COMMENTS = PivotPackage.CALL_EXP__ANNOTATING_COMMENTS;
+	int MAPPING_LOOP__ANNOTATING_COMMENTS = MAPPING_STATEMENT__ANNOTATING_COMMENTS;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -1631,7 +1627,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_LOOP__OWNED_ANNOTATIONS = PivotPackage.CALL_EXP__OWNED_ANNOTATIONS;
+	int MAPPING_LOOP__OWNED_ANNOTATIONS = MAPPING_STATEMENT__OWNED_ANNOTATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
@@ -1640,7 +1636,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_LOOP__OWNED_COMMENTS = PivotPackage.CALL_EXP__OWNED_COMMENTS;
+	int MAPPING_LOOP__OWNED_COMMENTS = MAPPING_STATEMENT__OWNED_COMMENTS;
 
 	/**
 	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
@@ -1649,7 +1645,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_LOOP__OWNED_EXTENSIONS = PivotPackage.CALL_EXP__OWNED_EXTENSIONS;
+	int MAPPING_LOOP__OWNED_EXTENSIONS = MAPPING_STATEMENT__OWNED_EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1658,79 +1654,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_LOOP__NAME = PivotPackage.CALL_EXP__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Is Many</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAPPING_LOOP__IS_MANY = PivotPackage.CALL_EXP__IS_MANY;
-
-	/**
-	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAPPING_LOOP__IS_REQUIRED = PivotPackage.CALL_EXP__IS_REQUIRED;
-
-	/**
-	 * The feature id for the '<em><b>Type</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAPPING_LOOP__TYPE = PivotPackage.CALL_EXP__TYPE;
-
-	/**
-	 * The feature id for the '<em><b>Type Value</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAPPING_LOOP__TYPE_VALUE = PivotPackage.CALL_EXP__TYPE_VALUE;
-
-	/**
-	 * The feature id for the '<em><b>Is Implicit</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAPPING_LOOP__IS_IMPLICIT = PivotPackage.CALL_EXP__IS_IMPLICIT;
-
-	/**
-	 * The feature id for the '<em><b>Is Safe</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAPPING_LOOP__IS_SAFE = PivotPackage.CALL_EXP__IS_SAFE;
-
-	/**
-	 * The feature id for the '<em><b>Owned Source</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAPPING_LOOP__OWNED_SOURCE = PivotPackage.CALL_EXP__OWNED_SOURCE;
-
-	/**
-	 * The feature id for the '<em><b>Owned Body</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAPPING_LOOP__OWNED_BODY = PivotPackage.CALL_EXP_FEATURE_COUNT + 0;
+	int MAPPING_LOOP__NAME = MAPPING_STATEMENT__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Owned Iterators</b></em>' containment reference list.
@@ -1739,7 +1663,25 @@ public interface QVTimperativePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_LOOP__OWNED_ITERATORS = PivotPackage.CALL_EXP_FEATURE_COUNT + 1;
+	int MAPPING_LOOP__OWNED_ITERATORS = MAPPING_STATEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Owned Mapping Statements</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_LOOP__OWNED_MAPPING_STATEMENTS = MAPPING_STATEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Owned Source</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_LOOP__OWNED_SOURCE = MAPPING_STATEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Mapping Loop</em>' class.
@@ -1748,126 +1690,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_LOOP_FEATURE_COUNT = PivotPackage.CALL_EXP_FEATURE_COUNT + 2;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingSequenceImpl <em>Mapping Sequence</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.MappingSequenceImpl
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.QVTimperativePackageImpl#getMappingSequence()
-	 * @generated
-	 */
-	int MAPPING_SEQUENCE = 14;
-
-	/**
-	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAPPING_SEQUENCE__ANNOTATING_COMMENTS = MAPPING_STATEMENT__ANNOTATING_COMMENTS;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAPPING_SEQUENCE__OWNED_ANNOTATIONS = MAPPING_STATEMENT__OWNED_ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAPPING_SEQUENCE__OWNED_COMMENTS = MAPPING_STATEMENT__OWNED_COMMENTS;
-
-	/**
-	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAPPING_SEQUENCE__OWNED_EXTENSIONS = MAPPING_STATEMENT__OWNED_EXTENSIONS;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAPPING_SEQUENCE__NAME = MAPPING_STATEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Is Many</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAPPING_SEQUENCE__IS_MANY = MAPPING_STATEMENT__IS_MANY;
-
-	/**
-	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAPPING_SEQUENCE__IS_REQUIRED = MAPPING_STATEMENT__IS_REQUIRED;
-
-	/**
-	 * The feature id for the '<em><b>Type</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAPPING_SEQUENCE__TYPE = MAPPING_STATEMENT__TYPE;
-
-	/**
-	 * The feature id for the '<em><b>Type Value</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAPPING_SEQUENCE__TYPE_VALUE = MAPPING_STATEMENT__TYPE_VALUE;
-
-	/**
-	 * The feature id for the '<em><b>Mapping Statements</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAPPING_SEQUENCE__MAPPING_STATEMENTS = MAPPING_STATEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Mapping Sequence</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAPPING_SEQUENCE_FEATURE_COUNT = MAPPING_STATEMENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.NavigationAssignmentImpl <em>Navigation Assignment</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.NavigationAssignmentImpl
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.QVTimperativePackageImpl#getNavigationAssignment()
-	 * @generated
-	 */
-	int NAVIGATION_ASSIGNMENT = 16;
+	int MAPPING_LOOP_FEATURE_COUNT = MAPPING_STATEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -1949,16 +1772,6 @@ public interface QVTimperativePackage extends EPackage {
 	 * @ordered
 	 */
 	int NAVIGATION_ASSIGNMENT_FEATURE_COUNT = ASSIGNMENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.OppositePropertyAssignmentImpl <em>Opposite Property Assignment</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.OppositePropertyAssignmentImpl
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.QVTimperativePackageImpl#getOppositePropertyAssignment()
-	 * @generated
-	 */
-	int OPPOSITE_PROPERTY_ASSIGNMENT = 17;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -2051,16 +1864,6 @@ public interface QVTimperativePackage extends EPackage {
 	int OPPOSITE_PROPERTY_ASSIGNMENT_FEATURE_COUNT = NAVIGATION_ASSIGNMENT_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.PropertyAssignmentImpl <em>Property Assignment</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.PropertyAssignmentImpl
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.QVTimperativePackageImpl#getPropertyAssignment()
-	 * @generated
-	 */
-	int PROPERTY_ASSIGNMENT = 18;
-
-	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2149,16 +1952,6 @@ public interface QVTimperativePackage extends EPackage {
 	 * @ordered
 	 */
 	int PROPERTY_ASSIGNMENT_FEATURE_COUNT = NAVIGATION_ASSIGNMENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.RealizedVariableImpl <em>Realized Variable</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.RealizedVariableImpl
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.QVTimperativePackageImpl#getRealizedVariable()
-	 * @generated
-	 */
-	int REALIZED_VARIABLE = 19;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -2726,15 +2519,15 @@ public interface QVTimperativePackage extends EPackage {
 	EClass getMapping();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.pivot.qvtimperative.Mapping#getMappingStatement <em>Mapping Statement</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.pivot.qvtimperative.Mapping#getOwnedStatements <em>Owned Statements</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Mapping Statement</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.Mapping#getMappingStatement()
+	 * @return the meta object for the containment reference list '<em>Owned Statements</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.Mapping#getOwnedStatements()
 	 * @see #getMapping()
 	 * @generated
 	 */
-	EReference getMapping_MappingStatement();
+	EReference getMapping_OwnedStatements();
 
 	/**
 	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.pivot.qvtimperative.Mapping#getPolledClasses <em>Polled Classes</em>}'.
@@ -2866,17 +2659,6 @@ public interface QVTimperativePackage extends EPackage {
 	EClass getMappingLoop();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.pivot.qvtimperative.MappingLoop#getOwnedBody <em>Owned Body</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Owned Body</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.MappingLoop#getOwnedBody()
-	 * @see #getMappingLoop()
-	 * @generated
-	 */
-	EReference getMappingLoop_OwnedBody();
-
-	/**
 	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.pivot.qvtimperative.MappingLoop#getOwnedIterators <em>Owned Iterators</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2888,25 +2670,26 @@ public interface QVTimperativePackage extends EPackage {
 	EReference getMappingLoop_OwnedIterators();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtimperative.MappingSequence <em>Mapping Sequence</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.pivot.qvtimperative.MappingLoop#getOwnedMappingStatements <em>Owned Mapping Statements</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Mapping Sequence</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.MappingSequence
+	 * @return the meta object for the containment reference list '<em>Owned Mapping Statements</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.MappingLoop#getOwnedMappingStatements()
+	 * @see #getMappingLoop()
 	 * @generated
 	 */
-	EClass getMappingSequence();
+	EReference getMappingLoop_OwnedMappingStatements();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.pivot.qvtimperative.MappingSequence#getMappingStatements <em>Mapping Statements</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.pivot.qvtimperative.MappingLoop#getOwnedSource <em>Owned Source</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Mapping Statements</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.MappingSequence#getMappingStatements()
-	 * @see #getMappingSequence()
+	 * @return the meta object for the containment reference '<em>Owned Source</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.MappingLoop#getOwnedSource()
+	 * @see #getMappingLoop()
 	 * @generated
 	 */
-	EReference getMappingSequence_MappingStatements();
+	EReference getMappingLoop_OwnedSource();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtimperative.MappingStatement <em>Mapping Statement</em>}'.
@@ -2990,6 +2773,16 @@ public interface QVTimperativePackage extends EPackage {
 	 * @generated
 	 */
 	EClass getRealizedVariable();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtimperative.Statement <em>Statement</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Statement</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.Statement
+	 * @generated
+	 */
+	EClass getStatement();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtimperative.VariableAssignment <em>Variable Assignment</em>}'.
@@ -3286,12 +3079,12 @@ public interface QVTimperativePackage extends EPackage {
 		EClass MAPPING = eINSTANCE.getMapping();
 
 		/**
-		 * The meta object literal for the '<em><b>Mapping Statement</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Owned Statements</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference MAPPING__MAPPING_STATEMENT = eINSTANCE.getMapping_MappingStatement();
+		EReference MAPPING__OWNED_STATEMENTS = eINSTANCE.getMapping_OwnedStatements();
 
 		/**
 		 * The meta object literal for the '<em><b>Polled Classes</b></em>' reference list feature.
@@ -3396,14 +3189,6 @@ public interface QVTimperativePackage extends EPackage {
 		EClass MAPPING_LOOP = eINSTANCE.getMappingLoop();
 
 		/**
-		 * The meta object literal for the '<em><b>Owned Body</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference MAPPING_LOOP__OWNED_BODY = eINSTANCE.getMappingLoop_OwnedBody();
-
-		/**
 		 * The meta object literal for the '<em><b>Owned Iterators</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3412,22 +3197,20 @@ public interface QVTimperativePackage extends EPackage {
 		EReference MAPPING_LOOP__OWNED_ITERATORS = eINSTANCE.getMappingLoop_OwnedIterators();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingSequenceImpl <em>Mapping Sequence</em>}' class.
+		 * The meta object literal for the '<em><b>Owned Mapping Statements</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.MappingSequenceImpl
-		 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.QVTimperativePackageImpl#getMappingSequence()
 		 * @generated
 		 */
-		EClass MAPPING_SEQUENCE = eINSTANCE.getMappingSequence();
+		EReference MAPPING_LOOP__OWNED_MAPPING_STATEMENTS = eINSTANCE.getMappingLoop_OwnedMappingStatements();
 
 		/**
-		 * The meta object literal for the '<em><b>Mapping Statements</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Owned Source</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference MAPPING_SEQUENCE__MAPPING_STATEMENTS = eINSTANCE.getMappingSequence_MappingStatements();
+		EReference MAPPING_LOOP__OWNED_SOURCE = eINSTANCE.getMappingLoop_OwnedSource();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingStatementImpl <em>Mapping Statement</em>}' class.
@@ -3502,6 +3285,16 @@ public interface QVTimperativePackage extends EPackage {
 		 * @generated
 		 */
 		EClass REALIZED_VARIABLE = eINSTANCE.getRealizedVariable();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.StatementImpl <em>Statement</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.StatementImpl
+		 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.QVTimperativePackageImpl#getStatement()
+		 * @generated
+		 */
+		EClass STATEMENT = eINSTANCE.getStatement();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.VariableAssignmentImpl <em>Variable Assignment</em>}' class.

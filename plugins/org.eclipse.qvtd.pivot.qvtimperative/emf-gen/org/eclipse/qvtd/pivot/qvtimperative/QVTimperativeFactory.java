@@ -139,15 +139,6 @@ public interface QVTimperativeFactory extends EFactory {
 	@NonNull MappingLoop createMappingLoop();
 
 	/**
-	 * Returns a new object of class '<em>Mapping Sequence</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Mapping Sequence</em>'.
-	 * @generated
-	 */
-	@NonNull MappingSequence createMappingSequence();
-
-	/**
 	 * Returns a new object of class '<em>Opposite Property Assignment</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

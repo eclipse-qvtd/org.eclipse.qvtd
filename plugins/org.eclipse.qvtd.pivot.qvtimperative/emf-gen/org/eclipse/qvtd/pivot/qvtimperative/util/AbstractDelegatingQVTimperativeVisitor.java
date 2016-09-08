@@ -101,11 +101,6 @@ public abstract class AbstractDelegatingQVTimperativeVisitor<R, C, @NonNull D ex
 	}
 
 	@Override
-	public R visitMappingSequence(org.eclipse.qvtd.pivot.qvtimperative.@NonNull MappingSequence object) {
-		return delegate.visitMappingSequence(object);
-	}
-
-	@Override
 	public R visitMappingStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull MappingStatement object) {
 		return delegate.visitMappingStatement(object);
 	}
@@ -128,6 +123,11 @@ public abstract class AbstractDelegatingQVTimperativeVisitor<R, C, @NonNull D ex
 	@Override
 	public R visitRealizedVariable(org.eclipse.qvtd.pivot.qvtimperative.@NonNull RealizedVariable object) {
 		return delegate.visitRealizedVariable(object);
+	}
+
+	@Override
+	public R visitStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull Statement object) {
+		return delegate.visitStatement(object);
 	}
 
 	@Override

@@ -105,17 +105,12 @@ public abstract class AbstractQVTimperativeASSaverResolveVisitor
 
 	@Override
 	public @Nullable Object visitMappingLoop(org.eclipse.qvtd.pivot.qvtimperative.@NonNull MappingLoop object) {
-		return visitCallExp(object);
-	}
-
-	@Override
-	public @Nullable Object visitMappingSequence(org.eclipse.qvtd.pivot.qvtimperative.@NonNull MappingSequence object) {
 		return visitMappingStatement(object);
 	}
 
 	@Override
 	public @Nullable Object visitMappingStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull MappingStatement object) {
-		return visitOCLExpression(object);
+		return visitStatement(object);
 	}
 
 	@Override
@@ -136,6 +131,11 @@ public abstract class AbstractQVTimperativeASSaverResolveVisitor
 	@Override
 	public @Nullable Object visitRealizedVariable(org.eclipse.qvtd.pivot.qvtimperative.@NonNull RealizedVariable object) {
 		return visitVariable(object);
+	}
+
+	@Override
+	public @Nullable Object visitStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull Statement object) {
+		return visitNamedElement(object);
 	}
 
 	@Override

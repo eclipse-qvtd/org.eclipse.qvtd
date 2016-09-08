@@ -101,17 +101,12 @@ public abstract class AbstractExtendingQVTimperativeVisitor<R, C>
 
 	@Override
 	public R visitMappingLoop(org.eclipse.qvtd.pivot.qvtimperative.@NonNull MappingLoop object) {
-		return visitCallExp(object);
-	}
-
-	@Override
-	public R visitMappingSequence(org.eclipse.qvtd.pivot.qvtimperative.@NonNull MappingSequence object) {
 		return visitMappingStatement(object);
 	}
 
 	@Override
 	public R visitMappingStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull MappingStatement object) {
-		return visitOCLExpression(object);
+		return visitStatement(object);
 	}
 
 	@Override
@@ -132,6 +127,11 @@ public abstract class AbstractExtendingQVTimperativeVisitor<R, C>
 	@Override
 	public R visitRealizedVariable(org.eclipse.qvtd.pivot.qvtimperative.@NonNull RealizedVariable object) {
 		return visitVariable(object);
+	}
+
+	@Override
+	public R visitStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull Statement object) {
+		return visitNamedElement(object);
 	}
 
 	@Override

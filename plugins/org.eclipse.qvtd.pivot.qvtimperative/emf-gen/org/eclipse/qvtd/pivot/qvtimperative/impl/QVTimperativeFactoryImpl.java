@@ -28,7 +28,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
-import org.eclipse.qvtd.pivot.qvtimperative.MappingSequence;
 import org.eclipse.qvtd.pivot.qvtimperative.OppositePropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeFactory;
@@ -93,7 +92,6 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 			case QVTimperativePackage.MAPPING_CALL: return createMappingCall();
 			case QVTimperativePackage.MAPPING_CALL_BINDING: return createMappingCallBinding();
 			case QVTimperativePackage.MAPPING_LOOP: return createMappingLoop();
-			case QVTimperativePackage.MAPPING_SEQUENCE: return createMappingSequence();
 			case QVTimperativePackage.OPPOSITE_PROPERTY_ASSIGNMENT: return createOppositePropertyAssignment();
 			case QVTimperativePackage.PROPERTY_ASSIGNMENT: return createPropertyAssignment();
 			case QVTimperativePackage.REALIZED_VARIABLE: return createRealizedVariable();
@@ -234,17 +232,6 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 	public @NonNull MappingLoop createMappingLoop() {
 		MappingLoopImpl mappingLoop = new MappingLoopImpl();
 		return mappingLoop;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public @NonNull MappingSequence createMappingSequence() {
-		MappingSequenceImpl mappingSequence = new MappingSequenceImpl();
-		return mappingSequence;
 	}
 
 	/**
