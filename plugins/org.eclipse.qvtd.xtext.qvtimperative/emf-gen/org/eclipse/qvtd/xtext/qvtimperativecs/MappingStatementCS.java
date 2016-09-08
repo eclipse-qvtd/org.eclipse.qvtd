@@ -10,8 +10,6 @@
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtimperativecs;
 
-import org.eclipse.ocl.xtext.basecs.ModelElementCS;
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Mapping Statement CS</b></em>'.
@@ -22,5 +20,5 @@ import org.eclipse.ocl.xtext.basecs.ModelElementCS;
  * @model abstract="true"
  * @generated
  */
-public interface MappingStatementCS extends ModelElementCS {
+public interface MappingStatementCS extends StatementCS {
 } // MappingStatementCS

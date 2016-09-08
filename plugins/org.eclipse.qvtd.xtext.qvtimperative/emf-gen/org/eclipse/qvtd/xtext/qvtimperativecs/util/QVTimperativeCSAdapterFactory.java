@@ -130,10 +130,6 @@ public class QVTimperativeCSAdapterFactory extends AdapterFactoryImpl {
 				return createMappingLoopCSAdapter();
 			}
 			@Override
-			public Adapter caseMappingSequenceCS(MappingSequenceCS object) {
-				return createMappingSequenceCSAdapter();
-			}
-			@Override
 			public Adapter caseMappingStatementCS(MappingStatementCS object) {
 				return createMappingStatementCSAdapter();
 			}
@@ -164,6 +160,10 @@ public class QVTimperativeCSAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseRealizedVariableCS(RealizedVariableCS object) {
 				return createRealizedVariableCSAdapter();
+			}
+			@Override
+			public Adapter caseStatementCS(StatementCS object) {
+				return createStatementCSAdapter();
 			}
 			@Override
 			public Adapter caseTopLevelCS(TopLevelCS object) {
@@ -342,20 +342,6 @@ public class QVTimperativeCSAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createMappingLoopCSAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingSequenceCS <em>Mapping Sequence CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.MappingSequenceCS
-	 * @generated
-	 */
-	public Adapter createMappingSequenceCSAdapter() {
 		return null;
 	}
 
@@ -636,6 +622,20 @@ public class QVTimperativeCSAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createRealizedVariableCSAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.StatementCS <em>Statement CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.StatementCS
+	 * @generated
+	 */
+	public Adapter createStatementCSAdapter() {
 		return null;
 	}
 

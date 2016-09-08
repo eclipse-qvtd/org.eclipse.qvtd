@@ -112,15 +112,6 @@ public interface QVTimperativeCSFactory extends EFactory {
 	@NonNull MappingLoopCS createMappingLoopCS();
 
 	/**
-	 * Returns a new object of class '<em>Mapping Sequence CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Mapping Sequence CS</em>'.
-	 * @generated
-	 */
-	@NonNull MappingSequenceCS createMappingSequenceCS();
-
-	/**
 	 * Returns a new object of class '<em>Param Declaration CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

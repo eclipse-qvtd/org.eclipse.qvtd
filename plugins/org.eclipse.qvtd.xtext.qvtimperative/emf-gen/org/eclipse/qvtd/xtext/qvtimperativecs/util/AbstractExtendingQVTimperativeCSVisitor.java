@@ -90,13 +90,8 @@ public abstract class AbstractExtendingQVTimperativeCSVisitor<R, C>
 	}
 
 	@Override
-	public R visitMappingSequenceCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull MappingSequenceCS object) {
-		return visitMappingStatementCS(object);
-	}
-
-	@Override
 	public R visitMappingStatementCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull MappingStatementCS object) {
-		return visitModelElementCS(object);
+		return visitStatementCS(object);
 	}
 
 	@Override
@@ -132,6 +127,11 @@ public abstract class AbstractExtendingQVTimperativeCSVisitor<R, C>
 	@Override
 	public R visitRealizedVariableCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull RealizedVariableCS object) {
 		return visitRealizeableVariableCS(object);
+	}
+
+	@Override
+	public R visitStatementCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull StatementCS object) {
+		return visitModelElementCS(object);
 	}
 
 	@Override

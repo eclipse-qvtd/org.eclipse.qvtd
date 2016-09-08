@@ -4,23 +4,27 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtimperativecs.impl;
 
+import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
 import org.eclipse.ocl.xtext.essentialoclcs.VariableCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingLoopCS;
-import org.eclipse.qvtd.xtext.qvtimperativecs.MappingSequenceCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.MappingStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage;
 import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
 
@@ -34,7 +38,7 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingLoopCSImpl#getOwnedIterator <em>Owned Iterator</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingLoopCSImpl#getOwnedInExpression <em>Owned In Expression</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingLoopCSImpl#getOwnedMappingSequence <em>Owned Mapping Sequence</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingLoopCSImpl#getOwnedMappingStatements <em>Owned Mapping Statements</em>}</li>
  * </ul>
  *
  * @generated
@@ -61,14 +65,14 @@ public class MappingLoopCSImpl extends MappingStatementCSImpl implements Mapping
 	protected ExpCS ownedInExpression;
 
 	/**
-	 * The cached value of the '{@link #getOwnedMappingSequence() <em>Owned Mapping Sequence</em>}' containment reference.
+	 * The cached value of the '{@link #getOwnedMappingStatements() <em>Owned Mapping Statements</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getOwnedMappingSequence()
+	 * @see #getOwnedMappingStatements()
 	 * @generated
 	 * @ordered
 	 */
-	protected MappingSequenceCS ownedMappingSequence;
+	protected EList<MappingStatementCS> ownedMappingStatements;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -185,43 +189,11 @@ public class MappingLoopCSImpl extends MappingStatementCSImpl implements Mapping
 	 * @generated
 	 */
 	@Override
-	public MappingSequenceCS getOwnedMappingSequence() {
-		return ownedMappingSequence;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetOwnedMappingSequence(MappingSequenceCS newOwnedMappingSequence, NotificationChain msgs) {
-		MappingSequenceCS oldOwnedMappingSequence = ownedMappingSequence;
-		ownedMappingSequence = newOwnedMappingSequence;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.MAPPING_LOOP_CS__OWNED_MAPPING_SEQUENCE, oldOwnedMappingSequence, newOwnedMappingSequence);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
+	public EList<MappingStatementCS> getOwnedMappingStatements() {
+		if (ownedMappingStatements == null) {
+			ownedMappingStatements = new EObjectContainmentEList<MappingStatementCS>(MappingStatementCS.class, this, QVTimperativeCSPackage.MAPPING_LOOP_CS__OWNED_MAPPING_STATEMENTS);
 		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setOwnedMappingSequence(MappingSequenceCS newOwnedMappingSequence) {
-		if (newOwnedMappingSequence != ownedMappingSequence) {
-			NotificationChain msgs = null;
-			if (ownedMappingSequence != null)
-				msgs = ((InternalEObject)ownedMappingSequence).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTimperativeCSPackage.MAPPING_LOOP_CS__OWNED_MAPPING_SEQUENCE, null, msgs);
-			if (newOwnedMappingSequence != null)
-				msgs = ((InternalEObject)newOwnedMappingSequence).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTimperativeCSPackage.MAPPING_LOOP_CS__OWNED_MAPPING_SEQUENCE, null, msgs);
-			msgs = basicSetOwnedMappingSequence(newOwnedMappingSequence, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.MAPPING_LOOP_CS__OWNED_MAPPING_SEQUENCE, newOwnedMappingSequence, newOwnedMappingSequence));
+		return ownedMappingStatements;
 	}
 
 	/**
@@ -236,8 +208,8 @@ public class MappingLoopCSImpl extends MappingStatementCSImpl implements Mapping
 				return basicSetOwnedIterator(null, msgs);
 			case QVTimperativeCSPackage.MAPPING_LOOP_CS__OWNED_IN_EXPRESSION:
 				return basicSetOwnedInExpression(null, msgs);
-			case QVTimperativeCSPackage.MAPPING_LOOP_CS__OWNED_MAPPING_SEQUENCE:
-				return basicSetOwnedMappingSequence(null, msgs);
+			case QVTimperativeCSPackage.MAPPING_LOOP_CS__OWNED_MAPPING_STATEMENTS:
+				return ((InternalEList<?>)getOwnedMappingStatements()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -254,8 +226,8 @@ public class MappingLoopCSImpl extends MappingStatementCSImpl implements Mapping
 				return getOwnedIterator();
 			case QVTimperativeCSPackage.MAPPING_LOOP_CS__OWNED_IN_EXPRESSION:
 				return getOwnedInExpression();
-			case QVTimperativeCSPackage.MAPPING_LOOP_CS__OWNED_MAPPING_SEQUENCE:
-				return getOwnedMappingSequence();
+			case QVTimperativeCSPackage.MAPPING_LOOP_CS__OWNED_MAPPING_STATEMENTS:
+				return getOwnedMappingStatements();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -265,6 +237,7 @@ public class MappingLoopCSImpl extends MappingStatementCSImpl implements Mapping
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
@@ -274,8 +247,9 @@ public class MappingLoopCSImpl extends MappingStatementCSImpl implements Mapping
 			case QVTimperativeCSPackage.MAPPING_LOOP_CS__OWNED_IN_EXPRESSION:
 				setOwnedInExpression((ExpCS)newValue);
 				return;
-			case QVTimperativeCSPackage.MAPPING_LOOP_CS__OWNED_MAPPING_SEQUENCE:
-				setOwnedMappingSequence((MappingSequenceCS)newValue);
+			case QVTimperativeCSPackage.MAPPING_LOOP_CS__OWNED_MAPPING_STATEMENTS:
+				getOwnedMappingStatements().clear();
+				getOwnedMappingStatements().addAll((Collection<? extends MappingStatementCS>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -295,8 +269,8 @@ public class MappingLoopCSImpl extends MappingStatementCSImpl implements Mapping
 			case QVTimperativeCSPackage.MAPPING_LOOP_CS__OWNED_IN_EXPRESSION:
 				setOwnedInExpression((ExpCS)null);
 				return;
-			case QVTimperativeCSPackage.MAPPING_LOOP_CS__OWNED_MAPPING_SEQUENCE:
-				setOwnedMappingSequence((MappingSequenceCS)null);
+			case QVTimperativeCSPackage.MAPPING_LOOP_CS__OWNED_MAPPING_STATEMENTS:
+				getOwnedMappingStatements().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -314,8 +288,8 @@ public class MappingLoopCSImpl extends MappingStatementCSImpl implements Mapping
 				return ownedIterator != null;
 			case QVTimperativeCSPackage.MAPPING_LOOP_CS__OWNED_IN_EXPRESSION:
 				return ownedInExpression != null;
-			case QVTimperativeCSPackage.MAPPING_LOOP_CS__OWNED_MAPPING_SEQUENCE:
-				return ownedMappingSequence != null;
+			case QVTimperativeCSPackage.MAPPING_LOOP_CS__OWNED_MAPPING_STATEMENTS:
+				return ownedMappingStatements != null && !ownedMappingStatements.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

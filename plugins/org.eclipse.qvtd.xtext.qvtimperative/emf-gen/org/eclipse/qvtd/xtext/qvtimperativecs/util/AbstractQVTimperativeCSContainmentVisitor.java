@@ -94,13 +94,8 @@ public abstract class AbstractQVTimperativeCSContainmentVisitor
 	}
 
 	@Override
-	public @Nullable Continuation<?> visitMappingSequenceCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull MappingSequenceCS csElement) {
-		return visitMappingStatementCS(csElement);
-	}
-
-	@Override
 	public @Nullable Continuation<?> visitMappingStatementCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull MappingStatementCS csElement) {
-		return visitModelElementCS(csElement);
+		return visitStatementCS(csElement);
 	}
 
 	@Override
@@ -136,6 +131,11 @@ public abstract class AbstractQVTimperativeCSContainmentVisitor
 	@Override
 	public @Nullable Continuation<?> visitRealizedVariableCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull RealizedVariableCS csElement) {
 		return visitRealizeableVariableCS(csElement);
+	}
+
+	@Override
+	public @Nullable Continuation<?> visitStatementCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull StatementCS csElement) {
+		return visitModelElementCS(csElement);
 	}
 
 	@Override

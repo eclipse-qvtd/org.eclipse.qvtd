@@ -31,7 +31,6 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingLoopCS;
-import org.eclipse.qvtd.xtext.qvtimperativecs.MappingSequenceCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.ParamDeclarationCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.PatternCS;
@@ -42,6 +41,7 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QueryCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.RealizeableVariableCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.RealizedVariableCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.StatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.TopLevelCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.TransformationCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.UnrealizedVariableCS;
@@ -128,13 +128,6 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass mappingSequenceCSEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EClass mappingStatementCSEClass = null;
 
 	/**
@@ -191,6 +184,13 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass statementCSEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass topLevelCSEClass = null;
 
 	/**
@@ -235,7 +235,7 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link QVTimperativeCSPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -268,7 +268,7 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		// Mark meta-data to indicate it can't be changed
 		theQVTimperativeCSPackage.freeze();
 
-  
+
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(QVTimperativeCSPackage.eNS_URI, theQVTimperativeCSPackage);
 		return theQVTimperativeCSPackage;
@@ -530,7 +530,7 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	 * @generated
 	 */
 	@Override
-	public EReference getMappingCS_OwnedMappingSequence() {
+	public EReference getMappingCS_OwnedStatements() {
 		return (EReference)mappingCSEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -690,28 +690,8 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	 * @generated
 	 */
 	@Override
-	public EReference getMappingLoopCS_OwnedMappingSequence() {
+	public EReference getMappingLoopCS_OwnedMappingStatements() {
 		return (EReference)mappingLoopCSEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getMappingSequenceCS() {
-		return mappingSequenceCSEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getMappingSequenceCS_OwnedMappingStatements() {
-		return (EReference)mappingSequenceCSEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -920,6 +900,16 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	 * @generated
 	 */
 	@Override
+	public EClass getStatementCS() {
+		return statementCSEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getTopLevelCS() {
 		return topLevelCSEClass;
 	}
@@ -1064,7 +1054,7 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		createEReference(mappingCSEClass, MAPPING_CS__OWNED_DOMAINS);
 		createEReference(mappingCSEClass, MAPPING_CS__OWNED_IN_PATH_NAME);
 		createEReference(mappingCSEClass, MAPPING_CS__OWNED_KEY_EXPRESSION);
-		createEReference(mappingCSEClass, MAPPING_CS__OWNED_MAPPING_SEQUENCE);
+		createEReference(mappingCSEClass, MAPPING_CS__OWNED_STATEMENTS);
 		createEReference(mappingCSEClass, MAPPING_CS__OWNED_MIDDLE);
 		createEReference(mappingCSEClass, MAPPING_CS__OWNED_USES_PATH_NAMES);
 
@@ -1083,10 +1073,7 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		mappingLoopCSEClass = createEClass(MAPPING_LOOP_CS);
 		createEReference(mappingLoopCSEClass, MAPPING_LOOP_CS__OWNED_ITERATOR);
 		createEReference(mappingLoopCSEClass, MAPPING_LOOP_CS__OWNED_IN_EXPRESSION);
-		createEReference(mappingLoopCSEClass, MAPPING_LOOP_CS__OWNED_MAPPING_SEQUENCE);
-
-		mappingSequenceCSEClass = createEClass(MAPPING_SEQUENCE_CS);
-		createEReference(mappingSequenceCSEClass, MAPPING_SEQUENCE_CS__OWNED_MAPPING_STATEMENTS);
+		createEReference(mappingLoopCSEClass, MAPPING_LOOP_CS__OWNED_MAPPING_STATEMENTS);
 
 		mappingStatementCSEClass = createEClass(MAPPING_STATEMENT_CS);
 
@@ -1115,6 +1102,8 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 
 		realizedVariableCSEClass = createEClass(REALIZED_VARIABLE_CS);
 		createEReference(realizedVariableCSEClass, REALIZED_VARIABLE_CS__OWNED_INIT_EXPRESSION);
+
+		statementCSEClass = createEClass(STATEMENT_CS);
 
 		topLevelCSEClass = createEClass(TOP_LEVEL_CS);
 		createEReference(topLevelCSEClass, TOP_LEVEL_CS__OWNED_MAPPINGS);
@@ -1175,8 +1164,7 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		mappingCallBindingCSEClass.getESuperTypes().add(theEssentialOCLCSPackage.getExpCS());
 		mappingCallCSEClass.getESuperTypes().add(this.getMappingStatementCS());
 		mappingLoopCSEClass.getESuperTypes().add(this.getMappingStatementCS());
-		mappingSequenceCSEClass.getESuperTypes().add(this.getMappingStatementCS());
-		mappingStatementCSEClass.getESuperTypes().add(theBaseCSPackage.getModelElementCS());
+		mappingStatementCSEClass.getESuperTypes().add(this.getStatementCS());
 		paramDeclarationCSEClass.getESuperTypes().add(theBaseCSPackage.getTypedElementCS());
 		patternCSEClass.getESuperTypes().add(theBaseCSPackage.getModelElementCS());
 		predicateCSEClass.getESuperTypes().add(theEssentialOCLCSPackage.getExpCS());
@@ -1184,6 +1172,7 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		queryCSEClass.getESuperTypes().add(theBaseCSPackage.getTypedElementCS());
 		realizeableVariableCSEClass.getESuperTypes().add(theBaseCSPackage.getTypedElementCS());
 		realizedVariableCSEClass.getESuperTypes().add(this.getRealizeableVariableCS());
+		statementCSEClass.getESuperTypes().add(theBaseCSPackage.getModelElementCS());
 		topLevelCSEClass.getESuperTypes().add(theBaseCSPackage.getRootPackageCS());
 		transformationCSEClass.getESuperTypes().add(theQVTbaseCSPackage.getAbstractTransformationCS());
 		unrealizedVariableCSEClass.getESuperTypes().add(this.getRealizeableVariableCS());
@@ -1220,7 +1209,7 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		initEReference(getMappingCS_OwnedDomains(), this.getDomainCS(), null, "ownedDomains", null, 0, -1, MappingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMappingCS_OwnedInPathName(), theBaseCSPackage.getPathNameCS(), null, "ownedInPathName", null, 0, 1, MappingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMappingCS_OwnedKeyExpression(), theEssentialOCLCSPackage.getExpCS(), null, "ownedKeyExpression", null, 0, 1, MappingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getMappingCS_OwnedMappingSequence(), this.getMappingSequenceCS(), null, "ownedMappingSequence", null, 0, 1, MappingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMappingCS_OwnedStatements(), this.getStatementCS(), null, "ownedStatements", null, 0, -1, MappingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMappingCS_OwnedMiddle(), this.getDomainCS(), null, "ownedMiddle", null, 1, 1, MappingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMappingCS_OwnedUsesPathNames(), theBaseCSPackage.getPathNameCS(), null, "ownedUsesPathNames", null, 0, -1, MappingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -1239,10 +1228,7 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		initEClass(mappingLoopCSEClass, MappingLoopCS.class, "MappingLoopCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getMappingLoopCS_OwnedIterator(), theEssentialOCLCSPackage.getVariableCS(), null, "ownedIterator", null, 1, 1, MappingLoopCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMappingLoopCS_OwnedInExpression(), theEssentialOCLCSPackage.getExpCS(), null, "ownedInExpression", null, 1, 1, MappingLoopCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getMappingLoopCS_OwnedMappingSequence(), this.getMappingSequenceCS(), null, "ownedMappingSequence", null, 1, 1, MappingLoopCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(mappingSequenceCSEClass, MappingSequenceCS.class, "MappingSequenceCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getMappingSequenceCS_OwnedMappingStatements(), this.getMappingStatementCS(), null, "ownedMappingStatements", null, 1, -1, MappingSequenceCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMappingLoopCS_OwnedMappingStatements(), this.getMappingStatementCS(), null, "ownedMappingStatements", null, 1, -1, MappingLoopCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(mappingStatementCSEClass, MappingStatementCS.class, "MappingStatementCS", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1271,6 +1257,8 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 
 		initEClass(realizedVariableCSEClass, RealizedVariableCS.class, "RealizedVariableCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getRealizedVariableCS_OwnedInitExpression(), theEssentialOCLCSPackage.getExpCS(), null, "ownedInitExpression", null, 0, 1, RealizedVariableCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(statementCSEClass, StatementCS.class, "StatementCS", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(topLevelCSEClass, TopLevelCS.class, "TopLevelCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTopLevelCS_OwnedMappings(), this.getMappingCS(), null, "ownedMappings", null, 0, -1, TopLevelCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

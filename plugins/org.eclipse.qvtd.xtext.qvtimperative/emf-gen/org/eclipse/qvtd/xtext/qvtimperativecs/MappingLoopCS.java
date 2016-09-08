@@ -10,6 +10,7 @@
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtimperativecs;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
 import org.eclipse.ocl.xtext.essentialoclcs.VariableCS;
 
@@ -24,7 +25,7 @@ import org.eclipse.ocl.xtext.essentialoclcs.VariableCS;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingLoopCS#getOwnedIterator <em>Owned Iterator</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingLoopCS#getOwnedInExpression <em>Owned In Expression</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingLoopCS#getOwnedMappingSequence <em>Owned Mapping Sequence</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingLoopCS#getOwnedMappingStatements <em>Owned Mapping Statements</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getMappingLoopCS()
@@ -85,29 +86,19 @@ public interface MappingLoopCS extends MappingStatementCS {
 	void setOwnedInExpression(ExpCS value);
 
 	/**
-	 * Returns the value of the '<em><b>Owned Mapping Sequence</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Owned Mapping Statements</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingStatementCS}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Owned Mapping Sequence</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Owned Mapping Statements</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Owned Mapping Sequence</em>' containment reference.
-	 * @see #setOwnedMappingSequence(MappingSequenceCS)
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getMappingLoopCS_OwnedMappingSequence()
+	 * @return the value of the '<em>Owned Mapping Statements</em>' containment reference list.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getMappingLoopCS_OwnedMappingStatements()
 	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	MappingSequenceCS getOwnedMappingSequence();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingLoopCS#getOwnedMappingSequence <em>Owned Mapping Sequence</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Owned Mapping Sequence</em>' containment reference.
-	 * @see #getOwnedMappingSequence()
-	 * @generated
-	 */
-	void setOwnedMappingSequence(MappingSequenceCS value);
+	EList<MappingStatementCS> getOwnedMappingStatements();
 
 } // MappingLoopCS

@@ -118,6 +118,7 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 				ConnectionStatementCS connectionStatementCS = (ConnectionStatementCS)theEObject;
 				T result = caseConnectionStatementCS(connectionStatementCS);
 				if (result == null) result = caseMappingStatementCS(connectionStatementCS);
+				if (result == null) result = caseStatementCS(connectionStatementCS);
 				if (result == null) result = caseModelElementCS(connectionStatementCS);
 				if (result == null) result = casePivotableElementCS(connectionStatementCS);
 				if (result == null) result = caseElementCS(connectionStatementCS);
@@ -194,6 +195,7 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 				MappingCallCS mappingCallCS = (MappingCallCS)theEObject;
 				T result = caseMappingCallCS(mappingCallCS);
 				if (result == null) result = caseMappingStatementCS(mappingCallCS);
+				if (result == null) result = caseStatementCS(mappingCallCS);
 				if (result == null) result = caseModelElementCS(mappingCallCS);
 				if (result == null) result = casePivotableElementCS(mappingCallCS);
 				if (result == null) result = caseElementCS(mappingCallCS);
@@ -206,6 +208,7 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 				MappingLoopCS mappingLoopCS = (MappingLoopCS)theEObject;
 				T result = caseMappingLoopCS(mappingLoopCS);
 				if (result == null) result = caseMappingStatementCS(mappingLoopCS);
+				if (result == null) result = caseStatementCS(mappingLoopCS);
 				if (result == null) result = caseModelElementCS(mappingLoopCS);
 				if (result == null) result = casePivotableElementCS(mappingLoopCS);
 				if (result == null) result = caseElementCS(mappingLoopCS);
@@ -214,21 +217,10 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTimperativeCSPackage.MAPPING_SEQUENCE_CS: {
-				MappingSequenceCS mappingSequenceCS = (MappingSequenceCS)theEObject;
-				T result = caseMappingSequenceCS(mappingSequenceCS);
-				if (result == null) result = caseMappingStatementCS(mappingSequenceCS);
-				if (result == null) result = caseModelElementCS(mappingSequenceCS);
-				if (result == null) result = casePivotableElementCS(mappingSequenceCS);
-				if (result == null) result = caseElementCS(mappingSequenceCS);
-				if (result == null) result = casePivotable(mappingSequenceCS);
-				if (result == null) result = caseVisitableCS(mappingSequenceCS);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case QVTimperativeCSPackage.MAPPING_STATEMENT_CS: {
 				MappingStatementCS mappingStatementCS = (MappingStatementCS)theEObject;
 				T result = caseMappingStatementCS(mappingStatementCS);
+				if (result == null) result = caseStatementCS(mappingStatementCS);
 				if (result == null) result = caseModelElementCS(mappingStatementCS);
 				if (result == null) result = casePivotableElementCS(mappingStatementCS);
 				if (result == null) result = caseElementCS(mappingStatementCS);
@@ -326,6 +318,17 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = caseElementCS(realizedVariableCS);
 				if (result == null) result = casePivotable(realizedVariableCS);
 				if (result == null) result = caseVisitableCS(realizedVariableCS);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case QVTimperativeCSPackage.STATEMENT_CS: {
+				StatementCS statementCS = (StatementCS)theEObject;
+				T result = caseStatementCS(statementCS);
+				if (result == null) result = caseModelElementCS(statementCS);
+				if (result == null) result = casePivotableElementCS(statementCS);
+				if (result == null) result = caseElementCS(statementCS);
+				if (result == null) result = casePivotable(statementCS);
+				if (result == null) result = caseVisitableCS(statementCS);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -530,21 +533,6 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Mapping Sequence CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Mapping Sequence CS</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseMappingSequenceCS(MappingSequenceCS object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Mapping Statement CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -661,6 +649,21 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseRealizedVariableCS(RealizedVariableCS object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Statement CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Statement CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseStatementCS(StatementCS object) {
 		return null;
 	}
 

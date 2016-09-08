@@ -90,11 +90,6 @@ public abstract class AbstractNullQVTimperativeCSVisitor<@Nullable R, C>
 	}
 
 	@Override
-	public R visitMappingSequenceCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull MappingSequenceCS object) {
-		return null;
-	}
-
-	@Override
 	public R visitMappingStatementCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull MappingStatementCS object) {
 		return null;
 	}
@@ -131,6 +126,11 @@ public abstract class AbstractNullQVTimperativeCSVisitor<@Nullable R, C>
 
 	@Override
 	public R visitRealizedVariableCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull RealizedVariableCS object) {
+		return null;
+	}
+
+	@Override
+	public R visitStatementCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull StatementCS object) {
 		return null;
 	}
 

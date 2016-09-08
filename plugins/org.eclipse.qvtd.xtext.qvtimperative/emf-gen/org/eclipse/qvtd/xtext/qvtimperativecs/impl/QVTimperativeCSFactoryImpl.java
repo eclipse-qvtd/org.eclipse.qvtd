@@ -71,7 +71,6 @@ public class QVTimperativeCSFactoryImpl extends EFactoryImpl implements QVTimper
 			case QVTimperativeCSPackage.MAPPING_CALL_BINDING_CS: return createMappingCallBindingCS();
 			case QVTimperativeCSPackage.MAPPING_CALL_CS: return createMappingCallCS();
 			case QVTimperativeCSPackage.MAPPING_LOOP_CS: return createMappingLoopCS();
-			case QVTimperativeCSPackage.MAPPING_SEQUENCE_CS: return createMappingSequenceCS();
 			case QVTimperativeCSPackage.PARAM_DECLARATION_CS: return createParamDeclarationCS();
 			case QVTimperativeCSPackage.PREDICATE_CS: return createPredicateCS();
 			case QVTimperativeCSPackage.PREDICATE_OR_ASSIGNMENT_CS: return createPredicateOrAssignmentCS();
@@ -182,17 +181,6 @@ public class QVTimperativeCSFactoryImpl extends EFactoryImpl implements QVTimper
 	public @NonNull MappingLoopCS createMappingLoopCS() {
 		MappingLoopCSImpl mappingLoopCS = new MappingLoopCSImpl();
 		return mappingLoopCS;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public @NonNull MappingSequenceCS createMappingSequenceCS() {
-		MappingSequenceCSImpl mappingSequenceCS = new MappingSequenceCSImpl();
-		return mappingSequenceCS;
 	}
 
 	/**
