@@ -28,9 +28,9 @@ import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
-import org.eclipse.qvtd.pivot.qvtimperative.MappingSequence;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.RealizedVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 
 public class QVTiStepperVisitor extends AbstractQVTimperativeStepperVisitor
 {
@@ -96,11 +96,6 @@ public class QVTiStepperVisitor extends AbstractQVTimperativeStepperVisitor
 	}
 
 	@Override
-	public @Nullable IStepper visitMappingSequence(@NonNull MappingSequence object) {
-		return NonStepper.INSTANCE;
-	}
-
-	@Override
 	public @Nullable IStepper visitMappingStatement(@NonNull MappingStatement object) {
 		return PreStepper.INSTANCE;
 	}
@@ -113,6 +108,11 @@ public class QVTiStepperVisitor extends AbstractQVTimperativeStepperVisitor
 	@Override
 	public @Nullable IStepper visitRealizedVariable(@NonNull RealizedVariable object) {
 		return NonStepper.INSTANCE;
+	}
+
+	@Override
+	public @Nullable IStepper visitStatement(@NonNull Statement object) {
+		return PreStepper.INSTANCE;
 	}
 
 	@Override

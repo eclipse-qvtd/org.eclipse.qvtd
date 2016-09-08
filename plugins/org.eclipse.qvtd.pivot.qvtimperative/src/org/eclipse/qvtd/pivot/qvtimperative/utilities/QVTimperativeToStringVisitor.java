@@ -30,13 +30,13 @@ import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
-import org.eclipse.qvtd.pivot.qvtimperative.MappingSequence;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.NavigationAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.OppositePropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.RealizedVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 import org.eclipse.qvtd.pivot.qvtimperative.VariableAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.VariablePredicate;
 import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
@@ -181,11 +181,6 @@ public class QVTimperativeToStringVisitor extends QVTbaseToStringVisitor impleme
 	}
 
 	@Override
-	public @Nullable String visitMappingSequence(@NonNull MappingSequence object) {
-		return null;
-	}
-
-	@Override
 	public @Nullable String visitMappingStatement(@NonNull MappingStatement object) {
 		return null;
 	}
@@ -214,6 +209,11 @@ public class QVTimperativeToStringVisitor extends QVTbaseToStringVisitor impleme
 	public String visitRealizedVariable(@NonNull RealizedVariable variable) {
 		//		append("realized ");
 		visitVariable(variable);
+		return null;
+	}
+
+	@Override
+	public @Nullable String visitStatement(@NonNull Statement object) {
 		return null;
 	}
 

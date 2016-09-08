@@ -10,6 +10,7 @@
  *******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.qvts2qvti;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -271,7 +272,7 @@ public class CyclicScheduledRegion2Mapping extends AbstractScheduledRegion2Mappi
 
 	@Override
 	public void createStatements() {
-		MappingStatement mappingStatement = null;
+		List<@NonNull MappingStatement> mappingStatements = new ArrayList<>();
 		for (@NonNull Region callableRegion : region.getCallableChildren()) {
 			AbstractRegion2Mapping calledRegion2Mapping = visitor.getRegion2Mapping(callableRegion);
 			Map<@NonNull Variable, @NonNull OCLExpression> guardVariable2expression = new HashMap<@NonNull Variable, @NonNull OCLExpression>();
@@ -294,7 +295,7 @@ public class CyclicScheduledRegion2Mapping extends AbstractScheduledRegion2Mappi
 					//					}
 				}
 			}
-			mappingStatement = createCall(mappingStatement, callableRegion, guardVariable2expression);
+			mappingStatements.add(createCall(callableRegion, guardVariable2expression));
 		}
 		//
 		//	Create connection assignments to pass local creations to the accumulated result.
@@ -318,7 +319,7 @@ public class CyclicScheduledRegion2Mapping extends AbstractScheduledRegion2Mappi
 					ConnectionStatement connectionStatement1 = QVTimperativeFactory.eINSTANCE.createConnectionStatement();
 					connectionStatement1.setTargetVariable(newVariable);
 					connectionStatement1.setValue(excludingAllCallExp);
-					mappingStatement = QVTimperativeUtil.addMappingStatement(mappingStatement, connectionStatement1);
+					mappingStatements.add(connectionStatement1);
 				}
 				else {
 					newVariable = localVariable;
@@ -327,7 +328,7 @@ public class CyclicScheduledRegion2Mapping extends AbstractScheduledRegion2Mappi
 				ConnectionStatement connectionStatement2 = QVTimperativeFactory.eINSTANCE.createConnectionStatement();
 				connectionStatement2.setTargetVariable(accumulatedVariable);
 				connectionStatement2.setValue(PivotUtil.createVariableExp(newVariable));
-				mappingStatement = QVTimperativeUtil.addMappingStatement(mappingStatement, connectionStatement2);
+				mappingStatements.add(connectionStatement2);
 			}
 		}
 		//
@@ -343,8 +344,8 @@ public class CyclicScheduledRegion2Mapping extends AbstractScheduledRegion2Mappi
 			VariableExp localVariableExp = PivotUtil.createVariableExp(newVariable);
 			guardVariable2expression.put(guardVariable, localVariableExp);
 		}
-		mappingStatement = createCall(mappingStatement, region, guardVariable2expression);
-		mapping.setMappingStatement(mappingStatement);
+		mappingStatements.add(createCall(region, guardVariable2expression));
+		mapping.getOwnedStatements().addAll(mappingStatements);
 	}
 
 	@Override

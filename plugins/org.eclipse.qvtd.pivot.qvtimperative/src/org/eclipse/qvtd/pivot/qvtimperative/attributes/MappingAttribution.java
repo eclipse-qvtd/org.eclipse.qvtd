@@ -33,7 +33,7 @@ public class MappingAttribution extends AbstractAttribution
 			return null;
 		}
 		Mapping mapping = (Mapping)target;
-		if (scopeView.getContainmentFeature() == QVTimperativePackage.Literals.MAPPING__MAPPING_STATEMENT) {
+		if (scopeView.getContainmentFeature() == QVTimperativePackage.Literals.MAPPING__OWNED_STATEMENTS) {
 			QVTimperativeEnvironmentUtil.addMiddleGuardVariables(environmentView, mapping);
 			QVTimperativeEnvironmentUtil.addSideGuardVariables(environmentView, mapping, null);
 			QVTimperativeEnvironmentUtil.addMiddleBottomVariables(environmentView, mapping);
@@ -49,7 +49,7 @@ public class MappingAttribution extends AbstractAttribution
 					}
 				}
 			}
-			
+
 		}
 		return scopeView.getParent();
 	}

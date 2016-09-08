@@ -19,6 +19,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.Assignment;
 import org.eclipse.qvtd.pivot.qvtimperative.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.VariableAssignment;
 import org.eclipse.qvtd.xtext.qvtbase.ui.outline.QVTbaseOutlineTreeProvider;
@@ -71,8 +72,8 @@ public class QVTimperativeOutlineTreeProvider extends QVTbaseOutlineTreeProvider
 		for (Variable asIterator : ele.getOwnedIterators()) {
 			createNode(parentNode, asIterator);
 		}
-		if (ele.getOwnedBody() != null) {
-			createNode(parentNode, ele.getOwnedBody());
+		for (MappingStatement asStatement : ele.getOwnedMappingStatements()) {
+			createNode(parentNode, asStatement);
 		}
 	}
 

@@ -38,9 +38,9 @@ import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
-import org.eclipse.qvtd.pivot.qvtimperative.MappingSequence;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.PropertyAssignment;
+import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 import org.eclipse.qvtd.pivot.qvtimperative.VariableAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.VariablePredicate;
 
@@ -288,14 +288,8 @@ public abstract class QVTiAbstractTracingEvaluationVisitor extends QVTiEvaluatio
 	}
 
 	@Override
-	public @Nullable Object visitMappingSequence(@NonNull MappingSequence mappingSequence) {
-		Object result = delegate.visitMappingSequence(mappingSequence);
-		return result;
-	}
-
-	@Override
-	public @Nullable Object visitMappingStatement(@NonNull MappingStatement vappingStatement) {
-		return visiting(vappingStatement);
+	public @Nullable Object visitMappingStatement(@NonNull MappingStatement mappingStatement) {
+		return visitStatement(mappingStatement);
 	}
 
 	/* (non-Javadoc)
@@ -344,6 +338,11 @@ public abstract class QVTiAbstractTracingEvaluationVisitor extends QVTiEvaluatio
 		logger.info(getIndent() + "Predicate " + safePrint(exp) + " is " + String.valueOf(value));
 		return delegate.visitPredicate(predicate);
 
+	}
+
+	@Override
+	public @Nullable Object visitStatement(@NonNull Statement statement) {
+		return visiting(statement);
 	}
 
 	/* (non-Javadoc)

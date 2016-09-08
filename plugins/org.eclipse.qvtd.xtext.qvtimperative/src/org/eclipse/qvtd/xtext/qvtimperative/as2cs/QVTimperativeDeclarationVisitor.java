@@ -84,12 +84,12 @@ import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
-import org.eclipse.qvtd.pivot.qvtimperative.MappingSequence;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.NavigationAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.OppositePropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.RealizedVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 import org.eclipse.qvtd.pivot.qvtimperative.VariableAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.VariablePredicate;
 import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
@@ -107,15 +107,14 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingLoopCS;
-import org.eclipse.qvtd.xtext.qvtimperativecs.MappingSequenceCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.ParamDeclarationCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.PredicateCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.PredicateOrAssignmentCS;
-import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSFactory;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QueryCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.RealizedVariableCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.StatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.TopLevelCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.TransformationCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.UnrealizedVariableCS;
@@ -551,25 +550,7 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 		refreshUsedProperties(asTransformation, csDomain.getCheckedProperties(), ClassUtil.nullFree(asMapping.getCheckedProperties()));
 		csMapping.setOwnedMiddle(csDomain);
 		csMapping.setOwnedKeyExpression(createExpCS(asMapping.getOwnedKeyExpression()));
-		MappingStatementCS csMappingStatement = context.visitDeclaration(MappingStatementCS.class, asMapping.getMappingStatement());
-		MappingSequenceCS csMappingSequence;
-		if (csMappingStatement instanceof MappingSequenceCS) {
-			csMappingSequence = (MappingSequenceCS) csMappingStatement;
-		}
-		else if (csMappingStatement != null) {
-			csMappingSequence = csMapping.getOwnedMappingSequence();
-			if (csMappingSequence == null) {
-				csMappingSequence = QVTimperativeCSFactory.eINSTANCE.createMappingSequenceCS();
-			}
-			else {
-				csMappingSequence.getOwnedMappingStatements().clear();
-			}
-			csMappingSequence.getOwnedMappingStatements().add(csMappingStatement);
-		}
-		else {
-			csMappingSequence = null;
-		}
-		csMapping.setOwnedMappingSequence(csMappingSequence);
+		context.refreshList(csMapping.getOwnedStatements(), context.visitDeclarations(StatementCS.class, asMapping.getOwnedStatements(), null));
 		return csMapping;
 	}
 
@@ -599,42 +580,13 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 		csMappingLoop.setPivot(asMappingLoop);
 		csMappingLoop.setOwnedIterator(context.visitDeclaration(VariableCS.class, asMappingLoop.getOwnedIterators().get(0)));
 		csMappingLoop.setOwnedInExpression(createExpCS(asMappingLoop.getOwnedSource()));
-		MappingStatementCS csMappingStatement = context.visitDeclaration(MappingStatementCS.class, asMappingLoop.getOwnedBody());
-		MappingSequenceCS csMappingSequence;
-		if (csMappingStatement instanceof MappingSequenceCS) {
-			csMappingSequence = (MappingSequenceCS) csMappingStatement;
-		}
-		else if (csMappingStatement != null) {
-			csMappingSequence = csMappingLoop.getOwnedMappingSequence();
-			if (csMappingSequence == null) {
-				csMappingSequence = QVTimperativeCSFactory.eINSTANCE.createMappingSequenceCS();
-			}
-			else {
-				csMappingSequence.getOwnedMappingStatements().clear();
-			}
-			csMappingSequence.getOwnedMappingStatements().add(csMappingStatement);
-		}
-		else {
-			csMappingSequence = null;
-		}
-		csMappingLoop.setOwnedMappingSequence(csMappingSequence);
+		context.refreshList(csMappingLoop.getOwnedMappingStatements(), context.visitDeclarations(MappingStatementCS.class, asMappingLoop.getOwnedMappingStatements(), null));
 		return csMappingLoop;
 	}
 
 	@Override
-	public ElementCS visitMappingSequence(@NonNull MappingSequence asMappingSequence) {
-		List<MappingStatement> asMappingStatements = asMappingSequence.getMappingStatements();
-		if (asMappingStatements.size() <= 0) {
-			return null;
-		}
-		MappingSequenceCS csMappingSequence = context.refreshElement(MappingSequenceCS.class, QVTimperativeCSPackage.Literals.MAPPING_SEQUENCE_CS, asMappingSequence);
-		context.refreshList(csMappingSequence.getOwnedMappingStatements(), context.visitDeclarations(MappingStatementCS.class, asMappingStatements, null));
-		return csMappingSequence;
-	}
-
-	@Override
 	public ElementCS visitMappingStatement(@NonNull MappingStatement object) {
-		return visiting(object);
+		return visitStatement(object);
 	}
 
 	@Override
@@ -731,6 +683,11 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 	@Override
 	public ElementCS visitRule(@NonNull Rule object) {
 		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public ElementCS visitStatement(@NonNull Statement object) {
+		return visiting(object);
 	}
 
 	@Override

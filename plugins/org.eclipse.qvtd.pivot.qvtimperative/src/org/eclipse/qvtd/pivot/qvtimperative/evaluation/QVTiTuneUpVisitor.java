@@ -46,10 +46,10 @@ import org.eclipse.qvtd.pivot.qvtimperative.ImperativePattern;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
-import org.eclipse.qvtd.pivot.qvtimperative.MappingSequence;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeFactory;
+import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 import org.eclipse.qvtd.pivot.qvtimperative.VariableAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.util.AbstractExtendingQVTimperativeVisitor;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
@@ -231,9 +231,8 @@ public class QVTiTuneUpVisitor extends AbstractExtendingQVTimperativeVisitor<Boo
 		}
 		object.getGuardPattern().accept(this);
 		object.getBottomPattern().accept(this);
-		MappingStatement mappingStatement = object.getMappingStatement();
-		if (mappingStatement != null) {
-			mappingStatement.accept(this);
+		for (Statement statement : object.getOwnedStatements()) {
+			statement.accept(this);
 		}
 		return Boolean.TRUE;
 	}
@@ -246,13 +245,7 @@ public class QVTiTuneUpVisitor extends AbstractExtendingQVTimperativeVisitor<Boo
 
 	@Override
 	public @Nullable Boolean visitMappingLoop(@NonNull MappingLoop object) {
-		object.getOwnedBody().accept(this);
-		return Boolean.TRUE;
-	}
-
-	@Override
-	public @Nullable Boolean visitMappingSequence(@NonNull MappingSequence object) {
-		for (MappingStatement mappingStatement : object.getMappingStatements()) {
+		for (MappingStatement mappingStatement : object.getOwnedMappingStatements()) {
 			if (mappingStatement != null) {
 				mappingStatement.accept(this);
 			}

@@ -28,8 +28,8 @@ import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
-import org.eclipse.qvtd.pivot.qvtimperative.MappingSequence;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 import org.eclipse.qvtd.pivot.qvtimperative.VariablePredicate;
 import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
 
@@ -78,7 +78,9 @@ public class QVTimperativeDomainUsageAnalysis extends RootDomainUsageAnalysis im
 		visitRule(object);
 		visit(object.getGuardPattern());
 		visit(object.getBottomPattern());
-		visit(object.getMappingStatement());
+		for (Statement mappingStatement : object.getOwnedStatements()) {
+			visit(mappingStatement);
+		}
 		return usage;
 	}
 
@@ -105,13 +107,7 @@ public class QVTimperativeDomainUsageAnalysis extends RootDomainUsageAnalysis im
 				setUsage(iterator, sourceUsage);
 			}
 		}
-		visit(object.getOwnedBody());
-		return getNoneUsage();
-	}
-
-	@Override
-	public @NonNull DomainUsage visitMappingSequence(@NonNull MappingSequence object) {
-		for (MappingStatement mappingStatement : object.getMappingStatements()) {
+		for (MappingStatement mappingStatement : object.getOwnedMappingStatements()) {
 			visit(mappingStatement);
 		}
 		return getNoneUsage();
@@ -119,7 +115,7 @@ public class QVTimperativeDomainUsageAnalysis extends RootDomainUsageAnalysis im
 
 	@Override
 	public @NonNull DomainUsage visitMappingStatement(@NonNull MappingStatement object) {
-		return visitOCLExpression(object);
+		return visitStatement(object);
 	}
 
 	@Override
@@ -132,6 +128,11 @@ public class QVTimperativeDomainUsageAnalysis extends RootDomainUsageAnalysis im
 			return visit(object.getOwnedSource());
 		}
 		return super.visitOperationCallExp(object);
+	}
+
+	@Override
+	public @NonNull DomainUsage visitStatement(@NonNull Statement object) {
+		return visiting(object);
 	}
 
 	@Override

@@ -42,20 +42,20 @@ import org.eclipse.qvtd.pivot.qvtimperative.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativePattern;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardPattern;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativePattern;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
-import org.eclipse.qvtd.pivot.qvtimperative.MappingSequence;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.NavigationAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.OppositePropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.RealizedVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 import org.eclipse.qvtd.pivot.qvtimperative.VariableAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.VariablePredicate;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
@@ -246,23 +246,15 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 				Variable iterator = ClassUtil.nonNullState(iterators.get(0));
 				for (Object object : (Iterable<?>)inValues) {
 					((QVTiExecutor)context).replace(iterator, object, false);
-					mappingLoop.getOwnedBody().accept(undecoratedVisitor);
-				}
-			}
-		}
-		return true;
-	}
-
-	@Override
-	public @Nullable Object visitMappingSequence(@NonNull MappingSequence mappingSequence) {
-		for (MappingStatement mappingStatement : mappingSequence.getMappingStatements()) {
-			if (mappingStatement != null) {
-				context.pushEvaluationEnvironment(mappingStatement, mappingSequence);
-				try {
-					mappingStatement.accept(undecoratedVisitor);
-				}
-				finally {
-					context.popEvaluationEnvironment();
+					for (@NonNull MappingStatement mappingStatement : ClassUtil.nullFree(mappingLoop.getOwnedMappingStatements())) {
+						context.pushEvaluationEnvironment(mappingStatement, mappingLoop);
+						try {
+							mappingStatement.accept(undecoratedVisitor);
+						}
+						finally {
+							context.popEvaluationEnvironment();
+						}
+					}
 				}
 			}
 		}
@@ -271,7 +263,7 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 
 	@Override
 	public @Nullable Object visitMappingStatement(@NonNull MappingStatement object) {
-		return visiting(object);	// MappingStatement is abstract
+		return visitStatement(object);	// MappingStatement is abstract
 	}
 
 	@Override
@@ -369,6 +361,11 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 	@Override
 	public @Nullable Object visitRule(@NonNull Rule object) {
 		return visiting(object);
+	}
+
+	@Override
+	public @Nullable Object visitStatement(@NonNull Statement object) {
+		return visitNamedElement(object);	// Statement is abstract
 	}
 
 	@Override

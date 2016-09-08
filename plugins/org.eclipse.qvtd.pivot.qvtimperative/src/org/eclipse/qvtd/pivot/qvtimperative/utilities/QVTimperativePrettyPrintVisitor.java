@@ -25,20 +25,20 @@ import org.eclipse.qvtd.pivot.qvtimperative.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativePattern;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardPattern;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativePattern;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
-import org.eclipse.qvtd.pivot.qvtimperative.MappingSequence;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.NavigationAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.OppositePropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.RealizedVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 import org.eclipse.qvtd.pivot.qvtimperative.VariableAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.VariablePredicate;
 import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
@@ -159,7 +159,10 @@ public class QVTimperativePrettyPrintVisitor extends QVTbasePrettyPrintVisitor i
 		}
 		context.append("where");
 		doArea(pMapping);
-		safeVisit(pMapping.getMappingStatement());
+		context.append("}");
+		for (Statement pStatement : pMapping.getOwnedStatements()) {
+			safeVisit(pStatement);
+		}
 		context.pop();
 		return null;
 	}
@@ -198,23 +201,17 @@ public class QVTimperativePrettyPrintVisitor extends QVTbasePrettyPrintVisitor i
 		context.appendElement(pMappingLoop.getOwnedSource());
 		context.append(" {");
 		context.push("", "");
-		safeVisit(pMappingLoop.getOwnedBody());
+		for (MappingStatement pMappingStatement : pMappingLoop.getOwnedMappingStatements()) {
+			safeVisit(pMappingStatement);
+		}
 		context.append("}");
 		context.pop();
 		return null;
 	}
 
 	@Override
-	public Object visitMappingSequence(@NonNull MappingSequence pMappingSequence) {
-		for (MappingStatement pMappingStatement : pMappingSequence.getMappingStatements()) {
-			safeVisit(pMappingStatement);
-		}
-		return null;
-	}
-
-	@Override
 	public Object visitMappingStatement(@NonNull MappingStatement object) {
-		return visiting(object);
+		return visitStatement(object);
 	}
 
 	@Override
@@ -249,6 +246,11 @@ public class QVTimperativePrettyPrintVisitor extends QVTbasePrettyPrintVisitor i
 		context.append("realize ");
 		visitVariable(pRealizedVariable);
 		return null;
+	}
+
+	@Override
+	public Object visitStatement(@NonNull Statement object) {
+		return visiting(object);
 	}
 
 	@Override

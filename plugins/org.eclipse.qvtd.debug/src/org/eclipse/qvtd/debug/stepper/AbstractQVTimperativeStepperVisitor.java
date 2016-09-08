@@ -46,6 +46,21 @@ implements QVTimperativeVisitor<IStepper>
 	}
 
 	@Override
+	public @Nullable IStepper visitConnectionAssignment(org.eclipse.qvtd.pivot.qvtimperative.@NonNull ConnectionAssignment object) {
+		return visitAssignment(object);
+	}
+
+	@Override
+	public @Nullable IStepper visitConnectionStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull ConnectionStatement object) {
+		return visitMappingStatement(object);
+	}
+
+	@Override
+	public @Nullable IStepper visitConnectionVariable(org.eclipse.qvtd.pivot.qvtimperative.@NonNull ConnectionVariable object) {
+		return visitVariable(object);
+	}
+
+	@Override
 	public @Nullable IStepper visitGuardPattern(org.eclipse.qvtd.pivot.qvtimperative.@NonNull GuardPattern object) {
 		return visitImperativePattern(object);
 	}
@@ -72,12 +87,22 @@ implements QVTimperativeVisitor<IStepper>
 
 	@Override
 	public @Nullable IStepper visitMappingCall(org.eclipse.qvtd.pivot.qvtimperative.@NonNull MappingCall object) {
-		return visitOCLExpression(object);
+		return visitMappingStatement(object);
 	}
 
 	@Override
 	public @Nullable IStepper visitMappingCallBinding(org.eclipse.qvtd.pivot.qvtimperative.@NonNull MappingCallBinding object) {
 		return visitElement(object);
+	}
+
+	@Override
+	public @Nullable IStepper visitMappingLoop(org.eclipse.qvtd.pivot.qvtimperative.@NonNull MappingLoop object) {
+		return visitMappingStatement(object);
+	}
+
+	@Override
+	public @Nullable IStepper visitMappingStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull MappingStatement object) {
+		return visitStatement(object);
 	}
 
 	@Override
@@ -98,6 +123,11 @@ implements QVTimperativeVisitor<IStepper>
 	@Override
 	public @Nullable IStepper visitRealizedVariable(org.eclipse.qvtd.pivot.qvtimperative.@NonNull RealizedVariable object) {
 		return visitVariable(object);
+	}
+
+	@Override
+	public @Nullable IStepper visitStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull Statement object) {
+		return visitElement(object);
 	}
 
 	@Override

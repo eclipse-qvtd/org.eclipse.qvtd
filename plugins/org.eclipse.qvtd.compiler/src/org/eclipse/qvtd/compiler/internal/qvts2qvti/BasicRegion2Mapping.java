@@ -916,7 +916,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 	}
 
 	private void createMappingStatements(@NonNull Map<@NonNull Region, @NonNull Map<@NonNull Node, @NonNull Node>> calls) {
-		MappingStatement mappingStatement = null;
+		List<@NonNull MappingStatement> mappingStatements = new ArrayList<>();
 		Map<@NonNull Variable, @NonNull OCLExpression> loopVariables = null;
 		for (Map.Entry<@NonNull Region, @NonNull Map<@NonNull Node, @NonNull Node>> entry : calls.entrySet()) {
 			@NonNull Region calledRegion = entry.getKey();
@@ -968,9 +968,9 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 					mappingCallStatement = QVTimperativeUtil.createMappingLoop(loopSource, loopVariable, mappingCallStatement);
 				}
 			}
-			mappingStatement = QVTimperativeUtil.addMappingStatement(mappingStatement, mappingCallStatement);
+			mappingStatements.add(mappingCallStatement);
 		}
-		mapping.setMappingStatement(mappingStatement);
+		mapping.getOwnedStatements().addAll(mappingStatements);
 	}
 
 	/**

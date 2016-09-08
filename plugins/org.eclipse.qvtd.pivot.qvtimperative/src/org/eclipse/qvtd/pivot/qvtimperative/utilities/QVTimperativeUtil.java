@@ -55,7 +55,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
-import org.eclipse.qvtd.pivot.qvtimperative.MappingSequence;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.NavigationAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.OppositePropertyAssignment;
@@ -111,7 +110,7 @@ public class QVTimperativeUtil extends QVTbaseUtil
 	/**
 	 * Return a MappingStatement comprising the concatenation of mappingStatementOrStatements and mappingStatement.
 	 * mappingStatementOrStatements may be null, a MappingStatement or a composite MappingSequence.
-	 */
+	 *
 	public static @NonNull MappingStatement addMappingStatement(@Nullable MappingStatement mappingStatementOrStatements, @NonNull MappingStatement mappingStatement) {
 		if (mappingStatementOrStatements == null) {
 			return mappingStatement;
@@ -127,7 +126,7 @@ public class QVTimperativeUtil extends QVTbaseUtil
 			mappingStatements.add(mappingStatement);
 			return mappingSequence;
 		}
-	}
+	} */
 
 	public static @NonNull ImperativeDomain createImperativeDomain(@NonNull TypedModel typedModel) {
 		ImperativeDomain coreDomain = QVTimperativeFactory.eINSTANCE.createImperativeDomain();
@@ -176,15 +175,15 @@ public class QVTimperativeUtil extends QVTbaseUtil
 		MappingLoop ml = QVTimperativeFactory.eINSTANCE.createMappingLoop();
 		ml.setOwnedSource(source);
 		ml.getOwnedIterators().add(iterator);
-		ml.setOwnedBody(mappingStatement);
+		ml.getOwnedMappingStatements().add(mappingStatement);
 		return ml;
 	}
 
-	public static @NonNull MappingSequence createMappingSequence(@NonNull List<@NonNull MappingStatement> mappingStatements) {
+	/*	public static @NonNull MappingSequence createMappingSequence(@NonNull List<@NonNull MappingStatement> mappingStatements) {
 		MappingSequence mappingSequence = QVTimperativeFactory.eINSTANCE.createMappingSequence();
 		mappingSequence.getMappingStatements().addAll(mappingStatements);
 		return mappingSequence;
-	}
+	} */
 
 	/*	public static @NonNull OperationCallExp createOperationCallExp(@NonNull OCLExpression sourceExp, @NonNull Operation operation, OCLExpression... arguments) {
 		OperationCallExp exp = PivotFactory.eINSTANCE.createOperationCallExp();
@@ -339,7 +338,7 @@ public class QVTimperativeUtil extends QVTbaseUtil
 	 */
 	public static void sortPatternVariables(@NonNull List<@NonNull Variable> variables) {
 		if (variables.size() > 1) {
-			final Map<@NonNull Variable, @Nullable List<@NonNull VariableDeclaration>> def2refs = new HashMap<@NonNull Variable, @Nullable List<@NonNull VariableDeclaration>>();
+			final Map<@NonNull Variable, @Nullable List<@NonNull VariableDeclaration>> def2refs = new HashMap<>();
 			//
 			// Initialize the def2refs.keySet as a fast is-a-pattern-variable lookup.
 			//
@@ -359,7 +358,7 @@ public class QVTimperativeUtil extends QVTbaseUtil
 							assert referredVariable != null;
 							if (def2refs.containsKey(referredVariable)) {
 								if (refs == null) {
-									refs = new ArrayList<@NonNull VariableDeclaration>();
+									refs = new ArrayList<>();
 									def2refs.put(variable, refs);
 								}
 								if (!refs.contains(referredVariable)) {
@@ -404,48 +403,51 @@ public class QVTimperativeUtil extends QVTbaseUtil
 	/**
 	 * Return a copy of asVariablePredicates sorted to avoid reverse references from the predicate expressions.
 	 */
-	public static @NonNull List<VariablePredicate> sortVariablePredicates(@NonNull Mapping asMapping, @NonNull List<VariablePredicate> asVariablePredicates) {
-		Set<Variable> asGuardVariables = new HashSet<Variable>();
-		asGuardVariables.addAll(asMapping.getGuardPattern().getVariable());
+	public static @NonNull List<@NonNull VariablePredicate> sortVariablePredicates(@NonNull Mapping asMapping, @NonNull List<@NonNull VariablePredicate> asVariablePredicates) {
+		Set<@NonNull Variable> asGuardVariables = new HashSet<>();
+		asGuardVariables.addAll(ClassUtil.nullFree(asMapping.getGuardPattern().getVariable()));
 		for (Domain asDomain : asMapping.getDomain()) {
-			asGuardVariables.addAll(((ImperativeDomain)asDomain).getGuardPattern().getVariable());
+			asGuardVariables.addAll(ClassUtil.nullFree(((ImperativeDomain)asDomain).getGuardPattern().getVariable()));
 		}
-		List<VariableDeclaration> pendingVariables = new ArrayList<VariableDeclaration>();
-		Map<VariableDeclaration, VariablePredicate> variable2predicate = new HashMap<VariableDeclaration, VariablePredicate>();
-		Map<VariableDeclaration, Set<VariablePredicate>> variable2predicates = new HashMap<VariableDeclaration, Set<VariablePredicate>>();
-		Map<VariablePredicate, @NonNull Set<VariableDeclaration>> predicate2variables = new HashMap<VariablePredicate, @NonNull Set<VariableDeclaration>>();
-		for (VariablePredicate asVariablePredicate : asVariablePredicates) {
+		List<@NonNull VariableDeclaration> pendingVariables = new ArrayList<>();
+		Map<@NonNull VariableDeclaration, @NonNull VariablePredicate> variable2predicate = new HashMap<>();
+		Map<@NonNull VariableDeclaration, @NonNull Set<@NonNull VariablePredicate>> variable2predicates = new HashMap<>();
+		Map<@NonNull VariablePredicate, @NonNull Set<@NonNull VariableDeclaration>> predicate2variables = new HashMap<>();
+		for (@NonNull VariablePredicate asVariablePredicate : asVariablePredicates) {
 			for (TreeIterator<EObject> tit = asVariablePredicate.eAllContents(); tit.hasNext(); ) {
 				EObject eObject = tit.next();
 				if (eObject instanceof VariableExp) {
 					VariableDeclaration asVariable = ((VariableExp)eObject).getReferredVariable();
 					if ((asVariable != null) && asGuardVariables.contains(asVariable)) {
-						Set<VariablePredicate> predicates = variable2predicates.get(asVariable);
+						Set<@NonNull VariablePredicate> predicates = variable2predicates.get(asVariable);
 						if (predicates == null){
-							predicates = new HashSet<VariablePredicate>();
+							predicates = new HashSet<>();
 							variable2predicates.put(asVariable, predicates);
 						}
 						predicates.add(asVariablePredicate);
-						Set<VariableDeclaration> variables = predicate2variables.get(asVariablePredicate);
+						Set<@NonNull VariableDeclaration> variables = predicate2variables.get(asVariablePredicate);
 						if (variables == null){
-							variables = new HashSet<VariableDeclaration>();
+							variables = new HashSet<>();
 							predicate2variables.put(asVariablePredicate, variables);
 						}
 						variables.add(asVariable);
-						pendingVariables.add(asVariablePredicate.getTargetVariable());
-						variable2predicate.put(asVariablePredicate.getTargetVariable(), asVariablePredicate);
+						Variable targetVariable = asVariablePredicate.getTargetVariable();
+						assert targetVariable != null;
+						pendingVariables.add(targetVariable);
+						variable2predicate.put(targetVariable, asVariablePredicate);
 					}
 				}
 			}
 		}
 		int oldSize;
-		List<VariablePredicate> asSortedVariablePredicates = new ArrayList<VariablePredicate>();
+		List<@NonNull VariablePredicate> asSortedVariablePredicates = new ArrayList<>();
 		Collections.sort(pendingVariables, NameUtil.NAMEABLE_COMPARATOR);		// Ensure deterministic order
 		while (pendingVariables.size() > 0) {
 			oldSize = asSortedVariablePredicates.size();
-			for (VariableDeclaration asVariable : pendingVariables) {
+			for (@NonNull VariableDeclaration asVariable : pendingVariables) {
 				VariablePredicate asVariablePredicate1 = variable2predicate.get(asVariable);
-				Set<VariableDeclaration> variables = predicate2variables.get(asVariablePredicate1);
+				assert asVariablePredicate1 != null;
+				Set<@NonNull VariableDeclaration> variables = predicate2variables.get(asVariablePredicate1);
 				if (variables != null){
 					variables.retainAll(pendingVariables);
 					if (variables.size() <= 0) {

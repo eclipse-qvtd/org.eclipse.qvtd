@@ -38,7 +38,7 @@ public abstract class AbstractScheduledRegion2Mapping extends AbstractRegion2Map
 		connection2variable = new HashMap<@NonNull NodeConnection, @NonNull Variable>();
 	}
 
-	protected @NonNull MappingStatement createCall(@Nullable MappingStatement mappingStatement, @NonNull Region calledRegion, @Nullable Map<@NonNull Variable, @NonNull OCLExpression> guardVariable2expression) {
+	protected @NonNull MappingStatement createCall(@NonNull Region calledRegion, @Nullable Map<@NonNull Variable, @NonNull OCLExpression> guardVariable2expression) {
 		//		Iterable<Connection> connectionRegions = getConnectionRegions(calledRegion);
 		//		assert !calledRegion.isConnectionRegion();
 		AbstractRegion2Mapping calledRegion2Mapping = visitor.getRegion2Mapping(calledRegion);
@@ -112,8 +112,7 @@ public abstract class AbstractScheduledRegion2Mapping extends AbstractRegion2Map
 			@NonNull OCLExpression loopSource = loopEntry.getValue();
 			mappingCallStatement = QVTimperativeUtil.createMappingLoop(loopSource, loopVariable, mappingCallStatement);
 		}
-		mappingStatement = QVTimperativeUtil.addMappingStatement(mappingStatement, mappingCallStatement);
-		return mappingStatement;
+		return mappingCallStatement;
 	}
 
 	/*	protected @NonNull MappingStatement createCalls(@Nullable MappingStatement mappingStatement, @NonNull Region calledRegion) {

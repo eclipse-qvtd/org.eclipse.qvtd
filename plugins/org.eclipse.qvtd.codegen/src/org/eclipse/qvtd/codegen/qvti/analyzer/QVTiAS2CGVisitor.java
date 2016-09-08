@@ -116,12 +116,12 @@ import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
-import org.eclipse.qvtd.pivot.qvtimperative.MappingSequence;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.NavigationAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.OppositePropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.RealizedVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 import org.eclipse.qvtd.pivot.qvtimperative.VariableAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.VariablePredicate;
 import org.eclipse.qvtd.pivot.qvtimperative.analysis.QVTimperativeDomainUsageAnalysis;
@@ -830,10 +830,14 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 		PredicateTreeBuilder bodyBuilder = new PredicateTreeBuilder(pMapping, cgMapping);
 		bodyBuilder.doGuards();
 		bodyBuilder.doBottoms(cgMappingExp);
-		MappingStatement mappingStatements = pMapping.getMappingStatement();
-		if (mappingStatements != null) {
-			cgMappingExp.setBody(doVisit(CGValuedElement.class, mappingStatements));
+
+		CGSequence cgSequence = QVTiCGModelFactory.eINSTANCE.createCGSequence();
+		List<CGValuedElement> cgMappingStatements = cgSequence.getStatements();
+		for (Statement asStatement : pMapping.getOwnedStatements()) {
+			CGValuedElement cgMappingStatement = doVisit(CGValuedElement.class, asStatement);
+			cgMappingStatements.add(cgMappingStatement);
 		}
+		cgMappingExp.setBody(cgSequence);
 		List<CGGuardVariable> cgFreeVariables = cgMapping.getFreeVariables();
 		List<CGGuardVariable> sortedVariables = new ArrayList<CGGuardVariable>(cgFreeVariables);
 		Collections.sort(sortedVariables, CGVariableComparator.INSTANCE);
@@ -893,24 +897,19 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 		CollectionType collectionType = standardLibrary.getCollectionType();
 		Operation forAllIteration = NameUtil.getNameable(collectionType.getOwnedOperations(), "forAll");
 		cgMappingLoop.setReferredIteration((Iteration) forAllIteration);
-		cgMappingLoop.setBody(doVisit(CGValuedElement.class, asMappingLoop.getOwnedBody()));
+		CGSequence cgSequence = QVTiCGModelFactory.eINSTANCE.createCGSequence();
+		List<CGValuedElement> cgMappingStatements = cgSequence.getStatements();
+		for (MappingStatement asMappingStatement : asMappingLoop.getOwnedMappingStatements()) {
+			CGValuedElement cgMappingStatement = doVisit(CGValuedElement.class, asMappingStatement);
+			cgMappingStatements.add(cgMappingStatement);
+		}
+		cgMappingLoop.setBody(cgSequence);
 		return cgMappingLoop;
 	}
 
 	@Override
-	public @Nullable CGNamedElement visitMappingSequence(@NonNull MappingSequence asMappingSequence) {
-		CGSequence cgSequence = QVTiCGModelFactory.eINSTANCE.createCGSequence();
-		List<CGValuedElement> cgMappingStatements = cgSequence.getStatements();
-		for (MappingStatement asMappingStatement : asMappingSequence.getMappingStatements()) {
-			CGValuedElement cgMappingStatement = doVisit(CGValuedElement.class, asMappingStatement);
-			cgMappingStatements.add(cgMappingStatement);
-		}
-		return cgSequence;
-	}
-
-	@Override
 	public @Nullable CGNamedElement visitMappingStatement(@NonNull MappingStatement object) {
-		return visiting(object);
+		return visitStatement(object);
 	}
 
 	@Override
@@ -1052,6 +1051,11 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 
 	@Override
 	public @Nullable CGNamedElement visitRule(@NonNull Rule object) {
+		return visiting(object);
+	}
+
+	@Override
+	public @Nullable CGNamedElement visitStatement(@NonNull Statement object) {
 		return visiting(object);
 	}
 

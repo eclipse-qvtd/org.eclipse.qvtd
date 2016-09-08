@@ -63,9 +63,9 @@ import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
-import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.NavigationAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.RealizedVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 import org.eclipse.qvtd.pivot.qvtimperative.VariableAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
@@ -385,7 +385,7 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 	public @Nullable Object internalExecuteMappingCall(@NonNull MappingCall mappingCall, @NonNull Object @NonNull [] boundValues, @NonNull EvaluationVisitor undecoratedVisitor) {
 		Mapping calledMapping = mappingCall.getReferredMapping();
 		if (calledMapping != null) {
-			pushEvaluationEnvironment(calledMapping, (TypedElement)mappingCall);
+			pushEvaluationEnvironment(calledMapping, mappingCall);
 			try {
 				int index = 0;
 				for (MappingCallBinding binding : mappingCall.getBinding()) {
@@ -429,9 +429,8 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 		//
 		//	Invoke any corrolaries
 		//
-		MappingStatement mappingStatement = mapping.getMappingStatement();
-		if (mappingStatement != null) {
-			mappingStatement.accept(undecoratedVisitor);
+		for (Statement statement : mapping.getOwnedStatements()) {
+			statement.accept(undecoratedVisitor);
 		}
 		return true;
 	}

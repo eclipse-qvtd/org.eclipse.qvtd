@@ -55,7 +55,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativePattern;
-import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 
 public class RootRegion2Mapping extends AbstractScheduledRegion2Mapping
@@ -241,7 +240,6 @@ public class RootRegion2Mapping extends AbstractScheduledRegion2Mapping
 			}
 			bottomPattern.getVariable().addAll(connection2variable.values());
 //		} */
-		MappingStatement mappingStatement = null;
 		/*		ChainNode chain = visitor.getChain(region);
 		for (ChainNode child : chain.getChildren()) {
 			Region calledRegion = child.getRegion();
@@ -262,9 +260,8 @@ public class RootRegion2Mapping extends AbstractScheduledRegion2Mapping
 			}
 		} */
 		for (@NonNull Region callableRegion : region.getCallableChildren()) {
-			mappingStatement = createCall(mappingStatement, callableRegion, null);
+			mapping.getOwnedStatements().add(createCall(callableRegion, null));
 		}
-		mapping.setMappingStatement(mappingStatement);
 	}
 
 	private @NonNull OCLExpression getFilteredExpression(@NonNull OCLExpression initExpression, @NonNull NavigableEdge edge) {
