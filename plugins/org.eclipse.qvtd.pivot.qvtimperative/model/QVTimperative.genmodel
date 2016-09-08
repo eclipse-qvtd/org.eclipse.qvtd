@@ -52,7 +52,7 @@
       <genOperations ecoreOperation="QVTimperative.ecore#//ImperativePattern/getArea"/>
     </genClasses>
     <genClasses ecoreClass="QVTimperative.ecore#//Mapping">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//Mapping/mappingStatement"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//Mapping/ownedStatements"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//Mapping/polledClasses"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//Mapping/ownedKeyExpression"/>
     </genClasses>
@@ -68,11 +68,9 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//MappingCallBinding/value"/>
     </genClasses>
     <genClasses ecoreClass="QVTimperative.ecore#//MappingLoop">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//MappingLoop/ownedBody"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//MappingLoop/ownedIterators"/>
-    </genClasses>
-    <genClasses ecoreClass="QVTimperative.ecore#//MappingSequence">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//MappingSequence/mappingStatements"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//MappingLoop/ownedMappingStatements"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//MappingLoop/ownedSource"/>
     </genClasses>
     <genClasses image="false" ecoreClass="QVTimperative.ecore#//MappingStatement"/>
     <genClasses image="false" ecoreClass="QVTimperative.ecore#//NavigationAssignment">
@@ -85,6 +83,7 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//PropertyAssignment/targetProperty"/>
     </genClasses>
     <genClasses ecoreClass="QVTimperative.ecore#//RealizedVariable"/>
+    <genClasses image="false" ecoreClass="QVTimperative.ecore#//Statement"/>
     <genClasses ecoreClass="QVTimperative.ecore#//VariableAssignment">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//VariableAssignment/targetVariable"/>
     </genClasses>

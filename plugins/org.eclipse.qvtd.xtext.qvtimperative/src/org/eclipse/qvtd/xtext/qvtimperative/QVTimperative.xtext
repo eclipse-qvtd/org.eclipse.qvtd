@@ -66,18 +66,16 @@ ImportCS returns base::ImportCS:
 
 MappingCS: {MappingCS} isDefault?='default'? 'map' name=UnrestrictedName ('in' ownedInPathName=PathNameCS)?
 	('uses' ownedUsesPathNames+=PathNameCS (',' ownedUsesPathNames+=PathNameCS)*)? ('key' ownedKeyExpression=ExpCS ';')?
-	'{' ownedDomains+=(SourceDomainCS | TargetDomainCS)* ('where' ownedMiddle=MiddleDomainCS)? ownedMappingSequence=MappingSequenceCS? '}';
+	'{' ownedDomains+=(SourceDomainCS | TargetDomainCS)* ('where' ownedMiddle=MiddleDomainCS)? ownedStatements+=StatementCS* '}';
 	
 MappingCallCS: {MappingCallCS} isInfinite?='infinite'? 'call' ownedPathName=PathNameCS
 	'{' ownedBindings+=MappingCallBindingCS* '}';
 
 MappingCallBindingCS: referredVariable=[pivot::Variable|UnrestrictedName] (':='|isPolled?='?=') ownedValue=ExpCS ';';
 	
-MappingLoopCS: 'for' ownedIterator=MappingIteratorCS 'in' ownedInExpression=ExpCS '{' ownedMappingSequence=MappingSequenceCS '}';
+MappingLoopCS: 'for' ownedIterator=MappingIteratorCS 'in' ownedInExpression=ExpCS '{' ownedMappingStatements+=MappingStatementCS+ '}';
 	
 MappingIteratorCS returns essentialocl::VariableCS: name=UnrestrictedName (':' ownedType=TypeExpCS)?;
-
-MappingSequenceCS: ownedMappingStatements+=MappingStatementCS+;
 	
 MappingStatementCS: ConnectionStatementCS | MappingCallCS | MappingLoopCS;
 	
@@ -155,6 +153,8 @@ SourceBottomPatternCS returns BottomPatternCS:
 SourceGuardPatternCS returns GuardPatternCS:
 	{GuardPatternCS} '(' (ownedUnrealizedVariables+=UnrealizedVariableCS (',' ownedUnrealizedVariables+=UnrealizedVariableCS)*)? ')'
 ;
+	
+StatementCS: MappingStatementCS;
 
 TransformationCS:
 	'transformation' ownedPathName=ScopeNameCS? name=UnreservedName '{' (ownedDirections+=DirectionCS ';')* '}';
