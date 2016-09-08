@@ -13,7 +13,7 @@
       <modelParameter xmi:id="qT..classescs2as.leftCS" name="leftCS" usedPackage="../ClassesCS.ecore.oclas#P.classescs"/>
       <modelParameter xmi:id="qT..classescs2as.rightAS" name="rightAS" usedPackage="../Classes.ecore.oclas#P.classes"/>
       <rule xsi:type="qvti:Mapping" xmi:id="m..classescs2as.createPackage" name="createPackage">
-        <domain xsi:type="qvti:CoreDomain" isCheckable="true" isEnforceable="false"
+        <domain xsi:type="qvti:ImperativeDomain" isCheckable="true" isEnforceable="false"
             typedModel="#qT..classescs2as.leftCS">
           <guardPattern>
             <variable xmi:id="qV..classescs2as.createPackage.leftCS.guard.packageCS"
@@ -21,7 +21,7 @@
           </guardPattern>
           <bottomPattern/>
         </domain>
-        <domain xsi:type="qvti:CoreDomain" isCheckable="false" isEnforceable="true"
+        <domain xsi:type="qvti:ImperativeDomain" isCheckable="false" isEnforceable="true"
             typedModel="#qT..classescs2as.rightAS">
           <guardPattern/>
           <bottomPattern>

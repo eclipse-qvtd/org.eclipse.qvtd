@@ -12,13 +12,13 @@
       <modelParameter xmi:id="qT..hsv2hls.hls" name="hls" usedPackage="HLSTree.ecore.oclas#P.HLSTree"/>
       <modelParameter xmi:id="qT..hsv2hls.middle" name="middle" usedPackage="HSV2HLS.ecore.oclas#P.HSV2HLS"/>
       <rule xsi:type="qvti:Mapping" xmi:id="m..hsv2hls.HSV2HLSRoot_LM" name="HSV2HLSRoot_LM">
-        <domain xsi:type="qvti:CoreDomain" name="hsv" isCheckable="true" isEnforceable="false" typedModel="#qT..hsv2hls.hsv">
+        <domain xsi:type="qvti:ImperativeDomain" name="hsv" isCheckable="true" isEnforceable="false" typedModel="#qT..hsv2hls.hsv">
           <guardPattern>
             <variable xmi:id="qV..hsv2hls.HSV2HLSRoot_LM.hsv.guard.hsvRoot" name="hsvRoot" type="pivot:Class HSVTree.ecore.oclas#T.HSVTree.HSVNode"/>
           </guardPattern>
           <bottomPattern/>
         </domain>
-        <domain xsi:type="qvti:CoreDomain" name="middle" isCheckable="false" isEnforceable="true" typedModel="#qT..hsv2hls.middle">
+        <domain xsi:type="qvti:ImperativeDomain" name="middle" isCheckable="false" isEnforceable="true" typedModel="#qT..hsv2hls.middle">
           <guardPattern/>
           <bottomPattern>
             <realizedVariable xmi:id="qV..hsv2hls.HSV2HLSRoot_LM.middle.bottom.middleRoot" name="middleRoot" type="pivot:Class HSV2HLS.ecore.oclas#T.HSV2HLS.HSVNode2HLSNode"/>
@@ -71,13 +71,13 @@
         </mappingStatement>
       </rule>
       <rule xsi:type="qvti:Mapping" xmi:id="m..hsv2hls.HSV2HLSRoot_MR" name="HSV2HLSRoot_MR">
-        <domain xsi:type="qvti:CoreDomain" name="hls" isCheckable="false" isEnforceable="true" typedModel="#qT..hsv2hls.hls">
+        <domain xsi:type="qvti:ImperativeDomain" name="hls" isCheckable="false" isEnforceable="true" typedModel="#qT..hsv2hls.hls">
           <guardPattern/>
           <bottomPattern>
             <realizedVariable xmi:id="qV..hsv2hls.HSV2HLSRoot_MR.hls.bottom.hlsRoot" name="hlsRoot" type="pivot:Class HLSTree.ecore.oclas#T.HLSTree.HLSNode"/>
           </bottomPattern>
         </domain>
-        <domain xsi:type="qvti:CoreDomain" name="middle" isCheckable="true" isEnforceable="false" typedModel="#qT..hsv2hls.middle">
+        <domain xsi:type="qvti:ImperativeDomain" name="middle" isCheckable="true" isEnforceable="false" typedModel="#qT..hsv2hls.middle">
           <guardPattern>
             <variable xmi:id="qV..hsv2hls.HSV2HLSRoot_MR.middle.guard.middleRoot" name="middleRoot" type="pivot:Class HSV2HLS.ecore.oclas#T.HSV2HLS.HSVNode2HLSNode"/>
           </guardPattern>
@@ -116,14 +116,14 @@
         </mappingStatement>
       </rule>
       <rule xsi:type="qvti:Mapping" xmi:id="m..hsv2hls.HSV2HLSRecursion_LM" name="HSV2HLSRecursion_LM">
-        <domain xsi:type="qvti:CoreDomain" name="hsv" isCheckable="true" isEnforceable="false" typedModel="#qT..hsv2hls.hsv">
+        <domain xsi:type="qvti:ImperativeDomain" name="hsv" isCheckable="true" isEnforceable="false" typedModel="#qT..hsv2hls.hsv">
           <guardPattern>
             <variable xmi:id="qV..hsv2hls.HSV2HLSRecursion_LM.hsv.guard.hsvParent" name="hsvParent" type="pivot:Class HSVTree.ecore.oclas#T.HSVTree.HSVNode"/>
             <variable xmi:id="qV..hsv2hls.HSV2HLSRecursion_LM.hsv.guard.hsvNode" name="hsvNode" type="pivot:Class HSVTree.ecore.oclas#T.HSVTree.HSVNode"/>
           </guardPattern>
           <bottomPattern/>
         </domain>
-        <domain xsi:type="qvti:CoreDomain" name="middle" isCheckable="false" isEnforceable="true" typedModel="#qT..hsv2hls.middle">
+        <domain xsi:type="qvti:ImperativeDomain" name="middle" isCheckable="false" isEnforceable="true" typedModel="#qT..hsv2hls.middle">
           <guardPattern>
             <variable xmi:id="qV..hsv2hls.HSV2HLSRecursion_LM.middle.guard.middleParent" name="middleParent" type="pivot:Class HSV2HLS.ecore.oclas#T.HSV2HLS.HSVNode2HLSNode"/>
           </guardPattern>
@@ -183,7 +183,7 @@
         </mappingStatement>
       </rule>
       <rule xsi:type="qvti:Mapping" xmi:id="m..hsv2hls.HSV2HLSRecursion_MR" name="HSV2HLSRecursion_MR">
-        <domain xsi:type="qvti:CoreDomain" name="hls" isCheckable="false" isEnforceable="true" typedModel="#qT..hsv2hls.hls">
+        <domain xsi:type="qvti:ImperativeDomain" name="hls" isCheckable="false" isEnforceable="true" typedModel="#qT..hsv2hls.hls">
           <guardPattern>
             <variable xmi:id="qV..hsv2hls.HSV2HLSRecursion_MR.hls.guard.hlsParent" name="hlsParent" type="pivot:Class HLSTree.ecore.oclas#T.HLSTree.HLSNode"/>
           </guardPattern>
@@ -191,7 +191,7 @@
             <realizedVariable xmi:id="qV..hsv2hls.HSV2HLSRecursion_MR.hls.bottom.hlsNode" name="hlsNode" type="pivot:Class HLSTree.ecore.oclas#T.HLSTree.HLSNode"/>
           </bottomPattern>
         </domain>
-        <domain xsi:type="qvti:CoreDomain" name="middle" isCheckable="true" isEnforceable="false" typedModel="#qT..hsv2hls.middle">
+        <domain xsi:type="qvti:ImperativeDomain" name="middle" isCheckable="true" isEnforceable="false" typedModel="#qT..hsv2hls.middle">
           <guardPattern>
             <variable xmi:id="qV..hsv2hls.HSV2HLSRecursion_MR.middle.guard.middleParent" name="middleParent" type="pivot:Class HSV2HLS.ecore.oclas#T.HSV2HLS.HSVNode2HLSNode"/>
             <variable xmi:id="qV..hsv2hls.HSV2HLSRecursion_MR.middle.guard.middleNode" name="middleNode" type="pivot:Class HSV2HLS.ecore.oclas#T.HSV2HLS.HSVNode2HLSNode"/>
@@ -251,7 +251,7 @@
       </rule>
       <rule xsi:type="qvti:Mapping" xmi:id="m..hsv2hls.__root__" name="__root__">
         <guardPattern/>
-        <bottomPattern xsi:type="qvti:ImperativeBottomPattern"/>
+        <bottomPattern xsi:type="qvti:BottomPattern"/>
         <mappingStatement xsi:type="qvti:MappingLoop">
           <ownedSource xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.0" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclElement.allInstances">
             <ownedSource xsi:type="pivot:TypeExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class" referredType="pivot:Class HSVTree.ecore.oclas#T.HSVTree.HSVNode"/>

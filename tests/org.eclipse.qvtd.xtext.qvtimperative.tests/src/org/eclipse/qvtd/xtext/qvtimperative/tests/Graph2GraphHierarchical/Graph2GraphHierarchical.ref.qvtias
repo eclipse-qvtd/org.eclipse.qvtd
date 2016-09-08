@@ -11,7 +11,7 @@
       <modelParameter xmi:id="qT..CopyGraph.lowerGraph" name="lowerGraph" usedPackage="../Graph2GraphMinimal/SimpleGraph.ecore.oclas#P.simplegraph"/>
       <modelParameter xmi:id="qT..CopyGraph.middle" name="middle" usedPackage="../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#P.simplegraph2graph"/>
       <rule xsi:type="qvti:Mapping" xmi:id="m..CopyGraph.Graph2Middle" name="Graph2Middle">
-        <domain xsi:type="qvti:CoreDomain" isCheckable="true" isEnforceable="false"
+        <domain xsi:type="qvti:ImperativeDomain" isCheckable="true" isEnforceable="false"
             typedModel="#qT..CopyGraph.upperGraph">
           <guardPattern>
             <variable xmi:id="qV..CopyGraph.Graph2Middle.upperGraph.guard.g1" name="g1"
@@ -19,7 +19,7 @@
           </guardPattern>
           <bottomPattern/>
         </domain>
-        <domain xsi:type="qvti:CoreDomain" isCheckable="false" isEnforceable="true"
+        <domain xsi:type="qvti:ImperativeDomain" isCheckable="false" isEnforceable="true"
             typedModel="#qT..CopyGraph.middle">
           <guardPattern/>
           <bottomPattern>
@@ -91,7 +91,7 @@
         </mappingStatement>
       </rule>
       <rule xsi:type="qvti:Mapping" xmi:id="m..CopyGraph.Node2Middle" name="Node2Middle">
-        <domain xsi:type="qvti:CoreDomain" isCheckable="true" isEnforceable="false"
+        <domain xsi:type="qvti:ImperativeDomain" isCheckable="true" isEnforceable="false"
             typedModel="#qT..CopyGraph.upperGraph">
           <guardPattern>
             <variable xmi:id="qV..CopyGraph.Node2Middle.upperGraph.guard.n1" name="n1"
@@ -99,7 +99,7 @@
           </guardPattern>
           <bottomPattern/>
         </domain>
-        <domain xsi:type="qvti:CoreDomain" isCheckable="false" isEnforceable="true"
+        <domain xsi:type="qvti:ImperativeDomain" isCheckable="false" isEnforceable="true"
             typedModel="#qT..CopyGraph.middle">
           <guardPattern>
             <variable xmi:id="qV..CopyGraph.Node2Middle.middle.guard.middleParent"
@@ -139,7 +139,7 @@
         </bottomPattern>
       </rule>
       <rule xsi:type="qvti:Mapping" xmi:id="m..CopyGraph.Middle2Graph" name="Middle2Graph">
-        <domain xsi:type="qvti:CoreDomain" isCheckable="true" isEnforceable="false"
+        <domain xsi:type="qvti:ImperativeDomain" isCheckable="true" isEnforceable="false"
             typedModel="#qT..CopyGraph.middle">
           <guardPattern>
             <variable xmi:id="qV..CopyGraph.Middle2Graph.middle.guard.g2Gmiddle" name="g2Gmiddle"
@@ -147,7 +147,7 @@
           </guardPattern>
           <bottomPattern/>
         </domain>
-        <domain xsi:type="qvti:CoreDomain" isCheckable="false" isEnforceable="true"
+        <domain xsi:type="qvti:ImperativeDomain" isCheckable="false" isEnforceable="true"
             typedModel="#qT..CopyGraph.lowerGraph">
           <guardPattern/>
           <bottomPattern>
@@ -206,7 +206,7 @@
         </mappingStatement>
       </rule>
       <rule xsi:type="qvti:Mapping" xmi:id="m..CopyGraph.Middle2Node" name="Middle2Node">
-        <domain xsi:type="qvti:CoreDomain" isCheckable="true" isEnforceable="false"
+        <domain xsi:type="qvti:ImperativeDomain" isCheckable="true" isEnforceable="false"
             typedModel="#qT..CopyGraph.middle">
           <guardPattern>
             <variable xmi:id="qV..CopyGraph.Middle2Node.middle.guard.n2n" name="n2n"
@@ -214,7 +214,7 @@
           </guardPattern>
           <bottomPattern/>
         </domain>
-        <domain xsi:type="qvti:CoreDomain" isCheckable="false" isEnforceable="true"
+        <domain xsi:type="qvti:ImperativeDomain" isCheckable="false" isEnforceable="true"
             typedModel="#qT..CopyGraph.lowerGraph">
           <guardPattern/>
           <bottomPattern>
