@@ -52,7 +52,7 @@ public abstract class AbstractQVTimperativeASSaverNormalizeVisitor
 
 	@Override
 	public @Nullable Object visitBottomPattern(org.eclipse.qvtd.pivot.qvtimperative.@NonNull BottomPattern object) {
-		return visitCorePattern(object);
+		return visitImperativePattern(object);
 	}
 
 	@Override
@@ -71,33 +71,23 @@ public abstract class AbstractQVTimperativeASSaverNormalizeVisitor
 	}
 
 	@Override
-	public @Nullable Object visitCoreDomain(org.eclipse.qvtd.pivot.qvtimperative.@NonNull CoreDomain object) {
-		return visitDomain(object);
-	}
-
-	@Override
-	public @Nullable Object visitCorePattern(org.eclipse.qvtd.pivot.qvtimperative.@NonNull CorePattern object) {
-		return visitPattern(object);
-	}
-
-	@Override
 	public @Nullable Object visitGuardPattern(org.eclipse.qvtd.pivot.qvtimperative.@NonNull GuardPattern object) {
-		return visitCorePattern(object);
-	}
-
-	@Override
-	public @Nullable Object visitImperativeBottomPattern(org.eclipse.qvtd.pivot.qvtimperative.@NonNull ImperativeBottomPattern object) {
-		return visitBottomPattern(object);
+		return visitImperativePattern(object);
 	}
 
 	@Override
 	public @Nullable Object visitImperativeDomain(org.eclipse.qvtd.pivot.qvtimperative.@NonNull ImperativeDomain object) {
-		return visitCoreDomain(object);
+		return visitDomain(object);
 	}
 
 	@Override
 	public @Nullable Object visitImperativeModel(org.eclipse.qvtd.pivot.qvtimperative.@NonNull ImperativeModel object) {
 		return visitBaseModel(object);
+	}
+
+	@Override
+	public @Nullable Object visitImperativePattern(org.eclipse.qvtd.pivot.qvtimperative.@NonNull ImperativePattern object) {
+		return visitPattern(object);
 	}
 
 	@Override

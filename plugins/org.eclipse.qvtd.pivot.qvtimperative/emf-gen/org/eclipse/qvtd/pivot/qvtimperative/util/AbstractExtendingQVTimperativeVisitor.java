@@ -46,7 +46,7 @@ public abstract class AbstractExtendingQVTimperativeVisitor<R, C>
 
 	@Override
 	public R visitBottomPattern(org.eclipse.qvtd.pivot.qvtimperative.@NonNull BottomPattern object) {
-		return visitCorePattern(object);
+		return visitImperativePattern(object);
 	}
 
 	@Override
@@ -65,33 +65,23 @@ public abstract class AbstractExtendingQVTimperativeVisitor<R, C>
 	}
 
 	@Override
-	public R visitCoreDomain(org.eclipse.qvtd.pivot.qvtimperative.@NonNull CoreDomain object) {
-		return visitDomain(object);
-	}
-
-	@Override
-	public R visitCorePattern(org.eclipse.qvtd.pivot.qvtimperative.@NonNull CorePattern object) {
-		return visitPattern(object);
-	}
-
-	@Override
 	public R visitGuardPattern(org.eclipse.qvtd.pivot.qvtimperative.@NonNull GuardPattern object) {
-		return visitCorePattern(object);
-	}
-
-	@Override
-	public R visitImperativeBottomPattern(org.eclipse.qvtd.pivot.qvtimperative.@NonNull ImperativeBottomPattern object) {
-		return visitBottomPattern(object);
+		return visitImperativePattern(object);
 	}
 
 	@Override
 	public R visitImperativeDomain(org.eclipse.qvtd.pivot.qvtimperative.@NonNull ImperativeDomain object) {
-		return visitCoreDomain(object);
+		return visitDomain(object);
 	}
 
 	@Override
 	public R visitImperativeModel(org.eclipse.qvtd.pivot.qvtimperative.@NonNull ImperativeModel object) {
 		return visitBaseModel(object);
+	}
+
+	@Override
+	public R visitImperativePattern(org.eclipse.qvtd.pivot.qvtimperative.@NonNull ImperativePattern object) {
+		return visitPattern(object);
 	}
 
 	@Override

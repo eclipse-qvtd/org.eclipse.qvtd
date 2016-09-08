@@ -27,7 +27,6 @@ import org.eclipse.qvtd.pivot.qvtbase.impl.RuleImpl;
 import org.eclipse.qvtd.pivot.qvtimperative.Area;
 import org.eclipse.qvtd.pivot.qvtimperative.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardPattern;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeArea;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
@@ -534,13 +533,8 @@ public class MappingImpl extends RuleImpl implements Mapping {
 			switch (derivedFeatureID) {
 				case QVTimperativePackage.MAPPING__GUARD_PATTERN: return QVTimperativePackage.AREA__GUARD_PATTERN;
 				case QVTimperativePackage.MAPPING__BOTTOM_PATTERN: return QVTimperativePackage.AREA__BOTTOM_PATTERN;
-				default: return -1;
-			}
-		}
-		if (baseClass == ImperativeArea.class) {
-			switch (derivedFeatureID) {
-				case QVTimperativePackage.MAPPING__CHECKED_PROPERTIES: return QVTimperativePackage.IMPERATIVE_AREA__CHECKED_PROPERTIES;
-				case QVTimperativePackage.MAPPING__ENFORCED_PROPERTIES: return QVTimperativePackage.IMPERATIVE_AREA__ENFORCED_PROPERTIES;
+				case QVTimperativePackage.MAPPING__CHECKED_PROPERTIES: return QVTimperativePackage.AREA__CHECKED_PROPERTIES;
+				case QVTimperativePackage.MAPPING__ENFORCED_PROPERTIES: return QVTimperativePackage.AREA__ENFORCED_PROPERTIES;
 				default: return -1;
 			}
 		}
@@ -558,13 +552,8 @@ public class MappingImpl extends RuleImpl implements Mapping {
 			switch (baseFeatureID) {
 				case QVTimperativePackage.AREA__GUARD_PATTERN: return QVTimperativePackage.MAPPING__GUARD_PATTERN;
 				case QVTimperativePackage.AREA__BOTTOM_PATTERN: return QVTimperativePackage.MAPPING__BOTTOM_PATTERN;
-				default: return -1;
-			}
-		}
-		if (baseClass == ImperativeArea.class) {
-			switch (baseFeatureID) {
-				case QVTimperativePackage.IMPERATIVE_AREA__CHECKED_PROPERTIES: return QVTimperativePackage.MAPPING__CHECKED_PROPERTIES;
-				case QVTimperativePackage.IMPERATIVE_AREA__ENFORCED_PROPERTIES: return QVTimperativePackage.MAPPING__ENFORCED_PROPERTIES;
+				case QVTimperativePackage.AREA__CHECKED_PROPERTIES: return QVTimperativePackage.MAPPING__CHECKED_PROPERTIES;
+				case QVTimperativePackage.AREA__ENFORCED_PROPERTIES: return QVTimperativePackage.MAPPING__ENFORCED_PROPERTIES;
 				default: return -1;
 			}
 		}

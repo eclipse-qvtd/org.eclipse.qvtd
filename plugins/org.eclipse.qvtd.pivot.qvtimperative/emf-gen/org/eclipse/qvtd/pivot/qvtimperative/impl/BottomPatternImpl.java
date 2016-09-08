@@ -50,7 +50,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
  *
  * @generated
  */
-public class BottomPatternImpl extends CorePatternImpl implements BottomPattern {
+public class BottomPatternImpl extends ImperativePatternImpl implements BottomPattern {
 	/**
 	 * The cached value of the '{@link #getAssignment() <em>Assignment</em>}' containment reference list.
 	 * <!-- begin-user-doc -->

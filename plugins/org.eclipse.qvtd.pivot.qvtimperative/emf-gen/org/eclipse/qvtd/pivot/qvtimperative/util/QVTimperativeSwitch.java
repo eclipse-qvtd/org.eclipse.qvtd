@@ -37,13 +37,10 @@ import org.eclipse.qvtd.pivot.qvtimperative.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
-import org.eclipse.qvtd.pivot.qvtimperative.CoreDomain;
-import org.eclipse.qvtd.pivot.qvtimperative.CorePattern;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardPattern;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeArea;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeBottomPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativePattern;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
@@ -134,7 +131,7 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 			case QVTimperativePackage.BOTTOM_PATTERN: {
 				BottomPattern bottomPattern = (BottomPattern)theEObject;
 				T result = caseBottomPattern(bottomPattern);
-				if (result == null) result = caseCorePattern(bottomPattern);
+				if (result == null) result = caseImperativePattern(bottomPattern);
 				if (result == null) result = casePattern(bottomPattern);
 				if (result == null) result = caseElement(bottomPattern);
 				if (result == null) result = caseVisitable(bottomPattern);
@@ -176,63 +173,19 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTimperativePackage.CORE_DOMAIN: {
-				CoreDomain coreDomain = (CoreDomain)theEObject;
-				T result = caseCoreDomain(coreDomain);
-				if (result == null) result = caseDomain(coreDomain);
-				if (result == null) result = caseArea(coreDomain);
-				if (result == null) result = caseNamedElement(coreDomain);
-				if (result == null) result = caseReferringElement(coreDomain);
-				if (result == null) result = caseElement(coreDomain);
-				if (result == null) result = caseNameable(coreDomain);
-				if (result == null) result = caseVisitable(coreDomain);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case QVTimperativePackage.CORE_PATTERN: {
-				CorePattern corePattern = (CorePattern)theEObject;
-				T result = caseCorePattern(corePattern);
-				if (result == null) result = casePattern(corePattern);
-				if (result == null) result = caseElement(corePattern);
-				if (result == null) result = caseVisitable(corePattern);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case QVTimperativePackage.GUARD_PATTERN: {
 				GuardPattern guardPattern = (GuardPattern)theEObject;
 				T result = caseGuardPattern(guardPattern);
-				if (result == null) result = caseCorePattern(guardPattern);
+				if (result == null) result = caseImperativePattern(guardPattern);
 				if (result == null) result = casePattern(guardPattern);
 				if (result == null) result = caseElement(guardPattern);
 				if (result == null) result = caseVisitable(guardPattern);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTimperativePackage.IMPERATIVE_AREA: {
-				ImperativeArea imperativeArea = (ImperativeArea)theEObject;
-				T result = caseImperativeArea(imperativeArea);
-				if (result == null) result = caseArea(imperativeArea);
-				if (result == null) result = caseElement(imperativeArea);
-				if (result == null) result = caseVisitable(imperativeArea);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case QVTimperativePackage.IMPERATIVE_BOTTOM_PATTERN: {
-				ImperativeBottomPattern imperativeBottomPattern = (ImperativeBottomPattern)theEObject;
-				T result = caseImperativeBottomPattern(imperativeBottomPattern);
-				if (result == null) result = caseBottomPattern(imperativeBottomPattern);
-				if (result == null) result = caseCorePattern(imperativeBottomPattern);
-				if (result == null) result = casePattern(imperativeBottomPattern);
-				if (result == null) result = caseElement(imperativeBottomPattern);
-				if (result == null) result = caseVisitable(imperativeBottomPattern);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case QVTimperativePackage.IMPERATIVE_DOMAIN: {
 				ImperativeDomain imperativeDomain = (ImperativeDomain)theEObject;
 				T result = caseImperativeDomain(imperativeDomain);
-				if (result == null) result = caseCoreDomain(imperativeDomain);
-				if (result == null) result = caseImperativeArea(imperativeDomain);
 				if (result == null) result = caseDomain(imperativeDomain);
 				if (result == null) result = caseArea(imperativeDomain);
 				if (result == null) result = caseNamedElement(imperativeDomain);
@@ -256,13 +209,21 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case QVTimperativePackage.IMPERATIVE_PATTERN: {
+				ImperativePattern imperativePattern = (ImperativePattern)theEObject;
+				T result = caseImperativePattern(imperativePattern);
+				if (result == null) result = casePattern(imperativePattern);
+				if (result == null) result = caseElement(imperativePattern);
+				if (result == null) result = caseVisitable(imperativePattern);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case QVTimperativePackage.MAPPING: {
 				Mapping mapping = (Mapping)theEObject;
 				T result = caseMapping(mapping);
 				if (result == null) result = caseRule(mapping);
-				if (result == null) result = caseImperativeArea(mapping);
-				if (result == null) result = caseNamedElement(mapping);
 				if (result == null) result = caseArea(mapping);
+				if (result == null) result = caseNamedElement(mapping);
 				if (result == null) result = caseElement(mapping);
 				if (result == null) result = caseNameable(mapping);
 				if (result == null) result = caseVisitable(mapping);
@@ -485,36 +446,6 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Core Domain</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Core Domain</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseCoreDomain(CoreDomain object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Core Pattern</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Core Pattern</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseCorePattern(CorePattern object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Guard Pattern</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -526,36 +457,6 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseGuardPattern(GuardPattern object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Imperative Area</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Imperative Area</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseImperativeArea(ImperativeArea object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Imperative Bottom Pattern</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Imperative Bottom Pattern</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseImperativeBottomPattern(ImperativeBottomPattern object) {
 		return null;
 	}
 
@@ -586,6 +487,21 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseImperativeModel(ImperativeModel object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Imperative Pattern</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Imperative Pattern</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseImperativePattern(ImperativePattern object) {
 		return null;
 	}
 

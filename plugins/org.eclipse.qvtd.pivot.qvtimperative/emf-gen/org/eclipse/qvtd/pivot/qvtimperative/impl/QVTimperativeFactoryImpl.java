@@ -20,12 +20,10 @@ import org.eclipse.qvtd.pivot.qvtimperative.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
-import org.eclipse.qvtd.pivot.qvtimperative.CoreDomain;
-import org.eclipse.qvtd.pivot.qvtimperative.CorePattern;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardPattern;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeBottomPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativePattern;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
@@ -87,12 +85,10 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 			case QVTimperativePackage.CONNECTION_ASSIGNMENT: return createConnectionAssignment();
 			case QVTimperativePackage.CONNECTION_STATEMENT: return createConnectionStatement();
 			case QVTimperativePackage.CONNECTION_VARIABLE: return createConnectionVariable();
-			case QVTimperativePackage.CORE_DOMAIN: return createCoreDomain();
-			case QVTimperativePackage.CORE_PATTERN: return createCorePattern();
 			case QVTimperativePackage.GUARD_PATTERN: return createGuardPattern();
-			case QVTimperativePackage.IMPERATIVE_BOTTOM_PATTERN: return createImperativeBottomPattern();
 			case QVTimperativePackage.IMPERATIVE_DOMAIN: return createImperativeDomain();
 			case QVTimperativePackage.IMPERATIVE_MODEL: return createImperativeModel();
+			case QVTimperativePackage.IMPERATIVE_PATTERN: return createImperativePattern();
 			case QVTimperativePackage.MAPPING: return createMapping();
 			case QVTimperativePackage.MAPPING_CALL: return createMappingCall();
 			case QVTimperativePackage.MAPPING_CALL_BINDING: return createMappingCallBinding();
@@ -114,7 +110,7 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 	 * @generated
 	 */
 	@Override
-	public BottomPattern createBottomPattern() {
+	public @NonNull BottomPattern createBottomPattern() {
 		BottomPatternImpl bottomPattern = new BottomPatternImpl();
 		return bottomPattern;
 	}
@@ -158,42 +154,9 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 	 * @generated
 	 */
 	@Override
-	public CoreDomain createCoreDomain() {
-		CoreDomainImpl coreDomain = new CoreDomainImpl();
-		return coreDomain;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public CorePattern createCorePattern() {
-		CorePatternImpl corePattern = new CorePatternImpl();
-		return corePattern;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public GuardPattern createGuardPattern() {
+	public @NonNull GuardPattern createGuardPattern() {
 		GuardPatternImpl guardPattern = new GuardPatternImpl();
 		return guardPattern;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public @NonNull ImperativeBottomPattern createImperativeBottomPattern() {
-		ImperativeBottomPatternImpl imperativeBottomPattern = new ImperativeBottomPatternImpl();
-		return imperativeBottomPattern;
 	}
 
 	/**
@@ -213,9 +176,20 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 	 * @generated
 	 */
 	@Override
-	public@NonNull ImperativeModel createImperativeModel() {
+	public @NonNull ImperativeModel createImperativeModel() {
 		ImperativeModelImpl imperativeModel = new ImperativeModelImpl();
 		return imperativeModel;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public @NonNull ImperativePattern createImperativePattern() {
+		ImperativePatternImpl imperativePattern = new ImperativePatternImpl();
+		return imperativePattern;
 	}
 
 	/**
@@ -279,7 +253,7 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 	 * @generated
 	 */
 	@Override
-	public OppositePropertyAssignment createOppositePropertyAssignment() {
+	public @NonNull OppositePropertyAssignment createOppositePropertyAssignment() {
 		OppositePropertyAssignmentImpl oppositePropertyAssignment = new OppositePropertyAssignmentImpl();
 		return oppositePropertyAssignment;
 	}
@@ -290,7 +264,7 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 	 * @generated
 	 */
 	@Override
-	public PropertyAssignment createPropertyAssignment() {
+	public @NonNull PropertyAssignment createPropertyAssignment() {
 		PropertyAssignmentImpl propertyAssignment = new PropertyAssignmentImpl();
 		return propertyAssignment;
 	}
@@ -301,7 +275,7 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 	 * @generated
 	 */
 	@Override
-	public RealizedVariable createRealizedVariable() {
+	public @NonNull RealizedVariable createRealizedVariable() {
 		RealizedVariableImpl realizedVariable = new RealizedVariableImpl();
 		return realizedVariable;
 	}
@@ -312,7 +286,7 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 	 * @generated
 	 */
 	@Override
-	public VariableAssignment createVariableAssignment() {
+	public @NonNull VariableAssignment createVariableAssignment() {
 		VariableAssignmentImpl variableAssignment = new VariableAssignmentImpl();
 		return variableAssignment;
 	}

@@ -47,7 +47,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
  *
  * @generated
  */
-public class GuardPatternImpl extends CorePatternImpl implements GuardPattern {
+public class GuardPatternImpl extends ImperativePatternImpl implements GuardPattern {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

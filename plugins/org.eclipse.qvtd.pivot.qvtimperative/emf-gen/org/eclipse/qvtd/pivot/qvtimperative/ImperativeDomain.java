@@ -14,6 +14,8 @@
  */
 package org.eclipse.qvtd.pivot.qvtimperative;
 
+import org.eclipse.qvtd.pivot.qvtbase.Domain;
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Imperative Domain</b></em>'.
@@ -23,5 +25,5 @@ package org.eclipse.qvtd.pivot.qvtimperative;
  * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getImperativeDomain()
  * @generated
  */
-public interface ImperativeDomain extends CoreDomain, ImperativeArea {
+public interface ImperativeDomain extends Domain, Area {
 } // ImperativeDomain

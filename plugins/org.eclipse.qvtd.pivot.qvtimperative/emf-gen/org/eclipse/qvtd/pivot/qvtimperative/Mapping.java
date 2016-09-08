@@ -37,7 +37,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Rule;
  * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getMapping()
  * @generated
  */
-public interface Mapping extends Rule, ImperativeArea {
+public interface Mapping extends Rule, Area {
 	/**
 	 * Returns the value of the '<em><b>Mapping Statement</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

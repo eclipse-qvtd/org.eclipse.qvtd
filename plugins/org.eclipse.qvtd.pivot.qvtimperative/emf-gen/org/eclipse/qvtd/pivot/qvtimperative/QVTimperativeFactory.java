@@ -37,7 +37,7 @@ public interface QVTimperativeFactory extends EFactory {
 	 * @return a new object of class '<em>Bottom Pattern</em>'.
 	 * @generated
 	 */
-	BottomPattern createBottomPattern();
+	@NonNull BottomPattern createBottomPattern();
 
 	/**
 	 * Returns a new object of class '<em>Connection Assignment</em>'.
@@ -67,40 +67,13 @@ public interface QVTimperativeFactory extends EFactory {
 	@NonNull ConnectionVariable createConnectionVariable();
 
 	/**
-	 * Returns a new object of class '<em>Core Domain</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Core Domain</em>'.
-	 * @generated
-	 */
-	CoreDomain createCoreDomain();
-
-	/**
-	 * Returns a new object of class '<em>Core Pattern</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Core Pattern</em>'.
-	 * @generated
-	 */
-	CorePattern createCorePattern();
-
-	/**
 	 * Returns a new object of class '<em>Guard Pattern</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>Guard Pattern</em>'.
 	 * @generated
 	 */
-	GuardPattern createGuardPattern();
-
-	/**
-	 * Returns a new object of class '<em>Imperative Bottom Pattern</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Imperative Bottom Pattern</em>'.
-	 * @generated
-	 */
-	@NonNull ImperativeBottomPattern createImperativeBottomPattern();
+	@NonNull GuardPattern createGuardPattern();
 
 	/**
 	 * Returns a new object of class '<em>Imperative Domain</em>'.
@@ -119,6 +92,15 @@ public interface QVTimperativeFactory extends EFactory {
 	 * @generated
 	 */
 	@NonNull ImperativeModel createImperativeModel();
+
+	/**
+	 * Returns a new object of class '<em>Imperative Pattern</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Imperative Pattern</em>'.
+	 * @generated
+	 */
+	@NonNull ImperativePattern createImperativePattern();
 
 	/**
 	 * Returns a new object of class '<em>Mapping</em>'.
@@ -172,7 +154,7 @@ public interface QVTimperativeFactory extends EFactory {
 	 * @return a new object of class '<em>Opposite Property Assignment</em>'.
 	 * @generated
 	 */
-	OppositePropertyAssignment createOppositePropertyAssignment();
+	@NonNull OppositePropertyAssignment createOppositePropertyAssignment();
 
 	/**
 	 * Returns a new object of class '<em>Property Assignment</em>'.
@@ -181,7 +163,7 @@ public interface QVTimperativeFactory extends EFactory {
 	 * @return a new object of class '<em>Property Assignment</em>'.
 	 * @generated
 	 */
-	PropertyAssignment createPropertyAssignment();
+	@NonNull PropertyAssignment createPropertyAssignment();
 
 	/**
 	 * Returns a new object of class '<em>Realized Variable</em>'.
@@ -190,7 +172,7 @@ public interface QVTimperativeFactory extends EFactory {
 	 * @return a new object of class '<em>Realized Variable</em>'.
 	 * @generated
 	 */
-	RealizedVariable createRealizedVariable();
+	@NonNull RealizedVariable createRealizedVariable();
 
 	/**
 	 * Returns a new object of class '<em>Variable Assignment</em>'.
@@ -199,7 +181,7 @@ public interface QVTimperativeFactory extends EFactory {
 	 * @return a new object of class '<em>Variable Assignment</em>'.
 	 * @generated
 	 */
-	VariableAssignment createVariableAssignment();
+	@NonNull VariableAssignment createVariableAssignment();
 
 	/**
 	 * Returns a new object of class '<em>Variable Predicate</em>'.

@@ -92,46 +92,10 @@ public abstract class AbstractWrappingQVTimperativeVisitor<R, C, @NonNull D exte
 	}
 
 	@Override
-	public R visitCoreDomain(org.eclipse.qvtd.pivot.qvtimperative.@NonNull CoreDomain object) {
-		@Nullable P prologue = preVisit(object);
-		try {
-			R result = delegate.visitCoreDomain(object);
-			return postVisit(object, prologue, result);
-		}
-		catch (Throwable e) {
-			return badVisit(object, prologue, e);
-		}
-	}
-
-	@Override
-	public R visitCorePattern(org.eclipse.qvtd.pivot.qvtimperative.@NonNull CorePattern object) {
-		@Nullable P prologue = preVisit(object);
-		try {
-			R result = delegate.visitCorePattern(object);
-			return postVisit(object, prologue, result);
-		}
-		catch (Throwable e) {
-			return badVisit(object, prologue, e);
-		}
-	}
-
-	@Override
 	public R visitGuardPattern(org.eclipse.qvtd.pivot.qvtimperative.@NonNull GuardPattern object) {
 		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitGuardPattern(object);
-			return postVisit(object, prologue, result);
-		}
-		catch (Throwable e) {
-			return badVisit(object, prologue, e);
-		}
-	}
-
-	@Override
-	public R visitImperativeBottomPattern(org.eclipse.qvtd.pivot.qvtimperative.@NonNull ImperativeBottomPattern object) {
-		@Nullable P prologue = preVisit(object);
-		try {
-			R result = delegate.visitImperativeBottomPattern(object);
 			return postVisit(object, prologue, result);
 		}
 		catch (Throwable e) {
@@ -156,6 +120,18 @@ public abstract class AbstractWrappingQVTimperativeVisitor<R, C, @NonNull D exte
 		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitImperativeModel(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
+	}
+
+	@Override
+	public R visitImperativePattern(org.eclipse.qvtd.pivot.qvtimperative.@NonNull ImperativePattern object) {
+		@Nullable P prologue = preVisit(object);
+		try {
+			R result = delegate.visitImperativePattern(object);
 			return postVisit(object, prologue, result);
 		}
 		catch (Throwable e) {

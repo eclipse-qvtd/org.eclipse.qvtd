@@ -33,7 +33,7 @@ import org.eclipse.emf.common.util.EList;
  * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getBottomPattern()
  * @generated
  */
-public interface BottomPattern extends CorePattern {
+public interface BottomPattern extends ImperativePattern {
 	/**
 	 * Returns the value of the '<em><b>Area</b></em>' container reference.
 	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtimperative.Area#getBottomPattern <em>Bottom Pattern</em>}'.

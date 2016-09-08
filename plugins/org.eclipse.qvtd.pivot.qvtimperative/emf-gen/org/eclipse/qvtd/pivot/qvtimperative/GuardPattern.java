@@ -30,7 +30,7 @@ package org.eclipse.qvtd.pivot.qvtimperative;
  * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getGuardPattern()
  * @generated
  */
-public interface GuardPattern extends CorePattern {
+public interface GuardPattern extends ImperativePattern {
 	/**
 	 * Returns the value of the '<em><b>Area</b></em>' container reference.
 	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtimperative.Area#getGuardPattern <em>Guard Pattern</em>}'.

@@ -42,15 +42,15 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//ConnectionStatement/value"/>
     </genClasses>
     <genClasses ecoreClass="QVTimperative.ecore#//ConnectionVariable"/>
-    <genClasses ecoreClass="QVTimperative.ecore#//CoreDomain"/>
-    <genClasses ecoreClass="QVTimperative.ecore#//CorePattern">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//CorePattern/variable"/>
-      <genOperations ecoreOperation="QVTimperative.ecore#//CorePattern/getArea"/>
-    </genClasses>
     <genClasses ecoreClass="QVTimperative.ecore#//GuardPattern">
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference QVTimperative.ecore#//GuardPattern/area"/>
     </genClasses>
+    <genClasses ecoreClass="QVTimperative.ecore#//ImperativeDomain"/>
     <genClasses ecoreClass="QVTimperative.ecore#//ImperativeModel"/>
+    <genClasses ecoreClass="QVTimperative.ecore#//ImperativePattern">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//ImperativePattern/variable"/>
+      <genOperations ecoreOperation="QVTimperative.ecore#//ImperativePattern/getArea"/>
+    </genClasses>
     <genClasses ecoreClass="QVTimperative.ecore#//Mapping">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//Mapping/mappingStatement"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//Mapping/polledClasses"/>
