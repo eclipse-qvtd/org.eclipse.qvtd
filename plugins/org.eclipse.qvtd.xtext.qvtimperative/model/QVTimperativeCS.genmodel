@@ -15,17 +15,16 @@
   <foreignModel>QVTimperativeCS.ecore</foreignModel>
   <genPackages prefix="QVTimperativeCS" basePackage="org.eclipse.qvtd.xtext" disposableProviderFactory="true"
       fileExtensions="qvtics" ecorePackage="QVTimperativeCS.ecore#/">
+    <genClasses ecoreClass="QVTimperativeCS.ecore#//AddStatementCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//AddStatementCS/ownedExpression"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//AddStatementCS/targetVariable"/>
+    </genClasses>
     <genClasses image="false" ecoreClass="QVTimperativeCS.ecore#//AreaCS">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//AreaCS/ownedGuardPattern"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//AreaCS/ownedBottomPattern"/>
     </genClasses>
     <genClasses ecoreClass="QVTimperativeCS.ecore#//BottomPatternCS">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//BottomPatternCS/ownedRealizedVariables"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//BottomPatternCS/ownedConstraints"/>
-    </genClasses>
-    <genClasses ecoreClass="QVTimperativeCS.ecore#//ConnectionStatementCS">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//ConnectionStatementCS/ownedExpression"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//ConnectionStatementCS/targetVariable"/>
     </genClasses>
     <genClasses ecoreClass="QVTimperativeCS.ecore#//DirectionCS">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//DirectionCS/imports"/>
@@ -87,8 +86,9 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperativeCS.ecore#//QueryCS/isTransient"/>
     </genClasses>
     <genClasses image="false" ecoreClass="QVTimperativeCS.ecore#//RealizeableVariableCS"/>
-    <genClasses ecoreClass="QVTimperativeCS.ecore#//RealizedVariableCS">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//RealizedVariableCS/ownedInitExpression"/>
+    <genClasses ecoreClass="QVTimperativeCS.ecore#//NewStatementCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//NewStatementCS/ownedInitExpression"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//NewStatementCS/referredTypedModel"/>
     </genClasses>
     <genClasses ecoreClass="QVTimperativeCS.ecore#//SetStatementCS">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//SetStatementCS/referredProperty"/>

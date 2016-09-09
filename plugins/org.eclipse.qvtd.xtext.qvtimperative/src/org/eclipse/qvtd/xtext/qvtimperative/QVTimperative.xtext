@@ -24,16 +24,14 @@ TopLevelCS:
 	(ownedPackages+=QualifiedPackageCS | ownedTransformations+=TransformationCS | ownedMappings+=MappingCS | ownedQueries+=QueryCS)*
 ;
 
-AddStatementCS returns ConnectionStatementCS: 'add' targetVariable=[pivot::Variable|UnrestrictedName] '+=' ownedExpression=ExpCS ';';
+AddStatementCS: 'add' targetVariable=[pivot::Variable|UnrestrictedName] '+=' ownedExpression=ExpCS ';';
 				
 BottomPatternCS:		// Bug 466385 explains the redundancy below
 	(
-		'{' (ownedUnrealizedVariables+=UnrealizedVariableCS | ownedRealizedVariables+=RealizedVariableCS)
-		(',' (ownedUnrealizedVariables+=UnrealizedVariableCS | ownedRealizedVariables+=RealizedVariableCS))*
+		'{' ownedUnrealizedVariables+=UnrealizedVariableCS (',' ownedUnrealizedVariables+=UnrealizedVariableCS)*
 		'|' ownedConstraints+=PredicateOrAssignmentCS* '}'
 	) | (
-		'{' (ownedUnrealizedVariables+=UnrealizedVariableCS | ownedRealizedVariables+=RealizedVariableCS)
-		(',' (ownedUnrealizedVariables+=UnrealizedVariableCS | ownedRealizedVariables+=RealizedVariableCS))* '}'
+		'{' ownedUnrealizedVariables+=UnrealizedVariableCS (',' ownedUnrealizedVariables+=UnrealizedVariableCS)* '}'
 	) | (
 		'{' ownedConstraints+=PredicateOrAssignmentCS+ '}'
 	) | (
@@ -41,7 +39,7 @@ BottomPatternCS:		// Bug 466385 explains the redundancy below
 	)
 ;
 	
-BottomStatementCS returns StatementCS: SetStatementCS;
+BottomStatementCS returns StatementCS: NewStatementCS | SetStatementCS;
 	
 ControlStatementCS returns MappingStatementCS: AddStatementCS | MappingCallCS | MappingLoopCS;
 	
@@ -134,8 +132,8 @@ QueryCS: isTransient?='transient'? 'query' ownedPathName=ScopeNameCS name=Unrest
 //      	  ':' <TypeCS>
 //            (';' | '{' <OCLExpressionCS> '}')
 
-RealizedVariableCS:
-	'realize' name=UnrestrictedName ':' ownedType=TypeExpCS (':=' ownedInitExpression=ExpCS)?
+NewStatementCS:
+	'new' ':' referredTypedModel=[qvtbase::TypedModel|UnrestrictedName] name=UnrestrictedName ':' ownedType=TypeExpCS (':=' ownedInitExpression=ExpCS)?';'
 ;
 
 ScopeNameCS returns base::PathNameCS:
@@ -171,8 +169,7 @@ TargetDomainCS returns DomainCS: isEnforce?='enforce' direction=[qvtbase::TypedM
 ;
 		
 TargetBottomPatternCS returns BottomPatternCS:
-	{BottomPatternCS} '{' ((ownedRealizedVariables+=RealizedVariableCS | ownedUnrealizedVariables+=UnrealizedVariableCS)
-		(',' (ownedRealizedVariables+=RealizedVariableCS | ownedUnrealizedVariables+=UnrealizedVariableCS))*)?
+	{BottomPatternCS} '{' (ownedUnrealizedVariables+=UnrealizedVariableCS (',' ownedUnrealizedVariables+=UnrealizedVariableCS)*)?
 	'}'
 ;
 	

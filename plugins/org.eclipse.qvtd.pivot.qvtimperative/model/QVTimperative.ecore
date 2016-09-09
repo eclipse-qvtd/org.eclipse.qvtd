@@ -63,8 +63,6 @@
         transient="true" eOpposite="#//Area/bottomPattern"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="assignment" upperBound="-1"
         eType="#//Assignment" containment="true" eOpposite="#//Assignment/bottomPattern"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="realizedVariable" ordered="false"
-        upperBound="-1" eType="#//RealizedVariable" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BottomStatement" abstract="true" eSuperTypes="#//Statement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -176,7 +174,10 @@
       <details key="documentation" value="A MappingCall specifies the invocation of a referredMapping with a set of bindings&#xA;of the bound variables of the referredMapping to values provided in the invocation.&#xA;Where Collections of values are provided for isLoop bindings, a distinct invocation&#xA;is performed for each distinct permutation of Collection elements."/>
     </eAnnotations>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="RealizedVariable" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#//Variable"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NewStatement" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#//Variable #//BottomStatement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referredTypedModel" lowerBound="1"
+        eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#//TypedModel"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SetStatement" eSuperTypes="#//BottomStatement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="slotExpression" lowerBound="1"
         eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//VariableExp"

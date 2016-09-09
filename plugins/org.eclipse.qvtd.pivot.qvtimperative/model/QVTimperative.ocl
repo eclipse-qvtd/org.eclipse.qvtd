@@ -59,13 +59,13 @@ context SetStatement
 inv IsNotReadOnly: not targetProperty.isReadOnly
 inv PropertyOfSlot(slotExpression.type.name + ' must conform to ' + targetProperty.owningClass.name): slotExpression.type.conformsTo(targetProperty.owningClass)
 inv CompatibleType(value.type.name + ' must conform to ' + targetProperty.type.name): value.type.conformsTo(targetProperty.type)
-inv NoRealizedVariableNavigations: value->closure(oclContents())->selectByKind(ocl::VariableExp)->select(referredVariable.oclIsKindOf(RealizedVariable))->select(oclContainer().oclIsKindOf(ocl::CallExp))->isEmpty()
+inv NoRealizedVariableNavigations: value->closure(oclContents())->selectByKind(ocl::VariableExp)->select(referredVariable.oclIsKindOf(NewStatement))->select(oclContainer().oclIsKindOf(ocl::CallExp))->isEmpty()
 
-context RealizedVariable
-def: isBottom : Boolean = oclContainer().oclIsKindOf(BottomPattern)
-def: isGuard : Boolean = oclContainer().oclIsKindOf(GuardPattern)
-inv IsBottom('RealizedVariable ' + name + ' must be in a BottomPattern'): isBottom
-inv IsEnforced('RealizedVariable ' + name + ' must be in an enforceable Area'): isBottom and oclContainer().oclAsType(BottomPattern).area.isTarget
+--context NewStatement
+--def: isBottom : Boolean = oclContainer().oclIsKindOf(BottomPattern)
+--def: isGuard : Boolean = oclContainer().oclIsKindOf(GuardPattern)
+--inv IsBottom('RealizedVariable ' + name + ' must be in a BottomPattern'): isBottom
+--inv IsEnforced('RealizedVariable ' + name + ' must be in an enforceable Area'): isBottom and oclContainer().oclAsType(BottomPattern).area.isTarget
 
 --context Variable
 --inv IsInGuard: oclContainer().oclIsKindOf(GuardPattern)
