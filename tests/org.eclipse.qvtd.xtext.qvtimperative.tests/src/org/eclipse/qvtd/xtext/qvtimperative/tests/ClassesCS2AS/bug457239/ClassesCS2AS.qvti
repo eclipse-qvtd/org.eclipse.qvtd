@@ -11,9 +11,7 @@ transformation classescs2as
 map createPackage in classescs2as
 {
 	check leftCS(packageCS : PackageCS) {}
-	enforce rightAS() {
-		realize _'package' : Package
-	}
+	new:rightAS _'package' : Package;
 	set _'package'.name := if packageCS.hasName()
 						then packageCS.name
 						else 'unnamed'

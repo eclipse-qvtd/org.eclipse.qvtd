@@ -11,11 +11,15 @@ package org.eclipse.qvtd.xtext.qvtrelation2.tests.forward2reverse;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.Class;
 import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.ids.ClassId;
+import org.eclipse.ocl.pivot.ids.CollectionTypeId;
 import org.eclipse.ocl.pivot.ids.IdManager;
+import org.eclipse.ocl.pivot.ids.IdResolver;
+import org.eclipse.ocl.pivot.ids.NsURIPackageId;
+import org.eclipse.ocl.pivot.ids.RootPackageId;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
@@ -25,6 +29,7 @@ import org.eclipse.qvtd.runtime.library.model.ModelObjectsOfKindOperation;
 import org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.PForward2ReverseFactory;
 import org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.PForward2ReversePackage;
 import org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.Telement2element;
+import org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.TemptyList2emptyList;
 import org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.Tlist2list;
 import org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.DoublyLinkedList;
 import org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.Element;
@@ -205,8 +210,7 @@ public class Forward2Reverse extends AbstractTransformer
      * forwardTarget : doublylinkedlist::Element[1];
      *  |}
      * middle ( |)
-     * {realize trace : PForward2Reverse::Telement2element[1];
-     *  |}
+     * { |}
      * where (jm_Telement2element : Set(PForward2Reverse::Telement2element)[*|1];
      *  |)
      * {elementName : String[1];
@@ -215,7 +219,8 @@ public class Forward2Reverse extends AbstractTransformer
      * forwardList := forwardElement.list;
      * forwardTarget := forwardElement.target;
      * }
-     * }set trace.elementName := elementName;
+     * }new@middle trace : PForward2Reverse::Telement2element[1];
+     * set trace.elementName := elementName;
      * set trace.forwardElement := forwardElement;
      * set trace.forwardList := forwardList;
      * set trace.forwardTarget := forwardTarget;
@@ -262,8 +267,7 @@ public class Forward2Reverse extends AbstractTransformer
      * when_Tlist2list : PForward2Reverse::Tlist2list[1];
      *  |}
      * reverse ( |)
-     * {realize reverseElement : doublylinkedlist::Element[1];
-     *  |}
+     * { |}
      * where ( |)
      * {elementName : String[1];
      *  |
@@ -273,7 +277,8 @@ public class Forward2Reverse extends AbstractTransformer
      * when_Telement2element := forwardTarget.Telement2element;
      * when_Tlist2list := forwardList.Tlist2list;
      * }
-     * }set reverseElement.name := elementName;
+     * }new@reverse reverseElement : doublylinkedlist::Element[1];
+     * set reverseElement.name := elementName;
      * set trace.reverseElement := reverseElement;
      * 
      */
@@ -450,18 +455,18 @@ public class Forward2Reverse extends AbstractTransformer
      *  |)
      * { |}
      * middle ( |)
-     * {realize trace : PForward2Reverse::TemptyList2emptyList[1];
-     *  |}
+     * { |}
      * reverse ( |)
-     * {realize reverseList : doublylinkedlist::DoublyLinkedList[1];
-     *  |}
+     * { |}
      * where ( |
      * forwardList.headElement = null)
      * {listName : String[1];
      *  |
      * listName := forwardList.name;
      * }
-     * }set reverseList.name := listName;
+     * }new@middle trace : PForward2Reverse::TemptyList2emptyList[1];
+     * new@reverse reverseList : doublylinkedlist::DoublyLinkedList[1];
+     * set reverseList.name := listName;
      * set trace.listName := listName;
      * set reverseList.headElement := null;
      * set trace.forwardList := forwardList;
@@ -509,8 +514,7 @@ public class Forward2Reverse extends AbstractTransformer
      * {forwardHead : doublylinkedlist::Element[1];
      *  |}
      * middle ( |)
-     * {realize trace : PForward2Reverse::Tlist2list[1];
-     *  |}
+     * { |}
      * where (jm_Tlist2list : Set(PForward2Reverse::Tlist2list)[*|1];
      *  |)
      * {listName : String[1];
@@ -518,7 +522,8 @@ public class Forward2Reverse extends AbstractTransformer
      * forwardHead := forwardList.headElement;
      * listName := forwardList.name;
      * }
-     * }set trace.listName := listName;
+     * }new@middle trace : PForward2Reverse::Tlist2list[1];
+     * set trace.listName := listName;
      * set trace.forwardHead := forwardHead;
      * set trace.forwardList := forwardList;
      * add jm_Tlist2list += trace;
@@ -568,8 +573,7 @@ public class Forward2Reverse extends AbstractTransformer
      * {when_Telement2element : PForward2Reverse::Telement2element[1];
      *  |}
      * reverse ( |)
-     * {realize reverseList : doublylinkedlist::DoublyLinkedList[1];
-     *  |}
+     * { |}
      * where ( |)
      * {listName : String[1];
      *  |
@@ -577,7 +581,8 @@ public class Forward2Reverse extends AbstractTransformer
      * listName := trace.listName;
      * when_Telement2element := forwardHead.Telement2element;
      * }
-     * }set reverseList.name := listName;
+     * }new@reverse reverseList : doublylinkedlist::DoublyLinkedList[1];
+     * set reverseList.name := listName;
      * set trace.reverseList := reverseList;
      * 
      */
@@ -634,8 +639,8 @@ public class Forward2Reverse extends AbstractTransformer
      * when_Telement2element := forwardHead.Telement2element;
      * reverseHead := when_Telement2element.reverseElement;
      * }
-     * }set trace.reverseHead := reverseHead;
-     * set reverseList.headElement := reverseHead;
+     * }set reverseList.headElement := reverseHead;
+     * set trace.reverseHead := reverseHead;
      * 
      */
     protected boolean MAP_m_Tlist2list_DoublyLinkedList_46p2(final /*@NonInvalid*/ org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.@org.eclipse.jdt.annotation.NonNull Tlist2list trace_2)  {
@@ -655,8 +660,8 @@ public class Forward2Reverse extends AbstractTransformer
                 @SuppressWarnings("null")
                 final /*@Thrown*/ org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.@org.eclipse.jdt.annotation.NonNull Element reverseElement = Telement2element.getReverseElement();
                 // mapping statements
-                trace_2.setReverseHead(reverseElement);
                 reverseList.setHeadElement(reverseElement);
+                trace_2.setReverseHead(reverseElement);
                 final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean m_Tlist2list_DoublyLinkedList_p2 = ValueUtil.TRUE_VALUE;
                 raw_when_Telement2element = m_Tlist2list_DoublyLinkedList_p2;
             }

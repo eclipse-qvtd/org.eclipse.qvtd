@@ -12,54 +12,42 @@ transformation classescs2as
 map mClassCS2Class_LM in classescs2as
 {
 	check leftCS(classCS : ClassCS) {}
-	enforce middle() {
-		realize c2c : ClassCS2Class
-	}
+	new:middle c2c : ClassCS2Class;
 	set c2c.classCS := classCS;
 }
 
 map mRootCS2Root_LM in classescs2as
 {
 	check leftCS(rootCS : RootCS) {}
-	enforce middle() {
-		realize r2r : RootCS2Root
-	}
+	new:middle r2r : RootCS2Root;
 	set r2r.rootCS := rootCS;
 }
 
 map mPackageCS2Package_LM in classescs2as
 {
 	check leftCS(packageCS : PackageCS) {}
-	enforce middle() {
-		realize p2p : PackageCS2Package
-	}
+	new:middle p2p : PackageCS2Package;
 	set p2p.packageCS := packageCS;
 }
 
 map mClassCS2Class_MR in classescs2as
 {
 	check middle(c2c : ClassCS2Class) {}
-	enforce rightAS() {
-		realize _'class' : Class
-	}
+	new:rightAS _'class' : Class;
 	set c2c._'class' := _'class';
 }
 
 map mRootCS2Root_MR in classescs2as
 {
 	check middle(r2r : RootCS2Root) {}
-	enforce rightAS() {
-		realize root : Root
-	}
+	new:rightAS root : Root;
 	set r2r.root := root;
 }
 
 map mPackageCS2Package_MR in classescs2as
 {
 	check middle(p2p : PackageCS2Package) {}
-	enforce rightAS() {
-		realize _'package' : Package
-	}
+	new:rightAS _'package' : Package;
 	set p2p._'package' := _'package';
 }
 

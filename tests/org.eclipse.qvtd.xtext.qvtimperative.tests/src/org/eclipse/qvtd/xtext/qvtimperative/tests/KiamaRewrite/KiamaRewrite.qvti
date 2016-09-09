@@ -89,9 +89,7 @@ map __root__ in KiamaRewrite_qvtp_qvtcas
 map m_NumCS_ast in KiamaRewrite_qvtp_qvtcas
 {
 	check leftCS(lNumCS : NumCS) {}
-	enforce rightAS() {
-		realize rNum : Num
-	}
+	new:rightAS rNum : Num;
 	set lNumCS.ast := rNum;
 }
 
@@ -166,16 +164,13 @@ map m_PlusCS_ast_1 in KiamaRewrite_qvtp_qvtcas
 map m_PlusCS_ast_2 in KiamaRewrite_qvtp_qvtcas
 {
 	check leftCS(lPlusCS : PlusCS) {}
-	enforce rightAS() {
-		realize rPlus : Plus
-	}
+	new:rightAS rPlus : Plus;
 	set lPlusCS.ast := rPlus;
 }
 
 map m_PlusCS_ast_left in KiamaRewrite_qvtp_qvtcas
 {
 	check leftCS(lPlusCS : PlusCS) {}
-	enforce rightAS() {}
 	where () {
 		ast : ecore::EObject := lPlusCS.ast,
 		left : kiamacs::NodeCS := lPlusCS.left,
@@ -189,7 +184,6 @@ map m_PlusCS_ast_left in KiamaRewrite_qvtp_qvtcas
 map m_PlusCS_ast_right in KiamaRewrite_qvtp_qvtcas
 {
 	check leftCS(lPlusCS : PlusCS) {}
-	enforce rightAS() {}
 	where () {
 		ast : ecore::EObject := lPlusCS.ast,
 		right : kiamacs::NodeCS := lPlusCS.right,
@@ -203,16 +197,13 @@ map m_PlusCS_ast_right in KiamaRewrite_qvtp_qvtcas
 map m_TopCS_ast in KiamaRewrite_qvtp_qvtcas
 {
 	check leftCS(lTopCS : TopCS) {}
-	enforce rightAS() {
-		realize rTop : Top
-	}
+	new:rightAS rTop : Top;
 	set lTopCS.ast := rTop;
 }
 
 map m_TopCS_ast_node in KiamaRewrite_qvtp_qvtcas
 {
 	check leftCS(lTopCS : TopCS) {}
-	enforce rightAS() {}
 	where () {
 		ast : ecore::EObject := lTopCS.ast,
 		node : kiamacs::NodeCS := lTopCS.node,

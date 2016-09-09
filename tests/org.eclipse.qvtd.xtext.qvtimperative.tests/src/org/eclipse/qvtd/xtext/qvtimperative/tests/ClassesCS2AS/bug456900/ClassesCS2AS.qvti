@@ -10,18 +10,14 @@ transformation classescs2as
 map mCreationRootCS2Root in classescs2as
 {
 	check leftCS(rootCS : RootCS) {}
-	enforce rightAS() {
-		realize root : Root
-	}
+	new:rightAS root : Root;
 	set rootCS.ast := root;
 }
 
 map mCreationPackageCS2Package in classescs2as
 {
 	check leftCS(packageCS : PackageCS) {}
-	enforce rightAS() {
-		realize _'package' : Package
-	}
+	new:rightAS _'package' : Package;
 	set packageCS.ast := _'package';
 }
 

@@ -18,18 +18,14 @@
           <guardPattern>
             <variable name="packageCS" isRequired="false" type="pivot:Class ../ClassesCS.ecore.oclas#T.classescs.PackageCS"/>
           </guardPattern>
-          <bottomPattern/>AC
-        </domain>
-        <domain xsi:type="qvti:ImperativeDomain" isCheckable="false" isEnforceable="true" typedModel="#qT..classescs2as.rightAS">
-          <guardPattern/>
-          <bottomPattern>
-            <realizedVariable xmi:id="qV..classescs2as.createPackage.rightAS.bottom._package" name="_package" isRequired="false" type="pivot:Class ../Classes.ecore.oclas#T.classes.Package"/>
-          </bottomPattern>
+          <bottomPattern/>
         </domain>
         <guardPattern/>
         <bottomPattern/>
+        <ownedStatements xsi:type="qvti:NewStatement" xmi:id="qV..classescs2as.createPackage._package" name="_package" isRequired="false"
+            type="pivot:Class ../Classes.ecore.oclas#T.classes.Package" referredTypedModel="#qT..classescs2as.rightAS"/>
         <ownedStatements xsi:type="qvti:SetStatement" targetProperty="../Classes.ecore.oclas#p.classes.NamedElement.name">
-          <slotExpression isRequired="false" type="pivot:Class ../Classes.ecore.oclas#T.classes.Package" referredVariable="#qV..classescs2as.createPackage.rightAS.bottom._package"/>
+          <slotExpression isRequired="false" type="pivot:Class ../Classes.ecore.oclas#T.classes.Package" referredVariable="#qV..classescs2as.createPackage._package"/>
           <value xsi:type="pivot:IfExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String">
             <ownedCondition xsi:type="pivot:OperationCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
                 referredOperation="helpers.ocl.oclas#o.ocl.OclElement.aBooleanElementOp">
