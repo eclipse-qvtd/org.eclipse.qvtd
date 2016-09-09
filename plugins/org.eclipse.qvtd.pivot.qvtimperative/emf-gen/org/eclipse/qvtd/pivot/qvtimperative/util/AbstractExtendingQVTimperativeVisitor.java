@@ -40,6 +40,11 @@ public abstract class AbstractExtendingQVTimperativeVisitor<R, C>
 	}	
 
 	@Override
+	public R visitAddStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull AddStatement object) {
+		return visitMappingStatement(object);
+	}
+
+	@Override
 	public R visitAssignment(org.eclipse.qvtd.pivot.qvtimperative.@NonNull Assignment object) {
 		return visitElement(object);
 	}
@@ -52,16 +57,6 @@ public abstract class AbstractExtendingQVTimperativeVisitor<R, C>
 	@Override
 	public R visitBottomStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull BottomStatement object) {
 		return visitStatement(object);
-	}
-
-	@Override
-	public R visitConnectionAssignment(org.eclipse.qvtd.pivot.qvtimperative.@NonNull ConnectionAssignment object) {
-		return visitAssignment(object);
-	}
-
-	@Override
-	public R visitConnectionStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull ConnectionStatement object) {
-		return visitMappingStatement(object);
 	}
 
 	@Override

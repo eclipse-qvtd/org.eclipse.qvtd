@@ -47,6 +47,11 @@ public abstract class AbstractQVTimperativeTemplateParameterSubstitutionVisitor
 	}	
 
 	@Override
+	public @Nullable Object visitAddStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull AddStatement object) {
+		return visitMappingStatement(object);
+	}
+
+	@Override
 	public @Nullable Object visitAssignment(org.eclipse.qvtd.pivot.qvtimperative.@NonNull Assignment object) {
 		return visitElement(object);
 	}
@@ -59,16 +64,6 @@ public abstract class AbstractQVTimperativeTemplateParameterSubstitutionVisitor
 	@Override
 	public @Nullable Object visitBottomStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull BottomStatement object) {
 		return visitStatement(object);
-	}
-
-	@Override
-	public @Nullable Object visitConnectionAssignment(org.eclipse.qvtd.pivot.qvtimperative.@NonNull ConnectionAssignment object) {
-		return visitAssignment(object);
-	}
-
-	@Override
-	public @Nullable Object visitConnectionStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull ConnectionStatement object) {
-		return visitMappingStatement(object);
 	}
 
 	@Override

@@ -29,12 +29,11 @@ import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
+import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.Area;
 import org.eclipse.qvtd.pivot.qvtimperative.Assignment;
 import org.eclipse.qvtd.pivot.qvtimperative.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.BottomStatement;
-import org.eclipse.qvtd.pivot.qvtimperative.ConnectionAssignment;
-import org.eclipse.qvtd.pivot.qvtimperative.ConnectionStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
@@ -109,6 +108,18 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
+			case QVTimperativePackage.ADD_STATEMENT: {
+				AddStatement addStatement = (AddStatement)theEObject;
+				T result = caseAddStatement(addStatement);
+				if (result == null) result = caseMappingStatement(addStatement);
+				if (result == null) result = caseStatement(addStatement);
+				if (result == null) result = caseNamedElement(addStatement);
+				if (result == null) result = caseElement(addStatement);
+				if (result == null) result = caseNameable(addStatement);
+				if (result == null) result = caseVisitable(addStatement);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case QVTimperativePackage.AREA: {
 				Area area = (Area)theEObject;
 				T result = caseArea(area);
@@ -143,27 +154,6 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = caseElement(bottomStatement);
 				if (result == null) result = caseNameable(bottomStatement);
 				if (result == null) result = caseVisitable(bottomStatement);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case QVTimperativePackage.CONNECTION_ASSIGNMENT: {
-				ConnectionAssignment connectionAssignment = (ConnectionAssignment)theEObject;
-				T result = caseConnectionAssignment(connectionAssignment);
-				if (result == null) result = caseAssignment(connectionAssignment);
-				if (result == null) result = caseElement(connectionAssignment);
-				if (result == null) result = caseVisitable(connectionAssignment);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case QVTimperativePackage.CONNECTION_STATEMENT: {
-				ConnectionStatement connectionStatement = (ConnectionStatement)theEObject;
-				T result = caseConnectionStatement(connectionStatement);
-				if (result == null) result = caseMappingStatement(connectionStatement);
-				if (result == null) result = caseStatement(connectionStatement);
-				if (result == null) result = caseNamedElement(connectionStatement);
-				if (result == null) result = caseElement(connectionStatement);
-				if (result == null) result = caseNameable(connectionStatement);
-				if (result == null) result = caseVisitable(connectionStatement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -339,6 +329,21 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Add Statement</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Add Statement</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAddStatement(AddStatement object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Area</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -395,36 +400,6 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseBottomStatement(BottomStatement object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Connection Assignment</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Connection Assignment</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseConnectionAssignment(ConnectionAssignment object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Connection Statement</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Connection Statement</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseConnectionStatement(ConnectionStatement object) {
 		return null;
 	}
 

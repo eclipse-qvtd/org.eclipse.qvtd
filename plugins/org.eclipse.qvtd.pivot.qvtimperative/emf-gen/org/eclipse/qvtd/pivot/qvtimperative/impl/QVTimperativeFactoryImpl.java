@@ -16,9 +16,8 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.BottomPattern;
-import org.eclipse.qvtd.pivot.qvtimperative.ConnectionAssignment;
-import org.eclipse.qvtd.pivot.qvtimperative.ConnectionStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
@@ -79,9 +78,8 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
+			case QVTimperativePackage.ADD_STATEMENT: return createAddStatement();
 			case QVTimperativePackage.BOTTOM_PATTERN: return createBottomPattern();
-			case QVTimperativePackage.CONNECTION_ASSIGNMENT: return createConnectionAssignment();
-			case QVTimperativePackage.CONNECTION_STATEMENT: return createConnectionStatement();
 			case QVTimperativePackage.CONNECTION_VARIABLE: return createConnectionVariable();
 			case QVTimperativePackage.GUARD_PATTERN: return createGuardPattern();
 			case QVTimperativePackage.IMPERATIVE_DOMAIN: return createImperativeDomain();
@@ -106,31 +104,20 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 	 * @generated
 	 */
 	@Override
+	public @NonNull AddStatement createAddStatement() {
+		AddStatementImpl addStatement = new AddStatementImpl();
+		return addStatement;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public @NonNull BottomPattern createBottomPattern() {
 		BottomPatternImpl bottomPattern = new BottomPatternImpl();
 		return bottomPattern;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public @NonNull ConnectionAssignment createConnectionAssignment() {
-		ConnectionAssignmentImpl connectionAssignment = new ConnectionAssignmentImpl();
-		return connectionAssignment;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public @NonNull ConnectionStatement createConnectionStatement() {
-		ConnectionStatementImpl connectionStatement = new ConnectionStatementImpl();
-		return connectionStatement;
 	}
 
 	/**

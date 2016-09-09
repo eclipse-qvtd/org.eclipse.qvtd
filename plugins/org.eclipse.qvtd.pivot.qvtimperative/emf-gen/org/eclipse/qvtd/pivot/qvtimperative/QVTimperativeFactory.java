@@ -31,6 +31,15 @@ public interface QVTimperativeFactory extends EFactory {
 	QVTimperativeFactory eINSTANCE = org.eclipse.qvtd.pivot.qvtimperative.impl.QVTimperativeFactoryImpl.init();
 
 	/**
+	 * Returns a new object of class '<em>Add Statement</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Add Statement</em>'.
+	 * @generated
+	 */
+	@NonNull AddStatement createAddStatement();
+
+	/**
 	 * Returns a new object of class '<em>Bottom Pattern</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -38,24 +47,6 @@ public interface QVTimperativeFactory extends EFactory {
 	 * @generated
 	 */
 	@NonNull BottomPattern createBottomPattern();
-
-	/**
-	 * Returns a new object of class '<em>Connection Assignment</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Connection Assignment</em>'.
-	 * @generated
-	 */
-	@NonNull ConnectionAssignment createConnectionAssignment();
-
-	/**
-	 * Returns a new object of class '<em>Connection Statement</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Connection Statement</em>'.
-	 * @generated
-	 */
-	@NonNull ConnectionStatement createConnectionStatement();
 
 	/**
 	 * Returns a new object of class '<em>Connection Variable</em>'.
