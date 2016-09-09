@@ -18,11 +18,10 @@ import org.eclipse.ocl.examples.debug.vm.evaluator.IStepper;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.Assignment;
 import org.eclipse.qvtd.pivot.qvtimperative.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.BottomStatement;
-import org.eclipse.qvtd.pivot.qvtimperative.ConnectionAssignment;
-import org.eclipse.qvtd.pivot.qvtimperative.ConnectionStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
@@ -42,6 +41,11 @@ public class QVTiStepperVisitor extends AbstractQVTimperativeStepperVisitor
 	}
 
 	@Override
+	public @Nullable IStepper visitAddStatement(@NonNull AddStatement object) {
+		return visitMappingStatement(object);
+	}
+
+	@Override
 	public @Nullable IStepper visitAssignment(@NonNull Assignment object) {
 		return PostStepper.INSTANCE;
 	}
@@ -54,16 +58,6 @@ public class QVTiStepperVisitor extends AbstractQVTimperativeStepperVisitor
 	@Override
 	public IStepper visitBottomStatement(@NonNull BottomStatement object) {
 		return NonStepper.INSTANCE;
-	}
-
-	@Override
-	public @Nullable IStepper visitConnectionAssignment(@NonNull ConnectionAssignment object) {
-		return visitAssignment(object);
-	}
-
-	@Override
-	public @Nullable IStepper visitConnectionStatement(@NonNull ConnectionStatement object) {
-		return visitMappingStatement(object);
 	}
 
 	@Override

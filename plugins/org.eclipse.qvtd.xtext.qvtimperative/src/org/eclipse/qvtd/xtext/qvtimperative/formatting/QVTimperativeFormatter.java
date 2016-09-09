@@ -12,8 +12,8 @@ package org.eclipse.qvtd.xtext.qvtimperative.formatting;
 
 import org.eclipse.ocl.xtext.essentialocl.formatting.AbstractEssentialOCLFormatter;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess;
+import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.AddStatementCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.BottomPatternCSElements;
-import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.ConnectionStatementCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.DirectionCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.GuardPatternCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.ImportCSElements;
@@ -139,7 +139,7 @@ public class QVTimperativeFormatter extends AbstractEssentialOCLFormatter
 	}
 
 	protected void configurePredicateOrAssignmentCS(FormattingConfig c, PredicateOrAssignmentCSElements a) {
-		setNoSpaceLineWrap(c, a.getSemicolonKeyword_3());
+		setNoSpaceLineWrap(c, a.getSemicolonKeyword_2());
 	}
 
 	protected void configureQualifiedPackageCS(FormattingConfig c, QualifiedPackageCSElements a) {
@@ -216,8 +216,8 @@ public class QVTimperativeFormatter extends AbstractEssentialOCLFormatter
 
 
 		{
-			ConnectionStatementCSElements a = f.getConnectionStatementCSAccess();
-			setNoSpaceLineWrap(c, a.getSemicolonKeyword_3());
+			AddStatementCSElements a = f.getAddStatementCSAccess();
+			setNoSpaceLineWrap(c, a.getSemicolonKeyword_4());
 		}
 		{
 			MappingCSElements a = f.getMappingCSAccess();
@@ -325,7 +325,7 @@ public class QVTimperativeFormatter extends AbstractEssentialOCLFormatter
 		}
 		{
 			PredicateOrAssignmentCSElements a = f.getPredicateOrAssignmentCSAccess();
-			setNoSpaceLineWrap(c, a.getSemicolonKeyword_3());
+			setNoSpaceLineWrap(c, a.getSemicolonKeyword_2());
 		}
 		{
 			RealizedVariableCSElements a = f.getRealizedVariableCSAccess();

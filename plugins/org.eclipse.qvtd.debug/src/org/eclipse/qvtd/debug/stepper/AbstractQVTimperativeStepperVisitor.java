@@ -36,6 +36,11 @@ implements QVTimperativeVisitor<IStepper>
 	}
 
 	@Override
+	public @Nullable IStepper visitAddStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull AddStatement object) {
+		return visitMappingStatement(object);
+	}
+
+	@Override
 	public @Nullable IStepper visitAssignment(org.eclipse.qvtd.pivot.qvtimperative.@NonNull Assignment object) {
 		return visitElement(object);
 	}
@@ -43,16 +48,6 @@ implements QVTimperativeVisitor<IStepper>
 	@Override
 	public @Nullable IStepper visitBottomPattern(org.eclipse.qvtd.pivot.qvtimperative.@NonNull BottomPattern object) {
 		return visitImperativePattern(object);
-	}
-
-	@Override
-	public @Nullable IStepper visitConnectionAssignment(org.eclipse.qvtd.pivot.qvtimperative.@NonNull ConnectionAssignment object) {
-		return visitAssignment(object);
-	}
-
-	@Override
-	public @Nullable IStepper visitConnectionStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull ConnectionStatement object) {
-		return visitMappingStatement(object);
 	}
 
 	@Override

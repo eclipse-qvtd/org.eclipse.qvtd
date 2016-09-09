@@ -17,16 +17,15 @@ import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.utilities.ToStringVisitor;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseToStringVisitor;
+import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.Assignment;
 import org.eclipse.qvtd.pivot.qvtimperative.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.BottomStatement;
-import org.eclipse.qvtd.pivot.qvtimperative.ConnectionAssignment;
-import org.eclipse.qvtd.pivot.qvtimperative.ConnectionStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativePattern;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardPattern;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativePattern;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
@@ -73,6 +72,15 @@ public class QVTimperativeToStringVisitor extends QVTbaseToStringVisitor impleme
 	}
 
 	@Override
+	public @Nullable String visitAddStatement(@NonNull AddStatement asAddStatement) {
+		append("add ");
+		appendName(asAddStatement.getTargetVariable());
+		append(" += ");
+		safeVisit(asAddStatement.getValue());
+		return null;
+	}
+
+	@Override
 	public String visitAssignment(@NonNull Assignment object) {
 		append("Assignment ");
 		//		appendName(object);
@@ -89,22 +97,6 @@ public class QVTimperativeToStringVisitor extends QVTbaseToStringVisitor impleme
 	@Override
 	public String visitBottomStatement(@NonNull BottomStatement object) {
 		return visitStatement(object);
-	}
-
-	@Override
-	public @Nullable String visitConnectionAssignment(@NonNull ConnectionAssignment connectionAssignment) {
-		appendName(connectionAssignment.getTargetVariable());
-		append(" += ");
-		safeVisit(connectionAssignment.getValue());
-		return null;
-	}
-
-	@Override
-	public @Nullable String visitConnectionStatement(@NonNull ConnectionStatement asConnectionStatement) {
-		appendName(asConnectionStatement.getTargetVariable());
-		append(" += ");
-		safeVisit(asConnectionStatement.getValue());
-		return null;
 	}
 
 	@Override

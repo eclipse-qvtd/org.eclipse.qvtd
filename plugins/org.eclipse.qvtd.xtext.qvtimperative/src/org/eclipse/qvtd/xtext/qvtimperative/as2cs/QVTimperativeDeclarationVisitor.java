@@ -69,12 +69,11 @@ import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
+import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.Area;
 import org.eclipse.qvtd.pivot.qvtimperative.Assignment;
 import org.eclipse.qvtd.pivot.qvtimperative.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.BottomStatement;
-import org.eclipse.qvtd.pivot.qvtimperative.ConnectionAssignment;
-import org.eclipse.qvtd.pivot.qvtimperative.ConnectionStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
@@ -367,6 +366,19 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 	}
 
 	@Override
+	public ElementCS visitAddStatement(@NonNull AddStatement asAddStatement) {
+		ConnectionStatementCS csStatement = context.refreshElement(ConnectionStatementCS.class, QVTimperativeCSPackage.Literals.CONNECTION_STATEMENT_CS, asAddStatement);
+		csStatement.setPivot(asAddStatement);
+		Variable asVariable = asAddStatement.getTargetVariable();
+		if (asVariable != null) {
+			assert asVariable.eContainer().eContainer() instanceof Mapping;
+			csStatement.setTargetVariable(asVariable);
+		}
+		csStatement.setOwnedExpression(context.visitDeclaration(ExpCS.class, asAddStatement.getValue()));
+		return csStatement;
+	}
+
+	@Override
 	public ElementCS visitAssignment(@NonNull Assignment object) {
 		throw new UnsupportedOperationException();
 	}
@@ -397,34 +409,6 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 	@Override
 	public ElementCS visitBottomStatement(@NonNull BottomStatement object) {
 		return visitStatement(object);
-	}
-
-	@Override
-	public ElementCS visitConnectionAssignment(@NonNull ConnectionAssignment asConnectionAssignment) {
-		PredicateOrAssignmentCS csAssignment = context.refreshElement(PredicateOrAssignmentCS.class, QVTimperativeCSPackage.Literals.PREDICATE_OR_ASSIGNMENT_CS, asConnectionAssignment);
-		csAssignment.setPivot(asConnectionAssignment);
-		Variable asVariable = asConnectionAssignment.getTargetVariable();
-		if (asVariable != null) {
-			assert asVariable.eContainer().eContainer() instanceof Mapping;
-			csAssignment.setOwnedTarget(createNameExpCS(asVariable));
-			csAssignment.setIsAccumulate(true);
-		}
-		csAssignment.setOwnedInitExpression(context.visitDeclaration(ExpCS.class, asConnectionAssignment.getValue()));
-		assert !asConnectionAssignment.isIsDefault();
-		return csAssignment;
-	}
-
-	@Override
-	public ElementCS visitConnectionStatement(@NonNull ConnectionStatement asConnectionStatement) {
-		ConnectionStatementCS csStatement = context.refreshElement(ConnectionStatementCS.class, QVTimperativeCSPackage.Literals.CONNECTION_STATEMENT_CS, asConnectionStatement);
-		csStatement.setPivot(asConnectionStatement);
-		Variable asVariable = asConnectionStatement.getTargetVariable();
-		if (asVariable != null) {
-			assert asVariable.eContainer().eContainer() instanceof Mapping;
-			csStatement.setTargetVariable(asVariable);
-		}
-		csStatement.setOwnedExpression(context.visitDeclaration(ExpCS.class, asConnectionStatement.getValue()));
-		return csStatement;
 	}
 
 	@Override
@@ -799,7 +783,6 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 			csAssignment.setOwnedTarget(createNameExpCS(asVariable));
 		}
 		csAssignment.setOwnedInitExpression(context.visitDeclaration(ExpCS.class, asVariableAssignment.getValue()));
-		csAssignment.setIsDefault(asVariableAssignment.isIsDefault());
 		return csAssignment;
 	}
 

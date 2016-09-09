@@ -37,10 +37,9 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.Assignment;
 import org.eclipse.qvtd.pivot.qvtimperative.BottomPattern;
-import org.eclipse.qvtd.pivot.qvtimperative.ConnectionAssignment;
-import org.eclipse.qvtd.pivot.qvtimperative.ConnectionStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativePattern;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
@@ -97,14 +96,16 @@ public class QVTiTuneUpVisitor extends AbstractExtendingQVTimperativeVisitor<Boo
 	}
 
 	@Override
+	public Boolean visitAddStatement(@NonNull AddStatement object) {
+		return Boolean.TRUE;
+	}
+
+	@Override
 	public @Nullable Boolean visitBottomPattern(@NonNull BottomPattern object) {
 		List<Assignment> variableAssignments = new ArrayList<Assignment>();
 		List<Assignment> propertyAssignments = new ArrayList<Assignment>();
 		for (Assignment assignment : object.getAssignment()) {
-			if (assignment instanceof ConnectionAssignment) {
-				variableAssignments.add(assignment);
-			}
-			else if (assignment instanceof VariableAssignment) {
+			if (assignment instanceof VariableAssignment) {
 				variableAssignments.add(assignment);
 			}
 			else {
@@ -150,11 +151,6 @@ public class QVTiTuneUpVisitor extends AbstractExtendingQVTimperativeVisitor<Boo
 		if ((ownedLast != null) && (ownedLast.accept(this) != Boolean.TRUE)) {
 			return Boolean.FALSE;
 		}
-		return Boolean.TRUE;
-	}
-
-	@Override
-	public Boolean visitConnectionStatement(@NonNull ConnectionStatement object) {
 		return Boolean.TRUE;
 	}
 

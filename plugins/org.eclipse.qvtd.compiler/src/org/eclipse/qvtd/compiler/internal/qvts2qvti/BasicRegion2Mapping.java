@@ -578,7 +578,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		createExternalPredicates();
 		createRealizedVariables();
 		createPropertyAssignments();
-		createConnectionAssignments();
+		createAddStatements();
 		createPollingDependencies();
 	}
 
@@ -740,14 +740,14 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 	/**
 	 *	Create accumulation assignments for connections.
 	 */
-	private void createConnectionAssignments() {
+	private void createAddStatements() {
 		if (connection2variable != null) {
 			for (@NonNull NodeConnection connection : connection2variable.keySet()) {
 				Node sourceNode = connection.getSource(region);
 				OCLExpression variableExpression = createVariableExp(sourceNode);
 				ConnectionVariable connectionVariable = (ConnectionVariable)connection2variable.get(connection);
 				assert connectionVariable != null;
-				createConnectionAssignment(connectionVariable, variableExpression);
+				createAddStatement(connectionVariable, variableExpression);
 			}
 		}
 	}

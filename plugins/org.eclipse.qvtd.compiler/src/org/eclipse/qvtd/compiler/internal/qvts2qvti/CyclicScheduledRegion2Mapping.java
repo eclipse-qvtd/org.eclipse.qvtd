@@ -35,7 +35,7 @@ import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NodeConnection;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
-import org.eclipse.qvtd.pivot.qvtimperative.ConnectionStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardPattern;
@@ -316,19 +316,19 @@ public class CyclicScheduledRegion2Mapping extends AbstractScheduledRegion2Mappi
 					excludingAllCallExp.setIsRequired(localVariableExp.isIsRequired());
 
 
-					ConnectionStatement connectionStatement1 = QVTimperativeFactory.eINSTANCE.createConnectionStatement();
-					connectionStatement1.setTargetVariable(newVariable);
-					connectionStatement1.setValue(excludingAllCallExp);
-					mappingStatements.add(connectionStatement1);
+					AddStatement addStatement1 = QVTimperativeFactory.eINSTANCE.createAddStatement();
+					addStatement1.setTargetVariable(newVariable);
+					addStatement1.setValue(excludingAllCallExp);
+					mappingStatements.add(addStatement1);
 				}
 				else {
 					newVariable = localVariable;
 				}
 				//
-				ConnectionStatement connectionStatement2 = QVTimperativeFactory.eINSTANCE.createConnectionStatement();
-				connectionStatement2.setTargetVariable(accumulatedVariable);
-				connectionStatement2.setValue(PivotUtil.createVariableExp(newVariable));
-				mappingStatements.add(connectionStatement2);
+				AddStatement addStatement2 = QVTimperativeFactory.eINSTANCE.createAddStatement();
+				addStatement2.setTargetVariable(accumulatedVariable);
+				addStatement2.setValue(PivotUtil.createVariableExp(newVariable));
+				mappingStatements.add(addStatement2);
 			}
 		}
 		//

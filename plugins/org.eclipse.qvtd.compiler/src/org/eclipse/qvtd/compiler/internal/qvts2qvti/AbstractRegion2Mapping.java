@@ -45,7 +45,7 @@ import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NodeConnection;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.SchedulerConstants;
-import org.eclipse.qvtd.pivot.qvtimperative.ConnectionAssignment;
+import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
@@ -96,6 +96,11 @@ public abstract class AbstractRegion2Mapping
 		}
 	}
 
+	protected void createAddStatement(@NonNull ConnectionVariable connectionVariable, @NonNull OCLExpression childrenExpression) {
+		AddStatement addStatement = helper.createAddStatement(connectionVariable, childrenExpression);
+		mapping.getOwnedStatements().add(addStatement);
+	}
+
 	protected @NonNull CallExp createCallExp(@NonNull OCLExpression asSource, @NonNull Property asProperty) {
 		if (asProperty.eContainer() == null) {
 			Type asType = asProperty.getType();
@@ -111,11 +116,6 @@ public abstract class AbstractRegion2Mapping
 			}
 		}
 		return PivotUtil.createNavigationCallExp(asSource, asProperty);
-	}
-
-	protected void createConnectionAssignment(@NonNull ConnectionVariable connectionVariable, @NonNull OCLExpression childrenExpression) {
-		ConnectionAssignment connectionAssignment = helper.createConnectionAssignment(connectionVariable, childrenExpression);
-		mapping.getBottomPattern().getAssignment().add(connectionAssignment);
 	}
 
 	protected @NonNull ConnectionVariable createConnectionVariable(@NonNull NodeConnection connection) {

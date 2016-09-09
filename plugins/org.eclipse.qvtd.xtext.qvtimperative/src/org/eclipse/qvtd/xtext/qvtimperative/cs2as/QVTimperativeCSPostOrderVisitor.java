@@ -33,10 +33,9 @@ import org.eclipse.ocl.xtext.basecs.ConstraintCS;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
+import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.Assignment;
 import org.eclipse.qvtd.pivot.qvtimperative.BottomPattern;
-import org.eclipse.qvtd.pivot.qvtimperative.ConnectionAssignment;
-import org.eclipse.qvtd.pivot.qvtimperative.ConnectionStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
@@ -61,10 +60,10 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.ParamDeclarationCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.PatternCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.PredicateCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.PredicateOrAssignmentCS;
-import org.eclipse.qvtd.xtext.qvtimperativecs.SetStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QueryCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.RealizeableVariableCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.RealizedVariableCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.SetStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.TopLevelCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.TransformationCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.UnrealizedVariableCS;
@@ -115,18 +114,11 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 	} */
 
 	protected @Nullable Assignment refreshVariableAssignment(@NonNull VariableExp variableExp, @NonNull PredicateOrAssignmentCS csConstraint) {
-		Assignment assignment = PivotUtil.getPivot(Assignment.class, csConstraint);
-		if (assignment instanceof ConnectionAssignment) {
-			((ConnectionAssignment)assignment).setTargetVariable((ConnectionVariable) variableExp.getReferredVariable());
-			return assignment;
+		VariableAssignment variableAssignment = PivotUtil.getPivot(VariableAssignment.class, csConstraint);
+		if (variableAssignment != null) {
+			variableAssignment.setTargetVariable((Variable) variableExp.getReferredVariable());
 		}
-		else {
-			VariableAssignment variableAssignment = PivotUtil.getPivot(VariableAssignment.class, csConstraint);
-			if (variableAssignment != null) {
-				variableAssignment.setTargetVariable((Variable) variableExp.getReferredVariable());
-			}
-			return variableAssignment;
-		}
+		return variableAssignment;
 	}
 
 	@Override
@@ -143,7 +135,6 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 			for (PredicateOrAssignmentCS csConstraint : csElement.getOwnedConstraints()) {
 				ExpCS csTarget = csConstraint.getOwnedTarget();
 				ExpCS csInitialiser = csConstraint.getOwnedInitExpression();
-				boolean isDefault = csConstraint.isIsDefault();
 				OCLExpression target = csTarget != null ? context.visitLeft2Right(OCLExpression.class, csTarget) : null;
 				if (csInitialiser != null) {
 					Assignment assignment = null;
@@ -159,15 +150,11 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 					}
 					if (assignment != null) {
 						OCLExpression initialiser = context.visitLeft2Right(OCLExpression.class, csInitialiser);
-						assignment.setIsDefault(isDefault);
 						assignment.setValue(initialiser);
 						pAssignments.add(assignment);
 					}
 				}
 				else {
-					if (isDefault) {
-						context.addDiagnostic(csElement, "misplaced default ignored");
-					}
 					Predicate predicate = PivotUtil.getPivot(Predicate.class, csConstraint);
 					if (predicate != null) {
 						predicate.setConditionExpression(target);
@@ -183,13 +170,13 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 
 	@Override
 	public @Nullable Continuation<?> visitConnectionStatementCS(@NonNull ConnectionStatementCS csElement) {
-		ConnectionStatement asConnectionStatement = PivotUtil.getPivot(ConnectionStatement.class, csElement);
-		if (asConnectionStatement != null) {
-			asConnectionStatement.setTargetVariable((ConnectionVariable) csElement.getTargetVariable());
+		AddStatement asAddStatement = PivotUtil.getPivot(AddStatement.class, csElement);
+		if (asAddStatement != null) {
+			asAddStatement.setTargetVariable((ConnectionVariable) csElement.getTargetVariable());
 			ExpCS csInitialiser = csElement.getOwnedExpression();
 			if (csInitialiser != null) {
 				OCLExpression initialiser = context.visitLeft2Right(OCLExpression.class, csInitialiser);
-				asConnectionStatement.setValue(initialiser);
+				asAddStatement.setValue(initialiser);
 			}
 		}
 		return null;

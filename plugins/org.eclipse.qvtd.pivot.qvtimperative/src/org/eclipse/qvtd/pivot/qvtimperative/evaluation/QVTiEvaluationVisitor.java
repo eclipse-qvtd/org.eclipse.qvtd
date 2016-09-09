@@ -37,11 +37,10 @@ import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.Assignment;
 import org.eclipse.qvtd.pivot.qvtimperative.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.BottomStatement;
-import org.eclipse.qvtd.pivot.qvtimperative.ConnectionAssignment;
-import org.eclipse.qvtd.pivot.qvtimperative.ConnectionStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
@@ -98,6 +97,18 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 	}
 
 	@Override
+	public @Nullable Object visitAddStatement(@NonNull AddStatement connectionStatement) {
+		ConnectionVariable targetVariable = connectionStatement.getTargetVariable() ;
+		if (targetVariable != null) {
+			OCLExpression valueExpression = connectionStatement.getValue();
+			if (valueExpression != null) {
+				return doConnectionAccumulation(targetVariable, valueExpression);
+			}
+		}
+		return null;
+	}
+
+	@Override
 	public @Nullable Object visitAssignment(@NonNull Assignment object) {
 		return visiting(object);
 	}
@@ -115,30 +126,6 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 	@Override
 	public @Nullable Object visitBottomStatement(@NonNull BottomStatement object) {
 		return visitStatement(object);	// MappingStatement is abstract
-	}
-
-	@Override
-	public @Nullable Object visitConnectionAssignment(@NonNull ConnectionAssignment connectionAssignment) {
-		ConnectionVariable targetVariable = connectionAssignment.getTargetVariable() ;
-		if (targetVariable != null) {
-			OCLExpression valueExpression = connectionAssignment.getValue();
-			if (valueExpression != null) {
-				return doConnectionAccumulation(targetVariable, valueExpression);
-			}
-		}
-		return null;
-	}
-
-	@Override
-	public @Nullable Object visitConnectionStatement(@NonNull ConnectionStatement connectionStatement) {
-		ConnectionVariable targetVariable = connectionStatement.getTargetVariable() ;
-		if (targetVariable != null) {
-			OCLExpression valueExpression = connectionStatement.getValue();
-			if (valueExpression != null) {
-				return doConnectionAccumulation(targetVariable, valueExpression);
-			}
-		}
-		return null;
 	}
 
 	@Override

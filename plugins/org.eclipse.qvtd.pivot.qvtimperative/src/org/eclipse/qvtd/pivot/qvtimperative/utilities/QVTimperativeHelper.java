@@ -18,7 +18,7 @@ import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseHelper;
-import org.eclipse.qvtd.pivot.qvtimperative.ConnectionAssignment;
+import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.RealizedVariable;
@@ -34,11 +34,11 @@ public class QVTimperativeHelper extends QVTbaseHelper
 		super(environmentFactory);
 	}
 
-	public @NonNull ConnectionAssignment createConnectionAssignment(@NonNull ConnectionVariable connectionVariable, @NonNull OCLExpression childrenExpression) {
-		ConnectionAssignment connectionAssignment = QVTimperativeFactory.eINSTANCE.createConnectionAssignment();
-		connectionAssignment.setTargetVariable(connectionVariable);
-		connectionAssignment.setValue(childrenExpression);
-		return connectionAssignment;
+	public @NonNull AddStatement createAddStatement(@NonNull ConnectionVariable connectionVariable, @NonNull OCLExpression childrenExpression) {
+		AddStatement addStatement = QVTimperativeFactory.eINSTANCE.createAddStatement();
+		addStatement.setTargetVariable(connectionVariable);
+		addStatement.setValue(childrenExpression);
+		return addStatement;
 	}
 
 	public @NonNull ConnectionVariable createConnectionVariable(@NonNull String name, @NonNull Type asType, @Nullable OCLExpression initExpression) {

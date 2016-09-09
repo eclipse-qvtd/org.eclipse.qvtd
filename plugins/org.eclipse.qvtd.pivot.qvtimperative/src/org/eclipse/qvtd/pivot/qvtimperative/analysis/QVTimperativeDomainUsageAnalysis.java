@@ -20,8 +20,7 @@ import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.internal.complete.StandardLibraryInternal;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtbase.analysis.DomainUsage;
-import org.eclipse.qvtd.pivot.qvtimperative.ConnectionAssignment;
-import org.eclipse.qvtd.pivot.qvtimperative.ConnectionStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
@@ -48,14 +47,7 @@ public class QVTimperativeDomainUsageAnalysis extends RootDomainUsageAnalysis im
 	}
 
 	@Override
-	public @NonNull DomainUsage visitConnectionAssignment(@NonNull ConnectionAssignment object) {
-		DomainUsage valueUsage = visit(object.getValue());
-		DomainUsage variableUsage = visit(object.getTargetVariable());
-		return intersection(variableUsage, valueUsage);
-	}
-
-	@Override
-	public @NonNull DomainUsage visitConnectionStatement(@NonNull ConnectionStatement object) {
+	public @NonNull DomainUsage visitAddStatement(@NonNull AddStatement object) {
 		DomainUsage valueUsage = visit(object.getValue());
 		DomainUsage variableUsage = visit(object.getTargetVariable());
 		return intersection(variableUsage, valueUsage);

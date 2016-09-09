@@ -19,12 +19,11 @@ import org.eclipse.ocl.pivot.internal.prettyprint.PrettyPrinter;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbasePrettyPrintVisitor;
+import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.Area;
 import org.eclipse.qvtd.pivot.qvtimperative.Assignment;
 import org.eclipse.qvtd.pivot.qvtimperative.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.BottomStatement;
-import org.eclipse.qvtd.pivot.qvtimperative.ConnectionAssignment;
-import org.eclipse.qvtd.pivot.qvtimperative.ConnectionStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
@@ -54,6 +53,16 @@ public class QVTimperativePrettyPrintVisitor extends QVTbasePrettyPrintVisitor i
 		context.append(")\n{");
 		safeVisit(pArea.getBottomPattern());
 		context.append("}\n");
+	}
+
+	@Override
+	public Object visitAddStatement(@NonNull AddStatement asAddStatement) {
+		context.append("add ");
+		context.appendName(asAddStatement.getTargetVariable());
+		context.append(" += ");
+		safeVisit(asAddStatement.getValue());
+		context.append(";\n");
+		return null;
 	}
 
 	@Override
@@ -90,24 +99,6 @@ public class QVTimperativePrettyPrintVisitor extends QVTbasePrettyPrintVisitor i
 	@Override
 	public Object visitBottomStatement(@NonNull BottomStatement object) {
 		return visitStatement(object);
-	}
-
-	@Override
-	public Object visitConnectionAssignment(@NonNull ConnectionAssignment asConnectionAssignment) {
-		context.appendName(asConnectionAssignment.getTargetVariable());
-		context.append(" += ");
-		safeVisit(asConnectionAssignment.getValue());
-		context.append(";\n");
-		return null;
-	}
-
-	@Override
-	public Object visitConnectionStatement(@NonNull ConnectionStatement asConnectionStatement) {
-		context.appendName(asConnectionStatement.getTargetVariable());
-		context.append(" += ");
-		safeVisit(asConnectionStatement.getValue());
-		context.append(";\n");
-		return null;
 	}
 
 	@Override
