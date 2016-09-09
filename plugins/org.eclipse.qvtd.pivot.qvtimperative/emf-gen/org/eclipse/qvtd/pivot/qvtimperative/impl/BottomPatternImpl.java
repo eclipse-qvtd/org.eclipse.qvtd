@@ -22,7 +22,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
@@ -32,7 +31,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.Area;
 import org.eclipse.qvtd.pivot.qvtimperative.Assignment;
 import org.eclipse.qvtd.pivot.qvtimperative.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
-import org.eclipse.qvtd.pivot.qvtimperative.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
 
 /**
@@ -45,7 +43,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.BottomPatternImpl#getArea <em>Area</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.BottomPatternImpl#getAssignment <em>Assignment</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.BottomPatternImpl#getRealizedVariable <em>Realized Variable</em>}</li>
  * </ul>
  *
  * @generated
@@ -60,16 +57,6 @@ public class BottomPatternImpl extends ImperativePatternImpl implements BottomPa
 	 * @ordered
 	 */
 	protected EList<Assignment> assignment;
-
-	/**
-	 * The cached value of the '{@link #getRealizedVariable() <em>Realized Variable</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getRealizedVariable()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<RealizedVariable> realizedVariable;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -151,19 +138,6 @@ public class BottomPatternImpl extends ImperativePatternImpl implements BottomPa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public EList<RealizedVariable> getRealizedVariable() {
-		if (realizedVariable == null) {
-			realizedVariable = new EObjectContainmentEList<RealizedVariable>(RealizedVariable.class, this, QVTimperativePackage.BOTTOM_PATTERN__REALIZED_VARIABLE);
-		}
-		return realizedVariable;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -190,8 +164,6 @@ public class BottomPatternImpl extends ImperativePatternImpl implements BottomPa
 				return basicSetArea(null, msgs);
 			case QVTimperativePackage.BOTTOM_PATTERN__ASSIGNMENT:
 				return ((InternalEList<?>)getAssignment()).basicRemove(otherEnd, msgs);
-			case QVTimperativePackage.BOTTOM_PATTERN__REALIZED_VARIABLE:
-				return ((InternalEList<?>)getRealizedVariable()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -222,8 +194,6 @@ public class BottomPatternImpl extends ImperativePatternImpl implements BottomPa
 				return getArea();
 			case QVTimperativePackage.BOTTOM_PATTERN__ASSIGNMENT:
 				return getAssignment();
-			case QVTimperativePackage.BOTTOM_PATTERN__REALIZED_VARIABLE:
-				return getRealizedVariable();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -244,10 +214,6 @@ public class BottomPatternImpl extends ImperativePatternImpl implements BottomPa
 				getAssignment().clear();
 				getAssignment().addAll((Collection<? extends Assignment>)newValue);
 				return;
-			case QVTimperativePackage.BOTTOM_PATTERN__REALIZED_VARIABLE:
-				getRealizedVariable().clear();
-				getRealizedVariable().addAll((Collection<? extends RealizedVariable>)newValue);
-				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -266,9 +232,6 @@ public class BottomPatternImpl extends ImperativePatternImpl implements BottomPa
 			case QVTimperativePackage.BOTTOM_PATTERN__ASSIGNMENT:
 				getAssignment().clear();
 				return;
-			case QVTimperativePackage.BOTTOM_PATTERN__REALIZED_VARIABLE:
-				getRealizedVariable().clear();
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -285,8 +248,6 @@ public class BottomPatternImpl extends ImperativePatternImpl implements BottomPa
 				return getArea() != null;
 			case QVTimperativePackage.BOTTOM_PATTERN__ASSIGNMENT:
 				return assignment != null && !assignment.isEmpty();
-			case QVTimperativePackage.BOTTOM_PATTERN__REALIZED_VARIABLE:
-				return realizedVariable != null && !realizedVariable.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

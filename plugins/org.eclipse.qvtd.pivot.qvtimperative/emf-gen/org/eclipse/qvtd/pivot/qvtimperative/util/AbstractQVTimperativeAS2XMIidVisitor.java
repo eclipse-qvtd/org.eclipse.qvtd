@@ -114,7 +114,7 @@ public abstract class AbstractQVTimperativeAS2XMIidVisitor
 	}
 
 	@Override
-	public @Nullable Boolean visitRealizedVariable(org.eclipse.qvtd.pivot.qvtimperative.@NonNull RealizedVariable object) {
+	public @Nullable Boolean visitNewStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull NewStatement object) {
 		return visitVariable(object);
 	}
 

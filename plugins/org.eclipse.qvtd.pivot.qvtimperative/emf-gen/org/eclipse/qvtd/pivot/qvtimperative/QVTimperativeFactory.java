@@ -37,7 +37,7 @@ public interface QVTimperativeFactory extends EFactory {
 	 * @return a new object of class '<em>Add Statement</em>'.
 	 * @generated
 	 */
-	@NonNull AddStatement createAddStatement();
+	AddStatement createAddStatement();
 
 	/**
 	 * Returns a new object of class '<em>Bottom Pattern</em>'.
@@ -130,13 +130,13 @@ public interface QVTimperativeFactory extends EFactory {
 	@NonNull MappingLoop createMappingLoop();
 
 	/**
-	 * Returns a new object of class '<em>Realized Variable</em>'.
+	 * Returns a new object of class '<em>New Statement</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Realized Variable</em>'.
+	 * @return a new object of class '<em>New Statement</em>'.
 	 * @generated
 	 */
-	@NonNull RealizedVariable createRealizedVariable();
+	@NonNull NewStatement createNewStatement();
 
 	/**
 	 * Returns a new object of class '<em>Set Statement</em>'.

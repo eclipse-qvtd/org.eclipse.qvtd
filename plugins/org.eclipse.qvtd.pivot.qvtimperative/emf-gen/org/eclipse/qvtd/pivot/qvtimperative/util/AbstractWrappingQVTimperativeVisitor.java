@@ -200,10 +200,10 @@ public abstract class AbstractWrappingQVTimperativeVisitor<R, C, @NonNull D exte
 	}
 
 	@Override
-	public R visitRealizedVariable(org.eclipse.qvtd.pivot.qvtimperative.@NonNull RealizedVariable object) {
+	public R visitNewStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull NewStatement object) {
 		@Nullable P prologue = preVisit(object);
 		try {
-			R result = delegate.visitRealizedVariable(object);
+			R result = delegate.visitNewStatement(object);
 			return postVisit(object, prologue, result);
 		}
 		catch (Throwable e) {

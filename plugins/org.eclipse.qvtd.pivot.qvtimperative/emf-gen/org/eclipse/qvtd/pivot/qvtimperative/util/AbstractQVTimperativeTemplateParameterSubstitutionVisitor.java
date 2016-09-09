@@ -117,7 +117,7 @@ public abstract class AbstractQVTimperativeTemplateParameterSubstitutionVisitor
 	}
 
 	@Override
-	public @Nullable Object visitRealizedVariable(org.eclipse.qvtd.pivot.qvtimperative.@NonNull RealizedVariable object) {
+	public @Nullable Object visitNewStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull NewStatement object) {
 		return visitVariable(object);
 	}
 

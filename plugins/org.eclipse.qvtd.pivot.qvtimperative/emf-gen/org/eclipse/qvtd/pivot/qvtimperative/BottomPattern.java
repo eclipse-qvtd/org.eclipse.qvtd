@@ -27,7 +27,6 @@ import org.eclipse.emf.common.util.EList;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.BottomPattern#getArea <em>Area</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.BottomPattern#getAssignment <em>Assignment</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.BottomPattern#getRealizedVariable <em>Realized Variable</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getBottomPattern()
@@ -78,20 +77,5 @@ public interface BottomPattern extends ImperativePattern {
 	 * @generated
 	 */
 	EList<Assignment> getAssignment();
-
-	/**
-	 * Returns the value of the '<em><b>Realized Variable</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.qvtd.pivot.qvtimperative.RealizedVariable}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Realized Variable</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Realized Variable</em>' containment reference list.
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getBottomPattern_RealizedVariable()
-	 * @generated
-	 */
-	EList<RealizedVariable> getRealizedVariable();
 
 } // BottomPattern

@@ -44,8 +44,8 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
-import org.eclipse.qvtd.pivot.qvtimperative.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 import org.eclipse.qvtd.pivot.qvtimperative.VariableAssignment;
@@ -271,16 +271,18 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTimperativePackage.REALIZED_VARIABLE: {
-				RealizedVariable realizedVariable = (RealizedVariable)theEObject;
-				T result = caseRealizedVariable(realizedVariable);
-				if (result == null) result = caseVariable(realizedVariable);
-				if (result == null) result = caseVariableDeclaration(realizedVariable);
-				if (result == null) result = caseTypedElement(realizedVariable);
-				if (result == null) result = caseNamedElement(realizedVariable);
-				if (result == null) result = caseElement(realizedVariable);
-				if (result == null) result = caseNameable(realizedVariable);
-				if (result == null) result = caseVisitable(realizedVariable);
+			case QVTimperativePackage.NEW_STATEMENT: {
+				NewStatement newStatement = (NewStatement)theEObject;
+				T result = caseNewStatement(newStatement);
+				if (result == null) result = caseVariable(newStatement);
+				if (result == null) result = caseBottomStatement(newStatement);
+				if (result == null) result = caseVariableDeclaration(newStatement);
+				if (result == null) result = caseStatement(newStatement);
+				if (result == null) result = caseTypedElement(newStatement);
+				if (result == null) result = caseNamedElement(newStatement);
+				if (result == null) result = caseElement(newStatement);
+				if (result == null) result = caseNameable(newStatement);
+				if (result == null) result = caseVisitable(newStatement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -554,17 +556,17 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Realized Variable</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>New Statement</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Realized Variable</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>New Statement</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseRealizedVariable(RealizedVariable object) {
+	public T caseNewStatement(NewStatement object) {
 		return null;
 	}
 

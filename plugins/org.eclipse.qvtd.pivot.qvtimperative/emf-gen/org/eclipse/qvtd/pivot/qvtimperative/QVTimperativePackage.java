@@ -219,16 +219,6 @@ public interface QVTimperativePackage extends EPackage {
 	int MAPPING_LOOP = 13;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.RealizedVariableImpl <em>Realized Variable</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.RealizedVariableImpl
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.QVTimperativePackageImpl#getRealizedVariable()
-	 * @generated
-	 */
-	int REALIZED_VARIABLE = 15;
-
-	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.StatementImpl <em>Statement</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -754,22 +744,13 @@ public interface QVTimperativePackage extends EPackage {
 	int BOTTOM_PATTERN__ASSIGNMENT = IMPERATIVE_PATTERN_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Realized Variable</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BOTTOM_PATTERN__REALIZED_VARIABLE = IMPERATIVE_PATTERN_FEATURE_COUNT + 2;
-
-	/**
 	 * The number of structural features of the '<em>Bottom Pattern</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BOTTOM_PATTERN_FEATURE_COUNT = IMPERATIVE_PATTERN_FEATURE_COUNT + 3;
+	int BOTTOM_PATTERN_FEATURE_COUNT = IMPERATIVE_PATTERN_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -1645,13 +1626,23 @@ public interface QVTimperativePackage extends EPackage {
 	int MAPPING_LOOP_FEATURE_COUNT = MAPPING_STATEMENT_FEATURE_COUNT + 3;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.NewStatementImpl <em>New Statement</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.NewStatementImpl
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.QVTimperativePackageImpl#getNewStatement()
+	 * @generated
+	 */
+	int NEW_STATEMENT = 15;
+
+	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int REALIZED_VARIABLE__ANNOTATING_COMMENTS = PivotPackage.VARIABLE__ANNOTATING_COMMENTS;
+	int NEW_STATEMENT__ANNOTATING_COMMENTS = PivotPackage.VARIABLE__ANNOTATING_COMMENTS;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -1660,7 +1651,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REALIZED_VARIABLE__OWNED_ANNOTATIONS = PivotPackage.VARIABLE__OWNED_ANNOTATIONS;
+	int NEW_STATEMENT__OWNED_ANNOTATIONS = PivotPackage.VARIABLE__OWNED_ANNOTATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
@@ -1669,7 +1660,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REALIZED_VARIABLE__OWNED_COMMENTS = PivotPackage.VARIABLE__OWNED_COMMENTS;
+	int NEW_STATEMENT__OWNED_COMMENTS = PivotPackage.VARIABLE__OWNED_COMMENTS;
 
 	/**
 	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
@@ -1678,7 +1669,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REALIZED_VARIABLE__OWNED_EXTENSIONS = PivotPackage.VARIABLE__OWNED_EXTENSIONS;
+	int NEW_STATEMENT__OWNED_EXTENSIONS = PivotPackage.VARIABLE__OWNED_EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1687,7 +1678,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REALIZED_VARIABLE__NAME = PivotPackage.VARIABLE__NAME;
+	int NEW_STATEMENT__NAME = PivotPackage.VARIABLE__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Is Many</b></em>' attribute.
@@ -1696,7 +1687,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REALIZED_VARIABLE__IS_MANY = PivotPackage.VARIABLE__IS_MANY;
+	int NEW_STATEMENT__IS_MANY = PivotPackage.VARIABLE__IS_MANY;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -1705,7 +1696,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REALIZED_VARIABLE__IS_REQUIRED = PivotPackage.VARIABLE__IS_REQUIRED;
+	int NEW_STATEMENT__IS_REQUIRED = PivotPackage.VARIABLE__IS_REQUIRED;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -1714,7 +1705,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REALIZED_VARIABLE__TYPE = PivotPackage.VARIABLE__TYPE;
+	int NEW_STATEMENT__TYPE = PivotPackage.VARIABLE__TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Type Value</b></em>' reference.
@@ -1723,7 +1714,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REALIZED_VARIABLE__TYPE_VALUE = PivotPackage.VARIABLE__TYPE_VALUE;
+	int NEW_STATEMENT__TYPE_VALUE = PivotPackage.VARIABLE__TYPE_VALUE;
 
 	/**
 	 * The feature id for the '<em><b>Is Implicit</b></em>' attribute.
@@ -1732,7 +1723,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REALIZED_VARIABLE__IS_IMPLICIT = PivotPackage.VARIABLE__IS_IMPLICIT;
+	int NEW_STATEMENT__IS_IMPLICIT = PivotPackage.VARIABLE__IS_IMPLICIT;
 
 	/**
 	 * The feature id for the '<em><b>Owned Init</b></em>' containment reference.
@@ -1741,7 +1732,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REALIZED_VARIABLE__OWNED_INIT = PivotPackage.VARIABLE__OWNED_INIT;
+	int NEW_STATEMENT__OWNED_INIT = PivotPackage.VARIABLE__OWNED_INIT;
 
 	/**
 	 * The feature id for the '<em><b>Represented Parameter</b></em>' reference.
@@ -1750,16 +1741,25 @@ public interface QVTimperativePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REALIZED_VARIABLE__REPRESENTED_PARAMETER = PivotPackage.VARIABLE__REPRESENTED_PARAMETER;
+	int NEW_STATEMENT__REPRESENTED_PARAMETER = PivotPackage.VARIABLE__REPRESENTED_PARAMETER;
 
 	/**
-	 * The number of structural features of the '<em>Realized Variable</em>' class.
+	 * The feature id for the '<em><b>Referred Typed Model</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int REALIZED_VARIABLE_FEATURE_COUNT = PivotPackage.VARIABLE_FEATURE_COUNT + 0;
+	int NEW_STATEMENT__REFERRED_TYPED_MODEL = PivotPackage.VARIABLE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>New Statement</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NEW_STATEMENT_FEATURE_COUNT = PivotPackage.VARIABLE_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.SetStatementImpl <em>Set Statement</em>}' class.
@@ -2207,17 +2207,6 @@ public interface QVTimperativePackage extends EPackage {
 	EReference getBottomPattern_Assignment();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.pivot.qvtimperative.BottomPattern#getRealizedVariable <em>Realized Variable</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Realized Variable</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.BottomPattern#getRealizedVariable()
-	 * @see #getBottomPattern()
-	 * @generated
-	 */
-	EReference getBottomPattern_RealizedVariable();
-
-	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtimperative.BottomStatement <em>Bottom Statement</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2493,14 +2482,25 @@ public interface QVTimperativePackage extends EPackage {
 	EClass getMappingStatement();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtimperative.RealizedVariable <em>Realized Variable</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtimperative.NewStatement <em>New Statement</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Realized Variable</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.RealizedVariable
+	 * @return the meta object for class '<em>New Statement</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.NewStatement
 	 * @generated
 	 */
-	EClass getRealizedVariable();
+	EClass getNewStatement();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtimperative.NewStatement#getReferredTypedModel <em>Referred Typed Model</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Referred Typed Model</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.NewStatement#getReferredTypedModel()
+	 * @see #getNewStatement()
+	 * @generated
+	 */
+	EReference getNewStatement_ReferredTypedModel();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtimperative.SetStatement <em>Set Statement</em>}'.
@@ -2767,14 +2767,6 @@ public interface QVTimperativePackage extends EPackage {
 		EReference BOTTOM_PATTERN__ASSIGNMENT = eINSTANCE.getBottomPattern_Assignment();
 
 		/**
-		 * The meta object literal for the '<em><b>Realized Variable</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference BOTTOM_PATTERN__REALIZED_VARIABLE = eINSTANCE.getBottomPattern_RealizedVariable();
-
-		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.BottomStatementImpl <em>Bottom Statement</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3005,14 +2997,22 @@ public interface QVTimperativePackage extends EPackage {
 		EClass MAPPING_STATEMENT = eINSTANCE.getMappingStatement();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.RealizedVariableImpl <em>Realized Variable</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.NewStatementImpl <em>New Statement</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.RealizedVariableImpl
-		 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.QVTimperativePackageImpl#getRealizedVariable()
+		 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.NewStatementImpl
+		 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.QVTimperativePackageImpl#getNewStatement()
 		 * @generated
 		 */
-		EClass REALIZED_VARIABLE = eINSTANCE.getRealizedVariable();
+		EClass NEW_STATEMENT = eINSTANCE.getNewStatement();
+
+		/**
+		 * The meta object literal for the '<em><b>Referred Typed Model</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference NEW_STATEMENT__REFERRED_TYPED_MODEL = eINSTANCE.getNewStatement_ReferredTypedModel();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.SetStatementImpl <em>Set Statement</em>}' class.
