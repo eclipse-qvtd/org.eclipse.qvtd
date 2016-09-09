@@ -243,7 +243,7 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 *
+	 * 
 	 * <p>This method is used to initialize {@link QVTimperativeCSPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -276,7 +276,7 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		// Mark meta-data to indicate it can't be changed
 		theQVTimperativeCSPackage.freeze();
 
-
+  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(QVTimperativeCSPackage.eNS_URI, theQVTimperativeCSPackage);
 		return theQVTimperativeCSPackage;
@@ -778,28 +778,8 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	 * @generated
 	 */
 	@Override
-	public EAttribute getPredicateOrAssignmentCS_IsAccumulate() {
-		return (EAttribute)predicateOrAssignmentCSEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EAttribute getPredicateOrAssignmentCS_IsDefault() {
-		return (EAttribute)predicateOrAssignmentCSEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EReference getPredicateOrAssignmentCS_OwnedTarget() {
-		return (EReference)predicateOrAssignmentCSEClass.getEStructuralFeatures().get(2);
+		return (EReference)predicateOrAssignmentCSEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -809,7 +789,7 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	 */
 	@Override
 	public EReference getPredicateOrAssignmentCS_OwnedInitExpression() {
-		return (EReference)predicateOrAssignmentCSEClass.getEStructuralFeatures().get(3);
+		return (EReference)predicateOrAssignmentCSEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1134,8 +1114,6 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		createEReference(predicateCSEClass, PREDICATE_CS__OWNED_CONDITION);
 
 		predicateOrAssignmentCSEClass = createEClass(PREDICATE_OR_ASSIGNMENT_CS);
-		createEAttribute(predicateOrAssignmentCSEClass, PREDICATE_OR_ASSIGNMENT_CS__IS_ACCUMULATE);
-		createEAttribute(predicateOrAssignmentCSEClass, PREDICATE_OR_ASSIGNMENT_CS__IS_DEFAULT);
 		createEReference(predicateOrAssignmentCSEClass, PREDICATE_OR_ASSIGNMENT_CS__OWNED_TARGET);
 		createEReference(predicateOrAssignmentCSEClass, PREDICATE_OR_ASSIGNMENT_CS__OWNED_INIT_EXPRESSION);
 
@@ -1295,8 +1273,6 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		initEReference(getPredicateCS_OwnedCondition(), theEssentialOCLCSPackage.getExpCS(), null, "ownedCondition", null, 1, 1, PredicateCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(predicateOrAssignmentCSEClass, PredicateOrAssignmentCS.class, "PredicateOrAssignmentCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getPredicateOrAssignmentCS_IsAccumulate(), ecorePackage.getEBoolean(), "isAccumulate", "false", 0, 1, PredicateOrAssignmentCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getPredicateOrAssignmentCS_IsDefault(), ecorePackage.getEBoolean(), "isDefault", null, 0, 1, PredicateOrAssignmentCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPredicateOrAssignmentCS_OwnedTarget(), theEssentialOCLCSPackage.getExpCS(), null, "ownedTarget", null, 1, 1, PredicateOrAssignmentCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPredicateOrAssignmentCS_OwnedInitExpression(), theEssentialOCLCSPackage.getExpCS(), null, "ownedInitExpression", null, 0, 1, PredicateOrAssignmentCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 

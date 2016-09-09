@@ -35,8 +35,6 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.PredicateOrAssignmentCSImpl#isIsAccumulate <em>Is Accumulate</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.PredicateOrAssignmentCSImpl#isIsDefault <em>Is Default</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.PredicateOrAssignmentCSImpl#getOwnedTarget <em>Owned Target</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.PredicateOrAssignmentCSImpl#getOwnedInitExpression <em>Owned Init Expression</em>}</li>
  * </ul>
@@ -44,46 +42,6 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
  * @generated
  */
 public class PredicateOrAssignmentCSImpl extends ExpCSImpl implements PredicateOrAssignmentCS {
-	/**
-	 * The default value of the '{@link #isIsAccumulate() <em>Is Accumulate</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isIsAccumulate()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean IS_ACCUMULATE_EDEFAULT = false;
-
-	/**
-	 * The cached value of the '{@link #isIsAccumulate() <em>Is Accumulate</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isIsAccumulate()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean isAccumulate = IS_ACCUMULATE_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #isIsDefault() <em>Is Default</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isIsDefault()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean IS_DEFAULT_EDEFAULT = false;
-
-	/**
-	 * The cached value of the '{@link #isIsDefault() <em>Is Default</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isIsDefault()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean isDefault = IS_DEFAULT_EDEFAULT;
-
 	/**
 	 * The cached value of the '{@link #getOwnedTarget() <em>Owned Target</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -121,52 +79,6 @@ public class PredicateOrAssignmentCSImpl extends ExpCSImpl implements PredicateO
 	@Override
 	protected EClass eStaticClass() {
 		return QVTimperativeCSPackage.Literals.PREDICATE_OR_ASSIGNMENT_CS;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public boolean isIsAccumulate() {
-		return isAccumulate;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setIsAccumulate(boolean newIsAccumulate) {
-		boolean oldIsAccumulate = isAccumulate;
-		isAccumulate = newIsAccumulate;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.PREDICATE_OR_ASSIGNMENT_CS__IS_ACCUMULATE, oldIsAccumulate, isAccumulate));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public boolean isIsDefault() {
-		return isDefault;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setIsDefault(boolean newIsDefault) {
-		boolean oldIsDefault = isDefault;
-		isDefault = newIsDefault;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.PREDICATE_OR_ASSIGNMENT_CS__IS_DEFAULT, oldIsDefault, isDefault));
 	}
 
 	/**
@@ -265,16 +177,6 @@ public class PredicateOrAssignmentCSImpl extends ExpCSImpl implements PredicateO
 	 * @generated
 	 */
 	@Override
-	public String toString() {
-		return super.toString();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case QVTimperativeCSPackage.PREDICATE_OR_ASSIGNMENT_CS__OWNED_TARGET:
@@ -293,10 +195,6 @@ public class PredicateOrAssignmentCSImpl extends ExpCSImpl implements PredicateO
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.PREDICATE_OR_ASSIGNMENT_CS__IS_ACCUMULATE:
-				return isIsAccumulate();
-			case QVTimperativeCSPackage.PREDICATE_OR_ASSIGNMENT_CS__IS_DEFAULT:
-				return isIsDefault();
 			case QVTimperativeCSPackage.PREDICATE_OR_ASSIGNMENT_CS__OWNED_TARGET:
 				return getOwnedTarget();
 			case QVTimperativeCSPackage.PREDICATE_OR_ASSIGNMENT_CS__OWNED_INIT_EXPRESSION:
@@ -313,12 +211,6 @@ public class PredicateOrAssignmentCSImpl extends ExpCSImpl implements PredicateO
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.PREDICATE_OR_ASSIGNMENT_CS__IS_ACCUMULATE:
-				setIsAccumulate((Boolean)newValue);
-				return;
-			case QVTimperativeCSPackage.PREDICATE_OR_ASSIGNMENT_CS__IS_DEFAULT:
-				setIsDefault((Boolean)newValue);
-				return;
 			case QVTimperativeCSPackage.PREDICATE_OR_ASSIGNMENT_CS__OWNED_TARGET:
 				setOwnedTarget((ExpCS)newValue);
 				return;
@@ -337,12 +229,6 @@ public class PredicateOrAssignmentCSImpl extends ExpCSImpl implements PredicateO
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.PREDICATE_OR_ASSIGNMENT_CS__IS_ACCUMULATE:
-				setIsAccumulate(IS_ACCUMULATE_EDEFAULT);
-				return;
-			case QVTimperativeCSPackage.PREDICATE_OR_ASSIGNMENT_CS__IS_DEFAULT:
-				setIsDefault(IS_DEFAULT_EDEFAULT);
-				return;
 			case QVTimperativeCSPackage.PREDICATE_OR_ASSIGNMENT_CS__OWNED_TARGET:
 				setOwnedTarget((ExpCS)null);
 				return;
@@ -361,10 +247,6 @@ public class PredicateOrAssignmentCSImpl extends ExpCSImpl implements PredicateO
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.PREDICATE_OR_ASSIGNMENT_CS__IS_ACCUMULATE:
-				return isAccumulate != IS_ACCUMULATE_EDEFAULT;
-			case QVTimperativeCSPackage.PREDICATE_OR_ASSIGNMENT_CS__IS_DEFAULT:
-				return isDefault != IS_DEFAULT_EDEFAULT;
 			case QVTimperativeCSPackage.PREDICATE_OR_ASSIGNMENT_CS__OWNED_TARGET:
 				return ownedTarget != null;
 			case QVTimperativeCSPackage.PREDICATE_OR_ASSIGNMENT_CS__OWNED_INIT_EXPRESSION:

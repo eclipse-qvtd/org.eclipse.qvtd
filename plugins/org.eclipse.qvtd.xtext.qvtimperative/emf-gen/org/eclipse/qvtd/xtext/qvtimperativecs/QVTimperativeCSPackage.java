@@ -1723,31 +1723,13 @@ public interface QVTimperativeCSPackage extends EPackage {
 	int PREDICATE_OR_ASSIGNMENT_CS__PRECEDENCE = EssentialOCLCSPackage.EXP_CS__PRECEDENCE;
 
 	/**
-	 * The feature id for the '<em><b>Is Accumulate</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PREDICATE_OR_ASSIGNMENT_CS__IS_ACCUMULATE = EssentialOCLCSPackage.EXP_CS_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Is Default</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PREDICATE_OR_ASSIGNMENT_CS__IS_DEFAULT = EssentialOCLCSPackage.EXP_CS_FEATURE_COUNT + 1;
-
-	/**
 	 * The feature id for the '<em><b>Owned Target</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PREDICATE_OR_ASSIGNMENT_CS__OWNED_TARGET = EssentialOCLCSPackage.EXP_CS_FEATURE_COUNT + 2;
+	int PREDICATE_OR_ASSIGNMENT_CS__OWNED_TARGET = EssentialOCLCSPackage.EXP_CS_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Owned Init Expression</b></em>' containment reference.
@@ -1756,7 +1738,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PREDICATE_OR_ASSIGNMENT_CS__OWNED_INIT_EXPRESSION = EssentialOCLCSPackage.EXP_CS_FEATURE_COUNT + 3;
+	int PREDICATE_OR_ASSIGNMENT_CS__OWNED_INIT_EXPRESSION = EssentialOCLCSPackage.EXP_CS_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Predicate Or Assignment CS</em>' class.
@@ -1765,7 +1747,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PREDICATE_OR_ASSIGNMENT_CS_FEATURE_COUNT = EssentialOCLCSPackage.EXP_CS_FEATURE_COUNT + 4;
+	int PREDICATE_OR_ASSIGNMENT_CS_FEATURE_COUNT = EssentialOCLCSPackage.EXP_CS_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.QueryCSImpl <em>Query CS</em>}' class.
@@ -3061,28 +3043,6 @@ public interface QVTimperativeCSPackage extends EPackage {
 	EClass getPredicateOrAssignmentCS();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.xtext.qvtimperativecs.PredicateOrAssignmentCS#isIsAccumulate <em>Is Accumulate</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Is Accumulate</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.PredicateOrAssignmentCS#isIsAccumulate()
-	 * @see #getPredicateOrAssignmentCS()
-	 * @generated
-	 */
-	EAttribute getPredicateOrAssignmentCS_IsAccumulate();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.xtext.qvtimperativecs.PredicateOrAssignmentCS#isIsDefault <em>Is Default</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Is Default</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.PredicateOrAssignmentCS#isIsDefault()
-	 * @see #getPredicateOrAssignmentCS()
-	 * @generated
-	 */
-	EAttribute getPredicateOrAssignmentCS_IsDefault();
-
-	/**
 	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtimperativecs.PredicateOrAssignmentCS#getOwnedTarget <em>Owned Target</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3792,22 +3752,6 @@ public interface QVTimperativeCSPackage extends EPackage {
 		 * @generated
 		 */
 		EClass PREDICATE_OR_ASSIGNMENT_CS = eINSTANCE.getPredicateOrAssignmentCS();
-
-		/**
-		 * The meta object literal for the '<em><b>Is Accumulate</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute PREDICATE_OR_ASSIGNMENT_CS__IS_ACCUMULATE = eINSTANCE.getPredicateOrAssignmentCS_IsAccumulate();
-
-		/**
-		 * The meta object literal for the '<em><b>Is Default</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute PREDICATE_OR_ASSIGNMENT_CS__IS_DEFAULT = eINSTANCE.getPredicateOrAssignmentCS_IsDefault();
 
 		/**
 		 * The meta object literal for the '<em><b>Owned Target</b></em>' containment reference feature.
