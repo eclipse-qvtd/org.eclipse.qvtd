@@ -157,6 +157,15 @@ public interface QVTimperativeCSFactory extends EFactory {
 	@NonNull RealizedVariableCS createRealizedVariableCS();
 
 	/**
+	 * Returns a new object of class '<em>Set Statement CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Set Statement CS</em>'.
+	 * @generated
+	 */
+	@NonNull SetStatementCS createSetStatementCS();
+
+	/**
 	 * Returns a new object of class '<em>Top Level CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -76,6 +76,7 @@ public class QVTimperativeCSFactoryImpl extends EFactoryImpl implements QVTimper
 			case QVTimperativeCSPackage.PREDICATE_OR_ASSIGNMENT_CS: return createPredicateOrAssignmentCS();
 			case QVTimperativeCSPackage.QUERY_CS: return createQueryCS();
 			case QVTimperativeCSPackage.REALIZED_VARIABLE_CS: return createRealizedVariableCS();
+			case QVTimperativeCSPackage.SET_STATEMENT_CS: return createSetStatementCS();
 			case QVTimperativeCSPackage.TOP_LEVEL_CS: return createTopLevelCS();
 			case QVTimperativeCSPackage.TRANSFORMATION_CS: return createTransformationCS();
 			case QVTimperativeCSPackage.UNREALIZED_VARIABLE_CS: return createUnrealizedVariableCS();
@@ -236,6 +237,17 @@ public class QVTimperativeCSFactoryImpl extends EFactoryImpl implements QVTimper
 	public @NonNull RealizedVariableCS createRealizedVariableCS() {
 		RealizedVariableCSImpl realizedVariableCS = new RealizedVariableCSImpl();
 		return realizedVariableCS;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public @NonNull SetStatementCS createSetStatementCS() {
+		SetStatementCSImpl setStatementCS = new SetStatementCSImpl();
+		return setStatementCS;
 	}
 
 	/**

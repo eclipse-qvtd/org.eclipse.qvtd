@@ -134,6 +134,11 @@ public abstract class AbstractQVTimperativeCSContainmentVisitor
 	}
 
 	@Override
+	public @Nullable Continuation<?> visitSetStatementCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull SetStatementCS csElement) {
+		return visitStatementCS(csElement);
+	}
+
+	@Override
 	public @Nullable Continuation<?> visitStatementCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull StatementCS csElement) {
 		return visitModelElementCS(csElement);
 	}

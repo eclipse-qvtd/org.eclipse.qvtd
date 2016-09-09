@@ -321,6 +321,18 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case QVTimperativeCSPackage.SET_STATEMENT_CS: {
+				SetStatementCS setStatementCS = (SetStatementCS)theEObject;
+				T result = caseSetStatementCS(setStatementCS);
+				if (result == null) result = caseStatementCS(setStatementCS);
+				if (result == null) result = caseModelElementCS(setStatementCS);
+				if (result == null) result = casePivotableElementCS(setStatementCS);
+				if (result == null) result = caseElementCS(setStatementCS);
+				if (result == null) result = casePivotable(setStatementCS);
+				if (result == null) result = caseVisitableCS(setStatementCS);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case QVTimperativeCSPackage.STATEMENT_CS: {
 				StatementCS statementCS = (StatementCS)theEObject;
 				T result = caseStatementCS(statementCS);
@@ -649,6 +661,21 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseRealizedVariableCS(RealizedVariableCS object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Set Statement CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Set Statement CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSetStatementCS(SetStatementCS object) {
 		return null;
 	}
 
