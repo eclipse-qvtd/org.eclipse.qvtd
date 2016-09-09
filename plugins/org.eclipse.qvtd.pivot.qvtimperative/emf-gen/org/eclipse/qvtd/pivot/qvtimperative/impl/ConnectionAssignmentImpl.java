@@ -34,6 +34,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.ConnectionAssignmentImpl#getTargetVariable <em>Target Variable</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.ConnectionAssignmentImpl#isIsEnforceadUnqiue <em>Is Enforcead Unqiue</em>}</li>
  * </ul>
  *
  * @generated
@@ -48,6 +49,33 @@ public class ConnectionAssignmentImpl extends AssignmentImpl implements Connecti
 	 * @ordered
 	 */
 	protected ConnectionVariable targetVariable;
+
+	/**
+	 * The default value of the '{@link #isIsEnforceadUnqiue() <em>Is Enforcead Unqiue</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsEnforceadUnqiue()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean IS_ENFORCEAD_UNQIUE_EDEFAULT = false;
+	/**
+	 * The cached value of the '{@link #isIsEnforceadUnqiue() <em>Is Enforcead Unqiue</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsEnforceadUnqiue()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean isEnforceadUnqiue = IS_ENFORCEAD_UNQIUE_EDEFAULT;
+	/**
+	 * This is true if the Is Enforcead Unqiue attribute has been set.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean isEnforceadUnqiueESet;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -114,11 +142,73 @@ public class ConnectionAssignmentImpl extends AssignmentImpl implements Connecti
 	 * @generated
 	 */
 	@Override
+	public boolean isIsEnforceadUnqiue() {
+		return isEnforceadUnqiue;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setIsEnforceadUnqiue(boolean newIsEnforceadUnqiue) {
+		boolean oldIsEnforceadUnqiue = isEnforceadUnqiue;
+		isEnforceadUnqiue = newIsEnforceadUnqiue;
+		boolean oldIsEnforceadUnqiueESet = isEnforceadUnqiueESet;
+		isEnforceadUnqiueESet = true;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.CONNECTION_ASSIGNMENT__IS_ENFORCEAD_UNQIUE, oldIsEnforceadUnqiue, isEnforceadUnqiue, !oldIsEnforceadUnqiueESet));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void unsetIsEnforceadUnqiue() {
+		boolean oldIsEnforceadUnqiue = isEnforceadUnqiue;
+		boolean oldIsEnforceadUnqiueESet = isEnforceadUnqiueESet;
+		isEnforceadUnqiue = IS_ENFORCEAD_UNQIUE_EDEFAULT;
+		isEnforceadUnqiueESet = false;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.UNSET, QVTimperativePackage.CONNECTION_ASSIGNMENT__IS_ENFORCEAD_UNQIUE, oldIsEnforceadUnqiue, IS_ENFORCEAD_UNQIUE_EDEFAULT, oldIsEnforceadUnqiueESet));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean isSetIsEnforceadUnqiue() {
+		return isEnforceadUnqiueESet;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		return super.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case QVTimperativePackage.CONNECTION_ASSIGNMENT__TARGET_VARIABLE:
 				if (resolve) return getTargetVariable();
 				return basicGetTargetVariable();
+			case QVTimperativePackage.CONNECTION_ASSIGNMENT__IS_ENFORCEAD_UNQIUE:
+				return isIsEnforceadUnqiue();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -133,6 +223,9 @@ public class ConnectionAssignmentImpl extends AssignmentImpl implements Connecti
 		switch (featureID) {
 			case QVTimperativePackage.CONNECTION_ASSIGNMENT__TARGET_VARIABLE:
 				setTargetVariable((ConnectionVariable)newValue);
+				return;
+			case QVTimperativePackage.CONNECTION_ASSIGNMENT__IS_ENFORCEAD_UNQIUE:
+				setIsEnforceadUnqiue((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -149,6 +242,9 @@ public class ConnectionAssignmentImpl extends AssignmentImpl implements Connecti
 			case QVTimperativePackage.CONNECTION_ASSIGNMENT__TARGET_VARIABLE:
 				setTargetVariable((ConnectionVariable)null);
 				return;
+			case QVTimperativePackage.CONNECTION_ASSIGNMENT__IS_ENFORCEAD_UNQIUE:
+				unsetIsEnforceadUnqiue();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -163,6 +259,8 @@ public class ConnectionAssignmentImpl extends AssignmentImpl implements Connecti
 		switch (featureID) {
 			case QVTimperativePackage.CONNECTION_ASSIGNMENT__TARGET_VARIABLE:
 				return targetVariable != null;
+			case QVTimperativePackage.CONNECTION_ASSIGNMENT__IS_ENFORCEAD_UNQIUE:
+				return isSetIsEnforceadUnqiue();
 		}
 		return super.eIsSet(featureID);
 	}

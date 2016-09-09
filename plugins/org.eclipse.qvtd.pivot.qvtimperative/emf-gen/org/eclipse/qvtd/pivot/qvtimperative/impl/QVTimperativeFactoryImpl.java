@@ -28,11 +28,10 @@ import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
-import org.eclipse.qvtd.pivot.qvtimperative.OppositePropertyAssignment;
-import org.eclipse.qvtd.pivot.qvtimperative.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.RealizedVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.VariableAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.VariablePredicate;
 
@@ -92,9 +91,8 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 			case QVTimperativePackage.MAPPING_CALL: return createMappingCall();
 			case QVTimperativePackage.MAPPING_CALL_BINDING: return createMappingCallBinding();
 			case QVTimperativePackage.MAPPING_LOOP: return createMappingLoop();
-			case QVTimperativePackage.OPPOSITE_PROPERTY_ASSIGNMENT: return createOppositePropertyAssignment();
-			case QVTimperativePackage.PROPERTY_ASSIGNMENT: return createPropertyAssignment();
 			case QVTimperativePackage.REALIZED_VARIABLE: return createRealizedVariable();
+			case QVTimperativePackage.SET_STATEMENT: return createSetStatement();
 			case QVTimperativePackage.VARIABLE_ASSIGNMENT: return createVariableAssignment();
 			case QVTimperativePackage.VARIABLE_PREDICATE: return createVariablePredicate();
 			default:
@@ -240,31 +238,20 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 	 * @generated
 	 */
 	@Override
-	public @NonNull OppositePropertyAssignment createOppositePropertyAssignment() {
-		OppositePropertyAssignmentImpl oppositePropertyAssignment = new OppositePropertyAssignmentImpl();
-		return oppositePropertyAssignment;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public @NonNull PropertyAssignment createPropertyAssignment() {
-		PropertyAssignmentImpl propertyAssignment = new PropertyAssignmentImpl();
-		return propertyAssignment;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public @NonNull RealizedVariable createRealizedVariable() {
 		RealizedVariableImpl realizedVariable = new RealizedVariableImpl();
 		return realizedVariable;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public @NonNull SetStatement createSetStatement() {
+		SetStatementImpl setStatement = new SetStatementImpl();
+		return setStatement;
 	}
 
 	/**

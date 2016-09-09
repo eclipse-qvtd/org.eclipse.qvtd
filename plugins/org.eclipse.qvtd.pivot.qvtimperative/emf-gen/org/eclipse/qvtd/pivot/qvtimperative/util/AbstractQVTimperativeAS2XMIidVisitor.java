@@ -54,6 +54,11 @@ public abstract class AbstractQVTimperativeAS2XMIidVisitor
 	}
 
 	@Override
+	public @Nullable Boolean visitBottomStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull BottomStatement object) {
+		return visitStatement(object);
+	}
+
+	@Override
 	public @Nullable Boolean visitConnectionAssignment(org.eclipse.qvtd.pivot.qvtimperative.@NonNull ConnectionAssignment object) {
 		return visitAssignment(object);
 	}
@@ -114,23 +119,13 @@ public abstract class AbstractQVTimperativeAS2XMIidVisitor
 	}
 
 	@Override
-	public @Nullable Boolean visitNavigationAssignment(org.eclipse.qvtd.pivot.qvtimperative.@NonNull NavigationAssignment object) {
-		return visitAssignment(object);
-	}
-
-	@Override
-	public @Nullable Boolean visitOppositePropertyAssignment(org.eclipse.qvtd.pivot.qvtimperative.@NonNull OppositePropertyAssignment object) {
-		return visitNavigationAssignment(object);
-	}
-
-	@Override
-	public @Nullable Boolean visitPropertyAssignment(org.eclipse.qvtd.pivot.qvtimperative.@NonNull PropertyAssignment object) {
-		return visitNavigationAssignment(object);
-	}
-
-	@Override
 	public @Nullable Boolean visitRealizedVariable(org.eclipse.qvtd.pivot.qvtimperative.@NonNull RealizedVariable object) {
 		return visitVariable(object);
+	}
+
+	@Override
+	public @Nullable Boolean visitSetStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull SetStatement object) {
+		return visitBottomStatement(object);
 	}
 
 	@Override

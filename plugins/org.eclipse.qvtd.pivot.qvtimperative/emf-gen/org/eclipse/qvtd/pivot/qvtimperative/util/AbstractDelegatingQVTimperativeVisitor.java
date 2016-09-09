@@ -46,6 +46,11 @@ public abstract class AbstractDelegatingQVTimperativeVisitor<R, C, @NonNull D ex
 	}
 
 	@Override
+	public R visitBottomStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull BottomStatement object) {
+		return delegate.visitBottomStatement(object);
+	}
+
+	@Override
 	public R visitConnectionAssignment(org.eclipse.qvtd.pivot.qvtimperative.@NonNull ConnectionAssignment object) {
 		return delegate.visitConnectionAssignment(object);
 	}
@@ -106,23 +111,13 @@ public abstract class AbstractDelegatingQVTimperativeVisitor<R, C, @NonNull D ex
 	}
 
 	@Override
-	public R visitNavigationAssignment(org.eclipse.qvtd.pivot.qvtimperative.@NonNull NavigationAssignment object) {
-		return delegate.visitNavigationAssignment(object);
-	}
-
-	@Override
-	public R visitOppositePropertyAssignment(org.eclipse.qvtd.pivot.qvtimperative.@NonNull OppositePropertyAssignment object) {
-		return delegate.visitOppositePropertyAssignment(object);
-	}
-
-	@Override
-	public R visitPropertyAssignment(org.eclipse.qvtd.pivot.qvtimperative.@NonNull PropertyAssignment object) {
-		return delegate.visitPropertyAssignment(object);
-	}
-
-	@Override
 	public R visitRealizedVariable(org.eclipse.qvtd.pivot.qvtimperative.@NonNull RealizedVariable object) {
 		return delegate.visitRealizedVariable(object);
+	}
+
+	@Override
+	public R visitSetStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull SetStatement object) {
+		return delegate.visitSetStatement(object);
 	}
 
 	@Override

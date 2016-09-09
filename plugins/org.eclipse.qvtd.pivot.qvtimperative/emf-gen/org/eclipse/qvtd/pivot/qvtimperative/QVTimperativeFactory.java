@@ -139,24 +139,6 @@ public interface QVTimperativeFactory extends EFactory {
 	@NonNull MappingLoop createMappingLoop();
 
 	/**
-	 * Returns a new object of class '<em>Opposite Property Assignment</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Opposite Property Assignment</em>'.
-	 * @generated
-	 */
-	@NonNull OppositePropertyAssignment createOppositePropertyAssignment();
-
-	/**
-	 * Returns a new object of class '<em>Property Assignment</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Property Assignment</em>'.
-	 * @generated
-	 */
-	@NonNull PropertyAssignment createPropertyAssignment();
-
-	/**
 	 * Returns a new object of class '<em>Realized Variable</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -164,6 +146,15 @@ public interface QVTimperativeFactory extends EFactory {
 	 * @generated
 	 */
 	@NonNull RealizedVariable createRealizedVariable();
+
+	/**
+	 * Returns a new object of class '<em>Set Statement</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Set Statement</em>'.
+	 * @generated
+	 */
+	@NonNull SetStatement createSetStatement();
 
 	/**
 	 * Returns a new object of class '<em>Variable Assignment</em>'.
