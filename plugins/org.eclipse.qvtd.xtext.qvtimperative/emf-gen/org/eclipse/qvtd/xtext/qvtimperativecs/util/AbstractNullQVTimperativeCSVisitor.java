@@ -40,17 +40,17 @@ public abstract class AbstractNullQVTimperativeCSVisitor<@Nullable R, C>
 	}	
 
 	@Override
+	public R visitAddStatementCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull AddStatementCS object) {
+		return null;
+	}
+
+	@Override
 	public R visitAreaCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull AreaCS object) {
 		return null;
 	}
 
 	@Override
 	public R visitBottomPatternCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull BottomPatternCS object) {
-		return null;
-	}
-
-	@Override
-	public R visitConnectionStatementCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull ConnectionStatementCS object) {
 		return null;
 	}
 
@@ -95,6 +95,11 @@ public abstract class AbstractNullQVTimperativeCSVisitor<@Nullable R, C>
 	}
 
 	@Override
+	public R visitNewStatementCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull NewStatementCS object) {
+		return null;
+	}
+
+	@Override
 	public R visitParamDeclarationCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull ParamDeclarationCS object) {
 		return null;
 	}
@@ -121,11 +126,6 @@ public abstract class AbstractNullQVTimperativeCSVisitor<@Nullable R, C>
 
 	@Override
 	public R visitRealizeableVariableCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull RealizeableVariableCS object) {
-		return null;
-	}
-
-	@Override
-	public R visitRealizedVariableCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull RealizedVariableCS object) {
 		return null;
 	}
 

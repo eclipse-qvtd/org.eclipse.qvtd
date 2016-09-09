@@ -25,7 +25,6 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.BottomPatternCS#getOwnedRealizedVariables <em>Owned Realized Variables</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.BottomPatternCS#getOwnedConstraints <em>Owned Constraints</em>}</li>
  * </ul>
  *
@@ -34,22 +33,6 @@ import org.eclipse.emf.common.util.EList;
  * @generated
  */
 public interface BottomPatternCS extends PatternCS {
-	/**
-	 * Returns the value of the '<em><b>Owned Realized Variables</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.qvtd.xtext.qvtimperativecs.RealizedVariableCS}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Owned Realized Variables</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Owned Realized Variables</em>' containment reference list.
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getBottomPatternCS_OwnedRealizedVariables()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<RealizedVariableCS> getOwnedRealizedVariables();
-
 	/**
 	 * Returns the value of the '<em><b>Owned Constraints</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.xtext.qvtimperativecs.PredicateOrAssignmentCS}.

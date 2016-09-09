@@ -16,7 +16,26 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.qvtd.xtext.qvtimperativecs.*;
+import org.eclipse.qvtd.xtext.qvtimperativecs.AddStatementCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.BottomPatternCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.DomainCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.GuardPatternCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.MappingLoopCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.NewStatementCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.ParamDeclarationCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.PredicateCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.PredicateOrAssignmentCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSFactory;
+import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage;
+import org.eclipse.qvtd.xtext.qvtimperativecs.QueryCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.SetStatementCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.TopLevelCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.TransformationCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.UnrealizedVariableCS;
 
 /**
  * <!-- begin-user-doc -->
@@ -62,8 +81,8 @@ public class QVTimperativeCSFactoryImpl extends EFactoryImpl implements QVTimper
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
+			case QVTimperativeCSPackage.ADD_STATEMENT_CS: return createAddStatementCS();
 			case QVTimperativeCSPackage.BOTTOM_PATTERN_CS: return createBottomPatternCS();
-			case QVTimperativeCSPackage.CONNECTION_STATEMENT_CS: return createConnectionStatementCS();
 			case QVTimperativeCSPackage.DIRECTION_CS: return createDirectionCS();
 			case QVTimperativeCSPackage.DOMAIN_CS: return createDomainCS();
 			case QVTimperativeCSPackage.GUARD_PATTERN_CS: return createGuardPatternCS();
@@ -75,7 +94,7 @@ public class QVTimperativeCSFactoryImpl extends EFactoryImpl implements QVTimper
 			case QVTimperativeCSPackage.PREDICATE_CS: return createPredicateCS();
 			case QVTimperativeCSPackage.PREDICATE_OR_ASSIGNMENT_CS: return createPredicateOrAssignmentCS();
 			case QVTimperativeCSPackage.QUERY_CS: return createQueryCS();
-			case QVTimperativeCSPackage.REALIZED_VARIABLE_CS: return createRealizedVariableCS();
+			case QVTimperativeCSPackage.NEW_STATEMENT_CS: return createNewStatementCS();
 			case QVTimperativeCSPackage.SET_STATEMENT_CS: return createSetStatementCS();
 			case QVTimperativeCSPackage.TOP_LEVEL_CS: return createTopLevelCS();
 			case QVTimperativeCSPackage.TRANSFORMATION_CS: return createTransformationCS();
@@ -91,9 +110,9 @@ public class QVTimperativeCSFactoryImpl extends EFactoryImpl implements QVTimper
 	 * @generated
 	 */
 	@Override
-	public @NonNull BottomPatternCS createBottomPatternCS() {
-		BottomPatternCSImpl bottomPatternCS = new BottomPatternCSImpl();
-		return bottomPatternCS;
+	public AddStatementCS createAddStatementCS() {
+		AddStatementCSImpl addStatementCS = new AddStatementCSImpl();
+		return addStatementCS;
 	}
 
 	/**
@@ -102,9 +121,9 @@ public class QVTimperativeCSFactoryImpl extends EFactoryImpl implements QVTimper
 	 * @generated
 	 */
 	@Override
-	public @NonNull ConnectionStatementCS createConnectionStatementCS() {
-		ConnectionStatementCSImpl connectionStatementCS = new ConnectionStatementCSImpl();
-		return connectionStatementCS;
+	public @NonNull BottomPatternCS createBottomPatternCS() {
+		BottomPatternCSImpl bottomPatternCS = new BottomPatternCSImpl();
+		return bottomPatternCS;
 	}
 
 	/**
@@ -234,9 +253,9 @@ public class QVTimperativeCSFactoryImpl extends EFactoryImpl implements QVTimper
 	 * @generated
 	 */
 	@Override
-	public @NonNull RealizedVariableCS createRealizedVariableCS() {
-		RealizedVariableCSImpl realizedVariableCS = new RealizedVariableCSImpl();
-		return realizedVariableCS;
+	public @NonNull NewStatementCS createNewStatementCS() {
+		NewStatementCSImpl newStatementCS = new NewStatementCSImpl();
+		return newStatementCS;
 	}
 
 	/**

@@ -27,7 +27,6 @@ import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
 import org.eclipse.qvtd.xtext.qvtimperativecs.BottomPatternCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.PredicateOrAssignmentCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage;
-import org.eclipse.qvtd.xtext.qvtimperativecs.RealizedVariableCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
 
 /**
@@ -38,23 +37,12 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.BottomPatternCSImpl#getOwnedRealizedVariables <em>Owned Realized Variables</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.BottomPatternCSImpl#getOwnedConstraints <em>Owned Constraints</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class BottomPatternCSImpl extends PatternCSImpl implements BottomPatternCS {
-	/**
-	 * The cached value of the '{@link #getOwnedRealizedVariables() <em>Owned Realized Variables</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getOwnedRealizedVariables()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<RealizedVariableCS> ownedRealizedVariables;
-
 	/**
 	 * The cached value of the '{@link #getOwnedConstraints() <em>Owned Constraints</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -90,19 +78,6 @@ public class BottomPatternCSImpl extends PatternCSImpl implements BottomPatternC
 	 * @generated
 	 */
 	@Override
-	public EList<RealizedVariableCS> getOwnedRealizedVariables() {
-		if (ownedRealizedVariables == null) {
-			ownedRealizedVariables = new EObjectContainmentEList<RealizedVariableCS>(RealizedVariableCS.class, this, QVTimperativeCSPackage.BOTTOM_PATTERN_CS__OWNED_REALIZED_VARIABLES);
-		}
-		return ownedRealizedVariables;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EList<PredicateOrAssignmentCS> getOwnedConstraints() {
 		if (ownedConstraints == null) {
 			ownedConstraints = new EObjectContainmentEList<PredicateOrAssignmentCS>(PredicateOrAssignmentCS.class, this, QVTimperativeCSPackage.BOTTOM_PATTERN_CS__OWNED_CONSTRAINTS);
@@ -118,8 +93,6 @@ public class BottomPatternCSImpl extends PatternCSImpl implements BottomPatternC
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.BOTTOM_PATTERN_CS__OWNED_REALIZED_VARIABLES:
-				return ((InternalEList<?>)getOwnedRealizedVariables()).basicRemove(otherEnd, msgs);
 			case QVTimperativeCSPackage.BOTTOM_PATTERN_CS__OWNED_CONSTRAINTS:
 				return ((InternalEList<?>)getOwnedConstraints()).basicRemove(otherEnd, msgs);
 		}
@@ -134,8 +107,6 @@ public class BottomPatternCSImpl extends PatternCSImpl implements BottomPatternC
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.BOTTOM_PATTERN_CS__OWNED_REALIZED_VARIABLES:
-				return getOwnedRealizedVariables();
 			case QVTimperativeCSPackage.BOTTOM_PATTERN_CS__OWNED_CONSTRAINTS:
 				return getOwnedConstraints();
 		}
@@ -151,10 +122,6 @@ public class BottomPatternCSImpl extends PatternCSImpl implements BottomPatternC
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.BOTTOM_PATTERN_CS__OWNED_REALIZED_VARIABLES:
-				getOwnedRealizedVariables().clear();
-				getOwnedRealizedVariables().addAll((Collection<? extends RealizedVariableCS>)newValue);
-				return;
 			case QVTimperativeCSPackage.BOTTOM_PATTERN_CS__OWNED_CONSTRAINTS:
 				getOwnedConstraints().clear();
 				getOwnedConstraints().addAll((Collection<? extends PredicateOrAssignmentCS>)newValue);
@@ -171,9 +138,6 @@ public class BottomPatternCSImpl extends PatternCSImpl implements BottomPatternC
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.BOTTOM_PATTERN_CS__OWNED_REALIZED_VARIABLES:
-				getOwnedRealizedVariables().clear();
-				return;
 			case QVTimperativeCSPackage.BOTTOM_PATTERN_CS__OWNED_CONSTRAINTS:
 				getOwnedConstraints().clear();
 				return;
@@ -189,8 +153,6 @@ public class BottomPatternCSImpl extends PatternCSImpl implements BottomPatternC
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.BOTTOM_PATTERN_CS__OWNED_REALIZED_VARIABLES:
-				return ownedRealizedVariables != null && !ownedRealizedVariables.isEmpty();
 			case QVTimperativeCSPackage.BOTTOM_PATTERN_CS__OWNED_CONSTRAINTS:
 				return ownedConstraints != null && !ownedConstraints.isEmpty();
 		}

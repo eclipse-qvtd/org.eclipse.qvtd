@@ -21,9 +21,9 @@ import org.eclipse.ocl.xtext.essentialoclcs.EssentialOCLCSPackage;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.xtext.qvtbasecs.QVTbaseCSPackage;
+import org.eclipse.qvtd.xtext.qvtimperativecs.AddStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.AreaCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.BottomPatternCS;
-import org.eclipse.qvtd.xtext.qvtimperativecs.ConnectionStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DomainCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.GuardPatternCS;
@@ -32,6 +32,7 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingLoopCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingStatementCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.NewStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.ParamDeclarationCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.PatternCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.PredicateCS;
@@ -40,7 +41,6 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSFactory;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QueryCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.RealizeableVariableCS;
-import org.eclipse.qvtd.xtext.qvtimperativecs.RealizedVariableCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.SetStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.StatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.TopLevelCS;
@@ -59,6 +59,13 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass addStatementCSEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass areaCSEClass = null;
 
 	/**
@@ -67,13 +74,6 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	 * @generated
 	 */
 	private EClass bottomPatternCSEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass connectionStatementCSEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -178,7 +178,7 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass realizedVariableCSEClass = null;
+	private EClass newStatementCSEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -243,7 +243,7 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link QVTimperativeCSPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -276,10 +276,40 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		// Mark meta-data to indicate it can't be changed
 		theQVTimperativeCSPackage.freeze();
 
-  
+
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(QVTimperativeCSPackage.eNS_URI, theQVTimperativeCSPackage);
 		return theQVTimperativeCSPackage;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getAddStatementCS() {
+		return addStatementCSEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getAddStatementCS_OwnedExpression() {
+		return (EReference)addStatementCSEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getAddStatementCS_TargetVariable() {
+		return (EReference)addStatementCSEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -328,48 +358,8 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	 * @generated
 	 */
 	@Override
-	public EReference getBottomPatternCS_OwnedRealizedVariables() {
-		return (EReference)bottomPatternCSEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EReference getBottomPatternCS_OwnedConstraints() {
-		return (EReference)bottomPatternCSEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getConnectionStatementCS() {
-		return connectionStatementCSEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getConnectionStatementCS_OwnedExpression() {
-		return (EReference)connectionStatementCSEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getConnectionStatementCS_TargetVariable() {
-		return (EReference)connectionStatementCSEClass.getEStructuralFeatures().get(1);
+		return (EReference)bottomPatternCSEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -868,8 +858,8 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	 * @generated
 	 */
 	@Override
-	public EClass getRealizedVariableCS() {
-		return realizedVariableCSEClass;
+	public EClass getNewStatementCS() {
+		return newStatementCSEClass;
 	}
 
 	/**
@@ -878,8 +868,18 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	 * @generated
 	 */
 	@Override
-	public EReference getRealizedVariableCS_OwnedInitExpression() {
-		return (EReference)realizedVariableCSEClass.getEStructuralFeatures().get(0);
+	public EReference getNewStatementCS_OwnedInitExpression() {
+		return (EReference)newStatementCSEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getNewStatementCS_ReferredTypedModel() {
+		return (EReference)newStatementCSEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1051,17 +1051,16 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		isCreated = true;
 
 		// Create classes and their features
+		addStatementCSEClass = createEClass(ADD_STATEMENT_CS);
+		createEReference(addStatementCSEClass, ADD_STATEMENT_CS__OWNED_EXPRESSION);
+		createEReference(addStatementCSEClass, ADD_STATEMENT_CS__TARGET_VARIABLE);
+
 		areaCSEClass = createEClass(AREA_CS);
 		createEReference(areaCSEClass, AREA_CS__OWNED_GUARD_PATTERN);
 		createEReference(areaCSEClass, AREA_CS__OWNED_BOTTOM_PATTERN);
 
 		bottomPatternCSEClass = createEClass(BOTTOM_PATTERN_CS);
-		createEReference(bottomPatternCSEClass, BOTTOM_PATTERN_CS__OWNED_REALIZED_VARIABLES);
 		createEReference(bottomPatternCSEClass, BOTTOM_PATTERN_CS__OWNED_CONSTRAINTS);
-
-		connectionStatementCSEClass = createEClass(CONNECTION_STATEMENT_CS);
-		createEReference(connectionStatementCSEClass, CONNECTION_STATEMENT_CS__OWNED_EXPRESSION);
-		createEReference(connectionStatementCSEClass, CONNECTION_STATEMENT_CS__TARGET_VARIABLE);
 
 		directionCSEClass = createEClass(DIRECTION_CS);
 		createEReference(directionCSEClass, DIRECTION_CS__IMPORTS);
@@ -1126,8 +1125,9 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 
 		realizeableVariableCSEClass = createEClass(REALIZEABLE_VARIABLE_CS);
 
-		realizedVariableCSEClass = createEClass(REALIZED_VARIABLE_CS);
-		createEReference(realizedVariableCSEClass, REALIZED_VARIABLE_CS__OWNED_INIT_EXPRESSION);
+		newStatementCSEClass = createEClass(NEW_STATEMENT_CS);
+		createEReference(newStatementCSEClass, NEW_STATEMENT_CS__OWNED_INIT_EXPRESSION);
+		createEReference(newStatementCSEClass, NEW_STATEMENT_CS__REFERRED_TYPED_MODEL);
 
 		setStatementCSEClass = createEClass(SET_STATEMENT_CS);
 		createEReference(setStatementCSEClass, SET_STATEMENT_CS__REFERRED_PROPERTY);
@@ -1173,9 +1173,9 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		setNsURI(eNS_URI);
 
 		// Obtain other dependent packages
-		BaseCSPackage theBaseCSPackage = (BaseCSPackage)EPackage.Registry.INSTANCE.getEPackage(BaseCSPackage.eNS_URI);
 		EssentialOCLCSPackage theEssentialOCLCSPackage = (EssentialOCLCSPackage)EPackage.Registry.INSTANCE.getEPackage(EssentialOCLCSPackage.eNS_URI);
 		PivotPackage thePivotPackage = (PivotPackage)EPackage.Registry.INSTANCE.getEPackage(PivotPackage.eNS_URI);
+		BaseCSPackage theBaseCSPackage = (BaseCSPackage)EPackage.Registry.INSTANCE.getEPackage(BaseCSPackage.eNS_URI);
 		QVTimperativePackage theQVTimperativePackage = (QVTimperativePackage)EPackage.Registry.INSTANCE.getEPackage(QVTimperativePackage.eNS_URI);
 		QVTbasePackage theQVTbasePackage = (QVTbasePackage)EPackage.Registry.INSTANCE.getEPackage(QVTbasePackage.eNS_URI);
 		QVTbaseCSPackage theQVTbaseCSPackage = (QVTbaseCSPackage)EPackage.Registry.INSTANCE.getEPackage(QVTbaseCSPackage.eNS_URI);
@@ -1185,9 +1185,9 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
+		addStatementCSEClass.getESuperTypes().add(this.getMappingStatementCS());
 		areaCSEClass.getESuperTypes().add(theBaseCSPackage.getNamedElementCS());
 		bottomPatternCSEClass.getESuperTypes().add(this.getPatternCS());
-		connectionStatementCSEClass.getESuperTypes().add(this.getMappingStatementCS());
 		directionCSEClass.getESuperTypes().add(theBaseCSPackage.getNamedElementCS());
 		domainCSEClass.getESuperTypes().add(this.getAreaCS());
 		guardPatternCSEClass.getESuperTypes().add(this.getPatternCS());
@@ -1202,7 +1202,8 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		predicateOrAssignmentCSEClass.getESuperTypes().add(theEssentialOCLCSPackage.getExpCS());
 		queryCSEClass.getESuperTypes().add(theBaseCSPackage.getTypedElementCS());
 		realizeableVariableCSEClass.getESuperTypes().add(theBaseCSPackage.getTypedElementCS());
-		realizedVariableCSEClass.getESuperTypes().add(this.getRealizeableVariableCS());
+		newStatementCSEClass.getESuperTypes().add(theBaseCSPackage.getTypedElementCS());
+		newStatementCSEClass.getESuperTypes().add(this.getStatementCS());
 		setStatementCSEClass.getESuperTypes().add(this.getStatementCS());
 		statementCSEClass.getESuperTypes().add(theBaseCSPackage.getModelElementCS());
 		topLevelCSEClass.getESuperTypes().add(theBaseCSPackage.getRootPackageCS());
@@ -1210,17 +1211,16 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		unrealizedVariableCSEClass.getESuperTypes().add(this.getRealizeableVariableCS());
 
 		// Initialize classes and features; add operations and parameters
+		initEClass(addStatementCSEClass, AddStatementCS.class, "AddStatementCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getAddStatementCS_OwnedExpression(), theEssentialOCLCSPackage.getExpCS(), null, "ownedExpression", null, 0, 1, AddStatementCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAddStatementCS_TargetVariable(), thePivotPackage.getVariable(), null, "targetVariable", null, 1, 1, AddStatementCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		initEClass(areaCSEClass, AreaCS.class, "AreaCS", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAreaCS_OwnedGuardPattern(), this.getGuardPatternCS(), null, "ownedGuardPattern", null, 0, 1, AreaCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAreaCS_OwnedBottomPattern(), this.getBottomPatternCS(), null, "ownedBottomPattern", null, 0, 1, AreaCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(bottomPatternCSEClass, BottomPatternCS.class, "BottomPatternCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getBottomPatternCS_OwnedRealizedVariables(), this.getRealizedVariableCS(), null, "ownedRealizedVariables", null, 0, -1, BottomPatternCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getBottomPatternCS_OwnedConstraints(), this.getPredicateOrAssignmentCS(), null, "ownedConstraints", null, 0, -1, BottomPatternCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(connectionStatementCSEClass, ConnectionStatementCS.class, "ConnectionStatementCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getConnectionStatementCS_OwnedExpression(), theEssentialOCLCSPackage.getExpCS(), null, "ownedExpression", null, 0, 1, ConnectionStatementCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getConnectionStatementCS_TargetVariable(), thePivotPackage.getVariable(), null, "targetVariable", null, 1, 1, ConnectionStatementCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(directionCSEClass, DirectionCS.class, "DirectionCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getDirectionCS_Imports(), thePivotPackage.getPackage(), null, "imports", null, 0, -1, DirectionCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1285,8 +1285,9 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 
 		initEClass(realizeableVariableCSEClass, RealizeableVariableCS.class, "RealizeableVariableCS", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(realizedVariableCSEClass, RealizedVariableCS.class, "RealizedVariableCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getRealizedVariableCS_OwnedInitExpression(), theEssentialOCLCSPackage.getExpCS(), null, "ownedInitExpression", null, 0, 1, RealizedVariableCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(newStatementCSEClass, NewStatementCS.class, "NewStatementCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getNewStatementCS_OwnedInitExpression(), theEssentialOCLCSPackage.getExpCS(), null, "ownedInitExpression", null, 0, 1, NewStatementCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getNewStatementCS_ReferredTypedModel(), theQVTbasePackage.getTypedModel(), null, "referredTypedModel", null, 1, 1, NewStatementCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(setStatementCSEClass, SetStatementCS.class, "SetStatementCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSetStatementCS_ReferredProperty(), thePivotPackage.getProperty(), null, "referredProperty", null, 1, 1, SetStatementCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

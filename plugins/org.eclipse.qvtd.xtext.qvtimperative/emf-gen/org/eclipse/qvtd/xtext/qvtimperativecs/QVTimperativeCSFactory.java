@@ -31,6 +31,15 @@ public interface QVTimperativeCSFactory extends EFactory {
 	QVTimperativeCSFactory eINSTANCE = org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSFactoryImpl.init();
 
 	/**
+	 * Returns a new object of class '<em>Add Statement CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Add Statement CS</em>'.
+	 * @generated
+	 */
+	AddStatementCS createAddStatementCS();
+
+	/**
 	 * Returns a new object of class '<em>Bottom Pattern CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -38,15 +47,6 @@ public interface QVTimperativeCSFactory extends EFactory {
 	 * @generated
 	 */
 	@NonNull BottomPatternCS createBottomPatternCS();
-
-	/**
-	 * Returns a new object of class '<em>Connection Statement CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Connection Statement CS</em>'.
-	 * @generated
-	 */
-	@NonNull ConnectionStatementCS createConnectionStatementCS();
 
 	/**
 	 * Returns a new object of class '<em>Direction CS</em>'.
@@ -148,13 +148,13 @@ public interface QVTimperativeCSFactory extends EFactory {
 	@NonNull QueryCS createQueryCS();
 
 	/**
-	 * Returns a new object of class '<em>Realized Variable CS</em>'.
+	 * Returns a new object of class '<em>New Statement CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Realized Variable CS</em>'.
+	 * @return a new object of class '<em>New Statement CS</em>'.
 	 * @generated
 	 */
-	@NonNull RealizedVariableCS createRealizedVariableCS();
+	@NonNull NewStatementCS createNewStatementCS();
 
 	/**
 	 * Returns a new object of class '<em>Set Statement CS</em>'.

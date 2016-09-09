@@ -36,6 +36,11 @@ public abstract class AbstractDelegatingQVTimperativeCSVisitor<R, C, @NonNull D 
 	}
 
 	@Override
+	public R visitAddStatementCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull AddStatementCS object) {
+		return delegate.visitAddStatementCS(object);
+	}
+
+	@Override
 	public R visitAreaCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull AreaCS object) {
 		return delegate.visitAreaCS(object);
 	}
@@ -43,11 +48,6 @@ public abstract class AbstractDelegatingQVTimperativeCSVisitor<R, C, @NonNull D 
 	@Override
 	public R visitBottomPatternCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull BottomPatternCS object) {
 		return delegate.visitBottomPatternCS(object);
-	}
-
-	@Override
-	public R visitConnectionStatementCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull ConnectionStatementCS object) {
-		return delegate.visitConnectionStatementCS(object);
 	}
 
 	@Override
@@ -91,6 +91,11 @@ public abstract class AbstractDelegatingQVTimperativeCSVisitor<R, C, @NonNull D 
 	}
 
 	@Override
+	public R visitNewStatementCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull NewStatementCS object) {
+		return delegate.visitNewStatementCS(object);
+	}
+
+	@Override
 	public R visitParamDeclarationCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull ParamDeclarationCS object) {
 		return delegate.visitParamDeclarationCS(object);
 	}
@@ -118,11 +123,6 @@ public abstract class AbstractDelegatingQVTimperativeCSVisitor<R, C, @NonNull D 
 	@Override
 	public R visitRealizeableVariableCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull RealizeableVariableCS object) {
 		return delegate.visitRealizeableVariableCS(object);
-	}
-
-	@Override
-	public R visitRealizedVariableCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull RealizedVariableCS object) {
-		return delegate.visitRealizedVariableCS(object);
 	}
 
 	@Override

@@ -89,6 +89,19 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
+			case QVTimperativeCSPackage.ADD_STATEMENT_CS: {
+				AddStatementCS addStatementCS = (AddStatementCS)theEObject;
+				T result = caseAddStatementCS(addStatementCS);
+				if (result == null) result = caseMappingStatementCS(addStatementCS);
+				if (result == null) result = caseStatementCS(addStatementCS);
+				if (result == null) result = caseModelElementCS(addStatementCS);
+				if (result == null) result = casePivotableElementCS(addStatementCS);
+				if (result == null) result = caseElementCS(addStatementCS);
+				if (result == null) result = casePivotable(addStatementCS);
+				if (result == null) result = caseVisitableCS(addStatementCS);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case QVTimperativeCSPackage.AREA_CS: {
 				AreaCS areaCS = (AreaCS)theEObject;
 				T result = caseAreaCS(areaCS);
@@ -111,19 +124,6 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = caseElementCS(bottomPatternCS);
 				if (result == null) result = casePivotable(bottomPatternCS);
 				if (result == null) result = caseVisitableCS(bottomPatternCS);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case QVTimperativeCSPackage.CONNECTION_STATEMENT_CS: {
-				ConnectionStatementCS connectionStatementCS = (ConnectionStatementCS)theEObject;
-				T result = caseConnectionStatementCS(connectionStatementCS);
-				if (result == null) result = caseMappingStatementCS(connectionStatementCS);
-				if (result == null) result = caseStatementCS(connectionStatementCS);
-				if (result == null) result = caseModelElementCS(connectionStatementCS);
-				if (result == null) result = casePivotableElementCS(connectionStatementCS);
-				if (result == null) result = caseElementCS(connectionStatementCS);
-				if (result == null) result = casePivotable(connectionStatementCS);
-				if (result == null) result = caseVisitableCS(connectionStatementCS);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -306,18 +306,18 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTimperativeCSPackage.REALIZED_VARIABLE_CS: {
-				RealizedVariableCS realizedVariableCS = (RealizedVariableCS)theEObject;
-				T result = caseRealizedVariableCS(realizedVariableCS);
-				if (result == null) result = caseRealizeableVariableCS(realizedVariableCS);
-				if (result == null) result = caseTypedElementCS(realizedVariableCS);
-				if (result == null) result = caseNamedElementCS(realizedVariableCS);
-				if (result == null) result = caseModelElementCS(realizedVariableCS);
-				if (result == null) result = caseNameable(realizedVariableCS);
-				if (result == null) result = casePivotableElementCS(realizedVariableCS);
-				if (result == null) result = caseElementCS(realizedVariableCS);
-				if (result == null) result = casePivotable(realizedVariableCS);
-				if (result == null) result = caseVisitableCS(realizedVariableCS);
+			case QVTimperativeCSPackage.NEW_STATEMENT_CS: {
+				NewStatementCS newStatementCS = (NewStatementCS)theEObject;
+				T result = caseNewStatementCS(newStatementCS);
+				if (result == null) result = caseTypedElementCS(newStatementCS);
+				if (result == null) result = caseStatementCS(newStatementCS);
+				if (result == null) result = caseNamedElementCS(newStatementCS);
+				if (result == null) result = caseModelElementCS(newStatementCS);
+				if (result == null) result = caseNameable(newStatementCS);
+				if (result == null) result = casePivotableElementCS(newStatementCS);
+				if (result == null) result = caseElementCS(newStatementCS);
+				if (result == null) result = casePivotable(newStatementCS);
+				if (result == null) result = caseVisitableCS(newStatementCS);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -395,6 +395,21 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Add Statement CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Add Statement CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAddStatementCS(AddStatementCS object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Area CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -421,21 +436,6 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseBottomPatternCS(BottomPatternCS object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Connection Statement CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Connection Statement CS</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseConnectionStatementCS(ConnectionStatementCS object) {
 		return null;
 	}
 
@@ -650,17 +650,17 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Realized Variable CS</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>New Statement CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Realized Variable CS</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>New Statement CS</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseRealizedVariableCS(RealizedVariableCS object) {
+	public T caseNewStatementCS(NewStatementCS object) {
 		return null;
 	}
 

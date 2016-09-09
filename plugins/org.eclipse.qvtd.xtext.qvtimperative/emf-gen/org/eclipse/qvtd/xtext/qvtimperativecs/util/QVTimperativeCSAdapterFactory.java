@@ -90,16 +90,16 @@ public class QVTimperativeCSAdapterFactory extends AdapterFactoryImpl {
 	protected QVTimperativeCSSwitch<@Nullable Adapter> modelSwitch =
 		new QVTimperativeCSSwitch<@Nullable Adapter>() {
 			@Override
+			public Adapter caseAddStatementCS(AddStatementCS object) {
+				return createAddStatementCSAdapter();
+			}
+			@Override
 			public Adapter caseAreaCS(AreaCS object) {
 				return createAreaCSAdapter();
 			}
 			@Override
 			public Adapter caseBottomPatternCS(BottomPatternCS object) {
 				return createBottomPatternCSAdapter();
-			}
-			@Override
-			public Adapter caseConnectionStatementCS(ConnectionStatementCS object) {
-				return createConnectionStatementCSAdapter();
 			}
 			@Override
 			public Adapter caseDirectionCS(DirectionCS object) {
@@ -158,8 +158,8 @@ public class QVTimperativeCSAdapterFactory extends AdapterFactoryImpl {
 				return createRealizeableVariableCSAdapter();
 			}
 			@Override
-			public Adapter caseRealizedVariableCS(RealizedVariableCS object) {
-				return createRealizedVariableCSAdapter();
+			public Adapter caseNewStatementCS(NewStatementCS object) {
+				return createNewStatementCSAdapter();
 			}
 			@Override
 			public Adapter caseSetStatementCS(SetStatementCS object) {
@@ -266,16 +266,16 @@ public class QVTimperativeCSAdapterFactory extends AdapterFactoryImpl {
 
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.ConnectionStatementCS <em>Connection Statement CS</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.AddStatementCS <em>Add Statement CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.ConnectionStatementCS
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.AddStatementCS
 	 * @generated
 	 */
-	public Adapter createConnectionStatementCSAdapter() {
+	public Adapter createAddStatementCSAdapter() {
 		return null;
 	}
 
@@ -616,16 +616,16 @@ public class QVTimperativeCSAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.RealizedVariableCS <em>Realized Variable CS</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.NewStatementCS <em>New Statement CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.RealizedVariableCS
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.NewStatementCS
 	 * @generated
 	 */
-	public Adapter createRealizedVariableCSAdapter() {
+	public Adapter createNewStatementCSAdapter() {
 		return null;
 	}
 
