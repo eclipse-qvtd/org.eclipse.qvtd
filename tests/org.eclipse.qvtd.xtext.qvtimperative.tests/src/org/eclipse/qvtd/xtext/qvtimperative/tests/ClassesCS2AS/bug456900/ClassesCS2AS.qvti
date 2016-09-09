@@ -13,9 +13,7 @@ map mCreationRootCS2Root in classescs2as
 	enforce rightAS() {
 		realize root : Root
 	}
-	where () {
-		rootCS.ast := root;
-	}
+	set rootCS.ast := root;
 }
 
 map mCreationPackageCS2Package in classescs2as
@@ -24,29 +22,31 @@ map mCreationPackageCS2Package in classescs2as
 	enforce rightAS() {
 		realize _'package' : Package
 	}
-	where () {
-		packageCS.ast := _'package';
-	}
+	set packageCS.ast := _'package';
 }
 
 
 map uPackage_name in classescs2as
 {
 	check leftCS(packageCS : PackageCS) {}
-	enforce rightAS() {}
-	where () {
-		packageCS.ast.oclAsType(classes::Package).name := packageCS.name;
+	enforce rightAS() {
+		l1 : classes::Package
 	}
+	where () {
+		l1 := packageCS.ast.oclAsType(classes::Package);
+	}
+	set l1.name := packageCS.name;
 }
 
 map uRoot_ownedPackages in classescs2as
 {
 	check leftCS(rootCS : RootCS) {}
-	enforce rightAS() {}
+	enforce rightAS() {z1 : classes::Root}
 	where () {
-		rootCS.ast.oclAsType(classes::Root).ownedPackages :=
-		rootCS.ownedPackages.ast.oclAsType(classes::Package)->asOrderedSet();
+		z1 := rootCS.ast.oclAsType(classes::Root);
 	}
+	set z1.ownedPackages :=
+		rootCS.ownedPackages.ast.oclAsType(classes::Package)->asOrderedSet();
 }
 map __root__ in classescs2as
 {

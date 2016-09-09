@@ -16,7 +16,5 @@ map ep2ep in Constructors {
 		realize epOut1 : EPackage := this.createEPackage(epIn.name),
 		realize epOut2 : EPackage
 	}
-    where () {
-    	epOut2.name := epIn.name;
-    }
+    set epOut2.name := epIn.name;
 }

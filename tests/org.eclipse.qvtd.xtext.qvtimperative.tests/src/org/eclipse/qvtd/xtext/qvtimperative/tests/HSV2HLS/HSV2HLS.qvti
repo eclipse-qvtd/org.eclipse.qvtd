@@ -34,18 +34,17 @@ map HSV2MiddleRoot in hsv2hls {	-- Mapping root nodes L to M
 	}
 	where(
 		hsvRoot.parent = null;
-	) {
-		middleRoot.hsv := hsvRoot;
-		middleRoot.name := hsvRoot.name;
-		--middleRoot.rgb := hsv2rgb(hsvRoot.hsv);
-	}
+	) {}
+	set middleRoot.hsv := hsvRoot;
+	set middleRoot.name := hsvRoot.name;
+	-- set middleRoot.rgb := hsv2rgb(hsvRoot.hsv);
 	for hsvChild in hsvRoot.children {		-- recursive call to visit children
 		call HSV2MiddleRecursion {
 			hsvNode := hsvChild;
 			middleParent := middleRoot;
 		}
 	}
-	call Middle2HLSRoot {		-- invoke middle to output mapping
+	call Middle2HLSRoot {		-- invoke middle to outset mapping
 		middleNode := middleRoot;
 	}
 }
@@ -55,12 +54,11 @@ map HSV2MiddleRecursion in hsv2hls { -- Mapping child nodes L to M
 	enforce middle(middleParent : HSVNode2HLSNode) {
 		realize middleNode : HSVNode2HLSNode
 	}
-	where() {
-		middleNode.parent := middleParent;
-		middleNode.hsv := hsvNode;
-		middleNode.name := hsvNode.name;
-		--middleNode.rgb := hsv2rgb(hsvNode.hsv);
-	}
+	where() {}
+	set middleNode.parent := middleParent;
+	set middleNode.hsv := hsvNode;
+	set middleNode.name := hsvNode.name;
+	-- set middleNode.rgb := hsv2rgb(hsvNode.hsv);
 	for hsvChild in hsvNode.children {		-- recursive call to visit children
 		call HSV2MiddleRecursion {
 			hsvNode := hsvChild;
@@ -74,12 +72,11 @@ map Middle2HLSRoot in hsv2hls { -- Mapping root nodes M to R
 	enforce hls() {
 		realize hlsNode : HLSNode
 	}
-	where() {
-		hlsNode.parent := null;
-		middleNode.hls := hlsNode;
-		hlsNode.name := middleNode.name;
-		--hlsNode.hls := rgb2hls(middleNode.rgb);
-	}
+	where() {}
+	set hlsNode.parent := null;
+	set middleNode.hls := hlsNode;
+	set hlsNode.name := middleNode.name;
+	-- set hlsNode.hls := rgb2hls(middleNode.rgb);
 	for middleChild in middleNode.children {		-- recursive call to visit children
 		call Middle2HLSRecursion {
 			middleNode := middleChild;
@@ -92,12 +89,11 @@ map Middle2HLSRecursion in hsv2hls { -- Mapping child nodes M to R
 	enforce hls() {
 		realize hlsNode : HLSNode
 	}
-	where() {
-		hlsNode.parent := middleNode.parent.hls;
-		middleNode.hls := hlsNode;
-		hlsNode.name := middleNode.name;
-		--hlsNode.hls := rgb2hls(middleNode.rgb);
-	}
+	where() {}
+	set hlsNode.parent := middleNode.parent.hls;
+	set middleNode.hls := hlsNode;
+	set hlsNode.name := middleNode.name;
+	-- set hlsNode.hls := rgb2hls(middleNode.rgb);
 	for middleChild in middleNode.children {		-- recursive call to visit children
 		call Middle2HLSRecursion {
 			middleNode := middleChild;

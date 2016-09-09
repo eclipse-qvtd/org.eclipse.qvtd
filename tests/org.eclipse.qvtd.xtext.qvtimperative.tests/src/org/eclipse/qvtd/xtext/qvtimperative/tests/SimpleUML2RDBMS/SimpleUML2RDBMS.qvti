@@ -18,10 +18,8 @@ map packageToSchema_LM in simpleUML2RDBMS::SimpleUML2RDBMS
 	enforce middle() {
 		realize p2s : PackageToSchema
 	}
-	where () {
-		p2s.umlPackage := p;
-		p2s.name := p.name;
-	}
+	set p2s.umlPackage := p;
+	set p2s.name := p.name;
 }
 
 map packageToSchema_MR in simpleUML2RDBMS::SimpleUML2RDBMS
@@ -30,10 +28,8 @@ map packageToSchema_MR in simpleUML2RDBMS::SimpleUML2RDBMS
 		realize s : Schema
 	}
 	check middle(p2s : PackageToSchema) {}
-	where () {
-		s.name := p2s.name;
-		p2s.schema := s;
-	}
+	set s.name := p2s.name;
+	set p2s.schema := s;
 }
 
 map integerToNumber_LM in simpleUML2RDBMS::SimpleUML2RDBMS
@@ -45,11 +41,10 @@ map integerToNumber_LM in simpleUML2RDBMS::SimpleUML2RDBMS
 	}
 	where (p2s.umlPackage = p;
 		prim.namespace = p;
-		prim.name = 'Integer';) {
-		p2n.owner := p2s;
-		p2n._'primitive' := prim;
-		p2n.name := prim.name + '2' + 'NUMBER';
-	}
+		prim.name = 'Integer';) {}
+	set p2n.owner := p2s;
+	set p2n._'primitive' := prim;
+	set p2n.name := prim.name + '2' + 'NUMBER';
 }
 
 map integerToNumber_MR in simpleUML2RDBMS::SimpleUML2RDBMS
@@ -59,9 +54,8 @@ map integerToNumber_MR in simpleUML2RDBMS::SimpleUML2RDBMS
 		p2n : IntegerToNumber) {}
 	where (p2n.owner = p2s;) {
 		sqlType : String := 'NUMBER'
-	|
-		p2n.typeName := sqlType;
 	}
+	set p2n.typeName := sqlType;
 }
 
 map booleanToBoolean_MR in simpleUML2RDBMS::SimpleUML2RDBMS
@@ -72,9 +66,9 @@ map booleanToBoolean_MR in simpleUML2RDBMS::SimpleUML2RDBMS
 	where (p2n.owner = p2s;) {
 		sqlType : String
 	|
-		p2n.typeName := sqlType;
 		sqlType := 'BOOLEAN';
 	}
+	set p2n.typeName := sqlType;
 }
 
 map booleanToBoolean_LM in simpleUML2RDBMS::SimpleUML2RDBMS
@@ -86,11 +80,10 @@ map booleanToBoolean_LM in simpleUML2RDBMS::SimpleUML2RDBMS
 	}
 	where (p2s.umlPackage = p;
 		prim.namespace = p;
-		prim.name = 'Boolean';) {
-		p2n._'primitive' := prim;
-		p2n.name := prim.name + '2' + 'BOOLEAN';
-		p2n.owner := p2s;
-	}
+		prim.name = 'Boolean';) {}
+	set p2n._'primitive' := prim;
+	set p2n.name := prim.name + '2' + 'BOOLEAN';
+	set p2n.owner := p2s;
 }
 
 map stringToVarchar_MR in simpleUML2RDBMS::SimpleUML2RDBMS
@@ -100,9 +93,8 @@ map stringToVarchar_MR in simpleUML2RDBMS::SimpleUML2RDBMS
 		p2n : StringToVarchar) {}
 	where (p2n.owner = p2s;) {
 		sqlType : String := 'VARCHAR'
-	|
-		p2n.typeName := sqlType;
-	}
+	|}
+	set p2n.typeName := sqlType;
 }
 
 map stringToVarchar_LM in simpleUML2RDBMS::SimpleUML2RDBMS
@@ -114,11 +106,10 @@ map stringToVarchar_LM in simpleUML2RDBMS::SimpleUML2RDBMS
 	}
 	where (p2s.umlPackage = p;
 		prim.namespace = p;
-		prim.name = 'String';) {
-		p2n.name := prim.name + '2' + 'VARCHAR';
-		p2n.owner := p2s;
-		p2n._'primitive' := prim;
-	}
+		prim.name = 'String';) {}
+	set p2n.name := prim.name + '2' + 'VARCHAR';
+	set p2n.owner := p2s;
+	set p2n._'primitive' := prim;
 }
 
 map classToTable_MR in simpleUML2RDBMS::SimpleUML2RDBMS
@@ -132,21 +123,20 @@ map classToTable_MR in simpleUML2RDBMS::SimpleUML2RDBMS
 		c2t : ClassToTable) {}
 	where (p2s.schema = s;
 		c2t.owner = p2s;) {
-		c2t_name : String[?] := c2t.name |
-		c2t.table := t;
-		t.name := c2t_name;
-		c2t.primaryKey := pk;
-		c2t.column := pc;
-		default t.kind := 'base';
-		t.schema := s;
-		pk.owner := t;
-		pk.kind := 'primary';
-		pc.owner := t;
-		default pc.keys := OrderedSet(simplerdbms::Key){pk};
-		default pc.type := 'NUMBER';
-		pc.name := c2t_name + '_tid';
-		pk.name := c2t_name + '_pk';
-	}
+		c2t_name : String[?] := c2t.name |}
+	set c2t.table := t;
+	set t.name := c2t_name;
+	set c2t.primaryKey := pk;
+	set c2t.column := pc;
+	set t.kind := 'base';
+	set t.schema := s;
+	set pk.owner := t;
+	set pk.kind := 'primary';
+	set pc.owner := t;
+	set pc.keys := OrderedSet(simplerdbms::Key){pk};
+	set pc.type := 'NUMBER';
+	set pc.name := c2t_name + '_tid';
+	set pk.name := c2t_name + '_pk';
 }
 
 map classToTable_LM in simpleUML2RDBMS::SimpleUML2RDBMS
@@ -158,11 +148,10 @@ map classToTable_LM in simpleUML2RDBMS::SimpleUML2RDBMS
 	}
 	where (p2s.umlPackage = p;
 		c.kind = 'persistent';
-		c.namespace = p;) {
-		c2t.owner := p2s;
-		c2t.name := c.name;
-		c2t.umlClass := c;
-	}
+		c.namespace = p;) {}
+	set c2t.owner := p2s;
+	set c2t.name := c.name;
+	set c2t.umlClass := c;
 }
 
 map associationToForeignKey_MR in simpleUML2RDBMS::SimpleUML2RDBMS
@@ -186,17 +175,16 @@ map associationToForeignKey_MR in simpleUML2RDBMS::SimpleUML2RDBMS
 		a2f.owner = sc2t;
 		rk.kind = 'primary';
 		rk.owner = dt;
-		st.schema = s;) {
-		fk.name := a2f.name;
-		a2f.foreignKey := fk;
-		fc.type := rk.column->first().type;
-		fc.name := a2f.name + '_tid';
-		a2f.column := fc;
-		fk.owner := st;
-		fc.owner := st;
-		fk.refersTo := rk;
-		default fc.foreignKeys := OrderedSet(simplerdbms::ForeignKey){fk};
-	}
+		st.schema = s;) {}
+	set fk.name := a2f.name;
+	set a2f.foreignKey := fk;
+	set fc.type := rk.column->first().type;
+	set fc.name := a2f.name + '_tid';
+	set a2f.column := fc;
+	set fk.owner := st;
+	set fc.owner := st;
+	set fk.refersTo := rk;
+	set fc.foreignKeys := OrderedSet(simplerdbms::ForeignKey){fk};
 }
 
 map associationToForeignKey_LM in simpleUML2RDBMS::SimpleUML2RDBMS
@@ -218,8 +206,8 @@ map associationToForeignKey_LM in simpleUML2RDBMS::SimpleUML2RDBMS
 		sc.namespace = p;
 		a.source = sc;
 		a.destination = dc;) {
-		a2f_name : String |
-		a2f_name := if a.destination = dc and a.source = sc
+	    a2f_name : String |
+	    a2f_name := if a.destination = dc and a.source = sc
                 		then a.name
                 		else if a.destination <> dc and a.source = sc
                 			then dc.name + '_' + a.name
@@ -229,15 +217,15 @@ map associationToForeignKey_LM in simpleUML2RDBMS::SimpleUML2RDBMS
                 				endif
                 			endif
                 		endif;
-		a2f.association := a;
-		a2f.referenced := dc2t;
-		a2f.name := a2f_name;
-		a2f.owner := sc2t;
-		a.name := if a.destination = dc and a.source = sc
+    }
+	set a2f.association := a;
+	set a2f.referenced := dc2t;
+	set a2f.name := a2f_name;
+	set a2f.owner := sc2t;
+	set a.name := if a.destination = dc and a.source = sc
             		then a2f_name
             		else a.name
             		endif;
-	}
 }
 
 map classPrimitiveAttributes_LM in simpleUML2RDBMS::SimpleUML2RDBMS
@@ -252,17 +240,16 @@ map classPrimitiveAttributes_LM in simpleUML2RDBMS::SimpleUML2RDBMS
 	where (fao.umlClass = c;
 		p2n._'primitive' = t;
 		a.owner = c;
-		a.type = t;) {
-		fa.owner := fao;
-		fa.type := p2n;
-		fa.name := a.name;
---		fa.owner := fao;
-		fa.kind := a.kind;
---		fa.kind := a.kind;
-		fa._'attribute' := a;
---		fa._'attribute' := a;
-		fa.leafs := Set(umltordbms::AttributeToColumn){fa};
-	}
+		a.type = t;) {}
+	set fa.owner := fao;
+	set fa.type := p2n;
+	set fa.name := a.name;
+--	set fa.owner := fao;
+	set fa.kind := a.kind;
+--	set fa.kind := a.kind;
+	set fa._'attribute' := a;
+--	set fa._'attribute' := a;
+	set fa.leafs := Set(umltordbms::AttributeToColumn){fa};
 }
 
 map classComplexAttributes_LM in simpleUML2RDBMS::SimpleUML2RDBMS
@@ -275,15 +262,14 @@ map classComplexAttributes_LM in simpleUML2RDBMS::SimpleUML2RDBMS
 	}
 	where (fao.umlClass = c;
 		a.owner = c;
-		a.type = t;) {
-		fa._'attribute' := a;
-		fa.kind := a.kind;
-		fa.owner := fao;
---		fa.owner := fao;
-		fa.name := a.name;
-		fa.leafs := fao.fromAttributes.leafs->asSet();
---		fa.kind := a.kind;
-	}
+		a.type = t;) {}
+	set fa._'attribute' := a;
+	set fa.kind := a.kind;
+	set fa.owner := fao;
+--	set fa.owner := fao;
+	set fa.name := a.name;
+	set fa.leafs := fao.fromAttributes.leafs->asSet();
+--	set fa.kind := a.kind;
 }
 
 map complexAttributePrimitiveAttributes_LM in simpleUML2RDBMS::SimpleUML2RDBMS
@@ -301,17 +287,16 @@ map complexAttributePrimitiveAttributes_LM in simpleUML2RDBMS::SimpleUML2RDBMS
 		a.owner = c;
 		a.type = t;
 		ca.type = c;
-		a.owner = c;) {
-		fa.owner := fao;
-		fa._'attribute' := a;
-		fa.kind := a.kind;
-		fa.type := p2n;
-		fa.leafs := Set(umltordbms::AttributeToColumn){fa};
-		fa.name := fao.name + '_' + a.name;
---		fa.kind := a.kind;
---		fa._'attribute' := a;
---		fa.owner := fao;
-	}
+		a.owner = c;) {}
+	set fa.owner := fao;
+	set fa._'attribute' := a;
+	set fa.kind := a.kind;
+	set fa.type := p2n;
+	set fa.leafs := Set(umltordbms::AttributeToColumn){fa};
+	set fa.name := fao.name + '_' + a.name;
+--	set fa.kind := a.kind;
+--	set fa._'attribute' := a;
+--	set fa.owner := fao;
 }
 
 map complexAttributeComplexAttributes_LM in simpleUML2RDBMS::SimpleUML2RDBMS
@@ -327,16 +312,15 @@ map complexAttributeComplexAttributes_LM in simpleUML2RDBMS::SimpleUML2RDBMS
 		a.owner = c;
 		a.owner = c;
 		ca.type = c;
-		a.type = t;) {
-		fa.owner := fao;
-		fa.kind := a.kind;
-		fa.leafs := fao.fromAttributes.leafs->asSet();
-		fa._'attribute' := a;
---		fa._'attribute' := a;
-		fa.name := fao.name + '_' + a.name;
---		fa.kind := a.kind;
---		fa.owner := fao;
-	}
+		a.type = t;) {}
+	set fa.owner := fao;
+	set fa.kind := a.kind;
+	set fa.leafs := fao.fromAttributes.leafs->asSet();
+	set fa._'attribute' := a;
+--	set fa._'attribute' := a;
+	set fa.name := fao.name + '_' + a.name;
+--	set fa.kind := a.kind;
+--	set fa.owner := fao;
 }
 
 map attributeColumns_MR in simpleUML2RDBMS::SimpleUML2RDBMS
@@ -352,13 +336,12 @@ map attributeColumns_MR in simpleUML2RDBMS::SimpleUML2RDBMS
 		p2n.typeName = ct;
 		a2c.owner = c2t;
 		c2t.fromAttributes.leafs->includes(a2c);
-		a2c.type = p2n;) {
-		c.name := a2c.name;
-		c.kind := a2c.kind;
-		a2c.column := c;
-		c.owner := t;
-		c.type := ct;
-	}
+		a2c.type = p2n;) {}
+	set c.name := a2c.name;
+	set c.kind := a2c.kind;
+	set a2c.column := c;
+	set c.owner := t;
+	set c.type := ct;
 }
 
 map __root__ in simpleUML2RDBMS::SimpleUML2RDBMS

@@ -92,9 +92,7 @@ map m_NumCS_ast in KiamaRewrite_qvtp_qvtcas
 	enforce rightAS() {
 		realize rNum : Num
 	}
-	where () {
-		lNumCS.ast := rNum;
-	}
+	set lNumCS.ast := rNum;
 }
 
 map m_NumCS_ast_2 in KiamaRewrite_qvtp_qvtcas
@@ -110,9 +108,8 @@ map m_NumCS_ast_2 in KiamaRewrite_qvtp_qvtcas
 		_'if' : Integer := if _'oclIsKindOf\nkiamaas::Top'
 		then 0
 		else oclContainer.oclAsType(kiamaas::Plus).depth + 1 endif
-	|
-		aNum.depth := _'if';
-	}
+	|}
+	set aNum.depth := _'if';
 }
 
 map m_NumCS_ast_value_1 in KiamaRewrite_qvtp_qvtcas
@@ -124,10 +121,9 @@ map m_NumCS_ast_value_1 in KiamaRewrite_qvtp_qvtcas
 		ast : ecore::EObject := lNumCS.ast,
 		value : ecore::EInt := lNumCS.value,
 		aNum : kiamaas::Num := ast.oclAsType(kiamaas::Num)
-	|
-		aNum.height := 0;
-		aNum.value := value;
 	}
+	set aNum.height := 0;
+	set aNum.value := value;
 }
 
 map m_PlusCS_ast in KiamaRewrite_qvtp_qvtcas
@@ -146,9 +142,8 @@ map m_PlusCS_ast in KiamaRewrite_qvtp_qvtcas
 		including : Set(ecore::EIntegerObject) := oclAsSet->including(height1),
 		max : ecore::EIntegerObject := including->max(),
 		_'+' : Integer := max + 1
-	|
-		aPlus.height := _'+';
 	}
+	set aPlus.height := _'+';
 }
 
 map m_PlusCS_ast_1 in KiamaRewrite_qvtp_qvtcas
@@ -164,9 +159,8 @@ map m_PlusCS_ast_1 in KiamaRewrite_qvtp_qvtcas
 		_'if' : Integer := if _'oclIsKindOf\nkiamaas::Top'
 		then 0
 		else oclContainer.oclAsType(kiamaas::Plus).depth + 1 endif
-	|
-		aPlus.depth := _'if';
 	}
+	set aPlus.depth := _'if';
 }
 
 map m_PlusCS_ast_2 in KiamaRewrite_qvtp_qvtcas
@@ -175,9 +169,7 @@ map m_PlusCS_ast_2 in KiamaRewrite_qvtp_qvtcas
 	enforce rightAS() {
 		realize rPlus : Plus
 	}
-	where () {
-		lPlusCS.ast := rPlus;
-	}
+	set lPlusCS.ast := rPlus;
 }
 
 map m_PlusCS_ast_left in KiamaRewrite_qvtp_qvtcas
@@ -190,9 +182,8 @@ map m_PlusCS_ast_left in KiamaRewrite_qvtp_qvtcas
 		aPlus : kiamaas::Plus := ast.oclAsType(kiamaas::Plus),
 		ast1 : ecore::EObject := left.ast,
 		aNode : kiamaas::Node := ast1.oclAsType(kiamaas::Node)
-	|
-		aPlus.left := aNode;
 	}
+	set aPlus.left := aNode;
 }
 
 map m_PlusCS_ast_right in KiamaRewrite_qvtp_qvtcas
@@ -205,9 +196,8 @@ map m_PlusCS_ast_right in KiamaRewrite_qvtp_qvtcas
 		aPlus : kiamaas::Plus := ast.oclAsType(kiamaas::Plus),
 		ast1 : ecore::EObject := right.ast,
 		aNode : kiamaas::Node := ast1.oclAsType(kiamaas::Node)
-	|
-		aPlus.right := aNode;
 	}
+	set aPlus.right := aNode;
 }
 
 map m_TopCS_ast in KiamaRewrite_qvtp_qvtcas
@@ -216,9 +206,7 @@ map m_TopCS_ast in KiamaRewrite_qvtp_qvtcas
 	enforce rightAS() {
 		realize rTop : Top
 	}
-	where () {
-		lTopCS.ast := rTop;
-	}
+	set lTopCS.ast := rTop;
 }
 
 map m_TopCS_ast_node in KiamaRewrite_qvtp_qvtcas
@@ -231,9 +219,8 @@ map m_TopCS_ast_node in KiamaRewrite_qvtp_qvtcas
 		aTop : kiamaas::Top := ast.oclAsType(kiamaas::Top),
 		ast1 : ecore::EObject := node.ast,
 		aNode : kiamaas::Node := ast1.oclAsType(kiamaas::Node)
-	|
-		aTop.node := aNode;
 	}
+	set aTop.node := aNode;
 }
 
 map r_PlusCS_left in KiamaRewrite_qvtp_qvtcas

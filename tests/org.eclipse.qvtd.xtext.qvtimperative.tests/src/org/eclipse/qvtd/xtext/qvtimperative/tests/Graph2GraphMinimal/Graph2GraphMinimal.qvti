@@ -12,10 +12,8 @@ map graph2graphLM in CopyGraphMinimal {
 	enforce middle() {
 		realize g2g:Graph2Graph
 	}
-    where () {
-        g2g.graph1 := g1;
-        g2g.name := g1.name;
-    }
+    set g2g.graph1 := g1;
+    set g2g.name := g1.name;
     call graph2graphMR {
     	g2gout := g2g;
     }
@@ -26,15 +24,11 @@ map graph2graphMR in CopyGraphMinimal {
     enforce lowerGraph() {
         realize g2:Graph
     }
-    where () {		-- M to R for G
-		g2gout.graph2 := g2;
-        g2.name := g2gout.name;
-    }
+    set g2gout.graph2 := g2;
+    set g2.name := g2gout.name;
 }
 
 map __root__ in CopyGraphMinimal {
-    
-    where () {}
     for g1 : SimpleGraph::Graph in SimpleGraph::Graph.allInstances() {
         call graph2graphLM {
             g1 := g1;

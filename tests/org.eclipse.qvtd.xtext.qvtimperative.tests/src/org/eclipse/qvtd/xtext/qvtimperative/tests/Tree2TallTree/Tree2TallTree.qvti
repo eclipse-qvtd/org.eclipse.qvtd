@@ -32,10 +32,8 @@ map Node2MiddleNode in Tree2TallTree {
 	enforce tree2talltree() {
 		realize node2tallNode : Node2TallNode
 	}
-	where() {
-		node2tallNode.node := node;
-		node2tallNode.name := node.name;
-	}
+	set node2tallNode.node := node;
+	set node2tallNode.name := node.name;
 }
 
 map Edge2MiddleEdge in Tree2TallTree {
@@ -45,10 +43,9 @@ map Edge2MiddleEdge in Tree2TallTree {
 	} (node2tallNode : Node2TallNode) {
 --		realize node2tallNode : Node2TallNode
 	}
-	where(node.parent <> null;) {
-		node2tallNode.parent := node.parent.Node2TallNode;
+	where(node.parent <> null;) {}
+	set node2tallNode.parent := node.parent.Node2TallNode;
 --		node2tallNode.name := node.name;
-	}
 }
 
 map MiddleNode2TallNode in Tree2TallTree {
@@ -60,12 +57,18 @@ map MiddleNode2TallNode in Tree2TallTree {
 		check TallNode::height
 		enforce TallNode::height
 	} () {
-		realize tallNode : TallNode
+		realize tallNode : TallNode,
+		tallNode_name : String,
+		tallNode_height : Integer,
+		tallNode_children : Set(TallNode)
 	}
-	where() {
-		node2tallNode.tallNode := tallNode;
-		tallNode.name := node2tallNode.name;
-		tallNode.children := node2tallNode.children?.tallNode->asSet();
-		tallNode.height := if node2tallNode.children->notEmpty() then node2tallNode.children.tallNode.height->max() + 1 else 0 endif;
+	where () {
+		tallNode_name := node2tallNode.name;
+		tallNode_children := node2tallNode.children?.tallNode->asSet();
+		tallNode_height := if node2tallNode.children->notEmpty() then node2tallNode.children.tallNode.height->max() + 1 else 0 endif;
 	}
+	set	node2tallNode.tallNode := tallNode;
+	set	tallNode.name := tallNode_name;
+	set	tallNode.children := tallNode_children;
+	set	tallNode.height := tallNode_height;
 }

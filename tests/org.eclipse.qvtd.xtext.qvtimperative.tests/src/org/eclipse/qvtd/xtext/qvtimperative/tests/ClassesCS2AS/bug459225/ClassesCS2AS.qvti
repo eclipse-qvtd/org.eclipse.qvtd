@@ -14,18 +14,14 @@ map createPackage in classescs2as_Bug459225
 	enforce rightAS() {
 		realize _'package' : Package
 	}
-	where () {
-		_'package'.name := if packageCS.hasName()
+	set _'package'.name := if packageCS.hasName()
 						then packageCS.computeName()
 						else 'unnamed'
 						endif;
-	}
 }
 
 map __root__ in classescs2as_Bug459225
 {
-	where () {}
-
 	for packageCS : classescs::PackageCS in classescs::PackageCS.allInstances() {
 		call createPackage {
 			packageCS := packageCS;

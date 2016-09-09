@@ -15,9 +15,7 @@ map mClassCS2Class_LM in classescs2as
 	enforce middle() {
 		realize c2c : ClassCS2Class
 	}
-	where () {
-		c2c.classCS := classCS;
-	}
+	set c2c.classCS := classCS;
 }
 
 map mRootCS2Root_LM in classescs2as
@@ -26,9 +24,7 @@ map mRootCS2Root_LM in classescs2as
 	enforce middle() {
 		realize r2r : RootCS2Root
 	}
-	where () {
-		r2r.rootCS := rootCS;
-	}
+	set r2r.rootCS := rootCS;
 }
 
 map mPackageCS2Package_LM in classescs2as
@@ -37,9 +33,7 @@ map mPackageCS2Package_LM in classescs2as
 	enforce middle() {
 		realize p2p : PackageCS2Package
 	}
-	where () {
-		p2p.packageCS := packageCS;
-	}
+	set p2p.packageCS := packageCS;
 }
 
 map mClassCS2Class_MR in classescs2as
@@ -48,9 +42,7 @@ map mClassCS2Class_MR in classescs2as
 	enforce rightAS() {
 		realize _'class' : Class
 	}
-	where () {
-		c2c._'class' := _'class';
-	}
+	set c2c._'class' := _'class';
 }
 
 map mRootCS2Root_MR in classescs2as
@@ -59,9 +51,7 @@ map mRootCS2Root_MR in classescs2as
 	enforce rightAS() {
 		realize root : Root
 	}
-	where () {
-		r2r.root := root;
-	}
+	set r2r.root := root;
 }
 
 map mPackageCS2Package_MR in classescs2as
@@ -70,50 +60,43 @@ map mPackageCS2Package_MR in classescs2as
 	enforce rightAS() {
 		realize _'package' : Package
 	}
-	where () {
-		p2p._'package' := _'package';
-	}
+	set p2p._'package' := _'package';
 }
 
 map uClass_name in classescs2as
 {
 	check rightAS(_'class' : Class) {}
 	check leftCS(classCS : ClassCS) {}
-	where (classCS.ClassCS2Class._'class' = _'class';) {
-		_'class'.name := classCS.name;
-	}
+	where (classCS.ClassCS2Class._'class' = _'class';) {}
+	set _'class'.name := classCS.name;
 }
 
 map uRoot_ownedPackages in classescs2as
 {
 	check rightAS(root : Root) {}
 	check leftCS(rootCS : RootCS) {}
-	where (rootCS.RootCS2Root.root = root;) {
-		root.ownedPackages := rootCS.ownedPackages.PackageCS2Package._'package'->asOrderedSet();
-	}
+	where (rootCS.RootCS2Root.root = root;) {}
+	set root.ownedPackages := rootCS.ownedPackages.PackageCS2Package._'package'->asOrderedSet();
 }
 
 map uPackage_name in classescs2as
 {
 	check rightAS(_'package' : Package) {}
 	check leftCS(packageCS : PackageCS) {}
-	where (packageCS.PackageCS2Package._'package' = _'package';) {
-		_'package'.name := packageCS.name;
-	}
+	where (packageCS.PackageCS2Package._'package' = _'package';) {}
+	set	_'package'.name := packageCS.name;
 }
 
 map uPackage_ownedClasses in classescs2as
 {
 	check rightAS(_'package' : Package) {}
 	check leftCS(packageCS : PackageCS) {}
-	where (packageCS.PackageCS2Package._'package' = _'package';) {
-		_'package'.ownedClasses := packageCS.ownedClasses.ClassCS2Class._'class'->asOrderedSet();
-	}
+	where (packageCS.PackageCS2Package._'package' = _'package';) {}
+	set	_'package'.ownedClasses := packageCS.ownedClasses.ClassCS2Class._'class'->asOrderedSet();
 }
 
 map __root__ in classescs2as
 {
-	where () {}
 	for packageCS : classescs::PackageCS in classescs::PackageCS.allInstances() {
 		call mPackageCS2Package_LM {
 			packageCS := packageCS;
