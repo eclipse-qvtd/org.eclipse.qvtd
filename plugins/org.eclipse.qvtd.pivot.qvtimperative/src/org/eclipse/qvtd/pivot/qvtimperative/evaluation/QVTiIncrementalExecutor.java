@@ -32,8 +32,8 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
-import org.eclipse.qvtd.pivot.qvtimperative.NavigationAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.RealizedVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.runtime.evaluation.AbstractComputation;
 import org.eclipse.qvtd.runtime.evaluation.AbstractInvocation;
@@ -266,29 +266,6 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 	}
 
 	@Override
-	public void internalExecuteNavigationAssignment(@NonNull NavigationAssignment navigationAssignment, @NonNull Object sourceObject, @Nullable Object ecoreValue, @Nullable Object childKey) {
-		super.internalExecuteNavigationAssignment(navigationAssignment, sourceObject, ecoreValue, childKey);
-		if (mode == Mode.LAZY) {
-			Mapping asMapping = QVTimperativeUtil.getContainingMapping(navigationAssignment);
-			assert asMapping != null;
-			if (transformationAnalysis.isHazardousWrite(asMapping, navigationAssignment)) {
-				Property targetProperty = QVTimperativeUtil.getTargetProperty(navigationAssignment);
-				assert targetProperty != null;
-				EStructuralFeature eFeature = (EStructuralFeature)targetProperty.getESObject();
-				objectManager.assigned(sourceObject, eFeature, ecoreValue, childKey);
-			}
-		}
-		else {
-			Property targetProperty = QVTimperativeUtil.getTargetProperty(navigationAssignment);
-			assert targetProperty != null;
-			EStructuralFeature eFeature = (EStructuralFeature)targetProperty.getESObject();
-			Invocation.Incremental currentInvocation2 = currentInvocation;
-			assert currentInvocation2 != null;
-			objectManager.assigned(currentInvocation2, sourceObject, eFeature, ecoreValue, childKey);
-		}
-	}
-
-	@Override
 	public @Nullable Object internalExecuteRealizedVariable(@NonNull RealizedVariable realizedVariable, @NonNull EvaluationVisitor undecoratedVisitor) {
 		Object element = super.internalExecuteRealizedVariable(realizedVariable, undecoratedVisitor);
 		if ((element != null) && (mode == Mode.INCREMENTAL)) {
@@ -302,5 +279,28 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 			mappingStatus.getOutputs().add(classStatus); */
 		}
 		return element;
+	}
+
+	@Override
+	public void internalExecuteSetStatement(@NonNull SetStatement setStatement, @NonNull Object sourceObject, @Nullable Object ecoreValue, @Nullable Object childKey) {
+		super.internalExecuteSetStatement(setStatement, sourceObject, ecoreValue, childKey);
+		if (mode == Mode.LAZY) {
+			Mapping asMapping = QVTimperativeUtil.getContainingMapping(setStatement);
+			assert asMapping != null;
+			if (transformationAnalysis.isHazardousWrite(asMapping, setStatement)) {
+				Property targetProperty = QVTimperativeUtil.getTargetProperty(setStatement);
+				assert targetProperty != null;
+				EStructuralFeature eFeature = (EStructuralFeature)targetProperty.getESObject();
+				objectManager.assigned(sourceObject, eFeature, ecoreValue, childKey);
+			}
+		}
+		else {
+			Property targetProperty = QVTimperativeUtil.getTargetProperty(setStatement);
+			assert targetProperty != null;
+			EStructuralFeature eFeature = (EStructuralFeature)targetProperty.getESObject();
+			Invocation.Incremental currentInvocation2 = currentInvocation;
+			assert currentInvocation2 != null;
+			objectManager.assigned(currentInvocation2, sourceObject, eFeature, ecoreValue, childKey);
+		}
 	}
 }

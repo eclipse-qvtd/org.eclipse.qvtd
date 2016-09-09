@@ -52,6 +52,7 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.MappingLoopCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.ParamDeclarationCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.PredicateCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.PredicateOrAssignmentCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.SetStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QueryCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.RealizeableVariableCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.TopLevelCS;
@@ -288,6 +289,11 @@ public class QVTimperativeCSPreOrderVisitor extends AbstractQVTimperativeCSPreOr
 	@Override
 	public Continuation<?> visitRealizeableVariableCS(@NonNull RealizeableVariableCS csElement) {
 		return new RealizeableVariableCompletion(context, csElement);
+	}
+
+	@Override
+	public Continuation<?> visitSetStatementCS(@NonNull SetStatementCS csElement) {
+		return null;
 	}
 
 	@Override

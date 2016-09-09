@@ -444,6 +444,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 	public void testClassesCS2AS_bug456900() throws Exception {
 		MyQVT myQVT = createQVT();
 		QVTiEnvironmentFactory environmentFactory = myQVT.getEnvironmentFactory();
+		environmentFactory.setEvaluationTracingEnabled(true);
 		MyQvtiExecutor testEvaluator = new MyQvtiExecutor(environmentFactory, "ClassesCS2AS/bug456900", "ClassesCS2AS.qvti");
 		testEvaluator.saveTransformation(null);
 		testEvaluator.loadModel("leftCS", "example_input.xmi");

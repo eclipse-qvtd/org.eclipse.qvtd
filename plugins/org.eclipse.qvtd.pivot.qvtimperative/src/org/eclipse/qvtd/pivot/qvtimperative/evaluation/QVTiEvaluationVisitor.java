@@ -39,6 +39,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Assignment;
 import org.eclipse.qvtd.pivot.qvtimperative.BottomPattern;
+import org.eclipse.qvtd.pivot.qvtimperative.BottomStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
@@ -51,10 +52,8 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
-import org.eclipse.qvtd.pivot.qvtimperative.NavigationAssignment;
-import org.eclipse.qvtd.pivot.qvtimperative.OppositePropertyAssignment;
-import org.eclipse.qvtd.pivot.qvtimperative.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.RealizedVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 import org.eclipse.qvtd.pivot.qvtimperative.VariableAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.VariablePredicate;
@@ -111,6 +110,11 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 	@Override
 	public @Nullable Object visitBottomPattern(@NonNull BottomPattern object) {
 		return visiting(object);
+	}
+
+	@Override
+	public @Nullable Object visitBottomStatement(@NonNull BottomStatement object) {
+		return visitStatement(object);	// MappingStatement is abstract
 	}
 
 	@Override
@@ -266,47 +270,6 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 		return visitStatement(object);	// MappingStatement is abstract
 	}
 
-	@Override
-	public @Nullable Object visitNavigationAssignment(@NonNull NavigationAssignment navigationAssignment) {
-		Object slotObject = navigationAssignment.getSlotExpression().accept(undecoratedVisitor);
-		if (slotObject instanceof EObject) {
-			Integer childKey = null;
-			try {
-				Object boxedValue = navigationAssignment.getValue().accept(undecoratedVisitor);
-				Property targetProperty = QVTimperativeUtil.getTargetProperty(navigationAssignment);
-				Class<?> instanceClass = PivotUtil.getEcoreInstanceClass(targetProperty);
-				Object ecoreValue = idResolver.ecoreValueOf(instanceClass, boxedValue);
-				Property oppositeProperty = targetProperty.getOpposite();
-				if (oppositeProperty != null) {
-					Type type = oppositeProperty.getType();
-					if (type instanceof CollectionType) {
-						boolean isOrdered = ((CollectionType)type).isOrdered();
-						if (isOrdered) {
-
-						}
-					}
-				}
-				executor.internalExecuteNavigationAssignment(navigationAssignment, slotObject, ecoreValue, childKey);
-				return null;
-			}
-			catch (InvocationFailedException e) {
-				executor.internalExecuteNavigationAssignment(navigationAssignment, slotObject, e, childKey);
-				//				throw e;
-			}
-			//		} else if (slotObject == null){
-			//			throw new InvalidValueException("Null source for '" + navigationAssignment.toString() + "'");
-		} else {
-			throw new IllegalArgumentException("Unsupported " + navigationAssignment.eClass().getName()
-				+ " specification. The assignment slot expression '" + navigationAssignment.toString() + "'evaluates to non-ecore value: " + NameUtil.debugFullName(slotObject));
-		}
-		return true;
-	}
-
-	@Override
-	public @Nullable Object visitOppositePropertyAssignment(@NonNull OppositePropertyAssignment navigationAssignment) {
-		return visitNavigationAssignment(navigationAssignment);
-	}
-
 	/*	@Override
 	public Object visitOppositePropertyCallExp(@NonNull OppositePropertyCallExp oppositePropertyCallExp) {
 		QVTiModelManager modelManager = (QVTiModelManager) context.getModelManager();
@@ -349,11 +312,6 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 	}
 
 	@Override
-	public @Nullable Object visitPropertyAssignment(@NonNull PropertyAssignment navigationAssignment) {
-		return visitNavigationAssignment(navigationAssignment);
-	}
-
-	@Override
 	public @Nullable Object visitRealizedVariable(@NonNull RealizedVariable realizedVariable) {
 		return executor.internalExecuteRealizedVariable(realizedVariable, undecoratedVisitor);
 	}
@@ -361,6 +319,42 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 	@Override
 	public @Nullable Object visitRule(@NonNull Rule object) {
 		return visiting(object);
+	}
+
+	@Override
+	public @Nullable Object visitSetStatement(@NonNull SetStatement setStatement) {
+		Object slotObject = setStatement.getSlotExpression().accept(undecoratedVisitor);
+		if (slotObject instanceof EObject) {
+			Integer childKey = null;
+			try {
+				Object boxedValue = setStatement.getValue().accept(undecoratedVisitor);
+				Property targetProperty = QVTimperativeUtil.getTargetProperty(setStatement);
+				Class<?> instanceClass = PivotUtil.getEcoreInstanceClass(targetProperty);
+				Object ecoreValue = idResolver.ecoreValueOf(instanceClass, boxedValue);
+				Property oppositeProperty = targetProperty.getOpposite();
+				if (oppositeProperty != null) {
+					Type type = oppositeProperty.getType();
+					if (type instanceof CollectionType) {
+						boolean isOrdered = ((CollectionType)type).isOrdered();
+						if (isOrdered) {
+
+						}
+					}
+				}
+				executor.internalExecuteSetStatement(setStatement, slotObject, ecoreValue, childKey);
+				return null;
+			}
+			catch (InvocationFailedException e) {
+				executor.internalExecuteSetStatement(setStatement, slotObject, e, childKey);		// FIXME This leads to an AssertionError in PropertyImpl.initValue
+				//				throw e;
+			}
+			//		} else if (slotObject == null){
+			//			throw new InvalidValueException("Null source for '" + navigationAssignment.toString() + "'");
+		} else {
+			throw new IllegalArgumentException("Unsupported " + setStatement.eClass().getName()
+				+ " specification. The assignment slot expression '" + setStatement.toString() + "'evaluates to non-ecore value: " + NameUtil.debugFullName(slotObject));
+		}
+		return true;
 	}
 
 	@Override

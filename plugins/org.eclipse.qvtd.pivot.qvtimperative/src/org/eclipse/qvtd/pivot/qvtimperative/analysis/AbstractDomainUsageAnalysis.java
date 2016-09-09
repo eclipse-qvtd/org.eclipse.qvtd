@@ -83,10 +83,8 @@ import org.eclipse.qvtd.pivot.qvtimperative.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
-import org.eclipse.qvtd.pivot.qvtimperative.NavigationAssignment;
-import org.eclipse.qvtd.pivot.qvtimperative.OppositePropertyAssignment;
-import org.eclipse.qvtd.pivot.qvtimperative.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.RealizedVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.VariableAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.util.AbstractExtendingQVTimperativeVisitor;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
@@ -108,22 +106,6 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTim
 		return element2usage.get(element);
 	}
 
-	protected @NonNull DomainUsage doNavigationAssignment(@NonNull Property property, @NonNull NavigationAssignment object) {
-		DomainUsage slotUsage = visit(object.getSlotExpression());
-		DomainUsage valueUsage = visit(object.getValue());
-		DomainUsage knownSourceUsage = getRootAnalysis().property2containingClassUsage.get(property);
-		if (knownSourceUsage != null) {
-			DomainUsage knownTargetUsage = getRootAnalysis().getUsage(property);
-			assert knownTargetUsage != null;
-			intersection(knownSourceUsage, slotUsage);
-			intersection(knownTargetUsage, valueUsage);
-			return knownSourceUsage; //intersection(knownTargetUsage, valueUsage);
-		}
-		else {
-			return slotUsage; //intersection(slotUsage, valueUsage);
-		}
-	}
-
 	protected @NonNull DomainUsage doNavigationCallExp(@NonNull Property property, @NonNull NavigationCallExp object) {
 		DomainUsage actualSourceUsage = visit(object.getOwnedSource());
 		DomainUsage knownPropertyUsage = visit(property);
@@ -142,6 +124,22 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTim
 			usage = intersection(usage, actualSourceUsage);
 		}
 		return usage;
+	}
+
+	protected @NonNull DomainUsage doSetStatement(@NonNull Property property, @NonNull SetStatement object) {
+		DomainUsage slotUsage = visit(object.getSlotExpression());
+		DomainUsage valueUsage = visit(object.getValue());
+		DomainUsage knownSourceUsage = getRootAnalysis().property2containingClassUsage.get(property);
+		if (knownSourceUsage != null) {
+			DomainUsage knownTargetUsage = getRootAnalysis().getUsage(property);
+			assert knownTargetUsage != null;
+			intersection(knownSourceUsage, slotUsage);
+			intersection(knownTargetUsage, valueUsage);
+			return knownSourceUsage; //intersection(knownTargetUsage, valueUsage);
+		}
+		else {
+			return slotUsage; //intersection(slotUsage, valueUsage);
+		}
 	}
 
 	protected @NonNull DomainUsage getAllInstancesUsage(@NonNull OperationCallExp object, @NonNull DomainUsage sourceUsage) {
@@ -572,15 +570,6 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTim
 	}
 
 	@Override
-	public @NonNull DomainUsage visitNavigationAssignment(@NonNull NavigationAssignment object) {
-		Property property = QVTimperativeUtil.getTargetProperty(object);
-		//		if ("middleRoot.name := hsvRoot.name".equals(object.toString())) {
-		//			property = object.getTargetProperty();
-		//		}
-		return doNavigationAssignment(property, object);
-	}
-
-	@Override
 	public @NonNull DomainUsage visitNullLiteralExp(@NonNull NullLiteralExp object) {
 		return getRootAnalysis().createVariableUsage(getRootAnalysis().getAnyMask());
 	}
@@ -710,11 +699,6 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTim
 	}
 
 	@Override
-	public @NonNull DomainUsage visitOppositePropertyAssignment(@NonNull OppositePropertyAssignment object) {
-		return visitNavigationAssignment(object);
-	}
-
-	@Override
 	public @NonNull DomainUsage visitOppositePropertyCallExp(@NonNull OppositePropertyCallExp object) {
 		Property property = ClassUtil.nonNullState(object.getReferredProperty());
 		Property oppositeProperty = ClassUtil.nonNullState(property.getOpposite());
@@ -753,11 +737,6 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTim
 	}
 
 	@Override
-	public @NonNull DomainUsage visitPropertyAssignment(@NonNull PropertyAssignment object) {
-		return visitNavigationAssignment(object);
-	}
-
-	@Override
 	public @NonNull DomainUsage visitPropertyCallExp(@NonNull PropertyCallExp object) {
 		Property property = ClassUtil.nonNullState(object.getReferredProperty());
 		return doNavigationCallExp(property, object);
@@ -779,6 +758,15 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTim
 	@Override
 	public @NonNull DomainUsage visitSelfType(@NonNull SelfType object) {
 		return ClassUtil.nonNullState(selfUsage);
+	}
+
+	@Override
+	public @NonNull DomainUsage visitSetStatement(@NonNull SetStatement object) {
+		Property property = QVTimperativeUtil.getTargetProperty(object);
+		//		if ("middleRoot.name := hsvRoot.name".equals(object.toString())) {
+		//			property = object.getTargetProperty();
+		//		}
+		return doSetStatement(property, object);
 	}
 
 	@Override

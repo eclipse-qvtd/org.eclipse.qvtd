@@ -20,7 +20,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
-import org.eclipse.qvtd.pivot.qvtimperative.PropertyAssignment;
+import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.VariableAssignment;
 import org.eclipse.qvtd.xtext.qvtbase.ui.outline.QVTbaseOutlineTreeProvider;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS;
@@ -77,7 +77,7 @@ public class QVTimperativeOutlineTreeProvider extends QVTbaseOutlineTreeProvider
 		}
 	}
 
-	protected void _createChildren(IOutlineNode parentNode, PropertyAssignment ele) {
+	protected void _createChildren(IOutlineNode parentNode, SetStatement ele) {
 		createNode(parentNode, ele.getValue());
 	}
 

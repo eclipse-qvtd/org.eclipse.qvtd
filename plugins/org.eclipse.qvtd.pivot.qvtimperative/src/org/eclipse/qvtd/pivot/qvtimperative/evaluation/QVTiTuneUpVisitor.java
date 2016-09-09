@@ -47,7 +47,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
-import org.eclipse.qvtd.pivot.qvtimperative.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 import org.eclipse.qvtd.pivot.qvtimperative.VariableAssignment;
@@ -107,22 +106,6 @@ public class QVTiTuneUpVisitor extends AbstractExtendingQVTimperativeVisitor<Boo
 			}
 			else if (assignment instanceof VariableAssignment) {
 				variableAssignments.add(assignment);
-			}
-			else if (assignment instanceof PropertyAssignment) {
-				PropertyAssignment propertyAssignment = (PropertyAssignment)assignment;
-				OCLExpression slot = propertyAssignment.getSlotExpression();
-				if ((slot != null) && (slot.accept(this) != Boolean.TRUE)) {
-					propertyAssignment.setSlotExpression(null);			// Avoid a child stealing detection
-					VariableExp variableExp = rewritePropertyAssignmentTerm(object, variableAssignments, slot);
-					propertyAssignment.setSlotExpression(variableExp);
-				}
-				OCLExpression value = propertyAssignment.getValue();
-				if ((value != null) && (value.accept(this) != Boolean.TRUE)) {
-					propertyAssignment.setValue(null);			// Avoid a child stealing detection
-					VariableExp variableExp = rewritePropertyAssignmentTerm(object, variableAssignments, value);
-					propertyAssignment.setValue(variableExp);
-				}
-				propertyAssignments.add(propertyAssignment);
 			}
 			else {
 				assignment.accept(this);
@@ -269,6 +252,11 @@ public class QVTiTuneUpVisitor extends AbstractExtendingQVTimperativeVisitor<Boo
 		if ((ownedInit != null) && (ownedInit.accept(this) != Boolean.TRUE)) {
 			return Boolean.FALSE;
 		}
+		return Boolean.TRUE;
+	}
+
+	@Override
+	public Boolean visitStatement(@NonNull Statement object) {
 		return Boolean.TRUE;
 	}
 

@@ -58,10 +58,10 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
-import org.eclipse.qvtd.pivot.qvtimperative.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.RealizedVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 import org.eclipse.qvtd.pivot.qvtimperative.VariableAssignment;
 import org.eclipse.qvtd.xtext.qvtimperativecs.BottomPatternCS;
@@ -77,6 +77,7 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.ParamDeclarationCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.PatternCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.PredicateCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.PredicateOrAssignmentCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.SetStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QueryCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.RealizedVariableCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.TopLevelCS;
@@ -356,7 +357,7 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 			}
 		}
 		else {
-			context.refreshModelElement(PropertyAssignment.class, QVTimperativePackage.Literals.PROPERTY_ASSIGNMENT, csElement);
+			throw new IllegalStateException();
 		}
 		return null;
 	}
@@ -377,6 +378,12 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 	@Override
 	public Continuation<?> visitRealizedVariableCS(@NonNull RealizedVariableCS csElement) {
 		refreshNamedElement(RealizedVariable.class, QVTimperativePackage.Literals.REALIZED_VARIABLE, csElement);
+		return null;
+	}
+
+	@Override
+	public @Nullable Continuation<?> visitSetStatementCS(@NonNull SetStatementCS csElement) {
+		context.refreshModelElement(SetStatement.class, QVTimperativePackage.Literals.SET_STATEMENT, csElement);
 		return null;
 	}
 

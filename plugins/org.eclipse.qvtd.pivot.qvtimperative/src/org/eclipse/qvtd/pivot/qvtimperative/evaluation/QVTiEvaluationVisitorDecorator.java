@@ -30,15 +30,15 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Assignment;
 import org.eclipse.qvtd.pivot.qvtimperative.BottomPattern;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativePattern;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardPattern;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativePattern;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
-import org.eclipse.qvtd.pivot.qvtimperative.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.RealizedVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.VariableAssignment;
 
 /**
@@ -294,14 +294,6 @@ implements IQVTiEvaluationVisitor {
 	 * Delegates to my decorated visitor.
 	 */
 	@Override
-	public @Nullable Object visitPropertyAssignment(@NonNull PropertyAssignment propertyAssignment) {
-		return delegate.visitPropertyAssignment(propertyAssignment);
-	}
-
-	/**
-	 * Delegates to my decorated visitor.
-	 */
-	@Override
 	public @Nullable Object visitRealizedVariable(@NonNull RealizedVariable realizedVariable) {
 		return delegate.visitRealizedVariable(realizedVariable);
 	}
@@ -312,6 +304,14 @@ implements IQVTiEvaluationVisitor {
 	@Override
 	public @Nullable Object visitRule(@NonNull Rule rule) {
 		return delegate.visitRule(rule);
+	}
+
+	/**
+	 * Delegates to my decorated visitor.
+	 */
+	@Override
+	public @Nullable Object visitSetStatement(@NonNull SetStatement setStatement) {
+		return delegate.visitSetStatement(setStatement);
 	}
 
 	/**

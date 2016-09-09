@@ -29,6 +29,7 @@ import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.QueryCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.RealizedVariableCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.ScopeNameCSElements;
+import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.SetStatementCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.SourceBottomPatternCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.SourceDomainCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.SourceGuardPatternCSElements;
@@ -222,8 +223,8 @@ public class QVTimperativeFormatter extends AbstractEssentialOCLFormatter
 			MappingCSElements a = f.getMappingCSAccess();
 			c.setLinewrap(2).before(a.getMapKeyword_2());
 			c.setNoSpace().before(a.getSemicolonKeyword_6_2());
-			c.setNoSpace().between(a.getLeftCurlyBracketKeyword_7(), a.getRightCurlyBracketKeyword_11());
-			setBraces(c, a.getLeftCurlyBracketKeyword_7(), a.getRightCurlyBracketKeyword_11());
+			c.setNoSpace().between(a.getLeftCurlyBracketKeyword_7(), a.getRightCurlyBracketKeyword_12());
+			setBraces(c, a.getLeftCurlyBracketKeyword_7(), a.getRightCurlyBracketKeyword_12());
 			//			c.setLinewrap(2).between(a.getDomainsAssignment_5(), a.getDomainsAssignment_5());
 			c.setLinewrap(1).before(a.getOwnedDomainsAssignment_8());
 			c.setLinewrap(1).before(a.getWhereKeyword_9_0());
@@ -335,6 +336,11 @@ public class QVTimperativeFormatter extends AbstractEssentialOCLFormatter
 			ScopeNameCSElements a = f.getScopeNameCSAccess();
 			c.setNoSpace().around(a.getColonColonKeyword_1());
 			c.setNoSpace().around(a.getColonColonKeyword_2_1());
+		}
+		{
+			SetStatementCSElements a = f.getSetStatementCSAccess();
+			c.setLinewrap(1).before(a.getSetKeyword_0());
+			c.setNoSpace().before(a.getSemicolonKeyword_6());
 		}
 		{
 			SourceBottomPatternCSElements a = f.getSourceBottomPatternCSAccess();

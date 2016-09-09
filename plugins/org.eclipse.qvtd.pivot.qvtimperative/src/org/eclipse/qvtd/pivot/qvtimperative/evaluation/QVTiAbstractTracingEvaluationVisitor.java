@@ -32,17 +32,18 @@ import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtimperative.Assignment;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardPattern;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
-import org.eclipse.qvtd.pivot.qvtimperative.PropertyAssignment;
+import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 import org.eclipse.qvtd.pivot.qvtimperative.VariableAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.VariablePredicate;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 
 /**
  * The Class QVTiTracingEvaluationVisitor is a decorator visitor that prints
@@ -296,20 +297,20 @@ public abstract class QVTiAbstractTracingEvaluationVisitor extends QVTiEvaluatio
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEvaluationVisitorDecorator#visitPropertyAssignment(org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment)
 	 */
 	@Override
-	public @Nullable Object visitPropertyAssignment(@NonNull PropertyAssignment propertyAssignment) {
+	public @Nullable Object visitSetStatement(@NonNull SetStatement setStatement) {
 
 		try {
-			Object value = safeVisit(propertyAssignment.getValue());
+			Object value = safeVisit(setStatement.getValue());
 			// Unbox to asign to ecore type
 			value = delegate.getEnvironmentFactory().getIdResolver().unboxedValueOf(value);
-			logger.info(getIndent() + "VisitPropertyAssignment " + propertyAssignment.getSlotExpression()
-			+ "." + propertyAssignment.getTargetProperty().getName() + " = " + prettyPrint(value));
+			logger.info(getIndent() + "VisitSetStatement " + setStatement.getSlotExpression()
+			+ "." + QVTimperativeUtil.getTargetProperty(setStatement).getName() + " = " + prettyPrint(value));
 		} catch (InvalidValueException ex) {
-			logger.info(getIndent() + "VisitPropertyAssignment " + propertyAssignment.getSlotExpression()
-			+ "." + propertyAssignment.getTargetProperty().getName() + " = InvalidValueException" );
+			logger.info(getIndent() + "VisitSetStatement " + setStatement.getSlotExpression()
+			+ "." + QVTimperativeUtil.getTargetProperty(setStatement).getName() + " = InvalidValueException" );
 		}
 		//indentLevel++;
-		Object result = delegate.visitPropertyAssignment(propertyAssignment);
+		Object result = delegate.visitSetStatement(setStatement);
 		//indentLevel--;
 		return result;
 	}

@@ -22,6 +22,7 @@ import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbasePrettyPrintVisitor;
 import org.eclipse.qvtd.pivot.qvtimperative.Area;
 import org.eclipse.qvtd.pivot.qvtimperative.Assignment;
 import org.eclipse.qvtd.pivot.qvtimperative.BottomPattern;
+import org.eclipse.qvtd.pivot.qvtimperative.BottomStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
@@ -34,10 +35,8 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
-import org.eclipse.qvtd.pivot.qvtimperative.NavigationAssignment;
-import org.eclipse.qvtd.pivot.qvtimperative.OppositePropertyAssignment;
-import org.eclipse.qvtd.pivot.qvtimperative.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.RealizedVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 import org.eclipse.qvtd.pivot.qvtimperative.VariableAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.VariablePredicate;
@@ -86,6 +85,11 @@ public class QVTimperativePrettyPrintVisitor extends QVTbasePrettyPrintVisitor i
 			}
 		}
 		return null;
+	}
+
+	@Override
+	public Object visitBottomStatement(@NonNull BottomStatement object) {
+		return visitStatement(object);
 	}
 
 	@Override
@@ -215,36 +219,27 @@ public class QVTimperativePrettyPrintVisitor extends QVTbasePrettyPrintVisitor i
 	}
 
 	@Override
-	public Object visitNavigationAssignment(@NonNull NavigationAssignment asNavigationAssignment) {
-		safeVisit(asNavigationAssignment.getSlotExpression());
-		context.append(".");
-		context.appendName(QVTimperativeUtil.getTargetProperty(asNavigationAssignment));
-		context.append(" := ");
-		safeVisit(asNavigationAssignment.getValue());
-		context.append(";\n");
-		return null;
-	}
-
-	@Override
-	public Object visitOppositePropertyAssignment(@NonNull OppositePropertyAssignment asNavigationAssignment) {
-		return visitNavigationAssignment(asNavigationAssignment);
-	}
-
-	@Override
 	public Object visitPredicate(@NonNull Predicate pPredicate) {
 		safeVisit(pPredicate.getConditionExpression());
 		return null;
 	}
 
 	@Override
-	public Object visitPropertyAssignment(@NonNull PropertyAssignment asNavigationAssignment) {
-		return visitNavigationAssignment(asNavigationAssignment);
-	}
-
-	@Override
 	public Object visitRealizedVariable(@NonNull RealizedVariable pRealizedVariable) {
 		context.append("realize ");
 		visitVariable(pRealizedVariable);
+		return null;
+	}
+
+	@Override
+	public Object visitSetStatement(@NonNull SetStatement asSetStatement) {
+		context.append("set ");
+		safeVisit(asSetStatement.getSlotExpression());
+		context.append(".");
+		context.appendName(QVTimperativeUtil.getTargetProperty(asSetStatement));
+		context.append(" := ");
+		safeVisit(asSetStatement.getValue());
+		context.append(";\n");
 		return null;
 	}
 

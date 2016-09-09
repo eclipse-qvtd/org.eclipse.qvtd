@@ -55,7 +55,7 @@ import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.Area;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
-import org.eclipse.qvtd.pivot.qvtimperative.PropertyAssignment;
+import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 
@@ -372,19 +372,19 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 		return analysis;
 	}
 
-	protected void analyzePropertyAssignments(@NonNull Transformation transformation) {
+	protected void analyzeSetStatements(@NonNull Transformation transformation) {
 		for (TreeIterator<EObject> tit = transformation.eAllContents(); tit.hasNext(); ) {
 			EObject eObject = tit.next();
-			if (eObject instanceof PropertyAssignment) {
-				PropertyAssignment propertyAssignment = (PropertyAssignment)eObject;
+			if (eObject instanceof SetStatement) {
+				SetStatement setStatement = (SetStatement)eObject;
 				//				if ("s.name := sn".equals(eObject.toString())) {
 				//					eObject.toString();
 				//				}
-				OCLExpression slotExpression = propertyAssignment.getSlotExpression();
+				OCLExpression slotExpression = setStatement.getSlotExpression();
 				assert slotExpression != null;
 				DomainUsage domainUsage = getUsage(slotExpression);
 				if (!domainUsage.isOutput() && !domainUsage.isMiddle()) {
-					Property targetProperty = ClassUtil.nonNullState(propertyAssignment.getTargetProperty());
+					Property targetProperty = QVTimperativeUtil.getTargetProperty(setStatement);
 					//					System.out.println("Dirty " + targetProperty + " for " + eObject);
 					dirtyProperties.add(targetProperty);
 					EObject eProperty = targetProperty.getESObject();
@@ -493,7 +493,7 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 			setUsage(ownedContext, getAnyUsage());
 		}
 		visit(transformation);
-		analyzePropertyAssignments(transformation);
+		analyzeSetStatements(transformation);
 		return element2usage;
 	}
 

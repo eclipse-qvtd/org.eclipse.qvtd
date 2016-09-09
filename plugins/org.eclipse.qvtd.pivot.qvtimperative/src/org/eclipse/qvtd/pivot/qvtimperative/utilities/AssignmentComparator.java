@@ -21,14 +21,12 @@ import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.TreeIterable;
 import org.eclipse.qvtd.pivot.qvtimperative.Assignment;
-import org.eclipse.qvtd.pivot.qvtimperative.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.VariableAssignment;
 
 /**
@@ -45,29 +43,8 @@ public class AssignmentComparator implements Comparator<@NonNull Assignment>
 
 	@Override
 	public int compare(@NonNull Assignment o1, @NonNull Assignment o2) {
-		if (o1 instanceof PropertyAssignment) {
-			if (o2 instanceof PropertyAssignment) {
-				Property p1 = ((PropertyAssignment)o1).getTargetProperty();
-				Property p2 = ((PropertyAssignment)o2).getTargetProperty();
-				String n1 = p1.getName();
-				String n2 = p2.getName();
-				int diff = ClassUtil.safeCompareTo(n1, n2);
-				if (diff != 0) {
-					return diff;
-				}
-				n1 = p1.toString();
-				n2 = p2.toString();
-				return ClassUtil.safeCompareTo(n1, n2);
-			}
-			else {
-				return 1;
-			}
-		}
-		else if (o1 instanceof VariableAssignment) {
-			if (o2 instanceof PropertyAssignment) {
-				return -1;
-			}
-			else if (o2 instanceof VariableAssignment) {
+		if (o1 instanceof VariableAssignment) {
+			if (o2 instanceof VariableAssignment) {
 				Map<@NonNull Variable, @NonNull Set<@NonNull Variable>> variable2referencedVariables2 = variable2referencedVariables;
 				if (variable2referencedVariables2 == null) {
 					variable2referencedVariables2 = variable2referencedVariables = computeReferencedVariableClosure();

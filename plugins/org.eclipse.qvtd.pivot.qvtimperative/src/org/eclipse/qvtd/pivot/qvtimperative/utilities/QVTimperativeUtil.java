@@ -49,18 +49,16 @@ import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory.Create
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.Area;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativePattern;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativePattern;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
-import org.eclipse.qvtd.pivot.qvtimperative.NavigationAssignment;
-import org.eclipse.qvtd.pivot.qvtimperative.OppositePropertyAssignment;
-import org.eclipse.qvtd.pivot.qvtimperative.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.RealizedVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.VariablePredicate;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 
@@ -205,14 +203,6 @@ public class QVTimperativeUtil extends QVTbaseUtil
 		return property;
 	}
 
-	public static @NonNull PropertyAssignment createPropertyAssignment(@NonNull OCLExpression slotExpression, @NonNull Property targetProperty, @NonNull OCLExpression value) {
-		PropertyAssignment propertyAssignment = QVTimperativeFactory.eINSTANCE.createPropertyAssignment();
-		propertyAssignment.setSlotExpression(slotExpression);
-		propertyAssignment.setTargetProperty(targetProperty);
-		propertyAssignment.setValue(value);
-		return propertyAssignment;
-	}
-
 	/*	public static @NonNull PropertyCallExp createPropertyCallExp(@NonNull OCLExpression source, @NonNull Property property) {
 		PropertyCallExp propertyCallExp = PivotFactory.eINSTANCE.createPropertyCallExp();
 		propertyCallExp.setOwnedSource(source);
@@ -227,6 +217,21 @@ public class QVTimperativeUtil extends QVTbaseUtil
 		realizedVariable.setType(type);
 		realizedVariable.setIsRequired(true);
 		return realizedVariable;
+	}
+
+	public static @NonNull SetStatement createSetStatement(@NonNull Variable asVariable, @NonNull Property asProperty, @NonNull OCLExpression asValueExpression) {
+		SetStatement asSetAssignment = QVTimperativeFactory.eINSTANCE.createSetStatement();
+		if (asProperty.isIsImplicit()) {
+			asSetAssignment.setTargetProperty(asProperty.getOpposite());
+			asSetAssignment.setIsOpposite(true);
+		}
+		else {
+			asSetAssignment.setTargetProperty(asProperty);
+			asSetAssignment.setIsOpposite(false);
+		}
+		asSetAssignment.setSlotExpression(createVariableExp(asVariable));
+		asSetAssignment.setValue(asValueExpression);
+		return asSetAssignment;
 	}
 
 	public static @NonNull Transformation createTransformation(@NonNull String name) {
@@ -295,15 +300,9 @@ public class QVTimperativeUtil extends QVTbaseUtil
 		return (ImperativeDomain)getDomain((Rule)rule, typedModel);
 	}
 
-	public static @NonNull Property getTargetProperty(@NonNull NavigationAssignment asNavigationAssignment) {
-		if (asNavigationAssignment instanceof PropertyAssignment) {
-			return ClassUtil.nonNullState(((PropertyAssignment)asNavigationAssignment).getTargetProperty());
-		}
-		else if (asNavigationAssignment instanceof OppositePropertyAssignment) {
-			Property referredProperty = ClassUtil.nonNullState(((OppositePropertyAssignment)asNavigationAssignment).getTargetProperty());
-			return ClassUtil.nonNullState(referredProperty.getOpposite());
-		}
-		throw new UnsupportedOperationException("Unsupported " + asNavigationAssignment.eClass().getName());
+	public static @NonNull Property getTargetProperty(@NonNull SetStatement asSetStatement) {
+		Property referredProperty = ClassUtil.nonNullState(asSetStatement.getTargetProperty());
+		return asSetStatement.isIsOpposite() ? ClassUtil.nonNullState(referredProperty.getOpposite()) : referredProperty;
 	}
 
 	public static @Nullable TypedModel getTypedModel(@Nullable Area area) {

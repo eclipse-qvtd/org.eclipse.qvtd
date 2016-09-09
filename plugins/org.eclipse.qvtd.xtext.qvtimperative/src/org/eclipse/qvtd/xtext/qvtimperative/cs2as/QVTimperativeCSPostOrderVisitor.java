@@ -18,6 +18,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.NavigationCallExp;
 import org.eclipse.ocl.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableExp;
@@ -41,9 +42,9 @@ import org.eclipse.qvtd.pivot.qvtimperative.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
-import org.eclipse.qvtd.pivot.qvtimperative.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.RealizedVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.VariableAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.VariablePredicate;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
@@ -60,6 +61,7 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.ParamDeclarationCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.PatternCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.PredicateCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.PredicateOrAssignmentCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.SetStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QueryCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.RealizeableVariableCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.RealizedVariableCS;
@@ -94,7 +96,7 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 		super(context);
 	}
 
-	protected @Nullable Assignment refreshPropertyAssignment(@NonNull NavigationCallExp propertyCallExp, @NonNull PredicateOrAssignmentCS csConstraint) {
+	/*	protected @Nullable Statement refreshPropertyAssignment(@NonNull NavigationCallExp propertyCallExp, @NonNull PredicateOrAssignmentCS csConstraint) {
 		@Nullable PropertyAssignment propertyAssignment;
 		//		Property referredProperty = propertyCallExp.getReferredProperty();
 		//		Property oppositeProperty = referredProperty.getOpposite();
@@ -110,7 +112,7 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 			//			propertyAssignment.setIsOpposite(target instanceof FeatureCallExp);		// FIXME isOpposite
 		}
 		return propertyAssignment;
-	}
+	} */
 
 	protected @Nullable Assignment refreshVariableAssignment(@NonNull VariableExp variableExp, @NonNull PredicateOrAssignmentCS csConstraint) {
 		Assignment assignment = PivotUtil.getPivot(Assignment.class, csConstraint);
@@ -146,7 +148,8 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 				if (csInitialiser != null) {
 					Assignment assignment = null;
 					if (target instanceof NavigationCallExp) {
-						assignment = refreshPropertyAssignment((NavigationCallExp)target, csConstraint);
+						throw new IllegalStateException();
+						//						assignment = refreshPropertyAssignment((NavigationCallExp)target, csConstraint);
 					}
 					else if (target instanceof VariableExp) {
 						assignment = refreshVariableAssignment((VariableExp)target, csConstraint);
@@ -346,6 +349,23 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 				OCLExpression target = context.visitLeft2Right(OCLExpression.class, expression);
 				asRealizedVariable.setOwnedInit(target);
 			}
+		}
+		return null;
+	}
+
+	@Override
+	public Continuation<?> visitSetStatementCS(@NonNull SetStatementCS csElement) {
+		SetStatement setStatement = PivotUtil.getPivot(SetStatement.class, csElement);
+		if (setStatement != null) {
+			Variable targetVariable = csElement.getReferredVariable();
+			setStatement.setSlotExpression(PivotUtil.createVariableExp(targetVariable));
+			Property targetProperty = csElement.getReferredProperty();
+			ExpCS csInitialiser = csElement.getOwnedInitExpression();
+			OCLExpression target = csInitialiser != null ? context.visitLeft2Right(OCLExpression.class, csInitialiser) : null;
+			setStatement.setTargetProperty(targetProperty);
+			//			propertyAssignment.setIsOpposite(target instanceof FeatureCallExp);		// FIXME isOpposite
+			setStatement.setValue(target);
+			//				pAssignments.add(assignment);
 		}
 		return null;
 	}

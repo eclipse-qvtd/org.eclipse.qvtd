@@ -63,8 +63,8 @@ import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
-import org.eclipse.qvtd.pivot.qvtimperative.NavigationAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.RealizedVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 import org.eclipse.qvtd.pivot.qvtimperative.VariableAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
@@ -436,17 +436,6 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 	}
 
 	@Override
-	public void internalExecuteNavigationAssignment(@NonNull NavigationAssignment navigationAssignment, @NonNull Object slotObject, @Nullable Object ecoreValue, @Nullable Object childKey) {
-		Property targetProperty = QVTimperativeUtil.getTargetProperty(navigationAssignment);
-		targetProperty.initValue(slotObject, ecoreValue);
-		QVTiModelManager modelManager = getModelManager();
-		Integer cacheIndex = modelManager.getTransformationAnalysis().getCacheIndex(navigationAssignment);
-		if (cacheIndex != null) {
-			modelManager.setUnnavigableOpposite(cacheIndex, slotObject, ecoreValue);
-		}
-	}
-
-	@Override
 	public @Nullable Object internalExecuteOperationCallExp(@NonNull OperationCallExp operationCallExp,
 			@Nullable Object @NonNull [] boxedSourceAndArgumentValues) {
 		Operation referredOperation = operationCallExp.getReferredOperation();
@@ -475,6 +464,17 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 		replace(realizedVariable, element, false);
 		getModelManager().addModelElement(typedModel, element);
 		return element;
+	}
+
+	@Override
+	public void internalExecuteSetStatement(@NonNull SetStatement setStatement, @NonNull Object slotObject, @Nullable Object ecoreValue, @Nullable Object childKey) {
+		Property targetProperty = QVTimperativeUtil.getTargetProperty(setStatement);
+		targetProperty.initValue(slotObject, ecoreValue);
+		QVTiModelManager modelManager = getModelManager();
+		Integer cacheIndex = modelManager.getTransformationAnalysis().getCacheIndex(setStatement);
+		if (cacheIndex != null) {
+			modelManager.setUnnavigableOpposite(cacheIndex, slotObject, ecoreValue);
+		}
 	}
 
 	@Override

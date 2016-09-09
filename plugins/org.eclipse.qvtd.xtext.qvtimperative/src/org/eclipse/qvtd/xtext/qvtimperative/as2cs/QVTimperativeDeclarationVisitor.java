@@ -58,7 +58,6 @@ import org.eclipse.ocl.xtext.basecs.RootPackageCS;
 import org.eclipse.ocl.xtext.basecs.TypedRefCS;
 import org.eclipse.ocl.xtext.essentialoclcs.EssentialOCLCSPackage;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
-import org.eclipse.ocl.xtext.essentialoclcs.NameExpCS;
 import org.eclipse.ocl.xtext.essentialoclcs.VariableCS;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
@@ -73,22 +72,21 @@ import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.Area;
 import org.eclipse.qvtd.pivot.qvtimperative.Assignment;
 import org.eclipse.qvtd.pivot.qvtimperative.BottomPattern;
+import org.eclipse.qvtd.pivot.qvtimperative.BottomStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativePattern;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardPattern;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativePattern;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
-import org.eclipse.qvtd.pivot.qvtimperative.NavigationAssignment;
-import org.eclipse.qvtd.pivot.qvtimperative.OppositePropertyAssignment;
-import org.eclipse.qvtd.pivot.qvtimperative.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.RealizedVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 import org.eclipse.qvtd.pivot.qvtimperative.VariableAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.VariablePredicate;
@@ -114,6 +112,7 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.PredicateOrAssignmentCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QueryCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.RealizedVariableCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.SetStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.StatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.TopLevelCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.TransformationCS;
@@ -396,6 +395,11 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 	}
 
 	@Override
+	public ElementCS visitBottomStatement(@NonNull BottomStatement object) {
+		return visitStatement(object);
+	}
+
+	@Override
 	public ElementCS visitConnectionAssignment(@NonNull ConnectionAssignment asConnectionAssignment) {
 		PredicateOrAssignmentCS csAssignment = context.refreshElement(PredicateOrAssignmentCS.class, QVTimperativeCSPackage.Literals.PREDICATE_OR_ASSIGNMENT_CS, asConnectionAssignment);
 		csAssignment.setPivot(asConnectionAssignment);
@@ -590,22 +594,6 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 	}
 
 	@Override
-	public ElementCS visitNavigationAssignment(@NonNull NavigationAssignment asNavigationAssignment) {
-		PredicateOrAssignmentCS csAssignment = context.refreshElement(PredicateOrAssignmentCS.class, QVTimperativeCSPackage.Literals.PREDICATE_OR_ASSIGNMENT_CS, asNavigationAssignment);
-		ExpCS csSlotExp = createExpCS(asNavigationAssignment.getSlotExpression());
-		NameExpCS csPropName = createNameExpCS(QVTimperativeUtil.getTargetProperty(asNavigationAssignment));
-		csAssignment.setOwnedTarget(createInfixExpCS(csSlotExp, ".", csPropName));
-		csAssignment.setOwnedInitExpression(createExpCS(asNavigationAssignment.getValue()));
-		csAssignment.setIsDefault(asNavigationAssignment.isIsDefault());
-		return csAssignment;
-	}
-
-	@Override
-	public ElementCS visitOppositePropertyAssignment(@NonNull OppositePropertyAssignment asNavigationAssignment) {
-		return visitNavigationAssignment(asNavigationAssignment);
-	}
-
-	@Override
 	public ElementCS visitPackage(org.eclipse.ocl.pivot.@NonNull Package asPackage) {
 		//		List<org.eclipse.ocl.pivot.@NonNull Class> asClasses = ClassUtil.nullFree(asPackage.getOwnedClasses());
 		//		List<org.eclipse.ocl.pivot.@NonNull Package> asPackages = ClassUtil.nullFree(asPackage.getOwnedPackages());
@@ -660,18 +648,6 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 	}
 
 	@Override
-	public ElementCS visitPropertyAssignment(@NonNull PropertyAssignment asPropertyAssignment) {
-		PredicateOrAssignmentCS csAssignment = context.refreshElement(PredicateOrAssignmentCS.class, QVTimperativeCSPackage.Literals.PREDICATE_OR_ASSIGNMENT_CS, asPropertyAssignment);
-		csAssignment.setPivot(asPropertyAssignment);
-		ExpCS csSlotExp = createExpCS(asPropertyAssignment.getSlotExpression());
-		NameExpCS csPropName = createNameExpCS(asPropertyAssignment.getTargetProperty());
-		csAssignment.setOwnedTarget(createInfixExpCS(csSlotExp, ".", csPropName));
-		csAssignment.setOwnedInitExpression(createExpCS(asPropertyAssignment.getValue()));
-		csAssignment.setIsDefault(asPropertyAssignment.isIsDefault());
-		return csAssignment;
-	}
-
-	@Override
 	public ElementCS visitRealizedVariable(@NonNull RealizedVariable asRealizedVariable) {
 		RealizedVariableCS csRealizedVariable = context.refreshNamedElement(RealizedVariableCS.class, QVTimperativeCSPackage.Literals.REALIZED_VARIABLE_CS, asRealizedVariable);
 		csRealizedVariable.setPivot(asRealizedVariable);
@@ -683,6 +659,15 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 	@Override
 	public ElementCS visitRule(@NonNull Rule object) {
 		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public ElementCS visitSetStatement(@NonNull SetStatement asSetStatement) {
+		SetStatementCS csStatement = context.refreshElement(SetStatementCS.class, QVTimperativeCSPackage.Literals.SET_STATEMENT_CS, asSetStatement);
+		csStatement.setReferredVariable((Variable) asSetStatement.getSlotExpression().getReferredVariable());
+		csStatement.setReferredProperty(QVTimperativeUtil.getTargetProperty(asSetStatement));
+		csStatement.setOwnedInitExpression(createExpCS(asSetStatement.getValue()));
+		return csStatement;
 	}
 
 	@Override

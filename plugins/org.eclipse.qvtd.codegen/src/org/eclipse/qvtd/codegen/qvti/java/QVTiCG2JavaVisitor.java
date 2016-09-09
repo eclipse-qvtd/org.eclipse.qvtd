@@ -100,15 +100,11 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtimperative.Area;
-import org.eclipse.qvtd.pivot.qvtimperative.Assignment;
-import org.eclipse.qvtd.pivot.qvtimperative.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
-import org.eclipse.qvtd.pivot.qvtimperative.NavigationAssignment;
-import org.eclipse.qvtd.pivot.qvtimperative.PropertyAssignment;
-import org.eclipse.qvtd.pivot.qvtimperative.RealizedVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiTransformationAnalysis;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.runtime.evaluation.AbstractInvocation;
@@ -188,24 +184,6 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 	}
 
 	protected void doAddRealization(@NonNull CGRealizedVariable cgRealizedVariable) {
-		RealizedVariable pRealizedVariable = (RealizedVariable)cgRealizedVariable.getAst();
-		Area pArea = QVTimperativeUtil.getContainingArea(pRealizedVariable);
-		if (pArea != null) {
-			BottomPattern pBottomPattern = pArea.getBottomPattern();
-			if (pBottomPattern != null) {
-				for (@NonNull Assignment pAssignment : ClassUtil.nullFree(pBottomPattern.getAssignment())) {
-					if (pAssignment instanceof PropertyAssignment) {
-						Property pProperty = ((PropertyAssignment)pAssignment).getTargetProperty();
-						if (pProperty != null) {
-							Property pOppositeProperty = pProperty.getOpposite();
-							if ((pOppositeProperty != null) && pOppositeProperty.isIsComposite()) {
-								// FIXME must check for null asssignment and correct target								return;
-							}
-						}
-					}
-				}
-			}
-		}
 		CGTypedModel cgTypedModel = cgRealizedVariable.getTypedModel();
 		//
 		js.append(QVTiGlobalContext.MODELS_NAME);
@@ -343,10 +321,10 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		CGValuedElement cgInit = getExpression(cgPropertyAssignment.getInitValue());
 		EPackage ePackage = ClassUtil.nonNullModel(eStructuralFeature.getEContainingClass().getEPackage());
 		boolean isHazardous = false;
-		Element asNavigationAssignment = cgPropertyAssignment.getAst();
-		Mapping asMapping = QVTimperativeUtil.getContainingMapping(asNavigationAssignment);
-		if ((asMapping != null) && (asNavigationAssignment instanceof NavigationAssignment)) {
-			isHazardous = transformationAnalysis.isHazardousWrite(asMapping, (NavigationAssignment)asNavigationAssignment);
+		Element asSetStatement = cgPropertyAssignment.getAst();
+		Mapping asMapping = QVTimperativeUtil.getContainingMapping(asSetStatement);
+		if ((asMapping != null) && (asSetStatement instanceof SetStatement)) {
+			isHazardous = transformationAnalysis.isHazardousWrite(asMapping, (SetStatement)asSetStatement);
 		}
 		if (isHazardous || isIncremental) {
 			js.append("objectManager.assigned(");
@@ -370,10 +348,10 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		CGValuedElement cgInit = getExpression(cgPropertyAssignment.getInitValue());
 		EPackage ePackage = ClassUtil.nonNullModel(eStructuralFeature.getEContainingClass().getEPackage());
 		boolean isHazardous = false;
-		Element asNavigationAssignment = cgPropertyAssignment.getAst();
-		Mapping asMapping = QVTimperativeUtil.getContainingMapping(asNavigationAssignment);
-		if ((asMapping != null) && (asNavigationAssignment instanceof NavigationAssignment)) {
-			isHazardous = transformationAnalysis.isHazardousWrite(asMapping, (NavigationAssignment)asNavigationAssignment);
+		Element asSetStatement = cgPropertyAssignment.getAst();
+		Mapping asMapping = QVTimperativeUtil.getContainingMapping(asSetStatement);
+		if ((asMapping != null) && (asSetStatement instanceof SetStatement)) {
+			isHazardous = transformationAnalysis.isHazardousWrite(asMapping, (SetStatement)asSetStatement);
 		}
 		if (isHazardous || isIncremental) {
 			js.append("objectManager.assigned(");

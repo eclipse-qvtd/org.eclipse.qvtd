@@ -92,8 +92,8 @@ import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
-import org.eclipse.qvtd.pivot.qvtimperative.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.RealizedVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.VariableAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.util.AbstractExtendingQVTimperativeVisitor;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.AssignmentComparator;
@@ -723,7 +723,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		return variable;
 	}
 
-	private void createClassPropertyAssignments(@NonNull Iterable<@NonNull List<@NonNull NavigableEdge>> classAssignments) {
+	private void createClassSetStatements(@NonNull Iterable<@NonNull List<@NonNull NavigableEdge>> classAssignments) {
 		for (@NonNull List<@NonNull NavigableEdge> edges : classAssignments) {
 			for (@NonNull NavigableEdge edge : edges) {
 				Node sourceNode = edge.getSource();
@@ -731,8 +731,8 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 				OCLExpression slotVariableExp = createVariableExp(sourceNode);
 				Property property = edge.getProperty();
 				OCLExpression targetVariableExp = createVariableExp(targetNode);
-				PropertyAssignment propertyAssignment = QVTimperativeUtil.createPropertyAssignment(slotVariableExp, property, targetVariableExp);
-				mapping.getBottomPattern().getAssignment().add(propertyAssignment);
+				SetStatement setStatement = QVTimperativeUtil.createSetStatement((Variable) ((VariableExp)slotVariableExp).getReferredVariable(), property, targetVariableExp);
+				mapping.getOwnedStatements().add(setStatement);
 			}
 		}
 	}
@@ -1161,8 +1161,8 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 					valueExp = expressionCreator.getExpression(targetNode);		// FIXME debugging
 				}
 				if (valueExp != null) {
-					PropertyAssignment propertyAssignment = QVTimperativeUtil.createPropertyAssignment(slotVariableExp, property, valueExp);
-					bottomPattern.getAssignment().add(propertyAssignment);
+					SetStatement propertyAssignment = QVTimperativeUtil.createSetStatement((Variable) ((VariableExp)slotVariableExp).getReferredVariable(), property, valueExp);
+					mapping.getOwnedStatements().add(propertyAssignment);
 				}
 				else {
 					System.err.println("No assignment in " + this + " to " + slotVariableExp + "." + property);
@@ -1183,7 +1183,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		if (classAssignments != null) {
 			pruneClassAssignments(classAssignments);
 			Collection<@NonNull List<@NonNull NavigableEdge>> values = classAssignments.values();
-			createClassPropertyAssignments(values);
+			createClassSetStatements(values);
 		}
 		@SuppressWarnings("null")
 		@NonNull EList<@NonNull Assignment> bottomAssignments = bottomPattern.getAssignment();

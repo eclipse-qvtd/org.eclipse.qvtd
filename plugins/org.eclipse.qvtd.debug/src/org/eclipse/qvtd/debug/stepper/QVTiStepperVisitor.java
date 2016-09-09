@@ -20,6 +20,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtimperative.Assignment;
 import org.eclipse.qvtd.pivot.qvtimperative.BottomPattern;
+import org.eclipse.qvtd.pivot.qvtimperative.BottomStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
@@ -47,6 +48,11 @@ public class QVTiStepperVisitor extends AbstractQVTimperativeStepperVisitor
 
 	@Override
 	public @Nullable IStepper visitBottomPattern(@NonNull BottomPattern object) {
+		return NonStepper.INSTANCE;
+	}
+
+	@Override
+	public IStepper visitBottomStatement(@NonNull BottomStatement object) {
 		return NonStepper.INSTANCE;
 	}
 

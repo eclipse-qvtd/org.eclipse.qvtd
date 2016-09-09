@@ -20,11 +20,9 @@ import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseHelper;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
-import org.eclipse.qvtd.pivot.qvtimperative.NavigationAssignment;
-import org.eclipse.qvtd.pivot.qvtimperative.OppositePropertyAssignment;
-import org.eclipse.qvtd.pivot.qvtimperative.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.RealizedVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.VariableAssignment;
 
 /**
@@ -52,29 +50,16 @@ public class QVTimperativeHelper extends QVTbaseHelper
 		return asVariable;
 	}
 
-	public @NonNull NavigationAssignment createNavigationAssignment(@NonNull OCLExpression asSlotExpression, @NonNull Property asProperty, @NonNull OCLExpression asValueExpression) {
-		NavigationAssignment asNavigationAssignment;
-		if (asProperty.isIsImplicit()) {
-			OppositePropertyAssignment asPropertyAssignment = QVTimperativeFactory.eINSTANCE.createOppositePropertyAssignment();
-			asPropertyAssignment.setTargetProperty(asProperty.getOpposite());
-			asNavigationAssignment = asPropertyAssignment;
-		}
-		else {
-			PropertyAssignment asPropertyAssignment = QVTimperativeFactory.eINSTANCE.createPropertyAssignment();
-			asPropertyAssignment.setTargetProperty(asProperty);
-			asNavigationAssignment = asPropertyAssignment;
-		}
-		asNavigationAssignment.setSlotExpression(asSlotExpression);
-		asNavigationAssignment.setValue(asValueExpression);
-		return asNavigationAssignment;
-	}
-
 	public @NonNull RealizedVariable createRealizedVariable(@NonNull String name, @NonNull Type type) {
 		RealizedVariable realizedVariable = QVTimperativeFactory.eINSTANCE.createRealizedVariable();
 		realizedVariable.setName(name);
 		realizedVariable.setType(type);
 		realizedVariable.setIsRequired(true);;
 		return realizedVariable;
+	}
+
+	public @NonNull SetStatement createSetStatement(@NonNull Variable asVariable, @NonNull Property asProperty, @NonNull OCLExpression asValueExpression) {
+		return QVTimperativeUtil.createSetStatement(asVariable, asProperty, asValueExpression);
 	}
 
 	public @NonNull VariableAssignment createVariableAssignment(@NonNull Variable asVariable, @NonNull OCLExpression asValueExpression) {

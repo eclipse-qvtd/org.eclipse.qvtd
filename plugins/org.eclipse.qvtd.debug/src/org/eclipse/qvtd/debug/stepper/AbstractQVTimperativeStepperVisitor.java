@@ -106,23 +106,13 @@ implements QVTimperativeVisitor<IStepper>
 	}
 
 	@Override
-	public @Nullable IStepper visitNavigationAssignment(org.eclipse.qvtd.pivot.qvtimperative.@NonNull NavigationAssignment object) {
-		return visitAssignment(object);
-	}
-
-	@Override
-	public @Nullable IStepper visitOppositePropertyAssignment(org.eclipse.qvtd.pivot.qvtimperative.@NonNull OppositePropertyAssignment object) {
-		return visitNavigationAssignment(object);
-	}
-
-	@Override
-	public @Nullable IStepper visitPropertyAssignment(org.eclipse.qvtd.pivot.qvtimperative.@NonNull PropertyAssignment object) {
-		return visitNavigationAssignment(object);
-	}
-
-	@Override
 	public @Nullable IStepper visitRealizedVariable(org.eclipse.qvtd.pivot.qvtimperative.@NonNull RealizedVariable object) {
 		return visitVariable(object);
+	}
+
+	@Override
+	public @Nullable IStepper visitSetStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull SetStatement object) {
+		return visitBottomStatement(object);
 	}
 
 	@Override
