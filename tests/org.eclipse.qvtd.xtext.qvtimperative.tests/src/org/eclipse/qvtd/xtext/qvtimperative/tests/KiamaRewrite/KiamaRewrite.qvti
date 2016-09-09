@@ -230,10 +230,9 @@ map r_PlusCS_left in KiamaRewrite_qvtp_qvtcas
 		allChildren : Set(kiamacs::NodeCS) := _'«parent»'.left.oclAsSet(),
 		_'«child-PlusCS»' : Set(kiamacs::PlusCS) := allChildren->selectByKind(kiamacs::PlusCS),
 		_'«child-NumCS»' : Set(kiamacs::NumCS) := allChildren->selectByKind(kiamacs::NumCS)
-	|
-		ji_PlusCS += _'«child-PlusCS»';
-		ji_NumCS += _'«child-NumCS»';
 	}
+	add ji_PlusCS += _'«child-PlusCS»';
+	add ji_NumCS += _'«child-NumCS»';
 	for aChild : kiamacs::PlusCS in _'«child-PlusCS»' {
 		call r_PlusCS_left {
 			_'«parent»' := aChild;
@@ -250,10 +249,9 @@ map r_PlusCS_right in KiamaRewrite_qvtp_qvtcas
 		allChildren : Set(kiamacs::NodeCS) := _'«parent»'.right.oclAsSet(),
 		_'«child-PlusCS»' : Set(kiamacs::PlusCS) := allChildren->selectByKind(kiamacs::PlusCS),
 		_'«child-NumCS»' : Set(kiamacs::NumCS) := allChildren->selectByKind(kiamacs::NumCS)
-	|
-		ji_PlusCS += _'«child-PlusCS»';
-		ji_NumCS += _'«child-NumCS»';
 	}
+	add ji_PlusCS += _'«child-PlusCS»';
+	add ji_NumCS += _'«child-NumCS»';
 	for aChild : kiamacs::PlusCS in _'«child-PlusCS»' {
 		call r_PlusCS_right {
 			_'«parent»' := aChild;
@@ -270,11 +268,10 @@ map r_TopCS_node in KiamaRewrite_qvtp_qvtcas
 		allChildren : Set(kiamacs::NodeCS) := _'«parent»'.node.oclAsSet(),
 		_'«child-PlusCS»' : Set(kiamacs::PlusCS) := allChildren->selectByKind(kiamacs::PlusCS),
 		_'«child-NumCS»' : Set(kiamacs::NumCS) := allChildren->selectByKind(kiamacs::NumCS)
-	|
-		ji_PlusCS += _'«child-PlusCS»';
-		ji_PlusCS_3 += _'«child-PlusCS»';
-		ji_NumCS += _'«child-NumCS»';
 	}
+	add ji_PlusCS += _'«child-PlusCS»';
+	add ji_PlusCS_3 += _'«child-PlusCS»';
+	add ji_NumCS += _'«child-NumCS»';
 }
 
 map r__PlusCS in KiamaRewrite_qvtp_qvtcas
@@ -294,8 +291,8 @@ map r__PlusCS in KiamaRewrite_qvtp_qvtcas
 		ji_PlusCS := _'«local»';
 		_'«parent»' := _'«head»';
 	}
-	_'«new»' += _'«local»'->excludingAll(ji_PlusCS);
-	ji_PlusCS += _'«new»';
+	add _'«new»' += _'«local»'->excludingAll(ji_PlusCS);
+	add ji_PlusCS += _'«new»';
 	for loop0 : kiamacs::PlusCS in _'«new»' {
 		infinite call r__PlusCS {
 			ji_NumCS := ji_NumCS;
