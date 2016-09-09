@@ -23,7 +23,9 @@ TopLevelCS:
 	ownedImports+=ImportCS*
 	(ownedPackages+=QualifiedPackageCS | ownedTransformations+=TransformationCS | ownedMappings+=MappingCS | ownedQueries+=QueryCS)*
 ;
-		
+
+AddStatementCS returns ConnectionStatementCS: 'add' targetVariable=[pivot::Variable|UnrestrictedName] '+=' ownedExpression=ExpCS ';';
+				
 BottomPatternCS:		// Bug 466385 explains the redundancy below
 	(
 		'{' (ownedUnrealizedVariables+=UnrealizedVariableCS | ownedRealizedVariables+=RealizedVariableCS)
@@ -40,10 +42,8 @@ BottomPatternCS:		// Bug 466385 explains the redundancy below
 ;
 	
 BottomStatementCS returns StatementCS: SetStatementCS;
-
-ConnectionStatementCS: targetVariable=[pivot::Variable|UnrestrictedName] '+=' ownedExpression=ExpCS ';';
 	
-ControlStatementCS returns MappingStatementCS: ConnectionStatementCS | MappingCallCS | MappingLoopCS;
+ControlStatementCS returns MappingStatementCS: AddStatementCS | MappingCallCS | MappingLoopCS;
 	
 DirectionCS: {DirectionCS} name=UnrestrictedName?
 	'imports' imports+=[pivot::Package|UnrestrictedName] (',' imports+=[pivot::Package|UnrestrictedName])*
@@ -124,7 +124,7 @@ PredicateCS: ownedCondition=ExpCS ';';
 //Predicate ::= BooleanOCLExpr
 //Assignement ::= [�default�] SlotOwnerOCLExpr�.�PropertyName �:=� ValueOCLExpr
 
-PredicateOrAssignmentCS: isDefault?='default'? ownedTarget=ExpCS ((':='|isAccumulate?='+=') ownedInitExpression=ExpCS)? ';';
+PredicateOrAssignmentCS: ownedTarget=ExpCS (':=' ownedInitExpression=ExpCS)? ';';
 		
 QueryCS: isTransient?='transient'? 'query' ownedPathName=ScopeNameCS name=UnrestrictedName
 		'(' (ownedParameters+=ParamDeclarationCS (',' ownedParameters+=ParamDeclarationCS)*)? ')'

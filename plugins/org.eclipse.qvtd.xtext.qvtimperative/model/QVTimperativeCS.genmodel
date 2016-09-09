@@ -76,8 +76,6 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//PredicateCS/ownedCondition"/>
     </genClasses>
     <genClasses ecoreClass="QVTimperativeCS.ecore#//PredicateOrAssignmentCS">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperativeCS.ecore#//PredicateOrAssignmentCS/isAccumulate"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperativeCS.ecore#//PredicateOrAssignmentCS/isDefault"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//PredicateOrAssignmentCS/ownedTarget"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//PredicateOrAssignmentCS/ownedInitExpression"/>
     </genClasses>
