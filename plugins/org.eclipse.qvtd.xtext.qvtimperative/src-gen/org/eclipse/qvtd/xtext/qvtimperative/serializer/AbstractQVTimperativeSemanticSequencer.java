@@ -462,7 +462,7 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 				}
 				else break;
 			case QVTimperativeCSPackage.CONNECTION_STATEMENT_CS:
-				sequence_ConnectionStatementCS(context, (ConnectionStatementCS) semanticObject); 
+				sequence_AddStatementCS(context, (ConnectionStatementCS) semanticObject); 
 				return; 
 			case QVTimperativeCSPackage.DIRECTION_CS:
 				sequence_DirectionCS(context, (DirectionCS) semanticObject); 
@@ -557,6 +557,29 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 	
 	/**
 	 * Contexts:
+	 *     AddStatementCS returns ConnectionStatementCS
+	 *     ControlStatementCS returns ConnectionStatementCS
+	 *     StatementCS returns ConnectionStatementCS
+	 *
+	 * Constraint:
+	 *     (targetVariable=[Variable|UnrestrictedName] ownedExpression=ExpCS)
+	 */
+	protected void sequence_AddStatementCS(ISerializationContext context, ConnectionStatementCS semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, QVTimperativeCSPackage.Literals.CONNECTION_STATEMENT_CS__TARGET_VARIABLE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, QVTimperativeCSPackage.Literals.CONNECTION_STATEMENT_CS__TARGET_VARIABLE));
+			if (transientValues.isValueTransient(semanticObject, QVTimperativeCSPackage.Literals.CONNECTION_STATEMENT_CS__OWNED_EXPRESSION) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, QVTimperativeCSPackage.Literals.CONNECTION_STATEMENT_CS__OWNED_EXPRESSION));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getAddStatementCSAccess().getTargetVariableVariableUnrestrictedNameParserRuleCall_1_0_1(), semanticObject.getTargetVariable());
+		feeder.accept(grammarAccess.getAddStatementCSAccess().getOwnedExpressionExpCSParserRuleCall_3_0(), semanticObject.getOwnedExpression());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     BottomPatternCS returns BottomPatternCS
 	 *
 	 * Constraint:
@@ -577,29 +600,6 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 	 */
 	protected void sequence_BottomPatternCS(ISerializationContext context, BottomPatternCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     ConnectionStatementCS returns ConnectionStatementCS
-	 *     ControlStatementCS returns ConnectionStatementCS
-	 *     StatementCS returns ConnectionStatementCS
-	 *
-	 * Constraint:
-	 *     (targetVariable=[Variable|UnrestrictedName] ownedExpression=ExpCS)
-	 */
-	protected void sequence_ConnectionStatementCS(ISerializationContext context, ConnectionStatementCS semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, QVTimperativeCSPackage.Literals.CONNECTION_STATEMENT_CS__TARGET_VARIABLE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, QVTimperativeCSPackage.Literals.CONNECTION_STATEMENT_CS__TARGET_VARIABLE));
-			if (transientValues.isValueTransient(semanticObject, QVTimperativeCSPackage.Literals.CONNECTION_STATEMENT_CS__OWNED_EXPRESSION) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, QVTimperativeCSPackage.Literals.CONNECTION_STATEMENT_CS__OWNED_EXPRESSION));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getConnectionStatementCSAccess().getTargetVariableVariableUnrestrictedNameParserRuleCall_0_0_1(), semanticObject.getTargetVariable());
-		feeder.accept(grammarAccess.getConnectionStatementCSAccess().getOwnedExpressionExpCSParserRuleCall_2_0(), semanticObject.getOwnedExpression());
-		feeder.finish();
 	}
 	
 	
@@ -839,7 +839,7 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 	 *     PredicateOrAssignmentCS returns PredicateOrAssignmentCS
 	 *
 	 * Constraint:
-	 *     (isDefault?='default'? ownedTarget=ExpCS (isAccumulate?='+='? ownedInitExpression=ExpCS)?)
+	 *     (ownedTarget=ExpCS ownedInitExpression=ExpCS?)
 	 */
 	protected void sequence_PredicateOrAssignmentCS(ISerializationContext context, PredicateOrAssignmentCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
