@@ -101,7 +101,7 @@ implements QVTimperativeVisitor<IStepper>
 	}
 
 	@Override
-	public @Nullable IStepper visitRealizedVariable(org.eclipse.qvtd.pivot.qvtimperative.@NonNull RealizedVariable object) {
+	public @Nullable IStepper visitNewStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull NewStatement object) {
 		return visitVariable(object);
 	}
 

@@ -15,6 +15,7 @@ import org.eclipse.ocl.pivot.Namespace;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.internal.prettyprint.PrettyPrinter;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
@@ -28,7 +29,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
-import org.eclipse.qvtd.pivot.qvtimperative.RealizedVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.VariableAssignment;
 import org.eclipse.qvtd.xtext.qvtbase.ui.labeling.QVTbaseLabelProvider;
@@ -91,12 +92,12 @@ public class QVTimperativeLabelProvider extends QVTbaseLabelProvider
 		return "MappingCallBinding.gif";
 	}
 
-	protected String image(SetStatement ele) {
-		return QVTIMPERATIVE_UI_ICONS + "SetStatement.gif";
+	protected String image(NewStatement ele) {
+		return QVTIMPERATIVE_UI_ICONS + "NewStatement.gif";
 	}
 
-	protected String image(RealizedVariable ele) {
-		return QVTIMPERATIVE_UI_ICONS + "RealizedVariable.gif";
+	protected String image(SetStatement ele) {
+		return QVTIMPERATIVE_UI_ICONS + "SetStatement.gif";
 	}
 
 	protected String image(TopLevelCS ele) {
@@ -154,7 +155,10 @@ public class QVTimperativeLabelProvider extends QVTbaseLabelProvider
 			return "";
 		}
 		StringBuilder s = new StringBuilder();
-		s.append(PrettyPrinter.printName(ele.getSlotExpression(), namespace));
+		VariableExp slotExpression = ele.getSlotExpression();
+		if (slotExpression != null) {
+			s.append(PrettyPrinter.printName(slotExpression, namespace));
+		}
 		Property targetProperty = ele.getTargetProperty();
 		s.append(".");
 		if (targetProperty != null) {
@@ -179,7 +183,9 @@ public class QVTimperativeLabelProvider extends QVTbaseLabelProvider
 		}
 		StringBuilder s = new StringBuilder();
 		Variable targetVariable = ele.getTargetVariable();
-		s.append(PrettyPrinter.printName(targetVariable, namespace));
+		if (targetVariable != null) {
+			s.append(PrettyPrinter.printName(targetVariable, namespace));
+		}
 		s.append(" : ");
 		if (targetVariable != null) {
 			Type type = targetVariable.getType();

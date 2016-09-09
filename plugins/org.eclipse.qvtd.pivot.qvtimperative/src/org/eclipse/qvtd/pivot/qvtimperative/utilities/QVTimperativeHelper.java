@@ -17,11 +17,12 @@ import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseHelper;
 import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeFactory;
-import org.eclipse.qvtd.pivot.qvtimperative.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.VariableAssignment;
 
@@ -50,12 +51,8 @@ public class QVTimperativeHelper extends QVTbaseHelper
 		return asVariable;
 	}
 
-	public @NonNull RealizedVariable createRealizedVariable(@NonNull String name, @NonNull Type type) {
-		RealizedVariable realizedVariable = QVTimperativeFactory.eINSTANCE.createRealizedVariable();
-		realizedVariable.setName(name);
-		realizedVariable.setType(type);
-		realizedVariable.setIsRequired(true);;
-		return realizedVariable;
+	public @NonNull NewStatement createNewStatement(@NonNull String name, @NonNull TypedModel typedModel, @NonNull Type type) {
+		return QVTimperativeUtil.createNewStatement(name, typedModel, type);
 	}
 
 	public @NonNull SetStatement createSetStatement(@NonNull Variable asVariable, @NonNull Property asProperty, @NonNull OCLExpression asValueExpression) {

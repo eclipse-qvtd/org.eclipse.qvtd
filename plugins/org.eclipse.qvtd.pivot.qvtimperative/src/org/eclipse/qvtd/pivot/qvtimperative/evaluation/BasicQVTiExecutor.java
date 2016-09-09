@@ -54,7 +54,6 @@ import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
-import org.eclipse.qvtd.pivot.qvtimperative.Area;
 import org.eclipse.qvtd.pivot.qvtimperative.Assignment;
 import org.eclipse.qvtd.pivot.qvtimperative.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
@@ -63,7 +62,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
-import org.eclipse.qvtd.pivot.qvtimperative.RealizedVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 import org.eclipse.qvtd.pivot.qvtimperative.VariableAssignment;
@@ -141,34 +140,6 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 
 	protected void doCommits(@NonNull Mapping mapping, @NonNull EvaluationVisitor undecoratedVisitor) {
 		//
-		//	creations
-		//
-		for (Domain domain : mapping.getDomain()) {
-			if (domain.isIsEnforceable()) {
-				ImperativeDomain enforceableDomain = (ImperativeDomain)domain;
-				BottomPattern enforceableBottomPattern = enforceableDomain.getBottomPattern();
-				for (RealizedVariable realizedVariable : enforceableBottomPattern.getRealizedVariable()) {
-					OCLExpression ownedInit = realizedVariable.getOwnedInit();
-					if (ownedInit != null) {
-						Object initValue = ownedInit.accept(undecoratedVisitor);
-						getEvaluationEnvironment().add(realizedVariable, initValue);
-						replace(realizedVariable, initValue);
-						Area area = ((BottomPattern)realizedVariable.eContainer()).getArea();
-						TypedModel typedModel = QVTimperativeUtil.getTypedModel(area);
-						assert typedModel != null;
-						Object ecoreValue = getIdResolver().ecoreValueOf(null, initValue);
-						assert ecoreValue != null;
-						getModelManager().addModelElement(typedModel, ecoreValue);
-					}
-				}
-				for (RealizedVariable realizedVariable : enforceableBottomPattern.getRealizedVariable()) {
-					if (realizedVariable.getOwnedInit() == null) {
-						realizedVariable.accept(undecoratedVisitor);
-					}
-				}
-			}
-		}
-		//
 		// property and connection assignments
 		//
 		BottomPattern middleBottomPattern = mapping.getBottomPattern();
@@ -200,7 +171,6 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 				BottomPattern checkableBottomPattern = checkableDomain.getBottomPattern();
 				assert checkableBottomPattern.getAssignment().isEmpty();
 				assert checkableBottomPattern.getPredicate().isEmpty();
-				assert checkableBottomPattern.getRealizedVariable().isEmpty();
 				//				assert checkableBottomPattern.getVariable().isEmpty();
 				for (@NonNull Variable rVar : ClassUtil.nullFree(checkableBottomPattern.getVariable())) {
 					OCLExpression ownedInit = rVar.getOwnedInit();
@@ -224,7 +194,6 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 			}
 		}
 		BottomPattern middleBottomPattern = mapping.getBottomPattern();
-		assert middleBottomPattern.getRealizedVariable().isEmpty();
 		//
 		// variable declarations/initializations
 		//
@@ -448,22 +417,35 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 	}
 
 	@Override
-	public @Nullable Object internalExecuteRealizedVariable(@NonNull RealizedVariable realizedVariable, @NonNull EvaluationVisitor undecoratedVisitor) {
-		// Realized variables are in the mapping's target bottom pattern
-		// and create elements in the target model. The realized variables
-		// are being visited for each binding of variable in the mapping.
-		Type type = realizedVariable.getType();
-		if (!(type instanceof org.eclipse.ocl.pivot.Class)) {
-			return null;
+	public @Nullable Object internalExecuteNewStatement(@NonNull NewStatement newStatement, @NonNull EvaluationVisitor undecoratedVisitor) {
+		OCLExpression ownedInit = newStatement.getOwnedInit();
+		if (ownedInit != null) {
+			Object initValue = ownedInit.accept(undecoratedVisitor);
+			getEvaluationEnvironment().add(newStatement, initValue);
+			replace(newStatement, initValue);
+			TypedModel typedModel = newStatement.getReferredTypedModel();
+			assert typedModel != null;
+			Object ecoreValue = getIdResolver().ecoreValueOf(null, initValue);
+			assert ecoreValue != null;
+			getModelManager().addModelElement(typedModel, ecoreValue);
+			return ecoreValue;
 		}
-		Area area = ((BottomPattern)realizedVariable.eContainer()).getArea();
-		TypedModel typedModel = QVTimperativeUtil.getTypedModel(area);
-		assert typedModel != null;
-		Object element = ((org.eclipse.ocl.pivot.Class)type).createInstance();
-		// Add the realize variable binding to the environment
-		replace(realizedVariable, element, false);
-		getModelManager().addModelElement(typedModel, element);
-		return element;
+		else {
+			// Realized variables are in the mapping's target bottom pattern
+			// and create elements in the target model. The realized variables
+			// are being visited for each binding of variable in the mapping.
+			Type type = newStatement.getType();
+			if (!(type instanceof org.eclipse.ocl.pivot.Class)) {
+				return null;
+			}
+			TypedModel typedModel = newStatement.getReferredTypedModel();
+			assert typedModel != null;
+			Object element = ((org.eclipse.ocl.pivot.Class)type).createInstance();
+			// Add the realize variable binding to the environment
+			replace(newStatement, element, false);
+			getModelManager().addModelElement(typedModel, element);
+			return element;
+		}
 	}
 
 	@Override

@@ -51,7 +51,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
-import org.eclipse.qvtd.pivot.qvtimperative.RealizedVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 import org.eclipse.qvtd.pivot.qvtimperative.VariableAssignment;
@@ -257,6 +257,11 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 		return visitStatement(object);	// MappingStatement is abstract
 	}
 
+	@Override
+	public @Nullable Object visitNewStatement(@NonNull NewStatement newStatement) {
+		return executor.internalExecuteNewStatement(newStatement, undecoratedVisitor);
+	}
+
 	/*	@Override
 	public Object visitOppositePropertyCallExp(@NonNull OppositePropertyCallExp oppositePropertyCallExp) {
 		QVTiModelManager modelManager = (QVTiModelManager) context.getModelManager();
@@ -296,11 +301,6 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 		// The predicated is visited with a nested environment
 		Object expResult = exp.accept(undecoratedVisitor);
 		return expResult;
-	}
-
-	@Override
-	public @Nullable Object visitRealizedVariable(@NonNull RealizedVariable realizedVariable) {
-		return executor.internalExecuteRealizedVariable(realizedVariable, undecoratedVisitor);
 	}
 
 	@Override

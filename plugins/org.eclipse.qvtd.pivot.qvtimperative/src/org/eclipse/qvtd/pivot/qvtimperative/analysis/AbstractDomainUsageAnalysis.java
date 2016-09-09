@@ -83,7 +83,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
-import org.eclipse.qvtd.pivot.qvtimperative.RealizedVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.VariableAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.util.AbstractExtendingQVTimperativeVisitor;
@@ -365,9 +365,6 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTim
 		for (Variable variable : object.getVariable()) {
 			visit(variable);
 		}
-		for (RealizedVariable variable : object.getRealizedVariable()) {
-			visit(variable);
-		}
 		for (Assignment assignment : object.getAssignment()) {
 			visit(assignment);
 		}
@@ -570,6 +567,11 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTim
 	}
 
 	@Override
+	public @NonNull DomainUsage visitNewStatement(@NonNull NewStatement object) {
+		return visit(object.getReferredTypedModel());
+	}
+
+	@Override
 	public @NonNull DomainUsage visitNullLiteralExp(@NonNull NullLiteralExp object) {
 		return getRootAnalysis().createVariableUsage(getRootAnalysis().getAnyMask());
 	}
@@ -740,11 +742,6 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTim
 	public @NonNull DomainUsage visitPropertyCallExp(@NonNull PropertyCallExp object) {
 		Property property = ClassUtil.nonNullState(object.getReferredProperty());
 		return doNavigationCallExp(property, object);
-	}
-
-	@Override
-	public @NonNull DomainUsage visitRealizedVariable(@NonNull RealizedVariable object) {
-		return getDomainUsage(object);
 	}
 
 	@Override

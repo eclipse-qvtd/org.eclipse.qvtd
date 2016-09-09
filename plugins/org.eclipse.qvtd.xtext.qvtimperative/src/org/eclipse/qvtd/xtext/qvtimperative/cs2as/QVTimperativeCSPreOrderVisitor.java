@@ -49,6 +49,7 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingLoopCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.NewStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.ParamDeclarationCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.PredicateCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.PredicateOrAssignmentCS;
@@ -90,6 +91,22 @@ public class QVTimperativeCSPreOrderVisitor extends AbstractQVTimperativeCSPreOr
 						iterator.setType(type);
 					}
 				}
+			}
+			return null;
+		}
+	}
+
+	public static class NewStatementCompletion extends SingleContinuation<NewStatementCS>
+	{
+		public NewStatementCompletion(@NonNull CS2ASConversion context, @NonNull NewStatementCS csElement) {
+			super(context, null, null, csElement, new PivotDependency(csElement.getOwnedType()));
+		}
+
+		@Override
+		public BasicContinuation<?> execute() {
+			Variable pivotElement = PivotUtil.getPivot(Variable.class, csElement);
+			if (pivotElement != null) {
+				context.refreshRequiredType(pivotElement, csElement);
 			}
 			return null;
 		}
@@ -264,6 +281,11 @@ public class QVTimperativeCSPreOrderVisitor extends AbstractQVTimperativeCSPreOr
 	@Override
 	public Continuation<?> visitMappingLoopCS(@NonNull MappingLoopCS csElement) {
 		return new MappingLoopIteratorCompletion(context, csElement);
+	}
+
+	@Override
+	public Continuation<?> visitNewStatementCS(@NonNull NewStatementCS csElement) {
+		return new NewStatementCompletion(context, csElement);
 	}
 
 	@Override

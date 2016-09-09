@@ -14,13 +14,16 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.xtext.basecs.ImportCS;
 import org.eclipse.ocl.xtext.basecs.PackageCS;
+import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtimperative.Assignment;
 import org.eclipse.qvtd.pivot.qvtimperative.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardPattern;
+import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 import org.eclipse.qvtd.pivot.qvtimperative.VariableAssignment;
 import org.eclipse.qvtd.xtext.qvtbase.ui.outline.QVTbaseOutlineTreeProvider;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS;
@@ -42,9 +45,6 @@ public class QVTimperativeOutlineTreeProvider extends QVTbaseOutlineTreeProvider
 	//}
 
 	protected void _createChildren(IOutlineNode parentNode, BottomPattern ele) {
-		for (Variable asVariable : ele.getRealizedVariable()) {
-			createNode(parentNode, asVariable);
-		}
 		for (Variable asVariable : ele.getVariable()) {
 			createNode(parentNode, asVariable);
 		}
@@ -62,6 +62,17 @@ public class QVTimperativeOutlineTreeProvider extends QVTbaseOutlineTreeProvider
 		}
 		for (Predicate asPredicate : ele.getPredicate()) {
 			createNode(parentNode, asPredicate);
+		}
+	}
+
+	protected void _createChildren(IOutlineNode parentNode, Mapping ele) {
+		for (Domain asDomain : ele.getDomain()) {
+			createNode(parentNode, asDomain);
+		}
+		createNode(parentNode, ele.getGuardPattern());
+		createNode(parentNode, ele.getBottomPattern());
+		for (Statement asStatement : ele.getOwnedStatements()) {
+			createNode(parentNode, asStatement);
 		}
 	}
 

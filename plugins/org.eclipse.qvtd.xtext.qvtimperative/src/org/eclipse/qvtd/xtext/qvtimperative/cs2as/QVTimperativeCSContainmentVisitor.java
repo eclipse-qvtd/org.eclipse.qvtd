@@ -57,14 +57,14 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
-import org.eclipse.qvtd.pivot.qvtimperative.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 import org.eclipse.qvtd.pivot.qvtimperative.VariableAssignment;
+import org.eclipse.qvtd.xtext.qvtimperativecs.AddStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.BottomPatternCS;
-import org.eclipse.qvtd.xtext.qvtimperativecs.ConnectionStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DomainCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.GuardPatternCS;
@@ -72,12 +72,12 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingLoopCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.NewStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.ParamDeclarationCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.PatternCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.PredicateCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.PredicateOrAssignmentCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QueryCS;
-import org.eclipse.qvtd.xtext.qvtimperativecs.RealizedVariableCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.SetStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.TopLevelCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.TransformationCS;
@@ -212,19 +212,18 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 	}
 
 	@Override
-	public Continuation<?> visitBottomPatternCS(@NonNull BottomPatternCS csElement) {
-		BottomPattern pBottomPattern = context.refreshModelElement(BottomPattern.class, QVTimperativePackage.Literals.BOTTOM_PATTERN, csElement);
-		context.refreshPivotList(RealizedVariable.class, pBottomPattern.getRealizedVariable(), csElement.getOwnedRealizedVariables());
-		context.refreshPivotList(Variable.class, pBottomPattern.getVariable(), csElement.getOwnedUnrealizedVariables());
-		context.refreshPivotList(Assignment.class, pBottomPattern.getAssignment(), Iterables.filter(csElement.getOwnedConstraints(), IsAssignmentPredicate.INSTANCE));
-		context.refreshPivotList(Predicate.class, pBottomPattern.getPredicate(), Iterables.filter(csElement.getOwnedConstraints(), IsPredicatePredicate.INSTANCE));
-		context.refreshComments(pBottomPattern, csElement);
+	public @Nullable Continuation<?> visitAddStatementCS(@NonNull AddStatementCS csElement) {
+		context.refreshModelElement(AddStatement.class, QVTimperativePackage.Literals.ADD_STATEMENT, csElement);
 		return null;
 	}
 
 	@Override
-	public @Nullable Continuation<?> visitConnectionStatementCS(@NonNull ConnectionStatementCS csElement) {
-		context.refreshModelElement(AddStatement.class, QVTimperativePackage.Literals.ADD_STATEMENT, csElement);
+	public Continuation<?> visitBottomPatternCS(@NonNull BottomPatternCS csElement) {
+		BottomPattern pBottomPattern = context.refreshModelElement(BottomPattern.class, QVTimperativePackage.Literals.BOTTOM_PATTERN, csElement);
+		context.refreshPivotList(Variable.class, pBottomPattern.getVariable(), csElement.getOwnedUnrealizedVariables());
+		context.refreshPivotList(Assignment.class, pBottomPattern.getAssignment(), Iterables.filter(csElement.getOwnedConstraints(), IsAssignmentPredicate.INSTANCE));
+		context.refreshPivotList(Predicate.class, pBottomPattern.getPredicate(), Iterables.filter(csElement.getOwnedConstraints(), IsPredicatePredicate.INSTANCE));
+		context.refreshComments(pBottomPattern, csElement);
 		return null;
 	}
 
@@ -278,7 +277,6 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 				bottomPattern.getAssignment().clear();
 				bottomPattern.getBindsTo().clear();
 				bottomPattern.getPredicate().clear();
-				bottomPattern.getRealizedVariable().clear();
 				bottomPattern.getVariable().clear();
 				pivotElement.setBottomPattern(bottomPattern);
 			}
@@ -329,6 +327,12 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 	}
 
 	@Override
+	public Continuation<?> visitNewStatementCS(@NonNull NewStatementCS csElement) {
+		refreshNamedElement(NewStatement.class, QVTimperativePackage.Literals.NEW_STATEMENT, csElement);
+		return null;
+	}
+
+	@Override
 	public Continuation<?> visitParamDeclarationCS(@NonNull ParamDeclarationCS csElement) {
 		refreshNamedElement(FunctionParameter.class, QVTbasePackage.Literals.FUNCTION_PARAMETER, csElement);
 		return null;
@@ -366,12 +370,6 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 		//		pivotElement.setIsStatic(true);
 		pivotElement.setIsTransient(csElement.isIsTransient());
 		context.refreshPivotList(FunctionParameter.class, pivotElement.getOwnedParameters(), csElement.getOwnedParameters());
-		return null;
-	}
-
-	@Override
-	public Continuation<?> visitRealizedVariableCS(@NonNull RealizedVariableCS csElement) {
-		refreshNamedElement(RealizedVariable.class, QVTimperativePackage.Literals.REALIZED_VARIABLE, csElement);
 		return null;
 	}
 

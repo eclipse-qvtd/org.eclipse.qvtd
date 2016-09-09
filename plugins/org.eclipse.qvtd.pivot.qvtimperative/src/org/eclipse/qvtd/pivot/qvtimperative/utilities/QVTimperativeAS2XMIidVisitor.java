@@ -28,7 +28,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
-import org.eclipse.qvtd.pivot.qvtimperative.RealizedVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.util.AbstractQVTimperativeAS2XMIidVisitor;
 
 public class QVTimperativeAS2XMIidVisitor extends AbstractQVTimperativeAS2XMIidVisitor
@@ -108,20 +108,20 @@ public class QVTimperativeAS2XMIidVisitor extends AbstractQVTimperativeAS2XMIidV
 	}
 
 	@Override
-	public @Nullable Boolean visitRealizedVariable(@NonNull RealizedVariable object) {
-		if (object.eContainer() instanceof ImperativePattern) {
-			Rule rule = QVTimperativeUtil.getContainingRule(object);
-			if((rule != null) && (rule.getName() != null)) {
-				String name = object.getName();
-				if (name != null) {
-					s.append(VARIABLE_PREFIX);
-					appendParent(object);
-					appendName(name);
-					return true;
-				}
+	public @Nullable Boolean visitNewStatement(@NonNull NewStatement object) {
+		//		if (object.eContainer() instanceof ImperativePattern) {
+		Rule rule = QVTimperativeUtil.getContainingRule(object);
+		if ((rule != null) && (rule.getName() != null)) {
+			String name = object.getName();
+			if (name != null) {
+				s.append(VARIABLE_PREFIX);
+				appendParent(object);
+				appendName(name);
+				return true;
 			}
 		}
-		return super.visitRealizedVariable(object);
+		//		}
+		return super.visitNewStatement(object);
 	}
 
 	@Override

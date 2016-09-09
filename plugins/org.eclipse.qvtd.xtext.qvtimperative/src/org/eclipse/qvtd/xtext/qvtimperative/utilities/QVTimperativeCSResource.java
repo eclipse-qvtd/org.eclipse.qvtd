@@ -33,8 +33,8 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativePattern;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
+import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
-import org.eclipse.qvtd.pivot.qvtimperative.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeASResourceFactory;
 import org.eclipse.qvtd.xtext.qvtimperative.as2cs.QVTimperativeAS2CS;
@@ -90,8 +90,8 @@ public class QVTimperativeCSResource extends EssentialOCLCSResource
 		else if (element instanceof Mapping) {
 			return (Mapping)element;
 		}
-		else if (element instanceof RealizedVariable) {
-			return (RealizedVariable)element;
+		else if (element instanceof NewStatement) {
+			return (NewStatement)element;
 		}
 		else if ((element instanceof Variable) && (element.eContainer() instanceof ImperativePattern)) {
 			return (Variable)element;

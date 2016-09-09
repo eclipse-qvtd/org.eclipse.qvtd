@@ -19,7 +19,9 @@ import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
+import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
+import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 
 public class MappingAttribution extends AbstractAttribution
@@ -34,6 +36,15 @@ public class MappingAttribution extends AbstractAttribution
 		}
 		Mapping mapping = (Mapping)target;
 		if (scopeView.getContainmentFeature() == QVTimperativePackage.Literals.MAPPING__OWNED_STATEMENTS) {
+			EObject child = scopeView.getChild();
+			for (Statement asStatement : mapping.getOwnedStatements()) {
+				if (asStatement == child) {
+					break;
+				}
+				if (asStatement instanceof NewStatement) {
+					environmentView.addNamedElement(asStatement);
+				}
+			}
 			QVTimperativeEnvironmentUtil.addMiddleGuardVariables(environmentView, mapping);
 			QVTimperativeEnvironmentUtil.addSideGuardVariables(environmentView, mapping, null);
 			QVTimperativeEnvironmentUtil.addMiddleBottomVariables(environmentView, mapping);

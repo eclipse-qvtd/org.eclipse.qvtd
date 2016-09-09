@@ -23,11 +23,11 @@ import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.MappingLoopCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.MiddleBottomPatternCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.MiddleDomainCSElements;
+import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.NewStatementCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.PredicateCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.PredicateOrAssignmentCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.QualifiedPackageCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.QueryCSElements;
-import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.RealizedVariableCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.ScopeNameCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.SetStatementCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.SourceBottomPatternCSElements;
@@ -324,13 +324,14 @@ public class QVTimperativeFormatter extends AbstractEssentialOCLFormatter
 			c.setNoSpace().between(a.getLeftParenthesisKeyword_0_0(), a.getRightParenthesisKeyword_0_5());
 		}
 		{
-			PredicateOrAssignmentCSElements a = f.getPredicateOrAssignmentCSAccess();
-			setNoSpaceLineWrap(c, a.getSemicolonKeyword_2());
+			NewStatementCSElements a = f.getNewStatementCSAccess();
+			c.setLinewrap(1).before(a.getNewKeyword_0());
+			c.setNoSpace().around(a.getColonKeyword_1());
+			c.setNoSpace().before(a.getSemicolonKeyword_7());
 		}
 		{
-			RealizedVariableCSElements a = f.getRealizedVariableCSAccess();
-			c.setLinewrap(1).before(a.getRealizeKeyword_0());
-			c.setLinewrap(1).after(a.getOwnedInitExpressionAssignment_4_1());
+			PredicateOrAssignmentCSElements a = f.getPredicateOrAssignmentCSAccess();
+			setNoSpaceLineWrap(c, a.getSemicolonKeyword_2());
 		}
 		{
 			ScopeNameCSElements a = f.getScopeNameCSAccess();

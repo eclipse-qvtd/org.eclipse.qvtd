@@ -17,7 +17,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.internal.resource.ASSaver;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtimperative.Assignment;
 import org.eclipse.qvtd.pivot.qvtimperative.BottomPattern;
@@ -49,7 +48,7 @@ public class QVTimperativeASSaverNormalizeVisitor extends AbstractQVTimperativeA
 	public @Nullable Object visitBottomPattern(@NonNull BottomPattern object) {
 		List<@NonNull Assignment> assignments = ClassUtil.nullFree(object.getAssignment());
 		ClassUtil.sort(assignments, new AssignmentComparator(assignments));
-		ClassUtil.sort(ClassUtil.nullFree(object.getRealizedVariable()), NameUtil.NAMEABLE_COMPARATOR);
+		//		ClassUtil.sort(ClassUtil.nullFree(object.getRealizedVariable()), NameUtil.NAMEABLE_COMPARATOR);
 		return super.visitBottomPattern(object);
 	}
 

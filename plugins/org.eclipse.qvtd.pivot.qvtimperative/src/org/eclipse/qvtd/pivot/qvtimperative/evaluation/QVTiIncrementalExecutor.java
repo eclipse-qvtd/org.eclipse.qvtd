@@ -32,7 +32,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
-import org.eclipse.qvtd.pivot.qvtimperative.RealizedVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.runtime.evaluation.AbstractComputation;
@@ -266,8 +266,8 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 	}
 
 	@Override
-	public @Nullable Object internalExecuteRealizedVariable(@NonNull RealizedVariable realizedVariable, @NonNull EvaluationVisitor undecoratedVisitor) {
-		Object element = super.internalExecuteRealizedVariable(realizedVariable, undecoratedVisitor);
+	public @Nullable Object internalExecuteNewStatement(@NonNull NewStatement asNewStatement, @NonNull EvaluationVisitor undecoratedVisitor) {
+		Object element = super.internalExecuteNewStatement(asNewStatement, undecoratedVisitor);
 		if ((element != null) && (mode == Mode.INCREMENTAL)) {
 			Invocation.Incremental currentInvocation2 = currentInvocation;
 			assert currentInvocation2 != null;

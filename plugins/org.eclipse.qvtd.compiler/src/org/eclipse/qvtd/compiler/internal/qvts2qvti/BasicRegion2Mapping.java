@@ -92,7 +92,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
-import org.eclipse.qvtd.pivot.qvtimperative.RealizedVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.VariableAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.util.AbstractExtendingQVTimperativeVisitor;
@@ -310,7 +310,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			for (TreeIterator<EObject> tit = oclExpression.eAllContents(); tit.hasNext(); ) {
 				EObject eObject = tit.next();
 				if (eObject instanceof VariableExp) {
-					if (((VariableExp)eObject).getReferredVariable() instanceof RealizedVariable) {
+					if (((VariableExp)eObject).getReferredVariable() instanceof NewStatement) {
 						return true;
 					}
 				}
@@ -1203,11 +1203,12 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 					}
 				}
 				ClassDatumAnalysis classDatumAnalysis = newNode.getClassDatumAnalysis();
-				BottomPattern bottomPattern = getArea(classDatumAnalysis).getBottomPattern();
-				RealizedVariable realizedVariable = QVTimperativeUtil.createRealizedVariable(getSafeName(newNode), classDatumAnalysis.getCompleteClass().getPrimaryClass());
-				realizedVariable.setOwnedInit(constructor);
-				bottomPattern.getRealizedVariable().add(realizedVariable);
-				Variable oldVariable = node2variable.put(newNode, realizedVariable);
+				TypedModel pTypedModel = classDatumAnalysis.getTypedModel();
+				TypedModel iTypedModel = ClassUtil.nonNullState(visitor.getQVTiTypedModel(pTypedModel));
+				NewStatement newStatement = QVTimperativeUtil.createNewStatement(getSafeName(newNode), iTypedModel, classDatumAnalysis.getCompleteClass().getPrimaryClass());
+				newStatement.setOwnedInit(constructor);
+				mapping.getOwnedStatements().add(newStatement);
+				Variable oldVariable = node2variable.put(newNode, newStatement);
 				assert oldVariable == null;
 			}
 		}

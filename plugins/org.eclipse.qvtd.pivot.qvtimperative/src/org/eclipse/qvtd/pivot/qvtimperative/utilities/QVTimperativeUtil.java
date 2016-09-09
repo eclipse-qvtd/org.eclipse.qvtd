@@ -56,8 +56,8 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeFactory;
-import org.eclipse.qvtd.pivot.qvtimperative.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.VariablePredicate;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
@@ -211,12 +211,13 @@ public class QVTimperativeUtil extends QVTbaseUtil
 		return propertyCallExp;
 	} */
 
-	public static @NonNull RealizedVariable createRealizedVariable(@NonNull String name, @NonNull Type type) {
-		RealizedVariable realizedVariable = QVTimperativeFactory.eINSTANCE.createRealizedVariable();
-		realizedVariable.setName(name);
-		realizedVariable.setType(type);
-		realizedVariable.setIsRequired(true);
-		return realizedVariable;
+	public static @NonNull NewStatement createNewStatement(@NonNull String name, @NonNull TypedModel typedModel, @NonNull Type type) {
+		NewStatement newStatement = QVTimperativeFactory.eINSTANCE.createNewStatement();
+		newStatement.setName(name);
+		newStatement.setReferredTypedModel(typedModel);
+		newStatement.setType(type);
+		newStatement.setIsRequired(true);
+		return newStatement;
 	}
 
 	public static @NonNull SetStatement createSetStatement(@NonNull Variable asVariable, @NonNull Property asProperty, @NonNull OCLExpression asValueExpression) {

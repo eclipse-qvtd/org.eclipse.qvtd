@@ -34,7 +34,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
-import org.eclipse.qvtd.pivot.qvtimperative.RealizedVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 import org.eclipse.qvtd.pivot.qvtimperative.VariableAssignment;
@@ -72,9 +72,6 @@ public class QVTimperativePrettyPrintVisitor extends QVTbasePrettyPrintVisitor i
 
 	@Override
 	public Object visitBottomPattern(@NonNull BottomPattern pBottomPattern) {
-		for (RealizedVariable pRealizedVariable : pBottomPattern.getRealizedVariable()) {
-			safeVisit(pRealizedVariable);
-		}
 		for (Variable pVariable : pBottomPattern.getVariable()) {
 			safeVisit(pVariable);
 		}
@@ -210,15 +207,17 @@ public class QVTimperativePrettyPrintVisitor extends QVTbasePrettyPrintVisitor i
 	}
 
 	@Override
-	public Object visitPredicate(@NonNull Predicate pPredicate) {
-		safeVisit(pPredicate.getConditionExpression());
+	public Object visitNewStatement(@NonNull NewStatement pNewStatement) {
+		context.append("new@");
+		context.appendName(pNewStatement.getReferredTypedModel());
+		context.append(" ");
+		visitVariable(pNewStatement);
 		return null;
 	}
 
 	@Override
-	public Object visitRealizedVariable(@NonNull RealizedVariable pRealizedVariable) {
-		context.append("realize ");
-		visitVariable(pRealizedVariable);
+	public Object visitPredicate(@NonNull Predicate pPredicate) {
+		safeVisit(pPredicate.getConditionExpression());
 		return null;
 	}
 

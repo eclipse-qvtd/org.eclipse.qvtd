@@ -84,7 +84,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
-import org.eclipse.qvtd.pivot.qvtimperative.RealizedVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 import org.eclipse.qvtd.pivot.qvtimperative.VariableAssignment;
@@ -95,8 +95,8 @@ import org.eclipse.qvtd.xtext.qvtbase.as2cs.QVTbaseDeclarationVisitor;
 import org.eclipse.qvtd.xtext.qvtbasecs.AbstractTransformationCS;
 import org.eclipse.qvtd.xtext.qvtbasecs.QVTbaseCSPackage;
 import org.eclipse.qvtd.xtext.qvtbasecs.QualifiedPackageCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.AddStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.BottomPatternCS;
-import org.eclipse.qvtd.xtext.qvtimperativecs.ConnectionStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DomainCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.GuardPatternCS;
@@ -105,12 +105,12 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingLoopCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingStatementCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.NewStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.ParamDeclarationCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.PredicateCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.PredicateOrAssignmentCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QueryCS;
-import org.eclipse.qvtd.xtext.qvtimperativecs.RealizedVariableCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.SetStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.StatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.TopLevelCS;
@@ -367,7 +367,7 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 
 	@Override
 	public ElementCS visitAddStatement(@NonNull AddStatement asAddStatement) {
-		ConnectionStatementCS csStatement = context.refreshElement(ConnectionStatementCS.class, QVTimperativeCSPackage.Literals.CONNECTION_STATEMENT_CS, asAddStatement);
+		AddStatementCS csStatement = context.refreshElement(AddStatementCS.class, QVTimperativeCSPackage.Literals.ADD_STATEMENT_CS, asAddStatement);
 		csStatement.setPivot(asAddStatement);
 		Variable asVariable = asAddStatement.getTargetVariable();
 		if (asVariable != null) {
@@ -400,7 +400,6 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 			context.refreshList(csBottomPattern.getOwnedUnrealizedVariables(), context.visitDeclarations(UnrealizedVariableCS.class, asBottomPattern.getVariable(), null));
 		}
 		else {
-			context.refreshList(csBottomPattern.getOwnedRealizedVariables(), context.visitDeclarations(RealizedVariableCS.class, asBottomPattern.getRealizedVariable(), null));
 			context.refreshList(csBottomPattern.getOwnedUnrealizedVariables(), context.visitDeclarations(UnrealizedVariableCS.class, asBottomPattern.getVariable(), null));
 		}
 		return csBottomPattern;
@@ -632,12 +631,13 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 	}
 
 	@Override
-	public ElementCS visitRealizedVariable(@NonNull RealizedVariable asRealizedVariable) {
-		RealizedVariableCS csRealizedVariable = context.refreshNamedElement(RealizedVariableCS.class, QVTimperativeCSPackage.Literals.REALIZED_VARIABLE_CS, asRealizedVariable);
-		csRealizedVariable.setPivot(asRealizedVariable);
-		csRealizedVariable.setOwnedType(createTypeRefCS(asRealizedVariable.getType(), getScope(asRealizedVariable)));
-		csRealizedVariable.setOwnedInitExpression(context.visitDeclaration(ExpCS.class, asRealizedVariable.getOwnedInit()));
-		return csRealizedVariable;
+	public ElementCS visitNewStatement(@NonNull NewStatement asNewStatement) {
+		NewStatementCS csNewStatement = context.refreshNamedElement(NewStatementCS.class, QVTimperativeCSPackage.Literals.NEW_STATEMENT_CS, asNewStatement);
+		csNewStatement.setPivot(asNewStatement);
+		csNewStatement.setOwnedType(createTypeRefCS(asNewStatement.getType(), getScope(asNewStatement)));
+		csNewStatement.setReferredTypedModel(asNewStatement.getReferredTypedModel());
+		csNewStatement.setOwnedInitExpression(context.visitDeclaration(ExpCS.class, asNewStatement.getOwnedInit()));
+		return csNewStatement;
 	}
 
 	@Override

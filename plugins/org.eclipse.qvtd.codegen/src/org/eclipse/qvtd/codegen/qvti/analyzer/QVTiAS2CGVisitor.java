@@ -117,7 +117,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
-import org.eclipse.qvtd.pivot.qvtimperative.RealizedVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 import org.eclipse.qvtd.pivot.qvtimperative.VariableAssignment;
@@ -308,7 +308,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 		}
 
 		public void doBottoms(@NonNull CGMappingExp cgMappingExp) {
-			List<@NonNull BottomPattern> pBottomPatterns = new ArrayList<@NonNull BottomPattern>();
+			List<@NonNull BottomPattern> pBottomPatterns = new ArrayList<>();
 			{
 				BottomPattern pBottomPattern = asMapping.getBottomPattern();
 				if (pBottomPattern != null) {
@@ -367,22 +367,23 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 					appendSubTree(doVisit(CGValuedElement.class, asPredicate));
 				}
 			}
-			List<@NonNull RealizedVariable> pRealizedVariables = new ArrayList<@NonNull RealizedVariable>();
-			for (@NonNull BottomPattern pBottomPattern : pBottomPatterns) {
-				for (@NonNull RealizedVariable asRealizedVariable : ClassUtil.nullFree(pBottomPattern.getRealizedVariable())) {
-					OCLExpression asInit = asRealizedVariable.getOwnedInit();
+			List<@NonNull NewStatement> asNewStatements = new ArrayList<>();
+			for (@NonNull Statement asStatement : ClassUtil.nullFree(asMapping.getOwnedStatements())) {
+				if (asStatement instanceof NewStatement) {
+					NewStatement asNewStatement = (NewStatement) asStatement;
+					OCLExpression asInit = asNewStatement.getOwnedInit();
 					if (asInit == null) {
-						pRealizedVariables.add(asRealizedVariable);
+						asNewStatements.add(asNewStatement);
 					}
 					else {
-						appendCheckedLetVariable(asRealizedVariable, asInit);
+						appendCheckedLetVariable(asNewStatement, asInit);
 					}
 				}
 			}
-			Collections.sort(pRealizedVariables, NameUtil.NAMEABLE_COMPARATOR);
+			Collections.sort(asNewStatements, NameUtil.NAMEABLE_COMPARATOR);
 			List<@NonNull CGValuedElement> cgRealizedVariables = ClassUtil.nullFree(cgMappingExp.getRealizedVariables());
-			for (@NonNull RealizedVariable pRealizedVariable : pRealizedVariables) {
-				CGRealizedVariable cgVariable = getRealizedVariable(pRealizedVariable);
+			for (@NonNull NewStatement asNewStatement : asNewStatements) {
+				CGRealizedVariable cgVariable = getRealizedVariable(asNewStatement);
 				cgRealizedVariables.add(cgVariable);
 			}
 			for (@NonNull BottomPattern pBottomPattern : pBottomPatterns) {
@@ -647,12 +648,12 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 		return cgGuardVariable;
 	}
 
-	public @NonNull CGRealizedVariable getRealizedVariable(@NonNull RealizedVariable pRealizedVariable) {
+	public @NonNull CGRealizedVariable getRealizedVariable(@NonNull NewStatement pNewStatement) {
 		Variables variablesStack = getVariablesStack();
-		CGVariable cgVariable2 = variablesStack.getVariable(pRealizedVariable);
+		CGVariable cgVariable2 = variablesStack.getVariable(pNewStatement);
 		CGRealizedVariable cgVariable = (CGRealizedVariable) cgVariable2;
 		if (cgVariable == null) {
-			EClassifier eClassifier = getEClassifier(pRealizedVariable.getType());
+			EClassifier eClassifier = getEClassifier(pNewStatement.getType());
 			if (eClassifier != null) {
 				CGEcoreRealizedVariable cgEcoreRealizedVariable = QVTiCGModelFactory.eINSTANCE.createCGEcoreRealizedVariable();
 				cgEcoreRealizedVariable.setEClassifier(eClassifier);
@@ -661,9 +662,11 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 			if (cgVariable == null) {
 				cgVariable = QVTiCGModelFactory.eINSTANCE.createCGRealizedVariable();
 			}
-			setAst(cgVariable, pRealizedVariable);
-			cgVariable.setTypedModel(getTypedModel(pRealizedVariable));
-			variablesStack.putVariable(pRealizedVariable, cgVariable);
+			setAst(cgVariable, pNewStatement);
+			TypedModel asTypedModel = ClassUtil.nonNullState(pNewStatement.getReferredTypedModel());
+			CGTypedModel cgTypedModel = ClassUtil.nonNullState(analyzer.getTypedModel(asTypedModel));
+			cgVariable.setTypedModel(cgTypedModel);
+			variablesStack.putVariable(pNewStatement, cgVariable);
 		}
 		return cgVariable;
 	}
@@ -810,8 +813,10 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 		CGSequence cgSequence = QVTiCGModelFactory.eINSTANCE.createCGSequence();
 		List<CGValuedElement> cgMappingStatements = cgSequence.getStatements();
 		for (Statement asStatement : pMapping.getOwnedStatements()) {
-			CGValuedElement cgMappingStatement = doVisit(CGValuedElement.class, asStatement);
-			cgMappingStatements.add(cgMappingStatement);
+			if (!(asStatement instanceof NewStatement)) {		// FIXME
+				CGValuedElement cgMappingStatement = doVisit(CGValuedElement.class, asStatement);
+				cgMappingStatements.add(cgMappingStatement);
+			}
 		}
 		cgMappingExp.setBody(cgSequence);
 		List<CGGuardVariable> cgFreeVariables = cgMapping.getFreeVariables();
@@ -889,6 +894,13 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 	}
 
 	@Override
+	public @Nullable CGNamedElement visitNewStatement(@NonNull NewStatement object) {
+		//		CGExecutorType cgExecutorType = analyzer.createExecutorType(pTypeExp.getReferredType());
+		//		cgTypeExp.setExecutorType(cgExecutorType);
+		return visiting(object);
+	}
+
+	@Override
 	public @Nullable CGNamedElement visitPattern(@NonNull Pattern object) {
 		return visiting(object);
 	}
@@ -931,13 +943,6 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 		}
 		return cgPropertyAssignment;
 	} */
-
-	@Override
-	public @Nullable CGNamedElement visitRealizedVariable(@NonNull RealizedVariable object) {
-		//		CGExecutorType cgExecutorType = analyzer.createExecutorType(pTypeExp.getReferredType());
-		//		cgTypeExp.setExecutorType(cgExecutorType);
-		return visiting(object);
-	}
 
 	@Override
 	public @Nullable CGNamedElement visitRule(@NonNull Rule object) {

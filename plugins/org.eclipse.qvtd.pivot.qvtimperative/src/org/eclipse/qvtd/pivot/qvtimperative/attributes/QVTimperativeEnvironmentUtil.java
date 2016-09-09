@@ -19,6 +19,8 @@ import org.eclipse.qvtd.pivot.qvtimperative.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
+import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 
 public class QVTimperativeEnvironmentUtil
 {
@@ -38,8 +40,12 @@ public class QVTimperativeEnvironmentUtil
 		if (bottomToo) {
 			BottomPattern bottomPattern = mapping.getBottomPattern();
 			if (bottomPattern != null) {
-				environmentView.addNamedElements(bottomPattern.getRealizedVariable());
 				environmentView.addNamedElements(bottomPattern.getVariable());
+			}
+			for (Statement asStatement : mapping.getOwnedStatements()) {
+				if (asStatement instanceof NewStatement) {
+					environmentView.addNamedElement(asStatement);
+				}
 			}
 		}
 		GuardPattern guardPattern = mapping.getGuardPattern();
@@ -52,8 +58,12 @@ public class QVTimperativeEnvironmentUtil
 				if (bottomToo) {
 					BottomPattern bottomPattern = domain.getBottomPattern();
 					if (bottomPattern != null) {
-						environmentView.addNamedElements(bottomPattern.getRealizedVariable());
 						environmentView.addNamedElements(bottomPattern.getVariable());
+					}
+					for (Statement asStatement : mapping.getOwnedStatements()) {
+						if (asStatement instanceof NewStatement) {
+							environmentView.addNamedElement(asStatement);
+						}
 					}
 				}
 				guardPattern = domain.getGuardPattern();
@@ -84,8 +94,12 @@ public class QVTimperativeEnvironmentUtil
 					if (bottomToo) {
 						BottomPattern bottomPattern = domain.getBottomPattern();
 						if (bottomPattern != null) {
-							environmentView.addNamedElements(bottomPattern.getRealizedVariable());
 							environmentView.addNamedElements(bottomPattern.getVariable());
+						}
+						for (Statement asStatement : mapping.getOwnedStatements()) {
+							if (asStatement instanceof NewStatement) {
+								environmentView.addNamedElement(asStatement);
+							}
 						}
 					}
 					GuardPattern guardPattern = domain.getGuardPattern();

@@ -37,7 +37,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.ImperativePattern;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
-import org.eclipse.qvtd.pivot.qvtimperative.RealizedVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.VariableAssignment;
 
@@ -278,6 +278,14 @@ implements IQVTiEvaluationVisitor {
 	 * Delegates to my decorated visitor.
 	 */
 	@Override
+	public @Nullable Object visitNewStatement(@NonNull NewStatement newStatement) {
+		return delegate.visitNewStatement(newStatement);
+	}
+
+	/**
+	 * Delegates to my decorated visitor.
+	 */
+	@Override
 	public @Nullable Object visitPattern(@NonNull Pattern pattern) {
 		return delegate.visitPattern(pattern);
 	}
@@ -288,14 +296,6 @@ implements IQVTiEvaluationVisitor {
 	@Override
 	public @Nullable Object visitPredicate(@NonNull Predicate predicate) {
 		return delegate.visitPredicate(predicate);
-	}
-
-	/**
-	 * Delegates to my decorated visitor.
-	 */
-	@Override
-	public @Nullable Object visitRealizedVariable(@NonNull RealizedVariable realizedVariable) {
-		return delegate.visitRealizedVariable(realizedVariable);
 	}
 
 	/**
