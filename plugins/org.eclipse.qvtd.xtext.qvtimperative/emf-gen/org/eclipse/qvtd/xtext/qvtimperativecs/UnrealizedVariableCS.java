@@ -14,6 +14,7 @@
  */
 package org.eclipse.qvtd.xtext.qvtimperativecs;
 
+import org.eclipse.ocl.xtext.basecs.TypedElementCS;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
 
 /**
@@ -26,13 +27,14 @@ import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.UnrealizedVariableCS#getOwnedInitExpression <em>Owned Init Expression</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.UnrealizedVariableCS#isIsConnection <em>Is Connection</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getUnrealizedVariableCS()
  * @model
  * @generated
  */
-public interface UnrealizedVariableCS extends RealizeableVariableCS {
+public interface UnrealizedVariableCS extends TypedElementCS {
 	/**
 	 * Returns the value of the '<em><b>Owned Init Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
@@ -58,5 +60,32 @@ public interface UnrealizedVariableCS extends RealizeableVariableCS {
 	 * @generated
 	 */
 	void setOwnedInitExpression(ExpCS value);
+
+	/**
+	 * Returns the value of the '<em><b>Is Connection</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Is Connection</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Is Connection</em>' attribute.
+	 * @see #setIsConnection(boolean)
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getUnrealizedVariableCS_IsConnection()
+	 * @model default="false"
+	 * @generated
+	 */
+	boolean isIsConnection();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.UnrealizedVariableCS#isIsConnection <em>Is Connection</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Is Connection</em>' attribute.
+	 * @see #isIsConnection()
+	 * @generated
+	 */
+	void setIsConnection(boolean value);
 
 } // UnrealizedVariableCS

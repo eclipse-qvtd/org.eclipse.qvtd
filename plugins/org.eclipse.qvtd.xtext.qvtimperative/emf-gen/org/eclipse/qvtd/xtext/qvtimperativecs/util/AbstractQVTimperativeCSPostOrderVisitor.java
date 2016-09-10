@@ -129,11 +129,6 @@ public abstract class AbstractQVTimperativeCSPostOrderVisitor
 	}
 
 	@Override
-	public @Nullable Continuation<?> visitRealizeableVariableCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull RealizeableVariableCS csElement) {
-		return visitTypedElementCS(csElement);
-	}
-
-	@Override
 	public @Nullable Continuation<?> visitSetStatementCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull SetStatementCS csElement) {
 		return visitStatementCS(csElement);
 	}
@@ -155,6 +150,6 @@ public abstract class AbstractQVTimperativeCSPostOrderVisitor
 
 	@Override
 	public @Nullable Continuation<?> visitUnrealizedVariableCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull UnrealizedVariableCS csElement) {
-		return visitRealizeableVariableCS(csElement);
+		return visitTypedElementCS(csElement);
 	}
 }

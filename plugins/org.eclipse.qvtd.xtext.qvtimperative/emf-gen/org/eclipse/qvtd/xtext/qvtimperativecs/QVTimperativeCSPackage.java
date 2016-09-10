@@ -112,7 +112,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getStatementCS()
 	 * @generated
 	 */
-	int STATEMENT_CS = 19;
+	int STATEMENT_CS = 18;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -226,7 +226,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getTopLevelCS()
 	 * @generated
 	 */
-	int TOP_LEVEL_CS = 20;
+	int TOP_LEVEL_CS = 19;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -898,16 +898,6 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @generated
 	 */
 	int PREDICATE_OR_ASSIGNMENT_CS = 14;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.RealizeableVariableCSImpl <em>Realizeable Variable CS</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.RealizeableVariableCSImpl
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getRealizeableVariableCS()
-	 * @generated
-	 */
-	int REALIZEABLE_VARIABLE_CS = 16;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -1849,96 +1839,6 @@ public interface QVTimperativeCSPackage extends EPackage {
 	int QUERY_CS_FEATURE_COUNT = BaseCSPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 5;
 
 	/**
-	 * The feature id for the '<em><b>Csi</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REALIZEABLE_VARIABLE_CS__CSI = BaseCSPackage.TYPED_ELEMENT_CS__CSI;
-
-	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REALIZEABLE_VARIABLE_CS__PARENT = BaseCSPackage.TYPED_ELEMENT_CS__PARENT;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REALIZEABLE_VARIABLE_CS__PIVOT = BaseCSPackage.TYPED_ELEMENT_CS__PIVOT;
-
-	/**
-	 * The feature id for the '<em><b>Original Xmi Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REALIZEABLE_VARIABLE_CS__ORIGINAL_XMI_ID = BaseCSPackage.TYPED_ELEMENT_CS__ORIGINAL_XMI_ID;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REALIZEABLE_VARIABLE_CS__OWNED_ANNOTATIONS = BaseCSPackage.TYPED_ELEMENT_CS__OWNED_ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REALIZEABLE_VARIABLE_CS__NAME = BaseCSPackage.TYPED_ELEMENT_CS__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Is Optional</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REALIZEABLE_VARIABLE_CS__IS_OPTIONAL = BaseCSPackage.TYPED_ELEMENT_CS__IS_OPTIONAL;
-
-	/**
-	 * The feature id for the '<em><b>Owned Type</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REALIZEABLE_VARIABLE_CS__OWNED_TYPE = BaseCSPackage.TYPED_ELEMENT_CS__OWNED_TYPE;
-
-	/**
-	 * The feature id for the '<em><b>Qualifiers</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REALIZEABLE_VARIABLE_CS__QUALIFIERS = BaseCSPackage.TYPED_ELEMENT_CS__QUALIFIERS;
-
-	/**
-	 * The number of structural features of the '<em>Realizeable Variable CS</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REALIZEABLE_VARIABLE_CS_FEATURE_COUNT = BaseCSPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 0;
-
-	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.NewStatementCSImpl <em>New Statement CS</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1946,7 +1846,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getNewStatementCS()
 	 * @generated
 	 */
-	int NEW_STATEMENT_CS = 17;
+	int NEW_STATEMENT_CS = 16;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -2064,7 +1964,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getSetStatementCS()
 	 * @generated
 	 */
-	int SET_STATEMENT_CS = 18;
+	int SET_STATEMENT_CS = 17;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -2254,7 +2154,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getTransformationCS()
 	 * @generated
 	 */
-	int TRANSFORMATION_CS = 21;
+	int TRANSFORMATION_CS = 20;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -2390,7 +2290,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getUnrealizedVariableCS()
 	 * @generated
 	 */
-	int UNREALIZED_VARIABLE_CS = 22;
+	int UNREALIZED_VARIABLE_CS = 21;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -2399,7 +2299,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int UNREALIZED_VARIABLE_CS__CSI = REALIZEABLE_VARIABLE_CS__CSI;
+	int UNREALIZED_VARIABLE_CS__CSI = BaseCSPackage.TYPED_ELEMENT_CS__CSI;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
@@ -2408,7 +2308,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int UNREALIZED_VARIABLE_CS__PARENT = REALIZEABLE_VARIABLE_CS__PARENT;
+	int UNREALIZED_VARIABLE_CS__PARENT = BaseCSPackage.TYPED_ELEMENT_CS__PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Pivot</b></em>' reference.
@@ -2417,7 +2317,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int UNREALIZED_VARIABLE_CS__PIVOT = REALIZEABLE_VARIABLE_CS__PIVOT;
+	int UNREALIZED_VARIABLE_CS__PIVOT = BaseCSPackage.TYPED_ELEMENT_CS__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Original Xmi Id</b></em>' attribute.
@@ -2426,7 +2326,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int UNREALIZED_VARIABLE_CS__ORIGINAL_XMI_ID = REALIZEABLE_VARIABLE_CS__ORIGINAL_XMI_ID;
+	int UNREALIZED_VARIABLE_CS__ORIGINAL_XMI_ID = BaseCSPackage.TYPED_ELEMENT_CS__ORIGINAL_XMI_ID;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -2435,7 +2335,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int UNREALIZED_VARIABLE_CS__OWNED_ANNOTATIONS = REALIZEABLE_VARIABLE_CS__OWNED_ANNOTATIONS;
+	int UNREALIZED_VARIABLE_CS__OWNED_ANNOTATIONS = BaseCSPackage.TYPED_ELEMENT_CS__OWNED_ANNOTATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2444,7 +2344,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int UNREALIZED_VARIABLE_CS__NAME = REALIZEABLE_VARIABLE_CS__NAME;
+	int UNREALIZED_VARIABLE_CS__NAME = BaseCSPackage.TYPED_ELEMENT_CS__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Is Optional</b></em>' attribute.
@@ -2453,7 +2353,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int UNREALIZED_VARIABLE_CS__IS_OPTIONAL = REALIZEABLE_VARIABLE_CS__IS_OPTIONAL;
+	int UNREALIZED_VARIABLE_CS__IS_OPTIONAL = BaseCSPackage.TYPED_ELEMENT_CS__IS_OPTIONAL;
 
 	/**
 	 * The feature id for the '<em><b>Owned Type</b></em>' containment reference.
@@ -2462,7 +2362,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int UNREALIZED_VARIABLE_CS__OWNED_TYPE = REALIZEABLE_VARIABLE_CS__OWNED_TYPE;
+	int UNREALIZED_VARIABLE_CS__OWNED_TYPE = BaseCSPackage.TYPED_ELEMENT_CS__OWNED_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Qualifiers</b></em>' attribute list.
@@ -2471,7 +2371,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int UNREALIZED_VARIABLE_CS__QUALIFIERS = REALIZEABLE_VARIABLE_CS__QUALIFIERS;
+	int UNREALIZED_VARIABLE_CS__QUALIFIERS = BaseCSPackage.TYPED_ELEMENT_CS__QUALIFIERS;
 
 	/**
 	 * The feature id for the '<em><b>Owned Init Expression</b></em>' containment reference.
@@ -2480,7 +2380,16 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int UNREALIZED_VARIABLE_CS__OWNED_INIT_EXPRESSION = REALIZEABLE_VARIABLE_CS_FEATURE_COUNT + 0;
+	int UNREALIZED_VARIABLE_CS__OWNED_INIT_EXPRESSION = BaseCSPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Is Connection</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNREALIZED_VARIABLE_CS__IS_CONNECTION = BaseCSPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Unrealized Variable CS</em>' class.
@@ -2489,7 +2398,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int UNREALIZED_VARIABLE_CS_FEATURE_COUNT = REALIZEABLE_VARIABLE_CS_FEATURE_COUNT + 1;
+	int UNREALIZED_VARIABLE_CS_FEATURE_COUNT = BaseCSPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 2;
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.AddStatementCS <em>Add Statement CS</em>}'.
@@ -3059,16 +2968,6 @@ public interface QVTimperativeCSPackage extends EPackage {
 	EAttribute getQueryCS_IsTransient();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.RealizeableVariableCS <em>Realizeable Variable CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Realizeable Variable CS</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.RealizeableVariableCS
-	 * @generated
-	 */
-	EClass getRealizeableVariableCS();
-
-	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.NewStatementCS <em>New Statement CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3248,6 +3147,17 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getUnrealizedVariableCS_OwnedInitExpression();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.xtext.qvtimperativecs.UnrealizedVariableCS#isIsConnection <em>Is Connection</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Is Connection</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.UnrealizedVariableCS#isIsConnection()
+	 * @see #getUnrealizedVariableCS()
+	 * @generated
+	 */
+	EAttribute getUnrealizedVariableCS_IsConnection();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -3728,16 +3638,6 @@ public interface QVTimperativeCSPackage extends EPackage {
 		EAttribute QUERY_CS__IS_TRANSIENT = eINSTANCE.getQueryCS_IsTransient();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.RealizeableVariableCSImpl <em>Realizeable Variable CS</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.RealizeableVariableCSImpl
-		 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getRealizeableVariableCS()
-		 * @generated
-		 */
-		EClass REALIZEABLE_VARIABLE_CS = eINSTANCE.getRealizeableVariableCS();
-
-		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.NewStatementCSImpl <em>New Statement CS</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3884,6 +3784,14 @@ public interface QVTimperativeCSPackage extends EPackage {
 		 * @generated
 		 */
 		EReference UNREALIZED_VARIABLE_CS__OWNED_INIT_EXPRESSION = eINSTANCE.getUnrealizedVariableCS_OwnedInitExpression();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Connection</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute UNREALIZED_VARIABLE_CS__IS_CONNECTION = eINSTANCE.getUnrealizedVariableCS_IsConnection();
 
 	}
 

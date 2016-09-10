@@ -16,21 +16,15 @@ package org.eclipse.qvtd.xtext.qvtimperativecs.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org.eclipse.jdt.annotation.NonNull;
-
+import org.eclipse.ocl.xtext.basecs.impl.TypedElementCSImpl;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
-
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
-
 import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage;
 import org.eclipse.qvtd.xtext.qvtimperativecs.UnrealizedVariableCS;
-
 import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
 
 /**
@@ -42,11 +36,12 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.UnrealizedVariableCSImpl#getOwnedInitExpression <em>Owned Init Expression</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.UnrealizedVariableCSImpl#isIsConnection <em>Is Connection</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class UnrealizedVariableCSImpl extends RealizeableVariableCSImpl implements UnrealizedVariableCS {
+public class UnrealizedVariableCSImpl extends TypedElementCSImpl implements UnrealizedVariableCS {
 	/**
 	 * The cached value of the '{@link #getOwnedInitExpression() <em>Owned Init Expression</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -56,6 +51,25 @@ public class UnrealizedVariableCSImpl extends RealizeableVariableCSImpl implemen
 	 * @ordered
 	 */
 	protected ExpCS ownedInitExpression;
+
+	/**
+	 * The default value of the '{@link #isIsConnection() <em>Is Connection</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsConnection()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean IS_CONNECTION_EDEFAULT = false;
+	/**
+	 * The cached value of the '{@link #isIsConnection() <em>Is Connection</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsConnection()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean isConnection = IS_CONNECTION_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -127,6 +141,39 @@ public class UnrealizedVariableCSImpl extends RealizeableVariableCSImpl implemen
 	 * @generated
 	 */
 	@Override
+	public boolean isIsConnection() {
+		return isConnection;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setIsConnection(boolean newIsConnection) {
+		boolean oldIsConnection = isConnection;
+		isConnection = newIsConnection;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.UNREALIZED_VARIABLE_CS__IS_CONNECTION, oldIsConnection, isConnection));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		return super.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case QVTimperativeCSPackage.UNREALIZED_VARIABLE_CS__OWNED_INIT_EXPRESSION:
@@ -145,6 +192,8 @@ public class UnrealizedVariableCSImpl extends RealizeableVariableCSImpl implemen
 		switch (featureID) {
 			case QVTimperativeCSPackage.UNREALIZED_VARIABLE_CS__OWNED_INIT_EXPRESSION:
 				return getOwnedInitExpression();
+			case QVTimperativeCSPackage.UNREALIZED_VARIABLE_CS__IS_CONNECTION:
+				return isIsConnection();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -159,6 +208,9 @@ public class UnrealizedVariableCSImpl extends RealizeableVariableCSImpl implemen
 		switch (featureID) {
 			case QVTimperativeCSPackage.UNREALIZED_VARIABLE_CS__OWNED_INIT_EXPRESSION:
 				setOwnedInitExpression((ExpCS)newValue);
+				return;
+			case QVTimperativeCSPackage.UNREALIZED_VARIABLE_CS__IS_CONNECTION:
+				setIsConnection((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -175,6 +227,9 @@ public class UnrealizedVariableCSImpl extends RealizeableVariableCSImpl implemen
 			case QVTimperativeCSPackage.UNREALIZED_VARIABLE_CS__OWNED_INIT_EXPRESSION:
 				setOwnedInitExpression((ExpCS)null);
 				return;
+			case QVTimperativeCSPackage.UNREALIZED_VARIABLE_CS__IS_CONNECTION:
+				setIsConnection(IS_CONNECTION_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -189,6 +244,8 @@ public class UnrealizedVariableCSImpl extends RealizeableVariableCSImpl implemen
 		switch (featureID) {
 			case QVTimperativeCSPackage.UNREALIZED_VARIABLE_CS__OWNED_INIT_EXPRESSION:
 				return ownedInitExpression != null;
+			case QVTimperativeCSPackage.UNREALIZED_VARIABLE_CS__IS_CONNECTION:
+				return isConnection != IS_CONNECTION_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}

@@ -129,11 +129,6 @@ public abstract class AbstractQVTimperativeCSLeft2RightVisitor
 	}
 
 	@Override
-	public @Nullable Element visitRealizeableVariableCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull RealizeableVariableCS csElement) {
-		return visitTypedElementCS(csElement);
-	}
-
-	@Override
 	public @Nullable Element visitSetStatementCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull SetStatementCS csElement) {
 		return visitStatementCS(csElement);
 	}
@@ -155,6 +150,6 @@ public abstract class AbstractQVTimperativeCSLeft2RightVisitor
 
 	@Override
 	public @Nullable Element visitUnrealizedVariableCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull UnrealizedVariableCS csElement) {
-		return visitRealizeableVariableCS(csElement);
+		return visitTypedElementCS(csElement);
 	}
 }

@@ -121,11 +121,6 @@ public abstract class AbstractDelegatingQVTimperativeCSVisitor<R, C, @NonNull D 
 	}
 
 	@Override
-	public R visitRealizeableVariableCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull RealizeableVariableCS object) {
-		return delegate.visitRealizeableVariableCS(object);
-	}
-
-	@Override
 	public R visitSetStatementCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull SetStatementCS object) {
 		return delegate.visitSetStatementCS(object);
 	}

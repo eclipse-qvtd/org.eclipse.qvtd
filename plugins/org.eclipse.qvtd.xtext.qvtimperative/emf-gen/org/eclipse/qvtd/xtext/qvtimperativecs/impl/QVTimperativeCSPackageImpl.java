@@ -40,7 +40,6 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.PredicateOrAssignmentCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSFactory;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QueryCS;
-import org.eclipse.qvtd.xtext.qvtimperativecs.RealizeableVariableCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.SetStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.StatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.TopLevelCS;
@@ -171,13 +170,6 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass realizeableVariableCSEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EClass newStatementCSEClass = null;
 
 	/**
@@ -243,7 +235,7 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link QVTimperativeCSPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -276,7 +268,7 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		// Mark meta-data to indicate it can't be changed
 		theQVTimperativeCSPackage.freeze();
 
-  
+
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(QVTimperativeCSPackage.eNS_URI, theQVTimperativeCSPackage);
 		return theQVTimperativeCSPackage;
@@ -818,16 +810,6 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	 * @generated
 	 */
 	@Override
-	public EClass getRealizeableVariableCS() {
-		return realizeableVariableCSEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EClass getNewStatementCS() {
 		return newStatementCSEClass;
 	}
@@ -998,6 +980,16 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	 * @generated
 	 */
 	@Override
+	public EAttribute getUnrealizedVariableCS_IsConnection() {
+		return (EAttribute)unrealizedVariableCSEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public QVTimperativeCSFactory getQVTimperativeCSFactory() {
 		return (QVTimperativeCSFactory)getEFactoryInstance();
 	}
@@ -1090,8 +1082,6 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		createEReference(queryCSEClass, QUERY_CS__OWNED_EXPRESSION);
 		createEAttribute(queryCSEClass, QUERY_CS__IS_TRANSIENT);
 
-		realizeableVariableCSEClass = createEClass(REALIZEABLE_VARIABLE_CS);
-
 		newStatementCSEClass = createEClass(NEW_STATEMENT_CS);
 		createEReference(newStatementCSEClass, NEW_STATEMENT_CS__OWNED_INIT_EXPRESSION);
 		createEReference(newStatementCSEClass, NEW_STATEMENT_CS__REFERRED_TYPED_MODEL);
@@ -1114,6 +1104,7 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 
 		unrealizedVariableCSEClass = createEClass(UNREALIZED_VARIABLE_CS);
 		createEReference(unrealizedVariableCSEClass, UNREALIZED_VARIABLE_CS__OWNED_INIT_EXPRESSION);
+		createEAttribute(unrealizedVariableCSEClass, UNREALIZED_VARIABLE_CS__IS_CONNECTION);
 	}
 
 	/**
@@ -1168,14 +1159,13 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		predicateCSEClass.getESuperTypes().add(theEssentialOCLCSPackage.getExpCS());
 		predicateOrAssignmentCSEClass.getESuperTypes().add(theEssentialOCLCSPackage.getExpCS());
 		queryCSEClass.getESuperTypes().add(theBaseCSPackage.getTypedElementCS());
-		realizeableVariableCSEClass.getESuperTypes().add(theBaseCSPackage.getTypedElementCS());
 		newStatementCSEClass.getESuperTypes().add(theBaseCSPackage.getTypedElementCS());
 		newStatementCSEClass.getESuperTypes().add(this.getStatementCS());
 		setStatementCSEClass.getESuperTypes().add(this.getStatementCS());
 		statementCSEClass.getESuperTypes().add(theBaseCSPackage.getModelElementCS());
 		topLevelCSEClass.getESuperTypes().add(theBaseCSPackage.getRootPackageCS());
 		transformationCSEClass.getESuperTypes().add(theQVTbaseCSPackage.getAbstractTransformationCS());
-		unrealizedVariableCSEClass.getESuperTypes().add(this.getRealizeableVariableCS());
+		unrealizedVariableCSEClass.getESuperTypes().add(theBaseCSPackage.getTypedElementCS());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(addStatementCSEClass, AddStatementCS.class, "AddStatementCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1247,8 +1237,6 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		initEReference(getQueryCS_OwnedExpression(), theEssentialOCLCSPackage.getExpCS(), null, "ownedExpression", null, 0, 1, QueryCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getQueryCS_IsTransient(), ecorePackage.getEBoolean(), "isTransient", "false", 0, 1, QueryCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(realizeableVariableCSEClass, RealizeableVariableCS.class, "RealizeableVariableCS", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
 		initEClass(newStatementCSEClass, NewStatementCS.class, "NewStatementCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getNewStatementCS_OwnedInitExpression(), theEssentialOCLCSPackage.getExpCS(), null, "ownedInitExpression", null, 0, 1, NewStatementCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getNewStatementCS_ReferredTypedModel(), theQVTbasePackage.getTypedModel(), null, "referredTypedModel", null, 1, 1, NewStatementCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1271,6 +1259,7 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 
 		initEClass(unrealizedVariableCSEClass, UnrealizedVariableCS.class, "UnrealizedVariableCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getUnrealizedVariableCS_OwnedInitExpression(), theEssentialOCLCSPackage.getExpCS(), null, "ownedInitExpression", null, 0, 1, UnrealizedVariableCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getUnrealizedVariableCS_IsConnection(), ecorePackage.getEBoolean(), "isConnection", "false", 0, 1, UnrealizedVariableCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

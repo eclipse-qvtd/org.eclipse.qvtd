@@ -154,10 +154,6 @@ public class QVTimperativeCSAdapterFactory extends AdapterFactoryImpl {
 				return createQueryCSAdapter();
 			}
 			@Override
-			public Adapter caseRealizeableVariableCS(RealizeableVariableCS object) {
-				return createRealizeableVariableCSAdapter();
-			}
-			@Override
 			public Adapter caseNewStatementCS(NewStatementCS object) {
 				return createNewStatementCSAdapter();
 			}
@@ -598,20 +594,6 @@ public class QVTimperativeCSAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createTypedElementCSAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.RealizeableVariableCS <em>Realizeable Variable CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.RealizeableVariableCS
-	 * @generated
-	 */
-	public Adapter createRealizeableVariableCSAdapter() {
 		return null;
 	}
 

@@ -125,11 +125,6 @@ public abstract class AbstractExtendingQVTimperativeCSVisitor<R, C>
 	}
 
 	@Override
-	public R visitRealizeableVariableCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull RealizeableVariableCS object) {
-		return visitTypedElementCS(object);
-	}
-
-	@Override
 	public R visitSetStatementCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull SetStatementCS object) {
 		return visitStatementCS(object);
 	}
@@ -151,6 +146,6 @@ public abstract class AbstractExtendingQVTimperativeCSVisitor<R, C>
 
 	@Override
 	public R visitUnrealizedVariableCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull UnrealizedVariableCS object) {
-		return visitRealizeableVariableCS(object);
+		return visitTypedElementCS(object);
 	}
 }

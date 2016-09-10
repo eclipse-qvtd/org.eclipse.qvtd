@@ -292,20 +292,6 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTimperativeCSPackage.REALIZEABLE_VARIABLE_CS: {
-				RealizeableVariableCS realizeableVariableCS = (RealizeableVariableCS)theEObject;
-				T result = caseRealizeableVariableCS(realizeableVariableCS);
-				if (result == null) result = caseTypedElementCS(realizeableVariableCS);
-				if (result == null) result = caseNamedElementCS(realizeableVariableCS);
-				if (result == null) result = caseModelElementCS(realizeableVariableCS);
-				if (result == null) result = caseNameable(realizeableVariableCS);
-				if (result == null) result = casePivotableElementCS(realizeableVariableCS);
-				if (result == null) result = caseElementCS(realizeableVariableCS);
-				if (result == null) result = casePivotable(realizeableVariableCS);
-				if (result == null) result = caseVisitableCS(realizeableVariableCS);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case QVTimperativeCSPackage.NEW_STATEMENT_CS: {
 				NewStatementCS newStatementCS = (NewStatementCS)theEObject;
 				T result = caseNewStatementCS(newStatementCS);
@@ -378,7 +364,6 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 			case QVTimperativeCSPackage.UNREALIZED_VARIABLE_CS: {
 				UnrealizedVariableCS unrealizedVariableCS = (UnrealizedVariableCS)theEObject;
 				T result = caseUnrealizedVariableCS(unrealizedVariableCS);
-				if (result == null) result = caseRealizeableVariableCS(unrealizedVariableCS);
 				if (result == null) result = caseTypedElementCS(unrealizedVariableCS);
 				if (result == null) result = caseNamedElementCS(unrealizedVariableCS);
 				if (result == null) result = caseModelElementCS(unrealizedVariableCS);
@@ -631,21 +616,6 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseQueryCS(QueryCS object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Realizeable Variable CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Realizeable Variable CS</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseRealizeableVariableCS(RealizeableVariableCS object) {
 		return null;
 	}
 
