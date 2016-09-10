@@ -108,151 +108,151 @@ public class QVTimperativeAdapterFactory extends AdapterFactoryImpl {
 	 */
 	protected QVTimperativeSwitch<@Nullable Adapter> modelSwitch =
 			new QVTimperativeSwitch<@Nullable Adapter>() {
-		@Override
-		public Adapter caseAddStatement(AddStatement object) {
-			return createAddStatementAdapter();
-		}
-		@Override
-		public Adapter caseArea(Area object) {
-			return createAreaAdapter();
-		}
-		@Override
-		public Adapter caseAssignment(Assignment object) {
-			return createAssignmentAdapter();
-		}
-		@Override
-		public Adapter caseBottomPattern(BottomPattern object) {
-			return createBottomPatternAdapter();
-		}
-		@Override
-		public Adapter caseBottomStatement(BottomStatement object) {
-			return createBottomStatementAdapter();
-		}
-		@Override
-		public Adapter caseConnectionVariable(ConnectionVariable object) {
-			return createConnectionVariableAdapter();
-		}
-		@Override
-		public Adapter caseGuardPattern(GuardPattern object) {
-			return createGuardPatternAdapter();
-		}
-		@Override
-		public Adapter caseImperativeDomain(ImperativeDomain object) {
-			return createImperativeDomainAdapter();
-		}
-		@Override
-		public Adapter caseImperativeModel(ImperativeModel object) {
-			return createImperativeModelAdapter();
-		}
-		@Override
-		public Adapter caseImperativePattern(ImperativePattern object) {
-			return createImperativePatternAdapter();
-		}
-		@Override
-		public Adapter caseMapping(Mapping object) {
-			return createMappingAdapter();
-		}
-		@Override
-		public Adapter caseMappingCall(MappingCall object) {
-			return createMappingCallAdapter();
-		}
-		@Override
-		public Adapter caseMappingCallBinding(MappingCallBinding object) {
-			return createMappingCallBindingAdapter();
-		}
-		@Override
-		public Adapter caseMappingLoop(MappingLoop object) {
-			return createMappingLoopAdapter();
-		}
-		@Override
-		public Adapter caseMappingStatement(MappingStatement object) {
-			return createMappingStatementAdapter();
-		}
-		@Override
-		public Adapter caseNewStatement(NewStatement object) {
-			return createNewStatementAdapter();
-		}
-		@Override
-		public Adapter caseSetStatement(SetStatement object) {
-			return createSetStatementAdapter();
-		}
-		@Override
-		public Adapter caseStatement(Statement object) {
-			return createStatementAdapter();
-		}
-		@Override
-		public Adapter caseVariableAssignment(VariableAssignment object) {
-			return createVariableAssignmentAdapter();
-		}
-		@Override
-		public Adapter caseVariablePredicate(VariablePredicate object) {
-			return createVariablePredicateAdapter();
-		}
-		@Override
-		public Adapter caseVisitable(Visitable object) {
-			return createVisitableAdapter();
-		}
-		@Override
-		public Adapter caseElement(Element object) {
-			return createElementAdapter();
-		}
-		@Override
-		public Adapter caseNameable(Nameable object) {
-			return createNameableAdapter();
-		}
-		@Override
-		public Adapter caseNamedElement(NamedElement object) {
-			return createNamedElementAdapter();
-		}
-		@Override
-		public Adapter casePattern(Pattern object) {
-			return createPatternAdapter();
-		}
-		@Override
-		public Adapter caseTypedElement(TypedElement object) {
-			return createTypedElementAdapter();
-		}
-		@Override
-		public Adapter caseVariableDeclaration(VariableDeclaration object) {
-			return createVariableDeclarationAdapter();
-		}
-		@Override
-		public Adapter caseVariable(Variable object) {
-			return createVariableAdapter();
-		}
-		@Override
-		public Adapter caseReferringElement(ReferringElement object) {
-			return createReferringElementAdapter();
-		}
-		@Override
-		public Adapter caseDomain(Domain object) {
-			return createDomainAdapter();
-		}
-		@Override
-		public Adapter caseNamespace(Namespace object) {
-			return createNamespaceAdapter();
-		}
-		@Override
-		public Adapter caseModel(Model object) {
-			return createModelAdapter();
-		}
-		@Override
-		public Adapter caseBaseModel(BaseModel object) {
-			return createBaseModelAdapter();
-		}
-		@Override
-		public Adapter caseRule(Rule object) {
-			return createRuleAdapter();
-		}
-		@Override
-		public Adapter casePredicate(Predicate object) {
-			return createPredicateAdapter();
-		}
-		@Override
-		public Adapter defaultCase(EObject object) {
-			return createEObjectAdapter();
-		}
-	};
+			@Override
+			public Adapter caseAddStatement(AddStatement object) {
+				return createAddStatementAdapter();
+			}
+			@Override
+			public Adapter caseArea(Area object) {
+				return createAreaAdapter();
+			}
+			@Override
+			public Adapter caseAssignment(Assignment object) {
+				return createAssignmentAdapter();
+			}
+			@Override
+			public Adapter caseBottomPattern(BottomPattern object) {
+				return createBottomPatternAdapter();
+			}
+			@Override
+			public Adapter caseBottomStatement(BottomStatement object) {
+				return createBottomStatementAdapter();
+			}
+			@Override
+			public Adapter caseConnectionVariable(ConnectionVariable object) {
+				return createConnectionVariableAdapter();
+			}
+			@Override
+			public Adapter caseGuardPattern(GuardPattern object) {
+				return createGuardPatternAdapter();
+			}
+			@Override
+			public Adapter caseImperativeDomain(ImperativeDomain object) {
+				return createImperativeDomainAdapter();
+			}
+			@Override
+			public Adapter caseImperativeModel(ImperativeModel object) {
+				return createImperativeModelAdapter();
+			}
+			@Override
+			public Adapter caseImperativePattern(ImperativePattern object) {
+				return createImperativePatternAdapter();
+			}
+			@Override
+			public Adapter caseMapping(Mapping object) {
+				return createMappingAdapter();
+			}
+			@Override
+			public Adapter caseMappingCall(MappingCall object) {
+				return createMappingCallAdapter();
+			}
+			@Override
+			public Adapter caseMappingCallBinding(MappingCallBinding object) {
+				return createMappingCallBindingAdapter();
+			}
+			@Override
+			public Adapter caseMappingLoop(MappingLoop object) {
+				return createMappingLoopAdapter();
+			}
+			@Override
+			public Adapter caseMappingStatement(MappingStatement object) {
+				return createMappingStatementAdapter();
+			}
+			@Override
+			public Adapter caseNewStatement(NewStatement object) {
+				return createNewStatementAdapter();
+			}
+			@Override
+			public Adapter caseSetStatement(SetStatement object) {
+				return createSetStatementAdapter();
+			}
+			@Override
+			public Adapter caseStatement(Statement object) {
+				return createStatementAdapter();
+			}
+			@Override
+			public Adapter caseVariableAssignment(VariableAssignment object) {
+				return createVariableAssignmentAdapter();
+			}
+			@Override
+			public Adapter caseVariablePredicate(VariablePredicate object) {
+				return createVariablePredicateAdapter();
+			}
+			@Override
+			public Adapter caseVisitable(Visitable object) {
+				return createVisitableAdapter();
+			}
+			@Override
+			public Adapter caseElement(Element object) {
+				return createElementAdapter();
+			}
+			@Override
+			public Adapter caseNameable(Nameable object) {
+				return createNameableAdapter();
+			}
+			@Override
+			public Adapter caseNamedElement(NamedElement object) {
+				return createNamedElementAdapter();
+			}
+			@Override
+			public Adapter casePattern(Pattern object) {
+				return createPatternAdapter();
+			}
+			@Override
+			public Adapter caseTypedElement(TypedElement object) {
+				return createTypedElementAdapter();
+			}
+			@Override
+			public Adapter caseVariableDeclaration(VariableDeclaration object) {
+				return createVariableDeclarationAdapter();
+			}
+			@Override
+			public Adapter caseVariable(Variable object) {
+				return createVariableAdapter();
+			}
+			@Override
+			public Adapter caseReferringElement(ReferringElement object) {
+				return createReferringElementAdapter();
+			}
+			@Override
+			public Adapter caseDomain(Domain object) {
+				return createDomainAdapter();
+			}
+			@Override
+			public Adapter caseNamespace(Namespace object) {
+				return createNamespaceAdapter();
+			}
+			@Override
+			public Adapter caseModel(Model object) {
+				return createModelAdapter();
+			}
+			@Override
+			public Adapter caseBaseModel(BaseModel object) {
+				return createBaseModelAdapter();
+			}
+			@Override
+			public Adapter caseRule(Rule object) {
+				return createRuleAdapter();
+			}
+			@Override
+			public Adapter casePredicate(Predicate object) {
+				return createPredicateAdapter();
+			}
+			@Override
+			public Adapter defaultCase(EObject object) {
+				return createEObjectAdapter();
+			}
+		};
 
 	/**
 	 * Creates an adapter for the <code>target</code>.

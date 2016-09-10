@@ -1356,31 +1356,13 @@ public interface QVTimperativePackage extends EPackage {
 	int MAPPING__OWNED_STATEMENTS = QVTbasePackage.RULE_FEATURE_COUNT + 4;
 
 	/**
-	 * The feature id for the '<em><b>Polled Classes</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAPPING__POLLED_CLASSES = QVTbasePackage.RULE_FEATURE_COUNT + 5;
-
-	/**
-	 * The feature id for the '<em><b>Owned Key Expression</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAPPING__OWNED_KEY_EXPRESSION = QVTbasePackage.RULE_FEATURE_COUNT + 6;
-
-	/**
 	 * The number of structural features of the '<em>Mapping</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_FEATURE_COUNT = QVTbasePackage.RULE_FEATURE_COUNT + 7;
+	int MAPPING_FEATURE_COUNT = QVTbasePackage.RULE_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -2310,28 +2292,6 @@ public interface QVTimperativePackage extends EPackage {
 	EReference getMapping_OwnedStatements();
 
 	/**
-	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.pivot.qvtimperative.Mapping#getPolledClasses <em>Polled Classes</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Polled Classes</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.Mapping#getPolledClasses()
-	 * @see #getMapping()
-	 * @generated
-	 */
-	EReference getMapping_PolledClasses();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.pivot.qvtimperative.Mapping#getOwnedKeyExpression <em>Owned Key Expression</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Owned Key Expression</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.Mapping#getOwnedKeyExpression()
-	 * @see #getMapping()
-	 * @generated
-	 */
-	EReference getMapping_OwnedKeyExpression();
-
-	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtimperative.MappingCall <em>Mapping Call</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2859,22 +2819,6 @@ public interface QVTimperativePackage extends EPackage {
 		 * @generated
 		 */
 		EReference MAPPING__OWNED_STATEMENTS = eINSTANCE.getMapping_OwnedStatements();
-
-		/**
-		 * The meta object literal for the '<em><b>Polled Classes</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference MAPPING__POLLED_CLASSES = eINSTANCE.getMapping_PolledClasses();
-
-		/**
-		 * The meta object literal for the '<em><b>Owned Key Expression</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference MAPPING__OWNED_KEY_EXPRESSION = eINSTANCE.getMapping_OwnedKeyExpression();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingCallImpl <em>Mapping Call</em>}' class.

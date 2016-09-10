@@ -215,7 +215,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 *
+	 * 
 	 * <p>This method is used to initialize {@link QVTimperativePackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -246,7 +246,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		// Mark meta-data to indicate it can't be changed
 		theQVTimperativePackage.freeze();
 
-
+  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(QVTimperativePackage.eNS_URI, theQVTimperativePackage);
 		return theQVTimperativePackage;
@@ -510,26 +510,6 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	@Override
 	public EReference getMapping_OwnedStatements() {
 		return (EReference)mappingEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getMapping_PolledClasses() {
-		return (EReference)mappingEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getMapping_OwnedKeyExpression() {
-		return (EReference)mappingEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -857,8 +837,6 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 
 		mappingEClass = createEClass(MAPPING);
 		createEReference(mappingEClass, MAPPING__OWNED_STATEMENTS);
-		createEReference(mappingEClass, MAPPING__POLLED_CLASSES);
-		createEReference(mappingEClass, MAPPING__OWNED_KEY_EXPRESSION);
 
 		mappingCallEClass = createEClass(MAPPING_CALL);
 		createEReference(mappingCallEClass, MAPPING_CALL__BINDING);
@@ -992,8 +970,6 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 
 		initEClass(mappingEClass, Mapping.class, "Mapping", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getMapping_OwnedStatements(), this.getStatement(), null, "ownedStatements", null, 0, -1, Mapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getMapping_PolledClasses(), thePivotPackage.getClass_(), null, "polledClasses", null, 0, -1, Mapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getMapping_OwnedKeyExpression(), thePivotPackage.getOCLExpression(), null, "ownedKeyExpression", null, 0, 1, Mapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(mappingCallEClass, MappingCall.class, "MappingCall", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getMappingCall_Binding(), this.getMappingCallBinding(), this.getMappingCallBinding_MappingCall(), "binding", null, 0, -1, MappingCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1047,13 +1023,13 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * @generated
 	 */
 	protected void createImportAnnotations() {
-		String source = "http://www.eclipse.org/OCL/Import";
+		String source = "http://www.eclipse.org/OCL/Import";	
 		addAnnotation
-		(this,
-			source,
-			new String[] {
-				"qvtb", "../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#/"
-		});
+		  (this, 
+		   source, 
+		   new String[] {
+			 "qvtb", "../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#/"
+		   });
 	}
 
 	/**
@@ -1063,55 +1039,55 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * @generated
 	 */
 	protected void createEmofAnnotations() {
-		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";
+		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";	
 		addAnnotation
-		(getAddStatement_TargetVariable(),
-			source,
-			new String[] {
-				"body", "assignment"
-		});
+		  (getAddStatement_TargetVariable(), 
+		   source, 
+		   new String[] {
+			 "body", "assignment"
+		   });	
 		addAnnotation
-		(getAddStatement_Value(),
-			source,
-			new String[] {
-				"body", "valueAssignment"
-		});
+		  (getAddStatement_Value(), 
+		   source, 
+		   new String[] {
+			 "body", "valueAssignment"
+		   });	
 		addAnnotation
-		(getAssignment_Value(),
-			source,
-			new String[] {
-				"body", "valueAssignment"
-		});
+		  (getAssignment_Value(), 
+		   source, 
+		   new String[] {
+			 "body", "valueAssignment"
+		   });	
 		addAnnotation
-		(getSetStatement_SlotExpression(),
-			source,
-			new String[] {
-				"body", "slotAssignment"
-		});
+		  (getSetStatement_SlotExpression(), 
+		   source, 
+		   new String[] {
+			 "body", "slotAssignment"
+		   });	
 		addAnnotation
-		(getSetStatement_TargetProperty(),
-			source,
-			new String[] {
-				"body", "assignment"
-		});
+		  (getSetStatement_TargetProperty(), 
+		   source, 
+		   new String[] {
+			 "body", "assignment"
+		   });	
 		addAnnotation
-		(getSetStatement_Value(),
-			source,
-			new String[] {
-				"body", "valueAssignment"
-		});
+		  (getSetStatement_Value(), 
+		   source, 
+		   new String[] {
+			 "body", "valueAssignment"
+		   });	
 		addAnnotation
-		(getVariableAssignment_TargetVariable(),
-			source,
-			new String[] {
-				"body", "assignment"
-		});
+		  (getVariableAssignment_TargetVariable(), 
+		   source, 
+		   new String[] {
+			 "body", "assignment"
+		   });	
 		addAnnotation
-		(getVariablePredicate_TargetVariable(),
-			source,
-			new String[] {
-				"body", "predicate"
-		});
+		  (getVariablePredicate_TargetVariable(), 
+		   source, 
+		   new String[] {
+			 "body", "predicate"
+		   });
 	}
 
 } //QVTimperativePackageImpl

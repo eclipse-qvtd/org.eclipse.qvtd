@@ -22,7 +22,6 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtbase.impl.RuleImpl;
@@ -47,8 +46,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingImpl#getCheckedProperties <em>Checked Properties</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingImpl#getEnforcedProperties <em>Enforced Properties</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingImpl#getOwnedStatements <em>Owned Statements</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingImpl#getPolledClasses <em>Polled Classes</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingImpl#getOwnedKeyExpression <em>Owned Key Expression</em>}</li>
  * </ul>
  *
  * @generated
@@ -103,26 +100,6 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	 * @ordered
 	 */
 	protected EList<Statement> ownedStatements;
-
-	/**
-	 * The cached value of the '{@link #getPolledClasses() <em>Polled Classes</em>}' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getPolledClasses()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<org.eclipse.ocl.pivot.Class> polledClasses;
-
-	/**
-	 * The cached value of the '{@link #getOwnedKeyExpression() <em>Owned Key Expression</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getOwnedKeyExpression()
-	 * @generated
-	 * @ordered
-	 */
-	protected OCLExpression ownedKeyExpression;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -278,64 +255,6 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	 * @generated
 	 */
 	@Override
-	public EList<org.eclipse.ocl.pivot.Class> getPolledClasses() {
-		if (polledClasses == null) {
-			polledClasses = new EObjectResolvingEList<org.eclipse.ocl.pivot.Class>(org.eclipse.ocl.pivot.Class.class, this, QVTimperativePackage.MAPPING__POLLED_CLASSES);
-		}
-		return polledClasses;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public OCLExpression getOwnedKeyExpression() {
-		return ownedKeyExpression;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetOwnedKeyExpression(OCLExpression newOwnedKeyExpression, NotificationChain msgs) {
-		OCLExpression oldOwnedKeyExpression = ownedKeyExpression;
-		ownedKeyExpression = newOwnedKeyExpression;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTimperativePackage.MAPPING__OWNED_KEY_EXPRESSION, oldOwnedKeyExpression, newOwnedKeyExpression);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setOwnedKeyExpression(OCLExpression newOwnedKeyExpression) {
-		if (newOwnedKeyExpression != ownedKeyExpression) {
-			NotificationChain msgs = null;
-			if (ownedKeyExpression != null)
-				msgs = ((InternalEObject)ownedKeyExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTimperativePackage.MAPPING__OWNED_KEY_EXPRESSION, null, msgs);
-			if (newOwnedKeyExpression != null)
-				msgs = ((InternalEObject)newOwnedKeyExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTimperativePackage.MAPPING__OWNED_KEY_EXPRESSION, null, msgs);
-			msgs = basicSetOwnedKeyExpression(newOwnedKeyExpression, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.MAPPING__OWNED_KEY_EXPRESSION, newOwnedKeyExpression, newOwnedKeyExpression));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case QVTimperativePackage.MAPPING__GUARD_PATTERN:
@@ -364,8 +283,6 @@ public class MappingImpl extends RuleImpl implements Mapping {
 				return basicSetBottomPattern(null, msgs);
 			case QVTimperativePackage.MAPPING__OWNED_STATEMENTS:
 				return ((InternalEList<?>)getOwnedStatements()).basicRemove(otherEnd, msgs);
-			case QVTimperativePackage.MAPPING__OWNED_KEY_EXPRESSION:
-				return basicSetOwnedKeyExpression(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -388,10 +305,6 @@ public class MappingImpl extends RuleImpl implements Mapping {
 				return getEnforcedProperties();
 			case QVTimperativePackage.MAPPING__OWNED_STATEMENTS:
 				return getOwnedStatements();
-			case QVTimperativePackage.MAPPING__POLLED_CLASSES:
-				return getPolledClasses();
-			case QVTimperativePackage.MAPPING__OWNED_KEY_EXPRESSION:
-				return getOwnedKeyExpression();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -423,13 +336,6 @@ public class MappingImpl extends RuleImpl implements Mapping {
 				getOwnedStatements().clear();
 				getOwnedStatements().addAll((Collection<? extends Statement>)newValue);
 				return;
-			case QVTimperativePackage.MAPPING__POLLED_CLASSES:
-				getPolledClasses().clear();
-				getPolledClasses().addAll((Collection<? extends org.eclipse.ocl.pivot.Class>)newValue);
-				return;
-			case QVTimperativePackage.MAPPING__OWNED_KEY_EXPRESSION:
-				setOwnedKeyExpression((OCLExpression)newValue);
-				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -457,12 +363,6 @@ public class MappingImpl extends RuleImpl implements Mapping {
 			case QVTimperativePackage.MAPPING__OWNED_STATEMENTS:
 				getOwnedStatements().clear();
 				return;
-			case QVTimperativePackage.MAPPING__POLLED_CLASSES:
-				getPolledClasses().clear();
-				return;
-			case QVTimperativePackage.MAPPING__OWNED_KEY_EXPRESSION:
-				setOwnedKeyExpression((OCLExpression)null);
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -485,10 +385,6 @@ public class MappingImpl extends RuleImpl implements Mapping {
 				return enforcedProperties != null && !enforcedProperties.isEmpty();
 			case QVTimperativePackage.MAPPING__OWNED_STATEMENTS:
 				return ownedStatements != null && !ownedStatements.isEmpty();
-			case QVTimperativePackage.MAPPING__POLLED_CLASSES:
-				return polledClasses != null && !polledClasses.isEmpty();
-			case QVTimperativePackage.MAPPING__OWNED_KEY_EXPRESSION:
-				return ownedKeyExpression != null;
 		}
 		return super.eIsSet(featureID);
 	}

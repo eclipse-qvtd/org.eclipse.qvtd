@@ -11,7 +11,6 @@
 package org.eclipse.qvtd.pivot.qvtimperative;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 
 /**
@@ -30,8 +29,6 @@ import org.eclipse.qvtd.pivot.qvtbase.Rule;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.Mapping#getOwnedStatements <em>Owned Statements</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.Mapping#getPolledClasses <em>Polled Classes</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.Mapping#getOwnedKeyExpression <em>Owned Key Expression</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getMapping()
@@ -52,44 +49,5 @@ public interface Mapping extends Rule, Area {
 	 * @generated
 	 */
 	EList<Statement> getOwnedStatements();
-
-	/**
-	 * Returns the value of the '<em><b>Polled Classes</b></em>' reference list.
-	 * The list contents are of type {@link org.eclipse.ocl.pivot.Class}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * The classes whse instances must be polled for readiness prior to use.
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Polled Classes</em>' reference list.
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getMapping_PolledClasses()
-	 * @generated
-	 */
-	EList<org.eclipse.ocl.pivot.Class> getPolledClasses();
-
-	/**
-	 * Returns the value of the '<em><b>Owned Key Expression</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Owned Key Expression</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Owned Key Expression</em>' containment reference.
-	 * @see #setOwnedKeyExpression(OCLExpression)
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getMapping_OwnedKeyExpression()
-	 * @generated
-	 */
-	OCLExpression getOwnedKeyExpression();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtimperative.Mapping#getOwnedKeyExpression <em>Owned Key Expression</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Owned Key Expression</em>' containment reference.
-	 * @see #getOwnedKeyExpression()
-	 * @generated
-	 */
-	void setOwnedKeyExpression(OCLExpression value);
 
 } // Mapping
