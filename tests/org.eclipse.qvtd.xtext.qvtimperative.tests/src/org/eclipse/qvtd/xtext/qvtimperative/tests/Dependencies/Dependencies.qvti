@@ -16,7 +16,7 @@ map dependenciesLM in Dependencies {
     }
 }
 
-map dependenciesMR in Dependencies uses ecore::EPackage, ocl::Integer {
+map dependenciesMR in Dependencies /*uses ecore::EPackage, ocl::Integer*/ {
 	check middle(binaryPrecedence:OclAny, unaryPrecedence:OclAny) { }
     enforce target() {}
     where () {}
