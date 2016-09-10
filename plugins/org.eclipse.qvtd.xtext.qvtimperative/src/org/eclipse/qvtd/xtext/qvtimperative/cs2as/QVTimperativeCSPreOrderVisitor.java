@@ -55,9 +55,9 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.PredicateCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.PredicateOrAssignmentCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.SetStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QueryCS;
-import org.eclipse.qvtd.xtext.qvtimperativecs.RealizeableVariableCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.TopLevelCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.TransformationCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.UnrealizedVariableCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.util.AbstractQVTimperativeCSPreOrderVisitor;
 
 public class QVTimperativeCSPreOrderVisitor extends AbstractQVTimperativeCSPreOrderVisitor
@@ -144,9 +144,9 @@ public class QVTimperativeCSPreOrderVisitor extends AbstractQVTimperativeCSPreOr
 		}
 	}
 
-	public static class RealizeableVariableCompletion extends SingleContinuation<RealizeableVariableCS>
+	public static class UnrealizedVariableCompletion extends SingleContinuation<UnrealizedVariableCS>
 	{
-		public RealizeableVariableCompletion(@NonNull CS2ASConversion context, @NonNull RealizeableVariableCS csElement) {
+		public UnrealizedVariableCompletion(@NonNull CS2ASConversion context, @NonNull UnrealizedVariableCS csElement) {
 			super(context, null, null, csElement, new PivotDependency(csElement.getOwnedType()));
 		}
 
@@ -296,11 +296,6 @@ public class QVTimperativeCSPreOrderVisitor extends AbstractQVTimperativeCSPreOr
 	}
 
 	@Override
-	public Continuation<?> visitRealizeableVariableCS(@NonNull RealizeableVariableCS csElement) {
-		return new RealizeableVariableCompletion(context, csElement);
-	}
-
-	@Override
 	public Continuation<?> visitSetStatementCS(@NonNull SetStatementCS csElement) {
 		return null;
 	}
@@ -322,5 +317,10 @@ public class QVTimperativeCSPreOrderVisitor extends AbstractQVTimperativeCSPreOr
 			}
 		}
 		return null;
+	}
+
+	@Override
+	public @Nullable Continuation<?> visitUnrealizedVariableCS(@NonNull UnrealizedVariableCS csElement) {
+		return new UnrealizedVariableCompletion(context, csElement);
 	}
 }

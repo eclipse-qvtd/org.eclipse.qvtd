@@ -34,7 +34,6 @@ import org.eclipse.ocl.xtext.base.cs2as.Continuation;
 import org.eclipse.ocl.xtext.base.cs2as.SingleContinuation;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.xtext.basecs.PathNameCS;
-import org.eclipse.ocl.xtext.basecs.PrimitiveTypeRefCS;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
 import org.eclipse.ocl.xtext.essentialoclcs.NameExpCS;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
@@ -74,7 +73,6 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingLoopCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.NewStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.ParamDeclarationCS;
-import org.eclipse.qvtd.xtext.qvtimperativecs.PatternCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.PredicateCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.PredicateOrAssignmentCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QueryCS;
@@ -82,7 +80,6 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.SetStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.TopLevelCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.TransformationCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.UnrealizedVariableCS;
-import org.eclipse.qvtd.xtext.qvtimperativecs.impl.DomainCSImpl;
 import org.eclipse.qvtd.xtext.qvtimperativecs.util.AbstractQVTimperativeCSContainmentVisitor;
 
 import com.google.common.collect.Iterables;
@@ -415,18 +412,12 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 
 	@Override
 	public Continuation<?> visitUnrealizedVariableCS(@NonNull UnrealizedVariableCS csElement) {
-		EObject eContainer = csElement.eContainer();
-		if ((eContainer instanceof PatternCS) && !(csElement.getOwnedType() instanceof PrimitiveTypeRefCS)) {		// FIXME need clearer syntax
-			EObject eContainerContainer = eContainer.eContainer();
-			if (eContainerContainer instanceof DomainCSImpl) {
-				TypedModel typedModel = ((DomainCSImpl)eContainerContainer).basicGetDirection();
-				if (typedModel == null) {
-					refreshNamedElement(ConnectionVariable.class, QVTimperativePackage.Literals.CONNECTION_VARIABLE, csElement);
-					return null;
-				}
-			}
+		if (csElement.isIsConnection()) {
+			refreshNamedElement(ConnectionVariable.class, QVTimperativePackage.Literals.CONNECTION_VARIABLE, csElement);
 		}
-		refreshNamedElement(Variable.class, PivotPackage.Literals.VARIABLE, csElement);
+		else {
+			refreshNamedElement(Variable.class, PivotPackage.Literals.VARIABLE, csElement);
+		}
 		return null;
 	}
 

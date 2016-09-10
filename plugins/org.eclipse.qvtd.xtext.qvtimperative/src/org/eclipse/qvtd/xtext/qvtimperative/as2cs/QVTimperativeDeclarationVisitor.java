@@ -745,12 +745,14 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 				}
 			}
 			csUnrealizedVariable.setOwnedInitExpression(context.visitDeclaration(ExpCS.class, ownedInit));
+			csUnrealizedVariable.setIsConnection(asVariable instanceof ConnectionVariable);
 			return csUnrealizedVariable;
 		}
 		else {
 			if (asVariable.eContainer() instanceof ImperativePattern) {
 				UnrealizedVariableCS csUnrealizedVariable = refreshTypedElement(UnrealizedVariableCS.class, QVTimperativeCSPackage.Literals.UNREALIZED_VARIABLE_CS, asVariable);
 				csUnrealizedVariable.setOwnedInitExpression(context.visitDeclaration(ExpCS.class, asVariable.getOwnedInit()));
+				csUnrealizedVariable.setIsConnection(asVariable instanceof ConnectionVariable);
 				return csUnrealizedVariable;
 			}
 			else {

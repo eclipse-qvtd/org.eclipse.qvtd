@@ -14,29 +14,27 @@ import org.eclipse.ocl.xtext.essentialocl.formatting.AbstractEssentialOCLFormatt
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.AddStatementCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.BottomPatternCSElements;
+import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.ConstraintCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.DirectionCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.GuardPatternCSElements;
+import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.GuardVariableCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.ImportCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.MappingCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.MappingCallBindingCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.MappingCallCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.MappingLoopCSElements;
-import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.MiddleBottomPatternCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.MiddleDomainCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.NewStatementCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.PredicateCSElements;
-import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.PredicateOrAssignmentCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.QualifiedPackageCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.QueryCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.ScopeNameCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.SetStatementCSElements;
-import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.SourceBottomPatternCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.SourceDomainCSElements;
-import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.SourceGuardPatternCSElements;
-import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.TargetBottomPatternCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.TargetDomainCSElements;
-import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.TargetGuardPatternCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.TransformationCSElements;
+import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.UnrealizedVariableCSElements;
+import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.VariablePredicateCSElements;
 import org.eclipse.xtext.formatting.impl.FormattingConfig;
 
 /**
@@ -51,36 +49,10 @@ public class QVTimperativeFormatter extends AbstractEssentialOCLFormatter
 {
 
 	protected void configureBottomPatternCS(FormattingConfig c, BottomPatternCSElements a) {
-		c.setNoLinewrap().before(a.getLeftCurlyBracketKeyword_0_0());
-		c.setLinewrap().after(a.getLeftCurlyBracketKeyword_0_0());
-		c.setNoSpace().before(a.getCommaKeyword_0_2_0());
-		c.setLinewrap().after(a.getCommaKeyword_0_2_0());
-		c.setLinewrap(1).before(a.getVerticalLineKeyword_0_3());
-		c.setLinewrap(1).after(a.getVerticalLineKeyword_0_3());
-		c.setIndentation(a.getLeftCurlyBracketKeyword_0_0(), a.getVerticalLineKeyword_0_3());
-		c.setLinewrap().before(a.getRightCurlyBracketKeyword_0_5());
-		c.setLinewrap().after(a.getRightCurlyBracketKeyword_0_5());
-		c.setIndentation(a.getVerticalLineKeyword_0_3(), a.getRightCurlyBracketKeyword_0_5());
-		c.setNoSpace().between(a.getLeftCurlyBracketKeyword_0_0(), a.getVerticalLineKeyword_0_3());
-		c.setNoSpace().between(a.getVerticalLineKeyword_0_3(), a.getRightCurlyBracketKeyword_0_5());
-		//
-		c.setNoLinewrap().before(a.getLeftCurlyBracketKeyword_1_0());
-		c.setLinewrap().after(a.getLeftCurlyBracketKeyword_1_0());
-		c.setNoSpace().before(a.getCommaKeyword_1_2_0());
-		c.setLinewrap().after(a.getCommaKeyword_1_2_0());
-		c.setLinewrap().before(a.getRightCurlyBracketKeyword_1_3());
-		c.setLinewrap().after(a.getRightCurlyBracketKeyword_1_3());
-		c.setIndentation(a.getLeftCurlyBracketKeyword_1_0(), a.getRightCurlyBracketKeyword_1_3());
-		//
-		c.setNoLinewrap().before(a.getLeftCurlyBracketKeyword_2_0());
-		c.setLinewrap().after(a.getLeftCurlyBracketKeyword_2_0());
-		c.setLinewrap().before(a.getRightCurlyBracketKeyword_2_2());
-		c.setLinewrap().after(a.getRightCurlyBracketKeyword_2_2());
-		c.setIndentation(a.getLeftCurlyBracketKeyword_2_0(), a.getRightCurlyBracketKeyword_2_2());
-		//
-		c.setNoLinewrap().before(a.getLeftCurlyBracketKeyword_3_1());
-		c.setLinewrap().after(a.getRightCurlyBracketKeyword_3_2());
-		c.setNoSpace().between(a.getLeftCurlyBracketKeyword_3_1(), a.getRightCurlyBracketKeyword_3_2());
+		c.setNoLinewrap().before(a.getLeftCurlyBracketKeyword_1());
+		c.setLinewrap().after(a.getLeftCurlyBracketKeyword_1());
+		c.setLinewrap().before(a.getRightCurlyBracketKeyword_3());
+		c.setLinewrap().after(a.getRightCurlyBracketKeyword_3());
 	}
 
 	protected void configureDirectionCS(FormattingConfig c, DirectionCSElements a) {
@@ -88,57 +60,13 @@ public class QVTimperativeFormatter extends AbstractEssentialOCLFormatter
 		c.setNoSpace().before(a.getCommaKeyword_5_2_0());
 	}
 
-	protected void configureGuardPatternCS(FormattingConfig c, GuardPatternCSElements a) {
-		c.setNoLinewrap().before(a.getLeftParenthesisKeyword_0_0());
-		c.setLinewrap().after(a.getLeftParenthesisKeyword_0_0());
-		c.setNoSpace().before(a.getCommaKeyword_0_2_0());
-		c.setLinewrap().after(a.getCommaKeyword_0_2_0());
-		c.setLinewrap(1).before(a.getVerticalLineKeyword_0_3());
-		c.setLinewrap(1).after(a.getVerticalLineKeyword_0_3());
-		c.setIndentation(a.getLeftParenthesisKeyword_0_0(), a.getVerticalLineKeyword_0_3());
-		c.setLinewrap().before(a.getRightParenthesisKeyword_0_5());
-		c.setLinewrap().after(a.getRightParenthesisKeyword_0_5());
-		c.setIndentation(a.getVerticalLineKeyword_0_3(), a.getRightParenthesisKeyword_0_5());
-		c.setNoSpace().around(a.getLeftParenthesisKeyword_0_0());
-		c.setNoSpace().before(a.getRightParenthesisKeyword_0_5());
-		c.setNoSpace().between(a.getLeftParenthesisKeyword_0_0(), a.getVerticalLineKeyword_0_3());
-		c.setNoSpace().between(a.getVerticalLineKeyword_0_3(), a.getRightParenthesisKeyword_0_5());
-		c.setNoSpace().between(a.getLeftParenthesisKeyword_0_0(), a.getRightParenthesisKeyword_0_5());
-		//
-		c.setNoLinewrap().before(a.getLeftParenthesisKeyword_1_0());
-		c.setLinewrap().after(a.getLeftParenthesisKeyword_1_0());
-		c.setNoSpace().before(a.getCommaKeyword_1_2_0());
-		c.setLinewrap().after(a.getCommaKeyword_1_2_0());
-		c.setLinewrap().before(a.getRightParenthesisKeyword_1_3());
-		c.setLinewrap().after(a.getRightParenthesisKeyword_1_3());
-		c.setIndentation(a.getLeftParenthesisKeyword_1_0(), a.getRightParenthesisKeyword_1_3());
-		c.setNoSpace().around(a.getLeftParenthesisKeyword_1_0());
-		c.setNoSpace().before(a.getRightParenthesisKeyword_1_3());
-		//
-		c.setNoLinewrap().before(a.getLeftParenthesisKeyword_2_0());
-		c.setLinewrap().after(a.getLeftParenthesisKeyword_2_0());
-		c.setLinewrap().before(a.getRightParenthesisKeyword_2_2());
-		c.setLinewrap().after(a.getRightParenthesisKeyword_2_2());
-		c.setIndentation(a.getLeftParenthesisKeyword_2_0(), a.getRightParenthesisKeyword_2_2());
-		c.setNoSpace().around(a.getLeftParenthesisKeyword_2_0());
-		c.setNoSpace().before(a.getRightParenthesisKeyword_2_2());
-		//
-		c.setNoLinewrap().before(a.getLeftParenthesisKeyword_3_1());
-		c.setLinewrap().after(a.getRightParenthesisKeyword_3_2());
-		c.setNoSpace().around(a.getLeftParenthesisKeyword_3_1());
-		c.setNoSpace().before(a.getRightParenthesisKeyword_3_2());
-		c.setNoSpace().between(a.getLeftParenthesisKeyword_3_1(), a.getRightParenthesisKeyword_3_2());
-	}
-
 	protected void configureImportCS(FormattingConfig c, ImportCSElements a) {
 		setNoSpaceLineWrap(c, a.getSemicolonKeyword_4());
 	}
 
 	protected void configurePredicateCS(FormattingConfig c, PredicateCSElements a) {
-		setNoSpaceLineWrap(c, a.getSemicolonKeyword_1());
-	}
-
-	protected void configurePredicateOrAssignmentCS(FormattingConfig c, PredicateOrAssignmentCSElements a) {
+		c.setLinewrap(1).before(a.getCheckKeyword_0());
+		c.setNoSpace().before(a.getSemicolonKeyword_2());
 		setNoSpaceLineWrap(c, a.getSemicolonKeyword_2());
 	}
 
@@ -217,7 +145,14 @@ public class QVTimperativeFormatter extends AbstractEssentialOCLFormatter
 
 		{
 			AddStatementCSElements a = f.getAddStatementCSAccess();
-			setNoSpaceLineWrap(c, a.getSemicolonKeyword_4());
+			c.setLinewrap(1).before(a.getAddKeyword_0());
+			c.setNoSpace().before(a.getSemicolonKeyword_4());
+		}
+		{
+			GuardVariableCSElements a = f.getGuardVariableCSAccess();
+			c.setLinewrap(1).before(a.getInKeyword_0_0());
+			c.setLinewrap(1).before(a.getIsConnectionInoutKeyword_0_1_0());
+			c.setNoSpace().before(a.getSemicolonKeyword_4());
 		}
 		{
 			MappingCSElements a = f.getMappingCSAccess();
@@ -245,39 +180,6 @@ public class QVTimperativeFormatter extends AbstractEssentialOCLFormatter
 			setAppendedBraces(c, a.getLeftCurlyBracketKeyword_4(), a.getRightCurlyBracketKeyword_6());
 		}
 		{
-			MiddleBottomPatternCSElements a = f.getMiddleBottomPatternCSAccess();
-			c.setNoLinewrap().before(a.getLeftCurlyBracketKeyword_0_0());
-			c.setLinewrap().after(a.getLeftCurlyBracketKeyword_0_0());
-			c.setNoSpace().before(a.getCommaKeyword_0_2_0());
-			c.setLinewrap().after(a.getCommaKeyword_0_2_0());
-			c.setLinewrap(1).before(a.getVerticalLineKeyword_0_3());
-			c.setLinewrap(1).after(a.getVerticalLineKeyword_0_3());
-			c.setIndentation(a.getLeftCurlyBracketKeyword_0_0(), a.getVerticalLineKeyword_0_3());
-			c.setLinewrap().before(a.getRightCurlyBracketKeyword_0_5());
-			c.setLinewrap().after(a.getRightCurlyBracketKeyword_0_5());
-			c.setIndentation(a.getVerticalLineKeyword_0_3(), a.getRightCurlyBracketKeyword_0_5());
-			c.setNoSpace().between(a.getLeftCurlyBracketKeyword_0_0(), a.getVerticalLineKeyword_0_3());
-			c.setNoSpace().between(a.getVerticalLineKeyword_0_3(), a.getRightCurlyBracketKeyword_0_5());
-			//
-			c.setNoLinewrap().before(a.getLeftCurlyBracketKeyword_1_0());
-			c.setLinewrap().after(a.getLeftCurlyBracketKeyword_1_0());
-			c.setNoSpace().before(a.getCommaKeyword_1_2_0());
-			c.setLinewrap().after(a.getCommaKeyword_1_2_0());
-			c.setLinewrap().before(a.getRightCurlyBracketKeyword_1_3());
-			c.setLinewrap().after(a.getRightCurlyBracketKeyword_1_3());
-			c.setIndentation(a.getLeftCurlyBracketKeyword_1_0(), a.getRightCurlyBracketKeyword_1_3());
-			//
-			c.setNoLinewrap().before(a.getLeftCurlyBracketKeyword_2_0());
-			c.setLinewrap().after(a.getLeftCurlyBracketKeyword_2_0());
-			c.setLinewrap().before(a.getRightCurlyBracketKeyword_2_2());
-			c.setLinewrap().after(a.getRightCurlyBracketKeyword_2_2());
-			c.setIndentation(a.getLeftCurlyBracketKeyword_2_0(), a.getRightCurlyBracketKeyword_2_2());
-			//
-			c.setNoLinewrap().before(a.getLeftCurlyBracketKeyword_3_1());
-			c.setLinewrap().after(a.getRightCurlyBracketKeyword_3_2());
-			c.setNoSpace().between(a.getLeftCurlyBracketKeyword_3_1(), a.getRightCurlyBracketKeyword_3_2());
-		}
-		{
 			MiddleDomainCSElements a = f.getMiddleDomainCSAccess();
 			c.setNoLinewrap().before(a.getLeftCurlyBracketKeyword_0_0());
 			c.setLinewrap().after(a.getLeftCurlyBracketKeyword_0_0());
@@ -291,36 +193,15 @@ public class QVTimperativeFormatter extends AbstractEssentialOCLFormatter
 		}
 		{
 			GuardPatternCSElements a = f.getGuardPatternCSAccess();
-			c.setNoLinewrap().before(a.getLeftParenthesisKeyword_0_0());
-			c.setLinewrap().after(a.getLeftParenthesisKeyword_0_0());
-			c.setLinewrap().before(a.getRightParenthesisKeyword_0_5());
-			c.setLinewrap().after(a.getRightParenthesisKeyword_0_5());
-			c.setNoSpace().after(a.getLeftParenthesisKeyword_0_0());
-			c.setNoSpace().before(a.getCommaKeyword_0_2_0());
-			c.setNoSpace().before(a.getRightParenthesisKeyword_0_5());
+			c.setNoLinewrap().before(a.getLeftParenthesisKeyword_1());
+			c.setLinewrap().after(a.getLeftParenthesisKeyword_1());
+			c.setLinewrap().before(a.getRightParenthesisKeyword_3());
+			c.setLinewrap().after(a.getRightParenthesisKeyword_3());
+			c.setNoSpace().around(a.getLeftParenthesisKeyword_1());
+			c.setNoSpace().before(a.getRightParenthesisKeyword_3());
 			//
-			c.setNoLinewrap().before(a.getLeftParenthesisKeyword_1_0());
-			c.setLinewrap().after(a.getLeftParenthesisKeyword_1_0());
-			c.setLinewrap().before(a.getRightParenthesisKeyword_1_3());
-			c.setLinewrap().after(a.getRightParenthesisKeyword_1_3());
-			c.setNoSpace().after(a.getLeftParenthesisKeyword_1_0());
-			c.setNoSpace().before(a.getCommaKeyword_1_2_0());
-			c.setNoSpace().before(a.getRightParenthesisKeyword_1_3());
-			//
-			c.setNoLinewrap().before(a.getLeftParenthesisKeyword_2_0());
-			c.setLinewrap().after(a.getLeftParenthesisKeyword_2_0());
-			c.setLinewrap().before(a.getRightParenthesisKeyword_2_2());
-			c.setLinewrap().after(a.getRightParenthesisKeyword_2_2());
-			c.setNoSpace().after(a.getLeftParenthesisKeyword_2_0());
-			//
-			c.setNoLinewrap().before(a.getLeftParenthesisKeyword_3_1());
-			c.setLinewrap().after(a.getLeftParenthesisKeyword_3_1());
-			c.setLinewrap().before(a.getRightParenthesisKeyword_3_2());
-			c.setLinewrap().after(a.getRightParenthesisKeyword_3_2());
-			c.setNoSpace().after(a.getLeftParenthesisKeyword_3_1());
-			//
-			c.setIndentation(a.getLeftParenthesisKeyword_0_0(), a.getRightParenthesisKeyword_0_5());
-			c.setNoSpace().between(a.getLeftParenthesisKeyword_0_0(), a.getRightParenthesisKeyword_0_5());
+			c.setIndentation(a.getLeftParenthesisKeyword_1(), a.getRightParenthesisKeyword_3());
+			c.setNoSpace().between(a.getLeftParenthesisKeyword_1(), a.getRightParenthesisKeyword_3());
 		}
 		{
 			NewStatementCSElements a = f.getNewStatementCSAccess();
@@ -329,8 +210,9 @@ public class QVTimperativeFormatter extends AbstractEssentialOCLFormatter
 			c.setNoSpace().before(a.getSemicolonKeyword_7());
 		}
 		{
-			PredicateOrAssignmentCSElements a = f.getPredicateOrAssignmentCSAccess();
-			setNoSpaceLineWrap(c, a.getSemicolonKeyword_2());
+			ConstraintCSElements a = f.getConstraintCSAccess();
+			c.setLinewrap(1).before(a.getCheckKeyword_0());
+			setNoSpaceLineWrap(c, a.getSemicolonKeyword_3());
 		}
 		{
 			ScopeNameCSElements a = f.getScopeNameCSAccess();
@@ -341,15 +223,6 @@ public class QVTimperativeFormatter extends AbstractEssentialOCLFormatter
 			SetStatementCSElements a = f.getSetStatementCSAccess();
 			c.setLinewrap(1).before(a.getSetKeyword_0());
 			c.setNoSpace().before(a.getSemicolonKeyword_6());
-		}
-		{
-			SourceBottomPatternCSElements a = f.getSourceBottomPatternCSAccess();
-			c.setNoLinewrap().before(a.getLeftCurlyBracketKeyword_1());
-			c.setLinewrap().after(a.getLeftCurlyBracketKeyword_1());
-			c.setNoSpace().before(a.getCommaKeyword_2_1_0());
-			c.setLinewrap().after(a.getCommaKeyword_2_1_0());
-			c.setLinewrap().after(a.getRightCurlyBracketKeyword_3());
-			c.setNoSpace().between(a.getLeftCurlyBracketKeyword_1(), a.getRightCurlyBracketKeyword_3());
 		}
 		{
 			SourceDomainCSElements a = f.getSourceDomainCSAccess();
@@ -364,32 +237,6 @@ public class QVTimperativeFormatter extends AbstractEssentialOCLFormatter
 			c.setIndentation(a.getLeftCurlyBracketKeyword_2_0(), a.getRightCurlyBracketKeyword_2_3());
 		}
 		{
-			SourceGuardPatternCSElements a = f.getSourceGuardPatternCSAccess();
-			c.setNoLinewrap().before(a.getLeftParenthesisKeyword_1());
-			c.setLinewrap().after(a.getLeftParenthesisKeyword_1());
-			c.setNoSpace().before(a.getCommaKeyword_2_1_0());
-			c.setLinewrap().after(a.getCommaKeyword_2_1_0());
-			c.setLinewrap().before(a.getRightParenthesisKeyword_3());
-			c.setLinewrap().after(a.getRightParenthesisKeyword_3());
-			c.setNoSpace().around(a.getLeftParenthesisKeyword_1());
-			c.setNoSpace().before(a.getRightParenthesisKeyword_3());
-			//
-			c.setIndentation(a.getLeftParenthesisKeyword_1(), a.getRightParenthesisKeyword_3());
-			c.setNoSpace().between(a.getLeftParenthesisKeyword_1(), a.getRightParenthesisKeyword_3());
-		}
-		{
-			TargetBottomPatternCSElements a = f.getTargetBottomPatternCSAccess();
-			c.setNoLinewrap().before(a.getLeftCurlyBracketKeyword_1());
-			c.setLinewrap().after(a.getLeftCurlyBracketKeyword_1());
-			c.setNoSpace().before(a.getCommaKeyword_2_1_0());
-			c.setLinewrap().after(a.getCommaKeyword_2_1_0());
-			c.setLinewrap().before(a.getRightCurlyBracketKeyword_3());
-			c.setLinewrap().after(a.getRightCurlyBracketKeyword_3());
-			//
-			c.setIndentation(a.getLeftCurlyBracketKeyword_1(), a.getRightCurlyBracketKeyword_3());
-			c.setNoSpace().between(a.getLeftCurlyBracketKeyword_1(), a.getRightCurlyBracketKeyword_3());
-		}
-		{
 			TargetDomainCSElements a = f.getTargetDomainCSAccess();
 			c.setNoLinewrap().before(a.getLeftCurlyBracketKeyword_2_0());
 			c.setLinewrap().after(a.getLeftCurlyBracketKeyword_2_0());
@@ -401,26 +248,22 @@ public class QVTimperativeFormatter extends AbstractEssentialOCLFormatter
 			c.setNoSpace().between(a.getLeftCurlyBracketKeyword_2_0(), a.getRightCurlyBracketKeyword_2_3());
 			c.setIndentation(a.getLeftCurlyBracketKeyword_2_0(), a.getRightCurlyBracketKeyword_2_3());
 		}
-		{
-			TargetGuardPatternCSElements a = f.getTargetGuardPatternCSAccess();
-			c.setNoLinewrap().before(a.getLeftParenthesisKeyword_1());
-			c.setLinewrap().after(a.getLeftParenthesisKeyword_1());
-			c.setNoSpace().before(a.getCommaKeyword_2_1_0());
-			c.setLinewrap().after(a.getCommaKeyword_2_1_0());
-			c.setLinewrap().before(a.getRightParenthesisKeyword_3());
-			c.setLinewrap().after(a.getRightParenthesisKeyword_3());
-			c.setNoSpace().around(a.getLeftParenthesisKeyword_1());
-			c.setNoSpace().before(a.getRightParenthesisKeyword_3());
-			//
-			c.setIndentation(a.getLeftParenthesisKeyword_1(), a.getRightParenthesisKeyword_3());
-			c.setNoSpace().between(a.getLeftParenthesisKeyword_1(), a.getRightParenthesisKeyword_3());
-		}
 		//	    {
 		//	    	TopLevelCSElements a = f.getTopLevelCSAccess();
 		//			c.setLinewrap(2).between(a.getOwnedMappingsMappingCSParserRuleCall_1_1_0(), a.getOwnedMappingsMappingCSParserRuleCall_1_1_0());
 		//			c.setLinewrap(2).before(a.getOwnedQueriesAssignment_1_2());
 		//			c.setLinewrap(2).before(a.getOwnedTransformationsAssignment_1_0());
 		//	    }
+		{
+			UnrealizedVariableCSElements a = f.getUnrealizedVariableCSAccess();
+			c.setLinewrap(1).before(a.getVarKeyword_0_0());
+			c.setNoSpace().before(a.getSemicolonKeyword_4());
+		}
+		{
+			VariablePredicateCSElements a = f.getVariablePredicateCSAccess();
+			c.setLinewrap(1).before(a.getInvarKeyword_0());
+			setNoSpaceLineWrap(c, a.getSemicolonKeyword_5());
+		}
 	}
 
 	@Override
