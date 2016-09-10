@@ -51,8 +51,6 @@
     </genClasses>
     <genClasses ecoreClass="QVTimperative.ecore#//Mapping">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//Mapping/ownedStatements"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//Mapping/polledClasses"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//Mapping/ownedKeyExpression"/>
     </genClasses>
     <genClasses ecoreClass="QVTimperative.ecore#//MappingCall">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//MappingCall/binding"/>

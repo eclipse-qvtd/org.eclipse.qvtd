@@ -66,8 +66,7 @@ GuardVariableCS returns UnrealizedVariableCS: name=UnrestrictedName ':' ownedTyp
 ImportCS returns base::ImportCS:
 	'import' (name=Identifier ':')? ownedPathName=URIPathNameCS (isAll?='::' '*')? ';';
 
-MappingCS: {MappingCS} isDefault?='default'? 'map' name=UnrestrictedName ('in' ownedInPathName=PathNameCS)?
-	('uses' ownedUsesPathNames+=PathNameCS (',' ownedUsesPathNames+=PathNameCS)*)? ('key' ownedKeyExpression=ExpCS ';')?
+MappingCS: {MappingCS} 'map' name=UnrestrictedName ('in' ownedInPathName=PathNameCS)?
 	'{' ownedDomains+=(SourceDomainCS | TargetDomainCS)* ('where' ownedMiddle=MiddleDomainCS)?
 	ownedStatements+=BottomStatementCS* ownedStatements+=ControlStatementCS* '}';
 	
