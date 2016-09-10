@@ -354,17 +354,6 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 		context.refreshList(csPathNames, pathNames);
 	}
 
-	protected void refreshUsedTypes(@NonNull MappingCS csMapping, @NonNull Mapping asMapping) {
-		List<PathNameCS> csPathNames = new ArrayList<PathNameCS>();
-		for (org.eclipse.ocl.pivot.@NonNull Class asClass : ClassUtil.nullFree(asMapping.getPolledClasses())) {
-			@NonNull PathNameCS csPathName = BaseCSFactory.eINSTANCE.createPathNameCS();
-			csPathNames.add(csPathName);
-			Transformation asTransformation = QVTbaseUtil.getContainingTransformation(asMapping);
-			context.refreshPathName(csPathName, asClass, asTransformation);
-		}
-		context.refreshList(csMapping.getOwnedUsesPathNames(), csPathNames);
-	}
-
 	@Override
 	public ElementCS visitAddStatement(@NonNull AddStatement asAddStatement) {
 		AddStatementCS csStatement = context.refreshElement(AddStatementCS.class, QVTimperativeCSPackage.Literals.ADD_STATEMENT_CS, asAddStatement);
@@ -523,9 +512,7 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 	public ElementCS visitMapping(@NonNull Mapping asMapping) {
 		MappingCS csMapping = context.refreshNamedElement(MappingCS.class, QVTimperativeCSPackage.Literals.MAPPING_CS, asMapping);
 		csMapping.setPivot(asMapping);
-		csMapping.setIsDefault(asMapping.isIsDefault());
 		refreshOwnedInTransformation(csMapping, asMapping);
-		refreshUsedTypes(csMapping, asMapping);
 		context.refreshList(csMapping.getOwnedDomains(), context.visitDeclarations(DomainCS.class, asMapping.getDomain(), null));
 		DomainCS csDomain = context.refreshElement(DomainCS.class, QVTimperativeCSPackage.Literals.DOMAIN_CS, asMapping);
 		csDomain.setPivot(null);		// stop comment duplication
@@ -536,7 +523,6 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 		refreshUsedProperties(asTransformation, csDomain.getCheckedProperties(), ClassUtil.nullFree(asMapping.getCheckedProperties()));
 		refreshUsedProperties(asTransformation, csDomain.getCheckedProperties(), ClassUtil.nullFree(asMapping.getCheckedProperties()));
 		csMapping.setOwnedMiddle(csDomain);
-		csMapping.setOwnedKeyExpression(createExpCS(asMapping.getOwnedKeyExpression()));
 		context.refreshList(csMapping.getOwnedStatements(), context.visitDeclarations(StatementCS.class, asMapping.getOwnedStatements(), null));
 		return csMapping;
 	}

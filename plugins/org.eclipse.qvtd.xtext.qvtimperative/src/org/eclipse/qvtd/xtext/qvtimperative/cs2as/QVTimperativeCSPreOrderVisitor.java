@@ -240,19 +240,6 @@ public class QVTimperativeCSPreOrderVisitor extends AbstractQVTimperativeCSPreOr
 
 	@Override
 	public Continuation<?> visitMappingCS(@NonNull MappingCS csMapping) {
-		Mapping asMapping = PivotUtil.getPivot(Mapping.class, csMapping);
-		if (asMapping != null) {
-			List<org.eclipse.ocl.pivot.Class> asClasses = new ArrayList<org.eclipse.ocl.pivot.Class>();
-			for (PathNameCS csPathName : csMapping.getOwnedUsesPathNames()) {
-				if (csPathName != null) {
-					org.eclipse.ocl.pivot.Class asClass = lookupClass(csMapping, csPathName, null);
-					if (asClass != null) {
-						asClasses.add(asClass);
-					}
-				}
-			}
-			context.refreshList(asMapping.getPolledClasses(), asClasses);
-		}
 		return null;
 	}
 

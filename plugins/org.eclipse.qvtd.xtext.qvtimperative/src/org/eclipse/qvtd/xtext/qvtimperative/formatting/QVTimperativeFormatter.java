@@ -221,13 +221,12 @@ public class QVTimperativeFormatter extends AbstractEssentialOCLFormatter
 		}
 		{
 			MappingCSElements a = f.getMappingCSAccess();
-			c.setLinewrap(2).before(a.getMapKeyword_2());
-			c.setNoSpace().before(a.getSemicolonKeyword_6_2());
-			c.setNoSpace().between(a.getLeftCurlyBracketKeyword_7(), a.getRightCurlyBracketKeyword_12());
-			setBraces(c, a.getLeftCurlyBracketKeyword_7(), a.getRightCurlyBracketKeyword_12());
+			c.setLinewrap(2).before(a.getMapKeyword_1());
+			c.setNoSpace().between(a.getLeftCurlyBracketKeyword_4(), a.getRightCurlyBracketKeyword_9());
+			setBraces(c, a.getLeftCurlyBracketKeyword_4(), a.getRightCurlyBracketKeyword_9());
 			//			c.setLinewrap(2).between(a.getDomainsAssignment_5(), a.getDomainsAssignment_5());
-			c.setLinewrap(1).before(a.getOwnedDomainsAssignment_8());
-			c.setLinewrap(1).before(a.getWhereKeyword_9_0());
+			c.setLinewrap(1).before(a.getOwnedDomainsAssignment_5());
+			c.setLinewrap(1).before(a.getWhereKeyword_6_0());
 		}
 		{
 			MappingCallCSElements a = f.getMappingCallCSAccess();
