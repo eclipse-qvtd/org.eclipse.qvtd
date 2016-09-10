@@ -964,22 +964,13 @@ public interface QVTimperativeCSPackage extends EPackage {
 	int MAPPING_CS__NAME = BaseCSPackage.NAMED_ELEMENT_CS__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Is Default</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAPPING_CS__IS_DEFAULT = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Owned Domains</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_CS__OWNED_DOMAINS = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 1;
+	int MAPPING_CS__OWNED_DOMAINS = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Owned In Path Name</b></em>' containment reference.
@@ -988,16 +979,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_CS__OWNED_IN_PATH_NAME = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Owned Key Expression</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAPPING_CS__OWNED_KEY_EXPRESSION = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 3;
+	int MAPPING_CS__OWNED_IN_PATH_NAME = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Owned Statements</b></em>' containment reference list.
@@ -1006,7 +988,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_CS__OWNED_STATEMENTS = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 4;
+	int MAPPING_CS__OWNED_STATEMENTS = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Owned Middle</b></em>' containment reference.
@@ -1015,16 +997,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_CS__OWNED_MIDDLE = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 5;
-
-	/**
-	 * The feature id for the '<em><b>Owned Uses Path Names</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAPPING_CS__OWNED_USES_PATH_NAMES = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 6;
+	int MAPPING_CS__OWNED_MIDDLE = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Mapping CS</em>' class.
@@ -1033,7 +1006,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_CS_FEATURE_COUNT = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 7;
+	int MAPPING_CS_FEATURE_COUNT = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -2732,17 +2705,6 @@ public interface QVTimperativeCSPackage extends EPackage {
 	EClass getMappingCS();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS#isIsDefault <em>Is Default</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Is Default</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS#isIsDefault()
-	 * @see #getMappingCS()
-	 * @generated
-	 */
-	EAttribute getMappingCS_IsDefault();
-
-	/**
 	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS#getOwnedDomains <em>Owned Domains</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2765,17 +2727,6 @@ public interface QVTimperativeCSPackage extends EPackage {
 	EReference getMappingCS_OwnedInPathName();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS#getOwnedKeyExpression <em>Owned Key Expression</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Owned Key Expression</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS#getOwnedKeyExpression()
-	 * @see #getMappingCS()
-	 * @generated
-	 */
-	EReference getMappingCS_OwnedKeyExpression();
-
-	/**
 	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS#getOwnedStatements <em>Owned Statements</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2796,17 +2747,6 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getMappingCS_OwnedMiddle();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS#getOwnedUsesPathNames <em>Owned Uses Path Names</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Owned Uses Path Names</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS#getOwnedUsesPathNames()
-	 * @see #getMappingCS()
-	 * @generated
-	 */
-	EReference getMappingCS_OwnedUsesPathNames();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS <em>Mapping Call Binding CS</em>}'.
@@ -3506,14 +3446,6 @@ public interface QVTimperativeCSPackage extends EPackage {
 		EClass MAPPING_CS = eINSTANCE.getMappingCS();
 
 		/**
-		 * The meta object literal for the '<em><b>Is Default</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute MAPPING_CS__IS_DEFAULT = eINSTANCE.getMappingCS_IsDefault();
-
-		/**
 		 * The meta object literal for the '<em><b>Owned Domains</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3530,14 +3462,6 @@ public interface QVTimperativeCSPackage extends EPackage {
 		EReference MAPPING_CS__OWNED_IN_PATH_NAME = eINSTANCE.getMappingCS_OwnedInPathName();
 
 		/**
-		 * The meta object literal for the '<em><b>Owned Key Expression</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference MAPPING_CS__OWNED_KEY_EXPRESSION = eINSTANCE.getMappingCS_OwnedKeyExpression();
-
-		/**
 		 * The meta object literal for the '<em><b>Owned Statements</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3552,14 +3476,6 @@ public interface QVTimperativeCSPackage extends EPackage {
 		 * @generated
 		 */
 		EReference MAPPING_CS__OWNED_MIDDLE = eINSTANCE.getMappingCS_OwnedMiddle();
-
-		/**
-		 * The meta object literal for the '<em><b>Owned Uses Path Names</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference MAPPING_CS__OWNED_USES_PATH_NAMES = eINSTANCE.getMappingCS_OwnedUsesPathNames();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCallBindingCSImpl <em>Mapping Call Binding CS</em>}' class.

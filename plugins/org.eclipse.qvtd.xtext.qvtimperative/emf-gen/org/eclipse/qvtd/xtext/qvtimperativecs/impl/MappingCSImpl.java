@@ -23,7 +23,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.xtext.basecs.PathNameCS;
 import org.eclipse.ocl.xtext.basecs.impl.NamedElementCSImpl;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
-import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DomainCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage;
@@ -38,36 +37,15 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCSImpl#isIsDefault <em>Is Default</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCSImpl#getOwnedDomains <em>Owned Domains</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCSImpl#getOwnedInPathName <em>Owned In Path Name</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCSImpl#getOwnedKeyExpression <em>Owned Key Expression</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCSImpl#getOwnedStatements <em>Owned Statements</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCSImpl#getOwnedMiddle <em>Owned Middle</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCSImpl#getOwnedUsesPathNames <em>Owned Uses Path Names</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
-	/**
-	 * The default value of the '{@link #isIsDefault() <em>Is Default</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isIsDefault()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean IS_DEFAULT_EDEFAULT = false;
-	/**
-	 * The cached value of the '{@link #isIsDefault() <em>Is Default</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isIsDefault()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean isDefault = IS_DEFAULT_EDEFAULT;
 	/**
 	 * The cached value of the '{@link #getOwnedDomains() <em>Owned Domains</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -87,15 +65,6 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 	 */
 	protected PathNameCS ownedInPathName;
 	/**
-	 * The cached value of the '{@link #getOwnedKeyExpression() <em>Owned Key Expression</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getOwnedKeyExpression()
-	 * @generated
-	 * @ordered
-	 */
-	protected ExpCS ownedKeyExpression;
-	/**
 	 * The cached value of the '{@link #getOwnedStatements() <em>Owned Statements</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -114,15 +83,6 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 	 */
 	protected DomainCS ownedMiddle;
 	/**
-	 * The cached value of the '{@link #getOwnedUsesPathNames() <em>Owned Uses Path Names</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getOwnedUsesPathNames()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<PathNameCS> ownedUsesPathNames;
-	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -139,29 +99,6 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 	@Override
 	protected EClass eStaticClass() {
 		return QVTimperativeCSPackage.Literals.MAPPING_CS;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public boolean isIsDefault() {
-		return isDefault;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setIsDefault(boolean newIsDefault) {
-		boolean oldIsDefault = isDefault;
-		isDefault = newIsDefault;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.MAPPING_CS__IS_DEFAULT, oldIsDefault, isDefault));
 	}
 
 	/**
@@ -228,51 +165,6 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 	 * @generated
 	 */
 	@Override
-	public ExpCS getOwnedKeyExpression() {
-		return ownedKeyExpression;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetOwnedKeyExpression(ExpCS newOwnedKeyExpression, NotificationChain msgs) {
-		ExpCS oldOwnedKeyExpression = ownedKeyExpression;
-		ownedKeyExpression = newOwnedKeyExpression;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.MAPPING_CS__OWNED_KEY_EXPRESSION, oldOwnedKeyExpression, newOwnedKeyExpression);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setOwnedKeyExpression(ExpCS newOwnedKeyExpression) {
-		if (newOwnedKeyExpression != ownedKeyExpression) {
-			NotificationChain msgs = null;
-			if (ownedKeyExpression != null)
-				msgs = ((InternalEObject)ownedKeyExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTimperativeCSPackage.MAPPING_CS__OWNED_KEY_EXPRESSION, null, msgs);
-			if (newOwnedKeyExpression != null)
-				msgs = ((InternalEObject)newOwnedKeyExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTimperativeCSPackage.MAPPING_CS__OWNED_KEY_EXPRESSION, null, msgs);
-			msgs = basicSetOwnedKeyExpression(newOwnedKeyExpression, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.MAPPING_CS__OWNED_KEY_EXPRESSION, newOwnedKeyExpression, newOwnedKeyExpression));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EList<StatementCS> getOwnedStatements() {
 		if (ownedStatements == null) {
 			ownedStatements = new EObjectContainmentEList<StatementCS>(StatementCS.class, this, QVTimperativeCSPackage.MAPPING_CS__OWNED_STATEMENTS);
@@ -331,43 +223,16 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 	 * @generated
 	 */
 	@Override
-	public EList<PathNameCS> getOwnedUsesPathNames() {
-		if (ownedUsesPathNames == null) {
-			ownedUsesPathNames = new EObjectContainmentEList<PathNameCS>(PathNameCS.class, this, QVTimperativeCSPackage.MAPPING_CS__OWNED_USES_PATH_NAMES);
-		}
-		return ownedUsesPathNames;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		return super.toString();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case QVTimperativeCSPackage.MAPPING_CS__OWNED_DOMAINS:
 				return ((InternalEList<?>)getOwnedDomains()).basicRemove(otherEnd, msgs);
 			case QVTimperativeCSPackage.MAPPING_CS__OWNED_IN_PATH_NAME:
 				return basicSetOwnedInPathName(null, msgs);
-			case QVTimperativeCSPackage.MAPPING_CS__OWNED_KEY_EXPRESSION:
-				return basicSetOwnedKeyExpression(null, msgs);
 			case QVTimperativeCSPackage.MAPPING_CS__OWNED_STATEMENTS:
 				return ((InternalEList<?>)getOwnedStatements()).basicRemove(otherEnd, msgs);
 			case QVTimperativeCSPackage.MAPPING_CS__OWNED_MIDDLE:
 				return basicSetOwnedMiddle(null, msgs);
-			case QVTimperativeCSPackage.MAPPING_CS__OWNED_USES_PATH_NAMES:
-				return ((InternalEList<?>)getOwnedUsesPathNames()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -380,20 +245,14 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.MAPPING_CS__IS_DEFAULT:
-				return isIsDefault();
 			case QVTimperativeCSPackage.MAPPING_CS__OWNED_DOMAINS:
 				return getOwnedDomains();
 			case QVTimperativeCSPackage.MAPPING_CS__OWNED_IN_PATH_NAME:
 				return getOwnedInPathName();
-			case QVTimperativeCSPackage.MAPPING_CS__OWNED_KEY_EXPRESSION:
-				return getOwnedKeyExpression();
 			case QVTimperativeCSPackage.MAPPING_CS__OWNED_STATEMENTS:
 				return getOwnedStatements();
 			case QVTimperativeCSPackage.MAPPING_CS__OWNED_MIDDLE:
 				return getOwnedMiddle();
-			case QVTimperativeCSPackage.MAPPING_CS__OWNED_USES_PATH_NAMES:
-				return getOwnedUsesPathNames();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -407,9 +266,6 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.MAPPING_CS__IS_DEFAULT:
-				setIsDefault((Boolean)newValue);
-				return;
 			case QVTimperativeCSPackage.MAPPING_CS__OWNED_DOMAINS:
 				getOwnedDomains().clear();
 				getOwnedDomains().addAll((Collection<? extends DomainCS>)newValue);
@@ -417,19 +273,12 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 			case QVTimperativeCSPackage.MAPPING_CS__OWNED_IN_PATH_NAME:
 				setOwnedInPathName((PathNameCS)newValue);
 				return;
-			case QVTimperativeCSPackage.MAPPING_CS__OWNED_KEY_EXPRESSION:
-				setOwnedKeyExpression((ExpCS)newValue);
-				return;
 			case QVTimperativeCSPackage.MAPPING_CS__OWNED_STATEMENTS:
 				getOwnedStatements().clear();
 				getOwnedStatements().addAll((Collection<? extends StatementCS>)newValue);
 				return;
 			case QVTimperativeCSPackage.MAPPING_CS__OWNED_MIDDLE:
 				setOwnedMiddle((DomainCS)newValue);
-				return;
-			case QVTimperativeCSPackage.MAPPING_CS__OWNED_USES_PATH_NAMES:
-				getOwnedUsesPathNames().clear();
-				getOwnedUsesPathNames().addAll((Collection<? extends PathNameCS>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -443,26 +292,17 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.MAPPING_CS__IS_DEFAULT:
-				setIsDefault(IS_DEFAULT_EDEFAULT);
-				return;
 			case QVTimperativeCSPackage.MAPPING_CS__OWNED_DOMAINS:
 				getOwnedDomains().clear();
 				return;
 			case QVTimperativeCSPackage.MAPPING_CS__OWNED_IN_PATH_NAME:
 				setOwnedInPathName((PathNameCS)null);
 				return;
-			case QVTimperativeCSPackage.MAPPING_CS__OWNED_KEY_EXPRESSION:
-				setOwnedKeyExpression((ExpCS)null);
-				return;
 			case QVTimperativeCSPackage.MAPPING_CS__OWNED_STATEMENTS:
 				getOwnedStatements().clear();
 				return;
 			case QVTimperativeCSPackage.MAPPING_CS__OWNED_MIDDLE:
 				setOwnedMiddle((DomainCS)null);
-				return;
-			case QVTimperativeCSPackage.MAPPING_CS__OWNED_USES_PATH_NAMES:
-				getOwnedUsesPathNames().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -476,20 +316,14 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.MAPPING_CS__IS_DEFAULT:
-				return isDefault != IS_DEFAULT_EDEFAULT;
 			case QVTimperativeCSPackage.MAPPING_CS__OWNED_DOMAINS:
 				return ownedDomains != null && !ownedDomains.isEmpty();
 			case QVTimperativeCSPackage.MAPPING_CS__OWNED_IN_PATH_NAME:
 				return ownedInPathName != null;
-			case QVTimperativeCSPackage.MAPPING_CS__OWNED_KEY_EXPRESSION:
-				return ownedKeyExpression != null;
 			case QVTimperativeCSPackage.MAPPING_CS__OWNED_STATEMENTS:
 				return ownedStatements != null && !ownedStatements.isEmpty();
 			case QVTimperativeCSPackage.MAPPING_CS__OWNED_MIDDLE:
 				return ownedMiddle != null;
-			case QVTimperativeCSPackage.MAPPING_CS__OWNED_USES_PATH_NAMES:
-				return ownedUsesPathNames != null && !ownedUsesPathNames.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
