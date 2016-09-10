@@ -667,11 +667,8 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 	 *
 	 * Constraint:
 	 *     (
-	 *         isDefault?='default'? 
 	 *         name=UnrestrictedName 
 	 *         ownedInPathName=PathNameCS? 
-	 *         (ownedUsesPathNames+=PathNameCS ownedUsesPathNames+=PathNameCS*)? 
-	 *         ownedKeyExpression=ExpCS? 
 	 *         (ownedDomains+=SourceDomainCS | ownedDomains+=TargetDomainCS)* 
 	 *         ownedMiddle=MiddleDomainCS? 
 	 *         ownedStatements+=BottomStatementCS* 
