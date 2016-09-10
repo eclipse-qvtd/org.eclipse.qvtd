@@ -1746,7 +1746,7 @@ public abstract class AbstractQVTimperativeSyntacticSequencer extends AbstractSy
 	 *     ('{' '}')?
 	 *
 	 * This ambiguous syntax occurs at:
-	 *     (rule start) (ambiguity) ownedGuardPattern=MiddleGuardPatternCS
+	 *     (rule start) (ambiguity) ownedGuardPattern=GuardPatternCS
 	 */
 	protected void emit_MiddleDomainCS___LeftCurlyBracketKeyword_0_0_RightCurlyBracketKeyword_0_3__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
@@ -3569,7 +3569,7 @@ public abstract class AbstractQVTimperativeSyntacticSequencer extends AbstractSy
 	 *     ('{' '}')?
 	 *
 	 * This ambiguous syntax occurs at:
-	 *     direction=[TypedModel|UnrestrictedName] (ambiguity) ownedGuardPattern=SourceGuardPatternCS
+	 *     direction=[TypedModel|UnrestrictedName] (ambiguity) ownedGuardPattern=GuardPatternCS
 	 */
 	protected void emit_SourceDomainCS___LeftCurlyBracketKeyword_2_0_RightCurlyBracketKeyword_2_3__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
@@ -3621,7 +3621,7 @@ public abstract class AbstractQVTimperativeSyntacticSequencer extends AbstractSy
 	 *     ('{' '}')?
 	 *
 	 * This ambiguous syntax occurs at:
-	 *     direction=[TypedModel|UnrestrictedName] (ambiguity) ownedGuardPattern=TargetGuardPatternCS
+	 *     direction=[TypedModel|UnrestrictedName] (ambiguity) ownedGuardPattern=GuardPatternCS
 	 */
 	protected void emit_TargetDomainCS___LeftCurlyBracketKeyword_2_0_RightCurlyBracketKeyword_2_3__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
