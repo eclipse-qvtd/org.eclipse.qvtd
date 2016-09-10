@@ -26,20 +26,13 @@ TopLevelCS:
 
 AddStatementCS: 'add' targetVariable=[pivot::Variable|UnrestrictedName] '+=' ownedExpression=ExpCS ';';
 				
-BottomPatternCS:		// Bug 466385 explains the redundancy below
-	(
-		'{' ownedUnrealizedVariables+=UnrealizedVariableCS (',' ownedUnrealizedVariables+=UnrealizedVariableCS)*
-		'|' ownedConstraints+=PredicateOrAssignmentCS* '}'
-	) | (
-		'{' ownedUnrealizedVariables+=UnrealizedVariableCS (',' ownedUnrealizedVariables+=UnrealizedVariableCS)* '}'
-	) | (
-		'{' ownedConstraints+=PredicateOrAssignmentCS+ '}'
-	) | (
-		{BottomPatternCS} '{' '}'
-	)
+BottomPatternCS:
+	{BottomPatternCS} '{' (ownedUnrealizedVariables+=UnrealizedVariableCS | ownedConstraints+=ConstraintCS)* '}'
 ;
 	
 BottomStatementCS returns StatementCS: NewStatementCS | SetStatementCS;
+
+ConstraintCS returns PredicateOrAssignmentCS: 'check' ownedTarget=ExpCS (':=' ownedInitExpression=ExpCS)? ';';
 	
 ControlStatementCS returns MappingStatementCS: AddStatementCS | MappingCallCS | MappingLoopCS;
 	
@@ -49,19 +42,11 @@ DirectionCS: {DirectionCS} name=UnrestrictedName?
 ;
 	
 GuardPatternCS:		// Bug 466385 explains the redundancy below
-	(
-		'(' ownedUnrealizedVariables+=GuardVariableCS (',' ownedUnrealizedVariables+=GuardVariableCS)* '|' ownedPredicates+=PredicateCS* ')'
-	) | (
-		'(' ownedUnrealizedVariables+=GuardVariableCS (',' ownedUnrealizedVariables+=GuardVariableCS)* ')'
-	) | (
-		'(' ownedPredicates+=PredicateCS+ ')'
-	) | (
-		{GuardPatternCS} '(' ')'
-	)
+	{GuardPatternCS} '(' (ownedUnrealizedVariables+=GuardVariableCS | ownedUnrealizedVariables+=VariablePredicateCS | ownedPredicates+=PredicateCS)* ')'
 ;
 	
 //Variable := VariableName �:� TypeDeclaration
-GuardVariableCS returns UnrealizedVariableCS: name=UnrestrictedName ':' ownedType=TypeExpCS;
+GuardVariableCS returns UnrealizedVariableCS: ('in'|isConnection?='inout') name=UnrestrictedName ':' ownedType=TypeExpCS ';';
 
 ImportCS returns base::ImportCS:
 	'import' (name=Identifier ':')? ownedPathName=URIPathNameCS (isAll?='::' '*')? ';';
@@ -82,25 +67,9 @@ MappingIteratorCS returns essentialocl::VariableCS: name=UnrestrictedName (':' o
 MiddleDomainCS returns DomainCS:
 	('{' ('check' checkedProperties+=PathNameCS (',' checkedProperties+=PathNameCS)*)?
 	('enforce' enforcedProperties+=PathNameCS (',' enforcedProperties+=PathNameCS)*)? '}')?
-	ownedGuardPattern=MiddleGuardPatternCS ownedBottomPattern=MiddleBottomPatternCS
+	ownedGuardPattern=GuardPatternCS ownedBottomPattern=BottomPatternCS
 ;
 		
-MiddleBottomPatternCS returns BottomPatternCS:		// Bug 466385 explains the redundancy below
-	(
-		'{' ownedUnrealizedVariables+=UnrealizedVariableCS (',' ownedUnrealizedVariables+=UnrealizedVariableCS)*
-		'|' ownedConstraints+=PredicateOrAssignmentCS* '}'
-	) | (
-		'{' ownedUnrealizedVariables+=UnrealizedVariableCS (',' ownedUnrealizedVariables+=UnrealizedVariableCS)* '}'
-	) | (
-		'{' ownedConstraints+=PredicateOrAssignmentCS+ '}'
-	) | (
-		{BottomPatternCS} '{' '}'
-	)
-;
-	
-MiddleGuardPatternCS returns GuardPatternCS: GuardPatternCS
-;
-	
 NamedDomainCS returns DomainCS: isCheck?='check'? isEnforce?='enforce'? direction=[qvtbase::TypedModel|UnrestrictedName]
 	ownedGuardPattern=GuardPatternCS ownedBottomPattern=BottomPatternCS;
 
@@ -115,21 +84,11 @@ QualifiedPackageCS returns qvtbasecs::QualifiedPackageCS:
 	
 ParamDeclarationCS: name=UnrestrictedName ':' ownedType=TypeExpCS;
 
-PredicateCS: ownedCondition=ExpCS ';';
-		
-//Constraint ::= Predicate | Assignment
-//Predicate ::= BooleanOCLExpr
-//Assignement ::= [�default�] SlotOwnerOCLExpr�.�PropertyName �:=� ValueOCLExpr
-
-PredicateOrAssignmentCS: ownedTarget=ExpCS (':=' ownedInitExpression=ExpCS)? ';';
+PredicateCS: 'check' ownedCondition=ExpCS ';';
 		
 QueryCS: isTransient?='transient'? 'query' ownedPathName=ScopeNameCS name=UnrestrictedName
 		'(' (ownedParameters+=ParamDeclarationCS (',' ownedParameters+=ParamDeclarationCS)*)? ')'
 		':' ownedType=TypeExpCS (';' | '{' ownedExpression=ExpCS '}');
-//<query> ::= 'query' <PathNameCS> 
-//            '(' [<paramDeclaration> (',' <paramDeclaration>)*] ')'
-//      	  ':' <TypeCS>
-//            (';' | '{' <OCLExpressionCS> '}')
 
 NewStatementCS:
 	'new' ':' referredTypedModel=[qvtbase::TypedModel|UnrestrictedName] name=UnrestrictedName ':' ownedType=TypeExpCS (':=' ownedInitExpression=ExpCS)?';'
@@ -143,17 +102,7 @@ SetStatementCS: 'set' referredVariable=[pivot::Variable|UnrestrictedName] '.' re
 SourceDomainCS returns DomainCS: isCheck?='check' direction=[qvtbase::TypedModel|UnrestrictedName]
 	('{' ('check' checkedProperties+=PathNameCS (',' checkedProperties+=PathNameCS)*)?
 	('enforce' enforcedProperties+=PathNameCS (',' enforcedProperties+=PathNameCS)*)? '}')?
-	ownedGuardPattern=SourceGuardPatternCS ownedBottomPattern=SourceBottomPatternCS
-;
-		
-SourceBottomPatternCS returns BottomPatternCS:
-	{BottomPatternCS} '{' (ownedUnrealizedVariables+=UnrealizedVariableCS
-		(',' ownedUnrealizedVariables+=UnrealizedVariableCS)*)?
-	'}'
-;
-	
-SourceGuardPatternCS returns GuardPatternCS:
-	{GuardPatternCS} '(' (ownedUnrealizedVariables+=UnrealizedVariableCS (',' ownedUnrealizedVariables+=UnrealizedVariableCS)*)? ')'
+	ownedGuardPattern=GuardPatternCS ownedBottomPattern=BottomPatternCS
 ;
 	
 StatementCS: ControlStatementCS;
@@ -164,29 +113,18 @@ TransformationCS:
 TargetDomainCS returns DomainCS: isEnforce?='enforce' direction=[qvtbase::TypedModel|UnrestrictedName]
 	('{' ('check' checkedProperties+=PathNameCS (',' checkedProperties+=PathNameCS)*)?
 	('enforce' enforcedProperties+=PathNameCS (',' enforcedProperties+=PathNameCS)*)? '}')?
-	ownedGuardPattern=TargetGuardPatternCS ownedBottomPattern=TargetBottomPatternCS
-;
-		
-TargetBottomPatternCS returns BottomPatternCS:
-	{BottomPatternCS} '{' (ownedUnrealizedVariables+=UnrealizedVariableCS (',' ownedUnrealizedVariables+=UnrealizedVariableCS)*)?
-	'}'
-;
-	
-TargetGuardPatternCS returns GuardPatternCS:
-	{GuardPatternCS} '(' (ownedUnrealizedVariables+=UnrealizedVariableCS (',' ownedUnrealizedVariables+=UnrealizedVariableCS)*)? ')'
+	ownedGuardPattern=GuardPatternCS ownedBottomPattern=BottomPatternCS
 ;
 	
 UnnamedDomainCS returns DomainCS: {DomainCS} ownedGuardPattern=GuardPatternCS ownedBottomPattern=BottomPatternCS;
 	
-//Variable := VariableName �:� TypeDeclaration
-UnrealizedVariableCS: name=UnrestrictedName (':' ownedType=TypeExpCS)? (':=' ownedInitExpression=ExpCS)?;
+UnrealizedVariableCS: ('var'|isConnection?='out') name=UnrestrictedName (':' ownedType=TypeExpCS)? (':=' ownedInitExpression=ExpCS)? ';';
+
+VariablePredicateCS returns UnrealizedVariableCS: 'invar' name=UnrestrictedName (':' ownedType=TypeExpCS)? ':=' ownedInitExpression=ExpCS ';';
 		
 UnrestrictedName returns ecore::EString:
 	EssentialOCLUnrestrictedName
 |	'check'
-//|	'creation'
-//|	'default'
-//|	'deletion'
 |	'enforce'
 |	'import'
 |	'imports'

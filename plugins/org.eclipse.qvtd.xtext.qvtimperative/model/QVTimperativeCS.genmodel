@@ -82,7 +82,6 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//QueryCS/ownedExpression"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperativeCS.ecore#//QueryCS/isTransient"/>
     </genClasses>
-    <genClasses image="false" ecoreClass="QVTimperativeCS.ecore#//RealizeableVariableCS"/>
     <genClasses ecoreClass="QVTimperativeCS.ecore#//NewStatementCS">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//NewStatementCS/ownedInitExpression"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//NewStatementCS/referredTypedModel"/>
@@ -104,6 +103,7 @@
     </genClasses>
     <genClasses ecoreClass="QVTimperativeCS.ecore#//UnrealizedVariableCS">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//UnrealizedVariableCS/ownedInitExpression"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperativeCS.ecore#//UnrealizedVariableCS/isConnection"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>
