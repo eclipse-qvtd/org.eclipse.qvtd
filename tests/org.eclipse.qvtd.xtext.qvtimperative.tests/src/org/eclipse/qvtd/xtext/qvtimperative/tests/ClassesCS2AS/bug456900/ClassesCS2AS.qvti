@@ -9,14 +9,14 @@ transformation classescs2as
 
 map mCreationRootCS2Root in classescs2as
 {
-	check leftCS(rootCS : RootCS) {}
+	check leftCS(in rootCS : RootCS;) {}
 	new:rightAS root : Root;
 	set rootCS.ast := root;
 }
 
 map mCreationPackageCS2Package in classescs2as
 {
-	check leftCS(packageCS : PackageCS) {}
+	check leftCS(in packageCS : PackageCS;) {}
 	new:rightAS _'package' : Package;
 	set packageCS.ast := _'package';
 }
@@ -24,23 +24,19 @@ map mCreationPackageCS2Package in classescs2as
 
 map uPackage_name in classescs2as
 {
-	check leftCS(packageCS : PackageCS) {}
+	check leftCS(in packageCS : PackageCS;) {}
 	enforce rightAS() {
-		l1 : classes::Package
+		var l1 : classes::Package := packageCS.ast.oclAsType(classes::Package);
 	}
-	where () {
-		l1 := packageCS.ast.oclAsType(classes::Package);
-	}
+	where () {}
 	set l1.name := packageCS.name;
 }
 
 map uRoot_ownedPackages in classescs2as
 {
-	check leftCS(rootCS : RootCS) {}
-	enforce rightAS() {z1 : classes::Root}
-	where () {
-		z1 := rootCS.ast.oclAsType(classes::Root);
-	}
+	check leftCS(in rootCS : RootCS;) {}
+	enforce rightAS() {var z1 : classes::Root := rootCS.ast.oclAsType(classes::Root);}
+	where () {}
 	set z1.ownedPackages :=
 		rootCS.ownedPackages.ast.oclAsType(classes::Package)->asOrderedSet();
 }

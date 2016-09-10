@@ -11,7 +11,7 @@ query Constructors::createEPackage(name2 : String) : ecore::EPackage {
 }
 
 map ep2ep in Constructors {
-	check source (epIn:EPackage) {}
+	check source (in epIn:EPackage;) {}
 	new:target epOut1 : EPackage := this.createEPackage(epIn.name);
 	new:target epOut2 : EPackage;
     set epOut2.name := epIn.name;

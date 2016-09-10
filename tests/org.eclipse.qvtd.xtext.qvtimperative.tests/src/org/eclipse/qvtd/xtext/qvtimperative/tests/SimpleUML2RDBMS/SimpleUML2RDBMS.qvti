@@ -14,7 +14,7 @@ package simpleUML2RDBMS = 'http://simpleUML2RDBMS'
 
 map packageToSchema_LM in simpleUML2RDBMS::SimpleUML2RDBMS
 {
-	check uml(p : Package) {}
+	check uml(in p : Package;) {}
 	new:middle p2s : PackageToSchema;
 	set p2s.umlPackage := p;
 	set p2s.name := p.name;
@@ -22,7 +22,7 @@ map packageToSchema_LM in simpleUML2RDBMS::SimpleUML2RDBMS
 
 map packageToSchema_MR in simpleUML2RDBMS::SimpleUML2RDBMS
 {
-	check middle(p2s : PackageToSchema) {}
+	check middle(in p2s : PackageToSchema;) {}
 	new:rdbms s : Schema;
 	set s.name := p2s.name;
 	set p2s.schema := s;
@@ -30,12 +30,11 @@ map packageToSchema_MR in simpleUML2RDBMS::SimpleUML2RDBMS
 
 map integerToNumber_LM in simpleUML2RDBMS::SimpleUML2RDBMS
 {
-	check uml(p : Package,
-		prim : PrimitiveDataType) {}
-	enforce middle(p2s : PackageToSchema) {}
-	where (p2s.umlPackage = p;
-		prim.namespace = p;
-		prim.name = 'Integer';) {}
+	check uml(in p : Package; in prim : PrimitiveDataType;) {}
+	enforce middle(in p2s : PackageToSchema;) {}
+	where (check p2s.umlPackage = p;
+		check prim.namespace = p;
+		check prim.name = 'Integer';) {}
 	new:middle p2n : IntegerToNumber;
 	set p2n.owner := p2s;
 	set p2n._'primitive' := prim;
@@ -44,34 +43,32 @@ map integerToNumber_LM in simpleUML2RDBMS::SimpleUML2RDBMS
 
 map integerToNumber_MR in simpleUML2RDBMS::SimpleUML2RDBMS
 {
-	check middle(p2s : PackageToSchema,
-		p2n : IntegerToNumber) {}
-	where (p2n.owner = p2s;) {
-		sqlType : String := 'NUMBER'
+	check middle(in p2s : PackageToSchema;
+		in p2n : IntegerToNumber;) {}
+	where (check p2n.owner = p2s;) {
+		var sqlType : String := 'NUMBER';
 	}
 	set p2n.typeName := sqlType;
 }
 
 map booleanToBoolean_MR in simpleUML2RDBMS::SimpleUML2RDBMS
 {
-	check middle(p2s : PackageToSchema,
-		p2n : BooleanToBoolean) {}
-	where (p2n.owner = p2s;) {
-		sqlType : String
-	|
-		sqlType := 'BOOLEAN';
+	check middle(in p2s : PackageToSchema;
+		in p2n : BooleanToBoolean;) {}
+	where (check p2n.owner = p2s;) {
+		var sqlType : String := 'BOOLEAN';
 	}
 	set p2n.typeName := sqlType;
 }
 
 map booleanToBoolean_LM in simpleUML2RDBMS::SimpleUML2RDBMS
 {
-	check uml(p : Package,
-		prim : PrimitiveDataType) {}
-	enforce middle(p2s : PackageToSchema) {}
-	where (p2s.umlPackage = p;
-		prim.namespace = p;
-		prim.name = 'Boolean';) {}
+	check uml(in p : Package;
+		in prim : PrimitiveDataType;) {}
+	enforce middle(in p2s : PackageToSchema;) {}
+	where (check p2s.umlPackage = p;
+		check prim.namespace = p;
+		check prim.name = 'Boolean';) {}
 	new:middle p2n : BooleanToBoolean;
 	set p2n._'primitive' := prim;
 	set p2n.name := prim.name + '2' + 'BOOLEAN';
@@ -81,22 +78,22 @@ map booleanToBoolean_LM in simpleUML2RDBMS::SimpleUML2RDBMS
 map stringToVarchar_MR in simpleUML2RDBMS::SimpleUML2RDBMS
 {
 	enforce rdbms() {}
-	check middle(p2s : PackageToSchema,
-		p2n : StringToVarchar) {}
-	where (p2n.owner = p2s;) {
-		sqlType : String := 'VARCHAR'
-	|}
+	check middle(in p2s : PackageToSchema;
+		in p2n : StringToVarchar;) {}
+	where (check p2n.owner = p2s;) {
+		var sqlType : String := 'VARCHAR';
+	}
 	set p2n.typeName := sqlType;
 }
 
 map stringToVarchar_LM in simpleUML2RDBMS::SimpleUML2RDBMS
 {
-	check uml(p : Package,
-		prim : PrimitiveDataType) {}
-	enforce middle(p2s : PackageToSchema) {}
-	where (p2s.umlPackage = p;
-		prim.namespace = p;
-		prim.name = 'String';) {}
+	check uml(in p : Package;
+		in prim : PrimitiveDataType;) {}
+	enforce middle(in p2s : PackageToSchema;) {}
+	where (check p2s.umlPackage = p;
+		check prim.namespace = p;
+		check prim.name = 'String';) {}
 	new:middle p2n : StringToVarchar;
 	set p2n.name := prim.name + '2' + 'VARCHAR';
 	set p2n.owner := p2s;
@@ -105,12 +102,12 @@ map stringToVarchar_LM in simpleUML2RDBMS::SimpleUML2RDBMS
 
 map classToTable_MR in simpleUML2RDBMS::SimpleUML2RDBMS
 {
-	enforce rdbms(s : Schema) {}
-	check middle(p2s : PackageToSchema,
-		c2t : ClassToTable) {}
-	where (p2s.schema = s;
-		c2t.owner = p2s;) {
-		c2t_name : String[?] := c2t.name |}
+	enforce rdbms(in s : Schema;) {}
+	check middle(in p2s : PackageToSchema;
+		in c2t : ClassToTable;) {}
+	where (check p2s.schema = s;
+		check c2t.owner = p2s;) {
+		var c2t_name : String[?] := c2t.name;}
 	new:rdbms t : Table;
 	new:rdbms pk : Key;
 	new:rdbms pc : Column;
@@ -131,12 +128,12 @@ map classToTable_MR in simpleUML2RDBMS::SimpleUML2RDBMS
 
 map classToTable_LM in simpleUML2RDBMS::SimpleUML2RDBMS
 {
-	check uml(p : Package,
-		c : Class) {}
-	enforce middle(p2s : PackageToSchema) {}
-	where (p2s.umlPackage = p;
-		c.kind = 'persistent';
-		c.namespace = p;) {}
+	check uml(in p : Package;
+		in c : Class;) {}
+	enforce middle(in p2s : PackageToSchema;) {}
+	where (check p2s.umlPackage = p;
+		check c.kind = 'persistent';
+		check c.namespace = p;) {}
 	new:middle c2t : ClassToTable;
 	set c2t.owner := p2s;
 	set c2t.name := c.name;
@@ -145,23 +142,23 @@ map classToTable_LM in simpleUML2RDBMS::SimpleUML2RDBMS
 
 map associationToForeignKey_MR in simpleUML2RDBMS::SimpleUML2RDBMS
 {
-	enforce rdbms(s : Schema,
-		st : Table,
-		dt : Table,
-		rk : Key) {}
-	check middle(p2s : PackageToSchema,
-		sc2t : ClassToTable,
-		dc2t : ClassToTable,
-		a2f : AssociationToForeignKey) {}
-	where (dc2t.table = dt;
-		sc2t.owner = p2s;
-		p2s.schema = s;
-		sc2t.table = st;
-		a2f.referenced = dc2t;
-		a2f.owner = sc2t;
-		rk.kind = 'primary';
-		rk.owner = dt;
-		st.schema = s;) {}
+	enforce rdbms(in s : Schema;
+		in st : Table;
+		in dt : Table;
+		in rk : Key;) {}
+	check middle(in p2s : PackageToSchema;
+		in sc2t : ClassToTable;
+		in dc2t : ClassToTable;
+		in a2f : AssociationToForeignKey;) {}
+	where (check dc2t.table = dt;
+		check sc2t.owner = p2s;
+		check p2s.schema = s;
+		check sc2t.table = st;
+		check a2f.referenced = dc2t;
+		check a2f.owner = sc2t;
+		check rk.kind = 'primary';
+		check rk.owner = dt;
+		check st.schema = s;) {}
 	new:rdbms fk : ForeignKey;
 	new:rdbms fc : Column;
 	set fk.name := a2f.name;
@@ -177,23 +174,22 @@ map associationToForeignKey_MR in simpleUML2RDBMS::SimpleUML2RDBMS
 
 map associationToForeignKey_LM in simpleUML2RDBMS::SimpleUML2RDBMS
 {
-	check uml(p : Package,
-		sc : Class,
-		dc : Class,
-		a : Association) {}
-	enforce middle(p2s : PackageToSchema,
-		sc2t : ClassToTable,
-		dc2t : ClassToTable) {}
-	where (sc2t.owner = p2s;
-		dc2t.umlClass = dc;
-		sc2t.umlClass = sc;
-		p2s.umlPackage = p;
-		a.namespace = p;
-		sc.namespace = p;
-		a.source = sc;
-		a.destination = dc;) {
-	    a2f_name : String |
-	    a2f_name := if a.destination = dc and a.source = sc
+	check uml(in p : Package;
+		in sc : Class;
+		in dc : Class;
+		in a : Association;) {}
+	enforce middle(in p2s : PackageToSchema;
+		in sc2t : ClassToTable;
+		in dc2t : ClassToTable;) {}
+	where (check sc2t.owner = p2s;
+		check dc2t.umlClass = dc;
+		check sc2t.umlClass = sc;
+		check p2s.umlPackage = p;
+		check a.namespace = p;
+		check sc.namespace = p;
+		check a.source = sc;
+		check a.destination = dc;) {
+	    var a2f_name : String := if a.destination = dc and a.source = sc
                 		then a.name
                 		else if a.destination <> dc and a.source = sc
                 			then dc.name + '_' + a.name
@@ -217,15 +213,15 @@ map associationToForeignKey_LM in simpleUML2RDBMS::SimpleUML2RDBMS
 
 map classPrimitiveAttributes_LM in simpleUML2RDBMS::SimpleUML2RDBMS
 {
-	check uml(t : PrimitiveDataType,
-		c : Class,
-		a : Attribute) {}
-	enforce middle(fao : ClassToTable,
-		p2n : PrimitiveToName) {}
-	where (fao.umlClass = c;
-		p2n._'primitive' = t;
-		a.owner = c;
-		a.type = t;) {}
+	check uml(in t : PrimitiveDataType;
+		in c : Class;
+		in a : Attribute;) {}
+	enforce middle(in fao : ClassToTable;
+		in p2n : PrimitiveToName;) {}
+	where (check fao.umlClass = c;
+		check p2n._'primitive' = t;
+		check a.owner = c;
+		check a.type = t;) {}
 	new:middle fa : AttributeToColumn;
 	set fa.owner := fao;
 	set fa.type := p2n;
@@ -240,13 +236,13 @@ map classPrimitiveAttributes_LM in simpleUML2RDBMS::SimpleUML2RDBMS
 
 map classComplexAttributes_LM in simpleUML2RDBMS::SimpleUML2RDBMS
 {
-	check uml(t : Class,
-		c : Class,
-		a : Attribute) {}
-	enforce middle(fao : ClassToTable) {}
-	where (fao.umlClass = c;
-		a.owner = c;
-		a.type = t;) {}
+	check uml(in t : Class;
+		in c : Class;
+		in a : Attribute;) {}
+	enforce middle(in fao : ClassToTable;) {}
+	where (check fao.umlClass = c;
+		check a.owner = c;
+		check a.type = t;) {}
 	new:middle fa : NonLeafAttribute;
 	set fa._'attribute' := a;
 	set fa.kind := a.kind;
@@ -259,18 +255,18 @@ map classComplexAttributes_LM in simpleUML2RDBMS::SimpleUML2RDBMS
 
 map complexAttributePrimitiveAttributes_LM in simpleUML2RDBMS::SimpleUML2RDBMS
 {
-	check uml(ca : Attribute,
-		c : Class,
-		t : PrimitiveDataType,
-		a : Attribute) {}
-	enforce middle(fao : NonLeafAttribute,
-		p2n : PrimitiveToName) {}
-	where (fao._'attribute' = ca;
-		p2n._'primitive' = t;
-		a.owner = c;
-		a.type = t;
-		ca.type = c;
-		a.owner = c;) {}
+	check uml(in ca : Attribute;
+		in c : Class;
+		in t : PrimitiveDataType;
+		in a : Attribute;) {}
+	enforce middle(in fao : NonLeafAttribute;
+		in p2n : PrimitiveToName;) {}
+	where (check fao._'attribute' = ca;
+		check p2n._'primitive' = t;
+		check a.owner = c;
+		check a.type = t;
+		check ca.type = c;
+		check a.owner = c;) {}
 	new:middle fa : AttributeToColumn;
 	set fa.owner := fao;
 	set fa._'attribute' := a;
@@ -285,16 +281,16 @@ map complexAttributePrimitiveAttributes_LM in simpleUML2RDBMS::SimpleUML2RDBMS
 
 map complexAttributeComplexAttributes_LM in simpleUML2RDBMS::SimpleUML2RDBMS
 {
-	check uml(ca : Attribute,
-		c : Class,
-		t : Class,
-		a : Attribute) {}
-	enforce middle(fao : NonLeafAttribute) {}
-	where (fao._'attribute' = ca;
-		a.owner = c;
-		a.owner = c;
-		ca.type = c;
-		a.type = t;) {}
+	check uml(in ca : Attribute;
+		in c : Class;
+		in t : Class;
+		in a : Attribute;) {}
+	enforce middle(in fao : NonLeafAttribute;) {}
+	where (check fao._'attribute' = ca;
+		check a.owner = c;
+		check a.owner = c;
+		check ca.type = c;
+		check a.type = t;) {}
 	new:middle fa : NonLeafAttribute;
 	set fa.owner := fao;
 	set fa.kind := a.kind;
@@ -308,16 +304,16 @@ map complexAttributeComplexAttributes_LM in simpleUML2RDBMS::SimpleUML2RDBMS
 
 map attributeColumns_MR in simpleUML2RDBMS::SimpleUML2RDBMS
 {
-	enforce rdbms(t : Table,
-		ct : String) {}
-	check middle(c2t : ClassToTable,
-		p2n : PrimitiveToName,
-		a2c : AttributeToColumn) {}
-	where (c2t.table = t;
-		p2n.typeName = ct;
-		a2c.owner = c2t;
-		c2t.fromAttributes.leafs->includes(a2c);
-		a2c.type = p2n;) {}
+	enforce rdbms(in t : Table;
+		in ct : String;) {}
+	check middle(in c2t : ClassToTable;
+		in p2n : PrimitiveToName;
+		in a2c : AttributeToColumn;) {}
+	where (check c2t.table = t;
+		check p2n.typeName = ct;
+		check a2c.owner = c2t;
+		check c2t.fromAttributes.leafs->includes(a2c);
+		check a2c.type = p2n;) {}
 	new:rdbms c : Column;
 	set c.name := a2c.name;
 	set c.kind := a2c.kind;

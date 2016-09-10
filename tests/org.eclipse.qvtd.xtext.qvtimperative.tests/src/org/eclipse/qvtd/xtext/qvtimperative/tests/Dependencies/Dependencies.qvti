@@ -7,7 +7,7 @@ transformation Dependencies {
 }
 
 map dependenciesLM in Dependencies {
-	check source { check ecore::EPackage::eSubpackages enforce ecore::EPackage::eSuperPackage } (dummy:EPackage) {}
+	check source { check ecore::EPackage::eSubpackages enforce ecore::EPackage::eSuperPackage } (in dummy:EPackage;) {}
 	enforce middle() {}
     where () {}
     call dependenciesMR {
@@ -17,7 +17,7 @@ map dependenciesLM in Dependencies {
 }
 
 map dependenciesMR in Dependencies /*uses ecore::EPackage, ocl::Integer*/ {
-	check middle(binaryPrecedence:OclAny, unaryPrecedence:OclAny) { }
+	check middle(in binaryPrecedence:OclAny; in unaryPrecedence:OclAny;) { }
     enforce target() {}
     where () {}
 }

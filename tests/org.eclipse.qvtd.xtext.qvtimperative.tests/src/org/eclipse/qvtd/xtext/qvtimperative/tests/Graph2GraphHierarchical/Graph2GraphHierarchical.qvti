@@ -17,7 +17,7 @@ map __root__ in CopyGraph {
 }
 
 map Graph2Middle in CopyGraph {	        					-- L to M for G
-    check upperGraph(g1:Graph) {}
+    check upperGraph(in g1:Graph;) {}
     new:middle middleG2G:Graph2Graph;
     set middleG2G.graph1 := g1;
     set middleG2G.name := g1.name.toLowerCase();
@@ -33,8 +33,8 @@ map Graph2Middle in CopyGraph {	        					-- L to M for G
 }
 
 map Node2Middle in CopyGraph {    							-- L to M for N
-    check upperGraph(n1:Node) { }
-    enforce middle(middleParent:Graph2Graph) {}
+    check upperGraph(in n1:Node;) { }
+    enforce middle(in middleParent:Graph2Graph;) {}
     new:middle n2n:Node2Node;
     set n2n.owner := middleParent;
     set n2n.node1 := n1;
@@ -42,7 +42,7 @@ map Node2Middle in CopyGraph {    							-- L to M for N
 }
 	
 map Middle2Graph in CopyGraph {								-- M to R for G
-    check middle(g2Gmiddle:Graph2Graph) {}
+    check middle(in g2Gmiddle:Graph2Graph;) {}
 	new:lowerGraph g2:Graph;
     set	g2Gmiddle.graph2 := g2;
     set g2.name := g2Gmiddle.name;
@@ -54,7 +54,7 @@ map Middle2Graph in CopyGraph {								-- M to R for G
 }
 
 map Middle2Node in CopyGraph {						        -- M to R for N
-    check middle(n2n:Node2Node) {}
+    check middle(in n2n:Node2Node;) {}
 	new:lowerGraph n2:Node;
     set	n2n.node2 := n2;
 	set	n2.graph := n2n.owner.graph2;
