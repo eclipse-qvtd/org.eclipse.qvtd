@@ -31,7 +31,7 @@ import org.eclipse.emf.ecore.EReference;
  * <!-- end-user-doc -->
  * @see example1.target.lookup.EnvironmentFactory
  * @model kind="package"
- *        annotation="http://www.eclipse.org/OCL/Import target='TargetMM1.ecore#/'"
+ *        annotation="http://www.eclipse.org/OCL/Import target='platform:/resource/org.eclipse.qvtd.cs2as.compiler.tests/src/org/eclipse/qvtd/cs2as/compiler/tests/models/example1/TargetMM1.ecore#/'"
  * @generated
  */
 public interface EnvironmentPackage extends EPackage {

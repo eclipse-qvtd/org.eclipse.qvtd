@@ -337,7 +337,7 @@ public class EnvironmentPackageImpl extends EPackageImpl implements EnvironmentP
 		  (this, 
 		   source, 
 		   new String[] {
-			 "target", "TargetMM1.ecore#/"
+			 "target", "platform:/resource/org.eclipse.qvtd.cs2as.compiler.tests/src/org/eclipse/qvtd/cs2as/compiler/tests/models/example1/TargetMM1.ecore#/"
 		   });
 	}
 
