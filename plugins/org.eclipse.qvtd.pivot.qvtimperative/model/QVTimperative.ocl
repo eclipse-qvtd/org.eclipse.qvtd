@@ -11,10 +11,9 @@ endpackage
 package qvtimperative
 
 context Mapping
-def: allAreas : Set(qvtimperative::Area) = self.domain.oclAsType(qvtimperative::Area)->asSet()->including(self)
-def: allGuardPatterns : Set(qvtimperative::GuardPattern) = allAreas.guardPattern->asSet()
-def: guardVariables : Set(ocl::Variable) = allGuardPatterns.variable->asSet()
-def: boundGuardVariables : Set(ocl::Variable) = allGuardPatterns.predicate->selectByKind(VariablePredicate).targetVariable->asSet()
+def: allAreas : Set(qvtimperative::ImperativeDomain) = self.domain.oclAsType(qvtimperative::ImperativeDomain)->asSet()
+def: guardVariables : Set(ocl::Variable) = allAreas.ownedGuardVariables->asSet()->union(ownedGuardVariables)
+def: boundGuardVariables : Set(ocl::Variable) = ownedStatements->selectByKind(PredicateVariable)
 /* Mapping guard variables that are assigned  */
 --def: boundGuardVariables : Set(ocl::Variable) = guardVariables->select(initExpression <> null)
 def: unboundGuardVariables : Set(ocl::Variable) = guardVariables - boundGuardVariables
@@ -24,7 +23,7 @@ def: unboundGuardVariables : Set(ocl::Variable) = guardVariables - boundGuardVar
 --inv ViaMiddle: isToMiddle xor isFromMiddle
 /* No mapping refinement */
 -- inv NoRefinement: noInheritance and noParents
-inv NoMiddleGuardPatternVariables: guardPattern.variable->isEmpty()
+--inv NoMiddleGuardPatternVariables: guardPattern.ownedGuardVariables->isEmpty()
 --inv NoMiddleBottomPatternVariables: bottomPattern.variable->isEmpty() and bottomPattern.realizedVariable->isEmpty()
 
 context MappingCall
@@ -40,11 +39,11 @@ endpackage
 
 package qvtimperative
 
-context Area
-def: mapping : qvtimperative::Mapping = if oclIsKindOf(qvtimperative::Mapping) then self else oclAsType(ImperativeDomain).rule endif.oclAsType(qvtimperative::Mapping)
-def: isMiddle : Boolean = oclIsKindOf(qvtimperative::Mapping)
-def: isSource : Boolean = oclIsKindOf(ImperativeDomain) and oclAsType(ImperativeDomain).isCheckable
-def: isTarget : Boolean = oclIsKindOf(ImperativeDomain) and oclAsType(ImperativeDomain).isEnforceable
+--context Area
+--def: mapping : qvtimperative::Mapping = if oclIsKindOf(qvtimperative::Mapping) then self else oclAsType(ImperativeDomain).rule endif.oclAsType(qvtimperative::Mapping)
+--def: isMiddle : Boolean = oclIsKindOf(qvtimperative::Mapping)
+--def: isSource : Boolean = oclIsKindOf(ImperativeDomain) and oclAsType(ImperativeDomain).isCheckable
+--def: isTarget : Boolean = oclIsKindOf(ImperativeDomain) and oclAsType(ImperativeDomain).isEnforceable
 
 --context BottomPattern
 --inv UniquePropertyAssignments: assignment->select(PropertyAssignment)->isUnique(a : PropertyAssignment | a.targetProperty)	-- FIXME redundant "a : PropertyAssignment | a."
@@ -53,11 +52,11 @@ context ImperativeDomain
 def: mapping : qvtimperative::Mapping = rule.oclAsType(qvtimperative::Mapping)
 inv CheckableXorEnforceable: isCheckable xor isEnforceable
 --inv NoSideBottomPatternVariables: bottomPattern.variable->isEmpty()
-inv NoSideBottomPatternAssignments: bottomPattern.assignment->isEmpty()
+--inv NoSideBottomPatternAssignments: bottomAssignments->isEmpty()
 
 context SetStatement
 inv IsNotReadOnly: not targetProperty.isReadOnly
-inv PropertyOfSlot(slotExpression.type.name + ' must conform to ' + targetProperty.owningClass.name): slotExpression.type.conformsTo(targetProperty.owningClass)
+inv PropertyOfSlot(targetVariable.type.name + ' must conform to ' + targetProperty.owningClass.name): targetVariable.type.conformsTo(targetProperty.owningClass)
 inv CompatibleType(value.type.name + ' must conform to ' + targetProperty.type.name): value.type.conformsTo(targetProperty.type)
 inv NoRealizedVariableNavigations: value->closure(oclContents())->selectByKind(ocl::VariableExp)->select(referredVariable.oclIsKindOf(NewStatement))->select(oclContainer().oclIsKindOf(ocl::CallExp))->isEmpty()
 
@@ -72,8 +71,8 @@ inv NoRealizedVariableNavigations: value->closure(oclContents())->selectByKind(o
 --inv IsEnforced: let area = oclContainer().oclAsType(GuardPattern).area, mapping = area.mapping in
 --	if mapping.isToMiddle then area = mapping else area.oclAsType(CoreDomain).isEnforceable endif
 
-context VariableAssignment
-inv NoVariableAssignmentsInSourceDomain: not bottomPattern.area.isSource
-inv CompatibleType: value.type.conformsTo(targetVariable.type)
+--context PredicateVariable
+--inv NoVariableAssignmentsInSourceDomain: not bottomPattern.area.isSource
+--inv CompatibleType: ownedInit.type.conformsTo(type)
 
 endpackage
