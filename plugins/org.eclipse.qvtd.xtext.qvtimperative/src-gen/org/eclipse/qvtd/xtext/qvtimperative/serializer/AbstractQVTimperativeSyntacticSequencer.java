@@ -3554,8 +3554,7 @@ public abstract class AbstractQVTimperativeSyntacticSequencer extends AbstractSy
 	 *     ('{' '}')?
 	 *
 	 * This ambiguous syntax occurs at:
-	 *     direction=[TypedModel|UnrestrictedName] (ambiguity) '(' ')' '{' '}' (rule end)
-	 *     direction=[TypedModel|UnrestrictedName] (ambiguity) '(' ownedGuardVariables+=GuardVariableCS
+	 *     direction=[ImperativeTypedModel|UnrestrictedName] (ambiguity) '(' ')' '{' '}' (rule end)
 	 */
 	protected void emit_SourceDomainCS___LeftCurlyBracketKeyword_2_0_RightCurlyBracketKeyword_2_2__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
@@ -3607,8 +3606,7 @@ public abstract class AbstractQVTimperativeSyntacticSequencer extends AbstractSy
 	 *     ('{' '}')?
 	 *
 	 * This ambiguous syntax occurs at:
-	 *     direction=[TypedModel|UnrestrictedName] (ambiguity) '(' ')' '{' '}' (rule end)
-	 *     direction=[TypedModel|UnrestrictedName] (ambiguity) '(' ownedGuardVariables+=GuardVariableCS
+	 *     direction=[ImperativeTypedModel|UnrestrictedName] (ambiguity) '(' ')' '{' '}' (rule end)
 	 */
 	protected void emit_TargetDomainCS___LeftCurlyBracketKeyword_2_0_RightCurlyBracketKeyword_2_2__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);

@@ -410,16 +410,6 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	 * @generated
 	 */
 	@Override
-	public EReference getDomainCS_OwnedGuardVariables() {
-		return (EReference)domainCSEClass.getEStructuralFeatures().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EClass getGuardVariableCS() {
 		return guardVariableCSEClass;
 	}
@@ -479,9 +469,18 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getMappingCS_OwnedGuardVariables() {
+		return (EReference)mappingCSEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public EReference getMappingCS_OwnedStatements() {
-		return (EReference)mappingCSEClass.getEStructuralFeatures().get(2);
+		return (EReference)mappingCSEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -961,7 +960,6 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		createEAttribute(domainCSEClass, DOMAIN_CS__IS_CHECK);
 		createEAttribute(domainCSEClass, DOMAIN_CS__IS_ENFORCE);
 		createEReference(domainCSEClass, DOMAIN_CS__CHECKED_PROPERTIES);
-		createEReference(domainCSEClass, DOMAIN_CS__OWNED_GUARD_VARIABLES);
 
 		guardVariableCSEClass = createEClass(GUARD_VARIABLE_CS);
 		createEReference(guardVariableCSEClass, GUARD_VARIABLE_CS__REFERRED_TYPED_MODEL);
@@ -971,8 +969,9 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		mappingCSEClass = createEClass(MAPPING_CS);
 		createEReference(mappingCSEClass, MAPPING_CS__OWNED_DOMAINS);
 		createEReference(mappingCSEClass, MAPPING_CS__OWNED_IN_PATH_NAME);
-		createEReference(mappingCSEClass, MAPPING_CS__OWNED_STATEMENTS);
+		createEReference(mappingCSEClass, MAPPING_CS__OWNED_GUARD_VARIABLES);
 		createEReference(mappingCSEClass, MAPPING_CS__OWNED_INOUT_VARIABLES);
+		createEReference(mappingCSEClass, MAPPING_CS__OWNED_STATEMENTS);
 
 		mappingCallBindingCSEClass = createEClass(MAPPING_CALL_BINDING_CS);
 		createEAttribute(mappingCallBindingCSEClass, MAPPING_CALL_BINDING_CS__IS_POLLED);
@@ -1105,22 +1104,22 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		initEAttribute(getDirectionCS_IsEnforced(), ecorePackage.getEBoolean(), "isEnforced", null, 0, 1, DirectionCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(domainCSEClass, DomainCS.class, "DomainCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getDomainCS_Direction(), theQVTbasePackage.getTypedModel(), null, "direction", null, 0, 1, DomainCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDomainCS_Direction(), theQVTimperativePackage.getImperativeTypedModel(), null, "direction", null, 0, 1, DomainCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getDomainCS_IsCheck(), ecorePackage.getEBoolean(), "isCheck", null, 0, 1, DomainCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getDomainCS_IsEnforce(), ecorePackage.getEBoolean(), "isEnforce", null, 0, 1, DomainCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDomainCS_CheckedProperties(), theBaseCSPackage.getPathNameCS(), null, "checkedProperties", null, 0, -1, DomainCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEReference(getDomainCS_OwnedGuardVariables(), this.getGuardVariableCS(), null, "ownedGuardVariables", null, 0, -1, DomainCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(guardVariableCSEClass, GuardVariableCS.class, "GuardVariableCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getGuardVariableCS_ReferredTypedModel(), theQVTbasePackage.getTypedModel(), null, "referredTypedModel", null, 1, 1, GuardVariableCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getGuardVariableCS_ReferredTypedModel(), theQVTimperativePackage.getImperativeTypedModel(), null, "referredTypedModel", null, 1, 1, GuardVariableCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(inoutVariableCSEClass, InoutVariableCS.class, "InoutVariableCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(mappingCSEClass, MappingCS.class, "MappingCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getMappingCS_OwnedDomains(), this.getDomainCS(), null, "ownedDomains", null, 0, -1, MappingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMappingCS_OwnedInPathName(), theBaseCSPackage.getPathNameCS(), null, "ownedInPathName", null, 0, 1, MappingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getMappingCS_OwnedStatements(), this.getStatementCS(), null, "ownedStatements", null, 0, -1, MappingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMappingCS_OwnedGuardVariables(), this.getGuardVariableCS(), null, "ownedGuardVariables", null, 0, -1, MappingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMappingCS_OwnedInoutVariables(), this.getInoutVariableCS(), null, "ownedInoutVariables", null, 0, -1, MappingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMappingCS_OwnedStatements(), this.getStatementCS(), null, "ownedStatements", null, 0, -1, MappingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(mappingCallBindingCSEClass, MappingCallBindingCS.class, "MappingCallBindingCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getMappingCallBindingCS_IsPolled(), ecorePackage.getEBoolean(), "isPolled", "false", 0, 1, MappingCallBindingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1143,7 +1142,7 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 
 		initEClass(newStatementCSEClass, NewStatementCS.class, "NewStatementCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getNewStatementCS_OwnedInit(), theEssentialOCLCSPackage.getExpCS(), null, "ownedInit", null, 0, 1, NewStatementCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getNewStatementCS_ReferredTypedModel(), theQVTbasePackage.getTypedModel(), null, "referredTypedModel", null, 1, 1, NewStatementCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getNewStatementCS_ReferredTypedModel(), theQVTimperativePackage.getImperativeTypedModel(), null, "referredTypedModel", null, 1, 1, NewStatementCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(outVariableCSEClass, OutVariableCS.class, "OutVariableCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

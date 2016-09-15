@@ -22,6 +22,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.xtext.basecs.impl.TypedElementCSImpl;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.xtext.qvtimperativecs.GuardVariableCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage;
 import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
@@ -48,7 +49,7 @@ public class GuardVariableCSImpl extends TypedElementCSImpl implements GuardVari
 	 * @generated
 	 * @ordered
 	 */
-	protected TypedModel referredTypedModel;
+	protected ImperativeTypedModel referredTypedModel;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -75,10 +76,10 @@ public class GuardVariableCSImpl extends TypedElementCSImpl implements GuardVari
 	 * @generated
 	 */
 	@Override
-	public TypedModel getReferredTypedModel() {
+	public ImperativeTypedModel getReferredTypedModel() {
 		if (referredTypedModel != null && referredTypedModel.eIsProxy()) {
 			InternalEObject oldReferredTypedModel = (InternalEObject)referredTypedModel;
-			referredTypedModel = (TypedModel)eResolveProxy(oldReferredTypedModel);
+			referredTypedModel = (ImperativeTypedModel)eResolveProxy(oldReferredTypedModel);
 			if (referredTypedModel != oldReferredTypedModel) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTimperativeCSPackage.GUARD_VARIABLE_CS__REFERRED_TYPED_MODEL, oldReferredTypedModel, referredTypedModel));
@@ -92,7 +93,7 @@ public class GuardVariableCSImpl extends TypedElementCSImpl implements GuardVari
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TypedModel basicGetReferredTypedModel() {
+	public ImperativeTypedModel basicGetReferredTypedModel() {
 		return referredTypedModel;
 	}
 
@@ -101,9 +102,8 @@ public class GuardVariableCSImpl extends TypedElementCSImpl implements GuardVari
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public void setReferredTypedModel(TypedModel newReferredTypedModel) {
-		TypedModel oldReferredTypedModel = referredTypedModel;
+	public void setReferredTypedModel(ImperativeTypedModel newReferredTypedModel) {
+		ImperativeTypedModel oldReferredTypedModel = referredTypedModel;
 		referredTypedModel = newReferredTypedModel;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.GUARD_VARIABLE_CS__REFERRED_TYPED_MODEL, oldReferredTypedModel, referredTypedModel));
@@ -133,7 +133,7 @@ public class GuardVariableCSImpl extends TypedElementCSImpl implements GuardVari
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case QVTimperativeCSPackage.GUARD_VARIABLE_CS__REFERRED_TYPED_MODEL:
-				setReferredTypedModel((TypedModel)newValue);
+				setReferredTypedModel((ImperativeTypedModel)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -148,7 +148,7 @@ public class GuardVariableCSImpl extends TypedElementCSImpl implements GuardVari
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case QVTimperativeCSPackage.GUARD_VARIABLE_CS__REFERRED_TYPED_MODEL:
-				setReferredTypedModel((TypedModel)null);
+				setReferredTypedModel((ImperativeTypedModel)null);
 				return;
 		}
 		super.eUnset(featureID);

@@ -12,7 +12,7 @@ package qvtimperative
 
 context Mapping
 def: allAreas : Set(qvtimperative::ImperativeDomain) = self.domain.oclAsType(qvtimperative::ImperativeDomain)->asSet()
-def: guardVariables : Set(ocl::Variable) = allAreas.ownedGuardVariables->asSet()->union(ownedGuardVariables)
+def: guardVariables : Set(ocl::Variable) = ownedGuardVariables
 def: boundGuardVariables : Set(ocl::Variable) = ownedStatements->selectByKind(PredicateVariable)
 /* Mapping guard variables that are assigned  */
 --def: boundGuardVariables : Set(ocl::Variable) = guardVariables->select(initExpression <> null)

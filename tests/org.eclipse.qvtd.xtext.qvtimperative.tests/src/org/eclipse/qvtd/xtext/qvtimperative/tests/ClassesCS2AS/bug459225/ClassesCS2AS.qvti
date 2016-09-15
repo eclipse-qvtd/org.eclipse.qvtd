@@ -10,7 +10,7 @@ transformation classescs2as_Bug459225
 
 map createPackage in classescs2as_Bug459225
 {
-	check leftCS(in:leftCS packageCS : PackageCS;) {}
+	in:leftCS packageCS : PackageCS;
 	new:rightAS _'package' : Package;
 	set _'package'.name := if packageCS.hasName()
 						then packageCS.computeName()

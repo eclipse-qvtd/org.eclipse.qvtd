@@ -15,12 +15,12 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
-import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseHelper;
 import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.CheckStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.InConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.OutConnectionVariable;
@@ -49,7 +49,7 @@ public class QVTimperativeHelper extends QVTbaseHelper
 		return asPredicate;
 	}
 
-	public @NonNull GuardVariable createGuardVariable(@NonNull String name, @NonNull TypedModel typedModel, @NonNull Type type, boolean isRequired) {
+	public @NonNull GuardVariable createGuardVariable(@NonNull String name, @NonNull ImperativeTypedModel typedModel, @NonNull Type type, boolean isRequired) {
 		GuardVariable asVariable = QVTimperativeFactory.eINSTANCE.createGuardVariable();
 		asVariable.setName(name);
 		asVariable.setReferredTypedModel(typedModel);

@@ -3,8 +3,8 @@ import 'TallTree.ecore'::talltree;
 import 'Tree2TallTree.ecore'::tree2talltree;
 
 transformation Tree2TallTree {
-	tree imports tree;
-	talltree imports talltree;
+	check tree imports tree;
+	enforce talltree imports talltree;
 	tree2talltree imports tree2talltree;
 }
 
@@ -28,17 +28,15 @@ map __root__ in Tree2TallTree {
 }
 
 map Node2MiddleNode in Tree2TallTree {
-	check tree(in:tree node : Node;) {} 
+	in:tree node : Node; 
 	new:tree2talltree node2tallNode : Node2TallNode;
 	set node2tallNode.node := node;
 	set node2tallNode.name := node.name;
 }
 
 map Edge2MiddleEdge in Tree2TallTree {
-	check tree(in:tree node : Node;) {} 
-	enforce tree2talltree(in:tree2talltree node2tallNode : Node2TallNode;) {
---		realize node2tallNode : Node2TallNode
-	}
+	in:tree node : Node;
+	in:tree2talltree node2tallNode : Node2TallNode;
 	check node.parent <> null;
 	emit node2tallNode.parent := node.parent.Node2TallNode;
 --		node2tallNode.name := node.name;
@@ -47,10 +45,11 @@ map Edge2MiddleEdge in Tree2TallTree {
 map MiddleNode2TallNode in Tree2TallTree {
 	check tree2talltree {
 		check Node2TallNode::tallNode, Node2TallNode::children
-	} (in:tree2talltree node2tallNode : Node2TallNode;) {} 
+	} () {} 
 	enforce talltree {
 		check TallNode::height
 	} () {}
+	in:tree2talltree node2tallNode : Node2TallNode;
 	var tallNode_name : String := node2tallNode.name;
 	var tallNode_children : Set(TallNode) := node2tallNode.children?.tallNode->asSet();
 	var tallNode_height : Integer := if node2tallNode.children->notEmpty() then node2tallNode.children.tallNode.height->max() + 1 else 0 endif;

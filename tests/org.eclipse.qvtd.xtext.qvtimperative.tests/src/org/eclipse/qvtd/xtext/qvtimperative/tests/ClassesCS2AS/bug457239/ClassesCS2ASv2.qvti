@@ -10,7 +10,7 @@ transformation classescs2as
 
 map createPackage in classescs2as
 {
-	check leftCS(in:leftCS packageCS : PackageCS;) {}
+	in:leftCS packageCS : PackageCS;
 	new:rightAS _package : Package;
 	set _package.name := if packageCS.aBooleanElementOp()
 						--if not packageCS.name.oclIsUndefined()

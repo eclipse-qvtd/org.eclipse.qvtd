@@ -368,16 +368,6 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * @generated
 	 */
 	@Override
-	public EReference getImperativeDomain_OwnedGuardVariables() {
-		return (EReference)imperativeDomainEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EClass getImperativeModel() {
 		return imperativeModelEClass;
 	}
@@ -833,7 +823,6 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 
 		imperativeDomainEClass = createEClass(IMPERATIVE_DOMAIN);
 		createEReference(imperativeDomainEClass, IMPERATIVE_DOMAIN__CHECKED_PROPERTIES);
-		createEReference(imperativeDomainEClass, IMPERATIVE_DOMAIN__OWNED_GUARD_VARIABLES);
 
 		imperativeModelEClass = createEClass(IMPERATIVE_MODEL);
 
@@ -961,11 +950,10 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		initEClass(connectionVariableEClass, ConnectionVariable.class, "ConnectionVariable", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(guardVariableEClass, GuardVariable.class, "GuardVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getGuardVariable_ReferredTypedModel(), theQVTbasePackage.getTypedModel(), null, "referredTypedModel", null, 1, 1, GuardVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getGuardVariable_ReferredTypedModel(), this.getImperativeTypedModel(), null, "referredTypedModel", null, 1, 1, GuardVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(imperativeDomainEClass, ImperativeDomain.class, "ImperativeDomain", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getImperativeDomain_CheckedProperties(), thePivotPackage.getProperty(), null, "checkedProperties", null, 0, -1, ImperativeDomain.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEReference(getImperativeDomain_OwnedGuardVariables(), this.getGuardVariable(), null, "ownedGuardVariables", null, 0, -1, ImperativeDomain.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		initEClass(imperativeModelEClass, ImperativeModel.class, "ImperativeModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1003,7 +991,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		initEClass(mappingStatementEClass, MappingStatement.class, "MappingStatement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(newStatementEClass, NewStatement.class, "NewStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getNewStatement_ReferredTypedModel(), theQVTbasePackage.getTypedModel(), null, "referredTypedModel", null, 1, 1, NewStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getNewStatement_ReferredTypedModel(), this.getImperativeTypedModel(), null, "referredTypedModel", null, 1, 1, NewStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getNewStatement_OwnedInit(), thePivotPackage.getOCLExpression(), null, "ownedInit", null, 0, 1, NewStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(outConnectionVariableEClass, OutConnectionVariable.class, "OutConnectionVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

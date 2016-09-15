@@ -32,7 +32,6 @@
     </genClasses>
     <genClasses ecoreClass="QVTimperative.ecore#//ImperativeDomain">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//ImperativeDomain/checkedProperties"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//ImperativeDomain/ownedGuardVariables"/>
     </genClasses>
     <genClasses ecoreClass="QVTimperative.ecore#//ImperativeModel"/>
     <genClasses ecoreClass="QVTimperative.ecore#//ImperativeTypedModel">

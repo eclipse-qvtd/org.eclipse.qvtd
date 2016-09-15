@@ -2,13 +2,13 @@ import SimpleGraph : 'SimpleGraph.ecore'::simplegraph;
 import SimpleGraph2Graph : 'SimpleGraph2Graph.ecore'::simplegraph2graph;
 
 transformation CopyGraphMinimal {
-	upperGraph imports SimpleGraph;
-	lowerGraph imports SimpleGraph;
+	check upperGraph imports SimpleGraph;
+	enforce lowerGraph imports SimpleGraph;
 	middle imports SimpleGraph2Graph;
 }
 
 map graph2graphLM in CopyGraphMinimal {
-	check upperGraph(in:upperGraph g1:Graph;) {}
+	in:upperGraph g1:Graph;
 	new:middle g2g:Graph2Graph;
     set g2g.graph1 := g1;
     set g2g.name := g1.name;
@@ -18,7 +18,7 @@ map graph2graphLM in CopyGraphMinimal {
 }
 
 map graph2graphMR in CopyGraphMinimal {
-	check middle(in:middle g2gout:Graph2Graph;) { }
+	in:middle g2gout:Graph2Graph;
     new:lowerGraph g2:Graph;
     set g2gout.graph2 := g2;
     set g2.name := g2gout.name;

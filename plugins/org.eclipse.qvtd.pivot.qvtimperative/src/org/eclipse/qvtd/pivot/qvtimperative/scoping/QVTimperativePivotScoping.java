@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.ocl.pivot.internal.scoping.Attribution;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.attributes.CoreDomainAttribution;
+import org.eclipse.qvtd.pivot.qvtimperative.attributes.GuardVariableAttribution;
 import org.eclipse.qvtd.pivot.qvtimperative.attributes.MappingAttribution;
 import org.eclipse.qvtd.pivot.qvtimperative.attributes.MappingCallBindingAttribution;
 import org.eclipse.qvtd.pivot.qvtimperative.attributes.MappingLoopAttribution;
@@ -25,6 +26,7 @@ public class QVTimperativePivotScoping
 {
 	public static void init() {
 		Map<EClassifier, Attribution> registry = Attribution.REGISTRY;
+		registry.put(QVTimperativePackage.Literals.GUARD_VARIABLE, GuardVariableAttribution.INSTANCE);
 		registry.put(QVTimperativePackage.Literals.IMPERATIVE_DOMAIN, CoreDomainAttribution.INSTANCE);
 		registry.put(QVTimperativePackage.Literals.MAPPING, MappingAttribution.INSTANCE);
 		registry.put(QVTimperativePackage.Literals.MAPPING_CALL_BINDING, MappingCallBindingAttribution.INSTANCE);

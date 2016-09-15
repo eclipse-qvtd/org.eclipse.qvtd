@@ -282,12 +282,12 @@ public class QVTs2QVTiVisitor extends QVTimperativeHelper implements Visitor<Ele
 		return environmentFactory.getIdResolver().getOperation(oclAnyEqualsId);
 	}
 
-	public @Nullable TypedModel getQVTiTypedModel(@Nullable TypedModel qvtpTypedModel) {
+	public @Nullable ImperativeTypedModel getQVTiTypedModel(@Nullable TypedModel qvtpTypedModel) {
 		if (qvtpTypedModel == null) {
+			assert qvtiMiddleTypedModel != null;
 			return qvtiMiddleTypedModel;
 		}
-		ImperativeTypedModel qvtiTypedModel = qvtpTypedModel2qvtiTypedModel.get(qvtpTypedModel);
-		return qvtiTypedModel != null ? qvtiTypedModel : qvtpTypedModel;
+		return qvtpTypedModel2qvtiTypedModel.get(qvtpTypedModel);
 	}
 
 	public @NonNull Region2Depth getRegion2Depth() {

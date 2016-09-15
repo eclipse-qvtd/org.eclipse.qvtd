@@ -41,7 +41,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.ImperativeDomainImpl#getCheckedProperties <em>Checked Properties</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.ImperativeDomainImpl#getOwnedGuardVariables <em>Owned Guard Variables</em>}</li>
  * </ul>
  *
  * @generated
@@ -56,16 +55,6 @@ public class ImperativeDomainImpl extends DomainImpl implements ImperativeDomain
 	 * @ordered
 	 */
 	protected EList<Property> checkedProperties;
-
-	/**
-	 * The cached value of the '{@link #getOwnedGuardVariables() <em>Owned Guard Variables</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getOwnedGuardVariables()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<GuardVariable> ownedGuardVariables;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -105,39 +94,10 @@ public class ImperativeDomainImpl extends DomainImpl implements ImperativeDomain
 	 * @generated
 	 */
 	@Override
-	public EList<GuardVariable> getOwnedGuardVariables() {
-		if (ownedGuardVariables == null) {
-			ownedGuardVariables = new EObjectContainmentEList<GuardVariable>(GuardVariable.class, this, QVTimperativePackage.IMPERATIVE_DOMAIN__OWNED_GUARD_VARIABLES);
-		}
-		return ownedGuardVariables;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case QVTimperativePackage.IMPERATIVE_DOMAIN__OWNED_GUARD_VARIABLES:
-				return ((InternalEList<?>)getOwnedGuardVariables()).basicRemove(otherEnd, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case QVTimperativePackage.IMPERATIVE_DOMAIN__CHECKED_PROPERTIES:
 				return getCheckedProperties();
-			case QVTimperativePackage.IMPERATIVE_DOMAIN__OWNED_GUARD_VARIABLES:
-				return getOwnedGuardVariables();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -155,10 +115,6 @@ public class ImperativeDomainImpl extends DomainImpl implements ImperativeDomain
 				getCheckedProperties().clear();
 				getCheckedProperties().addAll((Collection<? extends Property>)newValue);
 				return;
-			case QVTimperativePackage.IMPERATIVE_DOMAIN__OWNED_GUARD_VARIABLES:
-				getOwnedGuardVariables().clear();
-				getOwnedGuardVariables().addAll((Collection<? extends GuardVariable>)newValue);
-				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -174,9 +130,6 @@ public class ImperativeDomainImpl extends DomainImpl implements ImperativeDomain
 			case QVTimperativePackage.IMPERATIVE_DOMAIN__CHECKED_PROPERTIES:
 				getCheckedProperties().clear();
 				return;
-			case QVTimperativePackage.IMPERATIVE_DOMAIN__OWNED_GUARD_VARIABLES:
-				getOwnedGuardVariables().clear();
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -191,8 +144,6 @@ public class ImperativeDomainImpl extends DomainImpl implements ImperativeDomain
 		switch (featureID) {
 			case QVTimperativePackage.IMPERATIVE_DOMAIN__CHECKED_PROPERTIES:
 				return checkedProperties != null && !checkedProperties.isEmpty();
-			case QVTimperativePackage.IMPERATIVE_DOMAIN__OWNED_GUARD_VARIABLES:
-				return ownedGuardVariables != null && !ownedGuardVariables.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

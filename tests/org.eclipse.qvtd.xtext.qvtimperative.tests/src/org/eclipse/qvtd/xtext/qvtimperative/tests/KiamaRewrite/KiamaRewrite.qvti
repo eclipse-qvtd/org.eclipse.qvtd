@@ -86,14 +86,14 @@ map __root__ in KiamaRewrite_qvtp_qvtcas
 
 map m_NumCS_ast in KiamaRewrite_qvtp_qvtcas
 {
-	check leftCS(in:leftCS lNumCS : NumCS;) {}
+	in:leftCS lNumCS : NumCS;
 	new:rightAS rNum : Num;
 	set lNumCS.ast := rNum;
 }
 
 map m_NumCS_ast_2 in KiamaRewrite_qvtp_qvtcas
 {
-	check leftCS(in:leftCS lNumCS : NumCS;) {}
+	in:leftCS lNumCS : NumCS;
 	var ast : ecore::EObject := lNumCS.ast;
 	var aNum : kiamaas::Num := ast.oclAsType(kiamaas::Num);
 	var oclContainer : ocl::OclElement := aNum.oclContainer;
@@ -106,7 +106,7 @@ map m_NumCS_ast_2 in KiamaRewrite_qvtp_qvtcas
 
 map m_NumCS_ast_value_1 in KiamaRewrite_qvtp_qvtcas
 {
-	check leftCS(in:leftCS lNumCS : NumCS;) {}
+	in:leftCS lNumCS : NumCS;
 	var ast : ecore::EObject := lNumCS.ast;
 	var value : ecore::EInt := lNumCS.value;
 	var aNum : kiamaas::Num := ast.oclAsType(kiamaas::Num);
@@ -116,9 +116,9 @@ map m_NumCS_ast_value_1 in KiamaRewrite_qvtp_qvtcas
 
 map m_PlusCS_ast in KiamaRewrite_qvtp_qvtcas
 {
-	check leftCS(in:leftCS lPlusCS : PlusCS;) {}
 	enforce rightAS {
 	check kiamaas::Node::height }() {}
+	in:leftCS lPlusCS : PlusCS;
 	var ast : ecore::EObject := lPlusCS.ast;
 	var aPlus : kiamaas::Plus := ast.oclAsType(kiamaas::Plus);
 	var left : kiamaas::Node := aPlus.left;
@@ -134,9 +134,9 @@ map m_PlusCS_ast in KiamaRewrite_qvtp_qvtcas
 
 map m_PlusCS_ast_1 in KiamaRewrite_qvtp_qvtcas
 {
-	check leftCS(in:leftCS lPlusCS : PlusCS;) {}
 	enforce rightAS {
 		check kiamaas::Node::depth }() {}
+	in:leftCS lPlusCS : PlusCS;
 	var ast : ecore::EObject := lPlusCS.ast;
 	var aPlus : kiamaas::Plus := ast.oclAsType(kiamaas::Plus);
 	var oclContainer : ocl::OclElement := aPlus.oclContainer;
@@ -149,14 +149,14 @@ map m_PlusCS_ast_1 in KiamaRewrite_qvtp_qvtcas
 
 map m_PlusCS_ast_2 in KiamaRewrite_qvtp_qvtcas
 {
-	check leftCS(in:leftCS lPlusCS : PlusCS;) {}
+	in:leftCS lPlusCS : PlusCS;
 	new:rightAS rPlus : Plus;
 	set lPlusCS.ast := rPlus;
 }
 
 map m_PlusCS_ast_left in KiamaRewrite_qvtp_qvtcas
 {
-	check leftCS(in:leftCS lPlusCS : PlusCS;) {}
+	in:leftCS lPlusCS : PlusCS;
 	var ast : ecore::EObject := lPlusCS.ast;
 	var left : kiamacs::NodeCS := lPlusCS.left;
 	var aPlus : kiamaas::Plus := ast.oclAsType(kiamaas::Plus);
@@ -167,7 +167,7 @@ map m_PlusCS_ast_left in KiamaRewrite_qvtp_qvtcas
 
 map m_PlusCS_ast_right in KiamaRewrite_qvtp_qvtcas
 {
-	check leftCS(in:leftCS lPlusCS : PlusCS;) {}
+	in:leftCS lPlusCS : PlusCS;
 	var ast : ecore::EObject := lPlusCS.ast;
 	var right : kiamacs::NodeCS := lPlusCS.right;
 	var aPlus : kiamaas::Plus := ast.oclAsType(kiamaas::Plus);
@@ -178,14 +178,14 @@ map m_PlusCS_ast_right in KiamaRewrite_qvtp_qvtcas
 
 map m_TopCS_ast in KiamaRewrite_qvtp_qvtcas
 {
-	check leftCS(in:leftCS lTopCS : TopCS;) {}
+	in:leftCS lTopCS : TopCS;
 	new:rightAS rTop : Top;
 	set lTopCS.ast := rTop;
 }
 
 map m_TopCS_ast_node in KiamaRewrite_qvtp_qvtcas
 {
-	check leftCS(in:leftCS lTopCS : TopCS;) {}
+	in:leftCS lTopCS : TopCS;
 	var ast : ecore::EObject := lTopCS.ast;
 	var node : kiamacs::NodeCS := lTopCS.node;
 	var aTop : kiamaas::Top := ast.oclAsType(kiamaas::Top);
@@ -198,7 +198,7 @@ map r_PlusCS_left in KiamaRewrite_qvtp_qvtcas
 {
 	inout ji_PlusCS : Set(kiamacs::PlusCS);
 	inout ji_NumCS : Set(kiamacs::NumCS);
-	check leftCS(in:leftCS _'«parent»' : PlusCS;) {}
+	in:leftCS _'«parent»' : PlusCS;
 	var allChildren : Set(kiamacs::NodeCS) := _'«parent»'.left.oclAsSet();
 	var _'«child-PlusCS»' : Set(kiamacs::PlusCS) := allChildren->selectByKind(kiamacs::PlusCS);
 	var _'«child-NumCS»' : Set(kiamacs::NumCS) := allChildren->selectByKind(kiamacs::NumCS);
@@ -217,7 +217,7 @@ map r_PlusCS_right in KiamaRewrite_qvtp_qvtcas
 {
 	inout ji_PlusCS : Set(kiamacs::PlusCS);
 	inout ji_NumCS : Set(kiamacs::NumCS);
-	check leftCS(in:leftCS _'«parent»' : PlusCS;) {}
+	in:leftCS _'«parent»' : PlusCS;
 	var allChildren : Set(kiamacs::NodeCS) := _'«parent»'.right.oclAsSet();
 	var _'«child-PlusCS»' : Set(kiamacs::PlusCS) := allChildren->selectByKind(kiamacs::PlusCS);
 	var _'«child-NumCS»' : Set(kiamacs::NumCS) := allChildren->selectByKind(kiamacs::NumCS);
@@ -237,7 +237,7 @@ map r_TopCS_node in KiamaRewrite_qvtp_qvtcas
 	inout ji_PlusCS : Set(kiamacs::PlusCS);
 	inout ji_PlusCS_3 : Set(kiamacs::PlusCS);
 	inout ji_NumCS : Set(kiamacs::NumCS);
-	check leftCS(in:leftCS _'«parent»' : TopCS;) {}
+	in:leftCS _'«parent»' : TopCS;
 	var allChildren : Set(kiamacs::NodeCS) := _'«parent»'.node.oclAsSet();
 	var _'«child-PlusCS»' : Set(kiamacs::PlusCS) := allChildren->selectByKind(kiamacs::PlusCS);
 	var _'«child-NumCS»' : Set(kiamacs::NumCS) := allChildren->selectByKind(kiamacs::NumCS);
@@ -250,7 +250,7 @@ map r__PlusCS in KiamaRewrite_qvtp_qvtcas
 {
 	inout ji_PlusCS : Set(kiamacs::PlusCS);
 	inout ji_NumCS : Set(kiamacs::NumCS);
-	check leftCS(in:leftCS _'«head»' : PlusCS;) {}
+	in:leftCS _'«head»' : PlusCS;
 	out _'«local»' : Set(kiamacs::PlusCS);
 	out _'«new»' : Set(kiamacs::PlusCS);
 	call r_PlusCS_left {

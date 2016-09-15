@@ -33,7 +33,6 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperativeCS.ecore#//DomainCS/isCheck"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperativeCS.ecore#//DomainCS/isEnforce"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//DomainCS/checkedProperties"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//DomainCS/ownedGuardVariables"/>
     </genClasses>
     <genClasses ecoreClass="QVTimperativeCS.ecore#//GuardVariableCS">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//GuardVariableCS/referredTypedModel"/>
@@ -42,8 +41,9 @@
     <genClasses ecoreClass="QVTimperativeCS.ecore#//MappingCS">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//MappingCS/ownedDomains"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//MappingCS/ownedInPathName"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//MappingCS/ownedStatements"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//MappingCS/ownedGuardVariables"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//MappingCS/ownedInoutVariables"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//MappingCS/ownedStatements"/>
     </genClasses>
     <genClasses ecoreClass="QVTimperativeCS.ecore#//MappingCallBindingCS">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperativeCS.ecore#//MappingCallBindingCS/isPolled"/>

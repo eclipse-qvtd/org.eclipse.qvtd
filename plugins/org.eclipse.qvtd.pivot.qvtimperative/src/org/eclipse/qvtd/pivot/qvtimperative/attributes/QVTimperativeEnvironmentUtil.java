@@ -13,9 +13,7 @@ package org.eclipse.qvtd.pivot.qvtimperative.attributes;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.internal.scoping.EnvironmentView;
-import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 import org.eclipse.qvtd.pivot.qvtimperative.VariableStatement;
@@ -44,19 +42,6 @@ public class QVTimperativeEnvironmentUtil
 		}
 		environmentView.addNamedElements(mapping.getOwnedGuardVariables());
 		environmentView.addNamedElements(mapping.getInoutVariables());
-		for (Domain aDomain : mapping.getDomain()) {
-			if (aDomain instanceof ImperativeDomain) {
-				ImperativeDomain domain = (ImperativeDomain)aDomain;
-				if (bottomToo) {
-					for (Statement asStatement : mapping.getOwnedStatements()) {
-						if (asStatement instanceof VariableStatement) {
-							environmentView.addNamedElement(asStatement);
-						}
-					}
-				}
-				environmentView.addNamedElements(domain.getOwnedGuardVariables());
-			}
-		}
 	}
 
 	public static void addSideBottomVariables(@NonNull EnvironmentView environmentView, @Nullable Mapping mapping, @Nullable TypedModel typedModel) {
@@ -72,22 +57,13 @@ public class QVTimperativeEnvironmentUtil
 	}
 
 	private static void addSideVariables(@NonNull EnvironmentView environmentView, @NonNull Mapping mapping, @Nullable TypedModel typedModel, boolean bottomToo) {
-		for (Domain aDomain : mapping.getDomain()) {
-			if (aDomain instanceof ImperativeDomain) {
-				ImperativeDomain domain = (ImperativeDomain)aDomain;
-				if ((typedModel == null) || (domain.getTypedModel() == typedModel)) {
-					if (bottomToo) {
-						for (Statement asStatement : mapping.getOwnedStatements()) {
-							if (asStatement instanceof VariableStatement) {
-								environmentView.addNamedElement(asStatement);
-							}
-						}
-					}
-					environmentView.addNamedElements(domain.getOwnedGuardVariables());
-					environmentView.addNamedElements(mapping.getInoutVariables());
-					break;
+		if (bottomToo) {
+			for (Statement asStatement : mapping.getOwnedStatements()) {
+				if (asStatement instanceof VariableStatement) {
+					environmentView.addNamedElement(asStatement);
 				}
 			}
 		}
+		environmentView.addNamedElements(mapping.getInoutVariables());
 	}
 }

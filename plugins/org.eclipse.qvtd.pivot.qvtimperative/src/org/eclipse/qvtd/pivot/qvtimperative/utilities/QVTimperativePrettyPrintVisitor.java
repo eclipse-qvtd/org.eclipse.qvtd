@@ -10,14 +10,11 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtimperative.utilities;
 
-import java.util.List;
-
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.internal.prettyprint.PrettyPrinter;
-import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbasePrettyPrintVisitor;
 import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
@@ -131,26 +128,17 @@ public class QVTimperativePrettyPrintVisitor extends QVTbasePrettyPrintVisitor i
 		context.appendName(pMapping.getTransformation());
 		context.append(" {\n");
 		context.push("", "");
+		for (GuardVariable pVariable : pMapping.getOwnedGuardVariables()) {
+			context.append("in:");
+			context.appendName(pVariable.getReferredTypedModel());
+			context.append(" ");
+			safeVisit(pVariable);
+			context.append(";\n");
+		}
 		for (ConnectionVariable pVariable : pMapping.getInoutVariables()) {
 			context.append("inout ");
 			safeVisit(pVariable);
 			context.append(";\n");
-		}
-		for (Domain pDomain : pMapping.getDomain()) {
-			if (pDomain instanceof ImperativeDomain) {
-				List<GuardVariable> ownedGuardVariables = ((ImperativeDomain)pDomain).getOwnedGuardVariables();
-				if (ownedGuardVariables.size() > 0) {
-					context.appendName(pDomain);
-					context.append("{\n");
-					for (GuardVariable pVariable : ownedGuardVariables) {
-						safeVisit(pVariable);
-					}
-					context.append("}\n");
-				}
-			}
-		}
-		for (GuardVariable pVariable : pMapping.getOwnedGuardVariables()) {
-			safeVisit(pVariable);
 		}
 		for (Statement pStatement : pMapping.getOwnedStatements()) {
 			safeVisit(pStatement);

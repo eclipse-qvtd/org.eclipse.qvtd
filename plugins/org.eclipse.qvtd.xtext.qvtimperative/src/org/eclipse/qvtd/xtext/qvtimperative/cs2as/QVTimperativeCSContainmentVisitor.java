@@ -119,6 +119,38 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 		}
 	}
 
+	public static class GuardVariableCompletion extends SingleContinuation<@NonNull GuardVariableCS>
+	{
+		public GuardVariableCompletion(@NonNull CS2ASConversion context, @NonNull GuardVariableCS csElement) {
+			super(context, null, null, csElement);
+		}
+
+		@Override
+		public BasicContinuation<?> execute() {
+			GuardVariable pivotElement = PivotUtil.getPivot(GuardVariable.class, csElement);
+			if (pivotElement != null) {
+				pivotElement.setReferredTypedModel(csElement.getReferredTypedModel());
+			}
+			return null;
+		}
+	}
+
+	public static class NewStatementCompletion extends SingleContinuation<@NonNull NewStatementCS>
+	{
+		public NewStatementCompletion(@NonNull CS2ASConversion context, @NonNull NewStatementCS csElement) {
+			super(context, null, null, csElement);
+		}
+
+		@Override
+		public BasicContinuation<?> execute() {
+			NewStatement pivotElement = PivotUtil.getPivot(NewStatement.class, csElement);
+			if (pivotElement != null) {
+				pivotElement.setReferredTypedModel(csElement.getReferredTypedModel());
+			}
+			return null;
+		}
+	}
+
 	public QVTimperativeCSContainmentVisitor(@NonNull CS2ASConversion context) {
 		super(context);
 	}
@@ -209,7 +241,6 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 		ImperativeDomain pivotElement = context.refreshModelElement(ImperativeDomain.class, QVTimperativePackage.Literals.IMPERATIVE_DOMAIN, csElement);
 		pivotElement.setIsCheckable(csElement.isIsCheck());
 		pivotElement.setIsEnforceable(csElement.isIsEnforce());
-		context.refreshPivotList(GuardVariable.class, pivotElement.getOwnedGuardVariables(), csElement.getOwnedGuardVariables());
 		context.refreshComments(pivotElement, csElement);
 		return new DomainContentContinuation(context, csElement);
 	}
@@ -217,7 +248,7 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 	@Override
 	public Continuation<?> visitGuardVariableCS(@NonNull GuardVariableCS csElement) {
 		refreshNamedElement(GuardVariable.class, QVTimperativePackage.Literals.GUARD_VARIABLE, csElement);
-		return null;
+		return new GuardVariableCompletion(context, csElement);
 	}
 
 	@Override
@@ -228,9 +259,8 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 
 	@Override
 	public Continuation<?> visitMappingCS(@NonNull MappingCS csElement) {
-		@NonNull Mapping pivotElement = refreshNamedElement(Mapping.class, QVTimperativePackage.Literals.MAPPING, csElement);
-		//		DomainCS csMiddle = csElement.getOwnedMiddle();
-		//		context.refreshPivotList(GuardVariable.class, pivotElement.getOwnedGuardVariables(), csMiddle.getOwnedGuardVariables());
+		Mapping pivotElement = refreshNamedElement(Mapping.class, QVTimperativePackage.Literals.MAPPING, csElement);
+		context.refreshPivotList(GuardVariable.class, pivotElement.getOwnedGuardVariables(), csElement.getOwnedGuardVariables());
 		context.refreshPivotList(InConnectionVariable.class, pivotElement.getInoutVariables(), csElement.getOwnedInoutVariables());
 		context.refreshPivotList(ImperativeDomain.class, pivotElement.getDomain(), csElement.getOwnedDomains());
 		context.refreshPivotList(Statement.class, pivotElement.getOwnedStatements(), csElement.getOwnedStatements());
@@ -268,7 +298,7 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 	@Override
 	public Continuation<?> visitNewStatementCS(@NonNull NewStatementCS csElement) {
 		refreshNamedElement(NewStatement.class, QVTimperativePackage.Literals.NEW_STATEMENT, csElement);
-		return null;
+		return new NewStatementCompletion(context, csElement);
 	}
 
 	@Override

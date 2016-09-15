@@ -11,74 +11,74 @@ transformation classescs2as
 
 map mClassCS2Class_LM in classescs2as
 {
-	check leftCS(in:leftCS classCS : ClassCS;) {}
+	in:leftCS classCS : ClassCS;
 	new:middle c2c : ClassCS2Class;
 	set c2c.classCS := classCS;
 }
 
 map mRootCS2Root_LM in classescs2as
 {
-	check leftCS(in:leftCS rootCS : RootCS;) {}
+	in:leftCS rootCS : RootCS;
 	new:middle r2r : RootCS2Root;
 	set r2r.rootCS := rootCS;
 }
 
 map mPackageCS2Package_LM in classescs2as
 {
-	check leftCS(in:leftCS packageCS : PackageCS;) {}
+	in:leftCS packageCS : PackageCS;
 	new:middle p2p : PackageCS2Package;
 	set p2p.packageCS := packageCS;
 }
 
 map mClassCS2Class_MR in classescs2as
 {
-	check middle(in:middle c2c : ClassCS2Class;) {}
+	in:middle c2c : ClassCS2Class;
 	new:rightAS _'class' : Class;
 	set c2c._'class' := _'class';
 }
 
 map mRootCS2Root_MR in classescs2as
 {
-	check middle(in:middle r2r : RootCS2Root;) {}
+	in:middle r2r : RootCS2Root;
 	new:rightAS root : Root;
 	set r2r.root := root;
 }
 
 map mPackageCS2Package_MR in classescs2as
 {
-	check middle(in:middle p2p : PackageCS2Package;) {}
+	in:middle p2p : PackageCS2Package;
 	new:rightAS _'package' : Package;
 	set p2p._'package' := _'package';
 }
 
 map uClass_name in classescs2as
 {
-	check rightAS(in:rightAS _'class' : Class;) {}
-	check leftCS(in:leftCS classCS : ClassCS;) {}
+	in:rightAS _'class' : Class;
+	in:leftCS classCS : ClassCS;
 	check classCS.ClassCS2Class._'class' = _'class';
 	set _'class'.name := classCS.name;
 }
 
 map uRoot_ownedPackages in classescs2as
 {
-	check rightAS(in:rightAS root : Root;) {}
-	check leftCS(in:leftCS rootCS : RootCS;) {}
+	in:rightAS root : Root;
+	in:leftCS rootCS : RootCS;
 	check rootCS.RootCS2Root.root = root;
 	set root.ownedPackages := rootCS.ownedPackages.PackageCS2Package._'package'->asOrderedSet();
 }
 
 map uPackage_name in classescs2as
 {
-	check rightAS(in:rightAS _'package' : Package;) {}
-	check leftCS(in:leftCS packageCS : PackageCS;) {}
+	in:rightAS _'package' : Package;
+	in:leftCS packageCS : PackageCS;
 	check packageCS.PackageCS2Package._'package' = _'package';
 	set	_'package'.name := packageCS.name;
 }
 
 map uPackage_ownedClasses in classescs2as
 {
-	check rightAS(in:rightAS _'package' : Package;) {}
-	check leftCS(in:leftCS packageCS : PackageCS;) {}
+	in:rightAS _'package' : Package;
+	in:leftCS packageCS : PackageCS;
 	check packageCS.PackageCS2Package._'package' = _'package';
 	set	_'package'.ownedClasses := packageCS.ownedClasses.ClassCS2Class._'class'->asOrderedSet();
 }

@@ -1,13 +1,13 @@
 import ecore : 'http://www.eclipse.org/emf/2002/Ecore';
 
 transformation Expressions {
-	source imports ecore;
-	target imports ecore;
+	check source imports ecore;
+	enforce target imports ecore;
 	middle imports ecore;
 }
 
 map expressionsLM in Expressions {
-	check source(in:source dummy:EPackage;) {}
+	in:source dummy:EPackage;
     call expressionsMR {
     	binaryPrecedence := (1 + 2) * (3*5 + 4);
     	unaryPrecedence := -1 * - -1;
@@ -16,7 +16,9 @@ map expressionsLM in Expressions {
 }
 
 map expressionsMR in Expressions {
-	check middle(in:middle binaryPrecedence:OclAny; in:middle unaryPrecedence:OclAny; in:middle notPrecedence:OclAny;) { }
+	in:middle binaryPrecedence:OclAny;
+	in:middle unaryPrecedence:OclAny;
+	in:middle notPrecedence:OclAny;
 }
 
 map expressionsDomains in Expressions {

@@ -23,6 +23,7 @@ import org.eclipse.ocl.pivot.internal.VariableDeclarationImpl;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
 
@@ -48,7 +49,7 @@ public class GuardVariableImpl extends VariableDeclarationImpl implements GuardV
 	 * @generated
 	 * @ordered
 	 */
-	protected TypedModel referredTypedModel;
+	protected ImperativeTypedModel referredTypedModel;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -75,10 +76,10 @@ public class GuardVariableImpl extends VariableDeclarationImpl implements GuardV
 	 * @generated
 	 */
 	@Override
-	public TypedModel getReferredTypedModel() {
+	public ImperativeTypedModel getReferredTypedModel() {
 		if (referredTypedModel != null && referredTypedModel.eIsProxy()) {
 			InternalEObject oldReferredTypedModel = (InternalEObject)referredTypedModel;
-			referredTypedModel = (TypedModel)eResolveProxy(oldReferredTypedModel);
+			referredTypedModel = (ImperativeTypedModel)eResolveProxy(oldReferredTypedModel);
 			if (referredTypedModel != oldReferredTypedModel) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTimperativePackage.GUARD_VARIABLE__REFERRED_TYPED_MODEL, oldReferredTypedModel, referredTypedModel));
@@ -92,7 +93,7 @@ public class GuardVariableImpl extends VariableDeclarationImpl implements GuardV
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TypedModel basicGetReferredTypedModel() {
+	public ImperativeTypedModel basicGetReferredTypedModel() {
 		return referredTypedModel;
 	}
 
@@ -101,9 +102,8 @@ public class GuardVariableImpl extends VariableDeclarationImpl implements GuardV
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public void setReferredTypedModel(TypedModel newReferredTypedModel) {
-		TypedModel oldReferredTypedModel = referredTypedModel;
+	public void setReferredTypedModel(ImperativeTypedModel newReferredTypedModel) {
+		ImperativeTypedModel oldReferredTypedModel = referredTypedModel;
 		referredTypedModel = newReferredTypedModel;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.GUARD_VARIABLE__REFERRED_TYPED_MODEL, oldReferredTypedModel, referredTypedModel));
@@ -133,7 +133,7 @@ public class GuardVariableImpl extends VariableDeclarationImpl implements GuardV
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case QVTimperativePackage.GUARD_VARIABLE__REFERRED_TYPED_MODEL:
-				setReferredTypedModel((TypedModel)newValue);
+				setReferredTypedModel((ImperativeTypedModel)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -148,7 +148,7 @@ public class GuardVariableImpl extends VariableDeclarationImpl implements GuardV
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case QVTimperativePackage.GUARD_VARIABLE__REFERRED_TYPED_MODEL:
-				setReferredTypedModel((TypedModel)null);
+				setReferredTypedModel((ImperativeTypedModel)null);
 				return;
 		}
 		super.eUnset(featureID);

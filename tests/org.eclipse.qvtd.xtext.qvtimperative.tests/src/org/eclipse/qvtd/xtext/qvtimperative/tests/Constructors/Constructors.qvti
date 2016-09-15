@@ -1,8 +1,8 @@
 import ecore : 'http://www.eclipse.org/emf/2002/Ecore';
 
 transformation Constructors {
-	source imports ecore;
-	target imports ecore;
+	check source imports ecore;
+	enforce target imports ecore;
 	middle imports ecore;
 }
 
@@ -11,7 +11,7 @@ query Constructors::createEPackage(name2 : String) : ecore::EPackage {
 }
 
 map ep2ep in Constructors {
-	check source(in:source epIn:EPackage;) {}
+	in:source epIn:EPackage;
 	new:target epOut1 : EPackage := this.createEPackage(epIn.name);
 	new:target epOut2 : EPackage;
     set epOut2.name := epIn.name;

@@ -320,10 +320,8 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 
 		public void doBottoms() {
 			List<@NonNull CGGuardVariable> cgFreeVariables = new ArrayList<>();
-			for (@NonNull Domain pDomain : ClassUtil.nullFree(asMapping.getDomain())) {
-				for (@NonNull GuardVariable pGuardVariable : ClassUtil.nullFree(((ImperativeDomain)pDomain).getOwnedGuardVariables())) {
-					cgFreeVariables.add(getGuardVariable(pGuardVariable));
-				}
+			for (@NonNull GuardVariable pGuardVariable : ClassUtil.nullFree(asMapping.getOwnedGuardVariables())) {
+				cgFreeVariables.add(getGuardVariable(pGuardVariable));
 			}
 			for (@NonNull InConnectionVariable pGuardVariable : ClassUtil.nullFree(asMapping.getInoutVariables())) {
 				cgFreeVariables.add(getGuardVariable(pGuardVariable));

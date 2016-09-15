@@ -201,7 +201,7 @@ public class QVTimperativeUtil extends QVTbaseUtil
 		return propertyCallExp;
 	} */
 
-	public static @NonNull NewStatement createNewStatement(@NonNull String name, @NonNull TypedModel typedModel, @NonNull Type type) {
+	public static @NonNull NewStatement createNewStatement(@NonNull String name, @NonNull ImperativeTypedModel typedModel, @NonNull Type type) {
 		NewStatement newStatement = QVTimperativeFactory.eINSTANCE.createNewStatement();
 		newStatement.setName(name);
 		newStatement.setReferredTypedModel(typedModel);

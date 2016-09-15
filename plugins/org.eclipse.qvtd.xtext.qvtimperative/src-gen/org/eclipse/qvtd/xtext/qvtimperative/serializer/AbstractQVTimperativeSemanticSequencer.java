@@ -573,7 +573,7 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 	 *     GuardVariableCS returns GuardVariableCS
 	 *
 	 * Constraint:
-	 *     (referredTypedModel=[TypedModel|UnrestrictedName] name=UnrestrictedName ownedType=TypeExpCS)
+	 *     (referredTypedModel=[ImperativeTypedModel|UnrestrictedName] name=UnrestrictedName ownedType=TypeExpCS)
 	 */
 	protected void sequence_GuardVariableCS(ISerializationContext context, GuardVariableCS semanticObject) {
 		if (errorAcceptor != null) {
@@ -585,7 +585,7 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BaseCSPackage.Literals.TYPED_ELEMENT_CS__OWNED_TYPE));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getGuardVariableCSAccess().getReferredTypedModelTypedModelUnrestrictedNameParserRuleCall_2_0_1(), semanticObject.getReferredTypedModel());
+		feeder.accept(grammarAccess.getGuardVariableCSAccess().getReferredTypedModelImperativeTypedModelUnrestrictedNameParserRuleCall_2_0_1(), semanticObject.getReferredTypedModel());
 		feeder.accept(grammarAccess.getGuardVariableCSAccess().getNameUnrestrictedNameParserRuleCall_3_0(), semanticObject.getName());
 		feeder.accept(grammarAccess.getGuardVariableCSAccess().getOwnedTypeTypeExpCSParserRuleCall_5_0(), semanticObject.getOwnedType());
 		feeder.finish();
@@ -633,8 +633,9 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 	 *     (
 	 *         name=UnrestrictedName 
 	 *         ownedInPathName=PathNameCS? 
-	 *         ownedInoutVariables+=InoutVariableCS* 
 	 *         (ownedDomains+=SourceDomainCS | ownedDomains+=TargetDomainCS)* 
+	 *         ownedGuardVariables+=GuardVariableCS? 
+	 *         (ownedInoutVariables+=InoutVariableCS? ownedGuardVariables+=GuardVariableCS?)* 
 	 *         ownedStatements+=OutVariableCS? 
 	 *         ((ownedStatements+=PredicateVariableCS | ownedStatements+=CheckStatementCS)? ownedStatements+=OutVariableCS?)* 
 	 *         ownedStatements+=NewStatementCS? 
@@ -704,7 +705,7 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 	 *     NewStatementCS returns NewStatementCS
 	 *
 	 * Constraint:
-	 *     (referredTypedModel=[TypedModel|UnrestrictedName] name=UnrestrictedName ownedType=TypeExpCS ownedInit=ExpCS?)
+	 *     (referredTypedModel=[ImperativeTypedModel|UnrestrictedName] name=UnrestrictedName ownedType=TypeExpCS ownedInit=ExpCS?)
 	 */
 	protected void sequence_NewStatementCS(ISerializationContext context, NewStatementCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -831,12 +832,7 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 	 *     SourceDomainCS returns DomainCS
 	 *
 	 * Constraint:
-	 *     (
-	 *         isCheck?='check' 
-	 *         direction=[TypedModel|UnrestrictedName] 
-	 *         (checkedProperties+=PathNameCS checkedProperties+=PathNameCS*)? 
-	 *         ownedGuardVariables+=GuardVariableCS*
-	 *     )
+	 *     (isCheck?='check' direction=[ImperativeTypedModel|UnrestrictedName] (checkedProperties+=PathNameCS checkedProperties+=PathNameCS*)?)
 	 */
 	protected void sequence_SourceDomainCS(ISerializationContext context, DomainCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -848,12 +844,7 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 	 *     TargetDomainCS returns DomainCS
 	 *
 	 * Constraint:
-	 *     (
-	 *         isEnforce?='enforce' 
-	 *         direction=[TypedModel|UnrestrictedName] 
-	 *         (checkedProperties+=PathNameCS checkedProperties+=PathNameCS*)? 
-	 *         ownedGuardVariables+=GuardVariableCS*
-	 *     )
+	 *     (isEnforce?='enforce' direction=[ImperativeTypedModel|UnrestrictedName] (checkedProperties+=PathNameCS checkedProperties+=PathNameCS*)?)
 	 */
 	protected void sequence_TargetDomainCS(ISerializationContext context, DomainCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

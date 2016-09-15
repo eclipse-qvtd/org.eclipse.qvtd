@@ -23,6 +23,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
@@ -50,7 +51,7 @@ public class NewStatementImpl extends VariableStatementImpl implements NewStatem
 	 * @generated
 	 * @ordered
 	 */
-	protected TypedModel referredTypedModel;
+	protected ImperativeTypedModel referredTypedModel;
 
 	/**
 	 * The cached value of the '{@link #getOwnedInit() <em>Owned Init</em>}' containment reference.
@@ -87,10 +88,10 @@ public class NewStatementImpl extends VariableStatementImpl implements NewStatem
 	 * @generated
 	 */
 	@Override
-	public TypedModel getReferredTypedModel() {
+	public ImperativeTypedModel getReferredTypedModel() {
 		if (referredTypedModel != null && referredTypedModel.eIsProxy()) {
 			InternalEObject oldReferredTypedModel = (InternalEObject)referredTypedModel;
-			referredTypedModel = (TypedModel)eResolveProxy(oldReferredTypedModel);
+			referredTypedModel = (ImperativeTypedModel)eResolveProxy(oldReferredTypedModel);
 			if (referredTypedModel != oldReferredTypedModel) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTimperativePackage.NEW_STATEMENT__REFERRED_TYPED_MODEL, oldReferredTypedModel, referredTypedModel));
@@ -104,7 +105,7 @@ public class NewStatementImpl extends VariableStatementImpl implements NewStatem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TypedModel basicGetReferredTypedModel() {
+	public ImperativeTypedModel basicGetReferredTypedModel() {
 		return referredTypedModel;
 	}
 
@@ -113,9 +114,8 @@ public class NewStatementImpl extends VariableStatementImpl implements NewStatem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public void setReferredTypedModel(TypedModel newReferredTypedModel) {
-		TypedModel oldReferredTypedModel = referredTypedModel;
+	public void setReferredTypedModel(ImperativeTypedModel newReferredTypedModel) {
+		ImperativeTypedModel oldReferredTypedModel = referredTypedModel;
 		referredTypedModel = newReferredTypedModel;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.NEW_STATEMENT__REFERRED_TYPED_MODEL, oldReferredTypedModel, referredTypedModel));
@@ -206,7 +206,7 @@ public class NewStatementImpl extends VariableStatementImpl implements NewStatem
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case QVTimperativePackage.NEW_STATEMENT__REFERRED_TYPED_MODEL:
-				setReferredTypedModel((TypedModel)newValue);
+				setReferredTypedModel((ImperativeTypedModel)newValue);
 				return;
 			case QVTimperativePackage.NEW_STATEMENT__OWNED_INIT:
 				setOwnedInit((OCLExpression)newValue);
@@ -224,7 +224,7 @@ public class NewStatementImpl extends VariableStatementImpl implements NewStatem
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case QVTimperativePackage.NEW_STATEMENT__REFERRED_TYPED_MODEL:
-				setReferredTypedModel((TypedModel)null);
+				setReferredTypedModel((ImperativeTypedModel)null);
 				return;
 			case QVTimperativePackage.NEW_STATEMENT__OWNED_INIT:
 				setOwnedInit((OCLExpression)null);

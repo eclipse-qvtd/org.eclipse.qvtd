@@ -418,12 +418,14 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 
 	@Override
 	public ElementCS visitGuardVariable(@NonNull GuardVariable asVariable) {
+		ImperativeTypedModel asTypedModel = asVariable.getReferredTypedModel();
+		org.eclipse.ocl.pivot.Package asUsedPackage = asTypedModel.getUsedPackage().size() > 0 ? asTypedModel.getUsedPackage().get(0) : null;
 		Mapping containingMapping = QVTimperativeUtil.getContainingMapping(asVariable);
 		assert containingMapping != null;
 		GuardVariableCS csUnrealizedVariable = context.refreshNamedElement(GuardVariableCS.class, QVTimperativeCSPackage.Literals.GUARD_VARIABLE_CS, asVariable);
 		csUnrealizedVariable.setPivot(asVariable);
-		csUnrealizedVariable.setReferredTypedModel(asVariable.getReferredTypedModel());
-		csUnrealizedVariable.setOwnedType(createTypeRefCS(asVariable.getType(), getScope(asVariable)));
+		csUnrealizedVariable.setReferredTypedModel(asTypedModel);
+		csUnrealizedVariable.setOwnedType(createTypeRefCS(asVariable.getType(), asUsedPackage));
 		return csUnrealizedVariable;
 	}
 
@@ -431,9 +433,8 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 	public ElementCS visitImperativeDomain(@NonNull ImperativeDomain asCoreDomain) {
 		DomainCS csDomain = createCoreDomain(asCoreDomain);
 		csDomain.setPivot(asCoreDomain);
-		context.refreshList(csDomain.getOwnedGuardVariables(), context.visitDeclarations(GuardVariableCS.class, asCoreDomain.getOwnedGuardVariables(), null));
 		csDomain.setIsCheck(asCoreDomain.isIsCheckable());
-		csDomain.setDirection(asCoreDomain.getTypedModel());
+		csDomain.setDirection((ImperativeTypedModel) asCoreDomain.getTypedModel());
 		csDomain.setIsEnforce(asCoreDomain.isIsEnforceable());
 		Transformation asTransformation = QVTbaseUtil.getContainingTransformation(asCoreDomain);
 		assert asTransformation != null;
@@ -568,6 +569,7 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 		MappingCS csMapping = context.refreshNamedElement(MappingCS.class, QVTimperativeCSPackage.Literals.MAPPING_CS, asMapping);
 		csMapping.setPivot(asMapping);
 		refreshOwnedInTransformation(csMapping, asMapping);
+		context.refreshList(csMapping.getOwnedGuardVariables(), context.visitDeclarations(GuardVariableCS.class, asMapping.getOwnedGuardVariables(), null));
 		context.refreshList(csMapping.getOwnedInoutVariables(), context.visitDeclarations(InoutVariableCS.class, asMapping.getInoutVariables(), null));
 		context.refreshList(csMapping.getOwnedDomains(), context.visitDeclarations(DomainCS.class, asMapping.getDomain(), null));
 		context.refreshList(csMapping.getOwnedStatements(), context.visitDeclarations(StatementCS.class, asMapping.getOwnedStatements(), null));
@@ -611,7 +613,7 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 
 	@Override
 	public ElementCS visitNewStatement(@NonNull NewStatement asNewStatement) {
-		TypedModel asTypedModel = asNewStatement.getReferredTypedModel();
+		ImperativeTypedModel asTypedModel = asNewStatement.getReferredTypedModel();
 		org.eclipse.ocl.pivot.Package asUsedPackage = asTypedModel.getUsedPackage().size() > 0 ? asTypedModel.getUsedPackage().get(0) : null;
 		NewStatementCS csNewStatement = context.refreshNamedElement(NewStatementCS.class, QVTimperativeCSPackage.Literals.NEW_STATEMENT_CS, asNewStatement);
 		csNewStatement.setPivot(asNewStatement);

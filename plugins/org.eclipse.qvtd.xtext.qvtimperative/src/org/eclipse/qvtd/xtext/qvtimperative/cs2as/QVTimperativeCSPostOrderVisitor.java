@@ -29,6 +29,7 @@ import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.CheckStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.GuardVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
@@ -142,6 +143,10 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 
 	@Override
 	public Continuation<?> visitGuardVariableCS(@NonNull GuardVariableCS csElement) {
+		GuardVariable asGuardVariable = PivotUtil.getPivot(GuardVariable.class, csElement);
+		if (asGuardVariable != null) {
+			asGuardVariable.setReferredTypedModel(csElement.getReferredTypedModel());
+		}
 		return null;
 	}
 

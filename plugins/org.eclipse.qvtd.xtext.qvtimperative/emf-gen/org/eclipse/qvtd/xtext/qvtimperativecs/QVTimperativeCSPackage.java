@@ -617,22 +617,13 @@ public interface QVTimperativeCSPackage extends EPackage {
 	int DOMAIN_CS__CHECKED_PROPERTIES = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 3;
 
 	/**
-	 * The feature id for the '<em><b>Owned Guard Variables</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DOMAIN_CS__OWNED_GUARD_VARIABLES = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 4;
-
-	/**
 	 * The number of structural features of the '<em>Domain CS</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DOMAIN_CS_FEATURE_COUNT = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 5;
+	int DOMAIN_CS_FEATURE_COUNT = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.GuardVariableCSImpl <em>Guard Variable CS</em>}' class.
@@ -916,13 +907,13 @@ public interface QVTimperativeCSPackage extends EPackage {
 	int MAPPING_CS__OWNED_IN_PATH_NAME = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Owned Statements</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Guard Variables</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_CS__OWNED_STATEMENTS = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 2;
+	int MAPPING_CS__OWNED_GUARD_VARIABLES = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Owned Inout Variables</b></em>' containment reference list.
@@ -934,13 +925,22 @@ public interface QVTimperativeCSPackage extends EPackage {
 	int MAPPING_CS__OWNED_INOUT_VARIABLES = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 3;
 
 	/**
+	 * The feature id for the '<em><b>Owned Statements</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_CS__OWNED_STATEMENTS = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 4;
+
+	/**
 	 * The number of structural features of the '<em>Mapping CS</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_CS_FEATURE_COUNT = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 4;
+	int MAPPING_CS_FEATURE_COUNT = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -2344,17 +2344,6 @@ public interface QVTimperativeCSPackage extends EPackage {
 	EReference getDomainCS_CheckedProperties();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtimperativecs.DomainCS#getOwnedGuardVariables <em>Owned Guard Variables</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Owned Guard Variables</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.DomainCS#getOwnedGuardVariables()
-	 * @see #getDomainCS()
-	 * @generated
-	 */
-	EReference getDomainCS_OwnedGuardVariables();
-
-	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.GuardVariableCS <em>Guard Variable CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2416,6 +2405,17 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getMappingCS_OwnedInPathName();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS#getOwnedGuardVariables <em>Owned Guard Variables</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Owned Guard Variables</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS#getOwnedGuardVariables()
+	 * @see #getMappingCS()
+	 * @generated
+	 */
+	EReference getMappingCS_OwnedGuardVariables();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS#getOwnedStatements <em>Owned Statements</em>}'.
@@ -3039,14 +3039,6 @@ public interface QVTimperativeCSPackage extends EPackage {
 		EReference DOMAIN_CS__CHECKED_PROPERTIES = eINSTANCE.getDomainCS_CheckedProperties();
 
 		/**
-		 * The meta object literal for the '<em><b>Owned Guard Variables</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference DOMAIN_CS__OWNED_GUARD_VARIABLES = eINSTANCE.getDomainCS_OwnedGuardVariables();
-
-		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.GuardVariableCSImpl <em>Guard Variable CS</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3099,6 +3091,14 @@ public interface QVTimperativeCSPackage extends EPackage {
 		 * @generated
 		 */
 		EReference MAPPING_CS__OWNED_IN_PATH_NAME = eINSTANCE.getMappingCS_OwnedInPathName();
+
+		/**
+		 * The meta object literal for the '<em><b>Owned Guard Variables</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MAPPING_CS__OWNED_GUARD_VARIABLES = eINSTANCE.getMappingCS_OwnedGuardVariables();
 
 		/**
 		 * The meta object literal for the '<em><b>Owned Statements</b></em>' containment reference list feature.

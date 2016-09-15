@@ -24,6 +24,7 @@ import org.eclipse.ocl.xtext.basecs.impl.TypedElementCSImpl;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.xtext.qvtimperativecs.NewStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage;
 import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
@@ -61,7 +62,7 @@ public class NewStatementCSImpl extends TypedElementCSImpl implements NewStateme
 	 * @generated
 	 * @ordered
 	 */
-	protected TypedModel referredTypedModel;
+	protected ImperativeTypedModel referredTypedModel;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -133,10 +134,10 @@ public class NewStatementCSImpl extends TypedElementCSImpl implements NewStateme
 	 * @generated
 	 */
 	@Override
-	public TypedModel getReferredTypedModel() {
+	public ImperativeTypedModel getReferredTypedModel() {
 		if (referredTypedModel != null && referredTypedModel.eIsProxy()) {
 			InternalEObject oldReferredTypedModel = (InternalEObject)referredTypedModel;
-			referredTypedModel = (TypedModel)eResolveProxy(oldReferredTypedModel);
+			referredTypedModel = (ImperativeTypedModel)eResolveProxy(oldReferredTypedModel);
 			if (referredTypedModel != oldReferredTypedModel) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTimperativeCSPackage.NEW_STATEMENT_CS__REFERRED_TYPED_MODEL, oldReferredTypedModel, referredTypedModel));
@@ -150,7 +151,7 @@ public class NewStatementCSImpl extends TypedElementCSImpl implements NewStateme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TypedModel basicGetReferredTypedModel() {
+	public ImperativeTypedModel basicGetReferredTypedModel() {
 		return referredTypedModel;
 	}
 
@@ -159,9 +160,8 @@ public class NewStatementCSImpl extends TypedElementCSImpl implements NewStateme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public void setReferredTypedModel(TypedModel newReferredTypedModel) {
-		TypedModel oldReferredTypedModel = referredTypedModel;
+	public void setReferredTypedModel(ImperativeTypedModel newReferredTypedModel) {
+		ImperativeTypedModel oldReferredTypedModel = referredTypedModel;
 		referredTypedModel = newReferredTypedModel;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.NEW_STATEMENT_CS__REFERRED_TYPED_MODEL, oldReferredTypedModel, referredTypedModel));
@@ -210,7 +210,7 @@ public class NewStatementCSImpl extends TypedElementCSImpl implements NewStateme
 				setOwnedInit((ExpCS)newValue);
 				return;
 			case QVTimperativeCSPackage.NEW_STATEMENT_CS__REFERRED_TYPED_MODEL:
-				setReferredTypedModel((TypedModel)newValue);
+				setReferredTypedModel((ImperativeTypedModel)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -228,7 +228,7 @@ public class NewStatementCSImpl extends TypedElementCSImpl implements NewStateme
 				setOwnedInit((ExpCS)null);
 				return;
 			case QVTimperativeCSPackage.NEW_STATEMENT_CS__REFERRED_TYPED_MODEL:
-				setReferredTypedModel((TypedModel)null);
+				setReferredTypedModel((ImperativeTypedModel)null);
 				return;
 		}
 		super.eUnset(featureID);

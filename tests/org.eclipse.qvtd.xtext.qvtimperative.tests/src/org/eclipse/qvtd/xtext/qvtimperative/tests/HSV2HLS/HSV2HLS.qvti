@@ -6,8 +6,8 @@ import hsv2hls_0 : 'HSV2HLS.ecore'::HSV2HLS; -- A name is useful to define an al
 -- library '../../myOclHelper.ocl'; -- Import a complete OCL with helpers
 
 transformation hsv2hls {
-	hsv imports HSVTree;  -- Should specify the correct package
-	hls imports HLSTree;  --
+	check hsv imports HSVTree;  -- Should specify the correct package
+	enforce hls imports HLSTree;  --
 	-- hls imports "strict" HLSTree;  -- 
 	-- hls imports HLSTree{strict};   -- The model has to strictly conform to the HLSTree mm, without strict the model can have classes that match the name but not completely conform to the mm  
 	middle imports HSV2HLS;
@@ -28,7 +28,7 @@ map __root__ in hsv2hls {
 }
 
 map HSV2MiddleRoot in hsv2hls {	-- Mapping root nodes L to M
-	check hsv(in:hsv hsvRoot : HSVNode;) { } 
+	in:hsv hsvRoot : HSVNode;
 	check hsvRoot.parent = null;
 	new:middle middleRoot : HSVNode2HLSNode;
 	set middleRoot.hsv := hsvRoot;
@@ -46,8 +46,8 @@ map HSV2MiddleRoot in hsv2hls {	-- Mapping root nodes L to M
 }
 
 map HSV2MiddleRecursion in hsv2hls { -- Mapping child nodes L to M
-	check hsv(in:hsv hsvNode : HSVNode;) {}
-	enforce middle(in:middle middleParent : HSVNode2HLSNode;) {}
+	in:hsv hsvNode : HSVNode;
+	in:middle middleParent : HSVNode2HLSNode;
 	new:middle middleNode : HSVNode2HLSNode;
 	set middleNode.parent := middleParent;
 	set middleNode.hsv := hsvNode;
@@ -62,7 +62,7 @@ map HSV2MiddleRecursion in hsv2hls { -- Mapping child nodes L to M
 }
 
 map Middle2HLSRoot in hsv2hls { -- Mapping root nodes M to R
-	check middle(in:middle middleNode : HSVNode2HLSNode;) {}
+	in:middle middleNode : HSVNode2HLSNode;
 	new:hls hlsNode : HLSNode;
 	set hlsNode.parent := null;
 	set middleNode.hls := hlsNode;
@@ -76,7 +76,7 @@ map Middle2HLSRoot in hsv2hls { -- Mapping root nodes M to R
 }
 
 map Middle2HLSRecursion in hsv2hls { -- Mapping child nodes M to R
-	check middle(in:middle middleNode : HSVNode2HLSNode;) {}
+	in:middle middleNode : HSVNode2HLSNode;
 	new:hls hlsNode : HLSNode;
 	set hlsNode.parent := middleNode.parent.hls;
 	set middleNode.hls := hlsNode;

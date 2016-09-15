@@ -28,7 +28,6 @@ import org.eclipse.qvtd.pivot.qvtbase.Domain;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain#getCheckedProperties <em>Checked Properties</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain#getOwnedGuardVariables <em>Owned Guard Variables</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getImperativeDomain()
@@ -49,19 +48,4 @@ public interface ImperativeDomain extends Domain {
 	 * @generated
 	 */
 	EList<Property> getCheckedProperties();
-
-	/**
-	 * Returns the value of the '<em><b>Owned Guard Variables</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.qvtd.pivot.qvtimperative.GuardVariable}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Owned Guard Variables</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Owned Guard Variables</em>' containment reference list.
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getImperativeDomain_OwnedGuardVariables()
-	 * @generated
-	 */
-	EList<GuardVariable> getOwnedGuardVariables();
 } // ImperativeDomain

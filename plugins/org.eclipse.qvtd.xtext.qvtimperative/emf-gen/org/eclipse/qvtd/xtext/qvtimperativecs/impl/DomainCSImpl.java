@@ -29,6 +29,7 @@ import org.eclipse.ocl.xtext.basecs.PathNameCS;
 import org.eclipse.ocl.xtext.basecs.impl.NamedElementCSImpl;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DomainCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.GuardVariableCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage;
@@ -46,7 +47,6 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.DomainCSImpl#isIsCheck <em>Is Check</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.DomainCSImpl#isIsEnforce <em>Is Enforce</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.DomainCSImpl#getCheckedProperties <em>Checked Properties</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.DomainCSImpl#getOwnedGuardVariables <em>Owned Guard Variables</em>}</li>
  * </ul>
  *
  * @generated
@@ -60,7 +60,7 @@ public class DomainCSImpl extends NamedElementCSImpl implements DomainCS {
 	 * @generated
 	 * @ordered
 	 */
-	protected TypedModel direction;
+	protected ImperativeTypedModel direction;
 
 	/**
 	 * The default value of the '{@link #isIsCheck() <em>Is Check</em>}' attribute.
@@ -113,16 +113,6 @@ public class DomainCSImpl extends NamedElementCSImpl implements DomainCS {
 	protected EList<PathNameCS> checkedProperties;
 
 	/**
-	 * The cached value of the '{@link #getOwnedGuardVariables() <em>Owned Guard Variables</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getOwnedGuardVariables()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<GuardVariableCS> ownedGuardVariables;
-
-	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -147,10 +137,10 @@ public class DomainCSImpl extends NamedElementCSImpl implements DomainCS {
 	 * @generated
 	 */
 	@Override
-	public TypedModel getDirection() {
+	public ImperativeTypedModel getDirection() {
 		if (direction != null && direction.eIsProxy()) {
 			InternalEObject oldDirection = (InternalEObject)direction;
-			direction = (TypedModel)eResolveProxy(oldDirection);
+			direction = (ImperativeTypedModel)eResolveProxy(oldDirection);
 			if (direction != oldDirection) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTimperativeCSPackage.DOMAIN_CS__DIRECTION, oldDirection, direction));
@@ -164,7 +154,7 @@ public class DomainCSImpl extends NamedElementCSImpl implements DomainCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TypedModel basicGetDirection() {
+	public ImperativeTypedModel basicGetDirection() {
 		return direction;
 	}
 
@@ -173,9 +163,8 @@ public class DomainCSImpl extends NamedElementCSImpl implements DomainCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public void setDirection(TypedModel newDirection) {
-		TypedModel oldDirection = direction;
+	public void setDirection(ImperativeTypedModel newDirection) {
+		ImperativeTypedModel oldDirection = direction;
 		direction = newDirection;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.DOMAIN_CS__DIRECTION, oldDirection, direction));
@@ -241,19 +230,6 @@ public class DomainCSImpl extends NamedElementCSImpl implements DomainCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public EList<GuardVariableCS> getOwnedGuardVariables() {
-		if (ownedGuardVariables == null) {
-			ownedGuardVariables = new EObjectContainmentEList<GuardVariableCS>(GuardVariableCS.class, this, QVTimperativeCSPackage.DOMAIN_CS__OWNED_GUARD_VARIABLES);
-		}
-		return ownedGuardVariables;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public String toString() {
 		return super.toString();
 	}
@@ -268,8 +244,6 @@ public class DomainCSImpl extends NamedElementCSImpl implements DomainCS {
 		switch (featureID) {
 			case QVTimperativeCSPackage.DOMAIN_CS__CHECKED_PROPERTIES:
 				return ((InternalEList<?>)getCheckedProperties()).basicRemove(otherEnd, msgs);
-			case QVTimperativeCSPackage.DOMAIN_CS__OWNED_GUARD_VARIABLES:
-				return ((InternalEList<?>)getOwnedGuardVariables()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -291,8 +265,6 @@ public class DomainCSImpl extends NamedElementCSImpl implements DomainCS {
 				return isIsEnforce();
 			case QVTimperativeCSPackage.DOMAIN_CS__CHECKED_PROPERTIES:
 				return getCheckedProperties();
-			case QVTimperativeCSPackage.DOMAIN_CS__OWNED_GUARD_VARIABLES:
-				return getOwnedGuardVariables();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -307,7 +279,7 @@ public class DomainCSImpl extends NamedElementCSImpl implements DomainCS {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case QVTimperativeCSPackage.DOMAIN_CS__DIRECTION:
-				setDirection((TypedModel)newValue);
+				setDirection((ImperativeTypedModel)newValue);
 				return;
 			case QVTimperativeCSPackage.DOMAIN_CS__IS_CHECK:
 				setIsCheck((Boolean)newValue);
@@ -318,10 +290,6 @@ public class DomainCSImpl extends NamedElementCSImpl implements DomainCS {
 			case QVTimperativeCSPackage.DOMAIN_CS__CHECKED_PROPERTIES:
 				getCheckedProperties().clear();
 				getCheckedProperties().addAll((Collection<? extends PathNameCS>)newValue);
-				return;
-			case QVTimperativeCSPackage.DOMAIN_CS__OWNED_GUARD_VARIABLES:
-				getOwnedGuardVariables().clear();
-				getOwnedGuardVariables().addAll((Collection<? extends GuardVariableCS>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -336,7 +304,7 @@ public class DomainCSImpl extends NamedElementCSImpl implements DomainCS {
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case QVTimperativeCSPackage.DOMAIN_CS__DIRECTION:
-				setDirection((TypedModel)null);
+				setDirection((ImperativeTypedModel)null);
 				return;
 			case QVTimperativeCSPackage.DOMAIN_CS__IS_CHECK:
 				setIsCheck(IS_CHECK_EDEFAULT);
@@ -346,9 +314,6 @@ public class DomainCSImpl extends NamedElementCSImpl implements DomainCS {
 				return;
 			case QVTimperativeCSPackage.DOMAIN_CS__CHECKED_PROPERTIES:
 				getCheckedProperties().clear();
-				return;
-			case QVTimperativeCSPackage.DOMAIN_CS__OWNED_GUARD_VARIABLES:
-				getOwnedGuardVariables().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -370,8 +335,6 @@ public class DomainCSImpl extends NamedElementCSImpl implements DomainCS {
 				return isEnforce != IS_ENFORCE_EDEFAULT;
 			case QVTimperativeCSPackage.DOMAIN_CS__CHECKED_PROPERTIES:
 				return checkedProperties != null && !checkedProperties.isEmpty();
-			case QVTimperativeCSPackage.DOMAIN_CS__OWNED_GUARD_VARIABLES:
-				return ownedGuardVariables != null && !ownedGuardVariables.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

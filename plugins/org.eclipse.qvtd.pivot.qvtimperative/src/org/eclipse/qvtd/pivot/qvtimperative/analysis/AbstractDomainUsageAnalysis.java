@@ -246,7 +246,7 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTim
 	}
 
 	protected void setBoundVariablesUsages(@NonNull Rule rule) {
-		DomainUsage primitiveUsage = getRootAnalysis().getPrimitiveUsage();
+		/*		DomainUsage primitiveUsage = getRootAnalysis().getPrimitiveUsage();
 		for (Domain domain : rule.getDomain()) {
 			if (domain instanceof ImperativeDomain) {
 				DomainUsage usage = visit(domain.getTypedModel());
@@ -261,7 +261,7 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTim
 					}
 				}
 			}
-		}
+		} */
 		if (rule instanceof Mapping) {
 			DomainUsage middleUsage = getRootAnalysis().getMiddleUsage();
 			for (GuardVariable variable : ((Mapping)rule).getOwnedGuardVariables()) {

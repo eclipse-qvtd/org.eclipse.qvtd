@@ -47,11 +47,11 @@ public interface GuardVariable extends VariableDeclaration {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Referred Typed Model</em>' reference.
-	 * @see #setReferredTypedModel(TypedModel)
+	 * @see #setReferredTypedModel(ImperativeTypedModel)
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getGuardVariable_ReferredTypedModel()
 	 * @generated
 	 */
-	TypedModel getReferredTypedModel();
+	ImperativeTypedModel getReferredTypedModel();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtimperative.GuardVariable#getReferredTypedModel <em>Referred Typed Model</em>}' reference.
@@ -61,6 +61,6 @@ public interface GuardVariable extends VariableDeclaration {
 	 * @see #getReferredTypedModel()
 	 * @generated
 	 */
-	void setReferredTypedModel(TypedModel value);
+	void setReferredTypedModel(ImperativeTypedModel value);
 
 } // GuardVariable

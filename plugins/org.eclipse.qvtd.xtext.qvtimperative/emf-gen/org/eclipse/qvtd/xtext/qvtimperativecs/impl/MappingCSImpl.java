@@ -25,6 +25,7 @@ import org.eclipse.ocl.xtext.basecs.PathNameCS;
 import org.eclipse.ocl.xtext.basecs.impl.NamedElementCSImpl;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DomainCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.GuardVariableCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.InoutVariableCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage;
@@ -41,8 +42,9 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCSImpl#getOwnedDomains <em>Owned Domains</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCSImpl#getOwnedInPathName <em>Owned In Path Name</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCSImpl#getOwnedStatements <em>Owned Statements</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCSImpl#getOwnedGuardVariables <em>Owned Guard Variables</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCSImpl#getOwnedInoutVariables <em>Owned Inout Variables</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCSImpl#getOwnedStatements <em>Owned Statements</em>}</li>
  * </ul>
  *
  * @generated
@@ -67,14 +69,14 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 	 */
 	protected PathNameCS ownedInPathName;
 	/**
-	 * The cached value of the '{@link #getOwnedStatements() <em>Owned Statements</em>}' containment reference list.
+	 * The cached value of the '{@link #getOwnedGuardVariables() <em>Owned Guard Variables</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getOwnedStatements()
+	 * @see #getOwnedGuardVariables()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<StatementCS> ownedStatements;
+	protected EList<GuardVariableCS> ownedGuardVariables;
 	/**
 	 * The cached value of the '{@link #getOwnedInoutVariables() <em>Owned Inout Variables</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -84,6 +86,15 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 	 * @ordered
 	 */
 	protected EList<InoutVariableCS> ownedInoutVariables;
+	/**
+	 * The cached value of the '{@link #getOwnedStatements() <em>Owned Statements</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOwnedStatements()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<StatementCS> ownedStatements;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -166,6 +177,18 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<GuardVariableCS> getOwnedGuardVariables() {
+		if (ownedGuardVariables == null) {
+			ownedGuardVariables = new EObjectContainmentEList<GuardVariableCS>(GuardVariableCS.class, this, QVTimperativeCSPackage.MAPPING_CS__OWNED_GUARD_VARIABLES);
+		}
+		return ownedGuardVariables;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public EList<StatementCS> getOwnedStatements() {
 		if (ownedStatements == null) {
@@ -199,10 +222,12 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 				return ((InternalEList<?>)getOwnedDomains()).basicRemove(otherEnd, msgs);
 			case QVTimperativeCSPackage.MAPPING_CS__OWNED_IN_PATH_NAME:
 				return basicSetOwnedInPathName(null, msgs);
-			case QVTimperativeCSPackage.MAPPING_CS__OWNED_STATEMENTS:
-				return ((InternalEList<?>)getOwnedStatements()).basicRemove(otherEnd, msgs);
+			case QVTimperativeCSPackage.MAPPING_CS__OWNED_GUARD_VARIABLES:
+				return ((InternalEList<?>)getOwnedGuardVariables()).basicRemove(otherEnd, msgs);
 			case QVTimperativeCSPackage.MAPPING_CS__OWNED_INOUT_VARIABLES:
 				return ((InternalEList<?>)getOwnedInoutVariables()).basicRemove(otherEnd, msgs);
+			case QVTimperativeCSPackage.MAPPING_CS__OWNED_STATEMENTS:
+				return ((InternalEList<?>)getOwnedStatements()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -219,10 +244,12 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 				return getOwnedDomains();
 			case QVTimperativeCSPackage.MAPPING_CS__OWNED_IN_PATH_NAME:
 				return getOwnedInPathName();
-			case QVTimperativeCSPackage.MAPPING_CS__OWNED_STATEMENTS:
-				return getOwnedStatements();
+			case QVTimperativeCSPackage.MAPPING_CS__OWNED_GUARD_VARIABLES:
+				return getOwnedGuardVariables();
 			case QVTimperativeCSPackage.MAPPING_CS__OWNED_INOUT_VARIABLES:
 				return getOwnedInoutVariables();
+			case QVTimperativeCSPackage.MAPPING_CS__OWNED_STATEMENTS:
+				return getOwnedStatements();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -243,13 +270,17 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 			case QVTimperativeCSPackage.MAPPING_CS__OWNED_IN_PATH_NAME:
 				setOwnedInPathName((PathNameCS)newValue);
 				return;
-			case QVTimperativeCSPackage.MAPPING_CS__OWNED_STATEMENTS:
-				getOwnedStatements().clear();
-				getOwnedStatements().addAll((Collection<? extends StatementCS>)newValue);
+			case QVTimperativeCSPackage.MAPPING_CS__OWNED_GUARD_VARIABLES:
+				getOwnedGuardVariables().clear();
+				getOwnedGuardVariables().addAll((Collection<? extends GuardVariableCS>)newValue);
 				return;
 			case QVTimperativeCSPackage.MAPPING_CS__OWNED_INOUT_VARIABLES:
 				getOwnedInoutVariables().clear();
 				getOwnedInoutVariables().addAll((Collection<? extends InoutVariableCS>)newValue);
+				return;
+			case QVTimperativeCSPackage.MAPPING_CS__OWNED_STATEMENTS:
+				getOwnedStatements().clear();
+				getOwnedStatements().addAll((Collection<? extends StatementCS>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -269,11 +300,14 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 			case QVTimperativeCSPackage.MAPPING_CS__OWNED_IN_PATH_NAME:
 				setOwnedInPathName((PathNameCS)null);
 				return;
-			case QVTimperativeCSPackage.MAPPING_CS__OWNED_STATEMENTS:
-				getOwnedStatements().clear();
+			case QVTimperativeCSPackage.MAPPING_CS__OWNED_GUARD_VARIABLES:
+				getOwnedGuardVariables().clear();
 				return;
 			case QVTimperativeCSPackage.MAPPING_CS__OWNED_INOUT_VARIABLES:
 				getOwnedInoutVariables().clear();
+				return;
+			case QVTimperativeCSPackage.MAPPING_CS__OWNED_STATEMENTS:
+				getOwnedStatements().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -291,10 +325,12 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 				return ownedDomains != null && !ownedDomains.isEmpty();
 			case QVTimperativeCSPackage.MAPPING_CS__OWNED_IN_PATH_NAME:
 				return ownedInPathName != null;
-			case QVTimperativeCSPackage.MAPPING_CS__OWNED_STATEMENTS:
-				return ownedStatements != null && !ownedStatements.isEmpty();
+			case QVTimperativeCSPackage.MAPPING_CS__OWNED_GUARD_VARIABLES:
+				return ownedGuardVariables != null && !ownedGuardVariables.isEmpty();
 			case QVTimperativeCSPackage.MAPPING_CS__OWNED_INOUT_VARIABLES:
 				return ownedInoutVariables != null && !ownedInoutVariables.isEmpty();
+			case QVTimperativeCSPackage.MAPPING_CS__OWNED_STATEMENTS:
+				return ownedStatements != null && !ownedStatements.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

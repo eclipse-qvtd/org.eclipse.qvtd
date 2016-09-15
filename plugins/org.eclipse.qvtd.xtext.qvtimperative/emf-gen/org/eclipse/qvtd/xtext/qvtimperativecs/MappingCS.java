@@ -25,8 +25,9 @@ import org.eclipse.ocl.xtext.basecs.PathNameCS;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS#getOwnedDomains <em>Owned Domains</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS#getOwnedInPathName <em>Owned In Path Name</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS#getOwnedStatements <em>Owned Statements</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS#getOwnedGuardVariables <em>Owned Guard Variables</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS#getOwnedInoutVariables <em>Owned Inout Variables</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS#getOwnedStatements <em>Owned Statements</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getMappingCS()
@@ -75,6 +76,22 @@ public interface MappingCS extends NamedElementCS {
 	 * @generated
 	 */
 	void setOwnedInPathName(PathNameCS value);
+
+	/**
+	 * Returns the value of the '<em><b>Owned Guard Variables</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.qvtd.xtext.qvtimperativecs.GuardVariableCS}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Owned Guard Variables</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Owned Guard Variables</em>' containment reference list.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getMappingCS_OwnedGuardVariables()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<GuardVariableCS> getOwnedGuardVariables();
 
 	/**
 	 * Returns the value of the '<em><b>Owned Statements</b></em>' containment reference list.

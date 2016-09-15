@@ -1,13 +1,14 @@
 import ecore : 'http://www.eclipse.org/emf/2002/Ecore';
 
 transformation Dependencies {
-	source imports ecore;
-	target imports ecore;
+	check source imports ecore;
+	enforce target imports ecore;
 	middle imports ecore;
 }
 
 map dependenciesLM in Dependencies {
-	check source { check ecore::EPackage::eSubpackages } (in:source dummy:EPackage;) {}
+	check source { check ecore::EPackage::eSubpackages } () {}
+    in:source dummy:EPackage;
     call dependenciesMR {
     	binaryPrecedence := (1 + 2) * (3*5 + 4);
     	unaryPrecedence := -1 * - -1;
@@ -15,5 +16,6 @@ map dependenciesLM in Dependencies {
 }
 
 map dependenciesMR in Dependencies /*uses ecore::EPackage, ocl::Integer*/ {
-	check middle(in:middle binaryPrecedence:OclAny; in:middle unaryPrecedence:OclAny;) { }
+	in:middle binaryPrecedence:OclAny;
+	in:middle unaryPrecedence:OclAny;
 }

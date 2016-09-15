@@ -740,22 +740,13 @@ public interface QVTimperativePackage extends EPackage {
 	int IMPERATIVE_DOMAIN__CHECKED_PROPERTIES = QVTbasePackage.DOMAIN_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Owned Guard Variables</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IMPERATIVE_DOMAIN__OWNED_GUARD_VARIABLES = QVTbasePackage.DOMAIN_FEATURE_COUNT + 1;
-
-	/**
 	 * The number of structural features of the '<em>Imperative Domain</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IMPERATIVE_DOMAIN_FEATURE_COUNT = QVTbasePackage.DOMAIN_FEATURE_COUNT + 2;
+	int IMPERATIVE_DOMAIN_FEATURE_COUNT = QVTbasePackage.DOMAIN_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -2223,17 +2214,6 @@ public interface QVTimperativePackage extends EPackage {
 	EReference getImperativeDomain_CheckedProperties();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain#getOwnedGuardVariables <em>Owned Guard Variables</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Owned Guard Variables</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain#getOwnedGuardVariables()
-	 * @see #getImperativeDomain()
-	 * @generated
-	 */
-	EReference getImperativeDomain_OwnedGuardVariables();
-
-	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel <em>Imperative Model</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2799,14 +2779,6 @@ public interface QVTimperativePackage extends EPackage {
 		 * @generated
 		 */
 		EReference IMPERATIVE_DOMAIN__CHECKED_PROPERTIES = eINSTANCE.getImperativeDomain_CheckedProperties();
-
-		/**
-		 * The meta object literal for the '<em><b>Owned Guard Variables</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference IMPERATIVE_DOMAIN__OWNED_GUARD_VARIABLES = eINSTANCE.getImperativeDomain_OwnedGuardVariables();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.ImperativeModelImpl <em>Imperative Model</em>}' class.

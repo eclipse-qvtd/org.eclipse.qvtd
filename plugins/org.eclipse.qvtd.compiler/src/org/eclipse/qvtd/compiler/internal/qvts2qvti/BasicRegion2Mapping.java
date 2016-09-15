@@ -86,6 +86,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.CheckStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
@@ -562,7 +563,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 	/**
 	 * Mapping from the TypedModel to its ImperativeDomain.
 	 */
-	private final @NonNull Map<@NonNull TypedModel, @NonNull ImperativeDomain> typedModel2domain = new HashMap<>();
+	private final @NonNull Map<@NonNull ImperativeTypedModel, @NonNull ImperativeDomain> typedModel2domain = new HashMap<>();
 
 	private final @NonNull ExpressionCreator expressionCreator;
 	private final @NonNull ExpressionCreator inlineExpressionCreator;
@@ -731,8 +732,8 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 	 * Create the domains and guard/bottom patterns.
 	 */
 	private void createEmptyDomainsAndPatterns() {
-		Set<@NonNull TypedModel> checkableTypedModels = new HashSet<>();
-		Set<@NonNull TypedModel> enforceableTypedModels = new HashSet<>();
+		Set<@NonNull ImperativeTypedModel> checkableTypedModels = new HashSet<>();
+		Set<@NonNull ImperativeTypedModel> enforceableTypedModels = new HashSet<>();
 		for (@NonNull Node node : region.getNodes()) {
 			ClassDatumAnalysis classDatumAnalysis = node.getClassDatumAnalysis();
 			Type type = classDatumAnalysis.getClassDatum().getType();
@@ -740,19 +741,19 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 				DomainUsage domainUsage = classDatumAnalysis.getDomainUsage();
 				if (domainUsage.isInput()) {		// EObject is $primitive$
 					for (@NonNull TypedModel typedModel : domainUsage.getTypedModels()) {
-						TypedModel qvtiTypedModel = visitor.getQVTiTypedModel(typedModel);
+						ImperativeTypedModel qvtiTypedModel = visitor.getQVTiTypedModel(typedModel);
 						assert qvtiTypedModel != null;
 						checkableTypedModels.add(qvtiTypedModel);
 					}
 				}
 				else if (domainUsage.isMiddle()) {
-					TypedModel qvtiTypedModel = visitor.getQVTiTypedModel(null);
+					ImperativeTypedModel qvtiTypedModel = visitor.getQVTiTypedModel(null);
 					assert qvtiTypedModel != null;
 					enforceableTypedModels.add(qvtiTypedModel);
 				}
 				else if (domainUsage.isOutput()) {		// EObject is $primitive$
 					for (@NonNull TypedModel typedModel : domainUsage.getTypedModels()) {
-						TypedModel qvtiTypedModel = visitor.getQVTiTypedModel(typedModel);
+						ImperativeTypedModel qvtiTypedModel = visitor.getQVTiTypedModel(typedModel);
 						assert qvtiTypedModel != null;
 						enforceableTypedModels.add(qvtiTypedModel);
 					}
@@ -760,14 +761,14 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			}
 		}
 		checkableTypedModels.removeAll(enforceableTypedModels);
-		for (@NonNull TypedModel qvtiTypedModel : checkableTypedModels) {
+		for (@NonNull ImperativeTypedModel qvtiTypedModel : checkableTypedModels) {
 			ImperativeDomain domain = QVTimperativeUtil.createImperativeDomain(qvtiTypedModel);
 			domain.setIsCheckable(true);
 			mapping.getDomain().add(domain);
 			ImperativeDomain oldDomain = typedModel2domain.put(qvtiTypedModel, domain);
 			assert oldDomain == null;
 		}
-		for (@NonNull TypedModel qvtiTypedModel : enforceableTypedModels) {
+		for (@NonNull ImperativeTypedModel qvtiTypedModel : enforceableTypedModels) {
 			ImperativeDomain domain = QVTimperativeUtil.createImperativeDomain(qvtiTypedModel);
 			domain.setIsEnforceable(true);
 			mapping.getDomain().add(domain);
@@ -820,9 +821,9 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		ClassDatumAnalysis classDatumAnalysis = guardNode.getClassDatumAnalysis();
 		ImperativeDomain area = getArea(classDatumAnalysis);
 		Type variableType = guardNode.getCompleteClass().getPrimaryClass();
-		TypedModel iTypedModel = ClassUtil.nonNullState(visitor.getQVTiTypedModel(classDatumAnalysis.getTypedModel()));
+		ImperativeTypedModel iTypedModel = ClassUtil.nonNullState(visitor.getQVTiTypedModel(classDatumAnalysis.getTypedModel()));
 		GuardVariable guardVariable = helper.createGuardVariable(getSafeName(guardNode), iTypedModel, variableType, true);
-		area.getOwnedGuardVariables().add(guardVariable);
+		mapping.getOwnedGuardVariables().add(guardVariable);
 		VariableDeclaration oldVariable = node2variable.put(guardNode, guardVariable);
 		assert oldVariable == null;
 		return guardVariable;
@@ -1102,14 +1103,16 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 	private void createPollingDependencies() {
 		DomainUsage anyUsage = region.getSchedulerConstants().getDomainAnalysis().getAnyUsage();
 		for (@NonNull TypedModel qvtpTypedModel : anyUsage.getTypedModels()) {
-			TypedModel qvtiTypedModel = visitor.getQVTiTypedModel(qvtpTypedModel);
-			ImperativeDomain domain = typedModel2domain.get(qvtiTypedModel);
-			if (domain != null) {
-				Iterable<@NonNull NavigableEdge> checkedEdges = region.getCheckedEdges(qvtpTypedModel);
-				if (checkedEdges != null) {
-					List<Property> checkedProperties = domain.getCheckedProperties();
-					for (NavigableEdge checkedEdge : checkedEdges) {
-						checkedProperties.add(checkedEdge.getProperty());
+			ImperativeTypedModel qvtiTypedModel = visitor.getQVTiTypedModel(qvtpTypedModel);
+			if (qvtiTypedModel != null) {
+				ImperativeDomain domain = typedModel2domain.get(qvtiTypedModel);
+				if (domain != null) {
+					Iterable<@NonNull NavigableEdge> checkedEdges = region.getCheckedEdges(qvtpTypedModel);
+					if (checkedEdges != null) {
+						List<Property> checkedProperties = domain.getCheckedProperties();
+						for (NavigableEdge checkedEdge : checkedEdges) {
+							checkedProperties.add(checkedEdge.getProperty());
+						}
 					}
 				}
 			}
@@ -1187,7 +1190,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 				}
 				ClassDatumAnalysis classDatumAnalysis = newNode.getClassDatumAnalysis();
 				TypedModel pTypedModel = classDatumAnalysis.getTypedModel();
-				TypedModel iTypedModel = ClassUtil.nonNullState(visitor.getQVTiTypedModel(pTypedModel));
+				ImperativeTypedModel iTypedModel = ClassUtil.nonNullState(visitor.getQVTiTypedModel(pTypedModel));
 				NewStatement newStatement = QVTimperativeUtil.createNewStatement(getSafeName(newNode), iTypedModel, classDatumAnalysis.getCompleteClass().getPrimaryClass());
 				newStatement.setOwnedInit(constructor);
 				mapping.getOwnedStatements().add(newStatement);

@@ -46,13 +46,13 @@ import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbaseFactory;
-import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtbase.analysis.DomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
@@ -415,20 +415,8 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 			int bitMask = 1 << nextBit;
 			@NonNull DomainUsageConstant typedModelUsage = getConstantUsage(bitMask);
 			validUsages.put(bitMask, typedModelUsage);
-			boolean isEnforceable = false;
-			boolean isUnenforceable = false;
-			for (Rule rule : transformation.getRule()) {
-				for (Domain domain : rule.getDomain()) {
-					if (domain.getTypedModel() == typedModel) {
-						if (domain.isIsEnforceable()) {
-							isEnforceable = true;
-						}
-						else {
-							isUnenforceable = true;
-						}
-					}
-				}
-			}
+			boolean isEnforceable = ((ImperativeTypedModel)typedModel).isIsEnforced();
+			boolean isUnenforceable = !isEnforceable;//((ImperativeTypedModel)typedModel).isIsChecked();
 			if (isEnforceable) {
 				enforceableMask |= bitMask;
 			}

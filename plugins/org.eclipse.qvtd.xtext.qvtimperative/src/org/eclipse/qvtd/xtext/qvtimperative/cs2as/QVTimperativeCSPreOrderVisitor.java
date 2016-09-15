@@ -78,7 +78,6 @@ public class QVTimperativeCSPreOrderVisitor extends AbstractQVTimperativeCSPreOr
 			GuardVariable pivotElement = PivotUtil.getPivot(GuardVariable.class, csElement);
 			if (pivotElement != null) {
 				context.refreshRequiredType(pivotElement, csElement);
-				pivotElement.setReferredTypedModel(csElement.getReferredTypedModel());
 			}
 			return null;
 		}

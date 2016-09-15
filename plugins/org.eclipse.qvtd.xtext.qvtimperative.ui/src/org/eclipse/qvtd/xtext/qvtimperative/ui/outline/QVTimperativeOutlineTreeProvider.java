@@ -16,7 +16,6 @@ import org.eclipse.ocl.xtext.basecs.PackageCS;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardVariable;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
@@ -39,12 +38,6 @@ import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
  */
 public class QVTimperativeOutlineTreeProvider extends QVTbaseOutlineTreeProvider
 {
-	protected void _createChildren(IOutlineNode parentNode, ImperativeDomain ele) {
-		for (GuardVariable asVariable : ele.getOwnedGuardVariables()) {
-			createNode(parentNode, asVariable);
-		}
-	}
-
 	protected void _createChildren(IOutlineNode parentNode, Mapping ele) {
 		for (GuardVariable asVariable : ele.getOwnedGuardVariables()) {
 			createNode(parentNode, asVariable);
