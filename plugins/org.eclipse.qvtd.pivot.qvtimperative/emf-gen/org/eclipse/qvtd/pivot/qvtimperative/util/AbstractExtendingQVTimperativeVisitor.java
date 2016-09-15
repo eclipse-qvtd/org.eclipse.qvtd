@@ -40,6 +40,11 @@ public abstract class AbstractExtendingQVTimperativeVisitor<R, C>
 	}	
 
 	@Override
+	public R visitAccessStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull AccessStatement object) {
+		return visitVariableStatement(object);
+	}
+
+	@Override
 	public R visitAddStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull AddStatement object) {
 		return visitMappingStatement(object);
 	}

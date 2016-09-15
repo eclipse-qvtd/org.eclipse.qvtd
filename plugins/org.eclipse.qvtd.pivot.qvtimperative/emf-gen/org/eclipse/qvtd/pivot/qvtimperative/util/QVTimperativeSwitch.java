@@ -106,6 +106,20 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
+			case QVTimperativePackage.ACCESS_STATEMENT: {
+				AccessStatement accessStatement = (AccessStatement)theEObject;
+				T result = caseAccessStatement(accessStatement);
+				if (result == null) result = caseVariableStatement(accessStatement);
+				if (result == null) result = caseVariableDeclaration(accessStatement);
+				if (result == null) result = caseStatement(accessStatement);
+				if (result == null) result = caseTypedElement(accessStatement);
+				if (result == null) result = caseNamedElement(accessStatement);
+				if (result == null) result = caseElement(accessStatement);
+				if (result == null) result = caseNameable(accessStatement);
+				if (result == null) result = caseVisitable(accessStatement);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case QVTimperativePackage.ADD_STATEMENT: {
 				AddStatement addStatement = (AddStatement)theEObject;
 				T result = caseAddStatement(addStatement);
@@ -370,6 +384,21 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 			}
 			default: return defaultCase(theEObject);
 		}
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Access Statement</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Access Statement</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAccessStatement(AccessStatement object) {
+		return null;
 	}
 
 	/**

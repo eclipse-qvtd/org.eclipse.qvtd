@@ -107,6 +107,10 @@ public class QVTimperativeAdapterFactory extends AdapterFactoryImpl {
 	protected QVTimperativeSwitch<@Nullable Adapter> modelSwitch =
 			new QVTimperativeSwitch<@Nullable Adapter>() {
 			@Override
+			public Adapter caseAccessStatement(AccessStatement object) {
+				return createAccessStatementAdapter();
+			}
+			@Override
 			public Adapter caseAddStatement(AddStatement object) {
 				return createAddStatementAdapter();
 			}
@@ -265,6 +269,20 @@ public class QVTimperativeAdapterFactory extends AdapterFactoryImpl {
 		return modelSwitch.doSwitch((EObject)target);
 	}
 
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtimperative.AccessStatement <em>Access Statement</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.AccessStatement
+	 * @generated
+	 */
+	public Adapter createAccessStatementAdapter() {
+		return null;
+	}
 
 	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtimperative.AddStatement <em>Add Statement</em>}'.

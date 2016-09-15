@@ -44,6 +44,11 @@ public abstract class AbstractQVTimperativeCSLeft2RightVisitor
 	}
 
 	@Override
+	public @Nullable Element visitAccessStatementCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull AccessStatementCS csElement) {
+		return visitTypedElementCS(csElement);
+	}
+
+	@Override
 	public @Nullable Element visitAddStatementCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull AddStatementCS csElement) {
 		return visitMappingStatementCS(csElement);
 	}

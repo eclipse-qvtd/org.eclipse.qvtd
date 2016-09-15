@@ -47,6 +47,11 @@ public abstract class AbstractQVTimperativeTemplateParameterSubstitutionVisitor
 	}	
 
 	@Override
+	public @Nullable Object visitAccessStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull AccessStatement object) {
+		return visitVariableStatement(object);
+	}
+
+	@Override
 	public @Nullable Object visitAddStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull AddStatement object) {
 		return visitMappingStatement(object);
 	}

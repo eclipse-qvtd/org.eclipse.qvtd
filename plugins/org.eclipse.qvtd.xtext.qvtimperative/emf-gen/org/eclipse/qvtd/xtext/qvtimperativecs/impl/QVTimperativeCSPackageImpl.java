@@ -21,6 +21,7 @@ import org.eclipse.ocl.xtext.essentialoclcs.EssentialOCLCSPackage;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.xtext.qvtbasecs.QVTbaseCSPackage;
+import org.eclipse.qvtd.xtext.qvtimperativecs.AccessStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.AddStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.CheckStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS;
@@ -53,6 +54,13 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.TransformationCS;
  * @generated
  */
 public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimperativeCSPackage {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass accessStatementCSEClass = null;
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -272,6 +280,33 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(QVTimperativeCSPackage.eNS_URI, theQVTimperativeCSPackage);
 		return theQVTimperativeCSPackage;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getAccessStatementCS() {
+		return accessStatementCSEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getAccessStatementCS_SourceProperty() {
+		return (EReference)accessStatementCSEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getAccessStatementCS_SourceVariable() {
+		return (EReference)accessStatementCSEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1027,6 +1062,10 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		isCreated = true;
 
 		// Create classes and their features
+		accessStatementCSEClass = createEClass(ACCESS_STATEMENT_CS);
+		createEReference(accessStatementCSEClass, ACCESS_STATEMENT_CS__SOURCE_PROPERTY);
+		createEReference(accessStatementCSEClass, ACCESS_STATEMENT_CS__SOURCE_VARIABLE);
+
 		addStatementCSEClass = createEClass(ADD_STATEMENT_CS);
 		createEReference(addStatementCSEClass, ADD_STATEMENT_CS__OWNED_EXPRESSION);
 		createEReference(addStatementCSEClass, ADD_STATEMENT_CS__TARGET_VARIABLE);
@@ -1148,10 +1187,10 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		setNsURI(eNS_URI);
 
 		// Obtain other dependent packages
-		EssentialOCLCSPackage theEssentialOCLCSPackage = (EssentialOCLCSPackage)EPackage.Registry.INSTANCE.getEPackage(EssentialOCLCSPackage.eNS_URI);
-		QVTimperativePackage theQVTimperativePackage = (QVTimperativePackage)EPackage.Registry.INSTANCE.getEPackage(QVTimperativePackage.eNS_URI);
 		BaseCSPackage theBaseCSPackage = (BaseCSPackage)EPackage.Registry.INSTANCE.getEPackage(BaseCSPackage.eNS_URI);
 		PivotPackage thePivotPackage = (PivotPackage)EPackage.Registry.INSTANCE.getEPackage(PivotPackage.eNS_URI);
+		EssentialOCLCSPackage theEssentialOCLCSPackage = (EssentialOCLCSPackage)EPackage.Registry.INSTANCE.getEPackage(EssentialOCLCSPackage.eNS_URI);
+		QVTimperativePackage theQVTimperativePackage = (QVTimperativePackage)EPackage.Registry.INSTANCE.getEPackage(QVTimperativePackage.eNS_URI);
 		QVTbasePackage theQVTbasePackage = (QVTbasePackage)EPackage.Registry.INSTANCE.getEPackage(QVTbasePackage.eNS_URI);
 		QVTbaseCSPackage theQVTbaseCSPackage = (QVTbaseCSPackage)EPackage.Registry.INSTANCE.getEPackage(QVTbaseCSPackage.eNS_URI);
 
@@ -1160,6 +1199,8 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
+		accessStatementCSEClass.getESuperTypes().add(theBaseCSPackage.getTypedElementCS());
+		accessStatementCSEClass.getESuperTypes().add(this.getStatementCS());
 		addStatementCSEClass.getESuperTypes().add(this.getMappingStatementCS());
 		checkStatementCSEClass.getESuperTypes().add(this.getStatementCS());
 		declareStatementCSEClass.getESuperTypes().add(theBaseCSPackage.getTypedElementCS());
@@ -1187,6 +1228,10 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		transformationCSEClass.getESuperTypes().add(theQVTbaseCSPackage.getAbstractTransformationCS());
 
 		// Initialize classes and features; add operations and parameters
+		initEClass(accessStatementCSEClass, AccessStatementCS.class, "AccessStatementCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getAccessStatementCS_SourceProperty(), thePivotPackage.getProperty(), null, "sourceProperty", null, 1, 1, AccessStatementCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAccessStatementCS_SourceVariable(), thePivotPackage.getVariableDeclaration(), null, "sourceVariable", null, 1, 1, AccessStatementCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		initEClass(addStatementCSEClass, AddStatementCS.class, "AddStatementCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAddStatementCS_OwnedExpression(), theEssentialOCLCSPackage.getExpCS(), null, "ownedExpression", null, 0, 1, AddStatementCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAddStatementCS_TargetVariable(), theQVTimperativePackage.getConnectionVariable(), null, "targetVariable", null, 1, 1, AddStatementCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

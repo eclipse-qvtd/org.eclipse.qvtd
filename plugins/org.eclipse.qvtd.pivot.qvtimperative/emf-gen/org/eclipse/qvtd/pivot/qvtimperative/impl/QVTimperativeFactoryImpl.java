@@ -79,6 +79,7 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
+			case QVTimperativePackage.ACCESS_STATEMENT: return createAccessStatement();
 			case QVTimperativePackage.ADD_STATEMENT: return createAddStatement();
 			case QVTimperativePackage.CHECK_STATEMENT: return createCheckStatement();
 			case QVTimperativePackage.DECLARE_STATEMENT: return createDeclareStatement();
@@ -100,6 +101,16 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public AccessStatement createAccessStatement() {
+		AccessStatementImpl accessStatement = new AccessStatementImpl();
+		return accessStatement;
 	}
 
 	/**

@@ -40,6 +40,11 @@ public abstract class AbstractNullQVTimperativeVisitor<@Nullable R, C>
 	}	
 
 	@Override
+	public R visitAccessStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull AccessStatement object) {
+		return null;
+	}
+
+	@Override
 	public R visitAddStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull AddStatement object) {
 		return null;
 	}

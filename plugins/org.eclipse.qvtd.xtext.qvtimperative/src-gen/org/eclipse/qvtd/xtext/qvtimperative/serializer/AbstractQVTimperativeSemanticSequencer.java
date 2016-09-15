@@ -79,6 +79,7 @@ import org.eclipse.qvtd.xtext.qvtbase.serializer.QVTbaseSemanticSequencer;
 import org.eclipse.qvtd.xtext.qvtbasecs.QVTbaseCSPackage;
 import org.eclipse.qvtd.xtext.qvtbasecs.QualifiedPackageCS;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess;
+import org.eclipse.qvtd.xtext.qvtimperativecs.AccessStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.AddStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.CheckStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DeclareStatementCS;
@@ -445,6 +446,9 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 			}
 		else if (epackage == QVTimperativeCSPackage.eINSTANCE)
 			switch (semanticObject.eClass().getClassifierID()) {
+			case QVTimperativeCSPackage.ACCESS_STATEMENT_CS:
+				sequence_AccessStatementCS(context, (AccessStatementCS) semanticObject); 
+				return; 
 			case QVTimperativeCSPackage.ADD_STATEMENT_CS:
 				sequence_AddStatementCS(context, (AddStatementCS) semanticObject); 
 				return; 
@@ -519,9 +523,21 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 	
 	/**
 	 * Contexts:
+	 *     AccessStatementCS returns AccessStatementCS
+	 *     GuardStatementCS returns AccessStatementCS
+	 *
+	 * Constraint:
+	 *     (name=UnrestrictedName ownedType=TypeExpCS? sourceVariable=[VariableDeclaration|UnrestrictedName] sourceProperty=[Property|UnrestrictedName])
+	 */
+	protected void sequence_AccessStatementCS(ISerializationContext context, AccessStatementCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     AddStatementCS returns AddStatementCS
 	 *     ControlStatementCS returns AddStatementCS
-	 *     StatementCS returns AddStatementCS
 	 *
 	 * Constraint:
 	 *     (targetVariable=[ConnectionVariable|UnrestrictedName] ownedExpression=ExpCS)
@@ -641,6 +657,7 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 	
 	/**
 	 * Contexts:
+	 *     GuardStatementCS returns InitializeStatementCS
 	 *     InitializeStatementCS returns InitializeStatementCS
 	 *
 	 * Constraint:
@@ -709,7 +726,6 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 	 * Contexts:
 	 *     ControlStatementCS returns MappingCallCS
 	 *     MappingCallCS returns MappingCallCS
-	 *     StatementCS returns MappingCallCS
 	 *
 	 * Constraint:
 	 *     (isInfinite?='infinite'? ownedPathName=PathNameCS ownedBindings+=MappingCallBindingCS*)
@@ -735,7 +751,6 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 	 * Contexts:
 	 *     ControlStatementCS returns MappingLoopCS
 	 *     MappingLoopCS returns MappingLoopCS
-	 *     StatementCS returns MappingLoopCS
 	 *
 	 * Constraint:
 	 *     (ownedIterator=MappingIteratorCS ownedInExpression=ExpCS ownedMappingStatements+=ControlStatementCS+)

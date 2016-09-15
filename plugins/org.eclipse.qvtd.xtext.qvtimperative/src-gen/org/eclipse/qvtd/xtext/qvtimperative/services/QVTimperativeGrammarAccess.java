@@ -86,6 +86,85 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		public RuleCall getOwnedQueriesQueryCSParserRuleCall_1_3_0() { return cOwnedQueriesQueryCSParserRuleCall_1_3_0; }
 	}
 
+	public class AccessStatementCSElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvtd.xtext.qvtimperative.QVTimperative.AccessStatementCS");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cAccessKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cNameUnrestrictedNameParserRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
+		private final Keyword cColonKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
+		private final Assignment cOwnedTypeAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
+		private final RuleCall cOwnedTypeTypeExpCSParserRuleCall_2_1_0 = (RuleCall)cOwnedTypeAssignment_2_1.eContents().get(0);
+		private final Keyword cColonEqualsSignKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Assignment cSourceVariableAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final CrossReference cSourceVariableVariableDeclarationCrossReference_4_0 = (CrossReference)cSourceVariableAssignment_4.eContents().get(0);
+		private final RuleCall cSourceVariableVariableDeclarationUnrestrictedNameParserRuleCall_4_0_1 = (RuleCall)cSourceVariableVariableDeclarationCrossReference_4_0.eContents().get(1);
+		private final Keyword cFullStopKeyword_5 = (Keyword)cGroup.eContents().get(5);
+		private final Assignment cSourcePropertyAssignment_6 = (Assignment)cGroup.eContents().get(6);
+		private final CrossReference cSourcePropertyPropertyCrossReference_6_0 = (CrossReference)cSourcePropertyAssignment_6.eContents().get(0);
+		private final RuleCall cSourcePropertyPropertyUnrestrictedNameParserRuleCall_6_0_1 = (RuleCall)cSourcePropertyPropertyCrossReference_6_0.eContents().get(1);
+		private final Keyword cSemicolonKeyword_7 = (Keyword)cGroup.eContents().get(7);
+		
+		//AccessStatementCS:
+		//	'access' name=UnrestrictedName (':' ownedType=TypeExpCS)? ':='
+		//	sourceVariable=[pivot::VariableDeclaration|UnrestrictedName] '.' sourceProperty=[pivot::Property|UnrestrictedName]
+		//	';';
+		@Override public ParserRule getRule() { return rule; }
+
+		//'access' name=UnrestrictedName (':' ownedType=TypeExpCS)? ':='
+		//sourceVariable=[pivot::VariableDeclaration|UnrestrictedName] '.' sourceProperty=[pivot::Property|UnrestrictedName] ';'
+		public Group getGroup() { return cGroup; }
+
+		//'access'
+		public Keyword getAccessKeyword_0() { return cAccessKeyword_0; }
+
+		//name=UnrestrictedName
+		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+
+		//UnrestrictedName
+		public RuleCall getNameUnrestrictedNameParserRuleCall_1_0() { return cNameUnrestrictedNameParserRuleCall_1_0; }
+
+		//(':' ownedType=TypeExpCS)?
+		public Group getGroup_2() { return cGroup_2; }
+
+		//':'
+		public Keyword getColonKeyword_2_0() { return cColonKeyword_2_0; }
+
+		//ownedType=TypeExpCS
+		public Assignment getOwnedTypeAssignment_2_1() { return cOwnedTypeAssignment_2_1; }
+
+		//TypeExpCS
+		public RuleCall getOwnedTypeTypeExpCSParserRuleCall_2_1_0() { return cOwnedTypeTypeExpCSParserRuleCall_2_1_0; }
+
+		//':='
+		public Keyword getColonEqualsSignKeyword_3() { return cColonEqualsSignKeyword_3; }
+
+		//sourceVariable=[pivot::VariableDeclaration|UnrestrictedName]
+		public Assignment getSourceVariableAssignment_4() { return cSourceVariableAssignment_4; }
+
+		//[pivot::VariableDeclaration|UnrestrictedName]
+		public CrossReference getSourceVariableVariableDeclarationCrossReference_4_0() { return cSourceVariableVariableDeclarationCrossReference_4_0; }
+
+		//UnrestrictedName
+		public RuleCall getSourceVariableVariableDeclarationUnrestrictedNameParserRuleCall_4_0_1() { return cSourceVariableVariableDeclarationUnrestrictedNameParserRuleCall_4_0_1; }
+
+		//'.'
+		public Keyword getFullStopKeyword_5() { return cFullStopKeyword_5; }
+
+		//sourceProperty=[pivot::Property|UnrestrictedName]
+		public Assignment getSourcePropertyAssignment_6() { return cSourcePropertyAssignment_6; }
+
+		//[pivot::Property|UnrestrictedName]
+		public CrossReference getSourcePropertyPropertyCrossReference_6_0() { return cSourcePropertyPropertyCrossReference_6_0; }
+
+		//UnrestrictedName
+		public RuleCall getSourcePropertyPropertyUnrestrictedNameParserRuleCall_6_0_1() { return cSourcePropertyPropertyUnrestrictedNameParserRuleCall_6_0_1; }
+
+		//';'
+		public Keyword getSemicolonKeyword_7() { return cSemicolonKeyword_7; }
+	}
+
 	public class AddStatementCSElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvtd.xtext.qvtimperative.QVTimperative.AddStatementCS");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -403,14 +482,18 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cOutVariableCSParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cDeclareStatementCSParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		private final RuleCall cDeclareStatementCSParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
-		private final RuleCall cCheckStatementCSParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
-		private final RuleCall cIfStatementCSParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
+		private final RuleCall cInitializeStatementCSParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
+		private final RuleCall cCheckStatementCSParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
+		private final RuleCall cAccessStatementCSParserRuleCall_5 = (RuleCall)cAlternatives.eContents().get(5);
+		private final RuleCall cIfStatementCSParserRuleCall_6 = (RuleCall)cAlternatives.eContents().get(6);
 		
 		//GuardStatementCS StatementCS:
-		//	OutVariableCS | DeclareStatementCS | DeclareStatementCS | CheckStatementCS | IfStatementCS
+		//	OutVariableCS | DeclareStatementCS | DeclareStatementCS | InitializeStatementCS | CheckStatementCS |
+		//	AccessStatementCS | IfStatementCS
 		@Override public ParserRule getRule() { return rule; }
 
-		//OutVariableCS | DeclareStatementCS | DeclareStatementCS | CheckStatementCS | IfStatementCS
+		//OutVariableCS | DeclareStatementCS | DeclareStatementCS | InitializeStatementCS | CheckStatementCS | AccessStatementCS |
+		//IfStatementCS
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//OutVariableCS
@@ -422,11 +505,17 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		//DeclareStatementCS
 		public RuleCall getDeclareStatementCSParserRuleCall_2() { return cDeclareStatementCSParserRuleCall_2; }
 
+		//InitializeStatementCS
+		public RuleCall getInitializeStatementCSParserRuleCall_3() { return cInitializeStatementCSParserRuleCall_3; }
+
 		//CheckStatementCS
-		public RuleCall getCheckStatementCSParserRuleCall_3() { return cCheckStatementCSParserRuleCall_3; }
+		public RuleCall getCheckStatementCSParserRuleCall_4() { return cCheckStatementCSParserRuleCall_4; }
+
+		//AccessStatementCS
+		public RuleCall getAccessStatementCSParserRuleCall_5() { return cAccessStatementCSParserRuleCall_5; }
 
 		//IfStatementCS
-		public RuleCall getIfStatementCSParserRuleCall_4() { return cIfStatementCSParserRuleCall_4; }
+		public RuleCall getIfStatementCSParserRuleCall_6() { return cIfStatementCSParserRuleCall_6; }
 	}
 
 	public class GuardVariableCSElements extends AbstractParserRuleElementFinder {
@@ -1602,18 +1691,6 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		public Keyword getRightCurlyBracketKeyword_6() { return cRightCurlyBracketKeyword_6; }
 	}
 
-	public class StatementCSElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvtd.xtext.qvtimperative.QVTimperative.StatementCS");
-		private final RuleCall cControlStatementCSParserRuleCall = (RuleCall)rule.eContents().get(1);
-		
-		//StatementCS:
-		//	ControlStatementCS;
-		@Override public ParserRule getRule() { return rule; }
-
-		//ControlStatementCS
-		public RuleCall getControlStatementCSParserRuleCall() { return cControlStatementCSParserRuleCall; }
-	}
-
 	public class TransformationCSElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvtd.xtext.qvtimperative.QVTimperative.TransformationCS");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -1828,6 +1905,7 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	
 	
 	private final TopLevelCSElements pTopLevelCS;
+	private final AccessStatementCSElements pAccessStatementCS;
 	private final AddStatementCSElements pAddStatementCS;
 	private final CommitStatementCSElements pCommitStatementCS;
 	private final CheckStatementCSElements pCheckStatementCS;
@@ -1853,7 +1931,6 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	private final ScopeNameCSElements pScopeNameCS;
 	private final SetStatementCSElements pSetStatementCS;
 	private final SourceDomainCSElements pSourceDomainCS;
-	private final StatementCSElements pStatementCS;
 	private final TransformationCSElements pTransformationCS;
 	private final TargetDomainCSElements pTargetDomainCS;
 	private final UnrestrictedNameElements pUnrestrictedName;
@@ -1876,6 +1953,7 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		this.gaEssentialOCL = gaEssentialOCL;
 		this.gaBase = gaBase;
 		this.pTopLevelCS = new TopLevelCSElements();
+		this.pAccessStatementCS = new AccessStatementCSElements();
 		this.pAddStatementCS = new AddStatementCSElements();
 		this.pCommitStatementCS = new CommitStatementCSElements();
 		this.pCheckStatementCS = new CheckStatementCSElements();
@@ -1901,7 +1979,6 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		this.pScopeNameCS = new ScopeNameCSElements();
 		this.pSetStatementCS = new SetStatementCSElements();
 		this.pSourceDomainCS = new SourceDomainCSElements();
-		this.pStatementCS = new StatementCSElements();
 		this.pTransformationCS = new TransformationCSElements();
 		this.pTargetDomainCS = new TargetDomainCSElements();
 		this.pUnrestrictedName = new UnrestrictedNameElements();
@@ -1951,6 +2028,18 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getTopLevelCSRule() {
 		return getTopLevelCSAccess().getRule();
+	}
+
+	//AccessStatementCS:
+	//	'access' name=UnrestrictedName (':' ownedType=TypeExpCS)? ':='
+	//	sourceVariable=[pivot::VariableDeclaration|UnrestrictedName] '.' sourceProperty=[pivot::Property|UnrestrictedName]
+	//	';';
+	public AccessStatementCSElements getAccessStatementCSAccess() {
+		return pAccessStatementCS;
+	}
+	
+	public ParserRule getAccessStatementCSRule() {
+		return getAccessStatementCSAccess().getRule();
 	}
 
 	//AddStatementCS:
@@ -2017,7 +2106,8 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//GuardStatementCS StatementCS:
-	//	OutVariableCS | DeclareStatementCS | DeclareStatementCS | CheckStatementCS | IfStatementCS
+	//	OutVariableCS | DeclareStatementCS | DeclareStatementCS | InitializeStatementCS | CheckStatementCS |
+	//	AccessStatementCS | IfStatementCS
 	public GuardStatementCSElements getGuardStatementCSAccess() {
 		return pGuardStatementCS;
 	}
@@ -2215,16 +2305,6 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getSourceDomainCSRule() {
 		return getSourceDomainCSAccess().getRule();
-	}
-
-	//StatementCS:
-	//	ControlStatementCS;
-	public StatementCSElements getStatementCSAccess() {
-		return pStatementCS;
-	}
-	
-	public ParserRule getStatementCSRule() {
-		return getStatementCSAccess().getRule();
 	}
 
 	//TransformationCS:

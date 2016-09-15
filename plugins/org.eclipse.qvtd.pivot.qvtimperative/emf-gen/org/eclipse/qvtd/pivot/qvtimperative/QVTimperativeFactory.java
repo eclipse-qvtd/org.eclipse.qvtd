@@ -31,6 +31,15 @@ public interface QVTimperativeFactory extends EFactory {
 	QVTimperativeFactory eINSTANCE = org.eclipse.qvtd.pivot.qvtimperative.impl.QVTimperativeFactoryImpl.init();
 
 	/**
+	 * Returns a new object of class '<em>Access Statement</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Access Statement</em>'.
+	 * @generated
+	 */
+	AccessStatement createAccessStatement();
+
+	/**
 	 * Returns a new object of class '<em>Add Statement</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

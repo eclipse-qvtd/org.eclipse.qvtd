@@ -112,6 +112,8 @@ public class QVTimperativeParser extends AbstractContentAssistParser {
 					put(grammarAccess.getIDAccess().getAlternatives(), "rule__ID__Alternatives");
 					put(grammarAccess.getUPPERAccess().getAlternatives(), "rule__UPPER__Alternatives");
 					put(grammarAccess.getTopLevelCSAccess().getGroup(), "rule__TopLevelCS__Group__0");
+					put(grammarAccess.getAccessStatementCSAccess().getGroup(), "rule__AccessStatementCS__Group__0");
+					put(grammarAccess.getAccessStatementCSAccess().getGroup_2(), "rule__AccessStatementCS__Group_2__0");
 					put(grammarAccess.getAddStatementCSAccess().getGroup(), "rule__AddStatementCS__Group__0");
 					put(grammarAccess.getCheckStatementCSAccess().getGroup(), "rule__CheckStatementCS__Group__0");
 					put(grammarAccess.getDeclareStatementCSAccess().getGroup(), "rule__DeclareStatementCS__Group__0");
@@ -318,6 +320,10 @@ public class QVTimperativeParser extends AbstractContentAssistParser {
 					put(grammarAccess.getTopLevelCSAccess().getOwnedTransformationsAssignment_1_1(), "rule__TopLevelCS__OwnedTransformationsAssignment_1_1");
 					put(grammarAccess.getTopLevelCSAccess().getOwnedMappingsAssignment_1_2(), "rule__TopLevelCS__OwnedMappingsAssignment_1_2");
 					put(grammarAccess.getTopLevelCSAccess().getOwnedQueriesAssignment_1_3(), "rule__TopLevelCS__OwnedQueriesAssignment_1_3");
+					put(grammarAccess.getAccessStatementCSAccess().getNameAssignment_1(), "rule__AccessStatementCS__NameAssignment_1");
+					put(grammarAccess.getAccessStatementCSAccess().getOwnedTypeAssignment_2_1(), "rule__AccessStatementCS__OwnedTypeAssignment_2_1");
+					put(grammarAccess.getAccessStatementCSAccess().getSourceVariableAssignment_4(), "rule__AccessStatementCS__SourceVariableAssignment_4");
+					put(grammarAccess.getAccessStatementCSAccess().getSourcePropertyAssignment_6(), "rule__AccessStatementCS__SourcePropertyAssignment_6");
 					put(grammarAccess.getAddStatementCSAccess().getTargetVariableAssignment_1(), "rule__AddStatementCS__TargetVariableAssignment_1");
 					put(grammarAccess.getAddStatementCSAccess().getOwnedExpressionAssignment_3(), "rule__AddStatementCS__OwnedExpressionAssignment_3");
 					put(grammarAccess.getCheckStatementCSAccess().getOwnedConditionAssignment_1(), "rule__CheckStatementCS__OwnedConditionAssignment_1");

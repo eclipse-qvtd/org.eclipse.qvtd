@@ -23,6 +23,7 @@ import org.eclipse.jdt.annotation.NonNull;
  */
 public interface QVTimperativeVisitor<R> extends org.eclipse.qvtd.pivot.qvtbase.util.QVTbaseVisitor<R>
 {
+	R visitAccessStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull AccessStatement object);
 	R visitAddStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull AddStatement object);
 	R visitCheckStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull CheckStatement object);
 	R visitConnectionVariable(org.eclipse.qvtd.pivot.qvtimperative.@NonNull ConnectionVariable object);

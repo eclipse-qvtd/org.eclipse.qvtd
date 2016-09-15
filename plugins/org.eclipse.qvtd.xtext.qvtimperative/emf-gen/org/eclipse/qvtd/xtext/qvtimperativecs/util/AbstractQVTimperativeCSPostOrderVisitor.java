@@ -44,6 +44,11 @@ public abstract class AbstractQVTimperativeCSPostOrderVisitor
 	}
 
 	@Override
+	public @Nullable Continuation<?> visitAccessStatementCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull AccessStatementCS csElement) {
+		return visitTypedElementCS(csElement);
+	}
+
+	@Override
 	public @Nullable Continuation<?> visitAddStatementCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull AddStatementCS csElement) {
 		return visitMappingStatementCS(csElement);
 	}

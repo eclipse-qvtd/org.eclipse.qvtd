@@ -44,6 +44,11 @@ public abstract class AbstractQVTimperativeAS2XMIidVisitor
 	}	
 
 	@Override
+	public @Nullable Boolean visitAccessStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull AccessStatement object) {
+		return visitVariableStatement(object);
+	}
+
+	@Override
 	public @Nullable Boolean visitAddStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull AddStatement object) {
 		return visitMappingStatement(object);
 	}

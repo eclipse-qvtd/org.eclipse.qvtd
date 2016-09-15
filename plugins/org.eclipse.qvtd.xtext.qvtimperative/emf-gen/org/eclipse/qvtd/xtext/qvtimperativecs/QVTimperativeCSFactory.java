@@ -31,6 +31,15 @@ public interface QVTimperativeCSFactory extends EFactory {
 	QVTimperativeCSFactory eINSTANCE = org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSFactoryImpl.init();
 
 	/**
+	 * Returns a new object of class '<em>Access Statement CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Access Statement CS</em>'.
+	 * @generated
+	 */
+	AccessStatementCS createAccessStatementCS();
+
+	/**
 	 * Returns a new object of class '<em>Add Statement CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

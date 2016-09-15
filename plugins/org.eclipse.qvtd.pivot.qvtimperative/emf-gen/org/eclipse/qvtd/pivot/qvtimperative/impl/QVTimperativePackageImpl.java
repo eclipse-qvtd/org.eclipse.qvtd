@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
+import org.eclipse.qvtd.pivot.qvtimperative.AccessStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.CheckStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
@@ -49,6 +50,13 @@ import org.eclipse.qvtd.pivot.qvtimperative.VariableStatement;
  * @generated
  */
 public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperativePackage {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass accessStatementEClass = null;
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -266,6 +274,42 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(QVTimperativePackage.eNS_URI, theQVTimperativePackage);
 		return theQVTimperativePackage;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getAccessStatement() {
+		return accessStatementEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getAccessStatement_SourceVariable() {
+		return (EReference)accessStatementEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getAccessStatement_SourceProperty() {
+		return (EReference)accessStatementEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAccessStatement_IsOpposite() {
+		return (EAttribute)accessStatementEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -890,6 +934,11 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		isCreated = true;
 
 		// Create classes and their features
+		accessStatementEClass = createEClass(ACCESS_STATEMENT);
+		createEReference(accessStatementEClass, ACCESS_STATEMENT__SOURCE_VARIABLE);
+		createEReference(accessStatementEClass, ACCESS_STATEMENT__SOURCE_PROPERTY);
+		createEAttribute(accessStatementEClass, ACCESS_STATEMENT__IS_OPPOSITE);
+
 		addStatementEClass = createEClass(ADD_STATEMENT);
 		createEReference(addStatementEClass, ADD_STATEMENT__TARGET_VARIABLE);
 		createEReference(addStatementEClass, ADD_STATEMENT__OWNED_INIT);
@@ -1006,6 +1055,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
+		accessStatementEClass.getESuperTypes().add(this.getVariableStatement());
 		addStatementEClass.getESuperTypes().add(this.getMappingStatement());
 		checkStatementEClass.getESuperTypes().add(this.getStatement());
 		connectionVariableEClass.getESuperTypes().add(thePivotPackage.getVariableDeclaration());
@@ -1033,6 +1083,11 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		variableStatementEClass.getESuperTypes().add(this.getStatement());
 
 		// Initialize classes and features; add operations and parameters
+		initEClass(accessStatementEClass, AccessStatement.class, "AccessStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getAccessStatement_SourceVariable(), thePivotPackage.getVariableDeclaration(), null, "sourceVariable", null, 1, 1, AccessStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAccessStatement_SourceProperty(), thePivotPackage.getProperty(), null, "sourceProperty", null, 1, 1, AccessStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAccessStatement_IsOpposite(), ecorePackage.getEBoolean(), "isOpposite", null, 0, 1, AccessStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		initEClass(addStatementEClass, AddStatement.class, "AddStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAddStatement_TargetVariable(), this.getConnectionVariable(), null, "targetVariable", null, 1, 1, AddStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAddStatement_OwnedInit(), thePivotPackage.getOCLExpression(), null, "ownedInit", null, 1, 1, AddStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1150,6 +1205,18 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 */
 	protected void createEmofAnnotations() {
 		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";	
+		addAnnotation
+		  (getAccessStatement_SourceVariable(), 
+		   source, 
+		   new String[] {
+			 "body", "assignment"
+		   });	
+		addAnnotation
+		  (getAccessStatement_SourceProperty(), 
+		   source, 
+		   new String[] {
+			 "body", "assignment"
+		   });	
 		addAnnotation
 		  (getAddStatement_TargetVariable(), 
 		   source, 

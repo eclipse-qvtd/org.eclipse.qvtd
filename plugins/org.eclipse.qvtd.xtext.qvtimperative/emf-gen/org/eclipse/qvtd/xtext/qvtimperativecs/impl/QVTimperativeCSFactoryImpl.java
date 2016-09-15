@@ -82,6 +82,7 @@ public class QVTimperativeCSFactoryImpl extends EFactoryImpl implements QVTimper
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
+			case QVTimperativeCSPackage.ACCESS_STATEMENT_CS: return createAccessStatementCS();
 			case QVTimperativeCSPackage.ADD_STATEMENT_CS: return createAddStatementCS();
 			case QVTimperativeCSPackage.CHECK_STATEMENT_CS: return createCheckStatementCS();
 			case QVTimperativeCSPackage.DECLARE_STATEMENT_CS: return createDeclareStatementCS();
@@ -105,6 +106,16 @@ public class QVTimperativeCSFactoryImpl extends EFactoryImpl implements QVTimper
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public AccessStatementCS createAccessStatementCS() {
+		AccessStatementCSImpl accessStatementCS = new AccessStatementCSImpl();
+		return accessStatementCS;
 	}
 
 	/**

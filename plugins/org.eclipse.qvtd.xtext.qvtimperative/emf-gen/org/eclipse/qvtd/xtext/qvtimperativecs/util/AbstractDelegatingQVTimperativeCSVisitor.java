@@ -36,6 +36,11 @@ public abstract class AbstractDelegatingQVTimperativeCSVisitor<R, C, @NonNull D 
 	}
 
 	@Override
+	public R visitAccessStatementCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull AccessStatementCS object) {
+		return delegate.visitAccessStatementCS(object);
+	}
+
+	@Override
 	public R visitAddStatementCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull AddStatementCS object) {
 		return delegate.visitAddStatementCS(object);
 	}
