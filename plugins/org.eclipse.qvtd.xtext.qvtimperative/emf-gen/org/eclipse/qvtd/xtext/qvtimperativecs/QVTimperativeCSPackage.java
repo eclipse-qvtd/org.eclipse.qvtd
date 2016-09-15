@@ -490,13 +490,31 @@ public interface QVTimperativeCSPackage extends EPackage {
 	int DIRECTION_CS__USES = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Is Checked</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DIRECTION_CS__IS_CHECKED = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Is Enforced</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DIRECTION_CS__IS_ENFORCED = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>Direction CS</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DIRECTION_CS_FEATURE_COUNT = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 2;
+	int DIRECTION_CS_FEATURE_COUNT = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.DomainCSImpl <em>Domain CS</em>}' class.
@@ -563,13 +581,22 @@ public interface QVTimperativeCSPackage extends EPackage {
 	int DOMAIN_CS__NAME = BaseCSPackage.NAMED_ELEMENT_CS__NAME;
 
 	/**
+	 * The feature id for the '<em><b>Direction</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_CS__DIRECTION = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Is Check</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DOMAIN_CS__IS_CHECK = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 0;
+	int DOMAIN_CS__IS_CHECK = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Is Enforce</b></em>' attribute.
@@ -578,16 +605,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DOMAIN_CS__IS_ENFORCE = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Direction</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DOMAIN_CS__DIRECTION = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 2;
+	int DOMAIN_CS__IS_ENFORCE = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Checked Properties</b></em>' containment reference list.
@@ -2250,6 +2268,28 @@ public interface QVTimperativeCSPackage extends EPackage {
 	EReference getDirectionCS_Uses();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS#isIsChecked <em>Is Checked</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Is Checked</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS#isIsChecked()
+	 * @see #getDirectionCS()
+	 * @generated
+	 */
+	EAttribute getDirectionCS_IsChecked();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS#isIsEnforced <em>Is Enforced</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Is Enforced</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS#isIsEnforced()
+	 * @see #getDirectionCS()
+	 * @generated
+	 */
+	EAttribute getDirectionCS_IsEnforced();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.DomainCS <em>Domain CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2258,6 +2298,17 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getDomainCS();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.xtext.qvtimperativecs.DomainCS#getDirection <em>Direction</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Direction</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.DomainCS#getDirection()
+	 * @see #getDomainCS()
+	 * @generated
+	 */
+	EReference getDomainCS_Direction();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.xtext.qvtimperativecs.DomainCS#isIsCheck <em>Is Check</em>}'.
@@ -2280,17 +2331,6 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getDomainCS_IsEnforce();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.xtext.qvtimperativecs.DomainCS#getDirection <em>Direction</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Direction</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.DomainCS#getDirection()
-	 * @see #getDomainCS()
-	 * @generated
-	 */
-	EReference getDomainCS_Direction();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtimperativecs.DomainCS#getCheckedProperties <em>Checked Properties</em>}'.
@@ -2941,6 +2981,22 @@ public interface QVTimperativeCSPackage extends EPackage {
 		EReference DIRECTION_CS__USES = eINSTANCE.getDirectionCS_Uses();
 
 		/**
+		 * The meta object literal for the '<em><b>Is Checked</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DIRECTION_CS__IS_CHECKED = eINSTANCE.getDirectionCS_IsChecked();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Enforced</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DIRECTION_CS__IS_ENFORCED = eINSTANCE.getDirectionCS_IsEnforced();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.DomainCSImpl <em>Domain CS</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2949,6 +3005,14 @@ public interface QVTimperativeCSPackage extends EPackage {
 		 * @generated
 		 */
 		EClass DOMAIN_CS = eINSTANCE.getDomainCS();
+
+		/**
+		 * The meta object literal for the '<em><b>Direction</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DOMAIN_CS__DIRECTION = eINSTANCE.getDomainCS_Direction();
 
 		/**
 		 * The meta object literal for the '<em><b>Is Check</b></em>' attribute feature.
@@ -2965,14 +3029,6 @@ public interface QVTimperativeCSPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute DOMAIN_CS__IS_ENFORCE = eINSTANCE.getDomainCS_IsEnforce();
-
-		/**
-		 * The meta object literal for the '<em><b>Direction</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference DOMAIN_CS__DIRECTION = eINSTANCE.getDomainCS_Direction();
 
 		/**
 		 * The meta object literal for the '<em><b>Checked Properties</b></em>' containment reference list feature.

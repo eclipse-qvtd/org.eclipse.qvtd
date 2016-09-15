@@ -35,6 +35,10 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//ImperativeDomain/ownedGuardVariables"/>
     </genClasses>
     <genClasses ecoreClass="QVTimperative.ecore#//ImperativeModel"/>
+    <genClasses ecoreClass="QVTimperative.ecore#//ImperativeTypedModel">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperative.ecore#//ImperativeTypedModel/isChecked"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperative.ecore#//ImperativeTypedModel/isEnforced"/>
+    </genClasses>
     <genClasses ecoreClass="QVTimperative.ecore#//InConnectionVariable"/>
     <genClasses ecoreClass="QVTimperative.ecore#//LoopVariable">
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference QVTimperative.ecore#//LoopVariable/owningMappingLoop"/>

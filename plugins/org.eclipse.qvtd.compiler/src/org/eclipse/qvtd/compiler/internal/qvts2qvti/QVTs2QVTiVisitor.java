@@ -59,6 +59,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeHelper;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
@@ -72,9 +73,9 @@ public class QVTs2QVTiVisitor extends QVTimperativeHelper implements Visitor<Ele
 	protected final @NonNull SymbolNameReservation symbolNameReservation;
 
 	protected final @NonNull Transformation qvtiTransformation;
-	protected final @NonNull Map<@NonNull TypedModel, @NonNull TypedModel> qvtpTypedModel2qvtiTypedModel = new HashMap<@NonNull TypedModel, @NonNull TypedModel>();
+	protected final @NonNull Map<@NonNull TypedModel, @NonNull ImperativeTypedModel> qvtpTypedModel2qvtiTypedModel = new HashMap<>();
 	protected final @NonNull List<@NonNull TypedModel> checkableTypedModels = new ArrayList<@NonNull TypedModel>();
-	protected final @NonNull List<@NonNull TypedModel> checkableAndEnforceableTypedModels = new ArrayList<@NonNull TypedModel>();
+	protected final @NonNull List<@NonNull ImperativeTypedModel> checkableAndEnforceableTypedModels = new ArrayList<>();
 	protected final @NonNull List<@NonNull TypedModel> enforceableTypedModels = new ArrayList<@NonNull TypedModel>();
 	protected final @NonNull Map<@NonNull Region, @NonNull AbstractRegion2Mapping> region2region2mapping = new HashMap<@NonNull Region, @NonNull AbstractRegion2Mapping>();
 	private @Nullable Set<@NonNull String> reservedNames = null;
@@ -84,7 +85,7 @@ public class QVTs2QVTiVisitor extends QVTimperativeHelper implements Visitor<Ele
 	private final @NonNull Set<@NonNull Transformation> otherTransformations = new HashSet<@NonNull Transformation>();	// Workaround Bug 481658
 	private final @NonNull Map<@NonNull String, @NonNull Operation> name2operation = new HashMap<@NonNull String, @NonNull Operation>();	// Workaround Bug 481658
 
-	private /*@LazyNonNull*/ TypedModel qvtiMiddleTypedModel = null;
+	private /*@LazyNonNull*/ ImperativeTypedModel qvtiMiddleTypedModel = null;
 
 	public QVTs2QVTiVisitor(@NonNull ProblemHandler problemHandler, @NonNull EnvironmentFactory environmentFactory, @NonNull Transformation qvtpTransformation, @NonNull SymbolNameReservation symbolNameReservation) {
 		super(environmentFactory);
@@ -209,7 +210,7 @@ public class QVTs2QVTiVisitor extends QVTimperativeHelper implements Visitor<Ele
 		for (TypedModel qvtpTypedModel : qvtpTransformation.getModelParameter()) {
 			String typedModelName = qvtpTypedModel.getName();
 			assert typedModelName != null;
-			TypedModel qvtiTypedModel = QVTimperativeUtil.createTypedModel(typedModelName);
+			ImperativeTypedModel qvtiTypedModel = QVTimperativeUtil.createTypedModel(typedModelName);
 			qvtiTypedModel.getUsedPackage().addAll(qvtpTypedModel.getUsedPackage());
 			if (QVTimperativeUtil.MIDDLE_DOMAIN_NAME.equals(typedModelName)) {
 				assert qvtiMiddleTypedModel  == null;
@@ -221,8 +222,9 @@ public class QVTs2QVTiVisitor extends QVTimperativeHelper implements Visitor<Ele
 		for (Rule rule : qvtpTransformation.getRule()) {
 			for (Domain domain : rule.getDomain()) {
 				if (domain.isIsCheckable()) {
-					TypedModel checkableTypedModel = qvtpTypedModel2qvtiTypedModel.get(domain.getTypedModel());
+					ImperativeTypedModel checkableTypedModel = qvtpTypedModel2qvtiTypedModel.get(domain.getTypedModel());
 					if ((checkableTypedModel != null) && !checkableAndEnforceableTypedModels.contains(checkableTypedModel)) {
+						checkableTypedModel.setIsChecked(true);
 						if (enforceableTypedModels.contains(checkableTypedModel)) {
 							checkableAndEnforceableTypedModels.add(checkableTypedModel);
 							enforceableTypedModels.remove(checkableTypedModel);
@@ -233,8 +235,9 @@ public class QVTs2QVTiVisitor extends QVTimperativeHelper implements Visitor<Ele
 					}
 				}
 				if (domain.isIsEnforceable()) {
-					TypedModel enforceableTypedModel = qvtpTypedModel2qvtiTypedModel.get(domain.getTypedModel());
+					ImperativeTypedModel enforceableTypedModel = qvtpTypedModel2qvtiTypedModel.get(domain.getTypedModel());
 					if ((enforceableTypedModel != null) && !checkableAndEnforceableTypedModels.contains(enforceableTypedModel)) {
+						enforceableTypedModel.setIsEnforced(true);
 						if (checkableTypedModels.contains(enforceableTypedModel)) {
 							checkableAndEnforceableTypedModels.add(enforceableTypedModel);
 							checkableTypedModels.remove(enforceableTypedModel);
@@ -283,7 +286,7 @@ public class QVTs2QVTiVisitor extends QVTimperativeHelper implements Visitor<Ele
 		if (qvtpTypedModel == null) {
 			return qvtiMiddleTypedModel;
 		}
-		TypedModel qvtiTypedModel = qvtpTypedModel2qvtiTypedModel.get(qvtpTypedModel);
+		ImperativeTypedModel qvtiTypedModel = qvtpTypedModel2qvtiTypedModel.get(qvtpTypedModel);
 		return qvtiTypedModel != null ? qvtiTypedModel : qvtpTypedModel;
 	}
 

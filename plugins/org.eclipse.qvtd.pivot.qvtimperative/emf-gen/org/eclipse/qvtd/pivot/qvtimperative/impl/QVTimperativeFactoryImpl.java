@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.qvtd.pivot.qvtimperative.*;
 import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.CheckStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardVariable;
@@ -83,6 +84,7 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 			case QVTimperativePackage.GUARD_VARIABLE: return createGuardVariable();
 			case QVTimperativePackage.IMPERATIVE_DOMAIN: return createImperativeDomain();
 			case QVTimperativePackage.IMPERATIVE_MODEL: return createImperativeModel();
+			case QVTimperativePackage.IMPERATIVE_TYPED_MODEL: return createImperativeTypedModel();
 			case QVTimperativePackage.IN_CONNECTION_VARIABLE: return createInConnectionVariable();
 			case QVTimperativePackage.LOOP_VARIABLE: return createLoopVariable();
 			case QVTimperativePackage.MAPPING: return createMapping();
@@ -151,6 +153,16 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 	public @NonNull ImperativeModel createImperativeModel() {
 		ImperativeModelImpl imperativeModel = new ImperativeModelImpl();
 		return imperativeModel;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ImperativeTypedModel createImperativeTypedModel() {
+		ImperativeTypedModelImpl imperativeTypedModel = new ImperativeTypedModelImpl();
+		return imperativeTypedModel;
 	}
 
 	/**

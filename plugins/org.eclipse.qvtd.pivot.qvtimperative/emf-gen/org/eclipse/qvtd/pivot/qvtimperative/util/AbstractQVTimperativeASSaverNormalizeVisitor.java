@@ -76,6 +76,11 @@ public abstract class AbstractQVTimperativeASSaverNormalizeVisitor
 	}
 
 	@Override
+	public @Nullable Object visitImperativeTypedModel(org.eclipse.qvtd.pivot.qvtimperative.@NonNull ImperativeTypedModel object) {
+		return visitTypedModel(object);
+	}
+
+	@Override
 	public @Nullable Object visitInConnectionVariable(org.eclipse.qvtd.pivot.qvtimperative.@NonNull InConnectionVariable object) {
 		return visitConnectionVariable(object);
 	}

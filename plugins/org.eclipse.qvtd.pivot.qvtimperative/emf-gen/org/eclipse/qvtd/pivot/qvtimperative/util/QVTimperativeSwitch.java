@@ -26,6 +26,8 @@ import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+import org.eclipse.qvtd.pivot.qvtimperative.*;
 import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.CheckStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
@@ -173,6 +175,17 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = caseElement(imperativeModel);
 				if (result == null) result = caseNameable(imperativeModel);
 				if (result == null) result = caseVisitable(imperativeModel);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case QVTimperativePackage.IMPERATIVE_TYPED_MODEL: {
+				ImperativeTypedModel imperativeTypedModel = (ImperativeTypedModel)theEObject;
+				T result = caseImperativeTypedModel(imperativeTypedModel);
+				if (result == null) result = caseTypedModel(imperativeTypedModel);
+				if (result == null) result = caseNamedElement(imperativeTypedModel);
+				if (result == null) result = caseElement(imperativeTypedModel);
+				if (result == null) result = caseNameable(imperativeTypedModel);
+				if (result == null) result = caseVisitable(imperativeTypedModel);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -424,6 +437,21 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseImperativeModel(ImperativeModel object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Imperative Typed Model</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Imperative Typed Model</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseImperativeTypedModel(ImperativeTypedModel object) {
 		return null;
 	}
 
@@ -724,6 +752,21 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseBaseModel(BaseModel object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Typed Model</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Typed Model</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTypedModel(TypedModel object) {
 		return null;
 	}
 

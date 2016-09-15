@@ -104,6 +104,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.InConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
@@ -653,6 +654,14 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 	}
 
 	@Override
+	public @Nullable CGNamedElement visitImperativeTypedModel(@NonNull ImperativeTypedModel asTypedModel) {
+		CGTypedModel cgTypedModel = QVTiCGModelFactory.eINSTANCE.createCGTypedModel();
+		setAst(cgTypedModel, asTypedModel);
+		analyzer.addTypedModel(asTypedModel, cgTypedModel);
+		return cgTypedModel;
+	}
+
+	@Override
 	public @Nullable CGNamedElement visitInConnectionVariable(@NonNull InConnectionVariable object) {
 		return visiting(object);		// Really should not be happening.
 		/*		CGVariable cgVariable = getVariable(asConnectionVariable);
@@ -1029,11 +1038,8 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 	}
 
 	@Override
-	public @Nullable CGNamedElement visitTypedModel(@NonNull TypedModel asTypedModel) {
-		CGTypedModel cgTypedModel = QVTiCGModelFactory.eINSTANCE.createCGTypedModel();
-		setAst(cgTypedModel, asTypedModel);
-		analyzer.addTypedModel(asTypedModel, cgTypedModel);
-		return cgTypedModel;
+	public CGNamedElement visitTypedModel(@NonNull TypedModel object) {
+		return visiting(object);		// Should be ImperativeTypedModel
 	}
 
 	@Override

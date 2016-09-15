@@ -28,9 +28,9 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
  * The following features are supported:
  * </p>
  * <ul>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.DomainCS#getDirection <em>Direction</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.DomainCS#isIsCheck <em>Is Check</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.DomainCS#isIsEnforce <em>Is Enforce</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.DomainCS#getDirection <em>Direction</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.DomainCS#getCheckedProperties <em>Checked Properties</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.DomainCS#getOwnedGuardVariables <em>Owned Guard Variables</em>}</li>
  * </ul>
@@ -40,6 +40,32 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
  * @generated
  */
 public interface DomainCS extends NamedElementCS {
+	/**
+	 * Returns the value of the '<em><b>Direction</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Direction</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Direction</em>' reference.
+	 * @see #setDirection(TypedModel)
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getDomainCS_Direction()
+	 * @model
+	 * @generated
+	 */
+	TypedModel getDirection();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.DomainCS#getDirection <em>Direction</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Direction</em>' reference.
+	 * @see #getDirection()
+	 * @generated
+	 */
+	void setDirection(TypedModel value);
+
 	/**
 	 * Returns the value of the '<em><b>Is Check</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -91,32 +117,6 @@ public interface DomainCS extends NamedElementCS {
 	 * @generated
 	 */
 	void setIsEnforce(boolean value);
-
-	/**
-	 * Returns the value of the '<em><b>Direction</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Direction</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Direction</em>' reference.
-	 * @see #setDirection(TypedModel)
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getDomainCS_Direction()
-	 * @model
-	 * @generated
-	 */
-	TypedModel getDirection();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.DomainCS#getDirection <em>Direction</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Direction</em>' reference.
-	 * @see #getDirection()
-	 * @generated
-	 */
-	void setDirection(TypedModel value);
 
 	/**
 	 * Returns the value of the '<em><b>Checked Properties</b></em>' containment reference list.

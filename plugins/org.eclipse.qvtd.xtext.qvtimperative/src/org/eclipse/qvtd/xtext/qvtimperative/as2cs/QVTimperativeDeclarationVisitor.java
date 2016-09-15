@@ -75,6 +75,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.InConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
@@ -488,6 +489,19 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 	}
 
 	@Override
+	public ElementCS visitImperativeTypedModel(@NonNull ImperativeTypedModel asTypedModel) {
+		DirectionCS csDirection = context.refreshNamedElement(DirectionCS.class, QVTimperativeCSPackage.Literals.DIRECTION_CS, asTypedModel, null);
+		if ("".equals(asTypedModel.getName())) {
+			csDirection.setName(null);
+		}
+		csDirection.setIsChecked(asTypedModel.isIsChecked());
+		csDirection.setIsEnforced(asTypedModel.isIsEnforced());
+		PivotUtilInternal.refreshList(csDirection.getImports(), asTypedModel.getUsedPackage());
+		//		PivotUtil.refreshList(csDirection.getUses(), asTypedModel.getDependsOn());
+		return csDirection;
+	}
+
+	@Override
 	public @Nullable ElementCS visitImport(@NonNull Import asUnit) {
 		BaseCSResource csResource = context.getCSResource();
 		Namespace asNamespace = asUnit.getImportedNamespace();
@@ -695,13 +709,7 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 
 	@Override
 	public ElementCS visitTypedModel(@NonNull TypedModel asTypedModel) {
-		DirectionCS csDirection = context.refreshNamedElement(DirectionCS.class, QVTimperativeCSPackage.Literals.DIRECTION_CS, asTypedModel, null);
-		if ("".equals(asTypedModel.getName())) {
-			csDirection.setName(null);
-		}
-		PivotUtilInternal.refreshList(csDirection.getImports(), asTypedModel.getUsedPackage());
-		//		PivotUtil.refreshList(csDirection.getUses(), asTypedModel.getDependsOn());
-		return csDirection;
+		return visiting(asTypedModel);
 	}
 
 	@Override

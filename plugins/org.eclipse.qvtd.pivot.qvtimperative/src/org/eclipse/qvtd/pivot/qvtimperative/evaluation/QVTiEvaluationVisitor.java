@@ -45,6 +45,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.InConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
@@ -161,6 +162,11 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 			pkge.accept(undecoratedVisitor);
 		}
 		return true;
+	}
+
+	@Override
+	public @Nullable Object visitImperativeTypedModel(@NonNull ImperativeTypedModel object) {
+		return visiting(object);
 	}
 
 	@Override

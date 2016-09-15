@@ -44,6 +44,7 @@ import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory.Create
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
@@ -231,8 +232,8 @@ public class QVTimperativeUtil extends QVTbaseUtil
 		return transformation;
 	}
 
-	public static @NonNull TypedModel createTypedModel(@NonNull String name) {
-		TypedModel typedModel = QVTbaseFactory.eINSTANCE.createTypedModel();
+	public static @NonNull ImperativeTypedModel createTypedModel(@NonNull String name) {
+		ImperativeTypedModel typedModel = QVTimperativeFactory.eINSTANCE.createImperativeTypedModel();
 		typedModel.setName(name);
 		return typedModel;
 	}

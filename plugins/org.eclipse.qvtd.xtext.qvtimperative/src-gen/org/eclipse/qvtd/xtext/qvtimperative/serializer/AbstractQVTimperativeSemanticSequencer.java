@@ -556,6 +556,7 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 	 *
 	 * Constraint:
 	 *     (
+	 *         (isChecked?='check' | isEnforced?='enforce')? 
 	 *         name=UnrestrictedName? 
 	 *         imports+=[Package|UnrestrictedName] 
 	 *         imports+=[Package|UnrestrictedName]* 

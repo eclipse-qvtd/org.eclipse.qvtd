@@ -26,6 +26,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.InConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
@@ -93,6 +94,17 @@ public class QVTimperativePrettyPrintVisitor extends QVTbasePrettyPrintVisitor i
 	@Override
 	public Object visitImperativeModel(@NonNull ImperativeModel object) {
 		return visitModel(object);
+	}
+
+	@Override
+	public Object visitImperativeTypedModel(@NonNull ImperativeTypedModel object) {
+		if (object.isIsChecked()) {
+			context.append("check ");
+		}
+		if (object.isIsEnforced()) {
+			context.append("enforce ");
+		}
+		return visitTypedModel(object);
 	}
 
 	@Override

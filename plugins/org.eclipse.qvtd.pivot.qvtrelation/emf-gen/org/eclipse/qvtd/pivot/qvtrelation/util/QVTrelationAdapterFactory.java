@@ -31,6 +31,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtrelation.*;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
 import org.eclipse.qvtd.pivot.qvtrelation.Key;
 import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage;
@@ -98,115 +99,115 @@ public class QVTrelationAdapterFactory extends AdapterFactoryImpl {
 	 */
 	protected QVTrelationSwitch<@Nullable Adapter> modelSwitch =
 			new QVTrelationSwitch<@Nullable Adapter>() {
-		@Override
-		public Adapter caseDomainPattern(DomainPattern object) {
-			return createDomainPatternAdapter();
-		}
-		@Override
-		public Adapter caseKey(Key object) {
-			return createKeyAdapter();
-		}
-		@Override
-		public Adapter caseRelation(Relation object) {
-			return createRelationAdapter();
-		}
-		@Override
-		public Adapter caseRelationCallExp(RelationCallExp object) {
-			return createRelationCallExpAdapter();
-		}
-		@Override
-		public Adapter caseRelationDomain(RelationDomain object) {
-			return createRelationDomainAdapter();
-		}
-		@Override
-		public Adapter caseRelationDomainAssignment(RelationDomainAssignment object) {
-			return createRelationDomainAssignmentAdapter();
-		}
-		@Override
-		public Adapter caseRelationModel(RelationModel object) {
-			return createRelationModelAdapter();
-		}
-		@Override
-		public Adapter caseRelationImplementation(RelationImplementation object) {
-			return createRelationImplementationAdapter();
-		}
-		@Override
-		public Adapter caseRelationalTransformation(RelationalTransformation object) {
-			return createRelationalTransformationAdapter();
-		}
-		@Override
-		public Adapter caseVisitable(Visitable object) {
-			return createVisitableAdapter();
-		}
-		@Override
-		public Adapter caseElement(Element object) {
-			return createElementAdapter();
-		}
-		@Override
-		public Adapter casePattern(Pattern object) {
-			return createPatternAdapter();
-		}
-		@Override
-		public Adapter caseNameable(Nameable object) {
-			return createNameableAdapter();
-		}
-		@Override
-		public Adapter caseNamedElement(NamedElement object) {
-			return createNamedElementAdapter();
-		}
-		@Override
-		public Adapter caseRule(Rule object) {
-			return createRuleAdapter();
-		}
-		@Override
-		public Adapter caseTypedElement(TypedElement object) {
-			return createTypedElementAdapter();
-		}
-		@Override
-		public Adapter caseOCLExpression(OCLExpression object) {
-			return createOCLExpressionAdapter();
-		}
-		@Override
-		public Adapter caseReferringElement(ReferringElement object) {
-			return createReferringElementAdapter();
-		}
-		@Override
-		public Adapter caseDomain(Domain object) {
-			return createDomainAdapter();
-		}
-		@Override
-		public Adapter caseNamespace(Namespace object) {
-			return createNamespaceAdapter();
-		}
-		@Override
-		public Adapter caseModel(Model object) {
-			return createModelAdapter();
-		}
-		@Override
-		public Adapter caseBaseModel(BaseModel object) {
-			return createBaseModelAdapter();
-		}
-		@Override
-		public Adapter caseType(Type object) {
-			return createTypeAdapter();
-		}
-		@Override
-		public Adapter caseTemplateableElement(TemplateableElement object) {
-			return createTemplateableElementAdapter();
-		}
-		@Override
-		public Adapter caseClass(org.eclipse.ocl.pivot.Class object) {
-			return createClassAdapter();
-		}
-		@Override
-		public Adapter caseTransformation(Transformation object) {
-			return createTransformationAdapter();
-		}
-		@Override
-		public Adapter defaultCase(EObject object) {
-			return createEObjectAdapter();
-		}
-	};
+			@Override
+			public Adapter caseDomainPattern(DomainPattern object) {
+				return createDomainPatternAdapter();
+			}
+			@Override
+			public Adapter caseKey(Key object) {
+				return createKeyAdapter();
+			}
+			@Override
+			public Adapter caseRelation(Relation object) {
+				return createRelationAdapter();
+			}
+			@Override
+			public Adapter caseRelationCallExp(RelationCallExp object) {
+				return createRelationCallExpAdapter();
+			}
+			@Override
+			public Adapter caseRelationDomain(RelationDomain object) {
+				return createRelationDomainAdapter();
+			}
+			@Override
+			public Adapter caseRelationDomainAssignment(RelationDomainAssignment object) {
+				return createRelationDomainAssignmentAdapter();
+			}
+			@Override
+			public Adapter caseRelationModel(RelationModel object) {
+				return createRelationModelAdapter();
+			}
+			@Override
+			public Adapter caseRelationImplementation(RelationImplementation object) {
+				return createRelationImplementationAdapter();
+			}
+			@Override
+			public Adapter caseRelationalTransformation(RelationalTransformation object) {
+				return createRelationalTransformationAdapter();
+			}
+			@Override
+			public Adapter caseVisitable(Visitable object) {
+				return createVisitableAdapter();
+			}
+			@Override
+			public Adapter caseElement(Element object) {
+				return createElementAdapter();
+			}
+			@Override
+			public Adapter casePattern(Pattern object) {
+				return createPatternAdapter();
+			}
+			@Override
+			public Adapter caseNameable(Nameable object) {
+				return createNameableAdapter();
+			}
+			@Override
+			public Adapter caseNamedElement(NamedElement object) {
+				return createNamedElementAdapter();
+			}
+			@Override
+			public Adapter caseRule(Rule object) {
+				return createRuleAdapter();
+			}
+			@Override
+			public Adapter caseTypedElement(TypedElement object) {
+				return createTypedElementAdapter();
+			}
+			@Override
+			public Adapter caseOCLExpression(OCLExpression object) {
+				return createOCLExpressionAdapter();
+			}
+			@Override
+			public Adapter caseReferringElement(ReferringElement object) {
+				return createReferringElementAdapter();
+			}
+			@Override
+			public Adapter caseDomain(Domain object) {
+				return createDomainAdapter();
+			}
+			@Override
+			public Adapter caseNamespace(Namespace object) {
+				return createNamespaceAdapter();
+			}
+			@Override
+			public Adapter caseModel(Model object) {
+				return createModelAdapter();
+			}
+			@Override
+			public Adapter caseBaseModel(BaseModel object) {
+				return createBaseModelAdapter();
+			}
+			@Override
+			public Adapter caseType(Type object) {
+				return createTypeAdapter();
+			}
+			@Override
+			public Adapter caseTemplateableElement(TemplateableElement object) {
+				return createTemplateableElementAdapter();
+			}
+			@Override
+			public Adapter caseClass(org.eclipse.ocl.pivot.Class object) {
+				return createClassAdapter();
+			}
+			@Override
+			public Adapter caseTransformation(Transformation object) {
+				return createTransformationAdapter();
+			}
+			@Override
+			public Adapter defaultCase(EObject object) {
+				return createEObjectAdapter();
+			}
+		};
 
 	/**
 	 * Creates an adapter for the <code>target</code>.

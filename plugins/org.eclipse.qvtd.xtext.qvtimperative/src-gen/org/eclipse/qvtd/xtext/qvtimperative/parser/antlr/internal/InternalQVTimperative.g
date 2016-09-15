@@ -388,27 +388,58 @@ ruleDirectionCS returns [EObject current=null]
             grammarAccess.getDirectionCSAccess().getDirectionCSAction_0(),
             $current);
     }
-)(
+)((
+(
+		lv_isChecked_1_0=	'check' 
+    {
+        newLeafNode(lv_isChecked_1_0, grammarAccess.getDirectionCSAccess().getIsCheckedCheckKeyword_1_0_0());
+    }
+ 
+	    {
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getDirectionCSRule());
+	        }
+       		setWithLastConsumed($current, "isChecked", true, "check");
+	    }
+
+)
+)
+    |(
+(
+		lv_isEnforced_2_0=	'enforce' 
+    {
+        newLeafNode(lv_isEnforced_2_0, grammarAccess.getDirectionCSAccess().getIsEnforcedEnforceKeyword_1_1_0());
+    }
+ 
+	    {
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getDirectionCSRule());
+	        }
+       		setWithLastConsumed($current, "isEnforced", true, "enforce");
+	    }
+
+)
+))?(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getDirectionCSAccess().getNameUnrestrictedNameParserRuleCall_1_0()); 
+	        newCompositeNode(grammarAccess.getDirectionCSAccess().getNameUnrestrictedNameParserRuleCall_2_0()); 
 	    }
-		lv_name_1_0=ruleUnrestrictedName		{
+		lv_name_3_0=ruleUnrestrictedName		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getDirectionCSRule());
 	        }
        		set(
        			$current, 
        			"name",
-        		lv_name_1_0, 
+        		lv_name_3_0, 
         		"org.eclipse.qvtd.xtext.qvtimperative.QVTimperative.UnrestrictedName");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-)?	otherlv_2='imports' 
+)?	otherlv_4='imports' 
     {
-    	newLeafNode(otherlv_2, grammarAccess.getDirectionCSAccess().getImportsKeyword_2());
+    	newLeafNode(otherlv_4, grammarAccess.getDirectionCSAccess().getImportsKeyword_3());
     }
 (
 (
@@ -421,16 +452,16 @@ ruleDirectionCS returns [EObject current=null]
 	        }
         }
 		{ 
-	        newCompositeNode(grammarAccess.getDirectionCSAccess().getImportsPackageCrossReference_3_0()); 
+	        newCompositeNode(grammarAccess.getDirectionCSAccess().getImportsPackageCrossReference_4_0()); 
 	    }
 		ruleUnrestrictedName		{ 
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-)(	otherlv_4=',' 
+)(	otherlv_6=',' 
     {
-    	newLeafNode(otherlv_4, grammarAccess.getDirectionCSAccess().getCommaKeyword_4_0());
+    	newLeafNode(otherlv_6, grammarAccess.getDirectionCSAccess().getCommaKeyword_5_0());
     }
 (
 (
@@ -443,16 +474,16 @@ ruleDirectionCS returns [EObject current=null]
 	        }
         }
 		{ 
-	        newCompositeNode(grammarAccess.getDirectionCSAccess().getImportsPackageCrossReference_4_1_0()); 
+	        newCompositeNode(grammarAccess.getDirectionCSAccess().getImportsPackageCrossReference_5_1_0()); 
 	    }
 		ruleUnrestrictedName		{ 
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-))*(	otherlv_6='uses' 
+))*(	otherlv_8='uses' 
     {
-    	newLeafNode(otherlv_6, grammarAccess.getDirectionCSAccess().getUsesKeyword_5_0());
+    	newLeafNode(otherlv_8, grammarAccess.getDirectionCSAccess().getUsesKeyword_6_0());
     }
 (
 (
@@ -465,16 +496,16 @@ ruleDirectionCS returns [EObject current=null]
 	        }
         }
 		{ 
-	        newCompositeNode(grammarAccess.getDirectionCSAccess().getUsesImperativeDomainCrossReference_5_1_0()); 
+	        newCompositeNode(grammarAccess.getDirectionCSAccess().getUsesImperativeDomainCrossReference_6_1_0()); 
 	    }
 		ruleUnrestrictedName		{ 
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-)(	otherlv_8=',' 
+)(	otherlv_10=',' 
     {
-    	newLeafNode(otherlv_8, grammarAccess.getDirectionCSAccess().getCommaKeyword_5_2_0());
+    	newLeafNode(otherlv_10, grammarAccess.getDirectionCSAccess().getCommaKeyword_6_2_0());
     }
 (
 (
@@ -487,7 +518,7 @@ ruleDirectionCS returns [EObject current=null]
 	        }
         }
 		{ 
-	        newCompositeNode(grammarAccess.getDirectionCSAccess().getUsesImperativeDomainCrossReference_5_2_1_0()); 
+	        newCompositeNode(grammarAccess.getDirectionCSAccess().getUsesImperativeDomainCrossReference_6_2_1_0()); 
 	    }
 		ruleUnrestrictedName		{ 
 	        afterParserOrEnumRuleCall();

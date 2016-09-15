@@ -106,7 +106,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.QVTimperativePackageImpl#getMapping()
 	 * @generated
 	 */
-	int MAPPING = 8;
+	int MAPPING = 9;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingStatementImpl <em>Mapping Statement</em>}' class.
@@ -116,7 +116,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.QVTimperativePackageImpl#getMappingStatement()
 	 * @generated
 	 */
-	int MAPPING_STATEMENT = 12;
+	int MAPPING_STATEMENT = 13;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.ConnectionVariableImpl <em>Connection Variable</em>}' class.
@@ -146,7 +146,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.QVTimperativePackageImpl#getMappingCall()
 	 * @generated
 	 */
-	int MAPPING_CALL = 9;
+	int MAPPING_CALL = 10;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingCallBindingImpl <em>Mapping Call Binding</em>}' class.
@@ -156,7 +156,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.QVTimperativePackageImpl#getMappingCallBinding()
 	 * @generated
 	 */
-	int MAPPING_CALL_BINDING = 10;
+	int MAPPING_CALL_BINDING = 11;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingLoopImpl <em>Mapping Loop</em>}' class.
@@ -166,7 +166,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.QVTimperativePackageImpl#getMappingLoop()
 	 * @generated
 	 */
-	int MAPPING_LOOP = 11;
+	int MAPPING_LOOP = 12;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.StatementImpl <em>Statement</em>}' class.
@@ -176,7 +176,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.QVTimperativePackageImpl#getStatement()
 	 * @generated
 	 */
-	int STATEMENT = 17;
+	int STATEMENT = 18;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -848,6 +848,124 @@ public interface QVTimperativePackage extends EPackage {
 	int IMPERATIVE_MODEL_FEATURE_COUNT = QVTbasePackage.BASE_MODEL_FEATURE_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.ImperativeTypedModelImpl <em>Imperative Typed Model</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.ImperativeTypedModelImpl
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.QVTimperativePackageImpl#getImperativeTypedModel()
+	 * @generated
+	 */
+	int IMPERATIVE_TYPED_MODEL = 6;
+
+	/**
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_TYPED_MODEL__ANNOTATING_COMMENTS = QVTbasePackage.TYPED_MODEL__ANNOTATING_COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_TYPED_MODEL__OWNED_ANNOTATIONS = QVTbasePackage.TYPED_MODEL__OWNED_ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_TYPED_MODEL__OWNED_COMMENTS = QVTbasePackage.TYPED_MODEL__OWNED_COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_TYPED_MODEL__OWNED_EXTENSIONS = QVTbasePackage.TYPED_MODEL__OWNED_EXTENSIONS;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_TYPED_MODEL__NAME = QVTbasePackage.TYPED_MODEL__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Transformation</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_TYPED_MODEL__TRANSFORMATION = QVTbasePackage.TYPED_MODEL__TRANSFORMATION;
+
+	/**
+	 * The feature id for the '<em><b>Used Package</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_TYPED_MODEL__USED_PACKAGE = QVTbasePackage.TYPED_MODEL__USED_PACKAGE;
+
+	/**
+	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_TYPED_MODEL__DEPENDS_ON = QVTbasePackage.TYPED_MODEL__DEPENDS_ON;
+
+	/**
+	 * The feature id for the '<em><b>Owned Context</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_TYPED_MODEL__OWNED_CONTEXT = QVTbasePackage.TYPED_MODEL__OWNED_CONTEXT;
+
+	/**
+	 * The feature id for the '<em><b>Is Checked</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_TYPED_MODEL__IS_CHECKED = QVTbasePackage.TYPED_MODEL_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Is Enforced</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_TYPED_MODEL__IS_ENFORCED = QVTbasePackage.TYPED_MODEL_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Imperative Typed Model</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_TYPED_MODEL_FEATURE_COUNT = QVTbasePackage.TYPED_MODEL_FEATURE_COUNT + 2;
+
+	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.InConnectionVariableImpl <em>In Connection Variable</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -855,7 +973,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.QVTimperativePackageImpl#getInConnectionVariable()
 	 * @generated
 	 */
-	int IN_CONNECTION_VARIABLE = 6;
+	int IN_CONNECTION_VARIABLE = 7;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -955,7 +1073,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.QVTimperativePackageImpl#getLoopVariable()
 	 * @generated
 	 */
-	int LOOP_VARIABLE = 7;
+	int LOOP_VARIABLE = 8;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -1442,7 +1560,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.QVTimperativePackageImpl#getVariableStatement()
 	 * @generated
 	 */
-	int VARIABLE_STATEMENT = 18;
+	int VARIABLE_STATEMENT = 19;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -1542,7 +1660,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.QVTimperativePackageImpl#getNewStatement()
 	 * @generated
 	 */
-	int NEW_STATEMENT = 13;
+	int NEW_STATEMENT = 14;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -1660,7 +1778,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.QVTimperativePackageImpl#getOutConnectionVariable()
 	 * @generated
 	 */
-	int OUT_CONNECTION_VARIABLE = 14;
+	int OUT_CONNECTION_VARIABLE = 15;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -1769,7 +1887,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.QVTimperativePackageImpl#getPredicateVariable()
 	 * @generated
 	 */
-	int PREDICATE_VARIABLE = 15;
+	int PREDICATE_VARIABLE = 16;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -1887,7 +2005,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.QVTimperativePackageImpl#getSetStatement()
 	 * @generated
 	 */
-	int SET_STATEMENT = 16;
+	int SET_STATEMENT = 17;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -2124,6 +2242,38 @@ public interface QVTimperativePackage extends EPackage {
 	 * @generated
 	 */
 	EClass getImperativeModel();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel <em>Imperative Typed Model</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Imperative Typed Model</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel
+	 * @generated
+	 */
+	EClass getImperativeTypedModel();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel#isIsChecked <em>Is Checked</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Is Checked</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel#isIsChecked()
+	 * @see #getImperativeTypedModel()
+	 * @generated
+	 */
+	EAttribute getImperativeTypedModel_IsChecked();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel#isIsEnforced <em>Is Enforced</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Is Enforced</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel#isIsEnforced()
+	 * @see #getImperativeTypedModel()
+	 * @generated
+	 */
+	EAttribute getImperativeTypedModel_IsEnforced();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtimperative.InConnectionVariable <em>In Connection Variable</em>}'.
@@ -2667,6 +2817,32 @@ public interface QVTimperativePackage extends EPackage {
 		 * @generated
 		 */
 		EClass IMPERATIVE_MODEL = eINSTANCE.getImperativeModel();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.ImperativeTypedModelImpl <em>Imperative Typed Model</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.ImperativeTypedModelImpl
+		 * @see org.eclipse.qvtd.pivot.qvtimperative.impl.QVTimperativePackageImpl#getImperativeTypedModel()
+		 * @generated
+		 */
+		EClass IMPERATIVE_TYPED_MODEL = eINSTANCE.getImperativeTypedModel();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Checked</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute IMPERATIVE_TYPED_MODEL__IS_CHECKED = eINSTANCE.getImperativeTypedModel_IsChecked();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Enforced</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute IMPERATIVE_TYPED_MODEL__IS_ENFORCED = eINSTANCE.getImperativeTypedModel_IsEnforced();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.InConnectionVariableImpl <em>In Connection Variable</em>}' class.

@@ -74,6 +74,11 @@ public abstract class AbstractQVTimperativeAS2XMIidVisitor
 	}
 
 	@Override
+	public @Nullable Boolean visitImperativeTypedModel(org.eclipse.qvtd.pivot.qvtimperative.@NonNull ImperativeTypedModel object) {
+		return visitTypedModel(object);
+	}
+
+	@Override
 	public @Nullable Boolean visitInConnectionVariable(org.eclipse.qvtd.pivot.qvtimperative.@NonNull InConnectionVariable object) {
 		return visitConnectionVariable(object);
 	}

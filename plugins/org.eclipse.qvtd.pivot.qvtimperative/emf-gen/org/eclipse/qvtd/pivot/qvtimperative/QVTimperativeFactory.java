@@ -76,6 +76,15 @@ public interface QVTimperativeFactory extends EFactory {
 	@NonNull ImperativeModel createImperativeModel();
 
 	/**
+	 * Returns a new object of class '<em>Imperative Typed Model</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Imperative Typed Model</em>'.
+	 * @generated
+	 */
+	ImperativeTypedModel createImperativeTypedModel();
+
+	/**
 	 * Returns a new object of class '<em>In Connection Variable</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

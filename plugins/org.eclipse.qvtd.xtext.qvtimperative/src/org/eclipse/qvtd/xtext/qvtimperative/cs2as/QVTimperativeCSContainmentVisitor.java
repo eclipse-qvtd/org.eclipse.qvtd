@@ -44,6 +44,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.CheckStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.InConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
@@ -195,12 +196,11 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 
 	@Override
 	public Continuation<?> visitDirectionCS(@NonNull DirectionCS csElement) {
-		refreshNamedElement(TypedModel.class, QVTbasePackage.Literals.TYPED_MODEL, csElement);
+		ImperativeTypedModel asTypedModel = refreshNamedElement(ImperativeTypedModel.class, QVTimperativePackage.Literals.IMPERATIVE_TYPED_MODEL, csElement);
 		Continuation<?> continuation = new DirectionContentContinuation(context, csElement);
-		TypedModel asTypedModel = PivotUtil.getPivot(TypedModel.class, csElement);
-		if (asTypedModel != null) {
-			QVTbaseUtil.getContextVariable(standardLibrary, asTypedModel);
-		}
+		asTypedModel.setIsChecked(csElement.isIsChecked());
+		asTypedModel.setIsEnforced(csElement.isIsEnforced());
+		QVTbaseUtil.getContextVariable(standardLibrary, asTypedModel);
 		return continuation;
 	}
 

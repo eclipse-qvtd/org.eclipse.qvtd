@@ -23,6 +23,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.InConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
@@ -87,6 +88,13 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * @generated
 	 */
 	private EClass imperativeModelEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass imperativeTypedModelEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -207,7 +215,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 *
+	 * 
 	 * <p>This method is used to initialize {@link QVTimperativePackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -238,7 +246,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		// Mark meta-data to indicate it can't be changed
 		theQVTimperativePackage.freeze();
 
-
+  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(QVTimperativePackage.eNS_URI, theQVTimperativePackage);
 		return theQVTimperativePackage;
@@ -372,6 +380,33 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	@Override
 	public EClass getImperativeModel() {
 		return imperativeModelEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getImperativeTypedModel() {
+		return imperativeTypedModelEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getImperativeTypedModel_IsChecked() {
+		return (EAttribute)imperativeTypedModelEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getImperativeTypedModel_IsEnforced() {
+		return (EAttribute)imperativeTypedModelEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -802,6 +837,10 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 
 		imperativeModelEClass = createEClass(IMPERATIVE_MODEL);
 
+		imperativeTypedModelEClass = createEClass(IMPERATIVE_TYPED_MODEL);
+		createEAttribute(imperativeTypedModelEClass, IMPERATIVE_TYPED_MODEL__IS_CHECKED);
+		createEAttribute(imperativeTypedModelEClass, IMPERATIVE_TYPED_MODEL__IS_ENFORCED);
+
 		inConnectionVariableEClass = createEClass(IN_CONNECTION_VARIABLE);
 
 		loopVariableEClass = createEClass(LOOP_VARIABLE);
@@ -892,6 +931,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		guardVariableEClass.getESuperTypes().add(thePivotPackage.getVariableDeclaration());
 		imperativeDomainEClass.getESuperTypes().add(theQVTbasePackage.getDomain());
 		imperativeModelEClass.getESuperTypes().add(theQVTbasePackage.getBaseModel());
+		imperativeTypedModelEClass.getESuperTypes().add(theQVTbasePackage.getTypedModel());
 		inConnectionVariableEClass.getESuperTypes().add(this.getConnectionVariable());
 		loopVariableEClass.getESuperTypes().add(thePivotPackage.getVariableDeclaration());
 		mappingEClass.getESuperTypes().add(theQVTbasePackage.getRule());
@@ -928,6 +968,10 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		initEReference(getImperativeDomain_OwnedGuardVariables(), this.getGuardVariable(), null, "ownedGuardVariables", null, 0, -1, ImperativeDomain.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		initEClass(imperativeModelEClass, ImperativeModel.class, "ImperativeModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(imperativeTypedModelEClass, ImperativeTypedModel.class, "ImperativeTypedModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getImperativeTypedModel_IsChecked(), ecorePackage.getEBoolean(), "isChecked", "false", 0, 1, ImperativeTypedModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getImperativeTypedModel_IsEnforced(), ecorePackage.getEBoolean(), "isEnforced", "false", 0, 1, ImperativeTypedModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(inConnectionVariableEClass, InConnectionVariable.class, "InConnectionVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -997,13 +1041,13 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * @generated
 	 */
 	protected void createImportAnnotations() {
-		String source = "http://www.eclipse.org/OCL/Import";
+		String source = "http://www.eclipse.org/OCL/Import";	
 		addAnnotation
-		(this,
-			source,
-			new String[] {
-				"qvtb", "../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#/"
-		});
+		  (this, 
+		   source, 
+		   new String[] {
+			 "qvtb", "../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#/"
+		   });
 	}
 
 	/**
@@ -1013,43 +1057,43 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * @generated
 	 */
 	protected void createEmofAnnotations() {
-		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";
+		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";	
 		addAnnotation
-		(getAddStatement_TargetVariable(),
-			source,
-			new String[] {
-				"body", "assignment"
-		});
+		  (getAddStatement_TargetVariable(), 
+		   source, 
+		   new String[] {
+			 "body", "assignment"
+		   });	
 		addAnnotation
-		(getAddStatement_Value(),
-			source,
-			new String[] {
-				"body", "valueAssignment"
-		});
+		  (getAddStatement_Value(), 
+		   source, 
+		   new String[] {
+			 "body", "valueAssignment"
+		   });	
 		addAnnotation
-		(getCheckStatement_ConditionExpression(),
-			source,
-			new String[] {
-				"body", "predicate"
-		});
+		  (getCheckStatement_ConditionExpression(), 
+		   source, 
+		   new String[] {
+			 "body", "predicate"
+		   });	
 		addAnnotation
-		(getSetStatement_TargetVariable(),
-			source,
-			new String[] {
-				"body", "assignment"
-		});
+		  (getSetStatement_TargetVariable(), 
+		   source, 
+		   new String[] {
+			 "body", "assignment"
+		   });	
 		addAnnotation
-		(getSetStatement_TargetProperty(),
-			source,
-			new String[] {
-				"body", "assignment"
-		});
+		  (getSetStatement_TargetProperty(), 
+		   source, 
+		   new String[] {
+			 "body", "assignment"
+		   });	
 		addAnnotation
-		(getSetStatement_Value(),
-			source,
-			new String[] {
-				"body", "valueAssignment"
-		});
+		  (getSetStatement_Value(), 
+		   source, 
+		   new String[] {
+			 "body", "valueAssignment"
+		   });
 	}
 
 } //QVTimperativePackageImpl

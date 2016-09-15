@@ -42,9 +42,9 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.DomainCSImpl#getDirection <em>Direction</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.DomainCSImpl#isIsCheck <em>Is Check</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.DomainCSImpl#isIsEnforce <em>Is Enforce</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.DomainCSImpl#getDirection <em>Direction</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.DomainCSImpl#getCheckedProperties <em>Checked Properties</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.DomainCSImpl#getOwnedGuardVariables <em>Owned Guard Variables</em>}</li>
  * </ul>
@@ -52,6 +52,16 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
  * @generated
  */
 public class DomainCSImpl extends NamedElementCSImpl implements DomainCS {
+	/**
+	 * The cached value of the '{@link #getDirection() <em>Direction</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDirection()
+	 * @generated
+	 * @ordered
+	 */
+	protected TypedModel direction;
+
 	/**
 	 * The default value of the '{@link #isIsCheck() <em>Is Check</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -93,16 +103,6 @@ public class DomainCSImpl extends NamedElementCSImpl implements DomainCS {
 	protected boolean isEnforce = IS_ENFORCE_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getDirection() <em>Direction</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getDirection()
-	 * @generated
-	 * @ordered
-	 */
-	protected TypedModel direction;
-
-	/**
 	 * The cached value of the '{@link #getCheckedProperties() <em>Checked Properties</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -139,52 +139,6 @@ public class DomainCSImpl extends NamedElementCSImpl implements DomainCS {
 	@Override
 	protected EClass eStaticClass() {
 		return QVTimperativeCSPackage.Literals.DOMAIN_CS;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public boolean isIsCheck() {
-		return isCheck;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setIsCheck(boolean newIsCheck) {
-		boolean oldIsCheck = isCheck;
-		isCheck = newIsCheck;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.DOMAIN_CS__IS_CHECK, oldIsCheck, isCheck));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public boolean isIsEnforce() {
-		return isEnforce;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setIsEnforce(boolean newIsEnforce) {
-		boolean oldIsEnforce = isEnforce;
-		isEnforce = newIsEnforce;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.DOMAIN_CS__IS_ENFORCE, oldIsEnforce, isEnforce));
 	}
 
 	/**
@@ -232,6 +186,48 @@ public class DomainCSImpl extends NamedElementCSImpl implements DomainCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isIsCheck() {
+		return isCheck;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setIsCheck(boolean newIsCheck) {
+		boolean oldIsCheck = isCheck;
+		isCheck = newIsCheck;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.DOMAIN_CS__IS_CHECK, oldIsCheck, isCheck));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isIsEnforce() {
+		return isEnforce;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setIsEnforce(boolean newIsEnforce) {
+		boolean oldIsEnforce = isEnforce;
+		isEnforce = newIsEnforce;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.DOMAIN_CS__IS_ENFORCE, oldIsEnforce, isEnforce));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public EList<PathNameCS> getCheckedProperties() {
 		if (checkedProperties == null) {
@@ -258,7 +254,6 @@ public class DomainCSImpl extends NamedElementCSImpl implements DomainCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public String toString() {
 		return super.toString();
 	}
@@ -287,13 +282,13 @@ public class DomainCSImpl extends NamedElementCSImpl implements DomainCS {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case QVTimperativeCSPackage.DOMAIN_CS__DIRECTION:
+				if (resolve) return getDirection();
+				return basicGetDirection();
 			case QVTimperativeCSPackage.DOMAIN_CS__IS_CHECK:
 				return isIsCheck();
 			case QVTimperativeCSPackage.DOMAIN_CS__IS_ENFORCE:
 				return isIsEnforce();
-			case QVTimperativeCSPackage.DOMAIN_CS__DIRECTION:
-				if (resolve) return getDirection();
-				return basicGetDirection();
 			case QVTimperativeCSPackage.DOMAIN_CS__CHECKED_PROPERTIES:
 				return getCheckedProperties();
 			case QVTimperativeCSPackage.DOMAIN_CS__OWNED_GUARD_VARIABLES:
@@ -311,14 +306,14 @@ public class DomainCSImpl extends NamedElementCSImpl implements DomainCS {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case QVTimperativeCSPackage.DOMAIN_CS__DIRECTION:
+				setDirection((TypedModel)newValue);
+				return;
 			case QVTimperativeCSPackage.DOMAIN_CS__IS_CHECK:
 				setIsCheck((Boolean)newValue);
 				return;
 			case QVTimperativeCSPackage.DOMAIN_CS__IS_ENFORCE:
 				setIsEnforce((Boolean)newValue);
-				return;
-			case QVTimperativeCSPackage.DOMAIN_CS__DIRECTION:
-				setDirection((TypedModel)newValue);
 				return;
 			case QVTimperativeCSPackage.DOMAIN_CS__CHECKED_PROPERTIES:
 				getCheckedProperties().clear();
@@ -340,14 +335,14 @@ public class DomainCSImpl extends NamedElementCSImpl implements DomainCS {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case QVTimperativeCSPackage.DOMAIN_CS__DIRECTION:
+				setDirection((TypedModel)null);
+				return;
 			case QVTimperativeCSPackage.DOMAIN_CS__IS_CHECK:
 				setIsCheck(IS_CHECK_EDEFAULT);
 				return;
 			case QVTimperativeCSPackage.DOMAIN_CS__IS_ENFORCE:
 				setIsEnforce(IS_ENFORCE_EDEFAULT);
-				return;
-			case QVTimperativeCSPackage.DOMAIN_CS__DIRECTION:
-				setDirection((TypedModel)null);
 				return;
 			case QVTimperativeCSPackage.DOMAIN_CS__CHECKED_PROPERTIES:
 				getCheckedProperties().clear();
@@ -367,12 +362,12 @@ public class DomainCSImpl extends NamedElementCSImpl implements DomainCS {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case QVTimperativeCSPackage.DOMAIN_CS__DIRECTION:
+				return direction != null;
 			case QVTimperativeCSPackage.DOMAIN_CS__IS_CHECK:
 				return isCheck != IS_CHECK_EDEFAULT;
 			case QVTimperativeCSPackage.DOMAIN_CS__IS_ENFORCE:
 				return isEnforce != IS_ENFORCE_EDEFAULT;
-			case QVTimperativeCSPackage.DOMAIN_CS__DIRECTION:
-				return direction != null;
 			case QVTimperativeCSPackage.DOMAIN_CS__CHECKED_PROPERTIES:
 				return checkedProperties != null && !checkedProperties.isEmpty();
 			case QVTimperativeCSPackage.DOMAIN_CS__OWNED_GUARD_VARIABLES:

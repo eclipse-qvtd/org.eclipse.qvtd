@@ -46,6 +46,7 @@ public class QVTimperativeParser extends AbstractContentAssistParser {
 				{
 					put(grammarAccess.getTopLevelCSAccess().getAlternatives_1(), "rule__TopLevelCS__Alternatives_1");
 					put(grammarAccess.getControlStatementCSAccess().getAlternatives(), "rule__ControlStatementCS__Alternatives");
+					put(grammarAccess.getDirectionCSAccess().getAlternatives_1(), "rule__DirectionCS__Alternatives_1");
 					put(grammarAccess.getMappingCSAccess().getOwnedDomainsAlternatives_6_0(), "rule__MappingCS__OwnedDomainsAlternatives_6_0");
 					put(grammarAccess.getMappingCSAccess().getAlternatives_7(), "rule__MappingCS__Alternatives_7");
 					put(grammarAccess.getMappingCSAccess().getAlternatives_8(), "rule__MappingCS__Alternatives_8");
@@ -114,9 +115,9 @@ public class QVTimperativeParser extends AbstractContentAssistParser {
 					put(grammarAccess.getAddStatementCSAccess().getGroup(), "rule__AddStatementCS__Group__0");
 					put(grammarAccess.getCheckStatementCSAccess().getGroup(), "rule__CheckStatementCS__Group__0");
 					put(grammarAccess.getDirectionCSAccess().getGroup(), "rule__DirectionCS__Group__0");
-					put(grammarAccess.getDirectionCSAccess().getGroup_4(), "rule__DirectionCS__Group_4__0");
 					put(grammarAccess.getDirectionCSAccess().getGroup_5(), "rule__DirectionCS__Group_5__0");
-					put(grammarAccess.getDirectionCSAccess().getGroup_5_2(), "rule__DirectionCS__Group_5_2__0");
+					put(grammarAccess.getDirectionCSAccess().getGroup_6(), "rule__DirectionCS__Group_6__0");
+					put(grammarAccess.getDirectionCSAccess().getGroup_6_2(), "rule__DirectionCS__Group_6_2__0");
 					put(grammarAccess.getGuardVariableCSAccess().getGroup(), "rule__GuardVariableCS__Group__0");
 					put(grammarAccess.getImportCSAccess().getGroup(), "rule__ImportCS__Group__0");
 					put(grammarAccess.getImportCSAccess().getGroup_1(), "rule__ImportCS__Group_1__0");
@@ -316,11 +317,13 @@ public class QVTimperativeParser extends AbstractContentAssistParser {
 					put(grammarAccess.getAddStatementCSAccess().getTargetVariableAssignment_1(), "rule__AddStatementCS__TargetVariableAssignment_1");
 					put(grammarAccess.getAddStatementCSAccess().getOwnedExpressionAssignment_3(), "rule__AddStatementCS__OwnedExpressionAssignment_3");
 					put(grammarAccess.getCheckStatementCSAccess().getOwnedConditionAssignment_1(), "rule__CheckStatementCS__OwnedConditionAssignment_1");
-					put(grammarAccess.getDirectionCSAccess().getNameAssignment_1(), "rule__DirectionCS__NameAssignment_1");
-					put(grammarAccess.getDirectionCSAccess().getImportsAssignment_3(), "rule__DirectionCS__ImportsAssignment_3");
-					put(grammarAccess.getDirectionCSAccess().getImportsAssignment_4_1(), "rule__DirectionCS__ImportsAssignment_4_1");
-					put(grammarAccess.getDirectionCSAccess().getUsesAssignment_5_1(), "rule__DirectionCS__UsesAssignment_5_1");
-					put(grammarAccess.getDirectionCSAccess().getUsesAssignment_5_2_1(), "rule__DirectionCS__UsesAssignment_5_2_1");
+					put(grammarAccess.getDirectionCSAccess().getIsCheckedAssignment_1_0(), "rule__DirectionCS__IsCheckedAssignment_1_0");
+					put(grammarAccess.getDirectionCSAccess().getIsEnforcedAssignment_1_1(), "rule__DirectionCS__IsEnforcedAssignment_1_1");
+					put(grammarAccess.getDirectionCSAccess().getNameAssignment_2(), "rule__DirectionCS__NameAssignment_2");
+					put(grammarAccess.getDirectionCSAccess().getImportsAssignment_4(), "rule__DirectionCS__ImportsAssignment_4");
+					put(grammarAccess.getDirectionCSAccess().getImportsAssignment_5_1(), "rule__DirectionCS__ImportsAssignment_5_1");
+					put(grammarAccess.getDirectionCSAccess().getUsesAssignment_6_1(), "rule__DirectionCS__UsesAssignment_6_1");
+					put(grammarAccess.getDirectionCSAccess().getUsesAssignment_6_2_1(), "rule__DirectionCS__UsesAssignment_6_2_1");
 					put(grammarAccess.getGuardVariableCSAccess().getReferredTypedModelAssignment_2(), "rule__GuardVariableCS__ReferredTypedModelAssignment_2");
 					put(grammarAccess.getGuardVariableCSAccess().getNameAssignment_3(), "rule__GuardVariableCS__NameAssignment_3");
 					put(grammarAccess.getGuardVariableCSAccess().getOwnedTypeAssignment_5(), "rule__GuardVariableCS__OwnedTypeAssignment_5");

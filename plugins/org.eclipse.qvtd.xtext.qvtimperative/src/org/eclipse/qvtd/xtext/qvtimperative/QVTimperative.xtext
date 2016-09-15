@@ -30,7 +30,7 @@ CheckStatementCS: 'check' ownedCondition=ExpCS ';';
 	
 ControlStatementCS returns MappingStatementCS: AddStatementCS | MappingCallCS | MappingLoopCS;
 	
-DirectionCS: {DirectionCS} name=UnrestrictedName?
+DirectionCS: {DirectionCS} (isChecked?='check'|isEnforced?='enforce')? name=UnrestrictedName?
 	'imports' imports+=[pivot::Package|UnrestrictedName] (',' imports+=[pivot::Package|UnrestrictedName])*
 	('uses' uses+=[qvtimperative::ImperativeDomain|UnrestrictedName] (',' uses+=[qvtimperative::ImperativeDomain|UnrestrictedName])*)?
 ;

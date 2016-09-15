@@ -21,6 +21,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.CheckStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.InConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
@@ -64,6 +65,11 @@ public class QVTiStepperVisitor extends AbstractQVTimperativeStepperVisitor
 
 	@Override
 	public @Nullable IStepper visitGuardVariable(@NonNull GuardVariable asVariable) {
+		return NonStepper.INSTANCE;
+	}
+
+	@Override
+	public @Nullable IStepper visitImperativeTypedModel(@NonNull ImperativeTypedModel object) {
 		return NonStepper.INSTANCE;
 	}
 
