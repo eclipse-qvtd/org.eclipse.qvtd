@@ -28,10 +28,8 @@ map __root__ in hsv2hls {
 }
 
 map HSV2MiddleRoot in hsv2hls {	-- Mapping root nodes L to M
-	check hsv(in hsvRoot : HSVNode;) { } 
-	where(
-		check hsvRoot.parent = null;
-	) {}
+	check hsv(in:hsv hsvRoot : HSVNode;) { } 
+	check hsvRoot.parent = null;
 	new:middle middleRoot : HSVNode2HLSNode;
 	set middleRoot.hsv := hsvRoot;
 	set middleRoot.name := hsvRoot.name;
@@ -48,8 +46,8 @@ map HSV2MiddleRoot in hsv2hls {	-- Mapping root nodes L to M
 }
 
 map HSV2MiddleRecursion in hsv2hls { -- Mapping child nodes L to M
-	check hsv(in hsvNode : HSVNode;) {}
-	enforce middle(in middleParent : HSVNode2HLSNode;) {}
+	check hsv(in:hsv hsvNode : HSVNode;) {}
+	enforce middle(in:middle middleParent : HSVNode2HLSNode;) {}
 	new:middle middleNode : HSVNode2HLSNode;
 	set middleNode.parent := middleParent;
 	set middleNode.hsv := hsvNode;
@@ -64,7 +62,7 @@ map HSV2MiddleRecursion in hsv2hls { -- Mapping child nodes L to M
 }
 
 map Middle2HLSRoot in hsv2hls { -- Mapping root nodes M to R
-	check middle(in middleNode : HSVNode2HLSNode;) {}
+	check middle(in:middle middleNode : HSVNode2HLSNode;) {}
 	new:hls hlsNode : HLSNode;
 	set hlsNode.parent := null;
 	set middleNode.hls := hlsNode;
@@ -78,7 +76,7 @@ map Middle2HLSRoot in hsv2hls { -- Mapping root nodes M to R
 }
 
 map Middle2HLSRecursion in hsv2hls { -- Mapping child nodes M to R
-	check middle(in middleNode : HSVNode2HLSNode;) {}
+	check middle(in:middle middleNode : HSVNode2HLSNode;) {}
 	new:hls hlsNode : HLSNode;
 	set hlsNode.parent := middleNode.parent.hls;
 	set middleNode.hls := hlsNode;

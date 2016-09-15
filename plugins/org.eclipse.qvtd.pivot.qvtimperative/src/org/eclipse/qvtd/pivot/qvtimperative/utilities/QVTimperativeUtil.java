@@ -12,15 +12,11 @@ package org.eclipse.qvtd.pivot.qvtimperative.utilities;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
-import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
@@ -36,7 +32,6 @@ import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.TreeIterable;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
@@ -47,10 +42,9 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory.CreateStrategy;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
-import org.eclipse.qvtd.pivot.qvtimperative.Area;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativePattern;
+import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
@@ -59,7 +53,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
-import org.eclipse.qvtd.pivot.qvtimperative.VariablePredicate;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 
 public class QVTimperativeUtil extends QVTbaseUtil
@@ -74,8 +67,8 @@ public class QVTimperativeUtil extends QVTbaseUtil
 
 		@Override
 		public int compare(MappingCallBinding o1, MappingCallBinding o2) {
-			Variable v1 = o1.getBoundVariable();
-			Variable v2 = o2.getBoundVariable();
+			VariableDeclaration v1 = o1.getBoundVariable();
+			VariableDeclaration v2 = o2.getBoundVariable();
 			String n1 = v1 != null ? v1.getName() : null;
 			String n2 = v2 != null ? v2.getName() : null;
 			return ClassUtil.safeCompareTo(n1, n2);
@@ -130,8 +123,6 @@ public class QVTimperativeUtil extends QVTbaseUtil
 		ImperativeDomain coreDomain = QVTimperativeFactory.eINSTANCE.createImperativeDomain();
 		coreDomain.setName(typedModel.getName());
 		coreDomain.setTypedModel(typedModel);
-		coreDomain.setBottomPattern(QVTimperativeFactory.eINSTANCE.createBottomPattern());
-		coreDomain.setGuardPattern(QVTimperativeFactory.eINSTANCE.createGuardPattern());
 		return coreDomain;
 	}
 
@@ -149,8 +140,6 @@ public class QVTimperativeUtil extends QVTbaseUtil
 	public static @NonNull Mapping createMapping(@NonNull String name) {
 		Mapping mapping = QVTimperativeFactory.eINSTANCE.createMapping();
 		mapping.setName(name);
-		mapping.setBottomPattern(QVTimperativeFactory.eINSTANCE.createBottomPattern());
-		mapping.setGuardPattern(QVTimperativeFactory.eINSTANCE.createGuardPattern());
 		return mapping;
 	}
 
@@ -161,14 +150,14 @@ public class QVTimperativeUtil extends QVTbaseUtil
 		return mappingCall;
 	}
 
-	public static @NonNull MappingCallBinding createMappingCallBinding(@NonNull Variable variable, @NonNull OCLExpression value) {
+	public static @NonNull MappingCallBinding createMappingCallBinding(@NonNull VariableDeclaration variable, @NonNull OCLExpression value) {
 		MappingCallBinding mappingCallBinding = QVTimperativeFactory.eINSTANCE.createMappingCallBinding();
 		mappingCallBinding.setBoundVariable(variable);
 		mappingCallBinding.setValue(value);
 		return mappingCallBinding;
 	}
 
-	public static @NonNull MappingLoop createMappingLoop(@NonNull OCLExpression source, @NonNull Variable iterator, @NonNull MappingStatement mappingStatement) {
+	public static @NonNull MappingLoop createMappingLoop(@NonNull OCLExpression source, @NonNull LoopVariable iterator, @NonNull MappingStatement mappingStatement) {
 		assert iterator.eContainer() == null;
 		MappingLoop ml = QVTimperativeFactory.eINSTANCE.createMappingLoop();
 		ml.setOwnedSource(source);
@@ -220,7 +209,7 @@ public class QVTimperativeUtil extends QVTbaseUtil
 		return newStatement;
 	}
 
-	public static @NonNull SetStatement createSetStatement(@NonNull Variable asVariable, @NonNull Property asProperty, @NonNull OCLExpression asValueExpression) {
+	public static @NonNull SetStatement createSetStatement(@NonNull VariableDeclaration asVariable, @NonNull Property asProperty, @NonNull OCLExpression asValueExpression, boolean isEmit) {
 		SetStatement asSetAssignment = QVTimperativeFactory.eINSTANCE.createSetStatement();
 		if (asProperty.isIsImplicit()) {
 			asSetAssignment.setTargetProperty(asProperty.getOpposite());
@@ -230,8 +219,9 @@ public class QVTimperativeUtil extends QVTbaseUtil
 			asSetAssignment.setTargetProperty(asProperty);
 			asSetAssignment.setIsOpposite(false);
 		}
-		asSetAssignment.setSlotExpression(createVariableExp(asVariable));
+		asSetAssignment.setTargetVariable(asVariable);
 		asSetAssignment.setValue(asValueExpression);
+		asSetAssignment.setIsEmit(isEmit);
 		return asSetAssignment;
 	}
 
@@ -247,23 +237,24 @@ public class QVTimperativeUtil extends QVTbaseUtil
 		return typedModel;
 	}
 
-	public static @NonNull Area getArea(@NonNull Mapping mapping, @NonNull TypedModel typedModel) {
+	public static @NonNull ImperativeDomain getArea(@NonNull Mapping mapping, @NonNull TypedModel typedModel) {
 		for (Domain domain : mapping.getDomain()) {
 			if (domain.getTypedModel() == typedModel) {
 				return (ImperativeDomain)domain;
 			}
 		}
-		return mapping;
+		throw new IllegalStateException();
+		//		return mapping;
 	}
 
-	public static @Nullable Area getContainingArea(@Nullable EObject eObject) {
+	/*	public static @Nullable Area getContainingArea(@Nullable EObject eObject) {
 		for ( ; eObject != null; eObject = eObject.eContainer()) {
 			if (eObject instanceof Area) {
 				return (Area) eObject;
 			}
 		}
 		return null;
-	}
+	} */
 
 	/*	public static @NonNull Variable createVariable(@NonNull String name, @NonNull Type type) {
 		Variable bodyIt = PivotFactory.eINSTANCE.createVariable();
@@ -288,15 +279,6 @@ public class QVTimperativeUtil extends QVTbaseUtil
 		return null;
 	}
 
-	public static @Nullable ImperativePattern getContainingPattern(@Nullable EObject eObject) {
-		for ( ; eObject != null; eObject = eObject.eContainer()) {
-			if (eObject instanceof ImperativePattern) {
-				return (ImperativePattern) eObject;
-			}
-		}
-		return null;
-	}
-
 	public static @Nullable ImperativeDomain getDomain(@NonNull Mapping rule, @NonNull TypedModel typedModel) {
 		return (ImperativeDomain)getDomain((Rule)rule, typedModel);
 	}
@@ -306,18 +288,21 @@ public class QVTimperativeUtil extends QVTbaseUtil
 		return asSetStatement.isIsOpposite() ? ClassUtil.nonNullState(referredProperty.getOpposite()) : referredProperty;
 	}
 
-	public static @Nullable TypedModel getTypedModel(@Nullable Area area) {
-		if (area instanceof ImperativeDomain) {
-			return ((ImperativeDomain)area).getTypedModel();
+	public static @Nullable TypedModel getTypedModel(@Nullable Domain domain) {
+		if (domain instanceof ImperativeDomain) {
+			return ((ImperativeDomain)domain).getTypedModel();
 		}
 		else {
 			return null;
 		}
 	}
 
-	public static boolean isPrimitiveVariable(@NonNull Variable asVariable) {
-		Area asArea = QVTimperativeUtil.getContainingArea(asVariable);
-		if ((asArea instanceof Mapping) && !(asVariable.getType() instanceof CollectionType))  {
+	public static boolean isPrimitiveVariable(@NonNull VariableDeclaration asVariable) {
+		Domain asArea = QVTimperativeUtil.getContainingDomain(asVariable);
+		if (asArea != null) {
+			return false;
+		}
+		if (!(asVariable.getType() instanceof CollectionType))  {
 			return true;
 		}
 		return false;
@@ -334,9 +319,9 @@ public class QVTimperativeUtil extends QVTbaseUtil
 	}
 
 	/**
-	 * Sort the pattern variables into a least referenced foirst then alphabetical order.
+	 * Sort the pattern variables into a least referenced first then alphabetical order.
 	 */
-	public static void sortPatternVariables(@NonNull List<@NonNull Variable> variables) {
+	public static void sortPatternVariables(@NonNull List<@NonNull ? extends Variable> variables) {
 		if (variables.size() > 1) {
 			final Map<@NonNull Variable, @Nullable List<@NonNull VariableDeclaration>> def2refs = new HashMap<>();
 			//
@@ -402,12 +387,14 @@ public class QVTimperativeUtil extends QVTbaseUtil
 
 	/**
 	 * Return a copy of asVariablePredicates sorted to avoid reverse references from the predicate expressions.
-	 */
+	 *
 	public static @NonNull List<@NonNull VariablePredicate> sortVariablePredicates(@NonNull Mapping asMapping, @NonNull List<@NonNull VariablePredicate> asVariablePredicates) {
-		Set<@NonNull Variable> asGuardVariables = new HashSet<>();
-		asGuardVariables.addAll(ClassUtil.nullFree(asMapping.getGuardPattern().getVariable()));
+		Set<@NonNull VariableDeclaration> asGuardVariables = new HashSet<>();
+		asGuardVariables.addAll(ClassUtil.nullFree(asMapping.getGuardPattern().getOwnedGuardVariables()));
+		asGuardVariables.addAll(ClassUtil.nullFree(asMapping.getInoutVariables()));
+		asGuardVariables.addAll(ClassUtil.nullFree(asMapping.getOwnedPredicateVariables()));
 		for (Domain asDomain : asMapping.getDomain()) {
-			asGuardVariables.addAll(ClassUtil.nullFree(((ImperativeDomain)asDomain).getGuardPattern().getVariable()));
+			asGuardVariables.addAll(ClassUtil.nullFree(((ImperativeDomain)asDomain).getGuardPattern().getOwnedGuardVariables()));
 		}
 		List<@NonNull VariableDeclaration> pendingVariables = new ArrayList<>();
 		Map<@NonNull VariableDeclaration, @NonNull VariablePredicate> variable2predicate = new HashMap<>();
@@ -475,6 +462,6 @@ public class QVTimperativeUtil extends QVTbaseUtil
 			}
 		}
 		return asSortedVariablePredicates;
-	}
+	} */
 
 }

@@ -31,6 +31,7 @@ import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.TypeExp;
 import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.ids.IdManager;
 import org.eclipse.ocl.pivot.ids.IdResolver;
@@ -47,6 +48,7 @@ import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.SchedulerConstants;
 import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.InConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
@@ -78,7 +80,7 @@ public abstract class AbstractRegion2Mapping
 	/**
 	 * The QVTi variable for each connection.
 	 */
-	protected Map<@NonNull NodeConnection, @NonNull Variable> connection2variable = null;
+	protected Map<@NonNull NodeConnection, @NonNull ConnectionVariable> connection2variable = null;
 
 	public AbstractRegion2Mapping(@NonNull QVTs2QVTiVisitor visitor, @NonNull Region region) {
 		this.visitor = visitor;
@@ -118,21 +120,21 @@ public abstract class AbstractRegion2Mapping
 		return PivotUtil.createNavigationCallExp(asSource, asProperty);
 	}
 
-	protected @NonNull ConnectionVariable createConnectionVariable(@NonNull NodeConnection connection) {
+	protected @NonNull InConnectionVariable createInConnectionVariable(@NonNull NodeConnection connection) {
 		Type asType = getConnectionSourcesType(connection);
 		String name = connection.getName();
 		assert name != null;
-		return helper.createConnectionVariable(getSafeName(name), asType, null);
+		return helper.createInConnectionVariable(getSafeName(name), asType, true);
 	}
 
 	protected void createConnectionGuardVariables() {
 		List<@NonNull NodeConnection> intermediateConnections = region.getIntermediateConnections();
 		if (intermediateConnections.size() > 0) {
-			connection2variable = new HashMap<@NonNull NodeConnection, @NonNull Variable>();
+			connection2variable = new HashMap<>();
 			for (@NonNull NodeConnection connection : intermediateConnections) {
-				ConnectionVariable connectionVariable = createConnectionVariable(connection);
+				InConnectionVariable connectionVariable = createInConnectionVariable(connection);
 				connection2variable.put(connection, connectionVariable);
-				mapping.getGuardPattern().getVariable().add(connectionVariable);
+				mapping.getInoutVariables().add(connectionVariable);
 			}
 		}
 	}
@@ -243,9 +245,9 @@ public abstract class AbstractRegion2Mapping
 		return asType;
 	}
 
-	public @NonNull Variable getConnectionVariable(@NonNull NodeConnection connection) {
+	public @NonNull ConnectionVariable getConnectionVariable(@NonNull NodeConnection connection) {
 		assert connection2variable != null;
-		Variable connectionVariable = connection2variable.get(connection);
+		ConnectionVariable connectionVariable = connection2variable.get(connection);
 		assert connectionVariable != null;
 		return connectionVariable;
 	}
@@ -256,7 +258,7 @@ public abstract class AbstractRegion2Mapping
 
 	public abstract @NonNull List<@NonNull Node> getGuardNodes();
 
-	public abstract @NonNull Variable getGuardVariable(@NonNull Node node);
+	public abstract @NonNull VariableDeclaration getGuardVariable(@NonNull Node node);
 
 	/*	private @Nullable OCLExpression getInitExpression(@NonNull Node node) {
 		List<Edge> incomingEdges = node.getIncomingEdges();

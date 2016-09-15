@@ -31,12 +31,12 @@ import org.eclipse.ocl.pivot.DataType;
 import org.eclipse.ocl.pivot.Detail;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.NullLiteralExp;
-import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.ids.OperationId;
 import org.eclipse.ocl.pivot.internal.complete.StandardLibraryInternal;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
@@ -52,7 +52,6 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtbase.analysis.DomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
-import org.eclipse.qvtd.pivot.qvtimperative.Area;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
@@ -380,9 +379,9 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 				//				if ("s.name := sn".equals(eObject.toString())) {
 				//					eObject.toString();
 				//				}
-				OCLExpression slotExpression = setStatement.getSlotExpression();
-				assert slotExpression != null;
-				DomainUsage domainUsage = getUsage(slotExpression);
+				VariableDeclaration targetVariable = setStatement.getTargetVariable();
+				assert targetVariable != null;
+				DomainUsage domainUsage = getUsage(targetVariable);
 				if (!domainUsage.isOutput() && !domainUsage.isMiddle()) {
 					Property targetProperty = QVTimperativeUtil.getTargetProperty(setStatement);
 					//					System.out.println("Dirty " + targetProperty + " for " + eObject);
@@ -525,27 +524,24 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 		if (asCallExp.getOwnedSource().getTypeValue() instanceof DataType) {
 			return getPrimitiveUsage();
 		}
-		Area area = QVTimperativeUtil.getContainingArea(asCallExp);
-		if (area instanceof ImperativeDomain) {
-			DomainUsage areaUsage = getUsage(area);
+		Domain aDomain = QVTimperativeUtil.getContainingDomain(asCallExp);
+		if (aDomain instanceof ImperativeDomain) {
+			DomainUsage areaUsage = getUsage(aDomain);
 			return intersection(sourceUsage, areaUsage);
 		}
-		else if (area instanceof Mapping) {
-			DomainUsage inputUsage = getNoneUsage();
-			for (Domain domain : ((Mapping)area).getDomain()) {
-				if (!domain.isIsEnforceable()) {
-					inputUsage = union(inputUsage, getUsage(domain));
-				}
-			}
-			if (inputUsage != getNoneUsage()) {
-				return intersection(sourceUsage, inputUsage);
-			}
-			else {				// Att root so no domains, use input
-				return intersection(sourceUsage, getInputUsage());
+		Mapping mapping = QVTimperativeUtil.getContainingMapping(asCallExp);
+		assert mapping != null;
+		DomainUsage inputUsage = getNoneUsage();
+		for (Domain domain : mapping.getDomain()) {
+			if (!domain.isIsEnforceable()) {
+				inputUsage = union(inputUsage, getUsage(domain));
 			}
 		}
-		else {
-			return sourceUsage;
+		if (inputUsage != getNoneUsage()) {
+			return intersection(sourceUsage, inputUsage);
+		}
+		else {				// Att root so no domains, use input
+			return intersection(sourceUsage, getInputUsage());
 		}
 	}
 

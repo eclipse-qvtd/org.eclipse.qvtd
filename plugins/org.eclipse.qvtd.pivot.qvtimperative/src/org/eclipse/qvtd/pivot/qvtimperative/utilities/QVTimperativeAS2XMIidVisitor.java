@@ -18,11 +18,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.internal.utilities.AS2XMIid;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
-import org.eclipse.qvtd.pivot.qvtimperative.Assignment;
-import org.eclipse.qvtd.pivot.qvtimperative.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativePattern;
-import org.eclipse.qvtd.pivot.qvtimperative.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
@@ -37,19 +33,6 @@ public class QVTimperativeAS2XMIidVisitor extends AbstractQVTimperativeAS2XMIidV
 
 	protected QVTimperativeAS2XMIidVisitor(@NonNull AS2XMIid context) {
 		super(context);
-	}
-
-	@Override
-	protected void appendNameOf(@NonNull Object element) {
-		if (element instanceof BottomPattern) {
-			appendName("bottom");
-		}
-		else if (element instanceof GuardPattern) {
-			appendName("guard");
-		}
-		else {
-			super.appendNameOf(element);
-		}
 	}
 
 	private void appendParentStatements(EObject object) {
@@ -70,17 +53,7 @@ public class QVTimperativeAS2XMIidVisitor extends AbstractQVTimperativeAS2XMIidV
 	}
 
 	@Override
-	public @Nullable Boolean visitAssignment(@NonNull Assignment object) {
-		return null;
-	}
-
-	@Override
 	public @Nullable Boolean visitImperativeDomain(@NonNull ImperativeDomain asImperativeDomain) {
-		return null;
-	}
-
-	@Override
-	public @Nullable Boolean visitImperativePattern(@NonNull ImperativePattern asImperativePattern) {
 		return null;
 	}
 

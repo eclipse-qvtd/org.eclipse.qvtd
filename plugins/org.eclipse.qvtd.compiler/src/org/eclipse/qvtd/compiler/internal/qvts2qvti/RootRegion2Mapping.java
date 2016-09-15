@@ -51,10 +51,10 @@ import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RootCompositionRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.SchedulerConstants;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
-import org.eclipse.qvtd.pivot.qvtimperative.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativePattern;
+import org.eclipse.qvtd.pivot.qvtimperative.OutConnectionVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.PredicateVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 
 public class RootRegion2Mapping extends AbstractScheduledRegion2Mapping
@@ -62,12 +62,12 @@ public class RootRegion2Mapping extends AbstractScheduledRegion2Mapping
 	/**
 	 * Mapping from the type to allInstances variable.
 	 */
-	private final @NonNull Map<@NonNull ClassDatumAnalysis, @NonNull Variable> classDatumAnalysis2variable = new HashMap<@NonNull ClassDatumAnalysis, @NonNull Variable>();
+	private final @NonNull Map<@NonNull ClassDatumAnalysis, @NonNull PredicateVariable> classDatumAnalysis2variable = new HashMap<>();
 
 	/**
 	 * Mapping from the scheduled Nodes to their QVTi variables.
 	 */
-	private final @NonNull Map<@NonNull Node, @NonNull Variable> node2variable = new HashMap<@NonNull Node, @NonNull Variable>();
+	private final @NonNull Map<@NonNull Node, @NonNull Variable> node2variable = new HashMap<>();
 	//	private Variable rootsVariable = null;
 
 	//	private final @NonNull Map<@NonNull NodeConnection, @NonNull ConnectionVariable> connection2variable = new HashMap<@NonNull NodeConnection, @NonNull ConnectionVariable>();
@@ -110,7 +110,7 @@ public class RootRegion2Mapping extends AbstractScheduledRegion2Mapping
 
 	private @NonNull OCLExpression createObjectsOfKindExpression(@NonNull Node resultNode) {	// FIXME compute input typed model
 		ClassDatumAnalysis classDatumAnalysis = resultNode.getClassDatumAnalysis();
-		Variable allInstancesVariable = classDatumAnalysis2variable.get(classDatumAnalysis);
+		PredicateVariable allInstancesVariable = classDatumAnalysis2variable.get(classDatumAnalysis);
 		if (allInstancesVariable == null) {
 			Type collectionType = classDatumAnalysis.getCompleteClass().getPrimaryClass();
 			Type elementType = ((CollectionType)collectionType).getElementType();
@@ -123,26 +123,26 @@ public class RootRegion2Mapping extends AbstractScheduledRegion2Mapping
 			VariableExp modelExp = helper.createVariableExp(contextVariable);
 			TypeExp typeExp = helper.createTypeExp(elementType);
 			OCLExpression asSource = helper.createOperationCallExp(modelExp, "objectsOfKind", typeExp);
-			allInstancesVariable = PivotUtil.createVariable(resultNode.getName(), asSource);
-			mapping.getBottomPattern().getVariable().add(allInstancesVariable);
+			Type sourceType = asSource.getType();
+			assert sourceType != null;
+			allInstancesVariable = helper.createLocalOrPredicateVariable(resultNode.getName(), sourceType, true, asSource);
+			mapping.getOwnedStatements().add(allInstancesVariable);
 			classDatumAnalysis2variable.put(classDatumAnalysis, allInstancesVariable);
 		}
 		return helper.createVariableExp(allInstancesVariable);
 	}
 
-	private @NonNull ConnectionVariable createRootConnectionVariable(@NonNull ImperativePattern pattern, @NonNull String name, @NonNull Type type, @Nullable OCLExpression initExpression) {
+	private @NonNull ConnectionVariable createRootConnectionVariable(@NonNull String name, @NonNull Type type, @Nullable OCLExpression initExpression) {
 		//		Type variableType = visitor.getEnvironmentFactory().getCompleteEnvironment().getSetType(node.getCompleteClass().getPrimaryClass(), true, null, null);
 		//		assert variableType != null;
-		ConnectionVariable variable = helper.createConnectionVariable(getSafeName(name), type, initExpression);
-		pattern.getVariable().add(variable);
+		OutConnectionVariable variable = helper.createOutConnectionVariable(getSafeName(name), type, true, initExpression);
+		mapping.getOwnedStatements().add(variable);
 		//		Variable oldVariable = node2variable.put(node, variable);
 		//		assert oldVariable == null;
 		return variable;
 	}
 
 	private void createRootConnectionVariables() {
-		BottomPattern bottomPattern = mapping.getBottomPattern();
-		assert bottomPattern != null;
 		List<@NonNull NodeConnection> rootConnections = new ArrayList<@NonNull NodeConnection>(region.getRootConnections());
 		Collections.sort(rootConnections, NameUtil.NAMEABLE_COMPARATOR);
 		for (@NonNull NodeConnection rootConnection : rootConnections) {
@@ -158,14 +158,14 @@ public class RootRegion2Mapping extends AbstractScheduledRegion2Mapping
 					case 1: initExpression = getFilteredExpression(initExpression, (NavigableEdge) incomingEdges.get(0)); break;
 					default: assert false;
 				}
-				connection2variable.put(rootConnection, createRootConnectionVariable(bottomPattern, name, commonType, initExpression));
+				connection2variable.put(rootConnection, createRootConnectionVariable(name, commonType, initExpression));
 			}
 			else if (commonType instanceof CollectionType) {
 				CollectionLiteralExp initExpression = PivotFactory.eINSTANCE.createCollectionLiteralExp();
 				initExpression.setType(commonType);
 				initExpression.setKind(TypeUtil.getCollectionKind((CollectionType) commonType));
 				initExpression.setIsRequired(true);
-				connection2variable.put(rootConnection, createRootConnectionVariable(bottomPattern, name, commonType, initExpression));
+				connection2variable.put(rootConnection, createRootConnectionVariable(name, commonType, initExpression));
 			}
 			else {
 				CollectionLiteralExp initExpression = PivotFactory.eINSTANCE.createCollectionLiteralExp();
@@ -173,7 +173,7 @@ public class RootRegion2Mapping extends AbstractScheduledRegion2Mapping
 				initExpression.setType(setType);
 				initExpression.setKind(CollectionKind.SET);
 				initExpression.setIsRequired(true);
-				connection2variable.put(rootConnection, createRootConnectionVariable(bottomPattern, name, setType, initExpression));
+				connection2variable.put(rootConnection, createRootConnectionVariable(name, setType, initExpression));
 			}
 		}
 	}

@@ -285,9 +285,7 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 	public void internalExecuteSetStatement(@NonNull SetStatement setStatement, @NonNull Object sourceObject, @Nullable Object ecoreValue, @Nullable Object childKey) {
 		super.internalExecuteSetStatement(setStatement, sourceObject, ecoreValue, childKey);
 		if (mode == Mode.LAZY) {
-			Mapping asMapping = QVTimperativeUtil.getContainingMapping(setStatement);
-			assert asMapping != null;
-			if (transformationAnalysis.isHazardousWrite(asMapping, setStatement)) {
+			if (setStatement.isIsEmit()) {
 				Property targetProperty = QVTimperativeUtil.getTargetProperty(setStatement);
 				assert targetProperty != null;
 				EStructuralFeature eFeature = (EStructuralFeature)targetProperty.getESObject();

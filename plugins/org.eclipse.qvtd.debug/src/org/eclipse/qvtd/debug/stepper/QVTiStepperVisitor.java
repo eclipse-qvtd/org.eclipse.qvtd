@@ -13,23 +13,25 @@ package org.eclipse.qvtd.debug.stepper;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.debug.stepper.NonStepper;
-import org.eclipse.ocl.examples.debug.stepper.PostStepper;
 import org.eclipse.ocl.examples.debug.vm.evaluator.IStepper;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
-import org.eclipse.qvtd.pivot.qvtimperative.Assignment;
-import org.eclipse.qvtd.pivot.qvtimperative.BottomPattern;
-import org.eclipse.qvtd.pivot.qvtimperative.BottomStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.CheckStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
-import org.eclipse.qvtd.pivot.qvtimperative.GuardPattern;
+import org.eclipse.qvtd.pivot.qvtimperative.GuardVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.InConnectionVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.OutConnectionVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.PredicateVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 
 public class QVTiStepperVisitor extends AbstractQVTimperativeStepperVisitor
@@ -46,17 +48,7 @@ public class QVTiStepperVisitor extends AbstractQVTimperativeStepperVisitor
 	}
 
 	@Override
-	public @Nullable IStepper visitAssignment(@NonNull Assignment object) {
-		return PostStepper.INSTANCE;
-	}
-
-	@Override
-	public @Nullable IStepper visitBottomPattern(@NonNull BottomPattern object) {
-		return NonStepper.INSTANCE;
-	}
-
-	@Override
-	public IStepper visitBottomStatement(@NonNull BottomStatement object) {
+	public @Nullable IStepper visitCheckStatement(@NonNull CheckStatement object) {
 		return NonStepper.INSTANCE;
 	}
 
@@ -71,7 +63,17 @@ public class QVTiStepperVisitor extends AbstractQVTimperativeStepperVisitor
 	}
 
 	@Override
-	public @Nullable IStepper visitGuardPattern(@NonNull GuardPattern object) {
+	public @Nullable IStepper visitGuardVariable(@NonNull GuardVariable asVariable) {
+		return NonStepper.INSTANCE;
+	}
+
+	@Override
+	public @Nullable IStepper visitInConnectionVariable(@NonNull InConnectionVariable object) {
+		return NonStepper.INSTANCE;
+	}
+
+	@Override
+	public @Nullable IStepper visitLoopVariable(@NonNull LoopVariable asVariable) {
 		return NonStepper.INSTANCE;
 	}
 
@@ -106,7 +108,22 @@ public class QVTiStepperVisitor extends AbstractQVTimperativeStepperVisitor
 	}
 
 	@Override
+	public @Nullable IStepper visitOutConnectionVariable(@NonNull OutConnectionVariable object) {
+		return NonStepper.INSTANCE;
+	}
+
+	@Override
 	public @Nullable IStepper visitPredicate(@NonNull Predicate object) {
+		return NonStepper.INSTANCE;
+	}
+
+	@Override
+	public @Nullable IStepper visitPredicateVariable(@NonNull PredicateVariable asVariable) {
+		return NonStepper.INSTANCE;
+	}
+
+	@Override
+	public @Nullable IStepper visitSetStatement(@NonNull SetStatement object) {
 		return NonStepper.INSTANCE;
 	}
 

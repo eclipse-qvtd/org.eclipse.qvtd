@@ -31,7 +31,7 @@ public class MappingCallBindingAttribution extends EmptyAttribution
 		MappingCall mappingCall = mappingCallBinding.getMappingCall();
 		if (mappingCall != null) {
 			EStructuralFeature targetReference = environmentView.getReference();
-			if (targetReference.getEType() == PivotPackage.Literals.VARIABLE) {
+			if (targetReference.getEType() == PivotPackage.Literals.VARIABLE_DECLARATION) {
 				Mapping referredMapping = mappingCall.getReferredMapping();
 				if (referredMapping != null) {
 					QVTimperativeEnvironmentUtil.addMiddleGuardVariables(environmentView, referredMapping);

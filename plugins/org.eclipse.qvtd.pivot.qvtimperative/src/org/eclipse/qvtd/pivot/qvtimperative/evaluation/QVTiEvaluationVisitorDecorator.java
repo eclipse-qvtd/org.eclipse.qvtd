@@ -28,18 +28,13 @@ import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
-import org.eclipse.qvtd.pivot.qvtimperative.Assignment;
-import org.eclipse.qvtd.pivot.qvtimperative.BottomPattern;
-import org.eclipse.qvtd.pivot.qvtimperative.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativePattern;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
-import org.eclipse.qvtd.pivot.qvtimperative.VariableAssignment;
 
 /**
  * QVTcoreEvaluationVisitorImpl is the class for ...
@@ -206,24 +201,8 @@ implements IQVTiEvaluationVisitor {
 	 * Delegates to my decorated visitor.
 	 */
 	@Override
-	public @Nullable Object visitAssignment(@NonNull Assignment assignment) {
-		return delegate.visitAssignment(assignment);
-	}
-
-	/**
-	 * Delegates to my decorated visitor.
-	 */
-	@Override
 	public @Nullable Object visitBaseModel(@NonNull BaseModel baseModel) {
 		return delegate.visitBaseModel(baseModel);
-	}
-
-	/**
-	 * Delegates to my decorated visitor.
-	 */
-	@Override
-	public @Nullable Object visitBottomPattern(@NonNull BottomPattern bottomPattern) {
-		return delegate.visitBottomPattern(bottomPattern);
 	}
 
 	/**
@@ -254,24 +233,40 @@ implements IQVTiEvaluationVisitor {
 	 * Delegates to my decorated visitor.
 	 */
 	@Override
-	public @Nullable Object visitGuardPattern(@NonNull GuardPattern guardPattern) {
-		return delegate.visitGuardPattern(guardPattern);
-	}
-
-	/**
-	 * Delegates to my decorated visitor.
-	 */
-	@Override
-	public @Nullable Object visitImperativePattern(@NonNull ImperativePattern corePattern) {
-		return delegate.visitImperativePattern(corePattern);
-	}
-
-	/**
-	 * Delegates to my decorated visitor.
-	 */
-	@Override
 	public @Nullable Object visitImperativeDomain(@NonNull ImperativeDomain coreDomain) {
 		return delegate.visitImperativeDomain(coreDomain);
+	}
+
+	/**
+	 * Delegates to my decorated visitor.
+	 */
+	@Override
+	public @Nullable Object visitImperativeModel(@NonNull ImperativeModel imperativeModel) {
+		return delegate.visitImperativeModel(imperativeModel);
+	}
+
+	/**
+	 * Delegates to my decorated visitor.
+	 */
+	@Override
+	public @Nullable Object visitMapping(@NonNull Mapping mapping) {
+		return delegate.visitMapping(mapping);
+	}
+
+	/**
+	 * Delegates to my decorated visitor.
+	 */
+	@Override
+	public @Nullable Object visitMappingCall(@NonNull MappingCall mappingCall) {
+		return delegate.visitMappingCall(mappingCall);
+	}
+
+	/**
+	 * Delegates to my decorated visitor.
+	 */
+	@Override
+	public @Nullable Object visitMappingCallBinding(@NonNull MappingCallBinding mappingCallBinding) {
+		return delegate.visitMappingCallBinding(mappingCallBinding);
 	}
 
 	/**
@@ -336,46 +331,6 @@ implements IQVTiEvaluationVisitor {
 	@Override
 	public @Nullable Object visitImport(@NonNull Import _import) {
 		return delegate.visitImport(_import);
-	}
-
-	/**
-	 * Delegates to my decorated visitor.
-	 */
-	@Override
-	public @Nullable Object visitVariableAssignment(@NonNull VariableAssignment variableAssignment) {
-		return delegate.visitVariableAssignment(variableAssignment);
-	}
-
-	/**
-	 * Delegates to my decorated visitor.
-	 */
-	@Override
-	public @Nullable Object visitImperativeModel(@NonNull ImperativeModel imperativeModel) {
-		return delegate.visitImperativeModel(imperativeModel);
-	}
-
-	/**
-	 * Delegates to my decorated visitor.
-	 */
-	@Override
-	public @Nullable Object visitMapping(@NonNull Mapping mapping) {
-		return delegate.visitMapping(mapping);
-	}
-
-	/**
-	 * Delegates to my decorated visitor.
-	 */
-	@Override
-	public @Nullable Object visitMappingCall(@NonNull MappingCall mappingCall) {
-		return delegate.visitMappingCall(mappingCall);
-	}
-
-	/**
-	 * Delegates to my decorated visitor.
-	 */
-	@Override
-	public @Nullable Object visitMappingCallBinding(@NonNull MappingCallBinding mappingCallBinding) {
-		return delegate.visitMappingCallBinding(mappingCallBinding);
 	}
 
 	/**

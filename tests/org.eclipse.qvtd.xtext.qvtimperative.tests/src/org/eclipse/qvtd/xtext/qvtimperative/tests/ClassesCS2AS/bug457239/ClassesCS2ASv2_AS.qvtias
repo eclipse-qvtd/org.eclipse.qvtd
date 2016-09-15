@@ -15,22 +15,17 @@
       </modelParameter>
       <rule xsi:type="qvti:Mapping" xmi:id="m..classescs2as.createPackage" name="createPackage">
         <domain xsi:type="qvti:ImperativeDomain" isCheckable="true" isEnforceable="false" typedModel="#qT..classescs2as.leftCS">
-          <guardPattern>
-            <variable name="packageCS" isRequired="false" type="pivot:Class ../ClassesCS.ecore.oclas#T.classescs.PackageCS"/>
-          </guardPattern>
-          <bottomPattern/>
+          <ownedGuardVariables name="packageCS" isRequired="false" type="pivot:Class ../ClassesCS.ecore.oclas#T.classescs.PackageCS" referredTypedModel="#qT..classescs2as.leftCS"/>
         </domain>
-        <guardPattern/>
-        <bottomPattern/>
         <ownedStatements xsi:type="qvti:NewStatement" xmi:id="qV..classescs2as.createPackage._package" name="_package" isRequired="false"
             type="pivot:Class ../Classes.ecore.oclas#T.classes.Package" referredTypedModel="#qT..classescs2as.rightAS"/>
-        <ownedStatements xsi:type="qvti:SetStatement" targetProperty="../Classes.ecore.oclas#p.classes.NamedElement.name">
-          <slotExpression isRequired="false" type="pivot:Class ../Classes.ecore.oclas#T.classes.Package" referredVariable="#qV..classescs2as.createPackage._package"/>
+        <ownedStatements xsi:type="qvti:SetStatement" targetVariable="#qV..classescs2as.createPackage._package" targetProperty="../Classes.ecore.oclas#p.classes.NamedElement.name"
+            isEmit="false">
           <value xsi:type="pivot:IfExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String">
             <ownedCondition xsi:type="pivot:OperationCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
                 referredOperation="helpers.ocl.oclas#o.ocl.OclElement.aBooleanElementOp">
               <ownedSource xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class ../ClassesCS.ecore.oclas#T.classescs.PackageCS"
-                  referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.0/@domain.0/@guardPattern/@variable.0"/>
+                  referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.0/@domain.0/@ownedGuardVariables.0"/>
             </ownedCondition>
             <ownedElse xsi:type="pivot:StringLiteralExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
                 stringSymbol="unexpected"/>
@@ -40,13 +35,11 @@
         </ownedStatements>
       </rule>
       <rule xsi:type="qvti:Mapping" xmi:id="m..classescs2as.__root__" name="__root__">
-        <guardPattern/>
-        <bottomPattern/>
         <ownedStatements xsi:type="qvti:MappingLoop">
-          <ownedIterators xmi:id="i..classescs2as.__root__.0.packageCS" name="packageCS" type="pivot:Class ../ClassesCS.ecore.oclas#T.classescs.PackageCS"/>
+          <ownedIterators name="packageCS" type="pivot:Class ../ClassesCS.ecore.oclas#T.classescs.PackageCS"/>
           <ownedMappingStatements xsi:type="qvti:MappingCall" isInfinite="false" referredMapping="#m..classescs2as.createPackage">
-            <binding boundVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.0/@domain.0/@guardPattern/@variable.0" isPolled="false">
-              <value xsi:type="pivot:VariableExp" type="pivot:Class ../ClassesCS.ecore.oclas#T.classescs.PackageCS" referredVariable="#i..classescs2as.__root__.0.packageCS"/>
+            <binding boundVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.0/@domain.0/@ownedGuardVariables.0" isPolled="false">
+              <value xsi:type="pivot:VariableExp" type="pivot:Class ../ClassesCS.ecore.oclas#T.classescs.PackageCS" referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.1/@ownedStatements.0/@ownedIterators.0"/>
             </binding>
           </ownedMappingStatements>
           <ownedSource xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.0" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclElement.allInstances">

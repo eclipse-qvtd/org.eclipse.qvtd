@@ -17,7 +17,7 @@ map __root__ in ManualUML2RDBMS {
 }
 
 map packageToSchemaLM in ManualUML2RDBMS {
-    check uml (in p:Package;) { }
+    check uml(in:uml p:Package;) { }
     new:middle p2s:PackageToSchema;
     set p2s.umlPackage := p;
     set p2s.name := p.name;
@@ -69,7 +69,7 @@ map packageToSchemaLM in ManualUML2RDBMS {
 }
 
 map packageToSchemaMR in ManualUML2RDBMS {
-    check middle (in p2s:PackageToSchema;) {}
+    check middle(in:middle p2s:PackageToSchema;) {}
     new:rdbms s:Schema;
     set p2s.schema := s;
     call packageToSchemaMR_1 {
@@ -100,18 +100,17 @@ map packageToSchemaMR in ManualUML2RDBMS {
 }
 
 map packageToSchemaMR_1 in ManualUML2RDBMS {
-    check middle (in p2s_1:PackageToSchema;) {}
-    enforce rdbms (in s_1:Schema;) {}
+    check middle(in:middle p2s_1:PackageToSchema;) {}
+    enforce rdbms(in:rdbms s_1:Schema;) {}
     set s_1.name := p2s_1.name;
 }
 
 map integerToNumberLM in ManualUML2RDBMS {
-    check uml (in p:Package; in prim:PrimitiveDataType;) {}
-    enforce middle (in p2s:PackageToSchema;) {}
-    where (check prim.namespace = p;
-        check prim.name = 'Integer';
-        check p2s.umlPackage=p;
-    ) {}
+    check uml(in:uml p:Package; in:uml prim:PrimitiveDataType;) {}
+    enforce middle(in:middle  p2s:PackageToSchema;) {}
+    check prim.namespace = p;
+    check prim.name = 'Integer';
+    check p2s.umlPackage=p;
     new:middle p2n:PrimitiveToName;
     set p2n.owner := p2s;
     set p2n._'primitive' := prim;
@@ -120,21 +119,17 @@ map integerToNumberLM in ManualUML2RDBMS {
 }
 
 map integerToNumberMR in ManualUML2RDBMS {
-    check middle (in p2s:PackageToSchema; in p2n:PrimitiveToName;) {}
-    where (
-    	check p2n.owner = p2s;
-        check p2n.name = 'Integer' + '2' + 'NUMBER';
-    ) {}
+    check middle(in:middle p2s:PackageToSchema; in:middle p2n:PrimitiveToName;) {}
+    check p2n.owner = p2s;
+    check p2n.name = 'Integer' + '2' + 'NUMBER';
 }
 
 map booleanToBooleanLM in ManualUML2RDBMS {
-    check uml (in p:Package; in prim:PrimitiveDataType;) { }
-    enforce middle (in p2s:PackageToSchema;) {}
-    where (
-        check prim.namespace = p;
-        check prim.name = 'Boolean';
-        check p2s.umlPackage=p;
-    ) {}
+    check uml(in:uml p:Package; in:uml prim:PrimitiveDataType;) { }
+    enforce middle(in:middle p2s:PackageToSchema;) {}
+    check prim.namespace = p;
+    check prim.name = 'Boolean';
+    check p2s.umlPackage=p;
     new:middle p2n:PrimitiveToName;
     set p2n.owner := p2s;
     set p2n._'primitive' := prim;
@@ -143,22 +138,17 @@ map booleanToBooleanLM in ManualUML2RDBMS {
 }
 
 map booleanToBooleanMR in ManualUML2RDBMS {
-    check middle (in p2s:PackageToSchema; in p2n:PrimitiveToName;) {}
-    enforce rdbms () {}
-    where (
-        check p2n.owner = p2s;
-        check p2n.name = 'Boolean' + '2' + 'BOOLEAN';
-    ) {}
+    check middle(in:middle p2s:PackageToSchema; in:middle p2n:PrimitiveToName;) {}
+    check p2n.owner = p2s;
+    check p2n.name = 'Boolean' + '2' + 'BOOLEAN';
 }
 
 map stringToVarcharLM in ManualUML2RDBMS {
-    check uml (in p:Package; in prim:PrimitiveDataType;) { }
-    enforce middle (in p2s:PackageToSchema;) {}
-    where (
-        check prim.namespace = p;
-        check prim.name = 'String';
-        check p2s.umlPackage=p;
-    ) {}
+    check uml(in:uml p:Package; in:uml prim:PrimitiveDataType;) { }
+    enforce middle(in:middle p2s:PackageToSchema;) {}
+    check prim.namespace = p;
+    check prim.name = 'String';
+    check p2s.umlPackage=p;
     new:middle p2n:PrimitiveToName;
     set p2n.owner := p2s;
     set p2n._'primitive' := prim;
@@ -167,12 +157,9 @@ map stringToVarcharLM in ManualUML2RDBMS {
 }
 
 map stringToVarcharMR in ManualUML2RDBMS {
-    check middle (in p2s:PackageToSchema; in p2n:PrimitiveToName;) {}
-    enforce rdbms () {}
-    where (
-        check p2n.owner = p2s;
-        check p2n.name = 'String' + '2' + 'VARCHAR';
-    ) {}
+    check middle(in:middle p2s:PackageToSchema; in:middle p2n:PrimitiveToName;) {}
+    check p2n.owner = p2s;
+    check p2n.name = 'String' + '2' + 'VARCHAR';
 }
 
 query ManualUML2RDBMS::getAllSupers(cls : UML::Class[1]) : Set(UML::Class) {
@@ -188,13 +175,11 @@ query ManualUML2RDBMS::getAllForwards(cls : UML::Class[1]) : Set(UML::Associatio
 }
 
 map classToTableLM in ManualUML2RDBMS {
-    check uml (in p:Package; in c:Class;) { }
-    enforce middle (in p2s:PackageToSchema;) {}
-    where (
-        check c.kind = 'persistent';
-        check c.namespace = p;
-        check p2s.umlPackage=p;
-    ) {}
+    check uml(in:uml p:Package; in:uml c:Class;) { }
+    enforce middle(in:middle p2s:PackageToSchema;) {}
+    check c.kind = 'persistent';
+    check c.namespace = p;
+    check p2s.umlPackage=p;
     new:middle c2t:ClassToTable;
     set c2t.owner := p2s;
     set c2t.umlClass := c;
@@ -223,11 +208,9 @@ map classToTableLM in ManualUML2RDBMS {
 }
 
 map classToTableMR in ManualUML2RDBMS {
-    check middle (in p2s:PackageToSchema; in c2t:ClassToTable;) {}
-    enforce rdbms (in s:Schema;) {}
-    where (
-        check c2t.owner = p2s;
-    ) {}
+    check middle(in:middle p2s:PackageToSchema; in:middle c2t:ClassToTable;) {}
+    enforce rdbms(in:rdbms s:Schema;) {}
+    check c2t.owner = p2s;
     new:rdbms t:Table;
     set t.kind := 'base';
     set t.schema := s;
@@ -264,15 +247,15 @@ map classToTableMR in ManualUML2RDBMS {
 }
 
 map classToTableMR_1 in ManualUML2RDBMS {
-    check middle (in c2t_1:ClassToTable;) {}
-    enforce rdbms (in t_1:Table;) { }
+    check middle(in:middle c2t_1:ClassToTable;) {}
+    enforce rdbms(in:rdbms t_1:Table;) { }
     set c2t_1.table := t_1;
     set t_1.name := c2t_1.name;
 }
 
 map classToTableMR_2 in ManualUML2RDBMS {
-    check middle (in c2t_2:ClassToTable;) {}
-    enforce rdbms (in t_2:Table;) {}
+    check middle(in:middle c2t_2:ClassToTable;) {}
+    enforce rdbms(in:rdbms t_2:Table;) {}
     new:rdbms pk:Key;
     new:rdbms pc:Column;
     set pk.owner := t_2;
@@ -293,32 +276,33 @@ map classToTableMR_2 in ManualUML2RDBMS {
 }
 
 map classToTableMR_2_1 in ManualUML2RDBMS {
-    check middle (in c2t_2_1:ClassToTable;) {}
-	enforce rdbms (in pk_2_1:Key; in pc_2_1:Column;) {}
+    check middle(in:middle c2t_2_1:ClassToTable;) {}
+	enforce rdbms(in:rdbms pk_2_1:Key; in:rdbms pc_2_1:Column;) {}
     set c2t_2_1.primaryKey := pk_2_1;
     set c2t_2_1.column := pc_2_1;
 }
         
 map classToTableMR_2_2 in ManualUML2RDBMS {
-    check middle () {}
-    enforce rdbms (in pk_2_2:Key; in pc_2_2:Column; in t_2_2:Table;) {}
+    enforce rdbms(in:rdbms pk_2_2:Key; in:rdbms pc_2_2:Column; in:rdbms t_2_2:Table;) {}
     set pc_2_2.name := t_2_2.name+'_tid';
     set pk_2_2.name := t_2_2.name+'_pk';
 }
 
 map associationToForeignKeyLM in ManualUML2RDBMS {
-    check uml (in p:Package; invar sc:Class := a.source; invar dc:Class := a.destination; in a:Association;) {
+    check uml(in:uml p:Package; in:uml a:Association;) {
 --            sc.namespace = p;
-        }
-    enforce middle (in p2s:PackageToSchema; invar sc2t:ClassToTable := sc.ClassToTable; invar dc2t:ClassToTable := dc.ClassToTable;) {}
-    where (
-        check a.namespace = p;
-        check sc.namespace = p;
-         -- getAllForwards(sc)->includes(a);
-        -- getAllSupers(dc)->includes(a.destination);
-        check p2s.umlPackage = p;
-    ) {}
-    new:middle a2f:AssociationToForeignKey;
+    }
+    enforce middle(in:middle p2s:PackageToSchema; ) {}
+	check sc:Class := a.source;
+	check dc:Class := a.destination;
+	check sc2t:ClassToTable := sc.ClassToTable;
+	check dc2t:ClassToTable := dc.ClassToTable;
+    check a.namespace = p;
+    check sc.namespace = p;
+     -- getAllForwards(sc)->includes(a);
+    -- getAllSupers(dc)->includes(a.destination);
+    check p2s.umlPackage = p;
+	new:middle a2f:AssociationToForeignKey;
     set sc2t.owner := p2s;
     set a2f.owner := sc2t;
     set a2f.referenced := dc2t;
@@ -335,20 +319,18 @@ map associationToForeignKeyLM in ManualUML2RDBMS {
 }
 
 map associationToForeignKeyMR in ManualUML2RDBMS {
-    check middle (in p2s:PackageToSchema; in sc2t:ClassToTable; in dc2t:ClassToTable; in a2f:AssociationToForeignKey;) {}
-    enforce rdbms (in s:Schema; in st:Table; in dt:Table; in rk:Key;) {}
-    where (
-        check a2f.owner = sc2t;
-        check a2f.referenced = dc2t;
-        check p2s.schema = s;
-        --sc2t.table = st;
-        --dc2t.table = dt; 
+    check middle(in:middle p2s:PackageToSchema; in:middle sc2t:ClassToTable; in:middle dc2t:ClassToTable; in:middle a2f:AssociationToForeignKey;) {}
+    enforce rdbms(in:rdbms s:Schema; in:rdbms st:Table; in:rdbms dt:Table; in:rdbms rk:Key;) {}
+    check a2f.owner = sc2t;
+    check a2f.referenced = dc2t;
+    check p2s.schema = s;
+    --sc2t.table = st;
+    --dc2t.table = dt; 
 --        sc2t := st.ClassToTable;
 --        dc2t := dt.ClassToTable;
-        check st.schema = s;
-        -- rk.owner = dt;
-        -- rk.kind = 'primary';
-    ) {}
+    check st.schema = s;
+    -- rk.owner = dt;
+    -- rk.kind = 'primary';
     new:rdbms fk:ForeignKey;
     new:rdbms fc:Column;
     set sc2t.owner := p2s;
@@ -370,29 +352,27 @@ map associationToForeignKeyMR in ManualUML2RDBMS {
 }
 
 map associationToForeignKeyMR_1 in ManualUML2RDBMS {
-    check middle () {}
-    enforce rdbms (in fk:ForeignKey; in fc:Column; in dt:Table; in rk:Key;) {}
+    enforce rdbms(in:rdbms fk:ForeignKey; in:rdbms fc:Column; in:rdbms dt:Table; in:rdbms rk:Key;) {}
     set fk.refersTo := rk;
     set fc.foreignKeys := OrderedSet(ForeignKey){fk};
     set fc.type := rk.column->first().type;
 }
 
 map associationToForeignKeyMR_2 in ManualUML2RDBMS {
-    check middle (in a2f_1:AssociationToForeignKey;) {}
-    enforce rdbms (in fk_1:ForeignKey; in fc_1:Column;) {}   
+    check middle(in:middle a2f_1:AssociationToForeignKey;) {}
+    enforce rdbms(in:rdbms fk_1:ForeignKey; in:rdbms fc_1:Column;) {}   
     set a2f_1.foreignKey := fk_1;
     set a2f_1.column := fc_1;
 }
 
 map classPrimitiveAttributesLM in ManualUML2RDBMS {
-    check uml (in c:Class; in a:Attribute; invar t:PrimitiveDataType := a.type;) {}
-    enforce middle (in fao:ClassToTable; invar p2n:PrimitiveToName := t.PrimitiveToName;) {}
-    where (
-        check a.owner = c;
-        --getAllAttributes(c)->includes(a);
-    	check fao.umlClass = c;
-    
-    ) {}
+    check uml(in:uml c:Class; in:uml a:Attribute;) {}
+    enforce middle(in:middle fao:ClassToTable;) {}
+	check t:PrimitiveDataType := a.type;
+	check p2n:PrimitiveToName := t.PrimitiveToName;
+    check a.owner = c;
+    --getAllAttributes(c)->includes(a);
+	check fao.umlClass = c;
     new:middle atc:AttributeToColumn;
     set atc._'attribute' := a;
     set atc.owner := fao;
@@ -403,13 +383,12 @@ map classPrimitiveAttributesLM in ManualUML2RDBMS {
 }
 
 map classComplexAttributesLM in ManualUML2RDBMS {
-    check uml (in c:Class; in a:Attribute; invar t:Class := a.type;) {}
-    enforce middle (in fao:ClassToTable;) {}
-    where (
-        check a.owner = c;
-        --getAllAttributes(c)->includes(a);
-        check fao.umlClass=c;
-    ) {}
+    check uml(in:uml c:Class; in:uml a:Attribute;) {}
+    enforce middle(in:middle fao:ClassToTable;) {}
+	check t:Class := a.type;
+    check a.owner = c;
+    --getAllAttributes(c)->includes(a);
+    check fao.umlClass=c;
     new:middle fa:NonLeafAttribute;
     set fa._'attribute' := a;
     set fa.owner := fao;
@@ -419,13 +398,10 @@ map classComplexAttributesLM in ManualUML2RDBMS {
 }
 
 map complexAttributePrimitiveAttributesLM in ManualUML2RDBMS {
-    check uml (in c:Class; in ca:Attribute;) {
-        }
-    enforce middle (invar fao:NonLeafAttribute := ca.FromAttribute;) {}
-    where (
-        check ca.type = c;
-        -- getAllAttributes(c)->includes(a);
-    ) {}
+    check uml(in:uml c:Class; in:uml ca:Attribute;) {}
+    check fao:NonLeafAttribute := ca.FromAttribute;
+    check ca.type = c;
+    -- getAllAttributes(c)->includes(a);
     for anAttribute in c.attributes {
 	    call complexAttributePrimitiveAttributesLM_1 {
 	        c_1 := c;
@@ -437,12 +413,10 @@ map complexAttributePrimitiveAttributesLM in ManualUML2RDBMS {
 }
 
 map complexAttributePrimitiveAttributesLM_1 in ManualUML2RDBMS {
-    check uml (in c_1:Class; in a_1:Attribute; in ca_1:Attribute; invar t_1:PrimitiveDataType := a_1.type;) {
-    	}
-    enforce middle (in fao_1:NonLeafAttribute; invar p2n_1:PrimitiveToName := t_1.PrimitiveToName;) {}
-    where (
-        --getAllAttributes(c)->includes(a);
-     ) {}
+    check uml(in:uml c_1:Class; in:uml a_1:Attribute; in:uml ca_1:Attribute;) {}
+    enforce middle(in:middle fao_1:NonLeafAttribute;) {}
+    check t_1:PrimitiveDataType := a_1.type;
+    check p2n_1:PrimitiveToName := t_1.PrimitiveToName;
     new:middle fa:AttributeToColumn;
     set fa.owner := fao_1;    
     set fa.leafs := Set(AttributeToColumn) {fa};
@@ -453,13 +427,10 @@ map complexAttributePrimitiveAttributesLM_1 in ManualUML2RDBMS {
 }
 
 map complexAttributeComplexAttributesLM in ManualUML2RDBMS {
-    check uml (in c:Class; in ca:Attribute;) {
-        }
-    enforce middle (invar fao:NonLeafAttribute := ca.FromAttribute;) {}
-    where (
-        check ca.type = c;
-        --getAllAttributes(c)->includes(a);
-    ) {}
+    check uml(in:uml c:Class; in:uml ca:Attribute;) {}
+	check fao:NonLeafAttribute := ca.FromAttribute;
+    check ca.type = c;
+    --getAllAttributes(c)->includes(a);
     for anAttribute in c.attributes {
     	call complexAttributeComplexAttributesLM_1 {
 	        ca_1 := ca;
@@ -471,13 +442,11 @@ map complexAttributeComplexAttributesLM in ManualUML2RDBMS {
 }
 
 map complexAttributeComplexAttributesLM_1 in ManualUML2RDBMS {
-    check uml (in c_1:Class; in ca_1:Attribute; in a_1:Attribute; invar t_1:Class := a_1.type;) {
-    	}
-    enforce middle (in fao_1:NonLeafAttribute;) {}
-    where (
-        check a_1.owner = c_1;
-        --getAllAttributes(c)->includes(a);
-    ) {}
+    check uml(in:uml c_1:Class; in:uml ca_1:Attribute; in:uml a_1:Attribute;) {}
+    enforce middle(in:middle fao_1:NonLeafAttribute;) {}
+    check t_1:Class := a_1.type;
+    check a_1.owner = c_1;
+    --getAllAttributes(c)->includes(a);
     new:middle fa:NonLeafAttribute;
     set fa.owner := fao_1;
     set fa.leafs := fao_1.fromAttributes.leafs->asSet(); 
@@ -489,13 +458,13 @@ map complexAttributeComplexAttributesLM_1 in ManualUML2RDBMS {
 
 
 map attributeColumnsMR in ManualUML2RDBMS {
-    check middle (in c2t:ClassToTable; in a2c:AttributeToColumn; invar p2n:PrimitiveToName := a2c.type;) {}
-    enforce rdbms (in t:Table; invar ct:String := p2n.typeName;) {}
-    where (
-        -- c2t.fromAttributes.leafs->includes(a2c); -- need to go deeper in the recursion
-        -- a2c.owner = c2t;   NOT ALL a2c are owned by c2t (complex attributes) 
-        check c2t.table = t;
-    ) {}
+    check middle(in:middle c2t:ClassToTable; in:middle a2c:AttributeToColumn;) {}
+    enforce rdbms(in:rdbms t:Table;) {}
+    check p2n:PrimitiveToName := a2c.type;
+    check ct:String := p2n.typeName;
+    -- c2t.fromAttributes.leafs->includes(a2c); -- need to go deeper in the recursion
+    -- a2c.owner = c2t;   NOT ALL a2c are owned by c2t (complex attributes) 
+    check c2t.table = t;
     new:rdbms c:Column;
     set c.owner := t;
     call attributeColumnsMR_1 {
@@ -515,17 +484,15 @@ map attributeColumnsMR in ManualUML2RDBMS {
 }
 
 map attributeColumnsMR_1 in ManualUML2RDBMS {
-    check middle (in a2c_1:AttributeToColumn;) {}
-    enforce rdbms (in c_1:Column;) {}
+    check middle(in:middle a2c_1:AttributeToColumn;) {}
+    enforce rdbms(in:rdbms c_1:Column;) {}
     set a2c_1.column := c_1;
 }
 
 map attributeColumnsMR_2 in ManualUML2RDBMS {
-    check middle (in p2n_2:PrimitiveToName; in a2c_2:AttributeToColumn;) {}
-    enforce rdbms (in c_2:Column; in ct_2:String;) {}
-    where (
-        check a2c_2.type = p2n_2;
-    ) {}
+    check middle(in:middle p2n_2:PrimitiveToName; in:middle a2c_2:AttributeToColumn;) {}
+    enforce rdbms(in:rdbms c_2:Column; in:rdbms ct_2:String;) {}
+    check a2c_2.type = p2n_2;
     set c_2.type := ct_2;
     call attributeColumnsMR_2_1 {
         p2n_2_1 := p2n_2;
@@ -534,14 +501,14 @@ map attributeColumnsMR_2 in ManualUML2RDBMS {
 }
 
 map attributeColumnsMR_2_1 in ManualUML2RDBMS {
-    check middle (in p2n_2_1:PrimitiveToName;) {}
-    enforce rdbms (in ct_2_1:String;) {}
+    check middle(in:middle p2n_2_1:PrimitiveToName;) {}
+    enforce rdbms(in:rdbms ct_2_1:String;) {}
     set p2n_2_1.typeName := ct_2_1;
 }
 
 map attributeColumnsMR_3 in ManualUML2RDBMS {
-    check middle (in a2c_3:AttributeToColumn;) {}
-    enforce rdbms (in c_3:Column;) { }
+    check middle(in:middle a2c_3:AttributeToColumn;) {}
+    enforce rdbms(in:rdbms c_3:Column;) {}
     set c_3.name := a2c_3.name;
     set c_3.kind := a2c_3.kind;
 }

@@ -38,8 +38,6 @@ import org.eclipse.qvtd.debug.QVTiBreakpoint;
 import org.eclipse.qvtd.debug.core.QVTiDebugCore;
 import org.eclipse.qvtd.debug.core.QVTiEvaluationContext;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
-import org.eclipse.qvtd.pivot.qvtbase.Pattern;
-import org.eclipse.qvtd.pivot.qvtimperative.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 
@@ -77,13 +75,6 @@ public class QVTiVMVirtualMachine extends VMVirtualMachine
 				s.append("::");
 			}
 			s.append(((Domain)eObject).getName());
-			return true;
-		}
-		else if (eObject instanceof Pattern) {
-			if (appendElementSignature(s, eObject.eContainer())) {
-				s.append(" ");
-			}
-			s.append(eObject instanceof GuardPattern ? "«guard»" : "«bottom»");
 			return true;
 		}
 		else if (eObject instanceof MappingCall) {
@@ -151,7 +142,7 @@ public class QVTiVMVirtualMachine extends VMVirtualMachine
 	private static @NonNull VMStackFrameData createStackFrame(@NonNull UnitLocation location, boolean includeVars) {
 		VMEvaluationEnvironment evalEnv = location.getEvalEnv();
 		NamedElement module = location.getModule();
-		String moduleName = (module != null) ? module.getName() : null;
+		String moduleName = module.getName();
 		if (moduleName == null) moduleName = "<null>"; //$NON-NLS-1$
 		Element element = location.getElement();
 		StringBuilder s = new StringBuilder();

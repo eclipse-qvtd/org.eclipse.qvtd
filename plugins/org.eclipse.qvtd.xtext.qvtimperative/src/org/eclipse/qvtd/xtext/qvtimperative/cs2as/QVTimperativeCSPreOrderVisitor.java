@@ -19,7 +19,6 @@ import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
-import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.internal.scoping.ScopeFilter;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.xtext.base.cs2as.BasicContinuation;
@@ -35,34 +34,73 @@ import org.eclipse.ocl.xtext.essentialoclcs.VariableCS;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
-import org.eclipse.qvtd.pivot.qvtimperative.Area;
+import org.eclipse.qvtd.pivot.qvtimperative.GuardVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
+import org.eclipse.qvtd.pivot.qvtimperative.InConnectionVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
+import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.OutConnectionVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.PredicateVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
-import org.eclipse.qvtd.xtext.qvtimperativecs.BottomPatternCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.CheckStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DomainCS;
-import org.eclipse.qvtd.xtext.qvtimperativecs.GuardPatternCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.GuardVariableCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.InoutVariableCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingLoopCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.NewStatementCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.OutVariableCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.ParamDeclarationCS;
-import org.eclipse.qvtd.xtext.qvtimperativecs.PredicateCS;
-import org.eclipse.qvtd.xtext.qvtimperativecs.PredicateOrAssignmentCS;
-import org.eclipse.qvtd.xtext.qvtimperativecs.SetStatementCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.PredicateVariableCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QueryCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.SetStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.TopLevelCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.TransformationCS;
-import org.eclipse.qvtd.xtext.qvtimperativecs.UnrealizedVariableCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.util.AbstractQVTimperativeCSPreOrderVisitor;
 
 public class QVTimperativeCSPreOrderVisitor extends AbstractQVTimperativeCSPreOrderVisitor
 {
-	public static class MappingLoopIteratorCompletion extends SingleContinuation<MappingLoopCS>
+	public static class GuardVariableCompletion extends SingleContinuation<@NonNull GuardVariableCS>
+	{
+		public GuardVariableCompletion(@NonNull CS2ASConversion context, @NonNull GuardVariableCS csElement) {
+			super(context, null, null, csElement, new PivotDependency(csElement.getOwnedType()));
+		}
+
+		@Override
+		public BasicContinuation<?> execute() {
+			GuardVariable pivotElement = PivotUtil.getPivot(GuardVariable.class, csElement);
+			if (pivotElement != null) {
+				context.refreshRequiredType(pivotElement, csElement);
+				pivotElement.setReferredTypedModel(csElement.getReferredTypedModel());
+			}
+			return null;
+		}
+	}
+
+	public static class InoutVariableCompletion extends SingleContinuation<@NonNull InoutVariableCS>
+	{
+		public InoutVariableCompletion(@NonNull CS2ASConversion context, @NonNull InoutVariableCS csElement) {
+			super(context, null, null, csElement, new PivotDependency(csElement.getOwnedType()));
+		}
+
+		@Override
+		public BasicContinuation<?> execute() {
+			InConnectionVariable pivotElement = PivotUtil.getPivot(InConnectionVariable.class, csElement);
+			if (pivotElement != null) {
+				context.refreshRequiredType(pivotElement, csElement);
+			}
+			return null;
+		}
+	}
+
+	public static class MappingLoopIteratorCompletion extends SingleContinuation<@NonNull MappingLoopCS>
 	{
 		protected static PivotDependency[] computeDependencies(@NonNull MappingLoopCS csElement) {
 			VariableCS csIterator = csElement.getOwnedIterator();
@@ -83,7 +121,7 @@ public class QVTimperativeCSPreOrderVisitor extends AbstractQVTimperativeCSPreOr
 		public BasicContinuation<?> execute() {
 			MappingLoop pivotElement = PivotUtil.getPivot(MappingLoop.class, csElement);
 			if (pivotElement != null) {
-				Variable iterator = pivotElement.getOwnedIterators().get(0);
+				LoopVariable iterator = pivotElement.getOwnedIterators().get(0);
 				if (iterator != null) {
 					VariableCS csIterator = csElement.getOwnedIterator();
 					if (csIterator != null) {
@@ -96,7 +134,7 @@ public class QVTimperativeCSPreOrderVisitor extends AbstractQVTimperativeCSPreOr
 		}
 	}
 
-	public static class NewStatementCompletion extends SingleContinuation<NewStatementCS>
+	public static class NewStatementCompletion extends SingleContinuation<@NonNull NewStatementCS>
 	{
 		public NewStatementCompletion(@NonNull CS2ASConversion context, @NonNull NewStatementCS csElement) {
 			super(context, null, null, csElement, new PivotDependency(csElement.getOwnedType()));
@@ -104,7 +142,7 @@ public class QVTimperativeCSPreOrderVisitor extends AbstractQVTimperativeCSPreOr
 
 		@Override
 		public BasicContinuation<?> execute() {
-			Variable pivotElement = PivotUtil.getPivot(Variable.class, csElement);
+			NewStatement pivotElement = PivotUtil.getPivot(NewStatement.class, csElement);
 			if (pivotElement != null) {
 				context.refreshRequiredType(pivotElement, csElement);
 			}
@@ -112,7 +150,23 @@ public class QVTimperativeCSPreOrderVisitor extends AbstractQVTimperativeCSPreOr
 		}
 	}
 
-	public static class ParamDeclarationCompletion extends SingleContinuation<ParamDeclarationCS>
+	public static class OutVariableCompletion extends SingleContinuation<@NonNull OutVariableCS>
+	{
+		public OutVariableCompletion(@NonNull CS2ASConversion context, @NonNull OutVariableCS csElement) {
+			super(context, null, null, csElement, new PivotDependency(csElement.getOwnedType()));
+		}
+
+		@Override
+		public BasicContinuation<?> execute() {
+			OutConnectionVariable pivotElement = PivotUtil.getPivot(OutConnectionVariable.class, csElement);
+			if (pivotElement != null) {
+				context.refreshRequiredType(pivotElement, csElement);
+			}
+			return null;
+		}
+	}
+
+	public static class ParamDeclarationCompletion extends SingleContinuation<@NonNull ParamDeclarationCS>
 	{
 		public ParamDeclarationCompletion(@NonNull CS2ASConversion context, @NonNull ParamDeclarationCS csElement) {
 			super(context, null, null, csElement, new PivotDependency(csElement.getOwnedType()));
@@ -121,6 +175,22 @@ public class QVTimperativeCSPreOrderVisitor extends AbstractQVTimperativeCSPreOr
 		@Override
 		public BasicContinuation<?> execute() {
 			FunctionParameter pivotElement = PivotUtil.getPivot(FunctionParameter.class, csElement);
+			if (pivotElement != null) {
+				context.refreshRequiredType(pivotElement, csElement);
+			}
+			return null;
+		}
+	}
+
+	public static class PredicateVariableCompletion extends SingleContinuation<@NonNull PredicateVariableCS>
+	{
+		public PredicateVariableCompletion(@NonNull CS2ASConversion context, @NonNull PredicateVariableCS csElement) {
+			super(context, null, null, csElement, new PivotDependency(csElement.getOwnedType()));
+		}
+
+		@Override
+		public BasicContinuation<?> execute() {
+			PredicateVariable pivotElement = PivotUtil.getPivot(PredicateVariable.class, csElement);
 			if (pivotElement != null) {
 				context.refreshRequiredType(pivotElement, csElement);
 			}
@@ -137,22 +207,6 @@ public class QVTimperativeCSPreOrderVisitor extends AbstractQVTimperativeCSPreOr
 		@Override
 		public BasicContinuation<?> execute() {
 			Function pivotElement = PivotUtil.getPivot(Function.class, csElement);
-			if (pivotElement != null) {
-				context.refreshRequiredType(pivotElement, csElement);
-			}
-			return null;
-		}
-	}
-
-	public static class UnrealizedVariableCompletion extends SingleContinuation<UnrealizedVariableCS>
-	{
-		public UnrealizedVariableCompletion(@NonNull CS2ASConversion context, @NonNull UnrealizedVariableCS csElement) {
-			super(context, null, null, csElement, new PivotDependency(csElement.getOwnedType()));
-		}
-
-		@Override
-		public BasicContinuation<?> execute() {
-			Variable pivotElement = PivotUtil.getPivot(Variable.class, csElement);
 			if (pivotElement != null) {
 				context.refreshRequiredType(pivotElement, csElement);
 			}
@@ -214,7 +268,7 @@ public class QVTimperativeCSPreOrderVisitor extends AbstractQVTimperativeCSPreOr
 	}
 
 	@Override
-	public Continuation<?> visitBottomPatternCS(@NonNull BottomPatternCS csElement) {
+	public Continuation<?> visitCheckStatementCS(@NonNull CheckStatementCS csElement) {
 		return null;
 	}
 
@@ -225,17 +279,21 @@ public class QVTimperativeCSPreOrderVisitor extends AbstractQVTimperativeCSPreOr
 
 	@Override
 	public @Nullable Continuation<?> visitDomainCS(@NonNull DomainCS csDomain) {
-		Area asArea = PivotUtil.getPivot(Area.class, csDomain);
+		ImperativeDomain asArea = PivotUtil.getPivot(ImperativeDomain.class, csDomain);
 		if (asArea != null) {
 			refreshUsedProperties(csDomain, asArea.getCheckedProperties(), csDomain.getCheckedProperties());
-			refreshUsedProperties(csDomain, asArea.getEnforcedProperties(), csDomain.getEnforcedProperties());
 		}
 		return null;
 	}
 
 	@Override
-	public Continuation<?> visitGuardPatternCS(@NonNull GuardPatternCS csElement) {
-		return null;
+	public @Nullable Continuation<?> visitGuardVariableCS(@NonNull GuardVariableCS csElement) {
+		return new GuardVariableCompletion(context, csElement);
+	}
+
+	@Override
+	public @Nullable Continuation<?> visitInoutVariableCS(@NonNull InoutVariableCS csElement) {
+		return new InoutVariableCompletion(context, csElement);
 	}
 
 	@Override
@@ -276,18 +334,18 @@ public class QVTimperativeCSPreOrderVisitor extends AbstractQVTimperativeCSPreOr
 	}
 
 	@Override
+	public @Nullable Continuation<?> visitOutVariableCS(@NonNull OutVariableCS csElement) {
+		return new OutVariableCompletion(context, csElement);
+	}
+
+	@Override
 	public Continuation<?> visitParamDeclarationCS(@NonNull ParamDeclarationCS csElement) {
 		return new ParamDeclarationCompletion(context, csElement);
 	}
 
 	@Override
-	public Continuation<?> visitPredicateCS(@NonNull PredicateCS csElement) {
-		return null;
-	}
-
-	@Override
-	public Continuation<?> visitPredicateOrAssignmentCS(@NonNull PredicateOrAssignmentCS csElement) {
-		return null;
+	public @Nullable Continuation<?> visitPredicateVariableCS(@NonNull PredicateVariableCS csElement) {
+		return new PredicateVariableCompletion(context, csElement);
 	}
 
 	@Override
@@ -317,10 +375,5 @@ public class QVTimperativeCSPreOrderVisitor extends AbstractQVTimperativeCSPreOr
 			}
 		}
 		return null;
-	}
-
-	@Override
-	public @Nullable Continuation<?> visitUnrealizedVariableCS(@NonNull UnrealizedVariableCS csElement) {
-		return new UnrealizedVariableCompletion(context, csElement);
 	}
 }

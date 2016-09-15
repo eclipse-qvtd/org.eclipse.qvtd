@@ -57,7 +57,7 @@ import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.SetType;
 import org.eclipse.ocl.pivot.ShadowExp;
 import org.eclipse.ocl.pivot.ShadowPart;
-import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.ids.ClassId;
 import org.eclipse.ocl.pivot.ids.CollectionTypeId;
@@ -99,8 +99,8 @@ import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.analysis.DomainUsage;
-import org.eclipse.qvtd.pivot.qvtimperative.Area;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
@@ -123,7 +123,7 @@ import com.google.common.collect.Iterables;
 /**
  * A QVTiCG2JavaVisitor supports generation of Java code from an optimized QVTi CG transformation tree.
  */
-public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerator> implements QVTiCGModelVisitor<Boolean>
+public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerator> implements QVTiCGModelVisitor<@NonNull Boolean>
 {
 	/**
 	 * The run-time API version.
@@ -320,13 +320,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		CGValuedElement cgSlot = getExpression(cgPropertyAssignment.getSlotValue());
 		CGValuedElement cgInit = getExpression(cgPropertyAssignment.getInitValue());
 		EPackage ePackage = ClassUtil.nonNullModel(eStructuralFeature.getEContainingClass().getEPackage());
-		boolean isHazardous = false;
-		Element asSetStatement = cgPropertyAssignment.getAst();
-		Mapping asMapping = QVTimperativeUtil.getContainingMapping(asSetStatement);
-		if ((asMapping != null) && (asSetStatement instanceof SetStatement)) {
-			isHazardous = transformationAnalysis.isHazardousWrite(asMapping, (SetStatement)asSetStatement);
-		}
-		if (isHazardous || isIncremental) {
+		if (isIncremental || ((SetStatement)cgPropertyAssignment.getAst()).isIsEmit()) {
 			js.append("objectManager.assigned(");
 			if (isIncremental) {
 				js.append("this, ");
@@ -347,13 +341,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		CGValuedElement cgSlot = getExpression(cgPropertyAssignment.getSlotValue());
 		CGValuedElement cgInit = getExpression(cgPropertyAssignment.getInitValue());
 		EPackage ePackage = ClassUtil.nonNullModel(eStructuralFeature.getEContainingClass().getEPackage());
-		boolean isHazardous = false;
-		Element asSetStatement = cgPropertyAssignment.getAst();
-		Mapping asMapping = QVTimperativeUtil.getContainingMapping(asSetStatement);
-		if ((asMapping != null) && (asSetStatement instanceof SetStatement)) {
-			isHazardous = transformationAnalysis.isHazardousWrite(asMapping, (SetStatement)asSetStatement);
-		}
-		if (isHazardous || isIncremental) {
+		if (isIncremental || ((SetStatement)cgPropertyAssignment.getAst()).isIsEmit()) {
 			js.append("objectManager.assigned(");
 			if (isIncremental) {
 				js.append("this, ");
@@ -864,7 +852,6 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			String savedLocalPrefix = localPrefix;
 			try {
 				localPrefix = hasMappingClass ? cgMapping.getTransformation().getName() : localPrefix;
-				js.append("// predicates and unrealized variables\n");
 				if (!cgBody.isInlined()) {
 					cgBody.accept(this);
 				}
@@ -1129,7 +1116,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 
 	protected @Nullable TypeDescriptor needsTypeCheck(@NonNull CGMappingCallBinding cgMappingCallBinding) {
 		MappingCallBinding mappingCallBinding = (MappingCallBinding)cgMappingCallBinding.getAst();
-		Variable boundVariable = mappingCallBinding.getBoundVariable();
+		VariableDeclaration boundVariable = mappingCallBinding.getBoundVariable();
 		assert boundVariable != null;
 		if (boundVariable instanceof ConnectionVariable) {
 			return null;
@@ -1175,7 +1162,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			isHazardous = true;
 		}
 		for (Domain domain : asMapping.getDomain()) {
-			if ((domain instanceof Area) && (((Area)domain).getCheckedProperties().size() > 0)) {
+			if (((ImperativeDomain)domain).getCheckedProperties().size() > 0) {
 				isHazardous = true;
 				break;
 			}
@@ -1791,7 +1778,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			}
 		}
 		List<@NonNull CGPropertyAssignment> cgPropertyAssignments = ClassUtil.nullFree(cgMappingExp.getAssignments());
-		if (cgPropertyAssignments.size()> 0) {
+		if (cgPropertyAssignments.size() > 0) {
 			js.append("// property assignments\n");
 			for (@NonNull CGPropertyAssignment cgAssignment : cgPropertyAssignments) {
 				cgAssignment.accept(this);
@@ -1955,7 +1942,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 	}
 
 	@Override
-	public @Nullable Boolean visitCGSequence(@NonNull CGSequence cgSequence) {
+	public @NonNull Boolean visitCGSequence(@NonNull CGSequence cgSequence) {
 		for (@NonNull CGValuedElement cgStatement : ClassUtil.nullFree(cgSequence.getStatements())) {
 			cgStatement.accept(this);
 		}

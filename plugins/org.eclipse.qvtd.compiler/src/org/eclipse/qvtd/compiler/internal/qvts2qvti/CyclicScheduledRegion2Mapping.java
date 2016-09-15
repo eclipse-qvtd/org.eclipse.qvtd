@@ -22,7 +22,7 @@ import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.Type;
-import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.ids.IdManager;
 import org.eclipse.ocl.pivot.ids.OperationId;
@@ -34,16 +34,14 @@ import org.eclipse.qvtd.compiler.internal.qvtp2qvts.CyclicScheduledRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NodeConnection;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
-import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
-import org.eclipse.qvtd.pivot.qvtimperative.GuardPattern;
+import org.eclipse.qvtd.pivot.qvtimperative.InConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.OutConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeFactory;
-import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 
 import com.google.common.collect.Iterables;
 
@@ -72,36 +70,32 @@ public class CyclicScheduledRegion2Mapping extends AbstractScheduledRegion2Mappi
 		/**
 		 * The guard variable for the recursed type.
 		 */
-		private final @NonNull Variable guardVariable;
+		private final @NonNull InConnectionVariable guardVariable;
 
 		/**
 		 * The local accumulation variable for the recursed type. Already processed values may be present.
 		 */
-		private final @NonNull ConnectionVariable localVariable;
+		private final @NonNull OutConnectionVariable localVariable;
 
 		/**
 		 * The filtered local accumulation variable for the recursed type. Already processed values have been removed.
 		 */
-		private @Nullable ConnectionVariable newVariable;
+		private @Nullable OutConnectionVariable newVariable;
 
 		/**
 		 * The accumulated output variable for the recursed type.
 		 */
-		private ConnectionVariable accumulatedVariable;
+		private InConnectionVariable accumulatedVariable;
 
 		public RecursionContext(@NonNull Node headNode) {
 			this.classDatumAnalysis = headNode.getClassDatumAnalysis();
 			this.index = classDatumAnalysis2recursion.size();
 			//
-			//	Create/locate the domain and guard pattern for the guard.
-			//
-			GuardPattern guardPattern = getGuardPattern(classDatumAnalysis);
-			//
 			//	Create the domain guard variable.
 			//
 			org.eclipse.ocl.pivot.Class elementType = classDatumAnalysis.getCompleteClass().getPrimaryClass();
-			guardVariable = PivotUtil.createVariable(getSafeName(headNode), elementType, false, null);
-			guardPattern.getVariable().add(guardVariable);
+			guardVariable = helper.createInConnectionVariable(getSafeName(headNode), elementType, false);
+			mapping.getInoutVariables().add(guardVariable);
 
 			Iterable<@NonNull NodeConnection> outgoingConnections = headNode.getOutgoingPassedConnections();
 			assert Iterables.size(outgoingConnections) == 1;
@@ -127,14 +121,14 @@ public class CyclicScheduledRegion2Mapping extends AbstractScheduledRegion2Mappi
 			//					incoming2outgoing.put(incomingConnection, internallyPassedConnection);
 			Type asType = getConnectionSourcesType(incomingConnection);
 			String localName = "«local" + (index > 0 ? Integer.toString(index) : "") + "»";
-			localVariable = helper.createConnectionVariable(localName, asType, null);
-			mapping.getBottomPattern().getVariable().add(localVariable);
+			localVariable = helper.createOutConnectionVariable(localName, asType, true, null);
+			mapping.getOwnedStatements().add(localVariable);
 			connection2variable.put(outgoingConnection, localVariable);
 			//
 			if ((asType instanceof CollectionType) && ((CollectionType)asType).isUnique()) {
 				String newName = "«new" + (index > 0 ? Integer.toString(index) : "") + "»";
-				ConnectionVariable newVariable2 = newVariable = helper.createConnectionVariable(newName, asType, null);
-				mapping.getBottomPattern().getVariable().add(newVariable2);
+				OutConnectionVariable newVariable2 = newVariable = helper.createOutConnectionVariable(newName, asType, true, null);
+				mapping.getOwnedStatements().add(newVariable2);
 				connection2variable.put(outgoingConnection, newVariable2);
 			}
 			else {
@@ -155,7 +149,7 @@ public class CyclicScheduledRegion2Mapping extends AbstractScheduledRegion2Mappi
 			return classDatumAnalysis;
 		}
 
-		public @NonNull Variable getGuardVariable() {
+		public @NonNull ConnectionVariable getGuardVariable() {
 			return guardVariable;
 		}
 
@@ -173,8 +167,8 @@ public class CyclicScheduledRegion2Mapping extends AbstractScheduledRegion2Mappi
 			//	Select a/the outgoing recursive intermediate connection.
 			//
 			NodeConnection intermediateConnection = accumulatedConnection;
-			ConnectionVariable accumulatedVariable2 = accumulatedVariable = createConnectionVariable(intermediateConnection);
-			mapping.getGuardPattern().getVariable().add(accumulatedVariable2);
+			InConnectionVariable accumulatedVariable2 = accumulatedVariable = createInConnectionVariable(intermediateConnection);
+			mapping.getInoutVariables().add(accumulatedVariable2);
 			connection2variable.put(intermediateConnection, accumulatedVariable2);
 		}
 	}
@@ -193,7 +187,7 @@ public class CyclicScheduledRegion2Mapping extends AbstractScheduledRegion2Mappi
 	/**
 	 * Cache of the domains created for each recursiing typed model
 	 */
-	private final @NonNull Map<@NonNull TypedModel, @NonNull ImperativeDomain> typedModel2domain = new HashMap<>();
+	//	private final @NonNull Map<@NonNull TypedModel, @NonNull ImperativeDomain> typedModel2domain = new HashMap<>();
 
 	public CyclicScheduledRegion2Mapping(@NonNull QVTs2QVTiVisitor visitor, @NonNull CyclicScheduledRegion region) {
 		super(visitor, region);
@@ -230,13 +224,13 @@ public class CyclicScheduledRegion2Mapping extends AbstractScheduledRegion2Mappi
 	protected void createConnectionGuardVariables() {
 		List<@NonNull NodeConnection> intermediateConnections = region.getIntermediateConnections();
 		for (@NonNull NodeConnection intermediateConnection : intermediateConnections) {
-			Variable connectionVariable = connection2variable.get(intermediateConnection);
+			InConnectionVariable connectionVariable = (InConnectionVariable) connection2variable.get(intermediateConnection);
 			if (connectionVariable == null) {
 				String name = intermediateConnection.getName();
 				assert name != null;
-				connectionVariable = helper.createConnectionVariable(name, getConnectionSourcesType(intermediateConnection), null);
+				connectionVariable = helper.createInConnectionVariable(name, getConnectionSourcesType(intermediateConnection), true);
 				connection2variable.put(intermediateConnection, connectionVariable);
-				mapping.getGuardPattern().getVariable().add(connectionVariable);
+				mapping.getInoutVariables().add(connectionVariable);
 			}
 		}
 	}
@@ -275,22 +269,22 @@ public class CyclicScheduledRegion2Mapping extends AbstractScheduledRegion2Mappi
 		List<@NonNull MappingStatement> mappingStatements = new ArrayList<>();
 		for (@NonNull Region callableRegion : region.getCallableChildren()) {
 			AbstractRegion2Mapping calledRegion2Mapping = visitor.getRegion2Mapping(callableRegion);
-			Map<@NonNull Variable, @NonNull OCLExpression> guardVariable2expression = new HashMap<@NonNull Variable, @NonNull OCLExpression>();
+			Map<@NonNull VariableDeclaration, @NonNull OCLExpression> guardVariable2expression = new HashMap<>();
 			for (@NonNull Node calledHeadNode : callableRegion.getHeadNodes()) {
 				NodeConnection headConnection = calledHeadNode.getIncomingConnection();
 				assert headConnection != null;
 				Node callingHeadNode = Iterables.get(headConnection.getSourceNodes(), 0);
-				Variable callingHeadVariable = getGuardVariable(callingHeadNode);
-				Variable calledHeadVariable = calledRegion2Mapping.getGuardVariable(calledHeadNode);
+				ConnectionVariable callingHeadVariable = getGuardVariable(callingHeadNode);
+				VariableDeclaration calledHeadVariable = calledRegion2Mapping.getGuardVariable(calledHeadNode);
 				guardVariable2expression.put(calledHeadVariable, PivotUtil.createVariableExp(callingHeadVariable));
 			}
 			for (@NonNull NodeConnection intermediateConnection : callableRegion.getIntermediateConnections()) {
 				RecursionContext recursion = classDatumAnalysis2recursion.get(intermediateConnection.getClassDatumAnalysis());
 				if (recursion != null) {
-					Variable callingLocalVariable = recursion.getLocalVariable();
+					ConnectionVariable callingLocalVariable = recursion.getLocalVariable();
 					//					NodeConnection tailConnection = recursion.getAccumulatedConnection();
 					//					if (tailConnection != null) {
-					Variable calledTailVariable = calledRegion2Mapping.getConnectionVariable(intermediateConnection);
+					ConnectionVariable calledTailVariable = calledRegion2Mapping.getConnectionVariable(intermediateConnection);
 					guardVariable2expression.put(calledTailVariable, PivotUtil.createVariableExp(callingLocalVariable));
 					//					}
 				}
@@ -334,10 +328,10 @@ public class CyclicScheduledRegion2Mapping extends AbstractScheduledRegion2Mappi
 		//
 		//	Create the recursive call recursing all the recursive connections.
 		//
-		Map<@NonNull Variable, @NonNull OCLExpression> guardVariable2expression = new HashMap<@NonNull Variable, @NonNull OCLExpression>();
+		Map<@NonNull VariableDeclaration, @NonNull OCLExpression> guardVariable2expression = new HashMap<>();
 		for (@NonNull RecursionContext recursion : classDatumAnalysis2recursion.values()) {
-			Variable guardVariable = recursion.getGuardVariable();
-			Variable newVariable = recursion.getNewVariable();
+			ConnectionVariable guardVariable = recursion.getGuardVariable();
+			ConnectionVariable newVariable = recursion.getNewVariable();
 			if (newVariable == null) {
 				newVariable = recursion.getLocalVariable();
 			}
@@ -353,31 +347,8 @@ public class CyclicScheduledRegion2Mapping extends AbstractScheduledRegion2Mappi
 		return getHeadNodes();
 	}
 
-	public @NonNull GuardPattern getGuardPattern(@NonNull ClassDatumAnalysis classDatumAnalysis) {
-		//
-		//	Create/locate the domain and guard pattern for the guard.
-		//
-		TypedModel typedModel = visitor.getQVTiTypedModel(classDatumAnalysis.getTypedModel());
-		GuardPattern guardPattern;
-		if (typedModel != null) {
-			ImperativeDomain domain = typedModel2domain.get(typedModel);
-			if (domain == null) {
-				domain = QVTimperativeUtil.createImperativeDomain(typedModel);
-				domain.setIsCheckable(true);
-				mapping.getDomain().add(domain);
-				typedModel2domain.put(typedModel, domain);
-			}
-			guardPattern = domain.getGuardPattern();
-		}
-		else {
-			guardPattern = mapping.getGuardPattern();
-		}
-		assert guardPattern != null;
-		return guardPattern;
-	}
-
 	@Override
-	public @NonNull Variable getGuardVariable(@NonNull Node node) {
+	public @NonNull ConnectionVariable getGuardVariable(@NonNull Node node) {
 		assert getHeadNodes().contains(node);
 		ClassDatumAnalysis classDatumAnalysis = node.getClassDatumAnalysis();
 		RecursionContext recursion = classDatumAnalysis2recursion.get(classDatumAnalysis);

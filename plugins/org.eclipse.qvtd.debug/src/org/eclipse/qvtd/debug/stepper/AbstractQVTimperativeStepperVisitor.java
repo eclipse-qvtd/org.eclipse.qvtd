@@ -41,23 +41,8 @@ implements QVTimperativeVisitor<IStepper>
 	}
 
 	@Override
-	public @Nullable IStepper visitAssignment(org.eclipse.qvtd.pivot.qvtimperative.@NonNull Assignment object) {
-		return visitElement(object);
-	}
-
-	@Override
-	public @Nullable IStepper visitBottomPattern(org.eclipse.qvtd.pivot.qvtimperative.@NonNull BottomPattern object) {
-		return visitImperativePattern(object);
-	}
-
-	@Override
 	public @Nullable IStepper visitConnectionVariable(org.eclipse.qvtd.pivot.qvtimperative.@NonNull ConnectionVariable object) {
-		return visitVariable(object);
-	}
-
-	@Override
-	public @Nullable IStepper visitGuardPattern(org.eclipse.qvtd.pivot.qvtimperative.@NonNull GuardPattern object) {
-		return visitImperativePattern(object);
+		return visitVariableDeclaration(object);
 	}
 
 	@Override
@@ -68,11 +53,6 @@ implements QVTimperativeVisitor<IStepper>
 	@Override
 	public @Nullable IStepper visitImperativeModel(org.eclipse.qvtd.pivot.qvtimperative.@NonNull ImperativeModel object) {
 		return visitBaseModel(object);
-	}
-
-	@Override
-	public @Nullable IStepper visitImperativePattern(org.eclipse.qvtd.pivot.qvtimperative.@NonNull ImperativePattern object) {
-		return visitPattern(object);
 	}
 
 	@Override
@@ -102,12 +82,7 @@ implements QVTimperativeVisitor<IStepper>
 
 	@Override
 	public @Nullable IStepper visitNewStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull NewStatement object) {
-		return visitVariable(object);
-	}
-
-	@Override
-	public @Nullable IStepper visitSetStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull SetStatement object) {
-		return visitBottomStatement(object);
+		return visitVariableStatement(object);
 	}
 
 	@Override
@@ -116,12 +91,7 @@ implements QVTimperativeVisitor<IStepper>
 	}
 
 	@Override
-	public @Nullable IStepper visitVariableAssignment(org.eclipse.qvtd.pivot.qvtimperative.@NonNull VariableAssignment object) {
-		return visitAssignment(object);
-	}
-
-	@Override
-	public @Nullable IStepper visitVariablePredicate(org.eclipse.qvtd.pivot.qvtimperative.@NonNull VariablePredicate object) {
-		return visitPredicate(object);
+	public @Nullable IStepper visitVariableStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull VariableStatement object) {
+		return visitStatement(object);
 	}
 }

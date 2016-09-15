@@ -15,7 +15,6 @@ import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.Type;
-import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.internal.complete.StandardLibraryInternal;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
@@ -23,13 +22,13 @@ import org.eclipse.qvtd.pivot.qvtbase.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
+import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
-import org.eclipse.qvtd.pivot.qvtimperative.VariablePredicate;
 import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
 
 /**
@@ -55,7 +54,7 @@ public class QVTimperativeDomainUsageAnalysis extends RootDomainUsageAnalysis im
 
 	@Override
 	public @NonNull DomainUsage visitConnectionVariable(@NonNull ConnectionVariable object) {
-		return visitVariable(object);
+		return visitVariableDeclaration(object);
 	}
 
 	@Override
@@ -67,9 +66,7 @@ public class QVTimperativeDomainUsageAnalysis extends RootDomainUsageAnalysis im
 	public @NonNull DomainUsage visitMapping(@NonNull Mapping object) {
 		DomainUsage usage = getNoneUsage();
 		setUsage(object, usage);
-		visitRule(object);
-		visit(object.getGuardPattern());
-		visit(object.getBottomPattern());
+		super.visitMapping(object);
 		for (Statement mappingStatement : object.getOwnedStatements()) {
 			visit(mappingStatement);
 		}
@@ -94,7 +91,7 @@ public class QVTimperativeDomainUsageAnalysis extends RootDomainUsageAnalysis im
 	@Override
 	public @NonNull DomainUsage visitMappingLoop(@NonNull MappingLoop object) {
 		DomainUsage sourceUsage = visit(object.getOwnedSource());
-		for (Variable iterator : object.getOwnedIterators()) {
+		for (LoopVariable iterator : object.getOwnedIterators()) {
 			if (iterator != null) {
 				setUsage(iterator, sourceUsage);
 			}
@@ -135,10 +132,5 @@ public class QVTimperativeDomainUsageAnalysis extends RootDomainUsageAnalysis im
 			return getNoneUsage();
 		}
 		return super.visitVariableExp(object);
-	}
-
-	@Override
-	public @NonNull DomainUsage visitVariablePredicate(@NonNull VariablePredicate object) {
-		return visitPredicate(object);
 	}
 }

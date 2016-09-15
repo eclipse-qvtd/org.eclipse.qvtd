@@ -7,9 +7,7 @@ transformation Expressions {
 }
 
 map expressionsLM in Expressions {
-	check source(in dummy:EPackage;) {}
-	enforce middle() {}
-    where () {}
+	check source(in:source dummy:EPackage;) {}
     call expressionsMR {
     	binaryPrecedence := (1 + 2) * (3*5 + 4);
     	unaryPrecedence := -1 * - -1;
@@ -18,25 +16,17 @@ map expressionsLM in Expressions {
 }
 
 map expressionsMR in Expressions {
-	check middle(in binaryPrecedence:OclAny; in unaryPrecedence:OclAny; in notPrecedence:OclAny;) { }
-    enforce target() {}
-    where () {}
+	check middle(in:middle binaryPrecedence:OclAny; in:middle unaryPrecedence:OclAny; in:middle notPrecedence:OclAny;) { }
 }
 
 map expressionsDomains in Expressions {
-	check middle() {
-		var s : Integer := 0;
-		var s_1 : Integer := m;
-		var s_2 : Integer := t;
-	}
-    enforce target() {
-		var t : Integer := 0;
-		var t_1 : Integer := s;
-		var t_2 : Integer := m;
-    }
-    where () {
-		var m : Integer := 0;
-		var m_1 : Integer := s;
-		var m_2 : Integer := t;
-    }
+	var s : Integer := 0;
+	var t : Integer := 0;
+	var m : Integer := 0;
+	var s_1 : Integer := m;
+	var s_2 : Integer := t;
+	var t_1 : Integer := s;
+	var t_2 : Integer := m;
+	var m_1 : Integer := s;
+	var m_2 : Integer := t;
 }

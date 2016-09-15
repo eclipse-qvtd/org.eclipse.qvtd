@@ -12,20 +12,14 @@ package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.NamedElement;
-import org.eclipse.ocl.pivot.Operation;
-import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.ocl.pivot.internal.evaluation.BasicEvaluationEnvironment;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
-import org.eclipse.qvtd.pivot.qvtbase.analysis.DomainUsage;
-import org.eclipse.qvtd.pivot.qvtbase.analysis.DomainUsageAnalysis;
 
 public class QVTiNestedEvaluationEnvironment extends BasicEvaluationEnvironment implements QVTiEvaluationEnvironment
 {
 	protected final @NonNull QVTiRootEvaluationEnvironment rootEvaluationEnvironment;
-	private @Nullable DomainUsageAnalysis usageAnalysis;
 
 	public QVTiNestedEvaluationEnvironment(@NonNull QVTiEvaluationEnvironment evaluationEnvironment, @NonNull NamedElement executableObject, @Nullable Object caller) {
 		super(evaluationEnvironment, executableObject, caller);
@@ -52,30 +46,5 @@ public class QVTiNestedEvaluationEnvironment extends BasicEvaluationEnvironment 
 	@Override
 	public @NonNull Transformation getTransformation() {
 		return rootEvaluationEnvironment.getTransformation();
-	}
-
-	@Override
-	public @Nullable DomainUsage getUsageFor(@NonNull Element element) {
-		DomainUsage domainUsage = null;
-		DomainUsageAnalysis usageAnalysis2 = usageAnalysis;
-		if (usageAnalysis2 == null) {
-			if (caller instanceof OperationCallExp) {
-				OperationCallExp operationCallExp = (OperationCallExp)caller;
-				Operation referredOperation = operationCallExp.getReferredOperation();
-				if (referredOperation != null) {
-					usageAnalysis = usageAnalysis2 = getExecutor().getModelManager().getTransformationAnalysis().getDomainUsageAnalysis().getAnalysis(referredOperation);
-					// FIXME Surely we need to 'specialize' for the actual usage of callingObject
-				}
-			}
-		}
-		if (usageAnalysis2 != null) {
-			domainUsage = usageAnalysis2.getUsage(element);
-		}
-		if (domainUsage != null) {
-			return domainUsage;
-		}
-		else {
-			return getParentEvaluationEnvironment().getUsageFor(element);
-		}
 	}
 }

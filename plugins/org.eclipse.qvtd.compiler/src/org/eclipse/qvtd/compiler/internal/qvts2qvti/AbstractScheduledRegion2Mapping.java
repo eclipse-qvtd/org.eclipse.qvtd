@@ -21,11 +21,13 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Type;
-import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NodeConnection;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
+import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
@@ -35,18 +37,18 @@ public abstract class AbstractScheduledRegion2Mapping extends AbstractRegion2Map
 {
 	protected AbstractScheduledRegion2Mapping(@NonNull QVTs2QVTiVisitor visitor, @NonNull Region region) {
 		super(visitor, region);
-		connection2variable = new HashMap<@NonNull NodeConnection, @NonNull Variable>();
+		connection2variable = new HashMap<>();
 	}
 
-	protected @NonNull MappingStatement createCall(@NonNull Region calledRegion, @Nullable Map<@NonNull Variable, @NonNull OCLExpression> guardVariable2expression) {
+	protected @NonNull MappingStatement createCall(@NonNull Region calledRegion, @Nullable Map<@NonNull VariableDeclaration, @NonNull OCLExpression> guardVariable2expression) {
 		//		Iterable<Connection> connectionRegions = getConnectionRegions(calledRegion);
 		//		assert !calledRegion.isConnectionRegion();
 		AbstractRegion2Mapping calledRegion2Mapping = visitor.getRegion2Mapping(calledRegion);
 		Mapping calledMapping = calledRegion2Mapping.getMapping();
-		Map<@NonNull Variable, @NonNull OCLExpression> loopVariables = new HashMap<@NonNull Variable, @NonNull OCLExpression>();
-		List<@NonNull MappingCallBinding> mappingCallBindings = new ArrayList<@NonNull MappingCallBinding>();
+		Map<@NonNull LoopVariable, @NonNull OCLExpression> loopVariables = new HashMap<>();
+		List<@NonNull MappingCallBinding> mappingCallBindings = new ArrayList<>();
 		for (@NonNull Node calledGuardNode : calledRegion2Mapping.getGuardNodes()) {
-			Variable guardVariable = calledRegion2Mapping.getGuardVariable(calledGuardNode);
+			VariableDeclaration guardVariable = calledRegion2Mapping.getGuardVariable(calledGuardNode);
 			NodeConnection callingConnection = calledGuardNode.getIncomingPassedConnection();
 			if (callingConnection != null) {
 				OCLExpression connectionExpression = null;
@@ -54,7 +56,7 @@ public abstract class AbstractScheduledRegion2Mapping extends AbstractRegion2Map
 					connectionExpression = guardVariable2expression.get(guardVariable);
 				}
 				if (connectionExpression == null) {
-					Variable connectionVariable = connection2variable.get(callingConnection);
+					ConnectionVariable connectionVariable = connection2variable.get(callingConnection);
 					if (connectionVariable != null) {
 						connectionExpression = PivotUtil.createVariableExp(connectionVariable);
 					}
@@ -83,13 +85,13 @@ public abstract class AbstractScheduledRegion2Mapping extends AbstractRegion2Map
 			mappingCallBindings.add(QVTimperativeUtil.createMappingCallBinding(calledConnectionVariable, sourceExpression));
 		} */
 		for (@NonNull NodeConnection intermediateConnection : calledRegion.getIntermediateConnections()) {
-			Variable calledConnectionVariable = calledRegion2Mapping.getConnectionVariable(intermediateConnection);
+			ConnectionVariable calledConnectionVariable = calledRegion2Mapping.getConnectionVariable(intermediateConnection);
 			OCLExpression connectionExpression = null;
 			if (guardVariable2expression != null) {
 				connectionExpression = guardVariable2expression.get(calledConnectionVariable);
 			}
 			if (connectionExpression == null) {
-				Variable callingConnectionVariable = connection2variable.get(intermediateConnection);
+				ConnectionVariable callingConnectionVariable = connection2variable.get(intermediateConnection);
 				assert callingConnectionVariable != null;
 				OCLExpression sourceExpression = PivotUtil.createVariableExp(callingConnectionVariable);
 				Type calledType = calledConnectionVariable.getType();
@@ -97,7 +99,7 @@ public abstract class AbstractScheduledRegion2Mapping extends AbstractRegion2Map
 				assert calledType != null;
 				assert callingType != null;
 				if (getCollectionDepth(calledType) < getCollectionDepth(callingType)) {
-					Variable loopVariable = PivotUtil.createVariable("loop" + loopVariables.size(), calledType, true, sourceExpression);
+					LoopVariable loopVariable = helper.createLoopVariable("loop" + loopVariables.size(), calledType);//, true, sourceExpression);
 					loopVariables.put(loopVariable, sourceExpression);
 					sourceExpression = PivotUtil.createVariableExp(loopVariable);
 				}
@@ -107,8 +109,8 @@ public abstract class AbstractScheduledRegion2Mapping extends AbstractRegion2Map
 		}
 		Collections.sort(mappingCallBindings, QVTimperativeUtil.MappingCallBindingComparator.INSTANCE);
 		MappingStatement mappingCallStatement = calledRegion2Mapping.createMappingCall(mappingCallBindings);
-		for (Map./*@NonNull*/Entry<@NonNull Variable, @NonNull OCLExpression> loopEntry : loopVariables.entrySet()) {
-			@NonNull Variable loopVariable = loopEntry.getKey();
+		for (Map./*@NonNull*/Entry<@NonNull LoopVariable, @NonNull OCLExpression> loopEntry : loopVariables.entrySet()) {
+			@NonNull LoopVariable loopVariable = loopEntry.getKey();
 			@NonNull OCLExpression loopSource = loopEntry.getValue();
 			mappingCallStatement = QVTimperativeUtil.createMappingLoop(loopSource, loopVariable, mappingCallStatement);
 		}
@@ -176,17 +178,17 @@ public abstract class AbstractScheduledRegion2Mapping extends AbstractRegion2Map
 	} */
 
 	private @NonNull MappingCallBinding createMappingCallBinding(@NonNull OCLExpression sourceExpression, @NonNull Node targetNode,
-			@NonNull Map<@NonNull Variable, @NonNull OCLExpression> loopVariables) {
+			@NonNull Map<@NonNull LoopVariable, @NonNull OCLExpression> loopVariables) {
 		Type type = sourceExpression.getType();
 		if (type instanceof CollectionType) {
 			Type elementType = ((CollectionType)type).getElementType();
 			assert elementType != null;
-			Variable loopVariable = PivotUtil.createVariable("loop" + loopVariables.size(), elementType, true, sourceExpression);
+			LoopVariable loopVariable = helper.createLoopVariable("loop" + loopVariables.size(), elementType);//, true, sourceExpression);
 			loopVariables.put(loopVariable, sourceExpression);
 			sourceExpression = PivotUtil.createVariableExp(loopVariable);
 		}
 		AbstractRegion2Mapping calledRegion2Mapping = visitor.getRegion2Mapping(targetNode.getRegion());
-		Variable guardVariable = calledRegion2Mapping.getGuardVariable(targetNode);
+		VariableDeclaration guardVariable = calledRegion2Mapping.getGuardVariable(targetNode);
 		return QVTimperativeUtil.createMappingCallBinding(guardVariable, sourceExpression);
 	}
 

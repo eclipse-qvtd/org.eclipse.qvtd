@@ -33,13 +33,11 @@
         <ownedContext xmi:id="qV..hsv2hls.middle.middle" name="middle" type="pivot:Class http://www.eclipse.org/qvt/2015/QVTimperativeLibrary.oclas#T.qvtbaselibrary.Model"/>
       </modelParameter>
       <rule xsi:type="qvti:Mapping" xmi:id="m..hsv2hls.__root__" name="__root__">
-        <guardPattern/>
-        <bottomPattern/>
         <ownedStatements xsi:type="qvti:MappingLoop">
-          <ownedIterators xmi:id="i..hsv2hls.__root__.0.hsvRoot" name="hsvRoot" type="pivot:Class HSVTree.ecore.oclas#T.HSVTree.HSVNode"/>
+          <ownedIterators name="hsvRoot" type="pivot:Class HSVTree.ecore.oclas#T.HSVTree.HSVNode"/>
           <ownedMappingStatements xsi:type="qvti:MappingCall" isInfinite="false" referredMapping="#m..hsv2hls.HSV2MiddleRoot">
-            <binding boundVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.1/@domain.0/@guardPattern/@variable.0" isPolled="false">
-              <value xsi:type="pivot:VariableExp" type="pivot:Class HSVTree.ecore.oclas#T.HSVTree.HSVNode" referredVariable="#i..hsv2hls.__root__.0.hsvRoot"/>
+            <binding boundVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.1/@domain.0/@ownedGuardVariables.0" isPolled="false">
+              <value xsi:type="pivot:VariableExp" type="pivot:Class HSVTree.ecore.oclas#T.HSVTree.HSVNode" referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.0/@ownedStatements.0/@ownedIterators.0"/>
             </binding>
           </ownedMappingStatements>
           <ownedSource xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.0" referredOperation="http://www.eclipse.org/qvt/2015/QVTimperativeLibrary.oclas#o.qvtbaselibrary.Model.objectsOfKind..TT">
@@ -51,190 +49,166 @@
       </rule>
       <rule xsi:type="qvti:Mapping" xmi:id="m..hsv2hls.HSV2MiddleRoot" name="HSV2MiddleRoot">
         <domain xsi:type="qvti:ImperativeDomain" isCheckable="true" isEnforceable="false" typedModel="#qT..hsv2hls.hsv">
-          <guardPattern>
-            <variable name="hsvRoot" isRequired="false" type="pivot:Class HSVTree.ecore.oclas#T.HSVTree.HSVNode"/>
-          </guardPattern>
-          <bottomPattern/>
+          <ownedGuardVariables name="hsvRoot" isRequired="false" type="pivot:Class HSVTree.ecore.oclas#T.HSVTree.HSVNode" referredTypedModel="#qT..hsv2hls.hsv"/>
         </domain>
-        <guardPattern>
-          <predicate>
-            <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
-                referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
-              <ownedSource xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:Class HSVTree.ecore.oclas#T.HSVTree.HSVNode"
-                  referredProperty="HSVTree.ecore.oclas#p.HSVTree.HSVNode.parent">
-                <ownedSource xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class HSVTree.ecore.oclas#T.HSVTree.HSVNode"
-                    referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.1/@domain.0/@guardPattern/@variable.0"/>
-              </ownedSource>
-              <ownedArguments xsi:type="pivot:NullLiteralExp" isRequired="false" type="pivot:VoidType http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclVoid"/>
-            </conditionExpression>
-          </predicate>
-        </guardPattern>
-        <bottomPattern/>
+        <ownedStatements xsi:type="qvti:CheckStatement">
+          <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
+              referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
+            <ownedSource xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:Class HSVTree.ecore.oclas#T.HSVTree.HSVNode"
+                referredProperty="HSVTree.ecore.oclas#p.HSVTree.HSVNode.parent">
+              <ownedSource xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class HSVTree.ecore.oclas#T.HSVTree.HSVNode" referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.1/@domain.0/@ownedGuardVariables.0"/>
+            </ownedSource>
+            <ownedArguments xsi:type="pivot:NullLiteralExp" isRequired="false" type="pivot:VoidType http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclVoid"/>
+          </conditionExpression>
+        </ownedStatements>
         <ownedStatements xsi:type="qvti:NewStatement" xmi:id="qV..hsv2hls.HSV2MiddleRoot.middleRoot" name="middleRoot" isRequired="false"
             type="pivot:Class HSV2HLS.ecore.oclas#T.HSV2HLS.HSVNode2HLSNode" referredTypedModel="#qT..hsv2hls.middle"/>
-        <ownedStatements xsi:type="qvti:SetStatement" targetProperty="HSV2HLS.ecore.oclas#p.HSV2HLS.HSVNode2HLSNode.hsv">
-          <slotExpression isRequired="false" type="pivot:Class HSV2HLS.ecore.oclas#T.HSV2HLS.HSVNode2HLSNode" referredVariable="#qV..hsv2hls.HSV2MiddleRoot.middleRoot"/>
-          <value xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class HSVTree.ecore.oclas#T.HSVTree.HSVNode" referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.1/@domain.0/@guardPattern/@variable.0"/>
+        <ownedStatements xsi:type="qvti:SetStatement" targetVariable="#qV..hsv2hls.HSV2MiddleRoot.middleRoot" targetProperty="HSV2HLS.ecore.oclas#p.HSV2HLS.HSVNode2HLSNode.hsv"
+            isEmit="false">
+          <value xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class HSVTree.ecore.oclas#T.HSVTree.HSVNode" referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.1/@domain.0/@ownedGuardVariables.0"/>
         </ownedStatements>
-        <ownedStatements xsi:type="qvti:SetStatement" targetProperty="HSV2HLS.ecore.oclas#p.HSV2HLS.HSVNode2HLSNode.name">
-          <slotExpression isRequired="false" type="pivot:Class HSV2HLS.ecore.oclas#T.HSV2HLS.HSVNode2HLSNode" referredVariable="#qV..hsv2hls.HSV2MiddleRoot.middleRoot"/>
+        <ownedStatements xsi:type="qvti:SetStatement" targetVariable="#qV..hsv2hls.HSV2MiddleRoot.middleRoot" targetProperty="HSV2HLS.ecore.oclas#p.HSV2HLS.HSVNode2HLSNode.name"
+            isEmit="false">
           <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
               referredProperty="HSVTree.ecore.oclas#p.HSVTree.HSVNode.name">
-            <ownedSource xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class HSVTree.ecore.oclas#T.HSVTree.HSVNode" referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.1/@domain.0/@guardPattern/@variable.0"/>
+            <ownedSource xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class HSVTree.ecore.oclas#T.HSVTree.HSVNode" referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.1/@domain.0/@ownedGuardVariables.0"/>
           </value>
         </ownedStatements>
         <ownedStatements xsi:type="qvti:MappingLoop">
-          <ownedIterators xmi:id="i..hsv2hls.HSV2MiddleRoot.3.hsvChild" name="hsvChild" type="pivot:Class HSVTree.ecore.oclas#T.HSVTree.HSVNode"/>
+          <ownedIterators name="hsvChild" type="pivot:Class HSVTree.ecore.oclas#T.HSVTree.HSVNode"/>
           <ownedMappingStatements xsi:type="qvti:MappingCall" isInfinite="false" referredMapping="#m..hsv2hls.HSV2MiddleRecursion">
-            <binding boundVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.2/@domain.0/@guardPattern/@variable.0" isPolled="false">
-              <value xsi:type="pivot:VariableExp" type="pivot:Class HSVTree.ecore.oclas#T.HSVTree.HSVNode" referredVariable="#i..hsv2hls.HSV2MiddleRoot.3.hsvChild"/>
+            <binding boundVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.2/@domain.0/@ownedGuardVariables.0" isPolled="false">
+              <value xsi:type="pivot:VariableExp" type="pivot:Class HSVTree.ecore.oclas#T.HSVTree.HSVNode" referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.1/@ownedStatements.4/@ownedIterators.0"/>
             </binding>
-            <binding boundVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.2/@domain.1/@guardPattern/@variable.0" isPolled="false">
+            <binding boundVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.2/@domain.1/@ownedGuardVariables.0" isPolled="false">
               <value xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class HSV2HLS.ecore.oclas#T.HSV2HLS.HSVNode2HLSNode"
                   referredVariable="#qV..hsv2hls.HSV2MiddleRoot.middleRoot"/>
             </binding>
           </ownedMappingStatements>
           <ownedSource xsi:type="pivot:PropertyCallExp" type="#//@ownedPackages.1/@ownedClasses.1" referredProperty="HSVTree.ecore.oclas#p.HSVTree.HSVNode.children">
-            <ownedSource xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class HSVTree.ecore.oclas#T.HSVTree.HSVNode" referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.1/@domain.0/@guardPattern/@variable.0"/>
+            <ownedSource xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class HSVTree.ecore.oclas#T.HSVTree.HSVNode" referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.1/@domain.0/@ownedGuardVariables.0"/>
           </ownedSource>
         </ownedStatements>
         <ownedStatements xsi:type="qvti:MappingCall" isInfinite="false" referredMapping="#m..hsv2hls.Middle2HLSRoot">
-          <binding boundVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.3/@domain.0/@guardPattern/@variable.0" isPolled="false">
+          <binding boundVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.3/@domain.0/@ownedGuardVariables.0" isPolled="false">
             <value xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class HSV2HLS.ecore.oclas#T.HSV2HLS.HSVNode2HLSNode" referredVariable="#qV..hsv2hls.HSV2MiddleRoot.middleRoot"/>
           </binding>
         </ownedStatements>
       </rule>
       <rule xsi:type="qvti:Mapping" xmi:id="m..hsv2hls.HSV2MiddleRecursion" name="HSV2MiddleRecursion">
         <domain xsi:type="qvti:ImperativeDomain" isCheckable="true" isEnforceable="false" typedModel="#qT..hsv2hls.hsv">
-          <guardPattern>
-            <variable name="hsvNode" isRequired="false" type="pivot:Class HSVTree.ecore.oclas#T.HSVTree.HSVNode"/>
-          </guardPattern>
-          <bottomPattern/>
+          <ownedGuardVariables name="hsvNode" isRequired="false" type="pivot:Class HSVTree.ecore.oclas#T.HSVTree.HSVNode" referredTypedModel="#qT..hsv2hls.hsv"/>
         </domain>
         <domain xsi:type="qvti:ImperativeDomain" isCheckable="false" isEnforceable="true" typedModel="#qT..hsv2hls.middle">
-          <guardPattern>
-            <variable name="middleParent" isRequired="false" type="pivot:Class HSV2HLS.ecore.oclas#T.HSV2HLS.HSVNode2HLSNode"/>
-          </guardPattern>
-          <bottomPattern/>
+          <ownedGuardVariables name="middleParent" isRequired="false" type="pivot:Class HSV2HLS.ecore.oclas#T.HSV2HLS.HSVNode2HLSNode"
+              referredTypedModel="#qT..hsv2hls.middle"/>
         </domain>
-        <guardPattern/>
-        <bottomPattern/>
         <ownedStatements xsi:type="qvti:NewStatement" xmi:id="qV..hsv2hls.HSV2MiddleRecursion.middleNode" name="middleNode" isRequired="false"
             type="pivot:Class HSV2HLS.ecore.oclas#T.HSV2HLS.HSVNode2HLSNode" referredTypedModel="#qT..hsv2hls.middle"/>
-        <ownedStatements xsi:type="qvti:SetStatement" targetProperty="HSV2HLS.ecore.oclas#p.HSV2HLS.HSVNode2HLSNode.parent">
-          <slotExpression isRequired="false" type="pivot:Class HSV2HLS.ecore.oclas#T.HSV2HLS.HSVNode2HLSNode" referredVariable="#qV..hsv2hls.HSV2MiddleRecursion.middleNode"/>
-          <value xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class HSV2HLS.ecore.oclas#T.HSV2HLS.HSVNode2HLSNode" referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.2/@domain.1/@guardPattern/@variable.0"/>
+        <ownedStatements xsi:type="qvti:SetStatement" targetVariable="#qV..hsv2hls.HSV2MiddleRecursion.middleNode" targetProperty="HSV2HLS.ecore.oclas#p.HSV2HLS.HSVNode2HLSNode.parent"
+            isEmit="false">
+          <value xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class HSV2HLS.ecore.oclas#T.HSV2HLS.HSVNode2HLSNode" referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.2/@domain.1/@ownedGuardVariables.0"/>
         </ownedStatements>
-        <ownedStatements xsi:type="qvti:SetStatement" targetProperty="HSV2HLS.ecore.oclas#p.HSV2HLS.HSVNode2HLSNode.hsv">
-          <slotExpression isRequired="false" type="pivot:Class HSV2HLS.ecore.oclas#T.HSV2HLS.HSVNode2HLSNode" referredVariable="#qV..hsv2hls.HSV2MiddleRecursion.middleNode"/>
-          <value xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class HSVTree.ecore.oclas#T.HSVTree.HSVNode" referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.2/@domain.0/@guardPattern/@variable.0"/>
+        <ownedStatements xsi:type="qvti:SetStatement" targetVariable="#qV..hsv2hls.HSV2MiddleRecursion.middleNode" targetProperty="HSV2HLS.ecore.oclas#p.HSV2HLS.HSVNode2HLSNode.hsv"
+            isEmit="false">
+          <value xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class HSVTree.ecore.oclas#T.HSVTree.HSVNode" referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.2/@domain.0/@ownedGuardVariables.0"/>
         </ownedStatements>
-        <ownedStatements xsi:type="qvti:SetStatement" targetProperty="HSV2HLS.ecore.oclas#p.HSV2HLS.HSVNode2HLSNode.name">
-          <slotExpression isRequired="false" type="pivot:Class HSV2HLS.ecore.oclas#T.HSV2HLS.HSVNode2HLSNode" referredVariable="#qV..hsv2hls.HSV2MiddleRecursion.middleNode"/>
+        <ownedStatements xsi:type="qvti:SetStatement" targetVariable="#qV..hsv2hls.HSV2MiddleRecursion.middleNode" targetProperty="HSV2HLS.ecore.oclas#p.HSV2HLS.HSVNode2HLSNode.name"
+            isEmit="false">
           <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
               referredProperty="HSVTree.ecore.oclas#p.HSVTree.HSVNode.name">
-            <ownedSource xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class HSVTree.ecore.oclas#T.HSVTree.HSVNode" referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.2/@domain.0/@guardPattern/@variable.0"/>
+            <ownedSource xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class HSVTree.ecore.oclas#T.HSVTree.HSVNode" referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.2/@domain.0/@ownedGuardVariables.0"/>
           </value>
         </ownedStatements>
         <ownedStatements xsi:type="qvti:MappingLoop">
-          <ownedIterators xmi:id="i..hsv2hls.HSV2MiddleRecursion.4.hsvChild" name="hsvChild" type="pivot:Class HSVTree.ecore.oclas#T.HSVTree.HSVNode"/>
+          <ownedIterators name="hsvChild" type="pivot:Class HSVTree.ecore.oclas#T.HSVTree.HSVNode"/>
           <ownedMappingStatements xsi:type="qvti:MappingCall" isInfinite="false" referredMapping="#m..hsv2hls.HSV2MiddleRecursion">
-            <binding boundVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.2/@domain.0/@guardPattern/@variable.0" isPolled="false">
-              <value xsi:type="pivot:VariableExp" type="pivot:Class HSVTree.ecore.oclas#T.HSVTree.HSVNode" referredVariable="#i..hsv2hls.HSV2MiddleRecursion.4.hsvChild"/>
+            <binding boundVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.2/@domain.0/@ownedGuardVariables.0" isPolled="false">
+              <value xsi:type="pivot:VariableExp" type="pivot:Class HSVTree.ecore.oclas#T.HSVTree.HSVNode" referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.2/@ownedStatements.4/@ownedIterators.0"/>
             </binding>
-            <binding boundVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.2/@domain.1/@guardPattern/@variable.0" isPolled="false">
+            <binding boundVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.2/@domain.1/@ownedGuardVariables.0" isPolled="false">
               <value xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class HSV2HLS.ecore.oclas#T.HSV2HLS.HSVNode2HLSNode"
                   referredVariable="#qV..hsv2hls.HSV2MiddleRecursion.middleNode"/>
             </binding>
           </ownedMappingStatements>
           <ownedSource xsi:type="pivot:PropertyCallExp" type="#//@ownedPackages.1/@ownedClasses.1" referredProperty="HSVTree.ecore.oclas#p.HSVTree.HSVNode.children">
-            <ownedSource xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class HSVTree.ecore.oclas#T.HSVTree.HSVNode" referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.2/@domain.0/@guardPattern/@variable.0"/>
+            <ownedSource xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class HSVTree.ecore.oclas#T.HSVTree.HSVNode" referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.2/@domain.0/@ownedGuardVariables.0"/>
           </ownedSource>
         </ownedStatements>
       </rule>
       <rule xsi:type="qvti:Mapping" xmi:id="m..hsv2hls.Middle2HLSRoot" name="Middle2HLSRoot">
         <domain xsi:type="qvti:ImperativeDomain" isCheckable="true" isEnforceable="false" typedModel="#qT..hsv2hls.middle">
-          <guardPattern>
-            <variable name="middleNode" isRequired="false" type="pivot:Class HSV2HLS.ecore.oclas#T.HSV2HLS.HSVNode2HLSNode"/>
-          </guardPattern>
-          <bottomPattern/>
+          <ownedGuardVariables name="middleNode" isRequired="false" type="pivot:Class HSV2HLS.ecore.oclas#T.HSV2HLS.HSVNode2HLSNode" referredTypedModel="#qT..hsv2hls.middle"/>
         </domain>
-        <guardPattern/>
-        <bottomPattern/>
         <ownedStatements xsi:type="qvti:NewStatement" xmi:id="qV..hsv2hls.Middle2HLSRoot.hlsNode" name="hlsNode" isRequired="false" type="pivot:Class HLSTree.ecore.oclas#T.HLSTree.HLSNode"
             referredTypedModel="#qT..hsv2hls.hls"/>
-        <ownedStatements xsi:type="qvti:SetStatement" targetProperty="HLSTree.ecore.oclas#p.HLSTree.HLSNode.parent">
-          <slotExpression isRequired="false" type="pivot:Class HLSTree.ecore.oclas#T.HLSTree.HLSNode" referredVariable="#qV..hsv2hls.Middle2HLSRoot.hlsNode"/>
+        <ownedStatements xsi:type="qvti:SetStatement" targetVariable="#qV..hsv2hls.Middle2HLSRoot.hlsNode" targetProperty="HLSTree.ecore.oclas#p.HLSTree.HLSNode.parent"
+            isEmit="false">
           <value xsi:type="pivot:NullLiteralExp" isRequired="false" type="pivot:VoidType http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclVoid"/>
         </ownedStatements>
-        <ownedStatements xsi:type="qvti:SetStatement" targetProperty="HSV2HLS.ecore.oclas#p.HSV2HLS.HSVNode2HLSNode.hls">
-          <slotExpression isRequired="false" type="pivot:Class HSV2HLS.ecore.oclas#T.HSV2HLS.HSVNode2HLSNode" referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.3/@domain.0/@guardPattern/@variable.0"/>
+        <ownedStatements xsi:type="qvti:SetStatement" targetVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.3/@domain.0/@ownedGuardVariables.0"
+            targetProperty="HSV2HLS.ecore.oclas#p.HSV2HLS.HSVNode2HLSNode.hls" isEmit="false">
           <value xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class HLSTree.ecore.oclas#T.HLSTree.HLSNode" referredVariable="#qV..hsv2hls.Middle2HLSRoot.hlsNode"/>
         </ownedStatements>
-        <ownedStatements xsi:type="qvti:SetStatement" targetProperty="HLSTree.ecore.oclas#p.HLSTree.HLSNode.name">
-          <slotExpression isRequired="false" type="pivot:Class HLSTree.ecore.oclas#T.HLSTree.HLSNode" referredVariable="#qV..hsv2hls.Middle2HLSRoot.hlsNode"/>
+        <ownedStatements xsi:type="qvti:SetStatement" targetVariable="#qV..hsv2hls.Middle2HLSRoot.hlsNode" targetProperty="HLSTree.ecore.oclas#p.HLSTree.HLSNode.name"
+            isEmit="false">
           <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
               referredProperty="HSV2HLS.ecore.oclas#p.HSV2HLS.HSVNode2HLSNode.name">
             <ownedSource xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class HSV2HLS.ecore.oclas#T.HSV2HLS.HSVNode2HLSNode"
-                referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.3/@domain.0/@guardPattern/@variable.0"/>
+                referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.3/@domain.0/@ownedGuardVariables.0"/>
           </value>
         </ownedStatements>
         <ownedStatements xsi:type="qvti:MappingLoop">
-          <ownedIterators xmi:id="i..hsv2hls.Middle2HLSRoot.4.middleChild" name="middleChild" type="pivot:Class HSV2HLS.ecore.oclas#T.HSV2HLS.HSVNode2HLSNode"/>
+          <ownedIterators name="middleChild" type="pivot:Class HSV2HLS.ecore.oclas#T.HSV2HLS.HSVNode2HLSNode"/>
           <ownedMappingStatements xsi:type="qvti:MappingCall" isInfinite="false" referredMapping="#m..hsv2hls.Middle2HLSRecursion">
-            <binding boundVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.4/@domain.0/@guardPattern/@variable.0" isPolled="false">
-              <value xsi:type="pivot:VariableExp" type="pivot:Class HSV2HLS.ecore.oclas#T.HSV2HLS.HSVNode2HLSNode" referredVariable="#i..hsv2hls.Middle2HLSRoot.4.middleChild"/>
+            <binding boundVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.4/@domain.0/@ownedGuardVariables.0" isPolled="false">
+              <value xsi:type="pivot:VariableExp" type="pivot:Class HSV2HLS.ecore.oclas#T.HSV2HLS.HSVNode2HLSNode" referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.3/@ownedStatements.4/@ownedIterators.0"/>
             </binding>
           </ownedMappingStatements>
           <ownedSource xsi:type="pivot:PropertyCallExp" type="#//@ownedPackages.1/@ownedClasses.2" referredProperty="HSV2HLS.ecore.oclas#p.HSV2HLS.HSVNode2HLSNode.children">
             <ownedSource xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class HSV2HLS.ecore.oclas#T.HSV2HLS.HSVNode2HLSNode"
-                referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.3/@domain.0/@guardPattern/@variable.0"/>
+                referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.3/@domain.0/@ownedGuardVariables.0"/>
           </ownedSource>
         </ownedStatements>
       </rule>
       <rule xsi:type="qvti:Mapping" xmi:id="m..hsv2hls.Middle2HLSRecursion" name="Middle2HLSRecursion">
         <domain xsi:type="qvti:ImperativeDomain" isCheckable="true" isEnforceable="false" typedModel="#qT..hsv2hls.middle">
-          <guardPattern>
-            <variable name="middleNode" isRequired="false" type="pivot:Class HSV2HLS.ecore.oclas#T.HSV2HLS.HSVNode2HLSNode"/>
-          </guardPattern>
-          <bottomPattern/>
+          <ownedGuardVariables name="middleNode" isRequired="false" type="pivot:Class HSV2HLS.ecore.oclas#T.HSV2HLS.HSVNode2HLSNode" referredTypedModel="#qT..hsv2hls.middle"/>
         </domain>
-        <guardPattern/>
-        <bottomPattern/>
         <ownedStatements xsi:type="qvti:NewStatement" xmi:id="qV..hsv2hls.Middle2HLSRecursion.hlsNode" name="hlsNode" isRequired="false"
             type="pivot:Class HLSTree.ecore.oclas#T.HLSTree.HLSNode" referredTypedModel="#qT..hsv2hls.hls"/>
-        <ownedStatements xsi:type="qvti:SetStatement" targetProperty="HLSTree.ecore.oclas#p.HLSTree.HLSNode.parent">
-          <slotExpression isRequired="false" type="pivot:Class HLSTree.ecore.oclas#T.HLSTree.HLSNode" referredVariable="#qV..hsv2hls.Middle2HLSRecursion.hlsNode"/>
+        <ownedStatements xsi:type="qvti:SetStatement" targetVariable="#qV..hsv2hls.Middle2HLSRecursion.hlsNode" targetProperty="HLSTree.ecore.oclas#p.HLSTree.HLSNode.parent"
+            isEmit="false">
           <value xsi:type="pivot:PropertyCallExp" type="pivot:Class HLSTree.ecore.oclas#T.HLSTree.HLSNode" referredProperty="HSV2HLS.ecore.oclas#p.HSV2HLS.HSVNode2HLSNode.hls">
             <ownedSource xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:Class HSV2HLS.ecore.oclas#T.HSV2HLS.HSVNode2HLSNode"
                 referredProperty="HSV2HLS.ecore.oclas#p.HSV2HLS.HSVNode2HLSNode.parent">
               <ownedSource xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class HSV2HLS.ecore.oclas#T.HSV2HLS.HSVNode2HLSNode"
-                  referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.4/@domain.0/@guardPattern/@variable.0"/>
+                  referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.4/@domain.0/@ownedGuardVariables.0"/>
             </ownedSource>
           </value>
         </ownedStatements>
-        <ownedStatements xsi:type="qvti:SetStatement" targetProperty="HSV2HLS.ecore.oclas#p.HSV2HLS.HSVNode2HLSNode.hls">
-          <slotExpression isRequired="false" type="pivot:Class HSV2HLS.ecore.oclas#T.HSV2HLS.HSVNode2HLSNode" referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.4/@domain.0/@guardPattern/@variable.0"/>
+        <ownedStatements xsi:type="qvti:SetStatement" targetVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.4/@domain.0/@ownedGuardVariables.0"
+            targetProperty="HSV2HLS.ecore.oclas#p.HSV2HLS.HSVNode2HLSNode.hls" isEmit="false">
           <value xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class HLSTree.ecore.oclas#T.HLSTree.HLSNode" referredVariable="#qV..hsv2hls.Middle2HLSRecursion.hlsNode"/>
         </ownedStatements>
-        <ownedStatements xsi:type="qvti:SetStatement" targetProperty="HLSTree.ecore.oclas#p.HLSTree.HLSNode.name">
-          <slotExpression isRequired="false" type="pivot:Class HLSTree.ecore.oclas#T.HLSTree.HLSNode" referredVariable="#qV..hsv2hls.Middle2HLSRecursion.hlsNode"/>
+        <ownedStatements xsi:type="qvti:SetStatement" targetVariable="#qV..hsv2hls.Middle2HLSRecursion.hlsNode" targetProperty="HLSTree.ecore.oclas#p.HLSTree.HLSNode.name"
+            isEmit="false">
           <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
               referredProperty="HSV2HLS.ecore.oclas#p.HSV2HLS.HSVNode2HLSNode.name">
             <ownedSource xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class HSV2HLS.ecore.oclas#T.HSV2HLS.HSVNode2HLSNode"
-                referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.4/@domain.0/@guardPattern/@variable.0"/>
+                referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.4/@domain.0/@ownedGuardVariables.0"/>
           </value>
         </ownedStatements>
         <ownedStatements xsi:type="qvti:MappingLoop">
-          <ownedIterators xmi:id="i..hsv2hls.Middle2HLSRecursion.4.middleChild" name="middleChild" type="pivot:Class HSV2HLS.ecore.oclas#T.HSV2HLS.HSVNode2HLSNode"/>
+          <ownedIterators name="middleChild" type="pivot:Class HSV2HLS.ecore.oclas#T.HSV2HLS.HSVNode2HLSNode"/>
           <ownedMappingStatements xsi:type="qvti:MappingCall" isInfinite="false" referredMapping="#m..hsv2hls.Middle2HLSRecursion">
-            <binding boundVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.4/@domain.0/@guardPattern/@variable.0" isPolled="false">
-              <value xsi:type="pivot:VariableExp" type="pivot:Class HSV2HLS.ecore.oclas#T.HSV2HLS.HSVNode2HLSNode" referredVariable="#i..hsv2hls.Middle2HLSRecursion.4.middleChild"/>
+            <binding boundVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.4/@domain.0/@ownedGuardVariables.0" isPolled="false">
+              <value xsi:type="pivot:VariableExp" type="pivot:Class HSV2HLS.ecore.oclas#T.HSV2HLS.HSVNode2HLSNode" referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.4/@ownedStatements.4/@ownedIterators.0"/>
             </binding>
           </ownedMappingStatements>
           <ownedSource xsi:type="pivot:PropertyCallExp" type="#//@ownedPackages.1/@ownedClasses.2" referredProperty="HSV2HLS.ecore.oclas#p.HSV2HLS.HSVNode2HLSNode.children">
             <ownedSource xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class HSV2HLS.ecore.oclas#T.HSV2HLS.HSVNode2HLSNode"
-                referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.4/@domain.0/@guardPattern/@variable.0"/>
+                referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.4/@domain.0/@ownedGuardVariables.0"/>
           </ownedSource>
         </ownedStatements>
       </rule>

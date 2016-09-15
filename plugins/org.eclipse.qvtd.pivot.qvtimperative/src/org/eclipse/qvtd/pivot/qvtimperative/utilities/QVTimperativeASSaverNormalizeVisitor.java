@@ -11,27 +11,23 @@
 package	org.eclipse.qvtd.pivot.qvtimperative.utilities;
 
 import java.util.Comparator;
-import java.util.List;
-
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.internal.resource.ASSaver;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.qvtd.pivot.qvtbase.Predicate;
-import org.eclipse.qvtd.pivot.qvtimperative.Assignment;
-import org.eclipse.qvtd.pivot.qvtimperative.BottomPattern;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativePattern;
+import org.eclipse.qvtd.pivot.qvtimperative.CheckStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.util.AbstractQVTimperativeASSaverNormalizeVisitor;
 
 public class QVTimperativeASSaverNormalizeVisitor extends AbstractQVTimperativeASSaverNormalizeVisitor
 {
-	protected static final class PredicateComparator implements Comparator<@NonNull Predicate>
+	protected static final class PredicateComparator implements Comparator<@NonNull CheckStatement>
 	{
-		public static final @NonNull Comparator<@NonNull Predicate> INSTANCE = new PredicateComparator();
+		public static final @NonNull Comparator<@NonNull CheckStatement> INSTANCE = new PredicateComparator();
 
 		@Override
-		public int compare(@NonNull Predicate o1, @NonNull Predicate o2) {
+		public int compare(@NonNull CheckStatement o1, @NonNull CheckStatement o2) {
 			String n1 = o1.toString();
 			String n2 = o2.toString();
 			if (n1 == null) n1 = "";
@@ -45,18 +41,14 @@ public class QVTimperativeASSaverNormalizeVisitor extends AbstractQVTimperativeA
 	}
 
 	@Override
-	public @Nullable Object visitBottomPattern(@NonNull BottomPattern object) {
-		List<@NonNull Assignment> assignments = ClassUtil.nullFree(object.getAssignment());
-		ClassUtil.sort(assignments, new AssignmentComparator(assignments));
+	public @Nullable Object visitMapping(@NonNull Mapping object) {
+		//		List<@NonNull CheckVariableStatement> assignments = ClassUtil.nullFree(object.getBottomAssignments());
+		//		ClassUtil.sort(assignments, new AssignmentComparator(assignments));
+		//		ClassUtil.sort(ClassUtil.nullFree(object.getGuardPredicates()), PredicateComparator.INSTANCE);
+		//		QVTimperativeUtil.sortPatternVariables(ClassUtil.nullFree(object.getInoutVariables()));
+		//		QVTimperativeUtil.sortPatternVariables(ClassUtil.nullFree(object.getOwnedPredicateVariables()));
 		//		ClassUtil.sort(ClassUtil.nullFree(object.getRealizedVariable()), NameUtil.NAMEABLE_COMPARATOR);
-		return super.visitBottomPattern(object);
-	}
-
-	@Override
-	public @Nullable Object visitImperativePattern(@NonNull ImperativePattern object) {
-		ClassUtil.sort(ClassUtil.nullFree(object.getPredicate()), PredicateComparator.INSTANCE);
-		QVTimperativeUtil.sortPatternVariables(ClassUtil.nullFree(object.getVariable()));
-		return super.visitPattern(object);
+		return super.visitMapping(object);
 	}
 
 	@Override

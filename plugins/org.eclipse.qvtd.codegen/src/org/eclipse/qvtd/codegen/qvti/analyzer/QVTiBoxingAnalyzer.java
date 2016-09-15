@@ -20,7 +20,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGVariableExp;
 import org.eclipse.ocl.examples.codegen.generator.TypeDescriptor;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.TypedElement;
-import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcoreContainerAssignment;
@@ -142,7 +142,7 @@ public class QVTiBoxingAnalyzer extends BoxingAnalyzer implements QVTiCGModelVis
 	@Override
 	public Object visitCGMappingCallBinding(@NonNull CGMappingCallBinding cgMappingCallBinding) {
 		MappingCallBinding mappingCallBinding = (MappingCallBinding)cgMappingCallBinding.getAst();
-		Variable boundVariable = mappingCallBinding.getBoundVariable();
+		VariableDeclaration boundVariable = mappingCallBinding.getBoundVariable();
 		assert boundVariable != null;
 		if (boundVariable instanceof ConnectionVariable) {
 			//

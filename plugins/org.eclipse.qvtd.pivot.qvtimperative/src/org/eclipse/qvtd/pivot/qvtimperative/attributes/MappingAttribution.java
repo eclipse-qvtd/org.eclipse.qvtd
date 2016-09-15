@@ -11,6 +11,7 @@
 package org.eclipse.qvtd.pivot.qvtimperative.attributes;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.internal.scoping.AbstractAttribution;
 import org.eclipse.ocl.pivot.internal.scoping.EnvironmentView;
@@ -19,9 +20,9 @@ import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
-import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
+import org.eclipse.qvtd.pivot.qvtimperative.VariableStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 
 public class MappingAttribution extends AbstractAttribution
@@ -35,13 +36,43 @@ public class MappingAttribution extends AbstractAttribution
 			return null;
 		}
 		Mapping mapping = (Mapping)target;
-		if (scopeView.getContainmentFeature() == QVTimperativePackage.Literals.MAPPING__OWNED_STATEMENTS) {
+		EStructuralFeature containmentFeature = scopeView.getContainmentFeature();
+		/*		if ((containmentFeature == QVTimperativePackage.Literals.MAPPING__GUARD_PREDICATES)
+				|| (containmentFeature == QVTimperativePackage.Literals.MAPPING__OWNED_PREDICATE_VARIABLES)
+				|| (containmentFeature == QVTimperativePackage.Literals.MAPPING__OWNED_LOCAL_VARIABLES)) {
 			EObject child = scopeView.getChild();
 			for (Statement asStatement : mapping.getOwnedStatements()) {
 				if (asStatement == child) {
 					break;
 				}
-				if (asStatement instanceof NewStatement) {
+				if (asStatement instanceof VariableStatement) {
+					environmentView.addNamedElement(asStatement);
+				}
+			}
+			QVTimperativeEnvironmentUtil.addMiddleGuardVariables(environmentView, mapping);
+			QVTimperativeEnvironmentUtil.addSideGuardVariables(environmentView, mapping, null);
+			QVTimperativeEnvironmentUtil.addMiddleBottomVariables(environmentView, mapping);
+			QVTimperativeEnvironmentUtil.addSideBottomVariables(environmentView, mapping, null);
+			Transformation transformation = QVTimperativeUtil.getContainingTransformation(mapping);
+			if (transformation != null) {
+				for (TypedModel typedModel : transformation.getModelParameter()) {
+					for (org.eclipse.ocl.pivot.Package usedPackage : typedModel.getUsedPackage()) {
+						if (usedPackage != null) {
+							environmentView.addNamedElement(usedPackage);
+							environmentView.addAllTypes(usedPackage);
+						}
+					}
+				}
+			}
+
+		}
+		else*/ if (containmentFeature == QVTimperativePackage.Literals.MAPPING__OWNED_STATEMENTS) {
+			EObject child = scopeView.getChild();
+			for (Statement asStatement : mapping.getOwnedStatements()) {
+				if (asStatement == child) {
+					break;
+				}
+				if (asStatement instanceof VariableStatement) {
 					environmentView.addNamedElement(asStatement);
 				}
 			}

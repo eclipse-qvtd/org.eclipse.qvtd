@@ -34,38 +34,29 @@ import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.ocl.pivot.evaluation.EvaluationVisitor;
-import org.eclipse.ocl.pivot.ids.CollectionTypeId;
 import org.eclipse.ocl.pivot.internal.complete.StandardLibraryInternal;
 import org.eclipse.ocl.pivot.internal.evaluation.AbstractExecutor;
 import org.eclipse.ocl.pivot.internal.messages.PivotMessagesInternal;
 import org.eclipse.ocl.pivot.labels.ILabelGenerator;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
-import org.eclipse.ocl.pivot.utilities.ValueUtil;
-import org.eclipse.ocl.pivot.values.CollectionValue;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.ocl.pivot.values.NullValue;
-import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
-import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
-import org.eclipse.qvtd.pivot.qvtimperative.Assignment;
-import org.eclipse.qvtd.pivot.qvtimperative.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
-import org.eclipse.qvtd.pivot.qvtimperative.GuardPattern;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
-import org.eclipse.qvtd.pivot.qvtimperative.VariableAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
 import org.eclipse.qvtd.runtime.evaluation.InvocationFailedException;
@@ -138,111 +129,6 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 		super.dispose();
 	}
 
-	protected void doCommits(@NonNull Mapping mapping, @NonNull EvaluationVisitor undecoratedVisitor) {
-		//
-		// property and connection assignments
-		//
-		BottomPattern middleBottomPattern = mapping.getBottomPattern();
-		for (Assignment assignment : middleBottomPattern.getAssignment()) {
-			if (!(assignment instanceof VariableAssignment)) {
-				assignment.accept(undecoratedVisitor);
-			}
-		}
-	}
-
-	protected boolean doPredicatesAndEvaluations(@NonNull Mapping mapping, @NonNull EvaluationVisitor undecoratedVisitor) {
-		//
-		// middle guard predicates
-		//
-		GuardPattern middleGuardPattern = mapping.getGuardPattern();
-		//		assert middleGuardPattern.getVariable().isEmpty();		middle guards are connection variables
-		for (@NonNull Predicate predicate : ClassUtil.nullFree(middleGuardPattern.getPredicate())) {
-			// If the predicate is not true, the binding is not valid
-			Object result = predicate.accept(undecoratedVisitor);
-			if (result != Boolean.TRUE) {
-				return false;
-			}
-		}
-		for (@NonNull Domain domain : ClassUtil.nullFree(mapping.getDomain())) {
-			if (!domain.isIsEnforceable()) {
-				ImperativeDomain checkableDomain = (ImperativeDomain)domain;
-				GuardPattern checkableGuardPattern = checkableDomain.getGuardPattern();
-				assert checkableGuardPattern.getPredicate().isEmpty();
-				BottomPattern checkableBottomPattern = checkableDomain.getBottomPattern();
-				assert checkableBottomPattern.getAssignment().isEmpty();
-				assert checkableBottomPattern.getPredicate().isEmpty();
-				//				assert checkableBottomPattern.getVariable().isEmpty();
-				for (@NonNull Variable rVar : ClassUtil.nullFree(checkableBottomPattern.getVariable())) {
-					OCLExpression ownedInit = rVar.getOwnedInit();
-					assert ownedInit == null;
-				}
-			}
-			else {
-				ImperativeDomain enforceableDomain = (ImperativeDomain)domain;
-				GuardPattern enforceableGuardPattern = enforceableDomain.getGuardPattern();
-				assert enforceableGuardPattern.getPredicate().isEmpty();
-				BottomPattern enforceableBottomPattern = enforceableDomain.getBottomPattern();
-				assert enforceableBottomPattern.getAssignment().isEmpty();
-				assert enforceableBottomPattern.getPredicate().isEmpty();
-				for (@NonNull Variable rVar : ClassUtil.nullFree(enforceableBottomPattern.getVariable())) {
-					OCLExpression ownedInit = rVar.getOwnedInit();
-					if (ownedInit != null) {
-						Object initValue = ownedInit.accept(undecoratedVisitor);
-						replace(rVar, initValue, true);
-					}
-				}
-			}
-		}
-		BottomPattern middleBottomPattern = mapping.getBottomPattern();
-		//
-		// variable declarations/initializations
-		//
-		for (@NonNull Variable rVar : ClassUtil.nullFree(middleBottomPattern.getVariable())) {
-			if (rVar instanceof ConnectionVariable) {
-				CollectionValue.Accumulator accumulator = ValueUtil.createCollectionAccumulatorValue((CollectionTypeId) rVar.getTypeId());
-				OCLExpression ownedInit = rVar.getOwnedInit();
-				if (ownedInit != null) {
-					Object initValue = ownedInit.accept(undecoratedVisitor);
-					accumulator = ValueUtil.createCollectionAccumulatorValue((CollectionTypeId) ownedInit.getTypeId());
-					if (initValue != null) {
-						for (Object value : (Iterable<?>)initValue) {
-							accumulator.add(value);
-						}
-					}
-				}
-				else {
-					accumulator = ValueUtil.createCollectionAccumulatorValue((CollectionTypeId) rVar.getTypeId());
-				}
-				replace(rVar, accumulator, false);
-			}
-			else {
-				OCLExpression ownedInit = rVar.getOwnedInit();
-				if (ownedInit != null) {
-					Object initValue = ownedInit.accept(undecoratedVisitor);
-					replace(rVar, initValue, false);
-				}
-			}
-		}
-		//
-		// variable assignments
-		//
-		for (@NonNull Assignment assignment : ClassUtil.nullFree(middleBottomPattern.getAssignment())) {
-			if (assignment instanceof VariableAssignment) {
-				assignment.accept(undecoratedVisitor);
-			}
-		}
-		//
-		// middle bottom predicates
-		//
-		for (@NonNull Predicate predicate : ClassUtil.nullFree(middleBottomPattern.getPredicate())) {
-			// If the predicate is not true, the binding is not valid
-			Object result = predicate.accept(undecoratedVisitor);
-			if (result != Boolean.TRUE) {
-				return false;
-			}
-		}
-		return true;
-	}
 
 	@Override
 	public Boolean execute() {
@@ -358,7 +244,7 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 			try {
 				int index = 0;
 				for (MappingCallBinding binding : mappingCall.getBinding()) {
-					Variable boundVariable = ClassUtil.nonNullState(binding.getBoundVariable());
+					VariableDeclaration boundVariable = ClassUtil.nonNullState(binding.getBoundVariable());
 					replace(boundVariable, boundValues[index++], !(boundVariable instanceof ConnectionVariable));
 				}
 				calledMapping.accept(undecoratedVisitor);
@@ -373,35 +259,24 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 	@Override
 	public @Nullable Object internalExecuteMapping(@NonNull Mapping mapping, @NonNull EvaluationVisitor undecoratedVisitor) {
 		try {
-			//
-			//	Check the predicates
-			//
-			if (!doPredicatesAndEvaluations(mapping, undecoratedVisitor)) {
-				return false;
+			for (Statement statement : mapping.getOwnedStatements()) {
+				Object result = statement.accept(undecoratedVisitor);
+				if (result != Boolean.TRUE) {
+					return false;
+				}
 			}
+			return true;
 		}
 		catch (InvocationFailedException e) {
 			throw e;
 		}
 		catch (Throwable e) {
-			// Mapping failure are just mappings that never happened.
+			// Mapping failures are just mappings that never happened.
 			if (debugExceptions) {
 				AbstractTransformer.EXCEPTIONS.println("Execution failure in " + mapping.getName() + " : " + e);
 			}
 			return false;
 		}
-		//
-		//	Perform the instance model addition and property assignment only after all expressions have been evaluated
-		//	possibly throwing a not-ready exception that bypasses premature commits.
-		//
-		doCommits(mapping, undecoratedVisitor);
-		//
-		//	Invoke any corrolaries
-		//
-		for (Statement statement : mapping.getOwnedStatements()) {
-			statement.accept(undecoratedVisitor);
-		}
-		return true;
 	}
 
 	@Override

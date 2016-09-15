@@ -15,12 +15,10 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.internal.scoping.EnvironmentView;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
-import org.eclipse.qvtd.pivot.qvtimperative.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
-import org.eclipse.qvtd.pivot.qvtimperative.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
-import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
+import org.eclipse.qvtd.pivot.qvtimperative.VariableStatement;
 
 public class QVTimperativeEnvironmentUtil
 {
@@ -38,38 +36,25 @@ public class QVTimperativeEnvironmentUtil
 
 	private static void addMiddleVariables(@NonNull EnvironmentView environmentView, @NonNull Mapping mapping, boolean bottomToo) {
 		if (bottomToo) {
-			BottomPattern bottomPattern = mapping.getBottomPattern();
-			if (bottomPattern != null) {
-				environmentView.addNamedElements(bottomPattern.getVariable());
-			}
 			for (Statement asStatement : mapping.getOwnedStatements()) {
-				if (asStatement instanceof NewStatement) {
+				if (asStatement instanceof VariableStatement) {
 					environmentView.addNamedElement(asStatement);
 				}
 			}
 		}
-		GuardPattern guardPattern = mapping.getGuardPattern();
-		if (guardPattern != null) {
-			environmentView.addNamedElements(guardPattern.getVariable());
-		}
+		environmentView.addNamedElements(mapping.getOwnedGuardVariables());
+		environmentView.addNamedElements(mapping.getInoutVariables());
 		for (Domain aDomain : mapping.getDomain()) {
 			if (aDomain instanceof ImperativeDomain) {
 				ImperativeDomain domain = (ImperativeDomain)aDomain;
 				if (bottomToo) {
-					BottomPattern bottomPattern = domain.getBottomPattern();
-					if (bottomPattern != null) {
-						environmentView.addNamedElements(bottomPattern.getVariable());
-					}
 					for (Statement asStatement : mapping.getOwnedStatements()) {
-						if (asStatement instanceof NewStatement) {
+						if (asStatement instanceof VariableStatement) {
 							environmentView.addNamedElement(asStatement);
 						}
 					}
 				}
-				guardPattern = domain.getGuardPattern();
-				if (guardPattern != null) {
-					environmentView.addNamedElements(guardPattern.getVariable());
-				}
+				environmentView.addNamedElements(domain.getOwnedGuardVariables());
 			}
 		}
 	}
@@ -92,20 +77,14 @@ public class QVTimperativeEnvironmentUtil
 				ImperativeDomain domain = (ImperativeDomain)aDomain;
 				if ((typedModel == null) || (domain.getTypedModel() == typedModel)) {
 					if (bottomToo) {
-						BottomPattern bottomPattern = domain.getBottomPattern();
-						if (bottomPattern != null) {
-							environmentView.addNamedElements(bottomPattern.getVariable());
-						}
 						for (Statement asStatement : mapping.getOwnedStatements()) {
-							if (asStatement instanceof NewStatement) {
+							if (asStatement instanceof VariableStatement) {
 								environmentView.addNamedElement(asStatement);
 							}
 						}
 					}
-					GuardPattern guardPattern = domain.getGuardPattern();
-					if (guardPattern != null) {
-						environmentView.addNamedElements(guardPattern.getVariable());
-					}
+					environmentView.addNamedElements(domain.getOwnedGuardVariables());
+					environmentView.addNamedElements(mapping.getInoutVariables());
 					break;
 				}
 			}

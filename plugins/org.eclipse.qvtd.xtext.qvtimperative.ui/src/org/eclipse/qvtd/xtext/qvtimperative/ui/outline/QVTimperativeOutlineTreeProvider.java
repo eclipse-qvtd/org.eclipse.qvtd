@@ -11,20 +11,19 @@
 package org.eclipse.qvtd.xtext.qvtimperative.ui.outline;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.xtext.basecs.ImportCS;
 import org.eclipse.ocl.xtext.basecs.PackageCS;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
-import org.eclipse.qvtd.pivot.qvtbase.Predicate;
-import org.eclipse.qvtd.pivot.qvtimperative.Assignment;
-import org.eclipse.qvtd.pivot.qvtimperative.BottomPattern;
-import org.eclipse.qvtd.pivot.qvtimperative.GuardPattern;
+import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.GuardVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
+import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.PredicateVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
-import org.eclipse.qvtd.pivot.qvtimperative.VariableAssignment;
 import org.eclipse.qvtd.xtext.qvtbase.ui.outline.QVTbaseOutlineTreeProvider;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS;
@@ -40,37 +39,22 @@ import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
  */
 public class QVTimperativeOutlineTreeProvider extends QVTbaseOutlineTreeProvider
 {
-	//	protected void _createChildren(IOutlineNode parentNode, AssignmentCS csOperator) {
-	//	createNode(parentNode, csOperator.getInitialiser());
-	//}
-
-	protected void _createChildren(IOutlineNode parentNode, BottomPattern ele) {
-		for (Variable asVariable : ele.getVariable()) {
+	protected void _createChildren(IOutlineNode parentNode, ImperativeDomain ele) {
+		for (GuardVariable asVariable : ele.getOwnedGuardVariables()) {
 			createNode(parentNode, asVariable);
-		}
-		for (Predicate asPredicate : ele.getPredicate()) {
-			createNode(parentNode, asPredicate);
-		}
-		for (Assignment asAssignment : ele.getAssignment()) {
-			createNode(parentNode, asAssignment);
-		}
-	}
-
-	protected void _createChildren(IOutlineNode parentNode, GuardPattern ele) {
-		for (Variable asVariable : ele.getVariable()) {
-			createNode(parentNode, asVariable);
-		}
-		for (Predicate asPredicate : ele.getPredicate()) {
-			createNode(parentNode, asPredicate);
 		}
 	}
 
 	protected void _createChildren(IOutlineNode parentNode, Mapping ele) {
+		for (GuardVariable asVariable : ele.getOwnedGuardVariables()) {
+			createNode(parentNode, asVariable);
+		}
+		for (ConnectionVariable asVariable : ele.getInoutVariables()) {
+			createNode(parentNode, asVariable);
+		}
 		for (Domain asDomain : ele.getDomain()) {
 			createNode(parentNode, asDomain);
 		}
-		createNode(parentNode, ele.getGuardPattern());
-		createNode(parentNode, ele.getBottomPattern());
 		for (Statement asStatement : ele.getOwnedStatements()) {
 			createNode(parentNode, asStatement);
 		}
@@ -80,7 +64,7 @@ public class QVTimperativeOutlineTreeProvider extends QVTbaseOutlineTreeProvider
 		if (ele.getOwnedSource() != null) {
 			createNode(parentNode, ele.getOwnedSource());
 		}
-		for (Variable asIterator : ele.getOwnedIterators()) {
+		for (LoopVariable asIterator : ele.getOwnedIterators()) {
 			createNode(parentNode, asIterator);
 		}
 		for (MappingStatement asStatement : ele.getOwnedMappingStatements()) {
@@ -116,8 +100,8 @@ public class QVTimperativeOutlineTreeProvider extends QVTbaseOutlineTreeProvider
 		}
 	}
 
-	protected void _createChildren(IOutlineNode parentNode, VariableAssignment ele) {
-		createNode(parentNode, ele.getValue());
+	protected void _createChildren(IOutlineNode parentNode, PredicateVariable ele) {
+		createNode(parentNode, ele.getOwnedInit());
 	}
 
 	protected void _createNode(IOutlineNode parentNode, TopLevelCS ele) {

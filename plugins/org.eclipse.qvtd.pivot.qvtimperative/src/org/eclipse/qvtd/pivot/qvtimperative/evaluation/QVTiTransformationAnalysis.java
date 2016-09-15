@@ -32,7 +32,7 @@ import org.eclipse.ocl.pivot.PrimitiveType;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.PropertyCallExp;
 import org.eclipse.ocl.pivot.Type;
-import org.eclipse.ocl.pivot.VariableExp;
+import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.ids.IdManager;
 import org.eclipse.ocl.pivot.ids.OperationId;
 import org.eclipse.ocl.pivot.ids.TypeId;
@@ -46,7 +46,6 @@ import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.analysis.DomainUsage;
-import org.eclipse.qvtd.pivot.qvtimperative.Area;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
@@ -493,8 +492,8 @@ public class QVTiTransformationAnalysis
 			return false;
 		}
 		for (@NonNull SetStatement propertyAssignment : propertyAssignments) {
-			OCLExpression slotExpression = propertyAssignment.getSlotExpression();
-			DomainUsage slotUsage = domainAnalysis.basicGetUsage(slotExpression);
+			VariableDeclaration targetVariable = propertyAssignment.getTargetVariable();
+			DomainUsage slotUsage = domainAnalysis.basicGetUsage(targetVariable);
 			if (domainUsage == slotUsage) {
 				return true;
 			}
@@ -538,9 +537,16 @@ public class QVTiTransformationAnalysis
 		if (domainUsage1 != null) {
 			TypedModel typedModel = domainUsage1.getTypedModel(asSource);
 			if (typedModel != null) {
-				Area area = QVTimperativeUtil.getArea(asMapping, typedModel);
-				if (area.getCheckedProperties().contains(asProperty)) {
-					return true;
+				ImperativeDomain domain = QVTimperativeUtil.getDomain(asMapping, typedModel);
+				if (domain != null) {
+					if (domain.getCheckedProperties().contains(asProperty)) {
+						return true;
+					}
+				}
+				else {
+					if (asMapping.getCheckedProperties().contains(asProperty)) {
+						return true;
+					}
 				}
 			}
 		}
@@ -549,38 +555,16 @@ public class QVTiTransformationAnalysis
 		if (domainUsage2 != null) {
 			TypedModel typedModel = domainUsage2.getTypedModel(asProperty);
 			if (typedModel != null) {
-				Area area = QVTimperativeUtil.getArea(asMapping, typedModel);
-				if (area.getCheckedProperties().contains(asOppositeProperty)) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-
-	public boolean isHazardousWrite(@NonNull Mapping asMapping, @NonNull SetStatement asSetStatement) {
-		Property asProperty = QVTimperativeUtil.getTargetProperty(asSetStatement);
-		VariableExp asSource = asSetStatement.getSlotExpression();
-		DomainUsage domainUsage = getDomainUsageAnalysis().basicGetUsage(asSource);
-		if (domainUsage != null) {
-			TypedModel typedModel = domainUsage.getTypedModel(asSource);
-			if (typedModel != null) {
-				Area area = null;
-				for (Domain domain : asMapping.getDomain()) {
-					if (domain.getTypedModel() == typedModel) {
-						area = (ImperativeDomain)domain;
-						break;
+				ImperativeDomain domain = QVTimperativeUtil.getDomain(asMapping, typedModel);
+				if (domain != null) {
+					if (domain.getCheckedProperties().contains(asOppositeProperty)) {
+						return true;
 					}
 				}
-				if (area == null) {
-					area = asMapping;
-				}
-				List<Property> enforcedProperties = area.getEnforcedProperties();
-				if (enforcedProperties.contains(asProperty)) {
-					return true;
-				}
-				if (enforcedProperties.contains(asProperty.getOpposite())) {
-					return true;
+				else {
+					if (asMapping.getCheckedProperties().contains(asOppositeProperty)) {
+						return true;
+					}
 				}
 			}
 		}

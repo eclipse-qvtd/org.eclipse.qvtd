@@ -10,20 +10,15 @@
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtimperative.cs2as;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CollectionType;
-import org.eclipse.ocl.pivot.NavigationCallExp;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
-import org.eclipse.ocl.pivot.Variable;
-import org.eclipse.ocl.pivot.VariableExp;
-import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
-import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.xtext.base.cs2as.BasicContinuation;
 import org.eclipse.ocl.xtext.base.cs2as.CS2ASConversion;
@@ -32,40 +27,30 @@ import org.eclipse.ocl.xtext.base.cs2as.SingleContinuation;
 import org.eclipse.ocl.xtext.basecs.ConstraintCS;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
-import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
-import org.eclipse.qvtd.pivot.qvtimperative.Assignment;
-import org.eclipse.qvtd.pivot.qvtimperative.BottomPattern;
-import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
-import org.eclipse.qvtd.pivot.qvtimperative.GuardPattern;
-import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
+import org.eclipse.qvtd.pivot.qvtimperative.CheckStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
-import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeFactory;
+import org.eclipse.qvtd.pivot.qvtimperative.PredicateVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
-import org.eclipse.qvtd.pivot.qvtimperative.VariableAssignment;
-import org.eclipse.qvtd.pivot.qvtimperative.VariablePredicate;
-import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.xtext.qvtimperativecs.AddStatementCS;
-import org.eclipse.qvtd.xtext.qvtimperativecs.AreaCS;
-import org.eclipse.qvtd.xtext.qvtimperativecs.BottomPatternCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.CheckStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DomainCS;
-import org.eclipse.qvtd.xtext.qvtimperativecs.GuardPatternCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.GuardVariableCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingLoopCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.NewStatementCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.OutVariableCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.ParamDeclarationCS;
-import org.eclipse.qvtd.xtext.qvtimperativecs.PatternCS;
-import org.eclipse.qvtd.xtext.qvtimperativecs.PredicateCS;
-import org.eclipse.qvtd.xtext.qvtimperativecs.PredicateOrAssignmentCS;
-import org.eclipse.qvtd.xtext.qvtimperativecs.SetStatementCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.PredicateVariableCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QueryCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.SetStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.TopLevelCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.TransformationCS;
-import org.eclipse.qvtd.xtext.qvtimperativecs.UnrealizedVariableCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.util.AbstractQVTimperativeCSPostOrderVisitor;
 
 public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPostOrderVisitor
@@ -112,19 +97,11 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 		return propertyAssignment;
 	} */
 
-	protected @Nullable Assignment refreshVariableAssignment(@NonNull VariableExp variableExp, @NonNull PredicateOrAssignmentCS csConstraint) {
-		VariableAssignment variableAssignment = PivotUtil.getPivot(VariableAssignment.class, csConstraint);
-		if (variableAssignment != null) {
-			variableAssignment.setTargetVariable((Variable) variableExp.getReferredVariable());
-		}
-		return variableAssignment;
-	}
-
 	@Override
 	public @Nullable Continuation<?> visitAddStatementCS(@NonNull AddStatementCS csElement) {
 		AddStatement asAddStatement = PivotUtil.getPivot(AddStatement.class, csElement);
 		if (asAddStatement != null) {
-			asAddStatement.setTargetVariable((ConnectionVariable) csElement.getTargetVariable());
+			asAddStatement.setTargetVariable(csElement.getTargetVariable());
 			ExpCS csInitialiser = csElement.getOwnedExpression();
 			if (csInitialiser != null) {
 				OCLExpression initialiser = context.visitLeft2Right(OCLExpression.class, csInitialiser);
@@ -135,48 +112,15 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 	}
 
 	@Override
-	public Continuation<?> visitAreaCS(@NonNull AreaCS csElement) {
-		return null;
-	}
-
-	@Override
-	public Continuation<?> visitBottomPatternCS(@NonNull BottomPatternCS csElement) {
-		BottomPattern pBottomPattern = PivotUtil.getPivot(BottomPattern.class, csElement);
-		if (pBottomPattern != null) {
-			List<@NonNull Assignment> pAssignments = new ArrayList<>();
-			List<@NonNull Predicate> pPredicates = new ArrayList<>();
-			for (PredicateOrAssignmentCS csConstraint : csElement.getOwnedConstraints()) {
-				ExpCS csTarget = csConstraint.getOwnedTarget();
-				ExpCS csInitialiser = csConstraint.getOwnedInitExpression();
-				OCLExpression target = csTarget != null ? context.visitLeft2Right(OCLExpression.class, csTarget) : null;
-				if (csInitialiser != null) {
-					Assignment assignment = null;
-					if (target instanceof NavigationCallExp) {
-						throw new IllegalStateException();
-						//						assignment = refreshPropertyAssignment((NavigationCallExp)target, csConstraint);
-					}
-					else if (target instanceof VariableExp) {
-						assignment = refreshVariableAssignment((VariableExp)target, csConstraint);
-					}
-					else if (target != null) {
-						context.addDiagnostic(csElement, "unrecognised Constraint target " + target.eClass().getName());
-					}
-					if (assignment != null) {
-						OCLExpression initialiser = context.visitLeft2Right(OCLExpression.class, csInitialiser);
-						assignment.setValue(initialiser);
-						pAssignments.add(assignment);
-					}
-				}
-				else {
-					Predicate predicate = PivotUtil.getPivot(Predicate.class, csConstraint);
-					if (predicate != null) {
-						predicate.setConditionExpression(target);
-						pPredicates.add(predicate);
-					}
-				}
+	public Continuation<?> visitCheckStatementCS(@NonNull CheckStatementCS csElement) {
+		CheckStatement asPredicate = PivotUtil.getPivot(CheckStatement.class, csElement);
+		if (asPredicate != null) {
+			OCLExpression asCondition = null;
+			ExpCS csCondition = csElement.getOwnedCondition();
+			if (csCondition != null) {
+				asCondition = context.visitLeft2Right(OCLExpression.class, csCondition);
 			}
-			PivotUtilInternal.refreshList(pBottomPattern.getAssignment(), pAssignments);
-			PivotUtilInternal.refreshList(pBottomPattern.getPredicate(), pPredicates);
+			asPredicate.setConditionExpression(asCondition);
 		}
 		return null;
 	}
@@ -197,49 +141,12 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 	}
 
 	@Override
-	public Continuation<?> visitGuardPatternCS(@NonNull GuardPatternCS csElement) {
-		GuardPattern asGuardPattern = PivotUtil.getPivot(GuardPattern.class, csElement);
-		if (asGuardPattern != null) {
-			context.refreshList(Predicate.class, ClassUtil.nullFree(asGuardPattern.getPredicate()), csElement.getOwnedPredicates());
-		}
+	public Continuation<?> visitGuardVariableCS(@NonNull GuardVariableCS csElement) {
 		return null;
 	}
 
 	@Override
 	public Continuation<?> visitMappingCS(@NonNull MappingCS csElement) {
-		Mapping asMapping = PivotUtil.getPivot(Mapping.class, csElement);
-		if (asMapping != null) {
-			List<@NonNull VariablePredicate> asVariablePredicates = null;
-			for (DomainCS csDomain : csElement.getOwnedDomains()) {
-				GuardPatternCS csGuardPattern = csDomain.getOwnedGuardPattern();
-				for (UnrealizedVariableCS csVariable : csGuardPattern.getOwnedUnrealizedVariables()) {
-					Variable asVariable = PivotUtil.getPivot(Variable.class, csVariable);
-					if (asVariable != null) {
-						ExpCS csGuardExpression = csVariable.getOwnedInitExpression();
-						if (csGuardExpression != null) {
-							OCLExpression asExpression = context.visitLeft2Right(OCLExpression.class, csGuardExpression);
-							if (asExpression != null) {
-								VariablePredicate asVariablePredicate = QVTimperativeFactory.eINSTANCE.createVariablePredicate();
-								asVariablePredicate.setTargetVariable(asVariable);
-								asVariablePredicate.setConditionExpression(asExpression);
-								if (asVariablePredicates == null) {
-									asVariablePredicates = new ArrayList<>();
-								}
-								asVariablePredicates.add(asVariablePredicate);
-							}
-						}
-					}
-				}
-			}
-			if (asVariablePredicates != null) {
-				List<Predicate> asPredicates = asMapping.getGuardPattern().getPredicate();
-				List<VariablePredicate> asSortedPredicates = QVTimperativeUtil.sortVariablePredicates(asMapping, asVariablePredicates);
-				int j = 0;
-				for (VariablePredicate asVariablePredicate : asSortedPredicates) {
-					asPredicates.add(j++, asVariablePredicate);
-				}
-			}
-		}
 		return null;
 	}
 
@@ -257,9 +164,9 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 				OCLExpression target = context.visitLeft2Right(OCLExpression.class, expression);
 				if (target != null) {
 					pMappingLoop.setOwnedSource(target);
-					List<Variable> iterators = pMappingLoop.getOwnedIterators();
+					List<LoopVariable> iterators = pMappingLoop.getOwnedIterators();
 					if (iterators.size() > 0) {
-						Variable iterator = iterators.get(0);
+						LoopVariable iterator = iterators.get(0);
 						if (iterator.getType() == null) {
 							Type type = target.getType();
 							if (type instanceof CollectionType) {
@@ -279,7 +186,7 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 		NewStatement asNewStatement = PivotUtil.getPivot(NewStatement.class, csElement);
 		if (asNewStatement != null) {
 			asNewStatement.setReferredTypedModel(csElement.getReferredTypedModel());
-			ExpCS expression = csElement.getOwnedInitExpression();
+			ExpCS expression = csElement.getOwnedInit();
 			if (expression != null) {
 				OCLExpression target = context.visitLeft2Right(OCLExpression.class, expression);
 				asNewStatement.setOwnedInit(target);
@@ -289,34 +196,55 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 	}
 
 	@Override
+	public Continuation<?> visitOutVariableCS(@NonNull OutVariableCS csElement) {
+		return null;
+	}
+
+	@Override
 	public Continuation<?> visitParamDeclarationCS(@NonNull ParamDeclarationCS object) {
 		return null;
 	}
 
 	@Override
-	public Continuation<?> visitPatternCS(@NonNull PatternCS object) {
-		return null;
-	}
-
-	@Override
-	public Continuation<?> visitPredicateCS(@NonNull PredicateCS csElement) {
-		Predicate asPredicate = PivotUtil.getPivot(Predicate.class, csElement);
-		if (asPredicate != null) {
-			OCLExpression asCondition = null;
-			ExpCS csCondition = csElement.getOwnedCondition();
-			if (csCondition != null) {
-				asCondition = context.visitLeft2Right(OCLExpression.class, csCondition);
+	public Continuation<?> visitPredicateVariableCS(@NonNull PredicateVariableCS csElement) {
+		PredicateVariable asVariable = PivotUtil.getPivot(PredicateVariable.class, csElement);
+		if (asVariable != null) {
+			ExpCS expression = csElement.getOwnedInit();
+			if (expression != null) {
+				OCLExpression target = context.visitLeft2Right(OCLExpression.class, expression);
+				asVariable.setOwnedInit(target);
 			}
-			asPredicate.setConditionExpression(asCondition);
 		}
 		return null;
 	}
 
-
-	@Override
-	public Continuation<?> visitPredicateOrAssignmentCS(@NonNull PredicateOrAssignmentCS csElement) {
+	/*	@Override
+	public Continuation<?> visitCheckVariableStatementCS(@NonNull CheckVariableStatementCS csElement) {
+		ExpCS csTarget = csElement.getOwnedTarget();
+		assert csTarget != null;
+		OCLExpression target = context.visitLeft2Right(OCLExpression.class, csTarget);
+		ExpCS csInitialiser = csElement.getOwnedInit();
+		assert csInitialiser != null;
+		CheckVariableStatement assignment = null;
+		if (target instanceof NavigationCallExp) {
+			throw new IllegalStateException();
+		}
+		else if (target instanceof VariableExp) {
+			CheckVariableStatement variableAssignment = PivotUtil.getPivot(CheckVariableStatement.class, csElement);
+			if (variableAssignment != null) {
+				variableAssignment.setTargetVariable(((VariableExp)target).getReferredVariable());
+			}
+		}
+		else if (target != null) {
+			context.addDiagnostic(csElement, "unrecognised Constraint target " + target.eClass().getName());
+		}
+		if (assignment != null) {
+			OCLExpression initialiser = context.visitLeft2Right(OCLExpression.class, csInitialiser);
+			assignment.setOwnedInit(initialiser);
+			//			pAssignments.add(assignment);
+		}
 		return null;
-	}
+	} */
 
 	@Override
 	public Continuation<?> visitQueryCS(@NonNull QueryCS csElement) {
@@ -335,11 +263,11 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 	public Continuation<?> visitSetStatementCS(@NonNull SetStatementCS csElement) {
 		SetStatement setStatement = PivotUtil.getPivot(SetStatement.class, csElement);
 		if (setStatement != null) {
-			Variable targetVariable = csElement.getReferredVariable();
+			VariableDeclaration targetVariable = csElement.getReferredVariable();
 			assert targetVariable != null;
-			setStatement.setSlotExpression(PivotUtil.createVariableExp(targetVariable));
+			setStatement.setTargetVariable(targetVariable);
 			Property targetProperty = csElement.getReferredProperty();
-			ExpCS csInitialiser = csElement.getOwnedInitExpression();
+			ExpCS csInitialiser = csElement.getOwnedInit();
 			OCLExpression target = csInitialiser != null ? context.visitLeft2Right(OCLExpression.class, csInitialiser) : null;
 			setStatement.setTargetProperty(targetProperty);
 			//			propertyAssignment.setIsOpposite(target instanceof FeatureCallExp);		// FIXME isOpposite
@@ -356,22 +284,6 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 
 	@Override
 	public Continuation<?> visitTransformationCS(@NonNull TransformationCS object) {
-		return null;
-	}
-
-	@Override
-	public Continuation<?> visitUnrealizedVariableCS(@NonNull UnrealizedVariableCS csElement) {
-		if (csElement.eContainer() instanceof GuardPatternCS) {
-			return null;		// 'initExpression' is a guardExpression resolved by MappingCS
-		}
-		Variable asVariable = PivotUtil.getPivot(Variable.class, csElement);
-		if (asVariable != null) {
-			ExpCS expression = csElement.getOwnedInitExpression();
-			if (expression != null) {
-				OCLExpression target = context.visitLeft2Right(OCLExpression.class, expression);
-				asVariable.setOwnedInit(target);
-			}
-		}
 		return null;
 	}
 }

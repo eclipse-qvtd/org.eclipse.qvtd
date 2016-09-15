@@ -26,7 +26,7 @@ public class SetStatementAttribution extends EmptyAttribution
 	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
 		SetStatement asSetStatement = (SetStatement)target;
 		if (environmentView.getRequiredType() == PivotPackage.Literals.PROPERTY) {		// FIXME should be detecting ancestor
-			environmentView.addElementsOfScope(asSetStatement.getSlotExpression().getType(), scopeView);
+			environmentView.addElementsOfScope(asSetStatement.getTargetVariable().getType(), scopeView);
 			return null;
 		}
 		else {

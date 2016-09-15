@@ -16,14 +16,12 @@
         <ownedContext xmi:id="qV..CopyGraph.middle.middle" name="middle" type="pivot:Class http://www.eclipse.org/qvt/2015/QVTimperativeLibrary.oclas#T.qvtbaselibrary.Model"/>
       </modelParameter>
       <rule xsi:type="qvti:Mapping" xmi:id="m..CopyGraph.__root__" name="__root__">
-        <guardPattern/>
-        <bottomPattern/>
         <ownedStatements xsi:type="qvti:MappingLoop">
-          <ownedIterators xmi:id="i..CopyGraph.__root__.0.g1" name="g1" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph.ecore.oclas#T.simplegraph.Graph"/>
+          <ownedIterators name="g1" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph.ecore.oclas#T.simplegraph.Graph"/>
           <ownedMappingStatements xsi:type="qvti:MappingCall" isInfinite="false" referredMapping="#m..CopyGraph.Graph2Middle">
-            <binding boundVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.1/@domain.0/@guardPattern/@variable.0" isPolled="false">
+            <binding boundVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.1/@domain.0/@ownedGuardVariables.0" isPolled="false">
               <value xsi:type="pivot:VariableExp" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph.ecore.oclas#T.simplegraph.Graph"
-                  referredVariable="#i..CopyGraph.__root__.0.g1"/>
+                  referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.0/@ownedStatements.0/@ownedIterators.0"/>
             </binding>
           </ownedMappingStatements>
           <ownedSource xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.0" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclElement.allInstances">
@@ -33,48 +31,42 @@
       </rule>
       <rule xsi:type="qvti:Mapping" xmi:id="m..CopyGraph.Graph2Middle" name="Graph2Middle">
         <domain xsi:type="qvti:ImperativeDomain" isCheckable="true" isEnforceable="false" typedModel="#qT..CopyGraph.upperGraph">
-          <guardPattern>
-            <variable name="g1" isRequired="false" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph.ecore.oclas#T.simplegraph.Graph"/>
-          </guardPattern>
-          <bottomPattern/>
+          <ownedGuardVariables name="g1" isRequired="false" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph.ecore.oclas#T.simplegraph.Graph"
+              referredTypedModel="#qT..CopyGraph.upperGraph"/>
         </domain>
-        <guardPattern/>
-        <bottomPattern/>
         <ownedStatements xsi:type="qvti:NewStatement" xmi:id="qV..CopyGraph.Graph2Middle.middleG2G" name="middleG2G" isRequired="false"
             type="pivot:Class ../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph" referredTypedModel="#qT..CopyGraph.middle"/>
-        <ownedStatements xsi:type="qvti:SetStatement" targetProperty="../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Graph2Graph.graph1">
-          <slotExpression isRequired="false" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph"
-              referredVariable="#qV..CopyGraph.Graph2Middle.middleG2G"/>
+        <ownedStatements xsi:type="qvti:SetStatement" targetVariable="#qV..CopyGraph.Graph2Middle.middleG2G" targetProperty="../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Graph2Graph.graph1"
+            isEmit="false">
           <value xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph.ecore.oclas#T.simplegraph.Graph"
-              referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.1/@domain.0/@guardPattern/@variable.0"/>
+              referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.1/@domain.0/@ownedGuardVariables.0"/>
         </ownedStatements>
-        <ownedStatements xsi:type="qvti:SetStatement" targetProperty="../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Graph2Graph.name">
-          <slotExpression isRequired="false" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph"
-              referredVariable="#qV..CopyGraph.Graph2Middle.middleG2G"/>
+        <ownedStatements xsi:type="qvti:SetStatement" targetVariable="#qV..CopyGraph.Graph2Middle.middleG2G" targetProperty="../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Graph2Graph.name"
+            isEmit="false">
           <value xsi:type="pivot:OperationCallExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.String.toLowerCase">
             <ownedSource xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
                 referredProperty="../Graph2GraphMinimal/SimpleGraph.ecore.oclas#p.simplegraph.Graph.name">
               <ownedSource xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph.ecore.oclas#T.simplegraph.Graph"
-                  referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.1/@domain.0/@guardPattern/@variable.0"/>
+                  referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.1/@domain.0/@ownedGuardVariables.0"/>
             </ownedSource>
           </value>
         </ownedStatements>
         <ownedStatements xsi:type="qvti:MappingLoop">
-          <ownedIterators xmi:id="i..CopyGraph.Graph2Middle.3.child" name="child" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph.ecore.oclas#T.simplegraph.Element"/>
+          <ownedIterators name="child" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph.ecore.oclas#T.simplegraph.Element"/>
           <ownedMappingStatements xsi:type="qvti:MappingCall" isInfinite="false" referredMapping="#m..CopyGraph.Node2Middle">
-            <binding boundVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.2/@domain.1/@guardPattern/@variable.0" isPolled="false">
+            <binding boundVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.2/@domain.0/@ownedGuardVariables.0" isPolled="false">
+              <value xsi:type="pivot:VariableExp" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph.ecore.oclas#T.simplegraph.Element"
+                  referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.1/@ownedStatements.3/@ownedIterators.0"/>
+            </binding>
+            <binding boundVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.2/@domain.1/@ownedGuardVariables.0" isPolled="false">
               <value xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph"
                   referredVariable="#qV..CopyGraph.Graph2Middle.middleG2G"/>
-            </binding>
-            <binding boundVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.2/@domain.0/@guardPattern/@variable.0" isPolled="false">
-              <value xsi:type="pivot:VariableExp" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph.ecore.oclas#T.simplegraph.Element"
-                  referredVariable="#i..CopyGraph.Graph2Middle.3.child"/>
             </binding>
           </ownedMappingStatements>
           <ownedSource xsi:type="pivot:IteratorExp" type="#//@ownedPackages.1/@ownedClasses.1" referredIteration="http://www.eclipse.org/ocl/2015/Library.oclas#i.ocl.OrderedSet.select..T">
             <ownedSource xsi:type="pivot:PropertyCallExp" type="#//@ownedPackages.1/@ownedClasses.1" referredProperty="../Graph2GraphMinimal/SimpleGraph.ecore.oclas#p.simplegraph.Graph.element">
               <ownedSource xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph.ecore.oclas#T.simplegraph.Graph"
-                  referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.1/@domain.0/@guardPattern/@variable.0"/>
+                  referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.1/@domain.0/@ownedGuardVariables.0"/>
             </ownedSource>
             <ownedBody xsi:type="pivot:OperationCallExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
                 referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.oclIsTypeOf..ocl.OclType">
@@ -86,7 +78,7 @@
           </ownedSource>
         </ownedStatements>
         <ownedStatements xsi:type="qvti:MappingCall" isInfinite="false" referredMapping="#m..CopyGraph.Middle2Graph">
-          <binding boundVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.3/@domain.0/@guardPattern/@variable.0" isPolled="false">
+          <binding boundVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.3/@domain.0/@ownedGuardVariables.0" isPolled="false">
             <value xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph"
                 referredVariable="#qV..CopyGraph.Graph2Middle.middleG2G"/>
           </binding>
@@ -94,82 +86,68 @@
       </rule>
       <rule xsi:type="qvti:Mapping" xmi:id="m..CopyGraph.Node2Middle" name="Node2Middle">
         <domain xsi:type="qvti:ImperativeDomain" isCheckable="true" isEnforceable="false" typedModel="#qT..CopyGraph.upperGraph">
-          <guardPattern>
-            <variable name="n1" isRequired="false" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph.ecore.oclas#T.simplegraph.Node"/>
-          </guardPattern>
-          <bottomPattern/>
+          <ownedGuardVariables name="n1" isRequired="false" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph.ecore.oclas#T.simplegraph.Node"
+              referredTypedModel="#qT..CopyGraph.upperGraph"/>
         </domain>
         <domain xsi:type="qvti:ImperativeDomain" isCheckable="false" isEnforceable="true" typedModel="#qT..CopyGraph.middle">
-          <guardPattern>
-            <variable name="middleParent" isRequired="false" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph"/>
-          </guardPattern>
-          <bottomPattern/>
+          <ownedGuardVariables name="middleParent" isRequired="false" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph"
+              referredTypedModel="#qT..CopyGraph.middle"/>
         </domain>
-        <guardPattern/>
-        <bottomPattern/>
         <ownedStatements xsi:type="qvti:NewStatement" xmi:id="qV..CopyGraph.Node2Middle.n2n" name="n2n" isRequired="false" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Node2Node"
             referredTypedModel="#qT..CopyGraph.middle"/>
-        <ownedStatements xsi:type="qvti:SetStatement" targetProperty="../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Element2Element.owner">
-          <slotExpression isRequired="false" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Node2Node"
-              referredVariable="#qV..CopyGraph.Node2Middle.n2n"/>
+        <ownedStatements xsi:type="qvti:SetStatement" targetVariable="#qV..CopyGraph.Node2Middle.n2n" targetProperty="../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Element2Element.owner"
+            isEmit="false">
           <value xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph"
-              referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.2/@domain.1/@guardPattern/@variable.0"/>
+              referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.2/@domain.1/@ownedGuardVariables.0"/>
         </ownedStatements>
-        <ownedStatements xsi:type="qvti:SetStatement" targetProperty="../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Node2Node.node1">
-          <slotExpression isRequired="false" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Node2Node"
-              referredVariable="#qV..CopyGraph.Node2Middle.n2n"/>
+        <ownedStatements xsi:type="qvti:SetStatement" targetVariable="#qV..CopyGraph.Node2Middle.n2n" targetProperty="../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Node2Node.node1"
+            isEmit="false">
           <value xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph.ecore.oclas#T.simplegraph.Node"
-              referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.2/@domain.0/@guardPattern/@variable.0"/>
+              referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.2/@domain.0/@ownedGuardVariables.0"/>
         </ownedStatements>
-        <ownedStatements xsi:type="qvti:SetStatement" targetProperty="../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Node2Node.label">
-          <slotExpression isRequired="false" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Node2Node"
-              referredVariable="#qV..CopyGraph.Node2Middle.n2n"/>
+        <ownedStatements xsi:type="qvti:SetStatement" targetVariable="#qV..CopyGraph.Node2Middle.n2n" targetProperty="../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Node2Node.label"
+            isEmit="false">
           <value xsi:type="pivot:OperationCallExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.String.toLowerCase">
             <ownedSource xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
                 referredProperty="../Graph2GraphMinimal/SimpleGraph.ecore.oclas#p.simplegraph.Node.label">
               <ownedSource xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph.ecore.oclas#T.simplegraph.Node"
-                  referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.2/@domain.0/@guardPattern/@variable.0"/>
+                  referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.2/@domain.0/@ownedGuardVariables.0"/>
             </ownedSource>
           </value>
         </ownedStatements>
       </rule>
       <rule xsi:type="qvti:Mapping" xmi:id="m..CopyGraph.Middle2Graph" name="Middle2Graph">
         <domain xsi:type="qvti:ImperativeDomain" isCheckable="true" isEnforceable="false" typedModel="#qT..CopyGraph.middle">
-          <guardPattern>
-            <variable name="g2Gmiddle" isRequired="false" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph"/>
-          </guardPattern>
-          <bottomPattern/>
+          <ownedGuardVariables name="g2Gmiddle" isRequired="false" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph"
+              referredTypedModel="#qT..CopyGraph.middle"/>
         </domain>
-        <guardPattern/>
-        <bottomPattern/>
         <ownedStatements xsi:type="qvti:NewStatement" xmi:id="qV..CopyGraph.Middle2Graph.g2" name="g2" isRequired="false" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph.ecore.oclas#T.simplegraph.Graph"
             referredTypedModel="#qT..CopyGraph.lowerGraph"/>
-        <ownedStatements xsi:type="qvti:SetStatement" targetProperty="../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Graph2Graph.graph2">
-          <slotExpression isRequired="false" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph"
-              referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.3/@domain.0/@guardPattern/@variable.0"/>
+        <ownedStatements xsi:type="qvti:SetStatement" targetVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.3/@domain.0/@ownedGuardVariables.0"
+            targetProperty="../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Graph2Graph.graph2" isEmit="false">
           <value xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph.ecore.oclas#T.simplegraph.Graph"
               referredVariable="#qV..CopyGraph.Middle2Graph.g2"/>
         </ownedStatements>
-        <ownedStatements xsi:type="qvti:SetStatement" targetProperty="../Graph2GraphMinimal/SimpleGraph.ecore.oclas#p.simplegraph.Graph.name">
-          <slotExpression isRequired="false" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph.ecore.oclas#T.simplegraph.Graph" referredVariable="#qV..CopyGraph.Middle2Graph.g2"/>
+        <ownedStatements xsi:type="qvti:SetStatement" targetVariable="#qV..CopyGraph.Middle2Graph.g2" targetProperty="../Graph2GraphMinimal/SimpleGraph.ecore.oclas#p.simplegraph.Graph.name"
+            isEmit="false">
           <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
               referredProperty="../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Graph2Graph.name">
             <ownedSource xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph"
-                referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.3/@domain.0/@guardPattern/@variable.0"/>
+                referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.3/@domain.0/@ownedGuardVariables.0"/>
           </value>
         </ownedStatements>
         <ownedStatements xsi:type="qvti:MappingLoop">
-          <ownedIterators xmi:id="i..CopyGraph.Middle2Graph.3.child" name="child" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Element2Element"/>
+          <ownedIterators name="child" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Element2Element"/>
           <ownedMappingStatements xsi:type="qvti:MappingCall" isInfinite="false" referredMapping="#m..CopyGraph.Middle2Node">
-            <binding boundVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.4/@domain.0/@guardPattern/@variable.0" isPolled="false">
+            <binding boundVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.4/@domain.0/@ownedGuardVariables.0" isPolled="false">
               <value xsi:type="pivot:VariableExp" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Element2Element"
-                  referredVariable="#i..CopyGraph.Middle2Graph.3.child"/>
+                  referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.3/@ownedStatements.3/@ownedIterators.0"/>
             </binding>
           </ownedMappingStatements>
           <ownedSource xsi:type="pivot:IteratorExp" type="#//@ownedPackages.1/@ownedClasses.2" referredIteration="http://www.eclipse.org/ocl/2015/Library.oclas#i.ocl.OrderedSet.select..T">
             <ownedSource xsi:type="pivot:PropertyCallExp" type="#//@ownedPackages.1/@ownedClasses.2" referredProperty="../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Graph2Graph.element2Element">
               <ownedSource xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph"
-                  referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.3/@domain.0/@guardPattern/@variable.0"/>
+                  referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.3/@domain.0/@ownedGuardVariables.0"/>
             </ownedSource>
             <ownedBody xsi:type="pivot:OperationCallExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
                 referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.oclIsTypeOf..ocl.OclType">
@@ -184,38 +162,33 @@
       </rule>
       <rule xsi:type="qvti:Mapping" xmi:id="m..CopyGraph.Middle2Node" name="Middle2Node">
         <domain xsi:type="qvti:ImperativeDomain" isCheckable="true" isEnforceable="false" typedModel="#qT..CopyGraph.middle">
-          <guardPattern>
-            <variable name="n2n" isRequired="false" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Node2Node"/>
-          </guardPattern>
-          <bottomPattern/>
+          <ownedGuardVariables name="n2n" isRequired="false" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Node2Node"
+              referredTypedModel="#qT..CopyGraph.middle"/>
         </domain>
-        <guardPattern/>
-        <bottomPattern/>
         <ownedStatements xsi:type="qvti:NewStatement" xmi:id="qV..CopyGraph.Middle2Node.n2" name="n2" isRequired="false" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph.ecore.oclas#T.simplegraph.Node"
             referredTypedModel="#qT..CopyGraph.lowerGraph"/>
-        <ownedStatements xsi:type="qvti:SetStatement" targetProperty="../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Node2Node.node2">
-          <slotExpression isRequired="false" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Node2Node"
-              referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.4/@domain.0/@guardPattern/@variable.0"/>
+        <ownedStatements xsi:type="qvti:SetStatement" targetVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.4/@domain.0/@ownedGuardVariables.0"
+            targetProperty="../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Node2Node.node2" isEmit="false">
           <value xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph.ecore.oclas#T.simplegraph.Node"
               referredVariable="#qV..CopyGraph.Middle2Node.n2"/>
         </ownedStatements>
-        <ownedStatements xsi:type="qvti:SetStatement" targetProperty="../Graph2GraphMinimal/SimpleGraph.ecore.oclas#p.simplegraph.Element.graph">
-          <slotExpression isRequired="false" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph.ecore.oclas#T.simplegraph.Node" referredVariable="#qV..CopyGraph.Middle2Node.n2"/>
+        <ownedStatements xsi:type="qvti:SetStatement" targetVariable="#qV..CopyGraph.Middle2Node.n2" targetProperty="../Graph2GraphMinimal/SimpleGraph.ecore.oclas#p.simplegraph.Element.graph"
+            isEmit="false">
           <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph.ecore.oclas#T.simplegraph.Graph"
               referredProperty="../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Graph2Graph.graph2">
             <ownedSource xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph"
                 referredProperty="../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Element2Element.owner">
               <ownedSource xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Node2Node"
-                  referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.4/@domain.0/@guardPattern/@variable.0"/>
+                  referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.4/@domain.0/@ownedGuardVariables.0"/>
             </ownedSource>
           </value>
         </ownedStatements>
-        <ownedStatements xsi:type="qvti:SetStatement" targetProperty="../Graph2GraphMinimal/SimpleGraph.ecore.oclas#p.simplegraph.Node.label">
-          <slotExpression isRequired="false" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph.ecore.oclas#T.simplegraph.Node" referredVariable="#qV..CopyGraph.Middle2Node.n2"/>
+        <ownedStatements xsi:type="qvti:SetStatement" targetVariable="#qV..CopyGraph.Middle2Node.n2" targetProperty="../Graph2GraphMinimal/SimpleGraph.ecore.oclas#p.simplegraph.Node.label"
+            isEmit="false">
           <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
               referredProperty="../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Node2Node.label">
             <ownedSource xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Node2Node"
-                referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.4/@domain.0/@guardPattern/@variable.0"/>
+                referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.4/@domain.0/@ownedGuardVariables.0"/>
           </value>
         </ownedStatements>
       </rule>
