@@ -21,8 +21,10 @@ import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.CheckStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.IfStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.InConnectionVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.InitializeStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
@@ -31,7 +33,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.OutConnectionVariable;
-import org.eclipse.qvtd.pivot.qvtimperative.PredicateVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 
@@ -45,7 +47,7 @@ public class QVTiStepperVisitor extends AbstractQVTimperativeStepperVisitor
 
 	@Override
 	public @Nullable IStepper visitAddStatement(@NonNull AddStatement object) {
-		return visitMappingStatement(object);
+		return PreStepper.INSTANCE;
 	}
 
 	@Override
@@ -55,6 +57,11 @@ public class QVTiStepperVisitor extends AbstractQVTimperativeStepperVisitor
 
 	@Override
 	public @Nullable IStepper visitConnectionVariable(@NonNull ConnectionVariable object) {
+		return NonStepper.INSTANCE;
+	}
+
+	@Override
+	public @Nullable IStepper visitDeclareStatement(@NonNull DeclareStatement asVariable) {
 		return NonStepper.INSTANCE;
 	}
 
@@ -69,12 +76,22 @@ public class QVTiStepperVisitor extends AbstractQVTimperativeStepperVisitor
 	}
 
 	@Override
+	public @Nullable IStepper visitIfStatement(@NonNull IfStatement object) {
+		return PreStepper.INSTANCE;
+	}
+
+	@Override
 	public @Nullable IStepper visitImperativeTypedModel(@NonNull ImperativeTypedModel object) {
 		return NonStepper.INSTANCE;
 	}
 
 	@Override
 	public @Nullable IStepper visitInConnectionVariable(@NonNull InConnectionVariable object) {
+		return NonStepper.INSTANCE;
+	}
+
+	@Override
+	public @Nullable IStepper visitInitializeStatement(@NonNull InitializeStatement asVariable) {
 		return NonStepper.INSTANCE;
 	}
 
@@ -120,11 +137,6 @@ public class QVTiStepperVisitor extends AbstractQVTimperativeStepperVisitor
 
 	@Override
 	public @Nullable IStepper visitPredicate(@NonNull Predicate object) {
-		return NonStepper.INSTANCE;
-	}
-
-	@Override
-	public @Nullable IStepper visitPredicateVariable(@NonNull PredicateVariable asVariable) {
 		return NonStepper.INSTANCE;
 	}
 

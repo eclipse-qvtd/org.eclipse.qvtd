@@ -43,7 +43,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.OutConnectionVariable;
-import org.eclipse.qvtd.pivot.qvtimperative.PredicateVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
@@ -141,6 +141,20 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case QVTimperativePackage.DECLARE_STATEMENT: {
+				DeclareStatement declareStatement = (DeclareStatement)theEObject;
+				T result = caseDeclareStatement(declareStatement);
+				if (result == null) result = caseVariableStatement(declareStatement);
+				if (result == null) result = caseVariableDeclaration(declareStatement);
+				if (result == null) result = caseStatement(declareStatement);
+				if (result == null) result = caseTypedElement(declareStatement);
+				if (result == null) result = caseNamedElement(declareStatement);
+				if (result == null) result = caseElement(declareStatement);
+				if (result == null) result = caseNameable(declareStatement);
+				if (result == null) result = caseVisitable(declareStatement);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case QVTimperativePackage.GUARD_VARIABLE: {
 				GuardVariable guardVariable = (GuardVariable)theEObject;
 				T result = caseGuardVariable(guardVariable);
@@ -150,6 +164,17 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = caseElement(guardVariable);
 				if (result == null) result = caseNameable(guardVariable);
 				if (result == null) result = caseVisitable(guardVariable);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case QVTimperativePackage.IF_STATEMENT: {
+				IfStatement ifStatement = (IfStatement)theEObject;
+				T result = caseIfStatement(ifStatement);
+				if (result == null) result = caseStatement(ifStatement);
+				if (result == null) result = caseNamedElement(ifStatement);
+				if (result == null) result = caseElement(ifStatement);
+				if (result == null) result = caseNameable(ifStatement);
+				if (result == null) result = caseVisitable(ifStatement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -199,6 +224,17 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = caseElement(inConnectionVariable);
 				if (result == null) result = caseNameable(inConnectionVariable);
 				if (result == null) result = caseVisitable(inConnectionVariable);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case QVTimperativePackage.INITIALIZE_STATEMENT: {
+				InitializeStatement initializeStatement = (InitializeStatement)theEObject;
+				T result = caseInitializeStatement(initializeStatement);
+				if (result == null) result = caseStatement(initializeStatement);
+				if (result == null) result = caseNamedElement(initializeStatement);
+				if (result == null) result = caseElement(initializeStatement);
+				if (result == null) result = caseNameable(initializeStatement);
+				if (result == null) result = caseVisitable(initializeStatement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -298,20 +334,6 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTimperativePackage.PREDICATE_VARIABLE: {
-				PredicateVariable predicateVariable = (PredicateVariable)theEObject;
-				T result = casePredicateVariable(predicateVariable);
-				if (result == null) result = caseVariableStatement(predicateVariable);
-				if (result == null) result = caseVariableDeclaration(predicateVariable);
-				if (result == null) result = caseStatement(predicateVariable);
-				if (result == null) result = caseTypedElement(predicateVariable);
-				if (result == null) result = caseNamedElement(predicateVariable);
-				if (result == null) result = caseElement(predicateVariable);
-				if (result == null) result = caseNameable(predicateVariable);
-				if (result == null) result = caseVisitable(predicateVariable);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case QVTimperativePackage.SET_STATEMENT: {
 				SetStatement setStatement = (SetStatement)theEObject;
 				T result = caseSetStatement(setStatement);
@@ -396,6 +418,21 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Declare Statement</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Declare Statement</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDeclareStatement(DeclareStatement object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Guard Variable</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -407,6 +444,21 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseGuardVariable(GuardVariable object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>If Statement</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>If Statement</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseIfStatement(IfStatement object) {
 		return null;
 	}
 
@@ -467,6 +519,21 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseInConnectionVariable(InConnectionVariable object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Initialize Statement</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Initialize Statement</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseInitializeStatement(InitializeStatement object) {
 		return null;
 	}
 
@@ -587,21 +654,6 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseOutConnectionVariable(OutConnectionVariable object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Predicate Variable</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Predicate Variable</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T casePredicateVariable(PredicateVariable object) {
 		return null;
 	}
 

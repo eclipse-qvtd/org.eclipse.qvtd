@@ -25,7 +25,7 @@ import org.eclipse.ocl.pivot.OCLExpression;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.CheckStatement#getConditionExpression <em>Condition Expression</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.CheckStatement#getOwnedCondition <em>Owned Condition</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getCheckStatement()
@@ -33,28 +33,28 @@ import org.eclipse.ocl.pivot.OCLExpression;
  */
 public interface CheckStatement extends Statement {
 	/**
-	 * Returns the value of the '<em><b>Condition Expression</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Owned Condition</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Condition Expression</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Owned Condition</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Condition Expression</em>' containment reference.
-	 * @see #setConditionExpression(OCLExpression)
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getCheckStatement_ConditionExpression()
+	 * @return the value of the '<em>Owned Condition</em>' containment reference.
+	 * @see #setOwnedCondition(OCLExpression)
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getCheckStatement_OwnedCondition()
 	 * @generated
 	 */
-	OCLExpression getConditionExpression();
+	OCLExpression getOwnedCondition();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtimperative.CheckStatement#getConditionExpression <em>Condition Expression</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtimperative.CheckStatement#getOwnedCondition <em>Owned Condition</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Condition Expression</em>' containment reference.
-	 * @see #getConditionExpression()
+	 * @param value the new value of the '<em>Owned Condition</em>' containment reference.
+	 * @see #getOwnedCondition()
 	 * @generated
 	 */
-	void setConditionExpression(OCLExpression value);
+	void setOwnedCondition(OCLExpression value);
 
 } // CheckStatement

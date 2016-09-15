@@ -30,7 +30,7 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.MappingLoopCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.NewStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.OutVariableCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.ParamDeclarationCS;
-import org.eclipse.qvtd.xtext.qvtimperativecs.PredicateVariableCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.DeclareStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSFactory;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QueryCS;
@@ -84,9 +84,12 @@ public class QVTimperativeCSFactoryImpl extends EFactoryImpl implements QVTimper
 		switch (eClass.getClassifierID()) {
 			case QVTimperativeCSPackage.ADD_STATEMENT_CS: return createAddStatementCS();
 			case QVTimperativeCSPackage.CHECK_STATEMENT_CS: return createCheckStatementCS();
+			case QVTimperativeCSPackage.DECLARE_STATEMENT_CS: return createDeclareStatementCS();
 			case QVTimperativeCSPackage.DIRECTION_CS: return createDirectionCS();
 			case QVTimperativeCSPackage.DOMAIN_CS: return createDomainCS();
 			case QVTimperativeCSPackage.GUARD_VARIABLE_CS: return createGuardVariableCS();
+			case QVTimperativeCSPackage.IF_STATEMENT_CS: return createIfStatementCS();
+			case QVTimperativeCSPackage.INITIALIZE_STATEMENT_CS: return createInitializeStatementCS();
 			case QVTimperativeCSPackage.INOUT_VARIABLE_CS: return createInoutVariableCS();
 			case QVTimperativeCSPackage.MAPPING_CS: return createMappingCS();
 			case QVTimperativeCSPackage.MAPPING_CALL_BINDING_CS: return createMappingCallBindingCS();
@@ -95,7 +98,6 @@ public class QVTimperativeCSFactoryImpl extends EFactoryImpl implements QVTimper
 			case QVTimperativeCSPackage.NEW_STATEMENT_CS: return createNewStatementCS();
 			case QVTimperativeCSPackage.OUT_VARIABLE_CS: return createOutVariableCS();
 			case QVTimperativeCSPackage.PARAM_DECLARATION_CS: return createParamDeclarationCS();
-			case QVTimperativeCSPackage.PREDICATE_VARIABLE_CS: return createPredicateVariableCS();
 			case QVTimperativeCSPackage.QUERY_CS: return createQueryCS();
 			case QVTimperativeCSPackage.SET_STATEMENT_CS: return createSetStatementCS();
 			case QVTimperativeCSPackage.TOP_LEVEL_CS: return createTopLevelCS();
@@ -132,6 +134,16 @@ public class QVTimperativeCSFactoryImpl extends EFactoryImpl implements QVTimper
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public DeclareStatementCS createDeclareStatementCS() {
+		DeclareStatementCSImpl declareStatementCS = new DeclareStatementCSImpl();
+		return declareStatementCS;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public @NonNull DirectionCS createDirectionCS() {
 		DirectionCSImpl directionCS = new DirectionCSImpl();
@@ -158,6 +170,26 @@ public class QVTimperativeCSFactoryImpl extends EFactoryImpl implements QVTimper
 	public @NonNull GuardVariableCS createGuardVariableCS() {
 		GuardVariableCSImpl guardVariableCS = new GuardVariableCSImpl();
 		return guardVariableCS;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public IfStatementCS createIfStatementCS() {
+		IfStatementCSImpl ifStatementCS = new IfStatementCSImpl();
+		return ifStatementCS;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public InitializeStatementCS createInitializeStatementCS() {
+		InitializeStatementCSImpl initializeStatementCS = new InitializeStatementCSImpl();
+		return initializeStatementCS;
 	}
 
 	/**
@@ -224,17 +256,6 @@ public class QVTimperativeCSFactoryImpl extends EFactoryImpl implements QVTimper
 	public @NonNull ParamDeclarationCS createParamDeclarationCS() {
 		ParamDeclarationCSImpl paramDeclarationCS = new ParamDeclarationCSImpl();
 		return paramDeclarationCS;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public @NonNull PredicateVariableCS createPredicateVariableCS() {
-		PredicateVariableCSImpl predicateVariableCS = new PredicateVariableCSImpl();
-		return predicateVariableCS;
 	}
 
 	/**

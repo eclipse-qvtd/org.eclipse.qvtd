@@ -12,30 +12,27 @@
  * 
  * </copyright>
  */
-package org.eclipse.qvtd.xtext.qvtimperativecs;
+package org.eclipse.qvtd.pivot.qvtimperative;
 
-import org.eclipse.ocl.xtext.basecs.TypedElementCS;
-
-import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
+import org.eclipse.ocl.pivot.OCLExpression;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Predicate Variable CS</b></em>'.
+ * A representation of the model object '<em><b>Predicate Variable</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.PredicateVariableCS#getOwnedInit <em>Owned Init</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.PredicateVariableCS#isIsChecked <em>Is Checked</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement#getOwnedInit <em>Owned Init</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement#isIsChecked <em>Is Checked</em>}</li>
  * </ul>
  *
- * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getPredicateVariableCS()
- * @model
+ * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getDeclareStatement()
  * @generated
  */
-public interface PredicateVariableCS extends TypedElementCS, StatementCS {
+public interface DeclareStatement extends VariableStatement {
 	/**
 	 * Returns the value of the '<em><b>Owned Init</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
@@ -45,42 +42,39 @@ public interface PredicateVariableCS extends TypedElementCS, StatementCS {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Owned Init</em>' containment reference.
-	 * @see #setOwnedInit(ExpCS)
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getPredicateVariableCS_OwnedInit()
-	 * @model containment="true" required="true"
+	 * @see #setOwnedInit(OCLExpression)
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getDeclareStatement_OwnedInit()
 	 * @generated
 	 */
-	ExpCS getOwnedInit();
+	OCLExpression getOwnedInit();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.PredicateVariableCS#getOwnedInit <em>Owned Init</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement#getOwnedInit <em>Owned Init</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Owned Init</em>' containment reference.
 	 * @see #getOwnedInit()
 	 * @generated
 	 */
-	void setOwnedInit(ExpCS value);
+	void setOwnedInit(OCLExpression value);
 
 	/**
 	 * Returns the value of the '<em><b>Is Checked</b></em>' attribute.
 	 * The default value is <code>"false"</code>.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Is Checked</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Whether the variable initialization needs to be checked as a predicate. This is a derivation of not ownedInit.type.conformsTo(self.type).
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Is Checked</em>' attribute.
 	 * @see #setIsChecked(boolean)
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getPredicateVariableCS_IsChecked()
-	 * @model default="false"
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getDeclareStatement_IsChecked()
 	 * @generated
 	 */
 	boolean isIsChecked();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.PredicateVariableCS#isIsChecked <em>Is Checked</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement#isIsChecked <em>Is Checked</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Is Checked</em>' attribute.
@@ -89,4 +83,4 @@ public interface PredicateVariableCS extends TypedElementCS, StatementCS {
 	 */
 	void setIsChecked(boolean value);
 
-} // PredicateVariableCS
+} // PredicateVariable

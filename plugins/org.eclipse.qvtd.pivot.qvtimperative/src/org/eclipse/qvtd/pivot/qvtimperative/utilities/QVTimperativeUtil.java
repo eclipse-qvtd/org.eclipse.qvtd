@@ -221,7 +221,7 @@ public class QVTimperativeUtil extends QVTbaseUtil
 			asSetAssignment.setIsOpposite(false);
 		}
 		asSetAssignment.setTargetVariable(asVariable);
-		asSetAssignment.setValue(asValueExpression);
+		asSetAssignment.setOwnedInit(asValueExpression);
 		asSetAssignment.setIsEmit(isEmit);
 		return asSetAssignment;
 	}

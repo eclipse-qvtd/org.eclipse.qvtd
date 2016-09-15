@@ -22,6 +22,10 @@
     <genClasses ecoreClass="QVTimperativeCS.ecore#//CheckStatementCS">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//CheckStatementCS/ownedCondition"/>
     </genClasses>
+    <genClasses ecoreClass="QVTimperativeCS.ecore#//DeclareStatementCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//DeclareStatementCS/ownedInit"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperativeCS.ecore#//DeclareStatementCS/isChecked"/>
+    </genClasses>
     <genClasses ecoreClass="QVTimperativeCS.ecore#//DirectionCS">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//DirectionCS/imports"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//DirectionCS/uses"/>
@@ -36,6 +40,16 @@
     </genClasses>
     <genClasses ecoreClass="QVTimperativeCS.ecore#//GuardVariableCS">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//GuardVariableCS/referredTypedModel"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTimperativeCS.ecore#//IfStatementCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//IfStatementCS/ownedCondition"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//IfStatementCS/ownedThenStatements"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//IfStatementCS/ownedElseStatements"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTimperativeCS.ecore#//InitializeStatementCS">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//InitializeStatementCS/targetVariable"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//InitializeStatementCS/ownedInit"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperativeCS.ecore#//InitializeStatementCS/isChecked"/>
     </genClasses>
     <genClasses ecoreClass="QVTimperativeCS.ecore#//InoutVariableCS"/>
     <genClasses ecoreClass="QVTimperativeCS.ecore#//MappingCS">
@@ -69,10 +83,6 @@
     </genClasses>
     <genClasses ecoreClass="QVTimperativeCS.ecore#//OutVariableCS"/>
     <genClasses ecoreClass="QVTimperativeCS.ecore#//ParamDeclarationCS"/>
-    <genClasses ecoreClass="QVTimperativeCS.ecore#//PredicateVariableCS">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//PredicateVariableCS/ownedInit"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperativeCS.ecore#//PredicateVariableCS/isChecked"/>
-    </genClasses>
     <genClasses ecoreClass="QVTimperativeCS.ecore#//QueryCS">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//QueryCS/ownedPathName"/>
       <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//QueryCS/transformation"/>

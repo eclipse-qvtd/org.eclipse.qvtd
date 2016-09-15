@@ -68,10 +68,34 @@ public abstract class AbstractWrappingQVTimperativeVisitor<R, C, @NonNull D exte
 	}
 
 	@Override
+	public R visitDeclareStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull DeclareStatement object) {
+		@Nullable P prologue = preVisit(object);
+		try {
+			R result = delegate.visitDeclareStatement(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
+	}
+
+	@Override
 	public R visitGuardVariable(org.eclipse.qvtd.pivot.qvtimperative.@NonNull GuardVariable object) {
 		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitGuardVariable(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
+	}
+
+	@Override
+	public R visitIfStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull IfStatement object) {
+		@Nullable P prologue = preVisit(object);
+		try {
+			R result = delegate.visitIfStatement(object);
 			return postVisit(object, prologue, result);
 		}
 		catch (Throwable e) {
@@ -120,6 +144,18 @@ public abstract class AbstractWrappingQVTimperativeVisitor<R, C, @NonNull D exte
 		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitInConnectionVariable(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
+	}
+
+	@Override
+	public R visitInitializeStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull InitializeStatement object) {
+		@Nullable P prologue = preVisit(object);
+		try {
+			R result = delegate.visitInitializeStatement(object);
 			return postVisit(object, prologue, result);
 		}
 		catch (Throwable e) {
@@ -216,18 +252,6 @@ public abstract class AbstractWrappingQVTimperativeVisitor<R, C, @NonNull D exte
 		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitOutConnectionVariable(object);
-			return postVisit(object, prologue, result);
-		}
-		catch (Throwable e) {
-			return badVisit(object, prologue, e);
-		}
-	}
-
-	@Override
-	public R visitPredicateVariable(org.eclipse.qvtd.pivot.qvtimperative.@NonNull PredicateVariable object) {
-		@Nullable P prologue = preVisit(object);
-		try {
-			R result = delegate.visitPredicateVariable(object);
 			return postVisit(object, prologue, result);
 		}
 		catch (Throwable e) {

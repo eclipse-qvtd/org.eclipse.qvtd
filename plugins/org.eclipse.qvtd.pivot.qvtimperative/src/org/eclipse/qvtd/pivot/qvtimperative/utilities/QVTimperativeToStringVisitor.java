@@ -21,10 +21,12 @@ import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.CheckStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.IfStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.InConnectionVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.InitializeStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
@@ -33,7 +35,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.OutConnectionVariable;
-import org.eclipse.qvtd.pivot.qvtimperative.PredicateVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
@@ -77,14 +79,14 @@ public class QVTimperativeToStringVisitor extends QVTbaseToStringVisitor impleme
 		append("add ");
 		appendName(asAddStatement.getTargetVariable());
 		append(" += ");
-		safeVisit(asAddStatement.getValue());
+		safeVisit(asAddStatement.getOwnedInit());
 		return null;
 	}
 
 	@Override
 	public @Nullable String visitCheckStatement(@NonNull CheckStatement object) {
 		append("check ");
-		safeVisit(object.getConditionExpression());
+		safeVisit(object.getOwnedCondition());
 		return null;
 	}
 
@@ -101,6 +103,26 @@ public class QVTimperativeToStringVisitor extends QVTbaseToStringVisitor impleme
 	}
 
 	@Override
+	public @Nullable String visitDeclareStatement(@NonNull DeclareStatement asVariable) {
+		if (asVariable.isIsChecked()) {
+			append("check ");
+		}
+		append("var ");
+		appendName(asVariable);
+		Type type = asVariable.getType();
+		if (type != null) {
+			append(" : ");
+			appendElementType(asVariable);
+		}
+		OCLExpression asInit = asVariable.getOwnedInit();
+		if (asInit != null) {
+			append(" := ");
+			safeVisit(asInit);
+		}
+		return null;
+	}
+
+	@Override
 	public @Nullable String visitGuardVariable(@NonNull GuardVariable asVariable) {
 		append("in ");
 		appendName(asVariable);
@@ -109,6 +131,22 @@ public class QVTimperativeToStringVisitor extends QVTbaseToStringVisitor impleme
 			append(" : ");
 			appendElementType(asVariable);
 		}
+		return null;
+	}
+
+	@Override
+	public @Nullable String visitIfStatement(@NonNull IfStatement asIfStatement) {
+		append("if ");
+		safeVisit(asIfStatement.getOwnedCondition());
+		append(" {");
+		for (Statement asStatement : asIfStatement.getOwnedThenStatements()) {
+			safeVisit(asStatement);
+		}
+		append("} else {");
+		for (Statement asStatement : asIfStatement.getOwnedElseStatements()) {
+			safeVisit(asStatement);
+		}
+		append("}\n");
 		return null;
 	}
 
@@ -143,6 +181,18 @@ public class QVTimperativeToStringVisitor extends QVTbaseToStringVisitor impleme
 			append(" : ");
 			appendElementType(asVariable);
 		}
+		return null;
+	}
+
+	@Override
+	public @Nullable String visitInitializeStatement(@NonNull InitializeStatement asStatement) {
+		if (asStatement.isIsChecked()) {
+			append("check ");
+		}
+		append("init ");
+		appendName(asStatement.getTargetVariable());
+		append(" := ");
+		safeVisit(asStatement.getOwnedInit());
 		return null;
 	}
 
@@ -241,27 +291,13 @@ public class QVTimperativeToStringVisitor extends QVTbaseToStringVisitor impleme
 	}
 
 	@Override
-	public @Nullable String visitPredicateVariable(@NonNull PredicateVariable asVariable) {
-		append(asVariable.isIsChecked() ? "check " : "var ");
-		appendName(asVariable);
-		Type type = asVariable.getType();
-		if (type != null) {
-			append(" : ");
-			appendElementType(asVariable);
-		}
-		append(" := ");
-		safeVisit(asVariable.getOwnedInit());
-		return null;
-	}
-
-	@Override
 	public String visitSetStatement(@NonNull SetStatement asSetStatement) {
 		append(asSetStatement.isIsEmit() ? "emit " : "set ");
 		appendName(asSetStatement.getTargetVariable());
 		append(".");
 		appendName(QVTimperativeUtil.getTargetProperty(asSetStatement));
 		append(" := ");
-		safeVisit(asSetStatement.getValue());
+		safeVisit(asSetStatement.getOwnedInit());
 		return null;
 	}
 

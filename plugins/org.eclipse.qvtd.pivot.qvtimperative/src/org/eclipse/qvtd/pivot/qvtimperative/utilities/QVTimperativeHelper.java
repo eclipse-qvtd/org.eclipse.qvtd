@@ -24,7 +24,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.InConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.OutConnectionVariable;
-import org.eclipse.qvtd.pivot.qvtimperative.PredicateVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeFactory;
 
 /**
@@ -39,14 +39,24 @@ public class QVTimperativeHelper extends QVTbaseHelper
 	public @NonNull AddStatement createAddStatement(@NonNull ConnectionVariable connectionVariable, @NonNull OCLExpression childrenExpression) {
 		AddStatement addStatement = QVTimperativeFactory.eINSTANCE.createAddStatement();
 		addStatement.setTargetVariable(connectionVariable);
-		addStatement.setValue(childrenExpression);
+		addStatement.setOwnedInit(childrenExpression);
 		return addStatement;
 	}
 
 	public @NonNull CheckStatement createCheckStatement(@NonNull OCLExpression asConditionExpression) {
 		CheckStatement asPredicate = QVTimperativeFactory.eINSTANCE.createCheckStatement();
-		asPredicate.setConditionExpression(asConditionExpression);
+		asPredicate.setOwnedCondition(asConditionExpression);
 		return asPredicate;
+	}
+
+	public @NonNull DeclareStatement createDeclareStatement(@NonNull String name, @NonNull Type asType, boolean isRequired, @NonNull OCLExpression initExpression) {
+		DeclareStatement asVariableStatement = QVTimperativeFactory.eINSTANCE.createDeclareStatement();
+		asVariableStatement.setIsChecked(!initExpression.getType().conformsTo(standardLibrary, asType));
+		asVariableStatement.setOwnedInit(initExpression);
+		asVariableStatement.setName(name);
+		asVariableStatement.setType(asType);
+		asVariableStatement.setIsRequired(isRequired);
+		return asVariableStatement;
 	}
 
 	public @NonNull GuardVariable createGuardVariable(@NonNull String name, @NonNull ImperativeTypedModel typedModel, @NonNull Type type, boolean isRequired) {
@@ -66,16 +76,6 @@ public class QVTimperativeHelper extends QVTbaseHelper
 		return asVariable;
 	}
 
-	public @NonNull PredicateVariable createLocalOrPredicateVariable(@NonNull String name, @NonNull Type asType, boolean isRequired, @NonNull OCLExpression initExpression) {
-		PredicateVariable asVariableStatement = QVTimperativeFactory.eINSTANCE.createPredicateVariable();
-		asVariableStatement.setIsChecked(!initExpression.getType().conformsTo(standardLibrary, asType));
-		asVariableStatement.setOwnedInit(initExpression);
-		asVariableStatement.setName(name);
-		asVariableStatement.setType(asType);
-		asVariableStatement.setIsRequired(isRequired);
-		return asVariableStatement;
-	}
-
 	public @NonNull LoopVariable createLoopVariable(@NonNull String name, @NonNull Type type) {
 		LoopVariable asVariable = QVTimperativeFactory.eINSTANCE.createLoopVariable();
 		asVariable.setName(name);
@@ -83,10 +83,6 @@ public class QVTimperativeHelper extends QVTbaseHelper
 		asVariable.setIsRequired(true);
 		return asVariable;
 	}
-
-	//	public @NonNull NewStatement createNewStatement(@NonNull String name, @NonNull TypedModel typedModel, @NonNull Type type) {
-	//		return QVTimperativeUtil.createNewStatement(name, typedModel, type);
-	//	}
 
 	public @NonNull OutConnectionVariable createOutConnectionVariable(@NonNull String name, @NonNull Type asType, boolean isRequired, @Nullable OCLExpression initExpression) {
 		OutConnectionVariable asVariable = QVTimperativeFactory.eINSTANCE.createOutConnectionVariable();
@@ -96,18 +92,4 @@ public class QVTimperativeHelper extends QVTbaseHelper
 		asVariable.setOwnedInit(initExpression);
 		return asVariable;
 	}
-
-	/*	public @NonNull PredicateVariable createPredicateVariable(@NonNull String name, @NonNull Type asType, boolean isRequired, @NonNull OCLExpression initExpression) {
-		PredicateVariable asVariable = QVTimperativeFactory.eINSTANCE.createPredicateVariable();
-		asVariable.setName(name);
-		asVariable.setType(asType);
-		asVariable.setIsRequired(isRequired);
-		asVariable.setOwnedInit(initExpression);
-		assert !initExpression.getType().conformsTo(standardLibrary, asType);
-		return asVariable;
-	} */
-
-	//	public @NonNull SetStatement createSetStatement(@NonNull Variable asVariable, @NonNull Property asProperty, @NonNull OCLExpression asValueExpression, boolean isEmit) {
-	//		return QVTimperativeUtil.createSetStatement(asVariable, asProperty, asValueExpression, isEmit);
-	//	}
 }

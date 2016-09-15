@@ -54,6 +54,11 @@ public abstract class AbstractQVTimperativeCSContainmentVisitor
 	}
 
 	@Override
+	public @Nullable Continuation<?> visitDeclareStatementCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull DeclareStatementCS csElement) {
+		return visitTypedElementCS(csElement);
+	}
+
+	@Override
 	public @Nullable Continuation<?> visitDirectionCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull DirectionCS csElement) {
 		return visitNamedElementCS(csElement);
 	}
@@ -66,6 +71,16 @@ public abstract class AbstractQVTimperativeCSContainmentVisitor
 	@Override
 	public @Nullable Continuation<?> visitGuardVariableCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull GuardVariableCS csElement) {
 		return visitTypedElementCS(csElement);
+	}
+
+	@Override
+	public @Nullable Continuation<?> visitIfStatementCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull IfStatementCS csElement) {
+		return visitStatementCS(csElement);
+	}
+
+	@Override
+	public @Nullable Continuation<?> visitInitializeStatementCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull InitializeStatementCS csElement) {
+		return visitStatementCS(csElement);
 	}
 
 	@Override
@@ -110,11 +125,6 @@ public abstract class AbstractQVTimperativeCSContainmentVisitor
 
 	@Override
 	public @Nullable Continuation<?> visitParamDeclarationCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull ParamDeclarationCS csElement) {
-		return visitTypedElementCS(csElement);
-	}
-
-	@Override
-	public @Nullable Continuation<?> visitPredicateVariableCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull PredicateVariableCS csElement) {
 		return visitTypedElementCS(csElement);
 	}
 

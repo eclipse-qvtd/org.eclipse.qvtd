@@ -43,10 +43,12 @@ import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.CheckStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.IfStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.InConnectionVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.InitializeStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
@@ -55,7 +57,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.OutConnectionVariable;
-import org.eclipse.qvtd.pivot.qvtimperative.PredicateVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 import org.eclipse.qvtd.pivot.qvtimperative.VariableStatement;
@@ -103,7 +105,7 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 	public @Nullable Object visitAddStatement(@NonNull AddStatement connectionStatement) {
 		ConnectionVariable targetVariable = connectionStatement.getTargetVariable() ;
 		if (targetVariable != null) {
-			OCLExpression valueExpression = connectionStatement.getValue();
+			OCLExpression valueExpression = connectionStatement.getOwnedInit();
 			if (valueExpression != null) {
 				doConnectionAccumulation(targetVariable, valueExpression);
 				return true;
@@ -120,7 +122,7 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 	@Override
 	public @Nullable Object visitCheckStatement(@NonNull CheckStatement predicate) {
 		// Each predicate has a conditionExpression that is an OCLExpression
-		OCLExpression exp = predicate.getConditionExpression();
+		OCLExpression exp = predicate.getOwnedCondition();
 		// The predicated is visited with a nested environment
 		Object expResult = exp.accept(undecoratedVisitor);
 		return expResult;
@@ -129,6 +131,28 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 	@Override
 	public Object visitConnectionVariable(@NonNull ConnectionVariable object) {
 		return visiting(object);
+	}
+
+	@Override
+	public @Nullable Object visitDeclareStatement(@NonNull DeclareStatement asStatement) {
+		Object initValue;
+		OCLExpression ownedInit = asStatement.getOwnedInit();
+		if (ownedInit == null) {
+			initValue = null;
+		}
+		else {
+			initValue = ownedInit.accept(undecoratedVisitor);
+			if (asStatement.isIsChecked()) {
+				Type guardType = asStatement.getType();
+				Type valueType = idResolver.getDynamicTypeOf(initValue);
+				if ((guardType == null) || !valueType.conformsTo(standardLibrary, guardType)) {
+					// The initialisation fails, the guard is not met
+					return false;
+				}
+			}
+		}
+		executor.replace(asStatement, initValue, false);
+		return true;
 	}
 
 	@Override
@@ -149,6 +173,29 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 	@Override
 	public @Nullable Object visitGuardVariable(@NonNull GuardVariable object) {
 		return visiting(object);
+	}
+
+	@Override
+	public @Nullable Object visitIfStatement(@NonNull IfStatement ifStatement) {
+		OCLExpression exp = ifStatement.getOwnedCondition();
+		Object expResult = exp.accept(undecoratedVisitor);
+		if (expResult == Boolean.TRUE) {
+			for (Statement asStatement : ifStatement.getOwnedThenStatements()) {
+				Object result = asStatement.accept(this);
+				if (result != Boolean.TRUE) {
+					return result;
+				}
+			}
+		}
+		else if (expResult == Boolean.FALSE) {
+			for (Statement asStatement : ifStatement.getOwnedElseStatements()) {
+				Object result = asStatement.accept(this);
+				if (result != Boolean.TRUE) {
+					return result;
+				}
+			}
+		}
+		return expResult;
 	}
 
 	@Override
@@ -178,6 +225,29 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 	public Object visitInConnectionVariable(@NonNull InConnectionVariable object) {
 		CollectionValue.Accumulator accumulator = ValueUtil.createCollectionAccumulatorValue((CollectionTypeId) object.getTypeId());
 		executor.replace(object, accumulator, false);
+		return true;
+	}
+
+	@Override
+	public @Nullable Object visitInitializeStatement(@NonNull InitializeStatement asStatement) {
+		OCLExpression ownedInit = asStatement.getOwnedInit();
+		if (ownedInit == null) {
+			return false;
+		}
+		VariableDeclaration asVariable = asStatement.getTargetVariable();
+		if (asVariable == null) {
+			return false;
+		}
+		Object initValue = ownedInit.accept(undecoratedVisitor);
+		if (asStatement.isIsChecked()) {
+			Type guardType = asVariable.getType();
+			Type valueType = idResolver.getDynamicTypeOf(initValue);
+			if ((guardType == null) || !valueType.conformsTo(standardLibrary, guardType)) {
+				// The initialisation fails, the guard is not met
+				return false;
+			}
+		}
+		executor.replace(asVariable, initValue, false);
 		return true;
 	}
 
@@ -330,25 +400,6 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 	}
 
 	@Override
-	public @Nullable Object visitPredicateVariable(@NonNull PredicateVariable predicateVariable) {
-		OCLExpression ownedInit = predicateVariable.getOwnedInit();
-		if (ownedInit == null) {
-			return false;
-		}
-		Object initValue = ownedInit.accept(undecoratedVisitor);
-		if (predicateVariable.isIsChecked()) {
-			Type guardType = predicateVariable.getType();
-			Type valueType = idResolver.getDynamicTypeOf(initValue);
-			if ((guardType == null) || !valueType.conformsTo(standardLibrary, guardType)) {
-				// The initialisation fails, the guard is not met
-				return false;
-			}
-		}
-		executor.replace(predicateVariable, initValue, false);
-		return true;
-	}
-
-	@Override
 	public @Nullable Object visitRule(@NonNull Rule object) {
 		return visiting(object);
 	}
@@ -366,7 +417,7 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 		if (slotObject instanceof EObject) {
 			Integer childKey = null;
 			try {
-				Object boxedValue = setStatement.getValue().accept(undecoratedVisitor);
+				Object boxedValue = setStatement.getOwnedInit().accept(undecoratedVisitor);
 				Property targetProperty = QVTimperativeUtil.getTargetProperty(setStatement);
 				Class<?> instanceClass = PivotUtil.getEcoreInstanceClass(targetProperty);
 				Object ecoreValue = idResolver.ecoreValueOf(instanceClass, boxedValue);

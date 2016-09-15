@@ -47,7 +47,7 @@ public class QVTimperativeDomainUsageAnalysis extends RootDomainUsageAnalysis im
 
 	@Override
 	public @NonNull DomainUsage visitAddStatement(@NonNull AddStatement object) {
-		DomainUsage valueUsage = visit(object.getValue());
+		DomainUsage valueUsage = visit(object.getOwnedInit());
 		DomainUsage variableUsage = visit(object.getTargetVariable());
 		return intersection(variableUsage, valueUsage);
 	}

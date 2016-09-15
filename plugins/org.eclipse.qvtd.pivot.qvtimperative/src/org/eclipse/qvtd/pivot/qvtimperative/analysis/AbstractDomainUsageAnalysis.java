@@ -83,7 +83,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.GuardVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
-import org.eclipse.qvtd.pivot.qvtimperative.PredicateVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 import org.eclipse.qvtd.pivot.qvtimperative.util.AbstractExtendingQVTimperativeVisitor;
@@ -128,7 +128,7 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTim
 
 	protected @NonNull DomainUsage doSetStatement(@NonNull Property property, @NonNull SetStatement object) {
 		DomainUsage slotUsage = visit(object.getTargetVariable());
-		DomainUsage valueUsage = visit(object.getValue());
+		DomainUsage valueUsage = visit(object.getOwnedInit());
 		DomainUsage knownSourceUsage = getRootAnalysis().property2containingClassUsage.get(property);
 		if (knownSourceUsage != null) {
 			DomainUsage knownTargetUsage = getRootAnalysis().getUsage(property);
@@ -373,7 +373,7 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTim
 
 	@Override
 	public @NonNull DomainUsage visitCheckStatement(@NonNull CheckStatement object) {
-		return visit(object.getConditionExpression());
+		return visit(object.getOwnedCondition());
 	}
 
 	@Override
@@ -412,6 +412,15 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTim
 	@Override
 	public @NonNull DomainUsage visitCollectionType(@NonNull CollectionType object) {
 		return visit(object.getElementType());
+	}
+
+	@Override
+	public @NonNull DomainUsage visitDeclareStatement(@NonNull DeclareStatement object) {
+		OCLExpression ownedInit = object.getOwnedInit();
+		if (ownedInit != null) {
+			return visit(ownedInit);
+		}
+		return visit(object.getType());
 	}
 
 	@Override
@@ -723,15 +732,6 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTim
 	@Override
 	public @NonNull DomainUsage visitPredicate(@NonNull Predicate object) {
 		return visit(object.getConditionExpression());
-	}
-
-	@Override
-	public @NonNull DomainUsage visitPredicateVariable(@NonNull PredicateVariable object) {
-		OCLExpression ownedInit = object.getOwnedInit();
-		if (ownedInit != null) {
-			return visit(ownedInit);
-		}
-		return visit(object.getType());
 	}
 
 	@Override

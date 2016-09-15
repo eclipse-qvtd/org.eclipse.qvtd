@@ -1,0 +1,8 @@
+import 'platform:/resource/org.eclipse.ocl.pivot/model/OCL-2.5.oclstdlib';
+
+library ocl : ocl = 'http://www.eclipse.org/ocl/2015/Library'
+{
+type OclAny : AnyType {
+	operation access() : ocl::OclSelf => 'org.eclipse.ocl.pivot.library.oclany.OclAnyOclLogOperation';
+}
+}

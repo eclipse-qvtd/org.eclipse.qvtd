@@ -81,9 +81,12 @@ import org.eclipse.qvtd.xtext.qvtbasecs.QualifiedPackageCS;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess;
 import org.eclipse.qvtd.xtext.qvtimperativecs.AddStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.CheckStatementCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.DeclareStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DomainCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.GuardVariableCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.IfStatementCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.InitializeStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.InoutVariableCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS;
@@ -92,7 +95,6 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.MappingLoopCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.NewStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.OutVariableCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.ParamDeclarationCS;
-import org.eclipse.qvtd.xtext.qvtimperativecs.PredicateVariableCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QueryCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.SetStatementCS;
@@ -449,6 +451,9 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 			case QVTimperativeCSPackage.CHECK_STATEMENT_CS:
 				sequence_CheckStatementCS(context, (CheckStatementCS) semanticObject); 
 				return; 
+			case QVTimperativeCSPackage.DECLARE_STATEMENT_CS:
+				sequence_DeclareStatementCS(context, (DeclareStatementCS) semanticObject); 
+				return; 
 			case QVTimperativeCSPackage.DIRECTION_CS:
 				sequence_DirectionCS(context, (DirectionCS) semanticObject); 
 				return; 
@@ -464,6 +469,12 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 				else break;
 			case QVTimperativeCSPackage.GUARD_VARIABLE_CS:
 				sequence_GuardVariableCS(context, (GuardVariableCS) semanticObject); 
+				return; 
+			case QVTimperativeCSPackage.IF_STATEMENT_CS:
+				sequence_IfStatementCS(context, (IfStatementCS) semanticObject); 
+				return; 
+			case QVTimperativeCSPackage.INITIALIZE_STATEMENT_CS:
+				sequence_InitializeStatementCS(context, (InitializeStatementCS) semanticObject); 
 				return; 
 			case QVTimperativeCSPackage.INOUT_VARIABLE_CS:
 				sequence_InoutVariableCS(context, (InoutVariableCS) semanticObject); 
@@ -488,9 +499,6 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 				return; 
 			case QVTimperativeCSPackage.PARAM_DECLARATION_CS:
 				sequence_ParamDeclarationCS(context, (ParamDeclarationCS) semanticObject); 
-				return; 
-			case QVTimperativeCSPackage.PREDICATE_VARIABLE_CS:
-				sequence_PredicateVariableCS(context, (PredicateVariableCS) semanticObject); 
 				return; 
 			case QVTimperativeCSPackage.QUERY_CS:
 				sequence_QueryCS(context, (QueryCS) semanticObject); 
@@ -535,6 +543,7 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 	/**
 	 * Contexts:
 	 *     CheckStatementCS returns CheckStatementCS
+	 *     GuardStatementCS returns CheckStatementCS
 	 *
 	 * Constraint:
 	 *     ownedCondition=ExpCS
@@ -547,6 +556,19 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getCheckStatementCSAccess().getOwnedConditionExpCSParserRuleCall_1_0(), semanticObject.getOwnedCondition());
 		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     DeclareStatementCS returns DeclareStatementCS
+	 *     GuardStatementCS returns DeclareStatementCS
+	 *
+	 * Constraint:
+	 *     (isChecked?='check'? name=UnrestrictedName ownedType=TypeExpCS? ownedInit=ExpCS?)
+	 */
+	protected void sequence_DeclareStatementCS(ISerializationContext context, DeclareStatementCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -594,12 +616,37 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 	
 	/**
 	 * Contexts:
+	 *     GuardStatementCS returns IfStatementCS
+	 *     IfStatementCS returns IfStatementCS
+	 *
+	 * Constraint:
+	 *     (ownedCondition=ExpCS ownedThenStatements+=GuardStatementCS* ownedThenStatements+=GuardStatementCS*)
+	 */
+	protected void sequence_IfStatementCS(ISerializationContext context, IfStatementCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     ImportCS returns ImportCS
 	 *
 	 * Constraint:
 	 *     (name=Identifier? ownedPathName=URIPathNameCS isAll?='::'?)
 	 */
 	protected void sequence_ImportCS(ISerializationContext context, ImportCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     InitializeStatementCS returns InitializeStatementCS
+	 *
+	 * Constraint:
+	 *     (isChecked?='check'? targetVariable=[VariableDeclaration|UnrestrictedName] ownedInit=ExpCS)
+	 */
+	protected void sequence_InitializeStatementCS(ISerializationContext context, InitializeStatementCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -636,10 +683,8 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 	 *         (ownedDomains+=SourceDomainCS | ownedDomains+=TargetDomainCS)* 
 	 *         ownedGuardVariables+=GuardVariableCS? 
 	 *         (ownedInoutVariables+=InoutVariableCS? ownedGuardVariables+=GuardVariableCS?)* 
-	 *         ownedStatements+=OutVariableCS? 
-	 *         ((ownedStatements+=PredicateVariableCS | ownedStatements+=CheckStatementCS)? ownedStatements+=OutVariableCS?)* 
-	 *         ownedStatements+=NewStatementCS? 
-	 *         (ownedStatements+=SetStatementCS? ownedStatements+=NewStatementCS?)* 
+	 *         ownedStatements+=GuardStatementCS* 
+	 *         ownedStatements+=CommitStatementCS* 
 	 *         ownedStatements+=ControlStatementCS*
 	 *     )
 	 */
@@ -702,6 +747,7 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 	
 	/**
 	 * Contexts:
+	 *     CommitStatementCS returns NewStatementCS
 	 *     NewStatementCS returns NewStatementCS
 	 *
 	 * Constraint:
@@ -714,6 +760,7 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 	
 	/**
 	 * Contexts:
+	 *     GuardStatementCS returns OutVariableCS
 	 *     OutVariableCS returns OutVariableCS
 	 *
 	 * Constraint:
@@ -751,18 +798,6 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 		feeder.accept(grammarAccess.getParamDeclarationCSAccess().getNameUnrestrictedNameParserRuleCall_0_0(), semanticObject.getName());
 		feeder.accept(grammarAccess.getParamDeclarationCSAccess().getOwnedTypeTypeExpCSParserRuleCall_2_0(), semanticObject.getOwnedType());
 		feeder.finish();
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     PredicateVariableCS returns PredicateVariableCS
-	 *
-	 * Constraint:
-	 *     (isChecked?='check'? name=UnrestrictedName ownedType=TypeExpCS? ownedInit=ExpCS)
-	 */
-	protected void sequence_PredicateVariableCS(ISerializationContext context, PredicateVariableCS semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -817,6 +852,7 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 	
 	/**
 	 * Contexts:
+	 *     CommitStatementCS returns SetStatementCS
 	 *     SetStatementCS returns SetStatementCS
 	 *
 	 * Constraint:

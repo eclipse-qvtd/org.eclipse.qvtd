@@ -91,7 +91,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
-import org.eclipse.qvtd.pivot.qvtimperative.PredicateVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
@@ -508,7 +508,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 				Type variableType = pVariable.getType();
 				assert variableType != null;
 				String safeName = getSafeName(ClassUtil.nonNullState(pVariable.getName()));
-				PredicateVariable iVariable = helper.createLocalOrPredicateVariable(safeName, variableType, pVariable.isIsRequired(), helper.createNullLiteralExp());
+				DeclareStatement iVariable = helper.createDeclareStatement(safeName, variableType, pVariable.isIsRequired(), helper.createNullLiteralExp());
 				mapping.getOwnedStatements().add(iVariable);
 				//				Variable oldVariable = node2variable.put(node, iVariable);
 				//				assert oldVariable == null;
@@ -691,7 +691,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			isRequired = true;
 		}
 		String safeName = getSafeName(node);
-		VariableStatement newVariable = helper.createLocalOrPredicateVariable(safeName, variableType, isRequired, initExpression);
+		VariableStatement newVariable = helper.createDeclareStatement(safeName, variableType, isRequired, initExpression);
 		mapping.getOwnedStatements().add(newVariable);
 		VariableDeclaration oldVariable = node2variable.put(node, newVariable);
 		assert oldVariable == null;
@@ -811,7 +811,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 					conditionExpression = helper.createOperationCallExp(conditionExpression, name, targetExpression);
 				}
 				CheckStatement asPredicate = QVTimperativeFactory.eINSTANCE.createCheckStatement();
-				asPredicate.setConditionExpression(conditionExpression);
+				asPredicate.setOwnedCondition(conditionExpression);
 				mapping.getOwnedStatements().add(asPredicate);
 			}
 		}

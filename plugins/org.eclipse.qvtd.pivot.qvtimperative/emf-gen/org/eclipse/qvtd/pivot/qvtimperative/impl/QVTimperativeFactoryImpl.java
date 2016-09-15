@@ -30,7 +30,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.OutConnectionVariable;
-import org.eclipse.qvtd.pivot.qvtimperative.PredicateVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
@@ -81,11 +81,14 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 		switch (eClass.getClassifierID()) {
 			case QVTimperativePackage.ADD_STATEMENT: return createAddStatement();
 			case QVTimperativePackage.CHECK_STATEMENT: return createCheckStatement();
+			case QVTimperativePackage.DECLARE_STATEMENT: return createDeclareStatement();
 			case QVTimperativePackage.GUARD_VARIABLE: return createGuardVariable();
+			case QVTimperativePackage.IF_STATEMENT: return createIfStatement();
 			case QVTimperativePackage.IMPERATIVE_DOMAIN: return createImperativeDomain();
 			case QVTimperativePackage.IMPERATIVE_MODEL: return createImperativeModel();
 			case QVTimperativePackage.IMPERATIVE_TYPED_MODEL: return createImperativeTypedModel();
 			case QVTimperativePackage.IN_CONNECTION_VARIABLE: return createInConnectionVariable();
+			case QVTimperativePackage.INITIALIZE_STATEMENT: return createInitializeStatement();
 			case QVTimperativePackage.LOOP_VARIABLE: return createLoopVariable();
 			case QVTimperativePackage.MAPPING: return createMapping();
 			case QVTimperativePackage.MAPPING_CALL: return createMappingCall();
@@ -93,7 +96,6 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 			case QVTimperativePackage.MAPPING_LOOP: return createMappingLoop();
 			case QVTimperativePackage.NEW_STATEMENT: return createNewStatement();
 			case QVTimperativePackage.OUT_CONNECTION_VARIABLE: return createOutConnectionVariable();
-			case QVTimperativePackage.PREDICATE_VARIABLE: return createPredicateVariable();
 			case QVTimperativePackage.SET_STATEMENT: return createSetStatement();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
@@ -127,10 +129,30 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public DeclareStatement createDeclareStatement() {
+		DeclareStatementImpl declareStatement = new DeclareStatementImpl();
+		return declareStatement;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public @NonNull GuardVariable createGuardVariable() {
 		GuardVariableImpl guardVariable = new GuardVariableImpl();
 		return guardVariable;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public IfStatement createIfStatement() {
+		IfStatementImpl ifStatement = new IfStatementImpl();
+		return ifStatement;
 	}
 
 	/**
@@ -174,6 +196,16 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 	public @NonNull InConnectionVariable createInConnectionVariable() {
 		InConnectionVariableImpl inConnectionVariable = new InConnectionVariableImpl();
 		return inConnectionVariable;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public InitializeStatement createInitializeStatement() {
+		InitializeStatementImpl initializeStatement = new InitializeStatementImpl();
+		return initializeStatement;
 	}
 
 	/**
@@ -251,17 +283,6 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 	public @NonNull OutConnectionVariable createOutConnectionVariable() {
 		OutConnectionVariableImpl outConnectionVariable = new OutConnectionVariableImpl();
 		return outConnectionVariable;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public @NonNull PredicateVariable createPredicateVariable() {
-		PredicateVariableImpl predicateVariable = new PredicateVariableImpl();
-		return predicateVariable;
 	}
 
 	/**

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pivot:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pivot="http://www.eclipse.org/ocl/2015/Pivot"
+    xsi:schemaLocation="http://www.eclipse.org/ocl/2015/Pivot java://org.eclipse.ocl.pivot.PivotPackage" externalURI="platform:/resource/org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperativeExtensionLibrary.oclstdlib" name="QVTimperativeExtensionLibrary.oclstdlib">
+  <ownedImports importedNamespace="pivot:Model ../../org.eclipse.ocl.pivot/model/OCL-2.5.oclstdlib.oclas#/"/>
+  <ownedPackages xsi:type="pivot:Library" xmi:id="P.ocl" URI="http://www.eclipse.org/ocl/2015/Library" name="ocl" nsPrefix="ocl">
+    <ownedClasses xsi:type="pivot:AnyType" xmi:id="T.ocl.OclAny" name="OclAny">
+      <ownedOperations xmi:id="o.ocl.OclAny.access" implementationClass="org.eclipse.ocl.pivot.library.oclany.OclAnyOclLogOperation" isRequired="false"
+          name="access" type="pivot:SelfType ../../org.eclipse.ocl.pivot/model/OCL-2.5.oclstdlib.oclas#OclSelf"/>
+    </ownedClasses>
+  </ownedPackages>
+</pivot:Model>

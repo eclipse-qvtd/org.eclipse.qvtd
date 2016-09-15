@@ -303,10 +303,10 @@ map associationToForeignKeyLM in ManualUML2RDBMS {
     in:uml p:Package;
     in:uml a:Association;
     in:middle p2s:PackageToSchema; 
-	check sc:Class := a.source;
-	check dc:Class := a.destination;
-	check sc2t:ClassToTable := sc.ClassToTable;
-	check dc2t:ClassToTable := dc.ClassToTable;
+	check var sc:Class := a.source;
+	check var dc:Class := a.destination;
+	check var sc2t:ClassToTable := sc.ClassToTable;
+	check var dc2t:ClassToTable := dc.ClassToTable;
     check a.namespace = p;
     check sc.namespace = p;
      -- getAllForwards(sc)->includes(a);
@@ -389,8 +389,8 @@ map classPrimitiveAttributesLM in ManualUML2RDBMS {
     in:uml c:Class;
     in:uml a:Attribute;
     in:middle fao:ClassToTable;
-	check t:PrimitiveDataType := a.type;
-	check p2n:PrimitiveToName := t.PrimitiveToName;
+	check var t:PrimitiveDataType := a.type;
+	check var p2n:PrimitiveToName := t.PrimitiveToName;
     check a.owner = c;
     --getAllAttributes(c)->includes(a);
 	check fao.umlClass = c;
@@ -407,7 +407,7 @@ map classComplexAttributesLM in ManualUML2RDBMS {
     in:uml c:Class;
     in:uml a:Attribute;
     in:middle fao:ClassToTable;
-	check t:Class := a.type;
+	check var t:Class := a.type;
     check a.owner = c;
     --getAllAttributes(c)->includes(a);
     check fao.umlClass=c;
@@ -422,7 +422,7 @@ map classComplexAttributesLM in ManualUML2RDBMS {
 map complexAttributePrimitiveAttributesLM in ManualUML2RDBMS {
     in:uml c:Class;
     in:uml ca:Attribute;
-    check fao:NonLeafAttribute := ca.FromAttribute;
+    check var fao:NonLeafAttribute := ca.FromAttribute;
     check ca.type = c;
     -- getAllAttributes(c)->includes(a);
     for anAttribute in c.attributes {
@@ -440,8 +440,8 @@ map complexAttributePrimitiveAttributesLM_1 in ManualUML2RDBMS {
     in:uml a_1:Attribute;
     in:uml ca_1:Attribute;
     in:middle fao_1:NonLeafAttribute;
-    check t_1:PrimitiveDataType := a_1.type;
-    check p2n_1:PrimitiveToName := t_1.PrimitiveToName;
+    check var t_1:PrimitiveDataType := a_1.type;
+    check var p2n_1:PrimitiveToName := t_1.PrimitiveToName;
     new:middle fa:AttributeToColumn;
     set fa.owner := fao_1;    
     set fa.leafs := Set(AttributeToColumn) {fa};
@@ -454,7 +454,7 @@ map complexAttributePrimitiveAttributesLM_1 in ManualUML2RDBMS {
 map complexAttributeComplexAttributesLM in ManualUML2RDBMS {
     in:uml c:Class;
     in:uml ca:Attribute;
-	check fao:NonLeafAttribute := ca.FromAttribute;
+	check var fao:NonLeafAttribute := ca.FromAttribute;
     check ca.type = c;
     --getAllAttributes(c)->includes(a);
     for anAttribute in c.attributes {
@@ -472,7 +472,7 @@ map complexAttributeComplexAttributesLM_1 in ManualUML2RDBMS {
     in:uml ca_1:Attribute;
     in:uml a_1:Attribute;
     in:middle fao_1:NonLeafAttribute;
-    check t_1:Class := a_1.type;
+    check var t_1:Class := a_1.type;
     check a_1.owner = c_1;
     --getAllAttributes(c)->includes(a);
     new:middle fa:NonLeafAttribute;
@@ -489,8 +489,8 @@ map attributeColumnsMR in ManualUML2RDBMS {
     in:middle c2t:ClassToTable;
     in:middle a2c:AttributeToColumn;
     in:rdbms t:Table;
-    check p2n:PrimitiveToName := a2c.type;
-    check ct:String := p2n.typeName;
+    check var p2n:PrimitiveToName := a2c.type;
+    check var ct:String := p2n.typeName;
     -- c2t.fromAttributes.leafs->includes(a2c); -- need to go deeper in the recursion
     -- a2c.owner = c2t;   NOT ALL a2c are owned by c2t (complex attributes) 
     check c2t.table = t;

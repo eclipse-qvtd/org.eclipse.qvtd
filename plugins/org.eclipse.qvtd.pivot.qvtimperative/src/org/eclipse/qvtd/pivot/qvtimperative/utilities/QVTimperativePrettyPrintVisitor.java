@@ -21,10 +21,12 @@ import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.CheckStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.IfStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.InConnectionVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.InitializeStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
@@ -33,7 +35,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.OutConnectionVariable;
-import org.eclipse.qvtd.pivot.qvtimperative.PredicateVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 import org.eclipse.qvtd.pivot.qvtimperative.VariableStatement;
@@ -50,7 +52,7 @@ public class QVTimperativePrettyPrintVisitor extends QVTbasePrettyPrintVisitor i
 		context.append("add ");
 		context.appendName(asAddStatement.getTargetVariable());
 		context.append(" += ");
-		safeVisit(asAddStatement.getValue());
+		safeVisit(asAddStatement.getOwnedInit());
 		context.append(";\n");
 		return null;
 	}
@@ -58,7 +60,7 @@ public class QVTimperativePrettyPrintVisitor extends QVTbasePrettyPrintVisitor i
 	@Override
 	public Object visitCheckStatement(@NonNull CheckStatement pPredicate) {
 		context.append("check ");
-		safeVisit(pPredicate.getConditionExpression());
+		safeVisit(pPredicate.getOwnedCondition());
 		context.append(";\n");
 		return null;
 	}
@@ -66,6 +68,27 @@ public class QVTimperativePrettyPrintVisitor extends QVTbasePrettyPrintVisitor i
 	@Override
 	public Object visitConnectionVariable(@NonNull ConnectionVariable object) {
 		return visitVariableDeclaration(object);
+	}
+
+	@Override
+	public Object visitDeclareStatement(@NonNull DeclareStatement asVariable) {
+		if (asVariable.isIsChecked()) {
+			context.append("check ");
+		}
+		context.append("var ");
+		context.appendName(asVariable);
+		Type type = asVariable.getType();
+		if (type != null) {
+			context.append(" : ");
+			context.appendTypedMultiplicity(asVariable);
+		}
+		OCLExpression asInit = asVariable.getOwnedInit();
+		if (asInit != null) {
+			context.append(" := ");
+			safeVisit(asInit);
+		}
+		context.append(";\n");
+		return null;
 	}
 
 	@Override
@@ -79,6 +102,26 @@ public class QVTimperativePrettyPrintVisitor extends QVTbasePrettyPrintVisitor i
 			context.appendTypedMultiplicity(asVariable);
 		}
 		context.append(";\n");
+		return null;
+	}
+
+	@Override
+	public Object visitIfStatement(@NonNull IfStatement asIfStatement) {
+		context.append("if ");
+		safeVisit(asIfStatement.getOwnedCondition());
+		context.append(" {");
+		context.push("", "");
+		for (Statement asStatement : asIfStatement.getOwnedThenStatements()) {
+			safeVisit(asStatement);
+		}
+		context.pop();
+		context.append("} else {");
+		context.push("", "");
+		for (Statement asStatement : asIfStatement.getOwnedElseStatements()) {
+			safeVisit(asStatement);
+		}
+		context.pop();
+		context.append("}\n");
 		return null;
 	}
 
@@ -107,6 +150,18 @@ public class QVTimperativePrettyPrintVisitor extends QVTbasePrettyPrintVisitor i
 	@Override
 	public Object visitInConnectionVariable(@NonNull InConnectionVariable object) {
 		return visitVariableDeclaration(object);
+	}
+
+	@Override
+	public Object visitInitializeStatement(@NonNull InitializeStatement asStatement) {
+		if (asStatement.isIsChecked()) {
+			context.append("check ");
+		}
+		context.append("init ");
+		context.appendName(asStatement.getTargetVariable());
+		context.append(" := ");
+		safeVisit(asStatement.getOwnedInit());
+		return null;
 	}
 
 	@Override
@@ -227,28 +282,13 @@ public class QVTimperativePrettyPrintVisitor extends QVTbasePrettyPrintVisitor i
 	}
 
 	@Override
-	public Object visitPredicateVariable(@NonNull PredicateVariable asVariable) {
-		context.append(asVariable.isIsChecked() ? "check " : "var ");
-		context.appendName(asVariable);
-		Type type = asVariable.getType();
-		if (type != null) {
-			context.append(" : ");
-			context.appendTypedMultiplicity(asVariable);
-		}
-		context.append(" := ");
-		safeVisit(asVariable.getOwnedInit());
-		context.append(";\n");
-		return null;
-	}
-
-	@Override
 	public Object visitSetStatement(@NonNull SetStatement asSetStatement) {
 		context.append(asSetStatement.isIsEmit() ? "emit " : "set ");
 		context.appendName(asSetStatement.getTargetVariable());
 		context.append(".");
 		context.appendName(QVTimperativeUtil.getTargetProperty(asSetStatement));
 		context.append(" := ");
-		safeVisit(asSetStatement.getValue());
+		safeVisit(asSetStatement.getOwnedInit());
 		context.append(";\n");
 		return null;
 	}

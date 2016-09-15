@@ -13,7 +13,7 @@ package qvtimperative
 context Mapping
 def: allAreas : Set(qvtimperative::ImperativeDomain) = self.domain.oclAsType(qvtimperative::ImperativeDomain)->asSet()
 def: guardVariables : Set(ocl::Variable) = ownedGuardVariables
-def: boundGuardVariables : Set(ocl::Variable) = ownedStatements->selectByKind(PredicateVariable)
+def: boundGuardVariables : Set(ocl::Variable) = ownedStatements->selectByKind(DeclareStatement)
 /* Mapping guard variables that are assigned  */
 --def: boundGuardVariables : Set(ocl::Variable) = guardVariables->select(initExpression <> null)
 def: unboundGuardVariables : Set(ocl::Variable) = guardVariables - boundGuardVariables
@@ -57,8 +57,8 @@ inv CheckableXorEnforceable: isCheckable xor isEnforceable
 context SetStatement
 inv IsNotReadOnly: not targetProperty.isReadOnly
 inv PropertyOfSlot(targetVariable.type.name + ' must conform to ' + targetProperty.owningClass.name): targetVariable.type.conformsTo(targetProperty.owningClass)
-inv CompatibleType(value.type.name + ' must conform to ' + targetProperty.type.name): value.type.conformsTo(targetProperty.type)
-inv NoRealizedVariableNavigations: value->closure(oclContents())->selectByKind(ocl::VariableExp)->select(referredVariable.oclIsKindOf(NewStatement))->select(oclContainer().oclIsKindOf(ocl::CallExp))->isEmpty()
+inv CompatibleType(ownedInit.type.name + ' must conform to ' + targetProperty.type.name): ownedInit.type.conformsTo(targetProperty.type)
+inv NoRealizedVariableNavigations: ownedInit->closure(oclContents())->selectByKind(ocl::VariableExp)->select(referredVariable.oclIsKindOf(NewStatement))->select(oclContainer().oclIsKindOf(ocl::CallExp))->isEmpty()
 
 --context NewStatement
 --def: isBottom : Boolean = oclContainer().oclIsKindOf(BottomPattern)

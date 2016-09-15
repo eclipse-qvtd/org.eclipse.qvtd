@@ -42,10 +42,12 @@ import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.CheckStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.IfStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.InConnectionVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.InitializeStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
@@ -54,7 +56,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.OutConnectionVariable;
-import org.eclipse.qvtd.pivot.qvtimperative.PredicateVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
@@ -63,6 +65,8 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.CheckStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DomainCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.GuardVariableCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.IfStatementCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.InitializeStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.InoutVariableCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS;
@@ -71,7 +75,7 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.MappingLoopCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.NewStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.OutVariableCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.ParamDeclarationCS;
-import org.eclipse.qvtd.xtext.qvtimperativecs.PredicateVariableCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.DeclareStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QueryCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.SetStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.TopLevelCS;
@@ -227,6 +231,13 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 	}
 
 	@Override
+	public Continuation<?> visitDeclareStatementCS(@NonNull DeclareStatementCS csElement) {
+		DeclareStatement asElement = refreshNamedElement(DeclareStatement.class, QVTimperativePackage.Literals.DECLARE_STATEMENT, csElement);
+		asElement.setIsChecked(csElement.isIsChecked());
+		return null;
+	}
+
+	@Override
 	public Continuation<?> visitDirectionCS(@NonNull DirectionCS csElement) {
 		ImperativeTypedModel asTypedModel = refreshNamedElement(ImperativeTypedModel.class, QVTimperativePackage.Literals.IMPERATIVE_TYPED_MODEL, csElement);
 		Continuation<?> continuation = new DirectionContentContinuation(context, csElement);
@@ -249,6 +260,21 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 	public Continuation<?> visitGuardVariableCS(@NonNull GuardVariableCS csElement) {
 		refreshNamedElement(GuardVariable.class, QVTimperativePackage.Literals.GUARD_VARIABLE, csElement);
 		return new GuardVariableCompletion(context, csElement);
+	}
+
+	@Override
+	public Continuation<?> visitIfStatementCS(@NonNull IfStatementCS csIfStatement) {
+		IfStatement asIfStatement = context.refreshModelElement(IfStatement.class, QVTimperativePackage.Literals.IF_STATEMENT, csIfStatement);
+		context.refreshPivotList(Statement.class, asIfStatement.getOwnedThenStatements(), csIfStatement.getOwnedThenStatements());
+		context.refreshPivotList(Statement.class, asIfStatement.getOwnedElseStatements(), csIfStatement.getOwnedElseStatements());
+		return null;
+	}
+
+	@Override
+	public Continuation<?> visitInitializeStatementCS(@NonNull InitializeStatementCS csElement) {
+		InitializeStatement asElement = context.refreshModelElement(InitializeStatement.class, QVTimperativePackage.Literals.INITIALIZE_STATEMENT, csElement);
+		asElement.setIsChecked(csElement.isIsChecked());
+		return null;
 	}
 
 	@Override
@@ -310,13 +336,6 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 	@Override
 	public Continuation<?> visitParamDeclarationCS(@NonNull ParamDeclarationCS csElement) {
 		refreshNamedElement(FunctionParameter.class, QVTbasePackage.Literals.FUNCTION_PARAMETER, csElement);
-		return null;
-	}
-
-	@Override
-	public Continuation<?> visitPredicateVariableCS(@NonNull PredicateVariableCS csElement) {
-		PredicateVariable asElement = refreshNamedElement(PredicateVariable.class, QVTimperativePackage.Literals.PREDICATE_VARIABLE, csElement);
-		asElement.setIsChecked(csElement.isIsChecked());
 		return null;
 	}
 

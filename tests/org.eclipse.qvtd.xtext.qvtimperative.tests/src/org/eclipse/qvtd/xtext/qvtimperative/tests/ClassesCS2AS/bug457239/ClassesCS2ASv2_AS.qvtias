@@ -7,12 +7,10 @@
   <ownedImports importedNamespace="pivot:Model helpers.ocl.oclas#/"/>
   <ownedPackages xmi:id="P." name="">
     <ownedClasses xsi:type="qvtb:Transformation" xmi:id="T..classescs2as" name="classescs2as" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclElement">
-      <modelParameter xsi:type="qvti:ImperativeTypedModel" xmi:id="qT..classescs2as.leftCS" name="leftCS" usedPackage="helpers.ocl.oclas#P.classescs"
-          isChecked="true">
+      <modelParameter xsi:type="qvti:ImperativeTypedModel" xmi:id="qT..classescs2as.leftCS" name="leftCS" usedPackage="helpers.ocl.oclas#P.classescs">
         <ownedContext xmi:id="qV..classescs2as.leftCS.leftCS" name="leftCS" type="pivot:Class http://www.eclipse.org/qvt/2015/QVTimperativeLibrary.oclas#T.qvtbaselibrary.Model"/>
       </modelParameter>
-      <modelParameter xsi:type="qvti:ImperativeTypedModel" xmi:id="qT..classescs2as.rightAS" name="rightAS" usedPackage="../Classes.ecore.oclas#P.classes"
-          isEnforced="true">
+      <modelParameter xsi:type="qvti:ImperativeTypedModel" xmi:id="qT..classescs2as.rightAS" name="rightAS" usedPackage="../Classes.ecore.oclas#P.classes">
         <ownedContext xmi:id="qV..classescs2as.rightAS.rightAS" name="rightAS" type="pivot:Class http://www.eclipse.org/qvt/2015/QVTimperativeLibrary.oclas#T.qvtbaselibrary.Model"/>
       </modelParameter>
       <rule xsi:type="qvti:Mapping" xmi:id="m..classescs2as.createPackage" name="createPackage">
@@ -20,7 +18,7 @@
         <ownedStatements xsi:type="qvti:NewStatement" xmi:id="qV..classescs2as.createPackage._package" name="_package" isRequired="false"
             type="pivot:Class ../Classes.ecore.oclas#T.classes.Package" referredTypedModel="#qT..classescs2as.rightAS"/>
         <ownedStatements xsi:type="qvti:SetStatement" targetVariable="#qV..classescs2as.createPackage._package" targetProperty="../Classes.ecore.oclas#p.classes.NamedElement.name">
-          <value xsi:type="pivot:IfExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String">
+          <ownedInit xsi:type="pivot:IfExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String">
             <ownedCondition xsi:type="pivot:OperationCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
                 referredOperation="helpers.ocl.oclas#o.ocl.OclElement.aBooleanElementOp">
               <ownedSource xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class ../ClassesCS.ecore.oclas#T.classescs.PackageCS"
@@ -30,7 +28,7 @@
                 stringSymbol="unexpected"/>
             <ownedThen xsi:type="pivot:StringLiteralExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
                 stringSymbol="transformation worked"/>
-          </value>
+          </ownedInit>
         </ownedStatements>
       </rule>
       <rule xsi:type="qvti:Mapping" xmi:id="m..classescs2as.__root__" name="__root__">
