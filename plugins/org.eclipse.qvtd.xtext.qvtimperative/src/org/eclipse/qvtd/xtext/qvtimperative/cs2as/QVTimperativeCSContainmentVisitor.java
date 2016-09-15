@@ -39,6 +39,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
+import org.eclipse.qvtd.pivot.qvtimperative.AccessStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.CheckStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardVariable;
@@ -60,6 +61,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
+import org.eclipse.qvtd.xtext.qvtimperativecs.AccessStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.AddStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.CheckStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS;
@@ -216,6 +218,12 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 				asOperations.clear();
 			}
 		}
+	}
+
+	@Override
+	public @Nullable Continuation<?> visitAccessStatementCS(@NonNull AccessStatementCS csAccessStatement) {
+		refreshNamedElement(AccessStatement.class, QVTimperativePackage.Literals.ACCESS_STATEMENT, csAccessStatement);
+		return null;
 	}
 
 	@Override

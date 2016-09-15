@@ -17,6 +17,7 @@ import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.internal.prettyprint.PrettyPrinter;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbasePrettyPrintVisitor;
+import org.eclipse.qvtd.pivot.qvtimperative.AccessStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.CheckStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
@@ -45,6 +46,23 @@ public class QVTimperativePrettyPrintVisitor extends QVTbasePrettyPrintVisitor i
 {
 	public QVTimperativePrettyPrintVisitor(@NonNull PrettyPrinter context) {
 		super(context);
+	}
+
+	@Override
+	public Object visitAccessStatement(@NonNull AccessStatement asAccessStatement) {
+		context.append("access ");
+		context.appendName(asAccessStatement);
+		Type type = asAccessStatement.getType();
+		if (type != null) {
+			context.append(" : ");
+			context.appendTypedMultiplicity(asAccessStatement);
+		}
+		context.append(" := ");
+		context.appendName(asAccessStatement.getSourceVariable());
+		context.append(".");
+		context.appendName(QVTimperativeUtil.getSourceProperty(asAccessStatement));
+		context.append(";\n");
+		return null;
 	}
 
 	@Override

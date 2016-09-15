@@ -42,6 +42,7 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory.CreateStrategy;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
+import org.eclipse.qvtd.pivot.qvtimperative.AccessStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
@@ -282,6 +283,11 @@ public class QVTimperativeUtil extends QVTbaseUtil
 
 	public static @Nullable ImperativeDomain getDomain(@NonNull Mapping rule, @NonNull TypedModel typedModel) {
 		return (ImperativeDomain)getDomain((Rule)rule, typedModel);
+	}
+
+	public static @NonNull Property getSourceProperty(@NonNull AccessStatement asAccessStatement) {
+		Property referredProperty = ClassUtil.nonNullState(asAccessStatement.getSourceProperty());
+		return asAccessStatement.isIsOpposite() ? ClassUtil.nonNullState(referredProperty.getOpposite()) : referredProperty;
 	}
 
 	public static @NonNull Property getTargetProperty(@NonNull SetStatement asSetStatement) {

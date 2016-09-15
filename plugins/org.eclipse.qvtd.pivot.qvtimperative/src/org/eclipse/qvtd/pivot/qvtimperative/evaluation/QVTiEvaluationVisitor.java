@@ -39,6 +39,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+import org.eclipse.qvtd.pivot.qvtimperative.AccessStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.CheckStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
@@ -99,6 +100,26 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 			((QVTiExecutor)context).replace(targetVariable, e, false);
 			throw e;
 		}
+	}
+
+	@Override
+	public @Nullable Object visitAccessStatement(@NonNull AccessStatement accessStatement) {
+		/*		OCLExpression ownedInit = predicateVariable.getOwnedInit();
+		if (ownedInit == null) {
+			return false;
+		}
+		Object initValue = ownedInit.accept(undecoratedVisitor);
+		if (predicateVariable.isIsChecked()) {
+			Type guardType = predicateVariable.getType();
+			Type valueType = idResolver.getDynamicTypeOf(initValue);
+			if ((guardType == null) || !valueType.conformsTo(standardLibrary, guardType)) {
+				// The initialisation fails, the guard is not met
+				return false;
+			}
+		}
+		executor.replace(accessStatement, initValue, false);
+		return true; */
+		throw new UnsupportedOperationException();
 	}
 
 	@Override

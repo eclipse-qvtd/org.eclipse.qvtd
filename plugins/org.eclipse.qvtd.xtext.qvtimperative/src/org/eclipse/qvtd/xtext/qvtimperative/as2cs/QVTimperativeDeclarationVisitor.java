@@ -69,6 +69,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
+import org.eclipse.qvtd.pivot.qvtimperative.AccessStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.CheckStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
@@ -97,6 +98,7 @@ import org.eclipse.qvtd.xtext.qvtbase.as2cs.QVTbaseDeclarationVisitor;
 import org.eclipse.qvtd.xtext.qvtbasecs.AbstractTransformationCS;
 import org.eclipse.qvtd.xtext.qvtbasecs.QVTbaseCSPackage;
 import org.eclipse.qvtd.xtext.qvtbasecs.QualifiedPackageCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.AccessStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.AddStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.CheckStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS;
@@ -367,6 +369,14 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 			context.refreshPathName(csPathName, asProperty, asTransformation);
 		}
 		context.refreshList(csPathNames, pathNames);
+	}
+
+	@Override
+	public ElementCS visitAccessStatement(@NonNull AccessStatement asAccessStatement) {
+		AccessStatementCS csStatement = refreshTypedElement(AccessStatementCS.class, QVTimperativeCSPackage.Literals.ACCESS_STATEMENT_CS, asAccessStatement);
+		csStatement.setSourceVariable(asAccessStatement.getSourceVariable());
+		csStatement.setSourceProperty(QVTimperativeUtil.getSourceProperty(asAccessStatement));
+		return csStatement;
 	}
 
 	@Override
@@ -645,7 +655,6 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 		ImperativeTypedModel asTypedModel = asNewStatement.getReferredTypedModel();
 		org.eclipse.ocl.pivot.Package asUsedPackage = asTypedModel.getUsedPackage().size() > 0 ? asTypedModel.getUsedPackage().get(0) : null;
 		NewStatementCS csNewStatement = context.refreshNamedElement(NewStatementCS.class, QVTimperativeCSPackage.Literals.NEW_STATEMENT_CS, asNewStatement);
-		csNewStatement.setPivot(asNewStatement);
 		csNewStatement.setOwnedType(createTypeRefCS(asNewStatement.getType(), asUsedPackage));
 		csNewStatement.setReferredTypedModel(asTypedModel);
 		csNewStatement.setOwnedInit(context.visitDeclaration(ExpCS.class, asNewStatement.getOwnedInit()));

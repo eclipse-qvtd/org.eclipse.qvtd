@@ -4,8 +4,8 @@ import 'helpers.ocl';
 
 transformation classescs2as
 {
-	leftCS imports classescs;
-	rightAS imports classes;
+	check leftCS imports classescs;
+	enforce rightAS imports classes;
 }
 
 map createPackage in classescs2as

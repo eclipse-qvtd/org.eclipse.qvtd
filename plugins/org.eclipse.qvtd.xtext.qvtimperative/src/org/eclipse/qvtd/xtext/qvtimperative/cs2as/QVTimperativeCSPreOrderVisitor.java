@@ -35,6 +35,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.AccessStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.InConnectionVariable;
@@ -46,6 +47,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.OutConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
+import org.eclipse.qvtd.xtext.qvtimperativecs.AccessStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.CheckStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DeclareStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS;
@@ -68,6 +70,22 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.util.AbstractQVTimperativeCSPreOrd
 
 public class QVTimperativeCSPreOrderVisitor extends AbstractQVTimperativeCSPreOrderVisitor
 {
+	public static class AccessStatementCompletion extends SingleContinuation<@NonNull AccessStatementCS>
+	{
+		public AccessStatementCompletion(@NonNull CS2ASConversion context, @NonNull AccessStatementCS csElement) {
+			super(context, null, null, csElement, new PivotDependency(csElement.getOwnedType()));
+		}
+
+		@Override
+		public BasicContinuation<?> execute() {
+			AccessStatement pivotElement = PivotUtil.getPivot(AccessStatement.class, csElement);
+			if (pivotElement != null) {
+				context.refreshRequiredType(pivotElement, csElement);
+			}
+			return null;
+		}
+	}
+
 	public static class DeclareStatementCompletion extends SingleContinuation<@NonNull DeclareStatementCS>
 	{
 		public DeclareStatementCompletion(@NonNull CS2ASConversion context, @NonNull DeclareStatementCS csElement) {
@@ -265,6 +283,11 @@ public class QVTimperativeCSPreOrderVisitor extends AbstractQVTimperativeCSPreOr
 			}
 		}
 		context.refreshList(asProperties, properties);
+	}
+
+	@Override
+	public Continuation<?> visitAccessStatementCS(@NonNull AccessStatementCS csElement) {
+		return new AccessStatementCompletion(context, csElement);
 	}
 
 	@Override

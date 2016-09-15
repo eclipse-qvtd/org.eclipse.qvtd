@@ -123,8 +123,8 @@ map m_PlusCS_ast in KiamaRewrite_qvtp_qvtcas
 	var aPlus : kiamaas::Plus := ast.oclAsType(kiamaas::Plus);
 	var left : kiamaas::Node := aPlus.left;
 	var right : kiamaas::Node := aPlus.right;
-	var height : ecore::EIntegerObject := left.height;
-	var height1 : ecore::EIntegerObject := right.height;
+	access height : ecore::EIntegerObject := left.height;
+	access height1 : ecore::EIntegerObject := right.height;
 	var oclAsSet : Set(ecore::EIntegerObject) := height.oclAsSet();
 	var including : Set(ecore::EIntegerObject) := oclAsSet->including(height1);
 	var max : ecore::EIntegerObject := including->max();

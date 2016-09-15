@@ -98,6 +98,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
+import org.eclipse.qvtd.pivot.qvtimperative.AccessStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.CheckStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
@@ -551,6 +552,26 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 			asTypedModel = ClassUtil.nonNullState(pTransformation.getModelParameter(null));
 		}
 		return ClassUtil.nonNullState(analyzer.getTypedModel(asTypedModel));
+	}
+
+	@Override
+	public @Nullable CGNamedElement visitAccessStatement(@NonNull AccessStatement accessStatement) {
+		/*		OCLExpression ownedInit = predicateVariable.getOwnedInit();
+		if (ownedInit == null) {
+			return false;
+		}
+		Object initValue = ownedInit.accept(undecoratedVisitor);
+		if (predicateVariable.isIsChecked()) {
+			Type guardType = predicateVariable.getType();
+			Type valueType = idResolver.getDynamicTypeOf(initValue);
+			if ((guardType == null) || !valueType.conformsTo(standardLibrary, guardType)) {
+				// The initialisation fails, the guard is not met
+				return false;
+			}
+		}
+		executor.replace(accessStatement, initValue, false);
+		return true; */
+		throw new UnsupportedOperationException();
 	}
 
 	@Override

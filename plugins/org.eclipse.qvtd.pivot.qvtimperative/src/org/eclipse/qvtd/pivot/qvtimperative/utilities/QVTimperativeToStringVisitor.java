@@ -17,6 +17,7 @@ import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.utilities.ToStringVisitor;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseToStringVisitor;
+import org.eclipse.qvtd.pivot.qvtimperative.AccessStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.CheckStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
@@ -72,6 +73,18 @@ public class QVTimperativeToStringVisitor extends QVTbaseToStringVisitor impleme
 
 	public QVTimperativeToStringVisitor(@NonNull StringBuilder s) {
 		super(s);
+	}
+
+	@Override
+	public @Nullable String visitAccessStatement(@NonNull AccessStatement asAccessStatement) {
+		append("access ");
+		appendName(asAccessStatement);
+		append(" := ");
+		appendName(asAccessStatement.getSourceVariable());
+		append(".");
+		appendName(QVTimperativeUtil.getSourceProperty(asAccessStatement));
+		append(";\n");
+		return null;
 	}
 
 	@Override

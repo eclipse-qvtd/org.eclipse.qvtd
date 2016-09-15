@@ -27,6 +27,7 @@ import org.eclipse.ocl.xtext.base.cs2as.SingleContinuation;
 import org.eclipse.ocl.xtext.basecs.ConstraintCS;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
+import org.eclipse.qvtd.pivot.qvtimperative.AccessStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.CheckStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardVariable;
@@ -38,6 +39,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
+import org.eclipse.qvtd.xtext.qvtimperativecs.AccessStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.AddStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.CheckStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS;
@@ -101,6 +103,21 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 		}
 		return propertyAssignment;
 	} */
+
+	@Override
+	public Continuation<?> visitAccessStatementCS(@NonNull AccessStatementCS csElement) {
+		AccessStatement accessStatement = PivotUtil.getPivot(AccessStatement.class, csElement);
+		if (accessStatement != null) {
+			VariableDeclaration sourceVariable = csElement.getSourceVariable();
+			assert sourceVariable != null;
+			accessStatement.setSourceVariable(sourceVariable);
+			Property sourceProperty = csElement.getSourceProperty();
+			boolean isImplicit = sourceProperty.isIsImplicit();
+			accessStatement.setSourceProperty(isImplicit ? sourceProperty.getOpposite() : sourceProperty);
+			accessStatement.setIsOpposite(isImplicit);
+		}
+		return null;
+	}
 
 	@Override
 	public @Nullable Continuation<?> visitAddStatementCS(@NonNull AddStatementCS csElement) {
@@ -303,6 +320,9 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 			assert targetVariable != null;
 			setStatement.setTargetVariable(targetVariable);
 			Property targetProperty = csElement.getReferredProperty();
+			boolean isImplicit = targetProperty.isIsImplicit();
+			setStatement.setTargetProperty(isImplicit ? targetProperty.getOpposite() : targetProperty);
+			setStatement.setIsOpposite(isImplicit);
 			ExpCS csInitialiser = csElement.getOwnedInit();
 			OCLExpression target = csInitialiser != null ? context.visitLeft2Right(OCLExpression.class, csInitialiser) : null;
 			setStatement.setTargetProperty(targetProperty);

@@ -17,6 +17,7 @@ import org.eclipse.ocl.examples.debug.vm.evaluator.IStepper;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtimperative.AccessStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.CheckStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
@@ -43,6 +44,11 @@ public class QVTiStepperVisitor extends AbstractQVTimperativeStepperVisitor
 
 	protected QVTiStepperVisitor(@NonNull Object context) {
 		super(context);
+	}
+
+	@Override
+	public @Nullable IStepper visitAccessStatement(@NonNull AccessStatement object) {
+		return NonStepper.INSTANCE;
 	}
 
 	@Override
