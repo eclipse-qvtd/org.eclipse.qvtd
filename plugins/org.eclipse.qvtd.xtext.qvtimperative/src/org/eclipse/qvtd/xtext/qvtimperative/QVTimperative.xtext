@@ -24,6 +24,8 @@ TopLevelCS:
 	(ownedPackages+=QualifiedPackageCS | ownedTransformations+=TransformationCS | ownedMappings+=MappingCS | ownedQueries+=QueryCS)*
 ;
 
+AccessStatementCS: 'access' name=UnrestrictedName (':' ownedType=TypeExpCS)? ':=' sourceVariable=[pivot::VariableDeclaration|UnrestrictedName] '.' sourceProperty=[pivot::Property|UnrestrictedName] ';';
+
 AddStatementCS: 'add' targetVariable=[qvtimperative::ConnectionVariable|UnrestrictedName] '+=' ownedExpression=ExpCS ';';
 
 CommitStatementCS returns StatementCS:	NewStatementCS | SetStatementCS;
@@ -39,7 +41,7 @@ DirectionCS: {DirectionCS} (isChecked?='check'|isEnforced?='enforce')? name=Unre
 	('uses' uses+=[qvtimperative::ImperativeDomain|UnrestrictedName] (',' uses+=[qvtimperative::ImperativeDomain|UnrestrictedName])*)?
 ;
 
-GuardStatementCS returns StatementCS: OutVariableCS | DeclareStatementCS | DeclareStatementCS | CheckStatementCS | IfStatementCS;
+GuardStatementCS returns StatementCS: OutVariableCS | DeclareStatementCS | DeclareStatementCS | InitializeStatementCS | CheckStatementCS | AccessStatementCS | IfStatementCS;
 
 GuardVariableCS: 'in' ':' referredTypedModel=[qvtimperative::ImperativeTypedModel|UnrestrictedName] name=UnrestrictedName ':' ownedType=TypeExpCS ';';
 
@@ -101,8 +103,6 @@ SourceDomainCS returns DomainCS: isCheck?='check' direction=[qvtimperative::Impe
 	('{' ('check' checkedProperties+=PathNameCS (',' checkedProperties+=PathNameCS)*)? '}')?
 	'(' ')' '{' '}'
 ;
-	
-StatementCS: ControlStatementCS;
 
 TransformationCS:
 	'transformation' ownedPathName=ScopeNameCS? name=UnreservedName '{' (ownedDirections+=DirectionCS ';')* '}';

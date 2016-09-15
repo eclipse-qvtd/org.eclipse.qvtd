@@ -8,6 +8,21 @@
   <eAnnotations source="http://www.eclipse.org/OCL/Import">
     <details key="qvtb" value="../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#/"/>
   </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="AccessStatement" eSuperTypes="#//VariableStatement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sourceVariable" lowerBound="1"
+        eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//VariableDeclaration">
+      <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
+        <details key="body" value="assignment"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sourceProperty" lowerBound="1"
+        eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//Property">
+      <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
+        <details key="body" value="assignment"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isOpposite" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AddStatement" eSuperTypes="#//MappingStatement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="A ConnectionStatement assigns results to a ConnectionVariable."/>

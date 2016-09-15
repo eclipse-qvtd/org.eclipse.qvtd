@@ -15,6 +15,10 @@
   <foreignModel>QVTimperativeCS.ecore</foreignModel>
   <genPackages prefix="QVTimperativeCS" basePackage="org.eclipse.qvtd.xtext" disposableProviderFactory="true"
       fileExtensions="qvtics" ecorePackage="QVTimperativeCS.ecore#/">
+    <genClasses ecoreClass="QVTimperativeCS.ecore#//AccessStatementCS">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//AccessStatementCS/sourceProperty"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//AccessStatementCS/sourceVariable"/>
+    </genClasses>
     <genClasses ecoreClass="QVTimperativeCS.ecore#//AddStatementCS">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//AddStatementCS/ownedExpression"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//AddStatementCS/targetVariable"/>

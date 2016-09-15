@@ -2,6 +2,12 @@
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="qvtimperativecs" nsURI="http://www.eclipse.org/qvt/2015/QVTimperativeCS"
     nsPrefix="qvtics">
+  <eClassifiers xsi:type="ecore:EClass" name="AccessStatementCS" eSuperTypes="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//TypedElementCS #//StatementCS">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sourceProperty" lowerBound="1"
+        eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//Property"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sourceVariable" lowerBound="1"
+        eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//VariableDeclaration"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AddStatementCS" eSuperTypes="#//MappingStatementCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedExpression" eType="ecore:EClass ../../org.eclipse.ocl.xtext.essentialocl/model/EssentialOCLCS.ecore#//ExpCS"
         containment="true"/>

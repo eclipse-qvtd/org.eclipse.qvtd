@@ -18,6 +18,11 @@
   <genPackages prefix="QVTimperative" basePackage="org.eclipse.qvtd.pivot" disposableProviderFactory="true"
       contentTypeIdentifier="org.eclipse.qvtd.qvtimperative" fileExtensions="qvtias"
       ecorePackage="QVTimperative.ecore#/">
+    <genClasses ecoreClass="QVTimperative.ecore#//AccessStatement">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//AccessStatement/sourceVariable"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//AccessStatement/sourceProperty"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperative.ecore#//AccessStatement/isOpposite"/>
+    </genClasses>
     <genClasses ecoreClass="QVTimperative.ecore#//AddStatement">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//AddStatement/targetVariable"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//AddStatement/ownedInit"/>
