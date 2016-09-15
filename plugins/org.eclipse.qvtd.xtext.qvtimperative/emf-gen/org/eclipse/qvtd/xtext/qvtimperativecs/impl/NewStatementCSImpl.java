@@ -36,7 +36,7 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.NewStatementCSImpl#getOwnedInitExpression <em>Owned Init Expression</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.NewStatementCSImpl#getOwnedInit <em>Owned Init</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.NewStatementCSImpl#getReferredTypedModel <em>Referred Typed Model</em>}</li>
  * </ul>
  *
@@ -44,14 +44,14 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
  */
 public class NewStatementCSImpl extends TypedElementCSImpl implements NewStatementCS {
 	/**
-	 * The cached value of the '{@link #getOwnedInitExpression() <em>Owned Init Expression</em>}' containment reference.
+	 * The cached value of the '{@link #getOwnedInit() <em>Owned Init</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getOwnedInitExpression()
+	 * @see #getOwnedInit()
 	 * @generated
 	 * @ordered
 	 */
-	protected ExpCS ownedInitExpression;
+	protected ExpCS ownedInit;
 
 	/**
 	 * The cached value of the '{@link #getReferredTypedModel() <em>Referred Typed Model</em>}' reference.
@@ -88,8 +88,8 @@ public class NewStatementCSImpl extends TypedElementCSImpl implements NewStateme
 	 * @generated
 	 */
 	@Override
-	public ExpCS getOwnedInitExpression() {
-		return ownedInitExpression;
+	public ExpCS getOwnedInit() {
+		return ownedInit;
 	}
 
 	/**
@@ -97,11 +97,11 @@ public class NewStatementCSImpl extends TypedElementCSImpl implements NewStateme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetOwnedInitExpression(ExpCS newOwnedInitExpression, NotificationChain msgs) {
-		ExpCS oldOwnedInitExpression = ownedInitExpression;
-		ownedInitExpression = newOwnedInitExpression;
+	public NotificationChain basicSetOwnedInit(ExpCS newOwnedInit, NotificationChain msgs) {
+		ExpCS oldOwnedInit = ownedInit;
+		ownedInit = newOwnedInit;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.NEW_STATEMENT_CS__OWNED_INIT_EXPRESSION, oldOwnedInitExpression, newOwnedInitExpression);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.NEW_STATEMENT_CS__OWNED_INIT, oldOwnedInit, newOwnedInit);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -113,18 +113,18 @@ public class NewStatementCSImpl extends TypedElementCSImpl implements NewStateme
 	 * @generated
 	 */
 	@Override
-	public void setOwnedInitExpression(ExpCS newOwnedInitExpression) {
-		if (newOwnedInitExpression != ownedInitExpression) {
+	public void setOwnedInit(ExpCS newOwnedInit) {
+		if (newOwnedInit != ownedInit) {
 			NotificationChain msgs = null;
-			if (ownedInitExpression != null)
-				msgs = ((InternalEObject)ownedInitExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTimperativeCSPackage.NEW_STATEMENT_CS__OWNED_INIT_EXPRESSION, null, msgs);
-			if (newOwnedInitExpression != null)
-				msgs = ((InternalEObject)newOwnedInitExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTimperativeCSPackage.NEW_STATEMENT_CS__OWNED_INIT_EXPRESSION, null, msgs);
-			msgs = basicSetOwnedInitExpression(newOwnedInitExpression, msgs);
+			if (ownedInit != null)
+				msgs = ((InternalEObject)ownedInit).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTimperativeCSPackage.NEW_STATEMENT_CS__OWNED_INIT, null, msgs);
+			if (newOwnedInit != null)
+				msgs = ((InternalEObject)newOwnedInit).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTimperativeCSPackage.NEW_STATEMENT_CS__OWNED_INIT, null, msgs);
+			msgs = basicSetOwnedInit(newOwnedInit, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.NEW_STATEMENT_CS__OWNED_INIT_EXPRESSION, newOwnedInitExpression, newOwnedInitExpression));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.NEW_STATEMENT_CS__OWNED_INIT, newOwnedInit, newOwnedInit));
 	}
 
 	/**
@@ -175,8 +175,8 @@ public class NewStatementCSImpl extends TypedElementCSImpl implements NewStateme
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.NEW_STATEMENT_CS__OWNED_INIT_EXPRESSION:
-				return basicSetOwnedInitExpression(null, msgs);
+			case QVTimperativeCSPackage.NEW_STATEMENT_CS__OWNED_INIT:
+				return basicSetOwnedInit(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -189,8 +189,8 @@ public class NewStatementCSImpl extends TypedElementCSImpl implements NewStateme
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.NEW_STATEMENT_CS__OWNED_INIT_EXPRESSION:
-				return getOwnedInitExpression();
+			case QVTimperativeCSPackage.NEW_STATEMENT_CS__OWNED_INIT:
+				return getOwnedInit();
 			case QVTimperativeCSPackage.NEW_STATEMENT_CS__REFERRED_TYPED_MODEL:
 				if (resolve) return getReferredTypedModel();
 				return basicGetReferredTypedModel();
@@ -206,8 +206,8 @@ public class NewStatementCSImpl extends TypedElementCSImpl implements NewStateme
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.NEW_STATEMENT_CS__OWNED_INIT_EXPRESSION:
-				setOwnedInitExpression((ExpCS)newValue);
+			case QVTimperativeCSPackage.NEW_STATEMENT_CS__OWNED_INIT:
+				setOwnedInit((ExpCS)newValue);
 				return;
 			case QVTimperativeCSPackage.NEW_STATEMENT_CS__REFERRED_TYPED_MODEL:
 				setReferredTypedModel((TypedModel)newValue);
@@ -224,8 +224,8 @@ public class NewStatementCSImpl extends TypedElementCSImpl implements NewStateme
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.NEW_STATEMENT_CS__OWNED_INIT_EXPRESSION:
-				setOwnedInitExpression((ExpCS)null);
+			case QVTimperativeCSPackage.NEW_STATEMENT_CS__OWNED_INIT:
+				setOwnedInit((ExpCS)null);
 				return;
 			case QVTimperativeCSPackage.NEW_STATEMENT_CS__REFERRED_TYPED_MODEL:
 				setReferredTypedModel((TypedModel)null);
@@ -242,8 +242,8 @@ public class NewStatementCSImpl extends TypedElementCSImpl implements NewStateme
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.NEW_STATEMENT_CS__OWNED_INIT_EXPRESSION:
-				return ownedInitExpression != null;
+			case QVTimperativeCSPackage.NEW_STATEMENT_CS__OWNED_INIT:
+				return ownedInit != null;
 			case QVTimperativeCSPackage.NEW_STATEMENT_CS__REFERRED_TYPED_MODEL:
 				return referredTypedModel != null;
 		}

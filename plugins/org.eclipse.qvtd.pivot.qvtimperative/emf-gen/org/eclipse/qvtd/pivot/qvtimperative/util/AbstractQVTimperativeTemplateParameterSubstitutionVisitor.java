@@ -52,28 +52,18 @@ public abstract class AbstractQVTimperativeTemplateParameterSubstitutionVisitor
 	}
 
 	@Override
-	public @Nullable Object visitAssignment(org.eclipse.qvtd.pivot.qvtimperative.@NonNull Assignment object) {
-		return visitElement(object);
-	}
-
-	@Override
-	public @Nullable Object visitBottomPattern(org.eclipse.qvtd.pivot.qvtimperative.@NonNull BottomPattern object) {
-		return visitImperativePattern(object);
-	}
-
-	@Override
-	public @Nullable Object visitBottomStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull BottomStatement object) {
+	public @Nullable Object visitCheckStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull CheckStatement object) {
 		return visitStatement(object);
 	}
 
 	@Override
 	public @Nullable Object visitConnectionVariable(org.eclipse.qvtd.pivot.qvtimperative.@NonNull ConnectionVariable object) {
-		return visitVariable(object);
+		return visitVariableDeclaration(object);
 	}
 
 	@Override
-	public @Nullable Object visitGuardPattern(org.eclipse.qvtd.pivot.qvtimperative.@NonNull GuardPattern object) {
-		return visitImperativePattern(object);
+	public @Nullable Object visitGuardVariable(org.eclipse.qvtd.pivot.qvtimperative.@NonNull GuardVariable object) {
+		return visitVariableDeclaration(object);
 	}
 
 	@Override
@@ -87,8 +77,13 @@ public abstract class AbstractQVTimperativeTemplateParameterSubstitutionVisitor
 	}
 
 	@Override
-	public @Nullable Object visitImperativePattern(org.eclipse.qvtd.pivot.qvtimperative.@NonNull ImperativePattern object) {
-		return visitPattern(object);
+	public @Nullable Object visitInConnectionVariable(org.eclipse.qvtd.pivot.qvtimperative.@NonNull InConnectionVariable object) {
+		return visitConnectionVariable(object);
+	}
+
+	@Override
+	public @Nullable Object visitLoopVariable(org.eclipse.qvtd.pivot.qvtimperative.@NonNull LoopVariable object) {
+		return visitVariableDeclaration(object);
 	}
 
 	@Override
@@ -118,12 +113,22 @@ public abstract class AbstractQVTimperativeTemplateParameterSubstitutionVisitor
 
 	@Override
 	public @Nullable Object visitNewStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull NewStatement object) {
-		return visitVariable(object);
+		return visitVariableStatement(object);
+	}
+
+	@Override
+	public @Nullable Object visitOutConnectionVariable(org.eclipse.qvtd.pivot.qvtimperative.@NonNull OutConnectionVariable object) {
+		return visitConnectionVariable(object);
+	}
+
+	@Override
+	public @Nullable Object visitPredicateVariable(org.eclipse.qvtd.pivot.qvtimperative.@NonNull PredicateVariable object) {
+		return visitVariableStatement(object);
 	}
 
 	@Override
 	public @Nullable Object visitSetStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull SetStatement object) {
-		return visitBottomStatement(object);
+		return visitStatement(object);
 	}
 
 	@Override
@@ -132,12 +137,7 @@ public abstract class AbstractQVTimperativeTemplateParameterSubstitutionVisitor
 	}
 
 	@Override
-	public @Nullable Object visitVariableAssignment(org.eclipse.qvtd.pivot.qvtimperative.@NonNull VariableAssignment object) {
-		return visitAssignment(object);
-	}
-
-	@Override
-	public @Nullable Object visitVariablePredicate(org.eclipse.qvtd.pivot.qvtimperative.@NonNull VariablePredicate object) {
-		return visitPredicate(object);
+	public @Nullable Object visitVariableStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull VariableStatement object) {
+		return visitVariableDeclaration(object);
 	}
 }

@@ -37,16 +37,16 @@ public interface QVTimperativeCSFactory extends EFactory {
 	 * @return a new object of class '<em>Add Statement CS</em>'.
 	 * @generated
 	 */
-	AddStatementCS createAddStatementCS();
+	@NonNull AddStatementCS createAddStatementCS();
 
 	/**
-	 * Returns a new object of class '<em>Bottom Pattern CS</em>'.
+	 * Returns a new object of class '<em>Check Statement CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Bottom Pattern CS</em>'.
+	 * @return a new object of class '<em>Check Statement CS</em>'.
 	 * @generated
 	 */
-	@NonNull BottomPatternCS createBottomPatternCS();
+	@NonNull CheckStatementCS createCheckStatementCS();
 
 	/**
 	 * Returns a new object of class '<em>Direction CS</em>'.
@@ -67,13 +67,22 @@ public interface QVTimperativeCSFactory extends EFactory {
 	@NonNull DomainCS createDomainCS();
 
 	/**
-	 * Returns a new object of class '<em>Guard Pattern CS</em>'.
+	 * Returns a new object of class '<em>Guard Variable CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Guard Pattern CS</em>'.
+	 * @return a new object of class '<em>Guard Variable CS</em>'.
 	 * @generated
 	 */
-	@NonNull GuardPatternCS createGuardPatternCS();
+	@NonNull GuardVariableCS createGuardVariableCS();
+
+	/**
+	 * Returns a new object of class '<em>Inout Variable CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Inout Variable CS</em>'.
+	 * @generated
+	 */
+	@NonNull InoutVariableCS createInoutVariableCS();
 
 	/**
 	 * Returns a new object of class '<em>Mapping CS</em>'.
@@ -121,22 +130,13 @@ public interface QVTimperativeCSFactory extends EFactory {
 	@NonNull ParamDeclarationCS createParamDeclarationCS();
 
 	/**
-	 * Returns a new object of class '<em>Predicate CS</em>'.
+	 * Returns a new object of class '<em>Predicate Variable CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Predicate CS</em>'.
+	 * @return a new object of class '<em>Predicate Variable CS</em>'.
 	 * @generated
 	 */
-	@NonNull PredicateCS createPredicateCS();
-
-	/**
-	 * Returns a new object of class '<em>Predicate Or Assignment CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Predicate Or Assignment CS</em>'.
-	 * @generated
-	 */
-	@NonNull PredicateOrAssignmentCS createPredicateOrAssignmentCS();
+	@NonNull PredicateVariableCS createPredicateVariableCS();
 
 	/**
 	 * Returns a new object of class '<em>Query CS</em>'.
@@ -155,6 +155,15 @@ public interface QVTimperativeCSFactory extends EFactory {
 	 * @generated
 	 */
 	@NonNull NewStatementCS createNewStatementCS();
+
+	/**
+	 * Returns a new object of class '<em>Out Variable CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Out Variable CS</em>'.
+	 * @generated
+	 */
+	@NonNull OutVariableCS createOutVariableCS();
 
 	/**
 	 * Returns a new object of class '<em>Set Statement CS</em>'.
@@ -182,15 +191,6 @@ public interface QVTimperativeCSFactory extends EFactory {
 	 * @generated
 	 */
 	@NonNull TransformationCS createTransformationCS();
-
-	/**
-	 * Returns a new object of class '<em>Unrealized Variable CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Unrealized Variable CS</em>'.
-	 * @generated
-	 */
-	@NonNull UnrealizedVariableCS createUnrealizedVariableCS();
 
 	/**
 	 * Returns the package supported by this factory.

@@ -17,19 +17,16 @@ package org.eclipse.qvtd.pivot.qvtimperative;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Bottom Statement</b></em>'.
+ * A representation of the model object '<em><b>In Connection Variable</b></em>'.
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * A MappingCall specifies the invocation of a referredMapping with a set of bindings
- * of the bound variables of the referredMapping to values provided in the invocation.
- * Where Collections of values are provided for isLoop bindings, a distinct invocation
- * is performed for each distinct permutation of Collection elements.
+ * A ConnectionVariable accumulates one or more assignments.
  * <!-- end-model-doc -->
  *
  *
- * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getBottomStatement()
+ * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getInConnectionVariable()
  * @generated
  */
-public interface BottomStatement extends Statement {
-} // BottomStatement
+public interface InConnectionVariable extends ConnectionVariable {
+} // InConnectionVariable

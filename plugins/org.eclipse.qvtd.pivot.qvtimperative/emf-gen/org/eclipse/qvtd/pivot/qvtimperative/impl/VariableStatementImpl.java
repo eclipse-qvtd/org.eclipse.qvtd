@@ -16,23 +16,25 @@ package org.eclipse.qvtd.pivot.qvtimperative.impl;
 
 import org.eclipse.emf.ecore.EClass;
 
-import org.eclipse.qvtd.pivot.qvtimperative.BottomStatement;
+import org.eclipse.ocl.pivot.internal.VariableDeclarationImpl;
+
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
+import org.eclipse.qvtd.pivot.qvtimperative.VariableStatement;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Bottom Statement</b></em>'.
+ * An implementation of the model object '<em><b>Variable Statement</b></em>'.
  * <!-- end-user-doc -->
  *
  * @generated
  */
-public abstract class BottomStatementImpl extends StatementImpl implements BottomStatement {
+public abstract class VariableStatementImpl extends VariableDeclarationImpl implements VariableStatement {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected BottomStatementImpl() {
+	protected VariableStatementImpl() {
 		super();
 	}
 
@@ -43,8 +45,8 @@ public abstract class BottomStatementImpl extends StatementImpl implements Botto
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return QVTimperativePackage.Literals.BOTTOM_STATEMENT;
+		return QVTimperativePackage.Literals.VARIABLE_STATEMENT;
 	}
 
 
-} //BottomStatementImpl
+} //VariableStatementImpl

@@ -26,7 +26,7 @@ import org.eclipse.ocl.xtext.basecs.PathNameCS;
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS#getOwnedDomains <em>Owned Domains</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS#getOwnedInPathName <em>Owned In Path Name</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS#getOwnedStatements <em>Owned Statements</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS#getOwnedMiddle <em>Owned Middle</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS#getOwnedInoutVariables <em>Owned Inout Variables</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getMappingCS()
@@ -93,29 +93,19 @@ public interface MappingCS extends NamedElementCS {
 	EList<StatementCS> getOwnedStatements();
 
 	/**
-	 * Returns the value of the '<em><b>Owned Middle</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Owned Inout Variables</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.qvtd.xtext.qvtimperativecs.InoutVariableCS}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Owned Middle</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Owned Inout Variables</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Owned Middle</em>' containment reference.
-	 * @see #setOwnedMiddle(DomainCS)
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getMappingCS_OwnedMiddle()
-	 * @model containment="true" required="true"
+	 * @return the value of the '<em>Owned Inout Variables</em>' containment reference list.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getMappingCS_OwnedInoutVariables()
+	 * @model containment="true"
 	 * @generated
 	 */
-	DomainCS getOwnedMiddle();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS#getOwnedMiddle <em>Owned Middle</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Owned Middle</em>' containment reference.
-	 * @see #getOwnedMiddle()
-	 * @generated
-	 */
-	void setOwnedMiddle(DomainCS value);
+	EList<InoutVariableCS> getOwnedInoutVariables();
 
 } // MappingCS

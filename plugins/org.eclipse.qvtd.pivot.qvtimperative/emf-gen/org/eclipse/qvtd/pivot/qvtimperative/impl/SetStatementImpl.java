@@ -16,23 +16,16 @@ package org.eclipse.qvtd.pivot.qvtimperative.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org.eclipse.jdt.annotation.NonNull;
-
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Property;
-import org.eclipse.ocl.pivot.VariableExp;
-
+import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.util.Visitor;
-
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
-
 import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
 
 /**
@@ -43,24 +36,25 @@ import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.SetStatementImpl#getSlotExpression <em>Slot Expression</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.SetStatementImpl#getTargetVariable <em>Target Variable</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.SetStatementImpl#getTargetProperty <em>Target Property</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.SetStatementImpl#getValue <em>Value</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.SetStatementImpl#isIsOpposite <em>Is Opposite</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.SetStatementImpl#isIsEmit <em>Is Emit</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class SetStatementImpl extends BottomStatementImpl implements SetStatement {
+public class SetStatementImpl extends StatementImpl implements SetStatement {
 	/**
-	 * The cached value of the '{@link #getSlotExpression() <em>Slot Expression</em>}' containment reference.
+	 * The cached value of the '{@link #getTargetVariable() <em>Target Variable</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getSlotExpression()
+	 * @see #getTargetVariable()
 	 * @generated
 	 * @ordered
 	 */
-	protected VariableExp slotExpression;
+	protected VariableDeclaration targetVariable;
 
 	/**
 	 * The cached value of the '{@link #getTargetProperty() <em>Target Property</em>}' reference.
@@ -103,13 +97,24 @@ public class SetStatementImpl extends BottomStatementImpl implements SetStatemen
 	protected boolean isOpposite = IS_OPPOSITE_EDEFAULT;
 
 	/**
-	 * This is true if the Is Opposite attribute has been set.
+	 * The default value of the '{@link #isIsEmit() <em>Is Emit</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @see #isIsEmit()
 	 * @generated
 	 * @ordered
 	 */
-	protected boolean isOppositeESet;
+	protected static final boolean IS_EMIT_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isIsEmit() <em>Is Emit</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsEmit()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean isEmit = IS_EMIT_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -136,8 +141,16 @@ public class SetStatementImpl extends BottomStatementImpl implements SetStatemen
 	 * @generated
 	 */
 	@Override
-	public VariableExp getSlotExpression() {
-		return slotExpression;
+	public VariableDeclaration getTargetVariable() {
+		if (targetVariable != null && targetVariable.eIsProxy()) {
+			InternalEObject oldTargetVariable = (InternalEObject)targetVariable;
+			targetVariable = (VariableDeclaration)eResolveProxy(oldTargetVariable);
+			if (targetVariable != oldTargetVariable) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTimperativePackage.SET_STATEMENT__TARGET_VARIABLE, oldTargetVariable, targetVariable));
+			}
+		}
+		return targetVariable;
 	}
 
 	/**
@@ -145,14 +158,8 @@ public class SetStatementImpl extends BottomStatementImpl implements SetStatemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetSlotExpression(VariableExp newSlotExpression, NotificationChain msgs) {
-		VariableExp oldSlotExpression = slotExpression;
-		slotExpression = newSlotExpression;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTimperativePackage.SET_STATEMENT__SLOT_EXPRESSION, oldSlotExpression, newSlotExpression);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
+	public VariableDeclaration basicGetTargetVariable() {
+		return targetVariable;
 	}
 
 	/**
@@ -161,18 +168,11 @@ public class SetStatementImpl extends BottomStatementImpl implements SetStatemen
 	 * @generated
 	 */
 	@Override
-	public void setSlotExpression(VariableExp newSlotExpression) {
-		if (newSlotExpression != slotExpression) {
-			NotificationChain msgs = null;
-			if (slotExpression != null)
-				msgs = ((InternalEObject)slotExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTimperativePackage.SET_STATEMENT__SLOT_EXPRESSION, null, msgs);
-			if (newSlotExpression != null)
-				msgs = ((InternalEObject)newSlotExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTimperativePackage.SET_STATEMENT__SLOT_EXPRESSION, null, msgs);
-			msgs = basicSetSlotExpression(newSlotExpression, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.SET_STATEMENT__SLOT_EXPRESSION, newSlotExpression, newSlotExpression));
+	public void setTargetVariable(VariableDeclaration newTargetVariable) {
+		VariableDeclaration oldTargetVariable = targetVariable;
+		targetVariable = newTargetVariable;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.SET_STATEMENT__TARGET_VARIABLE, oldTargetVariable, targetVariable));
 	}
 
 	/**
@@ -279,10 +279,8 @@ public class SetStatementImpl extends BottomStatementImpl implements SetStatemen
 	public void setIsOpposite(boolean newIsOpposite) {
 		boolean oldIsOpposite = isOpposite;
 		isOpposite = newIsOpposite;
-		boolean oldIsOppositeESet = isOppositeESet;
-		isOppositeESet = true;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.SET_STATEMENT__IS_OPPOSITE, oldIsOpposite, isOpposite, !oldIsOppositeESet));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.SET_STATEMENT__IS_OPPOSITE, oldIsOpposite, isOpposite));
 	}
 
 	/**
@@ -291,13 +289,8 @@ public class SetStatementImpl extends BottomStatementImpl implements SetStatemen
 	 * @generated
 	 */
 	@Override
-	public void unsetIsOpposite() {
-		boolean oldIsOpposite = isOpposite;
-		boolean oldIsOppositeESet = isOppositeESet;
-		isOpposite = IS_OPPOSITE_EDEFAULT;
-		isOppositeESet = false;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.UNSET, QVTimperativePackage.SET_STATEMENT__IS_OPPOSITE, oldIsOpposite, IS_OPPOSITE_EDEFAULT, oldIsOppositeESet));
+	public boolean isIsEmit() {
+		return isEmit;
 	}
 
 	/**
@@ -306,8 +299,11 @@ public class SetStatementImpl extends BottomStatementImpl implements SetStatemen
 	 * @generated
 	 */
 	@Override
-	public boolean isSetIsOpposite() {
-		return isOppositeESet;
+	public void setIsEmit(boolean newIsEmit) {
+		boolean oldIsEmit = isEmit;
+		isEmit = newIsEmit;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.SET_STATEMENT__IS_EMIT, oldIsEmit, isEmit));
 	}
 
 	/**
@@ -328,8 +324,6 @@ public class SetStatementImpl extends BottomStatementImpl implements SetStatemen
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTimperativePackage.SET_STATEMENT__SLOT_EXPRESSION:
-				return basicSetSlotExpression(null, msgs);
 			case QVTimperativePackage.SET_STATEMENT__VALUE:
 				return basicSetValue(null, msgs);
 		}
@@ -344,8 +338,9 @@ public class SetStatementImpl extends BottomStatementImpl implements SetStatemen
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTimperativePackage.SET_STATEMENT__SLOT_EXPRESSION:
-				return getSlotExpression();
+			case QVTimperativePackage.SET_STATEMENT__TARGET_VARIABLE:
+				if (resolve) return getTargetVariable();
+				return basicGetTargetVariable();
 			case QVTimperativePackage.SET_STATEMENT__TARGET_PROPERTY:
 				if (resolve) return getTargetProperty();
 				return basicGetTargetProperty();
@@ -353,6 +348,8 @@ public class SetStatementImpl extends BottomStatementImpl implements SetStatemen
 				return getValue();
 			case QVTimperativePackage.SET_STATEMENT__IS_OPPOSITE:
 				return isIsOpposite();
+			case QVTimperativePackage.SET_STATEMENT__IS_EMIT:
+				return isIsEmit();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -365,8 +362,8 @@ public class SetStatementImpl extends BottomStatementImpl implements SetStatemen
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTimperativePackage.SET_STATEMENT__SLOT_EXPRESSION:
-				setSlotExpression((VariableExp)newValue);
+			case QVTimperativePackage.SET_STATEMENT__TARGET_VARIABLE:
+				setTargetVariable((VariableDeclaration)newValue);
 				return;
 			case QVTimperativePackage.SET_STATEMENT__TARGET_PROPERTY:
 				setTargetProperty((Property)newValue);
@@ -376,6 +373,9 @@ public class SetStatementImpl extends BottomStatementImpl implements SetStatemen
 				return;
 			case QVTimperativePackage.SET_STATEMENT__IS_OPPOSITE:
 				setIsOpposite((Boolean)newValue);
+				return;
+			case QVTimperativePackage.SET_STATEMENT__IS_EMIT:
+				setIsEmit((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -389,8 +389,8 @@ public class SetStatementImpl extends BottomStatementImpl implements SetStatemen
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTimperativePackage.SET_STATEMENT__SLOT_EXPRESSION:
-				setSlotExpression((VariableExp)null);
+			case QVTimperativePackage.SET_STATEMENT__TARGET_VARIABLE:
+				setTargetVariable((VariableDeclaration)null);
 				return;
 			case QVTimperativePackage.SET_STATEMENT__TARGET_PROPERTY:
 				setTargetProperty((Property)null);
@@ -399,7 +399,10 @@ public class SetStatementImpl extends BottomStatementImpl implements SetStatemen
 				setValue((OCLExpression)null);
 				return;
 			case QVTimperativePackage.SET_STATEMENT__IS_OPPOSITE:
-				unsetIsOpposite();
+				setIsOpposite(IS_OPPOSITE_EDEFAULT);
+				return;
+			case QVTimperativePackage.SET_STATEMENT__IS_EMIT:
+				setIsEmit(IS_EMIT_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -413,14 +416,16 @@ public class SetStatementImpl extends BottomStatementImpl implements SetStatemen
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTimperativePackage.SET_STATEMENT__SLOT_EXPRESSION:
-				return slotExpression != null;
+			case QVTimperativePackage.SET_STATEMENT__TARGET_VARIABLE:
+				return targetVariable != null;
 			case QVTimperativePackage.SET_STATEMENT__TARGET_PROPERTY:
 				return targetProperty != null;
 			case QVTimperativePackage.SET_STATEMENT__VALUE:
 				return value != null;
 			case QVTimperativePackage.SET_STATEMENT__IS_OPPOSITE:
-				return isSetIsOpposite();
+				return isOpposite != IS_OPPOSITE_EDEFAULT;
+			case QVTimperativePackage.SET_STATEMENT__IS_EMIT:
+				return isEmit != IS_EMIT_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}

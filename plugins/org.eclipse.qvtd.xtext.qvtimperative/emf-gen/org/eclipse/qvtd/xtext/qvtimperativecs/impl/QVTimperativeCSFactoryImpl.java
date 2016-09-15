@@ -17,25 +17,25 @@ import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.qvtd.xtext.qvtimperativecs.AddStatementCS;
-import org.eclipse.qvtd.xtext.qvtimperativecs.BottomPatternCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.CheckStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DomainCS;
-import org.eclipse.qvtd.xtext.qvtimperativecs.GuardPatternCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.GuardVariableCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.InoutVariableCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingLoopCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.NewStatementCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.OutVariableCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.ParamDeclarationCS;
-import org.eclipse.qvtd.xtext.qvtimperativecs.PredicateCS;
-import org.eclipse.qvtd.xtext.qvtimperativecs.PredicateOrAssignmentCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.PredicateVariableCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSFactory;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QueryCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.SetStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.TopLevelCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.TransformationCS;
-import org.eclipse.qvtd.xtext.qvtimperativecs.UnrealizedVariableCS;
 
 /**
  * <!-- begin-user-doc -->
@@ -82,23 +82,23 @@ public class QVTimperativeCSFactoryImpl extends EFactoryImpl implements QVTimper
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case QVTimperativeCSPackage.ADD_STATEMENT_CS: return createAddStatementCS();
-			case QVTimperativeCSPackage.BOTTOM_PATTERN_CS: return createBottomPatternCS();
+			case QVTimperativeCSPackage.CHECK_STATEMENT_CS: return createCheckStatementCS();
 			case QVTimperativeCSPackage.DIRECTION_CS: return createDirectionCS();
 			case QVTimperativeCSPackage.DOMAIN_CS: return createDomainCS();
-			case QVTimperativeCSPackage.GUARD_PATTERN_CS: return createGuardPatternCS();
+			case QVTimperativeCSPackage.GUARD_VARIABLE_CS: return createGuardVariableCS();
+			case QVTimperativeCSPackage.INOUT_VARIABLE_CS: return createInoutVariableCS();
 			case QVTimperativeCSPackage.MAPPING_CS: return createMappingCS();
 			case QVTimperativeCSPackage.MAPPING_CALL_BINDING_CS: return createMappingCallBindingCS();
 			case QVTimperativeCSPackage.MAPPING_CALL_CS: return createMappingCallCS();
 			case QVTimperativeCSPackage.MAPPING_LOOP_CS: return createMappingLoopCS();
-			case QVTimperativeCSPackage.PARAM_DECLARATION_CS: return createParamDeclarationCS();
-			case QVTimperativeCSPackage.PREDICATE_CS: return createPredicateCS();
-			case QVTimperativeCSPackage.PREDICATE_OR_ASSIGNMENT_CS: return createPredicateOrAssignmentCS();
-			case QVTimperativeCSPackage.QUERY_CS: return createQueryCS();
 			case QVTimperativeCSPackage.NEW_STATEMENT_CS: return createNewStatementCS();
+			case QVTimperativeCSPackage.OUT_VARIABLE_CS: return createOutVariableCS();
+			case QVTimperativeCSPackage.PARAM_DECLARATION_CS: return createParamDeclarationCS();
+			case QVTimperativeCSPackage.PREDICATE_VARIABLE_CS: return createPredicateVariableCS();
+			case QVTimperativeCSPackage.QUERY_CS: return createQueryCS();
 			case QVTimperativeCSPackage.SET_STATEMENT_CS: return createSetStatementCS();
 			case QVTimperativeCSPackage.TOP_LEVEL_CS: return createTopLevelCS();
 			case QVTimperativeCSPackage.TRANSFORMATION_CS: return createTransformationCS();
-			case QVTimperativeCSPackage.UNREALIZED_VARIABLE_CS: return createUnrealizedVariableCS();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -110,7 +110,7 @@ public class QVTimperativeCSFactoryImpl extends EFactoryImpl implements QVTimper
 	 * @generated
 	 */
 	@Override
-	public AddStatementCS createAddStatementCS() {
+	public @NonNull AddStatementCS createAddStatementCS() {
 		AddStatementCSImpl addStatementCS = new AddStatementCSImpl();
 		return addStatementCS;
 	}
@@ -121,9 +121,9 @@ public class QVTimperativeCSFactoryImpl extends EFactoryImpl implements QVTimper
 	 * @generated
 	 */
 	@Override
-	public @NonNull BottomPatternCS createBottomPatternCS() {
-		BottomPatternCSImpl bottomPatternCS = new BottomPatternCSImpl();
-		return bottomPatternCS;
+	public @NonNull CheckStatementCS createCheckStatementCS() {
+		CheckStatementCSImpl checkStatementCS = new CheckStatementCSImpl();
+		return checkStatementCS;
 	}
 
 	/**
@@ -154,9 +154,20 @@ public class QVTimperativeCSFactoryImpl extends EFactoryImpl implements QVTimper
 	 * @generated
 	 */
 	@Override
-	public @NonNull GuardPatternCS createGuardPatternCS() {
-		GuardPatternCSImpl guardPatternCS = new GuardPatternCSImpl();
-		return guardPatternCS;
+	public @NonNull GuardVariableCS createGuardVariableCS() {
+		GuardVariableCSImpl guardVariableCS = new GuardVariableCSImpl();
+		return guardVariableCS;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public @NonNull InoutVariableCS createInoutVariableCS() {
+		InoutVariableCSImpl inoutVariableCS = new InoutVariableCSImpl();
+		return inoutVariableCS;
 	}
 
 	/**
@@ -220,20 +231,9 @@ public class QVTimperativeCSFactoryImpl extends EFactoryImpl implements QVTimper
 	 * @generated
 	 */
 	@Override
-	public @NonNull PredicateCS createPredicateCS() {
-		PredicateCSImpl predicateCS = new PredicateCSImpl();
-		return predicateCS;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public @NonNull PredicateOrAssignmentCS createPredicateOrAssignmentCS() {
-		PredicateOrAssignmentCSImpl predicateOrAssignmentCS = new PredicateOrAssignmentCSImpl();
-		return predicateOrAssignmentCS;
+	public @NonNull PredicateVariableCS createPredicateVariableCS() {
+		PredicateVariableCSImpl predicateVariableCS = new PredicateVariableCSImpl();
+		return predicateVariableCS;
 	}
 
 	/**
@@ -256,6 +256,17 @@ public class QVTimperativeCSFactoryImpl extends EFactoryImpl implements QVTimper
 	public @NonNull NewStatementCS createNewStatementCS() {
 		NewStatementCSImpl newStatementCS = new NewStatementCSImpl();
 		return newStatementCS;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public @NonNull OutVariableCS createOutVariableCS() {
+		OutVariableCSImpl outVariableCS = new OutVariableCSImpl();
+		return outVariableCS;
 	}
 
 	/**
@@ -289,17 +300,6 @@ public class QVTimperativeCSFactoryImpl extends EFactoryImpl implements QVTimper
 	public @NonNull TransformationCS createTransformationCS() {
 		TransformationCSImpl transformationCS = new TransformationCSImpl();
 		return transformationCS;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public @NonNull UnrealizedVariableCS createUnrealizedVariableCS() {
-		UnrealizedVariableCSImpl unrealizedVariableCS = new UnrealizedVariableCSImpl();
-		return unrealizedVariableCS;
 	}
 
 	/**

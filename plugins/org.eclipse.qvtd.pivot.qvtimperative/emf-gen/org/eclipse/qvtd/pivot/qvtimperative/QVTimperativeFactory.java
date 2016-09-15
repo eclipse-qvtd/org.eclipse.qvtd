@@ -37,34 +37,25 @@ public interface QVTimperativeFactory extends EFactory {
 	 * @return a new object of class '<em>Add Statement</em>'.
 	 * @generated
 	 */
-	AddStatement createAddStatement();
+	@NonNull AddStatement createAddStatement();
 
 	/**
-	 * Returns a new object of class '<em>Bottom Pattern</em>'.
+	 * Returns a new object of class '<em>Check Statement</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Bottom Pattern</em>'.
+	 * @return a new object of class '<em>Check Statement</em>'.
 	 * @generated
 	 */
-	@NonNull BottomPattern createBottomPattern();
+	@NonNull CheckStatement createCheckStatement();
 
 	/**
-	 * Returns a new object of class '<em>Connection Variable</em>'.
+	 * Returns a new object of class '<em>Guard Variable</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Connection Variable</em>'.
+	 * @return a new object of class '<em>Guard Variable</em>'.
 	 * @generated
 	 */
-	@NonNull ConnectionVariable createConnectionVariable();
-
-	/**
-	 * Returns a new object of class '<em>Guard Pattern</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Guard Pattern</em>'.
-	 * @generated
-	 */
-	@NonNull GuardPattern createGuardPattern();
+	@NonNull GuardVariable createGuardVariable();
 
 	/**
 	 * Returns a new object of class '<em>Imperative Domain</em>'.
@@ -85,13 +76,22 @@ public interface QVTimperativeFactory extends EFactory {
 	@NonNull ImperativeModel createImperativeModel();
 
 	/**
-	 * Returns a new object of class '<em>Imperative Pattern</em>'.
+	 * Returns a new object of class '<em>In Connection Variable</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Imperative Pattern</em>'.
+	 * @return a new object of class '<em>In Connection Variable</em>'.
 	 * @generated
 	 */
-	@NonNull ImperativePattern createImperativePattern();
+	@NonNull InConnectionVariable createInConnectionVariable();
+
+	/**
+	 * Returns a new object of class '<em>Loop Variable</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Loop Variable</em>'.
+	 * @generated
+	 */
+	@NonNull LoopVariable createLoopVariable();
 
 	/**
 	 * Returns a new object of class '<em>Mapping</em>'.
@@ -139,6 +139,24 @@ public interface QVTimperativeFactory extends EFactory {
 	@NonNull NewStatement createNewStatement();
 
 	/**
+	 * Returns a new object of class '<em>Out Connection Variable</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Out Connection Variable</em>'.
+	 * @generated
+	 */
+	@NonNull OutConnectionVariable createOutConnectionVariable();
+
+	/**
+	 * Returns a new object of class '<em>Predicate Variable</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Predicate Variable</em>'.
+	 * @generated
+	 */
+	@NonNull PredicateVariable createPredicateVariable();
+
+	/**
 	 * Returns a new object of class '<em>Set Statement</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -146,24 +164,6 @@ public interface QVTimperativeFactory extends EFactory {
 	 * @generated
 	 */
 	@NonNull SetStatement createSetStatement();
-
-	/**
-	 * Returns a new object of class '<em>Variable Assignment</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Variable Assignment</em>'.
-	 * @generated
-	 */
-	@NonNull VariableAssignment createVariableAssignment();
-
-	/**
-	 * Returns a new object of class '<em>Variable Predicate</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Variable Predicate</em>'.
-	 * @generated
-	 */
-	@NonNull VariablePredicate createVariablePredicate();
 
 	/**
 	 * Returns the package supported by this factory.

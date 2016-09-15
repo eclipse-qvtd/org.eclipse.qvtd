@@ -1,22 +1,21 @@
 /**
  * <copyright>
- * 
+ *
  * Copyright (c) 2013, 2017 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
- * 
+ *
  * </copyright>
  */
 package org.eclipse.qvtd.xtext.qvtimperativecs;
 
 import org.eclipse.ocl.pivot.Property;
-import org.eclipse.ocl.pivot.Variable;
-
+import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
 
 /**
@@ -30,7 +29,8 @@ import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.SetStatementCS#getReferredProperty <em>Referred Property</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.SetStatementCS#getReferredVariable <em>Referred Variable</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.SetStatementCS#getOwnedInitExpression <em>Owned Init Expression</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.SetStatementCS#getOwnedInit <em>Owned Init</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.SetStatementCS#isIsEmit <em>Is Emit</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getSetStatementCS()
@@ -73,12 +73,12 @@ public interface SetStatementCS extends StatementCS {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Referred Variable</em>' reference.
-	 * @see #setReferredVariable(Variable)
+	 * @see #setReferredVariable(VariableDeclaration)
 	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getSetStatementCS_ReferredVariable()
 	 * @model required="true"
 	 * @generated
 	 */
-	Variable getReferredVariable();
+	VariableDeclaration getReferredVariable();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.SetStatementCS#getReferredVariable <em>Referred Variable</em>}' reference.
@@ -88,32 +88,59 @@ public interface SetStatementCS extends StatementCS {
 	 * @see #getReferredVariable()
 	 * @generated
 	 */
-	void setReferredVariable(Variable value);
+	void setReferredVariable(VariableDeclaration value);
 
 	/**
-	 * Returns the value of the '<em><b>Owned Init Expression</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Owned Init</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Owned Init Expression</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Owned Init</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Owned Init Expression</em>' containment reference.
-	 * @see #setOwnedInitExpression(ExpCS)
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getSetStatementCS_OwnedInitExpression()
+	 * @return the value of the '<em>Owned Init</em>' containment reference.
+	 * @see #setOwnedInit(ExpCS)
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getSetStatementCS_OwnedInit()
 	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	ExpCS getOwnedInitExpression();
+	ExpCS getOwnedInit();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.SetStatementCS#getOwnedInitExpression <em>Owned Init Expression</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.SetStatementCS#getOwnedInit <em>Owned Init</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Owned Init Expression</em>' containment reference.
-	 * @see #getOwnedInitExpression()
+	 * @param value the new value of the '<em>Owned Init</em>' containment reference.
+	 * @see #getOwnedInit()
 	 * @generated
 	 */
-	void setOwnedInitExpression(ExpCS value);
+	void setOwnedInit(ExpCS value);
+
+	/**
+	 * Returns the value of the '<em><b>Is Emit</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Is Emit</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Is Emit</em>' attribute.
+	 * @see #setIsEmit(boolean)
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getSetStatementCS_IsEmit()
+	 * @model default="false"
+	 * @generated
+	 */
+	boolean isIsEmit();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.SetStatementCS#isIsEmit <em>Is Emit</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Is Emit</em>' attribute.
+	 * @see #isIsEmit()
+	 * @generated
+	 */
+	void setIsEmit(boolean value);
 
 } // SetStatementCS

@@ -19,11 +19,12 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.OCLExpression;
-import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.util.Visitor;
+import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
@@ -53,7 +54,7 @@ public class MappingLoopImpl extends MappingStatementImpl implements MappingLoop
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Variable> ownedIterators;
+	protected EList<LoopVariable> ownedIterators;
 
 	/**
 	 * The cached value of the '{@link #getOwnedMappingStatements() <em>Owned Mapping Statements</em>}' containment reference list.
@@ -100,9 +101,9 @@ public class MappingLoopImpl extends MappingStatementImpl implements MappingLoop
 	 * @generated
 	 */
 	@Override
-	public EList<Variable> getOwnedIterators() {
+	public EList<LoopVariable> getOwnedIterators() {
 		if (ownedIterators == null) {
-			ownedIterators = new EObjectContainmentEList<Variable>(Variable.class, this, QVTimperativePackage.MAPPING_LOOP__OWNED_ITERATORS);
+			ownedIterators = new EObjectContainmentWithInverseEList<LoopVariable>(LoopVariable.class, this, QVTimperativePackage.MAPPING_LOOP__OWNED_ITERATORS, QVTimperativePackage.LOOP_VARIABLE__OWNING_MAPPING_LOOP);
 		}
 		return ownedIterators;
 	}
@@ -170,6 +171,21 @@ public class MappingLoopImpl extends MappingStatementImpl implements MappingLoop
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case QVTimperativePackage.MAPPING_LOOP__OWNED_ITERATORS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedIterators()).basicAdd(otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -212,7 +228,7 @@ public class MappingLoopImpl extends MappingStatementImpl implements MappingLoop
 		switch (featureID) {
 			case QVTimperativePackage.MAPPING_LOOP__OWNED_ITERATORS:
 				getOwnedIterators().clear();
-				getOwnedIterators().addAll((Collection<? extends Variable>)newValue);
+				getOwnedIterators().addAll((Collection<? extends LoopVariable>)newValue);
 				return;
 			case QVTimperativePackage.MAPPING_LOOP__OWNED_MAPPING_STATEMENTS:
 				getOwnedMappingStatements().clear();

@@ -18,7 +18,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.OCLExpression;
-import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.internal.ElementImpl;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
@@ -51,7 +51,7 @@ public class MappingCallBindingImpl extends ElementImpl implements MappingCallBi
 	 * @generated
 	 * @ordered
 	 */
-	protected Variable boundVariable;
+	protected VariableDeclaration boundVariable;
 
 	/**
 	 * The default value of the '{@link #isIsPolled() <em>Is Polled</em>}' attribute.
@@ -72,15 +72,6 @@ public class MappingCallBindingImpl extends ElementImpl implements MappingCallBi
 	 * @ordered
 	 */
 	protected boolean isPolled = IS_POLLED_EDEFAULT;
-
-	/**
-	 * This is true if the Is Polled attribute has been set.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean isPolledESet;
 
 	/**
 	 * The cached value of the '{@link #getValue() <em>Value</em>}' containment reference.
@@ -160,10 +151,10 @@ public class MappingCallBindingImpl extends ElementImpl implements MappingCallBi
 	 * @generated
 	 */
 	@Override
-	public Variable getBoundVariable() {
+	public VariableDeclaration getBoundVariable() {
 		if (boundVariable != null && boundVariable.eIsProxy()) {
 			InternalEObject oldBoundVariable = (InternalEObject)boundVariable;
-			boundVariable = (Variable)eResolveProxy(oldBoundVariable);
+			boundVariable = (VariableDeclaration)eResolveProxy(oldBoundVariable);
 			if (boundVariable != oldBoundVariable) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTimperativePackage.MAPPING_CALL_BINDING__BOUND_VARIABLE, oldBoundVariable, boundVariable));
@@ -177,7 +168,7 @@ public class MappingCallBindingImpl extends ElementImpl implements MappingCallBi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Variable basicGetBoundVariable() {
+	public VariableDeclaration basicGetBoundVariable() {
 		return boundVariable;
 	}
 
@@ -187,8 +178,8 @@ public class MappingCallBindingImpl extends ElementImpl implements MappingCallBi
 	 * @generated
 	 */
 	@Override
-	public void setBoundVariable(Variable newBoundVariable) {
-		Variable oldBoundVariable = boundVariable;
+	public void setBoundVariable(VariableDeclaration newBoundVariable) {
+		VariableDeclaration oldBoundVariable = boundVariable;
 		boundVariable = newBoundVariable;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.MAPPING_CALL_BINDING__BOUND_VARIABLE, oldBoundVariable, boundVariable));
@@ -213,35 +204,8 @@ public class MappingCallBindingImpl extends ElementImpl implements MappingCallBi
 	public void setIsPolled(boolean newIsPolled) {
 		boolean oldIsPolled = isPolled;
 		isPolled = newIsPolled;
-		boolean oldIsPolledESet = isPolledESet;
-		isPolledESet = true;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.MAPPING_CALL_BINDING__IS_POLLED, oldIsPolled, isPolled, !oldIsPolledESet));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void unsetIsPolled() {
-		boolean oldIsPolled = isPolled;
-		boolean oldIsPolledESet = isPolledESet;
-		isPolled = IS_POLLED_EDEFAULT;
-		isPolledESet = false;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.UNSET, QVTimperativePackage.MAPPING_CALL_BINDING__IS_POLLED, oldIsPolled, IS_POLLED_EDEFAULT, oldIsPolledESet));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public boolean isSetIsPolled() {
-		return isPolledESet;
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.MAPPING_CALL_BINDING__IS_POLLED, oldIsPolled, isPolled));
 	}
 
 	/**
@@ -375,7 +339,7 @@ public class MappingCallBindingImpl extends ElementImpl implements MappingCallBi
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case QVTimperativePackage.MAPPING_CALL_BINDING__BOUND_VARIABLE:
-				setBoundVariable((Variable)newValue);
+				setBoundVariable((VariableDeclaration)newValue);
 				return;
 			case QVTimperativePackage.MAPPING_CALL_BINDING__IS_POLLED:
 				setIsPolled((Boolean)newValue);
@@ -399,10 +363,10 @@ public class MappingCallBindingImpl extends ElementImpl implements MappingCallBi
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case QVTimperativePackage.MAPPING_CALL_BINDING__BOUND_VARIABLE:
-				setBoundVariable((Variable)null);
+				setBoundVariable((VariableDeclaration)null);
 				return;
 			case QVTimperativePackage.MAPPING_CALL_BINDING__IS_POLLED:
-				unsetIsPolled();
+				setIsPolled(IS_POLLED_EDEFAULT);
 				return;
 			case QVTimperativePackage.MAPPING_CALL_BINDING__MAPPING_CALL:
 				setMappingCall((MappingCall)null);
@@ -425,7 +389,7 @@ public class MappingCallBindingImpl extends ElementImpl implements MappingCallBi
 			case QVTimperativePackage.MAPPING_CALL_BINDING__BOUND_VARIABLE:
 				return boundVariable != null;
 			case QVTimperativePackage.MAPPING_CALL_BINDING__IS_POLLED:
-				return isSetIsPolled();
+				return isPolled != IS_POLLED_EDEFAULT;
 			case QVTimperativePackage.MAPPING_CALL_BINDING__MAPPING_CALL:
 				return getMappingCall() != null;
 			case QVTimperativePackage.MAPPING_CALL_BINDING__VALUE:

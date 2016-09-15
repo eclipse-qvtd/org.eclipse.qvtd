@@ -49,13 +49,8 @@ public abstract class AbstractQVTimperativeCSLeft2RightVisitor
 	}
 
 	@Override
-	public @Nullable Element visitAreaCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull AreaCS csElement) {
-		return visitNamedElementCS(csElement);
-	}
-
-	@Override
-	public @Nullable Element visitBottomPatternCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull BottomPatternCS csElement) {
-		return visitPatternCS(csElement);
+	public @Nullable Element visitCheckStatementCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull CheckStatementCS csElement) {
+		return visitStatementCS(csElement);
 	}
 
 	@Override
@@ -65,12 +60,17 @@ public abstract class AbstractQVTimperativeCSLeft2RightVisitor
 
 	@Override
 	public @Nullable Element visitDomainCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull DomainCS csElement) {
-		return visitAreaCS(csElement);
+		return visitNamedElementCS(csElement);
 	}
 
 	@Override
-	public @Nullable Element visitGuardPatternCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull GuardPatternCS csElement) {
-		return visitPatternCS(csElement);
+	public @Nullable Element visitGuardVariableCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull GuardVariableCS csElement) {
+		return visitTypedElementCS(csElement);
+	}
+
+	@Override
+	public @Nullable Element visitInoutVariableCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull InoutVariableCS csElement) {
+		return visitTypedElementCS(csElement);
 	}
 
 	@Override
@@ -104,23 +104,18 @@ public abstract class AbstractQVTimperativeCSLeft2RightVisitor
 	}
 
 	@Override
+	public @Nullable Element visitOutVariableCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull OutVariableCS csElement) {
+		return visitTypedElementCS(csElement);
+	}
+
+	@Override
 	public @Nullable Element visitParamDeclarationCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull ParamDeclarationCS csElement) {
 		return visitTypedElementCS(csElement);
 	}
 
 	@Override
-	public @Nullable Element visitPatternCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull PatternCS csElement) {
-		return visitModelElementCS(csElement);
-	}
-
-	@Override
-	public @Nullable Element visitPredicateCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull PredicateCS csElement) {
-		return visitExpCS(csElement);
-	}
-
-	@Override
-	public @Nullable Element visitPredicateOrAssignmentCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull PredicateOrAssignmentCS csElement) {
-		return visitExpCS(csElement);
+	public @Nullable Element visitPredicateVariableCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull PredicateVariableCS csElement) {
+		return visitTypedElementCS(csElement);
 	}
 
 	@Override
@@ -146,10 +141,5 @@ public abstract class AbstractQVTimperativeCSLeft2RightVisitor
 	@Override
 	public @Nullable Element visitTransformationCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull TransformationCS csElement) {
 		return visitAbstractTransformationCS(csElement);
-	}
-
-	@Override
-	public @Nullable Element visitUnrealizedVariableCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull UnrealizedVariableCS csElement) {
-		return visitTypedElementCS(csElement);
 	}
 }

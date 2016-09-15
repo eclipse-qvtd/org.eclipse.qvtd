@@ -12,59 +12,50 @@
  *
  * </copyright>
  */
-package org.eclipse.qvtd.xtext.qvtimperativecs.impl;
+package org.eclipse.qvtd.pivot.qvtimperative.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org.eclipse.jdt.annotation.NonNull;
-
-import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
-
-import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
-
-import org.eclipse.ocl.xtext.essentialoclcs.impl.ExpCSImpl;
-
-import org.eclipse.qvtd.xtext.qvtimperativecs.PredicateCS;
-import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage;
-
-import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
+import org.eclipse.ocl.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.util.Visitor;
+import org.eclipse.qvtd.pivot.qvtimperative.CheckStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
+import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Predicate CS</b></em>'.
+ * An implementation of the model object '<em><b>Check Statement</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.PredicateCSImpl#getOwnedCondition <em>Owned Condition</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.CheckStatementImpl#getConditionExpression <em>Condition Expression</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class PredicateCSImpl extends ExpCSImpl implements PredicateCS {
+public class CheckStatementImpl extends StatementImpl implements CheckStatement {
 	/**
-	 * The cached value of the '{@link #getOwnedCondition() <em>Owned Condition</em>}' containment reference.
+	 * The cached value of the '{@link #getConditionExpression() <em>Condition Expression</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getOwnedCondition()
+	 * @see #getConditionExpression()
 	 * @generated
 	 * @ordered
 	 */
-	protected ExpCS ownedCondition;
+	protected OCLExpression conditionExpression;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected PredicateCSImpl() {
+	protected CheckStatementImpl() {
 		super();
 	}
 
@@ -75,7 +66,7 @@ public class PredicateCSImpl extends ExpCSImpl implements PredicateCS {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return QVTimperativeCSPackage.Literals.PREDICATE_CS;
+		return QVTimperativePackage.Literals.CHECK_STATEMENT;
 	}
 
 	/**
@@ -84,8 +75,8 @@ public class PredicateCSImpl extends ExpCSImpl implements PredicateCS {
 	 * @generated
 	 */
 	@Override
-	public ExpCS getOwnedCondition() {
-		return ownedCondition;
+	public OCLExpression getConditionExpression() {
+		return conditionExpression;
 	}
 
 	/**
@@ -93,11 +84,11 @@ public class PredicateCSImpl extends ExpCSImpl implements PredicateCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetOwnedCondition(ExpCS newOwnedCondition, NotificationChain msgs) {
-		ExpCS oldOwnedCondition = ownedCondition;
-		ownedCondition = newOwnedCondition;
+	public NotificationChain basicSetConditionExpression(OCLExpression newConditionExpression, NotificationChain msgs) {
+		OCLExpression oldConditionExpression = conditionExpression;
+		conditionExpression = newConditionExpression;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.PREDICATE_CS__OWNED_CONDITION, oldOwnedCondition, newOwnedCondition);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTimperativePackage.CHECK_STATEMENT__CONDITION_EXPRESSION, oldConditionExpression, newConditionExpression);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -109,18 +100,18 @@ public class PredicateCSImpl extends ExpCSImpl implements PredicateCS {
 	 * @generated
 	 */
 	@Override
-	public void setOwnedCondition(ExpCS newOwnedCondition) {
-		if (newOwnedCondition != ownedCondition) {
+	public void setConditionExpression(OCLExpression newConditionExpression) {
+		if (newConditionExpression != conditionExpression) {
 			NotificationChain msgs = null;
-			if (ownedCondition != null)
-				msgs = ((InternalEObject)ownedCondition).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTimperativeCSPackage.PREDICATE_CS__OWNED_CONDITION, null, msgs);
-			if (newOwnedCondition != null)
-				msgs = ((InternalEObject)newOwnedCondition).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTimperativeCSPackage.PREDICATE_CS__OWNED_CONDITION, null, msgs);
-			msgs = basicSetOwnedCondition(newOwnedCondition, msgs);
+			if (conditionExpression != null)
+				msgs = ((InternalEObject)conditionExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTimperativePackage.CHECK_STATEMENT__CONDITION_EXPRESSION, null, msgs);
+			if (newConditionExpression != null)
+				msgs = ((InternalEObject)newConditionExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTimperativePackage.CHECK_STATEMENT__CONDITION_EXPRESSION, null, msgs);
+			msgs = basicSetConditionExpression(newConditionExpression, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.PREDICATE_CS__OWNED_CONDITION, newOwnedCondition, newOwnedCondition));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.CHECK_STATEMENT__CONDITION_EXPRESSION, newConditionExpression, newConditionExpression));
 	}
 
 	/**
@@ -131,8 +122,8 @@ public class PredicateCSImpl extends ExpCSImpl implements PredicateCS {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.PREDICATE_CS__OWNED_CONDITION:
-				return basicSetOwnedCondition(null, msgs);
+			case QVTimperativePackage.CHECK_STATEMENT__CONDITION_EXPRESSION:
+				return basicSetConditionExpression(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -145,8 +136,8 @@ public class PredicateCSImpl extends ExpCSImpl implements PredicateCS {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.PREDICATE_CS__OWNED_CONDITION:
-				return getOwnedCondition();
+			case QVTimperativePackage.CHECK_STATEMENT__CONDITION_EXPRESSION:
+				return getConditionExpression();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -159,8 +150,8 @@ public class PredicateCSImpl extends ExpCSImpl implements PredicateCS {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.PREDICATE_CS__OWNED_CONDITION:
-				setOwnedCondition((ExpCS)newValue);
+			case QVTimperativePackage.CHECK_STATEMENT__CONDITION_EXPRESSION:
+				setConditionExpression((OCLExpression)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -174,8 +165,8 @@ public class PredicateCSImpl extends ExpCSImpl implements PredicateCS {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.PREDICATE_CS__OWNED_CONDITION:
-				setOwnedCondition((ExpCS)null);
+			case QVTimperativePackage.CHECK_STATEMENT__CONDITION_EXPRESSION:
+				setConditionExpression((OCLExpression)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -189,8 +180,8 @@ public class PredicateCSImpl extends ExpCSImpl implements PredicateCS {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.PREDICATE_CS__OWNED_CONDITION:
-				return ownedCondition != null;
+			case QVTimperativePackage.CHECK_STATEMENT__CONDITION_EXPRESSION:
+				return conditionExpression != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -201,8 +192,8 @@ public class PredicateCSImpl extends ExpCSImpl implements PredicateCS {
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
-		return (R) ((QVTimperativeCSVisitor<?>)visitor).visitPredicateCS(this);
+	public <R> R accept(@NonNull Visitor<R> visitor) {
+		return (R) ((QVTimperativeVisitor<?>)visitor).visitCheckStatement(this);
 	}
 
-} //PredicateCSImpl
+} //CheckStatementImpl

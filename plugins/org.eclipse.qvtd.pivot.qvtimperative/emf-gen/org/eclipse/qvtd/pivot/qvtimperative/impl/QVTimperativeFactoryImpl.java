@@ -17,22 +17,22 @@ import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
-import org.eclipse.qvtd.pivot.qvtimperative.BottomPattern;
-import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
-import org.eclipse.qvtd.pivot.qvtimperative.GuardPattern;
+import org.eclipse.qvtd.pivot.qvtimperative.CheckStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.GuardVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativePattern;
+import org.eclipse.qvtd.pivot.qvtimperative.InConnectionVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.OutConnectionVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.PredicateVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
-import org.eclipse.qvtd.pivot.qvtimperative.VariableAssignment;
-import org.eclipse.qvtd.pivot.qvtimperative.VariablePredicate;
 
 /**
  * <!-- begin-user-doc -->
@@ -79,20 +79,20 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case QVTimperativePackage.ADD_STATEMENT: return createAddStatement();
-			case QVTimperativePackage.BOTTOM_PATTERN: return createBottomPattern();
-			case QVTimperativePackage.CONNECTION_VARIABLE: return createConnectionVariable();
-			case QVTimperativePackage.GUARD_PATTERN: return createGuardPattern();
+			case QVTimperativePackage.CHECK_STATEMENT: return createCheckStatement();
+			case QVTimperativePackage.GUARD_VARIABLE: return createGuardVariable();
 			case QVTimperativePackage.IMPERATIVE_DOMAIN: return createImperativeDomain();
 			case QVTimperativePackage.IMPERATIVE_MODEL: return createImperativeModel();
-			case QVTimperativePackage.IMPERATIVE_PATTERN: return createImperativePattern();
+			case QVTimperativePackage.IN_CONNECTION_VARIABLE: return createInConnectionVariable();
+			case QVTimperativePackage.LOOP_VARIABLE: return createLoopVariable();
 			case QVTimperativePackage.MAPPING: return createMapping();
 			case QVTimperativePackage.MAPPING_CALL: return createMappingCall();
 			case QVTimperativePackage.MAPPING_CALL_BINDING: return createMappingCallBinding();
 			case QVTimperativePackage.MAPPING_LOOP: return createMappingLoop();
 			case QVTimperativePackage.NEW_STATEMENT: return createNewStatement();
+			case QVTimperativePackage.OUT_CONNECTION_VARIABLE: return createOutConnectionVariable();
+			case QVTimperativePackage.PREDICATE_VARIABLE: return createPredicateVariable();
 			case QVTimperativePackage.SET_STATEMENT: return createSetStatement();
-			case QVTimperativePackage.VARIABLE_ASSIGNMENT: return createVariableAssignment();
-			case QVTimperativePackage.VARIABLE_PREDICATE: return createVariablePredicate();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -104,7 +104,7 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 	 * @generated
 	 */
 	@Override
-	public AddStatement createAddStatement() {
+	public @NonNull AddStatement createAddStatement() {
 		AddStatementImpl addStatement = new AddStatementImpl();
 		return addStatement;
 	}
@@ -115,9 +115,9 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 	 * @generated
 	 */
 	@Override
-	public @NonNull BottomPattern createBottomPattern() {
-		BottomPatternImpl bottomPattern = new BottomPatternImpl();
-		return bottomPattern;
+	public @NonNull CheckStatement createCheckStatement() {
+		CheckStatementImpl checkStatement = new CheckStatementImpl();
+		return checkStatement;
 	}
 
 	/**
@@ -126,20 +126,9 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 	 * @generated
 	 */
 	@Override
-	public @NonNull ConnectionVariable createConnectionVariable() {
-		ConnectionVariableImpl connectionVariable = new ConnectionVariableImpl();
-		return connectionVariable;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public @NonNull GuardPattern createGuardPattern() {
-		GuardPatternImpl guardPattern = new GuardPatternImpl();
-		return guardPattern;
+	public @NonNull GuardVariable createGuardVariable() {
+		GuardVariableImpl guardVariable = new GuardVariableImpl();
+		return guardVariable;
 	}
 
 	/**
@@ -170,9 +159,20 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 	 * @generated
 	 */
 	@Override
-	public @NonNull ImperativePattern createImperativePattern() {
-		ImperativePatternImpl imperativePattern = new ImperativePatternImpl();
-		return imperativePattern;
+	public @NonNull InConnectionVariable createInConnectionVariable() {
+		InConnectionVariableImpl inConnectionVariable = new InConnectionVariableImpl();
+		return inConnectionVariable;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public @NonNull LoopVariable createLoopVariable() {
+		LoopVariableImpl loopVariable = new LoopVariableImpl();
+		return loopVariable;
 	}
 
 	/**
@@ -236,31 +236,31 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 	 * @generated
 	 */
 	@Override
+	public @NonNull OutConnectionVariable createOutConnectionVariable() {
+		OutConnectionVariableImpl outConnectionVariable = new OutConnectionVariableImpl();
+		return outConnectionVariable;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public @NonNull PredicateVariable createPredicateVariable() {
+		PredicateVariableImpl predicateVariable = new PredicateVariableImpl();
+		return predicateVariable;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public @NonNull SetStatement createSetStatement() {
 		SetStatementImpl setStatement = new SetStatementImpl();
 		return setStatement;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public @NonNull VariableAssignment createVariableAssignment() {
-		VariableAssignmentImpl variableAssignment = new VariableAssignmentImpl();
-		return variableAssignment;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public @NonNull VariablePredicate createVariablePredicate() {
-		VariablePredicateImpl variablePredicate = new VariablePredicateImpl();
-		return variablePredicate;
 	}
 
 	/**

@@ -31,7 +31,7 @@ import org.eclipse.ocl.pivot.OCLExpression;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.AddStatement#getTargetVariable <em>Target Variable</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.AddStatement#getValue <em>Value</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.AddStatement#isIsEnforceadUnique <em>Is Enforcead Unique</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.AddStatement#isIsEnforcedUnique <em>Is Enforced Unique</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getAddStatement()
@@ -89,55 +89,28 @@ public interface AddStatement extends MappingStatement {
 	void setValue(OCLExpression value);
 
 	/**
-	 * Returns the value of the '<em><b>Is Enforcead Unique</b></em>' attribute.
+	 * Returns the value of the '<em><b>Is Enforced Unique</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Is Enforcead Unique</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Is Enforced Unique</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Is Enforcead Unique</em>' attribute.
-	 * @see #isSetIsEnforceadUnique()
-	 * @see #unsetIsEnforceadUnique()
-	 * @see #setIsEnforceadUnique(boolean)
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getAddStatement_IsEnforceadUnique()
+	 * @return the value of the '<em>Is Enforced Unique</em>' attribute.
+	 * @see #setIsEnforcedUnique(boolean)
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getAddStatement_IsEnforcedUnique()
 	 * @generated
 	 */
-	boolean isIsEnforceadUnique();
+	boolean isIsEnforcedUnique();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtimperative.AddStatement#isIsEnforceadUnique <em>Is Enforcead Unique</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtimperative.AddStatement#isIsEnforcedUnique <em>Is Enforced Unique</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Is Enforcead Unique</em>' attribute.
-	 * @see #isSetIsEnforceadUnique()
-	 * @see #unsetIsEnforceadUnique()
-	 * @see #isIsEnforceadUnique()
+	 * @param value the new value of the '<em>Is Enforced Unique</em>' attribute.
+	 * @see #isIsEnforcedUnique()
 	 * @generated
 	 */
-	void setIsEnforceadUnique(boolean value);
-
-	/**
-	 * Unsets the value of the '{@link org.eclipse.qvtd.pivot.qvtimperative.AddStatement#isIsEnforceadUnique <em>Is Enforcead Unique</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isSetIsEnforceadUnique()
-	 * @see #isIsEnforceadUnique()
-	 * @see #setIsEnforceadUnique(boolean)
-	 * @generated
-	 */
-	void unsetIsEnforceadUnique();
-
-	/**
-	 * Returns whether the value of the '{@link org.eclipse.qvtd.pivot.qvtimperative.AddStatement#isIsEnforceadUnique <em>Is Enforcead Unique</em>}' attribute is set.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return whether the value of the '<em>Is Enforcead Unique</em>' attribute is set.
-	 * @see #unsetIsEnforceadUnique()
-	 * @see #isIsEnforceadUnique()
-	 * @see #setIsEnforceadUnique(boolean)
-	 * @generated
-	 */
-	boolean isSetIsEnforceadUnique();
+	void setIsEnforcedUnique(boolean value);
 
 } // AddStatement

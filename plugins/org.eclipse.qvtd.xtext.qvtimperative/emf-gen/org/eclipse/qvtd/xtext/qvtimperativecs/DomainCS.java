@@ -15,6 +15,7 @@
 package org.eclipse.qvtd.xtext.qvtimperativecs;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.ocl.xtext.basecs.NamedElementCS;
 import org.eclipse.ocl.xtext.basecs.PathNameCS;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 
@@ -31,14 +32,14 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.DomainCS#isIsEnforce <em>Is Enforce</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.DomainCS#getDirection <em>Direction</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.DomainCS#getCheckedProperties <em>Checked Properties</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.DomainCS#getEnforcedProperties <em>Enforced Properties</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.DomainCS#getOwnedGuardVariables <em>Owned Guard Variables</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getDomainCS()
  * @model
  * @generated
  */
-public interface DomainCS extends AreaCS {
+public interface DomainCS extends NamedElementCS {
 	/**
 	 * Returns the value of the '<em><b>Is Check</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -133,18 +134,19 @@ public interface DomainCS extends AreaCS {
 	EList<PathNameCS> getCheckedProperties();
 
 	/**
-	 * Returns the value of the '<em><b>Enforced Properties</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.ocl.xtext.basecs.PathNameCS}.
+	 * Returns the value of the '<em><b>Owned Guard Variables</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.qvtd.xtext.qvtimperativecs.GuardVariableCS}.
 	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Owned Guard Variables</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
 	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * The properties whose assignments may be polled for readiness prior to use elsewhere.
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Enforced Properties</em>' containment reference list.
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getDomainCS_EnforcedProperties()
-	 * @model containment="true" ordered="false"
+	 * @return the value of the '<em>Owned Guard Variables</em>' containment reference list.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getDomainCS_OwnedGuardVariables()
+	 * @model containment="true"
 	 * @generated
 	 */
-	EList<PathNameCS> getEnforcedProperties();
+	EList<GuardVariableCS> getOwnedGuardVariables();
 
 } // DomainCS

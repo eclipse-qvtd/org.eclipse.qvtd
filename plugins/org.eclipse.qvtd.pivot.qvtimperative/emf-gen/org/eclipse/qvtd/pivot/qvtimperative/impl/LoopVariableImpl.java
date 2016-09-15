@@ -16,44 +16,38 @@ package org.eclipse.qvtd.pivot.qvtimperative.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org.eclipse.emf.ecore.util.EcoreUtil;
-
 import org.eclipse.jdt.annotation.NonNull;
-
+import org.eclipse.ocl.pivot.internal.VariableDeclarationImpl;
 import org.eclipse.ocl.pivot.util.Visitor;
-
-import org.eclipse.qvtd.pivot.qvtimperative.Area;
-import org.eclipse.qvtd.pivot.qvtimperative.GuardPattern;
+import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
-
 import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Guard Pattern</b></em>'.
+ * An implementation of the model object '<em><b>Loop Variable</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.GuardPatternImpl#getArea <em>Area</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.LoopVariableImpl#getOwningMappingLoop <em>Owning Mapping Loop</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class GuardPatternImpl extends ImperativePatternImpl implements GuardPattern {
+public class LoopVariableImpl extends VariableDeclarationImpl implements LoopVariable {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected GuardPatternImpl() {
+	protected LoopVariableImpl() {
 		super();
 	}
 
@@ -64,7 +58,7 @@ public class GuardPatternImpl extends ImperativePatternImpl implements GuardPatt
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return QVTimperativePackage.Literals.GUARD_PATTERN;
+		return QVTimperativePackage.Literals.LOOP_VARIABLE;
 	}
 
 	/**
@@ -73,9 +67,9 @@ public class GuardPatternImpl extends ImperativePatternImpl implements GuardPatt
 	 * @generated
 	 */
 	@Override
-	public Area getArea() {
-		if (eContainerFeatureID() != QVTimperativePackage.GUARD_PATTERN__AREA) return null;
-		return (Area)eInternalContainer();
+	public MappingLoop getOwningMappingLoop() {
+		if (eContainerFeatureID() != QVTimperativePackage.LOOP_VARIABLE__OWNING_MAPPING_LOOP) return null;
+		return (MappingLoop)eInternalContainer();
 	}
 
 	/**
@@ -83,8 +77,8 @@ public class GuardPatternImpl extends ImperativePatternImpl implements GuardPatt
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetArea(Area newArea, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newArea, QVTimperativePackage.GUARD_PATTERN__AREA, msgs);
+	public NotificationChain basicSetOwningMappingLoop(MappingLoop newOwningMappingLoop, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newOwningMappingLoop, QVTimperativePackage.LOOP_VARIABLE__OWNING_MAPPING_LOOP, msgs);
 		return msgs;
 	}
 
@@ -94,20 +88,20 @@ public class GuardPatternImpl extends ImperativePatternImpl implements GuardPatt
 	 * @generated
 	 */
 	@Override
-	public void setArea(Area newArea) {
-		if (newArea != eInternalContainer() || (eContainerFeatureID() != QVTimperativePackage.GUARD_PATTERN__AREA && newArea != null)) {
-			if (EcoreUtil.isAncestor(this, newArea))
+	public void setOwningMappingLoop(MappingLoop newOwningMappingLoop) {
+		if (newOwningMappingLoop != eInternalContainer() || (eContainerFeatureID() != QVTimperativePackage.LOOP_VARIABLE__OWNING_MAPPING_LOOP && newOwningMappingLoop != null)) {
+			if (EcoreUtil.isAncestor(this, newOwningMappingLoop))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
-			if (newArea != null)
-				msgs = ((InternalEObject)newArea).eInverseAdd(this, QVTimperativePackage.AREA__GUARD_PATTERN, Area.class, msgs);
-			msgs = basicSetArea(newArea, msgs);
+			if (newOwningMappingLoop != null)
+				msgs = ((InternalEObject)newOwningMappingLoop).eInverseAdd(this, QVTimperativePackage.MAPPING_LOOP__OWNED_ITERATORS, MappingLoop.class, msgs);
+			msgs = basicSetOwningMappingLoop(newOwningMappingLoop, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.GUARD_PATTERN__AREA, newArea, newArea));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.LOOP_VARIABLE__OWNING_MAPPING_LOOP, newOwningMappingLoop, newOwningMappingLoop));
 	}
 
 	/**
@@ -118,10 +112,10 @@ public class GuardPatternImpl extends ImperativePatternImpl implements GuardPatt
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTimperativePackage.GUARD_PATTERN__AREA:
+			case QVTimperativePackage.LOOP_VARIABLE__OWNING_MAPPING_LOOP:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetArea((Area)otherEnd, msgs);
+				return basicSetOwningMappingLoop((MappingLoop)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -134,8 +128,8 @@ public class GuardPatternImpl extends ImperativePatternImpl implements GuardPatt
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTimperativePackage.GUARD_PATTERN__AREA:
-				return basicSetArea(null, msgs);
+			case QVTimperativePackage.LOOP_VARIABLE__OWNING_MAPPING_LOOP:
+				return basicSetOwningMappingLoop(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -148,8 +142,8 @@ public class GuardPatternImpl extends ImperativePatternImpl implements GuardPatt
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case QVTimperativePackage.GUARD_PATTERN__AREA:
-				return eInternalContainer().eInverseRemove(this, QVTimperativePackage.AREA__GUARD_PATTERN, Area.class, msgs);
+			case QVTimperativePackage.LOOP_VARIABLE__OWNING_MAPPING_LOOP:
+				return eInternalContainer().eInverseRemove(this, QVTimperativePackage.MAPPING_LOOP__OWNED_ITERATORS, MappingLoop.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -162,8 +156,8 @@ public class GuardPatternImpl extends ImperativePatternImpl implements GuardPatt
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTimperativePackage.GUARD_PATTERN__AREA:
-				return getArea();
+			case QVTimperativePackage.LOOP_VARIABLE__OWNING_MAPPING_LOOP:
+				return getOwningMappingLoop();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -176,8 +170,8 @@ public class GuardPatternImpl extends ImperativePatternImpl implements GuardPatt
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTimperativePackage.GUARD_PATTERN__AREA:
-				setArea((Area)newValue);
+			case QVTimperativePackage.LOOP_VARIABLE__OWNING_MAPPING_LOOP:
+				setOwningMappingLoop((MappingLoop)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -191,8 +185,8 @@ public class GuardPatternImpl extends ImperativePatternImpl implements GuardPatt
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTimperativePackage.GUARD_PATTERN__AREA:
-				setArea((Area)null);
+			case QVTimperativePackage.LOOP_VARIABLE__OWNING_MAPPING_LOOP:
+				setOwningMappingLoop((MappingLoop)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -206,8 +200,8 @@ public class GuardPatternImpl extends ImperativePatternImpl implements GuardPatt
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTimperativePackage.GUARD_PATTERN__AREA:
-				return getArea() != null;
+			case QVTimperativePackage.LOOP_VARIABLE__OWNING_MAPPING_LOOP:
+				return getOwningMappingLoop() != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -219,7 +213,7 @@ public class GuardPatternImpl extends ImperativePatternImpl implements GuardPatt
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTimperativeVisitor<?>)visitor).visitGuardPattern(this);
+		return (R) ((QVTimperativeVisitor<?>)visitor).visitLoopVariable(this);
 	}
 
-} //GuardPatternImpl
+} //LoopVariableImpl

@@ -1,13 +1,17 @@
-/*******************************************************************************
- * Copyright (c) 2013, 2016 Willink Transformations and others.
+/**
+ * <copyright>
+ *
+ * Copyright (c) 2013, 2017 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
- *******************************************************************************/
+ *
+ * </copyright>
+ */
 package org.eclipse.qvtd.pivot.qvtimperative.impl;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -15,43 +19,43 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.internal.VariableDeclarationImpl;
 import org.eclipse.ocl.pivot.util.Visitor;
-import org.eclipse.qvtd.pivot.qvtbase.impl.PredicateImpl;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+import org.eclipse.qvtd.pivot.qvtimperative.GuardVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
-import org.eclipse.qvtd.pivot.qvtimperative.VariablePredicate;
 import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Variable Predicate</b></em>'.
+ * An implementation of the model object '<em><b>Guard Variable</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.VariablePredicateImpl#getTargetVariable <em>Target Variable</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.GuardVariableImpl#getReferredTypedModel <em>Referred Typed Model</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class VariablePredicateImpl extends PredicateImpl implements VariablePredicate {
+public class GuardVariableImpl extends VariableDeclarationImpl implements GuardVariable {
 	/**
-	 * The cached value of the '{@link #getTargetVariable() <em>Target Variable</em>}' reference.
+	 * The cached value of the '{@link #getReferredTypedModel() <em>Referred Typed Model</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getTargetVariable()
+	 * @see #getReferredTypedModel()
 	 * @generated
 	 * @ordered
 	 */
-	protected Variable targetVariable;
+	protected TypedModel referredTypedModel;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected VariablePredicateImpl() {
+	protected GuardVariableImpl() {
 		super();
 	}
 
@@ -62,7 +66,7 @@ public class VariablePredicateImpl extends PredicateImpl implements VariablePred
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return QVTimperativePackage.Literals.VARIABLE_PREDICATE;
+		return QVTimperativePackage.Literals.GUARD_VARIABLE;
 	}
 
 	/**
@@ -71,16 +75,16 @@ public class VariablePredicateImpl extends PredicateImpl implements VariablePred
 	 * @generated
 	 */
 	@Override
-	public Variable getTargetVariable() {
-		if (targetVariable != null && targetVariable.eIsProxy()) {
-			InternalEObject oldTargetVariable = (InternalEObject)targetVariable;
-			targetVariable = (Variable)eResolveProxy(oldTargetVariable);
-			if (targetVariable != oldTargetVariable) {
+	public TypedModel getReferredTypedModel() {
+		if (referredTypedModel != null && referredTypedModel.eIsProxy()) {
+			InternalEObject oldReferredTypedModel = (InternalEObject)referredTypedModel;
+			referredTypedModel = (TypedModel)eResolveProxy(oldReferredTypedModel);
+			if (referredTypedModel != oldReferredTypedModel) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTimperativePackage.VARIABLE_PREDICATE__TARGET_VARIABLE, oldTargetVariable, targetVariable));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTimperativePackage.GUARD_VARIABLE__REFERRED_TYPED_MODEL, oldReferredTypedModel, referredTypedModel));
 			}
 		}
-		return targetVariable;
+		return referredTypedModel;
 	}
 
 	/**
@@ -88,8 +92,8 @@ public class VariablePredicateImpl extends PredicateImpl implements VariablePred
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Variable basicGetTargetVariable() {
-		return targetVariable;
+	public TypedModel basicGetReferredTypedModel() {
+		return referredTypedModel;
 	}
 
 	/**
@@ -98,11 +102,11 @@ public class VariablePredicateImpl extends PredicateImpl implements VariablePred
 	 * @generated
 	 */
 	@Override
-	public void setTargetVariable(Variable newTargetVariable) {
-		Variable oldTargetVariable = targetVariable;
-		targetVariable = newTargetVariable;
+	public void setReferredTypedModel(TypedModel newReferredTypedModel) {
+		TypedModel oldReferredTypedModel = referredTypedModel;
+		referredTypedModel = newReferredTypedModel;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.VARIABLE_PREDICATE__TARGET_VARIABLE, oldTargetVariable, targetVariable));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.GUARD_VARIABLE__REFERRED_TYPED_MODEL, oldReferredTypedModel, referredTypedModel));
 	}
 
 	/**
@@ -113,9 +117,9 @@ public class VariablePredicateImpl extends PredicateImpl implements VariablePred
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTimperativePackage.VARIABLE_PREDICATE__TARGET_VARIABLE:
-				if (resolve) return getTargetVariable();
-				return basicGetTargetVariable();
+			case QVTimperativePackage.GUARD_VARIABLE__REFERRED_TYPED_MODEL:
+				if (resolve) return getReferredTypedModel();
+				return basicGetReferredTypedModel();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -128,8 +132,8 @@ public class VariablePredicateImpl extends PredicateImpl implements VariablePred
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTimperativePackage.VARIABLE_PREDICATE__TARGET_VARIABLE:
-				setTargetVariable((Variable)newValue);
+			case QVTimperativePackage.GUARD_VARIABLE__REFERRED_TYPED_MODEL:
+				setReferredTypedModel((TypedModel)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -143,8 +147,8 @@ public class VariablePredicateImpl extends PredicateImpl implements VariablePred
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTimperativePackage.VARIABLE_PREDICATE__TARGET_VARIABLE:
-				setTargetVariable((Variable)null);
+			case QVTimperativePackage.GUARD_VARIABLE__REFERRED_TYPED_MODEL:
+				setReferredTypedModel((TypedModel)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -158,8 +162,8 @@ public class VariablePredicateImpl extends PredicateImpl implements VariablePred
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTimperativePackage.VARIABLE_PREDICATE__TARGET_VARIABLE:
-				return targetVariable != null;
+			case QVTimperativePackage.GUARD_VARIABLE__REFERRED_TYPED_MODEL:
+				return referredTypedModel != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -171,7 +175,7 @@ public class VariablePredicateImpl extends PredicateImpl implements VariablePred
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTimperativeVisitor<?>)visitor).visitVariablePredicate(this);
+		return (R) ((QVTimperativeVisitor<?>)visitor).visitGuardVariable(this);
 	}
 
-} //VariablePredicateImpl
+} //GuardVariableImpl

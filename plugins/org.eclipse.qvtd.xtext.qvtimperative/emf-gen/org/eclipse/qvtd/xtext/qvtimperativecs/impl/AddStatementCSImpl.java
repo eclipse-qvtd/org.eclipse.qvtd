@@ -20,9 +20,9 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
+import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.xtext.qvtimperativecs.AddStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage;
 import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
@@ -60,7 +60,7 @@ public class AddStatementCSImpl extends MappingStatementCSImpl implements AddSta
 	 * @generated
 	 * @ordered
 	 */
-	protected Variable targetVariable;
+	protected ConnectionVariable targetVariable;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -132,10 +132,10 @@ public class AddStatementCSImpl extends MappingStatementCSImpl implements AddSta
 	 * @generated
 	 */
 	@Override
-	public Variable getTargetVariable() {
+	public ConnectionVariable getTargetVariable() {
 		if (targetVariable != null && targetVariable.eIsProxy()) {
 			InternalEObject oldTargetVariable = (InternalEObject)targetVariable;
-			targetVariable = (Variable)eResolveProxy(oldTargetVariable);
+			targetVariable = (ConnectionVariable)eResolveProxy(oldTargetVariable);
 			if (targetVariable != oldTargetVariable) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTimperativeCSPackage.ADD_STATEMENT_CS__TARGET_VARIABLE, oldTargetVariable, targetVariable));
@@ -149,7 +149,7 @@ public class AddStatementCSImpl extends MappingStatementCSImpl implements AddSta
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Variable basicGetTargetVariable() {
+	public ConnectionVariable basicGetTargetVariable() {
 		return targetVariable;
 	}
 
@@ -159,8 +159,8 @@ public class AddStatementCSImpl extends MappingStatementCSImpl implements AddSta
 	 * @generated
 	 */
 	@Override
-	public void setTargetVariable(Variable newTargetVariable) {
-		Variable oldTargetVariable = targetVariable;
+	public void setTargetVariable(ConnectionVariable newTargetVariable) {
+		ConnectionVariable oldTargetVariable = targetVariable;
 		targetVariable = newTargetVariable;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.ADD_STATEMENT_CS__TARGET_VARIABLE, oldTargetVariable, targetVariable));
@@ -209,7 +209,7 @@ public class AddStatementCSImpl extends MappingStatementCSImpl implements AddSta
 				setOwnedExpression((ExpCS)newValue);
 				return;
 			case QVTimperativeCSPackage.ADD_STATEMENT_CS__TARGET_VARIABLE:
-				setTargetVariable((Variable)newValue);
+				setTargetVariable((ConnectionVariable)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -227,7 +227,7 @@ public class AddStatementCSImpl extends MappingStatementCSImpl implements AddSta
 				setOwnedExpression((ExpCS)null);
 				return;
 			case QVTimperativeCSPackage.ADD_STATEMENT_CS__TARGET_VARIABLE:
-				setTargetVariable((Variable)null);
+				setTargetVariable((ConnectionVariable)null);
 				return;
 		}
 		super.eUnset(featureID);

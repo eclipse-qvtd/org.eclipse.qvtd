@@ -94,12 +94,8 @@ public class QVTimperativeCSAdapterFactory extends AdapterFactoryImpl {
 				return createAddStatementCSAdapter();
 			}
 			@Override
-			public Adapter caseAreaCS(AreaCS object) {
-				return createAreaCSAdapter();
-			}
-			@Override
-			public Adapter caseBottomPatternCS(BottomPatternCS object) {
-				return createBottomPatternCSAdapter();
+			public Adapter caseCheckStatementCS(CheckStatementCS object) {
+				return createCheckStatementCSAdapter();
 			}
 			@Override
 			public Adapter caseDirectionCS(DirectionCS object) {
@@ -110,8 +106,12 @@ public class QVTimperativeCSAdapterFactory extends AdapterFactoryImpl {
 				return createDomainCSAdapter();
 			}
 			@Override
-			public Adapter caseGuardPatternCS(GuardPatternCS object) {
-				return createGuardPatternCSAdapter();
+			public Adapter caseGuardVariableCS(GuardVariableCS object) {
+				return createGuardVariableCSAdapter();
+			}
+			@Override
+			public Adapter caseInoutVariableCS(InoutVariableCS object) {
+				return createInoutVariableCSAdapter();
 			}
 			@Override
 			public Adapter caseMappingCS(MappingCS object) {
@@ -134,28 +134,24 @@ public class QVTimperativeCSAdapterFactory extends AdapterFactoryImpl {
 				return createMappingStatementCSAdapter();
 			}
 			@Override
+			public Adapter caseNewStatementCS(NewStatementCS object) {
+				return createNewStatementCSAdapter();
+			}
+			@Override
+			public Adapter caseOutVariableCS(OutVariableCS object) {
+				return createOutVariableCSAdapter();
+			}
+			@Override
 			public Adapter caseParamDeclarationCS(ParamDeclarationCS object) {
 				return createParamDeclarationCSAdapter();
 			}
 			@Override
-			public Adapter casePatternCS(PatternCS object) {
-				return createPatternCSAdapter();
-			}
-			@Override
-			public Adapter casePredicateCS(PredicateCS object) {
-				return createPredicateCSAdapter();
-			}
-			@Override
-			public Adapter casePredicateOrAssignmentCS(PredicateOrAssignmentCS object) {
-				return createPredicateOrAssignmentCSAdapter();
+			public Adapter casePredicateVariableCS(PredicateVariableCS object) {
+				return createPredicateVariableCSAdapter();
 			}
 			@Override
 			public Adapter caseQueryCS(QueryCS object) {
 				return createQueryCSAdapter();
-			}
-			@Override
-			public Adapter caseNewStatementCS(NewStatementCS object) {
-				return createNewStatementCSAdapter();
 			}
 			@Override
 			public Adapter caseSetStatementCS(SetStatementCS object) {
@@ -172,10 +168,6 @@ public class QVTimperativeCSAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseTransformationCS(TransformationCS object) {
 				return createTransformationCSAdapter();
-			}
-			@Override
-			public Adapter caseUnrealizedVariableCS(UnrealizedVariableCS object) {
-				return createUnrealizedVariableCSAdapter();
 			}
 			@Override
 			public Adapter caseVisitableCS(VisitableCS object) {
@@ -206,12 +198,12 @@ public class QVTimperativeCSAdapterFactory extends AdapterFactoryImpl {
 				return createNamedElementCSAdapter();
 			}
 			@Override
-			public Adapter caseExpCS(ExpCS object) {
-				return createExpCSAdapter();
-			}
-			@Override
 			public Adapter caseTypedElementCS(TypedElementCS object) {
 				return createTypedElementCSAdapter();
+			}
+			@Override
+			public Adapter caseExpCS(ExpCS object) {
+				return createExpCSAdapter();
 			}
 			@Override
 			public Adapter casePackageOwnerCS(PackageOwnerCS object) {
@@ -272,6 +264,20 @@ public class QVTimperativeCSAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createAddStatementCSAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.CheckStatementCS <em>Check Statement CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.CheckStatementCS
+	 * @generated
+	 */
+	public Adapter createCheckStatementCSAdapter() {
 		return null;
 	}
 
@@ -374,30 +380,16 @@ public class QVTimperativeCSAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.PatternCS <em>Pattern CS</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.PredicateVariableCS <em>Predicate Variable CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.PatternCS
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.PredicateVariableCS
 	 * @generated
 	 */
-	public Adapter createPatternCSAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.PredicateCS <em>Predicate CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.PredicateCS
-	 * @generated
-	 */
-	public Adapter createPredicateCSAdapter() {
+	public Adapter createPredicateVariableCSAdapter() {
 		return null;
 	}
 
@@ -426,20 +418,6 @@ public class QVTimperativeCSAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createTransformationCSAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.UnrealizedVariableCS <em>Unrealized Variable CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.UnrealizedVariableCS
-	 * @generated
-	 */
-	public Adapter createUnrealizedVariableCSAdapter() {
 		return null;
 	}
 
@@ -556,20 +534,6 @@ public class QVTimperativeCSAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.PredicateOrAssignmentCS <em>Predicate Or Assignment CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.PredicateOrAssignmentCS
-	 * @generated
-	 */
-	public Adapter createPredicateOrAssignmentCSAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.QueryCS <em>Query CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -608,6 +572,20 @@ public class QVTimperativeCSAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createNewStatementCSAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.OutVariableCS <em>Out Variable CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.OutVariableCS
+	 * @generated
+	 */
+	public Adapter createOutVariableCSAdapter() {
 		return null;
 	}
 
@@ -738,34 +716,6 @@ public class QVTimperativeCSAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.AreaCS <em>Area CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.AreaCS
-	 * @generated
-	 */
-	public Adapter createAreaCSAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.BottomPatternCS <em>Bottom Pattern CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.BottomPatternCS
-	 * @generated
-	 */
-	public Adapter createBottomPatternCSAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.DomainCS <em>Domain CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -780,16 +730,30 @@ public class QVTimperativeCSAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.GuardPatternCS <em>Guard Pattern CS</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.GuardVariableCS <em>Guard Variable CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.GuardPatternCS
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.GuardVariableCS
 	 * @generated
 	 */
-	public Adapter createGuardPatternCSAdapter() {
+	public Adapter createGuardVariableCSAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.InoutVariableCS <em>Inout Variable CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.InoutVariableCS
+	 * @generated
+	 */
+	public Adapter createInoutVariableCSAdapter() {
 		return null;
 	}
 

@@ -17,7 +17,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
 import org.eclipse.ocl.xtext.essentialoclcs.impl.ExpCSImpl;
@@ -81,7 +81,7 @@ public class MappingCallBindingCSImpl extends ExpCSImpl implements MappingCallBi
 	 * @generated
 	 * @ordered
 	 */
-	protected Variable referredVariable;
+	protected VariableDeclaration referredVariable;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -174,10 +174,10 @@ public class MappingCallBindingCSImpl extends ExpCSImpl implements MappingCallBi
 	 * @generated
 	 */
 	@Override
-	public Variable getReferredVariable() {
+	public VariableDeclaration getReferredVariable() {
 		if (referredVariable != null && referredVariable.eIsProxy()) {
 			InternalEObject oldReferredVariable = (InternalEObject)referredVariable;
-			referredVariable = (Variable)eResolveProxy(oldReferredVariable);
+			referredVariable = (VariableDeclaration)eResolveProxy(oldReferredVariable);
 			if (referredVariable != oldReferredVariable) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTimperativeCSPackage.MAPPING_CALL_BINDING_CS__REFERRED_VARIABLE, oldReferredVariable, referredVariable));
@@ -191,7 +191,7 @@ public class MappingCallBindingCSImpl extends ExpCSImpl implements MappingCallBi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Variable basicGetReferredVariable() {
+	public VariableDeclaration basicGetReferredVariable() {
 		return referredVariable;
 	}
 
@@ -201,8 +201,8 @@ public class MappingCallBindingCSImpl extends ExpCSImpl implements MappingCallBi
 	 * @generated
 	 */
 	@Override
-	public void setReferredVariable(Variable newReferredVariable) {
-		Variable oldReferredVariable = referredVariable;
+	public void setReferredVariable(VariableDeclaration newReferredVariable) {
+		VariableDeclaration oldReferredVariable = referredVariable;
 		referredVariable = newReferredVariable;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.MAPPING_CALL_BINDING_CS__REFERRED_VARIABLE, oldReferredVariable, referredVariable));
@@ -348,7 +348,7 @@ public class MappingCallBindingCSImpl extends ExpCSImpl implements MappingCallBi
 				setOwningMappingCall((MappingCallCS)newValue);
 				return;
 			case QVTimperativeCSPackage.MAPPING_CALL_BINDING_CS__REFERRED_VARIABLE:
-				setReferredVariable((Variable)newValue);
+				setReferredVariable((VariableDeclaration)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -372,7 +372,7 @@ public class MappingCallBindingCSImpl extends ExpCSImpl implements MappingCallBi
 				setOwningMappingCall((MappingCallCS)null);
 				return;
 			case QVTimperativeCSPackage.MAPPING_CALL_BINDING_CS__REFERRED_VARIABLE:
-				setReferredVariable((Variable)null);
+				setReferredVariable((VariableDeclaration)null);
 				return;
 		}
 		super.eUnset(featureID);

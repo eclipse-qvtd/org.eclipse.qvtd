@@ -1,22 +1,22 @@
 /**
  * <copyright>
- * 
+ *
  * Copyright (c) 2013, 2017 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
- * 
+ *
  * </copyright>
  */
 package org.eclipse.qvtd.pivot.qvtimperative;
 
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Property;
-import org.eclipse.ocl.pivot.VariableExp;
+import org.eclipse.ocl.pivot.VariableDeclaration;
 
 /**
  * <!-- begin-user-doc -->
@@ -27,40 +27,41 @@ import org.eclipse.ocl.pivot.VariableExp;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.SetStatement#getSlotExpression <em>Slot Expression</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.SetStatement#getTargetVariable <em>Target Variable</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.SetStatement#getTargetProperty <em>Target Property</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.SetStatement#getValue <em>Value</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.SetStatement#isIsOpposite <em>Is Opposite</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.SetStatement#isIsEmit <em>Is Emit</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getSetStatement()
  * @generated
  */
-public interface SetStatement extends BottomStatement {
+public interface SetStatement extends Statement {
 	/**
-	 * Returns the value of the '<em><b>Slot Expression</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Target Variable</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Slot Expression</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Target Variable</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Slot Expression</em>' containment reference.
-	 * @see #setSlotExpression(VariableExp)
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getSetStatement_SlotExpression()
+	 * @return the value of the '<em>Target Variable</em>' reference.
+	 * @see #setTargetVariable(VariableDeclaration)
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getSetStatement_TargetVariable()
 	 * @generated
 	 */
-	VariableExp getSlotExpression();
+	VariableDeclaration getTargetVariable();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtimperative.SetStatement#getSlotExpression <em>Slot Expression</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtimperative.SetStatement#getTargetVariable <em>Target Variable</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Slot Expression</em>' containment reference.
-	 * @see #getSlotExpression()
+	 * @param value the new value of the '<em>Target Variable</em>' reference.
+	 * @see #getTargetVariable()
 	 * @generated
 	 */
-	void setSlotExpression(VariableExp value);
+	void setTargetVariable(VariableDeclaration value);
 
 	/**
 	 * Returns the value of the '<em><b>Target Property</b></em>' reference.
@@ -121,8 +122,6 @@ public interface SetStatement extends BottomStatement {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Is Opposite</em>' attribute.
-	 * @see #isSetIsOpposite()
-	 * @see #unsetIsOpposite()
 	 * @see #setIsOpposite(boolean)
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getSetStatement_IsOpposite()
 	 * @generated
@@ -134,34 +133,34 @@ public interface SetStatement extends BottomStatement {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Is Opposite</em>' attribute.
-	 * @see #isSetIsOpposite()
-	 * @see #unsetIsOpposite()
 	 * @see #isIsOpposite()
 	 * @generated
 	 */
 	void setIsOpposite(boolean value);
 
 	/**
-	 * Unsets the value of the '{@link org.eclipse.qvtd.pivot.qvtimperative.SetStatement#isIsOpposite <em>Is Opposite</em>}' attribute.
+	 * Returns the value of the '<em><b>Is Emit</b></em>' attribute.
 	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Is Emit</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #isSetIsOpposite()
-	 * @see #isIsOpposite()
-	 * @see #setIsOpposite(boolean)
+	 * @return the value of the '<em>Is Emit</em>' attribute.
+	 * @see #setIsEmit(boolean)
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getSetStatement_IsEmit()
 	 * @generated
 	 */
-	void unsetIsOpposite();
+	boolean isIsEmit();
 
 	/**
-	 * Returns whether the value of the '{@link org.eclipse.qvtd.pivot.qvtimperative.SetStatement#isIsOpposite <em>Is Opposite</em>}' attribute is set.
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtimperative.SetStatement#isIsEmit <em>Is Emit</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return whether the value of the '<em>Is Opposite</em>' attribute is set.
-	 * @see #unsetIsOpposite()
-	 * @see #isIsOpposite()
-	 * @see #setIsOpposite(boolean)
+	 * @param value the new value of the '<em>Is Emit</em>' attribute.
+	 * @see #isIsEmit()
 	 * @generated
 	 */
-	boolean isSetIsOpposite();
+	void setIsEmit(boolean value);
 
 } // SetStatement

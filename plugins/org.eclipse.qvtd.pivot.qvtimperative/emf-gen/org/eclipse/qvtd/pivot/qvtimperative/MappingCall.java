@@ -95,8 +95,6 @@ public interface MappingCall extends MappingStatement, ReferringElement {
 	 * An infinite MappingCall requires re-invocation of the called mapping to be suppressed to avoid an infinite loop.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Is Infinite</em>' attribute.
-	 * @see #isSetIsInfinite()
-	 * @see #unsetIsInfinite()
 	 * @see #setIsInfinite(boolean)
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getMappingCall_IsInfinite()
 	 * @generated
@@ -108,34 +106,9 @@ public interface MappingCall extends MappingStatement, ReferringElement {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Is Infinite</em>' attribute.
-	 * @see #isSetIsInfinite()
-	 * @see #unsetIsInfinite()
 	 * @see #isIsInfinite()
 	 * @generated
 	 */
 	void setIsInfinite(boolean value);
-
-	/**
-	 * Unsets the value of the '{@link org.eclipse.qvtd.pivot.qvtimperative.MappingCall#isIsInfinite <em>Is Infinite</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isSetIsInfinite()
-	 * @see #isIsInfinite()
-	 * @see #setIsInfinite(boolean)
-	 * @generated
-	 */
-	void unsetIsInfinite();
-
-	/**
-	 * Returns whether the value of the '{@link org.eclipse.qvtd.pivot.qvtimperative.MappingCall#isIsInfinite <em>Is Infinite</em>}' attribute is set.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return whether the value of the '<em>Is Infinite</em>' attribute is set.
-	 * @see #unsetIsInfinite()
-	 * @see #isIsInfinite()
-	 * @see #setIsInfinite(boolean)
-	 * @generated
-	 */
-	boolean isSetIsInfinite();
 
 } // MappingCall

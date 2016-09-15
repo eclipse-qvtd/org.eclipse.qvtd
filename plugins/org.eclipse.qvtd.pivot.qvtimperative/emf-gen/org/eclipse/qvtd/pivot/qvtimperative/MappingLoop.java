@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
@@ -12,7 +12,6 @@ package org.eclipse.qvtd.pivot.qvtimperative;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.ocl.pivot.OCLExpression;
-import org.eclipse.ocl.pivot.Variable;
 
 /**
  * <!-- begin-user-doc -->
@@ -39,7 +38,8 @@ public interface MappingLoop extends MappingStatement {
 
 	/**
 	 * Returns the value of the '<em><b>Owned Iterators</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.ocl.pivot.Variable}.
+	 * The list contents are of type {@link org.eclipse.qvtd.pivot.qvtimperative.LoopVariable}.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtimperative.LoopVariable#getOwningMappingLoop <em>Owning Mapping Loop</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Owned Iterators</em>' containment reference list isn't clear,
@@ -48,9 +48,10 @@ public interface MappingLoop extends MappingStatement {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Owned Iterators</em>' containment reference list.
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getMappingLoop_OwnedIterators()
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.LoopVariable#getOwningMappingLoop
 	 * @generated
 	 */
-	EList<Variable> getOwnedIterators();
+	EList<LoopVariable> getOwnedIterators();
 
 	/**
 	 * Returns the value of the '<em><b>Owned Mapping Statements</b></em>' containment reference list.

@@ -1,22 +1,21 @@
 /**
  * <copyright>
- * 
+ *
  * Copyright (c) 2013, 2017 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
- * 
+ *
  * </copyright>
  */
 package org.eclipse.qvtd.xtext.qvtimperativecs;
 
-import org.eclipse.ocl.pivot.Variable;
-
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
+import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 
 /**
  * <!-- begin-user-doc -->
@@ -71,12 +70,12 @@ public interface AddStatementCS extends MappingStatementCS {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Target Variable</em>' reference.
-	 * @see #setTargetVariable(Variable)
+	 * @see #setTargetVariable(ConnectionVariable)
 	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getAddStatementCS_TargetVariable()
 	 * @model required="true"
 	 * @generated
 	 */
-	Variable getTargetVariable();
+	ConnectionVariable getTargetVariable();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.AddStatementCS#getTargetVariable <em>Target Variable</em>}' reference.
@@ -86,6 +85,6 @@ public interface AddStatementCS extends MappingStatementCS {
 	 * @see #getTargetVariable()
 	 * @generated
 	 */
-	void setTargetVariable(Variable value);
+	void setTargetVariable(ConnectionVariable value);
 
 } // AddStatementCS

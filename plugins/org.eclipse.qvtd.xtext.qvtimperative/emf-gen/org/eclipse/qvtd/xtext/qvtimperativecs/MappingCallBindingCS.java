@@ -10,7 +10,7 @@
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtimperativecs;
 
-import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
 
 /**
@@ -97,12 +97,12 @@ public interface MappingCallBindingCS extends ExpCS {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Referred Variable</em>' reference.
-	 * @see #setReferredVariable(Variable)
+	 * @see #setReferredVariable(VariableDeclaration)
 	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getMappingCallBindingCS_ReferredVariable()
 	 * @model required="true"
 	 * @generated
 	 */
-	Variable getReferredVariable();
+	VariableDeclaration getReferredVariable();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS#getReferredVariable <em>Referred Variable</em>}' reference.
@@ -112,7 +112,7 @@ public interface MappingCallBindingCS extends ExpCS {
 	 * @see #getReferredVariable()
 	 * @generated
 	 */
-	void setReferredVariable(Variable value);
+	void setReferredVariable(VariableDeclaration value);
 
 	/**
 	 * Returns the value of the '<em><b>Owned Value</b></em>' containment reference.

@@ -37,7 +37,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.AddStatementImpl#getTargetVariable <em>Target Variable</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.AddStatementImpl#getValue <em>Value</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.AddStatementImpl#isIsEnforceadUnique <em>Is Enforcead Unique</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.AddStatementImpl#isIsEnforcedUnique <em>Is Enforced Unique</em>}</li>
  * </ul>
  *
  * @generated
@@ -64,33 +64,24 @@ public class AddStatementImpl extends MappingStatementImpl implements AddStateme
 	protected OCLExpression value;
 
 	/**
-	 * The default value of the '{@link #isIsEnforceadUnique() <em>Is Enforcead Unique</em>}' attribute.
+	 * The default value of the '{@link #isIsEnforcedUnique() <em>Is Enforced Unique</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isIsEnforceadUnique()
+	 * @see #isIsEnforcedUnique()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean IS_ENFORCEAD_UNIQUE_EDEFAULT = false;
+	protected static final boolean IS_ENFORCED_UNIQUE_EDEFAULT = false;
 
 	/**
-	 * The cached value of the '{@link #isIsEnforceadUnique() <em>Is Enforcead Unique</em>}' attribute.
+	 * The cached value of the '{@link #isIsEnforcedUnique() <em>Is Enforced Unique</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isIsEnforceadUnique()
+	 * @see #isIsEnforcedUnique()
 	 * @generated
 	 * @ordered
 	 */
-	protected boolean isEnforceadUnique = IS_ENFORCEAD_UNIQUE_EDEFAULT;
-
-	/**
-	 * This is true if the Is Enforcead Unique attribute has been set.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean isEnforceadUniqueESet;
+	protected boolean isEnforcedUnique = IS_ENFORCED_UNIQUE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -202,8 +193,8 @@ public class AddStatementImpl extends MappingStatementImpl implements AddStateme
 	 * @generated
 	 */
 	@Override
-	public boolean isIsEnforceadUnique() {
-		return isEnforceadUnique;
+	public boolean isIsEnforcedUnique() {
+		return isEnforcedUnique;
 	}
 
 	/**
@@ -212,38 +203,11 @@ public class AddStatementImpl extends MappingStatementImpl implements AddStateme
 	 * @generated
 	 */
 	@Override
-	public void setIsEnforceadUnique(boolean newIsEnforceadUnique) {
-		boolean oldIsEnforceadUnique = isEnforceadUnique;
-		isEnforceadUnique = newIsEnforceadUnique;
-		boolean oldIsEnforceadUniqueESet = isEnforceadUniqueESet;
-		isEnforceadUniqueESet = true;
+	public void setIsEnforcedUnique(boolean newIsEnforcedUnique) {
+		boolean oldIsEnforcedUnique = isEnforcedUnique;
+		isEnforcedUnique = newIsEnforcedUnique;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.ADD_STATEMENT__IS_ENFORCEAD_UNIQUE, oldIsEnforceadUnique, isEnforceadUnique, !oldIsEnforceadUniqueESet));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void unsetIsEnforceadUnique() {
-		boolean oldIsEnforceadUnique = isEnforceadUnique;
-		boolean oldIsEnforceadUniqueESet = isEnforceadUniqueESet;
-		isEnforceadUnique = IS_ENFORCEAD_UNIQUE_EDEFAULT;
-		isEnforceadUniqueESet = false;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.UNSET, QVTimperativePackage.ADD_STATEMENT__IS_ENFORCEAD_UNIQUE, oldIsEnforceadUnique, IS_ENFORCEAD_UNIQUE_EDEFAULT, oldIsEnforceadUniqueESet));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public boolean isSetIsEnforceadUnique() {
-		return isEnforceadUniqueESet;
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.ADD_STATEMENT__IS_ENFORCED_UNIQUE, oldIsEnforcedUnique, isEnforcedUnique));
 	}
 
 	/**
@@ -283,8 +247,8 @@ public class AddStatementImpl extends MappingStatementImpl implements AddStateme
 				return basicGetTargetVariable();
 			case QVTimperativePackage.ADD_STATEMENT__VALUE:
 				return getValue();
-			case QVTimperativePackage.ADD_STATEMENT__IS_ENFORCEAD_UNIQUE:
-				return isIsEnforceadUnique();
+			case QVTimperativePackage.ADD_STATEMENT__IS_ENFORCED_UNIQUE:
+				return isIsEnforcedUnique();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -303,8 +267,8 @@ public class AddStatementImpl extends MappingStatementImpl implements AddStateme
 			case QVTimperativePackage.ADD_STATEMENT__VALUE:
 				setValue((OCLExpression)newValue);
 				return;
-			case QVTimperativePackage.ADD_STATEMENT__IS_ENFORCEAD_UNIQUE:
-				setIsEnforceadUnique((Boolean)newValue);
+			case QVTimperativePackage.ADD_STATEMENT__IS_ENFORCED_UNIQUE:
+				setIsEnforcedUnique((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -324,8 +288,8 @@ public class AddStatementImpl extends MappingStatementImpl implements AddStateme
 			case QVTimperativePackage.ADD_STATEMENT__VALUE:
 				setValue((OCLExpression)null);
 				return;
-			case QVTimperativePackage.ADD_STATEMENT__IS_ENFORCEAD_UNIQUE:
-				unsetIsEnforceadUnique();
+			case QVTimperativePackage.ADD_STATEMENT__IS_ENFORCED_UNIQUE:
+				setIsEnforcedUnique(IS_ENFORCED_UNIQUE_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -343,8 +307,8 @@ public class AddStatementImpl extends MappingStatementImpl implements AddStateme
 				return targetVariable != null;
 			case QVTimperativePackage.ADD_STATEMENT__VALUE:
 				return value != null;
-			case QVTimperativePackage.ADD_STATEMENT__IS_ENFORCEAD_UNIQUE:
-				return isSetIsEnforceadUnique();
+			case QVTimperativePackage.ADD_STATEMENT__IS_ENFORCED_UNIQUE:
+				return isEnforcedUnique != IS_ENFORCED_UNIQUE_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}

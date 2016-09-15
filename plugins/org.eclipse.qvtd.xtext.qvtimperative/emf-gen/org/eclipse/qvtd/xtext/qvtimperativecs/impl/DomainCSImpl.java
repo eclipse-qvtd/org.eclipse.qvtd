@@ -26,9 +26,11 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.xtext.basecs.PathNameCS;
+import org.eclipse.ocl.xtext.basecs.impl.NamedElementCSImpl;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DomainCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.GuardVariableCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage;
 import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
 
@@ -44,12 +46,12 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.DomainCSImpl#isIsEnforce <em>Is Enforce</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.DomainCSImpl#getDirection <em>Direction</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.DomainCSImpl#getCheckedProperties <em>Checked Properties</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.DomainCSImpl#getEnforcedProperties <em>Enforced Properties</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.DomainCSImpl#getOwnedGuardVariables <em>Owned Guard Variables</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class DomainCSImpl extends AreaCSImpl implements DomainCS {
+public class DomainCSImpl extends NamedElementCSImpl implements DomainCS {
 	/**
 	 * The default value of the '{@link #isIsCheck() <em>Is Check</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -111,14 +113,14 @@ public class DomainCSImpl extends AreaCSImpl implements DomainCS {
 	protected EList<PathNameCS> checkedProperties;
 
 	/**
-	 * The cached value of the '{@link #getEnforcedProperties() <em>Enforced Properties</em>}' containment reference list.
+	 * The cached value of the '{@link #getOwnedGuardVariables() <em>Owned Guard Variables</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getEnforcedProperties()
+	 * @see #getOwnedGuardVariables()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<PathNameCS> enforcedProperties;
+	protected EList<GuardVariableCS> ownedGuardVariables;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -244,11 +246,11 @@ public class DomainCSImpl extends AreaCSImpl implements DomainCS {
 	 * @generated
 	 */
 	@Override
-	public EList<PathNameCS> getEnforcedProperties() {
-		if (enforcedProperties == null) {
-			enforcedProperties = new EObjectContainmentEList<PathNameCS>(PathNameCS.class, this, QVTimperativeCSPackage.DOMAIN_CS__ENFORCED_PROPERTIES);
+	public EList<GuardVariableCS> getOwnedGuardVariables() {
+		if (ownedGuardVariables == null) {
+			ownedGuardVariables = new EObjectContainmentEList<GuardVariableCS>(GuardVariableCS.class, this, QVTimperativeCSPackage.DOMAIN_CS__OWNED_GUARD_VARIABLES);
 		}
-		return enforcedProperties;
+		return ownedGuardVariables;
 	}
 
 	/**
@@ -271,8 +273,8 @@ public class DomainCSImpl extends AreaCSImpl implements DomainCS {
 		switch (featureID) {
 			case QVTimperativeCSPackage.DOMAIN_CS__CHECKED_PROPERTIES:
 				return ((InternalEList<?>)getCheckedProperties()).basicRemove(otherEnd, msgs);
-			case QVTimperativeCSPackage.DOMAIN_CS__ENFORCED_PROPERTIES:
-				return ((InternalEList<?>)getEnforcedProperties()).basicRemove(otherEnd, msgs);
+			case QVTimperativeCSPackage.DOMAIN_CS__OWNED_GUARD_VARIABLES:
+				return ((InternalEList<?>)getOwnedGuardVariables()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -294,8 +296,8 @@ public class DomainCSImpl extends AreaCSImpl implements DomainCS {
 				return basicGetDirection();
 			case QVTimperativeCSPackage.DOMAIN_CS__CHECKED_PROPERTIES:
 				return getCheckedProperties();
-			case QVTimperativeCSPackage.DOMAIN_CS__ENFORCED_PROPERTIES:
-				return getEnforcedProperties();
+			case QVTimperativeCSPackage.DOMAIN_CS__OWNED_GUARD_VARIABLES:
+				return getOwnedGuardVariables();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -322,9 +324,9 @@ public class DomainCSImpl extends AreaCSImpl implements DomainCS {
 				getCheckedProperties().clear();
 				getCheckedProperties().addAll((Collection<? extends PathNameCS>)newValue);
 				return;
-			case QVTimperativeCSPackage.DOMAIN_CS__ENFORCED_PROPERTIES:
-				getEnforcedProperties().clear();
-				getEnforcedProperties().addAll((Collection<? extends PathNameCS>)newValue);
+			case QVTimperativeCSPackage.DOMAIN_CS__OWNED_GUARD_VARIABLES:
+				getOwnedGuardVariables().clear();
+				getOwnedGuardVariables().addAll((Collection<? extends GuardVariableCS>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -350,8 +352,8 @@ public class DomainCSImpl extends AreaCSImpl implements DomainCS {
 			case QVTimperativeCSPackage.DOMAIN_CS__CHECKED_PROPERTIES:
 				getCheckedProperties().clear();
 				return;
-			case QVTimperativeCSPackage.DOMAIN_CS__ENFORCED_PROPERTIES:
-				getEnforcedProperties().clear();
+			case QVTimperativeCSPackage.DOMAIN_CS__OWNED_GUARD_VARIABLES:
+				getOwnedGuardVariables().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -373,8 +375,8 @@ public class DomainCSImpl extends AreaCSImpl implements DomainCS {
 				return direction != null;
 			case QVTimperativeCSPackage.DOMAIN_CS__CHECKED_PROPERTIES:
 				return checkedProperties != null && !checkedProperties.isEmpty();
-			case QVTimperativeCSPackage.DOMAIN_CS__ENFORCED_PROPERTIES:
-				return enforcedProperties != null && !enforcedProperties.isEmpty();
+			case QVTimperativeCSPackage.DOMAIN_CS__OWNED_GUARD_VARIABLES:
+				return ownedGuardVariables != null && !ownedGuardVariables.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

@@ -18,21 +18,21 @@ import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Predicate CS</b></em>'.
+ * A representation of the model object '<em><b>Check Statement CS</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.PredicateCS#getOwnedCondition <em>Owned Condition</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.CheckStatementCS#getOwnedCondition <em>Owned Condition</em>}</li>
  * </ul>
  *
- * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getPredicateCS()
+ * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getCheckStatementCS()
  * @model
  * @generated
  */
-public interface PredicateCS extends ExpCS {
+public interface CheckStatementCS extends StatementCS {
 	/**
 	 * Returns the value of the '<em><b>Owned Condition</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
@@ -43,14 +43,14 @@ public interface PredicateCS extends ExpCS {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Owned Condition</em>' containment reference.
 	 * @see #setOwnedCondition(ExpCS)
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getPredicateCS_OwnedCondition()
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getCheckStatementCS_OwnedCondition()
 	 * @model containment="true" required="true"
 	 * @generated
 	 */
 	ExpCS getOwnedCondition();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.PredicateCS#getOwnedCondition <em>Owned Condition</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.CheckStatementCS#getOwnedCondition <em>Owned Condition</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Owned Condition</em>' containment reference.
@@ -59,4 +59,4 @@ public interface PredicateCS extends ExpCS {
 	 */
 	void setOwnedCondition(ExpCS value);
 
-} // PredicateCS
+} // CheckStatementCS

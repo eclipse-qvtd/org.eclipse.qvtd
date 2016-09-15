@@ -15,11 +15,12 @@
 package org.eclipse.qvtd.pivot.qvtimperative.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.pivot.internal.VariableImpl;
+import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
@@ -35,11 +36,12 @@ import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.NewStatementImpl#getReferredTypedModel <em>Referred Typed Model</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.NewStatementImpl#getOwnedInit <em>Owned Init</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class NewStatementImpl extends VariableImpl implements NewStatement {
+public class NewStatementImpl extends VariableStatementImpl implements NewStatement {
 	/**
 	 * The cached value of the '{@link #getReferredTypedModel() <em>Referred Typed Model</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -49,6 +51,16 @@ public class NewStatementImpl extends VariableImpl implements NewStatement {
 	 * @ordered
 	 */
 	protected TypedModel referredTypedModel;
+
+	/**
+	 * The cached value of the '{@link #getOwnedInit() <em>Owned Init</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOwnedInit()
+	 * @generated
+	 * @ordered
+	 */
+	protected OCLExpression ownedInit;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -115,11 +127,72 @@ public class NewStatementImpl extends VariableImpl implements NewStatement {
 	 * @generated
 	 */
 	@Override
+	public OCLExpression getOwnedInit() {
+		return ownedInit;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetOwnedInit(OCLExpression newOwnedInit, NotificationChain msgs) {
+		OCLExpression oldOwnedInit = ownedInit;
+		ownedInit = newOwnedInit;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTimperativePackage.NEW_STATEMENT__OWNED_INIT, oldOwnedInit, newOwnedInit);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setOwnedInit(OCLExpression newOwnedInit) {
+		if (newOwnedInit != ownedInit) {
+			NotificationChain msgs = null;
+			if (ownedInit != null)
+				msgs = ((InternalEObject)ownedInit).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTimperativePackage.NEW_STATEMENT__OWNED_INIT, null, msgs);
+			if (newOwnedInit != null)
+				msgs = ((InternalEObject)newOwnedInit).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTimperativePackage.NEW_STATEMENT__OWNED_INIT, null, msgs);
+			msgs = basicSetOwnedInit(newOwnedInit, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.NEW_STATEMENT__OWNED_INIT, newOwnedInit, newOwnedInit));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case QVTimperativePackage.NEW_STATEMENT__OWNED_INIT:
+				return basicSetOwnedInit(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case QVTimperativePackage.NEW_STATEMENT__REFERRED_TYPED_MODEL:
 				if (resolve) return getReferredTypedModel();
 				return basicGetReferredTypedModel();
+			case QVTimperativePackage.NEW_STATEMENT__OWNED_INIT:
+				return getOwnedInit();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -134,6 +207,9 @@ public class NewStatementImpl extends VariableImpl implements NewStatement {
 		switch (featureID) {
 			case QVTimperativePackage.NEW_STATEMENT__REFERRED_TYPED_MODEL:
 				setReferredTypedModel((TypedModel)newValue);
+				return;
+			case QVTimperativePackage.NEW_STATEMENT__OWNED_INIT:
+				setOwnedInit((OCLExpression)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -150,6 +226,9 @@ public class NewStatementImpl extends VariableImpl implements NewStatement {
 			case QVTimperativePackage.NEW_STATEMENT__REFERRED_TYPED_MODEL:
 				setReferredTypedModel((TypedModel)null);
 				return;
+			case QVTimperativePackage.NEW_STATEMENT__OWNED_INIT:
+				setOwnedInit((OCLExpression)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -164,6 +243,8 @@ public class NewStatementImpl extends VariableImpl implements NewStatement {
 		switch (featureID) {
 			case QVTimperativePackage.NEW_STATEMENT__REFERRED_TYPED_MODEL:
 				return referredTypedModel != null;
+			case QVTimperativePackage.NEW_STATEMENT__OWNED_INIT:
+				return ownedInit != null;
 		}
 		return super.eIsSet(featureID);
 	}

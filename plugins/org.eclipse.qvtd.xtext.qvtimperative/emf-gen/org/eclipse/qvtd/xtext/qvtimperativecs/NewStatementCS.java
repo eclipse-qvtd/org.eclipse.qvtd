@@ -28,7 +28,7 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.NewStatementCS#getOwnedInitExpression <em>Owned Init Expression</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.NewStatementCS#getOwnedInit <em>Owned Init</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.NewStatementCS#getReferredTypedModel <em>Referred Typed Model</em>}</li>
  * </ul>
  *
@@ -38,30 +38,30 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
  */
 public interface NewStatementCS extends TypedElementCS, StatementCS {
 	/**
-	 * Returns the value of the '<em><b>Owned Init Expression</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Owned Init</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Owned Init Expression</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Owned Init</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Owned Init Expression</em>' containment reference.
-	 * @see #setOwnedInitExpression(ExpCS)
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getNewStatementCS_OwnedInitExpression()
+	 * @return the value of the '<em>Owned Init</em>' containment reference.
+	 * @see #setOwnedInit(ExpCS)
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getNewStatementCS_OwnedInit()
 	 * @model containment="true"
 	 * @generated
 	 */
-	ExpCS getOwnedInitExpression();
+	ExpCS getOwnedInit();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.NewStatementCS#getOwnedInitExpression <em>Owned Init Expression</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.NewStatementCS#getOwnedInit <em>Owned Init</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Owned Init Expression</em>' containment reference.
-	 * @see #getOwnedInitExpression()
+	 * @param value the new value of the '<em>Owned Init</em>' containment reference.
+	 * @see #getOwnedInit()
 	 * @generated
 	 */
-	void setOwnedInitExpression(ExpCS value);
+	void setOwnedInit(ExpCS value);
 
 	/**
 	 * Returns the value of the '<em><b>Referred Typed Model</b></em>' reference.
