@@ -76,10 +76,8 @@ public class MappingAttribution extends AbstractAttribution
 					environmentView.addNamedElement(asStatement);
 				}
 			}
-			QVTimperativeEnvironmentUtil.addMiddleGuardVariables(environmentView, mapping);
-			QVTimperativeEnvironmentUtil.addSideGuardVariables(environmentView, mapping, null);
-			QVTimperativeEnvironmentUtil.addMiddleBottomVariables(environmentView, mapping);
-			QVTimperativeEnvironmentUtil.addSideBottomVariables(environmentView, mapping, null);
+			environmentView.addNamedElements(mapping.getOwnedGuardVariables());
+			environmentView.addNamedElements(mapping.getInoutVariables());
 			Transformation transformation = QVTimperativeUtil.getContainingTransformation(mapping);
 			if (transformation != null) {
 				for (TypedModel typedModel : transformation.getModelParameter()) {
@@ -91,7 +89,6 @@ public class MappingAttribution extends AbstractAttribution
 					}
 				}
 			}
-
 		}
 		return scopeView.getParent();
 	}

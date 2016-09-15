@@ -34,18 +34,8 @@ public class MappingCallBindingAttribution extends EmptyAttribution
 			if (targetReference.getEType() == PivotPackage.Literals.VARIABLE_DECLARATION) {
 				Mapping referredMapping = mappingCall.getReferredMapping();
 				if (referredMapping != null) {
-					QVTimperativeEnvironmentUtil.addMiddleGuardVariables(environmentView, referredMapping);
-					QVTimperativeEnvironmentUtil.addSideGuardVariables(environmentView, referredMapping, null);
-				}
-			}
-			else {		// FIXME Distinguish referred.context mapping
-				EObject eContainer = mappingCall.eContainer();
-				if (eContainer instanceof Mapping) {
-					Mapping mapping = (Mapping)eContainer;
-					QVTimperativeEnvironmentUtil.addMiddleGuardVariables(environmentView, mapping);
-					QVTimperativeEnvironmentUtil.addSideGuardVariables(environmentView, mapping, null);
-					QVTimperativeEnvironmentUtil.addMiddleBottomVariables(environmentView, mapping);
-					QVTimperativeEnvironmentUtil.addSideBottomVariables(environmentView, mapping, null);
+					environmentView.addNamedElements(referredMapping.getOwnedGuardVariables());
+					environmentView.addNamedElements(referredMapping.getInoutVariables());
 				}
 			}
 		}
