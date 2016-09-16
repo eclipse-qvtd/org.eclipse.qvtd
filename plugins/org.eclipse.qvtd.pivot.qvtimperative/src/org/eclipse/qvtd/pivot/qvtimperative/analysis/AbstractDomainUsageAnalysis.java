@@ -81,6 +81,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.CheckStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
+import org.eclipse.qvtd.pivot.qvtimperative.InitializeStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
@@ -463,6 +464,11 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTim
 	}
 
 	@Override
+	public @NonNull DomainUsage visitGuardVariable(@NonNull GuardVariable object) {
+		return visit(object.getReferredTypedModel());
+	}
+
+	@Override
 	public @NonNull DomainUsage visitIfExp(@NonNull IfExp object) {
 		@SuppressWarnings("unused") DomainUsage conditionUsage = visit(object.getOwnedCondition());
 		DomainUsage thenUsage = visit(object.getOwnedThen());
@@ -471,15 +477,15 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTim
 	}
 
 	@Override
-	public @NonNull DomainUsage visitGuardVariable(@NonNull GuardVariable object) {
-		return visit(object.getReferredTypedModel());
-	}
-
-	@Override
 	public @NonNull DomainUsage visitImperativeDomain(@NonNull ImperativeDomain object) {
 		DomainUsage usage = visit(object.getTypedModel());
 		setUsage(object, usage);
 		return usage;
+	}
+
+	@Override
+	public @NonNull DomainUsage visitInitializeStatement(@NonNull InitializeStatement object) {
+		return visit(object.getTargetVariable());
 	}
 
 	@Override

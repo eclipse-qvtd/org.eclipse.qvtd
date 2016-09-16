@@ -19,7 +19,6 @@ import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.xtext.base.cs2as.BasicContinuation;
 import org.eclipse.ocl.xtext.base.cs2as.CS2ASConversion;
 import org.eclipse.ocl.xtext.base.cs2as.Continuation;
-import org.eclipse.ocl.xtext.base.cs2as.PivotDependency;
 import org.eclipse.ocl.xtext.base.cs2as.SingleContinuation;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
@@ -45,7 +44,7 @@ public class QVTcoreCSPreOrderVisitor extends AbstractQVTcoreCSPreOrderVisitor
 	public static class ParamDeclarationCompletion extends SingleContinuation<ParamDeclarationCS>
 	{
 		public ParamDeclarationCompletion(@NonNull CS2ASConversion context, @NonNull ParamDeclarationCS csElement) {
-			super(context, null, null, csElement, new PivotDependency(csElement.getOwnedType()));
+			super(context, null, null, csElement, createDependencies(csElement.getOwnedType()));
 		}
 
 		@Override
@@ -61,7 +60,7 @@ public class QVTcoreCSPreOrderVisitor extends AbstractQVTcoreCSPreOrderVisitor
 	public static class QueryCompletion extends SingleContinuation<QueryCS>
 	{
 		public QueryCompletion(@NonNull CS2ASConversion context, @NonNull QueryCS csElement) {
-			super(context, null, null, csElement, new PivotDependency(csElement.getOwnedType()));
+			super(context, null, null, csElement, createDependencies(csElement.getOwnedType()));
 		}
 
 		@Override
@@ -77,7 +76,7 @@ public class QVTcoreCSPreOrderVisitor extends AbstractQVTcoreCSPreOrderVisitor
 	public static class RealizeableVariableCompletion extends SingleContinuation<RealizeableVariableCS>
 	{
 		public RealizeableVariableCompletion(@NonNull CS2ASConversion context, @NonNull RealizeableVariableCS csElement) {
-			super(context, null, null, csElement, new PivotDependency(csElement.getOwnedType()));
+			super(context, null, null, csElement, createDependencies(csElement.getOwnedType()));
 		}
 
 		@Override

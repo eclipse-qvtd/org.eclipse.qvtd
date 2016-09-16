@@ -621,34 +621,23 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 
 	@Override
 	public CGNamedElement visitDeclareStatement(@NonNull DeclareStatement asVariable) {
-		if (!asVariable.isIsChecked()) {
+		OCLExpression asInit = asVariable.getOwnedInit();
+		if (asInit == null) {
+
+		}
+		else if (!asVariable.isIsChecked()) {
 			/*		CGVariable cgVariable = getVariable(asVariable);
 			CGValuedElement initValue = doVisit(CGValuedElement.class, asVariable.getOwnedInit());
 			cgVariable.setInit(initValue);
 			cgVariable.setTypeId(initValue.getTypeId());
 			cgVariable.setRequired(initValue.isRequired());
 			return cgVariable; */
-			OCLExpression asInit = asVariable.getOwnedInit();
 			if (asInit != null) {
 				getBodyBuilder().appendCheckedLetVariable(asVariable, asInit);
 			}
 		}
 		else {
-			//		CGVariable cgVariable = getVariable(asVariable);
-			//		CGValuedElement initValue = doVisit(CGValuedElement.class, asVariable.getOwnedInit());
-			//		cgVariable.setInit(initValue);
-			//		cgVariable.setTypeId(initValue.getTypeId());
-			//		cgVariable.setRequired(initValue.isRequired());
-			// FIXME predicate
-			//		return cgVariable;
-			//	}
-			//
-			//	@Override
-			//	public @Nullable CGNamedElement visitVariablePredicate(@NonNull VariablePredicate asPredicate) {
-			OCLExpression asExpression = asVariable.getOwnedInit();
-			assert asExpression != null;
-			//
-			CGValuedElement cgExpression = doVisit(CGValuedElement.class, asExpression);
+			CGValuedElement cgExpression = doVisit(CGValuedElement.class, asInit);
 			cgExpression.setName("temp1_" + asVariable.getName());
 			//
 			CGFinalVariable cgUncastVariable = CGModelFactory.eINSTANCE.createCGFinalVariable();
@@ -666,7 +655,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 			CGIfExp cgPredicate = CGModelFactory.eINSTANCE.createCGIfExp();
 			cgPredicate.setTypeId(analyzer.getTypeId(TypeId.BOOLEAN));
 			cgPredicate.setRequired(true);
-			CGConstantExp cgElse = analyzer.createCGConstantExp(asExpression, analyzer.getBoolean(false));
+			CGConstantExp cgElse = analyzer.createCGConstantExp(asInit, analyzer.getBoolean(false));
 			setAst(cgElse, asVariable);
 			cgElse.setTypeId(analyzer.getTypeId(TypeId.BOOLEAN));
 			cgElse.setRequired(true);

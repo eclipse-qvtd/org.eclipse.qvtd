@@ -73,7 +73,7 @@ public class QVTimperativeCSPreOrderVisitor extends AbstractQVTimperativeCSPreOr
 	public static class AccessStatementCompletion extends SingleContinuation<@NonNull AccessStatementCS>
 	{
 		public AccessStatementCompletion(@NonNull CS2ASConversion context, @NonNull AccessStatementCS csElement) {
-			super(context, null, null, csElement, new PivotDependency(csElement.getOwnedType()));
+			super(context, null, null, csElement, createDependencies(csElement.getOwnedType()));
 		}
 
 		@Override
@@ -89,7 +89,7 @@ public class QVTimperativeCSPreOrderVisitor extends AbstractQVTimperativeCSPreOr
 	public static class DeclareStatementCompletion extends SingleContinuation<@NonNull DeclareStatementCS>
 	{
 		public DeclareStatementCompletion(@NonNull CS2ASConversion context, @NonNull DeclareStatementCS csElement) {
-			super(context, null, null, csElement, new PivotDependency(csElement.getOwnedType()));
+			super(context, null, null, csElement, createDependencies(csElement.getOwnedType()));
 		}
 
 		@Override
@@ -105,7 +105,7 @@ public class QVTimperativeCSPreOrderVisitor extends AbstractQVTimperativeCSPreOr
 	public static class GuardVariableCompletion extends SingleContinuation<@NonNull GuardVariableCS>
 	{
 		public GuardVariableCompletion(@NonNull CS2ASConversion context, @NonNull GuardVariableCS csElement) {
-			super(context, null, null, csElement, new PivotDependency(csElement.getOwnedType()));
+			super(context, null, null, csElement, createDependencies(csElement.getOwnedType()));
 		}
 
 		@Override
@@ -121,7 +121,7 @@ public class QVTimperativeCSPreOrderVisitor extends AbstractQVTimperativeCSPreOr
 	public static class InoutVariableCompletion extends SingleContinuation<@NonNull InoutVariableCS>
 	{
 		public InoutVariableCompletion(@NonNull CS2ASConversion context, @NonNull InoutVariableCS csElement) {
-			super(context, null, null, csElement, new PivotDependency(csElement.getOwnedType()));
+			super(context, null, null, csElement, createDependencies(csElement.getOwnedType()));
 		}
 
 		@Override
@@ -136,12 +136,12 @@ public class QVTimperativeCSPreOrderVisitor extends AbstractQVTimperativeCSPreOr
 
 	public static class MappingLoopIteratorCompletion extends SingleContinuation<@NonNull MappingLoopCS>
 	{
-		protected static PivotDependency[] computeDependencies(@NonNull MappingLoopCS csElement) {
+		protected static @NonNull PivotDependency @NonNull [] computeDependencies(@NonNull MappingLoopCS csElement) {
 			VariableCS csIterator = csElement.getOwnedIterator();
 			if (csIterator != null) {
 				TypedRefCS ownedType = csIterator.getOwnedType();
 				if (ownedType != null) {
-					return new PivotDependency[]{new PivotDependency(ownedType)};
+					return new @NonNull PivotDependency[]{new PivotDependency(ownedType)};
 				}
 			}
 			return new PivotDependency[0];
@@ -171,7 +171,7 @@ public class QVTimperativeCSPreOrderVisitor extends AbstractQVTimperativeCSPreOr
 	public static class NewStatementCompletion extends SingleContinuation<@NonNull NewStatementCS>
 	{
 		public NewStatementCompletion(@NonNull CS2ASConversion context, @NonNull NewStatementCS csElement) {
-			super(context, null, null, csElement, new PivotDependency(csElement.getOwnedType()));
+			super(context, null, null, csElement, createDependencies(csElement.getOwnedType()));
 		}
 
 		@Override
@@ -187,7 +187,7 @@ public class QVTimperativeCSPreOrderVisitor extends AbstractQVTimperativeCSPreOr
 	public static class OutVariableCompletion extends SingleContinuation<@NonNull OutVariableCS>
 	{
 		public OutVariableCompletion(@NonNull CS2ASConversion context, @NonNull OutVariableCS csElement) {
-			super(context, null, null, csElement, new PivotDependency(csElement.getOwnedType()));
+			super(context, null, null, csElement, createDependencies(csElement.getOwnedType()));
 		}
 
 		@Override
@@ -203,7 +203,7 @@ public class QVTimperativeCSPreOrderVisitor extends AbstractQVTimperativeCSPreOr
 	public static class ParamDeclarationCompletion extends SingleContinuation<@NonNull ParamDeclarationCS>
 	{
 		public ParamDeclarationCompletion(@NonNull CS2ASConversion context, @NonNull ParamDeclarationCS csElement) {
-			super(context, null, null, csElement, new PivotDependency(csElement.getOwnedType()));
+			super(context, null, null, csElement, createDependencies(csElement.getOwnedType()));
 		}
 
 		@Override
@@ -219,7 +219,7 @@ public class QVTimperativeCSPreOrderVisitor extends AbstractQVTimperativeCSPreOr
 	public static class QueryCompletion extends SingleContinuation<QueryCS>
 	{
 		public QueryCompletion(@NonNull CS2ASConversion context, @NonNull QueryCS csElement) {
-			super(context, null, null, csElement, new PivotDependency(csElement.getOwnedType()));
+			super(context, null, null, csElement, createDependencies(csElement.getOwnedType()));
 		}
 
 		@Override

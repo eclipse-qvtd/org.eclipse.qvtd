@@ -160,6 +160,9 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 			if (expression != null) {
 				OCLExpression target = context.visitLeft2Right(OCLExpression.class, expression);
 				asVariable.setOwnedInit(target);
+				if ((csElement.getOwnedType() == null) && (target != null)) {
+					context.setType(asVariable, target.getType(), target.isIsRequired(), target.getTypeValue());
+				}
 			}
 		}
 		return null;
@@ -228,12 +231,15 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 
 	@Override
 	public Continuation<?> visitInitializeStatementCS(@NonNull InitializeStatementCS csElement) {
-		InitializeStatement asVariable = PivotUtil.getPivot(InitializeStatement.class, csElement);
-		if (asVariable != null) {
+		InitializeStatement asStatement = PivotUtil.getPivot(InitializeStatement.class, csElement);
+		if (asStatement != null) {
+			VariableDeclaration targetVariable = csElement.getTargetVariable();
+			assert targetVariable != null;
+			asStatement.setTargetVariable(targetVariable);
 			ExpCS expression = csElement.getOwnedInit();
 			if (expression != null) {
 				OCLExpression target = context.visitLeft2Right(OCLExpression.class, expression);
-				asVariable.setOwnedInit(target);
+				asStatement.setOwnedInit(target);
 			}
 		}
 		return null;
