@@ -233,7 +233,7 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 		Mapping asMapping = QVTimperativeUtil.getContainingMapping(navigationCallExp);
 		Object ecoreValue;
 		if ((asMapping != null) && transformationAnalysis.isHazardousRead(asMapping, navigationCallExp)) {		// null within queries
-			assert false; 		// Should use an AccessStatement
+			//			assert false; 		// Should use an AccessStatement
 			//			assert sourceValue != null;
 			if (sourceValue == null) {
 				throw new InvalidValueException("Null source for '" + referredProperty + "'", sourceValue, navigationCallExp);
