@@ -9317,6 +9317,7 @@ rule__OutVariableCS__Group__4
     }
 :
 	rule__OutVariableCS__Group__4__Impl
+	rule__OutVariableCS__Group__5
 ;
 finally {
 	restoreStackSize(stackSize);
@@ -9328,11 +9329,39 @@ rule__OutVariableCS__Group__4__Impl
     }
 :
 (
-{ before(grammarAccess.getOutVariableCSAccess().getSemicolonKeyword_4()); }
+{ before(grammarAccess.getOutVariableCSAccess().getGroup_4()); }
+(rule__OutVariableCS__Group_4__0)?
+{ after(grammarAccess.getOutVariableCSAccess().getGroup_4()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+rule__OutVariableCS__Group__5
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__OutVariableCS__Group__5__Impl
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__OutVariableCS__Group__5__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getOutVariableCSAccess().getSemicolonKeyword_5()); }
 
 	';' 
 
-{ after(grammarAccess.getOutVariableCSAccess().getSemicolonKeyword_4()); }
+{ after(grammarAccess.getOutVariableCSAccess().getSemicolonKeyword_5()); }
 )
 
 ;
@@ -9345,6 +9374,71 @@ finally {
 
 
 
+
+
+
+
+
+
+
+
+rule__OutVariableCS__Group_4__0
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__OutVariableCS__Group_4__0__Impl
+	rule__OutVariableCS__Group_4__1
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__OutVariableCS__Group_4__0__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getOutVariableCSAccess().getColonEqualsSignKeyword_4_0()); }
+
+	':=' 
+
+{ after(grammarAccess.getOutVariableCSAccess().getColonEqualsSignKeyword_4_0()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+rule__OutVariableCS__Group_4__1
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__OutVariableCS__Group_4__1__Impl
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__OutVariableCS__Group_4__1__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getOutVariableCSAccess().getOwnedExpressionAssignment_4_1()); }
+(rule__OutVariableCS__OwnedExpressionAssignment_4_1)
+{ after(grammarAccess.getOutVariableCSAccess().getOwnedExpressionAssignment_4_1()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
 
 
 
@@ -25972,6 +26066,21 @@ rule__OutVariableCS__OwnedTypeAssignment_3
 (
 { before(grammarAccess.getOutVariableCSAccess().getOwnedTypeTypeExpCSParserRuleCall_3_0()); }
 	ruleTypeExpCS{ after(grammarAccess.getOutVariableCSAccess().getOwnedTypeTypeExpCSParserRuleCall_3_0()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__OutVariableCS__OwnedExpressionAssignment_4_1
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getOutVariableCSAccess().getOwnedExpressionExpCSParserRuleCall_4_1_0()); }
+	ruleExpCS{ after(grammarAccess.getOutVariableCSAccess().getOwnedExpressionExpCSParserRuleCall_4_1_0()); }
 )
 
 ;

@@ -1790,9 +1790,31 @@ ruleOutVariableCS returns [EObject current=null]
 	    }
 
 )
-)	otherlv_4=';' 
+)(	otherlv_4=':=' 
     {
-    	newLeafNode(otherlv_4, grammarAccess.getOutVariableCSAccess().getSemicolonKeyword_4());
+    	newLeafNode(otherlv_4, grammarAccess.getOutVariableCSAccess().getColonEqualsSignKeyword_4_0());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getOutVariableCSAccess().getOwnedExpressionExpCSParserRuleCall_4_1_0()); 
+	    }
+		lv_ownedExpression_5_0=ruleExpCS		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getOutVariableCSRule());
+	        }
+       		set(
+       			$current, 
+       			"ownedExpression",
+        		lv_ownedExpression_5_0, 
+        		"org.eclipse.ocl.xtext.essentialocl.EssentialOCL.ExpCS");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+))?	otherlv_6=';' 
+    {
+    	newLeafNode(otherlv_6, grammarAccess.getOutVariableCSAccess().getSemicolonKeyword_5());
     }
 )
 ;

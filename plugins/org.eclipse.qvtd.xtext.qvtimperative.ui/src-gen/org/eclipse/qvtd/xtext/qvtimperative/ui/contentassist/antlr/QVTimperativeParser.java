@@ -138,6 +138,7 @@ public class QVTimperativeParser extends AbstractContentAssistParser {
 					put(grammarAccess.getNewStatementCSAccess().getGroup_0_2(), "rule__NewStatementCS__Group_0_2__0");
 					put(grammarAccess.getNewStatementCSAccess().getGroup_7(), "rule__NewStatementCS__Group_7__0");
 					put(grammarAccess.getOutVariableCSAccess().getGroup(), "rule__OutVariableCS__Group__0");
+					put(grammarAccess.getOutVariableCSAccess().getGroup_4(), "rule__OutVariableCS__Group_4__0");
 					put(grammarAccess.getParamDeclarationCSAccess().getGroup(), "rule__ParamDeclarationCS__Group__0");
 					put(grammarAccess.getQualifiedPackageCSAccess().getGroup(), "rule__QualifiedPackageCS__Group__0");
 					put(grammarAccess.getQualifiedPackageCSAccess().getGroup_3(), "rule__QualifiedPackageCS__Group_3__0");
@@ -362,6 +363,7 @@ public class QVTimperativeParser extends AbstractContentAssistParser {
 					put(grammarAccess.getNewStatementCSAccess().getOwnedExpressionAssignment_7_1(), "rule__NewStatementCS__OwnedExpressionAssignment_7_1");
 					put(grammarAccess.getOutVariableCSAccess().getNameAssignment_1(), "rule__OutVariableCS__NameAssignment_1");
 					put(grammarAccess.getOutVariableCSAccess().getOwnedTypeAssignment_3(), "rule__OutVariableCS__OwnedTypeAssignment_3");
+					put(grammarAccess.getOutVariableCSAccess().getOwnedExpressionAssignment_4_1(), "rule__OutVariableCS__OwnedExpressionAssignment_4_1");
 					put(grammarAccess.getParamDeclarationCSAccess().getNameAssignment_0(), "rule__ParamDeclarationCS__NameAssignment_0");
 					put(grammarAccess.getParamDeclarationCSAccess().getOwnedTypeAssignment_2(), "rule__ParamDeclarationCS__OwnedTypeAssignment_2");
 					put(grammarAccess.getQualifiedPackageCSAccess().getOwnedPathNameAssignment_1(), "rule__QualifiedPackageCS__OwnedPathNameAssignment_1");

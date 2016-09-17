@@ -611,6 +611,7 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 		OutVariableCS csVariable = context.refreshNamedElement(OutVariableCS.class, QVTimperativeCSPackage.Literals.OUT_VARIABLE_CS, asVariable);
 		csVariable.setPivot(asVariable);
 		csVariable.setOwnedType(createTypeRefCS(asVariable.getType(), null)); //getScope(asVariable)));
+		csVariable.setOwnedExpression(context.visitDeclaration(ExpCS.class, asVariable.getOwnedExpression()));
 		return csVariable;
 	}
 

@@ -726,19 +726,10 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 	 *     OutVariableCS returns OutVariableCS
 	 *
 	 * Constraint:
-	 *     (name=UnrestrictedName ownedType=TypeExpCS)
+	 *     (name=UnrestrictedName ownedType=TypeExpCS ownedExpression=ExpCS?)
 	 */
 	protected void sequence_OutVariableCS(ISerializationContext context, OutVariableCS semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, BaseCSPackage.Literals.NAMED_ELEMENT_CS__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BaseCSPackage.Literals.NAMED_ELEMENT_CS__NAME));
-			if (transientValues.isValueTransient(semanticObject, BaseCSPackage.Literals.TYPED_ELEMENT_CS__OWNED_TYPE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BaseCSPackage.Literals.TYPED_ELEMENT_CS__OWNED_TYPE));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getOutVariableCSAccess().getNameUnrestrictedNameParserRuleCall_1_0(), semanticObject.getName());
-		feeder.accept(grammarAccess.getOutVariableCSAccess().getOwnedTypeTypeExpCSParserRuleCall_3_0(), semanticObject.getOwnedType());
-		feeder.finish();
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	

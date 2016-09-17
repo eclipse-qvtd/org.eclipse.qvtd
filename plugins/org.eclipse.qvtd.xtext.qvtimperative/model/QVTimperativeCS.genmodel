@@ -65,7 +65,9 @@
     <genClasses ecoreClass="QVTimperativeCS.ecore#//ObservableStatementCS">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//ObservableStatementCS/observedProperties"/>
     </genClasses>
-    <genClasses ecoreClass="QVTimperativeCS.ecore#//OutVariableCS"/>
+    <genClasses ecoreClass="QVTimperativeCS.ecore#//OutVariableCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//OutVariableCS/ownedExpression"/>
+    </genClasses>
     <genClasses ecoreClass="QVTimperativeCS.ecore#//ParamDeclarationCS"/>
     <genClasses ecoreClass="QVTimperativeCS.ecore#//QueryCS">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//QueryCS/ownedPathName"/>
