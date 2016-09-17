@@ -34,7 +34,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
-import org.eclipse.qvtd.pivot.qvtimperative.PredicateVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.xtext.qvtimperativecs.AddStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.CheckStatementCS;
@@ -47,7 +47,7 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.MappingLoopCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.NewStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.OutVariableCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.ParamDeclarationCS;
-import org.eclipse.qvtd.xtext.qvtimperativecs.PredicateVariableCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.DeclareStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QueryCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.SetStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.TopLevelCS;
@@ -106,7 +106,7 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 			ExpCS csInitialiser = csElement.getOwnedExpression();
 			if (csInitialiser != null) {
 				OCLExpression initialiser = context.visitLeft2Right(OCLExpression.class, csInitialiser);
-				asAddStatement.setValue(initialiser);
+				asAddStatement.setOwnedInit(initialiser);
 			}
 		}
 		return null;
@@ -121,7 +121,7 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 			if (csCondition != null) {
 				asCondition = context.visitLeft2Right(OCLExpression.class, csCondition);
 			}
-			asPredicate.setConditionExpression(asCondition);
+			asPredicate.setOwnedCondition(asCondition);
 		}
 		return null;
 	}
@@ -130,6 +130,50 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 	public Continuation<?> visitConstraintCS(@NonNull ConstraintCS object) {
 		return null;
 	}
+
+	@Override
+	public Continuation<?> visitDeclareStatementCS(@NonNull DeclareStatementCS csElement) {
+		DeclareStatement asVariable = PivotUtil.getPivot(DeclareStatement.class, csElement);
+		if (asVariable != null) {
+			ExpCS expression = csElement.getOwnedInit();
+			if (expression != null) {
+				OCLExpression target = context.visitLeft2Right(OCLExpression.class, expression);
+				asVariable.setOwnedInit(target);
+				if ((csElement.getOwnedType() == null) && (target != null)) {
+					context.setType(asVariable, target.getType(), target.isIsRequired(), target.getTypeValue());
+				}
+			}
+		}
+		return null;
+	}
+
+	/*	@Override
+	public Continuation<?> visitCheckVariableStatementCS(@NonNull CheckVariableStatementCS csElement) {
+		ExpCS csTarget = csElement.getOwnedTarget();
+		assert csTarget != null;
+		OCLExpression target = context.visitLeft2Right(OCLExpression.class, csTarget);
+		ExpCS csInitialiser = csElement.getOwnedInit();
+		assert csInitialiser != null;
+		CheckVariableStatement assignment = null;
+		if (target instanceof NavigationCallExp) {
+			throw new IllegalStateException();
+		}
+		else if (target instanceof VariableExp) {
+			CheckVariableStatement variableAssignment = PivotUtil.getPivot(CheckVariableStatement.class, csElement);
+			if (variableAssignment != null) {
+				variableAssignment.setTargetVariable(((VariableExp)target).getReferredVariable());
+			}
+		}
+		else if (target != null) {
+			context.addDiagnostic(csElement, "unrecognised Constraint target " + target.eClass().getName());
+		}
+		if (assignment != null) {
+			OCLExpression initialiser = context.visitLeft2Right(OCLExpression.class, csInitialiser);
+			assignment.setOwnedInit(initialiser);
+			//			pAssignments.add(assignment);
+		}
+		return null;
+	} */
 
 	@Override
 	public Continuation<?> visitDirectionCS(@NonNull DirectionCS object) {
@@ -211,47 +255,6 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 	}
 
 	@Override
-	public Continuation<?> visitPredicateVariableCS(@NonNull PredicateVariableCS csElement) {
-		PredicateVariable asVariable = PivotUtil.getPivot(PredicateVariable.class, csElement);
-		if (asVariable != null) {
-			ExpCS expression = csElement.getOwnedInit();
-			if (expression != null) {
-				OCLExpression target = context.visitLeft2Right(OCLExpression.class, expression);
-				asVariable.setOwnedInit(target);
-			}
-		}
-		return null;
-	}
-
-	/*	@Override
-	public Continuation<?> visitCheckVariableStatementCS(@NonNull CheckVariableStatementCS csElement) {
-		ExpCS csTarget = csElement.getOwnedTarget();
-		assert csTarget != null;
-		OCLExpression target = context.visitLeft2Right(OCLExpression.class, csTarget);
-		ExpCS csInitialiser = csElement.getOwnedInit();
-		assert csInitialiser != null;
-		CheckVariableStatement assignment = null;
-		if (target instanceof NavigationCallExp) {
-			throw new IllegalStateException();
-		}
-		else if (target instanceof VariableExp) {
-			CheckVariableStatement variableAssignment = PivotUtil.getPivot(CheckVariableStatement.class, csElement);
-			if (variableAssignment != null) {
-				variableAssignment.setTargetVariable(((VariableExp)target).getReferredVariable());
-			}
-		}
-		else if (target != null) {
-			context.addDiagnostic(csElement, "unrecognised Constraint target " + target.eClass().getName());
-		}
-		if (assignment != null) {
-			OCLExpression initialiser = context.visitLeft2Right(OCLExpression.class, csInitialiser);
-			assignment.setOwnedInit(initialiser);
-			//			pAssignments.add(assignment);
-		}
-		return null;
-	} */
-
-	@Override
 	public Continuation<?> visitQueryCS(@NonNull QueryCS csElement) {
 		Function pFunction = PivotUtil.getPivot(Function.class, csElement);
 		if (pFunction != null) {
@@ -272,11 +275,14 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 			assert targetVariable != null;
 			setStatement.setTargetVariable(targetVariable);
 			Property targetProperty = csElement.getReferredProperty();
+			boolean isImplicit = targetProperty.isIsImplicit();
+			setStatement.setTargetProperty(isImplicit ? targetProperty.getOpposite() : targetProperty);
+			setStatement.setIsOpposite(isImplicit);
 			ExpCS csInitialiser = csElement.getOwnedInit();
 			OCLExpression target = csInitialiser != null ? context.visitLeft2Right(OCLExpression.class, csInitialiser) : null;
 			setStatement.setTargetProperty(targetProperty);
 			//			propertyAssignment.setIsOpposite(target instanceof FeatureCallExp);		// FIXME isOpposite
-			setStatement.setValue(target);
+			setStatement.setOwnedInit(target);
 			//				pAssignments.add(assignment);
 		}
 		return null;

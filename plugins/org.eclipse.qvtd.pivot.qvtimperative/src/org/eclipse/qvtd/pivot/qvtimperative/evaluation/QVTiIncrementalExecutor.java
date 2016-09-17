@@ -233,6 +233,7 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 		Mapping asMapping = QVTimperativeUtil.getContainingMapping(navigationCallExp);
 		Object ecoreValue;
 		if ((asMapping != null) && transformationAnalysis.isHazardousRead(asMapping, navigationCallExp)) {		// null within queries
+			//			assert false; 		// Should use an AccessStatement
 			//			assert sourceValue != null;
 			if (sourceValue == null) {
 				throw new InvalidValueException("Null source for '" + referredProperty + "'", sourceValue, navigationCallExp);
@@ -285,7 +286,7 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 	public void internalExecuteSetStatement(@NonNull SetStatement setStatement, @NonNull Object sourceObject, @Nullable Object ecoreValue, @Nullable Object childKey) {
 		super.internalExecuteSetStatement(setStatement, sourceObject, ecoreValue, childKey);
 		if (mode == Mode.LAZY) {
-			if (setStatement.isIsEmit()) {
+			if (setStatement.isIsNotify()) {
 				Property targetProperty = QVTimperativeUtil.getTargetProperty(setStatement);
 				assert targetProperty != null;
 				EStructuralFeature eFeature = (EStructuralFeature)targetProperty.getESObject();

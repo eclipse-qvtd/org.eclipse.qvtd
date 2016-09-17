@@ -20,7 +20,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
-import org.eclipse.qvtd.pivot.qvtimperative.PredicateVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 import org.eclipse.qvtd.xtext.qvtbase.ui.outline.QVTbaseOutlineTreeProvider;
@@ -66,7 +66,7 @@ public class QVTimperativeOutlineTreeProvider extends QVTbaseOutlineTreeProvider
 	}
 
 	protected void _createChildren(IOutlineNode parentNode, SetStatement ele) {
-		createNode(parentNode, ele.getValue());
+		createNode(parentNode, ele.getOwnedInit());
 	}
 
 	protected void _createChildren(IOutlineNode parentNode, TopLevelCS ele) {
@@ -93,7 +93,7 @@ public class QVTimperativeOutlineTreeProvider extends QVTbaseOutlineTreeProvider
 		}
 	}
 
-	protected void _createChildren(IOutlineNode parentNode, PredicateVariable ele) {
+	protected void _createChildren(IOutlineNode parentNode, DeclareStatement ele) {
 		createNode(parentNode, ele.getOwnedInit());
 	}
 

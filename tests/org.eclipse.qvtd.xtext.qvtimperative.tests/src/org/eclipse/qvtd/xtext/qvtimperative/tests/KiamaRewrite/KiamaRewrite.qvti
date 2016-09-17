@@ -101,7 +101,7 @@ map m_NumCS_ast_2 in KiamaRewrite_qvtp_qvtcas
 	var _'if' : Integer := if _'oclIsKindOf\nkiamaas::Top'
 	then 0
 	else oclContainer.oclAsType(kiamaas::Plus).depth + 1 endif;
-	emit aNum.depth := _'if';
+	notify set aNum.depth := _'if';
 }
 
 map m_NumCS_ast_value_1 in KiamaRewrite_qvtp_qvtcas
@@ -110,7 +110,7 @@ map m_NumCS_ast_value_1 in KiamaRewrite_qvtp_qvtcas
 	var ast : ecore::EObject := lNumCS.ast;
 	var value : ecore::EInt := lNumCS.value;
 	var aNum : kiamaas::Num := ast.oclAsType(kiamaas::Num);
-	emit aNum.height := 0;
+	notify set aNum.height := 0;
 	set aNum.value := value;
 }
 
@@ -129,7 +129,7 @@ map m_PlusCS_ast in KiamaRewrite_qvtp_qvtcas
 	var including : Set(ecore::EIntegerObject) := oclAsSet->including(height1);
 	var max : ecore::EIntegerObject := including->max();
 	var _'+' : Integer := max + 1;
-	emit aPlus.height := _'+';
+	notify set aPlus.height := _'+';
 }
 
 map m_PlusCS_ast_1 in KiamaRewrite_qvtp_qvtcas
@@ -144,7 +144,7 @@ map m_PlusCS_ast_1 in KiamaRewrite_qvtp_qvtcas
 	var _'if' : Integer := if _'oclIsKindOf\nkiamaas::Top'
 	then 0
 	else oclContainer.oclAsType(kiamaas::Plus).depth + 1 endif;
-	emit aPlus.depth := _'if';
+	notify set aPlus.depth := _'if';
 }
 
 map m_PlusCS_ast_2 in KiamaRewrite_qvtp_qvtcas

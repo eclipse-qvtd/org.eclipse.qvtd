@@ -3,8 +3,8 @@ import classescs : '../ClassesCS.ecore#/';
 
 transformation classescs2as
 {
-	leftCS imports classescs;
-	rightAS imports classes;
+	check leftCS imports classescs;
+	enforce rightAS imports classes;
 }
 
 map mCreationRootCS2Root in classescs2as

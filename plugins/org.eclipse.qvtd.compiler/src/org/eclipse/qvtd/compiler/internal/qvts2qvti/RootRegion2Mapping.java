@@ -54,7 +54,7 @@ import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.OutConnectionVariable;
-import org.eclipse.qvtd.pivot.qvtimperative.PredicateVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 
 public class RootRegion2Mapping extends AbstractScheduledRegion2Mapping
@@ -62,7 +62,7 @@ public class RootRegion2Mapping extends AbstractScheduledRegion2Mapping
 	/**
 	 * Mapping from the type to allInstances variable.
 	 */
-	private final @NonNull Map<@NonNull ClassDatumAnalysis, @NonNull PredicateVariable> classDatumAnalysis2variable = new HashMap<>();
+	private final @NonNull Map<@NonNull ClassDatumAnalysis, @NonNull DeclareStatement> classDatumAnalysis2variable = new HashMap<>();
 
 	/**
 	 * Mapping from the scheduled Nodes to their QVTi variables.
@@ -110,7 +110,7 @@ public class RootRegion2Mapping extends AbstractScheduledRegion2Mapping
 
 	private @NonNull OCLExpression createObjectsOfKindExpression(@NonNull Node resultNode) {	// FIXME compute input typed model
 		ClassDatumAnalysis classDatumAnalysis = resultNode.getClassDatumAnalysis();
-		PredicateVariable allInstancesVariable = classDatumAnalysis2variable.get(classDatumAnalysis);
+		DeclareStatement allInstancesVariable = classDatumAnalysis2variable.get(classDatumAnalysis);
 		if (allInstancesVariable == null) {
 			Type collectionType = classDatumAnalysis.getCompleteClass().getPrimaryClass();
 			Type elementType = ((CollectionType)collectionType).getElementType();
@@ -125,7 +125,7 @@ public class RootRegion2Mapping extends AbstractScheduledRegion2Mapping
 			OCLExpression asSource = helper.createOperationCallExp(modelExp, "objectsOfKind", typeExp);
 			Type sourceType = asSource.getType();
 			assert sourceType != null;
-			allInstancesVariable = helper.createLocalOrPredicateVariable(resultNode.getName(), sourceType, true, asSource);
+			allInstancesVariable = helper.createDeclareStatement(resultNode.getName(), sourceType, true, asSource);
 			mapping.getOwnedStatements().add(allInstancesVariable);
 			classDatumAnalysis2variable.put(classDatumAnalysis, allInstancesVariable);
 		}

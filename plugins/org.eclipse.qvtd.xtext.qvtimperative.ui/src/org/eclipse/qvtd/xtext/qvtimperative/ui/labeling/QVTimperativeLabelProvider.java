@@ -25,7 +25,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
-import org.eclipse.qvtd.pivot.qvtimperative.PredicateVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.xtext.qvtbase.ui.labeling.QVTbaseLabelProvider;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DomainCS;
@@ -75,7 +75,7 @@ public class QVTimperativeLabelProvider extends QVTbaseLabelProvider
 		return QVTIMPERATIVE_UI_ICONS + "NewStatement.gif";
 	}
 
-	protected String image(PredicateVariable ele) {
+	protected String image(DeclareStatement ele) {
 		return QVTIMPERATIVE_UI_ICONS + "CheckVariableStatement.gif";
 	}
 
@@ -119,7 +119,7 @@ public class QVTimperativeLabelProvider extends QVTbaseLabelProvider
 		return "«predicate»";
 	}
 
-	protected String text(PredicateVariable ele) {
+	protected String text(DeclareStatement ele) {
 		assert ele != null;
 		Namespace namespace = PivotUtil.getNamespace(ele.eContainer());
 		if (namespace == null) {

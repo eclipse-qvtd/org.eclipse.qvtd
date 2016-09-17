@@ -114,7 +114,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.OutConnectionVariable;
-import org.eclipse.qvtd.pivot.qvtimperative.PredicateVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 import org.eclipse.qvtd.pivot.qvtimperative.VariableStatement;
@@ -558,7 +558,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 			return null;
 		}
 		CGVariable cgVariable = getVariable(asVariable);
-		OCLExpression asInitValue = asAddStatement.getValue();
+		OCLExpression asInitValue = asAddStatement.getOwnedInit();
 		assert (cgVariable instanceof CGConnectionVariable) || (cgVariable instanceof CGAccumulator);
 		CGValuedElement initValue = doVisit(CGValuedElement.class, asInitValue);
 		CGConnectionAssignment cgConnectionAssignment = QVTiCGModelFactory.eINSTANCE.createCGConnectionAssignment();
@@ -579,7 +579,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 		CGIfExp cgPredicate = CGModelFactory.eINSTANCE.createCGIfExp();
 		cgPredicate.setTypeId(analyzer.getTypeId(TypeId.BOOLEAN));
 		cgPredicate.setRequired(true);
-		OCLExpression asConditionExpression = asPredicate.getConditionExpression();
+		OCLExpression asConditionExpression = asPredicate.getOwnedCondition();
 		assert asConditionExpression != null;
 		cgPredicate.setCondition(doVisit(CGValuedElement.class, asConditionExpression));
 		CGConstantExp cgElse = analyzer.createCGConstantExp(asConditionExpression, analyzer.getBoolean(false));
@@ -595,6 +595,106 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 	public @Nullable CGNamedElement visitConnectionVariable(@NonNull ConnectionVariable object) {
 		return visiting(object);
 	}
+
+	@Override
+	public CGNamedElement visitDeclareStatement(@NonNull DeclareStatement asVariable) {
+		OCLExpression asInit = asVariable.getOwnedInit();
+		assert asInit != null;
+		if (!asVariable.isIsChecked()) {
+			/*		CGVariable cgVariable = getVariable(asVariable);
+			CGValuedElement initValue = doVisit(CGValuedElement.class, asVariable.getOwnedInit());
+			cgVariable.setInit(initValue);
+			cgVariable.setTypeId(initValue.getTypeId());
+			cgVariable.setRequired(initValue.isRequired());
+			return cgVariable; */
+			getBodyBuilder().appendCheckedLetVariable(asVariable, asInit);
+		}
+		else {
+			CGValuedElement cgExpression = doVisit(CGValuedElement.class, asInit);
+			cgExpression.setName("temp1_" + asVariable.getName());
+			//
+			CGFinalVariable cgUncastVariable = CGModelFactory.eINSTANCE.createCGFinalVariable();
+			cgUncastVariable.setName("temp2_" + asVariable.getName());
+			cgUncastVariable.setInit(cgExpression);
+			cgUncastVariable.setTypeId(cgExpression.getTypeId());
+			cgUncastVariable.setRequired(cgExpression.isRequired());
+			//
+			CGLetExp cgOuterLetExp = CGModelFactory.eINSTANCE.createCGLetExp();
+			setAst(cgOuterLetExp, asVariable);
+			cgOuterLetExp.setInit(cgUncastVariable);
+			cgOuterLetExp.setTypeId(analyzer.getTypeId(TypeId.BOOLEAN));
+			cgOuterLetExp.setRequired(true);
+			//
+			CGIfExp cgPredicate = CGModelFactory.eINSTANCE.createCGIfExp();
+			cgPredicate.setTypeId(analyzer.getTypeId(TypeId.BOOLEAN));
+			cgPredicate.setRequired(true);
+			CGConstantExp cgElse = analyzer.createCGConstantExp(asInit, analyzer.getBoolean(false));
+			setAst(cgElse, asVariable);
+			cgElse.setTypeId(analyzer.getTypeId(TypeId.BOOLEAN));
+			cgElse.setRequired(true);
+			cgPredicate.setElseExpression(cgElse);
+			CGIsKindOfExp cgIsKindOfExp = CGModelFactory.eINSTANCE.createCGIsKindOfExp();
+			cgIsKindOfExp.setTypeId(analyzer.getTypeId(TypeId.BOOLEAN));
+			cgIsKindOfExp.setRequired(true);
+			CGVariableExp cgUncastVariableExp1 = CGModelFactory.eINSTANCE.createCGVariableExp();
+			setAst(cgUncastVariableExp1, asVariable);
+			cgUncastVariableExp1.setReferredVariable(cgUncastVariable);
+			cgUncastVariableExp1.setTypeId(cgUncastVariable.getTypeId());
+			cgUncastVariableExp1.setRequired(cgUncastVariable.isRequired());
+			cgIsKindOfExp.setSource(cgUncastVariableExp1);
+
+			CGExecutorType cgExecutorType = analyzer.createExecutorType(ClassUtil.nonNullState(asVariable.getType()));
+			cgIsKindOfExp.setExecutorType(cgExecutorType);
+			cgPredicate.setCondition(cgIsKindOfExp);
+			cgOuterLetExp.setIn(cgPredicate);
+
+			CGVariableExp cgUncastVariableExp2 = CGModelFactory.eINSTANCE.createCGVariableExp();
+			setAst(cgUncastVariableExp2, asVariable);
+			cgUncastVariableExp2.setReferredVariable(cgUncastVariable);
+			cgUncastVariableExp2.setTypeId(cgUncastVariable.getTypeId());
+			cgUncastVariableExp2.setRequired(cgUncastVariable.isRequired());
+			CGCastExp cgCastExp = CGModelFactory.eINSTANCE.createCGCastExp();
+			cgCastExp.setSource(cgUncastVariableExp2);
+			cgCastExp.setExecutorType(cgExecutorType);
+			TypeId asTypeId = cgExecutorType.getASTypeId();
+			assert asTypeId != null;
+			cgCastExp.setTypeId(analyzer.getTypeId(asTypeId));
+
+			CGFinalVariable cgCastVariable = (CGFinalVariable) createCGVariable(asVariable);		// FIXME Lose cast
+			cgCastVariable.setInit(cgCastExp);
+
+			CGLetExp cgCastLetExp = CGModelFactory.eINSTANCE.createCGLetExp();
+			setAst(cgCastLetExp, asVariable);
+			cgCastLetExp.setInit(cgCastVariable);
+			cgCastLetExp.setTypeId(analyzer.getTypeId(TypeId.BOOLEAN));
+			cgCastLetExp.setRequired(true);
+
+			cgPredicate.setThenExpression(cgCastLetExp);
+			getBodyBuilder().appendSubTree(cgCastLetExp);
+		}
+		return null;
+	}
+
+	/*	@Override
+	public @Nullable CGNamedElement visitCheckVariableStatement(@NonNull CheckVariableStatement asCheckVariableStatement) {
+		/*		VariableDeclaration asVariable = asCheckVariableStatement.getTargetVariable();
+		if (asVariable == null) {
+			return null;
+		}
+		CGVariable cgVariable = getVariable(asVariable);
+		OCLExpression asInitValue = asCheckVariableStatement.getOwnedInit();
+		assert !(cgVariable instanceof CGConnectionVariable);
+		CGValuedElement initValue = doVisit(CGValuedElement.class, asInitValue);
+		cgVariable.setInit(initValue);
+		cgVariable.setTypeId(initValue.getTypeId());
+		cgVariable.setRequired(initValue.isRequired());
+		return cgVariable; * /
+		VariableDeclaration asVariable = asCheckVariableStatement.getTargetVariable();
+		OCLExpression asInit = asCheckVariableStatement.getOwnedInit();
+		assert (asVariable != null) && (asInit != null);
+		getBodyBuilder().appendCheckedLetVariable(asVariable, asInit);
+		return null;
+	} */
 
 	@Override
 	public @Nullable CGNamedElement visitDomain(@NonNull Domain object) {
@@ -805,121 +905,6 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 	}
 
 	@Override
-	public CGNamedElement visitPredicateVariable(@NonNull PredicateVariable asVariable) {
-		if (!asVariable.isIsChecked()) {
-			/*		CGVariable cgVariable = getVariable(asVariable);
-			CGValuedElement initValue = doVisit(CGValuedElement.class, asVariable.getOwnedInit());
-			cgVariable.setInit(initValue);
-			cgVariable.setTypeId(initValue.getTypeId());
-			cgVariable.setRequired(initValue.isRequired());
-			return cgVariable; */
-			OCLExpression asInit = asVariable.getOwnedInit();
-			if (asInit != null) {
-				getBodyBuilder().appendCheckedLetVariable(asVariable, asInit);
-			}
-		}
-		else {
-			//		CGVariable cgVariable = getVariable(asVariable);
-			//		CGValuedElement initValue = doVisit(CGValuedElement.class, asVariable.getOwnedInit());
-			//		cgVariable.setInit(initValue);
-			//		cgVariable.setTypeId(initValue.getTypeId());
-			//		cgVariable.setRequired(initValue.isRequired());
-			// FIXME predicate
-			//		return cgVariable;
-			//	}
-			//
-			//	@Override
-			//	public @Nullable CGNamedElement visitVariablePredicate(@NonNull VariablePredicate asPredicate) {
-			OCLExpression asExpression = asVariable.getOwnedInit();
-			assert asExpression != null;
-			//
-			CGValuedElement cgExpression = doVisit(CGValuedElement.class, asExpression);
-			cgExpression.setName("temp1_" + asVariable.getName());
-			//
-			CGFinalVariable cgUncastVariable = CGModelFactory.eINSTANCE.createCGFinalVariable();
-			cgUncastVariable.setName("temp2_" + asVariable.getName());
-			cgUncastVariable.setInit(cgExpression);
-			cgUncastVariable.setTypeId(cgExpression.getTypeId());
-			cgUncastVariable.setRequired(cgExpression.isRequired());
-			//
-			CGLetExp cgOuterLetExp = CGModelFactory.eINSTANCE.createCGLetExp();
-			setAst(cgOuterLetExp, asVariable);
-			cgOuterLetExp.setInit(cgUncastVariable);
-			cgOuterLetExp.setTypeId(analyzer.getTypeId(TypeId.BOOLEAN));
-			cgOuterLetExp.setRequired(true);
-			//
-			CGIfExp cgPredicate = CGModelFactory.eINSTANCE.createCGIfExp();
-			cgPredicate.setTypeId(analyzer.getTypeId(TypeId.BOOLEAN));
-			cgPredicate.setRequired(true);
-			CGConstantExp cgElse = analyzer.createCGConstantExp(asExpression, analyzer.getBoolean(false));
-			setAst(cgElse, asVariable);
-			cgElse.setTypeId(analyzer.getTypeId(TypeId.BOOLEAN));
-			cgElse.setRequired(true);
-			cgPredicate.setElseExpression(cgElse);
-			CGIsKindOfExp cgIsKindOfExp = CGModelFactory.eINSTANCE.createCGIsKindOfExp();
-			cgIsKindOfExp.setTypeId(analyzer.getTypeId(TypeId.BOOLEAN));
-			cgIsKindOfExp.setRequired(true);
-			CGVariableExp cgUncastVariableExp1 = CGModelFactory.eINSTANCE.createCGVariableExp();
-			setAst(cgUncastVariableExp1, asVariable);
-			cgUncastVariableExp1.setReferredVariable(cgUncastVariable);
-			cgUncastVariableExp1.setTypeId(cgUncastVariable.getTypeId());
-			cgUncastVariableExp1.setRequired(cgUncastVariable.isRequired());
-			cgIsKindOfExp.setSource(cgUncastVariableExp1);
-
-			CGExecutorType cgExecutorType = analyzer.createExecutorType(ClassUtil.nonNullState(asVariable.getType()));
-			cgIsKindOfExp.setExecutorType(cgExecutorType);
-			cgPredicate.setCondition(cgIsKindOfExp);
-			cgOuterLetExp.setIn(cgPredicate);
-
-			CGVariableExp cgUncastVariableExp2 = CGModelFactory.eINSTANCE.createCGVariableExp();
-			setAst(cgUncastVariableExp2, asVariable);
-			cgUncastVariableExp2.setReferredVariable(cgUncastVariable);
-			cgUncastVariableExp2.setTypeId(cgUncastVariable.getTypeId());
-			cgUncastVariableExp2.setRequired(cgUncastVariable.isRequired());
-			CGCastExp cgCastExp = CGModelFactory.eINSTANCE.createCGCastExp();
-			cgCastExp.setSource(cgUncastVariableExp2);
-			cgCastExp.setExecutorType(cgExecutorType);
-			TypeId asTypeId = cgExecutorType.getASTypeId();
-			assert asTypeId != null;
-			cgCastExp.setTypeId(analyzer.getTypeId(asTypeId));
-
-			CGFinalVariable cgCastVariable = (CGFinalVariable) createCGVariable(asVariable);		// FIXME Lose cast
-			cgCastVariable.setInit(cgCastExp);
-
-			CGLetExp cgCastLetExp = CGModelFactory.eINSTANCE.createCGLetExp();
-			setAst(cgCastLetExp, asVariable);
-			cgCastLetExp.setInit(cgCastVariable);
-			cgCastLetExp.setTypeId(analyzer.getTypeId(TypeId.BOOLEAN));
-			cgCastLetExp.setRequired(true);
-
-			cgPredicate.setThenExpression(cgCastLetExp);
-			getBodyBuilder().appendSubTree(cgCastLetExp);
-		}
-		return null;
-	}
-
-	/*	@Override
-	public @Nullable CGNamedElement visitCheckVariableStatement(@NonNull CheckVariableStatement asCheckVariableStatement) {
-		/*		VariableDeclaration asVariable = asCheckVariableStatement.getTargetVariable();
-		if (asVariable == null) {
-			return null;
-		}
-		CGVariable cgVariable = getVariable(asVariable);
-		OCLExpression asInitValue = asCheckVariableStatement.getOwnedInit();
-		assert !(cgVariable instanceof CGConnectionVariable);
-		CGValuedElement initValue = doVisit(CGValuedElement.class, asInitValue);
-		cgVariable.setInit(initValue);
-		cgVariable.setTypeId(initValue.getTypeId());
-		cgVariable.setRequired(initValue.isRequired());
-		return cgVariable; * /
-		VariableDeclaration asVariable = asCheckVariableStatement.getTargetVariable();
-		OCLExpression asInit = asCheckVariableStatement.getOwnedInit();
-		assert (asVariable != null) && (asInit != null);
-		getBodyBuilder().appendCheckedLetVariable(asVariable, asInit);
-		return null;
-	} */
-
-	@Override
 	public @Nullable CGNamedElement visitRule(@NonNull Rule object) {
 		return visiting(object);
 	}
@@ -942,7 +927,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 			//			cgPredicate.setName(asPredicate.getName());
 			cgPropertyAssignment.setTypeId(analyzer.getTypeId(TypeId.OCL_VOID));
 			//			cgMappingCallBinding.setValueName(localnameasMappingCallBinding.getBoundVariable().getName());
-			cgPropertyAssignment.setInitValue(doVisit(CGValuedElement.class, asSetStatement.getValue()));
+			cgPropertyAssignment.setInitValue(doVisit(CGValuedElement.class, asSetStatement.getOwnedInit()));
 			EStructuralFeature eStructuralFeature = (EStructuralFeature) asProperty.getESObject();
 			if (eStructuralFeature != null) {
 				try {
@@ -998,7 +983,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 			//		cgPredicate.setName(asPredicate.getName());
 			cgPropertyAssignment.setTypeId(analyzer.getTypeId(TypeId.OCL_VOID));
 			//		cgMappingCallBinding.setValueName(localnameasMappingCallBinding.getBoundVariable().getName());
-			cgPropertyAssignment.setInitValue(doVisit(CGValuedElement.class, asSetStatement.getValue()));
+			cgPropertyAssignment.setInitValue(doVisit(CGValuedElement.class, asSetStatement.getOwnedInit()));
 
 			CGExecutorProperty cgExecutorProperty = analyzer.createExecutorProperty(asTargetProperty);
 			cgPropertyAssignment.setExecutorProperty(cgExecutorProperty);

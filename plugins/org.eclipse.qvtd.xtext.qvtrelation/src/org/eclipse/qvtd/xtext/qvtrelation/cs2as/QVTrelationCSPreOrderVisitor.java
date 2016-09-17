@@ -25,7 +25,6 @@ import org.eclipse.ocl.pivot.utilities.Pivotable;
 import org.eclipse.ocl.xtext.base.cs2as.BasicContinuation;
 import org.eclipse.ocl.xtext.base.cs2as.CS2ASConversion;
 import org.eclipse.ocl.xtext.base.cs2as.Continuation;
-import org.eclipse.ocl.xtext.base.cs2as.PivotDependency;
 import org.eclipse.ocl.xtext.base.cs2as.SingleContinuation;
 import org.eclipse.ocl.xtext.basecs.PathNameCS;
 import org.eclipse.ocl.xtext.basecs.TypedRefCS;
@@ -47,11 +46,11 @@ import org.eclipse.qvtd.xtext.qvtrelationcs.TransformationCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.util.AbstractQVTrelationCSPreOrderVisitor;
 
 public class QVTrelationCSPreOrderVisitor extends AbstractQVTrelationCSPreOrderVisitor
-{	
+{
 	public static class CollectionTemplateCompletion extends SingleContinuation<CollectionTemplateCS>
 	{
 		public CollectionTemplateCompletion(@NonNull CS2ASConversion context, @NonNull CollectionTemplateCS csElement) {
-			super(context, null, null, csElement, new PivotDependency(csElement.getOwnedType()));
+			super(context, null, null, csElement, createDependencies(csElement.getOwnedType()));
 		}
 
 		@Override
@@ -124,7 +123,7 @@ public class QVTrelationCSPreOrderVisitor extends AbstractQVTrelationCSPreOrderV
 	public static class ObjectTemplateCompletion extends SingleContinuation<ObjectTemplateCS>
 	{
 		public ObjectTemplateCompletion(@NonNull CS2ASConversion context, @NonNull ObjectTemplateCS csElement) {
-			super(context, null, null, csElement, new PivotDependency(csElement.getOwnedType()));
+			super(context, null, null, csElement, createDependencies(csElement.getOwnedType()));
 		}
 
 		@Override
@@ -267,7 +266,7 @@ public class QVTrelationCSPreOrderVisitor extends AbstractQVTrelationCSPreOrderV
 		Transformation pivotElement = PivotUtil.getPivot(Transformation.class, csElement);
 		if (pivotElement != null) {
 			List<org.eclipse.ocl.pivot.Class> superClasses = pivotElement.getSuperClasses();
-//			context.refreshList(Type.class, superClasses, csElement.getOwnedSuperType());
+			//			context.refreshList(Type.class, superClasses, csElement.getOwnedSuperType());
 			if (superClasses.isEmpty()) {
 				org.eclipse.ocl.pivot.Class oclElementType = context.getMetamodelManager().getStandardLibrary().getOclElementType();
 				pivotElement.getSuperClasses().add(oclElementType);

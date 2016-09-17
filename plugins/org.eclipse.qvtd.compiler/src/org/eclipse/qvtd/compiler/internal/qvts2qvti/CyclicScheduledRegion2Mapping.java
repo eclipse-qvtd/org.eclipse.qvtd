@@ -312,7 +312,7 @@ public class CyclicScheduledRegion2Mapping extends AbstractScheduledRegion2Mappi
 
 					AddStatement addStatement1 = QVTimperativeFactory.eINSTANCE.createAddStatement();
 					addStatement1.setTargetVariable(newVariable);
-					addStatement1.setValue(excludingAllCallExp);
+					addStatement1.setOwnedInit(excludingAllCallExp);
 					mappingStatements.add(addStatement1);
 				}
 				else {
@@ -321,7 +321,7 @@ public class CyclicScheduledRegion2Mapping extends AbstractScheduledRegion2Mappi
 				//
 				AddStatement addStatement2 = QVTimperativeFactory.eINSTANCE.createAddStatement();
 				addStatement2.setTargetVariable(accumulatedVariable);
-				addStatement2.setValue(PivotUtil.createVariableExp(newVariable));
+				addStatement2.setOwnedInit(PivotUtil.createVariableExp(newVariable));
 				mappingStatements.add(addStatement2);
 			}
 		}

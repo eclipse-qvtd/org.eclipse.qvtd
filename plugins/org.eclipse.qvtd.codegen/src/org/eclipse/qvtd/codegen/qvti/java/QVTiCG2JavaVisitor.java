@@ -320,7 +320,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		CGValuedElement cgSlot = getExpression(cgPropertyAssignment.getSlotValue());
 		CGValuedElement cgInit = getExpression(cgPropertyAssignment.getInitValue());
 		EPackage ePackage = ClassUtil.nonNullModel(eStructuralFeature.getEContainingClass().getEPackage());
-		if (isIncremental || ((SetStatement)cgPropertyAssignment.getAst()).isIsEmit()) {
+		if (isIncremental || ((SetStatement)cgPropertyAssignment.getAst()).isIsNotify()) {
 			js.append("objectManager.assigned(");
 			if (isIncremental) {
 				js.append("this, ");
@@ -341,7 +341,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		CGValuedElement cgSlot = getExpression(cgPropertyAssignment.getSlotValue());
 		CGValuedElement cgInit = getExpression(cgPropertyAssignment.getInitValue());
 		EPackage ePackage = ClassUtil.nonNullModel(eStructuralFeature.getEContainingClass().getEPackage());
-		if (isIncremental || ((SetStatement)cgPropertyAssignment.getAst()).isIsEmit()) {
+		if (isIncremental || ((SetStatement)cgPropertyAssignment.getAst()).isIsNotify()) {
 			js.append("objectManager.assigned(");
 			if (isIncremental) {
 				js.append("this, ");

@@ -38,7 +38,7 @@ map Edge2MiddleEdge in Tree2TallTree {
 	in:tree node : Node;
 	in:tree2talltree node2tallNode : Node2TallNode;
 	check node.parent <> null;
-	emit node2tallNode.parent := node.parent.Node2TallNode;
+	notify set node2tallNode.parent := node.parent.Node2TallNode;
 --		node2tallNode.name := node.name;
 }
 
@@ -54,8 +54,8 @@ map MiddleNode2TallNode in Tree2TallTree {
 	var tallNode_children : Set(TallNode) := node2tallNode.children?.tallNode->asSet();
 	var tallNode_height : Integer := if node2tallNode.children->notEmpty() then node2tallNode.children.tallNode.height->max() + 1 else 0 endif;
 	new:talltree tallNode : TallNode;
-	emit node2tallNode.tallNode := tallNode;
+	notify set node2tallNode.tallNode := tallNode;
 	set	tallNode.name := tallNode_name;
 	set	tallNode.children := tallNode_children;
-	emit tallNode.height := tallNode_height;
+	notify set tallNode.height := tallNode_height;
 }

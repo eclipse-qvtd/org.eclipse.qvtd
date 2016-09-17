@@ -378,7 +378,7 @@ public class CS2ASJavaCompilerImpl implements CS2ASJavaCompiler {
 
 		protected static class CS2ASRewriteVisitor extends QVTiFieldingAnalyzer.QVTiRewriteVisitor
 		implements CS2ASCGModelVisitor<Boolean> {
-			public CS2ASRewriteVisitor(@NonNull QVTiAnalyzer context, @NonNull Set<CGVariable> caughtVariable) {
+			public CS2ASRewriteVisitor(@NonNull QVTiAnalyzer context, @NonNull Set<@NonNull CGVariable> caughtVariable) {
 				super(context, caughtVariable);
 			}
 

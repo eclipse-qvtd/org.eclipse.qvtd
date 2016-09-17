@@ -210,7 +210,7 @@ public class QVTimperativeUtil extends QVTbaseUtil
 		return newStatement;
 	}
 
-	public static @NonNull SetStatement createSetStatement(@NonNull VariableDeclaration asVariable, @NonNull Property asProperty, @NonNull OCLExpression asValueExpression, boolean isEmit) {
+	public static @NonNull SetStatement createSetStatement(@NonNull VariableDeclaration asVariable, @NonNull Property asProperty, @NonNull OCLExpression asValueExpression, boolean isNotify) {
 		SetStatement asSetAssignment = QVTimperativeFactory.eINSTANCE.createSetStatement();
 		if (asProperty.isIsImplicit()) {
 			asSetAssignment.setTargetProperty(asProperty.getOpposite());
@@ -221,8 +221,8 @@ public class QVTimperativeUtil extends QVTbaseUtil
 			asSetAssignment.setIsOpposite(false);
 		}
 		asSetAssignment.setTargetVariable(asVariable);
-		asSetAssignment.setValue(asValueExpression);
-		asSetAssignment.setIsEmit(isEmit);
+		asSetAssignment.setOwnedInit(asValueExpression);
+		asSetAssignment.setIsNotify(isNotify);
 		return asSetAssignment;
 	}
 

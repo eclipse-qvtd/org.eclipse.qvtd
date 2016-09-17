@@ -41,6 +41,7 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.CheckStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
@@ -54,12 +55,12 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.OutConnectionVariable;
-import org.eclipse.qvtd.pivot.qvtimperative.PredicateVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 import org.eclipse.qvtd.xtext.qvtimperativecs.AddStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.CheckStatementCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.DeclareStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DomainCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.GuardVariableCS;
@@ -71,7 +72,6 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.MappingLoopCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.NewStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.OutVariableCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.ParamDeclarationCS;
-import org.eclipse.qvtd.xtext.qvtimperativecs.PredicateVariableCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QueryCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.SetStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.TopLevelCS;
@@ -227,6 +227,13 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 	}
 
 	@Override
+	public Continuation<?> visitDeclareStatementCS(@NonNull DeclareStatementCS csElement) {
+		DeclareStatement asElement = refreshNamedElement(DeclareStatement.class, QVTimperativePackage.Literals.DECLARE_STATEMENT, csElement);
+		asElement.setIsChecked(csElement.isIsChecked());
+		return null;
+	}
+
+	@Override
 	public Continuation<?> visitDirectionCS(@NonNull DirectionCS csElement) {
 		ImperativeTypedModel asTypedModel = refreshNamedElement(ImperativeTypedModel.class, QVTimperativePackage.Literals.IMPERATIVE_TYPED_MODEL, csElement);
 		Continuation<?> continuation = new DirectionContentContinuation(context, csElement);
@@ -314,13 +321,6 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 	}
 
 	@Override
-	public Continuation<?> visitPredicateVariableCS(@NonNull PredicateVariableCS csElement) {
-		PredicateVariable asElement = refreshNamedElement(PredicateVariable.class, QVTimperativePackage.Literals.PREDICATE_VARIABLE, csElement);
-		asElement.setIsChecked(csElement.isIsChecked());
-		return null;
-	}
-
-	@Override
 	public Continuation<?> visitQueryCS(@NonNull QueryCS csElement) {
 		PathNameCS pathName = csElement.getOwnedPathName();
 		if (pathName != null) {
@@ -336,7 +336,7 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 	@Override
 	public @Nullable Continuation<?> visitSetStatementCS(@NonNull SetStatementCS csSetStatement) {
 		SetStatement asSetStatement = context.refreshModelElement(SetStatement.class, QVTimperativePackage.Literals.SET_STATEMENT, csSetStatement);
-		asSetStatement.setIsEmit(csSetStatement.isIsEmit());
+		asSetStatement.setIsNotify(csSetStatement.isIsNotify());
 		return null;
 	}
 

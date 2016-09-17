@@ -36,7 +36,6 @@ import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.ids.IdManager;
 import org.eclipse.ocl.pivot.ids.OperationId;
 import org.eclipse.ocl.pivot.ids.TypeId;
-import org.eclipse.ocl.pivot.internal.complete.StandardLibraryInternal;
 import org.eclipse.ocl.pivot.internal.manager.MetamodelManagerInternal;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.library.LibraryFeature;
@@ -496,31 +495,6 @@ public class QVTiTransformationAnalysis
 			DomainUsage slotUsage = domainAnalysis.basicGetUsage(targetVariable);
 			if (domainUsage == slotUsage) {
 				return true;
-			}
-		}
-		return false;
-	}
-
-	public boolean isHazardous(@NonNull Property targetProperty) {	// Migrate to isHazardous(@NonNull Mapping asMapping, @NonNull Property asProperty)
-		if (hazardousProperties.contains(targetProperty)) {
-			return true;
-		}
-		if (!targetProperty.isIsComposite()) {
-			return false;
-		}
-		StandardLibraryInternal standardLibrary = environmentFactory.getStandardLibrary();
-		Type parentType = targetProperty.getOwningClass();
-		Type childType = targetProperty.getType();
-		assert childType != null;
-		for (Map.Entry<@NonNull Type, @NonNull List<@NonNull Type>> entry : parentClass2childClasses.entrySet()) {
-			Type entryType = entry.getKey();
-			assert entryType != null;
-			if (parentType.conformsTo(standardLibrary, entryType)) {
-				for (@NonNull Type type : entry.getValue()) {
-					if (type.conformsTo(standardLibrary, childType)) {
-						return true;
-					}
-				}
 			}
 		}
 		return false;
