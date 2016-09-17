@@ -39,7 +39,7 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.SetStatementCSImpl#getReferredProperty <em>Referred Property</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.SetStatementCSImpl#getReferredVariable <em>Referred Variable</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.SetStatementCSImpl#getOwnedInit <em>Owned Init</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.SetStatementCSImpl#isIsEmit <em>Is Emit</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.SetStatementCSImpl#isIsNotify <em>Is Notify</em>}</li>
  * </ul>
  *
  * @generated
@@ -76,24 +76,24 @@ public class SetStatementCSImpl extends StatementCSImpl implements SetStatementC
 	protected ExpCS ownedInit;
 
 	/**
-	 * The default value of the '{@link #isIsEmit() <em>Is Emit</em>}' attribute.
+	 * The default value of the '{@link #isIsNotify() <em>Is Notify</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isIsEmit()
+	 * @see #isIsNotify()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean IS_EMIT_EDEFAULT = false;
+	protected static final boolean IS_NOTIFY_EDEFAULT = false;
 
 	/**
-	 * The cached value of the '{@link #isIsEmit() <em>Is Emit</em>}' attribute.
+	 * The cached value of the '{@link #isIsNotify() <em>Is Notify</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isIsEmit()
+	 * @see #isIsNotify()
 	 * @generated
 	 * @ordered
 	 */
-	protected boolean isEmit = IS_EMIT_EDEFAULT;
+	protected boolean isNotify = IS_NOTIFY_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -245,8 +245,8 @@ public class SetStatementCSImpl extends StatementCSImpl implements SetStatementC
 	 * @generated
 	 */
 	@Override
-	public boolean isIsEmit() {
-		return isEmit;
+	public boolean isIsNotify() {
+		return isNotify;
 	}
 
 	/**
@@ -255,11 +255,11 @@ public class SetStatementCSImpl extends StatementCSImpl implements SetStatementC
 	 * @generated
 	 */
 	@Override
-	public void setIsEmit(boolean newIsEmit) {
-		boolean oldIsEmit = isEmit;
-		isEmit = newIsEmit;
+	public void setIsNotify(boolean newIsNotify) {
+		boolean oldIsNotify = isNotify;
+		isNotify = newIsNotify;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.SET_STATEMENT_CS__IS_EMIT, oldIsEmit, isEmit));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.SET_STATEMENT_CS__IS_NOTIFY, oldIsNotify, isNotify));
 	}
 
 	/**
@@ -302,8 +302,8 @@ public class SetStatementCSImpl extends StatementCSImpl implements SetStatementC
 				return basicGetReferredVariable();
 			case QVTimperativeCSPackage.SET_STATEMENT_CS__OWNED_INIT:
 				return getOwnedInit();
-			case QVTimperativeCSPackage.SET_STATEMENT_CS__IS_EMIT:
-				return isIsEmit();
+			case QVTimperativeCSPackage.SET_STATEMENT_CS__IS_NOTIFY:
+				return isIsNotify();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -325,8 +325,8 @@ public class SetStatementCSImpl extends StatementCSImpl implements SetStatementC
 			case QVTimperativeCSPackage.SET_STATEMENT_CS__OWNED_INIT:
 				setOwnedInit((ExpCS)newValue);
 				return;
-			case QVTimperativeCSPackage.SET_STATEMENT_CS__IS_EMIT:
-				setIsEmit((Boolean)newValue);
+			case QVTimperativeCSPackage.SET_STATEMENT_CS__IS_NOTIFY:
+				setIsNotify((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -349,8 +349,8 @@ public class SetStatementCSImpl extends StatementCSImpl implements SetStatementC
 			case QVTimperativeCSPackage.SET_STATEMENT_CS__OWNED_INIT:
 				setOwnedInit((ExpCS)null);
 				return;
-			case QVTimperativeCSPackage.SET_STATEMENT_CS__IS_EMIT:
-				setIsEmit(IS_EMIT_EDEFAULT);
+			case QVTimperativeCSPackage.SET_STATEMENT_CS__IS_NOTIFY:
+				setIsNotify(IS_NOTIFY_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -370,8 +370,8 @@ public class SetStatementCSImpl extends StatementCSImpl implements SetStatementC
 				return referredVariable != null;
 			case QVTimperativeCSPackage.SET_STATEMENT_CS__OWNED_INIT:
 				return ownedInit != null;
-			case QVTimperativeCSPackage.SET_STATEMENT_CS__IS_EMIT:
-				return isEmit != IS_EMIT_EDEFAULT;
+			case QVTimperativeCSPackage.SET_STATEMENT_CS__IS_NOTIFY:
+				return isNotify != IS_NOTIFY_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}

@@ -43,7 +43,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.OutConnectionVariable;
-import org.eclipse.qvtd.pivot.qvtimperative.PredicateVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
@@ -138,6 +138,20 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = caseElement(connectionVariable);
 				if (result == null) result = caseNameable(connectionVariable);
 				if (result == null) result = caseVisitable(connectionVariable);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case QVTimperativePackage.DECLARE_STATEMENT: {
+				DeclareStatement declareStatement = (DeclareStatement)theEObject;
+				T result = caseDeclareStatement(declareStatement);
+				if (result == null) result = caseVariableStatement(declareStatement);
+				if (result == null) result = caseVariableDeclaration(declareStatement);
+				if (result == null) result = caseStatement(declareStatement);
+				if (result == null) result = caseTypedElement(declareStatement);
+				if (result == null) result = caseNamedElement(declareStatement);
+				if (result == null) result = caseElement(declareStatement);
+				if (result == null) result = caseNameable(declareStatement);
+				if (result == null) result = caseVisitable(declareStatement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -298,20 +312,6 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTimperativePackage.PREDICATE_VARIABLE: {
-				PredicateVariable predicateVariable = (PredicateVariable)theEObject;
-				T result = casePredicateVariable(predicateVariable);
-				if (result == null) result = caseVariableStatement(predicateVariable);
-				if (result == null) result = caseVariableDeclaration(predicateVariable);
-				if (result == null) result = caseStatement(predicateVariable);
-				if (result == null) result = caseTypedElement(predicateVariable);
-				if (result == null) result = caseNamedElement(predicateVariable);
-				if (result == null) result = caseElement(predicateVariable);
-				if (result == null) result = caseNameable(predicateVariable);
-				if (result == null) result = caseVisitable(predicateVariable);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case QVTimperativePackage.SET_STATEMENT: {
 				SetStatement setStatement = (SetStatement)theEObject;
 				T result = caseSetStatement(setStatement);
@@ -392,6 +392,21 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseConnectionVariable(ConnectionVariable object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Declare Statement</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Declare Statement</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDeclareStatement(DeclareStatement object) {
 		return null;
 	}
 
@@ -587,21 +602,6 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseOutConnectionVariable(OutConnectionVariable object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Predicate Variable</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Predicate Variable</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T casePredicateVariable(PredicateVariable object) {
 		return null;
 	}
 

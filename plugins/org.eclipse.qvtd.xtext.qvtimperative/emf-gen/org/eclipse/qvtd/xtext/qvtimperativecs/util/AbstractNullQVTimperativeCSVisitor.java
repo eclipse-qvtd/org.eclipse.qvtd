@@ -50,6 +50,11 @@ public abstract class AbstractNullQVTimperativeCSVisitor<@Nullable R, C>
 	}
 
 	@Override
+	public R visitDeclareStatementCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull DeclareStatementCS object) {
+		return null;
+	}
+
+	@Override
 	public R visitDirectionCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull DirectionCS object) {
 		return null;
 	}
@@ -106,11 +111,6 @@ public abstract class AbstractNullQVTimperativeCSVisitor<@Nullable R, C>
 
 	@Override
 	public R visitParamDeclarationCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull ParamDeclarationCS object) {
-		return null;
-	}
-
-	@Override
-	public R visitPredicateVariableCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull PredicateVariableCS object) {
 		return null;
 	}
 

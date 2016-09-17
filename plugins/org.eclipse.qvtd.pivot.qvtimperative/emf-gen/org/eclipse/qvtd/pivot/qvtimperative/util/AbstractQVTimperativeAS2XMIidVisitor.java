@@ -59,6 +59,11 @@ public abstract class AbstractQVTimperativeAS2XMIidVisitor
 	}
 
 	@Override
+	public @Nullable Boolean visitDeclareStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull DeclareStatement object) {
+		return visitVariableStatement(object);
+	}
+
+	@Override
 	public @Nullable Boolean visitGuardVariable(org.eclipse.qvtd.pivot.qvtimperative.@NonNull GuardVariable object) {
 		return visitVariableDeclaration(object);
 	}
@@ -121,11 +126,6 @@ public abstract class AbstractQVTimperativeAS2XMIidVisitor
 	@Override
 	public @Nullable Boolean visitOutConnectionVariable(org.eclipse.qvtd.pivot.qvtimperative.@NonNull OutConnectionVariable object) {
 		return visitConnectionVariable(object);
-	}
-
-	@Override
-	public @Nullable Boolean visitPredicateVariable(org.eclipse.qvtd.pivot.qvtimperative.@NonNull PredicateVariable object) {
-		return visitVariableStatement(object);
 	}
 
 	@Override

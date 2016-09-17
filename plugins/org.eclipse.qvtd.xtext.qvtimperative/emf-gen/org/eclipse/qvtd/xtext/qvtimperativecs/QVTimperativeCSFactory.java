@@ -49,6 +49,15 @@ public interface QVTimperativeCSFactory extends EFactory {
 	@NonNull CheckStatementCS createCheckStatementCS();
 
 	/**
+	 * Returns a new object of class '<em>Declare Statement CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Declare Statement CS</em>'.
+	 * @generated
+	 */
+	@NonNull DeclareStatementCS createDeclareStatementCS();
+
+	/**
 	 * Returns a new object of class '<em>Direction CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -128,15 +137,6 @@ public interface QVTimperativeCSFactory extends EFactory {
 	 * @generated
 	 */
 	@NonNull ParamDeclarationCS createParamDeclarationCS();
-
-	/**
-	 * Returns a new object of class '<em>Predicate Variable CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Predicate Variable CS</em>'.
-	 * @generated
-	 */
-	@NonNull PredicateVariableCS createPredicateVariableCS();
 
 	/**
 	 * Returns a new object of class '<em>Query CS</em>'.

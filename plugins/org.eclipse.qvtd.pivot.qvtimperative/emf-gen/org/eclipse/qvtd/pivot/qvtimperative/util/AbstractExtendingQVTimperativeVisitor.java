@@ -55,6 +55,11 @@ public abstract class AbstractExtendingQVTimperativeVisitor<R, C>
 	}
 
 	@Override
+	public R visitDeclareStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull DeclareStatement object) {
+		return visitVariableStatement(object);
+	}
+
+	@Override
 	public R visitGuardVariable(org.eclipse.qvtd.pivot.qvtimperative.@NonNull GuardVariable object) {
 		return visitVariableDeclaration(object);
 	}
@@ -117,11 +122,6 @@ public abstract class AbstractExtendingQVTimperativeVisitor<R, C>
 	@Override
 	public R visitOutConnectionVariable(org.eclipse.qvtd.pivot.qvtimperative.@NonNull OutConnectionVariable object) {
 		return visitConnectionVariable(object);
-	}
-
-	@Override
-	public R visitPredicateVariable(org.eclipse.qvtd.pivot.qvtimperative.@NonNull PredicateVariable object) {
-		return visitVariableStatement(object);
 	}
 
 	@Override

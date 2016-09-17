@@ -98,6 +98,10 @@ public class QVTimperativeCSAdapterFactory extends AdapterFactoryImpl {
 				return createCheckStatementCSAdapter();
 			}
 			@Override
+			public Adapter caseDeclareStatementCS(DeclareStatementCS object) {
+				return createDeclareStatementCSAdapter();
+			}
+			@Override
 			public Adapter caseDirectionCS(DirectionCS object) {
 				return createDirectionCSAdapter();
 			}
@@ -144,10 +148,6 @@ public class QVTimperativeCSAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseParamDeclarationCS(ParamDeclarationCS object) {
 				return createParamDeclarationCSAdapter();
-			}
-			@Override
-			public Adapter casePredicateVariableCS(PredicateVariableCS object) {
-				return createPredicateVariableCSAdapter();
 			}
 			@Override
 			public Adapter caseQueryCS(QueryCS object) {
@@ -282,6 +282,20 @@ public class QVTimperativeCSAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.DeclareStatementCS <em>Declare Statement CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.DeclareStatementCS
+	 * @generated
+	 */
+	public Adapter createDeclareStatementCSAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS <em>Direction CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -376,20 +390,6 @@ public class QVTimperativeCSAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createParamDeclarationCSAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.PredicateVariableCS <em>Predicate Variable CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.PredicateVariableCS
-	 * @generated
-	 */
-	public Adapter createPredicateVariableCSAdapter() {
 		return null;
 	}
 

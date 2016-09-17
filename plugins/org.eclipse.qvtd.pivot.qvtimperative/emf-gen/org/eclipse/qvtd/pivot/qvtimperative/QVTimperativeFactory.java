@@ -49,6 +49,15 @@ public interface QVTimperativeFactory extends EFactory {
 	@NonNull CheckStatement createCheckStatement();
 
 	/**
+	 * Returns a new object of class '<em>Declare Statement</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Declare Statement</em>'.
+	 * @generated
+	 */
+	@NonNull DeclareStatement createDeclareStatement();
+
+	/**
 	 * Returns a new object of class '<em>Guard Variable</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -82,7 +91,7 @@ public interface QVTimperativeFactory extends EFactory {
 	 * @return a new object of class '<em>Imperative Typed Model</em>'.
 	 * @generated
 	 */
-	ImperativeTypedModel createImperativeTypedModel();
+	@NonNull ImperativeTypedModel createImperativeTypedModel();
 
 	/**
 	 * Returns a new object of class '<em>In Connection Variable</em>'.
@@ -155,15 +164,6 @@ public interface QVTimperativeFactory extends EFactory {
 	 * @generated
 	 */
 	@NonNull OutConnectionVariable createOutConnectionVariable();
-
-	/**
-	 * Returns a new object of class '<em>Predicate Variable</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Predicate Variable</em>'.
-	 * @generated
-	 */
-	@NonNull PredicateVariable createPredicateVariable();
 
 	/**
 	 * Returns a new object of class '<em>Set Statement</em>'.

@@ -30,7 +30,7 @@ import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.SetStatementCS#getReferredProperty <em>Referred Property</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.SetStatementCS#getReferredVariable <em>Referred Variable</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.SetStatementCS#getOwnedInit <em>Owned Init</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.SetStatementCS#isIsEmit <em>Is Emit</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.SetStatementCS#isIsNotify <em>Is Notify</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getSetStatementCS()
@@ -117,30 +117,30 @@ public interface SetStatementCS extends StatementCS {
 	void setOwnedInit(ExpCS value);
 
 	/**
-	 * Returns the value of the '<em><b>Is Emit</b></em>' attribute.
+	 * Returns the value of the '<em><b>Is Notify</b></em>' attribute.
 	 * The default value is <code>"false"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Is Emit</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Is Notify</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Is Emit</em>' attribute.
-	 * @see #setIsEmit(boolean)
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getSetStatementCS_IsEmit()
+	 * @return the value of the '<em>Is Notify</em>' attribute.
+	 * @see #setIsNotify(boolean)
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getSetStatementCS_IsNotify()
 	 * @model default="false"
 	 * @generated
 	 */
-	boolean isIsEmit();
+	boolean isIsNotify();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.SetStatementCS#isIsEmit <em>Is Emit</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.SetStatementCS#isIsNotify <em>Is Notify</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Is Emit</em>' attribute.
-	 * @see #isIsEmit()
+	 * @param value the new value of the '<em>Is Notify</em>' attribute.
+	 * @see #isIsNotify()
 	 * @generated
 	 */
-	void setIsEmit(boolean value);
+	void setIsNotify(boolean value);
 
 } // SetStatementCS

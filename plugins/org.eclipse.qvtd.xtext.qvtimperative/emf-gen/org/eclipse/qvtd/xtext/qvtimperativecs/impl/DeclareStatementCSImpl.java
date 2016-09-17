@@ -12,42 +12,36 @@
  *
  * </copyright>
  */
-package org.eclipse.qvtd.pivot.qvtimperative.impl;
+package org.eclipse.qvtd.xtext.qvtimperativecs.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org.eclipse.jdt.annotation.NonNull;
-
-import org.eclipse.ocl.pivot.OCLExpression;
-
-import org.eclipse.ocl.pivot.util.Visitor;
-
-import org.eclipse.qvtd.pivot.qvtimperative.PredicateVariable;
-import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
-
-import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
+import org.eclipse.ocl.xtext.basecs.impl.TypedElementCSImpl;
+import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
+import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.DeclareStatementCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage;
+import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Predicate Variable</b></em>'.
+ * An implementation of the model object '<em><b>Predicate Variable CS</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.PredicateVariableImpl#getOwnedInit <em>Owned Init</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.PredicateVariableImpl#isIsChecked <em>Is Checked</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.DeclareStatementCSImpl#getOwnedInit <em>Owned Init</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.DeclareStatementCSImpl#isIsChecked <em>Is Checked</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class PredicateVariableImpl extends VariableStatementImpl implements PredicateVariable {
+public class DeclareStatementCSImpl extends TypedElementCSImpl implements DeclareStatementCS {
 	/**
 	 * The cached value of the '{@link #getOwnedInit() <em>Owned Init</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -56,7 +50,7 @@ public class PredicateVariableImpl extends VariableStatementImpl implements Pred
 	 * @generated
 	 * @ordered
 	 */
-	protected OCLExpression ownedInit;
+	protected ExpCS ownedInit;
 
 	/**
 	 * The default value of the '{@link #isIsChecked() <em>Is Checked</em>}' attribute.
@@ -83,7 +77,7 @@ public class PredicateVariableImpl extends VariableStatementImpl implements Pred
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected PredicateVariableImpl() {
+	protected DeclareStatementCSImpl() {
 		super();
 	}
 
@@ -94,7 +88,7 @@ public class PredicateVariableImpl extends VariableStatementImpl implements Pred
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return QVTimperativePackage.Literals.PREDICATE_VARIABLE;
+		return QVTimperativeCSPackage.Literals.DECLARE_STATEMENT_CS;
 	}
 
 	/**
@@ -103,7 +97,7 @@ public class PredicateVariableImpl extends VariableStatementImpl implements Pred
 	 * @generated
 	 */
 	@Override
-	public OCLExpression getOwnedInit() {
+	public ExpCS getOwnedInit() {
 		return ownedInit;
 	}
 
@@ -112,11 +106,11 @@ public class PredicateVariableImpl extends VariableStatementImpl implements Pred
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetOwnedInit(OCLExpression newOwnedInit, NotificationChain msgs) {
-		OCLExpression oldOwnedInit = ownedInit;
+	public NotificationChain basicSetOwnedInit(ExpCS newOwnedInit, NotificationChain msgs) {
+		ExpCS oldOwnedInit = ownedInit;
 		ownedInit = newOwnedInit;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTimperativePackage.PREDICATE_VARIABLE__OWNED_INIT, oldOwnedInit, newOwnedInit);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.DECLARE_STATEMENT_CS__OWNED_INIT, oldOwnedInit, newOwnedInit);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -128,18 +122,18 @@ public class PredicateVariableImpl extends VariableStatementImpl implements Pred
 	 * @generated
 	 */
 	@Override
-	public void setOwnedInit(OCLExpression newOwnedInit) {
+	public void setOwnedInit(ExpCS newOwnedInit) {
 		if (newOwnedInit != ownedInit) {
 			NotificationChain msgs = null;
 			if (ownedInit != null)
-				msgs = ((InternalEObject)ownedInit).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTimperativePackage.PREDICATE_VARIABLE__OWNED_INIT, null, msgs);
+				msgs = ((InternalEObject)ownedInit).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTimperativeCSPackage.DECLARE_STATEMENT_CS__OWNED_INIT, null, msgs);
 			if (newOwnedInit != null)
-				msgs = ((InternalEObject)newOwnedInit).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTimperativePackage.PREDICATE_VARIABLE__OWNED_INIT, null, msgs);
+				msgs = ((InternalEObject)newOwnedInit).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTimperativeCSPackage.DECLARE_STATEMENT_CS__OWNED_INIT, null, msgs);
 			msgs = basicSetOwnedInit(newOwnedInit, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.PREDICATE_VARIABLE__OWNED_INIT, newOwnedInit, newOwnedInit));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.DECLARE_STATEMENT_CS__OWNED_INIT, newOwnedInit, newOwnedInit));
 	}
 
 	/**
@@ -162,7 +156,7 @@ public class PredicateVariableImpl extends VariableStatementImpl implements Pred
 		boolean oldIsChecked = isChecked;
 		isChecked = newIsChecked;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.PREDICATE_VARIABLE__IS_CHECKED, oldIsChecked, isChecked));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.DECLARE_STATEMENT_CS__IS_CHECKED, oldIsChecked, isChecked));
 	}
 
 	/**
@@ -183,7 +177,7 @@ public class PredicateVariableImpl extends VariableStatementImpl implements Pred
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTimperativePackage.PREDICATE_VARIABLE__OWNED_INIT:
+			case QVTimperativeCSPackage.DECLARE_STATEMENT_CS__OWNED_INIT:
 				return basicSetOwnedInit(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -197,9 +191,9 @@ public class PredicateVariableImpl extends VariableStatementImpl implements Pred
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTimperativePackage.PREDICATE_VARIABLE__OWNED_INIT:
+			case QVTimperativeCSPackage.DECLARE_STATEMENT_CS__OWNED_INIT:
 				return getOwnedInit();
-			case QVTimperativePackage.PREDICATE_VARIABLE__IS_CHECKED:
+			case QVTimperativeCSPackage.DECLARE_STATEMENT_CS__IS_CHECKED:
 				return isIsChecked();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -213,10 +207,10 @@ public class PredicateVariableImpl extends VariableStatementImpl implements Pred
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTimperativePackage.PREDICATE_VARIABLE__OWNED_INIT:
-				setOwnedInit((OCLExpression)newValue);
+			case QVTimperativeCSPackage.DECLARE_STATEMENT_CS__OWNED_INIT:
+				setOwnedInit((ExpCS)newValue);
 				return;
-			case QVTimperativePackage.PREDICATE_VARIABLE__IS_CHECKED:
+			case QVTimperativeCSPackage.DECLARE_STATEMENT_CS__IS_CHECKED:
 				setIsChecked((Boolean)newValue);
 				return;
 		}
@@ -231,10 +225,10 @@ public class PredicateVariableImpl extends VariableStatementImpl implements Pred
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTimperativePackage.PREDICATE_VARIABLE__OWNED_INIT:
-				setOwnedInit((OCLExpression)null);
+			case QVTimperativeCSPackage.DECLARE_STATEMENT_CS__OWNED_INIT:
+				setOwnedInit((ExpCS)null);
 				return;
-			case QVTimperativePackage.PREDICATE_VARIABLE__IS_CHECKED:
+			case QVTimperativeCSPackage.DECLARE_STATEMENT_CS__IS_CHECKED:
 				setIsChecked(IS_CHECKED_EDEFAULT);
 				return;
 		}
@@ -249,9 +243,9 @@ public class PredicateVariableImpl extends VariableStatementImpl implements Pred
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTimperativePackage.PREDICATE_VARIABLE__OWNED_INIT:
+			case QVTimperativeCSPackage.DECLARE_STATEMENT_CS__OWNED_INIT:
 				return ownedInit != null;
-			case QVTimperativePackage.PREDICATE_VARIABLE__IS_CHECKED:
+			case QVTimperativeCSPackage.DECLARE_STATEMENT_CS__IS_CHECKED:
 				return isChecked != IS_CHECKED_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
@@ -263,8 +257,8 @@ public class PredicateVariableImpl extends VariableStatementImpl implements Pred
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTimperativeVisitor<?>)visitor).visitPredicateVariable(this);
+	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
+		return (R) ((QVTimperativeCSVisitor<?>)visitor).visitDeclareStatementCS(this);
 	}
 
-} //PredicateVariableImpl
+} //PredicateVariableCSImpl

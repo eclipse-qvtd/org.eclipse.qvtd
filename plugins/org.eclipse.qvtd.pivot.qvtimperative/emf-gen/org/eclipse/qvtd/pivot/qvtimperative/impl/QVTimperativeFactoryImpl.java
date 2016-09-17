@@ -30,7 +30,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.OutConnectionVariable;
-import org.eclipse.qvtd.pivot.qvtimperative.PredicateVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
@@ -81,6 +81,7 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 		switch (eClass.getClassifierID()) {
 			case QVTimperativePackage.ADD_STATEMENT: return createAddStatement();
 			case QVTimperativePackage.CHECK_STATEMENT: return createCheckStatement();
+			case QVTimperativePackage.DECLARE_STATEMENT: return createDeclareStatement();
 			case QVTimperativePackage.GUARD_VARIABLE: return createGuardVariable();
 			case QVTimperativePackage.IMPERATIVE_DOMAIN: return createImperativeDomain();
 			case QVTimperativePackage.IMPERATIVE_MODEL: return createImperativeModel();
@@ -93,7 +94,6 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 			case QVTimperativePackage.MAPPING_LOOP: return createMappingLoop();
 			case QVTimperativePackage.NEW_STATEMENT: return createNewStatement();
 			case QVTimperativePackage.OUT_CONNECTION_VARIABLE: return createOutConnectionVariable();
-			case QVTimperativePackage.PREDICATE_VARIABLE: return createPredicateVariable();
 			case QVTimperativePackage.SET_STATEMENT: return createSetStatement();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
@@ -120,6 +120,17 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 	public @NonNull CheckStatement createCheckStatement() {
 		CheckStatementImpl checkStatement = new CheckStatementImpl();
 		return checkStatement;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public @NonNull DeclareStatement createDeclareStatement() {
+		DeclareStatementImpl declareStatement = new DeclareStatementImpl();
+		return declareStatement;
 	}
 
 	/**
@@ -160,7 +171,8 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ImperativeTypedModel createImperativeTypedModel() {
+	@Override
+	public @NonNull ImperativeTypedModel createImperativeTypedModel() {
 		ImperativeTypedModelImpl imperativeTypedModel = new ImperativeTypedModelImpl();
 		return imperativeTypedModel;
 	}
@@ -251,17 +263,6 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 	public @NonNull OutConnectionVariable createOutConnectionVariable() {
 		OutConnectionVariableImpl outConnectionVariable = new OutConnectionVariableImpl();
 		return outConnectionVariable;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public @NonNull PredicateVariable createPredicateVariable() {
-		PredicateVariableImpl predicateVariable = new PredicateVariableImpl();
-		return predicateVariable;
 	}
 
 	/**

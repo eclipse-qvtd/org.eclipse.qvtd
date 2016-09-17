@@ -44,7 +44,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.OutConnectionVariable;
-import org.eclipse.qvtd.pivot.qvtimperative.PredicateVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
@@ -119,6 +119,10 @@ public class QVTimperativeAdapterFactory extends AdapterFactoryImpl {
 				return createConnectionVariableAdapter();
 			}
 			@Override
+			public Adapter caseDeclareStatement(DeclareStatement object) {
+				return createDeclareStatementAdapter();
+			}
+			@Override
 			public Adapter caseGuardVariable(GuardVariable object) {
 				return createGuardVariableAdapter();
 			}
@@ -169,10 +173,6 @@ public class QVTimperativeAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseOutConnectionVariable(OutConnectionVariable object) {
 				return createOutConnectionVariableAdapter();
-			}
-			@Override
-			public Adapter casePredicateVariable(PredicateVariable object) {
-				return createPredicateVariableAdapter();
 			}
 			@Override
 			public Adapter caseSetStatement(SetStatement object) {
@@ -297,6 +297,20 @@ public class QVTimperativeAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createConnectionVariableAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement <em>Declare Statement</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement
+	 * @generated
+	 */
+	public Adapter createDeclareStatementAdapter() {
 		return null;
 	}
 
@@ -465,20 +479,6 @@ public class QVTimperativeAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createOutConnectionVariableAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtimperative.PredicateVariable <em>Predicate Variable</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.PredicateVariable
-	 * @generated
-	 */
-	public Adapter createPredicateVariableAdapter() {
 		return null;
 	}
 

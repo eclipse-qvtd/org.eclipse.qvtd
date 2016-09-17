@@ -114,6 +114,21 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case QVTimperativeCSPackage.DECLARE_STATEMENT_CS: {
+				DeclareStatementCS declareStatementCS = (DeclareStatementCS)theEObject;
+				T result = caseDeclareStatementCS(declareStatementCS);
+				if (result == null) result = caseTypedElementCS(declareStatementCS);
+				if (result == null) result = caseStatementCS(declareStatementCS);
+				if (result == null) result = caseNamedElementCS(declareStatementCS);
+				if (result == null) result = caseModelElementCS(declareStatementCS);
+				if (result == null) result = caseNameable(declareStatementCS);
+				if (result == null) result = casePivotableElementCS(declareStatementCS);
+				if (result == null) result = caseElementCS(declareStatementCS);
+				if (result == null) result = casePivotable(declareStatementCS);
+				if (result == null) result = caseVisitableCS(declareStatementCS);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case QVTimperativeCSPackage.DIRECTION_CS: {
 				DirectionCS directionCS = (DirectionCS)theEObject;
 				T result = caseDirectionCS(directionCS);
@@ -275,21 +290,6 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTimperativeCSPackage.PREDICATE_VARIABLE_CS: {
-				PredicateVariableCS predicateVariableCS = (PredicateVariableCS)theEObject;
-				T result = casePredicateVariableCS(predicateVariableCS);
-				if (result == null) result = caseTypedElementCS(predicateVariableCS);
-				if (result == null) result = caseStatementCS(predicateVariableCS);
-				if (result == null) result = caseNamedElementCS(predicateVariableCS);
-				if (result == null) result = caseModelElementCS(predicateVariableCS);
-				if (result == null) result = caseNameable(predicateVariableCS);
-				if (result == null) result = casePivotableElementCS(predicateVariableCS);
-				if (result == null) result = caseElementCS(predicateVariableCS);
-				if (result == null) result = casePivotable(predicateVariableCS);
-				if (result == null) result = caseVisitableCS(predicateVariableCS);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case QVTimperativeCSPackage.QUERY_CS: {
 				QueryCS queryCS = (QueryCS)theEObject;
 				T result = caseQueryCS(queryCS);
@@ -389,6 +389,21 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseCheckStatementCS(CheckStatementCS object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Declare Statement CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Declare Statement CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDeclareStatementCS(DeclareStatementCS object) {
 		return null;
 	}
 
@@ -539,21 +554,6 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseParamDeclarationCS(ParamDeclarationCS object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Predicate Variable CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Predicate Variable CS</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T casePredicateVariableCS(PredicateVariableCS object) {
 		return null;
 	}
 

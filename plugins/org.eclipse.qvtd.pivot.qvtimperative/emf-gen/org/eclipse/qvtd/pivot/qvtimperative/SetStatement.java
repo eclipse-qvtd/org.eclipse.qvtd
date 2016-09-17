@@ -29,9 +29,9 @@ import org.eclipse.ocl.pivot.VariableDeclaration;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.SetStatement#getTargetVariable <em>Target Variable</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.SetStatement#getTargetProperty <em>Target Property</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.SetStatement#getValue <em>Value</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.SetStatement#getOwnedInit <em>Owned Init</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.SetStatement#isIsOpposite <em>Is Opposite</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.SetStatement#isIsEmit <em>Is Emit</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.SetStatement#isIsNotify <em>Is Notify</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getSetStatement()
@@ -89,29 +89,29 @@ public interface SetStatement extends Statement {
 	void setTargetProperty(Property value);
 
 	/**
-	 * Returns the value of the '<em><b>Value</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Owned Init</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Value</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Owned Init</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Value</em>' containment reference.
-	 * @see #setValue(OCLExpression)
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getSetStatement_Value()
+	 * @return the value of the '<em>Owned Init</em>' containment reference.
+	 * @see #setOwnedInit(OCLExpression)
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getSetStatement_OwnedInit()
 	 * @generated
 	 */
-	OCLExpression getValue();
+	OCLExpression getOwnedInit();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtimperative.SetStatement#getValue <em>Value</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtimperative.SetStatement#getOwnedInit <em>Owned Init</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Value</em>' containment reference.
-	 * @see #getValue()
+	 * @param value the new value of the '<em>Owned Init</em>' containment reference.
+	 * @see #getOwnedInit()
 	 * @generated
 	 */
-	void setValue(OCLExpression value);
+	void setOwnedInit(OCLExpression value);
 
 	/**
 	 * Returns the value of the '<em><b>Is Opposite</b></em>' attribute.
@@ -139,28 +139,28 @@ public interface SetStatement extends Statement {
 	void setIsOpposite(boolean value);
 
 	/**
-	 * Returns the value of the '<em><b>Is Emit</b></em>' attribute.
+	 * Returns the value of the '<em><b>Is Notify</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Is Emit</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Is Notify</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Is Emit</em>' attribute.
-	 * @see #setIsEmit(boolean)
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getSetStatement_IsEmit()
+	 * @return the value of the '<em>Is Notify</em>' attribute.
+	 * @see #setIsNotify(boolean)
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getSetStatement_IsNotify()
 	 * @generated
 	 */
-	boolean isIsEmit();
+	boolean isIsNotify();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtimperative.SetStatement#isIsEmit <em>Is Emit</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtimperative.SetStatement#isIsNotify <em>Is Notify</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Is Emit</em>' attribute.
-	 * @see #isIsEmit()
+	 * @param value the new value of the '<em>Is Notify</em>' attribute.
+	 * @see #isIsNotify()
 	 * @generated
 	 */
-	void setIsEmit(boolean value);
+	void setIsNotify(boolean value);
 
 } // SetStatement

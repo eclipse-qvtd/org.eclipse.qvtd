@@ -36,7 +36,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.AddStatementImpl#getTargetVariable <em>Target Variable</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.AddStatementImpl#getValue <em>Value</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.AddStatementImpl#getOwnedInit <em>Owned Init</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.AddStatementImpl#isIsEnforcedUnique <em>Is Enforced Unique</em>}</li>
  * </ul>
  *
@@ -54,14 +54,14 @@ public class AddStatementImpl extends MappingStatementImpl implements AddStateme
 	protected ConnectionVariable targetVariable;
 
 	/**
-	 * The cached value of the '{@link #getValue() <em>Value</em>}' containment reference.
+	 * The cached value of the '{@link #getOwnedInit() <em>Owned Init</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getValue()
+	 * @see #getOwnedInit()
 	 * @generated
 	 * @ordered
 	 */
-	protected OCLExpression value;
+	protected OCLExpression ownedInit;
 
 	/**
 	 * The default value of the '{@link #isIsEnforcedUnique() <em>Is Enforced Unique</em>}' attribute.
@@ -148,8 +148,8 @@ public class AddStatementImpl extends MappingStatementImpl implements AddStateme
 	 * @generated
 	 */
 	@Override
-	public OCLExpression getValue() {
-		return value;
+	public OCLExpression getOwnedInit() {
+		return ownedInit;
 	}
 
 	/**
@@ -157,11 +157,11 @@ public class AddStatementImpl extends MappingStatementImpl implements AddStateme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetValue(OCLExpression newValue, NotificationChain msgs) {
-		OCLExpression oldValue = value;
-		value = newValue;
+	public NotificationChain basicSetOwnedInit(OCLExpression newOwnedInit, NotificationChain msgs) {
+		OCLExpression oldOwnedInit = ownedInit;
+		ownedInit = newOwnedInit;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTimperativePackage.ADD_STATEMENT__VALUE, oldValue, newValue);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTimperativePackage.ADD_STATEMENT__OWNED_INIT, oldOwnedInit, newOwnedInit);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -173,18 +173,18 @@ public class AddStatementImpl extends MappingStatementImpl implements AddStateme
 	 * @generated
 	 */
 	@Override
-	public void setValue(OCLExpression newValue) {
-		if (newValue != value) {
+	public void setOwnedInit(OCLExpression newOwnedInit) {
+		if (newOwnedInit != ownedInit) {
 			NotificationChain msgs = null;
-			if (value != null)
-				msgs = ((InternalEObject)value).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTimperativePackage.ADD_STATEMENT__VALUE, null, msgs);
-			if (newValue != null)
-				msgs = ((InternalEObject)newValue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTimperativePackage.ADD_STATEMENT__VALUE, null, msgs);
-			msgs = basicSetValue(newValue, msgs);
+			if (ownedInit != null)
+				msgs = ((InternalEObject)ownedInit).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTimperativePackage.ADD_STATEMENT__OWNED_INIT, null, msgs);
+			if (newOwnedInit != null)
+				msgs = ((InternalEObject)newOwnedInit).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTimperativePackage.ADD_STATEMENT__OWNED_INIT, null, msgs);
+			msgs = basicSetOwnedInit(newOwnedInit, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.ADD_STATEMENT__VALUE, newValue, newValue));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.ADD_STATEMENT__OWNED_INIT, newOwnedInit, newOwnedInit));
 	}
 
 	/**
@@ -228,8 +228,8 @@ public class AddStatementImpl extends MappingStatementImpl implements AddStateme
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTimperativePackage.ADD_STATEMENT__VALUE:
-				return basicSetValue(null, msgs);
+			case QVTimperativePackage.ADD_STATEMENT__OWNED_INIT:
+				return basicSetOwnedInit(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -245,8 +245,8 @@ public class AddStatementImpl extends MappingStatementImpl implements AddStateme
 			case QVTimperativePackage.ADD_STATEMENT__TARGET_VARIABLE:
 				if (resolve) return getTargetVariable();
 				return basicGetTargetVariable();
-			case QVTimperativePackage.ADD_STATEMENT__VALUE:
-				return getValue();
+			case QVTimperativePackage.ADD_STATEMENT__OWNED_INIT:
+				return getOwnedInit();
 			case QVTimperativePackage.ADD_STATEMENT__IS_ENFORCED_UNIQUE:
 				return isIsEnforcedUnique();
 		}
@@ -264,8 +264,8 @@ public class AddStatementImpl extends MappingStatementImpl implements AddStateme
 			case QVTimperativePackage.ADD_STATEMENT__TARGET_VARIABLE:
 				setTargetVariable((ConnectionVariable)newValue);
 				return;
-			case QVTimperativePackage.ADD_STATEMENT__VALUE:
-				setValue((OCLExpression)newValue);
+			case QVTimperativePackage.ADD_STATEMENT__OWNED_INIT:
+				setOwnedInit((OCLExpression)newValue);
 				return;
 			case QVTimperativePackage.ADD_STATEMENT__IS_ENFORCED_UNIQUE:
 				setIsEnforcedUnique((Boolean)newValue);
@@ -285,8 +285,8 @@ public class AddStatementImpl extends MappingStatementImpl implements AddStateme
 			case QVTimperativePackage.ADD_STATEMENT__TARGET_VARIABLE:
 				setTargetVariable((ConnectionVariable)null);
 				return;
-			case QVTimperativePackage.ADD_STATEMENT__VALUE:
-				setValue((OCLExpression)null);
+			case QVTimperativePackage.ADD_STATEMENT__OWNED_INIT:
+				setOwnedInit((OCLExpression)null);
 				return;
 			case QVTimperativePackage.ADD_STATEMENT__IS_ENFORCED_UNIQUE:
 				setIsEnforcedUnique(IS_ENFORCED_UNIQUE_EDEFAULT);
@@ -305,8 +305,8 @@ public class AddStatementImpl extends MappingStatementImpl implements AddStateme
 		switch (featureID) {
 			case QVTimperativePackage.ADD_STATEMENT__TARGET_VARIABLE:
 				return targetVariable != null;
-			case QVTimperativePackage.ADD_STATEMENT__VALUE:
-				return value != null;
+			case QVTimperativePackage.ADD_STATEMENT__OWNED_INIT:
+				return ownedInit != null;
 			case QVTimperativePackage.ADD_STATEMENT__IS_ENFORCED_UNIQUE:
 				return isEnforcedUnique != IS_ENFORCED_UNIQUE_EDEFAULT;
 		}

@@ -23,6 +23,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.xtext.qvtbasecs.QVTbaseCSPackage;
 import org.eclipse.qvtd.xtext.qvtimperativecs.AddStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.CheckStatementCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.DeclareStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DomainCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.GuardVariableCS;
@@ -35,7 +36,6 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.MappingStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.NewStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.OutVariableCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.ParamDeclarationCS;
-import org.eclipse.qvtd.xtext.qvtimperativecs.PredicateVariableCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSFactory;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QueryCS;
@@ -64,6 +64,13 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	 * @generated
 	 */
 	private EClass checkStatementCSEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass declareStatementCSEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -134,13 +141,6 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	 * @generated
 	 */
 	private EClass paramDeclarationCSEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass predicateVariableCSEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -219,7 +219,7 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link QVTimperativeCSPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -252,7 +252,7 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		// Mark meta-data to indicate it can't be changed
 		theQVTimperativeCSPackage.freeze();
 
-  
+
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(QVTimperativeCSPackage.eNS_URI, theQVTimperativeCSPackage);
 		return theQVTimperativeCSPackage;
@@ -314,6 +314,36 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	 * @generated
 	 */
 	@Override
+	public EClass getDeclareStatementCS() {
+		return declareStatementCSEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getDeclareStatementCS_OwnedInit() {
+		return (EReference)declareStatementCSEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getDeclareStatementCS_IsChecked() {
+		return (EAttribute)declareStatementCSEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getDirectionCS() {
 		return directionCSEClass;
 	}
@@ -343,6 +373,7 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getDirectionCS_IsChecked() {
 		return (EAttribute)directionCSEClass.getEStructuralFeatures().get(2);
 	}
@@ -352,6 +383,7 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getDirectionCS_IsEnforced() {
 		return (EAttribute)directionCSEClass.getEStructuralFeatures().get(3);
 	}
@@ -381,6 +413,7 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getDomainCS_IsCheck() {
 		return (EAttribute)domainCSEClass.getEStructuralFeatures().get(1);
 	}
@@ -390,6 +423,7 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getDomainCS_IsEnforce() {
 		return (EAttribute)domainCSEClass.getEStructuralFeatures().get(2);
 	}
@@ -469,6 +503,7 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getMappingCS_OwnedGuardVariables() {
 		return (EReference)mappingCSEClass.getEStructuralFeatures().get(2);
 	}
@@ -659,36 +694,6 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	 * @generated
 	 */
 	@Override
-	public EClass getPredicateVariableCS() {
-		return predicateVariableCSEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getPredicateVariableCS_OwnedInit() {
-		return (EReference)predicateVariableCSEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EAttribute getPredicateVariableCS_IsChecked() {
-		return (EAttribute)predicateVariableCSEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EClass getQueryCS() {
 		return queryCSEClass;
 	}
@@ -829,7 +834,7 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	 * @generated
 	 */
 	@Override
-	public EAttribute getSetStatementCS_IsEmit() {
+	public EAttribute getSetStatementCS_IsNotify() {
 		return (EAttribute)setStatementCSEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -949,6 +954,10 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		checkStatementCSEClass = createEClass(CHECK_STATEMENT_CS);
 		createEReference(checkStatementCSEClass, CHECK_STATEMENT_CS__OWNED_CONDITION);
 
+		declareStatementCSEClass = createEClass(DECLARE_STATEMENT_CS);
+		createEReference(declareStatementCSEClass, DECLARE_STATEMENT_CS__OWNED_INIT);
+		createEAttribute(declareStatementCSEClass, DECLARE_STATEMENT_CS__IS_CHECKED);
+
 		directionCSEClass = createEClass(DIRECTION_CS);
 		createEReference(directionCSEClass, DIRECTION_CS__IMPORTS);
 		createEReference(directionCSEClass, DIRECTION_CS__USES);
@@ -1000,10 +1009,6 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 
 		paramDeclarationCSEClass = createEClass(PARAM_DECLARATION_CS);
 
-		predicateVariableCSEClass = createEClass(PREDICATE_VARIABLE_CS);
-		createEReference(predicateVariableCSEClass, PREDICATE_VARIABLE_CS__OWNED_INIT);
-		createEAttribute(predicateVariableCSEClass, PREDICATE_VARIABLE_CS__IS_CHECKED);
-
 		queryCSEClass = createEClass(QUERY_CS);
 		createEReference(queryCSEClass, QUERY_CS__OWNED_PATH_NAME);
 		createEReference(queryCSEClass, QUERY_CS__TRANSFORMATION);
@@ -1015,7 +1020,7 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		createEReference(setStatementCSEClass, SET_STATEMENT_CS__REFERRED_PROPERTY);
 		createEReference(setStatementCSEClass, SET_STATEMENT_CS__REFERRED_VARIABLE);
 		createEReference(setStatementCSEClass, SET_STATEMENT_CS__OWNED_INIT);
-		createEAttribute(setStatementCSEClass, SET_STATEMENT_CS__IS_EMIT);
+		createEAttribute(setStatementCSEClass, SET_STATEMENT_CS__IS_NOTIFY);
 
 		statementCSEClass = createEClass(STATEMENT_CS);
 
@@ -1067,6 +1072,8 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		// Add supertypes to classes
 		addStatementCSEClass.getESuperTypes().add(this.getMappingStatementCS());
 		checkStatementCSEClass.getESuperTypes().add(this.getStatementCS());
+		declareStatementCSEClass.getESuperTypes().add(theBaseCSPackage.getTypedElementCS());
+		declareStatementCSEClass.getESuperTypes().add(this.getStatementCS());
 		directionCSEClass.getESuperTypes().add(theBaseCSPackage.getNamedElementCS());
 		domainCSEClass.getESuperTypes().add(theBaseCSPackage.getNamedElementCS());
 		guardVariableCSEClass.getESuperTypes().add(theBaseCSPackage.getTypedElementCS());
@@ -1081,8 +1088,6 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		outVariableCSEClass.getESuperTypes().add(theBaseCSPackage.getTypedElementCS());
 		outVariableCSEClass.getESuperTypes().add(this.getStatementCS());
 		paramDeclarationCSEClass.getESuperTypes().add(theBaseCSPackage.getTypedElementCS());
-		predicateVariableCSEClass.getESuperTypes().add(theBaseCSPackage.getTypedElementCS());
-		predicateVariableCSEClass.getESuperTypes().add(this.getStatementCS());
 		queryCSEClass.getESuperTypes().add(theBaseCSPackage.getTypedElementCS());
 		setStatementCSEClass.getESuperTypes().add(this.getStatementCS());
 		statementCSEClass.getESuperTypes().add(theBaseCSPackage.getModelElementCS());
@@ -1096,6 +1101,10 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 
 		initEClass(checkStatementCSEClass, CheckStatementCS.class, "CheckStatementCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCheckStatementCS_OwnedCondition(), theEssentialOCLCSPackage.getExpCS(), null, "ownedCondition", null, 1, 1, CheckStatementCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(declareStatementCSEClass, DeclareStatementCS.class, "DeclareStatementCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getDeclareStatementCS_OwnedInit(), theEssentialOCLCSPackage.getExpCS(), null, "ownedInit", null, 1, 1, DeclareStatementCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDeclareStatementCS_IsChecked(), ecorePackage.getEBoolean(), "isChecked", "false", 0, 1, DeclareStatementCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(directionCSEClass, DirectionCS.class, "DirectionCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getDirectionCS_Imports(), thePivotPackage.getPackage(), null, "imports", null, 0, -1, DirectionCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1148,10 +1157,6 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 
 		initEClass(paramDeclarationCSEClass, ParamDeclarationCS.class, "ParamDeclarationCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(predicateVariableCSEClass, PredicateVariableCS.class, "PredicateVariableCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getPredicateVariableCS_OwnedInit(), theEssentialOCLCSPackage.getExpCS(), null, "ownedInit", null, 1, 1, PredicateVariableCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getPredicateVariableCS_IsChecked(), ecorePackage.getEBoolean(), "isChecked", "false", 0, 1, PredicateVariableCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
 		initEClass(queryCSEClass, QueryCS.class, "QueryCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getQueryCS_OwnedPathName(), theBaseCSPackage.getPathNameCS(), null, "ownedPathName", null, 0, 1, QueryCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getQueryCS_Transformation(), theQVTbasePackage.getTransformation(), null, "transformation", null, 0, 1, QueryCS.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
@@ -1163,7 +1168,7 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		initEReference(getSetStatementCS_ReferredProperty(), thePivotPackage.getProperty(), null, "referredProperty", null, 1, 1, SetStatementCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSetStatementCS_ReferredVariable(), thePivotPackage.getVariableDeclaration(), null, "referredVariable", null, 1, 1, SetStatementCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSetStatementCS_OwnedInit(), theEssentialOCLCSPackage.getExpCS(), null, "ownedInit", null, 1, 1, SetStatementCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getSetStatementCS_IsEmit(), ecorePackage.getEBoolean(), "isEmit", "false", 0, 1, SetStatementCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSetStatementCS_IsNotify(), ecorePackage.getEBoolean(), "isNotify", "false", 0, 1, SetStatementCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(statementCSEClass, StatementCS.class, "StatementCS", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
