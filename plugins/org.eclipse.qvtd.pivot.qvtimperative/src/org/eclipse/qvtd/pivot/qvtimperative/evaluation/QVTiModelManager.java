@@ -130,6 +130,7 @@ public class QVTiModelManager extends AbstractModelManager
 			}
 		}
 		if (elements != null) {
+			assert !elements.contains(element);
 			elements.add((EObject) element);
 		}
 	}
@@ -186,18 +187,18 @@ public class QVTiModelManager extends AbstractModelManager
 			for (@NonNull EObject root : roots) {
 				//            if (root != null) {
 				//if (root.eClass().getName().equals(type.getName())) {
-				if (isInstance(type, root)) {
-					elements.add(root);
-				}
-				for (TreeIterator<EObject> contents = root.eAllContents(); contents
-						.hasNext();) {
-					EObject element = contents.next();
-					if ((element != null) && isInstance(type, element)) {
-						//                    if (((EClass) type.getETarget()).getName().equals(element.eClass().getName())) {
-						elements.add(element);
+				if (root.eContainer() == null) {
+					if (isInstance(type, root)) {
+						elements.add(root);
+					}
+					for (TreeIterator<EObject> contents = root.eAllContents(); contents.hasNext();) {
+						EObject element = contents.next();
+						if ((element != null) && isInstance(type, element)) {
+							//                    if (((EClass) type.getETarget()).getName().equals(element.eClass().getName())) {
+							elements.add(element);
+						}
 					}
 				}
-				//			}
 			}
 		}
 		else {
@@ -393,8 +394,8 @@ public class QVTiModelManager extends AbstractModelManager
 	{
 		protected final @NonNull QVTiModelManager modelManager;
 		protected final @NonNull TypedModel typedModel;
-		private /*@LazyNonNull*/ Map<@NonNull Type, @NonNull Set<@NonNull Object>> kind2instances = null;
-		private /*@LazyNonNull*/ Map<@NonNull Type, @NonNull Set<@NonNull Object>> type2instances = null;
+		private /*@LazyNonNull*/ Map<@NonNull Type, @NonNull List<@NonNull Object>> kind2instances = null;
+		private /*@LazyNonNull*/ Map<@NonNull Type, @NonNull List<@NonNull Object>> type2instances = null;
 
 		public QVTiTypedModelInstance(@NonNull QVTiModelManager modelManager, @NonNull TypedModel typedModel) {
 			this.modelManager = modelManager;
@@ -412,29 +413,26 @@ public class QVTiModelManager extends AbstractModelManager
 		}
 
 		@Override
-		public @NonNull Set<@NonNull Object> getObjectsOfKind(org.eclipse.ocl.pivot.@NonNull Class type) {
+		public @NonNull List<@NonNull Object> getObjectsOfKind(org.eclipse.ocl.pivot.@NonNull Class type) {
 			if (kind2instances == null) {
 				kind2instances = new HashMap<>();
 			}
-			Set<@NonNull Object> elements = kind2instances.get(type);
+			List<@NonNull Object> elements = kind2instances.get(type);
 			if (elements == null) {
-				elements = new HashSet<>();
+				elements = modelManager.getElementsByType(typedModel, type);
 				kind2instances.put(type, elements);
-				for (@NonNull Object o : modelManager.getElementsByType(typedModel, type)) {
-					elements.add(o);
-				}
 			}
 			return elements;
 		}
 
 		@Override
-		public @NonNull Set<@NonNull Object> getObjectsOfType(org.eclipse.ocl.pivot.@NonNull Class type) {
+		public @NonNull List<@NonNull Object> getObjectsOfType(org.eclipse.ocl.pivot.@NonNull Class type) {
 			if (type2instances == null) {
 				type2instances = new HashMap<>();
 			}
-			Set<@NonNull Object> elements = type2instances.get(type);
+			List<@NonNull Object> elements = type2instances.get(type);
 			if (elements == null) {
-				elements = new HashSet<>();
+				elements = new ArrayList<>();
 				type2instances.put(type, elements);
 				EObject eClass = type.getESObject();
 				for (@NonNull Object eObject : getObjectsOfKind(type)) {

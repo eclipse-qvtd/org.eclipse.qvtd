@@ -10,7 +10,6 @@
  *******************************************************************************/
 package org.eclipse.qvtd.runtime.library.model;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 import org.eclipse.jdt.annotation.NonNull;
@@ -40,6 +39,7 @@ public class ModelObjectsOfKindOperation extends AbstractBinaryOperation
 		}
 		TypedModelInstance typedModelInstance = (TypedModelInstance)sourceVal;
 		Collection<@NonNull ? extends Object> results = typedModelInstance.getObjectsOfKind(type);
-		return createSetValue((CollectionTypeId)returnTypeId, new ArrayList<@NonNull Object>(results));
+		return createSetValue((CollectionTypeId)returnTypeId, results);
+		//		return createSetValue((CollectionTypeId)returnTypeId, new ArrayList<@NonNull Object>(results));
 	}
 }
