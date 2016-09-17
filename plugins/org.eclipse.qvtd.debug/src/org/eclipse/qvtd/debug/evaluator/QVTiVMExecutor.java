@@ -19,7 +19,6 @@ import org.eclipse.ocl.examples.debug.vm.evaluator.IVMContext;
 import org.eclipse.ocl.examples.debug.vm.evaluator.VMEvaluationStepper;
 import org.eclipse.ocl.examples.debug.vm.evaluator.VMExecutor;
 import org.eclipse.ocl.pivot.NamedElement;
-import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.qvtd.debug.QVTiDebugPlugin;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
@@ -47,7 +46,7 @@ public class QVTiVMExecutor extends BasicQVTiExecutor implements VMExecutor
 	}
 
 	@Override
-	protected @NonNull QVTiVMEvaluationEnvironment createNestedEvaluationEnvironment(EvaluationEnvironment.@NonNull EvaluationEnvironmentExtension evaluationEnvironment, @NonNull NamedElement executableObject, @Nullable TypedElement caller) {
+	protected @NonNull QVTiVMEvaluationEnvironment createNestedEvaluationEnvironment(EvaluationEnvironment.@NonNull EvaluationEnvironmentExtension evaluationEnvironment, @NonNull NamedElement executableObject, @Nullable Object caller) {
 		return new QVTiVMNestedEvaluationEnvironment((QVTiVMEvaluationEnvironment) evaluationEnvironment, executableObject, caller, ++envId);
 	}
 

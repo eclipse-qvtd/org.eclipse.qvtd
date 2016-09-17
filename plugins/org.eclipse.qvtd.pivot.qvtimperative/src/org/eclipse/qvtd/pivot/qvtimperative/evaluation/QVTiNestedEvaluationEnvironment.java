@@ -16,7 +16,6 @@ import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
-import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.ocl.pivot.internal.evaluation.BasicEvaluationEnvironment;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
@@ -28,7 +27,7 @@ public class QVTiNestedEvaluationEnvironment extends BasicEvaluationEnvironment 
 	protected final @NonNull QVTiRootEvaluationEnvironment rootEvaluationEnvironment;
 	private @Nullable DomainUsageAnalysis usageAnalysis;
 
-	public QVTiNestedEvaluationEnvironment(@NonNull QVTiEvaluationEnvironment evaluationEnvironment, @NonNull NamedElement executableObject, @Nullable TypedElement caller) {
+	public QVTiNestedEvaluationEnvironment(@NonNull QVTiEvaluationEnvironment evaluationEnvironment, @NonNull NamedElement executableObject, @Nullable Object caller) {
 		super(evaluationEnvironment, executableObject, caller);
 		rootEvaluationEnvironment = evaluationEnvironment.getRootEvaluationEnvironment();
 	}
