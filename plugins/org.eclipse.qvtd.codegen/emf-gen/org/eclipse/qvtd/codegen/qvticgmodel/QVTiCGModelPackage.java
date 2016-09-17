@@ -2346,6 +2346,24 @@ public interface QVTiCGModelPackage extends EPackage {
 	int CG_TRANSFORMATION__TEMPLATE_PARAMETERS = CGModelPackage.CG_CLASS__TEMPLATE_PARAMETERS;
 
 	/**
+	 * The feature id for the '<em><b>Classes</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_TRANSFORMATION__CLASSES = CGModelPackage.CG_CLASS__CLASSES;
+
+	/**
+	 * The feature id for the '<em><b>Containing Class</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_TRANSFORMATION__CONTAINING_CLASS = CGModelPackage.CG_CLASS__CONTAINING_CLASS;
+
+	/**
 	 * The feature id for the '<em><b>Mappings</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
