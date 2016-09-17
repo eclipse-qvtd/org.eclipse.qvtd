@@ -29,15 +29,15 @@ import org.eclipse.ocl.pivot.VariableDeclaration;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.SetStatement#getTargetVariable <em>Target Variable</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.SetStatement#getTargetProperty <em>Target Property</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.SetStatement#getOwnedInit <em>Owned Init</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.SetStatement#isIsOpposite <em>Is Opposite</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.SetStatement#isIsNotify <em>Is Notify</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.SetStatement#getOwnedExpression <em>Owned Expression</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getSetStatement()
  * @generated
  */
-public interface SetStatement extends Statement {
+public interface SetStatement extends ObservableStatement {
 	/**
 	 * Returns the value of the '<em><b>Target Variable</b></em>' reference.
 	 * <!-- begin-user-doc -->
@@ -89,31 +89,6 @@ public interface SetStatement extends Statement {
 	void setTargetProperty(Property value);
 
 	/**
-	 * Returns the value of the '<em><b>Owned Init</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Owned Init</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Owned Init</em>' containment reference.
-	 * @see #setOwnedInit(OCLExpression)
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getSetStatement_OwnedInit()
-	 * @generated
-	 */
-	OCLExpression getOwnedInit();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtimperative.SetStatement#getOwnedInit <em>Owned Init</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Owned Init</em>' containment reference.
-	 * @see #getOwnedInit()
-	 * @generated
-	 */
-	void setOwnedInit(OCLExpression value);
-
-	/**
 	 * Returns the value of the '<em><b>Is Opposite</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -162,5 +137,30 @@ public interface SetStatement extends Statement {
 	 * @generated
 	 */
 	void setIsNotify(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Owned Expression</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Owned Expression</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Owned Expression</em>' containment reference.
+	 * @see #setOwnedExpression(OCLExpression)
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getSetStatement_OwnedExpression()
+	 * @generated
+	 */
+	OCLExpression getOwnedExpression();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtimperative.SetStatement#getOwnedExpression <em>Owned Expression</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Owned Expression</em>' containment reference.
+	 * @see #getOwnedExpression()
+	 * @generated
+	 */
+	void setOwnedExpression(OCLExpression value);
 
 } // SetStatement

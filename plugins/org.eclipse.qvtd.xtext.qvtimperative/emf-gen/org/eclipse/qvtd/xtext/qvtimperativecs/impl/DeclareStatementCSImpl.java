@@ -14,17 +14,25 @@
  */
 package org.eclipse.qvtd.xtext.qvtimperativecs.impl;
 
+import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.xtext.basecs.PathNameCS;
 import org.eclipse.ocl.xtext.basecs.impl.TypedElementCSImpl;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DeclareStatementCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.ObservableStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage;
+import org.eclipse.qvtd.xtext.qvtimperativecs.StatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
 
 /**
@@ -35,7 +43,8 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.DeclareStatementCSImpl#getOwnedInit <em>Owned Init</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.DeclareStatementCSImpl#getObservedProperties <em>Observed Properties</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.DeclareStatementCSImpl#getOwnedExpression <em>Owned Expression</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.DeclareStatementCSImpl#isIsChecked <em>Is Checked</em>}</li>
  * </ul>
  *
@@ -43,14 +52,24 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
  */
 public class DeclareStatementCSImpl extends TypedElementCSImpl implements DeclareStatementCS {
 	/**
-	 * The cached value of the '{@link #getOwnedInit() <em>Owned Init</em>}' containment reference.
+	 * The cached value of the '{@link #getObservedProperties() <em>Observed Properties</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getOwnedInit()
+	 * @see #getObservedProperties()
 	 * @generated
 	 * @ordered
 	 */
-	protected ExpCS ownedInit;
+	protected EList<PathNameCS> observedProperties;
+
+	/**
+	 * The cached value of the '{@link #getOwnedExpression() <em>Owned Expression</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOwnedExpression()
+	 * @generated
+	 * @ordered
+	 */
+	protected ExpCS ownedExpression;
 
 	/**
 	 * The default value of the '{@link #isIsChecked() <em>Is Checked</em>}' attribute.
@@ -97,8 +116,11 @@ public class DeclareStatementCSImpl extends TypedElementCSImpl implements Declar
 	 * @generated
 	 */
 	@Override
-	public ExpCS getOwnedInit() {
-		return ownedInit;
+	public EList<PathNameCS> getObservedProperties() {
+		if (observedProperties == null) {
+			observedProperties = new EObjectContainmentEList<PathNameCS>(PathNameCS.class, this, QVTimperativeCSPackage.DECLARE_STATEMENT_CS__OBSERVED_PROPERTIES);
+		}
+		return observedProperties;
 	}
 
 	/**
@@ -106,11 +128,21 @@ public class DeclareStatementCSImpl extends TypedElementCSImpl implements Declar
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetOwnedInit(ExpCS newOwnedInit, NotificationChain msgs) {
-		ExpCS oldOwnedInit = ownedInit;
-		ownedInit = newOwnedInit;
+	@Override
+	public ExpCS getOwnedExpression() {
+		return ownedExpression;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetOwnedExpression(ExpCS newOwnedExpression, NotificationChain msgs) {
+		ExpCS oldOwnedExpression = ownedExpression;
+		ownedExpression = newOwnedExpression;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.DECLARE_STATEMENT_CS__OWNED_INIT, oldOwnedInit, newOwnedInit);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.DECLARE_STATEMENT_CS__OWNED_EXPRESSION, oldOwnedExpression, newOwnedExpression);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -122,18 +154,18 @@ public class DeclareStatementCSImpl extends TypedElementCSImpl implements Declar
 	 * @generated
 	 */
 	@Override
-	public void setOwnedInit(ExpCS newOwnedInit) {
-		if (newOwnedInit != ownedInit) {
+	public void setOwnedExpression(ExpCS newOwnedExpression) {
+		if (newOwnedExpression != ownedExpression) {
 			NotificationChain msgs = null;
-			if (ownedInit != null)
-				msgs = ((InternalEObject)ownedInit).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTimperativeCSPackage.DECLARE_STATEMENT_CS__OWNED_INIT, null, msgs);
-			if (newOwnedInit != null)
-				msgs = ((InternalEObject)newOwnedInit).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTimperativeCSPackage.DECLARE_STATEMENT_CS__OWNED_INIT, null, msgs);
-			msgs = basicSetOwnedInit(newOwnedInit, msgs);
+			if (ownedExpression != null)
+				msgs = ((InternalEObject)ownedExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTimperativeCSPackage.DECLARE_STATEMENT_CS__OWNED_EXPRESSION, null, msgs);
+			if (newOwnedExpression != null)
+				msgs = ((InternalEObject)newOwnedExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTimperativeCSPackage.DECLARE_STATEMENT_CS__OWNED_EXPRESSION, null, msgs);
+			msgs = basicSetOwnedExpression(newOwnedExpression, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.DECLARE_STATEMENT_CS__OWNED_INIT, newOwnedInit, newOwnedInit));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.DECLARE_STATEMENT_CS__OWNED_EXPRESSION, newOwnedExpression, newOwnedExpression));
 	}
 
 	/**
@@ -177,8 +209,10 @@ public class DeclareStatementCSImpl extends TypedElementCSImpl implements Declar
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.DECLARE_STATEMENT_CS__OWNED_INIT:
-				return basicSetOwnedInit(null, msgs);
+			case QVTimperativeCSPackage.DECLARE_STATEMENT_CS__OBSERVED_PROPERTIES:
+				return ((InternalEList<?>)getObservedProperties()).basicRemove(otherEnd, msgs);
+			case QVTimperativeCSPackage.DECLARE_STATEMENT_CS__OWNED_EXPRESSION:
+				return basicSetOwnedExpression(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -191,8 +225,10 @@ public class DeclareStatementCSImpl extends TypedElementCSImpl implements Declar
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.DECLARE_STATEMENT_CS__OWNED_INIT:
-				return getOwnedInit();
+			case QVTimperativeCSPackage.DECLARE_STATEMENT_CS__OBSERVED_PROPERTIES:
+				return getObservedProperties();
+			case QVTimperativeCSPackage.DECLARE_STATEMENT_CS__OWNED_EXPRESSION:
+				return getOwnedExpression();
 			case QVTimperativeCSPackage.DECLARE_STATEMENT_CS__IS_CHECKED:
 				return isIsChecked();
 		}
@@ -204,11 +240,16 @@ public class DeclareStatementCSImpl extends TypedElementCSImpl implements Declar
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.DECLARE_STATEMENT_CS__OWNED_INIT:
-				setOwnedInit((ExpCS)newValue);
+			case QVTimperativeCSPackage.DECLARE_STATEMENT_CS__OBSERVED_PROPERTIES:
+				getObservedProperties().clear();
+				getObservedProperties().addAll((Collection<? extends PathNameCS>)newValue);
+				return;
+			case QVTimperativeCSPackage.DECLARE_STATEMENT_CS__OWNED_EXPRESSION:
+				setOwnedExpression((ExpCS)newValue);
 				return;
 			case QVTimperativeCSPackage.DECLARE_STATEMENT_CS__IS_CHECKED:
 				setIsChecked((Boolean)newValue);
@@ -225,8 +266,11 @@ public class DeclareStatementCSImpl extends TypedElementCSImpl implements Declar
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.DECLARE_STATEMENT_CS__OWNED_INIT:
-				setOwnedInit((ExpCS)null);
+			case QVTimperativeCSPackage.DECLARE_STATEMENT_CS__OBSERVED_PROPERTIES:
+				getObservedProperties().clear();
+				return;
+			case QVTimperativeCSPackage.DECLARE_STATEMENT_CS__OWNED_EXPRESSION:
+				setOwnedExpression((ExpCS)null);
 				return;
 			case QVTimperativeCSPackage.DECLARE_STATEMENT_CS__IS_CHECKED:
 				setIsChecked(IS_CHECKED_EDEFAULT);
@@ -243,12 +287,56 @@ public class DeclareStatementCSImpl extends TypedElementCSImpl implements Declar
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.DECLARE_STATEMENT_CS__OWNED_INIT:
-				return ownedInit != null;
+			case QVTimperativeCSPackage.DECLARE_STATEMENT_CS__OBSERVED_PROPERTIES:
+				return observedProperties != null && !observedProperties.isEmpty();
+			case QVTimperativeCSPackage.DECLARE_STATEMENT_CS__OWNED_EXPRESSION:
+				return ownedExpression != null;
 			case QVTimperativeCSPackage.DECLARE_STATEMENT_CS__IS_CHECKED:
 				return isChecked != IS_CHECKED_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+		if (baseClass == StatementCS.class) {
+			switch (derivedFeatureID) {
+				default: return -1;
+			}
+		}
+		if (baseClass == ObservableStatementCS.class) {
+			switch (derivedFeatureID) {
+				case QVTimperativeCSPackage.DECLARE_STATEMENT_CS__OBSERVED_PROPERTIES: return QVTimperativeCSPackage.OBSERVABLE_STATEMENT_CS__OBSERVED_PROPERTIES;
+				default: return -1;
+			}
+		}
+		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+		if (baseClass == StatementCS.class) {
+			switch (baseFeatureID) {
+				default: return -1;
+			}
+		}
+		if (baseClass == ObservableStatementCS.class) {
+			switch (baseFeatureID) {
+				case QVTimperativeCSPackage.OBSERVABLE_STATEMENT_CS__OBSERVED_PROPERTIES: return QVTimperativeCSPackage.DECLARE_STATEMENT_CS__OBSERVED_PROPERTIES;
+				default: return -1;
+			}
+		}
+		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
 	/**

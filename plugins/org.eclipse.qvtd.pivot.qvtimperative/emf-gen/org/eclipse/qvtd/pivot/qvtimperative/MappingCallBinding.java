@@ -31,7 +31,6 @@ import org.eclipse.ocl.pivot.VariableDeclaration;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding#getBoundVariable <em>Bound Variable</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding#isIsPolled <em>Is Polled</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding#getMappingCall <em>Mapping Call</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding#getValue <em>Value</em>}</li>
  * </ul>
@@ -97,35 +96,6 @@ public interface MappingCallBinding extends Element {
 	 * @generated
 	 */
 	void setBoundVariable(VariableDeclaration value);
-
-	/**
-	 * Returns the value of the '<em><b>Is Polled</b></em>' attribute.
-	 * The default value is <code>"false"</code>.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Is Polled</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * A polled MappingCallBinding requires invocation of the mapping to be deverred until all relevant properties are available.
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Is Polled</em>' attribute.
-	 * @see #setIsPolled(boolean)
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getMappingCallBinding_IsPolled()
-	 * @generated
-	 */
-	boolean isIsPolled();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding#isIsPolled <em>Is Polled</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Is Polled</em>' attribute.
-	 * @see #isIsPolled()
-	 * @generated
-	 */
-	void setIsPolled(boolean value);
 
 	/**
 	 * Returns the value of the '<em><b>Value</b></em>' containment reference.

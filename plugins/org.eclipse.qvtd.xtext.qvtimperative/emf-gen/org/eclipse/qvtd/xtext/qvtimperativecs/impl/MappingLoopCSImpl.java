@@ -11,6 +11,7 @@
 package org.eclipse.qvtd.xtext.qvtimperativecs.impl;
 
 import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
@@ -20,11 +21,13 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.xtext.basecs.PathNameCS;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
 import org.eclipse.ocl.xtext.essentialoclcs.VariableCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingLoopCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingStatementCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.ObservableStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage;
 import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
 
@@ -36,6 +39,7 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingLoopCSImpl#getObservedProperties <em>Observed Properties</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingLoopCSImpl#getOwnedIterator <em>Owned Iterator</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingLoopCSImpl#getOwnedInExpression <em>Owned In Expression</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingLoopCSImpl#getOwnedMappingStatements <em>Owned Mapping Statements</em>}</li>
@@ -44,6 +48,16 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
  * @generated
  */
 public class MappingLoopCSImpl extends MappingStatementCSImpl implements MappingLoopCS {
+	/**
+	 * The cached value of the '{@link #getObservedProperties() <em>Observed Properties</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getObservedProperties()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<PathNameCS> observedProperties;
+
 	/**
 	 * The cached value of the '{@link #getOwnedIterator() <em>Owned Iterator</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -91,6 +105,19 @@ public class MappingLoopCSImpl extends MappingStatementCSImpl implements Mapping
 	@Override
 	protected EClass eStaticClass() {
 		return QVTimperativeCSPackage.Literals.MAPPING_LOOP_CS;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EList<PathNameCS> getObservedProperties() {
+		if (observedProperties == null) {
+			observedProperties = new EObjectContainmentEList<PathNameCS>(PathNameCS.class, this, QVTimperativeCSPackage.MAPPING_LOOP_CS__OBSERVED_PROPERTIES);
+		}
+		return observedProperties;
 	}
 
 	/**
@@ -204,6 +231,8 @@ public class MappingLoopCSImpl extends MappingStatementCSImpl implements Mapping
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case QVTimperativeCSPackage.MAPPING_LOOP_CS__OBSERVED_PROPERTIES:
+				return ((InternalEList<?>)getObservedProperties()).basicRemove(otherEnd, msgs);
 			case QVTimperativeCSPackage.MAPPING_LOOP_CS__OWNED_ITERATOR:
 				return basicSetOwnedIterator(null, msgs);
 			case QVTimperativeCSPackage.MAPPING_LOOP_CS__OWNED_IN_EXPRESSION:
@@ -222,6 +251,8 @@ public class MappingLoopCSImpl extends MappingStatementCSImpl implements Mapping
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case QVTimperativeCSPackage.MAPPING_LOOP_CS__OBSERVED_PROPERTIES:
+				return getObservedProperties();
 			case QVTimperativeCSPackage.MAPPING_LOOP_CS__OWNED_ITERATOR:
 				return getOwnedIterator();
 			case QVTimperativeCSPackage.MAPPING_LOOP_CS__OWNED_IN_EXPRESSION:
@@ -241,6 +272,10 @@ public class MappingLoopCSImpl extends MappingStatementCSImpl implements Mapping
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case QVTimperativeCSPackage.MAPPING_LOOP_CS__OBSERVED_PROPERTIES:
+				getObservedProperties().clear();
+				getObservedProperties().addAll((Collection<? extends PathNameCS>)newValue);
+				return;
 			case QVTimperativeCSPackage.MAPPING_LOOP_CS__OWNED_ITERATOR:
 				setOwnedIterator((VariableCS)newValue);
 				return;
@@ -263,6 +298,9 @@ public class MappingLoopCSImpl extends MappingStatementCSImpl implements Mapping
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case QVTimperativeCSPackage.MAPPING_LOOP_CS__OBSERVED_PROPERTIES:
+				getObservedProperties().clear();
+				return;
 			case QVTimperativeCSPackage.MAPPING_LOOP_CS__OWNED_ITERATOR:
 				setOwnedIterator((VariableCS)null);
 				return;
@@ -284,6 +322,8 @@ public class MappingLoopCSImpl extends MappingStatementCSImpl implements Mapping
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case QVTimperativeCSPackage.MAPPING_LOOP_CS__OBSERVED_PROPERTIES:
+				return observedProperties != null && !observedProperties.isEmpty();
 			case QVTimperativeCSPackage.MAPPING_LOOP_CS__OWNED_ITERATOR:
 				return ownedIterator != null;
 			case QVTimperativeCSPackage.MAPPING_LOOP_CS__OWNED_IN_EXPRESSION:
@@ -292,6 +332,38 @@ public class MappingLoopCSImpl extends MappingStatementCSImpl implements Mapping
 				return ownedMappingStatements != null && !ownedMappingStatements.isEmpty();
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+		if (baseClass == ObservableStatementCS.class) {
+			switch (derivedFeatureID) {
+				case QVTimperativeCSPackage.MAPPING_LOOP_CS__OBSERVED_PROPERTIES: return QVTimperativeCSPackage.OBSERVABLE_STATEMENT_CS__OBSERVED_PROPERTIES;
+				default: return -1;
+			}
+		}
+		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+		if (baseClass == ObservableStatementCS.class) {
+			switch (baseFeatureID) {
+				case QVTimperativeCSPackage.OBSERVABLE_STATEMENT_CS__OBSERVED_PROPERTIES: return QVTimperativeCSPackage.MAPPING_LOOP_CS__OBSERVED_PROPERTIES;
+				default: return -1;
+			}
+		}
+		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
 	/**

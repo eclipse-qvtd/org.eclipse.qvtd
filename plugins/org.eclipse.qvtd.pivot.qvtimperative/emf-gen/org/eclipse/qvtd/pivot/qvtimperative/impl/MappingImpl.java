@@ -17,10 +17,8 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtbase.impl.RuleImpl;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardVariable;
@@ -41,7 +39,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingImpl#getOwnedGuardVariables <em>Owned Guard Variables</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingImpl#getInoutVariables <em>Inout Variables</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingImpl#getOwnedStatements <em>Owned Statements</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingImpl#getCheckedProperties <em>Checked Properties</em>}</li>
  * </ul>
  *
  * @generated
@@ -76,16 +73,6 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	 * @ordered
 	 */
 	protected EList<Statement> ownedStatements;
-
-	/**
-	 * The cached value of the '{@link #getCheckedProperties() <em>Checked Properties</em>}' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getCheckedProperties()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Property> checkedProperties;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -138,19 +125,6 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	 * @generated
 	 */
 	@Override
-	public EList<Property> getCheckedProperties() {
-		if (checkedProperties == null) {
-			checkedProperties = new EObjectResolvingEList<Property>(Property.class, this, QVTimperativePackage.MAPPING__CHECKED_PROPERTIES);
-		}
-		return checkedProperties;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EList<Statement> getOwnedStatements() {
 		if (ownedStatements == null) {
 			ownedStatements = new EObjectContainmentEList<Statement>(Statement.class, this, QVTimperativePackage.MAPPING__OWNED_STATEMENTS);
@@ -190,8 +164,6 @@ public class MappingImpl extends RuleImpl implements Mapping {
 				return getInoutVariables();
 			case QVTimperativePackage.MAPPING__OWNED_STATEMENTS:
 				return getOwnedStatements();
-			case QVTimperativePackage.MAPPING__CHECKED_PROPERTIES:
-				return getCheckedProperties();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -217,10 +189,6 @@ public class MappingImpl extends RuleImpl implements Mapping {
 				getOwnedStatements().clear();
 				getOwnedStatements().addAll((Collection<? extends Statement>)newValue);
 				return;
-			case QVTimperativePackage.MAPPING__CHECKED_PROPERTIES:
-				getCheckedProperties().clear();
-				getCheckedProperties().addAll((Collection<? extends Property>)newValue);
-				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -242,9 +210,6 @@ public class MappingImpl extends RuleImpl implements Mapping {
 			case QVTimperativePackage.MAPPING__OWNED_STATEMENTS:
 				getOwnedStatements().clear();
 				return;
-			case QVTimperativePackage.MAPPING__CHECKED_PROPERTIES:
-				getCheckedProperties().clear();
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -263,8 +228,6 @@ public class MappingImpl extends RuleImpl implements Mapping {
 				return inoutVariables != null && !inoutVariables.isEmpty();
 			case QVTimperativePackage.MAPPING__OWNED_STATEMENTS:
 				return ownedStatements != null && !ownedStatements.isEmpty();
-			case QVTimperativePackage.MAPPING__CHECKED_PROPERTIES:
-				return checkedProperties != null && !checkedProperties.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

@@ -14,23 +14,22 @@
  */
 package org.eclipse.qvtd.pivot.qvtimperative.impl;
 
+import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.jdt.annotation.NonNull;
-
 import org.eclipse.ocl.pivot.OCLExpression;
-
+import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.util.Visitor;
-
 import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.ObservableStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
-
 import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
 
 /**
@@ -41,22 +40,23 @@ import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.DeclareStatementImpl#getOwnedInit <em>Owned Init</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.DeclareStatementImpl#getObservedProperties <em>Observed Properties</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.DeclareStatementImpl#isIsChecked <em>Is Checked</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.DeclareStatementImpl#getOwnedExpression <em>Owned Expression</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class DeclareStatementImpl extends VariableStatementImpl implements DeclareStatement {
 	/**
-	 * The cached value of the '{@link #getOwnedInit() <em>Owned Init</em>}' containment reference.
+	 * The cached value of the '{@link #getObservedProperties() <em>Observed Properties</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getOwnedInit()
+	 * @see #getObservedProperties()
 	 * @generated
 	 * @ordered
 	 */
-	protected OCLExpression ownedInit;
+	protected EList<Property> observedProperties;
 
 	/**
 	 * The default value of the '{@link #isIsChecked() <em>Is Checked</em>}' attribute.
@@ -77,6 +77,16 @@ public class DeclareStatementImpl extends VariableStatementImpl implements Decla
 	 * @ordered
 	 */
 	protected boolean isChecked = IS_CHECKED_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getOwnedExpression() <em>Owned Expression</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOwnedExpression()
+	 * @generated
+	 * @ordered
+	 */
+	protected OCLExpression ownedExpression;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -103,43 +113,11 @@ public class DeclareStatementImpl extends VariableStatementImpl implements Decla
 	 * @generated
 	 */
 	@Override
-	public OCLExpression getOwnedInit() {
-		return ownedInit;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetOwnedInit(OCLExpression newOwnedInit, NotificationChain msgs) {
-		OCLExpression oldOwnedInit = ownedInit;
-		ownedInit = newOwnedInit;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTimperativePackage.DECLARE_STATEMENT__OWNED_INIT, oldOwnedInit, newOwnedInit);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
+	public EList<Property> getObservedProperties() {
+		if (observedProperties == null) {
+			observedProperties = new EObjectResolvingEList<Property>(Property.class, this, QVTimperativePackage.DECLARE_STATEMENT__OBSERVED_PROPERTIES);
 		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setOwnedInit(OCLExpression newOwnedInit) {
-		if (newOwnedInit != ownedInit) {
-			NotificationChain msgs = null;
-			if (ownedInit != null)
-				msgs = ((InternalEObject)ownedInit).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTimperativePackage.DECLARE_STATEMENT__OWNED_INIT, null, msgs);
-			if (newOwnedInit != null)
-				msgs = ((InternalEObject)newOwnedInit).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTimperativePackage.DECLARE_STATEMENT__OWNED_INIT, null, msgs);
-			msgs = basicSetOwnedInit(newOwnedInit, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.DECLARE_STATEMENT__OWNED_INIT, newOwnedInit, newOwnedInit));
+		return observedProperties;
 	}
 
 	/**
@@ -171,6 +149,51 @@ public class DeclareStatementImpl extends VariableStatementImpl implements Decla
 	 * @generated
 	 */
 	@Override
+	public OCLExpression getOwnedExpression() {
+		return ownedExpression;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetOwnedExpression(OCLExpression newOwnedExpression, NotificationChain msgs) {
+		OCLExpression oldOwnedExpression = ownedExpression;
+		ownedExpression = newOwnedExpression;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTimperativePackage.DECLARE_STATEMENT__OWNED_EXPRESSION, oldOwnedExpression, newOwnedExpression);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setOwnedExpression(OCLExpression newOwnedExpression) {
+		if (newOwnedExpression != ownedExpression) {
+			NotificationChain msgs = null;
+			if (ownedExpression != null)
+				msgs = ((InternalEObject)ownedExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTimperativePackage.DECLARE_STATEMENT__OWNED_EXPRESSION, null, msgs);
+			if (newOwnedExpression != null)
+				msgs = ((InternalEObject)newOwnedExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTimperativePackage.DECLARE_STATEMENT__OWNED_EXPRESSION, null, msgs);
+			msgs = basicSetOwnedExpression(newOwnedExpression, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.DECLARE_STATEMENT__OWNED_EXPRESSION, newOwnedExpression, newOwnedExpression));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public String toString() {
 		return super.toString();
 	}
@@ -183,8 +206,8 @@ public class DeclareStatementImpl extends VariableStatementImpl implements Decla
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTimperativePackage.DECLARE_STATEMENT__OWNED_INIT:
-				return basicSetOwnedInit(null, msgs);
+			case QVTimperativePackage.DECLARE_STATEMENT__OWNED_EXPRESSION:
+				return basicSetOwnedExpression(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -197,10 +220,12 @@ public class DeclareStatementImpl extends VariableStatementImpl implements Decla
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTimperativePackage.DECLARE_STATEMENT__OWNED_INIT:
-				return getOwnedInit();
+			case QVTimperativePackage.DECLARE_STATEMENT__OBSERVED_PROPERTIES:
+				return getObservedProperties();
 			case QVTimperativePackage.DECLARE_STATEMENT__IS_CHECKED:
 				return isIsChecked();
+			case QVTimperativePackage.DECLARE_STATEMENT__OWNED_EXPRESSION:
+				return getOwnedExpression();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -210,14 +235,19 @@ public class DeclareStatementImpl extends VariableStatementImpl implements Decla
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTimperativePackage.DECLARE_STATEMENT__OWNED_INIT:
-				setOwnedInit((OCLExpression)newValue);
+			case QVTimperativePackage.DECLARE_STATEMENT__OBSERVED_PROPERTIES:
+				getObservedProperties().clear();
+				getObservedProperties().addAll((Collection<? extends Property>)newValue);
 				return;
 			case QVTimperativePackage.DECLARE_STATEMENT__IS_CHECKED:
 				setIsChecked((Boolean)newValue);
+				return;
+			case QVTimperativePackage.DECLARE_STATEMENT__OWNED_EXPRESSION:
+				setOwnedExpression((OCLExpression)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -231,11 +261,14 @@ public class DeclareStatementImpl extends VariableStatementImpl implements Decla
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTimperativePackage.DECLARE_STATEMENT__OWNED_INIT:
-				setOwnedInit((OCLExpression)null);
+			case QVTimperativePackage.DECLARE_STATEMENT__OBSERVED_PROPERTIES:
+				getObservedProperties().clear();
 				return;
 			case QVTimperativePackage.DECLARE_STATEMENT__IS_CHECKED:
 				setIsChecked(IS_CHECKED_EDEFAULT);
+				return;
+			case QVTimperativePackage.DECLARE_STATEMENT__OWNED_EXPRESSION:
+				setOwnedExpression((OCLExpression)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -249,12 +282,46 @@ public class DeclareStatementImpl extends VariableStatementImpl implements Decla
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTimperativePackage.DECLARE_STATEMENT__OWNED_INIT:
-				return ownedInit != null;
+			case QVTimperativePackage.DECLARE_STATEMENT__OBSERVED_PROPERTIES:
+				return observedProperties != null && !observedProperties.isEmpty();
 			case QVTimperativePackage.DECLARE_STATEMENT__IS_CHECKED:
 				return isChecked != IS_CHECKED_EDEFAULT;
+			case QVTimperativePackage.DECLARE_STATEMENT__OWNED_EXPRESSION:
+				return ownedExpression != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+		if (baseClass == ObservableStatement.class) {
+			switch (derivedFeatureID) {
+				case QVTimperativePackage.DECLARE_STATEMENT__OBSERVED_PROPERTIES: return QVTimperativePackage.OBSERVABLE_STATEMENT__OBSERVED_PROPERTIES;
+				default: return -1;
+			}
+		}
+		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+		if (baseClass == ObservableStatement.class) {
+			switch (baseFeatureID) {
+				case QVTimperativePackage.OBSERVABLE_STATEMENT__OBSERVED_PROPERTIES: return QVTimperativePackage.DECLARE_STATEMENT__OBSERVED_PROPERTIES;
+				default: return -1;
+			}
+		}
+		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
 	/**

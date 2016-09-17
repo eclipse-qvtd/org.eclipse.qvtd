@@ -67,15 +67,6 @@ public interface QVTimperativeFactory extends EFactory {
 	@NonNull GuardVariable createGuardVariable();
 
 	/**
-	 * Returns a new object of class '<em>Imperative Domain</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Imperative Domain</em>'.
-	 * @generated
-	 */
-	@NonNull ImperativeDomain createImperativeDomain();
-
-	/**
 	 * Returns a new object of class '<em>Imperative Model</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

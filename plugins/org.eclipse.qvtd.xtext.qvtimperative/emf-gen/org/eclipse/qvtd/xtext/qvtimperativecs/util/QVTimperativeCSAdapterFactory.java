@@ -106,10 +106,6 @@ public class QVTimperativeCSAdapterFactory extends AdapterFactoryImpl {
 				return createDirectionCSAdapter();
 			}
 			@Override
-			public Adapter caseDomainCS(DomainCS object) {
-				return createDomainCSAdapter();
-			}
-			@Override
 			public Adapter caseGuardVariableCS(GuardVariableCS object) {
 				return createGuardVariableCSAdapter();
 			}
@@ -140,6 +136,10 @@ public class QVTimperativeCSAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseNewStatementCS(NewStatementCS object) {
 				return createNewStatementCSAdapter();
+			}
+			@Override
+			public Adapter caseObservableStatementCS(ObservableStatementCS object) {
+				return createObservableStatementCSAdapter();
 			}
 			@Override
 			public Adapter caseOutVariableCS(OutVariableCS object) {
@@ -576,6 +576,20 @@ public class QVTimperativeCSAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.ObservableStatementCS <em>Observable Statement CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.ObservableStatementCS
+	 * @generated
+	 */
+	public Adapter createObservableStatementCSAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.OutVariableCS <em>Out Variable CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -712,20 +726,6 @@ public class QVTimperativeCSAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createAbstractTransformationCSAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.DomainCS <em>Domain CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.DomainCS
-	 * @generated
-	 */
-	public Adapter createDomainCSAdapter() {
 		return null;
 	}
 

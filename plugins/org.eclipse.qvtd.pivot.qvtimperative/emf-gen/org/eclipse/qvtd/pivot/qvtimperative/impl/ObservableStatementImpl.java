@@ -16,52 +16,43 @@ package org.eclipse.qvtd.pivot.qvtimperative.impl;
 
 import java.util.Collection;
 
-import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
-import org.eclipse.emf.ecore.util.InternalEList;
-import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Property;
-import org.eclipse.ocl.pivot.util.Visitor;
-import org.eclipse.qvtd.pivot.qvtbase.impl.DomainImpl;
-import org.eclipse.qvtd.pivot.qvtimperative.GuardVariable;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
+import org.eclipse.qvtd.pivot.qvtimperative.ObservableStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
-import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Core Domain</b></em>'.
+ * An implementation of the model object '<em><b>Observable Statement</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.ImperativeDomainImpl#getCheckedProperties <em>Checked Properties</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.ObservableStatementImpl#getObservedProperties <em>Observed Properties</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class ImperativeDomainImpl extends DomainImpl implements ImperativeDomain {
+public abstract class ObservableStatementImpl extends StatementImpl implements ObservableStatement {
 	/**
-	 * The cached value of the '{@link #getCheckedProperties() <em>Checked Properties</em>}' reference list.
+	 * The cached value of the '{@link #getObservedProperties() <em>Observed Properties</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getCheckedProperties()
+	 * @see #getObservedProperties()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Property> checkedProperties;
+	protected EList<Property> observedProperties;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ImperativeDomainImpl() {
+	protected ObservableStatementImpl() {
 		super();
 	}
 
@@ -72,7 +63,7 @@ public class ImperativeDomainImpl extends DomainImpl implements ImperativeDomain
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return QVTimperativePackage.Literals.IMPERATIVE_DOMAIN;
+		return QVTimperativePackage.Literals.OBSERVABLE_STATEMENT;
 	}
 
 	/**
@@ -81,11 +72,11 @@ public class ImperativeDomainImpl extends DomainImpl implements ImperativeDomain
 	 * @generated
 	 */
 	@Override
-	public EList<Property> getCheckedProperties() {
-		if (checkedProperties == null) {
-			checkedProperties = new EObjectResolvingEList<Property>(Property.class, this, QVTimperativePackage.IMPERATIVE_DOMAIN__CHECKED_PROPERTIES);
+	public EList<Property> getObservedProperties() {
+		if (observedProperties == null) {
+			observedProperties = new EObjectResolvingEList<Property>(Property.class, this, QVTimperativePackage.OBSERVABLE_STATEMENT__OBSERVED_PROPERTIES);
 		}
-		return checkedProperties;
+		return observedProperties;
 	}
 
 	/**
@@ -96,8 +87,8 @@ public class ImperativeDomainImpl extends DomainImpl implements ImperativeDomain
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTimperativePackage.IMPERATIVE_DOMAIN__CHECKED_PROPERTIES:
-				return getCheckedProperties();
+			case QVTimperativePackage.OBSERVABLE_STATEMENT__OBSERVED_PROPERTIES:
+				return getObservedProperties();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -111,9 +102,9 @@ public class ImperativeDomainImpl extends DomainImpl implements ImperativeDomain
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTimperativePackage.IMPERATIVE_DOMAIN__CHECKED_PROPERTIES:
-				getCheckedProperties().clear();
-				getCheckedProperties().addAll((Collection<? extends Property>)newValue);
+			case QVTimperativePackage.OBSERVABLE_STATEMENT__OBSERVED_PROPERTIES:
+				getObservedProperties().clear();
+				getObservedProperties().addAll((Collection<? extends Property>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -127,8 +118,8 @@ public class ImperativeDomainImpl extends DomainImpl implements ImperativeDomain
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTimperativePackage.IMPERATIVE_DOMAIN__CHECKED_PROPERTIES:
-				getCheckedProperties().clear();
+			case QVTimperativePackage.OBSERVABLE_STATEMENT__OBSERVED_PROPERTIES:
+				getObservedProperties().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -142,20 +133,11 @@ public class ImperativeDomainImpl extends DomainImpl implements ImperativeDomain
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTimperativePackage.IMPERATIVE_DOMAIN__CHECKED_PROPERTIES:
-				return checkedProperties != null && !checkedProperties.isEmpty();
+			case QVTimperativePackage.OBSERVABLE_STATEMENT__OBSERVED_PROPERTIES:
+				return observedProperties != null && !observedProperties.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 * @generated
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTimperativeVisitor<?>)visitor).visitImperativeDomain(this);
-	}
 
-} //CoreDomainImpl
+} //ObservableStatementImpl

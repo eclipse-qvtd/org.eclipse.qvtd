@@ -16,7 +16,6 @@ package org.eclipse.qvtd.xtext.qvtimperativecs;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.ocl.xtext.basecs.NamedElementCS;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 
 /**
  * <!-- begin-user-doc -->
@@ -28,7 +27,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS#getImports <em>Imports</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS#getUses <em>Uses</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS#isIsChecked <em>Is Checked</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS#isIsEnforced <em>Is Enforced</em>}</li>
  * </ul>
@@ -53,22 +51,6 @@ public interface DirectionCS extends NamedElementCS {
 	 * @generated
 	 */
 	EList<org.eclipse.ocl.pivot.Package> getImports();
-
-	/**
-	 * Returns the value of the '<em><b>Uses</b></em>' reference list.
-	 * The list contents are of type {@link org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Uses</em>' reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Uses</em>' reference list.
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getDirectionCS_Uses()
-	 * @model
-	 * @generated
-	 */
-	EList<ImperativeDomain> getUses();
 
 	/**
 	 * Returns the value of the '<em><b>Is Checked</b></em>' attribute.

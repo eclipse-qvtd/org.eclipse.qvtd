@@ -30,14 +30,14 @@ import org.eclipse.ocl.pivot.OCLExpression;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.AddStatement#getTargetVariable <em>Target Variable</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.AddStatement#getOwnedInit <em>Owned Init</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.AddStatement#isIsEnforcedUnique <em>Is Enforced Unique</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.AddStatement#getOwnedExpression <em>Owned Expression</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getAddStatement()
  * @generated
  */
-public interface AddStatement extends MappingStatement {
+public interface AddStatement extends MappingStatement, ObservableStatement {
 	/**
 	 * Returns the value of the '<em><b>Target Variable</b></em>' reference.
 	 * <!-- begin-user-doc -->
@@ -64,31 +64,6 @@ public interface AddStatement extends MappingStatement {
 	void setTargetVariable(ConnectionVariable value);
 
 	/**
-	 * Returns the value of the '<em><b>Owned Init</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Owned Init</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Owned Init</em>' containment reference.
-	 * @see #setOwnedInit(OCLExpression)
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getAddStatement_OwnedInit()
-	 * @generated
-	 */
-	OCLExpression getOwnedInit();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtimperative.AddStatement#getOwnedInit <em>Owned Init</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Owned Init</em>' containment reference.
-	 * @see #getOwnedInit()
-	 * @generated
-	 */
-	void setOwnedInit(OCLExpression value);
-
-	/**
 	 * Returns the value of the '<em><b>Is Enforced Unique</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -112,5 +87,30 @@ public interface AddStatement extends MappingStatement {
 	 * @generated
 	 */
 	void setIsEnforcedUnique(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Owned Expression</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Owned Expression</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Owned Expression</em>' containment reference.
+	 * @see #setOwnedExpression(OCLExpression)
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getAddStatement_OwnedExpression()
+	 * @generated
+	 */
+	OCLExpression getOwnedExpression();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtimperative.AddStatement#getOwnedExpression <em>Owned Expression</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Owned Expression</em>' containment reference.
+	 * @see #getOwnedExpression()
+	 * @generated
+	 */
+	void setOwnedExpression(OCLExpression value);
 
 } // AddStatement

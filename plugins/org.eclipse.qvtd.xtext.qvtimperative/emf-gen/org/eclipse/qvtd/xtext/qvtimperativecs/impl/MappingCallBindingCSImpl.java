@@ -34,7 +34,6 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCallBindingCSImpl#isIsPolled <em>Is Polled</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCallBindingCSImpl#getOwnedValue <em>Owned Value</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCallBindingCSImpl#getOwningMappingCall <em>Owning Mapping Call</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCallBindingCSImpl#getReferredVariable <em>Referred Variable</em>}</li>
@@ -43,26 +42,6 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
  * @generated
  */
 public class MappingCallBindingCSImpl extends ExpCSImpl implements MappingCallBindingCS {
-	/**
-	 * The default value of the '{@link #isIsPolled() <em>Is Polled</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isIsPolled()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean IS_POLLED_EDEFAULT = false;
-
-	/**
-	 * The cached value of the '{@link #isIsPolled() <em>Is Polled</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isIsPolled()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean isPolled = IS_POLLED_EDEFAULT;
-
 	/**
 	 * The cached value of the '{@link #getOwnedValue() <em>Owned Value</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -100,29 +79,6 @@ public class MappingCallBindingCSImpl extends ExpCSImpl implements MappingCallBi
 	@Override
 	protected EClass eStaticClass() {
 		return QVTimperativeCSPackage.Literals.MAPPING_CALL_BINDING_CS;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public boolean isIsPolled() {
-		return isPolled;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setIsPolled(boolean newIsPolled) {
-		boolean oldIsPolled = isPolled;
-		isPolled = newIsPolled;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.MAPPING_CALL_BINDING_CS__IS_POLLED, oldIsPolled, isPolled));
 	}
 
 	/**
@@ -206,16 +162,6 @@ public class MappingCallBindingCSImpl extends ExpCSImpl implements MappingCallBi
 		referredVariable = newReferredVariable;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.MAPPING_CALL_BINDING_CS__REFERRED_VARIABLE, oldReferredVariable, referredVariable));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		return super.toString();
 	}
 
 	/**
@@ -317,8 +263,6 @@ public class MappingCallBindingCSImpl extends ExpCSImpl implements MappingCallBi
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.MAPPING_CALL_BINDING_CS__IS_POLLED:
-				return isIsPolled();
 			case QVTimperativeCSPackage.MAPPING_CALL_BINDING_CS__OWNED_VALUE:
 				return getOwnedValue();
 			case QVTimperativeCSPackage.MAPPING_CALL_BINDING_CS__OWNING_MAPPING_CALL:
@@ -338,9 +282,6 @@ public class MappingCallBindingCSImpl extends ExpCSImpl implements MappingCallBi
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.MAPPING_CALL_BINDING_CS__IS_POLLED:
-				setIsPolled((Boolean)newValue);
-				return;
 			case QVTimperativeCSPackage.MAPPING_CALL_BINDING_CS__OWNED_VALUE:
 				setOwnedValue((ExpCS)newValue);
 				return;
@@ -362,9 +303,6 @@ public class MappingCallBindingCSImpl extends ExpCSImpl implements MappingCallBi
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.MAPPING_CALL_BINDING_CS__IS_POLLED:
-				setIsPolled(IS_POLLED_EDEFAULT);
-				return;
 			case QVTimperativeCSPackage.MAPPING_CALL_BINDING_CS__OWNED_VALUE:
 				setOwnedValue((ExpCS)null);
 				return;
@@ -386,8 +324,6 @@ public class MappingCallBindingCSImpl extends ExpCSImpl implements MappingCallBi
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.MAPPING_CALL_BINDING_CS__IS_POLLED:
-				return isPolled != IS_POLLED_EDEFAULT;
 			case QVTimperativeCSPackage.MAPPING_CALL_BINDING_CS__OWNED_VALUE:
 				return ownedValue != null;
 			case QVTimperativeCSPackage.MAPPING_CALL_BINDING_CS__OWNING_MAPPING_CALL:

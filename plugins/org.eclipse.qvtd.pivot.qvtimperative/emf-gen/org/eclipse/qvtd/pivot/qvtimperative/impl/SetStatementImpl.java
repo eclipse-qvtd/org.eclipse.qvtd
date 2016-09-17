@@ -38,14 +38,14 @@ import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.SetStatementImpl#getTargetVariable <em>Target Variable</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.SetStatementImpl#getTargetProperty <em>Target Property</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.SetStatementImpl#getOwnedInit <em>Owned Init</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.SetStatementImpl#isIsOpposite <em>Is Opposite</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.SetStatementImpl#isIsNotify <em>Is Notify</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.SetStatementImpl#getOwnedExpression <em>Owned Expression</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class SetStatementImpl extends StatementImpl implements SetStatement {
+public class SetStatementImpl extends ObservableStatementImpl implements SetStatement {
 	/**
 	 * The cached value of the '{@link #getTargetVariable() <em>Target Variable</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -65,16 +65,6 @@ public class SetStatementImpl extends StatementImpl implements SetStatement {
 	 * @ordered
 	 */
 	protected Property targetProperty;
-
-	/**
-	 * The cached value of the '{@link #getOwnedInit() <em>Owned Init</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getOwnedInit()
-	 * @generated
-	 * @ordered
-	 */
-	protected OCLExpression ownedInit;
 
 	/**
 	 * The default value of the '{@link #isIsOpposite() <em>Is Opposite</em>}' attribute.
@@ -115,6 +105,16 @@ public class SetStatementImpl extends StatementImpl implements SetStatement {
 	 * @ordered
 	 */
 	protected boolean isNotify = IS_NOTIFY_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getOwnedExpression() <em>Owned Expression</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOwnedExpression()
+	 * @generated
+	 * @ordered
+	 */
+	protected OCLExpression ownedExpression;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -221,51 +221,6 @@ public class SetStatementImpl extends StatementImpl implements SetStatement {
 	 * @generated
 	 */
 	@Override
-	public OCLExpression getOwnedInit() {
-		return ownedInit;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetOwnedInit(OCLExpression newOwnedInit, NotificationChain msgs) {
-		OCLExpression oldOwnedInit = ownedInit;
-		ownedInit = newOwnedInit;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTimperativePackage.SET_STATEMENT__OWNED_INIT, oldOwnedInit, newOwnedInit);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setOwnedInit(OCLExpression newOwnedInit) {
-		if (newOwnedInit != ownedInit) {
-			NotificationChain msgs = null;
-			if (ownedInit != null)
-				msgs = ((InternalEObject)ownedInit).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTimperativePackage.SET_STATEMENT__OWNED_INIT, null, msgs);
-			if (newOwnedInit != null)
-				msgs = ((InternalEObject)newOwnedInit).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTimperativePackage.SET_STATEMENT__OWNED_INIT, null, msgs);
-			msgs = basicSetOwnedInit(newOwnedInit, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.SET_STATEMENT__OWNED_INIT, newOwnedInit, newOwnedInit));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public boolean isIsOpposite() {
 		return isOpposite;
 	}
@@ -312,6 +267,51 @@ public class SetStatementImpl extends StatementImpl implements SetStatement {
 	 * @generated
 	 */
 	@Override
+	public OCLExpression getOwnedExpression() {
+		return ownedExpression;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetOwnedExpression(OCLExpression newOwnedExpression, NotificationChain msgs) {
+		OCLExpression oldOwnedExpression = ownedExpression;
+		ownedExpression = newOwnedExpression;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTimperativePackage.SET_STATEMENT__OWNED_EXPRESSION, oldOwnedExpression, newOwnedExpression);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setOwnedExpression(OCLExpression newOwnedExpression) {
+		if (newOwnedExpression != ownedExpression) {
+			NotificationChain msgs = null;
+			if (ownedExpression != null)
+				msgs = ((InternalEObject)ownedExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTimperativePackage.SET_STATEMENT__OWNED_EXPRESSION, null, msgs);
+			if (newOwnedExpression != null)
+				msgs = ((InternalEObject)newOwnedExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTimperativePackage.SET_STATEMENT__OWNED_EXPRESSION, null, msgs);
+			msgs = basicSetOwnedExpression(newOwnedExpression, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.SET_STATEMENT__OWNED_EXPRESSION, newOwnedExpression, newOwnedExpression));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public String toString() {
 		return super.toString();
 	}
@@ -324,8 +324,8 @@ public class SetStatementImpl extends StatementImpl implements SetStatement {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTimperativePackage.SET_STATEMENT__OWNED_INIT:
-				return basicSetOwnedInit(null, msgs);
+			case QVTimperativePackage.SET_STATEMENT__OWNED_EXPRESSION:
+				return basicSetOwnedExpression(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -344,12 +344,12 @@ public class SetStatementImpl extends StatementImpl implements SetStatement {
 			case QVTimperativePackage.SET_STATEMENT__TARGET_PROPERTY:
 				if (resolve) return getTargetProperty();
 				return basicGetTargetProperty();
-			case QVTimperativePackage.SET_STATEMENT__OWNED_INIT:
-				return getOwnedInit();
 			case QVTimperativePackage.SET_STATEMENT__IS_OPPOSITE:
 				return isIsOpposite();
 			case QVTimperativePackage.SET_STATEMENT__IS_NOTIFY:
 				return isIsNotify();
+			case QVTimperativePackage.SET_STATEMENT__OWNED_EXPRESSION:
+				return getOwnedExpression();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -368,14 +368,14 @@ public class SetStatementImpl extends StatementImpl implements SetStatement {
 			case QVTimperativePackage.SET_STATEMENT__TARGET_PROPERTY:
 				setTargetProperty((Property)newValue);
 				return;
-			case QVTimperativePackage.SET_STATEMENT__OWNED_INIT:
-				setOwnedInit((OCLExpression)newValue);
-				return;
 			case QVTimperativePackage.SET_STATEMENT__IS_OPPOSITE:
 				setIsOpposite((Boolean)newValue);
 				return;
 			case QVTimperativePackage.SET_STATEMENT__IS_NOTIFY:
 				setIsNotify((Boolean)newValue);
+				return;
+			case QVTimperativePackage.SET_STATEMENT__OWNED_EXPRESSION:
+				setOwnedExpression((OCLExpression)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -395,14 +395,14 @@ public class SetStatementImpl extends StatementImpl implements SetStatement {
 			case QVTimperativePackage.SET_STATEMENT__TARGET_PROPERTY:
 				setTargetProperty((Property)null);
 				return;
-			case QVTimperativePackage.SET_STATEMENT__OWNED_INIT:
-				setOwnedInit((OCLExpression)null);
-				return;
 			case QVTimperativePackage.SET_STATEMENT__IS_OPPOSITE:
 				setIsOpposite(IS_OPPOSITE_EDEFAULT);
 				return;
 			case QVTimperativePackage.SET_STATEMENT__IS_NOTIFY:
 				setIsNotify(IS_NOTIFY_EDEFAULT);
+				return;
+			case QVTimperativePackage.SET_STATEMENT__OWNED_EXPRESSION:
+				setOwnedExpression((OCLExpression)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -420,12 +420,12 @@ public class SetStatementImpl extends StatementImpl implements SetStatement {
 				return targetVariable != null;
 			case QVTimperativePackage.SET_STATEMENT__TARGET_PROPERTY:
 				return targetProperty != null;
-			case QVTimperativePackage.SET_STATEMENT__OWNED_INIT:
-				return ownedInit != null;
 			case QVTimperativePackage.SET_STATEMENT__IS_OPPOSITE:
 				return isOpposite != IS_OPPOSITE_EDEFAULT;
 			case QVTimperativePackage.SET_STATEMENT__IS_NOTIFY:
 				return isNotify != IS_NOTIFY_EDEFAULT;
+			case QVTimperativePackage.SET_STATEMENT__OWNED_EXPRESSION:
+				return ownedExpression != null;
 		}
 		return super.eIsSet(featureID);
 	}

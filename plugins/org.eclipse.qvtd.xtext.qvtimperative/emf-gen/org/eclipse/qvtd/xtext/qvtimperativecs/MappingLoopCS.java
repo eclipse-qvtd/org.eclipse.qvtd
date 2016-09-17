@@ -32,7 +32,7 @@ import org.eclipse.ocl.xtext.essentialoclcs.VariableCS;
  * @model
  * @generated
  */
-public interface MappingLoopCS extends MappingStatementCS {
+public interface MappingLoopCS extends MappingStatementCS, ObservableStatementCS {
 	/**
 	 * Returns the value of the '<em><b>Owned Iterator</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

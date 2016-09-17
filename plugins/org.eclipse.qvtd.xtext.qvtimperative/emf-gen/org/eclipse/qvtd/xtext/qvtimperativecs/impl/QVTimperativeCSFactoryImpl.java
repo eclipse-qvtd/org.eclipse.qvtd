@@ -20,7 +20,6 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.AddStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.CheckStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DeclareStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS;
-import org.eclipse.qvtd.xtext.qvtimperativecs.DomainCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.GuardVariableCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.InoutVariableCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS;
@@ -85,7 +84,6 @@ public class QVTimperativeCSFactoryImpl extends EFactoryImpl implements QVTimper
 			case QVTimperativeCSPackage.CHECK_STATEMENT_CS: return createCheckStatementCS();
 			case QVTimperativeCSPackage.DECLARE_STATEMENT_CS: return createDeclareStatementCS();
 			case QVTimperativeCSPackage.DIRECTION_CS: return createDirectionCS();
-			case QVTimperativeCSPackage.DOMAIN_CS: return createDomainCS();
 			case QVTimperativeCSPackage.GUARD_VARIABLE_CS: return createGuardVariableCS();
 			case QVTimperativeCSPackage.INOUT_VARIABLE_CS: return createInoutVariableCS();
 			case QVTimperativeCSPackage.MAPPING_CS: return createMappingCS();
@@ -146,17 +144,6 @@ public class QVTimperativeCSFactoryImpl extends EFactoryImpl implements QVTimper
 	public @NonNull DirectionCS createDirectionCS() {
 		DirectionCSImpl directionCS = new DirectionCSImpl();
 		return directionCS;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public @NonNull DomainCS createDomainCS() {
-		DomainCSImpl domainCS = new DomainCSImpl();
-		return domainCS;
 	}
 
 	/**

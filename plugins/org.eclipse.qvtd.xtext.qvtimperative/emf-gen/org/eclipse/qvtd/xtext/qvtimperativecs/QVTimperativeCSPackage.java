@@ -146,7 +146,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getMappingCS()
 	 * @generated
 	 */
-	int MAPPING_CS = 7;
+	int MAPPING_CS = 6;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCallBindingCSImpl <em>Mapping Call Binding CS</em>}' class.
@@ -156,7 +156,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getMappingCallBindingCS()
 	 * @generated
 	 */
-	int MAPPING_CALL_BINDING_CS = 8;
+	int MAPPING_CALL_BINDING_CS = 7;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingStatementCSImpl <em>Mapping Statement CS</em>}' class.
@@ -166,7 +166,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getMappingStatementCS()
 	 * @generated
 	 */
-	int MAPPING_STATEMENT_CS = 11;
+	int MAPPING_STATEMENT_CS = 10;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCallCSImpl <em>Mapping Call CS</em>}' class.
@@ -176,7 +176,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getMappingCallCS()
 	 * @generated
 	 */
-	int MAPPING_CALL_CS = 9;
+	int MAPPING_CALL_CS = 8;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingLoopCSImpl <em>Mapping Loop CS</em>}' class.
@@ -186,7 +186,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getMappingLoopCS()
 	 * @generated
 	 */
-	int MAPPING_LOOP_CS = 10;
+	int MAPPING_LOOP_CS = 9;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.TopLevelCSImpl <em>Top Level CS</em>}' class.
@@ -308,13 +308,22 @@ public interface QVTimperativeCSPackage extends EPackage {
 	int ADD_STATEMENT_CS__OWNED_ANNOTATIONS = MAPPING_STATEMENT_CS__OWNED_ANNOTATIONS;
 
 	/**
+	 * The feature id for the '<em><b>Observed Properties</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ADD_STATEMENT_CS__OBSERVED_PROPERTIES = MAPPING_STATEMENT_CS_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Owned Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ADD_STATEMENT_CS__OWNED_EXPRESSION = MAPPING_STATEMENT_CS_FEATURE_COUNT + 0;
+	int ADD_STATEMENT_CS__OWNED_EXPRESSION = MAPPING_STATEMENT_CS_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Target Variable</b></em>' reference.
@@ -323,7 +332,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ADD_STATEMENT_CS__TARGET_VARIABLE = MAPPING_STATEMENT_CS_FEATURE_COUNT + 1;
+	int ADD_STATEMENT_CS__TARGET_VARIABLE = MAPPING_STATEMENT_CS_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Add Statement CS</em>' class.
@@ -332,7 +341,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ADD_STATEMENT_CS_FEATURE_COUNT = MAPPING_STATEMENT_CS_FEATURE_COUNT + 2;
+	int ADD_STATEMENT_CS_FEATURE_COUNT = MAPPING_STATEMENT_CS_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.CheckStatementCSImpl <em>Check Statement CS</em>}' class.
@@ -390,13 +399,22 @@ public interface QVTimperativeCSPackage extends EPackage {
 	int CHECK_STATEMENT_CS__OWNED_ANNOTATIONS = STATEMENT_CS__OWNED_ANNOTATIONS;
 
 	/**
+	 * The feature id for the '<em><b>Observed Properties</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHECK_STATEMENT_CS__OBSERVED_PROPERTIES = STATEMENT_CS_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Owned Condition</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CHECK_STATEMENT_CS__OWNED_CONDITION = STATEMENT_CS_FEATURE_COUNT + 0;
+	int CHECK_STATEMENT_CS__OWNED_CONDITION = STATEMENT_CS_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Check Statement CS</em>' class.
@@ -405,7 +423,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CHECK_STATEMENT_CS_FEATURE_COUNT = STATEMENT_CS_FEATURE_COUNT + 1;
+	int CHECK_STATEMENT_CS_FEATURE_COUNT = STATEMENT_CS_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.DeclareStatementCSImpl <em>Declare Statement CS</em>}' class.
@@ -499,13 +517,22 @@ public interface QVTimperativeCSPackage extends EPackage {
 	int DECLARE_STATEMENT_CS__QUALIFIERS = BaseCSPackage.TYPED_ELEMENT_CS__QUALIFIERS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Init</b></em>' containment reference.
+	 * The feature id for the '<em><b>Observed Properties</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DECLARE_STATEMENT_CS__OWNED_INIT = BaseCSPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 0;
+	int DECLARE_STATEMENT_CS__OBSERVED_PROPERTIES = BaseCSPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Owned Expression</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECLARE_STATEMENT_CS__OWNED_EXPRESSION = BaseCSPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Is Checked</b></em>' attribute.
@@ -514,7 +541,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DECLARE_STATEMENT_CS__IS_CHECKED = BaseCSPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 1;
+	int DECLARE_STATEMENT_CS__IS_CHECKED = BaseCSPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Declare Statement CS</em>' class.
@@ -523,7 +550,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DECLARE_STATEMENT_CS_FEATURE_COUNT = BaseCSPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 2;
+	int DECLARE_STATEMENT_CS_FEATURE_COUNT = BaseCSPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.DirectionCSImpl <em>Direction CS</em>}' class.
@@ -599,22 +626,13 @@ public interface QVTimperativeCSPackage extends EPackage {
 	int DIRECTION_CS__IMPORTS = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Uses</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DIRECTION_CS__USES = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 1;
-
-	/**
 	 * The feature id for the '<em><b>Is Checked</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DIRECTION_CS__IS_CHECKED = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 2;
+	int DIRECTION_CS__IS_CHECKED = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Is Enforced</b></em>' attribute.
@@ -623,7 +641,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DIRECTION_CS__IS_ENFORCED = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 3;
+	int DIRECTION_CS__IS_ENFORCED = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Direction CS</em>' class.
@@ -632,116 +650,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DIRECTION_CS_FEATURE_COUNT = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 4;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.DomainCSImpl <em>Domain CS</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.DomainCSImpl
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getDomainCS()
-	 * @generated
-	 */
-	int DOMAIN_CS = 4;
-
-	/**
-	 * The feature id for the '<em><b>Csi</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DOMAIN_CS__CSI = BaseCSPackage.NAMED_ELEMENT_CS__CSI;
-
-	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DOMAIN_CS__PARENT = BaseCSPackage.NAMED_ELEMENT_CS__PARENT;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DOMAIN_CS__PIVOT = BaseCSPackage.NAMED_ELEMENT_CS__PIVOT;
-
-	/**
-	 * The feature id for the '<em><b>Original Xmi Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DOMAIN_CS__ORIGINAL_XMI_ID = BaseCSPackage.NAMED_ELEMENT_CS__ORIGINAL_XMI_ID;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DOMAIN_CS__OWNED_ANNOTATIONS = BaseCSPackage.NAMED_ELEMENT_CS__OWNED_ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DOMAIN_CS__NAME = BaseCSPackage.NAMED_ELEMENT_CS__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Direction</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DOMAIN_CS__DIRECTION = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Is Check</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DOMAIN_CS__IS_CHECK = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Is Enforce</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DOMAIN_CS__IS_ENFORCE = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Checked Properties</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DOMAIN_CS__CHECKED_PROPERTIES = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 3;
-
-	/**
-	 * The number of structural features of the '<em>Domain CS</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DOMAIN_CS_FEATURE_COUNT = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 4;
+	int DIRECTION_CS_FEATURE_COUNT = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.GuardVariableCSImpl <em>Guard Variable CS</em>}' class.
@@ -751,7 +660,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getGuardVariableCS()
 	 * @generated
 	 */
-	int GUARD_VARIABLE_CS = 5;
+	int GUARD_VARIABLE_CS = 4;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -860,7 +769,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getInoutVariableCS()
 	 * @generated
 	 */
-	int INOUT_VARIABLE_CS = 6;
+	int INOUT_VARIABLE_CS = 5;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -1007,22 +916,13 @@ public interface QVTimperativeCSPackage extends EPackage {
 	int MAPPING_CS__NAME = BaseCSPackage.NAMED_ELEMENT_CS__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Owned Domains</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAPPING_CS__OWNED_DOMAINS = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Owned In Path Name</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_CS__OWNED_IN_PATH_NAME = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 1;
+	int MAPPING_CS__OWNED_IN_PATH_NAME = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Owned Guard Variables</b></em>' containment reference list.
@@ -1031,7 +931,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_CS__OWNED_GUARD_VARIABLES = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 2;
+	int MAPPING_CS__OWNED_GUARD_VARIABLES = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Owned Inout Variables</b></em>' containment reference list.
@@ -1040,7 +940,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_CS__OWNED_INOUT_VARIABLES = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 3;
+	int MAPPING_CS__OWNED_INOUT_VARIABLES = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Owned Statements</b></em>' containment reference list.
@@ -1049,7 +949,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_CS__OWNED_STATEMENTS = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 4;
+	int MAPPING_CS__OWNED_STATEMENTS = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Mapping CS</em>' class.
@@ -1058,7 +958,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_CS_FEATURE_COUNT = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 5;
+	int MAPPING_CS_FEATURE_COUNT = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -1169,22 +1069,13 @@ public interface QVTimperativeCSPackage extends EPackage {
 	int MAPPING_CALL_BINDING_CS__PRECEDENCE = EssentialOCLCSPackage.EXP_CS__PRECEDENCE;
 
 	/**
-	 * The feature id for the '<em><b>Is Polled</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAPPING_CALL_BINDING_CS__IS_POLLED = EssentialOCLCSPackage.EXP_CS_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Owned Value</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_CALL_BINDING_CS__OWNED_VALUE = EssentialOCLCSPackage.EXP_CS_FEATURE_COUNT + 1;
+	int MAPPING_CALL_BINDING_CS__OWNED_VALUE = EssentialOCLCSPackage.EXP_CS_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Owning Mapping Call</b></em>' container reference.
@@ -1193,7 +1084,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_CALL_BINDING_CS__OWNING_MAPPING_CALL = EssentialOCLCSPackage.EXP_CS_FEATURE_COUNT + 2;
+	int MAPPING_CALL_BINDING_CS__OWNING_MAPPING_CALL = EssentialOCLCSPackage.EXP_CS_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Referred Variable</b></em>' reference.
@@ -1202,7 +1093,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_CALL_BINDING_CS__REFERRED_VARIABLE = EssentialOCLCSPackage.EXP_CS_FEATURE_COUNT + 3;
+	int MAPPING_CALL_BINDING_CS__REFERRED_VARIABLE = EssentialOCLCSPackage.EXP_CS_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Mapping Call Binding CS</em>' class.
@@ -1211,7 +1102,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_CALL_BINDING_CS_FEATURE_COUNT = EssentialOCLCSPackage.EXP_CS_FEATURE_COUNT + 4;
+	int MAPPING_CALL_BINDING_CS_FEATURE_COUNT = EssentialOCLCSPackage.EXP_CS_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -1349,13 +1240,22 @@ public interface QVTimperativeCSPackage extends EPackage {
 	int MAPPING_LOOP_CS__OWNED_ANNOTATIONS = MAPPING_STATEMENT_CS__OWNED_ANNOTATIONS;
 
 	/**
+	 * The feature id for the '<em><b>Observed Properties</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_LOOP_CS__OBSERVED_PROPERTIES = MAPPING_STATEMENT_CS_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Owned Iterator</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_LOOP_CS__OWNED_ITERATOR = MAPPING_STATEMENT_CS_FEATURE_COUNT + 0;
+	int MAPPING_LOOP_CS__OWNED_ITERATOR = MAPPING_STATEMENT_CS_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Owned In Expression</b></em>' containment reference.
@@ -1364,7 +1264,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_LOOP_CS__OWNED_IN_EXPRESSION = MAPPING_STATEMENT_CS_FEATURE_COUNT + 1;
+	int MAPPING_LOOP_CS__OWNED_IN_EXPRESSION = MAPPING_STATEMENT_CS_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Owned Mapping Statements</b></em>' containment reference list.
@@ -1373,7 +1273,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_LOOP_CS__OWNED_MAPPING_STATEMENTS = MAPPING_STATEMENT_CS_FEATURE_COUNT + 2;
+	int MAPPING_LOOP_CS__OWNED_MAPPING_STATEMENTS = MAPPING_STATEMENT_CS_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Mapping Loop CS</em>' class.
@@ -1382,7 +1282,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_LOOP_CS_FEATURE_COUNT = MAPPING_STATEMENT_CS_FEATURE_COUNT + 3;
+	int MAPPING_LOOP_CS_FEATURE_COUNT = MAPPING_STATEMENT_CS_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.ParamDeclarationCSImpl <em>Param Declaration CS</em>}' class.
@@ -1412,7 +1312,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getNewStatementCS()
 	 * @generated
 	 */
-	int NEW_STATEMENT_CS = 12;
+	int NEW_STATEMENT_CS = 11;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -1496,13 +1396,22 @@ public interface QVTimperativeCSPackage extends EPackage {
 	int NEW_STATEMENT_CS__QUALIFIERS = BaseCSPackage.TYPED_ELEMENT_CS__QUALIFIERS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Init</b></em>' containment reference.
+	 * The feature id for the '<em><b>Observed Properties</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int NEW_STATEMENT_CS__OWNED_INIT = BaseCSPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 0;
+	int NEW_STATEMENT_CS__OBSERVED_PROPERTIES = BaseCSPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Owned Expression</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NEW_STATEMENT_CS__OWNED_EXPRESSION = BaseCSPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Referred Typed Model</b></em>' reference.
@@ -1511,7 +1420,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NEW_STATEMENT_CS__REFERRED_TYPED_MODEL = BaseCSPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 1;
+	int NEW_STATEMENT_CS__REFERRED_TYPED_MODEL = BaseCSPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>New Statement CS</em>' class.
@@ -1520,7 +1429,80 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NEW_STATEMENT_CS_FEATURE_COUNT = BaseCSPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 2;
+	int NEW_STATEMENT_CS_FEATURE_COUNT = BaseCSPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 3;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.ObservableStatementCSImpl <em>Observable Statement CS</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.ObservableStatementCSImpl
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getObservableStatementCS()
+	 * @generated
+	 */
+	int OBSERVABLE_STATEMENT_CS = 12;
+
+	/**
+	 * The feature id for the '<em><b>Csi</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OBSERVABLE_STATEMENT_CS__CSI = STATEMENT_CS__CSI;
+
+	/**
+	 * The feature id for the '<em><b>Parent</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OBSERVABLE_STATEMENT_CS__PARENT = STATEMENT_CS__PARENT;
+
+	/**
+	 * The feature id for the '<em><b>Pivot</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OBSERVABLE_STATEMENT_CS__PIVOT = STATEMENT_CS__PIVOT;
+
+	/**
+	 * The feature id for the '<em><b>Original Xmi Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OBSERVABLE_STATEMENT_CS__ORIGINAL_XMI_ID = STATEMENT_CS__ORIGINAL_XMI_ID;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OBSERVABLE_STATEMENT_CS__OWNED_ANNOTATIONS = STATEMENT_CS__OWNED_ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Observed Properties</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OBSERVABLE_STATEMENT_CS__OBSERVED_PROPERTIES = STATEMENT_CS_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Observable Statement CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OBSERVABLE_STATEMENT_CS_FEATURE_COUNT = STATEMENT_CS_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.OutVariableCSImpl <em>Out Variable CS</em>}' class.
@@ -1864,7 +1846,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SET_STATEMENT_CS__CSI = STATEMENT_CS__CSI;
+	int SET_STATEMENT_CS__CSI = OBSERVABLE_STATEMENT_CS__CSI;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
@@ -1873,7 +1855,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SET_STATEMENT_CS__PARENT = STATEMENT_CS__PARENT;
+	int SET_STATEMENT_CS__PARENT = OBSERVABLE_STATEMENT_CS__PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Pivot</b></em>' reference.
@@ -1882,7 +1864,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SET_STATEMENT_CS__PIVOT = STATEMENT_CS__PIVOT;
+	int SET_STATEMENT_CS__PIVOT = OBSERVABLE_STATEMENT_CS__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Original Xmi Id</b></em>' attribute.
@@ -1891,7 +1873,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SET_STATEMENT_CS__ORIGINAL_XMI_ID = STATEMENT_CS__ORIGINAL_XMI_ID;
+	int SET_STATEMENT_CS__ORIGINAL_XMI_ID = OBSERVABLE_STATEMENT_CS__ORIGINAL_XMI_ID;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -1900,7 +1882,16 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SET_STATEMENT_CS__OWNED_ANNOTATIONS = STATEMENT_CS__OWNED_ANNOTATIONS;
+	int SET_STATEMENT_CS__OWNED_ANNOTATIONS = OBSERVABLE_STATEMENT_CS__OWNED_ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Observed Properties</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SET_STATEMENT_CS__OBSERVED_PROPERTIES = OBSERVABLE_STATEMENT_CS__OBSERVED_PROPERTIES;
 
 	/**
 	 * The feature id for the '<em><b>Referred Property</b></em>' reference.
@@ -1909,7 +1900,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SET_STATEMENT_CS__REFERRED_PROPERTY = STATEMENT_CS_FEATURE_COUNT + 0;
+	int SET_STATEMENT_CS__REFERRED_PROPERTY = OBSERVABLE_STATEMENT_CS_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Referred Variable</b></em>' reference.
@@ -1918,16 +1909,16 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SET_STATEMENT_CS__REFERRED_VARIABLE = STATEMENT_CS_FEATURE_COUNT + 1;
+	int SET_STATEMENT_CS__REFERRED_VARIABLE = OBSERVABLE_STATEMENT_CS_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Owned Init</b></em>' containment reference.
+	 * The feature id for the '<em><b>Owned Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SET_STATEMENT_CS__OWNED_INIT = STATEMENT_CS_FEATURE_COUNT + 2;
+	int SET_STATEMENT_CS__OWNED_EXPRESSION = OBSERVABLE_STATEMENT_CS_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Is Notify</b></em>' attribute.
@@ -1936,7 +1927,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SET_STATEMENT_CS__IS_NOTIFY = STATEMENT_CS_FEATURE_COUNT + 3;
+	int SET_STATEMENT_CS__IS_NOTIFY = OBSERVABLE_STATEMENT_CS_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Set Statement CS</em>' class.
@@ -1945,7 +1936,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SET_STATEMENT_CS_FEATURE_COUNT = STATEMENT_CS_FEATURE_COUNT + 4;
+	int SET_STATEMENT_CS_FEATURE_COUNT = OBSERVABLE_STATEMENT_CS_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -2246,15 +2237,15 @@ public interface QVTimperativeCSPackage extends EPackage {
 	EClass getDeclareStatementCS();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtimperativecs.DeclareStatementCS#getOwnedInit <em>Owned Init</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtimperativecs.DeclareStatementCS#getOwnedExpression <em>Owned Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Owned Init</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.DeclareStatementCS#getOwnedInit()
+	 * @return the meta object for the containment reference '<em>Owned Expression</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.DeclareStatementCS#getOwnedExpression()
 	 * @see #getDeclareStatementCS()
 	 * @generated
 	 */
-	EReference getDeclareStatementCS_OwnedInit();
+	EReference getDeclareStatementCS_OwnedExpression();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.xtext.qvtimperativecs.DeclareStatementCS#isIsChecked <em>Is Checked</em>}'.
@@ -2289,17 +2280,6 @@ public interface QVTimperativeCSPackage extends EPackage {
 	EReference getDirectionCS_Imports();
 
 	/**
-	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS#getUses <em>Uses</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Uses</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS#getUses()
-	 * @see #getDirectionCS()
-	 * @generated
-	 */
-	EReference getDirectionCS_Uses();
-
-	/**
 	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS#isIsChecked <em>Is Checked</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2320,60 +2300,6 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getDirectionCS_IsEnforced();
-
-	/**
-	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.DomainCS <em>Domain CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Domain CS</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.DomainCS
-	 * @generated
-	 */
-	EClass getDomainCS();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.xtext.qvtimperativecs.DomainCS#getDirection <em>Direction</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Direction</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.DomainCS#getDirection()
-	 * @see #getDomainCS()
-	 * @generated
-	 */
-	EReference getDomainCS_Direction();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.xtext.qvtimperativecs.DomainCS#isIsCheck <em>Is Check</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Is Check</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.DomainCS#isIsCheck()
-	 * @see #getDomainCS()
-	 * @generated
-	 */
-	EAttribute getDomainCS_IsCheck();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.xtext.qvtimperativecs.DomainCS#isIsEnforce <em>Is Enforce</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Is Enforce</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.DomainCS#isIsEnforce()
-	 * @see #getDomainCS()
-	 * @generated
-	 */
-	EAttribute getDomainCS_IsEnforce();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtimperativecs.DomainCS#getCheckedProperties <em>Checked Properties</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Checked Properties</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.DomainCS#getCheckedProperties()
-	 * @see #getDomainCS()
-	 * @generated
-	 */
-	EReference getDomainCS_CheckedProperties();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.GuardVariableCS <em>Guard Variable CS</em>}'.
@@ -2415,17 +2341,6 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getMappingCS();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS#getOwnedDomains <em>Owned Domains</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Owned Domains</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS#getOwnedDomains()
-	 * @see #getMappingCS()
-	 * @generated
-	 */
-	EReference getMappingCS_OwnedDomains();
 
 	/**
 	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS#getOwnedInPathName <em>Owned In Path Name</em>}'.
@@ -2480,17 +2395,6 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getMappingCallBindingCS();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS#isIsPolled <em>Is Polled</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Is Polled</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS#isIsPolled()
-	 * @see #getMappingCallBindingCS()
-	 * @generated
-	 */
-	EAttribute getMappingCallBindingCS_IsPolled();
 
 	/**
 	 * Returns the meta object for the container reference '{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS#getOwningMappingCall <em>Owning Mapping Call</em>}'.
@@ -2718,15 +2622,15 @@ public interface QVTimperativeCSPackage extends EPackage {
 	EClass getNewStatementCS();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtimperativecs.NewStatementCS#getOwnedInit <em>Owned Init</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtimperativecs.NewStatementCS#getOwnedExpression <em>Owned Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Owned Init</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.NewStatementCS#getOwnedInit()
+	 * @return the meta object for the containment reference '<em>Owned Expression</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.NewStatementCS#getOwnedExpression()
 	 * @see #getNewStatementCS()
 	 * @generated
 	 */
-	EReference getNewStatementCS_OwnedInit();
+	EReference getNewStatementCS_OwnedExpression();
 
 	/**
 	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.xtext.qvtimperativecs.NewStatementCS#getReferredTypedModel <em>Referred Typed Model</em>}'.
@@ -2738,6 +2642,27 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getNewStatementCS_ReferredTypedModel();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.ObservableStatementCS <em>Observable Statement CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Observable Statement CS</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.ObservableStatementCS
+	 * @generated
+	 */
+	EClass getObservableStatementCS();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtimperativecs.ObservableStatementCS#getObservedProperties <em>Observed Properties</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Observed Properties</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.ObservableStatementCS#getObservedProperties()
+	 * @see #getObservableStatementCS()
+	 * @generated
+	 */
+	EReference getObservableStatementCS_ObservedProperties();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.OutVariableCS <em>Out Variable CS</em>}'.
@@ -2782,15 +2707,15 @@ public interface QVTimperativeCSPackage extends EPackage {
 	EReference getSetStatementCS_ReferredVariable();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtimperativecs.SetStatementCS#getOwnedInit <em>Owned Init</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtimperativecs.SetStatementCS#getOwnedExpression <em>Owned Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Owned Init</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.SetStatementCS#getOwnedInit()
+	 * @return the meta object for the containment reference '<em>Owned Expression</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.SetStatementCS#getOwnedExpression()
 	 * @see #getSetStatementCS()
 	 * @generated
 	 */
-	EReference getSetStatementCS_OwnedInit();
+	EReference getSetStatementCS_OwnedExpression();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.xtext.qvtimperativecs.SetStatementCS#isIsNotify <em>Is Notify</em>}'.
@@ -2965,12 +2890,12 @@ public interface QVTimperativeCSPackage extends EPackage {
 		EClass DECLARE_STATEMENT_CS = eINSTANCE.getDeclareStatementCS();
 
 		/**
-		 * The meta object literal for the '<em><b>Owned Init</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Owned Expression</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference DECLARE_STATEMENT_CS__OWNED_INIT = eINSTANCE.getDeclareStatementCS_OwnedInit();
+		EReference DECLARE_STATEMENT_CS__OWNED_EXPRESSION = eINSTANCE.getDeclareStatementCS_OwnedExpression();
 
 		/**
 		 * The meta object literal for the '<em><b>Is Checked</b></em>' attribute feature.
@@ -2999,14 +2924,6 @@ public interface QVTimperativeCSPackage extends EPackage {
 		EReference DIRECTION_CS__IMPORTS = eINSTANCE.getDirectionCS_Imports();
 
 		/**
-		 * The meta object literal for the '<em><b>Uses</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference DIRECTION_CS__USES = eINSTANCE.getDirectionCS_Uses();
-
-		/**
 		 * The meta object literal for the '<em><b>Is Checked</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3021,48 +2938,6 @@ public interface QVTimperativeCSPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute DIRECTION_CS__IS_ENFORCED = eINSTANCE.getDirectionCS_IsEnforced();
-
-		/**
-		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.DomainCSImpl <em>Domain CS</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.DomainCSImpl
-		 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getDomainCS()
-		 * @generated
-		 */
-		EClass DOMAIN_CS = eINSTANCE.getDomainCS();
-
-		/**
-		 * The meta object literal for the '<em><b>Direction</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference DOMAIN_CS__DIRECTION = eINSTANCE.getDomainCS_Direction();
-
-		/**
-		 * The meta object literal for the '<em><b>Is Check</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute DOMAIN_CS__IS_CHECK = eINSTANCE.getDomainCS_IsCheck();
-
-		/**
-		 * The meta object literal for the '<em><b>Is Enforce</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute DOMAIN_CS__IS_ENFORCE = eINSTANCE.getDomainCS_IsEnforce();
-
-		/**
-		 * The meta object literal for the '<em><b>Checked Properties</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference DOMAIN_CS__CHECKED_PROPERTIES = eINSTANCE.getDomainCS_CheckedProperties();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.GuardVariableCSImpl <em>Guard Variable CS</em>}' class.
@@ -3101,14 +2976,6 @@ public interface QVTimperativeCSPackage extends EPackage {
 		 * @generated
 		 */
 		EClass MAPPING_CS = eINSTANCE.getMappingCS();
-
-		/**
-		 * The meta object literal for the '<em><b>Owned Domains</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference MAPPING_CS__OWNED_DOMAINS = eINSTANCE.getMappingCS_OwnedDomains();
 
 		/**
 		 * The meta object literal for the '<em><b>Owned In Path Name</b></em>' containment reference feature.
@@ -3151,14 +3018,6 @@ public interface QVTimperativeCSPackage extends EPackage {
 		 * @generated
 		 */
 		EClass MAPPING_CALL_BINDING_CS = eINSTANCE.getMappingCallBindingCS();
-
-		/**
-		 * The meta object literal for the '<em><b>Is Polled</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute MAPPING_CALL_BINDING_CS__IS_POLLED = eINSTANCE.getMappingCallBindingCS_IsPolled();
 
 		/**
 		 * The meta object literal for the '<em><b>Owning Mapping Call</b></em>' container reference feature.
@@ -3341,12 +3200,12 @@ public interface QVTimperativeCSPackage extends EPackage {
 		EClass NEW_STATEMENT_CS = eINSTANCE.getNewStatementCS();
 
 		/**
-		 * The meta object literal for the '<em><b>Owned Init</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Owned Expression</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference NEW_STATEMENT_CS__OWNED_INIT = eINSTANCE.getNewStatementCS_OwnedInit();
+		EReference NEW_STATEMENT_CS__OWNED_EXPRESSION = eINSTANCE.getNewStatementCS_OwnedExpression();
 
 		/**
 		 * The meta object literal for the '<em><b>Referred Typed Model</b></em>' reference feature.
@@ -3355,6 +3214,24 @@ public interface QVTimperativeCSPackage extends EPackage {
 		 * @generated
 		 */
 		EReference NEW_STATEMENT_CS__REFERRED_TYPED_MODEL = eINSTANCE.getNewStatementCS_ReferredTypedModel();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.ObservableStatementCSImpl <em>Observable Statement CS</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.ObservableStatementCSImpl
+		 * @see org.eclipse.qvtd.xtext.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getObservableStatementCS()
+		 * @generated
+		 */
+		EClass OBSERVABLE_STATEMENT_CS = eINSTANCE.getObservableStatementCS();
+
+		/**
+		 * The meta object literal for the '<em><b>Observed Properties</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference OBSERVABLE_STATEMENT_CS__OBSERVED_PROPERTIES = eINSTANCE.getObservableStatementCS_ObservedProperties();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.OutVariableCSImpl <em>Out Variable CS</em>}' class.
@@ -3393,12 +3270,12 @@ public interface QVTimperativeCSPackage extends EPackage {
 		EReference SET_STATEMENT_CS__REFERRED_VARIABLE = eINSTANCE.getSetStatementCS_ReferredVariable();
 
 		/**
-		 * The meta object literal for the '<em><b>Owned Init</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Owned Expression</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference SET_STATEMENT_CS__OWNED_INIT = eINSTANCE.getSetStatementCS_OwnedInit();
+		EReference SET_STATEMENT_CS__OWNED_EXPRESSION = eINSTANCE.getSetStatementCS_OwnedExpression();
 
 		/**
 		 * The meta object literal for the '<em><b>Is Notify</b></em>' attribute feature.

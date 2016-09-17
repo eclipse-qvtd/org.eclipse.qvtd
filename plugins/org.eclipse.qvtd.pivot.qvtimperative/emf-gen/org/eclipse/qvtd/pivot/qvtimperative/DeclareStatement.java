@@ -25,39 +25,14 @@ import org.eclipse.ocl.pivot.OCLExpression;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement#getOwnedInit <em>Owned Init</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement#isIsChecked <em>Is Checked</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement#getOwnedExpression <em>Owned Expression</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getDeclareStatement()
  * @generated
  */
-public interface DeclareStatement extends VariableStatement {
-	/**
-	 * Returns the value of the '<em><b>Owned Init</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Owned Init</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Owned Init</em>' containment reference.
-	 * @see #setOwnedInit(OCLExpression)
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getDeclareStatement_OwnedInit()
-	 * @generated
-	 */
-	OCLExpression getOwnedInit();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement#getOwnedInit <em>Owned Init</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Owned Init</em>' containment reference.
-	 * @see #getOwnedInit()
-	 * @generated
-	 */
-	void setOwnedInit(OCLExpression value);
-
+public interface DeclareStatement extends VariableStatement, ObservableStatement {
 	/**
 	 * Returns the value of the '<em><b>Is Checked</b></em>' attribute.
 	 * The default value is <code>"false"</code>.
@@ -82,5 +57,30 @@ public interface DeclareStatement extends VariableStatement {
 	 * @generated
 	 */
 	void setIsChecked(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Owned Expression</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Owned Expression</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Owned Expression</em>' containment reference.
+	 * @see #setOwnedExpression(OCLExpression)
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getDeclareStatement_OwnedExpression()
+	 * @generated
+	 */
+	OCLExpression getOwnedExpression();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement#getOwnedExpression <em>Owned Expression</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Owned Expression</em>' containment reference.
+	 * @see #getOwnedExpression()
+	 * @generated
+	 */
+	void setOwnedExpression(OCLExpression value);
 
 } // PredicateVariable

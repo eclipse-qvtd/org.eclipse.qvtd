@@ -24,7 +24,6 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.xtext.basecs.impl.NamedElementCSImpl;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage;
 import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
@@ -38,7 +37,6 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.DirectionCSImpl#getImports <em>Imports</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.DirectionCSImpl#getUses <em>Uses</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.DirectionCSImpl#isIsChecked <em>Is Checked</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.DirectionCSImpl#isIsEnforced <em>Is Enforced</em>}</li>
  * </ul>
@@ -55,16 +53,6 @@ public class DirectionCSImpl extends NamedElementCSImpl implements DirectionCS {
 	 * @ordered
 	 */
 	protected EList<org.eclipse.ocl.pivot.Package> imports;
-
-	/**
-	 * The cached value of the '{@link #getUses() <em>Uses</em>}' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getUses()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<ImperativeDomain> uses;
 
 	/**
 	 * The default value of the '{@link #isIsChecked() <em>Is Checked</em>}' attribute.
@@ -144,18 +132,6 @@ public class DirectionCSImpl extends NamedElementCSImpl implements DirectionCS {
 	 * @generated
 	 */
 	@Override
-	public EList<ImperativeDomain> getUses() {
-		if (uses == null) {
-			uses = new EObjectResolvingEList<ImperativeDomain>(ImperativeDomain.class, this, QVTimperativeCSPackage.DIRECTION_CS__USES);
-		}
-		return uses;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public boolean isIsChecked() {
 		return isChecked;
 	}
@@ -165,6 +141,7 @@ public class DirectionCSImpl extends NamedElementCSImpl implements DirectionCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setIsChecked(boolean newIsChecked) {
 		boolean oldIsChecked = isChecked;
 		isChecked = newIsChecked;
@@ -177,6 +154,7 @@ public class DirectionCSImpl extends NamedElementCSImpl implements DirectionCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isIsEnforced() {
 		return isEnforced;
 	}
@@ -186,6 +164,7 @@ public class DirectionCSImpl extends NamedElementCSImpl implements DirectionCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setIsEnforced(boolean newIsEnforced) {
 		boolean oldIsEnforced = isEnforced;
 		isEnforced = newIsEnforced;
@@ -198,6 +177,7 @@ public class DirectionCSImpl extends NamedElementCSImpl implements DirectionCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String toString() {
 		return super.toString();
 	}
@@ -212,8 +192,6 @@ public class DirectionCSImpl extends NamedElementCSImpl implements DirectionCS {
 		switch (featureID) {
 			case QVTimperativeCSPackage.DIRECTION_CS__IMPORTS:
 				return getImports();
-			case QVTimperativeCSPackage.DIRECTION_CS__USES:
-				return getUses();
 			case QVTimperativeCSPackage.DIRECTION_CS__IS_CHECKED:
 				return isIsChecked();
 			case QVTimperativeCSPackage.DIRECTION_CS__IS_ENFORCED:
@@ -234,10 +212,6 @@ public class DirectionCSImpl extends NamedElementCSImpl implements DirectionCS {
 			case QVTimperativeCSPackage.DIRECTION_CS__IMPORTS:
 				getImports().clear();
 				getImports().addAll((Collection<? extends org.eclipse.ocl.pivot.Package>)newValue);
-				return;
-			case QVTimperativeCSPackage.DIRECTION_CS__USES:
-				getUses().clear();
-				getUses().addAll((Collection<? extends ImperativeDomain>)newValue);
 				return;
 			case QVTimperativeCSPackage.DIRECTION_CS__IS_CHECKED:
 				setIsChecked((Boolean)newValue);
@@ -260,9 +234,6 @@ public class DirectionCSImpl extends NamedElementCSImpl implements DirectionCS {
 			case QVTimperativeCSPackage.DIRECTION_CS__IMPORTS:
 				getImports().clear();
 				return;
-			case QVTimperativeCSPackage.DIRECTION_CS__USES:
-				getUses().clear();
-				return;
 			case QVTimperativeCSPackage.DIRECTION_CS__IS_CHECKED:
 				setIsChecked(IS_CHECKED_EDEFAULT);
 				return;
@@ -283,8 +254,6 @@ public class DirectionCSImpl extends NamedElementCSImpl implements DirectionCS {
 		switch (featureID) {
 			case QVTimperativeCSPackage.DIRECTION_CS__IMPORTS:
 				return imports != null && !imports.isEmpty();
-			case QVTimperativeCSPackage.DIRECTION_CS__USES:
-				return uses != null && !uses.isEmpty();
 			case QVTimperativeCSPackage.DIRECTION_CS__IS_CHECKED:
 				return isChecked != IS_CHECKED_EDEFAULT;
 			case QVTimperativeCSPackage.DIRECTION_CS__IS_ENFORCED:

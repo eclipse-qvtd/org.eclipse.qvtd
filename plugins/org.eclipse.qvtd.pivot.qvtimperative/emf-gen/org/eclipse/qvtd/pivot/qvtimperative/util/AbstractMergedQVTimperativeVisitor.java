@@ -59,11 +59,6 @@ public abstract class AbstractMergedQVTimperativeVisitor<R, C>
 	}
 
 	@Override
-	public R visitImperativeDomain(org.eclipse.qvtd.pivot.qvtimperative.@NonNull ImperativeDomain object) {
-		return visiting(object);
-	}
-
-	@Override
 	public R visitImperativeModel(org.eclipse.qvtd.pivot.qvtimperative.@NonNull ImperativeModel object) {
 		return visiting(object);
 	}
@@ -110,6 +105,11 @@ public abstract class AbstractMergedQVTimperativeVisitor<R, C>
 
 	@Override
 	public R visitNewStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull NewStatement object) {
+		return visiting(object);
+	}
+
+	@Override
+	public R visitObservableStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull ObservableStatement object) {
 		return visiting(object);
 	}
 

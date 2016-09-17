@@ -29,7 +29,7 @@ import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.SetStatementCS#getReferredProperty <em>Referred Property</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.SetStatementCS#getReferredVariable <em>Referred Variable</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.SetStatementCS#getOwnedInit <em>Owned Init</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.SetStatementCS#getOwnedExpression <em>Owned Expression</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.SetStatementCS#isIsNotify <em>Is Notify</em>}</li>
  * </ul>
  *
@@ -37,7 +37,7 @@ import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
  * @model
  * @generated
  */
-public interface SetStatementCS extends StatementCS {
+public interface SetStatementCS extends ObservableStatementCS {
 	/**
 	 * Returns the value of the '<em><b>Referred Property</b></em>' reference.
 	 * <!-- begin-user-doc -->
@@ -91,30 +91,30 @@ public interface SetStatementCS extends StatementCS {
 	void setReferredVariable(VariableDeclaration value);
 
 	/**
-	 * Returns the value of the '<em><b>Owned Init</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Owned Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Owned Init</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Owned Expression</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Owned Init</em>' containment reference.
-	 * @see #setOwnedInit(ExpCS)
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getSetStatementCS_OwnedInit()
+	 * @return the value of the '<em>Owned Expression</em>' containment reference.
+	 * @see #setOwnedExpression(ExpCS)
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getSetStatementCS_OwnedExpression()
 	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	ExpCS getOwnedInit();
+	ExpCS getOwnedExpression();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.SetStatementCS#getOwnedInit <em>Owned Init</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.SetStatementCS#getOwnedExpression <em>Owned Expression</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Owned Init</em>' containment reference.
-	 * @see #getOwnedInit()
+	 * @param value the new value of the '<em>Owned Expression</em>' containment reference.
+	 * @see #getOwnedExpression()
 	 * @generated
 	 */
-	void setOwnedInit(ExpCS value);
+	void setOwnedExpression(ExpCS value);
 
 	/**
 	 * Returns the value of the '<em><b>Is Notify</b></em>' attribute.

@@ -89,45 +89,79 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	public class AddStatementCSElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvtd.xtext.qvtimperative.QVTimperative.AddStatementCS");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cAddKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cTargetVariableAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final CrossReference cTargetVariableConnectionVariableCrossReference_1_0 = (CrossReference)cTargetVariableAssignment_1.eContents().get(0);
-		private final RuleCall cTargetVariableConnectionVariableUnrestrictedNameParserRuleCall_1_0_1 = (RuleCall)cTargetVariableConnectionVariableCrossReference_1_0.eContents().get(1);
-		private final Keyword cPlusSignEqualsSignKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Assignment cOwnedExpressionAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cOwnedExpressionExpCSParserRuleCall_3_0 = (RuleCall)cOwnedExpressionAssignment_3.eContents().get(0);
-		private final Keyword cSemicolonKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Group cGroup_0 = (Group)cGroup.eContents().get(0);
+		private final Keyword cObserveKeyword_0_0 = (Keyword)cGroup_0.eContents().get(0);
+		private final Assignment cObservedPropertiesAssignment_0_1 = (Assignment)cGroup_0.eContents().get(1);
+		private final RuleCall cObservedPropertiesPathNameCSParserRuleCall_0_1_0 = (RuleCall)cObservedPropertiesAssignment_0_1.eContents().get(0);
+		private final Group cGroup_0_2 = (Group)cGroup_0.eContents().get(2);
+		private final Keyword cCommaKeyword_0_2_0 = (Keyword)cGroup_0_2.eContents().get(0);
+		private final Assignment cObservedPropertiesAssignment_0_2_1 = (Assignment)cGroup_0_2.eContents().get(1);
+		private final RuleCall cObservedPropertiesPathNameCSParserRuleCall_0_2_1_0 = (RuleCall)cObservedPropertiesAssignment_0_2_1.eContents().get(0);
+		private final Keyword cAddKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cTargetVariableAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final CrossReference cTargetVariableConnectionVariableCrossReference_2_0 = (CrossReference)cTargetVariableAssignment_2.eContents().get(0);
+		private final RuleCall cTargetVariableConnectionVariableUnrestrictedNameParserRuleCall_2_0_1 = (RuleCall)cTargetVariableConnectionVariableCrossReference_2_0.eContents().get(1);
+		private final Keyword cPlusSignEqualsSignKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Assignment cOwnedExpressionAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cOwnedExpressionExpCSParserRuleCall_4_0 = (RuleCall)cOwnedExpressionAssignment_4.eContents().get(0);
+		private final Keyword cSemicolonKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
 		//AddStatementCS:
-		//	'add' targetVariable=[qvtimperative::ConnectionVariable|UnrestrictedName] '+=' ownedExpression=ExpCS ';';
+		//	('observe' observedProperties+=PathNameCS (',' observedProperties+=PathNameCS)*)? 'add'
+		//	targetVariable=[qvtimperative::ConnectionVariable|UnrestrictedName] '+=' ownedExpression=ExpCS ';';
 		@Override public ParserRule getRule() { return rule; }
 
-		//'add' targetVariable=[qvtimperative::ConnectionVariable|UnrestrictedName] '+=' ownedExpression=ExpCS ';'
+		//('observe' observedProperties+=PathNameCS (',' observedProperties+=PathNameCS)*)? 'add'
+		//targetVariable=[qvtimperative::ConnectionVariable|UnrestrictedName] '+=' ownedExpression=ExpCS ';'
 		public Group getGroup() { return cGroup; }
 
+		//('observe' observedProperties+=PathNameCS (',' observedProperties+=PathNameCS)*)?
+		public Group getGroup_0() { return cGroup_0; }
+
+		//'observe'
+		public Keyword getObserveKeyword_0_0() { return cObserveKeyword_0_0; }
+
+		//observedProperties+=PathNameCS
+		public Assignment getObservedPropertiesAssignment_0_1() { return cObservedPropertiesAssignment_0_1; }
+
+		//PathNameCS
+		public RuleCall getObservedPropertiesPathNameCSParserRuleCall_0_1_0() { return cObservedPropertiesPathNameCSParserRuleCall_0_1_0; }
+
+		//(',' observedProperties+=PathNameCS)*
+		public Group getGroup_0_2() { return cGroup_0_2; }
+
+		//','
+		public Keyword getCommaKeyword_0_2_0() { return cCommaKeyword_0_2_0; }
+
+		//observedProperties+=PathNameCS
+		public Assignment getObservedPropertiesAssignment_0_2_1() { return cObservedPropertiesAssignment_0_2_1; }
+
+		//PathNameCS
+		public RuleCall getObservedPropertiesPathNameCSParserRuleCall_0_2_1_0() { return cObservedPropertiesPathNameCSParserRuleCall_0_2_1_0; }
+
 		//'add'
-		public Keyword getAddKeyword_0() { return cAddKeyword_0; }
+		public Keyword getAddKeyword_1() { return cAddKeyword_1; }
 
 		//targetVariable=[qvtimperative::ConnectionVariable|UnrestrictedName]
-		public Assignment getTargetVariableAssignment_1() { return cTargetVariableAssignment_1; }
+		public Assignment getTargetVariableAssignment_2() { return cTargetVariableAssignment_2; }
 
 		//[qvtimperative::ConnectionVariable|UnrestrictedName]
-		public CrossReference getTargetVariableConnectionVariableCrossReference_1_0() { return cTargetVariableConnectionVariableCrossReference_1_0; }
+		public CrossReference getTargetVariableConnectionVariableCrossReference_2_0() { return cTargetVariableConnectionVariableCrossReference_2_0; }
 
 		//UnrestrictedName
-		public RuleCall getTargetVariableConnectionVariableUnrestrictedNameParserRuleCall_1_0_1() { return cTargetVariableConnectionVariableUnrestrictedNameParserRuleCall_1_0_1; }
+		public RuleCall getTargetVariableConnectionVariableUnrestrictedNameParserRuleCall_2_0_1() { return cTargetVariableConnectionVariableUnrestrictedNameParserRuleCall_2_0_1; }
 
 		//'+='
-		public Keyword getPlusSignEqualsSignKeyword_2() { return cPlusSignEqualsSignKeyword_2; }
+		public Keyword getPlusSignEqualsSignKeyword_3() { return cPlusSignEqualsSignKeyword_3; }
 
 		//ownedExpression=ExpCS
-		public Assignment getOwnedExpressionAssignment_3() { return cOwnedExpressionAssignment_3; }
+		public Assignment getOwnedExpressionAssignment_4() { return cOwnedExpressionAssignment_4; }
 
 		//ExpCS
-		public RuleCall getOwnedExpressionExpCSParserRuleCall_3_0() { return cOwnedExpressionExpCSParserRuleCall_3_0; }
+		public RuleCall getOwnedExpressionExpCSParserRuleCall_4_0() { return cOwnedExpressionExpCSParserRuleCall_4_0; }
 
 		//';'
-		public Keyword getSemicolonKeyword_4() { return cSemicolonKeyword_4; }
+		public Keyword getSemicolonKeyword_5() { return cSemicolonKeyword_5; }
 	}
 
 	public class CommitStatementCSElements extends AbstractParserRuleElementFinder {
@@ -205,65 +239,99 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	public class DeclareStatementCSElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvtd.xtext.qvtimperative.QVTimperative.DeclareStatementCS");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cIsCheckedAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final Keyword cIsCheckedCheckKeyword_0_0 = (Keyword)cIsCheckedAssignment_0.eContents().get(0);
-		private final Keyword cVarKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cNameUnrestrictedNameParserRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
-		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
-		private final Keyword cColonKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
-		private final Assignment cOwnedTypeAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
-		private final RuleCall cOwnedTypeTypeExpCSParserRuleCall_3_1_0 = (RuleCall)cOwnedTypeAssignment_3_1.eContents().get(0);
-		private final Keyword cColonEqualsSignKeyword_4 = (Keyword)cGroup.eContents().get(4);
-		private final Assignment cOwnedInitAssignment_5 = (Assignment)cGroup.eContents().get(5);
-		private final RuleCall cOwnedInitExpCSParserRuleCall_5_0 = (RuleCall)cOwnedInitAssignment_5.eContents().get(0);
-		private final Keyword cSemicolonKeyword_6 = (Keyword)cGroup.eContents().get(6);
+		private final Group cGroup_0 = (Group)cGroup.eContents().get(0);
+		private final Keyword cObserveKeyword_0_0 = (Keyword)cGroup_0.eContents().get(0);
+		private final Assignment cObservedPropertiesAssignment_0_1 = (Assignment)cGroup_0.eContents().get(1);
+		private final RuleCall cObservedPropertiesPathNameCSParserRuleCall_0_1_0 = (RuleCall)cObservedPropertiesAssignment_0_1.eContents().get(0);
+		private final Group cGroup_0_2 = (Group)cGroup_0.eContents().get(2);
+		private final Keyword cCommaKeyword_0_2_0 = (Keyword)cGroup_0_2.eContents().get(0);
+		private final Assignment cObservedPropertiesAssignment_0_2_1 = (Assignment)cGroup_0_2.eContents().get(1);
+		private final RuleCall cObservedPropertiesPathNameCSParserRuleCall_0_2_1_0 = (RuleCall)cObservedPropertiesAssignment_0_2_1.eContents().get(0);
+		private final Assignment cIsCheckedAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final Keyword cIsCheckedCheckKeyword_1_0 = (Keyword)cIsCheckedAssignment_1.eContents().get(0);
+		private final Keyword cVarKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cNameAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cNameUnrestrictedNameParserRuleCall_3_0 = (RuleCall)cNameAssignment_3.eContents().get(0);
+		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
+		private final Keyword cColonKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
+		private final Assignment cOwnedTypeAssignment_4_1 = (Assignment)cGroup_4.eContents().get(1);
+		private final RuleCall cOwnedTypeTypeExpCSParserRuleCall_4_1_0 = (RuleCall)cOwnedTypeAssignment_4_1.eContents().get(0);
+		private final Keyword cColonEqualsSignKeyword_5 = (Keyword)cGroup.eContents().get(5);
+		private final Assignment cOwnedExpressionAssignment_6 = (Assignment)cGroup.eContents().get(6);
+		private final RuleCall cOwnedExpressionExpCSParserRuleCall_6_0 = (RuleCall)cOwnedExpressionAssignment_6.eContents().get(0);
+		private final Keyword cSemicolonKeyword_7 = (Keyword)cGroup.eContents().get(7);
 		
 		//DeclareStatementCS:
-		//	isChecked?='check'? 'var' name=UnrestrictedName (':' ownedType=TypeExpCS)? ':=' ownedInit=ExpCS ';';
+		//	('observe' observedProperties+=PathNameCS (',' observedProperties+=PathNameCS)*)? isChecked?='check'? 'var'
+		//	name=UnrestrictedName (':' ownedType=TypeExpCS)? ':=' ownedExpression=ExpCS ';';
 		@Override public ParserRule getRule() { return rule; }
 
-		//isChecked?='check'? 'var' name=UnrestrictedName (':' ownedType=TypeExpCS)? ':=' ownedInit=ExpCS ';'
+		//('observe' observedProperties+=PathNameCS (',' observedProperties+=PathNameCS)*)? isChecked?='check'? 'var'
+		//name=UnrestrictedName (':' ownedType=TypeExpCS)? ':=' ownedExpression=ExpCS ';'
 		public Group getGroup() { return cGroup; }
 
+		//('observe' observedProperties+=PathNameCS (',' observedProperties+=PathNameCS)*)?
+		public Group getGroup_0() { return cGroup_0; }
+
+		//'observe'
+		public Keyword getObserveKeyword_0_0() { return cObserveKeyword_0_0; }
+
+		//observedProperties+=PathNameCS
+		public Assignment getObservedPropertiesAssignment_0_1() { return cObservedPropertiesAssignment_0_1; }
+
+		//PathNameCS
+		public RuleCall getObservedPropertiesPathNameCSParserRuleCall_0_1_0() { return cObservedPropertiesPathNameCSParserRuleCall_0_1_0; }
+
+		//(',' observedProperties+=PathNameCS)*
+		public Group getGroup_0_2() { return cGroup_0_2; }
+
+		//','
+		public Keyword getCommaKeyword_0_2_0() { return cCommaKeyword_0_2_0; }
+
+		//observedProperties+=PathNameCS
+		public Assignment getObservedPropertiesAssignment_0_2_1() { return cObservedPropertiesAssignment_0_2_1; }
+
+		//PathNameCS
+		public RuleCall getObservedPropertiesPathNameCSParserRuleCall_0_2_1_0() { return cObservedPropertiesPathNameCSParserRuleCall_0_2_1_0; }
+
 		//isChecked?='check'?
-		public Assignment getIsCheckedAssignment_0() { return cIsCheckedAssignment_0; }
+		public Assignment getIsCheckedAssignment_1() { return cIsCheckedAssignment_1; }
 
 		//'check'
-		public Keyword getIsCheckedCheckKeyword_0_0() { return cIsCheckedCheckKeyword_0_0; }
+		public Keyword getIsCheckedCheckKeyword_1_0() { return cIsCheckedCheckKeyword_1_0; }
 
 		//'var'
-		public Keyword getVarKeyword_1() { return cVarKeyword_1; }
+		public Keyword getVarKeyword_2() { return cVarKeyword_2; }
 
 		//name=UnrestrictedName
-		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
+		public Assignment getNameAssignment_3() { return cNameAssignment_3; }
 
 		//UnrestrictedName
-		public RuleCall getNameUnrestrictedNameParserRuleCall_2_0() { return cNameUnrestrictedNameParserRuleCall_2_0; }
+		public RuleCall getNameUnrestrictedNameParserRuleCall_3_0() { return cNameUnrestrictedNameParserRuleCall_3_0; }
 
 		//(':' ownedType=TypeExpCS)?
-		public Group getGroup_3() { return cGroup_3; }
+		public Group getGroup_4() { return cGroup_4; }
 
 		//':'
-		public Keyword getColonKeyword_3_0() { return cColonKeyword_3_0; }
+		public Keyword getColonKeyword_4_0() { return cColonKeyword_4_0; }
 
 		//ownedType=TypeExpCS
-		public Assignment getOwnedTypeAssignment_3_1() { return cOwnedTypeAssignment_3_1; }
+		public Assignment getOwnedTypeAssignment_4_1() { return cOwnedTypeAssignment_4_1; }
 
 		//TypeExpCS
-		public RuleCall getOwnedTypeTypeExpCSParserRuleCall_3_1_0() { return cOwnedTypeTypeExpCSParserRuleCall_3_1_0; }
+		public RuleCall getOwnedTypeTypeExpCSParserRuleCall_4_1_0() { return cOwnedTypeTypeExpCSParserRuleCall_4_1_0; }
 
 		//':='
-		public Keyword getColonEqualsSignKeyword_4() { return cColonEqualsSignKeyword_4; }
+		public Keyword getColonEqualsSignKeyword_5() { return cColonEqualsSignKeyword_5; }
 
-		//ownedInit=ExpCS
-		public Assignment getOwnedInitAssignment_5() { return cOwnedInitAssignment_5; }
+		//ownedExpression=ExpCS
+		public Assignment getOwnedExpressionAssignment_6() { return cOwnedExpressionAssignment_6; }
 
 		//ExpCS
-		public RuleCall getOwnedInitExpCSParserRuleCall_5_0() { return cOwnedInitExpCSParserRuleCall_5_0; }
+		public RuleCall getOwnedExpressionExpCSParserRuleCall_6_0() { return cOwnedExpressionExpCSParserRuleCall_6_0; }
 
 		//';'
-		public Keyword getSemicolonKeyword_6() { return cSemicolonKeyword_6; }
+		public Keyword getSemicolonKeyword_7() { return cSemicolonKeyword_7; }
 	}
 
 	public class DirectionCSElements extends AbstractParserRuleElementFinder {
@@ -286,28 +354,14 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cImportsAssignment_5_1 = (Assignment)cGroup_5.eContents().get(1);
 		private final CrossReference cImportsPackageCrossReference_5_1_0 = (CrossReference)cImportsAssignment_5_1.eContents().get(0);
 		private final RuleCall cImportsPackageUnrestrictedNameParserRuleCall_5_1_0_1 = (RuleCall)cImportsPackageCrossReference_5_1_0.eContents().get(1);
-		private final Group cGroup_6 = (Group)cGroup.eContents().get(6);
-		private final Keyword cUsesKeyword_6_0 = (Keyword)cGroup_6.eContents().get(0);
-		private final Assignment cUsesAssignment_6_1 = (Assignment)cGroup_6.eContents().get(1);
-		private final CrossReference cUsesImperativeDomainCrossReference_6_1_0 = (CrossReference)cUsesAssignment_6_1.eContents().get(0);
-		private final RuleCall cUsesImperativeDomainUnrestrictedNameParserRuleCall_6_1_0_1 = (RuleCall)cUsesImperativeDomainCrossReference_6_1_0.eContents().get(1);
-		private final Group cGroup_6_2 = (Group)cGroup_6.eContents().get(2);
-		private final Keyword cCommaKeyword_6_2_0 = (Keyword)cGroup_6_2.eContents().get(0);
-		private final Assignment cUsesAssignment_6_2_1 = (Assignment)cGroup_6_2.eContents().get(1);
-		private final CrossReference cUsesImperativeDomainCrossReference_6_2_1_0 = (CrossReference)cUsesAssignment_6_2_1.eContents().get(0);
-		private final RuleCall cUsesImperativeDomainUnrestrictedNameParserRuleCall_6_2_1_0_1 = (RuleCall)cUsesImperativeDomainCrossReference_6_2_1_0.eContents().get(1);
 		
 		//DirectionCS:
 		//	{DirectionCS} (isChecked?='check' | isEnforced?='enforce')? name=UnrestrictedName? 'imports'
-		//	imports+=[pivot::Package|UnrestrictedName] (',' imports+=[pivot::Package|UnrestrictedName])* ('uses'
-		//	uses+=[qvtimperative::ImperativeDomain|UnrestrictedName] (','
-		//	uses+=[qvtimperative::ImperativeDomain|UnrestrictedName])*)?;
+		//	imports+=[pivot::Package|UnrestrictedName] (',' imports+=[pivot::Package|UnrestrictedName])*;
 		@Override public ParserRule getRule() { return rule; }
 
 		//{DirectionCS} (isChecked?='check' | isEnforced?='enforce')? name=UnrestrictedName? 'imports'
-		//imports+=[pivot::Package|UnrestrictedName] (',' imports+=[pivot::Package|UnrestrictedName])* ('uses'
-		//uses+=[qvtimperative::ImperativeDomain|UnrestrictedName] (','
-		//uses+=[qvtimperative::ImperativeDomain|UnrestrictedName])*)?
+		//imports+=[pivot::Package|UnrestrictedName] (',' imports+=[pivot::Package|UnrestrictedName])*
 		public Group getGroup() { return cGroup; }
 
 		//{DirectionCS}
@@ -360,37 +414,6 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 
 		//UnrestrictedName
 		public RuleCall getImportsPackageUnrestrictedNameParserRuleCall_5_1_0_1() { return cImportsPackageUnrestrictedNameParserRuleCall_5_1_0_1; }
-
-		//('uses' uses+=[qvtimperative::ImperativeDomain|UnrestrictedName] (','
-		//uses+=[qvtimperative::ImperativeDomain|UnrestrictedName])*)?
-		public Group getGroup_6() { return cGroup_6; }
-
-		//'uses'
-		public Keyword getUsesKeyword_6_0() { return cUsesKeyword_6_0; }
-
-		//uses+=[qvtimperative::ImperativeDomain|UnrestrictedName]
-		public Assignment getUsesAssignment_6_1() { return cUsesAssignment_6_1; }
-
-		//[qvtimperative::ImperativeDomain|UnrestrictedName]
-		public CrossReference getUsesImperativeDomainCrossReference_6_1_0() { return cUsesImperativeDomainCrossReference_6_1_0; }
-
-		//UnrestrictedName
-		public RuleCall getUsesImperativeDomainUnrestrictedNameParserRuleCall_6_1_0_1() { return cUsesImperativeDomainUnrestrictedNameParserRuleCall_6_1_0_1; }
-
-		//(',' uses+=[qvtimperative::ImperativeDomain|UnrestrictedName])*
-		public Group getGroup_6_2() { return cGroup_6_2; }
-
-		//','
-		public Keyword getCommaKeyword_6_2_0() { return cCommaKeyword_6_2_0; }
-
-		//uses+=[qvtimperative::ImperativeDomain|UnrestrictedName]
-		public Assignment getUsesAssignment_6_2_1() { return cUsesAssignment_6_2_1; }
-
-		//[qvtimperative::ImperativeDomain|UnrestrictedName]
-		public CrossReference getUsesImperativeDomainCrossReference_6_2_1_0() { return cUsesImperativeDomainCrossReference_6_2_1_0; }
-
-		//UnrestrictedName
-		public RuleCall getUsesImperativeDomainUnrestrictedNameParserRuleCall_6_2_1_0_1() { return cUsesImperativeDomainUnrestrictedNameParserRuleCall_6_2_1_0_1; }
 	}
 
 	public class GuardStatementCSElements extends AbstractParserRuleElementFinder {
@@ -591,32 +614,28 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cOwnedInPathNameAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
 		private final RuleCall cOwnedInPathNamePathNameCSParserRuleCall_3_1_0 = (RuleCall)cOwnedInPathNameAssignment_3_1.eContents().get(0);
 		private final Keyword cLeftCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
-		private final Assignment cOwnedDomainsAssignment_5 = (Assignment)cGroup.eContents().get(5);
-		private final Alternatives cOwnedDomainsAlternatives_5_0 = (Alternatives)cOwnedDomainsAssignment_5.eContents().get(0);
-		private final RuleCall cOwnedDomainsSourceDomainCSParserRuleCall_5_0_0 = (RuleCall)cOwnedDomainsAlternatives_5_0.eContents().get(0);
-		private final RuleCall cOwnedDomainsTargetDomainCSParserRuleCall_5_0_1 = (RuleCall)cOwnedDomainsAlternatives_5_0.eContents().get(1);
-		private final Alternatives cAlternatives_6 = (Alternatives)cGroup.eContents().get(6);
-		private final Assignment cOwnedGuardVariablesAssignment_6_0 = (Assignment)cAlternatives_6.eContents().get(0);
-		private final RuleCall cOwnedGuardVariablesGuardVariableCSParserRuleCall_6_0_0 = (RuleCall)cOwnedGuardVariablesAssignment_6_0.eContents().get(0);
-		private final Assignment cOwnedInoutVariablesAssignment_6_1 = (Assignment)cAlternatives_6.eContents().get(1);
-		private final RuleCall cOwnedInoutVariablesInoutVariableCSParserRuleCall_6_1_0 = (RuleCall)cOwnedInoutVariablesAssignment_6_1.eContents().get(0);
+		private final Alternatives cAlternatives_5 = (Alternatives)cGroup.eContents().get(5);
+		private final Assignment cOwnedGuardVariablesAssignment_5_0 = (Assignment)cAlternatives_5.eContents().get(0);
+		private final RuleCall cOwnedGuardVariablesGuardVariableCSParserRuleCall_5_0_0 = (RuleCall)cOwnedGuardVariablesAssignment_5_0.eContents().get(0);
+		private final Assignment cOwnedInoutVariablesAssignment_5_1 = (Assignment)cAlternatives_5.eContents().get(1);
+		private final RuleCall cOwnedInoutVariablesInoutVariableCSParserRuleCall_5_1_0 = (RuleCall)cOwnedInoutVariablesAssignment_5_1.eContents().get(0);
+		private final Assignment cOwnedStatementsAssignment_6 = (Assignment)cGroup.eContents().get(6);
+		private final RuleCall cOwnedStatementsGuardStatementCSParserRuleCall_6_0 = (RuleCall)cOwnedStatementsAssignment_6.eContents().get(0);
 		private final Assignment cOwnedStatementsAssignment_7 = (Assignment)cGroup.eContents().get(7);
-		private final RuleCall cOwnedStatementsGuardStatementCSParserRuleCall_7_0 = (RuleCall)cOwnedStatementsAssignment_7.eContents().get(0);
+		private final RuleCall cOwnedStatementsCommitStatementCSParserRuleCall_7_0 = (RuleCall)cOwnedStatementsAssignment_7.eContents().get(0);
 		private final Assignment cOwnedStatementsAssignment_8 = (Assignment)cGroup.eContents().get(8);
-		private final RuleCall cOwnedStatementsCommitStatementCSParserRuleCall_8_0 = (RuleCall)cOwnedStatementsAssignment_8.eContents().get(0);
-		private final Assignment cOwnedStatementsAssignment_9 = (Assignment)cGroup.eContents().get(9);
-		private final RuleCall cOwnedStatementsControlStatementCSParserRuleCall_9_0 = (RuleCall)cOwnedStatementsAssignment_9.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_10 = (Keyword)cGroup.eContents().get(10);
+		private final RuleCall cOwnedStatementsControlStatementCSParserRuleCall_8_0 = (RuleCall)cOwnedStatementsAssignment_8.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_9 = (Keyword)cGroup.eContents().get(9);
 		
 		//MappingCS:
-		//	{MappingCS} 'map' name=UnrestrictedName ('in' ownedInPathName=PathNameCS)? '{' ownedDomains+=(SourceDomainCS |
-		//	TargetDomainCS)* (ownedGuardVariables+=GuardVariableCS | ownedInoutVariables+=InoutVariableCS)*
-		//	ownedStatements+=GuardStatementCS* ownedStatements+=CommitStatementCS* ownedStatements+=ControlStatementCS* '}';
+		//	{MappingCS} 'map' name=UnrestrictedName ('in' ownedInPathName=PathNameCS)? '{' (ownedGuardVariables+=GuardVariableCS
+		//	| ownedInoutVariables+=InoutVariableCS)* ownedStatements+=GuardStatementCS* ownedStatements+=CommitStatementCS*
+		//	ownedStatements+=ControlStatementCS* '}';
 		@Override public ParserRule getRule() { return rule; }
 
-		//{MappingCS} 'map' name=UnrestrictedName ('in' ownedInPathName=PathNameCS)? '{' ownedDomains+=(SourceDomainCS |
-		//TargetDomainCS)* (ownedGuardVariables+=GuardVariableCS | ownedInoutVariables+=InoutVariableCS)*
-		//ownedStatements+=GuardStatementCS* ownedStatements+=CommitStatementCS* ownedStatements+=ControlStatementCS* '}'
+		//{MappingCS} 'map' name=UnrestrictedName ('in' ownedInPathName=PathNameCS)? '{' (ownedGuardVariables+=GuardVariableCS |
+		//ownedInoutVariables+=InoutVariableCS)* ownedStatements+=GuardStatementCS* ownedStatements+=CommitStatementCS*
+		//ownedStatements+=ControlStatementCS* '}'
 		public Group getGroup() { return cGroup; }
 
 		//{MappingCS}
@@ -646,53 +665,41 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_4() { return cLeftCurlyBracketKeyword_4; }
 
-		//ownedDomains+=(SourceDomainCS | TargetDomainCS)*
-		public Assignment getOwnedDomainsAssignment_5() { return cOwnedDomainsAssignment_5; }
-
-		//(SourceDomainCS | TargetDomainCS)
-		public Alternatives getOwnedDomainsAlternatives_5_0() { return cOwnedDomainsAlternatives_5_0; }
-
-		//SourceDomainCS
-		public RuleCall getOwnedDomainsSourceDomainCSParserRuleCall_5_0_0() { return cOwnedDomainsSourceDomainCSParserRuleCall_5_0_0; }
-
-		//TargetDomainCS
-		public RuleCall getOwnedDomainsTargetDomainCSParserRuleCall_5_0_1() { return cOwnedDomainsTargetDomainCSParserRuleCall_5_0_1; }
-
 		//(ownedGuardVariables+=GuardVariableCS | ownedInoutVariables+=InoutVariableCS)*
-		public Alternatives getAlternatives_6() { return cAlternatives_6; }
+		public Alternatives getAlternatives_5() { return cAlternatives_5; }
 
 		//ownedGuardVariables+=GuardVariableCS
-		public Assignment getOwnedGuardVariablesAssignment_6_0() { return cOwnedGuardVariablesAssignment_6_0; }
+		public Assignment getOwnedGuardVariablesAssignment_5_0() { return cOwnedGuardVariablesAssignment_5_0; }
 
 		//GuardVariableCS
-		public RuleCall getOwnedGuardVariablesGuardVariableCSParserRuleCall_6_0_0() { return cOwnedGuardVariablesGuardVariableCSParserRuleCall_6_0_0; }
+		public RuleCall getOwnedGuardVariablesGuardVariableCSParserRuleCall_5_0_0() { return cOwnedGuardVariablesGuardVariableCSParserRuleCall_5_0_0; }
 
 		//ownedInoutVariables+=InoutVariableCS
-		public Assignment getOwnedInoutVariablesAssignment_6_1() { return cOwnedInoutVariablesAssignment_6_1; }
+		public Assignment getOwnedInoutVariablesAssignment_5_1() { return cOwnedInoutVariablesAssignment_5_1; }
 
 		//InoutVariableCS
-		public RuleCall getOwnedInoutVariablesInoutVariableCSParserRuleCall_6_1_0() { return cOwnedInoutVariablesInoutVariableCSParserRuleCall_6_1_0; }
+		public RuleCall getOwnedInoutVariablesInoutVariableCSParserRuleCall_5_1_0() { return cOwnedInoutVariablesInoutVariableCSParserRuleCall_5_1_0; }
 
 		//ownedStatements+=GuardStatementCS*
-		public Assignment getOwnedStatementsAssignment_7() { return cOwnedStatementsAssignment_7; }
+		public Assignment getOwnedStatementsAssignment_6() { return cOwnedStatementsAssignment_6; }
 
 		//GuardStatementCS
-		public RuleCall getOwnedStatementsGuardStatementCSParserRuleCall_7_0() { return cOwnedStatementsGuardStatementCSParserRuleCall_7_0; }
+		public RuleCall getOwnedStatementsGuardStatementCSParserRuleCall_6_0() { return cOwnedStatementsGuardStatementCSParserRuleCall_6_0; }
 
 		//ownedStatements+=CommitStatementCS*
-		public Assignment getOwnedStatementsAssignment_8() { return cOwnedStatementsAssignment_8; }
+		public Assignment getOwnedStatementsAssignment_7() { return cOwnedStatementsAssignment_7; }
 
 		//CommitStatementCS
-		public RuleCall getOwnedStatementsCommitStatementCSParserRuleCall_8_0() { return cOwnedStatementsCommitStatementCSParserRuleCall_8_0; }
+		public RuleCall getOwnedStatementsCommitStatementCSParserRuleCall_7_0() { return cOwnedStatementsCommitStatementCSParserRuleCall_7_0; }
 
 		//ownedStatements+=ControlStatementCS*
-		public Assignment getOwnedStatementsAssignment_9() { return cOwnedStatementsAssignment_9; }
+		public Assignment getOwnedStatementsAssignment_8() { return cOwnedStatementsAssignment_8; }
 
 		//ControlStatementCS
-		public RuleCall getOwnedStatementsControlStatementCSParserRuleCall_9_0() { return cOwnedStatementsControlStatementCSParserRuleCall_9_0; }
+		public RuleCall getOwnedStatementsControlStatementCSParserRuleCall_8_0() { return cOwnedStatementsControlStatementCSParserRuleCall_8_0; }
 
 		//'}'
-		public Keyword getRightCurlyBracketKeyword_10() { return cRightCurlyBracketKeyword_10; }
+		public Keyword getRightCurlyBracketKeyword_9() { return cRightCurlyBracketKeyword_9; }
 	}
 
 	public class MappingCallCSElements extends AbstractParserRuleElementFinder {
@@ -753,19 +760,16 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cReferredVariableAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final CrossReference cReferredVariableVariableDeclarationCrossReference_0_0 = (CrossReference)cReferredVariableAssignment_0.eContents().get(0);
 		private final RuleCall cReferredVariableVariableDeclarationUnrestrictedNameParserRuleCall_0_0_1 = (RuleCall)cReferredVariableVariableDeclarationCrossReference_0_0.eContents().get(1);
-		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
-		private final Keyword cColonEqualsSignKeyword_1_0 = (Keyword)cAlternatives_1.eContents().get(0);
-		private final Assignment cIsPolledAssignment_1_1 = (Assignment)cAlternatives_1.eContents().get(1);
-		private final Keyword cIsPolledQuestionMarkEqualsSignKeyword_1_1_0 = (Keyword)cIsPolledAssignment_1_1.eContents().get(0);
+		private final Keyword cColonEqualsSignKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Assignment cOwnedValueAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cOwnedValueExpCSParserRuleCall_2_0 = (RuleCall)cOwnedValueAssignment_2.eContents().get(0);
 		private final Keyword cSemicolonKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
 		//MappingCallBindingCS:
-		//	referredVariable=[pivot::VariableDeclaration|UnrestrictedName] (':=' | isPolled?='?=') ownedValue=ExpCS ';';
+		//	referredVariable=[pivot::VariableDeclaration|UnrestrictedName] ':=' ownedValue=ExpCS ';';
 		@Override public ParserRule getRule() { return rule; }
 
-		//referredVariable=[pivot::VariableDeclaration|UnrestrictedName] (':=' | isPolled?='?=') ownedValue=ExpCS ';'
+		//referredVariable=[pivot::VariableDeclaration|UnrestrictedName] ':=' ownedValue=ExpCS ';'
 		public Group getGroup() { return cGroup; }
 
 		//referredVariable=[pivot::VariableDeclaration|UnrestrictedName]
@@ -777,17 +781,8 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		//UnrestrictedName
 		public RuleCall getReferredVariableVariableDeclarationUnrestrictedNameParserRuleCall_0_0_1() { return cReferredVariableVariableDeclarationUnrestrictedNameParserRuleCall_0_0_1; }
 
-		//(':=' | isPolled?='?=')
-		public Alternatives getAlternatives_1() { return cAlternatives_1; }
-
 		//':='
-		public Keyword getColonEqualsSignKeyword_1_0() { return cColonEqualsSignKeyword_1_0; }
-
-		//isPolled?='?='
-		public Assignment getIsPolledAssignment_1_1() { return cIsPolledAssignment_1_1; }
-
-		//'?='
-		public Keyword getIsPolledQuestionMarkEqualsSignKeyword_1_1_0() { return cIsPolledQuestionMarkEqualsSignKeyword_1_1_0; }
+		public Keyword getColonEqualsSignKeyword_1() { return cColonEqualsSignKeyword_1; }
 
 		//ownedValue=ExpCS
 		public Assignment getOwnedValueAssignment_2() { return cOwnedValueAssignment_2; }
@@ -802,54 +797,87 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	public class MappingLoopCSElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvtd.xtext.qvtimperative.QVTimperative.MappingLoopCS");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cForKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cOwnedIteratorAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cOwnedIteratorMappingIteratorCSParserRuleCall_1_0 = (RuleCall)cOwnedIteratorAssignment_1.eContents().get(0);
-		private final Keyword cInKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Assignment cOwnedInExpressionAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cOwnedInExpressionExpCSParserRuleCall_3_0 = (RuleCall)cOwnedInExpressionAssignment_3.eContents().get(0);
-		private final Keyword cLeftCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
-		private final Assignment cOwnedMappingStatementsAssignment_5 = (Assignment)cGroup.eContents().get(5);
-		private final RuleCall cOwnedMappingStatementsControlStatementCSParserRuleCall_5_0 = (RuleCall)cOwnedMappingStatementsAssignment_5.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
+		private final Group cGroup_0 = (Group)cGroup.eContents().get(0);
+		private final Keyword cObserveKeyword_0_0 = (Keyword)cGroup_0.eContents().get(0);
+		private final Assignment cObservedPropertiesAssignment_0_1 = (Assignment)cGroup_0.eContents().get(1);
+		private final RuleCall cObservedPropertiesPathNameCSParserRuleCall_0_1_0 = (RuleCall)cObservedPropertiesAssignment_0_1.eContents().get(0);
+		private final Group cGroup_0_2 = (Group)cGroup_0.eContents().get(2);
+		private final Keyword cCommaKeyword_0_2_0 = (Keyword)cGroup_0_2.eContents().get(0);
+		private final Assignment cObservedPropertiesAssignment_0_2_1 = (Assignment)cGroup_0_2.eContents().get(1);
+		private final RuleCall cObservedPropertiesPathNameCSParserRuleCall_0_2_1_0 = (RuleCall)cObservedPropertiesAssignment_0_2_1.eContents().get(0);
+		private final Keyword cForKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cOwnedIteratorAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cOwnedIteratorMappingIteratorCSParserRuleCall_2_0 = (RuleCall)cOwnedIteratorAssignment_2.eContents().get(0);
+		private final Keyword cInKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Assignment cOwnedInExpressionAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cOwnedInExpressionExpCSParserRuleCall_4_0 = (RuleCall)cOwnedInExpressionAssignment_4.eContents().get(0);
+		private final Keyword cLeftCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
+		private final Assignment cOwnedMappingStatementsAssignment_6 = (Assignment)cGroup.eContents().get(6);
+		private final RuleCall cOwnedMappingStatementsControlStatementCSParserRuleCall_6_0 = (RuleCall)cOwnedMappingStatementsAssignment_6.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_7 = (Keyword)cGroup.eContents().get(7);
 		
 		//MappingLoopCS:
-		//	'for' ownedIterator=MappingIteratorCS 'in' ownedInExpression=ExpCS '{' ownedMappingStatements+=ControlStatementCS+
-		//	'}';
+		//	('observe' observedProperties+=PathNameCS (',' observedProperties+=PathNameCS)*)? 'for'
+		//	ownedIterator=MappingIteratorCS 'in' ownedInExpression=ExpCS '{' ownedMappingStatements+=ControlStatementCS+ '}';
 		@Override public ParserRule getRule() { return rule; }
 
-		//'for' ownedIterator=MappingIteratorCS 'in' ownedInExpression=ExpCS '{' ownedMappingStatements+=ControlStatementCS+ '}'
+		//('observe' observedProperties+=PathNameCS (',' observedProperties+=PathNameCS)*)? 'for' ownedIterator=MappingIteratorCS
+		//'in' ownedInExpression=ExpCS '{' ownedMappingStatements+=ControlStatementCS+ '}'
 		public Group getGroup() { return cGroup; }
 
+		//('observe' observedProperties+=PathNameCS (',' observedProperties+=PathNameCS)*)?
+		public Group getGroup_0() { return cGroup_0; }
+
+		//'observe'
+		public Keyword getObserveKeyword_0_0() { return cObserveKeyword_0_0; }
+
+		//observedProperties+=PathNameCS
+		public Assignment getObservedPropertiesAssignment_0_1() { return cObservedPropertiesAssignment_0_1; }
+
+		//PathNameCS
+		public RuleCall getObservedPropertiesPathNameCSParserRuleCall_0_1_0() { return cObservedPropertiesPathNameCSParserRuleCall_0_1_0; }
+
+		//(',' observedProperties+=PathNameCS)*
+		public Group getGroup_0_2() { return cGroup_0_2; }
+
+		//','
+		public Keyword getCommaKeyword_0_2_0() { return cCommaKeyword_0_2_0; }
+
+		//observedProperties+=PathNameCS
+		public Assignment getObservedPropertiesAssignment_0_2_1() { return cObservedPropertiesAssignment_0_2_1; }
+
+		//PathNameCS
+		public RuleCall getObservedPropertiesPathNameCSParserRuleCall_0_2_1_0() { return cObservedPropertiesPathNameCSParserRuleCall_0_2_1_0; }
+
 		//'for'
-		public Keyword getForKeyword_0() { return cForKeyword_0; }
+		public Keyword getForKeyword_1() { return cForKeyword_1; }
 
 		//ownedIterator=MappingIteratorCS
-		public Assignment getOwnedIteratorAssignment_1() { return cOwnedIteratorAssignment_1; }
+		public Assignment getOwnedIteratorAssignment_2() { return cOwnedIteratorAssignment_2; }
 
 		//MappingIteratorCS
-		public RuleCall getOwnedIteratorMappingIteratorCSParserRuleCall_1_0() { return cOwnedIteratorMappingIteratorCSParserRuleCall_1_0; }
+		public RuleCall getOwnedIteratorMappingIteratorCSParserRuleCall_2_0() { return cOwnedIteratorMappingIteratorCSParserRuleCall_2_0; }
 
 		//'in'
-		public Keyword getInKeyword_2() { return cInKeyword_2; }
+		public Keyword getInKeyword_3() { return cInKeyword_3; }
 
 		//ownedInExpression=ExpCS
-		public Assignment getOwnedInExpressionAssignment_3() { return cOwnedInExpressionAssignment_3; }
+		public Assignment getOwnedInExpressionAssignment_4() { return cOwnedInExpressionAssignment_4; }
 
 		//ExpCS
-		public RuleCall getOwnedInExpressionExpCSParserRuleCall_3_0() { return cOwnedInExpressionExpCSParserRuleCall_3_0; }
+		public RuleCall getOwnedInExpressionExpCSParserRuleCall_4_0() { return cOwnedInExpressionExpCSParserRuleCall_4_0; }
 
 		//'{'
-		public Keyword getLeftCurlyBracketKeyword_4() { return cLeftCurlyBracketKeyword_4; }
+		public Keyword getLeftCurlyBracketKeyword_5() { return cLeftCurlyBracketKeyword_5; }
 
 		//ownedMappingStatements+=ControlStatementCS+
-		public Assignment getOwnedMappingStatementsAssignment_5() { return cOwnedMappingStatementsAssignment_5; }
+		public Assignment getOwnedMappingStatementsAssignment_6() { return cOwnedMappingStatementsAssignment_6; }
 
 		//ControlStatementCS
-		public RuleCall getOwnedMappingStatementsControlStatementCSParserRuleCall_5_0() { return cOwnedMappingStatementsControlStatementCSParserRuleCall_5_0; }
+		public RuleCall getOwnedMappingStatementsControlStatementCSParserRuleCall_6_0() { return cOwnedMappingStatementsControlStatementCSParserRuleCall_6_0; }
 
 		//'}'
-		public Keyword getRightCurlyBracketKeyword_6() { return cRightCurlyBracketKeyword_6; }
+		public Keyword getRightCurlyBracketKeyword_7() { return cRightCurlyBracketKeyword_7; }
 	}
 
 	public class MappingIteratorCSElements extends AbstractParserRuleElementFinder {
@@ -891,75 +919,109 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	public class NewStatementCSElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvtd.xtext.qvtimperative.QVTimperative.NewStatementCS");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cNewKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Keyword cColonKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Assignment cReferredTypedModelAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final CrossReference cReferredTypedModelImperativeTypedModelCrossReference_2_0 = (CrossReference)cReferredTypedModelAssignment_2.eContents().get(0);
-		private final RuleCall cReferredTypedModelImperativeTypedModelUnrestrictedNameParserRuleCall_2_0_1 = (RuleCall)cReferredTypedModelImperativeTypedModelCrossReference_2_0.eContents().get(1);
-		private final Assignment cNameAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cNameUnrestrictedNameParserRuleCall_3_0 = (RuleCall)cNameAssignment_3.eContents().get(0);
-		private final Keyword cColonKeyword_4 = (Keyword)cGroup.eContents().get(4);
-		private final Assignment cOwnedTypeAssignment_5 = (Assignment)cGroup.eContents().get(5);
-		private final RuleCall cOwnedTypeTypeExpCSParserRuleCall_5_0 = (RuleCall)cOwnedTypeAssignment_5.eContents().get(0);
-		private final Group cGroup_6 = (Group)cGroup.eContents().get(6);
-		private final Keyword cColonEqualsSignKeyword_6_0 = (Keyword)cGroup_6.eContents().get(0);
-		private final Assignment cOwnedInitAssignment_6_1 = (Assignment)cGroup_6.eContents().get(1);
-		private final RuleCall cOwnedInitExpCSParserRuleCall_6_1_0 = (RuleCall)cOwnedInitAssignment_6_1.eContents().get(0);
-		private final Keyword cSemicolonKeyword_7 = (Keyword)cGroup.eContents().get(7);
+		private final Group cGroup_0 = (Group)cGroup.eContents().get(0);
+		private final Keyword cObserveKeyword_0_0 = (Keyword)cGroup_0.eContents().get(0);
+		private final Assignment cObservedPropertiesAssignment_0_1 = (Assignment)cGroup_0.eContents().get(1);
+		private final RuleCall cObservedPropertiesPathNameCSParserRuleCall_0_1_0 = (RuleCall)cObservedPropertiesAssignment_0_1.eContents().get(0);
+		private final Group cGroup_0_2 = (Group)cGroup_0.eContents().get(2);
+		private final Keyword cCommaKeyword_0_2_0 = (Keyword)cGroup_0_2.eContents().get(0);
+		private final Assignment cObservedPropertiesAssignment_0_2_1 = (Assignment)cGroup_0_2.eContents().get(1);
+		private final RuleCall cObservedPropertiesPathNameCSParserRuleCall_0_2_1_0 = (RuleCall)cObservedPropertiesAssignment_0_2_1.eContents().get(0);
+		private final Keyword cNewKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Keyword cColonKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cReferredTypedModelAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final CrossReference cReferredTypedModelImperativeTypedModelCrossReference_3_0 = (CrossReference)cReferredTypedModelAssignment_3.eContents().get(0);
+		private final RuleCall cReferredTypedModelImperativeTypedModelUnrestrictedNameParserRuleCall_3_0_1 = (RuleCall)cReferredTypedModelImperativeTypedModelCrossReference_3_0.eContents().get(1);
+		private final Assignment cNameAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cNameUnrestrictedNameParserRuleCall_4_0 = (RuleCall)cNameAssignment_4.eContents().get(0);
+		private final Keyword cColonKeyword_5 = (Keyword)cGroup.eContents().get(5);
+		private final Assignment cOwnedTypeAssignment_6 = (Assignment)cGroup.eContents().get(6);
+		private final RuleCall cOwnedTypeTypeExpCSParserRuleCall_6_0 = (RuleCall)cOwnedTypeAssignment_6.eContents().get(0);
+		private final Group cGroup_7 = (Group)cGroup.eContents().get(7);
+		private final Keyword cColonEqualsSignKeyword_7_0 = (Keyword)cGroup_7.eContents().get(0);
+		private final Assignment cOwnedExpressionAssignment_7_1 = (Assignment)cGroup_7.eContents().get(1);
+		private final RuleCall cOwnedExpressionExpCSParserRuleCall_7_1_0 = (RuleCall)cOwnedExpressionAssignment_7_1.eContents().get(0);
+		private final Keyword cSemicolonKeyword_8 = (Keyword)cGroup.eContents().get(8);
 		
 		//NewStatementCS:
-		//	'new' ':' referredTypedModel=[qvtimperative::ImperativeTypedModel|UnrestrictedName] name=UnrestrictedName ':'
-		//	ownedType=TypeExpCS (':=' ownedInit=ExpCS)? ';';
+		//	('observe' observedProperties+=PathNameCS (',' observedProperties+=PathNameCS)*)? 'new' ':'
+		//	referredTypedModel=[qvtimperative::ImperativeTypedModel|UnrestrictedName] name=UnrestrictedName ':'
+		//	ownedType=TypeExpCS (':=' ownedExpression=ExpCS)? ';';
 		@Override public ParserRule getRule() { return rule; }
 
-		//'new' ':' referredTypedModel=[qvtimperative::ImperativeTypedModel|UnrestrictedName] name=UnrestrictedName ':'
-		//ownedType=TypeExpCS (':=' ownedInit=ExpCS)? ';'
+		//('observe' observedProperties+=PathNameCS (',' observedProperties+=PathNameCS)*)? 'new' ':'
+		//referredTypedModel=[qvtimperative::ImperativeTypedModel|UnrestrictedName] name=UnrestrictedName ':'
+		//ownedType=TypeExpCS (':=' ownedExpression=ExpCS)? ';'
 		public Group getGroup() { return cGroup; }
 
+		//('observe' observedProperties+=PathNameCS (',' observedProperties+=PathNameCS)*)?
+		public Group getGroup_0() { return cGroup_0; }
+
+		//'observe'
+		public Keyword getObserveKeyword_0_0() { return cObserveKeyword_0_0; }
+
+		//observedProperties+=PathNameCS
+		public Assignment getObservedPropertiesAssignment_0_1() { return cObservedPropertiesAssignment_0_1; }
+
+		//PathNameCS
+		public RuleCall getObservedPropertiesPathNameCSParserRuleCall_0_1_0() { return cObservedPropertiesPathNameCSParserRuleCall_0_1_0; }
+
+		//(',' observedProperties+=PathNameCS)*
+		public Group getGroup_0_2() { return cGroup_0_2; }
+
+		//','
+		public Keyword getCommaKeyword_0_2_0() { return cCommaKeyword_0_2_0; }
+
+		//observedProperties+=PathNameCS
+		public Assignment getObservedPropertiesAssignment_0_2_1() { return cObservedPropertiesAssignment_0_2_1; }
+
+		//PathNameCS
+		public RuleCall getObservedPropertiesPathNameCSParserRuleCall_0_2_1_0() { return cObservedPropertiesPathNameCSParserRuleCall_0_2_1_0; }
+
 		//'new'
-		public Keyword getNewKeyword_0() { return cNewKeyword_0; }
+		public Keyword getNewKeyword_1() { return cNewKeyword_1; }
 
 		//':'
-		public Keyword getColonKeyword_1() { return cColonKeyword_1; }
+		public Keyword getColonKeyword_2() { return cColonKeyword_2; }
 
 		//referredTypedModel=[qvtimperative::ImperativeTypedModel|UnrestrictedName]
-		public Assignment getReferredTypedModelAssignment_2() { return cReferredTypedModelAssignment_2; }
+		public Assignment getReferredTypedModelAssignment_3() { return cReferredTypedModelAssignment_3; }
 
 		//[qvtimperative::ImperativeTypedModel|UnrestrictedName]
-		public CrossReference getReferredTypedModelImperativeTypedModelCrossReference_2_0() { return cReferredTypedModelImperativeTypedModelCrossReference_2_0; }
+		public CrossReference getReferredTypedModelImperativeTypedModelCrossReference_3_0() { return cReferredTypedModelImperativeTypedModelCrossReference_3_0; }
 
 		//UnrestrictedName
-		public RuleCall getReferredTypedModelImperativeTypedModelUnrestrictedNameParserRuleCall_2_0_1() { return cReferredTypedModelImperativeTypedModelUnrestrictedNameParserRuleCall_2_0_1; }
+		public RuleCall getReferredTypedModelImperativeTypedModelUnrestrictedNameParserRuleCall_3_0_1() { return cReferredTypedModelImperativeTypedModelUnrestrictedNameParserRuleCall_3_0_1; }
 
 		//name=UnrestrictedName
-		public Assignment getNameAssignment_3() { return cNameAssignment_3; }
+		public Assignment getNameAssignment_4() { return cNameAssignment_4; }
 
 		//UnrestrictedName
-		public RuleCall getNameUnrestrictedNameParserRuleCall_3_0() { return cNameUnrestrictedNameParserRuleCall_3_0; }
+		public RuleCall getNameUnrestrictedNameParserRuleCall_4_0() { return cNameUnrestrictedNameParserRuleCall_4_0; }
 
 		//':'
-		public Keyword getColonKeyword_4() { return cColonKeyword_4; }
+		public Keyword getColonKeyword_5() { return cColonKeyword_5; }
 
 		//ownedType=TypeExpCS
-		public Assignment getOwnedTypeAssignment_5() { return cOwnedTypeAssignment_5; }
+		public Assignment getOwnedTypeAssignment_6() { return cOwnedTypeAssignment_6; }
 
 		//TypeExpCS
-		public RuleCall getOwnedTypeTypeExpCSParserRuleCall_5_0() { return cOwnedTypeTypeExpCSParserRuleCall_5_0; }
+		public RuleCall getOwnedTypeTypeExpCSParserRuleCall_6_0() { return cOwnedTypeTypeExpCSParserRuleCall_6_0; }
 
-		//(':=' ownedInit=ExpCS)?
-		public Group getGroup_6() { return cGroup_6; }
+		//(':=' ownedExpression=ExpCS)?
+		public Group getGroup_7() { return cGroup_7; }
 
 		//':='
-		public Keyword getColonEqualsSignKeyword_6_0() { return cColonEqualsSignKeyword_6_0; }
+		public Keyword getColonEqualsSignKeyword_7_0() { return cColonEqualsSignKeyword_7_0; }
 
-		//ownedInit=ExpCS
-		public Assignment getOwnedInitAssignment_6_1() { return cOwnedInitAssignment_6_1; }
+		//ownedExpression=ExpCS
+		public Assignment getOwnedExpressionAssignment_7_1() { return cOwnedExpressionAssignment_7_1; }
 
 		//ExpCS
-		public RuleCall getOwnedInitExpCSParserRuleCall_6_1_0() { return cOwnedInitExpCSParserRuleCall_6_1_0; }
+		public RuleCall getOwnedExpressionExpCSParserRuleCall_7_1_0() { return cOwnedExpressionExpCSParserRuleCall_7_1_0; }
 
 		//';'
-		public Keyword getSemicolonKeyword_7() { return cSemicolonKeyword_7; }
+		public Keyword getSemicolonKeyword_8() { return cSemicolonKeyword_8; }
 	}
 
 	public class OutVariableCSElements extends AbstractParserRuleElementFinder {
@@ -1311,165 +1373,105 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	public class SetStatementCSElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvtd.xtext.qvtimperative.QVTimperative.SetStatementCS");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cIsNotifyAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final Keyword cIsNotifyNotifyKeyword_0_0 = (Keyword)cIsNotifyAssignment_0.eContents().get(0);
-		private final Keyword cSetKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Assignment cReferredVariableAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final CrossReference cReferredVariableVariableDeclarationCrossReference_2_0 = (CrossReference)cReferredVariableAssignment_2.eContents().get(0);
-		private final RuleCall cReferredVariableVariableDeclarationUnrestrictedNameParserRuleCall_2_0_1 = (RuleCall)cReferredVariableVariableDeclarationCrossReference_2_0.eContents().get(1);
-		private final Keyword cFullStopKeyword_3 = (Keyword)cGroup.eContents().get(3);
-		private final Assignment cReferredPropertyAssignment_4 = (Assignment)cGroup.eContents().get(4);
-		private final CrossReference cReferredPropertyPropertyCrossReference_4_0 = (CrossReference)cReferredPropertyAssignment_4.eContents().get(0);
-		private final RuleCall cReferredPropertyPropertyUnrestrictedNameParserRuleCall_4_0_1 = (RuleCall)cReferredPropertyPropertyCrossReference_4_0.eContents().get(1);
-		private final Keyword cColonEqualsSignKeyword_5 = (Keyword)cGroup.eContents().get(5);
-		private final Assignment cOwnedInitAssignment_6 = (Assignment)cGroup.eContents().get(6);
-		private final RuleCall cOwnedInitExpCSParserRuleCall_6_0 = (RuleCall)cOwnedInitAssignment_6.eContents().get(0);
-		private final Keyword cSemicolonKeyword_7 = (Keyword)cGroup.eContents().get(7);
+		private final Group cGroup_0 = (Group)cGroup.eContents().get(0);
+		private final Keyword cObserveKeyword_0_0 = (Keyword)cGroup_0.eContents().get(0);
+		private final Assignment cObservedPropertiesAssignment_0_1 = (Assignment)cGroup_0.eContents().get(1);
+		private final RuleCall cObservedPropertiesPathNameCSParserRuleCall_0_1_0 = (RuleCall)cObservedPropertiesAssignment_0_1.eContents().get(0);
+		private final Group cGroup_0_2 = (Group)cGroup_0.eContents().get(2);
+		private final Keyword cCommaKeyword_0_2_0 = (Keyword)cGroup_0_2.eContents().get(0);
+		private final Assignment cObservedPropertiesAssignment_0_2_1 = (Assignment)cGroup_0_2.eContents().get(1);
+		private final RuleCall cObservedPropertiesPathNameCSParserRuleCall_0_2_1_0 = (RuleCall)cObservedPropertiesAssignment_0_2_1.eContents().get(0);
+		private final Assignment cIsNotifyAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final Keyword cIsNotifyNotifyKeyword_1_0 = (Keyword)cIsNotifyAssignment_1.eContents().get(0);
+		private final Keyword cSetKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cReferredVariableAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final CrossReference cReferredVariableVariableDeclarationCrossReference_3_0 = (CrossReference)cReferredVariableAssignment_3.eContents().get(0);
+		private final RuleCall cReferredVariableVariableDeclarationUnrestrictedNameParserRuleCall_3_0_1 = (RuleCall)cReferredVariableVariableDeclarationCrossReference_3_0.eContents().get(1);
+		private final Keyword cFullStopKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Assignment cReferredPropertyAssignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final CrossReference cReferredPropertyPropertyCrossReference_5_0 = (CrossReference)cReferredPropertyAssignment_5.eContents().get(0);
+		private final RuleCall cReferredPropertyPropertyUnrestrictedNameParserRuleCall_5_0_1 = (RuleCall)cReferredPropertyPropertyCrossReference_5_0.eContents().get(1);
+		private final Keyword cColonEqualsSignKeyword_6 = (Keyword)cGroup.eContents().get(6);
+		private final Assignment cOwnedExpressionAssignment_7 = (Assignment)cGroup.eContents().get(7);
+		private final RuleCall cOwnedExpressionExpCSParserRuleCall_7_0 = (RuleCall)cOwnedExpressionAssignment_7.eContents().get(0);
+		private final Keyword cSemicolonKeyword_8 = (Keyword)cGroup.eContents().get(8);
 		
 		//SetStatementCS:
-		//	isNotify?='notify'? 'set' referredVariable=[pivot::VariableDeclaration|UnrestrictedName] '.'
-		//	referredProperty=[pivot::Property|UnrestrictedName] ':=' ownedInit=ExpCS ';';
+		//	('observe' observedProperties+=PathNameCS (',' observedProperties+=PathNameCS)*)? isNotify?='notify'? 'set'
+		//	referredVariable=[pivot::VariableDeclaration|UnrestrictedName] '.'
+		//	referredProperty=[pivot::Property|UnrestrictedName] ':=' ownedExpression=ExpCS ';';
 		@Override public ParserRule getRule() { return rule; }
 
-		//isNotify?='notify'? 'set' referredVariable=[pivot::VariableDeclaration|UnrestrictedName] '.'
-		//referredProperty=[pivot::Property|UnrestrictedName] ':=' ownedInit=ExpCS ';'
+		//('observe' observedProperties+=PathNameCS (',' observedProperties+=PathNameCS)*)? isNotify?='notify'? 'set'
+		//referredVariable=[pivot::VariableDeclaration|UnrestrictedName] '.' referredProperty=[pivot::Property|UnrestrictedName]
+		//':=' ownedExpression=ExpCS ';'
 		public Group getGroup() { return cGroup; }
 
-		//isNotify?='notify'?
-		public Assignment getIsNotifyAssignment_0() { return cIsNotifyAssignment_0; }
+		//('observe' observedProperties+=PathNameCS (',' observedProperties+=PathNameCS)*)?
+		public Group getGroup_0() { return cGroup_0; }
 
-		//'notify'
-		public Keyword getIsNotifyNotifyKeyword_0_0() { return cIsNotifyNotifyKeyword_0_0; }
+		//'observe'
+		public Keyword getObserveKeyword_0_0() { return cObserveKeyword_0_0; }
 
-		//'set'
-		public Keyword getSetKeyword_1() { return cSetKeyword_1; }
-
-		//referredVariable=[pivot::VariableDeclaration|UnrestrictedName]
-		public Assignment getReferredVariableAssignment_2() { return cReferredVariableAssignment_2; }
-
-		//[pivot::VariableDeclaration|UnrestrictedName]
-		public CrossReference getReferredVariableVariableDeclarationCrossReference_2_0() { return cReferredVariableVariableDeclarationCrossReference_2_0; }
-
-		//UnrestrictedName
-		public RuleCall getReferredVariableVariableDeclarationUnrestrictedNameParserRuleCall_2_0_1() { return cReferredVariableVariableDeclarationUnrestrictedNameParserRuleCall_2_0_1; }
-
-		//'.'
-		public Keyword getFullStopKeyword_3() { return cFullStopKeyword_3; }
-
-		//referredProperty=[pivot::Property|UnrestrictedName]
-		public Assignment getReferredPropertyAssignment_4() { return cReferredPropertyAssignment_4; }
-
-		//[pivot::Property|UnrestrictedName]
-		public CrossReference getReferredPropertyPropertyCrossReference_4_0() { return cReferredPropertyPropertyCrossReference_4_0; }
-
-		//UnrestrictedName
-		public RuleCall getReferredPropertyPropertyUnrestrictedNameParserRuleCall_4_0_1() { return cReferredPropertyPropertyUnrestrictedNameParserRuleCall_4_0_1; }
-
-		//':='
-		public Keyword getColonEqualsSignKeyword_5() { return cColonEqualsSignKeyword_5; }
-
-		//ownedInit=ExpCS
-		public Assignment getOwnedInitAssignment_6() { return cOwnedInitAssignment_6; }
-
-		//ExpCS
-		public RuleCall getOwnedInitExpCSParserRuleCall_6_0() { return cOwnedInitExpCSParserRuleCall_6_0; }
-
-		//';'
-		public Keyword getSemicolonKeyword_7() { return cSemicolonKeyword_7; }
-	}
-
-	public class SourceDomainCSElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvtd.xtext.qvtimperative.QVTimperative.SourceDomainCS");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cIsCheckAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final Keyword cIsCheckCheckKeyword_0_0 = (Keyword)cIsCheckAssignment_0.eContents().get(0);
-		private final Assignment cDirectionAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final CrossReference cDirectionImperativeTypedModelCrossReference_1_0 = (CrossReference)cDirectionAssignment_1.eContents().get(0);
-		private final RuleCall cDirectionImperativeTypedModelUnrestrictedNameParserRuleCall_1_0_1 = (RuleCall)cDirectionImperativeTypedModelCrossReference_1_0.eContents().get(1);
-		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
-		private final Keyword cLeftCurlyBracketKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
-		private final Group cGroup_2_1 = (Group)cGroup_2.eContents().get(1);
-		private final Keyword cCheckKeyword_2_1_0 = (Keyword)cGroup_2_1.eContents().get(0);
-		private final Assignment cCheckedPropertiesAssignment_2_1_1 = (Assignment)cGroup_2_1.eContents().get(1);
-		private final RuleCall cCheckedPropertiesPathNameCSParserRuleCall_2_1_1_0 = (RuleCall)cCheckedPropertiesAssignment_2_1_1.eContents().get(0);
-		private final Group cGroup_2_1_2 = (Group)cGroup_2_1.eContents().get(2);
-		private final Keyword cCommaKeyword_2_1_2_0 = (Keyword)cGroup_2_1_2.eContents().get(0);
-		private final Assignment cCheckedPropertiesAssignment_2_1_2_1 = (Assignment)cGroup_2_1_2.eContents().get(1);
-		private final RuleCall cCheckedPropertiesPathNameCSParserRuleCall_2_1_2_1_0 = (RuleCall)cCheckedPropertiesAssignment_2_1_2_1.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_2_2 = (Keyword)cGroup_2.eContents().get(2);
-		private final Keyword cLeftParenthesisKeyword_3 = (Keyword)cGroup.eContents().get(3);
-		private final Keyword cRightParenthesisKeyword_4 = (Keyword)cGroup.eContents().get(4);
-		private final Keyword cLeftCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
-		private final Keyword cRightCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
-		
-		//SourceDomainCS DomainCS:
-		//	isCheck?='check' direction=[qvtimperative::ImperativeTypedModel|UnrestrictedName] ('{' ('check'
-		//	checkedProperties+=PathNameCS (',' checkedProperties+=PathNameCS)*)? '}')? '(' ')' '{' '}'
-		@Override public ParserRule getRule() { return rule; }
-
-		//isCheck?='check' direction=[qvtimperative::ImperativeTypedModel|UnrestrictedName] ('{' ('check'
-		//checkedProperties+=PathNameCS (',' checkedProperties+=PathNameCS)*)? '}')? '(' ')' '{' '}'
-		public Group getGroup() { return cGroup; }
-
-		//isCheck?='check'
-		public Assignment getIsCheckAssignment_0() { return cIsCheckAssignment_0; }
-
-		//'check'
-		public Keyword getIsCheckCheckKeyword_0_0() { return cIsCheckCheckKeyword_0_0; }
-
-		//direction=[qvtimperative::ImperativeTypedModel|UnrestrictedName]
-		public Assignment getDirectionAssignment_1() { return cDirectionAssignment_1; }
-
-		//[qvtimperative::ImperativeTypedModel|UnrestrictedName]
-		public CrossReference getDirectionImperativeTypedModelCrossReference_1_0() { return cDirectionImperativeTypedModelCrossReference_1_0; }
-
-		//UnrestrictedName
-		public RuleCall getDirectionImperativeTypedModelUnrestrictedNameParserRuleCall_1_0_1() { return cDirectionImperativeTypedModelUnrestrictedNameParserRuleCall_1_0_1; }
-
-		//('{' ('check' checkedProperties+=PathNameCS (',' checkedProperties+=PathNameCS)*)? '}')?
-		public Group getGroup_2() { return cGroup_2; }
-
-		//'{'
-		public Keyword getLeftCurlyBracketKeyword_2_0() { return cLeftCurlyBracketKeyword_2_0; }
-
-		//('check' checkedProperties+=PathNameCS (',' checkedProperties+=PathNameCS)*)?
-		public Group getGroup_2_1() { return cGroup_2_1; }
-
-		//'check'
-		public Keyword getCheckKeyword_2_1_0() { return cCheckKeyword_2_1_0; }
-
-		//checkedProperties+=PathNameCS
-		public Assignment getCheckedPropertiesAssignment_2_1_1() { return cCheckedPropertiesAssignment_2_1_1; }
+		//observedProperties+=PathNameCS
+		public Assignment getObservedPropertiesAssignment_0_1() { return cObservedPropertiesAssignment_0_1; }
 
 		//PathNameCS
-		public RuleCall getCheckedPropertiesPathNameCSParserRuleCall_2_1_1_0() { return cCheckedPropertiesPathNameCSParserRuleCall_2_1_1_0; }
+		public RuleCall getObservedPropertiesPathNameCSParserRuleCall_0_1_0() { return cObservedPropertiesPathNameCSParserRuleCall_0_1_0; }
 
-		//(',' checkedProperties+=PathNameCS)*
-		public Group getGroup_2_1_2() { return cGroup_2_1_2; }
+		//(',' observedProperties+=PathNameCS)*
+		public Group getGroup_0_2() { return cGroup_0_2; }
 
 		//','
-		public Keyword getCommaKeyword_2_1_2_0() { return cCommaKeyword_2_1_2_0; }
+		public Keyword getCommaKeyword_0_2_0() { return cCommaKeyword_0_2_0; }
 
-		//checkedProperties+=PathNameCS
-		public Assignment getCheckedPropertiesAssignment_2_1_2_1() { return cCheckedPropertiesAssignment_2_1_2_1; }
+		//observedProperties+=PathNameCS
+		public Assignment getObservedPropertiesAssignment_0_2_1() { return cObservedPropertiesAssignment_0_2_1; }
 
 		//PathNameCS
-		public RuleCall getCheckedPropertiesPathNameCSParserRuleCall_2_1_2_1_0() { return cCheckedPropertiesPathNameCSParserRuleCall_2_1_2_1_0; }
+		public RuleCall getObservedPropertiesPathNameCSParserRuleCall_0_2_1_0() { return cObservedPropertiesPathNameCSParserRuleCall_0_2_1_0; }
 
-		//'}'
-		public Keyword getRightCurlyBracketKeyword_2_2() { return cRightCurlyBracketKeyword_2_2; }
+		//isNotify?='notify'?
+		public Assignment getIsNotifyAssignment_1() { return cIsNotifyAssignment_1; }
 
-		//'('
-		public Keyword getLeftParenthesisKeyword_3() { return cLeftParenthesisKeyword_3; }
+		//'notify'
+		public Keyword getIsNotifyNotifyKeyword_1_0() { return cIsNotifyNotifyKeyword_1_0; }
 
-		//')'
-		public Keyword getRightParenthesisKeyword_4() { return cRightParenthesisKeyword_4; }
+		//'set'
+		public Keyword getSetKeyword_2() { return cSetKeyword_2; }
 
-		//'{'
-		public Keyword getLeftCurlyBracketKeyword_5() { return cLeftCurlyBracketKeyword_5; }
+		//referredVariable=[pivot::VariableDeclaration|UnrestrictedName]
+		public Assignment getReferredVariableAssignment_3() { return cReferredVariableAssignment_3; }
 
-		//'}'
-		public Keyword getRightCurlyBracketKeyword_6() { return cRightCurlyBracketKeyword_6; }
+		//[pivot::VariableDeclaration|UnrestrictedName]
+		public CrossReference getReferredVariableVariableDeclarationCrossReference_3_0() { return cReferredVariableVariableDeclarationCrossReference_3_0; }
+
+		//UnrestrictedName
+		public RuleCall getReferredVariableVariableDeclarationUnrestrictedNameParserRuleCall_3_0_1() { return cReferredVariableVariableDeclarationUnrestrictedNameParserRuleCall_3_0_1; }
+
+		//'.'
+		public Keyword getFullStopKeyword_4() { return cFullStopKeyword_4; }
+
+		//referredProperty=[pivot::Property|UnrestrictedName]
+		public Assignment getReferredPropertyAssignment_5() { return cReferredPropertyAssignment_5; }
+
+		//[pivot::Property|UnrestrictedName]
+		public CrossReference getReferredPropertyPropertyCrossReference_5_0() { return cReferredPropertyPropertyCrossReference_5_0; }
+
+		//UnrestrictedName
+		public RuleCall getReferredPropertyPropertyUnrestrictedNameParserRuleCall_5_0_1() { return cReferredPropertyPropertyUnrestrictedNameParserRuleCall_5_0_1; }
+
+		//':='
+		public Keyword getColonEqualsSignKeyword_6() { return cColonEqualsSignKeyword_6; }
+
+		//ownedExpression=ExpCS
+		public Assignment getOwnedExpressionAssignment_7() { return cOwnedExpressionAssignment_7; }
+
+		//ExpCS
+		public RuleCall getOwnedExpressionExpCSParserRuleCall_7_0() { return cOwnedExpressionExpCSParserRuleCall_7_0; }
+
+		//';'
+		public Keyword getSemicolonKeyword_8() { return cSemicolonKeyword_8; }
 	}
 
 	public class TransformationCSElements extends AbstractParserRuleElementFinder {
@@ -1526,100 +1528,6 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_5() { return cRightCurlyBracketKeyword_5; }
-	}
-
-	public class TargetDomainCSElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvtd.xtext.qvtimperative.QVTimperative.TargetDomainCS");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cIsEnforceAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final Keyword cIsEnforceEnforceKeyword_0_0 = (Keyword)cIsEnforceAssignment_0.eContents().get(0);
-		private final Assignment cDirectionAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final CrossReference cDirectionImperativeTypedModelCrossReference_1_0 = (CrossReference)cDirectionAssignment_1.eContents().get(0);
-		private final RuleCall cDirectionImperativeTypedModelUnrestrictedNameParserRuleCall_1_0_1 = (RuleCall)cDirectionImperativeTypedModelCrossReference_1_0.eContents().get(1);
-		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
-		private final Keyword cLeftCurlyBracketKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
-		private final Group cGroup_2_1 = (Group)cGroup_2.eContents().get(1);
-		private final Keyword cCheckKeyword_2_1_0 = (Keyword)cGroup_2_1.eContents().get(0);
-		private final Assignment cCheckedPropertiesAssignment_2_1_1 = (Assignment)cGroup_2_1.eContents().get(1);
-		private final RuleCall cCheckedPropertiesPathNameCSParserRuleCall_2_1_1_0 = (RuleCall)cCheckedPropertiesAssignment_2_1_1.eContents().get(0);
-		private final Group cGroup_2_1_2 = (Group)cGroup_2_1.eContents().get(2);
-		private final Keyword cCommaKeyword_2_1_2_0 = (Keyword)cGroup_2_1_2.eContents().get(0);
-		private final Assignment cCheckedPropertiesAssignment_2_1_2_1 = (Assignment)cGroup_2_1_2.eContents().get(1);
-		private final RuleCall cCheckedPropertiesPathNameCSParserRuleCall_2_1_2_1_0 = (RuleCall)cCheckedPropertiesAssignment_2_1_2_1.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_2_2 = (Keyword)cGroup_2.eContents().get(2);
-		private final Keyword cLeftParenthesisKeyword_3 = (Keyword)cGroup.eContents().get(3);
-		private final Keyword cRightParenthesisKeyword_4 = (Keyword)cGroup.eContents().get(4);
-		private final Keyword cLeftCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
-		private final Keyword cRightCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
-		
-		//TargetDomainCS DomainCS:
-		//	isEnforce?='enforce' direction=[qvtimperative::ImperativeTypedModel|UnrestrictedName] ('{' ('check'
-		//	checkedProperties+=PathNameCS (',' checkedProperties+=PathNameCS)*)? '}')? '(' ')' '{' '}'
-		@Override public ParserRule getRule() { return rule; }
-
-		//isEnforce?='enforce' direction=[qvtimperative::ImperativeTypedModel|UnrestrictedName] ('{' ('check'
-		//checkedProperties+=PathNameCS (',' checkedProperties+=PathNameCS)*)? '}')? '(' ')' '{' '}'
-		public Group getGroup() { return cGroup; }
-
-		//isEnforce?='enforce'
-		public Assignment getIsEnforceAssignment_0() { return cIsEnforceAssignment_0; }
-
-		//'enforce'
-		public Keyword getIsEnforceEnforceKeyword_0_0() { return cIsEnforceEnforceKeyword_0_0; }
-
-		//direction=[qvtimperative::ImperativeTypedModel|UnrestrictedName]
-		public Assignment getDirectionAssignment_1() { return cDirectionAssignment_1; }
-
-		//[qvtimperative::ImperativeTypedModel|UnrestrictedName]
-		public CrossReference getDirectionImperativeTypedModelCrossReference_1_0() { return cDirectionImperativeTypedModelCrossReference_1_0; }
-
-		//UnrestrictedName
-		public RuleCall getDirectionImperativeTypedModelUnrestrictedNameParserRuleCall_1_0_1() { return cDirectionImperativeTypedModelUnrestrictedNameParserRuleCall_1_0_1; }
-
-		//('{' ('check' checkedProperties+=PathNameCS (',' checkedProperties+=PathNameCS)*)? '}')?
-		public Group getGroup_2() { return cGroup_2; }
-
-		//'{'
-		public Keyword getLeftCurlyBracketKeyword_2_0() { return cLeftCurlyBracketKeyword_2_0; }
-
-		//('check' checkedProperties+=PathNameCS (',' checkedProperties+=PathNameCS)*)?
-		public Group getGroup_2_1() { return cGroup_2_1; }
-
-		//'check'
-		public Keyword getCheckKeyword_2_1_0() { return cCheckKeyword_2_1_0; }
-
-		//checkedProperties+=PathNameCS
-		public Assignment getCheckedPropertiesAssignment_2_1_1() { return cCheckedPropertiesAssignment_2_1_1; }
-
-		//PathNameCS
-		public RuleCall getCheckedPropertiesPathNameCSParserRuleCall_2_1_1_0() { return cCheckedPropertiesPathNameCSParserRuleCall_2_1_1_0; }
-
-		//(',' checkedProperties+=PathNameCS)*
-		public Group getGroup_2_1_2() { return cGroup_2_1_2; }
-
-		//','
-		public Keyword getCommaKeyword_2_1_2_0() { return cCommaKeyword_2_1_2_0; }
-
-		//checkedProperties+=PathNameCS
-		public Assignment getCheckedPropertiesAssignment_2_1_2_1() { return cCheckedPropertiesAssignment_2_1_2_1; }
-
-		//PathNameCS
-		public RuleCall getCheckedPropertiesPathNameCSParserRuleCall_2_1_2_1_0() { return cCheckedPropertiesPathNameCSParserRuleCall_2_1_2_1_0; }
-
-		//'}'
-		public Keyword getRightCurlyBracketKeyword_2_2() { return cRightCurlyBracketKeyword_2_2; }
-
-		//'('
-		public Keyword getLeftParenthesisKeyword_3() { return cLeftParenthesisKeyword_3; }
-
-		//')'
-		public Keyword getRightParenthesisKeyword_4() { return cRightParenthesisKeyword_4; }
-
-		//'{'
-		public Keyword getLeftCurlyBracketKeyword_5() { return cLeftCurlyBracketKeyword_5; }
-
-		//'}'
-		public Keyword getRightCurlyBracketKeyword_6() { return cRightCurlyBracketKeyword_6; }
 	}
 
 	public class UnrestrictedNameElements extends AbstractParserRuleElementFinder {
@@ -1708,9 +1616,7 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	private final QueryCSElements pQueryCS;
 	private final ScopeNameCSElements pScopeNameCS;
 	private final SetStatementCSElements pSetStatementCS;
-	private final SourceDomainCSElements pSourceDomainCS;
 	private final TransformationCSElements pTransformationCS;
-	private final TargetDomainCSElements pTargetDomainCS;
 	private final UnrestrictedNameElements pUnrestrictedName;
 	
 	private final Grammar grammar;
@@ -1753,9 +1659,7 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		this.pQueryCS = new QueryCSElements();
 		this.pScopeNameCS = new ScopeNameCSElements();
 		this.pSetStatementCS = new SetStatementCSElements();
-		this.pSourceDomainCS = new SourceDomainCSElements();
 		this.pTransformationCS = new TransformationCSElements();
-		this.pTargetDomainCS = new TargetDomainCSElements();
 		this.pUnrestrictedName = new UnrestrictedNameElements();
 	}
 	
@@ -1806,7 +1710,8 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//AddStatementCS:
-	//	'add' targetVariable=[qvtimperative::ConnectionVariable|UnrestrictedName] '+=' ownedExpression=ExpCS ';';
+	//	('observe' observedProperties+=PathNameCS (',' observedProperties+=PathNameCS)*)? 'add'
+	//	targetVariable=[qvtimperative::ConnectionVariable|UnrestrictedName] '+=' ownedExpression=ExpCS ';';
 	public AddStatementCSElements getAddStatementCSAccess() {
 		return pAddStatementCS;
 	}
@@ -1846,7 +1751,8 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//DeclareStatementCS:
-	//	isChecked?='check'? 'var' name=UnrestrictedName (':' ownedType=TypeExpCS)? ':=' ownedInit=ExpCS ';';
+	//	('observe' observedProperties+=PathNameCS (',' observedProperties+=PathNameCS)*)? isChecked?='check'? 'var'
+	//	name=UnrestrictedName (':' ownedType=TypeExpCS)? ':=' ownedExpression=ExpCS ';';
 	public DeclareStatementCSElements getDeclareStatementCSAccess() {
 		return pDeclareStatementCS;
 	}
@@ -1857,9 +1763,7 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 
 	//DirectionCS:
 	//	{DirectionCS} (isChecked?='check' | isEnforced?='enforce')? name=UnrestrictedName? 'imports'
-	//	imports+=[pivot::Package|UnrestrictedName] (',' imports+=[pivot::Package|UnrestrictedName])* ('uses'
-	//	uses+=[qvtimperative::ImperativeDomain|UnrestrictedName] (','
-	//	uses+=[qvtimperative::ImperativeDomain|UnrestrictedName])*)?;
+	//	imports+=[pivot::Package|UnrestrictedName] (',' imports+=[pivot::Package|UnrestrictedName])*;
 	public DirectionCSElements getDirectionCSAccess() {
 		return pDirectionCS;
 	}
@@ -1910,9 +1814,9 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//MappingCS:
-	//	{MappingCS} 'map' name=UnrestrictedName ('in' ownedInPathName=PathNameCS)? '{' ownedDomains+=(SourceDomainCS |
-	//	TargetDomainCS)* (ownedGuardVariables+=GuardVariableCS | ownedInoutVariables+=InoutVariableCS)*
-	//	ownedStatements+=GuardStatementCS* ownedStatements+=CommitStatementCS* ownedStatements+=ControlStatementCS* '}';
+	//	{MappingCS} 'map' name=UnrestrictedName ('in' ownedInPathName=PathNameCS)? '{' (ownedGuardVariables+=GuardVariableCS
+	//	| ownedInoutVariables+=InoutVariableCS)* ownedStatements+=GuardStatementCS* ownedStatements+=CommitStatementCS*
+	//	ownedStatements+=ControlStatementCS* '}';
 	public MappingCSElements getMappingCSAccess() {
 		return pMappingCS;
 	}
@@ -1932,7 +1836,7 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//MappingCallBindingCS:
-	//	referredVariable=[pivot::VariableDeclaration|UnrestrictedName] (':=' | isPolled?='?=') ownedValue=ExpCS ';';
+	//	referredVariable=[pivot::VariableDeclaration|UnrestrictedName] ':=' ownedValue=ExpCS ';';
 	public MappingCallBindingCSElements getMappingCallBindingCSAccess() {
 		return pMappingCallBindingCS;
 	}
@@ -1942,8 +1846,8 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//MappingLoopCS:
-	//	'for' ownedIterator=MappingIteratorCS 'in' ownedInExpression=ExpCS '{' ownedMappingStatements+=ControlStatementCS+
-	//	'}';
+	//	('observe' observedProperties+=PathNameCS (',' observedProperties+=PathNameCS)*)? 'for'
+	//	ownedIterator=MappingIteratorCS 'in' ownedInExpression=ExpCS '{' ownedMappingStatements+=ControlStatementCS+ '}';
 	public MappingLoopCSElements getMappingLoopCSAccess() {
 		return pMappingLoopCS;
 	}
@@ -1963,8 +1867,9 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//NewStatementCS:
-	//	'new' ':' referredTypedModel=[qvtimperative::ImperativeTypedModel|UnrestrictedName] name=UnrestrictedName ':'
-	//	ownedType=TypeExpCS (':=' ownedInit=ExpCS)? ';';
+	//	('observe' observedProperties+=PathNameCS (',' observedProperties+=PathNameCS)*)? 'new' ':'
+	//	referredTypedModel=[qvtimperative::ImperativeTypedModel|UnrestrictedName] name=UnrestrictedName ':'
+	//	ownedType=TypeExpCS (':=' ownedExpression=ExpCS)? ';';
 	public NewStatementCSElements getNewStatementCSAccess() {
 		return pNewStatementCS;
 	}
@@ -2027,25 +1932,15 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//SetStatementCS:
-	//	isNotify?='notify'? 'set' referredVariable=[pivot::VariableDeclaration|UnrestrictedName] '.'
-	//	referredProperty=[pivot::Property|UnrestrictedName] ':=' ownedInit=ExpCS ';';
+	//	('observe' observedProperties+=PathNameCS (',' observedProperties+=PathNameCS)*)? isNotify?='notify'? 'set'
+	//	referredVariable=[pivot::VariableDeclaration|UnrestrictedName] '.'
+	//	referredProperty=[pivot::Property|UnrestrictedName] ':=' ownedExpression=ExpCS ';';
 	public SetStatementCSElements getSetStatementCSAccess() {
 		return pSetStatementCS;
 	}
 	
 	public ParserRule getSetStatementCSRule() {
 		return getSetStatementCSAccess().getRule();
-	}
-
-	//SourceDomainCS DomainCS:
-	//	isCheck?='check' direction=[qvtimperative::ImperativeTypedModel|UnrestrictedName] ('{' ('check'
-	//	checkedProperties+=PathNameCS (',' checkedProperties+=PathNameCS)*)? '}')? '(' ')' '{' '}'
-	public SourceDomainCSElements getSourceDomainCSAccess() {
-		return pSourceDomainCS;
-	}
-	
-	public ParserRule getSourceDomainCSRule() {
-		return getSourceDomainCSAccess().getRule();
 	}
 
 	//TransformationCS:
@@ -2056,17 +1951,6 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getTransformationCSRule() {
 		return getTransformationCSAccess().getRule();
-	}
-
-	//TargetDomainCS DomainCS:
-	//	isEnforce?='enforce' direction=[qvtimperative::ImperativeTypedModel|UnrestrictedName] ('{' ('check'
-	//	checkedProperties+=PathNameCS (',' checkedProperties+=PathNameCS)*)? '}')? '(' ')' '{' '}'
-	public TargetDomainCSElements getTargetDomainCSAccess() {
-		return pTargetDomainCS;
-	}
-	
-	public ParserRule getTargetDomainCSRule() {
-		return getTargetDomainCSAccess().getRule();
 	}
 
 	//UnrestrictedName:

@@ -29,36 +29,36 @@ import org.eclipse.ocl.pivot.OCLExpression;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.OutConnectionVariable#getOwnedInit <em>Owned Init</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.OutConnectionVariable#getOwnedExpression <em>Owned Expression</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getOutConnectionVariable()
  * @generated
  */
-public interface OutConnectionVariable extends ConnectionVariable, VariableStatement {
+public interface OutConnectionVariable extends ConnectionVariable, VariableStatement, ObservableStatement {
 	/**
-	 * Returns the value of the '<em><b>Owned Init</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Owned Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Owned Init</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Owned Expression</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Owned Init</em>' containment reference.
-	 * @see #setOwnedInit(OCLExpression)
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getOutConnectionVariable_OwnedInit()
+	 * @return the value of the '<em>Owned Expression</em>' containment reference.
+	 * @see #setOwnedExpression(OCLExpression)
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getOutConnectionVariable_OwnedExpression()
 	 * @generated
 	 */
-	OCLExpression getOwnedInit();
+	OCLExpression getOwnedExpression();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtimperative.OutConnectionVariable#getOwnedInit <em>Owned Init</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtimperative.OutConnectionVariable#getOwnedExpression <em>Owned Expression</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Owned Init</em>' containment reference.
-	 * @see #getOwnedInit()
+	 * @param value the new value of the '<em>Owned Expression</em>' containment reference.
+	 * @see #getOwnedExpression()
 	 * @generated
 	 */
-	void setOwnedInit(OCLExpression value);
+	void setOwnedExpression(OCLExpression value);
 
 } // OutConnectionVariable

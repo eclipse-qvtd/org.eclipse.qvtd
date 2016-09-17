@@ -34,21 +34,21 @@ import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.CheckStatementImpl#getOwnedCondition <em>Owned Condition</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.CheckStatementImpl#getOwnedExpression <em>Owned Expression</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class CheckStatementImpl extends StatementImpl implements CheckStatement {
+public class CheckStatementImpl extends ObservableStatementImpl implements CheckStatement {
 	/**
-	 * The cached value of the '{@link #getOwnedCondition() <em>Owned Condition</em>}' containment reference.
+	 * The cached value of the '{@link #getOwnedExpression() <em>Owned Expression</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getOwnedCondition()
+	 * @see #getOwnedExpression()
 	 * @generated
 	 * @ordered
 	 */
-	protected OCLExpression ownedCondition;
+	protected OCLExpression ownedExpression;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -74,8 +74,8 @@ public class CheckStatementImpl extends StatementImpl implements CheckStatement 
 	 * @generated
 	 */
 	@Override
-	public OCLExpression getOwnedCondition() {
-		return ownedCondition;
+	public OCLExpression getOwnedExpression() {
+		return ownedExpression;
 	}
 
 	/**
@@ -83,11 +83,11 @@ public class CheckStatementImpl extends StatementImpl implements CheckStatement 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetOwnedCondition(OCLExpression newOwnedCondition, NotificationChain msgs) {
-		OCLExpression oldOwnedCondition = ownedCondition;
-		ownedCondition = newOwnedCondition;
+	public NotificationChain basicSetOwnedExpression(OCLExpression newOwnedExpression, NotificationChain msgs) {
+		OCLExpression oldOwnedExpression = ownedExpression;
+		ownedExpression = newOwnedExpression;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTimperativePackage.CHECK_STATEMENT__OWNED_CONDITION, oldOwnedCondition, newOwnedCondition);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTimperativePackage.CHECK_STATEMENT__OWNED_EXPRESSION, oldOwnedExpression, newOwnedExpression);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -99,18 +99,18 @@ public class CheckStatementImpl extends StatementImpl implements CheckStatement 
 	 * @generated
 	 */
 	@Override
-	public void setOwnedCondition(OCLExpression newOwnedCondition) {
-		if (newOwnedCondition != ownedCondition) {
+	public void setOwnedExpression(OCLExpression newOwnedExpression) {
+		if (newOwnedExpression != ownedExpression) {
 			NotificationChain msgs = null;
-			if (ownedCondition != null)
-				msgs = ((InternalEObject)ownedCondition).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTimperativePackage.CHECK_STATEMENT__OWNED_CONDITION, null, msgs);
-			if (newOwnedCondition != null)
-				msgs = ((InternalEObject)newOwnedCondition).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTimperativePackage.CHECK_STATEMENT__OWNED_CONDITION, null, msgs);
-			msgs = basicSetOwnedCondition(newOwnedCondition, msgs);
+			if (ownedExpression != null)
+				msgs = ((InternalEObject)ownedExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTimperativePackage.CHECK_STATEMENT__OWNED_EXPRESSION, null, msgs);
+			if (newOwnedExpression != null)
+				msgs = ((InternalEObject)newOwnedExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTimperativePackage.CHECK_STATEMENT__OWNED_EXPRESSION, null, msgs);
+			msgs = basicSetOwnedExpression(newOwnedExpression, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.CHECK_STATEMENT__OWNED_CONDITION, newOwnedCondition, newOwnedCondition));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.CHECK_STATEMENT__OWNED_EXPRESSION, newOwnedExpression, newOwnedExpression));
 	}
 
 	/**
@@ -121,8 +121,8 @@ public class CheckStatementImpl extends StatementImpl implements CheckStatement 
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTimperativePackage.CHECK_STATEMENT__OWNED_CONDITION:
-				return basicSetOwnedCondition(null, msgs);
+			case QVTimperativePackage.CHECK_STATEMENT__OWNED_EXPRESSION:
+				return basicSetOwnedExpression(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -135,8 +135,8 @@ public class CheckStatementImpl extends StatementImpl implements CheckStatement 
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTimperativePackage.CHECK_STATEMENT__OWNED_CONDITION:
-				return getOwnedCondition();
+			case QVTimperativePackage.CHECK_STATEMENT__OWNED_EXPRESSION:
+				return getOwnedExpression();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -149,8 +149,8 @@ public class CheckStatementImpl extends StatementImpl implements CheckStatement 
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTimperativePackage.CHECK_STATEMENT__OWNED_CONDITION:
-				setOwnedCondition((OCLExpression)newValue);
+			case QVTimperativePackage.CHECK_STATEMENT__OWNED_EXPRESSION:
+				setOwnedExpression((OCLExpression)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -164,8 +164,8 @@ public class CheckStatementImpl extends StatementImpl implements CheckStatement 
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTimperativePackage.CHECK_STATEMENT__OWNED_CONDITION:
-				setOwnedCondition((OCLExpression)null);
+			case QVTimperativePackage.CHECK_STATEMENT__OWNED_EXPRESSION:
+				setOwnedExpression((OCLExpression)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -179,8 +179,8 @@ public class CheckStatementImpl extends StatementImpl implements CheckStatement 
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTimperativePackage.CHECK_STATEMENT__OWNED_CONDITION:
-				return ownedCondition != null;
+			case QVTimperativePackage.CHECK_STATEMENT__OWNED_EXPRESSION:
+				return ownedExpression != null;
 		}
 		return super.eIsSet(featureID);
 	}

@@ -24,7 +24,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.xtext.basecs.PathNameCS;
 import org.eclipse.ocl.xtext.basecs.impl.NamedElementCSImpl;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
-import org.eclipse.qvtd.xtext.qvtimperativecs.DomainCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.GuardVariableCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.InoutVariableCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS;
@@ -40,7 +39,6 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCSImpl#getOwnedDomains <em>Owned Domains</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCSImpl#getOwnedInPathName <em>Owned In Path Name</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCSImpl#getOwnedGuardVariables <em>Owned Guard Variables</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCSImpl#getOwnedInoutVariables <em>Owned Inout Variables</em>}</li>
@@ -50,15 +48,6 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
  * @generated
  */
 public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
-	/**
-	 * The cached value of the '{@link #getOwnedDomains() <em>Owned Domains</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getOwnedDomains()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<DomainCS> ownedDomains;
 	/**
 	 * The cached value of the '{@link #getOwnedInPathName() <em>Owned In Path Name</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -120,19 +109,6 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 	 * @generated
 	 */
 	@Override
-	public EList<DomainCS> getOwnedDomains() {
-		if (ownedDomains == null) {
-			ownedDomains = new EObjectContainmentEList<DomainCS>(DomainCS.class, this, QVTimperativeCSPackage.MAPPING_CS__OWNED_DOMAINS);
-		}
-		return ownedDomains;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public PathNameCS getOwnedInPathName() {
 		return ownedInPathName;
 	}
@@ -177,6 +153,7 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<GuardVariableCS> getOwnedGuardVariables() {
 		if (ownedGuardVariables == null) {
 			ownedGuardVariables = new EObjectContainmentEList<GuardVariableCS>(GuardVariableCS.class, this, QVTimperativeCSPackage.MAPPING_CS__OWNED_GUARD_VARIABLES);
@@ -218,8 +195,6 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.MAPPING_CS__OWNED_DOMAINS:
-				return ((InternalEList<?>)getOwnedDomains()).basicRemove(otherEnd, msgs);
 			case QVTimperativeCSPackage.MAPPING_CS__OWNED_IN_PATH_NAME:
 				return basicSetOwnedInPathName(null, msgs);
 			case QVTimperativeCSPackage.MAPPING_CS__OWNED_GUARD_VARIABLES:
@@ -240,8 +215,6 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.MAPPING_CS__OWNED_DOMAINS:
-				return getOwnedDomains();
 			case QVTimperativeCSPackage.MAPPING_CS__OWNED_IN_PATH_NAME:
 				return getOwnedInPathName();
 			case QVTimperativeCSPackage.MAPPING_CS__OWNED_GUARD_VARIABLES:
@@ -263,10 +236,6 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.MAPPING_CS__OWNED_DOMAINS:
-				getOwnedDomains().clear();
-				getOwnedDomains().addAll((Collection<? extends DomainCS>)newValue);
-				return;
 			case QVTimperativeCSPackage.MAPPING_CS__OWNED_IN_PATH_NAME:
 				setOwnedInPathName((PathNameCS)newValue);
 				return;
@@ -294,9 +263,6 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.MAPPING_CS__OWNED_DOMAINS:
-				getOwnedDomains().clear();
-				return;
 			case QVTimperativeCSPackage.MAPPING_CS__OWNED_IN_PATH_NAME:
 				setOwnedInPathName((PathNameCS)null);
 				return;
@@ -321,8 +287,6 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.MAPPING_CS__OWNED_DOMAINS:
-				return ownedDomains != null && !ownedDomains.isEmpty();
 			case QVTimperativeCSPackage.MAPPING_CS__OWNED_IN_PATH_NAME:
 				return ownedInPathName != null;
 			case QVTimperativeCSPackage.MAPPING_CS__OWNED_GUARD_VARIABLES:

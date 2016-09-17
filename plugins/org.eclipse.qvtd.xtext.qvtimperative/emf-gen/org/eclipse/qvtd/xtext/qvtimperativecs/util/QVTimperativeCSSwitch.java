@@ -93,6 +93,7 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 				AddStatementCS addStatementCS = (AddStatementCS)theEObject;
 				T result = caseAddStatementCS(addStatementCS);
 				if (result == null) result = caseMappingStatementCS(addStatementCS);
+				if (result == null) result = caseObservableStatementCS(addStatementCS);
 				if (result == null) result = caseStatementCS(addStatementCS);
 				if (result == null) result = caseModelElementCS(addStatementCS);
 				if (result == null) result = casePivotableElementCS(addStatementCS);
@@ -105,6 +106,7 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 			case QVTimperativeCSPackage.CHECK_STATEMENT_CS: {
 				CheckStatementCS checkStatementCS = (CheckStatementCS)theEObject;
 				T result = caseCheckStatementCS(checkStatementCS);
+				if (result == null) result = caseObservableStatementCS(checkStatementCS);
 				if (result == null) result = caseStatementCS(checkStatementCS);
 				if (result == null) result = caseModelElementCS(checkStatementCS);
 				if (result == null) result = casePivotableElementCS(checkStatementCS);
@@ -118,8 +120,9 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 				DeclareStatementCS declareStatementCS = (DeclareStatementCS)theEObject;
 				T result = caseDeclareStatementCS(declareStatementCS);
 				if (result == null) result = caseTypedElementCS(declareStatementCS);
-				if (result == null) result = caseStatementCS(declareStatementCS);
+				if (result == null) result = caseObservableStatementCS(declareStatementCS);
 				if (result == null) result = caseNamedElementCS(declareStatementCS);
+				if (result == null) result = caseStatementCS(declareStatementCS);
 				if (result == null) result = caseModelElementCS(declareStatementCS);
 				if (result == null) result = caseNameable(declareStatementCS);
 				if (result == null) result = casePivotableElementCS(declareStatementCS);
@@ -139,19 +142,6 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = caseElementCS(directionCS);
 				if (result == null) result = casePivotable(directionCS);
 				if (result == null) result = caseVisitableCS(directionCS);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case QVTimperativeCSPackage.DOMAIN_CS: {
-				DomainCS domainCS = (DomainCS)theEObject;
-				T result = caseDomainCS(domainCS);
-				if (result == null) result = caseNamedElementCS(domainCS);
-				if (result == null) result = caseModelElementCS(domainCS);
-				if (result == null) result = caseNameable(domainCS);
-				if (result == null) result = casePivotableElementCS(domainCS);
-				if (result == null) result = caseElementCS(domainCS);
-				if (result == null) result = casePivotable(domainCS);
-				if (result == null) result = caseVisitableCS(domainCS);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -225,6 +215,7 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 				MappingLoopCS mappingLoopCS = (MappingLoopCS)theEObject;
 				T result = caseMappingLoopCS(mappingLoopCS);
 				if (result == null) result = caseMappingStatementCS(mappingLoopCS);
+				if (result == null) result = caseObservableStatementCS(mappingLoopCS);
 				if (result == null) result = caseStatementCS(mappingLoopCS);
 				if (result == null) result = caseModelElementCS(mappingLoopCS);
 				if (result == null) result = casePivotableElementCS(mappingLoopCS);
@@ -250,14 +241,27 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 				NewStatementCS newStatementCS = (NewStatementCS)theEObject;
 				T result = caseNewStatementCS(newStatementCS);
 				if (result == null) result = caseTypedElementCS(newStatementCS);
-				if (result == null) result = caseStatementCS(newStatementCS);
+				if (result == null) result = caseObservableStatementCS(newStatementCS);
 				if (result == null) result = caseNamedElementCS(newStatementCS);
+				if (result == null) result = caseStatementCS(newStatementCS);
 				if (result == null) result = caseModelElementCS(newStatementCS);
 				if (result == null) result = caseNameable(newStatementCS);
 				if (result == null) result = casePivotableElementCS(newStatementCS);
 				if (result == null) result = caseElementCS(newStatementCS);
 				if (result == null) result = casePivotable(newStatementCS);
 				if (result == null) result = caseVisitableCS(newStatementCS);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case QVTimperativeCSPackage.OBSERVABLE_STATEMENT_CS: {
+				ObservableStatementCS observableStatementCS = (ObservableStatementCS)theEObject;
+				T result = caseObservableStatementCS(observableStatementCS);
+				if (result == null) result = caseStatementCS(observableStatementCS);
+				if (result == null) result = caseModelElementCS(observableStatementCS);
+				if (result == null) result = casePivotableElementCS(observableStatementCS);
+				if (result == null) result = caseElementCS(observableStatementCS);
+				if (result == null) result = casePivotable(observableStatementCS);
+				if (result == null) result = caseVisitableCS(observableStatementCS);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -307,6 +311,7 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 			case QVTimperativeCSPackage.SET_STATEMENT_CS: {
 				SetStatementCS setStatementCS = (SetStatementCS)theEObject;
 				T result = caseSetStatementCS(setStatementCS);
+				if (result == null) result = caseObservableStatementCS(setStatementCS);
 				if (result == null) result = caseStatementCS(setStatementCS);
 				if (result == null) result = caseModelElementCS(setStatementCS);
 				if (result == null) result = casePivotableElementCS(setStatementCS);
@@ -419,21 +424,6 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseDirectionCS(DirectionCS object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Domain CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Domain CS</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseDomainCS(DomainCS object) {
 		return null;
 	}
 
@@ -584,6 +574,21 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseNewStatementCS(NewStatementCS object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Observable Statement CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Observable Statement CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseObservableStatementCS(ObservableStatementCS object) {
 		return null;
 	}
 

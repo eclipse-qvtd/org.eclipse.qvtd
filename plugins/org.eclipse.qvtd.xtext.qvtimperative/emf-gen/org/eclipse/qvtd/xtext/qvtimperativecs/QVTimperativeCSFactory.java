@@ -67,15 +67,6 @@ public interface QVTimperativeCSFactory extends EFactory {
 	@NonNull DirectionCS createDirectionCS();
 
 	/**
-	 * Returns a new object of class '<em>Domain CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Domain CS</em>'.
-	 * @generated
-	 */
-	@NonNull DomainCS createDomainCS();
-
-	/**
 	 * Returns a new object of class '<em>Guard Variable CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

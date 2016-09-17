@@ -16,12 +16,12 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.qvtd.pivot.qvtimperative.*;
 import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.CheckStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardVariable;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.InConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
@@ -30,7 +30,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.OutConnectionVariable;
-import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
@@ -83,7 +82,6 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 			case QVTimperativePackage.CHECK_STATEMENT: return createCheckStatement();
 			case QVTimperativePackage.DECLARE_STATEMENT: return createDeclareStatement();
 			case QVTimperativePackage.GUARD_VARIABLE: return createGuardVariable();
-			case QVTimperativePackage.IMPERATIVE_DOMAIN: return createImperativeDomain();
 			case QVTimperativePackage.IMPERATIVE_MODEL: return createImperativeModel();
 			case QVTimperativePackage.IMPERATIVE_TYPED_MODEL: return createImperativeTypedModel();
 			case QVTimperativePackage.IN_CONNECTION_VARIABLE: return createInConnectionVariable();
@@ -142,17 +140,6 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 	public @NonNull GuardVariable createGuardVariable() {
 		GuardVariableImpl guardVariable = new GuardVariableImpl();
 		return guardVariable;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public @NonNull ImperativeDomain createImperativeDomain() {
-		ImperativeDomainImpl imperativeDomain = new ImperativeDomainImpl();
-		return imperativeDomain;
 	}
 
 	/**

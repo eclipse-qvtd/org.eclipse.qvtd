@@ -32,7 +32,7 @@ import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
  * @model
  * @generated
  */
-public interface CheckStatementCS extends StatementCS {
+public interface CheckStatementCS extends StatementCS, ObservableStatementCS {
 	/**
 	 * Returns the value of the '<em><b>Owned Condition</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

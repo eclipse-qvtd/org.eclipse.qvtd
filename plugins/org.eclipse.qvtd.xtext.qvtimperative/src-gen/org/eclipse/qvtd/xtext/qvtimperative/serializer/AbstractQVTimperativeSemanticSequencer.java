@@ -83,7 +83,6 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.AddStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.CheckStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DeclareStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS;
-import org.eclipse.qvtd.xtext.qvtimperativecs.DomainCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.GuardVariableCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.InoutVariableCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS;
@@ -455,16 +454,6 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 			case QVTimperativeCSPackage.DIRECTION_CS:
 				sequence_DirectionCS(context, (DirectionCS) semanticObject); 
 				return; 
-			case QVTimperativeCSPackage.DOMAIN_CS:
-				if (rule == grammarAccess.getSourceDomainCSRule()) {
-					sequence_SourceDomainCS(context, (DomainCS) semanticObject); 
-					return; 
-				}
-				else if (rule == grammarAccess.getTargetDomainCSRule()) {
-					sequence_TargetDomainCS(context, (DomainCS) semanticObject); 
-					return; 
-				}
-				else break;
 			case QVTimperativeCSPackage.GUARD_VARIABLE_CS:
 				sequence_GuardVariableCS(context, (GuardVariableCS) semanticObject); 
 				return; 
@@ -515,19 +504,10 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 	 *     ControlStatementCS returns AddStatementCS
 	 *
 	 * Constraint:
-	 *     (targetVariable=[ConnectionVariable|UnrestrictedName] ownedExpression=ExpCS)
+	 *     ((observedProperties+=PathNameCS observedProperties+=PathNameCS*)? targetVariable=[ConnectionVariable|UnrestrictedName] ownedExpression=ExpCS)
 	 */
 	protected void sequence_AddStatementCS(ISerializationContext context, AddStatementCS semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, QVTimperativeCSPackage.Literals.ADD_STATEMENT_CS__TARGET_VARIABLE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, QVTimperativeCSPackage.Literals.ADD_STATEMENT_CS__TARGET_VARIABLE));
-			if (transientValues.isValueTransient(semanticObject, QVTimperativeCSPackage.Literals.ADD_STATEMENT_CS__OWNED_EXPRESSION) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, QVTimperativeCSPackage.Literals.ADD_STATEMENT_CS__OWNED_EXPRESSION));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getAddStatementCSAccess().getTargetVariableConnectionVariableUnrestrictedNameParserRuleCall_1_0_1(), semanticObject.getTargetVariable());
-		feeder.accept(grammarAccess.getAddStatementCSAccess().getOwnedExpressionExpCSParserRuleCall_3_0(), semanticObject.getOwnedExpression());
-		feeder.finish();
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -556,7 +536,13 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 	 *     GuardStatementCS returns DeclareStatementCS
 	 *
 	 * Constraint:
-	 *     (isChecked?='check'? name=UnrestrictedName ownedType=TypeExpCS? ownedInit=ExpCS)
+	 *     (
+	 *         (observedProperties+=PathNameCS observedProperties+=PathNameCS*)? 
+	 *         isChecked?='check'? 
+	 *         name=UnrestrictedName 
+	 *         ownedType=TypeExpCS? 
+	 *         ownedExpression=ExpCS
+	 *     )
 	 */
 	protected void sequence_DeclareStatementCS(ISerializationContext context, DeclareStatementCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -568,13 +554,7 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 	 *     DirectionCS returns DirectionCS
 	 *
 	 * Constraint:
-	 *     (
-	 *         (isChecked?='check' | isEnforced?='enforce')? 
-	 *         name=UnrestrictedName? 
-	 *         imports+=[Package|UnrestrictedName] 
-	 *         imports+=[Package|UnrestrictedName]* 
-	 *         (uses+=[ImperativeDomain|UnrestrictedName] uses+=[ImperativeDomain|UnrestrictedName]*)?
-	 *     )
+	 *     ((isChecked?='check' | isEnforced?='enforce')? name=UnrestrictedName? imports+=[Package|UnrestrictedName] imports+=[Package|UnrestrictedName]*)
 	 */
 	protected void sequence_DirectionCS(ISerializationContext context, DirectionCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -646,9 +626,7 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 	 *     (
 	 *         name=UnrestrictedName 
 	 *         ownedInPathName=PathNameCS? 
-	 *         (ownedDomains+=SourceDomainCS | ownedDomains+=TargetDomainCS)* 
-	 *         ownedGuardVariables+=GuardVariableCS? 
-	 *         (ownedInoutVariables+=InoutVariableCS? ownedGuardVariables+=GuardVariableCS?)* 
+	 *         (ownedGuardVariables+=GuardVariableCS | ownedInoutVariables+=InoutVariableCS)* 
 	 *         ownedStatements+=GuardStatementCS* 
 	 *         ownedStatements+=CommitStatementCS* 
 	 *         ownedStatements+=ControlStatementCS*
@@ -664,10 +642,19 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 	 *     MappingCallBindingCS returns MappingCallBindingCS
 	 *
 	 * Constraint:
-	 *     (referredVariable=[VariableDeclaration|UnrestrictedName] isPolled?='?='? ownedValue=ExpCS)
+	 *     (referredVariable=[VariableDeclaration|UnrestrictedName] ownedValue=ExpCS)
 	 */
 	protected void sequence_MappingCallBindingCS(ISerializationContext context, MappingCallBindingCS semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, QVTimperativeCSPackage.Literals.MAPPING_CALL_BINDING_CS__REFERRED_VARIABLE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, QVTimperativeCSPackage.Literals.MAPPING_CALL_BINDING_CS__REFERRED_VARIABLE));
+			if (transientValues.isValueTransient(semanticObject, QVTimperativeCSPackage.Literals.MAPPING_CALL_BINDING_CS__OWNED_VALUE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, QVTimperativeCSPackage.Literals.MAPPING_CALL_BINDING_CS__OWNED_VALUE));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getMappingCallBindingCSAccess().getReferredVariableVariableDeclarationUnrestrictedNameParserRuleCall_0_0_1(), semanticObject.getReferredVariable());
+		feeder.accept(grammarAccess.getMappingCallBindingCSAccess().getOwnedValueExpCSParserRuleCall_2_0(), semanticObject.getOwnedValue());
+		feeder.finish();
 	}
 	
 	
@@ -702,7 +689,12 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 	 *     MappingLoopCS returns MappingLoopCS
 	 *
 	 * Constraint:
-	 *     (ownedIterator=MappingIteratorCS ownedInExpression=ExpCS ownedMappingStatements+=ControlStatementCS+)
+	 *     (
+	 *         (observedProperties+=PathNameCS observedProperties+=PathNameCS*)? 
+	 *         ownedIterator=MappingIteratorCS 
+	 *         ownedInExpression=ExpCS 
+	 *         ownedMappingStatements+=ControlStatementCS+
+	 *     )
 	 */
 	protected void sequence_MappingLoopCS(ISerializationContext context, MappingLoopCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -715,7 +707,13 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 	 *     NewStatementCS returns NewStatementCS
 	 *
 	 * Constraint:
-	 *     (referredTypedModel=[ImperativeTypedModel|UnrestrictedName] name=UnrestrictedName ownedType=TypeExpCS ownedInit=ExpCS?)
+	 *     (
+	 *         (observedProperties+=PathNameCS observedProperties+=PathNameCS*)? 
+	 *         referredTypedModel=[ImperativeTypedModel|UnrestrictedName] 
+	 *         name=UnrestrictedName 
+	 *         ownedType=TypeExpCS 
+	 *         ownedExpression=ExpCS?
+	 *     )
 	 */
 	protected void sequence_NewStatementCS(ISerializationContext context, NewStatementCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -820,33 +818,15 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 	 *     SetStatementCS returns SetStatementCS
 	 *
 	 * Constraint:
-	 *     (isNotify?='notify'? referredVariable=[VariableDeclaration|UnrestrictedName] referredProperty=[Property|UnrestrictedName] ownedInit=ExpCS)
+	 *     (
+	 *         (observedProperties+=PathNameCS observedProperties+=PathNameCS*)? 
+	 *         isNotify?='notify'? 
+	 *         referredVariable=[VariableDeclaration|UnrestrictedName] 
+	 *         referredProperty=[Property|UnrestrictedName] 
+	 *         ownedExpression=ExpCS
+	 *     )
 	 */
 	protected void sequence_SetStatementCS(ISerializationContext context, SetStatementCS semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     SourceDomainCS returns DomainCS
-	 *
-	 * Constraint:
-	 *     (isCheck?='check' direction=[ImperativeTypedModel|UnrestrictedName] (checkedProperties+=PathNameCS checkedProperties+=PathNameCS*)?)
-	 */
-	protected void sequence_SourceDomainCS(ISerializationContext context, DomainCS semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     TargetDomainCS returns DomainCS
-	 *
-	 * Constraint:
-	 *     (isEnforce?='enforce' direction=[ImperativeTypedModel|UnrestrictedName] (checkedProperties+=PathNameCS checkedProperties+=PathNameCS*)?)
-	 */
-	protected void sequence_TargetDomainCS(ISerializationContext context, DomainCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

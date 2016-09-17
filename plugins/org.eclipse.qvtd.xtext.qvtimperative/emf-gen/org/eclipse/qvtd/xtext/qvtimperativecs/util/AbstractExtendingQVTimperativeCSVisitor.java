@@ -60,11 +60,6 @@ public abstract class AbstractExtendingQVTimperativeCSVisitor<R, C>
 	}
 
 	@Override
-	public R visitDomainCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull DomainCS object) {
-		return visitNamedElementCS(object);
-	}
-
-	@Override
 	public R visitGuardVariableCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull GuardVariableCS object) {
 		return visitTypedElementCS(object);
 	}
@@ -105,6 +100,11 @@ public abstract class AbstractExtendingQVTimperativeCSVisitor<R, C>
 	}
 
 	@Override
+	public R visitObservableStatementCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull ObservableStatementCS object) {
+		return visitStatementCS(object);
+	}
+
+	@Override
 	public R visitOutVariableCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull OutVariableCS object) {
 		return visitTypedElementCS(object);
 	}
@@ -121,7 +121,7 @@ public abstract class AbstractExtendingQVTimperativeCSVisitor<R, C>
 
 	@Override
 	public R visitSetStatementCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull SetStatementCS object) {
-		return visitStatementCS(object);
+		return visitObservableStatementCS(object);
 	}
 
 	@Override

@@ -56,11 +56,6 @@ public abstract class AbstractDelegatingQVTimperativeCSVisitor<R, C, @NonNull D 
 	}
 
 	@Override
-	public R visitDomainCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull DomainCS object) {
-		return delegate.visitDomainCS(object);
-	}
-
-	@Override
 	public R visitGuardVariableCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull GuardVariableCS object) {
 		return delegate.visitGuardVariableCS(object);
 	}
@@ -98,6 +93,11 @@ public abstract class AbstractDelegatingQVTimperativeCSVisitor<R, C, @NonNull D 
 	@Override
 	public R visitNewStatementCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull NewStatementCS object) {
 		return delegate.visitNewStatementCS(object);
+	}
+
+	@Override
+	public R visitObservableStatementCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull ObservableStatementCS object) {
+		return delegate.visitObservableStatementCS(object);
 	}
 
 	@Override

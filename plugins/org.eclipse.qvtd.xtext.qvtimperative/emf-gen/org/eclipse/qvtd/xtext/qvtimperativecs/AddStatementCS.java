@@ -34,7 +34,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
  * @model
  * @generated
  */
-public interface AddStatementCS extends MappingStatementCS {
+public interface AddStatementCS extends MappingStatementCS, ObservableStatementCS {
 	/**
 	 * Returns the value of the '<em><b>Owned Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

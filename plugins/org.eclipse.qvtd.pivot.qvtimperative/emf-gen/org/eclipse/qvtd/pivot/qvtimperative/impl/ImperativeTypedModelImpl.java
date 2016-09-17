@@ -1,34 +1,27 @@
 /**
  * <copyright>
- * 
+ *
  * Copyright (c) 2013, 2017 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
- * 
+ *
  * </copyright>
  */
 package org.eclipse.qvtd.pivot.qvtimperative.impl;
 
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org.eclipse.jdt.annotation.NonNull;
-
 import org.eclipse.ocl.pivot.util.Visitor;
-
 import org.eclipse.qvtd.pivot.qvtbase.impl.TypedModelImpl;
-
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
-
 import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
 
 /**
@@ -110,6 +103,7 @@ public class ImperativeTypedModelImpl extends TypedModelImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isIsChecked() {
 		return isChecked;
 	}
@@ -119,6 +113,7 @@ public class ImperativeTypedModelImpl extends TypedModelImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setIsChecked(boolean newIsChecked) {
 		boolean oldIsChecked = isChecked;
 		isChecked = newIsChecked;
@@ -131,6 +126,7 @@ public class ImperativeTypedModelImpl extends TypedModelImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isIsEnforced() {
 		return isEnforced;
 	}
@@ -140,6 +136,7 @@ public class ImperativeTypedModelImpl extends TypedModelImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setIsEnforced(boolean newIsEnforced) {
 		boolean oldIsEnforced = isEnforced;
 		isEnforced = newIsEnforced;
@@ -152,6 +149,7 @@ public class ImperativeTypedModelImpl extends TypedModelImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String toString() {
 		return super.toString();
 	}

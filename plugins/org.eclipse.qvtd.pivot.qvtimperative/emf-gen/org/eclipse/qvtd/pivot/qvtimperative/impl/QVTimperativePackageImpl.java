@@ -22,7 +22,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.CheckStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardVariable;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.InConnectionVariable;
@@ -33,6 +32,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.ObservableStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.OutConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
@@ -81,13 +81,6 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * @generated
 	 */
 	private EClass guardVariableEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass imperativeDomainEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -158,6 +151,13 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * @generated
 	 */
 	private EClass newStatementEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass observableStatementEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -278,8 +278,8 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * @generated
 	 */
 	@Override
-	public EReference getAddStatement_OwnedInit() {
-		return (EReference)addStatementEClass.getEStructuralFeatures().get(1);
+	public EAttribute getAddStatement_IsEnforcedUnique() {
+		return (EAttribute)addStatementEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -288,8 +288,8 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * @generated
 	 */
 	@Override
-	public EAttribute getAddStatement_IsEnforcedUnique() {
-		return (EAttribute)addStatementEClass.getEStructuralFeatures().get(2);
+	public EReference getAddStatement_OwnedExpression() {
+		return (EReference)addStatementEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -308,7 +308,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * @generated
 	 */
 	@Override
-	public EReference getCheckStatement_OwnedCondition() {
+	public EReference getCheckStatement_OwnedExpression() {
 		return (EReference)checkStatementEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -338,8 +338,8 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * @generated
 	 */
 	@Override
-	public EReference getDeclareStatement_OwnedInit() {
-		return (EReference)declareStatementEClass.getEStructuralFeatures().get(0);
+	public EAttribute getDeclareStatement_IsChecked() {
+		return (EAttribute)declareStatementEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -348,8 +348,8 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * @generated
 	 */
 	@Override
-	public EAttribute getDeclareStatement_IsChecked() {
-		return (EAttribute)declareStatementEClass.getEStructuralFeatures().get(1);
+	public EReference getDeclareStatement_OwnedExpression() {
+		return (EReference)declareStatementEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -370,26 +370,6 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	@Override
 	public EReference getGuardVariable_ReferredTypedModel() {
 		return (EReference)guardVariableEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getImperativeDomain() {
-		return imperativeDomainEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getImperativeDomain_CheckedProperties() {
-		return (EReference)imperativeDomainEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -508,16 +488,6 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * @generated
 	 */
 	@Override
-	public EReference getMapping_CheckedProperties() {
-		return (EReference)mappingEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EClass getMappingCall() {
 		return mappingCallEClass;
 	}
@@ -569,7 +539,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 */
 	@Override
 	public EReference getMappingCallBinding_MappingCall() {
-		return (EReference)mappingCallBindingEClass.getEStructuralFeatures().get(2);
+		return (EReference)mappingCallBindingEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -588,18 +558,8 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * @generated
 	 */
 	@Override
-	public EAttribute getMappingCallBinding_IsPolled() {
-		return (EAttribute)mappingCallBindingEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EReference getMappingCallBinding_Value() {
-		return (EReference)mappingCallBindingEClass.getEStructuralFeatures().get(3);
+		return (EReference)mappingCallBindingEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -638,7 +598,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * @generated
 	 */
 	@Override
-	public EReference getMappingLoop_OwnedSource() {
+	public EReference getMappingLoop_OwnedExpression() {
 		return (EReference)mappingLoopEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -678,8 +638,28 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * @generated
 	 */
 	@Override
-	public EReference getNewStatement_OwnedInit() {
+	public EReference getNewStatement_OwnedExpression() {
 		return (EReference)newStatementEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getObservableStatement() {
+		return observableStatementEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getObservableStatement_ObservedProperties() {
+		return (EReference)observableStatementEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -698,7 +678,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * @generated
 	 */
 	@Override
-	public EReference getOutConnectionVariable_OwnedInit() {
+	public EReference getOutConnectionVariable_OwnedExpression() {
 		return (EReference)outConnectionVariableEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -738,18 +718,8 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * @generated
 	 */
 	@Override
-	public EReference getSetStatement_OwnedInit() {
-		return (EReference)setStatementEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EAttribute getSetStatement_IsOpposite() {
-		return (EAttribute)setStatementEClass.getEStructuralFeatures().get(3);
+		return (EAttribute)setStatementEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -759,7 +729,17 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 */
 	@Override
 	public EAttribute getSetStatement_IsNotify() {
-		return (EAttribute)setStatementEClass.getEStructuralFeatures().get(4);
+		return (EAttribute)setStatementEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getSetStatement_OwnedExpression() {
+		return (EReference)setStatementEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -813,23 +793,20 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		// Create classes and their features
 		addStatementEClass = createEClass(ADD_STATEMENT);
 		createEReference(addStatementEClass, ADD_STATEMENT__TARGET_VARIABLE);
-		createEReference(addStatementEClass, ADD_STATEMENT__OWNED_INIT);
 		createEAttribute(addStatementEClass, ADD_STATEMENT__IS_ENFORCED_UNIQUE);
+		createEReference(addStatementEClass, ADD_STATEMENT__OWNED_EXPRESSION);
 
 		checkStatementEClass = createEClass(CHECK_STATEMENT);
-		createEReference(checkStatementEClass, CHECK_STATEMENT__OWNED_CONDITION);
+		createEReference(checkStatementEClass, CHECK_STATEMENT__OWNED_EXPRESSION);
 
 		connectionVariableEClass = createEClass(CONNECTION_VARIABLE);
 
 		declareStatementEClass = createEClass(DECLARE_STATEMENT);
-		createEReference(declareStatementEClass, DECLARE_STATEMENT__OWNED_INIT);
 		createEAttribute(declareStatementEClass, DECLARE_STATEMENT__IS_CHECKED);
+		createEReference(declareStatementEClass, DECLARE_STATEMENT__OWNED_EXPRESSION);
 
 		guardVariableEClass = createEClass(GUARD_VARIABLE);
 		createEReference(guardVariableEClass, GUARD_VARIABLE__REFERRED_TYPED_MODEL);
-
-		imperativeDomainEClass = createEClass(IMPERATIVE_DOMAIN);
-		createEReference(imperativeDomainEClass, IMPERATIVE_DOMAIN__CHECKED_PROPERTIES);
 
 		imperativeModelEClass = createEClass(IMPERATIVE_MODEL);
 
@@ -846,7 +823,6 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		createEReference(mappingEClass, MAPPING__OWNED_GUARD_VARIABLES);
 		createEReference(mappingEClass, MAPPING__INOUT_VARIABLES);
 		createEReference(mappingEClass, MAPPING__OWNED_STATEMENTS);
-		createEReference(mappingEClass, MAPPING__CHECKED_PROPERTIES);
 
 		mappingCallEClass = createEClass(MAPPING_CALL);
 		createEReference(mappingCallEClass, MAPPING_CALL__BINDING);
@@ -855,30 +831,32 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 
 		mappingCallBindingEClass = createEClass(MAPPING_CALL_BINDING);
 		createEReference(mappingCallBindingEClass, MAPPING_CALL_BINDING__BOUND_VARIABLE);
-		createEAttribute(mappingCallBindingEClass, MAPPING_CALL_BINDING__IS_POLLED);
 		createEReference(mappingCallBindingEClass, MAPPING_CALL_BINDING__MAPPING_CALL);
 		createEReference(mappingCallBindingEClass, MAPPING_CALL_BINDING__VALUE);
 
 		mappingLoopEClass = createEClass(MAPPING_LOOP);
 		createEReference(mappingLoopEClass, MAPPING_LOOP__OWNED_ITERATORS);
 		createEReference(mappingLoopEClass, MAPPING_LOOP__OWNED_MAPPING_STATEMENTS);
-		createEReference(mappingLoopEClass, MAPPING_LOOP__OWNED_SOURCE);
+		createEReference(mappingLoopEClass, MAPPING_LOOP__OWNED_EXPRESSION);
 
 		mappingStatementEClass = createEClass(MAPPING_STATEMENT);
 
 		newStatementEClass = createEClass(NEW_STATEMENT);
 		createEReference(newStatementEClass, NEW_STATEMENT__REFERRED_TYPED_MODEL);
-		createEReference(newStatementEClass, NEW_STATEMENT__OWNED_INIT);
+		createEReference(newStatementEClass, NEW_STATEMENT__OWNED_EXPRESSION);
+
+		observableStatementEClass = createEClass(OBSERVABLE_STATEMENT);
+		createEReference(observableStatementEClass, OBSERVABLE_STATEMENT__OBSERVED_PROPERTIES);
 
 		outConnectionVariableEClass = createEClass(OUT_CONNECTION_VARIABLE);
-		createEReference(outConnectionVariableEClass, OUT_CONNECTION_VARIABLE__OWNED_INIT);
+		createEReference(outConnectionVariableEClass, OUT_CONNECTION_VARIABLE__OWNED_EXPRESSION);
 
 		setStatementEClass = createEClass(SET_STATEMENT);
 		createEReference(setStatementEClass, SET_STATEMENT__TARGET_VARIABLE);
 		createEReference(setStatementEClass, SET_STATEMENT__TARGET_PROPERTY);
-		createEReference(setStatementEClass, SET_STATEMENT__OWNED_INIT);
 		createEAttribute(setStatementEClass, SET_STATEMENT__IS_OPPOSITE);
 		createEAttribute(setStatementEClass, SET_STATEMENT__IS_NOTIFY);
+		createEReference(setStatementEClass, SET_STATEMENT__OWNED_EXPRESSION);
 
 		statementEClass = createEClass(STATEMENT);
 
@@ -918,11 +896,12 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 
 		// Add supertypes to classes
 		addStatementEClass.getESuperTypes().add(this.getMappingStatement());
-		checkStatementEClass.getESuperTypes().add(this.getStatement());
+		addStatementEClass.getESuperTypes().add(this.getObservableStatement());
+		checkStatementEClass.getESuperTypes().add(this.getObservableStatement());
 		connectionVariableEClass.getESuperTypes().add(thePivotPackage.getVariableDeclaration());
 		declareStatementEClass.getESuperTypes().add(this.getVariableStatement());
+		declareStatementEClass.getESuperTypes().add(this.getObservableStatement());
 		guardVariableEClass.getESuperTypes().add(thePivotPackage.getVariableDeclaration());
-		imperativeDomainEClass.getESuperTypes().add(theQVTbasePackage.getDomain());
 		imperativeModelEClass.getESuperTypes().add(theQVTbasePackage.getBaseModel());
 		imperativeTypedModelEClass.getESuperTypes().add(theQVTbasePackage.getTypedModel());
 		inConnectionVariableEClass.getESuperTypes().add(this.getConnectionVariable());
@@ -932,11 +911,15 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		mappingCallEClass.getESuperTypes().add(thePivotPackage.getReferringElement());
 		mappingCallBindingEClass.getESuperTypes().add(thePivotPackage.getElement());
 		mappingLoopEClass.getESuperTypes().add(this.getMappingStatement());
+		mappingLoopEClass.getESuperTypes().add(this.getObservableStatement());
 		mappingStatementEClass.getESuperTypes().add(this.getStatement());
 		newStatementEClass.getESuperTypes().add(this.getVariableStatement());
+		newStatementEClass.getESuperTypes().add(this.getObservableStatement());
+		observableStatementEClass.getESuperTypes().add(this.getStatement());
 		outConnectionVariableEClass.getESuperTypes().add(this.getConnectionVariable());
 		outConnectionVariableEClass.getESuperTypes().add(this.getVariableStatement());
-		setStatementEClass.getESuperTypes().add(this.getStatement());
+		outConnectionVariableEClass.getESuperTypes().add(this.getObservableStatement());
+		setStatementEClass.getESuperTypes().add(this.getObservableStatement());
 		statementEClass.getESuperTypes().add(thePivotPackage.getNamedElement());
 		variableStatementEClass.getESuperTypes().add(thePivotPackage.getVariableDeclaration());
 		variableStatementEClass.getESuperTypes().add(this.getStatement());
@@ -944,23 +927,20 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		// Initialize classes and features; add operations and parameters
 		initEClass(addStatementEClass, AddStatement.class, "AddStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAddStatement_TargetVariable(), this.getConnectionVariable(), null, "targetVariable", null, 1, 1, AddStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getAddStatement_OwnedInit(), thePivotPackage.getOCLExpression(), null, "ownedInit", null, 1, 1, AddStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAddStatement_IsEnforcedUnique(), ecorePackage.getEBoolean(), "isEnforcedUnique", null, 0, 1, AddStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAddStatement_OwnedExpression(), thePivotPackage.getOCLExpression(), null, "ownedExpression", null, 1, 1, AddStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(checkStatementEClass, CheckStatement.class, "CheckStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getCheckStatement_OwnedCondition(), thePivotPackage.getOCLExpression(), null, "ownedCondition", null, 1, 1, CheckStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCheckStatement_OwnedExpression(), thePivotPackage.getOCLExpression(), null, "ownedExpression", null, 1, 1, CheckStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(connectionVariableEClass, ConnectionVariable.class, "ConnectionVariable", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(declareStatementEClass, DeclareStatement.class, "DeclareStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getDeclareStatement_OwnedInit(), thePivotPackage.getOCLExpression(), null, "ownedInit", null, 1, 1, DeclareStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getDeclareStatement_IsChecked(), ecorePackage.getEBoolean(), "isChecked", "false", 0, 1, DeclareStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDeclareStatement_OwnedExpression(), thePivotPackage.getOCLExpression(), null, "ownedExpression", null, 1, 1, DeclareStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(guardVariableEClass, GuardVariable.class, "GuardVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getGuardVariable_ReferredTypedModel(), this.getImperativeTypedModel(), null, "referredTypedModel", null, 1, 1, GuardVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(imperativeDomainEClass, ImperativeDomain.class, "ImperativeDomain", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getImperativeDomain_CheckedProperties(), thePivotPackage.getProperty(), null, "checkedProperties", null, 0, -1, ImperativeDomain.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		initEClass(imperativeModelEClass, ImperativeModel.class, "ImperativeModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -977,7 +957,6 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		initEReference(getMapping_OwnedGuardVariables(), this.getGuardVariable(), null, "ownedGuardVariables", null, 0, -1, Mapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getMapping_InoutVariables(), this.getInConnectionVariable(), null, "inoutVariables", null, 0, -1, Mapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getMapping_OwnedStatements(), this.getStatement(), null, "ownedStatements", null, 0, -1, Mapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getMapping_CheckedProperties(), thePivotPackage.getProperty(), null, "checkedProperties", null, 0, -1, Mapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		initEClass(mappingCallEClass, MappingCall.class, "MappingCall", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getMappingCall_Binding(), this.getMappingCallBinding(), this.getMappingCallBinding_MappingCall(), "binding", null, 0, -1, MappingCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -986,30 +965,32 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 
 		initEClass(mappingCallBindingEClass, MappingCallBinding.class, "MappingCallBinding", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getMappingCallBinding_BoundVariable(), thePivotPackage.getVariableDeclaration(), null, "boundVariable", null, 1, 1, MappingCallBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getMappingCallBinding_IsPolled(), thePivotPackage.getBoolean(), "isPolled", "false", 0, 1, MappingCallBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMappingCallBinding_MappingCall(), this.getMappingCall(), this.getMappingCall_Binding(), "mappingCall", null, 0, 1, MappingCallBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMappingCallBinding_Value(), thePivotPackage.getOCLExpression(), null, "value", null, 1, 1, MappingCallBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(mappingLoopEClass, MappingLoop.class, "MappingLoop", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getMappingLoop_OwnedIterators(), this.getLoopVariable(), this.getLoopVariable_OwningMappingLoop(), "ownedIterators", null, 0, -1, MappingLoop.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMappingLoop_OwnedMappingStatements(), this.getMappingStatement(), null, "ownedMappingStatements", null, 0, -1, MappingLoop.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getMappingLoop_OwnedSource(), thePivotPackage.getOCLExpression(), null, "ownedSource", null, 0, 1, MappingLoop.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMappingLoop_OwnedExpression(), thePivotPackage.getOCLExpression(), null, "ownedExpression", null, 1, 1, MappingLoop.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(mappingStatementEClass, MappingStatement.class, "MappingStatement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(newStatementEClass, NewStatement.class, "NewStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getNewStatement_ReferredTypedModel(), this.getImperativeTypedModel(), null, "referredTypedModel", null, 1, 1, NewStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getNewStatement_OwnedInit(), thePivotPackage.getOCLExpression(), null, "ownedInit", null, 0, 1, NewStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getNewStatement_OwnedExpression(), thePivotPackage.getOCLExpression(), null, "ownedExpression", null, 0, 1, NewStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(observableStatementEClass, ObservableStatement.class, "ObservableStatement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getObservableStatement_ObservedProperties(), thePivotPackage.getProperty(), null, "observedProperties", null, 0, -1, ObservableStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		initEClass(outConnectionVariableEClass, OutConnectionVariable.class, "OutConnectionVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getOutConnectionVariable_OwnedInit(), thePivotPackage.getOCLExpression(), null, "ownedInit", null, 0, 1, OutConnectionVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getOutConnectionVariable_OwnedExpression(), thePivotPackage.getOCLExpression(), null, "ownedExpression", null, 0, 1, OutConnectionVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(setStatementEClass, SetStatement.class, "SetStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSetStatement_TargetVariable(), thePivotPackage.getVariableDeclaration(), null, "targetVariable", null, 1, 1, SetStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSetStatement_TargetProperty(), thePivotPackage.getProperty(), null, "targetProperty", null, 1, 1, SetStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getSetStatement_OwnedInit(), thePivotPackage.getOCLExpression(), null, "ownedInit", null, 1, 1, SetStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getSetStatement_IsOpposite(), ecorePackage.getEBoolean(), "isOpposite", null, 0, 1, SetStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getSetStatement_IsNotify(), ecorePackage.getEBoolean(), "isNotify", null, 0, 1, SetStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSetStatement_OwnedExpression(), thePivotPackage.getOCLExpression(), null, "ownedExpression", null, 1, 1, SetStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(statementEClass, Statement.class, "Statement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1056,18 +1037,6 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 				"body", "assignment"
 		});
 		addAnnotation
-		(getAddStatement_OwnedInit(),
-			source,
-			new String[] {
-				"body", "valueAssignment"
-		});
-		addAnnotation
-		(getCheckStatement_OwnedCondition(),
-			source,
-			new String[] {
-				"body", "predicate"
-		});
-		addAnnotation
 		(getSetStatement_TargetVariable(),
 			source,
 			new String[] {
@@ -1078,12 +1047,6 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 			source,
 			new String[] {
 				"body", "assignment"
-		});
-		addAnnotation
-		(getSetStatement_OwnedInit(),
-			source,
-			new String[] {
-				"body", "valueAssignment"
 		});
 	}
 
