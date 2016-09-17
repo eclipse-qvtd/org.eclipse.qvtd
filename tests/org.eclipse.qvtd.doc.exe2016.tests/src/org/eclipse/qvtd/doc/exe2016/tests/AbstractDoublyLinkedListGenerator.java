@@ -46,6 +46,7 @@ public abstract class AbstractDoublyLinkedListGenerator<@NonNull L extends EObje
 
 	public @NonNull List<@NonNull ? extends EObject> createDoublyLinkedListModel(int nElements) {
 		L list = createDoublyLinkedList();
+		setListName(list, "listName");
 		@Nullable E prevElement = null;
 		List<E> elements = new ArrayList<>(nElements-1);
 		for (int n = 1; n < nElements; n++) {

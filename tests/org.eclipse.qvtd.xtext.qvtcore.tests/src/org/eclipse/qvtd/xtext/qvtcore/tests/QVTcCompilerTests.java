@@ -81,9 +81,9 @@ import junit.framework.TestCase;
  */
 public class QVTcCompilerTests extends LoadTestCase
 {
-	private static URI TESTS_BASE_URI = URI.createPlatformResourceURI("/org.eclipse.qvtd.xtext.qvtcore.tests/bin/org/eclipse/qvtd/xtext/qvtcore/tests", true);
-	private static URI TESTS_JAVA_SRC_URI = URI.createPlatformResourceURI("/org.eclipse.qvtd.xtext.qvtcore.tests/test-gen", true);
-	private static URI TESTS_JAVA_BIN_URI = URI.createPlatformResourceURI("/org.eclipse.qvtd.xtext.qvtcore.tests/bin", true);
+	protected static final @NonNull URI TESTS_BASE_URI = URI.createPlatformResourceURI("/org.eclipse.qvtd.xtext.qvtcore.tests/bin/org/eclipse/qvtd/xtext/qvtcore/tests", true);
+	protected static final @NonNull URI TESTS_JAVA_SRC_URI = URI.createPlatformResourceURI("/org.eclipse.qvtd.xtext.qvtcore.tests/test-gen", true);
+	protected static final @NonNull URI TESTS_JAVA_BIN_URI = URI.createPlatformResourceURI("/org.eclipse.qvtd.xtext.qvtcore.tests/bin", true);
 
 	protected static class MyQVT extends QVTimperative
 	{
@@ -370,10 +370,10 @@ public class QVTcCompilerTests extends LoadTestCase
 	public void testQVTcCompiler_Forward2Reverse() throws Exception {
 		//    	QVTs2QVTiVisitor.POLLED_PROPERTIES.setState(true);
 		String testFolderName = "forward2reverse";
-		//		URI testFolderURI = TESTS_BASE_URI.appendSegment(testFolderName);
-		//		EcoreURIAdapter.setEcoreURI(List2listPackage.eINSTANCE, testFolderURI.appendSegment("List2List.ecore"));
-		//		EcoreURIAdapter.setEcoreURI(DoublylinkedlistPackage.eINSTANCE, testFolderURI.appendSegment("DoublyLinkedList.ecore"));
-		MyQVT myQVT = new MyQVT(testFolderName);
+		URI testFolderURI = TESTS_BASE_URI.appendSegment(testFolderName);
+		EcoreURIAdapter.setEcoreURI(List2listPackage.eINSTANCE, testFolderURI.appendSegment("List2List.ecore"));
+		EcoreURIAdapter.setEcoreURI(DoublylinkedlistPackage.eINSTANCE, testFolderURI.appendSegment("DoublyLinkedList.ecore"));
+		MyQVT myQVT = new MyQVT(testFolderName, List2listPackage.eINSTANCE, DoublylinkedlistPackage.eINSTANCE);
 		//		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 		try {
 			Transformation asTransformation = myQVT.compileTransformation("Forward2Reverse.qvtc", "reverse");

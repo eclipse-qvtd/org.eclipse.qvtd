@@ -12,6 +12,7 @@ package org.eclipse.qvtd.doc.exe2016.tests.qvtc;
 
 import java.util.Collection;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.qvtd.doc.exe2016.tests.AbstractEXE2016CGTests;
@@ -20,6 +21,8 @@ import org.eclipse.qvtd.doc.exe2016.tests.PrintAndLog;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
+import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
+import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.EcoreURIAdapter;
 import org.eclipse.qvtd.xtext.qvtcore.tests.QVTcCompilerTests;
 import org.eclipse.qvtd.xtext.qvtcore.tests.list2list.doublylinkedlist.DoublyLinkedList;
 import org.eclipse.qvtd.xtext.qvtcore.tests.list2list.doublylinkedlist.DoublylinkedlistPackage;
@@ -34,6 +37,11 @@ public class EXE2016InterpreterTests extends QVTcCompilerTests
 	@Override
 	@Test
 	public void testQVTcCompiler_Forward2Reverse() throws Exception {
+		AbstractTransformer.EXCEPTIONS.setState(true);
+		String testFolderName = "forward2reverse";
+		URI testFolderURI = TESTS_BASE_URI.appendSegment(testFolderName);
+		EcoreURIAdapter.setEcoreURI(List2listPackage.eINSTANCE, testFolderURI.appendSegment("List2List.ecore"));
+		EcoreURIAdapter.setEcoreURI(DoublylinkedlistPackage.eINSTANCE, testFolderURI.appendSegment("DoublyLinkedList.ecore"));
 		DoublyLinkedListGenerator doublyLinkedListGenerator = new DoublyLinkedListGenerator();
 		PrintAndLog logger = new PrintAndLog("results/" + getName());
 		logger.printf("%s\n", getName());
