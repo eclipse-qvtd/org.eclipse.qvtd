@@ -25,15 +25,21 @@ TopLevelCS:
 ;
 
 AddStatementCS: 'add' targetVariable=[qvtimperative::ConnectionVariable|UnrestrictedName] '+=' ownedExpression=ExpCS ';';
+
+CommitStatementCS returns StatementCS:	NewStatementCS | SetStatementCS;
 	
 CheckStatementCS: 'check' ownedCondition=ExpCS ';';
 	
 ControlStatementCS returns MappingStatementCS: AddStatementCS | MappingCallCS | MappingLoopCS;
+
+DeclareStatementCS: isChecked?='check'? 'var' name=UnrestrictedName (':' ownedType=TypeExpCS)? ':=' ownedInit=ExpCS ';';
 	
 DirectionCS: {DirectionCS} (isChecked?='check'|isEnforced?='enforce')? name=UnrestrictedName?
 	'imports' imports+=[pivot::Package|UnrestrictedName] (',' imports+=[pivot::Package|UnrestrictedName])*
 	('uses' uses+=[qvtimperative::ImperativeDomain|UnrestrictedName] (',' uses+=[qvtimperative::ImperativeDomain|UnrestrictedName])*)?
 ;
+
+GuardStatementCS returns StatementCS: OutVariableCS | DeclareStatementCS | DeclareStatementCS | CheckStatementCS;
 
 GuardVariableCS: 'in' ':' referredTypedModel=[qvtimperative::ImperativeTypedModel|UnrestrictedName] name=UnrestrictedName ':' ownedType=TypeExpCS ';';
 
@@ -46,8 +52,8 @@ MappingCS: {MappingCS} 'map' name=UnrestrictedName ('in' ownedInPathName=PathNam
 	'{'
 	ownedDomains+=(SourceDomainCS | TargetDomainCS)*
 	(ownedGuardVariables+=GuardVariableCS | ownedInoutVariables+=InoutVariableCS)*
-	(ownedStatements+=OutVariableCS | ownedStatements+=PredicateVariableCS | ownedStatements+=CheckStatementCS)*
-	(ownedStatements+=NewStatementCS | ownedStatements+=SetStatementCS)*
+	ownedStatements+=GuardStatementCS*
+	ownedStatements+=CommitStatementCS*
 	ownedStatements+=ControlStatementCS*
 	'}';
 	
@@ -68,8 +74,6 @@ OutVariableCS: 'out' name=UnrestrictedName ':' ownedType=TypeExpCS ';';
 	
 ParamDeclarationCS: name=UnrestrictedName ':' ownedType=TypeExpCS;
 
-PredicateVariableCS: ('var'|isChecked?='check') name=UnrestrictedName (':' ownedType=TypeExpCS)? ':=' ownedInit=ExpCS ';';
-
 QualifiedPackageCS returns qvtbasecs::QualifiedPackageCS:
 	'package' ownedPathName=ScopeNameCS? name=UnrestrictedName (':' nsPrefix=UnrestrictedName)? ('=' nsURI=URI)?
 	(('{'
@@ -86,14 +90,12 @@ QueryCS: isTransient?='transient'? 'query' ownedPathName=ScopeNameCS name=Unrest
 ScopeNameCS returns base::PathNameCS:
 	ownedPathElements+=FirstPathElementCS '::' (ownedPathElements+=NextPathElementCS '::')*;
 
-SetStatementCS: ('set'|isEmit?='emit') referredVariable=[pivot::VariableDeclaration|UnrestrictedName] '.' referredProperty=[pivot::Property|UnrestrictedName] ':=' ownedInit=ExpCS ';';
+SetStatementCS: (isNotify?='notify')? 'set' referredVariable=[pivot::VariableDeclaration|UnrestrictedName] '.' referredProperty=[pivot::Property|UnrestrictedName] ':=' ownedInit=ExpCS ';';
 	
 SourceDomainCS returns DomainCS: isCheck?='check' direction=[qvtimperative::ImperativeTypedModel|UnrestrictedName]
 	('{' ('check' checkedProperties+=PathNameCS (',' checkedProperties+=PathNameCS)*)? '}')?
 	'(' ')' '{' '}'
 ;
-	
-StatementCS: ControlStatementCS;
 
 TransformationCS:
 	'transformation' ownedPathName=ScopeNameCS? name=UnreservedName '{' (ownedDirections+=DirectionCS ';')* '}';
@@ -109,7 +111,6 @@ UnrestrictedName returns ecore::EString:
 |	'enforce'
 |	'import'
 |	'imports'
-//|	'include'
 |	'library'
 |	'map'
 |	'query'
@@ -117,5 +118,4 @@ UnrestrictedName returns ecore::EString:
 |	'refines'
 |	'transformation'
 |	'uses'
-//|	'where'
 ;
