@@ -93,12 +93,13 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 	}
 
 	@Override
-	public void createModel(@NonNull String name, @NonNull URI modelURI, @Nullable String contentType) {
+	public @Nullable Resource createModel(@NonNull String name, @NonNull URI modelURI, @Nullable String contentType) {
 		TypedModel typedModel = getTypedModel(name);
 		Resource resource = environmentFactory.getResourceSet().createResource(modelURI, contentType);
 		if (resource != null) {
 			getModelManager().addModel(typedModel, resource);
 		}
+		return resource;
 	}
 
 	@Override

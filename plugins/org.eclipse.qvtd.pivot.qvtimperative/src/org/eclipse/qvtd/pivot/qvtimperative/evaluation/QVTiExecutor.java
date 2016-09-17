@@ -25,7 +25,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 
 public interface QVTiExecutor extends ExecutorInternal
 {
-	void createModel(@NonNull String outName, @NonNull URI outURI, @Nullable String contentType);
+	@Nullable Resource createModel(@NonNull String outName, @NonNull URI outURI, @Nullable String contentType);
 	Boolean execute();
 	@Override
 	@NonNull QVTiEvaluationEnvironment getEvaluationEnvironment();

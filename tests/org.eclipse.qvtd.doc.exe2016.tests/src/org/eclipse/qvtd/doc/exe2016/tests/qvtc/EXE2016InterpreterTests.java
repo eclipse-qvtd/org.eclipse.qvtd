@@ -50,16 +50,16 @@ public class EXE2016InterpreterTests extends QVTcCompilerTests
 		//    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 		try {
 			Transformation asTransformation = myQVT.compileTransformation("Forward2Reverse.qvtc", "reverse");
-			int[] tests = PrintAndLog.getTestSizes();
+			int[] tests = /**new int[]{100000}; //*/PrintAndLog.getTestSizes();
 			for (int testSize : tests) {
 				BasicQVTiExecutor interpretedExecutor = myQVT.createInterpretedExecutor(asTransformation);
-				myQVT.loadInput("forward", "EmptyList.xmi");
-				Resource inResource = interpretedExecutor.getModel("forward");
+				Resource inResource = myQVT.loadInput("forward", "EmptyList.xmi");
 				assert inResource != null;
 				inResource.getContents().clear();
 				inResource.getContents().addAll(doublyLinkedListGenerator.createDoublyLinkedListModel(testSize));
-				myQVT.createModel(QVTimperativeUtil.MIDDLE_DOMAIN_NAME, "Forward2Reverse_trace.xmi");
-				myQVT.createModel("reverse", "List_Interpreted.xmi");
+				//				myQVT.createModel(QVTimperativeUtil.MIDDLE_DOMAIN_NAME, "Forward2Reverse_trace.xmi");
+				Resource outResource = myQVT.createModel("reverse", "List_Interpreted.xmi");
+				assert outResource != null;
 				AbstractEXE2016CGTests.garbageCollect();
 				logger.printf("%9d, ", testSize);
 				long startTime = System.nanoTime();
@@ -69,6 +69,13 @@ public class EXE2016InterpreterTests extends QVTcCompilerTests
 				logger.printf("%9.6f\n", (endTime - startTime) / 1.0e9);
 				doublyLinkedListGenerator.checkModel((@NonNull DoublyLinkedList) rootObjects.iterator().next(), testSize);
 				//				myQVT.saveOutput("person", "Persons_Interpreted.xmi", "Persons_expected.xmi", Families2PersonsNormalizer.INSTANCE);
+				myQVT.getResourceSet().getResources().remove(inResource);
+				myQVT.getResourceSet().getResources().remove(outResource);
+				inResource = null;
+				outResource = null;
+				rootObjects = null;
+				interpretedExecutor = null;
+				long endTime2 = System.nanoTime();
 			}
 		}
 		finally {

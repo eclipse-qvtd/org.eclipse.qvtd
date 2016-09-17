@@ -184,9 +184,9 @@ public class QVTcCompilerTests extends LoadTestCase
 			return interpretedExecutor;
 		}
 
-		public void createModel(@NonNull String modelName, @NonNull String modelFile) {
+		public @Nullable Resource createModel(@NonNull String modelName, @NonNull String modelFile) {
 			URI modelURI = samplesBaseUri.appendSegment(modelFile);
-			interpretedExecutor.createModel(modelName, modelURI, null);
+			return interpretedExecutor.createModel(modelName, modelURI, null);
 		}
 
 		@Override
