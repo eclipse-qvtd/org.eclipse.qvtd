@@ -117,7 +117,7 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTim
 				|| (property == rootAnalysis.getOclContentsProperty())) {
 			usage = intersection(usage, actualSourceUsage);
 		}
-		else if (!property.isIsImplicit() && !rootAnalysis.isDirty(property)	// Simple input domain nodes cannot reference middle or output domains
+		else if (!property.isIsImplicit() /*&& !rootAnalysis.isDirty(property)*/	// Simple input domain nodes cannot reference middle or output domains
 				&& (usage.isMiddle() || usage.isOutput())
 				&& actualSourceUsage.isInput() && !actualSourceUsage.isMiddle() && !actualSourceUsage.isOutput()) {
 			usage = intersection(usage, actualSourceUsage);

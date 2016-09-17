@@ -17,9 +17,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.emf.common.util.TreeIterator;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Annotation;
@@ -35,7 +32,6 @@ import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.ocl.pivot.Variable;
-import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.ids.OperationId;
 import org.eclipse.ocl.pivot.internal.complete.StandardLibraryInternal;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
@@ -50,9 +46,7 @@ import org.eclipse.qvtd.pivot.qvtbase.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtbase.analysis.DomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
-import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
-import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 
 public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis implements QVTimperativeVisitor<org.eclipse.qvtd.pivot.qvtbase.analysis.DomainUsage>, DomainUsageAnalysis.Root
 {
@@ -332,12 +326,6 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 	private /*@LazyNonNull*/ OperationId oclElementOclContentsId;
 	private /*@LazyNonNull*/ Property oclElementOclContainerProperty;
 	private /*@LazyNonNull*/ Property oclElementOclContentsProperty;
-	/**
-	 * The properties of the input models that are assigned by mappings and which cannot therefore
-	 * be trusted to be loaded from the input models.
-	 */
-	private final @NonNull Set<@NonNull Property> dirtyProperties = new HashSet<>();
-	private final @NonNull Set<@NonNull EReference> dirtyEReferences = new HashSet<>();
 
 	protected RootDomainUsageAnalysis(@NonNull EnvironmentFactory environmentFactory) {
 		super(environmentFactory);
@@ -365,41 +353,6 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 			setUsage(object, usage);
 		}
 		return analysis;
-	}
-
-	protected void analyzeSetStatements(@NonNull Transformation transformation) {
-		for (TreeIterator<EObject> tit = transformation.eAllContents(); tit.hasNext(); ) {
-			EObject eObject = tit.next();
-			if (eObject instanceof SetStatement) {
-				SetStatement setStatement = (SetStatement)eObject;
-				//				if ("s.name := sn".equals(eObject.toString())) {
-				//					eObject.toString();
-				//				}
-				VariableDeclaration targetVariable = setStatement.getTargetVariable();
-				assert targetVariable != null;
-				DomainUsage domainUsage = getUsage(targetVariable);
-				if (!domainUsage.isOutput() && !domainUsage.isMiddle()) {
-					Property targetProperty = QVTimperativeUtil.getTargetProperty(setStatement);
-					//					System.out.println("Dirty " + targetProperty + " for " + eObject);
-					dirtyProperties.add(targetProperty);
-					EObject eProperty = targetProperty.getESObject();
-					if (eProperty instanceof EReference) {
-						dirtyEReferences.add((EReference) eProperty);
-					}
-				}
-			}
-		}
-		for (@NonNull Property dirtyProperty : dirtyProperties) {
-			if (!dirtyProperty.isIsTransient()) {
-				System.err.println("Dirty " + dirtyProperty + " is not transient");
-			}
-			if (dirtyProperty.isIsReadOnly()) {
-				System.err.println("Dirty " + dirtyProperty + " is readonly");
-			}
-			if (dirtyProperty.isIsRequired()) {
-				System.err.println("Dirty " + dirtyProperty + " is required");
-			}
-		}
 	}
 
 	public @NonNull Map<Element, DomainUsage> analyzeTransformation(@NonNull Transformation transformation) {
@@ -476,7 +429,6 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 			setUsage(ownedContext, getAnyUsage());
 		}
 		visit(transformation);
-		analyzeSetStatements(transformation);
 		return element2usage;
 	}
 
@@ -749,24 +701,4 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 			return createVariableUsage(bitMask);
 		}
 	}
-
-	/**
-	 * Return true if a mapping may assign this property in an input model.
-	 */
-	public boolean isDirty(@NonNull EReference eReference) {
-		return dirtyEReferences.contains(eReference);
-	}
-
-	/**
-	 * Return true if a mapping may assign this property in an input model.
-	 */
-	public boolean isDirty(@NonNull Property property) {
-		return property.isIsTransient() || dirtyProperties.contains(property);
-	}
-
-	//	private boolean isPivotMMPackage(Package p) {
-	//		String pURI = p.getURI();
-	//		return PivotPackage.eNS_URI.equals(pURI) ||
-	//				OCLstdlib.STDLIB_URI.equals(pURI);
-	//	}
 }
