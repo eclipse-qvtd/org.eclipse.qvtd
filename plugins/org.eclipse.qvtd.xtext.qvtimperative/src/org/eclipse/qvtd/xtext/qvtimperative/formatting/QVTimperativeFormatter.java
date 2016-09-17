@@ -77,32 +77,32 @@ public class QVTimperativeFormatter extends AbstractEssentialOCLFormatter
 
 		{
 			AddStatementCSElements a = f.getAddStatementCSAccess();
-			c.setLinewrap(1).before(a.getObserveKeyword_0_0());
+			c.setLinewrap(1).before(a.getGroup());
 			c.setNoSpace().before(a.getCommaKeyword_0_2_0());
 			c.setLinewrap(1).before(a.getAddKeyword_1());
 			c.setNoSpace().before(a.getSemicolonKeyword_5());
 		}
 		{
 			CheckStatementCSElements a = f.getCheckStatementCSAccess();
-			c.setLinewrap(1).before(a.getCheckKeyword_0());
+			c.setLinewrap(1).before(a.getGroup());
 			c.setNoSpace().before(a.getSemicolonKeyword_2());
 			setNoSpaceLineWrap(c, a.getSemicolonKeyword_2());
 		}
 		{
 			DeclareStatementCSElements a = f.getDeclareStatementCSAccess();
-			c.setLinewrap(1).before(a.getObserveKeyword_0_0());
+			c.setLinewrap(1).before(a.getGroup());
 			c.setNoSpace().before(a.getCommaKeyword_0_2_0());
 			c.setLinewrap(1).before(a.getIsCheckedAssignment_1());
 			setNoSpaceLineWrap(c, a.getSemicolonKeyword_7());
 		}
 		{
 			DirectionCSElements a = f.getDirectionCSAccess();
-			c.setLinewrap(1).before(a.getAlternatives_1());
+			c.setLinewrap(1).before(a.getGroup());
 			c.setNoSpace().before(a.getCommaKeyword_5_0());
 		}
 		{
 			GuardVariableCSElements a = f.getGuardVariableCSAccess();
-			c.setLinewrap(1).before(a.getInKeyword_0());
+			c.setLinewrap(1).before(a.getGroup());
 			c.setNoSpace().around(a.getColonKeyword_1());
 			c.setNoSpace().before(a.getSemicolonKeyword_6());
 		}
@@ -112,12 +112,12 @@ public class QVTimperativeFormatter extends AbstractEssentialOCLFormatter
 		}
 		{
 			InoutVariableCSElements a = f.getInoutVariableCSAccess();
-			c.setLinewrap(1).before(a.getInoutKeyword_0());
+			c.setLinewrap(1).before(a.getGroup());
 			c.setNoSpace().before(a.getSemicolonKeyword_4());
 		}
 		{
 			MappingCSElements a = f.getMappingCSAccess();
-			c.setLinewrap(2).before(a.getMapKeyword_1());
+			c.setLinewrap(2).before(a.getGroup());
 			c.setNoSpace().between(a.getLeftCurlyBracketKeyword_4(), a.getRightCurlyBracketKeyword_9());
 			setBraces(c, a.getLeftCurlyBracketKeyword_4(), a.getRightCurlyBracketKeyword_9());
 			//			c.setLinewrap(2).between(a.getDomainsAssignment_5(), a.getDomainsAssignment_5());
@@ -125,8 +125,7 @@ public class QVTimperativeFormatter extends AbstractEssentialOCLFormatter
 		}
 		{
 			MappingCallCSElements a = f.getMappingCallCSAccess();
-			c.setLinewrap(1).before(a.getIsInfiniteInfiniteKeyword_1_0());
-			c.setLinewrap(1).before(a.getCallKeyword_2());
+			c.setLinewrap(1).before(a.getGroup());
 			c.setNoLinewrap().after(a.getIsInfiniteInfiniteKeyword_1_0());
 			setAppendedBraces(c, a.getLeftCurlyBracketKeyword_4(), a.getRightCurlyBracketKeyword_6());
 			//		    c.setIndentation(a.getLeftCurlyBracketKeyword_3(), a.getRightCurlyBracketKeyword_5());
@@ -137,13 +136,13 @@ public class QVTimperativeFormatter extends AbstractEssentialOCLFormatter
 		}
 		{
 			MappingLoopCSElements a = f.getMappingLoopCSAccess();
-			c.setLinewrap(1).before(a.getObserveKeyword_0_0());
+			c.setLinewrap(1).before(a.getGroup());
 			c.setNoSpace().before(a.getCommaKeyword_0_2_0());
 			setAppendedBraces(c, a.getLeftCurlyBracketKeyword_5(), a.getRightCurlyBracketKeyword_7());
 		}
 		{
 			NewStatementCSElements a = f.getNewStatementCSAccess();
-			c.setLinewrap(1).before(a.getObserveKeyword_0_0());
+			c.setLinewrap(1).before(a.getGroup());
 			c.setNoSpace().before(a.getCommaKeyword_0_2_0());
 			c.setLinewrap(1).before(a.getNewKeyword_1());
 			c.setNoSpace().around(a.getColonKeyword_2());
@@ -151,19 +150,19 @@ public class QVTimperativeFormatter extends AbstractEssentialOCLFormatter
 		}
 		{
 			OutVariableCSElements a = f.getOutVariableCSAccess();
-			c.setLinewrap(1).before(a.getOutKeyword_0());
+			c.setLinewrap(1).before(a.getGroup());
 			c.setNoSpace().before(a.getSemicolonKeyword_4());
 		}
 		{
 			QualifiedPackageCSElements a = f.getQualifiedPackageCSAccess();
-			c.setLinewrap(2).before(a.getPackageKeyword_0());
+			c.setLinewrap(2).before(a.getGroup());
 			c.setNoSpace().between(a.getLeftCurlyBracketKeyword_5_0_0(), a.getRightCurlyBracketKeyword_5_0_2());
 			setBraces(c, a.getLeftCurlyBracketKeyword_5_0_0(), a.getRightCurlyBracketKeyword_5_0_2());
 			setNoSpaceLineWrap(c, a.getSemicolonKeyword_5_1());
 		}
 		{
 			QueryCSElements a = f.getQueryCSAccess();
-			c.setLinewrap(2).before(a.getIsTransientAssignment_0());
+			c.setLinewrap(2).before(a.getGroup());
 			c.setNoSpace().around(a.getLeftParenthesisKeyword_4());
 			c.setNoSpace().around(a.getLeftParenthesisKeyword_4());
 			c.setNoSpace().before(a.getCommaKeyword_5_1_0());
@@ -180,7 +179,7 @@ public class QVTimperativeFormatter extends AbstractEssentialOCLFormatter
 		}
 		{
 			SetStatementCSElements a = f.getSetStatementCSAccess();
-			c.setLinewrap(1).before(a.getObserveKeyword_0_0());
+			c.setLinewrap(1).before(a.getGroup());
 			c.setNoSpace().before(a.getCommaKeyword_0_2_0());
 			c.setLinewrap(1).before(a.getIsNotifyAssignment_1());
 			c.setNoSpace().around(a.getFullStopKeyword_4());
@@ -194,7 +193,7 @@ public class QVTimperativeFormatter extends AbstractEssentialOCLFormatter
 		//	    }
 		{
 			TransformationCSElements a = f.getTransformationCSAccess();
-			c.setLinewrap(2).before(a.getTransformationKeyword_0());
+			c.setLinewrap(2).before(a.getGroup());
 			c.setNoSpace().between(a.getLeftCurlyBracketKeyword_3(), a.getRightCurlyBracketKeyword_5());
 			setBraces(c, a.getLeftCurlyBracketKeyword_3(), a.getRightCurlyBracketKeyword_5());
 			setNoSpaceLineWrap(c, a.getSemicolonKeyword_4_1());
