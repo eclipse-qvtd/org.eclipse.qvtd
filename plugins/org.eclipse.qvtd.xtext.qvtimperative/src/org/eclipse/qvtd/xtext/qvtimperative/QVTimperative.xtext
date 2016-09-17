@@ -24,7 +24,8 @@ TopLevelCS:
 	(ownedPackages+=QualifiedPackageCS | ownedTransformations+=TransformationCS | ownedMappings+=MappingCS | ownedQueries+=QueryCS)*
 ;
 
-AddStatementCS: 'add' targetVariable=[qvtimperative::ConnectionVariable|UnrestrictedName] '+=' ownedExpression=ExpCS ';';
+AddStatementCS: ('observe' observedProperties+=PathNameCS (',' observedProperties+=PathNameCS)*)?
+	'add' targetVariable=[qvtimperative::ConnectionVariable|UnrestrictedName] '+=' ownedExpression=ExpCS ';';
 
 CommitStatementCS returns StatementCS:	NewStatementCS | SetStatementCS;
 	
@@ -32,11 +33,11 @@ CheckStatementCS: 'check' ownedCondition=ExpCS ';';
 	
 ControlStatementCS returns MappingStatementCS: AddStatementCS | MappingCallCS | MappingLoopCS;
 
-DeclareStatementCS: isChecked?='check'? 'var' name=UnrestrictedName (':' ownedType=TypeExpCS)? ':=' ownedInit=ExpCS ';';
+DeclareStatementCS:  ('observe' observedProperties+=PathNameCS (',' observedProperties+=PathNameCS)*)?
+	isChecked?='check'? 'var' name=UnrestrictedName (':' ownedType=TypeExpCS)? ':=' ownedExpression=ExpCS ';';
 	
 DirectionCS: {DirectionCS} (isChecked?='check'|isEnforced?='enforce')? name=UnrestrictedName?
 	'imports' imports+=[pivot::Package|UnrestrictedName] (',' imports+=[pivot::Package|UnrestrictedName])*
-	('uses' uses+=[qvtimperative::ImperativeDomain|UnrestrictedName] (',' uses+=[qvtimperative::ImperativeDomain|UnrestrictedName])*)?
 ;
 
 GuardStatementCS returns StatementCS: OutVariableCS | DeclareStatementCS | DeclareStatementCS | CheckStatementCS;
@@ -50,7 +51,6 @@ InoutVariableCS: 'inout' name=UnrestrictedName ':' ownedType=TypeExpCS ';';
 
 MappingCS: {MappingCS} 'map' name=UnrestrictedName ('in' ownedInPathName=PathNameCS)?
 	'{'
-	ownedDomains+=(SourceDomainCS | TargetDomainCS)*
 	(ownedGuardVariables+=GuardVariableCS | ownedInoutVariables+=InoutVariableCS)*
 	ownedStatements+=GuardStatementCS*
 	ownedStatements+=CommitStatementCS*
@@ -60,14 +60,15 @@ MappingCS: {MappingCS} 'map' name=UnrestrictedName ('in' ownedInPathName=PathNam
 MappingCallCS: {MappingCallCS} isInfinite?='infinite'? 'call' ownedPathName=PathNameCS
 	'{' ownedBindings+=MappingCallBindingCS* '}';
 
-MappingCallBindingCS: referredVariable=[pivot::VariableDeclaration|UnrestrictedName] (':='|isPolled?='?=') ownedValue=ExpCS ';';
+MappingCallBindingCS: referredVariable=[pivot::VariableDeclaration|UnrestrictedName] ':=' ownedValue=ExpCS ';';
 	
-MappingLoopCS: 'for' ownedIterator=MappingIteratorCS 'in' ownedInExpression=ExpCS '{' ownedMappingStatements+=ControlStatementCS+ '}';
+MappingLoopCS: ('observe' observedProperties+=PathNameCS (',' observedProperties+=PathNameCS)*)?
+	'for' ownedIterator=MappingIteratorCS 'in' ownedInExpression=ExpCS '{' ownedMappingStatements+=ControlStatementCS+ '}';
 	
 MappingIteratorCS returns essentialocl::VariableCS: name=UnrestrictedName (':' ownedType=TypeExpCS)?;
 
-NewStatementCS:
-	'new' ':' referredTypedModel=[qvtimperative::ImperativeTypedModel|UnrestrictedName] name=UnrestrictedName ':' ownedType=TypeExpCS (':=' ownedInit=ExpCS)?';'
+NewStatementCS: ('observe' observedProperties+=PathNameCS (',' observedProperties+=PathNameCS)*)?
+	'new' ':' referredTypedModel=[qvtimperative::ImperativeTypedModel|UnrestrictedName] name=UnrestrictedName ':' ownedType=TypeExpCS (':=' ownedExpression=ExpCS)?';'
 ;
 	
 OutVariableCS: 'out' name=UnrestrictedName ':' ownedType=TypeExpCS ';';
@@ -90,21 +91,12 @@ QueryCS: isTransient?='transient'? 'query' ownedPathName=ScopeNameCS name=Unrest
 ScopeNameCS returns base::PathNameCS:
 	ownedPathElements+=FirstPathElementCS '::' (ownedPathElements+=NextPathElementCS '::')*;
 
-SetStatementCS: (isNotify?='notify')? 'set' referredVariable=[pivot::VariableDeclaration|UnrestrictedName] '.' referredProperty=[pivot::Property|UnrestrictedName] ':=' ownedInit=ExpCS ';';
+SetStatementCS: ('observe' observedProperties+=PathNameCS (',' observedProperties+=PathNameCS)*)?
+	(isNotify?='notify')? 'set' referredVariable=[pivot::VariableDeclaration|UnrestrictedName] '.' referredProperty=[pivot::Property|UnrestrictedName] ':=' ownedExpression=ExpCS ';';
 	
-SourceDomainCS returns DomainCS: isCheck?='check' direction=[qvtimperative::ImperativeTypedModel|UnrestrictedName]
-	('{' ('check' checkedProperties+=PathNameCS (',' checkedProperties+=PathNameCS)*)? '}')?
-	'(' ')' '{' '}'
-;
-
 TransformationCS:
 	'transformation' ownedPathName=ScopeNameCS? name=UnreservedName '{' (ownedDirections+=DirectionCS ';')* '}';
-	
-TargetDomainCS returns DomainCS: isEnforce?='enforce' direction=[qvtimperative::ImperativeTypedModel|UnrestrictedName]
-	('{' ('check' checkedProperties+=PathNameCS (',' checkedProperties+=PathNameCS)*)? '}')?
-	'(' ')' '{' '}'
-;
-		
+			
 UnrestrictedName returns ecore::EString:
 	EssentialOCLUnrestrictedName
 |	'check'

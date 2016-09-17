@@ -8,7 +8,7 @@
   <eAnnotations source="http://www.eclipse.org/OCL/Import">
     <details key="qvtb" value="../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#/"/>
   </eAnnotations>
-  <eClassifiers xsi:type="ecore:EClass" name="AddStatement" eSuperTypes="#//MappingStatement">
+  <eClassifiers xsi:type="ecore:EClass" name="AddStatement" eSuperTypes="#//MappingStatement #//ObservableStatement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="A ConnectionStatement assigns results to a ConnectionVariable."/>
     </eAnnotations>
@@ -18,23 +18,15 @@
         <details key="body" value="assignment"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedInit" lowerBound="1"
-        eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//OCLExpression"
-        containment="true">
-      <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
-        <details key="body" value="valueAssignment"/>
-      </eAnnotations>
-    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isEnforcedUnique" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="CheckStatement" eSuperTypes="#//Statement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedCondition" lowerBound="1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedExpression" lowerBound="1"
         eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//OCLExpression"
-        containment="true">
-      <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
-        <details key="body" value="predicate"/>
-      </eAnnotations>
-    </eStructuralFeatures>
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CheckStatement" eSuperTypes="#//ObservableStatement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedExpression" lowerBound="1"
+        eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//OCLExpression"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ConnectionVariable" abstract="true"
       eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#//VariableDeclaration">
@@ -42,16 +34,16 @@
       <details key="documentation" value="A ConnectionVariable accumulates one or more assignments."/>
     </eAnnotations>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="DeclareStatement" eSuperTypes="#//VariableStatement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedInit" lowerBound="1"
-        eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//OCLExpression"
-        containment="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DeclareStatement" eSuperTypes="#//VariableStatement #//ObservableStatement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isChecked" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         defaultValueLiteral="false">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Whether the variable initialization needs to be checked as a predicate. This is a derivation of not ownedInit.type.conformsTo(self.type)."/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedExpression" lowerBound="1"
+        eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//OCLExpression"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="GuardVariable" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#//VariableDeclaration">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -59,14 +51,6 @@
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="referredTypedModel" lowerBound="1"
         eType="#//ImperativeTypedModel"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ImperativeDomain" eSuperTypes="../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#//Domain">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="checkedProperties" ordered="false"
-        upperBound="-1" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//Property">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="The properties whose accesses must be polled for readiness prior to use here."/>
-      </eAnnotations>
-    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ImperativeModel" eSuperTypes="../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#//BaseModel">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -101,12 +85,6 @@
         upperBound="-1" eType="#//InConnectionVariable" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedStatements" upperBound="-1"
         eType="#//Statement" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="checkedProperties" ordered="false"
-        upperBound="-1" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//Property">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="The properties whose accesses must be polled for readiness prior to use here."/>
-      </eAnnotations>
-    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MappingCall" eSuperTypes="#//MappingStatement ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//ReferringElement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -141,12 +119,6 @@
         <details key="documentation" value="The variable with the mappingCall.referredMapping bound to the/a value"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isPolled" eType="ecore:EDataType ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//Boolean"
-        defaultValueLiteral="false">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="A polled MappingCallBinding requires invocation of the mapping to be deverred until all relevant properties are available."/>
-      </eAnnotations>
-    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="mappingCall" eType="#//MappingCall"
         eOpposite="#//MappingCall/binding">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -160,7 +132,7 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="MappingLoop" eSuperTypes="#//MappingStatement">
+  <eClassifiers xsi:type="ecore:EClass" name="MappingLoop" eSuperTypes="#//MappingStatement #//ObservableStatement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="An Imperative MappingLoop support an iterated nested mapping call."/>
     </eAnnotations>
@@ -168,7 +140,8 @@
         eType="#//LoopVariable" containment="true" eOpposite="#//LoopVariable/owningMappingLoop"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedMappingStatements"
         upperBound="-1" eType="#//MappingStatement" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedSource" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//OCLExpression"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedExpression" lowerBound="1"
+        eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//OCLExpression"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MappingStatement" abstract="true" eSuperTypes="#//Statement">
@@ -176,20 +149,29 @@
       <details key="documentation" value="A MappingCall specifies the invocation of a referredMapping with a set of bindings&#xA;of the bound variables of the referredMapping to values provided in the invocation.&#xA;Where Collections of values are provided for isLoop bindings, a distinct invocation&#xA;is performed for each distinct permutation of Collection elements."/>
     </eAnnotations>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="NewStatement" eSuperTypes="#//VariableStatement">
+  <eClassifiers xsi:type="ecore:EClass" name="NewStatement" eSuperTypes="#//VariableStatement #//ObservableStatement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="referredTypedModel" lowerBound="1"
         eType="#//ImperativeTypedModel"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedInit" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//OCLExpression"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedExpression" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//OCLExpression"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="OutConnectionVariable" eSuperTypes="#//ConnectionVariable #//VariableStatement">
+  <eClassifiers xsi:type="ecore:EClass" name="ObservableStatement" abstract="true"
+      eSuperTypes="#//Statement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="observedProperties" ordered="false"
+        upperBound="-1" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//Property">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The properties whose accesses must be polled for readiness prior to use here."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OutConnectionVariable" eSuperTypes="#//ConnectionVariable #//VariableStatement #//ObservableStatement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="A ConnectionVariable accumulates one or more assignments."/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedInit" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//OCLExpression"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedExpression" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//OCLExpression"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="SetStatement" eSuperTypes="#//Statement">
+  <eClassifiers xsi:type="ecore:EClass" name="SetStatement" eSuperTypes="#//ObservableStatement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="targetVariable" lowerBound="1"
         eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//VariableDeclaration">
       <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
@@ -202,15 +184,11 @@
         <details key="body" value="assignment"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedInit" lowerBound="1"
-        eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//OCLExpression"
-        containment="true">
-      <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
-        <details key="body" value="valueAssignment"/>
-      </eAnnotations>
-    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isOpposite" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isNotify" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedExpression" lowerBound="1"
+        eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//OCLExpression"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Statement" abstract="true" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#//NamedElement"/>
   <eClassifiers xsi:type="ecore:EClass" name="VariableStatement" abstract="true" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#//VariableDeclaration #//Statement"/>
