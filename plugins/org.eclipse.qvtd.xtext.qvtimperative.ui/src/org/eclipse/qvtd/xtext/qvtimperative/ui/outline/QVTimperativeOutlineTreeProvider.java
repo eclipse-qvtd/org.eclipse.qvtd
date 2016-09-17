@@ -54,8 +54,8 @@ public class QVTimperativeOutlineTreeProvider extends QVTbaseOutlineTreeProvider
 	}
 
 	protected void _createChildren(IOutlineNode parentNode, MappingLoop ele) {
-		if (ele.getOwnedSource() != null) {
-			createNode(parentNode, ele.getOwnedSource());
+		if (ele.getOwnedExpression() != null) {
+			createNode(parentNode, ele.getOwnedExpression());
 		}
 		for (LoopVariable asIterator : ele.getOwnedIterators()) {
 			createNode(parentNode, asIterator);
@@ -66,7 +66,7 @@ public class QVTimperativeOutlineTreeProvider extends QVTbaseOutlineTreeProvider
 	}
 
 	protected void _createChildren(IOutlineNode parentNode, SetStatement ele) {
-		createNode(parentNode, ele.getOwnedInit());
+		createNode(parentNode, ele.getOwnedExpression());
 	}
 
 	protected void _createChildren(IOutlineNode parentNode, TopLevelCS ele) {
@@ -94,7 +94,7 @@ public class QVTimperativeOutlineTreeProvider extends QVTbaseOutlineTreeProvider
 	}
 
 	protected void _createChildren(IOutlineNode parentNode, DeclareStatement ele) {
-		createNode(parentNode, ele.getOwnedInit());
+		createNode(parentNode, ele.getOwnedExpression());
 	}
 
 	protected void _createNode(IOutlineNode parentNode, TopLevelCS ele) {

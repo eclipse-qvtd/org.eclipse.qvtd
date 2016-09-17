@@ -47,7 +47,7 @@ public class QVTimperativeDomainUsageAnalysis extends RootDomainUsageAnalysis im
 
 	@Override
 	public @NonNull DomainUsage visitAddStatement(@NonNull AddStatement object) {
-		DomainUsage valueUsage = visit(object.getOwnedInit());
+		DomainUsage valueUsage = visit(object.getOwnedExpression());
 		DomainUsage variableUsage = visit(object.getTargetVariable());
 		return intersection(variableUsage, valueUsage);
 	}
@@ -90,7 +90,7 @@ public class QVTimperativeDomainUsageAnalysis extends RootDomainUsageAnalysis im
 
 	@Override
 	public @NonNull DomainUsage visitMappingLoop(@NonNull MappingLoop object) {
-		DomainUsage sourceUsage = visit(object.getOwnedSource());
+		DomainUsage sourceUsage = visit(object.getOwnedExpression());
 		for (LoopVariable iterator : object.getOwnedIterators()) {
 			if (iterator != null) {
 				setUsage(iterator, sourceUsage);

@@ -39,20 +39,20 @@ public class QVTimperativeHelper extends QVTbaseHelper
 	public @NonNull AddStatement createAddStatement(@NonNull ConnectionVariable connectionVariable, @NonNull OCLExpression childrenExpression) {
 		AddStatement addStatement = QVTimperativeFactory.eINSTANCE.createAddStatement();
 		addStatement.setTargetVariable(connectionVariable);
-		addStatement.setOwnedInit(childrenExpression);
+		addStatement.setOwnedExpression(childrenExpression);
 		return addStatement;
 	}
 
 	public @NonNull CheckStatement createCheckStatement(@NonNull OCLExpression asConditionExpression) {
 		CheckStatement asPredicate = QVTimperativeFactory.eINSTANCE.createCheckStatement();
-		asPredicate.setOwnedCondition(asConditionExpression);
+		asPredicate.setOwnedExpression(asConditionExpression);
 		return asPredicate;
 	}
 
 	public @NonNull DeclareStatement createDeclareStatement(@NonNull String name, @NonNull Type asType, boolean isRequired, @NonNull OCLExpression initExpression) {
 		DeclareStatement asVariableStatement = QVTimperativeFactory.eINSTANCE.createDeclareStatement();
 		asVariableStatement.setIsChecked(!initExpression.getType().conformsTo(standardLibrary, asType));
-		asVariableStatement.setOwnedInit(initExpression);
+		asVariableStatement.setOwnedExpression(initExpression);
 		asVariableStatement.setName(name);
 		asVariableStatement.setType(asType);
 		asVariableStatement.setIsRequired(isRequired);
@@ -89,7 +89,7 @@ public class QVTimperativeHelper extends QVTbaseHelper
 		asVariable.setName(name);
 		asVariable.setType(asType);
 		asVariable.setIsRequired(isRequired);
-		asVariable.setOwnedInit(initExpression);
+		asVariable.setOwnedExpression(initExpression);
 		return asVariable;
 	}
 }

@@ -22,7 +22,7 @@ map __root__ in Tree2TallTree {
     } 
     for node2tallNode : tree2talltree::Node2TallNode in tree2talltree.objectsOfKind(Node2TallNode)->sortedBy(name) {
         call MiddleNode2TallNode {
-            node2tallNode ?= node2tallNode;			--isPolled
+            node2tallNode := node2tallNode;	
         } 
     } 
 }
@@ -43,15 +43,11 @@ map Edge2MiddleEdge in Tree2TallTree {
 }
 
 map MiddleNode2TallNode in Tree2TallTree {
-	check tree2talltree {
-		check Node2TallNode::tallNode, Node2TallNode::children
-	} () {} 
-	enforce talltree {
-		check TallNode::height
-	} () {}
 	in:tree2talltree node2tallNode : Node2TallNode;
 	var tallNode_name : String := node2tallNode.name;
+	observe Node2TallNode::children, Node2TallNode::tallNode
 	var tallNode_children : Set(TallNode) := node2tallNode.children?.tallNode->asSet();
+	observe Node2TallNode::children, Node2TallNode::tallNode, TallNode::height
 	var tallNode_height : Integer := if node2tallNode.children->notEmpty() then node2tallNode.children.tallNode.height->max() + 1 else 0 endif;
 	new:talltree tallNode : TallNode;
 	notify set node2tallNode.tallNode := tallNode;

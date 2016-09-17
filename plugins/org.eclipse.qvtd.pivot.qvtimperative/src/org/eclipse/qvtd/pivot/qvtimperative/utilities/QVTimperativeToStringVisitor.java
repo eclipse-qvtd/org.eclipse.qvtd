@@ -22,7 +22,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.CheckStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardVariable;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.InConnectionVariable;
@@ -33,6 +32,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.ObservableStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.OutConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
@@ -77,14 +77,14 @@ public class QVTimperativeToStringVisitor extends QVTbaseToStringVisitor impleme
 		append("add ");
 		appendName(asAddStatement.getTargetVariable());
 		append(" += ");
-		safeVisit(asAddStatement.getOwnedInit());
+		safeVisit(asAddStatement.getOwnedExpression());
 		return null;
 	}
 
 	@Override
 	public @Nullable String visitCheckStatement(@NonNull CheckStatement object) {
 		append("check ");
-		safeVisit(object.getOwnedCondition());
+		safeVisit(object.getOwnedExpression());
 		return null;
 	}
 
@@ -112,7 +112,7 @@ public class QVTimperativeToStringVisitor extends QVTbaseToStringVisitor impleme
 			append(" : ");
 			appendElementType(asVariable);
 		}
-		OCLExpression asInit = asVariable.getOwnedInit();
+		OCLExpression asInit = asVariable.getOwnedExpression();
 		if (asInit != null) {
 			append(" := ");
 			safeVisit(asInit);
@@ -129,12 +129,6 @@ public class QVTimperativeToStringVisitor extends QVTbaseToStringVisitor impleme
 			append(" : ");
 			appendElementType(asVariable);
 		}
-		return null;
-	}
-
-	@Override
-	public String visitImperativeDomain(@NonNull ImperativeDomain object) {
-		appendQualifiedName(object);
 		return null;
 	}
 
@@ -193,7 +187,7 @@ public class QVTimperativeToStringVisitor extends QVTbaseToStringVisitor impleme
 				append(", ");
 			}
 			appendName(binding.getBoundVariable());
-			append(binding.isIsPolled() ? " ?= " : " := ");
+			append(" := ");
 			safeVisit(binding.getValue());
 			isFirst = false;
 		}
@@ -204,7 +198,7 @@ public class QVTimperativeToStringVisitor extends QVTbaseToStringVisitor impleme
 	@Override
 	public @Nullable String visitMappingCallBinding(@NonNull MappingCallBinding object) {
 		appendName(object.getBoundVariable());
-		append(object.isIsPolled() ? " ?= " : " := ");
+		append(" := ");
 		safeVisit(object.getValue());
 		return null;
 	}
@@ -220,7 +214,7 @@ public class QVTimperativeToStringVisitor extends QVTbaseToStringVisitor impleme
 			isFirst = false;
 		}
 		append(" := ");
-		safeVisit(object.getOwnedSource());
+		safeVisit(object.getOwnedExpression());
 		return null;
 	}
 
@@ -240,11 +234,16 @@ public class QVTimperativeToStringVisitor extends QVTbaseToStringVisitor impleme
 			append(" : ");
 			appendElementType(newStatement);
 		}
-		OCLExpression initExpression = newStatement.getOwnedInit();
+		OCLExpression initExpression = newStatement.getOwnedExpression();
 		if (initExpression != null) {
 			append(" = ");
 			safeVisit(initExpression);
 		}
+		return null;
+	}
+
+	@Override
+	public @Nullable String visitObservableStatement(@NonNull ObservableStatement object) {
 		return null;
 	}
 
@@ -270,7 +269,7 @@ public class QVTimperativeToStringVisitor extends QVTbaseToStringVisitor impleme
 		append(".");
 		appendName(QVTimperativeUtil.getTargetProperty(asSetStatement));
 		append(" := ");
-		safeVisit(asSetStatement.getOwnedInit());
+		safeVisit(asSetStatement.getOwnedExpression());
 		return null;
 	}
 

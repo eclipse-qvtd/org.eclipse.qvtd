@@ -22,7 +22,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.CheckStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardVariable;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.InConnectionVariable;
@@ -33,6 +32,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.ObservableStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.OutConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
@@ -49,7 +49,7 @@ public class QVTimperativePrettyPrintVisitor extends QVTbasePrettyPrintVisitor i
 		context.append("add ");
 		context.appendName(asAddStatement.getTargetVariable());
 		context.append(" += ");
-		safeVisit(asAddStatement.getOwnedInit());
+		safeVisit(asAddStatement.getOwnedExpression());
 		context.append(";\n");
 		return null;
 	}
@@ -57,7 +57,7 @@ public class QVTimperativePrettyPrintVisitor extends QVTbasePrettyPrintVisitor i
 	@Override
 	public Object visitCheckStatement(@NonNull CheckStatement pPredicate) {
 		context.append("check ");
-		safeVisit(pPredicate.getOwnedCondition());
+		safeVisit(pPredicate.getOwnedExpression());
 		context.append(";\n");
 		return null;
 	}
@@ -79,7 +79,7 @@ public class QVTimperativePrettyPrintVisitor extends QVTbasePrettyPrintVisitor i
 			context.append(" : ");
 			context.appendTypedMultiplicity(asVariable);
 		}
-		OCLExpression asInit = asVariable.getOwnedInit();
+		OCLExpression asInit = asVariable.getOwnedExpression();
 		if (asInit != null) {
 			context.append(" := ");
 			safeVisit(asInit);
@@ -99,12 +99,6 @@ public class QVTimperativePrettyPrintVisitor extends QVTbasePrettyPrintVisitor i
 			context.appendTypedMultiplicity(asVariable);
 		}
 		context.append(";\n");
-		return null;
-	}
-
-	@Override
-	public Object visitImperativeDomain(@NonNull ImperativeDomain object) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -187,7 +181,7 @@ public class QVTimperativePrettyPrintVisitor extends QVTbasePrettyPrintVisitor i
 	@Override
 	public Object visitMappingCallBinding(@NonNull MappingCallBinding pMappingCallBinding) {
 		context.appendName(pMappingCallBinding.getBoundVariable());
-		context.append(pMappingCallBinding.isIsPolled() ? " ?= " : " := ");
+		context.append(" := ");
 		safeVisit(pMappingCallBinding.getValue());
 		context.append(";\n");
 		return null;
@@ -198,7 +192,7 @@ public class QVTimperativePrettyPrintVisitor extends QVTbasePrettyPrintVisitor i
 		context.append("for ");
 		context.appendElement(pMappingLoop.getOwnedIterators().get(0));
 		context.append(" in ");
-		context.appendElement(pMappingLoop.getOwnedSource());
+		context.appendElement(pMappingLoop.getOwnedExpression());
 		context.append(" {");
 		context.push("", "");
 		for (MappingStatement pMappingStatement : pMappingLoop.getOwnedMappingStatements()) {
@@ -226,13 +220,18 @@ public class QVTimperativePrettyPrintVisitor extends QVTbasePrettyPrintVisitor i
 			//			context.appendQualifiedType(type);
 			context.appendTypedMultiplicity(pNewStatement);
 		}
-		OCLExpression initExpression = pNewStatement.getOwnedInit();
+		OCLExpression initExpression = pNewStatement.getOwnedExpression();
 		if (initExpression != null) {
 			context.append(" = ");
 			safeVisit(initExpression);
 		}
 		context.append(";\n");
 		return null;
+	}
+
+	@Override
+	public Object visitObservableStatement(@NonNull ObservableStatement object) {
+		return visiting(object);
 	}
 
 	@Override
@@ -256,7 +255,7 @@ public class QVTimperativePrettyPrintVisitor extends QVTbasePrettyPrintVisitor i
 		context.append(".");
 		context.appendName(QVTimperativeUtil.getTargetProperty(asSetStatement));
 		context.append(" := ");
-		safeVisit(asSetStatement.getOwnedInit());
+		safeVisit(asSetStatement.getOwnedExpression());
 		context.append(";\n");
 		return null;
 	}

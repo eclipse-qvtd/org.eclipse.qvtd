@@ -15,6 +15,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -47,6 +48,7 @@ import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.Iteration;
+import org.eclipse.ocl.pivot.LanguageExpression;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
@@ -101,8 +103,8 @@ import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.CheckStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardVariable;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.InConnectionVariable;
@@ -113,8 +115,8 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.ObservableStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.OutConnectionVariable;
-import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 import org.eclipse.qvtd.pivot.qvtimperative.VariableStatement;
@@ -123,7 +125,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiTransformationAnalysi
 import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 
-public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisitor<CGNamedElement>
+public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisitor<@Nullable CGNamedElement>
 {
 	public static class CGMappingCallBindingComparator implements Comparator<@NonNull CGMappingCallBinding>
 	{
@@ -552,13 +554,41 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 	}
 
 	@Override
+	protected @Nullable CGValuedElement inlineOperationCall(@NonNull OperationCallExp callExp, @NonNull LanguageExpression specification) {
+		CGValuedElement cgInlineOperationCall = super.inlineOperationCall(callExp, specification);
+		if (cgInlineOperationCall != null) {
+			//
+			//	We need to follow the path from an inlined property call to thge outer statement to mark the
+			//	outer statement as observing the property. The OCL CG leaves the inline code as orphans, so
+			//	add an adapter to workaround the broken containment path.
+			//
+			Element asInlineOperationCall = cgInlineOperationCall.getAst();
+			asInlineOperationCall.eAdapters().add(new InlinedBodyAdapter(callExp));
+		}
+		return cgInlineOperationCall;
+	}
+
+	public static class InlinedBodyAdapter extends AdapterImpl
+	{
+		protected final @NonNull OperationCallExp operationCallExp;
+
+		public InlinedBodyAdapter(@NonNull OperationCallExp operationCallExp) {
+			this.operationCallExp = operationCallExp;
+		}
+
+		public @NonNull OperationCallExp getOperationCallExp() {
+			return operationCallExp;
+		}
+	}
+
+	@Override
 	public @Nullable CGNamedElement visitAddStatement(@NonNull AddStatement asAddStatement) {
 		ConnectionVariable asVariable = asAddStatement.getTargetVariable();
 		if (asVariable == null) {
 			return null;
 		}
 		CGVariable cgVariable = getVariable(asVariable);
-		OCLExpression asInitValue = asAddStatement.getOwnedInit();
+		OCLExpression asInitValue = asAddStatement.getOwnedExpression();
 		assert (cgVariable instanceof CGConnectionVariable) || (cgVariable instanceof CGAccumulator);
 		CGValuedElement initValue = doVisit(CGValuedElement.class, asInitValue);
 		CGConnectionAssignment cgConnectionAssignment = QVTiCGModelFactory.eINSTANCE.createCGConnectionAssignment();
@@ -579,7 +609,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 		CGIfExp cgPredicate = CGModelFactory.eINSTANCE.createCGIfExp();
 		cgPredicate.setTypeId(analyzer.getTypeId(TypeId.BOOLEAN));
 		cgPredicate.setRequired(true);
-		OCLExpression asConditionExpression = asPredicate.getOwnedCondition();
+		OCLExpression asConditionExpression = asPredicate.getOwnedExpression();
 		assert asConditionExpression != null;
 		cgPredicate.setCondition(doVisit(CGValuedElement.class, asConditionExpression));
 		CGConstantExp cgElse = analyzer.createCGConstantExp(asConditionExpression, analyzer.getBoolean(false));
@@ -598,11 +628,11 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 
 	@Override
 	public CGNamedElement visitDeclareStatement(@NonNull DeclareStatement asVariable) {
-		OCLExpression asInit = asVariable.getOwnedInit();
+		OCLExpression asInit = asVariable.getOwnedExpression();
 		assert asInit != null;
 		if (!asVariable.isIsChecked()) {
 			/*		CGVariable cgVariable = getVariable(asVariable);
-			CGValuedElement initValue = doVisit(CGValuedElement.class, asVariable.getOwnedInit());
+			CGValuedElement initValue = doVisit(CGValuedElement.class, asVariable.getOwnedExpression());
 			cgVariable.setInit(initValue);
 			cgVariable.setTypeId(initValue.getTypeId());
 			cgVariable.setRequired(initValue.isRequired());
@@ -682,7 +712,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 			return null;
 		}
 		CGVariable cgVariable = getVariable(asVariable);
-		OCLExpression asInitValue = asCheckVariableStatement.getOwnedInit();
+		OCLExpression asInitValue = asCheckVariableStatement.getOwnedExpression();
 		assert !(cgVariable instanceof CGConnectionVariable);
 		CGValuedElement initValue = doVisit(CGValuedElement.class, asInitValue);
 		cgVariable.setInit(initValue);
@@ -690,7 +720,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 		cgVariable.setRequired(initValue.isRequired());
 		return cgVariable; * /
 		VariableDeclaration asVariable = asCheckVariableStatement.getTargetVariable();
-		OCLExpression asInit = asCheckVariableStatement.getOwnedInit();
+		OCLExpression asInit = asCheckVariableStatement.getOwnedExpression();
 		assert (asVariable != null) && (asInit != null);
 		getBodyBuilder().appendCheckedLetVariable(asVariable, asInit);
 		return null;
@@ -739,11 +769,6 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 	public @Nullable CGNamedElement visitGuardVariable(@NonNull GuardVariable object) {
 		return visiting(object);
 		//		return getVariable(asVariable);
-	}
-
-	@Override
-	public @Nullable CGNamedElement visitImperativeDomain(@NonNull ImperativeDomain object) {
-		return visiting(object);
 	}
 
 	@Override
@@ -833,7 +858,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 				cgMappingLoop.getIterators().add(cgIterator);
 			}
 		}
-		cgMappingLoop.setSource(doVisit(CGValuedElement.class, asMappingLoop.getOwnedSource()));
+		cgMappingLoop.setSource(doVisit(CGValuedElement.class, asMappingLoop.getOwnedExpression()));
 		//		cgIterator.setNonInvalid();
 		//		cgIterator.setNonNull();
 		cgMappingLoop.setAst(asMappingLoop);
@@ -857,7 +882,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 
 	@Override
 	public @Nullable CGNamedElement visitNewStatement(@NonNull NewStatement asNewStatement) {
-		OCLExpression asInit = asNewStatement.getOwnedInit();
+		OCLExpression asInit = asNewStatement.getOwnedExpression();
 		if (asInit == null) {
 			getBodyBuilder().addRealizedVariable(asNewStatement);
 		}
@@ -868,14 +893,19 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 	}
 
 	@Override
+	public CGNamedElement visitObservableStatement(@NonNull ObservableStatement object) {
+		return visiting(object);
+	}
+
+	@Override
 	public @Nullable CGNamedElement visitOutConnectionVariable(@NonNull OutConnectionVariable asVariable) {
 		/*		CGVariable cgVariable = getVariable(asConnectionVariable);
-		CGValuedElement initValue = doVisit(CGValuedElement.class, asConnectionVariable.getOwnedInit());
+		CGValuedElement initValue = doVisit(CGValuedElement.class, asConnectionVariable.getOwnedExpression());
 		cgVariable.setInit(initValue);
 		cgVariable.setTypeId(initValue.getTypeId());
 		cgVariable.setRequired(initValue.isRequired());
 		return cgVariable; */
-		OCLExpression asInit = asVariable.getOwnedInit();
+		OCLExpression asInit = asVariable.getOwnedExpression();
 		CGAccumulator cgAccumulator = CGModelFactory.eINSTANCE.createCGAccumulator();
 		cgAccumulator.setAst(asVariable);
 		cgAccumulator.setName(asVariable.getName());
@@ -927,7 +957,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 			//			cgPredicate.setName(asPredicate.getName());
 			cgPropertyAssignment.setTypeId(analyzer.getTypeId(TypeId.OCL_VOID));
 			//			cgMappingCallBinding.setValueName(localnameasMappingCallBinding.getBoundVariable().getName());
-			cgPropertyAssignment.setInitValue(doVisit(CGValuedElement.class, asSetStatement.getOwnedInit()));
+			cgPropertyAssignment.setInitValue(doVisit(CGValuedElement.class, asSetStatement.getOwnedExpression()));
 			EStructuralFeature eStructuralFeature = (EStructuralFeature) asProperty.getESObject();
 			if (eStructuralFeature != null) {
 				try {
@@ -983,7 +1013,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 			//		cgPredicate.setName(asPredicate.getName());
 			cgPropertyAssignment.setTypeId(analyzer.getTypeId(TypeId.OCL_VOID));
 			//		cgMappingCallBinding.setValueName(localnameasMappingCallBinding.getBoundVariable().getName());
-			cgPropertyAssignment.setInitValue(doVisit(CGValuedElement.class, asSetStatement.getOwnedInit()));
+			cgPropertyAssignment.setInitValue(doVisit(CGValuedElement.class, asSetStatement.getOwnedExpression()));
 
 			CGExecutorProperty cgExecutorProperty = analyzer.createExecutorProperty(asTargetProperty);
 			cgPropertyAssignment.setExecutorProperty(cgExecutorProperty);
@@ -1029,7 +1059,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 	public @Nullable CGNamedElement visitVariable(@NonNull Variable object) {
 		return visiting(object);		// Really should not be happening.
 		/*		CGVariable cgVariable = getVariable(asVariable);
-		CGValuedElement initValue = doVisit(CGValuedElement.class, asVariable.getOwnedInit());
+		CGValuedElement initValue = doVisit(CGValuedElement.class, asVariable.getOwnedExpression());
 		cgVariable.setInit(initValue);
 		cgVariable.setTypeId(initValue.getTypeId());
 		cgVariable.setRequired(initValue.isRequired());

@@ -46,11 +46,6 @@ implements QVTimperativeVisitor<IStepper>
 	}
 
 	@Override
-	public @Nullable IStepper visitImperativeDomain(org.eclipse.qvtd.pivot.qvtimperative.@NonNull ImperativeDomain object) {
-		return visitDomain(object);
-	}
-
-	@Override
 	public @Nullable IStepper visitImperativeModel(org.eclipse.qvtd.pivot.qvtimperative.@NonNull ImperativeModel object) {
 		return visitBaseModel(object);
 	}

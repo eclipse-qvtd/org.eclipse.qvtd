@@ -31,6 +31,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.ObservableStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.OutConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
@@ -116,6 +117,11 @@ public class QVTiStepperVisitor extends AbstractQVTimperativeStepperVisitor
 	@Override
 	public @Nullable IStepper visitNewStatement(@NonNull NewStatement object) {
 		return NonStepper.INSTANCE;
+	}
+
+	@Override
+	public @Nullable IStepper visitObservableStatement(@NonNull ObservableStatement object) {
+		return PreStepper.INSTANCE;
 	}
 
 	@Override

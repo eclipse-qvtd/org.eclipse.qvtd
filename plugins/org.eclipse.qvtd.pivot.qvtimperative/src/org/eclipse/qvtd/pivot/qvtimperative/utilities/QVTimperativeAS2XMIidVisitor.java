@@ -18,7 +18,6 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.internal.utilities.AS2XMIid;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
@@ -50,11 +49,6 @@ public class QVTimperativeAS2XMIidVisitor extends AbstractQVTimperativeAS2XMIidV
 			s.append(index);
 			s.append(SCOPE_SEPARATOR);
 		}
-	}
-
-	@Override
-	public @Nullable Boolean visitImperativeDomain(@NonNull ImperativeDomain asImperativeDomain) {
-		return null;
 	}
 
 	@Override

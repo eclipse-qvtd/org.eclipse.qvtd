@@ -4,13 +4,14 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
 package org.eclipse.qvtd.codegen.qvti.analyzer;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cse.GlobalPlace;
 import org.eclipse.ocl.examples.codegen.java.JavaDependencyVisitor;
 import org.eclipse.qvtd.codegen.qvti.java.QVTiGlobalContext;
@@ -37,8 +38,8 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel;
 import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
 
-public class QVTiDependencyVisitor extends JavaDependencyVisitor implements QVTiCGModelVisitor<Object>
-{	
+public class QVTiDependencyVisitor extends JavaDependencyVisitor implements QVTiCGModelVisitor<@Nullable Object>
+{
 	public QVTiDependencyVisitor(@NonNull QVTiAnalyzer analyzer, @NonNull QVTiGlobalContext globalContext, @NonNull GlobalPlace globalPlace) {
 		super(analyzer, globalContext, globalPlace);
 	}

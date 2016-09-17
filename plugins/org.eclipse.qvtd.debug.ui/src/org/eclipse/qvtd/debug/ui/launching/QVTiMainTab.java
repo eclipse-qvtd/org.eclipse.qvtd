@@ -12,10 +12,7 @@
 package org.eclipse.qvtd.debug.ui.launching;
 
 import java.io.IOException;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
-
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -23,12 +20,9 @@ import org.eclipse.qvtd.compiler.CompilerChain;
 import org.eclipse.qvtd.compiler.QVTiCompilerChain;
 import org.eclipse.qvtd.debug.launching.QVTiLaunchConstants;
 import org.eclipse.qvtd.debug.ui.QVTdDebugUIPlugin;
-import org.eclipse.qvtd.pivot.qvtbase.Domain;
-import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
-import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.swt.graphics.Image;
@@ -69,39 +63,17 @@ public class QVTiMainTab extends MainTab implements QVTiLaunchConstants
 			@NonNull Map<@NonNull String, @Nullable String> oldOutputsMap, @NonNull Map<@NonNull String, @Nullable String> newOutputsMap,
 			@NonNull Map<@NonNull String, @Nullable String> intermediateMap) {
 		super.updateGroups(transformation, oldInputsMap, newInputsMap, oldOutputsMap, newOutputsMap, intermediateMap);
-		Set<@NonNull TypedModel> inputs = new HashSet<@NonNull TypedModel>();
-		Set<@NonNull TypedModel> outputs = new HashSet<@NonNull TypedModel>();
-		for (Rule rule : transformation.getRule()) {
-			if (rule instanceof Mapping) {
-				Mapping mapping = (Mapping)rule;
-				for (Domain domain : mapping.getDomain()) {
-					if (domain instanceof ImperativeDomain) {
-						ImperativeDomain coreDomain = (ImperativeDomain)domain;
-						/*						BottomPattern bottomPattern = coreDomain.getBottomPattern();
-						assert bottomPattern != null;
-						TypedModel typedModel = coreDomain.getTypedModel();
-						assert typedModel != null;
-						if ((bottomPattern != null) && (typedModel != null)) {
-							String name = typedModel.getName();
-							if (bottomPattern.getRealizedVariable().isEmpty()) {
-								if (inputs.add(typedModel)) {
-									assert name != null;
-									if (name != null) {
-										newInputsMap.put(name, null); //getDefaultPath(inputsGroup, name));
-									}
-								}
-							}
-							else {
-								if (outputs.add(typedModel)) {
-									assert name != null;
-									if (name != null) {
-										newOutputsMap.put(name, null); //getDefaultPath(outputsGroup, name));
-									}
-								}
-							}
-						} */
-					}
-				}
+		for (TypedModel typedModel : transformation.getModelParameter()) {
+			ImperativeTypedModel imperativeTypedModel = (ImperativeTypedModel)typedModel;
+			if (imperativeTypedModel.isIsChecked()) {
+				String name = imperativeTypedModel.getName();
+				assert name != null;
+				newInputsMap.put(name, null); //getDefaultPath(inputsGroup, name));
+			}
+			if (imperativeTypedModel.isIsEnforced()) {
+				String name = imperativeTypedModel.getName();
+				assert name != null;
+				newOutputsMap.put(name, null); //getDefaultPath(inputsGroup, name));
 			}
 		}
 		for (String key : newOutputsMap.keySet()) {

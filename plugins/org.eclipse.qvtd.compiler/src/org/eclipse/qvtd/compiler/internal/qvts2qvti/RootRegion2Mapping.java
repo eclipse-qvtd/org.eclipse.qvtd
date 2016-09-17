@@ -52,10 +52,8 @@ import org.eclipse.qvtd.compiler.internal.qvtp2qvts.SchedulerConstants;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
-import org.eclipse.qvtd.pivot.qvtimperative.OutConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
-import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
+import org.eclipse.qvtd.pivot.qvtimperative.OutConnectionVariable;
 
 public class RootRegion2Mapping extends AbstractScheduledRegion2Mapping
 {
@@ -88,13 +86,6 @@ public class RootRegion2Mapping extends AbstractScheduledRegion2Mapping
 					checkableTypedModels.add(qvtiTypedModel);
 				}
 			}
-		}
-		for (@NonNull TypedModel qvtiTypedModel : checkableTypedModels) {
-			ImperativeDomain domain = QVTimperativeUtil.createImperativeDomain(qvtiTypedModel);
-			domain.setIsCheckable(true);
-			mapping.getDomain().add(domain);
-			//			CoreDomain oldDomain = typedModel2domain.put(qvtiTypedModel, domain);
-			//			assert oldDomain == null;
 		}
 		/*		for (ConnectionRegion connectionRegion : rootConnections) {
 			SimpleNode connectionNode = connectionRegion.getConnectionNode();

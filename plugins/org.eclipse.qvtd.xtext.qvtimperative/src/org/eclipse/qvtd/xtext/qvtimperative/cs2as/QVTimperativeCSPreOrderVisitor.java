@@ -29,6 +29,7 @@ import org.eclipse.ocl.xtext.base.cs2as.PivotDependency;
 import org.eclipse.ocl.xtext.base.cs2as.SingleContinuation;
 import org.eclipse.ocl.xtext.basecs.ElementCS;
 import org.eclipse.ocl.xtext.basecs.PathNameCS;
+import org.eclipse.ocl.xtext.basecs.PivotableElementCS;
 import org.eclipse.ocl.xtext.basecs.TypedRefCS;
 import org.eclipse.ocl.xtext.essentialoclcs.VariableCS;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
@@ -36,7 +37,6 @@ import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardVariable;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.InConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
@@ -44,12 +44,13 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.ObservableStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.OutConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
+import org.eclipse.qvtd.xtext.qvtimperativecs.AddStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.CheckStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DeclareStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS;
-import org.eclipse.qvtd.xtext.qvtimperativecs.DomainCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.GuardVariableCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.InoutVariableCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS;
@@ -252,41 +253,41 @@ public class QVTimperativeCSPreOrderVisitor extends AbstractQVTimperativeCSPreOr
 		}
 	}
 
-	private void refreshUsedProperties(@NonNull DomainCS csDomain,
-			/*@NonNull*/ List<Property> asProperties, /*@NonNull*/ List<PathNameCS> csProperties) {
+	private void refreshObservedProperties(@NonNull PivotableElementCS csElement, /*@NonNull*/ List<PathNameCS> csProperties) {
+		ObservableStatement asElement = PivotUtil.getPivot(ObservableStatement.class, csElement);
+		assert asElement != null;
 		List<Property> properties = new ArrayList<Property>();
 		for (PathNameCS csPathName : csProperties) {
 			if (csPathName != null) {
-				Property asProperty = lookupProperty(csDomain, csPathName, null);
+				Property asProperty = lookupProperty(csElement, csPathName, null);
 				if (asProperty != null) {
 					properties.add(asProperty);
 				}
 			}
 		}
-		context.refreshList(asProperties, properties);
+		context.refreshList(asElement.getObservedProperties(), properties);
+	}
+
+	@Override
+	public Continuation<?> visitAddStatementCS(@NonNull AddStatementCS csElement) {
+		refreshObservedProperties(csElement, csElement.getObservedProperties());
+		return null;
 	}
 
 	@Override
 	public Continuation<?> visitCheckStatementCS(@NonNull CheckStatementCS csElement) {
+		refreshObservedProperties(csElement, csElement.getObservedProperties());
 		return null;
 	}
 
 	@Override
 	public @Nullable Continuation<?> visitDeclareStatementCS(@NonNull DeclareStatementCS csElement) {
+		refreshObservedProperties(csElement, csElement.getObservedProperties());
 		return new DeclareStatementCompletion(context, csElement);
 	}
 
 	@Override
 	public Continuation<?> visitDirectionCS(@NonNull DirectionCS csElement) {
-		return null;
-	}
-
-	@Override
-	public @Nullable Continuation<?> visitDomainCS(@NonNull DomainCS csDomain) {
-		ImperativeDomain asArea = PivotUtil.getPivot(ImperativeDomain.class, csDomain);
-		if (asArea != null) {
-			refreshUsedProperties(csDomain, asArea.getCheckedProperties(), csDomain.getCheckedProperties());
-		}
 		return null;
 	}
 
@@ -329,11 +330,13 @@ public class QVTimperativeCSPreOrderVisitor extends AbstractQVTimperativeCSPreOr
 
 	@Override
 	public Continuation<?> visitMappingLoopCS(@NonNull MappingLoopCS csElement) {
+		refreshObservedProperties(csElement, csElement.getObservedProperties());
 		return new MappingLoopIteratorCompletion(context, csElement);
 	}
 
 	@Override
 	public Continuation<?> visitNewStatementCS(@NonNull NewStatementCS csElement) {
+		refreshObservedProperties(csElement, csElement.getObservedProperties());
 		return new NewStatementCompletion(context, csElement);
 	}
 
@@ -354,6 +357,7 @@ public class QVTimperativeCSPreOrderVisitor extends AbstractQVTimperativeCSPreOr
 
 	@Override
 	public Continuation<?> visitSetStatementCS(@NonNull SetStatementCS csElement) {
+		refreshObservedProperties(csElement, csElement.getObservedProperties());
 		return null;
 	}
 

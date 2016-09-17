@@ -44,7 +44,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.CheckStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardVariable;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.InConnectionVariable;
@@ -55,6 +54,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.ObservableStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.OutConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
@@ -103,7 +103,7 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 	public @Nullable Object visitAddStatement(@NonNull AddStatement connectionStatement) {
 		ConnectionVariable targetVariable = connectionStatement.getTargetVariable() ;
 		if (targetVariable != null) {
-			OCLExpression valueExpression = connectionStatement.getOwnedInit();
+			OCLExpression valueExpression = connectionStatement.getOwnedExpression();
 			if (valueExpression != null) {
 				doConnectionAccumulation(targetVariable, valueExpression);
 				return true;
@@ -120,7 +120,7 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 	@Override
 	public @Nullable Object visitCheckStatement(@NonNull CheckStatement predicate) {
 		// Each predicate has a conditionExpression that is an OCLExpression
-		OCLExpression exp = predicate.getOwnedCondition();
+		OCLExpression exp = predicate.getOwnedExpression();
 		// The predicated is visited with a nested environment
 		Object expResult = exp.accept(undecoratedVisitor);
 		return expResult;
@@ -134,12 +134,12 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 	@Override
 	public @Nullable Object visitDeclareStatement(@NonNull DeclareStatement asStatement) {
 		Object initValue;
-		OCLExpression ownedInit = asStatement.getOwnedInit();
-		if (ownedInit == null) {
+		OCLExpression ownedExpression = asStatement.getOwnedExpression();
+		if (ownedExpression == null) {
 			initValue = null;
 		}
 		else {
-			initValue = ownedInit.accept(undecoratedVisitor);
+			initValue = ownedExpression.accept(undecoratedVisitor);
 			if (asStatement.isIsChecked()) {
 				Type guardType = asStatement.getType();
 				Type valueType = idResolver.getDynamicTypeOf(initValue);
@@ -170,11 +170,6 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 
 	@Override
 	public @Nullable Object visitGuardVariable(@NonNull GuardVariable object) {
-		return visiting(object);
-	}
-
-	@Override
-	public @Nullable Object visitImperativeDomain(@NonNull ImperativeDomain object) {
 		return visiting(object);
 	}
 
@@ -262,7 +257,7 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 
 	@Override
 	public @Nullable Object visitMappingLoop(@NonNull MappingLoop mappingLoop) {
-		Object inValues = mappingLoop.getOwnedSource().accept(undecoratedVisitor);
+		Object inValues = mappingLoop.getOwnedExpression().accept(undecoratedVisitor);
 		if (inValues instanceof Iterable<?>) {
 			List<LoopVariable> iterators = mappingLoop.getOwnedIterators();
 			if (iterators.size() > 0) {
@@ -294,6 +289,11 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 		return executor.internalExecuteNewStatement(newStatement, undecoratedVisitor) != null;
 	}
 
+	@Override
+	public @Nullable Object visitObservableStatement(@NonNull ObservableStatement object) {
+		return visiting(object);
+	}
+
 	/*	@Override
 	public Object visitOppositePropertyCallExp(@NonNull OppositePropertyCallExp oppositePropertyCallExp) {
 		QVTiModelManager modelManager = (QVTiModelManager) context.getModelManager();
@@ -319,10 +319,10 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 	@Override
 	public Object visitOutConnectionVariable(@NonNull OutConnectionVariable object) {
 		CollectionValue.Accumulator accumulator;
-		OCLExpression ownedInit = object.getOwnedInit();
-		if (ownedInit != null) {
-			Object initValue = ownedInit.accept(undecoratedVisitor);
-			accumulator = ValueUtil.createCollectionAccumulatorValue((CollectionTypeId) ownedInit.getTypeId());
+		OCLExpression ownedExpression = object.getOwnedExpression();
+		if (ownedExpression != null) {
+			Object initValue = ownedExpression.accept(undecoratedVisitor);
+			accumulator = ValueUtil.createCollectionAccumulatorValue((CollectionTypeId) ownedExpression.getTypeId());
 			if (initValue != null) {
 				for (Object value : (Iterable<?>)initValue) {
 					accumulator.add(value);
@@ -369,7 +369,7 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 		if (slotObject instanceof EObject) {
 			Integer childKey = null;
 			try {
-				Object boxedValue = setStatement.getOwnedInit().accept(undecoratedVisitor);
+				Object boxedValue = setStatement.getOwnedExpression().accept(undecoratedVisitor);
 				Property targetProperty = QVTimperativeUtil.getTargetProperty(setStatement);
 				Class<?> instanceClass = PivotUtil.getEcoreInstanceClass(targetProperty);
 				Object ecoreValue = idResolver.ecoreValueOf(instanceClass, boxedValue);
@@ -401,7 +401,7 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 
 	@Override
 	public @Nullable Object visitStatement(@NonNull Statement object) {
-		return visitNamedElement(object);	// Statement is abstract
+		return visiting(object);
 	}
 
 	@Override

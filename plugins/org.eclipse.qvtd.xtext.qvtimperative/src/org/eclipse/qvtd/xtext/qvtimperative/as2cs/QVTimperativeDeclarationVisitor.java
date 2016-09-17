@@ -71,8 +71,8 @@ import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.CheckStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardVariable;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.InConnectionVariable;
@@ -83,8 +83,8 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.ObservableStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.OutConnectionVariable;
-import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 import org.eclipse.qvtd.pivot.qvtimperative.VariableStatement;
@@ -96,8 +96,8 @@ import org.eclipse.qvtd.xtext.qvtbasecs.QVTbaseCSPackage;
 import org.eclipse.qvtd.xtext.qvtbasecs.QualifiedPackageCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.AddStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.CheckStatementCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.DeclareStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS;
-import org.eclipse.qvtd.xtext.qvtimperativecs.DomainCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.GuardVariableCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.InoutVariableCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS;
@@ -108,7 +108,6 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.MappingStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.NewStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.OutVariableCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.ParamDeclarationCS;
-import org.eclipse.qvtd.xtext.qvtimperativecs.DeclareStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QueryCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.SetStatementCS;
@@ -236,10 +235,6 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 		}
 	}
 
-	protected @NonNull DomainCS createCoreDomain(@NonNull ImperativeDomain asCoreDomain) {
-		return context.refreshElement(DomainCS.class, QVTimperativeCSPackage.Literals.DOMAIN_CS, asCoreDomain);
-	}
-
 	protected void gatherTransformations(@NonNull List<Transformation> asTransformations, @NonNull List<Package> ownedPackages) {
 		for (org.eclipse.ocl.pivot.Package asPackage : ownedPackages) {
 			for (org.eclipse.ocl.pivot.Class asClass : asPackage.getOwnedClasses()) {
@@ -298,6 +293,16 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 		}
 	}
 
+	protected void refreshObservedProperties(@NonNull ObservableStatement asStatement, /*@NonNull*/ List<PathNameCS> csPathNames, /*@NonNull*/ List<@NonNull Property> asProperties) {
+		List<PathNameCS> pathNames = new ArrayList<PathNameCS>();
+		for (@NonNull Property asProperty : asProperties) {
+			@NonNull PathNameCS csPathName = BaseCSFactory.eINSTANCE.createPathNameCS();
+			pathNames.add(csPathName);
+			context.refreshPathName(csPathName, asProperty, PivotUtil.getContainingNamespace(asStatement));
+		}
+		context.refreshList(csPathNames, pathNames);
+	}
+
 	protected void refreshOwnedInTransformation(@NonNull MappingCS csMapping, @NonNull Mapping asMapping) {
 		Transformation asTransformation = asMapping.getTransformation();
 		if (asTransformation != null) {
@@ -348,7 +353,8 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 		ConnectionVariable asVariable = asAddStatement.getTargetVariable();
 		assert asVariable != null;
 		csStatement.setTargetVariable(asVariable);
-		csStatement.setOwnedExpression(context.visitDeclaration(ExpCS.class, asAddStatement.getOwnedInit()));
+		csStatement.setOwnedExpression(context.visitDeclaration(ExpCS.class, asAddStatement.getOwnedExpression()));
+		refreshObservedProperties(asAddStatement, csStatement.getObservedProperties(), ClassUtil.nullFree(asAddStatement.getObservedProperties()));
 		return csStatement;
 	}
 
@@ -362,7 +368,8 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 		assert asPredicate.eContainer() instanceof Mapping;
 		CheckStatementCS csPredicate = context.refreshElement(CheckStatementCS.class, QVTimperativeCSPackage.Literals.CHECK_STATEMENT_CS, asPredicate);
 		csPredicate.setPivot(asPredicate);
-		csPredicate.setOwnedCondition(createExpCS(asPredicate.getOwnedCondition()));
+		csPredicate.setOwnedCondition(createExpCS(asPredicate.getOwnedExpression()));
+		refreshObservedProperties(asPredicate, csPredicate.getObservedProperties(), ClassUtil.nullFree(asPredicate.getObservedProperties()));
 		return csPredicate;
 	}
 
@@ -374,8 +381,9 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 	@Override
 	public ElementCS visitDeclareStatement(@NonNull DeclareStatement asVariable) {
 		DeclareStatementCS csVariable = refreshTypedElement(DeclareStatementCS.class, QVTimperativeCSPackage.Literals.DECLARE_STATEMENT_CS, asVariable);
-		csVariable.setOwnedInit(context.visitDeclaration(ExpCS.class, asVariable.getOwnedInit()));
+		csVariable.setOwnedExpression(context.visitDeclaration(ExpCS.class, asVariable.getOwnedExpression()));
 		csVariable.setIsChecked(asVariable.isIsChecked());
+		refreshObservedProperties(asVariable, csVariable.getObservedProperties(), ClassUtil.nullFree(asVariable.getObservedProperties()));
 		return csVariable;
 	}
 
@@ -411,19 +419,6 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 		csUnrealizedVariable.setReferredTypedModel(asTypedModel);
 		csUnrealizedVariable.setOwnedType(createTypeRefCS(asVariable.getType(), asUsedPackage));
 		return csUnrealizedVariable;
-	}
-
-	@Override
-	public ElementCS visitImperativeDomain(@NonNull ImperativeDomain asCoreDomain) {
-		DomainCS csDomain = createCoreDomain(asCoreDomain);
-		csDomain.setPivot(asCoreDomain);
-		csDomain.setIsCheck(asCoreDomain.isIsCheckable());
-		csDomain.setDirection((ImperativeTypedModel) asCoreDomain.getTypedModel());
-		csDomain.setIsEnforce(asCoreDomain.isIsEnforceable());
-		Transformation asTransformation = QVTbaseUtil.getContainingTransformation(asCoreDomain);
-		assert asTransformation != null;
-		refreshUsedProperties(asTransformation, csDomain.getCheckedProperties(), ClassUtil.nullFree(asCoreDomain.getCheckedProperties()));
-		return csDomain;
 	}
 
 	@Override
@@ -555,7 +550,6 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 		refreshOwnedInTransformation(csMapping, asMapping);
 		context.refreshList(csMapping.getOwnedGuardVariables(), context.visitDeclarations(GuardVariableCS.class, asMapping.getOwnedGuardVariables(), null));
 		context.refreshList(csMapping.getOwnedInoutVariables(), context.visitDeclarations(InoutVariableCS.class, asMapping.getInoutVariables(), null));
-		context.refreshList(csMapping.getOwnedDomains(), context.visitDeclarations(DomainCS.class, asMapping.getDomain(), null));
 		context.refreshList(csMapping.getOwnedStatements(), context.visitDeclarations(StatementCS.class, asMapping.getOwnedStatements(), null));
 		return csMapping;
 	}
@@ -574,7 +568,6 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 	public ElementCS visitMappingCallBinding(@NonNull MappingCallBinding asMappingCallBinding) {
 		MappingCallBindingCS csMappingCallBinding = context.refreshElement(MappingCallBindingCS.class, QVTimperativeCSPackage.Literals.MAPPING_CALL_BINDING_CS, asMappingCallBinding);
 		csMappingCallBinding.setPivot(asMappingCallBinding);
-		csMappingCallBinding.setIsPolled(asMappingCallBinding.isIsPolled());
 		csMappingCallBinding.setReferredVariable(asMappingCallBinding.getBoundVariable());
 		csMappingCallBinding.setOwnedValue(createExpCS(asMappingCallBinding.getValue()));
 		return csMappingCallBinding;
@@ -585,8 +578,9 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 		MappingLoopCS csMappingLoop = context.refreshElement(MappingLoopCS.class, QVTimperativeCSPackage.Literals.MAPPING_LOOP_CS, asMappingLoop);
 		csMappingLoop.setPivot(asMappingLoop);
 		csMappingLoop.setOwnedIterator(context.visitDeclaration(VariableCS.class, asMappingLoop.getOwnedIterators().get(0)));
-		csMappingLoop.setOwnedInExpression(createExpCS(asMappingLoop.getOwnedSource()));
+		csMappingLoop.setOwnedInExpression(createExpCS(asMappingLoop.getOwnedExpression()));
 		context.refreshList(csMappingLoop.getOwnedMappingStatements(), context.visitDeclarations(MappingStatementCS.class, asMappingLoop.getOwnedMappingStatements(), null));
+		refreshObservedProperties(asMappingLoop, csMappingLoop.getObservedProperties(), ClassUtil.nullFree(asMappingLoop.getObservedProperties()));
 		return csMappingLoop;
 	}
 
@@ -602,8 +596,14 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 		NewStatementCS csNewStatement = context.refreshNamedElement(NewStatementCS.class, QVTimperativeCSPackage.Literals.NEW_STATEMENT_CS, asNewStatement);
 		csNewStatement.setOwnedType(createTypeRefCS(asNewStatement.getType(), asUsedPackage));
 		csNewStatement.setReferredTypedModel(asTypedModel);
-		csNewStatement.setOwnedInit(context.visitDeclaration(ExpCS.class, asNewStatement.getOwnedInit()));
+		csNewStatement.setOwnedExpression(context.visitDeclaration(ExpCS.class, asNewStatement.getOwnedExpression()));
+		refreshObservedProperties(asNewStatement, csNewStatement.getObservedProperties(), ClassUtil.nullFree(asNewStatement.getObservedProperties()));
 		return csNewStatement;
+	}
+
+	@Override
+	public ElementCS visitObservableStatement(@NonNull ObservableStatement object) {
+		return visiting(object);
 	}
 
 	@Override
@@ -657,8 +657,9 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 		SetStatementCS csStatement = context.refreshElement(SetStatementCS.class, QVTimperativeCSPackage.Literals.SET_STATEMENT_CS, asSetStatement);
 		csStatement.setReferredVariable(asSetStatement.getTargetVariable());
 		csStatement.setReferredProperty(QVTimperativeUtil.getTargetProperty(asSetStatement));
-		csStatement.setOwnedInit(createExpCS(asSetStatement.getOwnedInit()));
+		csStatement.setOwnedExpression(createExpCS(asSetStatement.getOwnedExpression()));
 		csStatement.setIsNotify(asSetStatement.isIsNotify());
+		refreshObservedProperties(asSetStatement, csStatement.getObservedProperties(), ClassUtil.nullFree(asSetStatement.getObservedProperties()));
 		return csStatement;
 	}
 
@@ -699,11 +700,11 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 				if (asPredicate instanceof VariablePredicate) {
 					VariablePredicate asVariablePredicate = (VariablePredicate)asPredicate;
 					if (asVariablePredicate.getTargetVariable() == asVariable) {
-						OCLExpression ownedInit = asVariablePredicate.getConditionExpression();
+						OCLExpression ownedExpression = asVariablePredicate.getConditionExpression();
 						PredicateVariableCS csUnrealizedVariable = context.refreshNamedElement(PredicateVariableCS.class, QVTimperativeCSPackage.Literals.PREDICATE_VARIABLE_CS, asVariable);
 						csUnrealizedVariable.setPivot(asVariable);
 						csUnrealizedVariable.setOwnedType(createTypeRefCS(asVariable.getType(), getScope(asVariable)));
-						csUnrealizedVariable.setOwnedInitExpression(context.visitDeclaration(ExpCS.class, ownedInit));
+						csUnrealizedVariable.setOwnedExpressionExpression(context.visitDeclaration(ExpCS.class, ownedExpression));
 						return csUnrealizedVariable;
 					}
 				}

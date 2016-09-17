@@ -42,191 +42,191 @@ import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
 
 public class QVTiFieldingAnalyzer extends FieldingAnalyzer
 {
-	public static class QVTiAnalysisVisitor extends AnalysisVisitor implements QVTiCGModelVisitor<Set<CGVariable>>
+	public static class QVTiAnalysisVisitor extends AnalysisVisitor implements QVTiCGModelVisitor<@Nullable Set<@NonNull CGVariable>>
 	{
 		public QVTiAnalysisVisitor(@NonNull QVTiFieldingAnalyzer context) {
 			super(context);
 		}
 
 		@Override
-		public @Nullable Set<CGVariable> visitCGConnectionAssignment(@NonNull CGConnectionAssignment object) {
+		public @Nullable Set<@NonNull CGVariable> visitCGConnectionAssignment(@NonNull CGConnectionAssignment object) {
 			return visitCGValuedElement(object);
 		}
 
 		@Override
-		public @Nullable Set<CGVariable> visitCGConnectionVariable(@NonNull CGConnectionVariable object) {
+		public @Nullable Set<@NonNull CGVariable> visitCGConnectionVariable(@NonNull CGConnectionVariable object) {
 			return visitCGGuardVariable(object);
 		}
 
 		@Override
-		public @Nullable Set<CGVariable> visitCGEcoreContainerAssignment(@NonNull CGEcoreContainerAssignment object) {
+		public @Nullable Set<@NonNull CGVariable> visitCGEcoreContainerAssignment(@NonNull CGEcoreContainerAssignment object) {
 			return visitCGPropertyAssignment(object);
 		}
 
 		@Override
-		public @Nullable Set<CGVariable> visitCGEcorePropertyAssignment(@NonNull CGEcorePropertyAssignment object) {
+		public @Nullable Set<@NonNull CGVariable> visitCGEcorePropertyAssignment(@NonNull CGEcorePropertyAssignment object) {
 			return visitCGPropertyAssignment(object);
 		}
 
 		@Override
-		public @Nullable Set<CGVariable> visitCGEcoreRealizedVariable(@NonNull CGEcoreRealizedVariable object) {
+		public @Nullable Set<@NonNull CGVariable> visitCGEcoreRealizedVariable(@NonNull CGEcoreRealizedVariable object) {
 			return visitCGRealizedVariable(object);
 		}
 
 		@Override
-		public @Nullable Set<CGVariable> visitCGFunction(@NonNull CGFunction object) {
+		public @Nullable Set<@NonNull CGVariable> visitCGFunction(@NonNull CGFunction object) {
 			return visitCGOperation(object);
 		}
 
 		@Override
-		public @Nullable Set<CGVariable> visitCGFunctionCallExp(@NonNull CGFunctionCallExp object) {
+		public @Nullable Set<@NonNull CGVariable> visitCGFunctionCallExp(@NonNull CGFunctionCallExp object) {
 			return visitCGOperationCallExp(object);
 		}
 
 		@Override
-		public @Nullable Set<CGVariable> visitCGFunctionParameter(@NonNull CGFunctionParameter object) {
+		public @Nullable Set<@NonNull CGVariable> visitCGFunctionParameter(@NonNull CGFunctionParameter object) {
 			return visitCGParameter(object);
 		}
 
 		@Override
-		public @Nullable Set<CGVariable> visitCGGuardVariable(@NonNull CGGuardVariable object) {
+		public @Nullable Set<@NonNull CGVariable> visitCGGuardVariable(@NonNull CGGuardVariable object) {
 			return visitCGParameter(object);
 		}
 
 		@Override
-		public @Nullable Set<CGVariable> visitCGMapping(@NonNull CGMapping object) {
+		public @Nullable Set<@NonNull CGVariable> visitCGMapping(@NonNull CGMapping object) {
 			return visitCGNamedElement(object);
 		}
 
 		@Override
-		public @Nullable Set<CGVariable> visitCGMappingCall(@NonNull CGMappingCall object) {
+		public @Nullable Set<@NonNull CGVariable> visitCGMappingCall(@NonNull CGMappingCall object) {
 			return visitCGValuedElement(object);
 		}
 
 		@Override
-		public @Nullable Set<CGVariable> visitCGMappingCallBinding(@NonNull CGMappingCallBinding object) {
+		public @Nullable Set<@NonNull CGVariable> visitCGMappingCallBinding(@NonNull CGMappingCallBinding object) {
 			return visitCGValuedElement(object);
 		}
 
 		@Override
-		public @Nullable Set<CGVariable> visitCGMappingExp(@NonNull CGMappingExp object) {
+		public @Nullable Set<@NonNull CGVariable> visitCGMappingExp(@NonNull CGMappingExp object) {
 			return visitCGValuedElement(object);
 		}
 
 		@Override
-		public @Nullable Set<CGVariable> visitCGMappingLoop(@NonNull CGMappingLoop object) {
+		public @Nullable Set<@NonNull CGVariable> visitCGMappingLoop(@NonNull CGMappingLoop object) {
 			return visitCGIterationCallExp(object);
 		}
 
 		@Override
-		public @Nullable Set<CGVariable> visitCGMiddlePropertyAssignment(@NonNull CGMiddlePropertyAssignment object) {
+		public @Nullable Set<@NonNull CGVariable> visitCGMiddlePropertyAssignment(@NonNull CGMiddlePropertyAssignment object) {
 			return visitCGPropertyAssignment(object);
 		}
 
 		@Override
-		public @Nullable Set<CGVariable> visitCGMiddlePropertyCallExp(@NonNull CGMiddlePropertyCallExp object) {
+		public @Nullable Set<@NonNull CGVariable> visitCGMiddlePropertyCallExp(@NonNull CGMiddlePropertyCallExp object) {
 			return visitCGOppositePropertyCallExp(object);
 		}
 
 		@Override
-		public @Nullable Set<CGVariable> visitCGPropertyAssignment(@NonNull CGPropertyAssignment object) {
+		public @Nullable Set<@NonNull CGVariable> visitCGPropertyAssignment(@NonNull CGPropertyAssignment object) {
 			return visitCGValuedElement(object);
 		}
 
 		@Override
-		public @Nullable Set<CGVariable> visitCGRealizedVariable(@NonNull CGRealizedVariable object) {
+		public @Nullable Set<@NonNull CGVariable> visitCGRealizedVariable(@NonNull CGRealizedVariable object) {
 			return visitCGVariable(object);
 		}
 
 		@Override
-		public @Nullable Set<CGVariable> visitCGSequence(@NonNull CGSequence object) {
+		public @Nullable Set<@NonNull CGVariable> visitCGSequence(@NonNull CGSequence object) {
 			return visitCGValuedElement(object);
 		}
 
 		@Override
-		public @Nullable Set<CGVariable> visitCGTransformation(@NonNull CGTransformation object) {
+		public @Nullable Set<@NonNull CGVariable> visitCGTransformation(@NonNull CGTransformation object) {
 			return visitCGClass(object);
 		}
 
 		@Override
-		public @Nullable Set<CGVariable> visitCGTypedModel(@NonNull CGTypedModel object) {
+		public @Nullable Set<@NonNull CGVariable> visitCGTypedModel(@NonNull CGTypedModel object) {
 			return visitCGNamedElement(object);
 		}
 	}
 
-	public static class QVTiRewriteVisitor extends RewriteVisitor implements QVTiCGModelVisitor<Boolean>
+	public static class QVTiRewriteVisitor extends RewriteVisitor implements QVTiCGModelVisitor<@NonNull Boolean>
 	{
 		public QVTiRewriteVisitor(@NonNull QVTiAnalyzer context, @NonNull Set<@NonNull CGVariable> caughtVariables) {
 			super(context, caughtVariables);
 		}
 
 		@Override
-		public Boolean visitCGConnectionAssignment(@NonNull CGConnectionAssignment object) {
+		public @NonNull Boolean visitCGConnectionAssignment(@NonNull CGConnectionAssignment object) {
 			return visitCGValuedElement(object);
 		}
 
 		@Override
-		public Boolean visitCGConnectionVariable(@NonNull CGConnectionVariable object) {
+		public @NonNull Boolean visitCGConnectionVariable(@NonNull CGConnectionVariable object) {
 			return visitCGGuardVariable(object);
 		}
 
 		@Override
-		public Boolean visitCGEcoreContainerAssignment(@NonNull CGEcoreContainerAssignment object) {
+		public @NonNull Boolean visitCGEcoreContainerAssignment(@NonNull CGEcoreContainerAssignment object) {
 			return visitCGPropertyAssignment(object);
 		}
 
 		@Override
-		public Boolean visitCGEcorePropertyAssignment(@NonNull CGEcorePropertyAssignment object) {
+		public @NonNull Boolean visitCGEcorePropertyAssignment(@NonNull CGEcorePropertyAssignment object) {
 			return visitCGPropertyAssignment(object);
 		}
 
 		@Override
-		public Boolean visitCGEcoreRealizedVariable(@NonNull CGEcoreRealizedVariable object) {
+		public @NonNull Boolean visitCGEcoreRealizedVariable(@NonNull CGEcoreRealizedVariable object) {
 			return visitCGRealizedVariable(object);
 		}
 
 		@Override
-		public Boolean visitCGFunction(@NonNull CGFunction object) {
+		public @NonNull Boolean visitCGFunction(@NonNull CGFunction object) {
 			return visitCGOperation(object);
 		}
 
 		@Override
-		public Boolean visitCGFunctionCallExp(@NonNull CGFunctionCallExp object) {
+		public @NonNull Boolean visitCGFunctionCallExp(@NonNull CGFunctionCallExp object) {
 			return visitCGOperationCallExp(object);
 		}
 
 		@Override
-		public Boolean visitCGFunctionParameter(@NonNull CGFunctionParameter object) {
+		public @NonNull Boolean visitCGFunctionParameter(@NonNull CGFunctionParameter object) {
 			return visitCGParameter(object);
 		}
 
 		@Override
-		public Boolean visitCGGuardVariable(@NonNull CGGuardVariable object) {
+		public @NonNull Boolean visitCGGuardVariable(@NonNull CGGuardVariable object) {
 			return visitCGParameter(object);
 		}
 
 		@Override
-		public Boolean visitCGMapping(@NonNull CGMapping object) {
+		public @NonNull Boolean visitCGMapping(@NonNull CGMapping object) {
 			return visitCGNamedElement(object);
 		}
 
 		@Override
-		public Boolean visitCGMappingCall(@NonNull CGMappingCall object) {
+		public @NonNull Boolean visitCGMappingCall(@NonNull CGMappingCall object) {
 			return visitCGValuedElement(object);
 		}
 
 		@Override
-		public Boolean visitCGMappingCallBinding(@NonNull CGMappingCallBinding object) {
+		public @NonNull Boolean visitCGMappingCallBinding(@NonNull CGMappingCallBinding object) {
 			return visitCGValuedElement(object);
 		}
 
 		@Override
-		public Boolean visitCGMappingExp(@NonNull CGMappingExp object) {
+		public @NonNull Boolean visitCGMappingExp(@NonNull CGMappingExp object) {
 			return visitCGValuedElement(object);
 		}
 
 		@Override
-		public Boolean visitCGMappingLoop(@NonNull CGMappingLoop cgElement) {
+		public @NonNull Boolean visitCGMappingLoop(@NonNull CGMappingLoop cgElement) {
 			//			return visitCGIterationCallExp(object);
 			rewriteAsThrown(cgElement.getSource());
 			for (CGIterator cgIterator : cgElement.getIterators()) {
@@ -243,37 +243,37 @@ public class QVTiFieldingAnalyzer extends FieldingAnalyzer
 		}
 
 		@Override
-		public Boolean visitCGMiddlePropertyAssignment(@NonNull CGMiddlePropertyAssignment object) {
+		public @NonNull Boolean visitCGMiddlePropertyAssignment(@NonNull CGMiddlePropertyAssignment object) {
 			return visitCGPropertyAssignment(object);
 		}
 
 		@Override
-		public Boolean visitCGMiddlePropertyCallExp(@NonNull CGMiddlePropertyCallExp object) {
+		public @NonNull Boolean visitCGMiddlePropertyCallExp(@NonNull CGMiddlePropertyCallExp object) {
 			return visitCGOppositePropertyCallExp(object);
 		}
 
 		@Override
-		public Boolean visitCGPropertyAssignment(@NonNull CGPropertyAssignment object) {
+		public @NonNull Boolean visitCGPropertyAssignment(@NonNull CGPropertyAssignment object) {
 			return visitCGValuedElement(object);
 		}
 
 		@Override
-		public Boolean visitCGRealizedVariable(@NonNull CGRealizedVariable object) {
+		public @NonNull Boolean visitCGRealizedVariable(@NonNull CGRealizedVariable object) {
 			return visitCGVariable(object);
 		}
 
 		@Override
-		public Boolean visitCGSequence(@NonNull CGSequence object) {
+		public @NonNull Boolean visitCGSequence(@NonNull CGSequence object) {
 			return visitCGValuedElement(object);
 		}
 
 		@Override
-		public Boolean visitCGTransformation(@NonNull CGTransformation object) {
+		public @NonNull Boolean visitCGTransformation(@NonNull CGTransformation object) {
 			return visitCGClass(object);
 		}
 
 		@Override
-		public Boolean visitCGTypedModel(@NonNull CGTypedModel object) {
+		public @NonNull Boolean visitCGTypedModel(@NonNull CGTypedModel object) {
 			return visitCGNamedElement(object);
 		}
 	}

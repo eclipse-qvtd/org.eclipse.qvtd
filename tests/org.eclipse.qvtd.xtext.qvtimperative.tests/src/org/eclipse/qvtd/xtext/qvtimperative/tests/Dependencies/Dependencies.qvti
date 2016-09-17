@@ -7,7 +7,6 @@ transformation Dependencies {
 }
 
 map dependenciesLM in Dependencies {
-	check source { check ecore::EPackage::eSubpackages } () {}
     in:source dummy:EPackage;
     call dependenciesMR {
     	binaryPrecedence := (1 + 2) * (3*5 + 4);

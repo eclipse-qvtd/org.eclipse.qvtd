@@ -293,9 +293,9 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 
 	@Override
 	public @Nullable Object internalExecuteNewStatement(@NonNull NewStatement newStatement, @NonNull EvaluationVisitor undecoratedVisitor) {
-		OCLExpression ownedInit = newStatement.getOwnedInit();
-		if (ownedInit != null) {
-			Object initValue = ownedInit.accept(undecoratedVisitor);
+		OCLExpression ownedExpression = newStatement.getOwnedExpression();
+		if (ownedExpression != null) {
+			Object initValue = ownedExpression.accept(undecoratedVisitor);
 			getEvaluationEnvironment().add(newStatement, initValue);
 			replace(newStatement, initValue);
 			TypedModel typedModel = newStatement.getReferredTypedModel();

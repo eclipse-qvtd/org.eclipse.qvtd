@@ -32,7 +32,6 @@ import org.eclipse.ocl.pivot.Detail;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.NullLiteralExp;
 import org.eclipse.ocl.pivot.Operation;
-import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.ocl.pivot.Variable;
@@ -44,16 +43,13 @@ import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.LabelUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
-import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbaseFactory;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtbase.analysis.DomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
-import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
@@ -507,7 +503,7 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 		return new DomainUsageVariable(intersectionMask);
 	}
 
-	@Override				// FIXME BUG 487257 Revise this
+	/*	@Override				// FIXME BUG 487257 Revise this
 	protected @NonNull DomainUsage getAllInstancesUsage(@NonNull OperationCallExp asCallExp, @NonNull DomainUsage sourceUsage) {
 		if (asCallExp.getOwnedSource().getTypeValue() instanceof DataType) {
 			return getPrimitiveUsage();
@@ -531,7 +527,7 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 		else {				// Att root so no domains, use input
 			return intersection(sourceUsage, getInputUsage());
 		}
-	}
+	} */
 
 	public @NonNull DomainUsageAnalysis getAnalysis(@NonNull Operation operation) {
 		DomainUsageAnalysis analysis = operation2analysis.get(operation);

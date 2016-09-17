@@ -36,13 +36,10 @@ import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.TreeIterable;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbaseFactory;
-import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
-import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory.CreateStrategy;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
@@ -52,8 +49,10 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.ObservableStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 
 public class QVTimperativeUtil extends QVTbaseUtil
@@ -99,34 +98,6 @@ public class QVTimperativeUtil extends QVTbaseUtil
 		}
 	}
 
-	/**
-	 * Return a MappingStatement comprising the concatenation of mappingStatementOrStatements and mappingStatement.
-	 * mappingStatementOrStatements may be null, a MappingStatement or a composite MappingSequence.
-	 *
-	public static @NonNull MappingStatement addMappingStatement(@Nullable MappingStatement mappingStatementOrStatements, @NonNull MappingStatement mappingStatement) {
-		if (mappingStatementOrStatements == null) {
-			return mappingStatement;
-		}
-		else if (mappingStatementOrStatements instanceof MappingSequence){
-			((MappingSequence)mappingStatementOrStatements).getMappingStatements().add(mappingStatement);
-			return mappingStatementOrStatements;
-		}
-		else  {
-			MappingSequence mappingSequence = QVTimperativeFactory.eINSTANCE.createMappingSequence();
-			List<MappingStatement> mappingStatements = mappingSequence.getMappingStatements();
-			mappingStatements.add(mappingStatementOrStatements);
-			mappingStatements.add(mappingStatement);
-			return mappingSequence;
-		}
-	} */
-
-	public static @NonNull ImperativeDomain createImperativeDomain(@NonNull TypedModel typedModel) {
-		ImperativeDomain coreDomain = QVTimperativeFactory.eINSTANCE.createImperativeDomain();
-		coreDomain.setName(typedModel.getName());
-		coreDomain.setTypedModel(typedModel);
-		return coreDomain;
-	}
-
 	public static @NonNull IterateExp createIterateExp(@Nullable OCLExpression asSource, @NonNull Iteration asIteration, @NonNull List<? extends Variable> asIterators, @NonNull OCLExpression asBody) {
 		IterateExp asCallExp = PivotFactory.eINSTANCE.createIterateExp();
 		asCallExp.setReferredIteration(asIteration);
@@ -161,7 +132,7 @@ public class QVTimperativeUtil extends QVTbaseUtil
 	public static @NonNull MappingLoop createMappingLoop(@NonNull OCLExpression source, @NonNull LoopVariable iterator, @NonNull MappingStatement mappingStatement) {
 		assert iterator.eContainer() == null;
 		MappingLoop ml = QVTimperativeFactory.eINSTANCE.createMappingLoop();
-		ml.setOwnedSource(source);
+		ml.setOwnedExpression(source);
 		ml.getOwnedIterators().add(iterator);
 		ml.getOwnedMappingStatements().add(mappingStatement);
 		return ml;
@@ -221,7 +192,7 @@ public class QVTimperativeUtil extends QVTbaseUtil
 			asSetAssignment.setIsOpposite(false);
 		}
 		asSetAssignment.setTargetVariable(asVariable);
-		asSetAssignment.setOwnedInit(asValueExpression);
+		asSetAssignment.setOwnedExpression(asValueExpression);
 		asSetAssignment.setIsNotify(isNotify);
 		return asSetAssignment;
 	}
@@ -237,25 +208,6 @@ public class QVTimperativeUtil extends QVTbaseUtil
 		typedModel.setName(name);
 		return typedModel;
 	}
-
-	public static @NonNull ImperativeDomain getArea(@NonNull Mapping mapping, @NonNull TypedModel typedModel) {
-		for (Domain domain : mapping.getDomain()) {
-			if (domain.getTypedModel() == typedModel) {
-				return (ImperativeDomain)domain;
-			}
-		}
-		throw new IllegalStateException();
-		//		return mapping;
-	}
-
-	/*	public static @Nullable Area getContainingArea(@Nullable EObject eObject) {
-		for ( ; eObject != null; eObject = eObject.eContainer()) {
-			if (eObject instanceof Area) {
-				return (Area) eObject;
-			}
-		}
-		return null;
-	} */
 
 	/*	public static @NonNull Variable createVariable(@NonNull String name, @NonNull Type type) {
 		Variable bodyIt = PivotFactory.eINSTANCE.createVariable();
@@ -280,8 +232,13 @@ public class QVTimperativeUtil extends QVTbaseUtil
 		return null;
 	}
 
-	public static @Nullable ImperativeDomain getDomain(@NonNull Mapping rule, @NonNull TypedModel typedModel) {
-		return (ImperativeDomain)getDomain((Rule)rule, typedModel);
+	public static @Nullable Statement getContainingStatement(@Nullable EObject eObject) {
+		for ( ; eObject != null; eObject = eObject.eContainer()) {
+			if (eObject instanceof Statement) {
+				return (Statement) eObject;
+			}
+		}
+		return null;
 	}
 
 	public static @NonNull Property getTargetProperty(@NonNull SetStatement asSetStatement) {
@@ -289,13 +246,15 @@ public class QVTimperativeUtil extends QVTbaseUtil
 		return asSetStatement.isIsOpposite() ? ClassUtil.nonNullState(referredProperty.getOpposite()) : referredProperty;
 	}
 
-	public static @Nullable TypedModel getTypedModel(@Nullable Domain domain) {
-		if (domain instanceof ImperativeDomain) {
-			return ((ImperativeDomain)domain).getTypedModel();
+	public static boolean isObserver(@NonNull Mapping asMapping) {
+		boolean isHazardous = false;
+		for (@NonNull Statement asStatement : ClassUtil.nullFree(asMapping.getOwnedStatements())) {
+			if ((asStatement instanceof ObservableStatement)
+					&& (((ObservableStatement)asStatement).getObservedProperties().size() > 0)) {
+				return true;
+			}
 		}
-		else {
-			return null;
-		}
+		return isHazardous;
 	}
 
 	public static boolean isPrimitiveVariable(@NonNull VariableDeclaration asVariable) {

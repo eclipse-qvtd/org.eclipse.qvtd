@@ -18,7 +18,7 @@
         <ownedStatements xsi:type="qvti:NewStatement" xmi:id="qV..classescs2as.createPackage._package" name="_package" isRequired="false"
             type="pivot:Class ../Classes.ecore.oclas#T.classes.Package" referredTypedModel="#qT..classescs2as.rightAS"/>
         <ownedStatements xsi:type="qvti:SetStatement" targetVariable="#qV..classescs2as.createPackage._package" targetProperty="../Classes.ecore.oclas#p.classes.NamedElement.name">
-          <ownedInit xsi:type="pivot:IfExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String">
+          <ownedExpression xsi:type="pivot:IfExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String">
             <ownedCondition xsi:type="pivot:OperationCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
                 referredOperation="helpers.ocl.oclas#o.ocl.OclElement.aBooleanElementOp">
               <ownedSource xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class ../ClassesCS.ecore.oclas#T.classescs.PackageCS"
@@ -28,7 +28,7 @@
                 stringSymbol="unexpected"/>
             <ownedThen xsi:type="pivot:StringLiteralExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
                 stringSymbol="transformation worked"/>
-          </ownedInit>
+          </ownedExpression>
         </ownedStatements>
       </rule>
       <rule xsi:type="qvti:Mapping" xmi:id="m..classescs2as.__root__" name="__root__">
@@ -39,9 +39,9 @@
               <value xsi:type="pivot:VariableExp" type="pivot:Class ../ClassesCS.ecore.oclas#T.classescs.PackageCS" referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.1/@ownedStatements.0/@ownedIterators.0"/>
             </binding>
           </ownedMappingStatements>
-          <ownedSource xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.0" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclElement.allInstances">
+          <ownedExpression xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.0" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclElement.allInstances">
             <ownedSource xsi:type="pivot:TypeExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Pivot.oclas#T.pivot.Class" referredType="pivot:Class ../ClassesCS.ecore.oclas#T.classescs.PackageCS"/>
-          </ownedSource>
+          </ownedExpression>
         </ownedStatements>
       </rule>
       <ownedContext xmi:id="qV..classescs2as.this" name="this" type="#T..classescs2as"/>

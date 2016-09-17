@@ -32,7 +32,6 @@ import org.eclipse.ocl.pivot.PrimitiveType;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.PropertyCallExp;
 import org.eclipse.ocl.pivot.Type;
-import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.ids.IdManager;
 import org.eclipse.ocl.pivot.ids.OperationId;
 import org.eclipse.ocl.pivot.ids.TypeId;
@@ -40,15 +39,9 @@ import org.eclipse.ocl.pivot.internal.manager.MetamodelManagerInternal;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.library.LibraryFeature;
 import org.eclipse.ocl.pivot.library.oclany.OclElementOclContainerProperty;
-import org.eclipse.ocl.pivot.utilities.PivotUtil;
-import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
-import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.analysis.DomainUsage;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
-import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
-import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.analysis.QVTimperativeDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
@@ -116,8 +109,6 @@ public class QVTiTransformationAnalysis
 	 * Mappings that have an isPolled input.
 	 */
 	private final @NonNull Set<@NonNull Mapping> hazardousMappings = new HashSet<>();
-
-	private final @NonNull Set<@NonNull Property> hazardousProperties = new HashSet<>();
 
 	/**
 	 * The SetStatements to each Property.
@@ -200,20 +191,6 @@ public class QVTiTransformationAnalysis
 	}
 
 	private void analyzeProperties() {
-		Set<@NonNull Mapping> hazardousMappings = getHazardousMappings();
-		for (Map.Entry<@NonNull Mapping, @NonNull Set<@NonNull NavigationCallExp>> entry : getMapping2Property().entrySet()) {
-			Mapping mapping = entry.getKey();
-			if (hazardousMappings.contains(mapping)) {
-				for (@NonNull NavigationCallExp hazardousPropertyCallExp : entry.getValue()) {
-					Property hazardousProperty = PivotUtil.getReferredProperty(hazardousPropertyCallExp);
-					hazardousProperties.add(hazardousProperty);
-					Property oppositeProperty = hazardousProperty.getOpposite();
-					if (oppositeProperty != null) {
-						hazardousProperties.add(oppositeProperty);
-					}
-				}
-			}
-		}
 		for (@NonNull Set<@NonNull SetStatement> propertyAssignments : mapping2propertyAssignments.values()) {
 			for (@NonNull SetStatement propertyAssignment : propertyAssignments) {
 				Property property = propertyAssignment.getTargetProperty();
@@ -287,33 +264,14 @@ public class QVTiTransformationAnalysis
 		OperationId allInstancesOperationId = oclElementType.getTypeId().getOperationId(0, "allInstances", IdManager.getParametersId());
 		OperationId objectsOfKindOperationId = modelType.getTypeId().getOperationId(1, "objectsOfKind", IdManager.getParametersId(TypeId.T_1));
 		OperationId objectsOfTypeOperationId = modelType.getTypeId().getOperationId(1, "objectsOfType", IdManager.getParametersId(TypeId.T_1));
-		List<@NonNull SetStatement> propertyAssignments = new ArrayList<>();
+		List<@NonNull SetStatement> setStatements = new ArrayList<>();
 		for (TreeIterator<EObject> tit = transformation.eAllContents(); tit.hasNext(); ) {
 			EObject eObject = tit.next();
 			if (eObject instanceof Mapping) {
 				Mapping mapping = (Mapping)eObject;
 				analyzeMappingPropertyAccesses(mapping);
 				analyzeMappingSetStatements(mapping);
-				if (mapping.getCheckedProperties().size() > 0) {
-					hazardousMappings.add(mapping);
-				}
-				else {
-					for (Domain domain : mapping.getDomain()) {
-						if (domain instanceof ImperativeDomain) {
-							ImperativeDomain imperativeDomain = (ImperativeDomain)domain;
-							if (imperativeDomain.getCheckedProperties().size() > 0) {
-								hazardousMappings.add(mapping);
-								break;
-							}
-						}
-					}
-				}
-			}
-			else if (eObject instanceof MappingCallBinding) {
-				MappingCallBinding mappingCallBinding = (MappingCallBinding)eObject;
-				if (mappingCallBinding.isIsPolled()) {
-					Mapping mapping = mappingCallBinding.getMappingCall().getReferredMapping();
-					assert mapping != null;
+				if (QVTimperativeUtil.isObserver(mapping)) {
 					hazardousMappings.add(mapping);
 				}
 			}
@@ -326,7 +284,7 @@ public class QVTiTransformationAnalysis
 				}
 			}
 			else if (eObject instanceof SetStatement) {
-				propertyAssignments.add((SetStatement)eObject);
+				setStatements.add((SetStatement)eObject);
 			}
 			else if (eObject instanceof OperationCallExp) {
 				OperationCallExp operationCallExp = (OperationCallExp)eObject;
@@ -359,7 +317,7 @@ public class QVTiTransformationAnalysis
 		//	Second pass
 		//  - install cacheIndex allocated to MiddlePropertyCallExp in each MiddleSetStatement
 		//
-		for (@NonNull SetStatement propertyAssignment : propertyAssignments) {
+		for (@NonNull SetStatement propertyAssignment : setStatements) {
 			Property navigableProperty = propertyAssignment.getTargetProperty();
 			if (navigableProperty != null) {
 				Integer cacheIndex = property2cacheIndex.get(navigableProperty);
@@ -458,90 +416,7 @@ public class QVTiTransformationAnalysis
 		return sourceProperty2cacheIndex;
 	}
 
-	public boolean hasHazardousRead(@NonNull MappingCall mappingCall) {
-		for (MappingCallBinding callBinding : mappingCall.getBinding()) {
-			if (callBinding.isIsPolled()) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	public boolean hasHazardousWrite(@NonNull MappingCall mappingCall) {
-		Mapping mapping = mappingCall.getReferredMapping();
-		Set<@NonNull SetStatement> propertyAssignments = mapping2propertyAssignments.get(mapping);
-		if (propertyAssignments == null) {
-			return false;
-		}
-		for (@NonNull SetStatement propertyAssignment : propertyAssignments) {
-			Property assignedProperty = propertyAssignment.getTargetProperty();
-			if (hazardousProperties.contains(assignedProperty)) {
-				return true;
-			}
-			if (hazardousProperties.contains(assignedProperty.getOpposite())) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	public boolean isAssigned(@NonNull Property targetProperty, @NonNull DomainUsage domainUsage) {
-		Set<@NonNull SetStatement> propertyAssignments = property2propertyAssignments.get(targetProperty);
-		if (propertyAssignments == null) {
-			return false;
-		}
-		for (@NonNull SetStatement propertyAssignment : propertyAssignments) {
-			VariableDeclaration targetVariable = propertyAssignment.getTargetVariable();
-			DomainUsage slotUsage = domainAnalysis.basicGetUsage(targetVariable);
-			if (domainUsage == slotUsage) {
-				return true;
-			}
-		}
-		return false;
-	}
-
 	public boolean isHazardous(@NonNull Mapping mapping) {
 		return hazardousMappings.contains(mapping);
-	}
-
-	public boolean isHazardousRead(@NonNull Mapping asMapping, @NonNull NavigationCallExp asNavigationCallExp) {
-		Property asProperty = PivotUtil.getReferredProperty(asNavigationCallExp);
-		OCLExpression asSource = asNavigationCallExp.getOwnedSource();
-		DomainUsage domainUsage1 = domainAnalysis.basicGetUsage(asSource);
-		if (domainUsage1 != null) {
-			TypedModel typedModel = domainUsage1.getTypedModel(asSource);
-			if (typedModel != null) {
-				ImperativeDomain domain = QVTimperativeUtil.getDomain(asMapping, typedModel);
-				if (domain != null) {
-					if (domain.getCheckedProperties().contains(asProperty)) {
-						return true;
-					}
-				}
-				else {
-					if (asMapping.getCheckedProperties().contains(asProperty)) {
-						return true;
-					}
-				}
-			}
-		}
-		Property asOppositeProperty = asProperty.getOpposite();
-		DomainUsage domainUsage2 = domainAnalysis.basicGetUsage(asNavigationCallExp);
-		if (domainUsage2 != null) {
-			TypedModel typedModel = domainUsage2.getTypedModel(asProperty);
-			if (typedModel != null) {
-				ImperativeDomain domain = QVTimperativeUtil.getDomain(asMapping, typedModel);
-				if (domain != null) {
-					if (domain.getCheckedProperties().contains(asOppositeProperty)) {
-						return true;
-					}
-				}
-				else {
-					if (asMapping.getCheckedProperties().contains(asOppositeProperty)) {
-						return true;
-					}
-				}
-			}
-		}
-		return false;
 	}
 }

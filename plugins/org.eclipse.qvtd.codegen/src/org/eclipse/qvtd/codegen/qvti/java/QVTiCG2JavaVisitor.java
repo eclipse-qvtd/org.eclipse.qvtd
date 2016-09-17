@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -70,7 +71,9 @@ import org.eclipse.ocl.pivot.library.oclany.OclElementOclContainerProperty;
 import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibPackage;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
+import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAS2CGVisitor;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAnalyzer;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionVariable;
@@ -95,15 +98,14 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel;
 import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
 import org.eclipse.qvtd.codegen.utilities.QVTiCGUtil;
-import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
+import org.eclipse.qvtd.pivot.qvtimperative.ObservableStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiTransformationAnalysis;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
@@ -778,7 +780,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		CGValuedElement source = getExpression(cgPropertyCallExp.getSource());
 		boolean isHazardous = false;
 		if ((asMapping != null) && (asPropertyCallExp instanceof NavigationCallExp)) {
-			isHazardous = transformationAnalysis.isHazardousRead(asMapping, (NavigationCallExp)asPropertyCallExp);
+			isHazardous = isHazardous2((NavigationCallExp) asPropertyCallExp);
 		}
 		if (isHazardous) {
 			EPackage ePackage = ClassUtil.nonNullModel(eStructuralFeature.getEContainingClass().getEPackage());
@@ -793,6 +795,30 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			js.appendBooleanString(isOpposite);
 			js.append(");\n");
 		}
+	}
+
+	private boolean isHazardous2(@NonNull NavigationCallExp asNavigationCallExp) {
+		for (EObject eObject = asNavigationCallExp; eObject != null; eObject = getContainer(eObject)) {
+			if (eObject instanceof ObservableStatement) {
+				List<Property> observedProperties = ((ObservableStatement)eObject).getObservedProperties();
+				Property navigatedProperty = PivotUtil.getReferredProperty(asNavigationCallExp);
+				return observedProperties.contains(navigatedProperty);
+			}
+		}
+		return false;
+	}
+
+	private EObject getContainer(EObject eObject) {
+		EObject eContainer = eObject.eContainer();
+		if (eContainer != null) {
+			return eContainer;
+		}
+		for (Adapter eAdapter : eObject.eAdapters()) {
+			if (eAdapter instanceof QVTiAS2CGVisitor.InlinedBodyAdapter) {
+				return ((QVTiAS2CGVisitor.InlinedBodyAdapter)eAdapter).getOperationCallExp();
+			}
+		}
+		return null;
 	}
 
 	protected void doGot(@NonNull CGNavigationCallExp cgPropertyCallExp, @NonNull CGValuedElement source, @NonNull EStructuralFeature eStructuralFeature) {
@@ -1157,18 +1183,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			return true;
 		}
 		Mapping asMapping = ClassUtil.nonNullState((Mapping) cgMapping.getAst());
-		boolean isHazardous = false;
-		if (asMapping.getCheckedProperties().size() > 0) {
-			isHazardous = true;
-		}
-		for (Domain domain : asMapping.getDomain()) {
-			if (((ImperativeDomain)domain).getCheckedProperties().size() > 0) {
-				isHazardous = true;
-				break;
-			}
-		}
-		assert isHazardous == transformationAnalysis.isHazardous(asMapping);
-		return isHazardous;
+		return QVTimperativeUtil.isObserver(asMapping);
 	}
 
 	@Override

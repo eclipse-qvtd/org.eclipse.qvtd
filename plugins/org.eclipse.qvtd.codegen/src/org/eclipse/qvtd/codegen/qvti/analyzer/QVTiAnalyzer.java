@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
@@ -29,9 +29,9 @@ import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 
 public class QVTiAnalyzer extends CodeGenAnalyzer
 {
-	private final @NonNull Map<Function, CGFunction> cgFunctions = new HashMap<Function, CGFunction>();
-	private final @NonNull Map<Mapping, CGMapping> cgMappings = new HashMap<Mapping, CGMapping>();
-	private final @NonNull Map<TypedModel, CGTypedModel> cgTypedModels = new HashMap<TypedModel, CGTypedModel>();
+	private final @NonNull Map<@NonNull Function, @NonNull CGFunction> cgFunctions = new HashMap<>();
+	private final @NonNull Map<@NonNull Mapping, @NonNull CGMapping> cgMappings = new HashMap<>();
+	private final @NonNull Map<@NonNull TypedModel, @NonNull CGTypedModel> cgTypedModels = new HashMap<>();
 
 	public QVTiAnalyzer(@NonNull QVTiCodeGenerator codeGenerator) {
 		super(codeGenerator);

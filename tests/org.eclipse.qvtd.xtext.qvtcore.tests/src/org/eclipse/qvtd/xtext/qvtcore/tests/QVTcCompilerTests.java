@@ -374,7 +374,7 @@ public class QVTcCompilerTests extends LoadTestCase
 		//		EcoreURIAdapter.setEcoreURI(List2listPackage.eINSTANCE, testFolderURI.appendSegment("List2List.ecore"));
 		//		EcoreURIAdapter.setEcoreURI(DoublylinkedlistPackage.eINSTANCE, testFolderURI.appendSegment("DoublyLinkedList.ecore"));
 		MyQVT myQVT = new MyQVT(testFolderName);
-		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
+		//		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 		try {
 			Transformation asTransformation = myQVT.compileTransformation("Forward2Reverse.qvtc", "reverse");
 			//

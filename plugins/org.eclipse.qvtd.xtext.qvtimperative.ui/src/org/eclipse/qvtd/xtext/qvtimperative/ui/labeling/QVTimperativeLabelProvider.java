@@ -19,7 +19,6 @@ import org.eclipse.ocl.pivot.internal.prettyprint.PrettyPrinter;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
@@ -28,7 +27,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.xtext.qvtbase.ui.labeling.QVTbaseLabelProvider;
-import org.eclipse.qvtd.xtext.qvtimperativecs.DomainCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.TopLevelCS;
 
 import com.google.inject.Inject;
@@ -50,14 +48,6 @@ public class QVTimperativeLabelProvider extends QVTbaseLabelProvider
 	//	protected String image(Direction ele) {
 	//		return QVTCOREBASE_UI_ICONS + "Direction.gif";
 	//	}
-
-	protected String image(DomainCS ele) {
-		return QVTIMPERATIVE_UI_ICONS + "CoreDomain.gif";
-	}
-
-	protected String image(ImperativeDomain ele) {
-		return QVTIMPERATIVE_UI_ICONS + "CoreDomain.gif";
-	}
 
 	protected String image(Mapping ele) {
 		return QVTIMPERATIVE_UI_ICONS + "Mapping.gif";
@@ -85,22 +75,6 @@ public class QVTimperativeLabelProvider extends QVTbaseLabelProvider
 
 	protected String image(TopLevelCS ele) {
 		return "QVTiModelFile.gif";
-	}
-
-	protected String text(ImperativeDomain ele) {
-		StringBuilder s = new StringBuilder();
-		if (ele.isIsCheckable()) {
-			s.append("«checkable» ");
-		}
-		if (ele.isIsEnforceable()) {
-			s.append("«enforceable» ");
-		}
-		appendName(s, ele);
-		return s.toString();
-	}
-
-	protected String text(DomainCS ele) {
-		return NameUtil.getSafeName(ele);
 	}
 
 	protected String text(MappingCall ele) {

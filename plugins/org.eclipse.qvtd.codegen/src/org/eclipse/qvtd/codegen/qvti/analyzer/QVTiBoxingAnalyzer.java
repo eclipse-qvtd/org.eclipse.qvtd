@@ -46,7 +46,7 @@ import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 
-public class QVTiBoxingAnalyzer extends BoxingAnalyzer implements QVTiCGModelVisitor<Object>
+public class QVTiBoxingAnalyzer extends BoxingAnalyzer implements QVTiCGModelVisitor<@Nullable Object>
 {
 	public QVTiBoxingAnalyzer(@NonNull QVTiAnalyzer analyzer) {
 		super(analyzer);
@@ -61,17 +61,17 @@ public class QVTiBoxingAnalyzer extends BoxingAnalyzer implements QVTiCGModelVis
 	}
 
 	@Override
-	public Object visitCGConnectionAssignment(@NonNull CGConnectionAssignment object) {
+	public @Nullable Object visitCGConnectionAssignment(@NonNull CGConnectionAssignment object) {
 		return visitCGValuedElement(object);
 	}
 
 	@Override
-	public Object visitCGConnectionVariable(@NonNull CGConnectionVariable object) {
+	public @Nullable Object visitCGConnectionVariable(@NonNull CGConnectionVariable object) {
 		return visitCGGuardVariable(object);
 	}
 
 	@Override
-	public Object visitCGEcoreContainerAssignment(@NonNull CGEcoreContainerAssignment cgEcoreContainerAssignment) {
+	public @Nullable Object visitCGEcoreContainerAssignment(@NonNull CGEcoreContainerAssignment cgEcoreContainerAssignment) {
 		EStructuralFeature eStructuralFeature = cgEcoreContainerAssignment.getEStructuralFeature();
 		boolean isRequired = eStructuralFeature.isRequired();
 		rewriteAsEcore(cgEcoreContainerAssignment.getSlotValue(), eStructuralFeature.getEType());
@@ -83,7 +83,7 @@ public class QVTiBoxingAnalyzer extends BoxingAnalyzer implements QVTiCGModelVis
 	}
 
 	@Override
-	public Object visitCGEcorePropertyAssignment(@NonNull CGEcorePropertyAssignment cgEcorePropertyAssignment) {
+	public @Nullable Object visitCGEcorePropertyAssignment(@NonNull CGEcorePropertyAssignment cgEcorePropertyAssignment) {
 		EStructuralFeature eStructuralFeature = cgEcorePropertyAssignment.getEStructuralFeature();
 		rewriteAsEcore(cgEcorePropertyAssignment.getSlotValue(), eStructuralFeature.getEContainingClass());
 		rewriteAsEcore(cgEcorePropertyAssignment.getInitValue(), eStructuralFeature.getEType());
@@ -98,20 +98,20 @@ public class QVTiBoxingAnalyzer extends BoxingAnalyzer implements QVTiCGModelVis
 	}
 
 	@Override
-	public Object visitCGEcoreRealizedVariable(@NonNull CGEcoreRealizedVariable cgEcoreRealizedVariable) {
+	public @Nullable Object visitCGEcoreRealizedVariable(@NonNull CGEcoreRealizedVariable cgEcoreRealizedVariable) {
 		rewriteAsAssertNonNulled(cgEcoreRealizedVariable);
 		return visitCGRealizedVariable(cgEcoreRealizedVariable);
 	}
 
 	@Override
-	public Object visitCGFunction(@NonNull CGFunction cgFunction) {
+	public @Nullable Object visitCGFunction(@NonNull CGFunction cgFunction) {
 		visitCGOperation(cgFunction);
 		rewriteAsUnboxed(cgFunction.getBody());
 		return null;
 	}
 
 	@Override
-	public Object visitCGFunctionCallExp(@NonNull CGFunctionCallExp cgFunctionCallExp) {
+	public @Nullable Object visitCGFunctionCallExp(@NonNull CGFunctionCallExp cgFunctionCallExp) {
 		visitCGOperationCallExp(cgFunctionCallExp);
 		for (CGValuedElement cgArgument : cgFunctionCallExp.getArguments()) {
 			rewriteAsUnboxed(cgArgument);
@@ -120,27 +120,27 @@ public class QVTiBoxingAnalyzer extends BoxingAnalyzer implements QVTiCGModelVis
 	}
 
 	@Override
-	public Object visitCGFunctionParameter(@NonNull CGFunctionParameter object) {
+	public @Nullable Object visitCGFunctionParameter(@NonNull CGFunctionParameter object) {
 		return visitCGParameter(object);
 	}
 
 	@Override
-	public Object visitCGGuardVariable(@NonNull CGGuardVariable object) {
+	public @Nullable Object visitCGGuardVariable(@NonNull CGGuardVariable object) {
 		return visitCGParameter(object);
 	}
 
 	@Override
-	public Object visitCGMapping(@NonNull CGMapping cgMapping) {
+	public @Nullable Object visitCGMapping(@NonNull CGMapping cgMapping) {
 		return visitCGNamedElement(cgMapping);
 	}
 
 	@Override
-	public Object visitCGMappingCall(@NonNull CGMappingCall cgMappingCall) {
+	public @Nullable Object visitCGMappingCall(@NonNull CGMappingCall cgMappingCall) {
 		return visitCGValuedElement(cgMappingCall);
 	}
 
 	@Override
-	public Object visitCGMappingCallBinding(@NonNull CGMappingCallBinding cgMappingCallBinding) {
+	public @Nullable Object visitCGMappingCallBinding(@NonNull CGMappingCallBinding cgMappingCallBinding) {
 		MappingCallBinding mappingCallBinding = (MappingCallBinding)cgMappingCallBinding.getAst();
 		VariableDeclaration boundVariable = mappingCallBinding.getBoundVariable();
 		assert boundVariable != null;
@@ -157,56 +157,56 @@ public class QVTiBoxingAnalyzer extends BoxingAnalyzer implements QVTiCGModelVis
 	}
 
 	@Override
-	public Object visitCGMappingExp(@NonNull CGMappingExp object) {
+	public @Nullable Object visitCGMappingExp(@NonNull CGMappingExp object) {
 		return visitCGValuedElement(object);
 	}
 
 	@Override
-	public Object visitCGMappingLoop(@NonNull CGMappingLoop cgMappingLoop) {
+	public @Nullable Object visitCGMappingLoop(@NonNull CGMappingLoop cgMappingLoop) {
 		visitCGIterationCallExp(cgMappingLoop);
 		//		rewriteAsUnboxed(cgMappingLoop.getSource());
 		return null;
 	}
 
 	@Override
-	public Object visitCGMiddlePropertyAssignment(@NonNull CGMiddlePropertyAssignment cgMiddlePropertyAssignment) {
+	public @Nullable Object visitCGMiddlePropertyAssignment(@NonNull CGMiddlePropertyAssignment cgMiddlePropertyAssignment) {
 		rewriteAsUnboxed(cgMiddlePropertyAssignment.getSlotValue());
 		rewriteAsUnboxed(cgMiddlePropertyAssignment.getInitValue());
 		return visitCGPropertyAssignment(cgMiddlePropertyAssignment);
 	}
 
 	@Override
-	public Object visitCGMiddlePropertyCallExp(@NonNull CGMiddlePropertyCallExp object) {
+	public @Nullable Object visitCGMiddlePropertyCallExp(@NonNull CGMiddlePropertyCallExp object) {
 		return visitCGOppositePropertyCallExp(object);
 	}
 
 	@Override
-	public Object visitCGPropertyAssignment(@NonNull CGPropertyAssignment cgPropertyAssignment) {
+	public @Nullable Object visitCGPropertyAssignment(@NonNull CGPropertyAssignment cgPropertyAssignment) {
 		return visitCGValuedElement(cgPropertyAssignment);
 	}
 
 	@Override
-	public Object visitCGRealizedVariable(@NonNull CGRealizedVariable cgRealizedVariable) {
+	public @Nullable Object visitCGRealizedVariable(@NonNull CGRealizedVariable cgRealizedVariable) {
 		return visitCGVariable(cgRealizedVariable);
 	}
 
 	@Override
-	public Object visitCGSequence(@NonNull CGSequence object) {
+	public @Nullable Object visitCGSequence(@NonNull CGSequence object) {
 		return visitCGValuedElement(object);
 	}
 
 	@Override
-	public Object visitCGTransformation(@NonNull CGTransformation cgTransformation) {
+	public @Nullable Object visitCGTransformation(@NonNull CGTransformation cgTransformation) {
 		return visitCGClass(cgTransformation);
 	}
 
 	@Override
-	public Object visitCGTypedModel(@NonNull CGTypedModel object) {
+	public @Nullable Object visitCGTypedModel(@NonNull CGTypedModel object) {
 		return visitCGNamedElement(object);
 	}
 
 	@Override
-	public Object visitCGVariable(@NonNull CGVariable object) {
+	public @Nullable Object visitCGVariable(@NonNull CGVariable object) {
 		Object visitCGVariable = super.visitCGVariable(object);
 		Element asElement = object.getAst();
 		if ((asElement instanceof TypedElement) && ((TypedElement)asElement).isIsRequired()) {

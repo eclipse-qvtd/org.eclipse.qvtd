@@ -12,8 +12,10 @@
 package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -25,6 +27,7 @@ import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.evaluation.EvaluationVisitor;
 import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
@@ -33,6 +36,7 @@ import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.ObservableStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.runtime.evaluation.AbstractComputation;
@@ -232,7 +236,8 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 		}
 		Mapping asMapping = QVTimperativeUtil.getContainingMapping(navigationCallExp);
 		Object ecoreValue;
-		if ((asMapping != null) && transformationAnalysis.isHazardousRead(asMapping, navigationCallExp)) {		// null within queries
+		//		if ((asMapping != null) && transformationAnalysis.isHazardousRead(asMapping, navigationCallExp)) {		// null within queries
+		if ((asMapping != null) && isHazardous2(navigationCallExp)) {		// null within queries
 			//			assert false; 		// Should use an AccessStatement
 			//			assert sourceValue != null;
 			if (sourceValue == null) {
@@ -264,6 +269,17 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 			}
 		}
 		return ecoreValue;
+	}
+
+	private boolean isHazardous2(@NonNull NavigationCallExp asNavigationCallExp) {
+		for (EObject eObject = asNavigationCallExp; eObject != null; eObject = eObject.eContainer()) {
+			if (eObject instanceof ObservableStatement) {
+				List<Property> observedProperties = ((ObservableStatement)eObject).getObservedProperties();
+				Property navigatedProperty = PivotUtil.getReferredProperty(asNavigationCallExp);
+				return observedProperties.contains(navigatedProperty);
+			}
+		}
+		return false;
 	}
 
 	@Override

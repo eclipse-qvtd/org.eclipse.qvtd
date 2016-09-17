@@ -116,15 +116,13 @@ map m_NumCS_ast_value_1 in KiamaRewrite_qvtp_qvtcas
 
 map m_PlusCS_ast in KiamaRewrite_qvtp_qvtcas
 {
-	enforce rightAS {
-	check kiamaas::Node::height }() {}
 	in:leftCS lPlusCS : PlusCS;
 	var ast : ecore::EObject := lPlusCS.ast;
 	var aPlus : kiamaas::Plus := ast.oclAsType(kiamaas::Plus);
 	var left : kiamaas::Node := aPlus.left;
 	var right : kiamaas::Node := aPlus.right;
-	var height : ecore::EIntegerObject := left.height;
-	var height1 : ecore::EIntegerObject := right.height;
+	observe kiamaas::Node::height var height : ecore::EIntegerObject := left.height;
+	observe kiamaas::Node::height var height1 : ecore::EIntegerObject := right.height;
 	var oclAsSet : Set(ecore::EIntegerObject) := height.oclAsSet();
 	var including : Set(ecore::EIntegerObject) := oclAsSet->including(height1);
 	var max : ecore::EIntegerObject := including->max();
@@ -134,14 +132,12 @@ map m_PlusCS_ast in KiamaRewrite_qvtp_qvtcas
 
 map m_PlusCS_ast_1 in KiamaRewrite_qvtp_qvtcas
 {
-	enforce rightAS {
-		check kiamaas::Node::depth }() {}
 	in:leftCS lPlusCS : PlusCS;
 	var ast : ecore::EObject := lPlusCS.ast;
 	var aPlus : kiamaas::Plus := ast.oclAsType(kiamaas::Plus);
 	var oclContainer : ocl::OclElement := aPlus.oclContainer;
 	var _'oclIsKindOf\nkiamaas::Top' : Boolean := oclContainer.oclIsKindOf(kiamaas::Top);
-	var _'if' : Integer := if _'oclIsKindOf\nkiamaas::Top'
+	observe kiamaas::Node::depth var _'if' : Integer := if _'oclIsKindOf\nkiamaas::Top'
 	then 0
 	else oclContainer.oclAsType(kiamaas::Plus).depth + 1 endif;
 	notify set aPlus.depth := _'if';

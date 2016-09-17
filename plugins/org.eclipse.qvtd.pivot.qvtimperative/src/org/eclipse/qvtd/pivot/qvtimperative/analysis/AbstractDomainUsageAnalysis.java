@@ -81,7 +81,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.CheckStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardVariable;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
@@ -128,7 +127,7 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTim
 
 	protected @NonNull DomainUsage doSetStatement(@NonNull Property property, @NonNull SetStatement object) {
 		DomainUsage slotUsage = visit(object.getTargetVariable());
-		DomainUsage valueUsage = visit(object.getOwnedInit());
+		DomainUsage valueUsage = visit(object.getOwnedExpression());
 		DomainUsage knownSourceUsage = getRootAnalysis().property2containingClassUsage.get(property);
 		if (knownSourceUsage != null) {
 			DomainUsage knownTargetUsage = getRootAnalysis().getUsage(property);
@@ -373,7 +372,7 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTim
 
 	@Override
 	public @NonNull DomainUsage visitCheckStatement(@NonNull CheckStatement object) {
-		return visit(object.getOwnedCondition());
+		return visit(object.getOwnedExpression());
 	}
 
 	@Override
@@ -416,9 +415,9 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTim
 
 	@Override
 	public @NonNull DomainUsage visitDeclareStatement(@NonNull DeclareStatement object) {
-		OCLExpression ownedInit = object.getOwnedInit();
-		if (ownedInit != null) {
-			return visit(ownedInit);
+		OCLExpression ownedExpression = object.getOwnedExpression();
+		if (ownedExpression != null) {
+			return visit(ownedExpression);
 		}
 		return visit(object.getType());
 	}
@@ -473,13 +472,6 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTim
 		DomainUsage thenUsage = visit(object.getOwnedThen());
 		DomainUsage elseUsage = visit(object.getOwnedElse());
 		return intersection(thenUsage, elseUsage);
-	}
-
-	@Override
-	public @NonNull DomainUsage visitImperativeDomain(@NonNull ImperativeDomain object) {
-		DomainUsage usage = visit(object.getTypedModel());
-		setUsage(object, usage);
-		return usage;
 	}
 
 	@Override
@@ -635,7 +627,7 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTim
 			}
 			String operationName = object.getReferredOperation().getName();
 			if ("allInstances".equals(operationName)) {										// FIXME BUG 487257 Revise this
-				return getAllInstancesUsage(object, sourceUsage);
+				return /*getAllInstancesUsage(object,*/ sourceUsage;//);
 			}
 			//
 			//	Special case: left/right of "="/"<>" have same usage. Result is primitive.

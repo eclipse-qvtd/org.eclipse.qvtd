@@ -43,7 +43,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.CheckStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardVariable;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeDomain;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.InConnectionVariable;
@@ -62,7 +61,6 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.AddStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.CheckStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DeclareStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS;
-import org.eclipse.qvtd.xtext.qvtimperativecs.DomainCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.GuardVariableCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.InoutVariableCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS;
@@ -91,29 +89,6 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 			TypedModel pTypedModel = PivotUtil.getPivot(TypedModel.class, csElement);
 			if (pTypedModel != null) {
 				PivotUtilInternal.refreshList(pTypedModel.getUsedPackage(), csElement.getImports());
-			}
-			return null;
-		}
-	}
-
-	protected static class DomainContentContinuation extends SingleContinuation<DomainCS>
-	{
-		private DomainContentContinuation(@NonNull CS2ASConversion context, @NonNull DomainCS csElement) {
-			super(context, null, null, csElement);
-		}
-
-		@Override
-		public BasicContinuation<?> execute() {
-			ImperativeDomain pDomain = PivotUtil.getPivot(ImperativeDomain.class, csElement);
-			if (pDomain != null) {
-				TypedModel direction = csElement.getDirection();
-				if (direction == null) {
-					Transformation transformation = QVTbaseUtil.getContainingTransformation(pDomain);
-					if (transformation != null) {
-						direction = transformation.getModelParameter(null);
-					}
-				}
-				pDomain.setTypedModel(direction);
 			}
 			return null;
 		}
@@ -244,15 +219,6 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 	}
 
 	@Override
-	public Continuation<?> visitDomainCS(@NonNull DomainCS csElement) {
-		ImperativeDomain pivotElement = context.refreshModelElement(ImperativeDomain.class, QVTimperativePackage.Literals.IMPERATIVE_DOMAIN, csElement);
-		pivotElement.setIsCheckable(csElement.isIsCheck());
-		pivotElement.setIsEnforceable(csElement.isIsEnforce());
-		context.refreshComments(pivotElement, csElement);
-		return new DomainContentContinuation(context, csElement);
-	}
-
-	@Override
 	public Continuation<?> visitGuardVariableCS(@NonNull GuardVariableCS csElement) {
 		refreshNamedElement(GuardVariable.class, QVTimperativePackage.Literals.GUARD_VARIABLE, csElement);
 		return new GuardVariableCompletion(context, csElement);
@@ -269,7 +235,6 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 		Mapping pivotElement = refreshNamedElement(Mapping.class, QVTimperativePackage.Literals.MAPPING, csElement);
 		context.refreshPivotList(GuardVariable.class, pivotElement.getOwnedGuardVariables(), csElement.getOwnedGuardVariables());
 		context.refreshPivotList(InConnectionVariable.class, pivotElement.getInoutVariables(), csElement.getOwnedInoutVariables());
-		context.refreshPivotList(ImperativeDomain.class, pivotElement.getDomain(), csElement.getOwnedDomains());
 		context.refreshPivotList(Statement.class, pivotElement.getOwnedStatements(), csElement.getOwnedStatements());
 		return null;
 	}
@@ -286,7 +251,6 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 	@Override
 	public Continuation<?> visitMappingCallBindingCS(@NonNull MappingCallBindingCS csElement) {
 		@NonNull MappingCallBinding pivotElement = context.refreshModelElement(MappingCallBinding.class, QVTimperativePackage.Literals.MAPPING_CALL_BINDING, csElement);
-		pivotElement.setIsPolled(csElement.isIsPolled());
 		context.refreshComments(pivotElement, csElement);
 		return null;
 	}
