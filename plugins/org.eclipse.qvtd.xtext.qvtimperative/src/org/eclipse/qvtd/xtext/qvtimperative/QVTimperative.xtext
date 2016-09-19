@@ -27,6 +27,8 @@ TopLevelCS:
 AddStatementCS: ('observe' observedProperties+=PathNameCS (',' observedProperties+=PathNameCS)*)?
 	'add' targetVariable=[qvtimperative::ConnectionVariable|UnrestrictedName] '+=' ownedExpression=ExpCS ';';
 
+AppendParameterCS: 'append' name=UnrestrictedName ':' ownedType=TypeExpCS ';';
+
 CommitStatementCS returns StatementCS:	NewStatementCS | SetStatementCS;
 	
 CheckStatementCS: 'check' ownedCondition=ExpCS ';';
@@ -40,18 +42,16 @@ DirectionCS: {DirectionCS} (isChecked?='check'|isEnforced?='enforce')? name=Unre
 	'imports' imports+=[pivot::Package|UnrestrictedName] (',' imports+=[pivot::Package|UnrestrictedName])*
 ;
 
-GuardStatementCS returns StatementCS: OutVariableCS | DeclareStatementCS | DeclareStatementCS | CheckStatementCS;
+GuardParameterCS: 'in' ':' referredTypedModel=[qvtimperative::ImperativeTypedModel|UnrestrictedName] name=UnrestrictedName ':' ownedType=TypeExpCS ';';
 
-GuardVariableCS: 'in' ':' referredTypedModel=[qvtimperative::ImperativeTypedModel|UnrestrictedName] name=UnrestrictedName ':' ownedType=TypeExpCS ';';
+GuardStatementCS returns StatementCS: OutVariableCS | DeclareStatementCS | DeclareStatementCS | CheckStatementCS;
 
 ImportCS returns base::ImportCS:
 	'import' (name=Identifier ':')? ownedPathName=URIPathNameCS (isAll?='::' '*')? ';';
 
-InoutVariableCS: 'inout' name=UnrestrictedName ':' ownedType=TypeExpCS ';';
-
 MappingCS: {MappingCS} 'map' name=UnrestrictedName ('in' ownedInPathName=PathNameCS)?
 	'{'
-	(ownedGuardVariables+=GuardVariableCS | ownedInoutVariables+=InoutVariableCS)*
+	ownedParameters+=MappingParameterCS*
 	ownedStatements+=GuardStatementCS*
 	ownedStatements+=CommitStatementCS*
 	ownedStatements+=ControlStatementCS*
@@ -66,6 +66,8 @@ MappingLoopCS: ('observe' observedProperties+=PathNameCS (',' observedProperties
 	'for' ownedIterator=MappingIteratorCS 'in' ownedInExpression=ExpCS '{' ownedMappingStatements+=ControlStatementCS+ '}';
 	
 MappingIteratorCS returns essentialocl::VariableCS: name=UnrestrictedName (':' ownedType=TypeExpCS)?;
+
+MappingParameterCS: GuardParameterCS | AppendParameterCS;
 
 NewStatementCS: ('observe' observedProperties+=PathNameCS (',' observedProperties+=PathNameCS)*)?
 	'new' ':' referredTypedModel=[qvtimperative::ImperativeTypedModel|UnrestrictedName] name=UnrestrictedName ':' ownedType=TypeExpCS (':=' ownedExpression=ExpCS)? ';'

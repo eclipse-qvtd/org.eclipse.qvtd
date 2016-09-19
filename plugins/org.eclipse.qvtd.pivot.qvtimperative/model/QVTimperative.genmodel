@@ -23,6 +23,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperative.ecore#//AddStatement/isEnforcedUnique"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//AddStatement/ownedExpression"/>
     </genClasses>
+    <genClasses ecoreClass="QVTimperative.ecore#//AppendParameter"/>
     <genClasses ecoreClass="QVTimperative.ecore#//CheckStatement">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//CheckStatement/ownedExpression"/>
     </genClasses>
@@ -31,21 +32,19 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperative.ecore#//DeclareStatement/isChecked"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//DeclareStatement/ownedExpression"/>
     </genClasses>
-    <genClasses ecoreClass="QVTimperative.ecore#//GuardVariable">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//GuardVariable/referredTypedModel"/>
+    <genClasses ecoreClass="QVTimperative.ecore#//GuardParameter">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//GuardParameter/referredTypedModel"/>
     </genClasses>
     <genClasses ecoreClass="QVTimperative.ecore#//ImperativeModel"/>
     <genClasses ecoreClass="QVTimperative.ecore#//ImperativeTypedModel">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperative.ecore#//ImperativeTypedModel/isChecked"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperative.ecore#//ImperativeTypedModel/isEnforced"/>
     </genClasses>
-    <genClasses ecoreClass="QVTimperative.ecore#//InConnectionVariable"/>
     <genClasses ecoreClass="QVTimperative.ecore#//LoopVariable">
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference QVTimperative.ecore#//LoopVariable/owningMappingLoop"/>
     </genClasses>
     <genClasses ecoreClass="QVTimperative.ecore#//Mapping">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//Mapping/ownedGuardVariables"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//Mapping/inoutVariables"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//Mapping/ownedParameters"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//Mapping/ownedStatements"/>
     </genClasses>
     <genClasses ecoreClass="QVTimperative.ecore#//MappingCall">
@@ -63,6 +62,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//MappingLoop/ownedMappingStatements"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//MappingLoop/ownedExpression"/>
     </genClasses>
+    <genClasses image="false" ecoreClass="QVTimperative.ecore#//MappingParameter"/>
     <genClasses image="false" ecoreClass="QVTimperative.ecore#//MappingStatement"/>
     <genClasses ecoreClass="QVTimperative.ecore#//NewStatement">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//NewStatement/referredTypedModel"/>

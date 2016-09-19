@@ -11,7 +11,7 @@ endpackage
 package qvtimperative
 
 context Mapping
-def: guardVariables : Set(ocl::Variable) = ownedGuardVariables
+def: guardVariables : Set(ocl::Variable) = ownedParameters
 def: boundGuardVariables : Set(ocl::Variable) = ownedStatements->selectByKind(DeclareStatement)
 /* Mapping guard variables that are assigned  */
 --def: boundGuardVariables : Set(ocl::Variable) = guardVariables->select(initExpression <> null)

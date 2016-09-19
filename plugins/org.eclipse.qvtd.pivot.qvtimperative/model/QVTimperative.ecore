@@ -23,6 +23,11 @@
         eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//OCLExpression"
         containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AppendParameter" eSuperTypes="#//ConnectionVariable #//MappingParameter">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="A ConnectionVariable accumulates one or more assignments."/>
+    </eAnnotations>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CheckStatement" eSuperTypes="#//ObservableStatement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedExpression" lowerBound="1"
         eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//OCLExpression"
@@ -45,7 +50,7 @@
         eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//OCLExpression"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="GuardVariable" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#//VariableDeclaration">
+  <eClassifiers xsi:type="ecore:EClass" name="GuardParameter" eSuperTypes="#//MappingParameter">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="A ConnectionVariable accumulates one or more assignments."/>
     </eAnnotations>
@@ -66,11 +71,6 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isEnforced" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         defaultValueLiteral="false"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="InConnectionVariable" eSuperTypes="#//ConnectionVariable">
-    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="A ConnectionVariable accumulates one or more assignments."/>
-    </eAnnotations>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="LoopVariable" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#//VariableDeclaration">
     <eStructuralFeatures xsi:type="ecore:EReference" name="owningMappingLoop" lowerBound="1"
         eType="#//MappingLoop" eOpposite="#//MappingLoop/ownedIterators"/>
@@ -79,10 +79,8 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="An Imperative Mapping extends the abstract declarative mapping to support&#xA;explicit nested invocation of mappings with bindings for the invoked mapping's&#xA;bound variables."/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedGuardVariables" ordered="false"
-        upperBound="-1" eType="#//GuardVariable" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="inoutVariables" ordered="false"
-        upperBound="-1" eType="#//InConnectionVariable" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedParameters" ordered="false"
+        upperBound="-1" eType="#//MappingParameter" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedStatements" upperBound="-1"
         eType="#//Statement" containment="true"/>
   </eClassifiers>
@@ -143,6 +141,11 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedExpression" lowerBound="1"
         eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//OCLExpression"
         containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MappingParameter" abstract="true" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#//VariableDeclaration">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="A ConnectionVariable accumulates one or more assignments."/>
+    </eAnnotations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MappingStatement" abstract="true" eSuperTypes="#//Statement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">

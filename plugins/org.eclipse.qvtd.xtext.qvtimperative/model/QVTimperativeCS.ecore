@@ -8,6 +8,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="targetVariable" lowerBound="1"
         eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperative.ecore#//ConnectionVariable"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AppendParameterCS" eSuperTypes="#//MappingParameterCS"/>
   <eClassifiers xsi:type="ecore:EClass" name="CheckStatementCS" eSuperTypes="#//StatementCS #//ObservableStatementCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedCondition" lowerBound="1"
         eType="ecore:EClass ../../org.eclipse.ocl.xtext.essentialocl/model/EssentialOCLCS.ecore#//ExpCS"
@@ -26,18 +27,15 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isChecked" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isEnforced" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="GuardVariableCS" eSuperTypes="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//TypedElementCS">
+  <eClassifiers xsi:type="ecore:EClass" name="GuardParameterCS" eSuperTypes="#//MappingParameterCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="referredTypedModel" lowerBound="1"
         eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperative.ecore#//ImperativeTypedModel"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="InoutVariableCS" eSuperTypes="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//TypedElementCS"/>
   <eClassifiers xsi:type="ecore:EClass" name="MappingCS" eSuperTypes="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//NamedElementCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedInPathName" eType="ecore:EClass ../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//PathNameCS"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedGuardVariables" upperBound="-1"
-        eType="#//GuardVariableCS" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedInoutVariables" upperBound="-1"
-        eType="#//InoutVariableCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedParameters" upperBound="-1"
+        eType="#//MappingParameterCS" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedStatements" upperBound="-1"
         eType="#//StatementCS" containment="true"/>
   </eClassifiers>
@@ -70,6 +68,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedMappingStatements"
         lowerBound="1" upperBound="-1" eType="#//MappingStatementCS" containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MappingParameterCS" abstract="true"
+      eSuperTypes="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//TypedElementCS"/>
   <eClassifiers xsi:type="ecore:EClass" name="MappingStatementCS" abstract="true"
       eSuperTypes="#//StatementCS"/>
   <eClassifiers xsi:type="ecore:EClass" name="NewStatementCS" eSuperTypes="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//TypedElementCS #//ObservableStatementCS">
