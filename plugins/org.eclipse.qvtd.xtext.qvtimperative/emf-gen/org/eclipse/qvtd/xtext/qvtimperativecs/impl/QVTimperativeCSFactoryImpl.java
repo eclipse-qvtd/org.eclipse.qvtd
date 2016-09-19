@@ -16,13 +16,12 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.qvtd.xtext.qvtimperativecs.*;
 import org.eclipse.qvtd.xtext.qvtimperativecs.AddStatementCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.AppendParameterCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.CheckStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DeclareStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS;
-import org.eclipse.qvtd.xtext.qvtimperativecs.GuardVariableCS;
-import org.eclipse.qvtd.xtext.qvtimperativecs.InoutVariableCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.GuardParameterCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallCS;
@@ -82,11 +81,11 @@ public class QVTimperativeCSFactoryImpl extends EFactoryImpl implements QVTimper
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case QVTimperativeCSPackage.ADD_STATEMENT_CS: return createAddStatementCS();
+			case QVTimperativeCSPackage.APPEND_PARAMETER_CS: return createAppendParameterCS();
 			case QVTimperativeCSPackage.CHECK_STATEMENT_CS: return createCheckStatementCS();
 			case QVTimperativeCSPackage.DECLARE_STATEMENT_CS: return createDeclareStatementCS();
 			case QVTimperativeCSPackage.DIRECTION_CS: return createDirectionCS();
-			case QVTimperativeCSPackage.GUARD_VARIABLE_CS: return createGuardVariableCS();
-			case QVTimperativeCSPackage.INOUT_VARIABLE_CS: return createInoutVariableCS();
+			case QVTimperativeCSPackage.GUARD_PARAMETER_CS: return createGuardParameterCS();
 			case QVTimperativeCSPackage.MAPPING_CS: return createMappingCS();
 			case QVTimperativeCSPackage.MAPPING_CALL_BINDING_CS: return createMappingCallBindingCS();
 			case QVTimperativeCSPackage.MAPPING_CALL_CS: return createMappingCallCS();
@@ -112,6 +111,17 @@ public class QVTimperativeCSFactoryImpl extends EFactoryImpl implements QVTimper
 	public @NonNull AddStatementCS createAddStatementCS() {
 		AddStatementCSImpl addStatementCS = new AddStatementCSImpl();
 		return addStatementCS;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public @NonNull AppendParameterCS createAppendParameterCS() {
+		AppendParameterCSImpl appendParameterCS = new AppendParameterCSImpl();
+		return appendParameterCS;
 	}
 
 	/**
@@ -153,20 +163,9 @@ public class QVTimperativeCSFactoryImpl extends EFactoryImpl implements QVTimper
 	 * @generated
 	 */
 	@Override
-	public @NonNull GuardVariableCS createGuardVariableCS() {
-		GuardVariableCSImpl guardVariableCS = new GuardVariableCSImpl();
-		return guardVariableCS;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public @NonNull InoutVariableCS createInoutVariableCS() {
-		InoutVariableCSImpl inoutVariableCS = new InoutVariableCSImpl();
-		return inoutVariableCS;
+	public @NonNull GuardParameterCS createGuardParameterCS() {
+		GuardParameterCSImpl guardParameterCS = new GuardParameterCSImpl();
+		return guardParameterCS;
 	}
 
 	/**

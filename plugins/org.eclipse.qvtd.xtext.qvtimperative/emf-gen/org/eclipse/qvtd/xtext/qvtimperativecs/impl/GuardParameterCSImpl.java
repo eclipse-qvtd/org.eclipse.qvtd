@@ -12,34 +12,40 @@
  *
  * </copyright>
  */
-package org.eclipse.qvtd.pivot.qvtimperative.impl;
+package org.eclipse.qvtd.xtext.qvtimperativecs.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.pivot.internal.VariableDeclarationImpl;
-import org.eclipse.ocl.pivot.util.Visitor;
-import org.eclipse.qvtd.pivot.qvtimperative.GuardVariable;
+
+import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
+
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
-import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
-import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
+
+import org.eclipse.qvtd.xtext.qvtimperativecs.GuardParameterCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage;
+
+import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Guard Variable</b></em>'.
+ * An implementation of the model object '<em><b>Guard Parameter CS</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.GuardVariableImpl#getReferredTypedModel <em>Referred Typed Model</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.GuardParameterCSImpl#getReferredTypedModel <em>Referred Typed Model</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class GuardVariableImpl extends VariableDeclarationImpl implements GuardVariable {
+public class GuardParameterCSImpl extends MappingParameterCSImpl implements GuardParameterCS {
 	/**
 	 * The cached value of the '{@link #getReferredTypedModel() <em>Referred Typed Model</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -55,7 +61,7 @@ public class GuardVariableImpl extends VariableDeclarationImpl implements GuardV
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected GuardVariableImpl() {
+	protected GuardParameterCSImpl() {
 		super();
 	}
 
@@ -66,7 +72,7 @@ public class GuardVariableImpl extends VariableDeclarationImpl implements GuardV
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return QVTimperativePackage.Literals.GUARD_VARIABLE;
+		return QVTimperativeCSPackage.Literals.GUARD_PARAMETER_CS;
 	}
 
 	/**
@@ -81,7 +87,7 @@ public class GuardVariableImpl extends VariableDeclarationImpl implements GuardV
 			referredTypedModel = (ImperativeTypedModel)eResolveProxy(oldReferredTypedModel);
 			if (referredTypedModel != oldReferredTypedModel) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTimperativePackage.GUARD_VARIABLE__REFERRED_TYPED_MODEL, oldReferredTypedModel, referredTypedModel));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTimperativeCSPackage.GUARD_PARAMETER_CS__REFERRED_TYPED_MODEL, oldReferredTypedModel, referredTypedModel));
 			}
 		}
 		return referredTypedModel;
@@ -106,7 +112,7 @@ public class GuardVariableImpl extends VariableDeclarationImpl implements GuardV
 		ImperativeTypedModel oldReferredTypedModel = referredTypedModel;
 		referredTypedModel = newReferredTypedModel;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.GUARD_VARIABLE__REFERRED_TYPED_MODEL, oldReferredTypedModel, referredTypedModel));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.GUARD_PARAMETER_CS__REFERRED_TYPED_MODEL, oldReferredTypedModel, referredTypedModel));
 	}
 
 	/**
@@ -117,7 +123,7 @@ public class GuardVariableImpl extends VariableDeclarationImpl implements GuardV
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTimperativePackage.GUARD_VARIABLE__REFERRED_TYPED_MODEL:
+			case QVTimperativeCSPackage.GUARD_PARAMETER_CS__REFERRED_TYPED_MODEL:
 				if (resolve) return getReferredTypedModel();
 				return basicGetReferredTypedModel();
 		}
@@ -132,7 +138,7 @@ public class GuardVariableImpl extends VariableDeclarationImpl implements GuardV
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTimperativePackage.GUARD_VARIABLE__REFERRED_TYPED_MODEL:
+			case QVTimperativeCSPackage.GUARD_PARAMETER_CS__REFERRED_TYPED_MODEL:
 				setReferredTypedModel((ImperativeTypedModel)newValue);
 				return;
 		}
@@ -147,7 +153,7 @@ public class GuardVariableImpl extends VariableDeclarationImpl implements GuardV
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTimperativePackage.GUARD_VARIABLE__REFERRED_TYPED_MODEL:
+			case QVTimperativeCSPackage.GUARD_PARAMETER_CS__REFERRED_TYPED_MODEL:
 				setReferredTypedModel((ImperativeTypedModel)null);
 				return;
 		}
@@ -162,7 +168,7 @@ public class GuardVariableImpl extends VariableDeclarationImpl implements GuardV
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTimperativePackage.GUARD_VARIABLE__REFERRED_TYPED_MODEL:
+			case QVTimperativeCSPackage.GUARD_PARAMETER_CS__REFERRED_TYPED_MODEL:
 				return referredTypedModel != null;
 		}
 		return super.eIsSet(featureID);
@@ -174,8 +180,8 @@ public class GuardVariableImpl extends VariableDeclarationImpl implements GuardV
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTimperativeVisitor<?>)visitor).visitGuardVariable(this);
+	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
+		return (R) ((QVTimperativeCSVisitor<?>)visitor).visitGuardParameterCS(this);
 	}
 
-} //GuardVariableImpl
+} //GuardParameterCSImpl

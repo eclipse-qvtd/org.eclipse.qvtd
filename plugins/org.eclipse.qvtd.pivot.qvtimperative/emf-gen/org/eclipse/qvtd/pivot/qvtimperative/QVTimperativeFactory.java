@@ -40,6 +40,15 @@ public interface QVTimperativeFactory extends EFactory {
 	@NonNull AddStatement createAddStatement();
 
 	/**
+	 * Returns a new object of class '<em>Append Parameter</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Append Parameter</em>'.
+	 * @generated
+	 */
+	@NonNull AppendParameter createAppendParameter();
+
+	/**
 	 * Returns a new object of class '<em>Check Statement</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -58,13 +67,13 @@ public interface QVTimperativeFactory extends EFactory {
 	@NonNull DeclareStatement createDeclareStatement();
 
 	/**
-	 * Returns a new object of class '<em>Guard Variable</em>'.
+	 * Returns a new object of class '<em>Guard Parameter</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Guard Variable</em>'.
+	 * @return a new object of class '<em>Guard Parameter</em>'.
 	 * @generated
 	 */
-	@NonNull GuardVariable createGuardVariable();
+	@NonNull GuardParameter createGuardParameter();
 
 	/**
 	 * Returns a new object of class '<em>Imperative Model</em>'.
@@ -83,15 +92,6 @@ public interface QVTimperativeFactory extends EFactory {
 	 * @generated
 	 */
 	@NonNull ImperativeTypedModel createImperativeTypedModel();
-
-	/**
-	 * Returns a new object of class '<em>In Connection Variable</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>In Connection Variable</em>'.
-	 * @generated
-	 */
-	@NonNull InConnectionVariable createInConnectionVariable();
 
 	/**
 	 * Returns a new object of class '<em>Loop Variable</em>'.

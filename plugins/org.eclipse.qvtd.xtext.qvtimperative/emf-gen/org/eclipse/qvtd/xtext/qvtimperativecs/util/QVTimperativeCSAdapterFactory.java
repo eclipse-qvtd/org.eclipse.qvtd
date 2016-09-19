@@ -94,6 +94,10 @@ public class QVTimperativeCSAdapterFactory extends AdapterFactoryImpl {
 				return createAddStatementCSAdapter();
 			}
 			@Override
+			public Adapter caseAppendParameterCS(AppendParameterCS object) {
+				return createAppendParameterCSAdapter();
+			}
+			@Override
 			public Adapter caseCheckStatementCS(CheckStatementCS object) {
 				return createCheckStatementCSAdapter();
 			}
@@ -106,12 +110,8 @@ public class QVTimperativeCSAdapterFactory extends AdapterFactoryImpl {
 				return createDirectionCSAdapter();
 			}
 			@Override
-			public Adapter caseGuardVariableCS(GuardVariableCS object) {
-				return createGuardVariableCSAdapter();
-			}
-			@Override
-			public Adapter caseInoutVariableCS(InoutVariableCS object) {
-				return createInoutVariableCSAdapter();
+			public Adapter caseGuardParameterCS(GuardParameterCS object) {
+				return createGuardParameterCSAdapter();
 			}
 			@Override
 			public Adapter caseMappingCS(MappingCS object) {
@@ -128,6 +128,10 @@ public class QVTimperativeCSAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseMappingLoopCS(MappingLoopCS object) {
 				return createMappingLoopCSAdapter();
+			}
+			@Override
+			public Adapter caseMappingParameterCS(MappingParameterCS object) {
+				return createMappingParameterCSAdapter();
 			}
 			@Override
 			public Adapter caseMappingStatementCS(MappingStatementCS object) {
@@ -268,6 +272,20 @@ public class QVTimperativeCSAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.AppendParameterCS <em>Append Parameter CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.AppendParameterCS
+	 * @generated
+	 */
+	public Adapter createAppendParameterCSAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.CheckStatementCS <em>Check Statement CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -306,6 +324,20 @@ public class QVTimperativeCSAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createDirectionCSAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.GuardParameterCS <em>Guard Parameter CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.GuardParameterCS
+	 * @generated
+	 */
+	public Adapter createGuardParameterCSAdapter() {
 		return null;
 	}
 
@@ -362,6 +394,20 @@ public class QVTimperativeCSAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createMappingLoopCSAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingParameterCS <em>Mapping Parameter CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.MappingParameterCS
+	 * @generated
+	 */
+	public Adapter createMappingParameterCSAdapter() {
 		return null;
 	}
 
@@ -726,34 +772,6 @@ public class QVTimperativeCSAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createAbstractTransformationCSAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.GuardVariableCS <em>Guard Variable CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.GuardVariableCS
-	 * @generated
-	 */
-	public Adapter createGuardVariableCSAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.InoutVariableCS <em>Inout Variable CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.InoutVariableCS
-	 * @generated
-	 */
-	public Adapter createInoutVariableCSAdapter() {
 		return null;
 	}
 

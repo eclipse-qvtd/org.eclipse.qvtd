@@ -49,6 +49,11 @@ public abstract class AbstractQVTimperativeCSPreOrderVisitor
 	}
 
 	@Override
+	public @Nullable Continuation<?> visitAppendParameterCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull AppendParameterCS csElement) {
+		return visitMappingParameterCS(csElement);
+	}
+
+	@Override
 	public @Nullable Continuation<?> visitCheckStatementCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull CheckStatementCS csElement) {
 		return visitStatementCS(csElement);
 	}
@@ -64,13 +69,8 @@ public abstract class AbstractQVTimperativeCSPreOrderVisitor
 	}
 
 	@Override
-	public @Nullable Continuation<?> visitGuardVariableCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull GuardVariableCS csElement) {
-		return visitTypedElementCS(csElement);
-	}
-
-	@Override
-	public @Nullable Continuation<?> visitInoutVariableCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull InoutVariableCS csElement) {
-		return visitTypedElementCS(csElement);
+	public @Nullable Continuation<?> visitGuardParameterCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull GuardParameterCS csElement) {
+		return visitMappingParameterCS(csElement);
 	}
 
 	@Override
@@ -91,6 +91,11 @@ public abstract class AbstractQVTimperativeCSPreOrderVisitor
 	@Override
 	public @Nullable Continuation<?> visitMappingLoopCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull MappingLoopCS csElement) {
 		return visitMappingStatementCS(csElement);
+	}
+
+	@Override
+	public @Nullable Continuation<?> visitMappingParameterCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull MappingParameterCS csElement) {
+		return visitTypedElementCS(csElement);
 	}
 
 	@Override

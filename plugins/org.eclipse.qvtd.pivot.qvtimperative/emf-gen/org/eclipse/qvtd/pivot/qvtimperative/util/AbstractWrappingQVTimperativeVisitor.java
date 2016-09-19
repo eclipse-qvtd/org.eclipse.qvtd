@@ -44,6 +44,18 @@ public abstract class AbstractWrappingQVTimperativeVisitor<R, C, @NonNull D exte
 	}
 
 	@Override
+	public R visitAppendParameter(org.eclipse.qvtd.pivot.qvtimperative.@NonNull AppendParameter object) {
+		@Nullable P prologue = preVisit(object);
+		try {
+			R result = delegate.visitAppendParameter(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
+	}
+
+	@Override
 	public R visitCheckStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull CheckStatement object) {
 		@Nullable P prologue = preVisit(object);
 		try {
@@ -80,10 +92,10 @@ public abstract class AbstractWrappingQVTimperativeVisitor<R, C, @NonNull D exte
 	}
 
 	@Override
-	public R visitGuardVariable(org.eclipse.qvtd.pivot.qvtimperative.@NonNull GuardVariable object) {
+	public R visitGuardParameter(org.eclipse.qvtd.pivot.qvtimperative.@NonNull GuardParameter object) {
 		@Nullable P prologue = preVisit(object);
 		try {
-			R result = delegate.visitGuardVariable(object);
+			R result = delegate.visitGuardParameter(object);
 			return postVisit(object, prologue, result);
 		}
 		catch (Throwable e) {
@@ -108,18 +120,6 @@ public abstract class AbstractWrappingQVTimperativeVisitor<R, C, @NonNull D exte
 		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitImperativeTypedModel(object);
-			return postVisit(object, prologue, result);
-		}
-		catch (Throwable e) {
-			return badVisit(object, prologue, e);
-		}
-	}
-
-	@Override
-	public R visitInConnectionVariable(org.eclipse.qvtd.pivot.qvtimperative.@NonNull InConnectionVariable object) {
-		@Nullable P prologue = preVisit(object);
-		try {
-			R result = delegate.visitInConnectionVariable(object);
 			return postVisit(object, prologue, result);
 		}
 		catch (Throwable e) {
@@ -180,6 +180,18 @@ public abstract class AbstractWrappingQVTimperativeVisitor<R, C, @NonNull D exte
 		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitMappingLoop(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
+	}
+
+	@Override
+	public R visitMappingParameter(org.eclipse.qvtd.pivot.qvtimperative.@NonNull MappingParameter object) {
+		@Nullable P prologue = preVisit(object);
+		try {
+			R result = delegate.visitMappingParameter(object);
 			return postVisit(object, prologue, result);
 		}
 		catch (Throwable e) {

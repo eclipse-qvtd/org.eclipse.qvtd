@@ -49,6 +49,11 @@ public abstract class AbstractQVTimperativeASSaverLocateVisitor
 	}
 
 	@Override
+	public @Nullable Object visitAppendParameter(org.eclipse.qvtd.pivot.qvtimperative.@NonNull AppendParameter object) {
+		return visitConnectionVariable(object);
+	}
+
+	@Override
 	public @Nullable Object visitCheckStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull CheckStatement object) {
 		return visitObservableStatement(object);
 	}
@@ -64,8 +69,8 @@ public abstract class AbstractQVTimperativeASSaverLocateVisitor
 	}
 
 	@Override
-	public @Nullable Object visitGuardVariable(org.eclipse.qvtd.pivot.qvtimperative.@NonNull GuardVariable object) {
-		return visitVariableDeclaration(object);
+	public @Nullable Object visitGuardParameter(org.eclipse.qvtd.pivot.qvtimperative.@NonNull GuardParameter object) {
+		return visitMappingParameter(object);
 	}
 
 	@Override
@@ -76,11 +81,6 @@ public abstract class AbstractQVTimperativeASSaverLocateVisitor
 	@Override
 	public @Nullable Object visitImperativeTypedModel(org.eclipse.qvtd.pivot.qvtimperative.@NonNull ImperativeTypedModel object) {
 		return visitTypedModel(object);
-	}
-
-	@Override
-	public @Nullable Object visitInConnectionVariable(org.eclipse.qvtd.pivot.qvtimperative.@NonNull InConnectionVariable object) {
-		return visitConnectionVariable(object);
 	}
 
 	@Override
@@ -106,6 +106,11 @@ public abstract class AbstractQVTimperativeASSaverLocateVisitor
 	@Override
 	public @Nullable Object visitMappingLoop(org.eclipse.qvtd.pivot.qvtimperative.@NonNull MappingLoop object) {
 		return visitMappingStatement(object);
+	}
+
+	@Override
+	public @Nullable Object visitMappingParameter(org.eclipse.qvtd.pivot.qvtimperative.@NonNull MappingParameter object) {
+		return visitVariableDeclaration(object);
 	}
 
 	@Override

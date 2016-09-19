@@ -103,6 +103,21 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case QVTimperativeCSPackage.APPEND_PARAMETER_CS: {
+				AppendParameterCS appendParameterCS = (AppendParameterCS)theEObject;
+				T result = caseAppendParameterCS(appendParameterCS);
+				if (result == null) result = caseMappingParameterCS(appendParameterCS);
+				if (result == null) result = caseTypedElementCS(appendParameterCS);
+				if (result == null) result = caseNamedElementCS(appendParameterCS);
+				if (result == null) result = caseModelElementCS(appendParameterCS);
+				if (result == null) result = caseNameable(appendParameterCS);
+				if (result == null) result = casePivotableElementCS(appendParameterCS);
+				if (result == null) result = caseElementCS(appendParameterCS);
+				if (result == null) result = casePivotable(appendParameterCS);
+				if (result == null) result = caseVisitableCS(appendParameterCS);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case QVTimperativeCSPackage.CHECK_STATEMENT_CS: {
 				CheckStatementCS checkStatementCS = (CheckStatementCS)theEObject;
 				T result = caseCheckStatementCS(checkStatementCS);
@@ -145,31 +160,18 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTimperativeCSPackage.GUARD_VARIABLE_CS: {
-				GuardVariableCS guardVariableCS = (GuardVariableCS)theEObject;
-				T result = caseGuardVariableCS(guardVariableCS);
-				if (result == null) result = caseTypedElementCS(guardVariableCS);
-				if (result == null) result = caseNamedElementCS(guardVariableCS);
-				if (result == null) result = caseModelElementCS(guardVariableCS);
-				if (result == null) result = caseNameable(guardVariableCS);
-				if (result == null) result = casePivotableElementCS(guardVariableCS);
-				if (result == null) result = caseElementCS(guardVariableCS);
-				if (result == null) result = casePivotable(guardVariableCS);
-				if (result == null) result = caseVisitableCS(guardVariableCS);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case QVTimperativeCSPackage.INOUT_VARIABLE_CS: {
-				InoutVariableCS inoutVariableCS = (InoutVariableCS)theEObject;
-				T result = caseInoutVariableCS(inoutVariableCS);
-				if (result == null) result = caseTypedElementCS(inoutVariableCS);
-				if (result == null) result = caseNamedElementCS(inoutVariableCS);
-				if (result == null) result = caseModelElementCS(inoutVariableCS);
-				if (result == null) result = caseNameable(inoutVariableCS);
-				if (result == null) result = casePivotableElementCS(inoutVariableCS);
-				if (result == null) result = caseElementCS(inoutVariableCS);
-				if (result == null) result = casePivotable(inoutVariableCS);
-				if (result == null) result = caseVisitableCS(inoutVariableCS);
+			case QVTimperativeCSPackage.GUARD_PARAMETER_CS: {
+				GuardParameterCS guardParameterCS = (GuardParameterCS)theEObject;
+				T result = caseGuardParameterCS(guardParameterCS);
+				if (result == null) result = caseMappingParameterCS(guardParameterCS);
+				if (result == null) result = caseTypedElementCS(guardParameterCS);
+				if (result == null) result = caseNamedElementCS(guardParameterCS);
+				if (result == null) result = caseModelElementCS(guardParameterCS);
+				if (result == null) result = caseNameable(guardParameterCS);
+				if (result == null) result = casePivotableElementCS(guardParameterCS);
+				if (result == null) result = caseElementCS(guardParameterCS);
+				if (result == null) result = casePivotable(guardParameterCS);
+				if (result == null) result = caseVisitableCS(guardParameterCS);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -222,6 +224,20 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = caseElementCS(mappingLoopCS);
 				if (result == null) result = casePivotable(mappingLoopCS);
 				if (result == null) result = caseVisitableCS(mappingLoopCS);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case QVTimperativeCSPackage.MAPPING_PARAMETER_CS: {
+				MappingParameterCS mappingParameterCS = (MappingParameterCS)theEObject;
+				T result = caseMappingParameterCS(mappingParameterCS);
+				if (result == null) result = caseTypedElementCS(mappingParameterCS);
+				if (result == null) result = caseNamedElementCS(mappingParameterCS);
+				if (result == null) result = caseModelElementCS(mappingParameterCS);
+				if (result == null) result = caseNameable(mappingParameterCS);
+				if (result == null) result = casePivotableElementCS(mappingParameterCS);
+				if (result == null) result = caseElementCS(mappingParameterCS);
+				if (result == null) result = casePivotable(mappingParameterCS);
+				if (result == null) result = caseVisitableCS(mappingParameterCS);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -383,6 +399,21 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Append Parameter CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Append Parameter CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAppendParameterCS(AppendParameterCS object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Check Statement CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -428,32 +459,17 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Guard Variable CS</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Guard Parameter CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Guard Variable CS</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Guard Parameter CS</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseGuardVariableCS(GuardVariableCS object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Inout Variable CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Inout Variable CS</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseInoutVariableCS(InoutVariableCS object) {
+	public T caseGuardParameterCS(GuardParameterCS object) {
 		return null;
 	}
 
@@ -514,6 +530,21 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseMappingLoopCS(MappingLoopCS object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Mapping Parameter CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Mapping Parameter CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseMappingParameterCS(MappingParameterCS object) {
 		return null;
 	}
 

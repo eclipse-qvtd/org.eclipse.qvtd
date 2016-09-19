@@ -1,24 +1,23 @@
 /**
  * <copyright>
- *
+ * 
  * Copyright (c) 2013, 2017 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
+ * 
  * Contributors:
  *   E.D.Willink - Initial API and implementation
- *
+ * 
  * </copyright>
  */
 package org.eclipse.qvtd.pivot.qvtimperative;
 
-import org.eclipse.ocl.pivot.VariableDeclaration;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Guard Variable</b></em>'.
+ * A representation of the model object '<em><b>Guard Parameter</b></em>'.
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
@@ -29,13 +28,13 @@ import org.eclipse.ocl.pivot.VariableDeclaration;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.GuardVariable#getReferredTypedModel <em>Referred Typed Model</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.GuardParameter#getReferredTypedModel <em>Referred Typed Model</em>}</li>
  * </ul>
  *
- * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getGuardVariable()
+ * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getGuardParameter()
  * @generated
  */
-public interface GuardVariable extends VariableDeclaration {
+public interface GuardParameter extends MappingParameter {
 	/**
 	 * Returns the value of the '<em><b>Referred Typed Model</b></em>' reference.
 	 * <!-- begin-user-doc -->
@@ -46,13 +45,13 @@ public interface GuardVariable extends VariableDeclaration {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Referred Typed Model</em>' reference.
 	 * @see #setReferredTypedModel(ImperativeTypedModel)
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getGuardVariable_ReferredTypedModel()
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getGuardParameter_ReferredTypedModel()
 	 * @generated
 	 */
 	ImperativeTypedModel getReferredTypedModel();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtimperative.GuardVariable#getReferredTypedModel <em>Referred Typed Model</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtimperative.GuardParameter#getReferredTypedModel <em>Referred Typed Model</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Referred Typed Model</em>' reference.
@@ -61,4 +60,4 @@ public interface GuardVariable extends VariableDeclaration {
 	 */
 	void setReferredTypedModel(ImperativeTypedModel value);
 
-} // GuardVariable
+} // GuardParameter

@@ -24,8 +24,7 @@ import org.eclipse.ocl.xtext.basecs.PathNameCS;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS#getOwnedInPathName <em>Owned In Path Name</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS#getOwnedGuardVariables <em>Owned Guard Variables</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS#getOwnedInoutVariables <em>Owned Inout Variables</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS#getOwnedParameters <em>Owned Parameters</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS#getOwnedStatements <em>Owned Statements</em>}</li>
  * </ul>
  *
@@ -61,20 +60,20 @@ public interface MappingCS extends NamedElementCS {
 	void setOwnedInPathName(PathNameCS value);
 
 	/**
-	 * Returns the value of the '<em><b>Owned Guard Variables</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.qvtd.xtext.qvtimperativecs.GuardVariableCS}.
+	 * Returns the value of the '<em><b>Owned Parameters</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingParameterCS}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Owned Guard Variables</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Owned Parameters</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Owned Guard Variables</em>' containment reference list.
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getMappingCS_OwnedGuardVariables()
+	 * @return the value of the '<em>Owned Parameters</em>' containment reference list.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getMappingCS_OwnedParameters()
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<GuardVariableCS> getOwnedGuardVariables();
+	EList<MappingParameterCS> getOwnedParameters();
 
 	/**
 	 * Returns the value of the '<em><b>Owned Statements</b></em>' containment reference list.
@@ -91,21 +90,5 @@ public interface MappingCS extends NamedElementCS {
 	 * @generated
 	 */
 	EList<StatementCS> getOwnedStatements();
-
-	/**
-	 * Returns the value of the '<em><b>Owned Inout Variables</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.qvtd.xtext.qvtimperativecs.InoutVariableCS}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Owned Inout Variables</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Owned Inout Variables</em>' containment reference list.
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getMappingCS_OwnedInoutVariables()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<InoutVariableCS> getOwnedInoutVariables();
 
 } // MappingCS

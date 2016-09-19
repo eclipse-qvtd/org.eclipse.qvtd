@@ -40,6 +40,15 @@ public interface QVTimperativeCSFactory extends EFactory {
 	@NonNull AddStatementCS createAddStatementCS();
 
 	/**
+	 * Returns a new object of class '<em>Append Parameter CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Append Parameter CS</em>'.
+	 * @generated
+	 */
+	@NonNull AppendParameterCS createAppendParameterCS();
+
+	/**
 	 * Returns a new object of class '<em>Check Statement CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -67,22 +76,13 @@ public interface QVTimperativeCSFactory extends EFactory {
 	@NonNull DirectionCS createDirectionCS();
 
 	/**
-	 * Returns a new object of class '<em>Guard Variable CS</em>'.
+	 * Returns a new object of class '<em>Guard Parameter CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Guard Variable CS</em>'.
+	 * @return a new object of class '<em>Guard Parameter CS</em>'.
 	 * @generated
 	 */
-	@NonNull GuardVariableCS createGuardVariableCS();
-
-	/**
-	 * Returns a new object of class '<em>Inout Variable CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Inout Variable CS</em>'.
-	 * @generated
-	 */
-	@NonNull InoutVariableCS createInoutVariableCS();
+	@NonNull GuardParameterCS createGuardParameterCS();
 
 	/**
 	 * Returns a new object of class '<em>Mapping CS</em>'.

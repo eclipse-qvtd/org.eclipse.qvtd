@@ -80,11 +80,11 @@ import org.eclipse.qvtd.xtext.qvtbasecs.QVTbaseCSPackage;
 import org.eclipse.qvtd.xtext.qvtbasecs.QualifiedPackageCS;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess;
 import org.eclipse.qvtd.xtext.qvtimperativecs.AddStatementCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.AppendParameterCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.CheckStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DeclareStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS;
-import org.eclipse.qvtd.xtext.qvtimperativecs.GuardVariableCS;
-import org.eclipse.qvtd.xtext.qvtimperativecs.InoutVariableCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.GuardParameterCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallCS;
@@ -445,6 +445,9 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 			case QVTimperativeCSPackage.ADD_STATEMENT_CS:
 				sequence_AddStatementCS(context, (AddStatementCS) semanticObject); 
 				return; 
+			case QVTimperativeCSPackage.APPEND_PARAMETER_CS:
+				sequence_AppendParameterCS(context, (AppendParameterCS) semanticObject); 
+				return; 
 			case QVTimperativeCSPackage.CHECK_STATEMENT_CS:
 				sequence_CheckStatementCS(context, (CheckStatementCS) semanticObject); 
 				return; 
@@ -454,11 +457,8 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 			case QVTimperativeCSPackage.DIRECTION_CS:
 				sequence_DirectionCS(context, (DirectionCS) semanticObject); 
 				return; 
-			case QVTimperativeCSPackage.GUARD_VARIABLE_CS:
-				sequence_GuardVariableCS(context, (GuardVariableCS) semanticObject); 
-				return; 
-			case QVTimperativeCSPackage.INOUT_VARIABLE_CS:
-				sequence_InoutVariableCS(context, (InoutVariableCS) semanticObject); 
+			case QVTimperativeCSPackage.GUARD_PARAMETER_CS:
+				sequence_GuardParameterCS(context, (GuardParameterCS) semanticObject); 
 				return; 
 			case QVTimperativeCSPackage.MAPPING_CS:
 				sequence_MappingCS(context, (MappingCS) semanticObject); 
@@ -508,6 +508,28 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 	 */
 	protected void sequence_AddStatementCS(ISerializationContext context, AddStatementCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     AppendParameterCS returns AppendParameterCS
+	 *     MappingParameterCS returns AppendParameterCS
+	 *
+	 * Constraint:
+	 *     (name=UnrestrictedName ownedType=TypeExpCS)
+	 */
+	protected void sequence_AppendParameterCS(ISerializationContext context, AppendParameterCS semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, BaseCSPackage.Literals.NAMED_ELEMENT_CS__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BaseCSPackage.Literals.NAMED_ELEMENT_CS__NAME));
+			if (transientValues.isValueTransient(semanticObject, BaseCSPackage.Literals.TYPED_ELEMENT_CS__OWNED_TYPE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BaseCSPackage.Literals.TYPED_ELEMENT_CS__OWNED_TYPE));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getAppendParameterCSAccess().getNameUnrestrictedNameParserRuleCall_1_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getAppendParameterCSAccess().getOwnedTypeTypeExpCSParserRuleCall_3_0(), semanticObject.getOwnedType());
+		feeder.finish();
 	}
 	
 	
@@ -563,24 +585,25 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 	
 	/**
 	 * Contexts:
-	 *     GuardVariableCS returns GuardVariableCS
+	 *     GuardParameterCS returns GuardParameterCS
+	 *     MappingParameterCS returns GuardParameterCS
 	 *
 	 * Constraint:
 	 *     (referredTypedModel=[ImperativeTypedModel|UnrestrictedName] name=UnrestrictedName ownedType=TypeExpCS)
 	 */
-	protected void sequence_GuardVariableCS(ISerializationContext context, GuardVariableCS semanticObject) {
+	protected void sequence_GuardParameterCS(ISerializationContext context, GuardParameterCS semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, QVTimperativeCSPackage.Literals.GUARD_VARIABLE_CS__REFERRED_TYPED_MODEL) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, QVTimperativeCSPackage.Literals.GUARD_VARIABLE_CS__REFERRED_TYPED_MODEL));
+			if (transientValues.isValueTransient(semanticObject, QVTimperativeCSPackage.Literals.GUARD_PARAMETER_CS__REFERRED_TYPED_MODEL) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, QVTimperativeCSPackage.Literals.GUARD_PARAMETER_CS__REFERRED_TYPED_MODEL));
 			if (transientValues.isValueTransient(semanticObject, BaseCSPackage.Literals.NAMED_ELEMENT_CS__NAME) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BaseCSPackage.Literals.NAMED_ELEMENT_CS__NAME));
 			if (transientValues.isValueTransient(semanticObject, BaseCSPackage.Literals.TYPED_ELEMENT_CS__OWNED_TYPE) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BaseCSPackage.Literals.TYPED_ELEMENT_CS__OWNED_TYPE));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getGuardVariableCSAccess().getReferredTypedModelImperativeTypedModelUnrestrictedNameParserRuleCall_2_0_1(), semanticObject.getReferredTypedModel());
-		feeder.accept(grammarAccess.getGuardVariableCSAccess().getNameUnrestrictedNameParserRuleCall_3_0(), semanticObject.getName());
-		feeder.accept(grammarAccess.getGuardVariableCSAccess().getOwnedTypeTypeExpCSParserRuleCall_5_0(), semanticObject.getOwnedType());
+		feeder.accept(grammarAccess.getGuardParameterCSAccess().getReferredTypedModelImperativeTypedModelUnrestrictedNameParserRuleCall_2_0_1(), semanticObject.getReferredTypedModel());
+		feeder.accept(grammarAccess.getGuardParameterCSAccess().getNameUnrestrictedNameParserRuleCall_3_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getGuardParameterCSAccess().getOwnedTypeTypeExpCSParserRuleCall_5_0(), semanticObject.getOwnedType());
 		feeder.finish();
 	}
 	
@@ -599,34 +622,13 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 	
 	/**
 	 * Contexts:
-	 *     InoutVariableCS returns InoutVariableCS
-	 *
-	 * Constraint:
-	 *     (name=UnrestrictedName ownedType=TypeExpCS)
-	 */
-	protected void sequence_InoutVariableCS(ISerializationContext context, InoutVariableCS semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, BaseCSPackage.Literals.NAMED_ELEMENT_CS__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BaseCSPackage.Literals.NAMED_ELEMENT_CS__NAME));
-			if (transientValues.isValueTransient(semanticObject, BaseCSPackage.Literals.TYPED_ELEMENT_CS__OWNED_TYPE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BaseCSPackage.Literals.TYPED_ELEMENT_CS__OWNED_TYPE));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getInoutVariableCSAccess().getNameUnrestrictedNameParserRuleCall_1_0(), semanticObject.getName());
-		feeder.accept(grammarAccess.getInoutVariableCSAccess().getOwnedTypeTypeExpCSParserRuleCall_3_0(), semanticObject.getOwnedType());
-		feeder.finish();
-	}
-	
-	
-	/**
-	 * Contexts:
 	 *     MappingCS returns MappingCS
 	 *
 	 * Constraint:
 	 *     (
 	 *         name=UnrestrictedName 
 	 *         ownedInPathName=PathNameCS? 
-	 *         (ownedGuardVariables+=GuardVariableCS | ownedInoutVariables+=InoutVariableCS)* 
+	 *         ownedParameters+=MappingParameterCS* 
 	 *         ownedStatements+=GuardStatementCS* 
 	 *         ownedStatements+=CommitStatementCS* 
 	 *         ownedStatements+=ControlStatementCS*

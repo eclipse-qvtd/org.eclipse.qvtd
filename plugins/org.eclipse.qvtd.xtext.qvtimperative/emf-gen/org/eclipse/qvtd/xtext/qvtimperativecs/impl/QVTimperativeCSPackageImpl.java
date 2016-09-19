@@ -22,15 +22,16 @@ import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.xtext.qvtbasecs.QVTbaseCSPackage;
 import org.eclipse.qvtd.xtext.qvtimperativecs.AddStatementCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.AppendParameterCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.CheckStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DeclareStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS;
-import org.eclipse.qvtd.xtext.qvtimperativecs.GuardVariableCS;
-import org.eclipse.qvtd.xtext.qvtimperativecs.InoutVariableCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.GuardParameterCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingLoopCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.MappingParameterCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.NewStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.ObservableStatementCS;
@@ -63,6 +64,13 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass appendParameterCSEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass checkStatementCSEClass = null;
 
 	/**
@@ -84,14 +92,7 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass guardVariableCSEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass inoutVariableCSEClass = null;
+	private EClass guardParameterCSEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -120,6 +121,13 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	 * @generated
 	 */
 	private EClass mappingLoopCSEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass mappingParameterCSEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -219,7 +227,7 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link QVTimperativeCSPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -252,7 +260,7 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		// Mark meta-data to indicate it can't be changed
 		theQVTimperativeCSPackage.freeze();
 
-  
+
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(QVTimperativeCSPackage.eNS_URI, theQVTimperativeCSPackage);
 		return theQVTimperativeCSPackage;
@@ -286,6 +294,16 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	@Override
 	public EReference getAddStatementCS_TargetVariable() {
 		return (EReference)addStatementCSEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getAppendParameterCS() {
+		return appendParameterCSEClass;
 	}
 
 	/**
@@ -384,8 +402,8 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	 * @generated
 	 */
 	@Override
-	public EClass getGuardVariableCS() {
-		return guardVariableCSEClass;
+	public EClass getGuardParameterCS() {
+		return guardParameterCSEClass;
 	}
 
 	/**
@@ -394,18 +412,8 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	 * @generated
 	 */
 	@Override
-	public EReference getGuardVariableCS_ReferredTypedModel() {
-		return (EReference)guardVariableCSEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getInoutVariableCS() {
-		return inoutVariableCSEClass;
+	public EReference getGuardParameterCS_ReferredTypedModel() {
+		return (EReference)guardParameterCSEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -434,7 +442,7 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	 * @generated
 	 */
 	@Override
-	public EReference getMappingCS_OwnedGuardVariables() {
+	public EReference getMappingCS_OwnedParameters() {
 		return (EReference)mappingCSEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -445,16 +453,6 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	 */
 	@Override
 	public EReference getMappingCS_OwnedStatements() {
-		return (EReference)mappingCSEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getMappingCS_OwnedInoutVariables() {
 		return (EReference)mappingCSEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -586,6 +584,16 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	@Override
 	public EReference getMappingLoopCS_OwnedMappingStatements() {
 		return (EReference)mappingLoopCSEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getMappingParameterCS() {
+		return mappingParameterCSEClass;
 	}
 
 	/**
@@ -733,6 +741,7 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getOutVariableCS_OwnedExpression() {
 		return (EReference)outVariableCSEClass.getEStructuralFeatures().get(0);
 	}
@@ -900,6 +909,8 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		createEReference(addStatementCSEClass, ADD_STATEMENT_CS__OWNED_EXPRESSION);
 		createEReference(addStatementCSEClass, ADD_STATEMENT_CS__TARGET_VARIABLE);
 
+		appendParameterCSEClass = createEClass(APPEND_PARAMETER_CS);
+
 		checkStatementCSEClass = createEClass(CHECK_STATEMENT_CS);
 		createEReference(checkStatementCSEClass, CHECK_STATEMENT_CS__OWNED_CONDITION);
 
@@ -912,15 +923,12 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		createEAttribute(directionCSEClass, DIRECTION_CS__IS_CHECKED);
 		createEAttribute(directionCSEClass, DIRECTION_CS__IS_ENFORCED);
 
-		guardVariableCSEClass = createEClass(GUARD_VARIABLE_CS);
-		createEReference(guardVariableCSEClass, GUARD_VARIABLE_CS__REFERRED_TYPED_MODEL);
-
-		inoutVariableCSEClass = createEClass(INOUT_VARIABLE_CS);
+		guardParameterCSEClass = createEClass(GUARD_PARAMETER_CS);
+		createEReference(guardParameterCSEClass, GUARD_PARAMETER_CS__REFERRED_TYPED_MODEL);
 
 		mappingCSEClass = createEClass(MAPPING_CS);
 		createEReference(mappingCSEClass, MAPPING_CS__OWNED_IN_PATH_NAME);
-		createEReference(mappingCSEClass, MAPPING_CS__OWNED_GUARD_VARIABLES);
-		createEReference(mappingCSEClass, MAPPING_CS__OWNED_INOUT_VARIABLES);
+		createEReference(mappingCSEClass, MAPPING_CS__OWNED_PARAMETERS);
 		createEReference(mappingCSEClass, MAPPING_CS__OWNED_STATEMENTS);
 
 		mappingCallBindingCSEClass = createEClass(MAPPING_CALL_BINDING_CS);
@@ -938,6 +946,8 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		createEReference(mappingLoopCSEClass, MAPPING_LOOP_CS__OWNED_ITERATOR);
 		createEReference(mappingLoopCSEClass, MAPPING_LOOP_CS__OWNED_IN_EXPRESSION);
 		createEReference(mappingLoopCSEClass, MAPPING_LOOP_CS__OWNED_MAPPING_STATEMENTS);
+
+		mappingParameterCSEClass = createEClass(MAPPING_PARAMETER_CS);
 
 		mappingStatementCSEClass = createEClass(MAPPING_STATEMENT_CS);
 
@@ -1016,19 +1026,20 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		// Add supertypes to classes
 		addStatementCSEClass.getESuperTypes().add(this.getMappingStatementCS());
 		addStatementCSEClass.getESuperTypes().add(this.getObservableStatementCS());
+		appendParameterCSEClass.getESuperTypes().add(this.getMappingParameterCS());
 		checkStatementCSEClass.getESuperTypes().add(this.getStatementCS());
 		checkStatementCSEClass.getESuperTypes().add(this.getObservableStatementCS());
 		declareStatementCSEClass.getESuperTypes().add(theBaseCSPackage.getTypedElementCS());
 		declareStatementCSEClass.getESuperTypes().add(this.getStatementCS());
 		declareStatementCSEClass.getESuperTypes().add(this.getObservableStatementCS());
 		directionCSEClass.getESuperTypes().add(theBaseCSPackage.getNamedElementCS());
-		guardVariableCSEClass.getESuperTypes().add(theBaseCSPackage.getTypedElementCS());
-		inoutVariableCSEClass.getESuperTypes().add(theBaseCSPackage.getTypedElementCS());
+		guardParameterCSEClass.getESuperTypes().add(this.getMappingParameterCS());
 		mappingCSEClass.getESuperTypes().add(theBaseCSPackage.getNamedElementCS());
 		mappingCallBindingCSEClass.getESuperTypes().add(theEssentialOCLCSPackage.getExpCS());
 		mappingCallCSEClass.getESuperTypes().add(this.getMappingStatementCS());
 		mappingLoopCSEClass.getESuperTypes().add(this.getMappingStatementCS());
 		mappingLoopCSEClass.getESuperTypes().add(this.getObservableStatementCS());
+		mappingParameterCSEClass.getESuperTypes().add(theBaseCSPackage.getTypedElementCS());
 		mappingStatementCSEClass.getESuperTypes().add(this.getStatementCS());
 		newStatementCSEClass.getESuperTypes().add(theBaseCSPackage.getTypedElementCS());
 		newStatementCSEClass.getESuperTypes().add(this.getObservableStatementCS());
@@ -1047,6 +1058,8 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		initEReference(getAddStatementCS_OwnedExpression(), theEssentialOCLCSPackage.getExpCS(), null, "ownedExpression", null, 0, 1, AddStatementCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAddStatementCS_TargetVariable(), theQVTimperativePackage.getConnectionVariable(), null, "targetVariable", null, 1, 1, AddStatementCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEClass(appendParameterCSEClass, AppendParameterCS.class, "AppendParameterCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
 		initEClass(checkStatementCSEClass, CheckStatementCS.class, "CheckStatementCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCheckStatementCS_OwnedCondition(), theEssentialOCLCSPackage.getExpCS(), null, "ownedCondition", null, 1, 1, CheckStatementCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -1059,15 +1072,12 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		initEAttribute(getDirectionCS_IsChecked(), ecorePackage.getEBoolean(), "isChecked", null, 0, 1, DirectionCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getDirectionCS_IsEnforced(), ecorePackage.getEBoolean(), "isEnforced", null, 0, 1, DirectionCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(guardVariableCSEClass, GuardVariableCS.class, "GuardVariableCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getGuardVariableCS_ReferredTypedModel(), theQVTimperativePackage.getImperativeTypedModel(), null, "referredTypedModel", null, 1, 1, GuardVariableCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(inoutVariableCSEClass, InoutVariableCS.class, "InoutVariableCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(guardParameterCSEClass, GuardParameterCS.class, "GuardParameterCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getGuardParameterCS_ReferredTypedModel(), theQVTimperativePackage.getImperativeTypedModel(), null, "referredTypedModel", null, 1, 1, GuardParameterCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(mappingCSEClass, MappingCS.class, "MappingCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getMappingCS_OwnedInPathName(), theBaseCSPackage.getPathNameCS(), null, "ownedInPathName", null, 0, 1, MappingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getMappingCS_OwnedGuardVariables(), this.getGuardVariableCS(), null, "ownedGuardVariables", null, 0, -1, MappingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getMappingCS_OwnedInoutVariables(), this.getInoutVariableCS(), null, "ownedInoutVariables", null, 0, -1, MappingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMappingCS_OwnedParameters(), this.getMappingParameterCS(), null, "ownedParameters", null, 0, -1, MappingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMappingCS_OwnedStatements(), this.getStatementCS(), null, "ownedStatements", null, 0, -1, MappingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(mappingCallBindingCSEClass, MappingCallBindingCS.class, "MappingCallBindingCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1085,6 +1095,8 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		initEReference(getMappingLoopCS_OwnedIterator(), theEssentialOCLCSPackage.getVariableCS(), null, "ownedIterator", null, 1, 1, MappingLoopCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMappingLoopCS_OwnedInExpression(), theEssentialOCLCSPackage.getExpCS(), null, "ownedInExpression", null, 1, 1, MappingLoopCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMappingLoopCS_OwnedMappingStatements(), this.getMappingStatementCS(), null, "ownedMappingStatements", null, 1, -1, MappingLoopCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(mappingParameterCSEClass, MappingParameterCS.class, "MappingParameterCS", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(mappingStatementCSEClass, MappingStatementCS.class, "MappingStatementCS", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

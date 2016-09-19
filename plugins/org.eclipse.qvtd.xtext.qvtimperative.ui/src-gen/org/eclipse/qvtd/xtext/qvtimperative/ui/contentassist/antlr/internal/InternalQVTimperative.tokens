@@ -23,9 +23,9 @@
 '.'=45
 '..'=99
 '/'=33
-':'=72
+':'=71
 '::'=84
-':='=71
+':='=73
 ';'=17
 '<'=36
 '<-'=102
@@ -59,6 +59,7 @@
 'abstract'=142
 'add'=66
 'and'=41
+'append'=70
 'attribute'=86
 'body'=94
 'call'=77
@@ -82,10 +83,9 @@
 'implies'=44
 'import'=20
 'imports'=21
-'in'=73
+'in'=74
 'infinite'=116
 'initial'=87
-'inout'=74
 'interface'=143
 'invalid'=103
 'let'=113
@@ -122,7 +122,7 @@
 'unique'=130
 'unsettable'=132
 'uses'=28
-'var'=70
+'var'=72
 'volatile'=134
 'xor'=43
 '{'=75

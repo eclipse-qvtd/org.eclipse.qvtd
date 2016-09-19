@@ -28,18 +28,19 @@ import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.AppendParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.CheckStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
-import org.eclipse.qvtd.pivot.qvtimperative.GuardVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
-import org.eclipse.qvtd.pivot.qvtimperative.InConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ObservableStatement;
@@ -110,6 +111,10 @@ public class QVTimperativeAdapterFactory extends AdapterFactoryImpl {
 			return createAddStatementAdapter();
 		}
 		@Override
+		public Adapter caseAppendParameter(AppendParameter object) {
+			return createAppendParameterAdapter();
+		}
+		@Override
 		public Adapter caseCheckStatement(CheckStatement object) {
 			return createCheckStatementAdapter();
 		}
@@ -122,8 +127,8 @@ public class QVTimperativeAdapterFactory extends AdapterFactoryImpl {
 			return createDeclareStatementAdapter();
 		}
 		@Override
-		public Adapter caseGuardVariable(GuardVariable object) {
-			return createGuardVariableAdapter();
+		public Adapter caseGuardParameter(GuardParameter object) {
+			return createGuardParameterAdapter();
 		}
 		@Override
 		public Adapter caseImperativeModel(ImperativeModel object) {
@@ -132,10 +137,6 @@ public class QVTimperativeAdapterFactory extends AdapterFactoryImpl {
 		@Override
 		public Adapter caseImperativeTypedModel(ImperativeTypedModel object) {
 			return createImperativeTypedModelAdapter();
-		}
-		@Override
-		public Adapter caseInConnectionVariable(InConnectionVariable object) {
-			return createInConnectionVariableAdapter();
 		}
 		@Override
 		public Adapter caseLoopVariable(LoopVariable object) {
@@ -156,6 +157,10 @@ public class QVTimperativeAdapterFactory extends AdapterFactoryImpl {
 		@Override
 		public Adapter caseMappingLoop(MappingLoop object) {
 			return createMappingLoopAdapter();
+		}
+		@Override
+		public Adapter caseMappingParameter(MappingParameter object) {
+			return createMappingParameterAdapter();
 		}
 		@Override
 		public Adapter caseMappingStatement(MappingStatement object) {
@@ -268,6 +273,20 @@ public class QVTimperativeAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtimperative.AppendParameter <em>Append Parameter</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.AppendParameter
+	 * @generated
+	 */
+	public Adapter createAppendParameterAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtimperative.CheckStatement <em>Check Statement</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -310,16 +329,16 @@ public class QVTimperativeAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtimperative.GuardVariable <em>Guard Variable</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtimperative.GuardParameter <em>Guard Parameter</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.GuardVariable
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.GuardParameter
 	 * @generated
 	 */
-	public Adapter createGuardVariableAdapter() {
+	public Adapter createGuardParameterAdapter() {
 		return null;
 	}
 
@@ -348,20 +367,6 @@ public class QVTimperativeAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createImperativeTypedModelAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtimperative.InConnectionVariable <em>In Connection Variable</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.InConnectionVariable
-	 * @generated
-	 */
-	public Adapter createInConnectionVariableAdapter() {
 		return null;
 	}
 
@@ -432,6 +437,20 @@ public class QVTimperativeAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createMappingLoopAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtimperative.MappingParameter <em>Mapping Parameter</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.MappingParameter
+	 * @generated
+	 */
+	public Adapter createMappingParameterAdapter() {
 		return null;
 	}
 

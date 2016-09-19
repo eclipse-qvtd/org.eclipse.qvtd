@@ -21,9 +21,8 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtbase.impl.RuleImpl;
-import org.eclipse.qvtd.pivot.qvtimperative.GuardVariable;
-import org.eclipse.qvtd.pivot.qvtimperative.InConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
@@ -36,8 +35,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingImpl#getOwnedGuardVariables <em>Owned Guard Variables</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingImpl#getInoutVariables <em>Inout Variables</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingImpl#getOwnedParameters <em>Owned Parameters</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingImpl#getOwnedStatements <em>Owned Statements</em>}</li>
  * </ul>
  *
@@ -45,24 +43,14 @@ import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
  */
 public class MappingImpl extends RuleImpl implements Mapping {
 	/**
-	 * The cached value of the '{@link #getOwnedGuardVariables() <em>Owned Guard Variables</em>}' containment reference list.
+	 * The cached value of the '{@link #getOwnedParameters() <em>Owned Parameters</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getOwnedGuardVariables()
+	 * @see #getOwnedParameters()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<GuardVariable> ownedGuardVariables;
-
-	/**
-	 * The cached value of the '{@link #getInoutVariables() <em>Inout Variables</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getInoutVariables()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<InConnectionVariable> inoutVariables;
+	protected EList<MappingParameter> ownedParameters;
 
 	/**
 	 * The cached value of the '{@link #getOwnedStatements() <em>Owned Statements</em>}' containment reference list.
@@ -99,24 +87,11 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	 * @generated
 	 */
 	@Override
-	public EList<GuardVariable> getOwnedGuardVariables() {
-		if (ownedGuardVariables == null) {
-			ownedGuardVariables = new EObjectContainmentEList<GuardVariable>(GuardVariable.class, this, QVTimperativePackage.MAPPING__OWNED_GUARD_VARIABLES);
+	public EList<MappingParameter> getOwnedParameters() {
+		if (ownedParameters == null) {
+			ownedParameters = new EObjectContainmentEList<MappingParameter>(MappingParameter.class, this, QVTimperativePackage.MAPPING__OWNED_PARAMETERS);
 		}
-		return ownedGuardVariables;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EList<InConnectionVariable> getInoutVariables() {
-		if (inoutVariables == null) {
-			inoutVariables = new EObjectContainmentEList<InConnectionVariable>(InConnectionVariable.class, this, QVTimperativePackage.MAPPING__INOUT_VARIABLES);
-		}
-		return inoutVariables;
+		return ownedParameters;
 	}
 
 	/**
@@ -140,10 +115,8 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTimperativePackage.MAPPING__OWNED_GUARD_VARIABLES:
-				return ((InternalEList<?>)getOwnedGuardVariables()).basicRemove(otherEnd, msgs);
-			case QVTimperativePackage.MAPPING__INOUT_VARIABLES:
-				return ((InternalEList<?>)getInoutVariables()).basicRemove(otherEnd, msgs);
+			case QVTimperativePackage.MAPPING__OWNED_PARAMETERS:
+				return ((InternalEList<?>)getOwnedParameters()).basicRemove(otherEnd, msgs);
 			case QVTimperativePackage.MAPPING__OWNED_STATEMENTS:
 				return ((InternalEList<?>)getOwnedStatements()).basicRemove(otherEnd, msgs);
 		}
@@ -158,10 +131,8 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTimperativePackage.MAPPING__OWNED_GUARD_VARIABLES:
-				return getOwnedGuardVariables();
-			case QVTimperativePackage.MAPPING__INOUT_VARIABLES:
-				return getInoutVariables();
+			case QVTimperativePackage.MAPPING__OWNED_PARAMETERS:
+				return getOwnedParameters();
 			case QVTimperativePackage.MAPPING__OWNED_STATEMENTS:
 				return getOwnedStatements();
 		}
@@ -177,13 +148,9 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTimperativePackage.MAPPING__OWNED_GUARD_VARIABLES:
-				getOwnedGuardVariables().clear();
-				getOwnedGuardVariables().addAll((Collection<? extends GuardVariable>)newValue);
-				return;
-			case QVTimperativePackage.MAPPING__INOUT_VARIABLES:
-				getInoutVariables().clear();
-				getInoutVariables().addAll((Collection<? extends InConnectionVariable>)newValue);
+			case QVTimperativePackage.MAPPING__OWNED_PARAMETERS:
+				getOwnedParameters().clear();
+				getOwnedParameters().addAll((Collection<? extends MappingParameter>)newValue);
 				return;
 			case QVTimperativePackage.MAPPING__OWNED_STATEMENTS:
 				getOwnedStatements().clear();
@@ -201,11 +168,8 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTimperativePackage.MAPPING__OWNED_GUARD_VARIABLES:
-				getOwnedGuardVariables().clear();
-				return;
-			case QVTimperativePackage.MAPPING__INOUT_VARIABLES:
-				getInoutVariables().clear();
+			case QVTimperativePackage.MAPPING__OWNED_PARAMETERS:
+				getOwnedParameters().clear();
 				return;
 			case QVTimperativePackage.MAPPING__OWNED_STATEMENTS:
 				getOwnedStatements().clear();
@@ -222,10 +186,8 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTimperativePackage.MAPPING__OWNED_GUARD_VARIABLES:
-				return ownedGuardVariables != null && !ownedGuardVariables.isEmpty();
-			case QVTimperativePackage.MAPPING__INOUT_VARIABLES:
-				return inoutVariables != null && !inoutVariables.isEmpty();
+			case QVTimperativePackage.MAPPING__OWNED_PARAMETERS:
+				return ownedParameters != null && !ownedParameters.isEmpty();
 			case QVTimperativePackage.MAPPING__OWNED_STATEMENTS:
 				return ownedStatements != null && !ownedStatements.isEmpty();
 		}

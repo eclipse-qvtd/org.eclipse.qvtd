@@ -28,8 +28,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Rule;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.Mapping#getOwnedGuardVariables <em>Owned Guard Variables</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.Mapping#getInoutVariables <em>Inout Variables</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.Mapping#getOwnedParameters <em>Owned Parameters</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.Mapping#getOwnedStatements <em>Owned Statements</em>}</li>
  * </ul>
  *
@@ -38,34 +37,19 @@ import org.eclipse.qvtd.pivot.qvtbase.Rule;
  */
 public interface Mapping extends Rule {
 	/**
-	 * Returns the value of the '<em><b>Owned Guard Variables</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.qvtd.pivot.qvtimperative.GuardVariable}.
+	 * Returns the value of the '<em><b>Owned Parameters</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.qvtd.pivot.qvtimperative.MappingParameter}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Owned Guard Variables</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Owned Parameters</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Owned Guard Variables</em>' containment reference list.
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getMapping_OwnedGuardVariables()
+	 * @return the value of the '<em>Owned Parameters</em>' containment reference list.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getMapping_OwnedParameters()
 	 * @generated
 	 */
-	EList<GuardVariable> getOwnedGuardVariables();
-
-	/**
-	 * Returns the value of the '<em><b>Inout Variables</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.qvtd.pivot.qvtimperative.InConnectionVariable}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Inout Variables</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Inout Variables</em>' containment reference list.
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getMapping_InoutVariables()
-	 * @generated
-	 */
-	EList<InConnectionVariable> getInoutVariables();
+	EList<MappingParameter> getOwnedParameters();
 
 	/**
 	 * Returns the value of the '<em><b>Owned Statements</b></em>' containment reference list.

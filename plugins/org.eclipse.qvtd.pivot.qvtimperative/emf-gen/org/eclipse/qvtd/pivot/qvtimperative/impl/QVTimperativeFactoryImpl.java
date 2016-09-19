@@ -17,12 +17,12 @@ import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.AppendParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.CheckStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
-import org.eclipse.qvtd.pivot.qvtimperative.GuardVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
-import org.eclipse.qvtd.pivot.qvtimperative.InConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
@@ -79,12 +79,12 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case QVTimperativePackage.ADD_STATEMENT: return createAddStatement();
+			case QVTimperativePackage.APPEND_PARAMETER: return createAppendParameter();
 			case QVTimperativePackage.CHECK_STATEMENT: return createCheckStatement();
 			case QVTimperativePackage.DECLARE_STATEMENT: return createDeclareStatement();
-			case QVTimperativePackage.GUARD_VARIABLE: return createGuardVariable();
+			case QVTimperativePackage.GUARD_PARAMETER: return createGuardParameter();
 			case QVTimperativePackage.IMPERATIVE_MODEL: return createImperativeModel();
 			case QVTimperativePackage.IMPERATIVE_TYPED_MODEL: return createImperativeTypedModel();
-			case QVTimperativePackage.IN_CONNECTION_VARIABLE: return createInConnectionVariable();
 			case QVTimperativePackage.LOOP_VARIABLE: return createLoopVariable();
 			case QVTimperativePackage.MAPPING: return createMapping();
 			case QVTimperativePackage.MAPPING_CALL: return createMappingCall();
@@ -115,6 +115,17 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 	 * @generated
 	 */
 	@Override
+	public @NonNull AppendParameter createAppendParameter() {
+		AppendParameterImpl appendParameter = new AppendParameterImpl();
+		return appendParameter;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public @NonNull CheckStatement createCheckStatement() {
 		CheckStatementImpl checkStatement = new CheckStatementImpl();
 		return checkStatement;
@@ -137,9 +148,9 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 	 * @generated
 	 */
 	@Override
-	public @NonNull GuardVariable createGuardVariable() {
-		GuardVariableImpl guardVariable = new GuardVariableImpl();
-		return guardVariable;
+	public @NonNull GuardParameter createGuardParameter() {
+		GuardParameterImpl guardParameter = new GuardParameterImpl();
+		return guardParameter;
 	}
 
 	/**
@@ -162,17 +173,6 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 	public @NonNull ImperativeTypedModel createImperativeTypedModel() {
 		ImperativeTypedModelImpl imperativeTypedModel = new ImperativeTypedModelImpl();
 		return imperativeTypedModel;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public @NonNull InConnectionVariable createInConnectionVariable() {
-		InConnectionVariableImpl inConnectionVariable = new InConnectionVariableImpl();
-		return inConnectionVariable;
 	}
 
 	/**
