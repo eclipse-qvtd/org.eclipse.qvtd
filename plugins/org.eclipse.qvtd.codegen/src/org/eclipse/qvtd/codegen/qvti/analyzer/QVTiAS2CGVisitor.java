@@ -101,18 +101,19 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.AppendParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.CheckStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
-import org.eclipse.qvtd.pivot.qvtimperative.GuardVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
-import org.eclipse.qvtd.pivot.qvtimperative.InConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ObservableStatement;
@@ -322,11 +323,8 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 
 		public void doBottoms() {
 			List<@NonNull CGGuardVariable> cgFreeVariables = new ArrayList<>();
-			for (@NonNull GuardVariable pGuardVariable : ClassUtil.nullFree(asMapping.getOwnedGuardVariables())) {
-				cgFreeVariables.add(getGuardVariable(pGuardVariable));
-			}
-			for (@NonNull InConnectionVariable pGuardVariable : ClassUtil.nullFree(asMapping.getInoutVariables())) {
-				cgFreeVariables.add(getGuardVariable(pGuardVariable));
+			for (@NonNull MappingParameter pMappingParameter : ClassUtil.nullFree(asMapping.getOwnedParameters())) {
+				cgFreeVariables.add(getGuardVariable(pMappingParameter));
 			}
 			Collections.sort(cgFreeVariables, NameUtil.NAMEABLE_COMPARATOR);
 			cgMapping.getFreeVariables().addAll(cgFreeVariables);
@@ -536,8 +534,8 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 	}
 
 	protected @NonNull CGTypedModel getTypedModel(@NonNull VariableDeclaration pVariable) {
-		if (pVariable instanceof GuardVariable) {
-			TypedModel referredTypedModel = ClassUtil.nonNullState(((GuardVariable)pVariable).getReferredTypedModel());
+		if (pVariable instanceof GuardParameter) {
+			TypedModel referredTypedModel = ClassUtil.nonNullState(((GuardParameter)pVariable).getReferredTypedModel());
 			return ClassUtil.nonNullState(analyzer.getTypedModel(referredTypedModel));
 		}
 		Domain pDomain = QVTimperativeUtil.getContainingDomain(pVariable);
@@ -597,6 +595,13 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 		cgConnectionAssignment.setTypeId(initValue.getTypeId());
 		cgConnectionAssignment.setRequired(initValue.isRequired());
 		return cgConnectionAssignment;
+	}
+
+	@Override
+	public @Nullable CGNamedElement visitAppendParameter(@NonNull AppendParameter object) {
+		return visiting(object);		// Really should not be happening.
+		/*		CGVariable cgVariable = getVariable(asConnectionVariable);
+		return cgVariable; */
 	}
 
 	@Override
@@ -766,7 +771,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 	}
 
 	@Override
-	public @Nullable CGNamedElement visitGuardVariable(@NonNull GuardVariable object) {
+	public @Nullable CGNamedElement visitGuardParameter(@NonNull GuardParameter object) {
 		return visiting(object);
 		//		return getVariable(asVariable);
 	}
@@ -782,13 +787,6 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 		setAst(cgTypedModel, asTypedModel);
 		analyzer.addTypedModel(asTypedModel, cgTypedModel);
 		return cgTypedModel;
-	}
-
-	@Override
-	public @Nullable CGNamedElement visitInConnectionVariable(@NonNull InConnectionVariable object) {
-		return visiting(object);		// Really should not be happening.
-		/*		CGVariable cgVariable = getVariable(asConnectionVariable);
-		return cgVariable; */
 	}
 
 	@Override
@@ -873,6 +871,11 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 		}
 		cgMappingLoop.setBody(cgSequence);
 		return cgMappingLoop;
+	}
+
+	@Override
+	public CGNamedElement visitMappingParameter(@NonNull MappingParameter object) {
+		return visiting(object);
 	}
 
 	@Override

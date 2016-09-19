@@ -40,17 +40,18 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.AppendParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.CheckStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
-import org.eclipse.qvtd.pivot.qvtimperative.GuardVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
-import org.eclipse.qvtd.pivot.qvtimperative.InConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.OutConnectionVariable;
@@ -58,11 +59,11 @@ import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 import org.eclipse.qvtd.xtext.qvtimperativecs.AddStatementCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.AppendParameterCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.CheckStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DeclareStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS;
-import org.eclipse.qvtd.xtext.qvtimperativecs.GuardVariableCS;
-import org.eclipse.qvtd.xtext.qvtimperativecs.InoutVariableCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.GuardParameterCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallCS;
@@ -94,15 +95,15 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 		}
 	}
 
-	public static class GuardVariableCompletion extends SingleContinuation<@NonNull GuardVariableCS>
+	public static class GuardParameterCompletion extends SingleContinuation<@NonNull GuardParameterCS>
 	{
-		public GuardVariableCompletion(@NonNull CS2ASConversion context, @NonNull GuardVariableCS csElement) {
+		public GuardParameterCompletion(@NonNull CS2ASConversion context, @NonNull GuardParameterCS csElement) {
 			super(context, null, null, csElement);
 		}
 
 		@Override
 		public BasicContinuation<?> execute() {
-			GuardVariable pivotElement = PivotUtil.getPivot(GuardVariable.class, csElement);
+			GuardParameter pivotElement = PivotUtil.getPivot(GuardParameter.class, csElement);
 			if (pivotElement != null) {
 				pivotElement.setReferredTypedModel(csElement.getReferredTypedModel());
 			}
@@ -196,6 +197,12 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 	}
 
 	@Override
+	public Continuation<?> visitAppendParameterCS(@NonNull AppendParameterCS csElement) {
+		refreshNamedElement(AppendParameter.class, QVTimperativePackage.Literals.APPEND_PARAMETER, csElement);
+		return null;
+	}
+
+	@Override
 	public Continuation<?> visitCheckStatementCS(@NonNull CheckStatementCS csElement) {
 		context.refreshModelElement(CheckStatement.class, QVTimperativePackage.Literals.CHECK_STATEMENT, csElement);
 		return null;
@@ -219,22 +226,15 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 	}
 
 	@Override
-	public Continuation<?> visitGuardVariableCS(@NonNull GuardVariableCS csElement) {
-		refreshNamedElement(GuardVariable.class, QVTimperativePackage.Literals.GUARD_VARIABLE, csElement);
-		return new GuardVariableCompletion(context, csElement);
-	}
-
-	@Override
-	public Continuation<?> visitInoutVariableCS(@NonNull InoutVariableCS csElement) {
-		refreshNamedElement(InConnectionVariable.class, QVTimperativePackage.Literals.IN_CONNECTION_VARIABLE, csElement);
-		return null;
+	public Continuation<?> visitGuardParameterCS(@NonNull GuardParameterCS csElement) {
+		refreshNamedElement(GuardParameter.class, QVTimperativePackage.Literals.GUARD_PARAMETER, csElement);
+		return new GuardParameterCompletion(context, csElement);
 	}
 
 	@Override
 	public Continuation<?> visitMappingCS(@NonNull MappingCS csElement) {
 		Mapping pivotElement = refreshNamedElement(Mapping.class, QVTimperativePackage.Literals.MAPPING, csElement);
-		context.refreshPivotList(GuardVariable.class, pivotElement.getOwnedGuardVariables(), csElement.getOwnedGuardVariables());
-		context.refreshPivotList(InConnectionVariable.class, pivotElement.getInoutVariables(), csElement.getOwnedInoutVariables());
+		context.refreshPivotList(MappingParameter.class, pivotElement.getOwnedParameters(), csElement.getOwnedParameters());
 		context.refreshPivotList(Statement.class, pivotElement.getOwnedStatements(), csElement.getOwnedStatements());
 		return null;
 	}

@@ -34,8 +34,7 @@ public class MappingCallBindingAttribution extends EmptyAttribution
 			if (targetReference.getEType() == PivotPackage.Literals.VARIABLE_DECLARATION) {
 				Mapping referredMapping = mappingCall.getReferredMapping();
 				if (referredMapping != null) {
-					environmentView.addNamedElements(referredMapping.getOwnedGuardVariables());
-					environmentView.addNamedElements(referredMapping.getInoutVariables());
+					environmentView.addNamedElements(referredMapping.getOwnedParameters());
 				}
 			}
 		}

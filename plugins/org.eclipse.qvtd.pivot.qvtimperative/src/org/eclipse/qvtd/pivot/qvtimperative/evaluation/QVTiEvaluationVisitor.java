@@ -40,18 +40,19 @@ import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.AppendParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.CheckStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
-import org.eclipse.qvtd.pivot.qvtimperative.GuardVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
-import org.eclipse.qvtd.pivot.qvtimperative.InConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ObservableStatement;
@@ -113,6 +114,13 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 	}
 
 	@Override
+	public Object visitAppendParameter(@NonNull AppendParameter object) {
+		CollectionValue.Accumulator accumulator = ValueUtil.createCollectionAccumulatorValue((CollectionTypeId) object.getTypeId());
+		executor.replace(object, accumulator, false);
+		return true;
+	}
+
+	@Override
 	public @Nullable Object visitBaseModel(@NonNull BaseModel object) {
 		return visiting(object);
 	}
@@ -169,7 +177,7 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 	}
 
 	@Override
-	public @Nullable Object visitGuardVariable(@NonNull GuardVariable object) {
+	public @Nullable Object visitGuardParameter(@NonNull GuardParameter object) {
 		return visiting(object);
 	}
 
@@ -189,13 +197,6 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 	@Override
 	public @Nullable Object visitImport(@NonNull Import object) {
 		return visiting(object);
-	}
-
-	@Override
-	public Object visitInConnectionVariable(@NonNull InConnectionVariable object) {
-		CollectionValue.Accumulator accumulator = ValueUtil.createCollectionAccumulatorValue((CollectionTypeId) object.getTypeId());
-		executor.replace(object, accumulator, false);
-		return true;
 	}
 
 	@Override
@@ -277,6 +278,11 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 			}
 		}
 		return true;
+	}
+
+	@Override
+	public @Nullable Object visitMappingParameter(@NonNull MappingParameter object) {
+		return visiting(object);	// MappingParameter is abstract
 	}
 
 	@Override

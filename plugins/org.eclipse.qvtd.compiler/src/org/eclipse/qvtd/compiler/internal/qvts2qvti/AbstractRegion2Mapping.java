@@ -47,8 +47,8 @@ import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NodeConnection;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.SchedulerConstants;
 import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.AppendParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
-import org.eclipse.qvtd.pivot.qvtimperative.InConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
@@ -103,6 +103,13 @@ public abstract class AbstractRegion2Mapping
 		mapping.getOwnedStatements().add(addStatement);
 	}
 
+	protected @NonNull AppendParameter createAppendParameter(@NonNull NodeConnection connection) {
+		Type asType = getConnectionSourcesType(connection);
+		String name = connection.getName();
+		assert name != null;
+		return helper.createAppendParameter(getSafeName(name), asType, true);
+	}
+
 	protected @NonNull CallExp createCallExp(@NonNull OCLExpression asSource, @NonNull Property asProperty) {
 		if (asProperty.eContainer() == null) {
 			Type asType = asProperty.getType();
@@ -120,21 +127,14 @@ public abstract class AbstractRegion2Mapping
 		return PivotUtil.createNavigationCallExp(asSource, asProperty);
 	}
 
-	protected @NonNull InConnectionVariable createInConnectionVariable(@NonNull NodeConnection connection) {
-		Type asType = getConnectionSourcesType(connection);
-		String name = connection.getName();
-		assert name != null;
-		return helper.createInConnectionVariable(getSafeName(name), asType, true);
-	}
-
-	protected void createConnectionGuardVariables() {
+	protected void createAppendParameters() {
 		List<@NonNull NodeConnection> intermediateConnections = region.getIntermediateConnections();
 		if (intermediateConnections.size() > 0) {
 			connection2variable = new HashMap<>();
 			for (@NonNull NodeConnection connection : intermediateConnections) {
-				InConnectionVariable connectionVariable = createInConnectionVariable(connection);
+				AppendParameter connectionVariable = createAppendParameter(connection);
 				connection2variable.put(connection, connectionVariable);
-				mapping.getInoutVariables().add(connectionVariable);
+				mapping.getOwnedParameters().add(connectionVariable);
 			}
 		}
 	}

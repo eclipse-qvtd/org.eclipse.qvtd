@@ -28,7 +28,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.CheckStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
-import org.eclipse.qvtd.pivot.qvtimperative.GuardVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.xtext.qvtbase.ui.labeling.QVTbaseLabelProvider;
@@ -66,8 +66,8 @@ public class QVTimperativeLabelProvider extends QVTbaseLabelProvider
 		return QVTIMPERATIVE_UI_ICONS + "DeclareStatement.gif";
 	}
 
-	protected String image(GuardVariable ele) {
-		return "GuardVariable.gif";
+	protected String image(GuardParameter ele) {
+		return "GuardParameter.gif";
 	}
 
 	protected String image(LoopVariable ele) {
@@ -157,7 +157,7 @@ public class QVTimperativeLabelProvider extends QVTbaseLabelProvider
 		return s.toString();
 	}
 
-	protected String text(GuardVariable ele) {
+	protected String text(GuardParameter ele) {
 		assert ele != null;
 		Namespace namespace = PivotUtil.getNamespace(ele.eContainer());
 		if (namespace == null) {

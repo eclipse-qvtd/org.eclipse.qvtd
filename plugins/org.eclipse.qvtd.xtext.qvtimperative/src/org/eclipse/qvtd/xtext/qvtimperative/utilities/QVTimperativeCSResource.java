@@ -30,10 +30,9 @@ import org.eclipse.ocl.xtext.essentialocl.utilities.EssentialOCLCSResource;
 import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
-import org.eclipse.qvtd.pivot.qvtimperative.GuardVariable;
-import org.eclipse.qvtd.pivot.qvtimperative.InConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.VariableStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
@@ -94,11 +93,8 @@ public class QVTimperativeCSResource extends EssentialOCLCSResource
 		else if (element instanceof VariableStatement) {	// NewStatement, PredicateVariable, OutConnectionVariable
 			return (VariableStatement)element;
 		}
-		else if (element instanceof InConnectionVariable) {
-			return (InConnectionVariable)element;
-		}
-		else if (element instanceof GuardVariable) {
-			return (GuardVariable)element;
+		else if (element instanceof MappingParameter) {
+			return (MappingParameter)element;
 		}
 		else if (element instanceof LoopVariable) {
 			return (LoopVariable)element;

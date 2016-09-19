@@ -76,8 +76,7 @@ public class MappingAttribution extends AbstractAttribution
 					environmentView.addNamedElement(asStatement);
 				}
 			}
-			environmentView.addNamedElements(mapping.getOwnedGuardVariables());
-			environmentView.addNamedElements(mapping.getInoutVariables());
+			environmentView.addNamedElements(mapping.getOwnedParameters());
 			Transformation transformation = QVTimperativeUtil.getContainingTransformation(mapping);
 			if (transformation != null) {
 				for (TypedModel typedModel : transformation.getModelParameter()) {

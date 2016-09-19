@@ -35,8 +35,8 @@ import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NodeConnection;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
 import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.AppendParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
-import org.eclipse.qvtd.pivot.qvtimperative.InConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
@@ -70,7 +70,7 @@ public class CyclicScheduledRegion2Mapping extends AbstractScheduledRegion2Mappi
 		/**
 		 * The guard variable for the recursed type.
 		 */
-		private final @NonNull InConnectionVariable guardVariable;
+		private final @NonNull AppendParameter guardVariable;
 
 		/**
 		 * The local accumulation variable for the recursed type. Already processed values may be present.
@@ -85,7 +85,7 @@ public class CyclicScheduledRegion2Mapping extends AbstractScheduledRegion2Mappi
 		/**
 		 * The accumulated output variable for the recursed type.
 		 */
-		private InConnectionVariable accumulatedVariable;
+		private AppendParameter accumulatedVariable;
 
 		public RecursionContext(@NonNull Node headNode) {
 			this.classDatumAnalysis = headNode.getClassDatumAnalysis();
@@ -94,8 +94,8 @@ public class CyclicScheduledRegion2Mapping extends AbstractScheduledRegion2Mappi
 			//	Create the domain guard variable.
 			//
 			org.eclipse.ocl.pivot.Class elementType = classDatumAnalysis.getCompleteClass().getPrimaryClass();
-			guardVariable = helper.createInConnectionVariable(getSafeName(headNode), elementType, false);
-			mapping.getInoutVariables().add(guardVariable);
+			guardVariable = helper.createAppendParameter(getSafeName(headNode), elementType, false);
+			mapping.getOwnedParameters().add(guardVariable);
 
 			Iterable<@NonNull NodeConnection> outgoingConnections = headNode.getOutgoingPassedConnections();
 			assert Iterables.size(outgoingConnections) == 1;
@@ -167,8 +167,8 @@ public class CyclicScheduledRegion2Mapping extends AbstractScheduledRegion2Mappi
 			//	Select a/the outgoing recursive intermediate connection.
 			//
 			NodeConnection intermediateConnection = accumulatedConnection;
-			InConnectionVariable accumulatedVariable2 = accumulatedVariable = createInConnectionVariable(intermediateConnection);
-			mapping.getInoutVariables().add(accumulatedVariable2);
+			AppendParameter accumulatedVariable2 = accumulatedVariable = createAppendParameter(intermediateConnection);
+			mapping.getOwnedParameters().add(accumulatedVariable2);
 			connection2variable.put(intermediateConnection, accumulatedVariable2);
 		}
 	}
@@ -214,23 +214,23 @@ public class CyclicScheduledRegion2Mapping extends AbstractScheduledRegion2Mappi
 		//
 		//	Create any non-recursion connectionVariable guards
 		//
-		createConnectionGuardVariables();
+		createAppendParameters();
 	}
 
 	/**
 	 * Create the guard variables for the intermediate connections that are not recursions.
 	 */
 	@Override
-	protected void createConnectionGuardVariables() {
+	protected void createAppendParameters() {
 		List<@NonNull NodeConnection> intermediateConnections = region.getIntermediateConnections();
 		for (@NonNull NodeConnection intermediateConnection : intermediateConnections) {
-			InConnectionVariable connectionVariable = (InConnectionVariable) connection2variable.get(intermediateConnection);
+			AppendParameter connectionVariable = (AppendParameter) connection2variable.get(intermediateConnection);
 			if (connectionVariable == null) {
 				String name = intermediateConnection.getName();
 				assert name != null;
-				connectionVariable = helper.createInConnectionVariable(name, getConnectionSourcesType(intermediateConnection), true);
+				connectionVariable = helper.createAppendParameter(name, getConnectionSourcesType(intermediateConnection), true);
 				connection2variable.put(intermediateConnection, connectionVariable);
-				mapping.getInoutVariables().add(connectionVariable);
+				mapping.getOwnedParameters().add(connectionVariable);
 			}
 		}
 	}

@@ -30,7 +30,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.CheckStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
-import org.eclipse.qvtd.pivot.qvtimperative.GuardVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
@@ -41,7 +41,7 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.AddStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.CheckStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DeclareStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS;
-import org.eclipse.qvtd.xtext.qvtimperativecs.GuardVariableCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.GuardParameterCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingLoopCS;
@@ -181,10 +181,10 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 	}
 
 	@Override
-	public Continuation<?> visitGuardVariableCS(@NonNull GuardVariableCS csElement) {
-		GuardVariable asGuardVariable = PivotUtil.getPivot(GuardVariable.class, csElement);
-		if (asGuardVariable != null) {
-			asGuardVariable.setReferredTypedModel(csElement.getReferredTypedModel());
+	public Continuation<?> visitGuardParameterCS(@NonNull GuardParameterCS csElement) {
+		GuardParameter asGuardParameter = PivotUtil.getPivot(GuardParameter.class, csElement);
+		if (asGuardParameter != null) {
+			asGuardParameter.setReferredTypedModel(csElement.getReferredTypedModel());
 		}
 		return null;
 	}

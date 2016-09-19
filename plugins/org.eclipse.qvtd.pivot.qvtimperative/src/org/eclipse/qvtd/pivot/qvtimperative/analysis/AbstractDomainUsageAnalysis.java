@@ -78,10 +78,10 @@ import org.eclipse.qvtd.pivot.qvtbase.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtbase.analysis.DomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.CheckStatement;
-import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
-import org.eclipse.qvtd.pivot.qvtimperative.GuardVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
@@ -249,7 +249,7 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTim
 		for (Domain domain : rule.getDomain()) {
 			if (domain instanceof ImperativeDomain) {
 				DomainUsage usage = visit(domain.getTypedModel());
-				for (GuardVariable variable : ((ImperativeDomain)domain).getOwnedGuardVariables()) {
+				for (GuardParameter variable : ((ImperativeDomain)domain).getOwnedGuardVariables()) {
 					if (variable != null) {
 						DomainUsage variableUsage = visit(variable.getType());
 						if (variableUsage != primitiveUsage) {
@@ -263,18 +263,7 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTim
 		} */
 		if (rule instanceof Mapping) {
 			DomainUsage middleUsage = getRootAnalysis().getMiddleUsage();
-			for (GuardVariable variable : ((Mapping)rule).getOwnedGuardVariables()) {
-				if (variable != null) {
-					DomainUsage variableUsage = visit(variable.getType());
-					//					if (variableUsage != primitiveUsage) {
-					if (!variableUsage.isInput() && !variableUsage.isOutput() && !variableUsage.isPrimitive()) {
-						variableUsage = middleUsage;
-					}
-					assert variableUsage != null;
-					setUsage(variable, variableUsage);
-				}
-			}
-			for (ConnectionVariable variable : ((Mapping)rule).getInoutVariables()) {
+			for (MappingParameter variable : ((Mapping)rule).getOwnedParameters()) {
 				if (variable != null) {
 					DomainUsage variableUsage = visit(variable.getType());
 					//					if (variableUsage != primitiveUsage) {
@@ -462,7 +451,7 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTim
 	}
 
 	@Override
-	public @NonNull DomainUsage visitGuardVariable(@NonNull GuardVariable object) {
+	public @NonNull DomainUsage visitGuardParameter(@NonNull GuardParameter object) {
 		return visit(object.getReferredTypedModel());
 	}
 

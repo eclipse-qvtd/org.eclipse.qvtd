@@ -17,14 +17,14 @@ import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseHelper;
 import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.AppendParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.CheckStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
-import org.eclipse.qvtd.pivot.qvtimperative.GuardVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
-import org.eclipse.qvtd.pivot.qvtimperative.InConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.OutConnectionVariable;
-import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeFactory;
 
 /**
@@ -43,6 +43,14 @@ public class QVTimperativeHelper extends QVTbaseHelper
 		return addStatement;
 	}
 
+	public @NonNull AppendParameter createAppendParameter(@NonNull String name, @NonNull Type asType, boolean isRequired) {
+		AppendParameter asVariable = QVTimperativeFactory.eINSTANCE.createAppendParameter();
+		asVariable.setName(name);
+		asVariable.setType(asType);
+		asVariable.setIsRequired(isRequired);
+		return asVariable;
+	}
+
 	public @NonNull CheckStatement createCheckStatement(@NonNull OCLExpression asConditionExpression) {
 		CheckStatement asPredicate = QVTimperativeFactory.eINSTANCE.createCheckStatement();
 		asPredicate.setOwnedExpression(asConditionExpression);
@@ -59,19 +67,11 @@ public class QVTimperativeHelper extends QVTbaseHelper
 		return asVariableStatement;
 	}
 
-	public @NonNull GuardVariable createGuardVariable(@NonNull String name, @NonNull ImperativeTypedModel typedModel, @NonNull Type type, boolean isRequired) {
-		GuardVariable asVariable = QVTimperativeFactory.eINSTANCE.createGuardVariable();
+	public @NonNull GuardParameter createGuardParameter(@NonNull String name, @NonNull ImperativeTypedModel typedModel, @NonNull Type type, boolean isRequired) {
+		GuardParameter asVariable = QVTimperativeFactory.eINSTANCE.createGuardParameter();
 		asVariable.setName(name);
 		asVariable.setReferredTypedModel(typedModel);
 		asVariable.setType(type);
-		asVariable.setIsRequired(isRequired);
-		return asVariable;
-	}
-
-	public @NonNull InConnectionVariable createInConnectionVariable(@NonNull String name, @NonNull Type asType, boolean isRequired) {
-		InConnectionVariable asVariable = QVTimperativeFactory.eINSTANCE.createInConnectionVariable();
-		asVariable.setName(name);
-		asVariable.setType(asType);
 		asVariable.setIsRequired(isRequired);
 		return asVariable;
 	}

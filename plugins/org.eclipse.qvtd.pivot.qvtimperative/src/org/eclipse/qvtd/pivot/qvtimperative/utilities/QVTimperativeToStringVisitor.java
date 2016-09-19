@@ -18,18 +18,19 @@ import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.utilities.ToStringVisitor;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseToStringVisitor;
 import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.AppendParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.CheckStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
-import org.eclipse.qvtd.pivot.qvtimperative.GuardVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
-import org.eclipse.qvtd.pivot.qvtimperative.InConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ObservableStatement;
@@ -82,6 +83,18 @@ public class QVTimperativeToStringVisitor extends QVTbaseToStringVisitor impleme
 	}
 
 	@Override
+	public @Nullable String visitAppendParameter(@NonNull AppendParameter asVariable) {
+		append("append ");
+		appendName(asVariable);
+		Type type = asVariable.getType();
+		if (type != null) {
+			append(" : ");
+			appendElementType(asVariable);
+		}
+		return null;
+	}
+
+	@Override
 	public @Nullable String visitCheckStatement(@NonNull CheckStatement object) {
 		append("check ");
 		safeVisit(object.getOwnedExpression());
@@ -121,7 +134,7 @@ public class QVTimperativeToStringVisitor extends QVTbaseToStringVisitor impleme
 	}
 
 	@Override
-	public @Nullable String visitGuardVariable(@NonNull GuardVariable asVariable) {
+	public @Nullable String visitGuardParameter(@NonNull GuardParameter asVariable) {
 		append("in ");
 		appendName(asVariable);
 		Type type = asVariable.getType();
@@ -146,18 +159,6 @@ public class QVTimperativeToStringVisitor extends QVTbaseToStringVisitor impleme
 			append("enforce ");
 		}
 		return visitTypedModel(object);
-	}
-
-	@Override
-	public @Nullable String visitInConnectionVariable(@NonNull InConnectionVariable asVariable) {
-		append("in ");
-		appendName(asVariable);
-		Type type = asVariable.getType();
-		if (type != null) {
-			append(" : ");
-			appendElementType(asVariable);
-		}
-		return null;
 	}
 
 	@Override
@@ -219,8 +220,13 @@ public class QVTimperativeToStringVisitor extends QVTbaseToStringVisitor impleme
 	}
 
 	@Override
+	public @Nullable String visitMappingParameter(@NonNull MappingParameter object) {
+		return visiting(object);
+	}
+
+	@Override
 	public @Nullable String visitMappingStatement(@NonNull MappingStatement object) {
-		return visitStatement(object);
+		return visiting(object);
 	}
 
 	@Override

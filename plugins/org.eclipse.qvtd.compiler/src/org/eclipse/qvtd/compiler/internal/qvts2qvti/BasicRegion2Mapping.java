@@ -80,7 +80,7 @@ import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.CheckStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
-import org.eclipse.qvtd.pivot.qvtimperative.GuardVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
@@ -780,12 +780,12 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		}
 	}
 
-	private @NonNull GuardVariable createGuardVariable(@NonNull Node guardNode) {
+	private @NonNull GuardParameter createGuardParameter(@NonNull Node guardNode) {
 		ClassDatumAnalysis classDatumAnalysis = guardNode.getClassDatumAnalysis();
 		Type variableType = guardNode.getCompleteClass().getPrimaryClass();
 		ImperativeTypedModel iTypedModel = ClassUtil.nonNullState(visitor.getQVTiTypedModel(classDatumAnalysis.getTypedModel()));
-		GuardVariable guardVariable = helper.createGuardVariable(getSafeName(guardNode), iTypedModel, variableType, true);
-		mapping.getOwnedGuardVariables().add(guardVariable);
+		GuardParameter guardVariable = helper.createGuardParameter(getSafeName(guardNode), iTypedModel, variableType, true);
+		mapping.getOwnedParameters().add(guardVariable);
 		VariableDeclaration oldVariable = node2variable.put(guardNode, guardVariable);
 		assert oldVariable == null;
 		return guardVariable;
@@ -845,12 +845,12 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		}
 		Collections.sort(guardNodes, NameUtil.NAMEABLE_COMPARATOR);
 		for (@NonNull Node guardNode : guardNodes) {
-			createGuardVariable(guardNode);
+			createGuardParameter(guardNode);
 		}
 		//
 		//	Create any connectionVariable guards
 		//
-		createConnectionGuardVariables();
+		createAppendParameters();
 	}
 
 	private void createMappingStatements(@NonNull Map<@NonNull Region, @NonNull Map<@NonNull Node, @NonNull Node>> calls) {

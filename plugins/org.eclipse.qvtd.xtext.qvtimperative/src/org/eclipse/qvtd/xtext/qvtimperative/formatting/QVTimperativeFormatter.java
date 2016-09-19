@@ -13,12 +13,12 @@ package org.eclipse.qvtd.xtext.qvtimperative.formatting;
 import org.eclipse.ocl.xtext.essentialocl.formatting.AbstractEssentialOCLFormatter;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.AddStatementCSElements;
+import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.AppendParameterCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.CheckStatementCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.DeclareStatementCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.DirectionCSElements;
-import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.GuardVariableCSElements;
+import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.GuardParameterCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.ImportCSElements;
-import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.InoutVariableCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.MappingCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.MappingCallBindingCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.MappingCallCSElements;
@@ -83,6 +83,11 @@ public class QVTimperativeFormatter extends AbstractEssentialOCLFormatter
 			c.setNoSpace().before(a.getSemicolonKeyword_5());
 		}
 		{
+			AppendParameterCSElements a = f.getAppendParameterCSAccess();
+			c.setLinewrap(1).before(a.getGroup());
+			c.setNoSpace().before(a.getSemicolonKeyword_4());
+		}
+		{
 			CheckStatementCSElements a = f.getCheckStatementCSAccess();
 			c.setLinewrap(1).before(a.getGroup());
 			c.setNoSpace().before(a.getSemicolonKeyword_2());
@@ -101,7 +106,7 @@ public class QVTimperativeFormatter extends AbstractEssentialOCLFormatter
 			c.setNoSpace().before(a.getCommaKeyword_5_0());
 		}
 		{
-			GuardVariableCSElements a = f.getGuardVariableCSAccess();
+			GuardParameterCSElements a = f.getGuardParameterCSAccess();
 			c.setLinewrap(1).before(a.getGroup());
 			c.setNoSpace().around(a.getColonKeyword_1());
 			c.setNoSpace().before(a.getSemicolonKeyword_6());
@@ -109,11 +114,6 @@ public class QVTimperativeFormatter extends AbstractEssentialOCLFormatter
 		{
 			ImportCSElements a = f.getImportCSAccess();
 			setNoSpaceLineWrap(c, a.getSemicolonKeyword_4());
-		}
-		{
-			InoutVariableCSElements a = f.getInoutVariableCSAccess();
-			c.setLinewrap(1).before(a.getGroup());
-			c.setNoSpace().before(a.getSemicolonKeyword_4());
 		}
 		{
 			MappingCSElements a = f.getMappingCSAccess();

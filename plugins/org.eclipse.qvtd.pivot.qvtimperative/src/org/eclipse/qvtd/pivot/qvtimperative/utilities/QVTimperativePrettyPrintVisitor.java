@@ -18,18 +18,19 @@ import org.eclipse.ocl.pivot.internal.prettyprint.PrettyPrinter;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbasePrettyPrintVisitor;
 import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.AppendParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.CheckStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
-import org.eclipse.qvtd.pivot.qvtimperative.GuardVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
-import org.eclipse.qvtd.pivot.qvtimperative.InConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ObservableStatement;
@@ -50,6 +51,19 @@ public class QVTimperativePrettyPrintVisitor extends QVTbasePrettyPrintVisitor i
 		context.appendName(asAddStatement.getTargetVariable());
 		context.append(" += ");
 		safeVisit(asAddStatement.getOwnedExpression());
+		context.append(";\n");
+		return null;
+	}
+
+	@Override
+	public Object visitAppendParameter(@NonNull AppendParameter asParameter) {
+		context.append("append ");
+		Type type = asParameter.getType();
+		if (type != null) {
+			context.append(" : ");
+			//			context.appendQualifiedType(type);
+			context.appendTypedMultiplicity(asParameter);
+		}
 		context.append(";\n");
 		return null;
 	}
@@ -89,14 +103,15 @@ public class QVTimperativePrettyPrintVisitor extends QVTbasePrettyPrintVisitor i
 	}
 
 	@Override
-	public Object visitGuardVariable(@NonNull GuardVariable asVariable) {
-		context.append("in ");
-		context.appendName(asVariable);
-		Type type = asVariable.getType();
+	public Object visitGuardParameter(@NonNull GuardParameter asParameter) {
+		context.append("in:");
+		context.appendName(asParameter.getReferredTypedModel());
+		context.append(" ");
+		Type type = asParameter.getType();
 		if (type != null) {
 			context.append(" : ");
 			//			context.appendQualifiedType(type);
-			context.appendTypedMultiplicity(asVariable);
+			context.appendTypedMultiplicity(asParameter);
 		}
 		context.append(";\n");
 		return null;
@@ -119,11 +134,6 @@ public class QVTimperativePrettyPrintVisitor extends QVTbasePrettyPrintVisitor i
 	}
 
 	@Override
-	public Object visitInConnectionVariable(@NonNull InConnectionVariable object) {
-		return visitVariableDeclaration(object);
-	}
-
-	@Override
 	public Object visitLoopVariable(@NonNull LoopVariable asVariable) {
 		context.appendName(asVariable);
 		Type type = asVariable.getType();
@@ -142,17 +152,8 @@ public class QVTimperativePrettyPrintVisitor extends QVTbasePrettyPrintVisitor i
 		context.appendName(pMapping.getTransformation());
 		context.append(" {\n");
 		context.push("", "");
-		for (GuardVariable pVariable : pMapping.getOwnedGuardVariables()) {
-			context.append("in:");
-			context.appendName(pVariable.getReferredTypedModel());
-			context.append(" ");
+		for (MappingParameter pVariable : pMapping.getOwnedParameters()) {
 			safeVisit(pVariable);
-			context.append(";\n");
-		}
-		for (ConnectionVariable pVariable : pMapping.getInoutVariables()) {
-			context.append("inout ");
-			safeVisit(pVariable);
-			context.append(";\n");
 		}
 		for (Statement pStatement : pMapping.getOwnedStatements()) {
 			safeVisit(pStatement);
@@ -204,8 +205,13 @@ public class QVTimperativePrettyPrintVisitor extends QVTbasePrettyPrintVisitor i
 	}
 
 	@Override
+	public Object visitMappingParameter(@NonNull MappingParameter object) {
+		return visiting(object);
+	}
+
+	@Override
 	public Object visitMappingStatement(@NonNull MappingStatement object) {
-		return visitStatement(object);
+		return visiting(object);
 	}
 
 	@Override
