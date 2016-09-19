@@ -23,7 +23,7 @@
 	               menubarPath="debug"
 	               icon="icons/brkp_obj.gif"/>
 	         <action id="org.eclipse.qvtd.debug.ui.QVTiBreakpointPropertiesRulerAction"
-	               class="org.eclipse.ocl.examples.debug.vm.ui.actions.VMBreakpointPropertiesRulerActionDelegate"	               
+	               class="org.eclipse.qvtd.debug.ui.actions.QVTiBreakpointPropertiesRulerActionDelegate"	               
 	               label="%QVTiBreakpointProperties.label"
 	               menubarPath="group.properties"/>	         
 	      </viewerContribution>    
@@ -72,7 +72,7 @@
       </viewerContribution-->
  
       <objectContribution id="org.eclipse.qvtd.debug.ui.QVTiBreakpointObjectActions"
-			objectClass="org.eclipse.ocl.examples.debug.vm.VMBreakpoint">
+			objectClass="org.eclipse.qvtd.debug.QVTiBreakpoint">
          <action id="org.eclipse.qvtd.debug.ui.actions.QVTiBreakpointProperties"
                class="org.eclipse.qvtd.debug.ui.actions.QVTiBreakpointPropertiesAction"
                enablesFor="1"

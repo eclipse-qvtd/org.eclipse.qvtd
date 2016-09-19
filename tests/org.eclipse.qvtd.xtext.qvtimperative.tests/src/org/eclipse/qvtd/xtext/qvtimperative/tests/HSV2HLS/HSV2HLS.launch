@@ -1,11 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <launchConfiguration type="org.eclipse.qvtd.debug.launching.QVTiLaunchConfigurationDelegate">
+<booleanAttribute key="auto-build" value="false"/>
+<booleanAttribute key="console-trace" value="false"/>
+<stringAttribute key="genmodel" value="platform:/resource/"/>
 <mapAttribute key="in">
 <mapEntry key="hsv" value="platform:/resource/org.eclipse.qvtd.xtext.qvtimperative.tests/src/org/eclipse/qvtd/xtext/qvtimperative/tests/HSV2HLS/HSVNode.xmi"/>
 </mapAttribute>
+<mapAttribute key="intermediates">
+<mapEntry key="QVTi" value="platform:/resource/org.eclipse.qvtd.xtext.qvtimperative.tests/src/org/eclipse/qvtd/xtext/qvtimperative/tests/HSV2HLS/temp/HSV2HLS.qvtias"/>
+</mapAttribute>
+<booleanAttribute key="interpreted" value="true"/>
+<mapAttribute key="old-in"/>
+<mapAttribute key="old-out"/>
 <mapAttribute key="out">
 <mapEntry key="hls" value="platform:/resource/org.eclipse.qvtd.xtext.qvtimperative.tests/src/org/eclipse/qvtd/xtext/qvtimperative/tests/HSV2HLS/HLSNode.xmi"/>
-<mapEntry key="middle" value="platform:/resource/org.eclipse.qvtd.xtext.qvtimperative.tests/src/org/eclipse/qvtd/xtext/qvtimperative/tests/HSV2HLS/HSV2HLSNode.xmi"/>
 </mapAttribute>
+<stringAttribute key="project" value=""/>
 <stringAttribute key="tx" value="platform:/resource/org.eclipse.qvtd.xtext.qvtimperative.tests/src/org/eclipse/qvtd/xtext/qvtimperative/tests/HSV2HLS/HSV2HLS.qvti"/>
 </launchConfiguration>

@@ -13,7 +13,6 @@ package org.eclipse.qvtd.debug.stepper;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.debug.stepper.NonStepper;
-import org.eclipse.ocl.examples.debug.stepper.OCLStepperVisitor;
 import org.eclipse.ocl.examples.debug.stepper.PostStepper;
 import org.eclipse.ocl.examples.debug.vm.evaluator.IStepper;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
@@ -37,7 +36,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 
 public class QVTiStepperVisitor extends AbstractQVTimperativeStepperVisitor
 {
-	public static @NonNull OCLStepperVisitor INSTANCE = new QVTiStepperVisitor(QVTiStepperVisitor.class);
+	public static @NonNull QVTiStepperVisitor INSTANCE = new QVTiStepperVisitor(QVTiStepperVisitor.class);
 
 	protected QVTiStepperVisitor(@NonNull Object context) {
 		super(context);

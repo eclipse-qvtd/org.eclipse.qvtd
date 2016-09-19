@@ -23,7 +23,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.debug.core.OCLDebugCore;
 import org.eclipse.ocl.examples.debug.vm.IVMVirtualMachineShell;
 import org.eclipse.ocl.examples.debug.vm.core.VMVirtualProcess;
 import org.eclipse.ocl.examples.debug.vm.launching.DebuggableRunner;
@@ -49,10 +48,10 @@ public class QVTiVMLaunchConfigurationDelegate extends VMLaunchConfigurationDele
 			@NonNull List<String> modelURIs, @Nullable String traceURI) {
 		return new QVTiDebuggableRunnerFactory(packageRegistry, modelURIs, null);
 	}
-	
+
 	@Override
 	protected @NonNull QVTiEvaluationContext createEvaluationContext(@NonNull ILaunchConfiguration configuration) throws CoreException {
-		String projectName = configuration.getAttribute(PROJECT_KEY, "");
+		@SuppressWarnings("unused") String projectName = configuration.getAttribute(PROJECT_KEY, "");
 		String txName = configuration.getAttribute(TX_KEY, "");
 		URI txURI = URI.createURI(txName, true);
 		Map<String, String> inMap = configuration.getAttribute(NEW_IN_KEY, EMPTY_MAP);
@@ -79,7 +78,7 @@ public class QVTiVMLaunchConfigurationDelegate extends VMLaunchConfigurationDele
 	}
 
 	@Override
-	protected @NonNull OCLDebugCore getDebugCore() {
-		return OCLDebugCore.INSTANCE;
+	protected @NonNull QVTiDebugCore getDebugCore() {
+		return QVTiDebugCore.INSTANCE;
 	}
 }

@@ -14,39 +14,43 @@ package org.eclipse.qvtd.debug.core;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.debug.core.OCLDebugCore;
 import org.eclipse.ocl.examples.debug.vm.core.VMLineBreakpoint;
 
 public class QVTiLineBreakpoint extends VMLineBreakpoint
 {
-    public static @NonNull QVTiLineBreakpoint createRunToLineBreakpoint(@NonNull URI sourceURI, int lineNumber) throws CoreException {
-    	return new QVTiLineBreakpoint(sourceURI, lineNumber, true);
-    }
-    
-    public static QVTiLineBreakpoint getBreakpointByID(long id) {
-    	for (QVTiLineBreakpoint qvtBreakpoint : OCLDebugCore.INSTANCE.getOCLBreakpoints(QVTiLineBreakpoint.class)) {
+	/**
+	 * Family for breakpoint validation job (@see OCLToggleBreakpointAdapter::toggleLineBreakpoints())
+	 */
+	public static final @NonNull Object QVTI_BREAKPOINT_JOBFAMILY = OCL_BREAKPOINT_JOBFAMILY;	//  FIXME
+
+	public static @NonNull QVTiLineBreakpoint createRunToLineBreakpoint(@NonNull URI sourceURI, int lineNumber) throws CoreException {
+		return new QVTiLineBreakpoint(sourceURI, lineNumber, true);
+	}
+
+	public static QVTiLineBreakpoint getBreakpointByID(long id) {
+		for (QVTiLineBreakpoint qvtBreakpoint : QVTiDebugCore.INSTANCE.getOCLBreakpoints(QVTiLineBreakpoint.class)) {
 			if (qvtBreakpoint.getID() == id) {
 				return qvtBreakpoint;
 			}
 		}
-    	
-    	return null;
-    }
 
-    /* 
-     * Remark: Keep the default constructor to allow the breakpoint manager to create breakpoint from markers
-     */
-    public QVTiLineBreakpoint() {
-    	super();
-    }
+		return null;
+	}
 
-    public QVTiLineBreakpoint(@NonNull URI sourceURI, int lineNumber) throws CoreException {
+	/*
+	 * Remark: Keep the default constructor to allow the breakpoint manager to create breakpoint from markers
+	 */
+	public QVTiLineBreakpoint() {
+		super();
+	}
+
+	public QVTiLineBreakpoint(@NonNull URI sourceURI, int lineNumber) throws CoreException {
 		this(sourceURI, lineNumber, false);
 	}
-    
-    private QVTiLineBreakpoint(@NonNull URI sourceURI, int lineNumber, boolean isRunToLine) throws CoreException {  
-    	super(sourceURI, lineNumber, isRunToLine);
-    }
+
+	private QVTiLineBreakpoint(@NonNull URI sourceURI, int lineNumber, boolean isRunToLine) throws CoreException {
+		super(sourceURI, lineNumber, isRunToLine);
+	}
 
 	@Override
 	protected @NonNull QVTiDebugCore getDebugCore() {

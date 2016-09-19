@@ -104,9 +104,9 @@ public class QVTiDebuggerTests extends XtextTestCase
 		ILaunchConfigurationType launchConfigurationType = launchManager.getLaunchConfigurationType(QVTiLaunchConstants.LAUNCH_CONFIGURATION_TYPE_ID);
 		ILaunchConfigurationWorkingCopy launchConfiguration = launchConfigurationType.newInstance(iProject, launchName);
 		launchConfiguration.setAttribute(QVTiLaunchConstants.TX_KEY, transformationURI.toString());
-//		launchConfiguration.setAttribute(QVTiLaunchConstants.OLD_IN_KEY, oldInKeys);
+		//		launchConfiguration.setAttribute(QVTiLaunchConstants.OLD_IN_KEY, oldInKeys);
 		launchConfiguration.setAttribute(QVTiLaunchConstants.NEW_IN_KEY, newInKeys);
-//		launchConfiguration.setAttribute(QVTiLaunchConstants.OLD_OUT_KEY, oldOutKeys);
+		//		launchConfiguration.setAttribute(QVTiLaunchConstants.OLD_OUT_KEY, oldOutKeys);
 		launchConfiguration.setAttribute(QVTiLaunchConstants.NEW_OUT_KEY, newOutKeys);
 		launchConfiguration.setAttribute(QVTiLaunchConstants.INTERPRETED_KEY, true);
 		launchConfiguration.setAttribute(QVTiLaunchConstants.TRACE_EVALUATION_KEY, false);
@@ -195,7 +195,7 @@ public class QVTiDebuggerTests extends XtextTestCase
 		ILaunch launch = launchConfiguration.launch(ILaunchManager.DEBUG_MODE, null);
 		assert launch != null;
 		//
-/*		Map<String, Object> attributes = launch.getLaunchConfiguration().getAttributes();
+		/*		Map<String, Object> attributes = launch.getLaunchConfiguration().getAttributes();
 		ExpressionInOCL asExpressionInOCL = (ExpressionInOCL) attributes.get(QVTiLaunchConstants.EXPRESSION_OBJECT);
 		OperationCallExp asOperationCallExp = (OperationCallExp) asExpressionInOCL.getOwnedBody();
 		PropertyCallExp asPropertyCallExpCallExp = (PropertyCallExp) asOperationCallExp.getOwnedSource();
@@ -215,7 +215,7 @@ public class QVTiDebuggerTests extends XtextTestCase
 		Variable asMiddleVariable = middleTypedModel.getOwnedContext();
 		Variable asOutVariable = outTypedModel.getOwnedContext();
 		assert (asTransformationVariable != null) && (asInVariable != null) && (asMiddleVariable != null) && (asOutVariable != null);
-		
+
 		IThread vmThread = debugTarget.getThreads()[0];
 		assert vmThread != null;
 		TestUIUtil.waitForSuspended(vmThread);
