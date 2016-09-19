@@ -51,22 +51,22 @@ public class QVTiStepperVisitor extends AbstractQVTimperativeStepperVisitor
 
 	@Override
 	public @Nullable IStepper visitCheckStatement(@NonNull CheckStatement object) {
-		return NonStepper.INSTANCE;
+		return PreStepper.INSTANCE;
 	}
 
 	@Override
 	public @Nullable IStepper visitConnectionVariable(@NonNull ConnectionVariable object) {
-		return NonStepper.INSTANCE;
+		return visiting(object);
 	}
 
 	@Override
 	public @Nullable IStepper visitDeclareStatement(@NonNull DeclareStatement asVariable) {
-		return NonStepper.INSTANCE;
+		return PreStepper.INSTANCE;
 	}
 
 	@Override
 	public @Nullable IStepper visitDomain(@NonNull Domain object) {
-		return NonStepper.INSTANCE;
+		return visiting(object);
 	}
 
 	@Override
@@ -81,7 +81,7 @@ public class QVTiStepperVisitor extends AbstractQVTimperativeStepperVisitor
 
 	@Override
 	public @Nullable IStepper visitInConnectionVariable(@NonNull InConnectionVariable object) {
-		return NonStepper.INSTANCE;
+		return PreStepper.INSTANCE;
 	}
 
 	@Override
@@ -111,22 +111,22 @@ public class QVTiStepperVisitor extends AbstractQVTimperativeStepperVisitor
 
 	@Override
 	public @Nullable IStepper visitMappingStatement(@NonNull MappingStatement object) {
-		return PreStepper.INSTANCE;
+		return visiting(object);
 	}
 
 	@Override
 	public @Nullable IStepper visitNewStatement(@NonNull NewStatement object) {
-		return NonStepper.INSTANCE;
-	}
-
-	@Override
-	public @Nullable IStepper visitObservableStatement(@NonNull ObservableStatement object) {
 		return PreStepper.INSTANCE;
 	}
 
 	@Override
+	public @Nullable IStepper visitObservableStatement(@NonNull ObservableStatement object) {
+		return visiting(object);
+	}
+
+	@Override
 	public @Nullable IStepper visitOutConnectionVariable(@NonNull OutConnectionVariable object) {
-		return NonStepper.INSTANCE;
+		return PreStepper.INSTANCE;
 	}
 
 	@Override
@@ -136,12 +136,12 @@ public class QVTiStepperVisitor extends AbstractQVTimperativeStepperVisitor
 
 	@Override
 	public @Nullable IStepper visitSetStatement(@NonNull SetStatement object) {
-		return NonStepper.INSTANCE;
+		return PreStepper.INSTANCE;
 	}
 
 	@Override
 	public @Nullable IStepper visitStatement(@NonNull Statement object) {
-		return PreStepper.INSTANCE;
+		return visiting(object);
 	}
 
 	@Override
