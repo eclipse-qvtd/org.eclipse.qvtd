@@ -25,7 +25,7 @@ import org.eclipse.ocl.pivot.OCLExpression;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement#isIsChecked <em>Is Checked</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement#isIsCheck <em>Is Check</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement#getOwnedExpression <em>Owned Expression</em>}</li>
  * </ul>
  *
@@ -34,29 +34,29 @@ import org.eclipse.ocl.pivot.OCLExpression;
  */
 public interface DeclareStatement extends VariableStatement, ObservableStatement {
 	/**
-	 * Returns the value of the '<em><b>Is Checked</b></em>' attribute.
+	 * Returns the value of the '<em><b>Is Check</b></em>' attribute.
 	 * The default value is <code>"false"</code>.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * Whether the variable initialization needs to be checked as a predicate. This is a derivation of not ownedInit.type.conformsTo(self.type).
 	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Is Checked</em>' attribute.
-	 * @see #setIsChecked(boolean)
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getDeclareStatement_IsChecked()
+	 * @return the value of the '<em>Is Check</em>' attribute.
+	 * @see #setIsCheck(boolean)
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getDeclareStatement_IsCheck()
 	 * @generated
 	 */
-	boolean isIsChecked();
+	boolean isIsCheck();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement#isIsChecked <em>Is Checked</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement#isIsCheck <em>Is Check</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Is Checked</em>' attribute.
-	 * @see #isIsChecked()
+	 * @param value the new value of the '<em>Is Check</em>' attribute.
+	 * @see #isIsCheck()
 	 * @generated
 	 */
-	void setIsChecked(boolean value);
+	void setIsCheck(boolean value);
 
 	/**
 	 * Returns the value of the '<em><b>Owned Expression</b></em>' containment reference.

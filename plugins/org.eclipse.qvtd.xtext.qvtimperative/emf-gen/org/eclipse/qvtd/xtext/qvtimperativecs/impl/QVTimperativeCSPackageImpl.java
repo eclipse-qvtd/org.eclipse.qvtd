@@ -22,25 +22,30 @@ import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.xtext.qvtbasecs.QVTbaseCSPackage;
 import org.eclipse.qvtd.xtext.qvtimperativecs.AddStatementCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.AppendParameterBindingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.AppendParameterCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.BufferStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.CheckStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DeclareStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.GuardParameterBindingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.GuardParameterCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.LoopParameterBindingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS;
-import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingLoopCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.MappingParameterBindingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingParameterCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.NewStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.ObservableStatementCS;
-import org.eclipse.qvtd.xtext.qvtimperativecs.OutVariableCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.ParamDeclarationCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSFactory;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QueryCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.SetStatementCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.SimpleParameterBindingCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.SimpleParameterCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.StatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.TopLevelCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.TransformationCS;
@@ -64,7 +69,21 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass appendParameterBindingCSEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass appendParameterCSEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass bufferStatementCSEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -92,6 +111,13 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass guardParameterBindingCSEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass guardParameterCSEClass = null;
 
 	/**
@@ -99,14 +125,14 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass mappingCSEClass = null;
+	private EClass loopParameterBindingCSEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass mappingCallBindingCSEClass = null;
+	private EClass mappingCSEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -128,6 +154,13 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	 * @generated
 	 */
 	private EClass mappingParameterCSEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass mappingParameterBindingCSEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -169,14 +202,21 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass outVariableCSEClass = null;
+	private EClass setStatementCSEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass setStatementCSEClass = null;
+	private EClass simpleParameterBindingCSEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass simpleParameterCSEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -302,8 +342,58 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	 * @generated
 	 */
 	@Override
+	public EClass getAppendParameterBindingCS() {
+		return appendParameterBindingCSEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getAppendParameterBindingCS_Value() {
+		return (EReference)appendParameterBindingCSEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getAppendParameterBindingCS_ReferredVariable() {
+		return (EReference)appendParameterBindingCSEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getAppendParameterCS() {
 		return appendParameterCSEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getBufferStatementCS() {
+		return bufferStatementCSEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getBufferStatementCS_OwnedExpression() {
+		return (EReference)bufferStatementCSEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -352,7 +442,7 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	 * @generated
 	 */
 	@Override
-	public EAttribute getDeclareStatementCS_IsChecked() {
+	public EAttribute getDeclareStatementCS_IsCheck() {
 		return (EAttribute)declareStatementCSEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -402,6 +492,46 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	 * @generated
 	 */
 	@Override
+	public EClass getGuardParameterBindingCS() {
+		return guardParameterBindingCSEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getGuardParameterBindingCS_Value() {
+		return (EReference)guardParameterBindingCSEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getGuardParameterBindingCS_ReferredVariable() {
+		return (EReference)guardParameterBindingCSEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getGuardParameterBindingCS_IsCheck() {
+		return (EAttribute)guardParameterBindingCSEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getGuardParameterCS() {
 		return guardParameterCSEClass;
 	}
@@ -414,6 +544,46 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	@Override
 	public EReference getGuardParameterCS_ReferredTypedModel() {
 		return (EReference)guardParameterCSEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getLoopParameterBindingCS() {
+		return loopParameterBindingCSEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getLoopParameterBindingCS_Value() {
+		return (EReference)loopParameterBindingCSEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getLoopParameterBindingCS_ReferredVariable() {
+		return (EReference)loopParameterBindingCSEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getLoopParameterBindingCS_IsCheck() {
+		return (EAttribute)loopParameterBindingCSEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -462,46 +632,6 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	 * @generated
 	 */
 	@Override
-	public EClass getMappingCallBindingCS() {
-		return mappingCallBindingCSEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getMappingCallBindingCS_OwningMappingCall() {
-		return (EReference)mappingCallBindingCSEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getMappingCallBindingCS_ReferredVariable() {
-		return (EReference)mappingCallBindingCSEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getMappingCallBindingCS_OwnedValue() {
-		return (EReference)mappingCallBindingCSEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EClass getMappingCallCS() {
 		return mappingCallCSEClass;
 	}
@@ -522,8 +652,28 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	 * @generated
 	 */
 	@Override
+	public EAttribute getMappingCallCS_IsInstall() {
+		return (EAttribute)mappingCallCSEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getMappingCallCS_IsInvoke() {
+		return (EAttribute)mappingCallCSEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EReference getMappingCallCS_ReferredMapping() {
-		return (EReference)mappingCallCSEClass.getEStructuralFeatures().get(3);
+		return (EReference)mappingCallCSEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -533,7 +683,7 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	 */
 	@Override
 	public EReference getMappingCallCS_OwnedBindings() {
-		return (EReference)mappingCallCSEClass.getEStructuralFeatures().get(1);
+		return (EReference)mappingCallCSEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -543,7 +693,7 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	 */
 	@Override
 	public EReference getMappingCallCS_OwnedPathName() {
-		return (EReference)mappingCallCSEClass.getEStructuralFeatures().get(2);
+		return (EReference)mappingCallCSEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -594,6 +744,26 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	@Override
 	public EClass getMappingParameterCS() {
 		return mappingParameterCSEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getMappingParameterBindingCS() {
+		return mappingParameterBindingCSEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getMappingParameterBindingCS_OwningMappingCall() {
+		return (EReference)mappingParameterBindingCSEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -732,26 +902,6 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	 * @generated
 	 */
 	@Override
-	public EClass getOutVariableCS() {
-		return outVariableCSEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getOutVariableCS_OwnedExpression() {
-		return (EReference)outVariableCSEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EClass getSetStatementCS() {
 		return setStatementCSEClass;
 	}
@@ -794,6 +944,66 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	@Override
 	public EAttribute getSetStatementCS_IsNotify() {
 		return (EAttribute)setStatementCSEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getSimpleParameterBindingCS() {
+		return simpleParameterBindingCSEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getSimpleParameterBindingCS_OwnedValue() {
+		return (EReference)simpleParameterBindingCSEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getSimpleParameterBindingCS_ReferredVariable() {
+		return (EReference)simpleParameterBindingCSEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getSimpleParameterBindingCS_IsCheck() {
+		return (EAttribute)simpleParameterBindingCSEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getSimpleParameterCS() {
+		return simpleParameterCSEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getSimpleParameterCS_ReferredTypedModel() {
+		return (EReference)simpleParameterCSEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -909,35 +1119,49 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		createEReference(addStatementCSEClass, ADD_STATEMENT_CS__OWNED_EXPRESSION);
 		createEReference(addStatementCSEClass, ADD_STATEMENT_CS__TARGET_VARIABLE);
 
+		appendParameterBindingCSEClass = createEClass(APPEND_PARAMETER_BINDING_CS);
+		createEReference(appendParameterBindingCSEClass, APPEND_PARAMETER_BINDING_CS__VALUE);
+		createEReference(appendParameterBindingCSEClass, APPEND_PARAMETER_BINDING_CS__REFERRED_VARIABLE);
+
 		appendParameterCSEClass = createEClass(APPEND_PARAMETER_CS);
+
+		bufferStatementCSEClass = createEClass(BUFFER_STATEMENT_CS);
+		createEReference(bufferStatementCSEClass, BUFFER_STATEMENT_CS__OWNED_EXPRESSION);
 
 		checkStatementCSEClass = createEClass(CHECK_STATEMENT_CS);
 		createEReference(checkStatementCSEClass, CHECK_STATEMENT_CS__OWNED_CONDITION);
 
 		declareStatementCSEClass = createEClass(DECLARE_STATEMENT_CS);
 		createEReference(declareStatementCSEClass, DECLARE_STATEMENT_CS__OWNED_EXPRESSION);
-		createEAttribute(declareStatementCSEClass, DECLARE_STATEMENT_CS__IS_CHECKED);
+		createEAttribute(declareStatementCSEClass, DECLARE_STATEMENT_CS__IS_CHECK);
 
 		directionCSEClass = createEClass(DIRECTION_CS);
 		createEReference(directionCSEClass, DIRECTION_CS__IMPORTS);
 		createEAttribute(directionCSEClass, DIRECTION_CS__IS_CHECKED);
 		createEAttribute(directionCSEClass, DIRECTION_CS__IS_ENFORCED);
 
+		guardParameterBindingCSEClass = createEClass(GUARD_PARAMETER_BINDING_CS);
+		createEReference(guardParameterBindingCSEClass, GUARD_PARAMETER_BINDING_CS__VALUE);
+		createEReference(guardParameterBindingCSEClass, GUARD_PARAMETER_BINDING_CS__REFERRED_VARIABLE);
+		createEAttribute(guardParameterBindingCSEClass, GUARD_PARAMETER_BINDING_CS__IS_CHECK);
+
 		guardParameterCSEClass = createEClass(GUARD_PARAMETER_CS);
 		createEReference(guardParameterCSEClass, GUARD_PARAMETER_CS__REFERRED_TYPED_MODEL);
+
+		loopParameterBindingCSEClass = createEClass(LOOP_PARAMETER_BINDING_CS);
+		createEReference(loopParameterBindingCSEClass, LOOP_PARAMETER_BINDING_CS__VALUE);
+		createEReference(loopParameterBindingCSEClass, LOOP_PARAMETER_BINDING_CS__REFERRED_VARIABLE);
+		createEAttribute(loopParameterBindingCSEClass, LOOP_PARAMETER_BINDING_CS__IS_CHECK);
 
 		mappingCSEClass = createEClass(MAPPING_CS);
 		createEReference(mappingCSEClass, MAPPING_CS__OWNED_IN_PATH_NAME);
 		createEReference(mappingCSEClass, MAPPING_CS__OWNED_PARAMETERS);
 		createEReference(mappingCSEClass, MAPPING_CS__OWNED_STATEMENTS);
 
-		mappingCallBindingCSEClass = createEClass(MAPPING_CALL_BINDING_CS);
-		createEReference(mappingCallBindingCSEClass, MAPPING_CALL_BINDING_CS__OWNED_VALUE);
-		createEReference(mappingCallBindingCSEClass, MAPPING_CALL_BINDING_CS__OWNING_MAPPING_CALL);
-		createEReference(mappingCallBindingCSEClass, MAPPING_CALL_BINDING_CS__REFERRED_VARIABLE);
-
 		mappingCallCSEClass = createEClass(MAPPING_CALL_CS);
 		createEAttribute(mappingCallCSEClass, MAPPING_CALL_CS__IS_INFINITE);
+		createEAttribute(mappingCallCSEClass, MAPPING_CALL_CS__IS_INSTALL);
+		createEAttribute(mappingCallCSEClass, MAPPING_CALL_CS__IS_INVOKE);
 		createEReference(mappingCallCSEClass, MAPPING_CALL_CS__OWNED_BINDINGS);
 		createEReference(mappingCallCSEClass, MAPPING_CALL_CS__OWNED_PATH_NAME);
 		createEReference(mappingCallCSEClass, MAPPING_CALL_CS__REFERRED_MAPPING);
@@ -949,6 +1173,9 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 
 		mappingParameterCSEClass = createEClass(MAPPING_PARAMETER_CS);
 
+		mappingParameterBindingCSEClass = createEClass(MAPPING_PARAMETER_BINDING_CS);
+		createEReference(mappingParameterBindingCSEClass, MAPPING_PARAMETER_BINDING_CS__OWNING_MAPPING_CALL);
+
 		mappingStatementCSEClass = createEClass(MAPPING_STATEMENT_CS);
 
 		newStatementCSEClass = createEClass(NEW_STATEMENT_CS);
@@ -957,9 +1184,6 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 
 		observableStatementCSEClass = createEClass(OBSERVABLE_STATEMENT_CS);
 		createEReference(observableStatementCSEClass, OBSERVABLE_STATEMENT_CS__OBSERVED_PROPERTIES);
-
-		outVariableCSEClass = createEClass(OUT_VARIABLE_CS);
-		createEReference(outVariableCSEClass, OUT_VARIABLE_CS__OWNED_EXPRESSION);
 
 		paramDeclarationCSEClass = createEClass(PARAM_DECLARATION_CS);
 
@@ -975,6 +1199,14 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		createEReference(setStatementCSEClass, SET_STATEMENT_CS__REFERRED_VARIABLE);
 		createEReference(setStatementCSEClass, SET_STATEMENT_CS__OWNED_EXPRESSION);
 		createEAttribute(setStatementCSEClass, SET_STATEMENT_CS__IS_NOTIFY);
+
+		simpleParameterBindingCSEClass = createEClass(SIMPLE_PARAMETER_BINDING_CS);
+		createEReference(simpleParameterBindingCSEClass, SIMPLE_PARAMETER_BINDING_CS__OWNED_VALUE);
+		createEReference(simpleParameterBindingCSEClass, SIMPLE_PARAMETER_BINDING_CS__REFERRED_VARIABLE);
+		createEAttribute(simpleParameterBindingCSEClass, SIMPLE_PARAMETER_BINDING_CS__IS_CHECK);
+
+		simpleParameterCSEClass = createEClass(SIMPLE_PARAMETER_CS);
+		createEReference(simpleParameterCSEClass, SIMPLE_PARAMETER_CS__REFERRED_TYPED_MODEL);
 
 		statementCSEClass = createEClass(STATEMENT_CS);
 
@@ -1026,29 +1258,34 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		// Add supertypes to classes
 		addStatementCSEClass.getESuperTypes().add(this.getMappingStatementCS());
 		addStatementCSEClass.getESuperTypes().add(this.getObservableStatementCS());
+		appendParameterBindingCSEClass.getESuperTypes().add(this.getMappingParameterBindingCS());
 		appendParameterCSEClass.getESuperTypes().add(this.getMappingParameterCS());
+		bufferStatementCSEClass.getESuperTypes().add(theBaseCSPackage.getTypedElementCS());
+		bufferStatementCSEClass.getESuperTypes().add(this.getStatementCS());
 		checkStatementCSEClass.getESuperTypes().add(this.getStatementCS());
 		checkStatementCSEClass.getESuperTypes().add(this.getObservableStatementCS());
 		declareStatementCSEClass.getESuperTypes().add(theBaseCSPackage.getTypedElementCS());
 		declareStatementCSEClass.getESuperTypes().add(this.getStatementCS());
 		declareStatementCSEClass.getESuperTypes().add(this.getObservableStatementCS());
 		directionCSEClass.getESuperTypes().add(theBaseCSPackage.getNamedElementCS());
+		guardParameterBindingCSEClass.getESuperTypes().add(this.getMappingParameterBindingCS());
 		guardParameterCSEClass.getESuperTypes().add(this.getMappingParameterCS());
+		loopParameterBindingCSEClass.getESuperTypes().add(this.getMappingParameterBindingCS());
 		mappingCSEClass.getESuperTypes().add(theBaseCSPackage.getNamedElementCS());
-		mappingCallBindingCSEClass.getESuperTypes().add(theEssentialOCLCSPackage.getExpCS());
 		mappingCallCSEClass.getESuperTypes().add(this.getMappingStatementCS());
 		mappingLoopCSEClass.getESuperTypes().add(this.getMappingStatementCS());
 		mappingLoopCSEClass.getESuperTypes().add(this.getObservableStatementCS());
 		mappingParameterCSEClass.getESuperTypes().add(theBaseCSPackage.getTypedElementCS());
+		mappingParameterBindingCSEClass.getESuperTypes().add(theEssentialOCLCSPackage.getExpCS());
 		mappingStatementCSEClass.getESuperTypes().add(this.getStatementCS());
 		newStatementCSEClass.getESuperTypes().add(theBaseCSPackage.getTypedElementCS());
 		newStatementCSEClass.getESuperTypes().add(this.getObservableStatementCS());
 		observableStatementCSEClass.getESuperTypes().add(this.getStatementCS());
-		outVariableCSEClass.getESuperTypes().add(theBaseCSPackage.getTypedElementCS());
-		outVariableCSEClass.getESuperTypes().add(this.getStatementCS());
 		paramDeclarationCSEClass.getESuperTypes().add(theBaseCSPackage.getTypedElementCS());
 		queryCSEClass.getESuperTypes().add(theBaseCSPackage.getTypedElementCS());
 		setStatementCSEClass.getESuperTypes().add(this.getObservableStatementCS());
+		simpleParameterBindingCSEClass.getESuperTypes().add(this.getMappingParameterBindingCS());
+		simpleParameterCSEClass.getESuperTypes().add(this.getMappingParameterCS());
 		statementCSEClass.getESuperTypes().add(theBaseCSPackage.getModelElementCS());
 		topLevelCSEClass.getESuperTypes().add(theBaseCSPackage.getRootPackageCS());
 		transformationCSEClass.getESuperTypes().add(theQVTbaseCSPackage.getAbstractTransformationCS());
@@ -1058,36 +1295,50 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		initEReference(getAddStatementCS_OwnedExpression(), theEssentialOCLCSPackage.getExpCS(), null, "ownedExpression", null, 0, 1, AddStatementCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAddStatementCS_TargetVariable(), theQVTimperativePackage.getConnectionVariable(), null, "targetVariable", null, 1, 1, AddStatementCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEClass(appendParameterBindingCSEClass, AppendParameterBindingCS.class, "AppendParameterBindingCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getAppendParameterBindingCS_Value(), theQVTimperativePackage.getConnectionVariable(), null, "value", null, 1, 1, AppendParameterBindingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAppendParameterBindingCS_ReferredVariable(), theQVTimperativePackage.getAppendParameter(), null, "referredVariable", null, 1, 1, AppendParameterBindingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		initEClass(appendParameterCSEClass, AppendParameterCS.class, "AppendParameterCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(bufferStatementCSEClass, BufferStatementCS.class, "BufferStatementCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getBufferStatementCS_OwnedExpression(), theEssentialOCLCSPackage.getExpCS(), null, "ownedExpression", null, 0, 1, BufferStatementCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(checkStatementCSEClass, CheckStatementCS.class, "CheckStatementCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCheckStatementCS_OwnedCondition(), theEssentialOCLCSPackage.getExpCS(), null, "ownedCondition", null, 1, 1, CheckStatementCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(declareStatementCSEClass, DeclareStatementCS.class, "DeclareStatementCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getDeclareStatementCS_OwnedExpression(), theEssentialOCLCSPackage.getExpCS(), null, "ownedExpression", null, 1, 1, DeclareStatementCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getDeclareStatementCS_IsChecked(), ecorePackage.getEBoolean(), "isChecked", "false", 0, 1, DeclareStatementCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDeclareStatementCS_IsCheck(), ecorePackage.getEBoolean(), "isCheck", "false", 0, 1, DeclareStatementCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(directionCSEClass, DirectionCS.class, "DirectionCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getDirectionCS_Imports(), thePivotPackage.getPackage(), null, "imports", null, 0, -1, DirectionCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getDirectionCS_IsChecked(), ecorePackage.getEBoolean(), "isChecked", null, 0, 1, DirectionCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getDirectionCS_IsEnforced(), ecorePackage.getEBoolean(), "isEnforced", null, 0, 1, DirectionCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEClass(guardParameterBindingCSEClass, GuardParameterBindingCS.class, "GuardParameterBindingCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getGuardParameterBindingCS_Value(), theQVTimperativePackage.getConnectionVariable(), null, "value", null, 1, 1, GuardParameterBindingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getGuardParameterBindingCS_ReferredVariable(), theQVTimperativePackage.getGuardParameter(), null, "referredVariable", null, 1, 1, GuardParameterBindingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getGuardParameterBindingCS_IsCheck(), ecorePackage.getEBoolean(), "isCheck", "false", 0, 1, GuardParameterBindingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		initEClass(guardParameterCSEClass, GuardParameterCS.class, "GuardParameterCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getGuardParameterCS_ReferredTypedModel(), theQVTimperativePackage.getImperativeTypedModel(), null, "referredTypedModel", null, 1, 1, GuardParameterCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(loopParameterBindingCSEClass, LoopParameterBindingCS.class, "LoopParameterBindingCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getLoopParameterBindingCS_Value(), theQVTimperativePackage.getLoopVariable(), null, "value", null, 1, 1, LoopParameterBindingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getLoopParameterBindingCS_ReferredVariable(), theQVTimperativePackage.getGuardParameter(), null, "referredVariable", null, 1, 1, LoopParameterBindingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getLoopParameterBindingCS_IsCheck(), ecorePackage.getEBoolean(), "isCheck", "false", 0, 1, LoopParameterBindingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(mappingCSEClass, MappingCS.class, "MappingCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getMappingCS_OwnedInPathName(), theBaseCSPackage.getPathNameCS(), null, "ownedInPathName", null, 0, 1, MappingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMappingCS_OwnedParameters(), this.getMappingParameterCS(), null, "ownedParameters", null, 0, -1, MappingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMappingCS_OwnedStatements(), this.getStatementCS(), null, "ownedStatements", null, 0, -1, MappingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(mappingCallBindingCSEClass, MappingCallBindingCS.class, "MappingCallBindingCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getMappingCallBindingCS_OwnedValue(), theEssentialOCLCSPackage.getExpCS(), null, "ownedValue", null, 1, 1, MappingCallBindingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getMappingCallBindingCS_OwningMappingCall(), this.getMappingCallCS(), this.getMappingCallCS_OwnedBindings(), "owningMappingCall", null, 0, 1, MappingCallBindingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getMappingCallBindingCS_ReferredVariable(), thePivotPackage.getVariableDeclaration(), null, "referredVariable", null, 1, 1, MappingCallBindingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
 		initEClass(mappingCallCSEClass, MappingCallCS.class, "MappingCallCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getMappingCallCS_IsInfinite(), ecorePackage.getEBoolean(), "isInfinite", "false", 0, 1, MappingCallCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getMappingCallCS_OwnedBindings(), this.getMappingCallBindingCS(), this.getMappingCallBindingCS_OwningMappingCall(), "ownedBindings", null, 0, -1, MappingCallCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEAttribute(getMappingCallCS_IsInstall(), ecorePackage.getEBoolean(), "isInstall", "false", 0, 1, MappingCallCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMappingCallCS_IsInvoke(), ecorePackage.getEBoolean(), "isInvoke", "false", 0, 1, MappingCallCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMappingCallCS_OwnedBindings(), this.getMappingParameterBindingCS(), this.getMappingParameterBindingCS_OwningMappingCall(), "ownedBindings", null, 0, -1, MappingCallCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getMappingCallCS_OwnedPathName(), theBaseCSPackage.getPathNameCS(), null, "ownedPathName", null, 0, 1, MappingCallCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMappingCallCS_ReferredMapping(), theQVTimperativePackage.getMapping(), null, "referredMapping", null, 0, 1, MappingCallCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
@@ -1098,6 +1349,9 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 
 		initEClass(mappingParameterCSEClass, MappingParameterCS.class, "MappingParameterCS", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
+		initEClass(mappingParameterBindingCSEClass, MappingParameterBindingCS.class, "MappingParameterBindingCS", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getMappingParameterBindingCS_OwningMappingCall(), this.getMappingCallCS(), this.getMappingCallCS_OwnedBindings(), "owningMappingCall", null, 0, 1, MappingParameterBindingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		initEClass(mappingStatementCSEClass, MappingStatementCS.class, "MappingStatementCS", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(newStatementCSEClass, NewStatementCS.class, "NewStatementCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1106,9 +1360,6 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 
 		initEClass(observableStatementCSEClass, ObservableStatementCS.class, "ObservableStatementCS", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getObservableStatementCS_ObservedProperties(), theBaseCSPackage.getPathNameCS(), null, "observedProperties", null, 0, -1, ObservableStatementCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-
-		initEClass(outVariableCSEClass, OutVariableCS.class, "OutVariableCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getOutVariableCS_OwnedExpression(), theEssentialOCLCSPackage.getExpCS(), null, "ownedExpression", null, 0, 1, OutVariableCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(paramDeclarationCSEClass, ParamDeclarationCS.class, "ParamDeclarationCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1124,6 +1375,14 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		initEReference(getSetStatementCS_ReferredVariable(), thePivotPackage.getVariableDeclaration(), null, "referredVariable", null, 1, 1, SetStatementCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSetStatementCS_OwnedExpression(), theEssentialOCLCSPackage.getExpCS(), null, "ownedExpression", null, 1, 1, SetStatementCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getSetStatementCS_IsNotify(), ecorePackage.getEBoolean(), "isNotify", "false", 0, 1, SetStatementCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(simpleParameterBindingCSEClass, SimpleParameterBindingCS.class, "SimpleParameterBindingCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getSimpleParameterBindingCS_OwnedValue(), theEssentialOCLCSPackage.getExpCS(), null, "ownedValue", null, 1, 1, SimpleParameterBindingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSimpleParameterBindingCS_ReferredVariable(), theQVTimperativePackage.getSimpleParameter(), null, "referredVariable", null, 1, 1, SimpleParameterBindingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSimpleParameterBindingCS_IsCheck(), ecorePackage.getEBoolean(), "isCheck", "false", 0, 1, SimpleParameterBindingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(simpleParameterCSEClass, SimpleParameterCS.class, "SimpleParameterCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getSimpleParameterCS_ReferredTypedModel(), theQVTimperativePackage.getImperativeTypedModel(), null, "referredTypedModel", null, 1, 1, SimpleParameterCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(statementCSEClass, StatementCS.class, "StatementCS", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

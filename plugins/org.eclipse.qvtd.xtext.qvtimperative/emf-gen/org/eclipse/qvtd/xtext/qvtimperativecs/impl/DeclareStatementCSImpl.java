@@ -45,7 +45,7 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.DeclareStatementCSImpl#getObservedProperties <em>Observed Properties</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.DeclareStatementCSImpl#getOwnedExpression <em>Owned Expression</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.DeclareStatementCSImpl#isIsChecked <em>Is Checked</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.DeclareStatementCSImpl#isIsCheck <em>Is Check</em>}</li>
  * </ul>
  *
  * @generated
@@ -72,24 +72,24 @@ public class DeclareStatementCSImpl extends TypedElementCSImpl implements Declar
 	protected ExpCS ownedExpression;
 
 	/**
-	 * The default value of the '{@link #isIsChecked() <em>Is Checked</em>}' attribute.
+	 * The default value of the '{@link #isIsCheck() <em>Is Check</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isIsChecked()
+	 * @see #isIsCheck()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean IS_CHECKED_EDEFAULT = false;
+	protected static final boolean IS_CHECK_EDEFAULT = false;
 
 	/**
-	 * The cached value of the '{@link #isIsChecked() <em>Is Checked</em>}' attribute.
+	 * The cached value of the '{@link #isIsCheck() <em>Is Check</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isIsChecked()
+	 * @see #isIsCheck()
 	 * @generated
 	 * @ordered
 	 */
-	protected boolean isChecked = IS_CHECKED_EDEFAULT;
+	protected boolean isCheck = IS_CHECK_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -174,8 +174,8 @@ public class DeclareStatementCSImpl extends TypedElementCSImpl implements Declar
 	 * @generated
 	 */
 	@Override
-	public boolean isIsChecked() {
-		return isChecked;
+	public boolean isIsCheck() {
+		return isCheck;
 	}
 
 	/**
@@ -184,11 +184,11 @@ public class DeclareStatementCSImpl extends TypedElementCSImpl implements Declar
 	 * @generated
 	 */
 	@Override
-	public void setIsChecked(boolean newIsChecked) {
-		boolean oldIsChecked = isChecked;
-		isChecked = newIsChecked;
+	public void setIsCheck(boolean newIsCheck) {
+		boolean oldIsCheck = isCheck;
+		isCheck = newIsCheck;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.DECLARE_STATEMENT_CS__IS_CHECKED, oldIsChecked, isChecked));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.DECLARE_STATEMENT_CS__IS_CHECK, oldIsCheck, isCheck));
 	}
 
 	/**
@@ -229,8 +229,8 @@ public class DeclareStatementCSImpl extends TypedElementCSImpl implements Declar
 				return getObservedProperties();
 			case QVTimperativeCSPackage.DECLARE_STATEMENT_CS__OWNED_EXPRESSION:
 				return getOwnedExpression();
-			case QVTimperativeCSPackage.DECLARE_STATEMENT_CS__IS_CHECKED:
-				return isIsChecked();
+			case QVTimperativeCSPackage.DECLARE_STATEMENT_CS__IS_CHECK:
+				return isIsCheck();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -251,8 +251,8 @@ public class DeclareStatementCSImpl extends TypedElementCSImpl implements Declar
 			case QVTimperativeCSPackage.DECLARE_STATEMENT_CS__OWNED_EXPRESSION:
 				setOwnedExpression((ExpCS)newValue);
 				return;
-			case QVTimperativeCSPackage.DECLARE_STATEMENT_CS__IS_CHECKED:
-				setIsChecked((Boolean)newValue);
+			case QVTimperativeCSPackage.DECLARE_STATEMENT_CS__IS_CHECK:
+				setIsCheck((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -272,8 +272,8 @@ public class DeclareStatementCSImpl extends TypedElementCSImpl implements Declar
 			case QVTimperativeCSPackage.DECLARE_STATEMENT_CS__OWNED_EXPRESSION:
 				setOwnedExpression((ExpCS)null);
 				return;
-			case QVTimperativeCSPackage.DECLARE_STATEMENT_CS__IS_CHECKED:
-				setIsChecked(IS_CHECKED_EDEFAULT);
+			case QVTimperativeCSPackage.DECLARE_STATEMENT_CS__IS_CHECK:
+				setIsCheck(IS_CHECK_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -291,8 +291,8 @@ public class DeclareStatementCSImpl extends TypedElementCSImpl implements Declar
 				return observedProperties != null && !observedProperties.isEmpty();
 			case QVTimperativeCSPackage.DECLARE_STATEMENT_CS__OWNED_EXPRESSION:
 				return ownedExpression != null;
-			case QVTimperativeCSPackage.DECLARE_STATEMENT_CS__IS_CHECKED:
-				return isChecked != IS_CHECKED_EDEFAULT;
+			case QVTimperativeCSPackage.DECLARE_STATEMENT_CS__IS_CHECK:
+				return isCheck != IS_CHECK_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}

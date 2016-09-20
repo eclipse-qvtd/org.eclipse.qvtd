@@ -1,15 +1,15 @@
 /**
  * <copyright>
- * 
+ *
  * Copyright (c) 2013, 2017 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
- * 
+ *
  * </copyright>
  */
 package org.eclipse.qvtd.xtext.qvtimperativecs.impl;
@@ -17,35 +17,30 @@ package org.eclipse.qvtd.xtext.qvtimperativecs.impl;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
-
 import org.eclipse.ocl.xtext.basecs.impl.TypedElementCSImpl;
-
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
-
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
-import org.eclipse.qvtd.xtext.qvtimperativecs.OutVariableCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.BufferStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage;
-
 import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Out Variable CS</b></em>'.
+ * An implementation of the model object '<em><b>Buffer Statement CS</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.OutVariableCSImpl#getOwnedExpression <em>Owned Expression</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.BufferStatementCSImpl#getOwnedExpression <em>Owned Expression</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class OutVariableCSImpl extends TypedElementCSImpl implements OutVariableCS {
+public class BufferStatementCSImpl extends TypedElementCSImpl implements BufferStatementCS {
 	/**
 	 * The cached value of the '{@link #getOwnedExpression() <em>Owned Expression</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -61,7 +56,7 @@ public class OutVariableCSImpl extends TypedElementCSImpl implements OutVariable
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected OutVariableCSImpl() {
+	protected BufferStatementCSImpl() {
 		super();
 	}
 
@@ -72,7 +67,7 @@ public class OutVariableCSImpl extends TypedElementCSImpl implements OutVariable
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return QVTimperativeCSPackage.Literals.OUT_VARIABLE_CS;
+		return QVTimperativeCSPackage.Literals.BUFFER_STATEMENT_CS;
 	}
 
 	/**
@@ -80,6 +75,7 @@ public class OutVariableCSImpl extends TypedElementCSImpl implements OutVariable
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ExpCS getOwnedExpression() {
 		return ownedExpression;
 	}
@@ -93,7 +89,7 @@ public class OutVariableCSImpl extends TypedElementCSImpl implements OutVariable
 		ExpCS oldOwnedExpression = ownedExpression;
 		ownedExpression = newOwnedExpression;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.OUT_VARIABLE_CS__OWNED_EXPRESSION, oldOwnedExpression, newOwnedExpression);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.BUFFER_STATEMENT_CS__OWNED_EXPRESSION, oldOwnedExpression, newOwnedExpression);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -104,18 +100,19 @@ public class OutVariableCSImpl extends TypedElementCSImpl implements OutVariable
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setOwnedExpression(ExpCS newOwnedExpression) {
 		if (newOwnedExpression != ownedExpression) {
 			NotificationChain msgs = null;
 			if (ownedExpression != null)
-				msgs = ((InternalEObject)ownedExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTimperativeCSPackage.OUT_VARIABLE_CS__OWNED_EXPRESSION, null, msgs);
+				msgs = ((InternalEObject)ownedExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTimperativeCSPackage.BUFFER_STATEMENT_CS__OWNED_EXPRESSION, null, msgs);
 			if (newOwnedExpression != null)
-				msgs = ((InternalEObject)newOwnedExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTimperativeCSPackage.OUT_VARIABLE_CS__OWNED_EXPRESSION, null, msgs);
+				msgs = ((InternalEObject)newOwnedExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTimperativeCSPackage.BUFFER_STATEMENT_CS__OWNED_EXPRESSION, null, msgs);
 			msgs = basicSetOwnedExpression(newOwnedExpression, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.OUT_VARIABLE_CS__OWNED_EXPRESSION, newOwnedExpression, newOwnedExpression));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.BUFFER_STATEMENT_CS__OWNED_EXPRESSION, newOwnedExpression, newOwnedExpression));
 	}
 
 	/**
@@ -126,7 +123,7 @@ public class OutVariableCSImpl extends TypedElementCSImpl implements OutVariable
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.OUT_VARIABLE_CS__OWNED_EXPRESSION:
+			case QVTimperativeCSPackage.BUFFER_STATEMENT_CS__OWNED_EXPRESSION:
 				return basicSetOwnedExpression(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -140,7 +137,7 @@ public class OutVariableCSImpl extends TypedElementCSImpl implements OutVariable
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.OUT_VARIABLE_CS__OWNED_EXPRESSION:
+			case QVTimperativeCSPackage.BUFFER_STATEMENT_CS__OWNED_EXPRESSION:
 				return getOwnedExpression();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -154,7 +151,7 @@ public class OutVariableCSImpl extends TypedElementCSImpl implements OutVariable
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.OUT_VARIABLE_CS__OWNED_EXPRESSION:
+			case QVTimperativeCSPackage.BUFFER_STATEMENT_CS__OWNED_EXPRESSION:
 				setOwnedExpression((ExpCS)newValue);
 				return;
 		}
@@ -169,7 +166,7 @@ public class OutVariableCSImpl extends TypedElementCSImpl implements OutVariable
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.OUT_VARIABLE_CS__OWNED_EXPRESSION:
+			case QVTimperativeCSPackage.BUFFER_STATEMENT_CS__OWNED_EXPRESSION:
 				setOwnedExpression((ExpCS)null);
 				return;
 		}
@@ -184,7 +181,7 @@ public class OutVariableCSImpl extends TypedElementCSImpl implements OutVariable
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.OUT_VARIABLE_CS__OWNED_EXPRESSION:
+			case QVTimperativeCSPackage.BUFFER_STATEMENT_CS__OWNED_EXPRESSION:
 				return ownedExpression != null;
 		}
 		return super.eIsSet(featureID);
@@ -197,7 +194,7 @@ public class OutVariableCSImpl extends TypedElementCSImpl implements OutVariable
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
-		return (R) ((QVTimperativeCSVisitor<?>)visitor).visitOutVariableCS(this);
+		return (R) ((QVTimperativeCSVisitor<?>)visitor).visitBufferStatementCS(this);
 	}
 
-} //OutVariableCSImpl
+} //BufferStatementCSImpl

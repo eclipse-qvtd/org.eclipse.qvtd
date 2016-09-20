@@ -12,29 +12,30 @@
  * 
  * </copyright>
  */
-package org.eclipse.qvtd.xtext.qvtimperativecs;
+package org.eclipse.qvtd.pivot.qvtimperative;
 
-import org.eclipse.ocl.xtext.basecs.TypedElementCS;
-import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
+import org.eclipse.ocl.pivot.OCLExpression;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Out Variable CS</b></em>'.
+ * A representation of the model object '<em><b>Buffer Statement</b></em>'.
  * <!-- end-user-doc -->
+ *
+ * <!-- begin-model-doc -->
+ * A ConnectionVariable accumulates one or more assignments.
+ * <!-- end-model-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.OutVariableCS#getOwnedExpression <em>Owned Expression</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.BufferStatement#getOwnedExpression <em>Owned Expression</em>}</li>
  * </ul>
  *
- * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getOutVariableCS()
- * @model
+ * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getBufferStatement()
  * @generated
  */
-public interface OutVariableCS extends TypedElementCS, StatementCS {
-
+public interface BufferStatement extends ConnectionVariable, VariableStatement, ObservableStatement {
 	/**
 	 * Returns the value of the '<em><b>Owned Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
@@ -44,20 +45,20 @@ public interface OutVariableCS extends TypedElementCS, StatementCS {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Owned Expression</em>' containment reference.
-	 * @see #setOwnedExpression(ExpCS)
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getOutVariableCS_OwnedExpression()
-	 * @model containment="true"
+	 * @see #setOwnedExpression(OCLExpression)
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getBufferStatement_OwnedExpression()
 	 * @generated
 	 */
-	ExpCS getOwnedExpression();
+	OCLExpression getOwnedExpression();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.OutVariableCS#getOwnedExpression <em>Owned Expression</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtimperative.BufferStatement#getOwnedExpression <em>Owned Expression</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Owned Expression</em>' containment reference.
 	 * @see #getOwnedExpression()
 	 * @generated
 	 */
-	void setOwnedExpression(ExpCS value);
-} // OutVariableCS
+	void setOwnedExpression(OCLExpression value);
+
+} // BufferStatement

@@ -41,8 +41,18 @@ public abstract class AbstractDelegatingQVTimperativeCSVisitor<R, C, @NonNull D 
 	}
 
 	@Override
+	public R visitAppendParameterBindingCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull AppendParameterBindingCS object) {
+		return delegate.visitAppendParameterBindingCS(object);
+	}
+
+	@Override
 	public R visitAppendParameterCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull AppendParameterCS object) {
 		return delegate.visitAppendParameterCS(object);
+	}
+
+	@Override
+	public R visitBufferStatementCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull BufferStatementCS object) {
+		return delegate.visitBufferStatementCS(object);
 	}
 
 	@Override
@@ -61,18 +71,23 @@ public abstract class AbstractDelegatingQVTimperativeCSVisitor<R, C, @NonNull D 
 	}
 
 	@Override
+	public R visitGuardParameterBindingCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull GuardParameterBindingCS object) {
+		return delegate.visitGuardParameterBindingCS(object);
+	}
+
+	@Override
 	public R visitGuardParameterCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull GuardParameterCS object) {
 		return delegate.visitGuardParameterCS(object);
 	}
 
 	@Override
-	public R visitMappingCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull MappingCS object) {
-		return delegate.visitMappingCS(object);
+	public R visitLoopParameterBindingCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull LoopParameterBindingCS object) {
+		return delegate.visitLoopParameterBindingCS(object);
 	}
 
 	@Override
-	public R visitMappingCallBindingCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull MappingCallBindingCS object) {
-		return delegate.visitMappingCallBindingCS(object);
+	public R visitMappingCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull MappingCS object) {
+		return delegate.visitMappingCS(object);
 	}
 
 	@Override
@@ -83,6 +98,11 @@ public abstract class AbstractDelegatingQVTimperativeCSVisitor<R, C, @NonNull D 
 	@Override
 	public R visitMappingLoopCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull MappingLoopCS object) {
 		return delegate.visitMappingLoopCS(object);
+	}
+
+	@Override
+	public R visitMappingParameterBindingCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull MappingParameterBindingCS object) {
+		return delegate.visitMappingParameterBindingCS(object);
 	}
 
 	@Override
@@ -106,11 +126,6 @@ public abstract class AbstractDelegatingQVTimperativeCSVisitor<R, C, @NonNull D 
 	}
 
 	@Override
-	public R visitOutVariableCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull OutVariableCS object) {
-		return delegate.visitOutVariableCS(object);
-	}
-
-	@Override
 	public R visitParamDeclarationCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull ParamDeclarationCS object) {
 		return delegate.visitParamDeclarationCS(object);
 	}
@@ -123,6 +138,16 @@ public abstract class AbstractDelegatingQVTimperativeCSVisitor<R, C, @NonNull D 
 	@Override
 	public R visitSetStatementCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull SetStatementCS object) {
 		return delegate.visitSetStatementCS(object);
+	}
+
+	@Override
+	public R visitSimpleParameterBindingCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull SimpleParameterBindingCS object) {
+		return delegate.visitSimpleParameterBindingCS(object);
+	}
+
+	@Override
+	public R visitSimpleParameterCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull SimpleParameterCS object) {
+		return delegate.visitSimpleParameterCS(object);
 	}
 
 	@Override

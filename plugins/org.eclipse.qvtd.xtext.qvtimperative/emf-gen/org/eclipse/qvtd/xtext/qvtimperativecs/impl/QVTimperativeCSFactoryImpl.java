@@ -16,23 +16,27 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.qvtd.xtext.qvtimperativecs.*;
 import org.eclipse.qvtd.xtext.qvtimperativecs.AddStatementCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.AppendParameterBindingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.AppendParameterCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.BufferStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.CheckStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DeclareStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.GuardParameterBindingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.GuardParameterCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS;
-import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingLoopCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.NewStatementCS;
-import org.eclipse.qvtd.xtext.qvtimperativecs.OutVariableCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.ParamDeclarationCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSFactory;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QueryCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.SetStatementCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.SimpleParameterBindingCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.SimpleParameterCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.TopLevelCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.TransformationCS;
 
@@ -81,20 +85,24 @@ public class QVTimperativeCSFactoryImpl extends EFactoryImpl implements QVTimper
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case QVTimperativeCSPackage.ADD_STATEMENT_CS: return createAddStatementCS();
+			case QVTimperativeCSPackage.APPEND_PARAMETER_BINDING_CS: return createAppendParameterBindingCS();
 			case QVTimperativeCSPackage.APPEND_PARAMETER_CS: return createAppendParameterCS();
+			case QVTimperativeCSPackage.BUFFER_STATEMENT_CS: return createBufferStatementCS();
 			case QVTimperativeCSPackage.CHECK_STATEMENT_CS: return createCheckStatementCS();
 			case QVTimperativeCSPackage.DECLARE_STATEMENT_CS: return createDeclareStatementCS();
 			case QVTimperativeCSPackage.DIRECTION_CS: return createDirectionCS();
+			case QVTimperativeCSPackage.GUARD_PARAMETER_BINDING_CS: return createGuardParameterBindingCS();
 			case QVTimperativeCSPackage.GUARD_PARAMETER_CS: return createGuardParameterCS();
+			case QVTimperativeCSPackage.LOOP_PARAMETER_BINDING_CS: return createLoopParameterBindingCS();
 			case QVTimperativeCSPackage.MAPPING_CS: return createMappingCS();
-			case QVTimperativeCSPackage.MAPPING_CALL_BINDING_CS: return createMappingCallBindingCS();
 			case QVTimperativeCSPackage.MAPPING_CALL_CS: return createMappingCallCS();
 			case QVTimperativeCSPackage.MAPPING_LOOP_CS: return createMappingLoopCS();
 			case QVTimperativeCSPackage.NEW_STATEMENT_CS: return createNewStatementCS();
-			case QVTimperativeCSPackage.OUT_VARIABLE_CS: return createOutVariableCS();
 			case QVTimperativeCSPackage.PARAM_DECLARATION_CS: return createParamDeclarationCS();
 			case QVTimperativeCSPackage.QUERY_CS: return createQueryCS();
 			case QVTimperativeCSPackage.SET_STATEMENT_CS: return createSetStatementCS();
+			case QVTimperativeCSPackage.SIMPLE_PARAMETER_BINDING_CS: return createSimpleParameterBindingCS();
+			case QVTimperativeCSPackage.SIMPLE_PARAMETER_CS: return createSimpleParameterCS();
 			case QVTimperativeCSPackage.TOP_LEVEL_CS: return createTopLevelCS();
 			case QVTimperativeCSPackage.TRANSFORMATION_CS: return createTransformationCS();
 			default:
@@ -119,9 +127,31 @@ public class QVTimperativeCSFactoryImpl extends EFactoryImpl implements QVTimper
 	 * @generated
 	 */
 	@Override
+	public @NonNull AppendParameterBindingCS createAppendParameterBindingCS() {
+		AppendParameterBindingCSImpl appendParameterBindingCS = new AppendParameterBindingCSImpl();
+		return appendParameterBindingCS;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public @NonNull AppendParameterCS createAppendParameterCS() {
 		AppendParameterCSImpl appendParameterCS = new AppendParameterCSImpl();
 		return appendParameterCS;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public @NonNull BufferStatementCS createBufferStatementCS() {
+		BufferStatementCSImpl bufferStatementCS = new BufferStatementCSImpl();
+		return bufferStatementCS;
 	}
 
 	/**
@@ -163,6 +193,17 @@ public class QVTimperativeCSFactoryImpl extends EFactoryImpl implements QVTimper
 	 * @generated
 	 */
 	@Override
+	public @NonNull GuardParameterBindingCS createGuardParameterBindingCS() {
+		GuardParameterBindingCSImpl guardParameterBindingCS = new GuardParameterBindingCSImpl();
+		return guardParameterBindingCS;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public @NonNull GuardParameterCS createGuardParameterCS() {
 		GuardParameterCSImpl guardParameterCS = new GuardParameterCSImpl();
 		return guardParameterCS;
@@ -174,9 +215,9 @@ public class QVTimperativeCSFactoryImpl extends EFactoryImpl implements QVTimper
 	 * @generated
 	 */
 	@Override
-	public @NonNull MappingCS createMappingCS() {
-		MappingCSImpl mappingCS = new MappingCSImpl();
-		return mappingCS;
+	public @NonNull LoopParameterBindingCS createLoopParameterBindingCS() {
+		LoopParameterBindingCSImpl loopParameterBindingCS = new LoopParameterBindingCSImpl();
+		return loopParameterBindingCS;
 	}
 
 	/**
@@ -185,9 +226,9 @@ public class QVTimperativeCSFactoryImpl extends EFactoryImpl implements QVTimper
 	 * @generated
 	 */
 	@Override
-	public @NonNull MappingCallBindingCS createMappingCallBindingCS() {
-		MappingCallBindingCSImpl mappingCallBindingCS = new MappingCallBindingCSImpl();
-		return mappingCallBindingCS;
+	public @NonNull MappingCS createMappingCS() {
+		MappingCSImpl mappingCS = new MappingCSImpl();
+		return mappingCS;
 	}
 
 	/**
@@ -251,9 +292,9 @@ public class QVTimperativeCSFactoryImpl extends EFactoryImpl implements QVTimper
 	 * @generated
 	 */
 	@Override
-	public @NonNull OutVariableCS createOutVariableCS() {
-		OutVariableCSImpl outVariableCS = new OutVariableCSImpl();
-		return outVariableCS;
+	public @NonNull SetStatementCS createSetStatementCS() {
+		SetStatementCSImpl setStatementCS = new SetStatementCSImpl();
+		return setStatementCS;
 	}
 
 	/**
@@ -262,9 +303,20 @@ public class QVTimperativeCSFactoryImpl extends EFactoryImpl implements QVTimper
 	 * @generated
 	 */
 	@Override
-	public @NonNull SetStatementCS createSetStatementCS() {
-		SetStatementCSImpl setStatementCS = new SetStatementCSImpl();
-		return setStatementCS;
+	public @NonNull SimpleParameterBindingCS createSimpleParameterBindingCS() {
+		SimpleParameterBindingCSImpl simpleParameterBindingCS = new SimpleParameterBindingCSImpl();
+		return simpleParameterBindingCS;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public @NonNull SimpleParameterCS createSimpleParameterCS() {
+		SimpleParameterCSImpl simpleParameterCS = new SimpleParameterCSImpl();
+		return simpleParameterCS;
 	}
 
 	/**

@@ -40,6 +40,15 @@ public interface QVTimperativeCSFactory extends EFactory {
 	@NonNull AddStatementCS createAddStatementCS();
 
 	/**
+	 * Returns a new object of class '<em>Append Parameter Binding CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Append Parameter Binding CS</em>'.
+	 * @generated
+	 */
+	@NonNull AppendParameterBindingCS createAppendParameterBindingCS();
+
+	/**
 	 * Returns a new object of class '<em>Append Parameter CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -47,6 +56,15 @@ public interface QVTimperativeCSFactory extends EFactory {
 	 * @generated
 	 */
 	@NonNull AppendParameterCS createAppendParameterCS();
+
+	/**
+	 * Returns a new object of class '<em>Buffer Statement CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Buffer Statement CS</em>'.
+	 * @generated
+	 */
+	@NonNull BufferStatementCS createBufferStatementCS();
 
 	/**
 	 * Returns a new object of class '<em>Check Statement CS</em>'.
@@ -76,6 +94,15 @@ public interface QVTimperativeCSFactory extends EFactory {
 	@NonNull DirectionCS createDirectionCS();
 
 	/**
+	 * Returns a new object of class '<em>Guard Parameter Binding CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Guard Parameter Binding CS</em>'.
+	 * @generated
+	 */
+	@NonNull GuardParameterBindingCS createGuardParameterBindingCS();
+
+	/**
 	 * Returns a new object of class '<em>Guard Parameter CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -85,6 +112,15 @@ public interface QVTimperativeCSFactory extends EFactory {
 	@NonNull GuardParameterCS createGuardParameterCS();
 
 	/**
+	 * Returns a new object of class '<em>Loop Parameter Binding CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Loop Parameter Binding CS</em>'.
+	 * @generated
+	 */
+	@NonNull LoopParameterBindingCS createLoopParameterBindingCS();
+
+	/**
 	 * Returns a new object of class '<em>Mapping CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -92,15 +128,6 @@ public interface QVTimperativeCSFactory extends EFactory {
 	 * @generated
 	 */
 	@NonNull MappingCS createMappingCS();
-
-	/**
-	 * Returns a new object of class '<em>Mapping Call Binding CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Mapping Call Binding CS</em>'.
-	 * @generated
-	 */
-	@NonNull MappingCallBindingCS createMappingCallBindingCS();
 
 	/**
 	 * Returns a new object of class '<em>Mapping Call CS</em>'.
@@ -148,15 +175,6 @@ public interface QVTimperativeCSFactory extends EFactory {
 	@NonNull NewStatementCS createNewStatementCS();
 
 	/**
-	 * Returns a new object of class '<em>Out Variable CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Out Variable CS</em>'.
-	 * @generated
-	 */
-	@NonNull OutVariableCS createOutVariableCS();
-
-	/**
 	 * Returns a new object of class '<em>Set Statement CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -164,6 +182,24 @@ public interface QVTimperativeCSFactory extends EFactory {
 	 * @generated
 	 */
 	@NonNull SetStatementCS createSetStatementCS();
+
+	/**
+	 * Returns a new object of class '<em>Simple Parameter Binding CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Simple Parameter Binding CS</em>'.
+	 * @generated
+	 */
+	@NonNull SimpleParameterBindingCS createSimpleParameterBindingCS();
+
+	/**
+	 * Returns a new object of class '<em>Simple Parameter CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Simple Parameter CS</em>'.
+	 * @generated
+	 */
+	@NonNull SimpleParameterCS createSimpleParameterCS();
 
 	/**
 	 * Returns a new object of class '<em>Top Level CS</em>'.

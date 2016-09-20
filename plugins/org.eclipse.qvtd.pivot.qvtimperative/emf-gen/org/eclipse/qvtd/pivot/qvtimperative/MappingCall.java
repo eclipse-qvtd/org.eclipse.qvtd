@@ -31,6 +31,8 @@ import org.eclipse.ocl.pivot.ReferringElement;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.MappingCall#getBinding <em>Binding</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.MappingCall#isIsInfinite <em>Is Infinite</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.MappingCall#isIsInstall <em>Is Install</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.MappingCall#isIsInvoke <em>Is Invoke</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.MappingCall#getReferredMapping <em>Referred Mapping</em>}</li>
  * </ul>
  *
@@ -68,8 +70,8 @@ public interface MappingCall extends MappingStatement, ReferringElement {
 
 	/**
 	 * Returns the value of the '<em><b>Binding</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding}.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding#getMappingCall <em>Mapping Call</em>}'.
+	 * The list contents are of type {@link org.eclipse.qvtd.pivot.qvtimperative.MappingParameterBinding}.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtimperative.MappingParameterBinding#getMappingCall <em>Mapping Call</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Binding</em>' containment reference list isn't clear,
@@ -81,10 +83,10 @@ public interface MappingCall extends MappingStatement, ReferringElement {
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Binding</em>' containment reference list.
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getMappingCall_Binding()
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding#getMappingCall
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.MappingParameterBinding#getMappingCall
 	 * @generated
 	 */
-	EList<MappingCallBinding> getBinding();
+	EList<MappingParameterBinding> getBinding();
 
 	/**
 	 * Returns the value of the '<em><b>Is Infinite</b></em>' attribute.
@@ -110,5 +112,55 @@ public interface MappingCall extends MappingStatement, ReferringElement {
 	 * @generated
 	 */
 	void setIsInfinite(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Is Install</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * An infinite MappingCall requires re-invocation of the called mapping to be suppressed to avoid an infinite loop.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Is Install</em>' attribute.
+	 * @see #setIsInstall(boolean)
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getMappingCall_IsInstall()
+	 * @generated
+	 */
+	boolean isIsInstall();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtimperative.MappingCall#isIsInstall <em>Is Install</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Is Install</em>' attribute.
+	 * @see #isIsInstall()
+	 * @generated
+	 */
+	void setIsInstall(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Is Invoke</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * An infinite MappingCall requires re-invocation of the called mapping to be suppressed to avoid an infinite loop.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Is Invoke</em>' attribute.
+	 * @see #setIsInvoke(boolean)
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getMappingCall_IsInvoke()
+	 * @generated
+	 */
+	boolean isIsInvoke();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtimperative.MappingCall#isIsInvoke <em>Is Invoke</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Is Invoke</em>' attribute.
+	 * @see #isIsInvoke()
+	 * @generated
+	 */
+	void setIsInvoke(boolean value);
 
 } // MappingCall

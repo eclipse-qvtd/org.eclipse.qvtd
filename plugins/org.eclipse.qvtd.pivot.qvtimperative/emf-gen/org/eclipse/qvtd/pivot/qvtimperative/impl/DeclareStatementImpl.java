@@ -41,7 +41,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.DeclareStatementImpl#getObservedProperties <em>Observed Properties</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.DeclareStatementImpl#isIsChecked <em>Is Checked</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.DeclareStatementImpl#isIsCheck <em>Is Check</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.DeclareStatementImpl#getOwnedExpression <em>Owned Expression</em>}</li>
  * </ul>
  *
@@ -59,24 +59,24 @@ public class DeclareStatementImpl extends VariableStatementImpl implements Decla
 	protected EList<Property> observedProperties;
 
 	/**
-	 * The default value of the '{@link #isIsChecked() <em>Is Checked</em>}' attribute.
+	 * The default value of the '{@link #isIsCheck() <em>Is Check</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isIsChecked()
+	 * @see #isIsCheck()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean IS_CHECKED_EDEFAULT = false;
+	protected static final boolean IS_CHECK_EDEFAULT = false;
 
 	/**
-	 * The cached value of the '{@link #isIsChecked() <em>Is Checked</em>}' attribute.
+	 * The cached value of the '{@link #isIsCheck() <em>Is Check</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isIsChecked()
+	 * @see #isIsCheck()
 	 * @generated
 	 * @ordered
 	 */
-	protected boolean isChecked = IS_CHECKED_EDEFAULT;
+	protected boolean isCheck = IS_CHECK_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getOwnedExpression() <em>Owned Expression</em>}' containment reference.
@@ -126,8 +126,8 @@ public class DeclareStatementImpl extends VariableStatementImpl implements Decla
 	 * @generated
 	 */
 	@Override
-	public boolean isIsChecked() {
-		return isChecked;
+	public boolean isIsCheck() {
+		return isCheck;
 	}
 
 	/**
@@ -136,11 +136,11 @@ public class DeclareStatementImpl extends VariableStatementImpl implements Decla
 	 * @generated
 	 */
 	@Override
-	public void setIsChecked(boolean newIsChecked) {
-		boolean oldIsChecked = isChecked;
-		isChecked = newIsChecked;
+	public void setIsCheck(boolean newIsCheck) {
+		boolean oldIsCheck = isCheck;
+		isCheck = newIsCheck;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.DECLARE_STATEMENT__IS_CHECKED, oldIsChecked, isChecked));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.DECLARE_STATEMENT__IS_CHECK, oldIsCheck, isCheck));
 	}
 
 	/**
@@ -222,8 +222,8 @@ public class DeclareStatementImpl extends VariableStatementImpl implements Decla
 		switch (featureID) {
 			case QVTimperativePackage.DECLARE_STATEMENT__OBSERVED_PROPERTIES:
 				return getObservedProperties();
-			case QVTimperativePackage.DECLARE_STATEMENT__IS_CHECKED:
-				return isIsChecked();
+			case QVTimperativePackage.DECLARE_STATEMENT__IS_CHECK:
+				return isIsCheck();
 			case QVTimperativePackage.DECLARE_STATEMENT__OWNED_EXPRESSION:
 				return getOwnedExpression();
 		}
@@ -243,8 +243,8 @@ public class DeclareStatementImpl extends VariableStatementImpl implements Decla
 				getObservedProperties().clear();
 				getObservedProperties().addAll((Collection<? extends Property>)newValue);
 				return;
-			case QVTimperativePackage.DECLARE_STATEMENT__IS_CHECKED:
-				setIsChecked((Boolean)newValue);
+			case QVTimperativePackage.DECLARE_STATEMENT__IS_CHECK:
+				setIsCheck((Boolean)newValue);
 				return;
 			case QVTimperativePackage.DECLARE_STATEMENT__OWNED_EXPRESSION:
 				setOwnedExpression((OCLExpression)newValue);
@@ -264,8 +264,8 @@ public class DeclareStatementImpl extends VariableStatementImpl implements Decla
 			case QVTimperativePackage.DECLARE_STATEMENT__OBSERVED_PROPERTIES:
 				getObservedProperties().clear();
 				return;
-			case QVTimperativePackage.DECLARE_STATEMENT__IS_CHECKED:
-				setIsChecked(IS_CHECKED_EDEFAULT);
+			case QVTimperativePackage.DECLARE_STATEMENT__IS_CHECK:
+				setIsCheck(IS_CHECK_EDEFAULT);
 				return;
 			case QVTimperativePackage.DECLARE_STATEMENT__OWNED_EXPRESSION:
 				setOwnedExpression((OCLExpression)null);
@@ -284,8 +284,8 @@ public class DeclareStatementImpl extends VariableStatementImpl implements Decla
 		switch (featureID) {
 			case QVTimperativePackage.DECLARE_STATEMENT__OBSERVED_PROPERTIES:
 				return observedProperties != null && !observedProperties.isEmpty();
-			case QVTimperativePackage.DECLARE_STATEMENT__IS_CHECKED:
-				return isChecked != IS_CHECKED_EDEFAULT;
+			case QVTimperativePackage.DECLARE_STATEMENT__IS_CHECK:
+				return isCheck != IS_CHECK_EDEFAULT;
 			case QVTimperativePackage.DECLARE_STATEMENT__OWNED_EXPRESSION:
 				return ownedExpression != null;
 		}

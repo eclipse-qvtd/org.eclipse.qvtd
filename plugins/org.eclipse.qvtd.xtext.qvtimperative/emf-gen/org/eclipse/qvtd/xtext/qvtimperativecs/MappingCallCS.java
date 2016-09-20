@@ -24,6 +24,8 @@ import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallCS#isIsInfinite <em>Is Infinite</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallCS#isIsInstall <em>Is Install</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallCS#isIsInvoke <em>Is Invoke</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallCS#getOwnedBindings <em>Owned Bindings</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallCS#getOwnedPathName <em>Owned Path Name</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallCS#getReferredMapping <em>Referred Mapping</em>}</li>
@@ -62,6 +64,60 @@ public interface MappingCallCS extends MappingStatementCS {
 	void setIsInfinite(boolean value);
 
 	/**
+	 * Returns the value of the '<em><b>Is Install</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Is Install</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Is Install</em>' attribute.
+	 * @see #setIsInstall(boolean)
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getMappingCallCS_IsInstall()
+	 * @model default="false"
+	 * @generated
+	 */
+	boolean isIsInstall();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallCS#isIsInstall <em>Is Install</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Is Install</em>' attribute.
+	 * @see #isIsInstall()
+	 * @generated
+	 */
+	void setIsInstall(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Is Invoke</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Is Invoke</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Is Invoke</em>' attribute.
+	 * @see #setIsInvoke(boolean)
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getMappingCallCS_IsInvoke()
+	 * @model default="false"
+	 * @generated
+	 */
+	boolean isIsInvoke();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallCS#isIsInvoke <em>Is Invoke</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Is Invoke</em>' attribute.
+	 * @see #isIsInvoke()
+	 * @generated
+	 */
+	void setIsInvoke(boolean value);
+
+	/**
 	 * Returns the value of the '<em><b>Referred Mapping</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -89,8 +145,8 @@ public interface MappingCallCS extends MappingStatementCS {
 
 	/**
 	 * Returns the value of the '<em><b>Owned Bindings</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS}.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS#getOwningMappingCall <em>Owning Mapping Call</em>}'.
+	 * The list contents are of type {@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingParameterBindingCS}.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingParameterBindingCS#getOwningMappingCall <em>Owning Mapping Call</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Owned Bindings</em>' containment reference list isn't clear,
@@ -99,11 +155,11 @@ public interface MappingCallCS extends MappingStatementCS {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Owned Bindings</em>' containment reference list.
 	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getMappingCallCS_OwnedBindings()
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS#getOwningMappingCall
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.MappingParameterBindingCS#getOwningMappingCall
 	 * @model opposite="owningMappingCall" containment="true" ordered="false"
 	 * @generated
 	 */
-	EList<MappingCallBindingCS> getOwnedBindings();
+	EList<MappingParameterBindingCS> getOwnedBindings();
 
 	/**
 	 * Returns the value of the '<em><b>Owned Path Name</b></em>' containment reference.

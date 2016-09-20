@@ -50,6 +50,16 @@ public abstract class AbstractExtendingQVTimperativeVisitor<R, C>
 	}
 
 	@Override
+	public R visitAppendParameterBinding(org.eclipse.qvtd.pivot.qvtimperative.@NonNull AppendParameterBinding object) {
+		return visitMappingParameterBinding(object);
+	}
+
+	@Override
+	public R visitBufferStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull BufferStatement object) {
+		return visitConnectionVariable(object);
+	}
+
+	@Override
 	public R visitCheckStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull CheckStatement object) {
 		return visitObservableStatement(object);
 	}
@@ -70,6 +80,11 @@ public abstract class AbstractExtendingQVTimperativeVisitor<R, C>
 	}
 
 	@Override
+	public R visitGuardParameterBinding(org.eclipse.qvtd.pivot.qvtimperative.@NonNull GuardParameterBinding object) {
+		return visitMappingParameterBinding(object);
+	}
+
+	@Override
 	public R visitImperativeModel(org.eclipse.qvtd.pivot.qvtimperative.@NonNull ImperativeModel object) {
 		return visitBaseModel(object);
 	}
@@ -77,6 +92,11 @@ public abstract class AbstractExtendingQVTimperativeVisitor<R, C>
 	@Override
 	public R visitImperativeTypedModel(org.eclipse.qvtd.pivot.qvtimperative.@NonNull ImperativeTypedModel object) {
 		return visitTypedModel(object);
+	}
+
+	@Override
+	public R visitLoopParameterBinding(org.eclipse.qvtd.pivot.qvtimperative.@NonNull LoopParameterBinding object) {
+		return visitMappingParameterBinding(object);
 	}
 
 	@Override
@@ -95,11 +115,6 @@ public abstract class AbstractExtendingQVTimperativeVisitor<R, C>
 	}
 
 	@Override
-	public R visitMappingCallBinding(org.eclipse.qvtd.pivot.qvtimperative.@NonNull MappingCallBinding object) {
-		return visitElement(object);
-	}
-
-	@Override
 	public R visitMappingLoop(org.eclipse.qvtd.pivot.qvtimperative.@NonNull MappingLoop object) {
 		return visitMappingStatement(object);
 	}
@@ -107,6 +122,11 @@ public abstract class AbstractExtendingQVTimperativeVisitor<R, C>
 	@Override
 	public R visitMappingParameter(org.eclipse.qvtd.pivot.qvtimperative.@NonNull MappingParameter object) {
 		return visitVariableDeclaration(object);
+	}
+
+	@Override
+	public R visitMappingParameterBinding(org.eclipse.qvtd.pivot.qvtimperative.@NonNull MappingParameterBinding object) {
+		return visitElement(object);
 	}
 
 	@Override
@@ -125,13 +145,18 @@ public abstract class AbstractExtendingQVTimperativeVisitor<R, C>
 	}
 
 	@Override
-	public R visitOutConnectionVariable(org.eclipse.qvtd.pivot.qvtimperative.@NonNull OutConnectionVariable object) {
-		return visitConnectionVariable(object);
+	public R visitSetStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull SetStatement object) {
+		return visitObservableStatement(object);
 	}
 
 	@Override
-	public R visitSetStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull SetStatement object) {
-		return visitObservableStatement(object);
+	public R visitSimpleParameter(org.eclipse.qvtd.pivot.qvtimperative.@NonNull SimpleParameter object) {
+		return visitMappingParameter(object);
+	}
+
+	@Override
+	public R visitSimpleParameterBinding(org.eclipse.qvtd.pivot.qvtimperative.@NonNull SimpleParameterBinding object) {
+		return visitMappingParameterBinding(object);
 	}
 
 	@Override

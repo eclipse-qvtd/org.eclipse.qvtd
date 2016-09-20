@@ -19,25 +19,30 @@ import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.AppendParameter;
+import org.eclipse.qvtd.pivot.qvtimperative.AppendParameterBinding;
+import org.eclipse.qvtd.pivot.qvtimperative.BufferStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.CheckStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
+import org.eclipse.qvtd.pivot.qvtimperative.GuardParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
+import org.eclipse.qvtd.pivot.qvtimperative.LoopParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
-import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingParameter;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ObservableStatement;
-import org.eclipse.qvtd.pivot.qvtimperative.OutConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.SimpleParameter;
+import org.eclipse.qvtd.pivot.qvtimperative.SimpleParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 import org.eclipse.qvtd.pivot.qvtimperative.VariableStatement;
 
@@ -61,6 +66,20 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * @generated
 	 */
 	private EClass appendParameterEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass appendParameterBindingEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass bufferStatementEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -95,6 +114,13 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass guardParameterBindingEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass imperativeModelEClass = null;
 
 	/**
@@ -103,6 +129,13 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * @generated
 	 */
 	private EClass imperativeTypedModelEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass loopParameterBindingEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -130,13 +163,6 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass mappingCallBindingEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EClass mappingLoopEClass = null;
 
 	/**
@@ -145,6 +171,13 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * @generated
 	 */
 	private EClass mappingParameterEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass mappingParameterBindingEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -172,14 +205,21 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass outConnectionVariableEClass = null;
+	private EClass setStatementEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass setStatementEClass = null;
+	private EClass simpleParameterEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass simpleParameterBindingEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -316,6 +356,46 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * @generated
 	 */
 	@Override
+	public EClass getAppendParameterBinding() {
+		return appendParameterBindingEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getAppendParameterBinding_Value() {
+		return (EReference)appendParameterBindingEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getBufferStatement() {
+		return bufferStatementEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getBufferStatement_OwnedExpression() {
+		return (EReference)bufferStatementEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getCheckStatement() {
 		return checkStatementEClass;
 	}
@@ -356,7 +436,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * @generated
 	 */
 	@Override
-	public EAttribute getDeclareStatement_IsChecked() {
+	public EAttribute getDeclareStatement_IsCheck() {
 		return (EAttribute)declareStatementEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -388,6 +468,36 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	@Override
 	public EReference getGuardParameter_ReferredTypedModel() {
 		return (EReference)guardParameterEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getGuardParameterBinding() {
+		return guardParameterBindingEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getGuardParameterBinding_Value() {
+		return (EReference)guardParameterBindingEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getGuardParameterBinding_IsCheck() {
+		return (EAttribute)guardParameterBindingEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -428,6 +538,36 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	@Override
 	public EAttribute getImperativeTypedModel_IsEnforced() {
 		return (EAttribute)imperativeTypedModelEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getLoopParameterBinding() {
+		return loopParameterBindingEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getLoopParameterBinding_Value() {
+		return (EReference)loopParameterBindingEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getLoopParameterBinding_IsCheck() {
+		return (EAttribute)loopParameterBindingEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -497,7 +637,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 */
 	@Override
 	public EReference getMappingCall_ReferredMapping() {
-		return (EReference)mappingCallEClass.getEStructuralFeatures().get(2);
+		return (EReference)mappingCallEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -526,8 +666,8 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * @generated
 	 */
 	@Override
-	public EClass getMappingCallBinding() {
-		return mappingCallBindingEClass;
+	public EAttribute getMappingCall_IsInstall() {
+		return (EAttribute)mappingCallEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -536,28 +676,8 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * @generated
 	 */
 	@Override
-	public EReference getMappingCallBinding_MappingCall() {
-		return (EReference)mappingCallBindingEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getMappingCallBinding_BoundVariable() {
-		return (EReference)mappingCallBindingEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getMappingCallBinding_Value() {
-		return (EReference)mappingCallBindingEClass.getEStructuralFeatures().get(2);
+	public EAttribute getMappingCall_IsInvoke() {
+		return (EAttribute)mappingCallEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -608,6 +728,36 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	@Override
 	public EClass getMappingParameter() {
 		return mappingParameterEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getMappingParameterBinding() {
+		return mappingParameterBindingEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getMappingParameterBinding_MappingCall() {
+		return (EReference)mappingParameterBindingEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getMappingParameterBinding_BoundVariable() {
+		return (EReference)mappingParameterBindingEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -676,26 +826,6 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * @generated
 	 */
 	@Override
-	public EClass getOutConnectionVariable() {
-		return outConnectionVariableEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getOutConnectionVariable_OwnedExpression() {
-		return (EReference)outConnectionVariableEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EClass getSetStatement() {
 		return setStatementEClass;
 	}
@@ -756,6 +886,56 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * @generated
 	 */
 	@Override
+	public EClass getSimpleParameter() {
+		return simpleParameterEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getSimpleParameter_ReferredTypedModel() {
+		return (EReference)simpleParameterEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getSimpleParameterBinding() {
+		return simpleParameterBindingEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getSimpleParameterBinding_Value() {
+		return (EReference)simpleParameterBindingEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getSimpleParameterBinding_IsCheck() {
+		return (EAttribute)simpleParameterBindingEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getStatement() {
 		return statementEClass;
 	}
@@ -806,23 +986,37 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 
 		appendParameterEClass = createEClass(APPEND_PARAMETER);
 
+		appendParameterBindingEClass = createEClass(APPEND_PARAMETER_BINDING);
+		createEReference(appendParameterBindingEClass, APPEND_PARAMETER_BINDING__VALUE);
+
+		bufferStatementEClass = createEClass(BUFFER_STATEMENT);
+		createEReference(bufferStatementEClass, BUFFER_STATEMENT__OWNED_EXPRESSION);
+
 		checkStatementEClass = createEClass(CHECK_STATEMENT);
 		createEReference(checkStatementEClass, CHECK_STATEMENT__OWNED_EXPRESSION);
 
 		connectionVariableEClass = createEClass(CONNECTION_VARIABLE);
 
 		declareStatementEClass = createEClass(DECLARE_STATEMENT);
-		createEAttribute(declareStatementEClass, DECLARE_STATEMENT__IS_CHECKED);
+		createEAttribute(declareStatementEClass, DECLARE_STATEMENT__IS_CHECK);
 		createEReference(declareStatementEClass, DECLARE_STATEMENT__OWNED_EXPRESSION);
 
 		guardParameterEClass = createEClass(GUARD_PARAMETER);
 		createEReference(guardParameterEClass, GUARD_PARAMETER__REFERRED_TYPED_MODEL);
+
+		guardParameterBindingEClass = createEClass(GUARD_PARAMETER_BINDING);
+		createEReference(guardParameterBindingEClass, GUARD_PARAMETER_BINDING__VALUE);
+		createEAttribute(guardParameterBindingEClass, GUARD_PARAMETER_BINDING__IS_CHECK);
 
 		imperativeModelEClass = createEClass(IMPERATIVE_MODEL);
 
 		imperativeTypedModelEClass = createEClass(IMPERATIVE_TYPED_MODEL);
 		createEAttribute(imperativeTypedModelEClass, IMPERATIVE_TYPED_MODEL__IS_CHECKED);
 		createEAttribute(imperativeTypedModelEClass, IMPERATIVE_TYPED_MODEL__IS_ENFORCED);
+
+		loopParameterBindingEClass = createEClass(LOOP_PARAMETER_BINDING);
+		createEReference(loopParameterBindingEClass, LOOP_PARAMETER_BINDING__VALUE);
+		createEAttribute(loopParameterBindingEClass, LOOP_PARAMETER_BINDING__IS_CHECK);
 
 		loopVariableEClass = createEClass(LOOP_VARIABLE);
 		createEReference(loopVariableEClass, LOOP_VARIABLE__OWNING_MAPPING_LOOP);
@@ -834,12 +1028,9 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		mappingCallEClass = createEClass(MAPPING_CALL);
 		createEReference(mappingCallEClass, MAPPING_CALL__BINDING);
 		createEAttribute(mappingCallEClass, MAPPING_CALL__IS_INFINITE);
+		createEAttribute(mappingCallEClass, MAPPING_CALL__IS_INSTALL);
+		createEAttribute(mappingCallEClass, MAPPING_CALL__IS_INVOKE);
 		createEReference(mappingCallEClass, MAPPING_CALL__REFERRED_MAPPING);
-
-		mappingCallBindingEClass = createEClass(MAPPING_CALL_BINDING);
-		createEReference(mappingCallBindingEClass, MAPPING_CALL_BINDING__BOUND_VARIABLE);
-		createEReference(mappingCallBindingEClass, MAPPING_CALL_BINDING__MAPPING_CALL);
-		createEReference(mappingCallBindingEClass, MAPPING_CALL_BINDING__VALUE);
 
 		mappingLoopEClass = createEClass(MAPPING_LOOP);
 		createEReference(mappingLoopEClass, MAPPING_LOOP__OWNED_ITERATORS);
@@ -847,6 +1038,10 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		createEReference(mappingLoopEClass, MAPPING_LOOP__OWNED_EXPRESSION);
 
 		mappingParameterEClass = createEClass(MAPPING_PARAMETER);
+
+		mappingParameterBindingEClass = createEClass(MAPPING_PARAMETER_BINDING);
+		createEReference(mappingParameterBindingEClass, MAPPING_PARAMETER_BINDING__MAPPING_CALL);
+		createEReference(mappingParameterBindingEClass, MAPPING_PARAMETER_BINDING__BOUND_VARIABLE);
 
 		mappingStatementEClass = createEClass(MAPPING_STATEMENT);
 
@@ -857,15 +1052,19 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		observableStatementEClass = createEClass(OBSERVABLE_STATEMENT);
 		createEReference(observableStatementEClass, OBSERVABLE_STATEMENT__OBSERVED_PROPERTIES);
 
-		outConnectionVariableEClass = createEClass(OUT_CONNECTION_VARIABLE);
-		createEReference(outConnectionVariableEClass, OUT_CONNECTION_VARIABLE__OWNED_EXPRESSION);
-
 		setStatementEClass = createEClass(SET_STATEMENT);
 		createEReference(setStatementEClass, SET_STATEMENT__TARGET_VARIABLE);
 		createEReference(setStatementEClass, SET_STATEMENT__TARGET_PROPERTY);
 		createEAttribute(setStatementEClass, SET_STATEMENT__IS_OPPOSITE);
 		createEAttribute(setStatementEClass, SET_STATEMENT__IS_NOTIFY);
 		createEReference(setStatementEClass, SET_STATEMENT__OWNED_EXPRESSION);
+
+		simpleParameterEClass = createEClass(SIMPLE_PARAMETER);
+		createEReference(simpleParameterEClass, SIMPLE_PARAMETER__REFERRED_TYPED_MODEL);
+
+		simpleParameterBindingEClass = createEClass(SIMPLE_PARAMETER_BINDING);
+		createEReference(simpleParameterBindingEClass, SIMPLE_PARAMETER_BINDING__VALUE);
+		createEAttribute(simpleParameterBindingEClass, SIMPLE_PARAMETER_BINDING__IS_CHECK);
 
 		statementEClass = createEClass(STATEMENT);
 
@@ -908,29 +1107,34 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		addStatementEClass.getESuperTypes().add(this.getObservableStatement());
 		appendParameterEClass.getESuperTypes().add(this.getConnectionVariable());
 		appendParameterEClass.getESuperTypes().add(this.getMappingParameter());
+		appendParameterBindingEClass.getESuperTypes().add(this.getMappingParameterBinding());
+		bufferStatementEClass.getESuperTypes().add(this.getConnectionVariable());
+		bufferStatementEClass.getESuperTypes().add(this.getVariableStatement());
+		bufferStatementEClass.getESuperTypes().add(this.getObservableStatement());
 		checkStatementEClass.getESuperTypes().add(this.getObservableStatement());
 		connectionVariableEClass.getESuperTypes().add(thePivotPackage.getVariableDeclaration());
 		declareStatementEClass.getESuperTypes().add(this.getVariableStatement());
 		declareStatementEClass.getESuperTypes().add(this.getObservableStatement());
 		guardParameterEClass.getESuperTypes().add(this.getMappingParameter());
+		guardParameterBindingEClass.getESuperTypes().add(this.getMappingParameterBinding());
 		imperativeModelEClass.getESuperTypes().add(theQVTbasePackage.getBaseModel());
 		imperativeTypedModelEClass.getESuperTypes().add(theQVTbasePackage.getTypedModel());
+		loopParameterBindingEClass.getESuperTypes().add(this.getMappingParameterBinding());
 		loopVariableEClass.getESuperTypes().add(thePivotPackage.getVariableDeclaration());
 		mappingEClass.getESuperTypes().add(theQVTbasePackage.getRule());
 		mappingCallEClass.getESuperTypes().add(this.getMappingStatement());
 		mappingCallEClass.getESuperTypes().add(thePivotPackage.getReferringElement());
-		mappingCallBindingEClass.getESuperTypes().add(thePivotPackage.getElement());
 		mappingLoopEClass.getESuperTypes().add(this.getMappingStatement());
 		mappingLoopEClass.getESuperTypes().add(this.getObservableStatement());
 		mappingParameterEClass.getESuperTypes().add(thePivotPackage.getVariableDeclaration());
+		mappingParameterBindingEClass.getESuperTypes().add(thePivotPackage.getElement());
 		mappingStatementEClass.getESuperTypes().add(this.getStatement());
 		newStatementEClass.getESuperTypes().add(this.getVariableStatement());
 		newStatementEClass.getESuperTypes().add(this.getObservableStatement());
 		observableStatementEClass.getESuperTypes().add(this.getStatement());
-		outConnectionVariableEClass.getESuperTypes().add(this.getConnectionVariable());
-		outConnectionVariableEClass.getESuperTypes().add(this.getVariableStatement());
-		outConnectionVariableEClass.getESuperTypes().add(this.getObservableStatement());
 		setStatementEClass.getESuperTypes().add(this.getObservableStatement());
+		simpleParameterEClass.getESuperTypes().add(this.getMappingParameter());
+		simpleParameterBindingEClass.getESuperTypes().add(this.getMappingParameterBinding());
 		statementEClass.getESuperTypes().add(thePivotPackage.getNamedElement());
 		variableStatementEClass.getESuperTypes().add(thePivotPackage.getVariableDeclaration());
 		variableStatementEClass.getESuperTypes().add(this.getStatement());
@@ -943,23 +1147,37 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 
 		initEClass(appendParameterEClass, AppendParameter.class, "AppendParameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
+		initEClass(appendParameterBindingEClass, AppendParameterBinding.class, "AppendParameterBinding", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getAppendParameterBinding_Value(), this.getConnectionVariable(), null, "value", null, 1, 1, AppendParameterBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(bufferStatementEClass, BufferStatement.class, "BufferStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getBufferStatement_OwnedExpression(), thePivotPackage.getOCLExpression(), null, "ownedExpression", null, 0, 1, BufferStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		initEClass(checkStatementEClass, CheckStatement.class, "CheckStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCheckStatement_OwnedExpression(), thePivotPackage.getOCLExpression(), null, "ownedExpression", null, 1, 1, CheckStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(connectionVariableEClass, ConnectionVariable.class, "ConnectionVariable", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(declareStatementEClass, DeclareStatement.class, "DeclareStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getDeclareStatement_IsChecked(), ecorePackage.getEBoolean(), "isChecked", "false", 0, 1, DeclareStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDeclareStatement_IsCheck(), ecorePackage.getEBoolean(), "isCheck", "false", 0, 1, DeclareStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDeclareStatement_OwnedExpression(), thePivotPackage.getOCLExpression(), null, "ownedExpression", null, 1, 1, DeclareStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(guardParameterEClass, GuardParameter.class, "GuardParameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getGuardParameter_ReferredTypedModel(), this.getImperativeTypedModel(), null, "referredTypedModel", null, 1, 1, GuardParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(guardParameterBindingEClass, GuardParameterBinding.class, "GuardParameterBinding", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getGuardParameterBinding_Value(), this.getConnectionVariable(), null, "value", null, 1, 1, GuardParameterBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getGuardParameterBinding_IsCheck(), ecorePackage.getEBoolean(), "isCheck", "false", 0, 1, GuardParameterBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(imperativeModelEClass, ImperativeModel.class, "ImperativeModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(imperativeTypedModelEClass, ImperativeTypedModel.class, "ImperativeTypedModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getImperativeTypedModel_IsChecked(), ecorePackage.getEBoolean(), "isChecked", "false", 0, 1, ImperativeTypedModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getImperativeTypedModel_IsEnforced(), ecorePackage.getEBoolean(), "isEnforced", "false", 0, 1, ImperativeTypedModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(loopParameterBindingEClass, LoopParameterBinding.class, "LoopParameterBinding", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getLoopParameterBinding_Value(), this.getLoopVariable(), null, "value", null, 1, 1, LoopParameterBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getLoopParameterBinding_IsCheck(), ecorePackage.getEBoolean(), "isCheck", "false", 0, 1, LoopParameterBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(loopVariableEClass, LoopVariable.class, "LoopVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getLoopVariable_OwningMappingLoop(), this.getMappingLoop(), this.getMappingLoop_OwnedIterators(), "owningMappingLoop", null, 1, 1, LoopVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -969,14 +1187,11 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		initEReference(getMapping_OwnedStatements(), this.getStatement(), null, "ownedStatements", null, 0, -1, Mapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(mappingCallEClass, MappingCall.class, "MappingCall", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getMappingCall_Binding(), this.getMappingCallBinding(), this.getMappingCallBinding_MappingCall(), "binding", null, 0, -1, MappingCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMappingCall_Binding(), this.getMappingParameterBinding(), this.getMappingParameterBinding_MappingCall(), "binding", null, 0, -1, MappingCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMappingCall_IsInfinite(), thePivotPackage.getBoolean(), "isInfinite", "false", 0, 1, MappingCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMappingCall_IsInstall(), thePivotPackage.getBoolean(), "isInstall", "false", 0, 1, MappingCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMappingCall_IsInvoke(), thePivotPackage.getBoolean(), "isInvoke", "false", 0, 1, MappingCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMappingCall_ReferredMapping(), this.getMapping(), null, "referredMapping", null, 1, 1, MappingCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(mappingCallBindingEClass, MappingCallBinding.class, "MappingCallBinding", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getMappingCallBinding_BoundVariable(), thePivotPackage.getVariableDeclaration(), null, "boundVariable", null, 1, 1, MappingCallBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getMappingCallBinding_MappingCall(), this.getMappingCall(), this.getMappingCall_Binding(), "mappingCall", null, 0, 1, MappingCallBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getMappingCallBinding_Value(), thePivotPackage.getOCLExpression(), null, "value", null, 1, 1, MappingCallBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(mappingLoopEClass, MappingLoop.class, "MappingLoop", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getMappingLoop_OwnedIterators(), this.getLoopVariable(), this.getLoopVariable_OwningMappingLoop(), "ownedIterators", null, 0, -1, MappingLoop.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -984,6 +1199,10 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		initEReference(getMappingLoop_OwnedExpression(), thePivotPackage.getOCLExpression(), null, "ownedExpression", null, 1, 1, MappingLoop.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(mappingParameterEClass, MappingParameter.class, "MappingParameter", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(mappingParameterBindingEClass, MappingParameterBinding.class, "MappingParameterBinding", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getMappingParameterBinding_MappingCall(), this.getMappingCall(), this.getMappingCall_Binding(), "mappingCall", null, 0, 1, MappingParameterBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMappingParameterBinding_BoundVariable(), this.getMappingParameter(), null, "boundVariable", null, 1, 1, MappingParameterBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(mappingStatementEClass, MappingStatement.class, "MappingStatement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -994,15 +1213,19 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		initEClass(observableStatementEClass, ObservableStatement.class, "ObservableStatement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getObservableStatement_ObservedProperties(), thePivotPackage.getProperty(), null, "observedProperties", null, 0, -1, ObservableStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
-		initEClass(outConnectionVariableEClass, OutConnectionVariable.class, "OutConnectionVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getOutConnectionVariable_OwnedExpression(), thePivotPackage.getOCLExpression(), null, "ownedExpression", null, 0, 1, OutConnectionVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
 		initEClass(setStatementEClass, SetStatement.class, "SetStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSetStatement_TargetVariable(), thePivotPackage.getVariableDeclaration(), null, "targetVariable", null, 1, 1, SetStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSetStatement_TargetProperty(), thePivotPackage.getProperty(), null, "targetProperty", null, 1, 1, SetStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getSetStatement_IsOpposite(), ecorePackage.getEBoolean(), "isOpposite", null, 0, 1, SetStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getSetStatement_IsNotify(), ecorePackage.getEBoolean(), "isNotify", null, 0, 1, SetStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSetStatement_OwnedExpression(), thePivotPackage.getOCLExpression(), null, "ownedExpression", null, 1, 1, SetStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(simpleParameterEClass, SimpleParameter.class, "SimpleParameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getSimpleParameter_ReferredTypedModel(), this.getImperativeTypedModel(), null, "referredTypedModel", null, 1, 1, SimpleParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(simpleParameterBindingEClass, SimpleParameterBinding.class, "SimpleParameterBinding", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getSimpleParameterBinding_Value(), thePivotPackage.getOCLExpression(), null, "value", null, 1, 1, SimpleParameterBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSimpleParameterBinding_IsCheck(), ecorePackage.getEBoolean(), "isCheck", "false", 0, 1, SimpleParameterBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(statementEClass, Statement.class, "Statement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

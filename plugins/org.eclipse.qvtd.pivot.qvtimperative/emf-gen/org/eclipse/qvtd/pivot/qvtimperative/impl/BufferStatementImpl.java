@@ -27,8 +27,8 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.util.Visitor;
+import org.eclipse.qvtd.pivot.qvtimperative.BufferStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ObservableStatement;
-import org.eclipse.qvtd.pivot.qvtimperative.OutConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 import org.eclipse.qvtd.pivot.qvtimperative.VariableStatement;
@@ -36,19 +36,19 @@ import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Out Connection Variable</b></em>'.
+ * An implementation of the model object '<em><b>Buffer Statement</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.OutConnectionVariableImpl#getObservedProperties <em>Observed Properties</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.OutConnectionVariableImpl#getOwnedExpression <em>Owned Expression</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.BufferStatementImpl#getObservedProperties <em>Observed Properties</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.BufferStatementImpl#getOwnedExpression <em>Owned Expression</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class OutConnectionVariableImpl extends ConnectionVariableImpl implements OutConnectionVariable {
+public class BufferStatementImpl extends ConnectionVariableImpl implements BufferStatement {
 	/**
 	 * The cached value of the '{@link #getObservedProperties() <em>Observed Properties</em>}' reference list.
 	 * <!-- begin-user-doc -->
@@ -58,6 +58,7 @@ public class OutConnectionVariableImpl extends ConnectionVariableImpl implements
 	 * @ordered
 	 */
 	protected EList<Property> observedProperties;
+
 	/**
 	 * The cached value of the '{@link #getOwnedExpression() <em>Owned Expression</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -67,12 +68,13 @@ public class OutConnectionVariableImpl extends ConnectionVariableImpl implements
 	 * @ordered
 	 */
 	protected OCLExpression ownedExpression;
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected OutConnectionVariableImpl() {
+	protected BufferStatementImpl() {
 		super();
 	}
 
@@ -83,7 +85,7 @@ public class OutConnectionVariableImpl extends ConnectionVariableImpl implements
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return QVTimperativePackage.Literals.OUT_CONNECTION_VARIABLE;
+		return QVTimperativePackage.Literals.BUFFER_STATEMENT;
 	}
 
 	/**
@@ -94,7 +96,7 @@ public class OutConnectionVariableImpl extends ConnectionVariableImpl implements
 	@Override
 	public EList<Property> getObservedProperties() {
 		if (observedProperties == null) {
-			observedProperties = new EObjectResolvingEList<Property>(Property.class, this, QVTimperativePackage.OUT_CONNECTION_VARIABLE__OBSERVED_PROPERTIES);
+			observedProperties = new EObjectResolvingEList<Property>(Property.class, this, QVTimperativePackage.BUFFER_STATEMENT__OBSERVED_PROPERTIES);
 		}
 		return observedProperties;
 	}
@@ -118,7 +120,7 @@ public class OutConnectionVariableImpl extends ConnectionVariableImpl implements
 		OCLExpression oldOwnedExpression = ownedExpression;
 		ownedExpression = newOwnedExpression;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTimperativePackage.OUT_CONNECTION_VARIABLE__OWNED_EXPRESSION, oldOwnedExpression, newOwnedExpression);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTimperativePackage.BUFFER_STATEMENT__OWNED_EXPRESSION, oldOwnedExpression, newOwnedExpression);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -134,14 +136,14 @@ public class OutConnectionVariableImpl extends ConnectionVariableImpl implements
 		if (newOwnedExpression != ownedExpression) {
 			NotificationChain msgs = null;
 			if (ownedExpression != null)
-				msgs = ((InternalEObject)ownedExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTimperativePackage.OUT_CONNECTION_VARIABLE__OWNED_EXPRESSION, null, msgs);
+				msgs = ((InternalEObject)ownedExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTimperativePackage.BUFFER_STATEMENT__OWNED_EXPRESSION, null, msgs);
 			if (newOwnedExpression != null)
-				msgs = ((InternalEObject)newOwnedExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTimperativePackage.OUT_CONNECTION_VARIABLE__OWNED_EXPRESSION, null, msgs);
+				msgs = ((InternalEObject)newOwnedExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTimperativePackage.BUFFER_STATEMENT__OWNED_EXPRESSION, null, msgs);
 			msgs = basicSetOwnedExpression(newOwnedExpression, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.OUT_CONNECTION_VARIABLE__OWNED_EXPRESSION, newOwnedExpression, newOwnedExpression));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.BUFFER_STATEMENT__OWNED_EXPRESSION, newOwnedExpression, newOwnedExpression));
 	}
 
 	/**
@@ -152,7 +154,7 @@ public class OutConnectionVariableImpl extends ConnectionVariableImpl implements
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTimperativePackage.OUT_CONNECTION_VARIABLE__OWNED_EXPRESSION:
+			case QVTimperativePackage.BUFFER_STATEMENT__OWNED_EXPRESSION:
 				return basicSetOwnedExpression(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -166,9 +168,9 @@ public class OutConnectionVariableImpl extends ConnectionVariableImpl implements
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTimperativePackage.OUT_CONNECTION_VARIABLE__OBSERVED_PROPERTIES:
+			case QVTimperativePackage.BUFFER_STATEMENT__OBSERVED_PROPERTIES:
 				return getObservedProperties();
-			case QVTimperativePackage.OUT_CONNECTION_VARIABLE__OWNED_EXPRESSION:
+			case QVTimperativePackage.BUFFER_STATEMENT__OWNED_EXPRESSION:
 				return getOwnedExpression();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -183,11 +185,11 @@ public class OutConnectionVariableImpl extends ConnectionVariableImpl implements
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTimperativePackage.OUT_CONNECTION_VARIABLE__OBSERVED_PROPERTIES:
+			case QVTimperativePackage.BUFFER_STATEMENT__OBSERVED_PROPERTIES:
 				getObservedProperties().clear();
 				getObservedProperties().addAll((Collection<? extends Property>)newValue);
 				return;
-			case QVTimperativePackage.OUT_CONNECTION_VARIABLE__OWNED_EXPRESSION:
+			case QVTimperativePackage.BUFFER_STATEMENT__OWNED_EXPRESSION:
 				setOwnedExpression((OCLExpression)newValue);
 				return;
 		}
@@ -202,10 +204,10 @@ public class OutConnectionVariableImpl extends ConnectionVariableImpl implements
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTimperativePackage.OUT_CONNECTION_VARIABLE__OBSERVED_PROPERTIES:
+			case QVTimperativePackage.BUFFER_STATEMENT__OBSERVED_PROPERTIES:
 				getObservedProperties().clear();
 				return;
-			case QVTimperativePackage.OUT_CONNECTION_VARIABLE__OWNED_EXPRESSION:
+			case QVTimperativePackage.BUFFER_STATEMENT__OWNED_EXPRESSION:
 				setOwnedExpression((OCLExpression)null);
 				return;
 		}
@@ -220,9 +222,9 @@ public class OutConnectionVariableImpl extends ConnectionVariableImpl implements
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTimperativePackage.OUT_CONNECTION_VARIABLE__OBSERVED_PROPERTIES:
+			case QVTimperativePackage.BUFFER_STATEMENT__OBSERVED_PROPERTIES:
 				return observedProperties != null && !observedProperties.isEmpty();
-			case QVTimperativePackage.OUT_CONNECTION_VARIABLE__OWNED_EXPRESSION:
+			case QVTimperativePackage.BUFFER_STATEMENT__OWNED_EXPRESSION:
 				return ownedExpression != null;
 		}
 		return super.eIsSet(featureID);
@@ -247,7 +249,7 @@ public class OutConnectionVariableImpl extends ConnectionVariableImpl implements
 		}
 		if (baseClass == ObservableStatement.class) {
 			switch (derivedFeatureID) {
-				case QVTimperativePackage.OUT_CONNECTION_VARIABLE__OBSERVED_PROPERTIES: return QVTimperativePackage.OBSERVABLE_STATEMENT__OBSERVED_PROPERTIES;
+				case QVTimperativePackage.BUFFER_STATEMENT__OBSERVED_PROPERTIES: return QVTimperativePackage.OBSERVABLE_STATEMENT__OBSERVED_PROPERTIES;
 				default: return -1;
 			}
 		}
@@ -273,7 +275,7 @@ public class OutConnectionVariableImpl extends ConnectionVariableImpl implements
 		}
 		if (baseClass == ObservableStatement.class) {
 			switch (baseFeatureID) {
-				case QVTimperativePackage.OBSERVABLE_STATEMENT__OBSERVED_PROPERTIES: return QVTimperativePackage.OUT_CONNECTION_VARIABLE__OBSERVED_PROPERTIES;
+				case QVTimperativePackage.OBSERVABLE_STATEMENT__OBSERVED_PROPERTIES: return QVTimperativePackage.BUFFER_STATEMENT__OBSERVED_PROPERTIES;
 				default: return -1;
 			}
 		}
@@ -287,7 +289,7 @@ public class OutConnectionVariableImpl extends ConnectionVariableImpl implements
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTimperativeVisitor<?>)visitor).visitOutConnectionVariable(this);
+		return (R) ((QVTimperativeVisitor<?>)visitor).visitBufferStatement(this);
 	}
 
-} //OutConnectionVariableImpl
+} //BufferStatementImpl

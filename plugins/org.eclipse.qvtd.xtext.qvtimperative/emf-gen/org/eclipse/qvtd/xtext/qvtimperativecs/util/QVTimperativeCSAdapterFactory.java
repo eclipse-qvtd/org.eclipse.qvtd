@@ -94,8 +94,16 @@ public class QVTimperativeCSAdapterFactory extends AdapterFactoryImpl {
 				return createAddStatementCSAdapter();
 			}
 			@Override
+			public Adapter caseAppendParameterBindingCS(AppendParameterBindingCS object) {
+				return createAppendParameterBindingCSAdapter();
+			}
+			@Override
 			public Adapter caseAppendParameterCS(AppendParameterCS object) {
 				return createAppendParameterCSAdapter();
+			}
+			@Override
+			public Adapter caseBufferStatementCS(BufferStatementCS object) {
+				return createBufferStatementCSAdapter();
 			}
 			@Override
 			public Adapter caseCheckStatementCS(CheckStatementCS object) {
@@ -110,16 +118,20 @@ public class QVTimperativeCSAdapterFactory extends AdapterFactoryImpl {
 				return createDirectionCSAdapter();
 			}
 			@Override
+			public Adapter caseGuardParameterBindingCS(GuardParameterBindingCS object) {
+				return createGuardParameterBindingCSAdapter();
+			}
+			@Override
 			public Adapter caseGuardParameterCS(GuardParameterCS object) {
 				return createGuardParameterCSAdapter();
 			}
 			@Override
-			public Adapter caseMappingCS(MappingCS object) {
-				return createMappingCSAdapter();
+			public Adapter caseLoopParameterBindingCS(LoopParameterBindingCS object) {
+				return createLoopParameterBindingCSAdapter();
 			}
 			@Override
-			public Adapter caseMappingCallBindingCS(MappingCallBindingCS object) {
-				return createMappingCallBindingCSAdapter();
+			public Adapter caseMappingCS(MappingCS object) {
+				return createMappingCSAdapter();
 			}
 			@Override
 			public Adapter caseMappingCallCS(MappingCallCS object) {
@@ -134,6 +146,10 @@ public class QVTimperativeCSAdapterFactory extends AdapterFactoryImpl {
 				return createMappingParameterCSAdapter();
 			}
 			@Override
+			public Adapter caseMappingParameterBindingCS(MappingParameterBindingCS object) {
+				return createMappingParameterBindingCSAdapter();
+			}
+			@Override
 			public Adapter caseMappingStatementCS(MappingStatementCS object) {
 				return createMappingStatementCSAdapter();
 			}
@@ -146,10 +162,6 @@ public class QVTimperativeCSAdapterFactory extends AdapterFactoryImpl {
 				return createObservableStatementCSAdapter();
 			}
 			@Override
-			public Adapter caseOutVariableCS(OutVariableCS object) {
-				return createOutVariableCSAdapter();
-			}
-			@Override
 			public Adapter caseParamDeclarationCS(ParamDeclarationCS object) {
 				return createParamDeclarationCSAdapter();
 			}
@@ -160,6 +172,14 @@ public class QVTimperativeCSAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseSetStatementCS(SetStatementCS object) {
 				return createSetStatementCSAdapter();
+			}
+			@Override
+			public Adapter caseSimpleParameterBindingCS(SimpleParameterBindingCS object) {
+				return createSimpleParameterBindingCSAdapter();
+			}
+			@Override
+			public Adapter caseSimpleParameterCS(SimpleParameterCS object) {
+				return createSimpleParameterCSAdapter();
 			}
 			@Override
 			public Adapter caseStatementCS(StatementCS object) {
@@ -194,6 +214,10 @@ public class QVTimperativeCSAdapterFactory extends AdapterFactoryImpl {
 				return createModelElementCSAdapter();
 			}
 			@Override
+			public Adapter caseExpCS(ExpCS object) {
+				return createExpCSAdapter();
+			}
+			@Override
 			public Adapter caseNameable(Nameable object) {
 				return createNameableAdapter();
 			}
@@ -204,10 +228,6 @@ public class QVTimperativeCSAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseTypedElementCS(TypedElementCS object) {
 				return createTypedElementCSAdapter();
-			}
-			@Override
-			public Adapter caseExpCS(ExpCS object) {
-				return createExpCSAdapter();
 			}
 			@Override
 			public Adapter casePackageOwnerCS(PackageOwnerCS object) {
@@ -272,6 +292,20 @@ public class QVTimperativeCSAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.AppendParameterBindingCS <em>Append Parameter Binding CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.AppendParameterBindingCS
+	 * @generated
+	 */
+	public Adapter createAppendParameterBindingCSAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.AppendParameterCS <em>Append Parameter CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -282,6 +316,20 @@ public class QVTimperativeCSAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createAppendParameterCSAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.BufferStatementCS <em>Buffer Statement CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.BufferStatementCS
+	 * @generated
+	 */
+	public Adapter createBufferStatementCSAdapter() {
 		return null;
 	}
 
@@ -328,6 +376,20 @@ public class QVTimperativeCSAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.GuardParameterBindingCS <em>Guard Parameter Binding CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.GuardParameterBindingCS
+	 * @generated
+	 */
+	public Adapter createGuardParameterBindingCSAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.GuardParameterCS <em>Guard Parameter CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -342,6 +404,20 @@ public class QVTimperativeCSAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.LoopParameterBindingCS <em>Loop Parameter Binding CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.LoopParameterBindingCS
+	 * @generated
+	 */
+	public Adapter createLoopParameterBindingCSAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS <em>Mapping CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -352,20 +428,6 @@ public class QVTimperativeCSAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createMappingCSAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS <em>Mapping Call Binding CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS
-	 * @generated
-	 */
-	public Adapter createMappingCallBindingCSAdapter() {
 		return null;
 	}
 
@@ -408,6 +470,20 @@ public class QVTimperativeCSAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createMappingParameterCSAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingParameterBindingCS <em>Mapping Parameter Binding CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.MappingParameterBindingCS
+	 * @generated
+	 */
+	public Adapter createMappingParameterBindingCSAdapter() {
 		return null;
 	}
 
@@ -636,20 +712,6 @@ public class QVTimperativeCSAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.OutVariableCS <em>Out Variable CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.OutVariableCS
-	 * @generated
-	 */
-	public Adapter createOutVariableCSAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.SetStatementCS <em>Set Statement CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -660,6 +722,34 @@ public class QVTimperativeCSAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createSetStatementCSAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.SimpleParameterBindingCS <em>Simple Parameter Binding CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.SimpleParameterBindingCS
+	 * @generated
+	 */
+	public Adapter createSimpleParameterBindingCSAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.SimpleParameterCS <em>Simple Parameter CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.SimpleParameterCS
+	 * @generated
+	 */
+	public Adapter createSimpleParameterCSAdapter() {
 		return null;
 	}
 

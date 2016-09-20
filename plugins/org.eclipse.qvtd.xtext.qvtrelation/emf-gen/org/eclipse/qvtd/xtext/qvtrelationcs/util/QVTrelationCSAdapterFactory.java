@@ -31,7 +31,6 @@ import org.eclipse.ocl.xtext.basecs.TypedElementCS;
 import org.eclipse.ocl.xtext.basecs.util.VisitableCS;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
 import org.eclipse.qvtd.xtext.qvtbasecs.AbstractTransformationCS;
-import org.eclipse.qvtd.xtext.qvtrelationcs.*;
 import org.eclipse.qvtd.xtext.qvtrelationcs.AbstractDomainCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.CollectionTemplateCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.DefaultValueCS;

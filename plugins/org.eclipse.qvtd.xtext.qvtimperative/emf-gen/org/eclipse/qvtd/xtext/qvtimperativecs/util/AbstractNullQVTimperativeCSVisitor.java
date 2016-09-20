@@ -45,7 +45,17 @@ public abstract class AbstractNullQVTimperativeCSVisitor<@Nullable R, C>
 	}
 
 	@Override
+	public R visitAppendParameterBindingCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull AppendParameterBindingCS object) {
+		return null;
+	}
+
+	@Override
 	public R visitAppendParameterCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull AppendParameterCS object) {
+		return null;
+	}
+
+	@Override
+	public R visitBufferStatementCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull BufferStatementCS object) {
 		return null;
 	}
 
@@ -65,17 +75,22 @@ public abstract class AbstractNullQVTimperativeCSVisitor<@Nullable R, C>
 	}
 
 	@Override
+	public R visitGuardParameterBindingCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull GuardParameterBindingCS object) {
+		return null;
+	}
+
+	@Override
 	public R visitGuardParameterCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull GuardParameterCS object) {
 		return null;
 	}
 
 	@Override
-	public R visitMappingCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull MappingCS object) {
+	public R visitLoopParameterBindingCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull LoopParameterBindingCS object) {
 		return null;
 	}
 
 	@Override
-	public R visitMappingCallBindingCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull MappingCallBindingCS object) {
+	public R visitMappingCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull MappingCS object) {
 		return null;
 	}
 
@@ -86,6 +101,11 @@ public abstract class AbstractNullQVTimperativeCSVisitor<@Nullable R, C>
 
 	@Override
 	public R visitMappingLoopCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull MappingLoopCS object) {
+		return null;
+	}
+
+	@Override
+	public R visitMappingParameterBindingCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull MappingParameterBindingCS object) {
 		return null;
 	}
 
@@ -110,11 +130,6 @@ public abstract class AbstractNullQVTimperativeCSVisitor<@Nullable R, C>
 	}
 
 	@Override
-	public R visitOutVariableCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull OutVariableCS object) {
-		return null;
-	}
-
-	@Override
 	public R visitParamDeclarationCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull ParamDeclarationCS object) {
 		return null;
 	}
@@ -126,6 +141,16 @@ public abstract class AbstractNullQVTimperativeCSVisitor<@Nullable R, C>
 
 	@Override
 	public R visitSetStatementCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull SetStatementCS object) {
+		return null;
+	}
+
+	@Override
+	public R visitSimpleParameterBindingCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull SimpleParameterBindingCS object) {
+		return null;
+	}
+
+	@Override
+	public R visitSimpleParameterCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull SimpleParameterCS object) {
 		return null;
 	}
 

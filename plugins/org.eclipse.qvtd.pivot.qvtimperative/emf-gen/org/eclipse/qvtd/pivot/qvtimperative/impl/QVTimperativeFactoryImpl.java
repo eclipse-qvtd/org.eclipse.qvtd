@@ -16,23 +16,27 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.qvtd.pivot.qvtimperative.*;
 import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.AppendParameter;
+import org.eclipse.qvtd.pivot.qvtimperative.AppendParameterBinding;
+import org.eclipse.qvtd.pivot.qvtimperative.BufferStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.CheckStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
+import org.eclipse.qvtd.pivot.qvtimperative.GuardParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
-import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
-import org.eclipse.qvtd.pivot.qvtimperative.OutConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.SimpleParameter;
+import org.eclipse.qvtd.pivot.qvtimperative.SimpleParameterBinding;
 
 /**
  * <!-- begin-user-doc -->
@@ -80,19 +84,23 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 		switch (eClass.getClassifierID()) {
 			case QVTimperativePackage.ADD_STATEMENT: return createAddStatement();
 			case QVTimperativePackage.APPEND_PARAMETER: return createAppendParameter();
+			case QVTimperativePackage.APPEND_PARAMETER_BINDING: return createAppendParameterBinding();
+			case QVTimperativePackage.BUFFER_STATEMENT: return createBufferStatement();
 			case QVTimperativePackage.CHECK_STATEMENT: return createCheckStatement();
 			case QVTimperativePackage.DECLARE_STATEMENT: return createDeclareStatement();
 			case QVTimperativePackage.GUARD_PARAMETER: return createGuardParameter();
+			case QVTimperativePackage.GUARD_PARAMETER_BINDING: return createGuardParameterBinding();
 			case QVTimperativePackage.IMPERATIVE_MODEL: return createImperativeModel();
 			case QVTimperativePackage.IMPERATIVE_TYPED_MODEL: return createImperativeTypedModel();
+			case QVTimperativePackage.LOOP_PARAMETER_BINDING: return createLoopParameterBinding();
 			case QVTimperativePackage.LOOP_VARIABLE: return createLoopVariable();
 			case QVTimperativePackage.MAPPING: return createMapping();
 			case QVTimperativePackage.MAPPING_CALL: return createMappingCall();
-			case QVTimperativePackage.MAPPING_CALL_BINDING: return createMappingCallBinding();
 			case QVTimperativePackage.MAPPING_LOOP: return createMappingLoop();
 			case QVTimperativePackage.NEW_STATEMENT: return createNewStatement();
-			case QVTimperativePackage.OUT_CONNECTION_VARIABLE: return createOutConnectionVariable();
 			case QVTimperativePackage.SET_STATEMENT: return createSetStatement();
+			case QVTimperativePackage.SIMPLE_PARAMETER: return createSimpleParameter();
+			case QVTimperativePackage.SIMPLE_PARAMETER_BINDING: return createSimpleParameterBinding();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -118,6 +126,28 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 	public @NonNull AppendParameter createAppendParameter() {
 		AppendParameterImpl appendParameter = new AppendParameterImpl();
 		return appendParameter;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public @NonNull AppendParameterBinding createAppendParameterBinding() {
+		AppendParameterBindingImpl appendParameterBinding = new AppendParameterBindingImpl();
+		return appendParameterBinding;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public @NonNull BufferStatement createBufferStatement() {
+		BufferStatementImpl bufferStatement = new BufferStatementImpl();
+		return bufferStatement;
 	}
 
 	/**
@@ -159,6 +189,17 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 	 * @generated
 	 */
 	@Override
+	public @NonNull GuardParameterBinding createGuardParameterBinding() {
+		GuardParameterBindingImpl guardParameterBinding = new GuardParameterBindingImpl();
+		return guardParameterBinding;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public @NonNull ImperativeModel createImperativeModel() {
 		ImperativeModelImpl imperativeModel = new ImperativeModelImpl();
 		return imperativeModel;
@@ -173,6 +214,17 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 	public @NonNull ImperativeTypedModel createImperativeTypedModel() {
 		ImperativeTypedModelImpl imperativeTypedModel = new ImperativeTypedModelImpl();
 		return imperativeTypedModel;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public @NonNull LoopParameterBinding createLoopParameterBinding() {
+		LoopParameterBindingImpl loopParameterBinding = new LoopParameterBindingImpl();
+		return loopParameterBinding;
 	}
 
 	/**
@@ -214,17 +266,6 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 	 * @generated
 	 */
 	@Override
-	public @NonNull MappingCallBinding createMappingCallBinding() {
-		MappingCallBindingImpl mappingCallBinding = new MappingCallBindingImpl();
-		return mappingCallBinding;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public @NonNull MappingLoop createMappingLoop() {
 		MappingLoopImpl mappingLoop = new MappingLoopImpl();
 		return mappingLoop;
@@ -247,9 +288,9 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 	 * @generated
 	 */
 	@Override
-	public @NonNull OutConnectionVariable createOutConnectionVariable() {
-		OutConnectionVariableImpl outConnectionVariable = new OutConnectionVariableImpl();
-		return outConnectionVariable;
+	public @NonNull SetStatement createSetStatement() {
+		SetStatementImpl setStatement = new SetStatementImpl();
+		return setStatement;
 	}
 
 	/**
@@ -258,9 +299,20 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 	 * @generated
 	 */
 	@Override
-	public @NonNull SetStatement createSetStatement() {
-		SetStatementImpl setStatement = new SetStatementImpl();
-		return setStatement;
+	public @NonNull SimpleParameter createSimpleParameter() {
+		SimpleParameterImpl simpleParameter = new SimpleParameterImpl();
+		return simpleParameter;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public @NonNull SimpleParameterBinding createSimpleParameterBinding() {
+		SimpleParameterBindingImpl simpleParameterBinding = new SimpleParameterBindingImpl();
+		return simpleParameterBinding;
 	}
 
 	/**

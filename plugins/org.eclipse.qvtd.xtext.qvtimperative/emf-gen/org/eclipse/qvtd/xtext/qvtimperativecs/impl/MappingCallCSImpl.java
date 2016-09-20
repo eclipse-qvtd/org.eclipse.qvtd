@@ -24,8 +24,8 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.xtext.basecs.PathNameCS;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
-import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.MappingParameterBindingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage;
 import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
 
@@ -38,6 +38,8 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCallCSImpl#isIsInfinite <em>Is Infinite</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCallCSImpl#isIsInstall <em>Is Install</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCallCSImpl#isIsInvoke <em>Is Invoke</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCallCSImpl#getOwnedBindings <em>Owned Bindings</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCallCSImpl#getOwnedPathName <em>Owned Path Name</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCallCSImpl#getReferredMapping <em>Referred Mapping</em>}</li>
@@ -67,6 +69,46 @@ public class MappingCallCSImpl extends MappingStatementCSImpl implements Mapping
 	protected boolean isInfinite = IS_INFINITE_EDEFAULT;
 
 	/**
+	 * The default value of the '{@link #isIsInstall() <em>Is Install</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsInstall()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean IS_INSTALL_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isIsInstall() <em>Is Install</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsInstall()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean isInstall = IS_INSTALL_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isIsInvoke() <em>Is Invoke</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsInvoke()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean IS_INVOKE_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isIsInvoke() <em>Is Invoke</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsInvoke()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean isInvoke = IS_INVOKE_EDEFAULT;
+
+	/**
 	 * The cached value of the '{@link #getOwnedBindings() <em>Owned Bindings</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -74,7 +116,7 @@ public class MappingCallCSImpl extends MappingStatementCSImpl implements Mapping
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<MappingCallBindingCS> ownedBindings;
+	protected EList<MappingParameterBindingCS> ownedBindings;
 
 	/**
 	 * The cached value of the '{@link #getOwnedPathName() <em>Owned Path Name</em>}' containment reference.
@@ -144,6 +186,52 @@ public class MappingCallCSImpl extends MappingStatementCSImpl implements Mapping
 	 * @generated
 	 */
 	@Override
+	public boolean isIsInstall() {
+		return isInstall;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setIsInstall(boolean newIsInstall) {
+		boolean oldIsInstall = isInstall;
+		isInstall = newIsInstall;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.MAPPING_CALL_CS__IS_INSTALL, oldIsInstall, isInstall));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean isIsInvoke() {
+		return isInvoke;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setIsInvoke(boolean newIsInvoke) {
+		boolean oldIsInvoke = isInvoke;
+		isInvoke = newIsInvoke;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.MAPPING_CALL_CS__IS_INVOKE, oldIsInvoke, isInvoke));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Mapping getReferredMapping() {
 		return referredMapping;
 	}
@@ -177,9 +265,9 @@ public class MappingCallCSImpl extends MappingStatementCSImpl implements Mapping
 	 * @generated
 	 */
 	@Override
-	public EList<MappingCallBindingCS> getOwnedBindings() {
+	public EList<MappingParameterBindingCS> getOwnedBindings() {
 		if (ownedBindings == null) {
-			ownedBindings = new EObjectContainmentWithInverseEList<MappingCallBindingCS>(MappingCallBindingCS.class, this, QVTimperativeCSPackage.MAPPING_CALL_CS__OWNED_BINDINGS, QVTimperativeCSPackage.MAPPING_CALL_BINDING_CS__OWNING_MAPPING_CALL);
+			ownedBindings = new EObjectContainmentWithInverseEList<MappingParameterBindingCS>(MappingParameterBindingCS.class, this, QVTimperativeCSPackage.MAPPING_CALL_CS__OWNED_BINDINGS, QVTimperativeCSPackage.MAPPING_PARAMETER_BINDING_CS__OWNING_MAPPING_CALL);
 		}
 		return ownedBindings;
 	}
@@ -270,6 +358,10 @@ public class MappingCallCSImpl extends MappingStatementCSImpl implements Mapping
 		switch (featureID) {
 			case QVTimperativeCSPackage.MAPPING_CALL_CS__IS_INFINITE:
 				return isIsInfinite();
+			case QVTimperativeCSPackage.MAPPING_CALL_CS__IS_INSTALL:
+				return isIsInstall();
+			case QVTimperativeCSPackage.MAPPING_CALL_CS__IS_INVOKE:
+				return isIsInvoke();
 			case QVTimperativeCSPackage.MAPPING_CALL_CS__OWNED_BINDINGS:
 				return getOwnedBindings();
 			case QVTimperativeCSPackage.MAPPING_CALL_CS__OWNED_PATH_NAME:
@@ -292,9 +384,15 @@ public class MappingCallCSImpl extends MappingStatementCSImpl implements Mapping
 			case QVTimperativeCSPackage.MAPPING_CALL_CS__IS_INFINITE:
 				setIsInfinite((Boolean)newValue);
 				return;
+			case QVTimperativeCSPackage.MAPPING_CALL_CS__IS_INSTALL:
+				setIsInstall((Boolean)newValue);
+				return;
+			case QVTimperativeCSPackage.MAPPING_CALL_CS__IS_INVOKE:
+				setIsInvoke((Boolean)newValue);
+				return;
 			case QVTimperativeCSPackage.MAPPING_CALL_CS__OWNED_BINDINGS:
 				getOwnedBindings().clear();
-				getOwnedBindings().addAll((Collection<? extends MappingCallBindingCS>)newValue);
+				getOwnedBindings().addAll((Collection<? extends MappingParameterBindingCS>)newValue);
 				return;
 			case QVTimperativeCSPackage.MAPPING_CALL_CS__OWNED_PATH_NAME:
 				setOwnedPathName((PathNameCS)newValue);
@@ -316,6 +414,12 @@ public class MappingCallCSImpl extends MappingStatementCSImpl implements Mapping
 		switch (featureID) {
 			case QVTimperativeCSPackage.MAPPING_CALL_CS__IS_INFINITE:
 				setIsInfinite(IS_INFINITE_EDEFAULT);
+				return;
+			case QVTimperativeCSPackage.MAPPING_CALL_CS__IS_INSTALL:
+				setIsInstall(IS_INSTALL_EDEFAULT);
+				return;
+			case QVTimperativeCSPackage.MAPPING_CALL_CS__IS_INVOKE:
+				setIsInvoke(IS_INVOKE_EDEFAULT);
 				return;
 			case QVTimperativeCSPackage.MAPPING_CALL_CS__OWNED_BINDINGS:
 				getOwnedBindings().clear();
@@ -340,6 +444,10 @@ public class MappingCallCSImpl extends MappingStatementCSImpl implements Mapping
 		switch (featureID) {
 			case QVTimperativeCSPackage.MAPPING_CALL_CS__IS_INFINITE:
 				return isInfinite != IS_INFINITE_EDEFAULT;
+			case QVTimperativeCSPackage.MAPPING_CALL_CS__IS_INSTALL:
+				return isInstall != IS_INSTALL_EDEFAULT;
+			case QVTimperativeCSPackage.MAPPING_CALL_CS__IS_INVOKE:
+				return isInvoke != IS_INVOKE_EDEFAULT;
 			case QVTimperativeCSPackage.MAPPING_CALL_CS__OWNED_BINDINGS:
 				return ownedBindings != null && !ownedBindings.isEmpty();
 			case QVTimperativeCSPackage.MAPPING_CALL_CS__OWNED_PATH_NAME:
