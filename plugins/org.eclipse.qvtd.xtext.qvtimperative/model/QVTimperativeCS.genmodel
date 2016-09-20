@@ -19,34 +19,48 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//AddStatementCS/ownedExpression"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//AddStatementCS/targetVariable"/>
     </genClasses>
+    <genClasses ecoreClass="QVTimperativeCS.ecore#//AppendParameterBindingCS">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//AppendParameterBindingCS/value"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//AppendParameterBindingCS/referredVariable"/>
+    </genClasses>
     <genClasses ecoreClass="QVTimperativeCS.ecore#//AppendParameterCS"/>
+    <genClasses ecoreClass="QVTimperativeCS.ecore#//BufferStatementCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//BufferStatementCS/ownedExpression"/>
+    </genClasses>
     <genClasses ecoreClass="QVTimperativeCS.ecore#//CheckStatementCS">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//CheckStatementCS/ownedCondition"/>
     </genClasses>
     <genClasses ecoreClass="QVTimperativeCS.ecore#//DeclareStatementCS">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//DeclareStatementCS/ownedExpression"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperativeCS.ecore#//DeclareStatementCS/isChecked"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperativeCS.ecore#//DeclareStatementCS/isCheck"/>
     </genClasses>
     <genClasses ecoreClass="QVTimperativeCS.ecore#//DirectionCS">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//DirectionCS/imports"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperativeCS.ecore#//DirectionCS/isChecked"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperativeCS.ecore#//DirectionCS/isEnforced"/>
     </genClasses>
+    <genClasses ecoreClass="QVTimperativeCS.ecore#//GuardParameterBindingCS">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//GuardParameterBindingCS/value"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//GuardParameterBindingCS/referredVariable"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperativeCS.ecore#//GuardParameterBindingCS/isCheck"/>
+    </genClasses>
     <genClasses ecoreClass="QVTimperativeCS.ecore#//GuardParameterCS">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//GuardParameterCS/referredTypedModel"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTimperativeCS.ecore#//LoopParameterBindingCS">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//LoopParameterBindingCS/value"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//LoopParameterBindingCS/referredVariable"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperativeCS.ecore#//LoopParameterBindingCS/isCheck"/>
     </genClasses>
     <genClasses ecoreClass="QVTimperativeCS.ecore#//MappingCS">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//MappingCS/ownedInPathName"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//MappingCS/ownedParameters"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//MappingCS/ownedStatements"/>
     </genClasses>
-    <genClasses ecoreClass="QVTimperativeCS.ecore#//MappingCallBindingCS">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//MappingCallBindingCS/ownedValue"/>
-      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//MappingCallBindingCS/owningMappingCall"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//MappingCallBindingCS/referredVariable"/>
-    </genClasses>
     <genClasses ecoreClass="QVTimperativeCS.ecore#//MappingCallCS">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperativeCS.ecore#//MappingCallCS/isInfinite"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperativeCS.ecore#//MappingCallCS/isInstall"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperativeCS.ecore#//MappingCallCS/isInvoke"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//MappingCallCS/ownedBindings"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//MappingCallCS/ownedPathName"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//MappingCallCS/referredMapping"/>
@@ -57,6 +71,9 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//MappingLoopCS/ownedMappingStatements"/>
     </genClasses>
     <genClasses image="false" ecoreClass="QVTimperativeCS.ecore#//MappingParameterCS"/>
+    <genClasses image="false" ecoreClass="QVTimperativeCS.ecore#//MappingParameterBindingCS">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//MappingParameterBindingCS/owningMappingCall"/>
+    </genClasses>
     <genClasses image="false" ecoreClass="QVTimperativeCS.ecore#//MappingStatementCS"/>
     <genClasses ecoreClass="QVTimperativeCS.ecore#//NewStatementCS">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//NewStatementCS/ownedExpression"/>
@@ -64,9 +81,6 @@
     </genClasses>
     <genClasses ecoreClass="QVTimperativeCS.ecore#//ObservableStatementCS">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//ObservableStatementCS/observedProperties"/>
-    </genClasses>
-    <genClasses ecoreClass="QVTimperativeCS.ecore#//OutVariableCS">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//OutVariableCS/ownedExpression"/>
     </genClasses>
     <genClasses ecoreClass="QVTimperativeCS.ecore#//ParamDeclarationCS"/>
     <genClasses ecoreClass="QVTimperativeCS.ecore#//QueryCS">
@@ -81,6 +95,14 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//SetStatementCS/referredVariable"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//SetStatementCS/ownedExpression"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperativeCS.ecore#//SetStatementCS/isNotify"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTimperativeCS.ecore#//SimpleParameterBindingCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//SimpleParameterBindingCS/ownedValue"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//SimpleParameterBindingCS/referredVariable"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperativeCS.ecore#//SimpleParameterBindingCS/isCheck"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTimperativeCS.ecore#//SimpleParameterCS">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//SimpleParameterCS/referredTypedModel"/>
     </genClasses>
     <genClasses image="false" ecoreClass="QVTimperativeCS.ecore#//StatementCS"/>
     <genClasses ecoreClass="QVTimperativeCS.ecore#//TopLevelCS">
