@@ -1,0 +1,421 @@
+
+h1(#pivot). **@pivot@**
+
+
+h2(#OCLExpression). **@OCLExpression@**
+
+*Associations*
+
+@AddStatement : qvtimperative::AddStatement[?]@
+
+@BufferStatement : qvtimperative::BufferStatement[?]@
+
+@CheckStatement : qvtimperative::CheckStatement[?]@
+
+@DeclareStatement : qvtimperative::DeclareStatement[?]@
+
+@MappingLoop : qvtimperative::MappingLoop[?]@
+
+@NewStatement : qvtimperative::NewStatement[?]@
+
+@SetStatement : qvtimperative::SetStatement[?]@
+
+@SimpleParameterBinding : qvtimperative::SimpleParameterBinding[?]@
+
+h2(#Property). **@Property@**
+
+*Attributes*
+
+@ObservableStatement : Bag(qvtimperative::ObservableStatement)@
+
+*Associations*
+
+@assignment : qvtimperative::SetStatement[?]@
+
+h2(#VariableDeclaration). **@VariableDeclaration@**
+
+*Associations*
+
+@assignment : qvtimperative::SetStatement[?]@
+
+h1(#qvtimperative). **@qvtimperative@**
+
+The Package for an Imperative QVT transformation.
+
+An Imperative QVT trabsformation is expected to be created by an autogenerator that observes the following run-time restrictions:
+
+A mapping that my be re-invoked must have MappingCall.isInfinite set for every possible invocation.
+
+A mapping that reads object slots before they are guaranteed to have been assigned must declare the slots property in a corresponding ImperativeArea.checkedProperties entry.
+
+A mapping that assigns an object slot that any mapping may access before assignment is guaranteed must declare declare the slots property in a corresponding ImperativeArea.enforcedProperties entry.
+
+All reads by Functions/Queries must be guaranteed to succeed; i.e. the invoking mapping must check readiness before calling the query.
+
+All writes to multi-valued properties must be guaranteed to occur before any read of the property. 
+
+
+h2(#AddStatement). **@AddStatement@**
+
+A ConnectionStatement assigns results to a ConnectionVariable.
+
+conformsTo "@MappingStatement@":#MappingStatement, "@ObservableStatement@":#ObservableStatement
+
+*Attributes*
+
+@isEnforcedUnique : Boolean[?]@
+
+*Associations*
+
+@ownedExpression : OCLExpression[1]@
+
+@targetVariable : ::ConnectionVariable[1]@
+
+h2(#AppendParameter). **@AppendParameter@**
+
+A ConnectionVariable accumulates one or more assignments.
+
+conformsTo "@ConnectionVariable@":#ConnectionVariable, "@MappingParameter@":#MappingParameter
+
+h2(#AppendParameterBinding). **@AppendParameterBinding@**
+
+A MappingCallBinding specifies the binding of a single variable as part of
+a MappingCall. A value is bound to the variable. OPtionally isLoop may be true
+to indicate that the value is a collection of values, each of which is to
+be used as part of a distinct invocation.
+
+conformsTo "@MappingParameterBinding@":#MappingParameterBinding
+
+*Associations*
+
+@value : ::ConnectionVariable[1]@
+
+The value or collection of values to bind to boundVariable
+
+h2(#BufferStatement). **@BufferStatement@**
+
+A ConnectionVariable accumulates one or more assignments.
+
+conformsTo "@ConnectionVariable@":#ConnectionVariable, "@VariableStatement@":#VariableStatement, "@ObservableStatement@":#ObservableStatement
+
+*Associations*
+
+@ownedExpression : OCLExpression[?]@
+
+h2(#CheckStatement). **@CheckStatement@**
+
+conformsTo "@ObservableStatement@":#ObservableStatement
+
+*Associations*
+
+@ownedExpression : OCLExpression[1]@
+
+h2(#ConnectionVariable). **@ConnectionVariable@**
+
+A ConnectionVariable accumulates one or more assignments.
+
+conformsTo "@VariableDeclaration@":#VariableDeclaration
+
+*Attributes*
+
+@AppendParameterBinding : Bag(qvtimperative::AppendParameterBinding)@
+
+@GuardParameterBinding : Bag(qvtimperative::GuardParameterBinding)@
+
+*Associations*
+
+@assignment : ::AddStatement[?]@
+
+h2(#DeclareStatement). **@DeclareStatement@**
+
+conformsTo "@VariableStatement@":#VariableStatement, "@ObservableStatement@":#ObservableStatement
+
+*Attributes*
+
+@isCheck : Boolean[?]@
+
+Whether the variable initialization needs to be checked as a predicate. This is a derivation of not ownedInit.type.conformsTo(self.type).
+
+*Associations*
+
+@ownedExpression : OCLExpression[1]@
+
+h2(#GuardParameter). **@GuardParameter@**
+
+A ConnectionVariable accumulates one or more assignments.
+
+conformsTo "@MappingParameter@":#MappingParameter
+
+*Associations*
+
+@referredTypedModel : ::ImperativeTypedModel[1]@
+
+h2(#GuardParameterBinding). **@GuardParameterBinding@**
+
+A MappingCallBinding specifies the binding of a single variable as part of
+a MappingCall. A value is bound to the variable. OPtionally isLoop may be true
+to indicate that the value is a collection of values, each of which is to
+be used as part of a distinct invocation.
+
+conformsTo "@MappingParameterBinding@":#MappingParameterBinding
+
+*Attributes*
+
+@isCheck : Boolean[?]@
+
+Whether the variable initialization needs to be checked as a predicate. This is a derivation of not ownedInit.type.conformsTo(self.type).
+
+*Associations*
+
+@value : ::ConnectionVariable[1]@
+
+The value or collection of values to bind to boundVariable
+
+h2(#ImperativeModel). **@ImperativeModel@**
+
+The Model of an Imperative QVT transformation.
+
+conformsTo "@BaseModel@":#BaseModel
+
+h2(#ImperativeTypedModel). **@ImperativeTypedModel@**
+
+The Model of an Imperative QVT transformation.
+
+conformsTo "@TypedModel@":#TypedModel
+
+*Attributes*
+
+@GuardParameter : Bag(qvtimperative::GuardParameter)@
+
+@NewStatement : Bag(qvtimperative::NewStatement)@
+
+@SimpleParameter : Bag(qvtimperative::SimpleParameter)@
+
+@isChecked : Boolean[?]@
+
+@isEnforced : Boolean[?]@
+
+h2(#LoopParameterBinding). **@LoopParameterBinding@**
+
+A MappingCallBinding specifies the binding of a single variable as part of
+a MappingCall. A value is bound to the variable. OPtionally isLoop may be true
+to indicate that the value is a collection of values, each of which is to
+be used as part of a distinct invocation.
+
+conformsTo "@MappingParameterBinding@":#MappingParameterBinding
+
+*Attributes*
+
+@isCheck : Boolean[?]@
+
+Whether the variable initialization needs to be checked as a predicate. This is a derivation of not ownedInit.type.conformsTo(self.type).
+
+*Associations*
+
+@value : ::LoopVariable[1]@
+
+The value or collection of values to bind to boundVariable
+
+h2(#LoopVariable). **@LoopVariable@**
+
+conformsTo "@VariableDeclaration@":#VariableDeclaration
+
+*Attributes*
+
+@LoopParameterBinding : Bag(qvtimperative::LoopParameterBinding)@
+
+*Associations*
+
+@owningMappingLoop : ::MappingLoop[1]@
+
+h2(#Mapping). **@Mapping@**
+
+An Imperative Mapping extends the abstract declarative mapping to support
+explicit nested invocation of mappings with bindings for the invoked mapping's
+bound variables.
+
+conformsTo "@Rule@":#Rule
+
+*Attributes*
+
+@MappingCall : Bag(qvtimperative::MappingCall)@
+
+@ownedParameters : Set(qvtimperative::MappingParameter)[*|1]@
+
+@ownedStatements : OrderedSet(qvtimperative::Statement)[*|1]@
+
+h2(#MappingCall). **@MappingCall@**
+
+A MappingCall specifies the invocation of a referredMapping with a set of bindings
+of the bound variables of the referredMapping to values provided in the invocation.
+Where Collections of values are provided for isLoop bindings, a distinct invocation
+is performed for each distinct permutation of Collection elements.
+
+conformsTo "@MappingStatement@":#MappingStatement, "@ReferringElement@":#ReferringElement
+
+*Attributes*
+
+@binding : OrderedSet(qvtimperative::MappingParameterBinding)[*|1]@
+
+The Set of value to bound variable bindings.
+
+@isInfinite : Boolean[?]@
+
+An infinite MappingCall requires re-invocation of the called mapping to be suppressed to avoid an infinite loop.
+
+@isInstall : Boolean[?]@
+
+An infinite MappingCall requires re-invocation of the called mapping to be suppressed to avoid an infinite loop.
+
+@isInvoke : Boolean[?]@
+
+An infinite MappingCall requires re-invocation of the called mapping to be suppressed to avoid an infinite loop.
+
+*Associations*
+
+@referredMapping : ::Mapping[1]@
+
+The Mapping invoked by the MappingCall.
+
+h2(#MappingLoop). **@MappingLoop@**
+
+An Imperative MappingLoop support an iterated nested mapping call.
+
+conformsTo "@MappingStatement@":#MappingStatement, "@ObservableStatement@":#ObservableStatement
+
+*Attributes*
+
+@ownedIterators : OrderedSet(qvtimperative::LoopVariable)[*|1]@
+
+@ownedMappingStatements : OrderedSet(qvtimperative::MappingStatement)[*|1]@
+
+*Associations*
+
+@ownedExpression : OCLExpression[1]@
+
+h2(#MappingParameter). **@MappingParameter@**
+
+A ConnectionVariable accumulates one or more assignments.
+
+conformsTo "@VariableDeclaration@":#VariableDeclaration
+
+*Attributes*
+
+@MappingParameterBinding : Bag(qvtimperative::MappingParameterBinding)@
+
+*Associations*
+
+@Mapping : ::Mapping[?]@
+
+h2(#MappingParameterBinding). **@MappingParameterBinding@**
+
+A MappingCallBinding specifies the binding of a single variable as part of
+a MappingCall. A value is bound to the variable. OPtionally isLoop may be true
+to indicate that the value is a collection of values, each of which is to
+be used as part of a distinct invocation.
+
+conformsTo "@Element@":#Element
+
+*Associations*
+
+@boundVariable : ::MappingParameter[1]@
+
+The variable with the mappingCall.referredMapping bound to the/a value
+
+@mappingCall : ::MappingCall[?]@
+
+The containing MappingCall.
+
+h2(#MappingStatement). **@MappingStatement@**
+
+A MappingCall specifies the invocation of a referredMapping with a set of bindings
+of the bound variables of the referredMapping to values provided in the invocation.
+Where Collections of values are provided for isLoop bindings, a distinct invocation
+is performed for each distinct permutation of Collection elements.
+
+conformsTo "@Statement@":#Statement
+
+*Associations*
+
+@MappingLoop : ::MappingLoop[?]@
+
+h2(#NewStatement). **@NewStatement@**
+
+conformsTo "@VariableStatement@":#VariableStatement, "@ObservableStatement@":#ObservableStatement
+
+*Associations*
+
+@ownedExpression : OCLExpression[?]@
+
+@referredTypedModel : ::ImperativeTypedModel[1]@
+
+h2(#ObservableStatement). **@ObservableStatement@**
+
+conformsTo "@Statement@":#Statement
+
+*Attributes*
+
+@observedProperties : Set(Property)[*|1]@
+
+The properties whose accesses must be polled for readiness prior to use here.
+
+h2(#SetStatement). **@SetStatement@**
+
+conformsTo "@ObservableStatement@":#ObservableStatement
+
+*Attributes*
+
+@isNotify : Boolean[?]@
+
+@isOpposite : Boolean[?]@
+
+*Associations*
+
+@ownedExpression : OCLExpression[1]@
+
+@targetProperty : Property[1]@
+
+@targetVariable : VariableDeclaration[1]@
+
+h2(#SimpleParameter). **@SimpleParameter@**
+
+A ConnectionVariable accumulates one or more assignments.
+
+conformsTo "@MappingParameter@":#MappingParameter
+
+*Associations*
+
+@referredTypedModel : ::ImperativeTypedModel[1]@
+
+h2(#SimpleParameterBinding). **@SimpleParameterBinding@**
+
+A MappingCallBinding specifies the binding of a single variable as part of
+a MappingCall. A value is bound to the variable. OPtionally isLoop may be true
+to indicate that the value is a collection of values, each of which is to
+be used as part of a distinct invocation.
+
+conformsTo "@MappingParameterBinding@":#MappingParameterBinding
+
+*Attributes*
+
+@isCheck : Boolean[?]@
+
+Whether the variable initialization needs to be checked as a predicate. This is a derivation of not ownedInit.type.conformsTo(self.type).
+
+*Associations*
+
+@value : OCLExpression[1]@
+
+The value or collection of values to bind to boundVariable
+
+h2(#Statement). **@Statement@**
+
+conformsTo "@NamedElement@":#NamedElement
+
+*Associations*
+
+@Mapping : ::Mapping[?]@
+
+h2(#VariableStatement). **@VariableStatement@**
+
+conformsTo "@VariableDeclaration@":#VariableDeclaration, "@Statement@":#Statement

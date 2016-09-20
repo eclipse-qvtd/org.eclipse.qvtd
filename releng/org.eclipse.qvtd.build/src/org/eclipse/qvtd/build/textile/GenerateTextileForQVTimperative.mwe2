@@ -1,0 +1,41 @@
+/*******************************************************************************
+ * Copyright (c) 2010, 2013 Willink Transformations and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *   E.D.Willink - initial API and implementation
+ *   E.D.Willink (CEA LIST) - Bug 424034
+ *
+ * Run As->MWE2 Workflow to regenerate the pivot model.
+ *******************************************************************************/
+module GenerateTextileForQVTimperative
+
+import org.eclipse.ocl.examples.build.textile.*
+import org.eclipse.ocl.examples.build.utilities.*
+import org.eclipse.emf.mwe.utils.*
+import org.eclipse.emf.ecore.resource.impl.*
+
+var sourceName = "org.eclipse.qvtd.pivot.qvtimperative"
+var targetName = "org.eclipse.qvtd.doc"
+
+/**
+ *	Generate the QVTimperative AS documentation, by converting QVTimperative.ecore to 2500-qvtimperative-as.textile.
+ */
+Workflow {
+	bean = ResourceSetImpl : resourceSet {}
+    bean = StandaloneSetup { resourceSet = resourceSet
+    	platformUri = ".."
+    	scanClassPath = true
+    }
+    bean = GenModelSetup { resourceSet = resourceSet }
+    component = GenerateTextileForModelXtend { resourceSet = resourceSet
+    	projectName = "${sourceName}"
+    	modelFile = "model/QVTimperative.ecore"
+    	textileFolder = "/../doc/${targetName}/doc"
+    	textileFileName = "2500-qvtimperative-as"
+    }
+}
+

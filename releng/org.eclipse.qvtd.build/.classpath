@@ -10,7 +10,7 @@
 			<attribute name="annotationpath" value="/org.eclipse.qvtd.pivot.qvtbase/annotations"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="src" path="src"/>
+	<classpathentry excluding="**/*.launch" kind="src" path="src"/>
 	<classpathentry kind="src" path="xtend-gen"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
