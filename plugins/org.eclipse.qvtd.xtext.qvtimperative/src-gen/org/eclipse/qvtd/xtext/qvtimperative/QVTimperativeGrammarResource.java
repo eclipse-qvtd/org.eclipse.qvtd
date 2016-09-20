@@ -92,14 +92,14 @@ public class QVTimperativeGrammarResource extends AbstractGrammarResource
 	
 	private static class _QVTimperative
 	{
-		private static final @NonNull ReferencedMetamodel MM = createReferencedMetamodel(org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage.eINSTANCE, null); // http://www.eclipse.org/qvt/2015/QVTimperativeCS
+		private static final @NonNull ReferencedMetamodel MM = createReferencedMetamodel(org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage.eINSTANCE, null); // http://www.eclipse.org/qvt/2016/QVTimperativeCS
 		private static final @NonNull ReferencedMetamodel MM_base = createReferencedMetamodel(org.eclipse.ocl.xtext.basecs.BaseCSPackage.eINSTANCE, "base"); // http://www.eclipse.org/ocl/2015/BaseCS
 		private static final @NonNull ReferencedMetamodel MM_ecore = createReferencedMetamodel(org.eclipse.emf.ecore.EcorePackage.eINSTANCE, "ecore"); // http://www.eclipse.org/emf/2002/Ecore
 		private static final @NonNull ReferencedMetamodel MM_essentialocl = createReferencedMetamodel(org.eclipse.ocl.xtext.essentialoclcs.EssentialOCLCSPackage.eINSTANCE, "essentialocl"); // http://www.eclipse.org/ocl/2015/EssentialOCLCS
 		private static final @NonNull ReferencedMetamodel MM_pivot = createReferencedMetamodel(org.eclipse.ocl.pivot.PivotPackage.eINSTANCE, "pivot"); // http://www.eclipse.org/ocl/2015/Pivot
 		private static final @NonNull ReferencedMetamodel MM_qvtbase = createReferencedMetamodel(org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage.eINSTANCE, "qvtbase"); // http://www.eclipse.org/qvt/2015/QVTbase
 		private static final @NonNull ReferencedMetamodel MM_qvtbasecs = createReferencedMetamodel(org.eclipse.qvtd.xtext.qvtbasecs.QVTbaseCSPackage.eINSTANCE, "qvtbasecs"); // http://www.eclipse.org/ocl/2016/QVTbaseCS
-		private static final @NonNull ReferencedMetamodel MM_qvtimperative = createReferencedMetamodel(org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage.eINSTANCE, "qvtimperative"); // http://www.eclipse.org/qvt/2015/QVTimperative
+		private static final @NonNull ReferencedMetamodel MM_qvtimperative = createReferencedMetamodel(org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage.eINSTANCE, "qvtimperative"); // http://www.eclipse.org/qvt/2016/QVTimperative
 		
 		private static final @NonNull ParserRule PR_AddStatementCS = createParserRule("AddStatementCS", createTypeRef(MM, org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage.Literals.ADD_STATEMENT_CS));
 		private static final @NonNull ParserRule PR_AppendParameterBindingCS = createParserRule("AppendParameterBindingCS", createTypeRef(MM, org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage.Literals.APPEND_PARAMETER_BINDING_CS));

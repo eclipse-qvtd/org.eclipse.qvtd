@@ -54,7 +54,7 @@ import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibPackage;
 
 /**
- * This is the http://www.eclipse.org/qvt/2015/QVTimperativeLibrary Standard Library
+ * This is the http://www.eclipse.org/qvt/2016/QVTimperativeLibrary Standard Library
  * auto-generated from /org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperativeLibrary.oclstdlib.
  * It facilitates efficient library loading without the overheads of model reading.
  * <p>
@@ -76,10 +76,10 @@ public class QVTimperativeLibrary extends ASResourceImpl
 	/**
 	 *	The URI of this Standard Library.
 	 */
-	public static final @NonNull String STDLIB_URI = "http://www.eclipse.org/qvt/2015/QVTimperativeLibrary";
+	public static final @NonNull String STDLIB_URI = "http://www.eclipse.org/qvt/2016/QVTimperativeLibrary";
 
 	/**
-	 * Return the default http://www.eclipse.org/qvt/2015/QVTimperativeLibrary standard Library Resource. 
+	 * Return the default http://www.eclipse.org/qvt/2016/QVTimperativeLibrary standard Library Resource. 
 	 *  This static definition auto-generated from /org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperativeLibrary.oclstdlib
 	 *  is used as the default when no overriding copy is registered.
 	 * It cannot be unloaded or rather unloading has no effect.
@@ -94,7 +94,7 @@ public class QVTimperativeLibrary extends ASResourceImpl
 	}
 
 	/**
-	 * Return the default http://www.eclipse.org/qvt/2015/QVTimperativeLibrary standard Library model. 
+	 * Return the default http://www.eclipse.org/qvt/2016/QVTimperativeLibrary standard Library model. 
 	 *  This static definition auto-generated from /org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperativeLibrary.oclstdlib
 	 *  is used as the default when no overriding copy is registered. 
 	 */

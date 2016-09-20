@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <qvti:ImperativeModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pivot="http://www.eclipse.org/ocl/2015/Pivot"
-    xmlns:qvtb="http://www.eclipse.org/qvt/2015/QVTbase" xmlns:qvti="http://www.eclipse.org/qvt/2015/QVTimperative" xsi:schemaLocation="http://www.eclipse.org/ocl/2015/Pivot java://org.eclipse.ocl.pivot.PivotPackage http://www.eclipse.org/qvt/2015/QVTbase java://org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage http://www.eclipse.org/qvt/2015/QVTimperative java://org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage"
+    xmlns:qvtb="http://www.eclipse.org/qvt/2015/QVTbase" xmlns:qvti="http://www.eclipse.org/qvt/2016/QVTimperative" xsi:schemaLocation="http://www.eclipse.org/ocl/2015/Pivot java://org.eclipse.ocl.pivot.PivotPackage http://www.eclipse.org/qvt/2015/QVTbase java://org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage http://www.eclipse.org/qvt/2016/QVTimperative java://org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage"
     name="HSV2HLS.qvti" externalURI="file:/E:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/HSV2HLS/HSV2HLS.qvti">
   <ownedImports importedNamespace="pivot:Package HSVTree.ecore.oclas#P.HSVTree"/>
   <ownedImports importedNamespace="pivot:Package HLSTree.ecore.oclas#P.HLSTree"/>
@@ -25,14 +25,14 @@
       </ownedOperations>
       <modelParameter xsi:type="qvti:ImperativeTypedModel" xmi:id="qT..hsv2hls.hsv" name="hsv" usedPackage="HSVTree.ecore.oclas#P.HSVTree"
           isChecked="true">
-        <ownedContext xmi:id="qV..hsv2hls.hsv.hsv" name="hsv" type="pivot:Class http://www.eclipse.org/qvt/2015/QVTimperativeLibrary.oclas#T.qvtbaselibrary.Model"/>
+        <ownedContext xmi:id="qV..hsv2hls.hsv.hsv" name="hsv" type="pivot:Class http://www.eclipse.org/qvt/2016/QVTimperativeLibrary.oclas#T.qvtbaselibrary.Model"/>
       </modelParameter>
       <modelParameter xsi:type="qvti:ImperativeTypedModel" xmi:id="qT..hsv2hls.hls" name="hls" usedPackage="HLSTree.ecore.oclas#P.HLSTree"
           isEnforced="true">
-        <ownedContext xmi:id="qV..hsv2hls.hls.hls" name="hls" type="pivot:Class http://www.eclipse.org/qvt/2015/QVTimperativeLibrary.oclas#T.qvtbaselibrary.Model"/>
+        <ownedContext xmi:id="qV..hsv2hls.hls.hls" name="hls" type="pivot:Class http://www.eclipse.org/qvt/2016/QVTimperativeLibrary.oclas#T.qvtbaselibrary.Model"/>
       </modelParameter>
       <modelParameter xsi:type="qvti:ImperativeTypedModel" xmi:id="qT..hsv2hls.middle" name="middle" usedPackage="HSV2HLS.ecore.oclas#P.HSV2HLS">
-        <ownedContext xmi:id="qV..hsv2hls.middle.middle" name="middle" type="pivot:Class http://www.eclipse.org/qvt/2015/QVTimperativeLibrary.oclas#T.qvtbaselibrary.Model"/>
+        <ownedContext xmi:id="qV..hsv2hls.middle.middle" name="middle" type="pivot:Class http://www.eclipse.org/qvt/2016/QVTimperativeLibrary.oclas#T.qvtbaselibrary.Model"/>
       </modelParameter>
       <rule xsi:type="qvti:Mapping" xmi:id="m..hsv2hls.__root__" name="__root__">
         <ownedStatements xsi:type="qvti:MappingLoop">
@@ -41,8 +41,8 @@
             <binding xsi:type="qvti:LoopParameterBinding" boundVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.1/@ownedParameters.0"
                 value="#//@ownedPackages.0/@ownedClasses.0/@rule.0/@ownedStatements.0/@ownedIterators.0"/>
           </ownedMappingStatements>
-          <ownedExpression xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.0" referredOperation="http://www.eclipse.org/qvt/2015/QVTimperativeLibrary.oclas#o.qvtbaselibrary.Model.objectsOfKind..TT">
-            <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class http://www.eclipse.org/qvt/2015/QVTimperativeLibrary.oclas#T.qvtbaselibrary.Model"
+          <ownedExpression xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.0" referredOperation="http://www.eclipse.org/qvt/2016/QVTimperativeLibrary.oclas#o.qvtbaselibrary.Model.objectsOfKind..TT">
+            <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class http://www.eclipse.org/qvt/2016/QVTimperativeLibrary.oclas#T.qvtbaselibrary.Model"
                 referredVariable="#qV..hsv2hls.hsv.hsv"/>
             <ownedArguments xsi:type="pivot:TypeExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Pivot.oclas#T.pivot.Class" referredType="pivot:Class HSVTree.ecore.oclas#T.HSVTree.HSVNode"/>
           </ownedExpression>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <qvti:ImperativeModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pivot="http://www.eclipse.org/ocl/2015/Pivot"
-    xmlns:qvtb="http://www.eclipse.org/qvt/2015/QVTbase" xmlns:qvti="http://www.eclipse.org/qvt/2015/QVTimperative"
-    xsi:schemaLocation="http://www.eclipse.org/ocl/2015/Pivot java://org.eclipse.ocl.pivot.PivotPackage http://www.eclipse.org/qvt/2015/QVTbase java://org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage http://www.eclipse.org/qvt/2015/QVTimperative java://org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage"
+    xmlns:qvtb="http://www.eclipse.org/qvt/2015/QVTbase" xmlns:qvti="http://www.eclipse.org/qvt/2016/QVTimperative"
+    xsi:schemaLocation="http://www.eclipse.org/ocl/2015/Pivot java://org.eclipse.ocl.pivot.PivotPackage http://www.eclipse.org/qvt/2015/QVTbase java://org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage http://www.eclipse.org/qvt/2016/QVTimperative java://org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage"
     name="BaseCS2AS.qvtias" externalURI="platform:/resource/org.eclipse.ocl.xtext.base/model/BaseCS2AS.qvtias">
   <ownedImports importedNamespace="pivot:Package BaseCS.ecore.oclas#P.basecs"/>
   <ownedImports importedNamespace="pivot:Library http://www.eclipse.org/ocl/2015/Library.oclas#P.ocl"/>
@@ -9,7 +9,7 @@
   <ownedPackages xmi:id="P." name="" URI="zz" nsPrefix="yy">
     <ownedClasses xsi:type="qvtb:Transformation" xmi:id="T..BaseCS2AS_qvtp_qvtcas" name="BaseCS2AS_qvtp_qvtcas">
       <modelParameter xmi:id="qT..BaseCS2AS_qvtp_qvtcas.leftCS" name="leftCS" usedPackage="BaseCS.ecore.oclas#P.basecs">
-        <ownedContext name="leftCS" type="pivot:Class http://www.eclipse.org/qvt/2015/QVTimperativeLibrary.oclas#T.qvtbaselibrary.Model"/>
+        <ownedContext name="leftCS" type="pivot:Class http://www.eclipse.org/qvt/2016/QVTimperativeLibrary.oclas#T.qvtbaselibrary.Model"/>
       </modelParameter>
       <modelParameter xmi:id="qT..BaseCS2AS_qvtp_qvtcas.rightAS" name="rightAS" usedPackage="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#P.pivot http://www.eclipse.org/ocl/2015/Library.oclas#P.ocl"/>
       <rule xsi:type="qvti:Mapping" xmi:id="m..BaseCS2AS_qvtp_qvtcas.__root__" name="__root__">
@@ -20,8 +20,8 @@
         <guardPattern/>
         <bottomPattern xsi:type="qvti:ImperativeBottomPattern">
           <variable xmi:id="qV..BaseCS2AS_qvtp_qvtcas.__root__.bottom.%171%AnnotationCS%187%" name="«AnnotationCS»" type="#//@ownedPackages.1/@ownedClasses.0">
-            <ownedInit xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.0" referredOperation="http://www.eclipse.org/qvt/2015/QVTimperativeLibrary.oclas#o.qvtbaselibrary.Model.objectsOfKind..TT">
-              <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class http://www.eclipse.org/qvt/2015/QVTimperativeLibrary.oclas#T.qvtbaselibrary.Model"
+            <ownedInit xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.0" referredOperation="http://www.eclipse.org/qvt/2016/QVTimperativeLibrary.oclas#o.qvtbaselibrary.Model.objectsOfKind..TT">
+              <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class http://www.eclipse.org/qvt/2016/QVTimperativeLibrary.oclas#T.qvtbaselibrary.Model"
                   referredVariable="#//@ownedPackages.0/@ownedClasses.0/@modelParameter.0/@ownedContext"/>
               <ownedArguments xsi:type="pivot:TypeExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class" referredType="pivot:Class BaseCS.ecore.oclas#T.basecs.AnnotationCS"/>
             </ownedInit>
@@ -31,8 +31,8 @@
             <ownedInit xsi:type="pivot:VariableExp" type="#//@ownedPackages.1/@ownedClasses.0" referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.__root__.bottom.%171%AnnotationCS%187%"/>
           </variable>
           <variable xmi:id="qV..BaseCS2AS_qvtp_qvtcas.__root__.bottom.%171%AttributeCS%187%" name="«AttributeCS»" type="#//@ownedPackages.1/@ownedClasses.2">
-            <ownedInit xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.2" referredOperation="http://www.eclipse.org/qvt/2015/QVTimperativeLibrary.oclas#o.qvtbaselibrary.Model.objectsOfKind..TT">
-              <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class http://www.eclipse.org/qvt/2015/QVTimperativeLibrary.oclas#T.qvtbaselibrary.Model"
+            <ownedInit xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.2" referredOperation="http://www.eclipse.org/qvt/2016/QVTimperativeLibrary.oclas#o.qvtbaselibrary.Model.objectsOfKind..TT">
+              <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class http://www.eclipse.org/qvt/2016/QVTimperativeLibrary.oclas#T.qvtbaselibrary.Model"
                   referredVariable="#//@ownedPackages.0/@ownedClasses.0/@modelParameter.0/@ownedContext"/>
               <ownedArguments xsi:type="pivot:TypeExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class" referredType="pivot:Class BaseCS.ecore.oclas#T.basecs.AttributeCS"/>
             </ownedInit>
@@ -42,8 +42,8 @@
             <ownedInit xsi:type="pivot:VariableExp" type="#//@ownedPackages.1/@ownedClasses.2" referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.__root__.bottom.%171%AttributeCS%187%"/>
           </variable>
           <variable xmi:id="qV..BaseCS2AS_qvtp_qvtcas.__root__.bottom.%171%ConstraintCS%187%" name="«ConstraintCS»" type="#//@ownedPackages.1/@ownedClasses.4">
-            <ownedInit xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.4" referredOperation="http://www.eclipse.org/qvt/2015/QVTimperativeLibrary.oclas#o.qvtbaselibrary.Model.objectsOfKind..TT">
-              <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class http://www.eclipse.org/qvt/2015/QVTimperativeLibrary.oclas#T.qvtbaselibrary.Model"
+            <ownedInit xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.4" referredOperation="http://www.eclipse.org/qvt/2016/QVTimperativeLibrary.oclas#o.qvtbaselibrary.Model.objectsOfKind..TT">
+              <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class http://www.eclipse.org/qvt/2016/QVTimperativeLibrary.oclas#T.qvtbaselibrary.Model"
                   referredVariable="#//@ownedPackages.0/@ownedClasses.0/@modelParameter.0/@ownedContext"/>
               <ownedArguments xsi:type="pivot:TypeExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class" referredType="pivot:Class BaseCS.ecore.oclas#T.basecs.ConstraintCS"/>
             </ownedInit>
@@ -53,8 +53,8 @@
             <ownedInit xsi:type="pivot:VariableExp" type="#//@ownedPackages.1/@ownedClasses.4" referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.__root__.bottom.%171%ConstraintCS%187%"/>
           </variable>
           <variable xmi:id="qV..BaseCS2AS_qvtp_qvtcas.__root__.bottom.%171%DataTypeCS%187%" name="«DataTypeCS»" type="#//@ownedPackages.1/@ownedClasses.6">
-            <ownedInit xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.6" referredOperation="http://www.eclipse.org/qvt/2015/QVTimperativeLibrary.oclas#o.qvtbaselibrary.Model.objectsOfKind..TT">
-              <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class http://www.eclipse.org/qvt/2015/QVTimperativeLibrary.oclas#T.qvtbaselibrary.Model"
+            <ownedInit xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.6" referredOperation="http://www.eclipse.org/qvt/2016/QVTimperativeLibrary.oclas#o.qvtbaselibrary.Model.objectsOfKind..TT">
+              <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class http://www.eclipse.org/qvt/2016/QVTimperativeLibrary.oclas#T.qvtbaselibrary.Model"
                   referredVariable="#//@ownedPackages.0/@ownedClasses.0/@modelParameter.0/@ownedContext"/>
               <ownedArguments xsi:type="pivot:TypeExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class" referredType="pivot:Class BaseCS.ecore.oclas#T.basecs.DataTypeCS"/>
             </ownedInit>
@@ -64,8 +64,8 @@
             <ownedInit xsi:type="pivot:VariableExp" type="#//@ownedPackages.1/@ownedClasses.6" referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.__root__.bottom.%171%DataTypeCS%187%"/>
           </variable>
           <variable xmi:id="qV..BaseCS2AS_qvtp_qvtcas.__root__.bottom.%171%DetailCS%187%" name="«DetailCS»" type="#//@ownedPackages.1/@ownedClasses.8">
-            <ownedInit xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.8" referredOperation="http://www.eclipse.org/qvt/2015/QVTimperativeLibrary.oclas#o.qvtbaselibrary.Model.objectsOfKind..TT">
-              <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class http://www.eclipse.org/qvt/2015/QVTimperativeLibrary.oclas#T.qvtbaselibrary.Model"
+            <ownedInit xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.8" referredOperation="http://www.eclipse.org/qvt/2016/QVTimperativeLibrary.oclas#o.qvtbaselibrary.Model.objectsOfKind..TT">
+              <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class http://www.eclipse.org/qvt/2016/QVTimperativeLibrary.oclas#T.qvtbaselibrary.Model"
                   referredVariable="#//@ownedPackages.0/@ownedClasses.0/@modelParameter.0/@ownedContext"/>
               <ownedArguments xsi:type="pivot:TypeExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class" referredType="pivot:Class BaseCS.ecore.oclas#T.basecs.DetailCS"/>
             </ownedInit>
@@ -75,8 +75,8 @@
             <ownedInit xsi:type="pivot:VariableExp" type="#//@ownedPackages.1/@ownedClasses.8" referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.__root__.bottom.%171%DetailCS%187%"/>
           </variable>
           <variable xmi:id="qV..BaseCS2AS_qvtp_qvtcas.__root__.bottom.%171%EnumerationCS%187%" name="«EnumerationCS»" type="#//@ownedPackages.1/@ownedClasses.10">
-            <ownedInit xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.10" referredOperation="http://www.eclipse.org/qvt/2015/QVTimperativeLibrary.oclas#o.qvtbaselibrary.Model.objectsOfKind..TT">
-              <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class http://www.eclipse.org/qvt/2015/QVTimperativeLibrary.oclas#T.qvtbaselibrary.Model"
+            <ownedInit xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.10" referredOperation="http://www.eclipse.org/qvt/2016/QVTimperativeLibrary.oclas#o.qvtbaselibrary.Model.objectsOfKind..TT">
+              <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class http://www.eclipse.org/qvt/2016/QVTimperativeLibrary.oclas#T.qvtbaselibrary.Model"
                   referredVariable="#//@ownedPackages.0/@ownedClasses.0/@modelParameter.0/@ownedContext"/>
               <ownedArguments xsi:type="pivot:TypeExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class" referredType="pivot:Class BaseCS.ecore.oclas#T.basecs.EnumerationCS"/>
             </ownedInit>
@@ -86,8 +86,8 @@
             <ownedInit xsi:type="pivot:VariableExp" type="#//@ownedPackages.1/@ownedClasses.10" referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.__root__.bottom.%171%EnumerationCS%187%"/>
           </variable>
           <variable xmi:id="qV..BaseCS2AS_qvtp_qvtcas.__root__.bottom.%171%EnumerationLiteralCS%187%" name="«EnumerationLiteralCS»" type="#//@ownedPackages.1/@ownedClasses.12">
-            <ownedInit xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.12" referredOperation="http://www.eclipse.org/qvt/2015/QVTimperativeLibrary.oclas#o.qvtbaselibrary.Model.objectsOfKind..TT">
-              <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class http://www.eclipse.org/qvt/2015/QVTimperativeLibrary.oclas#T.qvtbaselibrary.Model"
+            <ownedInit xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.12" referredOperation="http://www.eclipse.org/qvt/2016/QVTimperativeLibrary.oclas#o.qvtbaselibrary.Model.objectsOfKind..TT">
+              <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class http://www.eclipse.org/qvt/2016/QVTimperativeLibrary.oclas#T.qvtbaselibrary.Model"
                   referredVariable="#//@ownedPackages.0/@ownedClasses.0/@modelParameter.0/@ownedContext"/>
               <ownedArguments xsi:type="pivot:TypeExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class" referredType="pivot:Class BaseCS.ecore.oclas#T.basecs.EnumerationLiteralCS"/>
             </ownedInit>
@@ -97,8 +97,8 @@
             <ownedInit xsi:type="pivot:VariableExp" type="#//@ownedPackages.1/@ownedClasses.12" referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.__root__.bottom.%171%EnumerationLiteralCS%187%"/>
           </variable>
           <variable xmi:id="qV..BaseCS2AS_qvtp_qvtcas.__root__.bottom.%171%ImportCS%187%" name="«ImportCS»" type="#//@ownedPackages.1/@ownedClasses.14">
-            <ownedInit xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.14" referredOperation="http://www.eclipse.org/qvt/2015/QVTimperativeLibrary.oclas#o.qvtbaselibrary.Model.objectsOfKind..TT">
-              <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class http://www.eclipse.org/qvt/2015/QVTimperativeLibrary.oclas#T.qvtbaselibrary.Model"
+            <ownedInit xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.14" referredOperation="http://www.eclipse.org/qvt/2016/QVTimperativeLibrary.oclas#o.qvtbaselibrary.Model.objectsOfKind..TT">
+              <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class http://www.eclipse.org/qvt/2016/QVTimperativeLibrary.oclas#T.qvtbaselibrary.Model"
                   referredVariable="#//@ownedPackages.0/@ownedClasses.0/@modelParameter.0/@ownedContext"/>
               <ownedArguments xsi:type="pivot:TypeExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class" referredType="pivot:Class BaseCS.ecore.oclas#T.basecs.ImportCS"/>
             </ownedInit>
@@ -108,8 +108,8 @@
             <ownedInit xsi:type="pivot:VariableExp" type="#//@ownedPackages.1/@ownedClasses.14" referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.__root__.bottom.%171%ImportCS%187%"/>
           </variable>
           <variable xmi:id="qV..BaseCS2AS_qvtp_qvtcas.__root__.bottom.%171%LambdaTypeCS%187%" name="«LambdaTypeCS»" type="#//@ownedPackages.1/@ownedClasses.16">
-            <ownedInit xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.16" referredOperation="http://www.eclipse.org/qvt/2015/QVTimperativeLibrary.oclas#o.qvtbaselibrary.Model.objectsOfKind..TT">
-              <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class http://www.eclipse.org/qvt/2015/QVTimperativeLibrary.oclas#T.qvtbaselibrary.Model"
+            <ownedInit xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.16" referredOperation="http://www.eclipse.org/qvt/2016/QVTimperativeLibrary.oclas#o.qvtbaselibrary.Model.objectsOfKind..TT">
+              <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class http://www.eclipse.org/qvt/2016/QVTimperativeLibrary.oclas#T.qvtbaselibrary.Model"
                   referredVariable="#//@ownedPackages.0/@ownedClasses.0/@modelParameter.0/@ownedContext"/>
               <ownedArguments xsi:type="pivot:TypeExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class" referredType="pivot:Class BaseCS.ecore.oclas#T.basecs.LambdaTypeCS"/>
             </ownedInit>
@@ -119,8 +119,8 @@
             <ownedInit xsi:type="pivot:VariableExp" type="#//@ownedPackages.1/@ownedClasses.16" referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.__root__.bottom.%171%LambdaTypeCS%187%"/>
           </variable>
           <variable xmi:id="qV..BaseCS2AS_qvtp_qvtcas.__root__.bottom.%171%OperationCS%187%" name="«OperationCS»" type="#//@ownedPackages.1/@ownedClasses.18">
-            <ownedInit xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.18" referredOperation="http://www.eclipse.org/qvt/2015/QVTimperativeLibrary.oclas#o.qvtbaselibrary.Model.objectsOfKind..TT">
-              <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class http://www.eclipse.org/qvt/2015/QVTimperativeLibrary.oclas#T.qvtbaselibrary.Model"
+            <ownedInit xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.18" referredOperation="http://www.eclipse.org/qvt/2016/QVTimperativeLibrary.oclas#o.qvtbaselibrary.Model.objectsOfKind..TT">
+              <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class http://www.eclipse.org/qvt/2016/QVTimperativeLibrary.oclas#T.qvtbaselibrary.Model"
                   referredVariable="#//@ownedPackages.0/@ownedClasses.0/@modelParameter.0/@ownedContext"/>
               <ownedArguments xsi:type="pivot:TypeExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class" referredType="pivot:Class BaseCS.ecore.oclas#T.basecs.OperationCS"/>
             </ownedInit>
@@ -130,8 +130,8 @@
             <ownedInit xsi:type="pivot:VariableExp" type="#//@ownedPackages.1/@ownedClasses.18" referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.__root__.bottom.%171%OperationCS%187%"/>
           </variable>
           <variable xmi:id="qV..BaseCS2AS_qvtp_qvtcas.__root__.bottom.%171%PackageCS%187%" name="«PackageCS»" type="#//@ownedPackages.1/@ownedClasses.20">
-            <ownedInit xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.20" referredOperation="http://www.eclipse.org/qvt/2015/QVTimperativeLibrary.oclas#o.qvtbaselibrary.Model.objectsOfKind..TT">
-              <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class http://www.eclipse.org/qvt/2015/QVTimperativeLibrary.oclas#T.qvtbaselibrary.Model"
+            <ownedInit xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.20" referredOperation="http://www.eclipse.org/qvt/2016/QVTimperativeLibrary.oclas#o.qvtbaselibrary.Model.objectsOfKind..TT">
+              <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class http://www.eclipse.org/qvt/2016/QVTimperativeLibrary.oclas#T.qvtbaselibrary.Model"
                   referredVariable="#//@ownedPackages.0/@ownedClasses.0/@modelParameter.0/@ownedContext"/>
               <ownedArguments xsi:type="pivot:TypeExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class" referredType="pivot:Class BaseCS.ecore.oclas#T.basecs.PackageCS"/>
             </ownedInit>
@@ -141,8 +141,8 @@
             <ownedInit xsi:type="pivot:VariableExp" type="#//@ownedPackages.1/@ownedClasses.20" referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.__root__.bottom.%171%PackageCS%187%"/>
           </variable>
           <variable xmi:id="qV..BaseCS2AS_qvtp_qvtcas.__root__.bottom.%171%ParameterCS%187%" name="«ParameterCS»" type="#//@ownedPackages.1/@ownedClasses.22">
-            <ownedInit xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.22" referredOperation="http://www.eclipse.org/qvt/2015/QVTimperativeLibrary.oclas#o.qvtbaselibrary.Model.objectsOfKind..TT">
-              <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class http://www.eclipse.org/qvt/2015/QVTimperativeLibrary.oclas#T.qvtbaselibrary.Model"
+            <ownedInit xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.22" referredOperation="http://www.eclipse.org/qvt/2016/QVTimperativeLibrary.oclas#o.qvtbaselibrary.Model.objectsOfKind..TT">
+              <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class http://www.eclipse.org/qvt/2016/QVTimperativeLibrary.oclas#T.qvtbaselibrary.Model"
                   referredVariable="#//@ownedPackages.0/@ownedClasses.0/@modelParameter.0/@ownedContext"/>
               <ownedArguments xsi:type="pivot:TypeExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class" referredType="pivot:Class BaseCS.ecore.oclas#T.basecs.ParameterCS"/>
             </ownedInit>
@@ -152,8 +152,8 @@
             <ownedInit xsi:type="pivot:VariableExp" type="#//@ownedPackages.1/@ownedClasses.22" referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.__root__.bottom.%171%ParameterCS%187%"/>
           </variable>
           <variable xmi:id="qV..BaseCS2AS_qvtp_qvtcas.__root__.bottom.%171%PrimitiveTypeRefCS%187%" name="«PrimitiveTypeRefCS»" type="#//@ownedPackages.1/@ownedClasses.24">
-            <ownedInit xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.24" referredOperation="http://www.eclipse.org/qvt/2015/QVTimperativeLibrary.oclas#o.qvtbaselibrary.Model.objectsOfKind..TT">
-              <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class http://www.eclipse.org/qvt/2015/QVTimperativeLibrary.oclas#T.qvtbaselibrary.Model"
+            <ownedInit xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.24" referredOperation="http://www.eclipse.org/qvt/2016/QVTimperativeLibrary.oclas#o.qvtbaselibrary.Model.objectsOfKind..TT">
+              <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class http://www.eclipse.org/qvt/2016/QVTimperativeLibrary.oclas#T.qvtbaselibrary.Model"
                   referredVariable="#//@ownedPackages.0/@ownedClasses.0/@modelParameter.0/@ownedContext"/>
               <ownedArguments xsi:type="pivot:TypeExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class" referredType="pivot:Class BaseCS.ecore.oclas#T.basecs.PrimitiveTypeRefCS"/>
             </ownedInit>
@@ -163,8 +163,8 @@
             <ownedInit xsi:type="pivot:VariableExp" type="#//@ownedPackages.1/@ownedClasses.24" referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.__root__.bottom.%171%PrimitiveTypeRefCS%187%"/>
           </variable>
           <variable xmi:id="qV..BaseCS2AS_qvtp_qvtcas.__root__.bottom.%171%ReferenceCS%187%" name="«ReferenceCS»" type="#//@ownedPackages.1/@ownedClasses.26">
-            <ownedInit xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.26" referredOperation="http://www.eclipse.org/qvt/2015/QVTimperativeLibrary.oclas#o.qvtbaselibrary.Model.objectsOfKind..TT">
-              <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class http://www.eclipse.org/qvt/2015/QVTimperativeLibrary.oclas#T.qvtbaselibrary.Model"
+            <ownedInit xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.26" referredOperation="http://www.eclipse.org/qvt/2016/QVTimperativeLibrary.oclas#o.qvtbaselibrary.Model.objectsOfKind..TT">
+              <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class http://www.eclipse.org/qvt/2016/QVTimperativeLibrary.oclas#T.qvtbaselibrary.Model"
                   referredVariable="#//@ownedPackages.0/@ownedClasses.0/@modelParameter.0/@ownedContext"/>
               <ownedArguments xsi:type="pivot:TypeExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class" referredType="pivot:Class BaseCS.ecore.oclas#T.basecs.ReferenceCS"/>
             </ownedInit>
@@ -174,8 +174,8 @@
             <ownedInit xsi:type="pivot:VariableExp" type="#//@ownedPackages.1/@ownedClasses.26" referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.__root__.bottom.%171%ReferenceCS%187%"/>
           </variable>
           <variable xmi:id="qV..BaseCS2AS_qvtp_qvtcas.__root__.bottom.%171%RootPackageCS%187%" name="«RootPackageCS»" type="#//@ownedPackages.1/@ownedClasses.28">
-            <ownedInit xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.28" referredOperation="http://www.eclipse.org/qvt/2015/QVTimperativeLibrary.oclas#o.qvtbaselibrary.Model.objectsOfKind..TT">
-              <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class http://www.eclipse.org/qvt/2015/QVTimperativeLibrary.oclas#T.qvtbaselibrary.Model"
+            <ownedInit xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.28" referredOperation="http://www.eclipse.org/qvt/2016/QVTimperativeLibrary.oclas#o.qvtbaselibrary.Model.objectsOfKind..TT">
+              <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class http://www.eclipse.org/qvt/2016/QVTimperativeLibrary.oclas#T.qvtbaselibrary.Model"
                   referredVariable="#//@ownedPackages.0/@ownedClasses.0/@modelParameter.0/@ownedContext"/>
               <ownedArguments xsi:type="pivot:TypeExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class" referredType="pivot:Class BaseCS.ecore.oclas#T.basecs.RootPackageCS"/>
             </ownedInit>
@@ -185,8 +185,8 @@
             <ownedInit xsi:type="pivot:VariableExp" type="#//@ownedPackages.1/@ownedClasses.28" referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.__root__.bottom.%171%RootPackageCS%187%"/>
           </variable>
           <variable xmi:id="qV..BaseCS2AS_qvtp_qvtcas.__root__.bottom.%171%SpecificationCS%187%" name="«SpecificationCS»" type="#//@ownedPackages.1/@ownedClasses.30">
-            <ownedInit xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.30" referredOperation="http://www.eclipse.org/qvt/2015/QVTimperativeLibrary.oclas#o.qvtbaselibrary.Model.objectsOfKind..TT">
-              <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class http://www.eclipse.org/qvt/2015/QVTimperativeLibrary.oclas#T.qvtbaselibrary.Model"
+            <ownedInit xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.30" referredOperation="http://www.eclipse.org/qvt/2016/QVTimperativeLibrary.oclas#o.qvtbaselibrary.Model.objectsOfKind..TT">
+              <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class http://www.eclipse.org/qvt/2016/QVTimperativeLibrary.oclas#T.qvtbaselibrary.Model"
                   referredVariable="#//@ownedPackages.0/@ownedClasses.0/@modelParameter.0/@ownedContext"/>
               <ownedArguments xsi:type="pivot:TypeExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class" referredType="pivot:Class BaseCS.ecore.oclas#T.basecs.SpecificationCS"/>
             </ownedInit>
@@ -196,8 +196,8 @@
             <ownedInit xsi:type="pivot:VariableExp" type="#//@ownedPackages.1/@ownedClasses.30" referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.__root__.bottom.%171%SpecificationCS%187%"/>
           </variable>
           <variable xmi:id="qV..BaseCS2AS_qvtp_qvtcas.__root__.bottom.%171%StructuredClassCS%187%" name="«StructuredClassCS»" type="#//@ownedPackages.1/@ownedClasses.32">
-            <ownedInit xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.32" referredOperation="http://www.eclipse.org/qvt/2015/QVTimperativeLibrary.oclas#o.qvtbaselibrary.Model.objectsOfKind..TT">
-              <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class http://www.eclipse.org/qvt/2015/QVTimperativeLibrary.oclas#T.qvtbaselibrary.Model"
+            <ownedInit xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.32" referredOperation="http://www.eclipse.org/qvt/2016/QVTimperativeLibrary.oclas#o.qvtbaselibrary.Model.objectsOfKind..TT">
+              <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class http://www.eclipse.org/qvt/2016/QVTimperativeLibrary.oclas#T.qvtbaselibrary.Model"
                   referredVariable="#//@ownedPackages.0/@ownedClasses.0/@modelParameter.0/@ownedContext"/>
               <ownedArguments xsi:type="pivot:TypeExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class" referredType="pivot:Class BaseCS.ecore.oclas#T.basecs.StructuredClassCS"/>
             </ownedInit>
@@ -207,8 +207,8 @@
             <ownedInit xsi:type="pivot:VariableExp" type="#//@ownedPackages.1/@ownedClasses.32" referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.__root__.bottom.%171%StructuredClassCS%187%"/>
           </variable>
           <variable xmi:id="qV..BaseCS2AS_qvtp_qvtcas.__root__.bottom.%171%TemplateBindingCS%187%" name="«TemplateBindingCS»" type="#//@ownedPackages.1/@ownedClasses.34">
-            <ownedInit xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.34" referredOperation="http://www.eclipse.org/qvt/2015/QVTimperativeLibrary.oclas#o.qvtbaselibrary.Model.objectsOfKind..TT">
-              <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class http://www.eclipse.org/qvt/2015/QVTimperativeLibrary.oclas#T.qvtbaselibrary.Model"
+            <ownedInit xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.34" referredOperation="http://www.eclipse.org/qvt/2016/QVTimperativeLibrary.oclas#o.qvtbaselibrary.Model.objectsOfKind..TT">
+              <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class http://www.eclipse.org/qvt/2016/QVTimperativeLibrary.oclas#T.qvtbaselibrary.Model"
                   referredVariable="#//@ownedPackages.0/@ownedClasses.0/@modelParameter.0/@ownedContext"/>
               <ownedArguments xsi:type="pivot:TypeExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class" referredType="pivot:Class BaseCS.ecore.oclas#T.basecs.TemplateBindingCS"/>
             </ownedInit>
@@ -219,8 +219,8 @@
           </variable>
           <variable xmi:id="qV..BaseCS2AS_qvtp_qvtcas.__root__.bottom.%171%TemplateParameterSubstitutionCS%187%" name="«TemplateParameterSubstitutionCS»"
               type="#//@ownedPackages.1/@ownedClasses.36">
-            <ownedInit xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.36" referredOperation="http://www.eclipse.org/qvt/2015/QVTimperativeLibrary.oclas#o.qvtbaselibrary.Model.objectsOfKind..TT">
-              <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class http://www.eclipse.org/qvt/2015/QVTimperativeLibrary.oclas#T.qvtbaselibrary.Model"
+            <ownedInit xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.36" referredOperation="http://www.eclipse.org/qvt/2016/QVTimperativeLibrary.oclas#o.qvtbaselibrary.Model.objectsOfKind..TT">
+              <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class http://www.eclipse.org/qvt/2016/QVTimperativeLibrary.oclas#T.qvtbaselibrary.Model"
                   referredVariable="#//@ownedPackages.0/@ownedClasses.0/@modelParameter.0/@ownedContext"/>
               <ownedArguments xsi:type="pivot:TypeExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class" referredType="pivot:Class BaseCS.ecore.oclas#T.basecs.TemplateParameterSubstitutionCS"/>
             </ownedInit>
@@ -246,8 +246,8 @@
             </ownedInit>
           </variable>
           <variable xmi:id="qV..BaseCS2AS_qvtp_qvtcas.__root__.bottom.%171%TemplateSignatureCS%187%" name="«TemplateSignatureCS»" type="#//@ownedPackages.1/@ownedClasses.38">
-            <ownedInit xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.38" referredOperation="http://www.eclipse.org/qvt/2015/QVTimperativeLibrary.oclas#o.qvtbaselibrary.Model.objectsOfKind..TT">
-              <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class http://www.eclipse.org/qvt/2015/QVTimperativeLibrary.oclas#T.qvtbaselibrary.Model"
+            <ownedInit xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.38" referredOperation="http://www.eclipse.org/qvt/2016/QVTimperativeLibrary.oclas#o.qvtbaselibrary.Model.objectsOfKind..TT">
+              <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class http://www.eclipse.org/qvt/2016/QVTimperativeLibrary.oclas#T.qvtbaselibrary.Model"
                   referredVariable="#//@ownedPackages.0/@ownedClasses.0/@modelParameter.0/@ownedContext"/>
               <ownedArguments xsi:type="pivot:TypeExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class" referredType="pivot:Class BaseCS.ecore.oclas#T.basecs.TemplateSignatureCS"/>
             </ownedInit>
@@ -257,8 +257,8 @@
             <ownedInit xsi:type="pivot:VariableExp" type="#//@ownedPackages.1/@ownedClasses.38" referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.__root__.bottom.%171%TemplateSignatureCS%187%"/>
           </variable>
           <variable xmi:id="qV..BaseCS2AS_qvtp_qvtcas.__root__.bottom.%171%TuplePartCS%187%" name="«TuplePartCS»" type="#//@ownedPackages.1/@ownedClasses.40">
-            <ownedInit xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.40" referredOperation="http://www.eclipse.org/qvt/2015/QVTimperativeLibrary.oclas#o.qvtbaselibrary.Model.objectsOfKind..TT">
-              <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class http://www.eclipse.org/qvt/2015/QVTimperativeLibrary.oclas#T.qvtbaselibrary.Model"
+            <ownedInit xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.40" referredOperation="http://www.eclipse.org/qvt/2016/QVTimperativeLibrary.oclas#o.qvtbaselibrary.Model.objectsOfKind..TT">
+              <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class http://www.eclipse.org/qvt/2016/QVTimperativeLibrary.oclas#T.qvtbaselibrary.Model"
                   referredVariable="#//@ownedPackages.0/@ownedClasses.0/@modelParameter.0/@ownedContext"/>
               <ownedArguments xsi:type="pivot:TypeExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class" referredType="pivot:Class BaseCS.ecore.oclas#T.basecs.TuplePartCS"/>
             </ownedInit>
@@ -268,8 +268,8 @@
             <ownedInit xsi:type="pivot:VariableExp" type="#//@ownedPackages.1/@ownedClasses.40" referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.__root__.bottom.%171%TuplePartCS%187%"/>
           </variable>
           <variable xmi:id="qV..BaseCS2AS_qvtp_qvtcas.__root__.bottom.%171%TupleTypeCS%187%" name="«TupleTypeCS»" type="#//@ownedPackages.1/@ownedClasses.42">
-            <ownedInit xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.42" referredOperation="http://www.eclipse.org/qvt/2015/QVTimperativeLibrary.oclas#o.qvtbaselibrary.Model.objectsOfKind..TT">
-              <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class http://www.eclipse.org/qvt/2015/QVTimperativeLibrary.oclas#T.qvtbaselibrary.Model"
+            <ownedInit xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.42" referredOperation="http://www.eclipse.org/qvt/2016/QVTimperativeLibrary.oclas#o.qvtbaselibrary.Model.objectsOfKind..TT">
+              <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class http://www.eclipse.org/qvt/2016/QVTimperativeLibrary.oclas#T.qvtbaselibrary.Model"
                   referredVariable="#//@ownedPackages.0/@ownedClasses.0/@modelParameter.0/@ownedContext"/>
               <ownedArguments xsi:type="pivot:TypeExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class" referredType="pivot:Class BaseCS.ecore.oclas#T.basecs.TupleTypeCS"/>
             </ownedInit>
@@ -279,8 +279,8 @@
             <ownedInit xsi:type="pivot:VariableExp" type="#//@ownedPackages.1/@ownedClasses.42" referredVariable="#qV..BaseCS2AS_qvtp_qvtcas.__root__.bottom.%171%TupleTypeCS%187%"/>
           </variable>
           <variable xmi:id="qV..BaseCS2AS_qvtp_qvtcas.__root__.bottom.%171%TypeParameterCS%187%" name="«TypeParameterCS»" type="#//@ownedPackages.1/@ownedClasses.44">
-            <ownedInit xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.44" referredOperation="http://www.eclipse.org/qvt/2015/QVTimperativeLibrary.oclas#o.qvtbaselibrary.Model.objectsOfKind..TT">
-              <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class http://www.eclipse.org/qvt/2015/QVTimperativeLibrary.oclas#T.qvtbaselibrary.Model"
+            <ownedInit xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.44" referredOperation="http://www.eclipse.org/qvt/2016/QVTimperativeLibrary.oclas#o.qvtbaselibrary.Model.objectsOfKind..TT">
+              <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class http://www.eclipse.org/qvt/2016/QVTimperativeLibrary.oclas#T.qvtbaselibrary.Model"
                   referredVariable="#//@ownedPackages.0/@ownedClasses.0/@modelParameter.0/@ownedContext"/>
               <ownedArguments xsi:type="pivot:TypeExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class" referredType="pivot:Class BaseCS.ecore.oclas#T.basecs.TypeParameterCS"/>
             </ownedInit>

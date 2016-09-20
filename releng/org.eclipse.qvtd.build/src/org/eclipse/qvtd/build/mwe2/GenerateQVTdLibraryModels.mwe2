@@ -59,7 +59,7 @@ Workflow {
     component = GenerateOCLstdlibXtend { resourceSet = resourceSet
     	projectName = "org.eclipse.qvtd.pivot.qvtimperative"
     	modelFile = "model/QVTimperativeLibrary.oclstdlib"
-    	uri = "http://www.eclipse.org/qvt/2015/QVTimperativeLibrary"
+    	uri = "http://www.eclipse.org/qvt/2016/QVTimperativeLibrary"
     	ecoreFile = "/org.eclipse.qvtd.pivot.qvtimperative/model-gen/QVTimperativeLibrary.ecore"
     	javaFolder = "/org.eclipse.qvtd.pivot.qvtimperative/emf-gen"
     	javaPackageName = "org.eclipse.qvtd.pivot.qvtimperative.model"
@@ -73,7 +73,7 @@ Workflow {
     		to = "org.eclipse.ocl.pivot.model.OCLstdlib"
     	}
     	generatedClassNameMap = {
-    		from = "http://www.eclipse.org/qvt/2015/QVTimperative"
+    		from = "http://www.eclipse.org/qvt/2016/QVTimperative"
     		to = "org.eclipse.qvtd.pivot.qvtimperative.model.QVTimperativeMetamodel"
     	}
     }
