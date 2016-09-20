@@ -19,7 +19,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 
 public class MappingLoopAttribution extends EmptyAttribution
 {
-	public static final MappingLoopAttribution INSTANCE = new MappingLoopAttribution();
+	public static final @NonNull MappingLoopAttribution INSTANCE = new MappingLoopAttribution();
 
 	@Override
 	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {

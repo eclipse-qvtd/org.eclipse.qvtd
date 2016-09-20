@@ -31,7 +31,7 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
-import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 
@@ -256,8 +256,8 @@ implements IQVTiEvaluationVisitor {
 	 * Delegates to my decorated visitor.
 	 */
 	@Override
-	public @Nullable Object visitMappingCallBinding(@NonNull MappingCallBinding mappingCallBinding) {
-		return delegate.visitMappingCallBinding(mappingCallBinding);
+	public @Nullable Object visitMappingParameterBinding(@NonNull MappingParameterBinding mappingParameterBinding) {
+		return delegate.visitMappingParameterBinding(mappingParameterBinding);
 	}
 
 	/**

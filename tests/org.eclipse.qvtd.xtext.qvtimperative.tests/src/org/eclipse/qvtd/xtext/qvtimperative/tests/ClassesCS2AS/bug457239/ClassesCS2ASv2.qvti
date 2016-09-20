@@ -10,7 +10,7 @@ transformation classescs2as
 
 map createPackage in classescs2as
 {
-	in:leftCS packageCS : PackageCS;
+	guard:leftCS packageCS : PackageCS;
 	new:rightAS _package : Package;
 	set _package.name := if packageCS.aBooleanElementOp()
 						--if not packageCS.name.oclIsUndefined()
@@ -23,7 +23,7 @@ map __root__ in classescs2as
 {
 	for packageCS : classescs::PackageCS in classescs::PackageCS.allInstances() {
 		call createPackage {
-			packageCS := packageCS;
+			packageCS iterates packageCS;
 		}
 	}
 }

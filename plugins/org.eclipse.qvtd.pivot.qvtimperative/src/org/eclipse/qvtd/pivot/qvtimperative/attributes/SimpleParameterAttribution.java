@@ -18,17 +18,17 @@ import org.eclipse.ocl.pivot.internal.scoping.EnvironmentView;
 import org.eclipse.ocl.pivot.internal.scoping.ScopeView;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
-import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.SimpleParameter;
 
-public class NewStatementAttribution extends EmptyAttribution
+public class SimpleParameterAttribution extends EmptyAttribution
 {
-	public static final @NonNull NewStatementAttribution INSTANCE = new NewStatementAttribution();
+	public static final @NonNull SimpleParameterAttribution INSTANCE = new SimpleParameterAttribution();
 
 	@Override
 	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
-		NewStatement asNewStatement = (NewStatement)target;
+		SimpleParameter asSimpleParameter = (SimpleParameter)target;
 		if (environmentView.getRequiredType() == PivotPackage.Literals.TYPE) {		// FIXME should be detecting ancestor
-			ImperativeTypedModel asTypedModel = asNewStatement.getReferredTypedModel();
+			ImperativeTypedModel asTypedModel = asSimpleParameter.getReferredTypedModel();
 			for (org.eclipse.ocl.pivot.@NonNull Package asPackage : ClassUtil.nullFree(asTypedModel.getUsedPackage())) {
 				environmentView.addAllTypes(asPackage);
 			}

@@ -11,89 +11,89 @@ map __root__ in KiamaRewrite_qvtp_qvtcas
 {
 	var roots : Set(ocl::OclElement) := leftCS.rootObjects();
 	var _'«child-NumCS»' : Set(kiamacs::NumCS) := roots->selectByKind(kiamacs::NumCS);
-	var ji_NumCS1 : Set(kiamacs::NumCS) := _'«child-NumCS»';
+	buffer ji_NumCS1 : Set(kiamacs::NumCS) := _'«child-NumCS»';
 	var _'«child-PlusCS»' : Set(kiamacs::PlusCS) := roots->selectByKind(kiamacs::PlusCS);
-	var ji_PlusCS1 : Set(kiamacs::PlusCS) := _'«child-PlusCS»';
-	var ji_PlusCS_31 : Set(kiamacs::PlusCS) := _'«child-PlusCS»';
+	buffer ji_PlusCS1 : Set(kiamacs::PlusCS) := _'«child-PlusCS»';
+	buffer ji_PlusCS_31 : Set(kiamacs::PlusCS) := _'«child-PlusCS»';
 	var _'«child-TopCS»' : Set(kiamacs::TopCS) := roots->selectByKind(kiamacs::TopCS);
 	var ji_TopCS1 : Set(kiamacs::TopCS) := _'«child-TopCS»';
 	for loop0 : kiamacs::TopCS in ji_TopCS1 {
 		call m_TopCS_ast {
-			lTopCS := loop0;
+			lTopCS iterates loop0;
 		}
 	}
 	for loop0 : kiamacs::TopCS in ji_TopCS1 {
 		call r_TopCS_node {
-			ji_NumCS := ji_NumCS1;
-			ji_PlusCS := ji_PlusCS1;
-			ji_PlusCS_3 := ji_PlusCS_31;
-			_'«parent»' := loop0;
+			ji_NumCS appendsTo ji_NumCS1;
+			ji_PlusCS appendsTo ji_PlusCS1;
+			ji_PlusCS_3 appendsTo ji_PlusCS_31;
+			_'«parent»' iterates loop0;
 		}
 	}
 	for loop0 : kiamacs::PlusCS in ji_PlusCS_31 {
 		infinite call r__PlusCS {
-			ji_NumCS := ji_NumCS1;
-			ji_PlusCS := ji_PlusCS1;
-			_'«head»' := loop0;
+			ji_NumCS appendsTo ji_NumCS1;
+			ji_PlusCS appendsTo ji_PlusCS1;
+			_'«head»' iterates loop0;
 		}
 	}
 	for loop0 : kiamacs::NumCS in ji_NumCS1 {
 		call m_NumCS_ast {
-			lNumCS := loop0;
+			lNumCS iterates loop0;
 		}
 	}
 	for loop0 : kiamacs::PlusCS in ji_PlusCS1 {
 		call m_PlusCS_ast_2 {
-			lPlusCS := loop0;
+			lPlusCS iterates loop0;
 		}
 	}
 	for loop0 : kiamacs::NumCS in ji_NumCS1 {
 		call m_NumCS_ast_value_1 {
-			lNumCS := loop0;
+			lNumCS iterates loop0;
 		}
 	}
 	for loop0 : kiamacs::PlusCS in ji_PlusCS1 {
 		call m_PlusCS_ast_left {
-			lPlusCS := loop0;
+			lPlusCS iterates loop0;
 		}
 	}
 	for loop0 : kiamacs::PlusCS in ji_PlusCS1 {
 		call m_PlusCS_ast_right {
-			lPlusCS := loop0;
+			lPlusCS iterates loop0;
 		}
 	}
 	for loop0 : kiamacs::TopCS in ji_TopCS1 {
 		call m_TopCS_ast_node {
-			lTopCS := loop0;
+			lTopCS iterates loop0;
 		}
 	}
 	for loop0 : kiamacs::PlusCS in ji_PlusCS1 {
 		call m_PlusCS_ast_1 {
-			lPlusCS := loop0;
+			lPlusCS iterates loop0;
 		}
 	}
 	for loop0 : kiamacs::NumCS in ji_NumCS1 {
 		call m_NumCS_ast_2 {
-			lNumCS := loop0;
+			lNumCS iterates loop0;
 		}
 	}
 	for loop0 : kiamacs::PlusCS in ji_PlusCS1 {
 		call m_PlusCS_ast {
-			lPlusCS := loop0;
+			lPlusCS iterates loop0;
 		}
 	}
 }
 
 map m_NumCS_ast in KiamaRewrite_qvtp_qvtcas
 {
-	in:leftCS lNumCS : NumCS;
+	guard:leftCS lNumCS : NumCS;
 	new:rightAS rNum : Num;
 	set lNumCS.ast := rNum;
 }
 
 map m_NumCS_ast_2 in KiamaRewrite_qvtp_qvtcas
 {
-	in:leftCS lNumCS : NumCS;
+	guard:leftCS lNumCS : NumCS;
 	var ast : ecore::EObject := lNumCS.ast;
 	var aNum : kiamaas::Num := ast.oclAsType(kiamaas::Num);
 	var oclContainer : ocl::OclElement := aNum.oclContainer;
@@ -106,7 +106,7 @@ map m_NumCS_ast_2 in KiamaRewrite_qvtp_qvtcas
 
 map m_NumCS_ast_value_1 in KiamaRewrite_qvtp_qvtcas
 {
-	in:leftCS lNumCS : NumCS;
+	guard:leftCS lNumCS : NumCS;
 	var ast : ecore::EObject := lNumCS.ast;
 	var value : ecore::EInt := lNumCS.value;
 	var aNum : kiamaas::Num := ast.oclAsType(kiamaas::Num);
@@ -116,7 +116,7 @@ map m_NumCS_ast_value_1 in KiamaRewrite_qvtp_qvtcas
 
 map m_PlusCS_ast in KiamaRewrite_qvtp_qvtcas
 {
-	in:leftCS lPlusCS : PlusCS;
+	guard:leftCS lPlusCS : PlusCS;
 	var ast : ecore::EObject := lPlusCS.ast;
 	var aPlus : kiamaas::Plus := ast.oclAsType(kiamaas::Plus);
 	var left : kiamaas::Node := aPlus.left;
@@ -132,7 +132,7 @@ map m_PlusCS_ast in KiamaRewrite_qvtp_qvtcas
 
 map m_PlusCS_ast_1 in KiamaRewrite_qvtp_qvtcas
 {
-	in:leftCS lPlusCS : PlusCS;
+	guard:leftCS lPlusCS : PlusCS;
 	var ast : ecore::EObject := lPlusCS.ast;
 	var aPlus : kiamaas::Plus := ast.oclAsType(kiamaas::Plus);
 	var oclContainer : ocl::OclElement := aPlus.oclContainer;
@@ -145,14 +145,14 @@ map m_PlusCS_ast_1 in KiamaRewrite_qvtp_qvtcas
 
 map m_PlusCS_ast_2 in KiamaRewrite_qvtp_qvtcas
 {
-	in:leftCS lPlusCS : PlusCS;
+	guard:leftCS lPlusCS : PlusCS;
 	new:rightAS rPlus : Plus;
 	set lPlusCS.ast := rPlus;
 }
 
 map m_PlusCS_ast_left in KiamaRewrite_qvtp_qvtcas
 {
-	in:leftCS lPlusCS : PlusCS;
+	guard:leftCS lPlusCS : PlusCS;
 	var ast : ecore::EObject := lPlusCS.ast;
 	var left : kiamacs::NodeCS := lPlusCS.left;
 	var aPlus : kiamaas::Plus := ast.oclAsType(kiamaas::Plus);
@@ -163,7 +163,7 @@ map m_PlusCS_ast_left in KiamaRewrite_qvtp_qvtcas
 
 map m_PlusCS_ast_right in KiamaRewrite_qvtp_qvtcas
 {
-	in:leftCS lPlusCS : PlusCS;
+	guard:leftCS lPlusCS : PlusCS;
 	var ast : ecore::EObject := lPlusCS.ast;
 	var right : kiamacs::NodeCS := lPlusCS.right;
 	var aPlus : kiamaas::Plus := ast.oclAsType(kiamaas::Plus);
@@ -174,14 +174,14 @@ map m_PlusCS_ast_right in KiamaRewrite_qvtp_qvtcas
 
 map m_TopCS_ast in KiamaRewrite_qvtp_qvtcas
 {
-	in:leftCS lTopCS : TopCS;
+	guard:leftCS lTopCS : TopCS;
 	new:rightAS rTop : Top;
 	set lTopCS.ast := rTop;
 }
 
 map m_TopCS_ast_node in KiamaRewrite_qvtp_qvtcas
 {
-	in:leftCS lTopCS : TopCS;
+	guard:leftCS lTopCS : TopCS;
 	var ast : ecore::EObject := lTopCS.ast;
 	var node : kiamacs::NodeCS := lTopCS.node;
 	var aTop : kiamaas::Top := ast.oclAsType(kiamaas::Top);
@@ -202,9 +202,9 @@ map r_PlusCS_left in KiamaRewrite_qvtp_qvtcas
 	add ji_NumCS += _'«child-NumCS»';
 	for aChild : kiamacs::PlusCS in _'«child-PlusCS»' {
 		call r_PlusCS_left {
-			_'«parent»' := aChild;
-			ji_PlusCS := ji_PlusCS;
-			ji_NumCS := ji_NumCS;
+			_'«parent»' uses aChild;
+			ji_PlusCS appendsTo ji_PlusCS;
+			ji_NumCS appendsTo ji_NumCS;
 		}
 	}
 }
@@ -221,9 +221,9 @@ map r_PlusCS_right in KiamaRewrite_qvtp_qvtcas
 	add ji_NumCS += _'«child-NumCS»';
 	for aChild : kiamacs::PlusCS in _'«child-PlusCS»' {
 		call r_PlusCS_right {
-			_'«parent»' := aChild;
-			ji_PlusCS := ji_PlusCS;
-			ji_NumCS := ji_NumCS;
+			_'«parent»' uses aChild;
+			ji_PlusCS appendsTo ji_PlusCS;
+			ji_NumCS appendsTo ji_NumCS;
 		}
 	}
 }
@@ -233,7 +233,7 @@ map r_TopCS_node in KiamaRewrite_qvtp_qvtcas
 	append ji_PlusCS : Set(kiamacs::PlusCS);
 	append ji_PlusCS_3 : Set(kiamacs::PlusCS);
 	append ji_NumCS : Set(kiamacs::NumCS);
-	in:leftCS _'«parent»' : TopCS;
+	guard:leftCS _'«parent»' : TopCS;
 	var allChildren : Set(kiamacs::NodeCS) := _'«parent»'.node.oclAsSet();
 	var _'«child-PlusCS»' : Set(kiamacs::PlusCS) := allChildren->selectByKind(kiamacs::PlusCS);
 	var _'«child-NumCS»' : Set(kiamacs::NumCS) := allChildren->selectByKind(kiamacs::NumCS);
@@ -246,26 +246,26 @@ map r__PlusCS in KiamaRewrite_qvtp_qvtcas
 {
 	append ji_PlusCS : Set(kiamacs::PlusCS);
 	append ji_NumCS : Set(kiamacs::NumCS);
-	in:leftCS _'«head»' : PlusCS;
-	out _'«local»' : Set(kiamacs::PlusCS);
-	out _'«new»' : Set(kiamacs::PlusCS);
+	guard:leftCS _'«head»' : PlusCS;
+	buffer _'«local»' : Set(kiamacs::PlusCS);
+	buffer _'«new»' : Set(kiamacs::PlusCS);
 	call r_PlusCS_left {
-		ji_NumCS := ji_NumCS;
-		ji_PlusCS := _'«local»';
-		_'«parent»' := _'«head»';
+		ji_NumCS appendsTo ji_NumCS;
+		 ji_PlusCS appendsTo _'«local»';
+		_'«parent»' uses _'«head»';
 	}
 	call r_PlusCS_right {
-		ji_NumCS := ji_NumCS;
-		ji_PlusCS := _'«local»';
-		_'«parent»' := _'«head»';
+		ji_NumCS appendsTo ji_NumCS;
+		 ji_PlusCS appendsTo _'«local»';
+		_'«parent»' uses _'«head»';
 	}
 	add _'«new»' += _'«local»'->excludingAll(ji_PlusCS);
 	add ji_PlusCS += _'«new»';
 	for loop0 : kiamacs::PlusCS in _'«new»' {
 		infinite call r__PlusCS {
-			ji_NumCS := ji_NumCS;
-			ji_PlusCS := ji_PlusCS;
-			_'«head»' := loop0;
+			ji_NumCS appendsTo ji_NumCS;
+			ji_PlusCS appendsTo ji_PlusCS;
+			_'«head»' iterates  loop0;
 		}
 	}
 }

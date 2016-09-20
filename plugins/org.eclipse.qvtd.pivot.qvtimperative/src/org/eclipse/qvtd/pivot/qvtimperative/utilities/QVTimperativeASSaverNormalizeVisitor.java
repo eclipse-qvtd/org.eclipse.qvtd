@@ -53,7 +53,7 @@ public class QVTimperativeASSaverNormalizeVisitor extends AbstractQVTimperativeA
 
 	@Override
 	public @Nullable Boolean visitMappingCall(@NonNull MappingCall object) {
-		ClassUtil.sort(ClassUtil.nullFree(object.getBinding()), QVTimperativeUtil.MappingCallBindingComparator.INSTANCE);
+		ClassUtil.sort(ClassUtil.nullFree(object.getBinding()), QVTimperativeUtil.MappingParameterBindingComparator.INSTANCE);
 		return null;
 	}
 }

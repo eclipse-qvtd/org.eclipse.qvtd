@@ -22,7 +22,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 
 public class GuardParameterAttribution extends EmptyAttribution
 {
-	public static final GuardParameterAttribution INSTANCE = new GuardParameterAttribution();
+	public static final @NonNull GuardParameterAttribution INSTANCE = new GuardParameterAttribution();
 
 	@Override
 	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {

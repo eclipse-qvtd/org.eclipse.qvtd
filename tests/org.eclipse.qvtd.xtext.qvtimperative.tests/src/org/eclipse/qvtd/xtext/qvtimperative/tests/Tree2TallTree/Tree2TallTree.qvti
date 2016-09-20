@@ -9,41 +9,41 @@ transformation Tree2TallTree {
 }
 
 map __root__ in Tree2TallTree {
-    for node : tree::Node in tree.objectsOfKind(Node)->sortedBy(name) {
+    buffer nodes := tree.objectsOfKind(Node)->sortedBy(name);
+    for node : tree::Node in nodes {
         call Node2MiddleNode {
-            node := node;
+            node iterates node;
         } 
     } 
-    for node : tree::Node in tree.objectsOfKind(Node)->sortedBy(name) {
+    for node : tree::Node in nodes {
         call Edge2MiddleEdge {
-            node := node;
-            node2tallNode := node.Node2TallNode;
+            node iterates node;
         } 
     } 
     for node2tallNode : tree2talltree::Node2TallNode in tree2talltree.objectsOfKind(Node2TallNode)->sortedBy(name) {
         call MiddleNode2TallNode {
-            node2tallNode := node2tallNode;	
+            node2tallNode iterates node2tallNode;	
         } 
     } 
 }
 
 map Node2MiddleNode in Tree2TallTree {
-	in:tree node : Node; 
+	guard:tree node : Node; 
 	new:tree2talltree node2tallNode : Node2TallNode;
 	set node2tallNode.node := node;
 	set node2tallNode.name := node.name;
 }
 
 map Edge2MiddleEdge in Tree2TallTree {
-	in:tree node : Node;
-	in:tree2talltree node2tallNode : Node2TallNode;
+	guard:tree node : Node;
+	var node2tallNode : Node2TallNode := node.Node2TallNode;
 	check node.parent <> null;
 	notify set node2tallNode.parent := node.parent.Node2TallNode;
 --		node2tallNode.name := node.name;
 }
 
 map MiddleNode2TallNode in Tree2TallTree {
-	in:tree2talltree node2tallNode : Node2TallNode;
+	guard:tree2talltree node2tallNode : Node2TallNode;
 	var tallNode_name : String := node2tallNode.name;
 	observe Node2TallNode::children, Node2TallNode::tallNode
 	var tallNode_children : Set(TallNode) := node2tallNode.children?.tallNode->asSet();

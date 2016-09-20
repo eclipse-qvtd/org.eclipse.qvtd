@@ -31,7 +31,6 @@ import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.TypeExp;
 import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.Variable;
-import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.ids.IdManager;
 import org.eclipse.ocl.pivot.ids.IdResolver;
@@ -51,7 +50,8 @@ import org.eclipse.qvtd.pivot.qvtimperative.AppendParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
-import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingParameter;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeHelper;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 
@@ -258,7 +258,7 @@ public abstract class AbstractRegion2Mapping
 
 	public abstract @NonNull List<@NonNull Node> getGuardNodes();
 
-	public abstract @NonNull VariableDeclaration getGuardVariable(@NonNull Node node);
+	public abstract @NonNull MappingParameter getGuardVariable(@NonNull Node node);
 
 	/*	private @Nullable OCLExpression getInitExpression(@NonNull Node node) {
 		List<Edge> incomingEdges = node.getIncomingEdges();
@@ -372,12 +372,12 @@ public abstract class AbstractRegion2Mapping
 	}
 
 	// FIXME temporary backward compatibility
-	protected void setLegacyIsPolled(@NonNull Mapping calledMapping, @NonNull MappingCallBinding mappingCallBinding) {
+	protected void setLegacyIsPolled(@NonNull Mapping calledMapping, @NonNull MappingParameterBinding mappingParameterBinding) {
 		/*		for (Domain domain : calledMapping.getDomain()) {
 			if (domain instanceof ImperativeDomain) {
 				ImperativeDomain imperativeDomain = (ImperativeDomain)domain;
 				if (imperativeDomain.getCheckedProperties().size() > 0) {
-					mappingCallBinding.setIsPolled(true);
+					mappingParameterBinding.setIsPolled(true);
 					return;
 				}
 			}
@@ -389,7 +389,7 @@ public abstract class AbstractRegion2Mapping
 		return mapping.toString();
 	}
 
-	public @NonNull MappingCall createMappingCall(@NonNull List<@NonNull MappingCallBinding> mappingCallBindings) {
-		return QVTimperativeUtil.createMappingCall(getMapping(), mappingCallBindings);
+	public @NonNull MappingCall createMappingCall(@NonNull List<@NonNull MappingParameterBinding> mappingParameterBindings) {
+		return QVTimperativeUtil.createMappingCall(getMapping(), mappingParameterBindings);
 	}
 }

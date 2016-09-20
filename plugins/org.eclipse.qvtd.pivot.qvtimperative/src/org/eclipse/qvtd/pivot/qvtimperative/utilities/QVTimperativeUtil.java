@@ -40,13 +40,16 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory.CreateStrategy;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
+import org.eclipse.qvtd.pivot.qvtimperative.AppendParameter;
+import org.eclipse.qvtd.pivot.qvtimperative.AppendParameterBinding;
+import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
-import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ObservableStatement;
@@ -61,12 +64,12 @@ public class QVTimperativeUtil extends QVTbaseUtil
 	public static final @NonNull String ROOT_MAPPING_NAME = "__root__";
 	public static final @NonNull String MIDDLE_DOMAIN_NAME = "middle";
 
-	public static final class MappingCallBindingComparator implements Comparator<MappingCallBinding>
+	public static final class MappingParameterBindingComparator implements Comparator<@NonNull MappingParameterBinding>
 	{
-		public static final @NonNull MappingCallBindingComparator INSTANCE = new MappingCallBindingComparator();
+		public static final @NonNull MappingParameterBindingComparator INSTANCE = new MappingParameterBindingComparator();
 
 		@Override
-		public int compare(MappingCallBinding o1, MappingCallBinding o2) {
+		public int compare(@NonNull MappingParameterBinding o1, @NonNull MappingParameterBinding o2) {
 			VariableDeclaration v1 = o1.getBoundVariable();
 			VariableDeclaration v2 = o2.getBoundVariable();
 			String n1 = v1 != null ? v1.getName() : null;
@@ -98,6 +101,13 @@ public class QVTimperativeUtil extends QVTbaseUtil
 		}
 	}
 
+	public static @NonNull AppendParameterBinding createAppendParameterBinding(@NonNull AppendParameter variable, @NonNull ConnectionVariable value) {
+		AppendParameterBinding mappingParameterBinding = QVTimperativeFactory.eINSTANCE.createAppendParameterBinding();
+		mappingParameterBinding.setBoundVariable(variable);
+		mappingParameterBinding.setValue(value);
+		return mappingParameterBinding;
+	}
+
 	public static @NonNull IterateExp createIterateExp(@Nullable OCLExpression asSource, @NonNull Iteration asIteration, @NonNull List<? extends Variable> asIterators, @NonNull OCLExpression asBody) {
 		IterateExp asCallExp = PivotFactory.eINSTANCE.createIterateExp();
 		asCallExp.setReferredIteration(asIteration);
@@ -115,18 +125,11 @@ public class QVTimperativeUtil extends QVTbaseUtil
 		return mapping;
 	}
 
-	public static @NonNull MappingCall createMappingCall(@NonNull Mapping mapping, @NonNull List<MappingCallBinding> mappingCallBindings) {
+	public static @NonNull MappingCall createMappingCall(@NonNull Mapping mapping, @NonNull List<@NonNull MappingParameterBinding> mappingParameterBindings) {
 		MappingCall mappingCall = QVTimperativeFactory.eINSTANCE.createMappingCall();
 		mappingCall.setReferredMapping(mapping);
-		mappingCall.getBinding().addAll(mappingCallBindings);
+		mappingCall.getBinding().addAll(mappingParameterBindings);
 		return mappingCall;
-	}
-
-	public static @NonNull MappingCallBinding createMappingCallBinding(@NonNull VariableDeclaration variable, @NonNull OCLExpression value) {
-		MappingCallBinding mappingCallBinding = QVTimperativeFactory.eINSTANCE.createMappingCallBinding();
-		mappingCallBinding.setBoundVariable(variable);
-		mappingCallBinding.setValue(value);
-		return mappingCallBinding;
 	}
 
 	public static @NonNull MappingLoop createMappingLoop(@NonNull OCLExpression source, @NonNull LoopVariable iterator, @NonNull MappingStatement mappingStatement) {

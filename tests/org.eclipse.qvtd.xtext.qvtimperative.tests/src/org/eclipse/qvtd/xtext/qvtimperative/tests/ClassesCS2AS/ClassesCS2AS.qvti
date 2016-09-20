@@ -11,74 +11,74 @@ transformation classescs2as
 
 map mClassCS2Class_LM in classescs2as
 {
-	in:leftCS classCS : ClassCS;
+	guard:leftCS classCS : ClassCS;
 	new:middle c2c : ClassCS2Class;
 	set c2c.classCS := classCS;
 }
 
 map mRootCS2Root_LM in classescs2as
 {
-	in:leftCS rootCS : RootCS;
+	guard:leftCS rootCS : RootCS;
 	new:middle r2r : RootCS2Root;
 	set r2r.rootCS := rootCS;
 }
 
 map mPackageCS2Package_LM in classescs2as
 {
-	in:leftCS packageCS : PackageCS;
+	guard:leftCS packageCS : PackageCS;
 	new:middle p2p : PackageCS2Package;
 	set p2p.packageCS := packageCS;
 }
 
 map mClassCS2Class_MR in classescs2as
 {
-	in:middle c2c : ClassCS2Class;
+	guard:middle c2c : ClassCS2Class;
 	new:rightAS _'class' : Class;
 	set c2c._'class' := _'class';
 }
 
 map mRootCS2Root_MR in classescs2as
 {
-	in:middle r2r : RootCS2Root;
+	guard:middle r2r : RootCS2Root;
 	new:rightAS root : Root;
 	set r2r.root := root;
 }
 
 map mPackageCS2Package_MR in classescs2as
 {
-	in:middle p2p : PackageCS2Package;
+	guard:middle p2p : PackageCS2Package;
 	new:rightAS _'package' : Package;
 	set p2p._'package' := _'package';
 }
 
 map uClass_name in classescs2as
 {
-	in:rightAS _'class' : Class;
-	in:leftCS classCS : ClassCS;
+	guard:rightAS _'class' : Class;
+	guard:leftCS classCS : ClassCS;
 	check classCS.ClassCS2Class._'class' = _'class';
 	set _'class'.name := classCS.name;
 }
 
 map uRoot_ownedPackages in classescs2as
 {
-	in:rightAS root : Root;
-	in:leftCS rootCS : RootCS;
+	guard:rightAS root : Root;
+	guard:leftCS rootCS : RootCS;
 	check rootCS.RootCS2Root.root = root;
 	set root.ownedPackages := rootCS.ownedPackages.PackageCS2Package._'package'->asOrderedSet();
 }
 
 map uPackage_name in classescs2as
 {
-	in:rightAS _'package' : Package;
-	in:leftCS packageCS : PackageCS;
+	guard:rightAS _'package' : Package;
+	guard:leftCS packageCS : PackageCS;
 	check packageCS.PackageCS2Package._'package' = _'package';
 	set	_'package'.name := packageCS.name;
 }
 
 map uPackage_ownedClasses in classescs2as
 {
-	in:rightAS _'package' : Package;
-	in:leftCS packageCS : PackageCS;
+	guard:rightAS _'package' : Package;
+	guard:leftCS packageCS : PackageCS;
 	check packageCS.PackageCS2Package._'package' = _'package';
 	set	_'package'.ownedClasses := packageCS.ownedClasses.ClassCS2Class._'class'->asOrderedSet();
 }
@@ -87,63 +87,63 @@ map __root__ in classescs2as
 {
 	for packageCS : classescs::PackageCS in classescs::PackageCS.allInstances() {
 		call mPackageCS2Package_LM {
-			packageCS := packageCS;
+			packageCS iterates packageCS;
 		}
 	}
 	for p2p : classescstraces::PackageCS2Package in classescstraces::PackageCS2Package.allInstances() {
 		call mPackageCS2Package_MR {
-			p2p := p2p;
+			p2p iterates p2p;
 		}
 	}
 	for _'package' : classes::Package in classes::Package.allInstances() {
 		for packageCS : classescs::PackageCS in classescs::PackageCS.allInstances() {
 			call uPackage_name {
-				packageCS := packageCS;
-				_'package' := _'package';
+				packageCS iterates packageCS;
+				_'package' iterates _'package';
 			}
 		}
 	}
 	for _'package' : classes::Package in classes::Package.allInstances() {
 		for packageCS : classescs::PackageCS in classescs::PackageCS.allInstances() {
 			call uPackage_ownedClasses {
-				packageCS := packageCS;
-				_'package' := _'package';
+				packageCS iterates packageCS;
+				_'package' iterates _'package';
 			}
 		}
 	}
 	for classCS : classescs::ClassCS in classescs::ClassCS.allInstances() {
 		call mClassCS2Class_LM {
-			classCS := classCS;
+			classCS iterates classCS;
 		}
 	}
 	for c2c : classescstraces::ClassCS2Class in classescstraces::ClassCS2Class.allInstances() {
 		call mClassCS2Class_MR {
-			c2c := c2c;
+			c2c iterates c2c;
 		}
 	}
 	for classCS : classescs::ClassCS in classescs::ClassCS.allInstances() {
 		for _'class' : classes::Class in classes::Class.allInstances() {
 			call uClass_name {
-				_'class' := _'class';
-				classCS := classCS;
+				_'class' iterates _'class';
+				classCS iterates classCS;
 			}
 		}
 	}
 	for rootCS : classescs::RootCS in classescs::RootCS.allInstances() {
 		call mRootCS2Root_LM {
-			rootCS := rootCS;
+			rootCS iterates rootCS;
 		}
 	}
 	for r2r : classescstraces::RootCS2Root in classescstraces::RootCS2Root.allInstances() {
 		call mRootCS2Root_MR {
-			r2r := r2r;
+			r2r iterates r2r;
 		}
 	}
 	for rootCS : classescs::RootCS in classescs::RootCS.allInstances() {
 		for root : classes::Root in classes::Root.allInstances() {
 			call uRoot_ownedPackages {
-				root := root;
-				rootCS := rootCS;
+				root iterates root;
+				rootCS iterates rootCS;
 			}
 		}
 	}

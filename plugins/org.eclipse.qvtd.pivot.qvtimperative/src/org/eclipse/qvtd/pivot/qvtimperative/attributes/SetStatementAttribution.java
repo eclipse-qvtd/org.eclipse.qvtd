@@ -20,7 +20,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 
 public class SetStatementAttribution extends EmptyAttribution
 {
-	public static final SetStatementAttribution INSTANCE = new SetStatementAttribution();
+	public static final @NonNull SetStatementAttribution INSTANCE = new SetStatementAttribution();
 
 	@Override
 	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {

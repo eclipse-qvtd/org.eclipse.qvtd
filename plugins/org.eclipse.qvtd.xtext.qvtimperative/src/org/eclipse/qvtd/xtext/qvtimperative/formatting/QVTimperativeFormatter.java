@@ -13,22 +13,25 @@ package org.eclipse.qvtd.xtext.qvtimperative.formatting;
 import org.eclipse.ocl.xtext.essentialocl.formatting.AbstractEssentialOCLFormatter;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.AddStatementCSElements;
+import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.AppendParameterBindingCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.AppendParameterCSElements;
+import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.BufferStatementCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.CheckStatementCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.DeclareStatementCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.DirectionCSElements;
+import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.GuardParameterBindingCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.GuardParameterCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.ImportCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.MappingCSElements;
-import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.MappingCallBindingCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.MappingCallCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.MappingLoopCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.NewStatementCSElements;
-import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.OutVariableCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.QualifiedPackageCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.QueryCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.ScopeNameCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.SetStatementCSElements;
+import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.SimpleParameterBindingCSElements;
+import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.SimpleParameterCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.TransformationCSElements;
 import org.eclipse.xtext.formatting.impl.FormattingConfig;
 
@@ -83,7 +86,16 @@ public class QVTimperativeFormatter extends AbstractEssentialOCLFormatter
 			c.setNoSpace().before(a.getSemicolonKeyword_5());
 		}
 		{
+			AppendParameterBindingCSElements a = f.getAppendParameterBindingCSAccess();
+			setNoSpaceLineWrap(c, a.getSemicolonKeyword_3());
+		}
+		{
 			AppendParameterCSElements a = f.getAppendParameterCSAccess();
+			c.setLinewrap(1).before(a.getGroup());
+			c.setNoSpace().before(a.getSemicolonKeyword_4());
+		}
+		{
+			BufferStatementCSElements a = f.getBufferStatementCSAccess();
 			c.setLinewrap(1).before(a.getGroup());
 			c.setNoSpace().before(a.getSemicolonKeyword_4());
 		}
@@ -97,13 +109,17 @@ public class QVTimperativeFormatter extends AbstractEssentialOCLFormatter
 			DeclareStatementCSElements a = f.getDeclareStatementCSAccess();
 			c.setLinewrap(1).before(a.getGroup());
 			c.setNoSpace().before(a.getCommaKeyword_0_2_0());
-			c.setLinewrap(1).before(a.getIsCheckedAssignment_1());
+			c.setLinewrap(1).before(a.getIsCheckAssignment_1());
 			setNoSpaceLineWrap(c, a.getSemicolonKeyword_7());
 		}
 		{
 			DirectionCSElements a = f.getDirectionCSAccess();
 			c.setLinewrap(1).before(a.getGroup());
 			c.setNoSpace().before(a.getCommaKeyword_5_0());
+		}
+		{
+			GuardParameterBindingCSElements a = f.getGuardParameterBindingCSAccess();
+			setNoSpaceLineWrap(c, a.getSemicolonKeyword_4());
 		}
 		{
 			GuardParameterCSElements a = f.getGuardParameterCSAccess();
@@ -131,10 +147,6 @@ public class QVTimperativeFormatter extends AbstractEssentialOCLFormatter
 			//		    c.setIndentation(a.getLeftCurlyBracketKeyword_3(), a.getRightCurlyBracketKeyword_5());
 		}
 		{
-			MappingCallBindingCSElements a = f.getMappingCallBindingCSAccess();
-			setNoSpaceLineWrap(c, a.getSemicolonKeyword_3());
-		}
-		{
 			MappingLoopCSElements a = f.getMappingLoopCSAccess();
 			c.setLinewrap(1).before(a.getGroup());
 			c.setNoSpace().before(a.getCommaKeyword_0_2_0());
@@ -147,11 +159,6 @@ public class QVTimperativeFormatter extends AbstractEssentialOCLFormatter
 			c.setLinewrap(1).before(a.getNewKeyword_1());
 			c.setNoSpace().around(a.getColonKeyword_2());
 			c.setNoSpace().before(a.getSemicolonKeyword_8());
-		}
-		{
-			OutVariableCSElements a = f.getOutVariableCSAccess();
-			c.setLinewrap(1).before(a.getGroup());
-			c.setNoSpace().before(a.getSemicolonKeyword_5());
 		}
 		{
 			QualifiedPackageCSElements a = f.getQualifiedPackageCSAccess();
@@ -184,6 +191,16 @@ public class QVTimperativeFormatter extends AbstractEssentialOCLFormatter
 			c.setLinewrap(1).before(a.getIsNotifyAssignment_1());
 			c.setNoSpace().around(a.getFullStopKeyword_4());
 			c.setNoSpace().before(a.getSemicolonKeyword_8());
+		}
+		{
+			SimpleParameterBindingCSElements a = f.getSimpleParameterBindingCSAccess();
+			setNoSpaceLineWrap(c, a.getSemicolonKeyword_4());
+		}
+		{
+			SimpleParameterCSElements a = f.getSimpleParameterCSAccess();
+			c.setLinewrap(1).before(a.getGroup());
+			c.setNoSpace().around(a.getColonKeyword_1());
+			c.setNoSpace().before(a.getSemicolonKeyword_6());
 		}
 		//	    {
 		//	    	TopLevelCSElements a = f.getTopLevelCSAccess();

@@ -83,12 +83,14 @@ import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
-import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingParameter;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ObservableStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.SimpleParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 import org.eclipse.qvtd.pivot.qvtimperative.util.AbstractExtendingQVTimperativeVisitor;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
@@ -859,7 +861,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		for (Map.Entry<@NonNull Region, @NonNull Map<@NonNull Node, @NonNull Node>> entry : calls.entrySet()) {
 			@NonNull Region calledRegion = entry.getKey();
 			AbstractRegion2Mapping calledRegion2Mapping = visitor.getRegion2Mapping(calledRegion);
-			List<@NonNull MappingCallBinding> mappingCallBindings = new ArrayList<>();
+			List<@NonNull MappingParameterBinding> mappingParameterBindings = new ArrayList<>();
 			for (Map.Entry<@NonNull Node, @NonNull Node> entry2 : entry.getValue().entrySet()) {
 				@NonNull Node sourceNode = entry2.getKey();
 				@NonNull Node targetNode = entry2.getValue();
@@ -873,11 +875,15 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 					assert elementType != null;
 					LoopVariable loopVariable = helper.createLoopVariable("loop" + loopVariables.size(), elementType);//, true, sourceExpression);
 					loopVariables.put(loopVariable, sourceExpression);
-					sourceExpression = PivotUtil.createVariableExp(loopVariable);
+					//					sourceExpression = PivotUtil.createVariableExp(loopVariable);
+					VariableDeclaration guardVariable = calledRegion2Mapping.getGuardVariable(targetNode);
+					mappingParameterBindings.add(helper.createLoopParameterBinding((GuardParameter) guardVariable, loopVariable));
 				}
-				VariableDeclaration guardVariable = calledRegion2Mapping.getGuardVariable(targetNode);
-				mappingCallBindings.add(QVTimperativeUtil.createMappingCallBinding(guardVariable, sourceExpression));
-				//					mappingCallBindings.add(QVTimperativeUtil.createMappingLoop(source, iterator, mappingStatement);
+				else {
+					VariableDeclaration guardVariable = calledRegion2Mapping.getGuardVariable(targetNode);
+					mappingParameterBindings.add(helper.createSimpleParameterBinding((SimpleParameter) guardVariable, sourceExpression));
+				}
+				//					mappingParameterBindings.add(QVTimperativeUtil.createMappingLoop(source, iterator, mappingStatement);
 			}
 			/*			Mapping calledMapping = calledRegion2Mapping.getMapping();
 			for (Node node : calledRegion2Mapping.getRegion().getPredicatedNodes()) {
@@ -886,19 +892,19 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 					if (sourceNode.getRegion() == region) {
 						OCLExpression sourceExpression = createVariableExp(sourceNode);
 						Variable guardVariable = calledRegion2Mapping.getGuardVariable(edge.getTarget());
-						MappingCallBinding mappingCallBinding = QVTimperativeUtil.createMappingCallBinding(guardVariable, sourceExpression);
+						MappingParameterBinding mappingParameterBinding = QVTimperativeUtil.createMappingParameterBinding(guardVariable, sourceExpression);
 						if (calledMapping.getPolledClasses().size() > 0) {
-							mappingCallBinding.setIsPolled(true);		// FIXME temporary backward compatibility
+							mappingParameterBinding.setIsPolled(true);		// FIXME temporary backward compatibility
 						}
-						mappingCallBindings.add(mappingCallBinding);
+						mappingParameterBindings.add(mappingParameterBinding);
 					}
 					else {
 						// FIXME find source
 					}
 				}
 			} */
-			Collections.sort(mappingCallBindings, QVTimperativeUtil.MappingCallBindingComparator.INSTANCE);
-			MappingStatement mappingCallStatement = calledRegion2Mapping.createMappingCall(mappingCallBindings);
+			Collections.sort(mappingParameterBindings, QVTimperativeUtil.MappingParameterBindingComparator.INSTANCE);
+			MappingStatement mappingCallStatement = calledRegion2Mapping.createMappingCall(mappingParameterBindings);
 			if (loopVariables != null) {
 				for (Map.Entry<@NonNull LoopVariable, @NonNull OCLExpression> loopEntry : loopVariables.entrySet()) {
 					@NonNull LoopVariable loopVariable = loopEntry.getKey();
@@ -1291,13 +1297,13 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 	}
 
 	@Override
-	public @NonNull VariableDeclaration getGuardVariable(@NonNull Node node) {
+	public @NonNull MappingParameter getGuardVariable(@NonNull Node node) {
 		//		Area area = getArea(mapping, node.getClassDatumAnalysis().getDomainUsage());
 		//		String name = getName(node);
 		//		Variable variable = NameUtil.getNameable(area.getGuardPattern().getVariable(),name);
 		VariableDeclaration variable = node2variable.get(node);
 		assert variable != null;
-		return variable;
+		return (MappingParameter) variable;
 	}
 
 	/*	@Override

@@ -36,11 +36,11 @@ import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NodeConnection;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
 import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.AppendParameter;
+import org.eclipse.qvtd.pivot.qvtimperative.BufferStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
-import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
-import org.eclipse.qvtd.pivot.qvtimperative.OutConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeFactory;
 
 import com.google.common.collect.Iterables;
@@ -75,12 +75,12 @@ public class CyclicScheduledRegion2Mapping extends AbstractScheduledRegion2Mappi
 		/**
 		 * The local accumulation variable for the recursed type. Already processed values may be present.
 		 */
-		private final @NonNull OutConnectionVariable localVariable;
+		private final @NonNull BufferStatement localVariable;
 
 		/**
 		 * The filtered local accumulation variable for the recursed type. Already processed values have been removed.
 		 */
-		private @Nullable OutConnectionVariable newVariable;
+		private @Nullable BufferStatement newVariable;
 
 		/**
 		 * The accumulated output variable for the recursed type.
@@ -121,13 +121,13 @@ public class CyclicScheduledRegion2Mapping extends AbstractScheduledRegion2Mappi
 			//					incoming2outgoing.put(incomingConnection, internallyPassedConnection);
 			Type asType = getConnectionSourcesType(incomingConnection);
 			String localName = "«local" + (index > 0 ? Integer.toString(index) : "") + "»";
-			localVariable = helper.createOutConnectionVariable(localName, asType, true, null);
+			localVariable = helper.createBufferStatement(localName, asType, true, null);
 			mapping.getOwnedStatements().add(localVariable);
 			connection2variable.put(outgoingConnection, localVariable);
 			//
 			if ((asType instanceof CollectionType) && ((CollectionType)asType).isUnique()) {
 				String newName = "«new" + (index > 0 ? Integer.toString(index) : "") + "»";
-				OutConnectionVariable newVariable2 = newVariable = helper.createOutConnectionVariable(newName, asType, true, null);
+				BufferStatement newVariable2 = newVariable = helper.createBufferStatement(newName, asType, true, null);
 				mapping.getOwnedStatements().add(newVariable2);
 				connection2variable.put(outgoingConnection, newVariable2);
 			}
@@ -236,8 +236,8 @@ public class CyclicScheduledRegion2Mapping extends AbstractScheduledRegion2Mappi
 	}
 
 	@Override
-	public @NonNull MappingCall createMappingCall(@NonNull List<@NonNull MappingCallBinding> mappingCallBindings) {
-		MappingCall mappingCall = super.createMappingCall(mappingCallBindings);
+	public @NonNull MappingCall createMappingCall(@NonNull List<@NonNull MappingParameterBinding> mappingParameterBindings) {
+		MappingCall mappingCall = super.createMappingCall(mappingParameterBindings);
 		if (!allRecursionsAreUnique) {
 			mappingCall.setIsInfinite(true);		// FIXME share code
 		}
@@ -348,12 +348,12 @@ public class CyclicScheduledRegion2Mapping extends AbstractScheduledRegion2Mappi
 	}
 
 	@Override
-	public @NonNull ConnectionVariable getGuardVariable(@NonNull Node node) {
+	public @NonNull AppendParameter getGuardVariable(@NonNull Node node) {
 		assert getHeadNodes().contains(node);
 		ClassDatumAnalysis classDatumAnalysis = node.getClassDatumAnalysis();
 		RecursionContext recursion = classDatumAnalysis2recursion.get(classDatumAnalysis);
 		assert recursion != null;
-		return recursion.getGuardVariable();
+		return (AppendParameter) recursion.getGuardVariable();
 	}
 
 	private @NonNull List<@NonNull Node> getHeadNodes() {

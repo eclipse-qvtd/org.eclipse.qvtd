@@ -70,23 +70,28 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.AppendParameter;
+import org.eclipse.qvtd.pivot.qvtimperative.AppendParameterBinding;
+import org.eclipse.qvtd.pivot.qvtimperative.BufferStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.CheckStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
+import org.eclipse.qvtd.pivot.qvtimperative.GuardParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
+import org.eclipse.qvtd.pivot.qvtimperative.LoopParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
-import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingParameter;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ObservableStatement;
-import org.eclipse.qvtd.pivot.qvtimperative.OutConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.SimpleParameter;
+import org.eclipse.qvtd.pivot.qvtimperative.SimpleParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 import org.eclipse.qvtd.pivot.qvtimperative.VariableStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
@@ -96,23 +101,28 @@ import org.eclipse.qvtd.xtext.qvtbasecs.AbstractTransformationCS;
 import org.eclipse.qvtd.xtext.qvtbasecs.QVTbaseCSPackage;
 import org.eclipse.qvtd.xtext.qvtbasecs.QualifiedPackageCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.AddStatementCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.AppendParameterBindingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.AppendParameterCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.BufferStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.CheckStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DeclareStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.GuardParameterBindingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.GuardParameterCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.LoopParameterBindingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS;
-import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingLoopCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.MappingParameterBindingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingParameterCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.NewStatementCS;
-import org.eclipse.qvtd.xtext.qvtimperativecs.OutVariableCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.ParamDeclarationCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QueryCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.SetStatementCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.SimpleParameterBindingCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.SimpleParameterCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.StatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.TopLevelCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.TransformationCS;
@@ -369,8 +379,26 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 	}
 
 	@Override
+	public ElementCS visitAppendParameterBinding(@NonNull AppendParameterBinding asMappingParameterBinding) {
+		AppendParameterBindingCS csMappingParameterBinding = context.refreshElement(AppendParameterBindingCS.class, QVTimperativeCSPackage.Literals.APPEND_PARAMETER_BINDING_CS, asMappingParameterBinding);
+		csMappingParameterBinding.setPivot(asMappingParameterBinding);
+		csMappingParameterBinding.setReferredVariable((AppendParameter) asMappingParameterBinding.getBoundVariable());
+		csMappingParameterBinding.setValue(asMappingParameterBinding.getValue());
+		return csMappingParameterBinding;
+	}
+
+	@Override
 	public ElementCS visitBaseModel(@NonNull BaseModel object) {
 		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public ElementCS visitBufferStatement(@NonNull BufferStatement asVariable) {
+		BufferStatementCS csVariable = context.refreshNamedElement(BufferStatementCS.class, QVTimperativeCSPackage.Literals.BUFFER_STATEMENT_CS, asVariable);
+		csVariable.setPivot(asVariable);
+		csVariable.setOwnedType(createTypeRefCS(asVariable.getType(), null)); //getScope(asVariable)));
+		csVariable.setOwnedExpression(context.visitDeclaration(ExpCS.class, asVariable.getOwnedExpression()));
+		return csVariable;
 	}
 
 	@Override
@@ -392,7 +420,7 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 	public ElementCS visitDeclareStatement(@NonNull DeclareStatement asVariable) {
 		DeclareStatementCS csVariable = refreshTypedElement(DeclareStatementCS.class, QVTimperativeCSPackage.Literals.DECLARE_STATEMENT_CS, asVariable);
 		csVariable.setOwnedExpression(context.visitDeclaration(ExpCS.class, asVariable.getOwnedExpression()));
-		csVariable.setIsChecked(asVariable.isIsChecked());
+		csVariable.setIsCheck(asVariable.isIsCheck());
 		refreshObservedProperties(asVariable, csVariable.getObservedProperties(), ClassUtil.nullFree(asVariable.getObservedProperties()));
 		return csVariable;
 	}
@@ -429,6 +457,16 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 		csUnrealizedVariable.setReferredTypedModel(asTypedModel);
 		csUnrealizedVariable.setOwnedType(createTypeRefCS(asVariable.getType(), asUsedPackage));
 		return csUnrealizedVariable;
+	}
+
+	@Override
+	public ElementCS visitGuardParameterBinding(@NonNull GuardParameterBinding asMappingParameterBinding) {
+		GuardParameterBindingCS csMappingParameterBinding = context.refreshElement(GuardParameterBindingCS.class, QVTimperativeCSPackage.Literals.GUARD_PARAMETER_BINDING_CS, asMappingParameterBinding);
+		csMappingParameterBinding.setPivot(asMappingParameterBinding);
+		csMappingParameterBinding.setReferredVariable((GuardParameter) asMappingParameterBinding.getBoundVariable());
+		csMappingParameterBinding.setValue(asMappingParameterBinding.getValue());
+		csMappingParameterBinding.setIsCheck(asMappingParameterBinding.isIsCheck());
+		return csMappingParameterBinding;
 	}
 
 	@Override
@@ -524,6 +562,16 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 	}
 
 	@Override
+	public ElementCS visitLoopParameterBinding(@NonNull LoopParameterBinding asMappingParameterBinding) {
+		LoopParameterBindingCS csMappingParameterBinding = context.refreshElement(LoopParameterBindingCS.class, QVTimperativeCSPackage.Literals.LOOP_PARAMETER_BINDING_CS, asMappingParameterBinding);
+		csMappingParameterBinding.setPivot(asMappingParameterBinding);
+		csMappingParameterBinding.setReferredVariable((GuardParameter) asMappingParameterBinding.getBoundVariable());
+		csMappingParameterBinding.setValue(asMappingParameterBinding.getValue());
+		csMappingParameterBinding.setIsCheck(asMappingParameterBinding.isIsCheck());
+		return csMappingParameterBinding;
+	}
+
+	@Override
 	public ElementCS visitLoopVariable(@NonNull LoopVariable asVariable) {
 		VariableCS csVariable = context.refreshNamedElement(VariableCS.class, EssentialOCLCSPackage.Literals.VARIABLE_CS, asVariable);
 		Type type = asVariable.getType();
@@ -559,19 +607,12 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 	public ElementCS visitMappingCall(@NonNull MappingCall asMappingCall) {
 		MappingCallCS csMappingCall = context.refreshElement(MappingCallCS.class, QVTimperativeCSPackage.Literals.MAPPING_CALL_CS, asMappingCall);
 		csMappingCall.setPivot(asMappingCall);
-		context.refreshList(csMappingCall.getOwnedBindings(), context.visitDeclarations(MappingCallBindingCS.class, asMappingCall.getBinding(), null));
+		context.refreshList(csMappingCall.getOwnedBindings(), context.visitDeclarations(MappingParameterBindingCS.class, asMappingCall.getBinding(), null));
 		csMappingCall.setIsInfinite(asMappingCall.isIsInfinite());
+		csMappingCall.setIsInstall(asMappingCall.isIsInstall());
+		csMappingCall.setIsInvoke(asMappingCall.isIsInvoke());
 		refreshReferredMapping(csMappingCall, asMappingCall);
 		return csMappingCall;
-	}
-
-	@Override
-	public ElementCS visitMappingCallBinding(@NonNull MappingCallBinding asMappingCallBinding) {
-		MappingCallBindingCS csMappingCallBinding = context.refreshElement(MappingCallBindingCS.class, QVTimperativeCSPackage.Literals.MAPPING_CALL_BINDING_CS, asMappingCallBinding);
-		csMappingCallBinding.setPivot(asMappingCallBinding);
-		csMappingCallBinding.setReferredVariable(asMappingCallBinding.getBoundVariable());
-		csMappingCallBinding.setOwnedValue(createExpCS(asMappingCallBinding.getValue()));
-		return csMappingCallBinding;
 	}
 
 	@Override
@@ -587,6 +628,11 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 
 	@Override
 	public ElementCS visitMappingParameter(@NonNull MappingParameter object) {
+		return visiting(object);
+	}
+
+	@Override
+	public ElementCS visitMappingParameterBinding(@NonNull MappingParameterBinding object) {
 		return visiting(object);
 	}
 
@@ -610,15 +656,6 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 	@Override
 	public ElementCS visitObservableStatement(@NonNull ObservableStatement object) {
 		return visiting(object);
-	}
-
-	@Override
-	public ElementCS visitOutConnectionVariable(@NonNull OutConnectionVariable asVariable) {
-		OutVariableCS csVariable = context.refreshNamedElement(OutVariableCS.class, QVTimperativeCSPackage.Literals.OUT_VARIABLE_CS, asVariable);
-		csVariable.setPivot(asVariable);
-		csVariable.setOwnedType(createTypeRefCS(asVariable.getType(), null)); //getScope(asVariable)));
-		csVariable.setOwnedExpression(context.visitDeclaration(ExpCS.class, asVariable.getOwnedExpression()));
-		return csVariable;
 	}
 
 	@Override
@@ -668,6 +705,29 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 		csStatement.setIsNotify(asSetStatement.isIsNotify());
 		refreshObservedProperties(asSetStatement, csStatement.getObservedProperties(), ClassUtil.nullFree(asSetStatement.getObservedProperties()));
 		return csStatement;
+	}
+
+	@Override
+	public ElementCS visitSimpleParameter(@NonNull SimpleParameter asVariable) {
+		ImperativeTypedModel asTypedModel = asVariable.getReferredTypedModel();
+		org.eclipse.ocl.pivot.Package asUsedPackage = asTypedModel.getUsedPackage().size() > 0 ? asTypedModel.getUsedPackage().get(0) : null;
+		Mapping containingMapping = QVTimperativeUtil.getContainingMapping(asVariable);
+		assert containingMapping != null;
+		SimpleParameterCS csUnrealizedVariable = context.refreshNamedElement(SimpleParameterCS.class, QVTimperativeCSPackage.Literals.SIMPLE_PARAMETER_CS, asVariable);
+		csUnrealizedVariable.setPivot(asVariable);
+		csUnrealizedVariable.setReferredTypedModel(asTypedModel);
+		csUnrealizedVariable.setOwnedType(createTypeRefCS(asVariable.getType(), asUsedPackage));
+		return csUnrealizedVariable;
+	}
+
+	@Override
+	public ElementCS visitSimpleParameterBinding(@NonNull SimpleParameterBinding asMappingParameterBinding) {
+		SimpleParameterBindingCS csMappingParameterBinding = context.refreshElement(SimpleParameterBindingCS.class, QVTimperativeCSPackage.Literals.SIMPLE_PARAMETER_BINDING_CS, asMappingParameterBinding);
+		csMappingParameterBinding.setPivot(asMappingParameterBinding);
+		csMappingParameterBinding.setReferredVariable((SimpleParameter) asMappingParameterBinding.getBoundVariable());
+		csMappingParameterBinding.setOwnedValue(createExpCS(asMappingParameterBinding.getValue()));
+		csMappingParameterBinding.setIsCheck(asMappingParameterBinding.isIsCheck());
+		return csMappingParameterBinding;
 	}
 
 	@Override

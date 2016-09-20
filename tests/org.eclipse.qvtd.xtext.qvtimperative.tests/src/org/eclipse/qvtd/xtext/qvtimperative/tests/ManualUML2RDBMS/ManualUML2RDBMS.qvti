@@ -11,13 +11,13 @@ transformation ManualUML2RDBMS {
 map __root__ in ManualUML2RDBMS {
     for p1 : UML::Package in UML::Package.allInstances() {
         call packageToSchemaLM {
-            p := p1;
+            p iterates p1;
         }
     }
 }
 
 map packageToSchemaLM in ManualUML2RDBMS {
-    in:uml p:Package;
+    guard:uml p:Package;
     new:middle p2s:PackageToSchema;
     set p2s.umlPackage := p;
     set p2s.name := p.name;
@@ -28,33 +28,33 @@ map packageToSchemaLM in ManualUML2RDBMS {
     -- PrimitiveDataType
     for child in p.elements {
 	    call integerToNumberLM {
-	        p := p;
-	        prim := child;
-	        p2s := p2s;
+	        p uses p;
+	        check prim iterates child;
+	        p2s uses p2s;
 	    }
 	    call booleanToBooleanLM {
-	        p := p;
-	        prim := child;
-	        p2s := p2s;
+	        p uses p;
+	        check prim iterates child;
+	        p2s uses p2s;
 	    }
 	    call stringToVarcharLM {
-	        p := p;
-	        prim := child;
-	        p2s := p2s;
+	        p uses p;
+	        check prim iterates child;
+	        p2s uses p2s;
 	    }
 	}
     for child in p.elements {
 	    -- Class
 	    call classToTableLM {
-	        p := p;
-	        c := child;
-	        p2s := p2s;
+	        p uses p;
+	        check c iterates child;
+	        p2s uses p2s;
 	    }
 	    -- Associations
 		    call associationToForeignKeyLM {
-	        p := p;
-	        a := child;
-	        p2s := p2s;
+	        p uses p;
+	        check a iterates child;
+	        p2s uses p2s;
 	    }
 	}
     
@@ -63,7 +63,7 @@ map packageToSchemaLM in ManualUML2RDBMS {
     
     /* M to R */
     call packageToSchemaMR {
-        p2s := p2s;
+        p2s uses p2s;
     }
     
 }
@@ -73,28 +73,28 @@ map packageToSchemaMR in ManualUML2RDBMS {
     new:rdbms s:Schema;
     set p2s.schema := s;
     call packageToSchemaMR_1 {
-        s_1 := s;
-        p2s_1 := p2s;
+        s_1 uses s;
+        p2s_1 uses p2s;
     }
     for child in p2s.primitivesToNames {
 	    call integerToNumberMR {
-	        p2s := p2s;
-	        p2n := child;
+	        p2s uses p2s;
+	        p2n iterates child;
 	    }
 	    call booleanToBooleanMR {
-	        p2s := p2s;
-	        p2n := child;
+	        p2s uses p2s;
+	        p2n iterates child;
 	    }
 	    call stringToVarcharMR {
-	        p2s := p2s;
-	        p2n := child;
+	        p2s uses p2s;
+	        p2n iterates child;
 	    }
     }
     for child in p2s.classesToTables {
 	    call classToTableMR {
-	        p2s := p2s;
-	        c2t := child;
-	        s := s;
+	        p2s uses p2s;
+	        c2t iterates child;
+	        s uses s;
 	    }
 	}
 }
@@ -107,7 +107,7 @@ map packageToSchemaMR_1 in ManualUML2RDBMS {
 
 map integerToNumberLM in ManualUML2RDBMS {
     in:uml p:Package;
-    in:uml prim:PrimitiveDataType;
+    guard:uml prim:PrimitiveDataType;
     in:middle  p2s:PackageToSchema;
     check prim.namespace = p;
     check prim.name = 'Integer';
@@ -121,14 +121,14 @@ map integerToNumberLM in ManualUML2RDBMS {
 
 map integerToNumberMR in ManualUML2RDBMS {
     in:middle p2s:PackageToSchema;
-    in:middle p2n:PrimitiveToName;
+    guard:middle p2n:PrimitiveToName;
     check p2n.owner = p2s;
     check p2n.name = 'Integer' + '2' + 'NUMBER';
 }
 
 map booleanToBooleanLM in ManualUML2RDBMS {
     in:uml p:Package; 
-    in:uml prim:PrimitiveDataType;
+    guard:uml prim:PrimitiveDataType;
     in:middle p2s:PackageToSchema;
     check prim.namespace = p;
     check prim.name = 'Boolean';
@@ -142,14 +142,14 @@ map booleanToBooleanLM in ManualUML2RDBMS {
 
 map booleanToBooleanMR in ManualUML2RDBMS {
     in:middle p2s:PackageToSchema;
-    in:middle p2n:PrimitiveToName;
+    guard:middle p2n:PrimitiveToName;
     check p2n.owner = p2s;
     check p2n.name = 'Boolean' + '2' + 'BOOLEAN';
 }
 
 map stringToVarcharLM in ManualUML2RDBMS {
     in:uml p:Package;
-    in:uml prim:PrimitiveDataType;
+    guard:uml prim:PrimitiveDataType;
     in:middle p2s:PackageToSchema;
     check prim.namespace = p;
     check prim.name = 'String';
@@ -163,7 +163,7 @@ map stringToVarcharLM in ManualUML2RDBMS {
 
 map stringToVarcharMR in ManualUML2RDBMS {
     in:middle p2s:PackageToSchema;
-    in:middle p2n:PrimitiveToName;
+    guard:middle p2n:PrimitiveToName;
     check p2n.owner = p2s;
     check p2n.name = 'String' + '2' + 'VARCHAR';
 }
@@ -182,7 +182,7 @@ query ManualUML2RDBMS::getAllForwards(cls : UML::Class[1]) : Set(UML::Associatio
 
 map classToTableLM in ManualUML2RDBMS {
     in:uml p:Package; 
-    in:uml c:Class;
+    guard:uml c:Class;
     in:middle p2s:PackageToSchema;
     check c.kind = 'persistent';
     check c.namespace = p;
@@ -194,62 +194,62 @@ map classToTableLM in ManualUML2RDBMS {
     -- A Class has attributes
     for anAttribute in c.attributes {
 	    call classPrimitiveAttributesLM {
-	        c := c;
-	        a := anAttribute;
-	        fao := c2t;
+	        c uses c;
+	        a iterates anAttribute;
+	        fao uses c2t;
 	    }
 	    call classComplexAttributesLM {
-	        c := c;
-	        a := anAttribute;
-	        fao := c2t;
+	        c uses c;
+	        a iterates anAttribute;
+	        fao uses c2t;
 	    }
 	    call complexAttributePrimitiveAttributesLM {
-	        ca := anAttribute;
-	        c := anAttribute.type;
+	        ca iterates anAttribute;
+	        check c uses anAttribute.type;
 	    }
 	    call complexAttributeComplexAttributesLM {
-	        ca := anAttribute;
-	        c := anAttribute.type;
+	        ca iterates anAttribute;
+	        check c uses anAttribute.type;
 	    }
     }
 }
 
 map classToTableMR in ManualUML2RDBMS {
     in:middle p2s:PackageToSchema;
-    in:middle c2t:ClassToTable;
+    guard:middle c2t:ClassToTable;
     in:rdbms s:Schema;
     check c2t.owner = p2s;
     new:rdbms t:Table;
     set t.kind := 'base';
     set t.schema := s;
     call classToTableMR_1 {
-        c2t_1 := c2t;
-        t_1 := t;
+        c2t_1 uses c2t;
+        t_1 uses t;
     }    
     call classToTableMR_2 {
-        t_2 := t;
-        c2t_2 := c2t;
+        t_2 uses t;
+        c2t_2 uses c2t;
     }
     for child in c2t.associationsToForeignKeys {
 	    call associationToForeignKeyMR {
-	        p2s := p2s;
-	        dt := t;
-	--        sc2t := c2t;
+	        p2s uses p2s;
+	        dt uses t;
+	--        sc2t iterates c2t;
 	--        dc2t <= c2t.associationsToForeignKeys.referenced;
-        sc2t := t.ClassToTable;
-        dc2t := t.ClassToTable;
-	        a2f := child;
-	        s := s;
-	        st := t;
-	        rk := c2t.primaryKey;
+        sc2t uses t.ClassToTable;
+        dc2t uses t.ClassToTable;
+	        a2f iterates child;
+	        s uses s;
+	        st uses t;
+	        rk uses c2t.primaryKey;
 	    }
     }
     -- A Class has attributes
     for child in c2t.fromAttributes->union(c2t.fromAttributes->selectByKind(UML2RDBMS::NonLeafAttribute).fromAttributes) {
 	    call attributeColumnsMR {
-	        c2t := c2t;
-	        a2c := child;
-	        t := t;
+	        c2t uses c2t;
+	        check a2c iterates child;
+	        t uses t;
 	    }
     }
 }
@@ -272,14 +272,14 @@ map classToTableMR_2 in ManualUML2RDBMS {
     set pc._'key' := OrderedSet(Key){pk};
     set pc.type := 'NUMBER';
     call classToTableMR_2_1 {
-        c2t_2_1 := c2t_2;
-        pk_2_1 := pk;
-        pc_2_1 := pc; -- TODO Check this
+        c2t_2_1 uses c2t_2;
+        pk_2_1 uses pk;
+        pc_2_1 uses pc; -- TODO Check this
     }
     call classToTableMR_2_2 {
-        pk_2_2 := pk;
-        pc_2_2 := pc;
-        t_2_2 := t_2;
+        pk_2_2 uses pk;
+        pc_2_2 uses pc;
+        t_2_2 uses t_2;
     }
 }
 
@@ -301,7 +301,7 @@ map classToTableMR_2_2 in ManualUML2RDBMS {
 
 map associationToForeignKeyLM in ManualUML2RDBMS {
     in:uml p:Package;
-    in:uml a:Association;
+    guard:uml a:Association;
     in:middle p2s:PackageToSchema; 
 	check var sc:Class := a.source;
 	check var dc:Class := a.destination;
@@ -332,7 +332,7 @@ map associationToForeignKeyMR in ManualUML2RDBMS {
     in:middle p2s:PackageToSchema;
     in:middle sc2t:ClassToTable;
     in:middle dc2t:ClassToTable;
-    in:middle a2f:AssociationToForeignKey;
+    guard:middle a2f:AssociationToForeignKey;
     in:rdbms s:Schema;
     in:rdbms st:Table;
     in:rdbms dt:Table;
@@ -355,15 +355,15 @@ map associationToForeignKeyMR in ManualUML2RDBMS {
     set fk.owner := st;
     set fc.owner := st;
     call associationToForeignKeyMR_1 {
-        fk := fk;
-        fc := fc;
-        dt := a2f.referenced.table;
-        rk := rk;
+        fk uses fk;
+        fc uses fc;
+        dt uses a2f.referenced.table;
+        rk uses rk;
     }
     call associationToForeignKeyMR_2 {
-        a2f_1 := a2f;
-        fk_1 := fk;
-        fc_1 := fc;
+        a2f_1 uses a2f;
+        fk_1 uses fk;
+        fc_1 uses fc;
     }
 }
 
@@ -387,7 +387,7 @@ map associationToForeignKeyMR_2 in ManualUML2RDBMS {
 
 map classPrimitiveAttributesLM in ManualUML2RDBMS {
     in:uml c:Class;
-    in:uml a:Attribute;
+    guard:uml a:Attribute;
     in:middle fao:ClassToTable;
 	check var t:PrimitiveDataType := a.type;
 	check var p2n:PrimitiveToName := t.PrimitiveToName;
@@ -405,7 +405,7 @@ map classPrimitiveAttributesLM in ManualUML2RDBMS {
 
 map classComplexAttributesLM in ManualUML2RDBMS {
     in:uml c:Class;
-    in:uml a:Attribute;
+    guard:uml a:Attribute;
     in:middle fao:ClassToTable;
 	check var t:Class := a.type;
     check a.owner = c;
@@ -421,23 +421,23 @@ map classComplexAttributesLM in ManualUML2RDBMS {
 
 map complexAttributePrimitiveAttributesLM in ManualUML2RDBMS {
     in:uml c:Class;
-    in:uml ca:Attribute;
+    guard:uml ca:Attribute;
     check var fao:NonLeafAttribute := ca.FromAttribute;
     check ca.type = c;
     -- getAllAttributes(c)->includes(a);
     for anAttribute in c.attributes {
 	    call complexAttributePrimitiveAttributesLM_1 {
-	        c_1 := c;
-	        ca_1 := ca;
-	        fao_1 := fao;
-	        a_1 := anAttribute;
+	        c_1 uses c;
+	        ca_1 uses ca;
+	        fao_1 uses fao;
+	        a_1 iterates anAttribute;
 	    }
 	}
 }
 
 map complexAttributePrimitiveAttributesLM_1 in ManualUML2RDBMS {
     in:uml c_1:Class;
-    in:uml a_1:Attribute;
+    guard:uml a_1:Attribute;
     in:uml ca_1:Attribute;
     in:middle fao_1:NonLeafAttribute;
     check var t_1:PrimitiveDataType := a_1.type;
@@ -453,16 +453,16 @@ map complexAttributePrimitiveAttributesLM_1 in ManualUML2RDBMS {
 
 map complexAttributeComplexAttributesLM in ManualUML2RDBMS {
     in:uml c:Class;
-    in:uml ca:Attribute;
+    guard:uml ca:Attribute;
 	check var fao:NonLeafAttribute := ca.FromAttribute;
     check ca.type = c;
     --getAllAttributes(c)->includes(a);
     for anAttribute in c.attributes {
     	call complexAttributeComplexAttributesLM_1 {
-	        ca_1 := ca;
-	        a_1 := anAttribute;
-	        c_1 := c;
-	        fao_1 := fao;
+	        ca_1 uses ca;
+	        a_1 iterates anAttribute;
+	        c_1 uses c;
+	        fao_1 uses fao;
 	    }
 	}
 }
@@ -470,7 +470,7 @@ map complexAttributeComplexAttributesLM in ManualUML2RDBMS {
 map complexAttributeComplexAttributesLM_1 in ManualUML2RDBMS {
     in:uml c_1:Class;
     in:uml ca_1:Attribute;
-    in:uml a_1:Attribute;
+    guard:uml a_1:Attribute;
     in:middle fao_1:NonLeafAttribute;
     check var t_1:Class := a_1.type;
     check a_1.owner = c_1;
@@ -487,7 +487,7 @@ map complexAttributeComplexAttributesLM_1 in ManualUML2RDBMS {
 
 map attributeColumnsMR in ManualUML2RDBMS {
     in:middle c2t:ClassToTable;
-    in:middle a2c:AttributeToColumn;
+    guard:middle a2c:AttributeToColumn;
     in:rdbms t:Table;
     check var p2n:PrimitiveToName := a2c.type;
     check var ct:String := p2n.typeName;
@@ -497,18 +497,18 @@ map attributeColumnsMR in ManualUML2RDBMS {
     new:rdbms c:Column;
     set c.owner := t;
     call attributeColumnsMR_1 {
-        a2c_1 := a2c;
-        c_1 := c;
+        a2c_1 uses a2c;
+        c_1 uses c;
     }
     call attributeColumnsMR_2 {
-     	a2c_2 := a2c;
-    	c_2 := c;
-        p2n_2 := p2n;
-        ct_2 := ct;
+     	a2c_2 uses a2c;
+    	c_2 uses c;
+        p2n_2 uses p2n;
+        ct_2 uses ct;
     }
     call attributeColumnsMR_3 {
-        c_3 := c;
-        a2c_3 := a2c;
+        c_3 uses c;
+        a2c_3 uses a2c;
     }
 }
 
@@ -526,8 +526,8 @@ map attributeColumnsMR_2 in ManualUML2RDBMS {
     check a2c_2.type = p2n_2;
     set c_2.type := ct_2;
     call attributeColumnsMR_2_1 {
-        p2n_2_1 := p2n_2;
-        ct_2_1 := ct_2;
+        p2n_2_1 uses p2n_2;
+        ct_2_1 uses ct_2;
     }
 }
 

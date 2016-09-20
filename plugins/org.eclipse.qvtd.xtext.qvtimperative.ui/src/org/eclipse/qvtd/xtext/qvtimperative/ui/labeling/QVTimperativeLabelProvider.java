@@ -21,8 +21,8 @@ import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
-import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.CheckStatement;
@@ -82,12 +82,12 @@ public class QVTimperativeLabelProvider extends QVTbaseLabelProvider
 		return "MappingCall.gif";
 	}
 
-	protected String image(MappingCallBinding ele) {
-		return "MappingCallBinding.gif";
-	}
-
 	protected String image(MappingLoop ele) {
 		return "MappingLoop.gif";
+	}
+
+	protected String image(MappingParameterBinding ele) {
+		return "MappingParameterBinding.gif";
 	}
 
 	protected String image(NewStatement ele) {
@@ -193,12 +193,12 @@ public class QVTimperativeLabelProvider extends QVTbaseLabelProvider
 		return NameUtil.getSafeName(ele.getReferredMapping());
 	}
 
-	protected String text(MappingCallBinding ele) {
-		return NameUtil.getSafeName(ele.getBoundVariable());
-	}
-
 	protected String text(MappingLoop ele) {
 		return "«for»";
+	}
+
+	protected String text(MappingParameterBinding ele) {
+		return NameUtil.getSafeName(ele.getBoundVariable());
 	}
 
 	protected String text(Predicate ele) {

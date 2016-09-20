@@ -15,7 +15,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.internal.utilities.AS2Moniker;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
-import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.util.AbstractQVTimperativeAS2MonikerVisitor;
 
 public class QVTimperativeAS2MonikerVisitor extends AbstractQVTimperativeAS2MonikerVisitor
@@ -35,7 +35,7 @@ public class QVTimperativeAS2MonikerVisitor extends AbstractQVTimperativeAS2Moni
 	}
 
 	@Override
-	public @Nullable Object visitMappingCallBinding(@NonNull MappingCallBinding object) {
+	public @Nullable Object visitMappingParameterBinding(@NonNull MappingParameterBinding object) {
 		return null;
 	}
 }

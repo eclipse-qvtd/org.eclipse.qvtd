@@ -19,24 +19,29 @@ import org.eclipse.ocl.pivot.utilities.ToStringVisitor;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseToStringVisitor;
 import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.AppendParameter;
+import org.eclipse.qvtd.pivot.qvtimperative.AppendParameterBinding;
+import org.eclipse.qvtd.pivot.qvtimperative.BufferStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.CheckStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
+import org.eclipse.qvtd.pivot.qvtimperative.GuardParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
+import org.eclipse.qvtd.pivot.qvtimperative.LoopParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
-import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingParameter;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ObservableStatement;
-import org.eclipse.qvtd.pivot.qvtimperative.OutConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.SimpleParameter;
+import org.eclipse.qvtd.pivot.qvtimperative.SimpleParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 import org.eclipse.qvtd.pivot.qvtimperative.VariableStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
@@ -95,6 +100,26 @@ public class QVTimperativeToStringVisitor extends QVTbaseToStringVisitor impleme
 	}
 
 	@Override
+	public @Nullable String visitAppendParameterBinding(@NonNull AppendParameterBinding object) {
+		appendName(object.getBoundVariable());
+		append(" appendsTo ");
+		appendName(object.getValue());
+		return null;
+	}
+
+	@Override
+	public @Nullable String visitBufferStatement(@NonNull BufferStatement asVariable) {
+		append("buffer ");
+		appendName(asVariable);
+		Type type = asVariable.getType();
+		if (type != null) {
+			append(" : ");
+			appendElementType(asVariable);
+		}
+		return null;
+	}
+
+	@Override
 	public @Nullable String visitCheckStatement(@NonNull CheckStatement object) {
 		append("check ");
 		safeVisit(object.getOwnedExpression());
@@ -115,7 +140,7 @@ public class QVTimperativeToStringVisitor extends QVTbaseToStringVisitor impleme
 
 	@Override
 	public @Nullable String visitDeclareStatement(@NonNull DeclareStatement asVariable) {
-		if (asVariable.isIsChecked()) {
+		if (asVariable.isIsCheck()) {
 			append("check ");
 		}
 		append("var ");
@@ -135,13 +160,24 @@ public class QVTimperativeToStringVisitor extends QVTbaseToStringVisitor impleme
 
 	@Override
 	public @Nullable String visitGuardParameter(@NonNull GuardParameter asVariable) {
-		append("in ");
+		append("guard ");
 		appendName(asVariable);
 		Type type = asVariable.getType();
 		if (type != null) {
 			append(" : ");
 			appendElementType(asVariable);
 		}
+		return null;
+	}
+
+	@Override
+	public @Nullable String visitGuardParameterBinding(@NonNull GuardParameterBinding object) {
+		if (object.isIsCheck()) {
+			append("check ");
+		}
+		appendName(object.getBoundVariable());
+		append(" consumes ");
+		safeVisit(object.getValue());
 		return null;
 	}
 
@@ -159,6 +195,17 @@ public class QVTimperativeToStringVisitor extends QVTbaseToStringVisitor impleme
 			append("enforce ");
 		}
 		return visitTypedModel(object);
+	}
+
+	@Override
+	public @Nullable String visitLoopParameterBinding(@NonNull LoopParameterBinding object) {
+		if (object.isIsCheck()) {
+			append("check ");
+		}
+		appendName(object.getBoundVariable());
+		append(" iterates ");
+		safeVisit(object.getValue());
+		return null;
 	}
 
 	@Override
@@ -183,24 +230,14 @@ public class QVTimperativeToStringVisitor extends QVTbaseToStringVisitor impleme
 		appendQualifiedName(object.getReferredMapping());
 		append(" {");
 		boolean isFirst = true;
-		for (MappingCallBinding binding : object.getBinding()) {
+		for (MappingParameterBinding binding : object.getBinding()) {
 			if (!isFirst) {
 				append(", ");
 			}
-			appendName(binding.getBoundVariable());
-			append(" := ");
-			safeVisit(binding.getValue());
+			safeVisit(binding);
 			isFirst = false;
 		}
 		append("}");
-		return null;
-	}
-
-	@Override
-	public @Nullable String visitMappingCallBinding(@NonNull MappingCallBinding object) {
-		appendName(object.getBoundVariable());
-		append(" := ");
-		safeVisit(object.getValue());
 		return null;
 	}
 
@@ -221,6 +258,11 @@ public class QVTimperativeToStringVisitor extends QVTbaseToStringVisitor impleme
 
 	@Override
 	public @Nullable String visitMappingParameter(@NonNull MappingParameter object) {
+		return visiting(object);
+	}
+
+	@Override
+	public @Nullable String visitMappingParameterBinding(@NonNull MappingParameterBinding object) {
 		return visiting(object);
 	}
 
@@ -254,18 +296,6 @@ public class QVTimperativeToStringVisitor extends QVTbaseToStringVisitor impleme
 	}
 
 	@Override
-	public @Nullable String visitOutConnectionVariable(@NonNull OutConnectionVariable asVariable) {
-		append("out ");
-		appendName(asVariable);
-		Type type = asVariable.getType();
-		if (type != null) {
-			append(" : ");
-			appendElementType(asVariable);
-		}
-		return null;
-	}
-
-	@Override
 	public String visitSetStatement(@NonNull SetStatement asSetStatement) {
 		if (asSetStatement.isIsNotify()) {
 			append("notify ");
@@ -276,6 +306,29 @@ public class QVTimperativeToStringVisitor extends QVTbaseToStringVisitor impleme
 		appendName(QVTimperativeUtil.getTargetProperty(asSetStatement));
 		append(" := ");
 		safeVisit(asSetStatement.getOwnedExpression());
+		return null;
+	}
+
+	@Override
+	public @Nullable String visitSimpleParameter(@NonNull SimpleParameter asVariable) {
+		append("in ");
+		appendName(asVariable);
+		Type type = asVariable.getType();
+		if (type != null) {
+			append(" : ");
+			appendElementType(asVariable);
+		}
+		return null;
+	}
+
+	@Override
+	public @Nullable String visitSimpleParameterBinding(@NonNull SimpleParameterBinding object) {
+		if (object.isIsCheck()) {
+			append("check ");
+		}
+		appendName(object.getBoundVariable());
+		append(" uses ");
+		safeVisit(object.getValue());
 		return null;
 	}
 

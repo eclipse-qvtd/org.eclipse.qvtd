@@ -9,9 +9,9 @@ transformation Expressions {
 map expressionsLM in Expressions {
 	in:source dummy:EPackage;
     call expressionsMR {
-    	binaryPrecedence := (1 + 2) * (3*5 + 4);
-    	unaryPrecedence := -1 * - -1;
-    	notPrecedence := not not (4 = 5);
+    	binaryPrecedence uses (1 + 2) * (3*5 + 4);
+    	unaryPrecedence uses -1 * - -1;
+    	notPrecedence uses not not (4 = 5);
     }
 }
 

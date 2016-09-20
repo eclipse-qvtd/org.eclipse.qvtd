@@ -41,23 +41,28 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.AppendParameter;
+import org.eclipse.qvtd.pivot.qvtimperative.AppendParameterBinding;
+import org.eclipse.qvtd.pivot.qvtimperative.BufferStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.CheckStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
+import org.eclipse.qvtd.pivot.qvtimperative.GuardParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
+import org.eclipse.qvtd.pivot.qvtimperative.LoopParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
-import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingParameter;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ObservableStatement;
-import org.eclipse.qvtd.pivot.qvtimperative.OutConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.SimpleParameter;
+import org.eclipse.qvtd.pivot.qvtimperative.SimpleParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 import org.eclipse.qvtd.pivot.qvtimperative.VariableStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
@@ -80,7 +85,7 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 
 	private @Nullable Object doConnectionAccumulation(@NonNull ConnectionVariable targetVariable, @NonNull OCLExpression valueExpression) {
 		try {
-			Object connection = context.getValueOf(targetVariable);
+			Object connection = executor.getValueOf(targetVariable);
 			CollectionValue.Accumulator connectionCollection = (Accumulator) ValueUtil.asCollectionValue(connection);
 			Object values = valueExpression.accept(undecoratedVisitor);
 			if (values instanceof Iterable<?>) {
@@ -95,7 +100,7 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 			return connectionCollection;
 		}
 		catch (RuntimeException e) {
-			((QVTiExecutor)context).replace(targetVariable, e, false);
+			executor.replace(targetVariable, e, false);
 			throw e;
 		}
 	}
@@ -121,8 +126,55 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 	}
 
 	@Override
+	public Object visitAppendParameterBinding(@NonNull AppendParameterBinding object) {
+		return visiting(object);	// FIXME
+	}
+
+	@Override
 	public @Nullable Object visitBaseModel(@NonNull BaseModel object) {
 		return visiting(object);
+	}
+
+	/*	@Override
+	public Object visitOppositePropertyCallExp(@NonNull OppositePropertyCallExp oppositePropertyCallExp) {
+		QVTiModelManager modelManager = (QVTiModelManager) executor.getModelManager();
+		Integer cacheIndex = modelManager.getTransformationAnalysis().getCacheIndex(oppositePropertyCallExp);
+		if (cacheIndex == null) {
+			return super.visitOppositePropertyCallExp(oppositePropertyCallExp);
+		}
+		Object sourceValue = null;
+		OCLExpression source = oppositePropertyCallExp.getOwnedSource();
+		if (source != null) {
+			sourceValue = source.accept(undecoratedVisitor);
+			if (sourceValue != null) {
+				Object middleOpposite = modelManager.getUnnavigableOpposite(cacheIndex, sourceValue);
+				if (middleOpposite == null) {
+					throw new NotReadyValueException("Missing opposite value");
+				}
+				return ClassUtil.nonNullState(middleOpposite);
+			}
+		}
+		throw new InvalidValueException("Failed to evaluate '" + oppositePropertyCallExp.getReferredProperty() + "'", sourceValue, oppositePropertyCallExp);
+	} */
+
+	@Override
+	public Object visitBufferStatement(@NonNull BufferStatement object) {
+		CollectionValue.Accumulator accumulator;
+		OCLExpression ownedExpression = object.getOwnedExpression();
+		if (ownedExpression != null) {
+			Object initValue = ownedExpression.accept(undecoratedVisitor);
+			accumulator = ValueUtil.createCollectionAccumulatorValue((CollectionTypeId) ownedExpression.getTypeId());
+			if (initValue != null) {
+				for (Object value : (Iterable<?>)initValue) {
+					accumulator.add(value);
+				}
+			}
+		}
+		else {
+			accumulator = ValueUtil.createCollectionAccumulatorValue((CollectionTypeId) object.getTypeId());
+		}
+		executor.replace(object, accumulator, false);
+		return true;
 	}
 
 	@Override
@@ -148,7 +200,7 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 		}
 		else {
 			initValue = ownedExpression.accept(undecoratedVisitor);
-			if (asStatement.isIsChecked()) {
+			if (asStatement.isIsCheck()) {
 				Type guardType = asStatement.getType();
 				Type valueType = idResolver.getDynamicTypeOf(initValue);
 				if ((guardType == null) || !valueType.conformsTo(standardLibrary, guardType)) {
@@ -182,6 +234,11 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 	}
 
 	@Override
+	public Object visitGuardParameterBinding(@NonNull GuardParameterBinding object) {
+		return visiting(object);	// FIXME
+	}
+
+	@Override
 	public @Nullable Object visitImperativeModel(@NonNull ImperativeModel imperativeModel) {
 		for (org.eclipse.ocl.pivot.Package pkge : imperativeModel.getOwnedPackages()) {
 			pkge.accept(undecoratedVisitor);
@@ -197,6 +254,11 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 	@Override
 	public @Nullable Object visitImport(@NonNull Import object) {
 		return visiting(object);
+	}
+
+	@Override
+	public Object visitLoopParameterBinding(@NonNull LoopParameterBinding object) {
+		return visiting(object);	// FIXME
 	}
 
 	@Override
@@ -217,43 +279,97 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 		}
 		@NonNull Object @NonNull [] boundValues = new @NonNull Object[mappingCall.getBinding().size()];
 		int index = 0;
-		for (MappingCallBinding binding : mappingCall.getBinding()) {
+		for (MappingParameterBinding binding : mappingCall.getBinding()) {
 			VariableDeclaration boundVariable = binding.getBoundVariable();
 			if (boundVariable == null) {
 				return null;
 			}
-			Type varType = boundVariable.getType();
-			if (varType == null) {
-				return null;
-			}
-			OCLExpression value = binding.getValue();
-			if (value == null) {
-				return null;
-			}
-			Object valueOrValues = value.accept(undecoratedVisitor);
-			if (valueOrValues == null) {
-				return null;
-			}
-			if (boundVariable instanceof ConnectionVariable) {
+			if (binding instanceof AppendParameterBinding) {	// FIXME visit the bindings
+				AppendParameterBinding appendParameterBinding = (AppendParameterBinding)binding;
+				ConnectionVariable value = appendParameterBinding.getValue();
+				if (value == null) {
+					return null;
+				}
+				Object valueOrValues = executor.getValueOf(value);
+				if (valueOrValues == null) {
+					return null;
+				}
 				boundValues[index++] = valueOrValues;
-
 			}
-			else {
+			else if (binding instanceof GuardParameterBinding) {
+				Type varType = boundVariable.getType();
+				if (varType == null) {
+					return null;
+				}
+				GuardParameterBinding guardParameterBinding = (GuardParameterBinding)binding;
+				ConnectionVariable value = guardParameterBinding.getValue();
+				if (value == null) {
+					return null;
+				}
+				Object valueOrValues = executor.getValueOf(value);
+				if (valueOrValues == null) {
+					return null;
+				}
 				Type valueType = idResolver.getDynamicTypeOf(valueOrValues);
-				if (valueType.conformsTo(environmentFactory.getStandardLibrary(), varType)) {
+				if (!guardParameterBinding.isIsCheck() || valueType.conformsTo(environmentFactory.getStandardLibrary(), varType)) {
 					boundValues[index++] = valueOrValues;
 				}
 				else {
 					return null;
 				}
 			}
+			else if (binding instanceof LoopParameterBinding) {
+				Type varType = boundVariable.getType();
+				if (varType == null) {
+					return null;
+				}
+				LoopParameterBinding guardParameterBinding = (LoopParameterBinding)binding;
+				LoopVariable value = guardParameterBinding.getValue();
+				if (value == null) {
+					return null;
+				}
+				Object valueOrValues = executor.getValueOf(value);
+				if (valueOrValues == null) {
+					return null;
+				}
+				Type valueType = idResolver.getDynamicTypeOf(valueOrValues);
+				if (!guardParameterBinding.isIsCheck() || valueType.conformsTo(environmentFactory.getStandardLibrary(), varType)) {
+					boundValues[index++] = valueOrValues;
+				}
+				else {
+					return null;
+				}
+			}
+			else if (binding instanceof SimpleParameterBinding) {
+				Type varType = boundVariable.getType();
+				if (varType == null) {
+					return null;
+				}
+				SimpleParameterBinding simpleParameterBinding = (SimpleParameterBinding)binding;
+				OCLExpression value = simpleParameterBinding.getValue();
+				if (value == null) {
+					return null;
+				}
+				Object valueOrValues = value.accept(undecoratedVisitor);
+				if (valueOrValues == null) {
+					return null;
+				}
+				assert !(boundVariable instanceof ConnectionVariable);
+				//					boundValues[index++] = valueOrValues;
+
+				//				}
+				//				else {
+				Type valueType = idResolver.getDynamicTypeOf(valueOrValues);
+				if (!simpleParameterBinding.isIsCheck() || valueType.conformsTo(environmentFactory.getStandardLibrary(), varType)) {
+					boundValues[index++] = valueOrValues;
+				}
+				else {
+					return null;
+				}
+				//				}
+			}
 		}
 		return executor.internalExecuteMappingCall(mappingCall, boundValues, undecoratedVisitor);
-	}
-
-	@Override
-	public @Nullable Object visitMappingCallBinding(@NonNull MappingCallBinding object) {
-		return visiting(object);	// MappingCallBinding is serviced by the parent MappingCall
 	}
 
 	@Override
@@ -264,7 +380,7 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 			if (iterators.size() > 0) {
 				LoopVariable iterator = ClassUtil.nonNullState(iterators.get(0));
 				for (Object object : (Iterable<?>)inValues) {
-					((QVTiExecutor)context).replace(iterator, object, false);
+					executor.replace(iterator, object, false);
 					for (@NonNull MappingStatement mappingStatement : ClassUtil.nullFree(mappingLoop.getOwnedMappingStatements())) {
 						context.pushEvaluationEnvironment(mappingStatement, mappingLoop);
 						try {
@@ -286,6 +402,11 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 	}
 
 	@Override
+	public @Nullable Object visitMappingParameterBinding(@NonNull MappingParameterBinding object) {
+		return visiting(object);	// MappingCallBinding is serviced by the parent MappingCall
+	}
+
+	@Override
 	public @Nullable Object visitMappingStatement(@NonNull MappingStatement object) {
 		return visitStatement(object);	// MappingStatement is abstract
 	}
@@ -302,7 +423,7 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 
 	/*	@Override
 	public Object visitOppositePropertyCallExp(@NonNull OppositePropertyCallExp oppositePropertyCallExp) {
-		QVTiModelManager modelManager = (QVTiModelManager) context.getModelManager();
+		QVTiModelManager modelManager = (QVTiModelManager) executor.getModelManager();
 		Integer cacheIndex = modelManager.getTransformationAnalysis().getCacheIndex(oppositePropertyCallExp);
 		if (cacheIndex == null) {
 			return super.visitOppositePropertyCallExp(oppositePropertyCallExp);
@@ -321,26 +442,6 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 		}
 		throw new InvalidValueException("Failed to evaluate '" + oppositePropertyCallExp.getReferredProperty() + "'", sourceValue, oppositePropertyCallExp);
 	} */
-
-	@Override
-	public Object visitOutConnectionVariable(@NonNull OutConnectionVariable object) {
-		CollectionValue.Accumulator accumulator;
-		OCLExpression ownedExpression = object.getOwnedExpression();
-		if (ownedExpression != null) {
-			Object initValue = ownedExpression.accept(undecoratedVisitor);
-			accumulator = ValueUtil.createCollectionAccumulatorValue((CollectionTypeId) ownedExpression.getTypeId());
-			if (initValue != null) {
-				for (Object value : (Iterable<?>)initValue) {
-					accumulator.add(value);
-				}
-			}
-		}
-		else {
-			accumulator = ValueUtil.createCollectionAccumulatorValue((CollectionTypeId) object.getTypeId());
-		}
-		executor.replace(object, accumulator, false);
-		return true;
-	}
 
 	@Override
 	public @Nullable Object visitPackage(org.eclipse.ocl.pivot.@NonNull Package pkge) {
@@ -368,7 +469,7 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 		if (targetVariable == null) {
 			throw new InvalidValueException("Undefined variable", null, null, setStatement);
 		}
-		Object slotObject = context.getValueOf(targetVariable);
+		Object slotObject = executor.getValueOf(targetVariable);
 		if (slotObject instanceof InvalidValueException) {
 			throw (InvalidValueException)slotObject;
 		}
@@ -406,6 +507,16 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 	}
 
 	@Override
+	public @Nullable Object visitSimpleParameter(@NonNull SimpleParameter object) {
+		return visiting(object);
+	}
+
+	@Override
+	public Object visitSimpleParameterBinding(@NonNull SimpleParameterBinding object) {
+		return visiting(object);	// FIXME
+	}
+
+	@Override
 	public @Nullable Object visitStatement(@NonNull Statement object) {
 		return visiting(object);
 	}
@@ -422,6 +533,6 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 
 	@Override
 	public @Nullable Object visitVariableStatement(@NonNull VariableStatement object) {
-		return visitStatement(object);
+		return visiting(object);
 	}
 }

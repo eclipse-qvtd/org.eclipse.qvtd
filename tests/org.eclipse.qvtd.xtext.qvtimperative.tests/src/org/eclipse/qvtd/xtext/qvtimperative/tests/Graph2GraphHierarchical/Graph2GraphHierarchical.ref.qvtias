@@ -21,10 +21,8 @@
         <ownedStatements xsi:type="qvti:MappingLoop">
           <ownedIterators name="g1" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph.ecore.oclas#T.simplegraph.Graph"/>
           <ownedMappingStatements xsi:type="qvti:MappingCall" referredMapping="#m..CopyGraph.Graph2Middle">
-            <binding boundVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.1/@ownedParameters.0">
-              <value xsi:type="pivot:VariableExp" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph.ecore.oclas#T.simplegraph.Graph"
-                  referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.0/@ownedStatements.0/@ownedIterators.0"/>
-            </binding>
+            <binding xsi:type="qvti:LoopParameterBinding" boundVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.1/@ownedParameters.0"
+                value="#//@ownedPackages.0/@ownedClasses.0/@rule.0/@ownedStatements.0/@ownedIterators.0"/>
           </ownedMappingStatements>
           <ownedExpression xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.0" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclElement.allInstances">
             <ownedSource xsi:type="pivot:TypeExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Pivot.oclas#T.pivot.Class" referredType="pivot:Class ../Graph2GraphMinimal/SimpleGraph.ecore.oclas#T.simplegraph.Graph"/>
@@ -53,11 +51,9 @@
         <ownedStatements xsi:type="qvti:MappingLoop">
           <ownedIterators name="child" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph.ecore.oclas#T.simplegraph.Element"/>
           <ownedMappingStatements xsi:type="qvti:MappingCall" referredMapping="#m..CopyGraph.Node2Middle">
-            <binding boundVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.2/@ownedParameters.0">
-              <value xsi:type="pivot:VariableExp" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph.ecore.oclas#T.simplegraph.Element"
-                  referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.1/@ownedStatements.3/@ownedIterators.0"/>
-            </binding>
-            <binding boundVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.2/@ownedParameters.1">
+            <binding xsi:type="qvti:LoopParameterBinding" boundVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.2/@ownedParameters.0"
+                value="#//@ownedPackages.0/@ownedClasses.0/@rule.1/@ownedStatements.3/@ownedIterators.0"/>
+            <binding xsi:type="qvti:SimpleParameterBinding" boundVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.2/@ownedParameters.1">
               <value xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph"
                   referredVariable="#qV..CopyGraph.Graph2Middle.middleG2G"/>
             </binding>
@@ -77,7 +73,7 @@
           </ownedExpression>
         </ownedStatements>
         <ownedStatements xsi:type="qvti:MappingCall" referredMapping="#m..CopyGraph.Middle2Graph">
-          <binding boundVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.3/@ownedParameters.0">
+          <binding xsi:type="qvti:SimpleParameterBinding" boundVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.3/@ownedParameters.0">
             <value xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph"
                 referredVariable="#qV..CopyGraph.Graph2Middle.middleG2G"/>
           </binding>
@@ -86,7 +82,7 @@
       <rule xsi:type="qvti:Mapping" xmi:id="m..CopyGraph.Node2Middle" name="Node2Middle">
         <ownedParameters xsi:type="qvti:GuardParameter" name="n1" isRequired="false" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph.ecore.oclas#T.simplegraph.Node"
             referredTypedModel="#qT..CopyGraph.upperGraph"/>
-        <ownedParameters xsi:type="qvti:GuardParameter" name="middleParent" isRequired="false" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph"
+        <ownedParameters xsi:type="qvti:SimpleParameter" name="middleParent" isRequired="false" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph"
             referredTypedModel="#qT..CopyGraph.middle"/>
         <ownedStatements xsi:type="qvti:NewStatement" xmi:id="qV..CopyGraph.Node2Middle.n2n" name="n2n" isRequired="false" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Node2Node"
             referredTypedModel="#qT..CopyGraph.middle"/>
@@ -110,7 +106,7 @@
         </ownedStatements>
       </rule>
       <rule xsi:type="qvti:Mapping" xmi:id="m..CopyGraph.Middle2Graph" name="Middle2Graph">
-        <ownedParameters xsi:type="qvti:GuardParameter" name="g2Gmiddle" isRequired="false" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph"
+        <ownedParameters xsi:type="qvti:SimpleParameter" name="g2Gmiddle" isRequired="false" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph"
             referredTypedModel="#qT..CopyGraph.middle"/>
         <ownedStatements xsi:type="qvti:NewStatement" xmi:id="qV..CopyGraph.Middle2Graph.g2" name="g2" isRequired="false" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph.ecore.oclas#T.simplegraph.Graph"
             referredTypedModel="#qT..CopyGraph.lowerGraph"/>
@@ -129,10 +125,8 @@
         <ownedStatements xsi:type="qvti:MappingLoop">
           <ownedIterators name="child" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Element2Element"/>
           <ownedMappingStatements xsi:type="qvti:MappingCall" referredMapping="#m..CopyGraph.Middle2Node">
-            <binding boundVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.4/@ownedParameters.0">
-              <value xsi:type="pivot:VariableExp" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Element2Element"
-                  referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.3/@ownedStatements.3/@ownedIterators.0"/>
-            </binding>
+            <binding xsi:type="qvti:LoopParameterBinding" boundVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.4/@ownedParameters.0"
+                value="#//@ownedPackages.0/@ownedClasses.0/@rule.3/@ownedStatements.3/@ownedIterators.0"/>
           </ownedMappingStatements>
           <ownedExpression xsi:type="pivot:IteratorExp" type="#//@ownedPackages.1/@ownedClasses.2" referredIteration="http://www.eclipse.org/ocl/2015/Library.oclas#i.ocl.OrderedSet.select..T">
             <ownedSource xsi:type="pivot:PropertyCallExp" type="#//@ownedPackages.1/@ownedClasses.2" referredProperty="../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Graph2Graph.element2Element">

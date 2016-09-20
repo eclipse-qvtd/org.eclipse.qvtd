@@ -19,23 +19,28 @@ import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbasePrettyPrintVisitor;
 import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.AppendParameter;
+import org.eclipse.qvtd.pivot.qvtimperative.AppendParameterBinding;
+import org.eclipse.qvtd.pivot.qvtimperative.BufferStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.CheckStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
+import org.eclipse.qvtd.pivot.qvtimperative.GuardParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
+import org.eclipse.qvtd.pivot.qvtimperative.LoopParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
-import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingParameter;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ObservableStatement;
-import org.eclipse.qvtd.pivot.qvtimperative.OutConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.SimpleParameter;
+import org.eclipse.qvtd.pivot.qvtimperative.SimpleParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 import org.eclipse.qvtd.pivot.qvtimperative.VariableStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
@@ -58,6 +63,8 @@ public class QVTimperativePrettyPrintVisitor extends QVTbasePrettyPrintVisitor i
 	@Override
 	public Object visitAppendParameter(@NonNull AppendParameter asParameter) {
 		context.append("append ");
+		context.appendName(asParameter);
+		context.append(" ");
 		Type type = asParameter.getType();
 		if (type != null) {
 			context.append(" : ");
@@ -68,6 +75,19 @@ public class QVTimperativePrettyPrintVisitor extends QVTbasePrettyPrintVisitor i
 		return null;
 	}
 
+	@Override
+	public Object visitAppendParameterBinding(@NonNull AppendParameterBinding pAppendParameterBinding) {
+		context.appendName(pAppendParameterBinding.getBoundVariable());
+		context.append(" appendsTo ");
+		context.appendName(pAppendParameterBinding.getValue());
+		context.append(";\n");
+		return null;
+	}
+
+	@Override
+	public Object visitBufferStatement(@NonNull BufferStatement object) {
+		return visitVariableDeclaration(object);
+	}
 	@Override
 	public Object visitCheckStatement(@NonNull CheckStatement pPredicate) {
 		context.append("check ");
@@ -83,7 +103,7 @@ public class QVTimperativePrettyPrintVisitor extends QVTbasePrettyPrintVisitor i
 
 	@Override
 	public Object visitDeclareStatement(@NonNull DeclareStatement asVariable) {
-		if (asVariable.isIsChecked()) {
+		if (asVariable.isIsCheck()) {
 			context.append("check ");
 		}
 		context.append("var ");
@@ -104,8 +124,10 @@ public class QVTimperativePrettyPrintVisitor extends QVTbasePrettyPrintVisitor i
 
 	@Override
 	public Object visitGuardParameter(@NonNull GuardParameter asParameter) {
-		context.append("in:");
+		context.append("guard:");
 		context.appendName(asParameter.getReferredTypedModel());
+		context.append(" ");
+		context.appendName(asParameter);
 		context.append(" ");
 		Type type = asParameter.getType();
 		if (type != null) {
@@ -113,6 +135,18 @@ public class QVTimperativePrettyPrintVisitor extends QVTbasePrettyPrintVisitor i
 			//			context.appendQualifiedType(type);
 			context.appendTypedMultiplicity(asParameter);
 		}
+		context.append(";\n");
+		return null;
+	}
+
+	@Override
+	public Object visitGuardParameterBinding(@NonNull GuardParameterBinding pGuardParameterBinding) {
+		if (pGuardParameterBinding.isIsCheck()) {
+			context.append("check ");
+		}
+		context.appendName(pGuardParameterBinding.getBoundVariable());
+		context.append(" consumes ");
+		safeVisit(pGuardParameterBinding.getValue());
 		context.append(";\n");
 		return null;
 	}
@@ -131,6 +165,18 @@ public class QVTimperativePrettyPrintVisitor extends QVTbasePrettyPrintVisitor i
 			context.append("enforce ");
 		}
 		return visitTypedModel(object);
+	}
+
+	@Override
+	public Object visitLoopParameterBinding(@NonNull LoopParameterBinding pLoopParameterBinding) {
+		if (pLoopParameterBinding.isIsCheck()) {
+			context.append("check ");
+		}
+		context.appendName(pLoopParameterBinding.getBoundVariable());
+		context.append(" iterates ");
+		safeVisit(pLoopParameterBinding.getValue());
+		context.append(";\n");
+		return null;
 	}
 
 	@Override
@@ -167,24 +213,15 @@ public class QVTimperativePrettyPrintVisitor extends QVTbasePrettyPrintVisitor i
 		if (pMappingCall.isIsInfinite()) {
 			context.append("infinite ");
 		}
-		context.append("call ");
+		context.append(pMappingCall.isIsInstall() ? "install " : pMappingCall.isIsInvoke() ? "invoke " : "call ");
 		context.appendName(pMappingCall.getReferredMapping());
 		context.append(" {\n");
 		context.push("", "");
-		for (MappingCallBinding mappingCallBinding : pMappingCall.getBinding()) {
-			safeVisit(mappingCallBinding);
+		for (MappingParameterBinding mappingParameterBinding : pMappingCall.getBinding()) {
+			safeVisit(mappingParameterBinding);
 		}
 		context.append("}");
 		context.pop();
-		return null;
-	}
-
-	@Override
-	public Object visitMappingCallBinding(@NonNull MappingCallBinding pMappingCallBinding) {
-		context.appendName(pMappingCallBinding.getBoundVariable());
-		context.append(" := ");
-		safeVisit(pMappingCallBinding.getValue());
-		context.append(";\n");
 		return null;
 	}
 
@@ -206,6 +243,11 @@ public class QVTimperativePrettyPrintVisitor extends QVTbasePrettyPrintVisitor i
 
 	@Override
 	public Object visitMappingParameter(@NonNull MappingParameter object) {
+		return visiting(object);
+	}
+
+	@Override
+	public Object visitMappingParameterBinding(@NonNull MappingParameterBinding object) {
 		return visiting(object);
 	}
 
@@ -241,11 +283,6 @@ public class QVTimperativePrettyPrintVisitor extends QVTbasePrettyPrintVisitor i
 	}
 
 	@Override
-	public Object visitOutConnectionVariable(@NonNull OutConnectionVariable object) {
-		return visitVariableDeclaration(object);
-	}
-
-	@Override
 	public Object visitPredicate(@NonNull Predicate pPredicate) {
 		safeVisit(pPredicate.getConditionExpression());
 		return null;
@@ -262,6 +299,35 @@ public class QVTimperativePrettyPrintVisitor extends QVTbasePrettyPrintVisitor i
 		context.appendName(QVTimperativeUtil.getTargetProperty(asSetStatement));
 		context.append(" := ");
 		safeVisit(asSetStatement.getOwnedExpression());
+		context.append(";\n");
+		return null;
+	}
+
+	@Override
+	public Object visitSimpleParameter(@NonNull SimpleParameter asParameter) {
+		context.append("in:");
+		context.appendName(asParameter.getReferredTypedModel());
+		context.append(" ");
+		context.appendName(asParameter);
+		context.append(" ");
+		Type type = asParameter.getType();
+		if (type != null) {
+			context.append(" : ");
+			//			context.appendQualifiedType(type);
+			context.appendTypedMultiplicity(asParameter);
+		}
+		context.append(";\n");
+		return null;
+	}
+
+	@Override
+	public Object visitSimpleParameterBinding(@NonNull SimpleParameterBinding pSimpleParameterBinding) {
+		if (pSimpleParameterBinding.isIsCheck()) {
+			context.append("check ");
+		}
+		context.appendName(pSimpleParameterBinding.getBoundVariable());
+		context.append(" uses ");
+		safeVisit(pSimpleParameterBinding.getValue());
 		context.append(";\n");
 		return null;
 	}

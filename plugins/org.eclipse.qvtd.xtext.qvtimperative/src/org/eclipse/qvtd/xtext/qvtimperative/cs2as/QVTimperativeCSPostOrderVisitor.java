@@ -28,43 +28,48 @@ import org.eclipse.ocl.xtext.basecs.ConstraintCS;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.BufferStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.CheckStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
-import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
-import org.eclipse.qvtd.pivot.qvtimperative.OutConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.SimpleParameter;
+import org.eclipse.qvtd.pivot.qvtimperative.SimpleParameterBinding;
 import org.eclipse.qvtd.xtext.qvtimperativecs.AddStatementCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.AppendParameterBindingCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.BufferStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.CheckStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DeclareStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.GuardParameterBindingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.GuardParameterCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.LoopParameterBindingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS;
-import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingLoopCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.NewStatementCS;
-import org.eclipse.qvtd.xtext.qvtimperativecs.OutVariableCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.ParamDeclarationCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QueryCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.SetStatementCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.SimpleParameterBindingCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.SimpleParameterCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.TopLevelCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.TransformationCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.util.AbstractQVTimperativeCSPostOrderVisitor;
 
 public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPostOrderVisitor
 {
-	protected static class MappingCallBindingCSCompletion extends SingleContinuation<MappingCallBindingCS>
+	protected static class SimpleParameterBindingCSCompletion extends SingleContinuation<SimpleParameterBindingCS>
 	{
-		public MappingCallBindingCSCompletion(@NonNull CS2ASConversion context, @NonNull MappingCallBindingCS csElement) {
+		public SimpleParameterBindingCSCompletion(@NonNull CS2ASConversion context, @NonNull SimpleParameterBindingCS csElement) {
 			super(context, null, null, csElement);
 		}
 
 		@Override
 		public BasicContinuation<?> execute() {
-			MappingCallBinding pBinding = PivotUtil.getPivot(MappingCallBinding.class, csElement);
+			SimpleParameterBinding pBinding = PivotUtil.getPivot(SimpleParameterBinding.class, csElement);
 			if (pBinding != null) {
 				ExpCS expression = csElement.getOwnedValue();
 				if (expression != null) {
@@ -107,6 +112,27 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 			if (csInitialiser != null) {
 				OCLExpression initialiser = context.visitLeft2Right(OCLExpression.class, csInitialiser);
 				asAddStatement.setOwnedExpression(initialiser);
+			}
+		}
+		return null;
+	}
+
+	@Override
+	public Continuation<?> visitAppendParameterBindingCS(@NonNull AppendParameterBindingCS csElement) {
+		return null;
+	}
+
+	@Override
+	public Continuation<?> visitBufferStatementCS(@NonNull BufferStatementCS csElement) {
+		BufferStatement asOutStatement = PivotUtil.getPivot(BufferStatement.class, csElement);
+		if (asOutStatement != null) {
+			ExpCS expression = csElement.getOwnedExpression();
+			if (expression != null) {
+				OCLExpression target = context.visitLeft2Right(OCLExpression.class, expression);
+				asOutStatement.setOwnedExpression(target);
+				if ((csElement.getOwnedType() == null) && (target != null)) {
+					context.setType(asOutStatement, target.getType(), target.isIsRequired(), target.getTypeValue());
+				}
 			}
 		}
 		return null;
@@ -190,13 +216,18 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 	}
 
 	@Override
-	public Continuation<?> visitMappingCS(@NonNull MappingCS csElement) {
+	public Continuation<?> visitGuardParameterBindingCS(@NonNull GuardParameterBindingCS csElement) {
 		return null;
 	}
 
 	@Override
-	public Continuation<?> visitMappingCallBindingCS(@NonNull MappingCallBindingCS csElement) {
-		return new MappingCallBindingCSCompletion(context, csElement);		// Must wait till MappingLoop iterators initialized
+	public Continuation<?> visitLoopParameterBindingCS(@NonNull LoopParameterBindingCS csElement) {
+		return null;
+	}
+
+	@Override
+	public Continuation<?> visitMappingCS(@NonNull MappingCS csElement) {
+		return null;
 	}
 
 	@Override
@@ -240,19 +271,6 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 	}
 
 	@Override
-	public Continuation<?> visitOutVariableCS(@NonNull OutVariableCS csElement) {
-		OutConnectionVariable asOutStatement = PivotUtil.getPivot(OutConnectionVariable.class, csElement);
-		if (asOutStatement != null) {
-			ExpCS expression = csElement.getOwnedExpression();
-			if (expression != null) {
-				OCLExpression target = context.visitLeft2Right(OCLExpression.class, expression);
-				asOutStatement.setOwnedExpression(target);
-			}
-		}
-		return null;
-	}
-
-	@Override
 	public Continuation<?> visitParamDeclarationCS(@NonNull ParamDeclarationCS object) {
 		return null;
 	}
@@ -289,6 +307,20 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 			//				pAssignments.add(assignment);
 		}
 		return null;
+	}
+
+	@Override
+	public Continuation<?> visitSimpleParameterCS(@NonNull SimpleParameterCS csElement) {
+		SimpleParameter asSimpleParameter = PivotUtil.getPivot(SimpleParameter.class, csElement);
+		if (asSimpleParameter != null) {
+			asSimpleParameter.setReferredTypedModel(csElement.getReferredTypedModel());
+		}
+		return null;
+	}
+
+	@Override
+	public Continuation<?> visitSimpleParameterBindingCS(@NonNull SimpleParameterBindingCS csElement) {
+		return new SimpleParameterBindingCSCompletion(context, csElement);		// Must wait till MappingLoop iterators initialized
 	}
 
 	@Override

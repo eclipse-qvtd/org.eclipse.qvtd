@@ -61,13 +61,13 @@ implements QVTimperativeVisitor<IStepper>
 	}
 
 	@Override
-	public @Nullable IStepper visitMappingCallBinding(org.eclipse.qvtd.pivot.qvtimperative.@NonNull MappingCallBinding object) {
-		return visitElement(object);
+	public @Nullable IStepper visitMappingLoop(org.eclipse.qvtd.pivot.qvtimperative.@NonNull MappingLoop object) {
+		return visitMappingStatement(object);
 	}
 
 	@Override
-	public @Nullable IStepper visitMappingLoop(org.eclipse.qvtd.pivot.qvtimperative.@NonNull MappingLoop object) {
-		return visitMappingStatement(object);
+	public @Nullable IStepper visitMappingParameterBinding(org.eclipse.qvtd.pivot.qvtimperative.@NonNull MappingParameterBinding object) {
+		return visitElement(object);
 	}
 
 	@Override

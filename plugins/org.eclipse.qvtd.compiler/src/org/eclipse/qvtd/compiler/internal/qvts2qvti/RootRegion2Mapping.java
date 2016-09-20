@@ -51,9 +51,10 @@ import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RootCompositionRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.SchedulerConstants;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
+import org.eclipse.qvtd.pivot.qvtimperative.BufferStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
-import org.eclipse.qvtd.pivot.qvtimperative.OutConnectionVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingParameter;
 
 public class RootRegion2Mapping extends AbstractScheduledRegion2Mapping
 {
@@ -126,7 +127,7 @@ public class RootRegion2Mapping extends AbstractScheduledRegion2Mapping
 	private @NonNull ConnectionVariable createRootConnectionVariable(@NonNull String name, @NonNull Type type, @Nullable OCLExpression initExpression) {
 		//		Type variableType = visitor.getEnvironmentFactory().getCompleteEnvironment().getSetType(node.getCompleteClass().getPrimaryClass(), true, null, null);
 		//		assert variableType != null;
-		OutConnectionVariable variable = helper.createOutConnectionVariable(getSafeName(name), type, true, initExpression);
+		BufferStatement variable = helper.createBufferStatement(getSafeName(name), type, true, initExpression);
 		mapping.getOwnedStatements().add(variable);
 		//		Variable oldVariable = node2variable.put(node, variable);
 		//		assert oldVariable == null;
@@ -282,10 +283,10 @@ public class RootRegion2Mapping extends AbstractScheduledRegion2Mapping
 	}
 
 	@Override
-	public @NonNull Variable getGuardVariable(@NonNull Node node) {
+	public @NonNull MappingParameter getGuardVariable(@NonNull Node node) {
 		Variable variable = node2variable.get(node);
 		assert variable != null;
-		return variable;
+		return (MappingParameter) variable;
 	}
 
 	/*	private @NonNull OCLExpression getRootsVariable(@NonNull Node resultNode) {	// FIXME compute input typed model

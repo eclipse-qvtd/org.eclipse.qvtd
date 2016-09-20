@@ -84,6 +84,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.SimpleParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 import org.eclipse.qvtd.pivot.qvtimperative.util.AbstractExtendingQVTimperativeVisitor;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
@@ -765,6 +766,11 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTim
 	public @NonNull DomainUsage visitShadowPart(@NonNull ShadowPart object) {
 		visit(object.getOwnedInit());
 		return visit(object.getType());
+	}
+
+	@Override
+	public @NonNull DomainUsage visitSimpleParameter(@NonNull SimpleParameter object) {
+		return visit(object.getReferredTypedModel());
 	}
 
 	@Override

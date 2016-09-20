@@ -9,8 +9,8 @@ transformation Dependencies {
 map dependenciesLM in Dependencies {
     in:source dummy:EPackage;
     call dependenciesMR {
-    	binaryPrecedence := (1 + 2) * (3*5 + 4);
-    	unaryPrecedence := -1 * - -1;
+    	binaryPrecedence uses (1 + 2) * (3*5 + 4);
+    	unaryPrecedence uses -1 * - -1;
     }
 }
 

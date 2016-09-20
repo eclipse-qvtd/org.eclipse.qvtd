@@ -10,7 +10,7 @@ transformation classescs2as
 
 map createPackage in classescs2as
 {
-	in:leftCS packageCS : PackageCS;
+	guard:leftCS packageCS : PackageCS;
 	new:rightAS _'package' : Package;
 	set _'package'.name := if packageCS.hasName()
 						then packageCS.name
@@ -22,7 +22,7 @@ map __root__ in classescs2as
 {
 	for packageCS : classescs::PackageCS in classescs::PackageCS.allInstances() {
 		call createPackage {
-			packageCS := packageCS;
+			packageCS iterates packageCS;
 		}
 	}
 }

@@ -9,14 +9,14 @@ transformation classescs2as
 
 map mCreationRootCS2Root in classescs2as
 {
-	in:leftCS rootCS : RootCS;
+	guard:leftCS rootCS : RootCS;
 	new:rightAS root : Root;
 	set rootCS.ast := root;
 }
 
 map mCreationPackageCS2Package in classescs2as
 {
-	in:leftCS packageCS : PackageCS;
+	guard:leftCS packageCS : PackageCS;
 	new:rightAS _'package' : Package;
 	set packageCS.ast := _'package';
 }
@@ -24,14 +24,14 @@ map mCreationPackageCS2Package in classescs2as
 
 map uPackage_name in classescs2as
 {
-	in:leftCS packageCS : PackageCS;
+	guard:leftCS packageCS : PackageCS;
 	var l1 : classes::Package := packageCS.ast.oclAsType(classes::Package);
 	set l1.name := packageCS.name;
 }
 
 map uRoot_ownedPackages in classescs2as
 {
-	in:leftCS rootCS : RootCS;
+	guard:leftCS rootCS : RootCS;
 	var z1 : classes::Root := rootCS.ast.oclAsType(classes::Root);
 	set z1.ownedPackages :=
 		rootCS.ownedPackages.ast.oclAsType(classes::Package)->asOrderedSet();
@@ -40,23 +40,23 @@ map __root__ in classescs2as
 {
 	for rootCS : classescs::RootCS in classescs::RootCS.allInstances() {
 		call mCreationRootCS2Root {
-			rootCS := rootCS;
+			rootCS iterates rootCS;
 		}
 	}
 	for packageCS : classescs::PackageCS in classescs::PackageCS.allInstances() {
 		call mCreationPackageCS2Package {
-			packageCS := packageCS;
+			packageCS iterates packageCS;
 		}
 	}
 	
 	for rootCS : classescs::RootCS in classescs::RootCS.allInstances() {
 		call uRoot_ownedPackages {
-			rootCS := rootCS;
+			rootCS iterates rootCS;
 		}
 	}
 	for packageCS : classescs::PackageCS in classescs::PackageCS.allInstances() {
 		call uPackage_name {
-			packageCS := packageCS;
+			packageCS iterates packageCS;
 		}
 	}
 }

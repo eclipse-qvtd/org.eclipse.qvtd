@@ -11,29 +11,29 @@ map __root__ in CopyGraph {
     
     for g1 : SimpleGraph::Graph in SimpleGraph::Graph.allInstances() {
         call Graph2Middle {
-            g1 := g1;
+            g1 iterates g1;
         }
     }
 }
 
 map Graph2Middle in CopyGraph {	        					-- L to M for G
-    in:upperGraph g1:Graph;
+    guard:upperGraph g1:Graph;
     new:middle middleG2G:Graph2Graph;
     set middleG2G.graph1 := g1;
     set middleG2G.name := g1.name.toLowerCase();
     for child in g1.element->select(e | e.oclIsTypeOf(simplegraph::Node)) {
 	    call Node2Middle {
-	    	n1 := child;
-	    	middleParent := middleG2G;
+	    	n1 iterates child;
+	    	middleParent uses middleG2G;
 	    }
 	}
     call Middle2Graph {
-    	g2Gmiddle := middleG2G;
+    	g2Gmiddle uses middleG2G;
     }
 }
 
 map Node2Middle in CopyGraph {    							-- L to M for N
-    in:upperGraph n1:Node;
+    guard:upperGraph n1:Node;
     in:middle middleParent:Graph2Graph;
     new:middle n2n:Node2Node;
     set n2n.owner := middleParent;
@@ -48,13 +48,13 @@ map Middle2Graph in CopyGraph {								-- M to R for G
     set g2.name := g2Gmiddle.name;
     for child in g2Gmiddle.element2Element->select(e2e | e2e.oclIsTypeOf(simplegraph2graph::Node2Node)) {
 	    call Middle2Node {
-	    	n2n := child;
+	    	n2n iterates child;
 	    }
 	}
 }
 
 map Middle2Node in CopyGraph {						        -- M to R for N
-    in:middle n2n:Node2Node;
+    guard:middle n2n:Node2Node;
 	new:lowerGraph n2:Node;
     set	n2n.node2 := n2;
 	set	n2.graph := n2n.owner.graph2;

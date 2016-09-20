@@ -14,18 +14,23 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Type;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseHelper;
 import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.AppendParameter;
+import org.eclipse.qvtd.pivot.qvtimperative.BufferStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.CheckStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
+import org.eclipse.qvtd.pivot.qvtimperative.GuardParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
+import org.eclipse.qvtd.pivot.qvtimperative.LoopParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
-import org.eclipse.qvtd.pivot.qvtimperative.OutConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeFactory;
+import org.eclipse.qvtd.pivot.qvtimperative.SimpleParameter;
+import org.eclipse.qvtd.pivot.qvtimperative.SimpleParameterBinding;
 
 /**
  * QVTimperativeHelper provides helper routines to assist creation of QVTimperative model elements.
@@ -51,6 +56,15 @@ public class QVTimperativeHelper extends QVTbaseHelper
 		return asVariable;
 	}
 
+	public @NonNull BufferStatement createBufferStatement(@NonNull String name, @NonNull Type asType, boolean isRequired, @Nullable OCLExpression initExpression) {
+		BufferStatement asVariable = QVTimperativeFactory.eINSTANCE.createBufferStatement();
+		asVariable.setName(name);
+		asVariable.setType(asType);
+		asVariable.setIsRequired(isRequired);
+		asVariable.setOwnedExpression(initExpression);
+		return asVariable;
+	}
+
 	public @NonNull CheckStatement createCheckStatement(@NonNull OCLExpression asConditionExpression) {
 		CheckStatement asPredicate = QVTimperativeFactory.eINSTANCE.createCheckStatement();
 		asPredicate.setOwnedExpression(asConditionExpression);
@@ -59,7 +73,7 @@ public class QVTimperativeHelper extends QVTbaseHelper
 
 	public @NonNull DeclareStatement createDeclareStatement(@NonNull String name, @NonNull Type asType, boolean isRequired, @NonNull OCLExpression initExpression) {
 		DeclareStatement asVariableStatement = QVTimperativeFactory.eINSTANCE.createDeclareStatement();
-		asVariableStatement.setIsChecked(!initExpression.getType().conformsTo(standardLibrary, asType));
+		asVariableStatement.setIsCheck(!initExpression.getType().conformsTo(standardLibrary, asType));
 		asVariableStatement.setOwnedExpression(initExpression);
 		asVariableStatement.setName(name);
 		asVariableStatement.setType(asType);
@@ -76,6 +90,14 @@ public class QVTimperativeHelper extends QVTbaseHelper
 		return asVariable;
 	}
 
+	public @NonNull GuardParameterBinding createGuardParameterBinding(@NonNull GuardParameter variable, @NonNull ConnectionVariable value) {
+		GuardParameterBinding mappingParameterBinding = QVTimperativeFactory.eINSTANCE.createGuardParameterBinding();
+		mappingParameterBinding.setBoundVariable(variable);
+		mappingParameterBinding.setValue(value);
+		mappingParameterBinding.setIsCheck(!value.getType().conformsTo(standardLibrary, ClassUtil.nonNullState(variable.getType())));
+		return mappingParameterBinding;
+	}
+
 	public @NonNull LoopVariable createLoopVariable(@NonNull String name, @NonNull Type type) {
 		LoopVariable asVariable = QVTimperativeFactory.eINSTANCE.createLoopVariable();
 		asVariable.setName(name);
@@ -84,12 +106,19 @@ public class QVTimperativeHelper extends QVTbaseHelper
 		return asVariable;
 	}
 
-	public @NonNull OutConnectionVariable createOutConnectionVariable(@NonNull String name, @NonNull Type asType, boolean isRequired, @Nullable OCLExpression initExpression) {
-		OutConnectionVariable asVariable = QVTimperativeFactory.eINSTANCE.createOutConnectionVariable();
-		asVariable.setName(name);
-		asVariable.setType(asType);
-		asVariable.setIsRequired(isRequired);
-		asVariable.setOwnedExpression(initExpression);
-		return asVariable;
+	public @NonNull LoopParameterBinding createLoopParameterBinding(@NonNull GuardParameter variable, @NonNull LoopVariable value) {
+		LoopParameterBinding mappingParameterBinding = QVTimperativeFactory.eINSTANCE.createLoopParameterBinding();
+		mappingParameterBinding.setBoundVariable(variable);
+		mappingParameterBinding.setValue(value);
+		mappingParameterBinding.setIsCheck(!value.getType().conformsTo(standardLibrary, ClassUtil.nonNullState(variable.getType())));
+		return mappingParameterBinding;
+	}
+
+	public @NonNull SimpleParameterBinding createSimpleParameterBinding(@NonNull SimpleParameter variable, @NonNull OCLExpression value) {
+		SimpleParameterBinding mappingParameterBinding = QVTimperativeFactory.eINSTANCE.createSimpleParameterBinding();
+		mappingParameterBinding.setBoundVariable(variable);
+		mappingParameterBinding.setValue(value);
+		mappingParameterBinding.setIsCheck(!value.getType().conformsTo(standardLibrary, ClassUtil.nonNullState(variable.getType())));
+		return mappingParameterBinding;
 	}
 }

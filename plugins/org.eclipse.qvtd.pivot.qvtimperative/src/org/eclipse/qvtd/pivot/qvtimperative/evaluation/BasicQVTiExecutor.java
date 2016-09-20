@@ -34,7 +34,6 @@ import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.Variable;
-import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.ocl.pivot.evaluation.EvaluationVisitor;
 import org.eclipse.ocl.pivot.internal.complete.StandardLibraryInternal;
@@ -50,12 +49,17 @@ import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
+import org.eclipse.qvtd.pivot.qvtimperative.AppendParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.GuardParameterBinding;
+import org.eclipse.qvtd.pivot.qvtimperative.LoopParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
-import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingParameter;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.SimpleParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
@@ -244,9 +248,23 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 			pushEvaluationEnvironment(calledMapping, mappingCall);
 			try {
 				int index = 0;
-				for (MappingCallBinding binding : mappingCall.getBinding()) {
-					VariableDeclaration boundVariable = ClassUtil.nonNullState(binding.getBoundVariable());
-					replace(boundVariable, boundValues[index++], !(boundVariable instanceof ConnectionVariable));
+				for (MappingParameterBinding binding : mappingCall.getBinding()) {
+					MappingParameter boundVariable = ClassUtil.nonNullState(binding.getBoundVariable());
+					if (binding instanceof AppendParameterBinding) {	// FIXME visit the bindings
+						replace(boundVariable, boundValues[index++], !(boundVariable instanceof ConnectionVariable));	// FIXME static type conformance test
+					}
+					else if (binding instanceof GuardParameterBinding) {
+						replace(boundVariable, boundValues[index++], !(boundVariable instanceof ConnectionVariable));	// FIXME static type conformance test
+					}
+					else if (binding instanceof LoopParameterBinding) {
+						replace(boundVariable, boundValues[index++], !(boundVariable instanceof ConnectionVariable));	// FIXME static type conformance test
+					}
+					else if (binding instanceof SimpleParameterBinding) {
+						replace(boundVariable, boundValues[index++], !(boundVariable instanceof ConnectionVariable));	// FIXME static type conformance test
+					}
+					else {
+						assert false;
+					}
 				}
 				calledMapping.accept(undecoratedVisitor);
 			}

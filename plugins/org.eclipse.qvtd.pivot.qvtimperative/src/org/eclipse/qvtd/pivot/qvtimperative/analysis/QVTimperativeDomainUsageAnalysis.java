@@ -20,14 +20,18 @@ import org.eclipse.ocl.pivot.internal.complete.StandardLibraryInternal;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtbase.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.AppendParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.GuardParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
+import org.eclipse.qvtd.pivot.qvtimperative.LoopParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
-import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.SimpleParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
 
@@ -53,13 +57,34 @@ public class QVTimperativeDomainUsageAnalysis extends RootDomainUsageAnalysis im
 	}
 
 	@Override
+	public @NonNull DomainUsage visitAppendParameterBinding(@NonNull AppendParameterBinding object) {
+		DomainUsage valueUsage = visit(object.getValue());
+		DomainUsage variableUsage = visit(object.getBoundVariable());
+		return intersection(valueUsage, variableUsage);
+	}
+
+	@Override
 	public @NonNull DomainUsage visitConnectionVariable(@NonNull ConnectionVariable object) {
 		return visitVariableDeclaration(object);
 	}
 
 	@Override
+	public @NonNull DomainUsage visitGuardParameterBinding(@NonNull GuardParameterBinding object) {
+		DomainUsage valueUsage = visit(object.getValue());
+		DomainUsage variableUsage = visit(object.getBoundVariable());
+		return intersection(valueUsage, variableUsage);
+	}
+
+	@Override
 	public @NonNull DomainUsage visitImperativeModel(@NonNull ImperativeModel object) {
 		return visitBaseModel(object);
+	}
+
+	@Override
+	public @NonNull DomainUsage visitLoopParameterBinding(@NonNull LoopParameterBinding object) {
+		DomainUsage valueUsage = visit(object.getValue());
+		DomainUsage variableUsage = visit(object.getBoundVariable());
+		return intersection(valueUsage, variableUsage);
 	}
 
 	@Override
@@ -75,17 +100,10 @@ public class QVTimperativeDomainUsageAnalysis extends RootDomainUsageAnalysis im
 
 	@Override
 	public @NonNull DomainUsage visitMappingCall(@NonNull MappingCall object) {
-		for (MappingCallBinding mappingCallBinding : object.getBinding()) {
-			visit(mappingCallBinding);
+		for (MappingParameterBinding mappingParameterBinding : object.getBinding()) {
+			visit(mappingParameterBinding);
 		}
 		return getNoneUsage();
-	}
-
-	@Override
-	public @NonNull DomainUsage visitMappingCallBinding(@NonNull MappingCallBinding object) {
-		DomainUsage valueUsage = visit(object.getValue());
-		DomainUsage variableUsage = visit(object.getBoundVariable());
-		return intersection(valueUsage, variableUsage);
 	}
 
 	@Override
@@ -117,6 +135,13 @@ public class QVTimperativeDomainUsageAnalysis extends RootDomainUsageAnalysis im
 			return visit(object.getOwnedSource());
 		}
 		return super.visitOperationCallExp(object);
+	}
+
+	@Override
+	public @NonNull DomainUsage visitSimpleParameterBinding(@NonNull SimpleParameterBinding object) {
+		DomainUsage valueUsage = visit(object.getValue());
+		DomainUsage variableUsage = visit(object.getBoundVariable());
+		return intersection(valueUsage, variableUsage);
 	}
 
 	@Override

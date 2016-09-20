@@ -27,7 +27,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 
 public class MappingAttribution extends AbstractAttribution
 {
-	public static final MappingAttribution INSTANCE = new MappingAttribution();
+	public static final @NonNull MappingAttribution INSTANCE = new MappingAttribution();
 
 	@Override
 	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {

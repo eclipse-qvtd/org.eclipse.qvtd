@@ -20,7 +20,6 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGVariableExp;
 import org.eclipse.ocl.examples.codegen.generator.TypeDescriptor;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.TypedElement;
-import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcoreContainerAssignment;
@@ -43,8 +42,12 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGSequence;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel;
 import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
-import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
-import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
+import org.eclipse.qvtd.pivot.qvtimperative.AppendParameterBinding;
+import org.eclipse.qvtd.pivot.qvtimperative.GuardParameterBinding;
+import org.eclipse.qvtd.pivot.qvtimperative.LoopParameterBinding;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingParameter;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingParameterBinding;
+import org.eclipse.qvtd.pivot.qvtimperative.SimpleParameterBinding;
 
 public class QVTiBoxingAnalyzer extends BoxingAnalyzer implements QVTiCGModelVisitor<@Nullable Object>
 {
@@ -141,19 +144,43 @@ public class QVTiBoxingAnalyzer extends BoxingAnalyzer implements QVTiCGModelVis
 
 	@Override
 	public @Nullable Object visitCGMappingCallBinding(@NonNull CGMappingCallBinding cgMappingCallBinding) {
-		MappingCallBinding mappingCallBinding = (MappingCallBinding)cgMappingCallBinding.getAst();
-		VariableDeclaration boundVariable = mappingCallBinding.getBoundVariable();
+		MappingParameterBinding mappingParameterBinding = (MappingParameterBinding)cgMappingCallBinding.getAst();
+		MappingParameter boundVariable = mappingParameterBinding.getBoundVariable();
 		assert boundVariable != null;
-		if (boundVariable instanceof ConnectionVariable) {
-			//
+		if (mappingParameterBinding instanceof AppendParameterBinding) {
+			return visitCGValuedElement(cgMappingCallBinding);
 		}
-		else if (cgMappingCallBinding.isRequired()) {
-			rewriteAsUnboxed(rewriteAsGuarded(cgMappingCallBinding.getValue(), false, "binding for '" + mappingCallBinding.getMappingCall().getReferredMapping().getName() + "::" + boundVariable.getName() + "'"));	// FIXME referred mapping
+		else if (mappingParameterBinding instanceof GuardParameterBinding) {
+			//			if (cgMappingCallBinding.isRequired()) {
+			//				rewriteAsUnboxed(rewriteAsGuarded(cgMappingCallBinding.getValue(), false, "binding for '" + mappingParameterBinding.getMappingCall().getReferredMapping().getName() + "::" + boundVariable.getName() + "'"));	// FIXME referred mapping
+			//			}
+			//			else {
+			//				rewriteAsUnboxed(cgMappingCallBinding.getValue());
+			//			}
+			return visitCGValuedElement(cgMappingCallBinding);
+		}
+		else if (mappingParameterBinding instanceof LoopParameterBinding) {
+			//			if (cgMappingCallBinding.isRequired()) {
+			//				rewriteAsUnboxed(rewriteAsGuarded(cgMappingCallBinding.getValue(), false, "binding for '" + mappingParameterBinding.getMappingCall().getReferredMapping().getName() + "::" + boundVariable.getName() + "'"));	// FIXME referred mapping
+			//			}
+			//			else {
+			//				rewriteAsUnboxed(cgMappingCallBinding.getValue());
+			//			}
+			return visitCGValuedElement(cgMappingCallBinding);
+		}
+		else if (mappingParameterBinding instanceof SimpleParameterBinding) {
+			if (cgMappingCallBinding.isRequired()) {
+				rewriteAsUnboxed(rewriteAsGuarded(cgMappingCallBinding.getValue(), false, "binding for '" + mappingParameterBinding.getMappingCall().getReferredMapping().getName() + "::" + boundVariable.getName() + "'"));	// FIXME referred mapping
+			}
+			else {
+				rewriteAsUnboxed(cgMappingCallBinding.getValue());
+			}
+			return visitCGValuedElement(cgMappingCallBinding);
 		}
 		else {
-			rewriteAsUnboxed(cgMappingCallBinding.getValue());
+			assert false;
+			return null;
 		}
-		return visitCGValuedElement(cgMappingCallBinding);
 	}
 
 	@Override

@@ -8,12 +8,12 @@ transformation CopyGraphMinimal {
 }
 
 map graph2graphLM in CopyGraphMinimal {
-	in:upperGraph g1:Graph;
+	guard:upperGraph g1:Graph;
 	new:middle g2g:Graph2Graph;
     set g2g.graph1 := g1;
     set g2g.name := g1.name;
     call graph2graphMR {
-    	g2gout := g2g;
+    	g2gout uses g2g;
     }
 }
 
@@ -27,7 +27,7 @@ map graph2graphMR in CopyGraphMinimal {
 map __root__ in CopyGraphMinimal {
     for g1 : SimpleGraph::Graph in SimpleGraph::Graph.allInstances() {
         call graph2graphLM {
-            g1 := g1;
+            g1 iterates g1;
         }
     }
 }
