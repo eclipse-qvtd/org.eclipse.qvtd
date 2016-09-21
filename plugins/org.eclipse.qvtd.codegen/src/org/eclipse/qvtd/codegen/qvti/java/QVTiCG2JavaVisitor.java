@@ -56,7 +56,6 @@ import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.Parameter;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.SetType;
-import org.eclipse.ocl.pivot.ShadowExp;
 import org.eclipse.ocl.pivot.ShadowPart;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.evaluation.Executor;
@@ -100,8 +99,8 @@ import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
 import org.eclipse.qvtd.codegen.utilities.QVTiCGUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
-import org.eclipse.qvtd.pivot.qvtbase.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingParameterBinding;
@@ -541,7 +540,8 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 	protected boolean doFunctionBody2(@NonNull CGFunction cgFunction, @NonNull CGShadowExp cgShadowExp, @NonNull String instanceName) {
 		js.append(" {\n");
 		js.pushIndentation(null);
-		doEcoreCreate(cgShadowExp, ClassUtil.nonNullState(cgShadowExp.getEcoreClassifier()));
+		EClassifier eClassifier = ClassUtil.nonNullState(cgShadowExp.getEcoreClassifier());
+		doEcoreCreate(cgShadowExp, eClassifier);
 		int index = 0;
 		for (@NonNull CGShadowPart cgShadowPart : ClassUtil.nullFree(cgShadowExp.getParts())) {
 			Property asProperty = ClassUtil.nonNullState(((ShadowPart)cgShadowPart.getAst()).getReferredProperty());
@@ -570,17 +570,51 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		js.appendValueName(cgShadowExp);
 		js.append(";\n");
 		//
-		ShadowExp asShadowExp = (ShadowExp)ClassUtil.nonNullState(cgShadowExp.getAst());
-		DomainUsage usage = transformationAnalysis.getDomainUsageAnalysis().getUsage(asShadowExp);
-		TypedModel asTypedModel = ClassUtil.nonNullState(usage.getTypedModel(asShadowExp));
-		CGTypedModel cgTypedModel = context.getAnalyzer().getTypedModel(asTypedModel);
+		EPackage ePackage = eClassifier.getEPackage();
+		ImperativeTypedModel bestOutputTypedModel = null;
+		ImperativeTypedModel bestMiddleTypedModel = null;
+		ImperativeTypedModel bestInputTypedModel = null;
+		for (TypedModel typedModel : transformationAnalysis.getTransformation().getModelParameter()) {
+			ImperativeTypedModel imperativeTypedModel = null;
+			if (typedModel instanceof ImperativeTypedModel) {
+				for (org.eclipse.ocl.pivot.Package usedPackage : typedModel.getUsedPackage()) {
+					if (usedPackage.getESObject() == ePackage) {
+						imperativeTypedModel = (ImperativeTypedModel) typedModel;
+					}
+				}
+				if (imperativeTypedModel != null) {
+					if (imperativeTypedModel.isIsEnforced()) {
+						bestOutputTypedModel = imperativeTypedModel;
+					}
+					else if (!imperativeTypedModel.isIsChecked()) {
+						bestMiddleTypedModel = imperativeTypedModel;
+					}
+					else {
+						bestInputTypedModel = imperativeTypedModel;
+					}
+				}
+			}
+		}
+		ImperativeTypedModel asTypedModel = null;
+		if (bestOutputTypedModel != null) {
+			asTypedModel = bestOutputTypedModel;
+		}
+		else if (bestMiddleTypedModel != null) {
+			asTypedModel = bestMiddleTypedModel;
+		}
+		else if (bestInputTypedModel != null) {
+			asTypedModel = bestInputTypedModel;
+		}
+		if (asTypedModel != null) {			// FIXME Why are shadow objects put in a model at all -- testQVTrCompiler_SeqToStm_CG requires it
+			CGTypedModel cgTypedModel = context.getAnalyzer().getTypedModel(asTypedModel);
+			js.append(QVTiGlobalContext.MODELS_NAME);
+			js.append("[");
+			appendModelIndex(cgTypedModel);
+			js.append("].add(");
+			js.appendValueName(cgShadowExp);
+			js.append(");\n");
+		}
 		//
-		js.append(QVTiGlobalContext.MODELS_NAME);
-		js.append("[");
-		appendModelIndex(cgTypedModel);
-		js.append("].add(");
-		js.appendValueName(cgShadowExp);
-		js.append(");\n");
 		js.popIndentation();
 		js.append("}\n");
 		return true;
@@ -1964,7 +1998,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		return true;
 	}
 
-	@Override
+	/*	@Override
 	public @NonNull Boolean visitCGShadowExp(@NonNull CGShadowExp cgShadowExp) {
 		super.visitCGShadowExp(cgShadowExp);
 		ShadowExp asShadowExp = (ShadowExp)ClassUtil.nonNullState(cgShadowExp.getAst());
@@ -1978,7 +2012,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		js.appendValueName(cgShadowExp);
 		js.append(");\n");
 		return true;
-	}
+	} */
 
 	@Override
 	public @NonNull Boolean visitCGTransformation(@NonNull CGTransformation cgTransformation) {

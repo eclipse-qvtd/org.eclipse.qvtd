@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *     E.D.Willink - initial API and implementation
  ******************************************************************************/
@@ -16,6 +16,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.internal.manager.TemplateParameterSubstitutionVisitor;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
+import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.model.QVTimperativeLibrary;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeTemplateParameterSubstitutionVisitor;
@@ -30,25 +31,25 @@ public class QVTiEnvironmentFactory extends QVTbaseEnvironmentFactory
 			return new QVTimperativeTemplateParameterSubstitutionVisitor(environmentFactory, selfType, selfTypeValue);
 		}
 	}
-	
+
 	public static final @NonNull CreateStrategy CREATE_STRATEGY = new QVTiCreateStrategy();
-	
+
 	public QVTiEnvironmentFactory(@NonNull ProjectManager projectMap, @Nullable ResourceSet externalResourceSet) {
 		super(projectMap, externalResourceSet, CREATE_STRATEGY);
 		getStandardLibrary().setDefaultStandardLibraryURI(QVTimperativeLibrary.STDLIB_URI);
 	}
 
-//	@Override
-//	public @NonNull BasicOCLExecutor createExecutor( @NonNull ModelManager modelManager) {
-//		return new BasicOCLExecutor(this, modelManager);		// Inherited functionality used for validation
-//	}
+	//	@Override
+	//	public @NonNull BasicOCLExecutor createExecutor( @NonNull ModelManager modelManager) {
+	//		return new BasicOCLExecutor(this, modelManager);		// Inherited functionality used for validation
+	//	}
 
 	public @NonNull QVTiModelManager createModelManager(@NonNull QVTiTransformationAnalysis transformationAnalysis) {
 		return new QVTiModelManager(transformationAnalysis);
 	}
 
-	public @NonNull QVTiTransformationAnalysis createTransformationAnalysis() {
-		return new QVTiTransformationAnalysis(this);
+	public @NonNull QVTiTransformationAnalysis createTransformationAnalysis(@NonNull Transformation transformation) {
+		return new QVTiTransformationAnalysis(this, transformation);
 	}
 
 	public boolean keepDebug() {

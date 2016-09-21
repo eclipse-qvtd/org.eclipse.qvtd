@@ -247,8 +247,8 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 		//		Map<Transformation, QVTiTransformationAnalysis> transformation2analysis = new HashMap<Transformation, QVTiTransformationAnalysis>();
 		QVTiTransformationAnalysis transformationAnalysis = transformation2analysis.get(transformation);
 		if (transformationAnalysis == null) {
-			transformationAnalysis = new QVTiTransformationAnalysis(getEnvironmentFactory());
-			transformationAnalysis.analyzeTransformation(transformation);
+			transformationAnalysis = new QVTiTransformationAnalysis(getEnvironmentFactory(), transformation);
+			transformationAnalysis.analyzeTransformation();
 			transformation2analysis.put(transformation, transformationAnalysis);
 		}
 		return transformationAnalysis;

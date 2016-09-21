@@ -40,10 +40,8 @@ import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.library.LibraryFeature;
 import org.eclipse.ocl.pivot.library.oclany.OclElementOclContainerProperty;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
-import org.eclipse.qvtd.pivot.qvtbase.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
-import org.eclipse.qvtd.pivot.qvtimperative.analysis.QVTimperativeDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 
 /**
@@ -60,10 +58,7 @@ public class QVTiTransformationAnalysis
 {
 	protected final @NonNull EnvironmentFactoryInternal environmentFactory;
 
-	/**
-	 * Analysis of domains applicable to each transformation element.
-	 */
-	private final @NonNull QVTimperativeDomainUsageAnalysis domainAnalysis;
+	protected final @NonNull Transformation transformation;
 
 	/**
 	 *  Set of all types for which allInstances() is invoked.
@@ -74,11 +69,6 @@ public class QVTiTransformationAnalysis
 	 *  Map from navigable property to sequential index in any TypedModel.
 	 */
 	private final @NonNull Map<@NonNull Property, @NonNull Integer> property2cacheIndex = new HashMap<>();
-
-	/**
-	 *  Map from navigable property to sequential index in a checkable TypedModel.
-	 */
-	private final @NonNull Map<@NonNull Property, @NonNull Integer> sourceProperty2cacheIndex = new HashMap<>();
 
 	/**
 	 * Map from propertyAssignment to the cache index of an un-navigable lookup cache to be updated by the assignment.
@@ -120,9 +110,9 @@ public class QVTiTransformationAnalysis
 	 */
 	private final @NonNull Map<@NonNull Type, @NonNull List<@NonNull Type>> parentClass2childClasses = new HashMap<>();
 
-	public QVTiTransformationAnalysis(@NonNull EnvironmentFactoryInternal environmentFactory) {
+	public QVTiTransformationAnalysis(@NonNull EnvironmentFactoryInternal environmentFactory, @NonNull Transformation transformation) {
 		this.environmentFactory = environmentFactory;
-		this.domainAnalysis = new QVTimperativeDomainUsageAnalysis(environmentFactory);
+		this.transformation = transformation;
 	}
 
 	private void addAllInstancesClass(@NonNull OCLExpression asExpression) {
@@ -142,12 +132,6 @@ public class QVTiTransformationAnalysis
 		if (cacheIndex == null) {
 			Integer size = property2cacheIndex.size();
 			property2cacheIndex.put(navigableProperty, size);
-			if (sourceExpression != null) {
-				DomainUsage sourceUsage = domainAnalysis.basicGetUsage(sourceExpression);
-				if ((sourceUsage != null) && sourceUsage.isInput()) {
-					sourceProperty2cacheIndex.put(navigableProperty, size);
-				}
-			}
 			cacheIndex = size;
 		}
 		return cacheIndex;
@@ -251,8 +235,7 @@ public class QVTiTransformationAnalysis
 		}
 	}
 
-	public void analyzeTransformation(@NonNull Transformation transformation) {
-		domainAnalysis.analyzeTransformation(transformation);
+	public void analyzeTransformation() {
 		//
 		//	First pass
 		//  - identify all allInstances() source types
@@ -350,10 +333,6 @@ public class QVTiTransformationAnalysis
 		return property2cacheIndex;
 	}
 
-	public @NonNull QVTimperativeDomainUsageAnalysis getDomainUsageAnalysis() {
-		return domainAnalysis;
-	}
-
 	public @NonNull Set<@NonNull Mapping> getHazardousMappings() {
 		return hazardousMappings;
 	}
@@ -395,25 +374,8 @@ public class QVTiTransformationAnalysis
 		return environmentFactory.getMetamodelManager();
 	}
 
-	/*	protected int getOppositeCacheIndex(@NonNull Property oppositeProperty) {
-		Integer cacheIndex = opposite2cacheIndex.get(oppositeProperty);
-		if (cacheIndex == null) {
-			cacheIndex = opposite2cacheIndex.size();
-			opposite2cacheIndex.put(oppositeProperty, cacheIndex);
-		}
-		return cacheIndex;
-	}
-
-	public int getOppositeCacheIndexes() {
-		return opposite2cacheIndex.size();
-	}
-
-	public @NonNull Map<Property, Integer> getOpposites() {
-		return opposite2cacheIndex;
-	} */
-
-	public @NonNull Map<@NonNull Property, @NonNull Integer> getSourceCaches() {
-		return sourceProperty2cacheIndex;
+	public @NonNull Transformation getTransformation() {
+		return transformation;
 	}
 
 	public boolean isHazardous(@NonNull Mapping mapping) {

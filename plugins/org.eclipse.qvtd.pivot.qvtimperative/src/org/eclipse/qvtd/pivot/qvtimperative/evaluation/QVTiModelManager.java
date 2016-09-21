@@ -38,7 +38,7 @@ import org.eclipse.ocl.pivot.utilities.ParserException;
 import org.eclipse.ocl.pivot.utilities.XMIUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
-import org.eclipse.qvtd.pivot.qvtbase.analysis.DomainUsage;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTransformationInstance;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTypedModelInstance;
 import org.eclipse.qvtd.runtime.evaluation.TransformationInstance;
@@ -154,10 +154,11 @@ public class QVTiModelManager extends AbstractModelManager
 	@Override
 	public @NonNull Set<@NonNull Object> get(org.eclipse.ocl.pivot.@NonNull Class type) {
 		Set<@NonNull Object> elements = new HashSet<>();
-		DomainUsage inputUsage = transformationAnalysis.getDomainUsageAnalysis().getInputUsage();
-		for (@NonNull TypedModel typedModel : inputUsage.getTypedModels()) {
-			TypedModelInstance typedModelInstance = getTypedModelInstance(typedModel);
-			elements.addAll(typedModelInstance.getObjectsOfKind(type));
+		for (@NonNull TypedModel typedModel : ClassUtil.nullFree(transformationAnalysis.getTransformation().getModelParameter())) {
+			if (((ImperativeTypedModel)typedModel).isIsChecked()) {
+				TypedModelInstance typedModelInstance = getTypedModelInstance(typedModel);
+				elements.addAll(typedModelInstance.getObjectsOfKind(type));
+			}
 		}
 		return elements;
 	}

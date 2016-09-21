@@ -195,8 +195,8 @@ public class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 	public @NonNull QVTiTransformationAnalysis getTransformationAnalysis() {
 		QVTiTransformationAnalysis transformationAnalysis2 = transformationAnalysis;
 		if (transformationAnalysis2 == null) {
-			transformationAnalysis = transformationAnalysis2 = getEnvironmentFactory().createTransformationAnalysis();
-			transformationAnalysis2.analyzeTransformation(transformation);
+			transformationAnalysis = transformationAnalysis2 = getEnvironmentFactory().createTransformationAnalysis(transformation);
+			transformationAnalysis2.analyzeTransformation();
 		}
 		return transformationAnalysis2;
 	}

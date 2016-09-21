@@ -28,19 +28,18 @@ public class AllQVTimperativeTests extends TestCase
 	}
 
 	public static Test suite() {
-		TestSuite result = new TestSuite("All QVTimperative Tests");			
+		TestSuite result = new TestSuite("All QVTimperative Tests");
 		result.addTestSuite(QVTiEditorTests.class);
 		if (!EMFPlugin.IS_ECLIPSE_RUNNING) {		// FIXME should work as plugin test too
 			result.addTestSuite(QVTiInterpreterTests.class);
 			result.addTestSuite(QVTiCompilerTests.class);
-			result.addTestSuite(QVTiDomainUsageTests.class);
 		}
 		result.addTestSuite(QVTiSerializeTests.class);
 		return result;
 	}
 
 	public Object run(Object args)
-		throws Exception {
+			throws Exception {
 
 		TestRunner.run(suite());
 		return Arrays.asList(new String[] {"Please see raw test suite output for details."});

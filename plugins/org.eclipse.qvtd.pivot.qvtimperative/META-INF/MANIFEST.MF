@@ -8,7 +8,6 @@ Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.eclipse.qvtd.pivot.qvtimperative,
- org.eclipse.qvtd.pivot.qvtimperative.analysis,
  org.eclipse.qvtd.pivot.qvtimperative.attributes,
  org.eclipse.qvtd.pivot.qvtimperative.evaluation,
  org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus,
