@@ -405,7 +405,7 @@ public class QVTbaseUtil extends PivotUtil
 			for (OperationCallExp operationCallExp : missingSources) {
 				Transformation transformation = QVTbaseUtil.getContainingTransformation(operationCallExp);
 				if (transformation != null) {
-					Variable thisVariable = QVTbaseUtil.getContextVariable(standardLibrary, transformation);
+					VariableDeclaration thisVariable = QVTbaseUtil.getContextVariable(standardLibrary, transformation);
 					operationCallExp.setOwnedSource(PivotUtil.createVariableExp(thisVariable));
 				}
 			}

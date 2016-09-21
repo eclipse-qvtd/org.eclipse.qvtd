@@ -37,8 +37,8 @@ import org.eclipse.ocl.pivot.utilities.PivotConstants;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.Region2Depth;
 import org.eclipse.qvtd.compiler.internal.utilities.SymbolNameBuilder;
-import org.eclipse.qvtd.pivot.qvtbase.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
+import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.schedule.AbstractDatum;
 import org.eclipse.qvtd.pivot.schedule.ClassDatum;
 import org.eclipse.qvtd.pivot.schedule.PropertyDatum;
@@ -78,7 +78,7 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 	/**
 	 * The input models that may introduce model elements for transformation.
 	 */
-	private final @NonNull Map<@NonNull Model, org.eclipse.qvtd.pivot.qvtbase.analysis.DomainUsage> inputModels = new HashMap<@NonNull Model, org.eclipse.qvtd.pivot.qvtbase.analysis.DomainUsage>();
+	private final @NonNull Map<@NonNull Model, org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage> inputModels = new HashMap<@NonNull Model, org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage>();
 
 	/**
 	 * Mapping from each input class to the composite properties that may contain the class or its subclasses.
@@ -380,7 +380,7 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 	 * Identify all the containment relationships in the input models.
 	 */
 	private void computeContainedClassDatumAnalysis2compositeProperties() {
-		Map<org.eclipse.ocl.pivot.@NonNull Package, org.eclipse.qvtd.pivot.qvtbase.analysis.DomainUsage> allPackagesSet = new HashMap<org.eclipse.ocl.pivot.@NonNull Package, org.eclipse.qvtd.pivot.qvtbase.analysis.DomainUsage>();
+		Map<org.eclipse.ocl.pivot.@NonNull Package, org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage> allPackagesSet = new HashMap<org.eclipse.ocl.pivot.@NonNull Package, org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage>();
 		List<org.eclipse.ocl.pivot.@NonNull Package> allPackagesList = new ArrayList<org.eclipse.ocl.pivot.@NonNull Package>();
 		for (@NonNull Model asModel : inputModels.keySet()) {
 			DomainUsage domainUsage = inputModels.get(asModel);

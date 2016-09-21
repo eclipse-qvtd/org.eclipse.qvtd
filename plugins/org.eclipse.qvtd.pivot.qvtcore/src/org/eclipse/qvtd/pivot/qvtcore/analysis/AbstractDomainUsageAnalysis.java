@@ -74,8 +74,6 @@ import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
-import org.eclipse.qvtd.pivot.qvtbase.analysis.DomainUsage;
-import org.eclipse.qvtd.pivot.qvtbase.analysis.DomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcore.Area;
 import org.eclipse.qvtd.pivot.qvtcore.Assignment;
@@ -94,10 +92,10 @@ import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
 /**
  * AbstractDomainUsageAnalysis provides shared functionality for the overall analysis and for nested operational analyses.
  */
-public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTcoreVisitor<org.eclipse.qvtd.pivot.qvtbase.analysis.@NonNull DomainUsage, @NonNull EnvironmentFactory> implements DomainUsageAnalysis.Internal
+public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTcoreVisitor<org.eclipse.qvtd.pivot.qvtcore.analysis.@NonNull DomainUsage, @NonNull EnvironmentFactory> implements DomainUsageAnalysis.Internal
 {
 	private DomainUsage selfUsage = null;
-	protected final @NonNull Map<@NonNull Element, org.eclipse.qvtd.pivot.qvtbase.analysis.DomainUsage> element2usage = new HashMap<@NonNull Element, org.eclipse.qvtd.pivot.qvtbase.analysis.DomainUsage>();
+	protected final @NonNull Map<@NonNull Element, org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage> element2usage = new HashMap<@NonNull Element, org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage>();
 
 	protected AbstractDomainUsageAnalysis(@NonNull EnvironmentFactory environmentFactory) {
 		super(environmentFactory);
@@ -158,7 +156,7 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTco
 		}
 	}
 
-	public @NonNull Map<@NonNull Element, org.eclipse.qvtd.pivot.qvtbase.analysis.DomainUsage> getElements2Usage() {
+	public @NonNull Map<@NonNull Element, org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage> getElements2Usage() {
 		return element2usage;
 	}
 
@@ -297,9 +295,9 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTco
 
 	@Override
 	public String toString() {
-		Map<@NonNull String, org.eclipse.qvtd.pivot.qvtbase.analysis.DomainUsage> map = new HashMap<@NonNull String, org.eclipse.qvtd.pivot.qvtbase.analysis.DomainUsage>(element2usage.size());
+		Map<@NonNull String, org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage> map = new HashMap<@NonNull String, org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage>(element2usage.size());
 		List<@NonNull String> keys = new ArrayList<@NonNull String>(element2usage.size());
-		for (Map.Entry<@NonNull Element, org.eclipse.qvtd.pivot.qvtbase.analysis.DomainUsage> entry : element2usage.entrySet()) {
+		for (Map.Entry<@NonNull Element, org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage> entry : element2usage.entrySet()) {
 			Element element = entry.getKey();
 			String key = element.eClass().getName() + " : " + element;
 			map.put(key, entry.getValue());

@@ -38,9 +38,9 @@ import org.eclipse.ocl.pivot.validation.ComposedEValidator;
 import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
-import org.eclipse.qvtd.pivot.qvtbase.analysis.DomainUsage;
-import org.eclipse.qvtd.pivot.qvtbase.analysis.DomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtcore.CoreModel;
+import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage;
+import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.QVTcoreDomainUsageAnalysis;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTransformationExecutor;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
@@ -64,7 +64,7 @@ public class QVTcDomainUsageTests extends LoadTestCase
 			QVTcoreDomainUsageAnalysis domainAnalysis = new QVTcoreDomainUsageAnalysis(getEnvironmentFactory());
 			Map<Element, DomainUsage> analysis = domainAnalysis.analyzeTransformation(asTransformation);
 			Map<DomainUsage, List<Element>> usage2elements = new HashMap<DomainUsage, List<Element>>();
-			List<Operation> operations = new ArrayList<Operation>();
+			List<@NonNull Operation> operations = new ArrayList<>();
 			for (TreeIterator<EObject> tit = asTransformation.eAllContents(); tit.hasNext(); ) {
 				EObject eObject = tit.next();
 				if (eObject instanceof Comment) {
@@ -88,15 +88,17 @@ public class QVTcDomainUsageTests extends LoadTestCase
 				DomainUsageAnalysis operationAnalysis = domainAnalysis.getAnalysis(operation);
 				for (TreeIterator<EObject> tit = operation.eAllContents(); tit.hasNext(); ) {
 					EObject eObject = tit.next();
-					DomainUsage usage = operationAnalysis.getUsage((Element)eObject);
-					assert usage != null : "No nested usage for " + eObject.eClass().getName() + " " + eObject;
-					//					assert usage instanceof DomainUsageConstant : "Variable usage for " + eObject;
-					List<Element> list = usage2elements.get(usage);
-					if (list == null) {
-						list = new ArrayList<Element>();
-						usage2elements.put(usage, list);
+					if (eObject instanceof Element) {
+						DomainUsage usage = operationAnalysis.getUsage((Element)eObject);
+						assert usage != null : "No nested usage for " + eObject.eClass().getName() + " " + eObject;
+						//					assert usage instanceof DomainUsageConstant : "Variable usage for " + eObject;
+						List<Element> list = usage2elements.get(usage);
+						if (list == null) {
+							list = new ArrayList<Element>();
+							usage2elements.put(usage, list);
+						}
+						list.add((Element) eObject);
 					}
-					list.add((Element) eObject);
 				}
 			}
 			if (showAnalysis) {

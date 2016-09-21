@@ -50,9 +50,9 @@ import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.TrueNodeImpl;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.UnknownNodeImpl;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.VariableNodeImpl;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
-import org.eclipse.qvtd.pivot.qvtbase.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcore.NavigationAssignment;
+import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
 import org.eclipse.qvtd.pivot.schedule.ClassDatum;
 
