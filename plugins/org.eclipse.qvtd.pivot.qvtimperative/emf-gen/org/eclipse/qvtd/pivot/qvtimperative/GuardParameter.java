@@ -21,7 +21,9 @@ package org.eclipse.qvtd.pivot.qvtimperative;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * A ConnectionVariable accumulates one or more assignments.
+ * A GuardParameter of a Mapping defines a input at which a value is consumed from a connection.
+ * 
+ * syntax: oclText[guard:typedModel name : type;]
  * <!-- end-model-doc -->
  *
  * <p>
@@ -43,6 +45,9 @@ public interface GuardParameter extends MappingParameter {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The TypedModel that contains the passed value.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Referred Typed Model</em>' reference.
 	 * @see #setReferredTypedModel(ImperativeTypedModel)
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getGuardParameter_ReferredTypedModel()

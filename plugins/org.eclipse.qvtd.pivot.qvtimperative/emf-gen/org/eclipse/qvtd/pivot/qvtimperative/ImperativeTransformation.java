@@ -14,21 +14,20 @@
  */
 package org.eclipse.qvtd.pivot.qvtimperative;
 
-import org.eclipse.ocl.pivot.NamedElement;
+import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Statement</b></em>'.
+ * A representation of the model object '<em><b>Imperative Transformation</b></em>'.
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * A Statement is the basis for all execution by a Mapping.
+ * An ImperativeTransfornmation distinguishes a QVTi transformation from other transformations.
  * <!-- end-model-doc -->
  *
  *
- * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getStatement()
+ * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getImperativeTransformation()
  * @generated
  */
-public interface Statement extends NamedElement {
-
-} // Statement
+public interface ImperativeTransformation extends Transformation {
+} // ImperativeTransformation

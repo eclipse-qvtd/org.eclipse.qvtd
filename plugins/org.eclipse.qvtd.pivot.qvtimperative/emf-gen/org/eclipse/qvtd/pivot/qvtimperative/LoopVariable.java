@@ -21,6 +21,10 @@ import org.eclipse.ocl.pivot.VariableDeclaration;
  * A representation of the model object '<em><b>Loop Variable</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * A LoopVariable defines the iterator of a MappingLoop.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * </p>

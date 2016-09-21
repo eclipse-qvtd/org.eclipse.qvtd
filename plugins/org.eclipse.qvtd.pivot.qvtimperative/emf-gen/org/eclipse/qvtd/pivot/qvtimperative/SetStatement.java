@@ -23,6 +23,15 @@ import org.eclipse.ocl.pivot.VariableDeclaration;
  * A representation of the model object '<em><b>Set Statement</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * A SetStatement sets an object property to a computed value.
+ * 
+ * syntax: oclText[notify set name : type := expression;]
+ * 
+ * If oclText[notify] is specified, execution defines the property as ready enabling
+ * mappings whose ObservableStatements are waiting for the value to resume.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * </p>

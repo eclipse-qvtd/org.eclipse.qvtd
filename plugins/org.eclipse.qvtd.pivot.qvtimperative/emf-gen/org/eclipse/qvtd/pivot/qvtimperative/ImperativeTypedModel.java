@@ -22,7 +22,7 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * The Model of an Imperative QVT transformation.
+ * An ImperativeTypedModel defines an input,middle or output modek for the transformation.
  * <!-- end-model-doc -->
  *
  * <p>
@@ -46,6 +46,9 @@ public interface ImperativeTypedModel extends TypedModel {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * True for an input model.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Is Checked</em>' attribute.
 	 * @see #setIsChecked(boolean)
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getImperativeTypedModel_IsChecked()
@@ -72,6 +75,9 @@ public interface ImperativeTypedModel extends TypedModel {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * True for an output model.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Is Enforced</em>' attribute.
 	 * @see #setIsEnforced(boolean)
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getImperativeTypedModel_IsEnforced()

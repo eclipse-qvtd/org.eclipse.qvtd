@@ -21,6 +21,10 @@ import org.eclipse.ocl.pivot.VariableDeclaration;
  * A representation of the model object '<em><b>Variable Statement</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * A VariableStatement is the basis for a Mapping execution that makes a name available to subsequent starements.
+ * <!-- end-model-doc -->
+ *
  *
  * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getVariableStatement()
  * @generated

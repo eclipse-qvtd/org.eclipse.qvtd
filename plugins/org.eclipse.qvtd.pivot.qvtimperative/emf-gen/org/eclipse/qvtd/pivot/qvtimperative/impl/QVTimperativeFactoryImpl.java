@@ -91,6 +91,7 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 			case QVTimperativePackage.GUARD_PARAMETER: return createGuardParameter();
 			case QVTimperativePackage.GUARD_PARAMETER_BINDING: return createGuardParameterBinding();
 			case QVTimperativePackage.IMPERATIVE_MODEL: return createImperativeModel();
+			case QVTimperativePackage.IMPERATIVE_TRANSFORMATION: return createImperativeTransformation();
 			case QVTimperativePackage.IMPERATIVE_TYPED_MODEL: return createImperativeTypedModel();
 			case QVTimperativePackage.LOOP_PARAMETER_BINDING: return createLoopParameterBinding();
 			case QVTimperativePackage.LOOP_VARIABLE: return createLoopVariable();
@@ -203,6 +204,17 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 	public @NonNull ImperativeModel createImperativeModel() {
 		ImperativeModelImpl imperativeModel = new ImperativeModelImpl();
 		return imperativeModel;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public @NonNull ImperativeTransformation createImperativeTransformation() {
+		ImperativeTransformationImpl imperativeTransformation = new ImperativeTransformationImpl();
+		return imperativeTransformation;
 	}
 
 	/**

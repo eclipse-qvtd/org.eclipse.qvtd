@@ -21,10 +21,12 @@ package org.eclipse.qvtd.pivot.qvtimperative;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * A MappingCallBinding specifies the binding of a single variable as part of
- * a MappingCall. A value is bound to the variable. OPtionally isLoop may be true
- * to indicate that the value is a collection of values, each of which is to
- * be used as part of a distinct invocation.
+ * A LoopParameterBinding binds a guard parameter of an invoked Mapping to the value of a loop variable
+ * in the invoker. Execution of the mapping may use the value.
+ * 
+ * syntax: oclText[formalName iterates expression;]
+ * 
+ * Deprecated - WIP for a consuming stream
  * <!-- end-model-doc -->
  *
  * <p>

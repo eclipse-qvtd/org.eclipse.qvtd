@@ -22,7 +22,11 @@ import org.eclipse.ocl.pivot.OCLExpression;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * A ConnectionVariable accumulates one or more assignments.
+ * A BufferStatement declares a connection buffer and optionally assigns initial content.
+ * 
+ * syntax: oclText[buffer name : type := expression;]
+ * 
+ * oclText[type] or oclText[expression] but not both may be omitted. An omitted type is deduced from the initial expression values.
  * <!-- end-model-doc -->
  *
  * <p>
@@ -44,6 +48,9 @@ public interface BufferStatement extends ConnectionVariable, VariableStatement, 
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The optional expression computing initial content values.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Owned Expression</em>' containment reference.
 	 * @see #setOwnedExpression(OCLExpression)
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getBufferStatement_OwnedExpression()

@@ -23,6 +23,14 @@ import org.eclipse.ocl.pivot.Property;
  * A representation of the model object '<em><b>Observable Statement</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * An ObservableStatement may involve evaluation of an expression that accesses object properties whose
+ * values may not be available. If not ready,the mapping execution is suspended until the required value
+ * is made available by a notifying SetStatement.
+ * 
+ * syntax: oclText[observe class::property ...]
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * </p>
@@ -40,7 +48,7 @@ public interface ObservableStatement extends Statement {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * The properties whose accesses must be polled for readiness prior to use here.
+	 * The properties whose accesses must be checked for readiness.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Observed Properties</em>' reference list.
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getObservableStatement_ObservedProperties()

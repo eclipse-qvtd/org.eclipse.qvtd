@@ -22,7 +22,9 @@ import org.eclipse.ocl.pivot.OCLExpression;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * A ConnectionStatement assigns results to a ConnectionVariable.
+ * An AddStatement appends the value of an expression to a connection.
+ * 
+ * syntax: oclText[add connection := expression;]
  * <!-- end-model-doc -->
  *
  * <p>
@@ -46,6 +48,9 @@ public interface AddStatement extends MappingStatement, ObservableStatement {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The connection to be appended.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Target Variable</em>' reference.
 	 * @see #setTargetVariable(ConnectionVariable)
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getAddStatement_TargetVariable()
@@ -71,6 +76,9 @@ public interface AddStatement extends MappingStatement, ObservableStatement {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * True if the append is suppressed after a check for uniqueness of the value.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Is Enforced Unique</em>' attribute.
 	 * @see #setIsEnforcedUnique(boolean)
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getAddStatement_IsEnforcedUnique()
@@ -96,6 +104,9 @@ public interface AddStatement extends MappingStatement, ObservableStatement {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The expression whose evaluation yields the value to append.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Owned Expression</em>' containment reference.
 	 * @see #setOwnedExpression(OCLExpression)
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getAddStatement_OwnedExpression()

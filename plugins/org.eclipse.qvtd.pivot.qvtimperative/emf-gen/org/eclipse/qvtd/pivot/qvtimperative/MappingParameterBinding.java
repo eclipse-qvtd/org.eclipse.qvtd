@@ -22,10 +22,8 @@ import org.eclipse.ocl.pivot.Element;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * A MappingCallBinding specifies the binding of a single variable as part of
- * a MappingCall. A value is bound to the variable. OPtionally isLoop may be true
- * to indicate that the value is a collection of values, each of which is to
- * be used as part of a distinct invocation.
+ * A MappingCallBinding specifies the binding of a single variable or value to
+ * the formal parameter of a mapping as part of its inviocatuon or installation.
  * <!-- end-model-doc -->
  *
  * <p>
@@ -71,7 +69,7 @@ public interface MappingParameterBinding extends Element {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * The variable with the mappingCall.referredMapping bound to the/a value
+	 * The formal parameter bound by the call.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Bound Variable</em>' reference.
 	 * @see #setBoundVariable(MappingParameter)

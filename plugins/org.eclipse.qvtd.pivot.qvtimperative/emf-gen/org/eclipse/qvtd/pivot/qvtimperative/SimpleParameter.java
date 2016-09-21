@@ -21,7 +21,9 @@ package org.eclipse.qvtd.pivot.qvtimperative;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * A ConnectionVariable accumulates one or more assignments.
+ * A SimpleParameter of a Mapping defines an input at which a value is passed to the mapping.
+ * 
+ * syntax: oclText[in:typedModel name : type;]
  * <!-- end-model-doc -->
  *
  * <p>
@@ -43,6 +45,9 @@ public interface SimpleParameter extends MappingParameter {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The TypedModel that contains the passed value.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Referred Typed Model</em>' reference.
 	 * @see #setReferredTypedModel(ImperativeTypedModel)
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getSimpleParameter_ReferredTypedModel()

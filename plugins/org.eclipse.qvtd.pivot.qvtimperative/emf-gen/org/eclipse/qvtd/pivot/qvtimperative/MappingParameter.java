@@ -22,7 +22,8 @@ import org.eclipse.ocl.pivot.VariableDeclaration;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * A ConnectionVariable accumulates one or more assignments.
+ * A MappingParameter defines a formal parameter of a mapping. The parameter is bound by the
+ * mapping invocation to satisfy the requirements of the derived parameter class.
  * <!-- end-model-doc -->
  *
  *

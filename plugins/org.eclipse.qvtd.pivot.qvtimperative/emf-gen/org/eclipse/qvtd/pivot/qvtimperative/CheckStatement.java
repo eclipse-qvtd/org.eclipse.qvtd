@@ -21,6 +21,13 @@ import org.eclipse.ocl.pivot.OCLExpression;
  * A representation of the model object '<em><b>Check Statement</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * A CheckStatement evaluates a predicate. If the evaluation is false, the mapping execution
+ * terminates fails and does nothing.
+ * 
+ * syntax: oclText[check expression;]
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * </p>

@@ -20,7 +20,9 @@ package org.eclipse.qvtd.pivot.qvtimperative;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * A ConnectionVariable accumulates one or more assignments.
+ * An AppendParameter of a Mapping defines an output connection to which values may be appended.
+ * 
+ * syntax: oclText[append name : type;]
  * <!-- end-model-doc -->
  *
  *

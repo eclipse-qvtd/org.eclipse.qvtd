@@ -19,7 +19,9 @@ import org.eclipse.ocl.pivot.OCLExpression;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * An Imperative MappingLoop support an iterated nested mapping call.
+ * A MappingLoop supports an iteration of mapping invocations.
+ * 
+ * syntax: oclText[for name : type in expression {...}]
  * <!-- end-model-doc -->
  *
  * <p>
@@ -46,6 +48,9 @@ public interface MappingLoop extends MappingStatement, ObservableStatement {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The iterator loop variable.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Owned Iterators</em>' containment reference list.
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getMappingLoop_OwnedIterators()
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.LoopVariable#getOwningMappingLoop
@@ -62,6 +67,9 @@ public interface MappingLoop extends MappingStatement, ObservableStatement {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The statements to be iterated, typically a single MappingCall.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Owned Mapping Statements</em>' containment reference list.
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getMappingLoop_OwnedMappingStatements()
 	 * @generated
@@ -76,6 +84,9 @@ public interface MappingLoop extends MappingStatement, ObservableStatement {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The expression whose values provide the iterator values.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Owned Expression</em>' containment reference.
 	 * @see #setOwnedExpression(OCLExpression)
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getMappingLoop_OwnedExpression()

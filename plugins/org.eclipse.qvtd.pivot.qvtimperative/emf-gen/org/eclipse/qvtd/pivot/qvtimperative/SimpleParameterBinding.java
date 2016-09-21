@@ -22,10 +22,10 @@ import org.eclipse.ocl.pivot.OCLExpression;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * A MappingCallBinding specifies the binding of a single variable as part of
- * a MappingCall. A value is bound to the variable. OPtionally isLoop may be true
- * to indicate that the value is a collection of values, each of which is to
- * be used as part of a distinct invocation.
+ * A SimpleParameterBinding binds a simple parameter of an invoked Mapping to the value of an expression
+ * computed by the invoker. Execution of the mapping may use the value.
+ * 
+ * syntax: oclText[formalName uses expression;]
  * <!-- end-model-doc -->
  *
  * <p>

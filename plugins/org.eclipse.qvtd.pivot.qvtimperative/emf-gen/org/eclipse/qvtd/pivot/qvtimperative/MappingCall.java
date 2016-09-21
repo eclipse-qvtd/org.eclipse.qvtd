@@ -19,10 +19,9 @@ import org.eclipse.ocl.pivot.ReferringElement;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * A MappingCall specifies the invocation of a referredMapping with a set of bindings
- * of the bound variables of the referredMapping to values provided in the invocation.
- * Where Collections of values are provided for isLoop bindings, a distinct invocation
- * is performed for each distinct permutation of Collection elements.
+ * A MappingCall specifies the invocation of a referredMapping with a set of bindings.
+ * An installed mapping is invoked asynchronously whenever suitable values are available on consumed connections.
+ * An invoked mapping is invoked synchronously with values provided by the caller.
  * <!-- end-model-doc -->
  *
  * <p>
@@ -79,7 +78,7 @@ public interface MappingCall extends MappingStatement, ReferringElement {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * The Set of value to bound variable bindings.
+	 * The Set of bindings of variables or expressions to forma parameters.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Binding</em>' containment reference list.
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getMappingCall_Binding()
@@ -95,6 +94,8 @@ public interface MappingCall extends MappingStatement, ReferringElement {
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * An infinite MappingCall requires re-invocation of the called mapping to be suppressed to avoid an infinite loop.
+	 * 
+	 * Deprecated ?? not needed once install works.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Is Infinite</em>' attribute.
 	 * @see #setIsInfinite(boolean)
@@ -119,7 +120,8 @@ public interface MappingCall extends MappingStatement, ReferringElement {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * An infinite MappingCall requires re-invocation of the called mapping to be suppressed to avoid an infinite loop.
+	 * An install MappingCall declares a MappingCall that consumes one or more connections and appends to zero or more connections.
+	 * Invocations of the mapping are driven by the availability of values in the connection.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Is Install</em>' attribute.
 	 * @see #setIsInstall(boolean)
@@ -144,7 +146,8 @@ public interface MappingCall extends MappingStatement, ReferringElement {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * An infinite MappingCall requires re-invocation of the called mapping to be suppressed to avoid an infinite loop.
+	 * An invoke MappingCall invokes a Mapping that uses one or more values and appends to zero or more connections.
+	 * Invocations of the mapping is requested by the caller.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Is Invoke</em>' attribute.
 	 * @see #setIsInvoke(boolean)

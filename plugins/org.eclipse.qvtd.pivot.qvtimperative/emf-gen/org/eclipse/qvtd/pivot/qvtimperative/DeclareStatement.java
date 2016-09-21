@@ -21,6 +21,16 @@ import org.eclipse.ocl.pivot.OCLExpression;
  * A representation of the model object '<em><b>Predicate Variable</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * A DeclareStatement declares a variable and initial value.
+ * 
+ * syntax: oclText[check var name : type := expression;]
+ * 
+ * oclText[type] or oclText[expression] but not both may be omitted. An omitted type is deduced from the initial expression values.
+ * 
+ * oclText[check] may be omitted when the expression type is necessarily conformant.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * </p>
@@ -39,7 +49,9 @@ public interface DeclareStatement extends VariableStatement, ObservableStatement
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * Whether the variable initialization needs to be checked as a predicate. This is a derivation of not ownedInit.type.conformsTo(self.type).
+	 * True if the initial expression's type must be  checked for conformance with the variable's type.
+	 * A non-conforming vlaue is a predicate failure causing the mapping to fail without doing anything.
+	 * This is a derivation of not ownedInit.type.conformsTo(self.type).
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Is Check</em>' attribute.
 	 * @see #setIsCheck(boolean)
@@ -66,6 +78,9 @@ public interface DeclareStatement extends VariableStatement, ObservableStatement
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The expression computing the variable's value.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Owned Expression</em>' containment reference.
 	 * @see #setOwnedExpression(OCLExpression)
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getDeclareStatement_OwnedExpression()

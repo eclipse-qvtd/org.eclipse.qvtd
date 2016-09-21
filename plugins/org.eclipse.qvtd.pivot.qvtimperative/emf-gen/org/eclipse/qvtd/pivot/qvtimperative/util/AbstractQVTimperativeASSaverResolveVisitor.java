@@ -94,6 +94,11 @@ public abstract class AbstractQVTimperativeASSaverResolveVisitor
 	}
 
 	@Override
+	public @Nullable Object visitImperativeTransformation(org.eclipse.qvtd.pivot.qvtimperative.@NonNull ImperativeTransformation object) {
+		return visitTransformation(object);
+	}
+
+	@Override
 	public @Nullable Object visitImperativeTypedModel(org.eclipse.qvtd.pivot.qvtimperative.@NonNull ImperativeTypedModel object) {
 		return visitTypedModel(object);
 	}

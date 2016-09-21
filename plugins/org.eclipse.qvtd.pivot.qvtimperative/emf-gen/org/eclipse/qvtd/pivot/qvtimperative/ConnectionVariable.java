@@ -22,7 +22,7 @@ import org.eclipse.ocl.pivot.VariableDeclaration;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * A ConnectionVariable accumulates one or more assignments.
+ * A ConnectionVariable identifes a variable used as a connection buffer.
  * <!-- end-model-doc -->
  *
  *

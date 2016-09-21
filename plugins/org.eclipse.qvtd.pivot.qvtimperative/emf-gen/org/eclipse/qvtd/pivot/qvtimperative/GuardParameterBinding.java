@@ -20,10 +20,11 @@ package org.eclipse.qvtd.pivot.qvtimperative;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * A MappingCallBinding specifies the binding of a single variable as part of
- * a MappingCall. A value is bound to the variable. OPtionally isLoop may be true
- * to indicate that the value is a collection of values, each of which is to
- * be used as part of a distinct invocation.
+ * A GuardParameterBinding binds a guard parameter of an invoked Mapping to a value of a connection.
+ * Execution of the mapping may use the value. A distinct Mapping invocation occurs for each value
+ * in the connection.
+ * 
+ * syntax: oclText[formalName consumes expression;]
  * <!-- end-model-doc -->
  *
  * <p>
@@ -43,7 +44,7 @@ public interface GuardParameterBinding extends MappingParameterBinding {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * The value or collection of values to bind to boundVariable
+	 * The connection providing the invocation values.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Value</em>' reference.
 	 * @see #setValue(ConnectionVariable)
@@ -68,7 +69,9 @@ public interface GuardParameterBinding extends MappingParameterBinding {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * Whether the variable initialization needs to be checked as a predicate. This is a derivation of not ownedInit.type.conformsTo(self.type).
+	 * True if each consumed value must be checked for conformance with the variable's type.
+	 * A non-conforming vlaue is a predicate failure causing the mapping invocation to fail without doing anything.
+	 * This is a derivation of not ownedInit.type.conformsTo(self.type).
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Is Check</em>' attribute.
 	 * @see #setIsCheck(boolean)

@@ -21,6 +21,15 @@ import org.eclipse.ocl.pivot.OCLExpression;
  * A representation of the model object '<em><b>New Statement</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * A NewStatement creates an instance of a class and binds a name to it.
+ * 
+ * syntax: oclText[new:typedModel name : type := expression;]
+ * 
+ * If expression is omitted, a new instance if the tyope is created. If expression is provided, it
+ * computes the 'new' object, typically a singlton supervisor fpr a QVTr key.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * </p>
@@ -42,6 +51,9 @@ public interface NewStatement extends VariableStatement, ObservableStatement {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The TypedModel to which the new object is added.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Referred Typed Model</em>' reference.
 	 * @see #setReferredTypedModel(ImperativeTypedModel)
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getNewStatement_ReferredTypedModel()
@@ -67,6 +79,9 @@ public interface NewStatement extends VariableStatement, ObservableStatement {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Optional expression that constructs the new object.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Owned Expression</em>' containment reference.
 	 * @see #setOwnedExpression(OCLExpression)
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getNewStatement_OwnedExpression()
