@@ -1,0 +1,58 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>ObservableStatement</title>
+<link href="book.css" rel="stylesheet" type="text/css">
+<meta content="DocBook XSL Stylesheets V1.75.1" name="generator">
+<link rel="home" href="index.html" title="QVT Declarative Documentation">
+<link rel="up" href="qvtimperative.html" title="qvtimperative">
+<link rel="prev" href="NewStatement.html" title="NewStatement">
+<link rel="next" href="SetStatement.html" title="SetStatement">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">
+				
+					ObservableStatement
+				
+			</h1>
+<div class="section" title="ObservableStatement">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both">
+<a name="ObservableStatement"></a>
+				<span class="bold"><strong>
+					<code class="code">ObservableStatement</code>
+				</strong></span>
+			
+</h2>
+</div>
+</div>
+</div>
+<p>An ObservableStatement may involve evaluation of an expression that accesses object properties whose
+				values may not be available. If not ready,the mapping execution is suspended until the required value
+				is made available by a notifying SetStatement.</p>
+<p>syntax: 
+				<code class="code">observe class::property ...</code>
+			
+</p>
+<p>conformsTo 
+				<a class="link" href="Statement.html" title="Statement">
+					<code class="code">Statement</code>
+				</a>
+			
+</p>
+<p>
+				
+<span class="bold"><strong>Attributes</strong></span>
+			
+</p>
+<p>
+				
+<code class="code">observedProperties : Set(Property)[*|1]</code>
+			
+</p>
+<p>The properties whose accesses must be checked for readiness.</p>
+</div>
+</body>
+</html>

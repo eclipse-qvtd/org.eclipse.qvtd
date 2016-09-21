@@ -1,0 +1,291 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>qvtimperative</title>
+<link href="book.css" rel="stylesheet" type="text/css">
+<meta content="DocBook XSL Stylesheets V1.75.1" name="generator">
+<link rel="home" href="index.html" title="QVT Declarative Documentation">
+<link rel="up" href="index.html" title="QVT Declarative Documentation">
+<link rel="prev" href="VariableDeclaration.html" title="VariableDeclaration">
+<link rel="next" href="AppendParameter.html" title="AppendParameter">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">
+			
+				qvtimperative
+			
+		</h1>
+<div class="chapter" title="qvtimperative">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title">
+<a name="qvtimperative"></a>
+			<span class="bold"><strong>
+				<code class="code">qvtimperative</code>
+			</strong></span>
+		
+</h2>
+</div>
+</div>
+</div>
+<div class="toc">
+<dl>
+<dt>
+<span class="section"><a href="qvtimperative.html#AddStatement">
+				<span class="bold"><strong>
+					<code class="code">AddStatement</code>
+				</strong></span>
+			</a></span>
+</dt>
+<dt>
+<span class="section"><a href="AppendParameter.html">
+				<span class="bold"><strong>
+					<code class="code">AppendParameter</code>
+				</strong></span>
+			</a></span>
+</dt>
+<dt>
+<span class="section"><a href="AppendParameterBinding.html">
+				<span class="bold"><strong>
+					<code class="code">AppendParameterBinding</code>
+				</strong></span>
+			</a></span>
+</dt>
+<dt>
+<span class="section"><a href="BufferStatement.html">
+				<span class="bold"><strong>
+					<code class="code">BufferStatement</code>
+				</strong></span>
+			</a></span>
+</dt>
+<dt>
+<span class="section"><a href="CheckStatement.html">
+				<span class="bold"><strong>
+					<code class="code">CheckStatement</code>
+				</strong></span>
+			</a></span>
+</dt>
+<dt>
+<span class="section"><a href="ConnectionVariable.html">
+				<span class="bold"><strong>
+					<code class="code">ConnectionVariable</code>
+				</strong></span>
+			</a></span>
+</dt>
+<dt>
+<span class="section"><a href="DeclareStatement.html">
+				<span class="bold"><strong>
+					<code class="code">DeclareStatement</code>
+				</strong></span>
+			</a></span>
+</dt>
+<dt>
+<span class="section"><a href="GuardParameter.html">
+				<span class="bold"><strong>
+					<code class="code">GuardParameter</code>
+				</strong></span>
+			</a></span>
+</dt>
+<dt>
+<span class="section"><a href="GuardParameterBinding.html">
+				<span class="bold"><strong>
+					<code class="code">GuardParameterBinding</code>
+				</strong></span>
+			</a></span>
+</dt>
+<dt>
+<span class="section"><a href="ImperativeModel.html">
+				<span class="bold"><strong>
+					<code class="code">ImperativeModel</code>
+				</strong></span>
+			</a></span>
+</dt>
+<dt>
+<span class="section"><a href="ImperativeTransformation.html">
+				<span class="bold"><strong>
+					<code class="code">ImperativeTransformation</code>
+				</strong></span>
+			</a></span>
+</dt>
+<dt>
+<span class="section"><a href="ImperativeTypedModel.html">
+				<span class="bold"><strong>
+					<code class="code">ImperativeTypedModel</code>
+				</strong></span>
+			</a></span>
+</dt>
+<dt>
+<span class="section"><a href="LoopParameterBinding.html">
+				<span class="bold"><strong>
+					<code class="code">LoopParameterBinding</code>
+				</strong></span>
+			</a></span>
+</dt>
+<dt>
+<span class="section"><a href="LoopVariable.html">
+				<span class="bold"><strong>
+					<code class="code">LoopVariable</code>
+				</strong></span>
+			</a></span>
+</dt>
+<dt>
+<span class="section"><a href="Mapping.html">
+				<span class="bold"><strong>
+					<code class="code">Mapping</code>
+				</strong></span>
+			</a></span>
+</dt>
+<dt>
+<span class="section"><a href="MappingCall.html">
+				<span class="bold"><strong>
+					<code class="code">MappingCall</code>
+				</strong></span>
+			</a></span>
+</dt>
+<dt>
+<span class="section"><a href="MappingLoop.html">
+				<span class="bold"><strong>
+					<code class="code">MappingLoop</code>
+				</strong></span>
+			</a></span>
+</dt>
+<dt>
+<span class="section"><a href="MappingParameter.html">
+				<span class="bold"><strong>
+					<code class="code">MappingParameter</code>
+				</strong></span>
+			</a></span>
+</dt>
+<dt>
+<span class="section"><a href="MappingParameterBinding.html">
+				<span class="bold"><strong>
+					<code class="code">MappingParameterBinding</code>
+				</strong></span>
+			</a></span>
+</dt>
+<dt>
+<span class="section"><a href="MappingStatement.html">
+				<span class="bold"><strong>
+					<code class="code">MappingStatement</code>
+				</strong></span>
+			</a></span>
+</dt>
+<dt>
+<span class="section"><a href="NewStatement.html">
+				<span class="bold"><strong>
+					<code class="code">NewStatement</code>
+				</strong></span>
+			</a></span>
+</dt>
+<dt>
+<span class="section"><a href="ObservableStatement.html">
+				<span class="bold"><strong>
+					<code class="code">ObservableStatement</code>
+				</strong></span>
+			</a></span>
+</dt>
+<dt>
+<span class="section"><a href="SetStatement.html">
+				<span class="bold"><strong>
+					<code class="code">SetStatement</code>
+				</strong></span>
+			</a></span>
+</dt>
+<dt>
+<span class="section"><a href="SimpleParameter.html">
+				<span class="bold"><strong>
+					<code class="code">SimpleParameter</code>
+				</strong></span>
+			</a></span>
+</dt>
+<dt>
+<span class="section"><a href="SimpleParameterBinding.html">
+				<span class="bold"><strong>
+					<code class="code">SimpleParameterBinding</code>
+				</strong></span>
+			</a></span>
+</dt>
+<dt>
+<span class="section"><a href="Statement.html">
+				<span class="bold"><strong>
+					<code class="code">Statement</code>
+				</strong></span>
+			</a></span>
+</dt>
+<dt>
+<span class="section"><a href="VariableStatement.html">
+				<span class="bold"><strong>
+					<code class="code">VariableStatement</code>
+				</strong></span>
+			</a></span>
+</dt>
+</dl>
+</div>
+<p>The Package for an Imperative QVT transformation.</p>
+<p>An Imperative QVT trabsformation is expected to be created by an autogenerator that observes the following run-time restrictions:</p>
+<p>A mapping that my be re-invoked must have MappingCall.isInfinite set for every possible invocation.</p>
+<p>A mapping that reads object slots before they are guaranteed to have been assigned must declare the slots property in a corresponding ImperativeArea.checkedProperties entry.</p>
+<p>A mapping that assigns an object slot that any mapping may access before assignment is guaranteed must declare declare the slots property in a corresponding ImperativeArea.enforcedProperties entry.</p>
+<p>All reads by Functions/Queries must be guaranteed to succeed; i.e. the invoking mapping must check readiness before calling the query.</p>
+<p>All writes to multi-valued properties must be guaranteed to occur before any read of the property.</p>
+<div class="section" title="AddStatement">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both">
+<a name="AddStatement"></a>
+				<span class="bold"><strong>
+					<code class="code">AddStatement</code>
+				</strong></span>
+			
+</h2>
+</div>
+</div>
+</div>
+<p>An AddStatement appends the value of an expression to a connection.</p>
+<p>syntax: 
+				<code class="code">add connection := expression;</code>
+			
+</p>
+<p>conformsTo 
+				<a class="link" href="MappingStatement.html" title="MappingStatement">
+					<code class="code">MappingStatement</code>
+				</a>, 
+				<a class="link" href="ObservableStatement.html" title="ObservableStatement">
+					<code class="code">ObservableStatement</code>
+				</a>
+			
+</p>
+<p>
+				
+<span class="bold"><strong>Attributes</strong></span>
+			
+</p>
+<p>
+				
+<code class="code">isEnforcedUnique : Boolean[?]</code>
+			
+</p>
+<p>True if the append is suppressed after a check for uniqueness of the value.</p>
+<p>
+				
+<span class="bold"><strong>Associations</strong></span>
+			
+</p>
+<p>
+				
+<code class="code">ownedExpression : OCLExpression[1]</code>
+			
+</p>
+<p>The expression whose evaluation yields the value to append.</p>
+<p>
+				
+<code class="code">targetVariable : ::ConnectionVariable[1]</code>
+			
+</p>
+<p>The connection to be appended.</p>
+</div>
+</div>
+</body>
+</html>

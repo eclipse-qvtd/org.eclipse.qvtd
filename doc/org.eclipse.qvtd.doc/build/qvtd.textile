@@ -217,6 +217,44 @@ The Eclipse support for QVTc and QVTr supports declaration of transformations wi
 
 The package hierarchy declared for the Transformation is re-used to define the Java package hierarchy when Java code is generated from the Transformation.
 
+bc. 
+transformation org::eclipse::qvtd::xtext::qvtrelation::tests::hstm2fstm::HierarchicalStateMachine2FlatStateMachine(hier:hierMM, flat:flatMM)
+{
+    ...
+}
+
+Alternatively a package declaration may be used. This may also optionally define the package URI and/or namespace prefix.
+
+bc. 
+package org::eclipse::qvtd::xtext::qvtrelation::tests::hstm2fstm : nsPrefix = 'nsURI'
+{
+    transformation HierarchicalStateMachine2FlatStateMachine(hier:hierMM, flat:flatMM)
+    {
+        ...
+    }
+}
+
+h3(#Contextual Operations and Properties). Contextual Operations and Properties
+
+A *package* declaration may contain nested packages, classes or transformations. Within class declarations operations and properties may be declared analoguously to QVTo's contextual operatuions and properties, or to additional declarations from an imported Complete OCL document. The syntax is the same as OCLinECore which emulates typical OMG specification source text.
+
+bc. 
+package MyPackage
+{
+    class MyClass
+    {
+        operation op(p : String[1]) : String[1]
+        {
+            body: p.toUpper();
+        }
+        property name : String[1];
+    }
+    transformation MyTx(...)
+    {
+        ...
+    }
+}
+
 h3(#QVTc Middle Model). QVTc Middle Model
 
 The QVTc part of the specification is unclear as to how the middle metamodel is defined.
@@ -260,4 +298,518 @@ Eclipse QVTd provides *this* for QVTc and QVTr and thereby solves an OCL compati
 
 
 
+
+
+h1(#pivot). **@pivot@**
+
+
+h2(#OCLExpression). **@OCLExpression@**
+
+*Associations*
+
+@AddStatement : qvtimperative::AddStatement[?]@
+
+@BufferStatement : qvtimperative::BufferStatement[?]@
+
+@CheckStatement : qvtimperative::CheckStatement[?]@
+
+@DeclareStatement : qvtimperative::DeclareStatement[?]@
+
+@MappingLoop : qvtimperative::MappingLoop[?]@
+
+@NewStatement : qvtimperative::NewStatement[?]@
+
+@SetStatement : qvtimperative::SetStatement[?]@
+
+@SimpleParameterBinding : qvtimperative::SimpleParameterBinding[?]@
+
+h2(#Property). **@Property@**
+
+*Attributes*
+
+@ObservableStatement : Bag(qvtimperative::ObservableStatement)@
+
+@SetStatement : Bag(qvtimperative::SetStatement)@
+
+h2(#VariableDeclaration). **@VariableDeclaration@**
+
+*Attributes*
+
+@SetStatement : Bag(qvtimperative::SetStatement)@
+
+h1(#qvtimperative). **@qvtimperative@**
+
+The Package for an Imperative QVT transformation.
+
+An Imperative QVT trabsformation is expected to be created by an autogenerator that observes the following run-time restrictions:
+
+A mapping that my be re-invoked must have MappingCall.isInfinite set for every possible invocation.
+
+A mapping that reads object slots before they are guaranteed to have been assigned must declare the slots property in a corresponding ImperativeArea.checkedProperties entry.
+
+A mapping that assigns an object slot that any mapping may access before assignment is guaranteed must declare declare the slots property in a corresponding ImperativeArea.enforcedProperties entry.
+
+All reads by Functions/Queries must be guaranteed to succeed; i.e. the invoking mapping must check readiness before calling the query.
+
+All writes to multi-valued properties must be guaranteed to occur before any read of the property.
+
+
+h2(#AddStatement). **@AddStatement@**
+
+An AddStatement appends the value of an expression to a connection.
+
+syntax: @add connection := expression;@
+
+conformsTo "@MappingStatement@":#MappingStatement, "@ObservableStatement@":#ObservableStatement
+
+*Attributes*
+
+@isEnforcedUnique : Boolean[?]@
+
+True if the append is suppressed after a check for uniqueness of the value.
+
+*Associations*
+
+@ownedExpression : OCLExpression[1]@
+
+The expression whose evaluation yields the value to append.
+
+@targetVariable : ::ConnectionVariable[1]@
+
+The connection to be appended.
+
+h2(#AppendParameter). **@AppendParameter@**
+
+An AppendParameter of a Mapping defines an output connection to which values may be appended.
+
+syntax: @append name : type;@
+
+conformsTo "@ConnectionVariable@":#ConnectionVariable, "@MappingParameter@":#MappingParameter
+
+h2(#AppendParameterBinding). **@AppendParameterBinding@**
+
+An AppendParameterBinding binds an AppendParameter of an invoked Mapping to a connection of the invoker.
+Execution of the mapping may append to the connection.
+
+syntax: @formalName appendsTo connection;@
+
+conformsTo "@MappingParameterBinding@":#MappingParameterBinding
+
+*Associations*
+
+@value : ::ConnectionVariable[1]@
+
+The value or collection of values to bind to boundVariable
+
+h2(#BufferStatement). **@BufferStatement@**
+
+A BufferStatement declares a connection buffer and optionally assigns initial content.
+
+syntax: @buffer name : type := expression;@
+
+@type@ or @expression@ but not both may be omitted. An omitted type is deduced from the initial expression values.
+
+conformsTo "@ConnectionVariable@":#ConnectionVariable, "@VariableStatement@":#VariableStatement, "@ObservableStatement@":#ObservableStatement
+
+*Associations*
+
+@ownedExpression : OCLExpression[?]@
+
+The optional expression computing initial content values.
+
+h2(#CheckStatement). **@CheckStatement@**
+
+A CheckStatement evaluates a predicate. If the evaluation is false, the mapping execution
+terminates fails and does nothing.
+
+syntax: @check expression;@
+
+conformsTo "@ObservableStatement@":#ObservableStatement
+
+*Associations*
+
+@ownedExpression : OCLExpression[1]@
+
+h2(#ConnectionVariable). **@ConnectionVariable@**
+
+A ConnectionVariable identifes a variable used as a connection buffer.
+
+conformsTo "@VariableDeclaration@":#VariableDeclaration
+
+*Attributes*
+
+@AddStatement : Bag(qvtimperative::AddStatement)@
+
+@AppendParameterBinding : Bag(qvtimperative::AppendParameterBinding)@
+
+@GuardParameterBinding : Bag(qvtimperative::GuardParameterBinding)@
+
+h2(#DeclareStatement). **@DeclareStatement@**
+
+A DeclareStatement declares a variable and initial value.
+
+syntax: @check var name : type := expression;@
+
+@type@ or @expression@ but not both may be omitted. An omitted type is deduced from the initial expression values.
+
+@check@ may be omitted when the expression type is necessarily conformant.
+
+conformsTo "@VariableStatement@":#VariableStatement, "@ObservableStatement@":#ObservableStatement
+
+*Attributes*
+
+@isCheck : Boolean[?]@
+
+True if the initial expression's type must be  checked for conformance with the variable's type.
+A non-conforming vlaue is a predicate failure causing the mapping to fail without doing anything.
+This is a derivation of not ownedInit.type.conformsTo(self.type).
+
+*Associations*
+
+@ownedExpression : OCLExpression[1]@
+
+The expression computing the variable's value.
+
+h2(#GuardParameter). **@GuardParameter@**
+
+A GuardParameter of a Mapping defines a input at which a value is consumed from a connection.
+
+syntax: @guard:typedModel name : type;@
+
+conformsTo "@MappingParameter@":#MappingParameter
+
+*Associations*
+
+@referredTypedModel : ::ImperativeTypedModel[1]@
+
+The TypedModel that contains the passed value.
+
+h2(#GuardParameterBinding). **@GuardParameterBinding@**
+
+A GuardParameterBinding binds a guard parameter of an invoked Mapping to a value of a connection.
+Execution of the mapping may use the value. A distinct Mapping invocation occurs for each value
+in the connection.
+
+syntax: @formalName consumes expression;@
+
+conformsTo "@MappingParameterBinding@":#MappingParameterBinding
+
+*Attributes*
+
+@isCheck : Boolean[?]@
+
+True if each consumed value must be checked for conformance with the variable's type.
+A non-conforming vlaue is a predicate failure causing the mapping invocation to fail without doing anything.
+This is a derivation of not ownedInit.type.conformsTo(self.type).
+
+*Associations*
+
+@value : ::ConnectionVariable[1]@
+
+The connection providing the invocation values.
+
+h2(#ImperativeModel). **@ImperativeModel@**
+
+The Model of an Imperative QVT transformation.
+
+conformsTo "@BaseModel@":#BaseModel
+
+h2(#ImperativeTransformation). **@ImperativeTransformation@**
+
+An ImperativeTransfornmation distinguishes a QVTi transformation from other transformations.
+
+conformsTo "@Transformation@":#Transformation
+
+h2(#ImperativeTypedModel). **@ImperativeTypedModel@**
+
+An ImperativeTypedModel defines an input,middle or output modek for the transformation.
+
+conformsTo "@TypedModel@":#TypedModel
+
+*Attributes*
+
+@GuardParameter : Bag(qvtimperative::GuardParameter)@
+
+@NewStatement : Bag(qvtimperative::NewStatement)@
+
+@SimpleParameter : Bag(qvtimperative::SimpleParameter)@
+
+@isChecked : Boolean[?]@
+
+True for an input model.
+
+@isEnforced : Boolean[?]@
+
+True for an output model.
+
+h2(#LoopParameterBinding). **@LoopParameterBinding@**
+
+A LoopParameterBinding binds a guard parameter of an invoked Mapping to the value of a loop variable
+in the invoker. Execution of the mapping may use the value.
+
+syntax: @formalName iterates expression;@
+
+Deprecated - WIP for a consuming stream
+
+conformsTo "@MappingParameterBinding@":#MappingParameterBinding
+
+*Attributes*
+
+@isCheck : Boolean[?]@
+
+Whether the variable initialization needs to be checked as a predicate. This is a derivation of not ownedInit.type.conformsTo(self.type).
+
+*Associations*
+
+@value : ::LoopVariable[1]@
+
+The value or collection of values to bind to boundVariable
+
+h2(#LoopVariable). **@LoopVariable@**
+
+A LoopVariable defines the iterator of a MappingLoop.
+
+conformsTo "@VariableDeclaration@":#VariableDeclaration
+
+*Attributes*
+
+@LoopParameterBinding : Bag(qvtimperative::LoopParameterBinding)@
+
+*Associations*
+
+@owningMappingLoop : ::MappingLoop[1]@
+
+h2(#Mapping). **@Mapping@**
+
+An Imperative Mapping extends the abstract declarative mapping to support
+explicit nested invocation of mappings with bindings for the invoked mapping's
+bound variables.
+
+conformsTo "@Rule@":#Rule
+
+*Attributes*
+
+@MappingCall : Bag(qvtimperative::MappingCall)@
+
+@ownedParameters : Set(qvtimperative::MappingParameter)[*|1]@
+
+@ownedStatements : OrderedSet(qvtimperative::Statement)[*|1]@
+
+h2(#MappingCall). **@MappingCall@**
+
+A MappingCall specifies the invocation of a referredMapping with a set of bindings.
+An installed mapping is invoked asynchronously whenever suitable values are available on consumed connections.
+An invoked mapping is invoked synchronously with values provided by the caller.
+
+conformsTo "@MappingStatement@":#MappingStatement, "@ReferringElement@":#ReferringElement
+
+*Attributes*
+
+@binding : OrderedSet(qvtimperative::MappingParameterBinding)[*|1]@
+
+The Set of bindings of variables or expressions to forma parameters.
+
+@isInfinite : Boolean[?]@
+
+An infinite MappingCall requires re-invocation of the called mapping to be suppressed to avoid an infinite loop.
+
+Deprecated ?? not needed once install works.
+
+@isInstall : Boolean[?]@
+
+An install MappingCall declares a MappingCall that consumes one or more connections and appends to zero or more connections.
+Invocations of the mapping are driven by the availability of values in the connection.
+
+@isInvoke : Boolean[?]@
+
+An invoke MappingCall invokes a Mapping that uses one or more values and appends to zero or more connections.
+Invocations of the mapping is requested by the caller.
+
+*Associations*
+
+@referredMapping : ::Mapping[1]@
+
+The Mapping invoked by the MappingCall.
+
+h2(#MappingLoop). **@MappingLoop@**
+
+A MappingLoop supports an iteration of mapping invocations.
+
+syntax: @for name : type in expression {...}@
+
+conformsTo "@MappingStatement@":#MappingStatement, "@ObservableStatement@":#ObservableStatement
+
+*Attributes*
+
+@ownedIterators : OrderedSet(qvtimperative::LoopVariable)[*|1]@
+
+The iterator loop variable.
+
+@ownedMappingStatements : OrderedSet(qvtimperative::MappingStatement)[*|1]@
+
+The statements to be iterated, typically a single MappingCall.
+
+*Associations*
+
+@ownedExpression : OCLExpression[1]@
+
+The expression whose values provide the iterator values.
+
+h2(#MappingParameter). **@MappingParameter@**
+
+A MappingParameter defines a formal parameter of a mapping. The parameter is bound by the
+mapping invocation to satisfy the requirements of the derived parameter class.
+
+conformsTo "@VariableDeclaration@":#VariableDeclaration
+
+*Attributes*
+
+@MappingParameterBinding : Bag(qvtimperative::MappingParameterBinding)@
+
+*Associations*
+
+@Mapping : ::Mapping[?]@
+
+h2(#MappingParameterBinding). **@MappingParameterBinding@**
+
+A MappingCallBinding specifies the binding of a single variable or value to
+the formal parameter of a mapping as part of its inviocatuon or installation.
+
+conformsTo "@Element@":#Element
+
+*Associations*
+
+@boundVariable : ::MappingParameter[1]@
+
+The formal parameter bound by the call.
+
+@mappingCall : ::MappingCall[?]@
+
+The containing MappingCall.
+
+h2(#MappingStatement). **@MappingStatement@**
+
+A MappingCall specifies the invocation of a referredMapping with a set of bindings
+of the bound variables of the referredMapping to values provided in the invocation.
+Where Collections of values are provided for isLoop bindings, a distinct invocation
+is performed for each distinct permutation of Collection elements.
+
+conformsTo "@Statement@":#Statement
+
+*Associations*
+
+@MappingLoop : ::MappingLoop[?]@
+
+h2(#NewStatement). **@NewStatement@**
+
+A NewStatement creates an instance of a class and binds a name to it.
+
+syntax: @new:typedModel name : type := expression;@
+
+If expression is omitted, a new instance if the tyope is created. If expression is provided, it
+computes the 'new' object, typically a singlton supervisor fpr a QVTr key.
+
+conformsTo "@VariableStatement@":#VariableStatement, "@ObservableStatement@":#ObservableStatement
+
+*Associations*
+
+@ownedExpression : OCLExpression[?]@
+
+Optional expression that constructs the new object.
+
+@referredTypedModel : ::ImperativeTypedModel[1]@
+
+The TypedModel to which the new object is added.
+
+h2(#ObservableStatement). **@ObservableStatement@**
+
+An ObservableStatement may involve evaluation of an expression that accesses object properties whose
+values may not be available. If not ready,the mapping execution is suspended until the required value
+is made available by a notifying SetStatement.
+
+syntax: @observe class::property ...@
+
+conformsTo "@Statement@":#Statement
+
+*Attributes*
+
+@observedProperties : Set(Property)[*|1]@
+
+The properties whose accesses must be checked for readiness.
+
+h2(#SetStatement). **@SetStatement@**
+
+A SetStatement sets an object property to a computed value.
+
+syntax: @notify set name : type := expression;@
+
+If @notify@ is specified, execution defines the property as ready enabling
+mappings whose ObservableStatements are waiting for the value to resume.
+
+conformsTo "@ObservableStatement@":#ObservableStatement
+
+*Attributes*
+
+@isNotify : Boolean[?]@
+
+@isOpposite : Boolean[?]@
+
+*Associations*
+
+@ownedExpression : OCLExpression[1]@
+
+@targetProperty : Property[1]@
+
+@targetVariable : VariableDeclaration[1]@
+
+h2(#SimpleParameter). **@SimpleParameter@**
+
+A SimpleParameter of a Mapping defines an input at which a value is passed to the mapping.
+
+syntax: @in:typedModel name : type;@
+
+conformsTo "@MappingParameter@":#MappingParameter
+
+*Associations*
+
+@referredTypedModel : ::ImperativeTypedModel[1]@
+
+The TypedModel that contains the passed value.
+
+h2(#SimpleParameterBinding). **@SimpleParameterBinding@**
+
+A SimpleParameterBinding binds a simple parameter of an invoked Mapping to the value of an expression
+computed by the invoker. Execution of the mapping may use the value.
+
+syntax: @formalName uses expression;@
+
+conformsTo "@MappingParameterBinding@":#MappingParameterBinding
+
+*Attributes*
+
+@isCheck : Boolean[?]@
+
+Whether the variable initialization needs to be checked as a predicate. This is a derivation of not ownedInit.type.conformsTo(self.type).
+
+*Associations*
+
+@value : OCLExpression[1]@
+
+The value or collection of values to bind to boundVariable
+
+h2(#Statement). **@Statement@**
+
+A Statement is the basis for all execution by a Mapping.
+
+conformsTo "@NamedElement@":#NamedElement
+
+*Associations*
+
+@Mapping : ::Mapping[?]@
+
+h2(#VariableStatement). **@VariableStatement@**
+
+A VariableStatement is the basis for a Mapping execution that makes a name available to subsequent starements.
+
+conformsTo "@VariableDeclaration@":#VariableDeclaration, "@Statement@":#Statement
 

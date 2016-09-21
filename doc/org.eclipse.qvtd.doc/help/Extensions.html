@@ -7,7 +7,7 @@
 <link rel="home" href="index.html" title="QVT Declarative Documentation">
 <link rel="up" href="OverviewandGettingStarted.html" title="Overview and Getting Started">
 <link rel="prev" href="GettingStarted.html" title="Getting Started">
-<link rel="next" href="glossary.html" title="Appendix&nbsp;A.&nbsp;Glossary">
+<link rel="next" href="pivot.html" title="pivot">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Extensions</h1>
@@ -58,6 +58,64 @@
 </div>
 <p>The Eclipse support for QVTc and QVTr supports declaration of transformations within a package hierarchy. A Transformation therefore extends just a Class, not a Class and a Package as specified by OMG. The Transformation is declared nested within one of more Packages by qualifying the transformation name with one of more package names. For compatibility, if no Package is declared, the Transformation is contained by a Package with a blank name.</p>
 <p>The package hierarchy declared for the Transformation is re-used to define the Java package hierarchy when Java code is generated from the Transformation.</p>
+<div class="literallayout">
+<p>
+<code class="code">transformation&nbsp;org::eclipse::qvtd::xtext::qvtrelation::tests::hstm2fstm::HierarchicalStateMachine2FlatStateMachine(hier:hierMM,&nbsp;flat:flatMM)<br>
+{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;...<br>
+}<br>
+
+</code>
+</p>
+</div>
+<p>Alternatively a package declaration may be used. This may also optionally define the package URI and/or namespace prefix.</p>
+<div class="literallayout">
+<p>
+<code class="code">package&nbsp;org::eclipse::qvtd::xtext::qvtrelation::tests::hstm2fstm&nbsp;:&nbsp;nsPrefix&nbsp;=&nbsp;'nsURI'<br>
+{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;transformation&nbsp;HierarchicalStateMachine2FlatStateMachine(hier:hierMM,&nbsp;flat:flatMM)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+}<br>
+
+</code>
+</p>
+</div>
+</div>
+<div class="section" title="Contextual Operations and Properties">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="Contextual Operations and Properties"></a>Contextual Operations and Properties</h3>
+</div>
+</div>
+</div>
+<p>A 
+					<span class="bold"><strong>package</strong></span> declaration may contain nested packages, classes or transformations. Within class declarations operations and properties may be declared analoguously to QVTo&rsquo;s contextual operatuions and properties, or to additional declarations from an imported Complete OCL document. The syntax is the same as OCLinECore which emulates typical OMG specification source text.
+				</p>
+<div class="literallayout">
+<p>
+<code class="code">package&nbsp;MyPackage<br>
+{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;class&nbsp;MyClass<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;operation&nbsp;op(p&nbsp;:&nbsp;String[1])&nbsp;:&nbsp;String[1]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;body:&nbsp;p.toUpper();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;property&nbsp;name&nbsp;:&nbsp;String[1];<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;transformation&nbsp;MyTx(...)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+}<br>
+
+</code>
+</p>
+</div>
 </div>
 <div class="section" title="QVTc Middle Model">
 <div class="titlepage">

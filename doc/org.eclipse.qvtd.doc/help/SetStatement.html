@@ -1,0 +1,84 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>SetStatement</title>
+<link href="book.css" rel="stylesheet" type="text/css">
+<meta content="DocBook XSL Stylesheets V1.75.1" name="generator">
+<link rel="home" href="index.html" title="QVT Declarative Documentation">
+<link rel="up" href="qvtimperative.html" title="qvtimperative">
+<link rel="prev" href="ObservableStatement.html" title="ObservableStatement">
+<link rel="next" href="SimpleParameter.html" title="SimpleParameter">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">
+				
+					SetStatement
+				
+			</h1>
+<div class="section" title="SetStatement">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both">
+<a name="SetStatement"></a>
+				<span class="bold"><strong>
+					<code class="code">SetStatement</code>
+				</strong></span>
+			
+</h2>
+</div>
+</div>
+</div>
+<p>A SetStatement sets an object property to a computed value.</p>
+<p>syntax: 
+				<code class="code">notify set name : type := expression;</code>
+			
+</p>
+<p>If 
+				<code class="code">notify</code> is specified, execution defines the property as ready enabling
+				mappings whose ObservableStatements are waiting for the value to resume.
+			</p>
+<p>conformsTo 
+				<a class="link" href="ObservableStatement.html" title="ObservableStatement">
+					<code class="code">ObservableStatement</code>
+				</a>
+			
+</p>
+<p>
+				
+<span class="bold"><strong>Attributes</strong></span>
+			
+</p>
+<p>
+				
+<code class="code">isNotify : Boolean[?]</code>
+			
+</p>
+<p>
+				
+<code class="code">isOpposite : Boolean[?]</code>
+			
+</p>
+<p>
+				
+<span class="bold"><strong>Associations</strong></span>
+			
+</p>
+<p>
+				
+<code class="code">ownedExpression : OCLExpression[1]</code>
+			
+</p>
+<p>
+				
+<code class="code">targetProperty : Property[1]</code>
+			
+</p>
+<p>
+				
+<code class="code">targetVariable : VariableDeclaration[1]</code>
+			
+</p>
+</div>
+</body>
+</html>

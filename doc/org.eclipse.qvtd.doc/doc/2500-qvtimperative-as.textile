@@ -213,6 +213,12 @@ The Model of an Imperative QVT transformation.
 
 conformsTo "@BaseModel@":#BaseModel
 
+h2(#ImperativeTransformation). **@ImperativeTransformation@**
+
+An ImperativeTransfornmation distinguishes a QVTi transformation from other transformations.
+
+conformsTo "@Transformation@":#Transformation
+
 h2(#ImperativeTypedModel). **@ImperativeTypedModel@**
 
 An ImperativeTypedModel defines an input,middle or output modek for the transformation.

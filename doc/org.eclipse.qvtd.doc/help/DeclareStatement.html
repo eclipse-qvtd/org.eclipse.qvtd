@@ -1,0 +1,81 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>DeclareStatement</title>
+<link href="book.css" rel="stylesheet" type="text/css">
+<meta content="DocBook XSL Stylesheets V1.75.1" name="generator">
+<link rel="home" href="index.html" title="QVT Declarative Documentation">
+<link rel="up" href="qvtimperative.html" title="qvtimperative">
+<link rel="prev" href="ConnectionVariable.html" title="ConnectionVariable">
+<link rel="next" href="GuardParameter.html" title="GuardParameter">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">
+				
+					DeclareStatement
+				
+			</h1>
+<div class="section" title="DeclareStatement">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both">
+<a name="DeclareStatement"></a>
+				<span class="bold"><strong>
+					<code class="code">DeclareStatement</code>
+				</strong></span>
+			
+</h2>
+</div>
+</div>
+</div>
+<p>A DeclareStatement declares a variable and initial value.</p>
+<p>syntax: 
+				<code class="code">check var name : type := expression;</code>
+			
+</p>
+<p>
+				
+<code class="code">type</code> or 
+				<code class="code">expression</code> but not both may be omitted. An omitted type is deduced from the initial expression values.
+			</p>
+<p>
+				
+<code class="code">check</code> may be omitted when the expression type is necessarily conformant.
+			</p>
+<p>conformsTo 
+				<a class="link" href="VariableStatement.html" title="VariableStatement">
+					<code class="code">VariableStatement</code>
+				</a>, 
+				<a class="link" href="ObservableStatement.html" title="ObservableStatement">
+					<code class="code">ObservableStatement</code>
+				</a>
+			
+</p>
+<p>
+				
+<span class="bold"><strong>Attributes</strong></span>
+			
+</p>
+<p>
+				
+<code class="code">isCheck : Boolean[?]</code>
+			
+</p>
+<p>True if the initial expression&rsquo;s type must be  checked for conformance with the variable&rsquo;s type.
+				A non-conforming vlaue is a predicate failure causing the mapping to fail without doing anything.
+				This is a derivation of not ownedInit.type.conformsTo(self.type).</p>
+<p>
+				
+<span class="bold"><strong>Associations</strong></span>
+			
+</p>
+<p>
+				
+<code class="code">ownedExpression : OCLExpression[1]</code>
+			
+</p>
+<p>The expression computing the variable&rsquo;s value.</p>
+</div>
+</body>
+</html>

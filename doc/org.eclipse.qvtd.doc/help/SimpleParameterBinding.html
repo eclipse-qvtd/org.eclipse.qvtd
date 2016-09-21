@@ -1,0 +1,68 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>SimpleParameterBinding</title>
+<link href="book.css" rel="stylesheet" type="text/css">
+<meta content="DocBook XSL Stylesheets V1.75.1" name="generator">
+<link rel="home" href="index.html" title="QVT Declarative Documentation">
+<link rel="up" href="qvtimperative.html" title="qvtimperative">
+<link rel="prev" href="SimpleParameter.html" title="SimpleParameter">
+<link rel="next" href="Statement.html" title="Statement">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">
+				
+					SimpleParameterBinding
+				
+			</h1>
+<div class="section" title="SimpleParameterBinding">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both">
+<a name="SimpleParameterBinding"></a>
+				<span class="bold"><strong>
+					<code class="code">SimpleParameterBinding</code>
+				</strong></span>
+			
+</h2>
+</div>
+</div>
+</div>
+<p>A SimpleParameterBinding binds a simple parameter of an invoked Mapping to the value of an expression
+				computed by the invoker. Execution of the mapping may use the value.</p>
+<p>syntax: 
+				<code class="code">formalName uses expression;</code>
+			
+</p>
+<p>conformsTo 
+				<a class="link" href="MappingParameterBinding.html" title="MappingParameterBinding">
+					<code class="code">MappingParameterBinding</code>
+				</a>
+			
+</p>
+<p>
+				
+<span class="bold"><strong>Attributes</strong></span>
+			
+</p>
+<p>
+				
+<code class="code">isCheck : Boolean[?]</code>
+			
+</p>
+<p>Whether the variable initialization needs to be checked as a predicate. This is a derivation of not ownedInit.type.conformsTo(self.type).</p>
+<p>
+				
+<span class="bold"><strong>Associations</strong></span>
+			
+</p>
+<p>
+				
+<code class="code">value : OCLExpression[1]</code>
+			
+</p>
+<p>The value or collection of values to bind to boundVariable</p>
+</div>
+</body>
+</html>

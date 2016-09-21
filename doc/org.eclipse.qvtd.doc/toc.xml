@@ -30,12 +30,47 @@
 <topic href="help/Extensions.html" label="Extensions">
 <topic href="help/Extensions.html#Import" label="Import"></topic>
 <topic href="help/Extensions.html#Packages" label="Packages"></topic>
+<topic href="help/Extensions.html#Contextual Operations and Properties" label="Contextual Operations and Properties"></topic>
 <topic href="help/Extensions.html#QVTc Middle Model" label="QVTc Middle Model"></topic>
 <topic href="help/Extensions.html#QVTr Middle Model" label="QVTr Middle Model"></topic>
 <topic href="help/Extensions.html#Collection Templates" label="QVTr Collection Templates"></topic>
 <topic href="help/Extensions.html#OCL/EMOF Metamodels" label="OCL/EMOF Metamodels"></topic>
 <topic href="help/Extensions.html#this" label="this"></topic>
 </topic>
+</topic>
+<topic href="help/pivot.html" label="pivot">
+<topic href="help/pivot.html#OCLExpression" label="OCLExpression"></topic>
+<topic href="help/Property.html" label="Property"></topic>
+<topic href="help/VariableDeclaration.html" label="VariableDeclaration"></topic>
+</topic>
+<topic href="help/qvtimperative.html" label="qvtimperative">
+<topic href="help/qvtimperative.html#AddStatement" label="AddStatement"></topic>
+<topic href="help/AppendParameter.html" label="AppendParameter"></topic>
+<topic href="help/AppendParameterBinding.html" label="AppendParameterBinding"></topic>
+<topic href="help/BufferStatement.html" label="BufferStatement"></topic>
+<topic href="help/CheckStatement.html" label="CheckStatement"></topic>
+<topic href="help/ConnectionVariable.html" label="ConnectionVariable"></topic>
+<topic href="help/DeclareStatement.html" label="DeclareStatement"></topic>
+<topic href="help/GuardParameter.html" label="GuardParameter"></topic>
+<topic href="help/GuardParameterBinding.html" label="GuardParameterBinding"></topic>
+<topic href="help/ImperativeModel.html" label="ImperativeModel"></topic>
+<topic href="help/ImperativeTransformation.html" label="ImperativeTransformation"></topic>
+<topic href="help/ImperativeTypedModel.html" label="ImperativeTypedModel"></topic>
+<topic href="help/LoopParameterBinding.html" label="LoopParameterBinding"></topic>
+<topic href="help/LoopVariable.html" label="LoopVariable"></topic>
+<topic href="help/Mapping.html" label="Mapping"></topic>
+<topic href="help/MappingCall.html" label="MappingCall"></topic>
+<topic href="help/MappingLoop.html" label="MappingLoop"></topic>
+<topic href="help/MappingParameter.html" label="MappingParameter"></topic>
+<topic href="help/MappingParameterBinding.html" label="MappingParameterBinding"></topic>
+<topic href="help/MappingStatement.html" label="MappingStatement"></topic>
+<topic href="help/NewStatement.html" label="NewStatement"></topic>
+<topic href="help/ObservableStatement.html" label="ObservableStatement"></topic>
+<topic href="help/SetStatement.html" label="SetStatement"></topic>
+<topic href="help/SimpleParameter.html" label="SimpleParameter"></topic>
+<topic href="help/SimpleParameterBinding.html" label="SimpleParameterBinding"></topic>
+<topic href="help/Statement.html" label="Statement"></topic>
+<topic href="help/VariableStatement.html" label="VariableStatement"></topic>
 </topic>
 <topic href="help/glossary.html" label="A. Glossary"></topic>
 </toc>

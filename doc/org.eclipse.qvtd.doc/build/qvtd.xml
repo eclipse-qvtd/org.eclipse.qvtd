@@ -7,7 +7,7 @@
 			<link linkend="GettingStarted">Getting Started</link>.
 		</para>
 		<para>A PDF version of this documentation is available at 
-			<ulink url="http://download.eclipse.org/qvtd/doc/0.14.0/qvtd.pdf">QVTd 0.14.0 Documentation</ulink>.
+			<ulink url="http://download.eclipse.org/qvtd/doc/0.13.0/qvtd.pdf">QVTd 0.13.0 Documentation</ulink>.
 		</para>
 		<section id="WhatisQVTQueryViewTransformation">
 			<title>What is 
@@ -126,12 +126,12 @@
 			</section>
 			<section id="Execution">
 				<title>Execution</title>
-				<para>The 0.14.0 release provides one QVTr and one QVTc example project that be installed and executed. However execution functionality is very new and not suitable for more than experimental use.</para>
+				<para>The 0.13.0 release provides one QVTr and one QVTc example project that be installed and executed. However execution functionality is very new and not suitable for more than experimental use.</para>
 				<section id="Status2">
 					<title>Status</title>
 					<para>QVTi execution has been available since 0.11.0 (Luna). It demonstrates the extensibility of the Eclipse OCL interpreter, Java code generator and debugger. QVTi is a low level intermediate; it is not intended as a primary programming language.</para>
 					<para>A very preliminary form of QVTc execution was available in 0.12.0 (Mars) using an Epsilon prototype of the transformation chain.</para>
-					<para>0.14.0 (Neon) introduces a Java re-implementation of the full transformation chain so that QVTr and QVTc transformations can be executed. It is only suitable for researchers.</para>
+					<para>0.13.0 (Neon) introduces a Java re-implementation of the full transformation chain so that QVTr and QVTc transformations can be executed. It is only suitable for researchers.</para>
 					<para>The current execution supports only creation of output models. Checking, updated, incremental, in-place execution and views are work in progress.</para>
 					<para>Hopefully 1.0.0 (Oxygen) will have more substantial functionality and will be used internally to replace some of the manual Java transformations by QVTr / UMLX transformations.</para>
 				</section>
@@ -158,7 +158,7 @@
 		<section id="GettingStarted">
 			<title>Getting Started</title>
 			<para>
-				<emphasis role="bold">Warning: Eclipse QVTd 0.14.0 execution is not sufficiently mature for more than experimental/research usage.</emphasis>
+				<emphasis role="bold">Warning: Eclipse QVTd 0.13.0 execution is not sufficiently mature for more than experimental/research usage.</emphasis>
 			</para>
 			<para>For a very quick demonstration of QVTc or QVTr you may install the appropriate example project.</para>
 			<section id="QVTrExampleProject">
@@ -342,6 +342,42 @@
 				<title>Packages</title>
 				<para>The Eclipse support for QVTc and QVTr supports declaration of transformations within a package hierarchy. A Transformation therefore extends just a Class, not a Class and a Package as specified by OMG. The Transformation is declared nested within one of more Packages by qualifying the transformation name with one of more package names. For compatibility, if no Package is declared, the Transformation is contained by a Package with a blank name.</para>
 				<para>The package hierarchy declared for the Transformation is re-used to define the Java package hierarchy when Java code is generated from the Transformation.</para>
+				<literallayout><code>transformation org::eclipse::qvtd::xtext::qvtrelation::tests::hstm2fstm::HierarchicalStateMachine2FlatStateMachine(hier:hierMM, flat:flatMM)
+{
+    ...
+}
+</code></literallayout>
+				<para>Alternatively a package declaration may be used. This may also optionally define the package URI and/or namespace prefix.</para>
+				<literallayout><code>package org::eclipse::qvtd::xtext::qvtrelation::tests::hstm2fstm : nsPrefix = 'nsURI'
+{
+    transformation HierarchicalStateMachine2FlatStateMachine(hier:hierMM, flat:flatMM)
+    {
+        ...
+    }
+}
+</code></literallayout>
+			</section>
+			<section id="Contextual Operations and Properties">
+				<title>Contextual Operations and Properties</title>
+				<para>A 
+					<emphasis role="bold">package</emphasis> declaration may contain nested packages, classes or transformations. Within class declarations operations and properties may be declared analoguously to QVTo’s contextual operatuions and properties, or to additional declarations from an imported Complete OCL document. The syntax is the same as OCLinECore which emulates typical OMG specification source text.
+				</para>
+				<literallayout><code>package MyPackage
+{
+    class MyClass
+    {
+        operation op(p : String[1]) : String[1]
+        {
+            body: p.toUpper();
+        }
+        property name : String[1];
+    }
+    transformation MyTx(...)
+    {
+        ...
+    }
+}
+</code></literallayout>
 			</section>
 			<section id="QVTc Middle Model">
 				<title>QVTc Middle Model</title>
@@ -383,6 +419,837 @@ import SimpleRDBMS : 'SimpleRdbms.ecore'::rdbmsMM;
 					<emphasis role="bold">this</emphasis> can be used, and is used when viewing the equivalent source text for the Abstract Syntax model.
 				</para>
 			</section>
+		</section>
+	</chapter>
+	<chapter id="pivot">
+		<title>
+			<emphasis role="bold">
+				<code>pivot</code>
+			</emphasis>
+		</title>
+		<section id="OCLExpression">
+			<title>
+				<emphasis role="bold">
+					<code>OCLExpression</code>
+				</emphasis>
+			</title>
+			<para>
+				<emphasis role="bold">Associations</emphasis>
+			</para>
+			<para>
+				<code>AddStatement : qvtimperative::AddStatement[?]</code>
+			</para>
+			<para>
+				<code>BufferStatement : qvtimperative::BufferStatement[?]</code>
+			</para>
+			<para>
+				<code>CheckStatement : qvtimperative::CheckStatement[?]</code>
+			</para>
+			<para>
+				<code>DeclareStatement : qvtimperative::DeclareStatement[?]</code>
+			</para>
+			<para>
+				<code>MappingLoop : qvtimperative::MappingLoop[?]</code>
+			</para>
+			<para>
+				<code>NewStatement : qvtimperative::NewStatement[?]</code>
+			</para>
+			<para>
+				<code>SetStatement : qvtimperative::SetStatement[?]</code>
+			</para>
+			<para>
+				<code>SimpleParameterBinding : qvtimperative::SimpleParameterBinding[?]</code>
+			</para>
+		</section>
+		<section id="Property">
+			<title>
+				<emphasis role="bold">
+					<code>Property</code>
+				</emphasis>
+			</title>
+			<para>
+				<emphasis role="bold">Attributes</emphasis>
+			</para>
+			<para>
+				<code>ObservableStatement : Bag(qvtimperative::ObservableStatement)</code>
+			</para>
+			<para>
+				<code>SetStatement : Bag(qvtimperative::SetStatement)</code>
+			</para>
+		</section>
+		<section id="VariableDeclaration">
+			<title>
+				<emphasis role="bold">
+					<code>VariableDeclaration</code>
+				</emphasis>
+			</title>
+			<para>
+				<emphasis role="bold">Attributes</emphasis>
+			</para>
+			<para>
+				<code>SetStatement : Bag(qvtimperative::SetStatement)</code>
+			</para>
+		</section>
+	</chapter>
+	<chapter id="qvtimperative">
+		<title>
+			<emphasis role="bold">
+				<code>qvtimperative</code>
+			</emphasis>
+		</title>
+		<para>The Package for an Imperative QVT transformation.</para>
+		<para>An Imperative QVT trabsformation is expected to be created by an autogenerator that observes the following run-time restrictions:</para>
+		<para>A mapping that my be re-invoked must have MappingCall.isInfinite set for every possible invocation.</para>
+		<para>A mapping that reads object slots before they are guaranteed to have been assigned must declare the slots property in a corresponding ImperativeArea.checkedProperties entry.</para>
+		<para>A mapping that assigns an object slot that any mapping may access before assignment is guaranteed must declare declare the slots property in a corresponding ImperativeArea.enforcedProperties entry.</para>
+		<para>All reads by Functions/Queries must be guaranteed to succeed; i.e. the invoking mapping must check readiness before calling the query.</para>
+		<para>All writes to multi-valued properties must be guaranteed to occur before any read of the property.</para>
+		<section id="AddStatement">
+			<title>
+				<emphasis role="bold">
+					<code>AddStatement</code>
+				</emphasis>
+			</title>
+			<para>An AddStatement appends the value of an expression to a connection.</para>
+			<para>syntax: 
+				<code>add connection := expression;</code>
+			</para>
+			<para>conformsTo 
+				<link linkend="MappingStatement">
+					<code>MappingStatement</code>
+				</link>, 
+				<link linkend="ObservableStatement">
+					<code>ObservableStatement</code>
+				</link>
+			</para>
+			<para>
+				<emphasis role="bold">Attributes</emphasis>
+			</para>
+			<para>
+				<code>isEnforcedUnique : Boolean[?]</code>
+			</para>
+			<para>True if the append is suppressed after a check for uniqueness of the value.</para>
+			<para>
+				<emphasis role="bold">Associations</emphasis>
+			</para>
+			<para>
+				<code>ownedExpression : OCLExpression[1]</code>
+			</para>
+			<para>The expression whose evaluation yields the value to append.</para>
+			<para>
+				<code>targetVariable : ::ConnectionVariable[1]</code>
+			</para>
+			<para>The connection to be appended.</para>
+		</section>
+		<section id="AppendParameter">
+			<title>
+				<emphasis role="bold">
+					<code>AppendParameter</code>
+				</emphasis>
+			</title>
+			<para>An AppendParameter of a Mapping defines an output connection to which values may be appended.</para>
+			<para>syntax: 
+				<code>append name : type;</code>
+			</para>
+			<para>conformsTo 
+				<link linkend="ConnectionVariable">
+					<code>ConnectionVariable</code>
+				</link>, 
+				<link linkend="MappingParameter">
+					<code>MappingParameter</code>
+				</link>
+			</para>
+		</section>
+		<section id="AppendParameterBinding">
+			<title>
+				<emphasis role="bold">
+					<code>AppendParameterBinding</code>
+				</emphasis>
+			</title>
+			<para>An AppendParameterBinding binds an AppendParameter of an invoked Mapping to a connection of the invoker.
+				Execution of the mapping may append to the connection.</para>
+			<para>syntax: 
+				<code>formalName appendsTo connection;</code>
+			</para>
+			<para>conformsTo 
+				<link linkend="MappingParameterBinding">
+					<code>MappingParameterBinding</code>
+				</link>
+			</para>
+			<para>
+				<emphasis role="bold">Associations</emphasis>
+			</para>
+			<para>
+				<code>value : ::ConnectionVariable[1]</code>
+			</para>
+			<para>The value or collection of values to bind to boundVariable</para>
+		</section>
+		<section id="BufferStatement">
+			<title>
+				<emphasis role="bold">
+					<code>BufferStatement</code>
+				</emphasis>
+			</title>
+			<para>A BufferStatement declares a connection buffer and optionally assigns initial content.</para>
+			<para>syntax: 
+				<code>buffer name : type := expression;</code>
+			</para>
+			<para>
+				<code>type</code> or 
+				<code>expression</code> but not both may be omitted. An omitted type is deduced from the initial expression values.
+			</para>
+			<para>conformsTo 
+				<link linkend="ConnectionVariable">
+					<code>ConnectionVariable</code>
+				</link>, 
+				<link linkend="VariableStatement">
+					<code>VariableStatement</code>
+				</link>, 
+				<link linkend="ObservableStatement">
+					<code>ObservableStatement</code>
+				</link>
+			</para>
+			<para>
+				<emphasis role="bold">Associations</emphasis>
+			</para>
+			<para>
+				<code>ownedExpression : OCLExpression[?]</code>
+			</para>
+			<para>The optional expression computing initial content values.</para>
+		</section>
+		<section id="CheckStatement">
+			<title>
+				<emphasis role="bold">
+					<code>CheckStatement</code>
+				</emphasis>
+			</title>
+			<para>A CheckStatement evaluates a predicate. If the evaluation is false, the mapping execution
+				terminates fails and does nothing.</para>
+			<para>syntax: 
+				<code>check expression;</code>
+			</para>
+			<para>conformsTo 
+				<link linkend="ObservableStatement">
+					<code>ObservableStatement</code>
+				</link>
+			</para>
+			<para>
+				<emphasis role="bold">Associations</emphasis>
+			</para>
+			<para>
+				<code>ownedExpression : OCLExpression[1]</code>
+			</para>
+		</section>
+		<section id="ConnectionVariable">
+			<title>
+				<emphasis role="bold">
+					<code>ConnectionVariable</code>
+				</emphasis>
+			</title>
+			<para>A ConnectionVariable identifes a variable used as a connection buffer.</para>
+			<para>conformsTo 
+				<link linkend="VariableDeclaration">
+					<code>VariableDeclaration</code>
+				</link>
+			</para>
+			<para>
+				<emphasis role="bold">Attributes</emphasis>
+			</para>
+			<para>
+				<code>AddStatement : Bag(qvtimperative::AddStatement)</code>
+			</para>
+			<para>
+				<code>AppendParameterBinding : Bag(qvtimperative::AppendParameterBinding)</code>
+			</para>
+			<para>
+				<code>GuardParameterBinding : Bag(qvtimperative::GuardParameterBinding)</code>
+			</para>
+		</section>
+		<section id="DeclareStatement">
+			<title>
+				<emphasis role="bold">
+					<code>DeclareStatement</code>
+				</emphasis>
+			</title>
+			<para>A DeclareStatement declares a variable and initial value.</para>
+			<para>syntax: 
+				<code>check var name : type := expression;</code>
+			</para>
+			<para>
+				<code>type</code> or 
+				<code>expression</code> but not both may be omitted. An omitted type is deduced from the initial expression values.
+			</para>
+			<para>
+				<code>check</code> may be omitted when the expression type is necessarily conformant.
+			</para>
+			<para>conformsTo 
+				<link linkend="VariableStatement">
+					<code>VariableStatement</code>
+				</link>, 
+				<link linkend="ObservableStatement">
+					<code>ObservableStatement</code>
+				</link>
+			</para>
+			<para>
+				<emphasis role="bold">Attributes</emphasis>
+			</para>
+			<para>
+				<code>isCheck : Boolean[?]</code>
+			</para>
+			<para>True if the initial expression’s type must be  checked for conformance with the variable’s type.
+				A non-conforming vlaue is a predicate failure causing the mapping to fail without doing anything.
+				This is a derivation of not ownedInit.type.conformsTo(self.type).</para>
+			<para>
+				<emphasis role="bold">Associations</emphasis>
+			</para>
+			<para>
+				<code>ownedExpression : OCLExpression[1]</code>
+			</para>
+			<para>The expression computing the variable’s value.</para>
+		</section>
+		<section id="GuardParameter">
+			<title>
+				<emphasis role="bold">
+					<code>GuardParameter</code>
+				</emphasis>
+			</title>
+			<para>A GuardParameter of a Mapping defines a input at which a value is consumed from a connection.</para>
+			<para>syntax: 
+				<code>guard:typedModel name : type;</code>
+			</para>
+			<para>conformsTo 
+				<link linkend="MappingParameter">
+					<code>MappingParameter</code>
+				</link>
+			</para>
+			<para>
+				<emphasis role="bold">Associations</emphasis>
+			</para>
+			<para>
+				<code>referredTypedModel : ::ImperativeTypedModel[1]</code>
+			</para>
+			<para>The TypedModel that contains the passed value.</para>
+		</section>
+		<section id="GuardParameterBinding">
+			<title>
+				<emphasis role="bold">
+					<code>GuardParameterBinding</code>
+				</emphasis>
+			</title>
+			<para>A GuardParameterBinding binds a guard parameter of an invoked Mapping to a value of a connection.
+				Execution of the mapping may use the value. A distinct Mapping invocation occurs for each value
+				in the connection.</para>
+			<para>syntax: 
+				<code>formalName consumes expression;</code>
+			</para>
+			<para>conformsTo 
+				<link linkend="MappingParameterBinding">
+					<code>MappingParameterBinding</code>
+				</link>
+			</para>
+			<para>
+				<emphasis role="bold">Attributes</emphasis>
+			</para>
+			<para>
+				<code>isCheck : Boolean[?]</code>
+			</para>
+			<para>True if each consumed value must be checked for conformance with the variable’s type.
+				A non-conforming vlaue is a predicate failure causing the mapping invocation to fail without doing anything.
+				This is a derivation of not ownedInit.type.conformsTo(self.type).</para>
+			<para>
+				<emphasis role="bold">Associations</emphasis>
+			</para>
+			<para>
+				<code>value : ::ConnectionVariable[1]</code>
+			</para>
+			<para>The connection providing the invocation values.</para>
+		</section>
+		<section id="ImperativeModel">
+			<title>
+				<emphasis role="bold">
+					<code>ImperativeModel</code>
+				</emphasis>
+			</title>
+			<para>The Model of an Imperative QVT transformation.</para>
+			<para>conformsTo 
+				<link linkend="BaseModel">
+					<code>BaseModel</code>
+				</link>
+			</para>
+		</section>
+		<section id="ImperativeTransformation">
+			<title>
+				<emphasis role="bold">
+					<code>ImperativeTransformation</code>
+				</emphasis>
+			</title>
+			<para>An ImperativeTransfornmation distinguishes a QVTi transformation from other transformations.</para>
+			<para>conformsTo 
+				<link linkend="Transformation">
+					<code>Transformation</code>
+				</link>
+			</para>
+		</section>
+		<section id="ImperativeTypedModel">
+			<title>
+				<emphasis role="bold">
+					<code>ImperativeTypedModel</code>
+				</emphasis>
+			</title>
+			<para>An ImperativeTypedModel defines an input,middle or output modek for the transformation.</para>
+			<para>conformsTo 
+				<link linkend="TypedModel">
+					<code>TypedModel</code>
+				</link>
+			</para>
+			<para>
+				<emphasis role="bold">Attributes</emphasis>
+			</para>
+			<para>
+				<code>GuardParameter : Bag(qvtimperative::GuardParameter)</code>
+			</para>
+			<para>
+				<code>NewStatement : Bag(qvtimperative::NewStatement)</code>
+			</para>
+			<para>
+				<code>SimpleParameter : Bag(qvtimperative::SimpleParameter)</code>
+			</para>
+			<para>
+				<code>isChecked : Boolean[?]</code>
+			</para>
+			<para>True for an input model.</para>
+			<para>
+				<code>isEnforced : Boolean[?]</code>
+			</para>
+			<para>True for an output model.</para>
+		</section>
+		<section id="LoopParameterBinding">
+			<title>
+				<emphasis role="bold">
+					<code>LoopParameterBinding</code>
+				</emphasis>
+			</title>
+			<para>A LoopParameterBinding binds a guard parameter of an invoked Mapping to the value of a loop variable
+				in the invoker. Execution of the mapping may use the value.</para>
+			<para>syntax: 
+				<code>formalName iterates expression;</code>
+			</para>
+			<para>Deprecated – WIP for a consuming stream</para>
+			<para>conformsTo 
+				<link linkend="MappingParameterBinding">
+					<code>MappingParameterBinding</code>
+				</link>
+			</para>
+			<para>
+				<emphasis role="bold">Attributes</emphasis>
+			</para>
+			<para>
+				<code>isCheck : Boolean[?]</code>
+			</para>
+			<para>Whether the variable initialization needs to be checked as a predicate. This is a derivation of not ownedInit.type.conformsTo(self.type).</para>
+			<para>
+				<emphasis role="bold">Associations</emphasis>
+			</para>
+			<para>
+				<code>value : ::LoopVariable[1]</code>
+			</para>
+			<para>The value or collection of values to bind to boundVariable</para>
+		</section>
+		<section id="LoopVariable">
+			<title>
+				<emphasis role="bold">
+					<code>LoopVariable</code>
+				</emphasis>
+			</title>
+			<para>A LoopVariable defines the iterator of a MappingLoop.</para>
+			<para>conformsTo 
+				<link linkend="VariableDeclaration">
+					<code>VariableDeclaration</code>
+				</link>
+			</para>
+			<para>
+				<emphasis role="bold">Attributes</emphasis>
+			</para>
+			<para>
+				<code>LoopParameterBinding : Bag(qvtimperative::LoopParameterBinding)</code>
+			</para>
+			<para>
+				<emphasis role="bold">Associations</emphasis>
+			</para>
+			<para>
+				<code>owningMappingLoop : ::MappingLoop[1]</code>
+			</para>
+		</section>
+		<section id="Mapping">
+			<title>
+				<emphasis role="bold">
+					<code>Mapping</code>
+				</emphasis>
+			</title>
+			<para>An Imperative Mapping extends the abstract declarative mapping to support
+				explicit nested invocation of mappings with bindings for the invoked mapping’s
+				bound variables.</para>
+			<para>conformsTo 
+				<link linkend="Rule">
+					<code>Rule</code>
+				</link>
+			</para>
+			<para>
+				<emphasis role="bold">Attributes</emphasis>
+			</para>
+			<para>
+				<code>MappingCall : Bag(qvtimperative::MappingCall)</code>
+			</para>
+			<para>
+				<code>ownedParameters : Set(qvtimperative::MappingParameter)[*|1]</code>
+			</para>
+			<para>
+				<code>ownedStatements : OrderedSet(qvtimperative::Statement)[*|1]</code>
+			</para>
+		</section>
+		<section id="MappingCall">
+			<title>
+				<emphasis role="bold">
+					<code>MappingCall</code>
+				</emphasis>
+			</title>
+			<para>A MappingCall specifies the invocation of a referredMapping with a set of bindings.
+				An installed mapping is invoked asynchronously whenever suitable values are available on consumed connections.
+				An invoked mapping is invoked synchronously with values provided by the caller.</para>
+			<para>conformsTo 
+				<link linkend="MappingStatement">
+					<code>MappingStatement</code>
+				</link>, 
+				<link linkend="ReferringElement">
+					<code>ReferringElement</code>
+				</link>
+			</para>
+			<para>
+				<emphasis role="bold">Attributes</emphasis>
+			</para>
+			<para>
+				<code>binding : OrderedSet(qvtimperative::MappingParameterBinding)[*|1]</code>
+			</para>
+			<para>The Set of bindings of variables or expressions to forma parameters.</para>
+			<para>
+				<code>isInfinite : Boolean[?]</code>
+			</para>
+			<para>An infinite MappingCall requires re-invocation of the called mapping to be suppressed to avoid an infinite loop.</para>
+			<para>Deprecated ?? not needed once install works.</para>
+			<para>
+				<code>isInstall : Boolean[?]</code>
+			</para>
+			<para>An install MappingCall declares a MappingCall that consumes one or more connections and appends to zero or more connections.
+				Invocations of the mapping are driven by the availability of values in the connection.</para>
+			<para>
+				<code>isInvoke : Boolean[?]</code>
+			</para>
+			<para>An invoke MappingCall invokes a Mapping that uses one or more values and appends to zero or more connections.
+				Invocations of the mapping is requested by the caller.</para>
+			<para>
+				<emphasis role="bold">Associations</emphasis>
+			</para>
+			<para>
+				<code>referredMapping : ::Mapping[1]</code>
+			</para>
+			<para>The Mapping invoked by the MappingCall.</para>
+		</section>
+		<section id="MappingLoop">
+			<title>
+				<emphasis role="bold">
+					<code>MappingLoop</code>
+				</emphasis>
+			</title>
+			<para>A MappingLoop supports an iteration of mapping invocations.</para>
+			<para>syntax: 
+				<code>for name : type in expression {...}</code>
+			</para>
+			<para>conformsTo 
+				<link linkend="MappingStatement">
+					<code>MappingStatement</code>
+				</link>, 
+				<link linkend="ObservableStatement">
+					<code>ObservableStatement</code>
+				</link>
+			</para>
+			<para>
+				<emphasis role="bold">Attributes</emphasis>
+			</para>
+			<para>
+				<code>ownedIterators : OrderedSet(qvtimperative::LoopVariable)[*|1]</code>
+			</para>
+			<para>The iterator loop variable.</para>
+			<para>
+				<code>ownedMappingStatements : OrderedSet(qvtimperative::MappingStatement)[*|1]</code>
+			</para>
+			<para>The statements to be iterated, typically a single MappingCall.</para>
+			<para>
+				<emphasis role="bold">Associations</emphasis>
+			</para>
+			<para>
+				<code>ownedExpression : OCLExpression[1]</code>
+			</para>
+			<para>The expression whose values provide the iterator values.</para>
+		</section>
+		<section id="MappingParameter">
+			<title>
+				<emphasis role="bold">
+					<code>MappingParameter</code>
+				</emphasis>
+			</title>
+			<para>A MappingParameter defines a formal parameter of a mapping. The parameter is bound by the
+				mapping invocation to satisfy the requirements of the derived parameter class.</para>
+			<para>conformsTo 
+				<link linkend="VariableDeclaration">
+					<code>VariableDeclaration</code>
+				</link>
+			</para>
+			<para>
+				<emphasis role="bold">Attributes</emphasis>
+			</para>
+			<para>
+				<code>MappingParameterBinding : Bag(qvtimperative::MappingParameterBinding)</code>
+			</para>
+			<para>
+				<emphasis role="bold">Associations</emphasis>
+			</para>
+			<para>
+				<code>Mapping : ::Mapping[?]</code>
+			</para>
+		</section>
+		<section id="MappingParameterBinding">
+			<title>
+				<emphasis role="bold">
+					<code>MappingParameterBinding</code>
+				</emphasis>
+			</title>
+			<para>A MappingCallBinding specifies the binding of a single variable or value to
+				the formal parameter of a mapping as part of its inviocatuon or installation.</para>
+			<para>conformsTo 
+				<link linkend="Element">
+					<code>Element</code>
+				</link>
+			</para>
+			<para>
+				<emphasis role="bold">Associations</emphasis>
+			</para>
+			<para>
+				<code>boundVariable : ::MappingParameter[1]</code>
+			</para>
+			<para>The formal parameter bound by the call.</para>
+			<para>
+				<code>mappingCall : ::MappingCall[?]</code>
+			</para>
+			<para>The containing MappingCall.</para>
+		</section>
+		<section id="MappingStatement">
+			<title>
+				<emphasis role="bold">
+					<code>MappingStatement</code>
+				</emphasis>
+			</title>
+			<para>A MappingCall specifies the invocation of a referredMapping with a set of bindings
+				of the bound variables of the referredMapping to values provided in the invocation.
+				Where Collections of values are provided for isLoop bindings, a distinct invocation
+				is performed for each distinct permutation of Collection elements.</para>
+			<para>conformsTo 
+				<link linkend="Statement">
+					<code>Statement</code>
+				</link>
+			</para>
+			<para>
+				<emphasis role="bold">Associations</emphasis>
+			</para>
+			<para>
+				<code>MappingLoop : ::MappingLoop[?]</code>
+			</para>
+		</section>
+		<section id="NewStatement">
+			<title>
+				<emphasis role="bold">
+					<code>NewStatement</code>
+				</emphasis>
+			</title>
+			<para>A NewStatement creates an instance of a class and binds a name to it.</para>
+			<para>syntax: 
+				<code>new:typedModel name : type := expression;</code>
+			</para>
+			<para>If expression is omitted, a new instance if the tyope is created. If expression is provided, it
+				computes the ‘new’ object, typically a singlton supervisor fpr a QVTr key.</para>
+			<para>conformsTo 
+				<link linkend="VariableStatement">
+					<code>VariableStatement</code>
+				</link>, 
+				<link linkend="ObservableStatement">
+					<code>ObservableStatement</code>
+				</link>
+			</para>
+			<para>
+				<emphasis role="bold">Associations</emphasis>
+			</para>
+			<para>
+				<code>ownedExpression : OCLExpression[?]</code>
+			</para>
+			<para>Optional expression that constructs the new object.</para>
+			<para>
+				<code>referredTypedModel : ::ImperativeTypedModel[1]</code>
+			</para>
+			<para>The TypedModel to which the new object is added.</para>
+		</section>
+		<section id="ObservableStatement">
+			<title>
+				<emphasis role="bold">
+					<code>ObservableStatement</code>
+				</emphasis>
+			</title>
+			<para>An ObservableStatement may involve evaluation of an expression that accesses object properties whose
+				values may not be available. If not ready,the mapping execution is suspended until the required value
+				is made available by a notifying SetStatement.</para>
+			<para>syntax: 
+				<code>observe class::property ...</code>
+			</para>
+			<para>conformsTo 
+				<link linkend="Statement">
+					<code>Statement</code>
+				</link>
+			</para>
+			<para>
+				<emphasis role="bold">Attributes</emphasis>
+			</para>
+			<para>
+				<code>observedProperties : Set(Property)[*|1]</code>
+			</para>
+			<para>The properties whose accesses must be checked for readiness.</para>
+		</section>
+		<section id="SetStatement">
+			<title>
+				<emphasis role="bold">
+					<code>SetStatement</code>
+				</emphasis>
+			</title>
+			<para>A SetStatement sets an object property to a computed value.</para>
+			<para>syntax: 
+				<code>notify set name : type := expression;</code>
+			</para>
+			<para>If 
+				<code>notify</code> is specified, execution defines the property as ready enabling
+				mappings whose ObservableStatements are waiting for the value to resume.
+			</para>
+			<para>conformsTo 
+				<link linkend="ObservableStatement">
+					<code>ObservableStatement</code>
+				</link>
+			</para>
+			<para>
+				<emphasis role="bold">Attributes</emphasis>
+			</para>
+			<para>
+				<code>isNotify : Boolean[?]</code>
+			</para>
+			<para>
+				<code>isOpposite : Boolean[?]</code>
+			</para>
+			<para>
+				<emphasis role="bold">Associations</emphasis>
+			</para>
+			<para>
+				<code>ownedExpression : OCLExpression[1]</code>
+			</para>
+			<para>
+				<code>targetProperty : Property[1]</code>
+			</para>
+			<para>
+				<code>targetVariable : VariableDeclaration[1]</code>
+			</para>
+		</section>
+		<section id="SimpleParameter">
+			<title>
+				<emphasis role="bold">
+					<code>SimpleParameter</code>
+				</emphasis>
+			</title>
+			<para>A SimpleParameter of a Mapping defines an input at which a value is passed to the mapping.</para>
+			<para>syntax: 
+				<code>in:typedModel name : type;</code>
+			</para>
+			<para>conformsTo 
+				<link linkend="MappingParameter">
+					<code>MappingParameter</code>
+				</link>
+			</para>
+			<para>
+				<emphasis role="bold">Associations</emphasis>
+			</para>
+			<para>
+				<code>referredTypedModel : ::ImperativeTypedModel[1]</code>
+			</para>
+			<para>The TypedModel that contains the passed value.</para>
+		</section>
+		<section id="SimpleParameterBinding">
+			<title>
+				<emphasis role="bold">
+					<code>SimpleParameterBinding</code>
+				</emphasis>
+			</title>
+			<para>A SimpleParameterBinding binds a simple parameter of an invoked Mapping to the value of an expression
+				computed by the invoker. Execution of the mapping may use the value.</para>
+			<para>syntax: 
+				<code>formalName uses expression;</code>
+			</para>
+			<para>conformsTo 
+				<link linkend="MappingParameterBinding">
+					<code>MappingParameterBinding</code>
+				</link>
+			</para>
+			<para>
+				<emphasis role="bold">Attributes</emphasis>
+			</para>
+			<para>
+				<code>isCheck : Boolean[?]</code>
+			</para>
+			<para>Whether the variable initialization needs to be checked as a predicate. This is a derivation of not ownedInit.type.conformsTo(self.type).</para>
+			<para>
+				<emphasis role="bold">Associations</emphasis>
+			</para>
+			<para>
+				<code>value : OCLExpression[1]</code>
+			</para>
+			<para>The value or collection of values to bind to boundVariable</para>
+		</section>
+		<section id="Statement">
+			<title>
+				<emphasis role="bold">
+					<code>Statement</code>
+				</emphasis>
+			</title>
+			<para>A Statement is the basis for all execution by a Mapping.</para>
+			<para>conformsTo 
+				<link linkend="NamedElement">
+					<code>NamedElement</code>
+				</link>
+			</para>
+			<para>
+				<emphasis role="bold">Associations</emphasis>
+			</para>
+			<para>
+				<code>Mapping : ::Mapping[?]</code>
+			</para>
+		</section>
+		<section id="VariableStatement">
+			<title>
+				<emphasis role="bold">
+					<code>VariableStatement</code>
+				</emphasis>
+			</title>
+			<para>A VariableStatement is the basis for a Mapping execution that makes a name available to subsequent starements.</para>
+			<para>conformsTo 
+				<link linkend="VariableDeclaration">
+					<code>VariableDeclaration</code>
+				</link>, 
+				<link linkend="Statement">
+					<code>Statement</code>
+				</link>
+			</para>
 		</section>
 	</chapter>
 	<appendix id="glossary">
