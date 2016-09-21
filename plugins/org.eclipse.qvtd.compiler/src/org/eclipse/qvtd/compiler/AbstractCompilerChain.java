@@ -293,20 +293,15 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 		}
 
 		public @NonNull Transformation execute(@NonNull RootScheduledRegion rootRegion) throws IOException {
-			CreateStrategy savedStrategy = environmentFactory.setCreateStrategy(QVTcEnvironmentFactory.CREATE_STRATEGY);
-			try {
-				Resource iResource = createResource();
-				QVTs2QVTi tx = new QVTs2QVTi(this, environmentFactory);
-				Model model = tx.transform(rootRegion);
-				iResource.getContents().add(model);
-				saveResource(iResource);
-				Transformation transformation = getTransformation(iResource);
-				throwCompilerChainExceptionForErrors();
-				return transformation;
-			}
-			finally {
-				environmentFactory.setCreateStrategy(savedStrategy);
-			}
+			// Default QVTi strategy ok.
+			Resource iResource = createResource();
+			QVTs2QVTi tx = new QVTs2QVTi(this, environmentFactory);
+			Model model = tx.transform(rootRegion);
+			iResource.getContents().add(model);
+			saveResource(iResource);
+			Transformation transformation = getTransformation(iResource);
+			throwCompilerChainExceptionForErrors();
+			return transformation;
 		}
 	}
 

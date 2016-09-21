@@ -52,7 +52,7 @@ public class QVTbaseEnvironmentFactory extends AbstractEnvironmentFactory
 	}
 
 	public @Nullable CreateStrategy setCreateStrategy(@Nullable CreateStrategy createStrategy) {
-		CreateStrategy savedStrategy = createStrategy;
+		CreateStrategy savedStrategy = this.createStrategy;
 		this.createStrategy = createStrategy;
 		return savedStrategy;
 	}
