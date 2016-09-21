@@ -121,6 +121,11 @@
       <details key="documentation" value="The Model of an Imperative QVT transformation."/>
     </eAnnotations>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ImperativeTransformation" eSuperTypes="../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#//Transformation">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="An ImperativeTransfornmation distinguishes a QVTi transformation from other transformations."/>
+    </eAnnotations>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ImperativeTypedModel" eSuperTypes="../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#//TypedModel">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="An ImperativeTypedModel defines an input,middle or output modek for the transformation."/>

@@ -46,6 +46,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperative.ecore#//GuardParameterBinding/isCheck"/>
     </genClasses>
     <genClasses ecoreClass="QVTimperative.ecore#//ImperativeModel"/>
+    <genClasses ecoreClass="QVTimperative.ecore#//ImperativeTransformation"/>
     <genClasses ecoreClass="QVTimperative.ecore#//ImperativeTypedModel">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperative.ecore#//ImperativeTypedModel/isChecked"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperative.ecore#//ImperativeTypedModel/isEnforced"/>
