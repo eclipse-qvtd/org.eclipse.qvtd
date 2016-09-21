@@ -12,7 +12,7 @@ import --properties "${checkout.location}/buildroot/build.properties" "org.eclip
 build
 
 junit --launch "org.eclipse.qvtd.all.tests/.launches/All\ QVTd\ Tests\ \(standalone\).launch" --flatXML --output "${checkout.location}/QVTd.test.results/org.eclipse.qvtd.xtext.qvtd.all.xml"
-#junit --launch "org.eclipse.qvtd.all.tests/.launches/All\ QVTd\ Tests\ \(Plugin\).launch" --flatXML --output "${checkout.location}/QVTd.test.results/org.eclipse.qvtd.xtext.qvtd.all.plugin.xml"
+junit --launch "org.eclipse.qvtd.all.tests/.launches/All\ QVTd\ Tests\ \(Plugin\).launch" --flatXML --output "${checkout.location}/QVTd.test.results/org.eclipse.qvtd.xtext.qvtd.all.plugin.xml"
 
 perform --properties "${checkout.location}/buildroot/build.properties" "-Dbuckminster.reference.repository=${reference.repository}" "org.eclipse.qvtd.releng.build:eclipse.feature#build"
 perform --properties "${checkout.location}/buildroot/build.properties" "org.eclipse.qvtd.releng.buckminster:buckminster#setup.promoter"
