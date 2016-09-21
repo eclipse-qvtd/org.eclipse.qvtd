@@ -21,10 +21,12 @@ import org.eclipse.ocl.examples.debug.vm.evaluator.VMEvaluationEnvironment;
 import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
-import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiModelManager;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiModelManager.QVTiTransformationInstance;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiModelManager.QVTiTypedModelInstance;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 
 public class QVTiVariableFinder extends VariableFinder
 {
@@ -38,8 +40,8 @@ public class QVTiVariableFinder extends VariableFinder
 			String childPath[] = new String[parentPath.length + 1];
 			System.arraycopy(parentPath, 0, childPath, 0, parentPath.length);
 			QVTiTransformationInstance transformationInstance = (QVTiTransformationInstance)valueObject;
-			Transformation transformation = transformationInstance.getTransformation();
-			for (TypedModel typedModel : transformation.getModelParameter()) {
+			ImperativeTransformation transformation = transformationInstance.getTransformation();
+			for (@NonNull ImperativeTypedModel typedModel : QVTimperativeUtil.getOwnedTypedModels(transformation)) {
 				Variable variable = typedModel.getOwnedContext();
 				String varName = typedModel.getName();
 				assert varName != null;
@@ -58,7 +60,7 @@ public class QVTiVariableFinder extends VariableFinder
 		else if (valueObject instanceof QVTiTypedModelInstance) {
 			QVTiTypedModelInstance typedModelInstance = (QVTiTypedModelInstance)valueObject;
 			QVTiModelManager modelManager = typedModelInstance.getModelManager();
-			TypedModel typedModel = typedModelInstance.getTypedModel();
+			ImperativeTypedModel typedModel = typedModelInstance.getTypedModel();
 			Resource model = modelManager.getModel(typedModel);
 			super.collectChildVars(model, parentPath, containerType, result);
 		}
@@ -75,7 +77,7 @@ public class QVTiVariableFinder extends VariableFinder
 		if (parentObj instanceof QVTiTransformationInstance) {
 			QVTiTransformationInstance transformationInstance = (QVTiTransformationInstance)parentObj;
 			Transformation transformation = transformationInstance.getTransformation();
-			TypedModel typedModel = transformation.getModelParameter(varTreePath[pathIndex]);
+			ImperativeTypedModel typedModel = (ImperativeTypedModel) transformation.getModelParameter(varTreePath[pathIndex]);
 			QVTiModelManager modelManager = transformationInstance.getModelManager();
 			nextObject = typedModel != null ? modelManager.getModel(typedModel) : null;
 			nextDeclaredType = "Resource";
@@ -83,7 +85,7 @@ public class QVTiVariableFinder extends VariableFinder
 		else if (parentObj instanceof QVTiTypedModelInstance) {
 			QVTiTypedModelInstance typedModelInstance = (QVTiTypedModelInstance)parentObj;
 			QVTiModelManager modelManager = typedModelInstance.getModelManager();
-			TypedModel typedModel = typedModelInstance.getTypedModel();
+			ImperativeTypedModel typedModel = typedModelInstance.getTypedModel();
 			Resource model = modelManager.getModel(typedModel);
 			return super.findChildObject(model, optParentDeclaredType, varTreePath, pathIndex);
 		}
@@ -101,7 +103,7 @@ public class QVTiVariableFinder extends VariableFinder
 			}
 		}
 
-//			this.fTargetVar = childVar;		
+		//			this.fTargetVar = childVar;
 		return nextObject;
 	}
 
@@ -109,11 +111,11 @@ public class QVTiVariableFinder extends VariableFinder
 	protected String getDeclaredType(Object valueObject) {
 		if (valueObject instanceof QVTiTransformationInstance) {
 			return "qvtbaselibrary::Transformation";
-//				return super.getDeclaredType(((QVTiTransformationInstance)valueObject).getTransformation());
+			//				return super.getDeclaredType(((QVTiTransformationInstance)valueObject).getTransformation());
 		}
 		else if (valueObject instanceof QVTiTypedModelInstance) {
 			return "qvtbaselibrary::Model";
-/*				QVTiTypedModelInstance typedModelInstance = (QVTiTypedModelInstance)valueObject;
+			/*				QVTiTypedModelInstance typedModelInstance = (QVTiTypedModelInstance)valueObject;
 				QVTiModelManager modelManager = typedModelInstance.getModelManager();
 				TypedModel typedModel = typedModelInstance.getTypedModel();
 				Resource model = modelManager.getModel(typedModel);
@@ -126,7 +128,7 @@ public class QVTiVariableFinder extends VariableFinder
 
 	@Override
 	protected @Nullable VMVariableData getVariable(@NonNull TypedElement variable, @Nullable Object pcObject) {
-/*			EObject eContainer = variable.eContainer();
+		/*			EObject eContainer = variable.eContainer();
 			if (eContainer instanceof Transformation) {
 				Transformation transformation = (Transformation)eContainer;
 				String varName = variable.getName();
@@ -139,11 +141,11 @@ public class QVTiVariableFinder extends VariableFinder
 			}
 			else if (eContainer instanceof TypedModel) {
 				TypedModel typedModel = (TypedModel)eContainer;
-				
-				
+
+
 				QVTiModelManager modelManager = (QVTiModelManager) fEvalEnv.getModelManager();
 				Resource model = modelManager.getModel(typedModel);
-				
+
 				String varName = variable.getName();
 				if (varName != null) {
 					VMVariableData var = new VMVariableData(varName, null);
@@ -163,15 +165,15 @@ public class QVTiVariableFinder extends VariableFinder
 		else if (value instanceof QVTiTypedModelInstance) {
 			QVTiTypedModelInstance typedModelInstance = (QVTiTypedModelInstance)value;
 			QVTiModelManager modelManager = typedModelInstance.getModelManager();
-			TypedModel typedModel = typedModelInstance.getTypedModel();
+			ImperativeTypedModel typedModel = typedModelInstance.getTypedModel();
 			Resource model = modelManager.getModel(typedModel);
 			super.setValueAndType(variable, model, declaredTypeName);
-//				Resource resource = (Resource) value;
-//				EClass eClass = eObject.eClass();
-//				@SuppressWarnings("null")@NonNull String strVal = String.valueOf(resource.getURI());
-//				variable.value = new VMValueData(VMValueData.RESOURCE, strVal, true);
-//				@SuppressWarnings("null")@NonNull String className = resource.getClass().getSimpleName();
-//				variable.type = new VMTypeData(VMTypeData.RESOURCE, className, declaredTypeName);
+			//				Resource resource = (Resource) value;
+			//				EClass eClass = eObject.eClass();
+			//				@SuppressWarnings("null")@NonNull String strVal = String.valueOf(resource.getURI());
+			//				variable.value = new VMValueData(VMValueData.RESOURCE, strVal, true);
+			//				@SuppressWarnings("null")@NonNull String className = resource.getClass().getSimpleName();
+			//				variable.type = new VMTypeData(VMTypeData.RESOURCE, className, declaredTypeName);
 		}
 		else {
 			super.setValueAndType(variable, value, declaredTypeName);

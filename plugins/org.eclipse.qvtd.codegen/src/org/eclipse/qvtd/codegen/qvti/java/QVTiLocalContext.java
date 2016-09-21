@@ -21,7 +21,7 @@ import org.eclipse.ocl.examples.codegen.java.JavaLocalContext;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
-import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 
 /**
  * A QVTiLocalContext maintains the Java-specific local context for generation of QVTi code.
@@ -54,11 +54,11 @@ public class QVTiLocalContext extends JavaLocalContext<@NonNull QVTiCodeGenerato
 				Element asVariable = cgVariable.getAst();
 				if (asVariable instanceof Variable) {
 					EObject asContainer = asVariable.eContainer();
-					if (asContainer instanceof TypedModel) {
-						Transformation asTransformation = ((TypedModel)asContainer).getTransformation();
+					if (asContainer instanceof ImperativeTypedModel) {
+						Transformation asTransformation = ((ImperativeTypedModel)asContainer).getTransformation();
 						if (asTransformation != null) {
 							int index = asTransformation.getModelParameter().indexOf(asContainer);
-							String name = QVTiGlobalContext.MODELS_NAME + "[" + index + "/*" + ((TypedModel)asContainer).getName() + "*/]";
+							String name = QVTiGlobalContext.MODELS_NAME + "[" + index + "/*" + ((ImperativeTypedModel)asContainer).getName() + "*/]";
 							return name;
 						}
 					}

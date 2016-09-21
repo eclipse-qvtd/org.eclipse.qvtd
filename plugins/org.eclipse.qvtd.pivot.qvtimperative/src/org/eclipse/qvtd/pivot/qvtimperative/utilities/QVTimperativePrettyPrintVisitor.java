@@ -27,6 +27,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
@@ -154,6 +155,11 @@ public class QVTimperativePrettyPrintVisitor extends QVTbasePrettyPrintVisitor i
 	@Override
 	public Object visitImperativeModel(@NonNull ImperativeModel object) {
 		return visitModel(object);
+	}
+
+	@Override
+	public Object visitImperativeTransformation(@NonNull ImperativeTransformation object) {
+		return visitTransformation(object);
 	}
 
 	@Override

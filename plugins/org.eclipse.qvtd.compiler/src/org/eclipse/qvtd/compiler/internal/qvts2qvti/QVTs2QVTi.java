@@ -38,9 +38,9 @@ import org.eclipse.qvtd.compiler.internal.qvtp2qvts.QVTp2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RootScheduledRegion;
 import org.eclipse.qvtd.compiler.internal.utilities.SymbolNameReservation;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
-import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeHelper;
 
@@ -59,8 +59,8 @@ public class QVTs2QVTi extends QVTimperativeHelper
 	protected void resolveImports(@NonNull Model model) {
 		Set<@NonNull Namespace> importedNamespaces = new HashSet<@NonNull Namespace>();
 		for (EObject eObject : new TreeIterable(model, false)) {
-			if (eObject instanceof TypedModel) {
-				for (Namespace importedNamespace : ClassUtil.nullFree(((TypedModel)eObject).getUsedPackage())) {
+			if (eObject instanceof ImperativeTypedModel) {
+				for (Namespace importedNamespace : ClassUtil.nullFree(((ImperativeTypedModel)eObject).getUsedPackage())) {
 					if (!importedNamespaces.contains(importedNamespace)) {
 						importedNamespaces.add(importedNamespace);
 					}

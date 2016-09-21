@@ -97,9 +97,8 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel;
 import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
 import org.eclipse.qvtd.codegen.utilities.QVTiCGUtil;
-import org.eclipse.qvtd.pivot.qvtbase.Transformation;
-import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
@@ -574,24 +573,22 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		ImperativeTypedModel bestOutputTypedModel = null;
 		ImperativeTypedModel bestMiddleTypedModel = null;
 		ImperativeTypedModel bestInputTypedModel = null;
-		for (TypedModel typedModel : transformationAnalysis.getTransformation().getModelParameter()) {
+		for (@NonNull ImperativeTypedModel typedModel : QVTimperativeUtil.getOwnedTypedModels(transformationAnalysis.getTransformation())) {
 			ImperativeTypedModel imperativeTypedModel = null;
-			if (typedModel instanceof ImperativeTypedModel) {
-				for (org.eclipse.ocl.pivot.Package usedPackage : typedModel.getUsedPackage()) {
-					if (usedPackage.getESObject() == ePackage) {
-						imperativeTypedModel = (ImperativeTypedModel) typedModel;
-					}
+			for (org.eclipse.ocl.pivot.Package usedPackage : typedModel.getUsedPackage()) {
+				if (usedPackage.getESObject() == ePackage) {
+					imperativeTypedModel = typedModel;
 				}
-				if (imperativeTypedModel != null) {
-					if (imperativeTypedModel.isIsEnforced()) {
-						bestOutputTypedModel = imperativeTypedModel;
-					}
-					else if (!imperativeTypedModel.isIsChecked()) {
-						bestMiddleTypedModel = imperativeTypedModel;
-					}
-					else {
-						bestInputTypedModel = imperativeTypedModel;
-					}
+			}
+			if (imperativeTypedModel != null) {
+				if (imperativeTypedModel.isIsEnforced()) {
+					bestOutputTypedModel = imperativeTypedModel;
+				}
+				else if (!imperativeTypedModel.isIsChecked()) {
+					bestMiddleTypedModel = imperativeTypedModel;
+				}
+				else {
+					bestInputTypedModel = imperativeTypedModel;
 				}
 			}
 		}
@@ -2017,7 +2014,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 	@Override
 	public @NonNull Boolean visitCGTransformation(@NonNull CGTransformation cgTransformation) {
 		js.appendClassHeader(cgTransformation.getContainingPackage());
-		@SuppressWarnings("null")@NonNull Transformation transformation = (Transformation) cgTransformation.getAst();
+		@SuppressWarnings("null")@NonNull ImperativeTransformation transformation = (ImperativeTransformation) cgTransformation.getAst();
 		QVTiTransformationAnalysis transformationAnalysis = context.getTransformationAnalysis(transformation);
 		this.transformationAnalysis = transformationAnalysis;
 		String className = cgTransformation.getName();

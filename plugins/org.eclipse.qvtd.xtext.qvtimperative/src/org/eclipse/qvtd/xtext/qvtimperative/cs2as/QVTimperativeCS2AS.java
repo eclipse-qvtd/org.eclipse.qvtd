@@ -20,33 +20,33 @@ import org.eclipse.ocl.xtext.base.cs2as.CS2ASConversion;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.xtext.basecs.ElementCS;
 import org.eclipse.ocl.xtext.essentialocl.cs2as.EssentialOCLCS2AS;
-import org.eclipse.qvtd.pivot.qvtbase.Transformation;
-import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS;
 
 public class QVTimperativeCS2AS extends EssentialOCLCS2AS
-{	
-    public static boolean isMiddle(org.eclipse.ocl.pivot.@Nullable Class areaType, @NonNull ElementCS csElement) {
-    	if (areaType != null) {
-    		org.eclipse.ocl.pivot.Package areaPackage = areaType.getOwningPackage();
-    		for (EObject eObject = csElement; eObject != null; eObject = eObject.eContainer()) {
-    			if (eObject instanceof MappingCS) {
-    	    		Element mapping = ((MappingCS)eObject).getPivot();
-					Transformation transformation = QVTimperativeUtil.getContainingTransformation(mapping);
-    	    		if (transformation != null) {
-    	    			TypedModel middleModel = transformation.getModelParameter(null);
-    	    			if ((middleModel == null) || middleModel.getUsedPackage().contains(areaPackage)) {
-    	    				return true;
-    	    			}
-    	    		}
-    			}
-    		}
-    	}
+{
+	public static boolean isMiddle(org.eclipse.ocl.pivot.@Nullable Class areaType, @NonNull ElementCS csElement) {
+		if (areaType != null) {
+			org.eclipse.ocl.pivot.Package areaPackage = areaType.getOwningPackage();
+			for (EObject eObject = csElement; eObject != null; eObject = eObject.eContainer()) {
+				if (eObject instanceof MappingCS) {
+					Element mapping = ((MappingCS)eObject).getPivot();
+					ImperativeTransformation transformation = QVTimperativeUtil.getContainingTransformation(mapping);
+					if (transformation != null) {
+						ImperativeTypedModel middleModel = QVTimperativeUtil.basicGetOwnedTypedModel(transformation, null);
+						if ((middleModel == null) || middleModel.getUsedPackage().contains(areaPackage)) {
+							return true;
+						}
+					}
+				}
+			}
+		}
 		return false;
 	}
 
-    public QVTimperativeCS2AS(@NonNull EnvironmentFactoryInternal environmentFactory, @NonNull BaseCSResource csResource, @NonNull ASResource asResource) {
+	public QVTimperativeCS2AS(@NonNull EnvironmentFactoryInternal environmentFactory, @NonNull BaseCSResource csResource, @NonNull ASResource asResource) {
 		super(environmentFactory, csResource, asResource);
 	}
 

@@ -17,7 +17,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.internal.utilities.AS2XMIid;
-import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
@@ -77,7 +76,7 @@ public class QVTimperativeAS2XMIidVisitor extends AbstractQVTimperativeAS2XMIidV
 	@Override
 	public @Nullable Boolean visitNewStatement(@NonNull NewStatement object) {
 		//		if (object.eContainer() instanceof ImperativePattern) {
-		Rule rule = QVTimperativeUtil.getContainingRule(object);
+		Mapping rule = QVTimperativeUtil.getContainingMapping(object);
 		if ((rule != null) && (rule.getName() != null)) {
 			String name = object.getName();
 			if (name != null) {
@@ -94,7 +93,7 @@ public class QVTimperativeAS2XMIidVisitor extends AbstractQVTimperativeAS2XMIidV
 	@Override
 	public @Nullable Boolean visitVariable(@NonNull Variable object) {
 		if (object.eContainer() instanceof MappingLoop) {
-			Rule rule = QVTimperativeUtil.getContainingRule(object);
+			Mapping rule = QVTimperativeUtil.getContainingMapping(object);
 			if ((rule != null) && (rule.getName() != null)) {
 				String name = object.getName();
 				if (name != null) {

@@ -37,8 +37,8 @@ import org.eclipse.ocl.xtext.essentialoclcs.NameExpCS;
 import org.eclipse.ocl.xtext.essentialoclcs.RoundBracketedClauseCS;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
-import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QueryCS;
@@ -167,8 +167,8 @@ public class QVTimperativeCSLeft2RightVisitor extends AbstractQVTimperativeCSLef
 			Variable ownedContext = QVTbaseUtil.getContextVariable(standardLibrary, (Transformation) element);
 			return resolveVariableExp(csNameExp, ownedContext);
 		}
-		else if (element instanceof TypedModel) {
-			Variable ownedContext = QVTbaseUtil.getContextVariable(standardLibrary, (TypedModel) element);
+		else if (element instanceof ImperativeTypedModel) {
+			Variable ownedContext = QVTbaseUtil.getContextVariable(standardLibrary, (ImperativeTypedModel) element);
 			return resolveVariableExp(csNameExp, ownedContext);
 		}
 		return super.resolveSimpleNameExp(csNameExp, element);

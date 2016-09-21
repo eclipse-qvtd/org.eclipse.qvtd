@@ -32,11 +32,9 @@ import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.TreeIterable;
-import org.eclipse.qvtd.pivot.qvtbase.Domain;
-import org.eclipse.qvtd.pivot.qvtbase.QVTbaseFactory;
-import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory.CreateStrategy;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
@@ -44,6 +42,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.AppendParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.AppendParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
@@ -99,6 +98,10 @@ public class QVTimperativeUtil extends QVTbaseUtil
 			String n2 = o2.getName();
 			return ClassUtil.safeCompareTo(n1, n2);
 		}
+	}
+
+	public static @Nullable ImperativeTypedModel basicGetOwnedTypedModel(@NonNull ImperativeTransformation transformation, @Nullable String name) {
+		return NameUtil.getNameable(getOwnedTypedModels(transformation), name);
 	}
 
 	public static @NonNull AppendParameterBinding createAppendParameterBinding(@NonNull AppendParameter variable, @NonNull ConnectionVariable value) {
@@ -200,8 +203,8 @@ public class QVTimperativeUtil extends QVTbaseUtil
 		return asSetAssignment;
 	}
 
-	public static @NonNull Transformation createTransformation(@NonNull String name) {
-		Transformation transformation = QVTbaseFactory.eINSTANCE.createTransformation();
+	public static @NonNull ImperativeTransformation createTransformation(@NonNull String name) {
+		ImperativeTransformation transformation = QVTimperativeFactory.eINSTANCE.createImperativeTransformation();
 		transformation.setName(name);
 		return transformation;
 	}
@@ -244,6 +247,33 @@ public class QVTimperativeUtil extends QVTbaseUtil
 		return null;
 	}
 
+	public static @Nullable ImperativeTransformation getContainingTransformation(@Nullable EObject eObject) {
+		for ( ; eObject != null; eObject = eObject.eContainer()) {
+			if (eObject instanceof ImperativeTransformation) {
+				return (ImperativeTransformation) eObject;
+			}
+		}
+		return null;
+	}
+
+	public static @NonNull Mapping getOwnedMapping(@NonNull ImperativeTransformation transformation, @Nullable String name) {
+		return ClassUtil.nonNullState(NameUtil.getNameable(getOwnedMappings(transformation), name));
+	}
+
+	@SuppressWarnings("unchecked")
+	public static @NonNull Iterable<@NonNull Mapping> getOwnedMappings(@NonNull ImperativeTransformation transformation) {
+		return (@NonNull Iterable<@NonNull Mapping>)(Object)transformation.getRule();
+	}
+
+	public static @NonNull ImperativeTypedModel getOwnedTypedModel(@NonNull ImperativeTransformation transformation, @Nullable String name) {
+		return ClassUtil.nonNullState(NameUtil.getNameable(getOwnedTypedModels(transformation), name));
+	}
+
+	@SuppressWarnings("unchecked")
+	public static @NonNull Iterable<@NonNull ImperativeTypedModel> getOwnedTypedModels(@NonNull ImperativeTransformation transformation) {
+		return (@NonNull Iterable<@NonNull ImperativeTypedModel>)(Object)transformation.getModelParameter();
+	}
+
 	public static @NonNull Property getTargetProperty(@NonNull SetStatement asSetStatement) {
 		Property referredProperty = ClassUtil.nonNullState(asSetStatement.getTargetProperty());
 		return asSetStatement.isIsOpposite() ? ClassUtil.nonNullState(referredProperty.getOpposite()) : referredProperty;
@@ -261,20 +291,16 @@ public class QVTimperativeUtil extends QVTbaseUtil
 	}
 
 	public static boolean isPrimitiveVariable(@NonNull VariableDeclaration asVariable) {
-		Domain asArea = QVTimperativeUtil.getContainingDomain(asVariable);
-		if (asArea != null) {
-			return false;
-		}
 		if (!(asVariable.getType() instanceof CollectionType))  {
 			return true;
 		}
 		return false;
 	}
 
-	public static @NonNull Transformation loadTransformation(@NonNull QVTbaseEnvironmentFactory environmentFactory, @NonNull URI transformationURI, boolean keepDebug) throws IOException {
+	public static @NonNull ImperativeTransformation loadTransformation(@NonNull QVTbaseEnvironmentFactory environmentFactory, @NonNull URI transformationURI, boolean keepDebug) throws IOException {
 		CreateStrategy savedStrategy = environmentFactory.setCreateStrategy(QVTiEnvironmentFactory.CREATE_STRATEGY);
 		try {
-			return loadTransformation(ImperativeModel.class, environmentFactory, transformationURI, keepDebug);
+			return (ImperativeTransformation) loadTransformation(ImperativeModel.class, environmentFactory, transformationURI, keepDebug);
 		}
 		finally {
 			environmentFactory.setCreateStrategy(savedStrategy);

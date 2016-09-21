@@ -39,7 +39,7 @@ import org.eclipse.ocl.pivot.internal.manager.MetamodelManagerInternal;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.library.LibraryFeature;
 import org.eclipse.ocl.pivot.library.oclany.OclElementOclContainerProperty;
-import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
@@ -58,7 +58,7 @@ public class QVTiTransformationAnalysis
 {
 	protected final @NonNull EnvironmentFactoryInternal environmentFactory;
 
-	protected final @NonNull Transformation transformation;
+	protected final @NonNull ImperativeTransformation transformation;
 
 	/**
 	 *  Set of all types for which allInstances() is invoked.
@@ -110,7 +110,7 @@ public class QVTiTransformationAnalysis
 	 */
 	private final @NonNull Map<@NonNull Type, @NonNull List<@NonNull Type>> parentClass2childClasses = new HashMap<>();
 
-	public QVTiTransformationAnalysis(@NonNull EnvironmentFactoryInternal environmentFactory, @NonNull Transformation transformation) {
+	public QVTiTransformationAnalysis(@NonNull EnvironmentFactoryInternal environmentFactory, @NonNull ImperativeTransformation transformation) {
 		this.environmentFactory = environmentFactory;
 		this.transformation = transformation;
 	}
@@ -374,7 +374,7 @@ public class QVTiTransformationAnalysis
 		return environmentFactory.getMetamodelManager();
 	}
 
-	public @NonNull Transformation getTransformation() {
+	public @NonNull ImperativeTransformation getTransformation() {
 		return transformation;
 	}
 

@@ -78,6 +78,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
@@ -247,11 +248,11 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 		}
 	}
 
-	protected void gatherTransformations(@NonNull List<Transformation> asTransformations, @NonNull List<Package> ownedPackages) {
+	protected void gatherTransformations(@NonNull List<@NonNull ImperativeTransformation> asTransformations, @NonNull List<Package> ownedPackages) {
 		for (org.eclipse.ocl.pivot.Package asPackage : ownedPackages) {
 			for (org.eclipse.ocl.pivot.Class asClass : asPackage.getOwnedClasses()) {
-				if (asClass instanceof Transformation) {
-					asTransformations.add((Transformation) asClass);
+				if (asClass instanceof ImperativeTransformation) {
+					asTransformations.add((ImperativeTransformation) asClass);
 				}
 			}
 			gatherTransformations(asTransformations, asPackage.getOwnedPackages());
@@ -478,23 +479,21 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 
 		buildModel(csDocument, asModel);
 
-		List<Mapping> asMappings = null;
-		List<Function> asQueries = null;
-		List<Transformation> asTransformations = new ArrayList<Transformation>();
+		List<@NonNull Mapping> asMappings = null;
+		List<@NonNull Function> asQueries = null;
+		List<@NonNull ImperativeTransformation> asTransformations = new ArrayList<>();
 		gatherTransformations(asTransformations, asModel.getOwnedPackages());
-		for (Transformation asTransformation : asTransformations) {
-			for (Rule asRule : asTransformation.getRule()) {
-				if (asRule instanceof Mapping) {
-					if (asMappings == null) {
-						asMappings = new ArrayList<Mapping>();
-					}
-					asMappings.add((Mapping) asRule);
+		for (@NonNull ImperativeTransformation asTransformation : asTransformations) {
+			for (@NonNull Mapping asMapping : QVTimperativeUtil.getOwnedMappings(asTransformation)) {
+				if (asMappings == null) {
+					asMappings = new ArrayList<>();
 				}
+				asMappings.add(asMapping);
 			}
 			for (Operation asOperation : asTransformation.getOwnedOperations()) {
 				if (asOperation instanceof Function) {
 					if (asQueries == null) {
-						asQueries = new ArrayList<Function>();
+						asQueries = new ArrayList<>();
 					}
 					asQueries.add((Function) asOperation);
 				}
@@ -514,6 +513,23 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 			csDocument.getOwnedQueries().clear();
 		}
 		return csDocument;
+	}
+
+	@Override
+	public ElementCS visitImperativeTransformation(@NonNull ImperativeTransformation asTransformation) {
+		TransformationCS csTransformation = context.refreshNamedElement(TransformationCS.class, QVTimperativeCSPackage.Literals.TRANSFORMATION_CS, asTransformation);
+		//		csTransformation.setPivot(asTransformation);
+		//		org.eclipse.ocl.pivot.Package owningPackage = asTransformation.getOwningPackage();
+		//		if ((owningPackage == null) || "".equals(owningPackage.getName()) || (owningPackage.getName() == null)) {
+		//			csTransformation.setOwnedPathName(null);
+		//		}
+		//		else {
+		//			PathNameCS csPathName = BaseCSFactory.eINSTANCE.createPathNameCS();
+		//			csTransformation.setOwnedPathName(csPathName);
+		//			context.refreshPathName(csPathName, owningPackage, null);
+		//		}
+		context.refreshList(csTransformation.getOwnedDirections(), context.visitDeclarations(DirectionCS.class, asTransformation.getModelParameter(), null));
+		return csTransformation;
 	}
 
 	@Override
@@ -736,25 +752,13 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 	}
 
 	@Override
-	public ElementCS visitTransformation(@NonNull Transformation asTransformation) {
-		TransformationCS csTransformation = context.refreshNamedElement(TransformationCS.class, QVTimperativeCSPackage.Literals.TRANSFORMATION_CS, asTransformation);
-		//		csTransformation.setPivot(asTransformation);
-		//		org.eclipse.ocl.pivot.Package owningPackage = asTransformation.getOwningPackage();
-		//		if ((owningPackage == null) || "".equals(owningPackage.getName()) || (owningPackage.getName() == null)) {
-		//			csTransformation.setOwnedPathName(null);
-		//		}
-		//		else {
-		//			PathNameCS csPathName = BaseCSFactory.eINSTANCE.createPathNameCS();
-		//			csTransformation.setOwnedPathName(csPathName);
-		//			context.refreshPathName(csPathName, owningPackage, null);
-		//		}
-		context.refreshList(csTransformation.getOwnedDirections(), context.visitDeclarations(DirectionCS.class, asTransformation.getModelParameter(), null));
-		return csTransformation;
+	public ElementCS visitTransformation(@NonNull Transformation object) {
+		return visiting(object);
 	}
 
 	@Override
-	public ElementCS visitTypedModel(@NonNull TypedModel asTypedModel) {
-		return visiting(asTypedModel);
+	public ElementCS visitTypedModel(@NonNull TypedModel object) {
+		return visiting(object);
 	}
 
 	@Override

@@ -6,7 +6,7 @@
   <ownedImports name="classescs" importedNamespace="pivot:Model ../ClassesCS.ecore.oclas#/"/>
   <ownedImports importedNamespace="pivot:Model helpers.ocl.oclas#/"/>
   <ownedPackages xmi:id="P." name="">
-    <ownedClasses xsi:type="qvtb:Transformation" xmi:id="T..classescs2as" name="classescs2as" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclElement">
+    <ownedClasses xsi:type="qvti:ImperativeTransformation" xmi:id="T..classescs2as" name="classescs2as" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclElement">
       <modelParameter xsi:type="qvti:ImperativeTypedModel" xmi:id="qT..classescs2as.leftCS" name="leftCS" usedPackage="helpers.ocl.oclas#P.classescs"
           isChecked="true">
         <ownedContext xmi:id="qV..classescs2as.leftCS.leftCS" name="leftCS" type="pivot:Class http://www.eclipse.org/qvt/2016/QVTimperativeLibrary.oclas#T.qvtbaselibrary.Model"/>

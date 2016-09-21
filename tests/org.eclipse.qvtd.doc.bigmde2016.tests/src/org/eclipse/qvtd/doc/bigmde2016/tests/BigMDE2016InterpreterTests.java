@@ -12,7 +12,7 @@ package org.eclipse.qvtd.doc.bigmde2016.tests;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.qvtd.doc.bigmde2016.tests.qvtc.BigMDE2016CGTests;
-import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.xtext.qvtcore.tests.QVTcCompilerTests;
@@ -23,36 +23,37 @@ import org.junit.Test;
  */
 public class BigMDE2016InterpreterTests extends QVTcCompilerTests
 {
+	@Override
 	@Test
-    public void testQVTcCompiler_Families2Persons() throws Exception {
-    	PrintAndLog logger = new PrintAndLog("results/" + getName());
-    	logger.printf("%s\n", getName());
-//		AbstractTransformer.INVOCATIONS.setState(true);
-    	MyQVT myQVT = new MyQVT("families2persons");
-//    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
-    	try {
-	    	Transformation asTransformation = myQVT.compileTransformation("Families2Persons.qvtc", "person");
-	        int[] tests = PrintAndLog.getTestSizes();
-	        for (int testSize : tests) {
-		    	BasicQVTiExecutor interpretedExecutor = myQVT.createInterpretedExecutor(asTransformation);
-		    	myQVT.loadInput("family", "Families.xmi");
-		    	Resource inResource = interpretedExecutor.getModel("family");
-		    	inResource.getContents().clear();
-		    	inResource.getContents().addAll(FamiliesGenerator.createFamiliesModel(testSize, 9));
-		    	myQVT.createModel(QVTimperativeUtil.MIDDLE_DOMAIN_NAME, "Families2Persons_trace.xmi");
-		    	myQVT.createModel("person", "Persons_Interpreted.xmi");
-		    	BigMDE2016CGTests.garbageCollect();
-		    	logger.printf("%9d, ", 10*testSize);
+	public void testQVTcCompiler_Families2Persons() throws Exception {
+		PrintAndLog logger = new PrintAndLog("results/" + getName());
+		logger.printf("%s\n", getName());
+		//		AbstractTransformer.INVOCATIONS.setState(true);
+		MyQVT myQVT = new MyQVT("families2persons");
+		//    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
+		try {
+			ImperativeTransformation asTransformation = myQVT.compileTransformation("Families2Persons.qvtc", "person");
+			int[] tests = PrintAndLog.getTestSizes();
+			for (int testSize : tests) {
+				BasicQVTiExecutor interpretedExecutor = myQVT.createInterpretedExecutor(asTransformation);
+				myQVT.loadInput("family", "Families.xmi");
+				Resource inResource = interpretedExecutor.getModel("family");
+				inResource.getContents().clear();
+				inResource.getContents().addAll(FamiliesGenerator.createFamiliesModel(testSize, 9));
+				myQVT.createModel(QVTimperativeUtil.MIDDLE_DOMAIN_NAME, "Families2Persons_trace.xmi");
+				myQVT.createModel("person", "Persons_Interpreted.xmi");
+				BigMDE2016CGTests.garbageCollect();
+				logger.printf("%9d, ", 10*testSize);
 				long startTime = System.nanoTime();
-		    	myQVT.executeTransformation();
+				myQVT.executeTransformation();
 				long endTime = System.nanoTime();
 				logger.printf("%9.6f\n", (endTime - startTime) / 1.0e9);
-//				myQVT.saveOutput("person", "Persons_Interpreted.xmi", "Persons_expected.xmi", Families2PersonsNormalizer.INSTANCE);
-	        }
+				//				myQVT.saveOutput("person", "Persons_Interpreted.xmi", "Persons_expected.xmi", Families2PersonsNormalizer.INSTANCE);
+			}
 		}
 		finally {
-	    	myQVT.dispose();
-	    	logger.dispose();
+			myQVT.dispose();
+			logger.dispose();
 		}
-    }
+	}
 }

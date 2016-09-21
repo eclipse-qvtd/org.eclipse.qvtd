@@ -6,7 +6,7 @@
   <ownedImports importedNamespace="pivot:Package HLSTree.ecore.oclas#P.HLSTree"/>
   <ownedImports name="hsv2hls_0" importedNamespace="pivot:Package HSV2HLS.ecore.oclas#P.HSV2HLS"/>
   <ownedPackages xmi:id="P." name="">
-    <ownedClasses xsi:type="qvtb:Transformation" xmi:id="T..hsv2hls" name="hsv2hls" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclElement">
+    <ownedClasses xsi:type="qvti:ImperativeTransformation" xmi:id="T..hsv2hls" name="hsv2hls" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclElement">
       <ownedOperations xsi:type="qvtb:Function" xmi:id="o..hsv2hls.hls2rgb..HLSTree.HLS" name="hls2rgb" isRequired="false" type="pivot:DataType HSV2HLS.ecore.oclas#T.HSV2HLS.RGB">
         <ownedParameters xsi:type="qvtb:FunctionParameter" xmi:id="p0o..hsv2hls.hls2rgb..HLSTree.HLS" name="color" isRequired="false"
             type="pivot:DataType HLSTree.ecore.oclas#T.HLSTree.HLS"/>

@@ -11,7 +11,7 @@
 package org.eclipse.qvtd.debug.evaluator;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiIncrementalExecutor;
@@ -19,12 +19,12 @@ import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiIncrementalExecutor;
 /**
  * A BasicQVTrExecutor supports loading a QVTr transformation as source then loading models, performing a transformation
  * and then saving the models.
- * 
+ *
  * @see BasicQVTiExecutor
  */
 public class BasicQVTrExecutor extends QVTiIncrementalExecutor
 {
-    public BasicQVTrExecutor(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull Transformation transformation) {
-    	super(environmentFactory, transformation, Mode.LAZY);
-    }
+	public BasicQVTrExecutor(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull ImperativeTransformation transformation) {
+		super(environmentFactory, transformation, Mode.LAZY);
+	}
 }

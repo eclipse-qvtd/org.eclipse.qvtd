@@ -19,8 +19,8 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
 
 public interface CompilerChain
@@ -83,7 +83,7 @@ public interface CompilerChain
 
 	void addListener(@NonNull Listener listener);
 	@NonNull Class<? extends Transformer> build(@NonNull String outputName, @NonNull String ... genModelFiles) throws Exception;
-	@NonNull Transformation compile(@NonNull String outputName) throws Exception;
+	@NonNull ImperativeTransformation compile(@NonNull String outputName) throws Exception;
 	void compiled(@NonNull String stepKey, @NonNull Object object);
 	@NonNull Resource createResource(@NonNull URI uri) throws IOException;
 	void dispose();

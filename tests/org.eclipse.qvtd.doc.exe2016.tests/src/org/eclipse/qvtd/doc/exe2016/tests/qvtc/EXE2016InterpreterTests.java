@@ -18,7 +18,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.qvtd.doc.exe2016.tests.AbstractEXE2016CGTests;
 import org.eclipse.qvtd.doc.exe2016.tests.DoublyLinkedListGenerator;
 import org.eclipse.qvtd.doc.exe2016.tests.PrintAndLog;
-import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
@@ -49,10 +49,10 @@ public class EXE2016InterpreterTests extends QVTcCompilerTests
 		MyQVT myQVT = new MyQVT("forward2reverse", DoublylinkedlistPackage.eINSTANCE, List2listPackage.eINSTANCE);
 		//    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 		try {
-			Transformation asTransformation = myQVT.compileTransformation("Forward2Reverse.qvtc", "reverse");
+			ImperativeTransformation asTransformation = myQVT.compileTransformation("Forward2Reverse.qvtc", "reverse");
 			int[] tests = /**new int[]{100000}; //*/PrintAndLog.getTestSizes();
 			for (int testSize : tests) {
-				BasicQVTiExecutor interpretedExecutor = myQVT.createInterpretedExecutor(asTransformation);
+				@SuppressWarnings("unused")BasicQVTiExecutor interpretedExecutor = myQVT.createInterpretedExecutor(asTransformation);
 				Resource inResource = myQVT.loadInput("forward", "EmptyList.xmi");
 				assert inResource != null;
 				inResource.getContents().clear();
@@ -75,7 +75,6 @@ public class EXE2016InterpreterTests extends QVTcCompilerTests
 				outResource = null;
 				rootObjects = null;
 				interpretedExecutor = null;
-				long endTime2 = System.nanoTime();
 			}
 		}
 		finally {
@@ -93,7 +92,7 @@ public class EXE2016InterpreterTests extends QVTcCompilerTests
 		MyQVT myQVT = new MyQVT("forward2reverse", DoublylinkedlistPackage.eINSTANCE, List2listPackage.eINSTANCE);
 		//		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 		try {
-			Transformation asTransformation = myQVT.compileTransformation("Forward2Reverse.qvtc", "reverse");
+			ImperativeTransformation asTransformation = myQVT.compileTransformation("Forward2Reverse.qvtc", "reverse");
 			int testSize = 100000;
 			BasicQVTiExecutor interpretedExecutor = myQVT.createInterpretedExecutor(asTransformation);
 			myQVT.loadInput("forward", "EmptyList.xmi");

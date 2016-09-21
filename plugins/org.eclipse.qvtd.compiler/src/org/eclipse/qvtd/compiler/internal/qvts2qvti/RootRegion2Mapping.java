@@ -54,6 +54,7 @@ import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.BufferStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingParameter;
 
 public class RootRegion2Mapping extends AbstractScheduledRegion2Mapping
@@ -76,13 +77,13 @@ public class RootRegion2Mapping extends AbstractScheduledRegion2Mapping
 		//
 		//	Create domains
 		//
-		Set<@NonNull TypedModel> checkableTypedModels = new HashSet<@NonNull TypedModel>();
+		Set<@NonNull ImperativeTypedModel> checkableTypedModels = new HashSet<>();
 		for (@NonNull Node node : region.getNodes()) {
 			ClassDatumAnalysis classDatumAnalysis = node.getClassDatumAnalysis();
 			Type type = classDatumAnalysis.getClassDatum().getType();
 			if (!(type instanceof DataType) && !(type instanceof AnyType) && !(type instanceof VoidType) && !(type instanceof InvalidType)) {
 				TypedModel qvtpTypedModel = classDatumAnalysis.getTypedModel();
-				TypedModel qvtiTypedModel = visitor.getQVTiTypedModel(qvtpTypedModel);
+				ImperativeTypedModel qvtiTypedModel = visitor.getQVTiTypedModel(qvtpTypedModel);
 				if (qvtiTypedModel != null) {
 					checkableTypedModels.add(qvtiTypedModel);
 				}
@@ -109,7 +110,7 @@ public class RootRegion2Mapping extends AbstractScheduledRegion2Mapping
 			assert elementType != null;
 			assert !(elementType instanceof CollectionType);
 			StandardLibraryInternal standardLibrary = (StandardLibraryInternal)visitor.getStandardLibrary();
-			TypedModel typedModel = visitor.getQVTiTypedModel(classDatumAnalysis.getTypedModel());
+			ImperativeTypedModel typedModel = visitor.getQVTiTypedModel(classDatumAnalysis.getTypedModel());
 			assert typedModel != null;
 			Variable contextVariable = QVTbaseUtil.getContextVariable(standardLibrary, typedModel);
 			VariableExp modelExp = helper.createVariableExp(contextVariable);

@@ -18,7 +18,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 
@@ -32,24 +32,24 @@ public class QVTiCompilerChain extends AbstractCompilerChain
 		public Xtext2QVTiCompilerStep(@NonNull CompilerChain compilerChain) {
 			super(compilerChain, QVTI_STEP);
 		}
-		
-		public @NonNull Transformation execute(@NonNull URI txURI) throws IOException {
-			Transformation asTransformation = QVTimperativeUtil.loadTransformation(environmentFactory, txURI, false);
+
+		public @NonNull ImperativeTransformation execute(@NonNull URI txURI) throws IOException {
+			ImperativeTransformation asTransformation = QVTimperativeUtil.loadTransformation(environmentFactory, txURI, false);
 			Resource iResource = ClassUtil.nonNullState(asTransformation.eResource());
 			compiled(iResource);
 			return asTransformation;
-	    }
+		}
 	}
-	
+
 	protected final @NonNull Xtext2QVTiCompilerStep xtext2qvtiCompilerStep;
-	
+
 	public QVTiCompilerChain(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull URI prefixURI, @Nullable Map<@NonNull String, @Nullable Map<@NonNull Key<Object>, @Nullable Object>> options) {
 		super(environmentFactory, prefixURI, options);
 		this.xtext2qvtiCompilerStep = createXtext2QVTiCompilerStep();
 	}
 
 	@Override
-	public @NonNull Transformation compile(@NonNull String unusedEnforcedOutputName) throws IOException {
+	public @NonNull ImperativeTransformation compile(@NonNull String unusedEnforcedOutputName) throws IOException {
 		return xtext2qvtiCompilerStep.execute(txURI);
 	}
 

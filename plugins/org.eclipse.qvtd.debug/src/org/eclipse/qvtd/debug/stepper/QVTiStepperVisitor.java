@@ -26,6 +26,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameterBinding;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
@@ -98,6 +99,11 @@ public class QVTiStepperVisitor extends AbstractQVTimperativeStepperVisitor
 	@Override
 	public IStepper visitGuardParameterBinding(@NonNull GuardParameterBinding object) {
 		return PreStepper.INSTANCE;
+	}
+
+	@Override
+	public @Nullable IStepper visitImperativeTransformation(@NonNull ImperativeTransformation object) {
+		return PrePostStepper.INSTANCE;
 	}
 
 	@Override
@@ -182,6 +188,6 @@ public class QVTiStepperVisitor extends AbstractQVTimperativeStepperVisitor
 
 	@Override
 	public @Nullable IStepper visitTransformation(@NonNull Transformation object) {
-		return PrePostStepper.INSTANCE;
+		return visiting(object);
 	}
 }

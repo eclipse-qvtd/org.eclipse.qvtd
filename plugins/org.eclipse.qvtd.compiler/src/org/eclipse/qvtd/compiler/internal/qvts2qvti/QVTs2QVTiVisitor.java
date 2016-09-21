@@ -74,16 +74,16 @@ public class QVTs2QVTiVisitor extends QVTimperativeHelper implements Visitor<Ele
 
 	protected final @NonNull Transformation qvtiTransformation;
 	protected final @NonNull Map<@NonNull TypedModel, @NonNull ImperativeTypedModel> qvtpTypedModel2qvtiTypedModel = new HashMap<>();
-	protected final @NonNull List<@NonNull TypedModel> checkableTypedModels = new ArrayList<@NonNull TypedModel>();
+	protected final @NonNull List<@NonNull ImperativeTypedModel> checkableTypedModels = new ArrayList<>();
 	protected final @NonNull List<@NonNull ImperativeTypedModel> checkableAndEnforceableTypedModels = new ArrayList<>();
-	protected final @NonNull List<@NonNull TypedModel> enforceableTypedModels = new ArrayList<@NonNull TypedModel>();
-	protected final @NonNull Map<@NonNull Region, @NonNull AbstractRegion2Mapping> region2region2mapping = new HashMap<@NonNull Region, @NonNull AbstractRegion2Mapping>();
+	protected final @NonNull List<@NonNull ImperativeTypedModel> enforceableTypedModels = new ArrayList<>();
+	protected final @NonNull Map<@NonNull Region, @NonNull AbstractRegion2Mapping> region2region2mapping = new HashMap<>();
 	private @Nullable Set<@NonNull String> reservedNames = null;
-	private @NonNull Map<@NonNull Operation, @NonNull Operation> qvtpOperation2qvtiOperation = new HashMap<@NonNull Operation, @NonNull Operation>();
+	private @NonNull Map<@NonNull Operation, @NonNull Operation> qvtpOperation2qvtiOperation = new HashMap<>();
 	private final @NonNull Region2Depth region2depth = new Region2Depth();
 
-	private final @NonNull Set<@NonNull Transformation> otherTransformations = new HashSet<@NonNull Transformation>();	// Workaround Bug 481658
-	private final @NonNull Map<@NonNull String, @NonNull Operation> name2operation = new HashMap<@NonNull String, @NonNull Operation>();	// Workaround Bug 481658
+	private final @NonNull Set<@NonNull Transformation> otherTransformations = new HashSet<>();	// Workaround Bug 481658
+	private final @NonNull Map<@NonNull String, @NonNull Operation> name2operation = new HashMap<>();	// Workaround Bug 481658
 
 	private /*@LazyNonNull*/ ImperativeTypedModel qvtiMiddleTypedModel = null;
 

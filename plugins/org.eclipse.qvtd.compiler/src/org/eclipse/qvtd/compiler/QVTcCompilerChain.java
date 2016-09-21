@@ -20,9 +20,9 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.qvtd.compiler.internal.qvtc2qvtu.QVTuConfiguration;
-import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 
 /**
@@ -35,31 +35,31 @@ public class QVTcCompilerChain extends AbstractCompilerChain
 		public Xtext2QVTcCompilerStep(@NonNull CompilerChain compilerChain) {
 			super(compilerChain, QVTC_STEP);
 		}
-		
+
 		public @NonNull Resource execute(@NonNull URI txURI) throws IOException {
 			Resource cResource = QVTcoreUtil.loadTransformations(environmentFactory, txURI, false);
-	        // FIXME Following code fixes up missing source. Should be fixed earlier.
-	        List<OperationCallExp> missingOperationCallSources = QVTbaseUtil.rewriteMissingOperationCallSources(environmentFactory, cResource);
-	        if (missingOperationCallSources != null) {
-	        	System.err.println("Missing OperationCallExp sources were fixed up for '" + txURI + "'");
-	        }
+			// FIXME Following code fixes up missing source. Should be fixed earlier.
+			List<OperationCallExp> missingOperationCallSources = QVTbaseUtil.rewriteMissingOperationCallSources(environmentFactory, cResource);
+			if (missingOperationCallSources != null) {
+				System.err.println("Missing OperationCallExp sources were fixed up for '" + txURI + "'");
+			}
 			compiled(cResource);
 			return cResource;
-	    }
+		}
 	}
-	
+
 	protected final @NonNull Xtext2QVTcCompilerStep xtext2qvtcCompilerStep;
-	
+
 	public QVTcCompilerChain(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull URI prefixURI, @Nullable Map<@NonNull String, @Nullable Map<@NonNull Key<Object>, @Nullable Object>> options) {
 		super(environmentFactory, prefixURI, options);
 		this.xtext2qvtcCompilerStep = createXtext2QVTcCompilerStep();
 	}
 
 	@Override
-	public @NonNull Transformation compile(@NonNull String enforcedOutputName) throws IOException {
+	public @NonNull ImperativeTransformation compile(@NonNull String enforcedOutputName) throws IOException {
 		Resource cResource = xtext2qvtcCompilerStep.execute(txURI);
 		QVTuConfiguration qvtuConfiguration = createQVTuConfiguration(cResource, QVTuConfiguration.Mode.ENFORCE, enforcedOutputName);
-//		setOption(QVTU_STEP, QVTU_CONFIGURATION_KEY, qvtuConfiguration);
+		//		setOption(QVTU_STEP, QVTU_CONFIGURATION_KEY, qvtuConfiguration);
 		Resource pResource = qvtc2qvtp(cResource, qvtuConfiguration);
 		return qvtp2qvti(pResource);
 	}

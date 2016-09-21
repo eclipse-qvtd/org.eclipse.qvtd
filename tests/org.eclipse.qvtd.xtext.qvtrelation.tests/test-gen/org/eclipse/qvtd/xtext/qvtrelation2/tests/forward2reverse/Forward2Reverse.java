@@ -301,8 +301,8 @@ public class Forward2Reverse extends AbstractTransformer
      * var reverseElement : doublylinkedlist::Element[1] := trace.reverseElement;
      * var when_Tlist2list : PForward2Reverse::Tlist2list[1] := forwardList.Tlist2list;
      * var reverseList : doublylinkedlist::DoublyLinkedList[1] := when_Tlist2list.reverseList;
-     * set trace.reverseList := reverseList;
      * set reverseElement.list := reverseList;
+     * set trace.reverseList := reverseList;
      * 
      */
     protected boolean MAP_m_Telement2element_Element_46p2(final /*@NonInvalid*/ org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.@org.eclipse.jdt.annotation.NonNull Telement2element trace_0)  {
@@ -321,8 +321,8 @@ public class Forward2Reverse extends AbstractTransformer
                 @SuppressWarnings("null")
                 final /*@Thrown*/ org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.@org.eclipse.jdt.annotation.NonNull DoublyLinkedList reverseList = Tlist2list.getReverseList();
                 // mapping statements
-                trace_0.setReverseList(reverseList);
                 reverseElement.setList(reverseList);
+                trace_0.setReverseList(reverseList);
                 final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean m_Telement2element_Element_p2 = ValueUtil.TRUE_VALUE;
                 raw_when_Tlist2list = m_Telement2element_Element_p2;
             }

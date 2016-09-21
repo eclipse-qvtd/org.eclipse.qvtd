@@ -50,6 +50,7 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
 import org.eclipse.qvtd.codegen.utilities.QVTiCGModelResourceFactory;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiTransformationAnalysis;
 
 /**
@@ -243,7 +244,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 		}
 	}
 
-	public @NonNull QVTiTransformationAnalysis getTransformationAnalysis(@NonNull Transformation transformation) {
+	public @NonNull QVTiTransformationAnalysis getTransformationAnalysis(@NonNull ImperativeTransformation transformation) {
 		//		Map<Transformation, QVTiTransformationAnalysis> transformation2analysis = new HashMap<Transformation, QVTiTransformationAnalysis>();
 		QVTiTransformationAnalysis transformationAnalysis = transformation2analysis.get(transformation);
 		if (transformationAnalysis == null) {

@@ -45,6 +45,7 @@ import org.eclipse.qvtd.compiler.CompilerChain.Key;
 import org.eclipse.qvtd.compiler.QVTrCompilerChain;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.QVTp2QVTs;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiIncrementalExecutor;
@@ -146,7 +147,7 @@ public class QVTrCompilerTests extends LoadTestCase
 			assertSameModel(referenceResource, outputResource);
 		}
 
-		public @NonNull Transformation compileTransformation(@NonNull String testFileName, @NonNull String outputName, @NonNull String basePrefix, @NonNull String middleNsURI) throws Exception {
+		public @NonNull ImperativeTransformation compileTransformation(@NonNull String testFileName, @NonNull String outputName, @NonNull String basePrefix, @NonNull String middleNsURI) throws Exception {
 			Map<@NonNull String, @Nullable String> genModelOptions = new HashMap<@NonNull String, @Nullable String>();
 			genModelOptions.put(CompilerChain.GENMODEL_BASE_PREFIX, basePrefix);
 			genModelOptions.put(CompilerChain.GENMODEL_COPYRIGHT_TEXT, "Copyright (c) 2015, 2016 Willink Transformations and others.\n;All rights reserved. This program and the accompanying materials\n;are made available under the terms of the Eclipse Public License v1.0\n;which accompanies this distribution, and is available at\n;http://www.eclipse.org/legal/epl-v10.html\n;\n;Contributors:\n;  E.D.Willink - Initial API and implementation");
@@ -201,7 +202,7 @@ public class QVTrCompilerTests extends LoadTestCase
 			return generatedExecutor = new QVTiTransformationExecutor(getEnvironmentFactory(), txClass);
 		}
 
-		public @NonNull BasicQVTiExecutor createInterpretedExecutor(@NonNull Transformation asTransformation) throws Exception {
+		public @NonNull BasicQVTiExecutor createInterpretedExecutor(@NonNull ImperativeTransformation asTransformation) throws Exception {
 			interpretedExecutor = new QVTiIncrementalExecutor(getEnvironmentFactory(), asTransformation, QVTiIncrementalExecutor.Mode.LAZY);
 			return interpretedExecutor;
 		}
@@ -405,7 +406,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		MyQVT myQVT = new MyQVT("forward2reverse");
 		//		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 		try {
-			Transformation asTransformation = myQVT.compileTransformation("Forward2Reverse.qvtr", "reverse", PROJECT_NAME + ".Forward2Reverse", "http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/forward2reverse/Forward2Reverse");
+			ImperativeTransformation asTransformation = myQVT.compileTransformation("Forward2Reverse.qvtr", "reverse", PROJECT_NAME + ".Forward2Reverse", "http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/forward2reverse/Forward2Reverse");
 			//
 			myQVT.createInterpretedExecutor(asTransformation);
 			myQVT.loadInput("forward", "EmptyList.xmi");
@@ -483,7 +484,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		MyQVT myQVT = new MyQVT("hstm2fstm");
 		//		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 		try {
-			Transformation asTransformation = myQVT.compileTransformation("HierarchicalStateMachine2FlatStateMachine.qvtr", "flat", PROJECT_NAME + ".HierarchicalStateMachine2FlatStateMachine", "http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/hstm2fstm/HierarchicalStateMachine2FlatStateMachine");
+			ImperativeTransformation asTransformation = myQVT.compileTransformation("HierarchicalStateMachine2FlatStateMachine.qvtr", "flat", PROJECT_NAME + ".HierarchicalStateMachine2FlatStateMachine", "http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/hstm2fstm/HierarchicalStateMachine2FlatStateMachine");
 			//
 			myQVT.createInterpretedExecutor(asTransformation);
 			myQVT.loadInput("hier", "MiniModel.xmi");
@@ -559,7 +560,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		MyQVT myQVT = new MyQVT("seq2stm");
 		//		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 		try {
-			Transformation asTransformation = myQVT.compileTransformation("SeqToStm.qvtr", "stm", PROJECT_NAME + ".seq2stm", "http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/seq2stm/SeqToStm");
+			ImperativeTransformation asTransformation = myQVT.compileTransformation("SeqToStm.qvtr", "stm", PROJECT_NAME + ".seq2stm", "http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/seq2stm/SeqToStm");
 			myQVT.createInterpretedExecutor(asTransformation);
 			myQVT.loadInput("seqDgm", "Seq.xmi");
 			myQVT.createModel(QVTimperativeUtil.MIDDLE_DOMAIN_NAME, "Seq2Stmc_trace.xmi");

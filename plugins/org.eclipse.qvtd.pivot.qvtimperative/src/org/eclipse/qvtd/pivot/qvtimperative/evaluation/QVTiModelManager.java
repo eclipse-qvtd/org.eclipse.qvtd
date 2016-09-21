@@ -36,9 +36,9 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.MetamodelManager;
 import org.eclipse.ocl.pivot.utilities.ParserException;
 import org.eclipse.ocl.pivot.utilities.XMIUtil;
-import org.eclipse.qvtd.pivot.qvtbase.Transformation;
-import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTransformationInstance;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTypedModelInstance;
 import org.eclipse.qvtd.runtime.evaluation.TransformationInstance;
@@ -56,10 +56,10 @@ public class QVTiModelManager extends AbstractModelManager
 	protected final @NonNull MetamodelManager metamodelManager;
 	// TODO how to manage aliases?
 	/** Map a typed model to its resource (model). */
-	private @NonNull Map<@NonNull TypedModel, @NonNull Resource> modelResourceMap = new HashMap<>();
-	private @NonNull Map<@NonNull Resource, @NonNull TypedModel> resource2typedModel = new HashMap<>();
+	private @NonNull Map<@NonNull ImperativeTypedModel, @NonNull Resource> modelResourceMap = new HashMap<>();
+	private @NonNull Map<@NonNull Resource, @NonNull ImperativeTypedModel> resource2typedModel = new HashMap<>();
 
-	private @NonNull Map<@NonNull TypedModel, @NonNull List<@NonNull EObject>> modelElementsMap = new HashMap<>();
+	private @NonNull Map<@NonNull ImperativeTypedModel, @NonNull List<@NonNull EObject>> modelElementsMap = new HashMap<>();
 
 	/**
 	 * The types upon which execution of the transformation may invoke allInstances().
@@ -83,7 +83,7 @@ public class QVTiModelManager extends AbstractModelManager
 	/**
 	 * The run-time instance of each TypedModel.
 	 */
-	private /*@LazyNonNull*/ Map<@NonNull TypedModel, @NonNull TypedModelInstance> typedModel2typedModelInstance = null;
+	private /*@LazyNonNull*/ Map<@NonNull ImperativeTypedModel, @NonNull TypedModelInstance> typedModel2typedModelInstance = null;
 
 	/**
 	 * Instantiates a new QVTi Domain Manager. Responsible for creating new
@@ -109,7 +109,7 @@ public class QVTiModelManager extends AbstractModelManager
 	 * @param model the resource
 	 */
 	// TODO support multiple model instances by alias
-	public void addModel(@NonNull TypedModel typedModel, @NonNull Resource model) {
+	public void addModel(@NonNull ImperativeTypedModel typedModel, @NonNull Resource model) {
 		modelResourceMap.put(typedModel, model);
 		resource2typedModel.put(model, typedModel);
 	}
@@ -120,7 +120,7 @@ public class QVTiModelManager extends AbstractModelManager
 	 * @param tm the TypeModel
 	 * @param element the element
 	 */
-	public void addModelElement(@NonNull TypedModel model, @NonNull Object element) {
+	public void addModelElement(@NonNull ImperativeTypedModel model, @NonNull Object element) {
 		List<@NonNull EObject> elements = modelElementsMap.get(model);
 		if (elements == null) {
 			Resource resource = modelResourceMap.get(model);
@@ -154,8 +154,8 @@ public class QVTiModelManager extends AbstractModelManager
 	@Override
 	public @NonNull Set<@NonNull Object> get(org.eclipse.ocl.pivot.@NonNull Class type) {
 		Set<@NonNull Object> elements = new HashSet<>();
-		for (@NonNull TypedModel typedModel : ClassUtil.nullFree(transformationAnalysis.getTransformation().getModelParameter())) {
-			if (((ImperativeTypedModel)typedModel).isIsChecked()) {
+		for (@NonNull ImperativeTypedModel typedModel : QVTimperativeUtil.getOwnedTypedModels(transformationAnalysis.getTransformation())) {
+			if (typedModel.isIsChecked()) {
 				TypedModelInstance typedModelInstance = getTypedModelInstance(typedModel);
 				elements.addAll(typedModelInstance.getObjectsOfKind(type));
 			}
@@ -179,7 +179,7 @@ public class QVTiModelManager extends AbstractModelManager
 	 * @param type the type of the elements that are retrieved
 	 * @return the instances
 	 */
-	public @NonNull List<@NonNull Object> getElementsByType(@Nullable TypedModel model, @NonNull Type type) {
+	public @NonNull List<@NonNull Object> getElementsByType(@Nullable ImperativeTypedModel model, @NonNull Type type) {
 		List<@NonNull Object> elements = new ArrayList<>();
 		// Is the TypedModel the middle or output, hence we have elements in the elementsMap
 		if (modelElementsMap.containsKey(model)) {
@@ -230,11 +230,11 @@ public class QVTiModelManager extends AbstractModelManager
 	 * @param typedModel the typed model
 	 * @return the resource
 	 */
-	public Resource getModel(@NonNull TypedModel typedModel) {
+	public Resource getModel(@NonNull ImperativeTypedModel typedModel) {
 		return modelResourceMap.get(typedModel);
 	}
 
-	public @NonNull Collection<@NonNull EObject> getRootObjects(@NonNull TypedModel typedModel) {
+	public @NonNull Collection<@NonNull EObject> getRootObjects(@NonNull ImperativeTypedModel typedModel) {
 		return ClassUtil.nonNullState(modelResourceMap.get(typedModel)).getContents();
 	}
 
@@ -242,7 +242,7 @@ public class QVTiModelManager extends AbstractModelManager
 		return transformationAnalysis;
 	}
 
-	public List<EObject> getTypeModelEObjectList(TypedModel model) {
+	public List<EObject> getTypeModelEObjectList(@NonNull ImperativeTypedModel model) {
 
 		if (modelElementsMap.containsKey(model)) {
 			return  modelElementsMap.get(model);
@@ -252,7 +252,7 @@ public class QVTiModelManager extends AbstractModelManager
 
 	}
 
-	public @Nullable TypedModel getTypedModel(@NonNull Resource resource) {
+	public @Nullable ImperativeTypedModel getTypedModel(@NonNull Resource resource) {
 		return resource2typedModel.get(resource);
 	}
 
@@ -295,9 +295,9 @@ public class QVTiModelManager extends AbstractModelManager
 	}
 
 	public void saveContents() {
-		for (Map.Entry<TypedModel, Resource> entry : modelResourceMap.entrySet()) {
+		for (Map.Entry<@NonNull ImperativeTypedModel, @NonNull Resource> entry : modelResourceMap.entrySet()) {
 			Resource model = entry.getValue();
-			TypedModel key = entry.getKey();
+			ImperativeTypedModel key = entry.getKey();
 			if (modelElementsMap.containsKey(key)) {       // Only save modified models
 				// Move elements without container to the resource contents
 				List<EObject> elements = modelElementsMap.get(key);
@@ -325,9 +325,9 @@ public class QVTiModelManager extends AbstractModelManager
 	 */
 	public void saveModels(@Nullable Map<?, ?> savingOptions) {
 		saveContents();
-		for (Map.Entry<TypedModel, Resource> entry : modelResourceMap.entrySet()) {
+		for (Map.Entry<@NonNull ImperativeTypedModel, @NonNull Resource> entry : modelResourceMap.entrySet()) {
 			Resource model = entry.getValue();
-			TypedModel key = entry.getKey();
+			ImperativeTypedModel key = entry.getKey();
 			if (modelElementsMap.containsKey(key)) {       // Only save modified models
 				try{
 					model.save(savingOptions);
@@ -370,9 +370,9 @@ public class QVTiModelManager extends AbstractModelManager
 	public static class QVTiTransformationInstance extends AbstractTransformationInstance
 	{
 		protected final @NonNull QVTiModelManager modelManager;
-		protected final @NonNull Transformation transformation;
+		protected final @NonNull ImperativeTransformation transformation;
 
-		public QVTiTransformationInstance(@NonNull QVTiModelManager modelManager, @NonNull Transformation transformation) {
+		public QVTiTransformationInstance(@NonNull QVTiModelManager modelManager, @NonNull ImperativeTransformation transformation) {
 			this.modelManager = modelManager;
 			this.transformation = transformation;
 		}
@@ -386,7 +386,7 @@ public class QVTiModelManager extends AbstractModelManager
 			return transformation.getName();
 		}
 
-		public @NonNull Transformation getTransformation() {
+		public @NonNull ImperativeTransformation getTransformation() {
 			return transformation;
 		}
 	}
@@ -394,11 +394,11 @@ public class QVTiModelManager extends AbstractModelManager
 	public static class QVTiTypedModelInstance extends AbstractTypedModelInstance
 	{
 		protected final @NonNull QVTiModelManager modelManager;
-		protected final @NonNull TypedModel typedModel;
+		protected final @NonNull ImperativeTypedModel typedModel;
 		private /*@LazyNonNull*/ Map<@NonNull Type, @NonNull List<@NonNull Object>> kind2instances = null;
 		private /*@LazyNonNull*/ Map<@NonNull Type, @NonNull List<@NonNull Object>> type2instances = null;
 
-		public QVTiTypedModelInstance(@NonNull QVTiModelManager modelManager, @NonNull TypedModel typedModel) {
+		public QVTiTypedModelInstance(@NonNull QVTiModelManager modelManager, @NonNull ImperativeTypedModel typedModel) {
 			this.modelManager = modelManager;
 			this.typedModel = typedModel;
 		}
@@ -460,12 +460,12 @@ public class QVTiModelManager extends AbstractModelManager
 			}
 		}
 
-		public @NonNull TypedModel getTypedModel() {
+		public @NonNull ImperativeTypedModel getTypedModel() {
 			return typedModel;
 		}
 	}
 
-	public @NonNull TransformationInstance getTransformationInstance(@NonNull Transformation transformation) {
+	public @NonNull TransformationInstance getTransformationInstance(@NonNull ImperativeTransformation transformation) {
 		TransformationInstance transformationInstance2 = transformationInstance;
 		if (transformationInstance2 == null) {
 			transformationInstance = transformationInstance2 = new QVTiTransformationInstance(this, transformation);
@@ -473,7 +473,7 @@ public class QVTiModelManager extends AbstractModelManager
 		return transformationInstance2;
 	}
 
-	public @NonNull TypedModelInstance getTypedModelInstance(@NonNull TypedModel typedModel) {
+	public @NonNull TypedModelInstance getTypedModelInstance(@NonNull ImperativeTypedModel typedModel) {
 		if (typedModel2typedModelInstance == null) {
 			typedModel2typedModelInstance = new HashMap<>();
 		}

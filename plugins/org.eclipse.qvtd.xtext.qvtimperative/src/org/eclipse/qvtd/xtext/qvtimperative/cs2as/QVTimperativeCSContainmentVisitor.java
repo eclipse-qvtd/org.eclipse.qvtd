@@ -37,7 +37,6 @@ import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
-import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.AppendParameter;
@@ -48,6 +47,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
@@ -96,7 +96,7 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 
 		@Override
 		public BasicContinuation<?> execute() {
-			TypedModel pTypedModel = PivotUtil.getPivot(TypedModel.class, csElement);
+			ImperativeTypedModel pTypedModel = PivotUtil.getPivot(ImperativeTypedModel.class, csElement);
 			if (pTypedModel != null) {
 				PivotUtilInternal.refreshList(pTypedModel.getUsedPackage(), csElement.getImports());
 			}
@@ -388,10 +388,10 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 		if (pathName != null) {
 			CS2AS.setElementType(pathName, PivotPackage.Literals.NAMESPACE, csElement, null);
 		}
-		@SuppressWarnings("null") @NonNull EClass eClass = QVTbasePackage.Literals.TRANSFORMATION;
-		Transformation asTransformation = refreshNamedElement(Transformation.class, eClass, csElement);
+		@SuppressWarnings("null") @NonNull EClass eClass = QVTimperativePackage.Literals.IMPERATIVE_TRANSFORMATION;
+		ImperativeTransformation asTransformation = refreshNamedElement(ImperativeTransformation.class, eClass, csElement);
 		refreshClassifier(asTransformation, csElement);
-		context.refreshPivotList(TypedModel.class, asTransformation.getModelParameter(), csElement.getOwnedDirections());
+		context.refreshPivotList(ImperativeTypedModel.class, asTransformation.getModelParameter(), csElement.getOwnedDirections());
 		QVTbaseUtil.getContextVariable(standardLibrary, asTransformation);
 		return null;
 	}

@@ -40,10 +40,11 @@ import org.eclipse.ocl.pivot.utilities.XMIUtil;
 import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
 import org.eclipse.ocl.xtext.completeocl.validation.CompleteOCLEObjectValidator;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
-import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphMLBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphMLStringBuilder;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
@@ -93,7 +94,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 	{
 
 		/** The typed model validation resource map. */
-		protected final @NonNull Map<TypedModel, Resource> typedModelValidationResourceMap = new HashMap<TypedModel, Resource>();
+		protected final @NonNull Map<ImperativeTypedModel, Resource> typedModelValidationResourceMap = new HashMap<>();
 
 		/** The file name prefix. */
 		private final @NonNull String fileNamePrefix;
@@ -149,7 +150,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 		 * @param modelFileName the model file name
 		 */
 		public void loadReference(@NonNull String name, @NonNull String modelFileName) {
-			TypedModel typedModel = NameUtil.getNameable(transformation.getModelParameter(), name);
+			ImperativeTypedModel typedModel = (ImperativeTypedModel) NameUtil.getNameable(transformation.getModelParameter(), name);
 			if (typedModel == null) {
 				throw new IllegalStateException("Unknown TypedModel '" + name + "'");
 			}
@@ -173,8 +174,8 @@ public class QVTiInterpreterTests extends LoadTestCase
 				Map<Object, Object> saveOptions = XMIUtil.createSaveOptions();
 				saveOptions.put(XMIResource.OPTION_SCHEMA_LOCATION_IMPLEMENTATION, Boolean.TRUE);
 				saveModels(getProjectFileURI(fileNamePrefix + "middle.xmi"), saveOptions);
-				for (Entry<TypedModel, Resource> entry : typedModelValidationResourceMap.entrySet()) { // Validate against reference models
-					TypedModel typedModel = ClassUtil.nonNullState(entry.getKey());
+				for (Entry<ImperativeTypedModel, Resource> entry : typedModelValidationResourceMap.entrySet()) { // Validate against reference models
+					ImperativeTypedModel typedModel = ClassUtil.nonNullState(entry.getKey());
 					Resource expectedModel = entry.getValue();
 					assert expectedModel != null;
 					Resource actualModel = getModelManager().getModel(typedModel);
@@ -486,7 +487,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 
 		QVTiEnvironmentFactory environmentFactory = myQVT.getEnvironmentFactory();
 		BasicQVTiExecutor testExecutor =  new BasicQVTiExecutor(environmentFactory,
-			ClassUtil.nonNullState(loadTransformation(environmentFactory.getMetamodelManager(), txURI)));
+			(@NonNull ImperativeTransformation) ClassUtil.nonNullState(loadTransformation(environmentFactory.getMetamodelManager(), txURI)));
 
 		URI csModelURI = baseURI.appendSegment("example_input.xmi");
 		URI asModelURI = baseURI.appendSegment("example_output.xmi");

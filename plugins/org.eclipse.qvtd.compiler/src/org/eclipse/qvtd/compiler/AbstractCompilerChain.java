@@ -57,6 +57,7 @@ import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.QVTcoreDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.RootDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcEnvironmentFactory;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.schedule.Schedule;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
@@ -292,14 +293,14 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 			super(compilerChain, QVTI_STEP);
 		}
 
-		public @NonNull Transformation execute(@NonNull RootScheduledRegion rootRegion) throws IOException {
+		public @NonNull ImperativeTransformation execute(@NonNull RootScheduledRegion rootRegion) throws IOException {
 			// Default QVTi strategy ok.
 			Resource iResource = createResource();
 			QVTs2QVTi tx = new QVTs2QVTi(this, environmentFactory);
 			Model model = tx.transform(rootRegion);
 			iResource.getContents().add(model);
 			saveResource(iResource);
-			Transformation transformation = getTransformation(iResource);
+			ImperativeTransformation transformation = (ImperativeTransformation) getTransformation(iResource);
 			throwCompilerChainExceptionForErrors();
 			return transformation;
 		}
@@ -446,14 +447,14 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 
 	@Override
 	public @NonNull Class<? extends Transformer> build(@NonNull String enforcedOutputName, @NonNull String ... genModelFiles) throws Exception {
-		Transformation asTransformation = compile(enforcedOutputName);
+		ImperativeTransformation asTransformation = compile(enforcedOutputName);
 		JavaResult javaResult = qvti2java(asTransformation, genModelFiles);
 		Class<? extends Transformer> txClass = java2class(javaResult);
 		return txClass;
 	}
 
 	@Override
-	public abstract @NonNull Transformation compile(@NonNull String enforcedOutputName) throws IOException;
+	public abstract @NonNull ImperativeTransformation compile(@NonNull String enforcedOutputName) throws IOException;
 
 	@Override
 	public void compiled(@NonNull String stepKey, @NonNull Object object) {
@@ -578,7 +579,7 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 		return qvti2javaCompilerStep.execute(txURI, asTransformation, genModelFiles);
 	}
 
-	protected @NonNull Transformation qvtp2qvti(@NonNull Resource pResource) throws IOException {
+	protected @NonNull ImperativeTransformation qvtp2qvti(@NonNull Resource pResource) throws IOException {
 		RootDomainUsageAnalysis domainAnalysis = new QVTcoreDomainUsageAnalysis(environmentFactory);
 		ClassRelationships classRelationships = new ClassRelationships(environmentFactory);
 		QVTp2QVTg qvtp2qvtg = new QVTp2QVTg(domainAnalysis, classRelationships);

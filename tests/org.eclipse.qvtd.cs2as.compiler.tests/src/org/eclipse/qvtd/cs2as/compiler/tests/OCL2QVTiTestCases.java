@@ -46,6 +46,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbase;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePivotStandaloneSetup;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiIncrementalExecutor;
@@ -138,7 +139,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		// Execute the transformation with the CGed transformation
 		//
 
-		protected void executeModelsTX_Interpreted(@NonNull Transformation tx, String modelName) throws Exception {
+		protected void executeModelsTX_Interpreted(@NonNull ImperativeTransformation tx, String modelName) throws Exception {
 
 			URI samplesBaseUri = baseURI.appendSegment("samples");
 			URI csModelURI = samplesBaseUri.appendSegment(String.format("%s_input.xmi", modelName));
@@ -161,14 +162,14 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 			assertSameModel(expected, actual);
 		}
 
-		protected @NonNull Transformation executeNewOCL2QVTi_CompilerChain (@NonNull String oclDoc, String... extendedOclDocs) throws IOException {
+		protected @NonNull ImperativeTransformation executeNewOCL2QVTi_CompilerChain (@NonNull String oclDoc, String... extendedOclDocs) throws IOException {
 			URI mainOclDocURI = baseURI.appendSegment(oclDoc);
 			URI[] oclDocURIs = new URI[extendedOclDocs.length];
 			for (int i=0; i < extendedOclDocs.length; i++) {
 				oclDocURIs[i] = baseURI.appendSegment(extendedOclDocs[i]);
 			}
 			OCL2QVTiCompilerChain compiler = new OCL2QVTiCompilerChain(this, createTestCasesCompilerOptions(), mainOclDocURI, oclDocURIs);
-			Transformation qvtiTransf = compiler.compile();
+			ImperativeTransformation qvtiTransf = compiler.compile();
 			URI txURI = qvtiTransf.eResource().getURI();
 			if (txURI != null) {
 				URI inputURI = txURI;
@@ -293,7 +294,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		myQVT = new MyQVT("example1");
 		myQVT.loadEcoreFile("SourceMM1.ecore", SourcePackage.eINSTANCE);
 		myQVT.loadEcoreFile("TargetMM1.ecore", TargetPackage.eINSTANCE);
-		Transformation tx = getTransformation(myQVT.getMetamodelManager().getASResourceSet(), txURI);
+		ImperativeTransformation tx = getTransformation(myQVT.getMetamodelManager().getASResourceSet(), txURI);
 		//		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 		myQVT.executeModelsTX_Interpreted(tx, "model1");
 		myQVT.executeModelsTX_Interpreted(tx, "model2");
@@ -364,7 +365,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		myQVT = new MyQVT("example2");
 		myQVT.loadEcoreFile("ClassesCS.ecore", ClassescsPackage.eINSTANCE);
 		myQVT.loadEcoreFile("Classes.ecore", ClassesPackage.eINSTANCE);
-		Transformation tx = getTransformation(myQVT.getMetamodelManager().getASResourceSet(), txURI);
+		ImperativeTransformation tx = getTransformation(myQVT.getMetamodelManager().getASResourceSet(), txURI);
 		//		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 		myQVT.executeModelsTX_Interpreted(tx, "model1");
 		myQVT.executeModelsTX_Interpreted(tx, "model2");
@@ -433,7 +434,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		OCLstdlibPackage.eINSTANCE.getName();
 		myQVT.loadEcoreFile("ClassesCS.ecore", ClassescsPackage.eINSTANCE);
 		myQVT.loadEcoreFile("Classes.ecore", ClassesPackage.eINSTANCE);
-		Transformation tx = getTransformation(myQVT.getMetamodelManager().getASResourceSet(), txURI);
+		ImperativeTransformation tx = getTransformation(myQVT.getMetamodelManager().getASResourceSet(), txURI);
 		myQVT.executeModelsTX_Interpreted(tx, "model1V2");
 		myQVT.executeModelsTX_Interpreted(tx, "model2V2");
 		myQVT.executeModelsTX_Interpreted(tx, "model3V2");
@@ -498,7 +499,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 	public void testExample3_Interpreted() throws Exception {
 		MyQVT myQVT = new MyQVT("example3");
 		myQVT.loadGenModels("KiamaAS.genmodel", "KiamaCS.genmodel");
-		Transformation tx = myQVT.executeNewOCL2QVTi_CompilerChain("KiamaRewrite.ocl");
+		ImperativeTransformation tx = myQVT.executeNewOCL2QVTi_CompilerChain("KiamaRewrite.ocl");
 		myQVT.executeModelsTX_Interpreted(tx, "model1");
 		myQVT.dispose();
 	}
@@ -537,7 +538,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 	public void testExample4_Interpreted() throws Exception {
 		MyQVT myQVT = new MyQVT("example4");
 		myQVT.loadGenModels("SimplerKiamaAS.genmodel", "SimplerKiamaCS.genmodel");
-		Transformation qvtiTransf = myQVT.executeNewOCL2QVTi_CompilerChain("SimplerKiama.ocl");
+		ImperativeTransformation qvtiTransf = myQVT.executeNewOCL2QVTi_CompilerChain("SimplerKiama.ocl");
 		URI txURI = qvtiTransf.eResource().getURI();
 
 		myQVT.dispose();
@@ -545,7 +546,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		myQVT.loadEcoreFile("SimplerKiamaCS.ecore", KiamacsPackage.eINSTANCE);
 		myQVT.loadEcoreFile("SimplerKiamaAS.ecore", KiamaasPackage.eINSTANCE);
 
-		Transformation tx = getTransformation(myQVT.getMetamodelManager().getASResourceSet(), txURI);
+		ImperativeTransformation tx = getTransformation(myQVT.getMetamodelManager().getASResourceSet(), txURI);
 		//		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 		// FIXME BUG 484278 model0 has an invalid model TopCS.node[1] has a null value.
 		//    	executeModelsTX_Interpreted(myQVT, qvtiTransf, baseURI, "model0");
@@ -590,7 +591,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 	public void testExample5_Interpreted() throws Exception {
 		MyQVT myQVT = new MyQVT("example5");
 		myQVT.loadGenModels("SourceBaseMM.genmodel", "TargetBaseMM.genmodel");
-		Transformation tx = myQVT.executeNewOCL2QVTi_CompilerChain("Source2TargetBase.ocl");
+		ImperativeTransformation tx = myQVT.executeNewOCL2QVTi_CompilerChain("Source2TargetBase.ocl");
 		myQVT.executeModelsTX_Interpreted(tx, "model1");
 
 		myQVT.dispose();
@@ -628,15 +629,15 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		// We don't generate QVTi models anymore. Perhaps do a QVTc validation if there is a QVTcore.ocl file
 	}
 
-	protected @NonNull Transformation getTransformation(ResourceSet rSet, URI qvtiURI) {
+	protected @NonNull ImperativeTransformation getTransformation(ResourceSet rSet, URI qvtiURI) {
 
 		Resource resource = rSet.getResource(qvtiURI, true);
 		for (EObject eObject : resource.getContents()) {
 			if (eObject instanceof ImperativeModel) {
 				for (org.eclipse.ocl.pivot.Package pPackage : ((ImperativeModel)eObject).getOwnedPackages()) {
 					for (org.eclipse.ocl.pivot.Class pClass : pPackage.getOwnedClasses()) {
-						if (pClass instanceof Transformation) {
-							return  (Transformation) pClass;
+						if (pClass instanceof ImperativeTransformation) {
+							return  (ImperativeTransformation) pClass;
 						}
 					}
 				}

@@ -45,8 +45,8 @@ import org.eclipse.qvtd.debug.core.QVTiDebugTarget;
 import org.eclipse.qvtd.debug.evaluator.QVTiVMRootEvaluationEnvironment;
 import org.eclipse.qvtd.debug.launching.QVTiLaunchConstants;
 import org.eclipse.qvtd.debug.vm.QVTiVMVirtualMachine;
-import org.eclipse.qvtd.pivot.qvtbase.Transformation;
-import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 
 /**
@@ -206,10 +206,10 @@ public class QVTiDebuggerTests extends XtextTestCase
 		QVTiVMVirtualMachine vm = (QVTiVMVirtualMachine) debugTarget.getVM();
 		QVTiVMRootEvaluationEnvironment vmRootEvaluationEnvironment = (QVTiVMRootEvaluationEnvironment) vm.getEvaluationEnv();
 		assert vmRootEvaluationEnvironment != null;
-		Transformation asTransformation = vmRootEvaluationEnvironment.getDebuggableElement();
-		TypedModel inTypedModel = asTransformation.getModelParameter(inName);
-		TypedModel middleTypedModel = asTransformation.getModelParameter(middleName);
-		TypedModel outTypedModel = asTransformation.getModelParameter(outName);
+		ImperativeTransformation asTransformation = (ImperativeTransformation) vmRootEvaluationEnvironment.getDebuggableElement();
+		ImperativeTypedModel inTypedModel = QVTimperativeUtil.getOwnedTypedModel(asTransformation, inName);
+		ImperativeTypedModel middleTypedModel = QVTimperativeUtil.getOwnedTypedModel(asTransformation, middleName);
+		ImperativeTypedModel outTypedModel = QVTimperativeUtil.getOwnedTypedModel(asTransformation, outName);
 		Variable asTransformationVariable = asTransformation.getOwnedContext();
 		Variable asInVariable = inTypedModel.getOwnedContext();
 		Variable asMiddleVariable = middleTypedModel.getOwnedContext();

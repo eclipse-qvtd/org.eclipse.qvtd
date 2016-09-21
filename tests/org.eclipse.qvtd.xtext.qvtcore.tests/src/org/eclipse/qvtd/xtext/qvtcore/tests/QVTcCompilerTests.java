@@ -40,6 +40,7 @@ import org.eclipse.qvtd.compiler.QVTcCompilerChain;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.QVTp2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.splitter.Splitter;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiIncrementalExecutor;
@@ -136,7 +137,7 @@ public class QVTcCompilerTests extends LoadTestCase
 			return txClass;
 		}
 
-		public @NonNull Transformation compileTransformation(@NonNull String testFileName, @NonNull String outputName) throws Exception {
+		public @NonNull ImperativeTransformation compileTransformation(@NonNull String testFileName, @NonNull String outputName) throws Exception {
 			Map<@NonNull String, @Nullable Map<CompilerChain.@NonNull Key<Object>, @Nullable Object>> options = new HashMap<@NonNull String, @Nullable Map<CompilerChain.@NonNull Key<Object>, @Nullable Object>>();
 			QVTcCompilerChain.setOption(options, CompilerChain.DEFAULT_STEP, CompilerChain.DEBUG_KEY, true);
 			QVTcCompilerChain.setOption(options, CompilerChain.DEFAULT_STEP, CompilerChain.SAVE_OPTIONS_KEY, TestsXMLUtil.defaultSavingOptions);
@@ -179,7 +180,7 @@ public class QVTcCompilerTests extends LoadTestCase
 			return generatedExecutor = new QVTiTransformationExecutor(getEnvironmentFactory(), txClass);
 		}
 
-		public @NonNull BasicQVTiExecutor createInterpretedExecutor(@NonNull Transformation asTransformation) throws Exception {
+		public @NonNull BasicQVTiExecutor createInterpretedExecutor(@NonNull ImperativeTransformation asTransformation) throws Exception {
 			interpretedExecutor = new QVTiIncrementalExecutor(getEnvironmentFactory(), asTransformation, QVTiIncrementalExecutor.Mode.LAZY);
 			return interpretedExecutor;
 		}
@@ -318,7 +319,7 @@ public class QVTcCompilerTests extends LoadTestCase
 		MyQVT myQVT = new MyQVT("families2persons");
 		//    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 		try {
-			Transformation asTransformation = myQVT.compileTransformation("Families2Persons.qvtc", "person");
+			ImperativeTransformation asTransformation = myQVT.compileTransformation("Families2Persons.qvtc", "person");
 			myQVT.createInterpretedExecutor(asTransformation);
 			myQVT.loadInput("family", "Families.xmi");
 			myQVT.createModel(QVTimperativeUtil.MIDDLE_DOMAIN_NAME, "Families2Persons_trace.xmi");
@@ -376,7 +377,7 @@ public class QVTcCompilerTests extends LoadTestCase
 		MyQVT myQVT = new MyQVT(testFolderName, List2listPackage.eINSTANCE, DoublylinkedlistPackage.eINSTANCE);
 		//		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 		try {
-			Transformation asTransformation = myQVT.compileTransformation("Forward2Reverse.qvtc", "reverse");
+			ImperativeTransformation asTransformation = myQVT.compileTransformation("Forward2Reverse.qvtc", "reverse");
 			//
 			myQVT.createInterpretedExecutor(asTransformation);
 			myQVT.loadInput("forward", "EmptyList.xmi");
@@ -472,7 +473,7 @@ public class QVTcCompilerTests extends LoadTestCase
 		MyQVT myQVT = new MyQVT(testFolderName);
 		//		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 		try {
-			Transformation asTransformation = myQVT.compileTransformation("HSV2HLS.qvtc", "hls");
+			ImperativeTransformation asTransformation = myQVT.compileTransformation("HSV2HLS.qvtc", "hls");
 			myQVT.createInterpretedExecutor(asTransformation);
 			myQVT.loadInput("hsv", "SolarizedHSV.xmi");
 			myQVT.createModel(QVTimperativeUtil.MIDDLE_DOMAIN_NAME, "HSV2HLS_trace.xmi");
@@ -522,7 +523,7 @@ public class QVTcCompilerTests extends LoadTestCase
 		MyQVT myQVT = new MyQVT(testFolderName);
 		//    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 		try {
-			Transformation asTransformation = myQVT.compileTransformation("SimpleUML2RDBMS.qvtcas", "rdbms");
+			ImperativeTransformation asTransformation = myQVT.compileTransformation("SimpleUML2RDBMS.qvtcas", "rdbms");
 			myQVT.createInterpretedExecutor(asTransformation);
 			myQVT.loadInput("uml", "SimplerUMLPeople.xmi");
 			myQVT.createModel(QVTimperativeUtil.MIDDLE_DOMAIN_NAME, "SimplerUML2RDBMS_trace.xmi");
@@ -607,7 +608,7 @@ public class QVTcCompilerTests extends LoadTestCase
 		MyQVT myQVT = new MyQVT(testFolderName);
 		//    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 		try {
-			Transformation asTransformation = myQVT.compileTransformation("Upper2Lower.qvtcas", "lowerGraph");
+			ImperativeTransformation asTransformation = myQVT.compileTransformation("Upper2Lower.qvtcas", "lowerGraph");
 			myQVT.createInterpretedExecutor(asTransformation);
 			myQVT.loadInput("upperGraph", "SimpleGraph.xmi");
 			myQVT.createModel(QVTimperativeUtil.MIDDLE_DOMAIN_NAME, "Upper2Lower_trace.xmi");

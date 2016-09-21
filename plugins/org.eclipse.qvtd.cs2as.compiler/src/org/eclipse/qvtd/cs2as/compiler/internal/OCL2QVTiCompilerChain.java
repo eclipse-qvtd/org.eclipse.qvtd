@@ -26,7 +26,7 @@ import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.compiler.AbstractCompilerChain;
 import org.eclipse.qvtd.compiler.AbstractCompilerStep;
 import org.eclipse.qvtd.compiler.CompilerChain;
-import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
 
 public class OCL2QVTiCompilerChain extends AbstractCompilerChain {
@@ -98,16 +98,16 @@ public class OCL2QVTiCompilerChain extends AbstractCompilerChain {
 	}
 
 	@Override
-	public @NonNull Transformation compile(@NonNull String enforcedOutputName) throws IOException {
+	public @NonNull ImperativeTransformation compile(@NonNull String enforcedOutputName) throws IOException {
 		return qvtp2qvti(ocl2qvtpCompilerStep.execute());
 	}
 
-	public @NonNull Transformation compile() throws IOException {
+	public @NonNull ImperativeTransformation compile() throws IOException {
 		return compile("");
 	}
 
 	@Override
-	protected @NonNull Transformation qvtp2qvti(@NonNull Resource pResource) throws IOException {
+	protected @NonNull ImperativeTransformation qvtp2qvti(@NonNull Resource pResource) throws IOException {
 		rewriteSafeNavigations(pResource);
 		return super.qvtp2qvti(pResource);
 	}

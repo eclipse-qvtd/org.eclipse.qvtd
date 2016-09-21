@@ -108,6 +108,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
@@ -478,7 +479,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 		CGGuardVariable cgGuardVariable = (CGGuardVariable) getVariablesStack().getParameter(asVariable);
 		assert cgGuardVariable == null;
 		boolean isConnectionVariable = asVariable instanceof ConnectionVariable;
-		boolean isPrimitiveVariable = QVTimperativeUtil.isPrimitiveVariable(asVariable);
+		boolean isPrimitiveVariable = QVTimperativeUtil.isPrimitiveVariable(asVariable);	// FIXME obsolete ??
 		if (isConnectionVariable) {
 			cgGuardVariable = QVTiCGModelFactory.eINSTANCE.createCGConnectionVariable();
 		}
@@ -510,7 +511,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 				cgVariable = QVTiCGModelFactory.eINSTANCE.createCGRealizedVariable();
 			}
 			setAst(cgVariable, pNewStatement);
-			TypedModel asTypedModel = ClassUtil.nonNullState(pNewStatement.getReferredTypedModel());
+			ImperativeTypedModel asTypedModel = ClassUtil.nonNullState(pNewStatement.getReferredTypedModel());
 			CGTypedModel cgTypedModel = ClassUtil.nonNullState(analyzer.getTypedModel(asTypedModel));
 			cgVariable.setTypedModel(cgTypedModel);
 			variablesStack.putVariable(pNewStatement, cgVariable);
@@ -520,19 +521,12 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 
 	protected @NonNull CGTypedModel getTypedModel(@NonNull VariableDeclaration pVariable) {
 		if (pVariable instanceof GuardParameter) {
-			TypedModel referredTypedModel = ClassUtil.nonNullState(((GuardParameter)pVariable).getReferredTypedModel());
+			ImperativeTypedModel referredTypedModel = ClassUtil.nonNullState(((GuardParameter)pVariable).getReferredTypedModel());
 			return ClassUtil.nonNullState(analyzer.getTypedModel(referredTypedModel));
 		}
-		Domain pDomain = QVTimperativeUtil.getContainingDomain(pVariable);
-		TypedModel asTypedModel = null;
-		if (pDomain != null) {
-			asTypedModel = ClassUtil.nonNullState(pDomain.getTypedModel());
-		}
-		else {
-			Transformation pTransformation = QVTimperativeUtil.getContainingTransformation(pVariable);
-			assert pTransformation != null;
-			asTypedModel = ClassUtil.nonNullState(pTransformation.getModelParameter(null));
-		}
+		Transformation pTransformation = QVTimperativeUtil.getContainingTransformation(pVariable);
+		assert pTransformation != null;
+		ImperativeTypedModel asTypedModel = (ImperativeTypedModel) ClassUtil.nonNullState(pTransformation.getModelParameter(null));
 		return ClassUtil.nonNullState(analyzer.getTypedModel(asTypedModel));
 	}
 
@@ -833,6 +827,30 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 	}
 
 	@Override
+	public @Nullable CGNamedElement visitImperativeTransformation(@NonNull ImperativeTransformation asTransformation) {
+		/*QVTiTransformationAnalysis transformationAnalysis =*/ analyzer.getCodeGenerator().getTransformationAnalysis(asTransformation);
+		CGTransformation cgTransformation = QVTiCGModelFactory.eINSTANCE.createCGTransformation();
+		setAst(cgTransformation, asTransformation);
+		pushCurrentClass(cgTransformation);
+		List<CGTypedModel> cgTypedModels = cgTransformation.getTypedModels();
+		for (@NonNull ImperativeTypedModel asTypedModel : QVTimperativeUtil.getOwnedTypedModels(asTransformation)) {
+			CGTypedModel cgTypedModel = doVisit(CGTypedModel.class, asTypedModel);
+			cgTypedModel.setModelIndex(cgTypedModels.size());
+			cgTypedModels.add(cgTypedModel);
+		}
+		for (@NonNull Mapping asMapping : QVTimperativeUtil.getOwnedMappings(asTransformation)) {
+			CGMapping cgMapping = doVisit(CGMapping.class, asMapping);
+			cgTransformation.getMappings().add(cgMapping);
+		}
+		for (Operation asOperation : asTransformation.getOwnedOperations()) {
+			CGOperation cgOperation = doVisit(CGOperation.class, asOperation);
+			cgTransformation.getOperations().add(cgOperation);
+		}
+		popCurrentClass(cgTransformation);
+		return cgTransformation;
+	}
+
+	@Override
 	public @Nullable CGNamedElement visitImperativeTypedModel(@NonNull ImperativeTypedModel asTypedModel) {
 		CGTypedModel cgTypedModel = QVTiCGModelFactory.eINSTANCE.createCGTypedModel();
 		setAst(cgTypedModel, asTypedModel);
@@ -979,7 +997,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 
 	@Override
 	public @Nullable CGNamedElement visitSetStatement(@NonNull SetStatement asSetStatement) {
-		Transformation asTransformation = ClassUtil.nonNullModel(QVTbaseUtil.getContainingTransformation(asSetStatement));
+		ImperativeTransformation asTransformation = ClassUtil.nonNullModel(QVTimperativeUtil.getContainingTransformation(asSetStatement));
 		QVTiTransformationAnalysis transformationAnalysis = analyzer.getCodeGenerator().getTransformationAnalysis(asTransformation);
 		Integer cacheIndex = transformationAnalysis.getCacheIndex(asSetStatement);
 		if (cacheIndex != null) {
@@ -1084,27 +1102,8 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 	}
 
 	@Override
-	public @Nullable CGNamedElement visitTransformation(@NonNull Transformation asTransformation) {
-		/*QVTiTransformationAnalysis transformationAnalysis =*/ analyzer.getCodeGenerator().getTransformationAnalysis(asTransformation);
-		CGTransformation cgTransformation = QVTiCGModelFactory.eINSTANCE.createCGTransformation();
-		setAst(cgTransformation, asTransformation);
-		pushCurrentClass(cgTransformation);
-		List<CGTypedModel> cgTypedModels = cgTransformation.getTypedModels();
-		for (TypedModel asTypedModel : asTransformation.getModelParameter()) {
-			CGTypedModel cgTypedModel = doVisit(CGTypedModel.class, asTypedModel);
-			cgTypedModel.setModelIndex(cgTypedModels.size());
-			cgTypedModels.add(cgTypedModel);
-		}
-		for (Rule asRule : asTransformation.getRule()) {
-			CGMapping cgMapping = doVisit(CGMapping.class, asRule);
-			cgTransformation.getMappings().add(cgMapping);
-		}
-		for (Operation asOperation : asTransformation.getOwnedOperations()) {
-			CGOperation cgOperation = doVisit(CGOperation.class, asOperation);
-			cgTransformation.getOperations().add(cgOperation);
-		}
-		popCurrentClass(cgTransformation);
-		return cgTransformation;
+	public @Nullable CGNamedElement visitTransformation(@NonNull Transformation object) {
+		return visiting(object);		// Should be ImperativeTransformation
 	}
 
 	@Override

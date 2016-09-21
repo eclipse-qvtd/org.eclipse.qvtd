@@ -17,8 +17,8 @@ import org.eclipse.ocl.pivot.internal.scoping.AbstractAttribution;
 import org.eclipse.ocl.pivot.internal.scoping.EnvironmentView;
 import org.eclipse.ocl.pivot.internal.scoping.ScopeView;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
-import org.eclipse.qvtd.pivot.qvtbase.Transformation;
-import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
@@ -77,9 +77,9 @@ public class MappingAttribution extends AbstractAttribution
 				}
 			}
 			environmentView.addNamedElements(mapping.getOwnedParameters());
-			Transformation transformation = QVTimperativeUtil.getContainingTransformation(mapping);
+			ImperativeTransformation transformation = QVTimperativeUtil.getContainingTransformation(mapping);
 			if (transformation != null) {
-				for (TypedModel typedModel : transformation.getModelParameter()) {
+				for (@NonNull ImperativeTypedModel typedModel : QVTimperativeUtil.getOwnedTypedModels(transformation)) {
 					for (org.eclipse.ocl.pivot.Package usedPackage : typedModel.getUsedPackage()) {
 						if (usedPackage != null) {
 							environmentView.addNamedElement(usedPackage);
