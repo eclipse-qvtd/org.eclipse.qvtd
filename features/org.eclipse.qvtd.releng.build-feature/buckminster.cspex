@@ -10,8 +10,9 @@
 		
 		<!-- indirect dependencies -->		
 		<cs:dependency name="org.eclipse.rcp" componentType="eclipse.feature" />
-		<cs:dependency name="org.eclipse.sdk" componentType="osgi.bundle" />
 		<cs:dependency name="org.eclipse.pde.core" componentType="osgi.bundle"/>
+		<cs:dependency name="org.eclipse.platform" componentType="osgi.bundle" />
+		<cs:dependency name="org.eclipse.sdk" componentType="osgi.bundle" />
 		<cs:dependency name="org.eclipse.team.core" componentType="osgi.bundle" />
 	</cs:dependencies>
 	<cs:actions>
