@@ -26,3 +26,46 @@ After each first repo contribution, remember to update the aggregates e.g.
 cd downloads/mmt/qvtd/updates/milestones
 ant -f /shared/modeling/tools/promotion/manage-composite.xml add -Dchild.repository=0.14.0
 
+--------
+
+GIT repo: git://git.eclipse.org/gitroot/mmt/org.eclipse.qvtd.git
+
+Poll SCM schedule: 0 */6 * * *
+
+Run XVNC during build
+
+Pre Buckminster shell:
+
+# window manager for UI tests
+icewm --replace --sm-disable &
+
+chmod +x ${WORKSPACE}/org.eclipse.qvtd.git/releng/org.eclipse.qvtd.releng.buckminster/scripts/qvtd-pre-buckminster.sh
+${WORKSPACE}/org.eclipse.qvtd.git/releng/org.eclipse.qvtd.releng.buckminster/scripts/qvtd-pre-buckminster.sh
+# NB: This script contains some shell commands which prepare the build.properties file used by buckminster.
+# It will be called before buckminster commands execution. You may check its content at the following URL:
+# https://hudson.eclipse.org/ocl/job/qvtd-oxygen-master/ws/org.eclipse.qvtd.git/releng/org.eclipse.qvtd.releng.buckminster/scripts/qvtd-pre-buckminster.sh/*view*/
+
+Buckminster job (4.5):
+
+${WORKSPACE}/org.eclipse.qvtd.git/releng/org.eclipse.qvtd.releng.buckminster/scripts/qvtd-buckminster.script
+
+Advanced change workspace: ${WORKSPACE}/buildroot/buckminster.workspace
+
+Advanced JVM arguments:
+
+-Dcheckout.location=${WORKSPACE}
+-Dreference.repository=https://hudson.eclipse.org/ocl/job/${JOB_NAME}/lastSuccessfulBuild/artifact/QVTd.p2.repository/
+-Xmx2g
+-noverify
+
+Post Buckminster shell:
+
+chmod +x ${WORKSPACE}/org.eclipse.qvtd.git/releng/org.eclipse.qvtd.releng.buckminster/scripts/qvtd-post-buckminster.sh
+${WORKSPACE}/org.eclipse.qvtd.git/releng/org.eclipse.qvtd.releng.buckminster/scripts/qvtd-post-buckminster.sh
+# NB: This script contains some shell commands which will be extecuted prior to archive artifacts.
+# It will be called after buckminster commands execution. You may check its content at the following URL:
+# https://hudson.eclipse.org/ocl/job/qvtd-oxygen-master/ws/org.eclipse.qvtd.git/releng/org.eclipse.qvtd.releng.buckminster/scripts/qvtd-post-buckminster.sh/*view*/
+
+Publish JUnit test report: QVTd.test.results/**
+
+Archive the artefacts: QVTd.*/**, publishroot/**, promote.properties
