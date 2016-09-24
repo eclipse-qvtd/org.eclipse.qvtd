@@ -55,25 +55,25 @@ public abstract class DirectionalMainTab extends MainTab implements QVTcLaunchCo
 		gl_directionGroup.marginHeight = 0;
 		directionGroup.setLayout(gl_directionGroup);
 		directionGroup.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 3, 1));
-		
+
 		Label modeLabel = new Label(directionGroup, SWT.NONE);
 		modeLabel.setSize(31, 15);
 		modeLabel.setText("Mode");
-		
+
 		modeCombo = new Combo(directionGroup, SWT.NONE);
 		modeCombo.setToolTipText("Whether the execution\n- checks that the output corresponds to the input\n- creates new output model elements\n- updates existing model elements where possible ");
 		modeCombo.setItems(new String[] {/*CHECK_MODE,*/ ENFORCE_CREATE_MODE, /*ENFORCE_UPDATE_MODE*/});
 		modeCombo.select(0);
-		
+
 		Label directionLabel = new Label(directionGroup, SWT.NONE);
 		directionLabel.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, true, false, 1, 1));
 		directionLabel.setText("Direction");
-		
+
 		directionCombo = new Combo(directionGroup, SWT.NONE);
 		directionCombo.setToolTipText("Select enforceable output domain to choose the direction of a multi-directional transformation");
 		directionCombo.setItems(new String[] {"NONE"});
 		directionCombo.select(0);
-		
+
 		viewCheckButton = new Button(directionGroup, SWT.CHECK);
 		viewCheckButton.setToolTipText("Whether the output may be a view of a larger model, or must be the whole model.");
 		viewCheckButton.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, true, false, 1, 1));
@@ -138,7 +138,7 @@ public abstract class DirectionalMainTab extends MainTab implements QVTcLaunchCo
 	}
 
 	protected void setDirections(@NonNull Set<TypedModel> enforceables) {
-//		System.out.println("setDirections");
+		//		System.out.println("setDirections");
 		if (directionCombo.isDisposed()) {
 			return;
 		}
@@ -160,7 +160,7 @@ public abstract class DirectionalMainTab extends MainTab implements QVTcLaunchCo
 
 	@Override
 	protected void updateDirection(@NonNull Transformation transformation) {
-//		System.out.println("updateDirection");
+		//		System.out.println("updateDirection");
 		setDirections(QVTbaseUtil.getEnforceableTypedModels(transformation));
 	}
 
@@ -191,7 +191,6 @@ public abstract class DirectionalMainTab extends MainTab implements QVTcLaunchCo
 			for (TypedModel inputModel : inputModels) {
 				if (inputs.add(inputModel)) {
 					String name = inputModel.getName();
-					assert name != null;
 					if (name != null) {
 						newInputsMap.put(name, null); //getDefaultPath(outputsGroup, name));
 					}
@@ -200,7 +199,6 @@ public abstract class DirectionalMainTab extends MainTab implements QVTcLaunchCo
 			for (TypedModel outputModel : outputModels) {
 				if (outputs.add(outputModel)) {
 					String name = outputModel.getName();
-					assert name != null;
 					if (name != null) {
 						oldOutputsMap.put(name, null); //getDefaultPath(outputsGroup, name));
 					}
@@ -211,7 +209,6 @@ public abstract class DirectionalMainTab extends MainTab implements QVTcLaunchCo
 			for (TypedModel inputModel : inputModels) {
 				if (inputs.add(inputModel)) {
 					String name = inputModel.getName();
-					assert name != null;
 					if (name != null) {
 						newInputsMap.put(name, null); //getDefaultPath(outputsGroup, name));
 					}
@@ -220,7 +217,6 @@ public abstract class DirectionalMainTab extends MainTab implements QVTcLaunchCo
 			for (TypedModel outputModel : outputModels) {
 				if (outputs.add(outputModel)) {
 					String name = outputModel.getName();
-					assert name != null;
 					if (name != null) {
 						newOutputsMap.put(name, null); //getDefaultPath(outputsGroup, name));
 					}
@@ -231,7 +227,6 @@ public abstract class DirectionalMainTab extends MainTab implements QVTcLaunchCo
 			for (TypedModel inputModel : inputModels) {
 				if (inputs.add(inputModel)) {
 					String name = inputModel.getName();
-					assert name != null;
 					if (name != null) {
 						oldInputsMap.put(name, null); //getDefaultPath(outputsGroup, name));
 						newInputsMap.put(name, null); //getDefaultPath(outputsGroup, name));
@@ -241,7 +236,6 @@ public abstract class DirectionalMainTab extends MainTab implements QVTcLaunchCo
 			for (TypedModel outputModel : outputModels) {
 				if (outputs.add(outputModel)) {
 					String name = outputModel.getName();
-					assert name != null;
 					if (name != null) {
 						oldOutputsMap.put(name, null); //getDefaultPath(outputsGroup, name));
 						newOutputsMap.put(name, null); //getDefaultPath(outputsGroup, name));
@@ -249,7 +243,7 @@ public abstract class DirectionalMainTab extends MainTab implements QVTcLaunchCo
 				}
 			}
 		}
-/*		for (TypedModel outputModel : outputModels) {
+		/*		for (TypedModel outputModel : outputModels) {
 			if (outputs.add(outputModel)) {
 				String name = outputModel.getName();
 				assert name != null;

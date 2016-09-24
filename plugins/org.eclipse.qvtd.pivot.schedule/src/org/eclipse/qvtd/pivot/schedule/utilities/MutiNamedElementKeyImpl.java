@@ -24,21 +24,17 @@ import org.eclipse.ocl.pivot.NamedElement;
 public class MutiNamedElementKeyImpl implements MultiValueKey<NamedElement, String>
 {
 	public static final @NonNull MultiValueKey<?, ?> EMPTY_LIST = new MutiNamedElementKeyImpl();
-	
-	private final @NonNull List<String> valueIds = new ArrayList<String>();
-	private final @NonNull NamedElement[] values;
+
+	private final @NonNull List<String> valueIds = new ArrayList<>();
+	private final @NonNull NamedElement @NonNull [] values;
 
 	private int hashCode;
-	
-	public MutiNamedElementKeyImpl(@NonNull NamedElement... values) {
+
+	public MutiNamedElementKeyImpl(@NonNull NamedElement @NonNull ... values) {
 		//this.parametersId = IdManager.getParametersId(parameterTypes);
 		this.values = values;
-		for (NamedElement v : values) {
-			if (v != null) {
-				valueIds.add(v.getName());
-			} else {
-				valueIds.add("null");
-			}
+		for (@NonNull NamedElement v : values) {
+			valueIds.add(v.getName());
 		}
 		hashCode = valueIds.hashCode();
 	}
@@ -57,14 +53,8 @@ public class MutiNamedElementKeyImpl implements MultiValueKey<NamedElement, Stri
 			return false;
 		}
 		for (int i = 0; i < values.length; i++) {
-			if (values[i] != null) {
-				if (!values[i].equals(thoseValues[i])) {
-					return false;
-				}
-			} else {
-				if (values[i] != thoseValues[i]) {
-					return false;
-				}
+			if (!values[i].equals(thoseValues[i])) {
+				return false;
 			}
 		}
 		return true;
@@ -87,7 +77,7 @@ public class MutiNamedElementKeyImpl implements MultiValueKey<NamedElement, Stri
 	public @NonNull NamedElement[] get() {
 		return values;
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see org.eclipse.qvtd.pivot.schedule.utilities.MultiValueKey#getParameters()
 	 */

@@ -61,9 +61,9 @@ public class QVTbaseLibraryTests extends XtextTestCase
 		}
 	}
 
-	public Map<String, Element> computeMoniker2ASMap(Collection<? extends Resource> pivotResources) {
-		Map<String, Element> map = new HashMap<String, Element>();
-		for (Resource asResource : pivotResources) {
+	public Map<String, Element> computeMoniker2ASMap(Collection<@NonNull ? extends Resource> pivotResources) {
+		Map<String, Element> map = new HashMap<>();
+		for (@NonNull Resource asResource : pivotResources) {
 			for (Iterator<EObject> it = asResource.getAllContents(); it.hasNext();) {
 				EObject eObject = it.next();
 				assert eObject.eResource() == asResource;
@@ -155,8 +155,8 @@ public class QVTbaseLibraryTests extends XtextTestCase
 				assertEquals(fileClass, javaClass);
 			}
 			if (fileElement instanceof org.eclipse.ocl.pivot.Class) {
-				List<Element> fileTypes = new ArrayList<Element>(((org.eclipse.ocl.pivot.Class)fileElement).getSuperClasses());
-				List<Element> javaTypes = new ArrayList<Element>(((org.eclipse.ocl.pivot.Class)javaElement).getSuperClasses());
+				List<Element> fileTypes = new ArrayList<>(((org.eclipse.ocl.pivot.Class)fileElement).getSuperClasses());
+				List<Element> javaTypes = new ArrayList<>(((org.eclipse.ocl.pivot.Class)javaElement).getSuperClasses());
 				Collections.sort(fileTypes, MonikeredComparator.INSTANCE);
 				Collections.sort(javaTypes, MonikeredComparator.INSTANCE);
 				assertEquals(fileTypes.size(), javaTypes.size());
@@ -275,8 +275,8 @@ public class QVTbaseLibraryTests extends XtextTestCase
 				assertEquals(fileClass, javaClass);
 			}
 			if (fileElement instanceof org.eclipse.ocl.pivot.Class) {
-				List<Element> fileTypes = new ArrayList<Element>(((org.eclipse.ocl.pivot.Class)fileElement).getSuperClasses());
-				List<Element> javaTypes = new ArrayList<Element>(((org.eclipse.ocl.pivot.Class)javaElement).getSuperClasses());
+				List<Element> fileTypes = new ArrayList<>(((org.eclipse.ocl.pivot.Class)fileElement).getSuperClasses());
+				List<Element> javaTypes = new ArrayList<>(((org.eclipse.ocl.pivot.Class)javaElement).getSuperClasses());
 				Collections.sort(fileTypes, MonikeredComparator.INSTANCE);
 				Collections.sort(javaTypes, MonikeredComparator.INSTANCE);
 				assertEquals(fileTypes.size(), javaTypes.size());

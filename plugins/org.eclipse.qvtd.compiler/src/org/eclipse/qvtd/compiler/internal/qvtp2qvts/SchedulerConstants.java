@@ -177,21 +177,21 @@ public abstract class SchedulerConstants
 		//
 		//	Extract salient characteristics from the DependencyGraph.
 		//
-		analyzeDatums(dependencyGraph.getDatums());
+		analyzeDatums(ClassUtil.nullFree(dependencyGraph.getDatums()));
 	}
 
-	private void analyzeDatums(/*@NonNull*/ List<? extends AbstractDatum> datums) {
-		for (AbstractDatum abstractDatum : datums) {
+	private void analyzeDatums(/*@NonNull*/ List<@NonNull ? extends AbstractDatum> datums) {
+		for (@NonNull AbstractDatum abstractDatum : datums) {
 			if (abstractDatum instanceof ClassDatum) {
 				ClassDatum classDatum = (ClassDatum)abstractDatum;
 				//				class2classDatum.put(classDatum.getType(), classDatum);
-				analyzeDatums(classDatum.getPropertyDatums());
+				analyzeDatums(ClassUtil.nullFree(classDatum.getPropertyDatums()));
 			}
 			else if (abstractDatum instanceof PropertyDatum) {
 				PropertyDatum propertyDatum = (PropertyDatum)abstractDatum;
 				property2propertyDatum.put(propertyDatum.getProperty(), propertyDatum);
 			}
-			analyzeDatums(abstractDatum.getSub());
+			analyzeDatums(ClassUtil.nullFree(abstractDatum.getSub()));
 		}
 	}
 

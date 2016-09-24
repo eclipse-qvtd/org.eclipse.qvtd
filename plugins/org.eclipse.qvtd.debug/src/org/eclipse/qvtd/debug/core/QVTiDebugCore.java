@@ -27,21 +27,21 @@ import org.eclipse.qvtd.debug.QVTiDebugPlugin;
 public class QVTiDebugCore extends VMDebugCore
 {
 	public static final @NonNull QVTiDebugCore INSTANCE = new QVTiDebugCore();
-	
+
 	public static final @NonNull String BREAKPOINT_MARKER_ID = "org.eclipse.qvtd.debug.QVTdBreakpointMarker"; //$NON-NLS-1$
 	public static final @NonNull String MODEL_ID = "org.eclipse.qvtd.debug"; //$NON-NLS-1$
 	public static final @NonNull String DEBUGGER_ACTIVE_PROPERTY = "org.eclipse.qvtd.debug.debuggerActive"; //$NON-NLS-1$
-	
+
 	// The plug-in fBreakpointID
-	public static final @NonNull String PLUGIN_ID = QVTiDebugPlugin.PLUGIN_ID; //$NON-NLS-1$
+	public static final @NonNull String PLUGIN_ID = QVTiDebugPlugin.PLUGIN_ID; 
 
 	private static final @NonNull String EXCEPTIONS_CATCHING = PLUGIN_ID + "/exceptions/catching"; //$NON-NLS-1$
 	private static final @NonNull String EXCEPTIONS_THROWING = PLUGIN_ID + "/exceptions/throwing"; //$NON-NLS-1$
 	private static final @NonNull String METHODS_ENTERING = PLUGIN_ID + "/methods/entering"; //$NON-NLS-1$
 	private static final @NonNull String METHODS_EXITING = PLUGIN_ID + "/methods/exiting"; //$NON-NLS-1$
-	
+
 	private static final @NonNull EssentialOCLLocationInFileProvider locationInFileProvider = new EssentialOCLLocationInFileProvider();
-	
+
 	public static @NonNull Trace TRACE = new Trace(EXCEPTIONS_CATCHING, EXCEPTIONS_THROWING, METHODS_ENTERING, METHODS_EXITING);
 
 	private QVTiDebugCore() {}
@@ -55,9 +55,9 @@ public class QVTiDebugCore extends VMDebugCore
 	public @NonNull String getDebuggerActiveProperty() {
 		return DEBUGGER_ACTIVE_PROPERTY;
 	}
-    
+
 	@Override
-	public @NonNull List<QVTiLineBreakpoint> getLineBreakpoints() {
+	public @NonNull List<@NonNull QVTiLineBreakpoint> getLineBreakpoints() {
 		return getOCLBreakpoints(QVTiLineBreakpoint.class);
 	}
 
@@ -66,17 +66,17 @@ public class QVTiDebugCore extends VMDebugCore
 		return locationInFileProvider;
 	}
 
-    @Override
+	@Override
 	public @Nullable ILog getLog() {
-    	QVTiDebugPlugin debugPlugin = QVTiDebugPlugin.getDefault();
+		QVTiDebugPlugin debugPlugin = QVTiDebugPlugin.getDefault();
 		return debugPlugin != null ? debugPlugin.getLog() : null;
-    } 
-	
+	}
+
 	@Override
 	public @NonNull String getModelId() {
 		return MODEL_ID;
 	}
-	
+
 	@Override
 	public @NonNull String getPluginId() {
 		return PLUGIN_ID;
@@ -86,9 +86,9 @@ public class QVTiDebugCore extends VMDebugCore
 	public @NonNull Trace getTrace() {
 		return TRACE;
 	}
-	
+
 	@Override
 	public @NonNull String getVMThreadName() {
 		return "QVTi VM";
-	}	
+	}
 }
