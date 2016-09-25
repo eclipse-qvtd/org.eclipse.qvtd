@@ -64,9 +64,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import cg._Source2Target_qvtp_qvtcas.Source2Target_qvtp_qvtcas;
 import example1.source.SourcePackage;
 import example1.target.TargetPackage;
+import example1.target.lookup.EnvironmentPackage;
 import example2.classes.ClassesPackage;
 import example2.classescs.ClassescsPackage;
 import example4.kiamaas.KiamaasPackage;
@@ -295,12 +295,17 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		//		DependencyAnalyzer.START.setState(true);
 		MyQVT myQVT = new MyQVT("example1");
 		myQVT.loadGenModels("SourceMM1.genmodel", "TargetMM1.genmodel");
-		//		myQVT.executeNewOCL2QVTi_CompilerChain2("Source2Target.ocl");
-		//		CS2ASJavaCompilerParameters cgParams = new CS2ASJavaCompilerParametersImpl(
-		//			"example1.target.lookup.util.TargetLookupSolver",
-		//			"example1.target.lookup.util.TargetLookupResult",
-		//			TESTS_GEN_PATH, TESTS_PACKAGE_NAME);
-		Class<? extends Transformer> txClass = Source2Target_qvtp_qvtcas.class;
+		myQVT.loadEcoreFile("EnvExample1.ecore", EnvironmentPackage.eINSTANCE);
+
+		Transformation qvtiTransf =	myQVT.executeNewOCL2QVTi_CompilerChain("Source2Target.ocl");
+		CS2ASJavaCompilerParameters cgParams = new CS2ASJavaCompilerParametersImpl(
+			"example1.target.lookup.util.TargetLookupSolver",
+			"example1.target.lookup.util.TargetLookupResult",
+			TESTS_GEN_PATH, TESTS_PACKAGE_NAME);
+		Class<? extends Transformer> txClass = new CS2ASJavaCompilerImpl().compileTransformation(myQVT, qvtiTransf, cgParams);
+		//Class<? extends Transformer> txClass = Source2Target_qvtp_qvtcas.class;
+
+
 		myQVT.executeModelsTX_CG(txClass, "model1");
 		//		myQVT.executeModelsTX_CG(txClass, "model2");
 		//		myQVT.executeModelsTX_CG(txClass, "model3");
