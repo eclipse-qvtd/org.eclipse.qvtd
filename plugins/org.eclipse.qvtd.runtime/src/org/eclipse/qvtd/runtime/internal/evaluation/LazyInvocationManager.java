@@ -20,7 +20,6 @@ import org.eclipse.qvtd.runtime.evaluation.SlotState;
 
 /**
  * InvocationManager supervises and provides thread safety for the lists of blocked and waiting invocations.
- * @since 1.1
  */
 public class LazyInvocationManager extends AbstractInvocationManager
 {

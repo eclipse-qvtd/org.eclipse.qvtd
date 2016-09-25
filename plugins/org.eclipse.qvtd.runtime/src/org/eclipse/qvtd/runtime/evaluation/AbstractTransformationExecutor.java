@@ -19,9 +19,6 @@ import org.eclipse.ocl.pivot.internal.library.executor.ExecutorManager;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 
-/**
- * @since 1.1
- */
 public abstract class AbstractTransformationExecutor extends ExecutorManager implements TransformationExecutor
 {
 	protected final @NonNull EnvironmentFactory environmentFactory;

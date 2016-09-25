@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *
@@ -17,9 +17,6 @@ package	org.eclipse.qvtd.runtime.evaluation;
 
 import org.eclipse.jdt.annotation.NonNull;
 
-/**
- * @since 1.1
- */
 public /*abstract*/ class AbstractExecutionVisitor<R> implements ExecutionVisitor<R>
 {
 	/**
@@ -39,7 +36,7 @@ public /*abstract*/ class AbstractExecutionVisitor<R> implements ExecutionVisito
 	public R visitInvocation(@NonNull Invocation object) {
 		return visiting(object);
 	}
-	
+
 	@Override
 	public R visitInvocationManager(@NonNull InvocationManager object) {
 		return visiting(object);

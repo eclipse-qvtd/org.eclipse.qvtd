@@ -25,7 +25,6 @@ import org.eclipse.qvtd.runtime.evaluation.TypedModelInstance;
 
 /**
  * ModelObjectsOfTypeOperation realises the Model::objectsOfType() library operation.
- * @since 1.1
  */
 public class ModelObjectsOfTypeOperation extends AbstractBinaryOperation
 {

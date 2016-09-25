@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
@@ -17,14 +17,13 @@ import org.eclipse.qvtd.runtime.evaluation.SlotState;
 
 /**
  * AbstractInvocation provides the shared implementation of the intrusive blocked/waiting linked list functionality.
- * @since 1.1
  */
 public abstract class AbstractInvocationInternal implements Invocation
 {
 	@NonNull AbstractInvocationInternal prev = this;
 	@NonNull AbstractInvocationInternal next = this;
 	public @Nullable SlotState debug_blockedBy = null;
-	
+
 	@Override
 	public void insertAfter(@NonNull Invocation predecessor) {
 		@NonNull AbstractInvocationInternal castPredecessor = (AbstractInvocationInternal)predecessor;

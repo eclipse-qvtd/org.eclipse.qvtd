@@ -14,15 +14,12 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.labels.AbstractLabelGenerator;
 import org.eclipse.qvtd.runtime.evaluation.TypedModelInstance;
 
-/**
- * @since 1.1
- */
 public final class TypedModelInstanceLabelGenerator extends AbstractLabelGenerator<TypedModelInstance>
 {
 	public static void initialize(Registry registry) {
-		registry.install(TypedModelInstance.class, new TypedModelInstanceLabelGenerator());		
+		registry.install(TypedModelInstance.class, new TypedModelInstanceLabelGenerator());
 	}
-	
+
 	public TypedModelInstanceLabelGenerator() {
 		super(TypedModelInstance.class);
 	}

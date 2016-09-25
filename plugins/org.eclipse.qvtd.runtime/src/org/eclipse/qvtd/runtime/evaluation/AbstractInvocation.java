@@ -20,7 +20,6 @@ import org.eclipse.qvtd.runtime.internal.evaluation.AbstractInvocationInternal;
 
 /**
  * AbstractInvocation provides the mandatory shared functionality of the intrusive blocked/waiting linked list functionality.
- * @since 1.1
  */
 public abstract class AbstractInvocation extends AbstractInvocationInternal
 {

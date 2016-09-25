@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
@@ -12,14 +12,13 @@ package org.eclipse.qvtd.runtime.evaluation;
 
 import org.eclipse.jdt.annotation.NonNull;
 
-/** 
+/**
  * ExecutionVisitable defines the common visitable capability of all run-time execution objects.
- * 
+ *
  * @noimplement clients should derive from some AbstractXXX class
- * @since 1.1
  */
 public interface ExecutionVisitable
-{ 
+{
 	/**
 	 * Returns the result of accepting a visit from a visitor.
 	 * Implementations typically invoke a derived-class-specific

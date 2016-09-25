@@ -57,8 +57,6 @@ import org.eclipse.qvtd.runtime.evaluation.Transformer;
 /**
  * The abstract implementation of an auto-generated transformation provides the shared infrastructure for maintaining
  * models and deferring invocation of not-ready mapping invocations.
- *
- * @since 1.1
  */
 public abstract class AbstractTransformerInternal extends AbstractModelManager implements Transformer, ExecutionVisitable
 {

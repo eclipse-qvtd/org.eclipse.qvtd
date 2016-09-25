@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
@@ -20,8 +20,7 @@ import org.eclipse.osgi.util.NLS;
 /**
  * TransformationTechnology defines a polymorphic interface by which a variety of alternative transformation
  * technologies my be invoked.
- * 
- * @since 1.1
+ *
  * @noimplement clients should derive from AbstractTransformationTechnology
  */
 public interface TransformationTechnology
@@ -29,13 +28,13 @@ public interface TransformationTechnology
 	@SuppressWarnings("serial")
 	public class TransformationException extends Exception {
 		protected final @NonNull Map<@NonNull String, Object> parametersMap;
-		
+
 		public TransformationException(@NonNull Map<@NonNull String, Object> parametersMap, @Nullable Throwable cause, @NonNull String message, Object... objects) {
 			super(NLS.bind(message, objects), cause);
 			this.parametersMap = parametersMap;
 		}
 	}
-	
+
 	/**
 	 * Perform a transformation.
 	 * Optionally use resources within resourceSet.
@@ -46,7 +45,7 @@ public interface TransformationTechnology
 	 */
 	@NonNull Map<@NonNull String, Object> execute(@NonNull ResourceSet resourceSet, @NonNull Map<@NonNull String, Object> modelMap,
 			@NonNull Map<@NonNull String, Object> parametersMap) throws TransformationException;
-	
+
 	/**
 	 * Return the TransformationTechnology name used as the TransformationTechnologyContribution.REGISTRY key.
 	 */

@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
@@ -14,11 +14,10 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.ids.IdResolver;
 
-/** 
+/**
  * An Invocation identifies a unique invocation of a Mapping and the objects/values bound to its guard variables.
- * 
+ *
  * @noimplement clients should derive from AbstractInvocation
- * @since 1.1
  */
 public interface Invocation extends ExecutionVisitable
 {
@@ -37,15 +36,15 @@ public interface Invocation extends ExecutionVisitable
 	 * Return true if an occurrence with thoseValues would be a re-occurrence.
 	 */
 	boolean isEqual(@NonNull IdResolver idResolver, @NonNull Object @NonNull [] thoseValues);
-	
+
 
 	/**
 	 * Remove this Invocation from the blocked or waiting invocations linked list.
 	 */
 	void remove();
-	
+
 	public interface Constructor
-	{	
+	{
 		/**
 		 * Return the first invocation of this constructor with argValues, using newInstance(argValues) to
 		 * create a new invocation instance if necessary. Returns null if an instance already created.
@@ -57,7 +56,7 @@ public interface Invocation extends ExecutionVisitable
 		 */
 		@NonNull Invocation newInstance(@NonNull Object @NonNull [] values);
 	}
-		
+
 	public interface Incremental extends Invocation
 	{
 		void addCreatedObject(@NonNull Object createdObject);
@@ -66,5 +65,6 @@ public interface Invocation extends ExecutionVisitable
 		@NonNull Iterable<@NonNull Object> getCreatedObjects();
 		@NonNull Iterable<SlotState.@NonNull Incremental> getReadSlots();
 		@NonNull Iterable<SlotState.@NonNull Incremental> getWriteSlots();
+		//		void invalidate();
 	}
 }

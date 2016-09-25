@@ -25,7 +25,6 @@ import org.eclipse.qvtd.runtime.evaluation.TypedModelInstance;
 
 /**
  * AllObjectsOperation realises the Model::allObjects() library operation.
- * @since 1.1
  */
 public class AllObjectsOperation extends AbstractUnaryOperation
 {

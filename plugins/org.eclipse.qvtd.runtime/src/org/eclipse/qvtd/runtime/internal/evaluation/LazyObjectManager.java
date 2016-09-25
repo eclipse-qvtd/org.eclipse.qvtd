@@ -43,9 +43,6 @@ import org.eclipse.qvtd.runtime.evaluation.InvocationFailedException;
 import org.eclipse.qvtd.runtime.evaluation.ObjectManager;
 import org.eclipse.qvtd.runtime.evaluation.SlotState;
 
-/**
- * @since 1.1
- */
 public class LazyObjectManager extends AbstractObjectManager
 {
 	/**

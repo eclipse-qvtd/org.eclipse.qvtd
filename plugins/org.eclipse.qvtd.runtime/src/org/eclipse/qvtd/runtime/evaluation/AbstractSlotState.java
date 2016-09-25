@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
@@ -20,8 +20,6 @@ import org.eclipse.jdt.annotation.NonNull;
 /**
  * The abstract implementation of a SlotState provides the mandatory shared functionality for maintaining
  * the state of an object slot.
- * 
- * @since 1.1
  */
 public abstract class AbstractSlotState implements SlotState
 {
@@ -48,13 +46,13 @@ public abstract class AbstractSlotState implements SlotState
 			}
 			targets.add(invocation);
 		}
-		
+
 		@Override
 		public @NonNull Iterable<Invocation.@NonNull Incremental> getSources() {
 			return sources != null ? sources : EMPTY_INVOCATIONS_LIST;
 		}
 
-		
+
 		@Override
 		public @NonNull Iterable<Invocation.@NonNull Incremental> getTargets() {
 			return targets != null ? targets : EMPTY_INVOCATIONS_LIST;
