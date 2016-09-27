@@ -52,10 +52,9 @@ Workflow {
 			}
 				
 						
-			outline = CS2ASOutlineTreeProviderFragment {
-				
-			}
-			
+//			outline = CS2ASOutlineTreeProviderFragment {
+//				
+//			}			
 		}
 	}
 }

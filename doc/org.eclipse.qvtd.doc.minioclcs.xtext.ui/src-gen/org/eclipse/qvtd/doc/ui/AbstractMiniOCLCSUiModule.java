@@ -16,7 +16,7 @@ import org.eclipse.qvtd.doc.ide.contentassist.antlr.internal.InternalMiniOCLCSLe
 import org.eclipse.qvtd.doc.ui.contentassist.MiniOCLCSProposalProvider;
 import org.eclipse.qvtd.doc.ui.labeling.MiniOCLCSDescriptionLabelProvider;
 import org.eclipse.qvtd.doc.ui.labeling.MiniOCLCSLabelProvider;
-import org.eclipse.qvtd.doc.ui.outline.MiniOCLCSCS2ASOutlineTreeProvider;
+import org.eclipse.qvtd.doc.ui.outline.MiniOCLCSOutlineTreeProvider;
 import org.eclipse.qvtd.doc.ui.quickfix.MiniOCLCSQuickfixProvider;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.builder.BuilderParticipant;
@@ -196,12 +196,12 @@ public abstract class AbstractMiniOCLCSUiModule extends DefaultUiModule {
 	
 	// contributed by org.eclipse.xtext.xtext.generator.ui.outline.OutlineTreeProviderFragment2
 	public Class<? extends IOutlineTreeProvider> bindIOutlineTreeProvider() {
-		return MiniOCLCSCS2ASOutlineTreeProvider.class;
+		return MiniOCLCSOutlineTreeProvider.class;
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.ui.outline.OutlineTreeProviderFragment2
 	public Class<? extends IOutlineTreeStructureProvider> bindIOutlineTreeStructureProvider() {
-		return MiniOCLCSCS2ASOutlineTreeProvider.class;
+		return MiniOCLCSOutlineTreeProvider.class;
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.ui.quickfix.QuickfixProviderFragment2

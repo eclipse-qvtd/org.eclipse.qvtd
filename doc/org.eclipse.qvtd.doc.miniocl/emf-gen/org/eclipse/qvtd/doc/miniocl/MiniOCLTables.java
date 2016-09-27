@@ -519,6 +519,10 @@ public class MiniOCLTables
 
 	/**
 	 *	The parameter lists shared by operations.
+	 *
+	 * @noextend This class is not intended to be subclassed by clients.
+	 * @noinstantiate This class is not intended to be instantiated by clients.
+	 * @noreference This class is not intended to be referenced by clients.
 	 */
 	public static class Parameters {
 		static {
@@ -539,6 +543,10 @@ public class MiniOCLTables
 
 	/**
 	 *	The operation descriptors for each operation of each type.
+	 *
+	 * @noextend This class is not intended to be subclassed by clients.
+	 * @noinstantiate This class is not intended to be instantiated by clients.
+	 * @noreference This class is not intended to be referenced by clients.
 	 */
 	public static class Operations {
 		static {
@@ -558,6 +566,10 @@ public class MiniOCLTables
 
 	/**
 	 *	The property descriptors for each property of each type.
+	 *
+	 * @noextend This class is not intended to be subclassed by clients.
+	 * @noinstantiate This class is not intended to be instantiated by clients.
+	 * @noreference This class is not intended to be referenced by clients.
 	 */
 	public static class Properties {
 		static {

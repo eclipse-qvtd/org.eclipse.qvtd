@@ -4,10 +4,21 @@
 package org.eclipse.qvtd.doc.ui
 
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
+import org.eclipse.qvtd.doc.ui.outline.MiniOCLCSCS2ASOutlineTreeProvider
 
 /**
  * Use this class to register components to be used within the Eclipse IDE.
  */
 @FinalFieldsConstructor
 class MiniOCLCSUiModule extends AbstractMiniOCLCSUiModule {
+	
+
+	override bindIOutlineTreeProvider() {
+		return MiniOCLCSCS2ASOutlineTreeProvider;
+	}
+	
+	override bindIOutlineTreeStructureProvider() {
+		return MiniOCLCSCS2ASOutlineTreeProvider;
+	}
+	
 }

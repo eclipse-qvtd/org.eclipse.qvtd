@@ -715,8 +715,6 @@ public class LazyObjectManager extends AbstractObjectManager
 		}
 	}
 
-	protected final boolean debugTracing = AbstractTransformer.INVOCATIONS.isActive();
-
 	/**
 	 * This unpleasant Map of Maps is a pathfinder before embarking on slotted objects that merge user and overhead
 	 * in a single object. The first map is then a null lookup and the nested map is an index within the object.
@@ -735,7 +733,7 @@ public class LazyObjectManager extends AbstractObjectManager
 	@Override
 	public synchronized void assigned(@NonNull Object eObject, /*@NonNull*/ EStructuralFeature eFeature, @Nullable Object ecoreValue, @Nullable Object childKey) {
 		assert eFeature != null;
-		if (debugTracing) {
+		if (debugInvocations) {
 			AbstractTransformer.INVOCATIONS.println("assigned " + eFeature.getEContainingClass().getName() + "::" + eFeature.getName() + " for " + eObject + " = " + ecoreValue);
 		}
 		Map<@NonNull EStructuralFeature, @NonNull SlotState> objectState = getObjectState(eObject);
@@ -802,7 +800,7 @@ public class LazyObjectManager extends AbstractObjectManager
 				//				}
 				else {						// Unidirectional non-containment EReference
 					if (ecoreValue != null) {
-						eOppositeReference = getEOppositeReference(eReference);
+						//						eOppositeReference = getEOppositeReference(eReference);
 						Map<@NonNull EStructuralFeature, @NonNull SlotState> oppositeObjectState = getObjectState(ecoreValue);
 						slotState = oppositeObjectState.get(eOppositeReference);
 						if (slotState == null) {
@@ -1015,7 +1013,7 @@ public class LazyObjectManager extends AbstractObjectManager
 	@Override
 	public synchronized void getting(@NonNull Object eObject, /*@NonNull*/ EStructuralFeature eFeature, boolean isOpposite) {
 		assert eFeature != null;
-		if (debugTracing) {
+		if (debugInvocations) {
 			AbstractTransformer.INVOCATIONS.println("getting " + eFeature.getEContainingClass().getName() + "::" + eFeature.getName() + (isOpposite ? "<opposite> " : "") + " for " + eObject);
 		}
 		if (isOpposite) {

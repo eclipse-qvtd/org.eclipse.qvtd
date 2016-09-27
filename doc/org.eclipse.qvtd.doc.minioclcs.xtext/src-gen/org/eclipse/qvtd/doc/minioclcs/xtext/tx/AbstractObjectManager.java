@@ -12,7 +12,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
@@ -32,7 +32,8 @@ public abstract class AbstractObjectManager implements ObjectManager
 	protected static final @NonNull List<@NonNull SlotState> EMPTY_SLOT_STATE_LIST = Collections.emptyList();
 
 	protected final @NonNull InvocationManager invocationManager;
-	
+	protected final boolean debugInvocations = AbstractTransformer.INVOCATIONS.isActive();
+
 	protected AbstractObjectManager(@NonNull InvocationManager invocationManager) {
 		this.invocationManager = invocationManager;
 	}

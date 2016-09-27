@@ -12,7 +12,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
@@ -40,10 +40,8 @@ public class IncrementalInvocationManager extends AbstractInvocationManager
 	/**
 	 * Head of doubly linked list of unblocked invocations waiting for a re-execution attempt.
 	 */
-	private @Nullable AbstractInvocationInternal waitingInvocations = null;	
+	private @Nullable AbstractInvocationInternal waitingInvocations = null;
 
-	protected final boolean debugTracing = AbstractTransformer.INVOCATIONS.isActive();
-    
 	private synchronized void block(@NonNull Invocation invocation, @NonNull SlotState slotState) {
 		AbstractInvocationInternal castInvocation = (AbstractInvocationInternal) invocation;
 		assert castInvocation.debug_blockedBy == null;
@@ -56,7 +54,7 @@ public class IncrementalInvocationManager extends AbstractInvocationManager
 			castInvocation.insertAfter(blockedInvocations2.prev);
 		}
 		slotState.block(invocation);
-		if (debugTracing) {
+		if (debugInvocations) {
 			AbstractTransformer.INVOCATIONS.println("block " + invocation + " for " + slotState);
 		}
 	}
@@ -69,7 +67,7 @@ public class IncrementalInvocationManager extends AbstractInvocationManager
 			return true;
 		}
 		do {
-			if (debugTracing) {
+			if (debugInvocations) {
 				AbstractTransformer.INVOCATIONS.println("still blocked " + blockedInvocation + " by " + blockedInvocation.debug_blockedBy);
 			}
 			blockedInvocation = blockedInvocation.next;
@@ -77,35 +75,35 @@ public class IncrementalInvocationManager extends AbstractInvocationManager
 		while (blockedInvocation != blockedInvocations);
 		return false;
 	}
-	
-    private void flushInternal() {
+
+	private void flushInternal() {
 		while (waitingInvocations != null) {
 			AbstractInvocationInternal invocation = null;
-    		synchronized (this) {
-    			AbstractInvocationInternal waitingInvocations2 = waitingInvocations;
-    			if (waitingInvocations2 != null) {
-    				invocation = waitingInvocations2;
-    				waitingInvocations = waitingInvocations2.next;
-    				if (waitingInvocations == invocation) {
-    					waitingInvocations = null;
-    				}
-    				invocation.remove();
-    			}
-    		}
-    		if (invocation != null) {
-    			if (debugTracing) {
-    				AbstractTransformer.INVOCATIONS.println("re-invoke " + invocation);
-    			}
-        		invoke(invocation, false);
-    		}
-    	}
-    }
-	
-    @Override
+			synchronized (this) {
+				AbstractInvocationInternal waitingInvocations2 = waitingInvocations;
+				if (waitingInvocations2 != null) {
+					invocation = waitingInvocations2;
+					waitingInvocations = waitingInvocations2.next;
+					if (waitingInvocations == invocation) {
+						waitingInvocations = null;
+					}
+					invocation.remove();
+				}
+			}
+			if (invocation != null) {
+				if (debugInvocations) {
+					AbstractTransformer.INVOCATIONS.println("re-invoke " + invocation);
+				}
+				invoke(invocation, false);
+			}
+		}
+	}
+
+	@Override
 	public void invoke(@NonNull Invocation invocation, boolean doFlush) {
 		try {
 			invocation.execute();
-			if (debugTracing) {
+			if (debugInvocations) {
 				AbstractTransformer.INVOCATIONS.println("done " + invocation);
 			}
 			if (doFlush) {
@@ -113,13 +111,13 @@ public class IncrementalInvocationManager extends AbstractInvocationManager
 			}
 		}
 		catch (InvocationFailedException e) {
- 			block(invocation, e.slotState);
+			block(invocation, e.slotState);
 		}
-    }
-    
+	}
+
 	@Override
 	public synchronized void unblock(@NonNull Invocation invocation) {
-		if (debugTracing) {
+		if (debugInvocations) {
 			AbstractTransformer.INVOCATIONS.println("unblock " + invocation);
 		}
 		AbstractInvocationInternal castInvocation = (AbstractInvocationInternal) invocation;
