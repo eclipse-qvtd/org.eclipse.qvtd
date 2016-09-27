@@ -461,7 +461,7 @@ def : _unqualified_env_Variable(child : ocl::OclElement) : lookup::LookupEnviron
 context ExpressionInOCL
 def : _unqualified_env_Variable(child : ocl::OclElement) : lookup::LookupEnvironment =
    parentEnv_Variable().nestedEnv()
-      .addElement(ownedSelfVar)
+      .addElements(ownedSelfVar)
       
 
 endpackage

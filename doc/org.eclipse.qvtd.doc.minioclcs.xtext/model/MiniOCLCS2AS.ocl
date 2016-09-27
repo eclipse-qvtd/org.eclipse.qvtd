@@ -16,7 +16,7 @@ context PackageCS
 def : ast() : as::Package[1] =
 	as::Package {
 		name = name.toString(), -- FIXME bug 494252 
-	ownedClasses = classifiers.ast()->asOrderedSet(), -- FIXME remove asOrderedSet()
+	ownedClasses = classes.ast()->asOrderedSet(), -- FIXME remove asOrderedSet()
 	ownedPackages = packages.ast()->asOrderedSet()  -- FIXME remove asOrderedSet()
 	}
 	
@@ -25,16 +25,13 @@ def : ast() : as::Class[1] =
 	as::Class {
 		name = name.toString(), 
 		ownedOperations = operations.ast()->asOrderedSet(), -- FIXME remove asOrderedSet()
-		ownedProperties = properties.ast()->asOrderedSet(), -- FIXME remove asOrderedSet()
+		ownedProperties = properties.ast()->asOrderedSet() -- FIXME remove asOrderedSet()
 		--ownedInvariants = ConstraintCS::allInstances()->select(x | x.ast().ownedSpecification.ownedSelfVar.type  = ast()),
 --		ownedInvariants = self->closure(oclContainer())->selectByKind(RootCS)
 --				.contraints.invariants->select(x | x.ast().ownedSpecification.ownedSelfVar.type = ast())
 --				.ast()->asOrderedSet(), -- FIXME remove asOrderedSet()
-		superClass = if _extends = null then null else ast().lookupClass(_extends) endif
+--		superClasses = if _extends = OrderedSet {} then null else OrderedSet {ast().lookupClass(_extends)} endif
 	}
-context ClassifierCS
-def : ast () : as::Class[1] =
-	null -- to be overriden
 	
 --context InvariantCS
 --def :  ast() : as::Constraint[1] =
@@ -60,8 +57,10 @@ def : ast() : as::Operation[1] =
 		type = ast().lookupClass(resultRef),
 		ownedParameters = params.ast()->asOrderedSet(), -- FIXME remove asOrderedSet()
 		ownedBodyExpression = as::ExpressionInOCL {
+				language = 'OCL',
 				ownedBody = self._body.ast(),
-				ownedSelfVar = as::Variable{name='self', type= self.ast().owningClass}
+				ownedSelfVar = as::Variable{name='self', type= self.ast().owningClass},
+				type = self._body.ast().type
 			}
 	}
 	
