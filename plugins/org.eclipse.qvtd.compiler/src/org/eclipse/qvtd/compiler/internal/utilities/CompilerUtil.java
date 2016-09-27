@@ -31,6 +31,7 @@ import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.emf.ecore.util.EcoreUtil.UnresolvedProxyCrossReferencer;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.codegen.generator.CodeGenerator;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.PivotTables;
 import org.eclipse.ocl.pivot.messages.StatusCodes;
@@ -45,6 +46,7 @@ import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.xtext.base.utilities.ElementUtil;
 import org.eclipse.ocl.xtext.basecs.ModelElementCS;
+import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcore;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
@@ -247,6 +249,21 @@ public class CompilerUtil
 	public static <T> void removeAll(@NonNull Collection<T> removeFrom, @NonNull Iterable<T> elementsToTemove) {
 		for (T element : elementsToTemove) {
 			removeFrom.remove(element);
+		}
+	}
+
+	public static void throwExceptionWithProblems(@NonNull CodeGenerator codeGenerator, @NonNull Exception e) throws Exception {
+		List<@NonNull Exception> problems = codeGenerator.getProblems();
+		if (problems != null) {
+			StringBuilder s = new StringBuilder();
+			for (@NonNull Exception ex : problems) {
+				s.append(ex.toString() + "\n");
+			}
+			s.append(e.toString());
+			throw new CompilerChainException(e, s.toString());
+		}
+		else {
+			throw e;
 		}
 	}
 }

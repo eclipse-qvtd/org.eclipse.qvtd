@@ -149,7 +149,7 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 			super(compilerChain, JAVA_STEP);
 		}
 
-		protected @NonNull JavaResult execute(@NonNull URI txURI, @NonNull Transformation asTransformation, @NonNull String ... genModelFiles) throws IOException {
+		protected @NonNull JavaResult execute(@NonNull URI txURI, @NonNull Transformation asTransformation, @NonNull String ... genModelFiles) throws Exception {
 			URI javaURI = compilerChain.getURI(JAVA_STEP, URI_KEY);
 			URI classURI = compilerChain.getURI(CLASS_STEP, URI_KEY);
 			ResourceSet resourceSet = environmentFactory.getResourceSet();
@@ -167,7 +167,14 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 			if (javaExtraPrefix != null) {
 				options.setPackagePrefix(javaExtraPrefix);
 			}
-			String javaCodeSource = cg.generateClassFile();
+			String javaCodeSource;
+			try {
+				javaCodeSource = cg.generateClassFile();
+			}
+			catch (Exception e) {
+				CompilerUtil.throwExceptionWithProblems(cg, e);
+				javaCodeSource = "";		// Never happens but suppresses JDT error.
+			}
 			URI normalizedURI = resourceSet.getURIConverter().normalize(javaURI);
 			String javaFileName;
 			File explicitClassPath;
@@ -575,7 +582,7 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 		return qvtm2qvtpCompilerStep.execute(mResource);
 	}
 
-	protected @NonNull JavaResult qvti2java(@NonNull Transformation asTransformation, @NonNull String ... genModelFiles) throws IOException {
+	protected @NonNull JavaResult qvti2java(@NonNull Transformation asTransformation, @NonNull String ... genModelFiles) throws Exception {
 		return qvti2javaCompilerStep.execute(txURI, asTransformation, genModelFiles);
 	}
 

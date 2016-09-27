@@ -56,6 +56,7 @@ import org.eclipse.qvtd.codegen.qvti.java.QVTiGlobalContext;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGGuardVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
 import org.eclipse.qvtd.codegen.utilities.QVTiCGUtil;
+import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.cs2as.compiler.CS2ASJavaCompiler;
 import org.eclipse.qvtd.cs2as.compiler.CS2ASJavaCompilerParameters;
 import org.eclipse.qvtd.cs2as.compiler.cgmodel.CGLookupCallExp;
@@ -474,11 +475,25 @@ public class CS2ASJavaCompilerImpl implements CS2ASJavaCompiler {
 		options.setUseNullAnnotations(true);
 		options.setIsIncremental(params.isIncremental());
 		options.setPackagePrefix(params.getPackageName());
-		cg.generateClassFile();
+		try {
+			cg.generateClassFile();
+		}
+		catch (Exception e) {
+			CompilerUtil.throwExceptionWithProblems(cg, e);
+		}
+		Log log2 = log;
+		if (log2 != null) {
+			List<@NonNull Exception> problems = cg.getProblems();
+			if (problems != null) {
+				for (@NonNull Exception ex : problems) {
+					log2.info("CG Problem " + ex.toString());
+				}
+			}
+		}
 		String savePath = params.getSavePath();
 		cg.saveSourceFile(savePath);
-		if (log != null) {
-			log.info("Saved " + savePath + cg.getQualifiedName());
+		if (log2 != null) {
+			log2.info("Saved " + savePath + cg.getQualifiedName());
 		}
 		return ClassUtil.nonNullState(compileTransformation(new File(new File(savePath).getParentFile(), "bin"), cg));
 	}
