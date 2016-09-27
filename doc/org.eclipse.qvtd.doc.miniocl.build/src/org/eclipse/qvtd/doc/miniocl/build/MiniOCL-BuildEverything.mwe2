@@ -31,7 +31,7 @@ Workflow {
 	component = org.eclipse.ocl.examples.build.utilities.GenerateModel { resourceSet = rSet
 		genModel = "/org.eclipse.qvtd.doc.miniocl/model/MiniOCL.genmodel"
 	}
-	
+
 	component = org.eclipse.ocl.examples.build.xtend.GenerateASVisitors { resourceSet = rSet
 		projectName = "org.eclipse.qvtd.doc.miniocl"
 		genModelFile = "model/MiniOCL.genmodel"
@@ -43,12 +43,13 @@ Workflow {
 	}
 	
 	// We generate the AS Lookup infrastructure
-	component = @SubGenerateAutoASModel { resourceSet = rSet
-    	projectName = "org.eclipse.qvtd.doc.miniocl"
-    	genModelFile = "model/MiniOCL.genmodel"
-    	lookupFilePath = "platform:/resource/org.eclipse.qvtd.doc.minioclcs.xtext/model/MiniOCLCS2ASLookup.ocl"
-    }
-    
+//  FIXME Lookup infrastructure generation has been broken after cached operations rework
+//	component = @SubGenerateAutoASModel { resourceSet = rSet
+//    	projectName = "org.eclipse.qvtd.doc.miniocl"
+//    	genModelFile = "model/MiniOCL.genmodel"
+//    	lookupFilePath = "platform:/resource/org.eclipse.qvtd.doc.minioclcs.xtext/model/MiniOCLCS2ASLookup.ocl"
+//    }
+//    
     
     // We generate the CS2AS infrastructure
 	
