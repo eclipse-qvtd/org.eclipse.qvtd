@@ -50,7 +50,7 @@ public class OCL2QVTiCGTxCompiler implements OCL2JavaTxCompiler<CS2ASJavaCompile
 	}
 
 	@Override
-	public Class<? extends Transformer> compileTransformation(@Nullable ResourceSet rSet, @NonNull CS2ASJavaCompilerParameters params, @NonNull String tracePropertyName, @NonNull URI oclDocURI, URI... extendedOCLDocURIs)
+	public Class<? extends Transformer> compileTransformation(@Nullable ResourceSet rSet, @NonNull CS2ASJavaCompilerParameters params, @NonNull String tracePropertyName, @NonNull URI oclDocURI, @NonNull URI... extendedOCLDocURIs)
 			throws Exception {
 
 		QVTimperative qvt = QVTimperative.newInstance(BasicProjectManager.CLASS_PATH, rSet);
@@ -68,7 +68,7 @@ public class OCL2QVTiCGTxCompiler implements OCL2JavaTxCompiler<CS2ASJavaCompile
 		return new CS2ASJavaCompilerImpl();
 	}
 
-	protected Transformation executeOCL2QVTi_CompilerChain(QVTimperative qvt, String tracePropName,  URI oclDocURI, URI... extendedOCLDocURIs) throws Exception {
+	protected @NonNull Transformation executeOCL2QVTi_CompilerChain(@NonNull QVTimperative qvt, String tracePropName, @NonNull URI oclDocURI, @NonNull URI... extendedOCLDocURIs) throws Exception {
 
 		Map<@NonNull String, @Nullable Map<@NonNull Key<Object>, @Nullable Object>> options = new HashMap<@NonNull String, @Nullable Map<@NonNull Key<Object>, @Nullable Object>>();
 		// OCL2QVTp options

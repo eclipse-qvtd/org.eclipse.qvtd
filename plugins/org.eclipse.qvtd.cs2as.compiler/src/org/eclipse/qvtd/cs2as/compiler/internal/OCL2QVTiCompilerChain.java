@@ -18,14 +18,18 @@ import java.util.Map;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Element;
+import org.eclipse.ocl.pivot.resource.ASResource;
+import org.eclipse.ocl.pivot.resource.CSResource;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.compiler.AbstractCompilerChain;
 import org.eclipse.qvtd.compiler.AbstractCompilerStep;
 import org.eclipse.qvtd.compiler.CompilerChain;
+import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
 
@@ -39,12 +43,35 @@ public class OCL2QVTiCompilerChain extends AbstractCompilerChain {
 
 		public OCL2QVTpCompilerStep(@NonNull CompilerChain compilerChain, @NonNull QVTimperative qvti,
 				@Nullable Map<@NonNull String, @Nullable Map<@NonNull Key<Object>, @Nullable Object>> options,
-				@NonNull URI oclDocURI, URI... extendedDocURIs) {
+				@NonNull URI oclDocURI, @NonNull URI... extendedDocURIs) throws CompilerChainException {
 			super(compilerChain, QVTP_STEP);
 			this.traceabilityPropName = getTraceabilityPropertyName();
-			this.oclASUri = ClassUtil.nonNullState(qvti.parse(oclDocURI)).getURI();
-			for (URI oclDocUri : extendedDocURIs) {
-				this.extendedASUris.add(ClassUtil.nonNullState(qvti.parse(oclDocUri)).getURI()); // We add the AS URI
+			ResourceSet externalResourceSet = qvti.getResourceSet();
+			CSResource csResource = (CSResource) externalResourceSet.getResource(oclDocURI, true);
+			if (csResource == null) {
+				throw new CompilerChainException("Failed to parse " + oclDocURI);
+			}
+			ASResource asResource = qvti.cs2as(csResource);
+			this.oclASUri = ClassUtil.nonNullState(asResource.getURI());
+			for (@NonNull URI extendedDocURI : extendedDocURIs) {
+				csResource = (CSResource) externalResourceSet.getResource(extendedDocURI, true);
+				if (csResource == null) {
+					throw new CompilerChainException("Failed to parse " + extendedDocURI);
+				}
+				asResource = qvti.cs2as(csResource);
+				this.extendedASUris.add(ClassUtil.nonNullState(asResource.getURI())); // We add the AS URI
+			}
+			StringBuilder s = null;
+			for (@NonNull Resource resource : externalResourceSet.getResources()) {
+				if (resource.getErrors().size() > 0) {
+					if (s == null) {
+						s = new StringBuilder();
+					}
+					s.append(PivotUtil.formatResourceDiagnostics(resource.getErrors(), "\nErrors in " + resource.getURI(), "\n\t"));
+				}
+			}
+			if (s != null) {
+				throw new CompilerChainException(s.toString());
 			}
 		}
 
@@ -90,9 +117,10 @@ public class OCL2QVTiCompilerChain extends AbstractCompilerChain {
 	 * @param options optional options
 	 * @param oclDocURI the mandatory main OCL document URI to compile
 	 * @param extendedDocURIs optional OCL document URIs that the main one extends
+	 * @throws CompilerChainException
 	 */
 	public OCL2QVTiCompilerChain(@NonNull QVTimperative qvti, @Nullable Map<@NonNull String, @Nullable Map<@NonNull Key<Object>, @Nullable Object>> options,
-			@NonNull URI oclDocURI, URI... extendedDocURIs) {
+			@NonNull URI oclDocURI, @NonNull URI... extendedDocURIs) throws CompilerChainException {
 		super(qvti.getEnvironmentFactory(), oclDocURI, options);
 		this.ocl2qvtpCompilerStep = new OCL2QVTpCompilerStep(this, qvti, options, oclDocURI, extendedDocURIs);
 	}

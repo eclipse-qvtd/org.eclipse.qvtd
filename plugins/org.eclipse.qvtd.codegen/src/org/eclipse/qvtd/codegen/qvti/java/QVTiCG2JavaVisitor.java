@@ -853,19 +853,6 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		}
 	}
 
-	private EObject getContainer(EObject eObject) {
-		EObject eContainer = eObject.eContainer();
-		if (eContainer != null) {
-			return eContainer;
-		}
-		for (Adapter eAdapter : eObject.eAdapters()) {
-			if (eAdapter instanceof QVTiAS2CGVisitor.InlinedBodyAdapter) {
-				return ((QVTiAS2CGVisitor.InlinedBodyAdapter)eAdapter).getOperationCallExp();
-			}
-		}
-		return null;
-	}
-
 	protected void doGot(@NonNull CGNavigationCallExp cgPropertyCallExp, @NonNull CGValuedElement source, @NonNull EStructuralFeature eStructuralFeature) {
 		if (useGot) {
 			EPackage ePackage = ClassUtil.nonNullModel(eStructuralFeature.getEContainingClass().getEPackage());
@@ -1160,6 +1147,19 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		return allImports;
 	}
 
+	private EObject getContainer(EObject eObject) {
+		EObject eContainer = eObject.eContainer();
+		if (eContainer != null) {
+			return eContainer;
+		}
+		for (Adapter eAdapter : eObject.eAdapters()) {
+			if (eAdapter instanceof QVTiAS2CGVisitor.InlinedBodyAdapter) {
+				return ((QVTiAS2CGVisitor.InlinedBodyAdapter)eAdapter).getOperationCallExp();
+			}
+		}
+		return null;
+	}
+
 	@Override
 	protected @Nullable EStructuralFeature getESObject(@NonNull Property asProperty) {
 		EObject esObject = asProperty.getESObject();
@@ -1171,7 +1171,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			return null;
 		}
 		if (!oppositeProperty.isIsComposite()) {
-			PivotMetamodelManager metamodelManager = analyzer.getCodeGenerator().getEnvironmentFactory().getMetamodelManager();
+			PivotMetamodelManager metamodelManager = environmentFactory.getMetamodelManager();
 			LibraryProperty libraryProperty = metamodelManager.getImplementation(null, null, asProperty);
 			if (!(libraryProperty instanceof OclElementOclContainerProperty)) {
 				return null;
@@ -2105,7 +2105,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		List<CGOperation> cgOperations = cgTransformation.getOperations();
 		doMappingConstructorConstants(cgMappings);
 		doFunctionConstructorConstants(ClassUtil.nullFree(cgOperations));
-		//		js.append("\n");
+		js.append("\n");
 		doConstructor(cgTransformation, oppositeIndex2propertyIdName, allInstancesNames);
 		js.append("\n");
 		if (isIncremental) {

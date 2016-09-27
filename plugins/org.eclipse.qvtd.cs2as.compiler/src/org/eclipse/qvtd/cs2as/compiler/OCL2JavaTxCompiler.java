@@ -19,12 +19,12 @@ import org.eclipse.qvtd.runtime.evaluation.Transformer;
 public interface OCL2JavaTxCompiler<P extends OCL2JavaTxCompilerParams> {
 
 	// FIXME fix exception handling
-	
+
 	public Class<? extends Transformer> compileTransformation(@Nullable ResourceSet rSet,
 			@NonNull CS2ASJavaCompilerParameters params, @NonNull URI oclDocURI,
-			URI... extendedOCLDocURIs) throws Exception; 
-	
+			@NonNull URI... extendedOCLDocURIs) throws Exception;
+
 	public Class<? extends Transformer> compileTransformation(@Nullable ResourceSet rSet,
 			@NonNull CS2ASJavaCompilerParameters params, @NonNull String tracePropertyName, @NonNull URI oclDocURI,
-			URI... extendedOCLDocURIs) throws Exception;
+			@NonNull URI... extendedOCLDocURIs) throws Exception;
 }
