@@ -25,7 +25,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.dynamic.OCL2JavaFileObject;
@@ -49,7 +48,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
-import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.EcoreURIAdapter;
 import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.TestsXMLUtil;
 import org.eclipse.qvtd.xtext.qvtcore.tests.families2persons.Families2PersonsNormalizer;
 import org.eclipse.qvtd.xtext.qvtcore.tests.families2persons.Families.FamiliesPackage;
@@ -67,8 +65,6 @@ import org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simplerdbms.SimplerdbmsPac
 import org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.SimpleumlPackage;
 import org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml2rdbms.Simpleuml2rdbmsPackage;
 import org.eclipse.qvtd.xtext.qvtcore.tests.upper2lower.Upper2LowerNormalizer;
-import org.eclipse.qvtd.xtext.qvtcore.tests.upper2lower.simplegraph.SimplegraphPackage;
-import org.eclipse.qvtd.xtext.qvtcore.tests.upper2lower.simplegraph2graph.Simplegraph2graphPackage;
 import org.eclipse.qvtd.xtext.qvtimperative.tests.ModelNormalizer;
 import org.eclipse.qvtd.xtext.qvtimperative.tests.QVTiTestUtil;
 import org.junit.After;
@@ -96,32 +92,11 @@ public class QVTcCompilerTests extends LoadTestCase
 		private QVTiTransformationExecutor generatedExecutor = null;
 		private Set<@NonNull String> nsURIs = new HashSet<@NonNull String>();
 
-		public MyQVT(@NonNull String testFolderName, @NonNull EPackage... eInstances) {
+		public MyQVT(@NonNull String testFolderName) {
 			super(new QVTiEnvironmentFactory(getProjectMap(), null));
 			this.testFolderName = testFolderName;
 			this.testFolderURI = TESTS_BASE_URI.appendSegment(testFolderName);
 			this.samplesBaseUri = testFolderURI.appendSegment("samples");
-			//
-			// Explicitly install the eInstances that would normally make it into the ProjectMap from extension point registrations.
-			// Test models are not registered via extension point so we have to do this manually.
-			//
-			ResourceSetImpl externalResourceSet = (ResourceSetImpl) getResourceSet();
-			ResourceSetImpl asResourceSet = (ResourceSetImpl) getMetamodelManager().getASResourceSet();
-			for (EPackage eInstance : eInstances) {
-				String nsURI = eInstance.getNsURI();
-				if (nsURI != null) {
-					nsURIs.add(nsURI);
-				}
-				Resource eResource = eInstance.eResource();
-				assert eResource != null;
-				URI ecoreURI = EcoreURIAdapter.getEcoreURI(eResource);
-				if (ecoreURI == null) {
-					ecoreURI = testFolderURI.appendSegment(eInstance.getName() + ".ecore");
-				}
-				assert externalResourceSet.getURIConverter().exists(ecoreURI, null) : ecoreURI + " does not exist";
-				externalResourceSet.getURIResourceMap().put(ecoreURI, eResource);
-				asResourceSet.getURIResourceMap().put(ecoreURI, eResource);
-			}
 		}
 
 		public @NonNull Class<? extends Transformer> buildTransformation(@NonNull String testFileName, @NonNull String outputName, @NonNull String @NonNull... genModelFiles) throws Exception {
@@ -238,6 +213,11 @@ public class QVTcCompilerTests extends LoadTestCase
 			return TestsXMLUtil.defaultSavingOptions;
 		}
 
+		public void loadEcoreFile(URI fileURI, EPackage ePackage) {
+			ResourceSet rSet = getResourceSet();
+			rSet.getPackageRegistry().put(fileURI.toString(), ePackage);
+		}
+
 		private void loadGenModel(@NonNull URI genModelURI) {
 			ResourceSet resourceSet = getResourceSet();
 			MetamodelManagerInternal metamodelManager = getMetamodelManager();
@@ -316,7 +296,12 @@ public class QVTcCompilerTests extends LoadTestCase
 	@Test
 	public void testQVTcCompiler_Families2Persons() throws Exception {
 		//		AbstractTransformer.INVOCATIONS.setState(true);
-		MyQVT myQVT = new MyQVT("families2persons");
+		String testFolderName = "families2persons";
+		URI testFolderURI = TESTS_BASE_URI.appendSegment(testFolderName);
+		MyQVT myQVT = new MyQVT(testFolderName);
+		myQVT.loadEcoreFile(testFolderURI.appendSegment("Families.ecore"), FamiliesPackage.eINSTANCE);
+		myQVT.loadEcoreFile(testFolderURI.appendSegment("Families2Persons.ecore"), Families2PersonsPackage.eINSTANCE);
+		myQVT.loadEcoreFile(testFolderURI.appendSegment("Persons.ecore"), PersonsPackage.eINSTANCE);
 		//    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 		try {
 			ImperativeTransformation asTransformation = myQVT.compileTransformation("Families2Persons.qvtc", "person");
@@ -346,8 +331,7 @@ public class QVTcCompilerTests extends LoadTestCase
 		//		Scheduler.REGION_DEPTH.setState(true);
 		//		Scheduler.REGION_ORDER.setState(true);
 		//		Scheduler.REGION_TRAVERSAL.setState(true);
-		//		QVTs2QVTiVisitor.POLLED_PROPERTIES.setState(true);
-		MyQVT myQVT = new MyQVT("families2persons", Families2PersonsPackage.eINSTANCE, FamiliesPackage.eINSTANCE, PersonsPackage.eINSTANCE);
+		MyQVT myQVT = new MyQVT("families2persons");
 		//    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 		try {
 			Class<? extends Transformer> txClass = myQVT.buildTransformation("Families2Persons.qvtc", "person", "Families2Persons.genmodel");
@@ -372,9 +356,9 @@ public class QVTcCompilerTests extends LoadTestCase
 		//    	QVTs2QVTiVisitor.POLLED_PROPERTIES.setState(true);
 		String testFolderName = "forward2reverse";
 		URI testFolderURI = TESTS_BASE_URI.appendSegment(testFolderName);
-		EcoreURIAdapter.setEcoreURI(List2listPackage.eINSTANCE, testFolderURI.appendSegment("List2List.ecore"));
-		EcoreURIAdapter.setEcoreURI(DoublylinkedlistPackage.eINSTANCE, testFolderURI.appendSegment("DoublyLinkedList.ecore"));
-		MyQVT myQVT = new MyQVT(testFolderName, List2listPackage.eINSTANCE, DoublylinkedlistPackage.eINSTANCE);
+		MyQVT myQVT = new MyQVT(testFolderName);
+		myQVT.loadEcoreFile(testFolderURI.appendSegment("DoublyLinkedList.ecore"), DoublylinkedlistPackage.eINSTANCE);
+		myQVT.loadEcoreFile(testFolderURI.appendSegment("List2List.ecore"), List2listPackage.eINSTANCE);
 		//		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 		try {
 			ImperativeTransformation asTransformation = myQVT.compileTransformation("Forward2Reverse.qvtc", "reverse");
@@ -421,10 +405,7 @@ public class QVTcCompilerTests extends LoadTestCase
 		//    	Scheduler.REGION_STACK.setState(true);
 		//    	Scheduler.REGION_TRAVERSAL.setState(true);
 		String testFolderName = "forward2reverse";
-		URI testFolderURI = TESTS_BASE_URI.appendSegment(testFolderName);
-		EcoreURIAdapter.setEcoreURI(List2listPackage.eINSTANCE, testFolderURI.appendSegment("List2List.ecore"));
-		EcoreURIAdapter.setEcoreURI(DoublylinkedlistPackage.eINSTANCE, testFolderURI.appendSegment("DoublyLinkedList.ecore"));
-		MyQVT myQVT = new MyQVT(testFolderName, List2listPackage.eINSTANCE, DoublylinkedlistPackage.eINSTANCE);
+		MyQVT myQVT = new MyQVT(testFolderName);
 		//		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 		try {
 			Class<? extends Transformer> txClassReverse = myQVT.buildTransformation("Forward2Reverse.qvtc", "forward", "List2List.genmodel");
@@ -466,11 +447,11 @@ public class QVTcCompilerTests extends LoadTestCase
 		//		AbstractTransformer.EXCEPTIONS.setState(true);
 		//		AbstractTransformer.INVOCATIONS.setState(true);
 		String testFolderName = "hsv2hls";
-		//		URI testFolderURI = TESTS_BASE_URI.appendSegment(testFolderName);
-		//		EcoreURIAdapter.setEcoreURI(HSV2HLSPackage.eINSTANCE, testFolderURI.appendSegment("HSV2HLS.ecore"));
-		//		EcoreURIAdapter.setEcoreURI(HSVTreePackage.eINSTANCE, testFolderURI.appendSegment("HSVTree.ecore"));
-		//		EcoreURIAdapter.setEcoreURI(HLSTreePackage.eINSTANCE, testFolderURI.appendSegment("HLSTree.ecore"));
+		URI testFolderURI = TESTS_BASE_URI.appendSegment(testFolderName);
 		MyQVT myQVT = new MyQVT(testFolderName);
+		myQVT.loadEcoreFile(testFolderURI.appendSegment("HSV2HLS.ecore"), HSV2HLSPackage.eINSTANCE);
+		myQVT.loadEcoreFile(testFolderURI.appendSegment("HSVTree.ecore"), HSVTreePackage.eINSTANCE);
+		myQVT.loadEcoreFile(testFolderURI.appendSegment("HLSTree.ecore"), HLSTreePackage.eINSTANCE);
 		//		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 		try {
 			ImperativeTransformation asTransformation = myQVT.compileTransformation("HSV2HLS.qvtc", "hls");
@@ -496,11 +477,7 @@ public class QVTcCompilerTests extends LoadTestCase
 		//		Scheduler.REGION_TRAVERSAL.setState(true);
 		//		QVTs2QVTiVisitor.POLLED_PROPERTIES.setState(true);
 		String testFolderName = "hsv2hls";
-		URI testFolderURI = TESTS_BASE_URI.appendSegment(testFolderName);
-		EcoreURIAdapter.setEcoreURI(HSV2HLSPackage.eINSTANCE, testFolderURI.appendSegment("HSV2HLS.ecore"));
-		EcoreURIAdapter.setEcoreURI(HSVTreePackage.eINSTANCE, testFolderURI.appendSegment("HSVTree.ecore"));
-		EcoreURIAdapter.setEcoreURI(HLSTreePackage.eINSTANCE, testFolderURI.appendSegment("HLSTree.ecore"));
-		MyQVT myQVT = new MyQVT(testFolderName, HSV2HLSPackage.eINSTANCE, HSVTreePackage.eINSTANCE, HLSTreePackage.eINSTANCE);
+		MyQVT myQVT = new MyQVT(testFolderName);
 		try {
 			myQVT.buildTransformation("HSV2HLS.qvtc", "hls", "HSV2HLS.genmodel");
 			myQVT.loadInput("hsv", "SolarizedHSV.xmi");
@@ -516,11 +493,11 @@ public class QVTcCompilerTests extends LoadTestCase
 	public void testQVTcCompiler_SimpleUML2RDBMS() throws Exception {
 		//		AbstractTransformer.INVOCATIONS.setState(true);
 		String testFolderName = "uml2rdbms";
-		//		URI testFolderURI = TESTS_BASE_URI.appendSegment(testFolderName);
-		//		EcoreURIAdapter.setEcoreURI(Simpleuml2rdbmsPackage.eINSTANCE, testFolderURI.appendSegment("SimpleUML2RDBMS.ecore"));
-		//		EcoreURIAdapter.setEcoreURI(SimpleumlPackage.eINSTANCE, testFolderURI.appendSegment("SimpleUML.ecore"));
-		//		EcoreURIAdapter.setEcoreURI(SimplerdbmsPackage.eINSTANCE, testFolderURI.appendSegment("SimpleRDBMS.ecore"));
+		URI testFolderURI = TESTS_BASE_URI.appendSegment(testFolderName);
 		MyQVT myQVT = new MyQVT(testFolderName);
+		myQVT.loadEcoreFile(testFolderURI.appendSegment("SimpleUML2RDBMS.ecore"), Simpleuml2rdbmsPackage.eINSTANCE);
+		myQVT.loadEcoreFile(testFolderURI.appendSegment("SimpleUML.ecore"), SimpleumlPackage.eINSTANCE);
+		myQVT.loadEcoreFile(testFolderURI.appendSegment("SimpleRDBMS.ecore"), SimplerdbmsPackage.eINSTANCE);
 		//    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 		try {
 			ImperativeTransformation asTransformation = myQVT.compileTransformation("SimpleUML2RDBMS.qvtcas", "rdbms");
@@ -568,14 +545,9 @@ public class QVTcCompilerTests extends LoadTestCase
 		//		Scheduler.REGION_TRAVERSAL.setState(true);
 		Splitter.RESULT.setState(true);
 		Splitter.STAGES.setState(true);
-		//		QVTs2QVTiVisitor.POLLED_PROPERTIES.setState(true);
 		Splitter.RESULT.setState(true);
 		String testFolderName = "uml2rdbms";
-		URI testFolderURI = TESTS_BASE_URI.appendSegment(testFolderName);
-		EcoreURIAdapter.setEcoreURI(Simpleuml2rdbmsPackage.eINSTANCE, testFolderURI.appendSegment("SimpleUML2RDBMS.ecore"));
-		EcoreURIAdapter.setEcoreURI(SimpleumlPackage.eINSTANCE, testFolderURI.appendSegment("SimpleUML.ecore"));
-		EcoreURIAdapter.setEcoreURI(SimplerdbmsPackage.eINSTANCE, testFolderURI.appendSegment("SimpleRDBMS.ecore"));
-		MyQVT myQVT = new MyQVT(testFolderName, Simpleuml2rdbmsPackage.eINSTANCE, SimpleumlPackage.eINSTANCE, SimplerdbmsPackage.eINSTANCE);
+		MyQVT myQVT = new MyQVT(testFolderName);
 		try {
 			Transformation asTransformation = myQVT.compileTransformation("SimpleUML2RDBMS.qvtcas", "rdbms");
 			myQVT.createGeneratedExecutor(asTransformation, "SimpleUML2RDBMS.genmodel");
@@ -602,9 +574,6 @@ public class QVTcCompilerTests extends LoadTestCase
 	public void testQVTcCompiler_Upper2Lower() throws Exception {
 		//    	QVTs2QVTiVisitor.POLLED_PROPERTIES.setState(true);
 		String testFolderName = "upper2lower";
-		//		URI testFolderURI = TESTS_BASE_URI.appendSegment(testFolderName);
-		//		EcoreURIAdapter.setEcoreURI(Simplegraph2graphPackage.eINSTANCE, testFolderURI.appendSegment("SimpleGraph2Graph.ecore"));
-		//		EcoreURIAdapter.setEcoreURI(SimplegraphPackage.eINSTANCE, testFolderURI.appendSegment("SimpleGraph.ecore"));
 		MyQVT myQVT = new MyQVT(testFolderName);
 		//    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 		try {
@@ -630,10 +599,7 @@ public class QVTcCompilerTests extends LoadTestCase
 		//    	Scheduler.REGION_STACK.setState(true);
 		//    	Scheduler.REGION_TRAVERSAL.setState(true);
 		String testFolderName = "upper2lower";
-		URI testFolderURI = TESTS_BASE_URI.appendSegment(testFolderName);
-		EcoreURIAdapter.setEcoreURI(Simplegraph2graphPackage.eINSTANCE, testFolderURI.appendSegment("SimpleGraph2Graph.ecore"));
-		EcoreURIAdapter.setEcoreURI(SimplegraphPackage.eINSTANCE, testFolderURI.appendSegment("SimpleGraph.ecore"));
-		MyQVT myQVT = new MyQVT(testFolderName, Simplegraph2graphPackage.eINSTANCE, SimplegraphPackage.eINSTANCE);
+		MyQVT myQVT = new MyQVT(testFolderName);
 		//		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 		try {
 			myQVT.buildTransformation("Upper2Lower.qvtcas", "lowerGraph", "SimpleGraph2Graph.genmodel");

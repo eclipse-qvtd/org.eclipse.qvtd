@@ -22,7 +22,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
-import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.EcoreURIAdapter;
 import org.eclipse.qvtd.xtext.qvtcore.tests.QVTcCompilerTests;
 import org.eclipse.qvtd.xtext.qvtcore.tests.list2list.doublylinkedlist.DoublyLinkedList;
 import org.eclipse.qvtd.xtext.qvtcore.tests.list2list.doublylinkedlist.DoublylinkedlistPackage;
@@ -40,13 +39,13 @@ public class EXE2016InterpreterTests extends QVTcCompilerTests
 		AbstractTransformer.EXCEPTIONS.setState(true);
 		String testFolderName = "forward2reverse";
 		URI testFolderURI = TESTS_BASE_URI.appendSegment(testFolderName);
-		EcoreURIAdapter.setEcoreURI(List2listPackage.eINSTANCE, testFolderURI.appendSegment("List2List.ecore"));
-		EcoreURIAdapter.setEcoreURI(DoublylinkedlistPackage.eINSTANCE, testFolderURI.appendSegment("DoublyLinkedList.ecore"));
 		DoublyLinkedListGenerator doublyLinkedListGenerator = new DoublyLinkedListGenerator();
 		PrintAndLog logger = new PrintAndLog("results/" + getName());
 		logger.printf("%s\n", getName());
 		//		AbstractTransformer.INVOCATIONS.setState(true);
-		MyQVT myQVT = new MyQVT("forward2reverse", DoublylinkedlistPackage.eINSTANCE, List2listPackage.eINSTANCE);
+		MyQVT myQVT = new MyQVT("forward2reverse");
+		myQVT.loadEcoreFile(testFolderURI.appendSegment("DoublyLinkedList.ecore"), DoublylinkedlistPackage.eINSTANCE);
+		myQVT.loadEcoreFile(testFolderURI.appendSegment("List2List.ecore"), List2listPackage.eINSTANCE);
 		//    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 		try {
 			ImperativeTransformation asTransformation = myQVT.compileTransformation("Forward2Reverse.qvtc", "reverse");
@@ -89,7 +88,11 @@ public class EXE2016InterpreterTests extends QVTcCompilerTests
 		PrintAndLog logger = new PrintAndLog("results/" + getName());
 		logger.printf("%s\n", getName());
 		//		AbstractTransformer.INVOCATIONS.setState(true);
-		MyQVT myQVT = new MyQVT("forward2reverse", DoublylinkedlistPackage.eINSTANCE, List2listPackage.eINSTANCE);
+		String testFolderName = "forward2reverse";
+		URI testFolderURI = TESTS_BASE_URI.appendSegment(testFolderName);
+		MyQVT myQVT = new MyQVT(testFolderName);
+		myQVT.loadEcoreFile(testFolderURI.appendSegment("DoublyLinkedList.ecore"), DoublylinkedlistPackage.eINSTANCE);
+		myQVT.loadEcoreFile(testFolderURI.appendSegment("List2List.ecore"), List2listPackage.eINSTANCE);
 		//		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 		try {
 			ImperativeTransformation asTransformation = myQVT.compileTransformation("Forward2Reverse.qvtc", "reverse");
