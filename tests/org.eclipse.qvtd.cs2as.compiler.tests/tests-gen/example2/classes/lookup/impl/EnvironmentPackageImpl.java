@@ -104,6 +104,9 @@ public class EnvironmentPackageImpl extends EPackageImpl implements EnvironmentP
 
 		isInited = true;
 
+		// Initialize simple dependencies
+		OCLstdlibPackage.eINSTANCE.eClass();
+
 		// Obtain or create and register interdependencies
 		ClassesPackageImpl theClassesPackage = (ClassesPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(ClassesPackage.eNS_URI) instanceof ClassesPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(ClassesPackage.eNS_URI) : ClassesPackage.eINSTANCE);
 
