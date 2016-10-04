@@ -65,7 +65,7 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 			// FIXME Following code fixes up missing source. Should be fixed earlier.
 			List<OperationCallExp> missingOperationCallSources = QVTbaseUtil.rewriteMissingOperationCallSources(environmentFactory, rResource);
 			if (missingOperationCallSources != null) {
-				System.err.println("Missing OperationCallExp sources  were fixed up for '" + txURI + "'");
+				System.err.println("Missing OperationCallExp sources were fixed up for '" + txURI + "'");
 			}
 			compiled(rResource);
 			//			saveResource(rResource, QVTR_STEP); -- causes test failures
