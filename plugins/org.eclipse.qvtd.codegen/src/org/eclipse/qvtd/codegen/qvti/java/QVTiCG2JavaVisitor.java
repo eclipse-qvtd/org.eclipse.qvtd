@@ -932,19 +932,12 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		else {
 			js.append("try {\n");
 			js.pushIndentation(null);
-			String savedLocalPrefix = localPrefix;
-			try {
-				localPrefix = hasMappingClass ? getMappingName(cgMapping) : localPrefix;
-				if (!cgBody.isInlined()) {
-					cgBody.accept(this);
-				}
-				js.append("return ");
-				js.appendValueName(cgBody);
-				js.append(";\n");
+			if (!cgBody.isInlined()) {
+				cgBody.accept(this);
 			}
-			finally {
-				localPrefix = savedLocalPrefix;
-			}
+			js.append("return ");
+			js.appendValueName(cgBody);
+			js.append(";\n");
 			js.popIndentation();
 			js.append("} catch (Throwable e) {\n");
 			js.pushIndentation(null);
