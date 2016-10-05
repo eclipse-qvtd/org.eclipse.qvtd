@@ -1200,6 +1200,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		return JavaStream.convertToJavaIdentifier("MAP_" + cgMapping.getName());
 	}
 
+	@Override
 	protected @NonNull String getThisName(@NonNull CGElement cgElement) {
 		for (EObject eObject = cgElement; eObject != null; eObject = eObject.eContainer()) {
 			if (eObject instanceof CGMapping) {

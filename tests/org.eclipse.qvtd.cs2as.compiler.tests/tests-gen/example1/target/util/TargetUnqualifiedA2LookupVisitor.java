@@ -18,8 +18,11 @@ import example1.target.util.Visitable;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.TypedElement;
+import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.ids.IdManager;
 import org.eclipse.ocl.pivot.ids.TypeId;
+import org.eclipse.ocl.pivot.internal.library.executor.AbstractEvaluationOperation;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
 
@@ -43,7 +46,7 @@ public class TargetUnqualifiedA2LookupVisitor
     
     protected final /*@Thrown*/ org.eclipse.ocl.pivot.evaluation.@org.eclipse.jdt.annotation.NonNull Executor executor;
     protected final /*@Thrown*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull IdResolver idResolver;
-    protected /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Object child;
+    protected /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Object child_0;
     
     public TargetUnqualifiedA2LookupVisitor(@NonNull LookupEnvironment context) {
         super(context);
@@ -62,7 +65,7 @@ public class TargetUnqualifiedA2LookupVisitor
     protected @Nullable LookupEnvironment parentEnv(@NonNull EObject element) {
         EObject parent = element.eContainer();
         if (parent instanceof Visitable) {
-            this.child = element;
+            this.child_0 = element;
             return ((Visitable)parent).accept(this);
         }
         else {
@@ -71,20 +74,30 @@ public class TargetUnqualifiedA2LookupVisitor
     }
     
     /**
-     * visitTRoot(element : target::TRoot[1]) : lookup::LookupEnvironment[?]
+     * _'example1.target.util'::TargetUnqualifiedA2LookupVisitor::visitTRoot(element : target::TRoot[1]) : lookup::LookupEnvironment[?]
      * 
      * _'null' : lookup::LookupEnvironment[1]
      */
-    @Override
-    public /*@NonInvalid*/ LookupEnvironment visitTRoot(final /*@NonInvalid*/ example1.target.@org.eclipse.jdt.annotation.NonNull TRoot element) {
-        final /*@Thrown*/ example1.target.lookup.@org.eclipse.jdt.annotation.Nullable LookupEnvironment parentEnv = this.parentEnv(element);
-        if (parentEnv == null) {
-            throw new InvalidValueException("Null source for \'lookup::LookupEnvironment::addElements(NE)(Collection(addElements.NE)) : lookup::LookupEnvironment[1]\'");
+    protected class CACHE_TargetUnqualifiedA2LookupVisitor_visitTRoot extends AbstractEvaluationOperation
+    {
+        @Override
+        public @Nullable Object basicEvaluate(@NonNull Executor executor, @NonNull TypedElement caller, @Nullable Object @NonNull [] sourceAndArgumentValues) {
+            @SuppressWarnings("null") final /*@NonInvalid*/ example1.target.@org.eclipse.jdt.annotation.NonNull TRoot element_0 = (/*@NonInvalid*/ example1.target.@org.eclipse.jdt.annotation.NonNull TRoot)sourceAndArgumentValues[0];
+            final /*@Thrown*/ example1.target.lookup.@org.eclipse.jdt.annotation.Nullable LookupEnvironment parentEnv_0 = TargetUnqualifiedA2LookupVisitor.this.parentEnv(element_0);
+            if (parentEnv_0 == null) {
+                throw new InvalidValueException("Null source for \'lookup::LookupEnvironment::addElements(NE)(Collection(addElements.NE)) : lookup::LookupEnvironment[1]\'");
+            }
+            @SuppressWarnings("null")
+            final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<A> ownedA = element_0.getOwnedA();
+            @SuppressWarnings("null")
+            final /*@Thrown*/ example1.target.lookup.@org.eclipse.jdt.annotation.NonNull LookupEnvironment addElements = parentEnv_0.addElements(ownedA);
+            return addElements;
         }
-        @SuppressWarnings("null")
-        final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<A> ownedA = element.getOwnedA();
-        @SuppressWarnings("null")
-        final /*@Thrown*/ example1.target.lookup.@org.eclipse.jdt.annotation.NonNull LookupEnvironment addElements = parentEnv.addElements(ownedA);
-        return addElements;
+        
+        public LookupEnvironment evaluate(final /*@NonInvalid*/ example1.target.@org.eclipse.jdt.annotation.NonNull TRoot element_0) {
+            return (LookupEnvironment)evaluationCache.getCachedEvaluationResult(this, caller, new @Nullable Object[]{element_0});
+        }
     }
+    
+    protected final @NonNull CACHE_TargetUnqualifiedA2LookupVisitor_visitTRoot INST_TargetUnqualifiedA2LookupVisitor_visitTRoot = new CACHE_TargetUnqualifiedA2LookupVisitor_visitTRoot();
 }

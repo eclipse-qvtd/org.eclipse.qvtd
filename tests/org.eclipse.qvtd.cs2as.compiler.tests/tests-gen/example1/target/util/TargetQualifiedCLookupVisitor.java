@@ -17,8 +17,11 @@ import example1.target.util.AbstractTargetCommonLookupVisitor;
 import example1.target.util.Visitable;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.TypedElement;
+import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.ids.IdManager;
 import org.eclipse.ocl.pivot.ids.TypeId;
+import org.eclipse.ocl.pivot.internal.library.executor.AbstractEvaluationOperation;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 
 public class TargetQualifiedCLookupVisitor
@@ -50,16 +53,26 @@ public class TargetQualifiedCLookupVisitor
     }
     
     /**
-     * visitA2(element : target::A2[1]) : lookup::LookupEnvironment[?]
+     * _'example1.target.util'::TargetQualifiedCLookupVisitor::visitA2(element : target::A2[1]) : lookup::LookupEnvironment[?]
      * 
      * _'null' : lookup::LookupEnvironment[1]
      */
-    @Override
-    public /*@NonInvalid*/ LookupEnvironment visitA2(final /*@NonInvalid*/ example1.target.@org.eclipse.jdt.annotation.NonNull A2 element) {
-        @SuppressWarnings("null")
-        final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<C> ownsC = element.getOwnsC();
-        @SuppressWarnings("null")
-        final /*@Thrown*/ example1.target.lookup.@org.eclipse.jdt.annotation.NonNull LookupEnvironment addElements = context.addElements(ownsC);
-        return addElements;
+    protected class CACHE_TargetQualifiedCLookupVisitor_visitA2 extends AbstractEvaluationOperation
+    {
+        @Override
+        public @Nullable Object basicEvaluate(@NonNull Executor executor, @NonNull TypedElement caller, @Nullable Object @NonNull [] sourceAndArgumentValues) {
+            @SuppressWarnings("null") final /*@NonInvalid*/ example1.target.@org.eclipse.jdt.annotation.NonNull A2 element_0 = (/*@NonInvalid*/ example1.target.@org.eclipse.jdt.annotation.NonNull A2)sourceAndArgumentValues[0];
+            @SuppressWarnings("null")
+            final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<C> ownsC = element_0.getOwnsC();
+            @SuppressWarnings("null")
+            final /*@Thrown*/ example1.target.lookup.@org.eclipse.jdt.annotation.NonNull LookupEnvironment addElements = context.addElements(ownsC);
+            return addElements;
+        }
+        
+        public LookupEnvironment evaluate(final /*@NonInvalid*/ example1.target.@org.eclipse.jdt.annotation.NonNull A2 element_0) {
+            return (LookupEnvironment)evaluationCache.getCachedEvaluationResult(this, caller, new @Nullable Object[]{element_0});
+        }
     }
+    
+    protected final @NonNull CACHE_TargetQualifiedCLookupVisitor_visitA2 INST_TargetQualifiedCLookupVisitor_visitA2 = new CACHE_TargetQualifiedCLookupVisitor_visitA2();
 }

@@ -12,6 +12,8 @@
 package	example1.target.util;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.internal.evaluation.EvaluationCache;
+import org.eclipse.ocl.pivot.internal.evaluation.ExecutorInternal.ExecutorInternalExtension;
 
 import example1.target.lookup.LookupEnvironment;
 import example1.target.util.Visitable;
@@ -19,8 +21,11 @@ import example1.target.util.Visitable;
 public abstract class AbstractTargetCommonLookupVisitor
 	extends AbstractExtendingVisitor<@Nullable LookupEnvironment, @NonNull LookupEnvironment> {
 
+	protected final @NonNull EvaluationCache evaluationCache;
+	
 	protected AbstractTargetCommonLookupVisitor(@NonNull LookupEnvironment context) {
 		super(context);
+		this.evaluationCache = ((ExecutorInternalExtension)context.getExecutor()).getEvaluationCache();
 	}
 	
 	@Override

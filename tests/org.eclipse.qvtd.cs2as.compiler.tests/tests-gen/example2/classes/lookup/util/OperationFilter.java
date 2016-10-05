@@ -9,14 +9,22 @@
 
 package example2.classes.lookup.util;
 
+import example2.classes.Argument;
+import example2.classes.ClassesPackage;
+import example2.classes.Operation;
+import example2.classes.Parameter;
+import example2.classes.lookup.util.AbstractClassesLookupFilter;
 import java.util.Iterator;
 import java.util.List;
-
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.ids.IdManager;
 import org.eclipse.ocl.pivot.ids.TypeId;
+import org.eclipse.ocl.pivot.internal.evaluation.EvaluationCache;
+import org.eclipse.ocl.pivot.internal.evaluation.ExecutorInternal;
+import org.eclipse.ocl.pivot.internal.library.executor.AbstractEvaluationOperation;
 import org.eclipse.ocl.pivot.library.collection.CollectionSizeOperation;
 import org.eclipse.ocl.pivot.library.collection.OrderedCollectionAtOperation;
 import org.eclipse.ocl.pivot.library.collection.OrderedCollectionIndexOfOperation;
@@ -25,11 +33,6 @@ import org.eclipse.ocl.pivot.messages.PivotMessages;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.ocl.pivot.values.OrderedSetValue;
-
-import example2.classes.Argument;
-import example2.classes.ClassesPackage;
-import example2.classes.Operation;
-import example2.classes.Parameter;
 
 public class OperationFilter
 	extends AbstractClassesLookupFilter<Operation>
@@ -47,15 +50,22 @@ public class OperationFilter
     public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_Argument = TypeId.ORDERED_SET.getSpecializedId(CLSSid_Argument);
     public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_Parameter = TypeId.ORDERED_SET.getSpecializedId(CLSSid_Parameter);
     
+    protected final @NonNull EvaluationCache evaluationCache;
     protected final /*@Thrown*/ org.eclipse.ocl.pivot.evaluation.@org.eclipse.jdt.annotation.NonNull Executor executor;
     protected final /*@Thrown*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull IdResolver idResolver;
-    protected final /*@Thrown*/ List<Argument> args;
+    protected final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<Argument> args;
     
-    public OperationFilter(@NonNull Executor executor,final /*@Thrown*/ List<Argument> args) {
+    public OperationFilter(@NonNull Executor executor,final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<Argument> args) {
         super(Operation.class);
         this.args =  args;
         this.executor = executor;
         this.idResolver = executor.getIdResolver();
+        this.evaluationCache = ((ExecutorInternal.ExecutorInternalExtension)executor).getEvaluationCache();
+    }
+    
+    @Override
+    protected Boolean _matches(final /*@NonInvalid*/ example2.classes.@org.eclipse.jdt.annotation.NonNull Operation element_0) {
+        return INST_OperationFilter__matches.evaluate(element_0);
     }
     
     /**
@@ -63,98 +73,108 @@ public class OperationFilter
      * 
      * _'null' : Boolean[?]
      */
-    @Override
-	public /*@NonInvalid*/ Boolean _matches(final /*@NonInvalid*/ example2.classes.@org.eclipse.jdt.annotation.NonNull Operation element) {
-        /*@Caught*/ @NonNull Object CAUGHT_args;
-        try {
-            final /*@Thrown*/ List<Argument> args = (List<Argument>)this.args;
-            CAUGHT_args = args;
-        }
-        catch (Exception e) {
-            CAUGHT_args = ValueUtil.createInvalidValue(e);
-        }
-        /*@Caught*/ @NonNull Object CAUGHT_eq;
-        try {
-            final /*@Caught*/ @NonNull Object BOXED_args = idResolver.createOrderedSetOfAll(ORD_CLSSid_Argument, (Iterable)CAUGHT_args);
-            if (BOXED_args instanceof InvalidValueException) {
-                throw (InvalidValueException)BOXED_args;
+    protected class CACHE_OperationFilter__matches extends AbstractEvaluationOperation
+    {
+        @Override
+        public @Nullable Object basicEvaluate(@NonNull Executor executor, @NonNull TypedElement caller, @Nullable Object @NonNull [] sourceAndArgumentValues) {
+            @SuppressWarnings("null") final /*@NonInvalid*/ example2.classes.@org.eclipse.jdt.annotation.NonNull Operation element_0 = (/*@NonInvalid*/ example2.classes.@org.eclipse.jdt.annotation.NonNull Operation)sourceAndArgumentValues[0];
+            /*@Caught*/ @NonNull Object CAUGHT_args;
+            try {
+                final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<Argument> args = (List<Argument>)OperationFilter.this.args;
+                CAUGHT_args = args;
             }
-            final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(BOXED_args);
-            @SuppressWarnings("null")
-            final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<Parameter> ownedParameters = element.getOwnedParameters();
-            final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_ownedParameters = idResolver.createOrderedSetOfAll(ORD_CLSSid_Parameter, ownedParameters);
-            final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue size_0 = CollectionSizeOperation.INSTANCE.evaluate(BOXED_ownedParameters);
-            final /*@Thrown*/ boolean eq = size.equals(size_0);
-            CAUGHT_eq = eq;
-        }
-        catch (Exception e) {
-            CAUGHT_eq = ValueUtil.createInvalidValue(e);
-        }
-        /*@Caught*/ @NonNull Object CAUGHT_forAll;
-        try {
-            final /*@Caught*/ @NonNull Object BOXED_args_0 = idResolver.createOrderedSetOfAll(ORD_CLSSid_Argument, (Iterable)CAUGHT_args);
-            if (BOXED_args_0 instanceof InvalidValueException) {
-                throw (InvalidValueException)BOXED_args_0;
+            catch (Exception e) {
+                CAUGHT_args = ValueUtil.createInvalidValue(e);
             }
-            /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Object accumulator = ValueUtil.TRUE_VALUE;
-            @Nullable Iterator<Object> ITERATOR_x = ((OrderedSetValue)BOXED_args_0).iterator();
-            /*@Thrown*/ boolean forAll;
-            while (true) {
-                if (!ITERATOR_x.hasNext()) {
-                    if (accumulator == ValueUtil.TRUE_VALUE) {
-                        forAll = ValueUtil.TRUE_VALUE;
-                    }
-                    else {
-                        throw (InvalidValueException)accumulator;
-                    }
-                    break;
+            /*@Caught*/ @NonNull Object CAUGHT_eq;
+            try {
+                final /*@Caught*/ @NonNull Object BOXED_args = idResolver.createOrderedSetOfAll(ORD_CLSSid_Argument, (Iterable)CAUGHT_args);
+                if (BOXED_args instanceof InvalidValueException) {
+                    throw (InvalidValueException)BOXED_args;
                 }
-                /*@NonInvalid*/ example2.classes.@org.eclipse.jdt.annotation.Nullable Argument x = (Argument)ITERATOR_x.next();
-                /**
-                 * _'=' : Boolean[1]
-                 */
-                /*@Caught*/ @NonNull Object CAUGHT_eq_0;
-                try {
-                    if (x == null) {
-                        throw new InvalidValueException("Null source for \'\'http://cs2as/tests/example2/classes/1.0\'::NamedElement::name\'");
-                    }
-                    final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String name = x.getName();
-                    @SuppressWarnings("null")
-                    final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<Parameter> ownedParameters_0 = element.getOwnedParameters();
-                    final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_ownedParameters_0 = idResolver.createOrderedSetOfAll(ORD_CLSSid_Parameter, ownedParameters_0);
-                    final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue indexOf = OrderedCollectionIndexOfOperation.INSTANCE.evaluate(BOXED_args_0, x);
-                    final /*@Thrown*/ example2.classes.@org.eclipse.jdt.annotation.Nullable Parameter at = (Parameter)OrderedCollectionAtOperation.INSTANCE.evaluate(BOXED_ownedParameters_0, indexOf);
-                    if (at == null) {
-                        throw new InvalidValueException("Null source for \'\'http://cs2as/tests/example2/classes/1.0\'::NamedElement::name\'");
-                    }
-                    final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String name_0 = at.getName();
-                    final /*@Thrown*/ boolean eq_0 = (name != null) ? name.equals(name_0) : (name_0 == null);
-                    CAUGHT_eq_0 = eq_0;
-                }
-                catch (Exception e) {
-                    CAUGHT_eq_0 = ValueUtil.createInvalidValue(e);
-                }
-                //
-                if (CAUGHT_eq_0 == ValueUtil.FALSE_VALUE) {					// Normal unsuccessful body evaluation result
-                    forAll = ValueUtil.FALSE_VALUE;
-                    break;														// Stop immediately 
-                }
-                else if (CAUGHT_eq_0 == ValueUtil.TRUE_VALUE) {				// Normal successful body evaluation result
-                    ;															// Carry on
-                }
-                else if (CAUGHT_eq_0 instanceof InvalidValueException) {		// Abnormal exception evaluation result
-                    accumulator = CAUGHT_eq_0;									// Cache an exception failure
-                }
-                else {															// Impossible badly typed result
-                    accumulator = new InvalidValueException(PivotMessages.NonBooleanBody, "forAll");
-                }
+                final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(BOXED_args);
+                @SuppressWarnings("null")
+                final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<Parameter> ownedParameters = element_0.getOwnedParameters();
+                final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_ownedParameters = idResolver.createOrderedSetOfAll(ORD_CLSSid_Parameter, ownedParameters);
+                final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue size_0 = CollectionSizeOperation.INSTANCE.evaluate(BOXED_ownedParameters);
+                final /*@Thrown*/ boolean eq = size.equals(size_0);
+                CAUGHT_eq = eq;
             }
-            CAUGHT_forAll = forAll;
+            catch (Exception e) {
+                CAUGHT_eq = ValueUtil.createInvalidValue(e);
+            }
+            /*@Caught*/ @NonNull Object CAUGHT_forAll;
+            try {
+                final /*@Caught*/ @NonNull Object BOXED_args_0 = idResolver.createOrderedSetOfAll(ORD_CLSSid_Argument, (Iterable)CAUGHT_args);
+                if (BOXED_args_0 instanceof InvalidValueException) {
+                    throw (InvalidValueException)BOXED_args_0;
+                }
+                /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Object accumulator = ValueUtil.TRUE_VALUE;
+                @Nullable Iterator<Object> ITERATOR_x = ((OrderedSetValue)BOXED_args_0).iterator();
+                /*@Thrown*/ boolean forAll;
+                while (true) {
+                    if (!ITERATOR_x.hasNext()) {
+                        if (accumulator == ValueUtil.TRUE_VALUE) {
+                            forAll = ValueUtil.TRUE_VALUE;
+                        }
+                        else {
+                            throw (InvalidValueException)accumulator;
+                        }
+                        break;
+                    }
+                    /*@NonInvalid*/ example2.classes.@org.eclipse.jdt.annotation.Nullable Argument x = (Argument)ITERATOR_x.next();
+                    /**
+                     * _'=' : Boolean[1]
+                     */
+                    /*@Caught*/ @NonNull Object CAUGHT_eq_0;
+                    try {
+                        if (x == null) {
+                            throw new InvalidValueException("Null source for \'\'http://cs2as/tests/example2/classes/1.0\'::NamedElement::name\'");
+                        }
+                        final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String name = x.getName();
+                        @SuppressWarnings("null")
+                        final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<Parameter> ownedParameters_0 = element_0.getOwnedParameters();
+                        final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_ownedParameters_0 = idResolver.createOrderedSetOfAll(ORD_CLSSid_Parameter, ownedParameters_0);
+                        final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue indexOf = OrderedCollectionIndexOfOperation.INSTANCE.evaluate(BOXED_args_0, x);
+                        final /*@Thrown*/ example2.classes.@org.eclipse.jdt.annotation.Nullable Parameter at = (Parameter)OrderedCollectionAtOperation.INSTANCE.evaluate(BOXED_ownedParameters_0, indexOf);
+                        if (at == null) {
+                            throw new InvalidValueException("Null source for \'\'http://cs2as/tests/example2/classes/1.0\'::NamedElement::name\'");
+                        }
+                        final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable String name_0 = at.getName();
+                        final /*@Thrown*/ boolean eq_0 = (name != null) ? name.equals(name_0) : (name_0 == null);
+                        CAUGHT_eq_0 = eq_0;
+                    }
+                    catch (Exception e) {
+                        CAUGHT_eq_0 = ValueUtil.createInvalidValue(e);
+                    }
+                    //
+                    if (CAUGHT_eq_0 == ValueUtil.FALSE_VALUE) {					// Normal unsuccessful body evaluation result
+                        forAll = ValueUtil.FALSE_VALUE;
+                        break;														// Stop immediately 
+                    }
+                    else if (CAUGHT_eq_0 == ValueUtil.TRUE_VALUE) {				// Normal successful body evaluation result
+                        ;															// Carry on
+                    }
+                    else if (CAUGHT_eq_0 instanceof InvalidValueException) {		// Abnormal exception evaluation result
+                        accumulator = CAUGHT_eq_0;									// Cache an exception failure
+                    }
+                    else {															// Impossible badly typed result
+                        accumulator = new InvalidValueException(PivotMessages.NonBooleanBody, "forAll");
+                    }
+                }
+                CAUGHT_forAll = forAll;
+            }
+            catch (Exception e) {
+                CAUGHT_forAll = ValueUtil.createInvalidValue(e);
+            }
+            final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean and = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_eq, CAUGHT_forAll);
+            return and;
         }
-        catch (Exception e) {
-            CAUGHT_forAll = ValueUtil.createInvalidValue(e);
+        
+        public Boolean evaluate(final /*@NonInvalid*/ example2.classes.@org.eclipse.jdt.annotation.NonNull Operation element_0) {
+            return (Boolean)evaluationCache.getCachedEvaluationResult(this, caller, new @Nullable Object[]{element_0});
         }
-        final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean and = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_eq, CAUGHT_forAll);
-        return and;
     }
+    
+    protected final @NonNull CACHE_OperationFilter__matches INST_OperationFilter__matches = new CACHE_OperationFilter__matches();
 }

@@ -31,7 +31,6 @@ import org.eclipse.emf.ecore.EReference;
  * <!-- end-user-doc -->
  * @see example1.target.lookup.EnvironmentFactory
  * @model kind="package"
- *        annotation="http://www.eclipse.org/OCL/Import target='TargetMM1.ecore#/'"
  * @generated
  */
 public interface EnvironmentPackage extends EPackage {

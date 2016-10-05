@@ -29,13 +29,13 @@ public class TargetExportedLookupVisitor
     
     protected final /*@Thrown*/ org.eclipse.ocl.pivot.evaluation.@org.eclipse.jdt.annotation.NonNull Executor executor;
     protected final /*@Thrown*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull IdResolver idResolver;
-    protected final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.NonNull Object importer;
+    protected final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.NonNull Object importer_0;
     
     public TargetExportedLookupVisitor(@NonNull LookupEnvironment context, @NonNull Object importer) {
         super(context);
         this.executor = ClassUtil.nonNull(context.getExecutor());
         this.idResolver = executor.getIdResolver();
-        this.importer = importer;
+        this.importer_0 = importer;
     }
     
     @Override

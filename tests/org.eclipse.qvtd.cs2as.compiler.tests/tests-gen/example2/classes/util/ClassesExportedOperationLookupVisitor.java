@@ -17,8 +17,11 @@ import example2.classes.util.AbstractClassesCommonLookupVisitor;
 import example2.classes.util.Visitable;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.TypedElement;
+import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.ids.IdManager;
 import org.eclipse.ocl.pivot.ids.TypeId;
+import org.eclipse.ocl.pivot.internal.library.executor.AbstractEvaluationOperation;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 
 public class ClassesExportedOperationLookupVisitor
@@ -39,13 +42,13 @@ public class ClassesExportedOperationLookupVisitor
     
     protected final /*@Thrown*/ org.eclipse.ocl.pivot.evaluation.@org.eclipse.jdt.annotation.NonNull Executor executor;
     protected final /*@Thrown*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull IdResolver idResolver;
-    protected final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.NonNull Object importer;
+    protected final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.NonNull Object importer_0;
     
     public ClassesExportedOperationLookupVisitor(@NonNull LookupEnvironment context, @NonNull Object importer) {
         super(context);
         this.executor = ClassUtil.nonNull(context.getExecutor());
         this.idResolver = executor.getIdResolver();
-        this.importer = importer;
+        this.importer_0 = importer;
     }
     
     @Override
@@ -54,16 +57,26 @@ public class ClassesExportedOperationLookupVisitor
     }
     
     /**
-     * visitClass(element : classes::Class[1]) : lookup::LookupEnvironment[?]
+     * _'example2.classes.util'::ClassesExportedOperationLookupVisitor::visitClass(element : classes::Class[1]) : lookup::LookupEnvironment[?]
      * 
      * _'null' : lookup::LookupEnvironment[1]
      */
-    @Override
-    public /*@NonInvalid*/ LookupEnvironment visitClass(final /*@NonInvalid*/ example2.classes.@org.eclipse.jdt.annotation.NonNull Class element) {
-        @SuppressWarnings("null")
-        final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<Operation> ownedOperations = element.getOwnedOperations();
-        @SuppressWarnings("null")
-        final /*@Thrown*/ example2.classes.lookup.@org.eclipse.jdt.annotation.NonNull LookupEnvironment addElements = context.addElements(ownedOperations);
-        return addElements;
+    protected class CACHE_ClassesExportedOperationLookupVisitor_visitClass extends AbstractEvaluationOperation
+    {
+        @Override
+        public @Nullable Object basicEvaluate(@NonNull Executor executor, @NonNull TypedElement caller, @Nullable Object @NonNull [] sourceAndArgumentValues) {
+            @SuppressWarnings("null") final /*@NonInvalid*/ example2.classes.@org.eclipse.jdt.annotation.NonNull Class element_0 = (/*@NonInvalid*/ example2.classes.@org.eclipse.jdt.annotation.NonNull Class)sourceAndArgumentValues[0];
+            @SuppressWarnings("null")
+            final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<Operation> ownedOperations = element_0.getOwnedOperations();
+            @SuppressWarnings("null")
+            final /*@Thrown*/ example2.classes.lookup.@org.eclipse.jdt.annotation.NonNull LookupEnvironment addElements = context.addElements(ownedOperations);
+            return addElements;
+        }
+        
+        public LookupEnvironment evaluate(final /*@NonInvalid*/ example2.classes.@org.eclipse.jdt.annotation.NonNull Class element_0) {
+            return (LookupEnvironment)evaluationCache.getCachedEvaluationResult(this, caller, new @Nullable Object[]{element_0});
+        }
     }
+    
+    protected final @NonNull CACHE_ClassesExportedOperationLookupVisitor_visitClass INST_ClassesExportedOperationLookupVisitor_visitClass = new CACHE_ClassesExportedOperationLookupVisitor_visitClass();
 }

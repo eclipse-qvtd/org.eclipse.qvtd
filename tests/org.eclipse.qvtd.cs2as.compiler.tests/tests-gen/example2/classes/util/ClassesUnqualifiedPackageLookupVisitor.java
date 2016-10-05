@@ -18,8 +18,11 @@ import example2.classes.util.Visitable;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.TypedElement;
+import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.ids.IdManager;
 import org.eclipse.ocl.pivot.ids.TypeId;
+import org.eclipse.ocl.pivot.internal.library.executor.AbstractEvaluationOperation;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 
 public class ClassesUnqualifiedPackageLookupVisitor
@@ -42,7 +45,7 @@ public class ClassesUnqualifiedPackageLookupVisitor
     
     protected final /*@Thrown*/ org.eclipse.ocl.pivot.evaluation.@org.eclipse.jdt.annotation.NonNull Executor executor;
     protected final /*@Thrown*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull IdResolver idResolver;
-    protected /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Object child;
+    protected /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Object child_0;
     
     public ClassesUnqualifiedPackageLookupVisitor(@NonNull LookupEnvironment context) {
         super(context);
@@ -61,7 +64,7 @@ public class ClassesUnqualifiedPackageLookupVisitor
     protected @Nullable LookupEnvironment parentEnv(@NonNull EObject element) {
         EObject parent = element.eContainer();
         if (parent instanceof Visitable) {
-            this.child = element;
+            this.child_0 = element;
             return ((Visitable)parent).accept(this);
         }
         else {
@@ -70,48 +73,68 @@ public class ClassesUnqualifiedPackageLookupVisitor
     }
     
     /**
-     * visitPackage(element : classes::Package[1]) : lookup::LookupEnvironment[?]
+     * _'example2.classes.util'::ClassesUnqualifiedPackageLookupVisitor::visitPackage(element : classes::Package[1]) : lookup::LookupEnvironment[?]
      * 
      * _'null' : lookup::LookupEnvironment[1]
      */
-    @Override
-    public /*@NonInvalid*/ LookupEnvironment visitPackage(final /*@NonInvalid*/ example2.classes.@org.eclipse.jdt.annotation.NonNull Package element) {
-        @SuppressWarnings("null")
-        final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<Package> ownedPackages = element.getOwnedPackages();
-        @SuppressWarnings("null")
-        final /*@Thrown*/ example2.classes.lookup.@org.eclipse.jdt.annotation.NonNull LookupEnvironment inner = context.addElements(ownedPackages);
-        final /*@Thrown*/ boolean hasFinalResult = inner.hasFinalResult();
-        /*@Thrown*/ example2.classes.lookup.@org.eclipse.jdt.annotation.Nullable LookupEnvironment symbol_0;
-        if (hasFinalResult) {
-            symbol_0 = inner;
+    protected class CACHE_ClassesUnqualifiedPackageLookupVisitor_visitPackage extends AbstractEvaluationOperation
+    {
+        @Override
+        public @Nullable Object basicEvaluate(@NonNull Executor executor, @NonNull TypedElement caller, @Nullable Object @NonNull [] sourceAndArgumentValues) {
+            @SuppressWarnings("null") final /*@NonInvalid*/ example2.classes.@org.eclipse.jdt.annotation.NonNull Package element_0 = (/*@NonInvalid*/ example2.classes.@org.eclipse.jdt.annotation.NonNull Package)sourceAndArgumentValues[0];
+            @SuppressWarnings("null")
+            final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<Package> ownedPackages = element_0.getOwnedPackages();
+            @SuppressWarnings("null")
+            final /*@Thrown*/ example2.classes.lookup.@org.eclipse.jdt.annotation.NonNull LookupEnvironment inner = context.addElements(ownedPackages);
+            final /*@Thrown*/ boolean hasFinalResult_0 = inner.hasFinalResult();
+            /*@Thrown*/ example2.classes.lookup.@org.eclipse.jdt.annotation.Nullable LookupEnvironment symbol_0;
+            if (hasFinalResult_0) {
+                symbol_0 = inner;
+            }
+            else {
+                final /*@Thrown*/ example2.classes.lookup.@org.eclipse.jdt.annotation.Nullable LookupEnvironment parentEnv_0 = ClassesUnqualifiedPackageLookupVisitor.this.parentEnv(element_0);
+                symbol_0 = parentEnv_0;
+            }
+            return symbol_0;
         }
-        else {
-            final /*@Thrown*/ example2.classes.lookup.@org.eclipse.jdt.annotation.Nullable LookupEnvironment parentEnv = this.parentEnv(element);
-            symbol_0 = parentEnv;
+        
+        public LookupEnvironment evaluate(final /*@NonInvalid*/ example2.classes.@org.eclipse.jdt.annotation.NonNull Package element_0) {
+            return (LookupEnvironment)evaluationCache.getCachedEvaluationResult(this, caller, new @Nullable Object[]{element_0});
         }
-        return symbol_0;
     }
     
+    protected final @NonNull CACHE_ClassesUnqualifiedPackageLookupVisitor_visitPackage INST_ClassesUnqualifiedPackageLookupVisitor_visitPackage = new CACHE_ClassesUnqualifiedPackageLookupVisitor_visitPackage();
+    
     /**
-     * visitRoot(element : classes::Root[1]) : lookup::LookupEnvironment[?]
+     * _'example2.classes.util'::ClassesUnqualifiedPackageLookupVisitor::visitRoot(element : classes::Root[1]) : lookup::LookupEnvironment[?]
      * 
      * _'null' : lookup::LookupEnvironment[1]
      */
-    @Override
-    public /*@NonInvalid*/ LookupEnvironment visitRoot(final /*@NonInvalid*/ example2.classes.@org.eclipse.jdt.annotation.NonNull Root element_0) {
-        @SuppressWarnings("null")
-        final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<Package> ownedPackages = element_0.getOwnedPackages();
-        @SuppressWarnings("null")
-        final /*@Thrown*/ example2.classes.lookup.@org.eclipse.jdt.annotation.NonNull LookupEnvironment inner = context.addElements(ownedPackages);
-        final /*@Thrown*/ boolean hasFinalResult = inner.hasFinalResult();
-        /*@Thrown*/ example2.classes.lookup.@org.eclipse.jdt.annotation.Nullable LookupEnvironment symbol_0;
-        if (hasFinalResult) {
-            symbol_0 = inner;
+    protected class CACHE_ClassesUnqualifiedPackageLookupVisitor_visitRoot extends AbstractEvaluationOperation
+    {
+        @Override
+        public @Nullable Object basicEvaluate(@NonNull Executor executor, @NonNull TypedElement caller, @Nullable Object @NonNull [] sourceAndArgumentValues) {
+            @SuppressWarnings("null") final /*@NonInvalid*/ example2.classes.@org.eclipse.jdt.annotation.NonNull Root element_1 = (/*@NonInvalid*/ example2.classes.@org.eclipse.jdt.annotation.NonNull Root)sourceAndArgumentValues[0];
+            @SuppressWarnings("null")
+            final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<Package> ownedPackages = element_1.getOwnedPackages();
+            @SuppressWarnings("null")
+            final /*@Thrown*/ example2.classes.lookup.@org.eclipse.jdt.annotation.NonNull LookupEnvironment inner = context.addElements(ownedPackages);
+            final /*@Thrown*/ boolean hasFinalResult_0 = inner.hasFinalResult();
+            /*@Thrown*/ example2.classes.lookup.@org.eclipse.jdt.annotation.Nullable LookupEnvironment symbol_0;
+            if (hasFinalResult_0) {
+                symbol_0 = inner;
+            }
+            else {
+                final /*@Thrown*/ example2.classes.lookup.@org.eclipse.jdt.annotation.Nullable LookupEnvironment parentEnv_0 = ClassesUnqualifiedPackageLookupVisitor.this.parentEnv(element_1);
+                symbol_0 = parentEnv_0;
+            }
+            return symbol_0;
         }
-        else {
-            final /*@Thrown*/ example2.classes.lookup.@org.eclipse.jdt.annotation.Nullable LookupEnvironment parentEnv = this.parentEnv(element_0);
-            symbol_0 = parentEnv;
+        
+        public LookupEnvironment evaluate(final /*@NonInvalid*/ example2.classes.@org.eclipse.jdt.annotation.NonNull Root element_1) {
+            return (LookupEnvironment)evaluationCache.getCachedEvaluationResult(this, caller, new @Nullable Object[]{element_1});
         }
-        return symbol_0;
     }
+    
+    protected final @NonNull CACHE_ClassesUnqualifiedPackageLookupVisitor_visitRoot INST_ClassesUnqualifiedPackageLookupVisitor_visitRoot = new CACHE_ClassesUnqualifiedPackageLookupVisitor_visitRoot();
 }

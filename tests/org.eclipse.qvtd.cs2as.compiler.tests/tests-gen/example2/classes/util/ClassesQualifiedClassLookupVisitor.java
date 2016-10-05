@@ -17,8 +17,11 @@ import example2.classes.util.AbstractClassesCommonLookupVisitor;
 import example2.classes.util.Visitable;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.TypedElement;
+import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.ids.IdManager;
 import org.eclipse.ocl.pivot.ids.TypeId;
+import org.eclipse.ocl.pivot.internal.library.executor.AbstractEvaluationOperation;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 
 public class ClassesQualifiedClassLookupVisitor
@@ -50,16 +53,26 @@ public class ClassesQualifiedClassLookupVisitor
     }
     
     /**
-     * visitPackage(element : classes::Package[1]) : lookup::LookupEnvironment[?]
+     * _'example2.classes.util'::ClassesQualifiedClassLookupVisitor::visitPackage(element : classes::Package[1]) : lookup::LookupEnvironment[?]
      * 
      * _'null' : lookup::LookupEnvironment[1]
      */
-    @Override
-    public /*@NonInvalid*/ LookupEnvironment visitPackage(final /*@NonInvalid*/ example2.classes.@org.eclipse.jdt.annotation.NonNull Package element) {
-        @SuppressWarnings("null")
-        final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<Class> ownedClasses = element.getOwnedClasses();
-        @SuppressWarnings("null")
-        final /*@Thrown*/ example2.classes.lookup.@org.eclipse.jdt.annotation.NonNull LookupEnvironment addElements = context.addElements(ownedClasses);
-        return addElements;
+    protected class CACHE_ClassesQualifiedClassLookupVisitor_visitPackage extends AbstractEvaluationOperation
+    {
+        @Override
+        public @Nullable Object basicEvaluate(@NonNull Executor executor, @NonNull TypedElement caller, @Nullable Object @NonNull [] sourceAndArgumentValues) {
+            @SuppressWarnings("null") final /*@NonInvalid*/ example2.classes.@org.eclipse.jdt.annotation.NonNull Package element_0 = (/*@NonInvalid*/ example2.classes.@org.eclipse.jdt.annotation.NonNull Package)sourceAndArgumentValues[0];
+            @SuppressWarnings("null")
+            final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<Class> ownedClasses = element_0.getOwnedClasses();
+            @SuppressWarnings("null")
+            final /*@Thrown*/ example2.classes.lookup.@org.eclipse.jdt.annotation.NonNull LookupEnvironment addElements = context.addElements(ownedClasses);
+            return addElements;
+        }
+        
+        public LookupEnvironment evaluate(final /*@NonInvalid*/ example2.classes.@org.eclipse.jdt.annotation.NonNull Package element_0) {
+            return (LookupEnvironment)evaluationCache.getCachedEvaluationResult(this, caller, new @Nullable Object[]{element_0});
+        }
     }
+    
+    protected final @NonNull CACHE_ClassesQualifiedClassLookupVisitor_visitPackage INST_ClassesQualifiedClassLookupVisitor_visitPackage = new CACHE_ClassesQualifiedClassLookupVisitor_visitPackage();
 }
