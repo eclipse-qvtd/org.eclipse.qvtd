@@ -16,10 +16,10 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.ids.ClassId;
 import org.eclipse.ocl.pivot.ids.PropertyId;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
+import org.eclipse.qvtd.runtime.evaluation.TransformationExecutor;
 
 
 public abstract class AbstractCS2ASTransformer extends AbstractTransformer
@@ -28,7 +28,7 @@ implements CS2ASTransformer
 
 	private final List<CS2ASDiagnostic> txErrors = new ArrayList<CS2ASDiagnostic>();
 
-	protected AbstractCS2ASTransformer(@NonNull Executor executor, @NonNull String @NonNull [] modelNames,
+	protected AbstractCS2ASTransformer(@NonNull TransformationExecutor executor, @NonNull String @NonNull [] modelNames,
 			@NonNull PropertyId @Nullable [] propertyIndex2propertyId, @NonNull ClassId @Nullable [] classIndex2classId, int @Nullable [] @NonNull [] classIndex2allClassIndexes) {
 		super(executor, modelNames, propertyIndex2propertyId, classIndex2classId, classIndex2allClassIndexes);
 	}

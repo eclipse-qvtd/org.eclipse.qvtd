@@ -31,7 +31,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.evaluation.AbstractModelManager;
 import org.eclipse.ocl.pivot.evaluation.Evaluator;
-import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.ids.ClassId;
 import org.eclipse.ocl.pivot.ids.CollectionTypeId;
 import org.eclipse.ocl.pivot.ids.IdManager;
@@ -52,6 +51,7 @@ import org.eclipse.qvtd.runtime.evaluation.Invocation;
 import org.eclipse.qvtd.runtime.evaluation.InvocationFailedException;
 import org.eclipse.qvtd.runtime.evaluation.InvocationManager;
 import org.eclipse.qvtd.runtime.evaluation.ObjectManager;
+import org.eclipse.qvtd.runtime.evaluation.TransformationExecutor;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
 
 /**
@@ -395,7 +395,7 @@ public abstract class AbstractTransformerInternal extends AbstractModelManager i
 		}
 	}
 
-	protected final @NonNull Executor executor;
+	protected final @NonNull TransformationExecutor executor;
 	/** deprecated use executor */
 	@Deprecated
 	protected final @NonNull Evaluator evaluator;
@@ -453,7 +453,7 @@ public abstract class AbstractTransformerInternal extends AbstractModelManager i
 	 */
 	protected final @NonNull EvaluationCache evaluationCache;
 
-	protected AbstractTransformerInternal(@NonNull Executor executor, @NonNull String @NonNull [] modelNames,
+	protected AbstractTransformerInternal(@NonNull TransformationExecutor executor, @NonNull String @NonNull [] modelNames,
 			@NonNull PropertyId @Nullable [] propertyIndex2propertyId, @NonNull ClassId @Nullable [] classIndex2classId, int @Nullable [] @NonNull [] classIndex2allClassIndexes) {
 		this.executor = executor;
 		this.evaluator = executor;

@@ -13,7 +13,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.ids.ClassId;
 import org.eclipse.ocl.pivot.ids.IdManager;
 import org.eclipse.ocl.pivot.ids.TypeId;
@@ -30,6 +29,7 @@ import org.eclipse.qvtd.doc.exe2016.tests.qvtc.list2list.List2List;
 import org.eclipse.qvtd.doc.exe2016.tests.qvtc.list2list.List2listFactory;
 import org.eclipse.qvtd.doc.exe2016.tests.qvtc.list2list.List2listPackage;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
+import org.eclipse.qvtd.runtime.evaluation.TransformationExecutor;
 import org.eclipse.qvtd.runtime.library.model.ModelObjectsOfKindOperation;
 
 /**
@@ -89,7 +89,7 @@ public class Forward2Reverse extends AbstractTransformer
 	};
 
 
-	public Forward2Reverse(final @NonNull Executor executor) {
+	public Forward2Reverse(final @NonNull TransformationExecutor executor) {
 		super(executor, new @NonNull String[] {"forward", "reverse", "middle"}, null, classIndex2classId, classIndex2allClassIndexes);
 	}
 

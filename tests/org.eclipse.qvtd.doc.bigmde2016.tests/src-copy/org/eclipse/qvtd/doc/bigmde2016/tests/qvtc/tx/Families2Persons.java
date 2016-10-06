@@ -11,7 +11,6 @@ package org.eclipse.qvtd.doc.bigmde2016.tests.qvtc.tx;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.ids.ClassId;
 import org.eclipse.ocl.pivot.ids.IdManager;
 import org.eclipse.ocl.pivot.ids.IdResolver;
@@ -29,6 +28,7 @@ import org.eclipse.qvtd.doc.bigmde2016.tests.qvtc.Persons.PersonsFactory;
 import org.eclipse.qvtd.doc.bigmde2016.tests.qvtc.Persons.PersonsPackage;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
 import org.eclipse.qvtd.runtime.evaluation.AbstractValueOccurrence;
+import org.eclipse.qvtd.runtime.evaluation.TransformationExecutor;
 import org.eclipse.qvtd.runtime.internal.evaluation.AbstractComputationConstructor;
 import org.eclipse.qvtd.runtime.library.model.ModelObjectsOfKindOperation;
 
@@ -104,7 +104,7 @@ public class Families2Persons extends AbstractTransformer
 	};
 
 
-	public Families2Persons(final @NonNull Executor executor) {
+	public Families2Persons(final @NonNull TransformationExecutor executor) {
 		super(executor, new @NonNull String[] {"family", "person", "middle"}, null, classIndex2classId, classIndex2allClassIndexes);
 	}
 
