@@ -581,6 +581,26 @@ public abstract class AbstractTransformerInternal extends AbstractModelManager i
 		return classIndexes;
 	}
 
+	@Override
+	public @NonNull EvaluationCache getEvaluationCache() {
+		return evaluationCache;
+	}
+
+	@Override
+	public @NonNull TransformationExecutor getExecutor() {
+		return executor;
+	}
+
+	@Override
+	public @NonNull InvocationManager getInvocationManager() {
+		return invocationManager;
+	}
+
+	@Override
+	public @NonNull ObjectManager getObjectManager() {
+		return objectManager;
+	}
+
 	/**
 	 * Return all objects in the modelIndex model that conform to eClass.
 	 *
