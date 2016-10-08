@@ -993,7 +993,9 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 				js.appendClassReference(AbstractInvocationConstructor.class);
 				js.append(" " + getMappingCtorName(cgMapping) + " = new ");
 				js.appendClassReference(AbstractInvocationConstructor.class);
-				js.append("(idResolver)\n");
+				js.append("(idResolver, ");
+				js.appendString(QVTiCGUtil.getName(cgMapping));
+				js.append(")\n");
 				js.append("{\n");
 				js.pushIndentation(null);
 				js.append("@Override\n");

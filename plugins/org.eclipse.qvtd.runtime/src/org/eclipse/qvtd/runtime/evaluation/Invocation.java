@@ -13,6 +13,7 @@ package org.eclipse.qvtd.runtime.evaluation;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.ids.IdResolver;
+import org.eclipse.ocl.pivot.utilities.Nameable;
 
 /**
  * An Invocation identifies a unique invocation of a Mapping and the objects/values bound to its guard variables.
@@ -43,13 +44,16 @@ public interface Invocation extends ExecutionVisitable
 	 */
 	void remove();
 
-	public interface Constructor
+	public interface Constructor extends Nameable
 	{
 		/**
 		 * Return the first invocation of this constructor with argValues, using newInstance(argValues) to
 		 * create a new invocation instance if necessary. Returns null if an instance already created.
 		 */
 		@Nullable Invocation getFirstInvocation(@NonNull Object @NonNull [] argValues);
+
+		@Override
+		@NonNull String getName();
 
 		/**
 		 * Create the invocation identified by this constructor and values.

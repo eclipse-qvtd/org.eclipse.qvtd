@@ -256,6 +256,10 @@ public class QVTimperativeUtil extends QVTbaseUtil
 		return null;
 	}
 
+	public static @NonNull String getName(@NonNull Mapping asMapping) {
+		return ClassUtil.nonNullState(asMapping.getName());
+	}
+
 	public static @NonNull Mapping getOwnedMapping(@NonNull ImperativeTransformation transformation, @Nullable String name) {
 		return ClassUtil.nonNullState(NameUtil.getNameable(getOwnedMappings(transformation), name));
 	}
