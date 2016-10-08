@@ -1,0 +1,10 @@
+# Debugging options for the org.eclipse.ocl.pivot plug-in
+
+# Trace transformation connection appends 
+org.eclipse.qvtd.runtime/tx/appends=false
+
+# Trace transformation exceptions 
+org.eclipse.qvtd.runtime/tx/exceptions=false
+
+# Trace transformation invocations 
+org.eclipse.qvtd.runtime/tx/invocations=false

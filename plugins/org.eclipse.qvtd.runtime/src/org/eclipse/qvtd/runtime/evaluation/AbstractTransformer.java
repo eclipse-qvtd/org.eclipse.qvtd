@@ -15,7 +15,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.ids.ClassId;
 import org.eclipse.ocl.pivot.ids.PropertyId;
-import org.eclipse.ocl.pivot.util.PivotPlugin;
 import org.eclipse.ocl.pivot.utilities.TracingOption;
 import org.eclipse.qvtd.runtime.internal.evaluation.AbstractTransformerInternal;
 
@@ -25,8 +24,9 @@ import org.eclipse.qvtd.runtime.internal.evaluation.AbstractTransformerInternal;
  */
 public abstract class AbstractTransformer extends AbstractTransformerInternal
 {
-	public static final @NonNull TracingOption EXCEPTIONS = new TracingOption(PivotPlugin.PLUGIN_ID, "tx/exceptions");
-	public static final @NonNull TracingOption INVOCATIONS = new TracingOption(PivotPlugin.PLUGIN_ID, "tx/invocations");
+	public static final @NonNull String PLUGIN_ID = "org.eclipse.qvtd.runtime";
+	public static final @NonNull TracingOption EXCEPTIONS = new TracingOption(PLUGIN_ID, "tx/exceptions");
+	public static final @NonNull TracingOption INVOCATIONS = new TracingOption(PLUGIN_ID, "tx/invocations");
 
 	protected AbstractTransformer(@NonNull TransformationExecutor executor, @NonNull String @NonNull [] modelNames,
 			@NonNull PropertyId @Nullable [] propertyIndex2propertyId, @NonNull ClassId @Nullable [] classIndex2classId, int @Nullable [] @NonNull [] classIndex2allClassIndexes) {
