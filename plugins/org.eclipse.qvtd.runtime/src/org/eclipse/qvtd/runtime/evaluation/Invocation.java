@@ -46,6 +46,11 @@ public interface Invocation extends ExecutionVisitable
 
 	public interface Constructor extends Nameable
 	{
+		public interface Incremental extends Constructor
+		{
+			int nextSequence();
+		}
+
 		/**
 		 * Return the first invocation of this constructor with argValues, using newInstance(argValues) to
 		 * create a new invocation instance if necessary. Returns null if an instance already created.
@@ -61,12 +66,14 @@ public interface Invocation extends ExecutionVisitable
 		@NonNull Invocation newInstance(@NonNull Object @NonNull [] values);
 	}
 
-	public interface Incremental extends Invocation
+	public interface Incremental extends Invocation, Nameable
 	{
 		void addCreatedObject(@NonNull Object createdObject);
 		void addReadSlot(SlotState.@NonNull Incremental readSlot);
 		void addWriteSlot(SlotState.@NonNull Incremental writeSlot);
 		@NonNull Iterable<@NonNull Object> getCreatedObjects();
+		@Override
+		@NonNull String getName();
 		@NonNull Iterable<SlotState.@NonNull Incremental> getReadSlots();
 		@NonNull Iterable<SlotState.@NonNull Incremental> getWriteSlots();
 		//		void invalidate();

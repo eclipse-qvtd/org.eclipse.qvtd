@@ -110,6 +110,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.runtime.evaluation.AbstractInvocation;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
 import org.eclipse.qvtd.runtime.evaluation.AbstractValueOccurrence;
+import org.eclipse.qvtd.runtime.evaluation.Invocation;
 import org.eclipse.qvtd.runtime.evaluation.InvocationManager;
 import org.eclipse.qvtd.runtime.evaluation.ObjectManager;
 import org.eclipse.qvtd.runtime.evaluation.TransformationExecutor;
@@ -958,11 +959,18 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		js.append("public ");
 		js.append(getMappingName(cgMapping));
 		js.append("(");
+		if (isIncremental) {
+			js.appendClassReference(true, isIncremental ? Invocation.Constructor.Incremental.class : Invocation.Constructor.class);
+			js.append(" constructor, ");
+		}
 		js.appendIsRequired(true);
 		js.append(" Object ");
 		js.appendIsRequired(true);
 		js.append(" [] boundValues) {\n");
 		js.pushIndentation(null);
+		if (isIncremental) {
+			js.append("super(constructor);\n");
+		}
 		int i = 0;
 		for (@NonNull CGGuardVariable cgFreeVariable : cgFreeVariables) {
 			String valueName = getValueName(cgFreeVariable);
@@ -986,13 +994,12 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 
 	protected void doMappingConstructorConstants(/*@NonNull*/ List<@NonNull CGMapping> cgMappings) {
 		for (@NonNull CGMapping cgMapping : cgMappings) {
-			if (useClass(cgMapping) && (cgMapping.getFreeVariables().size() > 0)) {
+			if (useClass(cgMapping) && (isIncremental || (cgMapping.getFreeVariables().size() > 0))) {
+				Class<?> constructorClass = isIncremental ? AbstractInvocationConstructor.Incremental.class : AbstractInvocationConstructor.class;
 				js.append("protected final ");
-				js.appendIsRequired(true);
-				js.append(" ");
-				js.appendClassReference(AbstractInvocationConstructor.class);
+				js.appendClassReference(true, constructorClass);
 				js.append(" " + getMappingCtorName(cgMapping) + " = new ");
-				js.appendClassReference(AbstractInvocationConstructor.class);
+				js.appendClassReference(constructorClass);
 				js.append("(idResolver, ");
 				js.appendString(QVTiCGUtil.getName(cgMapping));
 				js.append(")\n");
@@ -1009,7 +1016,11 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 				js.appendIsRequired(true);
 				js.append(" [] values) {\n");
 				js.pushIndentation(null);
-				js.append("return new " + getMappingName(cgMapping) + "(values);\n");
+				js.append("return new " + getMappingName(cgMapping) + "(");
+				if (isIncremental) {
+					js.append("this, ");
+				}
+				js.append("values);\n");
 				js.popIndentation();
 				js.append("}\n");
 				js.popIndentation();
@@ -1116,19 +1127,17 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		js.append("@Override\n");
 		js.append("public boolean run() {\n");
 		js.pushIndentation(null);
-		js.append("return ");
 		if (isIncremental) {
-			js.append("new ");
-			js.append(getMappingName(cgRootMapping));
-			js.append("(new ");
-			js.appendIsRequired(true);
-			js.append(" Object[0]).execute()");
+			js.appendClassReference(Invocation.class);
+			js.append(" rootInvocation = " + getMappingCtorName(cgRootMapping) + ".newInstance(new @NonNull Object[0]);\n");
+			js.append("return rootInvocation.execute() && invocationManager.flush();\n");
 		}
 		else {
+			js.append("return ");
 			js.append(getMappingName(cgRootMapping));
 			js.append("()");
+			js.append(" && invocationManager.flush();\n");
 		}
-		js.append(" && invocationManager.flush();\n");
 		js.popIndentation();
 		js.append("}\n");
 	}

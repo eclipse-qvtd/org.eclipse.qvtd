@@ -22,6 +22,20 @@ import org.eclipse.qvtd.runtime.evaluation.Invocation;
 
 public abstract class AbstractInvocationConstructor implements Invocation.Constructor
 {
+	public static abstract class Incremental extends AbstractInvocationConstructor implements Invocation.Constructor.Incremental
+	{
+		protected int sequence = 0;
+
+		public Incremental(@NonNull IdResolver idResolver, @NonNull String name) {
+			super(idResolver, name);
+		}
+
+		@Override
+		public int nextSequence() {
+			return sequence++;
+		}
+	}
+
 	protected final IdResolver.@NonNull IdResolverExtension idResolver;
 	protected final @NonNull String name;
 

@@ -28,9 +28,17 @@ public abstract class AbstractInvocation extends AbstractInvocationInternal
 		public static final @NonNull List<@NonNull Object> EMPTY_OBJECT_LIST = Collections.emptyList();
 		public static final @NonNull List<SlotState.@NonNull Incremental> EMPTY_SLOT_LIST = Collections.emptyList();
 
+		protected final Invocation.@NonNull Constructor constructor;
+		protected final int sequence;
+
 		private Set<@NonNull Object> createdObjects = null;
 		private Set<SlotState.@NonNull Incremental> readSlots = null;
 		private Set<SlotState.@NonNull Incremental> writeSlots = null;
+
+		protected Incremental(Invocation.Constructor.@NonNull Incremental constructor) {
+			this.constructor = constructor;
+			this.sequence = constructor.nextSequence();
+		}
 
 		@Override
 		public void addCreatedObject(@NonNull Object createdObject) {
@@ -64,6 +72,11 @@ public abstract class AbstractInvocation extends AbstractInvocationInternal
 		}
 
 		@Override
+		public @NonNull String getName() {
+			return constructor.getName() + "-" + sequence;
+		}
+
+		@Override
 		public @NonNull Iterable<SlotState.@NonNull Incremental> getReadSlots() {
 			return readSlots != null ? readSlots : EMPTY_SLOT_LIST;
 		}
@@ -71,6 +84,11 @@ public abstract class AbstractInvocation extends AbstractInvocationInternal
 		@Override
 		public @NonNull Iterable<SlotState.@NonNull Incremental> getWriteSlots() {
 			return writeSlots != null ? writeSlots : EMPTY_SLOT_LIST;
+		}
+
+		@Override
+		public @NonNull String toString() {
+			return getName();
 		}
 	}
 

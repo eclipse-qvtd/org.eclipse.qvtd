@@ -163,11 +163,11 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 		}
 		Invocation.Constructor invocationConstructor = mapping2invocationConstructor2.get(asMapping);
 		if (invocationConstructor == null) {
-			invocationConstructor = new AbstractInvocationConstructor(idResolver, QVTimperativeUtil.getName(asMapping))
+			invocationConstructor = new AbstractInvocationConstructor.Incremental(idResolver, QVTimperativeUtil.getName(asMapping))
 			{
 				@Override
 				public @NonNull Invocation newInstance(@NonNull Object @NonNull [] theseValues) {
-					Invocation.Incremental invocation = new AbstractInvocation.Incremental()
+					Invocation.Incremental invocation = new AbstractInvocation.Incremental(this)
 					{
 						protected Object returnStatus;
 
@@ -197,10 +197,10 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 							return true;
 						}
 
-						@Override
-						public String toString() {
-							return mappingCall.getReferredMapping().getName();// + "@" + Integer.toHexString(System.identityHashCode(this));
-						}
+						//						@Override
+						//						public @NonNull String toString() {
+						//							return mappingCall.getReferredMapping().getName();// + "@" + Integer.toHexString(System.identityHashCode(this));
+						//						}
 					};
 					return invocation;
 				}
