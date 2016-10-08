@@ -54,6 +54,10 @@ public abstract class AbstractInvocationInternal implements Invocation
 		next = this;
 	}
 
+	public void revoke() {
+		throw new UnsupportedOperationException();
+	}
+
 	@Override
 	public String toString() {
 		return getClass().getSimpleName() + "@" + Integer.toHexString(System.identityHashCode(this));

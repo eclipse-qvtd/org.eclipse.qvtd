@@ -23,7 +23,7 @@ import org.eclipse.qvtd.runtime.evaluation.SlotState;
 /**
  * AbstractIntervalInternal provides the shared implementation of the intrusive blocked/waiting linked list functionality.
  */
-public abstract class AbstractIntervalInternal implements Interval
+public abstract class AbstractIntervalInternal extends ConnectionLinkage implements Interval
 {
 	protected final boolean debugInvocations = AbstractTransformer.INVOCATIONS.isActive();
 
@@ -106,6 +106,12 @@ public abstract class AbstractIntervalInternal implements Interval
 				invoke(invocation, false);
 			}
 		}
+	}
+
+
+	@Override
+	public int getIndex() {
+		return intervalIndex;
 	}
 
 	@Override

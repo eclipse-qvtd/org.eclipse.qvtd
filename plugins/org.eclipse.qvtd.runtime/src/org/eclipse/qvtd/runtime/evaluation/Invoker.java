@@ -14,25 +14,15 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.utilities.Nameable;
 
 /**
- * An Interval identifies one of the scheduler time slots. Invocations associated with one Interval may rely on
- * Invocatuions in earlier intervals completing before they start.
+ * An Invoker marshalls the arguments to invoke a mapping Invocation.
  *
- * @noimplement clients should derive from AbstractInterval
+ * @noimplement clients should derive from AbstractInvoker
  */
-public interface Interval extends ExecutionVisitable, Nameable
+public interface Invoker extends ExecutionVisitable, Nameable
 {
-	boolean flush();
+	@NonNull Interval getInterval();
 
-	int getIndex();
+	@NonNull Iterable<@NonNull Invocation> getInvocations();
 
-	@NonNull InvocationManager getInvocationManager();
-
-	@Override
-	@NonNull String getName();
-
-	void invoke(@NonNull Invocation invocation, boolean doFlush);
-
-	void queue(@NonNull Invocation consumer);
-
-	void unblock(@NonNull Invocation invocation);
+	void propagate();
 }

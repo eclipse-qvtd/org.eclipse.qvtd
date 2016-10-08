@@ -24,11 +24,16 @@ public /*abstract*/ class AbstractExecutionVisitor<R> implements ExecutionVisito
 	 * is available.
 	 */
 	public R visiting(@NonNull ExecutionVisitable visitable) {
-		throw new UnsupportedOperationException("No " + getClass().getSimpleName() + " suupport for a " + visitable.getClass().getSimpleName());
+		throw new UnsupportedOperationException("No " + getClass().getSimpleName() + " support for a " + visitable.getClass().getSimpleName());
 	}
 
 	@Override
 	public R visitComputation(@NonNull Computation object) {
+		return visiting(object);
+	}
+
+	@Override
+	public R visitConnection(@NonNull Connection object) {
 		return visiting(object);
 	}
 
@@ -44,6 +49,11 @@ public /*abstract*/ class AbstractExecutionVisitor<R> implements ExecutionVisito
 
 	@Override
 	public R visitInvocationManager(@NonNull InvocationManager object) {
+		return visiting(object);
+	}
+
+	@Override
+	public R visitInvoker(@NonNull Invoker object) {
 		return visiting(object);
 	}
 
