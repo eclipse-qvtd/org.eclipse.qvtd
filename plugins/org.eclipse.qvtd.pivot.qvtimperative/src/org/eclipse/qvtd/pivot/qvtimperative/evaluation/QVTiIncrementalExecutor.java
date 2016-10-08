@@ -167,7 +167,7 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 			{
 				@Override
 				public @NonNull Invocation newInstance(@NonNull Object @NonNull [] theseValues) {
-					Invocation.Incremental invocation = new AbstractInvocation.Incremental(this)
+					Invocation.Incremental invocation = new AbstractInvocation.Incremental(invocationManager.getDefaultInterval(), this)
 					{
 						protected Object returnStatus;
 
@@ -212,7 +212,7 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 			if (debugInvocations) {
 				AbstractTransformer.INVOCATIONS.println("invoke " + invocation);
 			}
-			invocationManager.invoke(invocation, true);
+			invocation.invokeInternal(true);
 		}
 		return null;
 	}

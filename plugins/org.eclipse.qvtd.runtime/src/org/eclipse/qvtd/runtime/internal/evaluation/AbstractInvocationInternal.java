@@ -12,6 +12,7 @@ package org.eclipse.qvtd.runtime.internal.evaluation;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.qvtd.runtime.evaluation.Interval;
 import org.eclipse.qvtd.runtime.evaluation.Invocation;
 import org.eclipse.qvtd.runtime.evaluation.SlotState;
 
@@ -20,9 +21,15 @@ import org.eclipse.qvtd.runtime.evaluation.SlotState;
  */
 public abstract class AbstractInvocationInternal implements Invocation
 {
+	protected final @NonNull Interval interval;
 	@NonNull AbstractInvocationInternal prev = this;
 	@NonNull AbstractInvocationInternal next = this;
 	public @Nullable SlotState debug_blockedBy = null;
+
+	protected AbstractInvocationInternal(@NonNull Interval interval) {
+		this.interval = interval;
+		// too soon		interval.queue(this);
+	}
 
 	@Override
 	public void insertAfter(@NonNull Invocation predecessor) {
@@ -32,6 +39,11 @@ public abstract class AbstractInvocationInternal implements Invocation
 		next = successor;
 		castPredecessor.next = this;
 		prev = castPredecessor;
+	}
+
+	@Override
+	public void invokeInternal(boolean doFlush) {
+		interval.invoke(this, doFlush);
 	}
 
 	@Override
@@ -45,5 +57,10 @@ public abstract class AbstractInvocationInternal implements Invocation
 	@Override
 	public String toString() {
 		return getClass().getSimpleName() + "@" + Integer.toHexString(System.identityHashCode(this));
+	}
+
+	@Override
+	public void unblock() {
+		interval.unblock(this);
 	}
 }

@@ -732,7 +732,7 @@ public abstract class AbstractTransformerInternal extends AbstractModelManager i
 		if (debugInvocations) {
 			AbstractTransformer.INVOCATIONS.println("invoke " + invocation);
 		}
-		invocationManager.invoke(invocation, true);
+		invocation.invokeInternal(true);
 	}
 
 	/**
@@ -744,7 +744,7 @@ public abstract class AbstractTransformerInternal extends AbstractModelManager i
 			if (debugInvocations) {
 				AbstractTransformer.INVOCATIONS.println("invokeOnce " + invocation);
 			}
-			invocationManager.invoke(invocation, true);
+			invocation.invokeInternal(true);
 		}
 	}
 }

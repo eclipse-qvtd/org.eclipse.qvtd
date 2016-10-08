@@ -35,7 +35,8 @@ public abstract class AbstractInvocation extends AbstractInvocationInternal
 		private Set<SlotState.@NonNull Incremental> readSlots = null;
 		private Set<SlotState.@NonNull Incremental> writeSlots = null;
 
-		protected Incremental(Invocation.Constructor.@NonNull Incremental constructor) {
+		protected Incremental(@NonNull Interval interval, Invocation.Constructor.@NonNull Incremental constructor) {
+			super(interval);
 			this.constructor = constructor;
 			this.sequence = constructor.nextSequence();
 		}
@@ -90,6 +91,10 @@ public abstract class AbstractInvocation extends AbstractInvocationInternal
 		public @NonNull String toString() {
 			return getName();
 		}
+	}
+
+	protected AbstractInvocation(@NonNull Interval interval) {
+		super(interval);
 	}
 
 	@Override

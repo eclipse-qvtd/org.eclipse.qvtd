@@ -22,6 +22,5 @@ import org.eclipse.jdt.annotation.NonNull;
 public interface InvocationManager extends ExecutionVisitable
 {
 	boolean flush();
-	void invoke(@NonNull Invocation invocation, boolean doFlush);
-	void unblock(@NonNull Invocation invocation);
+	@NonNull Interval getDefaultInterval();
 }

@@ -33,6 +33,8 @@ public interface Invocation extends ExecutionVisitable
 	 */
 	void insertAfter(@NonNull Invocation predecessor);
 
+	void invokeInternal(boolean doFlush);
+
 	/**
 	 * Return true if an occurrence with thoseValues would be a re-occurrence.
 	 */
@@ -43,6 +45,8 @@ public interface Invocation extends ExecutionVisitable
 	 * Remove this Invocation from the blocked or waiting invocations linked list.
 	 */
 	void remove();
+
+	void unblock();
 
 	public interface Constructor extends Nameable
 	{

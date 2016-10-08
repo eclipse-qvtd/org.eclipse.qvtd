@@ -26,6 +26,7 @@ public interface ExecutionVisitor<R>
 	//	R visiting(@NonNull ExecutionVisitable visitable);
 
 	R visitComputation(@NonNull Computation object);
+	R visitInterval(@NonNull Interval object);
 	R visitInvocation(@NonNull Invocation object);
 	R visitInvocationManager(@NonNull InvocationManager object);
 	R visitObjectManager(@NonNull ObjectManager object);

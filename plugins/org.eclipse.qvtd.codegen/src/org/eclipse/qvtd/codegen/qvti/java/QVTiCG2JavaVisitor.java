@@ -969,7 +969,10 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		js.append(" [] boundValues) {\n");
 		js.pushIndentation(null);
 		if (isIncremental) {
-			js.append("super(constructor);\n");
+			js.append("super(invocationManager.getDefaultInterval(), constructor);\n");
+		}
+		else {
+			js.append("super(invocationManager.getDefaultInterval());\n");
 		}
 		int i = 0;
 		for (@NonNull CGGuardVariable cgFreeVariable : cgFreeVariables) {

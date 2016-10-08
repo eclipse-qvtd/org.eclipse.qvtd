@@ -39,7 +39,7 @@ import org.eclipse.qvtd.runtime.evaluation.Transformer;
 
 import com.google.common.collect.Iterables;
 
-public class Execution2GraphVisitor extends AbstractExecutionVisitor<String>
+public class Execution2GraphVisitor extends AbstractExecutionVisitor<@Nullable Object>
 {
 	protected static final class ExecutionEdge implements GraphEdge
 	{

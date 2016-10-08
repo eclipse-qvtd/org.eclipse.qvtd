@@ -33,6 +33,11 @@ public /*abstract*/ class AbstractExecutionVisitor<R> implements ExecutionVisito
 	}
 
 	@Override
+	public R visitInterval(@NonNull Interval object) {
+		return visiting(object);
+	}
+
+	@Override
 	public R visitInvocation(@NonNull Invocation object) {
 		return visiting(object);
 	}
@@ -56,5 +61,4 @@ public /*abstract*/ class AbstractExecutionVisitor<R> implements ExecutionVisito
 	public R visitTransformer(@NonNull Transformer object) {
 		return visiting(object);
 	}
-
 }

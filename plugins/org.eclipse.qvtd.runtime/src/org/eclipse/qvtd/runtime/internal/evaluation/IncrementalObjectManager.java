@@ -131,13 +131,13 @@ public class IncrementalObjectManager extends AbstractObjectManager
 		protected synchronized void unblock(@NonNull ObjectManager objectManager) {
 			final Object blockedInvocations2 = blockedInvocations;
 			if (blockedInvocations2 instanceof Invocation) {
-				objectManager.unblock((Invocation) blockedInvocations2);
+				((Invocation) blockedInvocations2).unblock();
 			}
 			else if (blockedInvocations2 != null) {
 				@SuppressWarnings("unchecked")
 				List<Invocation> blockedInvocationList = (List<Invocation>)blockedInvocations2;
 				for (@SuppressWarnings("null")@NonNull Invocation invocation : blockedInvocationList) {
-					objectManager.unblock(invocation);
+					invocation.unblock();
 				}
 			}
 			blockedInvocations = null;

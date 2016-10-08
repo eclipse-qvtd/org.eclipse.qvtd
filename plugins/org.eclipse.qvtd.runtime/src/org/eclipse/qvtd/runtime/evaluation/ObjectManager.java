@@ -53,6 +53,4 @@ public interface ObjectManager extends ExecutionVisitable
 	 * Identify that the read of eFeature of eObject return ecoreValue.
 	 */
 	void got(Invocation.@NonNull Incremental invocation, @NonNull Object eObject, /*@NonNull*/ EStructuralFeature eFeature, @Nullable Object ecoreValue);
-
-	void unblock(@NonNull Invocation anInvocation);
 }

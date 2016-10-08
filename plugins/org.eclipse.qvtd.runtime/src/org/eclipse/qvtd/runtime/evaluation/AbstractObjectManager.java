@@ -33,9 +33,4 @@ public abstract class AbstractObjectManager implements ObjectManager
 	public <R> R accept(@NonNull ExecutionVisitor<R> visitor) {
 		return visitor.visitObjectManager(this);
 	}
-
-	@Override
-	public void unblock(@NonNull Invocation anInvocation) {
-		invocationManager.unblock(anInvocation);
-	}
 }
