@@ -10,6 +10,9 @@
  *******************************************************************************/
 package org.eclipse.qvtd.runtime.internal.evaluation;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.qvtd.runtime.evaluation.AbstractInvocationManager;
 import org.eclipse.qvtd.runtime.evaluation.Interval;
@@ -19,15 +22,34 @@ import org.eclipse.qvtd.runtime.evaluation.Interval;
  */
 public class AbstractInvocationManagerInternal extends AbstractInvocationManager
 {
-	private final @NonNull Interval interval = new AbstractIntervalInternal(this, 0) {};
+	/**
+	 * The distinct intervals of the schedule. Wherever possible work for earlier intervals is completed before that
+	 * for later intervals.
+	 */
+	private final @NonNull List<@NonNull Interval> intervals = new ArrayList<>();
+
+
+	private /*@LazyNonNull*/ Interval defaultInterval = null;
+
+	@Override
+	public @NonNull Interval createInterval() {
+		assert defaultInterval == null;
+		Interval interval = new AbstractIntervalInternal(this, intervals.size()) {};
+		intervals.add(interval);
+		return interval;
+	}
 
 	@Override
 	public boolean flush() {
-		return interval.flush();
+		return getDefaultInterval().flush();
 	}
 
 	@Override
 	public @NonNull Interval getDefaultInterval() {
-		return interval;
+		Interval defaultInterval2 = defaultInterval;
+		if (defaultInterval2  == null) {
+			defaultInterval2 = defaultInterval = createInterval();
+		}
+		return defaultInterval2;
 	}
 }

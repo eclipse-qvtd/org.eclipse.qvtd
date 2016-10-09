@@ -21,6 +21,7 @@ import org.eclipse.jdt.annotation.NonNull;
  */
 public interface InvocationManager extends ExecutionVisitable
 {
+	@NonNull Interval createInterval();
 	boolean flush();
 	@NonNull Interval getDefaultInterval();
 }

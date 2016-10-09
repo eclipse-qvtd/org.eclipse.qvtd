@@ -108,7 +108,6 @@ public abstract class AbstractIntervalInternal extends ConnectionLinkage impleme
 		}
 	}
 
-
 	@Override
 	public int getIndex() {
 		return intervalIndex;
