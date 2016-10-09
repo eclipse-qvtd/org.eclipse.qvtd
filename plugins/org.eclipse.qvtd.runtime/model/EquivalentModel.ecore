@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="EquivalentPackage" nsURI="xx" nsPrefix="xx">
+  <eClassifiers xsi:type="ecore:EClass" name="Connection" eSuperTypes="#//ConnectionLinkage">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="consumers" upperBound="-1"
+        eType="#//InvocationConstructor" eOpposite="#//InvocationConstructor/consumedConnections"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="interval" lowerBound="1"
+        eType="#//Interval" eOpposite="#//Interval/connections"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="typeId" lowerBound="1"
+        eType="#//TypeId"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="listOfValueAndConsumingInvocations"
+        upperBound="-1" eType="#//ConsumedValue" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="appenders" upperBound="-1"
+        eType="#//InvocationConstructor" eOpposite="#//InvocationConstructor/appendedConnections"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ConnectionLinkage">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="nextConnection" lowerBound="1"
+        eType="#//ConnectionLinkage"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ConsumedValue">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="index" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1" eType="#//Value"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="duplicates" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="consumers" upperBound="-1"
+        eType="#//Invocation"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EnvironmentFactory"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EvaluationCache"/>
+  <eClassifiers xsi:type="ecore:EClass" name="IdResolver"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Interval" eSuperTypes="#//ConnectionLinkage">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="blockedInvocations" upperBound="-1"
+        eType="#//Invocation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connections" upperBound="-1"
+        eType="#//Connection" containment="true" eOpposite="#//Connection/interval"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="invocationManager" lowerBound="1"
+        eType="#//InvocationManager" eOpposite="#//InvocationManager/intervals"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="intervalIndex" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tailConnection" lowerBound="1"
+        eType="#//ConnectionLinkage"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="waitingInvocations" upperBound="-1"
+        eType="#//Invocation"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Invocation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="InvocationConstructor">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="invocations" upperBound="-1"
+        eType="#//Invocation" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="interval" lowerBound="1"
+        eType="#//Interval"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="invocationManager" eType="#//InvocationManager"
+        eOpposite="#//InvocationManager/invokers"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="oldConsumedIndexes" lowerBound="1"
+        upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="consumedConnections" upperBound="-1"
+        eType="#//Connection" eOpposite="#//Connection/consumers"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="appendedConnections" upperBound="-1"
+        eType="#//Connection" eOpposite="#//Connection/appenders"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InvocationManager">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rootInterval" eType="#//Interval"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="intervals" upperBound="-1"
+        eType="#//Interval" containment="true" eOpposite="#//Interval/invocationManager"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="invokers" upperBound="-1"
+        eType="#//InvocationConstructor" eOpposite="#//InvocationConstructor/invocationManager"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nextIndex" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Model"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ModelManager"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ObjectManager">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="invocationManager" lowerBound="1"
+        eType="#//InvocationManager"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TransformationExecutor">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="environmentFactory" lowerBound="1"
+        eType="#//EnvironmentFactory"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="transformer" lowerBound="1"
+        eType="#//Transformer" eOpposite="#//Transformer/executor"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Transformer" eSuperTypes="#//ModelManager">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="constructors" upperBound="-1"
+        eType="#//InvocationConstructor" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="evaluationCache" lowerBound="1"
+        eType="#//EvaluationCache" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="executor" lowerBound="1"
+        eType="#//TransformationExecutor" eOpposite="#//TransformationExecutor/transformer"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="idResolver" lowerBound="1"
+        eType="#//IdResolver"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="invocationManager" lowerBound="1"
+        eType="#//InvocationManager" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="models" upperBound="-1"
+        eType="#//Model" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="objectManager" lowerBound="1"
+        eType="#//ObjectManager" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="TypeId" instanceTypeName="xx"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Value" instanceTypeName="xx"/>
+</ecore:EPackage>
