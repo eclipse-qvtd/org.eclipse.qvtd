@@ -27,6 +27,7 @@ import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.evaluation.EvaluationVisitor;
 import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.LabelUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
@@ -44,6 +45,7 @@ import org.eclipse.qvtd.runtime.evaluation.AbstractInvocation;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
 import org.eclipse.qvtd.runtime.evaluation.Computation;
 import org.eclipse.qvtd.runtime.evaluation.Invocation;
+import org.eclipse.qvtd.runtime.evaluation.InvocationConstructor;
 import org.eclipse.qvtd.runtime.evaluation.InvocationFailedException;
 import org.eclipse.qvtd.runtime.evaluation.InvocationManager;
 import org.eclipse.qvtd.runtime.evaluation.ObjectManager;
@@ -78,7 +80,7 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 	protected final @NonNull InvocationManager invocationManager;
 	protected final @NonNull ObjectManager objectManager;
 	private Invocation.@Nullable Incremental currentInvocation = null;
-	private @Nullable Map<@NonNull Mapping, Invocation.@NonNull Constructor> mapping2invocationConstructor = null;
+	private @Nullable Map<@NonNull Mapping, @NonNull InvocationConstructor> mapping2invocationConstructor = null;
 	private @Nullable Map<@NonNull Operation, Computation.@NonNull Constructor> operation2computationConstructor = null;
 
 	public QVTiIncrementalExecutor(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull ImperativeTransformation transformation, @NonNull Mode mode) {
@@ -86,7 +88,7 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 		this.mode = mode;
 		this.transformationAnalysis = getModelManager().getTransformationAnalysis();
 		boolean isLazy = mode == Mode.LAZY;
-		this.invocationManager = isLazy ? new LazyInvocationManager() : new IncrementalInvocationManager();
+		this.invocationManager = isLazy ? new LazyInvocationManager(this) : new IncrementalInvocationManager(this);
 		this.objectManager = isLazy ? new LazyObjectManager((LazyInvocationManager)invocationManager) : new IncrementalObjectManager((IncrementalInvocationManager)invocationManager);
 	}
 
@@ -157,17 +159,17 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 				return super.internalExecuteMappingCall(mappingCall, boundValues, undecoratedVisitor);
 			}
 		}
-		Map<@NonNull Mapping, Invocation.@NonNull Constructor> mapping2invocationConstructor2 = mapping2invocationConstructor;
+		Map<@NonNull Mapping, @NonNull InvocationConstructor> mapping2invocationConstructor2 = mapping2invocationConstructor;
 		if (mapping2invocationConstructor2 == null) {
 			mapping2invocationConstructor = mapping2invocationConstructor2 = new HashMap<>();
 		}
-		Invocation.Constructor invocationConstructor = mapping2invocationConstructor2.get(asMapping);
+		InvocationConstructor invocationConstructor = mapping2invocationConstructor2.get(asMapping);
 		if (invocationConstructor == null) {
-			invocationConstructor = new AbstractInvocationConstructor.Incremental(idResolver, QVTimperativeUtil.getName(asMapping))
+			invocationConstructor = new AbstractInvocationConstructor.Incremental(invocationManager.getRootInterval(), QVTimperativeUtil.getName(asMapping))
 			{
 				@Override
 				public @NonNull Invocation newInstance(@NonNull Object @NonNull [] theseValues) {
-					Invocation.Incremental invocation = new AbstractInvocation.Incremental(invocationManager.getDefaultInterval(), this)
+					Invocation.Incremental invocation = new AbstractInvocation.Incremental(invocationManager.getRootInterval(), this)
 					{
 						protected Object returnStatus;
 
@@ -253,7 +255,7 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 			objectManager.getting(sourceValue, eFeature, isOpposite);
 			ecoreValue = super.internalExecuteNavigationCallExp(navigationCallExp, referredProperty, sourceValue);
 			if (debugInvocations) {
-				AbstractTransformer.INVOCATIONS.println("got " + eFeature.getEContainingClass().getName() + "::" + eFeature.getName() + " for " + sourceValue + " = " + ecoreValue);
+				AbstractTransformer.INVOCATIONS.println("got " + eFeature.getEContainingClass().getName() + "::" + eFeature.getName() + " for " + LabelUtil.getLabel(sourceValue) + " = " + LabelUtil.getLabel(ecoreValue));
 			}
 		}
 		else {

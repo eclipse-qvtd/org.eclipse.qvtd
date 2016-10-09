@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibPackage;
+import org.eclipse.ocl.pivot.utilities.LabelUtil;
 import org.eclipse.qvtd.runtime.evaluation.AbstractObjectManager;
 import org.eclipse.qvtd.runtime.evaluation.AbstractSlotState;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
@@ -631,7 +632,7 @@ public class IncrementalObjectManager extends AbstractObjectManager
 	public synchronized void assigned(@NonNull Object eObject, /*@NonNull*/ EStructuralFeature eFeature, @Nullable Object ecoreValue, @Nullable Object childKey) {
 		assert eFeature != null;
 		if (debugInvocations) {
-			AbstractTransformer.INVOCATIONS.println("assigned " + eFeature.getEContainingClass().getName() + "::" + eFeature.getName() + " for " + eObject + " = " + ecoreValue);
+			AbstractTransformer.INVOCATIONS.println("assigned " + eFeature.getEContainingClass().getName() + "::" + eFeature.getName() + " for " + LabelUtil.getLabel(eObject) + " = " + LabelUtil.getLabel(ecoreValue));
 		}
 		Map<EStructuralFeature, BasicSlotState> objectState = getObjectState(eObject);
 		BasicSlotState slotState = objectState.get(eFeature);
@@ -821,7 +822,7 @@ public class IncrementalObjectManager extends AbstractObjectManager
 	public synchronized void getting(@NonNull Object eObject, /*@NonNull*/ EStructuralFeature eFeature, boolean isOpposite) {
 		assert eFeature != null;
 		if (debugInvocations) {
-			AbstractTransformer.INVOCATIONS.println("getting " + eFeature.getEContainingClass().getName() + "::" + eFeature.getName() + " for " + eObject);
+			AbstractTransformer.INVOCATIONS.println("getting " + eFeature.getEContainingClass().getName() + "::" + eFeature.getName() + " for " + LabelUtil.getLabel(eObject));
 		}
 		SlotState slotState = getSlotState(eObject, eFeature);
 		slotState.getting(eObject, eFeature);

@@ -10,9 +10,15 @@
  *******************************************************************************/
 package org.eclipse.qvtd.runtime.internal.evaluation;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.evaluation.Executor;
+
 /**
  * InvocationManager supervises and provides thread safety for the lists of blocked and waiting invocations.
  */
 public class LazyInvocationManager extends AbstractInvocationManagerInternal
 {
+	public LazyInvocationManager(@NonNull Executor executor) {
+		super(executor);
+	}
 }

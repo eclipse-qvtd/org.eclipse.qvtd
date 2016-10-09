@@ -10,6 +10,8 @@
  ******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
 
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -17,12 +19,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphMLStringBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphEdge;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphNode;
@@ -31,7 +36,10 @@ import org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.AttributeStatus;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.ClassStatus;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.PropertyStatus;
 import org.eclipse.qvtd.runtime.evaluation.AbstractExecutionVisitor;
+import org.eclipse.qvtd.runtime.evaluation.Connection;
+import org.eclipse.qvtd.runtime.evaluation.Interval;
 import org.eclipse.qvtd.runtime.evaluation.Invocation;
+import org.eclipse.qvtd.runtime.evaluation.InvocationConstructor;
 import org.eclipse.qvtd.runtime.evaluation.InvocationManager;
 import org.eclipse.qvtd.runtime.evaluation.ObjectManager;
 import org.eclipse.qvtd.runtime.evaluation.SlotState;
@@ -46,16 +54,21 @@ public class Execution2GraphVisitor extends AbstractExecutionVisitor<@Nullable O
 		private final @NonNull GraphNode sourceNode;
 		private final @NonNull GraphNode targetNode;
 		private final @NonNull String color;
+		private final @Nullable String style;
 
-		protected ExecutionEdge(@NonNull GraphNode sourceNode, @NonNull GraphNode targetNode, @NonNull String color) {
+		protected ExecutionEdge(@NonNull GraphNode sourceNode, @NonNull GraphNode targetNode, @NonNull String color, @Nullable String style) {
 			this.sourceNode = sourceNode;
 			this.targetNode = targetNode;
 			this.color = color;
+			this.style = style;
 		}
 
 		@Override
 		public void appendEdgeAttributes(@NonNull GraphStringBuilder s, @NonNull GraphNode source, @NonNull GraphNode target) {
 			s.setColor(color);
+			if (style != null) {
+				s.setStyle(style);
+			}
 			s.appendAttributedEdge(source, this, target);
 		}
 
@@ -72,11 +85,28 @@ public class Execution2GraphVisitor extends AbstractExecutionVisitor<@Nullable O
 
 	protected static @NonNull String NULL_PLACEHOLDER = "\"<null>\""; //$NON-NLS-1$
 
+	public static void writeGraphMLfile(Transformer tx, @NonNull URI graphmlURI) {
+		try {
+			OutputStream outputStream = URIConverter.INSTANCE.createOutputStream(graphmlURI);
+			GraphMLStringBuilder s = new GraphMLStringBuilder();
+			Execution2GraphVisitor execution2GraphVisitor = new Execution2GraphVisitor(s);
+			tx.accept(execution2GraphVisitor);
+			outputStream.write(s.toString().getBytes());
+			outputStream.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 	protected final @NonNull GraphStringBuilder context;
 
 	private Map<@NonNull AssociationStatus, @NonNull String> associationId = new HashMap<>();
 	private Map<@NonNull ClassStatus, @NonNull String> classId = new HashMap<>();
+	private Map<@NonNull Connection, @NonNull GraphNode> connection2node = new HashMap<>();
+	private Map<@NonNull Interval, @NonNull GraphNode> interval2node = new HashMap<>();
 	private Map<@NonNull Invocation, @NonNull GraphNode> invocation2node = new HashMap<>();
+	private Map<@NonNull InvocationConstructor, @NonNull GraphNode> invocationConstructor2node = new HashMap<>();
 	private Map<@NonNull Object, @NonNull GraphNode> object2node = new HashMap<>();
 	private Map<@NonNull SlotState, @NonNull GraphNode> slot2node = new HashMap<>();
 	//	private Map<@NonNull String, @NonNull String> propertyId2associationId = new HashMap<>();
@@ -86,8 +116,8 @@ public class Execution2GraphVisitor extends AbstractExecutionVisitor<@Nullable O
 		this.context = s;
 	}
 
-	protected void appendEdge(@NonNull GraphNode sourceNode, @NonNull GraphNode targetNode, @NonNull String color) {
-		context.appendEdge(sourceNode, new ExecutionEdge(sourceNode, targetNode, color), targetNode);
+	protected void appendEdge(@NonNull GraphNode sourceNode, @NonNull GraphNode targetNode, @NonNull String color, @Nullable String style) {
+		context.appendEdge(sourceNode, new ExecutionEdge(sourceNode, targetNode, color, style), targetNode);
 	}
 
 	protected @NonNull String getAssociationColor(@NonNull AssociationStatus associationStatus) {
@@ -147,18 +177,79 @@ public class Execution2GraphVisitor extends AbstractExecutionVisitor<@Nullable O
 		return id;
 	}
 
+	protected @NonNull GraphNode getConnectionNode(@NonNull Connection object) {
+		GraphNode node = connection2node.get(object);
+		if (node == null) {
+			final String label = object.getName();
+			node = new GraphNode()
+			{
+				@Override
+				public void appendNode(@NonNull GraphStringBuilder s, @NonNull String nodeName) {
+					s.setLabel(label);
+					s.setShape("ellipse");
+					s.setColor("brown");
+					s.appendAttributedNode(nodeName);
+				}
+			};
+			connection2node.put(object, node);
+			context.appendNode(node);
+		}
+		return node;
+	}
+
+	protected @NonNull GraphNode getIntervalNode(@NonNull Interval object) {
+		GraphNode node = interval2node.get(object);
+		if (node == null) {
+			final String label = "          " + object.getName() + "          ";
+			node = new GraphNode()
+			{
+				@Override
+				public void appendNode(@NonNull GraphStringBuilder s, @NonNull String nodeName) {
+					s.setLabel(label);
+					s.setShape("octagon");
+					s.setColor("black");
+					s.appendAttributedNode(nodeName);
+				}
+			};
+			interval2node.put(object, node);
+			context.appendNode(node);
+		}
+		return node;
+	}
+
+	protected @NonNull GraphNode getInvocationConstructorNode(@NonNull InvocationConstructor object) {
+		GraphNode node = invocationConstructor2node.get(object);
+		if (node == null) {
+			final String label = object.getName();
+			node = new GraphNode()
+			{
+				@Override
+				public void appendNode(@NonNull GraphStringBuilder s, @NonNull String nodeName) {
+					s.setLabel(label);
+					s.setShape("hexagon");
+					s.setColor("brown");
+					s.appendAttributedNode(nodeName);
+				}
+			};
+			invocationConstructor2node.put(object, node);
+			context.appendNode(node);
+		}
+		return node;
+	}
+
 	protected @NonNull GraphNode getInvocationNode(@NonNull Invocation object) {
 		GraphNode node = invocation2node.get(object);
 		if (node == null) {
 			//			id = object.getReferredMappingCall().getReferredMapping().getName() + "-" + (mappingId.size() + 1);
-			final String label;
-			if (object instanceof EObject) {
-				label = ((EObject)object).eClass().getName() + "-" + (invocation2node.size() + 1);
-			}
-			else {
-				label = object.toString().replace("@",  "\n@");
-				//				label = object.getClass().getSimpleName() + "-" + (invocation2node.size() + 1);
-			}
+			final String label = object.getName();
+			//			final String label;
+			//			if (object instanceof EObject) {
+			//				label = ((EObject)object).eClass().getName() + "-" + (invocation2node.size() + 1);
+			//			}
+			//			else {
+			//				label = object.toString().replace("@",  "\n@");
+			//				label = object.getClass().getSimpleName() + "-" + (invocation2node.size() + 1);
+			//			}
 			node = new GraphNode()
 			{
 				@Override
@@ -176,7 +267,7 @@ public class Execution2GraphVisitor extends AbstractExecutionVisitor<@Nullable O
 		return node;
 	}
 
-	protected @NonNull GraphNode getObjectNode(@NonNull Object object, @NonNull String color) {
+	protected @NonNull GraphNode getObjectNode(@NonNull Object object) {
 		GraphNode node = object2node.get(object);
 		if (node == null) {
 			//			id = object.getReferredMappingCall().getReferredMapping().getName() + "-" + (mappingId.size() + 1);
@@ -194,7 +285,7 @@ public class Execution2GraphVisitor extends AbstractExecutionVisitor<@Nullable O
 				public void appendNode(@NonNull GraphStringBuilder s, @NonNull String nodeName) {
 					s.setLabel(label);
 					s.setShape("rectangle");
-					s.setColor(color);
+					s.setColor("blue");
 					s.appendAttributedNode(nodeName);
 				}
 			};
@@ -216,7 +307,7 @@ public class Execution2GraphVisitor extends AbstractExecutionVisitor<@Nullable O
 		}
 	}
 
-	protected @NonNull GraphNode getSlotNode(SlotState.@NonNull Incremental object, @NonNull String color) {
+	protected @NonNull GraphNode getSlotNode(SlotState.@NonNull Incremental object) {
 		if (object.getValue() != null) {
 			object = object.getPrimarySlotState();
 		}
@@ -230,6 +321,14 @@ public class Execution2GraphVisitor extends AbstractExecutionVisitor<@Nullable O
 					label += " / " + eOpposite.getName();
 				}
 			}
+			else if (eFeature instanceof EAttribute) {
+				Object value = object.getValue();	// FIXME may be null for inputs, and some slots seem crooked
+				String stringValue = value != null ? value.toString() : "???";
+				if (stringValue.length() > 20) {
+					stringValue = stringValue.substring(0, 17) + "...";
+				}
+				label += "  \n  " + stringValue;
+			}
 			final String finalLabel = label;
 			node = new GraphNode()
 			{
@@ -240,7 +339,7 @@ public class Execution2GraphVisitor extends AbstractExecutionVisitor<@Nullable O
 					if (eFeature instanceof EAttribute) {
 						s.setStyle("rounded");
 					}
-					s.setColor(color);
+					s.setColor("blue");
 					s.appendAttributedNode(nodeName);
 				}
 			};
@@ -248,6 +347,31 @@ public class Execution2GraphVisitor extends AbstractExecutionVisitor<@Nullable O
 			context.appendNode(node);
 		}
 		return node;
+	}
+
+	@Override
+	public @Nullable Object visitConnection(@NonNull Connection object) {
+		GraphNode connectionNode = getConnectionNode(object);
+		for (@NonNull InvocationConstructor producer : object.getAppenders()) {
+			GraphNode producerNode = getInvocationConstructorNode(producer);
+			appendEdge(producerNode, connectionNode, "brown", null);
+		}
+		for (@NonNull InvocationConstructor consumer : object.getConsumers()) {
+			GraphNode consumerNode = getInvocationConstructorNode(consumer);
+			appendEdge(connectionNode, consumerNode, "brown", null);
+		}
+		int iMax = object.getValues();
+		for (int i = 0; i < iMax; i++) {
+			Object value = object.getValue(i);
+			if (value != null) {
+				GraphNode objectNode = getObjectNode(value);
+				appendEdge(connectionNode, objectNode, "brown", "dotted");
+				//			for (@NonNull Invocation invocation : object.getConsumers(i)) {
+				//				GraphNode consumerNode = getInvocationNode(invocation);
+				//			}
+			}
+		}
+		return null;
 	}
 
 	/*	@Override
@@ -312,50 +436,74 @@ public class Execution2GraphVisitor extends AbstractExecutionVisitor<@Nullable O
 	} */
 
 	@Override
+	public @Nullable Object visitInterval(@NonNull Interval object) {
+		GraphNode intervalNode = getIntervalNode(object);
+		for (@NonNull Connection connection : object.getConnections()) {
+			connection.accept(this);
+			GraphNode connectionNode = getConnectionNode(connection);
+			appendEdge(connectionNode, intervalNode, "black", "dashed");
+		}
+		return null;
+	}
+
+	@Override
 	public @Nullable String visitInvocation(@NonNull Invocation object) {
 		@SuppressWarnings("unused")
 		GraphNode invocationNode = getInvocationNode(object);
 		/*		context.appendNode(mappingId, "hexagon", "#ffcc00", 30, 150, mappingId.replace("-",  "\n"));
-		for (ElementStatus inputStatus : object.getInputs()) {
-			if (inputStatus instanceof ClassStatus) {
-				ClassStatus classStatus = (ClassStatus)inputStatus;
-				String classId = getClassId(classStatus);
-				context.appendEdge(classId, mappingId, "#000000", "line","none", "standard");
+			for (ElementStatus inputStatus : object.getInputs()) {
+				if (inputStatus instanceof ClassStatus) {
+					ClassStatus classStatus = (ClassStatus)inputStatus;
+					String classId = getClassId(classStatus);
+					context.appendEdge(classId, mappingId, "#000000", "line","none", "standard");
+				}
+				else if (inputStatus instanceof PropertyStatus) {
+					PropertyStatus propertyStatus = (PropertyStatus)inputStatus;
+					String propertyId = getPropertyId(propertyStatus);
+					context.appendEdge(propertyId, mappingId, "#000000", "dashed","none", "standard");
+				}
 			}
-			else if (inputStatus instanceof PropertyStatus) {
-				PropertyStatus propertyStatus = (PropertyStatus)inputStatus;
-				String propertyId = getPropertyId(propertyStatus);
-				context.appendEdge(propertyId, mappingId, "#000000", "dashed","none", "standard");
-			}
+			for (ElementStatus outputStatus : object.getOutputs()) {
+				if (outputStatus instanceof ClassStatus) {
+					ClassStatus classStatus = (ClassStatus)outputStatus;
+					String classId = getClassId(classStatus);
+					context.appendEdge(mappingId, classId, "#000000", "line","none", "standard");
+				}
+				else if (outputStatus instanceof PropertyStatus) {
+					PropertyStatus propertyStatus = (PropertyStatus)outputStatus;
+					String propertyId = getPropertyId(propertyStatus);
+					context.appendEdge(mappingId, propertyId, "#000000", "dashed","none", "standard");
+				}
+			} */
+		return null;
+	}
+
+	@Override
+	public @Nullable Object visitInvocationConstructor(@NonNull InvocationConstructor object) {
+		GraphNode invokerNode = getInvocationConstructorNode(object);
+		GraphNode intervalNode = getIntervalNode(object.getInterval());
+		appendEdge(invokerNode, intervalNode, "black", "dashed");
+		for (@NonNull Invocation invocation : object.getInvocations()) {
+			GraphNode invocationNode = getInvocationNode(invocation);
+			appendEdge(invokerNode, invocationNode, "orange", "dotted");
 		}
-		for (ElementStatus outputStatus : object.getOutputs()) {
-			if (outputStatus instanceof ClassStatus) {
-				ClassStatus classStatus = (ClassStatus)outputStatus;
-				String classId = getClassId(classStatus);
-				context.appendEdge(mappingId, classId, "#000000", "line","none", "standard");
-			}
-			else if (outputStatus instanceof PropertyStatus) {
-				PropertyStatus propertyStatus = (PropertyStatus)outputStatus;
-				String propertyId = getPropertyId(propertyStatus);
-				context.appendEdge(mappingId, propertyId, "#000000", "dashed","none", "standard");
-			}
-		} */
 		return null;
 	}
 
 	@Override
 	public @Nullable String visitInvocationManager(@NonNull InvocationManager object) {
-		//		context.open();
-		//			for (ClassStatus classStatus : object.getOwnedClassStatuses()) {
-		//				classStatus.accept(this);
-		//			}
-		//			for (MappingStatus mappingStatus : object.getOwnedMappingStatuses()) {
-		//				mappingStatus.accept(this);
-		//			}
-		//			for (AssociationStatus associationStatus : object.getOwnedAssociationStatuses()) {
-		//				associationStatus.accept(this);
-		//			}
-		//		context.close();
+		GraphNode previousNode = null;
+		for (@NonNull InvocationConstructor invoker : object.getInvokers()) {
+			invoker.accept(this);
+		}
+		for (@NonNull Interval interval : object.getIntervals()) {
+			interval.accept(this);
+			GraphNode nextNode = getIntervalNode(interval);
+			if (previousNode != null) {
+				appendEdge(previousNode, nextNode, "black", null);
+			}
+			previousNode = nextNode;
+		}
 		return null;
 	}
 
@@ -383,29 +531,29 @@ public class Execution2GraphVisitor extends AbstractExecutionVisitor<@Nullable O
 			invocation.accept(this);
 			GraphNode invocationNode = getInvocationNode(invocation);
 			for (@NonNull Object createdObject : invocation.getCreatedObjects()) {
-				GraphNode objectNode = getObjectNode(createdObject, "green");
-				appendEdge(invocationNode, objectNode, "green");
+				GraphNode objectNode = getObjectNode(createdObject);
+				appendEdge(invocationNode, objectNode, "green", null);
 			}
 		}
 		for (SlotState.@NonNull Incremental slotState : allSlots) {
-			GraphNode slotNode = getSlotNode(slotState, "green");
+			GraphNode slotNode = getSlotNode(slotState);
 			slotState.accept(this);
 			for (@NonNull Invocation invocation : slotState.getSources()) {
-				appendEdge(getInvocationNode(invocation), slotNode, "green");
+				appendEdge(getInvocationNode(invocation), slotNode, "green", null);
 			}
 			for (@NonNull Invocation invocation : slotState.getTargets()) {
-				appendEdge(slotNode, getInvocationNode(invocation), "cyan");
+				appendEdge(slotNode, getInvocationNode(invocation), "cyan", null);
 			}
 			Iterables.addAll(allInvocations, slotState.getTargets());
 		}
 		for (@NonNull Object object : objectManager.getObjects()) {
-			GraphNode objectNode = getObjectNode(object, "blue");
+			GraphNode objectNode = getObjectNode(object);
 			List<SlotState.@NonNull Incremental> slots = object2slots.get(object);
 			if (slots != null) {
 				for (SlotState.@NonNull Incremental slotState : slots) {
-					GraphNode slotNode = getSlotNode(slotState, "blue");
+					GraphNode slotNode = getSlotNode(slotState);
 					slotState.accept(this);
-					appendEdge(objectNode, slotNode, "blue");
+					appendEdge(objectNode, slotNode, "blue", null);
 				}
 			}
 		}
@@ -419,7 +567,9 @@ public class Execution2GraphVisitor extends AbstractExecutionVisitor<@Nullable O
 	}
 
 	@Override
-	public @Nullable String visitTransformer(@NonNull Transformer object) {
+	public @Nullable String visitTransformer(@NonNull Transformer transformer) {
+		transformer.getInvocationManager().accept(this);
+		transformer.getObjectManager().accept(this);
 		return null;
 	}
 

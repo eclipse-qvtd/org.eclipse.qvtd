@@ -11,18 +11,14 @@
 package org.eclipse.qvtd.runtime.evaluation;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.pivot.utilities.Nameable;
+import org.eclipse.qvtd.runtime.internal.evaluation.AbstractIntervalInternal;
 
 /**
- * An Invoker marshalls the arguments to invoke a mapping Invocation.
- *
- * @noimplement clients should derive from AbstractInvoker
+ * DefaultInterval provides the standard implementation of the scheduling interval manager.
  */
-public interface Invoker extends ExecutionVisitable, Nameable
+public class DefaultInterval extends AbstractIntervalInternal
 {
-	@NonNull Interval getInterval();
-
-	@NonNull Iterable<@NonNull Invocation> getInvocations();
-
-	void propagate();
+	public DefaultInterval(@NonNull InvocationManager invocationManager, int intervalIndex) {
+		super(invocationManager, intervalIndex);
+	}
 }

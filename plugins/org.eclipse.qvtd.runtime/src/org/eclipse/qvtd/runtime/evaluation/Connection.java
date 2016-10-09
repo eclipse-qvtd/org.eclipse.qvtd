@@ -27,9 +27,9 @@ import org.eclipse.ocl.pivot.utilities.Nameable;
  */
 public interface Connection extends ExecutionVisitable, Nameable
 {
-	void addConsumer(@NonNull Invoker consumingInvoker);
+	void addAppender(@NonNull InvocationConstructor appendingInvoker);
 
-	void addProducer(@NonNull Invoker producingInvoker);
+	void addConsumer(@NonNull InvocationConstructor consumingInvoker);
 
 	/**
 	 * Append aValue to the contents, enforcing uniqueness if necessary, and waking up the overall
@@ -46,13 +46,13 @@ public interface Connection extends ExecutionVisitable, Nameable
 
 	void consume(int elementIndex, @NonNull Invocation mapping);
 
+	@NonNull Iterable<@NonNull InvocationConstructor> getAppenders();
+
 	int getCapacity();
 
-	@NonNull Iterable<@NonNull Invoker> getConsumers();
+	@NonNull Iterable<@NonNull InvocationConstructor> getConsumers();
 
 	//	@NonNull Iterable<@NonNull Invocation> getConsumers(int i);
-
-	@NonNull Iterable<@NonNull Invoker> getProducers();
 
 	@Nullable Object getValue(int i);
 

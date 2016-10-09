@@ -48,6 +48,7 @@ import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTypedModelInstance;
 import org.eclipse.qvtd.runtime.evaluation.ExecutionVisitable;
 import org.eclipse.qvtd.runtime.evaluation.Invocation;
+import org.eclipse.qvtd.runtime.evaluation.InvocationConstructor;
 import org.eclipse.qvtd.runtime.evaluation.InvocationFailedException;
 import org.eclipse.qvtd.runtime.evaluation.InvocationManager;
 import org.eclipse.qvtd.runtime.evaluation.ObjectManager;
@@ -539,7 +540,7 @@ public abstract class AbstractTransformerInternal extends AbstractModelManager i
 	 * Create the InvocationManager. Creates a LazyInvocationManager by default.
 	 */
 	protected @NonNull InvocationManager createInvocationManager() {
-		return new LazyInvocationManager();
+		return new LazyInvocationManager(executor);
 	}
 
 	protected SetValue.@NonNull Accumulator createUnenforcedSetAccumulatorValue(@NonNull CollectionTypeId typeId) {
@@ -723,12 +724,26 @@ public abstract class AbstractTransformerInternal extends AbstractModelManager i
 		return false;
 	}
 
+	/*	protected void install(@NonNull InvocationConstructor constructor, int consumedConnections, @NonNull Connection @NonNull ... connections) {
+		//		InvocationConstructor invoker = invocationManager.createInvoker(constructor, consumedConnections, interval, connections);
+		for (int i = 0; i < consumedConnections; i++) {
+			Connection consumedConnection = connections[i];
+			consumedConnection.addConsumer(constructor);
+			constructor.addConsumedConection(consumedConnection);
+		}
+		for (int i = consumedConnections; i < connections.length; i++) {
+			Connection appendedConnection = connections[i];
+			appendedConnection.addProducer(constructor);
+			constructor.addAppendedConnection(appendedConnection);
+		}
+	} */
+
 	/**
 	 * Invoke a mapping with the given constructor with a given set of boundValues once. This shortform of invokeOnce
 	 * should only be used when it is known that recursive invocation is impossible.
 	 */
-	public <@Nullable T extends Invocation> void invoke(Invocation.@NonNull Constructor constructor, @NonNull Object @NonNull ... boundValues) {
-		@NonNull Invocation invocation = constructor.newInstance(boundValues);
+	public <@Nullable T extends Invocation> void invoke(@NonNull InvocationConstructor constructor, @NonNull Object @NonNull ... boundValues) {
+		@NonNull Invocation invocation = constructor.getInstance(boundValues);
 		if (debugInvocations) {
 			AbstractTransformer.INVOCATIONS.println("invoke " + invocation);
 		}
@@ -738,7 +753,7 @@ public abstract class AbstractTransformerInternal extends AbstractModelManager i
 	/**
 	 * Invoke a mapping with the given constructor with a given set of boundValues once. Repeated invocation attempts are ignored.
 	 */
-	public void invokeOnce(Invocation.@NonNull Constructor constructor, @NonNull Object @NonNull ... boundValues) {
+	public void invokeOnce(@NonNull InvocationConstructor constructor, @NonNull Object @NonNull ... boundValues) {
 		@Nullable Invocation invocation = constructor.getFirstInvocation(boundValues);
 		if (invocation != null) {
 			if (debugInvocations) {

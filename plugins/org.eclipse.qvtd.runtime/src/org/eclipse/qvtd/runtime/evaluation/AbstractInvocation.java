@@ -28,14 +28,14 @@ public abstract class AbstractInvocation extends AbstractInvocationInternal
 		public static final @NonNull List<@NonNull Object> EMPTY_OBJECT_LIST = Collections.emptyList();
 		public static final @NonNull List<SlotState.@NonNull Incremental> EMPTY_SLOT_LIST = Collections.emptyList();
 
-		protected final Invocation.@NonNull Constructor constructor;
+		protected final @NonNull InvocationConstructor constructor;
 		protected final int sequence;
 
 		private Set<@NonNull Object> createdObjects = null;
 		private Set<SlotState.@NonNull Incremental> readSlots = null;
 		private Set<SlotState.@NonNull Incremental> writeSlots = null;
 
-		protected Incremental(@NonNull Interval interval, Invocation.Constructor.@NonNull Incremental constructor) {
+		protected Incremental(@NonNull Interval interval, InvocationConstructor.@NonNull Incremental constructor) {
 			super(interval);
 			this.constructor = constructor;
 			this.sequence = constructor.nextSequence();
@@ -100,5 +100,10 @@ public abstract class AbstractInvocation extends AbstractInvocationInternal
 	@Override
 	public <R> R accept(@NonNull ExecutionVisitor<R> visitor) {
 		return visitor.visitInvocation(this);
+	}
+
+	@Override
+	public @NonNull String getName() {
+		return toString().replace("@",  "\n@");
 	}
 }

@@ -11,6 +11,7 @@
 package org.eclipse.qvtd.runtime.evaluation;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.ids.CollectionTypeId;
 import org.eclipse.ocl.pivot.utilities.Nameable;
 
 /**
@@ -21,7 +22,11 @@ import org.eclipse.ocl.pivot.utilities.Nameable;
  */
 public interface Interval extends ExecutionVisitable, Nameable
 {
+	@NonNull Connection createConnection(@NonNull String name, @NonNull CollectionTypeId typeId, boolean isEnforced);
+
 	boolean flush();
+
+	@NonNull Iterable<@NonNull Connection> getConnections();
 
 	int getIndex();
 
@@ -31,6 +36,10 @@ public interface Interval extends ExecutionVisitable, Nameable
 	@NonNull String getName();
 
 	void invoke(@NonNull Invocation invocation, boolean doFlush);
+
+	boolean isFlushed();
+
+	void queue(@NonNull Connection connection);
 
 	void queue(@NonNull Invocation consumer);
 

@@ -1,0 +1,55 @@
+import 'Tree.ecore'::tree;
+import 'TallTree.ecore'::talltree;
+import 'Tree2TallTree.ecore'::tree2talltree;
+
+transformation Tree2TallTreeInstall {
+	check tree imports tree;
+	enforce talltree imports talltree;
+	tree2talltree imports tree2talltree;
+}
+
+map __root__ in Tree2TallTreeInstall {
+    buffer nodes := tree.objectsOfKind(Node)->sortedBy(name);
+    buffer node2tallNodes : Sequence(tree2talltree::Node2TallNode);
+    install Node2MiddleNode {
+        node consumes nodes;
+        node2tallNodes appendsTo node2tallNodes;	
+    } 
+    install Edge2MiddleEdge {
+        node consumes nodes;
+    } 
+    install MiddleNode2TallNode {
+        node2tallNode consumes node2tallNodes;	
+    } 
+}
+
+map Node2MiddleNode in Tree2TallTreeInstall {
+	guard:tree node : Node; 
+	append node2tallNodes : Sequence(tree2talltree::Node2TallNode); 
+	new:tree2talltree node2tallNode : Node2TallNode;
+	set node2tallNode.node := node;
+	set node2tallNode.name := node.name;
+	add node2tallNodes += node2tallNode;
+}
+
+map Edge2MiddleEdge in Tree2TallTreeInstall {
+	guard:tree node : Node;
+	var node2tallNode : Node2TallNode := node.Node2TallNode;
+	check node.parent <> null;
+	notify set node2tallNode.parent := node.parent.Node2TallNode;
+--		node2tallNode.name := node.name;
+}
+
+map MiddleNode2TallNode in Tree2TallTreeInstall {
+	guard:tree2talltree node2tallNode : Node2TallNode;
+	var tallNode_name : String := node2tallNode.name;
+	observe Node2TallNode::children, Node2TallNode::tallNode
+	var tallNode_children : Set(TallNode) := node2tallNode.children?.tallNode->asSet();
+	observe Node2TallNode::children, Node2TallNode::tallNode, TallNode::height
+	var tallNode_height : Integer := if node2tallNode.children->notEmpty() then node2tallNode.children.tallNode.height->max() + 1 else 0 endif;
+	new:talltree tallNode : TallNode;
+	notify set node2tallNode.tallNode := tallNode;
+	set	tallNode.name := tallNode_name;
+	set	tallNode.children := tallNode_children;
+	notify set tallNode.height := tallNode_height;
+}

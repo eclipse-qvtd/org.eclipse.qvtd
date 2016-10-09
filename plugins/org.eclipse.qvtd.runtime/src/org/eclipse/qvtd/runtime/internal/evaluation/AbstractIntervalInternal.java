@@ -10,25 +10,49 @@
  *******************************************************************************/
 package org.eclipse.qvtd.runtime.internal.evaluation;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.ids.CollectionTypeId;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
+import org.eclipse.qvtd.runtime.evaluation.Connection;
+import org.eclipse.qvtd.runtime.evaluation.EnforcedConnection;
 import org.eclipse.qvtd.runtime.evaluation.ExecutionVisitor;
 import org.eclipse.qvtd.runtime.evaluation.Interval;
 import org.eclipse.qvtd.runtime.evaluation.Invocation;
 import org.eclipse.qvtd.runtime.evaluation.InvocationFailedException;
 import org.eclipse.qvtd.runtime.evaluation.InvocationManager;
 import org.eclipse.qvtd.runtime.evaluation.SlotState;
+import org.eclipse.qvtd.runtime.evaluation.UnenforcedConnection;
 
 /**
  * AbstractIntervalInternal provides the shared implementation of the intrusive blocked/waiting linked list functionality.
  */
-public abstract class AbstractIntervalInternal extends ConnectionLinkage implements Interval
+public abstract class AbstractIntervalInternal implements Interval
 {
 	protected final boolean debugInvocations = AbstractTransformer.INVOCATIONS.isActive();
 
 	protected final @NonNull InvocationManager invocationManager;
 	protected final int intervalIndex;
+
+	//	public @Nullable SlotState debug_blockedBy = null;
+
+	/**
+	 * Head of a singly linked list element of connections awaiting propagation, null when empty.
+	 */
+	private @Nullable AbstractConnectionInternal headConnection = null;
+
+	/**
+	 * Tail of a singly linked list element of connections awaiting propagation, null when empty.
+	 */
+	private @Nullable AbstractConnectionInternal tailConnection = null;
+
+	/**
+	 * Head of doubly linked list of blocked invocations.
+	 */
+	private @NonNull List<@NonNull Connection> connections = new ArrayList<>();
 
 	/**
 	 * Head of doubly linked list of blocked invocations.
@@ -69,23 +93,36 @@ public abstract class AbstractIntervalInternal extends ConnectionLinkage impleme
 	}
 
 	@Override
-	public boolean flush() {
-		flushInternal();
-		AbstractInvocationInternal blockedInvocation = blockedInvocations;
-		if (blockedInvocation == null) {
-			return true;
+	public @NonNull Connection createConnection(@NonNull String name, @NonNull CollectionTypeId typeId, boolean isEnforced) {
+		Connection connection;
+		if (isEnforced) {
+			connection = new EnforcedConnection(this, name, typeId);
 		}
-		do {
-			if (debugInvocations) {
-				AbstractTransformer.INVOCATIONS.println("still blocked " + blockedInvocation + " by " + blockedInvocation.debug_blockedBy);
-			}
-			blockedInvocation = blockedInvocation.next;
+		else {
+			connection = new UnenforcedConnection(this, name, typeId);
 		}
-		while (blockedInvocation != blockedInvocations);
-		return false;
+		connections.add(connection);
+		return connection;
 	}
 
-	private void flushInternal() {
+	@Override
+	public boolean flush() {
+		while (headConnection != null) {
+			AbstractConnectionInternal nextConnection2;
+			synchronized(this) {
+				nextConnection2 = headConnection;
+				if (nextConnection2 != null) {
+					headConnection = nextConnection2.getNextConnection();
+					if (headConnection == null) {
+						tailConnection = null;
+					}
+					nextConnection2.resetQueued();
+				}
+			}
+			if (nextConnection2 != null) {
+				nextConnection2.propagate();
+			}
+		}
 		while (waitingInvocations != null) {
 			AbstractInvocationInternal invocation = null;
 			synchronized (this) {
@@ -106,6 +143,23 @@ public abstract class AbstractIntervalInternal extends ConnectionLinkage impleme
 				invoke(invocation, false);
 			}
 		}
+		AbstractInvocationInternal blockedInvocation = blockedInvocations;
+		if (blockedInvocation == null) {
+			return true;
+		}
+		do {
+			if (debugInvocations) {
+				AbstractTransformer.INVOCATIONS.println("still blocked " + blockedInvocation + " by " + blockedInvocation.debug_blockedBy);
+			}
+			blockedInvocation = blockedInvocation.next;
+		}
+		while (blockedInvocation != blockedInvocations);
+		return false;
+	}
+
+	@Override
+	public @NonNull Iterable<@NonNull Connection> getConnections() {
+		return connections;
 	}
 
 	@Override
@@ -131,12 +185,67 @@ public abstract class AbstractIntervalInternal extends ConnectionLinkage impleme
 				AbstractTransformer.INVOCATIONS.println("done " + invocation);
 			}
 			if (doFlush) {
-				flushInternal();
+				while (waitingInvocations != null) {
+					AbstractInvocationInternal invocation2 = null;
+					synchronized (this) {
+						AbstractInvocationInternal waitingInvocations2 = waitingInvocations;
+						if (waitingInvocations2 != null) {
+							invocation2 = waitingInvocations2;
+							waitingInvocations = waitingInvocations2.next;
+							if (waitingInvocations == invocation2) {
+								waitingInvocations = null;
+							}
+							invocation2.remove();
+						}
+					}
+					if (invocation2 != null) {
+						if (debugInvocations) {
+							AbstractTransformer.INVOCATIONS.println("re-invoke " + invocation2);
+						}
+						invoke(invocation2, false);
+					}
+				}
 			}
 		}
 		catch (InvocationFailedException e) {
 			block(invocation, e.slotState);
 		}
+	}
+
+	@Override
+	public boolean isFlushed() {
+		if (tailConnection != null) {
+			return false;
+		}
+		// assert each connection fully propagatred
+		if (blockedInvocations != null) {
+			return false;
+		}
+		if (waitingInvocations != null) {
+			return false;
+		}
+		return true;
+	}
+
+	public void queue() {
+		invocationManager.setWorkToDoAt(intervalIndex);
+	}
+
+	@Override
+	public synchronized void queue(@NonNull Connection connection) {
+		AbstractConnectionInternal connection2 = (AbstractConnectionInternal)connection;
+		AbstractConnectionInternal tailConnection2 = tailConnection;
+		if (tailConnection2 == null) {								// Empty list
+			assert headConnection == null;
+			assert connection2.getNextConnection() == null;
+			headConnection = connection2;
+		}
+		else {														// New element
+			assert headConnection != null;
+			tailConnection2.setNextConnection(connection2);
+		}
+		tailConnection = connection2;
+		queue();
 	}
 
 	@Override
@@ -160,13 +269,45 @@ public abstract class AbstractIntervalInternal extends ConnectionLinkage impleme
 	@Override
 	public String toString() {
 		StringBuilder s = new StringBuilder();
+		s.append("<");
 		s.append(intervalIndex);
-		//		s.append(": ");
-		//		int i = 0;
-		//		for (@NonNull ConnectionLinkage nextConnectionLinkage = nextConnection; nextConnectionLinkage != this; nextConnectionLinkage = nextConnectionLinkage.nextConnection) {
-		//			i++;
-		//		}
-		//		s.append(i);
+		s.append("> ");
+		int i = 0;
+		for (AbstractConnectionInternal aConnection = headConnection; aConnection != null; aConnection = aConnection.getNextConnection()) {
+			i++;
+			if (i > 100) {
+				i = 999999;
+				break;
+			}
+		}
+		s.append(i);
+		s.append(" connections, ");
+		int j = 0;
+		for (AbstractInvocationInternal anInvocation = blockedInvocations; anInvocation != null; anInvocation = anInvocation.next) {
+			j++;
+			if (j > 100) {
+				j = 999999;
+				break;
+			}
+			if (anInvocation == blockedInvocations) {
+				break;
+			}
+		}
+		s.append(j);
+		s.append(" blocked, ");
+		int k = 0;
+		for (AbstractInvocationInternal anInvocation = waitingInvocations; anInvocation != null; anInvocation = anInvocation.next) {
+			k++;
+			if (k > 100) {
+				k = 999999;
+				break;
+			}
+			if (anInvocation == waitingInvocations) {
+				break;
+			}
+		}
+		s.append(k);
+		s.append(" waiting");
 		return s.toString();
 	}
 

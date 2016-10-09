@@ -11,7 +11,6 @@
 package org.eclipse.qvtd.runtime.evaluation;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.utilities.Nameable;
 
@@ -20,7 +19,7 @@ import org.eclipse.ocl.pivot.utilities.Nameable;
  *
  * @noimplement clients should derive from AbstractInvocation
  */
-public interface Invocation extends ExecutionVisitable
+public interface Invocation extends ExecutionVisitable, Nameable
 {
 	/**
 	 * Execute the mapping invocation, returning true if successfully executed, or false if some predicate failed.
@@ -40,6 +39,7 @@ public interface Invocation extends ExecutionVisitable
 	 */
 	boolean isEqual(@NonNull IdResolver idResolver, @NonNull Object @NonNull [] thoseValues);
 
+	void queue();
 
 	/**
 	 * Remove this Invocation from the blocked or waiting invocations linked list.
@@ -48,29 +48,7 @@ public interface Invocation extends ExecutionVisitable
 
 	void unblock();
 
-	public interface Constructor extends Nameable
-	{
-		public interface Incremental extends Constructor
-		{
-			int nextSequence();
-		}
-
-		/**
-		 * Return the first invocation of this constructor with argValues, using newInstance(argValues) to
-		 * create a new invocation instance if necessary. Returns null if an instance already created.
-		 */
-		@Nullable Invocation getFirstInvocation(@NonNull Object @NonNull [] argValues);
-
-		@Override
-		@NonNull String getName();
-
-		/**
-		 * Create the invocation identified by this constructor and values.
-		 */
-		@NonNull Invocation newInstance(@NonNull Object @NonNull [] values);
-	}
-
-	public interface Incremental extends Invocation, Nameable
+	public interface Incremental extends Invocation
 	{
 		void addCreatedObject(@NonNull Object createdObject);
 		void addReadSlot(SlotState.@NonNull Incremental readSlot);

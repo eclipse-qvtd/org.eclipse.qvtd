@@ -16,12 +16,13 @@ import java.util.List;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.ids.CollectionTypeId;
+import org.eclipse.ocl.pivot.utilities.LabelUtil;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
 import org.eclipse.qvtd.runtime.evaluation.Connection;
 import org.eclipse.qvtd.runtime.evaluation.ExecutionVisitor;
 import org.eclipse.qvtd.runtime.evaluation.Interval;
 import org.eclipse.qvtd.runtime.evaluation.Invocation;
-import org.eclipse.qvtd.runtime.evaluation.Invoker;
+import org.eclipse.qvtd.runtime.evaluation.InvocationConstructor;
 
 /**
  * An AbstractConnection maintains the values between one or more sources, typically Mappings, that
@@ -32,26 +33,37 @@ import org.eclipse.qvtd.runtime.evaluation.Invoker;
  *
  * Incremental update is supported by a revoke() or an append(), or a replace() of an appended value.
  */
-public abstract class AbstractConnectionInternal extends ConnectionLinkage implements Connection
+public abstract class AbstractConnectionInternal implements Connection
 {
 	protected static final int VALUE_INDEX = 0;
 	protected static final int INDEX_INDEX = 1;
 	protected static final int COUNT_INDEX = 2;
 
 	protected final boolean debugAppends = AbstractTransformer.APPENDS.isActive();
+	protected final boolean debugConsumes = AbstractTransformer.CONSUMES.isActive();
 	protected final @NonNull Interval interval;
 	protected final @NonNull String name;
 	protected final @NonNull CollectionTypeId typeId;
 
 	/**
-	 * The consumers of each appended value.
+	 * Singly linked list element of connections awaiting propagation from their interval, null when last/unlinked.
 	 */
-	protected final @NonNull List<@NonNull Invoker> consumers = new ArrayList<>();
+	private @Nullable AbstractConnectionInternal nextConnection = null;
 
 	/**
-	 * The producers of values.
+	 * True when this connection is part of the interval's list of connections awaiting propagation.
 	 */
-	protected final @NonNull List<@NonNull Invoker> producers = new ArrayList<>();
+	private boolean isQueued = false;
+
+	/**
+	 * The consumers of each appended value.
+	 */
+	protected final @NonNull List<@NonNull InvocationConstructor> consumers = new ArrayList<>();
+
+	/**
+	 * The appenders of values.
+	 */
+	protected final @NonNull List<@NonNull InvocationConstructor> appenders = new ArrayList<>();
 
 	/**
 	 * The earlist interval at which a consumer can execute.
@@ -81,20 +93,20 @@ public abstract class AbstractConnectionInternal extends ConnectionLinkage imple
 	}
 
 	@Override
-	public void addConsumer(@NonNull Invoker consumer) {
+	public void addAppender(@NonNull InvocationConstructor appender) {
+		if (!appenders.contains(appender)) {
+			appenders.add(appender);
+		}
+	}
+
+	@Override
+	public void addConsumer(@NonNull InvocationConstructor consumer) {
 		//		assert listOfValueAndConsumingInvocations.isEmpty() || listOfValueAndConsumingInvocations.get(0).;
 		if (!consumers.contains(consumer)) {
 			consumers.add(consumer);
 			if (!listOfValueAndConsumingInvocations.isEmpty()) {
 				queue();
 			}
-		}
-	}
-
-	@Override
-	public void addProducer(@NonNull Invoker producer) {
-		if (!producers.contains(producer)) {
-			producers.add(producer);
 		}
 	}
 
@@ -124,6 +136,14 @@ public abstract class AbstractConnectionInternal extends ConnectionLinkage imple
 		valueAndConsumingInvocations.add(invocation);
 		// FIXME empty status if all consumers at final index
 		// invocationManager.dequeue(this);
+		if (debugConsumes) {
+			AbstractTransformer.CONSUMES.println(this + " => " + LabelUtil.getLabel(valueAndConsumingInvocations.get(VALUE_INDEX)));
+		}
+	}
+
+	@Override
+	public @NonNull Iterable<@NonNull InvocationConstructor> getAppenders() {
+		return appenders;
 	}
 
 	@Override
@@ -132,7 +152,7 @@ public abstract class AbstractConnectionInternal extends ConnectionLinkage imple
 	}
 
 	@Override
-	public @NonNull Iterable<@NonNull Invoker> getConsumers() {
+	public @NonNull Iterable<@NonNull InvocationConstructor> getConsumers() {
 		return consumers;
 	}
 
@@ -141,9 +161,8 @@ public abstract class AbstractConnectionInternal extends ConnectionLinkage imple
 		return name;
 	}
 
-	@Override
-	public @NonNull Iterable<@NonNull Invoker> getProducers() {
-		return producers;
+	final @Nullable AbstractConnectionInternal getNextConnection() {
+		return nextConnection;
 	}
 
 	@Override
@@ -152,24 +171,6 @@ public abstract class AbstractConnectionInternal extends ConnectionLinkage imple
 		return valueAndConsumingInvocations != null ? valueAndConsumingInvocations.get(VALUE_INDEX) : null;
 	}
 
-	/*	@Override
-	public void insertAfter(@NonNull Interval predecessor) {
-		@NonNull AbstractIntervalInternal castPredecessor = (AbstractIntervalInternal)predecessor;
-		@NonNull AbstractIntervalInternal successor = castPredecessor.next;
-		successor.prev = this;
-		next = successor;
-		castPredecessor.next = this;
-		prev = castPredecessor;
-	} */
-
-	/*	@Override
-	public void remove() {
-		prev.next = next;
-		next.prev = prev;
-		prev = this;
-		next = this;
-	} */
-
 	@Override
 	public int getValues() {
 		return listOfValueAndConsumingInvocations.size();
@@ -177,32 +178,41 @@ public abstract class AbstractConnectionInternal extends ConnectionLinkage imple
 
 	@Override
 	public void propagate() {
-		for (@NonNull Invoker consumer : consumers) {
+		for (@NonNull InvocationConstructor consumer : consumers) {
 			consumer.propagate();
 		}
 	}
 
-	protected void queue() {
-		throw new UnsupportedOperationException();
-		//		if (nextConnection == this) {
-		//			interval.queue(this);
-		//		}
+	protected final void queue() {
+		if (!isQueued) {
+			isQueued = true;
+			interval.queue(this);
+		}
+	}
+
+	void resetQueued() {
+		isQueued = false;
+		this.nextConnection = null;
+	}
+
+	void setNextConnection(@NonNull AbstractConnectionInternal nextConnection) {
+		assert nextConnection != this;
+		assert isQueued;
+		this.nextConnection = nextConnection;
 	}
 
 	@Override
 	public String toString() {
 		StringBuilder s = new StringBuilder();
+		s.append("<");
 		s.append(interval.getIndex());
-		s.append(": ");
+		s.append(">");
 		s.append(name);
-		s.append(" : ");
-		s.append(typeId);
-		s.append(": ");
-		int i = 0;
-		for (@NonNull ConnectionLinkage nextConnectionLinkage = nextConnection; nextConnectionLinkage != this; nextConnectionLinkage = nextConnectionLinkage.nextConnection) {
-			i++;
-		}
-		s.append(i);
+		//		s.append(" : ");
+		//		s.append(typeId);
+		s.append("[");
+		s.append(listOfValueAndConsumingInvocations.size());
+		s.append("]");
 		return s.toString();
 	}
 }

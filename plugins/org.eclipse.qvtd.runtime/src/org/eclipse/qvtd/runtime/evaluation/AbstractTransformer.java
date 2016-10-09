@@ -26,6 +26,7 @@ public abstract class AbstractTransformer extends AbstractTransformerInternal
 {
 	public static final @NonNull String PLUGIN_ID = "org.eclipse.qvtd.runtime";
 	public static final @NonNull TracingOption APPENDS = new TracingOption(PLUGIN_ID, "tx/appends");
+	public static final @NonNull TracingOption CONSUMES = new TracingOption(PLUGIN_ID, "tx/consumes");
 	public static final @NonNull TracingOption EXCEPTIONS = new TracingOption(PLUGIN_ID, "tx/exceptions");
 	public static final @NonNull TracingOption INVOCATIONS = new TracingOption(PLUGIN_ID, "tx/invocations");
 

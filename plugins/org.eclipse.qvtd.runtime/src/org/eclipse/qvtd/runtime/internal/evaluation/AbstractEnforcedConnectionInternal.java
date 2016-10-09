@@ -17,6 +17,7 @@ import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.ids.CollectionTypeId;
+import org.eclipse.ocl.pivot.utilities.LabelUtil;
 import org.eclipse.qvtd.runtime.evaluation.AbstractInvocation;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
 import org.eclipse.qvtd.runtime.evaluation.Interval;
@@ -47,7 +48,7 @@ public abstract class AbstractEnforcedConnectionInternal extends AbstractConnect
 	@Override
 	public synchronized @NonNull Object append(@NonNull Object aValue) {
 		if (debugAppends) {
-			AbstractTransformer.APPENDS.println(this + " - " + aValue);
+			AbstractTransformer.APPENDS.println(this + " <= " + LabelUtil.getLabel(aValue));
 		}
 		List<@NonNull Object> valueAndConsumingInvocations = uniqueValues2valueAndConsumingInvocations.get(aValue);
 		if (valueAndConsumingInvocations == null) {

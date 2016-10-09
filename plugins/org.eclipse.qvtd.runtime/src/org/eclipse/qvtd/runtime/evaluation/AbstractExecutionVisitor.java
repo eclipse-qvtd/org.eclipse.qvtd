@@ -48,12 +48,12 @@ public /*abstract*/ class AbstractExecutionVisitor<R> implements ExecutionVisito
 	}
 
 	@Override
-	public R visitInvocationManager(@NonNull InvocationManager object) {
+	public R visitInvocationConstructor(@NonNull InvocationConstructor object) {
 		return visiting(object);
 	}
 
 	@Override
-	public R visitInvoker(@NonNull Invoker object) {
+	public R visitInvocationManager(@NonNull InvocationManager object) {
 		return visiting(object);
 	}
 

@@ -47,6 +47,11 @@ public abstract class AbstractInvocationInternal implements Invocation
 	}
 
 	@Override
+	public void queue() {
+		interval.queue(this);
+	}
+
+	@Override
 	public void remove() {
 		prev.next = next;
 		next.prev = prev;

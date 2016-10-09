@@ -32,6 +32,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.internal.utilities.PivotConstantsInternal;
 import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibPackage;
+import org.eclipse.ocl.pivot.utilities.LabelUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.IntegerValue;
 import org.eclipse.ocl.pivot.values.UnlimitedNaturalValue;
@@ -723,7 +724,7 @@ public class LazyObjectManager extends AbstractObjectManager
 	public synchronized void assigned(@NonNull Object eObject, /*@NonNull*/ EStructuralFeature eFeature, @Nullable Object ecoreValue, @Nullable Object childKey) {
 		assert eFeature != null;
 		if (debugInvocations) {
-			AbstractTransformer.INVOCATIONS.println("assigned " + eFeature.getEContainingClass().getName() + "::" + eFeature.getName() + " for " + eObject + " = " + ecoreValue);
+			AbstractTransformer.INVOCATIONS.println("assigned " + eFeature.getEContainingClass().getName() + "::" + eFeature.getName() + " for " + LabelUtil.getLabel(eObject) + " = " + LabelUtil.getLabel(ecoreValue));
 		}
 		Map<@NonNull EStructuralFeature, @NonNull SlotState> objectState = getObjectState(eObject);
 		SlotState slotState = objectState.get(eFeature);
@@ -1003,7 +1004,7 @@ public class LazyObjectManager extends AbstractObjectManager
 	public synchronized void getting(@NonNull Object eObject, /*@NonNull*/ EStructuralFeature eFeature, boolean isOpposite) {
 		assert eFeature != null;
 		if (debugInvocations) {
-			AbstractTransformer.INVOCATIONS.println("getting " + eFeature.getEContainingClass().getName() + "::" + eFeature.getName() + (isOpposite ? "<opposite> " : "") + " for " + eObject);
+			AbstractTransformer.INVOCATIONS.println("getting " + eFeature.getEContainingClass().getName() + "::" + eFeature.getName() + (isOpposite ? "<opposite> " : "") + " for " + LabelUtil.getLabel(eObject));
 		}
 		if (isOpposite) {
 			eFeature = getEOppositeReference((EReference) eFeature);

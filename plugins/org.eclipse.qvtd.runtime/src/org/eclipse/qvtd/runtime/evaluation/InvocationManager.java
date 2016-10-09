@@ -11,6 +11,7 @@
 package org.eclipse.qvtd.runtime.evaluation;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.evaluation.Executor;
 
 /**
  * An InvocationManager supervises the invocations of mappings, inhibiting re-executions and
@@ -21,7 +22,14 @@ import org.eclipse.jdt.annotation.NonNull;
  */
 public interface InvocationManager extends ExecutionVisitable
 {
+	void addInvoker(@NonNull InvocationConstructor constructor);
 	@NonNull Interval createInterval();
+	//	@NonNull InvocationConstructor createInvoker(@NonNull InvocationConstructor constructor, int consumedConnections, @NonNull Interval interval, @NonNull Connection @NonNull  ... connections);
 	boolean flush();
-	@NonNull Interval getDefaultInterval();
+	@NonNull Executor getExecutor();
+	@NonNull Iterable<@NonNull Interval> getIntervals();
+	@NonNull Iterable<@NonNull InvocationConstructor> getInvokers();
+	@NonNull Interval getRootInterval();
+	//	@Nullable Transformer getTransformer();
+	void setWorkToDoAt(int intervalIndex);
 }
