@@ -12,10 +12,7 @@ package org.eclipse.qvtd.cs2as.compiler.tests;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
-
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -62,21 +59,22 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage;
 import org.eclipse.xtext.resource.XtextResource;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
 import cg._Source2Target_qvtp_qvtcas.Source2Target_qvtp_qvtcas;
 import example1.source.SourcePackage;
 import example1.target.TargetPackage;
 import example2.classes.ClassesPackage;
 import example2.classescs.ClassescsPackage;
-import example4.kiamaas.KiamaasPackage;
-import example4.kiamacs.KiamacsPackage;
+import example5.sbase.SbasePackage;
+import example5.sderived.SderivedPackage;
+import example5.tbase.TbasePackage;
+import example5.tderived.TderivedPackage;
 
-/**
- * @author asbh500
- *
- *
- */
+// Manual load tests rely on previous generation of the class to load. - testExample1_CGManual
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class OCL2QVTiTestCases extends LoadTestCase {
 
 	//	private static final boolean CREATE_GRAPHML = false; // Note. You need Epsilon with Bug 458724 fix to have output graphml models serialised
@@ -90,25 +88,12 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		protected final @NonNull String testName;
 		protected final @NonNull URI baseURI;
 		//		protected final @NonNull URI samplesBaseUri;
-		private Set<@NonNull String> nsURIs = new HashSet<@NonNull String>();
 
 		public MyQVT(@NonNull String testName) {
 			super(new QVTiEnvironmentFactory(getProjectMap(), null));
 			this.testName = testName;
 			this.baseURI = TESTS_BASE_URI.appendSegment(testName);
 			//	        this.samplesBaseUri = baseURI.appendSegment("samples");
-		}
-
-		@Override
-		public synchronized void dispose() {
-			super.dispose();
-			/**
-			 * Remove the eInstances from the EPackage.Registry.INSTANCE so that global registrations from the calling test
-			 * do not confuse subsequent tests that may want to use dynamic models.
-			 */
-			for (String nsURI : nsURIs) {
-				EPackage.Registry.INSTANCE.remove(nsURI);
-			}
 		}
 
 		//
@@ -283,7 +268,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		myQVT.dispose();
 	}
 
-	@Test	// FIXME this will fail if testExample1_CG has not been run previously
+	@Test
 	public void testExample1_CGManual() throws Exception {
 		MyQVT myQVT = new MyQVT("example1");
 		Class<Source2Target_qvtp_qvtcas> txClass = Source2Target_qvtp_qvtcas.class;
@@ -534,6 +519,8 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		//		executeModelsTX_CG(myQVT, txClass, testBaseURI, "model0");
 		myQVT.executeModelsTX_CG(txClass, "model1");
 		myQVT.dispose();
+		EPackage.Registry.INSTANCE.remove(example3.kiamaas.KiamaasPackage.eNS_URI);
+		EPackage.Registry.INSTANCE.remove(example3.kiamacs.KiamacsPackage.eNS_URI);
 	}
 
 	@Test
@@ -584,8 +571,8 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 
 		myQVT.dispose();
 		myQVT = new MyQVT("example4");
-		myQVT.loadEcoreFile("SimplerKiamaCS.ecore", KiamacsPackage.eINSTANCE);
-		myQVT.loadEcoreFile("SimplerKiamaAS.ecore", KiamaasPackage.eINSTANCE);
+		myQVT.loadEcoreFile("SimplerKiamaCS.ecore", example4.kiamacs.KiamacsPackage.eINSTANCE);
+		myQVT.loadEcoreFile("SimplerKiamaAS.ecore", example4.kiamaas.KiamaasPackage.eINSTANCE);
 
 		ImperativeTransformation tx = getTransformation(myQVT.getMetamodelManager().getASResourceSet(), txURI);
 		//		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
@@ -626,6 +613,10 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		// Execute CGed transformation
 		myQVT.executeModelsTX_CG(txClass, "model2");
 		myQVT.dispose();
+		EPackage.Registry.INSTANCE.remove(SbasePackage.eNS_URI);
+		EPackage.Registry.INSTANCE.remove(SderivedPackage.eNS_URI);
+		EPackage.Registry.INSTANCE.remove(TbasePackage.eNS_URI);
+		EPackage.Registry.INSTANCE.remove(TderivedPackage.eNS_URI);
 	}
 
 	@Test
