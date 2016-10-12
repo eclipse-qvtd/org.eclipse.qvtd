@@ -29,8 +29,8 @@ import org.eclipse.ocl.pivot.internal.resource.ProjectMap;
 import org.eclipse.qvtd.doc.exe2016.tests.AbstractEXE2016CGTests;
 import org.eclipse.qvtd.doc.exe2016.tests.DoublyLinkedListGenerator;
 import org.eclipse.qvtd.doc.exe2016.tests.PrintAndLog;
-import org.eclipse.qvtd.xtext.qvtcore.tests.list2list.doublylinkedlist.DoublyLinkedList;
-import org.eclipse.qvtd.xtext.qvtcore.tests.list2list.doublylinkedlist.DoublylinkedlistPackage;
+import org.eclipse.qvtd.doc.exe2016.tests.qvtc.doublylinkedlist.DoublyLinkedList;
+import org.eclipse.qvtd.doc.exe2016.tests.qvtc.doublylinkedlist.DoublylinkedlistPackage;
 import org.junit.Test;
 
 public class EXE2016_QVTo_Tests extends AbstractEXE2016CGTests

@@ -16,11 +16,8 @@ Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Export-Package: cg._umlRdbms;x-friends:="org.eclipse.qvtd.doc.bigmde2016.tests",
  cg.org.eclipse.qvtd.xtext.qvtcore.tests.families2persons;x-friends:="org.eclipse.qvtd.doc.bigmde2016.tests",
- cg.org.eclipse.qvtd.xtext.qvtcore.tests.forward2reverse;x-friends:="org.eclipse.qvtd.doc.exe2016.tests",
  org.eclipse.qvtd.xtext.qvtcore.tests,
  org.eclipse.qvtd.xtext.qvtcore.tests.families2persons.Families,
  org.eclipse.qvtd.xtext.qvtcore.tests.families2persons.Persons,
- org.eclipse.qvtd.xtext.qvtcore.tests.list2list.doublylinkedlist,
- org.eclipse.qvtd.xtext.qvtcore.tests.list2list.list2list,
  org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simplerdbms,
  org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml

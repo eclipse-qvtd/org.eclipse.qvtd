@@ -18,14 +18,14 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.qvtd.doc.exe2016.tests.AbstractEXE2016CGTests;
 import org.eclipse.qvtd.doc.exe2016.tests.DoublyLinkedListGenerator;
 import org.eclipse.qvtd.doc.exe2016.tests.PrintAndLog;
+import org.eclipse.qvtd.doc.exe2016.tests.qvtc.doublylinkedlist.DoublyLinkedList;
+import org.eclipse.qvtd.doc.exe2016.tests.qvtc.doublylinkedlist.DoublylinkedlistPackage;
+import org.eclipse.qvtd.doc.exe2016.tests.qvtc.list2list.List2listPackage;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
 import org.eclipse.qvtd.xtext.qvtcore.tests.QVTcCompilerTests;
-import org.eclipse.qvtd.xtext.qvtcore.tests.list2list.doublylinkedlist.DoublyLinkedList;
-import org.eclipse.qvtd.xtext.qvtcore.tests.list2list.doublylinkedlist.DoublylinkedlistPackage;
-import org.eclipse.qvtd.xtext.qvtcore.tests.list2list.list2list.List2listPackage;
 import org.junit.Test;
 
 /**

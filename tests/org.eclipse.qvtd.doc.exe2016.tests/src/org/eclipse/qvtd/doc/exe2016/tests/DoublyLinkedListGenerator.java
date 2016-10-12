@@ -15,9 +15,9 @@ import java.util.List;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.qvtd.xtext.qvtcore.tests.list2list.doublylinkedlist.DoublyLinkedList;
-import org.eclipse.qvtd.xtext.qvtcore.tests.list2list.doublylinkedlist.DoublylinkedlistFactory;
-import org.eclipse.qvtd.xtext.qvtcore.tests.list2list.doublylinkedlist.Element;
+import org.eclipse.qvtd.doc.exe2016.tests.qvtc.doublylinkedlist.DoublyLinkedList;
+import org.eclipse.qvtd.doc.exe2016.tests.qvtc.doublylinkedlist.DoublylinkedlistFactory;
+import org.eclipse.qvtd.doc.exe2016.tests.qvtc.doublylinkedlist.Element;
 
 public class DoublyLinkedListGenerator extends AbstractDoublyLinkedListGenerator<@NonNull DoublyLinkedList, @NonNull Element>
 {
