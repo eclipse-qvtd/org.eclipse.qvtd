@@ -16,6 +16,4 @@ Require-Bundle: org.eclipse.qvtd.xtext.qvtbase.tests;bundle-version="[0.14.0,1.0
  org.eclipse.qvtd.codegen;bundle-version="[0.14.0,1.0.0)",
  org.eclipse.qvtd.xtext.qvtimperative.tests;bundle-version="[0.14.0,1.0.0)",
  org.eclipse.qvtd.xtext.qvtcore.tests;bundle-version="[0.14.0,1.0.0)"
-Export-Package: org.eclipse.qvtd.xtext.qvtrelation.tests,
- org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist;x-friends:="org.eclipse.qvtd.doc.exe2016.tests",
- org.eclipse.qvtd.xtext.qvtrelation2.tests.forward2reverse;x-friends:="org.eclipse.qvtd.doc.exe2016.tests"
+Export-Package: org.eclipse.qvtd.xtext.qvtrelation.tests

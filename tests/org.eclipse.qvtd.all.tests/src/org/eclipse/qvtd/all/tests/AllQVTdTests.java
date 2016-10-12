@@ -16,6 +16,7 @@ import java.util.Arrays;
 
 import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.qvtd.cs2as.compiler.tests.OCL2QVTiTestCases;
+import org.eclipse.qvtd.doc.exe2016.tests.qvtr.EXE2016_QVTr_AutomatedTests;
 import org.eclipse.qvtd.xtext.qvtbase.tests.QVTbaseLibraryTests;
 import org.eclipse.qvtd.xtext.qvtcore.tests.AllQVTcoreTests;
 import org.eclipse.qvtd.xtext.qvtimperative.tests.AllQVTimperativeTests;
@@ -38,7 +39,7 @@ public class AllQVTdTests extends TestCase
 	}
 
 	public static Test suite() {
-		TestSuite result = new TestSuite("QVTd All Tests");			
+		TestSuite result = new TestSuite("QVTd All Tests");
 		result.addTest(AllQVTcoreTests.suite());
 		result.addTest(AllQVTimperativeTests.suite());
 		if (!EMFPlugin.IS_ECLIPSE_RUNNING) {		// FIXME should work as plugin test too
@@ -54,14 +55,15 @@ public class AllQVTdTests extends TestCase
 		if (!EMFPlugin.IS_ECLIPSE_RUNNING) {		// FIXME should work as plugin test too
 			result.addTestSuite(OCL2QVTiTestCases.class);
 		}
+		result.addTestSuite(EXE2016_QVTr_AutomatedTests.class);		// NB this is very slow since we are -ea
 		return result;
 	}
 
 	public Object run(Object args)
-		throws Exception {
+			throws Exception {
 
 		TestRunner.run(suite());
 		return Arrays
-			.asList(new String[] {"Please see raw test suite output for details."});
+				.asList(new String[] {"Please see raw test suite output for details."});
 	}
 }
