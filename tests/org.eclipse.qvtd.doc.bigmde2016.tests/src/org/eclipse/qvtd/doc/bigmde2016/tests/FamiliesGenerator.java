@@ -16,9 +16,9 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.qvtd.xtext.qvtcore.tests.families2persons.Families.FamiliesFactory;
-import org.eclipse.qvtd.xtext.qvtcore.tests.families2persons.Families.Family;
-import org.eclipse.qvtd.xtext.qvtcore.tests.families2persons.Families.Member;
+import org.eclipse.qvtd.doc.bigmde2016.tests.qvtc.Families.FamiliesFactory;
+import org.eclipse.qvtd.doc.bigmde2016.tests.qvtc.Families.Family;
+import org.eclipse.qvtd.doc.bigmde2016.tests.qvtc.Families.Member;
 
 public class FamiliesGenerator
 { 

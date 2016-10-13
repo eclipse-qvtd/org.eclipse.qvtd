@@ -36,8 +36,8 @@ import org.eclipse.ocl.pivot.utilities.XMIUtil;
 import org.eclipse.qvtd.doc.bigmde2016.tests.FamiliesGenerator;
 import org.eclipse.qvtd.doc.bigmde2016.tests.PrintAndLog;
 import org.eclipse.qvtd.doc.bigmde2016.tests.qvtc.BigMDE2016CGTests;
-import org.eclipse.qvtd.xtext.qvtcore.tests.families2persons.Families.FamiliesPackage;
-import org.eclipse.qvtd.xtext.qvtcore.tests.families2persons.Persons.PersonsPackage;
+import org.eclipse.qvtd.doc.bigmde2016.tests.qvtc.Families.FamiliesPackage;
+import org.eclipse.qvtd.doc.bigmde2016.tests.qvtc.Persons.PersonsPackage;
 import org.junit.Test;
 
 import junit.framework.TestCase;
