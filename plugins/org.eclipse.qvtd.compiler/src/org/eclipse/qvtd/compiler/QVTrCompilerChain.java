@@ -133,7 +133,6 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 				GenModel genModel = t.saveGenModel(traceResource, traceURI, genModelURI, compilerChain.getOption(GENMODEL_STEP, GENMODEL_OPTIONS_KEY), saveOptions, usedGenPackages);
 
 				if (classURI != null) {
-					t.generateModels(genModel);
 					String binProjectName = t.getProjectName(traceURI);
 					File binFile;
 					String objectPath;
@@ -161,6 +160,12 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 						classpathProjects = null;
 					}
 					assert objectPath != null;
+					for (GenPackage genPackage : genModel.getGenPackages()) {
+						String basePackage = genPackage.getBasePackage();
+						String sourcePath = sourcePathPrefix + (basePackage != null ? ("/" + basePackage.replace(".", "/")) : "");
+						JavaSourceFileObject.deleteJavaFiles(sourcePath);
+					}
+					t.generateModels(genModel);
 					binFile.mkdir();
 					for (GenPackage genPackage : genModel.getGenPackages()) {
 						String basePackage = genPackage.getBasePackage();

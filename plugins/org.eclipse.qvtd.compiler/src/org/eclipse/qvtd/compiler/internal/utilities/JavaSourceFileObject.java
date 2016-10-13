@@ -44,7 +44,7 @@ import org.osgi.framework.Bundle;
 
 /**
  * JavaSourceFileObject supports use of a File as a Java compilation unit.
- * 
+ *
  * The compileClasses utility method support compilation of a source package and subpackages.
  */
 public final class JavaSourceFileObject extends SimpleJavaFileObject
@@ -66,8 +66,8 @@ public final class JavaSourceFileObject extends SimpleJavaFileObject
 			if (stdFileManager2 == null) {
 				throw new IllegalStateException("No StandardJavaFileManager provided by the Java platform");
 			}
-//			System.out.printf("%6.3f start\n", 0.001 * (System.currentTimeMillis()-base));
-			DiagnosticCollector<JavaFileObject> diagnostics = new DiagnosticCollector<JavaFileObject>();	
+			//			System.out.printf("%6.3f start\n", 0.001 * (System.currentTimeMillis()-base));
+			DiagnosticCollector<JavaFileObject> diagnostics = new DiagnosticCollector<JavaFileObject>();
 			List<String> compilationOptions;
 			if (EcorePlugin.IS_ECLIPSE_RUNNING && (classpathProjects != null)) {
 				compilationOptions = Arrays.asList("-d", objectPath, "-g", "-cp", createClassPath(classpathProjects));
@@ -75,17 +75,17 @@ public final class JavaSourceFileObject extends SimpleJavaFileObject
 			else {
 				compilationOptions = Arrays.asList("-d", objectPath, "-g");
 			}
-			
-//			System.out.printf("%6.3f getTask\n", 0.001 * (System.currentTimeMillis()-base));
+
+			//			System.out.printf("%6.3f getTask\n", 0.001 * (System.currentTimeMillis()-base));
 			CompilationTask compilerTask = compiler2.getTask(null, stdFileManager2, diagnostics, compilationOptions, null, compilationUnits);
-//			System.out.printf("%6.3f call\n", 0.001 * (System.currentTimeMillis()-base));
+			//			System.out.printf("%6.3f call\n", 0.001 * (System.currentTimeMillis()-base));
 			if (!compilerTask.call()) {
 				StringBuilder s = new StringBuilder();
 				for (Diagnostic<?> diagnostic : diagnostics.getDiagnostics()) {
 					s.append("\n" + diagnostic);
 				}
 				if (s.length() > 0) {
-//					throw new IOException("Failed to compile " + sourcePath + s.toString());
+					//					throw new IOException("Failed to compile " + sourcePath + s.toString());
 					// If a previous generation was bad we may get many irrelevant errors.
 					System.err.println("Failed to compile " + sourcePath + s.toString());
 				}
@@ -93,9 +93,9 @@ public final class JavaSourceFileObject extends SimpleJavaFileObject
 					System.out.println("Compilation of " + sourcePath + " returned false but no diagnostics");
 				}
 			}
-//			System.out.printf("%6.3f close\n", 0.001 * (System.currentTimeMillis()-base));
+			//			System.out.printf("%6.3f close\n", 0.001 * (System.currentTimeMillis()-base));
 			stdFileManager2.close();		// Close the file manager which re-opens automatically
-//			System.out.printf("%6.3f forName\n", 0.001 * (System.currentTimeMillis()-base));
+			//			System.out.printf("%6.3f forName\n", 0.001 * (System.currentTimeMillis()-base));
 		}
 		catch (Throwable e) {
 			throw e;
@@ -131,7 +131,7 @@ public final class JavaSourceFileObject extends SimpleJavaFileObject
 					projectPath = bundle.getLocation();
 				}
 			}
-			
+
 			if (projectPath != null) {
 				if (projectPath.startsWith("reference:")) {
 					projectPath = projectPath.substring(10);
@@ -154,6 +154,33 @@ public final class JavaSourceFileObject extends SimpleJavaFileObject
 			}
 		}
 		return s.toString();
+	}
+
+	/**
+	 * Compile all *.java files on sourcePath
+	 */
+	public static void deleteJavaFiles(@NonNull String sourcePath) {
+		deleteJavaFiles(new File(sourcePath));
+	}
+
+	/**
+	 * Return a list comprisiing a JavaFileObject for each *.java file in or below folder.
+	 * A non-null compilationUnits may be provided for use as the returned list.
+	 */
+	private static void deleteJavaFiles(@NonNull File folder) {
+		File[] listFiles = folder.listFiles();
+		if (listFiles != null) {
+			for (File file : listFiles) {
+				if (file.isDirectory()) {
+					deleteJavaFiles(file);
+				}
+				else if (file.isFile() && file.getName().endsWith(".java")) {
+					System.out.println("Delete " + file);
+					file.delete();
+				}
+			}
+		}
+		return;
 	}
 
 	/**
@@ -182,10 +209,11 @@ public final class JavaSourceFileObject extends SimpleJavaFileObject
 	/**
 	 * Load the class whose Java name is qualifiedClassName and whose class file can be found below explicitClassPath.
 	 * Subsequent loads of classes such as nested classes whose names are prefixed by qualifiedClassName are also loaded from explicitClassPath.
-	 * This method always uses a new ClassLoader to load the class and so ignores any previously cached loads. 
+	 * This method always uses a new ClassLoader to load the class and so ignores any previously cached loads.
 	 */
 	public static Class<?> loadExplicitClass(@NonNull File explicitClassPath, @NonNull String qualifiedClassName) throws ClassNotFoundException, IOException {
 		ClassLoader thisClassLoader = JavaSourceFileObject.class.getClassLoader();
+		assert thisClassLoader != null;
 		ExplicitClassLoader classLoader = new ExplicitClassLoader(explicitClassPath, qualifiedClassName, thisClassLoader);
 		return classLoader.loadClass(qualifiedClassName);
 	}
@@ -199,11 +227,11 @@ public final class JavaSourceFileObject extends SimpleJavaFileObject
 		if (stdFileManager2 == null) {
 			throw new IllegalStateException("No StandardJavaFileManager provided by the Java platform");
 		}
-//		System.out.printf("%6.3f start\n", 0.001 * (System.currentTimeMillis()-base));
+		//		System.out.printf("%6.3f start\n", 0.001 * (System.currentTimeMillis()-base));
 		List<? extends JavaFileObject> compilationUnits = Collections.singletonList(
-				new OCL2JavaFileObject(qualifiedName, javaCodeSource));
+			new OCL2JavaFileObject(qualifiedName, javaCodeSource));
 		DiagnosticCollector<JavaFileObject> diagnostics = new DiagnosticCollector<JavaFileObject>();
-		
+
 		List<String> compilationOptions;
 		if (EcorePlugin.IS_ECLIPSE_RUNNING && (classpathProjects != null)) {
 			compilationOptions = Arrays.asList("-d", explicitClassPath, "-g", "-cp", createClassPath(classpathProjects));
@@ -212,10 +240,10 @@ public final class JavaSourceFileObject extends SimpleJavaFileObject
 			compilationOptions = Arrays.asList("-d", explicitClassPath, "-g");
 		}
 
-//		System.out.printf("%6.3f getTask\n", 0.001 * (System.currentTimeMillis()-base));
+		//		System.out.printf("%6.3f getTask\n", 0.001 * (System.currentTimeMillis()-base));
 		CompilationTask compilerTask = compiler2.getTask(null, stdFileManager2,
-				diagnostics, compilationOptions, null, compilationUnits);
-//		System.out.printf("%6.3f call\n", 0.001 * (System.currentTimeMillis()-base));
+			diagnostics, compilationOptions, null, compilationUnits);
+		//		System.out.printf("%6.3f call\n", 0.001 * (System.currentTimeMillis()-base));
 		if (!compilerTask.call()) {
 			StringBuilder s = new StringBuilder();
 			for (Diagnostic<?> diagnostic : diagnostics.getDiagnostics()) {
@@ -226,15 +254,15 @@ public final class JavaSourceFileObject extends SimpleJavaFileObject
 			}
 			System.out.println("Compilation of " + qualifiedName + " returned false but no diagnostics");
 		}
-//		System.out.printf("%6.3f close\n", 0.001 * (System.currentTimeMillis()-base));
+		//		System.out.printf("%6.3f close\n", 0.001 * (System.currentTimeMillis()-base));
 		stdFileManager2.close();		// Close the file manager which re-opens automatically
-//		System.out.printf("%6.3f forName\n", 0.001 * (System.currentTimeMillis()-base));
+		//		System.out.printf("%6.3f forName\n", 0.001 * (System.currentTimeMillis()-base));
 	}
 
 	private JavaSourceFileObject(java.net.@NonNull URI uri) {
 		super(uri, Kind.SOURCE);
 	}
-	
+
 	@Override
 	public CharSequence getCharContent(boolean ignoreEncodingErrors) throws IOException {
 		char[] buf = new char[4096];
