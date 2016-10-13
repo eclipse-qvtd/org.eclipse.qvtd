@@ -11,6 +11,7 @@ package org.eclipse.qvtd.doc.exe2016.tests.qvtr;
 
 import java.util.HashMap;
 import java.util.Map;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.ids.ClassId;
@@ -23,6 +24,7 @@ import org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.PForward2Reverse
 import org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.PForward2ReversePackage;
 import org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.Telement2element;
 import org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.Tlist2list;
+import org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.TlistHead2listHead;
 import org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.DoublyLinkedList;
 import org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.Element;
 import org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.doublylinkedlistFactory;
@@ -53,8 +55,8 @@ public class Forward2Reverse extends AbstractTransformer
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Element = PACKid_http_c_s_s_www_eclipse_org_s_qvtd_s_xtext_s_qvtrelation_s_tests_s_forward2reverse_s_1_0_s_DoublyLinkList.getClassId("Element", 0);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Model = PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbaseLibrary.getClassId("Model", 0);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Telement2element = PACKid_http_c_s_s_www_eclipse_org_s_qvtd_m_example_s_org_s_eclipse_s_qvtd_s_xtext_s_qvtrelation2_s_tests_s_forward2reverse_s_Forward2Reverse.getClassId("Telement2element", 0);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_TemptyList2emptyList = PACKid_http_c_s_s_www_eclipse_org_s_qvtd_m_example_s_org_s_eclipse_s_qvtd_s_xtext_s_qvtrelation2_s_tests_s_forward2reverse_s_Forward2Reverse.getClassId("TemptyList2emptyList", 0);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Tlist2list = PACKid_http_c_s_s_www_eclipse_org_s_qvtd_m_example_s_org_s_eclipse_s_qvtd_s_xtext_s_qvtrelation2_s_tests_s_forward2reverse_s_Forward2Reverse.getClassId("Tlist2list", 0);
+	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_TlistHead2listHead = PACKid_http_c_s_s_www_eclipse_org_s_qvtd_m_example_s_org_s_eclipse_s_qvtd_s_xtext_s_qvtrelation2_s_tests_s_forward2reverse_s_Forward2Reverse.getClassId("TlistHead2listHead", 0);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId SET_CLSSid_DoublyLinkedList = TypeId.SET.getSpecializedId(CLSSid_DoublyLinkedList);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId SET_CLSSid_Element = TypeId.SET.getSpecializedId(CLSSid_Element);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId SET_CLSSid_Telement2element = TypeId.SET.getSpecializedId(CLSSid_Telement2element);
@@ -68,6 +70,7 @@ public class Forward2Reverse extends AbstractTransformer
 	protected final @NonNull Map<Element,Telement2element> OPPOSITE_OF_Telement2element_forwardElement = new HashMap<Element,Telement2element>();
 	protected final @NonNull Map<Element,Telement2element> OPPOSITE_OF_Telement2element_forwardTarget = new HashMap<Element,Telement2element>();
 	protected final @NonNull Map<DoublyLinkedList,Tlist2list> OPPOSITE_OF_Tlist2list_forwardList = new HashMap<DoublyLinkedList,Tlist2list>();
+	protected final @NonNull Map<DoublyLinkedList,TlistHead2listHead> OPPOSITE_OF_TlistHead2listHead_forwardList = new HashMap<DoublyLinkedList,TlistHead2listHead>();
 
 	/*
 	 * Array of the ClassIds of each class for which allInstances() may be invoked. Array index is the ClassIndex.
@@ -88,6 +91,7 @@ public class Forward2Reverse extends AbstractTransformer
 		{1}                     // 1 : Element -> {Element}
 	};
 
+
 	public Forward2Reverse(final @NonNull Executor executor) {
 		super(executor, new @NonNull String[] {"middle", "forward", "reverse"}, null, classIndex2classId, classIndex2allClassIndexes);
 	}
@@ -106,21 +110,25 @@ public class Forward2Reverse extends AbstractTransformer
 	 * ::ji_DoublyLinkedList : Set(doublylinkedlist::DoublyLinkedList)[*|1]var _'\u00ABElement\u00BB' : Set(doublylinkedlist::Element) := forward.objectsOfKind(doublylinkedlist::Element)
 	 *   ;
 	 * ::ji_Element : Set(doublylinkedlist::Element)[*|1]::jm_Telement2element : Set(PForward2Reverse::Telement2element)[*|1]::jm_Tlist2list : Set(PForward2Reverse::Tlist2list)[*|1]for loop0 : doublylinkedlist::DoublyLinkedList[1] in ji_DoublyLinkedList {
-	 *     call _'m_TemptyList2emptyList_DoublyLinkedList.r0' {
+	 *     call _'m_TlistHead2listHead_DoublyLinkedList.p0' {
 	 * forwardList iterates loop0 : doublylinkedlist::DoublyLinkedList[1];
+	 * }}
+	 *   for loop0 : doublylinkedlist::DoublyLinkedList[1] in ji_DoublyLinkedList {
+	 *     call _'m_Tlist2list_DoublyLinkedList.r0' {
+	 * forwardList iterates loop0 : doublylinkedlist::DoublyLinkedList[1];
+	 * jm_Tlist2list appendsTo jm_Tlist2list;
 	 * }}
 	 *   for loop0 : doublylinkedlist::Element[1] in ji_Element {
 	 *     call _'m_Telement2element_Element.p0' {
 	 * forwardElement iterates loop0 : doublylinkedlist::Element[1];
 	 * jm_Telement2element appendsTo jm_Telement2element;
 	 * }}
-	 *   for loop0 : doublylinkedlist::DoublyLinkedList[1] in ji_DoublyLinkedList {
-	 *     call _'m_Tlist2list_DoublyLinkedList.p0' {
-	 * forwardList iterates loop0 : doublylinkedlist::DoublyLinkedList[1];
-	 * jm_Tlist2list appendsTo jm_Tlist2list;
-	 * }}
 	 *   for loop0 : PForward2Reverse::Telement2element[1] in jm_Telement2element {
 	 *     call _'m_Telement2element_Element.p1' {
+	 * trace iterates loop0 : PForward2Reverse::Telement2element[1];
+	 * }}
+	 *   for loop0 : PForward2Reverse::Telement2element[1] in jm_Telement2element {
+	 *     call _'m_Telement2element_Element.p2' {
 	 * trace iterates loop0 : PForward2Reverse::Telement2element[1];
 	 * }}
 	 *   for loop0 : doublylinkedlist::Element[1] in ji_Element {
@@ -128,16 +136,8 @@ public class Forward2Reverse extends AbstractTransformer
 	 * forwardTarget iterates loop0 : doublylinkedlist::Element[1];
 	 * }}
 	 *   for loop0 : PForward2Reverse::Tlist2list[1] in jm_Tlist2list {
-	 *     call _'m_Tlist2list_DoublyLinkedList.p1' {
-	 * trace iterates loop0 : PForward2Reverse::Tlist2list[1];
-	 * }}
-	 *   for loop0 : PForward2Reverse::Telement2element[1] in jm_Telement2element {
-	 *     call _'m_Telement2element_Element.p2' {
-	 * trace iterates loop0 : PForward2Reverse::Telement2element[1];
-	 * }}
-	 *   for loop0 : PForward2Reverse::Tlist2list[1] in jm_Tlist2list {
-	 *     call _'m_Tlist2list_DoublyLinkedList.p2' {
-	 * trace iterates loop0 : PForward2Reverse::Tlist2list[1];
+	 *     call _'m_TlistHead2listHead_DoublyLinkedList.p1' {
+	 * from_Tlist2list iterates loop0 : PForward2Reverse::Tlist2list[1];
 	 * }}
 	 */
 	protected boolean MAP___root__()  {
@@ -160,28 +160,25 @@ public class Forward2Reverse extends AbstractTransformer
 			final SetValue.@NonNull Accumulator jm_Tlist2list_1 = createUnenforcedSetAccumulatorValue(SET_CLSSid_Tlist2list);
 			// mapping statements
 			for (org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.@org.eclipse.jdt.annotation.NonNull DoublyLinkedList loop0 : ValueUtil.typedIterable(DoublyLinkedList.class, ji_DoublyLinkedList)) {
-				MAP_m_TemptyList2emptyList_DoublyLinkedList_46r0(loop0);
+				MAP_m_TlistHead2listHead_DoublyLinkedList_46p0(loop0);
 			}
-			for (org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.@org.eclipse.jdt.annotation.NonNull Element loop0_0 : ValueUtil.typedIterable(Element.class, ji_Element)) {
-				MAP_m_Telement2element_Element_46p0(loop0_0, jm_Telement2element_1);
+			for (org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.@org.eclipse.jdt.annotation.NonNull DoublyLinkedList loop0_0 : ValueUtil.typedIterable(DoublyLinkedList.class, ji_DoublyLinkedList)) {
+				MAP_m_Tlist2list_DoublyLinkedList_46r0(loop0_0, jm_Tlist2list_1);
 			}
-			for (org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.@org.eclipse.jdt.annotation.NonNull DoublyLinkedList loop0_1 : ValueUtil.typedIterable(DoublyLinkedList.class, ji_DoublyLinkedList)) {
-				MAP_m_Tlist2list_DoublyLinkedList_46p0(loop0_1, jm_Tlist2list_1);
+			for (org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.@org.eclipse.jdt.annotation.NonNull Element loop0_1 : ValueUtil.typedIterable(Element.class, ji_Element)) {
+				MAP_m_Telement2element_Element_46p0(loop0_1, jm_Telement2element_1);
 			}
 			for (org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.@org.eclipse.jdt.annotation.NonNull Telement2element loop0_2 : ValueUtil.typedIterable(Telement2element.class, jm_Telement2element_1)) {
 				MAP_m_Telement2element_Element_46p1(loop0_2);
 			}
-			for (org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.@org.eclipse.jdt.annotation.NonNull Element loop0_3 : ValueUtil.typedIterable(Element.class, ji_Element)) {
-				MAP_m_Telement2element_Element_46p3(loop0_3);
+			for (org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.@org.eclipse.jdt.annotation.NonNull Telement2element loop0_3 : ValueUtil.typedIterable(Telement2element.class, jm_Telement2element_1)) {
+				MAP_m_Telement2element_Element_46p2(loop0_3);
 			}
-			for (org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.@org.eclipse.jdt.annotation.NonNull Tlist2list loop0_4 : ValueUtil.typedIterable(Tlist2list.class, jm_Tlist2list_1)) {
-				MAP_m_Tlist2list_DoublyLinkedList_46p1(loop0_4);
+			for (org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.@org.eclipse.jdt.annotation.NonNull Element loop0_4 : ValueUtil.typedIterable(Element.class, ji_Element)) {
+				MAP_m_Telement2element_Element_46p3(loop0_4);
 			}
-			for (org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.@org.eclipse.jdt.annotation.NonNull Telement2element loop0_5 : ValueUtil.typedIterable(Telement2element.class, jm_Telement2element_1)) {
-				MAP_m_Telement2element_Element_46p2(loop0_5);
-			}
-			for (org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.@org.eclipse.jdt.annotation.NonNull Tlist2list loop0_6 : ValueUtil.typedIterable(Tlist2list.class, jm_Tlist2list_1)) {
-				MAP_m_Tlist2list_DoublyLinkedList_46p2(loop0_6);
+			for (org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.@org.eclipse.jdt.annotation.NonNull Tlist2list loop0_5 : ValueUtil.typedIterable(Tlist2list.class, jm_Tlist2list_1)) {
+				MAP_m_TlistHead2listHead_DoublyLinkedList_46p1(loop0_5);
 			}
 			final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean __root__ = ValueUtil.TRUE_VALUE;
 			return __root__;
@@ -215,17 +212,17 @@ public class Forward2Reverse extends AbstractTransformer
 			@SuppressWarnings("null")
 			final /*@Thrown*/ org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.@org.eclipse.jdt.annotation.NonNull Element target = forwardElement.getTarget();
 			// creations
-			final /*@Thrown*/ org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.@org.eclipse.jdt.annotation.Nullable Telement2element trace_3 = PForward2ReverseFactory.eINSTANCE.createTelement2element();
-			assert trace_3 != null;
-			models[0/*middle*/].add(trace_3);
+			final /*@Thrown*/ org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.@org.eclipse.jdt.annotation.Nullable Telement2element trace_1 = PForward2ReverseFactory.eINSTANCE.createTelement2element();
+			assert trace_1 != null;
+			models[0/*middle*/].add(trace_1);
 			// mapping statements
-			OPPOSITE_OF_Telement2element_forwardElement.put(forwardElement, trace_3);
-			trace_3.setForwardElement(forwardElement);
-			trace_3.setElementName(name);
-			trace_3.setForwardList(list);
-			OPPOSITE_OF_Telement2element_forwardTarget.put(target, trace_3);
-			trace_3.setForwardTarget(target);
-			jm_Telement2element.add(trace_3);
+			OPPOSITE_OF_Telement2element_forwardElement.put(forwardElement, trace_1);
+			trace_1.setForwardElement(forwardElement);
+			trace_1.setElementName(name);
+			trace_1.setForwardList(list);
+			OPPOSITE_OF_Telement2element_forwardTarget.put(target, trace_1);
+			trace_1.setForwardTarget(target);
+			jm_Telement2element.add(trace_1);
 			final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean m_Telement2element_Element_p0 = ValueUtil.TRUE_VALUE;
 			return m_Telement2element_Element_p0;
 		} catch (Throwable e) {
@@ -301,8 +298,8 @@ public class Forward2Reverse extends AbstractTransformer
 	 * var reverseElement : doublylinkedlist::Element[1] := trace.reverseElement;
 	 * var when_Tlist2list : PForward2Reverse::Tlist2list[1] := forwardList.Tlist2list;
 	 * var reverseList : doublylinkedlist::DoublyLinkedList[1] := when_Tlist2list.reverseList;
-	 * set reverseElement.list := reverseList;
 	 * set trace.reverseList := reverseList;
+	 * set reverseElement.list := reverseList;
 	 *
 	 */
 	protected boolean MAP_m_Telement2element_Element_46p2(final /*@NonInvalid*/ org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.@org.eclipse.jdt.annotation.NonNull Telement2element trace_0)  {
@@ -321,8 +318,8 @@ public class Forward2Reverse extends AbstractTransformer
 				@SuppressWarnings("null")
 				final /*@Thrown*/ org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.@org.eclipse.jdt.annotation.NonNull DoublyLinkedList reverseList = Tlist2list.getReverseList();
 				// mapping statements
-				reverseElement.setList(reverseList);
 				trace_0.setReverseList(reverseList);
+				reverseElement.setList(reverseList);
 				final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean m_Telement2element_Element_p2 = ValueUtil.TRUE_VALUE;
 				raw_when_Tlist2list = m_Telement2element_Element_p2;
 			}
@@ -343,8 +340,8 @@ public class Forward2Reverse extends AbstractTransformer
 	 * var when_Telement2element : PForward2Reverse::Telement2element[1] := forwardTarget.Telement2element;
 	 * var reverseElement : doublylinkedlist::Element[1] := trace.reverseElement;
 	 * var reverseSource : doublylinkedlist::Element[1] := when_Telement2element.reverseElement;
-	 * set trace.reverseSource := reverseSource;
 	 * set reverseElement.source := reverseSource;
+	 * set trace.reverseSource := reverseSource;
 	 *
 	 */
 	protected boolean MAP_m_Telement2element_Element_46p3(final /*@NonInvalid*/ org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.@org.eclipse.jdt.annotation.NonNull Element forwardTarget)  {
@@ -368,8 +365,8 @@ public class Forward2Reverse extends AbstractTransformer
 					@SuppressWarnings("null")
 					final /*@Thrown*/ org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.@org.eclipse.jdt.annotation.NonNull Element reverseElement_0 = Telement2element_0.getReverseElement();
 					// mapping statements
-					Telement2element.setReverseSource(reverseElement_0);
 					reverseElement.setSource(reverseElement_0);
+					Telement2element.setReverseSource(reverseElement_0);
 					final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean m_Telement2element_Element_p3 = ValueUtil.TRUE_VALUE;
 					raw_when_Telement2element = m_Telement2element_Element_p3;
 				}
@@ -389,67 +386,55 @@ public class Forward2Reverse extends AbstractTransformer
 
 	/**
 	 *
-	 * map _'m_TemptyList2emptyList_DoublyLinkedList.r0' in Forward2Reverse {
+	 * map _'m_Tlist2list_DoublyLinkedList.r0' in Forward2Reverse {
 	 * guard:forward forwardList  : doublylinkedlist::DoublyLinkedList[1];
+	 * append jm_Tlist2list  : Set(PForward2Reverse::Tlist2list)[*|1];
 	 * var listName : String[1] := forwardList.name;
-	 * check forwardList.headElement = null;
 	 * new:reverse reverseList : doublylinkedlist::DoublyLinkedList[1];
-	 * new:middle trace : PForward2Reverse::TemptyList2emptyList[1];
-	 * set reverseList.headElement := null;
+	 * new:middle trace : PForward2Reverse::Tlist2list[1];
 	 * set trace.forwardList := forwardList;
 	 * set trace.reverseList := reverseList;
 	 * set reverseList.name := listName;
 	 * set trace.listName := listName;
+	 * add jm_Tlist2list += trace;
 	 *
 	 */
-	protected boolean MAP_m_TemptyList2emptyList_DoublyLinkedList_46r0(final /*@NonInvalid*/ org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.@org.eclipse.jdt.annotation.NonNull DoublyLinkedList forwardList)  {
+	protected boolean MAP_m_Tlist2list_DoublyLinkedList_46r0(final /*@NonInvalid*/ org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.@org.eclipse.jdt.annotation.NonNull DoublyLinkedList forwardList, final SetValue.@NonNull Accumulator jm_Tlist2list)  {
 		try {
 			@SuppressWarnings("null")
 			final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.NonNull String name = forwardList.getName();
-			final /*@Thrown*/ org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.@org.eclipse.jdt.annotation.Nullable Element headElement = forwardList.getHeadElement();
-			final /*@Thrown*/ boolean symbol_0 = headElement == null;
-			/*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean symbol_7;
-			if (symbol_0) {
-				// creations
-				final /*@Thrown*/ org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.@org.eclipse.jdt.annotation.Nullable DoublyLinkedList reverseList = doublylinkedlistFactory.eINSTANCE.createDoublyLinkedList();
-				assert reverseList != null;
-				models[2/*reverse*/].add(reverseList);
-				final /*@Thrown*/ org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.@org.eclipse.jdt.annotation.Nullable TemptyList2emptyList trace_3 = PForward2ReverseFactory.eINSTANCE.createTemptyList2emptyList();
-				assert trace_3 != null;
-				models[0/*middle*/].add(trace_3);
-				// mapping statements
-				reverseList.setHeadElement(null);
-				trace_3.setForwardList(forwardList);
-				trace_3.setReverseList(reverseList);
-				reverseList.setName(name);
-				trace_3.setListName(name);
-				final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean m_TemptyList2emptyList_DoublyLinkedList_r0 = ValueUtil.TRUE_VALUE;
-				symbol_7 = m_TemptyList2emptyList_DoublyLinkedList_r0;
-			}
-			else {
-				symbol_7 = ValueUtil.FALSE_VALUE;
-			}
-			return symbol_7;
+			// creations
+			final /*@Thrown*/ org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.@org.eclipse.jdt.annotation.Nullable DoublyLinkedList reverseList = doublylinkedlistFactory.eINSTANCE.createDoublyLinkedList();
+			assert reverseList != null;
+			models[2/*reverse*/].add(reverseList);
+			final /*@Thrown*/ org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.@org.eclipse.jdt.annotation.Nullable Tlist2list trace_1 = PForward2ReverseFactory.eINSTANCE.createTlist2list();
+			assert trace_1 != null;
+			models[0/*middle*/].add(trace_1);
+			// mapping statements
+			OPPOSITE_OF_Tlist2list_forwardList.put(forwardList, trace_1);
+			trace_1.setForwardList(forwardList);
+			trace_1.setReverseList(reverseList);
+			reverseList.setName(name);
+			trace_1.setListName(name);
+			jm_Tlist2list.add(trace_1);
+			final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean m_Tlist2list_DoublyLinkedList_r0 = ValueUtil.TRUE_VALUE;
+			return m_Tlist2list_DoublyLinkedList_r0;
 		} catch (Throwable e) {
-			return handleExecutionFailure("MAP_m_TemptyList2emptyList_DoublyLinkedList_46r0", e);
+			return handleExecutionFailure("MAP_m_Tlist2list_DoublyLinkedList_46r0", e);
 		}
 	}
 
 	/**
 	 *
-	 * map _'m_Tlist2list_DoublyLinkedList.p0' in Forward2Reverse {
+	 * map _'m_TlistHead2listHead_DoublyLinkedList.p0' in Forward2Reverse {
 	 * guard:forward forwardList  : doublylinkedlist::DoublyLinkedList[1];
-	 * append jm_Tlist2list  : Set(PForward2Reverse::Tlist2list)[*|1];
 	 * var forwardHead : doublylinkedlist::Element[1] := forwardList.headElement;
-	 * var listName : String[1] := forwardList.name;
-	 * new:middle trace : PForward2Reverse::Tlist2list[1];
+	 * new:middle trace : PForward2Reverse::TlistHead2listHead[1];
 	 * set trace.forwardList := forwardList;
-	 * set trace.listName := listName;
 	 * set trace.forwardHead := forwardHead;
-	 * add jm_Tlist2list += trace;
 	 *
 	 */
-	protected boolean MAP_m_Tlist2list_DoublyLinkedList_46p0(final /*@NonInvalid*/ org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.@org.eclipse.jdt.annotation.NonNull DoublyLinkedList forwardList_0, final SetValue.@NonNull Accumulator jm_Tlist2list)  {
+	protected boolean MAP_m_TlistHead2listHead_DoublyLinkedList_46p0(final /*@NonInvalid*/ org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.@org.eclipse.jdt.annotation.NonNull DoublyLinkedList forwardList_0)  {
 		try {
 			final /*@Thrown*/ org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.@org.eclipse.jdt.annotation.Nullable Element headElement = forwardList_0.getHeadElement();
 			final /*@Thrown*/ boolean symbol_0 = headElement != null;
@@ -458,113 +443,104 @@ public class Forward2Reverse extends AbstractTransformer
 				if (headElement == null) {
 					throw new InvalidValueException("Null where non-null value required");
 				}
-				@SuppressWarnings("null")
-				final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.NonNull String name = forwardList_0.getName();
 				// creations
-				final /*@Thrown*/ org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.@org.eclipse.jdt.annotation.Nullable Tlist2list trace_3 = PForward2ReverseFactory.eINSTANCE.createTlist2list();
-				assert trace_3 != null;
-				models[0/*middle*/].add(trace_3);
+				final /*@Thrown*/ org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.@org.eclipse.jdt.annotation.Nullable TlistHead2listHead trace_1 = PForward2ReverseFactory.eINSTANCE.createTlistHead2listHead();
+				assert trace_1 != null;
+				models[0/*middle*/].add(trace_1);
 				// mapping statements
-				OPPOSITE_OF_Tlist2list_forwardList.put(forwardList_0, trace_3);
-				trace_3.setForwardList(forwardList_0);
-				trace_3.setListName(name);
-				trace_3.setForwardHead(headElement);
-				jm_Tlist2list.add(trace_3);
-				final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean m_Tlist2list_DoublyLinkedList_p0 = ValueUtil.TRUE_VALUE;
-				raw_forwardHead = m_Tlist2list_DoublyLinkedList_p0;
+				OPPOSITE_OF_TlistHead2listHead_forwardList.put(forwardList_0, trace_1);
+				trace_1.setForwardList(forwardList_0);
+				trace_1.setForwardHead(headElement);
+				final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean m_TlistHead2listHead_DoublyLinkedList_p0 = ValueUtil.TRUE_VALUE;
+				raw_forwardHead = m_TlistHead2listHead_DoublyLinkedList_p0;
 			}
 			else {
 				raw_forwardHead = ValueUtil.FALSE_VALUE;
 			}
 			return raw_forwardHead;
 		} catch (Throwable e) {
-			return handleExecutionFailure("MAP_m_Tlist2list_DoublyLinkedList_46p0", e);
+			return handleExecutionFailure("MAP_m_TlistHead2listHead_DoublyLinkedList_46p0", e);
 		}
 	}
 
 	/**
 	 *
-	 * map _'m_Tlist2list_DoublyLinkedList.p1' in Forward2Reverse {
-	 * guard:middle trace  : PForward2Reverse::Tlist2list[1];
-	 * var forwardHead : doublylinkedlist::Element[1] := trace.forwardHead;
-	 * var listName : String[1] := trace.listName;
-	 * var when_Telement2element : PForward2Reverse::Telement2element[1] := forwardHead.Telement2element;
-	 * new:reverse reverseList : doublylinkedlist::DoublyLinkedList[1];
-	 * set trace.reverseList := reverseList;
-	 * set reverseList.name := listName;
-	 *
-	 */
-	protected boolean MAP_m_Tlist2list_DoublyLinkedList_46p1(final /*@NonInvalid*/ org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.@org.eclipse.jdt.annotation.NonNull Tlist2list trace_1)  {
-		try {
-			@SuppressWarnings("null")
-			final /*@Thrown*/ org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.@org.eclipse.jdt.annotation.NonNull Element forwardHead = trace_1.getForwardHead();
-			@SuppressWarnings("null")
-			final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.NonNull String listName = trace_1.getListName();
-			final /*@Thrown*/ org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.@org.eclipse.jdt.annotation.Nullable Telement2element Telement2element = OPPOSITE_OF_Telement2element_forwardElement.get(forwardHead);
-			final /*@Thrown*/ boolean symbol_0 = Telement2element != null;
-			/*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean raw_when_Telement2element;
-			if (symbol_0) {
-				if (Telement2element == null) {
-					throw new InvalidValueException("Null where non-null value required");
-				}
-				// creations
-				final /*@Thrown*/ org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.@org.eclipse.jdt.annotation.Nullable DoublyLinkedList reverseList = doublylinkedlistFactory.eINSTANCE.createDoublyLinkedList();
-				assert reverseList != null;
-				models[2/*reverse*/].add(reverseList);
-				// mapping statements
-				trace_1.setReverseList(reverseList);
-				reverseList.setName(listName);
-				final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean m_Tlist2list_DoublyLinkedList_p1 = ValueUtil.TRUE_VALUE;
-				raw_when_Telement2element = m_Tlist2list_DoublyLinkedList_p1;
-			}
-			else {
-				raw_when_Telement2element = ValueUtil.FALSE_VALUE;
-			}
-			return raw_when_Telement2element;
-		} catch (Throwable e) {
-			return handleExecutionFailure("MAP_m_Tlist2list_DoublyLinkedList_46p1", e);
-		}
-	}
-
-	/**
-	 *
-	 * map _'m_Tlist2list_DoublyLinkedList.p2' in Forward2Reverse {
-	 * guard:middle trace  : PForward2Reverse::Tlist2list[1];
-	 * var forwardHead : doublylinkedlist::Element[1] := trace.forwardHead;
-	 * var reverseList : doublylinkedlist::DoublyLinkedList[1] := trace.reverseList;
+	 * map _'m_TlistHead2listHead_DoublyLinkedList.p1' in Forward2Reverse {
+	 * guard:middle from_Tlist2list  : PForward2Reverse::Tlist2list[1];
+	 * var forwardList : doublylinkedlist::DoublyLinkedList[1] := from_Tlist2list.forwardList;
+	 * var reverseList : doublylinkedlist::DoublyLinkedList[1] := from_Tlist2list.reverseList;
+	 * var forwardHead : doublylinkedlist::Element[1] := forwardList.headElement;
+	 * var trace : PForward2Reverse::TlistHead2listHead[1] := forwardList.TlistHead2listHead;
 	 * var when_Telement2element : PForward2Reverse::Telement2element[1] := forwardHead.Telement2element;
 	 * var reverseHead : doublylinkedlist::Element[1] := when_Telement2element.reverseElement;
+	 * check forwardHead = trace.forwardHead;
+	 * set trace.reverseList := reverseList;
 	 * set reverseList.headElement := reverseHead;
 	 * set trace.reverseHead := reverseHead;
 	 *
 	 */
-	protected boolean MAP_m_Tlist2list_DoublyLinkedList_46p2(final /*@NonInvalid*/ org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.@org.eclipse.jdt.annotation.NonNull Tlist2list trace_2)  {
+	protected boolean MAP_m_TlistHead2listHead_DoublyLinkedList_46p1(final /*@NonInvalid*/ org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.@org.eclipse.jdt.annotation.NonNull Tlist2list from_Tlist2list)  {
 		try {
 			@SuppressWarnings("null")
-			final /*@Thrown*/ org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.@org.eclipse.jdt.annotation.NonNull Element forwardHead = trace_2.getForwardHead();
+			final /*@Thrown*/ org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.@org.eclipse.jdt.annotation.NonNull DoublyLinkedList forwardList_1 = from_Tlist2list.getForwardList();
 			@SuppressWarnings("null")
-			final /*@Thrown*/ org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.@org.eclipse.jdt.annotation.NonNull DoublyLinkedList reverseList = trace_2.getReverseList();
-			final /*@Thrown*/ org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.@org.eclipse.jdt.annotation.Nullable Telement2element Telement2element = OPPOSITE_OF_Telement2element_forwardElement.get(forwardHead);
-			final /*@Thrown*/ boolean symbol_0 = Telement2element != null;
-			/*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean raw_when_Telement2element;
+			final /*@Thrown*/ org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.@org.eclipse.jdt.annotation.NonNull DoublyLinkedList reverseList = from_Tlist2list.getReverseList();
+			final /*@Thrown*/ org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.@org.eclipse.jdt.annotation.Nullable Element headElement = forwardList_1.getHeadElement();
+			final /*@Thrown*/ boolean symbol_0 = headElement != null;
+			/*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean raw_forwardHead;
 			if (symbol_0) {
-				if (Telement2element == null) {
+				if (headElement == null) {
 					throw new InvalidValueException("Null where non-null value required");
 				}
-				@SuppressWarnings("null")
-				final /*@Thrown*/ org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.@org.eclipse.jdt.annotation.NonNull Element reverseElement = Telement2element.getReverseElement();
-				// mapping statements
-				reverseList.setHeadElement(reverseElement);
-				trace_2.setReverseHead(reverseElement);
-				final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean m_Tlist2list_DoublyLinkedList_p2 = ValueUtil.TRUE_VALUE;
-				raw_when_Telement2element = m_Tlist2list_DoublyLinkedList_p2;
+				final /*@Thrown*/ org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.@org.eclipse.jdt.annotation.Nullable TlistHead2listHead TlistHead2listHead = OPPOSITE_OF_TlistHead2listHead_forwardList.get(forwardList_1);
+				final /*@Thrown*/ boolean symbol_1 = TlistHead2listHead != null;
+				/*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean raw_trace;
+				if (symbol_1) {
+					if (TlistHead2listHead == null) {
+						throw new InvalidValueException("Null where non-null value required");
+					}
+					final /*@Thrown*/ org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.@org.eclipse.jdt.annotation.Nullable Telement2element Telement2element = OPPOSITE_OF_Telement2element_forwardElement.get(headElement);
+					final /*@Thrown*/ boolean symbol_2 = Telement2element != null;
+					/*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean raw_when_Telement2element;
+					if (symbol_2) {
+						if (Telement2element == null) {
+							throw new InvalidValueException("Null where non-null value required");
+						}
+						@SuppressWarnings("null")
+						final /*@Thrown*/ org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.@org.eclipse.jdt.annotation.NonNull Element reverseElement = Telement2element.getReverseElement();
+						@SuppressWarnings("null")
+						final /*@Thrown*/ org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.@org.eclipse.jdt.annotation.NonNull Element forwardHead = TlistHead2listHead.getForwardHead();
+						final /*@Thrown*/ boolean symbol_3 = headElement.equals(forwardHead);
+						/*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean symbol_8;
+						if (symbol_3) {
+							// mapping statements
+							TlistHead2listHead.setReverseList(reverseList);
+							reverseList.setHeadElement(reverseElement);
+							TlistHead2listHead.setReverseHead(reverseElement);
+							final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean m_TlistHead2listHead_DoublyLinkedList_p1 = ValueUtil.TRUE_VALUE;
+							symbol_8 = m_TlistHead2listHead_DoublyLinkedList_p1;
+						}
+						else {
+							symbol_8 = ValueUtil.FALSE_VALUE;
+						}
+						raw_when_Telement2element = symbol_8;
+					}
+					else {
+						raw_when_Telement2element = ValueUtil.FALSE_VALUE;
+					}
+					raw_trace = raw_when_Telement2element;
+				}
+				else {
+					raw_trace = ValueUtil.FALSE_VALUE;
+				}
+				raw_forwardHead = raw_trace;
 			}
 			else {
-				raw_when_Telement2element = ValueUtil.FALSE_VALUE;
+				raw_forwardHead = ValueUtil.FALSE_VALUE;
 			}
-			return raw_when_Telement2element;
+			return raw_forwardHead;
 		} catch (Throwable e) {
-			return handleExecutionFailure("MAP_m_Tlist2list_DoublyLinkedList_46p2", e);
+			return handleExecutionFailure("MAP_m_TlistHead2listHead_DoublyLinkedList_46p1", e);
 		}
 	}
 }

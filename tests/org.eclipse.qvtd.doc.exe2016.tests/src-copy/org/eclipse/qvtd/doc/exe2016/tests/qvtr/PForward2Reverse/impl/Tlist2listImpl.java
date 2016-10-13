@@ -17,10 +17,11 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+
 import org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.PForward2ReversePackage;
 import org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.Tlist2list;
+
 import org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.DoublyLinkedList;
-import org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.Element;
 
 /**
  * <!-- begin-user-doc -->
@@ -30,26 +31,14 @@ import org.eclipse.qvtd.doc.exe2016.tests.qvtr.doublylinkedlist.Element;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.impl.Tlist2listImpl#getForwardHead <em>Forward Head</em>}</li>
  *   <li>{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.impl.Tlist2listImpl#getForwardList <em>Forward List</em>}</li>
  *   <li>{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.impl.Tlist2listImpl#getListName <em>List Name</em>}</li>
- *   <li>{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.impl.Tlist2listImpl#getReverseHead <em>Reverse Head</em>}</li>
  *   <li>{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.impl.Tlist2listImpl#getReverseList <em>Reverse List</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class Tlist2listImpl extends MinimalEObjectImpl.Container implements Tlist2list {
-	/**
-	 * The cached value of the '{@link #getForwardHead() <em>Forward Head</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getForwardHead()
-	 * @generated
-	 * @ordered
-	 */
-	protected Element forwardHead;
-
 	/**
 	 * The cached value of the '{@link #getForwardList() <em>Forward List</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -81,16 +70,6 @@ public class Tlist2listImpl extends MinimalEObjectImpl.Container implements Tlis
 	protected String listName = LIST_NAME_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getReverseHead() <em>Reverse Head</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getReverseHead()
-	 * @generated
-	 * @ordered
-	 */
-	protected Element reverseHead;
-
-	/**
 	 * The cached value of the '{@link #getReverseList() <em>Reverse List</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -117,46 +96,6 @@ public class Tlist2listImpl extends MinimalEObjectImpl.Container implements Tlis
 	@Override
 	protected EClass eStaticClass() {
 		return PForward2ReversePackage.Literals.TLIST2LIST;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Element getForwardHead() {
-		if (forwardHead != null && forwardHead.eIsProxy()) {
-			InternalEObject oldForwardHead = (InternalEObject)forwardHead;
-			forwardHead = (Element)eResolveProxy(oldForwardHead);
-			if (forwardHead != oldForwardHead) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, PForward2ReversePackage.TLIST2LIST__FORWARD_HEAD, oldForwardHead, forwardHead));
-			}
-		}
-		return forwardHead;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Element basicGetForwardHead() {
-		return forwardHead;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setForwardHead(Element newForwardHead) {
-		Element oldForwardHead = forwardHead;
-		forwardHead = newForwardHead;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, PForward2ReversePackage.TLIST2LIST__FORWARD_HEAD, oldForwardHead, forwardHead));
 	}
 
 	/**
@@ -228,46 +167,6 @@ public class Tlist2listImpl extends MinimalEObjectImpl.Container implements Tlis
 	 * @generated
 	 */
 	@Override
-	public Element getReverseHead() {
-		if (reverseHead != null && reverseHead.eIsProxy()) {
-			InternalEObject oldReverseHead = (InternalEObject)reverseHead;
-			reverseHead = (Element)eResolveProxy(oldReverseHead);
-			if (reverseHead != oldReverseHead) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, PForward2ReversePackage.TLIST2LIST__REVERSE_HEAD, oldReverseHead, reverseHead));
-			}
-		}
-		return reverseHead;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Element basicGetReverseHead() {
-		return reverseHead;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setReverseHead(Element newReverseHead) {
-		Element oldReverseHead = reverseHead;
-		reverseHead = newReverseHead;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, PForward2ReversePackage.TLIST2LIST__REVERSE_HEAD, oldReverseHead, reverseHead));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public DoublyLinkedList getReverseList() {
 		if (reverseList != null && reverseList.eIsProxy()) {
 			InternalEObject oldReverseList = (InternalEObject)reverseList;
@@ -310,17 +209,11 @@ public class Tlist2listImpl extends MinimalEObjectImpl.Container implements Tlis
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case PForward2ReversePackage.TLIST2LIST__FORWARD_HEAD:
-				if (resolve) return getForwardHead();
-				return basicGetForwardHead();
 			case PForward2ReversePackage.TLIST2LIST__FORWARD_LIST:
 				if (resolve) return getForwardList();
 				return basicGetForwardList();
 			case PForward2ReversePackage.TLIST2LIST__LIST_NAME:
 				return getListName();
-			case PForward2ReversePackage.TLIST2LIST__REVERSE_HEAD:
-				if (resolve) return getReverseHead();
-				return basicGetReverseHead();
 			case PForward2ReversePackage.TLIST2LIST__REVERSE_LIST:
 				if (resolve) return getReverseList();
 				return basicGetReverseList();
@@ -336,17 +229,11 @@ public class Tlist2listImpl extends MinimalEObjectImpl.Container implements Tlis
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case PForward2ReversePackage.TLIST2LIST__FORWARD_HEAD:
-				setForwardHead((Element)newValue);
-				return;
 			case PForward2ReversePackage.TLIST2LIST__FORWARD_LIST:
 				setForwardList((DoublyLinkedList)newValue);
 				return;
 			case PForward2ReversePackage.TLIST2LIST__LIST_NAME:
 				setListName((String)newValue);
-				return;
-			case PForward2ReversePackage.TLIST2LIST__REVERSE_HEAD:
-				setReverseHead((Element)newValue);
 				return;
 			case PForward2ReversePackage.TLIST2LIST__REVERSE_LIST:
 				setReverseList((DoublyLinkedList)newValue);
@@ -363,17 +250,11 @@ public class Tlist2listImpl extends MinimalEObjectImpl.Container implements Tlis
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case PForward2ReversePackage.TLIST2LIST__FORWARD_HEAD:
-				setForwardHead((Element)null);
-				return;
 			case PForward2ReversePackage.TLIST2LIST__FORWARD_LIST:
 				setForwardList((DoublyLinkedList)null);
 				return;
 			case PForward2ReversePackage.TLIST2LIST__LIST_NAME:
 				setListName(LIST_NAME_EDEFAULT);
-				return;
-			case PForward2ReversePackage.TLIST2LIST__REVERSE_HEAD:
-				setReverseHead((Element)null);
 				return;
 			case PForward2ReversePackage.TLIST2LIST__REVERSE_LIST:
 				setReverseList((DoublyLinkedList)null);
@@ -390,14 +271,10 @@ public class Tlist2listImpl extends MinimalEObjectImpl.Container implements Tlis
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case PForward2ReversePackage.TLIST2LIST__FORWARD_HEAD:
-				return forwardHead != null;
 			case PForward2ReversePackage.TLIST2LIST__FORWARD_LIST:
 				return forwardList != null;
 			case PForward2ReversePackage.TLIST2LIST__LIST_NAME:
 				return LIST_NAME_EDEFAULT == null ? listName != null : !LIST_NAME_EDEFAULT.equals(listName);
-			case PForward2ReversePackage.TLIST2LIST__REVERSE_HEAD:
-				return reverseHead != null;
 			case PForward2ReversePackage.TLIST2LIST__REVERSE_LIST:
 				return reverseList != null;
 		}

@@ -156,61 +156,6 @@ public interface PForward2ReversePackage extends EPackage {
 	int TELEMENT2ELEMENT_OPERATION_COUNT = 0;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.impl.TemptyList2emptyListImpl <em>Tempty List2empty List</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.impl.TemptyList2emptyListImpl
-	 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.impl.PForward2ReversePackageImpl#getTemptyList2emptyList()
-	 * @generated
-	 */
-	int TEMPTY_LIST2EMPTY_LIST = 1;
-
-	/**
-	 * The feature id for the '<em><b>Forward List</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TEMPTY_LIST2EMPTY_LIST__FORWARD_LIST = 0;
-
-	/**
-	 * The feature id for the '<em><b>List Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TEMPTY_LIST2EMPTY_LIST__LIST_NAME = 1;
-
-	/**
-	 * The feature id for the '<em><b>Reverse List</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TEMPTY_LIST2EMPTY_LIST__REVERSE_LIST = 2;
-
-	/**
-	 * The number of structural features of the '<em>Tempty List2empty List</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TEMPTY_LIST2EMPTY_LIST_FEATURE_COUNT = 3;
-
-	/**
-	 * The number of operations of the '<em>Tempty List2empty List</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TEMPTY_LIST2EMPTY_LIST_OPERATION_COUNT = 0;
-
-	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.impl.Tlist2listImpl <em>Tlist2list</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -218,16 +163,7 @@ public interface PForward2ReversePackage extends EPackage {
 	 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.impl.PForward2ReversePackageImpl#getTlist2list()
 	 * @generated
 	 */
-	int TLIST2LIST = 2;
-
-	/**
-	 * The feature id for the '<em><b>Forward Head</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TLIST2LIST__FORWARD_HEAD = 0;
+	int TLIST2LIST = 1;
 
 	/**
 	 * The feature id for the '<em><b>Forward List</b></em>' reference.
@@ -236,7 +172,7 @@ public interface PForward2ReversePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TLIST2LIST__FORWARD_LIST = 1;
+	int TLIST2LIST__FORWARD_LIST = 0;
 
 	/**
 	 * The feature id for the '<em><b>List Name</b></em>' attribute.
@@ -245,16 +181,7 @@ public interface PForward2ReversePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TLIST2LIST__LIST_NAME = 2;
-
-	/**
-	 * The feature id for the '<em><b>Reverse Head</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TLIST2LIST__REVERSE_HEAD = 3;
+	int TLIST2LIST__LIST_NAME = 1;
 
 	/**
 	 * The feature id for the '<em><b>Reverse List</b></em>' reference.
@@ -263,7 +190,7 @@ public interface PForward2ReversePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TLIST2LIST__REVERSE_LIST = 4;
+	int TLIST2LIST__REVERSE_LIST = 2;
 
 	/**
 	 * The number of structural features of the '<em>Tlist2list</em>' class.
@@ -272,7 +199,7 @@ public interface PForward2ReversePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TLIST2LIST_FEATURE_COUNT = 5;
+	int TLIST2LIST_FEATURE_COUNT = 3;
 
 	/**
 	 * The number of operations of the '<em>Tlist2list</em>' class.
@@ -282,6 +209,70 @@ public interface PForward2ReversePackage extends EPackage {
 	 * @ordered
 	 */
 	int TLIST2LIST_OPERATION_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.impl.TlistHead2listHeadImpl <em>Tlist Head2list Head</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.impl.TlistHead2listHeadImpl
+	 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.impl.PForward2ReversePackageImpl#getTlistHead2listHead()
+	 * @generated
+	 */
+	int TLIST_HEAD2LIST_HEAD = 2;
+
+	/**
+	 * The feature id for the '<em><b>Forward Head</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TLIST_HEAD2LIST_HEAD__FORWARD_HEAD = 0;
+
+	/**
+	 * The feature id for the '<em><b>Forward List</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TLIST_HEAD2LIST_HEAD__FORWARD_LIST = 1;
+
+	/**
+	 * The feature id for the '<em><b>Reverse Head</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TLIST_HEAD2LIST_HEAD__REVERSE_HEAD = 2;
+
+	/**
+	 * The feature id for the '<em><b>Reverse List</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TLIST_HEAD2LIST_HEAD__REVERSE_LIST = 3;
+
+	/**
+	 * The number of structural features of the '<em>Tlist Head2list Head</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TLIST_HEAD2LIST_HEAD_FEATURE_COUNT = 4;
+
+	/**
+	 * The number of operations of the '<em>Tlist Head2list Head</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TLIST_HEAD2LIST_HEAD_OPERATION_COUNT = 0;
 
 
 	/**
@@ -372,49 +363,6 @@ public interface PForward2ReversePackage extends EPackage {
 	EReference getTelement2element_ReverseSource();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.TemptyList2emptyList <em>Tempty List2empty List</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Tempty List2empty List</em>'.
-	 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.TemptyList2emptyList
-	 * @generated
-	 */
-	EClass getTemptyList2emptyList();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.TemptyList2emptyList#getForwardList <em>Forward List</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Forward List</em>'.
-	 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.TemptyList2emptyList#getForwardList()
-	 * @see #getTemptyList2emptyList()
-	 * @generated
-	 */
-	EReference getTemptyList2emptyList_ForwardList();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.TemptyList2emptyList#getListName <em>List Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>List Name</em>'.
-	 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.TemptyList2emptyList#getListName()
-	 * @see #getTemptyList2emptyList()
-	 * @generated
-	 */
-	EAttribute getTemptyList2emptyList_ListName();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.TemptyList2emptyList#getReverseList <em>Reverse List</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Reverse List</em>'.
-	 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.TemptyList2emptyList#getReverseList()
-	 * @see #getTemptyList2emptyList()
-	 * @generated
-	 */
-	EReference getTemptyList2emptyList_ReverseList();
-
-	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.Tlist2list <em>Tlist2list</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -423,17 +371,6 @@ public interface PForward2ReversePackage extends EPackage {
 	 * @generated
 	 */
 	EClass getTlist2list();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.Tlist2list#getForwardHead <em>Forward Head</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Forward Head</em>'.
-	 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.Tlist2list#getForwardHead()
-	 * @see #getTlist2list()
-	 * @generated
-	 */
-	EReference getTlist2list_ForwardHead();
 
 	/**
 	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.Tlist2list#getForwardList <em>Forward List</em>}'.
@@ -458,17 +395,6 @@ public interface PForward2ReversePackage extends EPackage {
 	EAttribute getTlist2list_ListName();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.Tlist2list#getReverseHead <em>Reverse Head</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Reverse Head</em>'.
-	 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.Tlist2list#getReverseHead()
-	 * @see #getTlist2list()
-	 * @generated
-	 */
-	EReference getTlist2list_ReverseHead();
-
-	/**
 	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.Tlist2list#getReverseList <em>Reverse List</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -478,6 +404,60 @@ public interface PForward2ReversePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getTlist2list_ReverseList();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.TlistHead2listHead <em>Tlist Head2list Head</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Tlist Head2list Head</em>'.
+	 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.TlistHead2listHead
+	 * @generated
+	 */
+	EClass getTlistHead2listHead();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.TlistHead2listHead#getForwardHead <em>Forward Head</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Forward Head</em>'.
+	 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.TlistHead2listHead#getForwardHead()
+	 * @see #getTlistHead2listHead()
+	 * @generated
+	 */
+	EReference getTlistHead2listHead_ForwardHead();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.TlistHead2listHead#getForwardList <em>Forward List</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Forward List</em>'.
+	 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.TlistHead2listHead#getForwardList()
+	 * @see #getTlistHead2listHead()
+	 * @generated
+	 */
+	EReference getTlistHead2listHead_ForwardList();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.TlistHead2listHead#getReverseHead <em>Reverse Head</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Reverse Head</em>'.
+	 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.TlistHead2listHead#getReverseHead()
+	 * @see #getTlistHead2listHead()
+	 * @generated
+	 */
+	EReference getTlistHead2listHead_ReverseHead();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.TlistHead2listHead#getReverseList <em>Reverse List</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Reverse List</em>'.
+	 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.TlistHead2listHead#getReverseList()
+	 * @see #getTlistHead2listHead()
+	 * @generated
+	 */
+	EReference getTlistHead2listHead_ReverseList();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -569,40 +549,6 @@ public interface PForward2ReversePackage extends EPackage {
 		EReference TELEMENT2ELEMENT__REVERSE_SOURCE = eINSTANCE.getTelement2element_ReverseSource();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.impl.TemptyList2emptyListImpl <em>Tempty List2empty List</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.impl.TemptyList2emptyListImpl
-		 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.impl.PForward2ReversePackageImpl#getTemptyList2emptyList()
-		 * @generated
-		 */
-		EClass TEMPTY_LIST2EMPTY_LIST = eINSTANCE.getTemptyList2emptyList();
-
-		/**
-		 * The meta object literal for the '<em><b>Forward List</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference TEMPTY_LIST2EMPTY_LIST__FORWARD_LIST = eINSTANCE.getTemptyList2emptyList_ForwardList();
-
-		/**
-		 * The meta object literal for the '<em><b>List Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute TEMPTY_LIST2EMPTY_LIST__LIST_NAME = eINSTANCE.getTemptyList2emptyList_ListName();
-
-		/**
-		 * The meta object literal for the '<em><b>Reverse List</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference TEMPTY_LIST2EMPTY_LIST__REVERSE_LIST = eINSTANCE.getTemptyList2emptyList_ReverseList();
-
-		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.impl.Tlist2listImpl <em>Tlist2list</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -611,14 +557,6 @@ public interface PForward2ReversePackage extends EPackage {
 		 * @generated
 		 */
 		EClass TLIST2LIST = eINSTANCE.getTlist2list();
-
-		/**
-		 * The meta object literal for the '<em><b>Forward Head</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference TLIST2LIST__FORWARD_HEAD = eINSTANCE.getTlist2list_ForwardHead();
 
 		/**
 		 * The meta object literal for the '<em><b>Forward List</b></em>' reference feature.
@@ -637,12 +575,46 @@ public interface PForward2ReversePackage extends EPackage {
 		EAttribute TLIST2LIST__LIST_NAME = eINSTANCE.getTlist2list_ListName();
 
 		/**
+		 * The meta object literal for the '<em><b>Reverse List</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TLIST2LIST__REVERSE_LIST = eINSTANCE.getTlist2list_ReverseList();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.impl.TlistHead2listHeadImpl <em>Tlist Head2list Head</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.impl.TlistHead2listHeadImpl
+		 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.impl.PForward2ReversePackageImpl#getTlistHead2listHead()
+		 * @generated
+		 */
+		EClass TLIST_HEAD2LIST_HEAD = eINSTANCE.getTlistHead2listHead();
+
+		/**
+		 * The meta object literal for the '<em><b>Forward Head</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TLIST_HEAD2LIST_HEAD__FORWARD_HEAD = eINSTANCE.getTlistHead2listHead_ForwardHead();
+
+		/**
+		 * The meta object literal for the '<em><b>Forward List</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TLIST_HEAD2LIST_HEAD__FORWARD_LIST = eINSTANCE.getTlistHead2listHead_ForwardList();
+
+		/**
 		 * The meta object literal for the '<em><b>Reverse Head</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference TLIST2LIST__REVERSE_HEAD = eINSTANCE.getTlist2list_ReverseHead();
+		EReference TLIST_HEAD2LIST_HEAD__REVERSE_HEAD = eINSTANCE.getTlistHead2listHead_ReverseHead();
 
 		/**
 		 * The meta object literal for the '<em><b>Reverse List</b></em>' reference feature.
@@ -650,7 +622,7 @@ public interface PForward2ReversePackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference TLIST2LIST__REVERSE_LIST = eINSTANCE.getTlist2list_ReverseList();
+		EReference TLIST_HEAD2LIST_HEAD__REVERSE_LIST = eINSTANCE.getTlistHead2listHead_ReverseList();
 
 	}
 

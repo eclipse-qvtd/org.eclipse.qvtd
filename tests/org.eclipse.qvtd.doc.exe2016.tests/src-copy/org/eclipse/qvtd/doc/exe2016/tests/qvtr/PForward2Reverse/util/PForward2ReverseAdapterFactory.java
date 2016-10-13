@@ -81,12 +81,12 @@ public class PForward2ReverseAdapterFactory extends AdapterFactoryImpl {
 			return createTelement2elementAdapter();
 		}
 		@Override
-		public Adapter caseTemptyList2emptyList(TemptyList2emptyList object) {
-			return createTemptyList2emptyListAdapter();
-		}
-		@Override
 		public Adapter caseTlist2list(Tlist2list object) {
 			return createTlist2listAdapter();
+		}
+		@Override
+		public Adapter caseTlistHead2listHead(TlistHead2listHead object) {
+			return createTlistHead2listHeadAdapter();
 		}
 		@Override
 		public Adapter defaultCase(EObject object) {
@@ -123,20 +123,6 @@ public class PForward2ReverseAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.TemptyList2emptyList <em>Tempty List2empty List</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.TemptyList2emptyList
-	 * @generated
-	 */
-	public Adapter createTemptyList2emptyListAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.Tlist2list <em>Tlist2list</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -147,6 +133,20 @@ public class PForward2ReverseAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createTlist2listAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.TlistHead2listHead <em>Tlist Head2list Head</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.TlistHead2listHead
+	 * @generated
+	 */
+	public Adapter createTlistHead2listHeadAdapter() {
 		return null;
 	}
 

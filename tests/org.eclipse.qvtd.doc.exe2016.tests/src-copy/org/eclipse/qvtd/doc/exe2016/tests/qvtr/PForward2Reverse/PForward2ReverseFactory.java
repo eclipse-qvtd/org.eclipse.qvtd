@@ -11,7 +11,6 @@
 package org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse;
 
 import org.eclipse.emf.ecore.EFactory;
-import org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.impl.PForward2ReverseFactoryImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -28,7 +27,7 @@ public interface PForward2ReverseFactory extends EFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	PForward2ReverseFactory eINSTANCE = PForward2ReverseFactoryImpl.init();
+	PForward2ReverseFactory eINSTANCE = org.eclipse.qvtd.doc.exe2016.tests.qvtr.PForward2Reverse.impl.PForward2ReverseFactoryImpl.init();
 
 	/**
 	 * Returns a new object of class '<em>Telement2element</em>'.
@@ -40,15 +39,6 @@ public interface PForward2ReverseFactory extends EFactory {
 	Telement2element createTelement2element();
 
 	/**
-	 * Returns a new object of class '<em>Tempty List2empty List</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Tempty List2empty List</em>'.
-	 * @generated
-	 */
-	TemptyList2emptyList createTemptyList2emptyList();
-
-	/**
 	 * Returns a new object of class '<em>Tlist2list</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -56,6 +46,15 @@ public interface PForward2ReverseFactory extends EFactory {
 	 * @generated
 	 */
 	Tlist2list createTlist2list();
+
+	/**
+	 * Returns a new object of class '<em>Tlist Head2list Head</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Tlist Head2list Head</em>'.
+	 * @generated
+	 */
+	TlistHead2listHead createTlistHead2listHead();
 
 	/**
 	 * Returns the package supported by this factory.

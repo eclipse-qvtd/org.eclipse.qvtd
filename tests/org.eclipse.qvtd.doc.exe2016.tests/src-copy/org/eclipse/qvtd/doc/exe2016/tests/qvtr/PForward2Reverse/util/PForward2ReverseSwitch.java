@@ -81,15 +81,15 @@ public class PForward2ReverseSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case PForward2ReversePackage.TEMPTY_LIST2EMPTY_LIST: {
-				TemptyList2emptyList temptyList2emptyList = (TemptyList2emptyList)theEObject;
-				T result = caseTemptyList2emptyList(temptyList2emptyList);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case PForward2ReversePackage.TLIST2LIST: {
 				Tlist2list tlist2list = (Tlist2list)theEObject;
 				T result = caseTlist2list(tlist2list);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case PForward2ReversePackage.TLIST_HEAD2LIST_HEAD: {
+				TlistHead2listHead tlistHead2listHead = (TlistHead2listHead)theEObject;
+				T result = caseTlistHead2listHead(tlistHead2listHead);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -113,21 +113,6 @@ public class PForward2ReverseSwitch<@Nullable T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Tempty List2empty List</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Tempty List2empty List</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseTemptyList2emptyList(TemptyList2emptyList object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Tlist2list</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -139,6 +124,21 @@ public class PForward2ReverseSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseTlist2list(Tlist2list object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Tlist Head2list Head</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Tlist Head2list Head</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTlistHead2listHead(TlistHead2listHead object) {
 		return null;
 	}
 
