@@ -27,7 +27,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.xtext.tests.XtextTestCase.Normalizer;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.xtext.qvtimperative.tests.ModelNormalizer;
-import org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.doublylinkedlistPackage;
 
 /**
  * Forward2ReverseNormalizer normalises the results of the Forward2Reverse transformation.
@@ -88,13 +87,13 @@ public class Forward2ReverseNormalizer implements ModelNormalizer
 		}
 		EObject eRoot = contents.get(0);
 		EPackage ePackage = eRoot.eClass().getEPackage();
-		EClass elementClass = (EClass) ePackage.getEClassifier(doublylinkedlistPackage.Literals.ELEMENT.getName());
+		EClass elementClass = (EClass) ePackage.getEClassifier("Element");
 		assert elementClass != null;
-		EClass listClass = (EClass) ePackage.getEClassifier(doublylinkedlistPackage.Literals.DOUBLY_LINKED_LIST.getName());
+		EClass listClass = (EClass) ePackage.getEClassifier("DoublyLinkedList");
 		assert listClass != null;
-		EReference listElements = (EReference) listClass.getEStructuralFeature(doublylinkedlistPackage.Literals.DOUBLY_LINKED_LIST__OWNED_ELEMENTS.getName());
+		EReference listElements = (EReference) listClass.getEStructuralFeature("ownedElements");
 		assert listElements != null;
-		EAttribute elementName = (EAttribute) elementClass.getEStructuralFeature(doublylinkedlistPackage.Literals.ELEMENT__NAME.getName());
+		EAttribute elementName = (EAttribute) elementClass.getEStructuralFeature("name");
 		assert elementName != null;
 		ElementComparator elementComparator = new ElementComparator(elementName);
 		for (TreeIterator<EObject> tit = resource.getAllContents(); tit.hasNext(); ) {
