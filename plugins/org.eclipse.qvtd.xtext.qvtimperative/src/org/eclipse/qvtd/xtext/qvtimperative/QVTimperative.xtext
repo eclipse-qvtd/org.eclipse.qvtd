@@ -31,7 +31,7 @@ AppendParameterBindingCS: referredVariable=[qvtimperative::AppendParameter|Unres
 
 AppendParameterCS: 'append' name=UnrestrictedName ':' ownedType=TypeExpCS ';';
 	
-BufferStatementCS: 'buffer' name=UnrestrictedName (':' ownedType=TypeExpCS)? (':=' ownedExpression=ExpCS)? ';';
+BufferStatementCS: isStrict?='strict'? 'buffer' name=UnrestrictedName (':' ownedType=TypeExpCS)? (':=' ownedExpression=ExpCS)? ';';
 
 CommitStatementCS returns StatementCS:	NewStatementCS | SetStatementCS;
 	
@@ -57,7 +57,7 @@ ImportCS returns base::ImportCS:
 
 LoopParameterBindingCS: isCheck?='check'? referredVariable=[qvtimperative::GuardParameter|UnrestrictedName] 'iterates' value=[qvtimperative::LoopVariable|UnrestrictedName] ';';
 
-MappingCS: {MappingCS} 'map' name=UnrestrictedName ('in' ownedInPathName=PathNameCS)?
+MappingCS: {MappingCS} isStrict?='strict'? 'map' name=UnrestrictedName ('in' ownedInPathName=PathNameCS)?
 	'{'
 	ownedParameters+=MappingParameterCS*
 	ownedStatements+=GuardStatementCS*
@@ -65,7 +65,7 @@ MappingCS: {MappingCS} 'map' name=UnrestrictedName ('in' ownedInPathName=PathNam
 	ownedStatements+=ControlStatementCS*
 	'}';
 	
-MappingCallCS: {MappingCallCS} isInfinite?='infinite'? ('call'|isInstall?='install'|isInvoke?='invoke') ownedPathName=PathNameCS
+MappingCallCS: {MappingCallCS} ('call'|isInstall?='install'|isInvoke?='invoke') ownedPathName=PathNameCS
 	'{' ownedBindings+=MappingParameterBindingCS* '}';
 	
 MappingLoopCS: ('observe' observedProperties+=PathNameCS (',' observedProperties+=PathNameCS)*)?
@@ -120,6 +120,7 @@ UnrestrictedName returns ecore::EString:
 |	'query'
 |	'realize'
 |	'refines'
+|	'strict'
 |	'transformation'
 |	'uses'
 ;

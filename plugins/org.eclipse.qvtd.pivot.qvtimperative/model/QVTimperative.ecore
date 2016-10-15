@@ -70,6 +70,12 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="A ConnectionVariable identifes a variable used as a connection buffer."/>
     </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isStrict" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Duplicate elements in a strict ConnectionVariable are suppressed at run-time.&#xD;&#xA;&#xD;&#xA;Duplicate elements in a not-strict ConnectionVariable are guaranteed not to occur."/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DeclareStatement" eSuperTypes="#//VariableStatement #//ObservableStatement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -170,6 +176,12 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="An Imperative Mapping extends the abstract declarative mapping to support&#xA;explicit nested invocation of mappings with bindings for the invoked mapping's&#xA;bound variables."/>
     </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isStrict" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Repeated invocations of a strict Mapping are suppressed at run-time.&#xD;&#xA;&#xD;&#xA;Repeated invocations of a not-strict Mapping are guaranteed not to occur."/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedParameters" ordered="false"
         upperBound="-1" eType="#//MappingParameter" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedStatements" upperBound="-1"
@@ -183,12 +195,6 @@
         eType="#//MappingParameterBinding" containment="true" eOpposite="#//MappingParameterBinding/mappingCall">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The Set of bindings of variables or expressions to forma parameters."/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isInfinite" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
-        defaultValueLiteral="false">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="An infinite MappingCall requires re-invocation of the called mapping to be suppressed to avoid an infinite loop.&#xA;&#xA;Deprecated ?? not needed once install works."/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isInstall" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"

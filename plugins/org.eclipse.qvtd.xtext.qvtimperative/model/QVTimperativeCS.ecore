@@ -15,6 +15,8 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AppendParameterCS" eSuperTypes="#//MappingParameterCS"/>
   <eClassifiers xsi:type="ecore:EClass" name="BufferStatementCS" eSuperTypes="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//TypedElementCS #//StatementCS">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isStrict" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedExpression" eType="ecore:EClass ../../org.eclipse.ocl.xtext.essentialocl/model/EssentialOCLCS.ecore#//ExpCS"
         containment="true"/>
   </eClassifiers>
@@ -55,6 +57,8 @@
         defaultValueLiteral="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MappingCS" eSuperTypes="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//NamedElementCS">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isStrict" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedInPathName" eType="ecore:EClass ../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//PathNameCS"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedParameters" upperBound="-1"
@@ -63,8 +67,6 @@
         eType="#//StatementCS" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MappingCallCS" eSuperTypes="#//MappingStatementCS">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isInfinite" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
-        defaultValueLiteral="false"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isInstall" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         defaultValueLiteral="false"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isInvoke" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
