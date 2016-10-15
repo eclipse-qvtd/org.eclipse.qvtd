@@ -35,6 +35,7 @@ import org.eclipse.ocl.examples.codegen.java.CG2JavaPreVisitor;
 import org.eclipse.ocl.examples.codegen.java.ImportUtils;
 import org.eclipse.ocl.examples.codegen.java.JavaCodeGenerator;
 import org.eclipse.ocl.examples.codegen.utilities.CGModelResourceFactory;
+import org.eclipse.ocl.examples.codegen.utilities.CGUtil;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.codegen.qvti.QVTiCodeGenOptions;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAS2CGVisitor;
@@ -203,7 +204,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 	public @NonNull String generateClassFile() {
 		String javaSourceCode2 = javaSourceCode;
 		if (javaSourceCode2 == null) {
-			javaSourceCode = javaSourceCode2 = createClassFileContent();
+			javaSourceCode = javaSourceCode2 = CGUtil.compressJDTannotations(createClassFileContent());
 		}
 		return javaSourceCode2;
 	}
