@@ -86,8 +86,11 @@ public class QVTimperativePrettyPrintVisitor extends QVTbasePrettyPrintVisitor i
 	}
 
 	@Override
-	public Object visitBufferStatement(@NonNull BufferStatement object) {
-		return visitVariableDeclaration(object);
+	public Object visitBufferStatement(@NonNull BufferStatement pBuffer) {
+		if (pBuffer.isIsStrict()) {
+			context.append("strict ");
+		}
+		return visitVariableDeclaration(pBuffer);
 	}
 	@Override
 	public Object visitCheckStatement(@NonNull CheckStatement pPredicate) {
@@ -198,6 +201,9 @@ public class QVTimperativePrettyPrintVisitor extends QVTbasePrettyPrintVisitor i
 
 	@Override
 	public Object visitMapping(@NonNull Mapping pMapping) {
+		if (pMapping.isIsStrict()) {
+			context.append("strict ");
+		}
 		context.append("map ");
 		context.appendName(pMapping);
 		context.append(" in ");
@@ -216,9 +222,6 @@ public class QVTimperativePrettyPrintVisitor extends QVTbasePrettyPrintVisitor i
 
 	@Override
 	public Object visitMappingCall(@NonNull MappingCall pMappingCall) {
-		if (pMappingCall.isIsInfinite()) {
-			context.append("infinite ");
-		}
 		context.append(pMappingCall.isIsInstall() ? "install " : pMappingCall.isIsInvoke() ? "invoke " : "call ");
 		context.appendName(pMappingCall.getReferredMapping());
 		context.append(" {\n");

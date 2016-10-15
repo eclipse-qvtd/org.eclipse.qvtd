@@ -399,6 +399,7 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 		csVariable.setPivot(asVariable);
 		csVariable.setOwnedType(createTypeRefCS(asVariable.getType(), null)); //getScope(asVariable)));
 		csVariable.setOwnedExpression(context.visitDeclaration(ExpCS.class, asVariable.getOwnedExpression()));
+		csVariable.setIsStrict(asVariable.isIsStrict());
 		return csVariable;
 	}
 
@@ -616,6 +617,7 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 		refreshOwnedInTransformation(csMapping, asMapping);
 		context.refreshList(csMapping.getOwnedParameters(), context.visitDeclarations(MappingParameterCS.class, asMapping.getOwnedParameters(), null));
 		context.refreshList(csMapping.getOwnedStatements(), context.visitDeclarations(StatementCS.class, asMapping.getOwnedStatements(), null));
+		csMapping.setIsStrict(asMapping.isIsStrict());
 		return csMapping;
 	}
 
@@ -624,7 +626,6 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 		MappingCallCS csMappingCall = context.refreshElement(MappingCallCS.class, QVTimperativeCSPackage.Literals.MAPPING_CALL_CS, asMappingCall);
 		csMappingCall.setPivot(asMappingCall);
 		context.refreshList(csMappingCall.getOwnedBindings(), context.visitDeclarations(MappingParameterBindingCS.class, asMappingCall.getBinding(), null));
-		csMappingCall.setIsInfinite(asMappingCall.isIsInfinite());
 		csMappingCall.setIsInstall(asMappingCall.isIsInstall());
 		csMappingCall.setIsInvoke(asMappingCall.isIsInvoke());
 		refreshReferredMapping(csMappingCall, asMappingCall);

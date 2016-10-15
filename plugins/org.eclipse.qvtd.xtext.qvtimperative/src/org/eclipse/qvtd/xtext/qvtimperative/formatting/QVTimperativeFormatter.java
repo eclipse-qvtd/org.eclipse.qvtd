@@ -97,7 +97,7 @@ public class QVTimperativeFormatter extends AbstractEssentialOCLFormatter
 		{
 			BufferStatementCSElements a = f.getBufferStatementCSAccess();
 			c.setLinewrap(1).before(a.getGroup());
-			c.setNoSpace().before(a.getSemicolonKeyword_4());
+			c.setNoSpace().before(a.getSemicolonKeyword_5());
 		}
 		{
 			CheckStatementCSElements a = f.getCheckStatementCSAccess();
@@ -134,16 +134,15 @@ public class QVTimperativeFormatter extends AbstractEssentialOCLFormatter
 		{
 			MappingCSElements a = f.getMappingCSAccess();
 			c.setLinewrap(2).before(a.getGroup());
-			c.setNoSpace().between(a.getLeftCurlyBracketKeyword_4(), a.getRightCurlyBracketKeyword_9());
-			setBraces(c, a.getLeftCurlyBracketKeyword_4(), a.getRightCurlyBracketKeyword_9());
+			c.setNoSpace().between(a.getLeftCurlyBracketKeyword_5(), a.getRightCurlyBracketKeyword_10());
+			setBraces(c, a.getLeftCurlyBracketKeyword_5(), a.getRightCurlyBracketKeyword_10());
 			//			c.setLinewrap(2).between(a.getDomainsAssignment_5(), a.getDomainsAssignment_5());
 			//			c.setLinewrap(1).before(a.getOwnedDomainsAssignment_5());
 		}
 		{
 			MappingCallCSElements a = f.getMappingCallCSAccess();
 			c.setLinewrap(1).before(a.getGroup());
-			c.setNoLinewrap().after(a.getIsInfiniteInfiniteKeyword_1_0());
-			setAppendedBraces(c, a.getLeftCurlyBracketKeyword_4(), a.getRightCurlyBracketKeyword_6());
+			setAppendedBraces(c, a.getLeftCurlyBracketKeyword_3(), a.getRightCurlyBracketKeyword_5());
 			//		    c.setIndentation(a.getLeftCurlyBracketKeyword_3(), a.getRightCurlyBracketKeyword_5());
 		}
 		{

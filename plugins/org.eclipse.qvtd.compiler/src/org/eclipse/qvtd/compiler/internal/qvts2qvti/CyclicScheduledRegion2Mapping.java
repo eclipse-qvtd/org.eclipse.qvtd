@@ -239,7 +239,7 @@ public class CyclicScheduledRegion2Mapping extends AbstractScheduledRegion2Mappi
 	public @NonNull MappingCall createMappingCall(@NonNull List<@NonNull MappingParameterBinding> mappingParameterBindings) {
 		MappingCall mappingCall = super.createMappingCall(mappingParameterBindings);
 		if (!allRecursionsAreUnique) {
-			mappingCall.setIsInfinite(true);		// FIXME share code
+			mappingCall.getReferredMapping().setIsStrict(true);		// FIXME share code
 		}
 		return mappingCall;
 	}

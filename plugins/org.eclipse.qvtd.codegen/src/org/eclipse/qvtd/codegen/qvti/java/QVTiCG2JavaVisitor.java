@@ -1775,12 +1775,12 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		//	Emit the mapping call.
 		//
 		if (useClass(cgReferredMapping)) {
-			if (pMappingCall.isIsInfinite()) {
-				js.append("invokeOnce(" + getMappingCtorName(cgReferredMapping) + ", ");
-			}
-			else {
-				js.append("invoke(" + getMappingCtorName(cgReferredMapping) + ", ");
-			}
+			//			if (pMappingCall.isIsInfinite()) {
+			//				js.append("invokeOnce(" + getMappingCtorName(cgReferredMapping) + ", ");
+			//			}
+			//			else {
+			js.append("invoke(" + getMappingCtorName(cgReferredMapping) + ", ");
+			//			}
 		}
 		else {
 			js.append(getMappingName(cgReferredMapping) + "(");

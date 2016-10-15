@@ -236,7 +236,8 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 
 	@Override
 	public Continuation<?> visitBufferStatementCS(@NonNull BufferStatementCS csElement) {
-		refreshNamedElement(BufferStatement.class, QVTimperativePackage.Literals.BUFFER_STATEMENT, csElement);
+		BufferStatement pivotElement = refreshNamedElement(BufferStatement.class, QVTimperativePackage.Literals.BUFFER_STATEMENT, csElement);
+		pivotElement.setIsStrict(csElement.isIsStrict());
 		return null;
 	}
 
@@ -290,6 +291,7 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 		Mapping pivotElement = refreshNamedElement(Mapping.class, QVTimperativePackage.Literals.MAPPING, csElement);
 		context.refreshPivotList(MappingParameter.class, pivotElement.getOwnedParameters(), csElement.getOwnedParameters());
 		context.refreshPivotList(Statement.class, pivotElement.getOwnedStatements(), csElement.getOwnedStatements());
+		pivotElement.setIsStrict(csElement.isIsStrict());
 		return null;
 	}
 
@@ -297,7 +299,6 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 	public Continuation<?> visitMappingCallCS(@NonNull MappingCallCS csElement) {
 		@NonNull MappingCall pivotElement = context.refreshModelElement(MappingCall.class, QVTimperativePackage.Literals.MAPPING_CALL, csElement);
 		context.refreshPivotList(MappingParameterBinding.class, pivotElement.getBinding(), csElement.getOwnedBindings());
-		pivotElement.setIsInfinite(csElement.isIsInfinite());
 		pivotElement.setIsInstall(csElement.isIsInstall());
 		pivotElement.setIsInvoke(csElement.isIsInvoke());
 		context.refreshComments(pivotElement, csElement);

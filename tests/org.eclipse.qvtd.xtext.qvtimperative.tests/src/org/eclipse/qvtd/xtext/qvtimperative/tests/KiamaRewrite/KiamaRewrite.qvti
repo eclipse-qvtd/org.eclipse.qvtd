@@ -31,7 +31,7 @@ map __root__ in KiamaRewrite_qvtp_qvtcas
 		}
 	}
 	for loop0 : kiamacs::PlusCS in ji_PlusCS_31 {
-		infinite call r__PlusCS {
+		call r__PlusCS {
 			ji_NumCS appendsTo ji_NumCS1;
 			ji_PlusCS appendsTo ji_PlusCS1;
 			_'«head»' iterates loop0;
@@ -242,7 +242,7 @@ map r_TopCS_node in KiamaRewrite_qvtp_qvtcas
 	add ji_NumCS += _'«child-NumCS»';
 }
 
-map r__PlusCS in KiamaRewrite_qvtp_qvtcas
+strict map r__PlusCS in KiamaRewrite_qvtp_qvtcas
 {
 	append ji_PlusCS : Set(kiamacs::PlusCS);
 	append ji_NumCS : Set(kiamacs::NumCS);
@@ -262,7 +262,7 @@ map r__PlusCS in KiamaRewrite_qvtp_qvtcas
 	add _'«new»' += _'«local»'->excludingAll(ji_PlusCS);
 	add ji_PlusCS += _'«new»';
 	for loop0 : kiamacs::PlusCS in _'«new»' {
-		infinite call r__PlusCS {
+		call r__PlusCS {
 			ji_NumCS appendsTo ji_NumCS;
 			ji_PlusCS appendsTo ji_PlusCS;
 			_'«head»' iterates  loop0;
