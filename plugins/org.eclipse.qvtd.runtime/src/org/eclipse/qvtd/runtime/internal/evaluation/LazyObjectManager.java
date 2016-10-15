@@ -215,7 +215,7 @@ public class LazyObjectManager extends AbstractObjectManager
 			s.append("::");
 			s.append(debug_eFeature.getName());
 			s.append(" for ");
-			s.append(debug_eObject);
+			s.append(LabelUtil.getLabel(debug_eObject));
 			s.append("]");
 			return s.toString();
 		}

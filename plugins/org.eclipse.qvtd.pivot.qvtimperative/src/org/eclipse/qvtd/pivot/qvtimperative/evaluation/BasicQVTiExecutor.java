@@ -358,6 +358,7 @@ public abstract class BasicQVTiExecutor extends AbstractExecutor implements QVTi
 		pushEvaluationEnvironment(rule, (TypedElement)callExp);
 		try {
 			rule.accept(undecoratedVisitor);
+			getInvocationManager().flush();
 		}
 		finally {
 			popEvaluationEnvironment();

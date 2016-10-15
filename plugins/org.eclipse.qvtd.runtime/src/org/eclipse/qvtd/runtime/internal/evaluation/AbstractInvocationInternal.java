@@ -22,13 +22,18 @@ import org.eclipse.qvtd.runtime.evaluation.SlotState;
 public abstract class AbstractInvocationInternal implements Invocation
 {
 	protected final @NonNull Interval interval;
+
 	@NonNull AbstractInvocationInternal prev = this;
 	@NonNull AbstractInvocationInternal next = this;
 	public @Nullable SlotState debug_blockedBy = null;
 
 	protected AbstractInvocationInternal(@NonNull Interval interval) {
 		this.interval = interval;
-		// too soon		interval.queue(this);
+	}
+
+	@Override
+	public @NonNull Interval getInterval() {
+		return interval;
 	}
 
 	@Override
@@ -39,16 +44,6 @@ public abstract class AbstractInvocationInternal implements Invocation
 		next = successor;
 		castPredecessor.next = this;
 		prev = castPredecessor;
-	}
-
-	@Override
-	public void invokeInternal(boolean doFlush) {
-		interval.invoke(this, doFlush);
-	}
-
-	@Override
-	public void queue() {
-		interval.queue(this);
 	}
 
 	@Override

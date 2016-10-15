@@ -80,4 +80,6 @@ public interface Connection extends ExecutionVisitable, Nameable
 	 * so that their appends are also revoked.
 	 */
 	void revoke(@NonNull Object connectionKey);
+
+	<@NonNull T> @NonNull Iterable<T> typedIterable(Class<T> elementClass);
 }

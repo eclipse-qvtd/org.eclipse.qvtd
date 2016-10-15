@@ -11,7 +11,6 @@
 package org.eclipse.qvtd.runtime.evaluation;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.Nameable;
 
 /**
@@ -26,20 +25,7 @@ public interface InvocationConstructor extends ExecutionVisitable, Nameable
 		int nextSequence();
 	}
 
-	void addAppendedConnection(@NonNull Connection connection);
-
 	void addConsumedConection(@NonNull Connection connection);
-
-	/**
-	 * Return the first invocation of this constructor with argValues, using newInstance(argValues) to
-	 * create a new invocation instance if necessary. Returns null if an instance already created.
-	 */
-	@Nullable Invocation getFirstInvocation(@NonNull Object @NonNull [] argValues);
-
-	/**
-	 * Create the invocation identified by this constructor and values.
-	 */
-	@NonNull Invocation getInstance(@NonNull Object @NonNull [] values);
 
 	@NonNull Interval getInterval();
 
@@ -47,6 +33,20 @@ public interface InvocationConstructor extends ExecutionVisitable, Nameable
 
 	@Override
 	@NonNull String getName();
+
+	/**
+	 * Invoke the Mapping with the given set of boundValues exactly once.
+	 *
+	 * If isStrict and a previous invocation exists, no re-invocation occurs.
+	 *
+	 * If not isStrict or no previous invocation exists, the invocations occurs.
+	 *
+	 * The InvocationConstructor creator guarantees that isStrict is only true if
+	 * duplicate invocations cannot occur.
+	 */
+	@NonNull Invocation invoke(@NonNull Object @NonNull ... boundValues);
+
+	boolean isStrict();
 
 	void propagate();
 }

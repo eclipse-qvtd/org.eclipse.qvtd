@@ -102,6 +102,11 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 	}
 
 	@Override
+	public @NonNull InvocationManager getInvocationManager() {
+		return invocationManager;
+	}
+
+	@Override
 	protected @Nullable Object internalExecuteFunctionCallExp(@NonNull OperationCallExp operationCallExp,
 			@NonNull Function asFunction, @Nullable Object @NonNull [] boxedSourceAndArgumentValues) {
 		Map<@NonNull Operation, Computation.@NonNull Constructor> operation2computationConstructor2 = operation2computationConstructor;
@@ -165,11 +170,11 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 		}
 		InvocationConstructor invocationConstructor = mapping2invocationConstructor2.get(asMapping);
 		if (invocationConstructor == null) {
-			invocationConstructor = new AbstractInvocationConstructor.Incremental(invocationManager.getRootInterval(), QVTimperativeUtil.getName(asMapping))
+			invocationConstructor = new AbstractInvocationConstructor.Incremental(invocationManager, QVTimperativeUtil.getName(asMapping), asMapping.isIsStrict())
 			{
 				@Override
 				public @NonNull Invocation newInstance(@NonNull Object @NonNull [] theseValues) {
-					Invocation.Incremental invocation = new AbstractInvocation.Incremental(invocationManager.getRootInterval(), this)
+					Invocation.Incremental invocation = new AbstractInvocation.Incremental(this)
 					{
 						protected Object returnStatus;
 
@@ -209,13 +214,7 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 			};
 			mapping2invocationConstructor2.put(asMapping, invocationConstructor);
 		}
-		Invocation invocation = invocationConstructor.getFirstInvocation(boundValues);
-		if (invocation != null) {
-			if (debugInvocations) {
-				AbstractTransformer.INVOCATIONS.println("invoke " + invocation);
-			}
-			invocation.invokeInternal(true);
-		}
+		invocationConstructor.invoke(boundValues);
 		return null;
 	}
 

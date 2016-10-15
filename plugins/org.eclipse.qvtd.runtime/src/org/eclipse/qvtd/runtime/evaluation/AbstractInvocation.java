@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.ids.CollectionTypeId;
 import org.eclipse.qvtd.runtime.internal.evaluation.AbstractInvocationInternal;
 
 /**
@@ -35,8 +36,8 @@ public abstract class AbstractInvocation extends AbstractInvocationInternal
 		private Set<SlotState.@NonNull Incremental> readSlots = null;
 		private Set<SlotState.@NonNull Incremental> writeSlots = null;
 
-		protected Incremental(@NonNull Interval interval, InvocationConstructor.@NonNull Incremental constructor) {
-			super(interval);
+		protected Incremental(InvocationConstructor.@NonNull Incremental constructor) {
+			super(constructor);
 			this.constructor = constructor;
 			this.sequence = constructor.nextSequence();
 		}
@@ -67,6 +68,10 @@ public abstract class AbstractInvocation extends AbstractInvocationInternal
 			writeSlot.addSourceInternal(this);
 		}
 
+		protected @NonNull Connection createConnection(@NonNull String name, @NonNull CollectionTypeId typeId, boolean isStrict) {
+			return constructor.getInterval().createConnection(name, typeId, isStrict);
+		}
+
 		@Override
 		public @NonNull Iterable<@NonNull Object> getCreatedObjects() {
 			return createdObjects != null ? createdObjects : EMPTY_OBJECT_LIST;
@@ -93,8 +98,8 @@ public abstract class AbstractInvocation extends AbstractInvocationInternal
 		}
 	}
 
-	protected AbstractInvocation(@NonNull Interval interval) {
-		super(interval);
+	protected AbstractInvocation(@NonNull InvocationConstructor constructor) {
+		super(constructor.getInterval());
 	}
 
 	@Override

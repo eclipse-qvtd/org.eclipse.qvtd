@@ -27,19 +27,17 @@ public interface Invocation extends ExecutionVisitable, Nameable
 	 */
 	boolean execute() throws InvocationFailedException;
 
+	@NonNull Interval getInterval();
+
 	/**
 	 * Insert this Invocation following predecessor, which may be in the blocked or waiting invocations linked list.
 	 */
 	void insertAfter(@NonNull Invocation predecessor);
 
-	void invokeInternal(boolean doFlush);
-
 	/**
 	 * Return true if an occurrence with thoseValues would be a re-occurrence.
 	 */
 	boolean isEqual(@NonNull IdResolver idResolver, @NonNull Object @NonNull [] thoseValues);
-
-	void queue();
 
 	/**
 	 * Remove this Invocation from the blocked or waiting invocations linked list.

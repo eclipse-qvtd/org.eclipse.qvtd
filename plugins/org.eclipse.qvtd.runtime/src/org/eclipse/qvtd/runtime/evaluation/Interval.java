@@ -22,7 +22,7 @@ import org.eclipse.ocl.pivot.utilities.Nameable;
  */
 public interface Interval extends ExecutionVisitable, Nameable
 {
-	@NonNull Connection createConnection(@NonNull String name, @NonNull CollectionTypeId typeId, boolean isEnforced);
+	@NonNull Connection createConnection(@NonNull String name, @NonNull CollectionTypeId typeId, boolean isStrict);
 
 	boolean flush();
 
@@ -34,8 +34,6 @@ public interface Interval extends ExecutionVisitable, Nameable
 
 	@Override
 	@NonNull String getName();
-
-	void invoke(@NonNull Invocation invocation, boolean doFlush);
 
 	boolean isFlushed();
 

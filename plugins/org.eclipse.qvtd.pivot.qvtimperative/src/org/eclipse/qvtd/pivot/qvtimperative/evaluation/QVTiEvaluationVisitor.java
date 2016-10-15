@@ -397,6 +397,7 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 						}
 					}
 				}
+				executor.getInvocationManager().flush();
 			}
 		}
 		return true;

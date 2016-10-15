@@ -13,6 +13,7 @@ package org.eclipse.qvtd.cs2as.compiler.tests;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -523,8 +524,22 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		EPackage.Registry.INSTANCE.remove(example3.kiamacs.KiamacsPackage.eNS_URI);
 	}
 
+	/*	@Test
+	public void testExample3_CG2() throws Exception {
+		EPackage.Registry.INSTANCE.put(example3.kiamaas.KiamaasPackage.eNS_URI, example3.kiamaas.KiamaasPackage.eINSTANCE);
+		EPackage.Registry.INSTANCE.put(example3.kiamacs.KiamacsPackage.eNS_URI, example3.kiamacs.KiamacsPackage.eINSTANCE);
+		AbstractTransformer.INVOCATIONS.setState(true);
+		MyQVT myQVT = new MyQVT("example3");
+		Class<? extends Transformer> txClass = KiamaRewrite_qvtp_qvtcas.class;
+		myQVT.executeModelsTX_CG(txClass, "model1");
+		myQVT.dispose();
+		EPackage.Registry.INSTANCE.remove(example3.kiamaas.KiamaasPackage.eNS_URI);
+		EPackage.Registry.INSTANCE.remove(example3.kiamacs.KiamacsPackage.eNS_URI);
+	} */
+
 	@Test
 	public void testExample3_Interpreted() throws Exception {
+		AbstractTransformer.INVOCATIONS.setState(true);
 		MyQVT myQVT = new MyQVT("example3");
 		myQVT.loadGenModels("KiamaAS.genmodel", "KiamaCS.genmodel");
 		ImperativeTransformation tx = myQVT.executeNewOCL2QVTi_CompilerChain("KiamaRewrite.ocl");

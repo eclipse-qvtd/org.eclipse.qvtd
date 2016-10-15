@@ -60,7 +60,7 @@ public abstract class AbstractIntervalInternal implements Interval
 	private @Nullable AbstractInvocationInternal blockedInvocations = null;
 
 	/**
-	 * Head of doubly linked list of unblocked invocations waiting for a re-execution attempt.
+	 * Head of doubly linked list of unblocked invocations waiting for an execution attempt.
 	 */
 	private @Nullable AbstractInvocationInternal waitingInvocations = null;
 
@@ -78,6 +78,10 @@ public abstract class AbstractIntervalInternal implements Interval
 	private synchronized void block(@NonNull Invocation invocation, @NonNull SlotState slotState) {
 		AbstractInvocationInternal castInvocation = (AbstractInvocationInternal) invocation;
 		assert castInvocation.debug_blockedBy == null;
+		assert castInvocation.next == castInvocation;
+		assert castInvocation.prev == castInvocation;
+		assert blockedInvocations != castInvocation;
+		assert waitingInvocations != castInvocation;
 		castInvocation.debug_blockedBy = slotState;
 		AbstractInvocationInternal blockedInvocations2 = blockedInvocations;
 		if (blockedInvocations2 == null) {
@@ -93,9 +97,9 @@ public abstract class AbstractIntervalInternal implements Interval
 	}
 
 	@Override
-	public @NonNull Connection createConnection(@NonNull String name, @NonNull CollectionTypeId typeId, boolean isEnforced) {
+	public @NonNull Connection createConnection(@NonNull String name, @NonNull CollectionTypeId typeId, boolean isStrict) {
 		Connection connection;
-		if (isEnforced) {
+		if (isStrict) {
 			connection = new EnforcedConnection(this, name, typeId);
 		}
 		else {
@@ -138,9 +142,17 @@ public abstract class AbstractIntervalInternal implements Interval
 			}
 			if (invocation != null) {
 				if (debugInvocations) {
-					AbstractTransformer.INVOCATIONS.println("re-invoke " + invocation);
+					AbstractTransformer.INVOCATIONS.println("invoke " + invocation);
 				}
-				invoke(invocation, false);
+				try {
+					invocation.execute();
+					if (debugInvocations) {
+						AbstractTransformer.INVOCATIONS.println("done " + invocation);
+					}
+				}
+				catch (InvocationFailedException e) {
+					block(invocation, e.slotState);
+				}
 			}
 		}
 		AbstractInvocationInternal blockedInvocation = blockedInvocations;
@@ -175,41 +187,6 @@ public abstract class AbstractIntervalInternal implements Interval
 	@Override
 	public @NonNull String getName() {
 		return String.valueOf(intervalIndex);
-	}
-
-	@Override
-	public void invoke(@NonNull Invocation invocation, boolean doFlush) {
-		try {
-			invocation.execute();
-			if (debugInvocations) {
-				AbstractTransformer.INVOCATIONS.println("done " + invocation);
-			}
-			if (doFlush) {
-				while (waitingInvocations != null) {
-					AbstractInvocationInternal invocation2 = null;
-					synchronized (this) {
-						AbstractInvocationInternal waitingInvocations2 = waitingInvocations;
-						if (waitingInvocations2 != null) {
-							invocation2 = waitingInvocations2;
-							waitingInvocations = waitingInvocations2.next;
-							if (waitingInvocations == invocation2) {
-								waitingInvocations = null;
-							}
-							invocation2.remove();
-						}
-					}
-					if (invocation2 != null) {
-						if (debugInvocations) {
-							AbstractTransformer.INVOCATIONS.println("re-invoke " + invocation2);
-						}
-						invoke(invocation2, false);
-					}
-				}
-			}
-		}
-		catch (InvocationFailedException e) {
-			block(invocation, e.slotState);
-		}
 	}
 
 	@Override
@@ -250,6 +227,7 @@ public abstract class AbstractIntervalInternal implements Interval
 
 	@Override
 	public synchronized void queue(@NonNull Invocation invocation) {
+		assert invocation.getInterval() == this;
 		if (debugInvocations) {
 			AbstractTransformer.INVOCATIONS.println("queue " + invocation);
 		}
@@ -263,7 +241,7 @@ public abstract class AbstractIntervalInternal implements Interval
 		else {
 			castInvocation.insertAfter(waitingInvocations2.prev);
 		}
-		//		queue();
+		queue();
 	}
 
 	@Override
@@ -283,27 +261,27 @@ public abstract class AbstractIntervalInternal implements Interval
 		s.append(i);
 		s.append(" connections, ");
 		int j = 0;
-		for (AbstractInvocationInternal anInvocation = blockedInvocations; anInvocation != null; anInvocation = anInvocation.next) {
+		AbstractInvocationInternal blockedInvocation = blockedInvocations;
+		if (blockedInvocation != null) {
 			j++;
-			if (j > 100) {
-				j = 999999;
-				break;
-			}
-			if (anInvocation == blockedInvocations) {
-				break;
+			while ((blockedInvocation = blockedInvocation.next) != blockedInvocations) {
+				if (++j > 100) {
+					j = 999999;
+					break;
+				}
 			}
 		}
 		s.append(j);
 		s.append(" blocked, ");
 		int k = 0;
-		for (AbstractInvocationInternal anInvocation = waitingInvocations; anInvocation != null; anInvocation = anInvocation.next) {
+		AbstractInvocationInternal waitingInvocation = waitingInvocations;
+		if (waitingInvocation != null) {
 			k++;
-			if (k > 100) {
-				k = 999999;
-				break;
-			}
-			if (anInvocation == waitingInvocations) {
-				break;
+			while ((waitingInvocation = waitingInvocation.next) != waitingInvocations) {
+				if (++k > 100) {
+					k = 999999;
+					break;
+				}
 			}
 		}
 		s.append(k);
@@ -333,6 +311,6 @@ public abstract class AbstractIntervalInternal implements Interval
 		else {
 			castInvocation.insertAfter(waitingInvocations2.prev);
 		}
-		//		queue();
+		queue();
 	}
 }

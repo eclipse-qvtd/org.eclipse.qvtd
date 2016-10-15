@@ -566,7 +566,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 		}
 		CGVariable cgVariable = getVariable(asVariable);
 		OCLExpression asInitValue = asAddStatement.getOwnedExpression();
-		assert (cgVariable instanceof CGConnectionVariable) || (cgVariable instanceof CGAccumulator);
+		assert cgVariable instanceof CGConnectionVariable;
 		CGValuedElement initValue = doVisit(CGValuedElement.class, asInitValue);
 		CGConnectionAssignment cgConnectionAssignment = QVTiCGModelFactory.eINSTANCE.createCGConnectionAssignment();
 		cgConnectionAssignment.setConnectionVariable(cgVariable);

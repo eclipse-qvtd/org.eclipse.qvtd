@@ -13,6 +13,7 @@ package org.eclipse.qvtd.codegen.utilities;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGAccumulator;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
 import org.eclipse.ocl.examples.codegen.utilities.CGUtil;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
@@ -31,5 +32,9 @@ public class QVTiCGUtil extends CGUtil
 
 	public static @NonNull String getName(@NonNull CGMapping cgMapping) {
 		return ClassUtil.nonNullState(cgMapping.getName());
+	}
+
+	public static @NonNull String getName(@NonNull CGAccumulator cgAccumulator) {
+		return ClassUtil.nonNullState(cgAccumulator.getName());
 	}
 }

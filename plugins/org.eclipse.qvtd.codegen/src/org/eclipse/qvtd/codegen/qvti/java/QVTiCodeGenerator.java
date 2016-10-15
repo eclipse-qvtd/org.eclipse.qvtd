@@ -204,7 +204,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 	public @NonNull String generateClassFile() {
 		String javaSourceCode2 = javaSourceCode;
 		if (javaSourceCode2 == null) {
-			javaSourceCode = javaSourceCode2 = CGUtil.compressJDTannotations(createClassFileContent());
+			javaSourceCode = javaSourceCode2 = CGUtil.trimLines(CGUtil.compressJDTannotations(createClassFileContent()));
 		}
 		return javaSourceCode2;
 	}

@@ -46,9 +46,8 @@ import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.ocl.pivot.values.SetValue;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTypedModelInstance;
+import org.eclipse.qvtd.runtime.evaluation.Connection;
 import org.eclipse.qvtd.runtime.evaluation.ExecutionVisitable;
-import org.eclipse.qvtd.runtime.evaluation.Invocation;
-import org.eclipse.qvtd.runtime.evaluation.InvocationConstructor;
 import org.eclipse.qvtd.runtime.evaluation.InvocationFailedException;
 import org.eclipse.qvtd.runtime.evaluation.InvocationManager;
 import org.eclipse.qvtd.runtime.evaluation.ObjectManager;
@@ -529,6 +528,10 @@ public abstract class AbstractTransformerInternal extends AbstractModelManager i
 		models[modelIndex].addRootObjects(eRootObjects);
 	}
 
+	protected @NonNull Connection createConnection(@NonNull String name, @NonNull CollectionTypeId typeId, boolean isStrict) {
+		return invocationManager.getRootInterval().createConnection(name, typeId, isStrict);
+	}
+
 	/**
 	 * Create the evaluationCache. Creates a EvaluationCache by default.
 	 */
@@ -737,29 +740,4 @@ public abstract class AbstractTransformerInternal extends AbstractModelManager i
 			constructor.addAppendedConnection(appendedConnection);
 		}
 	} */
-
-	/**
-	 * Invoke a mapping with the given constructor with a given set of boundValues once. This shortform of invokeOnce
-	 * should only be used when it is known that recursive invocation is impossible.
-	 */
-	public <@Nullable T extends Invocation> void invoke(@NonNull InvocationConstructor constructor, @NonNull Object @NonNull ... boundValues) {
-		@NonNull Invocation invocation = constructor.getInstance(boundValues);
-		if (debugInvocations) {
-			AbstractTransformer.INVOCATIONS.println("invoke " + invocation);
-		}
-		invocation.invokeInternal(true);
-	}
-
-	/**
-	 * Invoke a mapping with the given constructor with a given set of boundValues once. Repeated invocation attempts are ignored.
-	 */
-	public void invokeOnce(@NonNull InvocationConstructor constructor, @NonNull Object @NonNull ... boundValues) {
-		@Nullable Invocation invocation = constructor.getFirstInvocation(boundValues);
-		if (invocation != null) {
-			if (debugInvocations) {
-				AbstractTransformer.INVOCATIONS.println("invokeOnce " + invocation);
-			}
-			invocation.invokeInternal(true);
-		}
-	}
 }

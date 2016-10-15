@@ -11,7 +11,9 @@
 package org.eclipse.qvtd.runtime.internal.evaluation;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -35,6 +37,38 @@ import org.eclipse.qvtd.runtime.evaluation.InvocationConstructor;
  */
 public abstract class AbstractConnectionInternal implements Connection
 {
+	protected final class ValueIterator<T> implements Iterator<T> {
+
+		private final int size = listOfValueAndConsumingInvocations.size();
+
+		private int cursor = next(0);
+
+		@Override
+		public boolean hasNext() {
+			return cursor < size;
+		}
+
+		@Override
+		public @NonNull T next() {
+			List<@NonNull Object> valueAndConsumingInvocations = listOfValueAndConsumingInvocations.get(cursor);
+			if (valueAndConsumingInvocations == null) {
+				throw new NoSuchElementException();
+			}
+			cursor = next(cursor+1);
+			return (T) valueAndConsumingInvocations.get(VALUE_INDEX);
+		}
+
+		private int next(int i) {
+			while (i < size) {
+				if (listOfValueAndConsumingInvocations.get(i) != null) {
+					return i;
+				}
+				i++;
+			}
+			return size;
+		}
+	}
+
 	protected static final int VALUE_INDEX = 0;
 	protected static final int INDEX_INDEX = 1;
 	protected static final int COUNT_INDEX = 2;
@@ -214,5 +248,16 @@ public abstract class AbstractConnectionInternal implements Connection
 		s.append(listOfValueAndConsumingInvocations.size());
 		s.append("]");
 		return s.toString();
+	}
+
+	@Override
+	public <@NonNull T> @NonNull Iterable<T> typedIterable(Class<T> elementClass) {
+		return new Iterable<T>()
+		{
+			@Override
+			public Iterator<@NonNull T> iterator() {
+				return new ValueIterator<T>();
+			}
+		};
 	}
 }
