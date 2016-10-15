@@ -146,6 +146,7 @@ public abstract class AbstractQVTimperativeSyntacticSequencer extends AbstractSy
 	 * |	'query'
 	 * |	'realize'
 	 * |	'refines'
+	 * |	'strict'
 	 * |	'transformation'
 	 * |	'uses'
 	 * ;

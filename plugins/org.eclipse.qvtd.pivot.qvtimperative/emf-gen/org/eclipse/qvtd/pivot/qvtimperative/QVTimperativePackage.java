@@ -508,13 +508,22 @@ public interface QVTimperativePackage extends EPackage {
 	int CONNECTION_VARIABLE__TYPE_VALUE = PivotPackage.VARIABLE_DECLARATION__TYPE_VALUE;
 
 	/**
+	 * The feature id for the '<em><b>Is Strict</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONNECTION_VARIABLE__IS_STRICT = PivotPackage.VARIABLE_DECLARATION_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>Connection Variable</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONNECTION_VARIABLE_FEATURE_COUNT = PivotPackage.VARIABLE_DECLARATION_FEATURE_COUNT + 0;
+	int CONNECTION_VARIABLE_FEATURE_COUNT = PivotPackage.VARIABLE_DECLARATION_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -596,6 +605,15 @@ public interface QVTimperativePackage extends EPackage {
 	 * @ordered
 	 */
 	int APPEND_PARAMETER__TYPE_VALUE = CONNECTION_VARIABLE__TYPE_VALUE;
+
+	/**
+	 * The feature id for the '<em><b>Is Strict</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APPEND_PARAMETER__IS_STRICT = CONNECTION_VARIABLE__IS_STRICT;
 
 	/**
 	 * The number of structural features of the '<em>Append Parameter</em>' class.
@@ -891,6 +909,15 @@ public interface QVTimperativePackage extends EPackage {
 	 * @ordered
 	 */
 	int BUFFER_STATEMENT__TYPE_VALUE = CONNECTION_VARIABLE__TYPE_VALUE;
+
+	/**
+	 * The feature id for the '<em><b>Is Strict</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUFFER_STATEMENT__IS_STRICT = CONNECTION_VARIABLE__IS_STRICT;
 
 	/**
 	 * The feature id for the '<em><b>Observed Properties</b></em>' reference list.
@@ -2254,13 +2281,22 @@ public interface QVTimperativePackage extends EPackage {
 	int MAPPING__OVERRIDDEN = QVTbasePackage.RULE__OVERRIDDEN;
 
 	/**
+	 * The feature id for the '<em><b>Is Strict</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING__IS_STRICT = QVTbasePackage.RULE_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Owned Parameters</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING__OWNED_PARAMETERS = QVTbasePackage.RULE_FEATURE_COUNT + 0;
+	int MAPPING__OWNED_PARAMETERS = QVTbasePackage.RULE_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Owned Statements</b></em>' containment reference list.
@@ -2269,7 +2305,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING__OWNED_STATEMENTS = QVTbasePackage.RULE_FEATURE_COUNT + 1;
+	int MAPPING__OWNED_STATEMENTS = QVTbasePackage.RULE_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Mapping</em>' class.
@@ -2278,7 +2314,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_FEATURE_COUNT = QVTbasePackage.RULE_FEATURE_COUNT + 2;
+	int MAPPING_FEATURE_COUNT = QVTbasePackage.RULE_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -2335,22 +2371,13 @@ public interface QVTimperativePackage extends EPackage {
 	int MAPPING_CALL__BINDING = MAPPING_STATEMENT_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Is Infinite</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAPPING_CALL__IS_INFINITE = MAPPING_STATEMENT_FEATURE_COUNT + 1;
-
-	/**
 	 * The feature id for the '<em><b>Is Install</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_CALL__IS_INSTALL = MAPPING_STATEMENT_FEATURE_COUNT + 2;
+	int MAPPING_CALL__IS_INSTALL = MAPPING_STATEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Is Invoke</b></em>' attribute.
@@ -2359,7 +2386,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_CALL__IS_INVOKE = MAPPING_STATEMENT_FEATURE_COUNT + 3;
+	int MAPPING_CALL__IS_INVOKE = MAPPING_STATEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Referred Mapping</b></em>' reference.
@@ -2368,7 +2395,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_CALL__REFERRED_MAPPING = MAPPING_STATEMENT_FEATURE_COUNT + 4;
+	int MAPPING_CALL__REFERRED_MAPPING = MAPPING_STATEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Mapping Call</em>' class.
@@ -2377,7 +2404,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_CALL_FEATURE_COUNT = MAPPING_STATEMENT_FEATURE_COUNT + 5;
+	int MAPPING_CALL_FEATURE_COUNT = MAPPING_STATEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -3041,6 +3068,17 @@ public interface QVTimperativePackage extends EPackage {
 	EClass getConnectionVariable();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable#isIsStrict <em>Is Strict</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Is Strict</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable#isIsStrict()
+	 * @see #getConnectionVariable()
+	 * @generated
+	 */
+	EAttribute getConnectionVariable_IsStrict();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement <em>Declare Statement</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3241,6 +3279,17 @@ public interface QVTimperativePackage extends EPackage {
 	EClass getMapping();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtimperative.Mapping#isIsStrict <em>Is Strict</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Is Strict</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.Mapping#isIsStrict()
+	 * @see #getMapping()
+	 * @generated
+	 */
+	EAttribute getMapping_IsStrict();
+
+	/**
 	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.pivot.qvtimperative.Mapping#getOwnedParameters <em>Owned Parameters</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3293,17 +3342,6 @@ public interface QVTimperativePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getMappingCall_Binding();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtimperative.MappingCall#isIsInfinite <em>Is Infinite</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Is Infinite</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.MappingCall#isIsInfinite()
-	 * @see #getMappingCall()
-	 * @generated
-	 */
-	EAttribute getMappingCall_IsInfinite();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtimperative.MappingCall#isIsInstall <em>Is Install</em>}'.
@@ -3744,6 +3782,14 @@ public interface QVTimperativePackage extends EPackage {
 		EClass CONNECTION_VARIABLE = eINSTANCE.getConnectionVariable();
 
 		/**
+		 * The meta object literal for the '<em><b>Is Strict</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CONNECTION_VARIABLE__IS_STRICT = eINSTANCE.getConnectionVariable_IsStrict();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.DeclareStatementImpl <em>Declare Statement</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3914,6 +3960,14 @@ public interface QVTimperativePackage extends EPackage {
 		EClass MAPPING = eINSTANCE.getMapping();
 
 		/**
+		 * The meta object literal for the '<em><b>Is Strict</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MAPPING__IS_STRICT = eINSTANCE.getMapping_IsStrict();
+
+		/**
 		 * The meta object literal for the '<em><b>Owned Parameters</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3954,14 +4008,6 @@ public interface QVTimperativePackage extends EPackage {
 		 * @generated
 		 */
 		EReference MAPPING_CALL__BINDING = eINSTANCE.getMappingCall_Binding();
-
-		/**
-		 * The meta object literal for the '<em><b>Is Infinite</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute MAPPING_CALL__IS_INFINITE = eINSTANCE.getMappingCall_IsInfinite();
 
 		/**
 		 * The meta object literal for the '<em><b>Is Install</b></em>' attribute feature.

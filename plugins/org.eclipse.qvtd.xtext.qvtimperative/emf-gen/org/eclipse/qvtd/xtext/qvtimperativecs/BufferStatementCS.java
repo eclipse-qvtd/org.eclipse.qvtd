@@ -27,6 +27,7 @@ import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
  * The following features are supported:
  * </p>
  * <ul>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.BufferStatementCS#isIsStrict <em>Is Strict</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.BufferStatementCS#getOwnedExpression <em>Owned Expression</em>}</li>
  * </ul>
  *
@@ -35,6 +36,33 @@ import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
  * @generated
  */
 public interface BufferStatementCS extends TypedElementCS, StatementCS {
+	/**
+	 * Returns the value of the '<em><b>Is Strict</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Is Strict</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Is Strict</em>' attribute.
+	 * @see #setIsStrict(boolean)
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getBufferStatementCS_IsStrict()
+	 * @model default="false"
+	 * @generated
+	 */
+	boolean isIsStrict();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.BufferStatementCS#isIsStrict <em>Is Strict</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Is Strict</em>' attribute.
+	 * @see #isIsStrict()
+	 * @generated
+	 */
+	void setIsStrict(boolean value);
+
 	/**
 	 * Returns the value of the '<em><b>Owned Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

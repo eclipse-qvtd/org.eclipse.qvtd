@@ -12,10 +12,12 @@ package org.eclipse.qvtd.pivot.qvtimperative.impl;
 
 import java.util.Collection;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
@@ -35,6 +37,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingImpl#isIsStrict <em>Is Strict</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingImpl#getOwnedParameters <em>Owned Parameters</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingImpl#getOwnedStatements <em>Owned Statements</em>}</li>
  * </ul>
@@ -42,6 +45,26 @@ import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
  * @generated
  */
 public class MappingImpl extends RuleImpl implements Mapping {
+	/**
+	 * The default value of the '{@link #isIsStrict() <em>Is Strict</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsStrict()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean IS_STRICT_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isIsStrict() <em>Is Strict</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsStrict()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean isStrict = IS_STRICT_EDEFAULT;
+
 	/**
 	 * The cached value of the '{@link #getOwnedParameters() <em>Owned Parameters</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -87,6 +110,29 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	 * @generated
 	 */
 	@Override
+	public boolean isIsStrict() {
+		return isStrict;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setIsStrict(boolean newIsStrict) {
+		boolean oldIsStrict = isStrict;
+		isStrict = newIsStrict;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.MAPPING__IS_STRICT, oldIsStrict, isStrict));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EList<MappingParameter> getOwnedParameters() {
 		if (ownedParameters == null) {
 			ownedParameters = new EObjectContainmentEList<MappingParameter>(MappingParameter.class, this, QVTimperativePackage.MAPPING__OWNED_PARAMETERS);
@@ -113,6 +159,16 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	 * @generated
 	 */
 	@Override
+	public String toString() {
+		return super.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case QVTimperativePackage.MAPPING__OWNED_PARAMETERS:
@@ -131,6 +187,8 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case QVTimperativePackage.MAPPING__IS_STRICT:
+				return isIsStrict();
 			case QVTimperativePackage.MAPPING__OWNED_PARAMETERS:
 				return getOwnedParameters();
 			case QVTimperativePackage.MAPPING__OWNED_STATEMENTS:
@@ -148,6 +206,9 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case QVTimperativePackage.MAPPING__IS_STRICT:
+				setIsStrict((Boolean)newValue);
+				return;
 			case QVTimperativePackage.MAPPING__OWNED_PARAMETERS:
 				getOwnedParameters().clear();
 				getOwnedParameters().addAll((Collection<? extends MappingParameter>)newValue);
@@ -168,6 +229,9 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case QVTimperativePackage.MAPPING__IS_STRICT:
+				setIsStrict(IS_STRICT_EDEFAULT);
+				return;
 			case QVTimperativePackage.MAPPING__OWNED_PARAMETERS:
 				getOwnedParameters().clear();
 				return;
@@ -186,6 +250,8 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case QVTimperativePackage.MAPPING__IS_STRICT:
+				return isStrict != IS_STRICT_EDEFAULT;
 			case QVTimperativePackage.MAPPING__OWNED_PARAMETERS:
 				return ownedParameters != null && !ownedParameters.isEmpty();
 			case QVTimperativePackage.MAPPING__OWNED_STATEMENTS:

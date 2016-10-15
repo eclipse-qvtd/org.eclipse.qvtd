@@ -28,6 +28,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Rule;
  * The following features are supported:
  * </p>
  * <ul>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.Mapping#isIsStrict <em>Is Strict</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.Mapping#getOwnedParameters <em>Owned Parameters</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.Mapping#getOwnedStatements <em>Owned Statements</em>}</li>
  * </ul>
@@ -36,6 +37,33 @@ import org.eclipse.qvtd.pivot.qvtbase.Rule;
  * @generated
  */
 public interface Mapping extends Rule {
+	/**
+	 * Returns the value of the '<em><b>Is Strict</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Repeated invocations of a strict Mapping are suppressed at run-time.
+	 * 
+	 * Repeated invocations of a not-strict Mapping are guaranteed not to occur.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Is Strict</em>' attribute.
+	 * @see #setIsStrict(boolean)
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getMapping_IsStrict()
+	 * @generated
+	 */
+	boolean isIsStrict();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtimperative.Mapping#isIsStrict <em>Is Strict</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Is Strict</em>' attribute.
+	 * @see #isIsStrict()
+	 * @generated
+	 */
+	void setIsStrict(boolean value);
+
 	/**
 	 * Returns the value of the '<em><b>Owned Parameters</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.pivot.qvtimperative.MappingParameter}.

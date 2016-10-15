@@ -965,13 +965,22 @@ public interface QVTimperativeCSPackage extends EPackage {
 	int BUFFER_STATEMENT_CS__QUALIFIERS = BaseCSPackage.TYPED_ELEMENT_CS__QUALIFIERS;
 
 	/**
+	 * The feature id for the '<em><b>Is Strict</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUFFER_STATEMENT_CS__IS_STRICT = BaseCSPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Owned Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BUFFER_STATEMENT_CS__OWNED_EXPRESSION = BaseCSPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 0;
+	int BUFFER_STATEMENT_CS__OWNED_EXPRESSION = BaseCSPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Buffer Statement CS</em>' class.
@@ -980,7 +989,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BUFFER_STATEMENT_CS_FEATURE_COUNT = BaseCSPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 1;
+	int BUFFER_STATEMENT_CS_FEATURE_COUNT = BaseCSPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -1731,13 +1740,22 @@ public interface QVTimperativeCSPackage extends EPackage {
 	int MAPPING_CS__NAME = BaseCSPackage.NAMED_ELEMENT_CS__NAME;
 
 	/**
+	 * The feature id for the '<em><b>Is Strict</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_CS__IS_STRICT = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Owned In Path Name</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_CS__OWNED_IN_PATH_NAME = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 0;
+	int MAPPING_CS__OWNED_IN_PATH_NAME = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Owned Parameters</b></em>' containment reference list.
@@ -1746,7 +1764,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_CS__OWNED_PARAMETERS = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 1;
+	int MAPPING_CS__OWNED_PARAMETERS = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Owned Statements</b></em>' containment reference list.
@@ -1755,7 +1773,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_CS__OWNED_STATEMENTS = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 2;
+	int MAPPING_CS__OWNED_STATEMENTS = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Mapping CS</em>' class.
@@ -1764,7 +1782,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_CS_FEATURE_COUNT = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 3;
+	int MAPPING_CS_FEATURE_COUNT = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -1812,22 +1830,13 @@ public interface QVTimperativeCSPackage extends EPackage {
 	int MAPPING_CALL_CS__OWNED_ANNOTATIONS = MAPPING_STATEMENT_CS__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Is Infinite</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAPPING_CALL_CS__IS_INFINITE = MAPPING_STATEMENT_CS_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Is Install</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_CALL_CS__IS_INSTALL = MAPPING_STATEMENT_CS_FEATURE_COUNT + 1;
+	int MAPPING_CALL_CS__IS_INSTALL = MAPPING_STATEMENT_CS_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Is Invoke</b></em>' attribute.
@@ -1836,7 +1845,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_CALL_CS__IS_INVOKE = MAPPING_STATEMENT_CS_FEATURE_COUNT + 2;
+	int MAPPING_CALL_CS__IS_INVOKE = MAPPING_STATEMENT_CS_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Owned Bindings</b></em>' containment reference list.
@@ -1845,7 +1854,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_CALL_CS__OWNED_BINDINGS = MAPPING_STATEMENT_CS_FEATURE_COUNT + 3;
+	int MAPPING_CALL_CS__OWNED_BINDINGS = MAPPING_STATEMENT_CS_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Owned Path Name</b></em>' containment reference.
@@ -1854,7 +1863,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_CALL_CS__OWNED_PATH_NAME = MAPPING_STATEMENT_CS_FEATURE_COUNT + 4;
+	int MAPPING_CALL_CS__OWNED_PATH_NAME = MAPPING_STATEMENT_CS_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Referred Mapping</b></em>' reference.
@@ -1863,7 +1872,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_CALL_CS__REFERRED_MAPPING = MAPPING_STATEMENT_CS_FEATURE_COUNT + 5;
+	int MAPPING_CALL_CS__REFERRED_MAPPING = MAPPING_STATEMENT_CS_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>Mapping Call CS</em>' class.
@@ -1872,7 +1881,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_CALL_CS_FEATURE_COUNT = MAPPING_STATEMENT_CS_FEATURE_COUNT + 6;
+	int MAPPING_CALL_CS_FEATURE_COUNT = MAPPING_STATEMENT_CS_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -3110,6 +3119,17 @@ public interface QVTimperativeCSPackage extends EPackage {
 	EClass getBufferStatementCS();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.xtext.qvtimperativecs.BufferStatementCS#isIsStrict <em>Is Strict</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Is Strict</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.BufferStatementCS#isIsStrict()
+	 * @see #getBufferStatementCS()
+	 * @generated
+	 */
+	EAttribute getBufferStatementCS_IsStrict();
+
+	/**
 	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtimperativecs.BufferStatementCS#getOwnedExpression <em>Owned Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3334,6 +3354,17 @@ public interface QVTimperativeCSPackage extends EPackage {
 	EClass getMappingCS();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS#isIsStrict <em>Is Strict</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Is Strict</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS#isIsStrict()
+	 * @see #getMappingCS()
+	 * @generated
+	 */
+	EAttribute getMappingCS_IsStrict();
+
+	/**
 	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS#getOwnedInPathName <em>Owned In Path Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3375,17 +3406,6 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getMappingCallCS();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallCS#isIsInfinite <em>Is Infinite</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Is Infinite</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallCS#isIsInfinite()
-	 * @see #getMappingCallCS()
-	 * @generated
-	 */
-	EAttribute getMappingCallCS_IsInfinite();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallCS#isIsInstall <em>Is Install</em>}'.
@@ -3952,6 +3972,14 @@ public interface QVTimperativeCSPackage extends EPackage {
 		EClass BUFFER_STATEMENT_CS = eINSTANCE.getBufferStatementCS();
 
 		/**
+		 * The meta object literal for the '<em><b>Is Strict</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute BUFFER_STATEMENT_CS__IS_STRICT = eINSTANCE.getBufferStatementCS_IsStrict();
+
+		/**
 		 * The meta object literal for the '<em><b>Owned Expression</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -4134,6 +4162,14 @@ public interface QVTimperativeCSPackage extends EPackage {
 		EClass MAPPING_CS = eINSTANCE.getMappingCS();
 
 		/**
+		 * The meta object literal for the '<em><b>Is Strict</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MAPPING_CS__IS_STRICT = eINSTANCE.getMappingCS_IsStrict();
+
+		/**
 		 * The meta object literal for the '<em><b>Owned In Path Name</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -4166,14 +4202,6 @@ public interface QVTimperativeCSPackage extends EPackage {
 		 * @generated
 		 */
 		EClass MAPPING_CALL_CS = eINSTANCE.getMappingCallCS();
-
-		/**
-		 * The meta object literal for the '<em><b>Is Infinite</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute MAPPING_CALL_CS__IS_INFINITE = eINSTANCE.getMappingCallCS_IsInfinite();
 
 		/**
 		 * The meta object literal for the '<em><b>Is Install</b></em>' attribute feature.

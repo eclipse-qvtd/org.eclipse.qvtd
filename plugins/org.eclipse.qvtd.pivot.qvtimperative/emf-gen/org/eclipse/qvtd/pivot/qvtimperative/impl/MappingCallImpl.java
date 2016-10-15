@@ -38,7 +38,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingCallImpl#getBinding <em>Binding</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingCallImpl#isIsInfinite <em>Is Infinite</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingCallImpl#isIsInstall <em>Is Install</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingCallImpl#isIsInvoke <em>Is Invoke</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingCallImpl#getReferredMapping <em>Referred Mapping</em>}</li>
@@ -56,26 +55,6 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 	 * @ordered
 	 */
 	protected EList<MappingParameterBinding> binding;
-
-	/**
-	 * The default value of the '{@link #isIsInfinite() <em>Is Infinite</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isIsInfinite()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean IS_INFINITE_EDEFAULT = false;
-
-	/**
-	 * The cached value of the '{@link #isIsInfinite() <em>Is Infinite</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isIsInfinite()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean isInfinite = IS_INFINITE_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #isIsInstall() <em>Is Install</em>}' attribute.
@@ -215,29 +194,6 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 	 * @generated
 	 */
 	@Override
-	public boolean isIsInfinite() {
-		return isInfinite;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setIsInfinite(boolean newIsInfinite) {
-		boolean oldIsInfinite = isInfinite;
-		isInfinite = newIsInfinite;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.MAPPING_CALL__IS_INFINITE, oldIsInfinite, isInfinite));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public boolean isIsInstall() {
 		return isInstall;
 	}
@@ -317,8 +273,6 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 		switch (featureID) {
 			case QVTimperativePackage.MAPPING_CALL__BINDING:
 				return getBinding();
-			case QVTimperativePackage.MAPPING_CALL__IS_INFINITE:
-				return isIsInfinite();
 			case QVTimperativePackage.MAPPING_CALL__IS_INSTALL:
 				return isIsInstall();
 			case QVTimperativePackage.MAPPING_CALL__IS_INVOKE:
@@ -342,9 +296,6 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 			case QVTimperativePackage.MAPPING_CALL__BINDING:
 				getBinding().clear();
 				getBinding().addAll((Collection<? extends MappingParameterBinding>)newValue);
-				return;
-			case QVTimperativePackage.MAPPING_CALL__IS_INFINITE:
-				setIsInfinite((Boolean)newValue);
 				return;
 			case QVTimperativePackage.MAPPING_CALL__IS_INSTALL:
 				setIsInstall((Boolean)newValue);
@@ -370,9 +321,6 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 			case QVTimperativePackage.MAPPING_CALL__BINDING:
 				getBinding().clear();
 				return;
-			case QVTimperativePackage.MAPPING_CALL__IS_INFINITE:
-				setIsInfinite(IS_INFINITE_EDEFAULT);
-				return;
 			case QVTimperativePackage.MAPPING_CALL__IS_INSTALL:
 				setIsInstall(IS_INSTALL_EDEFAULT);
 				return;
@@ -396,8 +344,6 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 		switch (featureID) {
 			case QVTimperativePackage.MAPPING_CALL__BINDING:
 				return binding != null && !binding.isEmpty();
-			case QVTimperativePackage.MAPPING_CALL__IS_INFINITE:
-				return isInfinite != IS_INFINITE_EDEFAULT;
 			case QVTimperativePackage.MAPPING_CALL__IS_INSTALL:
 				return isInstall != IS_INSTALL_EDEFAULT;
 			case QVTimperativePackage.MAPPING_CALL__IS_INVOKE:

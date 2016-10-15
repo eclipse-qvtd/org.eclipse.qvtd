@@ -37,7 +37,6 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCallCSImpl#isIsInfinite <em>Is Infinite</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCallCSImpl#isIsInstall <em>Is Install</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCallCSImpl#isIsInvoke <em>Is Invoke</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCallCSImpl#getOwnedBindings <em>Owned Bindings</em>}</li>
@@ -48,26 +47,6 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
  * @generated
  */
 public class MappingCallCSImpl extends MappingStatementCSImpl implements MappingCallCS {
-	/**
-	 * The default value of the '{@link #isIsInfinite() <em>Is Infinite</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isIsInfinite()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean IS_INFINITE_EDEFAULT = false;
-
-	/**
-	 * The cached value of the '{@link #isIsInfinite() <em>Is Infinite</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isIsInfinite()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean isInfinite = IS_INFINITE_EDEFAULT;
-
 	/**
 	 * The default value of the '{@link #isIsInstall() <em>Is Install</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -155,29 +134,6 @@ public class MappingCallCSImpl extends MappingStatementCSImpl implements Mapping
 	@Override
 	protected EClass eStaticClass() {
 		return QVTimperativeCSPackage.Literals.MAPPING_CALL_CS;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public boolean isIsInfinite() {
-		return isInfinite;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setIsInfinite(boolean newIsInfinite) {
-		boolean oldIsInfinite = isInfinite;
-		isInfinite = newIsInfinite;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.MAPPING_CALL_CS__IS_INFINITE, oldIsInfinite, isInfinite));
 	}
 
 	/**
@@ -356,8 +312,6 @@ public class MappingCallCSImpl extends MappingStatementCSImpl implements Mapping
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.MAPPING_CALL_CS__IS_INFINITE:
-				return isIsInfinite();
 			case QVTimperativeCSPackage.MAPPING_CALL_CS__IS_INSTALL:
 				return isIsInstall();
 			case QVTimperativeCSPackage.MAPPING_CALL_CS__IS_INVOKE:
@@ -381,9 +335,6 @@ public class MappingCallCSImpl extends MappingStatementCSImpl implements Mapping
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.MAPPING_CALL_CS__IS_INFINITE:
-				setIsInfinite((Boolean)newValue);
-				return;
 			case QVTimperativeCSPackage.MAPPING_CALL_CS__IS_INSTALL:
 				setIsInstall((Boolean)newValue);
 				return;
@@ -412,9 +363,6 @@ public class MappingCallCSImpl extends MappingStatementCSImpl implements Mapping
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.MAPPING_CALL_CS__IS_INFINITE:
-				setIsInfinite(IS_INFINITE_EDEFAULT);
-				return;
 			case QVTimperativeCSPackage.MAPPING_CALL_CS__IS_INSTALL:
 				setIsInstall(IS_INSTALL_EDEFAULT);
 				return;
@@ -442,8 +390,6 @@ public class MappingCallCSImpl extends MappingStatementCSImpl implements Mapping
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.MAPPING_CALL_CS__IS_INFINITE:
-				return isInfinite != IS_INFINITE_EDEFAULT;
 			case QVTimperativeCSPackage.MAPPING_CALL_CS__IS_INSTALL:
 				return isInstall != IS_INSTALL_EDEFAULT;
 			case QVTimperativeCSPackage.MAPPING_CALL_CS__IS_INVOKE:

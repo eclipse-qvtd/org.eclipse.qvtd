@@ -35,12 +35,31 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.BufferStatementCSImpl#isIsStrict <em>Is Strict</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.BufferStatementCSImpl#getOwnedExpression <em>Owned Expression</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class BufferStatementCSImpl extends TypedElementCSImpl implements BufferStatementCS {
+	/**
+	 * The default value of the '{@link #isIsStrict() <em>Is Strict</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsStrict()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean IS_STRICT_EDEFAULT = false;
+	/**
+	 * The cached value of the '{@link #isIsStrict() <em>Is Strict</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsStrict()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean isStrict = IS_STRICT_EDEFAULT;
 	/**
 	 * The cached value of the '{@link #getOwnedExpression() <em>Owned Expression</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -68,6 +87,29 @@ public class BufferStatementCSImpl extends TypedElementCSImpl implements BufferS
 	@Override
 	protected EClass eStaticClass() {
 		return QVTimperativeCSPackage.Literals.BUFFER_STATEMENT_CS;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean isIsStrict() {
+		return isStrict;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setIsStrict(boolean newIsStrict) {
+		boolean oldIsStrict = isStrict;
+		isStrict = newIsStrict;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.BUFFER_STATEMENT_CS__IS_STRICT, oldIsStrict, isStrict));
 	}
 
 	/**
@@ -121,6 +163,16 @@ public class BufferStatementCSImpl extends TypedElementCSImpl implements BufferS
 	 * @generated
 	 */
 	@Override
+	public String toString() {
+		return super.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case QVTimperativeCSPackage.BUFFER_STATEMENT_CS__OWNED_EXPRESSION:
@@ -137,6 +189,8 @@ public class BufferStatementCSImpl extends TypedElementCSImpl implements BufferS
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case QVTimperativeCSPackage.BUFFER_STATEMENT_CS__IS_STRICT:
+				return isIsStrict();
 			case QVTimperativeCSPackage.BUFFER_STATEMENT_CS__OWNED_EXPRESSION:
 				return getOwnedExpression();
 		}
@@ -151,6 +205,9 @@ public class BufferStatementCSImpl extends TypedElementCSImpl implements BufferS
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case QVTimperativeCSPackage.BUFFER_STATEMENT_CS__IS_STRICT:
+				setIsStrict((Boolean)newValue);
+				return;
 			case QVTimperativeCSPackage.BUFFER_STATEMENT_CS__OWNED_EXPRESSION:
 				setOwnedExpression((ExpCS)newValue);
 				return;
@@ -166,6 +223,9 @@ public class BufferStatementCSImpl extends TypedElementCSImpl implements BufferS
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case QVTimperativeCSPackage.BUFFER_STATEMENT_CS__IS_STRICT:
+				setIsStrict(IS_STRICT_EDEFAULT);
+				return;
 			case QVTimperativeCSPackage.BUFFER_STATEMENT_CS__OWNED_EXPRESSION:
 				setOwnedExpression((ExpCS)null);
 				return;
@@ -181,6 +241,8 @@ public class BufferStatementCSImpl extends TypedElementCSImpl implements BufferS
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case QVTimperativeCSPackage.BUFFER_STATEMENT_CS__IS_STRICT:
+				return isStrict != IS_STRICT_EDEFAULT;
 			case QVTimperativeCSPackage.BUFFER_STATEMENT_CS__OWNED_EXPRESSION:
 				return ownedExpression != null;
 		}

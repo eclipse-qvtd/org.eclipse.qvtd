@@ -23,7 +23,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallCS#isIsInfinite <em>Is Infinite</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallCS#isIsInstall <em>Is Install</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallCS#isIsInvoke <em>Is Invoke</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallCS#getOwnedBindings <em>Owned Bindings</em>}</li>
@@ -36,33 +35,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
  * @generated
  */
 public interface MappingCallCS extends MappingStatementCS {
-	/**
-	 * Returns the value of the '<em><b>Is Infinite</b></em>' attribute.
-	 * The default value is <code>"false"</code>.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Is Infinite</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Is Infinite</em>' attribute.
-	 * @see #setIsInfinite(boolean)
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getMappingCallCS_IsInfinite()
-	 * @model default="false"
-	 * @generated
-	 */
-	boolean isIsInfinite();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallCS#isIsInfinite <em>Is Infinite</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Is Infinite</em>' attribute.
-	 * @see #isIsInfinite()
-	 * @generated
-	 */
-	void setIsInfinite(boolean value);
-
 	/**
 	 * Returns the value of the '<em><b>Is Install</b></em>' attribute.
 	 * The default value is <code>"false"</code>.

@@ -33,7 +33,9 @@
     <genClasses ecoreClass="QVTimperative.ecore#//CheckStatement">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//CheckStatement/ownedExpression"/>
     </genClasses>
-    <genClasses ecoreClass="QVTimperative.ecore#//ConnectionVariable"/>
+    <genClasses ecoreClass="QVTimperative.ecore#//ConnectionVariable">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperative.ecore#//ConnectionVariable/isStrict"/>
+    </genClasses>
     <genClasses ecoreClass="QVTimperative.ecore#//DeclareStatement">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperative.ecore#//DeclareStatement/isCheck"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//DeclareStatement/ownedExpression"/>
@@ -59,12 +61,12 @@
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference QVTimperative.ecore#//LoopVariable/owningMappingLoop"/>
     </genClasses>
     <genClasses ecoreClass="QVTimperative.ecore#//Mapping">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperative.ecore#//Mapping/isStrict"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//Mapping/ownedParameters"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//Mapping/ownedStatements"/>
     </genClasses>
     <genClasses ecoreClass="QVTimperative.ecore#//MappingCall">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//MappingCall/binding"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperative.ecore#//MappingCall/isInfinite"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperative.ecore#//MappingCall/isInstall"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperative.ecore#//MappingCall/isInvoke"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//MappingCall/referredMapping"/>

@@ -29,7 +29,6 @@ import org.eclipse.ocl.pivot.ReferringElement;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.MappingCall#getBinding <em>Binding</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.MappingCall#isIsInfinite <em>Is Infinite</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.MappingCall#isIsInstall <em>Is Install</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.MappingCall#isIsInvoke <em>Is Invoke</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.MappingCall#getReferredMapping <em>Referred Mapping</em>}</li>
@@ -86,33 +85,6 @@ public interface MappingCall extends MappingStatement, ReferringElement {
 	 * @generated
 	 */
 	EList<MappingParameterBinding> getBinding();
-
-	/**
-	 * Returns the value of the '<em><b>Is Infinite</b></em>' attribute.
-	 * The default value is <code>"false"</code>.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * An infinite MappingCall requires re-invocation of the called mapping to be suppressed to avoid an infinite loop.
-	 * 
-	 * Deprecated ?? not needed once install works.
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Is Infinite</em>' attribute.
-	 * @see #setIsInfinite(boolean)
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getMappingCall_IsInfinite()
-	 * @generated
-	 */
-	boolean isIsInfinite();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtimperative.MappingCall#isIsInfinite <em>Is Infinite</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Is Infinite</em>' attribute.
-	 * @see #isIsInfinite()
-	 * @generated
-	 */
-	void setIsInfinite(boolean value);
 
 	/**
 	 * Returns the value of the '<em><b>Is Install</b></em>' attribute.

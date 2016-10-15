@@ -38,6 +38,7 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCSImpl#isIsStrict <em>Is Strict</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCSImpl#getOwnedInPathName <em>Owned In Path Name</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCSImpl#getOwnedParameters <em>Owned Parameters</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCSImpl#getOwnedStatements <em>Owned Statements</em>}</li>
@@ -46,6 +47,24 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
  * @generated
  */
 public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
+	/**
+	 * The default value of the '{@link #isIsStrict() <em>Is Strict</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsStrict()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean IS_STRICT_EDEFAULT = false;
+	/**
+	 * The cached value of the '{@link #isIsStrict() <em>Is Strict</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsStrict()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean isStrict = IS_STRICT_EDEFAULT;
 	/**
 	 * The cached value of the '{@link #getOwnedInPathName() <em>Owned In Path Name</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -90,6 +109,29 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 	@Override
 	protected EClass eStaticClass() {
 		return QVTimperativeCSPackage.Literals.MAPPING_CS;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean isIsStrict() {
+		return isStrict;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setIsStrict(boolean newIsStrict) {
+		boolean oldIsStrict = isStrict;
+		isStrict = newIsStrict;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.MAPPING_CS__IS_STRICT, oldIsStrict, isStrict));
 	}
 
 	/**
@@ -169,6 +211,16 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 	 * @generated
 	 */
 	@Override
+	public String toString() {
+		return super.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case QVTimperativeCSPackage.MAPPING_CS__OWNED_IN_PATH_NAME:
@@ -189,6 +241,8 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case QVTimperativeCSPackage.MAPPING_CS__IS_STRICT:
+				return isIsStrict();
 			case QVTimperativeCSPackage.MAPPING_CS__OWNED_IN_PATH_NAME:
 				return getOwnedInPathName();
 			case QVTimperativeCSPackage.MAPPING_CS__OWNED_PARAMETERS:
@@ -208,6 +262,9 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case QVTimperativeCSPackage.MAPPING_CS__IS_STRICT:
+				setIsStrict((Boolean)newValue);
+				return;
 			case QVTimperativeCSPackage.MAPPING_CS__OWNED_IN_PATH_NAME:
 				setOwnedInPathName((PathNameCS)newValue);
 				return;
@@ -231,6 +288,9 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case QVTimperativeCSPackage.MAPPING_CS__IS_STRICT:
+				setIsStrict(IS_STRICT_EDEFAULT);
+				return;
 			case QVTimperativeCSPackage.MAPPING_CS__OWNED_IN_PATH_NAME:
 				setOwnedInPathName((PathNameCS)null);
 				return;
@@ -252,6 +312,8 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case QVTimperativeCSPackage.MAPPING_CS__IS_STRICT:
+				return isStrict != IS_STRICT_EDEFAULT;
 			case QVTimperativeCSPackage.MAPPING_CS__OWNED_IN_PATH_NAME:
 				return ownedInPathName != null;
 			case QVTimperativeCSPackage.MAPPING_CS__OWNED_PARAMETERS:
