@@ -21,7 +21,6 @@ import org.eclipse.emf.ecore.EReference;
  * <!-- end-user-doc -->
  * @see org.eclipse.qvtd.doc.miniocl.lookup.EnvironmentFactory
  * @model kind="package"
- *        annotation="http://www.eclipse.org/OCL/Import mocl='MiniOCL.ecore#/'"
  * @generated
  */
 public interface EnvironmentPackage extends EPackage {
