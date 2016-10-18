@@ -19,6 +19,7 @@ import org.eclipse.qvtd.cs2as.compiler.tests.OCL2QVTiTestCases;
 import org.eclipse.qvtd.doc.bigmde2016.tests.qvtc.BigMDE2016_QVTc_AutomatedTests;
 import org.eclipse.qvtd.doc.exe2016.tests.qvtc.EXE2016_QVTc_AutomatedTests;
 import org.eclipse.qvtd.doc.exe2016.tests.qvtr.EXE2016_QVTr_AutomatedTests;
+import org.eclipse.qvtd.doc.minioclcs.xtext.tests.MiniOCLCSParsingTest;
 import org.eclipse.qvtd.xtext.qvtbase.tests.QVTbaseLibraryTests;
 import org.eclipse.qvtd.xtext.qvtcore.tests.AllQVTcoreTests;
 import org.eclipse.qvtd.xtext.qvtimperative.tests.AllQVTimperativeTests;
@@ -60,6 +61,7 @@ public class AllQVTdTests extends TestCase
 		result.addTestSuite(BigMDE2016_QVTc_AutomatedTests.class);	// NB this is very slow since we are -ea
 		result.addTestSuite(EXE2016_QVTc_AutomatedTests.class);		// NB this is very slow since we are -ea
 		result.addTestSuite(EXE2016_QVTr_AutomatedTests.class);		// NB this is very slow since we are -ea
+		result.addTestSuite(MiniOCLCSParsingTest.class);
 		return result;
 	}
 
