@@ -3,8 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: MiniOCL Example - AS Infrastructure
 Bundle-SymbolicName: org.eclipse.qvtd.doc.miniocl;singleton:=true
 Bundle-Version: 0.14.0.qualifier
-Require-Bundle: org.eclipse.emf.ecore,
- org.eclipse.ocl.pivot;bundle-version="[1.1.0,2.0.0)"
+Require-Bundle: org.eclipse.ocl.pivot;bundle-version="[1.1.0,2.0.0)"
 Export-Package: org.eclipse.qvtd.doc.miniocl,
  org.eclipse.qvtd.doc.miniocl.impl,
  org.eclipse.qvtd.doc.miniocl.lookup,
