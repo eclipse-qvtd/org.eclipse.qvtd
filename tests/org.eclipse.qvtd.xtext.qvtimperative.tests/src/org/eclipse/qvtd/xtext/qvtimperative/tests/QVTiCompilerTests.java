@@ -45,7 +45,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.Execution2GraphVisitor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiTransformationExecutor;
-import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.TestsXMLUtil;
@@ -290,7 +289,7 @@ public class QVTiCompilerTests extends LoadTestCase
 	}
 
 	public void testCG_Tree2TallTree_qvti() throws Exception {
-		AbstractTransformer.INVOCATIONS.setState(true);
+		//		AbstractTransformer.INVOCATIONS.setState(true);
 		MyQVT myQVT = createQVT();
 		URI genModelURI = getProjectFileURI("Tree2TallTree/Tree2TallTree.genmodel");
 		URI transformURI = getProjectFileURI("Tree2TallTree/Tree2TallTree.qvti");
@@ -343,10 +342,10 @@ public class QVTiCompilerTests extends LoadTestCase
 	}
 
 	public void testCG_Tree2TallTreeInstallManual_qvti() throws Exception {
-		AbstractTransformer.APPENDS.setState(true);
-		AbstractTransformer.CONSUMES.setState(true);
-		AbstractTransformer.EXCEPTIONS.setState(true);
-		AbstractTransformer.INVOCATIONS.setState(true);
+		//		AbstractTransformer.APPENDS.setState(true);
+		//		AbstractTransformer.CONSUMES.setState(true);
+		//		AbstractTransformer.EXCEPTIONS.setState(true);
+		//		AbstractTransformer.INVOCATIONS.setState(true);
 		MyQVT myQVT = createQVT();
 		//		URI genModelURI = getProjectFileURI("Tree2TallTree/Tree2TallTree.genmodel");
 		//		URI transformURI = getProjectFileURI("Tree2TallTree/Tree2TallTreeInstall.qvti");

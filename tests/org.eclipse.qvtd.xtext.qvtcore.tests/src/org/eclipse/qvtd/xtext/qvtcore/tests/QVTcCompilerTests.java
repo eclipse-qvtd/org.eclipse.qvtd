@@ -46,7 +46,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiIncrementalExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiTransformationExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
-import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.TestsXMLUtil;
@@ -315,6 +314,9 @@ public class QVTcCompilerTests extends LoadTestCase
 		}
 		finally {
 			myQVT.dispose();
+			EPackage.Registry.INSTANCE.remove(FamiliesPackage.eNS_URI);
+			EPackage.Registry.INSTANCE.remove(Families2PersonsPackage.eNS_URI);
+			EPackage.Registry.INSTANCE.remove(PersonsPackage.eNS_URI);
 		}
 	}
 
@@ -394,6 +396,8 @@ public class QVTcCompilerTests extends LoadTestCase
 		}
 		finally {
 			myQVT.dispose();
+			EPackage.Registry.INSTANCE.remove(DoublylinkedlistPackage.eNS_URI);
+			EPackage.Registry.INSTANCE.remove(List2listPackage.eNS_URI);
 		}
 	}
 
@@ -492,7 +496,7 @@ public class QVTcCompilerTests extends LoadTestCase
 
 	@Test // fails through at least lack of multi-headed support, which may not be needed if better partitioned
 	public void testQVTcCompiler_SimpleUML2RDBMS() throws Exception {
-		AbstractTransformer.INVOCATIONS.setState(true);
+		//		AbstractTransformer.INVOCATIONS.setState(true);
 		String testFolderName = "uml2rdbms";
 		URI testFolderURI = TESTS_BASE_URI.appendSegment(testFolderName);
 		MyQVT myQVT = new MyQVT(testFolderName);

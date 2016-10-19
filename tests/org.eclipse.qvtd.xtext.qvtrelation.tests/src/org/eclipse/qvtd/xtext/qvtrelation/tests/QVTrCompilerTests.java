@@ -66,6 +66,8 @@ import org.eclipse.qvtd.xtext.qvtimperative.tests.ModelNormalizer;
 import org.eclipse.qvtd.xtext.qvtimperative.tests.QVTiTestUtil;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage;
 import org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.Forward2ReverseNormalizer;
+import org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.PForward2ReversePackage;
+import org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.doublylinkedlistPackage;
 import org.eclipse.qvtd.xtext.qvtrelation.tests.hstm2fstm.FlatStateMachineNormalizer;
 import org.eclipse.xtext.resource.XtextResource;
 import org.junit.After;
@@ -561,6 +563,8 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 		finally {
 			myQVT.dispose();
+			EPackage.Registry.INSTANCE.remove(doublylinkedlistPackage.eNS_URI);
+			EPackage.Registry.INSTANCE.remove(PForward2ReversePackage.eNS_URI);
 		}
 	}
 

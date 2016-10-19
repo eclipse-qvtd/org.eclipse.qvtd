@@ -50,7 +50,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiIncrementalExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiTransformationExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
-import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
 import org.eclipse.qvtd.runtime.evaluation.TransformationExecutor;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
@@ -97,7 +96,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		}
 
 		//
-		// Execute the transformation with the interpreter
+		// Execute the transformation with the code generator
 		//
 		protected void executeModelsTX_CG(@NonNull Class<? extends Transformer> txClass, String modelName) throws Exception {
 			TransformationExecutor evaluator = new QVTiTransformationExecutor(getEnvironmentFactory(), txClass);
@@ -281,7 +280,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 
 	@Test
 	public void testExample1_CG2() throws Exception {
-		AbstractTransformer.EXCEPTIONS.setState(true);
+		//		AbstractTransformer.EXCEPTIONS.setState(true);
 		//		AbstractTransformer.INVOCATIONS.setState(true);
 		//		DependencyAnalyzer.CALL.setState(true);
 		//		DependencyAnalyzer.CREATE.setState(true);
@@ -539,7 +538,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 
 	@Test
 	public void testExample3_Interpreted() throws Exception {
-		AbstractTransformer.INVOCATIONS.setState(true);
+		//		AbstractTransformer.INVOCATIONS.setState(true);
 		MyQVT myQVT = new MyQVT("example3");
 		myQVT.loadGenModels("KiamaAS.genmodel", "KiamaCS.genmodel");
 		ImperativeTransformation tx = myQVT.executeNewOCL2QVTi_CompilerChain("KiamaRewrite.ocl");

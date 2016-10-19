@@ -175,7 +175,7 @@ public final class JavaSourceFileObject extends SimpleJavaFileObject
 					deleteJavaFiles(file);
 				}
 				else if (file.isFile() && file.getName().endsWith(".java")) {
-					System.out.println("Delete " + file);
+					//					System.out.println("Delete " + file);
 					file.delete();
 				}
 			}

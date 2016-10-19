@@ -24,7 +24,6 @@ import org.eclipse.qvtd.doc.exe2016.tests.qvtc.list2list.List2listPackage;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
-import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
 import org.eclipse.qvtd.xtext.qvtcore.tests.QVTcCompilerTests;
 import org.junit.Test;
 
@@ -36,7 +35,7 @@ public class EXE2016InterpreterTests extends QVTcCompilerTests
 	@Override
 	@Test
 	public void testQVTcCompiler_Forward2Reverse() throws Exception {
-		AbstractTransformer.EXCEPTIONS.setState(true);
+		//		AbstractTransformer.EXCEPTIONS.setState(true);
 		String testFolderName = "forward2reverse";
 		URI testFolderURI = TESTS_BASE_URI.appendSegment(testFolderName);
 		DoublyLinkedListGenerator doublyLinkedListGenerator = new DoublyLinkedListGenerator();
