@@ -457,7 +457,7 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 		GuardParameterCS csUnrealizedVariable = context.refreshNamedElement(GuardParameterCS.class, QVTimperativeCSPackage.Literals.GUARD_PARAMETER_CS, asVariable);
 		csUnrealizedVariable.setPivot(asVariable);
 		csUnrealizedVariable.setReferredTypedModel(asTypedModel);
-		csUnrealizedVariable.setOwnedType(createTypeRefCS(asVariable.getType(), asUsedPackage));
+		csUnrealizedVariable.setOwnedType(createTypeRefCS(asVariable.getType(), null));
 		return csUnrealizedVariable;
 	}
 
@@ -663,7 +663,7 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 		ImperativeTypedModel asTypedModel = asNewStatement.getReferredTypedModel();
 		org.eclipse.ocl.pivot.Package asUsedPackage = asTypedModel.getUsedPackage().size() > 0 ? asTypedModel.getUsedPackage().get(0) : null;
 		NewStatementCS csNewStatement = context.refreshNamedElement(NewStatementCS.class, QVTimperativeCSPackage.Literals.NEW_STATEMENT_CS, asNewStatement);
-		csNewStatement.setOwnedType(createTypeRefCS(asNewStatement.getType(), asUsedPackage));
+		csNewStatement.setOwnedType(createTypeRefCS(asNewStatement.getType(), null));
 		csNewStatement.setReferredTypedModel(asTypedModel);
 		csNewStatement.setOwnedExpression(context.visitDeclaration(ExpCS.class, asNewStatement.getOwnedExpression()));
 		refreshObservedProperties(asNewStatement, csNewStatement.getObservedProperties(), ClassUtil.nullFree(asNewStatement.getObservedProperties()));
@@ -733,7 +733,7 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 		SimpleParameterCS csUnrealizedVariable = context.refreshNamedElement(SimpleParameterCS.class, QVTimperativeCSPackage.Literals.SIMPLE_PARAMETER_CS, asVariable);
 		csUnrealizedVariable.setPivot(asVariable);
 		csUnrealizedVariable.setReferredTypedModel(asTypedModel);
-		csUnrealizedVariable.setOwnedType(createTypeRefCS(asVariable.getType(), asUsedPackage));
+		csUnrealizedVariable.setOwnedType(createTypeRefCS(asVariable.getType(), null));
 		return csUnrealizedVariable;
 	}
 

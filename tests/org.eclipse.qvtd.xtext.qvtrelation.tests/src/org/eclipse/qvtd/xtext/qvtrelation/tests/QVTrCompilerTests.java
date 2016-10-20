@@ -32,10 +32,15 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.dynamic.OCL2JavaFileObject;
+import org.eclipse.ocl.pivot.PivotTables;
 import org.eclipse.ocl.pivot.internal.manager.MetamodelManagerInternal;
+import org.eclipse.ocl.pivot.messages.StatusCodes;
 import org.eclipse.ocl.pivot.model.OCLstdlib;
 import org.eclipse.ocl.pivot.resource.ASResource;
+import org.eclipse.ocl.pivot.resource.CSResource;
+import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
 import org.eclipse.qvtd.codegen.qvti.QVTiCodeGenOptions;
@@ -45,6 +50,7 @@ import org.eclipse.qvtd.compiler.CompilerChain.Key;
 import org.eclipse.qvtd.compiler.QVTrCompilerChain;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.QVTp2QVTs;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbase;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
@@ -58,8 +64,10 @@ import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.TestsXMLUtil;
 import org.eclipse.qvtd.xtext.qvtcore.tests.QVTcTestUtil;
 import org.eclipse.qvtd.xtext.qvtimperative.tests.ModelNormalizer;
 import org.eclipse.qvtd.xtext.qvtimperative.tests.QVTiTestUtil;
+import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage;
 import org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.Forward2ReverseNormalizer;
 import org.eclipse.qvtd.xtext.qvtrelation.tests.hstm2fstm.FlatStateMachineNormalizer;
+import org.eclipse.xtext.resource.XtextResource;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -162,7 +170,14 @@ public class QVTrCompilerTests extends LoadTestCase
 			QVTrCompilerChain.setOption(options, CompilerChain.GENMODEL_STEP, CompilerChain.GENMODEL_OPTIONS_KEY, genModelOptions);
 			URI prefixURI = testFolderURI.appendSegment(testFileName);
 			compilerChain = new QVTrCompilerChain(getEnvironmentFactory(), prefixURI, options);
-			return compilerChain.compile(outputName);
+			ImperativeTransformation transformation = compilerChain.compile(outputName);
+			URI txURI = transformation.eResource().getURI();
+			if (txURI != null) {
+				URI inputURI = txURI;
+				URI serializedURI = txURI.trimFileExtension().appendFileExtension("serialized.qvti");
+				doSerialize(inputURI, serializedURI);
+			}
+			return transformation;
 		}
 
 		public @NonNull Class<? extends Transformer> createGeneratedClass(@NonNull Transformation asTransformation, @NonNull String @NonNull... genModelFiles) throws Exception {
@@ -322,6 +337,78 @@ public class QVTrCompilerTests extends LoadTestCase
 		public @NonNull URI getURI(@NonNull String genmodelStep, @NonNull Key<URI> uriKey) {
 			return compilerChain.getURI(CompilerChain.GENMODEL_STEP, CompilerChain.URI_KEY);
 		}
+	}
+
+	// FIXME move following clones to a Util class
+	protected static @NonNull XtextResource pivot2cs(@NonNull OCL ocl, @NonNull ResourceSet resourceSet, @NonNull ASResource asResource, @NonNull URI outputURI) throws IOException {
+		XtextResource xtextResource = ClassUtil.nonNullState((XtextResource) resourceSet.createResource(outputURI, QVTimperativeCSPackage.eCONTENT_TYPE));
+		ocl.as2cs(asResource, (CSResource) xtextResource);
+		assertNoResourceErrors("Conversion failed", xtextResource);
+		assertNoDiagnosticErrors("Concrete Syntax validation failed", xtextResource);
+		try {
+			xtextResource.save(TestsXMLUtil.defaultSavingOptions);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			URI xmiURI = outputURI.appendFileExtension(".xmi");
+			Resource xmiResource = resourceSet.createResource(xmiURI);
+			xmiResource.getContents().addAll(ClassUtil.nullFree(xtextResource.getContents()));
+			xmiResource.save(TestsXMLUtil.defaultSavingOptions);
+			fail(e.toString());
+		}
+		return xtextResource;
+	}
+
+	protected static XtextResource doSerialize(@NonNull URI inputURI, @NonNull URI serializedURI) throws IOException {
+		ResourceSet resourceSet = new ResourceSetImpl();
+		//
+		//	Load QVTiAS
+		//
+		OCL ocl = QVTbase.newInstance(OCL.NO_PROJECTS);
+		ocl.getEnvironmentFactory().setSeverity(PivotTables.STR_Variable_c_c_CompatibleInitialiserType, StatusCodes.Severity.IGNORE);
+		try {
+			ASResource asResource = loadQVTiAS(ocl, inputURI);
+			assertNoResourceErrors("Normalisation failed", asResource);
+			assertNoUnresolvedProxies("Normalisation invalid", asResource);
+			assertNoValidationErrors("Normalisation invalid", asResource);
+			//
+			//	Pivot to CS
+			//
+			XtextResource xtextResource = pivot2cs(ocl, resourceSet, asResource, serializedURI);
+			resourceSet.getResources().clear();
+
+			QVTimperative qvti = QVTimperative.newInstance(ProjectManager.NO_PROJECTS, null);
+			try {
+				Resource asResource2 = QVTimperativeUtil.loadTransformation(qvti.getEnvironmentFactory(), serializedURI, false).eResource();
+				assertNoResourceErrors("Load failed", asResource2);
+				assertNoUnresolvedProxies("Load invalid", asResource2);
+				assertNoValidationErrors("Load invalid", asResource2);
+			}
+			finally {
+				qvti.dispose();
+				qvti = null;
+			}
+
+
+			return xtextResource;
+		}
+		finally {
+			ocl.dispose();
+			ocl = null;
+		}
+	}
+
+	protected static @NonNull ASResource loadQVTiAS(@NonNull OCL ocl, @NonNull URI inputURI) {
+		Resource asResource = ocl.getMetamodelManager().getASResourceSet().getResource(inputURI, true);
+		assert asResource != null;
+		//		List<String> conversionErrors = new ArrayList<String>();
+		//		RootPackageCS documentCS = Ecore2OCLinEcore.importFromEcore(resourceSet, null, ecoreResource);
+		//		Resource eResource = documentCS.eResource();
+		assertNoResourceErrors("Load failed", asResource);
+		//		Resource xtextResource = resourceSet.createResource(outputURI, OCLinEcoreCSTPackage.eCONTENT_TYPE);
+		//		XtextResource xtextResource = (XtextResource) resourceSet.createResource(outputURI);
+		//		xtextResource.getContents().add(documentCS);
+		return (ASResource) asResource;
 	}
 
 	/* (non-Javadoc)
