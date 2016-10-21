@@ -1,0 +1,12 @@
+package ocl {
+	
+	class String {}
+}
+
+package package1 {
+	
+	class c1 {
+		prop a : ocl::String;
+		op getA() : ocl::String = a;
+	}
+}

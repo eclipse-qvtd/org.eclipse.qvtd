@@ -1,0 +1,16 @@
+package package1 {
+	
+	class c1 {
+		
+		prop a : String;
+		
+		op giveMeA() : String = self.c1;
+		
+		op testA() : Boolean = giveMeA().size() <> 0; 
+	}
+}
+
+context package1::c1 {
+	inv : a = giveMeA();
+	inv : testA();
+}

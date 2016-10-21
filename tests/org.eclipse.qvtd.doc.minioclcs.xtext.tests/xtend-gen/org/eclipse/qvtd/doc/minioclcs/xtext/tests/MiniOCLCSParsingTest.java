@@ -3,112 +3,45 @@
  */
 package org.eclipse.qvtd.doc.minioclcs.xtext.tests;
 
-import com.google.inject.Inject;
-import junit.framework.TestCase;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.qvtd.doc.MiniOCLCSStandaloneSetup;
 import org.eclipse.qvtd.doc.minioclcs.RootCS;
-import org.eclipse.qvtd.doc.minioclcs.xtext.tests.MiniOCLCSInjectorProvider;
-import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.junit4.InjectWith;
-import org.eclipse.xtext.junit4.XtextRunner;
-import org.eclipse.xtext.junit4.util.ParseHelper;
-import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
-@RunWith(XtextRunner.class)
-@InjectWith(MiniOCLCSInjectorProvider.class)
 @SuppressWarnings("all")
-public class MiniOCLCSParsingTest extends TestCase {
-  @Inject
-  private ParseHelper<RootCS> parseHelper;
+public class MiniOCLCSParsingTest extends LoadTestCase {
+  @Before
+  @Override
+  protected void setUp() throws Exception {
+    super.setUp();
+    MiniOCLCSStandaloneSetup.doSetup();
+  }
+  
+  protected RootCS parse(final String fileName) {
+    final URI fileURI = this.getProjectFileURI(fileName);
+    final ResourceSetImpl rSet = new ResourceSetImpl();
+    final Resource resoure = rSet.getResource(fileURI, true);
+    EList<EObject> _contents = resoure.getContents();
+    EObject _get = _contents.get(0);
+    return ((RootCS) _get);
+  }
   
   @Test
   public void testSimpleMiniOCL_PackagesDef() {
-    try {
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("package ocl {");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("class String {}");
-      _builder.newLine();
-      _builder.append("}");
-      _builder.newLine();
-      _builder.newLine();
-      _builder.append("package package1 {");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("class c1 {\t\t");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("prop a : ocl::String;");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("op getA() : ocl::String = a;");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("}");
-      _builder.newLine();
-      _builder.append("}");
-      _builder.newLine();
-      _builder.newLine();
-      final RootCS result = this.parseHelper.parse(_builder);
-      Assert.assertNotNull(result);
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+    final RootCS result = this.parse("models/simple_packages.mocl");
+    Assert.assertNotNull(result);
   }
   
   @Test
   public void testSimpleMiniOCL_Invariant() {
-    try {
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("package package1 {");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("class c1 {");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("prop a : String;");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("op giveMeA() : String = self.c1;");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("op testA() : Boolean = giveMeA().size() <> 0; ");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("}");
-      _builder.newLine();
-      _builder.append("}");
-      _builder.newLine();
-      _builder.newLine();
-      _builder.append("context package1::c1 {");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("inv : a = giveMeA();");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("inv : testA();");
-      _builder.newLine();
-      _builder.append("}");
-      _builder.newLine();
-      final RootCS result = this.parseHelper.parse(_builder);
-      Assert.assertNotNull(result);
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+    final RootCS result = this.parse("models/simple_invariants.mocl");
+    Assert.assertNotNull(result);
   }
 }

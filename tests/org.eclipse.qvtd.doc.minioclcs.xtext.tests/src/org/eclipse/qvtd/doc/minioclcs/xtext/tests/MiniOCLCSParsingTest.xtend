@@ -3,63 +3,40 @@
  */
 package org.eclipse.qvtd.doc.minioclcs.xtext.tests
 
-import com.google.inject.Inject
-import org.eclipse.xtext.junit4.InjectWith
-import org.eclipse.xtext.junit4.XtextRunner
-import org.eclipse.xtext.junit4.util.ParseHelper
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
+import org.eclipse.qvtd.doc.MiniOCLCSStandaloneSetup
+import org.eclipse.qvtd.doc.minioclcs.RootCS
+import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase
 import org.junit.Assert
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.eclipse.qvtd.doc.minioclcs.RootCS
-import junit.framework.TestCase
+import org.junit.Before
 
-@RunWith(XtextRunner)
-@InjectWith(MiniOCLCSInjectorProvider)
-class MiniOCLCSParsingTest extends TestCase {
+class MiniOCLCSParsingTest extends LoadTestCase {
 
-	@Inject
-	ParseHelper<RootCS> parseHelper
-
+	
+	@Before
+	override protected setUp() throws Exception {
+		super.setUp();
+		MiniOCLCSStandaloneSetup.doSetup();
+	}
+	
+	
+	def protected parse(String fileName) {
+		val fileURI = getProjectFileURI(fileName);
+		val rSet = new ResourceSetImpl();
+		val resoure = rSet.getResource(fileURI, true);
+		return resoure.contents.get(0) as RootCS; 
+	}
+	
 	@Test 
 	def void testSimpleMiniOCL_PackagesDef() {
-		val result = parseHelper.parse('''
-			package ocl {
-				
-				class String {}
-			}
-			
-			package package1 {
-				
-				class c1 {		
-					prop a : ocl::String;
-					op getA() : ocl::String = a;
-				}
-			}
-
-		''')
+		val result = parse('models/simple_packages.mocl');
 		Assert.assertNotNull(result)
 	}
 
 	@Test 
 	def void testSimpleMiniOCL_Invariant() {
-		val result = parseHelper.parse('''
-			package package1 {
-				
-				class c1 {
-					
-					prop a : String;
-					
-					op giveMeA() : String = self.c1;
-					
-					op testA() : Boolean = giveMeA().size() <> 0; 
-				}
-			}
-			
-			context package1::c1 {
-				inv : a = giveMeA();
-				inv : testA();
-			}
-		''')
+		val result = parse('models/simple_invariants.mocl');
 		Assert.assertNotNull(result)
 	}
 
