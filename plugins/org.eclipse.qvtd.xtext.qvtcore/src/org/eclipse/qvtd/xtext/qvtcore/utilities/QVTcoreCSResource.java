@@ -12,7 +12,6 @@ package org.eclipse.qvtd.xtext.qvtcore.utilities;
 
 import java.util.Map;
 
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -26,7 +25,6 @@ import org.eclipse.ocl.pivot.resource.BasicProjectManager;
 import org.eclipse.ocl.xtext.base.as2cs.AS2CS;
 import org.eclipse.ocl.xtext.base.cs2as.CS2AS;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
-import org.eclipse.ocl.xtext.essentialocl.utilities.EssentialOCLCSResource;
 import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -35,10 +33,11 @@ import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
 import org.eclipse.qvtd.pivot.qvtcore.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreASResourceFactory;
+import org.eclipse.qvtd.xtext.qvtbase.utilities.QVTbaseCSResource;
 import org.eclipse.qvtd.xtext.qvtcore.as2cs.QVTcoreAS2CS;
 import org.eclipse.qvtd.xtext.qvtcore.cs2as.QVTcoreCS2AS;
 
-public class QVTcoreCSResource extends EssentialOCLCSResource
+public class QVTcoreCSResource extends QVTbaseCSResource
 {
 	@Override
 	public @NonNull CS2AS createCS2AS(@NonNull EnvironmentFactoryInternal environmentFactory, @NonNull ASResource asResource) {
@@ -59,11 +58,6 @@ public class QVTcoreCSResource extends EssentialOCLCSResource
 	@Override
 	public @NonNull ASResourceFactory getASResourceFactory() {
 		return QVTcoreASResourceFactory.getInstance();
-	}
-
-	@Override
-	public @NonNull URI getASURI(@NonNull URI csURI) {
-		return URI.createURI(csURI.toString() + "as");
 	}
 
 	@Override

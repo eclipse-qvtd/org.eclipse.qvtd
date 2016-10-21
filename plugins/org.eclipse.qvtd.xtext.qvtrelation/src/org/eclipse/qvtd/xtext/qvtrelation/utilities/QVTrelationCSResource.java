@@ -10,7 +10,6 @@
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtrelation.utilities;
 
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -22,16 +21,16 @@ import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.resource.BasicProjectManager;
 import org.eclipse.ocl.xtext.base.cs2as.CS2AS;
-import org.eclipse.ocl.xtext.essentialocl.utilities.EssentialOCLCSResource;
 import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationASResourceFactory;
+import org.eclipse.qvtd.xtext.qvtbase.utilities.QVTbaseCSResource;
 import org.eclipse.qvtd.xtext.qvtrelation.cs2as.QVTrelationCS2AS;
 
-public class QVTrelationCSResource extends EssentialOCLCSResource
+public class QVTrelationCSResource extends QVTbaseCSResource
 {
 	@Override
 	public @NonNull CS2AS createCS2AS(@NonNull EnvironmentFactoryInternal environmentFactory, @NonNull ASResource asResource) {
@@ -46,11 +45,6 @@ public class QVTrelationCSResource extends EssentialOCLCSResource
 	@Override
 	public @NonNull ASResourceFactory getASResourceFactory() {
 		return QVTrelationASResourceFactory.getInstance();
-	}
-
-	@Override
-	public @NonNull URI getASURI(@NonNull URI csURI) {
-		return URI.createURI(csURI.toString() + "as");
 	}
 
 	@Override
