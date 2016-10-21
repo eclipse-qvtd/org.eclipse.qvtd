@@ -14,7 +14,7 @@ Workflow {
 				baseName = "org.eclipse.qvtd.doc.minioclcs.xtext"
 				rootPath = rootPath
 				runtimeTest = {
-					enabled = true
+					enabled = false // We do not rely on Xtext testing framework anymore
 					root = "../../tests/org.eclipse.qvtd.doc.minioclcs.xtext.tests"
 				}
 				eclipsePlugin = {
@@ -52,9 +52,9 @@ Workflow {
 			}
 				
 						
-//			outline = CS2ASOutlineTreeProviderFragment {
-//				
-//			}			
+			outline = CS2ASOutlineTreeProviderFragment {
+				
+			}			
 		}
 	}
 }
