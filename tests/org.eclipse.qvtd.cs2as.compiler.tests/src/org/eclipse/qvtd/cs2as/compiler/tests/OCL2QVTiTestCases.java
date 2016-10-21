@@ -63,7 +63,6 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-import cg._Source2Target_qvtp_qvtcas.Source2Target_qvtp_qvtcas;
 import example1.source.SourcePackage;
 import example1.target.TargetPackage;
 import example2.classes.ClassesPackage;
@@ -271,7 +270,8 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 	@Test
 	public void testExample1_CGManual() throws Exception {
 		MyQVT myQVT = new MyQVT("example1");
-		Class<Source2Target_qvtp_qvtcas> txClass = Source2Target_qvtp_qvtcas.class;
+		@SuppressWarnings({"null", "unchecked"})
+		@NonNull Class<? extends Transformer> txClass = (Class<? extends Transformer>) Class.forName("cg._Source2Target_qvtp_qvtcas.Source2Target_qvtp_qvtcas");
 		myQVT.executeModelsTX_CG(txClass, "model1");
 		myQVT.executeModelsTX_CG(txClass, "model2");
 		myQVT.executeModelsTX_CG(txClass, "model3");
