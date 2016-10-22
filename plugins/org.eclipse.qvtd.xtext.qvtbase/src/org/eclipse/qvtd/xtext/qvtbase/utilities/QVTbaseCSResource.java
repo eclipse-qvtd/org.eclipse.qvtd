@@ -26,9 +26,8 @@ public abstract class QVTbaseCSResource extends EssentialOCLCSResource
 	@Override
 	public void setURI(URI uri) {
 		assert uri != null;
-		if (PivotUtilInternal.isASURI(uri)) {
+		if (PivotUtilInternal.isASURI(uri)) {				// XtextResourceFactory.createResource uses the wrong URI for an AS edit
 			uri = PivotUtilInternal.trimASExtensionSuffix(uri);
-			setDerived(true);
 		}
 		super.setURI(uri);
 	}
