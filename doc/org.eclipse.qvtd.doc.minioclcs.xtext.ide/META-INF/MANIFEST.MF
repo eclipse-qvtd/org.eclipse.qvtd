@@ -1,7 +1,8 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: org.eclipse.qvtd.doc.minioclcs.xtext.ide
-Bundle-Vendor: MiniOCL Example - IDE
+Bundle-Name: %pluginName
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
 Bundle-Version: 0.14.0.qualifier
 Bundle-SymbolicName: org.eclipse.qvtd.doc.minioclcs.xtext.ide; singleton:=true
 Bundle-ActivationPolicy: lazy

@@ -5,12 +5,9 @@ package org.eclipse.qvtd.doc.minioclcs.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org.eclipse.qvtd.doc.minioclcs.AccVarCS;
 import org.eclipse.qvtd.doc.minioclcs.IterateExpCS;
 import org.eclipse.qvtd.doc.minioclcs.MinioclcsPackage;

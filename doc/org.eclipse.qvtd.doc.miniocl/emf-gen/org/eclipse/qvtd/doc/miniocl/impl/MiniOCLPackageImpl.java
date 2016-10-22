@@ -2,8 +2,6 @@
  */
 package org.eclipse.qvtd.doc.miniocl.impl;
 
-import static org.eclipse.qvtd.doc.miniocl.MiniOCLPackage.CLASS;
-
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;

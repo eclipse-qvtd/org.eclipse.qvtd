@@ -4,9 +4,6 @@
 package org.eclipse.qvtd.doc.minioclcs.impl;
 
 import org.eclipse.emf.ecore.EClass;
-
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
 import org.eclipse.qvtd.doc.minioclcs.MinioclcsPackage;
 import org.eclipse.qvtd.doc.minioclcs.NavigationExpCS;
 

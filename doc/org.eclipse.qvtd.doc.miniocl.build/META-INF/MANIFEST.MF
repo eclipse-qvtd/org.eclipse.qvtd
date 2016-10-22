@@ -1,6 +1,8 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: MiniOCL Example - Build Plugin
+Bundle-Name: %pluginName
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
 Bundle-SymbolicName: org.eclipse.qvtd.doc.miniocl.build
 Bundle-Version: 0.14.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8

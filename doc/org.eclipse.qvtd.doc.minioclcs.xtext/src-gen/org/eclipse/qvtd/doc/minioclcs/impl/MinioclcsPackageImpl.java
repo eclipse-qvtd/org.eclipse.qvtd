@@ -9,9 +9,7 @@ import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcorePackage;
-
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
 import org.eclipse.qvtd.doc.miniocl.MiniOCLPackage;
 import org.eclipse.qvtd.doc.minioclcs.AccVarCS;
 import org.eclipse.qvtd.doc.minioclcs.BooleanExpCS;

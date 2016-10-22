@@ -12,9 +12,7 @@
 package	org.eclipse.qvtd.doc.miniocl.util;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-
 import org.eclipse.qvtd.doc.miniocl.lookup.LookupEnvironment;
-import org.eclipse.qvtd.doc.miniocl.util.Visitable;
 
 public abstract class AbstractMiniOCLCommonLookupVisitor
 	extends AbstractExtendingVisitor<@Nullable LookupEnvironment, @NonNull LookupEnvironment> {

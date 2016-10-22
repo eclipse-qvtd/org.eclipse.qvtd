@@ -10,21 +10,15 @@
 package org.eclipse.qvtd.doc.minioclcs.xtext._MiniOCLCS2AS_qvtp_qvtcas;
 
 import java.util.Iterator;
-import java.util.List;
+
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.ids.ClassId;
-import org.eclipse.ocl.pivot.ids.CollectionTypeId;
-import org.eclipse.ocl.pivot.ids.DataTypeId;
 import org.eclipse.ocl.pivot.ids.IdManager;
 import org.eclipse.ocl.pivot.ids.IdResolver;
-import org.eclipse.ocl.pivot.ids.NsURIPackageId;
-import org.eclipse.ocl.pivot.ids.PropertyId;
-import org.eclipse.ocl.pivot.ids.RootPackageId;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.library.executor.AbstractDispatchOperation;
 import org.eclipse.ocl.pivot.internal.library.executor.AbstractEvaluationOperation;
@@ -56,7 +50,6 @@ import org.eclipse.ocl.pivot.values.OrderedSetValue;
 import org.eclipse.ocl.pivot.values.SequenceValue;
 import org.eclipse.ocl.pivot.values.SetValue;
 import org.eclipse.qvtd.doc.miniocl.CallExp;
-import org.eclipse.qvtd.doc.miniocl.Element;
 import org.eclipse.qvtd.doc.miniocl.ExpressionInOCL;
 import org.eclipse.qvtd.doc.miniocl.MiniOCLFactory;
 import org.eclipse.qvtd.doc.miniocl.MiniOCLPackage;
@@ -72,11 +65,9 @@ import org.eclipse.qvtd.doc.miniocl.VariableExp;
 import org.eclipse.qvtd.doc.miniocl.lookup.EnvironmentPackage;
 import org.eclipse.qvtd.doc.miniocl.lookup.LookupEnvironment;
 import org.eclipse.qvtd.doc.miniocl.lookup.util.MiniOCLLookupSolver;
-import org.eclipse.qvtd.doc.miniocl.util.Visitable;
 import org.eclipse.qvtd.doc.minioclcs.CSTrace;
 import org.eclipse.qvtd.doc.minioclcs.CallExpCS;
 import org.eclipse.qvtd.doc.minioclcs.ClassCS;
-import org.eclipse.qvtd.doc.minioclcs.ExpCS;
 import org.eclipse.qvtd.doc.minioclcs.MinioclcsPackage;
 import org.eclipse.qvtd.doc.minioclcs.NameExpCS;
 import org.eclipse.qvtd.doc.minioclcs.NavigationExpCS;
@@ -84,14 +75,12 @@ import org.eclipse.qvtd.doc.minioclcs.OperationCS;
 import org.eclipse.qvtd.doc.minioclcs.PackageCS;
 import org.eclipse.qvtd.doc.minioclcs.ParameterCS;
 import org.eclipse.qvtd.doc.minioclcs.PathElementCS;
-import org.eclipse.qvtd.doc.minioclcs.PathNameCS;
 import org.eclipse.qvtd.doc.minioclcs.PropertyCS;
 import org.eclipse.qvtd.doc.minioclcs.RootCS;
-import org.eclipse.qvtd.doc.minioclcs.RoundedBracketClauseCS;
-import org.eclipse.qvtd.doc.minioclcs.xtext.tx.AbstractInvocation;
-import org.eclipse.qvtd.doc.minioclcs.xtext.tx.AbstractCS2ASTransformer;
 import org.eclipse.qvtd.doc.minioclcs.xtext.internal.tx.AbstractInvocationConstructor;
 import org.eclipse.qvtd.doc.minioclcs.xtext.library.model.ModelObjectsOfKindOperation;
+import org.eclipse.qvtd.doc.minioclcs.xtext.tx.AbstractCS2ASTransformer;
+import org.eclipse.qvtd.doc.minioclcs.xtext.tx.AbstractInvocation;
 
 /**
  * The MiniOCLCS2AS_qvtp_qvtcas transformation:

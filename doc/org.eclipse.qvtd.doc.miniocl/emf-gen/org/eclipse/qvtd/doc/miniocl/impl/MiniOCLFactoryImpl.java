@@ -24,7 +24,6 @@ import org.eclipse.qvtd.doc.miniocl.LetExp;
 import org.eclipse.qvtd.doc.miniocl.MiniOCLFactory;
 import org.eclipse.qvtd.doc.miniocl.MiniOCLPackage;
 import org.eclipse.qvtd.doc.miniocl.NullLiteralExp;
-import org.eclipse.qvtd.doc.miniocl.OCLExpression;
 import org.eclipse.qvtd.doc.miniocl.OpaqueExpression;
 import org.eclipse.qvtd.doc.miniocl.Operation;
 import org.eclipse.qvtd.doc.miniocl.OperationCallExp;

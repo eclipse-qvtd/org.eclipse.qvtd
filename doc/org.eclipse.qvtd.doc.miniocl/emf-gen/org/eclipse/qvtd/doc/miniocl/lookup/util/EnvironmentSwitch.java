@@ -7,7 +7,6 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.evaluation.Executor;
-import org.eclipse.qvtd.doc.miniocl.lookup.*;
 import org.eclipse.qvtd.doc.miniocl.lookup.Env4CG;
 import org.eclipse.qvtd.doc.miniocl.lookup.EnvironmentPackage;
 import org.eclipse.qvtd.doc.miniocl.lookup.LookupEnvironment;

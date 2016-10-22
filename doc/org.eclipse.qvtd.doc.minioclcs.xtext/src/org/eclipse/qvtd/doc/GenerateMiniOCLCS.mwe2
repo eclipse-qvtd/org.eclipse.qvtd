@@ -2,7 +2,7 @@ module org.eclipse.qvtd.doc.GenerateMiniOCLCS
 
 import org.eclipse.xtext.xtext.generator.*
 import org.eclipse.xtext.xtext.generator.model.project.*
-import org.eclipse.qvtd.cs2as.xtext.generator.*
+//import org.eclipse.qvtd.cs2as.xtext.generator.*
 
 var rootPath = ".."
 
