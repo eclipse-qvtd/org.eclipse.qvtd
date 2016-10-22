@@ -30,7 +30,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.AppendParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
-import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
@@ -48,7 +47,6 @@ public abstract class AbstractScheduledRegion2Mapping extends AbstractRegion2Map
 		//		Iterable<Connection> connectionRegions = getConnectionRegions(calledRegion);
 		//		assert !calledRegion.isConnectionRegion();
 		AbstractRegion2Mapping calledRegion2Mapping = visitor.getRegion2Mapping(calledRegion);
-		Mapping calledMapping = calledRegion2Mapping.getMapping();
 		Map<@NonNull LoopVariable, @NonNull OCLExpression> loopVariables = new HashMap<>();
 		List<@NonNull MappingParameterBinding> mappingParameterBindings = new ArrayList<>();
 		for (@NonNull Node calledGuardNode : calledRegion2Mapping.getGuardNodes()) {
@@ -69,13 +67,18 @@ public abstract class AbstractScheduledRegion2Mapping extends AbstractRegion2Map
 						connectionExpression = createSelectByKind(callingNode);
 					}
 				}
-				MappingParameterBinding mappingParameterBinding = createMappingParameterBinding(connectionExpression, calledGuardNode, loopVariables);
-				mappingParameterBindings.add(mappingParameterBinding);
+				Type type = connectionExpression.getType();
+				assert type instanceof CollectionType;
+				Type elementType = ((CollectionType)type).getElementType();
+				assert elementType != null;
+				LoopVariable loopVariable = helper.createLoopVariable("loop" + loopVariables.size(), elementType);//, true, connectionExpression);
+				loopVariables.put(loopVariable, connectionExpression);
+				mappingParameterBindings.add(helper.createLoopParameterBinding((GuardParameter) guardVariable, loopVariable));
 			}
 			for (@NonNull Node callingNode : calledGuardNode.getUsedBindingSources()) {
 				if (callingNode.getRegion() == region) {
-					MappingParameterBinding mappingParameterBinding = createMappingParameterBinding(createSelectByKind(callingNode), calledGuardNode, loopVariables);
-					mappingParameterBindings.add(mappingParameterBinding);
+					OCLExpression sourceExpression = createSelectByKind(callingNode);
+					mappingParameterBindings.add(helper.createSimpleParameterBinding((SimpleParameter) guardVariable, sourceExpression));
 				}
 			}
 		}
@@ -183,26 +186,6 @@ public abstract class AbstractScheduledRegion2Mapping extends AbstractRegion2Map
 		//			mappingCallStatement = QVTimperativeUtil.createMappingLoop(loopSource, loopVariable, mappingCallStatement);
 		//		}
 		return mappingCallStatement;
-	}
-
-	private @NonNull MappingParameterBinding createMappingParameterBinding(@NonNull OCLExpression sourceExpression, @NonNull Node targetNode,
-			@NonNull Map<@NonNull LoopVariable, @NonNull OCLExpression> loopVariables) {
-		Type type = sourceExpression.getType();
-		if (type instanceof CollectionType) {
-			Type elementType = ((CollectionType)type).getElementType();
-			assert elementType != null;
-			LoopVariable loopVariable = helper.createLoopVariable(getSafeName("loop" + loopVariables.size()), elementType);//, true, sourceExpression);
-			loopVariables.put(loopVariable, sourceExpression);
-			//			sourceExpression = PivotUtil.createVariableExp(loopVariable);
-			AbstractRegion2Mapping calledRegion2Mapping = visitor.getRegion2Mapping(targetNode.getRegion());
-			VariableDeclaration guardVariable = calledRegion2Mapping.getGuardVariable(targetNode);
-			return helper.createLoopParameterBinding((GuardParameter) guardVariable, loopVariable);
-		}
-		else {
-			AbstractRegion2Mapping calledRegion2Mapping = visitor.getRegion2Mapping(targetNode.getRegion());
-			VariableDeclaration guardVariable = calledRegion2Mapping.getGuardVariable(targetNode);
-			return helper.createSimpleParameterBinding((SimpleParameter) guardVariable, sourceExpression);
-		}
 	}
 
 	protected abstract @NonNull OCLExpression createSelectByKind(@NonNull Node resultNode);
