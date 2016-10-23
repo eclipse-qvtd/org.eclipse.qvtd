@@ -16,16 +16,19 @@ import java.util.List;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.ids.CollectionTypeId;
+import org.eclipse.qvtd.runtime.evaluation.AbstractConnection;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
 import org.eclipse.qvtd.runtime.evaluation.Connection;
-import org.eclipse.qvtd.runtime.evaluation.EnforcedConnection;
+import org.eclipse.qvtd.runtime.evaluation.StrictIncrementalConnection;
 import org.eclipse.qvtd.runtime.evaluation.ExecutionVisitor;
 import org.eclipse.qvtd.runtime.evaluation.Interval;
 import org.eclipse.qvtd.runtime.evaluation.Invocation;
 import org.eclipse.qvtd.runtime.evaluation.InvocationFailedException;
 import org.eclipse.qvtd.runtime.evaluation.InvocationManager;
+import org.eclipse.qvtd.runtime.evaluation.SimpleConnection;
 import org.eclipse.qvtd.runtime.evaluation.SlotState;
-import org.eclipse.qvtd.runtime.evaluation.UnenforcedConnection;
+import org.eclipse.qvtd.runtime.evaluation.StrictConnection;
+import org.eclipse.qvtd.runtime.evaluation.SimpleIncrementalConnection;
 
 /**
  * AbstractIntervalInternal provides the shared implementation of the intrusive blocked/waiting linked list functionality.
@@ -42,12 +45,12 @@ public abstract class AbstractIntervalInternal implements Interval
 	/**
 	 * Head of a singly linked list element of connections awaiting propagation, null when empty.
 	 */
-	private @Nullable AbstractConnectionInternal headConnection = null;
+	private @Nullable AbstractConnection headConnection = null;
 
 	/**
 	 * Tail of a singly linked list element of connections awaiting propagation, null when empty.
 	 */
-	private @Nullable AbstractConnectionInternal tailConnection = null;
+	private @Nullable AbstractConnection tailConnection = null;
 
 	/**
 	 * Head of doubly linked list of blocked invocations.
@@ -100,10 +103,23 @@ public abstract class AbstractIntervalInternal implements Interval
 	public @NonNull Connection createConnection(@NonNull String name, @NonNull CollectionTypeId typeId, boolean isStrict) {
 		Connection connection;
 		if (isStrict) {
-			connection = new EnforcedConnection(this, name, typeId);
+			connection = new StrictConnection(this, name, typeId);
 		}
 		else {
-			connection = new UnenforcedConnection(this, name, typeId);
+			connection = new SimpleConnection(this, name, typeId);
+		}
+		connections.add(connection);
+		return connection;
+	}
+
+	@Override
+	public Connection.@NonNull Incremental createIncrementalConnection(@NonNull String name, @NonNull CollectionTypeId typeId, boolean isStrict) {
+		Connection.Incremental connection;
+		if (isStrict) {
+			connection = new StrictIncrementalConnection(this, name, typeId);
+		}
+		else {
+			connection = new SimpleIncrementalConnection(this, name, typeId);
 		}
 		connections.add(connection);
 		return connection;
@@ -112,7 +128,7 @@ public abstract class AbstractIntervalInternal implements Interval
 	@Override
 	public boolean flush() {
 		while (headConnection != null) {
-			AbstractConnectionInternal nextConnection2;
+			AbstractConnection nextConnection2;
 			synchronized(this) {
 				nextConnection2 = headConnection;
 				if (nextConnection2 != null) {
@@ -210,8 +226,8 @@ public abstract class AbstractIntervalInternal implements Interval
 
 	@Override
 	public synchronized void queue(@NonNull Connection connection) {
-		AbstractConnectionInternal connection2 = (AbstractConnectionInternal)connection;
-		AbstractConnectionInternal tailConnection2 = tailConnection;
+		AbstractConnection connection2 = (AbstractConnection)connection;
+		AbstractConnection tailConnection2 = tailConnection;
 		if (tailConnection2 == null) {								// Empty list
 			assert headConnection == null;
 			assert connection2.getNextConnection() == null;
@@ -251,7 +267,7 @@ public abstract class AbstractIntervalInternal implements Interval
 		s.append(intervalIndex);
 		s.append("> ");
 		int i = 0;
-		for (AbstractConnectionInternal aConnection = headConnection; aConnection != null; aConnection = aConnection.getNextConnection()) {
+		for (AbstractConnection aConnection = headConnection; aConnection != null; aConnection = aConnection.getNextConnection()) {
 			i++;
 			if (i > 100) {
 				i = 999999;

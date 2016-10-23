@@ -98,14 +98,17 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel;
 import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
 import org.eclipse.qvtd.codegen.utilities.QVTiCGUtil;
+import org.eclipse.qvtd.pivot.qvtimperative.AppendParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.AppendParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.BufferStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.ObservableStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
@@ -156,6 +159,16 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		this.isIncremental = codeGenerator.getOptions().isIncremental();
 		this.alwaysUseClasses = isIncremental;
 		this.useGot = isIncremental;
+	}
+
+	protected void appendConnectionBinding(@NonNull CGMappingCallBinding cgMappingCallBinding) {
+		TypeDescriptor checkedType = needsTypeCheck(cgMappingCallBinding);
+		if (checkedType != null) {
+			js.append("(");
+			js.appendClassReference(checkedType);
+			js.append(")");
+		}
+		js.appendValueName(cgMappingCallBinding.getValue());
 	}
 
 	protected void appendEcoreSet(@NonNull CGValuedElement cgSlot, @NonNull EStructuralFeature eStructuralFeature, @NonNull CGValuedElement cgInit) {
@@ -1203,20 +1216,6 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		return allImports;
 	}
 
-	private @Nullable Iterable<@NonNull CGMappingCallBinding> getAppendBindings(@NonNull List<CGMappingCallBinding> cgMappingCallBindings) {
-		List<@NonNull CGMappingCallBinding> bindings = null;
-		for (CGMappingCallBinding cgMappingCallBinding : cgMappingCallBindings) {
-			Element ast = cgMappingCallBinding.getAst();
-			if (ast instanceof AppendParameterBinding) {
-				if (bindings == null) {
-					bindings = new ArrayList<>();
-				}
-				bindings.add(cgMappingCallBinding);
-			}
-		}
-		return bindings;
-	}
-
 	private EObject getContainer(EObject eObject) {
 		EObject eContainer = eObject.eContainer();
 		if (eContainer != null) {
@@ -1228,20 +1227,6 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			}
 		}
 		return null;
-	}
-
-	private @Nullable Iterable<@NonNull CGMappingCallBinding> getConsumeBindings(@NonNull List<CGMappingCallBinding> cgMappingCallBindings) {
-		List<@NonNull CGMappingCallBinding> bindings = null;
-		for (CGMappingCallBinding cgMappingCallBinding : cgMappingCallBindings) {
-			Element ast = cgMappingCallBinding.getAst();
-			if (!(ast instanceof AppendParameterBinding)) {
-				if (bindings == null) {
-					bindings = new ArrayList<>();
-				}
-				bindings.add(cgMappingCallBinding);
-			}
-		}
-		return bindings;
 	}
 
 	@Override
@@ -1373,7 +1358,18 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			return true;
 		}
 		Mapping asMapping = ClassUtil.nonNullState((Mapping) cgMapping.getAst());
-		return QVTimperativeUtil.isObserver(asMapping);
+		if (QVTimperativeUtil.isObserver(asMapping)) {
+			return true;
+		}
+		for (MappingParameter asParameter : asMapping.getOwnedParameters()) {
+			if (asParameter instanceof AppendParameter) {
+				return true;
+			}
+			if (asParameter instanceof GuardParameter) {		// FIXME only if 'consumes'
+				return true;
+			}
+		}
+		return false;
 	}
 
 	@Override
@@ -1828,63 +1824,21 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		//	Emit the mapping call.
 		//
 		Iterable<@NonNull CGMappingCallBinding> iterateBindings = getIterateBindings(cgMappingCallBindings);
-		if (isIncremental && (iterateBindings == null)) {
-			js.append(getMappingCtorName(cgReferredMapping));
-			js.append(".connect(");
-			Iterable<@NonNull CGMappingCallBinding> consumeBindings = getConsumeBindings(cgMappingCallBindings);
-			Iterable<@NonNull CGMappingCallBinding> appendBindings = getAppendBindings(cgMappingCallBindings);
-			if (consumeBindings == null) {
-				js.append("null");
+		String mappingCtorName = getMappingCtorName(cgReferredMapping);
+		if (useClass(cgReferredMapping) && (iterateBindings == null)) {
+			for (CGMappingCallBinding cgMappingCallBinding : cgMappingCallBindings) {
+				Element ast = cgMappingCallBinding.getAst();
+				js.append(mappingCtorName);
+				js.append(".");
+				js.append(ast instanceof AppendParameterBinding ? "addAppendedConnection" : "addConsumedConnection");
+				js.append("(");
+				appendConnectionBinding(cgMappingCallBinding);
+				js.append(");\n");
 			}
-			else {
-				js.append("new ");
-				js.appendClassReference(true, Connection.class);
-				js.append("[]{");
-				boolean isFirst = true;
-				for (@NonNull CGMappingCallBinding cgMappingCallBinding : consumeBindings) {
-					if (!isFirst) {
-						js.append(", ");
-					}
-					TypeDescriptor checkedType = needsTypeCheck(cgMappingCallBinding);
-					if (checkedType != null) {
-						js.append("(");
-						js.appendClassReference(checkedType);
-						js.append(")");
-					}
-					js.appendValueName(cgMappingCallBinding.getValue());
-					isFirst = false;
-				}
-				js.append("}");
-			}
-			js.append(", ");
-			if (appendBindings == null) {
-				js.append("null");
-			}
-			else {
-				js.append("new ");
-				js.appendClassReference(true, Connection.class);
-				js.append("[]{");
-				boolean isFirst = true;
-				for (@NonNull CGMappingCallBinding cgMappingCallBinding : appendBindings) {
-					if (!isFirst) {
-						js.append(", ");
-					}
-					TypeDescriptor checkedType = needsTypeCheck(cgMappingCallBinding);
-					if (checkedType != null) {
-						js.append("(");
-						js.appendClassReference(checkedType);
-						js.append(")");
-					}
-					js.appendValueName(cgMappingCallBinding.getValue());
-					isFirst = false;
-				}
-				js.append("}");
-			}
-			js.append(");\n");
 		}
 		else {
 			if (useClass(cgReferredMapping)) {
-				js.append(getMappingCtorName(cgReferredMapping));
+				js.append(mappingCtorName);
 				js.append(".invoke(");
 			}
 			else {
@@ -1937,10 +1891,10 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			for (@NonNull CGAccumulator cgAccumulator : cgAccumulators) {
 				Element ast = cgAccumulator.getAst();
 				js.append("final ");
-				js.appendClassReference(true, Connection.class);
+				js.appendClassReference(true, isIncremental ? Connection.Incremental.class : Connection.class);
 				js.append(" ");
 				js.appendValueName(cgAccumulator);
-				js.append(" = createConnection(");
+				js.append(isIncremental ? " = createIncrementalConnection(" : " = createConnection(");
 				js.appendString(QVTiCGUtil.getName(cgAccumulator));
 				js.append(", ");
 				js.appendValueName(cgAccumulator.getTypeId());

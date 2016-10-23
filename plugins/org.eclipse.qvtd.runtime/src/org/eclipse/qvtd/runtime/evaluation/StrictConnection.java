@@ -12,20 +12,18 @@ package org.eclipse.qvtd.runtime.evaluation;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.ids.CollectionTypeId;
-import org.eclipse.qvtd.runtime.internal.evaluation.AbstractEnforcedConnectionInternal;
+import org.eclipse.qvtd.runtime.internal.evaluation.StrictConnectionInternal;
 
 /**
- * An EnforcedConnection maintains the unqiue values between one or more sources,
+ * A StrictConnection maintains the unique values between one or more sources,
  * typically Mappings, that invoke append() and one or more consumers that consume each value.
  * Uniqueness on the internal values on behalf of an overall application that is unable to do so automatically.
  *
- * Incremental update is supported by a revoke() or an append(), or a replace() of an appended value.
- *
- * Incremental update is supported by a revoke() or an append(), or a replace() of an appended value.
+ * Incremental update is not supported.
  */
-public class EnforcedConnection extends AbstractEnforcedConnectionInternal
+public class StrictConnection extends StrictConnectionInternal
 {
-	public EnforcedConnection(@NonNull Interval interval, @NonNull String name, @NonNull CollectionTypeId typeId) {
+	public StrictConnection(@NonNull Interval interval, @NonNull String name, @NonNull CollectionTypeId typeId) {
 		super(interval, name, typeId);
 	}
 }

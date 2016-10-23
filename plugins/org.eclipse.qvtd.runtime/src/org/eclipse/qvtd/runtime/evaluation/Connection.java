@@ -27,59 +27,62 @@ import org.eclipse.ocl.pivot.utilities.Nameable;
  */
 public interface Connection extends ExecutionVisitable, Nameable
 {
+	public interface Incremental extends Connection
+	{
+		void check();
+
+		/**
+		 * Remove the revoked entries and update the internal indexes accordingly.
+		 */
+		void cleanup();
+
+		void consume(int elementIndex, @NonNull Invocation mapping);
+
+		@NonNull Iterable<@NonNull InvocationConstructor> getAppenders();
+
+		/**
+		 * Replace the old value at connectionKey by newValue.
+		 *
+		 * If the old value is a multiple value in a unique value connection, the multi-value count is decremented
+		 * and a new entry created for the newValue by delegating to append to enforce uniqueness of the newValue.
+		 *
+		 * Otherwise the old value is removed, its consumingInvocations are invalidated
+		 * so that they recompute with the newValue which replaces the old.
+		 */
+		@NonNull Object replace(@NonNull Object connectionKey, @NonNull Object newValue);
+
+		/**
+		 * Revoke, inverse append, the old value at connectionKey.
+		 *
+		 * If the old value is a multiple value in a unique value connection, the multi-value count is decremented.
+		 *
+		 * Otherwise the old value is removed, its consumingInvocations are revoked
+		 * so that their appends are also revoked.
+		 */
+		void revoke(@NonNull Object connectionKey);
+	}
+
 	void addAppender(@NonNull InvocationConstructor appendingInvoker);
 
-	void addConsumer(@NonNull InvocationConstructor consumingInvoker);
+	boolean addConsumer(@NonNull InvocationConstructor consumingInvoker);
 
 	/**
 	 * Append aValue to the contents, enforcing uniqueness if necessary, and waking up the overall
 	 * connection manager to schedule a propagate() to consumers when convenient.
+	 *
+	 * Return the new entry.
 	 */
 	@NonNull Object append(@NonNull Object aValue);
-
-	void check();
-
-	/**
-	 * Remove the revoked entries and update the internal indexes accordingly.
-	 */
-	void cleanup();
-
-	void consume(int elementIndex, @NonNull Invocation mapping);
-
-	@NonNull Iterable<@NonNull InvocationConstructor> getAppenders();
 
 	int getCapacity();
 
 	@NonNull Iterable<@NonNull InvocationConstructor> getConsumers();
-
-	//	@NonNull Iterable<@NonNull Invocation> getConsumers(int i);
 
 	@Nullable Object getValue(int i);
 
 	int getValues();
 
 	void propagate();
-
-	/**
-	 * Replace the old value at connectionKey by newValue.
-	 *
-	 * If the old value is a multiple value in a unique value connection, the multi-value count is decremented
-	 * and a new entry created for the newValue by delegating to append to enforce uniqueness of the newValue.
-	 *
-	 * Otherwise the old value is removed, its consumingInvocations are invalidated
-	 * so that they recompute with the newValue which replaces the old.
-	 */
-	@NonNull Object replace(@NonNull Object connectionKey, @NonNull Object newValue);
-
-	/**
-	 * Revoke, inverse append, the old value at connectionKey.
-	 *
-	 * If the old value is a multiple value in a unique value connection, the multi-value count is decremented.
-	 *
-	 * Otherwise the old value is removed, its consumingInvocations are revoked
-	 * so that their appends are also revoked.
-	 */
-	void revoke(@NonNull Object connectionKey);
 
 	<@NonNull T> @NonNull Iterable<T> typedIterable(Class<T> elementClass);
 }

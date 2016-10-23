@@ -12,6 +12,7 @@ package org.eclipse.qvtd.pivot.qvtimperative.utilities;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
@@ -19,6 +20,7 @@ import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseHelper;
 import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.AppendParameter;
+import org.eclipse.qvtd.pivot.qvtimperative.AppendParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.BufferStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.CheckStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
@@ -54,6 +56,13 @@ public class QVTimperativeHelper extends QVTbaseHelper
 		asVariable.setType(asType);
 		asVariable.setIsRequired(isRequired);
 		return asVariable;
+	}
+
+	public @NonNull AppendParameterBinding createAppendParameterBinding(@NonNull AppendParameter variable, @NonNull ConnectionVariable value) {
+		AppendParameterBinding mappingParameterBinding = QVTimperativeFactory.eINSTANCE.createAppendParameterBinding();
+		mappingParameterBinding.setBoundVariable(variable);
+		mappingParameterBinding.setValue(value);
+		return mappingParameterBinding;
 	}
 
 	public @NonNull BufferStatement createBufferStatement(@NonNull String name, @NonNull Type asType, boolean isRequired, @Nullable OCLExpression initExpression) {
@@ -94,7 +103,10 @@ public class QVTimperativeHelper extends QVTbaseHelper
 		GuardParameterBinding mappingParameterBinding = QVTimperativeFactory.eINSTANCE.createGuardParameterBinding();
 		mappingParameterBinding.setBoundVariable(variable);
 		mappingParameterBinding.setValue(value);
-		mappingParameterBinding.setIsCheck(!value.getType().conformsTo(standardLibrary, ClassUtil.nonNullState(variable.getType())));
+		CollectionType collectionType = (CollectionType) value.getType();
+		Type elementType = collectionType.getElementType();
+		Type guardType = ClassUtil.nonNullState(variable.getType());
+		mappingParameterBinding.setIsCheck(!elementType.conformsTo(standardLibrary, guardType));
 		return mappingParameterBinding;
 	}
 

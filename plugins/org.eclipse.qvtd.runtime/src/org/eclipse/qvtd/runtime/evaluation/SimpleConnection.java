@@ -12,20 +12,20 @@ package org.eclipse.qvtd.runtime.evaluation;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.ids.CollectionTypeId;
-import org.eclipse.qvtd.runtime.internal.evaluation.AbstractUnenforcedConnectionInternal;
+import org.eclipse.qvtd.runtime.internal.evaluation.AbstractConnectionInternal;
 
 /**
- * An UnenforcedConnection maintains the values between one or more sources, typically Mappings, that
- * invoke append() and one or more consumers that consume each value.
+ * A SimpleConnection maintains the unique values between one or more sources,
+ * typically Mappings, that invoke append() and one or more consumers that consume each value.
  *
  * It is assumed that the overall application enforces unqiueness externally if uniqueness of values is required.
- * Use EnforcedConnection to enforce uniqueness internally.
+ * Use StrictConnection to enforce uniqueness internally.
  *
- * Incremental update is supported by a revoke() or an append(), or a replace() of an appended value.
+ * Incremental update is not supported.
  */
-public class UnenforcedConnection extends AbstractUnenforcedConnectionInternal
+public class SimpleConnection extends AbstractConnectionInternal
 {
-	public UnenforcedConnection(@NonNull Interval interval, @NonNull String name, @NonNull CollectionTypeId typeId) {
+	public SimpleConnection(@NonNull Interval interval, @NonNull String name, @NonNull CollectionTypeId typeId) {
 		super(interval, name, typeId);
 	}
 }

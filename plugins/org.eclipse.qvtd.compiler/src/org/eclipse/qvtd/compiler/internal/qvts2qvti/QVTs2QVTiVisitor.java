@@ -18,7 +18,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -492,7 +491,8 @@ public class QVTs2QVTiVisitor extends QVTimperativeHelper implements Visitor<Ele
 			region2Mapping.createStatements();
 			//			}
 		}
-		ECollections.sort(qvtiTransformation.getRule(), NameUtil.NameableComparator.INSTANCE);
+		// Mappings are in schedule index order.
+		//		ECollections.sort(qvtiTransformation.getRule(), NameUtil.NameableComparator.INSTANCE);
 		/*		org.eclipse.ocl.pivot.Package rootPackage = PivotUtil.createPackage("", "yy", "zz", null);
 		rootPackage.getOwnedClasses().add(qvtiTransformation);
 		Model model = PivotUtil.createModel(ImperativeModel.class, QVTimperativePackage.Literals.IMPERATIVE_MODEL, null);

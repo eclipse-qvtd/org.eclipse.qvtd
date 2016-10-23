@@ -352,9 +352,11 @@ public class Execution2GraphVisitor extends AbstractExecutionVisitor<@Nullable O
 	@Override
 	public @Nullable Object visitConnection(@NonNull Connection object) {
 		GraphNode connectionNode = getConnectionNode(object);
-		for (@NonNull InvocationConstructor producer : object.getAppenders()) {
-			GraphNode producerNode = getInvocationConstructorNode(producer);
-			appendEdge(producerNode, connectionNode, "brown", null);
+		if (object instanceof Connection.Incremental) {
+			for (@NonNull InvocationConstructor producer : ((Connection.Incremental)object).getAppenders()) {
+				GraphNode producerNode = getInvocationConstructorNode(producer);
+				appendEdge(producerNode, connectionNode, "brown", null);
+			}
 		}
 		for (@NonNull InvocationConstructor consumer : object.getConsumers()) {
 			GraphNode consumerNode = getInvocationConstructorNode(consumer);

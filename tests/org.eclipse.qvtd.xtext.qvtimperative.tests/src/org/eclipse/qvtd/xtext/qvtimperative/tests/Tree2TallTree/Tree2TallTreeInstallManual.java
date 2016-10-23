@@ -234,11 +234,12 @@ public class Tree2TallTreeInstallManual extends AbstractTransformer
 				for (@NonNull Node iterator : ValueUtil.typedIterable(Node.class, sortedBy)) {
 					nodes.append(iterator);
 				}
-				final @NonNull Connection node2tallNodes_1 = createConnection("node2tallNodes_1", SEQ_CLSSid_Node2TallNode, false);
+				final Connection.@NonNull Incremental node2tallNodes_1 = createIncrementalConnection("node2tallNodes_1", SEQ_CLSSid_Node2TallNode, false);
 				// mapping statements
-				CTOR_Node2MiddleNode.connect(new @NonNull Connection[]{nodes}, new @NonNull Connection[]{node2tallNodes_1});
-				CTOR_Edge2MiddleEdge.connect(new @NonNull Connection[]{nodes}, null);
-				CTOR_MiddleNode2TallNode.connect(new @NonNull Connection[]{node2tallNodes_1}, null);
+				CTOR_Node2MiddleNode.addConsumedConnection(nodes);
+				CTOR_Node2MiddleNode.addAppendedConnection(node2tallNodes_1);
+				CTOR_Edge2MiddleEdge.addConsumedConnection(nodes);
+				CTOR_MiddleNode2TallNode.addConsumedConnection(node2tallNodes_1);
 				final /*@Thrown*/ @Nullable Boolean __root__ = ValueUtil.TRUE_VALUE;
 				return __root__;
 			} catch (Throwable e) {
@@ -302,7 +303,7 @@ public class Tree2TallTreeInstallManual extends AbstractTransformer
 		@Override
 		public boolean isEqual(@NonNull IdResolver idResolver, @NonNull Object @NonNull [] thoseValues) {
 			return idResolver.oclEquals(node, thoseValues[0])
-				&& idResolver.oclEquals(node2tallNodes, thoseValues[1]);
+					&& idResolver.oclEquals(node2tallNodes, thoseValues[1]);
 		}
 	}
 

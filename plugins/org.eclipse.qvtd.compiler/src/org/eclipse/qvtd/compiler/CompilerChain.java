@@ -74,6 +74,7 @@ public interface CompilerChain
 	public static final @NonNull Key<Boolean> VALIDATE_KEY = new Key<Boolean>("validate");
 
 	public static final @NonNull Key<@Nullable String> JAVA_EXTRA_PREFIX_KEY = new Key<@Nullable String>("javaExtraPrefix");
+	public static final @NonNull Key<@Nullable Boolean> JAVA_INCREMENTAL_KEY = new Key<@Nullable Boolean>("javaIncremental");
 
 	public static final @NonNull String GENMODEL_BASE_PREFIX = "genModelBasePrefix";
 	public static final @NonNull String GENMODEL_COPYRIGHT_TEXT = "genModelCopyrightText";

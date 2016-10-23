@@ -111,7 +111,7 @@ public class QVTimperativeToStringVisitor extends QVTbaseToStringVisitor impleme
 	@Override
 	public @Nullable String visitBufferStatement(@NonNull BufferStatement asVariable) {
 		if (asVariable.isIsStrict()) {
-			context.append("strict ");
+			context.append("«strict»");
 		}
 		append("buffer ");
 		appendName(asVariable);
@@ -230,15 +230,18 @@ public class QVTimperativeToStringVisitor extends QVTbaseToStringVisitor impleme
 
 	@Override
 	public @Nullable String visitMapping(@NonNull Mapping asMapping) {
-		//		if (asMapping.isIsStrict()) {
-		//			context.append("strict ");
-		//		}
+		if (asMapping.isIsStrict()) {
+			context.append("«strict»");
+		}
 		appendQualifiedName(asMapping);
 		return null;
 	}
 
 	@Override
 	public @Nullable String visitMappingCall(@NonNull MappingCall object) {
+		if (object.isIsInstall()) {
+			append("«install»");
+		}
 		appendQualifiedName(object.getReferredMapping());
 		append(" {");
 		boolean isFirst = true;

@@ -22,10 +22,13 @@ public interface InvocationConstructor extends ExecutionVisitable, Nameable
 {
 	public interface Incremental extends InvocationConstructor
 	{
+
 		int nextSequence();
 	}
 
-	void addConsumedConection(@NonNull Connection connection);
+	void addAppendedConnection(@NonNull Connection connection);
+
+	void addConsumedConnection(@NonNull Connection connection);
 
 	@NonNull Interval getInterval();
 

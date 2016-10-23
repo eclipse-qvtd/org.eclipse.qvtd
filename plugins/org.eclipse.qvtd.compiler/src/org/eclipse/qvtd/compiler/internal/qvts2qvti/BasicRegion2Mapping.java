@@ -691,6 +691,21 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		return node2variable.get(node);
 	}
 
+	/**
+	 *	Create accumulation assignments for connections.
+	 */
+	private void createAddStatements() {
+		if (connection2variable != null) {
+			for (@NonNull NodeConnection connection : connection2variable.keySet()) {
+				Node sourceNode = connection.getSource(region);
+				OCLExpression variableExpression = createVariableExp(sourceNode);
+				ConnectionVariable connectionVariable = connection2variable.get(connection);
+				assert connectionVariable != null;
+				createAddStatement(connectionVariable, variableExpression);
+			}
+		}
+	}
+
 	private @NonNull DeclareStatement createBottomVariable(@NonNull Node node, @NonNull OCLExpression initExpression) {
 		//		String string = initExpression.toString();
 		Type variableType = node.getCompleteClass().getPrimaryClass();
@@ -723,21 +738,6 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 				boolean isNotify = isHazardousWrite(edge);
 				SetStatement setStatement = QVTimperativeUtil.createSetStatement(slotVariable, property, targetVariableExp, isNotify);
 				mapping.getOwnedStatements().add(setStatement);
-			}
-		}
-	}
-
-	/**
-	 *	Create accumulation assignments for connections.
-	 */
-	private void createAddStatements() {
-		if (connection2variable != null) {
-			for (@NonNull NodeConnection connection : connection2variable.keySet()) {
-				Node sourceNode = connection.getSource(region);
-				OCLExpression variableExpression = createVariableExp(sourceNode);
-				ConnectionVariable connectionVariable = connection2variable.get(connection);
-				assert connectionVariable != null;
-				createAddStatement(connectionVariable, variableExpression);
 			}
 		}
 	}

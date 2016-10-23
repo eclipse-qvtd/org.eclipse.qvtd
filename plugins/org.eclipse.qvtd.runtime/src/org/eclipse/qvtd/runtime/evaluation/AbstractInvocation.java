@@ -72,6 +72,10 @@ public abstract class AbstractInvocation extends AbstractInvocationInternal
 			return constructor.getInterval().createConnection(name, typeId, isStrict);
 		}
 
+		protected Connection.@NonNull Incremental createIncrementalConnection(@NonNull String name, @NonNull CollectionTypeId typeId, boolean isStrict) {
+			return constructor.getInterval().createIncrementalConnection(name, typeId, isStrict);
+		}
+
 		@Override
 		public @NonNull Iterable<@NonNull Object> getCreatedObjects() {
 			return createdObjects != null ? createdObjects : EMPTY_OBJECT_LIST;

@@ -24,6 +24,8 @@ public interface Interval extends ExecutionVisitable, Nameable
 {
 	@NonNull Connection createConnection(@NonNull String name, @NonNull CollectionTypeId typeId, boolean isStrict);
 
+	Connection.@NonNull Incremental createIncrementalConnection(@NonNull String name, @NonNull CollectionTypeId typeId, boolean isStrict);
+
 	boolean flush();
 
 	@NonNull Iterable<@NonNull Connection> getConnections();

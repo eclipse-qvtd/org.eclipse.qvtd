@@ -22,6 +22,7 @@ import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.GuardParameterBindingCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.GuardParameterCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.ImportCSElements;
+import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.LoopParameterBindingCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.MappingCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.MappingCallCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.MappingLoopCSElements;
@@ -87,6 +88,7 @@ public class QVTimperativeFormatter extends AbstractEssentialOCLFormatter
 		}
 		{
 			AppendParameterBindingCSElements a = f.getAppendParameterBindingCSAccess();
+			c.setLinewrap(1).before(a.getGroup());
 			setNoSpaceLineWrap(c, a.getSemicolonKeyword_3());
 		}
 		{
@@ -130,6 +132,11 @@ public class QVTimperativeFormatter extends AbstractEssentialOCLFormatter
 		{
 			ImportCSElements a = f.getImportCSAccess();
 			setNoSpaceLineWrap(c, a.getSemicolonKeyword_4());
+		}
+		{
+			LoopParameterBindingCSElements a = f.getLoopParameterBindingCSAccess();
+			c.setLinewrap(1).before(a.getGroup());
+			c.setNoSpace().before(a.getSemicolonKeyword_4());
 		}
 		{
 			MappingCSElements a = f.getMappingCSAccess();

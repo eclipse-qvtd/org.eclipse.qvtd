@@ -36,21 +36,6 @@ public abstract class AbstractInvocationConstructor implements InvocationConstru
 			super(invocationManager, name, isStrict);
 		}
 
-		public void connect(@NonNull Connection @Nullable [] consumedConnections, @NonNull Connection @Nullable [] appendedConnections) {
-			if (consumedConnections != null) {
-				for (@NonNull Connection consumedConnection : consumedConnections) {
-					consumedConnection.addConsumer(this);
-					addConsumedConection(consumedConnection);
-				}
-			}
-			if (appendedConnections != null) {
-				for (@NonNull Connection appendedConnection : appendedConnections) {
-					appendedConnection.addAppender(this);
-					addAppendedConnection(appendedConnection);
-				}
-			}
-		}
-
 		@Override
 		public int nextSequence() {
 			return sequence++;
@@ -93,16 +78,19 @@ public abstract class AbstractInvocationConstructor implements InvocationConstru
 		return visitor.visitInvocationConstructor(this);
 	}
 
-	protected void addAppendedConnection(@NonNull Connection connection) {
+	@Override
+	public void addAppendedConnection(@NonNull Connection connection) {
 		assert oldConsumedIndexes == null;
 		assert !appendedConnections.contains(connection);
 		appendedConnections.add(connection);
+		connection.addAppender(this);
 	}
 
 	@Override
-	public void addConsumedConection(@NonNull Connection connection) {
+	public void addConsumedConnection(@NonNull Connection connection) {
 		assert !consumedConnections.contains(connection);
 		consumedConnections.add(connection);
+		connection.addConsumer(this);
 	}
 
 	@Override
@@ -248,7 +236,9 @@ public abstract class AbstractInvocationConstructor implements InvocationConstru
 			Invocation mappingInstance = invoke(boundValues);
 			for (int i = 0; i < consumedConnectionsSize; i++) {
 				Connection consumedConnection = consumedConnections.get(i);
-				consumedConnection.consume(consumeIndexes[i], mappingInstance);
+				if (consumedConnection instanceof Connection.Incremental) {
+					((Connection.Incremental)consumedConnection).consume(consumeIndexes[i], mappingInstance);
+				}
 			}
 		}
 	}

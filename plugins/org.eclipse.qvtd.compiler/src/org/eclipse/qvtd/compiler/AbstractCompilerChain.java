@@ -161,6 +161,10 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 			if (javaExtraPrefix != null) {
 				options.setPackagePrefix(javaExtraPrefix);
 			}
+			Boolean javaIsIncremental = compilerChain.getOption(JAVA_STEP, JAVA_INCREMENTAL_KEY);
+			if (javaIsIncremental != null) {
+				options.setIsIncremental(true);
+			}
 			String javaCodeSource;
 			try {
 				javaCodeSource = cg.generateClassFile();

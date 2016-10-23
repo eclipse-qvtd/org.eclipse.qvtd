@@ -371,19 +371,6 @@ public abstract class AbstractRegion2Mapping
 		return false;
 	}
 
-	// FIXME temporary backward compatibility
-	protected void setLegacyIsPolled(@NonNull Mapping calledMapping, @NonNull MappingParameterBinding mappingParameterBinding) {
-		/*		for (Domain domain : calledMapping.getDomain()) {
-			if (domain instanceof ImperativeDomain) {
-				ImperativeDomain imperativeDomain = (ImperativeDomain)domain;
-				if (imperativeDomain.getCheckedProperties().size() > 0) {
-					mappingParameterBinding.setIsPolled(true);
-					return;
-				}
-			}
-		} */
-	}
-
 	@Override
 	public String toString() {
 		return mapping.toString();
