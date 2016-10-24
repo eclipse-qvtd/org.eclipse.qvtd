@@ -12,6 +12,7 @@ package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
 
 import java.io.IOException;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -48,7 +49,6 @@ import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.AppendParameterBinding;
-import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
@@ -63,6 +63,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.SimpleParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
+import org.eclipse.qvtd.runtime.evaluation.Interval;
 import org.eclipse.qvtd.runtime.evaluation.InvocationFailedException;
 
 public abstract class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
@@ -72,6 +73,7 @@ public abstract class BasicQVTiExecutor extends AbstractExecutor implements QVTi
 	private @Nullable QVTiModelManager modelManager = null;
 	protected final boolean debugExceptions = AbstractTransformer.EXCEPTIONS.isActive();
 	protected final boolean debugInvocations = AbstractTransformer.INVOCATIONS.isActive();
+	private final @NonNull Map<@NonNull Mapping, @NonNull Interval> mapping2interval = new HashMap<>();;
 
 	public BasicQVTiExecutor(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull ImperativeTransformation transformation) {
 		super(environmentFactory);
@@ -164,6 +166,12 @@ public abstract class BasicQVTiExecutor extends AbstractExecutor implements QVTi
 		return (QVTiEvaluationEnvironment) super.getEvaluationEnvironment();
 	}
 
+	@Override
+	public @NonNull Interval getInterval(@NonNull Mapping asMapping) {
+		Interval interval = mapping2interval.get(asMapping);
+		return ClassUtil.nonNullState(interval);
+	}
+
 	/**
 	 * Gets the named TypedModel.
 	 */
@@ -248,17 +256,21 @@ public abstract class BasicQVTiExecutor extends AbstractExecutor implements QVTi
 				int index = 0;
 				for (MappingParameterBinding binding : mappingCall.getBinding()) {
 					MappingParameter boundVariable = ClassUtil.nonNullState(binding.getBoundVariable());
+					Object boundValue = boundValues[index++];
 					if (binding instanceof AppendParameterBinding) {	// FIXME visit the bindings
-						replace(boundVariable, boundValues[index++], !(boundVariable instanceof ConnectionVariable));	// FIXME static type conformance test
+						replace(boundVariable, boundValue, false);
 					}
 					else if (binding instanceof GuardParameterBinding) {
-						replace(boundVariable, boundValues[index++], !(boundVariable instanceof ConnectionVariable));	// FIXME static type conformance test
+						//						if (boundValue instanceof Connection) {
+						//							boundValue = ((Connection)boundValue).
+						//						}
+						replace(boundVariable, boundValue, ((GuardParameterBinding)binding).isIsCheck());
 					}
 					else if (binding instanceof LoopParameterBinding) {
-						replace(boundVariable, boundValues[index++], !(boundVariable instanceof ConnectionVariable));	// FIXME static type conformance test
+						replace(boundVariable, boundValue, ((LoopParameterBinding)binding).isIsCheck());
 					}
 					else if (binding instanceof SimpleParameterBinding) {
-						replace(boundVariable, boundValues[index++], !(boundVariable instanceof ConnectionVariable));	// FIXME static type conformance test
+						replace(boundVariable, boundValue, ((SimpleParameterBinding)binding).isIsCheck());
 					}
 					else {
 						assert false;
@@ -354,10 +366,13 @@ public abstract class BasicQVTiExecutor extends AbstractExecutor implements QVTi
 	@Override
 	public @Nullable Object internalExecuteTransformation(@NonNull ImperativeTransformation transformation, @NonNull EvaluationVisitor undecoratedVisitor) {
 		Mapping rule = QVTimperativeUtil.getOwnedMapping(transformation, QVTimperativeUtil.ROOT_MAPPING_NAME);
+		//		assert rule == transformation.getRule().get(0);
 		CallExp callExp = PivotFactory.eINSTANCE.createOperationCallExp();		// FIXME TransformationCallExp
 		pushEvaluationEnvironment(rule, (TypedElement)callExp);
 		try {
-			rule.accept(undecoratedVisitor);
+			Interval rootInterval = getInvocationManager().getRootInterval();
+			mapping2interval.put(rule, rootInterval);
+			rule.accept(undecoratedVisitor);			// Use an outer InvocationConstructor?
 			getInvocationManager().flush();
 		}
 		finally {

@@ -28,7 +28,6 @@ import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.CollectionValue;
-import org.eclipse.ocl.pivot.values.CollectionValue.Accumulator;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
@@ -67,6 +66,9 @@ import org.eclipse.qvtd.pivot.qvtimperative.SimpleParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 import org.eclipse.qvtd.pivot.qvtimperative.VariableStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
+import org.eclipse.qvtd.runtime.evaluation.Connection;
+import org.eclipse.qvtd.runtime.evaluation.Interval;
+import org.eclipse.qvtd.runtime.evaluation.InvocationConstructor;
 import org.eclipse.qvtd.runtime.evaluation.InvocationFailedException;
 
 /**
@@ -86,24 +88,151 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 
 	private @Nullable Object doConnectionAccumulation(@NonNull ConnectionVariable targetVariable, @NonNull OCLExpression valueExpression) {
 		try {
-			Object connection = executor.getValueOf(targetVariable);
-			CollectionValue.Accumulator connectionCollection = (Accumulator) ValueUtil.asCollectionValue(connection);
+			Object targetValue = ClassUtil.nonNullState(executor.getValueOf(targetVariable));
+			Connection connectionCollection = (Connection) targetValue;
 			Object values = valueExpression.accept(undecoratedVisitor);
-			if (values instanceof Iterable<?>) {
-				CollectionValue valuesCollection = ValueUtil.asCollectionValue(values);
-				for (Object value : valuesCollection) {
-					connectionCollection.add(value);
-				}
-			}
-			else {
-				connectionCollection.add(values);
-			}
+			//			if (values instanceof Iterable<?>) {
+			//				CollectionValue valuesCollection = ValueUtil.asCollectionValue(values);
+			//				for (Object value : valuesCollection) {
+			//					connectionCollection.append(value);
+			//				}
+			//			}
+			//			else {
+			connectionCollection.append(values);
+			//			}
 			return connectionCollection;
 		}
 		catch (RuntimeException e) {
 			executor.replace(targetVariable, e, false);
 			throw e;
 		}
+	}
+
+	private @Nullable Object doMappingCall(@NonNull MappingCall mappingCall) {
+		Mapping referredMapping = mappingCall.getReferredMapping();
+		if (referredMapping == null) {
+			return null;
+		}
+		@NonNull Object @NonNull [] boundValues = new @NonNull Object[mappingCall.getBinding().size()];
+		int index = 0;
+		for (MappingParameterBinding binding : mappingCall.getBinding()) {
+			VariableDeclaration boundVariable = binding.getBoundVariable();
+			if (boundVariable == null) {
+				return null;
+			}
+			if (binding instanceof AppendParameterBinding) {	// FIXME visit the bindings
+				AppendParameterBinding appendParameterBinding = (AppendParameterBinding)binding;
+				ConnectionVariable value = appendParameterBinding.getValue();
+				if (value == null) {
+					return null;
+				}
+				Object valueOrValues = executor.getValueOf(value);
+				if (valueOrValues == null) {
+					return null;
+				}
+				boundValues[index++] = valueOrValues;
+			}
+			else if (binding instanceof GuardParameterBinding) {
+				Type varType = boundVariable.getType();
+				if (varType == null) {
+					return null;
+				}
+				GuardParameterBinding guardParameterBinding = (GuardParameterBinding)binding;
+				ConnectionVariable value = guardParameterBinding.getValue();
+				if (value == null) {
+					return null;
+				}
+				Object valueOrValues = executor.getValueOf(value);
+				if (valueOrValues == null) {
+					return null;
+				}
+				Type valueType = idResolver.getDynamicTypeOf(valueOrValues);
+				if (!guardParameterBinding.isIsCheck() || valueType.conformsTo(environmentFactory.getStandardLibrary(), varType)) {
+					boundValues[index++] = valueOrValues;
+				}
+				else {
+					return null;
+				}
+			}
+			else if (binding instanceof LoopParameterBinding) {
+				Type varType = boundVariable.getType();
+				if (varType == null) {
+					return null;
+				}
+				LoopParameterBinding guardParameterBinding = (LoopParameterBinding)binding;
+				LoopVariable value = guardParameterBinding.getValue();
+				if (value == null) {
+					return null;
+				}
+				Object valueOrValues = executor.getValueOf(value);
+				if (valueOrValues == null) {
+					return null;
+				}
+				Type valueType = idResolver.getDynamicTypeOf(valueOrValues);
+				if (!guardParameterBinding.isIsCheck() || valueType.conformsTo(environmentFactory.getStandardLibrary(), varType)) {
+					boundValues[index++] = valueOrValues;
+				}
+				else {
+					return null;
+				}
+			}
+			else if (binding instanceof SimpleParameterBinding) {
+				Type varType = boundVariable.getType();
+				if (varType == null) {
+					return null;
+				}
+				SimpleParameterBinding simpleParameterBinding = (SimpleParameterBinding)binding;
+				OCLExpression value = simpleParameterBinding.getValue();
+				if (value == null) {
+					return null;
+				}
+				Object valueOrValues = value.accept(undecoratedVisitor);
+				if (valueOrValues == null) {
+					return null;
+				}
+				assert !(boundVariable instanceof ConnectionVariable);
+				//					boundValues[index++] = valueOrValues;
+
+				//				}
+				//				else {
+				Type valueType = idResolver.getDynamicTypeOf(valueOrValues);
+				if (!simpleParameterBinding.isIsCheck() || valueType.conformsTo(environmentFactory.getStandardLibrary(), varType)) {
+					boundValues[index++] = valueOrValues;
+				}
+				else {
+					return null;
+				}
+				//				}
+			}
+		}
+		return executor.internalExecuteMappingCall(mappingCall, boundValues, undecoratedVisitor);
+	}
+
+	private @Nullable Object doMappingInstall(@NonNull MappingCall mappingCall) {
+		Mapping referredMapping = mappingCall.getReferredMapping();
+		if (referredMapping == null) {
+			return null;
+		}
+		InvocationConstructor invocationConstructor = executor.getInvocationConstructor(mappingCall, undecoratedVisitor);
+		List<MappingParameterBinding> mappingBindings = mappingCall.getBinding();
+		assert mappingBindings != null;
+		for (MappingParameterBinding asMappingCallBinding : mappingBindings) {
+			if (asMappingCallBinding instanceof GuardParameterBinding) {
+				ConnectionVariable connectionVariable = ((GuardParameterBinding)asMappingCallBinding).getValue();
+				assert connectionVariable != null;
+				Object value = executor.getValueOf(connectionVariable);
+				assert value != null;
+				invocationConstructor.addConsumedConnection((Connection) value);
+			}
+			else if (asMappingCallBinding instanceof AppendParameterBinding) {
+				ConnectionVariable connectionVariable = ((AppendParameterBinding)asMappingCallBinding).getValue();
+				assert connectionVariable != null;
+				Object value = executor.getValueOf(connectionVariable);
+				assert value != null;
+				invocationConstructor.addAppendedConnection((Connection) value);
+			}
+		}
+		return Boolean.TRUE;
 	}
 
 	@Override
@@ -160,21 +289,27 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 
 	@Override
 	public Object visitBufferStatement(@NonNull BufferStatement object) {
-		CollectionValue.Accumulator accumulator;
+		Mapping asMapping = QVTimperativeUtil.getContainingMapping(object);
+		assert asMapping != null;
+		Interval interval = executor.getInterval(asMapping);
+		Connection connection = null;
 		OCLExpression ownedExpression = object.getOwnedExpression();
+		String name = object.getName();
+		assert name != null;
 		if (ownedExpression != null) {
 			Object initValue = ownedExpression.accept(undecoratedVisitor);
-			accumulator = ValueUtil.createCollectionAccumulatorValue((CollectionTypeId) ownedExpression.getTypeId());
+			connection = interval.createConnection(name, (CollectionTypeId) ownedExpression.getTypeId(), object.isIsStrict());
 			if (initValue != null) {
 				for (Object value : (Iterable<?>)initValue) {
-					accumulator.add(value);
+					assert value != null;
+					connection.append(value);
 				}
 			}
 		}
 		else {
-			accumulator = ValueUtil.createCollectionAccumulatorValue((CollectionTypeId) object.getTypeId());
+			connection = interval.createConnection(name, (CollectionTypeId) object.getTypeId(), object.isIsStrict());
 		}
-		executor.replace(object, accumulator, false);
+		executor.replace(object, connection, false);
 		return true;
 	}
 
@@ -279,108 +414,20 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 
 	@Override
 	public @Nullable Object visitMappingCall(@NonNull MappingCall mappingCall) {
-		Mapping referredMapping = mappingCall.getReferredMapping();
-		if (referredMapping == null) {
-			return null;
+		if (mappingCall.isIsInstall()) {
+			return doMappingInstall(mappingCall);
 		}
-		@NonNull Object @NonNull [] boundValues = new @NonNull Object[mappingCall.getBinding().size()];
-		int index = 0;
-		for (MappingParameterBinding binding : mappingCall.getBinding()) {
-			VariableDeclaration boundVariable = binding.getBoundVariable();
-			if (boundVariable == null) {
-				return null;
-			}
-			if (binding instanceof AppendParameterBinding) {	// FIXME visit the bindings
-				AppendParameterBinding appendParameterBinding = (AppendParameterBinding)binding;
-				ConnectionVariable value = appendParameterBinding.getValue();
-				if (value == null) {
-					return null;
-				}
-				Object valueOrValues = executor.getValueOf(value);
-				if (valueOrValues == null) {
-					return null;
-				}
-				boundValues[index++] = valueOrValues;
-			}
-			else if (binding instanceof GuardParameterBinding) {
-				Type varType = boundVariable.getType();
-				if (varType == null) {
-					return null;
-				}
-				GuardParameterBinding guardParameterBinding = (GuardParameterBinding)binding;
-				ConnectionVariable value = guardParameterBinding.getValue();
-				if (value == null) {
-					return null;
-				}
-				Object valueOrValues = executor.getValueOf(value);
-				if (valueOrValues == null) {
-					return null;
-				}
-				Type valueType = idResolver.getDynamicTypeOf(valueOrValues);
-				if (!guardParameterBinding.isIsCheck() || valueType.conformsTo(environmentFactory.getStandardLibrary(), varType)) {
-					boundValues[index++] = valueOrValues;
-				}
-				else {
-					return null;
-				}
-			}
-			else if (binding instanceof LoopParameterBinding) {
-				Type varType = boundVariable.getType();
-				if (varType == null) {
-					return null;
-				}
-				LoopParameterBinding guardParameterBinding = (LoopParameterBinding)binding;
-				LoopVariable value = guardParameterBinding.getValue();
-				if (value == null) {
-					return null;
-				}
-				Object valueOrValues = executor.getValueOf(value);
-				if (valueOrValues == null) {
-					return null;
-				}
-				Type valueType = idResolver.getDynamicTypeOf(valueOrValues);
-				if (!guardParameterBinding.isIsCheck() || valueType.conformsTo(environmentFactory.getStandardLibrary(), varType)) {
-					boundValues[index++] = valueOrValues;
-				}
-				else {
-					return null;
-				}
-			}
-			else if (binding instanceof SimpleParameterBinding) {
-				Type varType = boundVariable.getType();
-				if (varType == null) {
-					return null;
-				}
-				SimpleParameterBinding simpleParameterBinding = (SimpleParameterBinding)binding;
-				OCLExpression value = simpleParameterBinding.getValue();
-				if (value == null) {
-					return null;
-				}
-				Object valueOrValues = value.accept(undecoratedVisitor);
-				if (valueOrValues == null) {
-					return null;
-				}
-				assert !(boundVariable instanceof ConnectionVariable);
-				//					boundValues[index++] = valueOrValues;
-
-				//				}
-				//				else {
-				Type valueType = idResolver.getDynamicTypeOf(valueOrValues);
-				if (!simpleParameterBinding.isIsCheck() || valueType.conformsTo(environmentFactory.getStandardLibrary(), varType)) {
-					boundValues[index++] = valueOrValues;
-				}
-				else {
-					return null;
-				}
-				//				}
-			}
+		else {
+			return doMappingCall(mappingCall);
 		}
-		return executor.internalExecuteMappingCall(mappingCall, boundValues, undecoratedVisitor);
 	}
 
 	@Override
 	public @Nullable Object visitMappingLoop(@NonNull MappingLoop mappingLoop) {
 		Object inValues = mappingLoop.getOwnedExpression().accept(undecoratedVisitor);
+		if (inValues instanceof Connection) {
+			inValues = ((Connection)inValues).typedIterable(Object.class);
+		}
 		if (inValues instanceof Iterable<?>) {
 			List<LoopVariable> iterators = mappingLoop.getOwnedIterators();
 			if (iterators.size() > 0) {

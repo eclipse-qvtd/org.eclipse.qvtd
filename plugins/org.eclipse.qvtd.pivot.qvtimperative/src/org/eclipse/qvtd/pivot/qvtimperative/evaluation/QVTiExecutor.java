@@ -22,6 +22,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
+import org.eclipse.qvtd.runtime.evaluation.Interval;
 import org.eclipse.qvtd.runtime.evaluation.InvocationConstructor;
 import org.eclipse.qvtd.runtime.evaluation.InvocationManager;
 
@@ -31,6 +32,7 @@ public interface QVTiExecutor extends ExecutorInternal
 	Boolean execute();
 	@Override
 	@NonNull QVTiEvaluationEnvironment getEvaluationEnvironment();
+	@NonNull Interval getInterval(@NonNull Mapping asMapping);
 	@NonNull InvocationConstructor getInvocationConstructor(@NonNull MappingCall mappingCall, @NonNull EvaluationVisitor undecoratedVisitor);
 	@NonNull InvocationManager getInvocationManager();
 	@Nullable Resource getModel(@NonNull String name);

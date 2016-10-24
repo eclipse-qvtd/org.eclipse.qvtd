@@ -69,11 +69,11 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 	 */
 	public static int RUN_TIME_EVALUATOR_API_VERSION = Transformer.RUN_TIME_EVALUATOR_API_VERSION_1_1_0_2;
 
-	public static final class InterpretedInvocationConstructor extends AbstractInvocationConstructor.Incremental
+	public static class InterpretedInvocationConstructor extends AbstractInvocationConstructor.Incremental
 	{
 		protected final @NonNull QVTiIncrementalExecutor executor;
-		private final @NonNull MappingCall mappingCall;
-		private final @NonNull EvaluationVisitor undecoratedVisitor;
+		protected final @NonNull MappingCall mappingCall;
+		protected final @NonNull EvaluationVisitor undecoratedVisitor;
 
 		public InterpretedInvocationConstructor(@NonNull QVTiIncrementalExecutor executor, @NonNull Mapping asMapping,
 				@NonNull MappingCall mappingCall, @NonNull EvaluationVisitor undecoratedVisitor) {
@@ -93,7 +93,7 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 		}
 	}
 
-	public final static class InterpretedInvocation extends AbstractInvocation.Incremental
+	public static class InterpretedInvocation extends AbstractInvocation.Incremental
 	{
 		protected final @NonNull Object @NonNull [] theseValues;
 

@@ -81,9 +81,11 @@ public abstract class AbstractInvocation extends AbstractInvocationInternal
 			return createdObjects != null ? createdObjects : EMPTY_OBJECT_LIST;
 		}
 
+		@SuppressWarnings("null")
 		@Override
 		public @NonNull String getName() {
-			return constructor.getName() + "-" + sequence;
+			InvocationConstructor constructor2 = constructor;	// May be invoked from toString() during constructor debugging
+			return (constructor2 != null ? constructor2.getName() : "null") + "-" + sequence;
 		}
 
 		@Override

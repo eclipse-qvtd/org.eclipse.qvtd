@@ -21,15 +21,12 @@ import java.util.Set;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.AnyType;
-import org.eclipse.ocl.pivot.CollectionKind;
-import org.eclipse.ocl.pivot.CollectionLiteralExp;
 import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.DataType;
 import org.eclipse.ocl.pivot.InvalidType;
 import org.eclipse.ocl.pivot.Iteration;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
-import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.TypeExp;
@@ -40,7 +37,6 @@ import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.internal.complete.StandardLibraryInternal;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
-import org.eclipse.ocl.pivot.utilities.TypeUtil;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.ClassDatumAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Edge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NavigableEdge;
@@ -56,6 +52,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingParameter;
+import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 
 public class RootRegion2Mapping extends AbstractScheduledRegion2Mapping
 {
@@ -155,19 +152,11 @@ public class RootRegion2Mapping extends AbstractScheduledRegion2Mapping
 				connection2variable.put(rootConnection, createRootConnectionVariable(name, commonType, initExpression));
 			}
 			else if (commonType instanceof CollectionType) {
-				CollectionLiteralExp initExpression = PivotFactory.eINSTANCE.createCollectionLiteralExp();
-				initExpression.setType(commonType);
-				initExpression.setKind(TypeUtil.getCollectionKind((CollectionType) commonType));
-				initExpression.setIsRequired(true);
-				connection2variable.put(rootConnection, createRootConnectionVariable(name, commonType, initExpression));
+				connection2variable.put(rootConnection, createRootConnectionVariable(name, commonType, null));
 			}
 			else {
-				CollectionLiteralExp initExpression = PivotFactory.eINSTANCE.createCollectionLiteralExp();
 				CollectionType setType = visitor.getEnvironmentFactory().getCompleteEnvironment().getSetType(commonType, true, null, null);
-				initExpression.setType(setType);
-				initExpression.setKind(CollectionKind.SET);
-				initExpression.setIsRequired(true);
-				connection2variable.put(rootConnection, createRootConnectionVariable(name, setType, initExpression));
+				connection2variable.put(rootConnection, createRootConnectionVariable(name, setType, null));
 			}
 		}
 	}
@@ -253,8 +242,14 @@ public class RootRegion2Mapping extends AbstractScheduledRegion2Mapping
 				}
 			}
 		} */
+		List<Statement> ownedStatements = mapping.getOwnedStatements();
 		for (@NonNull Region callableRegion : region.getCallableChildren()) {
-			mapping.getOwnedStatements().add(createCall(callableRegion, null));
+			if (isInstall(callableRegion)) {
+				ownedStatements.add(createInstall(callableRegion));
+			}
+			else {
+				ownedStatements.add(createCall(callableRegion, null));
+			}
 		}
 	}
 
@@ -325,5 +320,16 @@ public class RootRegion2Mapping extends AbstractScheduledRegion2Mapping
 			}
 		}
 		return commonType;
+	}
+
+	protected boolean isInstall(@NonNull Region calledRegion) {
+		AbstractRegion2Mapping calledRegion2Mapping = visitor.getRegion2Mapping(calledRegion);
+		for (@NonNull Node calledGuardNode : calledRegion2Mapping.getGuardNodes()) {
+			NodeConnection callingConnection = calledGuardNode.getIncomingPassedConnection();
+			if (callingConnection == null) {
+				return false;
+			}
+		}
+		return true;
 	}
 }

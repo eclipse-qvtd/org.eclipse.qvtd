@@ -42,6 +42,195 @@ public abstract class AbstractInvocationConstructor implements InvocationConstru
 		}
 	}
 
+	private static abstract class Binder
+	{
+		/**
+		 * The Mapping.ownedParameter index that consumes or appends to the connection.
+		 */
+		protected final int valueIndex;
+
+		/**
+		 * The Connection that provides the values to be consumed.
+		 */
+		protected final @NonNull Connection connection;
+
+		protected Binder(int valueIndex,  @NonNull Connection connection) {
+			this.valueIndex = valueIndex;
+			this.connection = connection;
+		}
+	}
+
+	private static class Appender extends Binder
+	{
+		/**
+		 * Next Appender in linked list of all appenders.
+		 */
+		private @Nullable Appender nextAppender = null;
+
+		protected Appender(int valueIndex, @NonNull Connection connection) {
+			super(valueIndex, connection);
+		}
+
+		public void appendAppender(int valueIndex, @NonNull Connection connection) {
+			if (nextAppender != null) {
+				nextAppender.appendAppender(valueIndex, connection);
+			}
+			else {
+				nextAppender = new Appender(valueIndex, connection);
+			}
+		}
+
+		public void propagate(@NonNull Object @NonNull [] values) {
+			values[valueIndex] = connection;
+			if (nextAppender != null) {
+				nextAppender.propagate(values);
+			}
+		}
+
+		@Override
+		public String toString() {
+			return "?/" + valueIndex;
+		}
+	}
+
+	/**
+	 * A Consumer manages the provision of values to be consumed from a Connection
+	 * at a Mapping guard parameter.
+	 */
+	private static class Consumer extends Binder
+	{
+		protected final @NonNull AbstractInvocationConstructor invocationConstructor;
+
+		/**
+		 * The logical AbstractInvocationConstructor.consumers index of this Consumer.
+		 */
+		protected final int consumerIndex;
+
+		/**
+		 * The index of the last value consumed by a previous propagate.
+		 */
+		private int previouslyConsumedIndex = 0;
+
+		/**
+		 * The index of the last value to be consumed by the current propagate.
+		 */
+		private int targetConsumedIndex = 0;
+
+		/**
+		 * The index of the value used by the current invocation of the current propagate.
+		 */
+		private int currentConsumedIndex = 0;
+
+		/**
+		 * Next Consumer in linked list of all consumers.
+		 */
+		private @Nullable Consumer nextConsumer = null;
+
+		protected Consumer(@NonNull AbstractInvocationConstructor invocationConstructor, int valueIndex, int consumerIndex, @NonNull Connection connection) {
+			super(valueIndex, connection);
+			this.invocationConstructor = invocationConstructor;
+			assert 0 <= consumerIndex;
+			assert consumerIndex <= valueIndex;
+			this.consumerIndex = consumerIndex;
+		}
+
+		public void appendConsumer(int valueIndex, @NonNull Connection connection) {
+			assert targetConsumedIndex == 0;
+			if (nextConsumer != null) {
+				nextConsumer.appendConsumer(valueIndex, connection);
+			}
+			else {
+				nextConsumer = new Consumer(invocationConstructor, valueIndex, consumerIndex+1, connection);
+			}
+		}
+
+		public boolean computeWork() {
+			targetConsumedIndex = connection.getCapacity();
+			boolean hasWork = previouslyConsumedIndex < targetConsumedIndex;
+			if ((nextConsumer != null) && nextConsumer.computeWork()) {
+				hasWork = true;
+			}
+			return hasWork;
+		}
+
+		public void didWork() {
+			previouslyConsumedIndex = targetConsumedIndex;
+			if (nextConsumer != null) {
+				nextConsumer.didWork();
+			}
+		}
+
+		public void invoked(@NonNull Invocation invocation) {
+			if (connection instanceof Connection.Incremental) {
+				((Connection.Incremental)connection).consume(currentConsumedIndex, invocation);
+			}
+			if (nextConsumer != null) {
+				nextConsumer.invoked(invocation);
+			}
+		}
+
+		/**
+		 * Propagate all new values of this and downstream consumers, updating values with prevailing state.
+		 * Returns true if one or more invocations were invoked.
+		 */
+		public boolean propagateHere(int partialConsumerIndex, @NonNull Object @NonNull [] values) {
+			boolean didInvoke = false;
+			if (partialConsumerIndex < consumerIndex) {
+				for (currentConsumedIndex = 0; currentConsumedIndex < targetConsumedIndex; currentConsumedIndex++) {
+					didInvoke |= propagateNext(partialConsumerIndex, values);
+				}
+			}
+			else if (partialConsumerIndex == consumerIndex) {
+				if (nextConsumer != null) {
+					// Offer each old index to downstream new indexes
+					for (currentConsumedIndex = 0; currentConsumedIndex < previouslyConsumedIndex; currentConsumedIndex++) {
+						Boolean didDownstreamInvoke = propagateNext(partialConsumerIndex+1, values);
+						if (didDownstreamInvoke != null) {
+							if (!didDownstreamInvoke) {
+								break;	// If no downstream new index interested, terminate
+							}
+							didInvoke = true;
+						}
+					}
+				}
+				for (currentConsumedIndex = previouslyConsumedIndex; currentConsumedIndex < targetConsumedIndex; currentConsumedIndex++) {
+					didInvoke |= propagateNext(partialConsumerIndex, values);
+				}
+			}
+			else {
+				assert false;
+			}
+			return didInvoke;
+		}
+
+		/**
+		 * Propagate all new values of downstream consumers, updating values with prevailing state.
+		 * Returns true if one or more invocations were invoked.
+		 * Returns null if no value to pass downstream.
+		 * Returns false if no invocations could be invoked.
+		 */
+		private @Nullable Boolean propagateNext(int partialConsumerIndex, @NonNull Object @NonNull [] values) {
+			Object value = connection.getValue(currentConsumedIndex);
+			if (value == null) {			// May be null for incrementally revoked value
+				return null;				// doesn't constitute a downstream failure
+			}
+			values[valueIndex] = value;
+			if (nextConsumer != null) {
+				return nextConsumer.propagateHere(partialConsumerIndex, values);
+			}
+			else {
+				Invocation invocation = invocationConstructor.invoke(values);
+				invocationConstructor.invoked(invocation);
+				return true;
+			}
+		}
+
+		@Override
+		public String toString() {
+			return consumerIndex + "/" + valueIndex + " " + previouslyConsumedIndex + "/" + currentConsumedIndex + "/" + targetConsumedIndex;
+		}
+	}
+
 	protected final @NonNull Interval interval;
 	protected final IdResolver.@NonNull IdResolverExtension idResolver;
 	protected final @NonNull String name;
@@ -60,14 +249,40 @@ public abstract class AbstractInvocationConstructor implements InvocationConstru
 	 */
 	private /*@LazyNonNull*/ List<@NonNull Invocation> allInvocations = null;
 
-	private final @NonNull List<@NonNull Connection> consumedConnections = new ArrayList<>();
-	private final @NonNull List<@NonNull Connection> appendedConnections = new ArrayList<>();
-	private int /*@LazyNonNull*/ [] oldConsumedIndexes = null;
+	/**
+	 * The number of values required to match the Mapping.ownedParameters.
+	 */
+	private int valuesCount = 0;
+
+	/**
+	 * Linked list of the Consumers to manage each guard parameter.
+	 */
+	private /*@LazyNonNull*/ Consumer firstConsumer = null;
+
+	/**
+	 * Linked list of the Appenders to manage each append parameter.
+	 */
+	private /*@LazyNonNull*/ Appender firstAppender = null;
+
+	/**
+	 * The values passed to the current invocation, one per Mapping.ownedParameter in that order.
+	 */
+	private @NonNull Object /*@LazyNonNull*/ values[] = null;
+
+	/**
+	 * Set true while propagation in progress.
+	 */
+	private boolean propagating = false;
+
+	/**
+	 * Set true if re-entrant propgation inhibited.
+	 */
+	private boolean repropagate = false;
 
 	protected AbstractInvocationConstructor(@NonNull InvocationManager invocationManager, @NonNull String name, boolean isStrict) {
 		this.interval = invocationManager.createInterval();
 		Executor executor = invocationManager.getExecutor();
-		this.idResolver = (IdResolver.IdResolverExtension)executor.getIdResolver();	// FIXME null Transformer
+		this.idResolver = (IdResolver.IdResolverExtension)executor.getIdResolver();
 		this.name = name;
 		this.isStrict = isStrict;
 		invocationManager.addInvoker(this);
@@ -79,18 +294,34 @@ public abstract class AbstractInvocationConstructor implements InvocationConstru
 	}
 
 	@Override
-	public void addAppendedConnection(@NonNull Connection connection) {
-		assert oldConsumedIndexes == null;
-		assert !appendedConnections.contains(connection);
-		appendedConnections.add(connection);
+	public synchronized void addAppendedConnection(@NonNull Connection connection) {
+		assert values == null;
+		//		assert oldConsumedIndexes == null;
+		//		assert !appendedConnections.contains(connection);
+		//		appendedConnections.add(connection);
 		connection.addAppender(this);
+		if (firstAppender != null) {
+			firstAppender.appendAppender(valuesCount, connection);
+		}
+		else {
+			firstAppender = new Appender(valuesCount, connection);
+		}
+		valuesCount++;
 	}
 
 	@Override
-	public void addConsumedConnection(@NonNull Connection connection) {
-		assert !consumedConnections.contains(connection);
-		consumedConnections.add(connection);
+	public synchronized void addConsumedConnection(@NonNull Connection connection) {
+		assert values == null;
+		//		assert !consumedConnections.contains(connection);
+		//		consumedConnections.add(connection);
 		connection.addConsumer(this);
+		if (firstConsumer != null) {
+			firstConsumer.appendConsumer(valuesCount, connection);
+		}
+		else {
+			firstConsumer = new Consumer(this, valuesCount, 0, connection);
+		}
+		valuesCount++;
 	}
 
 	@Override
@@ -178,6 +409,12 @@ public abstract class AbstractInvocationConstructor implements InvocationConstru
 		return theInvocation;
 	}
 
+	protected void invoked(@NonNull Invocation invocation) {
+		if (firstConsumer != null) {
+			firstConsumer.invoked(invocation);
+		}
+	}
+
 	@Override
 	public boolean isStrict() {
 		return isStrict;
@@ -190,57 +427,33 @@ public abstract class AbstractInvocationConstructor implements InvocationConstru
 
 	@Override
 	public void propagate() {
-		int consumedConnectionsSize = consumedConnections.size();
-		if (oldConsumedIndexes == null) {
-			oldConsumedIndexes = new int[consumedConnectionsSize];
-			for (int i = 0; i < consumedConnectionsSize; i++) {
-				oldConsumedIndexes[i] = 0;
-			}
-		}
-		int @NonNull [] newConsumedIndexes = new int[consumedConnectionsSize];
-		boolean hasWork = false;
-		for (int i = 0; i < consumedConnectionsSize; i++) {
-			Connection consumedConnection = consumedConnections.get(i);
-			newConsumedIndexes[i] = consumedConnection.getCapacity();
-			if (newConsumedIndexes[i] > oldConsumedIndexes[i]) {
-				hasWork = true;
-			}
-		}
-		if (hasWork) {
-			int appendedConnectionsSize = appendedConnections.size();
-			@NonNull Object @NonNull [] boundValues = new @NonNull Object[consumedConnectionsSize + appendedConnectionsSize];
-			for (int i = 0; i < appendedConnectionsSize; i++) {
-				boundValues[consumedConnectionsSize+i] = appendedConnections.get(i);
-			}
-			int @NonNull [] consumeIndexes = new int[consumedConnectionsSize];
-			propagate(0, newConsumedIndexes, consumeIndexes, boundValues);
-			for (int i = 0; i < consumedConnectionsSize; i++) {
-				oldConsumedIndexes[i] = newConsumedIndexes[i];
-			}
-		}
-	}
-	private void propagate(int depth, int @NonNull [] newConsumedIndexes, int @NonNull [] consumeIndexes, @NonNull Object @NonNull [] boundValues) {
-		int consumedConnectionsSize = consumedConnections.size();
-		if (depth < consumedConnectionsSize) {
-			Connection consumedConnection = consumedConnections.get(depth);
-			for (int i = oldConsumedIndexes[depth]; i < newConsumedIndexes[depth]; i++) {
-				consumeIndexes[depth] = i;
-				Object value = consumedConnection.getValue(i);
-				if (value != null) {				// Revoked value may be null.
-					boundValues[depth] = value;
-					propagate(depth+1, newConsumedIndexes, consumeIndexes, boundValues);
+		@NonNull Object[] values2 = values;
+		if (values2 == null) {
+			synchronized (this) {
+				values2 = values;
+				if (values2 == null) {
+					values2 = values = new @NonNull Object[valuesCount];
+					if (firstAppender != null) {
+						firstAppender.propagate(values2);
+					}
 				}
 			}
 		}
-		else {
-			Invocation mappingInstance = invoke(boundValues);
-			for (int i = 0; i < consumedConnectionsSize; i++) {
-				Connection consumedConnection = consumedConnections.get(i);
-				if (consumedConnection instanceof Connection.Incremental) {
-					((Connection.Incremental)consumedConnection).consume(consumeIndexes[i], mappingInstance);
-				}
+		synchronized (this) {
+			if (propagating) {
+				repropagate = true;
+				return;
 			}
+			propagating = true;
 		}
+		do {
+			repropagate = false;
+			if (firstConsumer.computeWork()) {
+				firstConsumer.propagateHere(0, values2);
+				firstConsumer.didWork();
+			}
+		} while (repropagate);
+		propagating = false;
 	}
 
 	@Override
