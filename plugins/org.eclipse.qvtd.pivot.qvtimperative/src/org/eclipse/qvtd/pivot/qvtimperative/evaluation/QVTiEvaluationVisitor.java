@@ -91,6 +91,7 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 			Object targetValue = ClassUtil.nonNullState(executor.getValueOf(targetVariable));
 			Connection connectionCollection = (Connection) targetValue;
 			Object values = valueExpression.accept(undecoratedVisitor);
+			assert values != null;
 			//			if (values instanceof Iterable<?>) {
 			//				CollectionValue valuesCollection = ValueUtil.asCollectionValue(values);
 			//				for (Object value : valuesCollection) {
@@ -298,7 +299,7 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 		assert name != null;
 		if (ownedExpression != null) {
 			Object initValue = ownedExpression.accept(undecoratedVisitor);
-			connection = interval.createConnection(name, (CollectionTypeId) ownedExpression.getTypeId(), object.isIsStrict());
+			connection = interval.createConnection(name, ownedExpression.getTypeId(), object.isIsStrict());
 			if (initValue != null) {
 				for (Object value : (Iterable<?>)initValue) {
 					assert value != null;
@@ -307,7 +308,7 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 			}
 		}
 		else {
-			connection = interval.createConnection(name, (CollectionTypeId) object.getTypeId(), object.isIsStrict());
+			connection = interval.createConnection(name, object.getTypeId(), object.isIsStrict());
 		}
 		executor.replace(object, connection, false);
 		return true;

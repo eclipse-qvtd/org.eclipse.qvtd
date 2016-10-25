@@ -121,13 +121,13 @@ public class CyclicScheduledRegion2Mapping extends AbstractScheduledRegion2Mappi
 			//					incoming2outgoing.put(incomingConnection, internallyPassedConnection);
 			Type asType = getConnectionSourcesType(incomingConnection);
 			String localName = getSafeName("«local" + (index > 0 ? Integer.toString(index) : "") + "»");
-			localVariable = helper.createBufferStatement(localName, asType, true, null);
+			localVariable = helper.createBufferStatement(localName, true, asType, true, null);
 			mapping.getOwnedStatements().add(localVariable);
 			connection2variable.put(outgoingConnection, localVariable);
 			//
 			if ((asType instanceof CollectionType) && ((CollectionType)asType).isUnique()) {
 				String newName = getSafeName("«new" + (index > 0 ? Integer.toString(index) : "") + "»");
-				BufferStatement newVariable2 = newVariable = helper.createBufferStatement(newName, asType, true, null);
+				BufferStatement newVariable2 = newVariable = helper.createBufferStatement(newName, true, asType, true, null);
 				mapping.getOwnedStatements().add(newVariable2);
 				connection2variable.put(outgoingConnection, newVariable2);
 			}

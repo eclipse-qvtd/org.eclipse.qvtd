@@ -11,7 +11,7 @@
 package org.eclipse.qvtd.runtime.evaluation;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.pivot.ids.CollectionTypeId;
+import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.qvtd.runtime.internal.evaluation.StrictConnectionInternal;
 
 /**
@@ -23,7 +23,7 @@ import org.eclipse.qvtd.runtime.internal.evaluation.StrictConnectionInternal;
  */
 public class StrictConnection extends StrictConnectionInternal
 {
-	public StrictConnection(@NonNull Interval interval, @NonNull String name, @NonNull CollectionTypeId typeId) {
+	public StrictConnection(@NonNull Interval interval, @NonNull String name, @NonNull TypeId typeId) {
 		super(interval, name, typeId);
 	}
 }

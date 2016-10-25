@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.pivot.ids.CollectionTypeId;
+import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.utilities.LabelUtil;
 import org.eclipse.qvtd.runtime.evaluation.AbstractInvocation;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
@@ -37,7 +37,7 @@ public abstract class StrictIncrementalConnectionInternal extends AbstractIncrem
 	 */
 	private final @NonNull Map<@NonNull Object, @NonNull List<@NonNull Object>> uniqueValues2valueAndConsumingInvocations = new HashMap<>();
 
-	protected StrictIncrementalConnectionInternal(@NonNull Interval interval, @NonNull String name, @NonNull CollectionTypeId typeId) {
+	protected StrictIncrementalConnectionInternal(@NonNull Interval interval, @NonNull String name, @NonNull TypeId typeId) {
 		super(interval, name, typeId);
 	}
 

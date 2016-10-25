@@ -63,9 +63,9 @@ inv NoRealizedVariableNavigations: ownedExpression->closure(oclContents())->sele
 --	if mapping.isToMiddle then area = mapping else area.oclAsType(CoreDomain).isEnforceable endif
 
 context GuardParameterBinding
-inv CheckedTypeIsNotConformant: isCheck implies let elementType = value.type.oclAsType(ocl::CollectionType).elementType in not elementType.conformsTo(boundVariable.type)
-inv UncheckedTypeIsConformant: not isCheck implies let elementType = value.type.oclAsType(ocl::CollectionType).elementType in elementType.conformsTo(boundVariable.type)
-inv CompatibleBinding: let elementType = value.type.oclAsType(ocl::CollectionType).elementType in elementType.conformsTo(boundVariable.type) or boundVariable.type.conformsTo(elementType)
+inv CheckedTypeIsNotConformant: isCheck implies not value.type.conformsTo(boundVariable.type)
+inv UncheckedTypeIsConformant: not isCheck implies value.type.conformsTo(boundVariable.type)
+inv CompatibleBinding: let elementType = value.type in elementType.conformsTo(boundVariable.type) or boundVariable.type.conformsTo(elementType)
 
 context SimpleParameterBinding
 inv CheckedTypeIsNotConformant: isCheck implies not value.type.conformsTo(boundVariable.type)

@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.pivot.ids.CollectionTypeId;
+import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.utilities.LabelUtil;
 import org.eclipse.qvtd.runtime.evaluation.AbstractInvocation;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
@@ -32,7 +32,7 @@ import org.eclipse.qvtd.runtime.evaluation.Invocation;
  */
 public class IncrementalConnectionInternal extends AbstractIncrementalConnectionInternal
 {
-	protected IncrementalConnectionInternal(@NonNull Interval interval, @NonNull String name, @NonNull CollectionTypeId typeId) {
+	protected IncrementalConnectionInternal(@NonNull Interval interval, @NonNull String name, @NonNull TypeId typeId) {
 		super(interval, name, typeId);
 	}
 

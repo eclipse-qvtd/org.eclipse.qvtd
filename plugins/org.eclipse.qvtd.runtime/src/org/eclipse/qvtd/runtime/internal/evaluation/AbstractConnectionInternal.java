@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.pivot.ids.CollectionTypeId;
+import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.utilities.LabelUtil;
 import org.eclipse.qvtd.runtime.evaluation.AbstractConnection;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
@@ -33,11 +33,11 @@ import org.eclipse.qvtd.runtime.evaluation.InvocationConstructor;
 public abstract class AbstractConnectionInternal extends AbstractConnection
 {
 	/**
-	 * THe values passed by the coonnection..
+	 * The values passed by the connection..
 	 */
 	protected final @NonNull List<@NonNull Object> values = new ArrayList<>();
 
-	protected AbstractConnectionInternal(@NonNull Interval interval, @NonNull String name, @NonNull CollectionTypeId typeId) {
+	protected AbstractConnectionInternal(@NonNull Interval interval, @NonNull String name, @NonNull TypeId typeId) {
 		super(interval, name, typeId);
 	}
 

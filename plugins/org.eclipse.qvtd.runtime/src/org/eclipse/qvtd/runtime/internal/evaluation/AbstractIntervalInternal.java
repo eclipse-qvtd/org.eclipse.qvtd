@@ -15,20 +15,20 @@ import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.ids.CollectionTypeId;
+import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.qvtd.runtime.evaluation.AbstractConnection;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
 import org.eclipse.qvtd.runtime.evaluation.Connection;
-import org.eclipse.qvtd.runtime.evaluation.StrictIncrementalConnection;
 import org.eclipse.qvtd.runtime.evaluation.ExecutionVisitor;
 import org.eclipse.qvtd.runtime.evaluation.Interval;
 import org.eclipse.qvtd.runtime.evaluation.Invocation;
 import org.eclipse.qvtd.runtime.evaluation.InvocationFailedException;
 import org.eclipse.qvtd.runtime.evaluation.InvocationManager;
 import org.eclipse.qvtd.runtime.evaluation.SimpleConnection;
+import org.eclipse.qvtd.runtime.evaluation.SimpleIncrementalConnection;
 import org.eclipse.qvtd.runtime.evaluation.SlotState;
 import org.eclipse.qvtd.runtime.evaluation.StrictConnection;
-import org.eclipse.qvtd.runtime.evaluation.SimpleIncrementalConnection;
+import org.eclipse.qvtd.runtime.evaluation.StrictIncrementalConnection;
 
 /**
  * AbstractIntervalInternal provides the shared implementation of the intrusive blocked/waiting linked list functionality.
@@ -100,7 +100,7 @@ public abstract class AbstractIntervalInternal implements Interval
 	}
 
 	@Override
-	public @NonNull Connection createConnection(@NonNull String name, @NonNull CollectionTypeId typeId, boolean isStrict) {
+	public @NonNull Connection createConnection(@NonNull String name, @NonNull TypeId typeId, boolean isStrict) {
 		Connection connection;
 		if (isStrict) {
 			connection = new StrictConnection(this, name, typeId);
@@ -113,7 +113,7 @@ public abstract class AbstractIntervalInternal implements Interval
 	}
 
 	@Override
-	public Connection.@NonNull Incremental createIncrementalConnection(@NonNull String name, @NonNull CollectionTypeId typeId, boolean isStrict) {
+	public Connection.@NonNull Incremental createIncrementalConnection(@NonNull String name, @NonNull TypeId typeId, boolean isStrict) {
 		Connection.Incremental connection;
 		if (isStrict) {
 			connection = new StrictIncrementalConnection(this, name, typeId);

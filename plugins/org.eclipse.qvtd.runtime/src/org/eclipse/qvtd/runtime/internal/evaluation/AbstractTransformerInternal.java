@@ -528,7 +528,7 @@ public abstract class AbstractTransformerInternal extends AbstractModelManager i
 		models[modelIndex].addRootObjects(eRootObjects);
 	}
 
-	protected @NonNull Connection createConnection(@NonNull String name, @NonNull CollectionTypeId typeId, boolean isStrict) {
+	protected @NonNull Connection createConnection(@NonNull String name, @NonNull TypeId typeId, boolean isStrict) {
 		return invocationManager.getRootInterval().createConnection(name, typeId, isStrict);
 	}
 

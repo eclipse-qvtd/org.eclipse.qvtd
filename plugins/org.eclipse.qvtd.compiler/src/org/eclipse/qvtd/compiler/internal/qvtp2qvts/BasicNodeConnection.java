@@ -17,7 +17,6 @@ import java.util.Set;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CollectionType;
-import org.eclipse.ocl.pivot.CompleteEnvironment;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.qvtd.compiler.internal.utilities.SymbolNameBuilder;
@@ -126,11 +125,15 @@ public class BasicNodeConnection extends AbstractConnection<@NonNull Node> imple
 		Type commonType = null;
 		for (@NonNull Node node : getSources()) {
 			Type nodeType = node.getCompleteClass().getPrimaryClass();
-			//			System.out.println("  nodeType " + nodeType);
-			CompleteEnvironment environment = idResolver.getEnvironment();
-			if (!(nodeType instanceof CollectionType)) {		// RealizedVariable accumulated on Connection
-				nodeType = isOrdered() ? environment.getOrderedSetType(nodeType, true, null, null) : environment.getSetType(nodeType, true, null, null);
+			if (nodeType instanceof CollectionType) {
+				nodeType = ((CollectionType)nodeType).getElementType();		// FIXME needed for composed source nodes
+				assert nodeType != null;
 			}
+			//			System.out.println("  nodeType " + nodeType);
+			//			CompleteEnvironment environment = idResolver.getEnvironment();
+			//			if (!(nodeType instanceof CollectionType)) {		// RealizedVariable accumulated on Connection
+			//				nodeType = isOrdered() ? environment.getOrderedSetType(nodeType, true, null, null) : environment.getSetType(nodeType, true, null, null);
+			//			}
 			if (commonType == null) {
 				commonType = nodeType;
 			}
@@ -180,7 +183,7 @@ public class BasicNodeConnection extends AbstractConnection<@NonNull Node> imple
 
 	/**
 	 * Return true if this connections should be ordered since its source could be ordered.
-	 */
+	 *
 	private boolean isOrdered() {
 		boolean isOrdered = false;
 		for (@NonNull Node sourceNode1 : getSources()) {
@@ -195,7 +198,7 @@ public class BasicNodeConnection extends AbstractConnection<@NonNull Node> imple
 			}
 		}
 		return isOrdered;
-	}
+	} */
 
 	/*	@Override
 	public boolean isOutput() {

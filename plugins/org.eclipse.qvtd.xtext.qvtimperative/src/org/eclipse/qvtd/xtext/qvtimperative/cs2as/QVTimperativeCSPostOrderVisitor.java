@@ -131,7 +131,17 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 				OCLExpression target = context.visitLeft2Right(OCLExpression.class, expression);
 				asOutStatement.setOwnedExpression(target);
 				if ((csElement.getOwnedType() == null) && (target != null)) {
-					context.setType(asOutStatement, target.getType(), target.isIsRequired(), target.getTypeValue());
+					Type targetType = target.getType();
+					boolean isRequired = target.isIsRequired();
+					if (targetType instanceof CollectionType) {
+						CollectionType collectionType = (CollectionType)targetType;
+						targetType = collectionType.getElementType();
+						isRequired = collectionType.isIsNullFree();
+					}
+					// FIXME else => error
+					// FIXME !isRequired => error
+					// FIXME isStrict
+					context.setType(asOutStatement, targetType, isRequired, target.getTypeValue());
 				}
 			}
 		}

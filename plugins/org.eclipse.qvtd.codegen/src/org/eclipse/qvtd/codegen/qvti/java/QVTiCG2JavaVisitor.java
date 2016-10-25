@@ -1380,13 +1380,8 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			return false;
 		}
 		final String iteratorName = getSymbolName(null, "iterator");
-		//		CollectionTypeId abstractCollectionTypeId = (CollectionTypeId)initValue.getASTypeId();
-		//		assert abstractCollectionTypeId != null;
-		//		TypeId abstractElementTypeId = abstractCollectionTypeId.getElementTypeId();
-		//		BoxedDescriptor abstractBoxedDescriptor = context.getBoxedDescriptor(abstractElementTypeId);
-		CollectionTypeId concreteCollectionTypeId = (CollectionTypeId)cgConnectionAssignment.getConnectionVariable().getASTypeId();
-		assert concreteCollectionTypeId != null;
-		TypeId concreteElementTypeId = concreteCollectionTypeId.getElementTypeId();
+		TypeId concreteElementTypeId = cgConnectionAssignment.getConnectionVariable().getASTypeId();
+		assert concreteElementTypeId != null;
 		BoxedDescriptor concreteBoxedDescriptor = context.getBoxedDescriptor(concreteElementTypeId);
 		BoxedDescriptor abstractBoxedDescriptor = concreteBoxedDescriptor;
 		if (!(initValue.getASTypeId() instanceof CollectionTypeId)) {

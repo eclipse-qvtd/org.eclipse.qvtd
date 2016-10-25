@@ -15,14 +15,14 @@ import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.ids.CollectionTypeId;
+import org.eclipse.ocl.pivot.ids.TypeId;
 
 public abstract class AbstractConnection implements Connection
 {
 	protected final boolean debugAppends = AbstractTransformer.APPENDS.isActive();
 	protected final @NonNull Interval interval;
 	protected final @NonNull String name;
-	protected final @NonNull CollectionTypeId typeId;
+	protected final @NonNull TypeId typeId;
 
 	/**
 	 * The consumers of each appended value.
@@ -39,7 +39,7 @@ public abstract class AbstractConnection implements Connection
 	 */
 	private boolean isQueued = false;
 
-	protected AbstractConnection(@NonNull Interval interval, @NonNull String name, @NonNull CollectionTypeId typeId) {
+	protected AbstractConnection(@NonNull Interval interval, @NonNull String name, @NonNull TypeId typeId) {
 		this.interval = interval;
 		this.name = name;
 		this.typeId = typeId;

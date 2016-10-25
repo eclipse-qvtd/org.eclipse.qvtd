@@ -10,7 +10,7 @@ transformation Tree2TallTreeInstall {
 
 map __root__ in Tree2TallTreeInstall {
     buffer nodes := tree.objectsOfKind(Node)->sortedBy(name);
-    buffer node2tallNodes : Sequence(tree2talltree::Node2TallNode);
+    buffer node2tallNodes : tree2talltree::Node2TallNode;
     install Node2MiddleNode {
         node consumes nodes;
         node2tallNodes appendsTo node2tallNodes;	
@@ -25,7 +25,7 @@ map __root__ in Tree2TallTreeInstall {
 
 map Node2MiddleNode in Tree2TallTreeInstall {
 	guard:tree node : Node; 
-	append node2tallNodes : Sequence(tree2talltree::Node2TallNode); 
+	append node2tallNodes : tree2talltree::Node2TallNode; 
 	new:tree2talltree node2tallNode : Node2TallNode;
 	set node2tallNode.node := node;
 	set node2tallNode.name := node.name;

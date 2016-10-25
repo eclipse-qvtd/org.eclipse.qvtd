@@ -11,7 +11,7 @@
 package org.eclipse.qvtd.runtime.evaluation;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.pivot.ids.CollectionTypeId;
+import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.qvtd.runtime.internal.evaluation.IncrementalConnectionInternal;
 
 /**
@@ -25,7 +25,7 @@ import org.eclipse.qvtd.runtime.internal.evaluation.IncrementalConnectionInterna
  */
 public class SimpleIncrementalConnection extends IncrementalConnectionInternal
 {
-	public SimpleIncrementalConnection(@NonNull Interval interval, @NonNull String name, @NonNull CollectionTypeId typeId) {
+	public SimpleIncrementalConnection(@NonNull Interval interval, @NonNull String name, @NonNull TypeId typeId) {
 		super(interval, name, typeId);
 	}
 }

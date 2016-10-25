@@ -12,7 +12,6 @@ package org.eclipse.qvtd.pivot.qvtimperative.utilities;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
@@ -65,11 +64,12 @@ public class QVTimperativeHelper extends QVTbaseHelper
 		return mappingParameterBinding;
 	}
 
-	public @NonNull BufferStatement createBufferStatement(@NonNull String name, @NonNull Type asType, boolean isRequired, @Nullable OCLExpression initExpression) {
+	public @NonNull BufferStatement createBufferStatement(@NonNull String name, boolean isStrict, @NonNull Type asType, boolean isRequired, @Nullable OCLExpression initExpression) {
 		BufferStatement asVariable = QVTimperativeFactory.eINSTANCE.createBufferStatement();
 		asVariable.setName(name);
 		asVariable.setType(asType);
 		asVariable.setIsRequired(isRequired);
+		asVariable.setIsStrict(isStrict);
 		asVariable.setOwnedExpression(initExpression);
 		return asVariable;
 	}
@@ -103,8 +103,7 @@ public class QVTimperativeHelper extends QVTbaseHelper
 		GuardParameterBinding mappingParameterBinding = QVTimperativeFactory.eINSTANCE.createGuardParameterBinding();
 		mappingParameterBinding.setBoundVariable(variable);
 		mappingParameterBinding.setValue(value);
-		CollectionType collectionType = (CollectionType) value.getType();
-		Type elementType = collectionType.getElementType();
+		Type elementType = value.getType();
 		Type guardType = ClassUtil.nonNullState(variable.getType());
 		mappingParameterBinding.setIsCheck(!elementType.conformsTo(standardLibrary, guardType));
 		return mappingParameterBinding;

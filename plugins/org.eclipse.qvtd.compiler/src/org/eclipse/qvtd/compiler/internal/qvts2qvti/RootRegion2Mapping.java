@@ -123,10 +123,10 @@ public class RootRegion2Mapping extends AbstractScheduledRegion2Mapping
 		return helper.createVariableExp(allInstancesVariable);
 	}
 
-	private @NonNull ConnectionVariable createRootConnectionVariable(@NonNull String name, @NonNull Type type, @Nullable OCLExpression initExpression) {
+	private @NonNull ConnectionVariable createRootConnectionVariable(@NonNull String name, boolean isStrict, @NonNull Type type, @Nullable OCLExpression initExpression) {
 		//		Type variableType = visitor.getEnvironmentFactory().getCompleteEnvironment().getSetType(node.getCompleteClass().getPrimaryClass(), true, null, null);
 		//		assert variableType != null;
-		BufferStatement variable = helper.createBufferStatement(getSafeName(name), type, true, initExpression);
+		BufferStatement variable = helper.createBufferStatement(getSafeName(name), isStrict, type, true, initExpression);
 		mapping.getOwnedStatements().add(variable);
 		//		Variable oldVariable = node2variable.put(node, variable);
 		//		assert oldVariable == null;
@@ -134,7 +134,7 @@ public class RootRegion2Mapping extends AbstractScheduledRegion2Mapping
 	}
 
 	private void createRootConnectionVariables() {
-		List<@NonNull NodeConnection> rootConnections = new ArrayList<@NonNull NodeConnection>(region.getRootConnections());
+		List<@NonNull NodeConnection> rootConnections = new ArrayList<>(region.getRootConnections());
 		Collections.sort(rootConnections, NameUtil.NAMEABLE_COMPARATOR);
 		for (@NonNull NodeConnection rootConnection : rootConnections) {
 			Type commonType = getConnectionSourcesType(rootConnection);
@@ -149,14 +149,10 @@ public class RootRegion2Mapping extends AbstractScheduledRegion2Mapping
 					case 1: initExpression = getFilteredExpression(initExpression, (NavigableEdge) incomingEdges.get(0)); break;
 					default: assert false;
 				}
-				connection2variable.put(rootConnection, createRootConnectionVariable(name, commonType, initExpression));
-			}
-			else if (commonType instanceof CollectionType) {
-				connection2variable.put(rootConnection, createRootConnectionVariable(name, commonType, null));
+				connection2variable.put(rootConnection, createRootConnectionVariable(name, false, commonType, initExpression));
 			}
 			else {
-				CollectionType setType = visitor.getEnvironmentFactory().getCompleteEnvironment().getSetType(commonType, true, null, null);
-				connection2variable.put(rootConnection, createRootConnectionVariable(name, setType, null));
+				connection2variable.put(rootConnection, createRootConnectionVariable(name, false, commonType, null));
 			}
 		}
 	}

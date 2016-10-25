@@ -17,7 +17,7 @@ import java.util.NoSuchElementException;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.ids.CollectionTypeId;
+import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.utilities.LabelUtil;
 import org.eclipse.qvtd.runtime.evaluation.AbstractConnection;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
@@ -55,7 +55,9 @@ public abstract class AbstractIncrementalConnectionInternal extends AbstractConn
 				throw new NoSuchElementException();
 			}
 			cursor = next(cursor+1);
-			return (T) valueAndConsumingInvocations.get(VALUE_INDEX);
+			@SuppressWarnings("unchecked")
+			T castValue = (T) valueAndConsumingInvocations.get(VALUE_INDEX);
+			return castValue;
 		}
 
 		private int next(int i) {
@@ -91,7 +93,7 @@ public abstract class AbstractIncrementalConnectionInternal extends AbstractConn
 	 */
 	protected final @NonNull List<@Nullable List<@NonNull Object>> listOfValueAndConsumingInvocations = new ArrayList<>();
 
-	protected AbstractIncrementalConnectionInternal(@NonNull Interval interval, @NonNull String name, @NonNull CollectionTypeId typeId) {
+	protected AbstractIncrementalConnectionInternal(@NonNull Interval interval, @NonNull String name, @NonNull TypeId typeId) {
 		super(interval, name, typeId);
 	}
 

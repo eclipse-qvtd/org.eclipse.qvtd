@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.pivot.ids.CollectionTypeId;
+import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.qvtd.runtime.internal.evaluation.AbstractInvocationInternal;
 
 /**
@@ -68,11 +68,11 @@ public abstract class AbstractInvocation extends AbstractInvocationInternal
 			writeSlot.addSourceInternal(this);
 		}
 
-		protected @NonNull Connection createConnection(@NonNull String name, @NonNull CollectionTypeId typeId, boolean isStrict) {
+		protected @NonNull Connection createConnection(@NonNull String name, @NonNull TypeId typeId, boolean isStrict) {
 			return constructor.getInterval().createConnection(name, typeId, isStrict);
 		}
 
-		protected Connection.@NonNull Incremental createIncrementalConnection(@NonNull String name, @NonNull CollectionTypeId typeId, boolean isStrict) {
+		protected Connection.@NonNull Incremental createIncrementalConnection(@NonNull String name, @NonNull TypeId typeId, boolean isStrict) {
 			return constructor.getInterval().createIncrementalConnection(name, typeId, isStrict);
 		}
 
