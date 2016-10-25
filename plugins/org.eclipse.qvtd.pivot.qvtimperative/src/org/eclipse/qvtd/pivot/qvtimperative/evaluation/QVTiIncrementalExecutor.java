@@ -69,6 +69,64 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 	 */
 	public static int RUN_TIME_EVALUATOR_API_VERSION = Transformer.RUN_TIME_EVALUATOR_API_VERSION_1_1_0_2;
 
+	public static final class InterpretedInvocationConstructor extends AbstractInvocationConstructor.Incremental
+	{
+		protected final @NonNull QVTiIncrementalExecutor executor;
+		private final @NonNull MappingCall mappingCall;
+		private final @NonNull EvaluationVisitor undecoratedVisitor;
+
+		public InterpretedInvocationConstructor(@NonNull QVTiIncrementalExecutor executor, @NonNull Mapping asMapping,
+				@NonNull MappingCall mappingCall, @NonNull EvaluationVisitor undecoratedVisitor) {
+			super(executor.getInvocationManager(), QVTimperativeUtil.getName(asMapping), asMapping.isIsStrict());
+			this.executor = executor;
+			this.mappingCall = mappingCall;
+			this.undecoratedVisitor = undecoratedVisitor;
+		}
+
+		@Override
+		public @NonNull Invocation newInstance(@NonNull Object @NonNull [] theseValues) {
+			return new InterpretedInvocation(this, theseValues);
+		}
+
+		private Object internalExecuteInvocation(@NonNull InterpretedInvocation invocation, @NonNull Object @NonNull [] theseValues) {
+			return executor.internalExecuteInvocation(invocation, theseValues, mappingCall, undecoratedVisitor);
+		}
+	}
+
+	public final static class InterpretedInvocation extends AbstractInvocation.Incremental
+	{
+		protected final @NonNull Object @NonNull [] theseValues;
+
+		public InterpretedInvocation(@NonNull InterpretedInvocationConstructor constructor, @NonNull Object @NonNull [] theseValues) {
+			super(constructor);
+			int iMax = theseValues.length;
+			this.theseValues = new @NonNull Object[iMax];
+			for (int i = 0; i < iMax; i++) {
+				this.theseValues[i] = theseValues[i];
+			}
+		}
+
+		@Override
+		public boolean execute() throws InvocationFailedException {
+			Object returnStatus = ((InterpretedInvocationConstructor)constructor).internalExecuteInvocation(this, theseValues);
+			return returnStatus == ValueUtil.TRUE_VALUE;
+		}
+
+		@Override
+		public boolean isEqual(@NonNull IdResolver idResolver, @NonNull Object @NonNull [] thoseValues) {
+			int iMax = thoseValues.length;
+			if (iMax != theseValues.length) {
+				return false;
+			}
+			for (int i = 0; i < iMax; i++) {
+				if (!idResolver.oclEquals(theseValues[i], thoseValues[i])) {
+					return false;
+				}
+			}
+			return true;
+		}
+	}
+
 	public enum Mode {
 		LAZY,						// EvaluationStatus is created lazily where necessary
 		INCREMENTAL,				// EvaluationStatus is created for all mapping elements
@@ -99,6 +157,21 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 		String string = execution2GraphVisitor.toString();
 		assert string != null;
 		return string;
+	}
+
+	@Override
+	public @NonNull InvocationConstructor getInvocationConstructor(@NonNull MappingCall mappingCall, @NonNull EvaluationVisitor undecoratedVisitor) {
+		Mapping asMapping = ClassUtil.nonNullState(mappingCall.getReferredMapping());
+		Map<@NonNull Mapping, @NonNull InvocationConstructor> mapping2invocationConstructor2 = mapping2invocationConstructor;
+		if (mapping2invocationConstructor2 == null) {
+			mapping2invocationConstructor = mapping2invocationConstructor2 = new HashMap<>();
+		}
+		InvocationConstructor invocationConstructor = mapping2invocationConstructor2.get(asMapping);
+		if (invocationConstructor == null) {
+			invocationConstructor = new InterpretedInvocationConstructor(this, asMapping, mappingCall, undecoratedVisitor);
+			mapping2invocationConstructor2.put(asMapping, invocationConstructor);
+		}
+		return invocationConstructor;
 	}
 
 	@Override
@@ -156,64 +229,25 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 		return computation.getResult();
 	}
 
+	private Object internalExecuteInvocation(@NonNull InterpretedInvocation invocation, @NonNull Object @NonNull [] theseValues, @NonNull MappingCall mappingCall, @NonNull EvaluationVisitor undecoratedVisitor) {
+		currentInvocation = invocation;
+		try {
+			return super.internalExecuteMappingCall(mappingCall, theseValues, undecoratedVisitor);
+		}
+		finally {
+			currentInvocation = null;
+		}
+	}
+
 	@Override
-	public @Nullable Object internalExecuteMappingCall(final @NonNull MappingCall mappingCall, @NonNull Object @NonNull [] boundValues, final @NonNull EvaluationVisitor undecoratedVisitor) {
+	public @Nullable Object internalExecuteMappingCall(@NonNull MappingCall mappingCall, @NonNull Object @NonNull [] boundValues, @NonNull EvaluationVisitor undecoratedVisitor) {
 		Mapping asMapping = ClassUtil.nonNullState(mappingCall.getReferredMapping());
 		if (mode == Mode.LAZY) {
 			if (!transformationAnalysis.isHazardous(asMapping)) {
 				return super.internalExecuteMappingCall(mappingCall, boundValues, undecoratedVisitor);
 			}
 		}
-		Map<@NonNull Mapping, @NonNull InvocationConstructor> mapping2invocationConstructor2 = mapping2invocationConstructor;
-		if (mapping2invocationConstructor2 == null) {
-			mapping2invocationConstructor = mapping2invocationConstructor2 = new HashMap<>();
-		}
-		InvocationConstructor invocationConstructor = mapping2invocationConstructor2.get(asMapping);
-		if (invocationConstructor == null) {
-			invocationConstructor = new AbstractInvocationConstructor.Incremental(invocationManager, QVTimperativeUtil.getName(asMapping), asMapping.isIsStrict())
-			{
-				@Override
-				public @NonNull Invocation newInstance(@NonNull Object @NonNull [] theseValues) {
-					Invocation.Incremental invocation = new AbstractInvocation.Incremental(this)
-					{
-						protected Object returnStatus;
-
-						@Override
-						public boolean execute() throws InvocationFailedException {
-							currentInvocation = this;
-							try {
-								returnStatus = QVTiIncrementalExecutor.super.internalExecuteMappingCall(mappingCall, theseValues, undecoratedVisitor);
-								return returnStatus == ValueUtil.TRUE_VALUE;
-							}
-							finally {
-								currentInvocation = null;
-							}
-						}
-
-						@Override
-						public boolean isEqual(@NonNull IdResolver idResolver, @NonNull Object @NonNull [] thoseValues) {
-							int iMax = thoseValues.length;
-							if (iMax != theseValues.length) {
-								return false;
-							}
-							for (int i = 0; i < iMax; i++) {
-								if (!idResolver.oclEquals(theseValues[i], thoseValues[i])) {
-									return false;
-								}
-							}
-							return true;
-						}
-
-						//						@Override
-						//						public @NonNull String toString() {
-						//							return mappingCall.getReferredMapping().getName();// + "@" + Integer.toHexString(System.identityHashCode(this));
-						//						}
-					};
-					return invocation;
-				}
-			};
-			mapping2invocationConstructor2.put(asMapping, invocationConstructor);
-		}
+		InvocationConstructor invocationConstructor = getInvocationConstructor(mappingCall, undecoratedVisitor);
 		invocationConstructor.invoke(boundValues);
 		return null;
 	}
