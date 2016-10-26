@@ -11,13 +11,16 @@ helpers {
         self = another or 
         superClasses->exists(conformsTo(another));
   }
-  cs::NameExpCS {
-    parentAsCallExpCS() : CallExpCS :=
+  
+  cs::NavigationExpCS {
+  	parentAsCallExpCS() : CallExpCS :=
       let container = self.oclContainer()
       in if container.oclIsKindOf(CallExpCS)
          then container.oclAsType(CallExpCS)
-         else null 
+         else null
          endif;
+  }
+  cs::NameExpCS {
     isNavExpOfACallExpCS() : Boolean :=
       let parentCallExpCS = parentAsCallExpCS()
       in parentCallExpCS <> null and parentCallExpCS.navExp = self;
@@ -133,8 +136,8 @@ mappings {
      ownedArguments := right.trace;
      referredOperation := lookupExported(Operation, trace.ownedSource.type,
                                          opName, trace.ownedArguments);
+     type := lookup(Class, 'Boolean');
   }
--- TODO
   create VariableExp from NameExpCS
   when fall_back {
       referredVariable := null;
@@ -210,6 +213,7 @@ mappings {
     ownedIterator := itVar.trace;
     ownedResult := accVar.trace;
     ownedBody := exp.trace;
+    ownedSource := parentAsCallExpCS()._source.trace;
     type := trace.ownedResult.type;
   }
   
@@ -218,8 +222,9 @@ mappings {
     ownedIterator := if itVar = null
                      then as::Variable { name='self', type=lookup(Class,'OclAny') }
                      else itVar.trace
-                     endif;                     
+                     endif;
     ownedBody := exp.trace;
+    ownedSource := parentAsCallExpCS()._source.trace;
     type := lookup(Class,'Collection');
   }
   create Variable from IteratorVarCS  {
@@ -243,8 +248,8 @@ mappings {
   }
   create CollectionRange from CollectionLiteralPartCS 
   when withLastExpression {
-     ownedFirst := first;
-     ownedLast := last;
+     ownedFirst := first.trace;
+     ownedLast := last.trace;
      type := trace.ownedFirst.type;
   }
 }
@@ -274,6 +279,10 @@ name_resolution {
 				Package using ownedPackages, exported ownedImports;
 		}
 		
+		Import {
+			in exported_scope provides
+				Package using loaded Package from uri;
+		}
 		Package {	
 			in current_scope provides occluding 
 				Package using ownedPackages

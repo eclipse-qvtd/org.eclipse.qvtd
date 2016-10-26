@@ -2,10 +2,11 @@ import  cs : 'generated/MiniOCLCS.ecore#/'
 import  as : '/resource/org.eclipse.qvtd.doc.miniocl/model/MiniOCL.ecore#/' 
 package cs
 
-context cs::NameExpCS
+context cs::NavigationExpCS
 def : parentAsCallExpCS() :CallExpCS =
 	let container  = self.oclContainer()
 	in if container.oclIsKindOf(CallExpCS) then container.oclAsType(CallExpCS) else null endif
+context cs::NameExpCS
 def : isNavExpOfACallExpCS() :Boolean =
 	let parentCallExpCS  = parentAsCallExpCS()
 	in parentCallExpCS <> null and parentCallExpCS.navExp = self

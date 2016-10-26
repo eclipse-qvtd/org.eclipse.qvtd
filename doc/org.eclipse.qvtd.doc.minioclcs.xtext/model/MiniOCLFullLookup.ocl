@@ -48,6 +48,8 @@ def : parentEnv_Property() : lookup::LookupEnvironment[1] =
 
 def : _exported_env_Property(importer : OclElement) : lookup::LookupEnvironment[1] =
 	lookup::LookupEnvironment { }
+def : _exported_env_Package(importer : OclElement) : lookup::LookupEnvironment[1] =
+	lookup::LookupEnvironment { }
 def : _exported_env_Operation(importer : OclElement) : lookup::LookupEnvironment[1] =
 	lookup::LookupEnvironment { }
 
@@ -330,8 +332,42 @@ context Root
 def : _unqualified_env_Package(child : ocl::OclElement) : lookup::LookupEnvironment =
    parentEnv_Package()
       .addElements(ownedPackages)
-      --TODO .addElements(ownedImports._exported_env(self).namedElements)
+      .addElements(ownedImports._exported_env_Package(self).namedElements)
       
+context Import
+def : _exported_env_Package(importer : ocl::OclElement) : lookup::LookupEnvironment =
+   let env = lookup::LookupEnvironment {}
+   in env
+      .addElements(OrderedSet{/*AutoGenCode Will Load The Package*/})
+   
+   
+def : _lookupExportedPackage(importer : ocl::OclElement, pName : String) : Package[?] =
+   let foundPackage = _lookupPackage(_exported_env_Package(importer), pName)
+   in  if foundPackage->isEmpty()
+      then null
+      else foundPackage->first()
+      endif
+def : lookupExportedPackage(importer : ocl::OclElement, pName : String) : Package[?] =
+   _lookupExportedPackage(importer, pName)
+def : lookupExportedPackage(importer : ocl::OclElement, aPathElementCS : cs::PathElementCS) : Package[?] =
+   _lookupExportedPackage(importer, aPathElementCS.elementName)
+
+context Visitable
+-- Import exports Package
+def : lookupPackageFrom(exporter : Import , iName : String) : Package[?] =
+   exporter.lookupExportedPackage(self, iName)
+def : lookupPackageFrom(exporter : Import, aPathElementCS : cs::PathElementCS) : Package[?] =
+   exporter.lookupExportedPackage(self, aPathElementCS)
+def : lookupPackageFrom(exporter : Import, aPathNameCS : cs::PathNameCS) : Package[?] =
+   lookupPackageFrom(exporter, aPathNameCS.pathElements)
+
+def : lookupPackageFrom(exporter : Import, segments : OrderedSet(cs::PathElementCS)) : Package[?] =
+   if segments->size() = 1
+   then lookupPackageFrom(exporter, segments->first())
+   else let qualifierSegments = segments->subOrderedSet(1,segments->size()-1),
+            qualifier = lookupPackage(qualifierSegments)
+        in qualifier?.lookupQualifiedPackage(segments->last())
+   endif
 context Package
 def : _unqualified_env_Package(child : ocl::OclElement) : lookup::LookupEnvironment =
    parentEnv_Package().nestedEnv()

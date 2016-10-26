@@ -7,11 +7,11 @@ package cs
 
 context ExpCS
 def : ast() : as::OCLExpression =
-    null
+    null -- to be overriden
 
 context NavigationExpCS
 def : ast() : as::CallExp =
-   null
+   null -- to be overriden
    
 context RootCS
 def : ast() : as::Root =
@@ -91,7 +91,8 @@ def : ast() : as::OperationCallExp =
 as::OperationCallExp {
 	ownedSource = left.ast(), 
 ownedArguments = right.ast(), 
-referredOperation = ast().lookupOperationFrom(ast().ownedSource.type, opName, ast().ownedArguments) 
+referredOperation = ast().lookupOperationFrom(ast().ownedSource.type, opName, ast().ownedArguments), 
+type = ast().lookupClass('Boolean' ) 
 }
 context NameExpCS
 def : ast() : as::OCLExpression =
@@ -105,7 +106,7 @@ type = ast().oclAsType(as::OperationCallExp).referredOperation ?. type
 else
 	if isOpCallExpWithImplicitSource()
 	then as::OperationCallExp {
-		ownedSource = let referredVar  = ast().lookupVariable(' self' )
+		ownedSource = let referredVar  = ast().lookupVariable('self' )
 		in as::VariableExp {
 					referredVariable = referredVar,
 					type = referredVar.type
@@ -131,7 +132,7 @@ else
 			else
 				if isPropCallExpWithImplicitSource()
 				then as::PropertyCallExp {
-					ownedSource = let referredVar  = ast().lookupVariable(' self' )
+					ownedSource = let referredVar  = ast().lookupVariable('self' )
 					in as::VariableExp {
 								referredVariable = referredVar,
 								type = referredVar.type
@@ -143,7 +144,7 @@ else
 				else
 					as::VariableExp {
 						referredVariable = null, 
-					type = ast().lookupClass(' OclVoid' ) 
+					type = ast().lookupClass('OclVoid' ) 
 					}
 				endif
 			endif
@@ -186,25 +187,27 @@ def : ast() : as::IterateExp =
 as::IterateExp {
 	ownedIterator = itVar.ast(), 
 ownedResult = accVar.ast(), 
-ownedBody = exp.ast(), 
+ownedBody = exp.ast(),
+ownedSource = parentAsCallExpCS()._source.ast(),
 type = ast().ownedResult.type 
 }
 context CollectExpCS
 def : ast() : as::IteratorExp =
 as::IteratorExp {
-	iterator = ' collect' , 
+	iterator = 'collect' , 
 ownedIterator = if itVar = null then as::Variable {
-				name = ' self' ,
-				type = ast().lookupClass(' OclAny' )
+				name = 'self' ,
+				type = ast().lookupClass('OclAny' )
 			} else itVar.ast() endif, 
 ownedBody = exp.ast(), 
-type = ast().lookupClass(' Collection' ) 
+ownedSource = self.parentAsCallExpCS()._source.ast(),
+type = ast().lookupClass('Collection' ) 
 }
 context IteratorVarCS
 def : ast() : as::Variable =
 as::Variable {
 	name = itName, 
-type = if itType <> null then ast().lookupClass(itType) else ast().lookupClass(' OclAny' ) endif 
+type = if itType <> null then ast().lookupClass(itType) else ast().lookupClass('OclAny' ) endif 
 }
 context AccVarCS
 def : ast() : as::Variable =
@@ -218,7 +221,7 @@ def : ast() : as::CollectionLiteralExp =
 as::CollectionLiteralExp {
 	kind = kind, 
 ownedParts = parts.ast(), 
-type = ast().lookupClass(' Collection' ) 
+type = ast().lookupClass('Collection' ) 
 }
 context CollectionLiteralPartCS
 def : ast() : as::CollectionLiteralPart =
@@ -230,8 +233,8 @@ type = ast().oclAsType(as::CollectionItem).ownedItem.type
 else
 	if withLastExpression()
 	then as::CollectionRange {
-		ownedFirst = first, 
-	ownedLast = last, 
+		ownedFirst = first.ast(), 
+	ownedLast = last.ast(), 
 	type = ast().oclAsType(as::CollectionRange).ownedFirst.type 
 	}
 	else
