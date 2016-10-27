@@ -120,13 +120,13 @@ public class CyclicScheduledRegion2Mapping extends AbstractScheduledRegion2Mappi
 			//				 && !incoming2outgoing.values().contains(internallyPassedConnection)) {	// Multiple should not occur, but line them up pair-wise
 			//					incoming2outgoing.put(incomingConnection, internallyPassedConnection);
 			Type asType = getConnectionSourcesType(incomingConnection);
-			String localName = "«local" + (index > 0 ? Integer.toString(index) : "") + "»";
+			String localName = getSafeName("«local" + (index > 0 ? Integer.toString(index) : "") + "»");
 			localVariable = helper.createBufferStatement(localName, asType, true, null);
 			mapping.getOwnedStatements().add(localVariable);
 			connection2variable.put(outgoingConnection, localVariable);
 			//
 			if ((asType instanceof CollectionType) && ((CollectionType)asType).isUnique()) {
-				String newName = "«new" + (index > 0 ? Integer.toString(index) : "") + "»";
+				String newName = getSafeName("«new" + (index > 0 ? Integer.toString(index) : "") + "»");
 				BufferStatement newVariable2 = newVariable = helper.createBufferStatement(newName, asType, true, null);
 				mapping.getOwnedStatements().add(newVariable2);
 				connection2variable.put(outgoingConnection, newVariable2);
@@ -228,7 +228,7 @@ public class CyclicScheduledRegion2Mapping extends AbstractScheduledRegion2Mappi
 			if (connectionVariable == null) {
 				String name = intermediateConnection.getName();
 				assert name != null;
-				connectionVariable = helper.createAppendParameter(name, getConnectionSourcesType(intermediateConnection), true);
+				connectionVariable = helper.createAppendParameter(getSafeName(name), getConnectionSourcesType(intermediateConnection), true);
 				connection2variable.put(intermediateConnection, connectionVariable);
 				mapping.getOwnedParameters().add(connectionVariable);
 			}

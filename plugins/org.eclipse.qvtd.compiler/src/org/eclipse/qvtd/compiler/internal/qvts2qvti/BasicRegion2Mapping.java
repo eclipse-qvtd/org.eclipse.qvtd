@@ -873,7 +873,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 					}
 					Type elementType = ((CollectionType)type).getElementType();
 					assert elementType != null;
-					LoopVariable loopVariable = helper.createLoopVariable("loop" + loopVariables.size(), elementType);//, true, sourceExpression);
+					LoopVariable loopVariable = helper.createLoopVariable(getSafeName("loop" + loopVariables.size()), elementType);//, true, sourceExpression);
 					loopVariables.put(loopVariable, sourceExpression);
 					//					sourceExpression = PivotUtil.createVariableExp(loopVariable);
 					VariableDeclaration guardVariable = calledRegion2Mapping.getGuardVariable(targetNode);

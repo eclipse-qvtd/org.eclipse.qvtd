@@ -11,6 +11,7 @@
 package org.eclipse.qvtd.compiler.internal.qvts2qvti;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -251,9 +252,19 @@ public class QVTs2QVTiVisitor extends QVTimperativeHelper implements Visitor<Ele
 		}
 	}
 
-	//	public @NonNull ChainNode getChain(@NonNull Region region) {
-	//		return chainGraph.getChain(region);
-	//	}
+	protected void gatherReservedPackageNames(@NonNull Set<@NonNull String> reservedNames, @NonNull Iterable<org.eclipse.ocl.pivot.Package> asPackages) {
+		for (org.eclipse.ocl.pivot.Package asPackage : asPackages) {
+			reservedNames.add(ClassUtil.nonNullState(asPackage.getName()));
+			gatherReservedClassNames(reservedNames, asPackage.getOwnedClasses());
+			gatherReservedPackageNames(reservedNames, asPackage.getOwnedPackages());
+		}
+	}
+
+	protected void gatherReservedClassNames(@NonNull Set<@NonNull String> reservedNames, @NonNull Iterable<org.eclipse.ocl.pivot.Class> asClasses) {
+		for (org.eclipse.ocl.pivot.Class asClass : asClasses) {
+			reservedNames.add(ClassUtil.nonNullState(asClass.getName()));
+		}
+	}
 
 	public @NonNull EnvironmentFactory getEnvironmentFactory() {
 		return environmentFactory;
@@ -304,9 +315,12 @@ public class QVTs2QVTiVisitor extends QVTimperativeHelper implements Visitor<Ele
 		Set<@NonNull String> reservedNames2 = reservedNames;
 		if (reservedNames2 == null) {
 			reservedNames = reservedNames2 = new HashSet<@NonNull String>();
+			org.eclipse.ocl.pivot.Package standardLibraryPackage = standardLibrary.getPackage();
+			gatherReservedPackageNames(reservedNames2, Collections.singletonList(standardLibraryPackage));
 			reservedNames2.add(ClassUtil.nonNull(qvtpTransformation.getName()));
 			for (TypedModel typedModel : qvtpTransformation.getModelParameter()) {
 				reservedNames2.add(ClassUtil.nonNullState(typedModel.getName()));
+				gatherReservedPackageNames(reservedNames2, typedModel.getUsedPackage());
 			}
 			for (Operation operation : qvtpTransformation.getOwnedOperations()) {
 				reservedNames2.add(ClassUtil.nonNull(operation.getName()));

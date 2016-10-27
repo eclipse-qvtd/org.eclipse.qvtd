@@ -186,7 +186,7 @@ public abstract class AbstractScheduledRegion2Mapping extends AbstractRegion2Map
 		if (type instanceof CollectionType) {
 			Type elementType = ((CollectionType)type).getElementType();
 			assert elementType != null;
-			LoopVariable loopVariable = helper.createLoopVariable("loop" + loopVariables.size(), elementType);//, true, sourceExpression);
+			LoopVariable loopVariable = helper.createLoopVariable(getSafeName("loop" + loopVariables.size()), elementType);//, true, sourceExpression);
 			loopVariables.put(loopVariable, sourceExpression);
 			//			sourceExpression = PivotUtil.createVariableExp(loopVariable);
 			AbstractRegion2Mapping calledRegion2Mapping = visitor.getRegion2Mapping(targetNode.getRegion());

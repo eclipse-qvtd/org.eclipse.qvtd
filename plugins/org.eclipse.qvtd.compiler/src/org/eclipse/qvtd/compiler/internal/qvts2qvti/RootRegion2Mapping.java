@@ -118,7 +118,8 @@ public class RootRegion2Mapping extends AbstractScheduledRegion2Mapping
 			OCLExpression asSource = helper.createOperationCallExp(modelExp, "objectsOfKind", typeExp);
 			Type sourceType = asSource.getType();
 			assert sourceType != null;
-			allInstancesVariable = helper.createDeclareStatement(resultNode.getName(), sourceType, true, asSource);
+			String safeName = getSafeName(resultNode);
+			allInstancesVariable = helper.createDeclareStatement(safeName, sourceType, true, asSource);
 			mapping.getOwnedStatements().add(allInstancesVariable);
 			classDatumAnalysis2variable.put(classDatumAnalysis, allInstancesVariable);
 		}
