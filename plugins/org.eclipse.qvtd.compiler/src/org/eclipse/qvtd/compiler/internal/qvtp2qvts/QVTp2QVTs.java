@@ -36,11 +36,10 @@ import org.eclipse.qvtd.compiler.CompilerConstants;
 import org.eclipse.qvtd.compiler.CompilerProblem;
 import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.Region2Depth;
-import org.eclipse.qvtd.pivot.qvtcore.analysis.RootDomainUsageAnalysis;
+import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.schedule.AbstractAction;
 import org.eclipse.qvtd.pivot.schedule.ClassDatum;
 import org.eclipse.qvtd.pivot.schedule.MappingAction;
-import org.eclipse.qvtd.pivot.schedule.Schedule;
 import org.eclipse.qvtd.pivot.schedule.utilities.DependencyUtil;
 
 public class QVTp2QVTs extends SchedulerConstants
@@ -70,10 +69,10 @@ public class QVTp2QVTs extends SchedulerConstants
 
 	private final @NonNull List<@NonNull AbstractAction> orderedActions;
 
-	public QVTp2QVTs(@NonNull ProblemHandler problemHandler, @NonNull EnvironmentFactory environmentFactory, @NonNull Schedule schedule, @NonNull QVTp2QVTg qvtp2qvtg, @NonNull RootDomainUsageAnalysis domainAnalysis) {
-		super(environmentFactory, schedule, qvtp2qvtg, domainAnalysis);
+	public QVTp2QVTs(@NonNull ProblemHandler problemHandler, @NonNull EnvironmentFactory environmentFactory, @NonNull Transformation asTransformation) {
+		super(environmentFactory, asTransformation);
 		this.problemHandler = problemHandler;
-		DependencyUtil.NaturalOrderer orderer = new DependencyUtil.NaturalOrderer(schedule);
+		DependencyUtil.NaturalOrderer orderer = new DependencyUtil.NaturalOrderer(getDependencyGraph());
 		List<@NonNull AbstractAction> orderedActions = orderer.computeOrdering();	// FIXME ??is this ordering still needed??
 		if (orderedActions == null) {
 			throw new IllegalArgumentException(orderer.diagnoseOrderingFailure());

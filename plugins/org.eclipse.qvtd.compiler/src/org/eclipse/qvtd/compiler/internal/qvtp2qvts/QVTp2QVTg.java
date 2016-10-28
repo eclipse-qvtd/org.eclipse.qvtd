@@ -23,7 +23,6 @@ import java.util.Set;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcorePackage;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CallExp;
@@ -37,7 +36,6 @@ import org.eclipse.ocl.pivot.NavigationCallExp;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
-import org.eclipse.ocl.pivot.Package;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.ShadowExp;
 import org.eclipse.ocl.pivot.Type;
@@ -46,7 +44,6 @@ import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
-import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
@@ -165,36 +162,14 @@ public class QVTp2QVTg {
 		}
 
 	}
-	public void run(@NonNull Resource qvtpModel, @NonNull Resource qvtsModel) {
+
+	public @NonNull Schedule transformTransformation(@NonNull Transformation pTransformation) {
 		clearCaches();
-
-		for (EObject eObject : qvtpModel.getContents()) {
-			if (eObject instanceof BaseModel) {
-				transformPackages(((BaseModel)eObject).getOwnedPackages());
-			}
-		}
-
-		// We add the result to the output result
-		qvtsModel.getContents().clear();
-		qvtsModel.getContents().add(dg);
-	}
-
-	protected void transformPackages(@NonNull List<Package> pPackages) {
-		for (org.eclipse.ocl.pivot.Package pPackage : pPackages) {
-			for (org.eclipse.ocl.pivot.Class pClass : pPackage.getOwnedClasses()) {
-				if (pClass instanceof Transformation) {
-					transformTransformation((Transformation)pClass);
-				}
-			}
-			transformPackages(pPackage.getOwnedPackages());
-		}
-	}
-
-	protected void transformTransformation(@NonNull Transformation pTransformation) {
 		computeInitialCaches(pTransformation);
 		for (Rule pRule : pTransformation.getRule()) {
 			createMappingAction((Mapping) pRule);
 		}
+		return dg;
 	}
 
 	protected MappingAction createMappingAction(Mapping mapping) {
@@ -286,10 +261,6 @@ public class QVTp2QVTg {
 			}
 		} */
 		return cDatum;
-	}
-
-	public @NonNull ClassRelationships getClassRelationships() {
-		return classRelationships;
 	}
 
 	@NonNull

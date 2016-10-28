@@ -39,9 +39,7 @@ import org.eclipse.qvtd.codegen.qvti.java.QVTiCodeGenerator;
 import org.eclipse.qvtd.compiler.internal.qvtc2qvtu.QVTc2QVTu;
 import org.eclipse.qvtd.compiler.internal.qvtc2qvtu.QVTuConfiguration;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvtp.QVTm2QVTp;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.ClassRelationships;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.MultiRegion;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.QVTp2QVTg;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.QVTp2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RootScheduledRegion;
 import org.eclipse.qvtd.compiler.internal.qvts2qvti.QVTs2QVTi;
@@ -54,12 +52,9 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory.CreateStrategy;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
-import org.eclipse.qvtd.pivot.qvtcore.analysis.QVTcoreDomainUsageAnalysis;
-import org.eclipse.qvtd.pivot.qvtcore.analysis.RootDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
-import org.eclipse.qvtd.pivot.schedule.Schedule;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
 
 public abstract class AbstractCompilerChain extends CompilerUtil implements CompilerChain
@@ -238,23 +233,14 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 			QVTp2QVTs.DEBUG_GRAPHS.setState(getOption(CompilerChain.DEBUG_KEY) == Boolean.TRUE);
 		}
 
-		public @NonNull RootScheduledRegion execute(@NonNull Resource pResource, @NonNull RootDomainUsageAnalysis domainUsageAnalysis, @NonNull ClassRelationships classRelationships) throws IOException {
+		public @NonNull RootScheduledRegion execute(@NonNull Resource pResource) throws IOException {
 			CreateStrategy savedStrategy = environmentFactory.setCreateStrategy(QVTcEnvironmentFactory.CREATE_STRATEGY);
 			try {
-				QVTp2QVTg qvtp2qvtg = new QVTp2QVTg(domainUsageAnalysis, classRelationships);
-				URI qvtgURI = compilerChain.getURI(QVTS_STEP, URI_KEY);
-				Resource gResource = createResource(qvtgURI);
-				Transformation asTransformation = getTransformation(pResource);
-				domainUsageAnalysis.analyzeTransformation(asTransformation);
-				qvtp2qvtg.run(pResource, gResource);
-				gResource.getContents().add(domainUsageAnalysis.getPrimitiveTypeModel());
-				saveResource(gResource);
-
-				Schedule schedule = getSchedule(gResource);
-				QVTp2QVTs qvtp2qvts = new QVTp2QVTs(this, environmentFactory, schedule, qvtp2qvtg, domainUsageAnalysis);
+				Transformation asTransformation = AbstractCompilerChain.getTransformation(pResource);
+				QVTp2QVTs qvtp2qvts = new QVTp2QVTs(this, environmentFactory, asTransformation);
 				MultiRegion multiRegion = qvtp2qvts.transform();
 				throwCompilerChainExceptionForErrors();
-				String rootName = ClassUtil.nonNullState(qvtp2qvts.getDependencyGraph().eResource().getURI().trimFileExtension().trimFileExtension().lastSegment());
+				String rootName = ClassUtil.nonNullState(asTransformation.eResource().getURI().trimFileExtension().trimFileExtension().lastSegment());
 				QVTs2QVTs qvts2qvts = new QVTs2QVTs(this, environmentFactory, rootName);
 				RootScheduledRegion rootRegion = qvts2qvts.transform(multiRegion);
 				throwCompilerChainExceptionForErrors();
@@ -265,15 +251,6 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 			finally {
 				environmentFactory.setCreateStrategy(savedStrategy);
 			}
-		}
-
-		private @NonNull Schedule getSchedule(@NonNull Resource gResource) throws IOException {
-			for (EObject eContent : gResource.getContents()) {
-				if (eContent instanceof Schedule) {
-					return (Schedule) eContent;
-				}
-			}
-			throw new IOException("No Schedule element in " + gResource.getURI());
 		}
 	}
 
@@ -564,9 +541,7 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 	}
 
 	protected @NonNull ImperativeTransformation qvtp2qvti(@NonNull Resource pResource) throws IOException {
-		RootDomainUsageAnalysis domainAnalysis = new QVTcoreDomainUsageAnalysis(environmentFactory);
-		ClassRelationships classRelationships = new ClassRelationships(environmentFactory);
-		RootScheduledRegion rootRegion = qvtp2qvtsCompilerStep.execute(pResource, domainAnalysis, classRelationships);
+		RootScheduledRegion rootRegion = qvtp2qvtsCompilerStep.execute(pResource);
 		return qvts2qvtiCompilerStep.execute(rootRegion);
 	}
 

@@ -44,14 +44,13 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.DOTStringBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphMLStringBuilder;
-import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsageAnalysis;
+import org.eclipse.qvtd.pivot.qvtcore.analysis.QVTcoreDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.RootDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.pivot.schedule.AbstractDatum;
 import org.eclipse.qvtd.pivot.schedule.ClassDatum;
-import org.eclipse.qvtd.pivot.schedule.MappingAction;
 import org.eclipse.qvtd.pivot.schedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.schedule.Schedule;
 
@@ -83,16 +82,17 @@ public abstract class SchedulerConstants
 		return s.toString();
 	}
 
+	private final @NonNull EnvironmentFactory environmentFactory;
+	private final @NonNull Transformation transformation;
+	private final @NonNull ClassRelationships classRelationships;
+	private final @NonNull RootDomainUsageAnalysis domainAnalysis;
+	private final @NonNull QVTp2QVTg qvtp2qvtg;
 	/**
 	 * The DependencyGraph to be analyzed
 	 */
 	private final @NonNull Schedule dependencyGraph;
-	private final @NonNull RootDomainUsageAnalysis domainAnalysis;
-	private final @NonNull QVTp2QVTg qvtp2qvtg;
 	@SuppressWarnings("unused")
 	private final @NonNull DomainUsage inputUsage;
-	private final @NonNull EnvironmentFactory environmentFactory;
-	private final @NonNull Transformation transformation;
 
 	private final @NonNull OperationId collectionSelectByKindId;
 	private final @NonNull OperationId oclAnyEqualsId;
@@ -136,12 +136,14 @@ public abstract class SchedulerConstants
 
 	private /*@LazyNonNull */ DependencyAnalyzer dependencyAnalyzer = null;
 
-	protected SchedulerConstants(@NonNull EnvironmentFactory environmentFactory, @NonNull Schedule dependencyGraph, @NonNull QVTp2QVTg qvtp2qvtg, @NonNull RootDomainUsageAnalysis domainAnalysis) {
+	protected SchedulerConstants(@NonNull EnvironmentFactory environmentFactory, @NonNull Transformation asTransformation) {
 		this.environmentFactory = environmentFactory;
-		this.dependencyGraph = dependencyGraph;
-		this.domainAnalysis = domainAnalysis;
-		this.qvtp2qvtg = qvtp2qvtg;
-		this.transformation = ClassUtil.nonNullState(QVTbaseUtil.getContainingTransformation(((MappingAction)dependencyGraph.getActions().get(0)).getMapping()));
+		this.transformation = asTransformation;
+		this.classRelationships = new ClassRelationships(environmentFactory);
+		this.domainAnalysis = new QVTcoreDomainUsageAnalysis(environmentFactory);
+		domainAnalysis.analyzeTransformation(asTransformation);
+		this.qvtp2qvtg = new QVTp2QVTg(domainAnalysis, classRelationships);
+		this.dependencyGraph = qvtp2qvtg.transformTransformation(asTransformation);
 		//
 		this.inputUsage = domainAnalysis.getInputUsage();
 		//		int outputMask = ((DomainUsage.Internal)domainAnalysis.getOutputUsage()).getMask();
@@ -273,7 +275,7 @@ public abstract class SchedulerConstants
 	}
 
 	public @NonNull ClassRelationships getClassRelationships() {
-		return qvtp2qvtg.getClassRelationships();
+		return classRelationships;
 	}
 
 	//	@SuppressWarnings("null")
@@ -315,7 +317,7 @@ public abstract class SchedulerConstants
 	}
 
 	protected @NonNull URI getGraphsBaseURI() {
-		return dependencyGraph.eResource().getURI().trimSegments(1).appendSegment("graphs").appendSegment("");
+		return transformation.eResource().getURI().trimSegments(1).appendSegment("graphs").appendSegment("");
 	}
 
 	public @NonNull Property getIterateProperty(@NonNull Type type) {
