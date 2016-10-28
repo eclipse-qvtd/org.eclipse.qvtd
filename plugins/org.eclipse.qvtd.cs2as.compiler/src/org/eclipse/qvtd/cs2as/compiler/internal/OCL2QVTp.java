@@ -561,7 +561,7 @@ public class OCL2QVTp {
 		assert(aClass != null);
 		Class pClass = envFact.getMetamodelManager().getPrimaryClass(aClass);
 		Set<Class> allClasses = getSuperClasses().apply(pClass);
-		allClasses.add(aClass);
+		allClasses.add(pClass);
 		return allClasses.stream()
 				.flatMap(x -> x.getOwnedProperties().stream())
 				.filter(x -> traceabilityPropName.equals(x.getName()))
