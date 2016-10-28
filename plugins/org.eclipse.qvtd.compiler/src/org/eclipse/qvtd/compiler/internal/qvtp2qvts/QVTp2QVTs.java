@@ -40,7 +40,6 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.schedule.AbstractAction;
 import org.eclipse.qvtd.pivot.schedule.ClassDatum;
 import org.eclipse.qvtd.pivot.schedule.MappingAction;
-import org.eclipse.qvtd.pivot.schedule.utilities.DependencyUtil;
 
 public class QVTp2QVTs extends SchedulerConstants
 {
@@ -67,17 +66,9 @@ public class QVTp2QVTs extends SchedulerConstants
 	 */
 	private final @NonNull Map<@NonNull AbstractAction, @NonNull BasicMappingRegion> action2mappingRegion = new HashMap<>();
 
-	private final @NonNull List<@NonNull AbstractAction> orderedActions;
-
 	public QVTp2QVTs(@NonNull ProblemHandler problemHandler, @NonNull EnvironmentFactory environmentFactory, @NonNull Transformation asTransformation) {
 		super(environmentFactory, asTransformation);
 		this.problemHandler = problemHandler;
-		DependencyUtil.NaturalOrderer orderer = new DependencyUtil.NaturalOrderer(getDependencyGraph());
-		List<@NonNull AbstractAction> orderedActions = orderer.computeOrdering();	// FIXME ??is this ordering still needed??
-		if (orderedActions == null) {
-			throw new IllegalArgumentException(orderer.diagnoseOrderingFailure());
-		}
-		this.orderedActions = orderedActions;
 	}
 
 	private Map<@NonNull OperationDatum, @NonNull OperationRegion> map = new HashMap<>();
@@ -326,6 +317,7 @@ public class QVTp2QVTs extends SchedulerConstants
 
 	public @NonNull MultiRegion transform() throws IOException {
 		MultiRegion multiRegion = new MultiRegion(this);
+		List<@NonNull AbstractAction> orderedActions = getOrderedActions();
 		//
 		//	Extract salient characteristics from within each MappingAction.
 		//

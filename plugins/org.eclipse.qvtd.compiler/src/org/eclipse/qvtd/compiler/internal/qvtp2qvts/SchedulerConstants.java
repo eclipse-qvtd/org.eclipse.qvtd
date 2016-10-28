@@ -49,10 +49,10 @@ import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.QVTcoreDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.RootDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
-import org.eclipse.qvtd.pivot.schedule.AbstractDatum;
+import org.eclipse.qvtd.pivot.schedule.AbstractAction;
 import org.eclipse.qvtd.pivot.schedule.ClassDatum;
-import org.eclipse.qvtd.pivot.schedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.schedule.Schedule;
+import org.eclipse.qvtd.pivot.schedule.utilities.DependencyUtil;
 
 public abstract class SchedulerConstants
 {
@@ -90,7 +90,7 @@ public abstract class SchedulerConstants
 	/**
 	 * The DependencyGraph to be analyzed
 	 */
-	private final @NonNull Schedule dependencyGraph;
+	//	private final @NonNull Schedule zdependencyGraph;
 	@SuppressWarnings("unused")
 	private final @NonNull DomainUsage inputUsage;
 
@@ -108,11 +108,6 @@ public abstract class SchedulerConstants
 	 * The extended analysis of each ClassDatum.
 	 */
 	private final @NonNull Map<ClassDatum, ClassDatumAnalysis> classDatum2classDatumAnalysis = new HashMap<ClassDatum, ClassDatumAnalysis>();
-
-	/**
-	 * The PropertyDatum for each property.	// FIXME domains
-	 */
-	private final @NonNull Map<Property, PropertyDatum> property2propertyDatum = new HashMap<Property, PropertyDatum>();
 
 	/**
 	 * Property used as a navigation to cast to a specific type.
@@ -136,6 +131,8 @@ public abstract class SchedulerConstants
 
 	private /*@LazyNonNull */ DependencyAnalyzer dependencyAnalyzer = null;
 
+	private final @NonNull List<@NonNull AbstractAction> orderedActions;
+
 	protected SchedulerConstants(@NonNull EnvironmentFactory environmentFactory, @NonNull Transformation asTransformation) {
 		this.environmentFactory = environmentFactory;
 		this.transformation = asTransformation;
@@ -143,7 +140,7 @@ public abstract class SchedulerConstants
 		this.domainAnalysis = new QVTcoreDomainUsageAnalysis(environmentFactory);
 		domainAnalysis.analyzeTransformation(asTransformation);
 		this.qvtp2qvtg = new QVTp2QVTg(domainAnalysis, classRelationships);
-		this.dependencyGraph = qvtp2qvtg.transformTransformation(asTransformation);
+		Schedule dependencyGraph = qvtp2qvtg.transformTransformation(asTransformation);
 		//
 		this.inputUsage = domainAnalysis.getInputUsage();
 		//		int outputMask = ((DomainUsage.Internal)domainAnalysis.getOutputUsage()).getMask();
@@ -177,24 +174,12 @@ public abstract class SchedulerConstants
 		assert candidateOclContainerProperty != null : "OCL Standard Librarty has no OclElement::oclContainer property";
 		oclContainerProperty = candidateOclContainerProperty;
 		//
-		//	Extract salient characteristics from the DependencyGraph.
-		//
-		analyzeDatums(ClassUtil.nullFree(dependencyGraph.getDatums()));
-	}
-
-	private void analyzeDatums(/*@NonNull*/ List<@NonNull ? extends AbstractDatum> datums) {
-		for (@NonNull AbstractDatum abstractDatum : datums) {
-			if (abstractDatum instanceof ClassDatum) {
-				ClassDatum classDatum = (ClassDatum)abstractDatum;
-				//				class2classDatum.put(classDatum.getType(), classDatum);
-				analyzeDatums(ClassUtil.nullFree(classDatum.getPropertyDatums()));
-			}
-			else if (abstractDatum instanceof PropertyDatum) {
-				PropertyDatum propertyDatum = (PropertyDatum)abstractDatum;
-				property2propertyDatum.put(propertyDatum.getProperty(), propertyDatum);
-			}
-			analyzeDatums(ClassUtil.nullFree(abstractDatum.getSub()));
+		DependencyUtil.NaturalOrderer orderer = new DependencyUtil.NaturalOrderer(dependencyGraph);
+		List<@NonNull AbstractAction> orderedActions = orderer.computeOrdering();	// FIXME ??is this ordering still needed??
+		if (orderedActions == null) {
+			throw new IllegalArgumentException(orderer.diagnoseOrderingFailure());
 		}
+		this.orderedActions = orderedActions;
 	}
 
 	protected abstract @NonNull ClassDatumAnalysis createClassDatumAnalysis(@NonNull ClassDatum classDatum);
@@ -295,10 +280,6 @@ public abstract class SchedulerConstants
 		return dependencyAnalyzer2;
 	}
 
-	public @NonNull Schedule getDependencyGraph() {
-		return dependencyGraph;
-	}
-
 	public @NonNull RootDomainUsageAnalysis getDomainAnalysis() {
 		return domainAnalysis;
 	}
@@ -355,6 +336,10 @@ public abstract class SchedulerConstants
 
 	public @NonNull ClassDatumAnalysis getOclVoidClassDatumAnalysis() {
 		return oclVoidClassDatumAnalysis;
+	}
+
+	protected @NonNull List<@NonNull AbstractAction> getOrderedActions() {
+		return orderedActions;
 	}
 
 	public @NonNull StandardLibrary getStandardLibrary() {
