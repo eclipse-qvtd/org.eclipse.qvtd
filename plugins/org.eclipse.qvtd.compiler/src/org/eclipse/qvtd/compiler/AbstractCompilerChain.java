@@ -251,7 +251,7 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 				saveResource(gResource);
 
 				Schedule schedule = getSchedule(gResource);
-				QVTp2QVTs qvtp2qvts = new QVTp2QVTs(this, environmentFactory, schedule, qvtp2qvtg);
+				QVTp2QVTs qvtp2qvts = new QVTp2QVTs(this, environmentFactory, schedule, qvtp2qvtg, domainUsageAnalysis);
 				MultiRegion multiRegion = qvtp2qvts.transform();
 				throwCompilerChainExceptionForErrors();
 				String rootName = ClassUtil.nonNullState(qvtp2qvts.getDependencyGraph().eResource().getURI().trimFileExtension().trimFileExtension().lastSegment());

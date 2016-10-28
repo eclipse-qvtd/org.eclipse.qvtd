@@ -651,10 +651,6 @@ public class QVTp2QVTg {
 		return result;
 	}
 
-	public @NonNull RootDomainUsageAnalysis getDomainUsageAnalysis() {
-		return domainUsageAnalysis;
-	}
-
 	private org.eclipse.ocl.pivot.Class getElementClass(TypedElement tElement) {
 		Type type = tElement.getType();
 		if (type instanceof CollectionType) {

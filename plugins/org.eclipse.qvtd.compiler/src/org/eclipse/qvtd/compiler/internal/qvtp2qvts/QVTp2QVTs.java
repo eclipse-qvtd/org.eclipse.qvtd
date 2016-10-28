@@ -36,6 +36,7 @@ import org.eclipse.qvtd.compiler.CompilerConstants;
 import org.eclipse.qvtd.compiler.CompilerProblem;
 import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.Region2Depth;
+import org.eclipse.qvtd.pivot.qvtcore.analysis.RootDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.schedule.AbstractAction;
 import org.eclipse.qvtd.pivot.schedule.ClassDatum;
 import org.eclipse.qvtd.pivot.schedule.MappingAction;
@@ -69,8 +70,8 @@ public class QVTp2QVTs extends SchedulerConstants
 
 	private final @NonNull List<@NonNull AbstractAction> orderedActions;
 
-	public QVTp2QVTs(@NonNull ProblemHandler problemHandler, @NonNull EnvironmentFactory environmentFactory, @NonNull Schedule schedule, @NonNull QVTp2QVTg qvtp2qvtg) {
-		super(environmentFactory, schedule, qvtp2qvtg);
+	public QVTp2QVTs(@NonNull ProblemHandler problemHandler, @NonNull EnvironmentFactory environmentFactory, @NonNull Schedule schedule, @NonNull QVTp2QVTg qvtp2qvtg, @NonNull RootDomainUsageAnalysis domainAnalysis) {
+		super(environmentFactory, schedule, qvtp2qvtg, domainAnalysis);
 		this.problemHandler = problemHandler;
 		DependencyUtil.NaturalOrderer orderer = new DependencyUtil.NaturalOrderer(schedule);
 		List<@NonNull AbstractAction> orderedActions = orderer.computeOrdering();	// FIXME ??is this ordering still needed??
