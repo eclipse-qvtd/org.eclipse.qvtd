@@ -73,7 +73,6 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 		step2extension.put(QVTU_STEP, "qvtu.qvtcas");
 		step2extension.put(QVTM_STEP, "qvtm.qvtcas");
 		step2extension.put(QVTP_STEP, "qvtp.qvtcas");
-		step2extension.put(QVTG_STEP, "qvtg.xmi");
 		step2extension.put(QVTS_STEP, "qvts.xmi");
 		step2extension.put(QVTI_STEP, "qvtias");
 		step2extension.put(JAVA_STEP, "java");
@@ -232,31 +231,6 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 		}
 	}
 
-	protected static class QVTp2QVTgCompilerStep extends AbstractCompilerStep
-	{
-		public QVTp2QVTgCompilerStep(@NonNull CompilerChain compilerChain) {
-			super(compilerChain, QVTG_STEP);
-		}
-
-		public @NonNull Resource execute(@NonNull Resource pResource, @NonNull QVTp2QVTg qvtp2qvtg) throws IOException {
-			CreateStrategy savedStrategy = environmentFactory.setCreateStrategy(QVTcEnvironmentFactory.CREATE_STRATEGY);
-			try {
-				URI qvtgURI = compilerChain.getURI(QVTS_STEP, URI_KEY);
-				Resource gResource = createResource(qvtgURI);
-				Transformation asTransformation = getTransformation(pResource);
-				RootDomainUsageAnalysis domainUsageAnalysis = qvtp2qvtg.getDomainUsageAnalysis();
-				domainUsageAnalysis.analyzeTransformation(asTransformation);
-				qvtp2qvtg.run(pResource, gResource);
-				gResource.getContents().add(domainUsageAnalysis.getPrimitiveTypeModel());
-				saveResource(gResource);
-				return gResource;
-			}
-			finally {
-				environmentFactory.setCreateStrategy(savedStrategy);
-			}
-		}
-	}
-
 	protected static class QVTp2QVTsCompilerStep extends AbstractCompilerStep
 	{
 		public QVTp2QVTsCompilerStep(@NonNull CompilerChain compilerChain) {
@@ -264,9 +238,18 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 			QVTp2QVTs.DEBUG_GRAPHS.setState(getOption(CompilerChain.DEBUG_KEY) == Boolean.TRUE);
 		}
 
-		public @NonNull RootScheduledRegion execute(@NonNull Resource gResource, @NonNull QVTp2QVTg qvtp2qvtg) throws IOException {
+		public @NonNull RootScheduledRegion execute(@NonNull Resource pResource, @NonNull RootDomainUsageAnalysis domainUsageAnalysis, @NonNull ClassRelationships classRelationships) throws IOException {
 			CreateStrategy savedStrategy = environmentFactory.setCreateStrategy(QVTcEnvironmentFactory.CREATE_STRATEGY);
 			try {
+				QVTp2QVTg qvtp2qvtg = new QVTp2QVTg(domainUsageAnalysis, classRelationships);
+				URI qvtgURI = compilerChain.getURI(QVTS_STEP, URI_KEY);
+				Resource gResource = createResource(qvtgURI);
+				Transformation asTransformation = getTransformation(pResource);
+				domainUsageAnalysis.analyzeTransformation(asTransformation);
+				qvtp2qvtg.run(pResource, gResource);
+				gResource.getContents().add(domainUsageAnalysis.getPrimitiveTypeModel());
+				saveResource(gResource);
+
 				Schedule schedule = getSchedule(gResource);
 				QVTp2QVTs qvtp2qvts = new QVTp2QVTs(this, environmentFactory, schedule, qvtp2qvtg);
 				MultiRegion multiRegion = qvtp2qvts.transform();
@@ -419,7 +402,6 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 	protected final @NonNull QVTc2QVTuCompilerStep qvtc2qvtuCompilerStep;
 	protected final @NonNull QVTu2QVTmCompilerStep qvtu2qvtmCompilerStep;
 	protected final @NonNull QVTm2QVTpCompilerStep qvtm2qvtpCompilerStep;
-	protected final @NonNull QVTp2QVTgCompilerStep qvtp2qvtgCompilerStep;
 	protected final @NonNull QVTp2QVTsCompilerStep qvtp2qvtsCompilerStep;
 	protected final @NonNull QVTs2QVTiCompilerStep qvts2qvtiCompilerStep;
 	protected final @NonNull QVTi2JavaCompilerStep qvti2javaCompilerStep;
@@ -435,7 +417,6 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 		this.qvtc2qvtuCompilerStep = createQVTc2QVTuCompilerStep();
 		this.qvtu2qvtmCompilerStep = createQVTu2QVTmCompilerStep();
 		this.qvtm2qvtpCompilerStep = createQVTm2QVTpCompilerStep();
-		this.qvtp2qvtgCompilerStep = createQVTp2QVTgCompilerStep();
 		this.qvtp2qvtsCompilerStep = createQVTp2QVTsCompilerStep();
 		this.qvts2qvtiCompilerStep = createQVTs2QVTiCompilerStep();
 		this.qvti2javaCompilerStep = createQVTi2JavaCompilerStep();
@@ -487,10 +468,6 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 
 	protected @NonNull QVTm2QVTpCompilerStep createQVTm2QVTpCompilerStep() {
 		return new QVTm2QVTpCompilerStep(this);
-	}
-
-	protected @NonNull QVTp2QVTgCompilerStep createQVTp2QVTgCompilerStep() {
-		return new QVTp2QVTgCompilerStep(this);
 	}
 
 	protected @NonNull QVTp2QVTsCompilerStep createQVTp2QVTsCompilerStep() {
@@ -589,9 +566,7 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 	protected @NonNull ImperativeTransformation qvtp2qvti(@NonNull Resource pResource) throws IOException {
 		RootDomainUsageAnalysis domainAnalysis = new QVTcoreDomainUsageAnalysis(environmentFactory);
 		ClassRelationships classRelationships = new ClassRelationships(environmentFactory);
-		QVTp2QVTg qvtp2qvtg = new QVTp2QVTg(domainAnalysis, classRelationships);
-		Resource gResource = qvtp2qvtgCompilerStep.execute(pResource, qvtp2qvtg);
-		RootScheduledRegion rootRegion = qvtp2qvtsCompilerStep.execute(gResource, qvtp2qvtg);
+		RootScheduledRegion rootRegion = qvtp2qvtsCompilerStep.execute(pResource, domainAnalysis, classRelationships);
 		return qvts2qvtiCompilerStep.execute(rootRegion);
 	}
 

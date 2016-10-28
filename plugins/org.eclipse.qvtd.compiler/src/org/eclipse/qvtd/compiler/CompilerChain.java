@@ -55,7 +55,6 @@ public interface CompilerChain
 	public static final @NonNull String GENMODEL_STEP = "GenModel";
 	public static final @NonNull String JAVA_STEP = "Java";
 	public static final @NonNull String QVTC_STEP = "QVTc";
-	public static final @NonNull String QVTG_STEP = "QVTg";
 	public static final @NonNull String QVTI_STEP = "QVTi";
 	public static final @NonNull String QVTM_STEP = "QVTm";
 	public static final @NonNull String QVTP_STEP = "QVTp";
