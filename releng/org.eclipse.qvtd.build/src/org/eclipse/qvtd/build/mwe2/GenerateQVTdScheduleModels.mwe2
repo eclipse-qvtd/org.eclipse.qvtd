@@ -35,10 +35,10 @@ Workflow {
     component = GenerateModel { resourceSet = resourceSet skipOnErrors = true
     	genModel = "/org.eclipse.qvtd.pivot.schedule/model/Schedule.genmodel" 	
     }
-    component = GenerateScheduleVisitors { resourceSet = resourceSet
+/*    component = GenerateScheduleVisitors { resourceSet = resourceSet
     	projectName = "org.eclipse.qvtd.pivot.schedule"
     	genModelFile = "model/Schedule.genmodel"
-    }
+    } */
 	component = ConvertToUnixLineEndings {
 		directory = "org.eclipse.qvtd.pivot.schedule/emf-gen"
 	}
