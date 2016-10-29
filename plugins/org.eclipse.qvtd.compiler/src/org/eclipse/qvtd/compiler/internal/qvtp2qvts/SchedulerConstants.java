@@ -88,11 +88,8 @@ public abstract class SchedulerConstants
 	private final @NonNull Transformation transformation;
 	private final @NonNull ClassRelationships classRelationships;
 	private final @NonNull RootDomainUsageAnalysis domainAnalysis;
-	private final @NonNull QVTp2QVTg qvtp2qvtg;
-	/**
-	 * The DependencyGraph to be analyzed
-	 */
-	//	private final @NonNull Schedule zdependencyGraph;
+	private final @NonNull DatumCaches datumCaches;
+
 	@SuppressWarnings("unused")
 	private final @NonNull DomainUsage inputUsage;
 
@@ -141,8 +138,8 @@ public abstract class SchedulerConstants
 		this.classRelationships = new ClassRelationships(environmentFactory);
 		this.domainAnalysis = new QVTcoreDomainUsageAnalysis(environmentFactory);
 		domainAnalysis.analyzeTransformation(asTransformation);
-		this.qvtp2qvtg = new QVTp2QVTg(domainAnalysis, classRelationships);
-		qvtp2qvtg.analyzeTransformation(asTransformation);
+		this.datumCaches = new DatumCaches(domainAnalysis, classRelationships);
+		datumCaches.analyzeTransformation(asTransformation);
 		//
 		this.inputUsage = domainAnalysis.getInputUsage();
 		//		int outputMask = ((DomainUsage.Internal)domainAnalysis.getOutputUsage()).getMask();
@@ -181,7 +178,7 @@ public abstract class SchedulerConstants
 	protected abstract @NonNull ClassDatumAnalysis createClassDatumAnalysis(@NonNull ClassDatum classDatum);
 
 	public @NonNull Iterable<@NonNull PropertyDatum> getAllPropertyDatums(@NonNull ClassDatum classDatum) {
-		return qvtp2qvtg.getAllPropertyDatums(classDatum);
+		return datumCaches.getAllPropertyDatums(classDatum);
 	}
 
 	public @NonNull Property getArgumentProperty(@NonNull String argumentName) {
@@ -216,11 +213,11 @@ public abstract class SchedulerConstants
 			typedModel = domainUsage.getTypedModel(asTypedElement);
 			assert typedModel != null;
 		}
-		return qvtp2qvtg.getClassDatum(typedModel, asType);
+		return datumCaches.getClassDatum(typedModel, asType);
 	}
 
 	public @NonNull ClassDatum getClassDatum(org.eclipse.ocl.pivot.@NonNull Class asType, @NonNull TypedModel typedModel) {
-		return qvtp2qvtg.getClassDatum(typedModel, asType);
+		return datumCaches.getClassDatum(typedModel, asType);
 	}
 
 	public @NonNull ClassDatumAnalysis getClassDatumAnalysis(@NonNull ClassDatum classDatum) {
@@ -251,12 +248,12 @@ public abstract class SchedulerConstants
 	}
 
 	public @NonNull ClassDatumAnalysis getClassDatumAnalysis(org.eclipse.ocl.pivot.@NonNull Class type, @NonNull TypedModel typedModel) {
-		ClassDatum classDatum = qvtp2qvtg.getClassDatum(typedModel, type);
+		ClassDatum classDatum = datumCaches.getClassDatum(typedModel, type);
 		return getClassDatumAnalysis(classDatum);
 	}
 
 	public @NonNull ClassDatumAnalysis getClassDatumAnalysis(@NonNull CompleteClass completeClass, @NonNull TypedModel typedModel) {
-		ClassDatum classDatum = qvtp2qvtg.getClassDatum(typedModel, completeClass);
+		ClassDatum classDatum = datumCaches.getClassDatum(typedModel, completeClass);
 		return getClassDatumAnalysis(classDatum);
 	}
 
@@ -356,7 +353,7 @@ public abstract class SchedulerConstants
 	}
 
 	public @NonNull PropertyDatum getPropertyDatum(@NonNull ClassDatum classDatum, @NonNull Property property) {
-		return qvtp2qvtg.getPropertyDatum(classDatum, property);
+		return datumCaches.getPropertyDatum(classDatum, property);
 	}
 
 	public @NonNull StandardLibrary getStandardLibrary() {

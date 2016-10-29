@@ -625,9 +625,9 @@ public class DependencyAnalyzer
 				int size = steps.size();
 				assert size > 0;
 				DependencyStep lastStep = steps.get(size-1);
-				org.eclipse.ocl.pivot.Class sourceClass = lastStep.getElementalType();
-				for (org.eclipse.ocl.pivot.@NonNull Class containerClass : scheduler.getClassRelationships().getContainerClasses(sourceClass)) {
-					ClassDependencyStep classDependencyStep = createClassDependencyStep(containerClass, operationCallExp);
+				CompleteClass sourceClass = metamodelManager.getCompleteModel().getCompleteClass(lastStep.getElementalType());
+				for (@NonNull CompleteClass containerClass : scheduler.getClassRelationships().getContainerClasses(sourceClass)) {
+					ClassDependencyStep classDependencyStep = createClassDependencyStep(containerClass.getPrimaryClass(), operationCallExp);
 					result = result.addReturn(createDependencyPaths(classDependencyStep));
 				}
 			}

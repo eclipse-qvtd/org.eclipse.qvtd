@@ -62,7 +62,10 @@ import org.eclipse.qvtd.pivot.schedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.schedule.Schedule;
 import org.eclipse.qvtd.pivot.schedule.ScheduleFactory;
 
-public class QVTp2QVTg
+/**
+ * DatumCaches maintains the caches of ClassDatum and PropertyDatum that establish the inter-Mapping connectivity.
+ */
+public class DatumCaches
 {
 	private final @NonNull RootDomainUsageAnalysis domainUsageAnalysis;
 	private final @NonNull ClassRelationships classRelationships;
@@ -73,33 +76,37 @@ public class QVTp2QVTg
 	private @NonNull Map<@NonNull TypedModel, @NonNull Map<org.eclipse.ocl.pivot.@NonNull CompleteClass, @NonNull ClassDatum>> typedModel2completeClass2classDatum = new HashMap<>();
 	private @NonNull Map<@NonNull ClassDatum, @NonNull Map<@NonNull Property, @NonNull PropertyDatum>> classDatum2property2propertyDatum = new HashMap<>();
 
-	public QVTp2QVTg(@NonNull RootDomainUsageAnalysis domainAnalysis, @NonNull ClassRelationships classRelationships) {
+	public DatumCaches(@NonNull RootDomainUsageAnalysis domainAnalysis, @NonNull ClassRelationships classRelationships) {
 		this.domainUsageAnalysis = domainAnalysis;
 		this.classRelationships = classRelationships;
 	}
 
-	private boolean assertValidTypedModel(@NonNull TypedModel typedModel, @NonNull CompleteClass completeClass) {
-		org.eclipse.ocl.pivot.@NonNull Class aType = completeClass.getPrimaryClass();
-		Type elementType = PivotUtil.getElementalType(aType);
-		if (elementType instanceof DataType) {
-			assert typedModel == domainUsageAnalysis.getPrimitiveTypeModel();
-		}
-		else {
-			assert typedModel != null;
-			/* FIXME waiting for BUG 485647
-			if (typedModel != domainUsageAnalysis.getPrimitiveTypeModel()) {			// Un'used' packages are primitive
-				Set<org.eclipse.ocl.pivot.Package> allUsedPackages = QVTbaseUtil.getAllUsedPackages(typedModel);
-				org.eclipse.ocl.pivot.Package containingPackage = PivotUtil.getContainingPackage(elementType);
-				assert containingPackage != null;
-				if (!Iterables.contains(allUsedPackages, containingPackage)) {
-					StandardLibrary standardLibrary = classRelationships.getEnvironmentFactory().getStandardLibrary();
-					assert (elementType == standardLibrary.getOclAnyType())
-				    || (elementType == standardLibrary.getOclElementType())
-				    || (elementType == standardLibrary.getOclVoidType());
+	private @NonNull Set<@NonNull PropertyDatum> analyseOclContainerCall(@NonNull TypedModel typedModel, @NonNull CompleteClass context) {
+
+		Set<@NonNull PropertyDatum> result = new HashSet<>();
+
+		for (@NonNull CompleteClass parentClass : classRelationships.getContainerClasses(context)) {
+			for (Property prop : parentClass.getProperties(FeatureFilter.SELECT_NON_STATIC)) {
+				if (prop.isIsComposite()) {
+					Set<@NonNull CompleteClass> allSuperAndSubClasses = getAllSuperAndSubClassesIncludingSelf(context);
+					if (allSuperAndSubClasses.contains(getElementClass(prop))) {
+						// self.print("\tOCL Container property  for ");
+						// prop.println(" : ");
+						// FIXME I'm getting non-deterministic QVTs 2 Graphml transformations
+						// when there are references to non-navigable (inexistent) properties
+						// in .oclas. Example3: Kiama
+						// For the time being, let's create the dependency on the forward
+						// containment property
+						//var opposite = prop.opposite;
+						//result.add(opposite.getOrCreatePropertyDatum(self));
+						result.add(getPropertyDatum(typedModel, parentClass, prop));
+					}
 				}
-			} */
+			}
+
 		}
-		return true;
+		return result;
+
 	}
 
 	public void analyzeTransformation(@NonNull Transformation pTransformation) {
@@ -135,7 +142,7 @@ public class QVTp2QVTg
 				assert ownedSource != null;
 				Type type = ownedSource.getType();
 				assert type != null;
-				CompleteClass context = getCompleteClass((org.eclipse.ocl.pivot.Class) type);
+				CompleteClass context = classRelationships.getCompleteClass(type);
 				requisites.addAll(getOperationPropertyDatums(opCall, context, new HashMap<>(), new HashMap<>()));
 			}
 			else if (eObj instanceof NavigationAssignment) {
@@ -155,8 +162,125 @@ public class QVTp2QVTg
 		return ma;
 	}
 
+	private boolean assertValidTypedModel(@NonNull TypedModel typedModel, @NonNull CompleteClass completeClass) {
+		org.eclipse.ocl.pivot.@NonNull Class aType = completeClass.getPrimaryClass();
+		Type elementType = PivotUtil.getElementalType(aType);
+		if (elementType instanceof DataType) {
+			assert typedModel == domainUsageAnalysis.getPrimitiveTypeModel();
+		}
+		else {
+			assert typedModel != null;
+			/* FIXME waiting for BUG 485647
+			if (typedModel != domainUsageAnalysis.getPrimitiveTypeModel()) {			// Un'used' packages are primitive
+				Set<org.eclipse.ocl.pivot.Package> allUsedPackages = QVTbaseUtil.getAllUsedPackages(typedModel);
+				org.eclipse.ocl.pivot.Package containingPackage = PivotUtil.getContainingPackage(elementType);
+				assert containingPackage != null;
+				if (!Iterables.contains(allUsedPackages, containingPackage)) {
+					StandardLibrary standardLibrary = classRelationships.getEnvironmentFactory().getStandardLibrary();
+					assert (elementType == standardLibrary.getOclAnyType())
+				    || (elementType == standardLibrary.getOclElementType())
+				    || (elementType == standardLibrary.getOclVoidType());
+				}
+			} */
+		}
+		return true;
+	}
+
+	// TODO cache
+	private @NonNull Set<@NonNull CompleteClass> computeContexts(@NonNull OCLExpression oclExp, @NonNull Map<@NonNull Variable, @NonNull Set<@NonNull CompleteClass>> variable2BoundContext) {
+
+		Set<@NonNull CompleteClass> result = new HashSet<>();
+		if (oclExp instanceof VariableExp) {
+			VariableExp varExp = (VariableExp) oclExp;
+			Set<@NonNull CompleteClass> context = variable2BoundContext.get(varExp.getReferredVariable());
+			if (context != null) { // FIXME is this check needed ?
+				result.addAll(context);
+			} else {
+				result.add(classRelationships.getCompleteClass(ClassUtil.nonNullState(varExp.getType())));
+			}
+		} else if (oclExp instanceof CallExp) {
+			CallExp callExp = (CallExp) oclExp;
+			if (callExp instanceof OperationCallExp &&
+					isOclContainerOp(ClassUtil.nonNullState(((OperationCallExp)callExp).getReferredOperation()))) {
+				OCLExpression ownedSource = callExp.getOwnedSource();
+				assert ownedSource != null;
+				for (@NonNull CompleteClass oclContainerOpContext : computeContexts(ownedSource, variable2BoundContext)) {
+					result.addAll(classRelationships.getContainerClasses(oclContainerOpContext));
+				}
+			} else {
+				result.add(classRelationships.getCompleteClass(ClassUtil.nonNullState(callExp.getType())));
+			}
+		} else if (oclExp instanceof ShadowExp) {
+			result.add(classRelationships.getCompleteClass(ClassUtil.nonNullState(((ShadowExp)oclExp).getType())));
+
+		} else {
+			throw new IllegalStateException("OCLExpression has not been considered yet");
+		}
+		return result;
+	}
+
+	public @NonNull Iterable<@NonNull PropertyDatum> getAllPropertyDatums(@NonNull ClassDatum cDatum) {
+		return getAllPropertyDatumsInternal(new HashSet<>(), new HashSet<>(), cDatum);
+	}
+
+	private @NonNull Iterable<@NonNull PropertyDatum> getAllPropertyDatumsInternal(@NonNull Set<@NonNull ClassDatum> classDatums, @NonNull Set<@NonNull PropertyDatum> propertyDatums, @NonNull ClassDatum cDatum) {
+		if (classDatums.add(cDatum)) {
+			propertyDatums.addAll(ClassUtil.nullFree(cDatum.getPropertyDatums()));
+		}
+		for (@NonNull ClassDatum superClassDatum : ClassUtil.nullFree(cDatum.getSuper())) {
+			getAllPropertyDatumsInternal(classDatums, propertyDatums, superClassDatum);
+		}
+		return propertyDatums;
+	}
+
+	// Property datum analysis
+
+	private @NonNull Set<@NonNull CompleteClass> getAllSuperAndSubClassesIncludingSelf(@NonNull CompleteClass context) {
+		Set<@NonNull CompleteClass> result = new HashSet<>();
+		result.addAll(classRelationships.getAllSuperClasses(context));
+		result.addAll(classRelationships.getAllSubClasses(context));
+		result.add(context);
+		return result;
+	}
+
+	private @NonNull Set<@NonNull PropertyDatum> getAssignedPropertyDatums(@NonNull NavigationAssignment propAssign) {
+		Set<@NonNull PropertyDatum> result = new HashSet<>();
+		Property targetProp = QVTcoreUtil.getTargetProperty(propAssign);
+		OCLExpression slotExpression = ClassUtil.nonNullState(propAssign.getSlotExpression());
+		TypedModel typedModel = getTypedModel(slotExpression);
+		PropertyDatum targetDatum = getPropertyDatum(typedModel, ClassUtil.nonNullState(slotExpression.getType().isClass()), targetProp);
+		result.add(targetDatum);
+		Property oppositeProp = targetProp.getOpposite();
+		if (oppositeProp != null) {
+			OCLExpression value = propAssign.getValue();
+			assert value != null;
+			DomainUsage valueUsage = getUsage(value);
+			if (valueUsage == null) {
+				getUsage(value);
+				throw new IllegalStateException("No DomainUsage for " + value);
+			}
+			Type propertyType = targetProp.getType();
+			if ((propertyType != null) && (propertyType.getESObject() != EcorePackage.Literals.EOBJECT)) {		// FIXME Legacy fix tolerating undeclared import of EObject
+				DomainUsage propertyUsage = getUsage(propertyType);
+				if (propertyUsage == null) {
+					getUsage(propertyType);
+					throw new IllegalStateException("No DomainUsage for " + propertyType);
+				}
+				valueUsage = domainUsageAnalysis.intersection(propertyUsage, valueUsage);
+			}
+			TypedModel oppositeTypedModel = valueUsage.getTypedModel(propAssign);
+			if (oppositeTypedModel == null) {
+				throw new IllegalStateException("No left/right DomainUsage commonality for \"" + propAssign + "\"");
+			}
+			PropertyDatum oppositeDatum = getPropertyDatum(oppositeTypedModel, ClassUtil.nonNullState(getElementClass(targetProp)), oppositeProp);
+			targetDatum.setOpposite(oppositeDatum);
+			result.add(oppositeDatum);
+		}
+		return result;
+	}
+
 	public @NonNull ClassDatum getClassDatum(@NonNull TypedModel typedModel, org.eclipse.ocl.pivot.@NonNull Class aClass) {
-		CompleteClass completeClass = getCompleteClass(aClass);
+		CompleteClass completeClass = classRelationships.getCompleteClass(aClass);
 		return getClassDatum(typedModel, completeClass);
 	}
 
@@ -204,123 +328,23 @@ public class QVTp2QVTg
 		return classDatum;
 	}
 
-	/*	public @NonNull Iterable<@NonNull PropertyDatum> getAllPropertyDatums(@NonNull ClassDatum classDatum) {
-		Map<@NonNull Property, @NonNull PropertyDatum> property2propertyDatums = classDatum2property2propertyDatums.get(classDatum);
-		if (property2propertyDatums == null) {
-			property2propertyDatums = new HashMap<>();
-			classDatum2property2propertyDatums.put(classDatum, property2propertyDatums);
-			for (@NonNull PropertyDatum propertyDatum : getAllPropertyDatumsInternal(new HashSet<>(), new HashSet<>(), classDatum)) {
-				Property property = propertyDatum.getProperty();
-				assert property != null;
-				PropertyDatum oldPropertyDatum = property2propertyDatums.put(property, propertyDatum);
-				assert oldPropertyDatum == null;
-			}
-		}
-		return property2propertyDatums.values();
-	} */
-	public @NonNull Iterable<@NonNull PropertyDatum> getAllPropertyDatums(@NonNull ClassDatum cDatum) {
-		return getAllPropertyDatumsInternal(new HashSet<>(), new HashSet<>(), cDatum);
-	}
-	private @NonNull Iterable<@NonNull PropertyDatum> getAllPropertyDatumsInternal(@NonNull Set<@NonNull ClassDatum> classDatums, @NonNull Set<@NonNull PropertyDatum> propertyDatums, @NonNull ClassDatum cDatum) {
-		if (classDatums.add(cDatum)) {
-			propertyDatums.addAll(ClassUtil.nullFree(cDatum.getPropertyDatums()));
-		}
-		for (@NonNull ClassDatum superClassDatum : ClassUtil.nullFree(cDatum.getSuper())) {
-			getAllPropertyDatumsInternal(classDatums, propertyDatums, superClassDatum);
-		}
-		return propertyDatums;
-	}
-
-	private @NonNull PropertyDatum getPropertyDatum(@NonNull TypedModel typedModel, org.eclipse.ocl.pivot.@NonNull Class context, @NonNull Property property) {
-		CompleteClass completeClass = getCompleteClass(context);
-		return getPropertyDatum(typedModel, completeClass, property);
-	}
-
-	private @NonNull PropertyDatum getPropertyDatum(@NonNull TypedModel typedModel, @NonNull CompleteClass completeClass, @NonNull Property property) {
-		ClassDatum classDatum = getClassDatum(typedModel, completeClass);
-		return getPropertyDatum(classDatum, property);
-	}
-
-	public @NonNull PropertyDatum getPropertyDatum(@NonNull ClassDatum classDatum, @NonNull Property property) {
-		Iterable<@NonNull PropertyDatum> allPropertyDatums = getAllPropertyDatums(classDatum);
-
-		Map<@NonNull Property, @NonNull PropertyDatum> property2propertyDatum = classDatum2property2propertyDatum.get(classDatum);
-		if (property2propertyDatum == null) {
-			property2propertyDatum = new HashMap<>();
-			classDatum2property2propertyDatum.put(classDatum, property2propertyDatum);
-		}
-		PropertyDatum cachedPropertyDatum = property2propertyDatum.get(property);
-		if (cachedPropertyDatum != null) {
-			return cachedPropertyDatum;
-		}
-		for (PropertyDatum propertyDatum : allPropertyDatums) {
-			if (propertyDatum.getProperty().equals(property)) {
-				return propertyDatum;
-			}
-		}
-		// If not found we create it
-		TypedModel typedModel = classDatum.getTypedModel();
-		assert typedModel != null;
-		CompleteClass targetCompleteClass = classDatum.getCompleteClass();
-		org.eclipse.ocl.pivot.Class owningClass = property.getOwningClass();
-		assert owningClass != null;
-		CompleteClass hostCompleteClass = getCompleteClass(owningClass);
-		PropertyDatum propertyDatum = ScheduleFactory.eINSTANCE.createPropertyDatum();
-		propertyDatum.setTypedModel(typedModel);
-		propertyDatum.setProperty(property);
-		propertyDatum.setClassDatum(classDatum);
-		assert targetCompleteClass.conformsTo(hostCompleteClass);
-		for (@NonNull CompleteClass superCompleteClass : targetCompleteClass.getSuperCompleteClasses()) {
-			if (superCompleteClass.conformsTo(hostCompleteClass)) {
-				PropertyDatum superPropDatum = getPropertyDatum(typedModel, superCompleteClass, property);
-				propertyDatum.getSuper().add(superPropDatum);
-			}
-		}
-		PropertyDatum oldPropertyDatum = property2propertyDatum.put(property, propertyDatum);
-		assert oldPropertyDatum == null;
-		return propertyDatum;
-	}
-
-	private @NonNull CompleteClass getCompleteClass(org.eclipse.ocl.pivot.@NonNull Class asClass) {
-		return classRelationships.getEnvironmentFactory().getCompleteModel().getCompleteClass(asClass);
-	}
-
 	// Property datum analysis
 
-	private @NonNull Set<@NonNull PropertyDatum> getAssignedPropertyDatums(@NonNull NavigationAssignment propAssign) {
-		Set<@NonNull PropertyDatum> result = new HashSet<>();
-		Property targetProp = QVTcoreUtil.getTargetProperty(propAssign);
-		OCLExpression slotExpression = ClassUtil.nonNullState(propAssign.getSlotExpression());
-		TypedModel typedModel = getTypedModel(slotExpression);
-		PropertyDatum targetDatum = getPropertyDatum(typedModel, ClassUtil.nonNullState(slotExpression.getType().isClass()), targetProp);
-		result.add(targetDatum);
-		Property oppositeProp = targetProp.getOpposite();
-		if (oppositeProp != null) {
-			OCLExpression value = propAssign.getValue();
-			assert value != null;
-			DomainUsage valueUsage = getUsage(value);
-			if (valueUsage == null) {
-				getUsage(value);
-				throw new IllegalStateException("No DomainUsage for " + value);
-			}
-			Type propertyType = targetProp.getType();
-			if ((propertyType != null) && (propertyType.getESObject() != EcorePackage.Literals.EOBJECT)) {		// FIXME Legacy fix tolerating undeclared import of EObject
-				DomainUsage propertyUsage = getUsage(propertyType);
-				if (propertyUsage == null) {
-					getUsage(propertyType);
-					throw new IllegalStateException("No DomainUsage for " + propertyType);
-				}
-				valueUsage = domainUsageAnalysis.intersection(propertyUsage, valueUsage);
-			}
-			TypedModel oppositeTypedModel = valueUsage.getTypedModel(propAssign);
-			if (oppositeTypedModel == null) {
-				throw new IllegalStateException("No left/right DomainUsage commonality for \"" + propAssign + "\"");
-			}
-			PropertyDatum oppositeDatum = getPropertyDatum(oppositeTypedModel, ClassUtil.nonNullState(getElementClass(targetProp)), oppositeProp);
-			targetDatum.setOpposite(oppositeDatum);
-			result.add(oppositeDatum);
+	// This is needed when analysing Property/Operation call exps so that they exploit the statically computed context
+	// carried on through the analysis.
+	// TODO cache
+	private @NonNull Set<@NonNull CompleteClass> getComputedContexts(@NonNull CallExp callExp, @NonNull Map<@NonNull Variable, @NonNull Set<@NonNull CompleteClass>> variable2BoundContext) {
+		OCLExpression source = ClassUtil.nonNullState(callExp.getOwnedSource());
+		return computeContexts(source, variable2BoundContext);
+	}
+
+	private org.eclipse.ocl.pivot.@Nullable Class getElementClass(@NonNull TypedElement tElement) {
+		Type type = tElement.getType();
+		if (type instanceof CollectionType) {
+			return ((CollectionType) type).getElementType().isClass();
+		} else {
+			return type.isClass();
 		}
-		return result;
 	}
 
 	private @NonNull Set<@NonNull PropertyDatum> getOperationPropertyDatums(@NonNull OperationCallExp opCall, @NonNull CompleteClass context,
@@ -355,6 +379,8 @@ public class QVTp2QVTg
 		}
 		return result;
 	}
+
+	// Property datum analysis
 
 	private @NonNull Set<@NonNull PropertyDatum> getOperationPropertyDatums(@NonNull Operation op, @NonNull CompleteClass context, @NonNull Map<@NonNull CompleteClass, @NonNull Set<@NonNull Operation>> type2VisitedOps) {
 
@@ -396,6 +422,58 @@ public class QVTp2QVTg
 		}
 		return result;
 	}
+
+	private @NonNull PropertyDatum getPropertyDatum(@NonNull TypedModel typedModel, org.eclipse.ocl.pivot.@NonNull Class context, @NonNull Property property) {
+		CompleteClass completeClass = classRelationships.getCompleteClass(context);
+		return getPropertyDatum(typedModel, completeClass, property);
+	}
+
+	private @NonNull PropertyDatum getPropertyDatum(@NonNull TypedModel typedModel, @NonNull CompleteClass completeClass, @NonNull Property property) {
+		ClassDatum classDatum = getClassDatum(typedModel, completeClass);
+		return getPropertyDatum(classDatum, property);
+	}
+
+	public @NonNull PropertyDatum getPropertyDatum(@NonNull ClassDatum classDatum, @NonNull Property property) {
+		Iterable<@NonNull PropertyDatum> allPropertyDatums = getAllPropertyDatums(classDatum);
+
+		Map<@NonNull Property, @NonNull PropertyDatum> property2propertyDatum = classDatum2property2propertyDatum.get(classDatum);
+		if (property2propertyDatum == null) {
+			property2propertyDatum = new HashMap<>();
+			classDatum2property2propertyDatum.put(classDatum, property2propertyDatum);
+		}
+		PropertyDatum cachedPropertyDatum = property2propertyDatum.get(property);
+		if (cachedPropertyDatum != null) {
+			return cachedPropertyDatum;
+		}
+		for (PropertyDatum propertyDatum : allPropertyDatums) {
+			if (propertyDatum.getProperty().equals(property)) {
+				return propertyDatum;
+			}
+		}
+		// If not found we create it
+		TypedModel typedModel = classDatum.getTypedModel();
+		assert typedModel != null;
+		CompleteClass targetCompleteClass = classDatum.getCompleteClass();
+		org.eclipse.ocl.pivot.Class owningClass = property.getOwningClass();
+		assert owningClass != null;
+		CompleteClass hostCompleteClass = classRelationships.getCompleteClass(owningClass);
+		PropertyDatum propertyDatum = ScheduleFactory.eINSTANCE.createPropertyDatum();
+		propertyDatum.setTypedModel(typedModel);
+		propertyDatum.setProperty(property);
+		propertyDatum.setClassDatum(classDatum);
+		assert targetCompleteClass.conformsTo(hostCompleteClass);
+		for (@NonNull CompleteClass superCompleteClass : targetCompleteClass.getSuperCompleteClasses()) {
+			if (superCompleteClass.conformsTo(hostCompleteClass)) {
+				PropertyDatum superPropDatum = getPropertyDatum(typedModel, superCompleteClass, property);
+				propertyDatum.getSuper().add(superPropDatum);
+			}
+		}
+		PropertyDatum oldPropertyDatum = property2propertyDatum.put(property, propertyDatum);
+		assert oldPropertyDatum == null;
+		return propertyDatum;
+	}
+
+	// Property datum analysis
 
 	private @NonNull TypedModel getTypedModel(@NonNull Element element) {
 		DomainUsage domainUsage = getUsage(element);
@@ -440,120 +518,9 @@ public class QVTp2QVTg
 		//		return "oclContainer".equals(op.getName()) && op.getOwnedParameters().isEmpty();
 	}
 
-	private @NonNull Set<@NonNull PropertyDatum> analyseOclContainerCall(@NonNull TypedModel typedModel, @NonNull CompleteClass context) {
-
-		Set<@NonNull PropertyDatum> result = new HashSet<>();
-
-		for (@NonNull CompleteClass parentClass : getContainingTypes(context)) {
-			for (Property prop : parentClass.getProperties((FeatureFilter)null)) {
-				if (prop.isIsComposite()) {
-					Set<@NonNull CompleteClass> allSuperAndSubClasses = getAllSuperAndSubClassesIncludingSelf(context);
-					if (allSuperAndSubClasses.contains(getElementClass(prop))) {
-						// self.print("\tOCL Container property  for ");
-						// prop.println(" : ");
-						// FIXME I'm getting non-deterministic QVTs 2 Graphml transformations
-						// when there are references to non-navigable (inexistent) properties
-						// in .oclas. Example3: Kiama
-						// For the time being, let's create the dependency on the forward
-						// containment property
-						//var opposite = prop.opposite;
-						//result.add(opposite.getOrCreatePropertyDatum(self));
-						result.add(getPropertyDatum(typedModel, parentClass, prop));
-					}
-				}
-			}
-
-		}
-		return result;
-
-	}
-
-
-	private void updateVariableBindings(@NonNull LetExp letExp , @NonNull Map<@NonNull Variable, @NonNull Set<@NonNull CompleteClass>> variable2BoundContext ) {
+	private void updateVariableBindings(@NonNull LetExp letExp, @NonNull Map<@NonNull Variable, @NonNull Set<@NonNull CompleteClass>> variable2BoundContext ) {
 
 		Variable variable = letExp.getOwnedVariable();
 		variable2BoundContext.put(variable, computeContexts(ClassUtil.nonNullState(variable.getOwnedInit()), variable2BoundContext));
-	}
-
-	// TODO cache
-	private @NonNull Set<@NonNull CompleteClass> computeContexts(@NonNull OCLExpression oclExp, @NonNull Map<@NonNull Variable, @NonNull Set<@NonNull CompleteClass>> variable2BoundContext) {
-
-		Set<@NonNull CompleteClass> result = new HashSet<>();
-		if (oclExp instanceof VariableExp) {
-			VariableExp varExp = (VariableExp) oclExp;
-			Set<@NonNull CompleteClass> context = variable2BoundContext.get(varExp.getReferredVariable());
-			if (context != null) { // FIXME is this check needed ?
-				result.addAll(context);
-			} else {
-				result.add(getCompleteClass(ClassUtil.nonNullState(varExp.getType().isClass())));
-			}
-		} else if (oclExp instanceof CallExp) {
-			CallExp callExp = (CallExp) oclExp;
-			if (callExp instanceof OperationCallExp &&
-					isOclContainerOp(ClassUtil.nonNullState(((OperationCallExp)callExp).getReferredOperation()))) {
-				OCLExpression ownedSource = callExp.getOwnedSource();
-				assert ownedSource != null;
-				for (@NonNull CompleteClass oclContainerOpContext : computeContexts(ownedSource, variable2BoundContext)) {
-					result.addAll(getContainingTypes(oclContainerOpContext));
-				}
-			} else {
-				result.add(getCompleteClass(ClassUtil.nonNullState(callExp.getType().isClass())));
-			}
-		} else if (oclExp instanceof ShadowExp) {
-			result.add(getCompleteClass(ClassUtil.nonNullState(((ShadowExp)oclExp).getType())));
-
-		} else {
-			throw new IllegalStateException("OCLExpression has not been considered yet");
-		}
-		return result;
-	}
-
-	// This is needed when analysing Property/Operation call exps so that they exploit the statically computed context
-	// carried on through the analysis.
-	// TODO cache
-	private @NonNull Set<@NonNull CompleteClass> getComputedContexts(@NonNull CallExp callExp, @NonNull Map<@NonNull Variable, @NonNull Set<@NonNull CompleteClass>> variable2BoundContext) {
-		OCLExpression source = ClassUtil.nonNullState(callExp.getOwnedSource());
-		return computeContexts(source, variable2BoundContext);
-	}
-	private @NonNull Set<@NonNull CompleteClass> getContainingTypes(@NonNull CompleteClass aClass) {
-		return getCompleteClasses(classRelationships.getContainerClasses(aClass.getPrimaryClass()));
-	}
-
-	private @NonNull Set<@NonNull CompleteClass> getCompleteClasses(@NonNull Set<org.eclipse.ocl.pivot.@NonNull Class> containerClasses) {
-		Set<@NonNull CompleteClass> result = new HashSet<>();
-		for (org.eclipse.ocl.pivot.@NonNull Class containerClass : containerClasses) {
-			result.add(getCompleteClass(containerClass));
-		}
-		return result;
-	}
-
-	private @NonNull Set<@NonNull CompleteClass> getAllSuperClasses(@NonNull CompleteClass context) {
-		return getCompleteClasses(classRelationships.getAllSuperClasses(context.getPrimaryClass()));
-	}
-
-	private @NonNull Set<@NonNull CompleteClass> getAllSubClasses(@NonNull CompleteClass context) {
-		return getCompleteClasses(classRelationships.getAllSubClasses(context.getPrimaryClass()));
-	}
-
-	private @NonNull Set<@NonNull CompleteClass> getAllSuperAndSubClasses(@NonNull CompleteClass context) {
-		Set<@NonNull CompleteClass> result = new HashSet<>();
-		result.addAll(getAllSuperClasses(context));
-		result.addAll(getAllSubClasses(context));
-		return result;
-	}
-
-	private @NonNull Set<@NonNull CompleteClass> getAllSuperAndSubClassesIncludingSelf(@NonNull CompleteClass context) {
-		Set<@NonNull CompleteClass> result = getAllSuperAndSubClasses(context);
-		result.add(context);
-		return result;
-	}
-
-	private org.eclipse.ocl.pivot.@Nullable Class getElementClass(@NonNull TypedElement tElement) {
-		Type type = tElement.getType();
-		if (type instanceof CollectionType) {
-			return ((CollectionType) type).getElementType().isClass();
-		} else {
-			return type.isClass();
-		}
 	}
 }
