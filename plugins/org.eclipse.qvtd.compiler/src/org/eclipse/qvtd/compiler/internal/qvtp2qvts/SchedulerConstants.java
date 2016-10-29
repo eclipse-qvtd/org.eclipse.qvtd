@@ -12,6 +12,7 @@ package org.eclipse.qvtd.compiler.internal.qvtp2qvts;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -40,17 +41,19 @@ import org.eclipse.ocl.pivot.utilities.StringUtil;
 import org.eclipse.ocl.pivot.values.Unlimited;
 import org.eclipse.qvtd.compiler.internal.utilities.SymbolNameBuilder;
 import org.eclipse.qvtd.compiler.internal.utilities.SymbolNameReservation;
+import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.DOTStringBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphMLStringBuilder;
+import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.QVTcoreDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.RootDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
-import org.eclipse.qvtd.pivot.schedule.AbstractAction;
 import org.eclipse.qvtd.pivot.schedule.ClassDatum;
+import org.eclipse.qvtd.pivot.schedule.PropertyDatum;
 
 public abstract class SchedulerConstants
 {
@@ -129,6 +132,8 @@ public abstract class SchedulerConstants
 
 	private /*@LazyNonNull */ DependencyAnalyzer dependencyAnalyzer = null;
 
+	private /*@LazyNonNull*/ List<@NonNull Mapping> orderedMappings;	// Only ordered to improve determinacy
+
 	protected SchedulerConstants(@NonNull EnvironmentFactory environmentFactory, @NonNull Transformation asTransformation) {
 		this.environmentFactory = environmentFactory;
 		this.transformation = asTransformation;
@@ -173,6 +178,10 @@ public abstract class SchedulerConstants
 	}
 
 	protected abstract @NonNull ClassDatumAnalysis createClassDatumAnalysis(@NonNull ClassDatum classDatum);
+
+	public @NonNull Iterable<@NonNull PropertyDatum> getAllPropertyDatums(@NonNull ClassDatum classDatum) {
+		return qvtp2qvtg.getAllPropertyDatums(classDatum);
+	}
 
 	public @NonNull Property getArgumentProperty(@NonNull String argumentName) {
 		Property argumentProperty = name2argumentProperty.get(argumentName);
@@ -328,8 +337,20 @@ public abstract class SchedulerConstants
 		return oclVoidClassDatumAnalysis;
 	}
 
-	protected @NonNull List<@NonNull AbstractAction> getOrderedActions() {
-		return qvtp2qvtg.getOrderedActions();
+	protected @NonNull Iterable<@NonNull Mapping> getOrderedMappings() {
+		List<@NonNull Mapping> orderedMappings2 = orderedMappings;
+		if (orderedMappings2 == null) {
+			orderedMappings2 = orderedMappings = new ArrayList<>();
+			for (@NonNull Rule rule : ClassUtil.nullFree(transformation.getRule())) {
+				orderedMappings.add((Mapping)rule);
+			}
+			Collections.sort(orderedMappings2, NameUtil.NAMEABLE_COMPARATOR);
+		}
+		return orderedMappings2;
+	}
+
+	public @NonNull PropertyDatum getPropertyDatum(@NonNull ClassDatum classDatum, @NonNull Property property) {
+		return qvtp2qvtg.getPropertyDatum(classDatum, property);
 	}
 
 	public @NonNull StandardLibrary getStandardLibrary() {

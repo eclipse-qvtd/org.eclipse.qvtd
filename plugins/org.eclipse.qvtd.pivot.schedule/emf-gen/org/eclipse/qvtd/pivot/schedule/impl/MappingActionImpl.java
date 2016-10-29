@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2016 Willink Transformations and others.
+ * Copyright (c) 2015 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -31,7 +31,7 @@ import org.eclipse.qvtd.pivot.schedule.SchedulePackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Mapping Action</b></em>'.
+ * An implementation of the model object '<em><b>Abstract Action</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
@@ -65,6 +65,7 @@ public class MappingActionImpl extends MinimalEObjectImpl.Container implements M
 	 * @ordered
 	 */
 	protected EList<AbstractDatum> productions;
+
 	/**
 	 * The cached value of the '{@link #getRequisites() <em>Requisites</em>}' reference list.
 	 * <!-- begin-user-doc -->

@@ -30,8 +30,10 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.FeatureFilter;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.schedule.ClassDatum;
+import org.eclipse.qvtd.pivot.schedule.MappingAction;
 
 import com.google.common.collect.Iterables;
 
@@ -56,7 +58,6 @@ public class ClassDatumAnalysis
 
 	protected final @NonNull SchedulerConstants schedulerConstants;
 	protected final @NonNull ClassDatum classDatum;
-	protected final @NonNull CompleteClass completeClass;
 	protected final @NonNull DomainUsage domainUsage;
 
 	/**
@@ -64,20 +65,17 @@ public class ClassDatumAnalysis
 	 */
 	private /* @LazyNonNull*/ List<@NonNull Property> multiOpposites = null;
 
-	//	private final @NonNull HeadNodeGroup headNodeGroup;
-
 	private final @NonNull Map<@NonNull Region, @NonNull List<@NonNull Node>> introducer2assignmentNodes = new HashMap<>();
 	private final @NonNull Map<@NonNull MappingRegion, @NonNull List<@NonNull Node>> consumer2predicateNodes = new HashMap<>();
 	private final @NonNull Map<@NonNull Region, @NonNull List<@NonNull Node>> producer2assignmentNodes = new HashMap<>();
 	private /*@LazyNonNull*/ List<@NonNull ClassDatumAnalysis> superClassDatumAnalyses = null;
+	private /*@LazyNonNull*/ List<@NonNull Mapping> producedBy = null;
+	private /*@LazyNonNull*/ List<@NonNull Mapping> requiredBy = null;
 
 	public ClassDatumAnalysis(@NonNull SchedulerConstants schedulerConstants, @NonNull ClassDatum classDatum) {
 		this.schedulerConstants = schedulerConstants;
 		this.classDatum = classDatum;
 		this.domainUsage = schedulerConstants.getDomainUsage(ClassUtil.nonNullState(classDatum.getTypedModel()));
-		Type type = classDatum.getType();
-		assert type != null;
-		this.completeClass = schedulerConstants.getEnvironmentFactory().getCompleteModel().getCompleteClass(type);
 	}
 
 	public void addConsumption(@NonNull MappingRegion consumer, @NonNull Node consumingNode) {
@@ -117,6 +115,8 @@ public class ClassDatumAnalysis
 	}
 
 	public @NonNull CompleteClass getCompleteClass() {
+		CompleteClass completeClass = classDatum.getCompleteClass();
+		assert completeClass != null;
 		return completeClass;
 	}
 
@@ -136,9 +136,8 @@ public class ClassDatumAnalysis
 		List<@NonNull Property> multiOpposites2 = multiOpposites;
 		if (multiOpposites2 == null) {
 			EnvironmentFactory environmentFactory = schedulerConstants.getEnvironmentFactory();
-			Type asClass = classDatum.getType();
-			assert asClass != null;
-			CompleteClass completeClass = environmentFactory.getCompleteModel().getCompleteClass(asClass);
+			CompleteClass completeClass = classDatum.getCompleteClass();
+			assert completeClass != null;
 			for (@NonNull Property property : completeClass.getProperties((FeatureFilter)null)) {
 				Property oppositeProperty = property.getOpposite();
 				if ((oppositeProperty != null) && oppositeProperty.isIsMany() && !oppositeProperty.isIsDerived()) {
@@ -147,7 +146,7 @@ public class ClassDatumAnalysis
 						Type childType = ((CollectionType)childrenType).getElementType();
 						assert childType != null;
 						StandardLibrary standardLibrary = environmentFactory.getStandardLibrary();
-						if (asClass.conformsTo(standardLibrary, childType)) {					// FIXME bi-conforming types
+						if (completeClass.getPrimaryClass().conformsTo(standardLibrary, childType)) {					// FIXME bi-conforming types
 							if (multiOpposites2 == null) {
 								multiOpposites = multiOpposites2 = new ArrayList<@NonNull Property>();
 							}
@@ -163,6 +162,19 @@ public class ClassDatumAnalysis
 		return multiOpposites2;
 	}
 
+	public @NonNull Iterable<@NonNull Mapping> getProducedBy() {
+		List<@NonNull Mapping> producedBy2 = producedBy;
+		if (producedBy2  == null) {
+			producedBy2 = producedBy = new ArrayList<>();
+			for (@NonNull MappingAction producingAction : ClassUtil.nullFree(classDatum.getProducedBy())) {
+				Mapping mapping = producingAction.getMapping();
+				assert mapping != null;
+				producedBy2.add(mapping);
+			}
+		}
+		return producedBy2;
+	}
+
 	//	@SuppressWarnings("null")
 	//	public @NonNull Collection<MappingRegion> getProducers() {
 	//		return producer2assignmentNodes.keySet();
@@ -174,6 +186,19 @@ public class ClassDatumAnalysis
 
 	public @NonNull Set<Region> getProducingRegions() {
 		return producer2assignmentNodes.keySet();
+	}
+
+	public @NonNull Iterable<@NonNull Mapping> getRequiredBy() {
+		List<@NonNull Mapping> requiredBy2 = requiredBy;
+		if (requiredBy2  == null) {
+			requiredBy2 = requiredBy = new ArrayList<>();
+			for (@NonNull MappingAction consumingAction : ClassUtil.nullFree(classDatum.getRequiredBy())) {
+				Mapping mapping = consumingAction.getMapping();
+				assert mapping != null;
+				requiredBy2.add(mapping);
+			}
+		}
+		return requiredBy2;
 	}
 
 	public @Nullable Node getSingleProducer() {
@@ -189,6 +214,7 @@ public class ClassDatumAnalysis
 		List<@NonNull ClassDatumAnalysis> superClassDatumAnalyses2 = superClassDatumAnalyses;
 		if (superClassDatumAnalyses2  == null) {
 			superClassDatumAnalyses = superClassDatumAnalyses2 = new ArrayList<@NonNull ClassDatumAnalysis>();
+			CompleteClass completeClass = getCompleteClass();
 			for (@NonNull CompleteClass completeSuperClass : completeClass.getSuperCompleteClasses()) {
 				superClassDatumAnalyses2.add(schedulerConstants.getClassDatumAnalysis(completeSuperClass.getPrimaryClass(), ClassUtil.nonNullState(domainUsage.getTypedModel(completeClass))));
 			}

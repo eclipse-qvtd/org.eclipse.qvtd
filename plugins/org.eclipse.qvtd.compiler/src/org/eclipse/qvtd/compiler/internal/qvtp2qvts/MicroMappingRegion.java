@@ -12,7 +12,7 @@ package org.eclipse.qvtd.compiler.internal.qvtp2qvts;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.qvtd.compiler.internal.utilities.SymbolNameBuilder;
-import org.eclipse.qvtd.pivot.schedule.MappingAction;
+import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 
 /**
  * A MicroMappingRegion provides the partitioned QVTs node-edge graph representation of a QVTp mapping.
@@ -39,8 +39,8 @@ public class MicroMappingRegion extends AbstractMappingRegion
 	}
 
 	@Override
-	public @NonNull Iterable<@NonNull MappingAction> getMappingActions() {
-		return basicMappingRegion.getMappingActions();
+	public @NonNull Iterable<@NonNull Mapping> getMappings() {
+		return basicMappingRegion.getMappings();
 	}
 
 	@Override

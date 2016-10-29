@@ -17,7 +17,7 @@ import java.util.List;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.StandardLibrary;
-import org.eclipse.qvtd.pivot.schedule.AbstractAction;
+import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -65,8 +65,8 @@ public class MultiRegion
 		return castProperty;
 	} */
 
-	public @NonNull MappingRegion getMappingRegion(@NonNull AbstractAction action) {
-		return qvtp2qvts.getMappingRegion(action);
+	public @NonNull MappingRegion getMappingRegion(@NonNull Mapping mapping) {
+		return qvtp2qvts.getMappingRegion(mapping);
 	}
 
 	public @NonNull Iterable<@NonNull OperationRegion> getOperationRegions() {

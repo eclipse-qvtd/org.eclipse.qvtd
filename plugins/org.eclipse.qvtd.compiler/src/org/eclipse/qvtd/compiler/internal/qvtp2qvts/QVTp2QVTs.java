@@ -37,9 +37,8 @@ import org.eclipse.qvtd.compiler.CompilerProblem;
 import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.Region2Depth;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
-import org.eclipse.qvtd.pivot.schedule.AbstractAction;
+import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.schedule.ClassDatum;
-import org.eclipse.qvtd.pivot.schedule.MappingAction;
 
 public class QVTp2QVTs extends SchedulerConstants
 {
@@ -62,9 +61,9 @@ public class QVTp2QVTs extends SchedulerConstants
 	protected final @NonNull ProblemHandler problemHandler;
 
 	/**
-	 * The Region to which each action is allocated.
+	 * The Region to which each mapping is allocated.
 	 */
-	private final @NonNull Map<@NonNull AbstractAction, @NonNull BasicMappingRegion> action2mappingRegion = new HashMap<>();
+	private final @NonNull Map<@NonNull Mapping, @NonNull BasicMappingRegion> mapping2mappingRegion = new HashMap<>();
 
 	public QVTp2QVTs(@NonNull ProblemHandler problemHandler, @NonNull EnvironmentFactory environmentFactory, @NonNull Transformation asTransformation) {
 		super(environmentFactory, asTransformation);
@@ -172,8 +171,8 @@ public class QVTp2QVTs extends SchedulerConstants
 		return outputRegions;
 	}
 
-	public @NonNull MappingRegion getMappingRegion(@NonNull AbstractAction action) {
-		MappingRegion mappingRegion = action2mappingRegion.get(action);
+	public @NonNull MappingRegion getMappingRegion(@NonNull Mapping mapping) {
+		MappingRegion mappingRegion = mapping2mappingRegion.get(mapping);
 		assert mappingRegion != null;
 		return mappingRegion;
 	}
@@ -317,18 +316,15 @@ public class QVTp2QVTs extends SchedulerConstants
 
 	public @NonNull MultiRegion transform() throws IOException {
 		MultiRegion multiRegion = new MultiRegion(this);
-		List<@NonNull AbstractAction> orderedActions = getOrderedActions();
+		Iterable<@NonNull Mapping> orderedMappings = getOrderedMappings();
 		//
 		//	Extract salient characteristics from within each MappingAction.
 		//
-		for (@NonNull AbstractAction abstractAction : orderedActions) {
-			if (abstractAction instanceof MappingAction) {
-				MappingAction mappingAction = (MappingAction) abstractAction;
-				BasicMappingRegion mappingRegion = BasicMappingRegion.createMappingRegion(multiRegion, mappingAction);
-				action2mappingRegion.put(abstractAction, mappingRegion);
-			}
+		for (@NonNull Mapping mapping : orderedMappings) {
+			BasicMappingRegion mappingRegion = BasicMappingRegion.createMappingRegion(multiRegion, mapping);
+			mapping2mappingRegion.put(mapping, mappingRegion);
 		}
-		List<@NonNull BasicMappingRegion> mappingRegions = new ArrayList<>(action2mappingRegion.values());
+		List<@NonNull BasicMappingRegion> mappingRegions = new ArrayList<>(mapping2mappingRegion.values());
 		Collections.sort(mappingRegions, NameUtil.NAMEABLE_COMPARATOR);		// Stabilize side effect of symbol name disambiguator suffixes
 		for (@NonNull BasicMappingRegion mappingRegion : mappingRegions) {
 			mappingRegion.registerConsumptionsAndProductions();
@@ -339,8 +335,8 @@ public class QVTp2QVTs extends SchedulerConstants
 			}
 		}
 		List<@NonNull BasicMappingRegion> orderedRegions = new ArrayList<>();
-		for (@NonNull AbstractAction abstractAction : orderedActions) {
-			BasicMappingRegion mappingRegion = action2mappingRegion.get(abstractAction);
+		for (@NonNull Mapping mapping : orderedMappings) {
+			BasicMappingRegion mappingRegion = mapping2mappingRegion.get(mapping);
 			assert mappingRegion != null;
 			orderedRegions.add(mappingRegion);
 			//			mappingRegion.resolveRecursion();

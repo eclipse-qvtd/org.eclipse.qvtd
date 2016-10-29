@@ -15,35 +15,34 @@ import java.util.Collections;
 import java.util.List;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.qvtd.pivot.schedule.MappingAction;
-
+import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 
 public class MergedMappingRegion extends AbstractMappingRegion
 {
 	/**
-	 * The merged analyzed actions.
+	 * The merged analyzed mappings.
 	 */
-	private final @NonNull List<@NonNull MappingAction> mappingActions = new ArrayList<>();
+	private final @NonNull List<@NonNull Mapping> mappings = new ArrayList<>();
 
 	public MergedMappingRegion(@NonNull MappingRegion primaryRegion, @NonNull MappingRegion secondaryRegion) {
 		super(primaryRegion.getMultiRegion());
-		Iterables.addAll(mappingActions, primaryRegion.getMappingActions());
-		Iterables.addAll(mappingActions, secondaryRegion.getMappingActions());
-		assert Sets.newHashSet(mappingActions).size() == mappingActions.size();
+		Iterables.addAll(mappings, primaryRegion.getMappings());
+		Iterables.addAll(mappings, secondaryRegion.getMappings());
+		assert Sets.newHashSet(mappings).size() == mappings.size();
 	}
 
 	@Override
-	public @NonNull Iterable<@NonNull MappingAction> getMappingActions() {
-		return mappingActions;
+	public @NonNull Iterable<@NonNull Mapping> getMappings() {
+		return mappings;
 	}
 
 	@Override
 	public @NonNull String getName() {
 		List<@NonNull String> names = new ArrayList<>();
-		for (@NonNull MappingAction mappingAction : mappingActions) {
-			names.add(ClassUtil.nonNullState(mappingAction.getMapping().getName()));
+		for (@NonNull Mapping mapping : mappings) {
+			names.add(ClassUtil.nonNullState(mapping.getName()));
 		}
 		Collections.sort(names);
 		StringBuilder s = new StringBuilder();

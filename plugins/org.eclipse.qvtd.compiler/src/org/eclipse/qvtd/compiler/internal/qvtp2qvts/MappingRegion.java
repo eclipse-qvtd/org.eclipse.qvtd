@@ -12,11 +12,12 @@ package org.eclipse.qvtd.compiler.internal.qvtp2qvts;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.qvtd.pivot.schedule.MappingAction;
+import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 
 public interface MappingRegion extends Region
 {
 	//	@NonNull Iterable<@NonNull Node> getComputedNodes();
-	@NonNull Iterable<@NonNull MappingAction> getMappingActions();
+	@NonNull Iterable<@NonNull Mapping> getMappings();
+	//	@NonNull Iterable<@NonNull MappingAction> getMappingActions();
 	void writeDebugGraphs(@Nullable String context);
 }

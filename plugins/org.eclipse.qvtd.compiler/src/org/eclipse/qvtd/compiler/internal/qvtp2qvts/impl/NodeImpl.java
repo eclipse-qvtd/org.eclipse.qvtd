@@ -536,7 +536,7 @@ public abstract class NodeImpl implements Node
 		this.region = region;
 		this.name = name;
 		this.classDatumAnalysis = classDatumAnalysis;
-		this.isDataType = classDatumAnalysis.getClassDatum().getType() instanceof DataType;;
+		this.isDataType = classDatumAnalysis.getCompleteClass().getPrimaryClass() instanceof DataType;
 		region.addNode(this);
 	}
 

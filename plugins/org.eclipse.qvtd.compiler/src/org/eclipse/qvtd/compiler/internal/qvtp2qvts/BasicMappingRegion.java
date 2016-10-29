@@ -44,25 +44,22 @@ import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtcore.NavigationAssignment;
 import org.eclipse.qvtd.pivot.qvtcore.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
-import org.eclipse.qvtd.pivot.schedule.AbstractAction;
-import org.eclipse.qvtd.pivot.schedule.ClassDatum;
-import org.eclipse.qvtd.pivot.schedule.MappingAction;
 
 /**
  * A BasicMappingRegion provides the initial QVTs node-edge graph representation of a QVTp mapping.
  */
 public class BasicMappingRegion extends AbstractMappingRegion
 {
-	public static @NonNull BasicMappingRegion createMappingRegion(@NonNull MultiRegion multiRegion, @NonNull MappingAction mappingAction) {
-		BasicMappingRegion mappingRegion = new BasicMappingRegion(multiRegion, mappingAction);
+	public static @NonNull BasicMappingRegion createMappingRegion(@NonNull MultiRegion multiRegion, @NonNull Mapping mapping) {
+		BasicMappingRegion mappingRegion = new BasicMappingRegion(multiRegion, mapping);
 		mappingRegion.initialize();
 		return mappingRegion;
 	}
 
 	/**
-	 * The analyzed action.
+	 * The analyzed mapping.
 	 */
-	private final @NonNull MappingAction mappingAction;
+	private final @NonNull Mapping mapping;
 
 	/**
 	 * Predicates that are too complex to analyze. i.e. more than a comparison of a bound variable wrt
@@ -97,10 +94,9 @@ public class BasicMappingRegion extends AbstractMappingRegion
 	 */
 	private /*@LazyNonNull*/ List<@NonNull Node> dependencyHeadNodes = null;
 
-	private BasicMappingRegion(@NonNull MultiRegion multiRegion, @NonNull MappingAction mappingAction) {
+	private BasicMappingRegion(@NonNull MultiRegion multiRegion, @NonNull Mapping mapping) {
 		super(multiRegion);
-		this.mappingAction = mappingAction;
-		Mapping mapping = mappingAction.getMapping();
+		this.mapping = mapping;
 		assert mapping != null;
 		//
 		guardPatterns.add(ClassUtil.nonNull(mapping.getGuardPattern()));
@@ -357,12 +353,12 @@ public class BasicMappingRegion extends AbstractMappingRegion
 	}
 
 	public @NonNull Mapping getMapping() {
-		return ClassUtil.nonNullState(mappingAction.getMapping());
+		return mapping;
 	}
 
 	@Override
-	public @NonNull Iterable<@NonNull MappingAction> getMappingActions() {
-		return Collections.singletonList(mappingAction);
+	public @NonNull Iterable<@NonNull Mapping> getMappings() {
+		return Collections.singletonList(mapping);
 	}
 
 	@Override
@@ -519,10 +515,8 @@ public class BasicMappingRegion extends AbstractMappingRegion
 		for (@NonNull Node newNode : getNewNodes()) {
 			ClassDatumAnalysis classDatumAnalysis = newNode.getClassDatumAnalysis();
 			classDatumAnalysis.addProduction(this, newNode);
-			ClassDatum classDatum = classDatumAnalysis.getClassDatum();
-			for (@SuppressWarnings("null")@NonNull AbstractAction consumingAction : classDatum.getRequiredBy()) {
-				MappingRegion consumingRegion = multiRegion.getMappingRegion(consumingAction);
-				assert consumingRegion != null;
+			for (@NonNull Mapping consumingMapping : classDatumAnalysis.getRequiredBy()) {
+				MappingRegion consumingRegion = multiRegion.getMappingRegion(consumingMapping);
 				for (@NonNull Node consumingNode : consumingRegion.getOldNodes()) {
 					if (consumingNode.getCompleteClass() == classDatumAnalysis.getCompleteClass()) {		// FIXME inheritance
 						classDatumAnalysis.addConsumption(consumingRegion, consumingNode);
@@ -533,9 +527,8 @@ public class BasicMappingRegion extends AbstractMappingRegion
 		for (@NonNull Node predicatedNode : getOldNodes()) {
 			ClassDatumAnalysis classDatumAnalysis = predicatedNode.getClassDatumAnalysis();
 			classDatumAnalysis.addConsumption(this, predicatedNode);
-			ClassDatum classDatum = classDatumAnalysis.getClassDatum();
-			for (@SuppressWarnings("null")@NonNull AbstractAction introducingAction : classDatum.getProducedBy()) {
-				MappingRegion producingRegion = multiRegion.getMappingRegion(introducingAction);
+			for (@NonNull Mapping producingMapping : classDatumAnalysis.getProducedBy()) {
+				MappingRegion producingRegion = multiRegion.getMappingRegion(producingMapping);
 				assert producingRegion != null;
 				for (@NonNull Node newNode : producingRegion.getNewNodes()) {
 					if (newNode.getCompleteClass() == classDatumAnalysis.getCompleteClass()) {		// FIXME inheritance

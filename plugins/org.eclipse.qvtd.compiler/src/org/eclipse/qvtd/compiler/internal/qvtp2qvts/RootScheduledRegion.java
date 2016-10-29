@@ -39,7 +39,6 @@ import org.eclipse.qvtd.compiler.internal.qvts2qvts.Region2Depth;
 import org.eclipse.qvtd.compiler.internal.utilities.SymbolNameBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage;
-import org.eclipse.qvtd.pivot.schedule.AbstractDatum;
 import org.eclipse.qvtd.pivot.schedule.ClassDatum;
 import org.eclipse.qvtd.pivot.schedule.PropertyDatum;
 
@@ -256,10 +255,8 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 		}
 		if (!edges.contains(producedEdge)) {
 			edges.add(producedEdge);
-			for (@NonNull AbstractDatum superAbstractDatum : ClassUtil.nullFree(propertyDatum.getSuper())) {
-				if (superAbstractDatum instanceof PropertyDatum) {
-					addProducedEdge(producedEdge, (PropertyDatum) superAbstractDatum);
-				}
+			for (@NonNull PropertyDatum superAbstractDatum : ClassUtil.nullFree(propertyDatum.getSuper())) {
+				addProducedEdge(producedEdge, superAbstractDatum);
 			}
 		}
 	}
@@ -489,7 +486,7 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 		for (ClassDatumAnalysis classDatumAnalysis : getSchedulerConstants().getClassDatumAnalyses()) {
 			DomainUsage domainUsage = classDatumAnalysis.getDomainUsage();
 			if (domainUsage.isInput() && !domainUsage.isOutput()) {
-				Type type = classDatumAnalysis.getClassDatum().getType();
+				Type type = classDatumAnalysis.getClassDatum().getCompleteClass().getPrimaryClass();
 				org.eclipse.ocl.pivot.Package asPackage = PivotUtil.getContainingPackage(type);
 				if ((asPackage != null) && !PivotConstants.ORPHANAGE_URI.equals(asPackage.getURI())) {
 					Model model = PivotUtil.getContainingModel(type);
@@ -1064,7 +1061,11 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 		Property property = producedEdge.getProperty();
 		ClassDatumAnalysis classDatumAnalysis = producedEdge.getSource().getClassDatumAnalysis();
 		ClassDatum forwardClassDatum = classDatumAnalysis.getClassDatum();
-		Iterable<@NonNull PropertyDatum> forwardPropertyDatums = QVTp2QVTg.getAllPropertyDatums(forwardClassDatum);
+		//		PropertyDatum forwardPropertyDatum = getSchedulerConstants().getPropertyDatum(forwardClassDatum, property);
+		//		if (forwardPropertyDatum.getClassDatum() == forwardClassDatum) {
+		//			return forwardPropertyDatum;
+		//		}
+		Iterable<@NonNull PropertyDatum> forwardPropertyDatums = getSchedulerConstants().getAllPropertyDatums(forwardClassDatum);
 		for (PropertyDatum propertyDatum : forwardPropertyDatums) {
 			if ((propertyDatum.getProperty() == property) && (propertyDatum.getClassDatum() == forwardClassDatum)) {
 				return propertyDatum;
@@ -1078,10 +1079,10 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 					bestPropertyDatum = propertyDatum;
 				}
 				else {
-					org.eclipse.ocl.pivot.Class type = propertyDatum.getClassDatum().getType();
+					org.eclipse.ocl.pivot.Class type = propertyDatum.getClassDatum().getCompleteClass().getPrimaryClass();
 					assert type != null;
 					Set<@NonNull Class> allSuperClasses = classRelationships.getAllSuperClasses(type);
-					if (allSuperClasses.contains(bestPropertyDatum.getClassDatum().getType())) {
+					if (allSuperClasses.contains(bestPropertyDatum.getClassDatum().getCompleteClass().getPrimaryClass())) {
 						bestPropertyDatum = propertyDatum;
 					}
 				}
@@ -1093,7 +1094,7 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 		property = property.getOpposite();
 		classDatumAnalysis = producedEdge.getTarget().getClassDatumAnalysis();
 		ClassDatum reverseClassDatum = classDatumAnalysis.getClassDatum();
-		Iterable<@NonNull PropertyDatum> reversePropertyDatums = QVTp2QVTg.getAllPropertyDatums(reverseClassDatum);
+		Iterable<@NonNull PropertyDatum> reversePropertyDatums = getSchedulerConstants().getAllPropertyDatums(reverseClassDatum);
 		for (PropertyDatum propertyDatum : reversePropertyDatums) {
 			if ((propertyDatum.getProperty() == property) && (propertyDatum.getClassDatum() == reverseClassDatum)) {
 				return propertyDatum;
@@ -1105,10 +1106,10 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 					bestPropertyDatum = propertyDatum;
 				}
 				else {
-					org.eclipse.ocl.pivot.Class type = propertyDatum.getClassDatum().getType();
+					org.eclipse.ocl.pivot.Class type = propertyDatum.getClassDatum().getCompleteClass().getPrimaryClass();
 					assert type != null;
 					Set<@NonNull Class> allSuperClasses = classRelationships.getAllSuperClasses(type);
-					if (allSuperClasses.contains(bestPropertyDatum.getClassDatum().getType())) {
+					if (allSuperClasses.contains(bestPropertyDatum.getClassDatum().getCompleteClass().getPrimaryClass())) {
 						bestPropertyDatum = propertyDatum;
 					}
 				}
