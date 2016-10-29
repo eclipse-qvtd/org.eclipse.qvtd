@@ -669,7 +669,7 @@ public abstract class NodeImpl implements Node
 			DomainUsage refinedDomainUsage = domainAnalysis.getConstantUsage(refinedBitMask);
 			TypedModel refinedTypedModel = refinedDomainUsage.getTypedModel(oldCompleteClass);
 			assert refinedTypedModel != null;
-			classDatumAnalysis = getSchedulerConstants().getClassDatumAnalysis(oldCompleteClass.getPrimaryClass(), refinedTypedModel);
+			classDatumAnalysis = getSchedulerConstants().getClassDatumAnalysis(oldCompleteClass, refinedTypedModel);
 			return true;
 		}
 		else if (newCompleteClass.conformsTo(oldCompleteClass)) {
@@ -680,7 +680,7 @@ public abstract class NodeImpl implements Node
 			DomainUsage refinedDomainUsage = domainAnalysis.getConstantUsage(refinedBitMask);
 			TypedModel refinedTypedModel = refinedDomainUsage.getTypedModel(newCompleteClass);
 			assert refinedTypedModel != null;
-			classDatumAnalysis = getSchedulerConstants().getClassDatumAnalysis(newCompleteClass.getPrimaryClass(), refinedTypedModel);
+			classDatumAnalysis = getSchedulerConstants().getClassDatumAnalysis(newCompleteClass, refinedTypedModel);
 			return true;
 		}
 		else if (oldCompleteClass.getPrimaryClass().getESObject() == EcorePackage.Literals.EOBJECT) {

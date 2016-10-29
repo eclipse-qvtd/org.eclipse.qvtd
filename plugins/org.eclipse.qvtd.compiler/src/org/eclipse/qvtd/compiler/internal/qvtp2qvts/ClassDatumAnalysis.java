@@ -24,7 +24,6 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Property;
-import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
@@ -145,8 +144,8 @@ public class ClassDatumAnalysis
 					if (childrenType instanceof CollectionType) {
 						Type childType = ((CollectionType)childrenType).getElementType();
 						assert childType != null;
-						StandardLibrary standardLibrary = environmentFactory.getStandardLibrary();
-						if (completeClass.getPrimaryClass().conformsTo(standardLibrary, childType)) {					// FIXME bi-conforming types
+						CompleteClass childCompleteClass = environmentFactory.getCompleteModel().getCompleteClass(childType);
+						if (completeClass.conformsTo(childCompleteClass)) {					// FIXME bi-conforming types
 							if (multiOpposites2 == null) {
 								multiOpposites = multiOpposites2 = new ArrayList<@NonNull Property>();
 							}
@@ -216,7 +215,7 @@ public class ClassDatumAnalysis
 			superClassDatumAnalyses = superClassDatumAnalyses2 = new ArrayList<@NonNull ClassDatumAnalysis>();
 			CompleteClass completeClass = getCompleteClass();
 			for (@NonNull CompleteClass completeSuperClass : completeClass.getSuperCompleteClasses()) {
-				superClassDatumAnalyses2.add(schedulerConstants.getClassDatumAnalysis(completeSuperClass.getPrimaryClass(), ClassUtil.nonNullState(domainUsage.getTypedModel(completeClass))));
+				superClassDatumAnalyses2.add(schedulerConstants.getClassDatumAnalysis(completeSuperClass, ClassUtil.nonNullState(domainUsage.getTypedModel(completeClass))));
 			}
 		}
 		return superClassDatumAnalyses2;

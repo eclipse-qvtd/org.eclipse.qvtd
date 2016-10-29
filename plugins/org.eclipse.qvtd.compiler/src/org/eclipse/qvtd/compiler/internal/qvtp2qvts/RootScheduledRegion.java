@@ -44,6 +44,7 @@ import org.eclipse.qvtd.pivot.schedule.PropertyDatum;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Sets;
 
 public class RootScheduledRegion extends AbstractScheduledRegion
 {
@@ -1071,7 +1072,6 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 				return propertyDatum;
 			}
 		}
-		ClassRelationships classRelationships = getSchedulerConstants().getClassRelationships();
 		PropertyDatum bestPropertyDatum = null;
 		for (PropertyDatum propertyDatum : forwardPropertyDatums) {
 			if (propertyDatum.getProperty() == property) {
@@ -1079,10 +1079,10 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 					bestPropertyDatum = propertyDatum;
 				}
 				else {
-					org.eclipse.ocl.pivot.Class type = propertyDatum.getClassDatum().getCompleteClass().getPrimaryClass();
-					assert type != null;
-					Set<@NonNull Class> allSuperClasses = classRelationships.getAllSuperClasses(type);
-					if (allSuperClasses.contains(bestPropertyDatum.getClassDatum().getCompleteClass().getPrimaryClass())) {
+					CompleteClass completeClass = propertyDatum.getClassDatum().getCompleteClass();
+					assert completeClass != null;
+					Set<@NonNull CompleteClass> allSuperCompleteClasses = Sets.newHashSet(completeClass.getProperSuperCompleteClasses());
+					if (allSuperCompleteClasses.contains(bestPropertyDatum.getClassDatum().getCompleteClass())) {
 						bestPropertyDatum = propertyDatum;
 					}
 				}
@@ -1106,10 +1106,10 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 					bestPropertyDatum = propertyDatum;
 				}
 				else {
-					org.eclipse.ocl.pivot.Class type = propertyDatum.getClassDatum().getCompleteClass().getPrimaryClass();
-					assert type != null;
-					Set<@NonNull Class> allSuperClasses = classRelationships.getAllSuperClasses(type);
-					if (allSuperClasses.contains(bestPropertyDatum.getClassDatum().getCompleteClass().getPrimaryClass())) {
+					CompleteClass completeClass = propertyDatum.getClassDatum().getCompleteClass();
+					assert completeClass != null;
+					Set<@NonNull CompleteClass> allSuperCompleteClasses = Sets.newHashSet(completeClass.getProperSuperCompleteClasses());
+					if (allSuperCompleteClasses.contains(bestPropertyDatum.getClassDatum().getCompleteClass())) {
 						bestPropertyDatum = propertyDatum;
 					}
 				}

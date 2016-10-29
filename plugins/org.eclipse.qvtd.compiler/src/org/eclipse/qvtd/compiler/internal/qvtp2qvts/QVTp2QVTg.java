@@ -42,6 +42,7 @@ import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.FeatureFilter;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
@@ -77,7 +78,8 @@ public class QVTp2QVTg
 		this.classRelationships = classRelationships;
 	}
 
-	private boolean assertValidTypedModel(@NonNull TypedModel typedModel, @NonNull Type aType) {
+	private boolean assertValidTypedModel(@NonNull TypedModel typedModel, @NonNull CompleteClass completeClass) {
+		org.eclipse.ocl.pivot.@NonNull Class aType = completeClass.getPrimaryClass();
 		Type elementType = PivotUtil.getElementalType(aType);
 		if (elementType instanceof DataType) {
 			assert typedModel == domainUsageAnalysis.getPrimitiveTypeModel();
@@ -133,7 +135,7 @@ public class QVTp2QVTg
 				assert ownedSource != null;
 				Type type = ownedSource.getType();
 				assert type != null;
-				org.eclipse.ocl.pivot.Class context = (org.eclipse.ocl.pivot.Class)type;
+				CompleteClass context = getCompleteClass((org.eclipse.ocl.pivot.Class) type);
 				requisites.addAll(getOperationPropertyDatums(opCall, context, new HashMap<>(), new HashMap<>()));
 			}
 			else if (eObj instanceof NavigationAssignment) {
@@ -154,8 +156,12 @@ public class QVTp2QVTg
 	}
 
 	public @NonNull ClassDatum getClassDatum(@NonNull TypedModel typedModel, org.eclipse.ocl.pivot.@NonNull Class aClass) {
-		CompleteClass completeClass = classRelationships.getEnvironmentFactory().getCompleteModel().getCompleteClass(aClass);
-		assert assertValidTypedModel(typedModel, aClass);
+		CompleteClass completeClass = getCompleteClass(aClass);
+		return getClassDatum(typedModel, completeClass);
+	}
+
+	public @NonNull ClassDatum getClassDatum(@NonNull TypedModel typedModel, @NonNull CompleteClass completeClass) {
+		assert assertValidTypedModel(typedModel, completeClass);
 		Map<org.eclipse.ocl.pivot.@NonNull CompleteClass, @NonNull ClassDatum> completeClass2classDatums = typedModel2completeClass2classDatum.get(typedModel);
 		if (completeClass2classDatums == null) {
 			completeClass2classDatums = new HashMap<>();
@@ -163,15 +169,18 @@ public class QVTp2QVTg
 		}
 		ClassDatum classDatum = completeClass2classDatums.get(completeClass);
 		if (classDatum == null) {
-			assert assertValidTypedModel(typedModel, aClass);
 			classDatum = ScheduleFactory.eINSTANCE.createClassDatum();
 			classDatum.setSchedule(schedule);
 			classDatum.setCompleteClass(completeClass);
 			classDatum.setTypedModel(typedModel);
+			org.eclipse.ocl.pivot.@NonNull Class aClass = completeClass.getPrimaryClass();
 			if (!(aClass instanceof DataType)) {
-				for (@SuppressWarnings("null") org.eclipse.ocl.pivot.@NonNull Class superClass : aClass.getSuperClasses()) {
-					ClassDatum superCDatum = getClassDatum(typedModel, superClass);
-					classDatum.getSuper().add(superCDatum);
+				List<ClassDatum> superClassDatums = classDatum.getSuper();
+				for (@NonNull CompleteClass superCompleteClass : completeClass.getSuperCompleteClasses()) {
+					if (superCompleteClass != completeClass) {		// FIXME Why is OclAny its own superClass ?
+						ClassDatum superClassDatum = getClassDatum(typedModel, superCompleteClass);
+						superClassDatums.add(superClassDatum);
+					}
 				}
 			}
 			completeClass2classDatums.put(completeClass, classDatum);
@@ -223,15 +232,16 @@ public class QVTp2QVTg
 	}
 
 	private @NonNull PropertyDatum getPropertyDatum(@NonNull TypedModel typedModel, org.eclipse.ocl.pivot.@NonNull Class context, @NonNull Property property) {
-		ClassDatum classDatum = getClassDatum(typedModel, context);
+		CompleteClass completeClass = getCompleteClass(context);
+		return getPropertyDatum(typedModel, completeClass, property);
+	}
+
+	private @NonNull PropertyDatum getPropertyDatum(@NonNull TypedModel typedModel, @NonNull CompleteClass completeClass, @NonNull Property property) {
+		ClassDatum classDatum = getClassDatum(typedModel, completeClass);
 		return getPropertyDatum(classDatum, property);
 	}
 
 	public @NonNull PropertyDatum getPropertyDatum(@NonNull ClassDatum classDatum, @NonNull Property property) {
-		TypedModel typedModel = classDatum.getTypedModel();
-		assert typedModel != null;
-		org.eclipse.ocl.pivot.Class context = classDatum.getCompleteClass().getPrimaryClass();
-		assert context != null;
 		Iterable<@NonNull PropertyDatum> allPropertyDatums = getAllPropertyDatums(classDatum);
 
 		Map<@NonNull Property, @NonNull PropertyDatum> property2propertyDatum = classDatum2property2propertyDatum.get(classDatum);
@@ -240,33 +250,39 @@ public class QVTp2QVTg
 			classDatum2property2propertyDatum.put(classDatum, property2propertyDatum);
 		}
 		PropertyDatum cachedPropertyDatum = property2propertyDatum.get(property);
+		if (cachedPropertyDatum != null) {
+			return cachedPropertyDatum;
+		}
 		for (PropertyDatum propertyDatum : allPropertyDatums) {
 			if (propertyDatum.getProperty().equals(property)) {
-				if (cachedPropertyDatum == propertyDatum) {
-					System.out.println("Consistent " + classDatum + " : " + propertyDatum);
-				}
-				else if (cachedPropertyDatum != null) {
-					System.out.println("Inconsistent " + classDatum + " : " + cachedPropertyDatum + " / " + propertyDatum);
-				}
 				return propertyDatum;
 			}
 		}
 		// If not found we create it
+		TypedModel typedModel = classDatum.getTypedModel();
+		assert typedModel != null;
+		CompleteClass targetCompleteClass = classDatum.getCompleteClass();
+		org.eclipse.ocl.pivot.Class owningClass = property.getOwningClass();
+		assert owningClass != null;
+		CompleteClass hostCompleteClass = getCompleteClass(owningClass);
 		PropertyDatum propertyDatum = ScheduleFactory.eINSTANCE.createPropertyDatum();
 		propertyDatum.setTypedModel(typedModel);
 		propertyDatum.setProperty(property);
 		propertyDatum.setClassDatum(classDatum);
-		if (context != property.getOwningClass()) {
-			for (@SuppressWarnings("null") org.eclipse.ocl.pivot.@NonNull Class superClass : context.getSuperClasses()) {
-				PropertyDatum superPropDatum = getPropertyDatum(typedModel, superClass, property);
+		assert targetCompleteClass.conformsTo(hostCompleteClass);
+		for (@NonNull CompleteClass superCompleteClass : targetCompleteClass.getSuperCompleteClasses()) {
+			if (superCompleteClass.conformsTo(hostCompleteClass)) {
+				PropertyDatum superPropDatum = getPropertyDatum(typedModel, superCompleteClass, property);
 				propertyDatum.getSuper().add(superPropDatum);
 			}
-
 		}
 		PropertyDatum oldPropertyDatum = property2propertyDatum.put(property, propertyDatum);
 		assert oldPropertyDatum == null;
-		System.out.println("Create " + classDatum + " : " + propertyDatum);
 		return propertyDatum;
+	}
+
+	private @NonNull CompleteClass getCompleteClass(org.eclipse.ocl.pivot.@NonNull Class asClass) {
+		return classRelationships.getEnvironmentFactory().getCompleteModel().getCompleteClass(asClass);
 	}
 
 	// Property datum analysis
@@ -307,9 +323,9 @@ public class QVTp2QVTg
 		return result;
 	}
 
-	private @NonNull Set<@NonNull PropertyDatum> getOperationPropertyDatums(@NonNull OperationCallExp opCall, org.eclipse.ocl.pivot.@NonNull Class context,
-			@NonNull Map<org.eclipse.ocl.pivot.@NonNull Class, @NonNull Set<@NonNull Operation>> type2VisitedOps,
-			@NonNull Map<@NonNull Variable, @NonNull Set<org.eclipse.ocl.pivot.@NonNull Class>> variable2BoundContext) {
+	private @NonNull Set<@NonNull PropertyDatum> getOperationPropertyDatums(@NonNull OperationCallExp opCall, @NonNull CompleteClass context,
+			@NonNull Map<@NonNull CompleteClass, @NonNull Set<@NonNull Operation>> type2VisitedOps,
+			@NonNull Map<@NonNull Variable, @NonNull Set<@NonNull CompleteClass>> variable2BoundContext) {
 
 		Set<@NonNull Operation> visitedOps = type2VisitedOps.get(context);
 		if (visitedOps == null) {
@@ -323,8 +339,8 @@ public class QVTp2QVTg
 		if (!visitedOps.contains(op)) {
 			visitedOps.add(op);
 			if (isOclContainerOp(op)) {
-				for (@NonNull TypedModel typedModel : getTypedModels(context)) {
-					for (org.eclipse.ocl.pivot.@NonNull Class newContext : getComputedContexts(opCall, variable2BoundContext)) {
+				for (@NonNull TypedModel typedModel : getTypedModels(context.getPrimaryClass())) {
+					for (@NonNull CompleteClass newContext : getComputedContexts(opCall, variable2BoundContext)) {
 						result.addAll(analyseOclContainerCall(typedModel, newContext));
 					}
 				}
@@ -340,15 +356,15 @@ public class QVTp2QVTg
 		return result;
 	}
 
-	private @NonNull Set<@NonNull PropertyDatum> getOperationPropertyDatums(@NonNull Operation op, org.eclipse.ocl.pivot.@NonNull Class context, @NonNull Map<org.eclipse.ocl.pivot.@NonNull Class, @NonNull Set<@NonNull Operation>> type2VisitedOps) {
+	private @NonNull Set<@NonNull PropertyDatum> getOperationPropertyDatums(@NonNull Operation op, @NonNull CompleteClass context, @NonNull Map<@NonNull CompleteClass, @NonNull Set<@NonNull Operation>> type2VisitedOps) {
 
 		Set<@NonNull PropertyDatum> result = new HashSet<>();
 		LanguageExpression langExp = op.getBodyExpression();
 		if (langExp instanceof ExpressionInOCL) {
 			ExpressionInOCL expInOCL = (ExpressionInOCL) langExp;
 			if (expInOCL.getOwnedBody() != null) {
-				Map<@NonNull Variable, @NonNull Set<org.eclipse.ocl.pivot.@NonNull Class>> variable2BoundContext = new HashMap<>();
-				Set<org.eclipse.ocl.pivot.@NonNull Class> boundContexts = new HashSet<>();
+				Map<@NonNull Variable, @NonNull Set<@NonNull CompleteClass>> variable2BoundContext = new HashMap<>();
+				Set<@NonNull CompleteClass> boundContexts = new HashSet<>();
 				boundContexts.add(context);
 				Variable ownedContext = expInOCL.getOwnedContext();
 				if (ownedContext != null) {
@@ -365,13 +381,13 @@ public class QVTp2QVTg
 						OCLExpression ownedSource = navCallExp.getOwnedSource();
 						assert ownedSource != null;
 						TypedModel typedModel = getTypedModel(ownedSource);
-						for (org.eclipse.ocl.pivot.@NonNull Class newContext : getComputedContexts(navCallExp, variable2BoundContext)) {
+						for (@NonNull CompleteClass newContext : getComputedContexts(navCallExp, variable2BoundContext)) {
 							PropertyDatum propertyDatum = getPropertyDatum(typedModel, newContext, property);
 							result.add(propertyDatum);
 						}
 					} else if (eObject instanceof OperationCallExp) {
 						OperationCallExp opCallExp = (OperationCallExp) eObject;
-						for (org.eclipse.ocl.pivot.Class newContext : getComputedContexts(opCallExp, variable2BoundContext)) {
+						for (@NonNull CompleteClass newContext : getComputedContexts(opCallExp, variable2BoundContext)) {
 							result.addAll(getOperationPropertyDatums(opCallExp, newContext, type2VisitedOps, variable2BoundContext));
 						}
 					}
@@ -424,14 +440,14 @@ public class QVTp2QVTg
 		//		return "oclContainer".equals(op.getName()) && op.getOwnedParameters().isEmpty();
 	}
 
-	private @NonNull Set<@NonNull PropertyDatum> analyseOclContainerCall(@NonNull TypedModel typedModel, org.eclipse.ocl.pivot.@NonNull Class context) {
+	private @NonNull Set<@NonNull PropertyDatum> analyseOclContainerCall(@NonNull TypedModel typedModel, @NonNull CompleteClass context) {
 
 		Set<@NonNull PropertyDatum> result = new HashSet<>();
 
-		for (org.eclipse.ocl.pivot.@NonNull Class parentClass : getContainingTypes(context)) {
-			for (Property prop : parentClass.getOwnedProperties()) {
+		for (@NonNull CompleteClass parentClass : getContainingTypes(context)) {
+			for (Property prop : parentClass.getProperties((FeatureFilter)null)) {
 				if (prop.isIsComposite()) {
-					Set<org.eclipse.ocl.pivot.Class> allSuperAndSubClasses = getAllSuperAndSubClassesIncludingSelf(context);
+					Set<@NonNull CompleteClass> allSuperAndSubClasses = getAllSuperAndSubClassesIncludingSelf(context);
 					if (allSuperAndSubClasses.contains(getElementClass(prop))) {
 						// self.print("\tOCL Container property  for ");
 						// prop.println(" : ");
@@ -453,36 +469,38 @@ public class QVTp2QVTg
 	}
 
 
-	private void updateVariableBindings(@NonNull LetExp letExp , @NonNull Map<@NonNull Variable, @NonNull Set<org.eclipse.ocl.pivot.@NonNull Class>> variable2BoundContext ) {
+	private void updateVariableBindings(@NonNull LetExp letExp , @NonNull Map<@NonNull Variable, @NonNull Set<@NonNull CompleteClass>> variable2BoundContext ) {
 
 		Variable variable = letExp.getOwnedVariable();
 		variable2BoundContext.put(variable, computeContexts(ClassUtil.nonNullState(variable.getOwnedInit()), variable2BoundContext));
 	}
 
 	// TODO cache
-	private @NonNull Set<org.eclipse.ocl.pivot.@NonNull Class> computeContexts(@NonNull OCLExpression oclExp, @NonNull Map<@NonNull Variable, @NonNull Set<org.eclipse.ocl.pivot.@NonNull Class>> variable2BoundContext) {
+	private @NonNull Set<@NonNull CompleteClass> computeContexts(@NonNull OCLExpression oclExp, @NonNull Map<@NonNull Variable, @NonNull Set<@NonNull CompleteClass>> variable2BoundContext) {
 
-		Set<org.eclipse.ocl.pivot.@NonNull Class> result = new HashSet<>();
+		Set<@NonNull CompleteClass> result = new HashSet<>();
 		if (oclExp instanceof VariableExp) {
 			VariableExp varExp = (VariableExp) oclExp;
-			Set<org.eclipse.ocl.pivot.@NonNull Class> context = variable2BoundContext.get(varExp.getReferredVariable());
+			Set<@NonNull CompleteClass> context = variable2BoundContext.get(varExp.getReferredVariable());
 			if (context != null) { // FIXME is this check needed ?
 				result.addAll(context);
 			} else {
-				result.add(ClassUtil.nonNullState(varExp.getType().isClass()));
+				result.add(getCompleteClass(ClassUtil.nonNullState(varExp.getType().isClass())));
 			}
 		} else if (oclExp instanceof CallExp) {
 			CallExp callExp = (CallExp) oclExp;
 			if (callExp instanceof OperationCallExp &&
 					isOclContainerOp(ClassUtil.nonNullState(((OperationCallExp)callExp).getReferredOperation()))) {
-				for (@SuppressWarnings("null") org.eclipse.ocl.pivot.@NonNull Class oclContainerOpContext : computeContexts(callExp.getOwnedSource(), variable2BoundContext)) {
+				OCLExpression ownedSource = callExp.getOwnedSource();
+				assert ownedSource != null;
+				for (@NonNull CompleteClass oclContainerOpContext : computeContexts(ownedSource, variable2BoundContext)) {
 					result.addAll(getContainingTypes(oclContainerOpContext));
 				}
 			} else {
-				result.add(ClassUtil.nonNullState(callExp.getType().isClass()));
+				result.add(getCompleteClass(ClassUtil.nonNullState(callExp.getType().isClass())));
 			}
 		} else if (oclExp instanceof ShadowExp) {
-			result.add(ClassUtil.nonNullState(((ShadowExp)oclExp).getType()));
+			result.add(getCompleteClass(ClassUtil.nonNullState(((ShadowExp)oclExp).getType())));
 
 		} else {
 			throw new IllegalStateException("OCLExpression has not been considered yet");
@@ -493,31 +511,39 @@ public class QVTp2QVTg
 	// This is needed when analysing Property/Operation call exps so that they exploit the statically computed context
 	// carried on through the analysis.
 	// TODO cache
-	private @NonNull Set<org.eclipse.ocl.pivot.@NonNull Class> getComputedContexts(@NonNull CallExp callExp, @NonNull Map<@NonNull Variable, @NonNull Set<org.eclipse.ocl.pivot.@NonNull Class>> variable2BoundContext) {
+	private @NonNull Set<@NonNull CompleteClass> getComputedContexts(@NonNull CallExp callExp, @NonNull Map<@NonNull Variable, @NonNull Set<@NonNull CompleteClass>> variable2BoundContext) {
 		OCLExpression source = ClassUtil.nonNullState(callExp.getOwnedSource());
 		return computeContexts(source, variable2BoundContext);
 	}
-	private @NonNull Set<org.eclipse.ocl.pivot.@NonNull Class> getContainingTypes(org.eclipse.ocl.pivot.@NonNull Class aClass) {
-		return classRelationships.getContainerClasses(aClass);
+	private @NonNull Set<@NonNull CompleteClass> getContainingTypes(@NonNull CompleteClass aClass) {
+		return getCompleteClasses(classRelationships.getContainerClasses(aClass.getPrimaryClass()));
 	}
 
-	private @NonNull Set<org.eclipse.ocl.pivot.@NonNull Class> getAllSuperClasses(org.eclipse.ocl.pivot.@NonNull Class context) {
-		return classRelationships.getAllSuperClasses(context);
+	private @NonNull Set<@NonNull CompleteClass> getCompleteClasses(@NonNull Set<org.eclipse.ocl.pivot.@NonNull Class> containerClasses) {
+		Set<@NonNull CompleteClass> result = new HashSet<>();
+		for (org.eclipse.ocl.pivot.@NonNull Class containerClass : containerClasses) {
+			result.add(getCompleteClass(containerClass));
+		}
+		return result;
 	}
 
-	private @NonNull Set<org.eclipse.ocl.pivot.@NonNull Class> getAllSubClasses(org.eclipse.ocl.pivot.@NonNull Class context) {
-		return classRelationships.getAllSubClasses(context);
+	private @NonNull Set<@NonNull CompleteClass> getAllSuperClasses(@NonNull CompleteClass context) {
+		return getCompleteClasses(classRelationships.getAllSuperClasses(context.getPrimaryClass()));
 	}
 
-	private @NonNull Set<org.eclipse.ocl.pivot.@NonNull Class> getAllSuperAndSubClasses(org.eclipse.ocl.pivot.@NonNull Class context) {
-		Set<org.eclipse.ocl.pivot.@NonNull Class> result = new HashSet<>();
+	private @NonNull Set<@NonNull CompleteClass> getAllSubClasses(@NonNull CompleteClass context) {
+		return getCompleteClasses(classRelationships.getAllSubClasses(context.getPrimaryClass()));
+	}
+
+	private @NonNull Set<@NonNull CompleteClass> getAllSuperAndSubClasses(@NonNull CompleteClass context) {
+		Set<@NonNull CompleteClass> result = new HashSet<>();
 		result.addAll(getAllSuperClasses(context));
 		result.addAll(getAllSubClasses(context));
 		return result;
 	}
 
-	private @NonNull Set<org.eclipse.ocl.pivot.@NonNull Class> getAllSuperAndSubClassesIncludingSelf(org.eclipse.ocl.pivot.@NonNull Class context) {
-		Set<org.eclipse.ocl.pivot.@NonNull Class> result = getAllSuperAndSubClasses(context);
+	private @NonNull Set<@NonNull CompleteClass> getAllSuperAndSubClassesIncludingSelf(@NonNull CompleteClass context) {
+		Set<@NonNull CompleteClass> result = getAllSuperAndSubClasses(context);
 		result.add(context);
 		return result;
 	}

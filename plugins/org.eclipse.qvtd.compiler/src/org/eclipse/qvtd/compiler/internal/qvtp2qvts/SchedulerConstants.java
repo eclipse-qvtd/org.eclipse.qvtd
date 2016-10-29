@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CollectionType;
+import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.DataType;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.Operation;
@@ -251,6 +252,11 @@ public abstract class SchedulerConstants
 
 	public @NonNull ClassDatumAnalysis getClassDatumAnalysis(org.eclipse.ocl.pivot.@NonNull Class type, @NonNull TypedModel typedModel) {
 		ClassDatum classDatum = qvtp2qvtg.getClassDatum(typedModel, type);
+		return getClassDatumAnalysis(classDatum);
+	}
+
+	public @NonNull ClassDatumAnalysis getClassDatumAnalysis(@NonNull CompleteClass completeClass, @NonNull TypedModel typedModel) {
+		ClassDatum classDatum = qvtp2qvtg.getClassDatum(typedModel, completeClass);
 		return getClassDatumAnalysis(classDatum);
 	}
 

@@ -38,6 +38,11 @@ public class QVTcoreDomainUsageAnalysis extends RootDomainUsageAnalysis implemen
 		}
 	}
 
+	//	@Override
+	//	public @NonNull DomainUsage visitCompleteClass(@NonNull CompleteClass object) {
+	//		return object.getPrimaryClass().accept(this);
+	//	}
+
 	@Override
 	public @NonNull DomainUsage visitCoreModel(@NonNull CoreModel object) {
 		return visitBaseModel(object);
