@@ -12,6 +12,7 @@
  */
 package org.eclipse.qvtd.pivot.schedule;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.ocl.pivot.Property;
 
 /**
@@ -26,6 +27,7 @@ import org.eclipse.ocl.pivot.Property;
  *   <li>{@link org.eclipse.qvtd.pivot.schedule.PropertyDatum#getProperty <em>Property</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.schedule.PropertyDatum#getClassDatum <em>Class Datum</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.schedule.PropertyDatum#getOpposite <em>Opposite</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.schedule.PropertyDatum#getSuper <em>Super</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.pivot.schedule.SchedulePackage#getPropertyDatum()
@@ -112,5 +114,21 @@ public interface PropertyDatum extends AbstractDatum {
 	 * @generated
 	 */
 	void setOpposite(PropertyDatum value);
+
+	/**
+	 * Returns the value of the '<em><b>Super</b></em>' reference list.
+	 * The list contents are of type {@link org.eclipse.qvtd.pivot.schedule.PropertyDatum}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Super</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Super</em>' reference list.
+	 * @see org.eclipse.qvtd.pivot.schedule.SchedulePackage#getPropertyDatum_Super()
+	 * @model
+	 * @generated
+	 */
+	EList<PropertyDatum> getSuper();
 
 } // PropertyDatum

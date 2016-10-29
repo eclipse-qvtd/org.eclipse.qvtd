@@ -21,12 +21,14 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.qvtd.pivot.schedule.ClassDatum;
 import org.eclipse.qvtd.pivot.schedule.PropertyDatum;
+import org.eclipse.qvtd.pivot.schedule.Schedule;
 import org.eclipse.qvtd.pivot.schedule.SchedulePackage;
-import org.eclipse.qvtd.pivot.schedule.util.ScheduleVisitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -36,22 +38,24 @@ import org.eclipse.qvtd.pivot.schedule.util.ScheduleVisitor;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.pivot.schedule.impl.ClassDatumImpl#getType <em>Type</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.schedule.impl.ClassDatumImpl#getCompleteClass <em>Complete Class</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.schedule.impl.ClassDatumImpl#getPropertyDatums <em>Property Datums</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.schedule.impl.ClassDatumImpl#getSchedule <em>Schedule</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.schedule.impl.ClassDatumImpl#getSuper <em>Super</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 	/**
-	 * The cached value of the '{@link #getType() <em>Type</em>}' reference.
+	 * The cached value of the '{@link #getCompleteClass() <em>Complete Class</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getType()
+	 * @see #getCompleteClass()
 	 * @generated
 	 * @ordered
 	 */
-	protected org.eclipse.ocl.pivot.Class type;
+	protected CompleteClass completeClass;
 
 	/**
 	 * The cached value of the '{@link #getPropertyDatums() <em>Property Datums</em>}' containment reference list.
@@ -62,6 +66,16 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 	 * @ordered
 	 */
 	protected EList<PropertyDatum> propertyDatums;
+
+	/**
+	 * The cached value of the '{@link #getSuper() <em>Super</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSuper()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ClassDatum> super_;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -88,16 +102,16 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 	 * @generated
 	 */
 	@Override
-	public org.eclipse.ocl.pivot.Class getType() {
-		if (type != null && type.eIsProxy()) {
-			InternalEObject oldType = (InternalEObject)type;
-			type = (org.eclipse.ocl.pivot.Class)eResolveProxy(oldType);
-			if (type != oldType) {
+	public CompleteClass getCompleteClass() {
+		if (completeClass != null && completeClass.eIsProxy()) {
+			InternalEObject oldCompleteClass = (InternalEObject)completeClass;
+			completeClass = (CompleteClass)eResolveProxy(oldCompleteClass);
+			if (completeClass != oldCompleteClass) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, SchedulePackage.CLASS_DATUM__TYPE, oldType, type));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, SchedulePackage.CLASS_DATUM__COMPLETE_CLASS, oldCompleteClass, completeClass));
 			}
 		}
-		return type;
+		return completeClass;
 	}
 
 	/**
@@ -105,8 +119,8 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public org.eclipse.ocl.pivot.Class basicGetType() {
-		return type;
+	public CompleteClass basicGetCompleteClass() {
+		return completeClass;
 	}
 
 	/**
@@ -115,11 +129,11 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 	 * @generated
 	 */
 	@Override
-	public void setType(org.eclipse.ocl.pivot.Class newType) {
-		org.eclipse.ocl.pivot.Class oldType = type;
-		type = newType;
+	public void setCompleteClass(CompleteClass newCompleteClass) {
+		CompleteClass oldCompleteClass = completeClass;
+		completeClass = newCompleteClass;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SchedulePackage.CLASS_DATUM__TYPE, oldType, type));
+			eNotify(new ENotificationImpl(this, Notification.SET, SchedulePackage.CLASS_DATUM__COMPLETE_CLASS, oldCompleteClass, completeClass));
 	}
 
 	/**
@@ -140,12 +154,72 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
+	public Schedule getSchedule() {
+		if (eContainerFeatureID() != SchedulePackage.CLASS_DATUM__SCHEDULE) return null;
+		return (Schedule)eInternalContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetSchedule(Schedule newSchedule, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newSchedule, SchedulePackage.CLASS_DATUM__SCHEDULE, msgs);
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setSchedule(Schedule newSchedule) {
+		if (newSchedule != eInternalContainer() || (eContainerFeatureID() != SchedulePackage.CLASS_DATUM__SCHEDULE && newSchedule != null)) {
+			if (EcoreUtil.isAncestor(this, newSchedule))
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+			NotificationChain msgs = null;
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			if (newSchedule != null)
+				msgs = ((InternalEObject)newSchedule).eInverseAdd(this, SchedulePackage.SCHEDULE__DATUMS, Schedule.class, msgs);
+			msgs = basicSetSchedule(newSchedule, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SchedulePackage.CLASS_DATUM__SCHEDULE, newSchedule, newSchedule));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EList<ClassDatum> getSuper() {
+		if (super_ == null) {
+			super_ = new EObjectResolvingEList<ClassDatum>(ClassDatum.class, this, SchedulePackage.CLASS_DATUM__SUPER);
+		}
+		return super_;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case SchedulePackage.CLASS_DATUM__PROPERTY_DATUMS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getPropertyDatums()).basicAdd(otherEnd, msgs);
+			case SchedulePackage.CLASS_DATUM__SCHEDULE:
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
+				return basicSetSchedule((Schedule)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -160,6 +234,8 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 		switch (featureID) {
 			case SchedulePackage.CLASS_DATUM__PROPERTY_DATUMS:
 				return ((InternalEList<?>)getPropertyDatums()).basicRemove(otherEnd, msgs);
+			case SchedulePackage.CLASS_DATUM__SCHEDULE:
+				return basicSetSchedule(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -170,13 +246,31 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 	 * @generated
 	 */
 	@Override
+	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+		switch (eContainerFeatureID()) {
+			case SchedulePackage.CLASS_DATUM__SCHEDULE:
+				return eInternalContainer().eInverseRemove(this, SchedulePackage.SCHEDULE__DATUMS, Schedule.class, msgs);
+		}
+		return super.eBasicRemoveFromContainerFeature(msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case SchedulePackage.CLASS_DATUM__TYPE:
-				if (resolve) return getType();
-				return basicGetType();
+			case SchedulePackage.CLASS_DATUM__COMPLETE_CLASS:
+				if (resolve) return getCompleteClass();
+				return basicGetCompleteClass();
 			case SchedulePackage.CLASS_DATUM__PROPERTY_DATUMS:
 				return getPropertyDatums();
+			case SchedulePackage.CLASS_DATUM__SCHEDULE:
+				return getSchedule();
+			case SchedulePackage.CLASS_DATUM__SUPER:
+				return getSuper();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -190,12 +284,19 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case SchedulePackage.CLASS_DATUM__TYPE:
-				setType((org.eclipse.ocl.pivot.Class)newValue);
+			case SchedulePackage.CLASS_DATUM__COMPLETE_CLASS:
+				setCompleteClass((CompleteClass)newValue);
 				return;
 			case SchedulePackage.CLASS_DATUM__PROPERTY_DATUMS:
 				getPropertyDatums().clear();
 				getPropertyDatums().addAll((Collection<? extends PropertyDatum>)newValue);
+				return;
+			case SchedulePackage.CLASS_DATUM__SCHEDULE:
+				setSchedule((Schedule)newValue);
+				return;
+			case SchedulePackage.CLASS_DATUM__SUPER:
+				getSuper().clear();
+				getSuper().addAll((Collection<? extends ClassDatum>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -209,11 +310,17 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case SchedulePackage.CLASS_DATUM__TYPE:
-				setType((org.eclipse.ocl.pivot.Class)null);
+			case SchedulePackage.CLASS_DATUM__COMPLETE_CLASS:
+				setCompleteClass((CompleteClass)null);
 				return;
 			case SchedulePackage.CLASS_DATUM__PROPERTY_DATUMS:
 				getPropertyDatums().clear();
+				return;
+			case SchedulePackage.CLASS_DATUM__SCHEDULE:
+				setSchedule((Schedule)null);
+				return;
+			case SchedulePackage.CLASS_DATUM__SUPER:
+				getSuper().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -227,26 +334,21 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case SchedulePackage.CLASS_DATUM__TYPE:
-				return type != null;
+			case SchedulePackage.CLASS_DATUM__COMPLETE_CLASS:
+				return completeClass != null;
 			case SchedulePackage.CLASS_DATUM__PROPERTY_DATUMS:
 				return propertyDatums != null && !propertyDatums.isEmpty();
+			case SchedulePackage.CLASS_DATUM__SCHEDULE:
+				return getSchedule() != null;
+			case SchedulePackage.CLASS_DATUM__SUPER:
+				return super_ != null && !super_.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 * @generated
-	 */
-	@Override
-	public <R> R accept(@NonNull ScheduleVisitor<R> visitor) {
-		return visitor.visitClassDatum(this);
-	}
-
 	@Override
 	public String toString() {
-		return type.toString();
+		return completeClass.toString();
 	}
 
 } //ClassDatumImpl

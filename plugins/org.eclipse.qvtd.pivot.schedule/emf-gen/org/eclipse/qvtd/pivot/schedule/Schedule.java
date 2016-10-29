@@ -13,9 +13,7 @@
 package org.eclipse.qvtd.pivot.schedule;
 
 import org.eclipse.emf.common.util.EList;
-
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.qvtd.pivot.schedule.util.ScheduleVisitor;
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -34,11 +32,11 @@ import org.eclipse.qvtd.pivot.schedule.util.ScheduleVisitor;
  * @model
  * @generated
  */
-public interface Schedule extends ScheduleElement {
+public interface Schedule extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Datums</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.qvtd.pivot.schedule.AbstractDatum}.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.schedule.AbstractDatum#getSchedule <em>Schedule</em>}'.
+	 * The list contents are of type {@link org.eclipse.qvtd.pivot.schedule.ClassDatum}.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.schedule.ClassDatum#getSchedule <em>Schedule</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Datums</em>' containment reference list isn't clear,
@@ -47,16 +45,16 @@ public interface Schedule extends ScheduleElement {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Datums</em>' containment reference list.
 	 * @see org.eclipse.qvtd.pivot.schedule.SchedulePackage#getSchedule_Datums()
-	 * @see org.eclipse.qvtd.pivot.schedule.AbstractDatum#getSchedule
+	 * @see org.eclipse.qvtd.pivot.schedule.ClassDatum#getSchedule
 	 * @model opposite="schedule" containment="true"
 	 * @generated
 	 */
-	EList<AbstractDatum> getDatums();
+	EList<ClassDatum> getDatums();
 
 	/**
 	 * Returns the value of the '<em><b>Actions</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.qvtd.pivot.schedule.AbstractAction}.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.schedule.AbstractAction#getSchedule <em>Schedule</em>}'.
+	 * The list contents are of type {@link org.eclipse.qvtd.pivot.schedule.MappingAction}.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.schedule.MappingAction#getSchedule <em>Schedule</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Actions</em>' containment reference list isn't clear,
@@ -65,18 +63,10 @@ public interface Schedule extends ScheduleElement {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Actions</em>' containment reference list.
 	 * @see org.eclipse.qvtd.pivot.schedule.SchedulePackage#getSchedule_Actions()
-	 * @see org.eclipse.qvtd.pivot.schedule.AbstractAction#getSchedule
+	 * @see org.eclipse.qvtd.pivot.schedule.MappingAction#getSchedule
 	 * @model opposite="schedule" containment="true"
 	 * @generated
 	 */
-	EList<AbstractAction> getActions();
-
-	/**
-	 * Accept a visit from a visitor and return the result of a call to the derived type-specific visitXXX in the visitor.
-	 * @generated
-	 */
-	// Generated from org.eclipse.ocl.examples.build/templates/model/Class/insert.javajetinc
-	@Override
-	public <R> R accept(@NonNull ScheduleVisitor<R> visitor);
+	EList<MappingAction> getActions();
 
 } // Schedule

@@ -12,18 +12,20 @@
  */
 package org.eclipse.qvtd.pivot.schedule.impl;
 
+import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.qvtd.pivot.schedule.ClassDatum;
 import org.eclipse.qvtd.pivot.schedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.schedule.SchedulePackage;
-import org.eclipse.qvtd.pivot.schedule.util.ScheduleVisitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -36,6 +38,7 @@ import org.eclipse.qvtd.pivot.schedule.util.ScheduleVisitor;
  *   <li>{@link org.eclipse.qvtd.pivot.schedule.impl.PropertyDatumImpl#getProperty <em>Property</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.schedule.impl.PropertyDatumImpl#getClassDatum <em>Class Datum</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.schedule.impl.PropertyDatumImpl#getOpposite <em>Opposite</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.schedule.impl.PropertyDatumImpl#getSuper <em>Super</em>}</li>
  * </ul>
  *
  * @generated
@@ -60,6 +63,16 @@ public class PropertyDatumImpl extends AbstractDatumImpl implements PropertyDatu
 	 * @ordered
 	 */
 	protected PropertyDatum opposite;
+
+	/**
+	 * The cached value of the '{@link #getSuper() <em>Super</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSuper()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<PropertyDatum> super_;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -209,6 +222,19 @@ public class PropertyDatumImpl extends AbstractDatumImpl implements PropertyDatu
 	 * @generated
 	 */
 	@Override
+	public EList<PropertyDatum> getSuper() {
+		if (super_ == null) {
+			super_ = new EObjectResolvingEList<PropertyDatum>(PropertyDatum.class, this, SchedulePackage.PROPERTY_DATUM__SUPER);
+		}
+		return super_;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case SchedulePackage.PROPERTY_DATUM__CLASS_DATUM:
@@ -263,6 +289,8 @@ public class PropertyDatumImpl extends AbstractDatumImpl implements PropertyDatu
 			case SchedulePackage.PROPERTY_DATUM__OPPOSITE:
 				if (resolve) return getOpposite();
 				return basicGetOpposite();
+			case SchedulePackage.PROPERTY_DATUM__SUPER:
+				return getSuper();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -272,6 +300,7 @@ public class PropertyDatumImpl extends AbstractDatumImpl implements PropertyDatu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
@@ -283,6 +312,10 @@ public class PropertyDatumImpl extends AbstractDatumImpl implements PropertyDatu
 				return;
 			case SchedulePackage.PROPERTY_DATUM__OPPOSITE:
 				setOpposite((PropertyDatum)newValue);
+				return;
+			case SchedulePackage.PROPERTY_DATUM__SUPER:
+				getSuper().clear();
+				getSuper().addAll((Collection<? extends PropertyDatum>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -305,6 +338,9 @@ public class PropertyDatumImpl extends AbstractDatumImpl implements PropertyDatu
 			case SchedulePackage.PROPERTY_DATUM__OPPOSITE:
 				setOpposite((PropertyDatum)null);
 				return;
+			case SchedulePackage.PROPERTY_DATUM__SUPER:
+				getSuper().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -323,17 +359,10 @@ public class PropertyDatumImpl extends AbstractDatumImpl implements PropertyDatu
 				return getClassDatum() != null;
 			case SchedulePackage.PROPERTY_DATUM__OPPOSITE:
 				return opposite != null;
+			case SchedulePackage.PROPERTY_DATUM__SUPER:
+				return super_ != null && !super_.isEmpty();
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * @generated
-	 */
-	@Override
-	public <R> R accept(@NonNull ScheduleVisitor<R> visitor) {
-		return visitor.visitPropertyDatum(this);
 	}
 
 	@Override

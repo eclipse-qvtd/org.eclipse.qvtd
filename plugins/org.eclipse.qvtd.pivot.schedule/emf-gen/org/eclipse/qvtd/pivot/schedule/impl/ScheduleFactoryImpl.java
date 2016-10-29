@@ -65,14 +65,9 @@ public class ScheduleFactoryImpl extends EFactoryImpl implements ScheduleFactory
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case SchedulePackage.CLASS_DATUM: return createClassDatum();
-			case SchedulePackage.DATA_PARAMETER: return createDataParameter();
-			case SchedulePackage.INPUT_ACTION: return createInputAction();
 			case SchedulePackage.MAPPING_ACTION: return createMappingAction();
-			case SchedulePackage.OUTPUT_ACTION: return createOutputAction();
-			case SchedulePackage.PARAMETER_DERIVATION: return createParameterDerivation();
 			case SchedulePackage.PROPERTY_DATUM: return createPropertyDatum();
 			case SchedulePackage.SCHEDULE: return createSchedule();
-			case SchedulePackage.SECONDARY_PARAMETER: return createSecondaryParameter();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -95,53 +90,9 @@ public class ScheduleFactoryImpl extends EFactoryImpl implements ScheduleFactory
 	 * @generated
 	 */
 	@Override
-	public @NonNull DataParameter createDataParameter() {
-		DataParameterImpl dataParameter = new DataParameterImpl();
-		return dataParameter;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public @NonNull InputAction createInputAction() {
-		InputActionImpl inputAction = new InputActionImpl();
-		return inputAction;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public @NonNull MappingAction createMappingAction() {
 		MappingActionImpl mappingAction = new MappingActionImpl();
 		return mappingAction;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public @NonNull OutputAction createOutputAction() {
-		OutputActionImpl outputAction = new OutputActionImpl();
-		return outputAction;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public @NonNull ParameterDerivation createParameterDerivation() {
-		ParameterDerivationImpl parameterDerivation = new ParameterDerivationImpl();
-		return parameterDerivation;
 	}
 
 	/**
@@ -164,17 +115,6 @@ public class ScheduleFactoryImpl extends EFactoryImpl implements ScheduleFactory
 	public @NonNull Schedule createSchedule() {
 		ScheduleImpl schedule = new ScheduleImpl();
 		return schedule;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public @NonNull SecondaryParameter createSecondaryParameter() {
-		SecondaryParameterImpl secondaryParameter = new SecondaryParameterImpl();
-		return secondaryParameter;
 	}
 
 	/**

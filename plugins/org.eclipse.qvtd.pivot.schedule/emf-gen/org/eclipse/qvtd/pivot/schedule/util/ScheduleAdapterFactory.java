@@ -80,32 +80,12 @@ public class ScheduleAdapterFactory extends AdapterFactoryImpl {
 				return createAbstractDatumAdapter();
 			}
 			@Override
-			public Adapter caseAbstractAction(AbstractAction object) {
-				return createAbstractActionAdapter();
-			}
-			@Override
 			public Adapter caseClassDatum(ClassDatum object) {
 				return createClassDatumAdapter();
 			}
 			@Override
-			public Adapter caseDataParameter(DataParameter object) {
-				return createDataParameterAdapter();
-			}
-			@Override
-			public Adapter caseInputAction(InputAction object) {
-				return createInputActionAdapter();
-			}
-			@Override
 			public Adapter caseMappingAction(MappingAction object) {
 				return createMappingActionAdapter();
-			}
-			@Override
-			public Adapter caseOutputAction(OutputAction object) {
-				return createOutputActionAdapter();
-			}
-			@Override
-			public Adapter caseParameterDerivation(ParameterDerivation object) {
-				return createParameterDerivationAdapter();
 			}
 			@Override
 			public Adapter casePropertyDatum(PropertyDatum object) {
@@ -114,14 +94,6 @@ public class ScheduleAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseSchedule(Schedule object) {
 				return createScheduleAdapter();
-			}
-			@Override
-			public Adapter caseScheduleElement(ScheduleElement object) {
-				return createScheduleElementAdapter();
-			}
-			@Override
-			public Adapter caseSecondaryParameter(SecondaryParameter object) {
-				return createSecondaryParameterAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -158,20 +130,6 @@ public class ScheduleAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.schedule.AbstractAction <em>Abstract Action</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.pivot.schedule.AbstractAction
-	 * @generated
-	 */
-	public Adapter createAbstractActionAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.schedule.ClassDatum <em>Class Datum</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -186,34 +144,6 @@ public class ScheduleAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.schedule.DataParameter <em>Data Parameter</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.pivot.schedule.DataParameter
-	 * @generated
-	 */
-	public Adapter createDataParameterAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.schedule.InputAction <em>Input Action</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.pivot.schedule.InputAction
-	 * @generated
-	 */
-	public Adapter createInputActionAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.schedule.MappingAction <em>Mapping Action</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -224,34 +154,6 @@ public class ScheduleAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createMappingActionAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.schedule.OutputAction <em>Output Action</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.pivot.schedule.OutputAction
-	 * @generated
-	 */
-	public Adapter createOutputActionAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.schedule.ParameterDerivation <em>Parameter Derivation</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.pivot.schedule.ParameterDerivation
-	 * @generated
-	 */
-	public Adapter createParameterDerivationAdapter() {
 		return null;
 	}
 
@@ -280,34 +182,6 @@ public class ScheduleAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createScheduleAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.schedule.ScheduleElement <em>Element</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.pivot.schedule.ScheduleElement
-	 * @generated
-	 */
-	public Adapter createScheduleElementAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.schedule.SecondaryParameter <em>Secondary Parameter</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.pivot.schedule.SecondaryParameter
-	 * @generated
-	 */
-	public Adapter createSecondaryParameterAdapter() {
 		return null;
 	}
 

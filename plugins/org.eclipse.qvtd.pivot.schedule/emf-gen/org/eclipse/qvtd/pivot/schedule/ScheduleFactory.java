@@ -42,24 +42,6 @@ public interface ScheduleFactory extends EFactory {
 	@NonNull ClassDatum createClassDatum();
 
 	/**
-	 * Returns a new object of class '<em>Data Parameter</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Data Parameter</em>'.
-	 * @generated
-	 */
-	@NonNull DataParameter createDataParameter();
-
-	/**
-	 * Returns a new object of class '<em>Input Action</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Input Action</em>'.
-	 * @generated
-	 */
-	@NonNull InputAction createInputAction();
-
-	/**
 	 * Returns a new object of class '<em>Mapping Action</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -67,24 +49,6 @@ public interface ScheduleFactory extends EFactory {
 	 * @generated
 	 */
 	@NonNull MappingAction createMappingAction();
-
-	/**
-	 * Returns a new object of class '<em>Output Action</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Output Action</em>'.
-	 * @generated
-	 */
-	@NonNull OutputAction createOutputAction();
-
-	/**
-	 * Returns a new object of class '<em>Parameter Derivation</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Parameter Derivation</em>'.
-	 * @generated
-	 */
-	@NonNull ParameterDerivation createParameterDerivation();
 
 	/**
 	 * Returns a new object of class '<em>Property Datum</em>'.
@@ -103,15 +67,6 @@ public interface ScheduleFactory extends EFactory {
 	 * @generated
 	 */
 	@NonNull Schedule createSchedule();
-
-	/**
-	 * Returns a new object of class '<em>Secondary Parameter</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Secondary Parameter</em>'.
-	 * @generated
-	 */
-	@NonNull SecondaryParameter createSecondaryParameter();
 
 	/**
 	 * Returns the package supported by this factory.

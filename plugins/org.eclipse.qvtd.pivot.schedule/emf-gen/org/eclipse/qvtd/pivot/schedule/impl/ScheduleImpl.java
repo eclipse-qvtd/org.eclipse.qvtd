@@ -18,14 +18,13 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.qvtd.pivot.schedule.AbstractAction;
-import org.eclipse.qvtd.pivot.schedule.AbstractDatum;
-import org.eclipse.qvtd.pivot.schedule.SchedulePackage;
-import org.eclipse.qvtd.pivot.schedule.util.ScheduleVisitor;
+import org.eclipse.qvtd.pivot.schedule.ClassDatum;
+import org.eclipse.qvtd.pivot.schedule.MappingAction;
 import org.eclipse.qvtd.pivot.schedule.Schedule;
+import org.eclipse.qvtd.pivot.schedule.SchedulePackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -41,7 +40,7 @@ import org.eclipse.qvtd.pivot.schedule.Schedule;
  *
  * @generated
  */
-public class ScheduleImpl extends ScheduleElementImpl implements Schedule {
+public class ScheduleImpl extends MinimalEObjectImpl.Container implements Schedule {
 	/**
 	 * The cached value of the '{@link #getDatums() <em>Datums</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -50,7 +49,7 @@ public class ScheduleImpl extends ScheduleElementImpl implements Schedule {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<AbstractDatum> datums;
+	protected EList<ClassDatum> datums;
 
 	/**
 	 * The cached value of the '{@link #getActions() <em>Actions</em>}' containment reference list.
@@ -60,7 +59,7 @@ public class ScheduleImpl extends ScheduleElementImpl implements Schedule {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<AbstractAction> actions;
+	protected EList<MappingAction> actions;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -87,9 +86,9 @@ public class ScheduleImpl extends ScheduleElementImpl implements Schedule {
 	 * @generated
 	 */
 	@Override
-	public EList<AbstractDatum> getDatums() {
+	public EList<ClassDatum> getDatums() {
 		if (datums == null) {
-			datums = new EObjectContainmentWithInverseEList<AbstractDatum>(AbstractDatum.class, this, SchedulePackage.SCHEDULE__DATUMS, SchedulePackage.ABSTRACT_DATUM__SCHEDULE);
+			datums = new EObjectContainmentWithInverseEList<ClassDatum>(ClassDatum.class, this, SchedulePackage.SCHEDULE__DATUMS, SchedulePackage.CLASS_DATUM__SCHEDULE);
 		}
 		return datums;
 	}
@@ -100,9 +99,9 @@ public class ScheduleImpl extends ScheduleElementImpl implements Schedule {
 	 * @generated
 	 */
 	@Override
-	public EList<AbstractAction> getActions() {
+	public EList<MappingAction> getActions() {
 		if (actions == null) {
-			actions = new EObjectContainmentWithInverseEList<AbstractAction>(AbstractAction.class, this, SchedulePackage.SCHEDULE__ACTIONS, SchedulePackage.ABSTRACT_ACTION__SCHEDULE);
+			actions = new EObjectContainmentWithInverseEList<MappingAction>(MappingAction.class, this, SchedulePackage.SCHEDULE__ACTIONS, SchedulePackage.MAPPING_ACTION__SCHEDULE);
 		}
 		return actions;
 	}
@@ -167,11 +166,11 @@ public class ScheduleImpl extends ScheduleElementImpl implements Schedule {
 		switch (featureID) {
 			case SchedulePackage.SCHEDULE__DATUMS:
 				getDatums().clear();
-				getDatums().addAll((Collection<? extends AbstractDatum>)newValue);
+				getDatums().addAll((Collection<? extends ClassDatum>)newValue);
 				return;
 			case SchedulePackage.SCHEDULE__ACTIONS:
 				getActions().clear();
-				getActions().addAll((Collection<? extends AbstractAction>)newValue);
+				getActions().addAll((Collection<? extends MappingAction>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -209,15 +208,6 @@ public class ScheduleImpl extends ScheduleElementImpl implements Schedule {
 				return actions != null && !actions.isEmpty();
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * @generated
-	 */
-	@Override
-	public <R> R accept(@NonNull ScheduleVisitor<R> visitor) {
-		return visitor.visitSchedule(this);
 	}
 
 } //ScheduleImpl
