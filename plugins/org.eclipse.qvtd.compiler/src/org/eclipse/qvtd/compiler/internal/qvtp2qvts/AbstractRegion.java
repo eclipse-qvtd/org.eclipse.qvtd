@@ -39,9 +39,6 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphEdge;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphNode;
-import org.eclipse.qvtd.pivot.schedule.AbstractAction;
-import org.eclipse.qvtd.pivot.schedule.MappingAction;
-
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -1773,33 +1770,9 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 		return loopingConnections;
 	}
 
-	public @NonNull Iterable<@NonNull MappingAction> getMappingActions() {
-		return Collections.emptyList();
-	}
-
-	public @NonNull MappingRegion getMappingRegion(@NonNull AbstractAction action) {
-		return multiRegion.getMappingRegion(action);
-	}
-
 	@Override
 	public @NonNull MultiRegion getMultiRegion() {
 		return multiRegion;
-	}
-
-	@Override
-	public @NonNull String getName() {
-		List<@NonNull String> names = new ArrayList<@NonNull String>();
-		for (@NonNull MappingAction action : getMappingActions()) {
-			names.add(ClassUtil.nonNullState(action.getMapping().getName()));
-		}
-		Collections.sort(names);;
-		StringBuilder s = new StringBuilder();
-		s.append(getClass().getSimpleName());
-		for (@NonNull String name : names) {
-			s.append("\n");
-			s.append(name);
-		}
-		return s.toString();
 	}
 
 	@Override

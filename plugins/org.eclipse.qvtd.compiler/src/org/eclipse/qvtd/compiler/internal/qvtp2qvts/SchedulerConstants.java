@@ -51,8 +51,6 @@ import org.eclipse.qvtd.pivot.qvtcore.analysis.RootDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.pivot.schedule.AbstractAction;
 import org.eclipse.qvtd.pivot.schedule.ClassDatum;
-import org.eclipse.qvtd.pivot.schedule.Schedule;
-import org.eclipse.qvtd.pivot.schedule.utilities.DependencyUtil;
 
 public abstract class SchedulerConstants
 {
@@ -131,8 +129,6 @@ public abstract class SchedulerConstants
 
 	private /*@LazyNonNull */ DependencyAnalyzer dependencyAnalyzer = null;
 
-	private final @NonNull List<@NonNull AbstractAction> orderedActions;
-
 	protected SchedulerConstants(@NonNull EnvironmentFactory environmentFactory, @NonNull Transformation asTransformation) {
 		this.environmentFactory = environmentFactory;
 		this.transformation = asTransformation;
@@ -140,7 +136,7 @@ public abstract class SchedulerConstants
 		this.domainAnalysis = new QVTcoreDomainUsageAnalysis(environmentFactory);
 		domainAnalysis.analyzeTransformation(asTransformation);
 		this.qvtp2qvtg = new QVTp2QVTg(domainAnalysis, classRelationships);
-		Schedule dependencyGraph = qvtp2qvtg.transformTransformation(asTransformation);
+		qvtp2qvtg.analyzeTransformation(asTransformation);
 		//
 		this.inputUsage = domainAnalysis.getInputUsage();
 		//		int outputMask = ((DomainUsage.Internal)domainAnalysis.getOutputUsage()).getMask();
@@ -174,12 +170,6 @@ public abstract class SchedulerConstants
 		assert candidateOclContainerProperty != null : "OCL Standard Librarty has no OclElement::oclContainer property";
 		oclContainerProperty = candidateOclContainerProperty;
 		//
-		DependencyUtil.NaturalOrderer orderer = new DependencyUtil.NaturalOrderer(dependencyGraph);
-		List<@NonNull AbstractAction> orderedActions = orderer.computeOrdering();	// FIXME ??is this ordering still needed??
-		if (orderedActions == null) {
-			throw new IllegalArgumentException(orderer.diagnoseOrderingFailure());
-		}
-		this.orderedActions = orderedActions;
 	}
 
 	protected abstract @NonNull ClassDatumAnalysis createClassDatumAnalysis(@NonNull ClassDatum classDatum);
@@ -339,7 +329,7 @@ public abstract class SchedulerConstants
 	}
 
 	protected @NonNull List<@NonNull AbstractAction> getOrderedActions() {
-		return orderedActions;
+		return qvtp2qvtg.getOrderedActions();
 	}
 
 	public @NonNull StandardLibrary getStandardLibrary() {
