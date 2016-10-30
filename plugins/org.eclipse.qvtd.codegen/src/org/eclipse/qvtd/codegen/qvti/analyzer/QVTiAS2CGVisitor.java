@@ -13,7 +13,11 @@ package org.eclipse.qvtd.codegen.qvti.analyzer;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.ecore.EClassifier;
@@ -59,12 +63,14 @@ import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VariableExp;
+import org.eclipse.ocl.pivot.ids.CollectionTypeId;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.complete.StandardLibraryInternal;
 import org.eclipse.ocl.pivot.library.LibraryProperty;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
+import org.eclipse.ocl.pivot.utilities.TreeIterable;
 import org.eclipse.qvtd.codegen.qvti.java.QVTiGlobalContext;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionVariable;
@@ -162,6 +168,19 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 			if (n1 == null) n1 = "";
 			if (n2 == null) n2 = "";
 			return n1.compareTo(n2);
+		}
+	}
+
+	public static class InlinedBodyAdapter extends AdapterImpl
+	{
+		protected final @NonNull OperationCallExp operationCallExp;
+
+		public InlinedBodyAdapter(@NonNull OperationCallExp operationCallExp) {
+			this.operationCallExp = operationCallExp;
+		}
+
+		public @NonNull OperationCallExp getOperationCallExp() {
+			return operationCallExp;
 		}
 	}
 
@@ -361,6 +380,80 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 		this.standardLibrary = environmentFactory.getStandardLibrary();
 	}
 
+	private @NonNull Set<@NonNull Mapping> computeUseClases(@NonNull ImperativeTransformation asTransformation) {
+		//
+		//	Compute the intervalIndex of each Mapping.
+		//
+		Map<@NonNull Mapping, @NonNull Integer> mapping2intervalIndex = new HashMap<>();
+		{
+			int intervalIndex = 0;
+			for (@NonNull Mapping asMapping : QVTimperativeUtil.getOwnedMappings(asTransformation)) {
+				mapping2intervalIndex.put(asMapping, intervalIndex++);
+			}
+		}
+		//
+		//	Compute the latestIntervalIndex of each ConnectionVariable.
+		//
+		Map<@NonNull ConnectionVariable, @NonNull Integer> connectionValue2latestIntervalIndex = new HashMap<>();
+		for (@NonNull Mapping asMapping : QVTimperativeUtil.getOwnedMappings(asTransformation)) {
+			for (@NonNull EObject eObject : new TreeIterable(asMapping, false)) {
+				if (eObject instanceof AppendParameterBinding) {
+					AppendParameterBinding appendParameterBinding = (AppendParameterBinding)eObject;
+					MappingCall mappingCall = appendParameterBinding.getMappingCall();
+					Mapping referredMapping = mappingCall.getReferredMapping();
+					Integer appendingIntervalIndex = mapping2intervalIndex.get(referredMapping);
+					assert appendingIntervalIndex != null;
+					ConnectionVariable connectionValue = appendParameterBinding.getValue();
+					assert connectionValue != null;
+					Integer latestIntervalIndex = connectionValue2latestIntervalIndex.get(connectionValue);
+					if ((latestIntervalIndex == null) || (latestIntervalIndex < appendingIntervalIndex)) {
+						connectionValue2latestIntervalIndex.put(connectionValue, appendingIntervalIndex);
+					}
+				}
+			}
+		}
+		//
+		//	Set Mapping isRecursive if consume may preceded append.
+		//
+		Set<@NonNull Mapping> useClassMappings = new HashSet<>();
+		for (@NonNull Mapping asMapping : QVTimperativeUtil.getOwnedMappings(asTransformation)) {
+			for (@NonNull EObject eObject : new TreeIterable(asMapping, false)) {
+				if (eObject instanceof GuardParameterBinding) {
+					GuardParameterBinding guardParameterBinding = (GuardParameterBinding)eObject;
+					MappingCall mappingCall = guardParameterBinding.getMappingCall();
+					Mapping referredMapping = mappingCall.getReferredMapping();
+					assert referredMapping != null;
+					Integer consumingIntervalIndex = mapping2intervalIndex.get(referredMapping);
+					assert consumingIntervalIndex != null;
+					ConnectionVariable connectionValue = guardParameterBinding.getValue();
+					assert connectionValue != null;
+					Integer latestIntervalIndex = connectionValue2latestIntervalIndex.get(connectionValue);
+					if (latestIntervalIndex == null) {
+						latestIntervalIndex = 0;			// root connections are not 'appended'
+					}
+					if (latestIntervalIndex >= consumingIntervalIndex) {
+						useClassMappings.add(referredMapping);
+					}
+				}
+			}
+		}
+		//
+		//
+		//
+		for (@NonNull Mapping asMapping : QVTimperativeUtil.getOwnedMappings(asTransformation)) {
+			if (asMapping.isIsStrict()) {
+				useClassMappings.add(asMapping);
+			}
+			else if (QVTimperativeUtil.isObserver(asMapping)) {
+				useClassMappings.add(asMapping);
+			}
+		}
+		if (useClassMappings.size() > 0) {
+			useClassMappings.add(QVTimperativeUtil.getRootMapping(asTransformation));
+		}
+		return useClassMappings;
+	}
+
 	@Override
 	protected <T extends EObject> @NonNull T createCopy(@NonNull T aPrototype) {
 		Copier copier = new EcoreUtil.Copier();
@@ -545,19 +638,6 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 		return cgInlineOperationCall;
 	}
 
-	public static class InlinedBodyAdapter extends AdapterImpl
-	{
-		protected final @NonNull OperationCallExp operationCallExp;
-
-		public InlinedBodyAdapter(@NonNull OperationCallExp operationCallExp) {
-			this.operationCallExp = operationCallExp;
-		}
-
-		public @NonNull OperationCallExp getOperationCallExp() {
-			return operationCallExp;
-		}
-	}
-
 	@Override
 	public @Nullable CGNamedElement visitAddStatement(@NonNull AddStatement asAddStatement) {
 		ConnectionVariable asVariable = asAddStatement.getTargetVariable();
@@ -617,12 +697,16 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 		cgVariable.setRequired(initValue.isRequired());
 		return cgVariable; */
 		OCLExpression asInit = asVariable.getOwnedExpression();
-		CGAccumulator cgAccumulator = CGModelFactory.eINSTANCE.createCGAccumulator();
+		CGAccumulator cgAccumulator = CGModelFactory.eINSTANCE.createCGAccumulator();		// ?? FIXME Use ConnectionVariable
 		cgAccumulator.setAst(asVariable);
 		cgAccumulator.setName(asVariable.getName());
 		if (asInit != null) {
 			CGValuedElement cgInit = doVisit(CGValuedElement.class, asInit);
-			cgAccumulator.setTypeId(cgInit.getTypeId());
+			TypeId typeId = asInit.getTypeId();
+			if (typeId instanceof CollectionTypeId) {
+				typeId = ((CollectionTypeId)typeId).getElementTypeId();
+			}
+			cgAccumulator.setTypeId(analyzer.getTypeId(typeId));
 			cgAccumulator.setInit(cgInit);
 			//							cgAccumulator.setRequired(true);
 		}
@@ -838,9 +922,13 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 			cgTypedModel.setModelIndex(cgTypedModels.size());
 			cgTypedModels.add(cgTypedModel);
 		}
+		Set<@NonNull Mapping> useClasses = computeUseClases(asTransformation);
 		for (@NonNull Mapping asMapping : QVTimperativeUtil.getOwnedMappings(asTransformation)) {
 			CGMapping cgMapping = doVisit(CGMapping.class, asMapping);
 			cgTransformation.getMappings().add(cgMapping);
+			if (useClasses.contains(asMapping)) {
+				cgMapping.setUseClass(true);
+			}
 		}
 		for (Operation asOperation : asTransformation.getOwnedOperations()) {
 			CGOperation cgOperation = doVisit(CGOperation.class, asOperation);

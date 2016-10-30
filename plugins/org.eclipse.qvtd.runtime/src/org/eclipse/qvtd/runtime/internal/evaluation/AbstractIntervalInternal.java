@@ -235,6 +235,9 @@ public abstract class AbstractIntervalInternal implements Interval
 		}
 		else {														// New element
 			assert headConnection != null;
+			if (connection2.getNextConnection() != null) {
+				return;
+			}
 			tailConnection2.setNextConnection(connection2);
 		}
 		tailConnection = connection2;

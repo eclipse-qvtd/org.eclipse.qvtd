@@ -98,17 +98,15 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel;
 import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
 import org.eclipse.qvtd.codegen.utilities.QVTiCGUtil;
-import org.eclipse.qvtd.pivot.qvtimperative.AppendParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.AppendParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.BufferStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
-import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
+import org.eclipse.qvtd.pivot.qvtimperative.GuardParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
-import org.eclipse.qvtd.pivot.qvtimperative.MappingParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.ObservableStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
@@ -849,6 +847,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 	}
 
 	protected void doFunctionIsEqual(@NonNull CGShadowExp cgShadowExp, @NonNull String instanceName) {
+		js.append("@Override\n");
 		js.append("public boolean isEqual(");
 		js.appendIsRequired(true);
 		js.append(" ");
@@ -992,6 +991,189 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		js.append("}\n");
 	}
 
+	public @NonNull Boolean doMappingCall_Class(@NonNull CGMappingCall cgMappingCall) {
+		js.append("invocationManager.flush();\n");
+		MappingCall pMappingCall = (MappingCall) cgMappingCall.getAst();
+		Mapping pReferredMapping = pMappingCall.getReferredMapping();
+		assert pReferredMapping != null;
+		CGMapping cgReferredMapping = analyzer.getMapping(pReferredMapping);
+		assert cgReferredMapping != null;
+		List<CGMappingCallBinding> cgMappingCallBindings = cgMappingCall.getMappingCallBindings();
+		//
+		//	Set loopVariable non-null if it needs to be type-checked and cast to a narrower type.
+		//
+		for (@SuppressWarnings("null")@NonNull CGMappingCallBinding cgMappingCallBinding : cgMappingCallBindings) {
+			TypeDescriptor checkedType = needsTypeCheck(cgMappingCallBinding);
+			if (checkedType != null) {
+				js.append("if (");
+				js.appendValueName(cgMappingCallBinding.getValue());
+				js.append(" instanceof ");
+				js.appendClassReference(checkedType);
+				js.append(") {\n");
+				js.pushIndentation(null);
+			}
+			else if (!cgMappingCallBinding.isNonNull()) {
+				Element asMappingParameterBinding = cgMappingCallBinding.getAst();
+				if (!(asMappingParameterBinding instanceof GuardParameterBinding)) {		// FIXME this should be part of isNonNull
+					js.append("if (");
+					js.appendValueName(cgMappingCallBinding.getValue());
+					js.append(" != null) {\n");
+					js.pushIndentation(null);
+				}
+			}
+		}
+		//
+		//	Emit the mapping call.
+		//
+		Iterable<@NonNull CGMappingCallBinding> iterateBindings = getIterateBindings(cgMappingCallBindings);
+		String mappingCtorName = getMappingCtorName(cgReferredMapping);
+		if (iterateBindings == null) {
+			for (CGMappingCallBinding cgMappingCallBinding : cgMappingCallBindings) {
+				Element ast = cgMappingCallBinding.getAst();
+				js.append(mappingCtorName);
+				js.append(".");
+				js.append(ast instanceof AppendParameterBinding ? "addAppendedConnection" : "addConsumedConnection");
+				js.append("(");
+				appendConnectionBinding(cgMappingCallBinding);
+				js.append(");\n");
+			}
+		}
+		else {
+			js.append(mappingCtorName);
+			js.append(".invoke(");
+			boolean isFirst = true;
+			for (@SuppressWarnings("null")@NonNull CGMappingCallBinding cgMappingCallBinding : cgMappingCallBindings) {
+				if (!isFirst) {
+					js.append(", ");
+				}
+				TypeDescriptor checkedType = needsTypeCheck(cgMappingCallBinding);
+				if (checkedType != null) {
+					js.append("(");
+					js.appendClassReference(checkedType);
+					js.append(")");
+				}
+				js.appendValueName(cgMappingCallBinding.getValue());
+				isFirst = false;
+			}
+			js.append(");\n");
+		}
+		//
+		//	End the type check.
+		//
+		for (@SuppressWarnings("null")@NonNull CGMappingCallBinding cgMappingCallBinding : cgMappingCallBindings) {
+			TypeDescriptor checkedType = needsTypeCheck(cgMappingCallBinding);
+			if (checkedType != null) {
+				js.popIndentation();
+				js.append("}\n");
+			}
+			else if (!cgMappingCallBinding.isNonNull()) {
+				Element asMappingParameterBinding = cgMappingCallBinding.getAst();
+				if (!(asMappingParameterBinding instanceof GuardParameterBinding)) {		// FIXME this should be part of isNonNull
+					js.popIndentation();
+					js.append("}\n");
+				}
+			}
+		}
+		js.append("invocationManager.flush();\n");
+		return true;
+	}
+
+	public @NonNull Boolean doMappingCall_Function(@NonNull CGMappingCall cgMappingCall) {
+		MappingCall pMappingCall = (MappingCall) cgMappingCall.getAst();
+		Mapping pReferredMapping = pMappingCall.getReferredMapping();
+		assert pReferredMapping != null;
+		CGMapping cgReferredMapping = analyzer.getMapping(pReferredMapping);
+		assert cgReferredMapping != null;
+		List<CGMappingCallBinding> cgMappingCallBindings = cgMappingCall.getMappingCallBindings();
+		//
+		//	Set loopVariable non-null if it needs to be type-checked and cast to a narrower type.
+		//
+		for (@SuppressWarnings("null")@NonNull CGMappingCallBinding cgMappingCallBinding : cgMappingCallBindings) {
+			MappingParameterBinding asMappingParameterBinding = (MappingParameterBinding)cgMappingCallBinding.getAst();
+			if (asMappingParameterBinding instanceof AppendParameterBinding) {
+			}
+			else if (asMappingParameterBinding instanceof GuardParameterBinding) {
+				js.append("for (");
+				js.appendClassReference(Boolean.TRUE, cgMappingCallBinding);
+				js.append(" ");
+				js.appendValueName(cgMappingCallBinding);
+				js.append(" : ");
+				js.appendValueName(cgMappingCallBinding.getValue());
+				js.append(".typedIterable(");
+				js.appendClassReference(null, cgMappingCallBinding);
+				js.append(".class)");
+				js.append(") {\n");
+				js.pushIndentation(null);
+				// FIXME typeCheck
+			}
+			else {
+				TypeDescriptor checkedType = needsTypeCheck(cgMappingCallBinding);
+				if (checkedType != null) {
+					js.append("if (");
+					js.appendValueName(cgMappingCallBinding.getValue());
+					js.append(" instanceof ");
+					js.appendClassReference(checkedType);
+					js.append(") {\n");
+					js.pushIndentation(null);
+				}
+				else if (!cgMappingCallBinding.isNonNull()) {
+					js.append("if (");
+					js.appendValueName(cgMappingCallBinding.getValue());
+					js.append(" != null) {\n");
+					js.pushIndentation(null);
+				}
+			}
+		}
+		//
+		//	Emit the mapping call.
+		//
+		js.append(getMappingName(cgReferredMapping) + "(");
+		boolean isFirst = true;
+		for (@SuppressWarnings("null")@NonNull CGMappingCallBinding cgMappingCallBinding : cgMappingCallBindings) {
+			if (!isFirst) {
+				js.append(", ");
+			}
+			TypeDescriptor checkedType = needsTypeCheck(cgMappingCallBinding);
+			if (checkedType != null) {
+				js.append("(");
+				js.appendClassReference(checkedType);
+				js.append(")");
+			}
+			MappingParameterBinding asMappingParameterBinding = (MappingParameterBinding)cgMappingCallBinding.getAst();
+			if (asMappingParameterBinding instanceof GuardParameterBinding) {
+				js.appendValueName(cgMappingCallBinding);
+			}
+			else {
+				js.appendValueName(cgMappingCallBinding.getValue());
+			}
+			isFirst = false;
+		}
+		js.append(");\n");
+		//
+		//	End the type check.
+		//
+		for (@SuppressWarnings("null")@NonNull CGMappingCallBinding cgMappingCallBinding : cgMappingCallBindings) {
+			MappingParameterBinding asMappingParameterBinding = (MappingParameterBinding)cgMappingCallBinding.getAst();
+			if (asMappingParameterBinding instanceof AppendParameterBinding) {
+			}
+			else if (asMappingParameterBinding instanceof GuardParameterBinding) {
+				js.popIndentation();
+				js.append("}\n");
+			}
+			else {TypeDescriptor checkedType = needsTypeCheck(cgMappingCallBinding);
+			if (checkedType != null) {
+				js.popIndentation();
+				js.append("}\n");
+			}
+			else if (!cgMappingCallBinding.isNonNull()) {
+				js.popIndentation();
+				js.append("}\n");
+			}
+			}
+		}
+		return true;
+	}
+
 	protected void doMappingConnectionVariable(@NonNull CGGuardVariable cgFreeVariable) {
 		if (cgFreeVariable instanceof CGConnectionVariable) {
 			js.append("final ");
@@ -1051,7 +1233,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 
 	protected void doMappingConstructorConstants(/*@NonNull*/ List<@NonNull CGMapping> cgMappings) {
 		for (@NonNull CGMapping cgMapping : cgMappings) {
-			if (useClass(cgMapping) && (isIncremental || (cgMapping.getFreeVariables().size() > 0))) {
+			if (useClass(cgMapping)) {// && (isIncremental || (cgMapping.getFreeVariables().size() > 0))) {
 				Class<?> constructorClass = isIncremental ? AbstractInvocationConstructor.Incremental.class : AbstractInvocationConstructor.class;
 				js.append("protected final ");
 				js.appendClassReference(true, constructorClass);
@@ -1186,7 +1368,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		js.append("@Override\n");
 		js.append("public boolean run() {\n");
 		js.pushIndentation(null);
-		if (isIncremental) {
+		if (isIncremental || useClass(cgRootMapping)) {
 			js.append(getMappingCtorName(cgRootMapping) + ".invoke();\n");
 			js.append("return invocationManager.flush();\n");
 		}
@@ -1357,17 +1539,11 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		if (alwaysUseClasses) {
 			return true;
 		}
-		Mapping asMapping = ClassUtil.nonNullState((Mapping) cgMapping.getAst());
-		if (QVTimperativeUtil.isObserver(asMapping)) {
+		if (isIncremental) {
 			return true;
 		}
-		for (MappingParameter asParameter : asMapping.getOwnedParameters()) {
-			if (asParameter instanceof AppendParameter) {
-				return true;
-			}
-			if (asParameter instanceof GuardParameter) {		// FIXME only if 'consumes'
-				return true;
-			}
+		if (cgMapping.isUseClass()) {
+			return true;
 		}
 		return false;
 	}
@@ -1795,81 +1971,12 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 				}
 			}
 		}
-		//
-		//	Set loopVariable non-null if it needs to be type-checked and cast to a narrower type.
-		//
-		for (@SuppressWarnings("null")@NonNull CGMappingCallBinding cgMappingCallBinding : cgMappingCallBindings) {
-			TypeDescriptor checkedType = needsTypeCheck(cgMappingCallBinding);
-			if (checkedType != null) {
-				js.append("if (");
-				js.appendValueName(cgMappingCallBinding.getValue());
-				js.append(" instanceof ");
-				js.appendClassReference(checkedType);
-				js.append(") {\n");
-				js.pushIndentation(null);
-			}
-			else if (!cgMappingCallBinding.isNonNull()) {
-				js.append("if (");
-				js.appendValueName(cgMappingCallBinding.getValue());
-				js.append(" != null) {\n");
-				js.pushIndentation(null);
-			}
-		}
-		//
-		//	Emit the mapping call.
-		//
-		Iterable<@NonNull CGMappingCallBinding> iterateBindings = getIterateBindings(cgMappingCallBindings);
-		String mappingCtorName = getMappingCtorName(cgReferredMapping);
-		if (useClass(cgReferredMapping) && (iterateBindings == null)) {
-			for (CGMappingCallBinding cgMappingCallBinding : cgMappingCallBindings) {
-				Element ast = cgMappingCallBinding.getAst();
-				js.append(mappingCtorName);
-				js.append(".");
-				js.append(ast instanceof AppendParameterBinding ? "addAppendedConnection" : "addConsumedConnection");
-				js.append("(");
-				appendConnectionBinding(cgMappingCallBinding);
-				js.append(");\n");
-			}
+		if (useClass(cgReferredMapping)) {
+			return doMappingCall_Class(cgMappingCall);
 		}
 		else {
-			if (useClass(cgReferredMapping)) {
-				js.append(mappingCtorName);
-				js.append(".invoke(");
-			}
-			else {
-				js.append(getMappingName(cgReferredMapping) + "(");
-			}
-			boolean isFirst = true;
-			for (@SuppressWarnings("null")@NonNull CGMappingCallBinding cgMappingCallBinding : cgMappingCallBindings) {
-				if (!isFirst) {
-					js.append(", ");
-				}
-				TypeDescriptor checkedType = needsTypeCheck(cgMappingCallBinding);
-				if (checkedType != null) {
-					js.append("(");
-					js.appendClassReference(checkedType);
-					js.append(")");
-				}
-				js.appendValueName(cgMappingCallBinding.getValue());
-				isFirst = false;
-			}
-			js.append(");\n");
+			return doMappingCall_Function(cgMappingCall);
 		}
-		//
-		//	End the type check.
-		//
-		for (@SuppressWarnings("null")@NonNull CGMappingCallBinding cgMappingCallBinding : cgMappingCallBindings) {
-			TypeDescriptor checkedType = needsTypeCheck(cgMappingCallBinding);
-			if (checkedType != null) {
-				js.popIndentation();
-				js.append("}\n");
-			}
-			else if (!cgMappingCallBinding.isNonNull()) {
-				js.popIndentation();
-				js.append("}\n");
-			}
-		}
-		return true;
 	}
 
 	@Override

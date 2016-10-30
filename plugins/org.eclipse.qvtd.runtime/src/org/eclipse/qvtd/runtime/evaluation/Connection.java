@@ -82,7 +82,11 @@ public interface Connection extends ExecutionVisitable, Nameable
 
 	int getValues();
 
+	//	boolean isQueued();
+
 	void propagate();
+
+	void queue();
 
 	<@NonNull T> @NonNull Iterable<T> typedIterable(Class<T> elementClass);
 }

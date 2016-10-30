@@ -40,7 +40,6 @@ import org.eclipse.ocl.examples.xtext.tests.TestUIUtil;
 import org.eclipse.ocl.examples.xtext.tests.TestUtil;
 import org.eclipse.ocl.examples.xtext.tests.XtextTestCase;
 import org.eclipse.ocl.pivot.Variable;
-import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.debug.core.QVTiDebugTarget;
 import org.eclipse.qvtd.debug.evaluator.QVTiVMRootEvaluationEnvironment;
 import org.eclipse.qvtd.debug.launching.QVTiLaunchConstants;
@@ -238,7 +237,7 @@ public class QVTiDebuggerTests extends XtextTestCase
 		//
 		checkPosition(vmThread, 21, 1067, 1075);
 		checkVariables(vmThread, PC_NAME);
-		checkVariable(vmThread, PC_NAME, NameUtil.getNameable(asTransformation.getRule(), QVTimperativeUtil.ROOT_MAPPING_NAME));
+		checkVariable(vmThread, PC_NAME, QVTimperativeUtil.getRootMapping(asTransformation));
 		//
 		vmThread.stepReturn();
 		TestUIUtil.waitForTerminated(vmThread);

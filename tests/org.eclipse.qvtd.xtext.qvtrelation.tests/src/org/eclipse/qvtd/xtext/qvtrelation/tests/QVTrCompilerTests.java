@@ -53,11 +53,13 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbase;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
+import org.eclipse.qvtd.pivot.qvtimperative.evaluation.Execution2GraphVisitor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiIncrementalExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiTransformationExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
+import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.TestsXMLUtil;
@@ -69,6 +71,7 @@ import org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.Forward2ReverseN
 import org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.PForward2ReversePackage;
 import org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.doublylinkedlistPackage;
 import org.eclipse.qvtd.xtext.qvtrelation.tests.hstm2fstm.FlatStateMachineNormalizer;
+import org.eclipse.qvtd.xtext.qvtrelation.tests.seq2stm.SeqToStm;
 import org.eclipse.xtext.resource.XtextResource;
 import org.junit.After;
 import org.junit.Before;
@@ -129,7 +132,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		} */
 
 		public @NonNull Class<? extends Transformer> buildTransformation(@NonNull String testName, @NonNull String testFileName, @NonNull String outputName,
-				@NonNull String middleNsURI, @NonNull String @NonNull... genModelFiles) throws Exception {
+				@NonNull String middleNsURI, boolean isIncremental, @NonNull String @NonNull... genModelFiles) throws Exception {
 			Map<@NonNull String, @Nullable String> genModelOptions = new HashMap<@NonNull String, @Nullable String>();
 			genModelOptions.put(CompilerChain.GENMODEL_BASE_PREFIX, PROJECT_NAME + "." + testName);
 			genModelOptions.put(CompilerChain.GENMODEL_COPYRIGHT_TEXT, "Copyright (c) 2015, 2016 Willink Transformations and others.\n;All rights reserved. This program and the accompanying materials\n;are made available under the terms of the Eclipse Public License v1.0\n;which accompanies this distribution, and is available at\n;http://www.eclipse.org/legal/epl-v10.html\n;\n;Contributors:\n;  E.D.Willink - Initial API and implementation");
@@ -137,11 +140,19 @@ public class QVTrCompilerTests extends LoadTestCase
 			QVTrCompilerChain.setOption(options, CompilerChain.DEFAULT_STEP, CompilerChain.DEBUG_KEY, true);
 			QVTrCompilerChain.setOption(options, CompilerChain.DEFAULT_STEP, CompilerChain.SAVE_OPTIONS_KEY, TestsXMLUtil.defaultSavingOptions);
 			QVTrCompilerChain.setOption(options, CompilerChain.JAVA_STEP, CompilerChain.URI_KEY, TESTS_JAVA_SRC_URI);
+			QVTrCompilerChain.setOption(options, CompilerChain.JAVA_STEP, CompilerChain.JAVA_INCREMENTAL_KEY, isIncremental);
 			QVTrCompilerChain.setOption(options, CompilerChain.CLASS_STEP, CompilerChain.URI_KEY, TESTS_JAVA_BIN_URI);
 			QVTrCompilerChain.setOption(options, CompilerChain.GENMODEL_STEP, CompilerChain.GENMODEL_USED_GENPACKAGES_KEY, usedGenPackages);
 			QVTrCompilerChain.setOption(options, CompilerChain.GENMODEL_STEP, CompilerChain.GENMODEL_OPTIONS_KEY, genModelOptions);
 			compilerChain = new QVTrCompilerChain(getEnvironmentFactory(), testFolderURI.appendSegment(testFileName), options);
-			Class<? extends Transformer> txClass = compilerChain.build(outputName, genModelFiles);
+			ImperativeTransformation asTransformation = compilerChain.compile(outputName);
+			URI txURI = asTransformation.eResource().getURI();
+			if (txURI != null) {
+				URI inputURI = txURI;
+				URI serializedURI = txURI.trimFileExtension().appendFileExtension("serialized.qvti");
+				doSerialize(inputURI, serializedURI);
+			}
+			Class<? extends Transformer> txClass = compilerChain.generate(asTransformation, genModelFiles);
 			createGeneratedExecutor(txClass);
 			return txClass;
 		}
@@ -247,13 +258,16 @@ public class QVTrCompilerTests extends LoadTestCase
 			}
 		}
 
-		public void executeTransformation() throws Exception {
+		public Transformer executeTransformation() throws Exception {
 			if (interpretedExecutor != null) {
 				interpretedExecutor.execute();
 				interpretedExecutor.saveModels(TestsXMLUtil.defaultSavingOptions);
+				return null;
 			}
 			else {
-				generatedExecutor.getTransformer().run();
+				Transformer transformer = generatedExecutor.getTransformer();
+				transformer.run();
+				return transformer;
 			}
 		}
 
@@ -539,7 +553,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		try {
 			Class<? extends Transformer> txClass = myQVT.buildTransformation("forward2reverse",
 				"Forward2Reverse.qvtr", "reverse",
-					"http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/forward2reverse/Forward2Reverse");//,
+				"http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/forward2reverse/Forward2Reverse", false);//,
 			//					"FlatStateMachine.FlatStateMachinePackage", "HierarchicalStateMachine.HierarchicalStateMachinePackage");
 			myQVT.createGeneratedExecutor(txClass);
 			myQVT.loadInput("forward", "EmptyList.xmi");
@@ -616,7 +630,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		try {
 			Class<? extends Transformer> txClass = myQVT.buildTransformation("HierarchicalStateMachine2FlatStateMachine",
 				"HierarchicalStateMachine2FlatStateMachine.qvtr", "flat",
-					"http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/hstm2fstm/HierarchicalStateMachine2FlatStateMachine");//,
+				"http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/hstm2fstm/HierarchicalStateMachine2FlatStateMachine", false);//,
 			//					"FlatStateMachine.FlatStateMachinePackage", "HierarchicalStateMachine.HierarchicalStateMachinePackage");
 			//
 			myQVT.createGeneratedExecutor(txClass);
@@ -675,12 +689,69 @@ public class QVTrCompilerTests extends LoadTestCase
 		MyQVT myQVT = new MyQVT("seq2stm");
 		try {
 			Class<? extends Transformer> txClass = myQVT.buildTransformation("seq2stm", "SeqToStm.qvtr", "stm",
-					"http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/seq2stm/SeqToStm");//,
+				"http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/seq2stm/SeqToStm", false);//,
 			//					"SeqMM.SeqMMPackage", "PSeqToStm.PSeqToStmPackage");
 			//
 			myQVT.createGeneratedExecutor(txClass);
 			myQVT.loadInput("seqDgm", "Seq.xmi");
 			myQVT.executeTransformation();
+			myQVT.saveOutput("stm", "Stmc_CG.xmi", "Stmc_expected.xmi", null);
+			//
+			//	        myQVT.createGeneratedExecutor(txClass);
+			//	    	myQVT.loadInput("seqDgm", "SeqUM.xmi");
+			//	    	myQVT.executeTransformation();
+			//			myQVT.saveOutput("stm", "StmcUM_CG.xmi", "StmcUM_expected.xmi", null);
+		}
+		finally {
+			myQVT.dispose();
+		}
+	}
+
+	@Test
+	public void testQVTrCompiler_SeqToStm_iCG() throws Exception {
+		//		Splitter.GROUPS.setState(true);
+		//		Splitter.RESULT.setState(true);
+		//		Splitter.STAGES.setState(true);
+		//		AbstractTransformer.EXCEPTIONS.setState(true);
+		//		AbstractTransformer.INVOCATIONS.setState(true);
+		//   	QVTm2QVTp.PARTITIONING.setState(true);
+		MyQVT myQVT = new MyQVT("seq2stm");
+		try {
+			Class<? extends Transformer> txClass = myQVT.buildTransformation("seq2stm", "SeqToStm.qvtr", "stm",
+				"http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/seq2stm/SeqToStm", true);//,
+			//					"SeqMM.SeqMMPackage", "PSeqToStm.PSeqToStmPackage");
+			//
+			myQVT.createGeneratedExecutor(txClass);
+			myQVT.loadInput("seqDgm", "Seq.xmi");
+			Transformer tx = myQVT.executeTransformation();
+			Execution2GraphVisitor.writeGraphMLfile(tx, getProjectFileURI("seq2stm/temp/SeqToStm-incremental.graphml"));
+			myQVT.saveOutput("stm", "Stmc_CG.xmi", "Stmc_expected.xmi", null);
+			//
+			//	        myQVT.createGeneratedExecutor(txClass);
+			//	    	myQVT.loadInput("seqDgm", "SeqUM.xmi");
+			//	    	myQVT.executeTransformation();
+			//			myQVT.saveOutput("stm", "StmcUM_CG.xmi", "StmcUM_expected.xmi", null);
+		}
+		finally {
+			myQVT.dispose();
+		}
+	}
+
+	@Test
+	public void testQVTrCompiler_SeqToStm_iCG2() throws Exception {
+		//		Splitter.GROUPS.setState(true);
+		//		Splitter.RESULT.setState(true);
+		//		Splitter.STAGES.setState(true);
+		AbstractTransformer.EXCEPTIONS.setState(true);
+		AbstractTransformer.INVOCATIONS.setState(true);
+		//   	QVTm2QVTp.PARTITIONING.setState(true);
+		MyQVT myQVT = new MyQVT("seq2stm");
+		try {
+			Class<? extends Transformer> txClass = SeqToStm.class;
+			myQVT.createGeneratedExecutor(txClass);
+			myQVT.loadInput("seqDgm", "Seq.xmi");
+			Transformer tx = myQVT.executeTransformation();
+			Execution2GraphVisitor.writeGraphMLfile(tx, getProjectFileURI("seq2stm/temp/SeqToStm-incremental.graphml"));
 			myQVT.saveOutput("stm", "Stmc_CG.xmi", "Stmc_expected.xmi", null);
 			//
 			//	        myQVT.createGeneratedExecutor(txClass);

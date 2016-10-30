@@ -365,8 +365,7 @@ public abstract class BasicQVTiExecutor extends AbstractExecutor implements QVTi
 
 	@Override
 	public @Nullable Object internalExecuteTransformation(@NonNull ImperativeTransformation transformation, @NonNull EvaluationVisitor undecoratedVisitor) {
-		Mapping rule = QVTimperativeUtil.getOwnedMapping(transformation, QVTimperativeUtil.ROOT_MAPPING_NAME);
-		//		assert rule == transformation.getRule().get(0);
+		Mapping rule = QVTimperativeUtil.getRootMapping(transformation);
 		CallExp callExp = PivotFactory.eINSTANCE.createOperationCallExp();		// FIXME TransformationCallExp
 		pushEvaluationEnvironment(rule, (TypedElement)callExp);
 		try {

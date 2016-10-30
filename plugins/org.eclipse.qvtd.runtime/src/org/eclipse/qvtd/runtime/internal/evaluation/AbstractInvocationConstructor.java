@@ -321,6 +321,7 @@ public abstract class AbstractInvocationConstructor implements InvocationConstru
 		else {
 			firstConsumer = new Consumer(this, valuesCount, 0, connection);
 		}
+		connection.queue();
 		valuesCount++;
 	}
 

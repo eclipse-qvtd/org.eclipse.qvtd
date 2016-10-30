@@ -48,6 +48,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
@@ -265,8 +266,15 @@ public class QVTimperativeUtil extends QVTbaseUtil
 	}
 
 	@SuppressWarnings("unchecked")
+	public static @NonNull Iterable<@NonNull MappingParameter> getOwnedMappingParameters(@NonNull Mapping mapping) {
+		Object ownedParameters = mapping.getOwnedParameters();
+		return (@NonNull Iterable<@NonNull MappingParameter>)ownedParameters;
+	}
+
+	@SuppressWarnings("unchecked")
 	public static @NonNull Iterable<@NonNull Mapping> getOwnedMappings(@NonNull ImperativeTransformation transformation) {
-		return (@NonNull Iterable<@NonNull Mapping>)(Object)transformation.getRule();
+		Object rule = transformation.getRule();
+		return (@NonNull Iterable<@NonNull Mapping>)rule;
 	}
 
 	public static @NonNull ImperativeTypedModel getOwnedTypedModel(@NonNull ImperativeTransformation transformation, @Nullable String name) {
@@ -275,7 +283,14 @@ public class QVTimperativeUtil extends QVTbaseUtil
 
 	@SuppressWarnings("unchecked")
 	public static @NonNull Iterable<@NonNull ImperativeTypedModel> getOwnedTypedModels(@NonNull ImperativeTransformation transformation) {
-		return (@NonNull Iterable<@NonNull ImperativeTypedModel>)(Object)transformation.getModelParameter();
+		Object modelParameter = transformation.getModelParameter();
+		return (@NonNull Iterable<@NonNull ImperativeTypedModel>)modelParameter;
+	}
+
+	public static @NonNull Mapping getRootMapping(@NonNull ImperativeTransformation transformation) {
+		Mapping mapping = getOwnedMapping(transformation, QVTimperativeUtil.ROOT_MAPPING_NAME);
+		//		assert mapping == transformation.getRule().get(0);
+		return mapping;
 	}
 
 	public static @NonNull Property getTargetProperty(@NonNull SetStatement asSetStatement) {

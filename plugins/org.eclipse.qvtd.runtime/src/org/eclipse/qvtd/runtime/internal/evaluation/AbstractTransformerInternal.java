@@ -546,6 +546,7 @@ public abstract class AbstractTransformerInternal extends AbstractModelManager i
 		return new LazyInvocationManager(executor);
 	}
 
+	@Deprecated // Use createConnection
 	protected SetValue.@NonNull Accumulator createUnenforcedSetAccumulatorValue(@NonNull CollectionTypeId typeId) {
 		return new UnenforcedSetAccumulator(typeId);
 	}

@@ -333,12 +333,13 @@ public class IncrementalObjectManager extends AbstractObjectManager
 	{
 		public ManyToManySlotState(@NonNull Object eObject, @NonNull EStructuralFeature eFeature) {
 			super(eObject, eFeature);
-			throw new UnsupportedOperationException();
+			//			throw new UnsupportedOperationException();
 		}
 
 		@Override
 		public synchronized void assigned(@NonNull Object eObject, @NonNull EStructuralFeature eFeature, @Nullable Object ecoreValue) {
 			throw new UnsupportedOperationException();
+			// ?? identify the mesh of M:N objects and set all of them assigned
 		}
 	}
 

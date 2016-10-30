@@ -162,9 +162,7 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 				options.setPackagePrefix(javaExtraPrefix);
 			}
 			Boolean javaIsIncremental = compilerChain.getOption(JAVA_STEP, JAVA_INCREMENTAL_KEY);
-			if (javaIsIncremental != null) {
-				options.setIsIncremental(true);
-			}
+			options.setIsIncremental(javaIsIncremental == Boolean.TRUE);
 			String javaCodeSource;
 			try {
 				javaCodeSource = cg.generateClassFile();
@@ -417,9 +415,7 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 	@Override
 	public @NonNull Class<? extends Transformer> build(@NonNull String enforcedOutputName, @NonNull String ... genModelFiles) throws Exception {
 		ImperativeTransformation asTransformation = compile(enforcedOutputName);
-		JavaResult javaResult = qvti2java(asTransformation, genModelFiles);
-		Class<? extends Transformer> txClass = java2class(javaResult);
-		return txClass;
+		return generate(asTransformation, genModelFiles);
 	}
 
 	@Override
@@ -498,6 +494,11 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 
 	@Override
 	public void dispose() {}
+
+	public @NonNull Class<? extends Transformer> generate(@NonNull ImperativeTransformation asTransformation, @NonNull String... genModelFiles) throws Exception {
+		JavaResult javaResult = qvti2java(asTransformation, genModelFiles);
+		return java2class(javaResult);
+	}
 
 	@Override
 	public @NonNull QVTiEnvironmentFactory getEnvironmentFactory() {

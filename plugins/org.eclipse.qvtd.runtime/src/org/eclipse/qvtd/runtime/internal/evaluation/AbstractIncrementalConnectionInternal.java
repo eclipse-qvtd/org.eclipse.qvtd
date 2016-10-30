@@ -138,7 +138,7 @@ public abstract class AbstractIncrementalConnectionInternal extends AbstractConn
 	public void consume(int elementIndex, @NonNull Invocation invocation) {
 		List<@NonNull Object> valueAndConsumingInvocations = listOfValueAndConsumingInvocations.get(elementIndex);
 		assert valueAndConsumingInvocations != null;
-		assert !valueAndConsumingInvocations.contains(invocation);		// Earlier indexes cannot be the invocation, so no need for a sub-list
+		//		assert !valueAndConsumingInvocations.contains(invocation);		// Earlier indexes cannot be the invocation, so no need for a sub-list
 		valueAndConsumingInvocations.add(invocation);
 		// FIXME empty status if all consumers at final index
 		// invocationManager.dequeue(this);

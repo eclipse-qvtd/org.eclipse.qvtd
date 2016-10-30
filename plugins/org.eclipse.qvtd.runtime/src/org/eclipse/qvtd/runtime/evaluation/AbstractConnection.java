@@ -74,6 +74,11 @@ public abstract class AbstractConnection implements Connection
 		return nextConnection;
 	}
 
+	//	@Override
+	public boolean isQueued() {
+		return isQueued;
+	}
+
 	@Override
 	public void propagate() {
 		for (@NonNull InvocationConstructor consumer : consumers) {
@@ -81,7 +86,8 @@ public abstract class AbstractConnection implements Connection
 		}
 	}
 
-	protected final void queue() {
+	@Override
+	public final void queue() {
 		if (!isQueued) {
 			isQueued = true;
 			interval.queue(this);
@@ -95,7 +101,7 @@ public abstract class AbstractConnection implements Connection
 
 	public void setNextConnection(@NonNull AbstractConnection nextConnection) {
 		assert nextConnection != this;
-		assert isQueued;
+		//		assert isQueued;
 		this.nextConnection = nextConnection;
 	}
 

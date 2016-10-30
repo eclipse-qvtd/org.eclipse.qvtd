@@ -20,7 +20,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.evaluation.ModelManager;
-import org.eclipse.ocl.pivot.ids.CollectionTypeId;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.evaluation.AbstractExecutor;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal.EnvironmentFactoryInternalExtension;
@@ -97,8 +96,7 @@ public class RuntimeConnectionTests extends TestCase
 
 		public @NonNull TestConnection createConsumedConnection() {
 			String name = "connection" + testConnections.size();
-			CollectionTypeId typeId = TypeId.SET.getSpecializedId(TypeId.INTEGER);
-			TestConnection testConnection = new TestConnection(invocationManager.getRootInterval(), name, typeId);
+			TestConnection testConnection = new TestConnection(invocationManager.getRootInterval(), name, TypeId.INTEGER);
 			addConsumedConnection(testConnection);
 			return testConnection;
 		}
@@ -205,7 +203,7 @@ public class RuntimeConnectionTests extends TestCase
 	{
 		private Integer counter = 0;
 
-		public TestConnection(@NonNull Interval interval, @NonNull String name, @NonNull CollectionTypeId typeId) {
+		public TestConnection(@NonNull Interval interval, @NonNull String name, @NonNull TypeId typeId) {
 			super(interval, name, typeId);
 		}
 
