@@ -12,14 +12,13 @@ package org.eclipse.qvtd.runtime.evaluation;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.ids.IdResolver;
-import org.eclipse.ocl.pivot.utilities.Nameable;
 
 /**
  * An Invocation identifies a unique invocation of a Mapping and the objects/values bound to its guard variables.
  *
  * @noimplement clients should derive from AbstractInvocation
  */
-public interface Invocation extends ExecutionVisitable, Nameable
+public interface Invocation extends Execution
 {
 	/**
 	 * Execute the mapping invocation, returning true if successfully executed, or false if some predicate failed.
@@ -46,14 +45,10 @@ public interface Invocation extends ExecutionVisitable, Nameable
 
 	void unblock();
 
-	public interface Incremental extends Invocation
+	public interface Incremental extends Invocation, Execution.Incremental
 	{
 		void addCreatedObject(@NonNull Object createdObject);
-		void addReadSlot(SlotState.@NonNull Incremental readSlot);
 		void addWriteSlot(SlotState.@NonNull Incremental writeSlot);
-		@NonNull Iterable<@NonNull Object> getCreatedObjects();
-		@Override
-		@NonNull String getName();
 		@NonNull Iterable<SlotState.@NonNull Incremental> getReadSlots();
 		@NonNull Iterable<SlotState.@NonNull Incremental> getWriteSlots();
 		//		void invalidate();

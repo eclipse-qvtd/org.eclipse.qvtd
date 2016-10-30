@@ -112,9 +112,9 @@ import org.eclipse.qvtd.pivot.qvtimperative.ObservableStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiTransformationAnalysis;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
+import org.eclipse.qvtd.runtime.evaluation.AbstractComputation;
 import org.eclipse.qvtd.runtime.evaluation.AbstractInvocation;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
-import org.eclipse.qvtd.runtime.evaluation.AbstractValueOccurrence;
 import org.eclipse.qvtd.runtime.evaluation.Connection;
 import org.eclipse.qvtd.runtime.evaluation.InvocationConstructor;
 import org.eclipse.qvtd.runtime.evaluation.InvocationManager;
@@ -1730,7 +1730,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 					js.append("protected class ");
 					js.append(functionName);
 					js.append(" extends ");
-					js.appendClassReference(/*isIncremental ? AbstractIdentification.Incremental.class :*/ AbstractValueOccurrence.class);
+					js.appendClassReference(isIncremental ? AbstractComputation.Incremental.class : AbstractComputation.class);
 					js.pushClassBody(functionName);
 					js.append("protected final ");
 					js.appendTypeDeclaration(cgFunction);
@@ -1750,7 +1750,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 					js.append("protected class ");
 					js.append(functionName);
 					js.append(" extends ");
-					js.appendClassReference(/*isIncremental ? AbstractIdentification.Incremental.class :*/ AbstractValueOccurrence.class);
+					js.appendClassReference(isIncremental ? AbstractComputation.Incremental.class : AbstractComputation.class);
 					js.pushClassBody(functionName);
 					js.append("protected final ");
 					js.appendIsRequired(true);

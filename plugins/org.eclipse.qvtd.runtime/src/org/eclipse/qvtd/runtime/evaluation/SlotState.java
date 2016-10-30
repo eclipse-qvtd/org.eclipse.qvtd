@@ -43,11 +43,11 @@ public interface SlotState extends ExecutionVisitable
 	public interface Incremental extends SlotState
 	{
 		void addSourceInternal(Invocation.@NonNull Incremental invocation);
-		void addTargetInternal(Invocation.@NonNull Incremental invocation);
+		void addTargetInternal(Execution.@NonNull Incremental invocation);
 		@NonNull EStructuralFeature getEFeature();
 		SlotState.@NonNull Incremental getPrimarySlotState();
 		@Nullable Object getValue();
 		@NonNull Iterable<Invocation.@NonNull Incremental> getSources();
-		@NonNull Iterable<Invocation.@NonNull Incremental> getTargets();
+		@NonNull Iterable<Execution.@NonNull Incremental> getTargets();
 	}
 }

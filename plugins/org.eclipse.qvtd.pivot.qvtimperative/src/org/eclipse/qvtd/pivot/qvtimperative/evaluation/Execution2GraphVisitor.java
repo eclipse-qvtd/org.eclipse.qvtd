@@ -36,7 +36,9 @@ import org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.AttributeStatus;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.ClassStatus;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.PropertyStatus;
 import org.eclipse.qvtd.runtime.evaluation.AbstractExecutionVisitor;
+import org.eclipse.qvtd.runtime.evaluation.Computation;
 import org.eclipse.qvtd.runtime.evaluation.Connection;
+import org.eclipse.qvtd.runtime.evaluation.Execution;
 import org.eclipse.qvtd.runtime.evaluation.Interval;
 import org.eclipse.qvtd.runtime.evaluation.Invocation;
 import org.eclipse.qvtd.runtime.evaluation.InvocationConstructor;
@@ -103,6 +105,7 @@ public class Execution2GraphVisitor extends AbstractExecutionVisitor<@Nullable O
 
 	private Map<@NonNull AssociationStatus, @NonNull String> associationId = new HashMap<>();
 	private Map<@NonNull ClassStatus, @NonNull String> classId = new HashMap<>();
+	private Map<@NonNull Computation, @NonNull GraphNode> computation2node = new HashMap<>();
 	private Map<@NonNull Connection, @NonNull GraphNode> connection2node = new HashMap<>();
 	private Map<@NonNull Interval, @NonNull GraphNode> interval2node = new HashMap<>();
 	private Map<@NonNull Invocation, @NonNull GraphNode> invocation2node = new HashMap<>();
@@ -177,6 +180,36 @@ public class Execution2GraphVisitor extends AbstractExecutionVisitor<@Nullable O
 		return id;
 	}
 
+	protected @NonNull GraphNode getComputationNode(@NonNull Computation object) {
+		GraphNode node = computation2node.get(object);
+		if (node == null) {
+			//			id = object.getReferredMappingCall().getReferredMapping().getName() + "-" + (mappingId.size() + 1);
+			final String label = object.getName();
+			//			final String label;
+			//			if (object instanceof EObject) {
+			//				label = ((EObject)object).eClass().getName() + "-" + (invocation2node.size() + 1);
+			//			}
+			//			else {
+			//				label = object.toString().replace("@",  "\n@");
+			//				label = object.getClass().getSimpleName() + "-" + (invocation2node.size() + 1);
+			//			}
+			node = new GraphNode()
+			{
+				@Override
+				public void appendNode(@NonNull GraphStringBuilder s, @NonNull String nodeName) {
+					s.setLabel(label);
+					s.setShape("hexagon");
+					s.setColor("brown");
+					//					context.appendNode(mappingId, "hexagon", "#ffcc00", 30, 150, mappingId.replace("-",  "\n"));
+					s.appendAttributedNode(nodeName);
+				}
+			};
+			computation2node.put(object, node);
+			context.appendNode(node);
+		}
+		return node;
+	}
+
 	protected @NonNull GraphNode getConnectionNode(@NonNull Connection object) {
 		GraphNode node = connection2node.get(object);
 		if (node == null) {
@@ -195,6 +228,18 @@ public class Execution2GraphVisitor extends AbstractExecutionVisitor<@Nullable O
 			context.appendNode(node);
 		}
 		return node;
+	}
+
+	protected @NonNull GraphNode getExecutionNode(@NonNull Execution object) {
+		if (object instanceof Computation) {
+			return  getComputationNode((@NonNull Computation) object);
+		}
+		else if (object instanceof Invocation) {
+			return  getInvocationNode((@NonNull Invocation) object);
+		}
+		else {
+			throw new UnsupportedOperationException();
+		}
 	}
 
 	protected @NonNull GraphNode getIntervalNode(@NonNull Interval object) {
@@ -347,6 +392,13 @@ public class Execution2GraphVisitor extends AbstractExecutionVisitor<@Nullable O
 			context.appendNode(node);
 		}
 		return node;
+	}
+
+	@Override
+	public @Nullable String visitComputation(@NonNull Computation object) {
+		@SuppressWarnings("unused")
+		GraphNode computationNode = getComputationNode(object);
+		return null;
 	}
 
 	@Override
@@ -511,7 +563,7 @@ public class Execution2GraphVisitor extends AbstractExecutionVisitor<@Nullable O
 
 	@Override
 	public @Nullable String visitObjectManager(@NonNull ObjectManager objectManager) {
-		Set<Invocation.@NonNull Incremental> allInvocations = new HashSet<>();
+		Set<Execution.@NonNull Incremental> allExecutions = new HashSet<>();
 		Set<SlotState.@NonNull Incremental> allSlots = new HashSet<>();
 		Map<@NonNull Object, @NonNull List<SlotState.@NonNull Incremental>> object2slots = new HashMap<>();
 		for (@NonNull Object object : objectManager.getObjects()) {
@@ -525,14 +577,14 @@ public class Execution2GraphVisitor extends AbstractExecutionVisitor<@Nullable O
 			object2slots.put(object, objectSlots);
 		}
 		for (SlotState.@NonNull Incremental slotState : allSlots) {
-			Iterables.addAll(allInvocations, slotState.getSources());
-			Iterables.addAll(allInvocations, slotState.getTargets());
+			Iterables.addAll(allExecutions, slotState.getSources());
+			Iterables.addAll(allExecutions, slotState.getTargets());
 			slotState.accept(this);
 		}
-		for (Invocation.@NonNull Incremental invocation : allInvocations) {
-			invocation.accept(this);
-			GraphNode invocationNode = getInvocationNode(invocation);
-			for (@NonNull Object createdObject : invocation.getCreatedObjects()) {
+		for (Execution.@NonNull Incremental execution : allExecutions) {
+			execution.accept(this);
+			GraphNode invocationNode = getExecutionNode(execution);
+			for (@NonNull Object createdObject : execution.getCreatedObjects()) {
 				GraphNode objectNode = getObjectNode(createdObject);
 				appendEdge(invocationNode, objectNode, "green", null);
 			}
@@ -543,10 +595,10 @@ public class Execution2GraphVisitor extends AbstractExecutionVisitor<@Nullable O
 			for (@NonNull Invocation invocation : slotState.getSources()) {
 				appendEdge(getInvocationNode(invocation), slotNode, "green", null);
 			}
-			for (@NonNull Invocation invocation : slotState.getTargets()) {
-				appendEdge(slotNode, getInvocationNode(invocation), "cyan", null);
+			for (@NonNull Execution invocation : slotState.getTargets()) {
+				appendEdge(slotNode, getExecutionNode(invocation), "cyan", null);
 			}
-			Iterables.addAll(allInvocations, slotState.getTargets());
+			Iterables.addAll(allExecutions, slotState.getTargets());
 		}
 		for (@NonNull Object object : objectManager.getObjects()) {
 			GraphNode objectNode = getObjectNode(object);

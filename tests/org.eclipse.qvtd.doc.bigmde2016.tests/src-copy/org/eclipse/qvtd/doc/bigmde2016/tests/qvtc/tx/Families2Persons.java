@@ -26,8 +26,8 @@ import org.eclipse.qvtd.doc.bigmde2016.tests.qvtc.Families2Persons.Families2Pers
 import org.eclipse.qvtd.doc.bigmde2016.tests.qvtc.Families2Persons.Families2PersonsPackage;
 import org.eclipse.qvtd.doc.bigmde2016.tests.qvtc.Persons.PersonsFactory;
 import org.eclipse.qvtd.doc.bigmde2016.tests.qvtc.Persons.PersonsPackage;
+import org.eclipse.qvtd.runtime.evaluation.AbstractComputation;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
-import org.eclipse.qvtd.runtime.evaluation.AbstractValueOccurrence;
 import org.eclipse.qvtd.runtime.evaluation.TransformationExecutor;
 import org.eclipse.qvtd.runtime.internal.evaluation.AbstractComputationConstructor;
 import org.eclipse.qvtd.runtime.library.model.ModelObjectsOfKindOperation;
@@ -116,7 +116,7 @@ public class Families2Persons extends AbstractTransformer
 	/**
 	 * ::isFemale(member : Families::Member[1]) : Boolean[1]
 	 */
-	protected class FUN_isFemale extends AbstractValueOccurrence
+	protected class FUN_isFemale extends AbstractComputation
 	{
 		protected final @NonNull Families2Persons self;
 		protected /*@NonInvalid*/ org.eclipse.qvtd.doc.bigmde2016.tests.qvtc.Families.@org.eclipse.jdt.annotation.NonNull Member member;
@@ -188,7 +188,7 @@ public class Families2Persons extends AbstractTransformer
 	/**
 	 * ::familyName(member : Families::Member[1]) : String[1]
 	 */
-	protected class FUN_familyName extends AbstractValueOccurrence
+	protected class FUN_familyName extends AbstractComputation
 	{
 		protected final @NonNull Families2Persons self;
 		protected /*@NonInvalid*/ org.eclipse.qvtd.doc.bigmde2016.tests.qvtc.Families.@org.eclipse.jdt.annotation.NonNull Member member_0;

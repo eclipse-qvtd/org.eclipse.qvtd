@@ -59,7 +59,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiIncrementalExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiTransformationExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
-import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.TestsXMLUtil;
@@ -631,7 +630,6 @@ public class QVTrCompilerTests extends LoadTestCase
 			Class<? extends Transformer> txClass = myQVT.buildTransformation("HierarchicalStateMachine2FlatStateMachine",
 				"HierarchicalStateMachine2FlatStateMachine.qvtr", "flat",
 				"http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/hstm2fstm/HierarchicalStateMachine2FlatStateMachine", false);//,
-			//					"FlatStateMachine.FlatStateMachinePackage", "HierarchicalStateMachine.HierarchicalStateMachinePackage");
 			//
 			myQVT.createGeneratedExecutor(txClass);
 			myQVT.loadInput("hier", "MiniModel.xmi");
@@ -647,11 +645,44 @@ public class QVTrCompilerTests extends LoadTestCase
 			myQVT.loadInput("hier", "LargerModel.xmi");
 			myQVT.executeTransformation();
 			myQVT.saveOutput("flat", "LargerModel_CG.xmi", "LargerModel_expected.xmi", FlatStateMachineNormalizer.INSTANCE);
+		}
+		finally {
+			myQVT.dispose();
+		}
+	}
+
+	@Test
+	public void testQVTrCompiler_HierarchicalStateMachine2FlatStateMachine_iCG() throws Exception {
+		//		Splitter.RESULT.setState(true);
+		//		Splitter.STAGES.setState(true);
+		//		Scheduler.DEBUG_GRAPHS.setState(true);
+		//		AbstractTransformer.EXCEPTIONS.setState(true);
+		//		AbstractTransformer.INVOCATIONS.setState(true);
+		//   	QVTm2QVTp.PARTITIONING.setState(true);
+		//		QVTr2QVTc.VARIABLES.setState(true);
+		MyQVT myQVT = new MyQVT("hstm2fstm");
+		try {
+			Class<? extends Transformer> txClass = myQVT.buildTransformation("HierarchicalStateMachine2FlatStateMachine",
+				"HierarchicalStateMachine2FlatStateMachine.qvtr", "flat",
+				"http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/hstm2fstm/HierarchicalStateMachine2FlatStateMachine", true);//,
 			//
-			//	        myQVT.createGeneratedExecutor(txClass);
-			//	    	myQVT.loadInput("seqDgm", "SeqUM.xmi");
-			//	    	myQVT.executeTransformation();
-			//			myQVT.saveOutput("stm", "StmcUM_CG.xmi", "StmcUM_expected.xmi", null);
+			myQVT.createGeneratedExecutor(txClass);
+			myQVT.loadInput("hier", "MiniModel.xmi");
+			Transformer tx = myQVT.executeTransformation();
+			Execution2GraphVisitor.writeGraphMLfile(tx, getProjectFileURI("hstm2fstm/temp/MiniModel-incremental.graphml"));
+			myQVT.saveOutput("flat", "MiniModel_CG.xmi", "MiniModel_expected.xmi", FlatStateMachineNormalizer.INSTANCE);
+			//
+			myQVT.createGeneratedExecutor(txClass);
+			myQVT.loadInput("hier", "SimpleModel.xmi");
+			tx = myQVT.executeTransformation();
+			Execution2GraphVisitor.writeGraphMLfile(tx, getProjectFileURI("hstm2fstm/temp/SimpleModel-incremental.graphml"));
+			myQVT.saveOutput("flat", "SimpleModel_CG.xmi", "SimpleModel_expected.xmi", FlatStateMachineNormalizer.INSTANCE);
+			//
+			myQVT.createGeneratedExecutor(txClass);
+			myQVT.loadInput("hier", "LargerModel.xmi");
+			tx = myQVT.executeTransformation();
+			Execution2GraphVisitor.writeGraphMLfile(tx, getProjectFileURI("hstm2fstm/temp/LargerModel-incremental.graphml"));
+			myQVT.saveOutput("flat", "LargerModel_CG.xmi", "LargerModel_expected.xmi", FlatStateMachineNormalizer.INSTANCE);
 		}
 		finally {
 			myQVT.dispose();
@@ -742,8 +773,8 @@ public class QVTrCompilerTests extends LoadTestCase
 		//		Splitter.GROUPS.setState(true);
 		//		Splitter.RESULT.setState(true);
 		//		Splitter.STAGES.setState(true);
-		AbstractTransformer.EXCEPTIONS.setState(true);
-		AbstractTransformer.INVOCATIONS.setState(true);
+		//		AbstractTransformer.EXCEPTIONS.setState(true);
+		//		AbstractTransformer.INVOCATIONS.setState(true);
 		//   	QVTm2QVTp.PARTITIONING.setState(true);
 		MyQVT myQVT = new MyQVT("seq2stm");
 		try {

@@ -22,7 +22,7 @@ import org.eclipse.ocl.pivot.ids.IdResolver;
  *
  * @noimplement clients should derive from AbstractIdentification
  */
-public interface Computation extends ExecutionVisitable
+public interface Computation extends Execution
 {
 	@Nullable Object getResult();
 
@@ -40,7 +40,7 @@ public interface Computation extends ExecutionVisitable
 		public @NonNull Computation getUniqueComputation(@Nullable Object @NonNull ... argValues);
 	}
 
-	public interface Incremental extends Computation
+	public interface Incremental extends Computation, Execution.Incremental
 	{
 	}
 }

@@ -50,7 +50,7 @@ public interface ObjectManager extends ExecutionVisitable
 	void getting(@NonNull Object eObject, /*@NonNull*/ EStructuralFeature eFeature, boolean isOpposite) throws InvocationFailedException;
 
 	/**
-	 * Identify that the read of eFeature of eObject return ecoreValue.
+	 * Identify that the read of eFeature of eObject returns ecoreValue.
 	 */
-	void got(Invocation.@NonNull Incremental invocation, @NonNull Object eObject, /*@NonNull*/ EStructuralFeature eFeature, @Nullable Object ecoreValue);
+	void got(Execution.@NonNull Incremental invocation, @NonNull Object eObject, /*@NonNull*/ EStructuralFeature eFeature, @Nullable Object ecoreValue);
 }
