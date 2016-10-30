@@ -67,10 +67,7 @@ import org.eclipse.qvtd.xtext.qvtimperative.tests.ModelNormalizer;
 import org.eclipse.qvtd.xtext.qvtimperative.tests.QVTiTestUtil;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage;
 import org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.Forward2ReverseNormalizer;
-import org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.PForward2ReversePackage;
-import org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.doublylinkedlistPackage;
 import org.eclipse.qvtd.xtext.qvtrelation.tests.hstm2fstm.FlatStateMachineNormalizer;
-import org.eclipse.qvtd.xtext.qvtrelation.tests.seq2stm.SeqToStm;
 import org.eclipse.xtext.resource.XtextResource;
 import org.junit.After;
 import org.junit.Before;
@@ -281,6 +278,10 @@ public class QVTrCompilerTests extends LoadTestCase
 			return saveOptions;
 		}
 
+		public @NonNull URI getURI(@NonNull String genmodelStep, @NonNull Key<URI> uriKey) {
+			return compilerChain.getURI(CompilerChain.GENMODEL_STEP, CompilerChain.URI_KEY);
+		}
+
 		public void installClassName(@NonNull String className) throws ClassNotFoundException, NoSuchFieldException, IllegalAccessException {
 			Class<?> middleClass = Class.forName(className);
 			Field middleField = middleClass.getDeclaredField("eINSTANCE");
@@ -330,6 +331,13 @@ public class QVTrCompilerTests extends LoadTestCase
 			}
 		}
 
+		public void removeRegisteredPackage(@NonNull String ePackageClassName) throws NoSuchFieldException, IllegalAccessException, ClassNotFoundException {
+			Class<?> ePackageClass = Class.forName(ePackageClassName);
+			Field eNsURIField = ePackageClass.getField("eNS_URI");
+			String nsURI = String.valueOf(eNsURIField.get(null));
+			EPackage.Registry.INSTANCE.remove(nsURI);
+		}
+
 		public @NonNull Resource saveOutput(@NonNull String modelName, @NonNull String modelFile, @Nullable String expectedFile, @Nullable ModelNormalizer normalizer) throws IOException, InterruptedException {
 			URI modelURI = samplesBaseUri.appendSegment(modelFile);
 			ResourceSet resourceSet = /*getResourceSet()*/environmentFactory.getMetamodelManager().getASResourceSet();
@@ -347,10 +355,6 @@ public class QVTrCompilerTests extends LoadTestCase
 				checkOutput(outputResource, expectedFile, normalizer);
 			}
 			return outputResource;
-		}
-
-		public @NonNull URI getURI(@NonNull String genmodelStep, @NonNull Key<URI> uriKey) {
-			return compilerChain.getURI(CompilerChain.GENMODEL_STEP, CompilerChain.URI_KEY);
 		}
 	}
 
@@ -576,8 +580,8 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 		finally {
 			myQVT.dispose();
-			EPackage.Registry.INSTANCE.remove(doublylinkedlistPackage.eNS_URI);
-			EPackage.Registry.INSTANCE.remove(PForward2ReversePackage.eNS_URI);
+			myQVT.removeRegisteredPackage("org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.doublylinkedlistPackage");
+			myQVT.removeRegisteredPackage("org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.PForward2ReversePackage");
 		}
 	}
 
@@ -768,7 +772,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 	}
 
-	@Test
+	/*	@Test
 	public void testQVTrCompiler_SeqToStm_iCG2() throws Exception {
 		//		Splitter.GROUPS.setState(true);
 		//		Splitter.RESULT.setState(true);
@@ -793,7 +797,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		finally {
 			myQVT.dispose();
 		}
-	}
+	} */
 
 	/*	@Test
 	public void testQVTrCompiler_SimplerRel2Core_CG() throws Exception {
