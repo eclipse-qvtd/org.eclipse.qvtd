@@ -59,6 +59,8 @@
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="transformation" lowerBound="1"
         eType="#//CGTransformation" resolveProxies="false" eOpposite="#//CGTransformation/mappings"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="useClass" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CGMappingCall" eSuperTypes="../../org.eclipse.ocl.examples.codegen/model/cgmodel.ecore#//CGValuedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="mappingCallBindings" upperBound="-1"

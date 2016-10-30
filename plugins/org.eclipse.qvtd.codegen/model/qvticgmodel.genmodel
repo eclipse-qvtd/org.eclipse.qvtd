@@ -49,6 +49,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGMapping/body"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGMapping/freeVariables"/>
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGMapping/transformation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute qvticgmodel.ecore#//CGMapping/useClass"/>
     </genClasses>
     <genClasses ecoreClass="qvticgmodel.ecore#//CGMappingCall">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference qvticgmodel.ecore#//CGMappingCall/mappingCallBindings"/>
