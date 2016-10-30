@@ -1540,13 +1540,22 @@ public interface QVTiCGModelPackage extends EPackage {
 	int CG_MAPPING__TRANSFORMATION = CGModelPackage.CG_NAMED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Use Class</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_MAPPING__USE_CLASS = CGModelPackage.CG_NAMED_ELEMENT_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>CG Mapping</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CG_MAPPING_FEATURE_COUNT = CGModelPackage.CG_NAMED_ELEMENT_FEATURE_COUNT + 3;
+	int CG_MAPPING_FEATURE_COUNT = CGModelPackage.CG_NAMED_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Ast</b></em>' attribute.
@@ -2628,6 +2637,17 @@ public interface QVTiCGModelPackage extends EPackage {
 	EReference getCGMapping_Transformation();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMapping#isUseClass <em>Use Class</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Use Class</em>'.
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGMapping#isUseClass()
+	 * @see #getCGMapping()
+	 * @generated
+	 */
+	EAttribute getCGMapping_UseClass();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation <em>CG Transformation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3168,6 +3188,14 @@ public interface QVTiCGModelPackage extends EPackage {
 		 * @generated
 		 */
 		EReference CG_MAPPING__TRANSFORMATION = eINSTANCE.getCGMapping_Transformation();
+
+		/**
+		 * The meta object literal for the '<em><b>Use Class</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CG_MAPPING__USE_CLASS = eINSTANCE.getCGMapping_UseClass();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGTransformationImpl <em>CG Transformation</em>}' class.

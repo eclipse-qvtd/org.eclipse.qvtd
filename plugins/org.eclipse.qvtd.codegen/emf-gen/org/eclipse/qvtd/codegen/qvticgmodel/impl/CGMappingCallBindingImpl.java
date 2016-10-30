@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
@@ -202,51 +202,6 @@ public class CGMappingCallBindingImpl extends CGValuedElementImpl implements CGM
 	@Override
 	public @Nullable EClassifier getEcoreClassifier() {
 		return value != null ? value.getEcoreClassifier() : null;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * @generated
-	 */
-	@Override
-	public @NonNull CGValuedElement getNamedValue() {
-		return value != null ? value.getNamedValue() : this;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * @generated
-	 */
-	@Override
-	public @NonNull CGValuedElement getReferredValue() {
-		return value != null ? value : this;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * @generated
-	 */
-	@Override
-	public @NonNull CGValuedElement getSourceValue() {
-		return value != null ? value.getSourceValue() : this;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * @generated
-	 */
-	@Override
-	public @NonNull CGValuedElement getTypedValue() {
-		return value != null ? value.getTypedValue() : this;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * @generated
-	 */
-	@Override
-	public @Nullable String getValueName() {
-		return value != null ? value.getValueName() : null;
 	}
 
 	/**

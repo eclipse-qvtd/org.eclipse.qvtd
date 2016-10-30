@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
@@ -48,6 +48,7 @@ import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGMappingImpl#getBody <em>Body</em>}</li>
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGMappingImpl#getFreeVariables <em>Free Variables</em>}</li>
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGMappingImpl#getTransformation <em>Transformation</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGMappingImpl#isUseClass <em>Use Class</em>}</li>
  * </ul>
  *
  * @generated
@@ -72,6 +73,26 @@ public class CGMappingImpl extends CGNamedElementImpl implements CGMapping {
 	 * @ordered
 	 */
 	protected EList<CGGuardVariable> freeVariables;
+
+	/**
+	 * The default value of the '{@link #isUseClass() <em>Use Class</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isUseClass()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean USE_CLASS_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isUseClass() <em>Use Class</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isUseClass()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean useClass = USE_CLASS_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -198,6 +219,39 @@ public class CGMappingImpl extends CGNamedElementImpl implements CGMapping {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
+	public boolean isUseClass() {
+		return useClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setUseClass(boolean newUseClass) {
+		boolean oldUseClass = useClass;
+		useClass = newUseClass;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTiCGModelPackage.CG_MAPPING__USE_CLASS, oldUseClass, useClass));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		return super.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -258,6 +312,8 @@ public class CGMappingImpl extends CGNamedElementImpl implements CGMapping {
 				return getFreeVariables();
 			case QVTiCGModelPackage.CG_MAPPING__TRANSFORMATION:
 				return getTransformation();
+			case QVTiCGModelPackage.CG_MAPPING__USE_CLASS:
+				return isUseClass();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -281,6 +337,9 @@ public class CGMappingImpl extends CGNamedElementImpl implements CGMapping {
 			case QVTiCGModelPackage.CG_MAPPING__TRANSFORMATION:
 				setTransformation((CGTransformation)newValue);
 				return;
+			case QVTiCGModelPackage.CG_MAPPING__USE_CLASS:
+				setUseClass((Boolean)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -302,6 +361,9 @@ public class CGMappingImpl extends CGNamedElementImpl implements CGMapping {
 			case QVTiCGModelPackage.CG_MAPPING__TRANSFORMATION:
 				setTransformation((CGTransformation)null);
 				return;
+			case QVTiCGModelPackage.CG_MAPPING__USE_CLASS:
+				setUseClass(USE_CLASS_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -320,6 +382,8 @@ public class CGMappingImpl extends CGNamedElementImpl implements CGMapping {
 				return freeVariables != null && !freeVariables.isEmpty();
 			case QVTiCGModelPackage.CG_MAPPING__TRANSFORMATION:
 				return getTransformation() != null;
+			case QVTiCGModelPackage.CG_MAPPING__USE_CLASS:
+				return useClass != USE_CLASS_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}

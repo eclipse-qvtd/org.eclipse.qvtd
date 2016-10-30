@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
@@ -495,6 +495,16 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 	 * @generated
 	 */
 	@Override
+	public EAttribute getCGMapping_UseClass() {
+		return (EAttribute)cgMappingEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getCGMappingCall() {
 		return cgMappingCallEClass;
 	}
@@ -860,6 +870,7 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 		createEReference(cgMappingEClass, CG_MAPPING__BODY);
 		createEReference(cgMappingEClass, CG_MAPPING__FREE_VARIABLES);
 		createEReference(cgMappingEClass, CG_MAPPING__TRANSFORMATION);
+		createEAttribute(cgMappingEClass, CG_MAPPING__USE_CLASS);
 
 		cgMappingCallEClass = createEClass(CG_MAPPING_CALL);
 		createEReference(cgMappingCallEClass, CG_MAPPING_CALL__MAPPING_CALL_BINDINGS);
@@ -990,6 +1001,7 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 		initEReference(getCGMapping_Body(), theCGModelPackage.getCGValuedElement(), null, "body", null, 1, 1, CGMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCGMapping_FreeVariables(), this.getCGGuardVariable(), this.getCGGuardVariable_Mapping(), "freeVariables", null, 0, -1, CGMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getCGMapping_Transformation(), this.getCGTransformation(), this.getCGTransformation_Mappings(), "transformation", null, 1, 1, CGMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCGMapping_UseClass(), ecorePackage.getEBoolean(), "useClass", "false", 0, 1, CGMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(cgMappingCallEClass, CGMappingCall.class, "CGMappingCall", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCGMappingCall_MappingCallBindings(), this.getCGMappingCallBinding(), null, "mappingCallBindings", null, 0, -1, CGMappingCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

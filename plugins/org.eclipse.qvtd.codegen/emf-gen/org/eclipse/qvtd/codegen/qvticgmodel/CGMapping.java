@@ -27,6 +27,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMapping#getBody <em>Body</em>}</li>
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMapping#getFreeVariables <em>Free Variables</em>}</li>
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMapping#getTransformation <em>Transformation</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMapping#isUseClass <em>Use Class</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage#getCGMapping()
@@ -105,4 +106,31 @@ public interface CGMapping extends CGNamedElement {
 	 * @generated
 	 */
 	void setTransformation(CGTransformation value);
+
+	/**
+	 * Returns the value of the '<em><b>Use Class</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Use Class</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Use Class</em>' attribute.
+	 * @see #setUseClass(boolean)
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage#getCGMapping_UseClass()
+	 * @model default="false"
+	 * @generated
+	 */
+	boolean isUseClass();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMapping#isUseClass <em>Use Class</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Use Class</em>' attribute.
+	 * @see #isUseClass()
+	 * @generated
+	 */
+	void setUseClass(boolean value);
 } // CGMapping
