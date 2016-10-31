@@ -847,7 +847,9 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		}
 		Collections.sort(guardNodes, NameUtil.NAMEABLE_COMPARATOR);
 		for (@NonNull Node guardNode : guardNodes) {
-			createGuardParameter(guardNode);
+			if (!guardNode.isDependency()) {
+				createGuardParameter(guardNode);
+			}
 		}
 		//
 		//	Create any connectionVariable guards

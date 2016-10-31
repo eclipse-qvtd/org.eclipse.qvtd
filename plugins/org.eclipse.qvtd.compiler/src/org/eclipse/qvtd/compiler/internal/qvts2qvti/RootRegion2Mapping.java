@@ -160,7 +160,17 @@ public class RootRegion2Mapping extends AbstractScheduledRegion2Mapping
 	@Override
 	protected @NonNull OCLExpression createSelectByKind(@NonNull Node resultNode) {
 		throw new UnsupportedOperationException();
-		/*		Variable resultVariable = node2variable.get(resultNode);
+		/*refactored code inlined at call point -- ?? ok, but needs usage analysis
+		OCLExpression initExpression = createObjectsOfKindExpression(resultNode);
+		List<@NonNull Edge> incomingEdges = resultNode.getIncomingEdges();
+		switch (incomingEdges.size()) {
+			case 0: break;
+			case 1: initExpression = getFilteredExpression(initExpression, (NavigableEdge) incomingEdges.get(0)); break;
+			default: assert false;
+		}
+		return initExpression; */
+		/*very old code
+		Variable resultVariable = node2variable.get(resultNode);
 		if (resultVariable == null) {
 			OCLExpression asSource = getRootsVariable(resultNode);
 			CompleteClass sourceCompleteClass = resultNode.getCompleteClass();

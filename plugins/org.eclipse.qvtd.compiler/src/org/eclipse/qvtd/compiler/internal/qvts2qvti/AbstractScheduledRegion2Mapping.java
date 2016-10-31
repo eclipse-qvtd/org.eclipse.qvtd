@@ -129,21 +129,26 @@ public abstract class AbstractScheduledRegion2Mapping extends AbstractRegion2Map
 		//		Mapping calledMapping = calledRegion2Mapping.getMapping();
 		List<@NonNull MappingParameterBinding> mappingParameterBindings = new ArrayList<>();
 		for (@NonNull Node calledGuardNode : calledRegion2Mapping.getGuardNodes()) {
-			VariableDeclaration guardVariable = calledRegion2Mapping.getGuardVariable(calledGuardNode);
-			NodeConnection callingConnection = calledGuardNode.getIncomingPassedConnection();
-			assert callingConnection != null;
-			ConnectionVariable connectionVariable = connection2variable.get(callingConnection);
-			assert connectionVariable != null;
-			if (guardVariable instanceof GuardParameter) {
-				mappingParameterBindings.add(helper.createGuardParameterBinding((GuardParameter) guardVariable, connectionVariable));
-			}
-			else {
-				mappingParameterBindings.add(helper.createAppendParameterBinding((AppendParameter) guardVariable, connectionVariable));
-			}
-			for (@NonNull Node callingNode : calledGuardNode.getUsedBindingSources()) {
-				if (callingNode.getRegion() == region) {
-					OCLExpression sourceExpression = createSelectByKind(callingNode);
-					mappingParameterBindings.add(helper.createSimpleParameterBinding((SimpleParameter) guardVariable, sourceExpression));
+			if (!calledGuardNode.isDependency()) {
+				VariableDeclaration guardVariable = calledRegion2Mapping.getGuardVariable(calledGuardNode);
+				NodeConnection callingConnection = calledGuardNode.getIncomingPassedConnection();
+				assert callingConnection != null;
+				ConnectionVariable connectionVariable = connection2variable.get(callingConnection);
+				assert connectionVariable != null;
+				if (guardVariable instanceof AppendParameter) {
+					mappingParameterBindings.add(helper.createAppendParameterBinding((AppendParameter) guardVariable, connectionVariable));
+				}
+				else if (guardVariable instanceof GuardParameter) {
+					mappingParameterBindings.add(helper.createGuardParameterBinding((GuardParameter) guardVariable, connectionVariable));
+				}
+				else {
+					throw new UnsupportedOperationException();
+					/*			for (@NonNull Node callingNode : calledGuardNode.getUsedBindingSources()) {
+					if (callingNode.getRegion() == region) {
+						OCLExpression sourceExpression = createSelectByKind(callingNode);
+						mappingParameterBindings.add(helper.createSimpleParameterBinding((SimpleParameter) guardVariable, sourceExpression));
+					}
+				} */
 				}
 			}
 		}
