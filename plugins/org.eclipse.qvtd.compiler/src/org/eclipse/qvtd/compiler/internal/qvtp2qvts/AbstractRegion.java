@@ -50,7 +50,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 		public static final @NonNull EarliestRegionComparator INSTANCE = new EarliestRegionComparator();
 
 		public static @NonNull List<@NonNull Region> sort(@NonNull Iterable<@NonNull Region> regions) {
-			List<@NonNull Region> sortedRegions = new ArrayList<@NonNull Region>();
+			List<@NonNull Region> sortedRegions = new ArrayList<>();
 			Iterables.addAll(sortedRegions, regions);
 			Collections.sort(sortedRegions, INSTANCE);
 			return sortedRegions;
@@ -280,29 +280,29 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 	/**
 	 * All the edges defined in this region, but not those in nested regions.
 	 */
-	private final @NonNull List<@NonNull Edge> edges = new ArrayList<@NonNull Edge>();
+	private final @NonNull List<@NonNull Edge> edges = new ArrayList<>();
 
 	/**
 	 * All the nodes defined in this region, but not those in nested regions.
 	 */
-	private final @NonNull List<@NonNull Node> nodes = new ArrayList<@NonNull Node>();
+	private final @NonNull List<@NonNull Node> nodes = new ArrayList<>();
 
 	/**
 	 * The indexes in the overall schedule at which this region can be executed. The first index is the index at which ALL
 	 * invocations occur. Subsequent indexes are when a referenced value may become available enabling a deferred execution.
 	 */
-	private final @NonNull List<@NonNull Integer> indexes = new ArrayList<@NonNull Integer>();
+	private final @NonNull List<@NonNull Integer> indexes = new ArrayList<>();
 
 	/**
 	 * Ordered list of regions that call this region
 	 */
-	private final @NonNull List<@NonNull Region> callableParents = new ArrayList<@NonNull Region>();
+	private final @NonNull List<@NonNull Region> callableParents = new ArrayList<>();
 
 	/**
 	 * Ordered list of regions that this region calls. May exclude some children whose dependencies are unsatisfied.
 	 * May include non-children whose dependencies are satisfied by earlier child calls.
 	 */
-	private final @NonNull List<@NonNull Region> callableChildren = new ArrayList<@NonNull Region>();
+	private final @NonNull List<@NonNull Region> callableChildren = new ArrayList<>();
 
 	/**
 	 * The per-typed model predicated navigable edges for which an execution may be attempted before assignment.
@@ -322,12 +322,12 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 	/**
 	 * The connections hosted by this region and passed to child regions.
 	 */
-	private @NonNull List<@NonNull NodeConnection> rootConnections = new ArrayList<@NonNull NodeConnection>();
+	private @NonNull List<@NonNull NodeConnection> rootConnections = new ArrayList<>();
 
 	/**
 	 * The connections propagated as middle guards from a hosted by a parent region and to one or more child regions.
 	 */
-	private @NonNull List<@NonNull NodeConnection> intermediateConnections = new ArrayList<@NonNull NodeConnection>();
+	private @NonNull List<@NonNull NodeConnection> intermediateConnections = new ArrayList<>();
 
 	/**
 	 * Set true if this region recurses on its outputs.
@@ -372,7 +372,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 		TypedModel typedModel = predicatedEdge.getSource().getClassDatumAnalysis().getTypedModel();
 		Set<@NonNull NavigableEdge> checkedEdges = typedModel2checkedEdges2.get(typedModel);
 		if (checkedEdges == null) {
-			checkedEdges = new HashSet<@NonNull NavigableEdge>();
+			checkedEdges = new HashSet<>();
 			typedModel2checkedEdges2.put(typedModel, checkedEdges);
 		}
 		checkedEdges.add(predicatedEdge);
@@ -389,7 +389,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 		TypedModel typedModel = realizedEdge.getSource().getClassDatumAnalysis().getTypedModel();
 		Set<@NonNull NavigableEdge> enforcedEdges = typedModel2enforcedEdges2.get(typedModel);
 		if (enforcedEdges == null) {
-			enforcedEdges = new HashSet<@NonNull NavigableEdge>();
+			enforcedEdges = new HashSet<>();
 			typedModel2enforcedEdges2.put(typedModel, enforcedEdges);
 		}
 		enforcedEdges.add(realizedEdge);
@@ -472,19 +472,19 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 				TypedModel typedModel = predicatedNode.getClassDatumAnalysis().getTypedModel();
 				Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>> property2predicatedEdges = typedModel2property2predicatedEdges.get(typedModel);
 				if (property2predicatedEdges == null) {
-					property2predicatedEdges = new HashMap<@NonNull Property, @NonNull List<@NonNull NavigableEdge>>();
+					property2predicatedEdges = new HashMap<>();
 					typedModel2property2predicatedEdges.put(typedModel, property2predicatedEdges);
 				}
 				List<@NonNull NavigableEdge> predicatedEdges = property2predicatedEdges.get(property);
 				if (predicatedEdges == null) {
-					predicatedEdges = new ArrayList<@NonNull NavigableEdge>();
+					predicatedEdges = new ArrayList<>();
 					property2predicatedEdges.put(property, predicatedEdges);
 				}
 				predicatedEdges.add(predicatedEdge);
 				QVTs2QVTiVisitor.POLLED_PROPERTIES.println("  " + typedModel + " predicated for " + property);
 			}
 		}
-		typedModel2checkedEdges = new HashMap<@NonNull TypedModel, @NonNull Set<@NonNull NavigableEdge>>();
+		typedModel2checkedEdges = new HashMap<>();
 	}
 
 	@Override
@@ -495,18 +495,18 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 			TypedModel typedModel = realizedNode.getClassDatumAnalysis().getTypedModel();
 			Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>> property2realizedEdges = typedModel2property2realizedEdges.get(typedModel);
 			if (property2realizedEdges == null) {
-				property2realizedEdges = new HashMap<@NonNull Property, @NonNull List<@NonNull NavigableEdge>>();
+				property2realizedEdges = new HashMap<>();
 				typedModel2property2realizedEdges.put(typedModel, property2realizedEdges);
 			}
 			List<@NonNull NavigableEdge> realizedEdges = property2realizedEdges.get(property);
 			if (realizedEdges == null) {
-				realizedEdges = new ArrayList<@NonNull NavigableEdge>();
+				realizedEdges = new ArrayList<>();
 				property2realizedEdges.put(property, realizedEdges);
 			}
 			realizedEdges.add(realizedEdge);
 			QVTs2QVTiVisitor.POLLED_PROPERTIES.println("  " + typedModel + " realized for " + property);
 		}
-		typedModel2enforcedEdges = new HashMap<@NonNull TypedModel, @NonNull Set<@NonNull NavigableEdge>>();
+		typedModel2enforcedEdges = new HashMap<>();
 	}
 
 	/**
@@ -515,7 +515,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 	 * a path would violate a null parent requirement.
 	 */
 	protected boolean canCreatePath(@NonNull Node startNode, @NonNull List<@NonNull NavigableEdge> protoPath) {
-		//		Map<Edge, Edge> path = new HashMap<Edge, Edge>();
+		//		Map<Edge, Edge> path = new HashMap<>();
 		//		Region region = startNode.getRegion();
 		Node sourceNode = startNode;
 		for (@NonNull NavigableEdge protoEdge : protoPath) {
@@ -549,7 +549,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 			if (primaryHeadNode == null) {
 				return null;
 			}
-			secondaryNode2primaryNode = new HashMap<@NonNull Node, @NonNull Node>();
+			secondaryNode2primaryNode = new HashMap<>();
 			if ("if".equals(secondaryHeadNode.getName())) {
 				secondaryHeadNode.getName();
 			}
@@ -577,7 +577,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 			boolean gotIt = false;
 			for (@NonNull Node secondaryTrueNode : secondaryTrueNodes) {
 				assert secondaryTrueNode != null;
-				Map<@NonNull Node, @NonNull Node> primary2secondary = new HashMap<@NonNull Node, @NonNull Node>();
+				Map<@NonNull Node, @NonNull Node> primary2secondary = new HashMap<>();
 				if (isEquivalent(primaryTrueNode, secondaryTrueNode, primary2secondary)) {	// FIXME use hashes
 					gotIt = true;
 					for (@NonNull Node primaryNode : primary2secondary.keySet()) {
@@ -598,8 +598,8 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 		return secondaryNode2primaryNode;
 	}
 	private boolean canMergeInternal(@NonNull Region secondaryRegion, @NonNull Map<@NonNull Node, @NonNull Node> secondaryNode2primaryNode, @NonNull Region2Depth region2depths, boolean isLateMerge) {
-		Set<@NonNull Node> secondaryNodes = new HashSet<@NonNull Node>(secondaryNode2primaryNode.keySet());
-		List<@NonNull Node> secondaryNodesList = new ArrayList<@NonNull Node>(secondaryNodes);
+		Set<@NonNull Node> secondaryNodes = new HashSet<>(secondaryNode2primaryNode.keySet());
+		List<@NonNull Node> secondaryNodesList = new ArrayList<>(secondaryNodes);
 		for (int i = 0; i < secondaryNodesList.size(); i++) {
 			@NonNull Node secondarySourceNode = secondaryNodesList.get(i);
 			Node primarySourceNode = secondaryNode2primaryNode.get(secondarySourceNode);
@@ -950,7 +950,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 	} */
 
 	protected @NonNull SymbolNameBuilder computeSymbolName() {
-		//		List<String> names = new ArrayList<String>();
+		//		List<String> names = new ArrayList<>();
 		//		for (@NonNull MappingAction action : getMappingActions()) {
 		//			names.add(action.getMapping().getName());
 		//		}
@@ -959,7 +959,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 		Set<@NonNull Node> bestToOneSubRegion = null;
 		Node bestNamingNode = null;
 		for (@NonNull Node newNode : getNewNodes()) {
-			Set<@NonNull Node> toOneSubRegion = computeToOneSubRegion(new HashSet<@NonNull Node>(), newNode);
+			Set<@NonNull Node> toOneSubRegion = computeToOneSubRegion(new HashSet<>(), newNode);
 			if ((bestToOneSubRegion == null) || (toOneSubRegion.size() > bestToOneSubRegion.size())) {
 				bestToOneSubRegion = toOneSubRegion;
 				bestNamingNode = newNode;
@@ -975,7 +975,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 			s = new SymbolNameBuilder();
 			s.appendString("m_");
 			s.appendName(bestNamingNode.getCompleteClass().getName());
-			List<@NonNull String> headNames = new ArrayList<@NonNull String>();
+			List<@NonNull String> headNames = new ArrayList<>();
 			for (@NonNull Node headNode : getHeadNodes()) {
 				String name = headNode.getCompleteClass().getName();
 				if (name != null) {
@@ -992,7 +992,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 				s = new SymbolNameBuilder();
 				s.appendString("m_");
 				s.appendName(headNode.getCompleteClass().getName());
-				List<String> edgeNames = new ArrayList<String>();
+				List<String> edgeNames = new ArrayList<>();
 				for (@NonNull NavigableEdge edge : headNode.getNavigationEdges()) {
 					String propertyName = edge.getProperty().getName();
 					edgeNames.add(edge.getTarget().isExplicitNull() ? propertyName + "0" : propertyName);
@@ -1043,7 +1043,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 					Property predicatedProperty = predicatedEdge.getProperty();
 					assert !predicatedProperty.isIsImplicit();
 					ClassDatumAnalysis classDatumAnalysis = predicatedTarget.getClassDatumAnalysis();
-					List<@NonNull Node> sourceNodes = new ArrayList<@NonNull Node>();
+					List<@NonNull Node> sourceNodes = new ArrayList<>();
 					for (@NonNull NavigationEdge realizedEdge : realizedEdges) {
 						sourceNodes.add(realizedEdge.getTarget());
 					}
@@ -1079,7 +1079,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 		if (classDatumAnalysis.getCompleteClass().getPrimaryClass() instanceof DataType) {
 			Iterable<@NonNull NavigableEdge> realizedEdges = rootScheduledRegion.getRealizedEdges(predicatedEdge, classDatumAnalysis);
 			if (realizedEdges != null) {
-				List<@NonNull Node> sourceNodes = new ArrayList<@NonNull Node>();
+				List<@NonNull Node> sourceNodes = new ArrayList<>();
 				for (@NonNull NavigableEdge realizedEdge : realizedEdges) {
 					if (RegionUtil.isConformantSource(realizedEdge, predicatedEdge) && RegionUtil.isConformantTarget(realizedEdge, predicatedEdge)) {
 						sourceNodes.add(realizedEdge.getTarget());
@@ -1105,8 +1105,8 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 			//			if (sourceNodes != null) {
 			Iterable<@NonNull NavigableEdge> realizedEdges = rootScheduledRegion.getRealizedEdges(predicatedEdge, classDatumAnalysis);
 			if (realizedEdges != null) {
-				Set<@NonNull Region> edgeSourceRegions = new HashSet<@NonNull Region>();
-				Set<@NonNull Region> nodeSourceRegions = new HashSet<@NonNull Region>();
+				Set<@NonNull Region> edgeSourceRegions = new HashSet<>();
+				Set<@NonNull Region> nodeSourceRegions = new HashSet<>();
 				for (@NonNull NavigableEdge realizedEdge : realizedEdges) {
 					edgeSourceRegions.add(realizedEdge.getRegion());
 				}
@@ -1124,8 +1124,8 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 					for (@NonNull NavigableEdge realizedEdge : realizedEdges) {
 						if (RegionUtil.isConformantSource(realizedEdge, predicatedEdge) && RegionUtil.isConformantTarget(realizedEdge, predicatedEdge)) {
 							if (thoseEdges == null) {
-								thoseEdges = new ArrayList<@NonNull NavigableEdge>();
-								conformantEdgeSourceRegions = new HashSet<@NonNull Region>();
+								thoseEdges = new ArrayList<>();
+								conformantEdgeSourceRegions = new HashSet<>();
 							}
 							if (!thoseEdges.contains(realizedEdge)) {
 								thoseEdges.add(realizedEdge);
@@ -1194,10 +1194,10 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 			for (@NonNull Node sourceNode : sourceNodes) {
 				Region sourceRegion = sourceNode.getRegion();
 				if (sourceRegion != this) {
-					Map<@NonNull Node, @NonNull Node> called2calling = new HashMap<@NonNull Node, @NonNull Node>();
+					Map<@NonNull Node, @NonNull Node> called2calling = new HashMap<>();
 					if (isCompatiblePattern(headNode, sourceNode, called2calling)) {
 						if (headSources == null) {
-							headSources = new ArrayList<@NonNull Node>();
+							headSources = new ArrayList<>();
 						}
 						headSources.add(sourceNode);
 					}
@@ -1218,7 +1218,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 			headConnection.addPassedTargetNode(headNode);
 		}
 		if (QVTp2QVTs.CONNECTION_CREATION.isActive()) {
-			QVTp2QVTs.CONNECTION_CREATION.println("  Head NodeConnection to " + headNode);
+			QVTp2QVTs.CONNECTION_CREATION.println((headNode.isDependency() ? "  Extra NodeConnection to " : "  Head NodeConnection to ") + headNode);
 			for (@NonNull Node sourceNode : headSources) {
 				QVTp2QVTs.CONNECTION_CREATION.println("    from " + sourceNode);
 			}
@@ -1233,18 +1233,20 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 	private @Nullable Iterable<@NonNull NodeConnection> createHeadConnections() {
 		List<@NonNull NodeConnection> headConnections = null;
 		for (@NonNull Node headNode : getHeadNodes()) {
-			if (/*headNode.isLoaded() &&*/ !headNode.isDependency() && !headNode.isTrue()) {
+			if (headNode.isTrue()) { /* true nodes do not need connections. */ }
+			else if (headNode.isDependency()) {
+				createHeadConnection(headNode);	/** Dependency nodes have extra not-head connections. */
+			}
+			else {
 				NodeConnection headConnection = createHeadConnection(headNode);
 				if (headConnection == null) {
-					if (!headNode.isDependency()) {	// We don't know if dependency heads are needed or not
-						multiRegion.getSchedulerConstants().addProblem(createError("createHeadConnections abandoned for " + headNode));
-						headConnection = createHeadConnection(headNode);	// FIXME debugging
-						return null;										//  so matching only fails for unmatchable real heads
-					}
+					multiRegion.getSchedulerConstants().addProblem(createError("createHeadConnections abandoned for " + headNode));
+					headConnection = createHeadConnection(headNode);	// FIXME debugging
+					return null;										//  so matching only fails for unmatchable real heads
 				}
 				else {
 					if (headConnections == null) {
-						headConnections = new ArrayList<@NonNull NodeConnection>();
+						headConnections = new ArrayList<>();
 					}
 					headConnections.add(headConnection);
 				}
@@ -1334,12 +1336,12 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 	 * Each bindable node is navigable within the guard/predicate from the head and has an equivalent node in every possible caller.
 	 * A bindable node may therefore by passed by value from each of a known set of calling nodes to each called node.
 	 * /
-		Map<@NonNull NavigationEdge, @NonNull List<@NonNull NavigationEdge>> related2bindableSources = new HashMap<@NonNull NavigationEdge, @NonNull List<@NonNull NavigationEdge>>();
+		Map<@NonNull NavigationEdge, @NonNull List<@NonNull NavigationEdge>> related2bindableSources = new HashMap<>();
 		/**
 	 * Each computable node is navigable within the guard/predicate from the head but does not have an equivalent node in every possible caller.
 	 * A computable node cannot always be passed by value. It is therefore recomputed within a known set of calling regions at each called node.
 	 * /
-		Map<@NonNull Node, @NonNull List<@NonNull Region>> related2computableSources = new HashMap<@NonNull Node, @NonNull List<@NonNull Region>>();
+		Map<@NonNull Node, @NonNull List<@NonNull Region>> related2computableSources = new HashMap<>();
 		ScheduledRegion invokingRegion2 = invokingRegion;
 		assert invokingRegion2 != null;
 		RootScheduledRegion rootScheduledRegion = invokingRegion2.getRootScheduledRegion();
@@ -1351,8 +1353,8 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 			assert this != sourceRegion;
 			for (@NonNull Node headNode : headConnection.getTargets()) {
 				if ((headNode.getRegion() == this) && headNode.isHead()) {
-					Map<@NonNull Node, @Nullable Node> calledNode2callingNode = new HashMap<@NonNull Node, @Nullable Node>();
-					Map<@NonNull NavigationEdge, @Nullable NavigationEdge> calledEdge2callingEdge = new HashMap<@NonNull NavigationEdge, @Nullable NavigationEdge>();
+					Map<@NonNull Node, @Nullable Node> calledNode2callingNode = new HashMap<>();
+					Map<@NonNull NavigationEdge, @Nullable NavigationEdge> calledEdge2callingEdge = new HashMap<>();
 					computeCompatiblePattern(headNode, headSource, calledNode2callingNode, calledEdge2callingEdge);
 					for (Map./*@NonNull* /Entry<@NonNull NavigationEdge, @Nullable NavigationEdge> entry : calledEdge2callingEdge.entrySet()) {
 						@NonNull NavigationEdge calledEdge = entry.getKey();
@@ -1366,7 +1368,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 							if ((callingEdge != null) && !related2computableSources.containsKey(calledNode)) {
 								List<@NonNull NavigationEdge> bindableSources = related2bindableSources.get(calledEdge);
 								if (bindableSources == null) {
-									bindableSources = new ArrayList<@NonNull NavigationEdge>();
+									bindableSources = new ArrayList<>();
 									related2bindableSources.put(calledEdge, bindableSources);
 								}
 								assert !bindableSources.contains(callingEdge);
@@ -1375,7 +1377,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 							else {
 								List<@NonNull Region> computableSources = related2computableSources.get(calledNode);
 								if (computableSources == null) {
-									computableSources = new ArrayList<@NonNull Region>();
+									computableSources = new ArrayList<>();
 									related2computableSources.put(calledNode, computableSources);
 								}
 								assert !computableSources.contains(sourceRegion);
@@ -1426,7 +1428,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 					Region sourceRegion = computableSourceNode.getRegion();
 					if ((computableSourceNode.getRegion() != this) && !computableRegions.contains(sourceRegion)) {		// FIXME only if a Recursion Edge
 						if (computableSourceNodes == null) {
-							computableSourceNodes = new ArrayList<@NonNull Node>();
+							computableSourceNodes = new ArrayList<>();
 						}
 						computableSourceNodes.add(computableSourceNode);
 					}
@@ -1469,8 +1471,8 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 
 	@Override
 	public @NonNull Iterable<@NonNull Node> getAncestorsOf(@NonNull Node node) {
-		List<@NonNull Node> ancestors = new ArrayList<@NonNull Node>();
-		HashSet<@NonNull Node> ancestorSet = new HashSet<@NonNull Node>();
+		List<@NonNull Node> ancestors = new ArrayList<>();
+		HashSet<@NonNull Node> ancestorSet = new HashSet<>();
 		node.getAllAncestors(ancestorSet);
 		for (@NonNull Node ancestor : ancestorSet) {
 			if (ancestor.getRegion() == this) {
@@ -1540,7 +1542,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 
 	@Override
 	public @NonNull List<@NonNull Region> getCalledRegions() {
-		List<@NonNull Region> childRegions = new ArrayList<@NonNull Region>();			// FIXME cache
+		List<@NonNull Region> childRegions = new ArrayList<>();			// FIXME cache
 		for (@NonNull NodeConnection childConnection : getOutgoingPassedConnections()) {
 			for (@NonNull Node childNode : childConnection.getTargetNodes()) {
 				Region childRegion = childNode.getRegion();
@@ -1554,7 +1556,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 
 	@Override
 	public @NonNull List<@NonNull Region> getCallingRegions() {
-		List<@NonNull Region> callingRegions = new ArrayList<@NonNull Region>();			// FIXME cache
+		List<@NonNull Region> callingRegions = new ArrayList<>();			// FIXME cache
 		for (@NonNull NodeConnection callingConnection : getIncomingPassedConnections()) {
 			for (@NonNull Node callingNode : callingConnection.getSources()) {
 				Region callingRegion = callingNode.getRegion();
@@ -1583,12 +1585,12 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 	}
 
 	private @NonNull Map<@NonNull CompleteClass, @NonNull List<@NonNull Node>> getCompleteClass2Node() {
-		Map<@NonNull CompleteClass, @NonNull List<@NonNull Node>> completeClass2node = new HashMap<@NonNull CompleteClass, @NonNull List<@NonNull Node>>();
+		Map<@NonNull CompleteClass, @NonNull List<@NonNull Node>> completeClass2node = new HashMap<>();
 		for (@NonNull Node node : getNodes()) {
 			CompleteClass completeClass = node.getCompleteClass();
 			List<@NonNull Node> mergedNodes = completeClass2node.get(completeClass);
 			if (mergedNodes == null) {
-				mergedNodes = new ArrayList<@NonNull Node>();
+				mergedNodes = new ArrayList<>();
 				completeClass2node.put(completeClass, mergedNodes);
 			}
 			if (!mergedNodes.contains(node)) {
@@ -1661,7 +1663,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 
 	@Override
 	public @NonNull Iterable<@NonNull DatumConnection> getIncomingConnections() {		// FIXME cache
-		List<@NonNull DatumConnection> connections = new ArrayList<@NonNull DatumConnection>();
+		List<@NonNull DatumConnection> connections = new ArrayList<>();
 		for (@NonNull Node headNode : getHeadNodes()) {
 			NodeConnection connection = headNode.getIncomingPassedConnection();
 			if ((connection != null) && !connections.contains(connection)) {
@@ -1689,7 +1691,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 
 	@Override
 	public @NonNull Iterable<@NonNull NodeConnection> getIncomingPassedConnections() {		// FIXME cache
-		List<@NonNull NodeConnection> connections = new ArrayList<@NonNull NodeConnection>();
+		List<@NonNull NodeConnection> connections = new ArrayList<>();
 		for (@NonNull Node headNode : getHeadNodes()) {
 			NodeConnection connection = headNode.getIncomingPassedConnection();
 			if (connection != null) {
@@ -1701,7 +1703,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 
 	@Override
 	public @NonNull Iterable<@NonNull NodeConnection> getIncomingUsedConnections() {			// FIXME cache
-		List<@NonNull NodeConnection> connections = new ArrayList<@NonNull NodeConnection>();
+		List<@NonNull NodeConnection> connections = new ArrayList<>();
 		for (@NonNull Node node : getPatternNodes()) {
 			if (node.isLoaded() || node.isSpeculated() || node.isPredicated()) {	// A DataType may be loaded but subject to an edge predication
 				NodeConnection connection = node.getIncomingUsedConnection();
@@ -1755,7 +1757,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 
 	@Override
 	public @NonNull List<@NonNull DatumConnection> getLoopingConnections() {
-		List<@NonNull DatumConnection> loopingConnections = new ArrayList<@NonNull DatumConnection>();
+		List<@NonNull DatumConnection> loopingConnections = new ArrayList<>();
 		for (@NonNull DatumConnection connection : getOutgoingConnections()) {
 			for (@NonNull Region sourceRegion : connection.getSourceRegions()) {
 				if (this == sourceRegion) {
@@ -1814,7 +1816,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 
 	@Override
 	public @NonNull List<@NonNull DatumConnection> getOutgoingConnections() {			// FIXME cache
-		List<@NonNull DatumConnection> connections = new ArrayList<@NonNull DatumConnection>();
+		List<@NonNull DatumConnection> connections = new ArrayList<>();
 		for (@NonNull Node node : getNodes()) {
 			for (@NonNull NodeConnection connection : node.getOutgoingPassedConnections()) {
 				connections.add(connection);
@@ -1833,7 +1835,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 
 	@Override
 	public @NonNull Iterable<@NonNull NodeConnection> getOutgoingPassedConnections() {			// FIXME cache
-		List<@NonNull NodeConnection> connections = new ArrayList<@NonNull NodeConnection>();
+		List<@NonNull NodeConnection> connections = new ArrayList<>();
 		for (@NonNull Node node : getNodes()) {
 			for (@NonNull NodeConnection connection : node.getOutgoingPassedConnections()) {
 				connections.add(connection);
@@ -1844,7 +1846,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 
 	@Override
 	public @NonNull Iterable<@NonNull NodeConnection> getOutgoingUsedConnections() {			// FIXME cache
-		List<@NonNull NodeConnection> connections = new ArrayList<@NonNull NodeConnection>();
+		List<@NonNull NodeConnection> connections = new ArrayList<>();
 		for (@NonNull Node node : getNodes()) {
 			for (@NonNull NodeConnection connection : node.getOutgoingUsedBindingEdges()) {
 				connections.add(connection);
@@ -1863,11 +1865,11 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 					bestEdge = getBestEdge(bestEdge, edge);
 				}
 				else {
-					Set<@NonNull Edge> moreUsedEdges = new HashSet<@NonNull Edge>(usedEdges);
+					Set<@NonNull Edge> moreUsedEdges = new HashSet<>(usedEdges);
 					moreUsedEdges.add(edge);
 					List<@NonNull NavigableEdge> tailPath = getPath(edge.getTarget(), targetNode, moreUsedEdges);
 					if (tailPath != null) {
-						tailPath = new ArrayList<@NonNull NavigableEdge>(tailPath);
+						tailPath = new ArrayList<>(tailPath);
 						tailPath.add(0, edge);
 					}
 					bestPath = getBestPath(bestPath, tailPath);
@@ -1958,7 +1960,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 
 	@Override
 	public @NonNull List<@NonNull NodeConnection> getUsedConnections() {			// FIXME cache
-		List<@NonNull NodeConnection> usedConnections = new ArrayList<@NonNull NodeConnection>();
+		List<@NonNull NodeConnection> usedConnections = new ArrayList<>();
 		for (@NonNull Node node : getPatternNodes()) {
 			if (node.isLoaded() || node.isSpeculated() || node.isPredicated()) {	// A DataType may be loaded but subject to an edge predication
 				NodeConnection connection = node.getIncomingUsedConnection();
@@ -2087,7 +2089,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 		if (!ClassUtil.safeEquals(primaryNode.getName(), secondaryNode.getName())) {		// FIXME stronger e.g. referredOperation
 			return false;
 		}
-		HashMap<@NonNull Node, @NonNull Node> nestedPrimary2secondary = new HashMap<@NonNull Node, @NonNull Node>(primary2secondary);
+		HashMap<@NonNull Node, @NonNull Node> nestedPrimary2secondary = new HashMap<>(primary2secondary);
 		nestedPrimary2secondary.put(primaryNode, secondaryNode);
 		for (@NonNull Edge primaryEdge : primaryNode.getArgumentEdges()) {
 			boolean gotIt = false;
@@ -2156,16 +2158,16 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 	@Override
 	public void refineBindings(@NonNull Region bindingRegion) {
 		refineHeadBindings(bindingRegion);
-		/*		List<Node> predicatedNodes = new ArrayList<Node>();
+		/*		List<Node> predicatedNodes = new ArrayList<>();
 		Iterables.addAll(predicatedNodes, getPredicatedNodes());
 		for (Node calledNode : predicatedNodes) {
 			if (calledNode.isHead() && !calledNode.isAttributeNode()) {
 //					for (@SuppressWarnings("null")@NonNull List<Node> headGroup : calledRegion.getHeadNodeGroups()) {
 //						for (@SuppressWarnings("null")@NonNull Node headNode : headGroup) {
-						List<Node> resolvedCallingSources = new ArrayList<Node>();
+						List<Node> resolvedCallingSources = new ArrayList<>();
 						boolean prunedOne = false;
 						for (@SuppressWarnings("null")@NonNull Node callingSource : calledNode.getPassedBindingSources()) {
-							if (canExpandRecursion(callingSource, calledNode, new HashMap<Node, Node>())) {
+							if (canExpandRecursion(callingSource, calledNode, new HashMap<>())) {
 								resolvedCallingSources.add(callingSource);
 							}
 							else {
@@ -2173,7 +2175,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 							}
 						}
 						if (prunedOne) {
-							List<Edge> deadEdges = new ArrayList<Edge>();
+							List<Edge> deadEdges = new ArrayList<>();
 							Iterables.addAll(deadEdges, calledNode.getIncomingPassedBindingEdges());
 							for (@SuppressWarnings("null")@NonNull Edge deadEdge : deadEdges) {
 								deadEdge.destroy();
@@ -2194,13 +2196,13 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 				List<NavigationEdge> bestPath = null;
 				for (@SuppressWarnings("null")@NonNull List<Node> headGroup : getHeadNodeGroups()) {
 					for (@SuppressWarnings("null")@NonNull Node headNode : headGroup) {
-						bestPath = getBestPath(bestPath, getPath(headNode, calledNode, new HashSet<Edge>()));
+						bestPath = getBestPath(bestPath, getPath(headNode, calledNode, new HashSet<>()));
 					}
 				}
 				if (bestPath != null) {
 					for (@SuppressWarnings("null")@NonNull List<Node> headGroup : getHeadNodeGroups()) {
 						for (@SuppressWarnings("null")@NonNull Node headNode : headGroup) {
-							List<Node> resolvedCallingSources = new ArrayList<Node>();
+							List<Node> resolvedCallingSources = new ArrayList<>();
 							for (@SuppressWarnings("null")@NonNull Node callingSource : headNode.getPassedBindingSources()) {
 								Region callingRegion = callingSource.getRegion();
 								boolean isRecursion = false;
@@ -2219,7 +2221,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 							}
 							for (@SuppressWarnings("null")@NonNull Node callingSource : resolvedCallingSources) {
 								Map<Edge, Edge> innerEdge2outerEdge = createPath(callingSource, bestPath);
-								List<Edge> deadEdges = new ArrayList<Edge>();
+								List<Edge> deadEdges = new ArrayList<>();
 								for (@SuppressWarnings("null")@NonNull Map.Entry<Edge, Edge> entry : innerEdge2outerEdge.entrySet()) {
 									Edge innerEdge2 = entry.getKey();
 									Node innerTarget = innerEdge2.getTarget();
@@ -2249,7 +2251,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 	protected void refineHeadBindings(@NonNull Region bindingRegion) {
 		/*		for (@SuppressWarnings("null")@NonNull List<Node> headGroup : getHeadNodeGroups()) {
 			for (@SuppressWarnings("null")@NonNull Node headNode : headGroup) {
-				List<Node> resolvedCallingSources = new ArrayList<Node>();
+				List<Node> resolvedCallingSources = new ArrayList<>();
 				boolean prunedOne = false;
 				for (@SuppressWarnings("null")@NonNull Node callingSource : headNode.getPassedBindingSources()) {
 					if (isConflictFree(callingSource, headNode)) {
@@ -2260,7 +2262,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 					}
 				}
 				if (prunedOne) {
-					List<Edge> deadEdges = new ArrayList<Edge>();
+					List<Edge> deadEdges = new ArrayList<>();
 					Iterables.addAll(deadEdges, headNode.getIncomingPassedBindingEdges());
 					for (@SuppressWarnings("null")@NonNull Edge deadEdge : deadEdges) {
 						deadEdge.destroy();
@@ -2305,7 +2307,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 			if (nodeList.size() > 1) {
 				for (@NonNull Node node : nodeList) {
 					if (node != headNode) {
-						Map<@NonNull Node, @NonNull Node> bindings = expandRecursion(headNode, node, new HashMap<@NonNull Node, @NonNull Node>());
+						Map<@NonNull Node, @NonNull Node> bindings = expandRecursion(headNode, node, new HashMap<>());
 						if (bindings != null) {
 							//						this.recursiveBindings  = bindings;
 							for (Map.@NonNull Entry<@NonNull Node, @NonNull Node> entry : bindings.entrySet()) {
@@ -2332,7 +2334,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 		}
 		Node bestHeadNode = null;
 		int bestNonImplicits = -1;
-		List<@NonNull Node> sortedHeadNodes = new ArrayList<@NonNull Node>(headNodes);
+		List<@NonNull Node> sortedHeadNodes = new ArrayList<>(headNodes);
 		Collections.sort(sortedHeadNodes, NameUtil.NAMEABLE_COMPARATOR);		// Stabilize order
 		for (@NonNull Node thisHeadNode : sortedHeadNodes) {
 			int nonImplicits = 0;
