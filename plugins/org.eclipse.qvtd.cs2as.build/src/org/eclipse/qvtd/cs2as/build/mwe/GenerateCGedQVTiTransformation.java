@@ -28,7 +28,7 @@ import org.eclipse.qvtd.cs2as.compiler.internal.CS2ASJavaCompilerParametersImpl;
 public  class GenerateCGedQVTiTransformation extends AbstractWorkflowComponent
 {
 	private final static @NonNull String BACKSLASH = "/";
-	private final static @NonNull String EMPTY_STRING = "";
+	//	private final static @NonNull String EMPTY_STRING = "";
 
 	protected static boolean isDefined(final String string) {
 		return (!Objects.equals(string, null));
@@ -66,7 +66,7 @@ public  class GenerateCGedQVTiTransformation extends AbstractWorkflowComponent
 
 	@Override
 	protected void invokeInternal(WorkflowContext ctx, ProgressMonitor monitor, Issues issues) {
-
+		//		QVTp2QVTs.CONNECTION_CREATION.setState(true);
 		try {
 			URI oclDocURI = URI.createURI(oclFileURI);
 			CS2ASJavaCompilerParameters cgParams = createParameters();
@@ -81,7 +81,7 @@ public  class GenerateCGedQVTiTransformation extends AbstractWorkflowComponent
 	protected OCL2QVTiCGTxCompiler createCompiler() {
 		return new OCL2QVTiCGTxCompiler();
 	}
-	protected CS2ASJavaCompilerParameters createParameters() {
+	protected @NonNull CS2ASJavaCompilerParameters createParameters() {
 		return new CS2ASJavaCompilerParametersImpl(lookupResolverClassName, lookupResultItfName, javaFolder, javaPackage);
 	}
 
