@@ -1081,14 +1081,14 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 			if (realizedEdges != null) {
 				List<@NonNull Node> sourceNodes = new ArrayList<>();
 				for (@NonNull NavigableEdge realizedEdge : realizedEdges) {
-					if (RegionUtil.isConformantSource(realizedEdge, predicatedEdge) && RegionUtil.isConformantTarget(realizedEdge, predicatedEdge)) {
+					if (RegionUtil.isElementallyConformantSource(realizedEdge, predicatedEdge) && RegionUtil.isConformantTarget(realizedEdge, predicatedEdge)) {
 						sourceNodes.add(realizedEdge.getTarget());
 					}
 				}
 				NodeConnection nodeConnection = invokingRegion2.getAttributeConnection(sourceNodes, predicatedEdge.getSource().getCompleteClass(), predicatedProperty, classDatumAnalysis);
 				nodeConnection.addUsedTargetNode(castTarget, false);
 				if (QVTp2QVTs.CONNECTION_CREATION.isActive()) {
-					QVTp2QVTs.CONNECTION_CREATION.println("  Attribute NodeConnection to " + castTarget);
+					QVTp2QVTs.CONNECTION_CREATION.println("  Attribute NodeConnection \"" + nodeConnection + "\" to " + castTarget);
 					//					Scheduler.CONNECTIONS.println("    classDatumAnalysis " + classDatumAnalysis);
 					//					for (@NonNull Node sourceNode : sourceNodes) {
 					//						Scheduler.CONNECTIONS.println("    from " + sourceNode.getRegion());
@@ -1122,7 +1122,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 					Set<@NonNull Region> conformantEdgeSourceRegions = null;
 					List<@NonNull NavigableEdge> thoseEdges = null;
 					for (@NonNull NavigableEdge realizedEdge : realizedEdges) {
-						if (RegionUtil.isConformantSource(realizedEdge, predicatedEdge) && RegionUtil.isConformantTarget(realizedEdge, predicatedEdge)) {
+						if (RegionUtil.isElementallyConformantSource(realizedEdge, predicatedEdge) && RegionUtil.isConformantTarget(realizedEdge, predicatedEdge)) {
 							if (thoseEdges == null) {
 								thoseEdges = new ArrayList<>();
 								conformantEdgeSourceRegions = new HashSet<>();
@@ -1136,10 +1136,15 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 					}
 					if ((thoseEdges != null) && !nodeSourceRegions.containsAll(conformantEdgeSourceRegions)) {
 						EdgeConnection edgeConnection = invokingRegion2.getEdgeConnection(thoseEdges, predicatedProperty);
+						if (QVTp2QVTs.CONNECTION_CREATION.isActive()) {
+							QVTp2QVTs.CONNECTION_CREATION.println("  EdgeConnection \"" + edgeConnection + "\" to " + predicatedEdge);
+						}
 						if (!Iterables.contains(edgeConnection.getTargetEdges(), castEdge)) {
 							edgeConnection.addUsedTargetEdge(castEdge, false);
 							if (QVTp2QVTs.CONNECTION_CREATION.isActive()) {
-								QVTp2QVTs.CONNECTION_CREATION.println("  EdgeConnection to " + castEdge);
+								for (@NonNull NavigableEdge thatEdge : thoseEdges) {
+									QVTp2QVTs.CONNECTION_CREATION.println("    from " + thatEdge.getRegion() + "  : " + thatEdge);
+								}
 							}
 						}
 					}
@@ -1162,7 +1167,10 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 				NodeConnection predicatedConnection = invokingRegion2.getNodeConnection(sourceNodes, classDatumAnalysis);
 				predicatedConnection.addUsedTargetNode(castTarget, false);
 				if (QVTp2QVTs.CONNECTION_CREATION.isActive()) {
-					QVTp2QVTs.CONNECTION_CREATION.println("  NodeConnection from " + castTarget);
+					QVTp2QVTs.CONNECTION_CREATION.println("  NodeConnection \"" + predicatedConnection + "\" to " + castTarget);
+					for (@NonNull Node sourceNode : sourceNodes) {
+						QVTp2QVTs.CONNECTION_CREATION.println("    from " + sourceNode.getRegion() + " : " + sourceNode);
+					}
 				}
 			}
 			//			}
@@ -1218,9 +1226,9 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 			headConnection.addPassedTargetNode(headNode);
 		}
 		if (QVTp2QVTs.CONNECTION_CREATION.isActive()) {
-			QVTp2QVTs.CONNECTION_CREATION.println((headNode.isDependency() ? "  Extra NodeConnection to " : "  Head NodeConnection to ") + headNode);
+			QVTp2QVTs.CONNECTION_CREATION.println((headNode.isDependency() ? "  Extra NodeConnection " : "  Head NodeConnection \"") + headConnection + "\" to " + headNode);
 			for (@NonNull Node sourceNode : headSources) {
-				QVTp2QVTs.CONNECTION_CREATION.println("    from " + sourceNode);
+				QVTp2QVTs.CONNECTION_CREATION.println("    from " + sourceNode.getRegion() + " : " + sourceNode);
 			}
 		}
 		return headConnection;

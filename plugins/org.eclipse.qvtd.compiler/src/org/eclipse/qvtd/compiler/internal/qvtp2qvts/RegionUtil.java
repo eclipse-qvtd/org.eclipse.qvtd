@@ -412,25 +412,6 @@ public class RegionUtil
 	}
 
 	/**
-	 * Return true if the source of thatEdge is compatible with the source of thisEdge.
-	 */
-	public static boolean isConformantSource(@NonNull NavigableEdge thatEdge, @NonNull NavigableEdge thisEdge) {
-		Node thatSource = thatEdge.getSource();
-		CompleteClass thatType = thatSource.getCompleteClass();
-		CompleteClass thisType = thisEdge.getSource().getCompleteClass();
-		if (thatType.conformsTo(thisType)) {
-			return true;
-		}
-		if (thatSource.isRealized()) {
-			return false;
-		}
-		if (thisType.conformsTo(thatType)) {
-			return true;
-		}
-		return false;
-	}
-
-	/**
 	 * Return true if the target of thatEdge is compatible with the target of thisEdge.
 	 */
 	public static boolean isConformantTarget(@NonNull NavigableEdge thatEdge, @NonNull NavigableEdge thisEdge) {
@@ -450,6 +431,24 @@ public class RegionUtil
 		return false;
 	}
 
+	/**
+	 * Return true if the elemental source type of thatEdge is compatible with the source type of thisEdge.
+	 */
+	public static boolean isElementallyConformantSource(@NonNull NavigableEdge thatEdge, @NonNull NavigableEdge thisEdge) {
+		Node thatSource = thatEdge.getSource();
+		CompleteClass thatType = ClassUtil.nonNullState(thatSource.getClassDatumAnalysis().getElementalClassDatum().getCompleteClass());
+		CompleteClass thisType = ClassUtil.nonNullState(thisEdge.getSource().getClassDatumAnalysis().getElementalClassDatum().getCompleteClass());
+		if (thatType.conformsTo(thisType)) {
+			return true;
+		}
+		if (thatSource.isRealized()) {
+			return false;
+		}
+		if (thisType.conformsTo(thatType)) {
+			return true;
+		}
+		return false;
+	}
 	public static boolean isMatched(@NonNull TypedElement typedElement) {
 		boolean isMatched = false;
 		Type type = typedElement.getType();

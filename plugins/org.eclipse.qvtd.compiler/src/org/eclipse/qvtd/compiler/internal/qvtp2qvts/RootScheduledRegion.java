@@ -1061,7 +1061,7 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 		assert !producedEdge.isCast();				// Handled by caller
 		Property property = producedEdge.getProperty();
 		ClassDatumAnalysis classDatumAnalysis = producedEdge.getSource().getClassDatumAnalysis();
-		ClassDatum forwardClassDatum = classDatumAnalysis.getClassDatum();
+		ClassDatum forwardClassDatum = classDatumAnalysis.getElementalClassDatum();
 		//		PropertyDatum forwardPropertyDatum = getSchedulerConstants().getPropertyDatum(forwardClassDatum, property);
 		//		if (forwardPropertyDatum.getClassDatum() == forwardClassDatum) {
 		//			return forwardPropertyDatum;
@@ -1093,7 +1093,7 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 		}
 		property = property.getOpposite();
 		classDatumAnalysis = producedEdge.getTarget().getClassDatumAnalysis();
-		ClassDatum reverseClassDatum = classDatumAnalysis.getClassDatum();
+		ClassDatum reverseClassDatum = classDatumAnalysis.getElementalClassDatum();
 		Iterable<@NonNull PropertyDatum> reversePropertyDatums = getSchedulerConstants().getAllPropertyDatums(reverseClassDatum);
 		for (PropertyDatum propertyDatum : reversePropertyDatums) {
 			if ((propertyDatum.getProperty() == property) && (propertyDatum.getClassDatum() == reverseClassDatum)) {

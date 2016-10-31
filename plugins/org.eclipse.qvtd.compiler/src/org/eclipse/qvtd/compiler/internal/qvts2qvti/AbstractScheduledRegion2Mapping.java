@@ -144,11 +144,11 @@ public abstract class AbstractScheduledRegion2Mapping extends AbstractRegion2Map
 				else {
 					throw new UnsupportedOperationException();
 					/*			for (@NonNull Node callingNode : calledGuardNode.getUsedBindingSources()) {
-					if (callingNode.getRegion() == region) {
-						OCLExpression sourceExpression = createSelectByKind(callingNode);
-						mappingParameterBindings.add(helper.createSimpleParameterBinding((SimpleParameter) guardVariable, sourceExpression));
-					}
-				} */
+						if (callingNode.getRegion() == region) {
+							OCLExpression sourceExpression = createSelectByKind(callingNode);
+							mappingParameterBindings.add(helper.createSimpleParameterBinding((SimpleParameter) guardVariable, sourceExpression));
+						}
+					} */
 				}
 			}
 		}

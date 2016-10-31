@@ -337,7 +337,6 @@ public class BasicMappingRegion extends AbstractMappingRegion
 		Node dependencyHeadNode = RegionUtil.createDependencyNode(this, "«extra-" + (dependencyHeadNodes.size()+1) + "»", classDatumAnalysis);
 		dependencyHeadNode.setHead();
 		dependencyHeadNodes.add(dependencyHeadNode);
-		addHeadNode(dependencyHeadNode);
 		return dependencyHeadNode;
 	}
 

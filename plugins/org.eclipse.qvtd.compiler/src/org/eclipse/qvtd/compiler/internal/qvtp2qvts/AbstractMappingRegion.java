@@ -147,6 +147,7 @@ public abstract class AbstractMappingRegion extends AbstractRegion implements Ma
 
 	protected void addHeadNode(@NonNull Node headNode) {
 		assert basicGetSymbolName() == null;
+		if (headNodes != null) { assert !headNodes.contains(headNode); }
 		getHeadNodes().add(headNode);
 	}
 

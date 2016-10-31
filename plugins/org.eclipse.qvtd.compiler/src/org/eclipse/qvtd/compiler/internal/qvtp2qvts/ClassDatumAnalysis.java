@@ -57,6 +57,7 @@ public class ClassDatumAnalysis
 
 	protected final @NonNull SchedulerConstants schedulerConstants;
 	protected final @NonNull ClassDatum classDatum;
+	protected final @NonNull ClassDatum elementalClassDatum;
 	protected final @NonNull DomainUsage domainUsage;
 
 	/**
@@ -74,7 +75,19 @@ public class ClassDatumAnalysis
 	public ClassDatumAnalysis(@NonNull SchedulerConstants schedulerConstants, @NonNull ClassDatum classDatum) {
 		this.schedulerConstants = schedulerConstants;
 		this.classDatum = classDatum;
-		this.domainUsage = schedulerConstants.getDomainUsage(ClassUtil.nonNullState(classDatum.getTypedModel()));
+		TypedModel typedModel = ClassUtil.nonNullState(classDatum.getTypedModel());
+		this.domainUsage = schedulerConstants.getDomainUsage(typedModel);
+		Type type = classDatum.getCompleteClass().getPrimaryClass();
+		Type elementType = type;
+		while (elementType instanceof CollectionType) {
+			elementType = ((CollectionType)elementType).getElementType();
+		}
+		if ((elementType == null) || (elementType == type) || !(elementType instanceof org.eclipse.ocl.pivot.Class)) {
+			elementalClassDatum = classDatum;
+		}
+		else {
+			elementalClassDatum = schedulerConstants.getClassDatum((org.eclipse.ocl.pivot.Class)elementType, typedModel);
+		}
 	}
 
 	public void addConsumption(@NonNull MappingRegion consumer, @NonNull Node consumingNode) {
@@ -129,6 +142,10 @@ public class ClassDatumAnalysis
 
 	public @NonNull DomainUsage getDomainUsage() {
 		return domainUsage;
+	}
+
+	public @NonNull ClassDatum getElementalClassDatum() {
+		return elementalClassDatum;
 	}
 
 	public @Nullable List<Property> getMultiOpposites() {
