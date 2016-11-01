@@ -48,6 +48,11 @@
     <genClasses ecoreClass="QVTimperativeCS.ecore#//GuardParameterCS">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//GuardParameterCS/referredTypedModel"/>
     </genClasses>
+    <genClasses ecoreClass="QVTimperativeCS.ecore#//IfStatementCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//IfStatementCS/ownedExpression"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//IfStatementCS/ownedThenStatements"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//IfStatementCS/ownedElseStatements"/>
+    </genClasses>
     <genClasses ecoreClass="QVTimperativeCS.ecore#//LoopParameterBindingCS">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//LoopParameterBindingCS/value"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//LoopParameterBindingCS/referredVariable"/>

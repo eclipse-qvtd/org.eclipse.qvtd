@@ -50,7 +50,10 @@ GuardParameterBindingCS: isCheck?='check'? referredVariable=[qvtimperative::Guar
 
 GuardParameterCS: 'guard' ':' referredTypedModel=[qvtimperative::ImperativeTypedModel|UnrestrictedName] name=UnrestrictedName ':' ownedType=TypeExpCS ';';
 
-GuardStatementCS returns StatementCS: BufferStatementCS | DeclareStatementCS | DeclareStatementCS | CheckStatementCS;
+GuardStatementCS returns StatementCS: BufferStatementCS | CheckStatementCS | DeclareStatementCS | IfStatementCS;
+
+IfStatementCS: ('observe' observedProperties+=PathNameCS (',' observedProperties+=PathNameCS)*)?
+	'if' ownedExpression=ExpCS 'then' '{' ownedThenStatements+=GuardStatementCS* '}' 'else' '{' ownedElseStatements+=GuardStatementCS* '}';
 
 ImportCS returns base::ImportCS:
 	'import' (name=Identifier ':')? ownedPathName=URIPathNameCS (isAll?='::' '*')? ';';

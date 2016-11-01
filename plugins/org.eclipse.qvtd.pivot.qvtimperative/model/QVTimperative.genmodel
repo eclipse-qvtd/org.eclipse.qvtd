@@ -47,6 +47,11 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//GuardParameterBinding/value"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperative.ecore#//GuardParameterBinding/isCheck"/>
     </genClasses>
+    <genClasses ecoreClass="QVTimperative.ecore#//IfStatement">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//IfStatement/ownedExpression"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//IfStatement/ownedThenStatements"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperative.ecore#//IfStatement/ownedElseStatements"/>
+    </genClasses>
     <genClasses ecoreClass="QVTimperative.ecore#//ImperativeModel"/>
     <genClasses ecoreClass="QVTimperative.ecore#//ImperativeTransformation"/>
     <genClasses ecoreClass="QVTimperative.ecore#//ImperativeTypedModel">

@@ -49,6 +49,15 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="referredTypedModel" lowerBound="1"
         eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperative.ecore#//ImperativeTypedModel"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IfStatementCS" eSuperTypes="#//ObservableStatementCS">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedExpression" lowerBound="1"
+        eType="ecore:EClass ../../org.eclipse.ocl.xtext.essentialocl/model/EssentialOCLCS.ecore#//ExpCS"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedThenStatements" upperBound="-1"
+        eType="#//StatementCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedElseStatements" upperBound="-1"
+        eType="#//StatementCS" containment="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="LoopParameterBindingCS" eSuperTypes="#//MappingParameterBindingCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperative.ecore#//LoopVariable"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="referredVariable" lowerBound="1"
