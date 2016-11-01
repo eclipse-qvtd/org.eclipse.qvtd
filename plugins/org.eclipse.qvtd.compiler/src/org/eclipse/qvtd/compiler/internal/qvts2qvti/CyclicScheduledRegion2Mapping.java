@@ -11,6 +11,7 @@
 package org.eclipse.qvtd.compiler.internal.qvts2qvti;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -305,7 +306,7 @@ public class CyclicScheduledRegion2Mapping extends AbstractScheduledRegion2Mappi
 					Operation operation = visitor.getEnvironmentFactory().getIdResolver().getOperation(operationId);
 					VariableExp localVariableExp = PivotUtil.createVariableExp(localVariable);
 					VariableExp resultVariableExp = PivotUtil.createVariableExp(accumulatedVariable);
-					OperationCallExp excludingAllCallExp = PivotUtil.createOperationCallExp(localVariableExp, operation, resultVariableExp);
+					OperationCallExp excludingAllCallExp = helper.createOperationCallExp(localVariableExp, operation, Collections.singletonList(resultVariableExp));
 					excludingAllCallExp.setType(localVariableExp.getType());
 					excludingAllCallExp.setIsRequired(localVariableExp.isIsRequired());
 

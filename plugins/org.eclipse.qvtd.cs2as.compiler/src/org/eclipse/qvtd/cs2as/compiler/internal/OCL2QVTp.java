@@ -58,6 +58,7 @@ import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.internal.manager.PivotMetamodelManager;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
+import org.eclipse.ocl.pivot.utilities.PivotHelper;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbaseFactory;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
@@ -637,9 +638,10 @@ public class OCL2QVTp {
 			Variable leftVar = leftDomain.getGuardPattern().getVariable().get(0);
 
 			org.eclipse.qvtd.pivot.qvtbase.Predicate predicate = QVTbaseFactory.eINSTANCE.createPredicate();
-			VariableExp sourceExp = PivotUtil.createVariableExp(leftVar);
+			PivotHelper helper = new PivotHelper(envFact);
+			VariableExp sourceExp = helper.createVariableExp(leftVar);
 			TypeExp argTypeExp = createTypeExp(leftVar.getType());
-			predicate.setConditionExpression(PivotUtil.createOperationCallExp(sourceExp, getOclAnyOclIsTypeOfOp(), argTypeExp));
+			predicate.setConditionExpression(helper.createOperationCallExp(sourceExp, getOclAnyOclIsTypeOfOp(), Collections.singletonList(argTypeExp)));
 
 			guard.getPredicate().add(predicate);
 		}

@@ -124,7 +124,7 @@ public abstract class AbstractRegion2Mapping
 				throw new UnsupportedOperationException();
 			}
 		}
-		return PivotUtil.createNavigationCallExp(asSource, asProperty);
+		return helper.createNavigationCallExp(asSource, asProperty);
 	}
 
 	protected void createAppendParameters() {

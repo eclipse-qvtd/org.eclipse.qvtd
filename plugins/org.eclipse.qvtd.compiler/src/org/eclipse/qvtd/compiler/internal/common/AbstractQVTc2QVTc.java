@@ -13,6 +13,7 @@ package org.eclipse.qvtd.compiler.internal.common;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -48,7 +49,6 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotConstants;
-import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
@@ -377,9 +377,11 @@ public abstract class AbstractQVTc2QVTc
 	protected static abstract class AbstractUpdateVisitor<@NonNull C extends AbstractQVTc2QVTc> extends AbstractExtendingQVTcoreVisitor<Object, C>
 	{
 		private Operation equalsOperation = null;
+		protected final @NonNull QVTcoreHelper helper;
 
 		public AbstractUpdateVisitor(@NonNull C context) {
 			super(context);
+			helper = context.getHelper();
 		}
 
 		/**
@@ -409,11 +411,12 @@ public abstract class AbstractQVTc2QVTc
 			Property targetProperty = QVTcoreUtil.getTargetProperty(paIn);
 			assert (slotExpression != null) && (targetProperty != null);
 			OCLExpression valueExpression = copy(paIn.getValue());
-			NavigationCallExp propertyCallExp = context.getHelper().createNavigationCallExp(slotExpression, targetProperty);
+			assert valueExpression != null;
+			NavigationCallExp propertyCallExp = helper.createNavigationCallExp(slotExpression, targetProperty);
 			context.addTrace(paIn, propertyCallExp);
 			propertyCallExp.eUnset(PivotPackage.Literals.TYPED_ELEMENT__IS_REQUIRED);		// FIXME redundant compatibility
 			Operation equalsOperation = getEqualsOperation();
-			OperationCallExp operationCallExp = PivotUtil.createOperationCallExp(propertyCallExp, equalsOperation, valueExpression);
+			OperationCallExp operationCallExp = helper.createOperationCallExp(propertyCallExp, equalsOperation, Collections.singletonList(valueExpression));
 			context.addTrace(paIn, operationCallExp);
 			operationCallExp.setName(equalsOperation.getName());		// FIXME redundant compatibility
 			pOut.setConditionExpression(operationCallExp);
@@ -431,7 +434,7 @@ public abstract class AbstractQVTc2QVTc
 			OCLExpression slotExpression = copy(paIn.getSlotExpression());
 			Property targetProperty = QVTcoreUtil.getTargetProperty(paIn);
 			assert (slotExpression != null) && (targetProperty != null);
-			NavigationCallExp propertyCallExp = context.getHelper().createNavigationCallExp(slotExpression, targetProperty);
+			NavigationCallExp propertyCallExp = helper.createNavigationCallExp(slotExpression, targetProperty);
 			context.addTrace(paIn, propertyCallExp);
 			propertyCallExp.eUnset(PivotPackage.Literals.TYPED_ELEMENT__IS_REQUIRED);		// FIXME redundant compatibility
 			vaOut.setValue(propertyCallExp);
@@ -469,7 +472,6 @@ public abstract class AbstractQVTc2QVTc
 				return eOut;
 			}
 			assert (toType.conformsTo(standardLibrary, eType));
-			QVTcoreHelper helper = context.getHelper();
 			return helper.createOperationCallExp(eOut, "oclAsType", helper.createTypeExp(toType));
 		}
 
@@ -703,9 +705,9 @@ public abstract class AbstractQVTc2QVTc
 	}
 
 	protected final @NonNull EnvironmentFactory environmentFactory;
+	private final @NonNull QVTcoreHelper helper;
 	protected final @NonNull AbstractCreateVisitor<@NonNull ?> createVisitor;
 	protected final @NonNull AbstractUpdateVisitor<@NonNull ?> updateVisitor;
-	private final @NonNull QVTcoreHelper helper;
 	private TypedModel middleTypedModelTarget = null;
 
 	/**
@@ -734,9 +736,9 @@ public abstract class AbstractQVTc2QVTc
 	 */
 	protected AbstractQVTc2QVTc(@NonNull EnvironmentFactory environmentFactory) {
 		this.environmentFactory = environmentFactory;
+		this.helper = new QVTcoreHelper(environmentFactory);
 		this.createVisitor = createCreateVisitor();
 		this.updateVisitor = createUpdateVisitor();
-		this.helper = new QVTcoreHelper(environmentFactory);
 	}
 
 	public void addDebugCopies(@NonNull Map<EObject, EObject> copier) {

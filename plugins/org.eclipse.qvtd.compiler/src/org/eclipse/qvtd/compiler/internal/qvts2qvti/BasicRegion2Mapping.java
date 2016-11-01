@@ -289,12 +289,12 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 					if (edgeRole.isLoaded()) {
 						OCLExpression source = getExpression(edge.getSource());
 						if (source != null) {
-							return PivotUtil.createNavigationCallExp(source, ((NavigableEdge)edge).getProperty());
+							return helper.createNavigationCallExp(source, ((NavigableEdge)edge).getProperty());
 						}
 					}
 					else if (edgeRole.isPredicated()) {
 						OCLExpression source = create(edge.getSource());
-						return PivotUtil.createNavigationCallExp(source, ((NavigableEdge)edge).getProperty());
+						return helper.createNavigationCallExp(source, ((NavigableEdge)edge).getProperty());
 					}
 				}
 			}
