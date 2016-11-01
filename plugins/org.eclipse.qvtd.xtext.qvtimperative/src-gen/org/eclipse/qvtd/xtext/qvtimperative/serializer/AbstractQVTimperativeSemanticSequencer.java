@@ -88,6 +88,7 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.DeclareStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.GuardParameterBindingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.GuardParameterCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.IfStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.LoopParameterBindingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallCS;
@@ -473,6 +474,9 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 			case QVTimperativeCSPackage.GUARD_PARAMETER_CS:
 				sequence_GuardParameterCS(context, (GuardParameterCS) semanticObject); 
 				return; 
+			case QVTimperativeCSPackage.IF_STATEMENT_CS:
+				sequence_IfStatementCS(context, (IfStatementCS) semanticObject); 
+				return; 
 			case QVTimperativeCSPackage.LOOP_PARAMETER_BINDING_CS:
 				sequence_LoopParameterBindingCS(context, (LoopParameterBindingCS) semanticObject); 
 				return; 
@@ -669,6 +673,24 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 		feeder.accept(grammarAccess.getGuardParameterCSAccess().getNameUnrestrictedNameParserRuleCall_3_0(), semanticObject.getName());
 		feeder.accept(grammarAccess.getGuardParameterCSAccess().getOwnedTypeTypeExpCSParserRuleCall_5_0(), semanticObject.getOwnedType());
 		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     GuardStatementCS returns IfStatementCS
+	 *     IfStatementCS returns IfStatementCS
+	 *
+	 * Constraint:
+	 *     (
+	 *         (observedProperties+=PathNameCS observedProperties+=PathNameCS*)? 
+	 *         ownedExpression=ExpCS 
+	 *         ownedThenStatements+=GuardStatementCS* 
+	 *         ownedElseStatements+=GuardStatementCS*
+	 *     )
+	 */
+	protected void sequence_IfStatementCS(ISerializationContext context, IfStatementCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	

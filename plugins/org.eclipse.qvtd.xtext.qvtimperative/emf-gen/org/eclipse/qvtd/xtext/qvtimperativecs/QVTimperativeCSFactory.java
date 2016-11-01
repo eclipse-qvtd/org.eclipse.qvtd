@@ -112,6 +112,15 @@ public interface QVTimperativeCSFactory extends EFactory {
 	@NonNull GuardParameterCS createGuardParameterCS();
 
 	/**
+	 * Returns a new object of class '<em>If Statement CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>If Statement CS</em>'.
+	 * @generated
+	 */
+	@NonNull IfStatementCS createIfStatementCS();
+
+	/**
 	 * Returns a new object of class '<em>Loop Parameter Binding CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

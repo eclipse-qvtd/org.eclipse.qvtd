@@ -103,6 +103,15 @@ public interface QVTimperativeFactory extends EFactory {
 	@NonNull GuardParameterBinding createGuardParameterBinding();
 
 	/**
+	 * Returns a new object of class '<em>If Statement</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>If Statement</em>'.
+	 * @generated
+	 */
+	@NonNull IfStatement createIfStatement();
+
+	/**
 	 * Returns a new object of class '<em>Imperative Model</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

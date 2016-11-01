@@ -90,6 +90,7 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 			case QVTimperativePackage.DECLARE_STATEMENT: return createDeclareStatement();
 			case QVTimperativePackage.GUARD_PARAMETER: return createGuardParameter();
 			case QVTimperativePackage.GUARD_PARAMETER_BINDING: return createGuardParameterBinding();
+			case QVTimperativePackage.IF_STATEMENT: return createIfStatement();
 			case QVTimperativePackage.IMPERATIVE_MODEL: return createImperativeModel();
 			case QVTimperativePackage.IMPERATIVE_TRANSFORMATION: return createImperativeTransformation();
 			case QVTimperativePackage.IMPERATIVE_TYPED_MODEL: return createImperativeTypedModel();
@@ -193,6 +194,17 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 	public @NonNull GuardParameterBinding createGuardParameterBinding() {
 		GuardParameterBindingImpl guardParameterBinding = new GuardParameterBindingImpl();
 		return guardParameterBinding;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public @NonNull IfStatement createIfStatement() {
+		IfStatementImpl ifStatement = new IfStatementImpl();
+		return ifStatement;
 	}
 
 	/**

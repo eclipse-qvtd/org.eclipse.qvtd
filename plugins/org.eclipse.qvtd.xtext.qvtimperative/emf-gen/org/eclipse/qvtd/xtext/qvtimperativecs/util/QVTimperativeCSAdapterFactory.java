@@ -126,6 +126,10 @@ public class QVTimperativeCSAdapterFactory extends AdapterFactoryImpl {
 				return createGuardParameterCSAdapter();
 			}
 			@Override
+			public Adapter caseIfStatementCS(IfStatementCS object) {
+				return createIfStatementCSAdapter();
+			}
+			@Override
 			public Adapter caseLoopParameterBindingCS(LoopParameterBindingCS object) {
 				return createLoopParameterBindingCSAdapter();
 			}
@@ -400,6 +404,20 @@ public class QVTimperativeCSAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createGuardParameterCSAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.IfStatementCS <em>If Statement CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.IfStatementCS
+	 * @generated
+	 */
+	public Adapter createIfStatementCSAdapter() {
 		return null;
 	}
 

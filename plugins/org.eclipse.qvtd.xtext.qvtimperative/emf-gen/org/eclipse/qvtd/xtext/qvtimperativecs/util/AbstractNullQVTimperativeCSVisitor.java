@@ -85,6 +85,11 @@ public abstract class AbstractNullQVTimperativeCSVisitor<@Nullable R, C>
 	}
 
 	@Override
+	public R visitIfStatementCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull IfStatementCS object) {
+		return null;
+	}
+
+	@Override
 	public R visitLoopParameterBindingCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull LoopParameterBindingCS object) {
 		return null;
 	}

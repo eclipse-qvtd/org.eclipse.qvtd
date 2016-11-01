@@ -85,6 +85,11 @@ public abstract class AbstractExtendingQVTimperativeVisitor<R, C>
 	}
 
 	@Override
+	public R visitIfStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull IfStatement object) {
+		return visitObservableStatement(object);
+	}
+
+	@Override
 	public R visitImperativeModel(org.eclipse.qvtd.pivot.qvtimperative.@NonNull ImperativeModel object) {
 		return visitBaseModel(object);
 	}

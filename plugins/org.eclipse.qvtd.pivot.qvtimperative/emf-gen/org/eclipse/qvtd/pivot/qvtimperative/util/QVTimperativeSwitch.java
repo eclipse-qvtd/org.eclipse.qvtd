@@ -227,6 +227,18 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case QVTimperativePackage.IF_STATEMENT: {
+				IfStatement ifStatement = (IfStatement)theEObject;
+				T result = caseIfStatement(ifStatement);
+				if (result == null) result = caseObservableStatement(ifStatement);
+				if (result == null) result = caseStatement(ifStatement);
+				if (result == null) result = caseNamedElement(ifStatement);
+				if (result == null) result = caseElement(ifStatement);
+				if (result == null) result = caseNameable(ifStatement);
+				if (result == null) result = caseVisitable(ifStatement);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case QVTimperativePackage.IMPERATIVE_MODEL: {
 				ImperativeModel imperativeModel = (ImperativeModel)theEObject;
 				T result = caseImperativeModel(imperativeModel);
@@ -574,6 +586,21 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseGuardParameterBinding(GuardParameterBinding object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>If Statement</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>If Statement</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseIfStatement(IfStatement object) {
 		return null;
 	}
 

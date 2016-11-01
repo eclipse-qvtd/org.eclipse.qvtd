@@ -151,6 +151,10 @@ public class QVTimperativeAdapterFactory extends AdapterFactoryImpl {
 				return createGuardParameterBindingAdapter();
 			}
 			@Override
+			public Adapter caseIfStatement(IfStatement object) {
+				return createIfStatementAdapter();
+			}
+			@Override
 			public Adapter caseImperativeModel(ImperativeModel object) {
 				return createImperativeModelAdapter();
 			}
@@ -429,6 +433,20 @@ public class QVTimperativeAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createGuardParameterBindingAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtimperative.IfStatement <em>If Statement</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.IfStatement
+	 * @generated
+	 */
+	public Adapter createIfStatementAdapter() {
 		return null;
 	}
 

@@ -140,6 +140,18 @@ public abstract class AbstractWrappingQVTimperativeVisitor<R, C, @NonNull D exte
 	}
 
 	@Override
+	public R visitIfStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull IfStatement object) {
+		@Nullable P prologue = preVisit(object);
+		try {
+			R result = delegate.visitIfStatement(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
+	}
+
+	@Override
 	public R visitImperativeModel(org.eclipse.qvtd.pivot.qvtimperative.@NonNull ImperativeModel object) {
 		@Nullable P prologue = preVisit(object);
 		try {

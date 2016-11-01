@@ -89,6 +89,11 @@ public abstract class AbstractQVTimperativeCSPreOrderVisitor
 	}
 
 	@Override
+	public @Nullable Continuation<?> visitIfStatementCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull IfStatementCS csElement) {
+		return visitObservableStatementCS(csElement);
+	}
+
+	@Override
 	public @Nullable Continuation<?> visitLoopParameterBindingCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull LoopParameterBindingCS csElement) {
 		return visitMappingParameterBindingCS(csElement);
 	}

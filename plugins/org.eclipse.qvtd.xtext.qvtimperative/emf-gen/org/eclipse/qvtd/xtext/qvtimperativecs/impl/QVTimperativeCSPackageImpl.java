@@ -30,6 +30,7 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.DeclareStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.GuardParameterBindingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.GuardParameterCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.IfStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.LoopParameterBindingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallCS;
@@ -119,6 +120,13 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	 * @generated
 	 */
 	private EClass guardParameterCSEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass ifStatementCSEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -267,7 +275,7 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link QVTimperativeCSPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -300,7 +308,7 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		// Mark meta-data to indicate it can't be changed
 		theQVTimperativeCSPackage.freeze();
 
-  
+
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(QVTimperativeCSPackage.eNS_URI, theQVTimperativeCSPackage);
 		return theQVTimperativeCSPackage;
@@ -554,6 +562,46 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	@Override
 	public EReference getGuardParameterCS_ReferredTypedModel() {
 		return (EReference)guardParameterCSEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getIfStatementCS() {
+		return ifStatementCSEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getIfStatementCS_OwnedExpression() {
+		return (EReference)ifStatementCSEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getIfStatementCS_OwnedThenStatements() {
+		return (EReference)ifStatementCSEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getIfStatementCS_OwnedElseStatements() {
+		return (EReference)ifStatementCSEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -1159,6 +1207,11 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		guardParameterCSEClass = createEClass(GUARD_PARAMETER_CS);
 		createEReference(guardParameterCSEClass, GUARD_PARAMETER_CS__REFERRED_TYPED_MODEL);
 
+		ifStatementCSEClass = createEClass(IF_STATEMENT_CS);
+		createEReference(ifStatementCSEClass, IF_STATEMENT_CS__OWNED_EXPRESSION);
+		createEReference(ifStatementCSEClass, IF_STATEMENT_CS__OWNED_THEN_STATEMENTS);
+		createEReference(ifStatementCSEClass, IF_STATEMENT_CS__OWNED_ELSE_STATEMENTS);
+
 		loopParameterBindingCSEClass = createEClass(LOOP_PARAMETER_BINDING_CS);
 		createEReference(loopParameterBindingCSEClass, LOOP_PARAMETER_BINDING_CS__VALUE);
 		createEReference(loopParameterBindingCSEClass, LOOP_PARAMETER_BINDING_CS__REFERRED_VARIABLE);
@@ -1281,6 +1334,7 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		directionCSEClass.getESuperTypes().add(theBaseCSPackage.getNamedElementCS());
 		guardParameterBindingCSEClass.getESuperTypes().add(this.getMappingParameterBindingCS());
 		guardParameterCSEClass.getESuperTypes().add(this.getMappingParameterCS());
+		ifStatementCSEClass.getESuperTypes().add(this.getObservableStatementCS());
 		loopParameterBindingCSEClass.getESuperTypes().add(this.getMappingParameterBindingCS());
 		mappingCSEClass.getESuperTypes().add(theBaseCSPackage.getNamedElementCS());
 		mappingCallCSEClass.getESuperTypes().add(this.getMappingStatementCS());
@@ -1335,6 +1389,11 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 
 		initEClass(guardParameterCSEClass, GuardParameterCS.class, "GuardParameterCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getGuardParameterCS_ReferredTypedModel(), theQVTimperativePackage.getImperativeTypedModel(), null, "referredTypedModel", null, 1, 1, GuardParameterCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(ifStatementCSEClass, IfStatementCS.class, "IfStatementCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getIfStatementCS_OwnedExpression(), theEssentialOCLCSPackage.getExpCS(), null, "ownedExpression", null, 1, 1, IfStatementCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getIfStatementCS_OwnedThenStatements(), this.getStatementCS(), null, "ownedThenStatements", null, 0, -1, IfStatementCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getIfStatementCS_OwnedElseStatements(), this.getStatementCS(), null, "ownedElseStatements", null, 0, -1, IfStatementCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(loopParameterBindingCSEClass, LoopParameterBindingCS.class, "LoopParameterBindingCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getLoopParameterBindingCS_Value(), theQVTimperativePackage.getLoopVariable(), null, "value", null, 1, 1, LoopParameterBindingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

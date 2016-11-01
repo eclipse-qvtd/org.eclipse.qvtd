@@ -93,6 +93,7 @@ public class QVTimperativeCSFactoryImpl extends EFactoryImpl implements QVTimper
 			case QVTimperativeCSPackage.DIRECTION_CS: return createDirectionCS();
 			case QVTimperativeCSPackage.GUARD_PARAMETER_BINDING_CS: return createGuardParameterBindingCS();
 			case QVTimperativeCSPackage.GUARD_PARAMETER_CS: return createGuardParameterCS();
+			case QVTimperativeCSPackage.IF_STATEMENT_CS: return createIfStatementCS();
 			case QVTimperativeCSPackage.LOOP_PARAMETER_BINDING_CS: return createLoopParameterBindingCS();
 			case QVTimperativeCSPackage.MAPPING_CS: return createMappingCS();
 			case QVTimperativeCSPackage.MAPPING_CALL_CS: return createMappingCallCS();
@@ -207,6 +208,17 @@ public class QVTimperativeCSFactoryImpl extends EFactoryImpl implements QVTimper
 	public @NonNull GuardParameterCS createGuardParameterCS() {
 		GuardParameterCSImpl guardParameterCS = new GuardParameterCSImpl();
 		return guardParameterCS;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public @NonNull IfStatementCS createIfStatementCS() {
+		IfStatementCSImpl ifStatementCS = new IfStatementCSImpl();
+		return ifStatementCS;
 	}
 
 	/**

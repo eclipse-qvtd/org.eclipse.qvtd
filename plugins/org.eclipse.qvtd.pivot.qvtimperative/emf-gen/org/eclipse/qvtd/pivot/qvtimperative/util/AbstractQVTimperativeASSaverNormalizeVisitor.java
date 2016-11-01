@@ -91,6 +91,11 @@ public abstract class AbstractQVTimperativeASSaverNormalizeVisitor
 	}
 
 	@Override
+	public @Nullable Object visitIfStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull IfStatement object) {
+		return visitObservableStatement(object);
+	}
+
+	@Override
 	public @Nullable Object visitImperativeModel(org.eclipse.qvtd.pivot.qvtimperative.@NonNull ImperativeModel object) {
 		return visitBaseModel(object);
 	}

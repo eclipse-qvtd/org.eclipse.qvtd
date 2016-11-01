@@ -26,6 +26,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameterBinding;
+import org.eclipse.qvtd.pivot.qvtimperative.IfStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
@@ -116,6 +117,13 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * @generated
 	 */
 	private EClass guardParameterBindingEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass ifStatementEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -271,7 +279,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link QVTimperativePackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -302,7 +310,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		// Mark meta-data to indicate it can't be changed
 		theQVTimperativePackage.freeze();
 
-  
+
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(QVTimperativePackage.eNS_URI, theQVTimperativePackage);
 		return theQVTimperativePackage;
@@ -516,6 +524,46 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	@Override
 	public EAttribute getGuardParameterBinding_IsCheck() {
 		return (EAttribute)guardParameterBindingEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getIfStatement() {
+		return ifStatementEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getIfStatement_OwnedExpression() {
+		return (EReference)ifStatementEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getIfStatement_OwnedThenStatements() {
+		return (EReference)ifStatementEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getIfStatement_OwnedElseStatements() {
+		return (EReference)ifStatementEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -1037,6 +1085,11 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		createEReference(guardParameterBindingEClass, GUARD_PARAMETER_BINDING__VALUE);
 		createEAttribute(guardParameterBindingEClass, GUARD_PARAMETER_BINDING__IS_CHECK);
 
+		ifStatementEClass = createEClass(IF_STATEMENT);
+		createEReference(ifStatementEClass, IF_STATEMENT__OWNED_EXPRESSION);
+		createEReference(ifStatementEClass, IF_STATEMENT__OWNED_THEN_STATEMENTS);
+		createEReference(ifStatementEClass, IF_STATEMENT__OWNED_ELSE_STATEMENTS);
+
 		imperativeModelEClass = createEClass(IMPERATIVE_MODEL);
 
 		imperativeTransformationEClass = createEClass(IMPERATIVE_TRANSFORMATION);
@@ -1148,6 +1201,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		declareStatementEClass.getESuperTypes().add(this.getObservableStatement());
 		guardParameterEClass.getESuperTypes().add(this.getMappingParameter());
 		guardParameterBindingEClass.getESuperTypes().add(this.getMappingParameterBinding());
+		ifStatementEClass.getESuperTypes().add(this.getObservableStatement());
 		imperativeModelEClass.getESuperTypes().add(theQVTbasePackage.getBaseModel());
 		imperativeTransformationEClass.getESuperTypes().add(theQVTbasePackage.getTransformation());
 		imperativeTypedModelEClass.getESuperTypes().add(theQVTbasePackage.getTypedModel());
@@ -1201,6 +1255,11 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		initEClass(guardParameterBindingEClass, GuardParameterBinding.class, "GuardParameterBinding", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getGuardParameterBinding_Value(), this.getConnectionVariable(), null, "value", null, 1, 1, GuardParameterBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getGuardParameterBinding_IsCheck(), ecorePackage.getEBoolean(), "isCheck", "false", 0, 1, GuardParameterBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(ifStatementEClass, IfStatement.class, "IfStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getIfStatement_OwnedExpression(), thePivotPackage.getOCLExpression(), null, "ownedExpression", null, 1, 1, IfStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getIfStatement_OwnedThenStatements(), this.getStatement(), null, "ownedThenStatements", null, 0, -1, IfStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getIfStatement_OwnedElseStatements(), this.getStatement(), null, "ownedElseStatements", null, 0, -1, IfStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(imperativeModelEClass, ImperativeModel.class, "ImperativeModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1281,13 +1340,13 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * @generated
 	 */
 	protected void createImportAnnotations() {
-		String source = "http://www.eclipse.org/OCL/Import";	
+		String source = "http://www.eclipse.org/OCL/Import";
 		addAnnotation
-		  (this, 
-		   source, 
-		   new String[] {
-			 "qvtb", "../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#/"
-		   });
+		(this,
+			source,
+			new String[] {
+				"qvtb", "../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#/"
+		});
 	}
 
 } //QVTimperativePackageImpl

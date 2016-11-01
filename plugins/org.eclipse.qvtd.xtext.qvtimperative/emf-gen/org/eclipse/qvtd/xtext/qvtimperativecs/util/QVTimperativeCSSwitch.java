@@ -216,6 +216,19 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case QVTimperativeCSPackage.IF_STATEMENT_CS: {
+				IfStatementCS ifStatementCS = (IfStatementCS)theEObject;
+				T result = caseIfStatementCS(ifStatementCS);
+				if (result == null) result = caseObservableStatementCS(ifStatementCS);
+				if (result == null) result = caseStatementCS(ifStatementCS);
+				if (result == null) result = caseModelElementCS(ifStatementCS);
+				if (result == null) result = casePivotableElementCS(ifStatementCS);
+				if (result == null) result = caseElementCS(ifStatementCS);
+				if (result == null) result = casePivotable(ifStatementCS);
+				if (result == null) result = caseVisitableCS(ifStatementCS);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case QVTimperativeCSPackage.LOOP_PARAMETER_BINDING_CS: {
 				LoopParameterBindingCS loopParameterBindingCS = (LoopParameterBindingCS)theEObject;
 				T result = caseLoopParameterBindingCS(loopParameterBindingCS);
@@ -582,6 +595,21 @@ public class QVTimperativeCSSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseGuardParameterCS(GuardParameterCS object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>If Statement CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>If Statement CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseIfStatementCS(IfStatementCS object) {
 		return null;
 	}
 
