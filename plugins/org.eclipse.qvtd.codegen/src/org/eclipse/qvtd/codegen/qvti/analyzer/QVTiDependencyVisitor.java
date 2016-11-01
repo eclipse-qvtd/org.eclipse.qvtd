@@ -24,6 +24,7 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGFunction;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunctionCallExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunctionParameter;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGGuardVariable;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGIfStatement;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCall;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCallBinding;
@@ -87,6 +88,11 @@ public class QVTiDependencyVisitor extends JavaDependencyVisitor implements QVTi
 	@Override
 	public Object visitCGGuardVariable(@NonNull CGGuardVariable object) {
 		return visitCGParameter(object);
+	}
+
+	@Override
+	public Object visitCGIfStatement(@NonNull CGIfStatement object) {
+		return visitCGValuedElement(object);
 	}
 
 	@Override

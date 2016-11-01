@@ -85,6 +85,7 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGFunction;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunctionCallExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunctionParameter;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGGuardVariable;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGIfStatement;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCall;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCallBinding;
@@ -999,11 +1000,11 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		assert pReferredMapping != null;
 		CGMapping cgReferredMapping = analyzer.getMapping(pReferredMapping);
 		assert cgReferredMapping != null;
-		List<CGMappingCallBinding> cgMappingCallBindings = cgMappingCall.getMappingCallBindings();
+		List<@NonNull CGMappingCallBinding> cgMappingCallBindings = ClassUtil.nullFree(cgMappingCall.getMappingCallBindings());
 		//
 		//	Set loopVariable non-null if it needs to be type-checked and cast to a narrower type.
 		//
-		for (@SuppressWarnings("null")@NonNull CGMappingCallBinding cgMappingCallBinding : cgMappingCallBindings) {
+		for (@NonNull CGMappingCallBinding cgMappingCallBinding : cgMappingCallBindings) {
 			TypeDescriptor checkedType = needsTypeCheck(cgMappingCallBinding);
 			if (checkedType != null) {
 				js.append("if (");
@@ -1043,7 +1044,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			js.append(mappingCtorName);
 			js.append(".invoke(");
 			boolean isFirst = true;
-			for (@SuppressWarnings("null")@NonNull CGMappingCallBinding cgMappingCallBinding : cgMappingCallBindings) {
+			for (@NonNull CGMappingCallBinding cgMappingCallBinding : cgMappingCallBindings) {
 				if (!isFirst) {
 					js.append(", ");
 				}
@@ -1061,7 +1062,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		//
 		//	End the type check.
 		//
-		for (@SuppressWarnings("null")@NonNull CGMappingCallBinding cgMappingCallBinding : cgMappingCallBindings) {
+		for (@NonNull CGMappingCallBinding cgMappingCallBinding : cgMappingCallBindings) {
 			TypeDescriptor checkedType = needsTypeCheck(cgMappingCallBinding);
 			if (checkedType != null) {
 				js.popIndentation();
@@ -1892,6 +1893,38 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 	@Override
 	public @NonNull Boolean visitCGGuardVariable(@NonNull CGGuardVariable object) {
 		return visitCGParameter(object);
+	}
+
+	@Override
+	public @NonNull Boolean visitCGIfStatement(@NonNull CGIfStatement cgIfStatement) {
+		CGValuedElement condition = getExpression(cgIfStatement.getCondition());
+		boolean flowContinues = false;
+		//
+		if (!js.appendLocalStatements(condition)) {
+			return flowContinues;
+		}
+		//		js.appendDeclaration(cgIfExp);
+		//		js.append(";\n");
+		//
+		js.append("if (");
+		js.appendBooleanValueName(condition, true);
+		js.append(") {\n");
+		try {
+			js.pushIndentation(null);
+			flowContinues = cgIfStatement.getThenStatements().accept(this);
+		} finally {
+			js.popIndentation();
+		}
+		js.append("}\n");
+		js.append("else {\n");
+		try {
+			js.pushIndentation(null);
+			flowContinues = cgIfStatement.getElseStatements().accept(this);
+		} finally {
+			js.popIndentation();
+		}
+		js.append("}\n");
+		return flowContinues;
 	}
 
 	@Override

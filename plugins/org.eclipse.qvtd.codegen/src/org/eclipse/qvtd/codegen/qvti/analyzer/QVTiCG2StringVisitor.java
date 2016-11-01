@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
@@ -26,6 +26,7 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGFunction;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunctionCallExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunctionParameter;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGGuardVariable;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGIfStatement;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCall;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCallBinding;
@@ -43,7 +44,7 @@ import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 
 public class QVTiCG2StringVisitor extends CG2StringVisitor implements QVTiCGModelVisitor<String>
-{	
+{
 	private static final class MyFactory extends AbstractFactory
 	{
 		private static final class MyFactory2 extends AbstractFactory
@@ -64,7 +65,7 @@ public class QVTiCG2StringVisitor extends CG2StringVisitor implements QVTiCGMode
 				return eInstance;
 			}
 		}
-		
+
 		private MyFactory() {
 			new MyFactory2();
 			CG2StringVisitor.addFactory(this);
@@ -136,6 +137,18 @@ public class QVTiCG2StringVisitor extends CG2StringVisitor implements QVTiCGMode
 	}
 
 	@Override
+	public @Nullable String visitCGIfStatement(@NonNull CGIfStatement cgIf) {
+		append("if ");  //$NON-NLS-1$
+		safeVisit(cgIf.getCondition());
+		append(" then {"); //$NON-NLS-1$
+		safeVisit(cgIf.getThenStatements());
+		append("} else {"); //$NON-NLS-1$
+		safeVisit(cgIf.getElseStatements());
+		append(" }"); //$NON-NLS-1$
+		return null;
+	}
+
+	@Override
 	public @Nullable String visitCGMapping(@NonNull CGMapping cgMapping) {
 		appendQualifiedName(cgMapping.getTransformation(), ".", cgMapping);
 		append("(");
@@ -189,7 +202,7 @@ public class QVTiCG2StringVisitor extends CG2StringVisitor implements QVTiCGMode
 		}
 		append(" | ");
 		append(" ... ");
-//		safeVisit(cgMappingLoop.getBody());
+		//		safeVisit(cgMappingLoop.getBody());
 		append(")");
 		return null;
 	}

@@ -32,7 +32,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 public class QVTiReferencesVisitor extends ReferencesVisitor implements QVTiCGModelVisitor<@NonNull List<@Nullable Object>>
 {
 	public static final @NonNull QVTiReferencesVisitor INSTANCE = new QVTiReferencesVisitor(new Object());
-	
+
 	protected QVTiReferencesVisitor(@Nullable Object context) {
 		super(context);
 	}
@@ -80,6 +80,11 @@ public class QVTiReferencesVisitor extends ReferencesVisitor implements QVTiCGMo
 	@Override
 	public @NonNull List<@Nullable Object> visitCGGuardVariable(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGGuardVariable object) {
 		return visitCGParameter(object);
+	}
+
+	@Override
+	public @NonNull List<@Nullable Object> visitCGIfStatement(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGIfStatement object) {
+		return visitCGValuedElement(object);
 	}
 
 	@Override

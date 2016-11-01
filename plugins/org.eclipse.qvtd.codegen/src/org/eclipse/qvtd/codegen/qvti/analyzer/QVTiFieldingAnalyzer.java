@@ -26,6 +26,7 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGFunction;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunctionCallExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunctionParameter;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGGuardVariable;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGIfStatement;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCall;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCallBinding;
@@ -91,6 +92,11 @@ public class QVTiFieldingAnalyzer extends FieldingAnalyzer
 		@Override
 		public @Nullable Set<@NonNull CGVariable> visitCGGuardVariable(@NonNull CGGuardVariable object) {
 			return visitCGParameter(object);
+		}
+
+		@Override
+		public @Nullable Set<@NonNull CGVariable> visitCGIfStatement(@NonNull CGIfStatement object) {
+			return visitCGValuedElement(object);
 		}
 
 		@Override
@@ -203,6 +209,11 @@ public class QVTiFieldingAnalyzer extends FieldingAnalyzer
 		@Override
 		public @NonNull Boolean visitCGGuardVariable(@NonNull CGGuardVariable object) {
 			return visitCGParameter(object);
+		}
+
+		@Override
+		public @NonNull Boolean visitCGIfStatement(@NonNull CGIfStatement object) {
+			return visitCGValuedElement(object);
 		}
 
 		@Override
