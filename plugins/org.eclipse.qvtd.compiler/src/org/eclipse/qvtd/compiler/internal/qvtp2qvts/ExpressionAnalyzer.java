@@ -64,6 +64,7 @@ import org.eclipse.qvtd.pivot.qvtcore.OppositePropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcore.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtcore.util.AbstractExtendingQVTcoreVisitor;
+import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreHelper;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
 
 import com.google.common.collect.Iterables;
@@ -706,7 +707,8 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@NonNull
 		assert property != null;
 		OCLExpression value = asNavigationAssignment.getValue();
 		if (value != null) {
-			PivotUtil.rewriteSafeNavigations(environmentFactory, value);
+			QVTcoreHelper helper = new QVTcoreHelper(environmentFactory);		// FIXME Re-use a helper
+			helper.rewriteSafeNavigations(value);
 		}
 		Node targetNode = analyze(value);
 		NavigableEdge navigationEdge = getNavigationEdge(slotNode, property, targetNode, asNavigationAssignment);

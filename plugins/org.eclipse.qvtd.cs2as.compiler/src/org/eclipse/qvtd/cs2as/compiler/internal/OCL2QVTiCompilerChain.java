@@ -30,6 +30,7 @@ import org.eclipse.qvtd.compiler.AbstractCompilerChain;
 import org.eclipse.qvtd.compiler.AbstractCompilerStep;
 import org.eclipse.qvtd.compiler.CompilerChain;
 import org.eclipse.qvtd.compiler.CompilerChainException;
+import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreHelper;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
 
@@ -142,9 +143,10 @@ public class OCL2QVTiCompilerChain extends AbstractCompilerChain {
 
 	// FIXME this workaround produces a new traversal of the resource
 	private void rewriteSafeNavigations(@NonNull Resource resource) {
+		QVTcoreHelper helper = new QVTcoreHelper(environmentFactory);		// FIXME Re-use a helper
 		for (EObject rootObject : resource.getContents()) {
 			if (rootObject instanceof Element) {
-				PivotUtil.rewriteSafeNavigations(environmentFactory, (Element) rootObject);
+				helper.rewriteSafeNavigations((Element) rootObject);
 			}
 		}
 	}
