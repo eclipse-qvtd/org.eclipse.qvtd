@@ -192,7 +192,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelPackageImpl#getCGPropertyAssignment()
 	 * @generated
 	 */
-	int CG_PROPERTY_ASSIGNMENT = 16;
+	int CG_PROPERTY_ASSIGNMENT = 17;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGEcorePropertyAssignmentImpl <em>CG Ecore Property Assignment</em>}' class.
@@ -212,7 +212,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelPackageImpl#getCGMapping()
 	 * @generated
 	 */
-	int CG_MAPPING = 9;
+	int CG_MAPPING = 10;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGTransformationImpl <em>CG Transformation</em>}' class.
@@ -222,7 +222,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelPackageImpl#getCGTransformation()
 	 * @generated
 	 */
-	int CG_TRANSFORMATION = 19;
+	int CG_TRANSFORMATION = 20;
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGEcorePropertyAssignment <em>CG Ecore Property Assignment</em>}'.
@@ -351,6 +351,49 @@ public interface QVTiCGModelPackage extends EPackage {
 	EReference getCGGuardVariable_TypedModel();
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGIfStatement <em>CG If Statement</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>CG If Statement</em>'.
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGIfStatement
+	 * @generated
+	 */
+	EClass getCGIfStatement();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGIfStatement#getCondition <em>Condition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Condition</em>'.
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGIfStatement#getCondition()
+	 * @see #getCGIfStatement()
+	 * @generated
+	 */
+	EReference getCGIfStatement_Condition();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGIfStatement#getThenStatements <em>Then Statements</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Then Statements</em>'.
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGIfStatement#getThenStatements()
+	 * @see #getCGIfStatement()
+	 * @generated
+	 */
+	EReference getCGIfStatement_ThenStatements();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGIfStatement#getElseStatements <em>Else Statements</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Else Statements</em>'.
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGIfStatement#getElseStatements()
+	 * @see #getCGIfStatement()
+	 * @generated
+	 */
+	EReference getCGIfStatement_ElseStatements();
+
+	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGMappingCallImpl <em>CG Mapping Call</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -358,7 +401,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelPackageImpl#getCGMappingCall()
 	 * @generated
 	 */
-	int CG_MAPPING_CALL = 10;
+	int CG_MAPPING_CALL = 11;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGMappingCallBindingImpl <em>CG Mapping Call Binding</em>}' class.
@@ -368,7 +411,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelPackageImpl#getCGMappingCallBinding()
 	 * @generated
 	 */
-	int CG_MAPPING_CALL_BINDING = 11;
+	int CG_MAPPING_CALL_BINDING = 12;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGRealizedVariableImpl <em>CG Realized Variable</em>}' class.
@@ -378,7 +421,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelPackageImpl#getCGRealizedVariable()
 	 * @generated
 	 */
-	int CG_REALIZED_VARIABLE = 17;
+	int CG_REALIZED_VARIABLE = 18;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGEcoreRealizedVariableImpl <em>CG Ecore Realized Variable</em>}' class.
@@ -1495,6 +1538,106 @@ public interface QVTiCGModelPackage extends EPackage {
 	int CG_FUNCTION_PARAMETER_FEATURE_COUNT = CGModelPackage.CG_PARAMETER_FEATURE_COUNT + 1;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGIfStatementImpl <em>CG If Statement</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.CGIfStatementImpl
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelPackageImpl#getCGIfStatement()
+	 * @generated
+	 */
+	int CG_IF_STATEMENT = 9;
+
+	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_IF_STATEMENT__AST = CGModelPackage.CG_VALUED_ELEMENT__AST;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_IF_STATEMENT__NAME = CGModelPackage.CG_VALUED_ELEMENT__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Type Id</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_IF_STATEMENT__TYPE_ID = CGModelPackage.CG_VALUED_ELEMENT__TYPE_ID;
+
+	/**
+	 * The feature id for the '<em><b>Required</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_IF_STATEMENT__REQUIRED = CGModelPackage.CG_VALUED_ELEMENT__REQUIRED;
+
+	/**
+	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_IF_STATEMENT__DEPENDS_ON = CGModelPackage.CG_VALUED_ELEMENT__DEPENDS_ON;
+
+	/**
+	 * The feature id for the '<em><b>Owns</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_IF_STATEMENT__OWNS = CGModelPackage.CG_VALUED_ELEMENT__OWNS;
+
+	/**
+	 * The feature id for the '<em><b>Condition</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_IF_STATEMENT__CONDITION = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Then Statements</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_IF_STATEMENT__THEN_STATEMENTS = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Else Statements</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_IF_STATEMENT__ELSE_STATEMENTS = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>CG If Statement</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_IF_STATEMENT_FEATURE_COUNT = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 3;
+
+	/**
 	 * The feature id for the '<em><b>Ast</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1709,7 +1852,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelPackageImpl#getCGMappingExp()
 	 * @generated
 	 */
-	int CG_MAPPING_EXP = 12;
+	int CG_MAPPING_EXP = 13;
 
 	/**
 	 * The feature id for the '<em><b>Ast</b></em>' attribute.
@@ -1836,7 +1979,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelPackageImpl#getCGMappingLoop()
 	 * @generated
 	 */
-	int CG_MAPPING_LOOP = 13;
+	int CG_MAPPING_LOOP = 14;
 
 	/**
 	 * The feature id for the '<em><b>Ast</b></em>' attribute.
@@ -1963,7 +2106,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelPackageImpl#getCGMiddlePropertyAssignment()
 	 * @generated
 	 */
-	int CG_MIDDLE_PROPERTY_ASSIGNMENT = 14;
+	int CG_MIDDLE_PROPERTY_ASSIGNMENT = 15;
 
 	/**
 	 * The feature id for the '<em><b>Ast</b></em>' attribute.
@@ -2090,7 +2233,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelPackageImpl#getCGMiddlePropertyCallExp()
 	 * @generated
 	 */
-	int CG_MIDDLE_PROPERTY_CALL_EXP = 15;
+	int CG_MIDDLE_PROPERTY_CALL_EXP = 16;
 
 	/**
 	 * The feature id for the '<em><b>Ast</b></em>' attribute.
@@ -2199,7 +2342,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelPackageImpl#getCGSequence()
 	 * @generated
 	 */
-	int CG_SEQUENCE = 18;
+	int CG_SEQUENCE = 19;
 
 	/**
 	 * The feature id for the '<em><b>Ast</b></em>' attribute.
@@ -2407,7 +2550,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelPackageImpl#getCGTypedModel()
 	 * @generated
 	 */
-	int CG_TYPED_MODEL = 20;
+	int CG_TYPED_MODEL = 21;
 
 	/**
 	 * The feature id for the '<em><b>Ast</b></em>' attribute.
@@ -3104,6 +3247,40 @@ public interface QVTiCGModelPackage extends EPackage {
 		 * @generated
 		 */
 		EReference CG_GUARD_VARIABLE__TYPED_MODEL = eINSTANCE.getCGGuardVariable_TypedModel();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGIfStatementImpl <em>CG If Statement</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.CGIfStatementImpl
+		 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelPackageImpl#getCGIfStatement()
+		 * @generated
+		 */
+		EClass CG_IF_STATEMENT = eINSTANCE.getCGIfStatement();
+
+		/**
+		 * The meta object literal for the '<em><b>Condition</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CG_IF_STATEMENT__CONDITION = eINSTANCE.getCGIfStatement_Condition();
+
+		/**
+		 * The meta object literal for the '<em><b>Then Statements</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CG_IF_STATEMENT__THEN_STATEMENTS = eINSTANCE.getCGIfStatement_ThenStatements();
+
+		/**
+		 * The meta object literal for the '<em><b>Else Statements</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CG_IF_STATEMENT__ELSE_STATEMENTS = eINSTANCE.getCGIfStatement_ElseStatements();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGPropertyAssignmentImpl <em>CG Property Assignment</em>}' class.

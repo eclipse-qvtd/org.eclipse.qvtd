@@ -202,6 +202,17 @@ public class QVTiCGModelSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case QVTiCGModelPackage.CG_IF_STATEMENT: {
+				CGIfStatement cgIfStatement = (CGIfStatement)theEObject;
+				T result = caseCGIfStatement(cgIfStatement);
+				if (result == null) result = caseCGValuedElement(cgIfStatement);
+				if (result == null) result = caseCGTypedElement(cgIfStatement);
+				if (result == null) result = caseCGNamedElement(cgIfStatement);
+				if (result == null) result = caseCGElement(cgIfStatement);
+				if (result == null) result = caseNameable(cgIfStatement);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case QVTiCGModelPackage.CG_MAPPING: {
 				CGMapping cgMapping = (CGMapping)theEObject;
 				T result = caseCGMapping(cgMapping);
@@ -473,6 +484,21 @@ public class QVTiCGModelSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseCGGuardVariable(CGGuardVariable object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>CG If Statement</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>CG If Statement</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCGIfStatement(CGIfStatement object) {
 		return null;
 	}
 

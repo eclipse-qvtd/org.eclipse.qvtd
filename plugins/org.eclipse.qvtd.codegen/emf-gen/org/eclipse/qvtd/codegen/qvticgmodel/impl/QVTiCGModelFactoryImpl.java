@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
@@ -89,6 +89,7 @@ public class QVTiCGModelFactoryImpl extends EFactoryImpl implements QVTiCGModelF
 			case QVTiCGModelPackage.CG_FUNCTION_CALL_EXP: return createCGFunctionCallExp();
 			case QVTiCGModelPackage.CG_FUNCTION_PARAMETER: return createCGFunctionParameter();
 			case QVTiCGModelPackage.CG_GUARD_VARIABLE: return createCGGuardVariable();
+			case QVTiCGModelPackage.CG_IF_STATEMENT: return createCGIfStatement();
 			case QVTiCGModelPackage.CG_MAPPING: return createCGMapping();
 			case QVTiCGModelPackage.CG_MAPPING_CALL: return createCGMappingCall();
 			case QVTiCGModelPackage.CG_MAPPING_CALL_BINDING: return createCGMappingCallBinding();
@@ -203,6 +204,17 @@ public class QVTiCGModelFactoryImpl extends EFactoryImpl implements QVTiCGModelF
 	public @NonNull CGGuardVariable createCGGuardVariable() {
 		CGGuardVariableImpl cgGuardVariable = new CGGuardVariableImpl();
 		return cgGuardVariable;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public @NonNull CGIfStatement createCGIfStatement() {
+		CGIfStatementImpl cgIfStatement = new CGIfStatementImpl();
+		return cgIfStatement;
 	}
 
 	/**

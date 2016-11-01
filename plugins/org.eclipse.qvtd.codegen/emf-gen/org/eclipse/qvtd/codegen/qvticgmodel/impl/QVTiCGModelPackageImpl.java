@@ -25,6 +25,7 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGFunction;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunctionCallExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunctionParameter;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGGuardVariable;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGIfStatement;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCall;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCallBinding;
@@ -109,6 +110,13 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 	 * @generated
 	 */
 	private EClass cgGuardVariableEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass cgIfStatementEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -222,7 +230,7 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link QVTiCGModelPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -253,7 +261,7 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 		// Mark meta-data to indicate it can't be changed
 		theQVTiCGModelPackage.freeze();
 
-  
+
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(QVTiCGModelPackage.eNS_URI, theQVTiCGModelPackage);
 		return theQVTiCGModelPackage;
@@ -447,6 +455,46 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 	@Override
 	public EReference getCGGuardVariable_TypedModel() {
 		return (EReference)cgGuardVariableEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getCGIfStatement() {
+		return cgIfStatementEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getCGIfStatement_Condition() {
+		return (EReference)cgIfStatementEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getCGIfStatement_ThenStatements() {
+		return (EReference)cgIfStatementEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getCGIfStatement_ElseStatements() {
+		return (EReference)cgIfStatementEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -866,6 +914,11 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 		createEReference(cgGuardVariableEClass, CG_GUARD_VARIABLE__MAPPING);
 		createEReference(cgGuardVariableEClass, CG_GUARD_VARIABLE__TYPED_MODEL);
 
+		cgIfStatementEClass = createEClass(CG_IF_STATEMENT);
+		createEReference(cgIfStatementEClass, CG_IF_STATEMENT__CONDITION);
+		createEReference(cgIfStatementEClass, CG_IF_STATEMENT__THEN_STATEMENTS);
+		createEReference(cgIfStatementEClass, CG_IF_STATEMENT__ELSE_STATEMENTS);
+
 		cgMappingEClass = createEClass(CG_MAPPING);
 		createEReference(cgMappingEClass, CG_MAPPING__BODY);
 		createEReference(cgMappingEClass, CG_MAPPING__FREE_VARIABLES);
@@ -955,6 +1008,7 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 		cgFunctionCallExpEClass.getESuperTypes().add(theCGModelPackage.getCGOperationCallExp());
 		cgFunctionParameterEClass.getESuperTypes().add(theCGModelPackage.getCGParameter());
 		cgGuardVariableEClass.getESuperTypes().add(theCGModelPackage.getCGParameter());
+		cgIfStatementEClass.getESuperTypes().add(theCGModelPackage.getCGValuedElement());
 		cgMappingEClass.getESuperTypes().add(theCGModelPackage.getCGNamedElement());
 		cgMappingCallEClass.getESuperTypes().add(theCGModelPackage.getCGValuedElement());
 		cgMappingCallBindingEClass.getESuperTypes().add(theCGModelPackage.getCGValuedElement());
@@ -996,6 +1050,11 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 		initEClass(cgGuardVariableEClass, CGGuardVariable.class, "CGGuardVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCGGuardVariable_Mapping(), this.getCGMapping(), this.getCGMapping_FreeVariables(), "mapping", null, 1, 1, CGGuardVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCGGuardVariable_TypedModel(), this.getCGTypedModel(), null, "typedModel", null, 1, 1, CGGuardVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(cgIfStatementEClass, CGIfStatement.class, "CGIfStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getCGIfStatement_Condition(), theCGModelPackage.getCGValuedElement(), null, "condition", null, 1, 1, CGIfStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCGIfStatement_ThenStatements(), this.getCGSequence(), null, "thenStatements", null, 1, 1, CGIfStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCGIfStatement_ElseStatements(), this.getCGSequence(), null, "elseStatements", null, 1, 1, CGIfStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(cgMappingEClass, CGMapping.class, "CGMapping", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCGMapping_Body(), theCGModelPackage.getCGValuedElement(), null, "body", null, 1, 1, CGMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1060,13 +1119,13 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 	 * @generated
 	 */
 	protected void createImportAnnotations() {
-		String source = "http://www.eclipse.org/OCL/Import";	
+		String source = "http://www.eclipse.org/OCL/Import";
 		addAnnotation
-		  (this, 
-		   source, 
-		   new String[] {
-			 "ecore", "http://www.eclipse.org/emf/2002/Ecore#/"
-		   });
+		(this,
+			source,
+			new String[] {
+				"ecore", "http://www.eclipse.org/emf/2002/Ecore#/"
+		});
 	}
 
 } //QVTiCGModelPackageImpl

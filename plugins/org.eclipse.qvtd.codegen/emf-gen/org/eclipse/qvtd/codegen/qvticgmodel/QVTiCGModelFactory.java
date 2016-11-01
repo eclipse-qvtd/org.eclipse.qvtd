@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
@@ -111,6 +111,15 @@ public interface QVTiCGModelFactory extends EFactory {
 	 * @generated
 	 */
 	@NonNull CGGuardVariable createCGGuardVariable();
+
+	/**
+	 * Returns a new object of class '<em>CG If Statement</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>CG If Statement</em>'.
+	 * @generated
+	 */
+	@NonNull CGIfStatement createCGIfStatement();
 
 	/**
 	 * Returns a new object of class '<em>CG Property Assignment</em>'.

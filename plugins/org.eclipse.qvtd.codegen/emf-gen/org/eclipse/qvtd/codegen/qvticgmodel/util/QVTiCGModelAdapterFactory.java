@@ -125,6 +125,10 @@ public class QVTiCGModelAdapterFactory extends AdapterFactoryImpl {
 				return createCGGuardVariableAdapter();
 			}
 			@Override
+			public Adapter caseCGIfStatement(CGIfStatement object) {
+				return createCGIfStatementAdapter();
+			}
+			@Override
 			public Adapter caseCGMapping(CGMapping object) {
 				return createCGMappingAdapter();
 			}
@@ -375,6 +379,20 @@ public class QVTiCGModelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createCGGuardVariableAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGIfStatement <em>CG If Statement</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGIfStatement
+	 * @generated
+	 */
+	public Adapter createCGIfStatementAdapter() {
 		return null;
 	}
 

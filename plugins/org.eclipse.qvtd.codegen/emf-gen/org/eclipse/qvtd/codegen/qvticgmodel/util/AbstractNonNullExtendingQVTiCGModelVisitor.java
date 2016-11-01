@@ -89,6 +89,11 @@ public abstract class AbstractNonNullExtendingQVTiCGModelVisitor<R, C>
 	}
 
 	@Override
+	public @NonNull R visitCGIfStatement(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGIfStatement object) {
+		return visitCGValuedElement(object);
+	}
+
+	@Override
 	public @NonNull R visitCGMapping(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGMapping object) {
 		return visitCGNamedElement(object);
 	}

@@ -32,6 +32,7 @@ public interface QVTiCGModelVisitor<R> extends org.eclipse.ocl.examples.codegen.
 	R visitCGFunctionCallExp(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGFunctionCallExp object);
 	R visitCGFunctionParameter(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGFunctionParameter object);
 	R visitCGGuardVariable(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGGuardVariable object);
+	R visitCGIfStatement(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGIfStatement object);
 	R visitCGMapping(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGMapping object);
 	R visitCGMappingCall(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGMappingCall object);
 	R visitCGMappingCallBinding(org.eclipse.qvtd.codegen.qvticgmodel.@NonNull CGMappingCallBinding object);
