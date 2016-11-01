@@ -47,6 +47,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameterBinding;
+import org.eclipse.qvtd.pivot.qvtimperative.IfStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
@@ -373,6 +374,30 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 	@Override
 	public Object visitGuardParameterBinding(@NonNull GuardParameterBinding object) {
 		return visiting(object);	// FIXME
+	}
+
+	@Override
+	public @Nullable Object visitIfStatement(@NonNull IfStatement asIfStatement) {
+		OCLExpression condition = asIfStatement.getOwnedExpression();
+		Object acceptedValue = condition.accept(undecoratedVisitor);
+		Object evaluatedCondition = ValueUtil.asBoolean(acceptedValue);
+		List<@NonNull Statement> asStatements = ClassUtil.nullFree(asIfStatement.getOwnedThenStatements());
+		if (evaluatedCondition == ValueUtil.TRUE_VALUE) {
+			asStatements = ClassUtil.nullFree(asIfStatement.getOwnedThenStatements());
+		}
+		else {
+			asStatements = ClassUtil.nullFree(asIfStatement.getOwnedElseStatements());
+		}
+		for (@NonNull Statement asStatement : ClassUtil.nullFree(asStatements)) {
+			context.pushEvaluationEnvironment(asStatement, asIfStatement);
+			try {
+				asStatement.accept(undecoratedVisitor);
+			}
+			finally {
+				context.popEvaluationEnvironment();
+			}
+		}
+		return true;
 	}
 
 	@Override

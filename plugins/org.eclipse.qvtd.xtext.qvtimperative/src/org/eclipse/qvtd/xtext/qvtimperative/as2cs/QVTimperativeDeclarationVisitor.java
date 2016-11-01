@@ -77,6 +77,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameterBinding;
+import org.eclipse.qvtd.pivot.qvtimperative.IfStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
@@ -110,6 +111,7 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.DeclareStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.GuardParameterBindingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.GuardParameterCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.IfStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.LoopParameterBindingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallCS;
@@ -451,7 +453,7 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 	@Override
 	public ElementCS visitGuardParameter(@NonNull GuardParameter asVariable) {
 		ImperativeTypedModel asTypedModel = asVariable.getReferredTypedModel();
-		org.eclipse.ocl.pivot.Package asUsedPackage = asTypedModel.getUsedPackage().size() > 0 ? asTypedModel.getUsedPackage().get(0) : null;
+		//		org.eclipse.ocl.pivot.Package asUsedPackage = asTypedModel.getUsedPackage().size() > 0 ? asTypedModel.getUsedPackage().get(0) : null;
 		Mapping containingMapping = QVTimperativeUtil.getContainingMapping(asVariable);
 		assert containingMapping != null;
 		GuardParameterCS csUnrealizedVariable = context.refreshNamedElement(GuardParameterCS.class, QVTimperativeCSPackage.Literals.GUARD_PARAMETER_CS, asVariable);
@@ -469,6 +471,15 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 		csMappingParameterBinding.setValue(asMappingParameterBinding.getValue());
 		csMappingParameterBinding.setIsCheck(asMappingParameterBinding.isIsCheck());
 		return csMappingParameterBinding;
+	}
+
+	@Override
+	public ElementCS visitIfStatement(@NonNull IfStatement asIfStatement) {
+		IfStatementCS csStatement = context.refreshElement(IfStatementCS.class, QVTimperativeCSPackage.Literals.IF_STATEMENT_CS, asIfStatement);
+		csStatement.setOwnedExpression(createExpCS(asIfStatement.getOwnedExpression()));
+		context.refreshList(csStatement.getOwnedThenStatements(), context.visitDeclarations(StatementCS.class, asIfStatement.getOwnedThenStatements(), null));
+		context.refreshList(csStatement.getOwnedElseStatements(), context.visitDeclarations(StatementCS.class, asIfStatement.getOwnedElseStatements(), null));
+		return csStatement;
 	}
 
 	@Override
@@ -661,7 +672,7 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 	@Override
 	public ElementCS visitNewStatement(@NonNull NewStatement asNewStatement) {
 		ImperativeTypedModel asTypedModel = asNewStatement.getReferredTypedModel();
-		org.eclipse.ocl.pivot.Package asUsedPackage = asTypedModel.getUsedPackage().size() > 0 ? asTypedModel.getUsedPackage().get(0) : null;
+		//		org.eclipse.ocl.pivot.Package asUsedPackage = asTypedModel.getUsedPackage().size() > 0 ? asTypedModel.getUsedPackage().get(0) : null;
 		NewStatementCS csNewStatement = context.refreshNamedElement(NewStatementCS.class, QVTimperativeCSPackage.Literals.NEW_STATEMENT_CS, asNewStatement);
 		csNewStatement.setOwnedType(createTypeRefCS(asNewStatement.getType(), null));
 		csNewStatement.setReferredTypedModel(asTypedModel);
@@ -727,7 +738,7 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 	@Override
 	public ElementCS visitSimpleParameter(@NonNull SimpleParameter asVariable) {
 		ImperativeTypedModel asTypedModel = asVariable.getReferredTypedModel();
-		org.eclipse.ocl.pivot.Package asUsedPackage = asTypedModel.getUsedPackage().size() > 0 ? asTypedModel.getUsedPackage().get(0) : null;
+		//		org.eclipse.ocl.pivot.Package asUsedPackage = asTypedModel.getUsedPackage().size() > 0 ? asTypedModel.getUsedPackage().get(0) : null;
 		Mapping containingMapping = QVTimperativeUtil.getContainingMapping(asVariable);
 		assert containingMapping != null;
 		SimpleParameterCS csUnrealizedVariable = context.refreshNamedElement(SimpleParameterCS.class, QVTimperativeCSPackage.Literals.SIMPLE_PARAMETER_CS, asVariable);

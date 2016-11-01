@@ -26,6 +26,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameterBinding;
+import org.eclipse.qvtd.pivot.qvtimperative.IfStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
@@ -182,6 +183,22 @@ public class QVTimperativeToStringVisitor extends QVTbaseToStringVisitor impleme
 		appendName(object.getBoundVariable());
 		append(" consumes ");
 		safeVisit(object.getValue());
+		return null;
+	}
+
+	@Override
+	public @Nullable String visitIfStatement(@NonNull IfStatement asIfStatement) {
+		append("if ");
+		safeVisit(asIfStatement.getOwnedExpression());
+		append(" then {");
+		for (Statement asThenStatement : asIfStatement.getOwnedThenStatements()) {
+			safeVisit(asThenStatement);
+		}
+		append("} else {");
+		for (Statement asElseStatement : asIfStatement.getOwnedElseStatements()) {
+			safeVisit(asElseStatement);
+		}
+		context.append("}n");
 		return null;
 	}
 

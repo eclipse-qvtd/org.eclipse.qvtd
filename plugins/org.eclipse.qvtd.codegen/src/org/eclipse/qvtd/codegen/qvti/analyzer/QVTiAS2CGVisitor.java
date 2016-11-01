@@ -113,6 +113,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameterBinding;
+import org.eclipse.qvtd.pivot.qvtimperative.IfStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
@@ -903,6 +904,11 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 		cgMappingCallBinding.setTypeId(analyzer.getTypeId(asBoundVariable.getTypeId()));
 		//		cgMappingCallBinding.setValueName(localnameasMappingCallBinding.getBoundVariable().getName());
 		return cgMappingCallBinding;
+	}
+
+	@Override
+	public @Nullable CGNamedElement visitIfStatement(@NonNull IfStatement asIftStatement) {
+		throw new UnsupportedOperationException();		// FIXME BUG 480194
 	}
 
 	@Override

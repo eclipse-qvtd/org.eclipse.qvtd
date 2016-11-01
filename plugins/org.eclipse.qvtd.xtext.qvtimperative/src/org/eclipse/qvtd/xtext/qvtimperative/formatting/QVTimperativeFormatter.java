@@ -21,6 +21,7 @@ import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.DirectionCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.GuardParameterBindingCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.GuardParameterCSElements;
+import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.IfStatementCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.ImportCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.LoopParameterBindingCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.MappingCSElements;
@@ -130,7 +131,18 @@ public class QVTimperativeFormatter extends AbstractEssentialOCLFormatter
 			c.setNoSpace().before(a.getSemicolonKeyword_6());
 		}
 		{
+			IfStatementCSElements a = f.getIfStatementCSAccess();
+			c.setLinewrap(1).before(a.getGroup());
+			//			c.setLinewrap().after(a.getOwnedConditionAssignment_1());
+			//			c.setLinewrap().after(a.getOwnedThenExpressionAssignment_3());
+			//			c.setLinewrap().after(a.getOwnedElseExpressionAssignment_6());
+			c.setIndentation(a.getIfKeyword_1(), a.getThenKeyword_3());
+			c.setIndentation(a.getThenKeyword_3(), a.getRightCurlyBracketKeyword_6());
+			c.setIndentation(a.getElseKeyword_7(), a.getRightCurlyBracketKeyword_10());
+		}
+		{
 			ImportCSElements a = f.getImportCSAccess();
+			c.setLinewrap(1).before(a.getGroup());
 			setNoSpaceLineWrap(c, a.getSemicolonKeyword_4());
 		}
 		{

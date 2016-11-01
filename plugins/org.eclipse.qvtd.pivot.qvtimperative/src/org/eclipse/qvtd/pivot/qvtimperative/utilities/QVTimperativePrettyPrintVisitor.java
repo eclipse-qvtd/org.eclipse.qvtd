@@ -26,6 +26,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameterBinding;
+import org.eclipse.qvtd.pivot.qvtimperative.IfStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
@@ -51,6 +52,7 @@ public class QVTimperativePrettyPrintVisitor extends QVTbasePrettyPrintVisitor i
 	public QVTimperativePrettyPrintVisitor(@NonNull PrettyPrinter context) {
 		super(context);
 	}
+
 	@Override
 	public Object visitAddStatement(@NonNull AddStatement asAddStatement) {
 		context.append("add ");
@@ -152,6 +154,28 @@ public class QVTimperativePrettyPrintVisitor extends QVTbasePrettyPrintVisitor i
 		context.append(" consumes ");
 		safeVisit(pGuardParameterBinding.getValue());
 		context.append(";\n");
+		return null;
+	}
+
+	@Override
+	public Object visitIfStatement(@NonNull IfStatement asIfStatement) {
+		context.append("if ");
+		safeVisit(asIfStatement.getOwnedExpression());
+		context.append(" then {");
+		context.push("", "");
+		for (Statement asThenStatement : asIfStatement.getOwnedThenStatements()) {
+			safeVisit(asThenStatement);
+		}
+		context.append("}");
+		context.pop();
+		context.append("else {");
+		context.push("", "");
+		for (Statement asElseStatement : asIfStatement.getOwnedElseStatements()) {
+			safeVisit(asElseStatement);
+		}
+		context.append("}");
+		context.pop();
+		//		context.append("\n");
 		return null;
 	}
 

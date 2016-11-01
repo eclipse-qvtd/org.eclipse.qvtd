@@ -32,6 +32,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.BufferStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.CheckStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
+import org.eclipse.qvtd.pivot.qvtimperative.IfStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
@@ -46,6 +47,7 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.DeclareStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.GuardParameterBindingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.GuardParameterCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.IfStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.LoopParameterBindingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingLoopCS;
@@ -227,6 +229,17 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 
 	@Override
 	public Continuation<?> visitGuardParameterBindingCS(@NonNull GuardParameterBindingCS csElement) {
+		return null;
+	}
+
+	@Override
+	public Continuation<?> visitIfStatementCS(@NonNull IfStatementCS csElement) {
+		IfStatement ifStatement = PivotUtil.getPivot(IfStatement.class, csElement);
+		if (ifStatement != null) {
+			ExpCS csCondition = csElement.getOwnedExpression();
+			OCLExpression asCondition = csCondition != null ? context.visitLeft2Right(OCLExpression.class, csCondition) : null;
+			ifStatement.setOwnedExpression(asCondition);
+		}
 		return null;
 	}
 

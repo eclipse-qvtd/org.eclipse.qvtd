@@ -46,6 +46,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.CheckStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameterBinding;
+import org.eclipse.qvtd.pivot.qvtimperative.IfStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
@@ -72,6 +73,7 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.DeclareStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.GuardParameterBindingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.GuardParameterCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.IfStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.LoopParameterBindingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallCS;
@@ -276,6 +278,14 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 	public Continuation<?> visitGuardParameterCS(@NonNull GuardParameterCS csElement) {
 		refreshNamedElement(GuardParameter.class, QVTimperativePackage.Literals.GUARD_PARAMETER, csElement);
 		return new GuardParameterCompletion(context, csElement);
+	}
+
+	@Override
+	public Continuation<?> visitIfStatementCS(@NonNull IfStatementCS csElement) {
+		IfStatement asIfStatement = context.refreshModelElement(IfStatement.class, QVTimperativePackage.Literals.IF_STATEMENT, csElement);
+		context.refreshPivotList(Statement.class, asIfStatement.getOwnedThenStatements(), csElement.getOwnedThenStatements());
+		context.refreshPivotList(Statement.class, asIfStatement.getOwnedElseStatements(), csElement.getOwnedElseStatements());
+		return null;
 	}
 
 	@Override
