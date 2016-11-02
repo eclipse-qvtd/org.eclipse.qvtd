@@ -935,7 +935,12 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		for (@NonNull NavigableEdge edge : region.getNavigationEdges()) {
 			Node sourceNode = edge.getSource();
 			Node targetNode = edge.getTarget();
-			if (!sourceNode.isIterator() && !sourceNode.isDependency() && !targetNode.isIterator() && RegionUtil.isUnconditional(edge)) {		// FIXME provide a better isExpression capability for pattern nodes
+			boolean isMatched1 = !sourceNode.isIterator() && !sourceNode.isDependency() && !targetNode.isIterator() && RegionUtil.isUnconditional(edge);		// FIXME provide a better isExpression capability for pattern nodes
+			boolean isMatched2 = edge.isMatched();
+			if (isMatched1 != isMatched2) {
+				System.out.println("Inconsistently isMatched in " + name + " : " + edge);
+			}
+			if (isMatched2) {
 				forestEdges.add(edge);
 			}
 		}
