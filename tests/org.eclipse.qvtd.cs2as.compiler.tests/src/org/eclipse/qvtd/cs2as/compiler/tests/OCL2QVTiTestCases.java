@@ -279,36 +279,6 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 	}
 
 	@Test
-	public void testExample1_CG2() throws Exception {
-		//		AbstractTransformer.EXCEPTIONS.setState(true);
-		//		AbstractTransformer.INVOCATIONS.setState(true);
-		//		DependencyAnalyzer.CALL.setState(true);
-		//		DependencyAnalyzer.CREATE.setState(true);
-		//		DependencyAnalyzer.FINISH.setState(true);
-		//		DependencyAnalyzer.PENDING.setState(true);
-		//		DependencyAnalyzer.REFINING.setState(true);
-		//		DependencyAnalyzer.RETURN.setState(true);
-		//		DependencyAnalyzer.START.setState(true);
-		MyQVT myQVT = new MyQVT("example1");
-		myQVT.loadGenModels("SourceMM1.genmodel", "TargetMM1.genmodel");
-		myQVT.loadEcoreFile("EnvExample1.ecore", example1.target.lookup.EnvironmentPackage.eINSTANCE);
-
-		Transformation qvtiTransf =	myQVT.executeNewOCL2QVTi_CompilerChain("Source2Target.ocl");
-		CS2ASJavaCompilerParameters cgParams = new CS2ASJavaCompilerParametersImpl(
-			"example1.target.lookup.util.TargetLookupSolver",
-			"example1.target.lookup.util.TargetLookupResult",
-			TESTS_GEN_PATH, TESTS_PACKAGE_NAME);
-		Class<? extends Transformer> txClass = new CS2ASJavaCompilerImpl().compileTransformation(myQVT, qvtiTransf, cgParams);
-		//Class<? extends Transformer> txClass = Source2Target_qvtp_qvtcas.class;
-
-
-		myQVT.executeModelsTX_CG(txClass, "model1");
-		//		myQVT.executeModelsTX_CG(txClass, "model2");
-		//		myQVT.executeModelsTX_CG(txClass, "model3");
-		myQVT.dispose();
-	}
-
-	@Test
 	public void testExample1_Interpreted() throws Exception {
 		testCaseAppender.uninstall();			// Silence Log failures warning that *.ocl has *.ecore rather than http:// references
 		MyQVT myQVT = new MyQVT("example1");

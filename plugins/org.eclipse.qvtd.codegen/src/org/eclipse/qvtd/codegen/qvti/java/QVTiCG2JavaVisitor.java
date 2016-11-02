@@ -28,6 +28,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.NameManager;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGAccumulator;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGCachedOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCollectionExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGEcorePropertyCallExp;
@@ -2320,8 +2321,22 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		}
 		doRun(cgTransformation);
 		for (@NonNull CGOperation cgOperation : ClassUtil.nullFree(cgOperations)) {
-			js.append("\n");
-			cgOperation.accept(this);
+			if (!(cgOperation instanceof CGCachedOperation)) {
+				js.append("\n");
+				cgOperation.accept(this);
+			}
+		}
+		for (@NonNull CGOperation cgOperation : ClassUtil.nullFree(cgOperations)) {
+			if ((cgOperation instanceof CGCachedOperation) && (((CGCachedOperation)cgOperation).getFinalOperations().size() <= 0)) {
+				js.append("\n");
+				cgOperation.accept(this);
+			}
+		}
+		for (@NonNull CGOperation cgOperation : ClassUtil.nullFree(cgOperations)) {
+			if ((cgOperation instanceof CGCachedOperation) && (((CGCachedOperation)cgOperation).getFinalOperations().size() > 0)) {
+				js.append("\n");
+				cgOperation.accept(this);
+			}
 		}
 		for (@NonNull CGMapping cgMapping : ClassUtil.nullFree(cgTransformation.getMappings())) {
 			js.append("\n");
