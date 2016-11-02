@@ -587,13 +587,16 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		//		this.expressionCreator = new ExpressionCreator();
 		//		this.inlineExpressionCreator = new InlineExpressionCreator();
 		@SuppressWarnings("unused")String name = region.getName();
-		createHeadAndGuardNodeVariables();
-		createNavigablePredicates();
-		createExternalPredicates();
-		createRealizedVariables();
-		createPropertyAssignments();
-		createAddStatements();
-		createObservedProperties();
+		if ("uifStmt_2_IfStatement_elseBody".equals(name)) {
+			toString();
+		}
+		createHeadAndGuardNodeVariables();			// BLUE/CYAN guard/append nodes
+		createNavigablePredicates();				// BLUE/CYAN navigable nodes and edges
+		createExternalPredicates();					// BLUE/CYAN computations involving a true guard node
+		createRealizedVariables();					// GREEN nodes
+		createPropertyAssignments();				// GREEN edges
+		createAddStatements();						// export to append nodes
+		createObservedProperties();					// wrap observable clauses around hazardous accesses
 	}
 
 	/*	@Override
@@ -821,7 +824,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			}
 		}
 		guardNodes.addAll(headNodes);
-		for (@NonNull Node guardNode : region.getOldNodes()) {
+		for (@NonNull Node guardNode : region.getOldNodes()) {				// FIXME Does this do anything ?
 			if (!guardNodes.contains(guardNode)) {
 				NodeConnection connection = guardNode.getIncomingUsedConnection();
 				if (connection != null) {				// null for LOADED
@@ -847,7 +850,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		}
 		Collections.sort(guardNodes, NameUtil.NAMEABLE_COMPARATOR);
 		for (@NonNull Node guardNode : guardNodes) {
-			if (!guardNode.isDependency()) {
+			if (!guardNode.isDependency()) {				// FIXME Is this really needed ?
 				createGuardParameter(guardNode);
 			}
 		}

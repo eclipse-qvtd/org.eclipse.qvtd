@@ -52,6 +52,10 @@ public class BasicMappingRegion extends AbstractMappingRegion
 {
 	public static @NonNull BasicMappingRegion createMappingRegion(@NonNull MultiRegion multiRegion, @NonNull Mapping mapping) {
 		BasicMappingRegion mappingRegion = new BasicMappingRegion(multiRegion, mapping);
+		@SuppressWarnings("unused")String name = mappingRegion.getName();
+		if ("uifStmt_2_IfStatement_elseBody".equals(name)) {
+			mapping.toString();
+		}
 		mappingRegion.initialize();
 		return mappingRegion;
 	}
