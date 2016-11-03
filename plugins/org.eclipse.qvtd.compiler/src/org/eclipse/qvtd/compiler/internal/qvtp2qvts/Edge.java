@@ -115,7 +115,10 @@ public interface Edge extends GraphStringBuilder.GraphEdge, Nameable, Visitable
 	 * Return true if after execution this edge exactly corresponds to a relationship between its matching ends.
 	 * Conversely return false if this edge is a conditional execution path or its ends my be optional nulls.
 	 * Collections are never null-valued, not even empty collections.
+	 *
+	 * @deprecated use isUnconditional or getUtility
 	 */
+	@Deprecated
 	boolean isMatched();
 
 	/**
@@ -157,6 +160,13 @@ public interface Edge extends GraphStringBuilder.GraphEdge, Nameable, Visitable
 	 * Return true is this edge is the auto-created inverse edge of a bidirectional pair of edges.
 	 */
 	boolean isSecondary();
+
+
+	/**
+	 * Return true is this edge is used as part of an unconditional navigation or computation.
+	 * i.e. it is not part of a loop or dependent upon if conditions.
+	 */
+	boolean isUnconditional();
 
 	void setSource(@NonNull Node sourceNode);
 

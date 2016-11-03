@@ -67,7 +67,7 @@ public class OperationRegion extends AbstractRegion
 		dependencyNode = selfNode;
 		//
 		resultNode = RegionUtil.createStepNode("result", operationCallExp, dependencyNode, false);
-		RegionUtil.createExpressionEdge(dependencyNode, "«equals»", resultNode);
+		RegionUtil.createExpressionEdge(dependencyNode, ExpressionAnalyzer.EQUALS_NAME, resultNode);
 		//
 		List<Variable> ownedParameters = specification.getOwnedParameters();
 		List<OCLExpression> ownedArguments = operationCallExp.getOwnedArguments();

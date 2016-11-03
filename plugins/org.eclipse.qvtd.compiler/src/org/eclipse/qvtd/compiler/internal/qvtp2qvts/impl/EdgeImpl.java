@@ -311,6 +311,11 @@ public abstract class EdgeImpl implements Edge
 		return false;
 	}
 
+	@Override
+	public boolean isUnconditional() {
+		return ClassUtil.nonNullState(sourceNode).isUnconditional() && ClassUtil.nonNullState(targetNode).isUnconditional();
+	}
+
 	protected void mergeRole(@NonNull EdgeRole edgeRole) {
 		if (this.edgeRole != edgeRole) {
 			assert this.edgeRole != null;

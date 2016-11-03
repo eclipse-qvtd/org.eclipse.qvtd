@@ -21,6 +21,7 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 
 import com.google.common.collect.Iterables;
@@ -129,6 +130,11 @@ public abstract class AbstractMappingRegion extends AbstractRegion implements Ma
 	 * The subsets of guardVariables from which all guardVariables are to-one navigable.
 	 */
 	private /*@LazyNonNull*/ @Nullable List<@NonNull Node> headNodes = null;
+	private /*@LazyNonNull*/ @Nullable List<@NonNull Node> stronglyMatchedNodes = null;
+	private /*@LazyNonNull*/ @Nullable List<@NonNull Node> unconditionalNodes = null;
+	private /*@LazyNonNull*/ @Nullable List<@NonNull Node> conditionalNodes = null;
+	//	private /*@LazyNonNull*/ @Nullable List<@NonNull Node> dependencyNodes = null;
+	private /*@LazyNonNull*/ @Nullable List<@NonNull Node> deadNodes = null;
 
 	protected AbstractMappingRegion(@NonNull MultiRegion multiRegion) {
 		super(multiRegion);
@@ -141,6 +147,9 @@ public abstract class AbstractMappingRegion extends AbstractRegion implements Ma
 
 	@Override
 	public void addEdge(@NonNull Edge edge) {
+		assert stronglyMatchedNodes == null;
+		assert unconditionalNodes == null;
+		assert conditionalNodes == null;
 		assert (basicGetSymbolName() == null) || !edge.isNavigation();
 		super.addEdge(edge);
 	}
@@ -153,14 +162,75 @@ public abstract class AbstractMappingRegion extends AbstractRegion implements Ma
 
 	@Override
 	public void addNode(@NonNull Node node) {
+		assert stronglyMatchedNodes == null;
+		assert unconditionalNodes == null;
+		assert conditionalNodes == null;
 		assert basicGetSymbolName() == null;
 		super.addNode(node);
 	}
 
+	/**
+	 * Any node with an edge to an unconditional node that is not itself unconditional must be conditional.
+	 */
+	private @NonNull Set<@NonNull Node> computeConditionalNodes(@NonNull Set<@NonNull Node> unconditionalNodes) {
+		Set<@NonNull Node> conditionalNodes = new HashSet<>();
+		Set<@NonNull Node> moreNodes = unconditionalNodes;
+		while (moreNodes.size() > 0) {
+			Set<@NonNull Node> moreMoreNodes = new HashSet<>();
+			for (@NonNull Node node : moreNodes) {
+				for (@NonNull Edge incomingEdge : node.getIncomingEdges()) {
+					Node sourceNode = incomingEdge.getSource();
+					if (!unconditionalNodes.contains(sourceNode) && conditionalNodes.add(sourceNode)) {
+						moreMoreNodes.add(sourceNode);
+					}
+				}
+				for (@NonNull Edge outgoingEdge : node.getOutgoingEdges()) {
+					Node targetNode = outgoingEdge.getTarget();
+					if (!unconditionalNodes.contains(targetNode) && conditionalNodes.add(targetNode)) {
+						moreMoreNodes.add(targetNode);
+					}
+				}
+			}
+			if (moreMoreNodes.size() <= 0) {
+				break;
+			}
+			moreNodes = moreMoreNodes;
+		}
+		this.conditionalNodes = new ArrayList<>(conditionalNodes);
+		Collections.sort(this.conditionalNodes, NameUtil.NAMEABLE_COMPARATOR);
+		return conditionalNodes;
+	}
+
+	/**
+	 * Any dependency node transitively connected to a deopendency head contributes to the dependency nodes.
+	 *
+	private @NonNull Set<@NonNull Node> computeDependencyNodes(@NonNull Iterable <@NonNull Node> headNodes) {
+		Set<@NonNull Node> dependencyNodes = new HashSet<>();
+		Iterable<@NonNull Node> moreNodes = headNodes;
+		while (!Iterables.isEmpty(moreNodes)) {
+			Set<@NonNull Node> moreMoreNodes = new HashSet<>();
+			for (@NonNull Node node : moreNodes) {
+				if (node.isDependency() && dependencyNodes.add(node)) {
+					for (@NonNull NavigableEdge edge : node.getNavigationEdges()) {
+						Node targetNode = edge.getTarget();
+						moreMoreNodes.add(targetNode);
+					}
+				}
+			}
+			if (moreMoreNodes.size() <= 0) {
+				break;
+			}
+			moreNodes = moreMoreNodes;
+		}
+		this.dependencyNodes = new ArrayList<>(dependencyNodes);
+		Collections.sort(this.dependencyNodes, NameUtil.NAMEABLE_COMPARATOR);
+		return dependencyNodes;
+	} */
+
 	protected @NonNull List<@NonNull Node> computeHeadNodes() {
 		//
 		//	A head node is reachable from very few nodes, typically just itself, occasionally from a small group of mutually bidirectional nodes,
-		//	so we searcvh for the least reachable nodes taking care to avoid hazrads from the source-to-target / target-source asymmetry.
+		//	so we search for the least reachable nodes taking care to avoid hazrads from the source-to-target / target-source asymmetry.
 		//
 		List<@NonNull Node> navigableNodes = new ArrayList<>();
 		for (@NonNull Node node : getNodes()) {
@@ -283,7 +353,136 @@ public abstract class AbstractMappingRegion extends AbstractRegion implements Ma
 			}
 		}
 		assert debugHeadNodes.equals(new HashSet<>(headNodes));
+		//
+		computeUtilities(headNodes);
 		return headNodes;
+	}
+
+	private void computeStronglyMatchedNodes(@NonNull Node sourceNode, @NonNull Set<@NonNull Node> stronglyMatchedNodes) {
+		for (@NonNull NavigableEdge edge : sourceNode.getNavigationEdges()) {
+			Node targetNode = edge.getTarget();
+			if (isMatchable(targetNode)) {
+				boolean targetIsStronglyMatched = edge.isRequired();
+				if (targetIsStronglyMatched && stronglyMatchedNodes.add(targetNode)) {
+					computeStronglyMatchedNodes(targetNode, stronglyMatchedNodes);
+				}
+			}
+		}
+	}
+
+	private @NonNull Set<@NonNull Node> computeStronglyMatchedNodes(@NonNull Iterable<@NonNull Node> headNodes) {
+		Set<@NonNull Node> stronglyMatchedNodes = new HashSet<>();
+		for (@NonNull Node headNode : headNodes) {
+			if (!headNode.isDependency() && !headNode.isTrue() && stronglyMatchedNodes.add(headNode)) {
+				computeStronglyMatchedNodes(headNode, stronglyMatchedNodes);
+			}
+		}
+		this.stronglyMatchedNodes = new ArrayList<>(stronglyMatchedNodes);
+		Collections.sort(this.stronglyMatchedNodes, NameUtil.NAMEABLE_COMPARATOR);
+		return stronglyMatchedNodes;
+	}
+
+	private @NonNull Set<@NonNull Node> computeUnconditionalNodes(@NonNull Iterable<@NonNull Node> headNodes) {
+		@NonNull Set<@NonNull Node> unconditionalNodes = Sets.newHashSet(headNodes);
+		Iterables.addAll(unconditionalNodes, getNewNodes());
+		for (@NonNull Edge edge : getRealizedEdges()) {
+			Node sourceNode = edge.getSource();
+			assert isUnconditionable(sourceNode);
+			unconditionalNodes.add(sourceNode);
+			Node targetNode = edge.getTarget();
+			assert isUnconditionable(targetNode);
+			unconditionalNodes.add(targetNode);
+		}
+		Set<@NonNull Node> moreUnconditionalNodes = new HashSet<>(unconditionalNodes);
+		while (moreUnconditionalNodes.size() > 0) {
+			Set<@NonNull Node> moreMoreNodes = new HashSet<>();
+			for (@NonNull Node node : moreUnconditionalNodes) {
+				for (@NonNull Edge incomingEdge : node.getIncomingEdges()) {
+					Node sourceNode = incomingEdge.getSource();
+					if (!isUnconditionable(sourceNode)) {}
+					else if (incomingEdge.isNavigation()) {
+						if (unconditionalNodes.add(sourceNode)) {
+							moreMoreNodes.add(sourceNode);
+						}
+					}
+					else if (incomingEdge.isComputation()) {
+						if (!isConditionalEdge(incomingEdge) && unconditionalNodes.add(sourceNode)) {
+							moreMoreNodes.add(sourceNode);
+						}
+					}
+					else {
+						System.out.println("Unsupported incoming edge in " + this + " : " + incomingEdge);
+					}
+				}
+				for (@NonNull Edge outgoingEdge : node.getOutgoingEdges()) {
+					Node targetNode = outgoingEdge.getTarget();
+					if (!isUnconditionable(targetNode)) {}
+					else if (outgoingEdge.isNavigation()) {
+						if (((NavigableEdge)outgoingEdge).isRequired() && unconditionalNodes.add(targetNode)) {
+							moreMoreNodes.add(targetNode);
+						}
+					}
+					else if (outgoingEdge.isComputation()) {}
+					else {
+						System.out.println("Unsupported outgoing edge in " + this + " : " + outgoingEdge);
+					}
+				}
+			}
+			if (moreMoreNodes.size() <= 0) {
+				break;
+			}
+			moreUnconditionalNodes = moreMoreNodes;
+		}
+		this.unconditionalNodes = new ArrayList<>(unconditionalNodes);
+		Collections.sort(this.unconditionalNodes, NameUtil.NAMEABLE_COMPARATOR);
+		return unconditionalNodes;
+	}
+
+	private void computeUtilities(@NonNull Iterable<@NonNull Node> headNodes) {		// FIXME remove assertions after 1-Jan-2017
+		Set<@NonNull Node> stronglyMatchedNodes = computeStronglyMatchedNodes(headNodes);
+		Set<@NonNull Node> unconditionalNodes = computeUnconditionalNodes(headNodes);
+		Set<@NonNull Node> conditionalNodes = computeConditionalNodes(unconditionalNodes);
+		//		Set<@NonNull Node> dependencyNodes = computeDependencyNodes(headNodes);
+		Set<@NonNull Node> deadNodes = null;
+		//
+		for (@NonNull Node node : getNodes()) {
+			if (stronglyMatchedNodes.contains(node)) {
+				node.setUtility(Node.Utility.STRONGLY_MATCHED);
+				assert unconditionalNodes.contains(node);
+				//				assert !dependencyNodes.contains(node);
+			}
+			else if (unconditionalNodes.contains(node) && !node.isDependency()) {
+				node.setUtility(Node.Utility.WEAKLY_MATCHED);
+				//				assert !dependencyNodes.contains(node);
+			}
+			else if (conditionalNodes.contains(node)) {
+				node.setUtility(Node.Utility.CONDITIONAL);
+				//				assert !dependencyNodes.contains(node);
+			}
+			else if (node.isDependency()) {
+				node.setUtility(Node.Utility.DEPENDENCY);
+			}
+			else {
+				System.err.println("Dead node in " + this + " : " + node);
+				if (deadNodes == null) {
+					deadNodes = new HashSet<>();
+				}
+				deadNodes.add(node);
+				node.setUtility(Node.Utility.DEAD);
+				toString();
+			}
+		}
+		if (deadNodes != null) {
+			this.deadNodes = new ArrayList<>(deadNodes);
+			Collections.sort(this.deadNodes, NameUtil.NAMEABLE_COMPARATOR);
+		}
+		for (@NonNull Node node : getNodes()) {
+			boolean isMatched = node.isMatched();
+			boolean isUnconditional = node.isUnconditional();
+			if (isMatched != isUnconditional) {
+				System.out.println("Inconsistently isMatched in " + this + " : " + node);
+			}
+		}
 	}
 
 	@Override
@@ -298,6 +497,21 @@ public abstract class AbstractMappingRegion extends AbstractRegion implements Ma
 			headNodes = headNodes2 = computeHeadNodes();
 		}
 		return headNodes2;
+	}
+
+	private boolean isConditionalEdge(@NonNull Edge edge) {
+		String edgeName = edge.getName();
+		return ExpressionAnalyzer.IF_THEN_NAME.equals(edgeName)
+				|| ExpressionAnalyzer.IF_ELSE_NAME.equals(edgeName)
+				|| ExpressionAnalyzer.LOOP_BODY_NAME.equals(edgeName);
+	}
+
+	private boolean isMatchable(@NonNull Node node) {
+		return node.isExplicitNull() || node.isPattern();
+	}
+
+	private boolean isUnconditionable(@NonNull Node node) {
+		return !node.isIterator();
 	}
 
 	@Override

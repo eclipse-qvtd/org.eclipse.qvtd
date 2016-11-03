@@ -195,6 +195,24 @@ public abstract class NavigableEdgeImpl extends EdgeImpl implements NavigableEdg
 	}
 
 	@Override
+	public boolean isRequired() {
+		Node targetNode = getTarget();
+		Property property = getProperty();
+		if (targetNode.isExplicitNull()) {
+			return true;			// ?? a degenerate typedElement.isIsRequired()
+		}
+		else if (property.isIsRequired()) {
+			return true;
+		}
+		else if (targetNode.isRequired()) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
 	public boolean isSecondary() {
 		return isSecondary;
 	}

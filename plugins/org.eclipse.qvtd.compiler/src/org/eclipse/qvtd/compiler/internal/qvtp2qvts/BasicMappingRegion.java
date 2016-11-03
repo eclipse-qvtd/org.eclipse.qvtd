@@ -52,6 +52,7 @@ public class BasicMappingRegion extends AbstractMappingRegion
 {
 	public static @NonNull BasicMappingRegion createMappingRegion(@NonNull MultiRegion multiRegion, @NonNull Mapping mapping) {
 		BasicMappingRegion mappingRegion = new BasicMappingRegion(multiRegion, mapping);
+		@SuppressWarnings("unused")String name = mappingRegion.getName();
 		mappingRegion.initialize();
 		return mappingRegion;
 	}
@@ -310,7 +311,7 @@ public class BasicMappingRegion extends AbstractMappingRegion
 		if ((ownedInit instanceof OperationCallExp) && initNode.isOperation()) {
 			if (QVTbaseUtil.isIdentification(((OperationCallExp)ownedInit).getReferredOperation())) {
 				Node stepNode = RegionUtil.createRealizedStepNode(this, variable);
-				RegionUtil.createExpressionEdge(initNode, "«equals»", stepNode);
+				RegionUtil.createExpressionEdge(initNode, ExpressionAnalyzer.EQUALS_NAME, stepNode);
 				initNode = stepNode;
 			}
 			//			else if (variable.getType() instanceof CollectionType) {
@@ -321,7 +322,7 @@ public class BasicMappingRegion extends AbstractMappingRegion
 			else {
 				//				Node stepNode = RegionUtil.STEP.createNode(this, variable.getName(), (OperationCallExp)ownedInit, initNode);
 				Node stepNode = RegionUtil.createLoadedStepNode(this, variable);
-				RegionUtil.createExpressionEdge(initNode, "«equals»", stepNode);
+				RegionUtil.createExpressionEdge(initNode, ExpressionAnalyzer.EQUALS_NAME, stepNode);
 				initNode = stepNode;
 			}
 		}

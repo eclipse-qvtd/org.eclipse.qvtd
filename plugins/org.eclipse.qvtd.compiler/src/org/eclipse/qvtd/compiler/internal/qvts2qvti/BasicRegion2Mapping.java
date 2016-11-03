@@ -70,7 +70,6 @@ import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NavigableEdge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NodeConnection;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RegionUtil;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.SchedulerConstants;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
@@ -587,13 +586,13 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		//		this.expressionCreator = new ExpressionCreator();
 		//		this.inlineExpressionCreator = new InlineExpressionCreator();
 		@SuppressWarnings("unused")String name = region.getName();
-		createHeadAndGuardNodeVariables();
-		createNavigablePredicates();
-		createExternalPredicates();
-		createRealizedVariables();
-		createPropertyAssignments();
-		createAddStatements();
-		createObservedProperties();
+		createHeadAndGuardNodeVariables();			// BLUE/CYAN guard/append nodes
+		createNavigablePredicates();				// BLUE/CYAN navigable nodes and edges
+		createExternalPredicates();					// BLUE/CYAN computations involving a true guard node
+		createRealizedVariables();					// GREEN nodes
+		createPropertyAssignments();				// GREEN edges
+		createAddStatements();						// export to append nodes
+		createObservedProperties();					// wrap observable clauses around hazardous accesses
 	}
 
 	/*	@Override
@@ -821,7 +820,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			}
 		}
 		guardNodes.addAll(headNodes);
-		for (@NonNull Node guardNode : region.getOldNodes()) {
+		/*		for (@NonNull Node guardNode : region.getOldNodes()) {
 			if (!guardNodes.contains(guardNode)) {
 				NodeConnection connection = guardNode.getIncomingUsedConnection();
 				if (connection != null) {				// null for LOADED
@@ -844,12 +843,12 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 					}
 				}
 			}
-		}
+		} */
 		Collections.sort(guardNodes, NameUtil.NAMEABLE_COMPARATOR);
 		for (@NonNull Node guardNode : guardNodes) {
-			if (!guardNode.isDependency()) {
-				createGuardParameter(guardNode);
-			}
+			assert !guardNode.isDependency();
+			createGuardParameter(guardNode);
+			//			}
 		}
 		//
 		//	Create any connectionVariable guards
@@ -930,9 +929,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		//
 		List<@NonNull NavigableEdge> forestEdges = new ArrayList<>();
 		for (@NonNull NavigableEdge edge : region.getNavigationEdges()) {
-			Node sourceNode = edge.getSource();
-			Node targetNode = edge.getTarget();
-			if (!sourceNode.isIterator() && !sourceNode.isDependency() && !targetNode.isIterator() && RegionUtil.isUnconditional(edge)) {		// FIXME provide a better isExpression capability for pattern nodes
+			if (edge.isUnconditional()) {
 				forestEdges.add(edge);
 			}
 		}
@@ -1173,23 +1170,6 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		return false;
 	}*/
 
-	private boolean isHazardousWrite(@NonNull NavigableEdge edge) {
-		Node sourceNode = edge.getSource();
-		Property asProperty = edge.getProperty();
-		TypedModel typedModel = sourceNode.getClassDatumAnalysis().getTypedModel();
-		Iterable<@NonNull NavigableEdge> enforcedEdges = region.getEnforcedEdges(typedModel);
-		if (enforcedEdges != null) {
-			Property asOppositeProperty = asProperty.getOpposite();
-			for (@NonNull NavigableEdge enforcedEdge : enforcedEdges) {
-				Property edgeProperty = enforcedEdge.getProperty();
-				if ((edgeProperty == asProperty) || (edgeProperty == asOppositeProperty)) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-
 	private void createRealizedVariables() {
 		for (@NonNull Node newNode : region.getNewNodes()) {
 			if (newNode.isPattern() && newNode.isClass()) {
@@ -1338,6 +1318,40 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		if (node.isExpression()) {
 			for (TypedElement typedElement : node.getTypedElements()) {
 				if (typedElement instanceof IfExp) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	/*	private boolean isHazardousRead(@NonNull NavigableEdge edge) {
+		Node sourceNode = edge.getSource();
+		Property asProperty = edge.getProperty();
+		TypedModel typedModel = sourceNode.getClassDatumAnalysis().getTypedModel();
+		Iterable<@NonNull NavigableEdge> checkedEdges = region.getCheckedEdges(typedModel);
+		if (checkedEdges != null) {
+			Property asOppositeProperty = asProperty.getOpposite();
+			for (@NonNull NavigableEdge checkedEdge : checkedEdges) {
+				Property edgeProperty = checkedEdge.getProperty();
+				if ((edgeProperty == asProperty) || (edgeProperty == asOppositeProperty)) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}*/
+
+	private boolean isHazardousWrite(@NonNull NavigableEdge edge) {
+		Node sourceNode = edge.getSource();
+		Property asProperty = edge.getProperty();
+		TypedModel typedModel = sourceNode.getClassDatumAnalysis().getTypedModel();
+		Iterable<@NonNull NavigableEdge> enforcedEdges = region.getEnforcedEdges(typedModel);
+		if (enforcedEdges != null) {
+			Property asOppositeProperty = asProperty.getOpposite();
+			for (@NonNull NavigableEdge enforcedEdge : enforcedEdges) {
+				Property edgeProperty = enforcedEdge.getProperty();
+				if ((edgeProperty == asProperty) || (edgeProperty == asOppositeProperty)) {
 					return true;
 				}
 			}

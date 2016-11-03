@@ -27,6 +27,20 @@ import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
  */
 public interface Node extends ConnectionEnd, GraphStringBuilder.GraphNode, Nameable, Visitable
 {
+	/**
+	 * The prioritized utility of each node.
+	 */
+	public enum Utility {
+		STRONGLY_MATCHED,				// Reachable by to-1 navigation from a head node, or by to-? to an ExplicitNull
+		WEAKLY_MATCHED,					// else unconditionally used in a computation or navigation
+		//		UNCONDITIONALLY_PREDICATING,	// else always computable as part of a predicate
+		//		CONDITIONALLY_PREDICATING,		// else selectively computable as part of a predicate depending on if conditions
+		//		UNCONDITIONALLY_COMPUTED,		// else always computable
+		CONDITIONAL,					// else selectively computable depending on if conditions / loops
+		DEPENDENCY,						// else solely used to establish a dependency
+		DEAD							// else never used
+	}
+
 	void addIncomingConnection(@NonNull NodeConnection connection);
 	void addIncomingEdge(@NonNull Edge edge);
 	void addOutgoingConnection(@NonNull NodeConnection connection);
@@ -95,6 +109,7 @@ public interface Node extends ConnectionEnd, GraphStringBuilder.GraphNode, Namea
 	@NonNull SchedulerConstants getSchedulerConstants();
 	@NonNull Iterable<@NonNull TypedElement> getTypedElements();
 	@NonNull Iterable<@NonNull Node> getUsedBindingSources();
+	@NonNull Utility getUtility();
 
 	/**
 	 * Return true if this node is a Class object.
@@ -154,7 +169,10 @@ public interface Node extends ConnectionEnd, GraphStringBuilder.GraphNode, Namea
 	 * Return true if after execution this node exactly corresponds to a non-null object or to a non-null value or to an explicit null.
 	 * Conversely return false if this node is optionally null or part of a conditional expression evaluation.
 	 * Collections are never null-valued, not even empty collections.
+	 *
+	 * @deprecated use isUnconditional or getUtility
 	 */
+	@Deprecated
 	boolean isMatched();
 
 	/**
@@ -190,6 +208,11 @@ public interface Node extends ConnectionEnd, GraphStringBuilder.GraphNode, Namea
 	boolean isRealized();
 
 	/**
+	 * Return true if this is a required element, i.e. it has a TypedElement with a non-zetro lowrr bound.
+	 */
+	boolean isRequired();
+
+	/**
 	 * Return true if this node is a speculated middle trace element that may havew benn created in anticipation
 	 * of other dependencies.
 	 *
@@ -210,6 +233,12 @@ public interface Node extends ConnectionEnd, GraphStringBuilder.GraphNode, Namea
 	 */
 	boolean isTrue();
 
+	/**
+	 * Return true if this node is unconditionally used in a computation of navigation. .e it does not form
+	 * part of a loop or a then/else arm.
+	 */
+	boolean isUnconditional();
+
 	boolean refineClassDatumAnalysis(@NonNull ClassDatumAnalysis newClassDatumAnalysis);
 	void removeIncomingConnection(@NonNull NodeConnection connection);
 	void removeIncomingEdge(@NonNull Edge edge);
@@ -225,6 +254,8 @@ public interface Node extends ConnectionEnd, GraphStringBuilder.GraphNode, Namea
 	 * Redesignate a guard node as a head.
 	 */
 	void setHead();
+
+	void setUtility(@NonNull Utility utility);
 
 	void toGraph(@NonNull GraphStringBuilder s);
 	@Override

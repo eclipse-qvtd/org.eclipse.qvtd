@@ -87,6 +87,8 @@ public abstract class NodeImpl implements Node
 
 	private final @NonNull List<@NonNull TypedElement> typedElements = new ArrayList<@NonNull TypedElement>();
 
+	private /*@LazyNonNull*/ Utility utility = null;		// Set by post region build analysis
+
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
 		return visitor.visitNode(this);
@@ -531,6 +533,11 @@ public abstract class NodeImpl implements Node
 		return sources;
 	}
 
+	@Override
+	public @NonNull Utility getUtility() {
+		return ClassUtil.nonNullState(utility);
+	}
+
 	protected void initialize(@NonNull NodeRole nodeRole, @NonNull Region region, @NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
 		this.nodeRole = nodeRole;
 		this.region = region;
@@ -639,6 +646,16 @@ public abstract class NodeImpl implements Node
 	}
 
 	@Override
+	public boolean isRequired() {
+		for (@NonNull TypedElement typedElement : getTypedElements()) {
+			if (typedElement.isIsRequired()) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	@Override
 	public boolean isSpeculated() {
 		assert nodeRole != null;
 		return nodeRole.isSpeculated();
@@ -653,6 +670,11 @@ public abstract class NodeImpl implements Node
 	@Override
 	public boolean isTrue() {
 		return false;
+	}
+
+	@Override
+	public boolean isUnconditional() {
+		return (utility == Utility.STRONGLY_MATCHED) || (utility == Utility.WEAKLY_MATCHED);
 	}
 
 	@Override
@@ -750,6 +772,12 @@ public abstract class NodeImpl implements Node
 		}
 		@NonNull String string = n.toString();
 		s.setLabel(string);
+	}
+
+	@Override
+	public void setUtility(@NonNull Utility utility) {
+		assert this.utility == null;
+		this.utility  = utility;
 	}
 
 	@Override
