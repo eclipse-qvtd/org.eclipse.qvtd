@@ -17,18 +17,25 @@ import org.eclipse.jdt.annotation.NonNull;
  */
 public interface Role extends Comparable<Role>
 {
-	public static final @NonNull String BINDING_COLOR = "orange";
+	public static final @NonNull String BINDING_COLOR = "darkorange";
 	public static final @NonNull String CONSTANT_COLOR = "black";
 	public static final @NonNull String ERROR_COLOR = "red";
 	public static final @NonNull String ITERATION_COLOR = "magenta";
+	public static final @NonNull String LIGHT_CONSTANT_COLOR = "lightgray";
+	public static final @NonNull String LIGHT_LOADED_COLOR = "lightblue1";
+	public static final @NonNull String LIGHT_OTHER_COLOR = "gray";
+	public static final @NonNull String LIGHT_PREDICATED_COLOR = "lightcyan1";
+	public static final @NonNull String LIGHT_REALIZED_COLOR = "palegreen1";
+	public static final @NonNull String LIGHT_SPECULATED_COLOR = "palegoldenrod";
+	public static final @NonNull String LIGHT_SPECULATION_COLOR = "pink1";
 	public static final @NonNull String LOADED_COLOR = "blue";
 	public static final @NonNull String OPERATION_COLOR = "magenta";
 	public static final @NonNull String ORDERING_COLOR = "brown";
 	public static final @NonNull String OTHER_COLOR = "grey";
 	public static final @NonNull String PREDICATED_COLOR = "cyan";
-	public static final @NonNull String REALIZED_COLOR = "green";
+	public static final @NonNull String REALIZED_COLOR = "green3";
 	public static final @NonNull String RECURSION_COLOR = "brown";
-	public static final @NonNull String SPECULATED_COLOR = "orange";
+	public static final @NonNull String SPECULATED_COLOR = "darkorange";
 	public static final @NonNull String SPECULATION_COLOR = "red";
 
 	public static final @NonNull Integer HEAD_WIDTH = 8;

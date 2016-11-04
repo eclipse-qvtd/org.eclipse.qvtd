@@ -268,6 +268,11 @@ public class DOTStringBuilder implements GraphStringBuilder
 	}
 
 	@Override
+	public void setFillColor(@NonNull String value) {
+		attributes.put("fillcolor", value);
+	}
+
+	@Override
 	public void setHead() {
 		attributes.put("head", "true");
 	}

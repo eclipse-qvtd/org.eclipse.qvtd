@@ -170,9 +170,8 @@ public interface Node extends ConnectionEnd, GraphStringBuilder.GraphNode, Namea
 	 * Conversely return false if this node is optionally null or part of a conditional expression evaluation.
 	 * Collections are never null-valued, not even empty collections.
 	 *
-	 * @deprecated use isUnconditional or getUtility
+	 * *deprecated try to use isUnconditional or getUtility
 	 */
-	@Deprecated
 	boolean isMatched();
 
 	/**

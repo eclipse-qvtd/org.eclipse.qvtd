@@ -476,13 +476,15 @@ public abstract class AbstractMappingRegion extends AbstractRegion implements Ma
 			this.deadNodes = new ArrayList<>(deadNodes);
 			Collections.sort(this.deadNodes, NameUtil.NAMEABLE_COMPARATOR);
 		}
-		for (@NonNull Node node : getNodes()) {
+		/*		for (@NonNull Node node : getNodes()) {
 			boolean isMatched = node.isMatched();
 			boolean isUnconditional = node.isUnconditional();
-			if (isMatched != isUnconditional) {
+			boolean isRequired = node.isRequired();
+			boolean isPattern = node.isPattern();
+			if (isMatched != (isUnconditional && isPattern)) {
 				System.out.println("Inconsistently isMatched in " + this + " : " + node);
 			}
-		}
+		} */
 	}
 
 	@Override

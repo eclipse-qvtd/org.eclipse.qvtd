@@ -21,6 +21,7 @@ public interface NodeRole extends Role
 	@NonNull NodeRole asPredicated();
 	@NonNull NodeRole asSpeculated();
 	@NonNull NodeRole asSpeculation();
+	@NonNull String getFillColor();
 
 	/**
 	 * Return the merged role combining this role and nodeRole.

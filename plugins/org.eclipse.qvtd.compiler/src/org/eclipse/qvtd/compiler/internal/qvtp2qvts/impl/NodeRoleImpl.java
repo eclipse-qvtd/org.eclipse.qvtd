@@ -63,6 +63,19 @@ public class NodeRoleImpl extends AbstractRoleImpl implements NodeRole
 	}
 
 	@Override
+	public final @NonNull String getFillColor() {
+		switch (phase) {
+			case CONSTANT: return LIGHT_CONSTANT_COLOR;
+			case LOADED: return LIGHT_LOADED_COLOR;
+			case PREDICATED: return LIGHT_PREDICATED_COLOR;
+			case REALIZED: return LIGHT_REALIZED_COLOR;
+			case SPECULATION: return LIGHT_SPECULATION_COLOR;
+			case SPECULATED: return LIGHT_SPECULATED_COLOR;
+			default: return LIGHT_OTHER_COLOR;
+		}
+	}
+
+	@Override
 	public @NonNull NodeRole merge(@NonNull NodeRole nodeRole) {
 		Phase mergedPhase = RegionUtil.mergeToMoreKnownPhase(this, nodeRole).getPhase();
 		return getNodeRole(mergedPhase);

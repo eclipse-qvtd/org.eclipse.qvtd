@@ -116,9 +116,8 @@ public interface Edge extends GraphStringBuilder.GraphEdge, Nameable, Visitable
 	 * Conversely return false if this edge is a conditional execution path or its ends my be optional nulls.
 	 * Collections are never null-valued, not even empty collections.
 	 *
-	 * @deprecated use isUnconditional or getUtility
+	 * *deprecated try to use isUnconditional or getUtility
 	 */
-	@Deprecated
 	boolean isMatched();
 
 	/**

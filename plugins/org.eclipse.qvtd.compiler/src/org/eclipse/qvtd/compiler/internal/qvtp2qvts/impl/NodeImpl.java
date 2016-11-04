@@ -179,6 +179,9 @@ public abstract class NodeImpl implements Node
 			s.setStyle(style);
 		}
 		s.setColor(getColor());
+		if (!isUnconditional()) {
+			s.setFillColor(getFillColor());
+		}
 		s.setPenwidth(getPenwidth());
 		s.appendAttributedNode(nodeName);
 		//		if (isHead) {
@@ -296,6 +299,11 @@ public abstract class NodeImpl implements Node
 	public @NonNull String getDisplayName() {
 		assert region != null;
 		return region.getName() + "::" + getName();
+	}
+
+	protected @NonNull String getFillColor() {
+		assert nodeRole != null;
+		return nodeRole.getFillColor();
 	}
 
 	@Override
@@ -499,19 +507,23 @@ public abstract class NodeImpl implements Node
 	}
 
 	protected @Nullable String getStyle() {
-		//		if (isNull()) {
-		//			return "rounded";
-		//		}
-		//		if (isTrue() || getNodeRole().isExtraGuardVariable()) {
-		//			return null;
-		//		}
-		boolean isDashed = !isMatched(); //!isRequired() && (isExpression() || !isRealized());
+		StringBuilder s = new StringBuilder();
 		if (isDataType()) {
-			return isDashed ? "\"rounded,dashed\"" : "rounded";
+			s.append("rounded");
 		}
-		else {
-			return isDashed ? "dashed" : null;
+		if (!isMatched()) {
+			if (s.length() > 0) {
+				s.append(",");
+			}
+			s.append("dashed");
 		}
+		if (!isUnconditional()) {
+			if (s.length() > 0) {
+				s.append(",");
+			}
+			s.append("filled");
+		}
+		return "\"" + s.toString() + "\"";
 	}
 
 	@Override

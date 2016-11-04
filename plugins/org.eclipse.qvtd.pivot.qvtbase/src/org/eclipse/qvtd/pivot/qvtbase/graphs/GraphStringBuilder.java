@@ -39,6 +39,7 @@ public interface GraphStringBuilder
 	void setArrowtail(@NonNull String arrowtail);
 	void setColor(@NonNull String color);
 	void setDir(@NonNull String color);
+	void setFillColor(@NonNull String color);
 	void setHead();
 	void setHeadlabel(/*@NonNull*/ String string);
 	void setLabel(/*@NonNull*/ String string);

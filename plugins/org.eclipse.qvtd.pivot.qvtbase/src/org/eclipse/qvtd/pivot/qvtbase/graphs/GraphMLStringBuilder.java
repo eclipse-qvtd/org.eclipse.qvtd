@@ -24,9 +24,18 @@ public class GraphMLStringBuilder extends GraphMLBuilder implements GraphStringB
 		colorName2colorCode.put("brown", "#993300");
 		colorName2colorCode.put("blue", "#0000ff");
 		colorName2colorCode.put("cyan", "#00ffff");
+		colorName2colorCode.put("darkorange", "#ffcc00");
+		colorName2colorCode.put("gray", "#cccccc");
 		colorName2colorCode.put("green", "#00ff00");
+		colorName2colorCode.put("green3", "#00ff00");
+		colorName2colorCode.put("lightblue1", "#ccccff");
+		colorName2colorCode.put("lightcyan1", "#ccffff");
+		colorName2colorCode.put("lightgray", "#dddddd");
 		colorName2colorCode.put("magenta", "#ff00ff");
 		colorName2colorCode.put("orange", "#ffcc00");
+		colorName2colorCode.put("palegreen1", "#ccffcc");
+		colorName2colorCode.put("palegoldenrod", "#ffeecc");
+		colorName2colorCode.put("pink1", "#ffcccc");
 		colorName2colorCode.put("red", "#ff0000");
 		colorName2colorCode.put("white", "#ffffff");
 		colorName2colorCode.put("yellow", "#ffff00");
@@ -35,6 +44,7 @@ public class GraphMLStringBuilder extends GraphMLBuilder implements GraphStringB
 	private final @NonNull Map<Object,String> node2name = new HashMap<Object,String>();
 	private int graphCount = 0;
 	private @NonNull String color = "#cccccc";
+	private @NonNull String fillColor = "#ffffff";
 	private @Nullable String label = null;
 	private @NonNull String penwidth = "2.0";
 	private @NonNull String shape = "rectangle";
@@ -75,7 +85,7 @@ public class GraphMLStringBuilder extends GraphMLBuilder implements GraphStringB
 	public void appendAttributedNode(@NonNull String nodeName) {
 		String id = nodeName;
 		String shapeName = shape;
-		String fillColor = "#ffffff";
+		//		String fillColor = fillColor;
 		String lineColor = color;
 		//		LineType lineType = LineType.line;
 		Double width = Double.valueOf(penwidth);
@@ -148,6 +158,7 @@ public class GraphMLStringBuilder extends GraphMLBuilder implements GraphStringB
 
 	protected void resetAttributes() {
 		color = "#000000";
+		fillColor = "#ffffff";
 		label = null;
 		lineType = LineType.line;
 		penwidth = "2.0";
@@ -188,6 +199,12 @@ public class GraphMLStringBuilder extends GraphMLBuilder implements GraphStringB
 
 	@Override
 	public void setDir(@NonNull String direction) {
+	}
+
+	@Override
+	public void setFillColor(@NonNull String colorName) {
+		String colorCode = colorName2colorCode.get(colorName);
+		fillColor = colorCode != null ? colorCode : "#777777";
 	}
 
 	@Override
