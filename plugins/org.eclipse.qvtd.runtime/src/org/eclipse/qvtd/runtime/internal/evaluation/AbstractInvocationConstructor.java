@@ -72,8 +72,9 @@ public abstract class AbstractInvocationConstructor implements InvocationConstru
 		}
 
 		public void appendAppender(int valueIndex, @NonNull Connection connection) {
-			if (nextAppender != null) {
-				nextAppender.appendAppender(valueIndex, connection);
+			Appender nextAppender2 = nextAppender;
+			if (nextAppender2 != null) {
+				nextAppender2.appendAppender(valueIndex, connection);
 			}
 			else {
 				nextAppender = new Appender(valueIndex, connection);
@@ -82,8 +83,9 @@ public abstract class AbstractInvocationConstructor implements InvocationConstru
 
 		public void propagate(@NonNull Object @NonNull [] values) {
 			values[valueIndex] = connection;
-			if (nextAppender != null) {
-				nextAppender.propagate(values);
+			Appender nextAppender2 = nextAppender;
+			if (nextAppender2 != null) {
+				nextAppender2.propagate(values);
 			}
 		}
 
@@ -136,8 +138,9 @@ public abstract class AbstractInvocationConstructor implements InvocationConstru
 
 		public void appendConsumer(int valueIndex, @NonNull Connection connection) {
 			assert targetConsumedIndex == 0;
-			if (nextConsumer != null) {
-				nextConsumer.appendConsumer(valueIndex, connection);
+			Consumer nextConsumer2 = nextConsumer;
+			if (nextConsumer2 != null) {
+				nextConsumer2.appendConsumer(valueIndex, connection);
 			}
 			else {
 				nextConsumer = new Consumer(invocationConstructor, valueIndex, consumerIndex+1, connection);
@@ -147,7 +150,8 @@ public abstract class AbstractInvocationConstructor implements InvocationConstru
 		public boolean computeWork() {
 			targetConsumedIndex = connection.getCapacity();
 			boolean hasWork = previouslyConsumedIndex < targetConsumedIndex;
-			if ((nextConsumer != null) && nextConsumer.computeWork()) {
+			Consumer nextConsumer2 = nextConsumer;
+			if ((nextConsumer2 != null) && nextConsumer2.computeWork()) {
 				hasWork = true;
 			}
 			return hasWork;
@@ -155,8 +159,9 @@ public abstract class AbstractInvocationConstructor implements InvocationConstru
 
 		public void didWork() {
 			previouslyConsumedIndex = targetConsumedIndex;
-			if (nextConsumer != null) {
-				nextConsumer.didWork();
+			Consumer nextConsumer2 = nextConsumer;
+			if (nextConsumer2 != null) {
+				nextConsumer2.didWork();
 			}
 		}
 
@@ -164,8 +169,9 @@ public abstract class AbstractInvocationConstructor implements InvocationConstru
 			if (connection instanceof Connection.Incremental) {
 				((Connection.Incremental)connection).consume(currentConsumedIndex, invocation);
 			}
-			if (nextConsumer != null) {
-				nextConsumer.invoked(invocation);
+			Consumer nextConsumer2 = nextConsumer;
+			if (nextConsumer2 != null) {
+				nextConsumer2.invoked(invocation);
 			}
 		}
 
@@ -215,8 +221,9 @@ public abstract class AbstractInvocationConstructor implements InvocationConstru
 				return null;				// doesn't constitute a downstream failure
 			}
 			values[valueIndex] = value;
-			if (nextConsumer != null) {
-				return nextConsumer.propagateHere(partialConsumerIndex, values);
+			Consumer nextConsumer2 = nextConsumer;
+			if (nextConsumer2 != null) {
+				return nextConsumer2.propagateHere(partialConsumerIndex, values);
 			}
 			else {
 				Invocation invocation = invocationConstructor.invoke(values);

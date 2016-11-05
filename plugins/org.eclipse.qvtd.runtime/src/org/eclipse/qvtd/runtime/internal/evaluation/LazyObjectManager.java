@@ -160,15 +160,15 @@ public class LazyObjectManager extends AbstractObjectManager
 
 		public synchronized void assigned(@NonNull LazyObjectManager objectManager, @NonNull Object eObject, @NonNull EStructuralFeature eFeature, @Nullable Object ecoreValue) {
 			switch (mode) {
-				case ASSIGNABLE:
-					mode = SlotMode.ASSIGNED;
-					unblock(objectManager);
-					break;
-				case ASSIGNED:
-					if (!(eFeature instanceof EOppositeReferenceImpl)) {
-						System.out.println("Re-assignment of " + eFeature.getEContainingClass().getName() + "::" + eFeature.getName() + " for " + eObject + " with " + ecoreValue);
-					}
-					break;
+			case ASSIGNABLE:
+				mode = SlotMode.ASSIGNED;
+				unblock(objectManager);
+				break;
+			case ASSIGNED:
+				if (!(eFeature instanceof EOppositeReferenceImpl)) {
+					System.out.println("Re-assignment of " + eFeature.getEContainingClass().getName() + "::" + eFeature.getName() + " for " + eObject + " with " + ecoreValue);
+				}
+				break;
 			}
 		}
 
@@ -194,10 +194,10 @@ public class LazyObjectManager extends AbstractObjectManager
 		@Override
 		public synchronized void getting(@NonNull Object eObject, @NonNull EStructuralFeature eFeature) {
 			switch (mode) {
-				case ASSIGNABLE:
-					throw new InvocationFailedException(this);
-				case ASSIGNED:
-					break;
+			case ASSIGNABLE:
+				throw new InvocationFailedException(this);
+			case ASSIGNED:
+				break;
 			}
 		}
 
@@ -511,24 +511,24 @@ public class LazyObjectManager extends AbstractObjectManager
 		public void assignedElement(@NonNull Object eContainer, @NonNull EReference eReference, Object eObject) {
 			//			super.assigned(objectManager, eContainer, eReference, eObject);
 			switch (mode) {
-				case ASSIGNABLE:
-					mode = SlotMode.ASSIGNED;
-					unblock(LazyObjectManager.this);
-					break;
-				case ASSIGNED:
-					break;
+			case ASSIGNABLE:
+				mode = SlotMode.ASSIGNED;
+				unblock(LazyObjectManager.this);
+				break;
+			case ASSIGNED:
+				break;
 			}
 		}
 
 		@Override
 		public synchronized void getting(@NonNull Object eObject, @NonNull EStructuralFeature eFeature) {
 			switch (mode) {
-				case ASSIGNABLE:
-					mode = SlotMode.ASSIGNED;
-					unblock(LazyObjectManager.this);
-					break;
-				case ASSIGNED:
-					break;
+			case ASSIGNABLE:
+				mode = SlotMode.ASSIGNED;
+				unblock(LazyObjectManager.this);
+				break;
+			case ASSIGNED:
+				break;
 			}
 		}
 	}
@@ -737,82 +737,86 @@ public class LazyObjectManager extends AbstractObjectManager
 				slotState = new SimpleSlotState(eObject, (EAttribute)eFeature, ecoreValue);
 			}
 			else {
+				Object ecoreValue2 = ecoreValue;
 				EReference eReference = (EReference)eFeature;
 				EReference eOppositeReference = getEOppositeReference(eReference);
 				if (!(eOppositeReference instanceof EOppositeReferenceImpl)) {
-					//					if (ecoreValue != null) {
-					//						Map<EStructuralFeature, SlotState> oppositeObjectState = getObjectState((EObject) ecoreValue);
+					//					if (ecoreValue2 != null) {
+					//						Map<EStructuralFeature, SlotState> oppositeObjectState = getObjectState((EObject) ecoreValue2);
 					//						SlotState oppositeSlotState = oppositeObjectState.get(eOppositeReference);
 					//					}
 					if (eReference.isMany()) {
-						assert ecoreValue != null;
+						assert ecoreValue2 != null;
 						if (eOppositeReference.isMany()) {
 							slotState = createManyToManySlotState(eObject, eReference, eOppositeReference);
 						}
 						else {
-							slotState = createOneToManyAggregatorSlotState(eObject, eReference, eOppositeReference, ecoreValue);
+							slotState = createOneToManyAggregatorSlotState(eObject, eReference, eOppositeReference, ecoreValue2);
 						}
 					}
-					else if (ecoreValue != null) {
+					else if (ecoreValue2 != null) {
 						if (eOppositeReference.isMany()) {
-							slotState = createOneToManyElementSlotState(eObject, eReference, eOppositeReference, ecoreValue);
+							slotState = createOneToManyElementSlotState(eObject, eReference, eOppositeReference, ecoreValue2);
 						}
 						//						else if (isIncremental) {
-						//							slotState = OneToOneSlotState.create(this, eObject, eReference, eOppositeReference, ecoreValue);
+						//							slotState = OneToOneSlotState.create(this, eObject, eReference, eOppositeReference, ecoreValue2);
 						//						}
 						else {
-							slotState = createOneToOneSlotState(eObject, eReference, eOppositeReference, ecoreValue);
+							slotState = createOneToOneSlotState(eObject, eReference, eOppositeReference, ecoreValue2);
 						}
 					}
 					else {
-						slotState = createOneToOneSlotState(eObject, eReference, eOppositeReference, ecoreValue);
+						slotState = createOneToOneSlotState(eObject, eReference, eOppositeReference, ecoreValue2);
 					}
 				}
 				else if (eReference.isContainment()) {
-					assert ecoreValue != null;
+					assert ecoreValue2 != null;
 					eOppositeReference = OCLstdlibPackage.Literals.OCL_ELEMENT__OCL_CONTAINER;
 					assert eOppositeReference != null;
 					if (eReference.isMany()) {
-						slotState = createOneToManyAggregatorSlotState(eObject, eReference, eOppositeReference, ecoreValue);
+						assert eOppositeReference != null;
+						slotState = createOneToManyAggregatorSlotState(eObject, eReference, eOppositeReference, ecoreValue2);
 					}
 					else {
-						Map<@NonNull EStructuralFeature, @NonNull SlotState> oppositeObjectState = getObjectState(ecoreValue);
+						Map<@NonNull EStructuralFeature, @NonNull SlotState> oppositeObjectState = getObjectState(ecoreValue2);
 						slotState = oppositeObjectState.get(eOppositeReference);
 						if (slotState != null) {
-							slotState.assigned(ecoreValue, eOppositeReference, eObject);
+							assert eOppositeReference != null;
+							slotState.assigned(ecoreValue2, eOppositeReference, eObject);
 						}
 						else {
-							slotState = createOneToOneSlotState(eObject, eReference, eOppositeReference, (EObject)ecoreValue);
+							assert eOppositeReference != null;
+							slotState = createOneToOneSlotState(eObject, eReference, eOppositeReference, (EObject)ecoreValue2);
 						}
 					}
 				}
 				//				else if (eReference == OCLstdlibPackage.Literals.OCL_ELEMENT__OCL_CONTAINER) {
-				//					slotState = OneToOneSlotState.create(this, eObject, eReference, eOppositeReference, (EObject)ecoreValue);
+				//					slotState = OneToOneSlotState.create(this, eObject, eReference, eOppositeReference, (EObject)ecoreValue2);
 				//				}
 				else {						// Unidirectional non-containment EReference
-					if (ecoreValue != null) {
+					if (ecoreValue2 != null) {
 						//						eOppositeReference = getEOppositeReference(eReference);
-						Map<@NonNull EStructuralFeature, @NonNull SlotState> oppositeObjectState = getObjectState(ecoreValue);
+						Map<@NonNull EStructuralFeature, @NonNull SlotState> oppositeObjectState = getObjectState(ecoreValue2);
 						slotState = oppositeObjectState.get(eOppositeReference);
 						if (slotState == null) {
 							if (eOppositeReference.isMany()) {
-								slotState = createOneToManyElementSlotState(eObject, eReference, eOppositeReference, ecoreValue);
+								slotState = createOneToManyElementSlotState(eObject, eReference, eOppositeReference, ecoreValue2);
 							}
 							else if (eReference.isMany()) {
-								slotState = new OneToManyAggregatorSlotState(eObject, eReference, /*eOppositeReference,*/ ecoreValue);
+								slotState = new OneToManyAggregatorSlotState(eObject, eReference, /*eOppositeReference,*/ ecoreValue2);
 								oppositeObjectState.put(eOppositeReference, slotState);
 							}
 							else {
-								slotState = new OneToOneSlotState(eObject, eReference, /*eOppositeReference,*/ ecoreValue);
+								slotState = new OneToOneSlotState(eObject, eReference, /*eOppositeReference,*/ ecoreValue2);
 								oppositeObjectState.put(eOppositeReference, slotState);
 							}
 						}
 						else {
-							slotState.assigned(ecoreValue, eOppositeReference, eObject);
+							slotState.assigned(ecoreValue2, eOppositeReference, eObject);
 						}
 					}
 					else {
-						slotState = createOneToOneSlotState(eObject, eReference, eOppositeReference, ecoreValue);
+						slotState = createOneToOneSlotState(eObject, eReference, eOppositeReference, ecoreValue2);
 
 					}
 				}

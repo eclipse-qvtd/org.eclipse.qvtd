@@ -120,20 +120,23 @@ public abstract class AbstractTransformerInternal extends AbstractModelManager i
 				}
 			}
 			if (eClass2allPropertyIndexes != null) {
-				assert eReference2propertyIndex != null;
+				Map<@NonNull EReference, @NonNull Integer> eReference2propertyIndex2 = eReference2propertyIndex;
+				assert eReference2propertyIndex2 != null;
 				List<@NonNull Integer> allPropertyIndexes = eClass2allPropertyIndexes.get(eClass);
 				if (allPropertyIndexes == null) {
-					allPropertyIndexes = getOppositePropertyIndexes(eReference2propertyIndex, eClass);
+					allPropertyIndexes = getOppositePropertyIndexes(eReference2propertyIndex2, eClass);
 					eClass2allPropertyIndexes.put(eClass, allPropertyIndexes);
 				}
 				Map<@NonNull Object, @NonNull Object>[] object2oppositeObject2 = object2oppositeObject;
 				assert object2oppositeObject2 != null;
 				for (@NonNull Integer propertyIndex : allPropertyIndexes) {
-					assert propertyIndex2eReference != null;
-					EReference eReference = propertyIndex2eReference[propertyIndex];
+					EReference @Nullable [] propertyIndex2eReference2 = propertyIndex2eReference;
+					assert propertyIndex2eReference2 != null;
+					EReference eReference = propertyIndex2eReference2[propertyIndex];
 					if (eReference == null) {
-						assert propertyIndex2propertyId != null;
-						PropertyId propertyId = propertyIndex2propertyId[propertyIndex];
+						PropertyId @Nullable [] propertyIndex2propertyId2 = propertyIndex2propertyId;
+						assert propertyIndex2propertyId2 != null;
+						PropertyId propertyId = propertyIndex2propertyId2[propertyIndex];
 						assert propertyId != null;
 						eReference = (EReference) NameUtil.getENamedElement(eClass.getEAllStructuralFeatures(), propertyId.getName());
 						assert eReference != null;
@@ -203,8 +206,9 @@ public abstract class AbstractTransformerInternal extends AbstractModelManager i
 			List<@NonNull Object> allEObjects2 = allEObjects;
 			if (allEObjects2 == null) {
 				allEObjects = allEObjects2 = new ArrayList<>();
-				if (rootEObjects != null) {
-					for (@NonNull Object eRootObject : rootEObjects) {
+				List<@NonNull Object> rootEObjects2 = rootEObjects;
+				if (rootEObjects2 != null) {
+					for (@NonNull Object eRootObject : rootEObjects2) {
 						assert !allEObjects2.contains(eRootObject);
 						allEObjects2.add(eRootObject);
 						for (TreeIterator<? extends Object> tit = eAllContents(eRootObject); tit.hasNext(); ) {
@@ -272,8 +276,9 @@ public abstract class AbstractTransformerInternal extends AbstractModelManager i
 			List<@NonNull Object> rootEObjects2 = rootEObjects;
 			if (rootEObjects2 == null) {
 				rootEObjects = rootEObjects2 = new ArrayList<>();
-				if (allEObjects != null) {
-					for (@NonNull Object eObject : allEObjects) {
+				List<@NonNull Object> allEObjects2 = allEObjects;
+				if (allEObjects2 != null) {
+					for (@NonNull Object eObject : allEObjects2) {
 						if (eContainer(eObject) == null) {
 							rootEObjects2.add(eObject);
 						}
@@ -285,12 +290,73 @@ public abstract class AbstractTransformerInternal extends AbstractModelManager i
 
 		@Override
 		public String toString() {
-			return name + " " + (rootEObjects != null ? rootEObjects.size() : "null") +  "/" + (allEObjects != null ? allEObjects.size() : "null");
+			List<@NonNull Object> rootEObjects2 = rootEObjects;
+			List<@NonNull Object> allEObjects2 = allEObjects;
+			return name + " " + (rootEObjects2 != null ? rootEObjects2.size() : "null") +  "/" + (allEObjects2 != null ? allEObjects2.size() : "null");
 		}
 
 		@Override
 		public @NonNull String getName() {
 			return name;
+		}
+
+		public void remove(@NonNull EObject eObject) {
+			List<@NonNull Object> allEObjects2 = allEObjects;
+			//			if (allEObjects2 == null) {
+			//				allEObjects = allEObjects2 = new ArrayList<>();
+			//			}
+			//			rootEObjects = null;
+			assert allEObjects2 != null;
+			assert allEObjects2.contains(eObject);
+			allEObjects2.remove(eObject);
+			//			if ((eClass2allClassIndexes == null) && (classId2classIndexes != null) && (classIndex2objects != null)) {
+			//				eClass2allClassIndexes = new HashMap<>();
+			//			}
+			unaccumulateEObject(eClass2allClassIndexes, null, null, eObject);
+		}
+
+		/**
+		 * Remove eObject from the caches.
+		 * <p>
+		 * If eClass2allClassIndexes is non-null, eObject is removed from the allInstances() caches potentially updating eClass2allClassIndexes with
+		 * the state of a new EClass.
+		 * <p>
+		 * If eClass2allPropertyIndexes is non-null, eObject is removed fromun the unnavigable opposites caches potentially updating eClass2allPropertyIndexes with
+		 * the state of a new EClass.
+		 */
+		private void unaccumulateEObject(@Nullable Map<@NonNull EClass, @NonNull Set<@NonNull Integer>> eClass2allClassIndexes,
+				@Nullable Map<@NonNull EClass, @NonNull List<@NonNull Integer>> eClass2allPropertyIndexes, @Nullable Map<@NonNull EReference, @NonNull Integer> eReference2propertyIndex,
+				@NonNull Object eObject) {
+			EClass eClass = eClass(eObject);
+			if (eClass2allClassIndexes != null) {
+				Set<@NonNull Integer> allClassIndexes = eClass2allClassIndexes.get(eClass);
+				if (allClassIndexes != null) {
+					List<@NonNull Object>[] classIndex2objects2 = classIndex2objects;
+					assert classIndex2objects2 != null;
+					for (@NonNull Integer classIndex : allClassIndexes) {
+						classIndex2objects2[classIndex].remove(eObject);
+					}
+				}
+			}
+			if (eClass2allPropertyIndexes != null) {
+				Map<@NonNull EReference, @NonNull Integer> eReference2propertyIndex2 = eReference2propertyIndex;
+				assert eReference2propertyIndex2 != null;
+				List<@NonNull Integer> allPropertyIndexes = eClass2allPropertyIndexes.get(eClass);
+				if (allPropertyIndexes != null) {
+					Map<@NonNull Object, @NonNull Object>[] object2oppositeObject2 = object2oppositeObject;
+					assert object2oppositeObject2 != null;
+					for (@NonNull Integer propertyIndex : allPropertyIndexes) {
+						EReference @Nullable [] propertyIndex2eReference2 = propertyIndex2eReference;
+						assert propertyIndex2eReference2 != null;
+						EReference eReference = propertyIndex2eReference2[propertyIndex];
+						if (eReference != null) {
+							Object object = eGet(eObject, eReference);
+							assert object != null;
+							object2oppositeObject2[propertyIndex].remove(object);
+						}
+					}
+				}
+			}
 		}
 	}
 
@@ -323,7 +389,7 @@ public abstract class AbstractTransformerInternal extends AbstractModelManager i
 		}
 
 		@Override
-		public boolean addAll(@NonNull Collection<? extends T> c) {
+		public boolean addAll(Collection<? extends T> c) {
 			throw new UnsupportedOperationException();
 		}
 
@@ -572,16 +638,16 @@ public abstract class AbstractTransformerInternal extends AbstractModelManager i
 		PackageId packageId = IdManager.getPackageId(ePackage);
 		String className = ClassUtil.nonNullEMF(eClass.getName());		// FIXME Original name
 		ClassId classId = packageId.getClassId(className, eClass.getETypeParameters().size());
-		assert classId2classIndexes != null;
-		Set<@NonNull Integer> classIndexes = classId2classIndexes.get(classId);
+		Map<@NonNull ClassId, @NonNull Set<@NonNull Integer>> classId2classIndexes2 = classId2classIndexes;
+		assert classId2classIndexes2 != null;
+		Set<@NonNull Integer> classIndexes = classId2classIndexes2.get(classId);
 		if (classIndexes == null) {
 			classIndexes = new HashSet<>();
 			for (@NonNull EClass eSuperClass : ClassUtil.nullFree(eClass.getESuperTypes())) {
 				Set<@NonNull Integer> partialResult = getClassIndexes(eSuperClass);
 				classIndexes.addAll(partialResult);
 			}
-			assert classId2classIndexes != null;
-			classId2classIndexes.put(classId, classIndexes);
+			classId2classIndexes2.put(classId, classIndexes);
 		}
 		return classIndexes;
 	}
@@ -634,8 +700,9 @@ public abstract class AbstractTransformerInternal extends AbstractModelManager i
 						ClassId classId = packageId.getClassId(className, eContainingClass.getETypeParameters().size());
 						String propertyName = ClassUtil.nonNullEMF(eReference.getName());		// FIXME Original name
 						PropertyId propertyId = classId.getPropertyId(propertyName);
-						assert propertyId2propertyIndex != null;
-						propertyIndex = propertyId2propertyIndex.get(propertyId);
+						Map<PropertyId, Integer> propertyId2propertyIndex2 = propertyId2propertyIndex;
+						assert propertyId2propertyIndex2 != null;
+						propertyIndex = propertyId2propertyIndex2.get(propertyId);
 					}
 					if (propertyIndex == null) {
 						propertyIndex = -1;
