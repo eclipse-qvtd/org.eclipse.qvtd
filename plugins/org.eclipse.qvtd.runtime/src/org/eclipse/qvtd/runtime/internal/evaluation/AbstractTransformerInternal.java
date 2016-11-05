@@ -67,6 +67,11 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 		}
 
 		@Override
+		protected @NonNull Connection createConnection(@NonNull String name, @NonNull TypeId typeId, boolean isStrict) {
+			return invocationManager.getRootInterval().createIncrementalConnection(name, typeId, isStrict);
+		}
+
+		@Override
 		protected @NonNull InvocationManager createInvocationManager() {
 			return new IncrementalInvocationManager(executor);
 		}
@@ -74,7 +79,7 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 		@Override
 		protected @NonNull Model createModel(@NonNull String modelName, @NonNull PropertyId @Nullable [] propertyIndex2propertyId,
 				@NonNull ClassId @NonNull [] classIndex2classId, int @Nullable [] @NonNull [] classIndex2allClassIndexes) {
-			return new Model(modelName, propertyIndex2propertyId, classIndex2classId, classIndex2allClassIndexes);
+			return new Model.Incremental(this, modelName, propertyIndex2propertyId, classIndex2classId, classIndex2allClassIndexes);
 		}
 
 		@Override
@@ -86,13 +91,13 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 	private static final @NonNull List<@NonNull Integer> EMPTY_INDEX_LIST = Collections.emptyList();
 	private static final @NonNull List<@NonNull Object> EMPTY_EOBJECT_LIST = Collections.emptyList();
 
-	protected class Model extends AbstractTypedModelInstance
+	public static class Model extends AbstractTypedModelInstance
 	{
-		protected class Incremental extends Model
+		public static class Incremental extends Model
 		{
-			public Incremental(@NonNull String name, @NonNull PropertyId @Nullable [] propertyIndex2propertyId,
+			public Incremental(@NonNull AbstractTransformerInternal transformer, @NonNull String name, @NonNull PropertyId @Nullable [] propertyIndex2propertyId,
 					@NonNull ClassId @NonNull [] classIndex2classId, int @Nullable [] @NonNull [] classIndex2allClassIndexes) {
-				super(name, propertyIndex2propertyId, classIndex2classId, classIndex2allClassIndexes);
+				super(transformer, name, propertyIndex2propertyId, classIndex2classId, classIndex2allClassIndexes);
 			}
 
 			public void remove(@NonNull EObject eObject) {
@@ -122,12 +127,12 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 			private void unaccumulateEObject(@Nullable Map<@NonNull EClass, @NonNull Set<@NonNull Integer>> eClass2allClassIndexes,
 					@Nullable Map<@NonNull EClass, @NonNull List<@NonNull Integer>> eClass2allPropertyIndexes, @Nullable Map<@NonNull EReference, @NonNull Integer> eReference2propertyIndex,
 					@NonNull Object eObject) {
-				EClass eClass = eClass(eObject);
+				EClass eClass = transformer.eClass(eObject);
 				if (eClass2allClassIndexes != null) {
 					Set<@NonNull Integer> allClassIndexes = eClass2allClassIndexes.get(eClass);
 					if (allClassIndexes != null) {
 						for (@NonNull Integer classIndex : allClassIndexes) {
-							((Connection.Incremental)classIndex2connection[classIndex]).revoke(eObject);
+							((Connection.Incremental)classIndex2connection[classIndex]).removeElement(eObject);
 						}
 					}
 				}
@@ -136,14 +141,14 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 					assert eReference2propertyIndex2 != null;
 					List<@NonNull Integer> allPropertyIndexes = eClass2allPropertyIndexes.get(eClass);
 					if (allPropertyIndexes != null) {
-						Map<@NonNull Object, @NonNull Object>[] object2oppositeObject2 = object2oppositeObject;
+						Map<@NonNull Object, @NonNull Object>[] object2oppositeObject2 = transformer.object2oppositeObject;
 						assert object2oppositeObject2 != null;
 						for (@NonNull Integer propertyIndex : allPropertyIndexes) {
-							EReference @Nullable [] propertyIndex2eReference2 = propertyIndex2eReference;
+							EReference @Nullable [] propertyIndex2eReference2 = transformer.propertyIndex2eReference;
 							assert propertyIndex2eReference2 != null;
 							EReference eReference = propertyIndex2eReference2[propertyIndex];
 							if (eReference != null) {
-								Object object = eGet(eObject, eReference);
+								Object object = transformer.eGet(eObject, eReference);
 								assert object != null;
 								object2oppositeObject2[propertyIndex].remove(object);
 							}
@@ -153,18 +158,20 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 			}
 		}
 
+		protected final @NonNull AbstractTransformerInternal transformer;
 		protected final @NonNull String name;
-		private @Nullable List<@NonNull Object> allEObjects = null;
+		protected @Nullable List<@NonNull Object> allEObjects = null;
 		private @Nullable List<@NonNull Object> rootEObjects = null;
-		private final @NonNull Map<@NonNull EClass, @NonNull Set<@NonNull Integer>> eClass2allClassIndexes = new HashMap<>();
+		protected final @NonNull Map<@NonNull EClass, @NonNull Set<@NonNull Integer>> eClass2allClassIndexes = new HashMap<>();
 
 		/**
 		 * All possible allInstances() returns indexed by the ClassIndex of the ClassId for which allInstances() may be invoked.
 		 */
-		private final @NonNull Connection [] classIndex2connection;
+		protected final @NonNull Connection [] classIndex2connection;
 
-		public Model(@NonNull String name, @NonNull PropertyId @Nullable [] propertyIndex2propertyId,
+		public Model(@NonNull AbstractTransformerInternal transformer, @NonNull String name, @NonNull PropertyId @Nullable [] propertyIndex2propertyId,
 				@NonNull ClassId @NonNull [] classIndex2classId, int @Nullable [] @NonNull [] classIndex2allClassIndexes) {
+			this.transformer = transformer;
 			this.name = name;
 			//
 			//	Prepare the allInstances() fields
@@ -174,7 +181,7 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 			for (int i = 0; i < classIds; i++) {
 				@NonNull
 				ClassId classId = classIndex2classId[i];
-				classIndex2connection[i] = createConnection(name + "-" + classId, classId, false);
+				classIndex2connection[i] = transformer.createConnection(name + "-" + classId, classId, false);
 			}
 		}
 
@@ -185,11 +192,11 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 		private void accumulateEObject1(@NonNull Object eObject, @NonNull EClass eClass) {
 			Set<@NonNull Integer> allClassIndexes = eClass2allClassIndexes.get(eClass);
 			if (allClassIndexes == null) {
-				allClassIndexes = getClassIndexes(eClass);
+				allClassIndexes = transformer.getClassIndexes(eClass);
 				eClass2allClassIndexes.put(eClass, allClassIndexes);
 			}
 			for (@NonNull Integer classIndex : allClassIndexes) {
-				classIndex2connection[classIndex].append(eObject);
+				classIndex2connection[classIndex].appendElement(eObject);
 			}
 		}
 
@@ -206,24 +213,24 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 			assert eReference2propertyIndex2 != null;
 			List<@NonNull Integer> allPropertyIndexes = eClass2allPropertyIndexes.get(eClass);
 			if (allPropertyIndexes == null) {
-				allPropertyIndexes = getOppositePropertyIndexes(eReference2propertyIndex2, eClass);
+				allPropertyIndexes = transformer.getOppositePropertyIndexes(eReference2propertyIndex2, eClass);
 				eClass2allPropertyIndexes.put(eClass, allPropertyIndexes);
 			}
-			Map<@NonNull Object, @NonNull Object>[] object2oppositeObject2 = object2oppositeObject;
+			Map<@NonNull Object, @NonNull Object>[] object2oppositeObject2 = transformer.object2oppositeObject;
 			assert object2oppositeObject2 != null;
 			for (@NonNull Integer propertyIndex : allPropertyIndexes) {
-				EReference @Nullable [] propertyIndex2eReference2 = propertyIndex2eReference;
+				EReference @Nullable [] propertyIndex2eReference2 = transformer.propertyIndex2eReference;
 				assert propertyIndex2eReference2 != null;
 				EReference eReference = propertyIndex2eReference2[propertyIndex];
 				if (eReference == null) {
-					PropertyId @Nullable [] propertyIndex2propertyId2 = propertyIndex2propertyId;
+					PropertyId @Nullable [] propertyIndex2propertyId2 = transformer.propertyIndex2propertyId;
 					assert propertyIndex2propertyId2 != null;
 					PropertyId propertyId = propertyIndex2propertyId2[propertyIndex];
 					assert propertyId != null;
 					eReference = (EReference) NameUtil.getENamedElement(eClass.getEAllStructuralFeatures(), propertyId.getName());
 					assert eReference != null;
 				}
-				Object object = eGet(eObject, eReference);
+				Object object = transformer.eGet(eObject, eReference);
 				assert object != null;
 				object2oppositeObject2[propertyIndex].put(object, eObject);
 			}
@@ -237,7 +244,7 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 			rootEObjects = null;
 			assert !allEObjects2.contains(eObject);
 			allEObjects2.add(eObject);
-			EClass eClass = eClass(eObject);
+			EClass eClass = transformer.eClass(eObject);
 			accumulateEObject1(eObject, eClass);
 		}
 
@@ -252,7 +259,7 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 			allEObjects = null;
 			Map<@NonNull EClass, @NonNull List<@NonNull Integer>> eClass2allPropertyIndexes = null;
 			Map<@NonNull EReference, @NonNull Integer> eReference2propertyIndex = null;
-			if (propertyIndex2propertyId != null) {
+			if (transformer.propertyIndex2propertyId != null) {
 				eClass2allPropertyIndexes = new HashMap<>();
 				eReference2propertyIndex = new HashMap<>();
 			}
@@ -264,15 +271,15 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 				//
 				//	Accumulate the root object and all its child objects in the allInstances() returns
 				//
-				EClass eRootClass = eClass(eRootObject);
+				EClass eRootClass = transformer.eClass(eRootObject);
 				accumulateEObject1(eRootObject, eRootClass);
 				if (eClass2allPropertyIndexes != null) {
 					accumulateEObject2(eRootObject, eRootClass, eClass2allPropertyIndexes, eReference2propertyIndex);
 				}
-				for (TreeIterator<? extends Object> tit = eAllContents(eRootObject); tit.hasNext(); ) {
+				for (TreeIterator<? extends Object> tit = transformer.eAllContents(eRootObject); tit.hasNext(); ) {
 					Object eObject = tit.next();
 					if (eObject != null) {
-						EClass eClass = eClass(eObject);
+						EClass eClass = transformer.eClass(eObject);
 						accumulateEObject1(eObject, eClass);
 						if (eClass2allPropertyIndexes != null) {
 							accumulateEObject2(eObject, eClass, eClass2allPropertyIndexes, eReference2propertyIndex);
@@ -292,7 +299,7 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 					for (@NonNull Object eRootObject : rootEObjects2) {
 						assert !allEObjects2.contains(eRootObject);
 						allEObjects2.add(eRootObject);
-						for (TreeIterator<? extends Object> tit = eAllContents(eRootObject); tit.hasNext(); ) {
+						for (TreeIterator<? extends Object> tit = transformer.eAllContents(eRootObject); tit.hasNext(); ) {
 							Object eObject = tit.next();
 							if (eObject != null) {
 								assert !allEObjects2.contains(eObject);
@@ -312,7 +319,7 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 		@Override
 		public @NonNull Iterable<@NonNull Object> getObjectsOfKind(org.eclipse.ocl.pivot.@NonNull Class type) {
 			TypeId classId = type.getTypeId();
-			Integer classIndex = classId2classIndex.get(classId);
+			Integer classIndex = transformer.classId2classIndex.get(classId);
 			if (classIndex != null) {
 				Iterable<@NonNull Object> typedIterable = classIndex2connection[classIndex].typedIterable(Object.class);
 				//				List<@NonNull Object> collection =  new ArrayList<>();
@@ -360,7 +367,7 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 				List<@NonNull Object> allEObjects2 = allEObjects;
 				if (allEObjects2 != null) {
 					for (@NonNull Object eObject : allEObjects2) {
-						if (eContainer(eObject) == null) {
+						if (transformer.eContainer(eObject) == null) {
 							rootEObjects2.add(eObject);
 						}
 					}
@@ -383,7 +390,7 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 
 		public <@NonNull T> Iterable<T> typedIterable(Class<T> javaClass, org.eclipse.ocl.pivot.@NonNull Class pivotType) {
 			TypeId typeId = pivotType.getTypeId();
-			Integer classIndex = classId2classIndex.get(typeId);
+			Integer classIndex = transformer.classId2classIndex.get(typeId);
 			if (classIndex != null) {
 				Connection connection = classIndex2connection[classIndex];
 				return connection.typedIterable(javaClass);
@@ -559,7 +566,7 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 
 	protected @NonNull Model createModel(@NonNull String modelName, @NonNull PropertyId @Nullable [] propertyIndex2propertyId,
 			@NonNull ClassId @NonNull [] classIndex2classId, int @Nullable [] @NonNull [] classIndex2allClassIndexes) {
-		return new Model(modelName, propertyIndex2propertyId, classIndex2classId, classIndex2allClassIndexes);
+		return new Model(this, modelName, propertyIndex2propertyId, classIndex2classId, classIndex2allClassIndexes);
 	}
 
 	@Deprecated // Use createConnection

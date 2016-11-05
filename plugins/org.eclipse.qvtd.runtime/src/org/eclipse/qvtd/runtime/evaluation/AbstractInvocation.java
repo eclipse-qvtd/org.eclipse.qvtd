@@ -99,6 +99,26 @@ public abstract class AbstractInvocation extends AbstractInvocationInternal
 		}
 
 		@Override
+		public void revokeExecution() {
+			if (writeSlots != null) {
+				for (SlotState.@NonNull Incremental writeSlot : writeSlots) {
+					writeSlot.revokeAssigned();
+				}
+			}
+			interval.queue(this);
+		}
+
+		@Override
+		public void revokeInvocation() {
+			if (writeSlots != null) {
+				for (SlotState.@NonNull Incremental writeSlot : writeSlots) {
+					writeSlot.revokeAssigned();
+				}
+			}
+			interval.queue(this);
+		}
+
+		@Override
 		public @NonNull String toString() {
 			return getName();
 		}

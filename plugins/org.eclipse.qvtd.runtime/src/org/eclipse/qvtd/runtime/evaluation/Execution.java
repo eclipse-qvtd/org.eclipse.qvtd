@@ -15,7 +15,7 @@ import org.eclipse.ocl.pivot.utilities.Nameable;
 
 /**
  * An Execution identifies a unique execution and the objects/values that it uses.
- * Derived EXecutions support Mapping Invocations and unique Function Computations
+ * Derived Executions support Mapping Invocations and unique Function Computations
  *
  * @noimplement clients should derive from AbstractInvocation
  */
@@ -25,7 +25,20 @@ public interface Execution extends ExecutionVisitable, Nameable
 	{
 		void addReadSlot(SlotState.@NonNull Incremental readSlot);
 		@NonNull Iterable<@NonNull Object> getCreatedObjects();
-		@Override
-		@NonNull String getName();
+
+		/**
+		 * Revoke the consequences of a previous execution in preparation for a new execution.
+		 * This reverts all assigned slot states back to REASSIGNABLE.
+		 */
+		void revokeExecution();
+
+		/**
+		 * Revoke the consequences of a previous execution that will not be re-executed.
+		 * All created objects are revoked.
+		 */
+		void revokeInvocation();
 	}
+
+	@Override
+	@NonNull String getName();
 }

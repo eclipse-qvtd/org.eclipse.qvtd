@@ -41,7 +41,8 @@ public class IncrementalObjectManager extends AbstractObjectManager
 	{
 		public enum SlotMode {
 			ASSIGNABLE,		// No assignment has been performed, object reads are blocked (collections reads may be unblocked)
-			ASSIGNED		// Last assignment has been performed, reads are unblocked
+			ASSIGNED,		// Last assignment has been performed, reads are unblocked
+			REASSIGNABLE,	// No assignment has been performed by a re-execution, object reads are blocked (collections reads may be unblocked)
 		}
 
 		protected final @NonNull Object eObject;
@@ -69,12 +70,20 @@ public class IncrementalObjectManager extends AbstractObjectManager
 				case ASSIGNABLE:
 					mode = SlotMode.ASSIGNED;
 					unblock(objectManager);
+					this.value = ecoreValue;
 					break;
 				case ASSIGNED:
 					System.out.println("Re-assignment of " + eFeature.getEContainingClass().getName() + "::" + eFeature.getName() + " for " + eObject + " with " + ecoreValue);
 					break;
+				case REASSIGNABLE:
+					mode = SlotMode.ASSIGNED;
+					if (this.value != ecoreValue) {		// FIXME equals() ??
+						this.value = ecoreValue;
+						revokeTargets();
+					}
+					unblock(objectManager);
+					break;
 			}
-			this.value = ecoreValue;
 		}
 
 		@Override
@@ -115,6 +124,7 @@ public class IncrementalObjectManager extends AbstractObjectManager
 		public synchronized void getting( @NonNull Object eObject, @NonNull EStructuralFeature eFeature) {
 			switch (mode) {
 				case ASSIGNABLE:
+				case REASSIGNABLE:
 					throw new InvocationFailedException(this);
 				case ASSIGNED:
 					break;
@@ -123,6 +133,12 @@ public class IncrementalObjectManager extends AbstractObjectManager
 
 		protected boolean isAssigned() {
 			return mode == SlotMode.ASSIGNED;
+		}
+
+		@Override
+		public void revokeAssigned() {
+			assert isAssigned();
+			mode = SlotMode.REASSIGNABLE;
 		}
 
 		@Override
@@ -416,6 +432,7 @@ public class IncrementalObjectManager extends AbstractObjectManager
 			//			super.assigned(objectManager, eContainer, eReference, eObject);
 			switch (mode) {
 				case ASSIGNABLE:
+				case REASSIGNABLE:
 					mode = SlotMode.ASSIGNED;
 					unblock(IncrementalObjectManager.this);
 					break;
@@ -428,6 +445,7 @@ public class IncrementalObjectManager extends AbstractObjectManager
 		public synchronized void getting(@NonNull Object eObject, @NonNull EStructuralFeature eFeature) {
 			switch (mode) {
 				case ASSIGNABLE:
+				case REASSIGNABLE:
 					mode = SlotMode.ASSIGNED;
 					unblock(IncrementalObjectManager.this);
 					break;
@@ -835,5 +853,12 @@ public class IncrementalObjectManager extends AbstractObjectManager
 		assert eFeature != null;
 		BasicSlotState slotState = getSlotState(eObject, eFeature);
 		execution.addReadSlot(slotState);
+	}
+
+	public void modified(@NonNull Object eObject, @NonNull EStructuralFeature eFeature) {
+		BasicSlotState slotState = getSlotState(eObject, eFeature);
+		for (Execution.@NonNull Incremental execution : slotState.getTargets()) {
+			execution.revokeExecution();
+		}
 	}
 }

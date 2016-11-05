@@ -41,6 +41,18 @@ public abstract class AbstractComputation implements Computation
 		public @NonNull Iterable<@NonNull Object> getCreatedObjects() {
 			return /*createdObjects != null ? createdObjects :*/ EMPTY_OBJECT_LIST;
 		}
+
+		@Override
+		public void revokeExecution() {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void revokeInvocation() {
+			// TODO Auto-generated method stub
+
+		}
 	}
 
 	@Override

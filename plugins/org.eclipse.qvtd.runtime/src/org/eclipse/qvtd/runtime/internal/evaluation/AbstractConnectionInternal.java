@@ -45,17 +45,17 @@ public abstract class AbstractConnectionInternal extends AbstractConnection
 	public void addAppender(@NonNull InvocationConstructor appendingInvoker) {}
 
 	/**
-	 * Append aValue to the contents, and waking up the overall
+	 * Append anElement to the contents, and waking up the overall
 	 * connection manager to schedule a propagate() to consumers when convenient.
 	 */
 	@Override
-	public synchronized @NonNull Object append(@NonNull Object aValue) {
+	public synchronized @NonNull Object appendElement(@NonNull Object anElement) {
 		if (debugAppends) {
-			AbstractTransformer.APPENDS.println(this + " <= " + LabelUtil.getLabel(aValue));
+			AbstractTransformer.APPENDS.println(this + " <= " + LabelUtil.getLabel(anElement));
 		}
-		values.add(aValue);
+		values.add(anElement);
 		queue();
-		return aValue;
+		return anElement;
 	}
 
 	@Override

@@ -41,6 +41,16 @@ public interface Connection extends ExecutionVisitable, Nameable
 		@NonNull Iterable<@NonNull InvocationConstructor> getAppenders();
 
 		/**
+		 * Remove, inverse append, the old anElement.
+		 *
+		 * If the old value is a multiple value in a unique value connection, the multi-value count is decremented.
+		 *
+		 * Otherwise the old value is removed, its consumingInvocations are revoked
+		 * so that their appends are also revoked.
+		 */
+		void removeElement(@NonNull Object anElement);
+
+		/**
 		 * Replace the old value at connectionKey by newValue.
 		 *
 		 * If the old value is a multiple value in a unique value connection, the multi-value count is decremented
@@ -67,12 +77,12 @@ public interface Connection extends ExecutionVisitable, Nameable
 	boolean addConsumer(@NonNull InvocationConstructor consumingInvoker);
 
 	/**
-	 * Append aValue to the contents, enforcing uniqueness if necessary, and waking up the overall
+	 * Append anElement to the contents, enforcing uniqueness if necessary, and waking up the overall
 	 * connection manager to schedule a propagate() to consumers when convenient.
 	 *
 	 * Return the new entry.
 	 */
-	@NonNull Object append(@NonNull Object aValue);
+	@NonNull Object appendElement(@NonNull Object anElement);
 
 	int getCapacity();
 

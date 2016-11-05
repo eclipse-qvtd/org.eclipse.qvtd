@@ -42,22 +42,22 @@ public abstract class StrictIncrementalConnectionInternal extends AbstractIncrem
 	}
 
 	/**
-	 * Append aValue to the contents, enforcing uniqueness if necessary, and waking up the overall
+	 * Append anElement to the contents, enforcing uniqueness if necessary, and waking up the overall
 	 * connection manager to schedule a propagate() to consumers when convenient.
 	 */
 	@Override
-	public synchronized @NonNull Object append(@NonNull Object aValue) {
+	public synchronized @NonNull Object appendElement(@NonNull Object anElement) {
 		if (debugAppends) {
-			AbstractTransformer.APPENDS.println(this + " <= " + LabelUtil.getLabel(aValue));
+			AbstractTransformer.APPENDS.println(this + " <= " + LabelUtil.getLabel(anElement));
 		}
-		List<@NonNull Object> valueAndConsumingInvocations = uniqueValues2valueAndConsumingInvocations.get(aValue);
+		List<@NonNull Object> valueAndConsumingInvocations = uniqueValues2valueAndConsumingInvocations.get(anElement);
 		if (valueAndConsumingInvocations == null) {
 			valueAndConsumingInvocations = new ArrayList<>();
-			valueAndConsumingInvocations.add(aValue);										// VALUE_INDEX
+			valueAndConsumingInvocations.add(anElement);									// VALUE_INDEX
 			valueAndConsumingInvocations.add(listOfValueAndConsumingInvocations.size());	// INDEX_INDEX
 			valueAndConsumingInvocations.add(1);											// COUNT_INDEX
 			listOfValueAndConsumingInvocations.add(valueAndConsumingInvocations);
-			uniqueValues2valueAndConsumingInvocations.put(aValue, valueAndConsumingInvocations);
+			uniqueValues2valueAndConsumingInvocations.put(anElement, valueAndConsumingInvocations);
 			queue();
 		}
 		else {
@@ -95,7 +95,7 @@ public abstract class StrictIncrementalConnectionInternal extends AbstractIncrem
 			Integer count = (Integer) valueAndConsumingInvocations.get(COUNT_INDEX);
 			if (count > 1) {
 				valueAndConsumingInvocations.set(COUNT_INDEX, count-1);
-				return append(newValue);
+				return appendElement(newValue);
 			}
 			valueAndConsumingInvocations.set(VALUE_INDEX, newValue);
 			int iMax = valueAndConsumingInvocations.size();
@@ -127,8 +127,8 @@ public abstract class StrictIncrementalConnectionInternal extends AbstractIncrem
 		listOfValueAndConsumingInvocations.set(valueIndex, null);			// Do not disrupt index equivalence.
 		int iMax = valueAndConsumingInvocations.size();
 		for (int i = COUNT_INDEX+1; i < iMax; i++) {
-			AbstractInvocation consumingInvocation = (AbstractInvocation) valueAndConsumingInvocations.get(i);
-			consumingInvocation.revoke();
+			AbstractInvocation.Incremental consumingInvocation = (AbstractInvocation.Incremental) valueAndConsumingInvocations.get(i);
+			consumingInvocation.revokeExecution();
 		}
 	}
 }

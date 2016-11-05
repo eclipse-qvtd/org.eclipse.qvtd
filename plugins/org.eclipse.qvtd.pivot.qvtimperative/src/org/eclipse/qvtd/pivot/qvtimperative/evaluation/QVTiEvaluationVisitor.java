@@ -101,7 +101,7 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 			//				}
 			//			}
 			//			else {
-			connectionCollection.append(values);
+			connectionCollection.appendElement(values);
 			//			}
 			return connectionCollection;
 		}
@@ -306,7 +306,7 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 			if (initValue != null) {
 				for (Object value : (Iterable<?>)initValue) {
 					assert value != null;
-					connection.append(value);
+					connection.appendElement(value);
 				}
 			}
 		}

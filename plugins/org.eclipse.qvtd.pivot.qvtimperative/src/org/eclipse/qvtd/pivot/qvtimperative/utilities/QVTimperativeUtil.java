@@ -308,6 +308,10 @@ public class QVTimperativeUtil extends QVTbaseUtil
 		return (@NonNull Iterable<@NonNull ImperativeTypedModel>)modelParameter;
 	}
 
+	public static @NonNull Mapping getReferredMapping(MappingCall asMappingCall) {
+		return ClassUtil.nonNullState(asMappingCall.getReferredMapping());
+	}
+
 	public static @NonNull Mapping getRootMapping(@NonNull ImperativeTransformation asTransformation) {
 		Mapping asRootMapping = NameUtil.getNameable(getOwnedMappings(asTransformation), QVTimperativeUtil.ROOT_MAPPING_NAME);	// Obsolete relic
 		for (@NonNull Mapping asMapping : getOwnedMappings(asTransformation)) {

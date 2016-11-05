@@ -58,6 +58,12 @@ public abstract class AbstractSlotState implements SlotState
 		public @NonNull Iterable<Execution.@NonNull Incremental> getTargets() {
 			return targets != null ? targets : EMPTY_EXECUTIONS_LIST;
 		}
+
+		protected void revokeTargets() {
+			for (Execution.@NonNull Incremental target : getTargets()) {
+				target.revokeExecution();
+			}
+		}
 	}
 
 	@Override

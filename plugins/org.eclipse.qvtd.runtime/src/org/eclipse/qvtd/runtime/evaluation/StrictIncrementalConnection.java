@@ -10,6 +10,8 @@
  *******************************************************************************/
 package org.eclipse.qvtd.runtime.evaluation;
 
+import java.util.List;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.qvtd.runtime.internal.evaluation.StrictIncrementalConnectionInternal;
@@ -27,5 +29,32 @@ public class StrictIncrementalConnection extends StrictIncrementalConnectionInte
 {
 	public StrictIncrementalConnection(@NonNull Interval interval, @NonNull String name, @NonNull TypeId typeId) {
 		super(interval, name, typeId);
+	}
+
+	/**
+	 * Remove, inverse append, the old anElement. The old value is removed,
+	 * its consumingInvocations are revoked so that their appends are also revoked.
+	 */
+	@Override
+	public synchronized void removeElement(@NonNull Object anElement) {
+		for (int i = 0; i < listOfValueAndConsumingInvocations.size(); i++) {
+			List<@NonNull Object> valueAndConsumingInvocations = listOfValueAndConsumingInvocations.get(i);
+			if ((valueAndConsumingInvocations != null) && (valueAndConsumingInvocations.get(VALUE_INDEX) == anElement)) {
+				Integer count = (Integer) valueAndConsumingInvocations.get(COUNT_INDEX);
+				assert count != null;
+				if (count <= 0) {
+					listOfValueAndConsumingInvocations.set(i, null);
+					int jMax = valueAndConsumingInvocations.size();
+					for (int j = INDEX_INDEX+1; j < jMax; j++) {
+						AbstractInvocation.Incremental consumingInvocation = (AbstractInvocation.Incremental) valueAndConsumingInvocations.get(j);
+						consumingInvocation.revokeExecution();
+					}
+				}
+				else {
+					valueAndConsumingInvocations.set(COUNT_INDEX, count-1);
+				}
+				break;
+			}
+		}
 	}
 }

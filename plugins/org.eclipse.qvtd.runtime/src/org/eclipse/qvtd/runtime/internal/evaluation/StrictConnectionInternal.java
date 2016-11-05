@@ -42,28 +42,28 @@ public abstract class StrictConnectionInternal extends AbstractConnectionInterna
 	 * connection manager to schedule a propagate() to consumers when convenient.
 	 */
 	@Override
-	public synchronized @NonNull Object append(@NonNull Object aValue) {
+	public synchronized @NonNull Object appendElement(@NonNull Object anElement) {
 		if (debugAppends) {
-			AbstractTransformer.APPENDS.println(this + " <= " + LabelUtil.getLabel(aValue));
+			AbstractTransformer.APPENDS.println(this + " <= " + LabelUtil.getLabel(anElement));
 		}
 		if (uniqueValues != null) {
-			if (!uniqueValues.add(aValue)) {
-				return aValue;
+			if (!uniqueValues.add(anElement)) {
+				return anElement;
 			}
 		}
 		else if (values.size() < 10) {
 			for (@NonNull Object value : values) {
-				if (value.equals(aValue)) {			// FIXME ==/oclEquals
-					return aValue;
+				if (value.equals(anElement)) {			// FIXME ==/oclEquals
+					return anElement;
 				}
 			}
 		}
-		else if (!createUniqueValues().add(aValue)) {
-			return aValue;
+		else if (!createUniqueValues().add(anElement)) {
+			return anElement;
 		}
-		values.add(aValue);
+		values.add(anElement);
 		queue();
-		return aValue;
+		return anElement;
 	}
 
 	private @NonNull Set<@NonNull Object> createUniqueValues() {

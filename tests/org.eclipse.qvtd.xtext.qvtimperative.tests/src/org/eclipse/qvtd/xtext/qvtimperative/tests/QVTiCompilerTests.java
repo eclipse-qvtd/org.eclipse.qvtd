@@ -17,6 +17,8 @@ import java.util.Map;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -31,6 +33,7 @@ import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.TreeIterable;
 import org.eclipse.ocl.pivot.validation.ComposedEValidator;
 import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
@@ -45,15 +48,15 @@ import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.Execution2GraphVisitor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiTransformationExecutor;
+import org.eclipse.qvtd.runtime.evaluation.TransformationExecutor;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
+import org.eclipse.qvtd.runtime.internal.evaluation.ModificationMonitor;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtbase.tests.ModelNormalizer;
 import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.TestsXMLUtil;
 import org.eclipse.qvtd.xtext.qvtimperative.tests.ManualUML2RDBMS.ManualRDBMSNormalizer;
 import org.eclipse.qvtd.xtext.qvtimperative.tests.SimpleUML2RDBMS.SimpleRDBMSNormalizer;
-import org.eclipse.qvtd.xtext.qvtimperative.tests.Tree2TallTree.Tree2TallTreeInstallManual;
 
-import cg_qvtimperative_tests._hsv2hls.hsv2hls;
 import junit.framework.TestCase;
 
 /**
@@ -142,9 +145,10 @@ public class QVTiCompilerTests extends LoadTestCase
 			return (QVTiEnvironmentFactory) super.getEnvironmentFactory();
 		}
 
-		public void loadInput(@NonNull Transformer tx, @NonNull String inputModelName, URI inputModelURI) {
+		public @NonNull Resource loadInput(@NonNull Transformer tx, @NonNull String inputModelName, URI inputModelURI) {
 			Resource inputResource = getResourceSet().getResource(inputModelURI, true);
 			tx.addRootObjects(inputModelName, ClassUtil.nonNullState(inputResource.getContents()));
+			return inputResource;
 		}
 
 		public @NonNull Transformation loadTransformation(@NonNull URI transformURI, @NonNull URI genModelURI) throws Exception {
@@ -233,7 +237,7 @@ public class QVTiCompilerTests extends LoadTestCase
 		myQVT.dispose();
 	}
 
-	public void testCG_HSV2HLS_qvti2() throws Exception {
+	/*	public void testCG_HSV2HLS_qvti2() throws Exception {
 		MyQVT myQVT = createQVT();
 		URI inputModelURI = getProjectFileURI("HSV2HLS/HSVNode.xmi");
 		URI outputModelURI = getProjectFileURI("HSV2HLS/HLSNode.xmi");
@@ -243,7 +247,7 @@ public class QVTiCompilerTests extends LoadTestCase
 		tx.run();
 		myQVT.saveOutput(tx, "hls", outputModelURI, referenceModelURI, null);
 		myQVT.dispose();
-	}
+	} */
 
 	public void testCG_ClassesCS2AS_qvti() throws Exception {
 		MyQVT myQVT = createQVT();
@@ -327,15 +331,73 @@ public class QVTiCompilerTests extends LoadTestCase
 		URI transformURI = getProjectFileURI("Tree2TallTree/Tree2TallTree.qvti");
 		URI inputModelURI = getProjectFileURI("Tree2TallTree/Tree.xmi");
 		URI outputModelURI = getProjectFileURI("Tree2TallTree/Tree2TallTree.xmi");
+		URI outputModelURI2 = getProjectFileURI("Tree2TallTree/Tree2TallTree2.xmi");
 		URI referenceModelURI = getProjectFileURI("Tree2TallTree/TallTreeValidate.xmi");
+		URI referenceModelURI2 = getProjectFileURI("Tree2TallTree/TallTreeValidate2.xmi");
 		Transformation asTransformation = myQVT.loadTransformation(transformURI, genModelURI);
 		Class<? extends Transformer> txClass = myQVT.generateCode(asTransformation, true);
 		Transformer tx = myQVT.createTransformer(txClass);
-		myQVT.loadInput(tx, "tree", inputModelURI);
+		Resource inputResource = myQVT.loadInput(tx, "tree", inputModelURI);
 		tx.run();
+		Execution2GraphVisitor.writeGraphMLfile(tx, getProjectFileURI("Tree2TallTree/Tree2TallTree-inc.graphml"));
 		myQVT.saveOutput(tx, "talltree", outputModelURI, referenceModelURI, null);
+		TransformationExecutor executor = tx.getExecutor();
+		@SuppressWarnings("unused") ModificationMonitor monitor = ModificationMonitor.getModificationMonitor(inputResource, executor);
+		int gotOne = 0;
+		for (EObject eObject : new TreeIterable(inputResource)) {
+			EClass eClass = eObject.eClass();
+			if ("Node".equals(eClass.getName())) {
+				EAttribute nameAttribute = (EAttribute) eClass.getEStructuralFeature("name");
+				Object name = eObject.eGet(nameAttribute);
+				if ("n1.1".equals(name)) {
+					gotOne++;
+					eObject.eSet(nameAttribute, "x1.1");
+				}
+			}
+		}
+		assert gotOne == 1;
+		executor.getTransformer().getInvocationManager().flush();
+		Execution2GraphVisitor.writeGraphMLfile(tx, getProjectFileURI("Tree2TallTree/Tree2TallTree-inc2.graphml"));
+		myQVT.saveOutput(tx, "talltree", outputModelURI2, referenceModelURI2, null);
 		myQVT.dispose();
 	}
+
+	/*	public void testCG_Tree2TallTree_Incremental_qvti2() throws Exception {
+		//		AbstractTransformer.INVOCATIONS.setState(true);
+		MyQVT myQVT = createQVT();
+		URI genModelURI = getProjectFileURI("Tree2TallTree/Tree2TallTree.genmodel");
+		URI transformURI = getProjectFileURI("Tree2TallTree/Tree2TallTree.qvti");
+		URI inputModelURI = getProjectFileURI("Tree2TallTree/Tree.xmi");
+		URI outputModelURI = getProjectFileURI("Tree2TallTree/Tree2TallTree.xmi");
+		URI outputModelURI2 = getProjectFileURI("Tree2TallTree/Tree2TallTree2.xmi");
+		URI referenceModelURI = getProjectFileURI("Tree2TallTree/TallTreeValidate.xmi");
+		URI referenceModelURI2 = getProjectFileURI("Tree2TallTree/TallTreeValidate2.xmi");
+		Class<? extends Transformer> txClass = Tree2TallTree.class;
+		Transformer tx = myQVT.createTransformer(txClass);
+		Resource inputResource = myQVT.loadInput(tx, "tree", inputModelURI);
+		tx.run();
+		Execution2GraphVisitor.writeGraphMLfile(tx, getProjectFileURI("Tree2TallTree/Tree2TallTree-inc.graphml"));
+		myQVT.saveOutput(tx, "talltree", outputModelURI, referenceModelURI, null);
+		TransformationExecutor executor = tx.getExecutor();
+		ModificationMonitor monitor = ModificationMonitor.getModificationMonitor(inputResource, executor);
+		int gotOne = 0;
+		for (EObject eObject : new TreeIterable(inputResource)) {
+			EClass eClass = eObject.eClass();
+			if ("Node".equals(eClass.getName())) {
+				EAttribute nameAttribute = (EAttribute) eClass.getEStructuralFeature("name");
+				Object name = eObject.eGet(nameAttribute);
+				if ("n1.1".equals(name)) {
+					gotOne++;
+					eObject.eSet(nameAttribute, "x1.1");
+				}
+			}
+		}
+		assert gotOne == 1;
+		executor.getTransformer().getInvocationManager().flush();
+		Execution2GraphVisitor.writeGraphMLfile(tx, getProjectFileURI("Tree2TallTree/Tree2TallTree-inc2.graphml"));
+		myQVT.saveOutput(tx, "talltree", outputModelURI2, referenceModelURI2, null);
+		myQVT.dispose();
+	} */
 
 	public void testCG_Tree2TallTreeInstall_qvti() throws Exception {
 		//		AbstractTransformer.INVOCATIONS.setState(true);
@@ -351,28 +413,6 @@ public class QVTiCompilerTests extends LoadTestCase
 		Transformer tx = myQVT.createTransformer(txClass);
 		myQVT.loadInput(tx, "tree", inputModelURI);
 		tx.run();
-		myQVT.saveOutput(tx, "talltree", outputModelURI, referenceModelURI, null);
-		myQVT.dispose();
-	}
-
-	public void testCG_Tree2TallTreeInstallManual_qvti() throws Exception {
-		//		AbstractTransformer.APPENDS.setState(true);
-		//		AbstractTransformer.CONSUMES.setState(true);
-		//		AbstractTransformer.EXCEPTIONS.setState(true);
-		//		AbstractTransformer.INVOCATIONS.setState(true);
-		MyQVT myQVT = createQVT();
-		//		URI genModelURI = getProjectFileURI("Tree2TallTree/Tree2TallTree.genmodel");
-		//		URI transformURI = getProjectFileURI("Tree2TallTree/Tree2TallTreeInstall.qvti");
-
-		URI inputModelURI = getProjectFileURI("Tree2TallTree/Tree.xmi");
-		URI outputModelURI = getProjectFileURI("Tree2TallTree/Tree2TallTree.xmi");
-		URI referenceModelURI = getProjectFileURI("Tree2TallTree/TallTreeValidate.xmi");
-		//		Transformation asTransformation = myQVT.loadTransformation(transformURI, genModelURI);
-		Class<? extends Transformer> txClass = Tree2TallTreeInstallManual.class;
-		Transformer tx = myQVT.createTransformer(txClass);
-		myQVT.loadInput(tx, "tree", inputModelURI);
-		tx.run();
-		Execution2GraphVisitor.writeGraphMLfile(tx, getProjectFileURI("Tree2TallTree/Tree2TallTreeInstallManual-execution.graphml"));
 		myQVT.saveOutput(tx, "talltree", outputModelURI, referenceModelURI, null);
 		myQVT.dispose();
 	}

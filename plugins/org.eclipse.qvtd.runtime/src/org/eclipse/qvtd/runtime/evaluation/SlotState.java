@@ -49,5 +49,6 @@ public interface SlotState extends ExecutionVisitable
 		@Nullable Object getValue();
 		@NonNull Iterable<Invocation.@NonNull Incremental> getSources();
 		@NonNull Iterable<Execution.@NonNull Incremental> getTargets();
+		void revokeAssigned();
 	}
 }

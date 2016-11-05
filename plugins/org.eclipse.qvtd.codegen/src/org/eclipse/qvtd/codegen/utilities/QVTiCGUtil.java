@@ -17,16 +17,22 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGAccumulator;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGEcorePropertyCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.utilities.CGUtil;
 import org.eclipse.ocl.pivot.VariableDeclaration;
+import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcoreContainerAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcorePropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGGuardVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCall;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCallBinding;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
@@ -85,12 +91,36 @@ public class QVTiCGUtil extends CGUtil
 		return ClassUtil.nonNullState(cgPropertyCallExp.getEStructuralFeature());
 	}
 
+	public static @NonNull String getName(@NonNull CGAccumulator cgAccumulator) {
+		return ClassUtil.nonNullState(cgAccumulator.getName());
+	}
+
 	public static @NonNull String getName(@NonNull CGMapping cgMapping) {
 		return ClassUtil.nonNullState(cgMapping.getName());
 	}
 
-	public static @NonNull String getName(@NonNull CGAccumulator cgAccumulator) {
-		return ClassUtil.nonNullState(cgAccumulator.getName());
+	public static @NonNull Iterable<@NonNull CGAccumulator> getOwnedAccumulators(@NonNull CGMappingExp cgMappingExp) {
+		return ClassUtil.nullFree(cgMappingExp.getOwnedAccumulators());
+	}
+
+	public static @NonNull Iterable<@NonNull CGPropertyAssignment> getOwnedAssignments(@NonNull CGMapping cgMapping) {
+		return ClassUtil.nullFree(cgMapping.getOwnedAssignments());
+	}
+
+	public static @NonNull Iterable<@NonNull CGConnectionAssignment> getOwnedConnectionAssignments(@NonNull CGMapping cgMapping) {
+		return ClassUtil.nullFree(cgMapping.getOwnedConnectionAssignments());
+	}
+
+	public static @NonNull Iterable<@NonNull CGGuardVariable> getOwnedGuardVariables(@NonNull CGMapping cgRootMapping) {
+		return ClassUtil.nullFree(cgRootMapping.getOwnedGuardVariables());
+	}
+
+	public static @NonNull CGValuedElement getOwnedInitValue(@NonNull CGConnectionAssignment cgConnectionAssignment) {
+		return ClassUtil.nonNullState(cgConnectionAssignment.getOwnedInitValue());
+	}
+
+	public static @NonNull CGValuedElement getOwnedInitValue(@NonNull CGPropertyAssignment cgPropertyAssignment) {
+		return ClassUtil.nonNullState(cgPropertyAssignment.getOwnedInitValue());
 	}
 
 	public static @NonNull Iterable<@NonNull CGMappingCallBinding> getOwnedMappingCallBindings(@NonNull CGMappingCall cgMappingCall) {
@@ -99,6 +129,31 @@ public class QVTiCGUtil extends CGUtil
 
 	public static @NonNull Iterable<@NonNull CGMapping> getOwnedMappings(@NonNull CGTransformation cgTransformation) {
 		return ClassUtil.nullFree(cgTransformation.getOwnedMappings());
+	}
+
+	public static @NonNull Iterable<@NonNull CGRealizedVariable> getOwnedRealizedVariables(@NonNull CGMapping cgMapping) {
+		return ClassUtil.nullFree(cgMapping.getOwnedRealizedVariables());
+	}
+
+	public static @NonNull CGValuedElement getOwnedSlotValue(@NonNull CGPropertyAssignment cgPropertyAssignment) {
+		return ClassUtil.nonNullState(cgPropertyAssignment.getOwnedSlotValue());
+	}
+
+	public static @NonNull Iterable<@NonNull CGTypedModel> getOwnedTypedModels(@NonNull CGTransformation cgTransformation) {
+		return ClassUtil.nullFree(cgTransformation.getOwnedTypedModels());
+	}
+
+	public static @NonNull CGMapping getOwningMapping(@NonNull CGRealizedVariable cgRealizedVariable) {
+		return ClassUtil.nonNullState(cgRealizedVariable.getOwningMapping());
+	}
+
+	public static @NonNull CGTransformation getOwningTransformation(@NonNull CGMapping cgMapping) {
+		return ClassUtil.nonNullState(cgMapping.getOwningTransformation());
+
+	}
+
+	public static @NonNull Property getReferredProperty(@NonNull CGPropertyAssignment cgPropertyAssignment) {
+		return ClassUtil.nonNullState(cgPropertyAssignment.getReferredProperty());
 	}
 
 	public static @NonNull CGMapping getRootMapping(@NonNull CGTransformation cgTransformation) {
@@ -129,18 +184,5 @@ public class QVTiCGUtil extends CGUtil
 			throw new IllegalStateException("Transformation " + cgTransformation.getName() + " has no root mapping");
 		}
 		return cgRootMapping;
-	}
-
-	public static @NonNull Iterable<@NonNull CGGuardVariable> getOwnedGuardVariables(@NonNull CGMapping cgRootMapping) {
-		return ClassUtil.nullFree(cgRootMapping.getOwnedGuardVariables());
-	}
-
-	public static @NonNull Iterable<@NonNull CGTypedModel> getOwnedTypedModels(@NonNull CGTransformation cgTransformation) {
-		return ClassUtil.nullFree(cgTransformation.getOwnedTypedModels());
-	}
-
-	public static @NonNull CGTransformation getOwningTransformation(@NonNull CGMapping cgMapping) {
-		return ClassUtil.nonNullState(cgMapping.getOwningTransformation());
-
 	}
 }

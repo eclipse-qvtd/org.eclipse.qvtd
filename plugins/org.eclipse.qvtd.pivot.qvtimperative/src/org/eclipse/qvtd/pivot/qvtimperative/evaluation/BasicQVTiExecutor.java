@@ -400,7 +400,7 @@ public abstract class BasicQVTiExecutor extends AbstractExecutor implements QVTi
 					Connection connection = rootInterval.createConnection(QVTimperativeUtil.getName(mappingParameter), type.getTypeId(), false);
 					Iterable<@NonNull ? extends Object> objectsOfKind = modelInstance.getObjectsOfKind(type);
 					for (@NonNull Object object : objectsOfKind) {
-						connection.append(object);
+						connection.appendElement(object);
 					}
 					getEvaluationEnvironment().add(mappingParameter, connection);
 				}

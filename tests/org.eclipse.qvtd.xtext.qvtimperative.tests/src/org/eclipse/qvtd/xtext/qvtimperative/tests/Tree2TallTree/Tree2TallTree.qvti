@@ -9,7 +9,8 @@ transformation Tree2TallTree {
 }
 
 map __root__ in Tree2TallTree {
-    buffer nodes := tree.objectsOfKind(Node)->sortedBy(name);
+--    buffer nodes := tree.objectsOfKind(Node)->sortedBy(name);
+    buffer nodes := tree.objectsOfKind(Node);
     for node : tree::Node in nodes {
         call Node2MiddleNode {
             node iterates node;
@@ -20,7 +21,8 @@ map __root__ in Tree2TallTree {
             node iterates node;
         } 
     } 
-    for node2tallNode : tree2talltree::Node2TallNode in tree2talltree.objectsOfKind(Node2TallNode)->sortedBy(name) {
+--    for node2tallNode : tree2talltree::Node2TallNode in tree2talltree.objectsOfKind(Node2TallNode)->sortedBy(name) {
+    for node2tallNode : tree2talltree::Node2TallNode in tree2talltree.objectsOfKind(Node2TallNode) {
         call MiddleNode2TallNode {
             node2tallNode iterates node2tallNode;	
         } 
