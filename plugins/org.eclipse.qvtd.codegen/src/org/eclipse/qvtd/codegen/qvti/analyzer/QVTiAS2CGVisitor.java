@@ -209,7 +209,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 		}
 
 		public void addRealizedVariable(@NonNull NewStatement asNewStatement) {
-			List<@NonNull CGValuedElement> cgRealizedVariables = ClassUtil.nullFree(cgMappingExp.getRealizedVariables());
+			List<@NonNull CGRealizedVariable> cgRealizedVariables = ClassUtil.nullFree(cgMapping.getOwnedRealizedVariables());
 			CGRealizedVariable cgVariable = getRealizedVariable(asNewStatement);
 			cgRealizedVariables.add(cgVariable);
 		}
@@ -349,7 +349,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 				cgFreeVariables.add(getGuardVariable(pMappingParameter));
 			}
 			Collections.sort(cgFreeVariables, NameUtil.NAMEABLE_COMPARATOR);
-			cgMapping.getFreeVariables().addAll(cgFreeVariables);
+			cgMapping.getOwnedGuardVariables().addAll(cgFreeVariables);
 			CGSequence cgSequence = QVTiCGModelFactory.eINSTANCE.createCGSequence();
 			List<CGValuedElement> cgMappingStatements = cgSequence.getStatements();
 			for (@NonNull Statement asStatement : ClassUtil.nullFree(asMapping.getOwnedStatements())) {
@@ -980,7 +980,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 		PredicateTreeBuilder bodyBuilder2 = bodyBuilder = new PredicateTreeBuilder(pMapping, cgMapping);
 		bodyBuilder2.doBottoms();
 
-		List<@NonNull CGGuardVariable> cgFreeVariables = ClassUtil.nullFree(cgMapping.getFreeVariables());
+		List<@NonNull CGGuardVariable> cgFreeVariables = ClassUtil.nullFree(cgMapping.getOwnedGuardVariables());
 		List<@NonNull CGGuardVariable> sortedVariables = new ArrayList<>(cgFreeVariables);
 		Collections.sort(sortedVariables, CGVariableComparator.INSTANCE);
 		cgFreeVariables.clear();

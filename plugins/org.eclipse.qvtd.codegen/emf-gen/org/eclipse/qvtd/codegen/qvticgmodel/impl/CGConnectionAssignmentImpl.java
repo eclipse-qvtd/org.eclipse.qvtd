@@ -1,15 +1,15 @@
 /**
  * <copyright>
- * 
+ *
  * Copyright (c) 2015, 2016 Willink Transformations and others.
  * All rights reserved.   This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
- * 
+ *
  * </copyright>
  */
 package org.eclipse.qvtd.codegen.qvticgmodel.impl;
@@ -28,7 +28,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
 import org.eclipse.ocl.examples.codegen.cgmodel.impl.CGValuedElementImpl;
 import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionAssignment;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
 import org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage;
 import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
 
@@ -40,7 +40,7 @@ import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGConnectionAssignmentImpl#getMappingExp <em>Mapping Exp</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGConnectionAssignmentImpl#getOwningMapping <em>Owning Mapping</em>}</li>
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGConnectionAssignmentImpl#getInitValue <em>Init Value</em>}</li>
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGConnectionAssignmentImpl#getConnectionVariable <em>Connection Variable</em>}</li>
  * </ul>
@@ -93,9 +93,9 @@ public class CGConnectionAssignmentImpl extends CGValuedElementImpl implements C
 	 * @generated
 	 */
 	@Override
-	public CGMappingExp getMappingExp() {
-		if (eContainerFeatureID() != QVTiCGModelPackage.CG_CONNECTION_ASSIGNMENT__MAPPING_EXP) return null;
-		return (CGMappingExp)eInternalContainer();
+	public CGMapping getOwningMapping() {
+		if (eContainerFeatureID() != QVTiCGModelPackage.CG_CONNECTION_ASSIGNMENT__OWNING_MAPPING) return null;
+		return (CGMapping)eInternalContainer();
 	}
 
 	/**
@@ -103,8 +103,8 @@ public class CGConnectionAssignmentImpl extends CGValuedElementImpl implements C
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetMappingExp(CGMappingExp newMappingExp, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newMappingExp, QVTiCGModelPackage.CG_CONNECTION_ASSIGNMENT__MAPPING_EXP, msgs);
+	public NotificationChain basicSetOwningMapping(CGMapping newOwningMapping, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newOwningMapping, QVTiCGModelPackage.CG_CONNECTION_ASSIGNMENT__OWNING_MAPPING, msgs);
 		return msgs;
 	}
 
@@ -114,20 +114,20 @@ public class CGConnectionAssignmentImpl extends CGValuedElementImpl implements C
 	 * @generated
 	 */
 	@Override
-	public void setMappingExp(CGMappingExp newMappingExp) {
-		if (newMappingExp != eInternalContainer() || (eContainerFeatureID() != QVTiCGModelPackage.CG_CONNECTION_ASSIGNMENT__MAPPING_EXP && newMappingExp != null)) {
-			if (EcoreUtil.isAncestor(this, newMappingExp))
+	public void setOwningMapping(CGMapping newOwningMapping) {
+		if (newOwningMapping != eInternalContainer() || (eContainerFeatureID() != QVTiCGModelPackage.CG_CONNECTION_ASSIGNMENT__OWNING_MAPPING && newOwningMapping != null)) {
+			if (EcoreUtil.isAncestor(this, newOwningMapping))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
-			if (newMappingExp != null)
-				msgs = ((InternalEObject)newMappingExp).eInverseAdd(this, QVTiCGModelPackage.CG_MAPPING_EXP__CONNECTION_ASSIGNMENTS, CGMappingExp.class, msgs);
-			msgs = basicSetMappingExp(newMappingExp, msgs);
+			if (newOwningMapping != null)
+				msgs = ((InternalEObject)newOwningMapping).eInverseAdd(this, QVTiCGModelPackage.CG_MAPPING__OWNED_CONNECTION_ASSIGNMENTS, CGMapping.class, msgs);
+			msgs = basicSetOwningMapping(newOwningMapping, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTiCGModelPackage.CG_CONNECTION_ASSIGNMENT__MAPPING_EXP, newMappingExp, newMappingExp));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTiCGModelPackage.CG_CONNECTION_ASSIGNMENT__OWNING_MAPPING, newOwningMapping, newOwningMapping));
 	}
 
 	/**
@@ -206,10 +206,10 @@ public class CGConnectionAssignmentImpl extends CGValuedElementImpl implements C
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_CONNECTION_ASSIGNMENT__MAPPING_EXP:
+			case QVTiCGModelPackage.CG_CONNECTION_ASSIGNMENT__OWNING_MAPPING:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetMappingExp((CGMappingExp)otherEnd, msgs);
+				return basicSetOwningMapping((CGMapping)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -222,8 +222,8 @@ public class CGConnectionAssignmentImpl extends CGValuedElementImpl implements C
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_CONNECTION_ASSIGNMENT__MAPPING_EXP:
-				return basicSetMappingExp(null, msgs);
+			case QVTiCGModelPackage.CG_CONNECTION_ASSIGNMENT__OWNING_MAPPING:
+				return basicSetOwningMapping(null, msgs);
 			case QVTiCGModelPackage.CG_CONNECTION_ASSIGNMENT__INIT_VALUE:
 				return basicSetInitValue(null, msgs);
 		}
@@ -238,8 +238,8 @@ public class CGConnectionAssignmentImpl extends CGValuedElementImpl implements C
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case QVTiCGModelPackage.CG_CONNECTION_ASSIGNMENT__MAPPING_EXP:
-				return eInternalContainer().eInverseRemove(this, QVTiCGModelPackage.CG_MAPPING_EXP__CONNECTION_ASSIGNMENTS, CGMappingExp.class, msgs);
+			case QVTiCGModelPackage.CG_CONNECTION_ASSIGNMENT__OWNING_MAPPING:
+				return eInternalContainer().eInverseRemove(this, QVTiCGModelPackage.CG_MAPPING__OWNED_CONNECTION_ASSIGNMENTS, CGMapping.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -252,8 +252,8 @@ public class CGConnectionAssignmentImpl extends CGValuedElementImpl implements C
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_CONNECTION_ASSIGNMENT__MAPPING_EXP:
-				return getMappingExp();
+			case QVTiCGModelPackage.CG_CONNECTION_ASSIGNMENT__OWNING_MAPPING:
+				return getOwningMapping();
 			case QVTiCGModelPackage.CG_CONNECTION_ASSIGNMENT__INIT_VALUE:
 				return getInitValue();
 			case QVTiCGModelPackage.CG_CONNECTION_ASSIGNMENT__CONNECTION_VARIABLE:
@@ -270,8 +270,8 @@ public class CGConnectionAssignmentImpl extends CGValuedElementImpl implements C
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_CONNECTION_ASSIGNMENT__MAPPING_EXP:
-				setMappingExp((CGMappingExp)newValue);
+			case QVTiCGModelPackage.CG_CONNECTION_ASSIGNMENT__OWNING_MAPPING:
+				setOwningMapping((CGMapping)newValue);
 				return;
 			case QVTiCGModelPackage.CG_CONNECTION_ASSIGNMENT__INIT_VALUE:
 				setInitValue((CGValuedElement)newValue);
@@ -291,8 +291,8 @@ public class CGConnectionAssignmentImpl extends CGValuedElementImpl implements C
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_CONNECTION_ASSIGNMENT__MAPPING_EXP:
-				setMappingExp((CGMappingExp)null);
+			case QVTiCGModelPackage.CG_CONNECTION_ASSIGNMENT__OWNING_MAPPING:
+				setOwningMapping((CGMapping)null);
 				return;
 			case QVTiCGModelPackage.CG_CONNECTION_ASSIGNMENT__INIT_VALUE:
 				setInitValue((CGValuedElement)null);
@@ -312,8 +312,8 @@ public class CGConnectionAssignmentImpl extends CGValuedElementImpl implements C
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_CONNECTION_ASSIGNMENT__MAPPING_EXP:
-				return getMappingExp() != null;
+			case QVTiCGModelPackage.CG_CONNECTION_ASSIGNMENT__OWNING_MAPPING:
+				return getOwningMapping() != null;
 			case QVTiCGModelPackage.CG_CONNECTION_ASSIGNMENT__INIT_VALUE:
 				return initValue != null;
 			case QVTiCGModelPackage.CG_CONNECTION_ASSIGNMENT__CONNECTION_VARIABLE:

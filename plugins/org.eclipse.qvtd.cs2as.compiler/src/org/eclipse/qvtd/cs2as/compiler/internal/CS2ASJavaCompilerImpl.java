@@ -147,7 +147,7 @@ public class CS2ASJavaCompilerImpl implements CS2ASJavaCompiler {
 		protected void appendGuardFailure(@NonNull CGGuardExp cgGuardExp) {
 			CGMapping cgMapping = QVTiCGUtil.getContainingCGMapping(cgGuardExp);
 			if (cgMapping != null) {
-				List<CGGuardVariable> freeVariables = cgMapping.getFreeVariables();
+				List<CGGuardVariable> freeVariables = cgMapping.getOwnedGuardVariables();
 				if (freeVariables.size() > 0) {
 					CGGuardVariable cgGuardVariable = freeVariables.get(0);
 					js.append("throw throwNull(");

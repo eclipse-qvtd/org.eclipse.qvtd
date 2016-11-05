@@ -31,8 +31,11 @@ import org.eclipse.ocl.examples.codegen.cgmodel.impl.CGNamedElementImpl;
 import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
 import org.eclipse.ocl.examples.codegen.cse.AbstractPlace;
 import org.eclipse.ocl.examples.codegen.cse.OuterStackPlace;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGGuardVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
 import org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage;
 import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
@@ -46,8 +49,11 @@ import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGMappingImpl#getBody <em>Body</em>}</li>
- *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGMappingImpl#getFreeVariables <em>Free Variables</em>}</li>
- *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGMappingImpl#getTransformation <em>Transformation</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGMappingImpl#getOwnedAssignments <em>Owned Assignments</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGMappingImpl#getOwnedConnectionAssignments <em>Owned Connection Assignments</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGMappingImpl#getOwnedGuardVariables <em>Owned Guard Variables</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGMappingImpl#getOwnedRealizedVariables <em>Owned Realized Variables</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGMappingImpl#getOwningTransformation <em>Owning Transformation</em>}</li>
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGMappingImpl#isUseClass <em>Use Class</em>}</li>
  * </ul>
  *
@@ -65,14 +71,44 @@ public class CGMappingImpl extends CGNamedElementImpl implements CGMapping {
 	protected CGValuedElement body;
 
 	/**
-	 * The cached value of the '{@link #getFreeVariables() <em>Free Variables</em>}' containment reference list.
+	 * The cached value of the '{@link #getOwnedAssignments() <em>Owned Assignments</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getFreeVariables()
+	 * @see #getOwnedAssignments()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<CGGuardVariable> freeVariables;
+	protected EList<CGPropertyAssignment> ownedAssignments;
+
+	/**
+	 * The cached value of the '{@link #getOwnedConnectionAssignments() <em>Owned Connection Assignments</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOwnedConnectionAssignments()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<CGConnectionAssignment> ownedConnectionAssignments;
+
+	/**
+	 * The cached value of the '{@link #getOwnedGuardVariables() <em>Owned Guard Variables</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOwnedGuardVariables()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<CGGuardVariable> ownedGuardVariables;
+
+	/**
+	 * The cached value of the '{@link #getOwnedRealizedVariables() <em>Owned Realized Variables</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOwnedRealizedVariables()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<CGRealizedVariable> ownedRealizedVariables;
 
 	/**
 	 * The default value of the '{@link #isUseClass() <em>Use Class</em>}' attribute.
@@ -164,11 +200,11 @@ public class CGMappingImpl extends CGNamedElementImpl implements CGMapping {
 	 * @generated
 	 */
 	@Override
-	public List<CGGuardVariable> getFreeVariables() {
-		if (freeVariables == null) {
-			freeVariables = new EObjectContainmentWithInverseEList<CGGuardVariable>(CGGuardVariable.class, this, QVTiCGModelPackage.CG_MAPPING__FREE_VARIABLES, QVTiCGModelPackage.CG_GUARD_VARIABLE__MAPPING);
+	public List<CGPropertyAssignment> getOwnedAssignments() {
+		if (ownedAssignments == null) {
+			ownedAssignments = new EObjectContainmentWithInverseEList<CGPropertyAssignment>(CGPropertyAssignment.class, this, QVTiCGModelPackage.CG_MAPPING__OWNED_ASSIGNMENTS, QVTiCGModelPackage.CG_PROPERTY_ASSIGNMENT__OWNING_MAPPING);
 		}
-		return freeVariables;
+		return ownedAssignments;
 	}
 
 	/**
@@ -177,8 +213,47 @@ public class CGMappingImpl extends CGNamedElementImpl implements CGMapping {
 	 * @generated
 	 */
 	@Override
-	public CGTransformation getTransformation() {
-		if (eContainerFeatureID() != QVTiCGModelPackage.CG_MAPPING__TRANSFORMATION) return null;
+	public List<CGConnectionAssignment> getOwnedConnectionAssignments() {
+		if (ownedConnectionAssignments == null) {
+			ownedConnectionAssignments = new EObjectContainmentWithInverseEList<CGConnectionAssignment>(CGConnectionAssignment.class, this, QVTiCGModelPackage.CG_MAPPING__OWNED_CONNECTION_ASSIGNMENTS, QVTiCGModelPackage.CG_CONNECTION_ASSIGNMENT__OWNING_MAPPING);
+		}
+		return ownedConnectionAssignments;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public List<CGGuardVariable> getOwnedGuardVariables() {
+		if (ownedGuardVariables == null) {
+			ownedGuardVariables = new EObjectContainmentWithInverseEList<CGGuardVariable>(CGGuardVariable.class, this, QVTiCGModelPackage.CG_MAPPING__OWNED_GUARD_VARIABLES, QVTiCGModelPackage.CG_GUARD_VARIABLE__OWNING_MAPPING);
+		}
+		return ownedGuardVariables;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public List<CGRealizedVariable> getOwnedRealizedVariables() {
+		if (ownedRealizedVariables == null) {
+			ownedRealizedVariables = new EObjectContainmentWithInverseEList<CGRealizedVariable>(CGRealizedVariable.class, this, QVTiCGModelPackage.CG_MAPPING__OWNED_REALIZED_VARIABLES, QVTiCGModelPackage.CG_REALIZED_VARIABLE__OWNING_MAPPING);
+		}
+		return ownedRealizedVariables;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public CGTransformation getOwningTransformation() {
+		if (eContainerFeatureID() != QVTiCGModelPackage.CG_MAPPING__OWNING_TRANSFORMATION) return null;
 		return (CGTransformation)eInternalContainer();
 	}
 
@@ -187,8 +262,8 @@ public class CGMappingImpl extends CGNamedElementImpl implements CGMapping {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetTransformation(CGTransformation newTransformation, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newTransformation, QVTiCGModelPackage.CG_MAPPING__TRANSFORMATION, msgs);
+	public NotificationChain basicSetOwningTransformation(CGTransformation newOwningTransformation, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newOwningTransformation, QVTiCGModelPackage.CG_MAPPING__OWNING_TRANSFORMATION, msgs);
 		return msgs;
 	}
 
@@ -198,20 +273,20 @@ public class CGMappingImpl extends CGNamedElementImpl implements CGMapping {
 	 * @generated
 	 */
 	@Override
-	public void setTransformation(CGTransformation newTransformation) {
-		if (newTransformation != eInternalContainer() || (eContainerFeatureID() != QVTiCGModelPackage.CG_MAPPING__TRANSFORMATION && newTransformation != null)) {
-			if (EcoreUtil.isAncestor(this, newTransformation))
+	public void setOwningTransformation(CGTransformation newOwningTransformation) {
+		if (newOwningTransformation != eInternalContainer() || (eContainerFeatureID() != QVTiCGModelPackage.CG_MAPPING__OWNING_TRANSFORMATION && newOwningTransformation != null)) {
+			if (EcoreUtil.isAncestor(this, newOwningTransformation))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
-			if (newTransformation != null)
-				msgs = ((InternalEObject)newTransformation).eInverseAdd(this, QVTiCGModelPackage.CG_TRANSFORMATION__MAPPINGS, CGTransformation.class, msgs);
-			msgs = basicSetTransformation(newTransformation, msgs);
+			if (newOwningTransformation != null)
+				msgs = ((InternalEObject)newOwningTransformation).eInverseAdd(this, QVTiCGModelPackage.CG_TRANSFORMATION__MAPPINGS, CGTransformation.class, msgs);
+			msgs = basicSetOwningTransformation(newOwningTransformation, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTiCGModelPackage.CG_MAPPING__TRANSFORMATION, newTransformation, newTransformation));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTiCGModelPackage.CG_MAPPING__OWNING_TRANSFORMATION, newOwningTransformation, newOwningTransformation));
 	}
 
 	/**
@@ -256,12 +331,18 @@ public class CGMappingImpl extends CGNamedElementImpl implements CGMapping {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_MAPPING__FREE_VARIABLES:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getFreeVariables()).basicAdd(otherEnd, msgs);
-			case QVTiCGModelPackage.CG_MAPPING__TRANSFORMATION:
+			case QVTiCGModelPackage.CG_MAPPING__OWNED_ASSIGNMENTS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedAssignments()).basicAdd(otherEnd, msgs);
+			case QVTiCGModelPackage.CG_MAPPING__OWNED_CONNECTION_ASSIGNMENTS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedConnectionAssignments()).basicAdd(otherEnd, msgs);
+			case QVTiCGModelPackage.CG_MAPPING__OWNED_GUARD_VARIABLES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedGuardVariables()).basicAdd(otherEnd, msgs);
+			case QVTiCGModelPackage.CG_MAPPING__OWNED_REALIZED_VARIABLES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedRealizedVariables()).basicAdd(otherEnd, msgs);
+			case QVTiCGModelPackage.CG_MAPPING__OWNING_TRANSFORMATION:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetTransformation((CGTransformation)otherEnd, msgs);
+				return basicSetOwningTransformation((CGTransformation)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -276,10 +357,16 @@ public class CGMappingImpl extends CGNamedElementImpl implements CGMapping {
 		switch (featureID) {
 			case QVTiCGModelPackage.CG_MAPPING__BODY:
 				return basicSetBody(null, msgs);
-			case QVTiCGModelPackage.CG_MAPPING__FREE_VARIABLES:
-				return ((InternalEList<?>)getFreeVariables()).basicRemove(otherEnd, msgs);
-			case QVTiCGModelPackage.CG_MAPPING__TRANSFORMATION:
-				return basicSetTransformation(null, msgs);
+			case QVTiCGModelPackage.CG_MAPPING__OWNED_ASSIGNMENTS:
+				return ((InternalEList<?>)getOwnedAssignments()).basicRemove(otherEnd, msgs);
+			case QVTiCGModelPackage.CG_MAPPING__OWNED_CONNECTION_ASSIGNMENTS:
+				return ((InternalEList<?>)getOwnedConnectionAssignments()).basicRemove(otherEnd, msgs);
+			case QVTiCGModelPackage.CG_MAPPING__OWNED_GUARD_VARIABLES:
+				return ((InternalEList<?>)getOwnedGuardVariables()).basicRemove(otherEnd, msgs);
+			case QVTiCGModelPackage.CG_MAPPING__OWNED_REALIZED_VARIABLES:
+				return ((InternalEList<?>)getOwnedRealizedVariables()).basicRemove(otherEnd, msgs);
+			case QVTiCGModelPackage.CG_MAPPING__OWNING_TRANSFORMATION:
+				return basicSetOwningTransformation(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -292,7 +379,7 @@ public class CGMappingImpl extends CGNamedElementImpl implements CGMapping {
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case QVTiCGModelPackage.CG_MAPPING__TRANSFORMATION:
+			case QVTiCGModelPackage.CG_MAPPING__OWNING_TRANSFORMATION:
 				return eInternalContainer().eInverseRemove(this, QVTiCGModelPackage.CG_TRANSFORMATION__MAPPINGS, CGTransformation.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
@@ -308,10 +395,16 @@ public class CGMappingImpl extends CGNamedElementImpl implements CGMapping {
 		switch (featureID) {
 			case QVTiCGModelPackage.CG_MAPPING__BODY:
 				return getBody();
-			case QVTiCGModelPackage.CG_MAPPING__FREE_VARIABLES:
-				return getFreeVariables();
-			case QVTiCGModelPackage.CG_MAPPING__TRANSFORMATION:
-				return getTransformation();
+			case QVTiCGModelPackage.CG_MAPPING__OWNED_ASSIGNMENTS:
+				return getOwnedAssignments();
+			case QVTiCGModelPackage.CG_MAPPING__OWNED_CONNECTION_ASSIGNMENTS:
+				return getOwnedConnectionAssignments();
+			case QVTiCGModelPackage.CG_MAPPING__OWNED_GUARD_VARIABLES:
+				return getOwnedGuardVariables();
+			case QVTiCGModelPackage.CG_MAPPING__OWNED_REALIZED_VARIABLES:
+				return getOwnedRealizedVariables();
+			case QVTiCGModelPackage.CG_MAPPING__OWNING_TRANSFORMATION:
+				return getOwningTransformation();
 			case QVTiCGModelPackage.CG_MAPPING__USE_CLASS:
 				return isUseClass();
 		}
@@ -330,12 +423,24 @@ public class CGMappingImpl extends CGNamedElementImpl implements CGMapping {
 			case QVTiCGModelPackage.CG_MAPPING__BODY:
 				setBody((CGValuedElement)newValue);
 				return;
-			case QVTiCGModelPackage.CG_MAPPING__FREE_VARIABLES:
-				getFreeVariables().clear();
-				getFreeVariables().addAll((Collection<? extends CGGuardVariable>)newValue);
+			case QVTiCGModelPackage.CG_MAPPING__OWNED_ASSIGNMENTS:
+				getOwnedAssignments().clear();
+				getOwnedAssignments().addAll((Collection<? extends CGPropertyAssignment>)newValue);
 				return;
-			case QVTiCGModelPackage.CG_MAPPING__TRANSFORMATION:
-				setTransformation((CGTransformation)newValue);
+			case QVTiCGModelPackage.CG_MAPPING__OWNED_CONNECTION_ASSIGNMENTS:
+				getOwnedConnectionAssignments().clear();
+				getOwnedConnectionAssignments().addAll((Collection<? extends CGConnectionAssignment>)newValue);
+				return;
+			case QVTiCGModelPackage.CG_MAPPING__OWNED_GUARD_VARIABLES:
+				getOwnedGuardVariables().clear();
+				getOwnedGuardVariables().addAll((Collection<? extends CGGuardVariable>)newValue);
+				return;
+			case QVTiCGModelPackage.CG_MAPPING__OWNED_REALIZED_VARIABLES:
+				getOwnedRealizedVariables().clear();
+				getOwnedRealizedVariables().addAll((Collection<? extends CGRealizedVariable>)newValue);
+				return;
+			case QVTiCGModelPackage.CG_MAPPING__OWNING_TRANSFORMATION:
+				setOwningTransformation((CGTransformation)newValue);
 				return;
 			case QVTiCGModelPackage.CG_MAPPING__USE_CLASS:
 				setUseClass((Boolean)newValue);
@@ -355,11 +460,20 @@ public class CGMappingImpl extends CGNamedElementImpl implements CGMapping {
 			case QVTiCGModelPackage.CG_MAPPING__BODY:
 				setBody((CGValuedElement)null);
 				return;
-			case QVTiCGModelPackage.CG_MAPPING__FREE_VARIABLES:
-				getFreeVariables().clear();
+			case QVTiCGModelPackage.CG_MAPPING__OWNED_ASSIGNMENTS:
+				getOwnedAssignments().clear();
 				return;
-			case QVTiCGModelPackage.CG_MAPPING__TRANSFORMATION:
-				setTransformation((CGTransformation)null);
+			case QVTiCGModelPackage.CG_MAPPING__OWNED_CONNECTION_ASSIGNMENTS:
+				getOwnedConnectionAssignments().clear();
+				return;
+			case QVTiCGModelPackage.CG_MAPPING__OWNED_GUARD_VARIABLES:
+				getOwnedGuardVariables().clear();
+				return;
+			case QVTiCGModelPackage.CG_MAPPING__OWNED_REALIZED_VARIABLES:
+				getOwnedRealizedVariables().clear();
+				return;
+			case QVTiCGModelPackage.CG_MAPPING__OWNING_TRANSFORMATION:
+				setOwningTransformation((CGTransformation)null);
 				return;
 			case QVTiCGModelPackage.CG_MAPPING__USE_CLASS:
 				setUseClass(USE_CLASS_EDEFAULT);
@@ -378,10 +492,16 @@ public class CGMappingImpl extends CGNamedElementImpl implements CGMapping {
 		switch (featureID) {
 			case QVTiCGModelPackage.CG_MAPPING__BODY:
 				return body != null;
-			case QVTiCGModelPackage.CG_MAPPING__FREE_VARIABLES:
-				return freeVariables != null && !freeVariables.isEmpty();
-			case QVTiCGModelPackage.CG_MAPPING__TRANSFORMATION:
-				return getTransformation() != null;
+			case QVTiCGModelPackage.CG_MAPPING__OWNED_ASSIGNMENTS:
+				return ownedAssignments != null && !ownedAssignments.isEmpty();
+			case QVTiCGModelPackage.CG_MAPPING__OWNED_CONNECTION_ASSIGNMENTS:
+				return ownedConnectionAssignments != null && !ownedConnectionAssignments.isEmpty();
+			case QVTiCGModelPackage.CG_MAPPING__OWNED_GUARD_VARIABLES:
+				return ownedGuardVariables != null && !ownedGuardVariables.isEmpty();
+			case QVTiCGModelPackage.CG_MAPPING__OWNED_REALIZED_VARIABLES:
+				return ownedRealizedVariables != null && !ownedRealizedVariables.isEmpty();
+			case QVTiCGModelPackage.CG_MAPPING__OWNING_TRANSFORMATION:
+				return getOwningTransformation() != null;
 			case QVTiCGModelPackage.CG_MAPPING__USE_CLASS:
 				return useClass != USE_CLASS_EDEFAULT;
 		}

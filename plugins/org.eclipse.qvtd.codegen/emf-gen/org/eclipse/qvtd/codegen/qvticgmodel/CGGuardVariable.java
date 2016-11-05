@@ -21,7 +21,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGParameter;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGGuardVariable#getMapping <em>Mapping</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGGuardVariable#getOwningMapping <em>Owning Mapping</em>}</li>
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGGuardVariable#getTypedModel <em>Typed Model</em>}</li>
  * </ul>
  *
@@ -31,32 +31,32 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGParameter;
  */
 public interface CGGuardVariable extends CGParameter {
 	/**
-	 * Returns the value of the '<em><b>Mapping</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMapping#getFreeVariables <em>Free Variables</em>}'.
+	 * Returns the value of the '<em><b>Owning Mapping</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMapping#getOwnedGuardVariables <em>Owned Guard Variables</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Mapping</em>' container reference isn't clear,
+	 * If the meaning of the '<em>Owning Mapping</em>' container reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Mapping</em>' container reference.
-	 * @see #setMapping(CGMapping)
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage#getCGGuardVariable_Mapping()
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGMapping#getFreeVariables
-	 * @model opposite="freeVariables" resolveProxies="false" required="true" transient="false"
+	 * @return the value of the '<em>Owning Mapping</em>' container reference.
+	 * @see #setOwningMapping(CGMapping)
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage#getCGGuardVariable_OwningMapping()
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGMapping#getOwnedGuardVariables
+	 * @model opposite="ownedGuardVariables" resolveProxies="false" required="true" transient="false"
 	 * @generated
 	 */
-	CGMapping getMapping();
+	CGMapping getOwningMapping();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGGuardVariable#getMapping <em>Mapping</em>}' container reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGGuardVariable#getOwningMapping <em>Owning Mapping</em>}' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Mapping</em>' container reference.
-	 * @see #getMapping()
+	 * @param value the new value of the '<em>Owning Mapping</em>' container reference.
+	 * @see #getOwningMapping()
 	 * @generated
 	 */
-	void setMapping(CGMapping value);
+	void setOwningMapping(CGMapping value);
 
 	/**
 	 * Returns the value of the '<em><b>Typed Model</b></em>' reference.

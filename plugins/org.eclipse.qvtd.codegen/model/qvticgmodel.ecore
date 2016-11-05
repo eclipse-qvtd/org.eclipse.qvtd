@@ -8,8 +8,8 @@
     <details key="ecore" value="http://www.eclipse.org/emf/2002/Ecore#/"/>
   </eAnnotations>
   <eClassifiers xsi:type="ecore:EClass" name="CGConnectionAssignment" eSuperTypes="../../org.eclipse.ocl.examples.codegen/model/cgmodel.ecore#//CGValuedElement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="mappingExp" lowerBound="1"
-        eType="#//CGMappingExp" resolveProxies="false" eOpposite="#//CGMappingExp/connectionAssignments"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owningMapping" lowerBound="1"
+        eType="#//CGMapping" resolveProxies="false" eOpposite="#//CGMapping/ownedConnectionAssignments"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="initValue" lowerBound="1"
         eType="ecore:EClass ../../org.eclipse.ocl.examples.codegen/model/cgmodel.ecore#//CGValuedElement"
         containment="true" resolveProxies="false"/>
@@ -42,22 +42,31 @@
         eType="#//CGFunction" resolveProxies="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CGGuardVariable" eSuperTypes="../../org.eclipse.ocl.examples.codegen/model/cgmodel.ecore#//CGParameter">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="mapping" lowerBound="1"
-        eType="#//CGMapping" resolveProxies="false" eOpposite="#//CGMapping/freeVariables"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owningMapping" lowerBound="1"
+        eType="#//CGMapping" resolveProxies="false" eOpposite="#//CGMapping/ownedGuardVariables"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="typedModel" lowerBound="1"
         eType="#//CGTypedModel" resolveProxies="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CGMapping" eSuperTypes="../../org.eclipse.ocl.examples.codegen/model/cgmodel.ecore#//CGNamedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="body" lowerBound="1" eType="ecore:EClass ../../org.eclipse.ocl.examples.codegen/model/cgmodel.ecore#//CGValuedElement"
         containment="true" resolveProxies="false"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="freeVariables" ordered="false"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedAssignments" upperBound="-1"
+        eType="#//CGPropertyAssignment" containment="true" resolveProxies="false"
+        eOpposite="#//CGPropertyAssignment/owningMapping"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedConnectionAssignments"
+        upperBound="-1" eType="#//CGConnectionAssignment" containment="true" resolveProxies="false"
+        eOpposite="#//CGConnectionAssignment/owningMapping"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedGuardVariables" ordered="false"
         upperBound="-1" eType="#//CGGuardVariable" containment="true" resolveProxies="false"
-        eOpposite="#//CGGuardVariable/mapping">
+        eOpposite="#//CGGuardVariable/owningMapping">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The parameters of this operation, with 'self' as the first parameter."/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="transformation" lowerBound="1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedRealizedVariables"
+        upperBound="-1" eType="#//CGRealizedVariable" containment="true" resolveProxies="false"
+        eOpposite="#//CGRealizedVariable/owningMapping"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owningTransformation" lowerBound="1"
         eType="#//CGTransformation" resolveProxies="false" eOpposite="#//CGTransformation/mappings"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="useClass" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         defaultValueLiteral="false"/>
@@ -71,19 +80,8 @@
         containment="true" resolveProxies="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CGMappingExp" eSuperTypes="../../org.eclipse.ocl.examples.codegen/model/cgmodel.ecore#//CGValuedElement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="assignments" upperBound="-1"
-        eType="#//CGPropertyAssignment" containment="true" resolveProxies="false"
-        eOpposite="#//CGPropertyAssignment/mappingExp"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="mapping" lowerBound="1"
-        eType="#//CGMapping" volatile="true" transient="true" derived="true" resolveProxies="false"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="realizedVariables" upperBound="-1"
-        eType="ecore:EClass ../../org.eclipse.ocl.examples.codegen/model/cgmodel.ecore#//CGValuedElement"
-        containment="true" resolveProxies="false"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="ecore:EClass ../../org.eclipse.ocl.examples.codegen/model/cgmodel.ecore#//CGValuedElement"
         containment="true" resolveProxies="false"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="connectionAssignments"
-        upperBound="-1" eType="#//CGConnectionAssignment" containment="true" resolveProxies="false"
-        eOpposite="#//CGConnectionAssignment/mappingExp"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedAccumulators" upperBound="-1"
         eType="ecore:EClass ../../org.eclipse.ocl.examples.codegen/model/cgmodel.ecore#//CGAccumulator"
         containment="true" resolveProxies="false"/>
@@ -92,11 +90,11 @@
   <eClassifiers xsi:type="ecore:EClass" name="CGMiddlePropertyAssignment" eSuperTypes="#//CGEcorePropertyAssignment"/>
   <eClassifiers xsi:type="ecore:EClass" name="CGMiddlePropertyCallExp" eSuperTypes="../../org.eclipse.ocl.examples.codegen/model/cgmodel.ecore#//CGOppositePropertyCallExp"/>
   <eClassifiers xsi:type="ecore:EClass" name="CGPropertyAssignment" eSuperTypes="../../org.eclipse.ocl.examples.codegen/model/cgmodel.ecore#//CGValuedElement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="mappingExp" lowerBound="1"
-        eType="#//CGMappingExp" resolveProxies="false" eOpposite="#//CGMappingExp/assignments"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="slotValue" lowerBound="1"
         eType="ecore:EClass ../../org.eclipse.ocl.examples.codegen/model/cgmodel.ecore#//CGValuedElement"
         containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owningMapping" lowerBound="1"
+        eType="#//CGMapping" resolveProxies="false" eOpposite="#//CGMapping/ownedAssignments"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="referredProperty" lowerBound="1"
         eType="ecore:EDataType ../../org.eclipse.ocl.examples.codegen/model/cgmodel.ecore#//Property"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="initValue" lowerBound="1"
@@ -114,6 +112,8 @@
         <details key="documentation" value="The shared type."/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owningMapping" lowerBound="1"
+        eType="#//CGMapping" resolveProxies="false" eOpposite="#//CGMapping/ownedRealizedVariables"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="typedModel" lowerBound="1"
         eType="#//CGTypedModel" resolveProxies="false"/>
   </eClassifiers>
@@ -125,7 +125,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="CGTransformation" eSuperTypes="../../org.eclipse.ocl.examples.codegen/model/cgmodel.ecore#//CGClass">
     <eStructuralFeatures xsi:type="ecore:EReference" name="mappings" lowerBound="1"
         upperBound="-1" eType="#//CGMapping" containment="true" resolveProxies="false"
-        eOpposite="#//CGMapping/transformation"/>
+        eOpposite="#//CGMapping/owningTransformation"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="typedModels" upperBound="-1"
         eType="#//CGTypedModel" containment="true" resolveProxies="false" eOpposite="#//CGTypedModel/transformation"/>
   </eClassifiers>

@@ -1277,7 +1277,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 	}
 
 	protected void doMappingConstructor(@NonNull CGMapping cgMapping) {
-		List<@NonNull CGGuardVariable> cgFreeVariables = ClassUtil.nullFree(cgMapping.getFreeVariables());
+		List<@NonNull CGGuardVariable> cgFreeVariables = ClassUtil.nullFree(cgMapping.getOwnedGuardVariables());
 		//		if (js.isUseNullAnnotations()) {
 		//			js.append("@SuppressWarnings(\"null\")\n");		// Accurate casts are too hard
 		//		}
@@ -1992,7 +1992,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		if (localContext2 != null) {
 			localContext = localContext2;
 			try {
-				List<@NonNull CGGuardVariable> cgFreeVariables = ClassUtil.nullFree(cgMapping.getFreeVariables());
+				List<@NonNull CGGuardVariable> cgFreeVariables = ClassUtil.nullFree(cgMapping.getOwnedGuardVariables());
 				//
 				js.appendCommentWithOCL(null, cgMapping.getAst());
 				String mappingName = getMappingName(cgMapping);
@@ -2080,6 +2080,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 	@Override
 	public @NonNull Boolean visitCGMappingExp(@NonNull CGMappingExp cgMappingExp) {
 		//		assert cgMappingExp.getPredicates().isEmpty();		// Get rewritten during JavaPre pass
+		CGMapping cgMapping = ClassUtil.nonNullState(QVTiCGUtil.getContainingCGMapping(cgMappingExp));
 		List<@NonNull CGAccumulator> cgAccumulators = ClassUtil.nullFree(cgMappingExp.getOwnedAccumulators());
 		if (cgAccumulators.size() > 0) {
 			js.append("// connection variables\n");
@@ -2143,21 +2144,21 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 				}
 			}
 		}
-		List<@NonNull CGValuedElement> cgRealizedVariables = ClassUtil.nullFree(cgMappingExp.getRealizedVariables());
+		List<@NonNull CGRealizedVariable> cgRealizedVariables = ClassUtil.nullFree(cgMapping.getOwnedRealizedVariables());
 		if (cgRealizedVariables.size() > 0) {
 			js.append("// creations\n");
-			for (@NonNull CGValuedElement cgRealizedVariable : cgRealizedVariables) {
+			for (@NonNull CGRealizedVariable cgRealizedVariable : cgRealizedVariables) {
 				cgRealizedVariable.accept(this);
 			}
 		}
-		List<@NonNull CGPropertyAssignment> cgPropertyAssignments = ClassUtil.nullFree(cgMappingExp.getAssignments());
+		List<@NonNull CGPropertyAssignment> cgPropertyAssignments = ClassUtil.nullFree(cgMapping.getOwnedAssignments());
 		if (cgPropertyAssignments.size() > 0) {
 			js.append("// property assignments\n");
 			for (@NonNull CGPropertyAssignment cgAssignment : cgPropertyAssignments) {
 				cgAssignment.accept(this);
 			}
 		}
-		List<@NonNull CGConnectionAssignment> cgConnectionAssignments = ClassUtil.nullFree(cgMappingExp.getConnectionAssignments());
+		List<@NonNull CGConnectionAssignment> cgConnectionAssignments = ClassUtil.nullFree(cgMapping.getOwnedConnectionAssignments());
 		if (cgConnectionAssignments.size() > 0) {
 			js.append("// connection assignments\n");
 			for (@NonNull CGConnectionAssignment cgConnectionAssignment : cgConnectionAssignments) {

@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
@@ -25,8 +25,11 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMapping#getBody <em>Body</em>}</li>
- *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMapping#getFreeVariables <em>Free Variables</em>}</li>
- *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMapping#getTransformation <em>Transformation</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMapping#getOwnedAssignments <em>Owned Assignments</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMapping#getOwnedConnectionAssignments <em>Owned Connection Assignments</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMapping#getOwnedGuardVariables <em>Owned Guard Variables</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMapping#getOwnedRealizedVariables <em>Owned Realized Variables</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMapping#getOwningTransformation <em>Owning Transformation</em>}</li>
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMapping#isUseClass <em>Use Class</em>}</li>
  * </ul>
  *
@@ -63,49 +66,103 @@ public interface CGMapping extends CGNamedElement {
 	void setBody(CGValuedElement value);
 
 	/**
-	 * Returns the value of the '<em><b>Free Variables</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Owned Assignments</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment}.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment#getOwningMapping <em>Owning Mapping</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Owned Assignments</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Owned Assignments</em>' containment reference list.
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage#getCGMapping_OwnedAssignments()
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment#getOwningMapping
+	 * @model opposite="owningMapping" containment="true"
+	 * @generated
+	 */
+	List<CGPropertyAssignment> getOwnedAssignments();
+
+	/**
+	 * Returns the value of the '<em><b>Owned Connection Assignments</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionAssignment}.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionAssignment#getOwningMapping <em>Owning Mapping</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Owned Connection Assignments</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Owned Connection Assignments</em>' containment reference list.
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage#getCGMapping_OwnedConnectionAssignments()
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionAssignment#getOwningMapping
+	 * @model opposite="owningMapping" containment="true"
+	 * @generated
+	 */
+	List<CGConnectionAssignment> getOwnedConnectionAssignments();
+
+	/**
+	 * Returns the value of the '<em><b>Owned Guard Variables</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.codegen.qvticgmodel.CGGuardVariable}.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGGuardVariable#getMapping <em>Mapping</em>}'.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGGuardVariable#getOwningMapping <em>Owning Mapping</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * The parameters of this operation, with 'self' as the first parameter.
 	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Free Variables</em>' containment reference list.
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage#getCGMapping_FreeVariables()
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGGuardVariable#getMapping
-	 * @model opposite="mapping" containment="true" ordered="false"
+	 * @return the value of the '<em>Owned Guard Variables</em>' containment reference list.
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage#getCGMapping_OwnedGuardVariables()
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGGuardVariable#getOwningMapping
+	 * @model opposite="owningMapping" containment="true" ordered="false"
 	 * @generated
 	 */
-	List<CGGuardVariable> getFreeVariables();
+	List<CGGuardVariable> getOwnedGuardVariables();
 
 	/**
-	 * Returns the value of the '<em><b>Transformation</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation#getMappings <em>Mappings</em>}'.
+	 * Returns the value of the '<em><b>Owned Realized Variables</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable}.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable#getOwningMapping <em>Owning Mapping</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Transformation</em>' container reference isn't clear,
+	 * If the meaning of the '<em>Owned Realized Variables</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Transformation</em>' container reference.
-	 * @see #setTransformation(CGTransformation)
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage#getCGMapping_Transformation()
+	 * @return the value of the '<em>Owned Realized Variables</em>' containment reference list.
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage#getCGMapping_OwnedRealizedVariables()
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable#getOwningMapping
+	 * @model opposite="owningMapping" containment="true"
+	 * @generated
+	 */
+	List<CGRealizedVariable> getOwnedRealizedVariables();
+
+	/**
+	 * Returns the value of the '<em><b>Owning Transformation</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation#getMappings <em>Mappings</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Owning Transformation</em>' container reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Owning Transformation</em>' container reference.
+	 * @see #setOwningTransformation(CGTransformation)
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage#getCGMapping_OwningTransformation()
 	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation#getMappings
 	 * @model opposite="mappings" resolveProxies="false" required="true" transient="false"
 	 * @generated
 	 */
-	CGTransformation getTransformation();
+	CGTransformation getOwningTransformation();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMapping#getTransformation <em>Transformation</em>}' container reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMapping#getOwningTransformation <em>Owning Transformation</em>}' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Transformation</em>' container reference.
-	 * @see #getTransformation()
+	 * @param value the new value of the '<em>Owning Transformation</em>' container reference.
+	 * @see #getOwningTransformation()
 	 * @generated
 	 */
-	void setTransformation(CGTransformation value);
+	void setOwningTransformation(CGTransformation value);
 
 	/**
 	 * Returns the value of the '<em><b>Use Class</b></em>' attribute.

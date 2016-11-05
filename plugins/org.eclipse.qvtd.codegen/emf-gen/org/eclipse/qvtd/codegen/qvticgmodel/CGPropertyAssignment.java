@@ -23,8 +23,8 @@ import org.eclipse.ocl.pivot.Property;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment#getMappingExp <em>Mapping Exp</em>}</li>
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment#getSlotValue <em>Slot Value</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment#getOwningMapping <em>Owning Mapping</em>}</li>
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment#getReferredProperty <em>Referred Property</em>}</li>
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment#getInitValue <em>Init Value</em>}</li>
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment#getExecutorProperty <em>Executor Property</em>}</li>
@@ -35,34 +35,6 @@ import org.eclipse.ocl.pivot.Property;
  * @generated
  */
 public interface CGPropertyAssignment extends CGValuedElement {
-	/**
-	 * Returns the value of the '<em><b>Mapping Exp</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp#getAssignments <em>Assignments</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Mapping Exp</em>' container reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Mapping Exp</em>' container reference.
-	 * @see #setMappingExp(CGMappingExp)
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage#getCGPropertyAssignment_MappingExp()
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp#getAssignments
-	 * @model opposite="assignments" resolveProxies="false" required="true" transient="false"
-	 * @generated
-	 */
-	CGMappingExp getMappingExp();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment#getMappingExp <em>Mapping Exp</em>}' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Mapping Exp</em>' container reference.
-	 * @see #getMappingExp()
-	 * @generated
-	 */
-	void setMappingExp(CGMappingExp value);
-
 	/**
 	 * Returns the value of the '<em><b>Slot Value</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
@@ -88,6 +60,34 @@ public interface CGPropertyAssignment extends CGValuedElement {
 	 * @generated
 	 */
 	void setSlotValue(CGValuedElement value);
+
+	/**
+	 * Returns the value of the '<em><b>Owning Mapping</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMapping#getOwnedAssignments <em>Owned Assignments</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Owning Mapping</em>' container reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Owning Mapping</em>' container reference.
+	 * @see #setOwningMapping(CGMapping)
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage#getCGPropertyAssignment_OwningMapping()
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGMapping#getOwnedAssignments
+	 * @model opposite="ownedAssignments" resolveProxies="false" required="true" transient="false"
+	 * @generated
+	 */
+	CGMapping getOwningMapping();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment#getOwningMapping <em>Owning Mapping</em>}' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Owning Mapping</em>' container reference.
+	 * @see #getOwningMapping()
+	 * @generated
+	 */
+	void setOwningMapping(CGMapping value);
 
 	/**
 	 * Returns the value of the '<em><b>Referred Property</b></em>' attribute.

@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
@@ -35,7 +35,7 @@ import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGGuardVariableImpl#getMapping <em>Mapping</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGGuardVariableImpl#getOwningMapping <em>Owning Mapping</em>}</li>
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGGuardVariableImpl#getTypedModel <em>Typed Model</em>}</li>
  * </ul>
  *
@@ -77,8 +77,8 @@ public class CGGuardVariableImpl extends CGParameterImpl implements CGGuardVaria
 	 * @generated
 	 */
 	@Override
-	public CGMapping getMapping() {
-		if (eContainerFeatureID() != QVTiCGModelPackage.CG_GUARD_VARIABLE__MAPPING) return null;
+	public CGMapping getOwningMapping() {
+		if (eContainerFeatureID() != QVTiCGModelPackage.CG_GUARD_VARIABLE__OWNING_MAPPING) return null;
 		return (CGMapping)eInternalContainer();
 	}
 
@@ -87,8 +87,8 @@ public class CGGuardVariableImpl extends CGParameterImpl implements CGGuardVaria
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetMapping(CGMapping newMapping, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newMapping, QVTiCGModelPackage.CG_GUARD_VARIABLE__MAPPING, msgs);
+	public NotificationChain basicSetOwningMapping(CGMapping newOwningMapping, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newOwningMapping, QVTiCGModelPackage.CG_GUARD_VARIABLE__OWNING_MAPPING, msgs);
 		return msgs;
 	}
 
@@ -98,20 +98,20 @@ public class CGGuardVariableImpl extends CGParameterImpl implements CGGuardVaria
 	 * @generated
 	 */
 	@Override
-	public void setMapping(CGMapping newMapping) {
-		if (newMapping != eInternalContainer() || (eContainerFeatureID() != QVTiCGModelPackage.CG_GUARD_VARIABLE__MAPPING && newMapping != null)) {
-			if (EcoreUtil.isAncestor(this, newMapping))
+	public void setOwningMapping(CGMapping newOwningMapping) {
+		if (newOwningMapping != eInternalContainer() || (eContainerFeatureID() != QVTiCGModelPackage.CG_GUARD_VARIABLE__OWNING_MAPPING && newOwningMapping != null)) {
+			if (EcoreUtil.isAncestor(this, newOwningMapping))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
-			if (newMapping != null)
-				msgs = ((InternalEObject)newMapping).eInverseAdd(this, QVTiCGModelPackage.CG_MAPPING__FREE_VARIABLES, CGMapping.class, msgs);
-			msgs = basicSetMapping(newMapping, msgs);
+			if (newOwningMapping != null)
+				msgs = ((InternalEObject)newOwningMapping).eInverseAdd(this, QVTiCGModelPackage.CG_MAPPING__OWNED_GUARD_VARIABLES, CGMapping.class, msgs);
+			msgs = basicSetOwningMapping(newOwningMapping, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTiCGModelPackage.CG_GUARD_VARIABLE__MAPPING, newMapping, newMapping));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTiCGModelPackage.CG_GUARD_VARIABLE__OWNING_MAPPING, newOwningMapping, newOwningMapping));
 	}
 
 	/**
@@ -145,10 +145,10 @@ public class CGGuardVariableImpl extends CGParameterImpl implements CGGuardVaria
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_GUARD_VARIABLE__MAPPING:
+			case QVTiCGModelPackage.CG_GUARD_VARIABLE__OWNING_MAPPING:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetMapping((CGMapping)otherEnd, msgs);
+				return basicSetOwningMapping((CGMapping)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -161,8 +161,8 @@ public class CGGuardVariableImpl extends CGParameterImpl implements CGGuardVaria
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_GUARD_VARIABLE__MAPPING:
-				return basicSetMapping(null, msgs);
+			case QVTiCGModelPackage.CG_GUARD_VARIABLE__OWNING_MAPPING:
+				return basicSetOwningMapping(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -175,8 +175,8 @@ public class CGGuardVariableImpl extends CGParameterImpl implements CGGuardVaria
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case QVTiCGModelPackage.CG_GUARD_VARIABLE__MAPPING:
-				return eInternalContainer().eInverseRemove(this, QVTiCGModelPackage.CG_MAPPING__FREE_VARIABLES, CGMapping.class, msgs);
+			case QVTiCGModelPackage.CG_GUARD_VARIABLE__OWNING_MAPPING:
+				return eInternalContainer().eInverseRemove(this, QVTiCGModelPackage.CG_MAPPING__OWNED_GUARD_VARIABLES, CGMapping.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -189,8 +189,8 @@ public class CGGuardVariableImpl extends CGParameterImpl implements CGGuardVaria
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_GUARD_VARIABLE__MAPPING:
-				return getMapping();
+			case QVTiCGModelPackage.CG_GUARD_VARIABLE__OWNING_MAPPING:
+				return getOwningMapping();
 			case QVTiCGModelPackage.CG_GUARD_VARIABLE__TYPED_MODEL:
 				return getTypedModel();
 		}
@@ -205,8 +205,8 @@ public class CGGuardVariableImpl extends CGParameterImpl implements CGGuardVaria
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_GUARD_VARIABLE__MAPPING:
-				setMapping((CGMapping)newValue);
+			case QVTiCGModelPackage.CG_GUARD_VARIABLE__OWNING_MAPPING:
+				setOwningMapping((CGMapping)newValue);
 				return;
 			case QVTiCGModelPackage.CG_GUARD_VARIABLE__TYPED_MODEL:
 				setTypedModel((CGTypedModel)newValue);
@@ -223,8 +223,8 @@ public class CGGuardVariableImpl extends CGParameterImpl implements CGGuardVaria
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_GUARD_VARIABLE__MAPPING:
-				setMapping((CGMapping)null);
+			case QVTiCGModelPackage.CG_GUARD_VARIABLE__OWNING_MAPPING:
+				setOwningMapping((CGMapping)null);
 				return;
 			case QVTiCGModelPackage.CG_GUARD_VARIABLE__TYPED_MODEL:
 				setTypedModel((CGTypedModel)null);
@@ -241,8 +241,8 @@ public class CGGuardVariableImpl extends CGParameterImpl implements CGGuardVaria
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_GUARD_VARIABLE__MAPPING:
-				return getMapping() != null;
+			case QVTiCGModelPackage.CG_GUARD_VARIABLE__OWNING_MAPPING:
+				return getOwningMapping() != null;
 			case QVTiCGModelPackage.CG_GUARD_VARIABLE__TYPED_MODEL:
 				return typedModel != null;
 		}

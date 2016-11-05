@@ -90,7 +90,7 @@ public class CGTransformationImpl extends CGClassImpl implements CGTransformatio
 	@Override
 	public List<CGMapping> getMappings() {
 		if (mappings == null) {
-			mappings = new EObjectContainmentWithInverseEList<CGMapping>(CGMapping.class, this, QVTiCGModelPackage.CG_TRANSFORMATION__MAPPINGS, QVTiCGModelPackage.CG_MAPPING__TRANSFORMATION);
+			mappings = new EObjectContainmentWithInverseEList<CGMapping>(CGMapping.class, this, QVTiCGModelPackage.CG_TRANSFORMATION__MAPPINGS, QVTiCGModelPackage.CG_MAPPING__OWNING_TRANSFORMATION);
 		}
 		return mappings;
 	}

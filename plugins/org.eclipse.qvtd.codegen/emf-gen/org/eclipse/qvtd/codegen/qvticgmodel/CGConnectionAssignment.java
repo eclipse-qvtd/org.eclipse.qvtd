@@ -26,7 +26,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionAssignment#getMappingExp <em>Mapping Exp</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionAssignment#getOwningMapping <em>Owning Mapping</em>}</li>
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionAssignment#getInitValue <em>Init Value</em>}</li>
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionAssignment#getConnectionVariable <em>Connection Variable</em>}</li>
  * </ul>
@@ -37,32 +37,32 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
  */
 public interface CGConnectionAssignment extends CGValuedElement {
 	/**
-	 * Returns the value of the '<em><b>Mapping Exp</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp#getConnectionAssignments <em>Connection Assignments</em>}'.
+	 * Returns the value of the '<em><b>Owning Mapping</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMapping#getOwnedConnectionAssignments <em>Owned Connection Assignments</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Mapping Exp</em>' container reference isn't clear,
+	 * If the meaning of the '<em>Owning Mapping</em>' container reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Mapping Exp</em>' container reference.
-	 * @see #setMappingExp(CGMappingExp)
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage#getCGConnectionAssignment_MappingExp()
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp#getConnectionAssignments
-	 * @model opposite="connectionAssignments" resolveProxies="false" required="true" transient="false"
+	 * @return the value of the '<em>Owning Mapping</em>' container reference.
+	 * @see #setOwningMapping(CGMapping)
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage#getCGConnectionAssignment_OwningMapping()
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGMapping#getOwnedConnectionAssignments
+	 * @model opposite="ownedConnectionAssignments" resolveProxies="false" required="true" transient="false"
 	 * @generated
 	 */
-	CGMappingExp getMappingExp();
+	CGMapping getOwningMapping();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionAssignment#getMappingExp <em>Mapping Exp</em>}' container reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionAssignment#getOwningMapping <em>Owning Mapping</em>}' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Mapping Exp</em>' container reference.
-	 * @see #getMappingExp()
+	 * @param value the new value of the '<em>Owning Mapping</em>' container reference.
+	 * @see #getOwningMapping()
 	 * @generated
 	 */
-	void setMappingExp(CGMappingExp value);
+	void setOwningMapping(CGMapping value);
 
 	/**
 	 * Returns the value of the '<em><b>Init Value</b></em>' containment reference.

@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
@@ -43,7 +43,7 @@ import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 
 public class QVTiCG2StringVisitor extends CG2StringVisitor implements QVTiCGModelVisitor<String>
-{	
+{
 	private static final class MyFactory extends AbstractFactory
 	{
 		private static final class MyFactory2 extends AbstractFactory
@@ -64,7 +64,7 @@ public class QVTiCG2StringVisitor extends CG2StringVisitor implements QVTiCGMode
 				return eInstance;
 			}
 		}
-		
+
 		private MyFactory() {
 			new MyFactory2();
 			CG2StringVisitor.addFactory(this);
@@ -137,10 +137,10 @@ public class QVTiCG2StringVisitor extends CG2StringVisitor implements QVTiCGMode
 
 	@Override
 	public @Nullable String visitCGMapping(@NonNull CGMapping cgMapping) {
-		appendQualifiedName(cgMapping.getTransformation(), ".", cgMapping);
+		appendQualifiedName(cgMapping.getOwningTransformation(), ".", cgMapping);
 		append("(");
 		boolean isFirst = true;
-		for (CGGuardVariable cgFreeVariable : cgMapping.getFreeVariables()) {
+		for (CGGuardVariable cgFreeVariable : cgMapping.getOwnedGuardVariables()) {
 			if (!isFirst) {
 				append(",");
 			}
@@ -189,7 +189,7 @@ public class QVTiCG2StringVisitor extends CG2StringVisitor implements QVTiCGMode
 		}
 		append(" | ");
 		append(" ... ");
-//		safeVisit(cgMappingLoop.getBody());
+		//		safeVisit(cgMappingLoop.getBody());
 		append(")");
 		return null;
 	}
