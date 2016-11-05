@@ -91,7 +91,7 @@ public class QVTiCG2StringVisitor extends CG2StringVisitor implements QVTiCGMode
 	public @Nullable String visitCGConnectionAssignment(@NonNull CGConnectionAssignment cgConnectionAssignment) {
 		appendName(cgConnectionAssignment.getConnectionVariable());
 		append(" := ");
-		safeVisit(cgConnectionAssignment.getInitValue());
+		safeVisit(cgConnectionAssignment.getOwnedInitValue());
 		return null;
 	}
 
@@ -155,7 +155,7 @@ public class QVTiCG2StringVisitor extends CG2StringVisitor implements QVTiCGMode
 	public @Nullable String visitCGMappingCall(@NonNull CGMappingCall cgMappingCall) {
 		appendName(((MappingCall)cgMappingCall.getAst()).getReferredMapping());
 		append("(");
-		for (CGValuedElement argument : cgMappingCall.getMappingCallBindings()) {
+		for (CGValuedElement argument : cgMappingCall.getOwnedMappingCallBindings()) {
 			safeVisit(argument);
 			append("; ");
 		}
@@ -167,7 +167,7 @@ public class QVTiCG2StringVisitor extends CG2StringVisitor implements QVTiCGMode
 	public @Nullable String visitCGMappingCallBinding(@NonNull CGMappingCallBinding cgMappingCallBinding) {
 		appendName(cgMappingCallBinding);
 		append(" := ");
-		safeVisit(cgMappingCallBinding.getValue());
+		safeVisit(cgMappingCallBinding.getOwnedValue());
 		return null;
 	}
 
@@ -206,11 +206,11 @@ public class QVTiCG2StringVisitor extends CG2StringVisitor implements QVTiCGMode
 
 	@Override
 	public @Nullable String visitCGPropertyAssignment(@NonNull CGPropertyAssignment cgPropertyAssignment) {
-		safeVisit(cgPropertyAssignment.getSlotValue());
+		safeVisit(cgPropertyAssignment.getOwnedSlotValue());
 		append(".");
 		appendName(cgPropertyAssignment.getReferredProperty());
 		append(" := ");
-		safeVisit(cgPropertyAssignment.getInitValue());
+		safeVisit(cgPropertyAssignment.getOwnedInitValue());
 		return null;
 	}
 

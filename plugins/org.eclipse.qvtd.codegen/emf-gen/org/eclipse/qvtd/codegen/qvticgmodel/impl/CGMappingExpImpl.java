@@ -46,23 +46,13 @@ import org.eclipse.qvtd.codegen.utilities.QVTiEquivalenceUtil;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGMappingExpImpl#getBody <em>Body</em>}</li>
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGMappingExpImpl#getOwnedAccumulators <em>Owned Accumulators</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGMappingExpImpl#getOwnedBody <em>Owned Body</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class CGMappingExpImpl extends CGValuedElementImpl implements CGMappingExp {
-	/**
-	 * The cached value of the '{@link #getBody() <em>Body</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getBody()
-	 * @generated
-	 * @ordered
-	 */
-	protected CGValuedElement body;
-
 	/**
 	 * The cached value of the '{@link #getOwnedAccumulators() <em>Owned Accumulators</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -72,6 +62,16 @@ public class CGMappingExpImpl extends CGValuedElementImpl implements CGMappingEx
 	 * @ordered
 	 */
 	protected EList<CGAccumulator> ownedAccumulators;
+
+	/**
+	 * The cached value of the '{@link #getOwnedBody() <em>Owned Body</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOwnedBody()
+	 * @generated
+	 * @ordered
+	 */
+	protected CGValuedElement ownedBody;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -98,51 +98,6 @@ public class CGMappingExpImpl extends CGValuedElementImpl implements CGMappingEx
 	 * @generated
 	 */
 	@Override
-	public CGValuedElement getBody() {
-		return body;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetBody(CGValuedElement newBody, NotificationChain msgs) {
-		CGValuedElement oldBody = body;
-		body = newBody;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTiCGModelPackage.CG_MAPPING_EXP__BODY, oldBody, newBody);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setBody(CGValuedElement newBody) {
-		if (newBody != body) {
-			NotificationChain msgs = null;
-			if (body != null)
-				msgs = ((InternalEObject)body).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTiCGModelPackage.CG_MAPPING_EXP__BODY, null, msgs);
-			if (newBody != null)
-				msgs = ((InternalEObject)newBody).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTiCGModelPackage.CG_MAPPING_EXP__BODY, null, msgs);
-			msgs = basicSetBody(newBody, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTiCGModelPackage.CG_MAPPING_EXP__BODY, newBody, newBody));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public List<CGAccumulator> getOwnedAccumulators() {
 		if (ownedAccumulators == null) {
 			ownedAccumulators = new EObjectContainmentEList<CGAccumulator>(CGAccumulator.class, this, QVTiCGModelPackage.CG_MAPPING_EXP__OWNED_ACCUMULATORS);
@@ -156,12 +111,57 @@ public class CGMappingExpImpl extends CGValuedElementImpl implements CGMappingEx
 	 * @generated
 	 */
 	@Override
+	public CGValuedElement getOwnedBody() {
+		return ownedBody;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetOwnedBody(CGValuedElement newOwnedBody, NotificationChain msgs) {
+		CGValuedElement oldOwnedBody = ownedBody;
+		ownedBody = newOwnedBody;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTiCGModelPackage.CG_MAPPING_EXP__OWNED_BODY, oldOwnedBody, newOwnedBody);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setOwnedBody(CGValuedElement newOwnedBody) {
+		if (newOwnedBody != ownedBody) {
+			NotificationChain msgs = null;
+			if (ownedBody != null)
+				msgs = ((InternalEObject)ownedBody).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTiCGModelPackage.CG_MAPPING_EXP__OWNED_BODY, null, msgs);
+			if (newOwnedBody != null)
+				msgs = ((InternalEObject)newOwnedBody).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTiCGModelPackage.CG_MAPPING_EXP__OWNED_BODY, null, msgs);
+			msgs = basicSetOwnedBody(newOwnedBody, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTiCGModelPackage.CG_MAPPING_EXP__OWNED_BODY, newOwnedBody, newOwnedBody));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_MAPPING_EXP__BODY:
-				return basicSetBody(null, msgs);
 			case QVTiCGModelPackage.CG_MAPPING_EXP__OWNED_ACCUMULATORS:
 				return ((InternalEList<?>)getOwnedAccumulators()).basicRemove(otherEnd, msgs);
+			case QVTiCGModelPackage.CG_MAPPING_EXP__OWNED_BODY:
+				return basicSetOwnedBody(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -174,10 +174,10 @@ public class CGMappingExpImpl extends CGValuedElementImpl implements CGMappingEx
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_MAPPING_EXP__BODY:
-				return getBody();
 			case QVTiCGModelPackage.CG_MAPPING_EXP__OWNED_ACCUMULATORS:
 				return getOwnedAccumulators();
+			case QVTiCGModelPackage.CG_MAPPING_EXP__OWNED_BODY:
+				return getOwnedBody();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -191,12 +191,12 @@ public class CGMappingExpImpl extends CGValuedElementImpl implements CGMappingEx
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_MAPPING_EXP__BODY:
-				setBody((CGValuedElement)newValue);
-				return;
 			case QVTiCGModelPackage.CG_MAPPING_EXP__OWNED_ACCUMULATORS:
 				getOwnedAccumulators().clear();
 				getOwnedAccumulators().addAll((Collection<? extends CGAccumulator>)newValue);
+				return;
+			case QVTiCGModelPackage.CG_MAPPING_EXP__OWNED_BODY:
+				setOwnedBody((CGValuedElement)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -210,11 +210,11 @@ public class CGMappingExpImpl extends CGValuedElementImpl implements CGMappingEx
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_MAPPING_EXP__BODY:
-				setBody((CGValuedElement)null);
-				return;
 			case QVTiCGModelPackage.CG_MAPPING_EXP__OWNED_ACCUMULATORS:
 				getOwnedAccumulators().clear();
+				return;
+			case QVTiCGModelPackage.CG_MAPPING_EXP__OWNED_BODY:
+				setOwnedBody((CGValuedElement)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -228,10 +228,10 @@ public class CGMappingExpImpl extends CGValuedElementImpl implements CGMappingEx
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_MAPPING_EXP__BODY:
-				return body != null;
 			case QVTiCGModelPackage.CG_MAPPING_EXP__OWNED_ACCUMULATORS:
 				return ownedAccumulators != null && !ownedAccumulators.isEmpty();
+			case QVTiCGModelPackage.CG_MAPPING_EXP__OWNED_BODY:
+				return ownedBody != null;
 		}
 		return super.eIsSet(featureID);
 	}

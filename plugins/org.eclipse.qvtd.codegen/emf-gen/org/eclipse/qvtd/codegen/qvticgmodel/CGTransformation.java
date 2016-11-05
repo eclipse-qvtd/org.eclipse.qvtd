@@ -23,8 +23,8 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation#getMappings <em>Mappings</em>}</li>
- *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation#getTypedModels <em>Typed Models</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation#getOwnedMappings <em>Owned Mappings</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation#getOwnedTypedModels <em>Owned Typed Models</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage#getCGTransformation()
@@ -34,38 +34,38 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
 public interface CGTransformation extends CGClass {
 
 	/**
-	 * Returns the value of the '<em><b>Mappings</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Owned Mappings</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.codegen.qvticgmodel.CGMapping}.
 	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMapping#getOwningTransformation <em>Owning Transformation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Mappings</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Owned Mappings</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Mappings</em>' containment reference list.
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage#getCGTransformation_Mappings()
+	 * @return the value of the '<em>Owned Mappings</em>' containment reference list.
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage#getCGTransformation_OwnedMappings()
 	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGMapping#getOwningTransformation
 	 * @model opposite="owningTransformation" containment="true" required="true"
 	 * @generated
 	 */
-	List<CGMapping> getMappings();
+	List<CGMapping> getOwnedMappings();
 
 	/**
-	 * Returns the value of the '<em><b>Typed Models</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Owned Typed Models</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel}.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel#getTransformation <em>Transformation</em>}'.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel#getOwningTransformation <em>Owning Transformation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Typed Models</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Owned Typed Models</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Typed Models</em>' containment reference list.
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage#getCGTransformation_TypedModels()
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel#getTransformation
-	 * @model opposite="transformation" containment="true"
+	 * @return the value of the '<em>Owned Typed Models</em>' containment reference list.
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage#getCGTransformation_OwnedTypedModels()
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel#getOwningTransformation
+	 * @model opposite="owningTransformation" containment="true"
 	 * @generated
 	 */
-	List<CGTypedModel> getTypedModels();
+	List<CGTypedModel> getOwnedTypedModels();
 } // CGTransformation

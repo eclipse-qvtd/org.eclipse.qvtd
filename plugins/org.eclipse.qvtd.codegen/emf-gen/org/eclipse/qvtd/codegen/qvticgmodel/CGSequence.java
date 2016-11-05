@@ -23,7 +23,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGSequence#getStatements <em>Statements</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGSequence#getOwnedStatements <em>Owned Statements</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage#getCGSequence()
@@ -32,19 +32,19 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
  */
 public interface CGSequence extends CGValuedElement {
 	/**
-	 * Returns the value of the '<em><b>Statements</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Owned Statements</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Statements</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Owned Statements</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Statements</em>' containment reference list.
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage#getCGSequence_Statements()
+	 * @return the value of the '<em>Owned Statements</em>' containment reference list.
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage#getCGSequence_OwnedStatements()
 	 * @model containment="true"
 	 * @generated
 	 */
-	List<CGValuedElement> getStatements();
+	List<CGValuedElement> getOwnedStatements();
 
 } // CGSequence

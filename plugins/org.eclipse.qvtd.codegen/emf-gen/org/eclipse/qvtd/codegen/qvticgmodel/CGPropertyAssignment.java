@@ -23,11 +23,11 @@ import org.eclipse.ocl.pivot.Property;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment#getSlotValue <em>Slot Value</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment#getExecutorProperty <em>Executor Property</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment#getOwnedInitValue <em>Owned Init Value</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment#getOwnedSlotValue <em>Owned Slot Value</em>}</li>
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment#getOwningMapping <em>Owning Mapping</em>}</li>
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment#getReferredProperty <em>Referred Property</em>}</li>
- *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment#getInitValue <em>Init Value</em>}</li>
- *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment#getExecutorProperty <em>Executor Property</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage#getCGPropertyAssignment()
@@ -35,32 +35,6 @@ import org.eclipse.ocl.pivot.Property;
  * @generated
  */
 public interface CGPropertyAssignment extends CGValuedElement {
-	/**
-	 * Returns the value of the '<em><b>Slot Value</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Slot Value</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Slot Value</em>' containment reference.
-	 * @see #setSlotValue(CGValuedElement)
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage#getCGPropertyAssignment_SlotValue()
-	 * @model containment="true" required="true"
-	 * @generated
-	 */
-	CGValuedElement getSlotValue();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment#getSlotValue <em>Slot Value</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Slot Value</em>' containment reference.
-	 * @see #getSlotValue()
-	 * @generated
-	 */
-	void setSlotValue(CGValuedElement value);
-
 	/**
 	 * Returns the value of the '<em><b>Owning Mapping</b></em>' container reference.
 	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMapping#getOwnedAssignments <em>Owned Assignments</em>}'.
@@ -116,32 +90,6 @@ public interface CGPropertyAssignment extends CGValuedElement {
 	void setReferredProperty(Property value);
 
 	/**
-	 * Returns the value of the '<em><b>Init Value</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Init Value</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Init Value</em>' containment reference.
-	 * @see #setInitValue(CGValuedElement)
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage#getCGPropertyAssignment_InitValue()
-	 * @model containment="true" required="true"
-	 * @generated
-	 */
-	CGValuedElement getInitValue();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment#getInitValue <em>Init Value</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Init Value</em>' containment reference.
-	 * @see #getInitValue()
-	 * @generated
-	 */
-	void setInitValue(CGValuedElement value);
-
-	/**
 	 * Returns the value of the '<em><b>Executor Property</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -166,5 +114,57 @@ public interface CGPropertyAssignment extends CGValuedElement {
 	 * @generated
 	 */
 	void setExecutorProperty(CGExecutorProperty value);
+
+	/**
+	 * Returns the value of the '<em><b>Owned Init Value</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Owned Init Value</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Owned Init Value</em>' containment reference.
+	 * @see #setOwnedInitValue(CGValuedElement)
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage#getCGPropertyAssignment_OwnedInitValue()
+	 * @model containment="true" required="true"
+	 * @generated
+	 */
+	CGValuedElement getOwnedInitValue();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment#getOwnedInitValue <em>Owned Init Value</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Owned Init Value</em>' containment reference.
+	 * @see #getOwnedInitValue()
+	 * @generated
+	 */
+	void setOwnedInitValue(CGValuedElement value);
+
+	/**
+	 * Returns the value of the '<em><b>Owned Slot Value</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Owned Slot Value</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Owned Slot Value</em>' containment reference.
+	 * @see #setOwnedSlotValue(CGValuedElement)
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage#getCGPropertyAssignment_OwnedSlotValue()
+	 * @model containment="true" required="true"
+	 * @generated
+	 */
+	CGValuedElement getOwnedSlotValue();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment#getOwnedSlotValue <em>Owned Slot Value</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Owned Slot Value</em>' containment reference.
+	 * @see #getOwnedSlotValue()
+	 * @generated
+	 */
+	void setOwnedSlotValue(CGValuedElement value);
 
 } // CGAssignment

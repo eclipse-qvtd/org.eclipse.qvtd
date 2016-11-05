@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
@@ -17,7 +17,7 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -37,22 +37,21 @@ import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGMappingCallImpl#getMappingCallBindings <em>Mapping Call Bindings</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGMappingCallImpl#getOwnedMappingCallBindings <em>Owned Mapping Call Bindings</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class CGMappingCallImpl extends CGValuedElementImpl implements CGMappingCall {
 	/**
-	 * The cached value of the '{@link #getMappingCallBindings() <em>Mapping Call Bindings</em>}' containment reference list.
+	 * The cached value of the '{@link #getOwnedMappingCallBindings() <em>Owned Mapping Call Bindings</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getMappingCallBindings()
+	 * @see #getOwnedMappingCallBindings()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<CGMappingCallBinding> mappingCallBindings;
-
+	protected EList<CGMappingCallBinding> ownedMappingCallBindings;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -78,11 +77,26 @@ public class CGMappingCallImpl extends CGValuedElementImpl implements CGMappingC
 	 * @generated
 	 */
 	@Override
-	public List<CGMappingCallBinding> getMappingCallBindings() {
-		if (mappingCallBindings == null) {
-			mappingCallBindings = new EObjectContainmentEList<CGMappingCallBinding>(CGMappingCallBinding.class, this, QVTiCGModelPackage.CG_MAPPING_CALL__MAPPING_CALL_BINDINGS);
+	public List<CGMappingCallBinding> getOwnedMappingCallBindings() {
+		if (ownedMappingCallBindings == null) {
+			ownedMappingCallBindings = new EObjectContainmentWithInverseEList<CGMappingCallBinding>(CGMappingCallBinding.class, this, QVTiCGModelPackage.CG_MAPPING_CALL__OWNED_MAPPING_CALL_BINDINGS, QVTiCGModelPackage.CG_MAPPING_CALL_BINDING__OWNING_MAPPING_CALL);
 		}
-		return mappingCallBindings;
+		return ownedMappingCallBindings;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case QVTiCGModelPackage.CG_MAPPING_CALL__OWNED_MAPPING_CALL_BINDINGS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedMappingCallBindings()).basicAdd(otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -93,8 +107,8 @@ public class CGMappingCallImpl extends CGValuedElementImpl implements CGMappingC
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_MAPPING_CALL__MAPPING_CALL_BINDINGS:
-				return ((InternalEList<?>)getMappingCallBindings()).basicRemove(otherEnd, msgs);
+			case QVTiCGModelPackage.CG_MAPPING_CALL__OWNED_MAPPING_CALL_BINDINGS:
+				return ((InternalEList<?>)getOwnedMappingCallBindings()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -107,8 +121,8 @@ public class CGMappingCallImpl extends CGValuedElementImpl implements CGMappingC
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_MAPPING_CALL__MAPPING_CALL_BINDINGS:
-				return getMappingCallBindings();
+			case QVTiCGModelPackage.CG_MAPPING_CALL__OWNED_MAPPING_CALL_BINDINGS:
+				return getOwnedMappingCallBindings();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -122,9 +136,9 @@ public class CGMappingCallImpl extends CGValuedElementImpl implements CGMappingC
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_MAPPING_CALL__MAPPING_CALL_BINDINGS:
-				getMappingCallBindings().clear();
-				getMappingCallBindings().addAll((Collection<? extends CGMappingCallBinding>)newValue);
+			case QVTiCGModelPackage.CG_MAPPING_CALL__OWNED_MAPPING_CALL_BINDINGS:
+				getOwnedMappingCallBindings().clear();
+				getOwnedMappingCallBindings().addAll((Collection<? extends CGMappingCallBinding>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -138,8 +152,8 @@ public class CGMappingCallImpl extends CGValuedElementImpl implements CGMappingC
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_MAPPING_CALL__MAPPING_CALL_BINDINGS:
-				getMappingCallBindings().clear();
+			case QVTiCGModelPackage.CG_MAPPING_CALL__OWNED_MAPPING_CALL_BINDINGS:
+				getOwnedMappingCallBindings().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -153,8 +167,8 @@ public class CGMappingCallImpl extends CGValuedElementImpl implements CGMappingC
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_MAPPING_CALL__MAPPING_CALL_BINDINGS:
-				return mappingCallBindings != null && !mappingCallBindings.isEmpty();
+			case QVTiCGModelPackage.CG_MAPPING_CALL__OWNED_MAPPING_CALL_BINDINGS:
+				return ownedMappingCallBindings != null && !ownedMappingCallBindings.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

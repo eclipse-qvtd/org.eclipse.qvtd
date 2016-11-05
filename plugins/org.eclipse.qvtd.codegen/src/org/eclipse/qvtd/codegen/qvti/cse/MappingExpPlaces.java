@@ -30,7 +30,7 @@ public class MappingExpPlaces
 {
 	public static @NonNull LocalPlace createMappingExpPlaces(@NonNull Map<@Nullable CGElement, @NonNull AbstractPlace> element2place, @NonNull CGMappingExp cgMappingExp) {
 		ControlPlace mapExpPlace = ControlPlace.getControlPlace(element2place, cgMappingExp);
-		CGValuedElement cgBody = cgMappingExp.getBody();
+		CGValuedElement cgBody = cgMappingExp.getOwnedBody();
 		if (cgBody != null) {
 			BodyPlace bodyPlace = new BodyPlace(mapExpPlace, cgBody);
 			element2place.put(cgBody, bodyPlace);

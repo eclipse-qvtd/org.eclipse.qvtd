@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
@@ -36,32 +36,32 @@ import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGTransformationImpl#getMappings <em>Mappings</em>}</li>
- *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGTransformationImpl#getTypedModels <em>Typed Models</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGTransformationImpl#getOwnedMappings <em>Owned Mappings</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGTransformationImpl#getOwnedTypedModels <em>Owned Typed Models</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class CGTransformationImpl extends CGClassImpl implements CGTransformation {
 	/**
-	 * The cached value of the '{@link #getMappings() <em>Mappings</em>}' containment reference list.
+	 * The cached value of the '{@link #getOwnedMappings() <em>Owned Mappings</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getMappings()
+	 * @see #getOwnedMappings()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<CGMapping> mappings;
+	protected EList<CGMapping> ownedMappings;
 
 	/**
-	 * The cached value of the '{@link #getTypedModels() <em>Typed Models</em>}' containment reference list.
+	 * The cached value of the '{@link #getOwnedTypedModels() <em>Owned Typed Models</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getTypedModels()
+	 * @see #getOwnedTypedModels()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<CGTypedModel> typedModels;
+	protected EList<CGTypedModel> ownedTypedModels;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -88,11 +88,11 @@ public class CGTransformationImpl extends CGClassImpl implements CGTransformatio
 	 * @generated
 	 */
 	@Override
-	public List<CGMapping> getMappings() {
-		if (mappings == null) {
-			mappings = new EObjectContainmentWithInverseEList<CGMapping>(CGMapping.class, this, QVTiCGModelPackage.CG_TRANSFORMATION__MAPPINGS, QVTiCGModelPackage.CG_MAPPING__OWNING_TRANSFORMATION);
+	public List<CGMapping> getOwnedMappings() {
+		if (ownedMappings == null) {
+			ownedMappings = new EObjectContainmentWithInverseEList<CGMapping>(CGMapping.class, this, QVTiCGModelPackage.CG_TRANSFORMATION__OWNED_MAPPINGS, QVTiCGModelPackage.CG_MAPPING__OWNING_TRANSFORMATION);
 		}
-		return mappings;
+		return ownedMappings;
 	}
 
 	/**
@@ -101,11 +101,11 @@ public class CGTransformationImpl extends CGClassImpl implements CGTransformatio
 	 * @generated
 	 */
 	@Override
-	public List<CGTypedModel> getTypedModels() {
-		if (typedModels == null) {
-			typedModels = new EObjectContainmentWithInverseEList<CGTypedModel>(CGTypedModel.class, this, QVTiCGModelPackage.CG_TRANSFORMATION__TYPED_MODELS, QVTiCGModelPackage.CG_TYPED_MODEL__TRANSFORMATION);
+	public List<CGTypedModel> getOwnedTypedModels() {
+		if (ownedTypedModels == null) {
+			ownedTypedModels = new EObjectContainmentWithInverseEList<CGTypedModel>(CGTypedModel.class, this, QVTiCGModelPackage.CG_TRANSFORMATION__OWNED_TYPED_MODELS, QVTiCGModelPackage.CG_TYPED_MODEL__OWNING_TRANSFORMATION);
 		}
-		return typedModels;
+		return ownedTypedModels;
 	}
 
 	/**
@@ -117,10 +117,10 @@ public class CGTransformationImpl extends CGClassImpl implements CGTransformatio
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_TRANSFORMATION__MAPPINGS:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getMappings()).basicAdd(otherEnd, msgs);
-			case QVTiCGModelPackage.CG_TRANSFORMATION__TYPED_MODELS:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getTypedModels()).basicAdd(otherEnd, msgs);
+			case QVTiCGModelPackage.CG_TRANSFORMATION__OWNED_MAPPINGS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedMappings()).basicAdd(otherEnd, msgs);
+			case QVTiCGModelPackage.CG_TRANSFORMATION__OWNED_TYPED_MODELS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedTypedModels()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -133,10 +133,10 @@ public class CGTransformationImpl extends CGClassImpl implements CGTransformatio
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_TRANSFORMATION__MAPPINGS:
-				return ((InternalEList<?>)getMappings()).basicRemove(otherEnd, msgs);
-			case QVTiCGModelPackage.CG_TRANSFORMATION__TYPED_MODELS:
-				return ((InternalEList<?>)getTypedModels()).basicRemove(otherEnd, msgs);
+			case QVTiCGModelPackage.CG_TRANSFORMATION__OWNED_MAPPINGS:
+				return ((InternalEList<?>)getOwnedMappings()).basicRemove(otherEnd, msgs);
+			case QVTiCGModelPackage.CG_TRANSFORMATION__OWNED_TYPED_MODELS:
+				return ((InternalEList<?>)getOwnedTypedModels()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -149,10 +149,10 @@ public class CGTransformationImpl extends CGClassImpl implements CGTransformatio
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_TRANSFORMATION__MAPPINGS:
-				return getMappings();
-			case QVTiCGModelPackage.CG_TRANSFORMATION__TYPED_MODELS:
-				return getTypedModels();
+			case QVTiCGModelPackage.CG_TRANSFORMATION__OWNED_MAPPINGS:
+				return getOwnedMappings();
+			case QVTiCGModelPackage.CG_TRANSFORMATION__OWNED_TYPED_MODELS:
+				return getOwnedTypedModels();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -166,13 +166,13 @@ public class CGTransformationImpl extends CGClassImpl implements CGTransformatio
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_TRANSFORMATION__MAPPINGS:
-				getMappings().clear();
-				getMappings().addAll((Collection<? extends CGMapping>)newValue);
+			case QVTiCGModelPackage.CG_TRANSFORMATION__OWNED_MAPPINGS:
+				getOwnedMappings().clear();
+				getOwnedMappings().addAll((Collection<? extends CGMapping>)newValue);
 				return;
-			case QVTiCGModelPackage.CG_TRANSFORMATION__TYPED_MODELS:
-				getTypedModels().clear();
-				getTypedModels().addAll((Collection<? extends CGTypedModel>)newValue);
+			case QVTiCGModelPackage.CG_TRANSFORMATION__OWNED_TYPED_MODELS:
+				getOwnedTypedModels().clear();
+				getOwnedTypedModels().addAll((Collection<? extends CGTypedModel>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -186,11 +186,11 @@ public class CGTransformationImpl extends CGClassImpl implements CGTransformatio
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_TRANSFORMATION__MAPPINGS:
-				getMappings().clear();
+			case QVTiCGModelPackage.CG_TRANSFORMATION__OWNED_MAPPINGS:
+				getOwnedMappings().clear();
 				return;
-			case QVTiCGModelPackage.CG_TRANSFORMATION__TYPED_MODELS:
-				getTypedModels().clear();
+			case QVTiCGModelPackage.CG_TRANSFORMATION__OWNED_TYPED_MODELS:
+				getOwnedTypedModels().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -204,10 +204,10 @@ public class CGTransformationImpl extends CGClassImpl implements CGTransformatio
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_TRANSFORMATION__MAPPINGS:
-				return mappings != null && !mappings.isEmpty();
-			case QVTiCGModelPackage.CG_TRANSFORMATION__TYPED_MODELS:
-				return typedModels != null && !typedModels.isEmpty();
+			case QVTiCGModelPackage.CG_TRANSFORMATION__OWNED_MAPPINGS:
+				return ownedMappings != null && !ownedMappings.isEmpty();
+			case QVTiCGModelPackage.CG_TRANSFORMATION__OWNED_TYPED_MODELS:
+				return ownedTypedModels != null && !ownedTypedModels.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

@@ -23,7 +23,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCall#getMappingCallBindings <em>Mapping Call Bindings</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCall#getOwnedMappingCallBindings <em>Owned Mapping Call Bindings</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage#getCGMappingCall()
@@ -33,18 +33,20 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 public interface CGMappingCall extends CGValuedElement {
 
 	/**
-	 * Returns the value of the '<em><b>Mapping Call Bindings</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Owned Mapping Call Bindings</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCallBinding}.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCallBinding#getOwningMappingCall <em>Owning Mapping Call</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Mapping Call Bindings</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Owned Mapping Call Bindings</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Mapping Call Bindings</em>' containment reference list.
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage#getCGMappingCall_MappingCallBindings()
-	 * @model containment="true"
+	 * @return the value of the '<em>Owned Mapping Call Bindings</em>' containment reference list.
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage#getCGMappingCall_OwnedMappingCallBindings()
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCallBinding#getOwningMappingCall
+	 * @model opposite="owningMappingCall" containment="true"
 	 * @generated
 	 */
-	List<CGMappingCallBinding> getMappingCallBindings();
+	List<CGMappingCallBinding> getOwnedMappingCallBindings();
 } // CGMappingCall

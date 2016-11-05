@@ -149,31 +149,31 @@ public interface QVTiCGModelPackage extends EPackage {
 	int CG_CONNECTION_ASSIGNMENT__OWNS = CGModelPackage.CG_VALUED_ELEMENT__OWNS;
 
 	/**
-	 * The feature id for the '<em><b>Owning Mapping</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONNECTION_ASSIGNMENT__OWNING_MAPPING = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Init Value</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_CONNECTION_ASSIGNMENT__INIT_VALUE = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
 	 * The feature id for the '<em><b>Connection Variable</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CG_CONNECTION_ASSIGNMENT__CONNECTION_VARIABLE = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 2;
+	int CG_CONNECTION_ASSIGNMENT__CONNECTION_VARIABLE = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Owned Init Value</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_CONNECTION_ASSIGNMENT__OWNED_INIT_VALUE = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Owning Mapping</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_CONNECTION_ASSIGNMENT__OWNING_MAPPING = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>CG Connection Assignment</em>' class.
@@ -693,13 +693,31 @@ public interface QVTiCGModelPackage extends EPackage {
 	int CG_PROPERTY_ASSIGNMENT__OWNS = CGModelPackage.CG_VALUED_ELEMENT__OWNS;
 
 	/**
-	 * The feature id for the '<em><b>Slot Value</b></em>' containment reference.
+	 * The feature id for the '<em><b>Executor Property</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CG_PROPERTY_ASSIGNMENT__SLOT_VALUE = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 0;
+	int CG_PROPERTY_ASSIGNMENT__EXECUTOR_PROPERTY = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Owned Init Value</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_PROPERTY_ASSIGNMENT__OWNED_INIT_VALUE = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Owned Slot Value</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_PROPERTY_ASSIGNMENT__OWNED_SLOT_VALUE = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Owning Mapping</b></em>' container reference.
@@ -708,7 +726,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_PROPERTY_ASSIGNMENT__OWNING_MAPPING = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 1;
+	int CG_PROPERTY_ASSIGNMENT__OWNING_MAPPING = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Referred Property</b></em>' attribute.
@@ -717,25 +735,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_PROPERTY_ASSIGNMENT__REFERRED_PROPERTY = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Init Value</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PROPERTY_ASSIGNMENT__INIT_VALUE = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 3;
-
-	/**
-	 * The feature id for the '<em><b>Executor Property</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_PROPERTY_ASSIGNMENT__EXECUTOR_PROPERTY = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 4;
+	int CG_PROPERTY_ASSIGNMENT__REFERRED_PROPERTY = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>CG Property Assignment</em>' class.
@@ -811,13 +811,31 @@ public interface QVTiCGModelPackage extends EPackage {
 	int CG_ECORE_CONTAINER_ASSIGNMENT__OWNS = CG_PROPERTY_ASSIGNMENT__OWNS;
 
 	/**
-	 * The feature id for the '<em><b>Slot Value</b></em>' containment reference.
+	 * The feature id for the '<em><b>Executor Property</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CG_ECORE_CONTAINER_ASSIGNMENT__SLOT_VALUE = CG_PROPERTY_ASSIGNMENT__SLOT_VALUE;
+	int CG_ECORE_CONTAINER_ASSIGNMENT__EXECUTOR_PROPERTY = CG_PROPERTY_ASSIGNMENT__EXECUTOR_PROPERTY;
+
+	/**
+	 * The feature id for the '<em><b>Owned Init Value</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_ECORE_CONTAINER_ASSIGNMENT__OWNED_INIT_VALUE = CG_PROPERTY_ASSIGNMENT__OWNED_INIT_VALUE;
+
+	/**
+	 * The feature id for the '<em><b>Owned Slot Value</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_ECORE_CONTAINER_ASSIGNMENT__OWNED_SLOT_VALUE = CG_PROPERTY_ASSIGNMENT__OWNED_SLOT_VALUE;
 
 	/**
 	 * The feature id for the '<em><b>Owning Mapping</b></em>' container reference.
@@ -836,24 +854,6 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_ECORE_CONTAINER_ASSIGNMENT__REFERRED_PROPERTY = CG_PROPERTY_ASSIGNMENT__REFERRED_PROPERTY;
-
-	/**
-	 * The feature id for the '<em><b>Init Value</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_CONTAINER_ASSIGNMENT__INIT_VALUE = CG_PROPERTY_ASSIGNMENT__INIT_VALUE;
-
-	/**
-	 * The feature id for the '<em><b>Executor Property</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_CONTAINER_ASSIGNMENT__EXECUTOR_PROPERTY = CG_PROPERTY_ASSIGNMENT__EXECUTOR_PROPERTY;
 
 	/**
 	 * The feature id for the '<em><b>EStructural Feature</b></em>' reference.
@@ -928,13 +928,31 @@ public interface QVTiCGModelPackage extends EPackage {
 	int CG_ECORE_PROPERTY_ASSIGNMENT__OWNS = CG_PROPERTY_ASSIGNMENT__OWNS;
 
 	/**
-	 * The feature id for the '<em><b>Slot Value</b></em>' containment reference.
+	 * The feature id for the '<em><b>Executor Property</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CG_ECORE_PROPERTY_ASSIGNMENT__SLOT_VALUE = CG_PROPERTY_ASSIGNMENT__SLOT_VALUE;
+	int CG_ECORE_PROPERTY_ASSIGNMENT__EXECUTOR_PROPERTY = CG_PROPERTY_ASSIGNMENT__EXECUTOR_PROPERTY;
+
+	/**
+	 * The feature id for the '<em><b>Owned Init Value</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_ECORE_PROPERTY_ASSIGNMENT__OWNED_INIT_VALUE = CG_PROPERTY_ASSIGNMENT__OWNED_INIT_VALUE;
+
+	/**
+	 * The feature id for the '<em><b>Owned Slot Value</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_ECORE_PROPERTY_ASSIGNMENT__OWNED_SLOT_VALUE = CG_PROPERTY_ASSIGNMENT__OWNED_SLOT_VALUE;
 
 	/**
 	 * The feature id for the '<em><b>Owning Mapping</b></em>' container reference.
@@ -953,24 +971,6 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_ECORE_PROPERTY_ASSIGNMENT__REFERRED_PROPERTY = CG_PROPERTY_ASSIGNMENT__REFERRED_PROPERTY;
-
-	/**
-	 * The feature id for the '<em><b>Init Value</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_PROPERTY_ASSIGNMENT__INIT_VALUE = CG_PROPERTY_ASSIGNMENT__INIT_VALUE;
-
-	/**
-	 * The feature id for the '<em><b>Executor Property</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_ECORE_PROPERTY_ASSIGNMENT__EXECUTOR_PROPERTY = CG_PROPERTY_ASSIGNMENT__EXECUTOR_PROPERTY;
 
 	/**
 	 * The feature id for the '<em><b>EStructural Feature</b></em>' reference.
@@ -1531,22 +1531,22 @@ public interface QVTiCGModelPackage extends EPackage {
 	int CG_MAPPING__NAME = CGModelPackage.CG_NAMED_ELEMENT__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Body</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_MAPPING__BODY = CGModelPackage.CG_NAMED_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Owned Assignments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CG_MAPPING__OWNED_ASSIGNMENTS = CGModelPackage.CG_NAMED_ELEMENT_FEATURE_COUNT + 1;
+	int CG_MAPPING__OWNED_ASSIGNMENTS = CGModelPackage.CG_NAMED_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Owned Body</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_MAPPING__OWNED_BODY = CGModelPackage.CG_NAMED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Owned Connection Assignments</b></em>' containment reference list.
@@ -1657,13 +1657,13 @@ public interface QVTiCGModelPackage extends EPackage {
 	int CG_MAPPING_CALL__OWNS = CGModelPackage.CG_VALUED_ELEMENT__OWNS;
 
 	/**
-	 * The feature id for the '<em><b>Mapping Call Bindings</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Mapping Call Bindings</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CG_MAPPING_CALL__MAPPING_CALL_BINDINGS = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 0;
+	int CG_MAPPING_CALL__OWNED_MAPPING_CALL_BINDINGS = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>CG Mapping Call</em>' class.
@@ -1729,13 +1729,22 @@ public interface QVTiCGModelPackage extends EPackage {
 	int CG_MAPPING_CALL_BINDING__OWNS = CGModelPackage.CG_VALUED_ELEMENT__OWNS;
 
 	/**
-	 * The feature id for the '<em><b>Value</b></em>' containment reference.
+	 * The feature id for the '<em><b>Owned Value</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CG_MAPPING_CALL_BINDING__VALUE = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 0;
+	int CG_MAPPING_CALL_BINDING__OWNED_VALUE = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Owning Mapping Call</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_MAPPING_CALL_BINDING__OWNING_MAPPING_CALL = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>CG Mapping Call Binding</em>' class.
@@ -1744,7 +1753,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_MAPPING_CALL_BINDING_FEATURE_COUNT = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 1;
+	int CG_MAPPING_CALL_BINDING_FEATURE_COUNT = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGMappingExpImpl <em>CG Mapping Exp</em>}' class.
@@ -1811,22 +1820,22 @@ public interface QVTiCGModelPackage extends EPackage {
 	int CG_MAPPING_EXP__OWNS = CGModelPackage.CG_VALUED_ELEMENT__OWNS;
 
 	/**
-	 * The feature id for the '<em><b>Body</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_MAPPING_EXP__BODY = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Owned Accumulators</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CG_MAPPING_EXP__OWNED_ACCUMULATORS = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 1;
+	int CG_MAPPING_EXP__OWNED_ACCUMULATORS = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Owned Body</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_MAPPING_EXP__OWNED_BODY = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>CG Mapping Exp</em>' class.
@@ -2029,13 +2038,31 @@ public interface QVTiCGModelPackage extends EPackage {
 	int CG_MIDDLE_PROPERTY_ASSIGNMENT__OWNS = CG_ECORE_PROPERTY_ASSIGNMENT__OWNS;
 
 	/**
-	 * The feature id for the '<em><b>Slot Value</b></em>' containment reference.
+	 * The feature id for the '<em><b>Executor Property</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CG_MIDDLE_PROPERTY_ASSIGNMENT__SLOT_VALUE = CG_ECORE_PROPERTY_ASSIGNMENT__SLOT_VALUE;
+	int CG_MIDDLE_PROPERTY_ASSIGNMENT__EXECUTOR_PROPERTY = CG_ECORE_PROPERTY_ASSIGNMENT__EXECUTOR_PROPERTY;
+
+	/**
+	 * The feature id for the '<em><b>Owned Init Value</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_MIDDLE_PROPERTY_ASSIGNMENT__OWNED_INIT_VALUE = CG_ECORE_PROPERTY_ASSIGNMENT__OWNED_INIT_VALUE;
+
+	/**
+	 * The feature id for the '<em><b>Owned Slot Value</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_MIDDLE_PROPERTY_ASSIGNMENT__OWNED_SLOT_VALUE = CG_ECORE_PROPERTY_ASSIGNMENT__OWNED_SLOT_VALUE;
 
 	/**
 	 * The feature id for the '<em><b>Owning Mapping</b></em>' container reference.
@@ -2054,24 +2081,6 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_MIDDLE_PROPERTY_ASSIGNMENT__REFERRED_PROPERTY = CG_ECORE_PROPERTY_ASSIGNMENT__REFERRED_PROPERTY;
-
-	/**
-	 * The feature id for the '<em><b>Init Value</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_MIDDLE_PROPERTY_ASSIGNMENT__INIT_VALUE = CG_ECORE_PROPERTY_ASSIGNMENT__INIT_VALUE;
-
-	/**
-	 * The feature id for the '<em><b>Executor Property</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_MIDDLE_PROPERTY_ASSIGNMENT__EXECUTOR_PROPERTY = CG_ECORE_PROPERTY_ASSIGNMENT__EXECUTOR_PROPERTY;
 
 	/**
 	 * The feature id for the '<em><b>EStructural Feature</b></em>' reference.
@@ -2265,13 +2274,13 @@ public interface QVTiCGModelPackage extends EPackage {
 	int CG_SEQUENCE__OWNS = CGModelPackage.CG_VALUED_ELEMENT__OWNS;
 
 	/**
-	 * The feature id for the '<em><b>Statements</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Statements</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CG_SEQUENCE__STATEMENTS = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 0;
+	int CG_SEQUENCE__OWNED_STATEMENTS = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>CG Sequence</em>' class.
@@ -2382,22 +2391,22 @@ public interface QVTiCGModelPackage extends EPackage {
 	int CG_TRANSFORMATION__CONTAINING_CLASS = CGModelPackage.CG_CLASS__CONTAINING_CLASS;
 
 	/**
-	 * The feature id for the '<em><b>Mappings</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Mappings</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CG_TRANSFORMATION__MAPPINGS = CGModelPackage.CG_CLASS_FEATURE_COUNT + 0;
+	int CG_TRANSFORMATION__OWNED_MAPPINGS = CGModelPackage.CG_CLASS_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Typed Models</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Typed Models</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CG_TRANSFORMATION__TYPED_MODELS = CGModelPackage.CG_CLASS_FEATURE_COUNT + 1;
+	int CG_TRANSFORMATION__OWNED_TYPED_MODELS = CGModelPackage.CG_CLASS_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>CG Transformation</em>' class.
@@ -2437,22 +2446,22 @@ public interface QVTiCGModelPackage extends EPackage {
 	int CG_TYPED_MODEL__NAME = CGModelPackage.CG_NAMED_ELEMENT__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Transformation</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_TYPED_MODEL__TRANSFORMATION = CGModelPackage.CG_NAMED_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Model Index</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CG_TYPED_MODEL__MODEL_INDEX = CGModelPackage.CG_NAMED_ELEMENT_FEATURE_COUNT + 1;
+	int CG_TYPED_MODEL__MODEL_INDEX = CGModelPackage.CG_NAMED_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Owning Transformation</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_TYPED_MODEL__OWNING_TRANSFORMATION = CGModelPackage.CG_NAMED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>CG Typed Model</em>' class.
@@ -2485,17 +2494,6 @@ public interface QVTiCGModelPackage extends EPackage {
 	EReference getCGConnectionAssignment_OwningMapping();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionAssignment#getInitValue <em>Init Value</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Init Value</em>'.
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionAssignment#getInitValue()
-	 * @see #getCGConnectionAssignment()
-	 * @generated
-	 */
-	EReference getCGConnectionAssignment_InitValue();
-
-	/**
 	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionAssignment#getConnectionVariable <em>Connection Variable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2505,6 +2503,17 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getCGConnectionAssignment_ConnectionVariable();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionAssignment#getOwnedInitValue <em>Owned Init Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Owned Init Value</em>'.
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionAssignment#getOwnedInitValue()
+	 * @see #getCGConnectionAssignment()
+	 * @generated
+	 */
+	EReference getCGConnectionAssignment_OwnedInitValue();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionVariable <em>CG Connection Variable</em>}'.
@@ -2548,17 +2557,6 @@ public interface QVTiCGModelPackage extends EPackage {
 	EClass getCGPropertyAssignment();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment#getSlotValue <em>Slot Value</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Slot Value</em>'.
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment#getSlotValue()
-	 * @see #getCGPropertyAssignment()
-	 * @generated
-	 */
-	EReference getCGPropertyAssignment_SlotValue();
-
-	/**
 	 * Returns the meta object for the container reference '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment#getOwningMapping <em>Owning Mapping</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2581,17 +2579,6 @@ public interface QVTiCGModelPackage extends EPackage {
 	EAttribute getCGPropertyAssignment_ReferredProperty();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment#getInitValue <em>Init Value</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Init Value</em>'.
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment#getInitValue()
-	 * @see #getCGPropertyAssignment()
-	 * @generated
-	 */
-	EReference getCGPropertyAssignment_InitValue();
-
-	/**
 	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment#getExecutorProperty <em>Executor Property</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2601,6 +2588,28 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getCGPropertyAssignment_ExecutorProperty();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment#getOwnedInitValue <em>Owned Init Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Owned Init Value</em>'.
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment#getOwnedInitValue()
+	 * @see #getCGPropertyAssignment()
+	 * @generated
+	 */
+	EReference getCGPropertyAssignment_OwnedInitValue();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment#getOwnedSlotValue <em>Owned Slot Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Owned Slot Value</em>'.
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment#getOwnedSlotValue()
+	 * @see #getCGPropertyAssignment()
+	 * @generated
+	 */
+	EReference getCGPropertyAssignment_OwnedSlotValue();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMapping <em>CG Mapping</em>}'.
@@ -2613,17 +2622,6 @@ public interface QVTiCGModelPackage extends EPackage {
 	EClass getCGMapping();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMapping#getBody <em>Body</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Body</em>'.
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGMapping#getBody()
-	 * @see #getCGMapping()
-	 * @generated
-	 */
-	EReference getCGMapping_Body();
-
-	/**
 	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMapping#getOwnedAssignments <em>Owned Assignments</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2633,6 +2631,17 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getCGMapping_OwnedAssignments();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMapping#getOwnedBody <em>Owned Body</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Owned Body</em>'.
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGMapping#getOwnedBody()
+	 * @see #getCGMapping()
+	 * @generated
+	 */
+	EReference getCGMapping_OwnedBody();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMapping#getOwnedConnectionAssignments <em>Owned Connection Assignments</em>}'.
@@ -2700,26 +2709,26 @@ public interface QVTiCGModelPackage extends EPackage {
 	EClass getCGTransformation();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation#getMappings <em>Mappings</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation#getOwnedMappings <em>Owned Mappings</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Mappings</em>'.
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation#getMappings()
+	 * @return the meta object for the containment reference list '<em>Owned Mappings</em>'.
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation#getOwnedMappings()
 	 * @see #getCGTransformation()
 	 * @generated
 	 */
-	EReference getCGTransformation_Mappings();
+	EReference getCGTransformation_OwnedMappings();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation#getTypedModels <em>Typed Models</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation#getOwnedTypedModels <em>Owned Typed Models</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Typed Models</em>'.
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation#getTypedModels()
+	 * @return the meta object for the containment reference list '<em>Owned Typed Models</em>'.
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation#getOwnedTypedModels()
 	 * @see #getCGTransformation()
 	 * @generated
 	 */
-	EReference getCGTransformation_TypedModels();
+	EReference getCGTransformation_OwnedTypedModels();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel <em>CG Typed Model</em>}'.
@@ -2730,17 +2739,6 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getCGTypedModel();
-
-	/**
-	 * Returns the meta object for the container reference '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel#getTransformation <em>Transformation</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Transformation</em>'.
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel#getTransformation()
-	 * @see #getCGTypedModel()
-	 * @generated
-	 */
-	EReference getCGTypedModel_Transformation();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel#getModelIndex <em>Model Index</em>}'.
@@ -2754,6 +2752,17 @@ public interface QVTiCGModelPackage extends EPackage {
 	EAttribute getCGTypedModel_ModelIndex();
 
 	/**
+	 * Returns the meta object for the container reference '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel#getOwningTransformation <em>Owning Transformation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Owning Transformation</em>'.
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel#getOwningTransformation()
+	 * @see #getCGTypedModel()
+	 * @generated
+	 */
+	EReference getCGTypedModel_OwningTransformation();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCall <em>CG Mapping Call</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2764,15 +2773,15 @@ public interface QVTiCGModelPackage extends EPackage {
 	EClass getCGMappingCall();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCall#getMappingCallBindings <em>Mapping Call Bindings</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCall#getOwnedMappingCallBindings <em>Owned Mapping Call Bindings</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Mapping Call Bindings</em>'.
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCall#getMappingCallBindings()
+	 * @return the meta object for the containment reference list '<em>Owned Mapping Call Bindings</em>'.
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCall#getOwnedMappingCallBindings()
 	 * @see #getCGMappingCall()
 	 * @generated
 	 */
-	EReference getCGMappingCall_MappingCallBindings();
+	EReference getCGMappingCall_OwnedMappingCallBindings();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCallBinding <em>CG Mapping Call Binding</em>}'.
@@ -2785,15 +2794,26 @@ public interface QVTiCGModelPackage extends EPackage {
 	EClass getCGMappingCallBinding();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCallBinding#getValue <em>Value</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCallBinding#getOwnedValue <em>Owned Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Value</em>'.
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCallBinding#getValue()
+	 * @return the meta object for the containment reference '<em>Owned Value</em>'.
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCallBinding#getOwnedValue()
 	 * @see #getCGMappingCallBinding()
 	 * @generated
 	 */
-	EReference getCGMappingCallBinding_Value();
+	EReference getCGMappingCallBinding_OwnedValue();
+
+	/**
+	 * Returns the meta object for the container reference '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCallBinding#getOwningMappingCall <em>Owning Mapping Call</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Owning Mapping Call</em>'.
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCallBinding#getOwningMappingCall()
+	 * @see #getCGMappingCallBinding()
+	 * @generated
+	 */
+	EReference getCGMappingCallBinding_OwningMappingCall();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp <em>CG Mapping Exp</em>}'.
@@ -2806,17 +2826,6 @@ public interface QVTiCGModelPackage extends EPackage {
 	EClass getCGMappingExp();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp#getBody <em>Body</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Body</em>'.
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp#getBody()
-	 * @see #getCGMappingExp()
-	 * @generated
-	 */
-	EReference getCGMappingExp_Body();
-
-	/**
 	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp#getOwnedAccumulators <em>Owned Accumulators</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2826,6 +2835,17 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getCGMappingExp_OwnedAccumulators();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp#getOwnedBody <em>Owned Body</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Owned Body</em>'.
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp#getOwnedBody()
+	 * @see #getCGMappingExp()
+	 * @generated
+	 */
+	EReference getCGMappingExp_OwnedBody();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMappingLoop <em>CG Mapping Loop</em>}'.
@@ -2889,15 +2909,15 @@ public interface QVTiCGModelPackage extends EPackage {
 	EClass getCGSequence();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGSequence#getStatements <em>Statements</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGSequence#getOwnedStatements <em>Owned Statements</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Statements</em>'.
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGSequence#getStatements()
+	 * @return the meta object for the containment reference list '<em>Owned Statements</em>'.
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGSequence#getOwnedStatements()
 	 * @see #getCGSequence()
 	 * @generated
 	 */
-	EReference getCGSequence_Statements();
+	EReference getCGSequence_OwnedStatements();
 
 	/**
 	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable#getExecutorType <em>Executor Type</em>}'.
@@ -2963,20 +2983,20 @@ public interface QVTiCGModelPackage extends EPackage {
 		EReference CG_CONNECTION_ASSIGNMENT__OWNING_MAPPING = eINSTANCE.getCGConnectionAssignment_OwningMapping();
 
 		/**
-		 * The meta object literal for the '<em><b>Init Value</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference CG_CONNECTION_ASSIGNMENT__INIT_VALUE = eINSTANCE.getCGConnectionAssignment_InitValue();
-
-		/**
 		 * The meta object literal for the '<em><b>Connection Variable</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference CG_CONNECTION_ASSIGNMENT__CONNECTION_VARIABLE = eINSTANCE.getCGConnectionAssignment_ConnectionVariable();
+
+		/**
+		 * The meta object literal for the '<em><b>Owned Init Value</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CG_CONNECTION_ASSIGNMENT__OWNED_INIT_VALUE = eINSTANCE.getCGConnectionAssignment_OwnedInitValue();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGConnectionVariableImpl <em>CG Connection Variable</em>}' class.
@@ -3125,14 +3145,6 @@ public interface QVTiCGModelPackage extends EPackage {
 		EClass CG_PROPERTY_ASSIGNMENT = eINSTANCE.getCGPropertyAssignment();
 
 		/**
-		 * The meta object literal for the '<em><b>Slot Value</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference CG_PROPERTY_ASSIGNMENT__SLOT_VALUE = eINSTANCE.getCGPropertyAssignment_SlotValue();
-
-		/**
 		 * The meta object literal for the '<em><b>Owning Mapping</b></em>' container reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3149,20 +3161,28 @@ public interface QVTiCGModelPackage extends EPackage {
 		EAttribute CG_PROPERTY_ASSIGNMENT__REFERRED_PROPERTY = eINSTANCE.getCGPropertyAssignment_ReferredProperty();
 
 		/**
-		 * The meta object literal for the '<em><b>Init Value</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference CG_PROPERTY_ASSIGNMENT__INIT_VALUE = eINSTANCE.getCGPropertyAssignment_InitValue();
-
-		/**
 		 * The meta object literal for the '<em><b>Executor Property</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference CG_PROPERTY_ASSIGNMENT__EXECUTOR_PROPERTY = eINSTANCE.getCGPropertyAssignment_ExecutorProperty();
+
+		/**
+		 * The meta object literal for the '<em><b>Owned Init Value</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CG_PROPERTY_ASSIGNMENT__OWNED_INIT_VALUE = eINSTANCE.getCGPropertyAssignment_OwnedInitValue();
+
+		/**
+		 * The meta object literal for the '<em><b>Owned Slot Value</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CG_PROPERTY_ASSIGNMENT__OWNED_SLOT_VALUE = eINSTANCE.getCGPropertyAssignment_OwnedSlotValue();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGMappingImpl <em>CG Mapping</em>}' class.
@@ -3175,20 +3195,20 @@ public interface QVTiCGModelPackage extends EPackage {
 		EClass CG_MAPPING = eINSTANCE.getCGMapping();
 
 		/**
-		 * The meta object literal for the '<em><b>Body</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference CG_MAPPING__BODY = eINSTANCE.getCGMapping_Body();
-
-		/**
 		 * The meta object literal for the '<em><b>Owned Assignments</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference CG_MAPPING__OWNED_ASSIGNMENTS = eINSTANCE.getCGMapping_OwnedAssignments();
+
+		/**
+		 * The meta object literal for the '<em><b>Owned Body</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CG_MAPPING__OWNED_BODY = eINSTANCE.getCGMapping_OwnedBody();
 
 		/**
 		 * The meta object literal for the '<em><b>Owned Connection Assignments</b></em>' containment reference list feature.
@@ -3241,20 +3261,20 @@ public interface QVTiCGModelPackage extends EPackage {
 		EClass CG_TRANSFORMATION = eINSTANCE.getCGTransformation();
 
 		/**
-		 * The meta object literal for the '<em><b>Mappings</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Owned Mappings</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference CG_TRANSFORMATION__MAPPINGS = eINSTANCE.getCGTransformation_Mappings();
+		EReference CG_TRANSFORMATION__OWNED_MAPPINGS = eINSTANCE.getCGTransformation_OwnedMappings();
 
 		/**
-		 * The meta object literal for the '<em><b>Typed Models</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Owned Typed Models</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference CG_TRANSFORMATION__TYPED_MODELS = eINSTANCE.getCGTransformation_TypedModels();
+		EReference CG_TRANSFORMATION__OWNED_TYPED_MODELS = eINSTANCE.getCGTransformation_OwnedTypedModels();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGTypedModelImpl <em>CG Typed Model</em>}' class.
@@ -3267,20 +3287,20 @@ public interface QVTiCGModelPackage extends EPackage {
 		EClass CG_TYPED_MODEL = eINSTANCE.getCGTypedModel();
 
 		/**
-		 * The meta object literal for the '<em><b>Transformation</b></em>' container reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference CG_TYPED_MODEL__TRANSFORMATION = eINSTANCE.getCGTypedModel_Transformation();
-
-		/**
 		 * The meta object literal for the '<em><b>Model Index</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EAttribute CG_TYPED_MODEL__MODEL_INDEX = eINSTANCE.getCGTypedModel_ModelIndex();
+
+		/**
+		 * The meta object literal for the '<em><b>Owning Transformation</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CG_TYPED_MODEL__OWNING_TRANSFORMATION = eINSTANCE.getCGTypedModel_OwningTransformation();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGMappingCallImpl <em>CG Mapping Call</em>}' class.
@@ -3293,12 +3313,12 @@ public interface QVTiCGModelPackage extends EPackage {
 		EClass CG_MAPPING_CALL = eINSTANCE.getCGMappingCall();
 
 		/**
-		 * The meta object literal for the '<em><b>Mapping Call Bindings</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Owned Mapping Call Bindings</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference CG_MAPPING_CALL__MAPPING_CALL_BINDINGS = eINSTANCE.getCGMappingCall_MappingCallBindings();
+		EReference CG_MAPPING_CALL__OWNED_MAPPING_CALL_BINDINGS = eINSTANCE.getCGMappingCall_OwnedMappingCallBindings();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGMappingCallBindingImpl <em>CG Mapping Call Binding</em>}' class.
@@ -3311,12 +3331,20 @@ public interface QVTiCGModelPackage extends EPackage {
 		EClass CG_MAPPING_CALL_BINDING = eINSTANCE.getCGMappingCallBinding();
 
 		/**
-		 * The meta object literal for the '<em><b>Value</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Owned Value</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference CG_MAPPING_CALL_BINDING__VALUE = eINSTANCE.getCGMappingCallBinding_Value();
+		EReference CG_MAPPING_CALL_BINDING__OWNED_VALUE = eINSTANCE.getCGMappingCallBinding_OwnedValue();
+
+		/**
+		 * The meta object literal for the '<em><b>Owning Mapping Call</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CG_MAPPING_CALL_BINDING__OWNING_MAPPING_CALL = eINSTANCE.getCGMappingCallBinding_OwningMappingCall();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGMappingExpImpl <em>CG Mapping Exp</em>}' class.
@@ -3329,20 +3357,20 @@ public interface QVTiCGModelPackage extends EPackage {
 		EClass CG_MAPPING_EXP = eINSTANCE.getCGMappingExp();
 
 		/**
-		 * The meta object literal for the '<em><b>Body</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference CG_MAPPING_EXP__BODY = eINSTANCE.getCGMappingExp_Body();
-
-		/**
 		 * The meta object literal for the '<em><b>Owned Accumulators</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference CG_MAPPING_EXP__OWNED_ACCUMULATORS = eINSTANCE.getCGMappingExp_OwnedAccumulators();
+
+		/**
+		 * The meta object literal for the '<em><b>Owned Body</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CG_MAPPING_EXP__OWNED_BODY = eINSTANCE.getCGMappingExp_OwnedBody();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGMappingLoopImpl <em>CG Mapping Loop</em>}' class.
@@ -3403,12 +3431,12 @@ public interface QVTiCGModelPackage extends EPackage {
 		EClass CG_SEQUENCE = eINSTANCE.getCGSequence();
 
 		/**
-		 * The meta object literal for the '<em><b>Statements</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Owned Statements</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference CG_SEQUENCE__STATEMENTS = eINSTANCE.getCGSequence_Statements();
+		EReference CG_SEQUENCE__OWNED_STATEMENTS = eINSTANCE.getCGSequence_OwnedStatements();
 
 		/**
 		 * The meta object literal for the '<em><b>Executor Type</b></em>' reference feature.

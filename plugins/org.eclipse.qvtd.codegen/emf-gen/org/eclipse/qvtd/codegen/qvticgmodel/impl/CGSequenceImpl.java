@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
@@ -45,22 +45,21 @@ import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGSequenceImpl#getStatements <em>Statements</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGSequenceImpl#getOwnedStatements <em>Owned Statements</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class CGSequenceImpl extends CGValuedElementImpl implements CGSequence {
 	/**
-	 * The cached value of the '{@link #getStatements() <em>Statements</em>}' containment reference list.
+	 * The cached value of the '{@link #getOwnedStatements() <em>Owned Statements</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getStatements()
+	 * @see #getOwnedStatements()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<CGValuedElement> statements;
-
+	protected EList<CGValuedElement> ownedStatements;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -86,11 +85,11 @@ public class CGSequenceImpl extends CGValuedElementImpl implements CGSequence {
 	 * @generated
 	 */
 	@Override
-	public List<CGValuedElement> getStatements() {
-		if (statements == null) {
-			statements = new EObjectContainmentEList<CGValuedElement>(CGValuedElement.class, this, QVTiCGModelPackage.CG_SEQUENCE__STATEMENTS);
+	public List<CGValuedElement> getOwnedStatements() {
+		if (ownedStatements == null) {
+			ownedStatements = new EObjectContainmentEList<CGValuedElement>(CGValuedElement.class, this, QVTiCGModelPackage.CG_SEQUENCE__OWNED_STATEMENTS);
 		}
-		return statements;
+		return ownedStatements;
 	}
 
 	/**
@@ -101,8 +100,8 @@ public class CGSequenceImpl extends CGValuedElementImpl implements CGSequence {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_SEQUENCE__STATEMENTS:
-				return ((InternalEList<?>)getStatements()).basicRemove(otherEnd, msgs);
+			case QVTiCGModelPackage.CG_SEQUENCE__OWNED_STATEMENTS:
+				return ((InternalEList<?>)getOwnedStatements()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -115,8 +114,8 @@ public class CGSequenceImpl extends CGValuedElementImpl implements CGSequence {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_SEQUENCE__STATEMENTS:
-				return getStatements();
+			case QVTiCGModelPackage.CG_SEQUENCE__OWNED_STATEMENTS:
+				return getOwnedStatements();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -130,9 +129,9 @@ public class CGSequenceImpl extends CGValuedElementImpl implements CGSequence {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_SEQUENCE__STATEMENTS:
-				getStatements().clear();
-				getStatements().addAll((Collection<? extends CGValuedElement>)newValue);
+			case QVTiCGModelPackage.CG_SEQUENCE__OWNED_STATEMENTS:
+				getOwnedStatements().clear();
+				getOwnedStatements().addAll((Collection<? extends CGValuedElement>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -146,8 +145,8 @@ public class CGSequenceImpl extends CGValuedElementImpl implements CGSequence {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_SEQUENCE__STATEMENTS:
-				getStatements().clear();
+			case QVTiCGModelPackage.CG_SEQUENCE__OWNED_STATEMENTS:
+				getOwnedStatements().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -161,8 +160,8 @@ public class CGSequenceImpl extends CGValuedElementImpl implements CGSequence {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_SEQUENCE__STATEMENTS:
-				return statements != null && !statements.isEmpty();
+			case QVTiCGModelPackage.CG_SEQUENCE__OWNED_STATEMENTS:
+				return ownedStatements != null && !ownedStatements.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

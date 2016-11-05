@@ -48,8 +48,8 @@ import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGMappingImpl#getBody <em>Body</em>}</li>
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGMappingImpl#getOwnedAssignments <em>Owned Assignments</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGMappingImpl#getOwnedBody <em>Owned Body</em>}</li>
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGMappingImpl#getOwnedConnectionAssignments <em>Owned Connection Assignments</em>}</li>
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGMappingImpl#getOwnedGuardVariables <em>Owned Guard Variables</em>}</li>
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGMappingImpl#getOwnedRealizedVariables <em>Owned Realized Variables</em>}</li>
@@ -61,16 +61,6 @@ import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
  */
 public class CGMappingImpl extends CGNamedElementImpl implements CGMapping {
 	/**
-	 * The cached value of the '{@link #getBody() <em>Body</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getBody()
-	 * @generated
-	 * @ordered
-	 */
-	protected CGValuedElement body;
-
-	/**
 	 * The cached value of the '{@link #getOwnedAssignments() <em>Owned Assignments</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -79,6 +69,16 @@ public class CGMappingImpl extends CGNamedElementImpl implements CGMapping {
 	 * @ordered
 	 */
 	protected EList<CGPropertyAssignment> ownedAssignments;
+
+	/**
+	 * The cached value of the '{@link #getOwnedBody() <em>Owned Body</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOwnedBody()
+	 * @generated
+	 * @ordered
+	 */
+	protected CGValuedElement ownedBody;
 
 	/**
 	 * The cached value of the '{@link #getOwnedConnectionAssignments() <em>Owned Connection Assignments</em>}' containment reference list.
@@ -155,8 +155,11 @@ public class CGMappingImpl extends CGNamedElementImpl implements CGMapping {
 	 * @generated
 	 */
 	@Override
-	public CGValuedElement getBody() {
-		return body;
+	public List<CGPropertyAssignment> getOwnedAssignments() {
+		if (ownedAssignments == null) {
+			ownedAssignments = new EObjectContainmentWithInverseEList<CGPropertyAssignment>(CGPropertyAssignment.class, this, QVTiCGModelPackage.CG_MAPPING__OWNED_ASSIGNMENTS, QVTiCGModelPackage.CG_PROPERTY_ASSIGNMENT__OWNING_MAPPING);
+		}
+		return ownedAssignments;
 	}
 
 	/**
@@ -164,11 +167,21 @@ public class CGMappingImpl extends CGNamedElementImpl implements CGMapping {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetBody(CGValuedElement newBody, NotificationChain msgs) {
-		CGValuedElement oldBody = body;
-		body = newBody;
+	@Override
+	public CGValuedElement getOwnedBody() {
+		return ownedBody;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetOwnedBody(CGValuedElement newOwnedBody, NotificationChain msgs) {
+		CGValuedElement oldOwnedBody = ownedBody;
+		ownedBody = newOwnedBody;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTiCGModelPackage.CG_MAPPING__BODY, oldBody, newBody);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTiCGModelPackage.CG_MAPPING__OWNED_BODY, oldOwnedBody, newOwnedBody);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -180,31 +193,18 @@ public class CGMappingImpl extends CGNamedElementImpl implements CGMapping {
 	 * @generated
 	 */
 	@Override
-	public void setBody(CGValuedElement newBody) {
-		if (newBody != body) {
+	public void setOwnedBody(CGValuedElement newOwnedBody) {
+		if (newOwnedBody != ownedBody) {
 			NotificationChain msgs = null;
-			if (body != null)
-				msgs = ((InternalEObject)body).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTiCGModelPackage.CG_MAPPING__BODY, null, msgs);
-			if (newBody != null)
-				msgs = ((InternalEObject)newBody).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTiCGModelPackage.CG_MAPPING__BODY, null, msgs);
-			msgs = basicSetBody(newBody, msgs);
+			if (ownedBody != null)
+				msgs = ((InternalEObject)ownedBody).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTiCGModelPackage.CG_MAPPING__OWNED_BODY, null, msgs);
+			if (newOwnedBody != null)
+				msgs = ((InternalEObject)newOwnedBody).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTiCGModelPackage.CG_MAPPING__OWNED_BODY, null, msgs);
+			msgs = basicSetOwnedBody(newOwnedBody, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTiCGModelPackage.CG_MAPPING__BODY, newBody, newBody));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public List<CGPropertyAssignment> getOwnedAssignments() {
-		if (ownedAssignments == null) {
-			ownedAssignments = new EObjectContainmentWithInverseEList<CGPropertyAssignment>(CGPropertyAssignment.class, this, QVTiCGModelPackage.CG_MAPPING__OWNED_ASSIGNMENTS, QVTiCGModelPackage.CG_PROPERTY_ASSIGNMENT__OWNING_MAPPING);
-		}
-		return ownedAssignments;
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTiCGModelPackage.CG_MAPPING__OWNED_BODY, newOwnedBody, newOwnedBody));
 	}
 
 	/**
@@ -281,7 +281,7 @@ public class CGMappingImpl extends CGNamedElementImpl implements CGMapping {
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newOwningTransformation != null)
-				msgs = ((InternalEObject)newOwningTransformation).eInverseAdd(this, QVTiCGModelPackage.CG_TRANSFORMATION__MAPPINGS, CGTransformation.class, msgs);
+				msgs = ((InternalEObject)newOwningTransformation).eInverseAdd(this, QVTiCGModelPackage.CG_TRANSFORMATION__OWNED_MAPPINGS, CGTransformation.class, msgs);
 			msgs = basicSetOwningTransformation(newOwningTransformation, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
@@ -355,10 +355,10 @@ public class CGMappingImpl extends CGNamedElementImpl implements CGMapping {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_MAPPING__BODY:
-				return basicSetBody(null, msgs);
 			case QVTiCGModelPackage.CG_MAPPING__OWNED_ASSIGNMENTS:
 				return ((InternalEList<?>)getOwnedAssignments()).basicRemove(otherEnd, msgs);
+			case QVTiCGModelPackage.CG_MAPPING__OWNED_BODY:
+				return basicSetOwnedBody(null, msgs);
 			case QVTiCGModelPackage.CG_MAPPING__OWNED_CONNECTION_ASSIGNMENTS:
 				return ((InternalEList<?>)getOwnedConnectionAssignments()).basicRemove(otherEnd, msgs);
 			case QVTiCGModelPackage.CG_MAPPING__OWNED_GUARD_VARIABLES:
@@ -380,7 +380,7 @@ public class CGMappingImpl extends CGNamedElementImpl implements CGMapping {
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
 			case QVTiCGModelPackage.CG_MAPPING__OWNING_TRANSFORMATION:
-				return eInternalContainer().eInverseRemove(this, QVTiCGModelPackage.CG_TRANSFORMATION__MAPPINGS, CGTransformation.class, msgs);
+				return eInternalContainer().eInverseRemove(this, QVTiCGModelPackage.CG_TRANSFORMATION__OWNED_MAPPINGS, CGTransformation.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -393,10 +393,10 @@ public class CGMappingImpl extends CGNamedElementImpl implements CGMapping {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_MAPPING__BODY:
-				return getBody();
 			case QVTiCGModelPackage.CG_MAPPING__OWNED_ASSIGNMENTS:
 				return getOwnedAssignments();
+			case QVTiCGModelPackage.CG_MAPPING__OWNED_BODY:
+				return getOwnedBody();
 			case QVTiCGModelPackage.CG_MAPPING__OWNED_CONNECTION_ASSIGNMENTS:
 				return getOwnedConnectionAssignments();
 			case QVTiCGModelPackage.CG_MAPPING__OWNED_GUARD_VARIABLES:
@@ -420,12 +420,12 @@ public class CGMappingImpl extends CGNamedElementImpl implements CGMapping {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_MAPPING__BODY:
-				setBody((CGValuedElement)newValue);
-				return;
 			case QVTiCGModelPackage.CG_MAPPING__OWNED_ASSIGNMENTS:
 				getOwnedAssignments().clear();
 				getOwnedAssignments().addAll((Collection<? extends CGPropertyAssignment>)newValue);
+				return;
+			case QVTiCGModelPackage.CG_MAPPING__OWNED_BODY:
+				setOwnedBody((CGValuedElement)newValue);
 				return;
 			case QVTiCGModelPackage.CG_MAPPING__OWNED_CONNECTION_ASSIGNMENTS:
 				getOwnedConnectionAssignments().clear();
@@ -457,11 +457,11 @@ public class CGMappingImpl extends CGNamedElementImpl implements CGMapping {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_MAPPING__BODY:
-				setBody((CGValuedElement)null);
-				return;
 			case QVTiCGModelPackage.CG_MAPPING__OWNED_ASSIGNMENTS:
 				getOwnedAssignments().clear();
+				return;
+			case QVTiCGModelPackage.CG_MAPPING__OWNED_BODY:
+				setOwnedBody((CGValuedElement)null);
 				return;
 			case QVTiCGModelPackage.CG_MAPPING__OWNED_CONNECTION_ASSIGNMENTS:
 				getOwnedConnectionAssignments().clear();
@@ -490,10 +490,10 @@ public class CGMappingImpl extends CGNamedElementImpl implements CGMapping {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_MAPPING__BODY:
-				return body != null;
 			case QVTiCGModelPackage.CG_MAPPING__OWNED_ASSIGNMENTS:
 				return ownedAssignments != null && !ownedAssignments.isEmpty();
+			case QVTiCGModelPackage.CG_MAPPING__OWNED_BODY:
+				return ownedBody != null;
 			case QVTiCGModelPackage.CG_MAPPING__OWNED_CONNECTION_ASSIGNMENTS:
 				return ownedConnectionAssignments != null && !ownedConnectionAssignments.isEmpty();
 			case QVTiCGModelPackage.CG_MAPPING__OWNED_GUARD_VARIABLES:

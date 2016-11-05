@@ -40,24 +40,14 @@ import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGConnectionAssignmentImpl#getOwningMapping <em>Owning Mapping</em>}</li>
- *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGConnectionAssignmentImpl#getInitValue <em>Init Value</em>}</li>
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGConnectionAssignmentImpl#getConnectionVariable <em>Connection Variable</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGConnectionAssignmentImpl#getOwnedInitValue <em>Owned Init Value</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGConnectionAssignmentImpl#getOwningMapping <em>Owning Mapping</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class CGConnectionAssignmentImpl extends CGValuedElementImpl implements CGConnectionAssignment {
-	/**
-	 * The cached value of the '{@link #getInitValue() <em>Init Value</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getInitValue()
-	 * @generated
-	 * @ordered
-	 */
-	protected CGValuedElement initValue;
-
 	/**
 	 * The cached value of the '{@link #getConnectionVariable() <em>Connection Variable</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -67,6 +57,16 @@ public class CGConnectionAssignmentImpl extends CGValuedElementImpl implements C
 	 * @ordered
 	 */
 	protected CGVariable connectionVariable;
+
+	/**
+	 * The cached value of the '{@link #getOwnedInitValue() <em>Owned Init Value</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOwnedInitValue()
+	 * @generated
+	 * @ordered
+	 */
+	protected CGValuedElement ownedInitValue;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -136,51 +136,6 @@ public class CGConnectionAssignmentImpl extends CGValuedElementImpl implements C
 	 * @generated
 	 */
 	@Override
-	public CGValuedElement getInitValue() {
-		return initValue;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetInitValue(CGValuedElement newInitValue, NotificationChain msgs) {
-		CGValuedElement oldInitValue = initValue;
-		initValue = newInitValue;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTiCGModelPackage.CG_CONNECTION_ASSIGNMENT__INIT_VALUE, oldInitValue, newInitValue);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setInitValue(CGValuedElement newInitValue) {
-		if (newInitValue != initValue) {
-			NotificationChain msgs = null;
-			if (initValue != null)
-				msgs = ((InternalEObject)initValue).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTiCGModelPackage.CG_CONNECTION_ASSIGNMENT__INIT_VALUE, null, msgs);
-			if (newInitValue != null)
-				msgs = ((InternalEObject)newInitValue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTiCGModelPackage.CG_CONNECTION_ASSIGNMENT__INIT_VALUE, null, msgs);
-			msgs = basicSetInitValue(newInitValue, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTiCGModelPackage.CG_CONNECTION_ASSIGNMENT__INIT_VALUE, newInitValue, newInitValue));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public CGVariable getConnectionVariable() {
 		return connectionVariable;
 	}
@@ -196,6 +151,51 @@ public class CGConnectionAssignmentImpl extends CGValuedElementImpl implements C
 		connectionVariable = newConnectionVariable;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, QVTiCGModelPackage.CG_CONNECTION_ASSIGNMENT__CONNECTION_VARIABLE, oldConnectionVariable, connectionVariable));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public CGValuedElement getOwnedInitValue() {
+		return ownedInitValue;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetOwnedInitValue(CGValuedElement newOwnedInitValue, NotificationChain msgs) {
+		CGValuedElement oldOwnedInitValue = ownedInitValue;
+		ownedInitValue = newOwnedInitValue;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTiCGModelPackage.CG_CONNECTION_ASSIGNMENT__OWNED_INIT_VALUE, oldOwnedInitValue, newOwnedInitValue);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setOwnedInitValue(CGValuedElement newOwnedInitValue) {
+		if (newOwnedInitValue != ownedInitValue) {
+			NotificationChain msgs = null;
+			if (ownedInitValue != null)
+				msgs = ((InternalEObject)ownedInitValue).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTiCGModelPackage.CG_CONNECTION_ASSIGNMENT__OWNED_INIT_VALUE, null, msgs);
+			if (newOwnedInitValue != null)
+				msgs = ((InternalEObject)newOwnedInitValue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTiCGModelPackage.CG_CONNECTION_ASSIGNMENT__OWNED_INIT_VALUE, null, msgs);
+			msgs = basicSetOwnedInitValue(newOwnedInitValue, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTiCGModelPackage.CG_CONNECTION_ASSIGNMENT__OWNED_INIT_VALUE, newOwnedInitValue, newOwnedInitValue));
 	}
 
 	/**
@@ -222,10 +222,10 @@ public class CGConnectionAssignmentImpl extends CGValuedElementImpl implements C
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case QVTiCGModelPackage.CG_CONNECTION_ASSIGNMENT__OWNED_INIT_VALUE:
+				return basicSetOwnedInitValue(null, msgs);
 			case QVTiCGModelPackage.CG_CONNECTION_ASSIGNMENT__OWNING_MAPPING:
 				return basicSetOwningMapping(null, msgs);
-			case QVTiCGModelPackage.CG_CONNECTION_ASSIGNMENT__INIT_VALUE:
-				return basicSetInitValue(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -252,12 +252,12 @@ public class CGConnectionAssignmentImpl extends CGValuedElementImpl implements C
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_CONNECTION_ASSIGNMENT__OWNING_MAPPING:
-				return getOwningMapping();
-			case QVTiCGModelPackage.CG_CONNECTION_ASSIGNMENT__INIT_VALUE:
-				return getInitValue();
 			case QVTiCGModelPackage.CG_CONNECTION_ASSIGNMENT__CONNECTION_VARIABLE:
 				return getConnectionVariable();
+			case QVTiCGModelPackage.CG_CONNECTION_ASSIGNMENT__OWNED_INIT_VALUE:
+				return getOwnedInitValue();
+			case QVTiCGModelPackage.CG_CONNECTION_ASSIGNMENT__OWNING_MAPPING:
+				return getOwningMapping();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -270,14 +270,14 @@ public class CGConnectionAssignmentImpl extends CGValuedElementImpl implements C
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_CONNECTION_ASSIGNMENT__OWNING_MAPPING:
-				setOwningMapping((CGMapping)newValue);
-				return;
-			case QVTiCGModelPackage.CG_CONNECTION_ASSIGNMENT__INIT_VALUE:
-				setInitValue((CGValuedElement)newValue);
-				return;
 			case QVTiCGModelPackage.CG_CONNECTION_ASSIGNMENT__CONNECTION_VARIABLE:
 				setConnectionVariable((CGVariable)newValue);
+				return;
+			case QVTiCGModelPackage.CG_CONNECTION_ASSIGNMENT__OWNED_INIT_VALUE:
+				setOwnedInitValue((CGValuedElement)newValue);
+				return;
+			case QVTiCGModelPackage.CG_CONNECTION_ASSIGNMENT__OWNING_MAPPING:
+				setOwningMapping((CGMapping)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -291,14 +291,14 @@ public class CGConnectionAssignmentImpl extends CGValuedElementImpl implements C
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_CONNECTION_ASSIGNMENT__OWNING_MAPPING:
-				setOwningMapping((CGMapping)null);
-				return;
-			case QVTiCGModelPackage.CG_CONNECTION_ASSIGNMENT__INIT_VALUE:
-				setInitValue((CGValuedElement)null);
-				return;
 			case QVTiCGModelPackage.CG_CONNECTION_ASSIGNMENT__CONNECTION_VARIABLE:
 				setConnectionVariable((CGVariable)null);
+				return;
+			case QVTiCGModelPackage.CG_CONNECTION_ASSIGNMENT__OWNED_INIT_VALUE:
+				setOwnedInitValue((CGValuedElement)null);
+				return;
+			case QVTiCGModelPackage.CG_CONNECTION_ASSIGNMENT__OWNING_MAPPING:
+				setOwningMapping((CGMapping)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -312,12 +312,12 @@ public class CGConnectionAssignmentImpl extends CGValuedElementImpl implements C
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_CONNECTION_ASSIGNMENT__OWNING_MAPPING:
-				return getOwningMapping() != null;
-			case QVTiCGModelPackage.CG_CONNECTION_ASSIGNMENT__INIT_VALUE:
-				return initValue != null;
 			case QVTiCGModelPackage.CG_CONNECTION_ASSIGNMENT__CONNECTION_VARIABLE:
 				return connectionVariable != null;
+			case QVTiCGModelPackage.CG_CONNECTION_ASSIGNMENT__OWNED_INIT_VALUE:
+				return ownedInitValue != null;
+			case QVTiCGModelPackage.CG_CONNECTION_ASSIGNMENT__OWNING_MAPPING:
+				return getOwningMapping() != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -338,7 +338,7 @@ public class CGConnectionAssignmentImpl extends CGValuedElementImpl implements C
 	 */
 	@Override
 	public @Nullable EClassifier getEcoreClassifier() {
-		return initValue != null ? initValue.getEcoreClassifier() : null;
+		return ownedInitValue != null ? ownedInitValue.getEcoreClassifier() : null;
 	}
 
 	/**
@@ -347,7 +347,7 @@ public class CGConnectionAssignmentImpl extends CGValuedElementImpl implements C
 	 */
 	@Override
 	public boolean isBoxed() {
-		return (initValue != null) && initValue.isBoxed();
+		return (ownedInitValue != null) && ownedInitValue.isBoxed();
 	}
 
 	/**
@@ -365,7 +365,7 @@ public class CGConnectionAssignmentImpl extends CGValuedElementImpl implements C
 	 */
 	@Override
 	public boolean isEcore() {
-		return (initValue != null) && initValue.isEcore();
+		return (ownedInitValue != null) && ownedInitValue.isEcore();
 	}
 
 	/**
@@ -392,7 +392,7 @@ public class CGConnectionAssignmentImpl extends CGValuedElementImpl implements C
 	 */
 	@Override
 	public boolean isUnboxed() {
-		return (initValue != null) && initValue.isUnboxed();
+		return (ownedInitValue != null) && ownedInitValue.isUnboxed();
 	}
 
 	/**

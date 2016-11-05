@@ -78,10 +78,10 @@ public class QVTiBoxingAnalyzer extends BoxingAnalyzer implements QVTiCGModelVis
 	public @Nullable Object visitCGEcoreContainerAssignment(@NonNull CGEcoreContainerAssignment cgEcoreContainerAssignment) {
 		EStructuralFeature eStructuralFeature = cgEcoreContainerAssignment.getEStructuralFeature();
 		boolean isRequired = eStructuralFeature.isRequired();
-		rewriteAsEcore(cgEcoreContainerAssignment.getSlotValue(), eStructuralFeature.getEType());
-		rewriteAsEcore(cgEcoreContainerAssignment.getInitValue(), eStructuralFeature.getEContainingClass());
+		rewriteAsEcore(cgEcoreContainerAssignment.getOwnedSlotValue(), eStructuralFeature.getEType());
+		rewriteAsEcore(cgEcoreContainerAssignment.getOwnedInitValue(), eStructuralFeature.getEContainingClass());
 		if (isRequired) {
-			rewriteAsGuarded(cgEcoreContainerAssignment.getSlotValue(), false, "value for " + cgEcoreContainerAssignment.getReferredProperty() + " assignment");
+			rewriteAsGuarded(cgEcoreContainerAssignment.getOwnedSlotValue(), false, "value for " + cgEcoreContainerAssignment.getReferredProperty() + " assignment");
 		}
 		return visitCGPropertyAssignment(cgEcoreContainerAssignment);
 	}
@@ -89,10 +89,10 @@ public class QVTiBoxingAnalyzer extends BoxingAnalyzer implements QVTiCGModelVis
 	@Override
 	public @Nullable Object visitCGEcorePropertyAssignment(@NonNull CGEcorePropertyAssignment cgEcorePropertyAssignment) {
 		EStructuralFeature eStructuralFeature = cgEcorePropertyAssignment.getEStructuralFeature();
-		rewriteAsEcore(cgEcorePropertyAssignment.getSlotValue(), eStructuralFeature.getEContainingClass());
-		rewriteAsEcore(cgEcorePropertyAssignment.getInitValue(), eStructuralFeature.getEType());
+		rewriteAsEcore(cgEcorePropertyAssignment.getOwnedSlotValue(), eStructuralFeature.getEContainingClass());
+		rewriteAsEcore(cgEcorePropertyAssignment.getOwnedInitValue(), eStructuralFeature.getEType());
 		if (eStructuralFeature.isRequired()) {
-			CGValuedElement cgInit = cgEcorePropertyAssignment.getInitValue();
+			CGValuedElement cgInit = cgEcorePropertyAssignment.getOwnedInitValue();
 			TypeDescriptor typeDescriptor = cgInit != null ? codeGenerator.getTypeDescriptor(cgInit) : null;
 			if ((typeDescriptor == null) || !typeDescriptor.isPrimitive()) {
 				rewriteAsGuarded(cgInit, false, "value for " + cgEcorePropertyAssignment.getReferredProperty() + " assignment");
@@ -171,10 +171,10 @@ public class QVTiBoxingAnalyzer extends BoxingAnalyzer implements QVTiCGModelVis
 		}
 		else if (mappingParameterBinding instanceof SimpleParameterBinding) {
 			if (cgMappingCallBinding.isRequired()) {
-				rewriteAsUnboxed(rewriteAsGuarded(cgMappingCallBinding.getValue(), false, "binding for '" + QVTimperativeUtil.getOwningMappingCall(mappingParameterBinding).getReferredMapping().getName() + "::" + boundVariable.getName() + "'"));	// FIXME referred mapping
+				rewriteAsUnboxed(rewriteAsGuarded(cgMappingCallBinding.getOwnedValue(), false, "binding for '" + QVTimperativeUtil.getOwningMappingCall(mappingParameterBinding).getReferredMapping().getName() + "::" + boundVariable.getName() + "'"));	// FIXME referred mapping
 			}
 			else {
-				rewriteAsUnboxed(cgMappingCallBinding.getValue());
+				rewriteAsUnboxed(cgMappingCallBinding.getOwnedValue());
 			}
 			return visitCGValuedElement(cgMappingCallBinding);
 		}
@@ -198,8 +198,8 @@ public class QVTiBoxingAnalyzer extends BoxingAnalyzer implements QVTiCGModelVis
 
 	@Override
 	public @Nullable Object visitCGMiddlePropertyAssignment(@NonNull CGMiddlePropertyAssignment cgMiddlePropertyAssignment) {
-		rewriteAsUnboxed(cgMiddlePropertyAssignment.getSlotValue());
-		rewriteAsUnboxed(cgMiddlePropertyAssignment.getInitValue());
+		rewriteAsUnboxed(cgMiddlePropertyAssignment.getOwnedSlotValue());
+		rewriteAsUnboxed(cgMiddlePropertyAssignment.getOwnedInitValue());
 		return visitCGPropertyAssignment(cgMiddlePropertyAssignment);
 	}
 

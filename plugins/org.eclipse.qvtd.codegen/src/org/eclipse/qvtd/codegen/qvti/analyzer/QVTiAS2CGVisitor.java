@@ -328,8 +328,8 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 			while (cgElementRoot.eContainer() != null) {
 				cgElementRoot = (CGValuedElement) cgElementRoot.eContainer();
 			}
-			if (cgMapping.getBody() == null) {
-				cgMapping.setBody(cgElementRoot);
+			if (cgMapping.getOwnedBody() == null) {
+				cgMapping.setOwnedBody(cgElementRoot);
 			}
 			if (cgLeafExp instanceof CGLetExp) {
 				((CGLetExp)cgLeafExp).setIn(cgElementRoot);
@@ -351,7 +351,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 			Collections.sort(cgFreeVariables, NameUtil.NAMEABLE_COMPARATOR);
 			cgMapping.getOwnedGuardVariables().addAll(cgFreeVariables);
 			CGSequence cgSequence = QVTiCGModelFactory.eINSTANCE.createCGSequence();
-			List<CGValuedElement> cgMappingStatements = cgSequence.getStatements();
+			List<CGValuedElement> cgMappingStatements = cgSequence.getOwnedStatements();
 			for (@NonNull Statement asStatement : ClassUtil.nullFree(asMapping.getOwnedStatements())) {
 				CGNamedElement cgElement = asStatement.accept(QVTiAS2CGVisitor.this);
 				if (cgElement != null) {	// FIXME some statements do a more complex appendSubTree
@@ -359,12 +359,12 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 				}
 			}
 			appendSubTree(cgMappingExp);
-			cgMappingExp.setBody(cgSequence);
+			cgMappingExp.setOwnedBody(cgSequence);
 		}
 
 		@Override
 		public String toString() {
-			return String.valueOf(cgMapping.getBody());
+			return String.valueOf(cgMapping.getOwnedBody());
 		}
 	}
 
@@ -650,7 +650,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 		CGValuedElement initValue = doVisit(CGValuedElement.class, asInitValue);
 		CGConnectionAssignment cgConnectionAssignment = QVTiCGModelFactory.eINSTANCE.createCGConnectionAssignment();
 		cgConnectionAssignment.setConnectionVariable(cgVariable);
-		cgConnectionAssignment.setInitValue(initValue);
+		cgConnectionAssignment.setOwnedInitValue(initValue);
 		cgConnectionAssignment.setTypeId(initValue.getTypeId());
 		cgConnectionAssignment.setRequired(initValue.isRequired());
 		return cgConnectionAssignment;
@@ -677,7 +677,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 		CGVariableExp cgVariableExp = CGModelFactory.eINSTANCE.createCGVariableExp();
 		setAst(cgVariableExp, ClassUtil.nonNullModel(asVariable));
 		cgVariableExp.setReferredVariable(cgVariable);
-		cgMappingCallBinding.setValue(cgVariableExp);
+		cgMappingCallBinding.setOwnedValue(cgVariableExp);
 		cgMappingCallBinding.setTypeId(analyzer.getTypeId(asBoundVariable.getTypeId()));
 		//		cgMappingCallBinding.setValueName(localnameasMappingCallBinding.getBoundVariable().getName());
 		return cgMappingCallBinding;
@@ -899,7 +899,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 		CGVariableExp cgVariableExp = CGModelFactory.eINSTANCE.createCGVariableExp();
 		setAst(cgVariableExp, ClassUtil.nonNullModel(asVariable));
 		cgVariableExp.setReferredVariable(cgVariable);
-		cgMappingCallBinding.setValue(cgVariableExp);
+		cgMappingCallBinding.setOwnedValue(cgVariableExp);
 		cgMappingCallBinding.setTypeId(analyzer.getTypeId(asBoundVariable.getTypeId()));
 		//		cgMappingCallBinding.setValueName(localnameasMappingCallBinding.getBoundVariable().getName());
 		return cgMappingCallBinding;
@@ -916,7 +916,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 		CGTransformation cgTransformation = QVTiCGModelFactory.eINSTANCE.createCGTransformation();
 		setAst(cgTransformation, asTransformation);
 		pushCurrentClass(cgTransformation);
-		List<CGTypedModel> cgTypedModels = cgTransformation.getTypedModels();
+		List<CGTypedModel> cgTypedModels = cgTransformation.getOwnedTypedModels();
 		for (@NonNull ImperativeTypedModel asTypedModel : QVTimperativeUtil.getOwnedTypedModels(asTransformation)) {
 			CGTypedModel cgTypedModel = doVisit(CGTypedModel.class, asTypedModel);
 			cgTypedModel.setModelIndex(cgTypedModels.size());
@@ -925,7 +925,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 		Set<@NonNull Mapping> useClasses = computeUseClases(asTransformation);
 		for (@NonNull Mapping asMapping : QVTimperativeUtil.getOwnedMappings(asTransformation)) {
 			CGMapping cgMapping = doVisit(CGMapping.class, asMapping);
-			cgTransformation.getMappings().add(cgMapping);
+			cgTransformation.getOwnedMappings().add(cgMapping);
 			if (useClasses.contains(asMapping)) {
 				cgMapping.setUseClass(true);
 			}
@@ -960,7 +960,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 		CGVariableExp cgVariableExp = CGModelFactory.eINSTANCE.createCGVariableExp();
 		setAst(cgVariableExp, ClassUtil.nonNullModel(asVariable));
 		cgVariableExp.setReferredVariable(cgVariable);
-		cgMappingCallBinding.setValue(cgVariableExp);
+		cgMappingCallBinding.setOwnedValue(cgVariableExp);
 		cgMappingCallBinding.setTypeId(analyzer.getTypeId(asBoundVariable.getTypeId()));
 		//		cgMappingCallBinding.setValueName(localnameasMappingCallBinding.getBoundVariable().getName());
 		return cgMappingCallBinding;
@@ -999,7 +999,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 			cgMappingCallBindings.add(cgMappingCallBinding);
 		}
 		Collections.sort(cgMappingCallBindings, CGMappingCallBindingComparator.INSTANCE);
-		cgMappingCall.getMappingCallBindings().addAll(cgMappingCallBindings);
+		cgMappingCall.getOwnedMappingCallBindings().addAll(cgMappingCallBindings);
 		return cgMappingCall;
 	}
 
@@ -1027,7 +1027,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 		Operation forAllIteration = NameUtil.getNameable(collectionType.getOwnedOperations(), "forAll");
 		cgMappingLoop.setReferredIteration((Iteration) forAllIteration);
 		CGSequence cgSequence = QVTiCGModelFactory.eINSTANCE.createCGSequence();
-		List<CGValuedElement> cgMappingStatements = cgSequence.getStatements();
+		List<CGValuedElement> cgMappingStatements = cgSequence.getOwnedStatements();
 		for (MappingStatement asMappingStatement : asMappingLoop.getOwnedMappingStatements()) {
 			CGValuedElement cgMappingStatement = doVisit(CGValuedElement.class, asMappingStatement);
 			cgMappingStatements.add(cgMappingStatement);
@@ -1095,13 +1095,13 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 			VariableDeclaration asVariable = asSetStatement.getTargetVariable();
 			assert asVariable != null;
 			CGVariable cgVariable = getVariable(asVariable);
-			cgPropertyAssignment.setSlotValue(analyzer.createCGVariableExp(cgVariable));
+			cgPropertyAssignment.setOwnedSlotValue(analyzer.createCGVariableExp(cgVariable));
 			Property asProperty = QVTimperativeUtil.getTargetProperty(asSetStatement);
 			cgPropertyAssignment.setReferredProperty(asProperty);
 			//			cgPredicate.setName(asPredicate.getName());
 			cgPropertyAssignment.setTypeId(analyzer.getTypeId(TypeId.OCL_VOID));
 			//			cgMappingCallBinding.setValueName(localnameasMappingCallBinding.getBoundVariable().getName());
-			cgPropertyAssignment.setInitValue(doVisit(CGValuedElement.class, asSetStatement.getOwnedExpression()));
+			cgPropertyAssignment.setOwnedInitValue(doVisit(CGValuedElement.class, asSetStatement.getOwnedExpression()));
 			EStructuralFeature eStructuralFeature = (EStructuralFeature) asProperty.getESObject();
 			if (eStructuralFeature != null) {
 				try {
@@ -1155,12 +1155,12 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 			VariableDeclaration asVariable = asSetStatement.getTargetVariable();
 			assert asVariable != null;
 			CGVariable cgVariable = getVariable(asVariable);
-			cgPropertyAssignment.setSlotValue(analyzer.createCGVariableExp(cgVariable));
+			cgPropertyAssignment.setOwnedSlotValue(analyzer.createCGVariableExp(cgVariable));
 			cgPropertyAssignment.setReferredProperty(asTargetProperty);
 			//		cgPredicate.setName(asPredicate.getName());
 			cgPropertyAssignment.setTypeId(analyzer.getTypeId(TypeId.OCL_VOID));
 			//		cgMappingCallBinding.setValueName(localnameasMappingCallBinding.getBoundVariable().getName());
-			cgPropertyAssignment.setInitValue(doVisit(CGValuedElement.class, asSetStatement.getOwnedExpression()));
+			cgPropertyAssignment.setOwnedInitValue(doVisit(CGValuedElement.class, asSetStatement.getOwnedExpression()));
 
 			CGExecutorProperty cgExecutorProperty = analyzer.createExecutorProperty(asTargetProperty);
 			cgPropertyAssignment.setExecutorProperty(cgExecutorProperty);
@@ -1181,7 +1181,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 		cgMappingCallBinding.setName(asBoundVariable.getName());
 		cgMappingCallBinding.setAst(asSimpleParameterBinding);
 		cgMappingCallBinding.setRequired(asBoundVariable.isIsRequired());
-		cgMappingCallBinding.setValue(doVisit(CGValuedElement.class, asSimpleParameterBinding.getValue()));
+		cgMappingCallBinding.setOwnedValue(doVisit(CGValuedElement.class, asSimpleParameterBinding.getValue()));
 		cgMappingCallBinding.setTypeId(analyzer.getTypeId(asBoundVariable.getTypeId()));
 		//		cgMappingCallBinding.setValueName(localnameasMappingCallBinding.getBoundVariable().getName());
 		return cgMappingCallBinding;

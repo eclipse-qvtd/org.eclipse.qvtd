@@ -26,9 +26,9 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionAssignment#getOwningMapping <em>Owning Mapping</em>}</li>
- *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionAssignment#getInitValue <em>Init Value</em>}</li>
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionAssignment#getConnectionVariable <em>Connection Variable</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionAssignment#getOwnedInitValue <em>Owned Init Value</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionAssignment#getOwningMapping <em>Owning Mapping</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage#getCGConnectionAssignment()
@@ -65,32 +65,6 @@ public interface CGConnectionAssignment extends CGValuedElement {
 	void setOwningMapping(CGMapping value);
 
 	/**
-	 * Returns the value of the '<em><b>Init Value</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Init Value</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Init Value</em>' containment reference.
-	 * @see #setInitValue(CGValuedElement)
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage#getCGConnectionAssignment_InitValue()
-	 * @model containment="true" required="true"
-	 * @generated
-	 */
-	CGValuedElement getInitValue();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionAssignment#getInitValue <em>Init Value</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Init Value</em>' containment reference.
-	 * @see #getInitValue()
-	 * @generated
-	 */
-	void setInitValue(CGValuedElement value);
-
-	/**
 	 * Returns the value of the '<em><b>Connection Variable</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -115,5 +89,31 @@ public interface CGConnectionAssignment extends CGValuedElement {
 	 * @generated
 	 */
 	void setConnectionVariable(CGVariable value);
+
+	/**
+	 * Returns the value of the '<em><b>Owned Init Value</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Owned Init Value</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Owned Init Value</em>' containment reference.
+	 * @see #setOwnedInitValue(CGValuedElement)
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage#getCGConnectionAssignment_OwnedInitValue()
+	 * @model containment="true" required="true"
+	 * @generated
+	 */
+	CGValuedElement getOwnedInitValue();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionAssignment#getOwnedInitValue <em>Owned Init Value</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Owned Init Value</em>' containment reference.
+	 * @see #getOwnedInitValue()
+	 * @generated
+	 */
+	void setOwnedInitValue(CGValuedElement value);
 
 } // CGConnectionAssignment

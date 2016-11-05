@@ -21,8 +21,8 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGNamedElement;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel#getTransformation <em>Transformation</em>}</li>
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel#getModelIndex <em>Model Index</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel#getOwningTransformation <em>Owning Transformation</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage#getCGTypedModel()
@@ -30,34 +30,6 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGNamedElement;
  * @generated
  */
 public interface CGTypedModel extends CGNamedElement {
-	/**
-	 * Returns the value of the '<em><b>Transformation</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation#getTypedModels <em>Typed Models</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Transformation</em>' container reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Transformation</em>' container reference.
-	 * @see #setTransformation(CGTransformation)
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage#getCGTypedModel_Transformation()
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation#getTypedModels
-	 * @model opposite="typedModels" resolveProxies="false" required="true" transient="false"
-	 * @generated
-	 */
-	CGTransformation getTransformation();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel#getTransformation <em>Transformation</em>}' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Transformation</em>' container reference.
-	 * @see #getTransformation()
-	 * @generated
-	 */
-	void setTransformation(CGTransformation value);
-
 	/**
 	 * Returns the value of the '<em><b>Model Index</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -83,5 +55,33 @@ public interface CGTypedModel extends CGNamedElement {
 	 * @generated
 	 */
 	void setModelIndex(int value);
+
+	/**
+	 * Returns the value of the '<em><b>Owning Transformation</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation#getOwnedTypedModels <em>Owned Typed Models</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Owning Transformation</em>' container reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Owning Transformation</em>' container reference.
+	 * @see #setOwningTransformation(CGTransformation)
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage#getCGTypedModel_OwningTransformation()
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation#getOwnedTypedModels
+	 * @model opposite="ownedTypedModels" resolveProxies="false" required="true" transient="false"
+	 * @generated
+	 */
+	CGTransformation getOwningTransformation();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel#getOwningTransformation <em>Owning Transformation</em>}' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Owning Transformation</em>' container reference.
+	 * @see #getOwningTransformation()
+	 * @generated
+	 */
+	void setOwningTransformation(CGTransformation value);
 
 } // CGTypedModel

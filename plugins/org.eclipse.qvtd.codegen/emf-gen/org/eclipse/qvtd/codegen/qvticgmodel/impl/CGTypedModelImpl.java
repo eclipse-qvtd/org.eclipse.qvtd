@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
@@ -32,8 +32,8 @@ import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGTypedModelImpl#getTransformation <em>Transformation</em>}</li>
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGTypedModelImpl#getModelIndex <em>Model Index</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGTypedModelImpl#getOwningTransformation <em>Owning Transformation</em>}</li>
  * </ul>
  *
  * @generated
@@ -84,49 +84,6 @@ public class CGTypedModelImpl extends CGNamedElementImpl implements CGTypedModel
 	 * @generated
 	 */
 	@Override
-	public CGTransformation getTransformation() {
-		if (eContainerFeatureID() != QVTiCGModelPackage.CG_TYPED_MODEL__TRANSFORMATION) return null;
-		return (CGTransformation)eInternalContainer();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetTransformation(CGTransformation newTransformation, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newTransformation, QVTiCGModelPackage.CG_TYPED_MODEL__TRANSFORMATION, msgs);
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setTransformation(CGTransformation newTransformation) {
-		if (newTransformation != eInternalContainer() || (eContainerFeatureID() != QVTiCGModelPackage.CG_TYPED_MODEL__TRANSFORMATION && newTransformation != null)) {
-			if (EcoreUtil.isAncestor(this, newTransformation))
-				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
-			NotificationChain msgs = null;
-			if (eInternalContainer() != null)
-				msgs = eBasicRemoveFromContainer(msgs);
-			if (newTransformation != null)
-				msgs = ((InternalEObject)newTransformation).eInverseAdd(this, QVTiCGModelPackage.CG_TRANSFORMATION__TYPED_MODELS, CGTransformation.class, msgs);
-			msgs = basicSetTransformation(newTransformation, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTiCGModelPackage.CG_TYPED_MODEL__TRANSFORMATION, newTransformation, newTransformation));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public int getModelIndex() {
 		return modelIndex;
 	}
@@ -150,6 +107,49 @@ public class CGTypedModelImpl extends CGNamedElementImpl implements CGTypedModel
 	 * @generated
 	 */
 	@Override
+	public CGTransformation getOwningTransformation() {
+		if (eContainerFeatureID() != QVTiCGModelPackage.CG_TYPED_MODEL__OWNING_TRANSFORMATION) return null;
+		return (CGTransformation)eInternalContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetOwningTransformation(CGTransformation newOwningTransformation, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newOwningTransformation, QVTiCGModelPackage.CG_TYPED_MODEL__OWNING_TRANSFORMATION, msgs);
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setOwningTransformation(CGTransformation newOwningTransformation) {
+		if (newOwningTransformation != eInternalContainer() || (eContainerFeatureID() != QVTiCGModelPackage.CG_TYPED_MODEL__OWNING_TRANSFORMATION && newOwningTransformation != null)) {
+			if (EcoreUtil.isAncestor(this, newOwningTransformation))
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+			NotificationChain msgs = null;
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			if (newOwningTransformation != null)
+				msgs = ((InternalEObject)newOwningTransformation).eInverseAdd(this, QVTiCGModelPackage.CG_TRANSFORMATION__OWNED_TYPED_MODELS, CGTransformation.class, msgs);
+			msgs = basicSetOwningTransformation(newOwningTransformation, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTiCGModelPackage.CG_TYPED_MODEL__OWNING_TRANSFORMATION, newOwningTransformation, newOwningTransformation));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public String toString() {
 		return super.toString();
 	}
@@ -162,10 +162,10 @@ public class CGTypedModelImpl extends CGNamedElementImpl implements CGTypedModel
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_TYPED_MODEL__TRANSFORMATION:
+			case QVTiCGModelPackage.CG_TYPED_MODEL__OWNING_TRANSFORMATION:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetTransformation((CGTransformation)otherEnd, msgs);
+				return basicSetOwningTransformation((CGTransformation)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -178,8 +178,8 @@ public class CGTypedModelImpl extends CGNamedElementImpl implements CGTypedModel
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_TYPED_MODEL__TRANSFORMATION:
-				return basicSetTransformation(null, msgs);
+			case QVTiCGModelPackage.CG_TYPED_MODEL__OWNING_TRANSFORMATION:
+				return basicSetOwningTransformation(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -192,8 +192,8 @@ public class CGTypedModelImpl extends CGNamedElementImpl implements CGTypedModel
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case QVTiCGModelPackage.CG_TYPED_MODEL__TRANSFORMATION:
-				return eInternalContainer().eInverseRemove(this, QVTiCGModelPackage.CG_TRANSFORMATION__TYPED_MODELS, CGTransformation.class, msgs);
+			case QVTiCGModelPackage.CG_TYPED_MODEL__OWNING_TRANSFORMATION:
+				return eInternalContainer().eInverseRemove(this, QVTiCGModelPackage.CG_TRANSFORMATION__OWNED_TYPED_MODELS, CGTransformation.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -206,10 +206,10 @@ public class CGTypedModelImpl extends CGNamedElementImpl implements CGTypedModel
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_TYPED_MODEL__TRANSFORMATION:
-				return getTransformation();
 			case QVTiCGModelPackage.CG_TYPED_MODEL__MODEL_INDEX:
 				return getModelIndex();
+			case QVTiCGModelPackage.CG_TYPED_MODEL__OWNING_TRANSFORMATION:
+				return getOwningTransformation();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -222,11 +222,11 @@ public class CGTypedModelImpl extends CGNamedElementImpl implements CGTypedModel
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_TYPED_MODEL__TRANSFORMATION:
-				setTransformation((CGTransformation)newValue);
-				return;
 			case QVTiCGModelPackage.CG_TYPED_MODEL__MODEL_INDEX:
 				setModelIndex((Integer)newValue);
+				return;
+			case QVTiCGModelPackage.CG_TYPED_MODEL__OWNING_TRANSFORMATION:
+				setOwningTransformation((CGTransformation)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -240,11 +240,11 @@ public class CGTypedModelImpl extends CGNamedElementImpl implements CGTypedModel
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_TYPED_MODEL__TRANSFORMATION:
-				setTransformation((CGTransformation)null);
-				return;
 			case QVTiCGModelPackage.CG_TYPED_MODEL__MODEL_INDEX:
 				setModelIndex(MODEL_INDEX_EDEFAULT);
+				return;
+			case QVTiCGModelPackage.CG_TYPED_MODEL__OWNING_TRANSFORMATION:
+				setOwningTransformation((CGTransformation)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -258,10 +258,10 @@ public class CGTypedModelImpl extends CGNamedElementImpl implements CGTypedModel
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_TYPED_MODEL__TRANSFORMATION:
-				return getTransformation() != null;
 			case QVTiCGModelPackage.CG_TYPED_MODEL__MODEL_INDEX:
 				return modelIndex != MODEL_INDEX_EDEFAULT;
+			case QVTiCGModelPackage.CG_TYPED_MODEL__OWNING_TRANSFORMATION:
+				return getOwningTransformation() != null;
 		}
 		return super.eIsSet(featureID);
 	}
