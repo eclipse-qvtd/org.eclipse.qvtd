@@ -354,7 +354,6 @@ public abstract class AbstractMappingRegion extends AbstractRegion implements Ma
 		}
 		assert debugHeadNodes.equals(new HashSet<>(headNodes));
 		//
-		computeUtilities(headNodes);
 		return headNodes;
 	}
 
@@ -438,7 +437,7 @@ public abstract class AbstractMappingRegion extends AbstractRegion implements Ma
 		return unconditionalNodes;
 	}
 
-	private void computeUtilities(@NonNull Iterable<@NonNull Node> headNodes) {		// FIXME remove assertions after 1-Jan-2017
+	protected void computeUtilities(@NonNull Iterable<@NonNull Node> headNodes) {		// FIXME remove assertions after 1-Jan-2017
 		Set<@NonNull Node> stronglyMatchedNodes = computeStronglyMatchedNodes(headNodes);
 		Set<@NonNull Node> unconditionalNodes = computeUnconditionalNodes(headNodes);
 		Set<@NonNull Node> conditionalNodes = computeConditionalNodes(unconditionalNodes);

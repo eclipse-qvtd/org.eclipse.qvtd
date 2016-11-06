@@ -170,6 +170,7 @@ class PartitioningVisitor extends AbstractVisitor<@Nullable Visitable>
 			partialNode = node.createNode(nodeRole, partialRegion);
 		}
 		oldNode2partialNode.put(node, partialNode);
+		partialNode.setUtility(node.getUtility());
 		for (@NonNull TypedElement typedElement : node.getTypedElements()) {
 			partialNode.addTypedElement(typedElement);
 		}
@@ -184,6 +185,7 @@ class PartitioningVisitor extends AbstractVisitor<@Nullable Visitable>
 		};
 		Node partialNode = variableNode.createNode(nodeRole, partialRegion);
 		oldNode2partialNode.put(variableNode, partialNode);
+		partialNode.setUtility(variableNode.getUtility());
 		for (@NonNull TypedElement typedElement : variableNode.getTypedElements()) {
 			partialNode.addTypedElement(typedElement);
 		}

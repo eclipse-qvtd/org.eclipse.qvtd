@@ -490,7 +490,8 @@ public class BasicMappingRegion extends AbstractMappingRegion
 		analyzeAssignmentValues();
 		analyzeComplexPredicates();
 		//
-		getHeadNodes();
+		List<@NonNull Node> headNodes = getHeadNodes();
+		computeUtilities(headNodes);
 	}
 
 	/**
