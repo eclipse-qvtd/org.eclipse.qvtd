@@ -111,7 +111,9 @@ public class RegionUtil
 		ClassDatum classDatum = region.getSchedulerConstants().getClassDatum(type, typedModel);
 		//				DomainUsage domainUsage = parentNode.getClassDatumAnalysis().getDomainUsage();
 		ClassDatumAnalysis classDatumAnalysis = region.getSchedulerConstants().getClassDatumAnalysis(classDatum);
-		return PatternTypedNodeImpl.create(nodeRole, region, name, classDatumAnalysis, true);
+		Node node = PatternTypedNodeImpl.create(nodeRole, region, name, classDatumAnalysis, true);
+		node.addTypedElement(property);
+		return node;
 	}
 
 	public static @NonNull Node createDependencyClassNode(@NonNull Node parentNode, @NonNull NavigationAssignment navigationAssignment) {
