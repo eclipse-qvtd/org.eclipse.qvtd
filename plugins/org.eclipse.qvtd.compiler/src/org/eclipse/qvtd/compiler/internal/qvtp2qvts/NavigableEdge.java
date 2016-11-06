@@ -44,11 +44,6 @@ public interface NavigableEdge extends Edge, ConnectionEnd
 	 */
 	@NonNull Property getProperty();
 
-	/**
-	 * Return true if this edge has a non-zero target lower bound or if the target node isRequired.
-	 */
-	boolean isRequired();
-
 	void removeIncomingConnection(@NonNull EdgeConnection edgeConnection);
 	void removeOutgoingConnection(@NonNull EdgeConnection edgeConnection);
 }

@@ -169,6 +169,32 @@ public abstract class AbstractMappingRegion extends AbstractRegion implements Ma
 		super.addNode(node);
 	}
 
+	private boolean canBeStronglyMatched(@NonNull Node node) {
+		if (node.isExplicitNull()) {
+			return true;
+		}
+		if (node.isPattern()) {
+			return true;
+		}
+		return false;
+	}
+
+	private boolean canBeUnconditional(@NonNull Node node) {
+		if (node.isExplicitNull()) {
+			return true;
+		}
+		if (node.isIterator()) {
+			return false;
+		}
+		if (node.isOperation()) {
+			return true;
+		}
+		if (node.isPattern()) {
+			return true;
+		}
+		return false;
+	}
+
 	/**
 	 * Any node with an edge to an unconditional node that is not itself unconditional must be conditional.
 	 */
@@ -357,24 +383,32 @@ public abstract class AbstractMappingRegion extends AbstractRegion implements Ma
 		return headNodes;
 	}
 
-	private void computeStronglyMatchedNodes(@NonNull Node sourceNode, @NonNull Set<@NonNull Node> stronglyMatchedNodes) {
-		for (@NonNull NavigableEdge edge : sourceNode.getNavigationEdges()) {
-			Node targetNode = edge.getTarget();
-			if (isMatchable(targetNode)) {
-				boolean targetIsStronglyMatched = edge.isRequired();
-				if (targetIsStronglyMatched && stronglyMatchedNodes.add(targetNode)) {
-					computeStronglyMatchedNodes(targetNode, stronglyMatchedNodes);
-				}
-			}
-		}
-	}
-
 	private @NonNull Set<@NonNull Node> computeStronglyMatchedNodes(@NonNull Iterable<@NonNull Node> headNodes) {
 		Set<@NonNull Node> stronglyMatchedNodes = new HashSet<>();
 		for (@NonNull Node headNode : headNodes) {
-			if (!headNode.isDependency() && !headNode.isTrue() && stronglyMatchedNodes.add(headNode)) {
-				computeStronglyMatchedNodes(headNode, stronglyMatchedNodes);
+			if (!headNode.isDependency() && !headNode.isTrue()) {
+				stronglyMatchedNodes.add(headNode);
 			}
+		}
+		Set<@NonNull Node> moreStronglyMatchedNodes = new HashSet<>(stronglyMatchedNodes);
+		while (moreStronglyMatchedNodes.size() > 0) {
+			Set<@NonNull Node> moreMoreNodes = new HashSet<>();
+			for (@NonNull Node sourceNode : moreStronglyMatchedNodes) {
+				for (@NonNull NavigableEdge edge : sourceNode.getNavigationEdges()) {
+					Node targetNode = edge.getTarget();
+					if (canBeStronglyMatched(targetNode)) {
+						if (targetNode.isExplicitNull() || edge.getProperty().isIsRequired()) {
+							if (stronglyMatchedNodes.add(targetNode)) {
+								moreMoreNodes.add(targetNode);
+							}
+						}
+					}
+				}
+			}
+			if (moreMoreNodes.size() <= 0) {
+				break;
+			}
+			moreStronglyMatchedNodes = moreMoreNodes;
 		}
 		this.stronglyMatchedNodes = new ArrayList<>(stronglyMatchedNodes);
 		Collections.sort(this.stronglyMatchedNodes, NameUtil.NAMEABLE_COMPARATOR);
@@ -384,13 +418,15 @@ public abstract class AbstractMappingRegion extends AbstractRegion implements Ma
 	private @NonNull Set<@NonNull Node> computeUnconditionalNodes(@NonNull Iterable<@NonNull Node> headNodes) {
 		@NonNull Set<@NonNull Node> unconditionalNodes = Sets.newHashSet(headNodes);
 		Iterables.addAll(unconditionalNodes, getNewNodes());
-		for (@NonNull Edge edge : getRealizedEdges()) {
-			Node sourceNode = edge.getSource();
-			assert isUnconditionable(sourceNode);
-			unconditionalNodes.add(sourceNode);
-			Node targetNode = edge.getTarget();
-			assert isUnconditionable(targetNode);
-			unconditionalNodes.add(targetNode);
+		for (@NonNull NavigableEdge edge : getRealizedNavigationEdges()) {
+			if (!edge.isSecondary()) {
+				Node sourceNode = edge.getSource();
+				assert canBeUnconditional(sourceNode);
+				unconditionalNodes.add(sourceNode);
+				Node targetNode = edge.getTarget();
+				assert canBeUnconditional(targetNode);
+				unconditionalNodes.add(targetNode);
+			}
 		}
 		Set<@NonNull Node> moreUnconditionalNodes = new HashSet<>(unconditionalNodes);
 		while (moreUnconditionalNodes.size() > 0) {
@@ -398,14 +434,20 @@ public abstract class AbstractMappingRegion extends AbstractRegion implements Ma
 			for (@NonNull Node node : moreUnconditionalNodes) {
 				for (@NonNull Edge incomingEdge : node.getIncomingEdges()) {
 					Node sourceNode = incomingEdge.getSource();
-					if (!isUnconditionable(sourceNode)) {}
-					else if (incomingEdge.isNavigation()) {
-						if (unconditionalNodes.add(sourceNode)) {
-							moreMoreNodes.add(sourceNode);
-						}
-					}
+					if (!canBeUnconditional(sourceNode)) {}
 					else if (incomingEdge.isComputation()) {
-						if (!isConditionalEdge(incomingEdge) && unconditionalNodes.add(sourceNode)) {
+						if (!isConditionalEdge(incomingEdge)) {
+							if (unconditionalNodes.add(sourceNode)) {
+								moreMoreNodes.add(sourceNode);
+							}
+						}
+						// if is <<then>>
+						// gather <<then>> visibilities
+						// gather <<else>> visibilities
+						// intersection <<then>>/<<else>> is unconditional
+					}
+					else if (incomingEdge.isNavigation()) {		// Unconditional target has unconditional source
+						if (unconditionalNodes.add(sourceNode)) {
 							moreMoreNodes.add(sourceNode);
 						}
 					}
@@ -415,13 +457,20 @@ public abstract class AbstractMappingRegion extends AbstractRegion implements Ma
 				}
 				for (@NonNull Edge outgoingEdge : node.getOutgoingEdges()) {
 					Node targetNode = outgoingEdge.getTarget();
-					if (!isUnconditionable(targetNode)) {}
+					if (!canBeUnconditional(targetNode)) {}
+					else if (outgoingEdge.isComputation()) {}
 					else if (outgoingEdge.isNavigation()) {
-						if (((NavigableEdge)outgoingEdge).isRequired() && unconditionalNodes.add(targetNode)) {
-							moreMoreNodes.add(targetNode);
+						if (targetNode.isExplicitNull()) {
+							if (unconditionalNodes.add(targetNode)) {
+								moreMoreNodes.add(targetNode);
+							}
+						}
+						else if (node.isRequired() && ((NavigableEdge)outgoingEdge).getProperty().isIsRequired()) {
+							if (unconditionalNodes.add(targetNode)) {
+								moreMoreNodes.add(targetNode);
+							}
 						}
 					}
-					else if (outgoingEdge.isComputation()) {}
 					else {
 						System.out.println("Unsupported outgoing edge in " + this + " : " + outgoingEdge);
 					}
@@ -505,14 +554,6 @@ public abstract class AbstractMappingRegion extends AbstractRegion implements Ma
 		return ExpressionAnalyzer.IF_THEN_NAME.equals(edgeName)
 				|| ExpressionAnalyzer.IF_ELSE_NAME.equals(edgeName)
 				|| ExpressionAnalyzer.LOOP_BODY_NAME.equals(edgeName);
-	}
-
-	private boolean isMatchable(@NonNull Node node) {
-		return node.isExplicitNull() || node.isPattern();
-	}
-
-	private boolean isUnconditionable(@NonNull Node node) {
-		return !node.isIterator();
 	}
 
 	@Override
