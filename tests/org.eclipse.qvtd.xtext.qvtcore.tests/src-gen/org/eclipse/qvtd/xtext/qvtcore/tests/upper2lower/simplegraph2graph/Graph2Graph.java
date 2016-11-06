@@ -47,7 +47,8 @@ public interface Graph2Graph extends EObject {
 	 * @return the value of the '<em>Graph1</em>' reference.
 	 * @see #setGraph1(Graph)
 	 * @see org.eclipse.qvtd.xtext.qvtcore.tests.upper2lower.simplegraph2graph.Simplegraph2graphPackage#getGraph2Graph_Graph1()
-	 * @model annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='middle1' upper='1'"
+	 * @model required="true"
+	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='middle1' upper='1'"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='upperGraph'"
 	 * @generated
 	 */
@@ -74,7 +75,8 @@ public interface Graph2Graph extends EObject {
 	 * @return the value of the '<em>Graph2</em>' reference.
 	 * @see #setGraph2(Graph)
 	 * @see org.eclipse.qvtd.xtext.qvtcore.tests.upper2lower.simplegraph2graph.Simplegraph2graphPackage#getGraph2Graph_Graph2()
-	 * @model annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='middle2' upper='1'"
+	 * @model required="true"
+	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='middle2' upper='1'"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='lowerGraph'"
 	 * @generated
 	 */

@@ -42,7 +42,7 @@ public interface Element2Element extends EObject {
 	 * @see #setOwner(Graph2Graph)
 	 * @see org.eclipse.qvtd.xtext.qvtcore.tests.upper2lower.simplegraph2graph.Simplegraph2graphPackage#getElement2Element_Owner()
 	 * @see org.eclipse.qvtd.xtext.qvtcore.tests.upper2lower.simplegraph2graph.Graph2Graph#getElement2Element
-	 * @model opposite="element2Element" transient="false"
+	 * @model opposite="element2Element" required="true" transient="false"
 	 * @generated
 	 */
 	Graph2Graph getOwner();

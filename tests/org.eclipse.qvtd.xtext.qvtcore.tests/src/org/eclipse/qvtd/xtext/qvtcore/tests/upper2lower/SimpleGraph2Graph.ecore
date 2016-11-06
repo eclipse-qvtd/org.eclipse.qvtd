@@ -3,7 +3,8 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="simplegraph2graph" nsURI="http://www.eclipse.org/qvtd/xtext/qvtcore/tests/Upper2Lower/1.0/SimpleGraph2Graph"
     nsPrefix="simplegraph2graph">
   <eClassifiers xsi:type="ecore:EClass" name="Graph2Graph">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="graph1" eType="ecore:EClass SimpleGraph.ecore#//Graph">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="graph1" lowerBound="1"
+        eType="ecore:EClass SimpleGraph.ecore#//Graph">
       <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
         <details key="body" value="middle1"/>
         <details key="upper" value="1"/>
@@ -12,7 +13,8 @@
         <details key="referredDomain" value="upperGraph"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="graph2" eType="ecore:EClass SimpleGraph.ecore#//Graph">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="graph2" lowerBound="1"
+        eType="ecore:EClass SimpleGraph.ecore#//Graph">
       <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
         <details key="body" value="middle2"/>
         <details key="upper" value="1"/>
@@ -26,11 +28,11 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Element2Element" abstract="true">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="owner" eType="#//Graph2Graph"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owner" lowerBound="1" eType="#//Graph2Graph"
         eOpposite="#//Graph2Graph/element2Element"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Edge2Edge" eSuperTypes="#//Element2Element">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="edge1" eType="ecore:EClass SimpleGraph.ecore#//Edge">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="edge1" lowerBound="1" eType="ecore:EClass SimpleGraph.ecore#//Edge">
       <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
         <details key="body" value="middle1"/>
         <details key="upper" value="1"/>
@@ -39,7 +41,7 @@
         <details key="referredDomain" value="upperGraph"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="edge2" eType="ecore:EClass SimpleGraph.ecore#//Edge">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="edge2" lowerBound="1" eType="ecore:EClass SimpleGraph.ecore#//Edge">
       <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
         <details key="body" value="middle2"/>
         <details key="upper" value="1"/>
@@ -48,11 +50,13 @@
         <details key="referredDomain" value="lowerGraph"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="#//Node2Node"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="source" eType="#//Node2Node"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+        eType="#//Node2Node"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
+        eType="#//Node2Node"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Node2Node" eSuperTypes="#//Element2Element">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="node1" eType="ecore:EClass SimpleGraph.ecore#//Node">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="node1" lowerBound="1" eType="ecore:EClass SimpleGraph.ecore#//Node">
       <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
         <details key="body" value="middle1"/>
         <details key="upper" value="1"/>
@@ -61,7 +65,7 @@
         <details key="referredDomain" value="upperGraph"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="node2" eType="ecore:EClass SimpleGraph.ecore#//Node">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="node2" lowerBound="1" eType="ecore:EClass SimpleGraph.ecore#//Node">
       <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
         <details key="body" value="middle2"/>
         <details key="upper" value="1"/>
