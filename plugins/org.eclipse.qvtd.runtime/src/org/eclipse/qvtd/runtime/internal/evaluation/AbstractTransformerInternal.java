@@ -74,6 +74,12 @@ public abstract class AbstractTransformerInternal extends AbstractModelManager i
 		}
 
 		@Override
+		protected @NonNull Model createModel(@NonNull String modelName, @NonNull PropertyId @Nullable [] propertyIndex2propertyId,
+				@NonNull ClassId @NonNull [] classIndex2classId, int @Nullable [] @NonNull [] classIndex2allClassIndexes) {
+			return new Model(modelName, propertyIndex2propertyId, classIndex2classId, classIndex2allClassIndexes);
+		}
+
+		@Override
 		protected @NonNull ObjectManager createObjectManager() {
 			return new IncrementalObjectManager((IncrementalInvocationManager)invocationManager);
 		}
@@ -84,6 +90,71 @@ public abstract class AbstractTransformerInternal extends AbstractModelManager i
 
 	protected class Model extends AbstractTypedModelInstance
 	{
+		protected class Incremental extends Model
+		{
+			public Incremental(@NonNull String name, @NonNull PropertyId @Nullable [] propertyIndex2propertyId,
+					@NonNull ClassId @NonNull [] classIndex2classId, int @Nullable [] @NonNull [] classIndex2allClassIndexes) {
+				super(name, propertyIndex2propertyId, classIndex2classId, classIndex2allClassIndexes);
+			}
+
+			public void remove(@NonNull EObject eObject) {
+				List<@NonNull Object> allEObjects2 = allEObjects;
+				//			if (allEObjects2 == null) {
+				//				allEObjects = allEObjects2 = new ArrayList<>();
+				//			}
+				//			rootEObjects = null;
+				assert allEObjects2 != null;
+				assert allEObjects2.contains(eObject);
+				allEObjects2.remove(eObject);
+				//			if ((eClass2allClassIndexes == null) && (classId2classIndexes != null) && (classIndex2objects != null)) {
+				//				eClass2allClassIndexes = new HashMap<>();
+				//			}
+				unaccumulateEObject(eClass2allClassIndexes, null, null, eObject);
+			}
+
+			/**
+			 * Remove eObject from the caches.
+			 * <p>
+			 * If eClass2allClassIndexes is non-null, eObject is removed from the allInstances() caches potentially updating eClass2allClassIndexes with
+			 * the state of a new EClass.
+			 * <p>
+			 * If eClass2allPropertyIndexes is non-null, eObject is removed fromun the unnavigable opposites caches potentially updating eClass2allPropertyIndexes with
+			 * the state of a new EClass.
+			 */
+			private void unaccumulateEObject(@Nullable Map<@NonNull EClass, @NonNull Set<@NonNull Integer>> eClass2allClassIndexes,
+					@Nullable Map<@NonNull EClass, @NonNull List<@NonNull Integer>> eClass2allPropertyIndexes, @Nullable Map<@NonNull EReference, @NonNull Integer> eReference2propertyIndex,
+					@NonNull Object eObject) {
+				EClass eClass = eClass(eObject);
+				if (eClass2allClassIndexes != null) {
+					Set<@NonNull Integer> allClassIndexes = eClass2allClassIndexes.get(eClass);
+					if (allClassIndexes != null) {
+						for (@NonNull Integer classIndex : allClassIndexes) {
+							((Connection.Incremental)classIndex2connection[classIndex]).revoke(eObject);
+						}
+					}
+				}
+				if (eClass2allPropertyIndexes != null) {
+					Map<@NonNull EReference, @NonNull Integer> eReference2propertyIndex2 = eReference2propertyIndex;
+					assert eReference2propertyIndex2 != null;
+					List<@NonNull Integer> allPropertyIndexes = eClass2allPropertyIndexes.get(eClass);
+					if (allPropertyIndexes != null) {
+						Map<@NonNull Object, @NonNull Object>[] object2oppositeObject2 = object2oppositeObject;
+						assert object2oppositeObject2 != null;
+						for (@NonNull Integer propertyIndex : allPropertyIndexes) {
+							EReference @Nullable [] propertyIndex2eReference2 = propertyIndex2eReference;
+							assert propertyIndex2eReference2 != null;
+							EReference eReference = propertyIndex2eReference2[propertyIndex];
+							if (eReference != null) {
+								Object object = eGet(eObject, eReference);
+								assert object != null;
+								object2oppositeObject2[propertyIndex].remove(object);
+							}
+						}
+					}
+				}
+			}
+		}
+
 		protected final @NonNull String name;
 		private @Nullable List<@NonNull Object> allEObjects = null;
 		private @Nullable List<@NonNull Object> rootEObjects = null;
@@ -92,18 +163,20 @@ public abstract class AbstractTransformerInternal extends AbstractModelManager i
 		/**
 		 * All possible allInstances() returns indexed by the ClassIndex of the ClassId for which allInstances() may be invoked.
 		 */
-		private final @NonNull List<@NonNull Object> @NonNull [] classIndex2objects;
+		private final @NonNull Connection [] classIndex2connection;
 
-		public Model(@NonNull String name, @NonNull PropertyId @Nullable [] propertyIndex2propertyId, @NonNull ClassId @NonNull [] classIndex2classId, int @Nullable [] @NonNull [] classIndex2allClassIndexes) {
+		public Model(@NonNull String name, @NonNull PropertyId @Nullable [] propertyIndex2propertyId,
+				@NonNull ClassId @NonNull [] classIndex2classId, int @Nullable [] @NonNull [] classIndex2allClassIndexes) {
 			this.name = name;
 			//
 			//	Prepare the allInstances() fields
 			//
 			int classIds = classIndex2classId.length;
-			@SuppressWarnings("unchecked")@NonNull List<@NonNull Object> @NonNull [] classIndex2objects = (@NonNull List<@NonNull Object> @NonNull []) new @NonNull ArrayList<?> @NonNull [classIds];
-			this.classIndex2objects = classIndex2objects;
+			this.classIndex2connection = new @NonNull Connection [classIds];
 			for (int i = 0; i < classIds; i++) {
-				classIndex2objects[i] = new ArrayList<>();
+				@NonNull
+				ClassId classId = classIndex2classId[i];
+				classIndex2connection[i] = createConnection(name + "-" + classId, classId, false);
 			}
 		}
 
@@ -118,7 +191,7 @@ public abstract class AbstractTransformerInternal extends AbstractModelManager i
 				eClass2allClassIndexes.put(eClass, allClassIndexes);
 			}
 			for (@NonNull Integer classIndex : allClassIndexes) {
-				classIndex2objects[classIndex].add(eObject);
+				classIndex2connection[classIndex].append(eObject);
 			}
 		}
 
@@ -239,7 +312,12 @@ public abstract class AbstractTransformerInternal extends AbstractModelManager i
 			TypeId classId = type.getTypeId();
 			Integer classIndex = classId2classIndex.get(classId);
 			if (classIndex != null) {
-				return classIndex2objects[classIndex];
+				Iterable<@NonNull Object> typedIterable = classIndex2connection[classIndex].typedIterable(Object.class);
+				List<@NonNull Object> collection =  new ArrayList<>();
+				for (@NonNull Object object : typedIterable) {
+					collection.add(object);
+				}
+				return collection;
 			}
 			return EMPTY_EOBJECT_LIST;
 		}
@@ -301,66 +379,18 @@ public abstract class AbstractTransformerInternal extends AbstractModelManager i
 			return name;
 		}
 
-		public void remove(@NonNull EObject eObject) {
-			List<@NonNull Object> allEObjects2 = allEObjects;
-			//			if (allEObjects2 == null) {
-			//				allEObjects = allEObjects2 = new ArrayList<>();
-			//			}
-			//			rootEObjects = null;
-			assert allEObjects2 != null;
-			assert allEObjects2.contains(eObject);
-			allEObjects2.remove(eObject);
-			//			if ((eClass2allClassIndexes == null) && (classId2classIndexes != null) && (classIndex2objects != null)) {
-			//				eClass2allClassIndexes = new HashMap<>();
-			//			}
-			unaccumulateEObject(eClass2allClassIndexes, null, null, eObject);
-		}
-
-		/**
-		 * Remove eObject from the caches.
-		 * <p>
-		 * If eClass2allClassIndexes is non-null, eObject is removed from the allInstances() caches potentially updating eClass2allClassIndexes with
-		 * the state of a new EClass.
-		 * <p>
-		 * If eClass2allPropertyIndexes is non-null, eObject is removed fromun the unnavigable opposites caches potentially updating eClass2allPropertyIndexes with
-		 * the state of a new EClass.
-		 */
-		private void unaccumulateEObject(@Nullable Map<@NonNull EClass, @NonNull Set<@NonNull Integer>> eClass2allClassIndexes,
-				@Nullable Map<@NonNull EClass, @NonNull List<@NonNull Integer>> eClass2allPropertyIndexes, @Nullable Map<@NonNull EReference, @NonNull Integer> eReference2propertyIndex,
-				@NonNull Object eObject) {
-			EClass eClass = eClass(eObject);
-			if (eClass2allClassIndexes != null) {
-				Set<@NonNull Integer> allClassIndexes = eClass2allClassIndexes.get(eClass);
-				if (allClassIndexes != null) {
-					List<@NonNull Object>[] classIndex2objects2 = classIndex2objects;
-					assert classIndex2objects2 != null;
-					for (@NonNull Integer classIndex : allClassIndexes) {
-						classIndex2objects2[classIndex].remove(eObject);
-					}
-				}
+		public <@NonNull T> Iterable<T> typedIterable(Class<T> javaClass, org.eclipse.ocl.pivot.@NonNull Class pivotType) {
+			TypeId typeId = pivotType.getTypeId();
+			Integer classIndex = classId2classIndex.get(typeId);
+			if (classIndex != null) {
+				Connection connection = classIndex2connection[classIndex];
+				return connection.typedIterable(javaClass);
 			}
-			if (eClass2allPropertyIndexes != null) {
-				Map<@NonNull EReference, @NonNull Integer> eReference2propertyIndex2 = eReference2propertyIndex;
-				assert eReference2propertyIndex2 != null;
-				List<@NonNull Integer> allPropertyIndexes = eClass2allPropertyIndexes.get(eClass);
-				if (allPropertyIndexes != null) {
-					Map<@NonNull Object, @NonNull Object>[] object2oppositeObject2 = object2oppositeObject;
-					assert object2oppositeObject2 != null;
-					for (@NonNull Integer propertyIndex : allPropertyIndexes) {
-						EReference @Nullable [] propertyIndex2eReference2 = propertyIndex2eReference;
-						assert propertyIndex2eReference2 != null;
-						EReference eReference = propertyIndex2eReference2[propertyIndex];
-						if (eReference != null) {
-							Object object = eGet(eObject, eReference);
-							assert object != null;
-							object2oppositeObject2[propertyIndex].remove(object);
-						}
-					}
-				}
-			}
+			return null;
 		}
 	}
 
+	@Deprecated // only used by exe2016/bugmde2016 tests
 	private static class UnenforcedSetAccumulator extends SetValueImpl implements SetValue.Accumulator
 	{
 		public UnenforcedSetAccumulator(@NonNull CollectionTypeId typeId) {
@@ -529,7 +559,7 @@ public abstract class AbstractTransformerInternal extends AbstractModelManager i
 		this.models = new @NonNull Model @NonNull [modelNames.length];
 		for (int i = 0; i < modelNames.length; i++) {
 			String modelName = modelNames[i];
-			models[i] = new Model(modelName, propertyIndex2propertyId, classIndex2classId, classIndex2allClassIndexes);
+			models[i] = createModel(modelName, propertyIndex2propertyId, classIndex2classId, classIndex2allClassIndexes);
 			modelIndexes.put(modelName,  i);
 		}
 		//
@@ -562,18 +592,16 @@ public abstract class AbstractTransformerInternal extends AbstractModelManager i
 		//
 		assert classIndex2allClassIndexes != null;
 		int classIds = classIndex2classId.length;
-		HashMap<@NonNull ClassId, @NonNull Integer> classId2classIndex2 = new HashMap<>(classIds);
-		HashMap<@NonNull ClassId, @NonNull Set<@NonNull Integer>> classId2classIndexes2 = new HashMap<>(classIds);
-		this.classId2classIndex = classId2classIndex2;
-		this.classId2classIndexes = classId2classIndexes2;
+		this.classId2classIndex = new HashMap<>(classIds);
+		this.classId2classIndexes = new HashMap<>(classIds);
 		for (int classIndex = 0; classIndex < classIds; classIndex++) {
 			ClassId classId = classIndex2classId[classIndex];
-			classId2classIndex2.put(classId, classIndex);
+			classId2classIndex.put(classId, classIndex);
 			Set<@NonNull Integer> superClassIndexes = new HashSet<>();
 			for (int allClassIndex : classIndex2allClassIndexes[classIndex]) {
 				superClassIndexes.add(allClassIndex);
 			}
-			classId2classIndexes2.put(classId, superClassIndexes);
+			classId2classIndexes.put(classId, superClassIndexes);
 		}
 	}
 
@@ -610,6 +638,11 @@ public abstract class AbstractTransformerInternal extends AbstractModelManager i
 	 */
 	protected @NonNull InvocationManager createInvocationManager() {
 		return new LazyInvocationManager(executor);
+	}
+
+	protected @NonNull Model createModel(@NonNull String modelName, @NonNull PropertyId @Nullable [] propertyIndex2propertyId,
+			@NonNull ClassId @NonNull [] classIndex2classId, int @Nullable [] @NonNull [] classIndex2allClassIndexes) {
+		return new Model(modelName, propertyIndex2propertyId, classIndex2classId, classIndex2allClassIndexes);
 	}
 
 	@Deprecated // Use createConnection
