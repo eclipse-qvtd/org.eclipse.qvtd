@@ -10,9 +10,13 @@
  *******************************************************************************/
 package org.eclipse.qvtd.codegen.qvti.java;
 
+import java.util.Map;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGElementId;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaPreVisitor;
+import org.eclipse.ocl.pivot.Property;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcoreContainerAssignment;
@@ -35,11 +39,19 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGSequence;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel;
 import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
+import org.eclipse.qvtd.codegen.utilities.QVTiCGUtil;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
+import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiTransformationAnalysis;
 
 public class QVTiCG2JavaPreVisitor extends CG2JavaPreVisitor implements QVTiCGModelVisitor<@Nullable Object>
 {
 	public QVTiCG2JavaPreVisitor(@NonNull QVTiGlobalContext javaContext) {
 		super(javaContext);
+	}
+
+	@Override
+	public @NonNull QVTiCodeGenerator getCodeGenerator() {
+		return (@NonNull QVTiCodeGenerator) super.getCodeGenerator();
 	}
 
 	@Override
@@ -144,8 +156,15 @@ public class QVTiCG2JavaPreVisitor extends CG2JavaPreVisitor implements QVTiCGMo
 	}
 
 	@Override
-	public Object visitCGTransformation(@NonNull CGTransformation object) {
-		return visitCGClass(object);
+	public Object visitCGTransformation(@NonNull CGTransformation cgTransformation) {
+		ImperativeTransformation transformation = QVTiCGUtil.getAST(cgTransformation);
+		QVTiTransformationAnalysis transformationAnalysis = getCodeGenerator().getTransformationAnalysis(transformation);
+		Map<@NonNull Property, @NonNull Integer> opposites = transformationAnalysis.getCaches();
+		for (@NonNull Property property : opposites.keySet()) {
+			CGElementId cgPropertyId = analyzer.getElementId(property.getPropertyId());
+			cgPropertyId.accept(this);
+		}
+		return visitCGClass(cgTransformation);
 	}
 
 	@Override

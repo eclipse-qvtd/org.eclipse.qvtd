@@ -37,6 +37,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCollectionExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGEcorePropertyCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGElementId;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorProperty;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGIterator;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGLetExp;
@@ -70,6 +71,7 @@ import org.eclipse.ocl.pivot.ids.ClassId;
 import org.eclipse.ocl.pivot.ids.CollectionTypeId;
 import org.eclipse.ocl.pivot.ids.ElementId;
 import org.eclipse.ocl.pivot.ids.IdResolver;
+import org.eclipse.ocl.pivot.ids.PropertyId;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.manager.PivotMetamodelManager;
 import org.eclipse.ocl.pivot.library.LibraryProperty;
@@ -976,7 +978,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 
 	protected void doGetting(@NonNull CGNavigationCallExp cgPropertyCallExp, @NonNull EStructuralFeature eStructuralFeature, boolean isOpposite) {
 		Element asPropertyCallExp = cgPropertyCallExp.getAst();
-		CGMapping cgMapping = QVTiCGUtil.getContainingCGMapping(cgPropertyCallExp);
+		CGMapping cgMapping = QVTiCGUtil.basicGetContainingCGMapping(cgPropertyCallExp);
 		Mapping asMapping = cgMapping != null ? (Mapping) cgMapping.getAst() : null;
 		CGValuedElement source = getExpression(cgPropertyCallExp.getSource());
 		boolean isHazardous = false;
@@ -1404,19 +1406,19 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 	}
 
 	protected @Nullable String doOppositePropertyIds(@NonNull QVTiTransformationAnalysis transformationAnalysis) {
-		return null;
 		// This code is no longer used, and since it is not used it generates undefined references
 		// It appears to have 'worked' only because a duplicate incomplete TransformationAnalysis was in use.
-		/*		Map<Property, Integer> opposites = transformationAnalysis.getSourceCaches();
+		Map<@NonNull Property, @NonNull Integer> opposites = transformationAnalysis.getCaches();
 		if (opposites.size() <= 0) {
 			return null;
 		}
+		Property dummyProperty = opposites.keySet().iterator().next();
 		NameManager nameManager = getGlobalContext().getNameManager();
-		List<Property> sortedList = new ArrayList<Property>();
+		List<@NonNull Property> sortedList = new ArrayList<>();
 		for (int i = 0; i < opposites.size();i++) {
-			sortedList.add(null);
+			sortedList.add(dummyProperty);
 		}
-		for (Map.Entry<Property, Integer> entry : opposites.entrySet()) {
+		for (Map.Entry<@NonNull Property, @NonNull Integer> entry : opposites.entrySet()) {
 			sortedList.set(entry.getValue().intValue(), entry.getKey());
 		}
 		//
@@ -1424,21 +1426,25 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		//
 		js.append("/*\n");
 		js.append(" * Array of the source PropertyIds of each Property for which unnavigable opposite property navigation may occur.\n");
-		js.append(" * /\n");
+		js.append(" */\n");
 		String oppositeIndex2propertyIdName = nameManager.getGlobalSymbolName(null, "oppositeIndex2propertyId");
 		js.append("private static final ");
 		js.appendIsRequired(true);
 		js.append(" ");
 		js.appendClassReference(PropertyId.class);
-		js.append("[] ");
+		js.append(" ");
+		js.appendIsRequired(true);
+		js.append(" [] ");
 		js.append(oppositeIndex2propertyIdName);
 		js.append(" = new ");
+		js.appendIsRequired(true);
+		js.append(" ");
 		js.appendClassReference(PropertyId.class);
 		js.append("[]{\n");
 		js.pushIndentation(null);
 		for (int i = 0; i < sortedList.size(); i++) {
 			Property property = sortedList.get(i);
-			CGElementId cgPropertyId = getCodeGenerator().getAnalyzer().getElementId(property.getPropertyId());
+			CGElementId cgPropertyId = analyzer.getElementId(property.getPropertyId());
 			js.appendValueName(cgPropertyId);
 			if ((i+1) < sortedList.size()) {
 				js.append(",");
@@ -1447,7 +1453,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		}
 		js.popIndentation();
 		js.append("};\n");
-		return oppositeIndex2propertyIdName; */
+		return oppositeIndex2propertyIdName;
 	}
 
 	protected void doRun(@NonNull CGTransformation cgTransformation) {
@@ -2367,7 +2373,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 	@Override
 	public @NonNull Boolean visitCGTransformation(@NonNull CGTransformation cgTransformation) {
 		js.appendClassHeader(cgTransformation.getContainingPackage());
-		@SuppressWarnings("null")@NonNull ImperativeTransformation transformation = (ImperativeTransformation) cgTransformation.getAst();
+		ImperativeTransformation transformation = QVTiCGUtil.getAST(cgTransformation);
 		QVTiTransformationAnalysis transformationAnalysis = context.getTransformationAnalysis(transformation);
 		this.transformationAnalysis = transformationAnalysis;
 		String className = cgTransformation.getName();
