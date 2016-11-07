@@ -24,6 +24,14 @@ import org.eclipse.qvtd.runtime.internal.evaluation.AbstractTransformerInternal;
  */
 public abstract class AbstractTransformer extends AbstractTransformerInternal
 {
+	public static abstract class Incremental extends AbstractTransformerInternal.Incremental
+	{
+		protected Incremental(@NonNull TransformationExecutor executor, @NonNull String @NonNull [] modelNames,
+				@NonNull PropertyId @Nullable [] propertyIndex2propertyId, @NonNull ClassId @NonNull [] classIndex2classId, int @Nullable [] @NonNull [] classIndex2allClassIndexes) {
+			super(executor, modelNames, propertyIndex2propertyId, classIndex2classId, classIndex2allClassIndexes) ;
+		}
+	}
+
 	public static final @NonNull String PLUGIN_ID = "org.eclipse.qvtd.runtime";
 	public static final @NonNull TracingOption APPENDS = new TracingOption(PLUGIN_ID, "tx/appends");
 	public static final @NonNull TracingOption CONSUMES = new TracingOption(PLUGIN_ID, "tx/consumes");
@@ -33,10 +41,5 @@ public abstract class AbstractTransformer extends AbstractTransformerInternal
 	protected AbstractTransformer(@NonNull TransformationExecutor executor, @NonNull String @NonNull [] modelNames,
 			@NonNull PropertyId @Nullable [] propertyIndex2propertyId, @NonNull ClassId @NonNull [] classIndex2classId, int @Nullable [] @NonNull [] classIndex2allClassIndexes) {
 		super(executor, modelNames, propertyIndex2propertyId, classIndex2classId, classIndex2allClassIndexes) ;
-	}
-
-	@Override
-	public <R> R accept(@NonNull ExecutionVisitor<R> visitor) {
-		return visitor.visitTransformer(this);
 	}
 }

@@ -126,14 +126,10 @@ import org.eclipse.qvtd.runtime.evaluation.AbstractInvocation;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
 import org.eclipse.qvtd.runtime.evaluation.Connection;
 import org.eclipse.qvtd.runtime.evaluation.InvocationConstructor;
-import org.eclipse.qvtd.runtime.evaluation.InvocationManager;
-import org.eclipse.qvtd.runtime.evaluation.ObjectManager;
 import org.eclipse.qvtd.runtime.evaluation.TransformationExecutor;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
 import org.eclipse.qvtd.runtime.internal.evaluation.AbstractComputationConstructor;
 import org.eclipse.qvtd.runtime.internal.evaluation.AbstractInvocationConstructor;
-import org.eclipse.qvtd.runtime.internal.evaluation.IncrementalInvocationManager;
-import org.eclipse.qvtd.runtime.internal.evaluation.IncrementalObjectManager;
 
 import com.google.common.collect.Iterables;
 
@@ -437,7 +433,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		js.append("}\n");
 	}
 
-	protected void doCreateIncrementalManagers() {
+	/*	protected void doCreateIncrementalManagers() {
 		js.append("@Override\n");
 		js.append("protected ");
 		js.appendIsRequired(true);
@@ -467,7 +463,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		js.append(")invocationManager);\n");
 		js.popIndentation();
 		js.append("}\n");
-	}
+	} */
 
 	protected boolean doEcoreCreateClass(@NonNull CGValuedElement cgElement, @NonNull EClass eClass) {
 		String createMethodName = "create" + eClass.getName();
@@ -1477,8 +1473,8 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		js.append("}\n");
 	}
 
-	protected @NonNull Class<? extends AbstractTransformer> getAbstractTransformationExecutorClass() {
-		return AbstractTransformer.class;
+	protected @NonNull Class<? extends Transformer> getAbstractTransformationExecutorClass() {
+		return isIncremental ? AbstractTransformer.Incremental.class : AbstractTransformer.class;
 	}
 
 	@Override
@@ -2416,10 +2412,10 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		js.append("\n");
 		doConstructor(cgTransformation, oppositeIndex2propertyIdName, allInstancesNames);
 		js.append("\n");
-		if (isIncremental) {
+		/*		if (isIncremental) {
 			doCreateIncrementalManagers();
 			js.append("\n");
-		}
+		} */
 		doRun(cgTransformation);
 		for (@NonNull CGOperation cgOperation : ClassUtil.nullFree(cgOperations)) {
 			if (!(cgOperation instanceof CGCachedOperation)) {

@@ -48,6 +48,7 @@ import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTypedModelInstance;
 import org.eclipse.qvtd.runtime.evaluation.Connection;
 import org.eclipse.qvtd.runtime.evaluation.ExecutionVisitable;
+import org.eclipse.qvtd.runtime.evaluation.ExecutionVisitor;
 import org.eclipse.qvtd.runtime.evaluation.InvocationFailedException;
 import org.eclipse.qvtd.runtime.evaluation.InvocationManager;
 import org.eclipse.qvtd.runtime.evaluation.ObjectManager;
@@ -60,6 +61,24 @@ import org.eclipse.qvtd.runtime.evaluation.Transformer;
  */
 public abstract class AbstractTransformerInternal extends AbstractModelManager implements Transformer, ExecutionVisitable
 {
+	public static abstract class Incremental extends AbstractTransformerInternal
+	{
+		protected Incremental(@NonNull TransformationExecutor executor, @NonNull String @NonNull [] modelNames,
+				@NonNull PropertyId @Nullable [] propertyIndex2propertyId, @NonNull ClassId @NonNull [] classIndex2classId, int @Nullable [] @NonNull [] classIndex2allClassIndexes) {
+			super(executor, modelNames, propertyIndex2propertyId, classIndex2classId, classIndex2allClassIndexes) ;
+		}
+
+		@Override
+		protected @NonNull InvocationManager createInvocationManager() {
+			return new IncrementalInvocationManager(executor);
+		}
+
+		@Override
+		protected @NonNull ObjectManager createObjectManager() {
+			return new IncrementalObjectManager((IncrementalInvocationManager)invocationManager);
+		}
+	}
+
 	private static final @NonNull List<@NonNull Integer> EMPTY_INDEX_LIST = Collections.emptyList();
 	private static final @NonNull List<@NonNull Object> EMPTY_EOBJECT_LIST = Collections.emptyList();
 
@@ -580,6 +599,11 @@ public abstract class AbstractTransformerInternal extends AbstractModelManager i
 			this.classId2classIndex = null;
 			this.classId2classIndexes = null;
 		}
+	}
+
+	@Override
+	public <R> R accept(@NonNull ExecutionVisitor<R> visitor) {
+		return visitor.visitTransformer(this);
 	}
 
 	/**
