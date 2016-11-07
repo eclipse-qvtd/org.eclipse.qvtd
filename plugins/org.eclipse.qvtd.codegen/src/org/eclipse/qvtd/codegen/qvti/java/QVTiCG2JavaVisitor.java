@@ -254,7 +254,9 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			js.appendIsRequired(true);
 			js.append(" ");
 			js.appendClassReference(ClassId.class);
-			js.append("[] ");
+			js.append(" ");
+			js.appendIsRequired(true);
+			js.append(" [] ");
 			js.append(classIndex2classIdName);
 			js.append(" = new ");
 			js.appendIsRequired(true);

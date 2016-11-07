@@ -29,7 +29,7 @@ implements CS2ASTransformer
 	private final List<CS2ASDiagnostic> txErrors = new ArrayList<CS2ASDiagnostic>();
 
 	protected AbstractCS2ASTransformer(@NonNull TransformationExecutor executor, @NonNull String @NonNull [] modelNames,
-			@NonNull PropertyId @Nullable [] propertyIndex2propertyId, @NonNull ClassId @Nullable [] classIndex2classId, int @Nullable [] @NonNull [] classIndex2allClassIndexes) {
+			@NonNull PropertyId @Nullable [] propertyIndex2propertyId, @NonNull ClassId @NonNull [] classIndex2classId, int @Nullable [] @NonNull [] classIndex2allClassIndexes) {
 		super(executor, modelNames, propertyIndex2propertyId, classIndex2classId, classIndex2allClassIndexes);
 	}
 
