@@ -14,3 +14,4 @@ Export-Package: org.eclipse.qvtd.runtime.evaluation,
  org.eclipse.qvtd.runtime.invocation,
  org.eclipse.qvtd.runtime.labels,
  org.eclipse.qvtd.runtime.library.model
+Import-Package: com.google.common.collect

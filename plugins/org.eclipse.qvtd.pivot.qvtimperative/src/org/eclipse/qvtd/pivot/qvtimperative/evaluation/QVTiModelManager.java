@@ -44,6 +44,8 @@ import org.eclipse.qvtd.runtime.evaluation.AbstractTypedModelInstance;
 import org.eclipse.qvtd.runtime.evaluation.TransformationInstance;
 import org.eclipse.qvtd.runtime.evaluation.TypedModelInstance;
 
+import com.google.common.collect.Iterables;
+
 /**
  * QVTc Domain Manager is the class responsible for managing the QVTc virtual
  * machine meta-models and models.
@@ -157,7 +159,7 @@ public class QVTiModelManager extends AbstractModelManager
 		for (@NonNull ImperativeTypedModel typedModel : QVTimperativeUtil.getOwnedTypedModels(transformationAnalysis.getTransformation())) {
 			if (typedModel.isIsChecked()) {
 				TypedModelInstance typedModelInstance = getTypedModelInstance(typedModel);
-				elements.addAll(typedModelInstance.getObjectsOfKind(type));
+				Iterables.addAll(elements, typedModelInstance.getObjectsOfKind(type));
 			}
 		}
 		return elements;

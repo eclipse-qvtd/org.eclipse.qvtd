@@ -52,6 +52,7 @@ import org.eclipse.qvtd.xtext.qvtimperative.tests.ManualUML2RDBMS.ManualRDBMSNor
 import org.eclipse.qvtd.xtext.qvtimperative.tests.SimpleUML2RDBMS.SimpleRDBMSNormalizer;
 import org.eclipse.qvtd.xtext.qvtimperative.tests.Tree2TallTree.Tree2TallTreeInstallManual;
 
+import cg_qvtimperative_tests._hsv2hls.hsv2hls;
 import junit.framework.TestCase;
 
 /**
@@ -228,6 +229,18 @@ public class QVTiCompilerTests extends LoadTestCase
 		myQVT.loadInput(tx, "hsv", inputModelURI);
 		tx.run();
 		myQVT.saveOutput(tx, "hsl", outputModelURI, referenceModelURI, null);
+		myQVT.dispose();
+	}
+
+	public void testCG_HSV2HLS_qvti2() throws Exception {
+		MyQVT myQVT = createQVT();
+		URI inputModelURI = getProjectFileURI("HSV2HLS/HSVNode.xmi");
+		URI outputModelURI = getProjectFileURI("HSV2HLS/HLSNode.xmi");
+		URI referenceModelURI = getProjectFileURI("HSV2HLS/HLSNodeValidate.xmi");
+		Transformer tx = myQVT.createTransformer(hsv2hls.class);
+		myQVT.loadInput(tx, "hsv", inputModelURI);
+		tx.run();
+		myQVT.saveOutput(tx, "hls", outputModelURI, referenceModelURI, null);
 		myQVT.dispose();
 	}
 

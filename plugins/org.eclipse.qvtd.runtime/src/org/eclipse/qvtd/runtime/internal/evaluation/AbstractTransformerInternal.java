@@ -16,7 +16,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -54,6 +53,7 @@ import org.eclipse.qvtd.runtime.evaluation.InvocationManager;
 import org.eclipse.qvtd.runtime.evaluation.ObjectManager;
 import org.eclipse.qvtd.runtime.evaluation.TransformationExecutor;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
+import org.eclipse.qvtd.runtime.library.model.IterableAsSet;
 
 /**
  * The abstract implementation of an auto-generated transformation provides the shared infrastructure for maintaining
@@ -308,16 +308,16 @@ public abstract class AbstractTransformerInternal extends AbstractModelManager i
 		}
 
 		@Override
-		public @NonNull Collection<@NonNull Object> getObjectsOfKind(org.eclipse.ocl.pivot.@NonNull Class type) {
+		public @NonNull Iterable<@NonNull Object> getObjectsOfKind(org.eclipse.ocl.pivot.@NonNull Class type) {
 			TypeId classId = type.getTypeId();
 			Integer classIndex = classId2classIndex.get(classId);
 			if (classIndex != null) {
 				Iterable<@NonNull Object> typedIterable = classIndex2connection[classIndex].typedIterable(Object.class);
-				List<@NonNull Object> collection =  new ArrayList<>();
-				for (@NonNull Object object : typedIterable) {
-					collection.add(object);
-				}
-				return collection;
+				//				List<@NonNull Object> collection =  new ArrayList<>();
+				//				for (@NonNull Object object : typedIterable) {
+				//					collection.add(object);
+				//				}
+				return typedIterable;
 			}
 			return EMPTY_EOBJECT_LIST;
 		}
@@ -405,11 +405,11 @@ public abstract class AbstractTransformerInternal extends AbstractModelManager i
 		}
 	}
 
-	private static class UnmodifiableCollectionAsSet<T> implements Set<T>
+	/*	private static class UnmodifiableCollectionAsSet<T> implements Set<T>
 	{
-		protected final @NonNull Collection<@NonNull T> collection;
+		protected final @NonNull Iterable<@NonNull T> collection;
 
-		private UnmodifiableCollectionAsSet(@NonNull Collection<@NonNull T> collection) {
+		private UnmodifiableCollectionAsSet(@NonNull Iterable<@NonNull T> collection) {
 			this.collection = collection;
 			assert collection.size() == new HashSet<>(collection).size();
 		}
@@ -431,7 +431,7 @@ public abstract class AbstractTransformerInternal extends AbstractModelManager i
 
 		@Override
 		public boolean contains(Object o) {
-			return collection.contains(o);
+			return Iterables.contains(collection, o);
 		}
 
 		@Override
@@ -488,7 +488,7 @@ public abstract class AbstractTransformerInternal extends AbstractModelManager i
 		public <T1> T1[] toArray(T1[] a) {
 			return collection.toArray(a);
 		}
-	}
+	} */
 
 	protected final @NonNull TransformationExecutor executor;
 	/** deprecated use executor */
@@ -659,7 +659,7 @@ public abstract class AbstractTransformerInternal extends AbstractModelManager i
 
 	@Override
 	public @NonNull Set<@NonNull Object> get(org.eclipse.ocl.pivot.@NonNull Class type) {
-		return new UnmodifiableCollectionAsSet<>(models[0].getObjectsOfKind(type));
+		return new IterableAsSet<@NonNull Object>(models[0].getObjectsOfKind(type));
 	}
 
 	/**
