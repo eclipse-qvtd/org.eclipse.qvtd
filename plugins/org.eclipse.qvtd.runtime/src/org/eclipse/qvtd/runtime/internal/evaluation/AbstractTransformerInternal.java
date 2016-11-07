@@ -87,7 +87,7 @@ public abstract class AbstractTransformerInternal extends AbstractModelManager i
 		protected final @NonNull String name;
 		private @Nullable List<@NonNull Object> allEObjects = null;
 		private @Nullable List<@NonNull Object> rootEObjects = null;
-		private @Nullable Map<@NonNull EClass, @NonNull Set<@NonNull Integer>> eClass2allClassIndexes = null;
+		private final @NonNull Map<@NonNull EClass, @NonNull Set<@NonNull Integer>> eClass2allClassIndexes = new HashMap<>();
 
 		/**
 		 * All possible allInstances() returns indexed by the ClassIndex of the ClassId for which allInstances() may be invoked.
@@ -99,7 +99,6 @@ public abstract class AbstractTransformerInternal extends AbstractModelManager i
 			//
 			//	Prepare the allInstances() fields
 			//
-			assert classIndex2allClassIndexes != null;
 			int classIds = classIndex2classId.length;
 			@SuppressWarnings("unchecked")@NonNull List<@NonNull Object> @NonNull [] classIndex2objects = (@NonNull List<@NonNull Object> @NonNull []) new @NonNull ArrayList<?> @NonNull [classIds];
 			this.classIndex2objects = classIndex2objects;
@@ -109,28 +108,26 @@ public abstract class AbstractTransformerInternal extends AbstractModelManager i
 		}
 
 		/**
-		 * Add eObject to the caches.
-		 * <p>
-		 * If eClass2allClassIndexes is non-null, eObject is added to the allInstances() caches potentially updating eClass2allClassIndexes with
-		 * the state of a new EClass.
-		 * <p>
-		 * If eClass2allPropertyIndexes is non-null, eObject is added to the unnavigable opposites caches potentially updating eClass2allPropertyIndexes with
+		 * Add eObject to the the allInstances() caches potentially updating eClass2allClassIndexes with
 		 * the state of a new EClass.
 		 */
-
-		private void accumulateEObject1(@NonNull Object eObject, @NonNull EClass eClass, @NonNull Map<@NonNull EClass, @NonNull Set<@NonNull Integer>> eClass2allClassIndexes) {
+		private void accumulateEObject1(@NonNull Object eObject, @NonNull EClass eClass) {
 			Set<@NonNull Integer> allClassIndexes = eClass2allClassIndexes.get(eClass);
 			if (allClassIndexes == null) {
 				allClassIndexes = getClassIndexes(eClass);
 				eClass2allClassIndexes.put(eClass, allClassIndexes);
 			}
-			List<@NonNull Object>[] classIndex2objects2 = classIndex2objects;
-			assert classIndex2objects2 != null;
 			for (@NonNull Integer classIndex : allClassIndexes) {
-				classIndex2objects2[classIndex].add(eObject);
+				classIndex2objects[classIndex].add(eObject);
 			}
 		}
 
+		/**
+		 * Add eObject to the caches.
+		 * <p>
+		 * If eClass2allPropertyIndexes is non-null, eObject is added to the unnavigable opposites caches potentially updating eClass2allPropertyIndexes with
+		 * the state of a new EClass.
+		 */
 		private void accumulateEObject2(@NonNull Object eObject, @NonNull EClass eClass,
 				@NonNull Map<@NonNull EClass, @NonNull List<@NonNull Integer>> eClass2allPropertyIndexes,
 				@Nullable Map<@NonNull EReference, @NonNull Integer> eReference2propertyIndex) {
@@ -169,13 +166,8 @@ public abstract class AbstractTransformerInternal extends AbstractModelManager i
 			rootEObjects = null;
 			assert !allEObjects2.contains(eObject);
 			allEObjects2.add(eObject);
-			if (eClass2allClassIndexes == null) {
-				eClass2allClassIndexes = new HashMap<>();
-			}
 			EClass eClass = eClass(eObject);
-			if (eClass2allClassIndexes != null) {
-				accumulateEObject1(eObject, eClass, eClass2allClassIndexes);
-			}
+			accumulateEObject1(eObject, eClass);
 		}
 
 		/**
@@ -187,15 +179,13 @@ public abstract class AbstractTransformerInternal extends AbstractModelManager i
 				rootEObjects = rootEObjects2 = new ArrayList<>();
 			}
 			allEObjects = null;
-			Map<@NonNull EClass, @NonNull Set<@NonNull Integer>> eClass2allClassIndexes = new HashMap<>();
 			Map<@NonNull EClass, @NonNull List<@NonNull Integer>> eClass2allPropertyIndexes = null;
 			Map<@NonNull EReference, @NonNull Integer> eReference2propertyIndex = null;
-			;
 			if (propertyIndex2propertyId != null) {
 				eClass2allPropertyIndexes = new HashMap<>();
 				eReference2propertyIndex = new HashMap<>();
 			}
-			for (Object eRootObject : eRootObjects) {
+			for (@NonNull Object eRootObject : eRootObjects) {
 				//
 				//	Accumulate the root object in the model extent
 				//
@@ -203,24 +193,18 @@ public abstract class AbstractTransformerInternal extends AbstractModelManager i
 				//
 				//	Accumulate the root object and all its child objects in the allInstances() returns
 				//
-				if ((eClass2allClassIndexes != null) || (eClass2allPropertyIndexes != null)) {
-					EClass eRootClass = eClass(eRootObject);
-					if (eClass2allClassIndexes != null) {
-						accumulateEObject1(eRootObject, eRootClass, eClass2allClassIndexes);
-					}
-					if (eClass2allPropertyIndexes != null) {
-						accumulateEObject2(eRootObject, eRootClass, eClass2allPropertyIndexes, eReference2propertyIndex);
-					}
-					for (TreeIterator<? extends Object> tit = eAllContents(eRootObject); tit.hasNext(); ) {
-						Object eObject = tit.next();
-						if (eObject != null) {
-							EClass eClass = eClass(eObject);
-							if (eClass2allClassIndexes != null) {
-								accumulateEObject1(eObject, eClass, eClass2allClassIndexes);
-							}
-							if (eClass2allPropertyIndexes != null) {
-								accumulateEObject2(eObject, eClass, eClass2allPropertyIndexes, eReference2propertyIndex);
-							}
+				EClass eRootClass = eClass(eRootObject);
+				accumulateEObject1(eRootObject, eRootClass);
+				if (eClass2allPropertyIndexes != null) {
+					accumulateEObject2(eRootObject, eRootClass, eClass2allPropertyIndexes, eReference2propertyIndex);
+				}
+				for (TreeIterator<? extends Object> tit = eAllContents(eRootObject); tit.hasNext(); ) {
+					Object eObject = tit.next();
+					if (eObject != null) {
+						EClass eClass = eClass(eObject);
+						accumulateEObject1(eObject, eClass);
+						if (eClass2allPropertyIndexes != null) {
+							accumulateEObject2(eObject, eClass, eClass2allPropertyIndexes, eReference2propertyIndex);
 						}
 					}
 				}
@@ -252,9 +236,8 @@ public abstract class AbstractTransformerInternal extends AbstractModelManager i
 
 		@Override
 		public @NonNull Collection<@NonNull Object> getObjectsOfKind(org.eclipse.ocl.pivot.@NonNull Class type) {
-			Map<@NonNull ClassId, @NonNull Integer> classId2classIndex2 = classId2classIndex;
 			TypeId classId = type.getTypeId();
-			Integer classIndex = classId2classIndex2.get(classId);
+			Integer classIndex = classId2classIndex.get(classId);
 			if (classIndex != null) {
 				return classIndex2objects[classIndex];
 			}
