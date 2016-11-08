@@ -33,7 +33,7 @@ public class QVTimperativeCS2AS extends EssentialOCLCS2AS
 			for (EObject eObject = csElement; eObject != null; eObject = eObject.eContainer()) {
 				if (eObject instanceof MappingCS) {
 					Element mapping = ((MappingCS)eObject).getPivot();
-					ImperativeTransformation transformation = QVTimperativeUtil.getContainingTransformation(mapping);
+					ImperativeTransformation transformation = QVTimperativeUtil.basicGetContainingTransformation(mapping);
 					if (transformation != null) {
 						ImperativeTypedModel middleModel = QVTimperativeUtil.basicGetOwnedTypedModel(transformation, null);
 						if ((middleModel == null) || middleModel.getUsedPackage().contains(areaPackage)) {

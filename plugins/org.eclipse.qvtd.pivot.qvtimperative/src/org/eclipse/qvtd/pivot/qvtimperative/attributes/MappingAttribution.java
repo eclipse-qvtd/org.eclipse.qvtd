@@ -77,7 +77,7 @@ public class MappingAttribution extends AbstractAttribution
 				}
 			}
 			environmentView.addNamedElements(QVTimperativeUtil.getOwnedMappingParameters(mapping));
-			ImperativeTransformation transformation = QVTimperativeUtil.getContainingTransformation(mapping);
+			ImperativeTransformation transformation = QVTimperativeUtil.basicGetContainingTransformation(mapping);
 			if (transformation != null) {
 				for (@NonNull ImperativeTypedModel typedModel : QVTimperativeUtil.getOwnedTypedModels(transformation)) {
 					for (org.eclipse.ocl.pivot.Package usedPackage : typedModel.getUsedPackage()) {

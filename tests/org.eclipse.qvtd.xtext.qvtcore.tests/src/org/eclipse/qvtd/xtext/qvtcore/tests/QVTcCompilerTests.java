@@ -10,30 +10,17 @@
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtcore.tests;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
-
-import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
-import org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.codegen.dynamic.OCL2JavaFileObject;
-import org.eclipse.ocl.pivot.internal.manager.MetamodelManagerInternal;
 import org.eclipse.ocl.pivot.model.OCLstdlib;
-import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
-import org.eclipse.qvtd.codegen.qvti.QVTiCodeGenOptions;
-import org.eclipse.qvtd.codegen.qvti.java.QVTiCodeGenerator;
 import org.eclipse.qvtd.compiler.CompilerChain;
 import org.eclipse.qvtd.compiler.QVTcCompilerChain;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.BasicMappingRegion;
@@ -47,14 +34,12 @@ import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.LateConsumerMerger;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.splitter.Splitter;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
-import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
-import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiIncrementalExecutor;
-import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiTransformationExecutor;
-import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
+import org.eclipse.qvtd.xtext.qvtbase.tests.AbstractTestQVT;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
+import org.eclipse.qvtd.xtext.qvtbase.tests.ModelNormalizer;
 import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.TestsXMLUtil;
 import org.eclipse.qvtd.xtext.qvtcore.tests.families2persons.Families2PersonsNormalizer;
 import org.eclipse.qvtd.xtext.qvtcore.tests.families2persons.Families.FamiliesPackage;
@@ -72,24 +57,22 @@ import org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simplerdbms.SimplerdbmsPac
 import org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.SimpleumlPackage;
 import org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml2rdbms.Simpleuml2rdbmsPackage;
 import org.eclipse.qvtd.xtext.qvtcore.tests.upper2lower.Upper2LowerNormalizer;
-import org.eclipse.qvtd.xtext.qvtimperative.tests.ModelNormalizer;
 import org.eclipse.qvtd.xtext.qvtimperative.tests.QVTiTestUtil;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import junit.framework.TestCase;
 
 /**
  * Tests that QVTc files can be compiled and executed.
  */
 public class QVTcCompilerTests extends LoadTestCase
 {
+	private static final @NonNull String PROJECT_NAME = "org.eclipse.qvtd.xtext.qvtcore.tests";
 	protected static final @NonNull URI TESTS_BASE_URI = URI.createPlatformResourceURI("/org.eclipse.qvtd.xtext.qvtcore.tests/bin/org/eclipse/qvtd/xtext/qvtcore/tests", true);
 	protected static final @NonNull URI TESTS_JAVA_SRC_URI = URI.createPlatformResourceURI("/org.eclipse.qvtd.xtext.qvtcore.tests/test-gen", true);
 	protected static final @NonNull URI TESTS_JAVA_BIN_URI = URI.createPlatformResourceURI("/org.eclipse.qvtd.xtext.qvtcore.tests/bin", true);
 
-	protected static class MyQVT extends QVTimperative
+	protected static class MyQVT extends AbstractTestQVT
 	{
 		protected class InstrumentedCompilerChain extends QVTcCompilerChain
 		{
@@ -112,20 +95,18 @@ public class QVTcCompilerTests extends LoadTestCase
 			}
 		}
 
-		protected final @NonNull String testFolderName;
+		/*		protected final @NonNull String testFolderName;
 		protected final @NonNull URI testFolderURI;
 		protected final @NonNull URI samplesBaseUri;
 		private QVTcCompilerChain compilerChain = null;
 		private BasicQVTiExecutor interpretedExecutor = null;
 		private QVTiTransformationExecutor generatedExecutor = null;
 		private Set<@NonNull String> nsURIs = new HashSet<@NonNull String>();
+		 */
 		private final @NonNull Map<@NonNull Class<? extends Region>, @NonNull Integer> regionClass2count = new HashMap<>();
 
 		public MyQVT(@NonNull String testFolderName) {
-			super(new QVTiEnvironmentFactory(getProjectMap(), null));
-			this.testFolderName = testFolderName;
-			this.testFolderURI = TESTS_BASE_URI.appendSegment(testFolderName);
-			this.samplesBaseUri = testFolderURI.appendSegment("samples");
+			super(TESTS_BASE_URI, PROJECT_NAME, testFolderName);
 		}
 
 		public void assertRegionCount(@NonNull Class<? extends Region> regionClass, @NonNull Integer count) {
@@ -139,20 +120,26 @@ public class QVTcCompilerTests extends LoadTestCase
 			QVTcCompilerChain.setOption(options, CompilerChain.JAVA_STEP, CompilerChain.URI_KEY, TESTS_JAVA_SRC_URI);
 			QVTcCompilerChain.setOption(options, CompilerChain.JAVA_STEP, CompilerChain.JAVA_EXTRA_PREFIX_KEY, "cg");
 			QVTcCompilerChain.setOption(options, CompilerChain.CLASS_STEP, CompilerChain.URI_KEY, TESTS_JAVA_BIN_URI);
-			compilerChain = new InstrumentedCompilerChain(getEnvironmentFactory(), testFolderURI.appendSegment(testFileName), options);
-			Class<? extends Transformer> txClass = compilerChain.build(outputName, genModelFiles);
-			createGeneratedExecutor(txClass);
-			return txClass;
+			//			compilerChain = new InstrumentedCompilerChain(getEnvironmentFactory(), testFolderURI.appendSegment(testFileName), options);
+			//			Class<? extends Transformer> txClass = compilerChain.build(outputName, genModelFiles);
+			//			createGeneratedExecutor(txClass);
+			//			return txClass;
+			return doBuild(testFileName, outputName, options, genModelFiles);
+			//			compilerChain = createCompilerChain(testFolderURI.appendSegment(testFileName), options);
+			//			Class<? extends Transformer> txClass = compilerChain.build(outputName, genModelFiles);
+			//			createGeneratedExecutor(txClass);
+			//			return txClass;
 		}
 
 		public @NonNull ImperativeTransformation compileTransformation(@NonNull String testFileName, @NonNull String outputName) throws Exception {
 			Map<@NonNull String, @Nullable Map<CompilerChain.@NonNull Key<Object>, @Nullable Object>> options = new HashMap<@NonNull String, @Nullable Map<CompilerChain.@NonNull Key<Object>, @Nullable Object>>();
 			QVTcCompilerChain.setOption(options, CompilerChain.DEFAULT_STEP, CompilerChain.DEBUG_KEY, true);
 			QVTcCompilerChain.setOption(options, CompilerChain.DEFAULT_STEP, CompilerChain.SAVE_OPTIONS_KEY, TestsXMLUtil.defaultSavingOptions);
-			compilerChain = new InstrumentedCompilerChain(getEnvironmentFactory(), testFolderURI.appendSegment(testFileName), options);
+			/*			compilerChain = new InstrumentedCompilerChain(getEnvironmentFactory(), testFolderURI.appendSegment(testFileName), options);
 			return compilerChain.compile(outputName);
 		}
 
+		@Override
 		public @NonNull Class<? extends Transformer> createGeneratedClass(@NonNull Transformation asTransformation, @NonNull String @NonNull... genModelFiles) throws Exception {
 			ResourceSet resourceSet = getResourceSet();
 			resourceSet.getPackageRegistry().put(GenModelPackage.eNS_URI, GenModelPackage.eINSTANCE);
@@ -179,71 +166,37 @@ public class QVTcCompilerTests extends LoadTestCase
 			return txClass;
 		}
 
+		@Override
 		public void createGeneratedExecutor(@NonNull Transformation asTransformation, @NonNull String @NonNull... genModelFiles) throws Exception {
 			Class<? extends Transformer> txClass = createGeneratedClass(asTransformation, genModelFiles);
 			createGeneratedExecutor(txClass);
 		}
 
+		@Override
 		public QVTiTransformationExecutor createGeneratedExecutor(@NonNull Class<? extends Transformer> txClass)  throws Exception {
 			return generatedExecutor = new QVTiTransformationExecutor(getEnvironmentFactory(), txClass);
 		}
 
+		@Override
 		public @NonNull BasicQVTiExecutor createInterpretedExecutor(@NonNull ImperativeTransformation asTransformation) throws Exception {
 			interpretedExecutor = new QVTiIncrementalExecutor(getEnvironmentFactory(), asTransformation, QVTiIncrementalExecutor.Mode.LAZY);
 			return interpretedExecutor;
 		}
 
+		@Override
 		public @Nullable Resource createModel(@NonNull String modelName, @NonNull String modelFile) {
 			URI modelURI = samplesBaseUri.appendSegment(modelFile);
 			return interpretedExecutor.createModel(modelName, modelURI, null);
+		} */
+			return doCompile(testFileName, outputName, options);
+			//			compilerChain = createCompilerChain(testFolderURI.appendSegment(testFileName), options);
+			//			return compilerChain.compile(outputName);
 		}
 
 		@Override
-		public synchronized void dispose() {
-			super.dispose();
-			if (interpretedExecutor != null) {
-				interpretedExecutor.dispose();
-			}
-			if (compilerChain != null) {
-				compilerChain.dispose();
-			}
-			/**
-			 * Remove the eInstances from the EPackage.Registry.INSTANCE so that global registrations from the calling test
-			 * do not confuse subsequent tests that may want to use dynamic models.
-			 */
-			for (String nsURI : nsURIs) {
-				EPackage.Registry.INSTANCE.remove(nsURI);
-			}
-		}
-
-		public void executeTransformation() throws Exception {
-			if (interpretedExecutor != null) {
-				interpretedExecutor.execute();
-				interpretedExecutor.saveContents();
-				//				interpretedExecutor.saveModels(TestsXMLUtil.defaultSavingOptions);
-			}
-			else {
-				Transformer transformer = generatedExecutor.getTransformer();
-				transformer.run();
-			}
-		}
-
-		@Override
-		public @NonNull QVTiEnvironmentFactory getEnvironmentFactory() {
-			return super.getEnvironmentFactory();
-		}
-
-		public @NonNull Collection<@NonNull ? extends Object> getRootObjects(@NonNull String modelName) {
-			if (interpretedExecutor != null) {
-				return interpretedExecutor.getRootObjects(modelName);
-			}
-			else {
-				return generatedExecutor.getTransformer().getRootObjects(modelName);
-			}
-		}
-
-		public @NonNull Map<Object, Object> getSaveOptions() {
-			return TestsXMLUtil.defaultSavingOptions;
+		protected @NonNull QVTcCompilerChain createCompilerChain(@NonNull URI prefixURI,
+				@NonNull Map<@NonNull String, @Nullable Map<CompilerChain.@NonNull Key<Object>, @Nullable Object>> options) {
+			return new InstrumentedCompilerChain(getEnvironmentFactory(), prefixURI, options);
 		}
 
 		private void instrumentRegion(@NonNull Region parentRegion) {
@@ -260,28 +213,11 @@ public class QVTcCompilerTests extends LoadTestCase
 			rSet.getPackageRegistry().put(fileURI.toString(), ePackage);
 		}
 
-		private void loadGenModel(@NonNull URI genModelURI) {
-			ResourceSet resourceSet = getResourceSet();
-			MetamodelManagerInternal metamodelManager = getMetamodelManager();
-			Resource csGenResource = resourceSet.getResource(genModelURI, true);
-			for (EObject eObject : csGenResource.getContents()) {
-				if (eObject instanceof GenModel) {
-					GenModel genModel = (GenModel)eObject;
-					genModel.reconcile();
-					metamodelManager.addGenModel(genModel);
-				}
-			}
-		}
-
-		public @Nullable Resource loadInput(@NonNull String modelName, @NonNull String modelFile) {
-			URI modelURI = samplesBaseUri.appendSegment(modelFile);
-			if (interpretedExecutor != null) {
-				return interpretedExecutor.loadModel(modelName, modelURI);
-			}
-			else {
-				Resource inputResource = getResourceSet().getResource(modelURI, true);
-				generatedExecutor.getTransformer().addRootObjects(modelName, ClassUtil.nullFree(inputResource.getContents()));
-				return inputResource;
+		@Override
+		protected void loadGenModels(@NonNull String @NonNull... genModelFiles) {
+			for (String genModelFile : genModelFiles) {
+				URI genModelURI = testFolderURI.appendSegment(genModelFile);
+				loadGenModel(genModelURI);
 			}
 		}
 

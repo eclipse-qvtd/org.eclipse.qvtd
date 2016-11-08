@@ -26,12 +26,12 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.xtext.tests.XtextTestCase.Normalizer;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.qvtd.xtext.qvtimperative.tests.ModelNormalizer;
+import org.eclipse.qvtd.xtext.qvtbase.tests.ModelNormalizer;
 
 public class SimpleRDBMSNormalizer implements ModelNormalizer
 {
 	public static final @NonNull SimpleRDBMSNormalizer INSTANCE = new SimpleRDBMSNormalizer();
-	
+
 	protected static class RModelElementNameComparator implements Comparator<EObject>
 	{
 		private final @NonNull EAttribute rmodelElementName;
@@ -39,7 +39,7 @@ public class SimpleRDBMSNormalizer implements ModelNormalizer
 		public RModelElementNameComparator(@NonNull EAttribute rmodelElementName) {
 			this.rmodelElementName = rmodelElementName;
 		}
-		
+
 		@Override
 		public int compare(EObject o1, EObject o2) {
 			String n1 = (String) o1.eGet(rmodelElementName);
@@ -72,7 +72,7 @@ public class SimpleRDBMSNormalizer implements ModelNormalizer
 			ECollections.sort(tables, rmodelElementNameComparator);
 		}
 	}
-	
+
 	protected class TableNormalizer implements Normalizer
 	{
 		protected final @NonNull EObject table;
@@ -104,7 +104,7 @@ public class SimpleRDBMSNormalizer implements ModelNormalizer
 	}
 
 	@Override
-	public @NonNull List<Normalizer> normalize(@NonNull Resource resource) {
+	public @NonNull List<@NonNull Normalizer> normalize(@NonNull Resource resource) {
 		EObject eRoot = resource.getContents().get(0);
 		EPackage ePackage = eRoot.eClass().getEPackage();
 		EClass schemaClass = (EClass) ePackage.getEClassifier("Schema");
@@ -124,7 +124,7 @@ public class SimpleRDBMSNormalizer implements ModelNormalizer
 		EReference tableForeignKeys = (EReference) tableClass.getEStructuralFeature("foreignKeys");
 		assert tableForeignKeys != null;
 		RModelElementNameComparator rmodelElementNameComparator = new RModelElementNameComparator(rmodelElementName);
-		List<Normalizer> normalizers = new ArrayList<Normalizer>();
+		List<@NonNull Normalizer> normalizers = new ArrayList<>();
 		for (TreeIterator<EObject> tit = resource.getAllContents(); tit.hasNext(); ) {
 			EObject eObject = tit.next();
 			EClass eClass = eObject.eClass();

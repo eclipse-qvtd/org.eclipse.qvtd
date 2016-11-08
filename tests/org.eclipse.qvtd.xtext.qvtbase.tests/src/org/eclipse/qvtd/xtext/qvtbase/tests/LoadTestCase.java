@@ -22,16 +22,61 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.internal.StandardLibraryImpl;
 import org.eclipse.ocl.pivot.internal.library.StandardLibraryContribution;
+import org.eclipse.ocl.pivot.resource.ASResource;
+import org.eclipse.ocl.pivot.resource.CSResource;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.OCL;
+import org.eclipse.ocl.pivot.utilities.PivotConstants;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbase;
 import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.TestsXMLUtil;
+import org.eclipse.xtext.resource.XtextResource;
 
 /**
  * Tests that load a model and verify that there are no unresolved proxies as a result.
  */
 public class LoadTestCase extends XtextTestCase
 {
+	protected static @NonNull ASResource loadQVTiAS(@NonNull OCL ocl, @NonNull URI inputURI) {
+		Resource asResource = ocl.getMetamodelManager().getASResourceSet().getResource(inputURI, true);
+		assert asResource != null;
+		//		List<String> conversionErrors = new ArrayList<String>();
+		//		RootPackageCS documentCS = Ecore2OCLinEcore.importFromEcore(resourceSet, null, ecoreResource);
+		//		Resource eResource = documentCS.eResource();
+		assertNoResourceErrors("Load failed", asResource);
+		//		Resource xtextResource = resourceSet.createResource(outputURI, OCLinEcoreCSTPackage.eCONTENT_TYPE);
+		//		XtextResource xtextResource = (XtextResource) resourceSet.createResource(outputURI);
+		//		xtextResource.getContents().add(documentCS);
+		return (ASResource) asResource;
+	}
+
+	// FIXME move following clones to a Util class
+	protected static @NonNull XtextResource pivot2cs(@NonNull OCL ocl, @NonNull ResourceSet resourceSet, @NonNull ASResource asResource, @NonNull URI outputURI, /*@NonNull*/ String csContentType) throws IOException {
+		XtextResource xtextResource = ClassUtil.nonNullState((XtextResource) resourceSet.createResource(outputURI, csContentType));
+		ocl.as2cs(asResource, (CSResource) xtextResource);
+		assertNoResourceErrors("Conversion failed", xtextResource);
+		//
+		//	CS save
+		//
+		URI savedURI = ClassUtil.nonNullState(asResource.getURI());
+		asResource.setURI(outputURI.trimFileExtension().trimFileExtension().appendFileExtension(PivotConstants.OCL_AS_FILE_EXTENSION));
+		asResource.save(TestsXMLUtil.defaultSavingOptions);
+		asResource.setURI(savedURI);
+		assertNoDiagnosticErrors("Concrete Syntax validation failed", xtextResource);
+		try {
+			xtextResource.save(TestsXMLUtil.defaultSavingOptions);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			URI xmiURI = outputURI.appendFileExtension(".xmi");
+			Resource xmiResource = resourceSet.createResource(xmiURI);
+			xmiResource.getContents().addAll(ClassUtil.nullFree(xtextResource.getContents()));
+			xmiResource.save(TestsXMLUtil.defaultSavingOptions);
+			fail(e.toString());
+		}
+		return xtextResource;
+	}
+
 	public void doLoad_Concrete(@NonNull String inputName, @NonNull String @Nullable [] messages) throws IOException {
 		OCL ocl = QVTbase.newInstance(getProjectMap(), null);
 		//		OCL ocl = OCL.newInstance(getProjectMap());

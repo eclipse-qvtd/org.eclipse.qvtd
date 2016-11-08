@@ -28,7 +28,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.xtext.tests.XtextTestCase.Normalizer;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.TreeIterable;
-import org.eclipse.qvtd.xtext.qvtimperative.tests.ModelNormalizer;
+import org.eclipse.qvtd.xtext.qvtbase.tests.ModelNormalizer;
 
 /**
  * UpperToLowerNormalizer normalises the results of the UpperToLower transformation.
@@ -239,7 +239,7 @@ public class FlatStateMachineNormalizer implements ModelNormalizer
 	protected final @NonNull Map<@NonNull EClass, @NonNull AbstractNormalizer> eClass2normalizer = new HashMap<@NonNull EClass, @NonNull AbstractNormalizer>();
 
 	@Override
-	public @NonNull List<Normalizer> normalize(@NonNull Resource resource) {
+	public @NonNull List<@NonNull Normalizer> normalize(@NonNull Resource resource) {
 		EObject eRoot = resource.getContents().get(0);
 		EPackage ePackage = eRoot.eClass().getEPackage();
 		EClass stateClass = (EClass) ClassUtil.nonNullState(ePackage.getEClassifier("State"));
@@ -277,7 +277,7 @@ public class FlatStateMachineNormalizer implements ModelNormalizer
 			normalizer.normalize(eObject);
 		}
 		ECollections.sort(resource.getContents(), stateMachineComparator);
-		List<Normalizer> normalizers = new ArrayList<Normalizer>();
+		List<@NonNull Normalizer> normalizers = new ArrayList<>();
 		return normalizers;
 	}
 }

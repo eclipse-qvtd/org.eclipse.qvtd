@@ -26,16 +26,16 @@ import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.Nameable;
-import org.eclipse.qvtd.xtext.qvtimperative.tests.ModelNormalizer;
+import org.eclipse.qvtd.xtext.qvtbase.tests.ModelNormalizer;
 
 public class PivotNormalizer implements ModelNormalizer
 {
 	public static final @NonNull PivotNormalizer INSTANCE = new PivotNormalizer();
 
 	public static final class ToStringComparator implements Comparator<Nameable>
-	{	
+	{
 		public static final @NonNull ToStringComparator INSTANCE = new ToStringComparator();
-	
+
 		@Override
 		public int compare(Nameable o1, Nameable o2) {
 			String n1 = String.valueOf(o1);
@@ -104,8 +104,8 @@ public class PivotNormalizer implements ModelNormalizer
 	}
 
 	@Override
-	public @NonNull List<Normalizer> normalize(@NonNull Resource resource) {
-		List<Normalizer> normalizers = new ArrayList<Normalizer>();
+	public @NonNull List<@NonNull Normalizer> normalize(@NonNull Resource resource) {
+		List<@NonNull Normalizer> normalizers = new ArrayList<>();
 		for (TreeIterator<EObject> tit = resource.getAllContents(); tit.hasNext(); ) {
 			EObject eObject = tit.next();
 			if (eObject instanceof Model) {
@@ -119,8 +119,8 @@ public class PivotNormalizer implements ModelNormalizer
 				normalizers.add(new ClassNormalizer((org.eclipse.ocl.pivot.Class)eObject));
 			}
 		}
-//		EList<NamedElement> contents = (EList<NamedElement>)(Object)resource.getContents();
-//		ECollections.sort(contents, ToStringComparator.INSTANCE);
+		//		EList<NamedElement> contents = (EList<NamedElement>)(Object)resource.getContents();
+		//		ECollections.sort(contents, ToStringComparator.INSTANCE);
 		for (Normalizer normalizer : normalizers) {
 			normalizer.normalize();
 		}

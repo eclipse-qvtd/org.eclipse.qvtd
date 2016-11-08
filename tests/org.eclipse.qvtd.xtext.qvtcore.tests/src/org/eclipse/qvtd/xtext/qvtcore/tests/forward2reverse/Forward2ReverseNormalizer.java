@@ -26,8 +26,8 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.xtext.tests.XtextTestCase.Normalizer;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.qvtd.xtext.qvtbase.tests.ModelNormalizer;
 import org.eclipse.qvtd.xtext.qvtcore.tests.list2list.doublylinkedlist.DoublylinkedlistPackage;
-import org.eclipse.qvtd.xtext.qvtimperative.tests.ModelNormalizer;
 
 /**
  * Forward2ReverseNormalizer normalises the results of the Forward2Reverse transformation.
@@ -80,8 +80,8 @@ public class Forward2ReverseNormalizer implements ModelNormalizer
 	}
 
 	@Override
-	public @NonNull List<Normalizer> normalize(@NonNull Resource resource) {
-		List<Normalizer> normalizers = new ArrayList<Normalizer>();
+	public @NonNull List<@NonNull Normalizer> normalize(@NonNull Resource resource) {
+		List<@NonNull Normalizer> normalizers = new ArrayList<>();
 		List<@NonNull EObject> contents = resource.getContents();
 		if (contents.isEmpty()) {
 			return normalizers;

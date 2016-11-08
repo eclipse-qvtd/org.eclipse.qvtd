@@ -18,10 +18,12 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGAccumulator;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGEcorePropertyCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
 import org.eclipse.ocl.examples.codegen.utilities.CGUtil;
+import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcoreContainerAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcorePropertyAssignment;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGGuardVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCall;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCallBinding;
@@ -36,10 +38,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 
 public class QVTiCGUtil extends CGUtil
 {
-	public static @NonNull Mapping getAST(@NonNull CGMapping cgMapping) {
-		return ClassUtil.nonNullState((Mapping) cgMapping.getAst());
-	}
-
 	public static @Nullable CGMapping basicGetContainingCGMapping(@NonNull CGElement cgElement) {
 		for (EObject eObject = cgElement; eObject != null; eObject = eObject.eContainer()) {
 			if (eObject instanceof CGMapping) {
@@ -47,6 +45,14 @@ public class QVTiCGUtil extends CGUtil
 			}
 		}
 		return null;
+	}
+
+	public static @NonNull VariableDeclaration getAST(@NonNull CGGuardVariable cgGuardVariable) {
+		return ClassUtil.nonNullState((VariableDeclaration)cgGuardVariable.getAst());
+	}
+
+	public static @NonNull Mapping getAST(@NonNull CGMapping cgMapping) {
+		return ClassUtil.nonNullState((Mapping)cgMapping.getAst());
 	}
 
 	public static @NonNull MappingCall getAST(@NonNull CGMappingCall cgMappingCall) {
@@ -117,5 +123,14 @@ public class QVTiCGUtil extends CGUtil
 			throw new IllegalStateException("Transformation " + cgTransformation.getName() + " has no root mapping");
 		}
 		return cgRootMapping;
+	}
+
+	public static @NonNull Iterable<@NonNull CGGuardVariable> getOwnedGuardVariables(@NonNull CGMapping cgRootMapping) {
+		return ClassUtil.nullFree(cgRootMapping.getOwnedGuardVariables());
+	}
+
+	public static @NonNull CGTransformation getOwningTransformation(@NonNull CGMapping cgMapping) {
+		return ClassUtil.nonNullState(cgMapping.getOwningTransformation());
+
 	}
 }

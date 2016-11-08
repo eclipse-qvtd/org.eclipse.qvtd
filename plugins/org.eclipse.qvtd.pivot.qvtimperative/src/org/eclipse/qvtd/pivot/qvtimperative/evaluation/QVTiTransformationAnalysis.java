@@ -32,6 +32,7 @@ import org.eclipse.ocl.pivot.PrimitiveType;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.PropertyCallExp;
 import org.eclipse.ocl.pivot.Type;
+import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.ids.IdManager;
 import org.eclipse.ocl.pivot.ids.OperationId;
 import org.eclipse.ocl.pivot.ids.TypeId;
@@ -39,6 +40,7 @@ import org.eclipse.ocl.pivot.internal.manager.MetamodelManagerInternal;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.library.LibraryFeature;
 import org.eclipse.ocl.pivot.library.oclany.OclElementOclContainerProperty;
+import org.eclipse.qvtd.pivot.qvtimperative.AppendParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
@@ -115,8 +117,8 @@ public class QVTiTransformationAnalysis
 		this.transformation = transformation;
 	}
 
-	private void addAllInstancesClass(@NonNull OCLExpression asExpression) {
-		Type asType = asExpression.getTypeValue();
+	private void addAllInstancesClass(@NonNull TypedElement asExpression) {
+		Type asType = asExpression instanceof OCLExpression ? ((OCLExpression)asExpression).getTypeValue() : null;
 		if (asType == null) {
 			asType = asExpression.getType();
 		}
@@ -268,6 +270,13 @@ public class QVTiTransformationAnalysis
 			}
 			else if (eObject instanceof SetStatement) {
 				setStatements.add((SetStatement)eObject);
+			}
+			else if (eObject instanceof AppendParameter) {
+				Mapping mapping = QVTimperativeUtil.getContainingMapping(eObject);
+				Mapping rootMapping = QVTimperativeUtil.getRootMapping(QVTimperativeUtil.getContainingTransformation(mapping));
+				if (rootMapping == mapping) {
+					addAllInstancesClass((AppendParameter)eObject);
+				}
 			}
 			else if (eObject instanceof OperationCallExp) {
 				OperationCallExp operationCallExp = (OperationCallExp)eObject;

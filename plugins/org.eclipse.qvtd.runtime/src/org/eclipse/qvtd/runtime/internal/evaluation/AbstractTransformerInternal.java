@@ -305,6 +305,10 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 			return allEObjects2;
 		}
 
+		public @NonNull Connection getConnection(int classIndex) {
+			return classIndex2connection[classIndex];
+		}
+
 		@Override
 		public @NonNull Iterable<@NonNull Object> getObjectsOfKind(org.eclipse.ocl.pivot.@NonNull Class type) {
 			TypeId classId = type.getTypeId();

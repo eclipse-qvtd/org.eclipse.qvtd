@@ -19,8 +19,8 @@ query hsv2hsl::rgb2hsl(color : HSV2HSL::RGB) : HSLTree::HSL;
 query hsv2hsl::rgb2hsv(color : HSV2HSL::RGB) : HSVTree::HSV;
 
 map __root__ in hsv2hsl {
---    for hsvRoot : HSVTree::HSVNode in HSVTree::HSVNode.allInstances() {
-    for hsvRoot : HSVTree::HSVNode in hsv.objectsOfKind(HSVTree::HSVNode) {
+	append nodes : HSVTree::HSVNode;
+    for hsvRoot : HSVTree::HSVNode in nodes {
         call HSV2MiddleRoot {
             hsvRoot iterates hsvRoot;
         } 

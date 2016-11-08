@@ -62,9 +62,9 @@ import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiTransformationExecuto
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
+import org.eclipse.qvtd.xtext.qvtbase.tests.ModelNormalizer;
 import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.TestsXMLUtil;
 import org.eclipse.qvtd.xtext.qvtcore.QVTcoreStandaloneSetup;
-import org.eclipse.qvtd.xtext.qvtimperative.tests.ModelNormalizer;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

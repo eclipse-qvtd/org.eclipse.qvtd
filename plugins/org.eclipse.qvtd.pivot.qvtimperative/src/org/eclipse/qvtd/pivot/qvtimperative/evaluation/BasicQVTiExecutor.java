@@ -49,6 +49,7 @@ import org.eclipse.ocl.pivot.values.NullValue;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
+import org.eclipse.qvtd.pivot.qvtimperative.AppendParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.AppendParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
@@ -64,8 +65,10 @@ import org.eclipse.qvtd.pivot.qvtimperative.SimpleParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
+import org.eclipse.qvtd.runtime.evaluation.Connection;
 import org.eclipse.qvtd.runtime.evaluation.Interval;
 import org.eclipse.qvtd.runtime.evaluation.InvocationFailedException;
+import org.eclipse.qvtd.runtime.evaluation.TypedModelInstance;
 
 public abstract class BasicQVTiExecutor extends AbstractExecutor implements QVTiExecutor
 {
@@ -383,6 +386,25 @@ public abstract class BasicQVTiExecutor extends AbstractExecutor implements QVTi
 		try {
 			Interval rootInterval = getInvocationManager().getRootInterval();
 			mapping2interval.put(rule, rootInterval);
+			TypedModelInstance modelInstance = null;
+			for (@NonNull ImperativeTypedModel typedModel : QVTimperativeUtil.getOwnedTypedModels(transformation)) {
+				if (typedModel.isIsChecked()) {
+					modelInstance = getModelsManager().getTypedModelInstance(typedModel);
+					break;
+				}
+			}
+			assert modelInstance != null;
+			for (@NonNull MappingParameter mappingParameter : QVTimperativeUtil.getOwnedMappingParameters(rule)) {
+				if (mappingParameter instanceof AppendParameter) {
+					org.eclipse.ocl.pivot.Class type = QVTimperativeUtil.getClassType(mappingParameter);
+					Connection connection = rootInterval.createConnection(QVTimperativeUtil.getName(mappingParameter), type.getTypeId(), false);
+					Iterable<@NonNull ? extends Object> objectsOfKind = modelInstance.getObjectsOfKind(type);
+					for (@NonNull Object object : objectsOfKind) {
+						connection.append(object);
+					}
+					getEvaluationEnvironment().add(mappingParameter, connection);
+				}
+			}
 			rule.accept(undecoratedVisitor);			// Use an outer InvocationConstructor?
 			getInvocationManager().flush();
 		}

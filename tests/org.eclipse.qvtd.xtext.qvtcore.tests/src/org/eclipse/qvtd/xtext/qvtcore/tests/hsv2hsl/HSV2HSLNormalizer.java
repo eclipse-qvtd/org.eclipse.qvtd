@@ -26,8 +26,8 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.xtext.tests.XtextTestCase.Normalizer;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.qvtd.xtext.qvtbase.tests.ModelNormalizer;
 import org.eclipse.qvtd.xtext.qvtcore.tests.hsv2hsl.HSLTree.HSLTreePackage;
-import org.eclipse.qvtd.xtext.qvtimperative.tests.ModelNormalizer;
 
 /**
  * FIXME Bug 490497 - this is a workaround for Bug 490172
@@ -55,7 +55,7 @@ public class HSV2HSLNormalizer implements ModelNormalizer
 	}
 
 	@Override
-	public @NonNull List<Normalizer> normalize(@NonNull Resource resource) {
+	public @NonNull List<@NonNull Normalizer> normalize(@NonNull Resource resource) {
 		EObject eRoot = resource.getContents().get(0);
 		EPackage ePackage = eRoot.eClass().getEPackage();
 		EClass hslNodeClass = (EClass) ePackage.getEClassifier(HSLTreePackage.Literals.HSL_NODE.getName());
@@ -77,7 +77,7 @@ public class HSV2HSLNormalizer implements ModelNormalizer
 			EList<@NonNull EObject> children = (EList<@NonNull EObject>) hslNode.eGet(hslNodeChildren);
 			ECollections.sort(children, personComparator);
 		}
-		List<Normalizer> normalizers = new ArrayList<Normalizer>();
+		List<@NonNull Normalizer> normalizers = new ArrayList<>();
 		return normalizers;
 	}
 }

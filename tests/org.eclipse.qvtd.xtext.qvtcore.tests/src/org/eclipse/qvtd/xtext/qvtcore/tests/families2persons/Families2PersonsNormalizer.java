@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  */
@@ -23,19 +23,19 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.xtext.tests.XtextTestCase.Normalizer;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.qvtd.xtext.qvtbase.tests.ModelNormalizer;
 import org.eclipse.qvtd.xtext.qvtcore.tests.families2persons.Persons.PersonsPackage;
-import org.eclipse.qvtd.xtext.qvtimperative.tests.ModelNormalizer;
 
 /**
  * UpperToLowerNormalizer normalises the results of the UpperToLower transformation.
- * 
+ *
  * Even though everything is ordered in the input/output model, the edges/incoming/outgoing lists cn be independently ordered, and only
  * the edges order is preserved in the middle model.
  */
 public class Families2PersonsNormalizer implements ModelNormalizer
 {
 	public static final @NonNull Families2PersonsNormalizer INSTANCE = new Families2PersonsNormalizer();
-	
+
 	protected static class PersonComparator implements Comparator<EObject>
 	{
 		private final @NonNull EClass femaleClass;
@@ -45,7 +45,7 @@ public class Families2PersonsNormalizer implements ModelNormalizer
 			this.femaleClass = femaleClass;
 			this.personFullName = personFullName;
 		}
-		
+
 		@Override
 		public int compare(EObject o1, EObject o2) {
 			if (femaleClass.isInstance(o1)) {
@@ -65,7 +65,7 @@ public class Families2PersonsNormalizer implements ModelNormalizer
 	}
 
 	@Override
-	public @NonNull List<Normalizer> normalize(@NonNull Resource resource) {
+	public @NonNull List<@NonNull Normalizer> normalize(@NonNull Resource resource) {
 		EObject eRoot = resource.getContents().get(0);
 		EPackage ePackage = eRoot.eClass().getEPackage();
 		EClass femaleClass = (EClass) ePackage.getEClassifier(PersonsPackage.Literals.FEMALE.getName());
@@ -78,7 +78,7 @@ public class Families2PersonsNormalizer implements ModelNormalizer
 		assert personFullName != null;
 		PersonComparator personComparator = new PersonComparator(femaleClass, personFullName);
 		ECollections.sort(resource.getContents(), personComparator);
-		List<Normalizer> normalizers = new ArrayList<Normalizer>();
+		List<@NonNull Normalizer> normalizers = new ArrayList<>();
 		return normalizers;
 	}
 }

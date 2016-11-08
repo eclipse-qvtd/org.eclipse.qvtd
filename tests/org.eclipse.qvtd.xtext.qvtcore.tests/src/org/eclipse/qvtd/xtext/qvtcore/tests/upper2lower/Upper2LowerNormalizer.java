@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  */
@@ -26,19 +26,19 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.xtext.tests.XtextTestCase.Normalizer;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.qvtd.xtext.qvtbase.tests.ModelNormalizer;
 import org.eclipse.qvtd.xtext.qvtcore.tests.upper2lower.simplegraph.SimplegraphPackage;
-import org.eclipse.qvtd.xtext.qvtimperative.tests.ModelNormalizer;
 
 /**
  * Upper2LowerNormalizer normalises the results of the UpperToLower transformation.
- * 
+ *
  * Even though everything is ordered in the input/output model, the edges/incoming/outgoing lists cn be independently ordered, and only
  * the edges order is preserved in the middle model.
  */
 public class Upper2LowerNormalizer implements ModelNormalizer
 {
 	public static final @NonNull Upper2LowerNormalizer INSTANCE = new Upper2LowerNormalizer();
-	
+
 	protected static class ElementComparator implements Comparator<EObject>
 	{
 		private final @NonNull EClass edgeClass;
@@ -52,7 +52,7 @@ public class Upper2LowerNormalizer implements ModelNormalizer
 			this.edgeTarget = edgeTarget;
 			this.nodeLabel = nodeLabel;
 		}
-		
+
 		@Override
 		public int compare(EObject o1, EObject o2) {
 			String n1;
@@ -103,7 +103,7 @@ public class Upper2LowerNormalizer implements ModelNormalizer
 			ECollections.sort(elements, elementComparator);
 		}
 	}
-	
+
 	protected class NodeNormalizer implements Normalizer
 	{
 		protected final @NonNull EObject node;
@@ -133,7 +133,7 @@ public class Upper2LowerNormalizer implements ModelNormalizer
 	}
 
 	@Override
-	public @NonNull List<Normalizer> normalize(@NonNull Resource resource) {
+	public @NonNull List<@NonNull Normalizer> normalize(@NonNull Resource resource) {
 		EObject eRoot = resource.getContents().get(0);
 		EPackage ePackage = eRoot.eClass().getEPackage();
 		EClass graphClass = (EClass) ePackage.getEClassifier(SimplegraphPackage.Literals.GRAPH.getName());
@@ -157,7 +157,7 @@ public class Upper2LowerNormalizer implements ModelNormalizer
 		EReference edgeTarget = (EReference) edgeClass.getEStructuralFeature(SimplegraphPackage.Literals.EDGE__TARGET.getName());
 		assert edgeTarget != null;
 		ElementComparator elementComparator = new ElementComparator(edgeClass, edgeSource, edgeTarget, nodeLabel);
-		List<Normalizer> normalizers = new ArrayList<Normalizer>();
+		List<@NonNull Normalizer> normalizers = new ArrayList<>();
 		for (TreeIterator<EObject> tit = resource.getAllContents(); tit.hasNext(); ) {
 			EObject eObject = tit.next();
 			EClass eClass = eObject.eClass();

@@ -28,6 +28,7 @@ import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
+import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VariableExp;
@@ -101,6 +102,15 @@ public class QVTimperativeUtil extends QVTbaseUtil
 			String n2 = o2.getName();
 			return ClassUtil.safeCompareTo(n1, n2);
 		}
+	}
+
+	public static @Nullable ImperativeTransformation basicGetContainingTransformation(@Nullable EObject eObject) {
+		for ( ; eObject != null; eObject = eObject.eContainer()) {
+			if (eObject instanceof ImperativeTransformation) {
+				return (ImperativeTransformation) eObject;
+			}
+		}
+		return null;
 	}
 
 	public static @Nullable ImperativeTypedModel basicGetOwnedTypedModel(@NonNull ImperativeTransformation transformation, @Nullable String name) {
@@ -232,6 +242,10 @@ public class QVTimperativeUtil extends QVTbaseUtil
 		return variableExp;
 	} */
 
+	public static org.eclipse.ocl.pivot.@NonNull Class getClassType(@NonNull TypedElement typedElement) {
+		return ClassUtil.nonNullState((org.eclipse.ocl.pivot.Class)typedElement.getType());
+	}
+
 	public static @Nullable Mapping getContainingMapping(@Nullable EObject eObject) {
 		for ( ; eObject != null; eObject = eObject.eContainer()) {
 			if (eObject instanceof Mapping) {
@@ -250,17 +264,16 @@ public class QVTimperativeUtil extends QVTbaseUtil
 		return null;
 	}
 
-	public static @Nullable ImperativeTransformation getContainingTransformation(@Nullable EObject eObject) {
-		for ( ; eObject != null; eObject = eObject.eContainer()) {
-			if (eObject instanceof ImperativeTransformation) {
-				return (ImperativeTransformation) eObject;
-			}
-		}
-		return null;
+	public static @NonNull ImperativeTransformation getContainingTransformation(@Nullable EObject eObject) {
+		return ClassUtil.nonNullState(basicGetContainingTransformation(eObject));
 	}
 
 	public static @NonNull String getName(@NonNull Mapping asMapping) {
 		return ClassUtil.nonNullState(asMapping.getName());
+	}
+
+	public static @NonNull String getName(@NonNull MappingParameter asParameter) {
+		return ClassUtil.nonNullState(asParameter.getName());
 	}
 
 	public static @NonNull Mapping getOwnedMapping(@NonNull ImperativeTransformation transformation, @Nullable String name) {

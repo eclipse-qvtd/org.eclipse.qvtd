@@ -618,7 +618,6 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 			return ClassUtil.nonNullState(analyzer.getTypedModel(referredTypedModel));
 		}
 		Transformation pTransformation = QVTimperativeUtil.getContainingTransformation(pVariable);
-		assert pTransformation != null;
 		ImperativeTypedModel asTypedModel = (ImperativeTypedModel) ClassUtil.nonNullState(pTransformation.getModelParameter(null));
 		return ClassUtil.nonNullState(analyzer.getTypedModel(asTypedModel));
 	}
@@ -1085,7 +1084,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 
 	@Override
 	public @Nullable CGNamedElement visitSetStatement(@NonNull SetStatement asSetStatement) {
-		ImperativeTransformation asTransformation = ClassUtil.nonNullModel(QVTimperativeUtil.getContainingTransformation(asSetStatement));
+		ImperativeTransformation asTransformation = QVTimperativeUtil.getContainingTransformation(asSetStatement);
 		QVTiTransformationAnalysis transformationAnalysis = analyzer.getCodeGenerator().getTransformationAnalysis(asTransformation);
 		Integer cacheIndex = transformationAnalysis.getCacheIndex(asSetStatement);
 		if (cacheIndex != null) {

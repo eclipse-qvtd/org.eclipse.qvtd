@@ -8,7 +8,7 @@
  * Contributors:
  *     E.D.Willink - initial API and implementation
  *******************************************************************************/
-package org.eclipse.qvtd.xtext.qvtimperative.tests;
+package org.eclipse.qvtd.xtext.qvtbase.tests;
 
 import java.util.List;
 
@@ -17,5 +17,5 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.xtext.tests.XtextTestCase.Normalizer;
 
 public interface ModelNormalizer {
-	@NonNull List<Normalizer> normalize(@NonNull Resource resource);
+	@NonNull List<@NonNull Normalizer> normalize(@NonNull Resource resource);
 }

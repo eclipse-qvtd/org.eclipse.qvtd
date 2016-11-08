@@ -385,7 +385,7 @@ public class QVTiModelsManager
 		}
 	}
 
-	public static class QVTiTypedModelInstance extends AbstractTypedModelInstance
+	public static class QVTiTypedModelInstance extends AbstractTypedModelInstance	// FIXME reimplement using CG variant
 	{
 		protected final @NonNull QVTiModelsManager modelManager;
 		protected final @NonNull ImperativeTypedModel typedModel;

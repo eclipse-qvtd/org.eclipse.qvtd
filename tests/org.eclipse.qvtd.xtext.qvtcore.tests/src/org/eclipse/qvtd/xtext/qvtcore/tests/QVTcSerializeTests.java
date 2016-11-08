@@ -10,7 +10,6 @@
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtcore.tests;
 
-import java.io.IOException;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
@@ -21,10 +20,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.resource.ASResource;
-import org.eclipse.ocl.pivot.resource.CSResource;
-import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.ocl.pivot.utilities.OCL;
-import org.eclipse.ocl.pivot.utilities.PivotConstants;
 import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcore;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
@@ -67,46 +62,6 @@ public class QVTcSerializeTests extends LoadTestCase
 		ocl2.dispose();
 	}
 
-	protected @NonNull ASResource loadQVTiAS(@NonNull OCL ocl, @NonNull URI inputURI) {
-		Resource asResource = ocl.getMetamodelManager().getASResourceSet().getResource(inputURI, true);
-		assert asResource != null;
-		//		List<String> conversionErrors = new ArrayList<String>();
-		//		RootPackageCS documentCS = Ecore2OCLinEcore.importFromEcore(resourceSet, null, ecoreResource);
-		//		Resource eResource = documentCS.eResource();
-		assertNoResourceErrors("Load failed", asResource);
-		//		Resource xtextResource = resourceSet.createResource(outputURI, OCLinEcoreCSTPackage.eCONTENT_TYPE);
-		//		XtextResource xtextResource = (XtextResource) resourceSet.createResource(outputURI);
-		//		xtextResource.getContents().add(documentCS);
-		return (ASResource) asResource;
-	}
-
-	public static @NonNull XtextResource pivot2cs(@NonNull OCL ocl, @NonNull ResourceSet resourceSet, @NonNull ASResource asResource, @NonNull URI outputURI) throws IOException {
-		XtextResource xtextResource = ClassUtil.nonNullState((XtextResource) resourceSet.createResource(outputURI, QVTcoreCSPackage.eCONTENT_TYPE));
-		ocl.as2cs(asResource, (CSResource) xtextResource);
-		assertNoResourceErrors("Conversion failed", xtextResource);
-		//
-		//	CS save
-		//
-		URI savedURI = ClassUtil.nonNullState(asResource.getURI());
-		asResource.setURI(outputURI.trimFileExtension().trimFileExtension().appendFileExtension(PivotConstants.OCL_AS_FILE_EXTENSION));
-		asResource.save(TestsXMLUtil.defaultSavingOptions);
-		asResource.setURI(savedURI);
-
-		assertNoDiagnosticErrors("Concrete Syntax validation failed", xtextResource);
-		try {
-			xtextResource.save(TestsXMLUtil.defaultSavingOptions);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			URI xmiURI = outputURI.appendFileExtension(".xmi");
-			Resource xmiResource = resourceSet.createResource(xmiURI);
-			xmiResource.getContents().addAll(xtextResource.getContents());
-			xmiResource.save(TestsXMLUtil.defaultSavingOptions);
-			fail(e.toString());
-		}
-		return xtextResource;
-	}
-
 	public XtextResource doSerialize(@NonNull URI inputURI, @NonNull String stem, @NonNull URI referenceURI, @Nullable Map<String, Object> options, boolean doCompare, boolean validateSaved) throws Exception {
 		ResourceSet resourceSet = new ResourceSetImpl();
 		//		getProjectMap().initializeResourceSet(resourceSet);
@@ -123,7 +78,7 @@ public class QVTcSerializeTests extends LoadTestCase
 			//
 			//	Pivot to CS
 			//
-			XtextResource xtextResource = pivot2cs(ocl, resourceSet, asResource, outputURI);
+			XtextResource xtextResource = pivot2cs(ocl, resourceSet, asResource, outputURI, QVTcoreCSPackage.eCONTENT_TYPE);
 			resourceSet.getResources().clear();
 			return xtextResource;
 		}
