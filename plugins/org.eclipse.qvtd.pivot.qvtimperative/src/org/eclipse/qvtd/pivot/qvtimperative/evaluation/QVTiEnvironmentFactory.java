@@ -44,7 +44,7 @@ public class QVTiEnvironmentFactory extends QVTbaseEnvironmentFactory
 	//		return new BasicOCLExecutor(this, modelManager);		// Inherited functionality used for validation
 	//	}
 
-	public @NonNull QVTiModelsManager createModelManager(@NonNull QVTiTransformationAnalysis transformationAnalysis) {
+	public @NonNull QVTiModelsManager createModelsManager(@NonNull QVTiTransformationAnalysis transformationAnalysis) {
 		return new QVTiModelsManager(transformationAnalysis);
 	}
 

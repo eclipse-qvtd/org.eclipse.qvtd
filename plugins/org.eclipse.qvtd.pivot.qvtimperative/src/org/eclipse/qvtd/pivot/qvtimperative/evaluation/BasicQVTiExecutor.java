@@ -77,13 +77,13 @@ public abstract class BasicQVTiExecutor extends AbstractExecutor implements QVTi
 	{
 		@Override
 		public @NonNull Set<@NonNull ? extends Object> get(org.eclipse.ocl.pivot.@NonNull Class type) {
-			return getModelsManager().get(type);
+			return modelsManager.get(type);
 		}
 	}
 
 	protected final @NonNull ImperativeTransformation transformation;
-	private @Nullable QVTiTransformationAnalysis transformationAnalysis = null;
-	private @Nullable QVTiModelsManager modelsManager = null;
+	protected final @NonNull QVTiTransformationAnalysis transformationAnalysis;
+	protected final @NonNull QVTiModelsManager modelsManager;
 	private @Nullable WrappedModelManager wrappedModelManager = null;
 	protected final boolean debugExceptions = AbstractTransformer.EXCEPTIONS.isActive();
 	protected final boolean debugInvocations = AbstractTransformer.INVOCATIONS.isActive();
@@ -92,13 +92,16 @@ public abstract class BasicQVTiExecutor extends AbstractExecutor implements QVTi
 	public BasicQVTiExecutor(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull ImperativeTransformation transformation) {
 		super(environmentFactory);
 		this.transformation = transformation;
+		this.transformationAnalysis = environmentFactory.createTransformationAnalysis(transformation);
+		transformationAnalysis.analyzeTransformation();
+		this.modelsManager = environmentFactory.createModelsManager(transformationAnalysis);
 	}
 
 	/**
 	 * Adds the model.
 	 */
 	public void addModel(@NonNull ImperativeTypedModel typedModel, @NonNull Resource resource) {
-		getModelsManager().addModel(typedModel, resource);
+		modelsManager.addModel(typedModel, resource);
 	}
 
 	@Override
@@ -117,7 +120,7 @@ public abstract class BasicQVTiExecutor extends AbstractExecutor implements QVTi
 		ImperativeTypedModel typedModel = getTypedModel(name);
 		Resource resource = environmentFactory.getResourceSet().createResource(modelURI, contentType);
 		if (resource != null) {
-			getModelsManager().addModel(typedModel, resource);
+			modelsManager.addModel(typedModel, resource);
 		}
 		return resource;
 	}
@@ -144,12 +147,9 @@ public abstract class BasicQVTiExecutor extends AbstractExecutor implements QVTi
 
 	@Override
 	public void dispose() {
-		if (modelsManager != null) {
-			modelsManager.dispose();
-		}
+		modelsManager.dispose();
 		super.dispose();
 	}
-
 
 	@Override
 	public Boolean execute() {
@@ -157,7 +157,6 @@ public abstract class BasicQVTiExecutor extends AbstractExecutor implements QVTi
 		getRootEvaluationEnvironment();
 		StandardLibraryInternal standardLibrary = environmentFactory.getStandardLibrary();
 		Variable ownedContext = QVTbaseUtil.getContextVariable(standardLibrary, transformation);
-		QVTiModelsManager modelsManager = getModelsManager();
 		add(ownedContext, modelsManager.getTransformationInstance(transformation));
 		for (@NonNull ImperativeTypedModel typedModel : QVTimperativeUtil.getOwnedTypedModels(transformation)) {
 			ownedContext = QVTbaseUtil.getContextVariable(standardLibrary, typedModel);
@@ -192,7 +191,7 @@ public abstract class BasicQVTiExecutor extends AbstractExecutor implements QVTi
 	@Override
 	public @Nullable Resource getModel(@NonNull String name) {
 		ImperativeTypedModel typedModel = getTypedModel(name);
-		return getModelsManager().getModel(typedModel);
+		return modelsManager.getModel(typedModel);
 	}
 
 	@Override
@@ -206,15 +205,11 @@ public abstract class BasicQVTiExecutor extends AbstractExecutor implements QVTi
 
 	@Override
 	public @NonNull QVTiModelsManager getModelsManager() {
-		QVTiModelsManager modelManager2 = modelsManager;
-		if (modelManager2 == null) {
-			modelsManager = modelManager2 = new QVTiModelsManager(getTransformationAnalysis());
-		}
-		return modelManager2;
+		return modelsManager;
 	}
 
 	public @NonNull Collection<@NonNull EObject> getRootObjects(@NonNull String name) {
-		return getModelsManager().getRootObjects(getTypedModel(name));
+		return modelsManager.getRootObjects(getTypedModel(name));
 	}
 
 	public @NonNull Transformation getTransformation() {
@@ -222,12 +217,7 @@ public abstract class BasicQVTiExecutor extends AbstractExecutor implements QVTi
 	}
 
 	public @NonNull QVTiTransformationAnalysis getTransformationAnalysis() {
-		QVTiTransformationAnalysis transformationAnalysis2 = transformationAnalysis;
-		if (transformationAnalysis2 == null) {
-			transformationAnalysis = transformationAnalysis2 = getEnvironmentFactory().createTransformationAnalysis(transformation);
-			transformationAnalysis2.analyzeTransformation();
-		}
-		return transformationAnalysis2;
+		return transformationAnalysis;
 	}
 
 	public @NonNull ImperativeTypedModel getTypedModel(@NonNull String name) {
@@ -354,7 +344,7 @@ public abstract class BasicQVTiExecutor extends AbstractExecutor implements QVTi
 			assert typedModel != null;
 			Object ecoreValue = getIdResolver().ecoreValueOf(null, initValue);
 			assert ecoreValue != null;
-			getModelsManager().addModelElement(typedModel, ecoreValue);
+			modelsManager.addModelElement(typedModel, ecoreValue);
 			return ecoreValue;
 		}
 		else {
@@ -370,7 +360,7 @@ public abstract class BasicQVTiExecutor extends AbstractExecutor implements QVTi
 			Object element = ((org.eclipse.ocl.pivot.Class)type).createInstance();
 			// Add the realize variable binding to the environment
 			replace(newStatement, element, false);
-			getModelsManager().addModelElement(typedModel, element);
+			modelsManager.addModelElement(typedModel, element);
 			return element;
 		}
 	}
@@ -379,10 +369,9 @@ public abstract class BasicQVTiExecutor extends AbstractExecutor implements QVTi
 	public void internalExecuteSetStatement(@NonNull SetStatement setStatement, @NonNull Object slotObject, @Nullable Object ecoreValue, @Nullable Object childKey) {
 		Property targetProperty = QVTimperativeUtil.getTargetProperty(setStatement);
 		targetProperty.initValue(slotObject, ecoreValue);
-		QVTiModelsManager modelManager = getModelsManager();
-		Integer cacheIndex = modelManager.getTransformationAnalysis().getCacheIndex(setStatement);
+		Integer cacheIndex = modelsManager.getTransformationAnalysis().getCacheIndex(setStatement);
 		if (cacheIndex != null) {
-			modelManager.setUnnavigableOpposite(cacheIndex, slotObject, ecoreValue);
+			modelsManager.setUnnavigableOpposite(cacheIndex, slotObject, ecoreValue);
 		}
 	}
 
@@ -410,7 +399,7 @@ public abstract class BasicQVTiExecutor extends AbstractExecutor implements QVTi
 		ImperativeTypedModel typedModel = getTypedModel(name);
 		Resource resource = environmentFactory.getResourceSet().getResource(modelURI, true);
 		if (resource != null) {
-			getModelsManager().addModel(typedModel, resource);
+			modelsManager.addModel(typedModel, resource);
 		}
 		return resource;
 	}
@@ -433,7 +422,7 @@ public abstract class BasicQVTiExecutor extends AbstractExecutor implements QVTi
 			}
 		}
 		if (resource != null) {
-			getModelsManager().addModel(typedModel, resource);
+			modelsManager.addModel(typedModel, resource);
 		}
 	}
 
@@ -468,12 +457,12 @@ public abstract class BasicQVTiExecutor extends AbstractExecutor implements QVTi
 
 	//	@Override
 	public void saveContents() {
-		getModelsManager().saveContents();
+		modelsManager.saveContents();
 	}
 
 	public Resource saveModel(@NonNull String name, @NonNull URI modelURI, String contentType, @Nullable Map<?, ?> savingOptions) throws IOException {
 		ImperativeTypedModel typedModel = getTypedModel(name);
-		Resource resource = getModelsManager().getModel(typedModel);
+		Resource resource = modelsManager.getModel(typedModel);
 		if (resource == null) {
 			resource = environmentFactory.getResourceSet().createResource(modelURI, contentType);
 		}
@@ -485,11 +474,11 @@ public abstract class BasicQVTiExecutor extends AbstractExecutor implements QVTi
 
 	@Override
 	public void saveModels() {
-		getModelsManager().saveModels();
+		modelsManager.saveModels();
 	}
 
 	public void saveModels(@Nullable Map<?, ?> savingOptions) {
-		getModelsManager().saveModels(savingOptions);
+		modelsManager.saveModels(savingOptions);
 	}
 
 	public void saveModels(@NonNull URI traceURI) {
@@ -498,7 +487,7 @@ public abstract class BasicQVTiExecutor extends AbstractExecutor implements QVTi
 
 	public void saveModels(@NonNull URI traceURI, @Nullable Map<?, ?> savingOptions) {
 		this.saveModels(savingOptions);
-		getModelsManager().saveMiddleModel(traceURI, savingOptions);
+		modelsManager.saveMiddleModel(traceURI, savingOptions);
 	}
 
 	public void saveTransformation(Map<?,?> options) throws IOException {

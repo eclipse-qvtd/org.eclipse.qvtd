@@ -238,15 +238,13 @@ public class QVTiModelsManager
 		return transformationAnalysis;
 	}
 
-	public List<EObject> getTypeModelEObjectList(@NonNull ImperativeTypedModel model) {
-
+	/*	public List<EObject> getTypeModelEObjectList(@NonNull ImperativeTypedModel model) {
 		if (modelElementsMap.containsKey(model)) {
 			return  modelElementsMap.get(model);
 		} else {
 			return new ArrayList<>();
 		}
-
-	}
+	} */
 
 	public @Nullable ImperativeTypedModel getTypedModel(@NonNull Resource resource) {
 		return resource2typedModel.get(resource);
