@@ -440,7 +440,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		js.appendIsRequired(true);
 		js.append(" String[] {");
 		boolean isFirst = true;
-		for (@NonNull CGTypedModel cgTypedModel : ClassUtil.nullFree(cgTransformation.getOwnedTypedModels())) {
+		for (@NonNull CGTypedModel cgTypedModel : QVTiCGUtil.getOwnedTypedModels(cgTransformation)) {
 			if (!isFirst) {
 				js.append(", ");
 			}
@@ -1507,32 +1507,45 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			js.append(" = ");
 			js.append(QVTiGlobalContext.MODELS_NAME);
 			js.append("[");
-			appendModelIndex(QVTiCGUtil.getOwningTransformation(cgRootMapping).getOwnedTypedModels().get(0));
-			js.append("].getConnection(");
 			VariableDeclaration asGuardVariable = QVTiCGUtil.getAST(cgGuardVariable);
-			assert allInstancesAnalysis != null;
 			Type type = asGuardVariable.getType();
+			org.eclipse.ocl.pivot.Package asPackage = PivotUtil.getContainingPackage(type);
+			assert asPackage != null;
+			for (@NonNull CGTypedModel cgTypedModel : QVTiCGUtil.getOwnedTypedModels(cgTransformation)) {
+				ImperativeTypedModel asTypedModel = QVTiCGUtil.getAST(cgTypedModel);
+				if (asTypedModel.isIsChecked() && asTypedModel.getUsedPackage().contains(asPackage)) {
+					appendModelIndex(cgTypedModel);
+					break;
+				}
+			}
+			js.append("].getConnection(");
+			assert allInstancesAnalysis != null;
 			Integer classIndex = allInstancesAnalysis.getInstancesClass2index().get(type);
 			js.append(classIndex + "/*" + type + "*/");
 			js.append(");\n");
 		}
 		if (isIncremental || useClass(cgRootMapping)) {
-			js.append(getMappingCtorName(cgRootMapping) + ".invoke();\n");
-			js.append("return invocationManager.flush();\n");
+			js.append(getMappingCtorName(cgRootMapping) + ".invoke(");
 		}
 		else {
 			js.append("return ");
 			js.append(getMappingName(cgRootMapping));
 			js.append("(");
-			boolean isFirst = true;
-			for (@NonNull CGGuardVariable cgGuardVariable : cgRootMapping.getOwnedGuardVariables()) {
-				if (!isFirst) {
-					js.append(", ");
-				}
-				js.appendValueName(cgGuardVariable);
-				isFirst = false;
+		}
+		boolean isFirst = true;
+		for (@NonNull CGGuardVariable cgGuardVariable : QVTiCGUtil.getOwnedGuardVariables(cgRootMapping)) {
+			if (!isFirst) {
+				js.append(", ");
 			}
-			js.append(")");
+			js.appendValueName(cgGuardVariable);
+			isFirst = false;
+		}
+		js.append(")");
+		if (isIncremental || useClass(cgRootMapping)) {
+			js.append(";\n");
+			js.append("return invocationManager.flush();\n");
+		}
+		else {
 			js.append(" && invocationManager.flush();\n");
 		}
 		js.popIndentation();

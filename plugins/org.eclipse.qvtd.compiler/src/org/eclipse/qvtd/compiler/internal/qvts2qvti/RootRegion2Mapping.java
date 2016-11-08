@@ -25,20 +25,14 @@ import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.DataType;
 import org.eclipse.ocl.pivot.InvalidType;
 import org.eclipse.ocl.pivot.Iteration;
-import org.eclipse.ocl.pivot.IteratorVariable;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
-import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
-import org.eclipse.ocl.pivot.TypeExp;
 import org.eclipse.ocl.pivot.Variable;
-import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.VoidType;
 import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.internal.complete.StandardLibraryInternal;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Edge;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NavigableEdge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NodeConnection;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
@@ -46,10 +40,9 @@ import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RootCompositionRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.SchedulerConstants;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
-import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
+import org.eclipse.qvtd.pivot.qvtimperative.AppendParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.BufferStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
-import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
@@ -59,7 +52,7 @@ public class RootRegion2Mapping extends AbstractScheduledRegion2Mapping
 	/**
 	 * Mapping from the type to allInstances variable.
 	 */
-	private final @NonNull Map<@NonNull ClassDatumAnalysis, @NonNull DeclareStatement> classDatumAnalysis2variable = new HashMap<>();
+	private final @NonNull Map<@NonNull ClassDatumAnalysis, @NonNull AppendParameter> classDatumAnalysis2variable = new HashMap<>();
 
 	/**
 	 * Mapping from the scheduled Nodes to their QVTi variables.
@@ -86,41 +79,6 @@ public class RootRegion2Mapping extends AbstractScheduledRegion2Mapping
 				}
 			}
 		}
-		/*		for (ConnectionRegion connectionRegion : rootConnections) {
-			SimpleNode connectionNode = connectionRegion.getConnectionNode();
-			CompleteClass completeClass = connectionNode.getCompleteClass();
-//			NullLiteralExp initExpression = ValueUtil.createSetOfEach((CollectionTypeId)completeClass.getPrimaryClass().getTypeId());
-			CollectionLiteralExp initExpression = PivotFactory.eINSTANCE.createCollectionLiteralExp();
-			CollectionType collectionType = visitor.getEnvironmentFactory().getCompleteEnvironment().getSetType(completeClass.getPrimaryClass(), true, null, null);
-			initExpression.setType(collectionType);
-			initExpression.setKind(TypeUtil.getCollectionKind(collectionType));
-			connection2variable.put(connectionRegion, createConnectionVariable(mapping.getBottomPattern(), connectionNode, initExpression));
-		} */
-	}
-
-	private @NonNull OCLExpression createObjectsOfKindExpression(@NonNull Node resultNode) {	// FIXME compute input typed model
-		ClassDatumAnalysis classDatumAnalysis = resultNode.getClassDatumAnalysis();
-		DeclareStatement allInstancesVariable = classDatumAnalysis2variable.get(classDatumAnalysis);
-		if (allInstancesVariable == null) {
-			Type collectionType = classDatumAnalysis.getCompleteClass().getPrimaryClass();
-			Type elementType = ((CollectionType)collectionType).getElementType();
-			assert elementType != null;
-			assert !(elementType instanceof CollectionType);
-			StandardLibraryInternal standardLibrary = (StandardLibraryInternal)visitor.getStandardLibrary();
-			ImperativeTypedModel typedModel = visitor.getQVTiTypedModel(classDatumAnalysis.getTypedModel());
-			assert typedModel != null;
-			Variable contextVariable = QVTbaseUtil.getContextVariable(standardLibrary, typedModel);
-			VariableExp modelExp = helper.createVariableExp(contextVariable);
-			TypeExp typeExp = helper.createTypeExp(elementType);
-			OCLExpression asSource = helper.createOperationCallExp(modelExp, "objectsOfKind", typeExp);
-			Type sourceType = asSource.getType();
-			assert sourceType != null;
-			String safeName = getSafeName(resultNode);
-			allInstancesVariable = helper.createDeclareStatement(safeName, sourceType, true, asSource);
-			mapping.getOwnedStatements().add(allInstancesVariable);
-			classDatumAnalysis2variable.put(classDatumAnalysis, allInstancesVariable);
-		}
-		return helper.createVariableExp(allInstancesVariable);
 	}
 
 	private @NonNull ConnectionVariable createRootConnectionVariable(@NonNull String name, boolean isStrict, @NonNull Type type, @Nullable OCLExpression initExpression) {
@@ -142,14 +100,19 @@ public class RootRegion2Mapping extends AbstractScheduledRegion2Mapping
 			String name = rootConnection.getName();
 			assert name != null;
 			if (regionNode != null) {
-				OCLExpression initExpression = createObjectsOfKindExpression(regionNode);
-				List<@NonNull Edge> incomingEdges = regionNode.getIncomingEdges();
-				switch (incomingEdges.size()) {
-					case 0: break;
-					case 1: initExpression = getFilteredExpression(initExpression, (NavigableEdge) incomingEdges.get(0)); break;
-					default: assert false;
+				ClassDatumAnalysis classDatumAnalysis = regionNode.getClassDatumAnalysis();
+				AppendParameter allInstancesVariable = classDatumAnalysis2variable.get(classDatumAnalysis);
+				if (allInstancesVariable == null) {
+					Type collectionType = classDatumAnalysis.getCompleteClass().getPrimaryClass();
+					Type elementType = ((CollectionType)collectionType).getElementType();
+					assert elementType != null;
+					assert !(elementType instanceof CollectionType);
+					String safeName = getSafeName(name);
+					allInstancesVariable = helper.createAppendParameter(safeName, elementType, true); //DeclareStatement(safeName, sourceType, true, asSource);
+					mapping.getOwnedMappingParameters().add(allInstancesVariable);
+					classDatumAnalysis2variable.put(classDatumAnalysis, allInstancesVariable);
 				}
-				connection2variable.put(rootConnection, createRootConnectionVariable(name, false, commonType, initExpression));
+				connection2variable.put(rootConnection, allInstancesVariable);
 			}
 			else {
 				connection2variable.put(rootConnection, createRootConnectionVariable(name, false, commonType, null));
@@ -259,27 +222,6 @@ public class RootRegion2Mapping extends AbstractScheduledRegion2Mapping
 		}
 	}
 
-	private @NonNull OCLExpression getFilteredExpression(@NonNull OCLExpression initExpression, @NonNull NavigableEdge edge) {
-		Type collectionType = initExpression.getType();
-		assert collectionType != null;
-		Type elementType = ((CollectionType)collectionType).getElementType();
-		assert elementType != null;
-		@NonNull IteratorVariable asIterator = helper.createIteratorVariable("i", elementType, true);
-		Property child2parentProperty = edge.getProperty().getOpposite();
-		assert child2parentProperty != null;
-		OCLExpression propertyCallExp = helper.createNavigationCallExp(helper.createVariableExp(asIterator), child2parentProperty);
-		if (edge.getSource().isExplicitNull()) {
-			OCLExpression equalsExp = helper.createOperationCallExp(propertyCallExp, "=", helper.createNullLiteralExp());
-			initExpression = helper.createIteratorExp(initExpression, getSelectIteration(), Collections.singletonList(asIterator), equalsExp);
-		}
-		else {
-			//			OCLExpression equalsExp = helper.createOperationCallExp(propertyCallExp, getOclIsKindOfOperation(), createTypeExp());
-			OCLExpression notEqualsExp = helper.createOperationCallExp(propertyCallExp, "<>", helper.createNullLiteralExp());
-			initExpression = helper.createIteratorExp(initExpression, getSelectIteration(), Collections.singletonList(asIterator), notEqualsExp);
-		}
-		return initExpression;
-	}
-
 	@Override
 	public @NonNull List<@NonNull Node> getGuardNodes() {
 		return SchedulerConstants.EMPTY_NODE_LIST;
@@ -291,21 +233,6 @@ public class RootRegion2Mapping extends AbstractScheduledRegion2Mapping
 		assert variable != null;
 		return (MappingParameter) variable;
 	}
-
-	/*	private @NonNull OCLExpression getRootsVariable(@NonNull Node resultNode) {	// FIXME compute input typed model
-		Variable rootsVariable2 = rootsVariable;
-		if (rootsVariable2 == null) {
-			StandardLibraryInternal standardLibrary = (StandardLibraryInternal)visitor.getStandardLibrary();
-			TypedModel typedModel = visitor.getQVTiTypedModel(resultNode.getClassDatumAnalysis().getTypedModel());
-			assert typedModel != null;
-			Variable contextVariable = QVTbaseUtil.getContextVariable(standardLibrary, typedModel);
-			VariableExp modelExp = helper.createVariableExp(contextVariable);
-			OCLExpression asSource = createOperationCallExp(modelExp, getRootObjectsOperation());
-			rootsVariable = rootsVariable2 = PivotUtil.createVariable("roots", asSource);
-			mapping.getBottomPattern().getVariable().add(rootsVariable2);
-		}
-		return helper.createVariableExp(rootsVariable2);
-	} */
 
 	protected @NonNull Iteration getSelectIteration() {
 		org.eclipse.ocl.pivot.Class collectionType = ((StandardLibraryInternal)visitor.getStandardLibrary()).getSetType();

@@ -28,13 +28,15 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCall;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCallBinding;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.SimpleParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
-import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
-import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 
 public class QVTiCGUtil extends CGUtil
 {
@@ -61,6 +63,10 @@ public class QVTiCGUtil extends CGUtil
 
 	public static @NonNull ImperativeTransformation getAST(@NonNull CGTransformation cgTransformation) {
 		return ClassUtil.nonNullState((ImperativeTransformation)cgTransformation.getAst());
+	}
+
+	public static @NonNull ImperativeTypedModel getAST(@NonNull CGTypedModel cgTypedModel) {
+		return ClassUtil.nonNullState((ImperativeTypedModel)cgTypedModel.getAst());
 	}
 
 	public static @NonNull CGMapping getContainingCGMapping(@NonNull CGElement cgElement) {
@@ -127,6 +133,10 @@ public class QVTiCGUtil extends CGUtil
 
 	public static @NonNull Iterable<@NonNull CGGuardVariable> getOwnedGuardVariables(@NonNull CGMapping cgRootMapping) {
 		return ClassUtil.nullFree(cgRootMapping.getOwnedGuardVariables());
+	}
+
+	public static @NonNull Iterable<@NonNull CGTypedModel> getOwnedTypedModels(@NonNull CGTransformation cgTransformation) {
+		return ClassUtil.nullFree(cgTransformation.getOwnedTypedModels());
 	}
 
 	public static @NonNull CGTransformation getOwningTransformation(@NonNull CGMapping cgMapping) {
