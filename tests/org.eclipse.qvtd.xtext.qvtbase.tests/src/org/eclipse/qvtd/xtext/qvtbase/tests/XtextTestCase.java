@@ -56,18 +56,18 @@ import org.eclipse.ocl.xtext.basecs.ModelElementCS;
 import junit.framework.TestCase;
 
 public class XtextTestCase extends PivotTestCase
-{	
+{
 	public static final class TestCaseAppender extends ConsoleAppender
 	{
 		private static Logger rootLogger = Logger.getRootLogger();
 
 		private boolean installed = false;
-		
+
 		public TestCaseAppender() {
-			super(new SimpleLayout(), SYSTEM_OUT); 
+			super(new SimpleLayout(), SYSTEM_OUT);
 			setName("TestHarness");
 		}
-		
+
 		@Override
 		public void append(LoggingEvent event) {
 			if (event.getLevel().isGreaterOrEqual(Level.INFO)) {
@@ -76,22 +76,22 @@ public class XtextTestCase extends PivotTestCase
 				Throwable throwable = throwableInformation != null ? throwableInformation.getThrowable() : null;
 				throw new Error(renderedMessage, throwable);
 			}
-//			super.append(event);
+			//			super.append(event);
 		}
-		
+
 		public void install() {
 			if (!installed) {
 				rootLogger.addAppender(this);
 				installed = true;
 			}
 		}
-		
+
 		public void uninstall() {
 			rootLogger.removeAppender(this);
 			installed = false;
 		}
 	}
-	
+
 	public static TestCaseAppender testCaseAppender = new TestCaseAppender();
 
 	protected void assertPivotIsValid(URI pivotURI) {
@@ -101,11 +101,11 @@ public class XtextTestCase extends PivotTestCase
 		assertNoValidationErrors("Pivot reload validation problems", reloadedPivotResource);
 		unloadResourceSet(reloadResourceSet);
 	}
-	
+
 	public static void assertSameModel(@NonNull Resource expectedResource, @NonNull Resource actualResource) throws IOException, InterruptedException {
 		TestUtil.assertSameModel(expectedResource, actualResource);
 	}
-	
+
 	/**
 	 * Install a platform:/resource/project... mapping for all folders in
 	 * $WORKSPACE_LOC/* if defined, or $user.dir/../* otherwise.
@@ -132,12 +132,12 @@ public class XtextTestCase extends PivotTestCase
 
 	/**
 	 * Return the difference between expectedMessages and actualMessages, or null if no differences.
-	 * 
+	 *
 	 * The return is formatted one message per line with a leading new-line followed by
-	 * an expected/actual count in parentheses followed by the messages 
+	 * an expected/actual count in parentheses followed by the messages
 	 */
-	public static String formatMessageDifferences(Bag<String> expectedMessages, Bag<String> actualMessages) {
-		Set<String> allMessages = new HashSet<String>(expectedMessages);
+	public static String formatMessageDifferences(@NonNull Bag<@NonNull String> expectedMessages, @NonNull Bag<@NonNull String> actualMessages) {
+		Set<@NonNull String> allMessages = new HashSet<>(expectedMessages);
 		allMessages.addAll(actualMessages);
 		StringBuilder s = null;
 		for (String message : allMessages) {
@@ -153,7 +153,7 @@ public class XtextTestCase extends PivotTestCase
 		return s != null ? s.toString() : null;
 	}
 
-	protected static boolean hasCorrespondingCS(Element pivotElement) {
+	protected static boolean hasCorrespondingCS(@NonNull Element pivotElement) {
 		if (!isValidPivot(pivotElement)) {
 			return false;
 		}
@@ -167,37 +167,37 @@ public class XtextTestCase extends PivotTestCase
 				&& Character.isDigit((((Variable)pivotElement).getName().charAt(0)))) {
 			return false;
 		}
-//		if (pivotElement instanceof TemplateBinding) {
-//			return false;
-//		}
-//		if ((pivotElement instanceof TemplateableElement) && (((TemplateableElement)pivotElement).getTemplateBinding().size() > 0)) {
-//			return false;
-//		}
+		//		if (pivotElement instanceof TemplateBinding) {
+		//			return false;
+		//		}
+		//		if ((pivotElement instanceof TemplateableElement) && (((TemplateableElement)pivotElement).getTemplateBinding().size() > 0)) {
+		//			return false;
+		//		}
 		return true;
 	}
 
-//	protected static boolean hasOptionalCS(MonikeredElement pivotElement) {
-//		if ((pivotElement instanceof LetExp) && (pivotElement.eContainer() instanceof LetExp)) {
-//			return false;
-//		}
-//		return true;
-//	}
+	//	protected static boolean hasOptionalCS(MonikeredElement pivotElement) {
+	//		if ((pivotElement instanceof LetExp) && (pivotElement.eContainer() instanceof LetExp)) {
+	//			return false;
+	//		}
+	//		return true;
+	//	}
 
-	protected static boolean hasCorrespondingPivot(ModelElementCS csElement) {
+	protected static boolean hasCorrespondingPivot(@NonNull ModelElementCS csElement) {
 		if (!org.eclipse.ocl.examples.xtext.tests.XtextTestCase.hasCorrespondingPivot(csElement)) {
 			return false;
 		}
 		return true;
 	}
 
-	protected static boolean hasUniqueMoniker(ModelElementCS csElement) {
+	protected static boolean hasUniqueMoniker(@NonNull ModelElementCS csElement) {
 		if (!org.eclipse.ocl.examples.xtext.tests.XtextTestCase.hasUniqueMoniker(csElement)) {
 			return false;
 		}
 		return true;
 	}
-	
-	protected static boolean isValidPivot(Element pivotElement) {
+
+	protected static boolean isValidPivot(@NonNull Element pivotElement) {
 		if (pivotElement instanceof org.eclipse.ocl.pivot.Package) {
 			if ((pivotElement.eContainer() == null) && PivotConstants.ORPHANAGE_NAME.equals(((NamedElement) pivotElement).getName())) {
 				return false;
@@ -229,7 +229,7 @@ public class XtextTestCase extends PivotTestCase
 		return true;
 	}
 
-/*	protected XtextResource savePivotAsCS(MetamodelManager metamodelManager, Resource pivotResource, URI outputURI) throws IOException {
+	/*	protected XtextResource savePivotAsCS(MetamodelManager metamodelManager, Resource pivotResource, URI outputURI) throws IOException {
 //		ResourceSet csResourceSet = resourceSet; //new ResourceSetImpl();
 //		csResourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("cs", new EcoreResourceFactoryImpl());
 //		csResourceSet.getPackageRegistry().put(PivotPackage.eNS_URI, PivotPackage.eINSTANCE);
@@ -244,12 +244,12 @@ public class XtextTestCase extends PivotTestCase
 //		csResource.save(TestsXMLUtil.defaultSavingOptions);
 		//
 		//	CS save and reload
-		//		
+		//
 		URI savedURI = pivotResource.getURI();
 		pivotResource.setURI(PivotUtil.getNonPivotURI(savedURI).appendFileExtension("pivot"));
 		pivotResource.save(TestsXMLUtil.defaultSavingOptions);
 		pivotResource.setURI(savedURI);
-		
+
 		assertNoDiagnosticErrors("Concrete Syntax validation failed", xtextResource);
 		try {
 			xtextResource.save(TestsXMLUtil.defaultSavingOptions);
@@ -265,7 +265,7 @@ public class XtextTestCase extends PivotTestCase
 		return xtextResource;
 	} */
 
-/*	protected Resource getPivotFromEcore(@NonNull EnvironmentFactoryInternal environmentFactory, Resource ecoreResource) {
+	/*	protected Resource getPivotFromEcore(@NonNull EnvironmentFactoryInternal environmentFactory, Resource ecoreResource) {
 		Ecore2AS ecore2Pivot = Ecore2AS.getAdapter(ecoreResource, environmentFactory);
 		Model pivotRoot = ecore2Pivot.getPivotModel();
 		Resource pivotResource = pivotRoot.eResource();
@@ -276,16 +276,16 @@ public class XtextTestCase extends PivotTestCase
 
 	protected File getProjectFile() {
 		String projectName = getProjectName();
-		URL projectURL = getTestResource(projectName);	
+		URL projectURL = getTestResource(projectName);
 		assertNotNull(projectURL);
 		return new File(projectURL.getFile());
 	}
-	
+
 	protected @NonNull URI getProjectFileURI(String referenceName) {
 		File projectFile = getProjectFile();
 		return URI.createFileURI(projectFile.toString() + "/" + referenceName);
 	}
-	
+
 	protected String getProjectName() {
 		return getClass().getPackage().getName().replace('.', '/');
 	}
@@ -302,31 +302,31 @@ public class XtextTestCase extends PivotTestCase
 		}
 		return projectURL;
 	}
-	
+
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 		testCaseAppender.install();
-//    	if (!EMFPlugin.IS_ECLIPSE_RUNNING) {
-//    		OCL.initialize(null);
-//    	}
+		//    	if (!EMFPlugin.IS_ECLIPSE_RUNNING) {
+		//    		OCL.initialize(null);
+		//    	}
 		PivotStandaloneSetup.doSetup();
-//		CompleteOCLStandaloneSetup.doSetup();
-//		OCLinEcoreStandaloneSetup.doSetup();
-//		OCLstdlibStandaloneSetup.doSetup();
-//		resourceSet = new ResourceSetImpl();
-//		ProjectMap.initializeURIResourceMap(resourceSet);
-//		Map<URI, URI> uriMap = resourceSet.getURIConverter().getURIMap();
-//		uriMap.putAll(EcorePlugin.computePlatformURIMap(false));
-//		for (Map.Entry<URI,URI> entry : uriMap.entrySet()) {
-//			System.out.println(entry.getKey() + " => " + entry.getValue());
-//		}
-//		URI platformOCLstdlibURI = URI.createURI(StandardDocumentAttribution.OCLSTDLIB_URI);
-//		URI projectURI = getProjectFileURI("dummy");
-//		URI projectOCLstdlibURI = URI.createURI("oclstdlib.oclstdlib").resolve(projectURI);
-//		uriMap.put(platformOCLstdlibURI, projectOCLstdlibURI);
+		//		CompleteOCLStandaloneSetup.doSetup();
+		//		OCLinEcoreStandaloneSetup.doSetup();
+		//		OCLstdlibStandaloneSetup.doSetup();
+		//		resourceSet = new ResourceSetImpl();
+		//		ProjectMap.initializeURIResourceMap(resourceSet);
+		//		Map<URI, URI> uriMap = resourceSet.getURIConverter().getURIMap();
+		//		uriMap.putAll(EcorePlugin.computePlatformURIMap(false));
+		//		for (Map.Entry<URI,URI> entry : uriMap.entrySet()) {
+		//			System.out.println(entry.getKey() + " => " + entry.getValue());
+		//		}
+		//		URI platformOCLstdlibURI = URI.createURI(StandardDocumentAttribution.OCLSTDLIB_URI);
+		//		URI projectURI = getProjectFileURI("dummy");
+		//		URI projectOCLstdlibURI = URI.createURI("oclstdlib.oclstdlib").resolve(projectURI);
+		//		uriMap.put(platformOCLstdlibURI, projectOCLstdlibURI);
 		StandardLibraryContribution.REGISTRY.put(StandardLibraryImpl.DEFAULT_OCL_STDLIB_URI, new OCLstdlib.Loader());
-//        OCLDelegateDomain.initialize(null);
+		//        OCLDelegateDomain.initialize(null);
 	}
 
 	@Override

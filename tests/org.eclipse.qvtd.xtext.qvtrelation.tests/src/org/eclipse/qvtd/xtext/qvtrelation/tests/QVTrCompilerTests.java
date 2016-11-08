@@ -11,7 +11,6 @@
 package org.eclipse.qvtd.xtext.qvtrelation.tests;
 
 import java.io.IOException;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -21,7 +20,6 @@ import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.model.OCLstdlib;
@@ -44,7 +42,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
 import org.eclipse.qvtd.xtext.qvtbase.tests.AbstractTestQVT;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
-import org.eclipse.qvtd.xtext.qvtbase.tests.ModelNormalizer;
 import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.TestsXMLUtil;
 import org.eclipse.qvtd.xtext.qvtcore.tests.QVTcTestUtil;
 import org.eclipse.qvtd.xtext.qvtimperative.tests.QVTiTestUtil;
@@ -110,20 +107,17 @@ public class QVTrCompilerTests extends LoadTestCase
 			assertEquals("Region " + regionClass.getSimpleName() + " count:", count != 0 ? count : null, regionClass2count.get(regionClass));
 		}
 
-		/*		public @NonNull Class<? extends Transformer> buildTransformation(@NonNull String testName, @NonNull String txName, @NonNull String outputName, @NonNull String middleNsURI, @NonNull String... suffixes) throws Exception {
-	    	String projectTestName = PROJECT_NAME + "." + testName;
-	    	if (suffixes != null) {
-	    		for (@NonNull String suffix : suffixes) {
-			    	installClassName(projectTestName + "." + suffix);
-		    	}
-	    	}
-			Transformation asTransformation = compileTransformation(txName + ".qvtr", outputName, projectTestName, "http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/hstm2fstm/" + txName);
-			JavaSourceFileObject.compileClasses("../" + PROJECT_NAME + "/test-gen/" + projectTestName.replace(".",  "/"), "../" + PROJECT_NAME + "/bin", null);
-	    	return createGeneratedClass(asTransformation);
-		} */
-
 		public @NonNull Class<? extends Transformer> buildTransformation(@NonNull String testName, @NonNull String testFileName, @NonNull String outputName,
 				@NonNull String middleNsURI, boolean isIncremental, @NonNull String @NonNull... genModelFiles) throws Exception {
+			Map<@NonNull String, @Nullable Map<CompilerChain.@NonNull Key<Object>, @Nullable Object>> options = createBuildCompilerChainOptions(testName, isIncremental);
+			return doBuild(testFileName, outputName, options, genModelFiles);
+		}
+
+		public @NonNull ImperativeTransformation compileTransformation(@NonNull String testFileName, @NonNull String outputName, @NonNull String basePrefix, @NonNull String middleNsURI) throws Exception {
+			return doCompile(testFileName, outputName, createCompilerChainOptions(basePrefix));
+		}
+
+		protected @NonNull Map<@NonNull String, @Nullable Map<CompilerChain.@NonNull Key<Object>, @Nullable Object>> createBuildCompilerChainOptions(String testName, boolean isIncremental) {
 			Map<@NonNull String, @Nullable String> genModelOptions = new HashMap<>();
 			genModelOptions.put(CompilerChain.GENMODEL_BASE_PREFIX, PROJECT_NAME + "." + testName);
 			genModelOptions.put(CompilerChain.GENMODEL_COPYRIGHT_TEXT, "Copyright (c) 2015, 2016 Willink Transformations and others.\n;All rights reserved. This program and the accompanying materials\n;are made available under the terms of the Eclipse Public License v1.0\n;which accompanies this distribution, and is available at\n;http://www.eclipse.org/legal/epl-v10.html\n;\n;Contributors:\n;  E.D.Willink - Initial API and implementation");
@@ -135,23 +129,7 @@ public class QVTrCompilerTests extends LoadTestCase
 			QVTrCompilerChain.setOption(options, CompilerChain.CLASS_STEP, CompilerChain.URI_KEY, TESTS_JAVA_BIN_URI);
 			QVTrCompilerChain.setOption(options, CompilerChain.GENMODEL_STEP, CompilerChain.GENMODEL_USED_GENPACKAGES_KEY, usedGenPackages);
 			QVTrCompilerChain.setOption(options, CompilerChain.GENMODEL_STEP, CompilerChain.GENMODEL_OPTIONS_KEY, genModelOptions);
-			return doBuild(testFileName, outputName, options, genModelFiles);
-		}
-
-		public @NonNull ImperativeTransformation compileTransformation(@NonNull String testFileName, @NonNull String outputName, @NonNull String basePrefix, @NonNull String middleNsURI) throws Exception {
-			Map<@NonNull String, @Nullable String> genModelOptions = new HashMap<>();
-			genModelOptions.put(CompilerChain.GENMODEL_BASE_PREFIX, basePrefix);
-			genModelOptions.put(CompilerChain.GENMODEL_COPYRIGHT_TEXT, "Copyright (c) 2015, 2016 Willink Transformations and others.\n;All rights reserved. This program and the accompanying materials\n;are made available under the terms of the Eclipse Public License v1.0\n;which accompanies this distribution, and is available at\n;http://www.eclipse.org/legal/epl-v10.html\n;\n;Contributors:\n;  E.D.Willink - Initial API and implementation");
-			Map<@NonNull String, @Nullable String> traceOptions = new HashMap<>();
-			//			traceOptions.put(CompilerChain.TRACE_NS_URI, middleNsURI);
-			Map<@NonNull String, @Nullable Map<CompilerChain.@NonNull Key<Object>, @Nullable Object>> options = new HashMap<>();
-			QVTrCompilerChain.setOption(options, CompilerChain.DEFAULT_STEP, CompilerChain.SAVE_OPTIONS_KEY, getSaveOptions());
-			QVTrCompilerChain.setOption(options, CompilerChain.JAVA_STEP, CompilerChain.URI_KEY, null);
-			QVTrCompilerChain.setOption(options, CompilerChain.CLASS_STEP, CompilerChain.URI_KEY, null);
-			QVTrCompilerChain.setOption(options, CompilerChain.TRACE_STEP, CompilerChain.TRACE_OPTIONS_KEY, traceOptions);
-			QVTrCompilerChain.setOption(options, CompilerChain.GENMODEL_STEP, CompilerChain.GENMODEL_USED_GENPACKAGES_KEY, usedGenPackages);
-			QVTrCompilerChain.setOption(options, CompilerChain.GENMODEL_STEP, CompilerChain.GENMODEL_OPTIONS_KEY, genModelOptions);
-			return doCompile(testFileName, outputName, options);
+			return options;
 		}
 
 		@Override
@@ -160,15 +138,24 @@ public class QVTrCompilerTests extends LoadTestCase
 			return new InstrumentedCompilerChain(getEnvironmentFactory(), prefixURI, options);
 		}
 
-		public @NonNull URI getURI(@NonNull String genmodelStep, @NonNull Key<URI> uriKey) {
-			return compilerChain.getURI(CompilerChain.GENMODEL_STEP, CompilerChain.URI_KEY);
+		protected @NonNull Map<@NonNull String, @Nullable Map<CompilerChain.@NonNull Key<Object>, @Nullable Object>> createCompilerChainOptions(String basePrefix) {
+			Map<@NonNull String, @Nullable String> genModelOptions = new HashMap<>();
+			genModelOptions.put(CompilerChain.GENMODEL_BASE_PREFIX, basePrefix);
+			genModelOptions.put(CompilerChain.GENMODEL_COPYRIGHT_TEXT, "Copyright (c) 2015, 2016 Willink Transformations and others.\n;All rights reserved. This program and the accompanying materials\n;are made available under the terms of the Eclipse Public License v1.0\n;which accompanies this distribution, and is available at\n;http://www.eclipse.org/legal/epl-v10.html\n;\n;Contributors:\n;  E.D.Willink - Initial API and implementation");
+			Map<@NonNull String, @Nullable String> traceOptions = new HashMap<@NonNull String, @Nullable String>();
+			//			traceOptions.put(CompilerChain.TRACE_NS_URI, middleNsURI);
+			Map<@NonNull String, @Nullable Map<CompilerChain.@NonNull Key<Object>, @Nullable Object>> options = new HashMap<>();
+			QVTrCompilerChain.setOption(options, CompilerChain.DEFAULT_STEP, CompilerChain.SAVE_OPTIONS_KEY, getSaveOptions());
+			QVTrCompilerChain.setOption(options, CompilerChain.JAVA_STEP, CompilerChain.URI_KEY, null);
+			QVTrCompilerChain.setOption(options, CompilerChain.CLASS_STEP, CompilerChain.URI_KEY, null);
+			QVTrCompilerChain.setOption(options, CompilerChain.TRACE_STEP, CompilerChain.TRACE_OPTIONS_KEY, traceOptions);
+			QVTrCompilerChain.setOption(options, CompilerChain.GENMODEL_STEP, CompilerChain.GENMODEL_USED_GENPACKAGES_KEY, usedGenPackages);
+			QVTrCompilerChain.setOption(options, CompilerChain.GENMODEL_STEP, CompilerChain.GENMODEL_OPTIONS_KEY, genModelOptions);
+			return options;
 		}
 
-		public void installClassName(@NonNull String className) throws ClassNotFoundException, NoSuchFieldException, IllegalAccessException {
-			Class<?> middleClass = Class.forName(className);
-			Field middleField = middleClass.getDeclaredField("eINSTANCE");
-			EPackage middleEPackage = (EPackage) middleField.get(null);
-			getResourceSet().getPackageRegistry().put(middleEPackage.getNsURI(), middleEPackage);
+		public @NonNull URI getURI(@NonNull String genmodelStep, @NonNull Key<URI> uriKey) {
+			return compilerChain.getURI(CompilerChain.GENMODEL_STEP, CompilerChain.URI_KEY);
 		}
 
 		private void instrumentRegion(@NonNull Region parentRegion) {
@@ -188,25 +175,6 @@ public class QVTrCompilerTests extends LoadTestCase
 				URI genModelURI = URI.createURI(genModelFile).resolve(testFolderURI);
 				loadGenModel(genModelURI);
 			}
-		}
-
-		public @NonNull Resource saveOutput(@NonNull String modelName, @NonNull String modelFile, @Nullable String expectedFile, @Nullable ModelNormalizer normalizer) throws IOException, InterruptedException {
-			URI modelURI = samplesBaseUri.appendSegment(modelFile);
-			ResourceSet resourceSet = /*getResourceSet()*/environmentFactory.getMetamodelManager().getASResourceSet();
-			Resource outputResource;
-			if (interpretedExecutor != null) {
-				outputResource = interpretedExecutor.saveModel(modelName, modelURI, null, getSaveOptions());
-			}
-			else {
-				outputResource = resourceSet.createResource(modelURI);
-				outputResource.getContents().addAll(generatedExecutor.getTransformer().getRootEObjects(modelName));
-				outputResource.save(getSaveOptions());
-			}
-			assert outputResource != null;
-			if (expectedFile != null) {
-				checkOutput(outputResource, expectedFile, normalizer);
-			}
-			return outputResource;
 		}
 	}
 

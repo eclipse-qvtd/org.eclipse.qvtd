@@ -34,9 +34,11 @@ import org.eclipse.ocl.pivot.PivotTables;
 import org.eclipse.ocl.pivot.internal.manager.MetamodelManagerInternal;
 import org.eclipse.ocl.pivot.messages.StatusCodes;
 import org.eclipse.ocl.pivot.resource.ASResource;
+import org.eclipse.ocl.pivot.resource.CSResource;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.OCL;
+import org.eclipse.ocl.pivot.utilities.PivotConstants;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.codegen.qvti.QVTiCodeGenOptions;
 import org.eclipse.qvtd.codegen.qvti.java.QVTiCodeGenerator;
@@ -60,14 +62,54 @@ import junit.framework.TestCase;
 
 public abstract class AbstractTestQVT extends QVTimperative
 {
+	// FIXME move following clones to a Util class
+	public static @NonNull XtextResource as2cs(@NonNull OCL ocl, @NonNull ResourceSet resourceSet, @NonNull ASResource asResource, @NonNull URI outputURI, /*@NonNull*/ String csContentType) throws IOException {
+		XtextResource xtextResource = ClassUtil.nonNullState((XtextResource) resourceSet.createResource(outputURI, csContentType));
+		ocl.as2cs(asResource, (CSResource) xtextResource);
+		LoadTestCase.assertNoResourceErrors("Conversion failed", xtextResource);
+		//
+		//	CS save
+		//
+		URI savedURI = ClassUtil.nonNullState(asResource.getURI());
+		asResource.setURI(outputURI.trimFileExtension().trimFileExtension().appendFileExtension(PivotConstants.OCL_AS_FILE_EXTENSION));
+		asResource.save(TestsXMLUtil.defaultSavingOptions);
+		asResource.setURI(savedURI);
+		LoadTestCase.assertNoDiagnosticErrors("Concrete Syntax validation failed", xtextResource);
+		try {
+			xtextResource.save(TestsXMLUtil.defaultSavingOptions);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			URI xmiURI = outputURI.appendFileExtension(".xmi");
+			Resource xmiResource = resourceSet.createResource(xmiURI);
+			xmiResource.getContents().addAll(ClassUtil.nullFree(xtextResource.getContents()));
+			xmiResource.save(TestsXMLUtil.defaultSavingOptions);
+			LoadTestCase.fail(e.toString());
+		}
+		return xtextResource;
+	}
+
+	public static @NonNull ASResource loadQVTiAS(@NonNull OCL ocl, @NonNull URI inputURI) {
+		Resource asResource = ocl.getMetamodelManager().getASResourceSet().getResource(inputURI, true);
+		assert asResource != null;
+		//		List<String> conversionErrors = new ArrayList<String>();
+		//		RootPackageCS documentCS = Ecore2OCLinEcore.importFromEcore(resourceSet, null, ecoreResource);
+		//		Resource eResource = documentCS.eResource();
+		LoadTestCase.assertNoResourceErrors("Load failed", asResource);
+		//		Resource xtextResource = resourceSet.createResource(outputURI, OCLinEcoreCSTPackage.eCONTENT_TYPE);
+		//		XtextResource xtextResource = (XtextResource) resourceSet.createResource(outputURI);
+		//		xtextResource.getContents().add(documentCS);
+		return (ASResource) asResource;
+	}
+
 	protected final @NonNull URI testsBaseURI;
 	protected final @NonNull String projectName;
 	protected final @NonNull String testFolderName;
 	protected final @NonNull URI testFolderURI;
 	protected final @NonNull URI samplesBaseUri;
 	protected AbstractCompilerChain compilerChain = null;
-	protected BasicQVTiExecutor interpretedExecutor = null;
-	protected QVTiTransformationExecutor generatedExecutor = null;
+	private BasicQVTiExecutor interpretedExecutor = null;
+	private QVTiTransformationExecutor generatedExecutor = null;
 	private Set<@NonNull String> nsURIs = new HashSet<@NonNull String>();
 
 	public AbstractTestQVT(@NonNull URI testsBaseURI, @NonNull String projectName, @NonNull String testFolderName) {
@@ -79,7 +121,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 		this.samplesBaseUri = testFolderURI.appendSegment("samples");
 	}
 
-	public void checkOutput(@NonNull Resource outputResource, @NonNull String expectedFile, @Nullable ModelNormalizer normalizer) throws IOException, InterruptedException {
+	protected void checkOutput(@NonNull Resource outputResource, @NonNull String expectedFile, @Nullable ModelNormalizer normalizer) throws IOException, InterruptedException {
 		URI referenceModelURI = samplesBaseUri.appendSegment(expectedFile);
 		Resource referenceResource = outputResource.getResourceSet().getResource(referenceModelURI, true);
 		assert referenceResource != null;
@@ -190,19 +232,21 @@ public abstract class AbstractTestQVT extends QVTimperative
 		OCL ocl = QVTbase.newInstance(OCL.NO_PROJECTS);
 		ocl.getEnvironmentFactory().setSeverity(PivotTables.STR_Variable_c_c_CompatibleInitialiserType, StatusCodes.Severity.IGNORE);
 		try {
-			ASResource asResource = LoadTestCase.loadQVTiAS(ocl, inputURI);
+			ASResource asResource = loadQVTiAS(ocl, inputURI);
 			LoadTestCase.assertNoResourceErrors("Normalisation failed", asResource);
 			LoadTestCase.assertNoUnresolvedProxies("Normalisation invalid", asResource);
 			LoadTestCase.assertNoValidationErrors("Normalisation invalid", asResource);
 			//
 			//	Pivot to CS
 			//
-			XtextResource xtextResource = LoadTestCase.pivot2cs(ocl, resourceSet, asResource, serializedURI, QVTimperativeCSPackage.eCONTENT_TYPE);
+			XtextResource xtextResource = as2cs(ocl, resourceSet, asResource, serializedURI, QVTimperativeCSPackage.eCONTENT_TYPE);
 			resourceSet.getResources().clear();
 
 			QVTimperative qvti = QVTimperative.newInstance(ProjectManager.NO_PROJECTS, null);
 			try {
-				Resource asResource2 = QVTimperativeUtil.loadTransformation(qvti.getEnvironmentFactory(), serializedURI, false).eResource();
+				ImperativeTransformation asTransformation = QVTimperativeUtil.loadTransformation(qvti.getEnvironmentFactory(), serializedURI, false);
+				Resource asResource2 = asTransformation.eResource();
+				assert asResource2 != null;
 				LoadTestCase.assertNoResourceErrors("Load failed", asResource2);
 				LoadTestCase.assertNoUnresolvedProxies("Load invalid", asResource2);
 				LoadTestCase.assertNoValidationErrors("Load invalid", asResource2);
@@ -251,6 +295,13 @@ public abstract class AbstractTestQVT extends QVTimperative
 		Map<Object, Object> saveOptions = new HashMap<Object, Object>(TestsXMLUtil.defaultSavingOptions);
 		saveOptions.put(ASResource.OPTION_NORMALIZE_CONTENTS, Boolean.TRUE);
 		return saveOptions;
+	}
+
+	public void installClassName(@NonNull String className) throws ClassNotFoundException, NoSuchFieldException, IllegalAccessException {
+		Class<?> middleClass = Class.forName(className);
+		Field middleField = middleClass.getDeclaredField("eINSTANCE");
+		EPackage middleEPackage = (EPackage) middleField.get(null);
+		getResourceSet().getPackageRegistry().put(middleEPackage.getNsURI(), middleEPackage);
 	}
 
 	protected void loadGenModel(@NonNull URI genModelURI) {
@@ -303,6 +354,25 @@ public abstract class AbstractTestQVT extends QVTimperative
 		Field eNsURIField = ePackageClass.getField("eNS_URI");
 		String nsURI = String.valueOf(eNsURIField.get(null));
 		EPackage.Registry.INSTANCE.remove(nsURI);
+	}
+
+	public @NonNull Resource saveOutput(@NonNull String modelName, @NonNull String modelFile, @Nullable String expectedFile, @Nullable ModelNormalizer normalizer) throws IOException, InterruptedException {
+		URI modelURI = samplesBaseUri.appendSegment(modelFile);
+		ResourceSet resourceSet = /*getResourceSet()*/environmentFactory.getMetamodelManager().getASResourceSet();
+		Resource outputResource;
+		if (interpretedExecutor != null) {
+			outputResource = interpretedExecutor.saveModel(modelName, modelURI, null, getSaveOptions());
+		}
+		else {
+			outputResource = resourceSet.createResource(modelURI);
+			outputResource.getContents().addAll(generatedExecutor.getTransformer().getRootEObjects(modelName));
+			outputResource.save(getSaveOptions());
+		}
+		assert outputResource != null;
+		if (expectedFile != null) {
+			checkOutput(outputResource, expectedFile, normalizer);
+		}
+		return outputResource;
 	}
 
 	protected void setPackagePrefixOption(@NonNull QVTiCodeGenOptions options) {}

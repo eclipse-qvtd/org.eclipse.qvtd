@@ -319,7 +319,7 @@ public class PivotTestCase extends TestCase
 	public static Resource savePivotAsEcore(@NonNull OCL ocl, @NonNull Resource pivotResource, URI ecoreURI, boolean validateSaved) throws IOException {
 		return savePivotAsEcore(ocl, pivotResource, ecoreURI, null, validateSaved);
 	}
-	public static Resource savePivotAsEcore(@NonNull OCL ocl, @NonNull  Resource pivotResource, URI ecoreURI, Map<String,Object> options, boolean validateSaved) throws IOException {
+	public static @NonNull Resource savePivotAsEcore(@NonNull OCL ocl, @NonNull Resource pivotResource, URI ecoreURI, Map<String,Object> options, boolean validateSaved) throws IOException {
 		URI uri = ecoreURI != null ? ecoreURI : URI.createURI("test.ecore");
 		Resource ecoreResource = AS2Ecore.createResource((EnvironmentFactoryInternal) ocl.getEnvironmentFactory(), pivotResource, uri, null);
 		assertNoResourceErrors("Ecore2Pivot failed", ecoreResource);

@@ -39,7 +39,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
 import org.eclipse.qvtd.xtext.qvtbase.tests.AbstractTestQVT;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
-import org.eclipse.qvtd.xtext.qvtbase.tests.ModelNormalizer;
 import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.TestsXMLUtil;
 import org.eclipse.qvtd.xtext.qvtcore.tests.families2persons.Families2PersonsNormalizer;
 import org.eclipse.qvtd.xtext.qvtcore.tests.families2persons.Families.FamiliesPackage;
@@ -114,89 +113,33 @@ public class QVTcCompilerTests extends LoadTestCase
 		}
 
 		public @NonNull Class<? extends Transformer> buildTransformation(@NonNull String testFileName, @NonNull String outputName, @NonNull String @NonNull... genModelFiles) throws Exception {
-			Map<@NonNull String, @Nullable Map<CompilerChain.@NonNull Key<Object>, @Nullable Object>> options = new HashMap<@NonNull String, @Nullable Map<CompilerChain.@NonNull Key<Object>, @Nullable Object>>();
-			QVTcCompilerChain.setOption(options, CompilerChain.DEFAULT_STEP, CompilerChain.DEBUG_KEY, true);
-			QVTcCompilerChain.setOption(options, CompilerChain.DEFAULT_STEP, CompilerChain.SAVE_OPTIONS_KEY, TestsXMLUtil.defaultSavingOptions);
-			QVTcCompilerChain.setOption(options, CompilerChain.JAVA_STEP, CompilerChain.URI_KEY, TESTS_JAVA_SRC_URI);
-			QVTcCompilerChain.setOption(options, CompilerChain.JAVA_STEP, CompilerChain.JAVA_EXTRA_PREFIX_KEY, "cg");
-			QVTcCompilerChain.setOption(options, CompilerChain.CLASS_STEP, CompilerChain.URI_KEY, TESTS_JAVA_BIN_URI);
-			//			compilerChain = new InstrumentedCompilerChain(getEnvironmentFactory(), testFolderURI.appendSegment(testFileName), options);
-			//			Class<? extends Transformer> txClass = compilerChain.build(outputName, genModelFiles);
-			//			createGeneratedExecutor(txClass);
-			//			return txClass;
+			Map<@NonNull String, @Nullable Map<CompilerChain.@NonNull Key<Object>, @Nullable Object>> options = createBuildCompilerChainOptions();
 			return doBuild(testFileName, outputName, options, genModelFiles);
-			//			compilerChain = createCompilerChain(testFolderURI.appendSegment(testFileName), options);
-			//			Class<? extends Transformer> txClass = compilerChain.build(outputName, genModelFiles);
-			//			createGeneratedExecutor(txClass);
-			//			return txClass;
 		}
 
 		public @NonNull ImperativeTransformation compileTransformation(@NonNull String testFileName, @NonNull String outputName) throws Exception {
-			Map<@NonNull String, @Nullable Map<CompilerChain.@NonNull Key<Object>, @Nullable Object>> options = new HashMap<@NonNull String, @Nullable Map<CompilerChain.@NonNull Key<Object>, @Nullable Object>>();
-			QVTcCompilerChain.setOption(options, CompilerChain.DEFAULT_STEP, CompilerChain.DEBUG_KEY, true);
-			QVTcCompilerChain.setOption(options, CompilerChain.DEFAULT_STEP, CompilerChain.SAVE_OPTIONS_KEY, TestsXMLUtil.defaultSavingOptions);
-			/*			compilerChain = new InstrumentedCompilerChain(getEnvironmentFactory(), testFolderURI.appendSegment(testFileName), options);
-			return compilerChain.compile(outputName);
+			return doCompile(testFileName, outputName, createCompilerChainOptions());
 		}
 
-		@Override
-		public @NonNull Class<? extends Transformer> createGeneratedClass(@NonNull Transformation asTransformation, @NonNull String @NonNull... genModelFiles) throws Exception {
-			ResourceSet resourceSet = getResourceSet();
-			resourceSet.getPackageRegistry().put(GenModelPackage.eNS_URI, GenModelPackage.eINSTANCE);
-			for (String genModelFile : genModelFiles) {
-				URI genModelURI = testFolderURI.appendSegment(genModelFile);
-				loadGenModel(genModelURI);
-			}
-			QVTiCodeGenerator cg = new QVTiCodeGenerator(getEnvironmentFactory(), asTransformation);
-			QVTiCodeGenOptions options = cg.getOptions();
-			options.setUseNullAnnotations(true);
-			options.setPackagePrefix("cg");
-			cg.generateClassFile();
-			cg.saveSourceFile("../org.eclipse.qvtd.xtext.qvtcore.tests/test-gen/");
-			File explicitClassPath = new File("../org.eclipse.qvtd.xtext.qvtcore.tests/bin");
-			String qualifiedClassName = cg.getQualifiedName();
-			String javaCodeSource = cg.generateClassFile();
-			OCL2JavaFileObject.saveClass(ClassUtil.nonNullState(explicitClassPath.toString()), qualifiedClassName, javaCodeSource);
-			@SuppressWarnings("unchecked")
-			Class<? extends Transformer> txClass = (Class<? extends Transformer>) OCL2JavaFileObject.loadExplicitClass(explicitClassPath, qualifiedClassName);
-			if (txClass == null) {
-				TestCase.fail("Failed to compile transformation");
-				throw new UnsupportedOperationException();
-			}
-			return txClass;
-		}
-
-		@Override
-		public void createGeneratedExecutor(@NonNull Transformation asTransformation, @NonNull String @NonNull... genModelFiles) throws Exception {
-			Class<? extends Transformer> txClass = createGeneratedClass(asTransformation, genModelFiles);
-			createGeneratedExecutor(txClass);
-		}
-
-		@Override
-		public QVTiTransformationExecutor createGeneratedExecutor(@NonNull Class<? extends Transformer> txClass)  throws Exception {
-			return generatedExecutor = new QVTiTransformationExecutor(getEnvironmentFactory(), txClass);
-		}
-
-		@Override
-		public @NonNull BasicQVTiExecutor createInterpretedExecutor(@NonNull ImperativeTransformation asTransformation) throws Exception {
-			interpretedExecutor = new QVTiIncrementalExecutor(getEnvironmentFactory(), asTransformation, QVTiIncrementalExecutor.Mode.LAZY);
-			return interpretedExecutor;
-		}
-
-		@Override
-		public @Nullable Resource createModel(@NonNull String modelName, @NonNull String modelFile) {
-			URI modelURI = samplesBaseUri.appendSegment(modelFile);
-			return interpretedExecutor.createModel(modelName, modelURI, null);
-		} */
-			return doCompile(testFileName, outputName, options);
-			//			compilerChain = createCompilerChain(testFolderURI.appendSegment(testFileName), options);
-			//			return compilerChain.compile(outputName);
+		protected @NonNull Map<@NonNull String, @Nullable Map<CompilerChain.@NonNull Key<Object>, @Nullable Object>> createBuildCompilerChainOptions() {
+			Map<@NonNull String, @Nullable Map<CompilerChain.@NonNull Key<Object>, @Nullable Object>> options = createCompilerChainOptions();
+			QVTcCompilerChain.setOption(options, CompilerChain.JAVA_STEP, CompilerChain.URI_KEY, TESTS_JAVA_SRC_URI);
+			QVTcCompilerChain.setOption(options, CompilerChain.JAVA_STEP, CompilerChain.JAVA_EXTRA_PREFIX_KEY, "cg");
+			QVTcCompilerChain.setOption(options, CompilerChain.CLASS_STEP, CompilerChain.URI_KEY, TESTS_JAVA_BIN_URI);
+			return options;
 		}
 
 		@Override
 		protected @NonNull QVTcCompilerChain createCompilerChain(@NonNull URI prefixURI,
 				@NonNull Map<@NonNull String, @Nullable Map<CompilerChain.@NonNull Key<Object>, @Nullable Object>> options) {
 			return new InstrumentedCompilerChain(getEnvironmentFactory(), prefixURI, options);
+		}
+
+		protected @NonNull Map<@NonNull String, @Nullable Map<CompilerChain.@NonNull Key<Object>, @Nullable Object>> createCompilerChainOptions() {
+			Map<@NonNull String, @Nullable Map<CompilerChain.@NonNull Key<Object>, @Nullable Object>> options = new HashMap<>();
+			QVTcCompilerChain.setOption(options, CompilerChain.DEFAULT_STEP, CompilerChain.DEBUG_KEY, true);
+			QVTcCompilerChain.setOption(options, CompilerChain.DEFAULT_STEP, CompilerChain.SAVE_OPTIONS_KEY, TestsXMLUtil.defaultSavingOptions);
+			return options;
 		}
 
 		private void instrumentRegion(@NonNull Region parentRegion) {
@@ -218,30 +161,6 @@ public class QVTcCompilerTests extends LoadTestCase
 			for (String genModelFile : genModelFiles) {
 				URI genModelURI = testFolderURI.appendSegment(genModelFile);
 				loadGenModel(genModelURI);
-			}
-		}
-
-		public void saveOutput(@NonNull String modelName, @NonNull String modelFile, @Nullable String expectedFile, @Nullable ModelNormalizer normalizer) throws IOException, InterruptedException {
-			URI modelURI = samplesBaseUri.appendSegment(modelFile);
-			ResourceSet resourceSet = getResourceSet();
-			Resource outputResource;
-			if (interpretedExecutor != null) {
-				outputResource = interpretedExecutor.saveModel(modelName, modelURI, null, getSaveOptions());
-			}
-			else {
-				outputResource = resourceSet.createResource(modelURI);
-				outputResource.getContents().addAll(generatedExecutor.getTransformer().getRootEObjects(modelName));
-				outputResource.save(getSaveOptions());
-			}
-			if ((outputResource != null) && (expectedFile != null)) {
-				URI referenceModelURI = samplesBaseUri.appendSegment(expectedFile);
-				Resource referenceResource = resourceSet.getResource(referenceModelURI, true);
-				assert referenceResource != null;
-				if (normalizer != null) {
-					normalizer.normalize(referenceResource);
-					normalizer.normalize(outputResource);
-				}
-				assertSameModel(referenceResource, outputResource);
 			}
 		}
 	}

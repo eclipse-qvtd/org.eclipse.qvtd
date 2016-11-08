@@ -49,20 +49,20 @@ import org.eclipse.qvtd.pivot.qvtbase.model.QVTbaseMetamodel;
  */
 public class QVTbaseLibraryTests extends XtextTestCase
 {
-	public static class MonikeredComparator implements Comparator<Element>
+	public static class MonikeredComparator implements Comparator<@NonNull Element>
 	{
-		public static final Comparator<? super Element> INSTANCE = new MonikeredComparator();
+		public static final Comparator<@NonNull Element> INSTANCE = new MonikeredComparator();
 
 		@Override
-		public int compare(Element o1, Element o2) {
+		public int compare(@NonNull Element o1, @NonNull Element o2) {
 			String m1 = AS2Moniker.toString(o1);
 			String m2 = AS2Moniker.toString(o2);
 			return m1.compareTo(m2);
 		}
 	}
 
-	public Map<String, Element> computeMoniker2ASMap(Collection<@NonNull ? extends Resource> pivotResources) {
-		Map<String, Element> map = new HashMap<>();
+	public Map<@NonNull String, @NonNull Element> computeMoniker2ASMap(Collection<@NonNull ? extends Resource> pivotResources) {
+		Map<@NonNull String, @NonNull Element> map = new HashMap<>();
 		for (@NonNull Resource asResource : pivotResources) {
 			for (Iterator<EObject> it = asResource.getAllContents(); it.hasNext();) {
 				EObject eObject = it.next();
@@ -86,6 +86,7 @@ public class QVTbaseLibraryTests extends XtextTestCase
 
 	protected Resource doLoadAS(@NonNull ResourceSet resourceSet, @NonNull URI libraryURI, @NonNull Resource javaResource, boolean validateMonikers) {
 		Resource asResource = resourceSet.getResource(libraryURI, true);
+		assert asResource != null;
 		assertNoResourceErrors("Load failed", asResource);
 		assertNoUnresolvedProxies("File Model", asResource);
 		assertNoValidationErrors("File Model", asResource);
@@ -99,16 +100,17 @@ public class QVTbaseLibraryTests extends XtextTestCase
 		//
 		//	Check similar content
 		//
-		Map<String,Element> fileMoniker2asMap = computeMoniker2ASMap(Collections.singletonList(asResource));
+		List<@NonNull Resource> asResourceList = Collections.singletonList(asResource);
+		Map<@NonNull String, @NonNull Element> fileMoniker2asMap = computeMoniker2ASMap(asResourceList);
 		//		for (String moniker : fileMoniker2asMap.keySet()) {
 		//			System.out.println("File : " + moniker);
 		//		}
-		Map<String,Element> javaMoniker2asMap = computeMoniker2ASMap(Collections.singletonList(javaResource));
+		Map<@NonNull String, @NonNull Element> javaMoniker2asMap = computeMoniker2ASMap(Collections.singletonList(javaResource));
 		//		for (String moniker : javaMoniker2asMap.keySet()) {
 		//			System.out.println("Java : " + moniker);
 		//		}
 		//		assertEquals(fileMoniker2asMap.size(), javaMoniker2asMap.size());
-		for (String moniker : fileMoniker2asMap.keySet()) {
+		for (@NonNull String moniker : fileMoniker2asMap.keySet()) {
 			Element fileElement = fileMoniker2asMap.get(moniker);
 			Element javaElement = javaMoniker2asMap.get(moniker);
 			if (javaElement == null) {
@@ -163,6 +165,7 @@ public class QVTbaseLibraryTests extends XtextTestCase
 				for (int i = 0; i < fileTypes.size(); i++) {
 					Element fileType = fileTypes.get(i);
 					Element javaType = javaTypes.get(i);
+					assert (fileType != null) && (javaType != null);
 					String fileMoniker = AS2Moniker.toString(fileType);
 					String javaMoniker = AS2Moniker.toString(javaType);
 					assertEquals(fileMoniker, javaMoniker);
@@ -198,7 +201,10 @@ public class QVTbaseLibraryTests extends XtextTestCase
 		getProjectMap().initializeResourceSet(resourceSet);
 		URI libraryURI = URI.createPlatformResourceURI("org.eclipse.qvtd.pivot.qvtbase/model/QVTbaseLibrary.oclstdlib", true);
 		BaseCSResource xtextResource = (BaseCSResource) resourceSet.createResource(libraryURI);
-		JavaClassScope.getAdapter(xtextResource, getClass().getClassLoader());
+		assert xtextResource != null;
+		ClassLoader classLoader = getClass().getClassLoader();
+		assert classLoader != null;
+		JavaClassScope.getAdapter(xtextResource, classLoader);
 		ocl.getEnvironmentFactory().adapt(xtextResource);
 		xtextResource.load(null);
 		CS2AS cs2as = xtextResource.findCS2AS();
@@ -219,11 +225,13 @@ public class QVTbaseLibraryTests extends XtextTestCase
 		//
 		//	Check similar content
 		//
-		Map<String,Element> fileMoniker2asMap = computeMoniker2ASMap(Collections.singletonList(fileResource));
+		List<@NonNull Resource> fileResourceList = Collections.singletonList(fileResource);
+		Map<@NonNull String, @NonNull Element> fileMoniker2asMap = computeMoniker2ASMap(fileResourceList);
 		//		for (String moniker : fileMoniker2asMap.keySet()) {
 		//			System.out.println("File : " + moniker);
 		//		}
-		Map<String,Element> javaMoniker2asMap = computeMoniker2ASMap(Collections.singletonList(javaResource));
+		List<@NonNull Resource> javaResourceList = Collections.singletonList(javaResource);
+		Map<@NonNull String, @NonNull Element> javaMoniker2asMap = computeMoniker2ASMap(javaResourceList);
 		//		for (String moniker : javaMoniker2asMap.keySet()) {
 		//			System.out.println("Java : " + moniker);
 		//		}
@@ -283,6 +291,7 @@ public class QVTbaseLibraryTests extends XtextTestCase
 				for (int i = 0; i < fileTypes.size(); i++) {
 					Element fileType = fileTypes.get(i);
 					Element javaType = javaTypes.get(i);
+					assert (fileType != null) && (javaType != null);
 					String fileMoniker = AS2Moniker.toString(fileType);
 					String javaMoniker = AS2Moniker.toString(javaType);
 					assertEquals(fileMoniker, javaMoniker);

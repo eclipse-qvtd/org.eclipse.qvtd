@@ -22,6 +22,7 @@ import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcore;
+import org.eclipse.qvtd.xtext.qvtbase.tests.AbstractTestQVT;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.TestsXMLUtil;
 import org.eclipse.qvtd.xtext.qvtcorecs.QVTcoreCSPackage;
@@ -72,13 +73,13 @@ public class QVTcSerializeTests extends LoadTestCase
 		//
 		QVTcore ocl = QVTcore.newInstance(QVTcore.NO_PROJECTS);
 		try {
-			ASResource asResource = loadQVTiAS(ocl, inputURI);
+			ASResource asResource = AbstractTestQVT.loadQVTiAS(ocl, inputURI);
 			assertNoResourceErrors("Normalisation failed", asResource);
 			assertNoValidationErrors("Normalisation invalid", asResource);
 			//
 			//	Pivot to CS
 			//
-			XtextResource xtextResource = pivot2cs(ocl, resourceSet, asResource, outputURI, QVTcoreCSPackage.eCONTENT_TYPE);
+			XtextResource xtextResource = AbstractTestQVT.as2cs(ocl, resourceSet, asResource, outputURI, QVTcoreCSPackage.eCONTENT_TYPE);
 			resourceSet.getResources().clear();
 			return xtextResource;
 		}
