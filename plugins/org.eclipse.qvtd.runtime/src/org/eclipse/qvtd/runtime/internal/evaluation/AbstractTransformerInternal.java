@@ -28,7 +28,6 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.evaluation.AbstractModelManager;
 import org.eclipse.ocl.pivot.evaluation.Evaluator;
 import org.eclipse.ocl.pivot.ids.ClassId;
 import org.eclipse.ocl.pivot.ids.CollectionTypeId;
@@ -53,13 +52,12 @@ import org.eclipse.qvtd.runtime.evaluation.InvocationManager;
 import org.eclipse.qvtd.runtime.evaluation.ObjectManager;
 import org.eclipse.qvtd.runtime.evaluation.TransformationExecutor;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
-import org.eclipse.qvtd.runtime.library.model.IterableAsSet;
 
 /**
  * The abstract implementation of an auto-generated transformation provides the shared infrastructure for maintaining
  * models and deferring invocation of not-ready mapping invocations.
  */
-public abstract class AbstractTransformerInternal extends AbstractModelManager implements Transformer, ExecutionVisitable
+public abstract class AbstractTransformerInternal /*extends AbstractModelManager*/ implements Transformer, ExecutionVisitable
 {
 	public static abstract class Incremental extends AbstractTransformerInternal
 	{
@@ -405,91 +403,6 @@ public abstract class AbstractTransformerInternal extends AbstractModelManager i
 		}
 	}
 
-	/*	private static class UnmodifiableCollectionAsSet<T> implements Set<T>
-	{
-		protected final @NonNull Iterable<@NonNull T> collection;
-
-		private UnmodifiableCollectionAsSet(@NonNull Iterable<@NonNull T> collection) {
-			this.collection = collection;
-			assert collection.size() == new HashSet<>(collection).size();
-		}
-
-		@Override
-		public boolean add(T e) {
-			throw new UnsupportedOperationException();
-		}
-
-		@Override
-		public boolean addAll(Collection<? extends T> c) {
-			throw new UnsupportedOperationException();
-		}
-
-		@Override
-		public void clear() {
-			throw new UnsupportedOperationException();
-		}
-
-		@Override
-		public boolean contains(Object o) {
-			return Iterables.contains(collection, o);
-		}
-
-		@Override
-		public boolean containsAll(Collection<?> c) {
-			return collection.containsAll(c);
-		}
-
-		@Override
-		public boolean equals(Object obj) {
-			return collection.equals(obj);
-		}
-
-		@Override
-		public int hashCode() {
-			return collection.hashCode();
-		}
-
-		@Override
-		public boolean isEmpty() {
-			return collection.isEmpty();
-		}
-
-		@Override
-		public @NonNull Iterator<T> iterator() {
-			return collection.iterator();
-		}
-
-		@Override
-		public boolean remove(Object o) {
-			throw new UnsupportedOperationException();
-		}
-
-		@Override
-		public boolean removeAll(Collection<?> c) {
-			throw new UnsupportedOperationException();
-		}
-
-		@Override
-		public boolean retainAll(Collection<?> c) {
-			throw new UnsupportedOperationException();
-		}
-
-		@Override
-		public int size() {
-			return collection.size();
-		}
-
-		@Override
-		public Object[] toArray() {
-			return collection.toArray();
-		}
-
-		@Override
-		public <T1> T1[] toArray(T1[] a) {
-			return collection.toArray(a);
-		}
-	} */
-
 	protected final @NonNull TransformationExecutor executor;
 	/** deprecated use executor */
 	@Deprecated
@@ -657,9 +570,26 @@ public abstract class AbstractTransformerInternal extends AbstractModelManager i
 		return new LazyObjectManager((LazyInvocationManager)invocationManager);
 	}
 
-	@Override
-	public @NonNull Set<@NonNull Object> get(org.eclipse.ocl.pivot.@NonNull Class type) {
-		return new IterableAsSet<@NonNull Object>(models[0].getObjectsOfKind(type));
+	@SuppressWarnings("null")
+	protected @NonNull TreeIterator<? extends Object> eAllContents(@NonNull Object object) {
+		return ((EObject)object).eAllContents();
+	}
+
+	@SuppressWarnings("null")
+	protected @NonNull EClass eClass(@NonNull Object object) {
+		return ((EObject)object).eClass();
+	}
+
+	protected @Nullable Object eContainer(@NonNull Object object) {
+		return ((EObject)object).eContainer();
+	}
+
+	protected @Nullable Object eGet(@NonNull Object object, @NonNull EStructuralFeature eFeature) {
+		return ((EObject)object).eGet(eFeature);
+	}
+
+	public @NonNull Iterable<@NonNull Object> get(org.eclipse.ocl.pivot.@NonNull Class type) {
+		return models[0].getObjectsOfKind(type);
 	}
 
 	/**

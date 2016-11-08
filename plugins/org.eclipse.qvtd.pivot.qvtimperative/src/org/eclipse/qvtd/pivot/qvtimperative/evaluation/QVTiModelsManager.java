@@ -31,7 +31,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.Type;
-import org.eclipse.ocl.pivot.evaluation.AbstractModelManager;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.MetamodelManager;
 import org.eclipse.ocl.pivot.utilities.ParserException;
@@ -47,12 +46,9 @@ import org.eclipse.qvtd.runtime.evaluation.TypedModelInstance;
 import com.google.common.collect.Iterables;
 
 /**
- * QVTc Domain Manager is the class responsible for managing the QVTc virtual
- * machine meta-models and models.
- * A QVTc Domain Manager object encapsulates the domain information need to
- * modify the domains's models.
+ * QVTiModelsManager manager the source, middle and target models during a QVTi transformation.
  */
-public class QVTiModelManager extends AbstractModelManager
+public class QVTiModelsManager
 {
 	protected final @NonNull QVTiTransformationAnalysis transformationAnalysis;
 	protected final @NonNull MetamodelManager metamodelManager;
@@ -91,7 +87,7 @@ public class QVTiModelManager extends AbstractModelManager
 	 * Instantiates a new QVTi Domain Manager. Responsible for creating new
 	 * instances of the middle model and the middle model EFactory.
 	 */
-	public QVTiModelManager(@NonNull QVTiTransformationAnalysis transformationAnalysis) {
+	public QVTiModelsManager(@NonNull QVTiTransformationAnalysis transformationAnalysis) {
 		this.transformationAnalysis = transformationAnalysis;
 		this.metamodelManager = transformationAnalysis.getMetamodelManager();
 		this.allInstancesClasses = transformationAnalysis.getAllInstancesClasses();
@@ -140,7 +136,6 @@ public class QVTiModelManager extends AbstractModelManager
 	/**
 	 * Dispose.
 	 */
-	@Override
 	public void dispose() {
 		modelElementsMap.clear();
 		modelResourceMap.clear();
@@ -153,7 +148,6 @@ public class QVTiModelManager extends AbstractModelManager
 	/**
 	 * The inherited 'allInstances' behavior is implemented as an accumulation of all instances from all input models.
 	 */
-	@Override
 	public @NonNull Set<@NonNull Object> get(org.eclipse.ocl.pivot.@NonNull Class type) {
 		Set<@NonNull Object> elements = new HashSet<>();
 		for (@NonNull ImperativeTypedModel typedModel : QVTimperativeUtil.getOwnedTypedModels(transformationAnalysis.getTransformation())) {
@@ -371,15 +365,15 @@ public class QVTiModelManager extends AbstractModelManager
 
 	public static class QVTiTransformationInstance extends AbstractTransformationInstance
 	{
-		protected final @NonNull QVTiModelManager modelManager;
+		protected final @NonNull QVTiModelsManager modelManager;
 		protected final @NonNull ImperativeTransformation transformation;
 
-		public QVTiTransformationInstance(@NonNull QVTiModelManager modelManager, @NonNull ImperativeTransformation transformation) {
+		public QVTiTransformationInstance(@NonNull QVTiModelsManager modelManager, @NonNull ImperativeTransformation transformation) {
 			this.modelManager = modelManager;
 			this.transformation = transformation;
 		}
 
-		public @NonNull QVTiModelManager getModelManager() {
+		public @NonNull QVTiModelsManager getModelManager() {
 			return modelManager;
 		}
 
@@ -395,12 +389,12 @@ public class QVTiModelManager extends AbstractModelManager
 
 	public static class QVTiTypedModelInstance extends AbstractTypedModelInstance
 	{
-		protected final @NonNull QVTiModelManager modelManager;
+		protected final @NonNull QVTiModelsManager modelManager;
 		protected final @NonNull ImperativeTypedModel typedModel;
 		private /*@LazyNonNull*/ Map<@NonNull Type, @NonNull List<@NonNull Object>> kind2instances = null;
 		private /*@LazyNonNull*/ Map<@NonNull Type, @NonNull List<@NonNull Object>> type2instances = null;
 
-		public QVTiTypedModelInstance(@NonNull QVTiModelManager modelManager, @NonNull ImperativeTypedModel typedModel) {
+		public QVTiTypedModelInstance(@NonNull QVTiModelsManager modelManager, @NonNull ImperativeTypedModel typedModel) {
 			this.modelManager = modelManager;
 			this.typedModel = typedModel;
 		}
@@ -447,7 +441,7 @@ public class QVTiModelManager extends AbstractModelManager
 			return elements;
 		}
 
-		public @NonNull QVTiModelManager getModelManager() {
+		public @NonNull QVTiModelsManager getModelManager() {
 			return modelManager;
 		}
 
@@ -465,6 +459,11 @@ public class QVTiModelManager extends AbstractModelManager
 		public @NonNull ImperativeTypedModel getTypedModel() {
 			return typedModel;
 		}
+	}
+
+	@SuppressWarnings("null")
+	public @NonNull EClass eClass(@NonNull Object object) {
+		return ((EObject)object).eClass();
 	}
 
 	public @NonNull TransformationInstance getTransformationInstance(@NonNull ImperativeTransformation transformation) {

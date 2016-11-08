@@ -176,7 +176,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 					ImperativeTypedModel typedModel = ClassUtil.nonNullState(entry.getKey());
 					Resource expectedModel = entry.getValue();
 					assert expectedModel != null;
-					Resource actualModel = getModelManager().getModel(typedModel);
+					Resource actualModel = getModelsManager().getModel(typedModel);
 					assert actualModel != null;
 					if (modelNormalizer != null) {
 						modelNormalizer.normalize(expectedModel);

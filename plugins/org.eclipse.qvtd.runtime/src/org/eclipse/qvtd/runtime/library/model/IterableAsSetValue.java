@@ -37,7 +37,7 @@ import com.google.common.collect.Iterables;
  * This wrapper makes an Iterable appear to be a SetValue. It only has enough functionality to
  * allow a ModelObjectsOfKindOperation return to satisfy the SetValue return.
  */
-public class IterableAsSetValue<T> extends ValueImpl implements SetValue
+class IterableAsSetValue<T> extends ValueImpl implements SetValue
 {
 	protected final @NonNull CollectionTypeId typeId;
 	protected final @NonNull Iterable<@NonNull ? extends T> iterable;

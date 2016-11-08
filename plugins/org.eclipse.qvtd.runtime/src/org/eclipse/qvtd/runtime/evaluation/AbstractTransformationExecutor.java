@@ -11,18 +11,33 @@
 package org.eclipse.qvtd.runtime.evaluation;
 
 import java.lang.reflect.Constructor;
+import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.pivot.evaluation.ModelManager;
+import org.eclipse.ocl.pivot.evaluation.AbstractModelManager;
 import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.internal.library.executor.ExecutorManager;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
+import org.eclipse.qvtd.runtime.internal.evaluation.AbstractTransformerInternal;
 
 public abstract class AbstractTransformationExecutor extends ExecutorManager implements TransformationExecutor
 {
+	/**
+	 * WrappedModelManager enables the unhelpful model access API to be observed without infecting the
+	 * more streamlined QVTi accesses.
+	 */
+	private class WrappedModelManager extends AbstractModelManager
+	{
+		@Override
+		public @NonNull Set<@NonNull ? extends Object> get(org.eclipse.ocl.pivot.@NonNull Class type) {
+			return new IterableAsSet<@NonNull Object>(((AbstractTransformerInternal)transformer).get(type));
+		}
+	}
+
 	protected final @NonNull EnvironmentFactory environmentFactory;
 	protected final @NonNull Transformer transformer;
+	private WrappedModelManager wrappedModelManager = null;
 
 	private AbstractTransformationExecutor(@NonNull EnvironmentFactory environmentFactory, @NonNull Constructor<? extends Transformer> txConstructor)
 			throws ReflectiveOperationException {
@@ -42,8 +57,12 @@ public abstract class AbstractTransformationExecutor extends ExecutorManager imp
 	}
 
 	@Override
-	public @NonNull ModelManager getModelManager() {
-		return transformer;
+	public @NonNull WrappedModelManager getModelManager() {
+		WrappedModelManager wrappedModelManager2 = wrappedModelManager ;
+		if (wrappedModelManager2 == null) {
+			wrappedModelManager2 = wrappedModelManager = new WrappedModelManager();
+		}
+		return wrappedModelManager2;
 	}
 
 	@Override

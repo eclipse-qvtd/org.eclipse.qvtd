@@ -36,8 +36,7 @@ public interface QVTiExecutor extends ExecutorInternal
 	@NonNull InvocationConstructor getInvocationConstructor(@NonNull MappingCall mappingCall, @NonNull EvaluationVisitor undecoratedVisitor);
 	@NonNull InvocationManager getInvocationManager();
 	@Nullable Resource getModel(@NonNull String name);
-	@Override
-	@NonNull QVTiModelManager getModelManager();
+	@NonNull QVTiModelsManager getModelsManager();
 	@Nullable Object internalExecuteMapping(@NonNull Mapping mapping, @NonNull EvaluationVisitor undecoratedVisitor);
 	@Nullable Object internalExecuteMappingCall(@NonNull MappingCall mappingCall, @NonNull Object @NonNull [] boundValues, @NonNull EvaluationVisitor undecoratedVisitor);
 	@Nullable Object internalExecuteNewStatement(@NonNull NewStatement newStatement, @NonNull EvaluationVisitor undecoratedVisitor);

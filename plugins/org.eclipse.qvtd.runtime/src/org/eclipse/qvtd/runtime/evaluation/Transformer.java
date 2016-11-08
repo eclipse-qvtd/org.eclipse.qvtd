@@ -14,7 +14,6 @@ import java.util.Collection;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.pivot.evaluation.ModelManager;
 import org.eclipse.ocl.pivot.internal.evaluation.EvaluationCache;
 
 /**
@@ -23,7 +22,7 @@ import org.eclipse.ocl.pivot.internal.evaluation.EvaluationCache;
  *
  * @noimplement clients should derive from AbstractTransformer
  */
-public interface Transformer extends ModelManager, ExecutionVisitable
+public interface Transformer extends ExecutionVisitable
 {
 	/**
 	 * Clients may reference this explicitly to force a compile-time failure for a mismatch.

@@ -144,7 +144,7 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 	public QVTiIncrementalExecutor(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull ImperativeTransformation transformation, @NonNull Mode mode) {
 		super(environmentFactory, transformation);
 		this.mode = mode;
-		this.transformationAnalysis = getModelManager().getTransformationAnalysis();
+		this.transformationAnalysis = getModelsManager().getTransformationAnalysis();
 		boolean isLazy = mode == Mode.LAZY;
 		this.invocationManager = isLazy ? new LazyInvocationManager(this) : new IncrementalInvocationManager(this);
 		this.objectManager = isLazy ? new LazyObjectManager((LazyInvocationManager)invocationManager) : new IncrementalObjectManager((IncrementalInvocationManager)invocationManager);
@@ -255,7 +255,7 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 	@Override
 	public @Nullable Object internalExecuteNavigationCallExp(@NonNull NavigationCallExp navigationCallExp, @NonNull Property referredProperty, @Nullable Object sourceValue) {
 		if (referredProperty.isIsImplicit()) {
-			QVTiModelManager modelManager = getModelManager();
+			QVTiModelsManager modelManager = getModelsManager();
 			Integer cacheIndex = modelManager.getTransformationAnalysis().getCacheIndex((OppositePropertyCallExp) navigationCallExp);
 			if (cacheIndex != null) {
 				if (sourceValue != null) {

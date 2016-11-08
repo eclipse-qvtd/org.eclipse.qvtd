@@ -8,7 +8,7 @@
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
-package org.eclipse.qvtd.runtime.library.model;
+package org.eclipse.qvtd.runtime.evaluation;
 
 import java.util.Collection;
 import java.util.Iterator;
@@ -20,9 +20,9 @@ import com.google.common.collect.Iterables;
 
 /**
  * This wrapper makes an Iterable appear to be a Set. It only has enough functionality to
- * support the unhelpfule ModelManager.get return type..
+ * support the unhelpful ModelManager.get return type.
  */
-public class IterableAsSet<T> implements Set<T>
+class IterableAsSet<T> implements Set<T>
 {
 	protected final @NonNull Iterable<@NonNull ? extends T> iterable;
 

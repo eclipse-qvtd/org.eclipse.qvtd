@@ -23,9 +23,9 @@ import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
-import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiModelManager;
-import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiModelManager.QVTiTransformationInstance;
-import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiModelManager.QVTiTypedModelInstance;
+import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiModelsManager;
+import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiModelsManager.QVTiTransformationInstance;
+import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiModelsManager.QVTiTypedModelInstance;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 
 public class QVTiVariableFinder extends VariableFinder
@@ -48,7 +48,7 @@ public class QVTiVariableFinder extends VariableFinder
 				childPath[childPath.length - 1] = varName;
 				VMVariableData elementVar = new VMVariableData(varName, createURI(childPath).toString());
 				elementVar.kind = VMVariableData.MODEL_PARAMETER;
-				QVTiModelManager modelManager = transformationInstance.getModelManager();
+				QVTiModelsManager modelManager = transformationInstance.getModelManager();
 				Resource model = modelManager.getModel(typedModel);
 				setValueAndType(elementVar, model, "TypedModel");
 				if (fIsStoreValues) {
@@ -59,7 +59,7 @@ public class QVTiVariableFinder extends VariableFinder
 		}
 		else if (valueObject instanceof QVTiTypedModelInstance) {
 			QVTiTypedModelInstance typedModelInstance = (QVTiTypedModelInstance)valueObject;
-			QVTiModelManager modelManager = typedModelInstance.getModelManager();
+			QVTiModelsManager modelManager = typedModelInstance.getModelManager();
 			ImperativeTypedModel typedModel = typedModelInstance.getTypedModel();
 			Resource model = modelManager.getModel(typedModel);
 			super.collectChildVars(model, parentPath, containerType, result);
@@ -78,13 +78,13 @@ public class QVTiVariableFinder extends VariableFinder
 			QVTiTransformationInstance transformationInstance = (QVTiTransformationInstance)parentObj;
 			Transformation transformation = transformationInstance.getTransformation();
 			ImperativeTypedModel typedModel = (ImperativeTypedModel) transformation.getModelParameter(varTreePath[pathIndex]);
-			QVTiModelManager modelManager = transformationInstance.getModelManager();
+			QVTiModelsManager modelManager = transformationInstance.getModelManager();
 			nextObject = typedModel != null ? modelManager.getModel(typedModel) : null;
 			nextDeclaredType = "Resource";
 		}
 		else if (parentObj instanceof QVTiTypedModelInstance) {
 			QVTiTypedModelInstance typedModelInstance = (QVTiTypedModelInstance)parentObj;
-			QVTiModelManager modelManager = typedModelInstance.getModelManager();
+			QVTiModelsManager modelManager = typedModelInstance.getModelManager();
 			ImperativeTypedModel typedModel = typedModelInstance.getTypedModel();
 			Resource model = modelManager.getModel(typedModel);
 			return super.findChildObject(model, optParentDeclaredType, varTreePath, pathIndex);
@@ -164,7 +164,7 @@ public class QVTiVariableFinder extends VariableFinder
 		}
 		else if (value instanceof QVTiTypedModelInstance) {
 			QVTiTypedModelInstance typedModelInstance = (QVTiTypedModelInstance)value;
-			QVTiModelManager modelManager = typedModelInstance.getModelManager();
+			QVTiModelsManager modelManager = typedModelInstance.getModelManager();
 			ImperativeTypedModel typedModel = typedModelInstance.getTypedModel();
 			Resource model = modelManager.getModel(typedModel);
 			super.setValueAndType(variable, model, declaredTypeName);
