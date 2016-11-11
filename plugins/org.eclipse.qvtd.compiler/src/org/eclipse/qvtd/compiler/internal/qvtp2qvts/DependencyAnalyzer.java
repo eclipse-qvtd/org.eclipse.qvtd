@@ -465,21 +465,6 @@ public class DependencyAnalyzer
 			return true;
 		}
 
-		public @NonNull DependencyPaths replaceReturn(@NonNull ClassDependencyStep classDependencyStep) {
-			Set<@NonNull List<@NonNull DependencyStep>> newReturnPaths = new HashSet<>();
-			for (@NonNull List<@NonNull DependencyStep> oldReturnPath : returnPaths) {
-				int size = oldReturnPath.size();
-				if (size > 0) {
-					List<@NonNull DependencyStep> newReturnPath = new ArrayList<>(oldReturnPath.subList(0, size-1));
-					newReturnPath.add(classDependencyStep);
-					if (!newReturnPaths.contains(newReturnPath)) {
-						newReturnPaths.add(newReturnPath);
-					}
-				}
-			}
-			return dependencyAnalyzer.createDependencyPaths(newReturnPaths, hiddenPaths);
-		}
-
 		@Override
 		public @NonNull String toString() {
 			StringBuilder s = new StringBuilder();
@@ -610,7 +595,7 @@ public class DependencyAnalyzer
 				for (@NonNull List<@NonNull DependencyStep> steps : sourcePaths.getReturnPaths()) {
 					for (@NonNull DependencyStep step : steps) {
 						org.eclipse.ocl.pivot.Class sourceClass = step.getElementalType();
-						CompleteClass selfClass = completeModel.getCompleteClass(sourceClass);
+						CompleteClass selfClass = metamodelManager.getCompleteModel().getCompleteClass(sourceClass);
 						Iterable<@NonNull Operation> overrides = getOverrides(selfClass, referredOperation);
 						for (@NonNull Operation operation : overrides) {
 							OperationId operationId = operation.getOperationId();
@@ -631,27 +616,6 @@ public class DependencyAnalyzer
 			return result;
 		}
 
-		private @NonNull DependencyPaths analyzeOperationCallExp_oclAsType(@NonNull OperationCallExp operationCallExp, @NonNull List<@NonNull DependencyPaths> sourceAndArgumentPaths) {
-			assert sourceAndArgumentPaths.size() == 2;
-			DependencyPaths sourcePath = sourceAndArgumentPaths.get(0);
-			OCLExpression typeArgument = operationCallExp.getOwnedArguments().get(0);
-			Type typeValue = typeArgument.getTypeValue();
-			if (typeValue == null) {
-				return sourcePath;
-			}
-			CompleteClass castClass = completeModel.getCompleteClass(typeValue);
-			ClassDependencyStep classDependencyStep = createClassDependencyStep(castClass.getPrimaryClass(), operationCallExp);
-			DependencyPaths result = sourcePath.replaceReturn(classDependencyStep);
-			if (RETURN.isActive()) {
-				StringBuilder s = new StringBuilder();
-				for (@NonNull DependencyPaths paths : sourceAndArgumentPaths) {
-					s.append("\n\t=> " + paths.toString());
-				}
-				s.append("\n\t= " + result.toString());
-				RETURN.println(operationCallExp.getReferredOperation() + s.toString());
-			}
-			return result;
-		}
 
 		private @NonNull DependencyPaths analyzeOperationCallExp_oclContainer(@NonNull OperationCallExp operationCallExp, @NonNull List<@NonNull DependencyPaths> sourceAndArgumentPaths) {
 			assert sourceAndArgumentPaths.size() == 1;
@@ -661,8 +625,8 @@ public class DependencyAnalyzer
 				int size = steps.size();
 				assert size > 0;
 				DependencyStep lastStep = steps.get(size-1);
-				CompleteClass sourceClass = completeModel.getCompleteClass(lastStep.getElementalType());
-				for (@NonNull CompleteClass containerClass : classRelationships.getContainerClasses(sourceClass)) {
+				CompleteClass sourceClass = metamodelManager.getCompleteModel().getCompleteClass(lastStep.getElementalType());
+				for (@NonNull CompleteClass containerClass : scheduler.getClassRelationships().getContainerClasses(sourceClass)) {
 					ClassDependencyStep classDependencyStep = createClassDependencyStep(containerClass.getPrimaryClass(), operationCallExp);
 					result = result.addReturn(createDependencyPaths(classDependencyStep));
 				}
@@ -891,12 +855,6 @@ public class DependencyAnalyzer
 				CALL.println(referredOperation + s.toString());
 			}
 			//
-			//	oclAsType() is a known operation - special case it.
-			//
-			if (PivotUtil.isSameOperation(referredOperation.getOperationId(), scheduler.getOclAnyOclAsTypeId())) {
-				return analyzeOperationCallExp_oclAsType(operationCallExp, allSourceAndArgumentPaths);
-			}
-			//
 			//	Analyze each possible source type
 			//
 			DependencyPaths result = emptyDependencyPaths;
@@ -923,7 +881,7 @@ public class DependencyAnalyzer
 				assert size > 0;
 				DependencyStep lastStep = steps2.get(size-1);
 				org.eclipse.ocl.pivot.Class sourceClass = lastStep.getElementalType();
-				CompleteClass selfClass = completeModel.getCompleteClass(sourceClass);
+				CompleteClass selfClass = metamodelManager.getCompleteModel().getCompleteClass(sourceClass);
 				List<@NonNull Operation> sortedOverrides = Lists.newArrayList(getOverrides(selfClass, referredOperation));
 				Collections.sort(sortedOverrides, ToStringComparator.INSTANCE);
 				for (@NonNull Operation operation : sortedOverrides) {
@@ -1235,7 +1193,7 @@ public class DependencyAnalyzer
 				Function function  = (Function)operation;
 				Transformation transformation = QVTbaseUtil.getContainingTransformation(function);
 				if (transformation != null) {
-					Variable thisVariable = QVTbaseUtil.getContextVariable(dependencyAnalyzer.standardLibrary, transformation);
+					Variable thisVariable = QVTbaseUtil.getContextVariable(dependencyAnalyzer.metamodelManager.getStandardLibrary(), transformation);
 					visitor.addVariable(thisVariable, ClassUtil.nonNullState(sourceAndArgumentPaths.get(0)));
 				}
 				ownedParameters = function.getOwnedParameters();
@@ -1328,10 +1286,8 @@ public class DependencyAnalyzer
 
 	private final @NonNull MetamodelManager metamodelManager;
 	protected final @NonNull StandardLibrary standardLibrary;
-	protected final @NonNull CompleteModel completeModel;
-	protected final @NonNull SchedulerConstants scheduler;
 	protected final @NonNull RootDomainUsageAnalysis domainUsageAnalysis;
-	protected final @NonNull ClassRelationships classRelationships;
+	protected final @NonNull SchedulerConstants scheduler;
 	private final @NonNull Map<@NonNull List<@Nullable Object>, @NonNull DependencyPaths> content2path = new HashMap<>();
 	private final @NonNull DependencyPaths emptyDependencyPaths = createDependencyPaths(null, null);
 	private final @NonNull Map<@NonNull OperationId, @NonNull Map<@NonNull List<@NonNull DependencyPaths>, @NonNull OperationAnalysis>> operation2paths2analysis = new HashMap<>();
@@ -1354,10 +1310,8 @@ public class DependencyAnalyzer
 		EnvironmentFactory environmentFactory = scheduler.getEnvironmentFactory();
 		this.metamodelManager = environmentFactory.getMetamodelManager();
 		this.standardLibrary = environmentFactory.getStandardLibrary();
-		this.completeModel = environmentFactory.getCompleteModel();
-		this.scheduler = scheduler;
 		this.domainUsageAnalysis = scheduler.getDomainAnalysis();
-		this.classRelationships = scheduler.getClassRelationships();
+		this.scheduler = scheduler;
 		this.finalAnalysis = ((PivotMetamodelManager)metamodelManager).getFinalAnalysis(); //new FinalAnalysis((CompleteModelInternal) environmentFactory.getCompleteModel());
 		CompleteModel completeModel = environmentFactory.getCompleteModel();
 		this.oclVoidCompleteClass = completeModel.getCompleteClass(standardLibrary.getOclVoidType());
