@@ -77,6 +77,7 @@
     </genClasses>
     <genClasses image="false" ecoreClass="QVTimperativeCS.ecore#//MappingStatementCS"/>
     <genClasses ecoreClass="QVTimperativeCS.ecore#//NewStatementCS">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperativeCS.ecore#//NewStatementCS/isContained"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//NewStatementCS/ownedExpression"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//NewStatementCS/referredTypedModel"/>
     </genClasses>

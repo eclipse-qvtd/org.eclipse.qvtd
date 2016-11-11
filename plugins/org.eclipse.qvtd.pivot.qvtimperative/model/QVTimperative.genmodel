@@ -148,6 +148,7 @@
     </genClasses>
     <genClasses image="false" ecoreClass="QVTimperative.ecore#T-qvtimperative-MappingStatement"/>
     <genClasses ecoreClass="QVTimperative.ecore#T-qvtimperative-NewStatement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperative.ecore#F-qvtimperative-NewStatement-isContained"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperative.ecore#F-qvtimperative-NewStatement-referredTypedModel"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperative.ecore#F-qvtimperative-NewStatement-ownedExpression"/>
       <genOperations ecoreOperation="QVTimperative.ecore#//NewStatement/validateCompatibleTypeForValue">

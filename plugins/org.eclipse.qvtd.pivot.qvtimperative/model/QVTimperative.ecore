@@ -599,6 +599,12 @@
         </eGenericType>
       </eParameters>
     </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="F-qvtimperative-NewStatement-isContained"
+        name="isContained" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="True if the new element is guaranteed to be assigned to a container and so does not need to be tracked in the set of potential orphan elememnts to be contained at the model root."/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtimperative-NewStatement-referredTypedModel"
         name="referredTypedModel" lowerBound="1" eType="#T-qvtimperative-ImperativeTypedModel">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
