@@ -267,7 +267,7 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link QVTimperativeCSPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -300,7 +300,7 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		// Mark meta-data to indicate it can't be changed
 		theQVTimperativeCSPackage.freeze();
 
-  
+
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(QVTimperativeCSPackage.eNS_URI, theQVTimperativeCSPackage);
 		return theQVTimperativeCSPackage;
@@ -872,8 +872,18 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	 * @generated
 	 */
 	@Override
+	public EAttribute getNewStatementCS_IsContained() {
+		return (EAttribute)newStatementCSEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EReference getNewStatementCS_OwnedExpression() {
-		return (EReference)newStatementCSEClass.getEStructuralFeatures().get(0);
+		return (EReference)newStatementCSEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -883,7 +893,7 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	 */
 	@Override
 	public EReference getNewStatementCS_ReferredTypedModel() {
-		return (EReference)newStatementCSEClass.getEStructuralFeatures().get(1);
+		return (EReference)newStatementCSEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -1190,6 +1200,7 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		mappingStatementCSEClass = createEClass(MAPPING_STATEMENT_CS);
 
 		newStatementCSEClass = createEClass(NEW_STATEMENT_CS);
+		createEAttribute(newStatementCSEClass, NEW_STATEMENT_CS__IS_CONTAINED);
 		createEReference(newStatementCSEClass, NEW_STATEMENT_CS__OWNED_EXPRESSION);
 		createEReference(newStatementCSEClass, NEW_STATEMENT_CS__REFERRED_TYPED_MODEL);
 
@@ -1367,6 +1378,7 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		initEClass(mappingStatementCSEClass, MappingStatementCS.class, "MappingStatementCS", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(newStatementCSEClass, NewStatementCS.class, "NewStatementCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getNewStatementCS_IsContained(), ecorePackage.getEBoolean(), "isContained", null, 0, 1, NewStatementCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getNewStatementCS_OwnedExpression(), theEssentialOCLCSPackage.getExpCS(), null, "ownedExpression", null, 0, 1, NewStatementCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getNewStatementCS_ReferredTypedModel(), theQVTimperativePackage.getImperativeTypedModel(), null, "referredTypedModel", null, 1, 1, NewStatementCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 

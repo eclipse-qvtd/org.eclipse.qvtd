@@ -27,6 +27,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
  * The following features are supported:
  * </p>
  * <ul>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.NewStatementCS#isIsContained <em>Is Contained</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.NewStatementCS#getOwnedExpression <em>Owned Expression</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.NewStatementCS#getReferredTypedModel <em>Referred Typed Model</em>}</li>
  * </ul>
@@ -36,6 +37,31 @@ import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
  * @generated
  */
 public interface NewStatementCS extends TypedElementCS, ObservableStatementCS {
+	/**
+	 * Returns the value of the '<em><b>Is Contained</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * True if the new element is guaranteed to be assigned to a container and so does not need to be tracked in the set of potential orphan elememnts to be contained at the model root.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Is Contained</em>' attribute.
+	 * @see #setIsContained(boolean)
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getNewStatementCS_IsContained()
+	 * @model
+	 * @generated
+	 */
+	boolean isIsContained();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.NewStatementCS#isIsContained <em>Is Contained</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Is Contained</em>' attribute.
+	 * @see #isIsContained()
+	 * @generated
+	 */
+	void setIsContained(boolean value);
+
 	/**
 	 * Returns the value of the '<em><b>Owned Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

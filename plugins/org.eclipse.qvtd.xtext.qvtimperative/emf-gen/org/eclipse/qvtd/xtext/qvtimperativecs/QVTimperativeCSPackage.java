@@ -2094,13 +2094,22 @@ public interface QVTimperativeCSPackage extends EPackage {
 	int NEW_STATEMENT_CS__OBSERVED_PROPERTIES = BaseCSPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Is Contained</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NEW_STATEMENT_CS__IS_CONTAINED = BaseCSPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 1;
+
+	/**
 	 * The feature id for the '<em><b>Owned Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int NEW_STATEMENT_CS__OWNED_EXPRESSION = BaseCSPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 1;
+	int NEW_STATEMENT_CS__OWNED_EXPRESSION = BaseCSPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Referred Typed Model</b></em>' reference.
@@ -2109,7 +2118,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NEW_STATEMENT_CS__REFERRED_TYPED_MODEL = BaseCSPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 2;
+	int NEW_STATEMENT_CS__REFERRED_TYPED_MODEL = BaseCSPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>New Statement CS</em>' class.
@@ -2118,7 +2127,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NEW_STATEMENT_CS_FEATURE_COUNT = BaseCSPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 3;
+	int NEW_STATEMENT_CS_FEATURE_COUNT = BaseCSPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.ObservableStatementCSImpl <em>Observable Statement CS</em>}' class.
@@ -3632,6 +3641,17 @@ public interface QVTimperativeCSPackage extends EPackage {
 	EClass getNewStatementCS();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.xtext.qvtimperativecs.NewStatementCS#isIsContained <em>Is Contained</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Is Contained</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.NewStatementCS#isIsContained()
+	 * @see #getNewStatementCS()
+	 * @generated
+	 */
+	EAttribute getNewStatementCS_IsContained();
+
+	/**
 	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtimperativecs.NewStatementCS#getOwnedExpression <em>Owned Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4384,6 +4404,14 @@ public interface QVTimperativeCSPackage extends EPackage {
 		 * @generated
 		 */
 		EClass NEW_STATEMENT_CS = eINSTANCE.getNewStatementCS();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Contained</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute NEW_STATEMENT_CS__IS_CONTAINED = eINSTANCE.getNewStatementCS_IsContained();
 
 		/**
 		 * The meta object literal for the '<em><b>Owned Expression</b></em>' containment reference feature.

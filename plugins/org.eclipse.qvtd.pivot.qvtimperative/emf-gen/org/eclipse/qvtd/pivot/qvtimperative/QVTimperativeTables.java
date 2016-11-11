@@ -684,8 +684,9 @@ public class QVTimperativeTables
 
 		public static final @NonNull ExecutorProperty _MappingStatement__MappingLoop__ownedMappingStatements = new ExecutorPropertyWithImplementation("MappingLoop", Types._MappingStatement, 0, new EcoreLibraryOppositeProperty(QVTimperativePackage.Literals.MAPPING_LOOP__OWNED_MAPPING_STATEMENTS));
 
-		public static final @NonNull ExecutorProperty _NewStatement__ownedExpression = new EcoreExecutorProperty(QVTimperativePackage.Literals.NEW_STATEMENT__OWNED_EXPRESSION, Types._NewStatement, 0);
-		public static final @NonNull ExecutorProperty _NewStatement__referredTypedModel = new EcoreExecutorProperty(QVTimperativePackage.Literals.NEW_STATEMENT__REFERRED_TYPED_MODEL, Types._NewStatement, 1);
+		public static final @NonNull ExecutorProperty _NewStatement__isContained = new EcoreExecutorProperty(QVTimperativePackage.Literals.NEW_STATEMENT__IS_CONTAINED, Types._NewStatement, 0);
+		public static final @NonNull ExecutorProperty _NewStatement__ownedExpression = new EcoreExecutorProperty(QVTimperativePackage.Literals.NEW_STATEMENT__OWNED_EXPRESSION, Types._NewStatement, 1);
+		public static final @NonNull ExecutorProperty _NewStatement__referredTypedModel = new EcoreExecutorProperty(QVTimperativePackage.Literals.NEW_STATEMENT__REFERRED_TYPED_MODEL, Types._NewStatement, 2);
 
 		public static final @NonNull ExecutorProperty _ObservableStatement__observedProperties = new EcoreExecutorProperty(QVTimperativePackage.Literals.OBSERVABLE_STATEMENT__OBSERVED_PROPERTIES, Types._ObservableStatement, 0);
 
@@ -2677,6 +2678,7 @@ public class QVTimperativeTables
 		private static final @NonNull ExecutorProperty @NonNull [] _MappingStatement = {};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _NewStatement = {
+			QVTimperativeTables.Properties._NewStatement__isContained,
 			QVTimperativeTables.Properties._ObservableStatement__observedProperties,
 			QVTimperativeTables.Properties._NewStatement__ownedExpression,
 			QVTimperativeTables.Properties._NewStatement__referredTypedModel

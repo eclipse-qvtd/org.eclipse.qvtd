@@ -768,6 +768,7 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 	 * Constraint:
 	 *     (
 	 *         (observedProperties+=PathNameCS observedProperties+=PathNameCS*)?
+	 *         isContained?='contained'?
 	 *         referredTypedModel=[ImperativeTypedModel|UnrestrictedName]
 	 *         name=UnrestrictedName
 	 *         ownedType=TypeExpCS

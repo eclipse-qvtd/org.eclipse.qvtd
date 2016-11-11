@@ -3948,13 +3948,22 @@ public interface QVTimperativePackage extends EPackage {
 	int NEW_STATEMENT__OBSERVED_PROPERTIES = VARIABLE_STATEMENT_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Is Contained</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NEW_STATEMENT__IS_CONTAINED = VARIABLE_STATEMENT_FEATURE_COUNT + 1;
+
+	/**
 	 * The feature id for the '<em><b>Referred Typed Model</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int NEW_STATEMENT__REFERRED_TYPED_MODEL = VARIABLE_STATEMENT_FEATURE_COUNT + 1;
+	int NEW_STATEMENT__REFERRED_TYPED_MODEL = VARIABLE_STATEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Owned Expression</b></em>' containment reference.
@@ -3963,7 +3972,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NEW_STATEMENT__OWNED_EXPRESSION = VARIABLE_STATEMENT_FEATURE_COUNT + 2;
+	int NEW_STATEMENT__OWNED_EXPRESSION = VARIABLE_STATEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>New Statement</em>' class.
@@ -3972,7 +3981,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NEW_STATEMENT_FEATURE_COUNT = VARIABLE_STATEMENT_FEATURE_COUNT + 3;
+	int NEW_STATEMENT_FEATURE_COUNT = VARIABLE_STATEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -5313,6 +5322,17 @@ public interface QVTimperativePackage extends EPackage {
 	EClass getNewStatement();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtimperative.NewStatement#isIsContained <em>Is Contained</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Is Contained</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.NewStatement#isIsContained()
+	 * @see #getNewStatement()
+	 * @generated
+	 */
+	EAttribute getNewStatement_IsContained();
+
+	/**
 	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtimperative.NewStatement#getReferredTypedModel <em>Referred Typed Model</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6209,6 +6229,14 @@ public interface QVTimperativePackage extends EPackage {
 		 * @generated
 		 */
 		EClass NEW_STATEMENT = eINSTANCE.getNewStatement();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Contained</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute NEW_STATEMENT__IS_CONTAINED = eINSTANCE.getNewStatement_IsContained();
 
 		/**
 		 * The meta object literal for the '<em><b>Referred Typed Model</b></em>' reference feature.

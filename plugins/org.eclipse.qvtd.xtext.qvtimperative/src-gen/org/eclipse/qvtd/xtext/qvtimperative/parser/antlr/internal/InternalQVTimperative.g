@@ -2043,13 +2043,28 @@ ruleNewStatementCS returns [EObject current=null]
 	    }
 
 )
-))*)?	otherlv_4='new'
+))*)?(
+(
+		lv_isContained_4_0=	'contained'
     {
-    	newLeafNode(otherlv_4, grammarAccess.getNewStatementCSAccess().getNewKeyword_1());
+        newLeafNode(lv_isContained_4_0, grammarAccess.getNewStatementCSAccess().getIsContainedContainedKeyword_1_0());
     }
-	otherlv_5=':'
+
+	    {
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getNewStatementCSRule());
+	        }
+       		setWithLastConsumed($current, "isContained", true, "contained");
+	    }
+
+)
+)?	otherlv_5='new'
     {
-    	newLeafNode(otherlv_5, grammarAccess.getNewStatementCSAccess().getColonKeyword_2());
+    	newLeafNode(otherlv_5, grammarAccess.getNewStatementCSAccess().getNewKeyword_2());
+    }
+	otherlv_6=':'
+    {
+    	newLeafNode(otherlv_6, grammarAccess.getNewStatementCSAccess().getColonKeyword_3());
     }
 (
 (
@@ -2062,7 +2077,7 @@ ruleNewStatementCS returns [EObject current=null]
 	        }
         }
 		{
-	        newCompositeNode(grammarAccess.getNewStatementCSAccess().getReferredTypedModelImperativeTypedModelCrossReference_3_0());
+	        newCompositeNode(grammarAccess.getNewStatementCSAccess().getReferredTypedModelImperativeTypedModelCrossReference_4_0());
 	    }
 		ruleUnrestrictedName		{
 	        afterParserOrEnumRuleCall();
@@ -2072,68 +2087,68 @@ ruleNewStatementCS returns [EObject current=null]
 )(
 (
 		{
-	        newCompositeNode(grammarAccess.getNewStatementCSAccess().getNameUnrestrictedNameParserRuleCall_4_0());
+	        newCompositeNode(grammarAccess.getNewStatementCSAccess().getNameUnrestrictedNameParserRuleCall_5_0());
 	    }
-		lv_name_7_0=ruleUnrestrictedName		{
+		lv_name_8_0=ruleUnrestrictedName		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getNewStatementCSRule());
 	        }
        		set(
        			$current,
        			"name",
-        		lv_name_7_0,
+        		lv_name_8_0,
         		"org.eclipse.qvtd.xtext.qvtimperative.QVTimperative.UnrestrictedName");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-)	otherlv_8=':'
+)	otherlv_9=':'
     {
-    	newLeafNode(otherlv_8, grammarAccess.getNewStatementCSAccess().getColonKeyword_5());
+    	newLeafNode(otherlv_9, grammarAccess.getNewStatementCSAccess().getColonKeyword_6());
     }
 (
 (
 		{
-	        newCompositeNode(grammarAccess.getNewStatementCSAccess().getOwnedTypeTypeExpCSParserRuleCall_6_0());
+	        newCompositeNode(grammarAccess.getNewStatementCSAccess().getOwnedTypeTypeExpCSParserRuleCall_7_0());
 	    }
-		lv_ownedType_9_0=ruleTypeExpCS		{
+		lv_ownedType_10_0=ruleTypeExpCS		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getNewStatementCSRule());
 	        }
        		set(
        			$current,
        			"ownedType",
-        		lv_ownedType_9_0,
+        		lv_ownedType_10_0,
         		"org.eclipse.ocl.xtext.essentialocl.EssentialOCL.TypeExpCS");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-)(	otherlv_10=':='
+)(	otherlv_11=':='
     {
-    	newLeafNode(otherlv_10, grammarAccess.getNewStatementCSAccess().getColonEqualsSignKeyword_7_0());
+    	newLeafNode(otherlv_11, grammarAccess.getNewStatementCSAccess().getColonEqualsSignKeyword_8_0());
     }
 (
 (
 		{
-	        newCompositeNode(grammarAccess.getNewStatementCSAccess().getOwnedExpressionExpCSParserRuleCall_7_1_0());
+	        newCompositeNode(grammarAccess.getNewStatementCSAccess().getOwnedExpressionExpCSParserRuleCall_8_1_0());
 	    }
-		lv_ownedExpression_11_0=ruleExpCS		{
+		lv_ownedExpression_12_0=ruleExpCS		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getNewStatementCSRule());
 	        }
        		set(
        			$current,
        			"ownedExpression",
-        		lv_ownedExpression_11_0,
+        		lv_ownedExpression_12_0,
         		"org.eclipse.ocl.xtext.essentialocl.EssentialOCL.ExpCS");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-))?	otherlv_12=';'
+))?	otherlv_13=';'
     {
-    	newLeafNode(otherlv_12, grammarAccess.getNewStatementCSAccess().getSemicolonKeyword_8());
+    	newLeafNode(otherlv_13, grammarAccess.getNewStatementCSAccess().getSemicolonKeyword_9());
     }
 )
 ;

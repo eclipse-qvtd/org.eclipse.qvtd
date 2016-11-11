@@ -45,6 +45,7 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.NewStatementCSImpl#getObservedProperties <em>Observed Properties</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.NewStatementCSImpl#isIsContained <em>Is Contained</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.NewStatementCSImpl#getOwnedExpression <em>Owned Expression</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.NewStatementCSImpl#getReferredTypedModel <em>Referred Typed Model</em>}</li>
  * </ul>
@@ -61,6 +62,26 @@ public class NewStatementCSImpl extends TypedElementCSImpl implements NewStateme
 	 * @ordered
 	 */
 	protected EList<PathNameCS> observedProperties;
+
+	/**
+	 * The default value of the '{@link #isIsContained() <em>Is Contained</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsContained()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean IS_CONTAINED_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isIsContained() <em>Is Contained</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsContained()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean isContained = IS_CONTAINED_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getOwnedExpression() <em>Owned Expression</em>}' containment reference.
@@ -112,6 +133,29 @@ public class NewStatementCSImpl extends TypedElementCSImpl implements NewStateme
 			observedProperties = new EObjectContainmentEList<PathNameCS>(PathNameCS.class, this, QVTimperativeCSPackage.NEW_STATEMENT_CS__OBSERVED_PROPERTIES);
 		}
 		return observedProperties;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean isIsContained() {
+		return isContained;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setIsContained(boolean newIsContained) {
+		boolean oldIsContained = isContained;
+		isContained = newIsContained;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.NEW_STATEMENT_CS__IS_CONTAINED, oldIsContained, isContained));
 	}
 
 	/**
@@ -205,6 +249,16 @@ public class NewStatementCSImpl extends TypedElementCSImpl implements NewStateme
 	 * @generated
 	 */
 	@Override
+	public String toString() {
+		return super.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case QVTimperativeCSPackage.NEW_STATEMENT_CS__OBSERVED_PROPERTIES:
@@ -225,6 +279,8 @@ public class NewStatementCSImpl extends TypedElementCSImpl implements NewStateme
 		switch (featureID) {
 			case QVTimperativeCSPackage.NEW_STATEMENT_CS__OBSERVED_PROPERTIES:
 				return getObservedProperties();
+			case QVTimperativeCSPackage.NEW_STATEMENT_CS__IS_CONTAINED:
+				return isIsContained();
 			case QVTimperativeCSPackage.NEW_STATEMENT_CS__OWNED_EXPRESSION:
 				return getOwnedExpression();
 			case QVTimperativeCSPackage.NEW_STATEMENT_CS__REFERRED_TYPED_MODEL:
@@ -247,6 +303,9 @@ public class NewStatementCSImpl extends TypedElementCSImpl implements NewStateme
 				getObservedProperties().clear();
 				getObservedProperties().addAll((Collection<? extends PathNameCS>)newValue);
 				return;
+			case QVTimperativeCSPackage.NEW_STATEMENT_CS__IS_CONTAINED:
+				setIsContained((Boolean)newValue);
+				return;
 			case QVTimperativeCSPackage.NEW_STATEMENT_CS__OWNED_EXPRESSION:
 				setOwnedExpression((ExpCS)newValue);
 				return;
@@ -268,6 +327,9 @@ public class NewStatementCSImpl extends TypedElementCSImpl implements NewStateme
 			case QVTimperativeCSPackage.NEW_STATEMENT_CS__OBSERVED_PROPERTIES:
 				getObservedProperties().clear();
 				return;
+			case QVTimperativeCSPackage.NEW_STATEMENT_CS__IS_CONTAINED:
+				setIsContained(IS_CONTAINED_EDEFAULT);
+				return;
 			case QVTimperativeCSPackage.NEW_STATEMENT_CS__OWNED_EXPRESSION:
 				setOwnedExpression((ExpCS)null);
 				return;
@@ -288,6 +350,8 @@ public class NewStatementCSImpl extends TypedElementCSImpl implements NewStateme
 		switch (featureID) {
 			case QVTimperativeCSPackage.NEW_STATEMENT_CS__OBSERVED_PROPERTIES:
 				return observedProperties != null && !observedProperties.isEmpty();
+			case QVTimperativeCSPackage.NEW_STATEMENT_CS__IS_CONTAINED:
+				return isContained != IS_CONTAINED_EDEFAULT;
 			case QVTimperativeCSPackage.NEW_STATEMENT_CS__OWNED_EXPRESSION:
 				return ownedExpression != null;
 			case QVTimperativeCSPackage.NEW_STATEMENT_CS__REFERRED_TYPED_MODEL:

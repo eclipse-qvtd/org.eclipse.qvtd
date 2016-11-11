@@ -1018,8 +1018,18 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * @generated
 	 */
 	@Override
+	public EAttribute getNewStatement_IsContained() {
+		return (EAttribute)newStatementEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EReference getNewStatement_ReferredTypedModel() {
-		return (EReference)newStatementEClass.getEStructuralFeatures().get(0);
+		return (EReference)newStatementEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1029,7 +1039,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 */
 	@Override
 	public EReference getNewStatement_OwnedExpression() {
-		return (EReference)newStatementEClass.getEStructuralFeatures().get(1);
+		return (EReference)newStatementEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -1400,6 +1410,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		mappingStatementEClass = createEClass(MAPPING_STATEMENT);
 
 		newStatementEClass = createEClass(NEW_STATEMENT);
+		createEAttribute(newStatementEClass, NEW_STATEMENT__IS_CONTAINED);
 		createEReference(newStatementEClass, NEW_STATEMENT__REFERRED_TYPED_MODEL);
 		createEReference(newStatementEClass, NEW_STATEMENT__OWNED_EXPRESSION);
 		createEOperation(newStatementEClass, NEW_STATEMENT___VALIDATE_COMPATIBLE_TYPE_FOR_VALUE__DIAGNOSTICCHAIN_MAP);
@@ -1714,6 +1725,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		initEClass(mappingStatementEClass, MappingStatement.class, "MappingStatement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(newStatementEClass, NewStatement.class, "NewStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getNewStatement_IsContained(), ecorePackage.getEBoolean(), "isContained", null, 0, 1, NewStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getNewStatement_ReferredTypedModel(), this.getImperativeTypedModel(), null, "referredTypedModel", null, 1, 1, NewStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getNewStatement_OwnedExpression(), thePivotPackage.getOCLExpression(), null, "ownedExpression", null, 0, 1, NewStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 

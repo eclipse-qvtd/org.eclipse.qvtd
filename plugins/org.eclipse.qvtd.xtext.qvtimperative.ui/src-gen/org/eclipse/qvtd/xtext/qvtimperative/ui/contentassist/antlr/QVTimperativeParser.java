@@ -143,7 +143,7 @@ public class QVTimperativeParser extends AbstractContentAssistParser {
 					put(grammarAccess.getNewStatementCSAccess().getGroup(), "rule__NewStatementCS__Group__0");
 					put(grammarAccess.getNewStatementCSAccess().getGroup_0(), "rule__NewStatementCS__Group_0__0");
 					put(grammarAccess.getNewStatementCSAccess().getGroup_0_2(), "rule__NewStatementCS__Group_0_2__0");
-					put(grammarAccess.getNewStatementCSAccess().getGroup_7(), "rule__NewStatementCS__Group_7__0");
+					put(grammarAccess.getNewStatementCSAccess().getGroup_8(), "rule__NewStatementCS__Group_8__0");
 					put(grammarAccess.getParamDeclarationCSAccess().getGroup(), "rule__ParamDeclarationCS__Group__0");
 					put(grammarAccess.getQualifiedPackageCSAccess().getGroup(), "rule__QualifiedPackageCS__Group__0");
 					put(grammarAccess.getQualifiedPackageCSAccess().getGroup_3(), "rule__QualifiedPackageCS__Group_3__0");
@@ -375,10 +375,11 @@ public class QVTimperativeParser extends AbstractContentAssistParser {
 					put(grammarAccess.getMappingIteratorCSAccess().getOwnedTypeAssignment_1_1(), "rule__MappingIteratorCS__OwnedTypeAssignment_1_1");
 					put(grammarAccess.getNewStatementCSAccess().getObservedPropertiesAssignment_0_1(), "rule__NewStatementCS__ObservedPropertiesAssignment_0_1");
 					put(grammarAccess.getNewStatementCSAccess().getObservedPropertiesAssignment_0_2_1(), "rule__NewStatementCS__ObservedPropertiesAssignment_0_2_1");
-					put(grammarAccess.getNewStatementCSAccess().getReferredTypedModelAssignment_3(), "rule__NewStatementCS__ReferredTypedModelAssignment_3");
-					put(grammarAccess.getNewStatementCSAccess().getNameAssignment_4(), "rule__NewStatementCS__NameAssignment_4");
-					put(grammarAccess.getNewStatementCSAccess().getOwnedTypeAssignment_6(), "rule__NewStatementCS__OwnedTypeAssignment_6");
-					put(grammarAccess.getNewStatementCSAccess().getOwnedExpressionAssignment_7_1(), "rule__NewStatementCS__OwnedExpressionAssignment_7_1");
+					put(grammarAccess.getNewStatementCSAccess().getIsContainedAssignment_1(), "rule__NewStatementCS__IsContainedAssignment_1");
+					put(grammarAccess.getNewStatementCSAccess().getReferredTypedModelAssignment_4(), "rule__NewStatementCS__ReferredTypedModelAssignment_4");
+					put(grammarAccess.getNewStatementCSAccess().getNameAssignment_5(), "rule__NewStatementCS__NameAssignment_5");
+					put(grammarAccess.getNewStatementCSAccess().getOwnedTypeAssignment_7(), "rule__NewStatementCS__OwnedTypeAssignment_7");
+					put(grammarAccess.getNewStatementCSAccess().getOwnedExpressionAssignment_8_1(), "rule__NewStatementCS__OwnedExpressionAssignment_8_1");
 					put(grammarAccess.getParamDeclarationCSAccess().getNameAssignment_0(), "rule__ParamDeclarationCS__NameAssignment_0");
 					put(grammarAccess.getParamDeclarationCSAccess().getOwnedTypeAssignment_2(), "rule__ParamDeclarationCS__OwnedTypeAssignment_2");
 					put(grammarAccess.getQualifiedPackageCSAccess().getOwnedPathNameAssignment_1(), "rule__QualifiedPackageCS__OwnedPathNameAssignment_1");

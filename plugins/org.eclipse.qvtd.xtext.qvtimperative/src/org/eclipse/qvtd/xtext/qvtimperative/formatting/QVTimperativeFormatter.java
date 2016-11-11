@@ -162,9 +162,9 @@ public class QVTimperativeFormatter extends AbstractEssentialOCLFormatter
 			NewStatementCSElements a = f.getNewStatementCSAccess();
 			c.setLinewrap(1).before(a.getGroup());
 			c.setNoSpace().before(a.getCommaKeyword_0_2_0());
-			c.setLinewrap(1).before(a.getNewKeyword_1());
-			c.setNoSpace().around(a.getColonKeyword_2());
-			c.setNoSpace().before(a.getSemicolonKeyword_8());
+			c.setLinewrap(1).before(a.getIsContainedAssignment_1());
+			c.setNoSpace().around(a.getColonKeyword_3());
+			c.setNoSpace().before(a.getSemicolonKeyword_9());
 		}
 		{
 			QualifiedPackageCSElements a = f.getQualifiedPackageCSAccess();

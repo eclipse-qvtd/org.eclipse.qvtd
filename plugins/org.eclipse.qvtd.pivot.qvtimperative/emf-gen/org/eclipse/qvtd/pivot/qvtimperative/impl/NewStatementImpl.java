@@ -58,6 +58,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.NewStatementImpl#getObservedProperties <em>Observed Properties</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.NewStatementImpl#isIsContained <em>Is Contained</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.NewStatementImpl#getReferredTypedModel <em>Referred Typed Model</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.NewStatementImpl#getOwnedExpression <em>Owned Expression</em>}</li>
  * </ul>
@@ -74,6 +75,26 @@ public class NewStatementImpl extends VariableStatementImpl implements NewStatem
 	 * @ordered
 	 */
 	protected EList<Property> observedProperties;
+
+	/**
+	 * The default value of the '{@link #isIsContained() <em>Is Contained</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsContained()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean IS_CONTAINED_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isIsContained() <em>Is Contained</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsContained()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean isContained = IS_CONTAINED_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getReferredTypedModel() <em>Referred Typed Model</em>}' reference.
@@ -125,6 +146,29 @@ public class NewStatementImpl extends VariableStatementImpl implements NewStatem
 			observedProperties = new EObjectResolvingEList<Property>(Property.class, this, QVTimperativePackage.NEW_STATEMENT__OBSERVED_PROPERTIES);
 		}
 		return observedProperties;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean isIsContained() {
+		return isContained;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setIsContained(boolean newIsContained) {
+		boolean oldIsContained = isContained;
+		isContained = newIsContained;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.NEW_STATEMENT__IS_CONTAINED, oldIsContained, isContained));
 	}
 
 	/**
@@ -338,6 +382,22 @@ public class NewStatementImpl extends VariableStatementImpl implements NewStatem
 	 * @generated
 	 */
 	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (isContained: ");
+		result.append(isContained);
+		result.append(')');
+		return result.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case QVTimperativePackage.NEW_STATEMENT__OWNED_EXPRESSION:
@@ -356,6 +416,8 @@ public class NewStatementImpl extends VariableStatementImpl implements NewStatem
 		switch (featureID) {
 			case QVTimperativePackage.NEW_STATEMENT__OBSERVED_PROPERTIES:
 				return getObservedProperties();
+			case QVTimperativePackage.NEW_STATEMENT__IS_CONTAINED:
+				return isIsContained();
 			case QVTimperativePackage.NEW_STATEMENT__REFERRED_TYPED_MODEL:
 				if (resolve) return getReferredTypedModel();
 				return basicGetReferredTypedModel();
@@ -378,6 +440,9 @@ public class NewStatementImpl extends VariableStatementImpl implements NewStatem
 				getObservedProperties().clear();
 				getObservedProperties().addAll((Collection<? extends Property>)newValue);
 				return;
+			case QVTimperativePackage.NEW_STATEMENT__IS_CONTAINED:
+				setIsContained((Boolean)newValue);
+				return;
 			case QVTimperativePackage.NEW_STATEMENT__REFERRED_TYPED_MODEL:
 				setReferredTypedModel((ImperativeTypedModel)newValue);
 				return;
@@ -399,6 +464,9 @@ public class NewStatementImpl extends VariableStatementImpl implements NewStatem
 			case QVTimperativePackage.NEW_STATEMENT__OBSERVED_PROPERTIES:
 				getObservedProperties().clear();
 				return;
+			case QVTimperativePackage.NEW_STATEMENT__IS_CONTAINED:
+				setIsContained(IS_CONTAINED_EDEFAULT);
+				return;
 			case QVTimperativePackage.NEW_STATEMENT__REFERRED_TYPED_MODEL:
 				setReferredTypedModel((ImperativeTypedModel)null);
 				return;
@@ -419,6 +487,8 @@ public class NewStatementImpl extends VariableStatementImpl implements NewStatem
 		switch (featureID) {
 			case QVTimperativePackage.NEW_STATEMENT__OBSERVED_PROPERTIES:
 				return observedProperties != null && !observedProperties.isEmpty();
+			case QVTimperativePackage.NEW_STATEMENT__IS_CONTAINED:
+				return isContained != IS_CONTAINED_EDEFAULT;
 			case QVTimperativePackage.NEW_STATEMENT__REFERRED_TYPED_MODEL:
 				return referredTypedModel != null;
 			case QVTimperativePackage.NEW_STATEMENT__OWNED_EXPRESSION:
