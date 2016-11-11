@@ -236,7 +236,20 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 			}
 		}
 
+		/**
+		 * @deprecated provide isContained argument
+		 */
+		@Deprecated
 		public void add(@NonNull EObject eObject) {
+			add(eObject, false);
+		}
+
+		/**
+		 * Add another eObject to the model, which must be distinct from all previously added eObjects.
+		 * If isContained, the caller asserts that the caller will define the eObjects eContainer eliminating
+		 * the need for the eObject to be tracked as a potential orphan to be assigned to the model root.
+		 */
+		public void add(@NonNull EObject eObject, boolean isContained) {
 			List<@NonNull Object> allEObjects2 = allEObjects;
 			if (allEObjects2 == null) {
 				allEObjects = allEObjects2 = new ArrayList<>();

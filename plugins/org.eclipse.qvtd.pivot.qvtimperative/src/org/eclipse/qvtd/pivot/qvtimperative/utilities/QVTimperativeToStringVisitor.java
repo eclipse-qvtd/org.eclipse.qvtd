@@ -288,6 +288,9 @@ public class QVTimperativeToStringVisitor extends QVTbaseToStringVisitor impleme
 
 	@Override
 	public String visitNewStatement(@NonNull NewStatement newStatement) {
+		if (newStatement.isIsContained()) {
+			context.append("contained ");
+		}
 		append("new:");
 		appendName(newStatement.getReferredTypedModel());
 		append(" ");

@@ -118,6 +118,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.LoopParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingParameterBinding;
+import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ObservableStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiTransformationAnalysis;
@@ -253,12 +254,15 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 
 	protected void doAddRealization(@NonNull CGRealizedVariable cgRealizedVariable) {
 		CGTypedModel cgTypedModel = cgRealizedVariable.getTypedModel();
+		NewStatement asNewStatement = QVTiCGUtil.getAST(cgRealizedVariable);
 		//
 		js.append(QVTiGlobalContext.MODELS_NAME);
 		js.append("[");
 		appendModelIndex(cgTypedModel);
 		js.append("].add(");
 		js.appendValueName(cgRealizedVariable);
+		js.append(", ");
+		js.appendBooleanString(asNewStatement.isIsContained());
 		js.append(");\n");
 		//
 		if (isIncremental) {

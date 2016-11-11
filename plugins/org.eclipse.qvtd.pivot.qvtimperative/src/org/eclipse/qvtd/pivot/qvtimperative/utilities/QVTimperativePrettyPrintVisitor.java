@@ -267,6 +267,9 @@ public class QVTimperativePrettyPrintVisitor extends QVTbasePrettyPrintVisitor i
 
 	@Override
 	public Object visitNewStatement(@NonNull NewStatement pNewStatement) {
+		if (pNewStatement.isIsContained()) {
+			context.append("contained ");
+		}
 		context.append("new:");
 		context.appendName(pNewStatement.getReferredTypedModel());
 		context.append(" ");

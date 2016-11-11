@@ -319,7 +319,8 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 
 	@Override
 	public Continuation<?> visitNewStatementCS(@NonNull NewStatementCS csElement) {
-		refreshNamedElement(NewStatement.class, QVTimperativePackage.Literals.NEW_STATEMENT, csElement);
+		NewStatement asNewStatement = refreshNamedElement(NewStatement.class, QVTimperativePackage.Literals.NEW_STATEMENT, csElement);
+		asNewStatement.setIsContained(csElement.isIsContained());
 		return new NewStatementCompletion(context, csElement);
 	}
 
