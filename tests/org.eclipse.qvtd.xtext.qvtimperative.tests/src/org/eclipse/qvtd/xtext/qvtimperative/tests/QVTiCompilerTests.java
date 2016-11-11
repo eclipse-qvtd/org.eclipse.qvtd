@@ -126,7 +126,7 @@ public class QVTiCompilerTests extends LoadTestCase
 			options.setUseNullAnnotations(true);
 			options.setPackagePrefix("cg_qvtimperative_tests");
 			cg.generateClassFile();
-			cg.saveSourceFile("../org.eclipse.qvtd.xtext.qvtimperative.tests/src-gen/");
+			cg.saveSourceFile("../org.eclipse.qvtd.xtext.qvtimperative.tests/test-gen/");
 			Class<? extends Transformer> txClass = compileTransformation(new File("../org.eclipse.qvtd.xtext.qvtimperative.tests/bin"), cg);
 			if (txClass == null) {
 				TestCase.fail("Failed to compile transformation");
