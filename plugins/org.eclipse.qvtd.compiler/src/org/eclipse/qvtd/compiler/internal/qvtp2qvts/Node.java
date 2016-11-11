@@ -126,6 +126,11 @@ public interface Node extends ConnectionEnd, GraphStringBuilder.GraphNode, Namea
 	boolean isConstant();
 
 	/**
+	 * Return true if this node is a realized node with a corresponding relaized edge to a container.
+	 */
+	boolean isContained();
+
+	/**
 	 * Return true if this node is a DataType value.
 	 */
 	boolean isDataType();
@@ -248,6 +253,8 @@ public interface Node extends ConnectionEnd, GraphStringBuilder.GraphNode, Namea
 	 * Redesignate a head node as not-a-head, typically following a multi-headed split.
 	 */
 	void resetHead();
+
+	void setContained(boolean isContained);
 
 	/**
 	 * Redesignate a guard node as a head.

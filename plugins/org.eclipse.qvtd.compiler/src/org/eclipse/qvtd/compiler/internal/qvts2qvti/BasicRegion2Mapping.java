@@ -1239,6 +1239,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 				ImperativeTypedModel iTypedModel = ClassUtil.nonNullState(visitor.getQVTiTypedModel(pTypedModel));
 				NewStatement newStatement = QVTimperativeUtil.createNewStatement(getSafeName(newNode), iTypedModel, classDatumAnalysis.getCompleteClass().getPrimaryClass());
 				newStatement.setOwnedExpression(constructor);
+				newStatement.setIsContained(newNode.isContained());
 				mapping.getOwnedStatements().add(newStatement);
 				VariableDeclaration oldVariable = node2variable.put(newNode, newStatement);
 				assert oldVariable == null;

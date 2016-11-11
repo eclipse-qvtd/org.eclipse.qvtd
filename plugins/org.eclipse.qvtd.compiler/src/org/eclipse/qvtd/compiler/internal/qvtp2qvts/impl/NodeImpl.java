@@ -79,6 +79,7 @@ public abstract class NodeImpl implements Node
 	private @Nullable ClassDatumAnalysis classDatumAnalysis;	// null is only permitted during construction
 	private boolean isDataType;
 	private boolean isHead = false;
+	private boolean isContained = false;
 	private @Nullable NodeConnection incomingConnection = null;
 	private @Nullable List<@NonNull Edge> incomingEdges = null;
 	private @Nullable List<@NonNull NodeConnection> outgoingConnections = null;
@@ -563,6 +564,11 @@ public abstract class NodeImpl implements Node
 	}
 
 	@Override
+	public boolean isContained() {
+		return isContained;
+	}
+
+	@Override
 	public final boolean isDataType() {
 		return isDataType;
 	}
@@ -755,6 +761,12 @@ public abstract class NodeImpl implements Node
 	@Override
 	public void resetHead() {
 		this.isHead = false;
+	}
+
+	@Override
+	public void setContained(boolean isContained) {
+		assert !isContained || !isRealized();
+		this.isContained = isContained;
 	}
 
 	@Override
