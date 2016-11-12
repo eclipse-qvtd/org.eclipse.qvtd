@@ -25,7 +25,9 @@ import com.google.common.collect.Lists;
 
 /**
  * ModelObjectsOfKindOperation realises the Model::objectsOfKind() library operation.
+ * @deprecated This is not needed by synthesized QVTr
  */
+@Deprecated
 public class ModelObjectsOfKindOperation extends AbstractBinaryOperation
 {
 	public static final @NonNull ModelObjectsOfKindOperation INSTANCE = new ModelObjectsOfKindOperation();

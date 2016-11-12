@@ -101,17 +101,8 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 			}
 
 			public void remove(@NonNull EObject eObject) {
-				List<@NonNull Object> allEObjects2 = allEObjects;
-				//			if (allEObjects2 == null) {
-				//				allEObjects = allEObjects2 = new ArrayList<>();
-				//			}
-				//			rootEObjects = null;
-				assert allEObjects2 != null;
-				assert allEObjects2.contains(eObject);
-				allEObjects2.remove(eObject);
-				//			if ((eClass2allClassIndexes == null) && (classId2classIndexes != null) && (classIndex2objects != null)) {
-				//				eClass2allClassIndexes = new HashMap<>();
-				//			}
+				rootObjects.remove(eObject);
+				potentialOrphanObjects.remove(eObject);
 				unaccumulateEObject(eClass2allClassIndexes, null, null, eObject);
 			}
 
@@ -160,8 +151,17 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 
 		protected final @NonNull AbstractTransformerInternal transformer;
 		protected final @NonNull String name;
-		protected @Nullable List<@NonNull Object> allEObjects = null;
-		private @Nullable List<@NonNull Object> rootEObjects = null;
+
+		/**
+		 * The (input) root objects added explicitly by addRootObjects.
+		 */
+		protected final @NonNull List<@NonNull Object> rootObjects = new ArrayList<>();
+
+		/**
+		 * The objects added by add filtered as defined by trackObjects.
+		 */
+		protected final @NonNull List<@NonNull Object> potentialOrphanObjects = new ArrayList<>();
+
 		protected final @NonNull Map<@NonNull EClass, @NonNull Set<@NonNull Integer>> eClass2allClassIndexes = new HashMap<>();
 
 		/**
@@ -264,13 +264,8 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 			}
 			else {
 				isNotContainedCount++;
-				List<@NonNull Object> allEObjects2 = allEObjects;
-				if (allEObjects2 == null) {
-					allEObjects = allEObjects2 = new ArrayList<>();
-				}
-				rootEObjects = null;
-				assert !allEObjects2.contains(eObject);
-				allEObjects2.add(eObject);
+				assert !potentialOrphanObjects.contains(eObject);
+				potentialOrphanObjects.add(eObject);
 				EClass eClass = transformer.eClass(eObject);
 				accumulateEObject1(eObject, eClass);
 			}
@@ -280,11 +275,6 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 		 * Add eRootObjects to the modelIndex model.
 		 */
 		public void addRootObjects(@NonNull Iterable<@NonNull ? extends Object> eRootObjects) {
-			List<@NonNull Object> rootEObjects2 = rootEObjects;
-			if (rootEObjects2 == null) {
-				rootEObjects = rootEObjects2 = new ArrayList<>();
-			}
-			allEObjects = null;
 			Map<@NonNull EClass, @NonNull List<@NonNull Integer>> eClass2allPropertyIndexes = null;
 			Map<@NonNull EReference, @NonNull Integer> eReference2propertyIndex = null;
 			if (transformer.propertyIndex2propertyId != null) {
@@ -295,7 +285,7 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 				//
 				//	Accumulate the root object in the model extent
 				//
-				rootEObjects2.add(eRootObject);
+				rootObjects.add(eRootObject);
 				//
 				//	Accumulate the root object and all its child objects in the allInstances() returns
 				//
@@ -317,9 +307,14 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 			}
 		}
 
+		/**
+		 * This is solely used by the Model::allObjects Operation which is not needed by synthesized QVTr.
+		 * @deprecated
+		 */
+		@Deprecated
 		@Override
 		public @NonNull Collection<@NonNull Object> getAllObjects() {
-			List<@NonNull Object> allEObjects2 = allEObjects;
+			/*			List<@NonNull Object> allEObjects2 = allEObjects;
 			if (allEObjects2 == null) {
 				allEObjects = allEObjects2 = new ArrayList<>();
 				List<@NonNull Object> rootEObjects2 = rootEObjects;
@@ -336,14 +331,19 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 						}
 					}
 				}
-			}
-			return allEObjects2;
+			} */
+			return potentialOrphanObjects;
 		}
 
 		public @NonNull Connection getConnection(int classIndex) {
 			return classIndex2connection[classIndex];
 		}
 
+		/**
+		 * This is solely used by the Model::objectsOfKind Operation which is not needed by synthesized QVTr.
+		 * @deprecated
+		 */
+		@Deprecated
 		@Override
 		public @NonNull Iterable<@NonNull Object> getObjectsOfKind(org.eclipse.ocl.pivot.@NonNull Class type) {
 			TypeId classId = type.getTypeId();
@@ -359,6 +359,11 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 			return EMPTY_EOBJECT_LIST;
 		}
 
+		/**
+		 * This is solely used by the Model::objectsOfType Operation which is not needed by synthesized QVTr.
+		 * @deprecated
+		 */
+		@Deprecated
 		@Override
 		public @NonNull Collection<@NonNull Object> getObjectsOfType(org.eclipse.ocl.pivot.@NonNull Class type) {
 			throw new UnsupportedOperationException();
@@ -389,29 +394,24 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 
 		@Override
 		public @NonNull Collection<@NonNull Object> getRootObjects() {
-			List<@NonNull Object> rootEObjects2 = rootEObjects;
-			if (rootEObjects2 == null) {
-				rootEObjects = rootEObjects2 = new ArrayList<>();
-				List<@NonNull Object> allEObjects2 = allEObjects;
-				if (allEObjects2 != null) {
-					for (@NonNull Object eObject : allEObjects2) {
-						if (transformer.eContainer(eObject) == null) {
-							rootEObjects2.add(eObject);
-						}
-					}
+			if (rootObjects.size() > 0) {		// If we have explicit (input) roots
+				return rootObjects;
+			}
+			List<@NonNull Object> rootObjects2 = new ArrayList<>();
+			for (@NonNull Object eObject : potentialOrphanObjects) {
+				if (transformer.eContainer(eObject) == null) {
+					rootObjects2.add(eObject);
 				}
 			}
 			if (AbstractTransformer.CONTAINMENTS.isActive()) {
 				AbstractTransformer.CONTAINMENTS.println(name + " " + isContainedCount + "/" + (isContainedCount + isNotContainedCount));
 			}
-			return rootEObjects2;
+			return rootObjects2;
 		}
 
 		@Override
 		public String toString() {
-			List<@NonNull Object> rootEObjects2 = rootEObjects;
-			List<@NonNull Object> allEObjects2 = allEObjects;
-			return name + " " + (rootEObjects2 != null ? rootEObjects2.size() : "null") +  "/" + (allEObjects2 != null ? allEObjects2.size() : "null");
+			return name + " " + rootObjects.size();
 		}
 
 		@Override

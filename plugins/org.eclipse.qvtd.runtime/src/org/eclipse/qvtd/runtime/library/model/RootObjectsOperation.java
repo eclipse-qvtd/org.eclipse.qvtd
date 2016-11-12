@@ -25,7 +25,9 @@ import org.eclipse.qvtd.runtime.evaluation.TypedModelInstance;
 
 /**
  * RootObjectsOperation realises the Model::rootObjects() library operation.
+ * @deprecated This is not needed by synthesized QVTr
  */
+@Deprecated
 public class RootObjectsOperation extends AbstractUnaryOperation
 {
 	public static final @NonNull RootObjectsOperation INSTANCE = new RootObjectsOperation();

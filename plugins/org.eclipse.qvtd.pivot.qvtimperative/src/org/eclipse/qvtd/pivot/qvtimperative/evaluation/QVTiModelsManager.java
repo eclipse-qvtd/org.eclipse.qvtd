@@ -398,7 +398,7 @@ public class QVTiModelsManager
 		}
 
 		@Override
-		public @NonNull Set<@NonNull Object> getAllObjects() {
+		public @NonNull Iterable<@NonNull Object> getAllObjects() {
 			throw new UnsupportedOperationException();
 		}
 
