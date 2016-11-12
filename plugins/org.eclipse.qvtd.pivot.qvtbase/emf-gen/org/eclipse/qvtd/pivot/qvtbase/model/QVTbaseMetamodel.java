@@ -167,10 +167,10 @@ public class QVTbaseMetamodel extends ASResourceImpl
 			root.getOwnedImports().add(createImport(null, _ocl));
 		}
 		
-		private final @NonNull Class _Annotation = createClass(PivotPackage.Literals.ANNOTATION);
-		private final @NonNull Class _OCLExpression = createClass(PivotPackage.Literals.OCL_EXPRESSION);
-		private final @NonNull Class _Package = createClass(PivotPackage.Literals.PACKAGE);
-		private final @NonNull Class _Variable = createClass(PivotPackage.Literals.VARIABLE);
+		private final @NonNull Class _Annotation = createClass("Annotation");
+		private final @NonNull Class _OCLExpression = createClass("OCLExpression");
+		private final @NonNull Class _Package = createClass("Package");
+		private final @NonNull Class _Variable = createClass("Variable");
 		
 		private final @NonNull Class _BaseModel = createClass(QVTbasePackage.Literals.BASE_MODEL);
 		private final @NonNull Class _Domain = createClass(QVTbasePackage.Literals.DOMAIN);

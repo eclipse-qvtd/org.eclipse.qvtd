@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010, 2016 Willink Transformations and others.
+ * Copyright (c) 2010, 2015 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -334,10 +334,10 @@ public class QVTimperativeLibrary extends ASResourceImpl
 			superClasses.add(_Collection_Model_objectsOfType_TT);
 		}
 		
-		private final @NonNull Operation op_Model_allObjects = createOperation("allObjects", _Set_OclElement, "org.eclipse.ocl.pivot.library.model.AllObjectsOperation", org.eclipse.qvtd.runtime.library.model.AllObjectsOperation.INSTANCE);
-		private final @NonNull Operation op_Model_objectsOfKind = createOperation("objectsOfKind", _Set_Model_objectsOfKind_TT, "org.eclipse.ocl.pivot.library.model.ModelObjectsOfKindOperation", org.eclipse.qvtd.runtime.library.model.ModelObjectsOfKindOperation.INSTANCE, tp_Model_objectsOfKind_TT);
-		private final @NonNull Operation op_Model_objectsOfType = createOperation("objectsOfType", _Set_Model_objectsOfType_TT, "org.eclipse.ocl.pivot.library.model.ModelObjectsOfTypeOperation", org.eclipse.qvtd.runtime.library.model.ModelObjectsOfTypeOperation.INSTANCE, tp_Model_objectsOfType_TT);
-		private final @NonNull Operation op_Model_rootObjects = createOperation("rootObjects", _Set_OclElement, "org.eclipse.ocl.pivot.library.model.RootObjectsOperation", org.eclipse.qvtd.runtime.library.model.RootObjectsOperation.INSTANCE);
+		private final @NonNull Operation op_Model_allObjects = createOperation("allObjects", _Set_OclElement, "org.eclipse.qvtd.runtime.library.model.AllObjectsOperation", org.eclipse.qvtd.runtime.library.model.AllObjectsOperation.INSTANCE);
+		private final @NonNull Operation op_Model_objectsOfKind = createOperation("objectsOfKind", _Set_Model_objectsOfKind_TT, "org.eclipse.qvtd.runtime.library.model.ModelObjectsOfKindOperation", org.eclipse.qvtd.runtime.library.model.ModelObjectsOfKindOperation.INSTANCE, tp_Model_objectsOfKind_TT);
+		private final @NonNull Operation op_Model_objectsOfType = createOperation("objectsOfType", _Set_Model_objectsOfType_TT, "org.eclipse.qvtd.runtime.library.model.ModelObjectsOfTypeOperation", org.eclipse.qvtd.runtime.library.model.ModelObjectsOfTypeOperation.INSTANCE, tp_Model_objectsOfType_TT);
+		private final @NonNull Operation op_Model_rootObjects = createOperation("rootObjects", _Set_OclElement, "org.eclipse.qvtd.runtime.library.model.RootObjectsOperation", org.eclipse.qvtd.runtime.library.model.RootObjectsOperation.INSTANCE);
 		
 		private void installOperations() {
 			List<Operation> ownedOperations;
