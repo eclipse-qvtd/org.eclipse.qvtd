@@ -33,7 +33,6 @@ import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NodeConnection;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NodeRole;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RegionUtil;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Role;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RootScheduledRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.SchedulerConstants;
@@ -150,15 +149,15 @@ public abstract class NodeImpl implements Node
 			typedElements.add(typedElement);
 			Region region2 = region;
 			assert region2 != null;
-			if (isPattern() && isMatched() && !isRealized() && (typedElements.size() == 1) && !region2.isOperationRegion()) {
-				boolean isMatched = RegionUtil.isMatched(typedElement);
-				if (!isMatched) {
-					isMatched = RegionUtil.isMatched(typedElement);
-				}
-				if (!isMatched) {
-					region2.getMultiRegion().getSchedulerConstants().addProblem(region2.createWarning("Cannot add unmatched " + typedElement + " to " + this));
-				}
-			}
+			//			if (isPattern() && isMatched() && !isRealized() && (typedElements.size() == 1) && !region2.isOperationRegion()) {	// FIXME this is not a sound diagnosis
+			//				boolean isMatched = RegionUtil.isMatched(typedElement);
+			//				if (!isMatched) {
+			//					isMatched = RegionUtil.isMatched(typedElement);
+			//				}
+			//				if (!isMatched) {
+			//					region2.getMultiRegion().getSchedulerConstants().addProblem(region2.createWarning("Cannot add unmatched " + typedElement + " to " + this));
+			//				}
+			//			}
 		}
 	}
 
