@@ -38,8 +38,8 @@ import org.eclipse.xtext.resource.XtextResource;
 public class QVTcSerializeTests extends LoadTestCase
 {
 	protected void doSerializeRoundTripFromAS(@NonNull String stem) throws Exception {
-		OCL ocl1 = OCL.newInstance(OCL.NO_PROJECTS);
-		OCL ocl2 = OCL.newInstance(OCL.NO_PROJECTS);
+		QVTcore ocl1 = QVTcore.newInstance(QVTcore.NO_PROJECTS);
+		QVTcore ocl2 = QVTcore.newInstance(QVTcore.NO_PROJECTS);
 		URI inputURI = getProjectFileURI(stem + ".qvtcas");
 		Resource asResource1 = ocl1.getMetamodelManager().getASResourceSet().getResource(inputURI, true);
 		URI referenceURI = getProjectFileURI(stem + "ref.qvtcas");
@@ -52,8 +52,8 @@ public class QVTcSerializeTests extends LoadTestCase
 	}
 
 	protected void doSerializeRoundTripFromCS(@NonNull String stem) throws Exception {
-		OCL ocl1 = OCL.newInstance(OCL.NO_PROJECTS);
-		OCL ocl2 = OCL.newInstance(OCL.NO_PROJECTS);
+		QVTcore ocl1 = QVTcore.newInstance(QVTcore.NO_PROJECTS);
+		QVTcore ocl2 = QVTcore.newInstance(QVTcore.NO_PROJECTS);
 		Resource asResource1 = doLoad_Concrete(ocl1, stem + ".qvtc", stem + ".qvtcas");
 		URI inputURI = getProjectFileURI(stem + ".qvtcas");
 		URI referenceURI = getProjectFileURI(stem + "ref.qvtcas");
@@ -114,7 +114,7 @@ public class QVTcSerializeTests extends LoadTestCase
 		//
 		//	Load QVTiAS
 		//
-		OCL ocl = QVTcore.newInstance(OCL.NO_PROJECTS);
+		QVTcore ocl = QVTcore.newInstance(QVTcore.NO_PROJECTS);
 		try {
 			ASResource asResource = loadQVTiAS(ocl, inputURI);
 			assertNoResourceErrors("Normalisation failed", asResource);
