@@ -70,7 +70,7 @@ public class QVTbaseUtil extends PivotUtil
 	 * Return all transformations in asModel.
 	 */
 	public static @NonNull List<@NonNull Transformation> getAllTransformations(@NonNull Model asModel) {
-		List<@NonNull Transformation> asTransformations = new ArrayList<@NonNull Transformation>();
+		List<@NonNull Transformation> asTransformations = new ArrayList<>();
 		getAllTransformations(ClassUtil.nullFree(asModel.getOwnedPackages()), asTransformations);
 		return asTransformations;
 	}
@@ -92,8 +92,8 @@ public class QVTbaseUtil extends PivotUtil
 	/**
 	 * Return the closure of typedModel and its dependsOn.
 	 */
-	public static @NonNull Set<TypedModel> getAllTypedModels(@NonNull TypedModel typedModel) {
-		Set<TypedModel> allTypedModels = new HashSet<TypedModel>();
+	public static @NonNull Set<@NonNull TypedModel> getAllTypedModels(@NonNull TypedModel typedModel) {
+		Set<@NonNull TypedModel> allTypedModels = new HashSet<>();
 		getAllTypedModelsInternal(allTypedModels, typedModel);
 		return allTypedModels;
 	}
@@ -109,8 +109,8 @@ public class QVTbaseUtil extends PivotUtil
 	/**
 	 * Return the closure of transformation.modelParameter.usedPackages and their importedPackages.
 	 */
-	public static @NonNull Set<org.eclipse.ocl.pivot.Package> getAllUsedPackages(@NonNull Transformation transformation) {
-		Set<org.eclipse.ocl.pivot.Package> allPackages = new HashSet<org.eclipse.ocl.pivot.Package>();
+	public static @NonNull Set<org.eclipse.ocl.pivot.@NonNull Package> getAllUsedPackages(@NonNull Transformation transformation) {
+		Set<org.eclipse.ocl.pivot.@NonNull Package> allPackages = new HashSet<>();
 		for (@SuppressWarnings("null")@NonNull TypedModel typedModel : transformation.getModelParameter()) {
 			getAllUsedPackagesInternal(allPackages, typedModel);
 		}
@@ -121,7 +121,7 @@ public class QVTbaseUtil extends PivotUtil
 	 * Return the closure of typedModel.usedPackages and their importedPackages.
 	 */
 	public static @NonNull Set<org.eclipse.ocl.pivot.@NonNull Package> getAllUsedPackages(@NonNull TypedModel typedModel) {
-		Set<org.eclipse.ocl.pivot.@NonNull Package> allUsedPackages = new HashSet<org.eclipse.ocl.pivot.@NonNull Package>();
+		Set<org.eclipse.ocl.pivot.@NonNull Package> allUsedPackages = new HashSet<>();
 		getAllUsedPackagesInternal(allUsedPackages, typedModel);
 		return allUsedPackages;
 	}
@@ -231,8 +231,8 @@ public class QVTbaseUtil extends PivotUtil
 	 * Return the TypedModels that are enforced by all domains that reference them throughout the transformation.
 	 */
 	public static @NonNull Set<@NonNull TypedModel> getEnforceableTypedModels(@NonNull Transformation transformation) {
-		Set<@NonNull TypedModel> enforceableTypedModels = new HashSet<@NonNull TypedModel>();
-		Set<@NonNull TypedModel> notEnforceableTypedModels = new HashSet<@NonNull TypedModel>();
+		Set<@NonNull TypedModel> enforceableTypedModels = new HashSet<>();
+		Set<@NonNull TypedModel> notEnforceableTypedModels = new HashSet<>();
 		for (Rule rule : transformation.getRule()) {
 			for (Domain domain : rule.getDomain()) {
 				TypedModel typedModel = domain.getTypedModel();
@@ -392,15 +392,15 @@ public class QVTbaseUtil extends PivotUtil
 	/**
 	 * Rewrite asResource to replace null OperationCallExp sources by a "this" expression.
 	 */
-	public static @Nullable List<OperationCallExp> rewriteMissingOperationCallSources(@NonNull EnvironmentFactory environmentFactory, @NonNull Resource asResource) {
-		List<OperationCallExp> missingSources = null;
+	public static @Nullable List<@NonNull OperationCallExp> rewriteMissingOperationCallSources(@NonNull EnvironmentFactory environmentFactory, @NonNull Resource asResource) {
+		List<@NonNull OperationCallExp> missingSources = null;
 		for (TreeIterator<EObject> tit = asResource.getAllContents(); tit.hasNext(); ) {
 			EObject eObject = tit.next();
 			if (eObject instanceof OperationCallExp) {
 				OperationCallExp operationCallExp = (OperationCallExp)eObject;
 				if (operationCallExp.getOwnedSource() == null) {
 					if (missingSources == null) {
-						missingSources = new ArrayList<OperationCallExp>();
+						missingSources = new ArrayList<>();
 					}
 					missingSources.add(operationCallExp);
 				}

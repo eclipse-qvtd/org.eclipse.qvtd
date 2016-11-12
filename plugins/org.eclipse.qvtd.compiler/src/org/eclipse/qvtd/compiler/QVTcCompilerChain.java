@@ -39,7 +39,7 @@ public class QVTcCompilerChain extends AbstractCompilerChain
 		public @NonNull Resource execute(@NonNull URI txURI) throws IOException {
 			Resource cResource = QVTcoreUtil.loadTransformations(environmentFactory, txURI, false);
 			// FIXME Following code fixes up missing source. Should be fixed earlier.
-			List<OperationCallExp> missingOperationCallSources = QVTbaseUtil.rewriteMissingOperationCallSources(environmentFactory, cResource);
+			List<@NonNull OperationCallExp> missingOperationCallSources = QVTbaseUtil.rewriteMissingOperationCallSources(environmentFactory, cResource);
 			if (missingOperationCallSources != null) {
 				System.err.println("Missing OperationCallExp sources were fixed up for '" + txURI + "'");
 			}
