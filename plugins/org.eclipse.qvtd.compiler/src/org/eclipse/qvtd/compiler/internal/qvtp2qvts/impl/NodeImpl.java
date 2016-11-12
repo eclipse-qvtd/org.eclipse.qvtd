@@ -765,7 +765,6 @@ public abstract class NodeImpl implements Node
 
 	@Override
 	public void setContained(boolean isContained) {
-		assert !isContained || !isRealized();
 		this.isContained = isContained;
 	}
 

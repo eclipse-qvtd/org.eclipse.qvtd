@@ -6,6 +6,9 @@ org.eclipse.qvtd.runtime/tx/appends=false
 # Trace transformation connection consumes 
 org.eclipse.qvtd.runtime/tx/consumes=false
 
+# Trace transformation output model containment count result 
+org.eclipse.qvtd.runtime/tx/containments=false
+
 # Trace transformation exceptions 
 org.eclipse.qvtd.runtime/tx/exceptions=false
 

@@ -168,6 +168,15 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 		 * All possible allInstances() returns indexed by the ClassIndex of the ClassId for which allInstances() may be invoked.
 		 */
 		protected final @NonNull Connection [] classIndex2connection;
+		private int isContainedCount = 0;
+		private int isNotContainedCount = 0;
+
+		/**
+		 * true to add all EObjects to allEObjects unconditionally
+		 * false to add no EObjects to allEObjects unconditionally
+		 * null to add EObjects to allEObjects unless isContained
+		 */
+		private @Nullable Boolean trackAdditions = null;
 
 		public Model(@NonNull AbstractTransformerInternal transformer, @NonNull String name, @NonNull PropertyId @Nullable [] propertyIndex2propertyId,
 				@NonNull ClassId @NonNull [] classIndex2classId, int @Nullable [] @NonNull [] classIndex2allClassIndexes) {
@@ -250,15 +259,21 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 		 * the need for the eObject to be tracked as a potential orphan to be assigned to the model root.
 		 */
 		public void add(@NonNull EObject eObject, boolean isContained) {
-			List<@NonNull Object> allEObjects2 = allEObjects;
-			if (allEObjects2 == null) {
-				allEObjects = allEObjects2 = new ArrayList<>();
+			if ((trackAdditions == Boolean.FALSE) || (isContained && (trackAdditions == null))) {
+				isContainedCount++;
 			}
-			rootEObjects = null;
-			assert !allEObjects2.contains(eObject);
-			allEObjects2.add(eObject);
-			EClass eClass = transformer.eClass(eObject);
-			accumulateEObject1(eObject, eClass);
+			else {
+				isNotContainedCount++;
+				List<@NonNull Object> allEObjects2 = allEObjects;
+				if (allEObjects2 == null) {
+					allEObjects = allEObjects2 = new ArrayList<>();
+				}
+				rootEObjects = null;
+				assert !allEObjects2.contains(eObject);
+				allEObjects2.add(eObject);
+				EClass eClass = transformer.eClass(eObject);
+				accumulateEObject1(eObject, eClass);
+			}
 		}
 
 		/**
@@ -386,6 +401,9 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 					}
 				}
 			}
+			if (AbstractTransformer.CONTAINMENTS.isActive()) {
+				AbstractTransformer.CONTAINMENTS.println(name + " " + isContainedCount + "/" + (isContainedCount + isNotContainedCount));
+			}
 			return rootEObjects2;
 		}
 
@@ -399,6 +417,16 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 		@Override
 		public @NonNull String getName() {
 			return name;
+		}
+
+		/**
+		 * Set the behavior of add(eObject,isContained),
+		 * true to add all EObjects to allEObjects unconditionally,
+		 * false to add no EObjects to allEObjects unconditionally,
+		 * null to add EObjects to allEObjects unless isContained
+		 */
+		public void setTrackAdditions(@Nullable Boolean trackAdditions) {
+			this.trackAdditions = trackAdditions;
 		}
 
 		public <@NonNull T> Iterable<T> typedIterable(Class<T> javaClass, org.eclipse.ocl.pivot.@NonNull Class pivotType) {

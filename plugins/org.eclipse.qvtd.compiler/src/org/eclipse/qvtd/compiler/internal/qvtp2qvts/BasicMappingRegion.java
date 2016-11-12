@@ -185,6 +185,23 @@ public class BasicMappingRegion extends AbstractMappingRegion
 		}
 	}
 
+	protected void analyzeContainments() {
+		for (@NonNull Node node : getNewNodes()) {
+			boolean isContained = false;
+			for (@NonNull NavigableEdge edge : node.getNavigationEdges()) {
+				Property property = edge.getProperty();
+				Property opposite = property.getOpposite();
+				if ((opposite != null) && opposite.isIsComposite() && !edge.getTarget().isExplicitNull()) {
+					isContained = true;
+					break;
+				}
+			}
+			if (isContained) {
+				node.setContained(true);
+			}
+		}
+	}
+
 	/**
 	 * Create a BLUE/CYAN node for each guard variable.
 	 */
@@ -484,6 +501,7 @@ public class BasicMappingRegion extends AbstractMappingRegion
 		analyzePredicates(bottomPatterns);
 		analyzeAssignmentValues();
 		analyzeComplexPredicates();
+		analyzeContainments();
 		//
 		List<@NonNull Node> headNodes = getHeadNodes();
 		computeUtilities(headNodes);
