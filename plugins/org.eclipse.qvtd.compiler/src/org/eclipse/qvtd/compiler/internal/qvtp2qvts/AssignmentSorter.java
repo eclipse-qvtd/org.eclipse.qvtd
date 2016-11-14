@@ -12,7 +12,6 @@ package org.eclipse.qvtd.compiler.internal.qvtp2qvts;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -28,7 +27,7 @@ import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VariableExp;
-import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.NameUtil.ToStringComparator;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.TreeIterable;
 import org.eclipse.qvtd.pivot.qvtcore.Assignment;
@@ -45,18 +44,6 @@ import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
  */
 public class AssignmentSorter
 {
-	public static final class ToStringComparator implements Comparator<@NonNull Object>
-	{
-		public static final @NonNull ToStringComparator INSTANCE = new ToStringComparator();
-
-		@Override
-		public int compare(@NonNull Object o1, @NonNull Object o2) {
-			String s1 = o1.toString();
-			String s2 = o2.toString();
-			return ClassUtil.safeCompareTo(s1, s2);
-		}
-	}
-
 	private static @Nullable Variable getTargetVariable(@NonNull NavigationAssignment navigationAssignment) {
 		OCLExpression slotExpression = navigationAssignment.getSlotExpression();
 		if (slotExpression instanceof VariableExp) {
@@ -72,7 +59,7 @@ public class AssignmentSorter
 
 	/**
 	 * Nested Map for each known NavigationAssignment from each RealizedVariable to its Property to the NavigationAssignment.
-	 * 	FIXME Not RealizedVariable becuase of Adolfo's folded middle
+	 * 	FIXME Not RealizedVariable because of Adolfo's folded middle
 	 */
 	protected final @NonNull Map<@NonNull Variable, @NonNull Map<@NonNull Property, @NonNull NavigationAssignment>> realizedVariable2property2navigationAssignment = new HashMap<>();
 

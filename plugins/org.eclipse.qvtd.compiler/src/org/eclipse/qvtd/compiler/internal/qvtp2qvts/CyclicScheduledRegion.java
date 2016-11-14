@@ -20,6 +20,7 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis;
 import org.eclipse.qvtd.compiler.internal.utilities.SymbolNameBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 
@@ -170,7 +171,7 @@ public class CyclicScheduledRegion extends AbstractScheduledRegion
 		//
 		//	Identify the same-typed passed connections to be merged.
 		//
-		Map<@NonNull ClassDatumAnalysis, @NonNull Set<@NonNull NodeConnection>> classDatumAnalysis2connections = new HashMap<@NonNull ClassDatumAnalysis, @NonNull Set<@NonNull NodeConnection>>();
+		Map<org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis, @NonNull Set<@NonNull NodeConnection>> classDatumAnalysis2connections = new HashMap<org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis, @NonNull Set<@NonNull NodeConnection>>();
 		for (@NonNull Region innerRegion : getRegions()) {
 			for (@NonNull NodeConnection connection : innerRegion.getIncomingPassedConnections()) {
 				ClassDatumAnalysis classDatumAnalysis = connection.getClassDatumAnalysis();

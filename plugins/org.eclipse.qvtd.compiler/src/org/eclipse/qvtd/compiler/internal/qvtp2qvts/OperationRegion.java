@@ -33,6 +33,7 @@ import org.eclipse.ocl.pivot.VoidType;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.DependencyAnalyzer.DependencyPaths;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.DependencyAnalyzer.DependencyStep;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis;
 import org.eclipse.qvtd.compiler.internal.utilities.SymbolNameBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.DOTStringBuilder;
@@ -87,7 +88,7 @@ public class OperationRegion extends AbstractRegion
 		Iterable<@NonNull List<@NonNull DependencyStep>> hiddenPaths = paths.getHiddenPaths();
 		Iterable<@NonNull List<@NonNull DependencyStep>> returnPaths = paths.getReturnPaths();
 		RootDomainUsageAnalysis domainAnalysis = schedulerConstants.getDomainAnalysis();
-		Map<@NonNull ClassDatumAnalysis, @NonNull Node> classDatumAnalysis2node = new HashMap<>();
+		Map<org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis, @NonNull Node> classDatumAnalysis2node = new HashMap<>();
 		for (List<@NonNull DependencyStep> steps : Iterables.concat(returnPaths, hiddenPaths)) {
 			if (steps.size() > 0) {
 				boolean isDirty = false;

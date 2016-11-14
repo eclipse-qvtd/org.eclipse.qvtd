@@ -9,7 +9,7 @@
  *     Adolfo Sanchez-Barbudo Herrera - initial API and implementation
  *     E.D.Willink - use Complete model
  *******************************************************************************/
-package org.eclipse.qvtd.compiler.internal.qvtp2qvts;
+package org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -27,7 +27,13 @@ import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.FeatureFilter;
 
 /**
- * ContainmentAnalysis provides an analysis of all containment relationships in the EnvironmentFactory's resources.
+ * ContainmentAnalysis provides an analysis of all declared containment relationships in the EnvironmentFactory's resources. It therefore supports the compile time question:
+ *
+ * What declared container types could contain this declared contained type?
+ *
+ * The declared contained type could actually be any of its subclasses, so the containment properties must consider them all.
+ * The actual container types could be the sub-class of each possible containment property.
+ * The declared container types could be the super-classes too.
  */
 public class ContainmentAnalysis
 {

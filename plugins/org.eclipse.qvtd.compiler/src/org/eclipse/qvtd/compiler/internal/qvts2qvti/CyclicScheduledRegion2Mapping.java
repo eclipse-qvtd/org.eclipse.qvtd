@@ -30,11 +30,11 @@ import org.eclipse.ocl.pivot.ids.OperationId;
 import org.eclipse.ocl.pivot.ids.ParametersId;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.ClassDatumAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.CyclicScheduledRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NodeConnection;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis;
 import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.AppendParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.BufferStatement;
@@ -177,7 +177,7 @@ public class CyclicScheduledRegion2Mapping extends AbstractScheduledRegion2Mappi
 	/**
 	 * The recursions.
 	 */
-	private final @NonNull Map<@NonNull ClassDatumAnalysis, @NonNull RecursionContext> classDatumAnalysis2recursion = new HashMap<@NonNull ClassDatumAnalysis, @NonNull RecursionContext>();
+	private final @NonNull Map<org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis, @NonNull RecursionContext> classDatumAnalysis2recursion = new HashMap<org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis, @NonNull RecursionContext>();
 
 	/**
 	 * True if all recursions use Set accumulators allowing the unqiueness to be determined by excliusion rather than

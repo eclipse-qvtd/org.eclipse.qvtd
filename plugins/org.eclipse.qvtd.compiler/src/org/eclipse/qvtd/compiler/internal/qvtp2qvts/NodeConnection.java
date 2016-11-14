@@ -17,6 +17,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.ids.IdResolver;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis;
 
 /**
  * A NodeConnection supports a data connection from one or more source nodes to one or more target nodes.

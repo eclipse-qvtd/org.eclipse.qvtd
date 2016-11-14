@@ -19,6 +19,7 @@ import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.utilities.Nameable;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 
 /**

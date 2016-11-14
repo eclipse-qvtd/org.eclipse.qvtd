@@ -45,6 +45,8 @@ import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.FeatureFilter;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ContainmentAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.InheritanceAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -80,9 +82,9 @@ public class DatumCaches
 	private @NonNull Map<@NonNull TypedModel, @NonNull Map<org.eclipse.ocl.pivot.@NonNull CompleteClass, @NonNull ClassDatum>> typedModel2completeClass2classDatum = new HashMap<>();
 	private @NonNull Map<@NonNull ClassDatum, @NonNull Map<@NonNull Property, @NonNull PropertyDatum>> classDatum2property2propertyDatum = new HashMap<>();
 
-	public DatumCaches(@NonNull RootDomainUsageAnalysis domainAnalysis, @NonNull ContainmentAnalysis containmentAnalysis) {
+	public DatumCaches(@NonNull RootDomainUsageAnalysis domainAnalysis) {
 		this.domainUsageAnalysis = domainAnalysis;
-		this.containmentAnalysis = containmentAnalysis;
+		this.containmentAnalysis = new ContainmentAnalysis(domainAnalysis.getEnvironmentFactory());
 		this.completeModel = domainAnalysis.getEnvironmentFactory().getCompleteModel();
 	}
 
@@ -332,6 +334,10 @@ public class DatumCaches
 	private @NonNull Set<@NonNull CompleteClass> getComputedContexts(@NonNull CallExp callExp, @NonNull Map<@NonNull Variable, @NonNull Set<@NonNull CompleteClass>> variable2BoundContext) {
 		OCLExpression source = ClassUtil.nonNullState(callExp.getOwnedSource());
 		return computeContexts(source, variable2BoundContext);
+	}
+
+	public @NonNull ContainmentAnalysis getContainmentAnalysis() {
+		return containmentAnalysis;
 	}
 
 	private org.eclipse.ocl.pivot.@Nullable Class getElementClass(@NonNull TypedElement tElement) {

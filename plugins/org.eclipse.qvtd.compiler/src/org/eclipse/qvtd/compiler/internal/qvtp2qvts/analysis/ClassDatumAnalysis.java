@@ -8,7 +8,7 @@
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
-package org.eclipse.qvtd.compiler.internal.qvtp2qvts;
+package org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -28,6 +28,10 @@ import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.FeatureFilter;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.MappingRegion;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.SchedulerConstants;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage;

@@ -25,8 +25,8 @@ import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 import org.eclipse.ocl.pivot.model.OCLstdlib;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.ParserException;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.ContainmentAnalysis;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.InheritanceAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ContainmentAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.InheritanceAnalysis;
 import org.eclipse.qvtd.xtext.qvtbase.tests.XtextTestCase;
 import org.junit.Test;
 

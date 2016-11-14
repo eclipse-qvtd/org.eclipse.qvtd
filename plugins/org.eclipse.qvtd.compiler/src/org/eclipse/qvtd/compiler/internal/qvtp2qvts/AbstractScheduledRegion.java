@@ -22,6 +22,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvti.QVTs2QVTiVisitor;
 import org.eclipse.qvtd.compiler.internal.utilities.SymbolNameBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -46,7 +47,7 @@ public abstract class AbstractScheduledRegion extends AbstractRegion implements 
 	/**
 	 * The per-class node connections that unite a set of sources via a shared connection.
 	 */
-	private final @NonNull Map<@NonNull ClassDatumAnalysis, @NonNull Map<@NonNull Set<@NonNull Node>, @NonNull NodeConnection>> classDatumAnalysis2nodes2nodeConnections = new HashMap<@NonNull ClassDatumAnalysis, @NonNull Map<@NonNull Set<@NonNull Node>, @NonNull NodeConnection>>();
+	private final @NonNull Map<org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis, @NonNull Map<@NonNull Set<@NonNull Node>, @NonNull NodeConnection>> classDatumAnalysis2nodes2nodeConnections = new HashMap<org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis, @NonNull Map<@NonNull Set<@NonNull Node>, @NonNull NodeConnection>>();
 
 	/**
 	 * The edge connections that unite a set of sources via a shared connection.

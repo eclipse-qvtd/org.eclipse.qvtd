@@ -31,6 +31,7 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.StringUtil;
 import org.eclipse.qvtd.compiler.CompilerProblem;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvti.QVTs2QVTiVisitor;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.Region2Depth;
 import org.eclipse.qvtd.compiler.internal.utilities.SymbolNameBuilder;

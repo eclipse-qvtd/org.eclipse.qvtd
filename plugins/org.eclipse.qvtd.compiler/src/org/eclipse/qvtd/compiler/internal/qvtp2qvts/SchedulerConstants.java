@@ -40,6 +40,8 @@ import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.StringUtil;
 import org.eclipse.ocl.pivot.values.Unlimited;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ContainmentAnalysis;
 import org.eclipse.qvtd.compiler.internal.utilities.SymbolNameBuilder;
 import org.eclipse.qvtd.compiler.internal.utilities.SymbolNameReservation;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
@@ -86,7 +88,6 @@ public abstract class SchedulerConstants
 
 	private final @NonNull EnvironmentFactory environmentFactory;
 	private final @NonNull Transformation transformation;
-	private final @NonNull ContainmentAnalysis containmentAnalysis;
 	private final @NonNull RootDomainUsageAnalysis domainAnalysis;
 	private final @NonNull DatumCaches datumCaches;
 
@@ -135,10 +136,9 @@ public abstract class SchedulerConstants
 	protected SchedulerConstants(@NonNull EnvironmentFactory environmentFactory, @NonNull Transformation asTransformation) {
 		this.environmentFactory = environmentFactory;
 		this.transformation = asTransformation;
-		this.containmentAnalysis = new ContainmentAnalysis(environmentFactory);
 		this.domainAnalysis = new QVTcoreDomainUsageAnalysis(environmentFactory);
 		domainAnalysis.analyzeTransformation(asTransformation);
-		this.datumCaches = new DatumCaches(domainAnalysis, containmentAnalysis);
+		this.datumCaches = new DatumCaches(domainAnalysis);
 		datumCaches.analyzeTransformation(asTransformation);
 		//
 		this.inputUsage = domainAnalysis.getInputUsage();
@@ -262,7 +262,7 @@ public abstract class SchedulerConstants
 	}
 
 	public @NonNull ContainmentAnalysis getContainmentAnalysis() {
-		return containmentAnalysis;
+		return datumCaches.getContainmentAnalysis();
 	}
 
 	//	@SuppressWarnings("null")

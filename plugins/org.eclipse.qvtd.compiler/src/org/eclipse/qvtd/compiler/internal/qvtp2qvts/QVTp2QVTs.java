@@ -35,6 +35,7 @@ import org.eclipse.ocl.pivot.utilities.TracingOption;
 import org.eclipse.qvtd.compiler.CompilerConstants;
 import org.eclipse.qvtd.compiler.CompilerProblem;
 import org.eclipse.qvtd.compiler.ProblemHandler;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.Region2Depth;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
@@ -272,7 +273,7 @@ public class QVTp2QVTs extends SchedulerConstants
 		//
 		//	All classes reachable from the primary head.
 		//
-		Set<@NonNull ClassDatumAnalysis> toOneReachableClasses = new HashSet<>();
+		Set<org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis> toOneReachableClasses = new HashSet<>();
 		List<@NonNull MappingRegion> secondaryRegions = null;
 		List<@NonNull MappingRegion> allConsumingRegionsList = new ArrayList<>(allConsumingRegions);	// CME-proof iterable List shadowing a mutating Set
 		for (int i = 0; i < allConsumingRegionsList.size(); i++) {

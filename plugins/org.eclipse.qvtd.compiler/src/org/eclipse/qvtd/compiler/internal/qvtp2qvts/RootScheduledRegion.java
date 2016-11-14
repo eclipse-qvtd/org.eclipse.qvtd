@@ -35,6 +35,7 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotConstants;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.Region2Depth;
 import org.eclipse.qvtd.compiler.internal.utilities.SymbolNameBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
@@ -90,13 +91,13 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 	 *-- relationship is included in every entry since it must be considered as an introducer for every possible
 	 *-- consumption.
 	 */
-	private final @NonNull Map<@NonNull ClassDatumAnalysis, @NonNull Set<@NonNull Property>> containedClassDatumAnalysis2compositeProperties = new HashMap<@NonNull ClassDatumAnalysis, @NonNull Set<@NonNull Property>>();
+	private final @NonNull Map<org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis, @NonNull Set<@NonNull Property>> containedClassDatumAnalysis2compositeProperties = new HashMap<org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis, @NonNull Set<@NonNull Property>>();
 
 	/**
 	 * The input model classes that may be used as independent inputs by mappings and the nodes at which they are consumed.
 	 * In the worst case a flat schedule just permutes allInstances() to provide all mapping inputs.
 	 */
-	private final @NonNull Map<@NonNull ClassDatumAnalysis, @NonNull List<@NonNull Node>> consumedClassDatumAnalysis2headNodes = new HashMap<@NonNull ClassDatumAnalysis, @NonNull List<@NonNull Node>>();
+	private final @NonNull Map<org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis, @NonNull List<@NonNull Node>> consumedClassDatumAnalysis2headNodes = new HashMap<org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis, @NonNull List<@NonNull Node>>();
 
 	/**
 	 * Mapping from each composite property to the classes consumed by mappings and transitive compositions.
@@ -105,17 +106,17 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 	 * For simple cases each composition introduces instances of just a single class corresponding to its composed type.
 	 * In more complex cases a composition may also introduce instances of superclasses of its composed type.
 	 */
-	private final @NonNull Map<@NonNull Property, @NonNull Set<@NonNull ClassDatumAnalysis>> consumedCompositeProperty2introducedClassDatumAnalyses = new HashMap<@NonNull Property, @NonNull Set<@NonNull ClassDatumAnalysis>>();
+	private final @NonNull Map<@NonNull Property, @NonNull Set<org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis>> consumedCompositeProperty2introducedClassDatumAnalyses = new HashMap<@NonNull Property, @NonNull Set<org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis>>();
 
 	/**
 	 * The per-class join nodes that identify all introducers.
 	 */
-	private final @NonNull Map<@NonNull ClassDatumAnalysis, @NonNull List<@NonNull Node>> introducedClassDatumAnalysis2nodes = new HashMap<@NonNull ClassDatumAnalysis, @NonNull List<@NonNull Node>>();
+	private final @NonNull Map<org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis, @NonNull List<@NonNull Node>> introducedClassDatumAnalysis2nodes = new HashMap<org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis, @NonNull List<@NonNull Node>>();
 
 	/**
 	 * The Realized Nodes that produce each ClassDatum.
 	 */
-	private final @NonNull Map<@NonNull ClassDatumAnalysis, @NonNull List<@NonNull Node>> producedClassDatumAnalysis2realizedNodes = new HashMap<@NonNull ClassDatumAnalysis, @NonNull List<@NonNull Node>>();
+	private final @NonNull Map<org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis, @NonNull List<@NonNull Node>> producedClassDatumAnalysis2realizedNodes = new HashMap<org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis, @NonNull List<@NonNull Node>>();
 
 	/**
 	 * The Realized Edges that produce each PropertyDatum (or its opposite).
@@ -456,17 +457,17 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 		//	Find the composite properties for each consumed class and its super classes, and accumulate
 		//	the container classes of all used properties as additional consumed classes.
 		//
-		Set<@NonNull ClassDatumAnalysis> allConsumedClassDatumAnalyses = new HashSet<@NonNull ClassDatumAnalysis>(consumedClassDatumAnalysis2headNodes.keySet());
-		List<@NonNull ClassDatumAnalysis> allConsumedClassDatumAnalysesList = new ArrayList<@NonNull ClassDatumAnalysis>(allConsumedClassDatumAnalyses);
+		Set<org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis> allConsumedClassDatumAnalyses = new HashSet<org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis>(consumedClassDatumAnalysis2headNodes.keySet());
+		List<org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis> allConsumedClassDatumAnalysesList = new ArrayList<org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis>(allConsumedClassDatumAnalyses);
 		for (int i = 0; i < allConsumedClassDatumAnalysesList.size(); i++) {
 			ClassDatumAnalysis consumedClassDatumAnalysis = allConsumedClassDatumAnalysesList.get(i);
 			for (@NonNull ClassDatumAnalysis consumedSuperClassDatumAnalysis : consumedClassDatumAnalysis.getSuperClassDatumAnalyses()) {
 				Set<@NonNull Property> consumedCompositeProperties = containedClassDatumAnalysis2compositeProperties.get(consumedSuperClassDatumAnalysis);
 				if (consumedCompositeProperties != null) {
 					for (@NonNull Property consumedCompositeProperty : consumedCompositeProperties) {
-						Set<@NonNull ClassDatumAnalysis> introducedClassDatumAnalyses = consumedCompositeProperty2introducedClassDatumAnalyses.get(consumedCompositeProperty);
+						Set<org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis> introducedClassDatumAnalyses = consumedCompositeProperty2introducedClassDatumAnalyses.get(consumedCompositeProperty);
 						if (introducedClassDatumAnalyses == null) {
-							introducedClassDatumAnalyses = new HashSet<@NonNull ClassDatumAnalysis>();
+							introducedClassDatumAnalyses = new HashSet<org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis>();
 							consumedCompositeProperty2introducedClassDatumAnalyses.put(consumedCompositeProperty, introducedClassDatumAnalyses);
 						}
 						introducedClassDatumAnalyses.add(consumedClassDatumAnalysis);

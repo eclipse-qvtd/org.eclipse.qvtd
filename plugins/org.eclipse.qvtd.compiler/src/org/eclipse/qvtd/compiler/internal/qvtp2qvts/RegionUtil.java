@@ -29,6 +29,7 @@ import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.CastEdgeImpl;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.ComposedNodeImpl;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.DependencyNodeImpl;

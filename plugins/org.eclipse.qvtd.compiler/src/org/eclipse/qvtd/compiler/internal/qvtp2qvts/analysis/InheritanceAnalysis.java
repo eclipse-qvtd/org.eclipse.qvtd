@@ -9,7 +9,7 @@
  *     Adolfo Sanchez-Barbudo Herrera - initial API and implementation
  *     E.D.Willink - use Complete model
  *******************************************************************************/
-package org.eclipse.qvtd.compiler.internal.qvtp2qvts;
+package org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis;
 
 import java.util.HashMap;
 import java.util.HashSet;

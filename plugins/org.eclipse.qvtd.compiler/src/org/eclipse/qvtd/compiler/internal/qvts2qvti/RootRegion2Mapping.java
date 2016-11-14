@@ -37,7 +37,6 @@ import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.internal.complete.StandardLibraryInternal;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.ClassDatumAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Edge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NavigableEdge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
@@ -45,6 +44,7 @@ import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NodeConnection;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RootCompositionRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.SchedulerConstants;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.BufferStatement;
@@ -59,7 +59,7 @@ public class RootRegion2Mapping extends AbstractScheduledRegion2Mapping
 	/**
 	 * Mapping from the type to allInstances variable.
 	 */
-	private final @NonNull Map<@NonNull ClassDatumAnalysis, @NonNull DeclareStatement> classDatumAnalysis2variable = new HashMap<>();
+	private final @NonNull Map<org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis, @NonNull DeclareStatement> classDatumAnalysis2variable = new HashMap<>();
 
 	/**
 	 * Mapping from the scheduled Nodes to their QVTi variables.

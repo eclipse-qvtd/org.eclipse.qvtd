@@ -11,10 +11,10 @@
 package org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.ClassDatumAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NodeRole;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis;
 
 public class OperationNodeImpl extends NodeImpl
 {
