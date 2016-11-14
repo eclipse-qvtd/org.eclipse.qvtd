@@ -23,6 +23,7 @@ import org.eclipse.qvtd.doc.minioclcs.xtext.tests.MiniOCLCSParsingTest;
 import org.eclipse.qvtd.xtext.qvtbase.tests.QVTbaseLibraryTests;
 import org.eclipse.qvtd.xtext.qvtcore.tests.AllQVTcoreTests;
 import org.eclipse.qvtd.xtext.qvtimperative.tests.AllQVTimperativeTests;
+import org.eclipse.qvtd.xtext.qvtimperative.tests.AnalysisTests;
 import org.eclipse.qvtd.xtext.qvtimperative.tests.QVTiDebuggerTests;
 import org.eclipse.qvtd.xtext.qvtimperative.tests.RuntimeConnectionTests;
 import org.eclipse.qvtd.xtext.qvtrelation.tests.AllQVTrelationTests;
@@ -59,6 +60,7 @@ public class AllQVTdTests extends TestCase
 		if (!EMFPlugin.IS_ECLIPSE_RUNNING) {		// FIXME should work as plugin test too
 			result.addTestSuite(OCL2QVTiTestCases.class);
 		}
+		result.addTestSuite(AnalysisTests.class);
 		result.addTestSuite(RuntimeConnectionTests.class);
 		result.addTestSuite(BigMDE2016_QVTc_AutomatedTests.class);	// NB this is very slow since we are -ea
 		result.addTestSuite(EXE2016_QVTc_AutomatedTests.class);		// NB this is very slow since we are -ea
