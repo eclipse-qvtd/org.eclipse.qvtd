@@ -595,7 +595,7 @@ public class DependencyAnalyzer
 				for (@NonNull List<@NonNull DependencyStep> steps : sourcePaths.getReturnPaths()) {
 					for (@NonNull DependencyStep step : steps) {
 						org.eclipse.ocl.pivot.Class sourceClass = step.getElementalType();
-						CompleteClass selfClass = metamodelManager.getCompleteModel().getCompleteClass(sourceClass);
+						CompleteClass selfClass = completeModel.getCompleteClass(sourceClass);
 						Iterable<@NonNull Operation> overrides = getOverrides(selfClass, referredOperation);
 						for (@NonNull Operation operation : overrides) {
 							OperationId operationId = operation.getOperationId();
@@ -625,8 +625,8 @@ public class DependencyAnalyzer
 				int size = steps.size();
 				assert size > 0;
 				DependencyStep lastStep = steps.get(size-1);
-				CompleteClass sourceClass = metamodelManager.getCompleteModel().getCompleteClass(lastStep.getElementalType());
-				for (@NonNull CompleteClass containerClass : scheduler.getClassRelationships().getContainerClasses(sourceClass)) {
+				CompleteClass sourceClass = completeModel.getCompleteClass(lastStep.getElementalType());
+				for (@NonNull CompleteClass containerClass : scheduler.getContainmentAnalysis().getContainerClasses(sourceClass)) {
 					ClassDependencyStep classDependencyStep = createClassDependencyStep(containerClass.getPrimaryClass(), operationCallExp);
 					result = result.addReturn(createDependencyPaths(classDependencyStep));
 				}
@@ -881,7 +881,7 @@ public class DependencyAnalyzer
 				assert size > 0;
 				DependencyStep lastStep = steps2.get(size-1);
 				org.eclipse.ocl.pivot.Class sourceClass = lastStep.getElementalType();
-				CompleteClass selfClass = metamodelManager.getCompleteModel().getCompleteClass(sourceClass);
+				CompleteClass selfClass = completeModel.getCompleteClass(sourceClass);
 				List<@NonNull Operation> sortedOverrides = Lists.newArrayList(getOverrides(selfClass, referredOperation));
 				Collections.sort(sortedOverrides, ToStringComparator.INSTANCE);
 				for (@NonNull Operation operation : sortedOverrides) {
@@ -1285,6 +1285,7 @@ public class DependencyAnalyzer
 	}
 
 	private final @NonNull MetamodelManager metamodelManager;
+	private final @NonNull CompleteModel completeModel;
 	protected final @NonNull StandardLibrary standardLibrary;
 	protected final @NonNull RootDomainUsageAnalysis domainUsageAnalysis;
 	protected final @NonNull SchedulerConstants scheduler;
@@ -1313,7 +1314,7 @@ public class DependencyAnalyzer
 		this.domainUsageAnalysis = scheduler.getDomainAnalysis();
 		this.scheduler = scheduler;
 		this.finalAnalysis = ((PivotMetamodelManager)metamodelManager).getFinalAnalysis(); //new FinalAnalysis((CompleteModelInternal) environmentFactory.getCompleteModel());
-		CompleteModel completeModel = environmentFactory.getCompleteModel();
+		this.completeModel = environmentFactory.getCompleteModel();
 		this.oclVoidCompleteClass = completeModel.getCompleteClass(standardLibrary.getOclVoidType());
 		this.oclInvalidCompleteClass = completeModel.getCompleteClass(standardLibrary.getOclInvalidType());
 	}

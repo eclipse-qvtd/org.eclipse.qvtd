@@ -25,7 +25,8 @@ import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 import org.eclipse.ocl.pivot.model.OCLstdlib;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.ParserException;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.ClassRelationships;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.ContainmentAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.InheritanceAnalysis;
 import org.eclipse.qvtd.xtext.qvtbase.tests.XtextTestCase;
 import org.junit.Test;
 
@@ -106,30 +107,30 @@ public class AnalysisTests extends XtextTestCase
 		CompleteClass eTypeParameterClass = ClassUtil.nonNullState(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.ETYPE_PARAMETER.getName()));
 		CompleteClass eTypedElementClass = ClassUtil.nonNullState(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.ETYPED_ELEMENT.getName()));
 		//
-		ClassRelationships inheritanceAnalysis = new ClassRelationships(environmentFactory);
+		ContainmentAnalysis containmentAnalysis = new ContainmentAnalysis(environmentFactory);
 		//
-		Set<@NonNull CompleteClass> oclAnyContainerClasses = inheritanceAnalysis.getContainerClasses(oclAnyClass);
+		Set<@NonNull CompleteClass> oclAnyContainerClasses = Sets.newHashSet(containmentAnalysis.getContainerClasses(oclAnyClass));
 		assertTrue((100 <= oclAnyContainerClasses.size()) && (oclAnyContainerClasses.size() <= 200));		// Currently 142
 		//
-		Set<@NonNull CompleteClass> eAnnotationContainerClasses = inheritanceAnalysis.getContainerClasses(eAnnotationClass);
+		Set<@NonNull CompleteClass> eAnnotationContainerClasses = Sets.newHashSet(containmentAnalysis.getContainerClasses(eAnnotationClass));
 		assertEquals(Sets.newHashSet(eAnnotationClass, eAttributeClass, eClassClass, eClassifierClass, eDataTypeClass, eEnumClass, eEnumLiteralClass, eFactoryClass, eModelElementClass, eNamedElementClass, eOperationClass, ePackageClass, eParameterClass, eReferenceClass, eStructuralFeatureClass, eTypeParameterClass, eTypedElementClass), eAnnotationContainerClasses);
 		//
-		Set<@NonNull CompleteClass> eStructuralFeatureContainerClasses = inheritanceAnalysis.getContainerClasses(eStructuralFeatureClass);
+		Set<@NonNull CompleteClass> eStructuralFeatureContainerClasses = Sets.newHashSet(containmentAnalysis.getContainerClasses(eStructuralFeatureClass));
 		assertEquals(Sets.newHashSet(eClassClass), eStructuralFeatureContainerClasses);
 		//
-		Set<@NonNull CompleteClass> eReferenceContainerClasses = inheritanceAnalysis.getContainerClasses(eReferenceClass);
-		assertEquals(Sets.newHashSet(eClassClass), eReferenceContainerClasses);
+		Set<@NonNull CompleteClass> eReferenceSubClasses = Sets.newHashSet(containmentAnalysis.getContainerClasses(eReferenceClass));
+		assertEquals(Sets.newHashSet(eClassClass), eReferenceSubClasses);
 		//
-		Set<@NonNull CompleteClass> eClassifierContainerClasses = inheritanceAnalysis.getContainerClasses(eClassifierClass);
-		assertEquals(Sets.newHashSet(ePackageClass), eClassifierContainerClasses);
+		Set<@NonNull CompleteClass> eClassifierSubClasses = Sets.newHashSet(containmentAnalysis.getContainerClasses(eClassifierClass));
+		assertEquals(Sets.newHashSet(ePackageClass), eClassifierSubClasses);
 		//
-		Set<@NonNull CompleteClass> eTypedElementContainerClasses = inheritanceAnalysis.getContainerClasses(eTypedElementClass);
+		Set<@NonNull CompleteClass> eTypedElementContainerClasses = Sets.newHashSet(containmentAnalysis.getContainerClasses(eTypedElementClass));
 		assertEquals(Sets.newHashSet(eClassClass, eOperationClass), eTypedElementContainerClasses);
 		//
-		Set<@NonNull CompleteClass> eModelElementContainerClasses = inheritanceAnalysis.getContainerClasses(eModelElementClass);
+		Set<@NonNull CompleteClass> eModelElementContainerClasses = Sets.newHashSet(containmentAnalysis.getContainerClasses(eModelElementClass));
 		assertEquals(Sets.newHashSet(eAnnotationClass, eAttributeClass, eClassClass, eClassifierClass, eDataTypeClass, eEnumClass, eEnumLiteralClass, eFactoryClass, eModelElementClass, eNamedElementClass, eOperationClass, ePackageClass, eParameterClass, eReferenceClass, eStructuralFeatureClass, eTypeParameterClass, eTypedElementClass), eModelElementContainerClasses);
 		//
-		Set<@NonNull CompleteClass> eGenericTypeContainerClasses = inheritanceAnalysis.getContainerClasses(eGenericTypeClass);
+		Set<@NonNull CompleteClass> eGenericTypeContainerClasses = Sets.newHashSet(containmentAnalysis.getContainerClasses(eGenericTypeClass));
 		assertEquals(Sets.newHashSet(eAttributeClass, eClassClass, eGenericTypeClass, eOperationClass, eParameterClass, eReferenceClass, eStructuralFeatureClass, eTypeParameterClass, eTypedElementClass), eGenericTypeContainerClasses);
 		//
 		ocl.dispose();
@@ -150,25 +151,26 @@ public class AnalysisTests extends XtextTestCase
 		ClassUtil.nonNullState(metamodelManager.loadResource(URI.createURI(ecoreNsUri), "", environmentFactory.getResourceSet()));
 		CompletePackage ecorePackage = ClassUtil.nonNullState(completeModel.getCompletePackageByURI(ecoreNsUri));
 		CompleteClass eAnnotationClass = ClassUtil.nonNullState(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.EANNOTATION.getName()));
+		CompleteClass eAttributeClass = ClassUtil.nonNullState(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.EATTRIBUTE.getName()));
 		CompleteClass eModelElementClass = ClassUtil.nonNullState(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.EMODEL_ELEMENT.getName()));
 		CompleteClass eNamedElementClass = ClassUtil.nonNullState(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.ENAMED_ELEMENT.getName()));
 		CompleteClass eReferenceClass = ClassUtil.nonNullState(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.EREFERENCE.getName()));
 		CompleteClass eStructuralFeatureClass = ClassUtil.nonNullState(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.ESTRUCTURAL_FEATURE.getName()));
 		CompleteClass eTypedElementClass = ClassUtil.nonNullState(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.ETYPED_ELEMENT.getName()));
 		//
-		ClassRelationships inheritanceAnalysis = new ClassRelationships(environmentFactory);
+		InheritanceAnalysis inheritanceAnalysis = new InheritanceAnalysis(environmentFactory);
 		//
-		Set<@NonNull CompleteClass> oclAnySuperClasses = inheritanceAnalysis.getAllSuperClasses(oclAnyClass);
-		assertEquals(Sets.newHashSet(), oclAnySuperClasses);
+		//		Set<@NonNull CompleteClass> oclAnySuperClasses = inheritanceAnalysis.getAllSuperAndSelfAndSubClasses(oclAnyClass);
+		//		assertEquals(Sets.newHashSet(), oclAnySuperClasses);
 		//
-		Set<@NonNull CompleteClass> eAnnotationSuperClasses = inheritanceAnalysis.getAllSuperClasses(eAnnotationClass);
-		assertEquals(Sets.newHashSet(oclAnyClass, oclElementClass, eModelElementClass), eAnnotationSuperClasses);
+		Set<@NonNull CompleteClass> eAnnotationSuperClasses = inheritanceAnalysis.getAllSuperAndSelfAndSubClasses(eAnnotationClass);
+		assertEquals(Sets.newHashSet(oclAnyClass, oclElementClass, eModelElementClass, eAnnotationClass), eAnnotationSuperClasses);
 		//
-		Set<@NonNull CompleteClass> eStructuralFeatureSuperClasses = inheritanceAnalysis.getAllSuperClasses(eStructuralFeatureClass);
-		assertEquals(Sets.newHashSet(oclAnyClass, oclElementClass, eModelElementClass, eNamedElementClass, eTypedElementClass), eStructuralFeatureSuperClasses);
-		//
-		Set<@NonNull CompleteClass> eReferenceSuperClasses = inheritanceAnalysis.getAllSuperClasses(eReferenceClass);
-		assertEquals(Sets.newHashSet(oclAnyClass, oclElementClass, eModelElementClass, eNamedElementClass, eStructuralFeatureClass, eTypedElementClass), eReferenceSuperClasses);
+		Set<@NonNull CompleteClass> eStructuralFeatureSuperClasses = inheritanceAnalysis.getAllSuperAndSelfAndSubClasses(eStructuralFeatureClass);
+		assertEquals(Sets.newHashSet(oclAnyClass, oclElementClass, eAttributeClass, eModelElementClass, eNamedElementClass, eReferenceClass, eStructuralFeatureClass, eTypedElementClass), eStructuralFeatureSuperClasses);
+
+		Set<@NonNull CompleteClass> eReferenceSuperClasses = inheritanceAnalysis.getAllSuperAndSelfAndSubClasses(eReferenceClass);
+		assertEquals(Sets.newHashSet(oclAnyClass, oclElementClass, eModelElementClass, eNamedElementClass, eReferenceClass, eStructuralFeatureClass, eTypedElementClass), eReferenceSuperClasses);
 		//
 		ocl.dispose();
 	}
@@ -187,13 +189,13 @@ public class AnalysisTests extends XtextTestCase
 		CompleteClass eReferenceClass = ClassUtil.nonNullState(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.EREFERENCE.getName()));
 		CompleteClass eStructuralFeatureClass = ClassUtil.nonNullState(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.ESTRUCTURAL_FEATURE.getName()));
 		//
-		ClassRelationships inheritanceAnalysis = new ClassRelationships(environmentFactory);
+		InheritanceAnalysis inheritanceAnalysis = new InheritanceAnalysis(environmentFactory);
 		//
-		Set<@NonNull CompleteClass> eReferenceSubClasses = inheritanceAnalysis.getAllSubClasses(eReferenceClass);
-		assertEquals(Sets.newHashSet(), eReferenceSubClasses);
+		Set<@NonNull CompleteClass> eReferenceSubClasses = inheritanceAnalysis.getAllSelfAndSubClasses(eReferenceClass);
+		assertEquals(Sets.newHashSet(eReferenceClass), eReferenceSubClasses);
 		//
-		Set<@NonNull CompleteClass> eStructuralFeatureSubClasses = inheritanceAnalysis.getAllSubClasses(eStructuralFeatureClass);
-		assertEquals(Sets.newHashSet(eAttributeClass, eReferenceClass), eStructuralFeatureSubClasses);
+		Set<@NonNull CompleteClass> eStructuralFeatureSubClasses = inheritanceAnalysis.getAllSelfAndSubClasses(eStructuralFeatureClass);
+		assertEquals(Sets.newHashSet(eAttributeClass, eReferenceClass, eStructuralFeatureClass), eStructuralFeatureSubClasses);
 		//
 		ocl.dispose();
 	}

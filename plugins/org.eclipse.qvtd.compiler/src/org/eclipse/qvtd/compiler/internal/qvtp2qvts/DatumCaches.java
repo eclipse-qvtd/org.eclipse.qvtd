@@ -26,6 +26,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CallExp;
 import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.CompleteClass;
+import org.eclipse.ocl.pivot.CompleteModel;
 import org.eclipse.ocl.pivot.DataType;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.ExpressionInOCL;
@@ -62,13 +63,16 @@ import org.eclipse.qvtd.pivot.schedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.schedule.Schedule;
 import org.eclipse.qvtd.pivot.schedule.ScheduleFactory;
 
+import com.google.common.collect.Iterables;
+
 /**
  * DatumCaches maintains the caches of ClassDatum and PropertyDatum that establish the inter-Mapping connectivity.
  */
 public class DatumCaches
 {
-	private final @NonNull RootDomainUsageAnalysis domainUsageAnalysis;
-	private final @NonNull ClassRelationships classRelationships;
+	protected final @NonNull RootDomainUsageAnalysis domainUsageAnalysis;
+	protected final @NonNull ContainmentAnalysis containmentAnalysis;
+	protected final @NonNull CompleteModel completeModel;
 
 	private final @NonNull Schedule schedule = ScheduleFactory.eINSTANCE.createSchedule();
 
@@ -76,19 +80,19 @@ public class DatumCaches
 	private @NonNull Map<@NonNull TypedModel, @NonNull Map<org.eclipse.ocl.pivot.@NonNull CompleteClass, @NonNull ClassDatum>> typedModel2completeClass2classDatum = new HashMap<>();
 	private @NonNull Map<@NonNull ClassDatum, @NonNull Map<@NonNull Property, @NonNull PropertyDatum>> classDatum2property2propertyDatum = new HashMap<>();
 
-	public DatumCaches(@NonNull RootDomainUsageAnalysis domainAnalysis, @NonNull ClassRelationships classRelationships) {
+	public DatumCaches(@NonNull RootDomainUsageAnalysis domainAnalysis, @NonNull ContainmentAnalysis containmentAnalysis) {
 		this.domainUsageAnalysis = domainAnalysis;
-		this.classRelationships = classRelationships;
+		this.containmentAnalysis = containmentAnalysis;
+		this.completeModel = domainAnalysis.getEnvironmentFactory().getCompleteModel();
 	}
 
 	private @NonNull Set<@NonNull PropertyDatum> analyseOclContainerCall(@NonNull TypedModel typedModel, @NonNull CompleteClass context) {
-
+		InheritanceAnalysis inheritanceAnalysis = containmentAnalysis.getInheritanceAnalysis();
 		Set<@NonNull PropertyDatum> result = new HashSet<>();
-
-		for (@NonNull CompleteClass parentClass : classRelationships.getContainerClasses(context)) {
+		for (@NonNull CompleteClass parentClass : containmentAnalysis.getContainerClasses(context)) {
 			for (Property prop : parentClass.getProperties(FeatureFilter.SELECT_NON_STATIC)) {
 				if (prop.isIsComposite()) {
-					Set<@NonNull CompleteClass> allSuperAndSubClasses = getAllSuperAndSubClassesIncludingSelf(context);
+					Set<@NonNull CompleteClass> allSuperAndSubClasses = inheritanceAnalysis.getAllSuperAndSelfAndSubClasses(context);
 					if (allSuperAndSubClasses.contains(getElementClass(prop))) {
 						// self.print("\tOCL Container property  for ");
 						// prop.println(" : ");
@@ -142,7 +146,7 @@ public class DatumCaches
 				assert ownedSource != null;
 				Type type = ownedSource.getType();
 				assert type != null;
-				CompleteClass context = classRelationships.getCompleteClass(type);
+				CompleteClass context = completeModel.getCompleteClass(type);
 				requisites.addAll(getOperationPropertyDatums(opCall, context, new HashMap<>(), new HashMap<>()));
 			}
 			else if (eObj instanceof NavigationAssignment) {
@@ -196,7 +200,7 @@ public class DatumCaches
 			if (context != null) { // FIXME is this check needed ?
 				result.addAll(context);
 			} else {
-				result.add(classRelationships.getCompleteClass(ClassUtil.nonNullState(varExp.getType())));
+				result.add(completeModel.getCompleteClass(ClassUtil.nonNullState(varExp.getType())));
 			}
 		} else if (oclExp instanceof CallExp) {
 			CallExp callExp = (CallExp) oclExp;
@@ -205,13 +209,13 @@ public class DatumCaches
 				OCLExpression ownedSource = callExp.getOwnedSource();
 				assert ownedSource != null;
 				for (@NonNull CompleteClass oclContainerOpContext : computeContexts(ownedSource, variable2BoundContext)) {
-					result.addAll(classRelationships.getContainerClasses(oclContainerOpContext));
+					Iterables.addAll(result, containmentAnalysis.getContainerClasses(oclContainerOpContext));
 				}
 			} else {
-				result.add(classRelationships.getCompleteClass(ClassUtil.nonNullState(callExp.getType())));
+				result.add(completeModel.getCompleteClass(ClassUtil.nonNullState(callExp.getType())));
 			}
 		} else if (oclExp instanceof ShadowExp) {
-			result.add(classRelationships.getCompleteClass(ClassUtil.nonNullState(((ShadowExp)oclExp).getType())));
+			result.add(completeModel.getCompleteClass(ClassUtil.nonNullState(((ShadowExp)oclExp).getType())));
 
 		} else {
 			throw new IllegalStateException("OCLExpression has not been considered yet");
@@ -234,14 +238,6 @@ public class DatumCaches
 	}
 
 	// Property datum analysis
-
-	private @NonNull Set<@NonNull CompleteClass> getAllSuperAndSubClassesIncludingSelf(@NonNull CompleteClass context) {
-		Set<@NonNull CompleteClass> result = new HashSet<>();
-		result.addAll(classRelationships.getAllSuperClasses(context));
-		result.addAll(classRelationships.getAllSubClasses(context));
-		result.add(context);
-		return result;
-	}
 
 	private @NonNull Set<@NonNull PropertyDatum> getAssignedPropertyDatums(@NonNull NavigationAssignment propAssign) {
 		Set<@NonNull PropertyDatum> result = new HashSet<>();
@@ -280,7 +276,7 @@ public class DatumCaches
 	}
 
 	public @NonNull ClassDatum getClassDatum(@NonNull TypedModel typedModel, org.eclipse.ocl.pivot.@NonNull Class aClass) {
-		CompleteClass completeClass = classRelationships.getCompleteClass(aClass);
+		CompleteClass completeClass = completeModel.getCompleteClass(aClass);
 		return getClassDatum(typedModel, completeClass);
 	}
 
@@ -424,7 +420,7 @@ public class DatumCaches
 	}
 
 	private @NonNull PropertyDatum getPropertyDatum(@NonNull TypedModel typedModel, org.eclipse.ocl.pivot.@NonNull Class context, @NonNull Property property) {
-		CompleteClass completeClass = classRelationships.getCompleteClass(context);
+		CompleteClass completeClass = completeModel.getCompleteClass(context);
 		return getPropertyDatum(typedModel, completeClass, property);
 	}
 
@@ -454,9 +450,8 @@ public class DatumCaches
 		TypedModel typedModel = classDatum.getTypedModel();
 		assert typedModel != null;
 		CompleteClass targetCompleteClass = classDatum.getCompleteClass();
-		org.eclipse.ocl.pivot.Class owningClass = property.getOwningClass();
-		assert owningClass != null;
-		CompleteClass hostCompleteClass = classRelationships.getCompleteClass(owningClass);
+		org.eclipse.ocl.pivot.Class owningClass = (org.eclipse.ocl.pivot.Class)PivotUtil.getOwningClass(property);
+		CompleteClass hostCompleteClass = completeModel.getCompleteClass(owningClass);
 		PropertyDatum propertyDatum = ScheduleFactory.eINSTANCE.createPropertyDatum();
 		propertyDatum.setTypedModel(typedModel);
 		propertyDatum.setProperty(property);

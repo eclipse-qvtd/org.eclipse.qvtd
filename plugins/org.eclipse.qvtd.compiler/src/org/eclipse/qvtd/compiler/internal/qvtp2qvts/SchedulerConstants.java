@@ -86,7 +86,7 @@ public abstract class SchedulerConstants
 
 	private final @NonNull EnvironmentFactory environmentFactory;
 	private final @NonNull Transformation transformation;
-	private final @NonNull ClassRelationships classRelationships;
+	private final @NonNull ContainmentAnalysis containmentAnalysis;
 	private final @NonNull RootDomainUsageAnalysis domainAnalysis;
 	private final @NonNull DatumCaches datumCaches;
 
@@ -135,10 +135,10 @@ public abstract class SchedulerConstants
 	protected SchedulerConstants(@NonNull EnvironmentFactory environmentFactory, @NonNull Transformation asTransformation) {
 		this.environmentFactory = environmentFactory;
 		this.transformation = asTransformation;
-		this.classRelationships = new ClassRelationships(environmentFactory);
+		this.containmentAnalysis = new ContainmentAnalysis(environmentFactory);
 		this.domainAnalysis = new QVTcoreDomainUsageAnalysis(environmentFactory);
 		domainAnalysis.analyzeTransformation(asTransformation);
-		this.datumCaches = new DatumCaches(domainAnalysis, classRelationships);
+		this.datumCaches = new DatumCaches(domainAnalysis, containmentAnalysis);
 		datumCaches.analyzeTransformation(asTransformation);
 		//
 		this.inputUsage = domainAnalysis.getInputUsage();
@@ -261,8 +261,8 @@ public abstract class SchedulerConstants
 		return classDatum2classDatumAnalysis.values();
 	}
 
-	public @NonNull ClassRelationships getClassRelationships() {
-		return classRelationships;
+	public @NonNull ContainmentAnalysis getContainmentAnalysis() {
+		return containmentAnalysis;
 	}
 
 	//	@SuppressWarnings("null")
