@@ -8,7 +8,7 @@
  * Contributors:
  *     E.D.Willink - initial API and implementation
  *******************************************************************************/
-package org.eclipse.qvtd.xtext.qvtimperative.tests;
+package org.eclipse.qvtd.compiler.tests;
 
 import java.util.ArrayList;
 import java.util.Collections;

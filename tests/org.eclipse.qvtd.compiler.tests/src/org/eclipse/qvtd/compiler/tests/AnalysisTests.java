@@ -8,7 +8,7 @@
  * Contributors:
  *     E.D.Willink - initial API and implementation
  *******************************************************************************/
-package org.eclipse.qvtd.xtext.qvtimperative.tests;
+package org.eclipse.qvtd.compiler.tests;
 
 import java.util.Set;
 
@@ -26,19 +26,53 @@ import org.eclipse.ocl.pivot.model.OCLstdlib;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.ParserException;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.ClassRelationships;
+import org.eclipse.qvtd.xtext.qvtbase.tests.XtextTestCase;
 import org.junit.Test;
 
 import com.google.common.collect.Sets;
 
-import junit.framework.TestCase;
-
-public class AnalysisTests extends TestCase
+public class AnalysisTests extends XtextTestCase
 {
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 		OCLstdlib.install();
 	}
+
+/*	@Test
+	public void testContainmentAnalysis_Delphi() throws ParserException {
+		OCLInternal ocl = OCLInternal.newInstance();
+		EnvironmentFactoryInternal environmentFactory = ocl.getEnvironmentFactory();
+		CompleteModel completeModel = environmentFactory.getCompleteModel();
+		StandardLibrary standardLibrary = environmentFactory.getStandardLibrary();
+		PivotMetamodelManager metamodelManager = environmentFactory.getMetamodelManager();
+		//
+		CompleteClass oclAnyClass = completeModel.getCompleteClass(standardLibrary.getOclAnyType());
+		//
+		String delphiNsUri = "http://www.xtext.org/example/delphi/Delphi";
+		String astmNsUri = "http://modelum.es/modernization/astm";
+		String ecoreNsUri = ClassUtil.nonNullState(EcorePackage.eNS_URI);
+		URI delphiURI = getProjectFileURI("models/Delphi.ecore");
+		ClassUtil.nonNullState(metamodelManager.loadResource(delphiURI, "", environmentFactory.getResourceSet()));
+		CompletePackage astmPackage = ClassUtil.nonNullState(completeModel.getCompletePackageByURI(astmNsUri));
+		CompletePackage delphiPackage = ClassUtil.nonNullState(completeModel.getCompletePackageByURI(delphiNsUri));
+		CompleteClass CSTraceClass = ClassUtil.nonNullState(delphiPackage.getOwnedCompleteClass("CSTrace"));
+		CompleteClass expressionClass = ClassUtil.nonNullState(delphiPackage.getOwnedCompleteClass("expression"));
+		CompleteClass VisitableClass = ClassUtil.nonNullState(astmPackage.getOwnedCompleteClass("Visitable"));
+		//
+		ClassRelationships inheritanceAnalysis = new ClassRelationships(environmentFactory);
+		//
+		Set<@NonNull CompleteClass> VisitableContainerClasses = inheritanceAnalysis.getContainerClasses(VisitableClass);
+		assertEquals(Sets.newHashSet(), VisitableContainerClasses);
+		//
+		Set<@NonNull CompleteClass> CSTraceContainerClasses = inheritanceAnalysis.getContainerClasses(CSTraceClass);
+		assertEquals(Sets.newHashSet(), CSTraceContainerClasses);
+		//
+		Set<@NonNull CompleteClass> expressionContainerClasses = inheritanceAnalysis.getContainerClasses(expressionClass);
+		assertEquals(Sets.newHashSet(), expressionContainerClasses);
+		//
+		ocl.dispose();
+	} */
 
 	@Test
 	public void testContainmentAnalysis_Ecore() throws ParserException {
@@ -61,6 +95,7 @@ public class AnalysisTests extends TestCase
 		CompleteClass eEnumClass = ClassUtil.nonNullState(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.EENUM.getName()));
 		CompleteClass eEnumLiteralClass = ClassUtil.nonNullState(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.EENUM_LITERAL.getName()));
 		CompleteClass eFactoryClass = ClassUtil.nonNullState(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.EFACTORY.getName()));
+		CompleteClass eGenericTypeClass = ClassUtil.nonNullState(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.EGENERIC_TYPE.getName()));
 		CompleteClass eModelElementClass = ClassUtil.nonNullState(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.EMODEL_ELEMENT.getName()));
 		CompleteClass eNamedElementClass = ClassUtil.nonNullState(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.ENAMED_ELEMENT.getName()));
 		CompleteClass eOperationClass = ClassUtil.nonNullState(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.EOPERATION.getName()));
@@ -74,7 +109,7 @@ public class AnalysisTests extends TestCase
 		ClassRelationships inheritanceAnalysis = new ClassRelationships(environmentFactory);
 		//
 		Set<@NonNull CompleteClass> oclAnyContainerClasses = inheritanceAnalysis.getContainerClasses(oclAnyClass);
-		assertEquals(Sets.newHashSet(), oclAnyContainerClasses);
+		assertTrue((100 <= oclAnyContainerClasses.size()) && (oclAnyContainerClasses.size() <= 200));		// Currently 142
 		//
 		Set<@NonNull CompleteClass> eAnnotationContainerClasses = inheritanceAnalysis.getContainerClasses(eAnnotationClass);
 		assertEquals(Sets.newHashSet(eAnnotationClass, eAttributeClass, eClassClass, eClassifierClass, eDataTypeClass, eEnumClass, eEnumLiteralClass, eFactoryClass, eModelElementClass, eNamedElementClass, eOperationClass, ePackageClass, eParameterClass, eReferenceClass, eStructuralFeatureClass, eTypeParameterClass, eTypedElementClass), eAnnotationContainerClasses);
@@ -82,11 +117,20 @@ public class AnalysisTests extends TestCase
 		Set<@NonNull CompleteClass> eStructuralFeatureContainerClasses = inheritanceAnalysis.getContainerClasses(eStructuralFeatureClass);
 		assertEquals(Sets.newHashSet(eClassClass), eStructuralFeatureContainerClasses);
 		//
-		Set<@NonNull CompleteClass> eReferenceSubClasses = inheritanceAnalysis.getContainerClasses(eReferenceClass);
-		assertEquals(Sets.newHashSet(eClassClass), eReferenceSubClasses);
+		Set<@NonNull CompleteClass> eReferenceContainerClasses = inheritanceAnalysis.getContainerClasses(eReferenceClass);
+		assertEquals(Sets.newHashSet(eClassClass), eReferenceContainerClasses);
 		//
-		Set<@NonNull CompleteClass> eClassifierSubClasses = inheritanceAnalysis.getContainerClasses(eClassifierClass);
-		assertEquals(Sets.newHashSet(ePackageClass), eClassifierSubClasses);
+		Set<@NonNull CompleteClass> eClassifierContainerClasses = inheritanceAnalysis.getContainerClasses(eClassifierClass);
+		assertEquals(Sets.newHashSet(ePackageClass), eClassifierContainerClasses);
+		//
+		Set<@NonNull CompleteClass> eTypedElementContainerClasses = inheritanceAnalysis.getContainerClasses(eTypedElementClass);
+		assertEquals(Sets.newHashSet(eClassClass, eOperationClass), eTypedElementContainerClasses);
+		//
+		Set<@NonNull CompleteClass> eModelElementContainerClasses = inheritanceAnalysis.getContainerClasses(eModelElementClass);
+		assertEquals(Sets.newHashSet(eAnnotationClass, eAttributeClass, eClassClass, eClassifierClass, eDataTypeClass, eEnumClass, eEnumLiteralClass, eFactoryClass, eModelElementClass, eNamedElementClass, eOperationClass, ePackageClass, eParameterClass, eReferenceClass, eStructuralFeatureClass, eTypeParameterClass, eTypedElementClass), eModelElementContainerClasses);
+		//
+		Set<@NonNull CompleteClass> eGenericTypeContainerClasses = inheritanceAnalysis.getContainerClasses(eGenericTypeClass);
+		assertEquals(Sets.newHashSet(eAttributeClass, eClassClass, eGenericTypeClass, eOperationClass, eParameterClass, eReferenceClass, eStructuralFeatureClass, eTypeParameterClass, eTypedElementClass), eGenericTypeContainerClasses);
 		//
 		ocl.dispose();
 	}
