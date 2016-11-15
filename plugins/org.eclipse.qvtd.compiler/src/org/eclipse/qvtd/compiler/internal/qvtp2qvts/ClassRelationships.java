@@ -89,7 +89,7 @@ public class ClassRelationships
 		initializeMaps(metamodelManager.getASResourceSet());
 	}
 
-	private void addContainerClassForTypeAndSubtypes(@NonNull CompleteClass containerClass, @NonNull Property containmentProperty, @NonNull CompleteClass type) {
+	private void addContainerClassForType(@NonNull CompleteClass containerClass, @NonNull Property containmentProperty, @NonNull CompleteClass type) {
 		Set<@NonNull ContainerClass> detailedContainerClasses = class2detailedContainerClasses.get(type);
 		Set<@NonNull CompleteClass> containerClasses = class2containerClasses.get(type);
 		if (detailedContainerClasses == null) {
@@ -104,19 +104,25 @@ public class ClassRelationships
 		detailedContainerClasses.add(new ContainerClass(containerClass, containmentProperty));
 		containerClasses.add(containerClass);
 
-		for (@NonNull CompleteClass subType : getDirectSubClasses(type)) {
-			addContainerClassForTypeAndSubtypes(containerClass, containmentProperty, subType);
-		}
+		//		for (@NonNull CompleteClass subType : getDirectSubClasses(type)) {
+		//			addContainerClassForTypeAndSubtypes(containerClass, containmentProperty, subType);
+		//		}
 	}
 
-	private void computeClass2ContainerClasses(@NonNull CompleteClass aClass) {
+	private void computeClass2ContainerClasses(@NonNull CompleteClass containerCompleteClass) {
 
-		for (@NonNull Property property : aClass.getProperties(FeatureFilter.SELECT_NON_STATIC)) {
+		for (@NonNull Property property : containerCompleteClass.getProperties(FeatureFilter.SELECT_NON_STATIC)) {
 			if (property.isIsComposite()) {
 				Type propType = getType(property);
 				//				if (propType instanceof org.eclipse.ocl.pivot.Class) {
-				CompleteClass completeClass = getCompleteClass(propType);
-				addContainerClassForTypeAndSubtypes(aClass, property, completeClass);
+				CompleteClass containedCompleteClass = getCompleteClass(propType);
+				for (@NonNull CompleteClass superContainedCompleteClass : getAllSuperClasses(containedCompleteClass)) {
+					addContainerClassForType(containerCompleteClass, property, superContainedCompleteClass);
+				}
+				addContainerClassForType(containerCompleteClass, property, containedCompleteClass);
+				for (@NonNull CompleteClass subContainedCompleteClass : getAllSubClasses(containedCompleteClass)) {
+					addContainerClassForType(containerCompleteClass, property, subContainedCompleteClass);
+				}
 				//				}
 			}
 		}
