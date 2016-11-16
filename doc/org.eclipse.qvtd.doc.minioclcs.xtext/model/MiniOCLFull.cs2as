@@ -316,5 +316,14 @@ name_resolution {
 			 for all excepting ownedVariable
 			    provides occluding Variable using  ownedVariable;
 		}
+		IteratorExp {
+			in current_scope 
+				provides occluding Variable using ownedIterator;
+		}
+		IterateExp {
+			in current_scope 
+				for ownedBody
+					provides occluding Variable using ownedIterator, ownedResult;
+		}
 	}
 }

@@ -486,5 +486,19 @@ def : _unqualified_env_Variable(child : ocl::OclElement) : lookup::LookupEnviron
       
    else parentEnv_Variable()
    endif
+context IteratorExp
+def : _unqualified_env_Variable(child : ocl::OclElement) : lookup::LookupEnvironment =
+   parentEnv_Variable().nestedEnv()
+      .addElements(ownedIterator)
+      
+context IterateExp
+def : _unqualified_env_Variable(child : ocl::OclElement) : lookup::LookupEnvironment =
+   if ownedBody->includes(child)
+   then parentEnv_Variable().nestedEnv()
+      .addElements(ownedIterator)
+      .addElements(ownedResult)
+      
+   else parentEnv_Variable()
+   endif
 
 endpackage
