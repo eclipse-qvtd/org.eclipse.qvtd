@@ -18,6 +18,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.CompleteModel;
 import org.eclipse.ocl.pivot.CompletePackage;
+import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.ocl.pivot.internal.manager.PivotMetamodelManager;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
@@ -40,7 +41,7 @@ public class AnalysisTests extends XtextTestCase
 		OCLstdlib.install();
 	}
 
-/*	@Test
+	/*	@Test
 	public void testContainmentAnalysis_Delphi() throws ParserException {
 		OCLInternal ocl = OCLInternal.newInstance();
 		EnvironmentFactoryInternal environmentFactory = ocl.getEnvironmentFactory();
@@ -76,7 +77,7 @@ public class AnalysisTests extends XtextTestCase
 	} */
 
 	@Test
-	public void testContainmentAnalysis_Ecore() throws ParserException {
+	public void testContainmentAnalysis_ContainerClass_Ecore() throws ParserException {
 		OCLInternal ocl = OCLInternal.newInstance();
 		EnvironmentFactoryInternal environmentFactory = ocl.getEnvironmentFactory();
 		CompleteModel completeModel = environmentFactory.getCompleteModel();
@@ -132,6 +133,66 @@ public class AnalysisTests extends XtextTestCase
 		//
 		Set<@NonNull CompleteClass> eGenericTypeContainerClasses = Sets.newHashSet(containmentAnalysis.getContainerClasses(eGenericTypeClass));
 		assertEquals(Sets.newHashSet(eAttributeClass, eClassClass, eGenericTypeClass, eOperationClass, eParameterClass, eReferenceClass, eStructuralFeatureClass, eTypeParameterClass, eTypedElementClass), eGenericTypeContainerClasses);
+		//
+		ocl.dispose();
+	}
+
+	@Test
+	public void testContainmentAnalysis_ContainmentProperty_Ecore() throws ParserException {
+		OCLInternal ocl = OCLInternal.newInstance();
+		EnvironmentFactoryInternal environmentFactory = ocl.getEnvironmentFactory();
+		CompleteModel completeModel = environmentFactory.getCompleteModel();
+		StandardLibrary standardLibrary = environmentFactory.getStandardLibrary();
+		PivotMetamodelManager metamodelManager = environmentFactory.getMetamodelManager();
+		//
+		CompleteClass oclAnyClass = completeModel.getCompleteClass(standardLibrary.getOclAnyType());
+		//
+		String ecoreNsUri = ClassUtil.nonNullState(EcorePackage.eNS_URI);
+		ClassUtil.nonNullState(metamodelManager.loadResource(URI.createURI(ecoreNsUri), "", environmentFactory.getResourceSet()));
+		CompletePackage ecorePackage = ClassUtil.nonNullState(completeModel.getCompletePackageByURI(ecoreNsUri));
+		CompleteClass eAnnotationClass = ClassUtil.nonNullState(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.EANNOTATION.getName()));
+		CompleteClass eClassClass = ClassUtil.nonNullState(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.ECLASS.getName()));
+		CompleteClass eClassifierClass = ClassUtil.nonNullState(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.ECLASSIFIER.getName()));
+		CompleteClass eGenericTypeClass = ClassUtil.nonNullState(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.EGENERIC_TYPE.getName()));
+		CompleteClass eModelElementClass = ClassUtil.nonNullState(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.EMODEL_ELEMENT.getName()));
+		CompleteClass eOperationClass = ClassUtil.nonNullState(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.EOPERATION.getName()));
+		CompleteClass ePackageClass = ClassUtil.nonNullState(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.EPACKAGE.getName()));
+		CompleteClass eReferenceClass = ClassUtil.nonNullState(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.EREFERENCE.getName()));
+		CompleteClass eStructuralFeatureClass = ClassUtil.nonNullState(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.ESTRUCTURAL_FEATURE.getName()));
+		CompleteClass eTypeParameterClass = ClassUtil.nonNullState(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.ETYPE_PARAMETER.getName()));
+		CompleteClass eTypedElementClass = ClassUtil.nonNullState(ecorePackage.getOwnedCompleteClass(EcorePackage.Literals.ETYPED_ELEMENT.getName()));
+		//
+		// EModelElement is not an EObject: Property eAnnotation__contents = ClassUtil.nonNullState(eAnnotationClass.getProperty(EcorePackage.Literals.EANNOTATION__CONTENTS.getName()));
+		Property eClass__eGenericSuperType = ClassUtil.nonNullState(eClassClass.getProperty(EcorePackage.Literals.ECLASS__EGENERIC_SUPER_TYPES.getName()));
+		Property eClass__eStructuralFeatures = ClassUtil.nonNullState(eClassClass.getProperty(EcorePackage.Literals.ECLASS__ESTRUCTURAL_FEATURES.getName()));
+		Property eGenericType__eLowerBound = ClassUtil.nonNullState(eGenericTypeClass.getProperty(EcorePackage.Literals.EGENERIC_TYPE__ELOWER_BOUND.getName()));
+		Property eGenericType__eTypeArguments = ClassUtil.nonNullState(eGenericTypeClass.getProperty(EcorePackage.Literals.EGENERIC_TYPE__ETYPE_ARGUMENTS.getName()));
+		Property eGenericType__eUpperBound = ClassUtil.nonNullState(eGenericTypeClass.getProperty(EcorePackage.Literals.EGENERIC_TYPE__EUPPER_BOUND.getName()));
+		Property eModelElement__eAnnotations = ClassUtil.nonNullState(eModelElementClass.getProperty(EcorePackage.Literals.EMODEL_ELEMENT__EANNOTATIONS.getName()));
+		Property eOperation__eGenericExceptions = ClassUtil.nonNullState(eOperationClass.getProperty(EcorePackage.Literals.EOPERATION__EGENERIC_EXCEPTIONS.getName()));
+		Property ePackage__eClassifiers = ClassUtil.nonNullState(ePackageClass.getProperty(EcorePackage.Literals.EPACKAGE__ECLASSIFIERS.getName()));
+		Property eTypedElement__eGenericType = ClassUtil.nonNullState(eTypedElementClass.getProperty(EcorePackage.Literals.ETYPED_ELEMENT__EGENERIC_TYPE.getName()));
+		Property eTypeParameter__eBounds = ClassUtil.nonNullState(eTypeParameterClass.getProperty(EcorePackage.Literals.ETYPE_PARAMETER__EBOUNDS.getName()));
+		//
+		ContainmentAnalysis containmentAnalysis = new ContainmentAnalysis(environmentFactory);
+		//
+		Set<@NonNull Property> oclAnyContainerProperties = Sets.newHashSet(containmentAnalysis.getContainmentProperties(oclAnyClass));
+		assertTrue((100 <= oclAnyContainerProperties.size()) && (oclAnyContainerProperties.size() <= 120));		// Currently 104
+		//
+		Set<@NonNull Property> eAnnotationContainerProperties = Sets.newHashSet(containmentAnalysis.getContainmentProperties(eAnnotationClass));
+		assertEquals(Sets.newHashSet(/*eAnnotation__contents,*/ eModelElement__eAnnotations), eAnnotationContainerProperties);
+		//
+		Set<@NonNull Property> eStructuralFeatureContainerProperties = Sets.newHashSet(containmentAnalysis.getContainmentProperties(eStructuralFeatureClass));
+		assertEquals(Sets.newHashSet(/*eAnnotation__contents,*/ eClass__eStructuralFeatures), eStructuralFeatureContainerProperties);
+		//
+		Set<@NonNull Property> eReferenceSubProperties = Sets.newHashSet(containmentAnalysis.getContainmentProperties(eReferenceClass));
+		assertEquals(Sets.newHashSet(/*eAnnotation__contents,*/ eClass__eStructuralFeatures), eReferenceSubProperties);
+		//
+		Set<@NonNull Property> eClassifierSubProperties = Sets.newHashSet(containmentAnalysis.getContainmentProperties(eClassifierClass));
+		assertEquals(Sets.newHashSet(/*eAnnotation__contents,*/ ePackage__eClassifiers), eClassifierSubProperties);
+		//
+		Set<@NonNull Property> eGenericTypeSubProperties = Sets.newHashSet(containmentAnalysis.getContainmentProperties(eGenericTypeClass));
+		assertEquals(Sets.newHashSet(eClass__eGenericSuperType, eGenericType__eLowerBound, eGenericType__eTypeArguments, eGenericType__eUpperBound, eOperation__eGenericExceptions, eTypeParameter__eBounds, eTypedElement__eGenericType), eGenericTypeSubProperties);
 		//
 		ocl.dispose();
 	}
