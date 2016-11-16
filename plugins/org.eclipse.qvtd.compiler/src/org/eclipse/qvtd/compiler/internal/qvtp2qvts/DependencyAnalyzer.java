@@ -25,6 +25,7 @@ import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.CallExp;
 import org.eclipse.ocl.pivot.CollectionItem;
 import org.eclipse.ocl.pivot.CollectionLiteralExp;
 import org.eclipse.ocl.pivot.CollectionLiteralPart;
@@ -71,6 +72,7 @@ import org.eclipse.ocl.pivot.utilities.ParserException;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.TracingOption;
 import org.eclipse.qvtd.compiler.CompilerConstants;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ContainmentAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
@@ -113,7 +115,7 @@ public class DependencyAnalyzer
 		private final @NonNull Map<@NonNull Property, @NonNull NavigationDependencyStep> property2step = new HashMap<>();
 
 		protected DependencyStepFactory(@NonNull DomainUsage usage) {
-			this.usage = usage;
+			this.usage = ClassUtil.nonNullState(usage);
 		}
 
 		public @NonNull ClassDependencyStep createClassDependencyStep(org.eclipse.ocl.pivot.@NonNull Class type, @NonNull Element element) {
@@ -145,6 +147,15 @@ public class DependencyAnalyzer
 			return dependencyStep;
 		}
 
+		public @NonNull NavigationDependencyStep createPropertyDependencyStep(@NonNull Property containerProperty, @NonNull OperationCallExp oclContainerCallExp) {
+			NavigationDependencyStep dependencyStep = property2step.get(containerProperty);
+			if (dependencyStep == null) {
+				dependencyStep = new NavigationDependencyStep(usage, containerProperty, oclContainerCallExp);
+				property2step.put(containerProperty, dependencyStep);
+			}
+			return dependencyStep;
+		}
+
 		public @NonNull DomainUsage getUsage() {
 			return usage;
 		}
@@ -168,7 +179,7 @@ public class DependencyAnalyzer
 
 		public abstract String getName();
 
-		public @Nullable NavigationCallExp getNavigationCallExp() {
+		public @Nullable CallExp getCallExp() {
 			return null;
 		}
 
@@ -216,7 +227,7 @@ public class DependencyAnalyzer
 	{
 		protected final @NonNull Property property;
 
-		public NavigationDependencyStep(@NonNull DomainUsage usage, @NonNull Property property, @NonNull NavigationCallExp element) {
+		public NavigationDependencyStep(@NonNull DomainUsage usage, @NonNull Property property, @NonNull CallExp element) {
 			super(usage, element);
 			this.property = property;
 		}
@@ -238,8 +249,8 @@ public class DependencyAnalyzer
 		}
 
 		@Override
-		public @NonNull NavigationCallExp getNavigationCallExp() {
-			return (NavigationCallExp) element;
+		public @NonNull CallExp getCallExp() {
+			return (CallExp) element;
 		}
 
 		@Override
@@ -619,18 +630,49 @@ public class DependencyAnalyzer
 
 		private @NonNull DependencyPaths analyzeOperationCallExp_oclContainer(@NonNull OperationCallExp operationCallExp, @NonNull List<@NonNull DependencyPaths> sourceAndArgumentPaths) {
 			assert sourceAndArgumentPaths.size() == 1;
+			ContainmentAnalysis containmentAnalysis = scheduler.getContainmentAnalysis();
 			DependencyPaths sourcePath = sourceAndArgumentPaths.get(0);
-			DependencyPaths result = emptyDependencyPaths;
-			for (@NonNull List<@NonNull DependencyStep> steps : sourcePath.getReturnPaths()) {
+			Iterable<@NonNull List<@NonNull DependencyStep>> oldReturnPaths = sourcePath.getReturnPaths();
+			//
+			//	The simple case of a single property can be appended to the existing path.
+			//
+			if (Iterables.size(oldReturnPaths) == 1) {
+				List<@NonNull DependencyStep> steps = oldReturnPaths.iterator().next();
 				int size = steps.size();
 				assert size > 0;
 				DependencyStep lastStep = steps.get(size-1);
-				CompleteClass sourceClass = completeModel.getCompleteClass(lastStep.getElementalType());
-				for (@NonNull CompleteClass containerClass : scheduler.getContainmentAnalysis().getContainerClasses(sourceClass)) {
-					ClassDependencyStep classDependencyStep = createClassDependencyStep(containerClass.getPrimaryClass(), operationCallExp);
-					result = result.addReturn(createDependencyPaths(classDependencyStep));
+				CompleteClass containedClass = completeModel.getCompleteClass(lastStep.getElementalType());
+				Iterable<@NonNull Property> containmentProperties = containmentAnalysis.getContainmentProperties(containedClass);	// FIXME exploit an oclAsType
+				if (Iterables.size(containmentProperties) == 1) {
+					Property containmentProperty = containmentProperties.iterator().next();
+					Property containerProperty = containmentProperty.getOpposite();
+					if (containerProperty != null) {
+						return sourcePath.append(createPropertyDependencyStep(containerProperty, operationCallExp));
+					}
 				}
 			}
+			//
+			//	The nore complex case risks a combinatorial explosion of possible paths. Therefore the new container types become the return types,
+			//	and each possible containment is a hidden path in addition to all the sourcepaths.
+			//
+			Set<@NonNull List<@NonNull DependencyStep>> newReturnPaths = new HashSet<>();
+			Set<@NonNull List<@NonNull DependencyStep>> newHiddenPaths = new HashSet<>();
+			Iterables.addAll(newHiddenPaths, oldReturnPaths);
+			Iterables.addAll(newHiddenPaths, sourcePath.getHiddenPaths());
+			for (@NonNull List<@NonNull DependencyStep> steps : oldReturnPaths) {
+				int size = steps.size();
+				assert size > 0;
+				DependencyStep lastStep = steps.get(size-1);
+				CompleteClass containedClass = completeModel.getCompleteClass(lastStep.getElementalType());
+				Iterable<@NonNull Property> containmentProperties = containmentAnalysis.getContainmentProperties(containedClass);	// FIXME exploit an oclAsType
+				for (@NonNull Property containmentProperty : containmentProperties) {
+					org.eclipse.ocl.pivot.Class containerClass = PivotUtil.getOwningClass(containmentProperty);
+					ClassDependencyStep classDependencyStep = createClassDependencyStep(containerClass, operationCallExp);
+					newReturnPaths.add(Lists.newArrayList(classDependencyStep));
+					newHiddenPaths.add(Lists.newArrayList(classDependencyStep, createPropertyDependencyStep(containmentProperty, operationCallExp)));
+				}
+			}
+			DependencyPaths result = createDependencyPaths(newReturnPaths, newHiddenPaths);
 			if (RETURN.isActive()) {
 				StringBuilder s = new StringBuilder();
 				for (@NonNull DependencyPaths paths : sourceAndArgumentPaths) {
@@ -1442,6 +1484,15 @@ public class DependencyAnalyzer
 		return factory.createPropertyDependencyStep(navigationCallExp);
 	}
 
+	protected @NonNull NavigationDependencyStep createPropertyDependencyStep(@NonNull Property containmentProperty, @NonNull OperationCallExp oclContainerCallExp) {
+		DomainUsage usage = getUsage(containmentProperty);
+		if (usage == null) {
+			usage = getUsage(containmentProperty);
+		}
+		DependencyStepFactory factory = getDependencyStepFactory(usage);
+		return factory.createPropertyDependencyStep(containmentProperty, oclContainerCallExp);
+	}
+
 	public void dump() {
 		List<@NonNull OperationId> operationIds = new ArrayList<>(operation2paths2analysis.keySet());
 		Collections.sort(operationIds, new Comparator<@NonNull OperationId>(){
@@ -1485,7 +1536,7 @@ public class DependencyAnalyzer
 	}
 
 	protected @NonNull DomainUsage getUsage(@NonNull Element element) {
-		DomainUsage usage = domainUsageAnalysis.basicGetUsage(element);
+		DomainUsage usage = domainUsageAnalysis.getUsage(element);
 		assert usage != null;
 		return usage;
 	}

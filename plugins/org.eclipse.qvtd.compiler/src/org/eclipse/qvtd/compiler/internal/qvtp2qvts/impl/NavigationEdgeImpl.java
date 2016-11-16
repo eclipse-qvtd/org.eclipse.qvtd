@@ -19,6 +19,9 @@ import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
 public class NavigationEdgeImpl extends NavigableEdgeImpl
 {
 	private static @NonNull NavigationEdgeImpl create(@NonNull EdgeRole edgeRole, @NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
+		if ("ownedCallExp".equals(source2targetProperty.getName())) {
+			edgeRole.toString();
+		}
 		NavigationEdgeImpl edge = new NavigationEdgeImpl();
 		edge.initialize(edgeRole, sourceNode, source2targetProperty, targetNode);
 		return edge;

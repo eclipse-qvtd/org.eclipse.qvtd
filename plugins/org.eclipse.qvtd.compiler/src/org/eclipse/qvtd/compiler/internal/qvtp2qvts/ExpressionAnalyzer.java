@@ -297,8 +297,8 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@NonNull
 		return RegionUtil.createCastEdge(sourceNode, castProperty, castNode);
 	}
 
-	protected @NonNull Node createDataTypeNode(@NonNull Node sourceNode, @NonNull NavigationCallExp callExp) {
-		return RegionUtil.createDataTypeNode(sourceNode, callExp);
+	protected @NonNull Node createDataTypeNode(@NonNull Node sourceNode, @NonNull Property property, @NonNull NavigationCallExp navigationCallExp) {
+		return RegionUtil.createDataTypeNode(sourceNode, navigationCallExp);
 	}
 
 	protected @NonNull Node createDependencyNode(@NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
@@ -755,7 +755,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@NonNull
 			if (type instanceof DataType) {
 				targetNode = sourceNode.getNavigationTarget(referredProperty);
 				if (targetNode == null) {
-					targetNode = createDataTypeNode(sourceNode, navigationCallExp);
+					targetNode = createDataTypeNode(sourceNode, referredProperty, navigationCallExp);
 				}
 			}
 			else {

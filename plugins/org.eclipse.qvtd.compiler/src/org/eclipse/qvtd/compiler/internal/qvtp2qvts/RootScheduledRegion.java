@@ -242,9 +242,9 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 	}
 
 	private void addProducedEdge(@NonNull NavigableEdge producedEdge) {
-		PropertyDatum propertyDatum = getPropertyDatum(producedEdge);
+		PropertyDatum propertyDatum = basicGetPropertyDatum(producedEdge);
 		if (propertyDatum == null) {
-			propertyDatum = getPropertyDatum(producedEdge);		// FIXME debugging
+			propertyDatum = basicGetPropertyDatum(producedEdge);		// FIXME debugging
 		}
 		assert propertyDatum != null;
 		addProducedEdge(producedEdge, propertyDatum);
@@ -310,6 +310,70 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 		}
 		Edges.USED_BINDING.createEdge(this, joinNode, null, usedNode);
 	} */
+
+	protected @Nullable PropertyDatum basicGetPropertyDatum(@NonNull NavigableEdge producedEdge) {
+		assert !producedEdge.isCast();				// Handled by caller
+		Property forwardProperty = producedEdge.getProperty();
+		ClassDatumAnalysis classDatumAnalysis = producedEdge.getSource().getClassDatumAnalysis();
+		ClassDatum forwardClassDatum = classDatumAnalysis.getElementalClassDatum();
+		//		PropertyDatum forwardPropertyDatum = getSchedulerConstants().getPropertyDatum(forwardClassDatum, property);
+		//		if (forwardPropertyDatum.getClassDatum() == forwardClassDatum) {
+		//			return forwardPropertyDatum;
+		//		}
+		Iterable<@NonNull PropertyDatum> forwardPropertyDatums = getSchedulerConstants().getAllPropertyDatums(forwardClassDatum);
+		for (PropertyDatum propertyDatum : forwardPropertyDatums) {
+			if ((propertyDatum.getProperty() == forwardProperty) && (propertyDatum.getClassDatum() == forwardClassDatum)) {
+				return propertyDatum;
+			}
+		}
+		PropertyDatum bestPropertyDatum = null;
+		for (PropertyDatum propertyDatum : forwardPropertyDatums) {
+			if (propertyDatum.getProperty() == forwardProperty) {
+				if (bestPropertyDatum == null) {
+					bestPropertyDatum = propertyDatum;
+				}
+				else {
+					CompleteClass completeClass = propertyDatum.getClassDatum().getCompleteClass();
+					assert completeClass != null;
+					Set<@NonNull CompleteClass> allSuperCompleteClasses = Sets.newHashSet(completeClass.getProperSuperCompleteClasses());
+					if (allSuperCompleteClasses.contains(bestPropertyDatum.getClassDatum().getCompleteClass())) {
+						bestPropertyDatum = propertyDatum;
+					}
+				}
+			}
+		}
+		if (bestPropertyDatum != null) {
+			return bestPropertyDatum;
+		}
+		Property reverseProperty = forwardProperty.getOpposite();
+		classDatumAnalysis = producedEdge.getTarget().getClassDatumAnalysis();
+		ClassDatum reverseClassDatum = classDatumAnalysis.getElementalClassDatum();
+		Iterable<@NonNull PropertyDatum> reversePropertyDatums = getSchedulerConstants().getAllPropertyDatums(reverseClassDatum);
+		for (PropertyDatum propertyDatum : reversePropertyDatums) {
+			if ((propertyDatum.getProperty() == reverseProperty) && (propertyDatum.getClassDatum() == reverseClassDatum)) {
+				return propertyDatum;
+			}
+		}
+		for (PropertyDatum propertyDatum : reversePropertyDatums) {
+			if (propertyDatum.getProperty() == reverseProperty) {
+				if (bestPropertyDatum == null) {
+					bestPropertyDatum = propertyDatum;
+				}
+				else {
+					CompleteClass completeClass = propertyDatum.getClassDatum().getCompleteClass();
+					assert completeClass != null;
+					Set<@NonNull CompleteClass> allSuperCompleteClasses = Sets.newHashSet(completeClass.getProperSuperCompleteClasses());
+					if (allSuperCompleteClasses.contains(bestPropertyDatum.getClassDatum().getCompleteClass())) {
+						bestPropertyDatum = propertyDatum;
+					}
+				}
+			}
+		}
+		if (bestPropertyDatum != null) {
+			return bestPropertyDatum;
+		}
+		return null;
+	}
 
 	/**
 	 * Identify all the classes whose instances may be required as independent mapping inputs.
@@ -1058,83 +1122,21 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 		return name;
 	}
 
-	protected @Nullable PropertyDatum getPropertyDatum(@NonNull NavigableEdge producedEdge) {
-		assert !producedEdge.isCast();				// Handled by caller
-		Property property = producedEdge.getProperty();
-		ClassDatumAnalysis classDatumAnalysis = producedEdge.getSource().getClassDatumAnalysis();
-		ClassDatum forwardClassDatum = classDatumAnalysis.getElementalClassDatum();
-		//		PropertyDatum forwardPropertyDatum = getSchedulerConstants().getPropertyDatum(forwardClassDatum, property);
-		//		if (forwardPropertyDatum.getClassDatum() == forwardClassDatum) {
-		//			return forwardPropertyDatum;
-		//		}
-		Iterable<@NonNull PropertyDatum> forwardPropertyDatums = getSchedulerConstants().getAllPropertyDatums(forwardClassDatum);
-		for (PropertyDatum propertyDatum : forwardPropertyDatums) {
-			if ((propertyDatum.getProperty() == property) && (propertyDatum.getClassDatum() == forwardClassDatum)) {
-				return propertyDatum;
-			}
-		}
-		PropertyDatum bestPropertyDatum = null;
-		for (PropertyDatum propertyDatum : forwardPropertyDatums) {
-			if (propertyDatum.getProperty() == property) {
-				if (bestPropertyDatum == null) {
-					bestPropertyDatum = propertyDatum;
-				}
-				else {
-					CompleteClass completeClass = propertyDatum.getClassDatum().getCompleteClass();
-					assert completeClass != null;
-					Set<@NonNull CompleteClass> allSuperCompleteClasses = Sets.newHashSet(completeClass.getProperSuperCompleteClasses());
-					if (allSuperCompleteClasses.contains(bestPropertyDatum.getClassDatum().getCompleteClass())) {
-						bestPropertyDatum = propertyDatum;
-					}
-				}
-			}
-		}
-		if (bestPropertyDatum != null) {
-			return bestPropertyDatum;
-		}
-		property = property.getOpposite();
-		classDatumAnalysis = producedEdge.getTarget().getClassDatumAnalysis();
-		ClassDatum reverseClassDatum = classDatumAnalysis.getElementalClassDatum();
-		Iterable<@NonNull PropertyDatum> reversePropertyDatums = getSchedulerConstants().getAllPropertyDatums(reverseClassDatum);
-		for (PropertyDatum propertyDatum : reversePropertyDatums) {
-			if ((propertyDatum.getProperty() == property) && (propertyDatum.getClassDatum() == reverseClassDatum)) {
-				return propertyDatum;
-			}
-		}
-		for (PropertyDatum propertyDatum : reversePropertyDatums) {
-			if (propertyDatum.getProperty() == property) {
-				if (bestPropertyDatum == null) {
-					bestPropertyDatum = propertyDatum;
-				}
-				else {
-					CompleteClass completeClass = propertyDatum.getClassDatum().getCompleteClass();
-					assert completeClass != null;
-					Set<@NonNull CompleteClass> allSuperCompleteClasses = Sets.newHashSet(completeClass.getProperSuperCompleteClasses());
-					if (allSuperCompleteClasses.contains(bestPropertyDatum.getClassDatum().getCompleteClass())) {
-						bestPropertyDatum = propertyDatum;
-					}
-				}
-			}
-		}
-		if (bestPropertyDatum != null) {
-			return bestPropertyDatum;
-		}
-		return null;
-	}
-
 	public @Nullable Iterable<@NonNull NavigableEdge> getRealizedEdges(@NonNull NavigableEdge edge, @NonNull ClassDatumAnalysis requiredClassDatumAnalysis) {
 		Property property = edge.getProperty();
 		if (property.eContainer() == null) {			// Ignore pseudo-properties such as «iterate»
 			return null;
 		}
-		PropertyDatum propertyDatum = getPropertyDatum(edge);
+		PropertyDatum propertyDatum = basicGetPropertyDatum(edge);
 		if (propertyDatum == null) {
 			if (property == getSchedulerConstants().getOclContainerProperty()) {
 				return getCompositeRealizedEdges(edge);
 			}
-			propertyDatum = getPropertyDatum(edge);				// FIXME debugging
+			propertyDatum = basicGetPropertyDatum(edge);				// FIXME debugging
 		}
-		assert propertyDatum != null;
+		if (propertyDatum == null) {			// May be null for edges only used by operation dependencies
+			return null;
+		}
 		Iterable<@NonNull NavigableEdge> realizedEdges = producedPropertyDatum2realizedEdges.get(propertyDatum);
 		if (realizedEdges == null) {
 			return null;

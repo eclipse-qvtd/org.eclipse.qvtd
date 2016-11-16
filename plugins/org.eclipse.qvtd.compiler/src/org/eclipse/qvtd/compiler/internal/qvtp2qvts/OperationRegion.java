@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.CallExp;
 import org.eclipse.ocl.pivot.Class;
 import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.CompleteClass;
@@ -134,8 +135,8 @@ public class OperationRegion extends AbstractRegion
 						for (int i = 1; i < steps.size(); i++) {
 							DependencyStep step = steps.get(i);
 							Property property = step.getProperty();
-							NavigationCallExp navigationCallExp = step.getNavigationCallExp();
-							assert (property != null) && (navigationCallExp != null);
+							CallExp callExp = step.getCallExp();
+							assert (property != null) && (callExp != null);
 							//						stepUsage = propertyStep.getUsage();
 							//						typedModel = stepUsage.getTypedModel();
 							//						assert typedModel != null;
@@ -154,7 +155,13 @@ public class OperationRegion extends AbstractRegion
 								dependencyNode2 = elementNode;
 							}
 							//							assert !dependencyNode2.isMatched();
-							Node nextNode = RegionUtil.createDataTypeNode(dependencyNode2, navigationCallExp);			// FIXME re-use shared paths
+							Node nextNode;			// FIXME re-use shared paths
+							if (callExp instanceof NavigationCallExp) {
+								nextNode = RegionUtil.createDataTypeNode(dependencyNode2, (NavigationCallExp)callExp);
+							}
+							else {
+								nextNode = RegionUtil.createDataTypeNode(dependencyNode2, property);
+							}
 							RegionUtil.createNavigationEdge(dependencyNode2, property, nextNode);
 							dependencyNode2 = nextNode;
 						}
