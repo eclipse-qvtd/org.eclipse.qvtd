@@ -108,10 +108,10 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 		AddStatement asAddStatement = PivotUtil.getPivot(AddStatement.class, csElement);
 		if (asAddStatement != null) {
 			asAddStatement.setTargetVariable(csElement.getTargetVariable());
-			ExpCS csInitialiser = csElement.getOwnedExpression();
-			if (csInitialiser != null) {
-				OCLExpression initialiser = context.visitLeft2Right(OCLExpression.class, csInitialiser);
-				asAddStatement.setOwnedExpression(initialiser);
+			ExpCS csInitializer = csElement.getOwnedExpression();
+			if (csInitializer != null) {
+				OCLExpression initializer = context.visitLeft2Right(OCLExpression.class, csInitializer);
+				asAddStatement.setOwnedExpression(initializer);
 			}
 		}
 		return null;
@@ -188,8 +188,8 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 		ExpCS csTarget = csElement.getOwnedTarget();
 		assert csTarget != null;
 		OCLExpression target = context.visitLeft2Right(OCLExpression.class, csTarget);
-		ExpCS csInitialiser = csElement.getOwnedExpression();
-		assert csInitialiser != null;
+		ExpCS csInitializer = csElement.getOwnedExpression();
+		assert csInitializer != null;
 		CheckVariableStatement assignment = null;
 		if (target instanceof NavigationCallExp) {
 			throw new IllegalStateException();
@@ -204,8 +204,8 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 			context.addDiagnostic(csElement, "unrecognised Constraint target " + target.eClass().getName());
 		}
 		if (assignment != null) {
-			OCLExpression initialiser = context.visitLeft2Right(OCLExpression.class, csInitialiser);
-			assignment.setOwnedExpression(initialiser);
+			OCLExpression initializer = context.visitLeft2Right(OCLExpression.class, csInitializer);
+			assignment.setOwnedExpression(initializer);
 			//			pAssignments.add(assignment);
 		}
 		return null;
@@ -309,8 +309,8 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 			boolean isImplicit = targetProperty.isIsImplicit();
 			setStatement.setTargetProperty(isImplicit ? targetProperty.getOpposite() : targetProperty);
 			setStatement.setIsOpposite(isImplicit);
-			ExpCS csInitialiser = csElement.getOwnedExpression();
-			OCLExpression target = csInitialiser != null ? context.visitLeft2Right(OCLExpression.class, csInitialiser) : null;
+			ExpCS csInitializer = csElement.getOwnedExpression();
+			OCLExpression target = csInitializer != null ? context.visitLeft2Right(OCLExpression.class, csInitializer) : null;
 			setStatement.setTargetProperty(targetProperty);
 			//			propertyAssignment.setIsOpposite(target instanceof FeatureCallExp);		// FIXME isOpposite
 			setStatement.setOwnedExpression(target);

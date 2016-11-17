@@ -20,7 +20,6 @@ import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
-import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.xtext.base.cs2as.CS2ASConversion;
 import org.eclipse.ocl.xtext.base.cs2as.Continuation;
@@ -28,6 +27,7 @@ import org.eclipse.ocl.xtext.basecs.ConstraintCS;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcore.Assignment;
 import org.eclipse.qvtd.pivot.qvtcore.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcore.GuardPattern;
@@ -89,10 +89,10 @@ public class QVTcoreCSPostOrderVisitor extends AbstractQVTcoreCSPostOrderVisitor
 			List<Predicate> pPredicates = new ArrayList<Predicate>();
 			for (PredicateOrAssignmentCS csConstraint : csElement.getOwnedConstraints()) {
 				ExpCS csTarget = csConstraint.getOwnedTarget();
-				ExpCS csInitialiser = csConstraint.getOwnedInitExpression();
+				ExpCS csInitializer = csConstraint.getOwnedInitExpression();
 				boolean isDefault = csConstraint.isIsDefault();
 				OCLExpression target = csTarget != null ? context.visitLeft2Right(OCLExpression.class, csTarget) : null;
-				if (csInitialiser != null) {
+				if (csInitializer != null) {
 					Assignment assignment = null;
 					if (target instanceof NavigationCallExp) {
 						assignment = refreshPropertyAssignment((NavigationCallExp)target, csConstraint);
@@ -104,9 +104,9 @@ public class QVTcoreCSPostOrderVisitor extends AbstractQVTcoreCSPostOrderVisitor
 						context.addDiagnostic(csElement, "unrecognised Constraint target " + target.eClass().getName());
 					}
 					if (assignment != null) {
-						OCLExpression initialiser = context.visitLeft2Right(OCLExpression.class, csInitialiser);
+						OCLExpression initializer = context.visitLeft2Right(OCLExpression.class, csInitializer);
 						assignment.setIsDefault(isDefault);
-						assignment.setValue(initialiser);
+						assignment.setValue(initializer);
 						pAssignments.add(assignment);
 					}
 				}
@@ -151,7 +151,7 @@ public class QVTcoreCSPostOrderVisitor extends AbstractQVTcoreCSPostOrderVisitor
 	public Continuation<?> visitGuardPatternCS(@NonNull GuardPatternCS csElement) {
 		GuardPattern asGuardPattern = PivotUtil.getPivot(GuardPattern.class, csElement);
 		if (asGuardPattern != null) {
-			context.refreshList(Predicate.class, ClassUtil.nullFree(asGuardPattern.getPredicate()), csElement.getOwnedPredicates());
+			context.refreshList(Predicate.class, QVTbaseUtil.getOwnedPredicates(asGuardPattern), csElement.getOwnedPredicates());
 		}
 		return null;
 	}

@@ -341,7 +341,7 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 				Type guardType = asStatement.getType();
 				Type valueType = idResolver.getDynamicTypeOf(initValue);
 				if ((guardType == null) || !valueType.conformsTo(standardLibrary, guardType)) {
-					// The initialisation fails, the guard is not met
+					// The initialization fails, the guard is not met
 					return false;
 				}
 			}

@@ -35,7 +35,7 @@ import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 public class QVTcoreOutlineTreeProvider extends QVTbaseOutlineTreeProvider
 {
 	//	protected void _createChildren(IOutlineNode parentNode, AssignmentCS csOperator) {
-	//	createNode(parentNode, csOperator.getInitialiser());
+	//	createNode(parentNode, csOperator.getInitializer());
 	//}
 
 	protected void _createChildren(IOutlineNode parentNode, BottomPattern ele) {

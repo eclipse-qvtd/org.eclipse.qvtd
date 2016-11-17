@@ -140,8 +140,8 @@ public class QVTrelationCSPostOrderVisitor extends AbstractQVTrelationCSPostOrde
 		@Override
 		public BasicContinuation<?> execute() {
 			RelationDomainAssignment pDomain = PivotUtil.getPivot(RelationDomainAssignment.class, csElement);
-			ExpCS csInitialiser = csElement.getOwnedInitExpression();
-			OCLExpression oclExpression = csInitialiser != null ? context.visitLeft2Right(OCLExpression.class, csInitialiser) : null;
+			ExpCS csInitializer = csElement.getOwnedInitExpression();
+			OCLExpression oclExpression = csInitializer != null ? context.visitLeft2Right(OCLExpression.class, csInitializer) : null;
 			if (pDomain != null) {
 				pDomain.setValueExp(oclExpression);
 			}
@@ -175,8 +175,8 @@ public class QVTrelationCSPostOrderVisitor extends AbstractQVTrelationCSPostOrde
 	public Continuation<?> visitDefaultValueCS(@NonNull DefaultValueCS csElement) {
 		RelationDomainAssignment pivotElement = PivotUtil.getPivot(RelationDomainAssignment.class, csElement);
 		if (pivotElement != null) {
-			ExpCS initialiser = csElement.getOwnedInitExpression();
-			OCLExpression oclExpression = initialiser != null ? context.visitLeft2Right(OCLExpression.class, initialiser) : null;
+			ExpCS initializer = csElement.getOwnedInitExpression();
+			OCLExpression oclExpression = initializer != null ? context.visitLeft2Right(OCLExpression.class, initializer) : null;
 			pivotElement.setValueExp(oclExpression);
 		}
 		return null;
