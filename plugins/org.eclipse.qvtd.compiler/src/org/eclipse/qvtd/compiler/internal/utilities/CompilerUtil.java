@@ -33,8 +33,6 @@ import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.codegen.generator.CodeGenerator;
 import org.eclipse.ocl.pivot.Element;
-import org.eclipse.ocl.pivot.PivotTables;
-import org.eclipse.ocl.pivot.messages.StatusCodes;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.resource.CSResource;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
@@ -164,7 +162,6 @@ public class CompilerUtil
 		//	Load QVTcAS
 		//
 		OCL ocl = QVTcore.newInstance(OCL.NO_PROJECTS, null);
-		ocl.getEnvironmentFactory().setSeverity(PivotTables.STR_Variable_c_c_CompatibleInitialiserType, StatusCodes.Severity.IGNORE);
 		try {
 			ASResource asResource = loadQVTcAS(ocl, inputURI);
 			assertNoResourceErrors("Normalisation failed", asResource);
