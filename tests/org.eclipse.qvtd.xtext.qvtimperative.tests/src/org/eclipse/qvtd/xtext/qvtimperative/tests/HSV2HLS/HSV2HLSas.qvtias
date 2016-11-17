@@ -25,14 +25,14 @@
       </ownedOperations>
       <modelParameter xsi:type="qvti:ImperativeTypedModel" xmi:id="qT..hsv2hls.hsv" name="hsv" usedPackage="HSVTree.ecore.oclas#P.HSVTree"
           isChecked="true">
-        <ownedContext xmi:id="qV..hsv2hls.hsv.hsv" name="hsv" type="pivot:Class http://www.eclipse.org/qvt/2016/QVTimperativeLibrary.oclas#T.qvtbaselibrary.Model"/>
+        <ownedContext xsi:type="pivot:ParameterVariable" xmi:id="qV..hsv2hls.hsv.hsv" name="hsv" type="pivot:Class http://www.eclipse.org/qvt/2016/QVTimperativeLibrary.oclas#T.qvtbaselibrary.Model"/>
       </modelParameter>
       <modelParameter xsi:type="qvti:ImperativeTypedModel" xmi:id="qT..hsv2hls.hls" name="hls" usedPackage="HLSTree.ecore.oclas#P.HLSTree"
           isEnforced="true">
-        <ownedContext xmi:id="qV..hsv2hls.hls.hls" name="hls" type="pivot:Class http://www.eclipse.org/qvt/2016/QVTimperativeLibrary.oclas#T.qvtbaselibrary.Model"/>
+        <ownedContext xsi:type="pivot:ParameterVariable" xmi:id="qV..hsv2hls.hls.hls" name="hls" type="pivot:Class http://www.eclipse.org/qvt/2016/QVTimperativeLibrary.oclas#T.qvtbaselibrary.Model"/>
       </modelParameter>
       <modelParameter xsi:type="qvti:ImperativeTypedModel" xmi:id="qT..hsv2hls.middle" name="middle" usedPackage="HSV2HLS.ecore.oclas#P.HSV2HLS">
-        <ownedContext xmi:id="qV..hsv2hls.middle.middle" name="middle" type="pivot:Class http://www.eclipse.org/qvt/2016/QVTimperativeLibrary.oclas#T.qvtbaselibrary.Model"/>
+        <ownedContext xsi:type="pivot:ParameterVariable" xmi:id="qV..hsv2hls.middle.middle" name="middle" type="pivot:Class http://www.eclipse.org/qvt/2016/QVTimperativeLibrary.oclas#T.qvtbaselibrary.Model"/>
       </modelParameter>
       <rule xsi:type="qvti:Mapping" xmi:id="m..hsv2hls.__root__" name="__root__">
         <ownedStatements xsi:type="qvti:MappingLoop">
@@ -195,7 +195,7 @@
           </ownedExpression>
         </ownedStatements>
       </rule>
-      <ownedContext xmi:id="qV..hsv2hls.this" name="this" type="#T..hsv2hls"/>
+      <ownedContext xsi:type="pivot:ParameterVariable" xmi:id="qV..hsv2hls.this" name="this" type="#T..hsv2hls"/>
     </ownedClasses>
   </ownedPackages>
   <ownedPackages xmi:id="P.$$" name="$$" URI="http://www.eclipse.org/ocl/2015/Orphanage" nsPrefix="orphanage">

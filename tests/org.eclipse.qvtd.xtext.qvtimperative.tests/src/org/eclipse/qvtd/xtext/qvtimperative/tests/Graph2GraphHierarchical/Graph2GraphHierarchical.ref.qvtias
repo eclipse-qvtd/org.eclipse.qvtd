@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <qvti:ImperativeModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pivot="http://www.eclipse.org/ocl/2015/Pivot"
-    xmlns:qvtb="http://www.eclipse.org/qvt/2015/QVTbase" xmlns:qvti="http://www.eclipse.org/qvt/2016/QVTimperative" xsi:schemaLocation="http://www.eclipse.org/ocl/2015/Pivot java://org.eclipse.ocl.pivot.PivotPackage http://www.eclipse.org/qvt/2015/QVTbase java://org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage http://www.eclipse.org/qvt/2016/QVTimperative java://org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage"
+    xmlns:qvti="http://www.eclipse.org/qvt/2016/QVTimperative" xsi:schemaLocation="http://www.eclipse.org/ocl/2015/Pivot java://org.eclipse.ocl.pivot.PivotPackage http://www.eclipse.org/qvt/2016/QVTimperative java://org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage"
     name="Graph2GraphHierarchical.qvti" externalURI="file:/E:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/Graph2GraphHierarchical/Graph2GraphHierarchical.qvti">
   <ownedImports name="SimpleGraph" importedNamespace="pivot:Package ../Graph2GraphMinimal/SimpleGraph.ecore.oclas#P.simplegraph"/>
   <ownedImports name="SimpleGraph2Graph" importedNamespace="pivot:Package ../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#P.simplegraph2graph"/>
   <ownedPackages xmi:id="P." name="">
-    <ownedClasses xsi:type="qvtb:Transformation" xmi:id="T..CopyGraph" name="CopyGraph" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclElement">
+    <ownedClasses xsi:type="qvti:ImperativeTransformation" xmi:id="T..CopyGraph" name="CopyGraph" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclElement">
       <modelParameter xsi:type="qvti:ImperativeTypedModel" xmi:id="qT..CopyGraph.upperGraph" name="upperGraph" usedPackage="../Graph2GraphMinimal/SimpleGraph.ecore.oclas#P.simplegraph"
           isChecked="true">
-        <ownedContext xmi:id="qV..CopyGraph.upperGraph.upperGraph" name="upperGraph" type="pivot:Class http://www.eclipse.org/qvt/2016/QVTimperativeLibrary.oclas#T.qvtbaselibrary.Model"/>
+        <ownedContext xsi:type="pivot:ParameterVariable" xmi:id="qV..CopyGraph.upperGraph.upperGraph" name="upperGraph" type="pivot:Class http://www.eclipse.org/qvt/2016/QVTimperativeLibrary.oclas#T.qvtbaselibrary.Model"/>
       </modelParameter>
       <modelParameter xsi:type="qvti:ImperativeTypedModel" xmi:id="qT..CopyGraph.lowerGraph" name="lowerGraph" usedPackage="../Graph2GraphMinimal/SimpleGraph.ecore.oclas#P.simplegraph"
           isEnforced="true">
-        <ownedContext xmi:id="qV..CopyGraph.lowerGraph.lowerGraph" name="lowerGraph" type="pivot:Class http://www.eclipse.org/qvt/2016/QVTimperativeLibrary.oclas#T.qvtbaselibrary.Model"/>
+        <ownedContext xsi:type="pivot:ParameterVariable" xmi:id="qV..CopyGraph.lowerGraph.lowerGraph" name="lowerGraph" type="pivot:Class http://www.eclipse.org/qvt/2016/QVTimperativeLibrary.oclas#T.qvtbaselibrary.Model"/>
       </modelParameter>
       <modelParameter xsi:type="qvti:ImperativeTypedModel" xmi:id="qT..CopyGraph.middle" name="middle" usedPackage="../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#P.simplegraph2graph">
-        <ownedContext xmi:id="qV..CopyGraph.middle.middle" name="middle" type="pivot:Class http://www.eclipse.org/qvt/2016/QVTimperativeLibrary.oclas#T.qvtbaselibrary.Model"/>
+        <ownedContext xsi:type="pivot:ParameterVariable" xmi:id="qV..CopyGraph.middle.middle" name="middle" type="pivot:Class http://www.eclipse.org/qvt/2016/QVTimperativeLibrary.oclas#T.qvtbaselibrary.Model"/>
       </modelParameter>
       <rule xsi:type="qvti:Mapping" xmi:id="m..CopyGraph.__root__" name="__root__">
         <ownedStatements xsi:type="qvti:MappingLoop">
@@ -69,7 +69,8 @@
                   referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.1/@ownedStatements.3/@ownedExpression/@ownedIterators.0"/>
               <ownedArguments xsi:type="pivot:TypeExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Pivot.oclas#T.pivot.Class" referredType="pivot:Class ../Graph2GraphMinimal/SimpleGraph.ecore.oclas#T.simplegraph.Node"/>
             </ownedBody>
-            <ownedIterators name="e" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph.ecore.oclas#T.simplegraph.Element" representedParameter="http://www.eclipse.org/ocl/2015/Library.oclas#i0i.ocl.OrderedSet.select..T"/>
+            <ownedIterators xsi:type="pivot:IteratorVariable" name="e" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph.ecore.oclas#T.simplegraph.Element"
+                representedParameter="http://www.eclipse.org/ocl/2015/Library.oclas#i0i.ocl.OrderedSet.select..T"/>
           </ownedExpression>
         </ownedStatements>
         <ownedStatements xsi:type="qvti:MappingCall" referredMapping="#m..CopyGraph.Middle2Graph">
@@ -139,7 +140,7 @@
                   referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.3/@ownedStatements.3/@ownedExpression/@ownedIterators.0"/>
               <ownedArguments xsi:type="pivot:TypeExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Pivot.oclas#T.pivot.Class" referredType="pivot:Class ../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Node2Node"/>
             </ownedBody>
-            <ownedIterators name="e2e" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Element2Element"
+            <ownedIterators xsi:type="pivot:IteratorVariable" name="e2e" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Element2Element"
                 representedParameter="http://www.eclipse.org/ocl/2015/Library.oclas#i0i.ocl.OrderedSet.select..T"/>
           </ownedExpression>
         </ownedStatements>
@@ -172,7 +173,7 @@
           </ownedExpression>
         </ownedStatements>
       </rule>
-      <ownedContext xmi:id="qV..CopyGraph.this" name="this" type="#T..CopyGraph"/>
+      <ownedContext xsi:type="pivot:ParameterVariable" xmi:id="qV..CopyGraph.this" name="this" type="#T..CopyGraph"/>
     </ownedClasses>
   </ownedPackages>
   <ownedPackages xmi:id="P.$$" name="$$" URI="http://www.eclipse.org/ocl/2015/Orphanage" nsPrefix="orphanage">
