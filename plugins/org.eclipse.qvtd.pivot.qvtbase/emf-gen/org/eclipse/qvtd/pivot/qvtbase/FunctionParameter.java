@@ -11,7 +11,6 @@
 package org.eclipse.qvtd.pivot.qvtbase;
 
 import org.eclipse.ocl.pivot.Parameter;
-import org.eclipse.ocl.pivot.Variable;
 
 /**
  * <!-- begin-user-doc -->
@@ -23,5 +22,5 @@ import org.eclipse.ocl.pivot.Variable;
  * @model
  * @generated
  */
-public interface FunctionParameter extends Parameter, Variable {
+public interface FunctionParameter extends Parameter {
 } // FunctionParameter

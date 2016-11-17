@@ -14,7 +14,7 @@
       <ownedProperties xmi:id="p.qvtbase.Function.queryExpression" isComposite="true" isRequired="false" name="queryExpression" opposite="#p.pivot.OCLExpression.Function"
           type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.OCLExpression"/>
     </ownedClasses>
-    <ownedClasses xmi:id="T.qvtbase.FunctionParameter" name="FunctionParameter" superClasses="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Parameter ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Variable"/>
+    <ownedClasses xmi:id="T.qvtbase.FunctionParameter" name="FunctionParameter" superClasses="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Parameter"/>
     <ownedClasses xmi:id="T.qvtbase.Pattern" name="Pattern" superClasses="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Element">
       <ownedProperties xmi:id="p.qvtbase.Pattern.bindsTo" name="bindsTo" opposite="#p.pivot.Variable.Pattern" type="#//@ownedPackages.2/@ownedClasses.17"/>
       <ownedProperties xmi:id="p.qvtbase.Pattern.predicate" isComposite="true" name="predicate" opposite="#p.qvtbase.Predicate.pattern"

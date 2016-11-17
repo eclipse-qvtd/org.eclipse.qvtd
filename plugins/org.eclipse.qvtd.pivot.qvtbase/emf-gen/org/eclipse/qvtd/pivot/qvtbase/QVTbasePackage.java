@@ -653,40 +653,13 @@ public interface QVTbasePackage extends EPackage {
 	int FUNCTION_PARAMETER__OWNING_OPERATION = PivotPackage.PARAMETER__OWNING_OPERATION;
 
 	/**
-	 * The feature id for the '<em><b>Is Implicit</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FUNCTION_PARAMETER__IS_IMPLICIT = PivotPackage.PARAMETER_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Owned Init</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FUNCTION_PARAMETER__OWNED_INIT = PivotPackage.PARAMETER_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Represented Parameter</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FUNCTION_PARAMETER__REPRESENTED_PARAMETER = PivotPackage.PARAMETER_FEATURE_COUNT + 2;
-
-	/**
 	 * The number of structural features of the '<em>Function Parameter</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FUNCTION_PARAMETER_FEATURE_COUNT = PivotPackage.PARAMETER_FEATURE_COUNT + 3;
+	int FUNCTION_PARAMETER_FEATURE_COUNT = PivotPackage.PARAMETER_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtbase.impl.PatternImpl <em>Pattern</em>}' class.

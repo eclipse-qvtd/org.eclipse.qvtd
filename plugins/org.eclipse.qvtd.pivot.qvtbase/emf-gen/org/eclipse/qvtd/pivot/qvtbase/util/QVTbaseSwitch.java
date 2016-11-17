@@ -25,7 +25,6 @@ import org.eclipse.ocl.pivot.ReferringElement;
 import org.eclipse.ocl.pivot.TemplateableElement;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.TypedElement;
-import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.util.Visitable;
 import org.eclipse.ocl.pivot.utilities.Nameable;
@@ -139,7 +138,6 @@ public class QVTbaseSwitch<@Nullable T> extends Switch<T> {
 				FunctionParameter functionParameter = (FunctionParameter)theEObject;
 				T result = caseFunctionParameter(functionParameter);
 				if (result == null) result = caseParameter(functionParameter);
-				if (result == null) result = caseVariable(functionParameter);
 				if (result == null) result = caseVariableDeclaration(functionParameter);
 				if (result == null) result = caseTypedElement(functionParameter);
 				if (result == null) result = caseNamedElement(functionParameter);
@@ -530,21 +528,6 @@ public class QVTbaseSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseParameter(Parameter object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Variable</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Variable</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseVariable(Variable object) {
 		return null;
 	}
 
