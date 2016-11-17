@@ -23,7 +23,6 @@ import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.Namespace;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
-import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Variable;
@@ -51,12 +50,15 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
 import org.eclipse.qvtd.pivot.qvtrelation.Key;
+import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationFactory;
 import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationDomainAssignment;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationModel;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
+import org.eclipse.qvtd.pivot.qvtrelation.SharedVariable;
+import org.eclipse.qvtd.pivot.qvtrelation.TemplateVariable;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 import org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
@@ -117,7 +119,7 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 			if (pKey != null) {
 				pKey.setIdentifies(csElement.getClassId());
 				PivotUtilInternal.refreshList(pKey.getPart(), csElement.getPropertyIds());
-				List<Property> oppositePart = new ArrayList<Property>();
+				List<Property> oppositePart = new ArrayList<>();
 				for (PathNameCS oppositePropertyId : csElement.getOwnedOppositePropertyIds()) {
 					Element element = oppositePropertyId.getReferredElement();
 					if (element instanceof Property) {
@@ -140,7 +142,7 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 		public BasicContinuation<?> execute() {
 			TypedModel pTypedModel = PivotUtil.getPivot(TypedModel.class, csElement);
 			if (pTypedModel != null) {
-				List<org.eclipse.ocl.pivot.Package> newUsedPackage = new ArrayList<org.eclipse.ocl.pivot.Package>();
+				List<org.eclipse.ocl.pivot.Package> newUsedPackage = new ArrayList<>();
 				for (Namespace metamodelId : csElement.getMetamodelIds()) {
 					if (metamodelId instanceof Model) {
 						newUsedPackage.addAll(((Model)metamodelId).getOwnedPackages());
@@ -235,7 +237,7 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 					String name = getElementTemplateName((ElementTemplateCS) csMember);
 					VariableExp asVariableExp = context.refreshModelElement(VariableExp.class, PivotPackage.Literals.VARIABLE_EXP, csMember);
 					if (name == null) {
-						Variable asMemberVariable = PivotFactory.eINSTANCE.createVariable();
+						Variable asMemberVariable = QVTrelationFactory.eINSTANCE.createSharedVariable();
 						asMemberVariable.setName(QVTrelationUtil.DUMMY_VARIABLE_NAME + specialVariables.size());
 						asMemberVariable.setIsImplicit(true);
 						specialVariables.add(asMemberVariable);
@@ -261,7 +263,7 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 					}
 				}
 				else {
-					asRestVariable = context.refreshModelElement(Variable.class, PivotPackage.Literals.VARIABLE, csRestTemplate);
+					asRestVariable = context.refreshModelElement(SharedVariable.class, QVTrelationPackage.Literals.SHARED_VARIABLE, csRestTemplate);
 					asRestVariable.setIsImplicit(true);
 					asRestVariable.setTypeValue(null);
 					asRestVariable.setIsRequired(true);
@@ -278,7 +280,7 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 	protected void resolveTemplateVariable(@NonNull TemplateCS csElement, @NonNull TemplateExp pivotElement) {
 		Variable variable = pivotElement.getBindsTo();
 		if (variable == null) {
-			variable = ClassUtil.nonNullEMF(PivotFactory.eINSTANCE.createVariable());
+			variable = QVTrelationFactory.eINSTANCE.createTemplateVariable();
 			pivotElement.setBindsTo(variable);
 		}
 		context.refreshName(variable, csElement.getName());
@@ -309,10 +311,10 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 		context.refreshPivotList(DomainPattern.class, asPatterns, csElement.getOwnedPattern());
 		context.refreshPivotList(RelationDomainAssignment.class, pivotElement.getDefaultAssignment(), csElement.getOwnedDefaultValues());
 		if (asPatterns.size() > 0) {
-			List<Variable> rootVariables = new ArrayList<Variable>();
+			List<Variable> rootVariables = new ArrayList<>();
 			for (DomainPattern asPattern : asPatterns) {
 				if (asPattern != null) {
-					//					List<@NonNull Variable> boundVariables = new ArrayList<@NonNull Variable>();
+					//					List<@NonNull Variable> boundVariables = new ArrayList<>();
 					TemplateExp asTemplate = asPattern.getTemplateExpression();
 					if (asTemplate != null) {
 						rootVariables.add(asTemplate.getBindsTo());
@@ -395,18 +397,18 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 	public Continuation<?> visitPrimitiveTypeDomainCS(@NonNull PrimitiveTypeDomainCS csElement) {
 		@NonNull RelationDomain pivotElement = context.refreshModelElement(RelationDomain.class, QVTrelationPackage.Literals.RELATION_DOMAIN, csElement);
 		@NonNull DomainPattern asPattern = context.refreshModelElement(DomainPattern.class, QVTrelationPackage.Literals.DOMAIN_PATTERN, null);
-		List<DomainPattern> asPatterns = new ArrayList<DomainPattern>();
+		List<DomainPattern> asPatterns = new ArrayList<>();
 		asPatterns.add(asPattern);
 		PivotUtilInternal.refreshList(pivotElement.getPattern(), asPatterns);
 		@NonNull TemplateExp template = context.refreshModelElement(TemplateExp.class, QVTtemplatePackage.Literals.OBJECT_TEMPLATE_EXP, null);
 		asPattern.setTemplateExpression(template);
-		@NonNull Variable rootVariable = context.refreshModelElement(Variable.class, PivotPackage.Literals.VARIABLE, null);
+		@NonNull TemplateVariable rootVariable = context.refreshModelElement(TemplateVariable.class, QVTrelationPackage.Literals.TEMPLATE_VARIABLE, null);
 		context.refreshName(rootVariable, csElement.getName());
 		template.setBindsTo(rootVariable);
-		List<Variable> rootVariables = new ArrayList<Variable>();
+		List<Variable> rootVariables = new ArrayList<>();
 		rootVariables.add(rootVariable);
 		PivotUtilInternal.refreshList(pivotElement.getRootVariable(), rootVariables);
-		List<Variable> pivotVariables = new ArrayList<Variable>();
+		List<Variable> pivotVariables = new ArrayList<>();
 		pivotVariables.add(rootVariable);
 		PivotUtilInternal.refreshList(asPattern.getBindsTo(), pivotVariables);
 		return null;
@@ -463,7 +465,7 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 				domain.setIsEnforceable(isEnforceable);
 			}
 		}
-		List<@NonNull Variable> relationVariables = new ArrayList<@NonNull Variable>();
+		List<@NonNull Variable> relationVariables = new ArrayList<>();
 		//
 		//	Gather explicit local variables.
 		//
@@ -487,12 +489,12 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 		//
 		//	Resolve the special variables.
 		//
-		List<@NonNull Variable> specialVariables = new ArrayList<@NonNull Variable>();
+		List<@NonNull Variable> specialVariables = new ArrayList<>();
 		for (@NonNull AbstractDomainCS csAbstractDomain : ClassUtil.nullFree(csElement.getOwnedDomains())) {
 			if (csAbstractDomain instanceof DomainCS) {
 				for (@NonNull DomainPatternCS csDomainPatternCS : ClassUtil.nullFree(((DomainCS)csAbstractDomain).getOwnedPattern())) {
 					DomainPattern asPattern = PivotUtil.getPivot(DomainPattern.class, csDomainPatternCS);
-					List<@NonNull Variable> boundVariables = new ArrayList<@NonNull Variable>();
+					List<@NonNull Variable> boundVariables = new ArrayList<>();
 					TemplateCS csTemplate = csDomainPatternCS.getOwnedTemplate();
 					if (csTemplate != null) {
 						processSpecialVariables(relationVariables, boundVariables, specialVariables, csTemplate);
@@ -569,7 +571,7 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 	@Override
 	public Continuation<?> visitVarDeclarationIdCS(@NonNull VarDeclarationIdCS csElement) {
 		@SuppressWarnings("unused")
-		Variable pivotElement = refreshNamedElement(Variable.class, PivotPackage.Literals.VARIABLE, csElement);
+		SharedVariable pivotElement = refreshNamedElement(SharedVariable.class, QVTrelationPackage.Literals.SHARED_VARIABLE, csElement);
 		return null;
 	}
 }

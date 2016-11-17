@@ -23,11 +23,9 @@ import static org.eclipse.qvtd.cs2as.compiler.internal.OCL2QVTpUtil.getUpdateMap
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Predicate;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import org.eclipse.emf.common.util.URI;
@@ -36,7 +34,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Class;
 import org.eclipse.ocl.pivot.ExpressionInOCL;
 import org.eclipse.ocl.pivot.IfExp;
@@ -74,10 +71,10 @@ import org.eclipse.qvtd.pivot.qvtcore.RealizedVariable;
 
 public class OCL2QVTp {
 
-	private @NonNull Logger logger = Logger.getLogger(getClass().getName());
+	//	private @NonNull Logger logger = Logger.getLogger(getClass().getName());
 	private @NonNull EnvironmentFactory envFact;
 	private @NonNull String traceabilityPropName;
-	private @Nullable Map<?,?> saveOptions;
+	//	private @Nullable Map<?,?> saveOptions;
 
 	public static final @NonNull String RIGHT_MODEL_TYPE_NAME = "rightAS";
 	public static final @NonNull String LEFT_MODEL_TYPE_NAME = "leftCS";
@@ -356,7 +353,7 @@ public class OCL2QVTp {
 		domain.setTypedModel(leftTypedModel);
 		domain.setIsCheckable(true);
 
-		Variable variable = PivotFactory.eINSTANCE.createVariable();
+		Variable variable = QVTcoreFactory.eINSTANCE.createGuardVariable();
 		variable.setName("l"+firstToUpperCase().apply(type.getName()));
 		variable.setType(type);
 

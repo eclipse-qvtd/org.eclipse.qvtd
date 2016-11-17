@@ -39,13 +39,17 @@ import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory.CreateStrategy;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcore.Area;
+import org.eclipse.qvtd.pivot.qvtcore.Assignment;
+import org.eclipse.qvtd.pivot.qvtcore.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcore.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcore.CoreModel;
 import org.eclipse.qvtd.pivot.qvtcore.CorePattern;
+import org.eclipse.qvtd.pivot.qvtcore.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtcore.NavigationAssignment;
 import org.eclipse.qvtd.pivot.qvtcore.OppositePropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcore.PropertyAssignment;
+import org.eclipse.qvtd.pivot.qvtcore.RealizedVariable;
 
 public class QVTcoreUtil extends QVTbaseUtil
 {
@@ -94,6 +98,10 @@ public class QVTcoreUtil extends QVTbaseUtil
 		return mapping;
 	}
 
+	public static @NonNull BottomPattern getBottomPattern(@NonNull Area area) {
+		return ClassUtil.nonNullState(area.getBottomPattern());
+	}
+
 	public static @Nullable Area getContainingArea(@Nullable EObject eObject) {
 		for ( ; eObject != null; eObject = eObject.eContainer()) {
 			if (eObject instanceof Area) {
@@ -123,6 +131,22 @@ public class QVTcoreUtil extends QVTbaseUtil
 
 	public static @Nullable CoreDomain getDomain(@NonNull Mapping rule, @NonNull TypedModel typedModel) {
 		return (CoreDomain)getDomain((Rule)rule, typedModel);
+	}
+
+	public static @NonNull GuardPattern getGuardPattern(@NonNull Area area) {
+		return ClassUtil.nonNullState(area.getGuardPattern());
+	}
+
+	public static @NonNull List<@NonNull Assignment> getOwnedAssignments(@NonNull BottomPattern bottomPattern) {
+		return ClassUtil.nullFree(bottomPattern.getAssignment());
+	}
+
+	public static @NonNull List<@NonNull RealizedVariable> getOwnedRealizedVariables(@NonNull BottomPattern bottomPattern) {
+		return ClassUtil.nullFree(bottomPattern.getRealizedVariable());
+	}
+
+	public static @NonNull List<@NonNull Variable> getOwnedVariables(@NonNull CorePattern corePattern) {
+		return ClassUtil.nullFree(corePattern.getVariable());
 	}
 
 	public static @NonNull Property getTargetProperty(@NonNull NavigationAssignment asNavigationAssignment) {

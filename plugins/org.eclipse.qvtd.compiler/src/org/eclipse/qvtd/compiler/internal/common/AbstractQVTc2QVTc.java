@@ -36,6 +36,7 @@ import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.Package;
 import org.eclipse.ocl.pivot.Parameter;
+import org.eclipse.ocl.pivot.ParameterVariable;
 import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.Property;
@@ -57,9 +58,11 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcore.BottomPattern;
+import org.eclipse.qvtd.pivot.qvtcore.BottomVariable;
 import org.eclipse.qvtd.pivot.qvtcore.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcore.CoreModel;
 import org.eclipse.qvtd.pivot.qvtcore.GuardPattern;
+import org.eclipse.qvtd.pivot.qvtcore.GuardVariable;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtcore.NavigationAssignment;
 import org.eclipse.qvtd.pivot.qvtcore.OppositePropertyAssignment;
@@ -178,6 +181,15 @@ public abstract class AbstractQVTc2QVTc
 		}
 
 		@Override
+		public @NonNull BottomVariable visitBottomVariable(@NonNull BottomVariable vIn) {
+			BottomVariable vOut = QVTcoreFactory.eINSTANCE.createBottomVariable();
+			context.addTrace(vIn, vOut);
+			vOut.setName(vIn.getName());
+			createAll(vIn.getOwnedComments(), vOut.getOwnedComments());
+			return vOut;
+		}
+
+		@Override
 		public @Nullable Element visitComment(@NonNull Comment cIn) {
 			Comment cOut = PivotFactory.eINSTANCE.createComment();
 			context.addTrace(cIn, cOut);
@@ -248,6 +260,15 @@ public abstract class AbstractQVTc2QVTc
 		}
 
 		@Override
+		public @NonNull GuardVariable visitGuardVariable(@NonNull GuardVariable vIn) {
+			GuardVariable vOut = QVTcoreFactory.eINSTANCE.createGuardVariable();
+			context.addTrace(vIn, vOut);
+			vOut.setName(vIn.getName());
+			createAll(vIn.getOwnedComments(), vOut.getOwnedComments());
+			return vOut;
+		}
+
+		@Override
 		public @Nullable Element visitImport(@NonNull Import iIn) {
 			Import iOut = context.createImport(iIn);
 			createAll(iIn.getOwnedComments(), iOut.getOwnedComments());
@@ -290,6 +311,15 @@ public abstract class AbstractQVTc2QVTc
 			createAll(pIn.getOwnedPackages(), pOut.getOwnedPackages());
 			createAll(pIn.getOwnedComments(), pOut.getOwnedComments());
 			return pOut;
+		}
+
+		@Override
+		public @NonNull ParameterVariable visitParameterVariable(@NonNull ParameterVariable vIn) {
+			ParameterVariable vOut = PivotFactory.eINSTANCE.createParameterVariable();
+			context.addTrace(vIn, vOut);
+			vOut.setName(vIn.getName());
+			createAll(vIn.getOwnedComments(), vOut.getOwnedComments());
+			return vOut;
 		}
 
 		@Override
@@ -350,15 +380,6 @@ public abstract class AbstractQVTc2QVTc
 			tmOut.getUsedPackage().addAll(tmIn.getUsedPackage());
 			createAll(tmIn.getOwnedComments(), tmOut.getOwnedComments());
 			return tmOut;
-		}
-
-		@Override
-		public @NonNull Variable visitVariable(@NonNull Variable vIn) {
-			Variable vOut = PivotFactory.eINSTANCE.createVariable();
-			context.addTrace(vIn, vOut);
-			vOut.setName(vIn.getName());
-			createAll(vIn.getOwnedComments(), vOut.getOwnedComments());
-			return vOut;
 		}
 
 		@Override

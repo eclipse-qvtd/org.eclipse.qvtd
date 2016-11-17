@@ -23,7 +23,6 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.OCLExpression;
-import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
@@ -31,6 +30,7 @@ import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.compiler.internal.common.AbstractQVTc2QVTc;
 import org.eclipse.qvtd.compiler.internal.utilities.SymbolNameBuilder;
 import org.eclipse.qvtd.compiler.internal.utilities.SymbolNameReservation;
@@ -146,46 +146,46 @@ public class QVTu2QVTm extends AbstractQVTc2QVTc
 		protected boolean analyze() {
 			Area thisArea = getArea(getMapping());
 			if (thisArea != null) {
-				@SuppressWarnings("null")@NonNull GuardPattern thisGuardPattern = thisArea.getGuardPattern();
-				guardPredicates.addAll(ClassUtil.nullFree(thisGuardPattern.getPredicate()));
-				gatherVariables(thisGuardPattern.getVariable(), MergedVariable.GUARD);
-				@SuppressWarnings("null")@NonNull BottomPattern thisBottomPattern = thisArea.getBottomPattern();
-				gatherVariables(thisBottomPattern.getVariable(), MergedVariable.BOTTOM);
-				gatherAssignments(thisBottomPattern.getAssignment(), ASSIGNMENT);
-				bottomPredicates.addAll(ClassUtil.nullFree(thisBottomPattern.getPredicate()));
-				gatherVariables(thisBottomPattern.getRealizedVariable(), MergedVariable.BOTTOM);
+				GuardPattern thisGuardPattern = QVTcoreUtil.getGuardPattern(thisArea);
+				guardPredicates.addAll(QVTbaseUtil.getOwnedPredicates(thisGuardPattern));
+				gatherVariables(QVTcoreUtil.getOwnedVariables(thisGuardPattern), MergedVariable.GUARD);
+				BottomPattern thisBottomPattern = QVTcoreUtil.getBottomPattern(thisArea);
+				gatherVariables(QVTcoreUtil.getOwnedVariables(thisBottomPattern), MergedVariable.BOTTOM);
+				gatherAssignments(QVTcoreUtil.getOwnedAssignments(thisBottomPattern), ASSIGNMENT);
+				bottomPredicates.addAll(QVTbaseUtil.getOwnedPredicates(thisBottomPattern));
+				gatherVariables(QVTcoreUtil.getOwnedRealizedVariables(thisBottomPattern), MergedVariable.BOTTOM);
 			}
 			for (@NonNull Area childArea : getChildAreas()) {
-				@SuppressWarnings("null")@NonNull GuardPattern childGuardPattern = childArea.getGuardPattern();
-				guardPredicates.addAll(ClassUtil.nullFree(childGuardPattern.getPredicate()));
-				gatherVariables(childGuardPattern.getVariable(), MergedVariable.GUARD);
-				@SuppressWarnings("null")@NonNull BottomPattern childBottomPattern = childArea.getBottomPattern();
-				gatherVariables(childBottomPattern.getVariable(), MergedVariable.BOTTOM);
-				gatherAssignments(childBottomPattern.getAssignment(), ASSIGNMENT);
-				bottomPredicates.addAll(ClassUtil.nullFree(childBottomPattern.getPredicate()));
-				gatherVariables(childBottomPattern.getRealizedVariable(), MergedVariable.BOTTOM);
+				GuardPattern childGuardPattern = QVTcoreUtil.getGuardPattern(childArea);
+				guardPredicates.addAll(QVTbaseUtil.getOwnedPredicates(childGuardPattern));
+				gatherVariables(QVTcoreUtil.getOwnedVariables(childGuardPattern), MergedVariable.GUARD);
+				BottomPattern childBottomPattern = QVTcoreUtil.getBottomPattern(childArea);
+				gatherVariables(QVTcoreUtil.getOwnedVariables(childBottomPattern), MergedVariable.BOTTOM);
+				gatherAssignments(QVTcoreUtil.getOwnedAssignments(childBottomPattern), ASSIGNMENT);
+				bottomPredicates.addAll(QVTbaseUtil.getOwnedPredicates(childBottomPattern));
+				gatherVariables(QVTcoreUtil.getOwnedRealizedVariables(childBottomPattern), MergedVariable.BOTTOM);
 			}
 			for (@NonNull Area parentArea : getParentAreas()) {
 				assert (parentArea != thisArea);
-				@SuppressWarnings("null")@NonNull GuardPattern parentGuardPattern = parentArea.getGuardPattern();
-				guardPredicates.addAll(ClassUtil.nullFree(parentGuardPattern.getPredicate()));
-				gatherVariables(parentGuardPattern.getVariable(), MergedVariable.GUARD);
-				@SuppressWarnings("null")@NonNull BottomPattern parentBottomPattern = parentArea.getBottomPattern();
-				gatherVariables(parentBottomPattern.getVariable(), MergedVariable.GUARD);			// Hoist
-				gatherAssignments(parentBottomPattern.getAssignment(), PREDICATE);
-				guardPredicates.addAll(ClassUtil.nullFree(parentBottomPattern.getPredicate()));									// Hoist
-				gatherVariables(parentBottomPattern.getRealizedVariable(), MergedVariable.GUARD);	// Hoist
+				GuardPattern parentGuardPattern = QVTcoreUtil.getGuardPattern(parentArea);
+				guardPredicates.addAll(QVTbaseUtil.getOwnedPredicates(parentGuardPattern));
+				gatherVariables(QVTcoreUtil.getOwnedVariables(parentGuardPattern), MergedVariable.GUARD);
+				BottomPattern parentBottomPattern = QVTcoreUtil.getBottomPattern(parentArea);
+				gatherVariables(QVTcoreUtil.getOwnedVariables(parentBottomPattern), MergedVariable.GUARD);			// Hoist
+				gatherAssignments(QVTcoreUtil.getOwnedAssignments(parentBottomPattern), PREDICATE);
+				guardPredicates.addAll(QVTbaseUtil.getOwnedPredicates(parentBottomPattern));									// Hoist
+				gatherVariables(QVTcoreUtil.getOwnedRealizedVariables(parentBottomPattern), MergedVariable.GUARD);	// Hoist
 			}
 			for (@NonNull Area siblingArea : getSiblingAreas()) {
 				if (siblingArea != thisArea) {
-					@SuppressWarnings("null")@NonNull GuardPattern siblingGuardPattern = siblingArea.getGuardPattern();
-					guardPredicates.addAll(ClassUtil.nullFree(siblingGuardPattern.getPredicate()));
-					gatherVariables(siblingGuardPattern.getVariable(), MergedVariable.GUARD);
-					@SuppressWarnings("null")@NonNull BottomPattern siblingBottomPattern = siblingArea.getBottomPattern();
-					gatherVariables(siblingBottomPattern.getVariable(), MergedVariable.BOTTOM);		// FIXME legacy compatibility
-					gatherAssignments(siblingBottomPattern.getAssignment(), ASSIGNMENT);
-					bottomPredicates.addAll(ClassUtil.nullFree(siblingBottomPattern.getPredicate()));		// FIXME legacy compatibility
-					gatherVariables(siblingBottomPattern.getRealizedVariable(), MergedVariable.BOTTOM);
+					GuardPattern siblingGuardPattern = QVTcoreUtil.getGuardPattern(siblingArea);
+					guardPredicates.addAll(QVTbaseUtil.getOwnedPredicates(siblingGuardPattern));
+					gatherVariables(QVTcoreUtil.getOwnedVariables(siblingGuardPattern), MergedVariable.GUARD);
+					BottomPattern siblingBottomPattern = QVTcoreUtil.getBottomPattern(siblingArea);
+					gatherVariables(QVTcoreUtil.getOwnedVariables(siblingBottomPattern), MergedVariable.BOTTOM);		// FIXME legacy compatibility
+					gatherAssignments(QVTcoreUtil.getOwnedAssignments(siblingBottomPattern), ASSIGNMENT);
+					bottomPredicates.addAll(QVTbaseUtil.getOwnedPredicates(siblingBottomPattern));		// FIXME legacy compatibility
+					gatherVariables(QVTcoreUtil.getOwnedRealizedVariables(siblingBottomPattern), MergedVariable.BOTTOM);
 				}
 			}
 			return true;
@@ -300,7 +300,7 @@ public class QVTu2QVTm extends AbstractQVTc2QVTc
 			BottomPattern mBottomPattern = QVTcoreFactory.eINSTANCE.createBottomPattern();
 			mArea.setBottomPattern(mBottomPattern);
 			createVisitor.createAll(bottomPredicates, mBottomPattern.getPredicate());
-			synthesizeNavigationAssignments(mBottomPattern.getAssignment());
+			synthesizeNavigationAssignments(QVTcoreUtil.getOwnedAssignments(mBottomPattern));
 			if (variableName2mergedVariables != null) {
 				for (@NonNull MergedVariable mergedVariable : variableName2mergedVariables.values()) {		// FIXME Change to alphabetical sort
 					mergedVariable.synthesize(mArea);
@@ -314,11 +314,11 @@ public class QVTu2QVTm extends AbstractQVTc2QVTc
 					createVisitor.createAll(uArea.getOwnedComments(), mArea.getOwnedComments());
 				}
 				//
-				@SuppressWarnings("null")@NonNull GuardPattern uGuardPattern = uArea.getGuardPattern();
+				GuardPattern uGuardPattern = QVTcoreUtil.getGuardPattern(uArea);
 				qvtu2qvtm.addTrace(uGuardPattern, mGuardPattern);
 				createVisitor.createAll(uGuardPattern.getOwnedComments(), mGuardPattern.getOwnedComments());
 				//
-				@SuppressWarnings("null")@NonNull BottomPattern uBottomPattern = uArea.getBottomPattern();
+				BottomPattern uBottomPattern = QVTcoreUtil.getBottomPattern(uArea);
 				qvtu2qvtm.addTrace(uBottomPattern, mBottomPattern);
 				createVisitor.createAll(uBottomPattern.getOwnedComments(), mArea.getOwnedComments());
 			}
@@ -695,11 +695,12 @@ public class QVTu2QVTm extends AbstractQVTc2QVTc
 					mArea.getBottomPattern().getRealizedVariable().add(realizedVariable);
 				}
 				else {
-					mVariable = PivotFactory.eINSTANCE.createVariable();
 					if (isGuard) {
+						mVariable = QVTcoreFactory.eINSTANCE.createGuardVariable();
 						mArea.getGuardPattern().getVariable().add(mVariable);
 					}
 					else {
+						mVariable = QVTcoreFactory.eINSTANCE.createBottomVariable();
 						mArea.getBottomPattern().getVariable().add(mVariable);
 					}
 				}
@@ -731,9 +732,9 @@ public class QVTu2QVTm extends AbstractQVTc2QVTc
 				assert assignments2 != null;
 				VariableAssignment mVariableAssignment = createVisitor.create(assignments2.get(0));
 				assert mVariableAssignment != null;
-				for (@NonNull VariableAssignment uVariableAssignment : assignments2) {
-					//					createVisitor.getContext().addTrace(uVariableAssignment, mVariableAssignment);
-				}
+				//				for (@NonNull VariableAssignment uVariableAssignment : assignments2) {
+				//					createVisitor.getContext().addTrace(uVariableAssignment, mVariableAssignment);
+				//				}
 			}
 		}
 
@@ -838,14 +839,14 @@ public class QVTu2QVTm extends AbstractQVTc2QVTc
 			while (uNamedMapping.getContext() != null) {
 				uNamedMapping = uNamedMapping.getContext();
 			}
-			s.appendString(String.valueOf(uNamedMapping.getName()));
+			s.appendString(PivotUtil.getName(uNamedMapping));
 			List<@NonNull String> guardVariableNames = new ArrayList<@NonNull String>();
 			for (@NonNull Variable guardVariable : ClassUtil.nullFree(uMapping.getGuardPattern().getVariable())) {
-				guardVariableNames.add(String.valueOf(guardVariable.getName()));
+				guardVariableNames.add(PivotUtil.getName(guardVariable));
 			}
 			for (@NonNull Domain uDomain : ClassUtil.nullFree(uMapping.getDomain())) {
 				for (@NonNull Variable guardVariable : ClassUtil.nullFree(((CoreDomain)uDomain).getGuardPattern().getVariable())) {
-					guardVariableNames.add(String.valueOf(guardVariable.getName()));
+					guardVariableNames.add(PivotUtil.getName(guardVariable));
 				}
 			}
 			Collections.sort(guardVariableNames);

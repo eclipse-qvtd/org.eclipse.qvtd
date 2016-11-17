@@ -24,6 +24,8 @@ import org.eclipse.qvtd.pivot.qvtrelation.RelationDomainAssignment;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationImplementation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationModel;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
+import org.eclipse.qvtd.pivot.qvtrelation.SharedVariable;
+import org.eclipse.qvtd.pivot.qvtrelation.TemplateVariable;
 import org.eclipse.qvtd.pivot.qvtrelation.util.QVTrelationVisitor;
 import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
@@ -109,10 +111,20 @@ public class QVTrelationPrettyPrintVisitor extends QVTtemplatePrettyPrintVisitor
 	}
 
 	@Override
+	public Object visitSharedVariable(@NonNull SharedVariable object) {
+		return visitVariable(object);
+	}
+
+	@Override
 	public Object visitTemplateExp(@NonNull TemplateExp object) {
 		context.appendName(object);
 		context.append(" : ");
 		context.appendTypedMultiplicity(object);
 		return null;
+	}
+
+	@Override
+	public Object visitTemplateVariable(@NonNull TemplateVariable object) {
+		return visitVariable(object);
 	}
 }

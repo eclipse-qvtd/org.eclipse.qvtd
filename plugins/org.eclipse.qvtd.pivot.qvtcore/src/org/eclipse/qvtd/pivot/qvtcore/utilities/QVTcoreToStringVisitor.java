@@ -17,11 +17,13 @@ import org.eclipse.ocl.pivot.utilities.ToStringVisitor;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseToStringVisitor;
 import org.eclipse.qvtd.pivot.qvtcore.Assignment;
 import org.eclipse.qvtd.pivot.qvtcore.BottomPattern;
+import org.eclipse.qvtd.pivot.qvtcore.BottomVariable;
 import org.eclipse.qvtd.pivot.qvtcore.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcore.CoreModel;
 import org.eclipse.qvtd.pivot.qvtcore.CorePattern;
 import org.eclipse.qvtd.pivot.qvtcore.EnforcementOperation;
 import org.eclipse.qvtd.pivot.qvtcore.GuardPattern;
+import org.eclipse.qvtd.pivot.qvtcore.GuardVariable;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtcore.NavigationAssignment;
 import org.eclipse.qvtd.pivot.qvtcore.OppositePropertyAssignment;
@@ -78,6 +80,11 @@ public class QVTcoreToStringVisitor extends QVTbaseToStringVisitor implements QV
 	}
 
 	@Override
+	public String visitBottomVariable(@NonNull BottomVariable object) {
+		return visitVariable(object);
+	}
+
+	@Override
 	public String visitCoreDomain(@NonNull CoreDomain object) {
 		appendQualifiedName(object);
 		return null;
@@ -107,6 +114,11 @@ public class QVTcoreToStringVisitor extends QVTbaseToStringVisitor implements QV
 		appendQualifiedName((NamedElement)object.getArea());
 		append("$Guard");
 		return null;
+	}
+
+	@Override
+	public String visitGuardVariable(@NonNull GuardVariable object) {
+		return visitVariable(object);
 	}
 
 	@Override

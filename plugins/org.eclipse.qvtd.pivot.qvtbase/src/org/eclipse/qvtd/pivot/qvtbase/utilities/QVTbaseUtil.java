@@ -189,7 +189,7 @@ public class QVTbaseUtil extends PivotUtil
 			//        	if (transformationType == null) {	// FIXME BUG 487123
 			//        		throw new IllegalLibraryException("No Transformation type in standard library.");		// FIXME need to be using a derived EnvironmentFactory
 			//        	}
-			ownedContext = PivotFactory.eINSTANCE.createVariable();
+			ownedContext = PivotFactory.eINSTANCE.createParameterVariable();
 			ownedContext.setName("this");
 			ownedContext.setType(transformation);		// FIXME promote API
 			//           	ownedContext.setTypeValue(transformation);
@@ -208,7 +208,7 @@ public class QVTbaseUtil extends PivotUtil
 	public static @NonNull Variable getContextVariable(@NonNull StandardLibraryInternal standardLibrary, @NonNull TypedModel typedModel) {
 		Variable ownedContext = typedModel.getOwnedContext();
 		if (ownedContext == null) {
-			ownedContext = PivotFactory.eINSTANCE.createVariable();
+			ownedContext = PivotFactory.eINSTANCE.createParameterVariable();
 			ownedContext.setName(typedModel.getName());
 			ownedContext.setType(standardLibrary.getLibraryType("Model"));
 			//        	ownedContext.setTypeValue(typedModel);

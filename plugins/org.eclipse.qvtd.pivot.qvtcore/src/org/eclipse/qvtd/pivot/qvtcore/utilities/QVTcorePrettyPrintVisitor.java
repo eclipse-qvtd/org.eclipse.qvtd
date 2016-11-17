@@ -21,11 +21,13 @@ import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbasePrettyPrintVisitor;
 import org.eclipse.qvtd.pivot.qvtcore.Area;
 import org.eclipse.qvtd.pivot.qvtcore.Assignment;
 import org.eclipse.qvtd.pivot.qvtcore.BottomPattern;
+import org.eclipse.qvtd.pivot.qvtcore.BottomVariable;
 import org.eclipse.qvtd.pivot.qvtcore.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcore.CoreModel;
 import org.eclipse.qvtd.pivot.qvtcore.CorePattern;
 import org.eclipse.qvtd.pivot.qvtcore.EnforcementOperation;
 import org.eclipse.qvtd.pivot.qvtcore.GuardPattern;
+import org.eclipse.qvtd.pivot.qvtcore.GuardVariable;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtcore.NavigationAssignment;
 import org.eclipse.qvtd.pivot.qvtcore.OppositePropertyAssignment;
@@ -80,6 +82,11 @@ public class QVTcorePrettyPrintVisitor extends QVTbasePrettyPrintVisitor impleme
 	}
 
 	@Override
+	public Object visitBottomVariable(@NonNull BottomVariable object) {
+		return visitVariable(object);
+	}
+
+	@Override
 	public Object visitCoreDomain(@NonNull CoreDomain object) {
 		// TODO Auto-generated method stub
 		return null;
@@ -117,6 +124,11 @@ public class QVTcorePrettyPrintVisitor extends QVTbasePrettyPrintVisitor impleme
 			}
 		}
 		return null;
+	}
+
+	@Override
+	public Object visitGuardVariable(@NonNull GuardVariable object) {
+		return visitVariable(object);
 	}
 
 	@Override

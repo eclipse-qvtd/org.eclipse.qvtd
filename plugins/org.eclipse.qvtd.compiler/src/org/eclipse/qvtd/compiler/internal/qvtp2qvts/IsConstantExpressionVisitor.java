@@ -11,7 +11,6 @@
 package org.eclipse.qvtd.compiler.internal.qvtp2qvts;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
@@ -36,41 +35,44 @@ import org.eclipse.ocl.pivot.TupleLiteralPart;
 import org.eclipse.ocl.pivot.TypeExp;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableExp;
-import org.eclipse.ocl.pivot.util.AbstractExtendingVisitor;
 import org.eclipse.ocl.pivot.util.Visitable;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
+import org.eclipse.qvtd.pivot.qvtcore.util.AbstractExtendingQVTcoreVisitor;
+
+import com.google.common.collect.Iterables;
 
 /**
  * The INSTANCE of the IsConstantExpressionVisitor visits an expression tree to determine whether
  * the tree evaluates to an unconditionally constant value.
- * 
- * Any use of a VariableExp with an indeterminate initializer causes a non-constant verdict. 
- * 
+ *
+ * Any use of a VariableExp with an indeterminate initializer causes a non-constant verdict.
+ *
  * Use of a LoopExp iterator within its loop is constant, provided the loop source is constant.
- * 
+ *
  * Use of NavigationCallExp is constant, provided the navigation source is constant.
- * 
+ *
  * Use of OperationCallExp is constant, provided the source and arguments are constant; OCL has only queries.
  */
-public class IsConstantExpressionVisitor extends AbstractExtendingVisitor<Boolean, Object>
+public class IsConstantExpressionVisitor extends AbstractExtendingQVTcoreVisitor<@NonNull Boolean, @Nullable Object>
 {
 	/**
 	 * Objects (variables) asserted to be constant by the caller.
 	 */
-	protected final @Nullable Set<Object> knownConstants;
+	protected final @Nullable Set<@NonNull Object> knownConstants;
 
 	/**
 	 * Objects (variables) asserted to be constant by the caller or effectively constant as a consequence
 	 * of use within an iteration.
 	 */
-	private /*@LazyNonNull*/ Set<Object> myConstants = null;
+	private /*@LazyNonNull*/ Set<@NonNull Object> myConstants = null;
 
 	/**
 	 * Construct an IsConstantExpressionVisitor that may be used to determine whether expressions
 	 * are constant-valued. If knownConstants is provided any references to them are interpreted
 	 * as constant-valued.
 	 */
-	public IsConstantExpressionVisitor(@Nullable Set<Object> knownConstants) {
-		super(IsConstantExpressionVisitor.class);
+	public IsConstantExpressionVisitor(@Nullable Set<@NonNull Object> knownConstants) {
+		super(null);
 		this.knownConstants = knownConstants;
 	}
 
@@ -145,14 +147,14 @@ public class IsConstantExpressionVisitor extends AbstractExtendingVisitor<Boolea
 		}
 		if (myConstants == null) {
 			if (knownConstants != null) {
-				myConstants = new HashSet<Object>(knownConstants);
+				myConstants = new HashSet<>(knownConstants);
 			}
 			else {
-				myConstants = new HashSet<Object>();
+				myConstants = new HashSet<>();
 			}
 		}
-		List<Variable> ownedIterators = loopExp.getOwnedIterators();
-		myConstants.addAll(ownedIterators);
+		Iterable<@NonNull Variable> ownedIterators = PivotUtil.getOwnedIterators(loopExp);
+		Iterables.addAll(myConstants, ownedIterators);
 		return isConstant(ownedIterators) && isConstant(loopExp.getOwnedBody());
 	}
 

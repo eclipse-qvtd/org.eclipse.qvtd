@@ -44,6 +44,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtcore.Area;
 import org.eclipse.qvtd.pivot.qvtcore.Assignment;
 import org.eclipse.qvtd.pivot.qvtcore.BottomPattern;
+import org.eclipse.qvtd.pivot.qvtcore.BottomVariable;
 import org.eclipse.qvtd.pivot.qvtcore.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcore.CoreModel;
 import org.eclipse.qvtd.pivot.qvtcore.CorePattern;
@@ -450,7 +451,7 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 		public @NonNull Variable visitRealizedVariable(@NonNull RealizedVariable rvIn) {
 			Area aIn = getContainingArea(rvIn);
 			if (isInputDomain(aIn)) {
-				Variable vOut = PivotFactory.eINSTANCE.createVariable();
+				BottomVariable vOut = QVTcoreFactory.eINSTANCE.createBottomVariable();
 				assert vOut != null;
 				context.addTrace(rvIn, vOut);
 				vOut.setName(rvIn.getName());

@@ -27,6 +27,8 @@ import org.eclipse.qvtd.pivot.qvtrelation.RelationDomainAssignment;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationImplementation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationModel;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
+import org.eclipse.qvtd.pivot.qvtrelation.SharedVariable;
+import org.eclipse.qvtd.pivot.qvtrelation.TemplateVariable;
 import org.eclipse.qvtd.pivot.qvtrelation.util.QVTrelationVisitor;
 import org.eclipse.qvtd.pivot.qvttemplate.utilities.QVTtemplateToStringVisitor;
 
@@ -130,7 +132,7 @@ public class QVTrelationToStringVisitor extends QVTtemplateToStringVisitor imple
 		}
 		append("domain ");
 		appendName(object);
-/*		append(" ");
+		/*		append(" ");
 		boolean isFirst = true;
 		for (DomainPattern pattern : object.getPattern()) {
 			if (!isFirst) {
@@ -175,5 +177,15 @@ public class QVTrelationToStringVisitor extends QVTtemplateToStringVisitor imple
 		}
 		append(")");
 		return null;
+	}
+
+	@Override
+	public String visitSharedVariable(@NonNull SharedVariable object) {
+		return visitVariable(object);
+	}
+
+	@Override
+	public String visitTemplateVariable(@NonNull TemplateVariable object) {
+		return visitVariable(object);
 	}
 }

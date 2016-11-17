@@ -32,6 +32,7 @@ import org.eclipse.qvtd.pivot.qvtcore.CorePattern;
 import org.eclipse.qvtd.pivot.qvtcore.NavigationAssignment;
 import org.eclipse.qvtd.pivot.qvtcore.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtcore.VariableAssignment;
+import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
 import org.eclipse.qvtd.pivot.qvtrelation.Key;
 import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
@@ -77,7 +78,7 @@ public class RelationVariableAnalysis extends AbstractVariableAnalysis
 			}
 		}
 		Variable cVariable2 = getCoreVariable();
-		List<@NonNull Assignment> cMiddleBottomAssignments = variablesAnalysis.getMiddleBottomPattern().getAssignment();
+		List<@NonNull Assignment> cMiddleBottomAssignments = QVTcoreUtil.getOwnedAssignments(variablesAnalysis.getMiddleBottomPattern());
 		if (!targetProperty.isIsMany() || (cExpression.getType() instanceof CollectionType)) {
 			VariableExp cSlotVariableExp = variablesAnalysis.createVariableExp(cVariable2);
 			NavigationAssignment cAssignment = variablesAnalysis.createNavigationAssignment(cSlotVariableExp, targetProperty, cExpression);
@@ -293,12 +294,12 @@ public class RelationVariableAnalysis extends AbstractVariableAnalysis
 			//
 			Type type = ClassUtil.nonNullState(rVariable.getType());
 			if (isKeyed) {
-				cVariable2 = variablesAnalysis.createVariable(name, type, true, null);
+				cVariable2 = variablesAnalysis.createBottomVariable(name, type, true, null);
 				initializeKeyedVariable(cVariable2);
 				cPattern.getVariable().add(cVariable2);
 			}
 			else if (!isRealized) {
-				cVariable2 = variablesAnalysis.createVariable(name, type, rVariable.isIsRequired(), null);
+				cVariable2 = variablesAnalysis.createBottomVariable(name, type, rVariable.isIsRequired(), null);
 				cPattern.getVariable().add(cVariable2);
 			}
 			else  {

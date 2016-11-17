@@ -222,6 +222,43 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			return newTypedElements;
 		}
 
+		private @NonNull Variable createIteratorVariable(@NonNull Variable oldVariable) {
+			String name = oldVariable.getName();
+			assert name != null;
+			Type type = oldVariable.getType();
+			assert type != null;
+			assert oldVariable.getOwnedInit() == null;
+			Variable newVariable = helper.createIteratorVariable(name, type, oldVariable.isIsRequired());
+			Node variableNode = getNode(oldVariable);
+			if (variableNode != null) {
+				node2variable.put(variableNode, newVariable);
+			}
+			return newVariable;
+		}
+
+		private @NonNull List<@NonNull Variable> createIteratorVariables(@NonNull List<@NonNull Variable> oldVariables) {
+			List<@NonNull Variable> newVariables = new ArrayList<>(oldVariables.size());
+			for (@NonNull Variable oldVariable : oldVariables) {
+				Variable newVariable = createIteratorVariable(oldVariable);
+				newVariables.add(newVariable);
+			}
+			return newVariables;
+		}
+
+		private @NonNull Variable createLetVariable(@NonNull Variable oldVariable) {
+			String name = oldVariable.getName();
+			assert name != null;
+			Type type = oldVariable.getType();
+			assert type != null;
+			OCLExpression newInit = ClassUtil.nonNullState(create(oldVariable.getOwnedInit()));
+			Variable newVariable = helper.createLetVariable(name, type, oldVariable.isIsRequired(), newInit);
+			Node variableNode = getNode(oldVariable);
+			if (variableNode != null) {
+				node2variable.put(variableNode, newVariable);
+			}
+			return newVariable;
+		}
+
 		private @NonNull OCLExpression createNonNull(@Nullable OCLExpression oldTypedElement) {
 			assert oldTypedElement != null;
 			Node node = context.getNode(oldTypedElement);
@@ -231,16 +268,30 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			return create(node);
 		}
 
-		private @NonNull List<@NonNull Variable> createVariables(@NonNull List<@NonNull Variable> oldVariables) {
+		private @NonNull Variable createResultVariable(@NonNull Variable oldVariable) {
+			String name = oldVariable.getName();
+			assert name != null;
+			Type type = oldVariable.getType();
+			assert type != null;
+			OCLExpression newInit = ClassUtil.nonNullState(create(oldVariable.getOwnedInit()));
+			Variable newVariable = helper.createResultVariable(name, type, oldVariable.isIsRequired(), newInit);
+			Node variableNode = getNode(oldVariable);
+			if (variableNode != null) {
+				node2variable.put(variableNode, newVariable);
+			}
+			return newVariable;
+		}
+
+		/*		private @NonNull List<@NonNull Variable> createVariables(@NonNull List<@NonNull Variable> oldVariables) {
 			List<@NonNull Variable> newVariables = new ArrayList<>(oldVariables.size());
 			for (@NonNull Variable oldVariable : oldVariables) {
 				Variable newVariable = createVariable(oldVariable);
 				newVariables.add(newVariable);
 			}
 			return newVariables;
-		}
+		} */
 
-		private @NonNull Variable createVariable(@NonNull Variable oldVariable) {
+		/*		private @NonNull Variable createVariable(@NonNull Variable oldVariable) {
 			String name = oldVariable.getName();
 			assert name != null;
 			Type type = oldVariable.getType();
@@ -251,7 +302,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 				node2variable.put(variableNode, newVariable);
 			}
 			return newVariable;
-		}
+		} */
 
 		public @Nullable OCLExpression getExpression(@NonNull Node node) {
 			if (node.isExplicitNull()) {
@@ -375,8 +426,8 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		public @NonNull OCLExpression visitIterateExp(@NonNull IterateExp pIterateExp) {
 			OCLExpression iSource = create(pIterateExp.getOwnedSource());
 			assert iSource != null;
-			List<@NonNull ? extends Variable> iIterators = createVariables(ClassUtil.nullFree(pIterateExp.getOwnedIterators()));
-			Variable result = createVariable(ClassUtil.nonNull(pIterateExp.getOwnedResult()));
+			List<@NonNull ? extends Variable> iIterators = createIteratorVariables(ClassUtil.nullFree(pIterateExp.getOwnedIterators()));
+			Variable result = createResultVariable(ClassUtil.nonNull(pIterateExp.getOwnedResult()));
 			Iteration referredIteration = (Iteration) visitor.create(pIterateExp.getReferredIteration());
 			assert referredIteration != null;
 			OCLExpression iBody = getInlineExpressionCreator().create(pIterateExp.getOwnedBody());
@@ -388,7 +439,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		public @NonNull OCLExpression visitIteratorExp(@NonNull IteratorExp pIteratorExp) {
 			OCLExpression iSource = create(pIteratorExp.getOwnedSource());
 			assert iSource != null;
-			List<@NonNull ? extends Variable> iIterators = createVariables(ClassUtil.nullFree(pIteratorExp.getOwnedIterators()));
+			List<@NonNull ? extends Variable> iIterators = createIteratorVariables(ClassUtil.nullFree(pIteratorExp.getOwnedIterators()));
 			Iteration referredIteration = (Iteration) visitor.create(pIteratorExp.getReferredIteration());
 			assert referredIteration != null;
 			OCLExpression iBody = getInlineExpressionCreator().create(pIteratorExp.getOwnedBody());
@@ -398,7 +449,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 
 		@Override
 		public @NonNull OCLExpression visitLetExp(@NonNull LetExp pLetExp) {
-			Variable asVariable = createVariable(ClassUtil.nonNull(pLetExp.getOwnedVariable()));
+			Variable asVariable = createLetVariable(ClassUtil.nonNull(pLetExp.getOwnedVariable()));
 			OCLExpression asInExpression = create(pLetExp.getOwnedIn());
 			assert asInExpression != null;
 			return helper.createLetExp(asVariable, asInExpression);

@@ -32,6 +32,7 @@ import org.eclipse.ocl.xtext.base.cs2as.Continuation;
 import org.eclipse.ocl.xtext.base.cs2as.SingleContinuation;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.xtext.basecs.PathNameCS;
+import org.eclipse.ocl.xtext.essentialoclcs.VariableCS;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
@@ -394,6 +395,12 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 		refreshClassifier(asTransformation, csElement);
 		context.refreshPivotList(ImperativeTypedModel.class, asTransformation.getModelParameter(), csElement.getOwnedDirections());
 		QVTbaseUtil.getContextVariable(standardLibrary, asTransformation);
+		return null;
+	}
+
+	@Override
+	public Continuation<?> visitVariableCS(@NonNull VariableCS csElement) {
+		refreshNamedElement(LoopVariable.class, QVTimperativePackage.Literals.LOOP_VARIABLE, csElement);
 		return null;
 	}
 }

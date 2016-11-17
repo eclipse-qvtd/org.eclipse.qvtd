@@ -45,10 +45,12 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcore.Assignment;
 import org.eclipse.qvtd.pivot.qvtcore.BottomPattern;
+import org.eclipse.qvtd.pivot.qvtcore.BottomVariable;
 import org.eclipse.qvtd.pivot.qvtcore.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcore.CoreModel;
 import org.eclipse.qvtd.pivot.qvtcore.EnforcementOperation;
 import org.eclipse.qvtd.pivot.qvtcore.GuardPattern;
+import org.eclipse.qvtd.pivot.qvtcore.GuardVariable;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtcore.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcoreFactory;
@@ -369,7 +371,12 @@ public class QVTcoreCSContainmentVisitor extends AbstractQVTcoreCSContainmentVis
 
 	@Override
 	public Continuation<?> visitUnrealizedVariableCS(@NonNull UnrealizedVariableCS csElement) {
-		refreshNamedElement(Variable.class, PivotPackage.Literals.VARIABLE, csElement);
+		if (csElement.eContainer() instanceof GuardPatternCS) {
+			refreshNamedElement(GuardVariable.class, QVTcorePackage.Literals.GUARD_VARIABLE, csElement);
+		}
+		else {
+			refreshNamedElement(BottomVariable.class, QVTcorePackage.Literals.BOTTOM_VARIABLE, csElement);
+		}
 		return null;
 	}
 }

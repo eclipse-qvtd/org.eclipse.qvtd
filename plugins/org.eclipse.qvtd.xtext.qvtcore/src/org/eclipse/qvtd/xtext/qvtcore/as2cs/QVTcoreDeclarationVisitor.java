@@ -62,11 +62,13 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtcore.Assignment;
 import org.eclipse.qvtd.pivot.qvtcore.BottomPattern;
+import org.eclipse.qvtd.pivot.qvtcore.BottomVariable;
 import org.eclipse.qvtd.pivot.qvtcore.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcore.CoreModel;
 import org.eclipse.qvtd.pivot.qvtcore.CorePattern;
 import org.eclipse.qvtd.pivot.qvtcore.EnforcementOperation;
 import org.eclipse.qvtd.pivot.qvtcore.GuardPattern;
+import org.eclipse.qvtd.pivot.qvtcore.GuardVariable;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtcore.NavigationAssignment;
 import org.eclipse.qvtd.pivot.qvtcore.OppositePropertyAssignment;
@@ -332,6 +334,11 @@ public class QVTcoreDeclarationVisitor extends QVTbaseDeclarationVisitor impleme
 	}
 
 	@Override
+	public ElementCS visitBottomVariable(@NonNull BottomVariable object) {
+		return visitVariable(object);
+	}
+
+	@Override
 	public ElementCS visitCoreDomain(@NonNull CoreDomain asCoreDomain) {
 		DomainCS csDomain = createCoreDomain(asCoreDomain);
 		csDomain.setPivot(asCoreDomain);
@@ -428,6 +435,11 @@ public class QVTcoreDeclarationVisitor extends QVTbaseDeclarationVisitor impleme
 		context.refreshList(csGuardPattern.getOwnedPredicates(), context.visitDeclarations(PredicateCS.class, asGuardPattern.getPredicate(), null));
 		context.refreshList(csGuardPattern.getOwnedUnrealizedVariables(), context.visitDeclarations(UnrealizedVariableCS.class, asGuardPattern.getVariable(), null));
 		return csGuardPattern;
+	}
+
+	@Override
+	public ElementCS visitGuardVariable(@NonNull GuardVariable object) {
+		return visitVariable(object);
 	}
 
 	@Override

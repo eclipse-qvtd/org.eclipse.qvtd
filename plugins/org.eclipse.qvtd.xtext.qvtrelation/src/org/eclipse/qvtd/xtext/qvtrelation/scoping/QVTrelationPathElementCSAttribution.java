@@ -21,6 +21,7 @@ import org.eclipse.ocl.pivot.internal.scoping.ScopeView;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.xtext.base.attributes.PathElementCSAttribution;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
+import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationHelper;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 import org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS;
 
@@ -36,10 +37,11 @@ public class QVTrelationPathElementCSAttribution extends PathElementCSAttributio
 				if (eObject instanceof RelationCS) {
 					Relation relation = PivotUtil.getPivot(Relation.class, (RelationCS)eObject);
 					if (relation != null) {
+						QVTrelationHelper helper = new QVTrelationHelper(environmentView.getEnvironmentFactory());
 						List<Variable> variables = relation.getVariable();
 						AnyType oclAnyType = environmentView.getStandardLibrary().getOclAnyType();
 						String variableName = QVTrelationUtil.DUMMY_VARIABLE_NAME + variables.size();
-						Variable asVariable = PivotUtil.createVariable(variableName, oclAnyType, true, null);
+						Variable asVariable = helper.createSharedVariable(variableName, oclAnyType, true, null);
 						asVariable.setIsImplicit(true);
 						variables.add(asVariable);
 						environmentView.addElement(QVTrelationUtil.DUMMY_VARIABLE_NAME, asVariable);
@@ -49,9 +51,9 @@ public class QVTrelationPathElementCSAttribution extends PathElementCSAttributio
 			}
 			return null;
 		}
-//		else if (name == null) {
-//			env
-//		}
+		//		else if (name == null) {
+		//			env
+		//		}
 		return super.computeLookup(target, environmentView, scopeView);
 	}
 }

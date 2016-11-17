@@ -335,7 +335,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 			OCLExpression cExpression = createVariableExp(cVariable);
 			NavigationAssignment cAssignment = createNavigationAssignment(cSlotVariableExp, cTargetProperty, cExpression);
 			QVTr2QVTc.SYNTHESIS.println("  addPropertyAssignment " + cAssignment);
-			assertNewAssignment(cMiddleBottomPattern.getAssignment(), cAssignment);
+			assertNewAssignment(QVTcoreUtil.getOwnedAssignments(cMiddleBottomPattern), cAssignment);
 			cMiddleBottomPattern.getAssignment().add(cAssignment);
 		}
 		return cVariable;
@@ -350,7 +350,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		}
 	}
 
-	public void assertNewAssignment(@NonNull List<@NonNull Assignment> oldAssignments, @NonNull NavigationAssignment newAssignment) {
+	public void assertNewAssignment(@NonNull Iterable<@NonNull Assignment> oldAssignments, @NonNull NavigationAssignment newAssignment) {
 		//		if ("tr.action := sm".equals(newAssignment.toString())) {
 		//			newAssignment.toString();
 		//		}
@@ -358,7 +358,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		if (newSlotExpression instanceof VariableExp) {
 			VariableDeclaration newVariable = ((VariableExp)newSlotExpression).getReferredVariable();
 			Property targetProperty = QVTcoreUtil.getTargetProperty(newAssignment);
-			for (Assignment oldAssignment : oldAssignments) {
+			for (@NonNull Assignment oldAssignment : oldAssignments) {
 				if (oldAssignment instanceof NavigationAssignment) {
 					if (QVTcoreUtil.getTargetProperty((NavigationAssignment)oldAssignment) == targetProperty) {
 						OCLExpression oldSlotExpression = ((NavigationAssignment)oldAssignment).getSlotExpression();
