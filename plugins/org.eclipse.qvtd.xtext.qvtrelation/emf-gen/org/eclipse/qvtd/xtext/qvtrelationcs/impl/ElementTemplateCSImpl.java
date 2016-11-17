@@ -15,8 +15,8 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
+import org.eclipse.qvtd.pivot.qvtrelation.SharedVariable;
 import org.eclipse.qvtd.xtext.qvtrelationcs.ElementTemplateCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage;
 import org.eclipse.qvtd.xtext.qvtrelationcs.util.QVTrelationCSVisitor;
@@ -43,7 +43,7 @@ public class ElementTemplateCSImpl extends TemplateVariableCSImpl implements Ele
 	 * @generated
 	 * @ordered
 	 */
-	protected Variable identifier;
+	protected SharedVariable identifier;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -70,10 +70,10 @@ public class ElementTemplateCSImpl extends TemplateVariableCSImpl implements Ele
 	 * @generated
 	 */
 	@Override
-	public Variable getIdentifier() {
+	public SharedVariable getIdentifier() {
 		if (identifier != null && identifier.eIsProxy()) {
 			InternalEObject oldIdentifier = (InternalEObject)identifier;
-			identifier = (Variable)eResolveProxy(oldIdentifier);
+			identifier = (SharedVariable)eResolveProxy(oldIdentifier);
 			if (identifier != oldIdentifier) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTrelationCSPackage.ELEMENT_TEMPLATE_CS__IDENTIFIER, oldIdentifier, identifier));
@@ -87,7 +87,7 @@ public class ElementTemplateCSImpl extends TemplateVariableCSImpl implements Ele
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Variable basicGetIdentifier() {
+	public SharedVariable basicGetIdentifier() {
 		return identifier;
 	}
 
@@ -97,8 +97,8 @@ public class ElementTemplateCSImpl extends TemplateVariableCSImpl implements Ele
 	 * @generated
 	 */
 	@Override
-	public void setIdentifier(Variable newIdentifier) {
-		Variable oldIdentifier = identifier;
+	public void setIdentifier(SharedVariable newIdentifier) {
+		SharedVariable oldIdentifier = identifier;
 		identifier = newIdentifier;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.ELEMENT_TEMPLATE_CS__IDENTIFIER, oldIdentifier, identifier));
@@ -128,7 +128,7 @@ public class ElementTemplateCSImpl extends TemplateVariableCSImpl implements Ele
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case QVTrelationCSPackage.ELEMENT_TEMPLATE_CS__IDENTIFIER:
-				setIdentifier((Variable)newValue);
+				setIdentifier((SharedVariable)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -143,7 +143,7 @@ public class ElementTemplateCSImpl extends TemplateVariableCSImpl implements Ele
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case QVTrelationCSPackage.ELEMENT_TEMPLATE_CS__IDENTIFIER:
-				setIdentifier((Variable)null);
+				setIdentifier((SharedVariable)null);
 				return;
 		}
 		super.eUnset(featureID);

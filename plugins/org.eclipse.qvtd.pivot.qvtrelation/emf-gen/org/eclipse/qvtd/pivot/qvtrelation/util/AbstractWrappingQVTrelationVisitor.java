@@ -138,4 +138,28 @@ public abstract class AbstractWrappingQVTrelationVisitor<R, C, @NonNull D extend
 			return badVisit(object, prologue, e);
 		}
 	}
+
+	@Override
+	public R visitSharedVariable(org.eclipse.qvtd.pivot.qvtrelation.@NonNull SharedVariable object) {
+		@Nullable P prologue = preVisit(object);
+		try {
+			R result = delegate.visitSharedVariable(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
+	}
+
+	@Override
+	public R visitTemplateVariable(org.eclipse.qvtd.pivot.qvtrelation.@NonNull TemplateVariable object) {
+		@Nullable P prologue = preVisit(object);
+		try {
+			R result = delegate.visitTemplateVariable(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
+	}
 }

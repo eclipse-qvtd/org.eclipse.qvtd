@@ -517,7 +517,7 @@ ruleDefaultValueCS returns [EObject current=null]
 	        }
         }
 		{ 
-	        newCompositeNode(grammarAccess.getDefaultValueCSAccess().getPropertyIdVariableCrossReference_0_0()); 
+	        newCompositeNode(grammarAccess.getDefaultValueCSAccess().getPropertyIdSharedVariableCrossReference_0_0()); 
 	    }
 		ruleUnrestrictedName		{ 
 	        afterParserOrEnumRuleCall();
@@ -796,7 +796,7 @@ ruleElementTemplateCS returns [EObject current=null]
 	        }
         }
 		{ 
-	        newCompositeNode(grammarAccess.getElementTemplateCSAccess().getIdentifierVariableCrossReference_0()); 
+	        newCompositeNode(grammarAccess.getElementTemplateCSAccess().getIdentifierSharedVariableCrossReference_0()); 
 	    }
 		ruleUnrestrictedName		{ 
 	        afterParserOrEnumRuleCall();

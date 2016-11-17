@@ -25,11 +25,13 @@ public interface QVTcoreVisitor<R> extends org.eclipse.qvtd.pivot.qvtbase.util.Q
 {
 	R visitAssignment(org.eclipse.qvtd.pivot.qvtcore.@NonNull Assignment object);
 	R visitBottomPattern(org.eclipse.qvtd.pivot.qvtcore.@NonNull BottomPattern object);
+	R visitBottomVariable(org.eclipse.qvtd.pivot.qvtcore.@NonNull BottomVariable object);
 	R visitCoreDomain(org.eclipse.qvtd.pivot.qvtcore.@NonNull CoreDomain object);
 	R visitCoreModel(org.eclipse.qvtd.pivot.qvtcore.@NonNull CoreModel object);
 	R visitCorePattern(org.eclipse.qvtd.pivot.qvtcore.@NonNull CorePattern object);
 	R visitEnforcementOperation(org.eclipse.qvtd.pivot.qvtcore.@NonNull EnforcementOperation object);
 	R visitGuardPattern(org.eclipse.qvtd.pivot.qvtcore.@NonNull GuardPattern object);
+	R visitGuardVariable(org.eclipse.qvtd.pivot.qvtcore.@NonNull GuardVariable object);
 	R visitMapping(org.eclipse.qvtd.pivot.qvtcore.@NonNull Mapping object);
 	R visitNavigationAssignment(org.eclipse.qvtd.pivot.qvtcore.@NonNull NavigationAssignment object);
 	R visitOppositePropertyAssignment(org.eclipse.qvtd.pivot.qvtcore.@NonNull OppositePropertyAssignment object);

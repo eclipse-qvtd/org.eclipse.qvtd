@@ -77,4 +77,14 @@ public abstract class AbstractMergedQVTrelationVisitor<R, C>
 	public R visitRelationalTransformation(org.eclipse.qvtd.pivot.qvtrelation.@NonNull RelationalTransformation object) {
 		return visiting(object);
 	}
+
+	@Override
+	public R visitSharedVariable(org.eclipse.qvtd.pivot.qvtrelation.@NonNull SharedVariable object) {
+		return visiting(object);
+	}
+
+	@Override
+	public R visitTemplateVariable(org.eclipse.qvtd.pivot.qvtrelation.@NonNull TemplateVariable object) {
+		return visiting(object);
+	}
 }

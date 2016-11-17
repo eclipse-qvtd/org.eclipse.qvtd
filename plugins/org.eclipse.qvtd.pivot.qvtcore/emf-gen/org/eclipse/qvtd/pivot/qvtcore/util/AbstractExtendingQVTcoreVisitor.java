@@ -50,6 +50,11 @@ public abstract class AbstractExtendingQVTcoreVisitor<R, C>
 	}
 
 	@Override
+	public R visitBottomVariable(org.eclipse.qvtd.pivot.qvtcore.@NonNull BottomVariable object) {
+		return visitVariable(object);
+	}
+
+	@Override
 	public R visitCoreDomain(org.eclipse.qvtd.pivot.qvtcore.@NonNull CoreDomain object) {
 		return visitDomain(object);
 	}
@@ -72,6 +77,11 @@ public abstract class AbstractExtendingQVTcoreVisitor<R, C>
 	@Override
 	public R visitGuardPattern(org.eclipse.qvtd.pivot.qvtcore.@NonNull GuardPattern object) {
 		return visitCorePattern(object);
+	}
+
+	@Override
+	public R visitGuardVariable(org.eclipse.qvtd.pivot.qvtcore.@NonNull GuardVariable object) {
+		return visitVariable(object);
 	}
 
 	@Override

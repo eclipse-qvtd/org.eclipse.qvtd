@@ -16,10 +16,10 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.xtext.basecs.impl.ModelElementCSImpl;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
+import org.eclipse.qvtd.pivot.qvtrelation.SharedVariable;
 import org.eclipse.qvtd.xtext.qvtrelationcs.DefaultValueCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage;
 import org.eclipse.qvtd.xtext.qvtrelationcs.util.QVTrelationCSVisitor;
@@ -57,7 +57,7 @@ public class DefaultValueCSImpl extends ModelElementCSImpl implements DefaultVal
 	 * @generated
 	 * @ordered
 	 */
-	protected Variable propertyId;
+	protected SharedVariable propertyId;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -129,10 +129,10 @@ public class DefaultValueCSImpl extends ModelElementCSImpl implements DefaultVal
 	 * @generated
 	 */
 	@Override
-	public Variable getPropertyId() {
+	public SharedVariable getPropertyId() {
 		if (propertyId != null && propertyId.eIsProxy()) {
 			InternalEObject oldPropertyId = (InternalEObject)propertyId;
-			propertyId = (Variable)eResolveProxy(oldPropertyId);
+			propertyId = (SharedVariable)eResolveProxy(oldPropertyId);
 			if (propertyId != oldPropertyId) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTrelationCSPackage.DEFAULT_VALUE_CS__PROPERTY_ID, oldPropertyId, propertyId));
@@ -146,7 +146,7 @@ public class DefaultValueCSImpl extends ModelElementCSImpl implements DefaultVal
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Variable basicGetPropertyId() {
+	public SharedVariable basicGetPropertyId() {
 		return propertyId;
 	}
 
@@ -156,8 +156,8 @@ public class DefaultValueCSImpl extends ModelElementCSImpl implements DefaultVal
 	 * @generated
 	 */
 	@Override
-	public void setPropertyId(Variable newPropertyId) {
-		Variable oldPropertyId = propertyId;
+	public void setPropertyId(SharedVariable newPropertyId) {
+		SharedVariable oldPropertyId = propertyId;
 		propertyId = newPropertyId;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.DEFAULT_VALUE_CS__PROPERTY_ID, oldPropertyId, propertyId));
@@ -206,7 +206,7 @@ public class DefaultValueCSImpl extends ModelElementCSImpl implements DefaultVal
 				setOwnedInitExpression((ExpCS)newValue);
 				return;
 			case QVTrelationCSPackage.DEFAULT_VALUE_CS__PROPERTY_ID:
-				setPropertyId((Variable)newValue);
+				setPropertyId((SharedVariable)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -224,7 +224,7 @@ public class DefaultValueCSImpl extends ModelElementCSImpl implements DefaultVal
 				setOwnedInitExpression((ExpCS)null);
 				return;
 			case QVTrelationCSPackage.DEFAULT_VALUE_CS__PROPERTY_ID:
-				setPropertyId((Variable)null);
+				setPropertyId((SharedVariable)null);
 				return;
 		}
 		super.eUnset(featureID);

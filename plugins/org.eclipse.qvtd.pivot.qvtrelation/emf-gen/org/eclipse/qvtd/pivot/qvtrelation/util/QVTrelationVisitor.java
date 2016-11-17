@@ -32,4 +32,6 @@ public interface QVTrelationVisitor<R> extends org.eclipse.qvtd.pivot.qvttemplat
 	R visitRelationImplementation(org.eclipse.qvtd.pivot.qvtrelation.@NonNull RelationImplementation object);
 	R visitRelationModel(org.eclipse.qvtd.pivot.qvtrelation.@NonNull RelationModel object);
 	R visitRelationalTransformation(org.eclipse.qvtd.pivot.qvtrelation.@NonNull RelationalTransformation object);
+	R visitSharedVariable(org.eclipse.qvtd.pivot.qvtrelation.@NonNull SharedVariable object);
+	R visitTemplateVariable(org.eclipse.qvtd.pivot.qvtrelation.@NonNull TemplateVariable object);
 }

@@ -114,6 +114,10 @@ public class QVTcoreAdapterFactory extends AdapterFactoryImpl {
 				return createBottomPatternAdapter();
 			}
 			@Override
+			public Adapter caseBottomVariable(BottomVariable object) {
+				return createBottomVariableAdapter();
+			}
+			@Override
 			public Adapter caseCoreDomain(CoreDomain object) {
 				return createCoreDomainAdapter();
 			}
@@ -132,6 +136,10 @@ public class QVTcoreAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseGuardPattern(GuardPattern object) {
 				return createGuardPatternAdapter();
+			}
+			@Override
+			public Adapter caseGuardVariable(GuardVariable object) {
+				return createGuardVariableAdapter();
 			}
 			@Override
 			public Adapter caseMapping(Mapping object) {
@@ -178,6 +186,18 @@ public class QVTcoreAdapterFactory extends AdapterFactoryImpl {
 				return createNamedElementAdapter();
 			}
 			@Override
+			public Adapter caseTypedElement(TypedElement object) {
+				return createTypedElementAdapter();
+			}
+			@Override
+			public Adapter caseVariableDeclaration(VariableDeclaration object) {
+				return createVariableDeclarationAdapter();
+			}
+			@Override
+			public Adapter caseVariable(Variable object) {
+				return createVariableAdapter();
+			}
+			@Override
 			public Adapter caseReferringElement(ReferringElement object) {
 				return createReferringElementAdapter();
 			}
@@ -200,18 +220,6 @@ public class QVTcoreAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseRule(Rule object) {
 				return createRuleAdapter();
-			}
-			@Override
-			public Adapter caseTypedElement(TypedElement object) {
-				return createTypedElementAdapter();
-			}
-			@Override
-			public Adapter caseVariableDeclaration(VariableDeclaration object) {
-				return createVariableDeclarationAdapter();
-			}
-			@Override
-			public Adapter caseVariable(Variable object) {
-				return createVariableAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -290,6 +298,20 @@ public class QVTcoreAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtcore.GuardVariable <em>Guard Variable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.pivot.qvtcore.GuardVariable
+	 * @generated
+	 */
+	public Adapter createGuardVariableAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtcore.Area <em>Area</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -328,6 +350,20 @@ public class QVTcoreAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createBottomPatternAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtcore.BottomVariable <em>Bottom Variable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.pivot.qvtcore.BottomVariable
+	 * @generated
+	 */
+	public Adapter createBottomVariableAdapter() {
 		return null;
 	}
 

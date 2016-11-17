@@ -127,6 +127,19 @@ public class QVTcoreSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case QVTcorePackage.BOTTOM_VARIABLE: {
+				BottomVariable bottomVariable = (BottomVariable)theEObject;
+				T result = caseBottomVariable(bottomVariable);
+				if (result == null) result = caseVariable(bottomVariable);
+				if (result == null) result = caseVariableDeclaration(bottomVariable);
+				if (result == null) result = caseTypedElement(bottomVariable);
+				if (result == null) result = caseNamedElement(bottomVariable);
+				if (result == null) result = caseElement(bottomVariable);
+				if (result == null) result = caseNameable(bottomVariable);
+				if (result == null) result = caseVisitable(bottomVariable);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case QVTcorePackage.CORE_DOMAIN: {
 				CoreDomain coreDomain = (CoreDomain)theEObject;
 				T result = caseCoreDomain(coreDomain);
@@ -177,6 +190,19 @@ public class QVTcoreSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = casePattern(guardPattern);
 				if (result == null) result = caseElement(guardPattern);
 				if (result == null) result = caseVisitable(guardPattern);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case QVTcorePackage.GUARD_VARIABLE: {
+				GuardVariable guardVariable = (GuardVariable)theEObject;
+				T result = caseGuardVariable(guardVariable);
+				if (result == null) result = caseVariable(guardVariable);
+				if (result == null) result = caseVariableDeclaration(guardVariable);
+				if (result == null) result = caseTypedElement(guardVariable);
+				if (result == null) result = caseNamedElement(guardVariable);
+				if (result == null) result = caseElement(guardVariable);
+				if (result == null) result = caseNameable(guardVariable);
+				if (result == null) result = caseVisitable(guardVariable);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -293,6 +319,21 @@ public class QVTcoreSwitch<@Nullable T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Bottom Variable</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Bottom Variable</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseBottomVariable(BottomVariable object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Core Domain</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -364,6 +405,21 @@ public class QVTcoreSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseGuardPattern(GuardPattern object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Guard Variable</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Guard Variable</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseGuardVariable(GuardVariable object) {
 		return null;
 	}
 

@@ -18,13 +18,13 @@ import org.eclipse.ocl.pivot.Variable;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Realized Variable</b></em>'.
+ * A representation of the model object '<em><b>Guard Variable</b></em>'.
  * <!-- end-user-doc -->
  *
  *
- * @see org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage#getRealizedVariable()
+ * @see org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage#getGuardVariable()
  * @model
  * @generated
  */
-public interface RealizedVariable extends Variable {
-} // RealizedVariable
+public interface GuardVariable extends Variable {
+} // GuardVariable

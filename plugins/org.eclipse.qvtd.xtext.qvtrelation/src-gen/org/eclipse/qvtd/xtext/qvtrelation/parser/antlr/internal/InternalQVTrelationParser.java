@@ -1485,7 +1485,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             }
             if ( state.backtracking==0 ) {
                
-              	        newCompositeNode(grammarAccess.getDefaultValueCSAccess().getPropertyIdVariableCrossReference_0_0()); 
+              	        newCompositeNode(grammarAccess.getDefaultValueCSAccess().getPropertyIdSharedVariableCrossReference_0_0()); 
               	    
             }
             pushFollow(FollowSets000.FOLLOW_18);
@@ -2250,7 +2250,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
             }
             if ( state.backtracking==0 ) {
                
-              	        newCompositeNode(grammarAccess.getElementTemplateCSAccess().getIdentifierVariableCrossReference_0()); 
+              	        newCompositeNode(grammarAccess.getElementTemplateCSAccess().getIdentifierSharedVariableCrossReference_0()); 
               	    
             }
             pushFollow(FollowSets000.FOLLOW_2);

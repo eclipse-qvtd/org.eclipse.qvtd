@@ -11,6 +11,7 @@
 package org.eclipse.qvtd.pivot.qvtrelation;
 
 import org.eclipse.emf.ecore.EFactory;
+import org.eclipse.jdt.annotation.NonNull;
 
 /**
  * <!-- begin-user-doc -->
@@ -36,7 +37,7 @@ public interface QVTrelationFactory extends EFactory {
 	 * @return a new object of class '<em>Domain Pattern</em>'.
 	 * @generated
 	 */
-	DomainPattern createDomainPattern();
+	@NonNull DomainPattern createDomainPattern();
 
 	/**
 	 * Returns a new object of class '<em>Key</em>'.
@@ -45,7 +46,7 @@ public interface QVTrelationFactory extends EFactory {
 	 * @return a new object of class '<em>Key</em>'.
 	 * @generated
 	 */
-	Key createKey();
+	@NonNull Key createKey();
 
 	/**
 	 * Returns a new object of class '<em>Relation</em>'.
@@ -54,7 +55,7 @@ public interface QVTrelationFactory extends EFactory {
 	 * @return a new object of class '<em>Relation</em>'.
 	 * @generated
 	 */
-	Relation createRelation();
+	@NonNull Relation createRelation();
 
 	/**
 	 * Returns a new object of class '<em>Relation Call Exp</em>'.
@@ -63,7 +64,7 @@ public interface QVTrelationFactory extends EFactory {
 	 * @return a new object of class '<em>Relation Call Exp</em>'.
 	 * @generated
 	 */
-	RelationCallExp createRelationCallExp();
+	@NonNull RelationCallExp createRelationCallExp();
 
 	/**
 	 * Returns a new object of class '<em>Relation Domain</em>'.
@@ -72,7 +73,7 @@ public interface QVTrelationFactory extends EFactory {
 	 * @return a new object of class '<em>Relation Domain</em>'.
 	 * @generated
 	 */
-	RelationDomain createRelationDomain();
+	@NonNull RelationDomain createRelationDomain();
 
 	/**
 	 * Returns a new object of class '<em>Relation Domain Assignment</em>'.
@@ -81,7 +82,7 @@ public interface QVTrelationFactory extends EFactory {
 	 * @return a new object of class '<em>Relation Domain Assignment</em>'.
 	 * @generated
 	 */
-	RelationDomainAssignment createRelationDomainAssignment();
+	@NonNull RelationDomainAssignment createRelationDomainAssignment();
 
 	/**
 	 * Returns a new object of class '<em>Relation Model</em>'.
@@ -90,7 +91,7 @@ public interface QVTrelationFactory extends EFactory {
 	 * @return a new object of class '<em>Relation Model</em>'.
 	 * @generated
 	 */
-	RelationModel createRelationModel();
+	@NonNull RelationModel createRelationModel();
 
 	/**
 	 * Returns a new object of class '<em>Relation Implementation</em>'.
@@ -99,7 +100,7 @@ public interface QVTrelationFactory extends EFactory {
 	 * @return a new object of class '<em>Relation Implementation</em>'.
 	 * @generated
 	 */
-	RelationImplementation createRelationImplementation();
+	@NonNull RelationImplementation createRelationImplementation();
 
 	/**
 	 * Returns a new object of class '<em>Relational Transformation</em>'.
@@ -108,7 +109,25 @@ public interface QVTrelationFactory extends EFactory {
 	 * @return a new object of class '<em>Relational Transformation</em>'.
 	 * @generated
 	 */
-	RelationalTransformation createRelationalTransformation();
+	@NonNull RelationalTransformation createRelationalTransformation();
+
+	/**
+	 * Returns a new object of class '<em>Shared Variable</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Shared Variable</em>'.
+	 * @generated
+	 */
+	@NonNull SharedVariable createSharedVariable();
+
+	/**
+	 * Returns a new object of class '<em>Template Variable</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Template Variable</em>'.
+	 * @generated
+	 */
+	@NonNull TemplateVariable createTemplateVariable();
 
 	/**
 	 * Returns the package supported by this factory.

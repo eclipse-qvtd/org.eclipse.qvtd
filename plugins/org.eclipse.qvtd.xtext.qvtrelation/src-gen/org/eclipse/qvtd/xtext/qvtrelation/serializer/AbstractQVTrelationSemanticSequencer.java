@@ -621,7 +621,7 @@ public abstract class AbstractQVTrelationSemanticSequencer extends QVTbaseSemant
 	 *     DefaultValueCS returns DefaultValueCS
 	 *
 	 * Constraint:
-	 *     (propertyId=[Variable|UnrestrictedName] ownedInitExpression=ExpCS)
+	 *     (propertyId=[SharedVariable|UnrestrictedName] ownedInitExpression=ExpCS)
 	 */
 	protected void sequence_DefaultValueCS(ISerializationContext context, DefaultValueCS semanticObject) {
 		if (errorAcceptor != null) {
@@ -631,7 +631,7 @@ public abstract class AbstractQVTrelationSemanticSequencer extends QVTbaseSemant
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, QVTrelationCSPackage.Literals.DEFAULT_VALUE_CS__OWNED_INIT_EXPRESSION));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getDefaultValueCSAccess().getPropertyIdVariableUnrestrictedNameParserRuleCall_0_0_1(), semanticObject.getPropertyId());
+		feeder.accept(grammarAccess.getDefaultValueCSAccess().getPropertyIdSharedVariableUnrestrictedNameParserRuleCall_0_0_1(), semanticObject.getPropertyId());
 		feeder.accept(grammarAccess.getDefaultValueCSAccess().getOwnedInitExpressionExpCSParserRuleCall_2_0(), semanticObject.getOwnedInitExpression());
 		feeder.finish();
 	}
@@ -679,7 +679,7 @@ public abstract class AbstractQVTrelationSemanticSequencer extends QVTbaseSemant
 	 *     ElementTemplateCS returns ElementTemplateCS
 	 *
 	 * Constraint:
-	 *     identifier=[Variable|UnrestrictedName]
+	 *     identifier=[SharedVariable|UnrestrictedName]
 	 */
 	protected void sequence_ElementTemplateCS(ISerializationContext context, ElementTemplateCS semanticObject) {
 		if (errorAcceptor != null) {
@@ -687,7 +687,7 @@ public abstract class AbstractQVTrelationSemanticSequencer extends QVTbaseSemant
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, QVTrelationCSPackage.Literals.ELEMENT_TEMPLATE_CS__IDENTIFIER));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getElementTemplateCSAccess().getIdentifierVariableUnrestrictedNameParserRuleCall_0_1(), semanticObject.getIdentifier());
+		feeder.accept(grammarAccess.getElementTemplateCSAccess().getIdentifierSharedVariableUnrestrictedNameParserRuleCall_0_1(), semanticObject.getIdentifier());
 		feeder.finish();
 	}
 	

@@ -12,30 +12,35 @@
  * 
  * </copyright>
  */
-package org.eclipse.qvtd.pivot.qvtcore.impl;
+package org.eclipse.qvtd.pivot.qvtrelation.impl;
 
 import org.eclipse.emf.ecore.EClass;
+
 import org.eclipse.jdt.annotation.NonNull;
+
 import org.eclipse.ocl.pivot.internal.VariableImpl;
+
 import org.eclipse.ocl.pivot.util.Visitor;
-import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
-import org.eclipse.qvtd.pivot.qvtcore.RealizedVariable;
-import org.eclipse.qvtd.pivot.qvtcore.util.QVTcoreVisitor;
+
+import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage;
+import org.eclipse.qvtd.pivot.qvtrelation.SharedVariable;
+
+import org.eclipse.qvtd.pivot.qvtrelation.util.QVTrelationVisitor;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Realized Variable</b></em>'.
+ * An implementation of the model object '<em><b>Shared Variable</b></em>'.
  * <!-- end-user-doc -->
  *
  * @generated
  */
-public class RealizedVariableImpl extends VariableImpl implements RealizedVariable {
+public class SharedVariableImpl extends VariableImpl implements SharedVariable {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected RealizedVariableImpl() {
+	protected SharedVariableImpl() {
 		super();
 	}
 
@@ -46,7 +51,7 @@ public class RealizedVariableImpl extends VariableImpl implements RealizedVariab
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return QVTcorePackage.Literals.REALIZED_VARIABLE;
+		return QVTrelationPackage.Literals.SHARED_VARIABLE;
 	}
 
 	/**
@@ -56,7 +61,7 @@ public class RealizedVariableImpl extends VariableImpl implements RealizedVariab
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTcoreVisitor<?>)visitor).visitRealizedVariable(this);
+		return (R) ((QVTrelationVisitor<?>)visitor).visitSharedVariable(this);
 	}
 
-} //RealizedVariableImpl
+} //SharedVariableImpl

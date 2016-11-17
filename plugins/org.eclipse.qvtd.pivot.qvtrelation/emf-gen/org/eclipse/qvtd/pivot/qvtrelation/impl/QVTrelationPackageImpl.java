@@ -28,6 +28,8 @@ import org.eclipse.qvtd.pivot.qvtrelation.RelationDomainAssignment;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationImplementation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationModel;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
+import org.eclipse.qvtd.pivot.qvtrelation.SharedVariable;
+import org.eclipse.qvtd.pivot.qvtrelation.TemplateVariable;
 import org.eclipse.qvtd.pivot.qvttemplate.QVTtemplatePackage;
 
 /**
@@ -101,6 +103,20 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 	private EClass relationalTransformationEClass = null;
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass sharedVariableEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass templateVariableEClass = null;
+
+	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
 	 * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
 	 * package URI value.
@@ -128,7 +144,7 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link QVTrelationPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -160,7 +176,7 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 		// Mark meta-data to indicate it can't be changed
 		theQVTrelationPackage.freeze();
 
-  
+
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(QVTrelationPackage.eNS_URI, theQVTrelationPackage);
 		return theQVTrelationPackage;
@@ -472,6 +488,26 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 	 * @generated
 	 */
 	@Override
+	public EClass getSharedVariable() {
+		return sharedVariableEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getTemplateVariable() {
+		return templateVariableEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public QVTrelationFactory getQVTrelationFactory() {
 		return (QVTrelationFactory)getEFactoryInstance();
 	}
@@ -533,6 +569,10 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 
 		relationalTransformationEClass = createEClass(RELATIONAL_TRANSFORMATION);
 		createEReference(relationalTransformationEClass, RELATIONAL_TRANSFORMATION__OWNED_KEY);
+
+		sharedVariableEClass = createEClass(SHARED_VARIABLE);
+
+		templateVariableEClass = createEClass(TEMPLATE_VARIABLE);
 	}
 
 	/**
@@ -577,6 +617,8 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 		relationModelEClass.getESuperTypes().add(theQVTbasePackage.getBaseModel());
 		relationImplementationEClass.getESuperTypes().add(thePivotPackage.getElement());
 		relationalTransformationEClass.getESuperTypes().add(theQVTbasePackage.getTransformation());
+		sharedVariableEClass.getESuperTypes().add(thePivotPackage.getVariable());
+		templateVariableEClass.getESuperTypes().add(thePivotPackage.getVariable());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(domainPatternEClass, DomainPattern.class, "DomainPattern", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -618,6 +660,10 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 		initEClass(relationalTransformationEClass, RelationalTransformation.class, "RelationalTransformation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getRelationalTransformation_OwnedKey(), this.getKey(), this.getKey_Transformation(), "ownedKey", null, 0, -1, RelationalTransformation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
+		initEClass(sharedVariableEClass, SharedVariable.class, "SharedVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(templateVariableEClass, TemplateVariable.class, "TemplateVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
 		// Create resource
 		createResource(eNS_URI);
 
@@ -633,67 +679,67 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 	 * @generated
 	 */
 	protected void createEmofAnnotations() {
-		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";	
+		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";
 		addAnnotation
-		  (getKey_Identifies(), 
-		   source, 
-		   new String[] {
-			 "body", "key"
-		   });	
+		(getKey_Identifies(),
+			source,
+			new String[] {
+				"body", "key"
+		});
 		addAnnotation
-		  (getKey_Part(), 
-		   source, 
-		   new String[] {
-			 "body", "key"
-		   });	
+		(getKey_Part(),
+			source,
+			new String[] {
+				"body", "key"
+		});
 		addAnnotation
-		  (getKey_OppositePart(), 
-		   source, 
-		   new String[] {
-			 "body", "oppKey"
-		   });	
+		(getKey_OppositePart(),
+			source,
+			new String[] {
+				"body", "oppKey"
+		});
 		addAnnotation
-		  (getRelation_When(), 
-		   source, 
-		   new String[] {
-			 "body", "whenOwner"
-		   });	
+		(getRelation_When(),
+			source,
+			new String[] {
+				"body", "whenOwner"
+		});
 		addAnnotation
-		  (getRelation_Where(), 
-		   source, 
-		   new String[] {
-			 "body", "whereOwner"
-		   });	
+		(getRelation_Where(),
+			source,
+			new String[] {
+				"body", "whereOwner"
+		});
 		addAnnotation
-		  (getRelationCallExp_Argument(), 
-		   source, 
-		   new String[] {
-			 "body", "relationCallExp"
-		   });	
+		(getRelationCallExp_Argument(),
+			source,
+			new String[] {
+				"body", "relationCallExp"
+		});
 		addAnnotation
-		  (getRelationCallExp_ReferredRelation(), 
-		   source, 
-		   new String[] {
-			 "body", "relationCallExp"
-		   });	
+		(getRelationCallExp_ReferredRelation(),
+			source,
+			new String[] {
+				"body", "relationCallExp"
+		});
 		addAnnotation
-		  (getRelationDomain_DefaultAssignment(), 
-		   source, 
-		   new String[] {
-			 "body", "owner"
-		   });	
+		(getRelationDomain_DefaultAssignment(),
+			source,
+			new String[] {
+				"body", "owner"
+		});
 		addAnnotation
-		  (getRelationDomainAssignment_ValueExp(), 
-		   source, 
-		   new String[] {
-			 "body", "domainAssignment"
-		   });	
+		(getRelationDomainAssignment_ValueExp(),
+			source,
+			new String[] {
+				"body", "domainAssignment"
+		});
 		addAnnotation
-		  (getRelationDomainAssignment_Variable(), 
-		   source, 
-		   new String[] {
-			 "body", "domainAssignment"
-		   });
+		(getRelationDomainAssignment_Variable(),
+			source,
+			new String[] {
+				"body", "domainAssignment"
+		});
 	}
 
 } //QVTrelationPackageImpl

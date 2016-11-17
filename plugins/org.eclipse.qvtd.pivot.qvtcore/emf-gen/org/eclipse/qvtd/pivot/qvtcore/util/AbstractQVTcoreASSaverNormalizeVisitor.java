@@ -56,6 +56,11 @@ public abstract class AbstractQVTcoreASSaverNormalizeVisitor
 	}
 
 	@Override
+	public @Nullable Object visitBottomVariable(org.eclipse.qvtd.pivot.qvtcore.@NonNull BottomVariable object) {
+		return visitVariable(object);
+	}
+
+	@Override
 	public @Nullable Object visitCoreDomain(org.eclipse.qvtd.pivot.qvtcore.@NonNull CoreDomain object) {
 		return visitDomain(object);
 	}
@@ -78,6 +83,11 @@ public abstract class AbstractQVTcoreASSaverNormalizeVisitor
 	@Override
 	public @Nullable Object visitGuardPattern(org.eclipse.qvtd.pivot.qvtcore.@NonNull GuardPattern object) {
 		return visitCorePattern(object);
+	}
+
+	@Override
+	public @Nullable Object visitGuardVariable(org.eclipse.qvtd.pivot.qvtcore.@NonNull GuardVariable object) {
+		return visitVariable(object);
 	}
 
 	@Override

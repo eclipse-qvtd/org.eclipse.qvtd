@@ -87,4 +87,14 @@ public abstract class AbstractQVTrelationAS2XMIidVisitor
 	public @Nullable Boolean visitRelationalTransformation(org.eclipse.qvtd.pivot.qvtrelation.@NonNull RelationalTransformation object) {
 		return visitTransformation(object);
 	}
+
+	@Override
+	public @Nullable Boolean visitSharedVariable(org.eclipse.qvtd.pivot.qvtrelation.@NonNull SharedVariable object) {
+		return visitVariable(object);
+	}
+
+	@Override
+	public @Nullable Boolean visitTemplateVariable(org.eclipse.qvtd.pivot.qvtrelation.@NonNull TemplateVariable object) {
+		return visitVariable(object);
+	}
 }

@@ -68,11 +68,13 @@ public class QVTcoreFactoryImpl extends EFactoryImpl implements QVTcoreFactory {
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case QVTcorePackage.BOTTOM_PATTERN: return createBottomPattern();
+			case QVTcorePackage.BOTTOM_VARIABLE: return createBottomVariable();
 			case QVTcorePackage.CORE_DOMAIN: return createCoreDomain();
 			case QVTcorePackage.CORE_MODEL: return createCoreModel();
 			case QVTcorePackage.CORE_PATTERN: return createCorePattern();
 			case QVTcorePackage.ENFORCEMENT_OPERATION: return createEnforcementOperation();
 			case QVTcorePackage.GUARD_PATTERN: return createGuardPattern();
+			case QVTcorePackage.GUARD_VARIABLE: return createGuardVariable();
 			case QVTcorePackage.MAPPING: return createMapping();
 			case QVTcorePackage.OPPOSITE_PROPERTY_ASSIGNMENT: return createOppositePropertyAssignment();
 			case QVTcorePackage.PROPERTY_ASSIGNMENT: return createPropertyAssignment();
@@ -130,6 +132,17 @@ public class QVTcoreFactoryImpl extends EFactoryImpl implements QVTcoreFactory {
 	 * @generated
 	 */
 	@Override
+	public @NonNull BottomVariable createBottomVariable() {
+		BottomVariableImpl bottomVariable = new BottomVariableImpl();
+		return bottomVariable;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public @NonNull CoreDomain createCoreDomain() {
 		CoreDomainImpl coreDomain = new CoreDomainImpl();
 		return coreDomain;
@@ -177,6 +190,17 @@ public class QVTcoreFactoryImpl extends EFactoryImpl implements QVTcoreFactory {
 	public @NonNull GuardPattern createGuardPattern() {
 		GuardPatternImpl guardPattern = new GuardPatternImpl();
 		return guardPattern;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public @NonNull GuardVariable createGuardVariable() {
+		GuardVariableImpl guardVariable = new GuardVariableImpl();
+		return guardVariable;
 	}
 
 	/**

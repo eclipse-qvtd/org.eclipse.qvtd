@@ -238,7 +238,7 @@ public interface QVTcorePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtcore.impl.QVTcorePackageImpl#getCorePattern()
 	 * @generated
 	 */
-	int CORE_PATTERN = 5;
+	int CORE_PATTERN = 6;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -431,6 +431,133 @@ public interface QVTcorePackage extends EPackage {
 	int BOTTOM_PATTERN_FEATURE_COUNT = CORE_PATTERN_FEATURE_COUNT + 4;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtcore.impl.BottomVariableImpl <em>Bottom Variable</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.pivot.qvtcore.impl.BottomVariableImpl
+	 * @see org.eclipse.qvtd.pivot.qvtcore.impl.QVTcorePackageImpl#getBottomVariable()
+	 * @generated
+	 */
+	int BOTTOM_VARIABLE = 3;
+
+	/**
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOTTOM_VARIABLE__ANNOTATING_COMMENTS = PivotPackage.VARIABLE__ANNOTATING_COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOTTOM_VARIABLE__OWNED_ANNOTATIONS = PivotPackage.VARIABLE__OWNED_ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOTTOM_VARIABLE__OWNED_COMMENTS = PivotPackage.VARIABLE__OWNED_COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOTTOM_VARIABLE__OWNED_EXTENSIONS = PivotPackage.VARIABLE__OWNED_EXTENSIONS;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOTTOM_VARIABLE__NAME = PivotPackage.VARIABLE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Is Many</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOTTOM_VARIABLE__IS_MANY = PivotPackage.VARIABLE__IS_MANY;
+
+	/**
+	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOTTOM_VARIABLE__IS_REQUIRED = PivotPackage.VARIABLE__IS_REQUIRED;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOTTOM_VARIABLE__TYPE = PivotPackage.VARIABLE__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Type Value</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOTTOM_VARIABLE__TYPE_VALUE = PivotPackage.VARIABLE__TYPE_VALUE;
+
+	/**
+	 * The feature id for the '<em><b>Is Implicit</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOTTOM_VARIABLE__IS_IMPLICIT = PivotPackage.VARIABLE__IS_IMPLICIT;
+
+	/**
+	 * The feature id for the '<em><b>Owned Init</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOTTOM_VARIABLE__OWNED_INIT = PivotPackage.VARIABLE__OWNED_INIT;
+
+	/**
+	 * The feature id for the '<em><b>Represented Parameter</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOTTOM_VARIABLE__REPRESENTED_PARAMETER = PivotPackage.VARIABLE__REPRESENTED_PARAMETER;
+
+	/**
+	 * The number of structural features of the '<em>Bottom Variable</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOTTOM_VARIABLE_FEATURE_COUNT = PivotPackage.VARIABLE_FEATURE_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtcore.impl.CoreDomainImpl <em>Core Domain</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -438,7 +565,7 @@ public interface QVTcorePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtcore.impl.QVTcorePackageImpl#getCoreDomain()
 	 * @generated
 	 */
-	int CORE_DOMAIN = 3;
+	int CORE_DOMAIN = 4;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -556,7 +683,7 @@ public interface QVTcorePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtcore.impl.QVTcorePackageImpl#getCoreModel()
 	 * @generated
 	 */
-	int CORE_MODEL = 4;
+	int CORE_MODEL = 5;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -656,7 +783,7 @@ public interface QVTcorePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtcore.impl.QVTcorePackageImpl#getEnforcementOperation()
 	 * @generated
 	 */
-	int ENFORCEMENT_OPERATION = 6;
+	int ENFORCEMENT_OPERATION = 7;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -738,7 +865,7 @@ public interface QVTcorePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtcore.impl.QVTcorePackageImpl#getGuardPattern()
 	 * @generated
 	 */
-	int GUARD_PATTERN = 7;
+	int GUARD_PATTERN = 8;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -822,6 +949,133 @@ public interface QVTcorePackage extends EPackage {
 	int GUARD_PATTERN_FEATURE_COUNT = CORE_PATTERN_FEATURE_COUNT + 1;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtcore.impl.GuardVariableImpl <em>Guard Variable</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.pivot.qvtcore.impl.GuardVariableImpl
+	 * @see org.eclipse.qvtd.pivot.qvtcore.impl.QVTcorePackageImpl#getGuardVariable()
+	 * @generated
+	 */
+	int GUARD_VARIABLE = 9;
+
+	/**
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GUARD_VARIABLE__ANNOTATING_COMMENTS = PivotPackage.VARIABLE__ANNOTATING_COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GUARD_VARIABLE__OWNED_ANNOTATIONS = PivotPackage.VARIABLE__OWNED_ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GUARD_VARIABLE__OWNED_COMMENTS = PivotPackage.VARIABLE__OWNED_COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GUARD_VARIABLE__OWNED_EXTENSIONS = PivotPackage.VARIABLE__OWNED_EXTENSIONS;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GUARD_VARIABLE__NAME = PivotPackage.VARIABLE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Is Many</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GUARD_VARIABLE__IS_MANY = PivotPackage.VARIABLE__IS_MANY;
+
+	/**
+	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GUARD_VARIABLE__IS_REQUIRED = PivotPackage.VARIABLE__IS_REQUIRED;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GUARD_VARIABLE__TYPE = PivotPackage.VARIABLE__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Type Value</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GUARD_VARIABLE__TYPE_VALUE = PivotPackage.VARIABLE__TYPE_VALUE;
+
+	/**
+	 * The feature id for the '<em><b>Is Implicit</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GUARD_VARIABLE__IS_IMPLICIT = PivotPackage.VARIABLE__IS_IMPLICIT;
+
+	/**
+	 * The feature id for the '<em><b>Owned Init</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GUARD_VARIABLE__OWNED_INIT = PivotPackage.VARIABLE__OWNED_INIT;
+
+	/**
+	 * The feature id for the '<em><b>Represented Parameter</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GUARD_VARIABLE__REPRESENTED_PARAMETER = PivotPackage.VARIABLE__REPRESENTED_PARAMETER;
+
+	/**
+	 * The number of structural features of the '<em>Guard Variable</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GUARD_VARIABLE_FEATURE_COUNT = PivotPackage.VARIABLE_FEATURE_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtcore.impl.MappingImpl <em>Mapping</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -829,7 +1083,7 @@ public interface QVTcorePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtcore.impl.QVTcorePackageImpl#getMapping()
 	 * @generated
 	 */
-	int MAPPING = 8;
+	int MAPPING = 10;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -992,7 +1246,7 @@ public interface QVTcorePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtcore.impl.QVTcorePackageImpl#getNavigationAssignment()
 	 * @generated
 	 */
-	int NAVIGATION_ASSIGNMENT = 9;
+	int NAVIGATION_ASSIGNMENT = 11;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -1083,7 +1337,7 @@ public interface QVTcorePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtcore.impl.QVTcorePackageImpl#getOppositePropertyAssignment()
 	 * @generated
 	 */
-	int OPPOSITE_PROPERTY_ASSIGNMENT = 10;
+	int OPPOSITE_PROPERTY_ASSIGNMENT = 12;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -1183,7 +1437,7 @@ public interface QVTcorePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtcore.impl.QVTcorePackageImpl#getPropertyAssignment()
 	 * @generated
 	 */
-	int PROPERTY_ASSIGNMENT = 11;
+	int PROPERTY_ASSIGNMENT = 13;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -1283,7 +1537,7 @@ public interface QVTcorePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtcore.impl.QVTcorePackageImpl#getRealizedVariable()
 	 * @generated
 	 */
-	int REALIZED_VARIABLE = 12;
+	int REALIZED_VARIABLE = 14;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -1410,7 +1664,7 @@ public interface QVTcorePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtcore.impl.QVTcorePackageImpl#getVariableAssignment()
 	 * @generated
 	 */
-	int VARIABLE_ASSIGNMENT = 13;
+	int VARIABLE_ASSIGNMENT = 15;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -1501,7 +1755,7 @@ public interface QVTcorePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtcore.impl.QVTcorePackageImpl#getEnforcementMode()
 	 * @generated
 	 */
-	int ENFORCEMENT_MODE = 14;
+	int ENFORCEMENT_MODE = 16;
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtcore.Area <em>Area</em>}'.
@@ -1633,6 +1887,16 @@ public interface QVTcorePackage extends EPackage {
 	EReference getBottomPattern_RealizedVariable();
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtcore.BottomVariable <em>Bottom Variable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Bottom Variable</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtcore.BottomVariable
+	 * @generated
+	 */
+	EClass getBottomVariable();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtcore.CoreDomain <em>Core Domain</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1736,6 +2000,16 @@ public interface QVTcorePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getGuardPattern_Area();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtcore.GuardVariable <em>Guard Variable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Guard Variable</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtcore.GuardVariable
+	 * @generated
+	 */
+	EClass getGuardVariable();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtcore.Mapping <em>Mapping</em>}'.
@@ -2020,6 +2294,16 @@ public interface QVTcorePackage extends EPackage {
 		EReference BOTTOM_PATTERN__REALIZED_VARIABLE = eINSTANCE.getBottomPattern_RealizedVariable();
 
 		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtcore.impl.BottomVariableImpl <em>Bottom Variable</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.pivot.qvtcore.impl.BottomVariableImpl
+		 * @see org.eclipse.qvtd.pivot.qvtcore.impl.QVTcorePackageImpl#getBottomVariable()
+		 * @generated
+		 */
+		EClass BOTTOM_VARIABLE = eINSTANCE.getBottomVariable();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtcore.impl.CoreDomainImpl <em>Core Domain</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2108,6 +2392,16 @@ public interface QVTcorePackage extends EPackage {
 		 * @generated
 		 */
 		EReference GUARD_PATTERN__AREA = eINSTANCE.getGuardPattern_Area();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtcore.impl.GuardVariableImpl <em>Guard Variable</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.pivot.qvtcore.impl.GuardVariableImpl
+		 * @see org.eclipse.qvtd.pivot.qvtcore.impl.QVTcorePackageImpl#getGuardVariable()
+		 * @generated
+		 */
+		EClass GUARD_VARIABLE = eINSTANCE.getGuardVariable();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtcore.impl.MappingImpl <em>Mapping</em>}' class.

@@ -10,7 +10,7 @@
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtrelationcs;
 
-import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.qvtd.pivot.qvtrelation.SharedVariable;
 
 
 /**
@@ -40,12 +40,12 @@ public interface ElementTemplateCS extends TemplateVariableCS {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Identifier</em>' reference.
-	 * @see #setIdentifier(Variable)
+	 * @see #setIdentifier(SharedVariable)
 	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getElementTemplateCS_Identifier()
 	 * @model
 	 * @generated
 	 */
-	Variable getIdentifier();
+	SharedVariable getIdentifier();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.ElementTemplateCS#getIdentifier <em>Identifier</em>}' reference.
@@ -55,5 +55,5 @@ public interface ElementTemplateCS extends TemplateVariableCS {
 	 * @see #getIdentifier()
 	 * @generated
 	 */
-	void setIdentifier(Variable value);
+	void setIdentifier(SharedVariable value);
 } // ElementTemplateCS

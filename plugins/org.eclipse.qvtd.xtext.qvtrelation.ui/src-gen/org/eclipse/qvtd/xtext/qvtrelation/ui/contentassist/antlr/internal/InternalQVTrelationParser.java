@@ -74953,13 +74953,13 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             // InternalQVTrelation.g:25646:1: ( ruleUnrestrictedName )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getDefaultValueCSAccess().getPropertyIdVariableCrossReference_0_0()); 
+               before(grammarAccess.getDefaultValueCSAccess().getPropertyIdSharedVariableCrossReference_0_0()); 
             }
             // InternalQVTrelation.g:25647:1: ( ruleUnrestrictedName )
             // InternalQVTrelation.g:25648:1: ruleUnrestrictedName
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getDefaultValueCSAccess().getPropertyIdVariableUnrestrictedNameParserRuleCall_0_0_1()); 
+               before(grammarAccess.getDefaultValueCSAccess().getPropertyIdSharedVariableUnrestrictedNameParserRuleCall_0_0_1()); 
             }
             pushFollow(FollowSets000.FOLLOW_2);
             ruleUnrestrictedName();
@@ -74967,13 +74967,13 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getDefaultValueCSAccess().getPropertyIdVariableUnrestrictedNameParserRuleCall_0_0_1()); 
+               after(grammarAccess.getDefaultValueCSAccess().getPropertyIdSharedVariableUnrestrictedNameParserRuleCall_0_0_1()); 
             }
 
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getDefaultValueCSAccess().getPropertyIdVariableCrossReference_0_0()); 
+               after(grammarAccess.getDefaultValueCSAccess().getPropertyIdSharedVariableCrossReference_0_0()); 
             }
 
             }
@@ -75443,13 +75443,13 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             // InternalQVTrelation.g:25820:1: ( ruleUnrestrictedName )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getElementTemplateCSAccess().getIdentifierVariableCrossReference_0()); 
+               before(grammarAccess.getElementTemplateCSAccess().getIdentifierSharedVariableCrossReference_0()); 
             }
             // InternalQVTrelation.g:25821:1: ( ruleUnrestrictedName )
             // InternalQVTrelation.g:25822:1: ruleUnrestrictedName
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getElementTemplateCSAccess().getIdentifierVariableUnrestrictedNameParserRuleCall_0_1()); 
+               before(grammarAccess.getElementTemplateCSAccess().getIdentifierSharedVariableUnrestrictedNameParserRuleCall_0_1()); 
             }
             pushFollow(FollowSets000.FOLLOW_2);
             ruleUnrestrictedName();
@@ -75457,13 +75457,13 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getElementTemplateCSAccess().getIdentifierVariableUnrestrictedNameParserRuleCall_0_1()); 
+               after(grammarAccess.getElementTemplateCSAccess().getIdentifierSharedVariableUnrestrictedNameParserRuleCall_0_1()); 
             }
 
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getElementTemplateCSAccess().getIdentifierVariableCrossReference_0()); 
+               after(grammarAccess.getElementTemplateCSAccess().getIdentifierSharedVariableCrossReference_0()); 
             }
 
             }

@@ -87,4 +87,14 @@ public abstract class AbstractQVTrelationASSaverResolveVisitor
 	public @Nullable Object visitRelationalTransformation(org.eclipse.qvtd.pivot.qvtrelation.@NonNull RelationalTransformation object) {
 		return visitTransformation(object);
 	}
+
+	@Override
+	public @Nullable Object visitSharedVariable(org.eclipse.qvtd.pivot.qvtrelation.@NonNull SharedVariable object) {
+		return visitVariable(object);
+	}
+
+	@Override
+	public @Nullable Object visitTemplateVariable(org.eclipse.qvtd.pivot.qvtrelation.@NonNull TemplateVariable object) {
+		return visitVariable(object);
+	}
 }

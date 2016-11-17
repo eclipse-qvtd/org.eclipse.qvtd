@@ -21,12 +21,14 @@ import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtcore.Area;
 import org.eclipse.qvtd.pivot.qvtcore.Assignment;
 import org.eclipse.qvtd.pivot.qvtcore.BottomPattern;
+import org.eclipse.qvtd.pivot.qvtcore.BottomVariable;
 import org.eclipse.qvtd.pivot.qvtcore.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcore.CoreModel;
 import org.eclipse.qvtd.pivot.qvtcore.CorePattern;
 import org.eclipse.qvtd.pivot.qvtcore.EnforcementMode;
 import org.eclipse.qvtd.pivot.qvtcore.EnforcementOperation;
 import org.eclipse.qvtd.pivot.qvtcore.GuardPattern;
+import org.eclipse.qvtd.pivot.qvtcore.GuardVariable;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtcore.NavigationAssignment;
 import org.eclipse.qvtd.pivot.qvtcore.OppositePropertyAssignment;
@@ -66,6 +68,12 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass bottomVariableEClass = null;
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass coreDomainEClass = null;
 	/**
 	 * <!-- begin-user-doc -->
@@ -91,6 +99,12 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 	 * @generated
 	 */
 	private EClass guardPatternEClass = null;
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass guardVariableEClass = null;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -163,7 +177,7 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link QVTcorePackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -194,7 +208,7 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 		// Mark meta-data to indicate it can't be changed
 		theQVTcorePackage.freeze();
 
-  
+
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(QVTcorePackage.eNS_URI, theQVTcorePackage);
 		return theQVTcorePackage;
@@ -326,6 +340,16 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 	 * @generated
 	 */
 	@Override
+	public EClass getBottomVariable() {
+		return bottomVariableEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getCoreDomain() {
 		return coreDomainEClass;
 	}
@@ -418,6 +442,16 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 	@Override
 	public EReference getGuardPattern_Area() {
 		return (EReference)guardPatternEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getGuardVariable() {
+		return guardVariableEClass;
 	}
 
 	/**
@@ -614,6 +648,8 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 		createEReference(bottomPatternEClass, BOTTOM_PATTERN__ENFORCEMENT_OPERATION);
 		createEReference(bottomPatternEClass, BOTTOM_PATTERN__REALIZED_VARIABLE);
 
+		bottomVariableEClass = createEClass(BOTTOM_VARIABLE);
+
 		coreDomainEClass = createEClass(CORE_DOMAIN);
 
 		coreModelEClass = createEClass(CORE_MODEL);
@@ -628,6 +664,8 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 
 		guardPatternEClass = createEClass(GUARD_PATTERN);
 		createEReference(guardPatternEClass, GUARD_PATTERN__AREA);
+
+		guardVariableEClass = createEClass(GUARD_VARIABLE);
 
 		mappingEClass = createEClass(MAPPING);
 		createEReference(mappingEClass, MAPPING__CONTEXT);
@@ -688,12 +726,14 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 		areaEClass.getESuperTypes().add(thePivotPackage.getElement());
 		assignmentEClass.getESuperTypes().add(thePivotPackage.getElement());
 		bottomPatternEClass.getESuperTypes().add(this.getCorePattern());
+		bottomVariableEClass.getESuperTypes().add(thePivotPackage.getVariable());
 		coreDomainEClass.getESuperTypes().add(theQVTbasePackage.getDomain());
 		coreDomainEClass.getESuperTypes().add(this.getArea());
 		coreModelEClass.getESuperTypes().add(theQVTbasePackage.getBaseModel());
 		corePatternEClass.getESuperTypes().add(theQVTbasePackage.getPattern());
 		enforcementOperationEClass.getESuperTypes().add(thePivotPackage.getElement());
 		guardPatternEClass.getESuperTypes().add(this.getCorePattern());
+		guardVariableEClass.getESuperTypes().add(thePivotPackage.getVariable());
 		mappingEClass.getESuperTypes().add(theQVTbasePackage.getRule());
 		mappingEClass.getESuperTypes().add(this.getArea());
 		navigationAssignmentEClass.getESuperTypes().add(this.getAssignment());
@@ -718,6 +758,8 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 		initEReference(getBottomPattern_EnforcementOperation(), this.getEnforcementOperation(), this.getEnforcementOperation_BottomPattern(), "enforcementOperation", null, 0, -1, BottomPattern.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getBottomPattern_RealizedVariable(), this.getRealizedVariable(), null, "realizedVariable", null, 0, -1, BottomPattern.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
+		initEClass(bottomVariableEClass, BottomVariable.class, "BottomVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
 		initEClass(coreDomainEClass, CoreDomain.class, "CoreDomain", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(coreModelEClass, CoreModel.class, "CoreModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -734,6 +776,8 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 
 		initEClass(guardPatternEClass, GuardPattern.class, "GuardPattern", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getGuardPattern_Area(), this.getArea(), this.getArea_GuardPattern(), "area", null, 1, 1, GuardPattern.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(guardVariableEClass, GuardVariable.class, "GuardVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(mappingEClass, Mapping.class, "Mapping", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getMapping_Context(), this.getMapping(), this.getMapping_Local(), "context", null, 0, 1, Mapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
@@ -775,37 +819,37 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 	 * @generated
 	 */
 	protected void createEmofAnnotations() {
-		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";	
+		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";
 		addAnnotation
-		  (getAssignment_Value(), 
-		   source, 
-		   new String[] {
-			 "body", "valueAssignment"
-		   });	
+		(getAssignment_Value(),
+			source,
+			new String[] {
+				"body", "valueAssignment"
+		});
 		addAnnotation
-		  (getNavigationAssignment_SlotExpression(), 
-		   source, 
-		   new String[] {
-			 "body", "slotAssignment"
-		   });	
+		(getNavigationAssignment_SlotExpression(),
+			source,
+			new String[] {
+				"body", "slotAssignment"
+		});
 		addAnnotation
-		  (getOppositePropertyAssignment_TargetProperty(), 
-		   source, 
-		   new String[] {
-			 "body", "assignment"
-		   });	
+		(getOppositePropertyAssignment_TargetProperty(),
+			source,
+			new String[] {
+				"body", "assignment"
+		});
 		addAnnotation
-		  (getPropertyAssignment_TargetProperty(), 
-		   source, 
-		   new String[] {
-			 "body", "assignment"
-		   });	
+		(getPropertyAssignment_TargetProperty(),
+			source,
+			new String[] {
+				"body", "assignment"
+		});
 		addAnnotation
-		  (getVariableAssignment_TargetVariable(), 
-		   source, 
-		   new String[] {
-			 "body", "assignment"
-		   });
+		(getVariableAssignment_TargetVariable(),
+			source,
+			new String[] {
+				"body", "assignment"
+		});
 	}
 
 } //QVTcorePackageImpl

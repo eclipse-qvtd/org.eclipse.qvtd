@@ -56,6 +56,18 @@ public abstract class AbstractWrappingQVTcoreVisitor<R, C, @NonNull D extends QV
 	}
 
 	@Override
+	public R visitBottomVariable(org.eclipse.qvtd.pivot.qvtcore.@NonNull BottomVariable object) {
+		@Nullable P prologue = preVisit(object);
+		try {
+			R result = delegate.visitBottomVariable(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
+	}
+
+	@Override
 	public R visitCoreDomain(org.eclipse.qvtd.pivot.qvtcore.@NonNull CoreDomain object) {
 		@Nullable P prologue = preVisit(object);
 		try {
@@ -108,6 +120,18 @@ public abstract class AbstractWrappingQVTcoreVisitor<R, C, @NonNull D extends QV
 		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitGuardPattern(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
+	}
+
+	@Override
+	public R visitGuardVariable(org.eclipse.qvtd.pivot.qvtcore.@NonNull GuardVariable object) {
+		@Nullable P prologue = preVisit(object);
+		try {
+			R result = delegate.visitGuardVariable(object);
 			return postVisit(object, prologue, result);
 		}
 		catch (Throwable e) {

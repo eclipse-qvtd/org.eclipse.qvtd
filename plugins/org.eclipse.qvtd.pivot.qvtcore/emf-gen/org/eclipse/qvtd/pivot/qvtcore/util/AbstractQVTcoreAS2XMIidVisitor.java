@@ -54,6 +54,11 @@ public abstract class AbstractQVTcoreAS2XMIidVisitor
 	}
 
 	@Override
+	public @Nullable Boolean visitBottomVariable(org.eclipse.qvtd.pivot.qvtcore.@NonNull BottomVariable object) {
+		return visitVariable(object);
+	}
+
+	@Override
 	public @Nullable Boolean visitCoreDomain(org.eclipse.qvtd.pivot.qvtcore.@NonNull CoreDomain object) {
 		return visitDomain(object);
 	}
@@ -76,6 +81,11 @@ public abstract class AbstractQVTcoreAS2XMIidVisitor
 	@Override
 	public @Nullable Boolean visitGuardPattern(org.eclipse.qvtd.pivot.qvtcore.@NonNull GuardPattern object) {
 		return visitCorePattern(object);
+	}
+
+	@Override
+	public @Nullable Boolean visitGuardVariable(org.eclipse.qvtd.pivot.qvtcore.@NonNull GuardVariable object) {
+		return visitVariable(object);
 	}
 
 	@Override

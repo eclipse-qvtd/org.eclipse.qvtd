@@ -15,6 +15,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.qvtd.pivot.qvtrelation.*;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
 import org.eclipse.qvtd.pivot.qvtrelation.Key;
 import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationFactory;
@@ -80,6 +82,8 @@ public class QVTrelationFactoryImpl extends EFactoryImpl implements QVTrelationF
 			case QVTrelationPackage.RELATION_MODEL: return createRelationModel();
 			case QVTrelationPackage.RELATION_IMPLEMENTATION: return createRelationImplementation();
 			case QVTrelationPackage.RELATIONAL_TRANSFORMATION: return createRelationalTransformation();
+			case QVTrelationPackage.SHARED_VARIABLE: return createSharedVariable();
+			case QVTrelationPackage.TEMPLATE_VARIABLE: return createTemplateVariable();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -91,7 +95,7 @@ public class QVTrelationFactoryImpl extends EFactoryImpl implements QVTrelationF
 	 * @generated
 	 */
 	@Override
-	public DomainPattern createDomainPattern() {
+	public @NonNull DomainPattern createDomainPattern() {
 		DomainPatternImpl domainPattern = new DomainPatternImpl();
 		return domainPattern;
 	}
@@ -102,7 +106,7 @@ public class QVTrelationFactoryImpl extends EFactoryImpl implements QVTrelationF
 	 * @generated
 	 */
 	@Override
-	public Key createKey() {
+	public @NonNull Key createKey() {
 		KeyImpl key = new KeyImpl();
 		return key;
 	}
@@ -113,7 +117,7 @@ public class QVTrelationFactoryImpl extends EFactoryImpl implements QVTrelationF
 	 * @generated
 	 */
 	@Override
-	public Relation createRelation() {
+	public @NonNull Relation createRelation() {
 		RelationImpl relation = new RelationImpl();
 		return relation;
 	}
@@ -124,7 +128,7 @@ public class QVTrelationFactoryImpl extends EFactoryImpl implements QVTrelationF
 	 * @generated
 	 */
 	@Override
-	public RelationCallExp createRelationCallExp() {
+	public @NonNull RelationCallExp createRelationCallExp() {
 		RelationCallExpImpl relationCallExp = new RelationCallExpImpl();
 		return relationCallExp;
 	}
@@ -135,7 +139,7 @@ public class QVTrelationFactoryImpl extends EFactoryImpl implements QVTrelationF
 	 * @generated
 	 */
 	@Override
-	public RelationDomain createRelationDomain() {
+	public @NonNull RelationDomain createRelationDomain() {
 		RelationDomainImpl relationDomain = new RelationDomainImpl();
 		return relationDomain;
 	}
@@ -146,7 +150,7 @@ public class QVTrelationFactoryImpl extends EFactoryImpl implements QVTrelationF
 	 * @generated
 	 */
 	@Override
-	public RelationDomainAssignment createRelationDomainAssignment() {
+	public @NonNull RelationDomainAssignment createRelationDomainAssignment() {
 		RelationDomainAssignmentImpl relationDomainAssignment = new RelationDomainAssignmentImpl();
 		return relationDomainAssignment;
 	}
@@ -157,7 +161,7 @@ public class QVTrelationFactoryImpl extends EFactoryImpl implements QVTrelationF
 	 * @generated
 	 */
 	@Override
-	public RelationModel createRelationModel() {
+	public @NonNull RelationModel createRelationModel() {
 		RelationModelImpl relationModel = new RelationModelImpl();
 		return relationModel;
 	}
@@ -168,7 +172,7 @@ public class QVTrelationFactoryImpl extends EFactoryImpl implements QVTrelationF
 	 * @generated
 	 */
 	@Override
-	public RelationImplementation createRelationImplementation() {
+	public @NonNull RelationImplementation createRelationImplementation() {
 		RelationImplementationImpl relationImplementation = new RelationImplementationImpl();
 		return relationImplementation;
 	}
@@ -179,9 +183,31 @@ public class QVTrelationFactoryImpl extends EFactoryImpl implements QVTrelationF
 	 * @generated
 	 */
 	@Override
-	public RelationalTransformation createRelationalTransformation() {
+	public @NonNull RelationalTransformation createRelationalTransformation() {
 		RelationalTransformationImpl relationalTransformation = new RelationalTransformationImpl();
 		return relationalTransformation;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public @NonNull SharedVariable createSharedVariable() {
+		SharedVariableImpl sharedVariable = new SharedVariableImpl();
+		return sharedVariable;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public @NonNull TemplateVariable createTemplateVariable() {
+		TemplateVariableImpl templateVariable = new TemplateVariableImpl();
+		return templateVariable;
 	}
 
 	/**

@@ -40,6 +40,15 @@ public interface QVTcoreFactory extends EFactory {
 	@NonNull BottomPattern createBottomPattern();
 
 	/**
+	 * Returns a new object of class '<em>Bottom Variable</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Bottom Variable</em>'.
+	 * @generated
+	 */
+	@NonNull BottomVariable createBottomVariable();
+
+	/**
 	 * Returns a new object of class '<em>Core Domain</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -83,6 +92,15 @@ public interface QVTcoreFactory extends EFactory {
 	 * @generated
 	 */
 	@NonNull GuardPattern createGuardPattern();
+
+	/**
+	 * Returns a new object of class '<em>Guard Variable</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Guard Variable</em>'.
+	 * @generated
+	 */
+	@NonNull GuardVariable createGuardVariable();
 
 	/**
 	 * Returns a new object of class '<em>Mapping</em>'.

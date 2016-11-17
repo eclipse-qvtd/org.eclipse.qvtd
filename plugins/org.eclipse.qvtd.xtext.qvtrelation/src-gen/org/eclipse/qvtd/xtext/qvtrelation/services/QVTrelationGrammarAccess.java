@@ -286,28 +286,28 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvtd.xtext.qvtrelation.QVTrelation.DefaultValueCS");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cPropertyIdAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final CrossReference cPropertyIdVariableCrossReference_0_0 = (CrossReference)cPropertyIdAssignment_0.eContents().get(0);
-		private final RuleCall cPropertyIdVariableUnrestrictedNameParserRuleCall_0_0_1 = (RuleCall)cPropertyIdVariableCrossReference_0_0.eContents().get(1);
+		private final CrossReference cPropertyIdSharedVariableCrossReference_0_0 = (CrossReference)cPropertyIdAssignment_0.eContents().get(0);
+		private final RuleCall cPropertyIdSharedVariableUnrestrictedNameParserRuleCall_0_0_1 = (RuleCall)cPropertyIdSharedVariableCrossReference_0_0.eContents().get(1);
 		private final Keyword cEqualsSignKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Assignment cOwnedInitExpressionAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cOwnedInitExpressionExpCSParserRuleCall_2_0 = (RuleCall)cOwnedInitExpressionAssignment_2.eContents().get(0);
 		private final Keyword cSemicolonKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
 		//DefaultValueCS:
-		//	propertyId=[pivot::Variable|UnrestrictedName] '=' ownedInitExpression=ExpCS ';';
+		//	propertyId=[qvtrelation::SharedVariable|UnrestrictedName] '=' ownedInitExpression=ExpCS ';';
 		@Override public ParserRule getRule() { return rule; }
 
-		//propertyId=[pivot::Variable|UnrestrictedName] '=' ownedInitExpression=ExpCS ';'
+		//propertyId=[qvtrelation::SharedVariable|UnrestrictedName] '=' ownedInitExpression=ExpCS ';'
 		public Group getGroup() { return cGroup; }
 
-		//propertyId=[pivot::Variable|UnrestrictedName]
+		//propertyId=[qvtrelation::SharedVariable|UnrestrictedName]
 		public Assignment getPropertyIdAssignment_0() { return cPropertyIdAssignment_0; }
 
-		//[pivot::Variable|UnrestrictedName]
-		public CrossReference getPropertyIdVariableCrossReference_0_0() { return cPropertyIdVariableCrossReference_0_0; }
+		//[qvtrelation::SharedVariable|UnrestrictedName]
+		public CrossReference getPropertyIdSharedVariableCrossReference_0_0() { return cPropertyIdSharedVariableCrossReference_0_0; }
 
 		//UnrestrictedName
-		public RuleCall getPropertyIdVariableUnrestrictedNameParserRuleCall_0_0_1() { return cPropertyIdVariableUnrestrictedNameParserRuleCall_0_0_1; }
+		public RuleCall getPropertyIdSharedVariableUnrestrictedNameParserRuleCall_0_0_1() { return cPropertyIdSharedVariableUnrestrictedNameParserRuleCall_0_0_1; }
 
 		//'='
 		public Keyword getEqualsSignKeyword_1() { return cEqualsSignKeyword_1; }
@@ -466,21 +466,21 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 	public class ElementTemplateCSElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvtd.xtext.qvtrelation.QVTrelation.ElementTemplateCS");
 		private final Assignment cIdentifierAssignment = (Assignment)rule.eContents().get(1);
-		private final CrossReference cIdentifierVariableCrossReference_0 = (CrossReference)cIdentifierAssignment.eContents().get(0);
-		private final RuleCall cIdentifierVariableUnrestrictedNameParserRuleCall_0_1 = (RuleCall)cIdentifierVariableCrossReference_0.eContents().get(1);
+		private final CrossReference cIdentifierSharedVariableCrossReference_0 = (CrossReference)cIdentifierAssignment.eContents().get(0);
+		private final RuleCall cIdentifierSharedVariableUnrestrictedNameParserRuleCall_0_1 = (RuleCall)cIdentifierSharedVariableCrossReference_0.eContents().get(1);
 		
 		//ElementTemplateCS:
-		//	identifier=[pivot::Variable|UnrestrictedName];
+		//	identifier=[qvtrelation::SharedVariable|UnrestrictedName];
 		@Override public ParserRule getRule() { return rule; }
 
-		//identifier=[pivot::Variable|UnrestrictedName]
+		//identifier=[qvtrelation::SharedVariable|UnrestrictedName]
 		public Assignment getIdentifierAssignment() { return cIdentifierAssignment; }
 
-		//[pivot::Variable|UnrestrictedName]
-		public CrossReference getIdentifierVariableCrossReference_0() { return cIdentifierVariableCrossReference_0; }
+		//[qvtrelation::SharedVariable|UnrestrictedName]
+		public CrossReference getIdentifierSharedVariableCrossReference_0() { return cIdentifierSharedVariableCrossReference_0; }
 
 		//UnrestrictedName
-		public RuleCall getIdentifierVariableUnrestrictedNameParserRuleCall_0_1() { return cIdentifierVariableUnrestrictedNameParserRuleCall_0_1; }
+		public RuleCall getIdentifierSharedVariableUnrestrictedNameParserRuleCall_0_1() { return cIdentifierSharedVariableUnrestrictedNameParserRuleCall_0_1; }
 	}
 
 	public class KeyDeclCSElements extends AbstractParserRuleElementFinder {
@@ -1972,7 +1972,7 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//DefaultValueCS:
-	//	propertyId=[pivot::Variable|UnrestrictedName] '=' ownedInitExpression=ExpCS ';';
+	//	propertyId=[qvtrelation::SharedVariable|UnrestrictedName] '=' ownedInitExpression=ExpCS ';';
 	public DefaultValueCSElements getDefaultValueCSAccess() {
 		return pDefaultValueCS;
 	}
@@ -2005,7 +2005,7 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//ElementTemplateCS:
-	//	identifier=[pivot::Variable|UnrestrictedName];
+	//	identifier=[qvtrelation::SharedVariable|UnrestrictedName];
 	public ElementTemplateCSElements getElementTemplateCSAccess() {
 		return pElementTemplateCS;
 	}
