@@ -118,4 +118,6 @@
         name="ownedKey" ordered="false" upperBound="-1" eType="#QVTRelation.Key" containment="true"
         eOpposite="#QVTRelation.Key.transformation"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SharedVariable" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#//Variable"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TemplateVariable" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#//Variable"/>
 </ecore:EPackage>

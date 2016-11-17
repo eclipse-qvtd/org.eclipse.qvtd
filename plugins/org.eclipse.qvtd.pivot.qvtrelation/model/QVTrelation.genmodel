@@ -55,5 +55,7 @@
     <genClasses ecoreClass="QVTrelation.ecore#QVTRelation.RelationalTransformation">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTrelation.ecore#QVTRelation.RelationalTransformation.ownedKey"/>
     </genClasses>
+    <genClasses ecoreClass="QVTrelation.ecore#//SharedVariable"/>
+    <genClasses ecoreClass="QVTrelation.ecore#//TemplateVariable"/>
   </genPackages>
 </genmodel:GenModel>

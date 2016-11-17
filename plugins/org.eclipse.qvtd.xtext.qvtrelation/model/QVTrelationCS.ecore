@@ -14,7 +14,7 @@
         eType="ecore:EClass ../../org.eclipse.ocl.xtext.essentialocl/model/EssentialOCLCS.ecore#//ExpCS"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="propertyId" lowerBound="1"
-        eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//Variable"/>
+        eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtrelation/model/QVTrelation.ecore#//SharedVariable"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DomainCS" eSuperTypes="#//AbstractDomainCS">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="implementedBy" eType="ecore:EDataType ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//String"/>
@@ -34,7 +34,7 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ElementTemplateCS" eSuperTypes="#//TemplateVariableCS">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="identifier" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//Variable"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="identifier" eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtrelation/model/QVTrelation.ecore#//SharedVariable"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="KeyDeclCS" eSuperTypes="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//ModelElementCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedPathName" eType="ecore:EClass ../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//PathNameCS"

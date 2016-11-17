@@ -41,7 +41,7 @@ CollectionTemplateCS: name=UnrestrictedName? ':' ownedType=CollectionTypeCS
         '++' ownedRestIdentifier=ElementTemplateCS
          )? '}';
 
-DefaultValueCS: propertyId=[pivot::Variable|UnrestrictedName] '=' ownedInitExpression=ExpCS ';';
+DefaultValueCS: propertyId=[qvtrelation::SharedVariable|UnrestrictedName] '=' ownedInitExpression=ExpCS ';';
 
 DomainCS: (isCheckonly?='checkonly' | isEnforce?='enforce' | 'replace')? 'domain' modelId=[qvtbase::TypedModel|UnrestrictedName] 
 			ownedPattern+=DomainPatternCS (',' ownedPattern+=DomainPatternCS)*
@@ -51,7 +51,7 @@ DomainCS: (isCheckonly?='checkonly' | isEnforce?='enforce' | 'replace')? 'domain
 
 DomainPatternCS: ownedTemplate=TemplateCS;
 
-ElementTemplateCS: identifier=[pivot::Variable|UnrestrictedName];
+ElementTemplateCS: identifier=[qvtrelation::SharedVariable|UnrestrictedName];
 
 KeyDeclCS: 'key' ownedPathName=PathNameCS '{'
 	(propertyIds+=[pivot::Property|UnrestrictedName]

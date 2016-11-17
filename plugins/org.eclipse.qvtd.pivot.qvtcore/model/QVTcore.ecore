@@ -30,6 +30,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="realizedVariable" ordered="false"
         upperBound="-1" eType="#//RealizedVariable" containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BottomVariable" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#//Variable"/>
   <eClassifiers xsi:type="ecore:EClass" name="CoreDomain" eSuperTypes="../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#//Domain #//Area"/>
   <eClassifiers xsi:type="ecore:EClass" name="CoreModel" eSuperTypes="../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#//BaseModel"/>
   <eClassifiers xsi:type="ecore:EClass" name="CorePattern" eSuperTypes="../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#//Pattern">
@@ -50,6 +51,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="area" lowerBound="1" eType="#//Area"
         transient="true" eOpposite="#//Area/guardPattern"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GuardVariable" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#//Variable"/>
   <eClassifiers xsi:type="ecore:EClass" name="Mapping" eSuperTypes="../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#//Rule #//Area">
     <eStructuralFeatures xsi:type="ecore:EReference" name="context" ordered="false"
         eType="#//Mapping" eOpposite="#//Mapping/local"/>
