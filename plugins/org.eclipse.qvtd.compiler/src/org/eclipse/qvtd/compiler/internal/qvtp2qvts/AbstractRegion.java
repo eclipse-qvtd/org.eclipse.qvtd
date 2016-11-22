@@ -541,7 +541,9 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 		//	Find the unambiguous head-node matches
 		//
 		List<@NonNull Node> secondaryHeadNodes = secondaryRegion.getHeadNodes();
-		assert secondaryHeadNodes.size() == 1;
+		if (secondaryHeadNodes.size() != 1) {
+			return null;
+		}
 		Node secondaryHeadNode = secondaryHeadNodes.get(0);
 		CompleteClass completeClass = secondaryHeadNode.getCompleteClass();
 		List<@NonNull Node> primaryNodes = completeClass2node.get(completeClass);

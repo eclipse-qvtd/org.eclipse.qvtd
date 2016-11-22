@@ -67,6 +67,7 @@ import org.eclipse.ocl.pivot.util.Visitable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.MetamodelManager;
+import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil.ToStringComparator;
 import org.eclipse.ocl.pivot.utilities.ParserException;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
@@ -77,11 +78,13 @@ import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcore.CorePattern;
+import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtcore.OppositePropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcore.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.RootDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtcore.util.AbstractExtendingQVTcoreVisitor;
+import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -94,13 +97,13 @@ import com.google.common.collect.Lists;
  */
 public class DependencyAnalyzer
 {
+	public static final @NonNull TracingOption ATTEMPT = new TracingOption(CompilerConstants.PLUGIN_ID, "dependency/attempt");
 	public static final @NonNull TracingOption CALL = new TracingOption(CompilerConstants.PLUGIN_ID, "dependency/call");
 	public static final @NonNull TracingOption CREATE = new TracingOption(CompilerConstants.PLUGIN_ID, "dependency/create");
-	public static final @NonNull TracingOption FINISH = new TracingOption(CompilerConstants.PLUGIN_ID, "dependency/finish");
 	public static final @NonNull TracingOption HYPOTHECATING = new TracingOption(CompilerConstants.PLUGIN_ID, "dependency/hypothecating");
 	public static final @NonNull TracingOption PENDING = new TracingOption(CompilerConstants.PLUGIN_ID, "dependency/pending");
 	public static final @NonNull TracingOption REFINING = new TracingOption(CompilerConstants.PLUGIN_ID, "dependency/refining");
-	public static final @NonNull TracingOption RETURN = new TracingOption(CompilerConstants.PLUGIN_ID, "dependency/return");
+	public static final @NonNull TracingOption RESULT = new TracingOption(CompilerConstants.PLUGIN_ID, "dependency/result");
 	public static final @NonNull TracingOption START = new TracingOption(CompilerConstants.PLUGIN_ID, "dependency/start");
 
 	/**
@@ -519,12 +522,16 @@ public class DependencyAnalyzer
 	}
 
 	/**
-	 * A DependencyAnalyzerVisitor performs a analyzed exection of a QVTi expression propagating the set of retured and used paths as
+	 * A DependencyAnalyzerVisitor performs an analyzed execution of a QVTi expression propagating the set of returned and used paths as
 	 * the analysis result.
 	 */
 	protected class DependencyAnalyzerVisitor extends AbstractExtendingQVTcoreVisitor<@Nullable DependencyPaths, @Nullable Object>
 	{
 		private final @NonNull AbstractOperationAnalysis analysis;
+
+		/**
+		 * True if an exact result (or null) is required. False if a partial result is permitted in order to unlock an analysis loop.
+		 */
 		private final boolean exactResult;
 		private final @Nullable DependencyAnalyzerVisitor parent;
 		private final @NonNull Map<@NonNull VariableDeclaration, @NonNull DependencyPaths> variable2dependencies = new HashMap<>();
@@ -544,7 +551,7 @@ public class DependencyAnalyzer
 		}
 
 		private @Nullable DependencyPaths addHidden(@Nullable DependencyPaths accumulatingResult, @Nullable DependencyPaths additionalResult) {
-			if (exactResult) {
+			if (exactResult || (pending.size() > 0)) {
 				if ((accumulatingResult == null) || (additionalResult == null)) {
 					return null;
 				}
@@ -564,7 +571,7 @@ public class DependencyAnalyzer
 		}
 
 		private @Nullable DependencyPaths addReturn(@Nullable DependencyPaths accumulatingResult, @Nullable DependencyPaths additionalResult) {
-			if (exactResult) {
+			if (exactResult || (pending.size() > 0)) {
 				if ((accumulatingResult == null) || (additionalResult == null)) {
 					return null;
 				}
@@ -633,6 +640,7 @@ public class DependencyAnalyzer
 			ContainmentAnalysis containmentAnalysis = scheduler.getContainmentAnalysis();
 			DependencyPaths sourcePath = sourceAndArgumentPaths.get(0);
 			Iterable<@NonNull List<@NonNull DependencyStep>> oldReturnPaths = sourcePath.getReturnPaths();
+			DependencyPaths result = null;
 			//
 			//	The simple case of a single property can be appended to the existing path.
 			//
@@ -647,39 +655,41 @@ public class DependencyAnalyzer
 					Property containmentProperty = containmentProperties.iterator().next();
 					Property containerProperty = containmentProperty.getOpposite();
 					if (containerProperty != null) {
-						return sourcePath.append(createPropertyDependencyStep(containerProperty, operationCallExp));
+						result = sourcePath.append(createPropertyDependencyStep(containerProperty, operationCallExp));
 					}
 				}
 			}
 			//
-			//	The nore complex case risks a combinatorial explosion of possible paths. Therefore the new container types become the return types,
-			//	and each possible containment is a hidden path in addition to all the sourcepaths.
+			//	The more complex case risks a combinatorial explosion of possible paths. Therefore the new container types become the return types,
+			//	and each possible containment is a hidden path in addition to all the source paths.
 			//
-			Set<@NonNull List<@NonNull DependencyStep>> newReturnPaths = new HashSet<>();
-			Set<@NonNull List<@NonNull DependencyStep>> newHiddenPaths = new HashSet<>();
-			Iterables.addAll(newHiddenPaths, oldReturnPaths);
-			Iterables.addAll(newHiddenPaths, sourcePath.getHiddenPaths());
-			for (@NonNull List<@NonNull DependencyStep> steps : oldReturnPaths) {
-				int size = steps.size();
-				assert size > 0;
-				DependencyStep lastStep = steps.get(size-1);
-				CompleteClass containedClass = completeModel.getCompleteClass(lastStep.getElementalType());
-				Iterable<@NonNull Property> containmentProperties = containmentAnalysis.getContainmentProperties(containedClass);	// FIXME exploit an oclAsType
-				for (@NonNull Property containmentProperty : containmentProperties) {
-					org.eclipse.ocl.pivot.Class containerClass = PivotUtil.getOwningClass(containmentProperty);
-					ClassDependencyStep classDependencyStep = createClassDependencyStep(containerClass, operationCallExp);
-					newReturnPaths.add(Lists.newArrayList(classDependencyStep));
-					newHiddenPaths.add(Lists.newArrayList(classDependencyStep, createPropertyDependencyStep(containmentProperty, operationCallExp)));
+			if (result == null) {
+				Set<@NonNull List<@NonNull DependencyStep>> newReturnPaths = new HashSet<>();
+				Set<@NonNull List<@NonNull DependencyStep>> newHiddenPaths = new HashSet<>();
+				Iterables.addAll(newHiddenPaths, oldReturnPaths);
+				Iterables.addAll(newHiddenPaths, sourcePath.getHiddenPaths());
+				for (@NonNull List<@NonNull DependencyStep> steps : oldReturnPaths) {
+					int size = steps.size();
+					assert size > 0;
+					DependencyStep lastStep = steps.get(size-1);
+					CompleteClass containedClass = completeModel.getCompleteClass(lastStep.getElementalType());
+					Iterable<@NonNull Property> containmentProperties = containmentAnalysis.getContainmentProperties(containedClass);	// FIXME exploit an oclAsType
+					for (@NonNull Property containmentProperty : containmentProperties) {
+						org.eclipse.ocl.pivot.Class containerClass = PivotUtil.getOwningClass(containmentProperty);
+						ClassDependencyStep classDependencyStep = createClassDependencyStep(containerClass, operationCallExp);
+						newReturnPaths.add(Lists.newArrayList(classDependencyStep));
+						newHiddenPaths.add(Lists.newArrayList(classDependencyStep, createPropertyDependencyStep(containmentProperty, operationCallExp)));
+					}
 				}
+				result = createDependencyPaths(newReturnPaths, newHiddenPaths);
 			}
-			DependencyPaths result = createDependencyPaths(newReturnPaths, newHiddenPaths);
-			if (RETURN.isActive()) {
+			if (RESULT.isActive()) {
 				StringBuilder s = new StringBuilder();
 				for (@NonNull DependencyPaths paths : sourceAndArgumentPaths) {
 					s.append("\n\t=> " + paths.toString());
 				}
 				s.append("\n\t= " + result.toString());
-				RETURN.println(operationCallExp.getReferredOperation() + s.toString());
+				RESULT.println(operationCallExp.getReferredOperation() + s.toString());
 			}
 			return result;
 		}
@@ -707,7 +717,7 @@ public class DependencyAnalyzer
 					assert typedElement != null;
 					Type type = typedElement.getType();
 					assert type != null;
-					ClassDependencyStep classStep = createClassDependencyStep((org.eclipse.ocl.pivot.Class)type, typedElement);
+					ClassDependencyStep classStep = createClassDependencyStep(type, typedElement);
 					typePaths.add(Collections.singletonList(classStep));
 				}
 				sourceAndArgumentPaths.add(createDependencyPaths(typePaths, null));
@@ -886,7 +896,7 @@ public class DependencyAnalyzer
 			}
 			//
 			//	Form the sourceAndArgumentPaths by stripping all hidden dependencies; only source and argument type dependencies are
-			//	passed intothe operation.
+			//	passed into the operation.
 			//
 			List<@NonNull DependencyPaths> allSourceAndArgumentPaths = getAllSourceAndArgumentPaths(resultPaths);
 			if (CALL.isActive()) {
@@ -900,7 +910,31 @@ public class DependencyAnalyzer
 			//	Analyze each possible source type
 			//
 			DependencyPaths result = emptyDependencyPaths;
-			StringBuilder s = RETURN.isActive() ? new StringBuilder() : null;
+			StringBuilder s = ATTEMPT.isActive() || RESULT.isActive() ? new StringBuilder() : null;
+			if (s != null) {
+				Operation containingOperation = PivotUtil.getContainingOperation(operationCallExp);
+				if (containingOperation != null) {
+					s.append("\n\tin: " + containingOperation);
+				}
+				else {
+					Mapping containingMapping = QVTcoreUtil.getContainingMapping(operationCallExp);
+					if (containingMapping != null) {
+						s.append("\n\tin: " + containingMapping);
+					}
+				}
+				String indent = "\n\t";
+				for (DependencyAnalyzerVisitor visitor = this; visitor != null; visitor = visitor.parent) {
+					indent = indent + "  ";
+					List<@NonNull VariableDeclaration> variables = new ArrayList<>(visitor.variable2dependencies.keySet());
+					Collections.sort(variables, NameUtil.NAMEABLE_COMPARATOR);
+					for (@NonNull VariableDeclaration variable : variables) {
+						s.append(indent);
+						s.append(variable.getName());
+						s.append(": ");
+						s.append(visitor.variable2dependencies.get(variable));
+					}
+				}
+			}
 			for (@NonNull List<@NonNull DependencyPaths> aSourceAndArgumentPaths : getEachSourceAndArgumentPaths(allSourceAndArgumentPaths)) {
 				if (s != null) {
 					int i = 0;
@@ -964,18 +998,23 @@ public class DependencyAnalyzer
 					}
 					DependencyPaths operationResult = operationAnalysis.getResult(analysis);
 					if (s != null) {
-						s.append("\n\t" + operation);
+						s.append("\n\tto: " + operation);
 						s.append("\n\t\t<= " + operationResult);
 					}
-					result = addReturn(result, operationResult);
+					if (operationResult != null) {
+						result = addReturn(result, operationResult);
+					}
+					else if (exactResult) {
+						result = null;
+					}
 				}
-			}
-			if (s != null) {
-				s.append("\n\t= " + result);
-				RETURN.println(referredOperation + s.toString());
 			}
 			for (@NonNull DependencyPaths argumentPath : resultPaths) {
 				result = addHidden(result, argumentPath);
+			}
+			if (s != null) {
+				s.append("\n\t" + (exactResult || (pending.size() > 0) ? "«exact» " : "«partial» ") + result);
+				(result != null ? RESULT : ATTEMPT).println(operationCallExp + s.toString());
 			}
 			return result;
 		}
@@ -1292,10 +1331,10 @@ public class DependencyAnalyzer
 				}
 			}
 			//			}
-			if ((result != null) && FINISH.isActive()) {
+			if ((result != null) && RESULT.isActive()) {
 				StringBuilder s = new StringBuilder();
 				toDebug(s);
-				FINISH.println(s.toString());
+				RESULT.println(s.toString());
 			}
 		}
 
@@ -1425,14 +1464,14 @@ public class DependencyAnalyzer
 		}
 	}
 
-	protected @NonNull ClassDependencyStep createClassDependencyStep(org.eclipse.ocl.pivot.@NonNull Class type, @NonNull Element element) {
+	protected @NonNull ClassDependencyStep createClassDependencyStep(@NonNull Type type, @NonNull Element element) {
 		while (type instanceof CollectionType) {
 			type = ClassUtil.nonNullState((org.eclipse.ocl.pivot.Class) ((CollectionType)type).getElementType());
 		}
 		DomainUsage usage1 = domainUsageAnalysis.basicGetUsage(type);
 		DomainUsage usage = usage1 != null ? usage1 : getUsage(element);
 		DependencyStepFactory factory = getDependencyStepFactory(usage);
-		return factory.createClassDependencyStep(type, element);
+		return factory.createClassDependencyStep((org.eclipse.ocl.pivot.Class)type, element);
 	}
 
 	protected @NonNull DependencyAnalyzerVisitor createDependencyAnalyzerVisitor(@NonNull AbstractOperationAnalysis operationAnalysis, boolean exactResult) {
