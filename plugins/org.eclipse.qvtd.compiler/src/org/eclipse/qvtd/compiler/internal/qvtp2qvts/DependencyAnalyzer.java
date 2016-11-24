@@ -77,6 +77,7 @@ import org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ContainmentAnalysis
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.StandardLibraryHelper;
 import org.eclipse.qvtd.pivot.qvtcore.CorePattern;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtcore.OppositePropertyAssignment;
@@ -637,7 +638,6 @@ public class DependencyAnalyzer
 
 		private @NonNull DependencyPaths analyzeOperationCallExp_oclContainer(@NonNull OperationCallExp operationCallExp, @NonNull List<@NonNull DependencyPaths> sourceAndArgumentPaths) {
 			assert sourceAndArgumentPaths.size() == 1;
-			ContainmentAnalysis containmentAnalysis = scheduler.getContainmentAnalysis();
 			DependencyPaths sourcePath = sourceAndArgumentPaths.get(0);
 			Iterable<@NonNull List<@NonNull DependencyStep>> oldReturnPaths = sourcePath.getReturnPaths();
 			DependencyPaths result = null;
@@ -976,7 +976,7 @@ public class DependencyAnalyzer
 						}
 						else {
 							DependencyPaths localResult;
-							if (PivotUtil.isSameOperation(operationId, scheduler.getOclElementOclContainerId())) {
+							if (PivotUtil.isSameOperation(operationId, standardLibraryHelper.getOclElementOclContainerId())) {
 								localResult = analyzeOperationCallExp_oclContainer(operationCallExp, aSourceAndArgumentPaths);
 							}
 							//			if (PivotUtil.isSameOperation(operationId, scheduler.getCollectionSelectByKindId())) {
@@ -1367,13 +1367,14 @@ public class DependencyAnalyzer
 
 	private final @NonNull MetamodelManager metamodelManager;
 	private final @NonNull CompleteModel completeModel;
-	protected final @NonNull StandardLibrary standardLibrary;
+	protected final @NonNull StandardLibraryHelper standardLibraryHelper;
 	protected final @NonNull RootDomainUsageAnalysis domainUsageAnalysis;
-	protected final @NonNull SchedulerConstants scheduler;
+	//	protected final @NonNull SchedulerConstants scheduler;
 	private final @NonNull Map<@NonNull List<@Nullable Object>, @NonNull DependencyPaths> content2path = new HashMap<>();
 	private final @NonNull DependencyPaths emptyDependencyPaths = createDependencyPaths(null, null);
 	private final @NonNull Map<@NonNull OperationId, @NonNull Map<@NonNull List<@NonNull DependencyPaths>, @NonNull OperationAnalysis>> operation2paths2analysis = new HashMap<>();
 	private final @NonNull Map<org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage, @NonNull DependencyStepFactory> usage2factory = new HashMap<>();
+	private final @NonNull ContainmentAnalysis containmentAnalysis;
 	private final @NonNull FinalAnalysis finalAnalysis;
 	protected final @NonNull CompleteClass oclVoidCompleteClass;
 	protected final @NonNull CompleteClass oclInvalidCompleteClass;
@@ -1388,12 +1389,14 @@ public class DependencyAnalyzer
 	 */
 	private final @NonNull Set<@NonNull OperationAnalysis> refining = new HashSet<>();
 
-	public DependencyAnalyzer(@NonNull SchedulerConstants scheduler) {
-		EnvironmentFactory environmentFactory = scheduler.getEnvironmentFactory();
+	public DependencyAnalyzer(@NonNull ContainmentAnalysis containmentAnalysis, @NonNull RootDomainUsageAnalysis domainUsageAnalysis) {
+		EnvironmentFactory environmentFactory = containmentAnalysis.getEnvironmentFactory();
 		this.metamodelManager = environmentFactory.getMetamodelManager();
-		this.standardLibrary = environmentFactory.getStandardLibrary();
-		this.domainUsageAnalysis = scheduler.getDomainAnalysis();
-		this.scheduler = scheduler;
+		StandardLibrary standardLibrary = environmentFactory.getStandardLibrary();
+		this.standardLibraryHelper = new StandardLibraryHelper(standardLibrary);
+		this.domainUsageAnalysis = domainUsageAnalysis;
+		this.containmentAnalysis = containmentAnalysis;
+		//		this.scheduler = scheduler;
 		this.finalAnalysis = ((PivotMetamodelManager)metamodelManager).getFinalAnalysis(); //new FinalAnalysis((CompleteModelInternal) environmentFactory.getCompleteModel());
 		this.completeModel = environmentFactory.getCompleteModel();
 		this.oclVoidCompleteClass = completeModel.getCompleteClass(standardLibrary.getOclVoidType());
@@ -1571,7 +1574,7 @@ public class DependencyAnalyzer
 	}
 
 	public @NonNull StandardLibrary getStandardLibrary() {
-		return standardLibrary;
+		return standardLibraryHelper.getStandardLibrary();
 	}
 
 	protected @NonNull DomainUsage getUsage(@NonNull Element element) {

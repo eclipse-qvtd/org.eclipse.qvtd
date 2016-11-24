@@ -114,7 +114,7 @@ public abstract class AbstractRegion2Mapping
 		if (asProperty.eContainer() == null) {
 			Type asType = asProperty.getType();
 			SchedulerConstants schedulerConstants = getRegion().getSchedulerConstants();
-			if (asProperty == schedulerConstants.getOclContainerProperty()) {
+			if (asProperty == schedulerConstants.getStandardLibraryHelper().getOclContainerProperty()) {
 				return helper.createOperationCallExp(asSource, "oclContainer");
 			}
 			else if ((asType != null) && (asProperty == schedulerConstants.getCastProperty(asType))) {

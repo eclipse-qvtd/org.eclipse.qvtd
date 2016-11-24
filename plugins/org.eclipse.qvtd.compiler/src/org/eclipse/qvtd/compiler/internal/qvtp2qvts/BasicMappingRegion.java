@@ -386,7 +386,7 @@ public class BasicMappingRegion extends AbstractMappingRegion
 		if (conditionExpression instanceof OperationCallExp) {
 			OperationCallExp callExp = (OperationCallExp)conditionExpression;
 			OperationId operationId = callExp.getReferredOperation().getOperationId();
-			if (PivotUtil.isSameOperation(operationId, getSchedulerConstants().getOclAnyEqualsId())) {
+			if (PivotUtil.isSameOperation(operationId, getStandardLibraryHelper().getOclAnyEqualsId())) {
 				OCLExpression leftExp = callExp.getOwnedSource();
 				if (leftExp instanceof VariableExp) {
 					return leftExp;
@@ -415,7 +415,7 @@ public class BasicMappingRegion extends AbstractMappingRegion
 		if (conditionExpression instanceof OperationCallExp) {
 			OperationCallExp callExp = (OperationCallExp)conditionExpression;
 			OperationId operationId = callExp.getReferredOperation().getOperationId();
-			if (PivotUtil.isSameOperation(operationId, getSchedulerConstants().getOclAnyEqualsId())) {
+			if (PivotUtil.isSameOperation(operationId, getStandardLibraryHelper().getOclAnyEqualsId())) {
 				OCLExpression leftExp = callExp.getOwnedSource();
 				OCLExpression rightExp = callExp.getOwnedArguments().get(0);
 				if (leftExp instanceof VariableExp) {

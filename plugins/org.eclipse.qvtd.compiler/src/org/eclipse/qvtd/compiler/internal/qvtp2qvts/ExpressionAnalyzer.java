@@ -60,6 +60,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.StandardLibraryHelper;
 import org.eclipse.qvtd.pivot.qvtcore.NavigationAssignment;
 import org.eclipse.qvtd.pivot.qvtcore.OppositePropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcore.PropertyAssignment;
@@ -108,6 +109,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@NonNull
 
 	protected final @NonNull SchedulerConstants scheduler;
 	protected final @NonNull EnvironmentFactory environmentFactory;
+	protected final @NonNull StandardLibraryHelper standardLibraryHelper;
 	private /*@LazyNonNull*/ ConditionalExpressionAnalyzer conditionalExpressionAnalyzer = null;
 	//	private /*@LazyNonNull*/ DependencyAnalyzer dependencyAnalyzer;
 
@@ -115,6 +117,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@NonNull
 		super(context);
 		this.scheduler = context.getSchedulerConstants();
 		this.environmentFactory = scheduler.getEnvironmentFactory();
+		this.standardLibraryHelper = new StandardLibraryHelper(environmentFactory.getStandardLibrary());
 		//		this.dependencyAnalyzer = getDependencyAnalyzer();
 	}
 
@@ -215,7 +218,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@NonNull
 	private @NonNull Node analyzeOperationCallExp_oclContainer(@NonNull Node sourceNode, @NonNull OperationCallExp operationCallExp) {
 		Type castType = operationCallExp.getType();
 		assert castType != null;
-		Property oclContainerProperty = scheduler.getOclContainerProperty();
+		Property oclContainerProperty = standardLibraryHelper.getOclContainerProperty();
 		Edge oclContainerEdge = sourceNode.getPredicateEdge(oclContainerProperty);
 		if (oclContainerEdge != null) {
 			return oclContainerEdge.getTarget();
@@ -816,13 +819,13 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@NonNull
 		OperationId operationId = referredOperation.getOperationId();
 		// FIXME "=" can identify that LHS and RHS can be coalesced
 		// FIXME "includes" may also indicate a coalesce
-		if (operationId == scheduler.getOclAnyOclAsTypeId()) {
+		if (operationId == standardLibraryHelper.getOclAnyOclAsTypeId()) {
 			return analyzeOperationCallExp_oclAsType(sourceNode, operationCallExp);
 		}
-		else if (PivotUtil.isSameOperation(operationId, scheduler.getOclElementOclContainerId())) {
+		else if (PivotUtil.isSameOperation(operationId, standardLibraryHelper.getOclElementOclContainerId())) {
 			return analyzeOperationCallExp_oclContainer(sourceNode, operationCallExp);
 		}
-		else if (PivotUtil.isSameOperation(operationId, scheduler.getOclAnyOclIsKindOfId())) {
+		else if (PivotUtil.isSameOperation(operationId, standardLibraryHelper.getOclAnyOclIsKindOfId())) {
 			return analyzeOperationCallExp_oclIsKindOf(sourceNode, operationCallExp);
 		}
 		else if ((operationCallExp.eContainer() instanceof Predicate)

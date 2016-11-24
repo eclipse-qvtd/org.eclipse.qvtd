@@ -33,7 +33,6 @@ import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.VariableDeclaration;
-import org.eclipse.ocl.pivot.ids.OperationId;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
@@ -49,6 +48,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.DOTStringBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphMLStringBuilder;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.StandardLibraryHelper;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsageAnalysis;
@@ -94,15 +94,8 @@ public abstract class SchedulerConstants
 	@SuppressWarnings("unused")
 	private final @NonNull DomainUsage inputUsage;
 
-	private final @NonNull OperationId collectionSelectByKindId;
-	private final @NonNull OperationId oclAnyEqualsId;
-	private final @NonNull OperationId oclAnyOclAsSetId;
-	private final @NonNull OperationId oclAnyOclAsTypeId;
-	private final @NonNull OperationId oclAnyOclIsKindOfId;
-	private final @NonNull OperationId oclElementOclContainerId;
+	protected final @NonNull StandardLibraryHelper standardLibraryHelper;
 	private final @NonNull ClassDatumAnalysis oclVoidClassDatumAnalysis;
-
-	private final @NonNull Property oclContainerProperty;
 
 	/**
 	 * The extended analysis of each ClassDatum.
@@ -147,31 +140,8 @@ public abstract class SchedulerConstants
 		//		this.inputUsage = domainAnalysis.getConstantUsage(inputMask);
 		//
 		StandardLibrary standardLibrary = environmentFactory.getStandardLibrary();
-		org.eclipse.ocl.pivot.Class oclAnyType = standardLibrary.getOclAnyType();
-		org.eclipse.ocl.pivot.Class oclElementType = standardLibrary.getOclElementType();
-		Operation operation1 = NameUtil.getNameable(oclAnyType.getOwnedOperations(), "=");
-		assert operation1 != null;
-		oclAnyEqualsId = operation1.getOperationId();
-		Operation operation2 = NameUtil.getNameable(oclAnyType.getOwnedOperations(), "oclAsType");
-		assert operation2 != null;
-		oclAnyOclAsTypeId = operation2.getOperationId();
-		Operation operation3 = NameUtil.getNameable(oclAnyType.getOwnedOperations(), "oclIsKindOf");
-		assert operation3 != null;
-		oclAnyOclIsKindOfId = operation3.getOperationId();
-		Operation operation4 = NameUtil.getNameable(oclElementType.getOwnedOperations(), "oclContainer");
-		assert operation4 != null;
-		oclElementOclContainerId = operation4.getOperationId();
-		Operation operation5 = NameUtil.getNameable(oclAnyType.getOwnedOperations(), "oclAsSet");
-		assert operation5 != null;
-		oclAnyOclAsSetId = operation5.getOperationId();
-		Operation operation6 = NameUtil.getNameable(standardLibrary.getCollectionType().getOwnedOperations(), "selectByKind");
-		assert operation6 != null;
-		collectionSelectByKindId = operation6.getOperationId();
+		this.standardLibraryHelper = new StandardLibraryHelper(standardLibrary);
 		oclVoidClassDatumAnalysis = getClassDatumAnalysis(standardLibrary.getOclVoidType(), domainAnalysis.getPrimitiveTypeModel());
-		//
-		Property candidateOclContainerProperty = NameUtil.getNameable(oclElementType.getOwnedProperties(), "oclContainer");
-		assert candidateOclContainerProperty != null : "OCL Standard Librarty has no OclElement::oclContainer property";
-		oclContainerProperty = candidateOclContainerProperty;
 		//
 	}
 
@@ -265,19 +235,10 @@ public abstract class SchedulerConstants
 		return datumCaches.getContainmentAnalysis();
 	}
 
-	//	@SuppressWarnings("null")
-	//	public @NonNull Set<ClassDatum> getClassDatums() {
-	//		return classDatum2classDatumAnalysis.keySet();
-	//	}
-
-	public @NonNull OperationId getCollectionSelectByKindId() {
-		return collectionSelectByKindId;
-	}
-
 	public @NonNull DependencyAnalyzer getDependencyAnalyzer() {
 		DependencyAnalyzer dependencyAnalyzer2 = dependencyAnalyzer;
 		if (dependencyAnalyzer2 == null) {
-			dependencyAnalyzer = dependencyAnalyzer2 = new DependencyAnalyzer(this);
+			dependencyAnalyzer = dependencyAnalyzer2 = new DependencyAnalyzer(getContainmentAnalysis(), getDomainAnalysis());
 		}
 		return dependencyAnalyzer2;
 	}
@@ -312,30 +273,6 @@ public abstract class SchedulerConstants
 		return iterateProperty;
 	}
 
-	public @NonNull OperationId getOclAnyEqualsId() {
-		return oclAnyEqualsId;
-	}
-
-	public @NonNull OperationId getOclAnyOclAsSetId() {
-		return oclAnyOclAsSetId;
-	}
-
-	public @NonNull OperationId getOclAnyOclAsTypeId() {
-		return oclAnyOclAsTypeId;
-	}
-
-	public @NonNull OperationId getOclAnyOclIsKindOfId() {
-		return oclAnyOclIsKindOfId;
-	}
-
-	public @NonNull Property getOclContainerProperty() {
-		return oclContainerProperty;
-	}
-
-	public @NonNull OperationId getOclElementOclContainerId() {
-		return oclElementOclContainerId;
-	}
-
 	public @NonNull ClassDatumAnalysis getOclVoidClassDatumAnalysis() {
 		return oclVoidClassDatumAnalysis;
 	}
@@ -358,6 +295,10 @@ public abstract class SchedulerConstants
 
 	public @NonNull StandardLibrary getStandardLibrary() {
 		return environmentFactory.getStandardLibrary();
+	}
+
+	public @NonNull StandardLibraryHelper getStandardLibraryHelper() {
+		return standardLibraryHelper;
 	}
 
 	public @NonNull Transformation getTransformation() {

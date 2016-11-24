@@ -77,7 +77,7 @@ public class RootCompositionRegion extends AbstractRegion
 			if ((property != null) && property.isIsComposite() && !property.isIsRequired()) {
 				containerEdge = edge;
 				parent2childProperty = property;
-				if (property == scheduler.getOclContainerProperty()) {
+				if (property == scheduler.getStandardLibraryHelper().getOclContainerProperty()) {
 					containingClassDatumAnalysis = edge.getSource().getClassDatumAnalysis();
 				}
 				break;

@@ -1129,7 +1129,7 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 		}
 		PropertyDatum propertyDatum = basicGetPropertyDatum(edge);
 		if (propertyDatum == null) {
-			if (property == getSchedulerConstants().getOclContainerProperty()) {
+			if (property == getStandardLibraryHelper().getOclContainerProperty()) {
 				return getCompositeRealizedEdges(edge);
 			}
 			propertyDatum = basicGetPropertyDatum(edge);				// FIXME debugging

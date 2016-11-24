@@ -40,6 +40,8 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphEdge;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphNode;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.StandardLibraryHelper;
+
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -808,7 +810,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 							TypedModel typedModel = classDatumAnalysis.getTypedModel();
 							Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>> property2realizedEdges = typedModel2property2realizedEdges.get(typedModel);
 							assert property2realizedEdges != null;
-							Property oclContainerProperty = getSchedulerConstants().getOclContainerProperty();
+							Property oclContainerProperty = getStandardLibraryHelper().getOclContainerProperty();
 							if (property == oclContainerProperty) {
 								//								Node containerNode = predicatedEdge.getTarget();
 								//								Node containedNode = predicatedEdge.getSource();
@@ -1948,6 +1950,10 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 	@Override
 	public @Nullable String getShape() {
 		return null;
+	}
+
+	protected @NonNull StandardLibraryHelper getStandardLibraryHelper() {
+		return getSchedulerConstants().getStandardLibraryHelper();
 	}
 
 	@Override

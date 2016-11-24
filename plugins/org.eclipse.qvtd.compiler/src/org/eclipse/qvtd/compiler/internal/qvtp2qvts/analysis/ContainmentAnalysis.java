@@ -107,6 +107,10 @@ public class ContainmentAnalysis
 		return containmentProperties == null ? EMPTY_PROPERTY_LIST : containmentProperties;
 	}
 
+	public @NonNull EnvironmentFactory getEnvironmentFactory() {
+		return inheritanceAnalysis.getEnvironmentFactory();
+	}
+
 	public @NonNull InheritanceAnalysis getInheritanceAnalysis() {
 		return inheritanceAnalysis;
 	}
