@@ -8,7 +8,7 @@
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
-package org.eclipse.qvtd.compiler.internal.qvtp2qvts;
+package org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -73,7 +73,6 @@ import org.eclipse.ocl.pivot.utilities.ParserException;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.TracingOption;
 import org.eclipse.qvtd.compiler.CompilerConstants;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ContainmentAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
@@ -96,7 +95,7 @@ import com.google.common.collect.Lists;
  * Cached Operation analyses are specialized wrt their invocation arguments so that the analysis of each OperationCallExp
  * is sensitive to actual usage.
  */
-public class DependencyAnalyzer
+public class OperationDependencyAnalysis
 {
 	public static final @NonNull TracingOption ATTEMPT = new TracingOption(CompilerConstants.PLUGIN_ID, "dependency/attempt");
 	public static final @NonNull TracingOption CALL = new TracingOption(CompilerConstants.PLUGIN_ID, "dependency/call");
@@ -165,23 +164,20 @@ public class DependencyAnalyzer
 		}
 	}
 
-	protected abstract static class DependencyStep
+	protected abstract static class BasicDependencyStep implements OperationDependencyStep
 	{
 		protected final @NonNull DomainUsage usage;
 		protected final @NonNull Element element;
 
-		protected DependencyStep(@NonNull DomainUsage usage, @NonNull Element element) {
+		protected BasicDependencyStep(@NonNull DomainUsage usage, @NonNull Element element) {
 			this.usage = usage;
 			this.element = element;
 		}
 
+		@Override
 		public @NonNull Element getElement() {
 			return element;
 		}
-
-		public abstract org.eclipse.ocl.pivot.@NonNull Class getElementalType();
-
-		public abstract String getName();
 
 		public @Nullable CallExp getCallExp() {
 			return null;
@@ -191,6 +187,7 @@ public class DependencyAnalyzer
 			return null;
 		}
 
+		@Override
 		public @NonNull DomainUsage getUsage() {
 			return usage;
 		}
@@ -200,7 +197,7 @@ public class DependencyAnalyzer
 		}
 	}
 
-	protected static class ClassDependencyStep extends DependencyStep
+	protected static class ClassDependencyStep extends BasicDependencyStep implements OperationDependencyStep.ClassStep
 	{
 		private final org.eclipse.ocl.pivot.@NonNull Class type;
 
@@ -222,18 +219,28 @@ public class DependencyAnalyzer
 		}
 
 		@Override
+		public @NonNull Element getPathElement() {
+			return type;
+		}
+
+		@Override
 		public String toString() {
 			return usage + " «" + type.eClass().getName() + "»" + type.toString();
 		}
 	}
 
-	protected static class NavigationDependencyStep extends DependencyStep
+	protected static class NavigationDependencyStep extends BasicDependencyStep implements OperationDependencyStep.PropertyStep
 	{
 		protected final @NonNull Property property;
 
 		public NavigationDependencyStep(@NonNull DomainUsage usage, @NonNull Property property, @NonNull CallExp element) {
 			super(usage, element);
 			this.property = property;
+		}
+
+		@Override
+		public @NonNull CallExp getCallExp() {
+			return (CallExp) element;
 		}
 
 		@Override
@@ -253,8 +260,8 @@ public class DependencyAnalyzer
 		}
 
 		@Override
-		public @NonNull CallExp getCallExp() {
-			return (CallExp) element;
+		public @NonNull Element getPathElement() {
+			return property;
 		}
 
 		@Override
@@ -268,7 +275,7 @@ public class DependencyAnalyzer
 		}
 	}
 
-	protected static class ParameterDependencyStep extends DependencyStep
+	protected static class ParameterDependencyStep extends BasicDependencyStep
 	{
 		private final org.eclipse.ocl.pivot.@NonNull Class type;
 
@@ -294,6 +301,11 @@ public class DependencyAnalyzer
 		}
 
 		@Override
+		public @NonNull Element getPathElement() {
+			return element;
+		}
+
+		@Override
 		public String toString() {
 			return usage + " «" + type.eClass().getName() + "»" + ((VariableDeclaration)element).getName() + ":" + type.toString();
 		}
@@ -308,20 +320,20 @@ public class DependencyAnalyzer
 	 * Each usage comprises overt usages that contribute to the analyze value and further hidden usages
 	 * that are used behind the scenes. e.g. a.b=c, has Boolean as an explicit return and A::b, C as hidden usages.
 	 */
-	protected static class DependencyPaths
+	protected static class BasicDependencyPaths implements OperationDependencyPaths
 	{
-		protected final @NonNull DependencyAnalyzer dependencyAnalyzer;
-		private final @NonNull Set<@NonNull List<@NonNull DependencyStep>> returnPaths;
-		private final @NonNull Set<@NonNull List<@NonNull DependencyStep>> hiddenPaths;
+		protected final @NonNull OperationDependencyAnalysis operationDependencyAnalysis;
+		private final @NonNull Set<@NonNull List<@NonNull OperationDependencyStep>> returnPaths;
+		private final @NonNull Set<@NonNull List<@NonNull OperationDependencyStep>> hiddenPaths;
 
-		protected DependencyPaths(@NonNull DependencyAnalyzer dependencyAnalyzer,
-				@Nullable Set<@NonNull List<@NonNull DependencyStep>> returnPaths,
-				@Nullable Set<@NonNull List<@NonNull DependencyStep>> hiddenPaths) {
-			this.dependencyAnalyzer = dependencyAnalyzer;
-			Set<@NonNull List<@NonNull DependencyStep>> immutableReturnPaths;
+		protected BasicDependencyPaths(@NonNull OperationDependencyAnalysis operationDependencyAnalysis,
+				@Nullable Set<@NonNull List<@NonNull OperationDependencyStep>> returnPaths,
+				@Nullable Set<@NonNull List<@NonNull OperationDependencyStep>> hiddenPaths) {
+			this.operationDependencyAnalysis = operationDependencyAnalysis;
+			Set<@NonNull List<@NonNull OperationDependencyStep>> immutableReturnPaths;
 			if (returnPaths != null) {
 				immutableReturnPaths = new HashSet<>(returnPaths.size());
-				for (@NonNull List<@NonNull DependencyStep> returnPath : returnPaths) {
+				for (@NonNull List<@NonNull OperationDependencyStep> returnPath : returnPaths) {
 					immutableReturnPaths.add(Collections.unmodifiableList(returnPath));
 				}
 			}
@@ -329,10 +341,10 @@ public class DependencyAnalyzer
 				immutableReturnPaths = Collections.emptySet();
 			}
 			this.returnPaths = Collections.unmodifiableSet(immutableReturnPaths);
-			Set<@NonNull List<@NonNull DependencyStep>> immutableHiddenPaths;
+			Set<@NonNull List<@NonNull OperationDependencyStep>> immutableHiddenPaths;
 			if (hiddenPaths != null) {
 				immutableHiddenPaths = new HashSet<>(hiddenPaths.size());
-				for (@NonNull List<@NonNull DependencyStep> hiddenPath : hiddenPaths) {
+				for (@NonNull List<@NonNull OperationDependencyStep> hiddenPath : hiddenPaths) {
 					immutableHiddenPaths.add(Collections.unmodifiableList(hiddenPath));
 				}
 			}
@@ -345,42 +357,42 @@ public class DependencyAnalyzer
 		/**
 		 * Return a new DependencyPaths formed by the addition of both the returnPaths and the hiddenPaths of secondPath to these hiddenPaths
 		 */
-		public @NonNull DependencyPaths addHidden(@NonNull DependencyPaths secondPath) {
-			Set<@NonNull List<@NonNull DependencyStep>> newHiddenPaths = hiddenPaths;
-			Set<@NonNull List<@NonNull DependencyStep>> secondPathHiddenPaths = secondPath.hiddenPaths;
+		public @NonNull BasicDependencyPaths addHidden(@NonNull BasicDependencyPaths secondPath) {
+			Set<@NonNull List<@NonNull OperationDependencyStep>> newHiddenPaths = hiddenPaths;
+			Set<@NonNull List<@NonNull OperationDependencyStep>> secondPathHiddenPaths = secondPath.basicGetHiddenPaths();
 			newHiddenPaths = new HashSet<>(newHiddenPaths);
 			newHiddenPaths.addAll(secondPathHiddenPaths);
-			Set<@NonNull List<@NonNull DependencyStep>> secondPathReturnPaths = secondPath.returnPaths;
+			Set<@NonNull List<@NonNull OperationDependencyStep>> secondPathReturnPaths = secondPath.basicGetReturnPaths();
 			newHiddenPaths = new HashSet<>(newHiddenPaths);
 			newHiddenPaths.addAll(secondPathReturnPaths);
-			return dependencyAnalyzer.createDependencyPaths(returnPaths, newHiddenPaths);
+			return operationDependencyAnalysis.createDependencyPaths(returnPaths, newHiddenPaths);
 		}
 
 		/**
 		 * Return a new DependencyPaths formed by the addition of the returnPaths of secondPath to these returnPaths
 		 * and the addition of the hiddenPaths of secondPath to these hiddenPaths
 		 */
-		public @NonNull DependencyPaths addReturn(@NonNull DependencyPaths secondPath) {
-			Set<@NonNull List<@NonNull DependencyStep>> newReturnPaths;
-			Set<@NonNull List<@NonNull DependencyStep>> secondPathReturnPaths = secondPath.returnPaths;
+		public @NonNull BasicDependencyPaths addReturn(@NonNull BasicDependencyPaths secondPath) {
+			Set<@NonNull List<@NonNull OperationDependencyStep>> newReturnPaths;
+			Set<@NonNull List<@NonNull OperationDependencyStep>> secondPathReturnPaths = secondPath.basicGetReturnPaths();
 			newReturnPaths = new HashSet<>(returnPaths);
 			newReturnPaths.addAll(secondPathReturnPaths);
-			Set<@NonNull List<@NonNull DependencyStep>> newHiddenPaths;
-			Set<@NonNull List<@NonNull DependencyStep>> secondPathHiddenPaths = secondPath.hiddenPaths;
+			Set<@NonNull List<@NonNull OperationDependencyStep>> newHiddenPaths;
+			Set<@NonNull List<@NonNull OperationDependencyStep>> secondPathHiddenPaths = secondPath.basicGetHiddenPaths();
 			newHiddenPaths = new HashSet<>(hiddenPaths);
 			newHiddenPaths.addAll(secondPathHiddenPaths);
-			return dependencyAnalyzer.createDependencyPaths(newReturnPaths, newHiddenPaths);
+			return operationDependencyAnalysis.createDependencyPaths(newReturnPaths, newHiddenPaths);
 		}
 
-		public @NonNull DependencyPaths append(@NonNull NavigationDependencyStep propertyDependencyStep) {
-			Set<@NonNull List<@NonNull DependencyStep>> oldReturnPaths = returnPaths;
+		public @NonNull BasicDependencyPaths append(@NonNull NavigationDependencyStep propertyDependencyStep) {
+			Set<@NonNull List<@NonNull OperationDependencyStep>> oldReturnPaths = returnPaths;
 			if (isRedundant(oldReturnPaths, propertyDependencyStep.getProperty())) {
 				return this;
 			}
-			StandardLibrary standardLibrary = dependencyAnalyzer.getStandardLibrary();
-			Set<@NonNull List<@NonNull DependencyStep>> newReturnPaths = new HashSet<>();
-			for (@NonNull List<@NonNull DependencyStep> oldReturnPath : oldReturnPaths) {
-				List<@NonNull DependencyStep> newReturnPath = null;
+			StandardLibrary standardLibrary = operationDependencyAnalysis.getStandardLibrary();
+			Set<@NonNull List<@NonNull OperationDependencyStep>> newReturnPaths = new HashSet<>();
+			for (@NonNull List<@NonNull OperationDependencyStep> oldReturnPath : oldReturnPaths) {
+				List<@NonNull OperationDependencyStep> newReturnPath = null;
 				int size = oldReturnPath.size();
 				assert size > 0;
 				if ((size > 0) && (oldReturnPath.get(size-1) == propertyDependencyStep)) {	// ?? conformance
@@ -396,7 +408,7 @@ public class DependencyAnalyzer
 					}
 					else if (sourceClass.conformsTo(standardLibrary, endClass)) {
 						if (oldReturnPath.size() == 1) {
-							ClassDependencyStep newClassDependencyStep = dependencyAnalyzer.createClassDependencyStep(sourceClass, oldReturnPath.get(0).getElement());
+							ClassDependencyStep newClassDependencyStep = operationDependencyAnalysis.createClassDependencyStep(sourceClass, oldReturnPath.get(0).getElement());
 							newReturnPath = new ArrayList<>();
 							newReturnPath.add(newClassDependencyStep);
 						}
@@ -411,30 +423,33 @@ public class DependencyAnalyzer
 				}
 				newReturnPaths.add(newReturnPath);
 			}
-			return dependencyAnalyzer.createDependencyPaths(newReturnPaths, hiddenPaths);
+			return operationDependencyAnalysis.createDependencyPaths(newReturnPaths, hiddenPaths);
 		}
 
-		public @NonNull Set<@NonNull List<@NonNull DependencyStep>> basicGetHiddenPaths() {
+		//	@Override
+		public @NonNull Set<@NonNull List<@NonNull OperationDependencyStep>> basicGetHiddenPaths() {
 			return hiddenPaths;
 		}
 
-		public @NonNull Set<@NonNull List<@NonNull DependencyStep>> basicGetReturnPaths() {
+		//	@Override
+		public @NonNull Set<@NonNull List<@NonNull OperationDependencyStep>> basicGetReturnPaths() {
 			return returnPaths;
 		}
 
 		/**
 		 * Return the hidden paths as an ordered iterable.
 		 */
-		public @NonNull Iterable<@NonNull List<@NonNull DependencyStep>> getHiddenPaths() {
-			Map<@NonNull String, @NonNull List<@NonNull DependencyStep>> map = new HashMap<>();
-			for (@NonNull List<@NonNull DependencyStep> list : hiddenPaths) {
+		@Override
+		public @NonNull Iterable<@NonNull List<@NonNull OperationDependencyStep>> getHiddenPaths() {
+			Map<@NonNull String, @NonNull List<@NonNull OperationDependencyStep>> map = new HashMap<>();
+			for (@NonNull List<@NonNull OperationDependencyStep> list : hiddenPaths) {
 				map.put(String.valueOf(list), list);
 			}
 			List<@NonNull String> sortedKeys = new ArrayList<>(map.keySet());
 			Collections.sort(sortedKeys);
-			List<@NonNull List<@NonNull DependencyStep>> sortedList = new ArrayList<>();
+			List<@NonNull List<@NonNull OperationDependencyStep>> sortedList = new ArrayList<>();
 			for (@NonNull String key : sortedKeys) {
-				List<@NonNull DependencyStep> steps = map.get(key);
+				List<@NonNull OperationDependencyStep> steps = map.get(key);
 				assert steps != null;
 				sortedList.add(steps);
 			}
@@ -444,16 +459,17 @@ public class DependencyAnalyzer
 		/**
 		 * Return the return paths as an ordered iterable.
 		 */
-		public @NonNull Iterable<@NonNull List<@NonNull DependencyStep>> getReturnPaths() {
-			Map<@NonNull String, @NonNull List<@NonNull DependencyStep>> map = new HashMap<>();
-			for (@NonNull List<@NonNull DependencyStep> list : returnPaths) {
+		@Override
+		public @NonNull Iterable<@NonNull List<@NonNull OperationDependencyStep>> getReturnPaths() {
+			Map<@NonNull String, @NonNull List<@NonNull OperationDependencyStep>> map = new HashMap<>();
+			for (@NonNull List<@NonNull OperationDependencyStep> list : returnPaths) {
 				map.put(String.valueOf(list), list);
 			}
 			List<@NonNull String> sortedKeys = new ArrayList<@NonNull String>(map.keySet());
 			Collections.sort(sortedKeys);
-			List<@NonNull List<@NonNull DependencyStep>> sortedList = new ArrayList<>();
+			List<@NonNull List<@NonNull OperationDependencyStep>> sortedList = new ArrayList<>();
 			for (@NonNull String key : sortedKeys) {
-				List<@NonNull DependencyStep> steps = map.get(key);
+				List<@NonNull OperationDependencyStep> steps = map.get(key);
 				assert steps != null;
 				sortedList.add(steps);
 			}
@@ -463,13 +479,13 @@ public class DependencyAnalyzer
 		/**
 		 * A property isRedundant if all paths have property as their final navigation.
 		 */
-		protected static boolean isRedundant(@NonNull Set<@NonNull List<@NonNull DependencyStep>> paths, @NonNull Property property) {
-			for (@NonNull List<@NonNull DependencyStep> path : paths) {
+		protected static boolean isRedundant(@NonNull Set<@NonNull List<@NonNull OperationDependencyStep>> paths, @NonNull Property property) {
+			for (@NonNull List<@NonNull OperationDependencyStep> path : paths) {
 				int size = path.size();
 				if (size <= 0) {
 					return false;
 				}
-				DependencyStep dependencyStep = path.get(size-1);
+				OperationDependencyStep dependencyStep = path.get(size-1);
 				if (!(dependencyStep instanceof NavigationDependencyStep)) {
 					return false;
 				}
@@ -484,14 +500,14 @@ public class DependencyAnalyzer
 		public @NonNull String toString() {
 			StringBuilder s = new StringBuilder();
 			s.append("{");
-			Iterable<@NonNull List<@NonNull DependencyStep>> returnPaths2 = getReturnPaths();
+			Iterable<@NonNull List<@NonNull OperationDependencyStep>> returnPaths2 = getReturnPaths();
 			boolean iFirst = true;
-			for (@NonNull List<@NonNull DependencyStep> path : returnPaths2) {
+			for (@NonNull List<@NonNull OperationDependencyStep> path : returnPaths2) {
 				if (!iFirst) {
 					s.append("|");
 				}
 				boolean jFirst = true;
-				for (@NonNull DependencyStep step : path) {
+				for (@NonNull OperationDependencyStep step : path) {
 					if (!jFirst) {
 						s.append("::");
 					}
@@ -501,14 +517,14 @@ public class DependencyAnalyzer
 				iFirst = false;
 			}
 			s.append("}++{");
-			Iterable<@NonNull List<@NonNull DependencyStep>> hiddenPaths2 = getHiddenPaths();
+			Iterable<@NonNull List<@NonNull OperationDependencyStep>> hiddenPaths2 = getHiddenPaths();
 			iFirst = true;
-			for (@NonNull List<@NonNull DependencyStep> path : hiddenPaths2) {
+			for (@NonNull List<@NonNull OperationDependencyStep> path : hiddenPaths2) {
 				if (!iFirst) {
 					s.append("|");
 				}
 				boolean jFirst = true;
-				for (@NonNull DependencyStep step : path) {
+				for (@NonNull OperationDependencyStep step : path) {
 					if (!jFirst) {
 						s.append("::");
 					}
@@ -526,7 +542,7 @@ public class DependencyAnalyzer
 	 * A DependencyAnalyzerVisitor performs an analyzed execution of a QVTi expression propagating the set of returned and used paths as
 	 * the analysis result.
 	 */
-	protected class DependencyAnalyzerVisitor extends AbstractExtendingQVTcoreVisitor<@Nullable DependencyPaths, @Nullable Object>
+	protected class DependencyAnalyzerVisitor extends AbstractExtendingQVTcoreVisitor<@Nullable BasicDependencyPaths, @Nullable Object>
 	{
 		private final @NonNull AbstractOperationAnalysis analysis;
 
@@ -535,7 +551,7 @@ public class DependencyAnalyzer
 		 */
 		private final boolean exactResult;
 		private final @Nullable DependencyAnalyzerVisitor parent;
-		private final @NonNull Map<@NonNull VariableDeclaration, @NonNull DependencyPaths> variable2dependencies = new HashMap<>();
+		private final @NonNull Map<@NonNull VariableDeclaration, @NonNull BasicDependencyPaths> variable2dependencies = new HashMap<>();
 
 		protected DependencyAnalyzerVisitor(@NonNull AbstractOperationAnalysis analysis, boolean exactResult) {
 			super(null);
@@ -551,8 +567,8 @@ public class DependencyAnalyzer
 			this.parent = parent;
 		}
 
-		private @Nullable DependencyPaths addHidden(@Nullable DependencyPaths accumulatingResult, @Nullable DependencyPaths additionalResult) {
-			if (exactResult || (pending.size() > 0)) {
+		private @Nullable BasicDependencyPaths addHidden(@Nullable BasicDependencyPaths accumulatingResult, @Nullable BasicDependencyPaths additionalResult) {
+			if (exactResultRequired()) {
 				if ((accumulatingResult == null) || (additionalResult == null)) {
 					return null;
 				}
@@ -571,8 +587,8 @@ public class DependencyAnalyzer
 			}
 		}
 
-		private @Nullable DependencyPaths addReturn(@Nullable DependencyPaths accumulatingResult, @Nullable DependencyPaths additionalResult) {
-			if (exactResult || (pending.size() > 0)) {
+		private @Nullable BasicDependencyPaths addReturn(@Nullable BasicDependencyPaths accumulatingResult, @Nullable BasicDependencyPaths additionalResult) {
+			if (exactResultRequired()) {
 				if ((accumulatingResult == null) || (additionalResult == null)) {
 					return null;
 				}
@@ -591,38 +607,38 @@ public class DependencyAnalyzer
 			}
 		}
 
-		private void addVariable(@NonNull VariableDeclaration variable, @NonNull DependencyPaths value) {
+		private void addVariable(@NonNull VariableDeclaration variable, @NonNull BasicDependencyPaths value) {
 			variable2dependencies.put(variable, value);
 		}
 
-		public @Nullable DependencyPaths analyze(/*@NonNull*/ Visitable element) {
+		public @Nullable BasicDependencyPaths analyze(/*@NonNull*/ Visitable element) {
 			return element.accept(this);
 		}
 
-		public @NonNull DependencyPaths analyzeOperation(@NonNull OperationCallExp operationCallExp) {
+		public @NonNull OperationDependencyPaths analyzeOperation(@NonNull OperationCallExp operationCallExp) {
 			Operation referredOperation = operationCallExp.getReferredOperation();
 			assert referredOperation != null;
 			//
 			//	Form the resultPaths by retaining all hidden dependencies; all dependencies are passed out.
 			//
-			List<@NonNull DependencyPaths> resultPaths = getResultPaths(operationCallExp);
+			List<@NonNull BasicDependencyPaths> resultPaths = getResultPaths(operationCallExp);
 			assert resultPaths != null;
-			List<@NonNull DependencyPaths> allSourceAndArgumentPaths = getAllSourceAndArgumentPaths(resultPaths);
-			DependencyPaths result = emptyDependencyPaths;
-			for (@NonNull List<@NonNull DependencyPaths> aSourceAndArgumentPaths : getEachSourceAndArgumentPaths(allSourceAndArgumentPaths)) {
-				DependencyPaths sourcePaths = aSourceAndArgumentPaths.get(0);
-				for (@NonNull List<@NonNull DependencyStep> steps : sourcePaths.getReturnPaths()) {
-					for (@NonNull DependencyStep step : steps) {
+			List<@NonNull BasicDependencyPaths> allSourceAndArgumentPaths = getAllSourceAndArgumentPaths(resultPaths);
+			BasicDependencyPaths result = emptyDependencyPaths;
+			for (@NonNull List<@NonNull BasicDependencyPaths> aSourceAndArgumentPaths : getEachSourceAndArgumentPaths(allSourceAndArgumentPaths)) {
+				OperationDependencyPaths sourcePaths = aSourceAndArgumentPaths.get(0);
+				for (@NonNull List<@NonNull OperationDependencyStep> steps : sourcePaths.getReturnPaths()) {
+					for (@NonNull OperationDependencyStep step : steps) {
 						org.eclipse.ocl.pivot.Class sourceClass = step.getElementalType();
 						CompleteClass selfClass = completeModel.getCompleteClass(sourceClass);
 						Iterable<@NonNull Operation> overrides = getOverrides(selfClass, referredOperation);
 						for (@NonNull Operation operation : overrides) {
 							OperationId operationId = operation.getOperationId();
-							Map<@NonNull List<@NonNull DependencyPaths>, @NonNull OperationAnalysis> args2result = operation2paths2analysis.get(operationId);
+							Map<@NonNull List<@NonNull BasicDependencyPaths>, @NonNull OperationAnalysis> args2result = operation2paths2analysis.get(operationId);
 							if (args2result != null) {
 								OperationAnalysis operationAnalysis = args2result.get(aSourceAndArgumentPaths);
 								if (operationAnalysis != null) {
-									DependencyPaths operationResult = operationAnalysis.basicGetResult();
+									BasicDependencyPaths operationResult = operationAnalysis.basicGetResult();
 									if (operationResult != null) {
 										result = result.addReturn(operationResult);
 									}
@@ -636,19 +652,19 @@ public class DependencyAnalyzer
 		}
 
 
-		private @NonNull DependencyPaths analyzeOperationCallExp_oclContainer(@NonNull OperationCallExp operationCallExp, @NonNull List<@NonNull DependencyPaths> sourceAndArgumentPaths) {
+		private @NonNull BasicDependencyPaths analyzeOperationCallExp_oclContainer(@NonNull OperationCallExp operationCallExp, @NonNull List<@NonNull BasicDependencyPaths> sourceAndArgumentPaths) {
 			assert sourceAndArgumentPaths.size() == 1;
-			DependencyPaths sourcePath = sourceAndArgumentPaths.get(0);
-			Iterable<@NonNull List<@NonNull DependencyStep>> oldReturnPaths = sourcePath.getReturnPaths();
-			DependencyPaths result = null;
+			BasicDependencyPaths sourcePath = sourceAndArgumentPaths.get(0);
+			Iterable<@NonNull List<@NonNull OperationDependencyStep>> oldReturnPaths = sourcePath.getReturnPaths();
+			BasicDependencyPaths result = null;
 			//
 			//	The simple case of a single property can be appended to the existing path.
 			//
 			if (Iterables.size(oldReturnPaths) == 1) {
-				List<@NonNull DependencyStep> steps = oldReturnPaths.iterator().next();
+				List<@NonNull OperationDependencyStep> steps = oldReturnPaths.iterator().next();
 				int size = steps.size();
 				assert size > 0;
-				DependencyStep lastStep = steps.get(size-1);
+				OperationDependencyStep lastStep = steps.get(size-1);
 				CompleteClass containedClass = completeModel.getCompleteClass(lastStep.getElementalType());
 				Iterable<@NonNull Property> containmentProperties = containmentAnalysis.getContainmentProperties(containedClass);	// FIXME exploit an oclAsType
 				if (Iterables.size(containmentProperties) == 1) {
@@ -664,14 +680,14 @@ public class DependencyAnalyzer
 			//	and each possible containment is a hidden path in addition to all the source paths.
 			//
 			if (result == null) {
-				Set<@NonNull List<@NonNull DependencyStep>> newReturnPaths = new HashSet<>();
-				Set<@NonNull List<@NonNull DependencyStep>> newHiddenPaths = new HashSet<>();
+				Set<@NonNull List<@NonNull OperationDependencyStep>> newReturnPaths = new HashSet<>();
+				Set<@NonNull List<@NonNull OperationDependencyStep>> newHiddenPaths = new HashSet<>();
 				Iterables.addAll(newHiddenPaths, oldReturnPaths);
 				Iterables.addAll(newHiddenPaths, sourcePath.getHiddenPaths());
-				for (@NonNull List<@NonNull DependencyStep> steps : oldReturnPaths) {
+				for (@NonNull List<@NonNull OperationDependencyStep> steps : oldReturnPaths) {
 					int size = steps.size();
 					assert size > 0;
-					DependencyStep lastStep = steps.get(size-1);
+					OperationDependencyStep lastStep = steps.get(size-1);
 					CompleteClass containedClass = completeModel.getCompleteClass(lastStep.getElementalType());
 					Iterable<@NonNull Property> containmentProperties = containmentAnalysis.getContainmentProperties(containedClass);	// FIXME exploit an oclAsType
 					for (@NonNull Property containmentProperty : containmentProperties) {
@@ -685,13 +701,17 @@ public class DependencyAnalyzer
 			}
 			if (RESULT.isActive()) {
 				StringBuilder s = new StringBuilder();
-				for (@NonNull DependencyPaths paths : sourceAndArgumentPaths) {
+				for (@NonNull OperationDependencyPaths paths : sourceAndArgumentPaths) {
 					s.append("\n\t=> " + paths.toString());
 				}
 				s.append("\n\t= " + result.toString());
 				RESULT.println(operationCallExp.getReferredOperation() + s.toString());
 			}
 			return result;
+		}
+
+		private boolean exactResultRequired() {
+			return exactResult || (pending.size() > 0);
 		}
 
 		/*		private @NonNull DependencyPaths analyzeOperationCallExp_collectionSelectByKind(@NonNull OperationCallExp operationCallExp,
@@ -707,12 +727,12 @@ public class DependencyAnalyzer
 			return result;
 		} */
 
-		protected @NonNull List<@NonNull DependencyPaths> getAllSourceAndArgumentPaths(@NonNull List<@NonNull DependencyPaths> resultPaths) {
-			List<@NonNull DependencyPaths> sourceAndArgumentPaths = new ArrayList<>(resultPaths.size());
-			for (@NonNull DependencyPaths resultPath : resultPaths) {
-				Set<@NonNull List<@NonNull DependencyStep>> typePaths = new HashSet<>();
-				for (@NonNull List<@NonNull DependencyStep> path : resultPath.basicGetReturnPaths()) {
-					DependencyStep lastStep = path.get(path.size()-1);
+		protected @NonNull List<@NonNull BasicDependencyPaths> getAllSourceAndArgumentPaths(@NonNull List<@NonNull BasicDependencyPaths> resultPaths) {
+			List<@NonNull BasicDependencyPaths> sourceAndArgumentPaths = new ArrayList<>(resultPaths.size());
+			for (@NonNull BasicDependencyPaths resultPath : resultPaths) {
+				Set<@NonNull List<@NonNull OperationDependencyStep>> typePaths = new HashSet<>();
+				for (@NonNull List<@NonNull OperationDependencyStep> path : resultPath.basicGetReturnPaths()) {
+					OperationDependencyStep lastStep = path.get(path.size()-1);
 					TypedElement typedElement = (TypedElement)lastStep.getElement();
 					assert typedElement != null;
 					Type type = typedElement.getType();
@@ -725,10 +745,10 @@ public class DependencyAnalyzer
 			return sourceAndArgumentPaths;
 		}
 
-		protected @NonNull Iterable<@NonNull List<@NonNull DependencyPaths>> getEachSourceAndArgumentPaths(@NonNull List<@NonNull DependencyPaths> allSourceAndArgumentPaths) {
-			List<@NonNull List<@NonNull DependencyPaths>> eachSourceAndArgumentPaths = new ArrayList<>();
-			for (@NonNull List<@NonNull DependencyStep> aSourceStep : allSourceAndArgumentPaths.get(0).getReturnPaths()) {
-				List<@NonNull DependencyPaths> aSourceAndArgumentPaths = new ArrayList<>();
+		protected @NonNull Iterable<@NonNull List<@NonNull BasicDependencyPaths>> getEachSourceAndArgumentPaths(@NonNull List<@NonNull BasicDependencyPaths> allSourceAndArgumentPaths) {
+			List<@NonNull List<@NonNull BasicDependencyPaths>> eachSourceAndArgumentPaths = new ArrayList<>();
+			for (@NonNull List<@NonNull OperationDependencyStep> aSourceStep : allSourceAndArgumentPaths.get(0).getReturnPaths()) {
+				List<@NonNull BasicDependencyPaths> aSourceAndArgumentPaths = new ArrayList<>();
 				aSourceAndArgumentPaths.add(createDependencyPaths(Collections.singleton(aSourceStep), null));
 				for (int i = 1; i < allSourceAndArgumentPaths.size(); i++) {
 					aSourceAndArgumentPaths.add(allSourceAndArgumentPaths.get(i));
@@ -745,16 +765,16 @@ public class DependencyAnalyzer
 			return finalAnalysis.getOverrides(referredOperation, selfClass);
 		}
 
-		protected @Nullable List<@NonNull DependencyPaths> getResultPaths(@NonNull OperationCallExp operationCallExp) {
-			List<@NonNull DependencyPaths> resultPaths = new ArrayList<>();
-			DependencyPaths sourcePaths = analyze(operationCallExp.getOwnedSource());
+		protected @Nullable List<@NonNull BasicDependencyPaths> getResultPaths(@NonNull OperationCallExp operationCallExp) {
+			List<@NonNull BasicDependencyPaths> resultPaths = new ArrayList<>();
+			BasicDependencyPaths sourcePaths = analyze(operationCallExp.getOwnedSource());
 			if (sourcePaths == null) {
 				return null;
 			}
 			resultPaths.add(createDependencyPaths(sourcePaths.basicGetReturnPaths(), sourcePaths.basicGetHiddenPaths()));
 			List<@NonNull OCLExpression> arguments = ClassUtil.nullFree(operationCallExp.getOwnedArguments());
 			for (@NonNull OCLExpression argument : arguments) {
-				DependencyPaths argumentPaths = analyze(argument);
+				BasicDependencyPaths argumentPaths = analyze(argument);
 				if (argumentPaths == null) {
 					return null;
 				}
@@ -763,8 +783,8 @@ public class DependencyAnalyzer
 			return resultPaths;
 		}
 
-		protected @NonNull DependencyPaths getVariable(@NonNull VariableDeclaration variable) {
-			DependencyPaths result = variable2dependencies.get(variable);
+		protected @NonNull BasicDependencyPaths getVariable(@NonNull VariableDeclaration variable) {
+			BasicDependencyPaths result = variable2dependencies.get(variable);
 			if (result != null) {
 				return result;
 			}
@@ -783,13 +803,13 @@ public class DependencyAnalyzer
 		}
 
 		@Override
-		public @Nullable DependencyPaths visiting(@NonNull Visitable visitable) {
+		public @Nullable BasicDependencyPaths visiting(@NonNull Visitable visitable) {
 			throw new UnsupportedOperationException(getClass().getSimpleName() + ": " + visitable.getClass().getSimpleName());
 		}
 
 		@Override
-		public @Nullable DependencyPaths visitCollectionLiteralExp(@NonNull CollectionLiteralExp collectionLiteralExp) {
-			DependencyPaths result = emptyDependencyPaths;
+		public @Nullable BasicDependencyPaths visitCollectionLiteralExp(@NonNull CollectionLiteralExp collectionLiteralExp) {
+			BasicDependencyPaths result = emptyDependencyPaths;
 			for (@NonNull CollectionLiteralPart ownedPart : ClassUtil.nullFree(collectionLiteralExp.getOwnedParts())) {
 				result = addReturn(result, analyze(ownedPart));
 			}
@@ -797,51 +817,51 @@ public class DependencyAnalyzer
 		}
 
 		@Override
-		public @Nullable DependencyPaths visitCollectionItem(@NonNull CollectionItem collectionItem) {
+		public @Nullable BasicDependencyPaths visitCollectionItem(@NonNull CollectionItem collectionItem) {
 			return analyze(collectionItem.getOwnedItem());
 		}
 
 		@Override
-		public @Nullable DependencyPaths visitCollectionRange(@NonNull CollectionRange collectionRange) {
+		public @Nullable BasicDependencyPaths visitCollectionRange(@NonNull CollectionRange collectionRange) {
 			return null;
 		}
 
 		@Override
-		public @Nullable DependencyPaths visitIfExp(@NonNull IfExp ifExp) {
+		public @Nullable BasicDependencyPaths visitIfExp(@NonNull IfExp ifExp) {
 			if (ifExp.toString().contains("lookupPackage")) {
 				ifExp.toString();
 			}
-			DependencyPaths result = analyze(ifExp.getOwnedThen());
+			BasicDependencyPaths result = analyze(ifExp.getOwnedThen());
 			result = addReturn(result, analyze(ifExp.getOwnedElse()));
 			result = addHidden(result, analyze(ifExp.getOwnedCondition()));
 			return result;
 		}
 
 		@Override
-		public @Nullable DependencyPaths visitLetExp(@NonNull LetExp letExp) {
+		public @Nullable BasicDependencyPaths visitLetExp(@NonNull LetExp letExp) {
 			Variable ownedVariable = letExp.getOwnedVariable();
-			DependencyPaths initResult = analyze(ownedVariable.getOwnedInit());
+			BasicDependencyPaths initResult = analyze(ownedVariable.getOwnedInit());
 			if (initResult == null) {
 				return null;
 			}
 			DependencyAnalyzerVisitor nestedAnalyzer = new DependencyAnalyzerVisitor(this);
 			nestedAnalyzer.addVariable(ownedVariable, initResult);
-			DependencyPaths inResult = nestedAnalyzer.analyze(letExp.getOwnedIn());
+			BasicDependencyPaths inResult = nestedAnalyzer.analyze(letExp.getOwnedIn());
 			if (inResult == null) {
 				return null;
 			}
-			DependencyPaths result = addHidden(inResult, initResult);
+			BasicDependencyPaths result = addHidden(inResult, initResult);
 			return result;
 		}
 
 		@Override
-		public @NonNull DependencyPaths visitLiteralExp(@NonNull LiteralExp literalExp) {
+		public @NonNull BasicDependencyPaths visitLiteralExp(@NonNull LiteralExp literalExp) {
 			return createDependencyPaths(literalExp);
 		}
 
 		@Override
-		public @Nullable DependencyPaths visitLoopExp(@NonNull LoopExp loopExp) {
-			DependencyPaths sourcePaths = analyze(loopExp.getOwnedSource());
+		public @Nullable BasicDependencyPaths visitLoopExp(@NonNull LoopExp loopExp) {
+			BasicDependencyPaths sourcePaths = analyze(loopExp.getOwnedSource());
 			if (sourcePaths == null) {
 				return null;
 			}
@@ -853,8 +873,8 @@ public class DependencyAnalyzer
 		}
 
 		@Override
-		public @Nullable DependencyPaths visitMapLiteralExp(@NonNull MapLiteralExp mapLiteralExp) {
-			DependencyPaths result = emptyDependencyPaths;
+		public @Nullable BasicDependencyPaths visitMapLiteralExp(@NonNull MapLiteralExp mapLiteralExp) {
+			BasicDependencyPaths result = emptyDependencyPaths;
 			for (MapLiteralPart ownedPart : mapLiteralExp.getOwnedParts()) {
 				result = addReturn(result, analyze(ownedPart));
 			}
@@ -862,35 +882,38 @@ public class DependencyAnalyzer
 		}
 
 		@Override
-		public @Nullable DependencyPaths visitMapLiteralPart(@NonNull MapLiteralPart mapLiteralPart) {
+		public @Nullable BasicDependencyPaths visitMapLiteralPart(@NonNull MapLiteralPart mapLiteralPart) {
 			return analyze(mapLiteralPart.getOwnedValue());
 		}
 
 		@Override
-		public @Nullable DependencyPaths visitNavigationCallExp(@NonNull NavigationCallExp navigationCallExp) {
-			DependencyPaths sourcePaths = analyze(navigationCallExp.getOwnedSource());
+		public @Nullable BasicDependencyPaths visitNavigationCallExp(@NonNull NavigationCallExp navigationCallExp) {
+			BasicDependencyPaths sourcePaths = analyze(navigationCallExp.getOwnedSource());
 			if (sourcePaths == null) {
 				return null;
 			}
 			NavigationDependencyStep dependencyStep = createPropertyDependencyStep(navigationCallExp);
-			DependencyPaths result = sourcePaths.append(dependencyStep);
+			BasicDependencyPaths result = sourcePaths.append(dependencyStep);
 			return result.addHidden(sourcePaths);
 		}
 
 		@Override
-		public @Nullable DependencyPaths visitNullLiteralExp(@NonNull NullLiteralExp object) {
+		public @Nullable BasicDependencyPaths visitNullLiteralExp(@NonNull NullLiteralExp object) {
 			return emptyDependencyPaths;		// We do not need OclVoid dependencies
 		}
 
 		@Override
-		public @Nullable DependencyPaths visitOperationCallExp(@NonNull OperationCallExp operationCallExp) {
+		public @Nullable BasicDependencyPaths visitOperationCallExp(@NonNull OperationCallExp operationCallExp) {
+			if ("1_.getEmployees()".equals(operationCallExp.toString())) {
+				toString();
+			}
 			Operation referredOperation = operationCallExp.getReferredOperation();
 			assert referredOperation != null;
 			//
 			//	Form the resultPaths by retaining all hidden dependencies; the result of an operationCallExp
 			//	includes all dependencies from the source and argument expressions.
 			//
-			List<@NonNull DependencyPaths> resultPaths = getResultPaths(operationCallExp);
+			List<@NonNull BasicDependencyPaths> resultPaths = getResultPaths(operationCallExp);
 			if (resultPaths == null) {
 				return null;
 			}
@@ -898,10 +921,10 @@ public class DependencyAnalyzer
 			//	Form the sourceAndArgumentPaths by stripping all hidden dependencies; only source and argument type dependencies are
 			//	passed into the operation.
 			//
-			List<@NonNull DependencyPaths> allSourceAndArgumentPaths = getAllSourceAndArgumentPaths(resultPaths);
+			List<@NonNull BasicDependencyPaths> allSourceAndArgumentPaths = getAllSourceAndArgumentPaths(resultPaths);
 			if (CALL.isActive()) {
 				StringBuilder s = new StringBuilder();
-				for (@NonNull DependencyPaths paths : allSourceAndArgumentPaths) {
+				for (@NonNull OperationDependencyPaths paths : allSourceAndArgumentPaths) {
 					s.append("\n\t=> " + paths.toString());
 				}
 				CALL.println(referredOperation + s.toString());
@@ -909,7 +932,7 @@ public class DependencyAnalyzer
 			//
 			//	Analyze each possible source type
 			//
-			DependencyPaths result = emptyDependencyPaths;
+			BasicDependencyPaths result = emptyDependencyPaths;
 			StringBuilder s = ATTEMPT.isActive() || RESULT.isActive() ? new StringBuilder() : null;
 			if (s != null) {
 				Operation containingOperation = PivotUtil.getContainingOperation(operationCallExp);
@@ -935,10 +958,10 @@ public class DependencyAnalyzer
 					}
 				}
 			}
-			for (@NonNull List<@NonNull DependencyPaths> aSourceAndArgumentPaths : getEachSourceAndArgumentPaths(allSourceAndArgumentPaths)) {
+			for (@NonNull List<@NonNull BasicDependencyPaths> aSourceAndArgumentPaths : getEachSourceAndArgumentPaths(allSourceAndArgumentPaths)) {
 				if (s != null) {
 					int i = 0;
-					for (@NonNull DependencyPaths callPath : aSourceAndArgumentPaths) {
+					for (@NonNull BasicDependencyPaths callPath : aSourceAndArgumentPaths) {
 						s.append("\n\t=> ");
 						s.append(i == 0 ?"self" : referredOperation.getOwnedParameters().get(i-1).getName());
 						s.append(": ");
@@ -949,20 +972,20 @@ public class DependencyAnalyzer
 				//
 				//	Analyze each possible override
 				//
-				DependencyPaths aSourcePath = aSourceAndArgumentPaths.get(0);
-				Iterable<@NonNull List<@NonNull DependencyStep>> aSourceReturnPaths = aSourcePath.getReturnPaths();
+				BasicDependencyPaths aSourcePath = aSourceAndArgumentPaths.get(0);
+				Iterable<@NonNull List<@NonNull OperationDependencyStep>> aSourceReturnPaths = aSourcePath.getReturnPaths();
 				assert Iterables.size(aSourceReturnPaths) == 1;
-				List<@NonNull DependencyStep> steps2 = aSourceReturnPaths.iterator().next();
+				List<@NonNull OperationDependencyStep> steps2 = aSourceReturnPaths.iterator().next();
 				int size = steps2.size();
 				assert size > 0;
-				DependencyStep lastStep = steps2.get(size-1);
+				OperationDependencyStep lastStep = steps2.get(size-1);
 				org.eclipse.ocl.pivot.Class sourceClass = lastStep.getElementalType();
 				CompleteClass selfClass = completeModel.getCompleteClass(sourceClass);
 				List<@NonNull Operation> sortedOverrides = Lists.newArrayList(getOverrides(selfClass, referredOperation));
 				Collections.sort(sortedOverrides, ToStringComparator.INSTANCE);
 				for (@NonNull Operation operation : sortedOverrides) {
 					OperationId operationId = operation.getOperationId();
-					Map<@NonNull List<@NonNull DependencyPaths>, @NonNull OperationAnalysis> args2result = operation2paths2analysis.get(operationId);
+					Map<@NonNull List<@NonNull BasicDependencyPaths>, @NonNull OperationAnalysis> args2result = operation2paths2analysis.get(operationId);
 					if (args2result == null) {
 						args2result = new HashMap<>();
 						operation2paths2analysis.put(operationId, args2result);
@@ -970,12 +993,12 @@ public class DependencyAnalyzer
 					OperationAnalysis operationAnalysis = args2result.get(aSourceAndArgumentPaths);
 					if (operationAnalysis == null) {
 						if (referredOperation.getBodyExpression() != null) {
-							operationAnalysis = new OperationAnalysis(DependencyAnalyzer.this, operation, aSourceAndArgumentPaths, null);
+							operationAnalysis = new OperationAnalysis(OperationDependencyAnalysis.this, operation, aSourceAndArgumentPaths, null);
 							addPendingAnalysis(operationAnalysis);				// Queue for evaluation later
 							result = null;
 						}
 						else {
-							DependencyPaths localResult;
+							BasicDependencyPaths localResult;
 							if (PivotUtil.isSameOperation(operationId, standardLibraryHelper.getOclElementOclContainerId())) {
 								localResult = analyzeOperationCallExp_oclContainer(operationCallExp, aSourceAndArgumentPaths);
 							}
@@ -988,15 +1011,15 @@ public class DependencyAnalyzer
 							else {
 								localResult = createDependencyPaths(operationCallExp);
 							}
-							operationAnalysis = new OperationAnalysis(DependencyAnalyzer.this, operation, aSourceAndArgumentPaths, localResult);
+							operationAnalysis = new OperationAnalysis(OperationDependencyAnalysis.this, operation, aSourceAndArgumentPaths, localResult);
 							result = addReturn(result, localResult);
 						}
-						for (@NonNull DependencyPaths callPath : aSourceAndArgumentPaths) {
+						for (@NonNull BasicDependencyPaths callPath : aSourceAndArgumentPaths) {
 							assert Iterables.isEmpty(callPath.getHiddenPaths());
 						}
 						args2result.put(aSourceAndArgumentPaths, operationAnalysis);
 					}
-					DependencyPaths operationResult = operationAnalysis.getResult(analysis);
+					BasicDependencyPaths operationResult = operationAnalysis.getResult(analysis);
 					if (s != null) {
 						s.append("\n\tto: " + operation);
 						s.append("\n\t\t<= " + operationResult);
@@ -1004,34 +1027,43 @@ public class DependencyAnalyzer
 					if (operationResult != null) {
 						result = addReturn(result, operationResult);
 					}
-					else if (exactResult) {
+					else if (exactResultRequired()) {
 						result = null;
+					}
+					else {
+						Type type = operation.getType();
+						assert type != null;
+						ClassDependencyStep classDependencyStep = createClassDependencyStep(type, operationCallExp);
+						BasicDependencyPaths dependencyPaths = createDependencyPaths(classDependencyStep);
+						result = addReturn(result, dependencyPaths);
 					}
 				}
 			}
-			for (@NonNull DependencyPaths argumentPath : resultPaths) {
-				result = addHidden(result, argumentPath);
+			if (result != null) {
+				for (@NonNull BasicDependencyPaths argumentPath : resultPaths) {
+					result = addHidden(result, argumentPath);
+				}
 			}
 			if (s != null) {
-				s.append("\n\t" + (exactResult || (pending.size() > 0) ? "«exact» " : "«partial» ") + result);
+				s.append("\n\t" + (exactResultRequired() ? "«exact» " : "«partial» ") + result);
 				(result != null ? RESULT : ATTEMPT).println(operationCallExp + s.toString());
 			}
 			return result;
 		}
 
 		@Override
-		public @Nullable DependencyPaths visitOppositePropertyAssignment(@NonNull OppositePropertyAssignment propertyAssignment) {
+		public @Nullable BasicDependencyPaths visitOppositePropertyAssignment(@NonNull OppositePropertyAssignment propertyAssignment) {
 			return visiting(propertyAssignment);		// No OppositePropertyAssignment in Operation
 		}
 
 		@Override
-		public @Nullable DependencyPaths visitPropertyAssignment(@NonNull PropertyAssignment propertyAssignment) {
+		public @Nullable BasicDependencyPaths visitPropertyAssignment(@NonNull PropertyAssignment propertyAssignment) {
 			return visiting(propertyAssignment);		// No PropertyAssignment in Operation
 		}
 
 		@Override
-		public @Nullable DependencyPaths visitShadowExp(@NonNull ShadowExp shadowExp) {
-			DependencyPaths result = createDependencyPaths(shadowExp);
+		public @Nullable BasicDependencyPaths visitShadowExp(@NonNull ShadowExp shadowExp) {
+			BasicDependencyPaths result = createDependencyPaths(shadowExp);
 			for (ShadowPart ownedPart : shadowExp.getOwnedParts()) {
 				result = addReturn(result, analyze(ownedPart));
 			}
@@ -1039,13 +1071,13 @@ public class DependencyAnalyzer
 		}
 
 		@Override
-		public @Nullable DependencyPaths visitShadowPart(@NonNull ShadowPart shadowPart) {
+		public @Nullable BasicDependencyPaths visitShadowPart(@NonNull ShadowPart shadowPart) {
 			return analyze(shadowPart.getOwnedInit());
 		}
 
 		@Override
-		public @Nullable DependencyPaths visitTupleLiteralExp(@NonNull TupleLiteralExp tupleLiteralExp) {
-			DependencyPaths result = emptyDependencyPaths;
+		public @Nullable BasicDependencyPaths visitTupleLiteralExp(@NonNull TupleLiteralExp tupleLiteralExp) {
+			BasicDependencyPaths result = emptyDependencyPaths;
 			for (TupleLiteralPart ownedPart : tupleLiteralExp.getOwnedParts()) {
 				result = addReturn(result, analyze(ownedPart));
 			}
@@ -1053,17 +1085,17 @@ public class DependencyAnalyzer
 		}
 
 		@Override
-		public @Nullable DependencyPaths visitTupleLiteralPart(@NonNull TupleLiteralPart tupleLiteralPart) {
+		public @Nullable BasicDependencyPaths visitTupleLiteralPart(@NonNull TupleLiteralPart tupleLiteralPart) {
 			return analyze(tupleLiteralPart.getOwnedInit());
 		}
 
 		@Override
-		public @Nullable DependencyPaths visitTypeExp(@NonNull TypeExp typeExp) {
+		public @Nullable BasicDependencyPaths visitTypeExp(@NonNull TypeExp typeExp) {
 			return emptyDependencyPaths;
 		}
 
 		@Override
-		public @Nullable DependencyPaths visitVariableExp(@NonNull VariableExp variableExp) {
+		public @Nullable BasicDependencyPaths visitVariableExp(@NonNull VariableExp variableExp) {
 			VariableDeclaration referredVariable = variableExp.getReferredVariable();
 			assert referredVariable != null;
 			return getVariable(referredVariable);
@@ -1072,7 +1104,7 @@ public class DependencyAnalyzer
 
 	public static abstract class AbstractOperationAnalysis
 	{
-		protected final @NonNull DependencyAnalyzer dependencyAnalyzer;
+		protected final @NonNull OperationDependencyAnalysis operationDependencyAnalysis;
 
 		/**
 		 * Nested operation invocations whose analysis returned a future result.
@@ -1087,10 +1119,10 @@ public class DependencyAnalyzer
 		/**
 		 * The definitive analyzed execution result once all nested invocations have been fully analyzed.
 		 */
-		protected /*@LazyNonNull*/ DependencyPaths result = null;
+		protected /*@LazyNonNull*/ BasicDependencyPaths result = null;
 
-		protected AbstractOperationAnalysis(@NonNull DependencyAnalyzer dependencyAnalyzer) {
-			this.dependencyAnalyzer = dependencyAnalyzer;
+		protected AbstractOperationAnalysis(@NonNull OperationDependencyAnalysis operationDependencyAnalysis) {
+			this.operationDependencyAnalysis = operationDependencyAnalysis;
 		}
 
 		protected void addInvokedFutureAnalysis(@NonNull OperationAnalysis invokedAnalysis) {
@@ -1114,7 +1146,7 @@ public class DependencyAnalyzer
 
 		public abstract void analyze(boolean exactResult);
 
-		public @Nullable DependencyPaths basicGetResult() {
+		public @Nullable BasicDependencyPaths basicGetResult() {
 			return result;
 		}
 
@@ -1124,18 +1156,18 @@ public class DependencyAnalyzer
 			if (result != null) {							// KNOWN
 				assert (invokedFutureAnalyses2 == null) || invokedFutureAnalyses2.isEmpty() : "Analysis with result should not invoke futures:" + this;
 				assert (invokingFutureAnalyses2 == null) || invokingFutureAnalyses2.isEmpty() : "Analysis with result should not be invoked as a future: " + this;
-				assert !dependencyAnalyzer.pending.contains(this) : "Analysis with result should not be pending: " + this;
-				assert !dependencyAnalyzer.refining.contains(this) : "Analysis with result should not be refining: " + this;
+				assert !operationDependencyAnalysis.pending.contains(this) : "Analysis with result should not be pending: " + this;
+				assert !operationDependencyAnalysis.refining.contains(this) : "Analysis with result should not be refining: " + this;
 			}
 			else {											// PENDING / REFINING
 				//				assert (invokingFutureAnalyses2 != null) && !invokingFutureAnalyses2.isEmpty() : "Analysis with future result should be invoking a future: " + this;
-				if (dependencyAnalyzer.refining.contains(this)) {											// REFINING
-					assert !dependencyAnalyzer.pending.contains(this) : "Analysis with refining result should not be pending: " + this;
+				if (operationDependencyAnalysis.refining.contains(this)) {											// REFINING
+					assert !operationDependencyAnalysis.pending.contains(this) : "Analysis with refining result should not be pending: " + this;
 					//					assert (invokingFutureAnalyses2 != null) && !invokingFutureAnalyses2.isEmpty() : "Analysis with future result should be invoking a future: " + this;
 				}
 				else {
-					assert dependencyAnalyzer.pending.contains(this) : "Analysis with pending result should be pending: " + this;
-					assert !dependencyAnalyzer.refining.contains(this) : "Analysis with pending result should not be refining: " + this;
+					assert operationDependencyAnalysis.pending.contains(this) : "Analysis with pending result should be pending: " + this;
+					assert !operationDependencyAnalysis.refining.contains(this) : "Analysis with pending result should not be refining: " + this;
 				}
 			}
 		}
@@ -1168,10 +1200,10 @@ public class DependencyAnalyzer
 		protected final @NonNull OperationCallExp operationCallExp;
 		protected final @NonNull DependencyAnalyzerVisitor visitor;
 
-		public RootOperationAnalysis(@NonNull DependencyAnalyzer dependencyAnalyzer, @NonNull OperationCallExp operationCallExp) {
-			super(dependencyAnalyzer);
+		public RootOperationAnalysis(@NonNull OperationDependencyAnalysis operationDependencyAnalysis, @NonNull OperationCallExp operationCallExp) {
+			super(operationDependencyAnalysis);
 			this.operationCallExp = operationCallExp;
-			this.visitor = dependencyAnalyzer.createDependencyAnalyzerVisitor(this, true);
+			this.visitor = operationDependencyAnalysis.createDependencyAnalyzerVisitor(this, true);
 		}
 
 		@Override
@@ -1247,10 +1279,10 @@ public class DependencyAnalyzer
 		/**
 		 * The source and arguments for th analyzed execution.
 		 */
-		private final @NonNull List<@NonNull DependencyPaths> sourceAndArgumentPaths;
+		private final @NonNull List<@NonNull BasicDependencyPaths> sourceAndArgumentPaths;
 
-		public OperationAnalysis(@NonNull DependencyAnalyzer dependencyAnalyzer, @NonNull Operation operation, @NonNull List<@NonNull DependencyPaths> sourceAndArgumentPaths, @Nullable DependencyPaths result) {
-			super(dependencyAnalyzer);
+		public OperationAnalysis(@NonNull OperationDependencyAnalysis operationDependencyAnalysis, @NonNull Operation operation, @NonNull List<@NonNull BasicDependencyPaths> sourceAndArgumentPaths, @Nullable BasicDependencyPaths result) {
+			super(operationDependencyAnalysis);
 			this.operation = operation;
 			this.sourceAndArgumentPaths = sourceAndArgumentPaths;
 			this.result = result;
@@ -1266,7 +1298,7 @@ public class DependencyAnalyzer
 				START.println(s.toString());
 			}
 			resetInvokedFutureAnalyses();
-			DependencyAnalyzerVisitor visitor = dependencyAnalyzer.createDependencyAnalyzerVisitor(this, exactResult);
+			DependencyAnalyzerVisitor visitor = operationDependencyAnalysis.createDependencyAnalyzerVisitor(this, exactResult);
 			LanguageExpression bodyExpression;
 			List<? extends VariableDeclaration> ownedParameters;
 			OCLExpression ownedBody;
@@ -1274,7 +1306,7 @@ public class DependencyAnalyzer
 				Function function  = (Function)operation;
 				Transformation transformation = QVTbaseUtil.getContainingTransformation(function);
 				if (transformation != null) {
-					Variable thisVariable = QVTbaseUtil.getContextVariable(dependencyAnalyzer.metamodelManager.getStandardLibrary(), transformation);
+					Variable thisVariable = QVTbaseUtil.getContextVariable(operationDependencyAnalysis.metamodelManager.getStandardLibrary(), transformation);
 					visitor.addVariable(thisVariable, ClassUtil.nonNullState(sourceAndArgumentPaths.get(0)));
 				}
 				ownedParameters = function.getOwnedParameters();
@@ -1284,7 +1316,7 @@ public class DependencyAnalyzer
 				bodyExpression = ClassUtil.nonNullState(operation.getBodyExpression());
 				ExpressionInOCL specification;
 				try {
-					specification = dependencyAnalyzer.metamodelManager.parseSpecification(bodyExpression);
+					specification = operationDependencyAnalysis.metamodelManager.parseSpecification(bodyExpression);
 				} catch (ParserException e) {
 					throw new IllegalStateException(e);
 				}
@@ -1296,7 +1328,7 @@ public class DependencyAnalyzer
 			for (int i = 0; i < iMax; i++) {
 				visitor.addVariable(ClassUtil.nonNullState(ownedParameters.get(i)), ClassUtil.nonNullState(sourceAndArgumentPaths.get(i+1)));
 			}
-			DependencyPaths analysisResult = visitor.analyze(ownedBody);
+			BasicDependencyPaths analysisResult = visitor.analyze(ownedBody);
 			Collection<@NonNull OperationAnalysis> invokedFutureAnalyses2 = invokedFutureAnalyses;
 			if (analysisResult != null) {
 				if (exactResult) {
@@ -1304,7 +1336,7 @@ public class DependencyAnalyzer
 				}
 				else {
 					resetInvokedFutureAnalyses();
-					dependencyAnalyzer.removeRefiningAnalysis(this);
+					operationDependencyAnalysis.removeRefiningAnalysis(this);
 				}
 				//
 				//	If this analysis has a result, everyone that invokes this analysis needs waking up.
@@ -1314,7 +1346,7 @@ public class DependencyAnalyzer
 					List<@NonNull AbstractOperationAnalysis> sortedInvokingFutureAnalyses = new ArrayList<>(invokingFutureAnalyses2);
 					Collections.sort(sortedInvokingFutureAnalyses, ToStringComparator.INSTANCE);
 					for (@NonNull AbstractOperationAnalysis invokingFutureAnalysis : sortedInvokingFutureAnalyses) {
-						dependencyAnalyzer.addPendingAnalysis(invokingFutureAnalysis);
+						operationDependencyAnalysis.addPendingAnalysis(invokingFutureAnalysis);
 						invokingFutureAnalysis.removeInvokedAnalysis(this);
 					}
 					invokingFutureAnalyses2.clear();
@@ -1326,8 +1358,8 @@ public class DependencyAnalyzer
 				//	If this analysis has no result, this analysis goes into the refining queue.
 				//
 				assert (invokedFutureAnalyses2 != null) && (invokedFutureAnalyses2.size() > 0);
-				if (!dependencyAnalyzer.pending.contains(this)) {
-					dependencyAnalyzer.addRefiningAnalysis(this);
+				if (!operationDependencyAnalysis.pending.contains(this)) {
+					operationDependencyAnalysis.addRefiningAnalysis(this);
 				}
 			}
 			//			}
@@ -1338,7 +1370,7 @@ public class DependencyAnalyzer
 			}
 		}
 
-		public @Nullable DependencyPaths getResult(@NonNull AbstractOperationAnalysis invokingAnalysis) {
+		public @Nullable BasicDependencyPaths getResult(@NonNull AbstractOperationAnalysis invokingAnalysis) {
 			if (result != null) {
 				return result;
 			}
@@ -1350,7 +1382,7 @@ public class DependencyAnalyzer
 		private void toDebug(@NonNull StringBuilder s) {
 			s.append(operation);
 			int i = 0;
-			for (@NonNull DependencyPaths sourceAndArgumentPath : sourceAndArgumentPaths) {
+			for (@NonNull OperationDependencyPaths sourceAndArgumentPath : sourceAndArgumentPaths) {
 				s.append("\n\t=> ");
 				s.append((i == 0 ? "self" : operation.getOwnedParameters().get(i-1).getName()));
 				s.append(": " + sourceAndArgumentPath);
@@ -1370,9 +1402,9 @@ public class DependencyAnalyzer
 	protected final @NonNull StandardLibraryHelper standardLibraryHelper;
 	protected final @NonNull RootDomainUsageAnalysis domainUsageAnalysis;
 	//	protected final @NonNull SchedulerConstants scheduler;
-	private final @NonNull Map<@NonNull List<@Nullable Object>, @NonNull DependencyPaths> content2path = new HashMap<>();
-	private final @NonNull DependencyPaths emptyDependencyPaths = createDependencyPaths(null, null);
-	private final @NonNull Map<@NonNull OperationId, @NonNull Map<@NonNull List<@NonNull DependencyPaths>, @NonNull OperationAnalysis>> operation2paths2analysis = new HashMap<>();
+	private final @NonNull Map<@NonNull List<@Nullable Object>, @NonNull BasicDependencyPaths> content2path = new HashMap<>();
+	private final @NonNull BasicDependencyPaths emptyDependencyPaths = createDependencyPaths(null, null);
+	private final @NonNull Map<@NonNull OperationId, @NonNull Map<@NonNull List<@NonNull BasicDependencyPaths>, @NonNull OperationAnalysis>> operation2paths2analysis = new HashMap<>();
 	private final @NonNull Map<org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage, @NonNull DependencyStepFactory> usage2factory = new HashMap<>();
 	private final @NonNull ContainmentAnalysis containmentAnalysis;
 	private final @NonNull FinalAnalysis finalAnalysis;
@@ -1389,7 +1421,7 @@ public class DependencyAnalyzer
 	 */
 	private final @NonNull Set<@NonNull OperationAnalysis> refining = new HashSet<>();
 
-	public DependencyAnalyzer(@NonNull ContainmentAnalysis containmentAnalysis, @NonNull RootDomainUsageAnalysis domainUsageAnalysis) {
+	public OperationDependencyAnalysis(@NonNull ContainmentAnalysis containmentAnalysis, @NonNull RootDomainUsageAnalysis domainUsageAnalysis) {
 		EnvironmentFactory environmentFactory = containmentAnalysis.getEnvironmentFactory();
 		this.metamodelManager = environmentFactory.getMetamodelManager();
 		StandardLibrary standardLibrary = environmentFactory.getStandardLibrary();
@@ -1419,14 +1451,14 @@ public class DependencyAnalyzer
 		refining.add(operationAnalysis);
 	}
 
-	public @NonNull DependencyPaths analyze(@NonNull OperationCallExp operationCallExp) {
+	public @NonNull OperationDependencyPaths analyze(@NonNull OperationCallExp operationCallExp) {
 		RootOperationAnalysis rootAnalysis = new RootOperationAnalysis(this, operationCallExp);
 		return analyze(rootAnalysis.visitor, rootAnalysis.operationCallExp);
 	}
 
-	private @NonNull DependencyPaths analyze(@NonNull DependencyAnalyzerVisitor visitor, @NonNull Element element) {
+	private @NonNull OperationDependencyPaths analyze(@NonNull DependencyAnalyzerVisitor visitor, @NonNull Element element) {
 		@SuppressWarnings("unused")
-		DependencyPaths result = visitor.analyze(element);
+		OperationDependencyPaths result = visitor.analyze(element);
 		while ((pending.size() > 0) || (refining.size() > 0)) {
 			while (pending.size() > 0) {
 				checkAll();
@@ -1439,23 +1471,23 @@ public class DependencyAnalyzer
 				analysis.analyze(false);
 			}
 		}
-		DependencyPaths result2 = visitor.analyze(element);
+		OperationDependencyPaths result2 = visitor.analyze(element);
 		return ClassUtil.nonNullState(result2);
 	}
 
-	public @NonNull DependencyPaths analyzeOperation(@NonNull OperationCallExp operationCallExp) {
+	public @NonNull OperationDependencyPaths analyzeOperation(@NonNull OperationCallExp operationCallExp) {
 		RootOperationAnalysis rootAnalysis = new RootOperationAnalysis(this, operationCallExp);
 		analyze(rootAnalysis.visitor, operationCallExp);
 		return rootAnalysis.visitor.analyzeOperation(operationCallExp);
 	}
 
 	private void checkAll() {
-		for (@NonNull Map<@NonNull List<@NonNull DependencyPaths>, @NonNull OperationAnalysis> paths2analysis : operation2paths2analysis.values()) {
-			for (@NonNull List<@NonNull DependencyPaths> paths : paths2analysis.keySet()) {
-				for (@NonNull DependencyPaths path : paths) {
+		for (@NonNull Map<@NonNull List<@NonNull BasicDependencyPaths>, @NonNull OperationAnalysis> paths2analysis : operation2paths2analysis.values()) {
+			for (@NonNull List<@NonNull BasicDependencyPaths> paths : paths2analysis.keySet()) {
+				for (@NonNull OperationDependencyPaths path : paths) {
 					assert Iterables.isEmpty(path.getHiddenPaths());
-					for (@NonNull List<@NonNull DependencyStep> steps : path.getReturnPaths()) {
-						for (@NonNull DependencyStep step : steps) {
+					for (@NonNull List<@NonNull OperationDependencyStep> steps : path.getReturnPaths()) {
+						for (@NonNull OperationDependencyStep step : steps) {
 							assert step instanceof ClassDependencyStep;
 						}
 					}
@@ -1481,30 +1513,30 @@ public class DependencyAnalyzer
 		return new DependencyAnalyzerVisitor(operationAnalysis, exactResult);
 	}
 
-	public @NonNull DependencyPaths createDependencyPaths(@NonNull TypedElement typedElement) {
+	public @NonNull BasicDependencyPaths createDependencyPaths(@NonNull TypedElement typedElement) {
 		org.eclipse.ocl.pivot.Class type = ClassUtil.nonNullState((org.eclipse.ocl.pivot.Class)typedElement.getType());
 		return createDependencyPaths(createClassDependencyStep(type, typedElement));
 	}
 
-	protected @NonNull DependencyPaths createDependencyPaths(@NonNull DependencyStep returnStep) {
-		Set<@NonNull List<@NonNull DependencyStep>> returnPaths = new HashSet<>();
+	protected @NonNull BasicDependencyPaths createDependencyPaths(@NonNull OperationDependencyStep returnStep) {
+		Set<@NonNull List<@NonNull OperationDependencyStep>> returnPaths = new HashSet<>();
 		returnPaths.add(Collections.singletonList(returnStep));
 		return createDependencyPaths(returnPaths, null);
 	}
 
-	protected @NonNull DependencyPaths createDependencyPaths(@Nullable Set<@NonNull List<@NonNull DependencyStep>> returnPaths, @Nullable Set<@NonNull List<@NonNull DependencyStep>> hiddenPaths) {
+	protected @NonNull BasicDependencyPaths createDependencyPaths(@Nullable Set<@NonNull List<@NonNull OperationDependencyStep>> returnPaths, @Nullable Set<@NonNull List<@NonNull OperationDependencyStep>> hiddenPaths) {
 		List<@Nullable Object> content = new ArrayList<>();
 		content.add(returnPaths);
 		content.add(hiddenPaths);
-		DependencyPaths path = content2path.get(content);
+		BasicDependencyPaths path = content2path.get(content);
 		if (path == null) {
-			path = new DependencyPaths(this, returnPaths, hiddenPaths);
+			path = new BasicDependencyPaths(this, returnPaths, hiddenPaths);
 			content2path.put(content, path);
 		}
 		return path;
 	}
 
-	public @NonNull DependencyPaths createParameterDependencyPaths(@NonNull VariableDeclaration parameter) {
+	public @NonNull BasicDependencyPaths createParameterDependencyPaths(@NonNull VariableDeclaration parameter) {
 		return createDependencyPaths(createParameterDependencyStep(parameter));
 	}
 
@@ -1544,10 +1576,10 @@ public class DependencyAnalyzer
 			}});
 		for (@NonNull OperationId operationId : operationIds) {
 			System.out.println(operationId);
-			Map<@NonNull List<@NonNull DependencyPaths>, @NonNull OperationAnalysis> map = operation2paths2analysis.get(operationId);
+			Map<@NonNull List<@NonNull BasicDependencyPaths>, @NonNull OperationAnalysis> map = operation2paths2analysis.get(operationId);
 			assert map != null;
-			for (@NonNull List<@NonNull DependencyPaths> paths : map.keySet()) {
-				for (@NonNull DependencyPaths path : paths) {
+			for (@NonNull List<@NonNull BasicDependencyPaths> paths : map.keySet()) {
+				for (@NonNull BasicDependencyPaths path : paths) {
 					System.out.println("\t" + path);
 				}
 				System.out.println("\t=>" + map.get(paths));

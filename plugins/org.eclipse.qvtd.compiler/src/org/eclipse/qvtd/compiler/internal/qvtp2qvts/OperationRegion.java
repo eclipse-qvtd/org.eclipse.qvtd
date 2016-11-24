@@ -32,9 +32,10 @@ import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VoidType;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.DependencyAnalyzer.DependencyPaths;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.DependencyAnalyzer.DependencyStep;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.OperationDependencyAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.OperationDependencyPaths;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.OperationDependencyStep;
 import org.eclipse.qvtd.compiler.internal.utilities.SymbolNameBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.DOTStringBuilder;
@@ -80,30 +81,28 @@ public class OperationRegion extends AbstractRegion
 		}
 		//
 		SchedulerConstants schedulerConstants = getSchedulerConstants();
-		DependencyAnalyzer dependencyAnalyzer = schedulerConstants.getDependencyAnalyzer();
-		//		DependencyAnalyzer dependencyAnalyzer = new DependencyAnalyzer(schedulerConstants);
-		//		dependencyAnalyzer.dump();
-		DependencyPaths paths = dependencyAnalyzer.analyzeOperation(operationCallExp);
-		//		dependencyAnalyzer.dump();
+		OperationDependencyAnalysis operationDependencyAnalysis = schedulerConstants.getOperationDependencyAnalysis();
+		//		OperationDependencyAnalysis operationDependencyAnalysis = new OperationDependencyAnalysis(schedulerConstants);
+		//		operationDependencyAnalysis.dump();
+		OperationDependencyPaths paths = operationDependencyAnalysis.analyzeOperation(operationCallExp);
+		//		operationDependencyAnalysis.dump();
 		//		System.out.println("Analyze2 " + operationCallExp + " gives\n\t" + paths);
-		Iterable<@NonNull List<@NonNull DependencyStep>> hiddenPaths = paths.getHiddenPaths();
-		Iterable<@NonNull List<@NonNull DependencyStep>> returnPaths = paths.getReturnPaths();
+		Iterable<@NonNull List<@NonNull OperationDependencyStep>> hiddenPaths = paths.getHiddenPaths();
+		Iterable<@NonNull List<@NonNull OperationDependencyStep>> returnPaths = paths.getReturnPaths();
 		RootDomainUsageAnalysis domainAnalysis = schedulerConstants.getDomainAnalysis();
 		Map<org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis, @NonNull Node> classDatumAnalysis2node = new HashMap<>();
-		for (List<@NonNull DependencyStep> steps : Iterables.concat(returnPaths, hiddenPaths)) {
+		for (List<@NonNull OperationDependencyStep> steps : Iterables.concat(returnPaths, hiddenPaths)) {
 			if (steps.size() > 0) {
 				boolean isDirty = false;
 				for (int i = 1; i < steps.size(); i++) {
-					DependencyStep step = steps.get(i);
+					OperationDependencyStep.PropertyStep step = (OperationDependencyStep.PropertyStep) steps.get(i);
 					Property asProperty = step.getProperty();
-					if (asProperty != null) {
-						if (domainAnalysis.isDirty(asProperty)) {
-							isDirty = true;
-							break;
-						}
+					if (domainAnalysis.isDirty(asProperty)) {
+						isDirty = true;
+						break;
 					}
 				}
-				DependencyStep classStep = steps.get(0);
+				OperationDependencyStep.ClassStep classStep = (OperationDependencyStep.ClassStep) steps.get(0);
 				DomainUsage stepUsage = classStep.getUsage();
 				if (stepUsage.isOutput() && !stepUsage.isInput() || isDirty) {
 					//					System.out.println("!checkable && enforceable: " + steps);
@@ -133,7 +132,7 @@ public class OperationRegion extends AbstractRegion
 						}
 						//					dependencyNodes.add(dependencyNode);
 						for (int i = 1; i < steps.size(); i++) {
-							DependencyStep step = steps.get(i);
+							OperationDependencyStep.PropertyStep step = (OperationDependencyStep.PropertyStep) steps.get(i);
 							Property property = step.getProperty();
 							CallExp callExp = step.getCallExp();
 							assert (property != null) && (callExp != null);

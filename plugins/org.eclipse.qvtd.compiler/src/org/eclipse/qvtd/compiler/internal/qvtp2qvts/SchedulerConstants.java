@@ -41,6 +41,7 @@ import org.eclipse.ocl.pivot.utilities.StringUtil;
 import org.eclipse.ocl.pivot.values.Unlimited;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ContainmentAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.OperationDependencyAnalysis;
 import org.eclipse.qvtd.compiler.internal.utilities.SymbolNameBuilder;
 import org.eclipse.qvtd.compiler.internal.utilities.SymbolNameReservation;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
@@ -122,7 +123,7 @@ public abstract class SchedulerConstants
 	 */
 	private @NonNull SymbolNameReservation symbolNameReservation = new SymbolNameReservation();
 
-	private /*@LazyNonNull */ DependencyAnalyzer dependencyAnalyzer = null;
+	private /*@LazyNonNull */ OperationDependencyAnalysis operationDependencyAnalysis = null;
 
 	private /*@LazyNonNull*/ List<@NonNull Mapping> orderedMappings;	// Only ordered to improve determinacy
 
@@ -235,14 +236,6 @@ public abstract class SchedulerConstants
 		return datumCaches.getContainmentAnalysis();
 	}
 
-	public @NonNull DependencyAnalyzer getDependencyAnalyzer() {
-		DependencyAnalyzer dependencyAnalyzer2 = dependencyAnalyzer;
-		if (dependencyAnalyzer2 == null) {
-			dependencyAnalyzer = dependencyAnalyzer2 = new DependencyAnalyzer(getContainmentAnalysis(), getDomainAnalysis());
-		}
-		return dependencyAnalyzer2;
-	}
-
 	public @NonNull RootDomainUsageAnalysis getDomainAnalysis() {
 		return domainAnalysis;
 	}
@@ -275,6 +268,14 @@ public abstract class SchedulerConstants
 
 	public @NonNull ClassDatumAnalysis getOclVoidClassDatumAnalysis() {
 		return oclVoidClassDatumAnalysis;
+	}
+
+	public @NonNull OperationDependencyAnalysis getOperationDependencyAnalysis() {
+		OperationDependencyAnalysis operationDependencyAnalysis2 = operationDependencyAnalysis;
+		if (operationDependencyAnalysis2 == null) {
+			operationDependencyAnalysis = operationDependencyAnalysis2 = new OperationDependencyAnalysis(getContainmentAnalysis(), getDomainAnalysis());
+		}
+		return operationDependencyAnalysis2;
 	}
 
 	protected @NonNull Iterable<@NonNull Mapping> getOrderedMappings() {

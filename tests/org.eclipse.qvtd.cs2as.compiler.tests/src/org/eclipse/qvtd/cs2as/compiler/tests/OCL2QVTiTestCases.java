@@ -251,13 +251,13 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 
 	@Test
 	public void testExample1_CG() throws Exception {
-		//		DependencyAnalyzer.CALL.setState(true);
-		//		DependencyAnalyzer.CREATE.setState(true);
-		//		DependencyAnalyzer.FINISH.setState(true);
-		//		DependencyAnalyzer.PENDING.setState(true);
-		//		DependencyAnalyzer.REFINING.setState(true);
-		//		DependencyAnalyzer.RETURN.setState(true);
-		//		DependencyAnalyzer.START.setState(true);
+		//		OperationDependencyAnalysis.CALL.setState(true);
+		//		OperationDependencyAnalysis.CREATE.setState(true);
+		//		OperationDependencyAnalysis.FINISH.setState(true);
+		//		OperationDependencyAnalysis.PENDING.setState(true);
+		//		OperationDependencyAnalysis.REFINING.setState(true);
+		//		OperationDependencyAnalysis.RETURN.setState(true);
+		//		OperationDependencyAnalysis.START.setState(true);
 		MyQVT myQVT = new MyQVT("example1");
 		myQVT.loadGenModels("SourceMM1.genmodel", "TargetMM1.genmodel");
 		myQVT.loadEcoreFile("EnvExample1.ecore", example1.target.lookup.EnvironmentPackage.eINSTANCE);
@@ -350,14 +350,14 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 
 	@Test
 	public void testExample2_Interpreted() throws Exception {
-		//		DependencyAnalyzer.CALL.setState(true);
-		//		DependencyAnalyzer.CREATE.setState(true);
-		//		DependencyAnalyzer.FINISH.setState(true);
-		//		DependencyAnalyzer.HYPOTHECATING.setState(true);
-		//		DependencyAnalyzer.PENDING.setState(true);
-		//		DependencyAnalyzer.REFINING.setState(true);
-		//		DependencyAnalyzer.RETURN.setState(true);
-		//		DependencyAnalyzer.START.setState(true);
+		//		OperationDependencyAnalysis.CALL.setState(true);
+		//		OperationDependencyAnalysis.CREATE.setState(true);
+		//		OperationDependencyAnalysis.FINISH.setState(true);
+		//		OperationDependencyAnalysis.HYPOTHECATING.setState(true);
+		//		OperationDependencyAnalysis.PENDING.setState(true);
+		//		OperationDependencyAnalysis.REFINING.setState(true);
+		//		OperationDependencyAnalysis.RETURN.setState(true);
+		//		OperationDependencyAnalysis.START.setState(true);
 		testCaseAppender.uninstall();			// Silence Log failures warning that *.ocl has *.ecore rather than http:// references
 		MyQVT myQVT = new MyQVT("example2");
 		myQVT.loadGenModels("ClassesCS.genmodel", "Classes.genmodel");
@@ -393,7 +393,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		//		Scheduler.REGION_ORDER.setState(true);
 		//		Scheduler.REGION_TRAVERSAL.setState(true);
 		//		QVTs2QVTiVisitor.POLLED_PROPERTIES.setState(true);
-		//		DependencyAnalyzer.FINISH.setState(true);
+		//		OperationDependencyAnalysis.FINISH.setState(true);
 		//		AbstractTransformer.INVOCATIONS.setState(true);
 		MyQVT myQVT = new MyQVT("example2");
 		myQVT.loadGenModels("ClassesCS.genmodel", "Classes.genmodel");
@@ -418,13 +418,13 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 
 	@Test
 	public void testExample2_V2_Interpreted() throws Exception {
-		//		DependencyAnalyzer.CALL.setState(true);
-		//		DependencyAnalyzer.CREATE.setState(true);
-		//		DependencyAnalyzer.FINISH.setState(true);
-		//		DependencyAnalyzer.PENDING.setState(true);
-		//		DependencyAnalyzer.REFINING.setState(true);
-		//		DependencyAnalyzer.RETURN.setState(true);
-		//		DependencyAnalyzer.START.setState(true);
+		//		OperationDependencyAnalysis.CALL.setState(true);
+		//		OperationDependencyAnalysis.CREATE.setState(true);
+		//		OperationDependencyAnalysis.FINISH.setState(true);
+		//		OperationDependencyAnalysis.PENDING.setState(true);
+		//		OperationDependencyAnalysis.REFINING.setState(true);
+		//		OperationDependencyAnalysis.RETURN.setState(true);
+		//		OperationDependencyAnalysis.START.setState(true);
 		testCaseAppender.uninstall();	// Silence Log failures warning that *.ocl has *.ecore rather than http:// references
 		MyQVT myQVT = new MyQVT("example2");
 		myQVT.loadGenModels("ClassesCS.genmodel", "Classes.genmodel");

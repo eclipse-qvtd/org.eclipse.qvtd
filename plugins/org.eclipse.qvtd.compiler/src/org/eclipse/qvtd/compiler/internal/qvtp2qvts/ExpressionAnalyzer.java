@@ -111,14 +111,14 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@NonNull
 	protected final @NonNull EnvironmentFactory environmentFactory;
 	protected final @NonNull StandardLibraryHelper standardLibraryHelper;
 	private /*@LazyNonNull*/ ConditionalExpressionAnalyzer conditionalExpressionAnalyzer = null;
-	//	private /*@LazyNonNull*/ DependencyAnalyzer dependencyAnalyzer;
+	//	private /*@LazyNonNull*/ OperationDependencyAnalysis operationDependencyAnalysis;
 
 	protected ExpressionAnalyzer(@NonNull BasicMappingRegion context) {
 		super(context);
 		this.scheduler = context.getSchedulerConstants();
 		this.environmentFactory = scheduler.getEnvironmentFactory();
 		this.standardLibraryHelper = new StandardLibraryHelper(environmentFactory.getStandardLibrary());
-		//		this.dependencyAnalyzer = getDependencyAnalyzer();
+		//		this.operationDependencyAnalysis = getOperationDependencyAnalysis();
 	}
 
 	public @NonNull Node analyze(/*@NonNull*/ Visitable element) {
@@ -423,12 +423,12 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@NonNull
 		return conditionalExpressionAnalyzer2;
 	}
 
-	/*	protected @NonNull DependencyAnalyzer getDependencyAnalyzer() {
-		DependencyAnalyzer dependencyAnalyzer2 = dependencyAnalyzer;
-		if (dependencyAnalyzer2 == null) {
-			dependencyAnalyzer = dependencyAnalyzer2 = new DependencyAnalyzer(environmentFactory, scheduler.getDomainAnalysis());
+	/*	protected @NonNull OperationDependencyAnalysis getOperationDependencyAnalysis() {
+		OperationDependencyAnalysis operationDependencyAnalysis2 = operationDependencyAnalysis;
+		if (operationDependencyAnalysis2 == null) {
+			operationDependencyAnalysis = operationDependencyAnalysis2 = new OperationDependencyAnalysis(environmentFactory, scheduler.getDomainAnalysis());
 		}
-		return dependencyAnalyzer2;
+		return operationDependencyAnalysis2;
 	} */
 
 	/**
