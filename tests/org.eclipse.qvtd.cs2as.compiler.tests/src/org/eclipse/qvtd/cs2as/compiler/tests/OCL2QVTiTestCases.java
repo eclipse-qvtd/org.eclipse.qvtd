@@ -18,6 +18,7 @@ import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -90,7 +91,14 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 			super(new QVTiEnvironmentFactory(getProjectMap(), null));
 			this.testName = testName;
 			this.baseURI = TESTS_BASE_URI.appendSegment(testName);
-			//	        this.samplesBaseUri = baseURI.appendSegment("samples");
+			//
+			// http://www.eclipse.org/emf/2002/Ecore is referenced by just about any model load
+			// Ecore.core is referenced from Ecore.genmodel that is used by the CG to coordinate Ecore objects with their Java classes
+			// therefore suppress diagnostics about confusing usage.
+			//
+			URI ecoreURI = URI.createURI(EcorePackage.eNS_URI);
+			getProjectManager().getPackageDescriptor(ecoreURI).configure(getResourceSet(), StandaloneProjectMap.LoadFirstStrategy.INSTANCE,
+				StandaloneProjectMap.MapToFirstConflictHandler.INSTANCE);
 		}
 
 		//
