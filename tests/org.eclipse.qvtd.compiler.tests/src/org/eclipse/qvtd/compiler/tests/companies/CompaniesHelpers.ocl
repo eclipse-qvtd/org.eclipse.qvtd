@@ -1,0 +1,17 @@
+import  cs : 'CompaniesCS.ecore#/'
+import  as : 'Companies.ecore#/'
+
+
+package as
+	
+context Company
+def : getEmployees() : Set(Employee) =
+	depts.getEmployees()->asSet()
+
+context Department 
+def : getEmployees() : Set(Employee) =
+	subdepts.getEmployees()
+	 ->includingAll(employees)
+	 ->including(manager)->asSet()
+
+endpackage

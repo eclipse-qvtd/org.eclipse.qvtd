@@ -10,6 +10,9 @@
  *******************************************************************************/
 package org.eclipse.qvtd.compiler.tests;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.URI;
@@ -18,19 +21,39 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.CompleteModel;
 import org.eclipse.ocl.pivot.CompletePackage;
+import org.eclipse.ocl.pivot.Element;
+import org.eclipse.ocl.pivot.ExpressionInOCL;
+import org.eclipse.ocl.pivot.LoopExp;
+import org.eclipse.ocl.pivot.Model;
+import org.eclipse.ocl.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.Operation;
+import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.ocl.pivot.internal.manager.PivotMetamodelManager;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 import org.eclipse.ocl.pivot.model.OCLstdlib;
+import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.ParserException;
+import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ContainmentAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.InheritanceAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.OperationDependencyAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.OperationDependencyPaths;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.OperationDependencyStep;
+import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtcore.Assignment;
+import org.eclipse.qvtd.pivot.qvtcore.Mapping;
+import org.eclipse.qvtd.pivot.qvtcore.analysis.QVTcoreDomainUsageAnalysis;
+import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
 import org.eclipse.qvtd.xtext.qvtbase.tests.XtextTestCase;
+import org.eclipse.qvtd.xtext.qvtcore.tests.QVTcTestUtil;
 import org.junit.Test;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
 public class AnalysisTests extends XtextTestCase
@@ -259,5 +282,119 @@ public class AnalysisTests extends XtextTestCase
 		assertEquals(Sets.newHashSet(eAttributeClass, eReferenceClass, eStructuralFeatureClass), eStructuralFeatureSubClasses);
 		//
 		ocl.dispose();
+	}
+
+	@Test
+	public void testOperationDependencyAnalysis_Companies() throws ParserException {
+		QVTcTestUtil.doCompleteOCLSetup();
+		QVTcTestUtil.doQVTcoreSetup();
+		OCLInternal ocl = OCLInternal.newInstance();
+		EnvironmentFactoryInternal environmentFactory = ocl.getEnvironmentFactory();
+		//
+		URI qvtcURI = URI.createPlatformResourceURI(getClass().getPackage().getName() + "/src/" + getProjectName() + "/companies/CompaniesCS2AS.qvtc", true);
+		BaseCSResource csResource = (BaseCSResource) environmentFactory.getResourceSet().getResource(qvtcURI, true);
+		ASResource asResource = csResource.getASResource();
+		Model asModel = (Model)asResource.getContents().get(0);
+		Transformation asTransformation = QVTcoreUtil.getAllTransformations(asModel).get(0);
+
+		ContainmentAnalysis containmentAnalysis = new ContainmentAnalysis(environmentFactory);
+		QVTcoreDomainUsageAnalysis domainAnalysis = new QVTcoreDomainUsageAnalysis(environmentFactory);
+		domainAnalysis.analyzeTransformation(asTransformation);
+		//
+		Mapping asMapping = (Mapping) NameUtil.getNameable(asTransformation.getRule(), "uemployee_2_Employee_mentor");
+		Assignment asAssignment = asMapping.getBottomPattern().getAssignment().get(0);
+		OCLExpression asExpression = asAssignment.getValue();
+		//
+		OperationDependencyAnalysis operationDependencyAnalysis = new OperationDependencyAnalysis(containmentAnalysis, domainAnalysis);
+		//
+		//	Overall analysis of "lEmployee.ast.oclAsType(as::Employee).lookupEmployee(lEmployee.mentor)"
+		//
+		OperationDependencyPaths analyze = operationDependencyAnalysis.analyze((OperationCallExp) asExpression);
+
+		StandardLibrary standardLibrary = environmentFactory.getStandardLibrary();
+		CompleteModel completeModel = environmentFactory.getCompleteModel();
+		//		CompleteClass oclElementClass = completeModel.getCompleteClass(standardLibrary.getOclElementType());
+		CompletePackage companyPackage = completeModel.getCompletePackageByURI("http://org.eclipse.qvtd.compiler.tests.companies/Company");
+		CompleteClass employeeClass = companyPackage.getOwnedCompleteClass("Employee");
+		//
+		CompleteClass companyClass = companyPackage.getOwnedCompleteClass("Company");
+		Operation companyUnqualifiedEnvEmployee = companyClass.getOperations(null, "_unqualified_env_Employee").iterator().next();
+		Property companyDepts = companyClass.getProperty("depts");
+		//
+		CompleteClass departmentClass = companyPackage.getOwnedCompleteClass("Department");
+		Operation departmentGetEmployees = departmentClass.getOperations(null, "getEmployees").iterator().next();
+		Property departmentEmployees = departmentClass.getProperty("employees");
+		Property departmentManager = departmentClass.getProperty("manager");
+		Property departmentSubdepts = departmentClass.getProperty("subdepts");
+
+		Set<@NonNull List<@NonNull Element>> actualReturns = toElements(analyze.getReturnPaths());
+		Set<@NonNull List<@NonNull Element>> expectedReturns =  new HashSet<>();
+		expectedReturns.add(Lists.newArrayList(employeeClass.getPrimaryClass()));
+		assertEquals(expectedReturns, actualReturns);
+		Set<@NonNull List<@NonNull Element>> actualHiddens = toElements(analyze.getHiddenPaths());
+		//		Set<@NonNull List<@NonNull Element>> expectedHiddens = toExpected(Lists.newArrayList(employeeClass.getPrimaryClass()));
+		assertEquals(187, actualHiddens.size());
+		//
+		//	"1_.getEmployees()" where 1_ is a department
+		//
+		//	a recursive call
+		//
+		OCLExpression exp1 = ((ExpressionInOCL)departmentGetEmployees.getBodyExpression()).getOwnedBody();
+		OCLExpression exp2 = ((OperationCallExp)exp1).getOwnedSource();
+		OCLExpression exp3 = ((OperationCallExp)exp2).getOwnedSource();
+		OCLExpression exp4 = ((OperationCallExp)exp3).getOwnedSource();
+		OCLExpression exp5 = ((LoopExp)exp4).getOwnedBody();
+		analyze = operationDependencyAnalysis.analyze((OperationCallExp)exp5);
+		//
+		expectedReturns = new HashSet<>();
+		expectedReturns.add(Lists.newArrayList(employeeClass.getPrimaryClass()));
+		assertEquals(expectedReturns, actualReturns);
+		actualHiddens = toElements(analyze.getHiddenPaths());
+		Set<@NonNull List<@NonNull Element>> expectedHiddens = new HashSet<>();
+		expectedHiddens.add(Lists.newArrayList(standardLibrary.getOclElementType()));
+		expectedHiddens.add(Lists.newArrayList(employeeClass.getPrimaryClass()));
+		expectedHiddens.add(Lists.newArrayList(departmentClass.getPrimaryClass()));
+		expectedHiddens.add(Lists.newArrayList(departmentClass.getPrimaryClass(), departmentEmployees));
+		expectedHiddens.add(Lists.newArrayList(departmentClass.getPrimaryClass(), departmentManager));
+		expectedHiddens.add(Lists.newArrayList(departmentClass.getPrimaryClass(), departmentSubdepts));
+		assertEquals(expectedHiddens, actualHiddens);
+		//
+		//
+		//	"self.getEmployees()" where self is a company
+		//
+		//	parent of a recursive call
+		//
+		exp1 = ((ExpressionInOCL)companyUnqualifiedEnvEmployee.getBodyExpression()).getOwnedBody();
+		exp2 = ((OperationCallExp)exp1).getOwnedArguments().get(0);
+		analyze = operationDependencyAnalysis.analyze((OperationCallExp)exp2);
+		//
+		actualReturns = toElements(analyze.getReturnPaths());
+		expectedReturns =  new HashSet<>();
+		expectedReturns.add(Lists.newArrayList(employeeClass.getPrimaryClass()));
+		assertEquals(expectedReturns, actualReturns);
+		actualHiddens = toElements(analyze.getHiddenPaths());
+		expectedHiddens =  new HashSet<>();
+		expectedHiddens.add(Lists.newArrayList(standardLibrary.getOclElementType()));
+		expectedHiddens.add(Lists.newArrayList(employeeClass.getPrimaryClass()));
+		expectedHiddens.add(Lists.newArrayList(companyClass.getPrimaryClass()));
+		expectedHiddens.add(Lists.newArrayList(companyClass.getPrimaryClass(), companyDepts));
+		expectedHiddens.add(Lists.newArrayList(departmentClass.getPrimaryClass(), departmentEmployees));
+		expectedHiddens.add(Lists.newArrayList(departmentClass.getPrimaryClass(), departmentManager));
+		expectedHiddens.add(Lists.newArrayList(departmentClass.getPrimaryClass(), departmentSubdepts));
+		assertEquals(expectedHiddens, actualHiddens);
+		//
+		ocl.dispose();
+	}
+
+	private Set<@NonNull List<@NonNull Element>> toElements(@NonNull Iterable<@NonNull List<@NonNull OperationDependencyStep>> paths) {
+		Set<@NonNull List<@NonNull Element>> newPaths = new HashSet<>();
+		for (@NonNull List<@NonNull OperationDependencyStep> path : paths) {
+			List<@NonNull Element> newPath = new ArrayList<>();
+			for (@NonNull OperationDependencyStep step : path) {
+				newPath.add(step.getPathElement());
+			}
+			newPaths.add(newPath);
+		}
+		return newPaths;
 	}
 }

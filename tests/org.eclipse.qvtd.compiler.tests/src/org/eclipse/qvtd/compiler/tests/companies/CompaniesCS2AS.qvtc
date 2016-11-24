@@ -1,0 +1,174 @@
+import cs : 'CompaniesCS.ecore#/';
+import as : 'Companies.ecore#/';
+import 'CompaniesLookup.ocl';
+
+transformation companies_qvtp_qvtcas
+{
+	leftCS imports cs;
+	rightAS imports as;
+}
+
+map ccompany_2_Company in companies_qvtp_qvtcas
+{
+	check leftCS(lCompany : cs::company[1]
+	|) {}
+
+	enforce rightAS() {
+		realize rCompany : as::Company[1]
+	|}
+
+	where() {
+		lCompany.ast := rCompany;
+	}
+}
+
+map cdepartment_2_Department in companies_qvtp_qvtcas
+{
+	check leftCS(lDepartment : cs::department[1]
+	|) {}
+
+	enforce rightAS() {
+		realize rDepartment : as::Department[1]
+	|}
+
+	where() {
+		lDepartment.ast := rDepartment;
+	}
+}
+
+map cemployee_2_Employee in companies_qvtp_qvtcas
+{
+	check leftCS(lEmployee : cs::employee[1]
+	|) {}
+
+	enforce rightAS() {
+		realize rEmployee : as::Employee[1]
+	|}
+
+	where() {
+		lEmployee.ast := rEmployee;
+	}
+}
+
+map ucompany_2_Company_name in companies_qvtp_qvtcas
+{
+	check leftCS(lCompany : cs::company[1]
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		lCompany.ast.oclAsType(as::Company).name := lCompany.name;
+	}
+}
+
+map ucompany_2_Company_depts in companies_qvtp_qvtcas
+{
+	check leftCS(lCompany : cs::company[1]
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		lCompany.ast.oclAsType(as::Company).depts := lCompany.deparment.ast.oclAsType(as::Department);
+	}
+}
+
+map udepartment_2_Department_name in companies_qvtp_qvtcas
+{
+	check leftCS(lDepartment : cs::department[1]
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		lDepartment.ast.oclAsType(as::Department).name := lDepartment.name;
+	}
+}
+
+map udepartment_2_Department_subdepts in companies_qvtp_qvtcas
+{
+	check leftCS(lDepartment : cs::department[1]
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		lDepartment.ast.oclAsType(as::Department).subdepts := lDepartment.deparment.ast.oclAsType(as::Department);
+	}
+}
+
+map udepartment_2_Department_manager in companies_qvtp_qvtcas
+{
+	check leftCS(lDepartment : cs::department[1]
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		lDepartment.ast.oclAsType(as::Department).manager :=
+		lDepartment.department_manager.employee.ast.oclAsType(as::Employee);
+	}
+}
+
+map udepartment_2_Department_employees in companies_qvtp_qvtcas
+{
+	check leftCS(lDepartment : cs::department[1]
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		lDepartment.ast.oclAsType(as::Department).employees :=
+		lDepartment.department_employees.employee.ast.oclAsType(as::Employee);
+	}
+}
+
+map uemployee_2_Employee_name in companies_qvtp_qvtcas
+{
+	check leftCS(lEmployee : cs::employee[1]
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		lEmployee.ast.oclAsType(as::Employee).name := lEmployee.name;
+	}
+}
+
+map uemployee_2_Employee_address in companies_qvtp_qvtcas
+{
+	check leftCS(lEmployee : cs::employee[1]
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		lEmployee.ast.oclAsType(as::Employee).address := lEmployee.address;
+	}
+}
+
+map uemployee_2_Employee_salary in companies_qvtp_qvtcas
+{
+	check leftCS(lEmployee : cs::employee[1]
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		lEmployee.ast.oclAsType(as::Employee).salary := lEmployee.salary;
+	}
+}
+
+map uemployee_2_Employee_mentor in companies_qvtp_qvtcas
+{
+	check leftCS(lEmployee : cs::employee[1]
+	|) {}
+
+	enforce rightAS() {}
+
+	where() {
+		lEmployee.ast.oclAsType(as::Employee).mentor :=
+		lEmployee.ast.oclAsType(as::Employee).lookupEmployee(lEmployee.mentor);
+	}
+}
