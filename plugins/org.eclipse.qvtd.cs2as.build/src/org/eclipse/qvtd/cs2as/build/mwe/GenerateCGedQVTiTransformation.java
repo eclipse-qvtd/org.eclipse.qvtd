@@ -21,7 +21,6 @@ import org.eclipse.emf.mwe.core.lib.AbstractWorkflowComponent;
 import org.eclipse.emf.mwe.core.monitor.ProgressMonitor;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.utilities.XMIUtil;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.OperationDependencyAnalysis;
 import org.eclipse.qvtd.cs2as.compiler.CS2ASJavaCompilerParameters;
 import org.eclipse.qvtd.cs2as.compiler.OCL2QVTiCGTxCompiler;
 import org.eclipse.qvtd.cs2as.compiler.internal.CS2ASJavaCompilerParametersImpl;
@@ -68,10 +67,10 @@ public  class GenerateCGedQVTiTransformation extends AbstractWorkflowComponent
 	@Override
 	protected void invokeInternal(WorkflowContext ctx, ProgressMonitor monitor, Issues issues) {
 		//		QVTp2QVTs.CONNECTION_CREATION.setState(true);
-		OperationDependencyAnalysis.ATTEMPT.setState(true);
-		OperationDependencyAnalysis.CREATE.setState(true);
-		OperationDependencyAnalysis.HYPOTHECATING.setState(true);
-		OperationDependencyAnalysis.RESULT.setState(true);
+		//		OperationDependencyAnalysis.ATTEMPT.setState(true);
+		//		OperationDependencyAnalysis.CREATE.setState(true);
+		//		OperationDependencyAnalysis.HYPOTHECATING.setState(true);
+		//		OperationDependencyAnalysis.RESULT.setState(true);
 		//		OperationDependencyAnalysis.START.setState(true);
 		try {
 			URI oclDocURI = URI.createURI(oclFileURI);
