@@ -14,14 +14,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.ExpressionInOCL;
 import org.eclipse.ocl.pivot.LanguageExpression;
 import org.eclipse.ocl.pivot.OCLExpression;
@@ -36,7 +31,6 @@ import org.eclipse.qvtd.compiler.CompilerConstants;
 import org.eclipse.qvtd.compiler.CompilerProblem;
 import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.Region2Depth;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.EarlyMerger;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
@@ -121,199 +115,10 @@ public class QVTp2QVTs extends SchedulerConstants
 		return new ClassDatumAnalysis(this, classDatum);
 	}
 
-	/**
-	 * Replace those orderedRegions that may be aggregated as part of a GuardedRegion decision tree by GuardedRegions.
-	 * orderedRegions should be naturally ordered to ensure that non-recursive dependencies are inherently satisfied.
-	 *
-	 * Returns the orderedRegions plus the new aggregates less those aggregated.
-	 */
-	public @NonNull List<@NonNull MappingRegion> earlyRegionMerge(@NonNull List<@NonNull BasicMappingRegion> orderedRegions) {
-		Region2Depth region2depths = new Region2Depth();
-		List<@NonNull MappingRegion> outputRegions = new ArrayList<>();
-		LinkedHashSet<@NonNull MappingRegion> residualInputRegions = new LinkedHashSet<>(orderedRegions);	// order preserving fast random removal
-		while (!residualInputRegions.isEmpty()) {
-			@NonNull MappingRegion candidateRegion = residualInputRegions.iterator().next();
-			boolean isMerged = false;
-			if (isEarlyMergePrimaryCandidate(candidateRegion)) {
-				List<@NonNull MappingRegion> secondaryRegions = selectSecondaryRegions(candidateRegion);
-				if (secondaryRegions != null) {
-					MappingRegion mergedRegion = candidateRegion;
-					for (@NonNull MappingRegion secondaryRegion : secondaryRegions) {
-						assert secondaryRegion != null;
-						if (residualInputRegions.contains(secondaryRegion)) {
-							Map<@NonNull Node, @NonNull Node> secondaryNode2primaryNode = EarlyMerger.canMerge(mergedRegion, secondaryRegion, region2depths, false);
-							if (secondaryNode2primaryNode != null) {
-								boolean isSharedHead = isSharedHead(mergedRegion, secondaryRegion);
-								if (!isSharedHead || (EarlyMerger.canMerge(secondaryRegion, mergedRegion, region2depths, false) != null)) {
-									residualInputRegions.remove(mergedRegion);
-									residualInputRegions.remove(secondaryRegion);
-									mergedRegion = RegionMerger.createMergedRegion(mergedRegion, secondaryRegion, secondaryNode2primaryNode);
-									region2depths.addRegion(mergedRegion);
-								}
-							}
-						}
-					}
-					if (mergedRegion != candidateRegion) {
-						//						mergedRegion.resolveRecursion();
-						if (QVTp2QVTs.DEBUG_GRAPHS.isActive()) {
-							mergedRegion.writeDebugGraphs("2-merged");
-						}
-						//						GuardedRegion guardedRegion = createGuardedRegion(mergedRegion, mergeableRegions);
-						//						outputRegions.add(guardedRegion);
-						outputRegions.add(mergedRegion);
-						isMerged = true;
-					}
-				}
-			}
-			if (!isMerged) {
-				outputRegions.add(candidateRegion);
-			}
-			residualInputRegions.remove(candidateRegion);
-		}
-		return outputRegions;
-	}
-
 	public @NonNull MappingRegion getMappingRegion(@NonNull Mapping mapping) {
 		MappingRegion mappingRegion = mapping2mappingRegion.get(mapping);
 		assert mappingRegion != null;
 		return mappingRegion;
-	}
-
-	/**
-	 * Return the nodes with region at which a suitably matching head of another region might be merged.
-	 * The nodes must be bi-directionally one to one to respect 1:N trace node relationships.
-	 */
-	protected @NonNull Iterable<@NonNull Node> getMergeableNodes(@NonNull MappingRegion region) {
-		Set<@NonNull Node> mergeableNodes = new HashSet<>();
-		for (@NonNull Node node : region.getHeadNodes()) {
-			getMergeableNodes(mergeableNodes, node);
-		}
-		return mergeableNodes;
-	}
-	private void getMergeableNodes(@NonNull Set<@NonNull Node> mergeableNodes, @NonNull Node node) {
-		if (isMergeable(node) && mergeableNodes.add(node)) {
-			for (@NonNull NavigableEdge edge : node.getNavigationEdges()) {
-				if (edge.getOppositeEdge() != null) {
-					getMergeableNodes(mergeableNodes, edge.getTarget());
-				}
-			}
-		}
-	}
-	private boolean isMergeable(@NonNull Node node) {	// FIXME this is legacy creep
-		NodeRole nodeRole = node.getNodeRole();
-		if (nodeRole.isRealized() || nodeRole.isSpeculation()) {
-			return false;
-		}
-		if (!node.isClass()) {
-			return false;
-		}
-		if (node.isExplicitNull()) {
-			return true;
-		}
-		if (node.isOperation()) {
-			return true;
-		}
-		if (node.isTrue()) {
-			return true;
-		}
-		if (node.isPattern()) {
-			return true;
-		}
-		return false;
-	}
-
-	/**
-	 * The primary region in a GuardedRegion must be single-headed. It may be multiply-produced, e.g. recursed.
-	 */
-	private boolean isEarlyMergePrimaryCandidate(@NonNull Region mappingRegion) {
-		List<@NonNull Node> headNodes = mappingRegion.getHeadNodes();
-		return headNodes.size() == 1;
-	}
-
-	/**
-	 * The secondary region in a GuardedRegion must be single-headed and at least one its head nodes must be a class in use within
-	 * the primary region. It may be multiply-produced, e.g. recursed.
-	 */
-	private boolean isEarlyMergeSecondaryCandidate(@NonNull Region primaryRegion,
-			@NonNull Region secondaryRegion, @NonNull Set<ClassDatumAnalysis> toOneReachableClasses) {
-		List<@NonNull Node> secondaryHeadNodes = secondaryRegion.getHeadNodes();
-		if (secondaryHeadNodes.size() == 1) {
-			Node classNode = secondaryHeadNodes.get(0);
-			ClassDatumAnalysis classDatumAnalysis = classNode.getClassDatumAnalysis();
-			if (toOneReachableClasses.contains(classDatumAnalysis)) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	/**
-	 * Return true if any primaryRegion head coincides with a secondaryRegion head.
-	 */
-	private boolean isSharedHead(@NonNull Region primaryRegion, @NonNull Region secondaryRegion) {
-		for (Node primaryHead : primaryRegion.getHeadNodes()) {
-			ClassDatumAnalysis primaryClassDatumAnalysis = primaryHead.getClassDatumAnalysis();
-			for (Node secondaryHead : secondaryRegion.getHeadNodes()) {
-				if (primaryClassDatumAnalysis == secondaryHead.getClassDatumAnalysis()) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-
-	/**
-	 * Return a list of single-headed to-one navigable regions whose head is transitively to-one reachable from the primaryRegion's head.
-	 */
-	private @Nullable List<@NonNull MappingRegion> selectSecondaryRegions(@NonNull MappingRegion primaryRegion) {
-		//
-		//	All regions that consume one of the primary nodes.
-		//
-		Set<@NonNull MappingRegion> allConsumingRegions = new HashSet<>();
-		allConsumingRegions.add(primaryRegion);
-		//
-		//	All classes reachable from the primary head.
-		//
-		Set<org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis> toOneReachableClasses = new HashSet<>();
-		List<@NonNull MappingRegion> secondaryRegions = null;
-		List<@NonNull MappingRegion> allConsumingRegionsList = new ArrayList<>(allConsumingRegions);	// CME-proof iterable List shadowing a mutating Set
-		for (int i = 0; i < allConsumingRegionsList.size(); i++) {
-			@NonNull MappingRegion secondaryRegion = allConsumingRegionsList.get(i);
-			if ((i == 0) || isEarlyMergeSecondaryCandidate(primaryRegion, secondaryRegion, toOneReachableClasses)) {
-				if (i > 0) {
-					if (secondaryRegions == null) {
-						secondaryRegions = new ArrayList<>();
-					}
-					secondaryRegions.add(secondaryRegion);
-				}
-				for (@NonNull Node predicatedNode : getMergeableNodes(secondaryRegion)) {
-					if (predicatedNode.isClass()) {							// Ignore nulls, attributes
-						ClassDatumAnalysis predicatedClassDatumAnalysis = predicatedNode.getClassDatumAnalysis();
-						if (toOneReachableClasses.add(predicatedClassDatumAnalysis)) {
-							for (@NonNull MappingRegion consumingRegion : predicatedClassDatumAnalysis.getConsumingRegions()) {
-								if (allConsumingRegions.add(consumingRegion)) {
-									allConsumingRegionsList.add(consumingRegion);
-								}
-							}
-						}
-					}
-				}
-				for (@NonNull Node newNode : secondaryRegion.getNewNodes()) {
-					if (newNode.isClass()) {							// Ignore nulls, attributes
-						ClassDatumAnalysis consumingClassDatumAnalysis = newNode.getClassDatumAnalysis();
-						if (toOneReachableClasses.add(consumingClassDatumAnalysis)) {
-							for (@NonNull MappingRegion consumingRegion : consumingClassDatumAnalysis.getConsumingRegions()) {
-								if (allConsumingRegions.add(consumingRegion)) {
-									allConsumingRegionsList.add(consumingRegion);
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-		assert allConsumingRegionsList.size() == allConsumingRegions.size();					// Check same changes to CME-proof shadow
-		return secondaryRegions;
 	}
 
 	public @NonNull MultiRegion transform() throws IOException {
@@ -343,7 +148,7 @@ public class QVTp2QVTs extends SchedulerConstants
 			orderedRegions.add(mappingRegion);
 			//			mappingRegion.resolveRecursion();
 		}
-		List<@NonNull Region> activeRegions = new ArrayList<>(earlyRegionMerge(orderedRegions));
+		List<@NonNull Region> activeRegions = new ArrayList<>(EarlyMerger.earlyRegionMerge(orderedRegions));
 		//		for (@NonNull Region activeRegion : activeRegions) {
 		//			((AbstractRegion)activeRegion).resolveRecursion();
 		//		}
