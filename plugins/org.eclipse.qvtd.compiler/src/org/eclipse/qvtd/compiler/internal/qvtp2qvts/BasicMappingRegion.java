@@ -11,7 +11,6 @@
 package org.eclipse.qvtd.compiler.internal.qvtp2qvts;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -355,11 +354,6 @@ public class BasicMappingRegion extends AbstractMappingRegion
 
 	public @NonNull Mapping getMapping() {
 		return mapping;
-	}
-
-	@Override
-	public @NonNull Iterable<@NonNull Mapping> getMappings() {
-		return Collections.singletonList(mapping);
 	}
 
 	@Override

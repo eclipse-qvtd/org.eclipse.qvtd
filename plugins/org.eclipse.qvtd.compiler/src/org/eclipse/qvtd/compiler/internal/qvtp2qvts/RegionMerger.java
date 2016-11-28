@@ -11,6 +11,7 @@
 package org.eclipse.qvtd.compiler.internal.qvtp2qvts;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -21,6 +22,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.TypedElement;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.VariableNodeImpl;
 
 public class RegionMerger extends AbstractVisitor<@Nullable Visitable>
@@ -44,7 +46,19 @@ public class RegionMerger extends AbstractVisitor<@Nullable Visitable>
 		this.primaryRegion = primaryRegion;
 		this.secondaryRegion = secondaryRegion;
 		this.secondaryNode2primaryNode = secondaryNode2primaryNode;
-		this.mergedRegion = new MergedMappingRegion(primaryRegion, secondaryRegion);
+		List<@NonNull String> names = new ArrayList<>();
+		names.add(ClassUtil.nonNullState(primaryRegion.getName()));
+		names.add(ClassUtil.nonNullState(secondaryRegion.getName()));
+		Collections.sort(names);
+		StringBuilder s = new StringBuilder();
+		//		s.append(getClass().getSimpleName());
+		for (String name : names) {
+			if (s.length() > 0) {
+				s.append("\\n");
+			}
+			s.append(name);
+		}
+		this.mergedRegion = new NamedMappingRegion(primaryRegion.getMultiRegion(), s.toString());
 	}
 
 	protected void accumulateEdge(@NonNull Map<@NonNull Node, @NonNull Map<@NonNull Node, @NonNull List<@NonNull List<@NonNull Edge>>>> mergedSourceNode2mergedTargetNode2listOfOldEdges, @NonNull Edge oldEdge) {

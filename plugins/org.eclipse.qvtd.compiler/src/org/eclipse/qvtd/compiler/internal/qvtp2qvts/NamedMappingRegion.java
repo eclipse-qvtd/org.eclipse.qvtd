@@ -10,9 +10,19 @@
  *******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.qvtp2qvts;
 
-import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.jdt.annotation.NonNull;
 
-public interface MappingRegion extends Region
+public class NamedMappingRegion extends AbstractMappingRegion
 {
-	void writeDebugGraphs(@Nullable String context);
+	protected final @NonNull String name;
+
+	public NamedMappingRegion(@NonNull MultiRegion multiRegion, @NonNull String name) {
+		super(multiRegion);
+		this.name = name;
+	}
+
+	@Override
+	public @NonNull String getName() {
+		return name;
+	}
 }
