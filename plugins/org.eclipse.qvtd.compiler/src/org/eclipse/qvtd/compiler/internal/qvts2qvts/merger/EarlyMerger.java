@@ -45,7 +45,7 @@ import com.google.common.collect.Sets;
  * EarlyMerger replaces one list of MappingRegions by another in which each set of regions that can be merged
  * without knowledge of the schedule is replaced by an equivalent merged region.
  */
-public class EarlyMerger
+public class EarlyMerger extends AbstractMerger
 {
 	/**
 	 * Replace those inputRegions that may be merged by merged regions.
@@ -97,7 +97,7 @@ public class EarlyMerger
 		if (!canMergeInternal(secondaryRegion, secondaryNode2primaryNode, region2depths, isLateMerge)) {
 			return null;
 		}
-		//FIXME Must be symmetrically mergeable; do tests before creating MergedRegion
+
 		//
 		//	Validate the true node predicate compatibility
 		//
@@ -252,9 +252,6 @@ public class EarlyMerger
 	}
 
 	protected void getHostNodesAccumulator(@NonNull Set<@NonNull Node> hostNodes, @NonNull Node node) {
-		//		if (node.isNew()) {
-		//			return;
-		//		}
 		if (!node.isClass()) {		// Simplify - this obviates many of the below
 			return;
 		}
@@ -500,9 +497,6 @@ public class EarlyMerger
 			return null;
 		}
 		Iterable<NavigableEdge> predicateEdges = headNode.getPredicateEdges();
-		//		if (predicateEdges == null) {
-		//			return null;
-		//		}
 		for (@NonNull Node mergedNode : mergedNodes) {
 			boolean ok = !mergedNode.isIterator();
 			if (ok) {
