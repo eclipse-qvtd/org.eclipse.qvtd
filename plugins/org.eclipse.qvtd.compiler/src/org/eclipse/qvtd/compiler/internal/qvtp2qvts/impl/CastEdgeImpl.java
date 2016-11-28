@@ -56,4 +56,10 @@ public class CastEdgeImpl extends NavigableEdgeImpl
 	public final boolean isNavigation() {
 		return true;
 	}
+
+	@Override
+	public void setEdgeRole(@NonNull EdgeRole edgeRole) {
+		assert !edgeRole.isNew();
+		super.setEdgeRole(edgeRole);
+	}
 }
