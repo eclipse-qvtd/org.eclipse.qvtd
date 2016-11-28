@@ -2130,35 +2130,6 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 	}
 
 	@Override
-	public boolean isLateMergeable(@NonNull Region consumerRegion, @NonNull Region2Depth region2depths) {
-		/*		for (Node consumerNode : consumerRegion.getPredicatedNodes()) {
-			for (Node producerNode : consumerNode.getUsedBindingSources()) {
-				Region producerRegion = producerNode.getRegion();
-				if ((producerRegion != this) && (producerRegion != consumerRegion)) {
-					Region commonRegion = region2depths.getCommonRegion(consumerRegion, producerRegion);
-//					if (commonRegion != producerRegion) {
-						if (commonRegion == null) {
-							return false;
-						}
-						int consumerIndex = region2depths.getChildIndexOf(commonRegion, consumerRegion);
-						if (consumerIndex < 0) {
-							return false;
-						}
-						int producerIndex = region2depths.getChildIndexOf(commonRegion, producerRegion);
-						if (producerIndex < 0) {
-							return false;
-						}
-						if (producerIndex > consumerIndex) {
-							return false;
-						}
-//					}
-				}
-			}
-		} */
-		return true;
-	}
-
-	@Override
 	public boolean isOperationRegion() {
 		return false;
 	}

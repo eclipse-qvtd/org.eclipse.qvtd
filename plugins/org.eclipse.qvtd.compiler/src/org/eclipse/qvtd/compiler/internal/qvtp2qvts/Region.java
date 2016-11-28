@@ -151,7 +151,6 @@ public interface Region extends Visitable, GraphNode, Nameable, Symbolable
 	boolean isCyclicScheduledRegion();
 	boolean isOperationRegion();
 	boolean isRootCompositionRegion();
-	boolean isLateMergeable(@NonNull Region region, @NonNull Region2Depth region2depths);
 	void refineBindings(@NonNull Region bindingRegion);
 	void removeEdge(@NonNull Edge edge);
 	void removeNode(@NonNull Node node);
