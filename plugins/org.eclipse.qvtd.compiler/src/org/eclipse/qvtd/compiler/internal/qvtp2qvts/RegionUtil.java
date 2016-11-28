@@ -10,6 +10,11 @@
  *******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.qvtp2qvts;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -357,6 +362,22 @@ public class RegionUtil
 			}
 			sourceNode = targetNode;
 		}
+	}
+
+	public static @NonNull Map<@NonNull CompleteClass, @NonNull List<@NonNull Node>> getCompleteClass2Nodes(@NonNull Region region) {
+		Map<@NonNull CompleteClass, @NonNull List<@NonNull Node>> completeClass2node = new HashMap<>();
+		for (@NonNull Node node : region.getNodes()) {
+			CompleteClass completeClass = node.getCompleteClass();
+			List<@NonNull Node> mergedNodes = completeClass2node.get(completeClass);
+			if (mergedNodes == null) {
+				mergedNodes = new ArrayList<>();
+				completeClass2node.put(completeClass, mergedNodes);
+			}
+			if (!mergedNodes.contains(node)) {
+				mergedNodes.add(node);
+			}
+		}
+		return completeClass2node;
 	}
 
 	public static Role.@NonNull Phase getOperationNodePhase(@NonNull Region region, @NonNull TypedElement typedElement, @NonNull Node... argNodes) {

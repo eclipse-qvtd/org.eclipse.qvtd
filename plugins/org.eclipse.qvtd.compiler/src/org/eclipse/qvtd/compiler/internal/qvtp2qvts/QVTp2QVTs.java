@@ -37,6 +37,7 @@ import org.eclipse.qvtd.compiler.CompilerProblem;
 import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.Region2Depth;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.EarlyMerger;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.schedule.ClassDatum;
@@ -140,10 +141,10 @@ public class QVTp2QVTs extends SchedulerConstants
 					for (@NonNull MappingRegion secondaryRegion : secondaryRegions) {
 						assert secondaryRegion != null;
 						if (residualInputRegions.contains(secondaryRegion)) {
-							Map<@NonNull Node, @NonNull Node> secondaryNode2primaryNode = mergedRegion.canMerge(secondaryRegion, region2depths, false);
+							Map<@NonNull Node, @NonNull Node> secondaryNode2primaryNode = EarlyMerger.canMerge(mergedRegion, secondaryRegion, region2depths, false);
 							if (secondaryNode2primaryNode != null) {
 								boolean isSharedHead = isSharedHead(mergedRegion, secondaryRegion);
-								if (!isSharedHead || (secondaryRegion.canMerge(mergedRegion, region2depths, false) != null)) {
+								if (!isSharedHead || (EarlyMerger.canMerge(secondaryRegion, mergedRegion, region2depths, false) != null)) {
 									residualInputRegions.remove(mergedRegion);
 									residualInputRegions.remove(secondaryRegion);
 									mergedRegion = RegionMerger.createMergedRegion(mergedRegion, secondaryRegion, secondaryNode2primaryNode);

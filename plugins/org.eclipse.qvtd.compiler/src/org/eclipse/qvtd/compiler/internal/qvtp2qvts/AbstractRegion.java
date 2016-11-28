@@ -28,12 +28,10 @@ import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.StringUtil;
 import org.eclipse.qvtd.compiler.CompilerProblem;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvti.QVTs2QVTiVisitor;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.Region2Depth;
 import org.eclipse.qvtd.compiler.internal.utilities.SymbolNameBuilder;
 import org.eclipse.qvtd.compiler.internal.utilities.ToDOT;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -531,188 +529,6 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 				}
 				sourceNode = target;
 			}
-		}
-		return true;
-	}
-
-	@Override
-	public @Nullable Map<@NonNull Node, @NonNull Node> canMerge(@NonNull Region secondaryRegion, @NonNull Region2Depth region2depths, boolean isLateMerge) {
-		Map<@NonNull Node, @NonNull Node> secondaryNode2primaryNode = null;
-		Map<@NonNull CompleteClass, @NonNull List<@NonNull Node>> completeClass2node = getCompleteClass2Node();
-		//
-		//	Find the unambiguous head-node matches
-		//
-		List<@NonNull Node> secondaryHeadNodes = secondaryRegion.getHeadNodes();
-		if (secondaryHeadNodes.size() != 1) {
-			return null;
-		}
-		Node secondaryHeadNode = secondaryHeadNodes.get(0);
-		CompleteClass completeClass = secondaryHeadNode.getCompleteClass();
-		List<@NonNull Node> primaryNodes = completeClass2node.get(completeClass);
-		if (primaryNodes != null) {
-			Node primaryHeadNode = selectMergedHeadNode(secondaryHeadNode, primaryNodes);
-			if (primaryHeadNode == null) {
-				return null;
-			}
-			secondaryNode2primaryNode = new HashMap<>();
-			if ("if".equals(secondaryHeadNode.getName())) {
-				secondaryHeadNode.getName();
-			}
-			secondaryNode2primaryNode.put(secondaryHeadNode, primaryHeadNode);
-		}
-		if (secondaryNode2primaryNode == null) {
-			return null;
-		}
-		//
-		//	Validate the transitive navigation from the head nodes. All common navigation edges must have compatible node types.
-		//
-		if (!canMergeInternal(secondaryRegion, secondaryNode2primaryNode, region2depths, isLateMerge)) {
-			return null;
-		}
-		//FIXME Must be symmetrically mergeable; do tests before creating MergedRegion
-		//
-		//	Validate the true node predicate compatibility
-		//
-		Iterable<@NonNull Node> primaryTrueNodes = this.getTrueNodes();
-		Iterable<@NonNull Node> secondaryTrueNodes = secondaryRegion.getTrueNodes();
-		if (Iterables.size(primaryTrueNodes) != Iterables.size(secondaryTrueNodes)) {
-			return null;
-		}
-		for (@NonNull Node primaryTrueNode : primaryTrueNodes) {
-			boolean gotIt = false;
-			for (@NonNull Node secondaryTrueNode : secondaryTrueNodes) {
-				assert secondaryTrueNode != null;
-				Map<@NonNull Node, @NonNull Node> primary2secondary = new HashMap<>();
-				if (isEquivalent(primaryTrueNode, secondaryTrueNode, primary2secondary)) {	// FIXME use hashes
-					gotIt = true;
-					for (@NonNull Node primaryNode : primary2secondary.keySet()) {
-						Node equivalentNode = primary2secondary.get(primaryNode);
-						assert equivalentNode != null;
-						if ("if".equals(equivalentNode.getName())) {
-							equivalentNode.getName();
-						}
-						secondaryNode2primaryNode.put(equivalentNode, primaryNode);
-					}
-					break;
-				}
-			}
-			if (!gotIt) {
-				return null;
-			}
-		}
-		return secondaryNode2primaryNode;
-	}
-	private boolean canMergeInternal(@NonNull Region secondaryRegion, @NonNull Map<@NonNull Node, @NonNull Node> secondaryNode2primaryNode, @NonNull Region2Depth region2depths, boolean isLateMerge) {
-		Set<@NonNull Node> secondaryNodes = new HashSet<>(secondaryNode2primaryNode.keySet());
-		List<@NonNull Node> secondaryNodesList = new ArrayList<>(secondaryNodes);
-		for (int i = 0; i < secondaryNodesList.size(); i++) {
-			@NonNull Node secondarySourceNode = secondaryNodesList.get(i);
-			Node primarySourceNode = secondaryNode2primaryNode.get(secondarySourceNode);
-			if (primarySourceNode == null) {
-				if (secondarySourceNode.isPredicated()) {
-					return false;
-				}
-			}
-			for (@NonNull NavigableEdge secondaryEdge : secondarySourceNode.getNavigationEdges()) {
-				Node secondaryTargetNode = secondaryEdge.getTarget();
-				Node primaryTargetNode = null;
-				if (primarySourceNode != null) {
-					Edge primaryEdge = primarySourceNode.getNavigationEdge(secondaryEdge.getProperty());
-					if (primaryEdge != null) {
-						primaryTargetNode = primaryEdge.getTarget();
-						//						primaryTargetNode = primaryTargetNode.getCastEquivalentNode();
-						//						secondaryTargetNode = secondaryTargetNode.getCastEquivalentNode();
-						if (primaryTargetNode.getCompleteClass() != secondaryTargetNode.getCompleteClass()) {		// FIXME conforms
-							return false;
-						}
-						if (primaryTargetNode.isExplicitNull() != secondaryTargetNode.isExplicitNull()) {		// FIXME conforms
-							return false;
-						}
-					}
-					else {
-						if (secondaryEdge.isPredicated()) {
-							if (!isLateMerge) {		// FIXME must locate in ancestry; if present can merge, if not cannot
-								return false;
-							}
-							for (@SuppressWarnings("unused") Node secondaryOriginNode : secondaryTargetNode.getUsedBindingSources()) {
-								return false;
-							}
-						}
-					}
-				}
-				if (primaryTargetNode != null) {
-					Node primaryTargetNode2 = secondaryNode2primaryNode.get(secondaryTargetNode);
-					if (primaryTargetNode2 == null) {
-						if ("if".equals(secondaryTargetNode.getName())) {
-							secondaryTargetNode.getName();
-						}
-						secondaryNode2primaryNode.put(secondaryTargetNode, primaryTargetNode);
-					}
-				}
-				assert secondaryTargetNode != null;
-				if (secondaryNodes.add(secondaryTargetNode)) {
-					//					if (mergedTargetNode != null) {
-					//						if (!secondaryTargetNode.isAttributeNode()) {
-					secondaryNodesList.add(secondaryTargetNode);
-					//						}
-				}
-
-			}
-			if (!isLateMerge && (primarySourceNode != null)) {
-				for (@NonNull Edge secondaryEdge : secondarySourceNode.getComputationEdges()) {
-					Node secondaryTargetNode = secondaryEdge.getTarget();
-					Node primaryTargetNode = null;
-					for (@NonNull Edge primaryEdge : primarySourceNode.getComputationEdges()) {
-						if (ClassUtil.safeEquals(primaryEdge.getName(), secondaryEdge.getName())) {
-							primaryTargetNode = primaryEdge.getTarget();
-							if (isEquivalent(secondaryTargetNode, primaryTargetNode, secondaryNode2primaryNode)) {
-								secondaryNodesList.add(secondaryTargetNode);
-							}
-						}
-					}
-				}
-			}
-			/*
-
-					}
-					if (secondaryEdge instanceof NavigationEdge) {
-						Edge primaryEdge = primarySourceNode.getNavigationEdge(((NavigationEdge)secondaryEdge).getProperty());
-						if (primaryEdge != null) {
-							primaryTargetNode = primaryEdge.getTarget();
-//							primaryTargetNode = primaryTargetNode.getCastEquivalentNode();
-//							secondaryTargetNode = secondaryTargetNode.getCastEquivalentNode();
-							if (primaryTargetNode.getCompleteClass() != secondaryTargetNode.getCompleteClass()) {		// FIXME conforms
-								return false;
-							}
-						}
-						else {
-							if (secondaryEdge.isPredicated()) {
-								if (!isLateMerge) {		// FIXME must locate in ancestry; if present can merge, if not cannot
-									return false;
-								}
-								for (@SuppressWarnings("null")@NonNull Node secondaryOriginNode : secondaryTargetNode.getUsedBindingSources()) {
-									if (!region2depths.isAfter(secondaryOriginNode, this)) {
-										return false;
-									}
-								}
-							}
-						}
-					}
-					else {} // FIXME???
-				}
-				if (primaryTargetNode != null) {
-					Node primaryTargetNode2 = secondaryNode2primaryNode.get(secondaryTargetNode);
-					if (primaryTargetNode2 == null) {
-						secondaryNode2primaryNode.put(secondaryTargetNode, primaryTargetNode);
-					}
-					if (secondaryNodes.add(secondaryTargetNode)) {
-	//					if (mergedTargetNode != null) {
-						if (!secondaryTargetNode.isAttributeNode()) {
-							secondaryNodesList.add(secondaryTargetNode);
-						}
-					}
-				}
-			} */
 		}
 		return true;
 	}
@@ -1599,22 +1415,6 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 		return "blue";
 	}
 
-	private @NonNull Map<@NonNull CompleteClass, @NonNull List<@NonNull Node>> getCompleteClass2Node() {
-		Map<@NonNull CompleteClass, @NonNull List<@NonNull Node>> completeClass2node = new HashMap<>();
-		for (@NonNull Node node : getNodes()) {
-			CompleteClass completeClass = node.getCompleteClass();
-			List<@NonNull Node> mergedNodes = completeClass2node.get(completeClass);
-			if (mergedNodes == null) {
-				mergedNodes = new ArrayList<>();
-				completeClass2node.put(completeClass, mergedNodes);
-			}
-			if (!mergedNodes.contains(node)) {
-				mergedNodes.add(node);
-			}
-		}
-		return completeClass2node;
-	}
-
 	@Override
 	public final @NonNull Iterable<@NonNull Node> getComposedNodes() {
 		return Iterables.filter(nodes, IsComposedNodePredicate.INSTANCE);
@@ -2093,42 +1893,6 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 		return false;
 	}
 
-	/**
-	 * Return true if the operation nodes for primaryNode and secondaryNode are equivalent
-	 * assigning equivalences to equivalentNodes.
-	 */
-	private boolean isEquivalent(@NonNull Node primaryNode, @NonNull Node secondaryNode, @NonNull Map<@NonNull Node, @NonNull Node> primary2secondary) {
-		Node node = primary2secondary.get(primaryNode);
-		if (node != null) {
-			return node == secondaryNode;
-		}
-		if (primaryNode.getNodeRole() != secondaryNode.getNodeRole()) {
-			return false;
-		}
-		if (!ClassUtil.safeEquals(primaryNode.getName(), secondaryNode.getName())) {		// FIXME stronger e.g. referredOperation
-			return false;
-		}
-		HashMap<@NonNull Node, @NonNull Node> nestedPrimary2secondary = new HashMap<>(primary2secondary);
-		nestedPrimary2secondary.put(primaryNode, secondaryNode);
-		for (@NonNull Edge primaryEdge : primaryNode.getArgumentEdges()) {
-			boolean gotIt = false;
-			for (@NonNull Edge secondaryEdge : secondaryNode.getArgumentEdges()) {
-				if (ClassUtil.safeEquals(primaryEdge.getName(), secondaryEdge.getName())) {
-					if (!isEquivalent(primaryEdge.getSource(), secondaryEdge.getSource(), nestedPrimary2secondary)) {
-						return false;
-					}
-					gotIt = true;
-					break;
-				}
-			}
-			if (!gotIt) {
-				return false;
-			}
-		}
-		primary2secondary.putAll(nestedPrimary2secondary);
-		return true;
-	}
-
 	@Override
 	public boolean isOperationRegion() {
 		return false;
@@ -2288,11 +2052,11 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 	}
 
 	public void resolveRecursion() {
-		Map<@NonNull CompleteClass, @NonNull List<@NonNull Node>> completeClass2node = getCompleteClass2Node();
+		Map<@NonNull CompleteClass, @NonNull List<@NonNull Node>> completeClass2nodes = RegionUtil.getCompleteClass2Nodes(this);
 		List<@NonNull Node> headNodes = getHeadNodes();
 		if (headNodes.size() == 1) {			// FIXME multi-heads
 			Node headNode = headNodes.get(0);
-			List<@NonNull Node> nodeList = completeClass2node.get(headNode.getCompleteClass());
+			List<@NonNull Node> nodeList = completeClass2nodes.get(headNode.getCompleteClass());
 			assert nodeList != null;
 			if (nodeList.size() > 1) {
 				for (@NonNull Node node : nodeList) {
@@ -2311,75 +2075,6 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 				}
 			}
 		}
-	}
-
-	/**
-	 * Chose the headNode from a group of peer nodes that has the most non-implicit properties targeting its peers.
-	 */
-	protected @NonNull Node selectBestHeadNode(@NonNull List<@NonNull Node> headNodes) {
-		int size = headNodes.size();
-		assert size >= 1;
-		if (size == 1) {
-			return headNodes.get(0);
-		}
-		Node bestHeadNode = null;
-		int bestNonImplicits = -1;
-		List<@NonNull Node> sortedHeadNodes = new ArrayList<>(headNodes);
-		Collections.sort(sortedHeadNodes, NameUtil.NAMEABLE_COMPARATOR);		// Stabilize order
-		for (@NonNull Node thisHeadNode : sortedHeadNodes) {
-			int nonImplicits = 0;
-			for (@NonNull Node thatHeadNode : sortedHeadNodes) {
-				for (@NonNull NavigableEdge edge : thisHeadNode.getNavigationEdges()) {
-					if (edge.getTarget() == thatHeadNode) {
-						Property property = edge.getProperty();
-						if (!property.isIsImplicit()) {
-							nonImplicits++;
-							break;
-						}
-					}
-				}
-			}
-			if (nonImplicits > bestNonImplicits) {
-				bestHeadNode = thisHeadNode;
-				bestNonImplicits = nonImplicits;
-			}
-		}
-		assert bestHeadNode != null;
-		return bestHeadNode;
-	}
-
-	private @Nullable Node selectMergedHeadNode(@NonNull Node headNode, @NonNull List<@NonNull Node> mergedNodes) {
-		if (mergedNodes.size() == 1) {
-			Node mergedNode = selectBestHeadNode(mergedNodes);
-			if (mergedNode.isIterator()) {
-				return null;
-			}
-			return mergedNode;
-		}
-		if (mergedNodes.size() == 0) {
-			return null;
-		}
-		Iterable<NavigableEdge> predicateEdges = headNode.getPredicateEdges();
-		//		if (predicateEdges == null) {
-		//			return null;
-		//		}
-		for (@NonNull Node mergedNode : mergedNodes) {
-			boolean ok = !mergedNode.isIterator();
-			if (ok) {
-				for (@NonNull NavigableEdge predicateEdge : predicateEdges) {
-					Property property = predicateEdge.getProperty();
-					Node navigation = mergedNode.getNavigationTarget(property);
-					if (navigation == null) {
-						ok = false;
-						break;
-					}
-				}
-			}
-			if (ok) {						// FIXME stronger checking
-				return mergedNode;
-			}
-		}
-		return null;
 	}
 
 	@Override
