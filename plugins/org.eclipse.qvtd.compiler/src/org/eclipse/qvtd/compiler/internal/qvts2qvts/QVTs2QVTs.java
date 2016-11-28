@@ -122,7 +122,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		RootScheduledRegion rootRegion = createRootRegion(activeRegions);
 		rootRegion.createSchedule();
 		createSchedule(rootRegion);
-		LateMerger.partition(rootRegion);
+		LateMerger.merge(rootRegion);
 		return rootRegion;
 	}
 }

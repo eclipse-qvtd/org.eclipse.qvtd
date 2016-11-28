@@ -95,6 +95,7 @@ public interface Region extends Visitable, GraphNode, Nameable, Symbolable
 	 */
 	int getInvocationIndex();
 	@Nullable ScheduledRegion getInvokingRegion();
+	int getLastIndex();
 	@NonNull List<@NonNull DatumConnection> getLoopingConnections();
 
 	@NonNull MultiRegion getMultiRegion();

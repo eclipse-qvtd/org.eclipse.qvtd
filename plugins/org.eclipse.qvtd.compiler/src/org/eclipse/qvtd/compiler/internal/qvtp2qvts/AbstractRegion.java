@@ -1540,6 +1540,13 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 	}
 
 	@Override
+	public int getLastIndex() {
+		int size = indexes.size();
+		assert size > 0;
+		return indexes.get(size-1);
+	}
+
+	@Override
 	public @NonNull List<@NonNull DatumConnection> getLoopingConnections() {
 		List<@NonNull DatumConnection> loopingConnections = new ArrayList<>();
 		for (@NonNull DatumConnection connection : getOutgoingConnections()) {
