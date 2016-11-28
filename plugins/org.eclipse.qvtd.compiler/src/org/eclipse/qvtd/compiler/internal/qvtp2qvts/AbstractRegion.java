@@ -1305,7 +1305,9 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 		Iterable<@NonNull NodeConnection> headConnections = createHeadConnections();
 		if (headConnections != null) {
 			for (@NonNull NavigableEdge predicatedEdge : getPredicatedNavigationEdges()) {
-				createEdgeConnection(predicatedEdge);
+				if (!predicatedEdge.isCast()) {
+					createEdgeConnection(predicatedEdge);
+				}
 			}
 		}
 	}
