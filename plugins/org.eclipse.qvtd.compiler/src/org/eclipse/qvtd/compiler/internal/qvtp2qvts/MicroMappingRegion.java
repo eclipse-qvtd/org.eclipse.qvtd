@@ -25,6 +25,7 @@ public class MicroMappingRegion extends AbstractMappingRegion
 
 	public MicroMappingRegion(@NonNull MappingRegion mappingRegion, @NonNull String prefix, @NonNull String suffix) {
 		super(mappingRegion.getMultiRegion());
+		assert !(mappingRegion instanceof MicroMappingRegion);
 		this.mappingRegion = mappingRegion;
 		this.prefix = prefix;
 		this.suffix = suffix;

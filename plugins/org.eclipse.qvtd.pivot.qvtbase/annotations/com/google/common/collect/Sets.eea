@@ -5,3 +5,6 @@ newHashSet
 newHashSet
  <E:Ljava/lang/Object;>([TE;)Ljava/util/HashSet<TE;>;
  <E:Ljava/lang/Object;>([TE;)L1java/util/HashSet<TE;>;
+newLinkedHashSet
+ <E:Ljava/lang/Object;>(Ljava/lang/Iterable<+TE;>;)Ljava/util/LinkedHashSet<TE;>;
+ <E:Ljava/lang/Object;>(Ljava/lang/Iterable<+TE;>;)L1java/util/LinkedHashSet<TE;>;

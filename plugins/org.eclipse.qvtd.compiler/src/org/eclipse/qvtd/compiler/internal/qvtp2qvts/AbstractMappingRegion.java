@@ -256,7 +256,7 @@ public abstract class AbstractMappingRegion extends AbstractRegion implements Ma
 	protected @NonNull List<@NonNull Node> computeHeadNodes() {
 		//
 		//	A head node is reachable from very few nodes, typically just itself, occasionally from a small group of mutually bidirectional nodes,
-		//	so we search for the least reachable nodes taking care to avoid hazrads from the source-to-target / target-source asymmetry.
+		//	so we search for the least reachable nodes taking care to avoid hazards from the source-to-target / target-source asymmetry.
 		//
 		List<@NonNull Node> navigableNodes = new ArrayList<>();
 		for (@NonNull Node node : getNodes()) {
@@ -290,8 +290,9 @@ public abstract class AbstractMappingRegion extends AbstractRegion implements Ma
 					Node targetNode = navigationEdge.getTarget();
 					if (targetNode.isMatched() && targetNode.isClass() && !targetNode.isExplicitNull()) {
 						Set<@NonNull Node> sourceClosure = targetFromSourceClosure.get(targetNode);
-						assert sourceClosure != null;
-						sourceClosure.add(sourceNode);
+						if (sourceClosure != null) {
+							sourceClosure.add(sourceNode);
+						}
 					}
 				}
 			}

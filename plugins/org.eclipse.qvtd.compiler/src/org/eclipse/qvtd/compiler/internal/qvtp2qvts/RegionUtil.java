@@ -365,19 +365,19 @@ public class RegionUtil
 	}
 
 	public static @NonNull Map<@NonNull CompleteClass, @NonNull List<@NonNull Node>> getCompleteClass2Nodes(@NonNull Region region) {
-		Map<@NonNull CompleteClass, @NonNull List<@NonNull Node>> completeClass2node = new HashMap<>();
+		Map<@NonNull CompleteClass, @NonNull List<@NonNull Node>> completeClass2nodes = new HashMap<>();
 		for (@NonNull Node node : region.getNodes()) {
 			CompleteClass completeClass = node.getCompleteClass();
-			List<@NonNull Node> mergedNodes = completeClass2node.get(completeClass);
+			List<@NonNull Node> mergedNodes = completeClass2nodes.get(completeClass);
 			if (mergedNodes == null) {
 				mergedNodes = new ArrayList<>();
-				completeClass2node.put(completeClass, mergedNodes);
+				completeClass2nodes.put(completeClass, mergedNodes);
 			}
 			if (!mergedNodes.contains(node)) {
 				mergedNodes.add(node);
 			}
 		}
-		return completeClass2node;
+		return completeClass2nodes;
 	}
 
 	public static Role.@NonNull Phase getOperationNodePhase(@NonNull Region region, @NonNull TypedElement typedElement, @NonNull Node... argNodes) {
@@ -575,5 +575,23 @@ public class RegionUtil
 			return secondRole;
 		}
 		throw new UnsupportedOperationException();
+	}
+
+	public static Node.@NonNull Utility mergeToStrongerUtility(Node.@NonNull Utility nodeUtility1, Node.@NonNull Utility nodeUtility2) {
+		if ((nodeUtility1 == Node.Utility.STRONGLY_MATCHED) || (nodeUtility2 == Node.Utility.STRONGLY_MATCHED)) {
+			return Node.Utility.STRONGLY_MATCHED;
+		}
+		else if ((nodeUtility1 == Node.Utility.WEAKLY_MATCHED) || (nodeUtility2 == Node.Utility.WEAKLY_MATCHED)) {
+			return Node.Utility.WEAKLY_MATCHED;
+		}
+		else if ((nodeUtility1 == Node.Utility.CONDITIONAL) || (nodeUtility2 == Node.Utility.CONDITIONAL)) {
+			return Node.Utility.CONDITIONAL;
+		}
+		else if ((nodeUtility1 == Node.Utility.DEPENDENCY) || (nodeUtility2 == Node.Utility.DEPENDENCY)) {
+			return Node.Utility.DEPENDENCY;
+		}
+		else {
+			return Node.Utility.DEAD;
+		}
 	}
 }

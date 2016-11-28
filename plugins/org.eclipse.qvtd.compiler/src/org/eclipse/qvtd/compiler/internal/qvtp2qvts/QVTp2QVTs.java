@@ -141,14 +141,14 @@ public class QVTp2QVTs extends SchedulerConstants
 				mappingRegion.writeDebugGraphs(null);
 			}
 		}
-		List<@NonNull BasicMappingRegion> orderedRegions = new ArrayList<>();
+		List<@NonNull MappingRegion> orderedRegions = new ArrayList<>();
 		for (@NonNull Mapping mapping : orderedMappings) {
 			BasicMappingRegion mappingRegion = mapping2mappingRegion.get(mapping);
 			assert mappingRegion != null;
 			orderedRegions.add(mappingRegion);
 			//			mappingRegion.resolveRecursion();
 		}
-		List<@NonNull Region> activeRegions = new ArrayList<>(EarlyMerger.earlyRegionMerge(orderedRegions));
+		List<@NonNull Region> activeRegions = new ArrayList<>(EarlyMerger.merge(orderedRegions));
 		//		for (@NonNull Region activeRegion : activeRegions) {
 		//			((AbstractRegion)activeRegion).resolveRecursion();
 		//		}
