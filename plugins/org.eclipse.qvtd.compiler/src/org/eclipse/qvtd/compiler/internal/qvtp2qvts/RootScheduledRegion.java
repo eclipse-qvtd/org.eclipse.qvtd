@@ -36,7 +36,6 @@ import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotConstants;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.Region2Depth;
 import org.eclipse.qvtd.compiler.internal.utilities.SymbolNameBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage;
@@ -79,7 +78,7 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 	/**
 	 * The input models that may introduce model elements for transformation.
 	 */
-	private final @NonNull Map<@NonNull Model, org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage> inputModels = new HashMap<@NonNull Model, org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage>();
+	private final @NonNull Map<@NonNull Model, @NonNull DomainUsage> inputModels = new HashMap<>();
 
 	/**
 	 * Mapping from each input class to the composite properties that may contain the class or its subclasses.
@@ -91,13 +90,13 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 	 *-- relationship is included in every entry since it must be considered as an introducer for every possible
 	 *-- consumption.
 	 */
-	private final @NonNull Map<org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis, @NonNull Set<@NonNull Property>> containedClassDatumAnalysis2compositeProperties = new HashMap<org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis, @NonNull Set<@NonNull Property>>();
+	private final @NonNull Map<@NonNull ClassDatumAnalysis, @NonNull Set<@NonNull Property>> containedClassDatumAnalysis2compositeProperties = new HashMap<>();
 
 	/**
 	 * The input model classes that may be used as independent inputs by mappings and the nodes at which they are consumed.
 	 * In the worst case a flat schedule just permutes allInstances() to provide all mapping inputs.
 	 */
-	private final @NonNull Map<org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis, @NonNull List<@NonNull Node>> consumedClassDatumAnalysis2headNodes = new HashMap<org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis, @NonNull List<@NonNull Node>>();
+	private final @NonNull Map<@NonNull ClassDatumAnalysis, @NonNull List<@NonNull Node>> consumedClassDatumAnalysis2headNodes = new HashMap<>();
 
 	/**
 	 * Mapping from each composite property to the classes consumed by mappings and transitive compositions.
@@ -106,22 +105,22 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 	 * For simple cases each composition introduces instances of just a single class corresponding to its composed type.
 	 * In more complex cases a composition may also introduce instances of superclasses of its composed type.
 	 */
-	private final @NonNull Map<@NonNull Property, @NonNull Set<org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis>> consumedCompositeProperty2introducedClassDatumAnalyses = new HashMap<@NonNull Property, @NonNull Set<org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis>>();
+	private final @NonNull Map<@NonNull Property, @NonNull Set<@NonNull ClassDatumAnalysis>> consumedCompositeProperty2introducedClassDatumAnalyses = new HashMap<>();
 
 	/**
 	 * The per-class join nodes that identify all introducers.
 	 */
-	private final @NonNull Map<org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis, @NonNull List<@NonNull Node>> introducedClassDatumAnalysis2nodes = new HashMap<org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis, @NonNull List<@NonNull Node>>();
+	private final @NonNull Map<@NonNull ClassDatumAnalysis, @NonNull List<@NonNull Node>> introducedClassDatumAnalysis2nodes = new HashMap<>();
 
 	/**
 	 * The Realized Nodes that produce each ClassDatum.
 	 */
-	private final @NonNull Map<org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis, @NonNull List<@NonNull Node>> producedClassDatumAnalysis2realizedNodes = new HashMap<org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis, @NonNull List<@NonNull Node>>();
+	private final @NonNull Map<@NonNull ClassDatumAnalysis, @NonNull List<@NonNull Node>> producedClassDatumAnalysis2realizedNodes = new HashMap<>();
 
 	/**
 	 * The Realized Edges that produce each PropertyDatum (or its opposite).
 	 */
-	private final @NonNull Map<@NonNull PropertyDatum, @NonNull List<@NonNull NavigableEdge>> producedPropertyDatum2realizedEdges = new HashMap<@NonNull PropertyDatum, @NonNull List<@NonNull NavigableEdge>>();
+	private final @NonNull Map<@NonNull PropertyDatum, @NonNull List<@NonNull NavigableEdge>> producedPropertyDatum2realizedEdges = new HashMap<>();
 
 	private final @NonNull RootCompositionRegion rootContainmentRegion = new RootCompositionRegion(multiRegion);
 
@@ -156,7 +155,7 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 
 		for (Edge usedBindingEdge : getUsedBindingEdges()) {
 			if (region2orderingEdge2usedEdges == null) {
-				region2orderingEdge2usedEdges = new HashMap<Region, Map<Edge, Set<Edge>>>();
+				region2orderingEdge2usedEdges = new HashMap<>();
 			}
 			Node targetNode = usedBindingEdge.getTarget();
 //			Iterable<Node> passedBindingSources = targetNode.getUsedBindingSources();
@@ -166,12 +165,12 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 					Region commonRegion = orderingEdge.getRegion();
 					Map<Edge, Set<Edge>> orderingEdge2usedEdges = region2orderingEdge2usedEdges.get(commonRegion);
 					if (orderingEdge2usedEdges == null) {
-						orderingEdge2usedEdges = new HashMap<Edge, Set<Edge>>();
+						orderingEdge2usedEdges = new HashMap<>();
 						region2orderingEdge2usedEdges.put(commonRegion, orderingEdge2usedEdges);
 					}
 					Set<Edge> usedEdges = orderingEdge2usedEdges.get(orderingEdge);
 					if (usedEdges == null) {
-						usedEdges = new HashSet<Edge>();
+						usedEdges = new HashSet<>();
 						orderingEdge2usedEdges.put(orderingEdge, usedEdges);
 					}
 					usedEdges.add(usedBindingEdge);
@@ -182,7 +181,7 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 		for (Region region : getRegions()) {
 			for (Edge recursionEdge : region.getRecursionEdges()) {
 				if (region2orderingEdge2usedEdges == null) {
-					region2orderingEdge2usedEdges = new HashMap<Region, Map<Edge, Set<Edge>>>();
+					region2orderingEdge2usedEdges = new HashMap<>();
 				}
 				Node targetNode = recursionEdge.getTarget();
 //			Iterable<Node> passedBindingSources = targetNode.getUsedBindingSources();
@@ -196,12 +195,12 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 								Region commonRegion = orderingEdge.getRegion();
 								Map<Edge, Set<Edge>> orderingEdge2usedEdges = region2orderingEdge2usedEdges.get(commonRegion);
 								if (orderingEdge2usedEdges == null) {
-									orderingEdge2usedEdges = new HashMap<Edge, Set<Edge>>();
+									orderingEdge2usedEdges = new HashMap<>();
 									region2orderingEdge2usedEdges.put(commonRegion, orderingEdge2usedEdges);
 								}
 								Set<Edge> recursionEdges = orderingEdge2usedEdges.get(orderingEdge);
 								if (recursionEdges == null) {
-									recursionEdges = new HashSet<Edge>();
+									recursionEdges = new HashSet<>();
 									orderingEdge2usedEdges.put(orderingEdge, recursionEdges);
 								}
 								recursionEdges.add(recursionEdge);
@@ -223,7 +222,7 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 		ClassDatumAnalysis consumedClassDatumAnalysis = headNode.getClassDatumAnalysis();
 		List<@NonNull Node> nodes = consumedClassDatumAnalysis2headNodes.get(consumedClassDatumAnalysis);
 		if (nodes == null) {
-			nodes = new ArrayList<@NonNull Node>();
+			nodes = new ArrayList<>();
 			consumedClassDatumAnalysis2headNodes.put(consumedClassDatumAnalysis, nodes);
 		}
 		if (!nodes.contains(headNode)) {
@@ -235,7 +234,7 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 		ClassDatumAnalysis classDatumAnalysis = getElementalClassDatumAnalysis(introducedNode);
 		List<@NonNull Node> nodes = introducedClassDatumAnalysis2nodes.get(classDatumAnalysis);
 		if (nodes == null) {
-			nodes = new ArrayList<@NonNull Node>();
+			nodes = new ArrayList<>();
 			introducedClassDatumAnalysis2nodes.put(classDatumAnalysis, nodes);
 		}
 		nodes.add(introducedNode);
@@ -252,7 +251,7 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 	private void addProducedEdge(@NonNull NavigableEdge producedEdge, @NonNull PropertyDatum propertyDatum) {
 		List<@NonNull NavigableEdge> edges = producedPropertyDatum2realizedEdges.get(propertyDatum);
 		if (edges == null) {
-			edges = new ArrayList<@NonNull NavigableEdge>();
+			edges = new ArrayList<>();
 			producedPropertyDatum2realizedEdges.put(propertyDatum, edges);
 		}
 		if (!edges.contains(producedEdge)) {
@@ -268,7 +267,7 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 		for (@NonNull ClassDatumAnalysis superClassDatumAnalysis : classDatumAnalysis.getSuperClassDatumAnalyses()) {
 			List<@NonNull Node> nodes = producedClassDatumAnalysis2realizedNodes.get(superClassDatumAnalysis);
 			if (nodes == null) {
-				nodes = new ArrayList<@NonNull Node>();
+				nodes = new ArrayList<>();
 				producedClassDatumAnalysis2realizedNodes.put(superClassDatumAnalysis, nodes);
 			}
 			nodes.add(producedNode);
@@ -276,7 +275,7 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 	}
 
 	/*	private void assignDepths() {
-		Map<Region, Integer> region2depth = new HashMap<Region, Integer>();
+		Map<Region, Integer> region2depth = new HashMap<>();
 		for (Region region : getRegions()) {
 			region.computeDepths(region2depth);
 		}
@@ -443,8 +442,8 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 	 * Identify all the containment relationships in the input models.
 	 */
 	private void computeContainedClassDatumAnalysis2compositeProperties() {
-		Map<org.eclipse.ocl.pivot.@NonNull Package, org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage> allPackagesSet = new HashMap<org.eclipse.ocl.pivot.@NonNull Package, org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage>();
-		List<org.eclipse.ocl.pivot.@NonNull Package> allPackagesList = new ArrayList<org.eclipse.ocl.pivot.@NonNull Package>();
+		Map<org.eclipse.ocl.pivot.@NonNull Package, @NonNull DomainUsage> allPackagesSet = new HashMap<>();
+		List<org.eclipse.ocl.pivot.@NonNull Package> allPackagesList = new ArrayList<>();
 		for (@NonNull Model asModel : inputModels.keySet()) {
 			DomainUsage domainUsage = inputModels.get(asModel);
 			assert domainUsage != null;
@@ -492,7 +491,7 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 			}
 		}
 		assert allPackagesSet.size() == allPackagesList.size();
-		assert allPackagesSet.keySet().equals(new HashSet<org.eclipse.ocl.pivot.Package>(allPackagesList));
+		assert allPackagesSet.keySet().equals(new HashSet<>(allPackagesList));
 	}
 
 	private void computeContainedClassDatumAnalysis2compositeProperties3(@NonNull Property asProperty, @NonNull DomainUsage domainUsage) {
@@ -501,7 +500,7 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 			ClassDatumAnalysis classDatumAnalysis = getSchedulerConstants().getClassDatumAnalysis((Class) asType, ClassUtil.nonNullState(domainUsage.getTypedModel(null)));
 			Set<@NonNull Property> compositeProperties = containedClassDatumAnalysis2compositeProperties.get(classDatumAnalysis);
 			if (compositeProperties == null) {
-				compositeProperties = new HashSet<@NonNull Property>();
+				compositeProperties = new HashSet<>();
 				containedClassDatumAnalysis2compositeProperties.put(classDatumAnalysis, compositeProperties);
 			}
 			compositeProperties.add(asProperty);
@@ -521,17 +520,17 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 		//	Find the composite properties for each consumed class and its super classes, and accumulate
 		//	the container classes of all used properties as additional consumed classes.
 		//
-		Set<org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis> allConsumedClassDatumAnalyses = new HashSet<org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis>(consumedClassDatumAnalysis2headNodes.keySet());
-		List<org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis> allConsumedClassDatumAnalysesList = new ArrayList<org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis>(allConsumedClassDatumAnalyses);
+		Set<@NonNull ClassDatumAnalysis> allConsumedClassDatumAnalyses = new HashSet<>(consumedClassDatumAnalysis2headNodes.keySet());
+		List<@NonNull ClassDatumAnalysis> allConsumedClassDatumAnalysesList = new ArrayList<>(allConsumedClassDatumAnalyses);
 		for (int i = 0; i < allConsumedClassDatumAnalysesList.size(); i++) {
 			ClassDatumAnalysis consumedClassDatumAnalysis = allConsumedClassDatumAnalysesList.get(i);
 			for (@NonNull ClassDatumAnalysis consumedSuperClassDatumAnalysis : consumedClassDatumAnalysis.getSuperClassDatumAnalyses()) {
 				Set<@NonNull Property> consumedCompositeProperties = containedClassDatumAnalysis2compositeProperties.get(consumedSuperClassDatumAnalysis);
 				if (consumedCompositeProperties != null) {
 					for (@NonNull Property consumedCompositeProperty : consumedCompositeProperties) {
-						Set<org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis> introducedClassDatumAnalyses = consumedCompositeProperty2introducedClassDatumAnalyses.get(consumedCompositeProperty);
+						Set<@NonNull ClassDatumAnalysis> introducedClassDatumAnalyses = consumedCompositeProperty2introducedClassDatumAnalyses.get(consumedCompositeProperty);
 						if (introducedClassDatumAnalyses == null) {
-							introducedClassDatumAnalyses = new HashSet<org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis>();
+							introducedClassDatumAnalyses = new HashSet<>();
 							consumedCompositeProperty2introducedClassDatumAnalyses.put(consumedCompositeProperty, introducedClassDatumAnalyses);
 						}
 						introducedClassDatumAnalyses.add(consumedClassDatumAnalysis);
@@ -575,8 +574,8 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 		//	Find the composite properties for each consumed class and its super classes, and accumulate
 		//	the container classes of all used properties as additional consumed classes.
 		//
-		Set<ClassDatumAnalysis> allConsumedClassDatumAnalyses = new HashSet<ClassDatumAnalysis>(consumedClassDatumAnalysis2headNodes.keySet());
-		List<ClassDatumAnalysis> allConsumedClassDatumAnalysesList = new ArrayList<ClassDatumAnalysis>(allConsumedClassDatumAnalyses);
+		Set<ClassDatumAnalysis> allConsumedClassDatumAnalyses = new HashSet<>(consumedClassDatumAnalysis2headNodes.keySet());
+		List<ClassDatumAnalysis> allConsumedClassDatumAnalysesList = new ArrayList<>(allConsumedClassDatumAnalyses);
 		for (int i = 0; i < allConsumedClassDatumAnalysesList.size(); i++) {
 			ClassDatumAnalysis consumedClassDatumAnalysis = allConsumedClassDatumAnalysesList.get(i);
 			for (@SuppressWarnings("null")@NonNull ClassDatumAnalysis consumedSuperClassDatumAnalysis : consumedClassDatumAnalysis.getSuperClassDatumAnalyses()) {
@@ -585,13 +584,13 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 					for (Property compositeProperty : compositeProperties) {
 						Set<Property> consumedCompositeProperties = consumedClassDatumAnalysis2compositionProperties.get(consumedClassDatumAnalysis);
 						if (consumedCompositeProperties == null) {
-							consumedCompositeProperties = new HashSet<Property>();
+							consumedCompositeProperties = new HashSet<>();
 							consumedClassDatumAnalysis2compositionProperties.put(consumedClassDatumAnalysis, consumedCompositeProperties);
 						}
 						consumedCompositeProperties.add(compositeProperty);
 						Set<ClassDatumAnalysis> introducedClassDatumAnalyses = consumedCompositeProperty2introducedClassDatumAnalyses.get(compositeProperty);
 						if (introducedClassDatumAnalyses == null) {
-							introducedClassDatumAnalyses = new HashSet<ClassDatumAnalysis>();
+							introducedClassDatumAnalyses = new HashSet<>();
 							consumedCompositeProperty2introducedClassDatumAnalyses.put(compositeProperty, introducedClassDatumAnalyses);
 						}
 						introducedClassDatumAnalyses.add(consumedSuperClassDatumAnalysis);
@@ -616,7 +615,7 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 					for (Property compositeProperty : entry.getValue()) {
 						Set<ClassDatumAnalysis> introducedClassDatumAnalyses = consumedCompositeProperty2introducedClassDatumAnalyses.get(compositeProperty);
 						if (introducedClassDatumAnalyses == null) {
-							introducedClassDatumAnalyses = new HashSet<ClassDatumAnalysis>();
+							introducedClassDatumAnalyses = new HashSet<>();
 							consumedCompositeProperty2introducedClassDatumAnalyses.put(compositeProperty, introducedClassDatumAnalyses);
 						}
 						introducedClassDatumAnalyses.add(superClassDatumAnalysis);
@@ -658,7 +657,7 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 	 * Create the Passed and Used Connections between all introducers and their corresponding consuming nodes.
 	 */
 	private void createConnections() {
-		List<@NonNull Region> sortedCallableRegions = new ArrayList<@NonNull Region>();
+		List<@NonNull Region> sortedCallableRegions = new ArrayList<>();
 		Iterables.addAll(sortedCallableRegions, getCallableRegions());
 		Collections.sort(sortedCallableRegions, NameUtil.NAMEABLE_COMPARATOR);
 		for (Region region : sortedCallableRegions) {
@@ -678,7 +677,7 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 	 */
 	private @NonNull RootCompositionRegion createRootContainmentRegion() {
 		//		RootCompositionRegion rootContainmentRegion = new RootCompositionRegion(multiRegion);
-		/*		Set<ClassDatumAnalysis> rootClassDatumAnalyses = new HashSet<ClassDatumAnalysis>();
+		/*		Set<ClassDatumAnalysis> rootClassDatumAnalyses = new HashSet<>();
 		for (Entry<Property, Set<ClassDatumAnalysis>> entry : consumedCompositeProperty2introducedClassDatumAnalyses.entrySet()) {
 			@SuppressWarnings("null")@NonNull Property parent2childrenProperty = entry.getKey();
 			Property childrenToParentProperty = parent2childrenProperty.getOpposite();
@@ -760,7 +759,7 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 			else {
 				Set<Property> containments = containedClassDatumAnalysis2compositeProperties.get(consumedClassDatumAnalysis);
 				if (containments != null) {
-					Set<Property> containments2 = new HashSet<Property>();		// FIXME omits independent containers
+					Set<Property> containments2 = new HashSet<>();		// FIXME omits independent containers
 					for (Property property : consumedClassDatumAnalysis.getCompleteClass().getProperties((FeatureFilter)null)) {
 						Property oppositeProperty = property.getOpposite();
 						if ((oppositeProperty != null) && oppositeProperty.isIsComposite() && oppositeProperty.isIsRequired()) {
@@ -864,21 +863,21 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 	} */
 
 	/*	private void propagateCommonNavigations(@NonNull Region region, Map<Node, List<Node>> outerNode2outerNodes, @NonNull Map<Region, Map<NavigationEdge, NavigationEdge>> region2innerEdge2outerEdge) {
-//		Map<Node, Set<Node>> node2consumers = new HashMap<Node, Set<Node>>();
+//		Map<Node, Set<Node>> node2consumers = new HashMap<>();
 		for (Node outerNode : region.getNodes()) {
 			for (Edge edge : outerNode.getOutgoingPassedBindingEdges()) {
 				Node innerNode = edge.getTarget();
 				Iterable<Edge> incomingPassedBindingEdges = innerNode.getIncomingPassedBindingEdges();
 				if (Iterables.size(incomingPassedBindingEdges) == 1) {				// FIXME is passing to multi-called regions viable?
-					Map<Node, List<Node>> innerNode2outerNodes = new HashMap<Node, List<Node>>();
+					Map<Node, List<Node>> innerNode2outerNodes = new HashMap<>();
 					for (Map.Entry<Node, List<Node>> entry : outerNode2outerNodes.entrySet()) {
-						innerNode2outerNodes.put(entry.getKey(), new ArrayList<Node>(entry.getValue()));
+						innerNode2outerNodes.put(entry.getKey(), new ArrayList<>(entry.getValue()));
 					}
 					assert outerNode == edge.getSource();
 					List<Node> outerNodes = innerNode2outerNodes.get(innerNode);
 					if (outerNodes == null) {
 						List<Node> outerOuterNodes = outerNode2outerNodes.get(outerNode);
-						outerNodes = outerOuterNodes != null ? new ArrayList<Node>(outerOuterNodes) : new ArrayList<Node>();
+						outerNodes = outerOuterNodes != null ? new ArrayList<>(outerOuterNodes) : new ArrayList<>();
 						innerNode2outerNodes.put(innerNode, outerNodes);
 					}
 					if (!outerNodes.contains(outerNode)) {
@@ -900,7 +899,7 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 		Region innerRegion = innerSourceNode.getRegion();
 		Map<NavigationEdge, NavigationEdge> innerEdge2outerEdge = region2innerEdge2outerEdge.get(innerRegion);
 		if (innerEdge2outerEdge == null) {
-			innerEdge2outerEdge = new HashMap<NavigationEdge, NavigationEdge>();
+			innerEdge2outerEdge = new HashMap<>();
 			region2innerEdge2outerEdge.put(innerRegion, innerEdge2outerEdge);
 		}
 		List<Node> outerSourceNodes = innerNode2outerNodes.get(innerSourceNode);
@@ -909,7 +908,7 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 			if (innerTargetNode.isClassNode() && !innerEdge.getProperty().isIsMany()) {
 				List<Node> outerTargetNodes = innerNode2outerNodes.get(innerTargetNode);
 				if (outerTargetNodes == null) {
-					outerTargetNodes = new ArrayList<Node>();
+					outerTargetNodes = new ArrayList<>();
 					innerNode2outerNodes.put(innerTargetNode, outerTargetNodes);
 					for (Node outerSourceNode : outerSourceNodes) {
 						NavigationEdge outerEdge = outerSourceNode.getNavigationEdge(innerEdge.getProperty());
@@ -1023,7 +1022,7 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 				}
 				if (compositeProperty != null) {
 					if (realizedEdges == null) {
-						realizedEdges = new HashSet<@NonNull NavigableEdge>();
+						realizedEdges = new HashSet<>();
 					}
 					realizedEdges.addAll(entry.getValue());
 				}
@@ -1055,7 +1054,7 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 		for (ClassDatumAnalysis aClassDatumAnalysis : introducedClassDatumAnalysis2nodes.keySet()) {		// FIXME cache
 			if (completeClass.conformsTo(aClassDatumAnalysis.getCompleteClass())) {
 				if (introducingNodes == null) {
-					introducingNodes = new ArrayList<Node>();
+					introducingNodes = new ArrayList<>();
 				}
 				introducingNodes.addAll(introducedClassDatumAnalysis2nodes.get(aClassDatumAnalysis));
 			}
@@ -1095,7 +1094,7 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 	}
 
 	/*	public @NonNull List<ConnectionRegion> getConnectionRegions(@NonNull Region toRegion) {
-		List<ConnectionRegion> joinRegions = new ArrayList<ConnectionRegion>();
+		List<ConnectionRegion> joinRegions = new ArrayList<>();
 		for (Connection edge : toRegion.getParentPassedConnections()) {
 			Node sourceNode = edge.getSource();
 			ConnectionRegion joinRegion;
@@ -1148,7 +1147,7 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 			CompleteClass realizedClass = targetNode.getCompleteClass();
 			if (realizedClass.conformsTo(requiredClass) /*|| realizedClass.conformsTo(requiredClass.getBehavioralClass())*/) {
 				if (conformantRealizedEdges == null) {
-					conformantRealizedEdges = new ArrayList<@NonNull NavigableEdge>();
+					conformantRealizedEdges = new ArrayList<>();
 				}
 				conformantRealizedEdges.add(realizedEdge);
 			}
@@ -1172,10 +1171,10 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 		}
 		Map<Set<Node>, Connection> joins = classDatumAnalysis2nodes2connections.get(classDatumAnalysis);
 		if (joins == null) {
-			joins = new HashMap<Set<Node>, Connection>();
+			joins = new HashMap<>();
 			classDatumAnalysis2nodes2connections.put(classDatumAnalysis, joins);
 		}
-		Set<Node> sources = new HashSet<Node>(sourceNodes);
+		Set<Node> sources = new HashSet<>(sourceNodes);
 		Connection joinRegion = joins.get(sources);
 		if (joinRegion != null) {
 			return joinRegion.getConnectionNode();
@@ -1210,11 +1209,6 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 			isCast = true;
 		}
 		return isCast;
-	}
-
-	@Override
-	public boolean isLateMergeable(@NonNull Region innerRegion, @NonNull Region2Depth region2depths) {
-		return false;
 	}
 
 	@Override

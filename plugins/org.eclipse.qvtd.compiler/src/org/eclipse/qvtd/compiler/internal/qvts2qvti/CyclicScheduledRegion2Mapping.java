@@ -177,7 +177,7 @@ public class CyclicScheduledRegion2Mapping extends AbstractScheduledRegion2Mappi
 	/**
 	 * The recursions.
 	 */
-	private final @NonNull Map<org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis, @NonNull RecursionContext> classDatumAnalysis2recursion = new HashMap<org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis, @NonNull RecursionContext>();
+	private final @NonNull Map<@NonNull ClassDatumAnalysis, @NonNull RecursionContext> classDatumAnalysis2recursion = new HashMap<>();
 
 	/**
 	 * True if all recursions use Set accumulators allowing the unqiueness to be determined by excliusion rather than

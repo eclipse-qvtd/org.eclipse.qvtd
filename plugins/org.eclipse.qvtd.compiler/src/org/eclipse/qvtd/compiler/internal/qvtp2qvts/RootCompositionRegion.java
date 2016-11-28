@@ -20,7 +20,6 @@ import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.CompleteEnvironment;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.Region2Depth;
 import org.eclipse.qvtd.compiler.internal.utilities.SymbolNameBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
@@ -37,13 +36,13 @@ public class RootCompositionRegion extends AbstractRegion
 	 * The introducer node for each consumed ClassDatumAnalysis and for each known container property where the containing property is known.
 	 * The null containing property is used for introducer nodes required to be at the root.
 	 */
-	private final @NonNull Map<org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis, @NonNull Map<@Nullable Property, @NonNull Node>> classDatumAnalysis2property2node = new HashMap<>();
+	private final @NonNull Map<@NonNull ClassDatumAnalysis, @NonNull Map<@Nullable Property, @NonNull Node>> classDatumAnalysis2property2node = new HashMap<>();
 
 	/**
 	 * The introducer node for each consumed ClassDatumAnalysis and for each known containing type where the containing property is just oclContainer.
 	 * The null type is used when no containing property or type is known.
 	 */
-	private final @NonNull Map<org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis, @NonNull Map<org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis, @NonNull Node>> classDatumAnalysis2type2node = new HashMap<>();
+	private final @NonNull Map<@NonNull ClassDatumAnalysis, @NonNull Map<@Nullable ClassDatumAnalysis, @NonNull Node>> classDatumAnalysis2type2node = new HashMap<>();
 
 	protected RootCompositionRegion(@NonNull MultiRegion multiRegion) {
 		super(multiRegion);
@@ -94,7 +93,7 @@ public class RootCompositionRegion extends AbstractRegion
 		//
 		Node introducedNode;
 		if (parent2childProperty == null) {												// No known containment, owned by null type
-			Map<org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis, @NonNull Node> type2node = classDatumAnalysis2type2node.get(consumedClassDatumAnalysis);
+			Map<@Nullable ClassDatumAnalysis, @NonNull Node> type2node = classDatumAnalysis2type2node.get(consumedClassDatumAnalysis);
 			if (type2node == null) {
 				type2node = new HashMap<>();
 				classDatumAnalysis2type2node.put(consumedClassDatumAnalysis, type2node);
@@ -119,7 +118,7 @@ public class RootCompositionRegion extends AbstractRegion
 			}
 		}
 		else if (containingClassDatumAnalysis != null) {								// Non-root oclContainer ownership
-			Map<org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis, @NonNull Node> type2node = classDatumAnalysis2type2node.get(consumedClassDatumAnalysis);
+			Map<@Nullable ClassDatumAnalysis, @NonNull Node> type2node = classDatumAnalysis2type2node.get(consumedClassDatumAnalysis);
 			if (type2node == null) {
 				type2node = new HashMap<>();
 				classDatumAnalysis2type2node.put(consumedClassDatumAnalysis, type2node);
@@ -168,11 +167,6 @@ public class RootCompositionRegion extends AbstractRegion
 			nullNode = nullNode2 = RegionUtil.createNullNode(this, true, null);
 		}
 		return nullNode2;
-	}
-
-	@Override
-	public boolean isLateMergeable(@NonNull Region innerRegion, @NonNull Region2Depth region2depths) {
-		return false;
 	}
 
 	@Override

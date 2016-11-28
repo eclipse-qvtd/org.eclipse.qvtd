@@ -37,22 +37,22 @@ public abstract class AbstractScheduledRegion extends AbstractRegion implements 
 	/**
 	 * All regions within this scheduled region.
 	 */
-	private final @NonNull List<@NonNull Region> regions = new ArrayList<@NonNull Region>();
+	private final @NonNull List<@NonNull Region> regions = new ArrayList<>();
 
 	/**
 	 * All the connections defined in this region, but not those in nested regions.
 	 */
-	private @NonNull List<@NonNull Connection> connections = new ArrayList<@NonNull Connection>();
+	private @NonNull List<@NonNull Connection> connections = new ArrayList<>();
 
 	/**
 	 * The per-class node connections that unite a set of sources via a shared connection.
 	 */
-	private final @NonNull Map<org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis, @NonNull Map<@NonNull Set<@NonNull Node>, @NonNull NodeConnection>> classDatumAnalysis2nodes2nodeConnections = new HashMap<org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis, @NonNull Map<@NonNull Set<@NonNull Node>, @NonNull NodeConnection>>();
+	private final @NonNull Map<@NonNull ClassDatumAnalysis, @NonNull Map<@NonNull Set<@NonNull Node>, @NonNull NodeConnection>> classDatumAnalysis2nodes2nodeConnections = new HashMap<>();
 
 	/**
 	 * The edge connections that unite a set of sources via a shared connection.
 	 */
-	private final @NonNull Map<@NonNull Set<@NonNull NavigableEdge>, @NonNull EdgeConnection> edges2edgeConnection = new HashMap<@NonNull Set<@NonNull NavigableEdge>, @NonNull EdgeConnection>();
+	private final @NonNull Map<@NonNull Set<@NonNull NavigableEdge>, @NonNull EdgeConnection> edges2edgeConnection = new HashMap<>();
 
 	public AbstractScheduledRegion(@NonNull MultiRegion multiRegion) {
 		super(multiRegion);
@@ -120,8 +120,8 @@ public abstract class AbstractScheduledRegion extends AbstractRegion implements 
 		//
 		//	Index all predicated and realized edges by typed model and property.
 		//
-		Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>>> typedModel2property2predicatedEdges = new HashMap<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>>>();
-		Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>>> typedModel2property2realizedEdges = new HashMap<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>>>();
+		Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>>> typedModel2property2predicatedEdges = new HashMap<>();
+		Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>>> typedModel2property2realizedEdges = new HashMap<>();
 		for (@NonNull Region region : orderedRegions) {
 			QVTs2QVTiVisitor.POLLED_PROPERTIES.println("building indexes for " + region + " " + region.getIndexRangeText());
 			region.buildPredicatedNavigationEdgesIndex(typedModel2property2predicatedEdges);
@@ -238,8 +238,8 @@ public abstract class AbstractScheduledRegion extends AbstractRegion implements 
 		/*		for (Region calledRegion : sortedRegions) {
 			calledRegion.refineBindings(this);
 		} */
-		/*		HashMap<Node, List<Node>> outerNode2outerNodes = new HashMap<Node, List<Node>>();
-		Map<Region, Map<NavigationEdge, NavigationEdge>> region2innerEdge2outerEdge = new HashMap<Region, Map<NavigationEdge, NavigationEdge>>();
+		/*		HashMap<Node, List<Node>> outerNode2outerNodes = new HashMap<>();
+		Map<Region, Map<NavigationEdge, NavigationEdge>> region2innerEdge2outerEdge = new HashMap<>();
 		propagateCommonNavigations(rootContainmentRegion, outerNode2outerNodes, region2innerEdge2outerEdge);
 		for (@SuppressWarnings("null")@NonNull Map.Entry<Region, Map<NavigationEdge, NavigationEdge>> entry1 : region2innerEdge2outerEdge.entrySet()) {
 			Region innerRegion = entry1.getKey();
@@ -248,7 +248,7 @@ public abstract class AbstractScheduledRegion extends AbstractRegion implements 
 				List<NavigationEdge> bestPath = null;
 				for (@SuppressWarnings("null")@NonNull List<Node> headGroup : innerRegion.getHeadNodeGroups()) {
 					for (@SuppressWarnings("null")@NonNull Node headNode : headGroup) {
-						bestPath = getBestPath(bestPath, getPath(headNode, innerNode, new HashSet<Edge>()));
+						bestPath = getBestPath(bestPath, getPath(headNode, innerNode, new HashSet<>()));
 					}
 				}
 				assert bestPath != null;
@@ -272,8 +272,8 @@ public abstract class AbstractScheduledRegion extends AbstractRegion implements 
 					}
 				}
 			} */
-		/*			Map<Node, Edge> innerNode2edge = new HashMap<Node, Edge>();
-			Map<Node, Node> innerNode2outerNode = new HashMap<Node, Node>();
+		/*			Map<Node, Edge> innerNode2edge = new HashMap<>();
+			Map<Node, Node> innerNode2outerNode = new HashMap<>();
 //			for (NavigationEdge innerEdge : entry1.getValue().keySet()) {
 //				innerNode2edge.put(innerEdge.getSource(), innerEdge);
 //			}
@@ -311,7 +311,7 @@ public abstract class AbstractScheduledRegion extends AbstractRegion implements 
 	public @NonNull NodeConnection getAttributeConnection(@NonNull Iterable<@NonNull Node> sourceNodes, @NonNull CompleteClass owningClass, @NonNull Property property, @NonNull ClassDatumAnalysis classDatumAnalysis) {
 		Map<@NonNull Set<@NonNull Node>, @NonNull NodeConnection> nodes2connection = classDatumAnalysis2nodes2nodeConnections.get(classDatumAnalysis);
 		if (nodes2connection == null) {
-			nodes2connection = new HashMap<@NonNull Set<@NonNull Node>, @NonNull NodeConnection>();
+			nodes2connection = new HashMap<>();
 			classDatumAnalysis2nodes2nodeConnections.put(classDatumAnalysis, nodes2connection);
 		}
 		Set<@NonNull Node> sourceSet = Sets.newHashSet(sourceNodes);
@@ -363,7 +363,7 @@ public abstract class AbstractScheduledRegion extends AbstractRegion implements 
 	public @NonNull NodeConnection getNodeConnection(@NonNull Iterable<@NonNull Node> sourceNodes, @NonNull ClassDatumAnalysis classDatumAnalysis) {
 		Map<@NonNull Set<@NonNull Node>, @NonNull NodeConnection> nodes2connection = classDatumAnalysis2nodes2nodeConnections.get(classDatumAnalysis);
 		if (nodes2connection == null) {
-			nodes2connection = new HashMap<@NonNull Set<@NonNull Node>, @NonNull NodeConnection>();
+			nodes2connection = new HashMap<>();
 			classDatumAnalysis2nodes2nodeConnections.put(classDatumAnalysis, nodes2connection);
 		}
 		Set<@NonNull Node> sourceSet = Sets.newHashSet(sourceNodes);
@@ -438,7 +438,7 @@ public abstract class AbstractScheduledRegion extends AbstractRegion implements 
 		ClassDatumAnalysis classDatumAnalysis = connection.getClassDatumAnalysis();
 		Map<@NonNull Set<@NonNull Node>, NodeConnection> nodes2connections = classDatumAnalysis2nodes2nodeConnections.get(classDatumAnalysis);
 		assert nodes2connections != null;
-		Set<@NonNull Node> newSourceNodes = new HashSet<@NonNull Node>();
+		Set<@NonNull Node> newSourceNodes = new HashSet<>();
 		Iterables.addAll(newSourceNodes, connection.getSources());
 		NodeConnection oldConnection = nodes2connections.remove(newSourceNodes);
 		assert oldConnection == connection;
@@ -462,7 +462,7 @@ public abstract class AbstractScheduledRegion extends AbstractRegion implements 
 	 * After cycles have been removed, split looped connection variables to isolate the unlooping base case, from the/each looping case.
 	 */
 	protected void splitConnectionVariables() {
-		for (@NonNull NodeConnection connection : getNodeConnections()) { //new ArrayList<NodeConnection>(getNodeConnections())) {
+		for (@NonNull NodeConnection connection : getNodeConnections()) { //new ArrayList<>(getNodeConnections())) {
 			if (connection.isPassed()) {
 				Set<@NonNull Region> loopRegions = null;
 				for (@NonNull Region sourceRegion : connection.getSourceRegions()) {
@@ -470,7 +470,7 @@ public abstract class AbstractScheduledRegion extends AbstractRegion implements 
 						for (@NonNull Region targetRegion : connection.getTargetRegions()) {
 							if (sourceRegion == targetRegion) {
 								if (loopRegions == null) {
-									loopRegions = new HashSet<@NonNull Region>();
+									loopRegions = new HashSet<>();
 								}
 								loopRegions.add(sourceRegion);
 							}
@@ -479,14 +479,14 @@ public abstract class AbstractScheduledRegion extends AbstractRegion implements 
 				}
 				if (loopRegions != null) {
 					ClassDatumAnalysis classDatumAnalysis = connection.getClassDatumAnalysis();
-					List<Node> allSourceNodes = new ArrayList<Node>();
+					List<@NonNull Node> allSourceNodes = new ArrayList<>();
 					Iterables.addAll(allSourceNodes, connection.getSources());
 					for (@NonNull Region loopRegion : loopRegions) {
 						Node sourceNode = connection.getSource(loopRegion);
 						Node targetNode = connection.getTarget(loopRegion);
 						targetNode.removeIncomingConnection(connection);
 						connection.removeTarget(targetNode);
-						Set<Node> selectedSourceNodes = new HashSet<Node>(allSourceNodes);
+						Set<@NonNull Node> selectedSourceNodes = new HashSet<>(allSourceNodes);
 						selectedSourceNodes.remove(sourceNode);
 						NodeConnection loopConection = getNodeConnection(selectedSourceNodes, classDatumAnalysis);
 						loopConection.addPassedTargetNode(targetNode);

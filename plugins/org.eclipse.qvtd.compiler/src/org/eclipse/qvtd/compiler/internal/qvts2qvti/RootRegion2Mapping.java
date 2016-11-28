@@ -59,7 +59,7 @@ public class RootRegion2Mapping extends AbstractScheduledRegion2Mapping
 	/**
 	 * Mapping from the type to allInstances variable.
 	 */
-	private final @NonNull Map<org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis, @NonNull DeclareStatement> classDatumAnalysis2variable = new HashMap<>();
+	private final @NonNull Map<@NonNull ClassDatumAnalysis, @NonNull DeclareStatement> classDatumAnalysis2variable = new HashMap<>();
 
 	/**
 	 * Mapping from the scheduled Nodes to their QVTi variables.

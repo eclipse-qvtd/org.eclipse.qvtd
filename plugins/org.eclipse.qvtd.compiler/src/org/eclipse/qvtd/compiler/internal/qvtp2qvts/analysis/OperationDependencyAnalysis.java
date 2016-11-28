@@ -1405,7 +1405,7 @@ public class OperationDependencyAnalysis
 	private final @NonNull Map<@NonNull List<@Nullable Object>, @NonNull BasicDependencyPaths> content2path = new HashMap<>();
 	private final @NonNull BasicDependencyPaths emptyDependencyPaths = createDependencyPaths(null, null);
 	private final @NonNull Map<@NonNull OperationId, @NonNull Map<@NonNull List<@NonNull BasicDependencyPaths>, @NonNull OperationAnalysis>> operation2paths2analysis = new HashMap<>();
-	private final @NonNull Map<org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage, @NonNull DependencyStepFactory> usage2factory = new HashMap<>();
+	private final @NonNull Map<@NonNull DomainUsage, @NonNull DependencyStepFactory> usage2factory = new HashMap<>();
 	private final @NonNull ContainmentAnalysis containmentAnalysis;
 	private final @NonNull FinalAnalysis finalAnalysis;
 	protected final @NonNull CompleteClass oclVoidCompleteClass;
