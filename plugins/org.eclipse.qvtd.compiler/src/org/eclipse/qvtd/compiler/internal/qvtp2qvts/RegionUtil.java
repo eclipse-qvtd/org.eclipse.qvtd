@@ -89,7 +89,7 @@ public class RegionUtil
 		Property property = PivotUtil.getReferredProperty(navigationCallExp);
 		boolean isMatched = sourceNode.isMatched() && isMatched(property);
 		NodeRole nodeRole = getPatternNodeRole(sourceNode, property);
-		assert sourceNode.isClass();
+		assert sourceNode.isClass() || (property.getOpposite() != null);	// FIXME review is this relevant?
 		String name = property.getName();
 		assert name != null;
 		Region region = sourceNode.getRegion();
@@ -102,7 +102,7 @@ public class RegionUtil
 		NodeRole nodeRole = targetNode.getNodeRole();
 		Property property = QVTcoreUtil.getTargetProperty(navigationAssignment);
 		//		PatternNodeRole nodeRole = PatternNodeRole.getDataTypeNodeRole(targetNode, property);
-		//		assert sourceNode.isClass();
+		//		assert sourceNode.isClass();	// FIXME review is this relevant?
 		String name = property.getName();
 		assert name != null;
 		org.eclipse.ocl.pivot.Class type = (org.eclipse.ocl.pivot.Class)property.getType();
