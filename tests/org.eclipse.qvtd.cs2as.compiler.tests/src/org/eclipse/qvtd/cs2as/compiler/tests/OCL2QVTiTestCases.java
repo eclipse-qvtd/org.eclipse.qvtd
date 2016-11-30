@@ -33,6 +33,12 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.xtext.completeocl.CompleteOCLStandaloneSetup;
 import org.eclipse.qvtd.compiler.CompilerChain.Key;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.BasicMappingRegion;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.EarlyMergedMappingRegion;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.LateMergedMappingRegion;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.MicroMappingRegion;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RootScheduledRegion;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.cs2as.compiler.CS2ASJavaCompilerParameters;
 import org.eclipse.qvtd.cs2as.compiler.internal.CS2ASJavaCompilerImpl;
@@ -86,6 +92,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		protected final @NonNull String testName;
 		protected final @NonNull URI baseURI;
 		//		protected final @NonNull URI samplesBaseUri;
+		private final @NonNull Map<@NonNull Class<? extends Region>, @NonNull Integer> regionClass2count = new HashMap<>();
 
 		public MyQVT(@NonNull String testName) {
 			super(new QVTiEnvironmentFactory(getProjectMap(), null));
@@ -99,6 +106,10 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 			URI ecoreURI = URI.createURI(EcorePackage.eNS_URI);
 			getProjectManager().getPackageDescriptor(ecoreURI).configure(getResourceSet(), StandaloneProjectMap.LoadFirstStrategy.INSTANCE,
 				StandaloneProjectMap.MapToFirstConflictHandler.INSTANCE);
+		}
+
+		public void assertRegionCount(@NonNull Class<? extends Region> regionClass, @NonNull Integer count) {
+			assertEquals("Region " + regionClass.getSimpleName() + " count:", count != 0 ? count : null, regionClass2count.get(regionClass));
 		}
 
 		//
@@ -160,7 +171,21 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 			for (int i=0; i < extendedOclDocs.length; i++) {
 				oclDocURIs[i] = baseURI.appendSegment(extendedOclDocs[i]);
 			}
-			OCL2QVTiCompilerChain compiler = new OCL2QVTiCompilerChain(this, createTestCasesCompilerOptions(), mainOclDocURI, oclDocURIs);
+			OCL2QVTiCompilerChain compiler = new OCL2QVTiCompilerChain(this, createTestCasesCompilerOptions(), mainOclDocURI, oclDocURIs)
+			{
+				@Override
+				protected @NonNull QVTp2QVTsCompilerStep createQVTp2QVTsCompilerStep() {
+					return new QVTp2QVTsCompilerStep(this)
+					{
+						@Override
+						public @NonNull RootScheduledRegion execute(@NonNull Resource pResource) throws IOException {
+							RootScheduledRegion rootRegion = super.execute(pResource);
+							instrumentRegion(rootRegion);
+							return rootRegion;
+						}
+					};
+				}
+			};
 			ImperativeTransformation qvtiTransf = compiler.compile();
 			URI txURI = qvtiTransf.eResource().getURI();
 			if (txURI != null) {
@@ -169,6 +194,15 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 				doSerialize(inputURI, serializedURI);
 			}
 			return qvtiTransf;
+		}
+
+		private void instrumentRegion(@NonNull Region parentRegion) {
+			Class<? extends @NonNull Region> regionClass = parentRegion.getClass();
+			Integer count = regionClass2count.get(regionClass);
+			regionClass2count.put(regionClass, count == null ? 1 : count+1);
+			for (@NonNull Region childRegion : parentRegion.getCallableChildren()) {
+				instrumentRegion(childRegion);
+			}
 		}
 
 		protected void loadEcoreFile(String ecoreFileName, EPackage ePackage) {
@@ -262,6 +296,10 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		myQVT.loadGenModels("SourceMM1.genmodel", "TargetMM1.genmodel");
 		myQVT.loadEcoreFile("EnvExample1.ecore", example1.target.lookup.EnvironmentPackage.eINSTANCE);
 		Transformation qvtiTransf = myQVT.executeNewOCL2QVTi_CompilerChain("Source2Target.ocl");
+		myQVT.assertRegionCount(BasicMappingRegion.class, 19);
+		myQVT.assertRegionCount(EarlyMergedMappingRegion.class, 2);
+		myQVT.assertRegionCount(LateMergedMappingRegion.class, 0);
+		myQVT.assertRegionCount(MicroMappingRegion.class, 0);
 		CS2ASJavaCompilerParameters cgParams = new CS2ASJavaCompilerParametersImpl(
 			"example1.target.lookup.util.TargetLookupSolver",
 			"example1.target.lookup.util.TargetLookupResult",
@@ -333,6 +371,10 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		myQVT.loadGenModels("ClassesCS.genmodel", "Classes.genmodel");
 		myQVT.loadEcoreFile("EnvExample2.ecore", example2.classes.lookup.EnvironmentPackage.eINSTANCE);
 		Transformation qvtiTransf = myQVT.executeNewOCL2QVTi_CompilerChain("classescs2as.ocl");
+		myQVT.assertRegionCount(BasicMappingRegion.class, 5);
+		myQVT.assertRegionCount(EarlyMergedMappingRegion.class, 2);
+		myQVT.assertRegionCount(LateMergedMappingRegion.class, 0);
+		myQVT.assertRegionCount(MicroMappingRegion.class, 0);
 		CS2ASJavaCompilerParameters cgParams = new CS2ASJavaCompilerParametersImpl(
 			"example2.classes.lookup.util.ClassesLookupSolver",
 			"example2.classes.lookup.util.ClassesLookupResult",
@@ -398,6 +440,10 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		MyQVT myQVT = new MyQVT("example2");
 		myQVT.loadGenModels("ClassesCS.genmodel", "Classes.genmodel");
 		Transformation qvtiTransf = myQVT.executeNewOCL2QVTi_CompilerChain("classescs2asV2.ocl");
+		myQVT.assertRegionCount(BasicMappingRegion.class, 19);
+		myQVT.assertRegionCount(EarlyMergedMappingRegion.class, 5);
+		myQVT.assertRegionCount(LateMergedMappingRegion.class, 0);
+		myQVT.assertRegionCount(MicroMappingRegion.class, 0);
 		CS2ASJavaCompilerParameters cgParams = new CS2ASJavaCompilerParametersImpl(
 			"example2.classes.lookup.util.ClassesLookupSolver",
 			"example2.classes.lookup.util.ClassesLookupResult",
@@ -487,6 +533,10 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		MyQVT myQVT = new MyQVT("example3");
 		myQVT.loadGenModels("KiamaAS.genmodel", "KiamaCS.genmodel");
 		Transformation qvtiTransf = myQVT.executeNewOCL2QVTi_CompilerChain("KiamaRewrite.ocl");
+		myQVT.assertRegionCount(BasicMappingRegion.class, 8);
+		myQVT.assertRegionCount(EarlyMergedMappingRegion.class, 1);
+		myQVT.assertRegionCount(LateMergedMappingRegion.class, 0);
+		myQVT.assertRegionCount(MicroMappingRegion.class, 0);
 		CS2ASJavaCompilerParameters cgParams = new CS2ASJavaCompilerParametersImpl("","",
 			TESTS_GEN_PATH, TESTS_PACKAGE_NAME);
 		Class<? extends Transformer> txClass = new CS2ASJavaCompilerImpl().compileTransformation(myQVT, qvtiTransf, cgParams);
@@ -540,6 +590,10 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		MyQVT myQVT = new MyQVT("example4");
 		myQVT.loadGenModels("SimplerKiamaAS.genmodel", "SimplerKiamaCS.genmodel");
 		Transformation qvtiTransf = myQVT.executeNewOCL2QVTi_CompilerChain("SimplerKiama.ocl");
+		myQVT.assertRegionCount(BasicMappingRegion.class, 7);
+		myQVT.assertRegionCount(EarlyMergedMappingRegion.class, 1);
+		myQVT.assertRegionCount(LateMergedMappingRegion.class, 0);
+		myQVT.assertRegionCount(MicroMappingRegion.class, 0);
 		CS2ASJavaCompilerParameters cgParams = new CS2ASJavaCompilerParametersImpl("","",
 			TESTS_GEN_PATH, TESTS_PACKAGE_NAME);
 		Class<? extends Transformer> txClass = new CS2ASJavaCompilerImpl().compileTransformation(myQVT, qvtiTransf, cgParams);
@@ -579,7 +633,10 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		MyQVT myQVT = new MyQVT("example5");
 		myQVT.loadGenModels("SourceBaseMM.genmodel", "TargetBaseMM.genmodel");
 		Transformation qvtiTransf = myQVT.executeNewOCL2QVTi_CompilerChain("Source2TargetBase.ocl");
-
+		myQVT.assertRegionCount(BasicMappingRegion.class, 5);
+		myQVT.assertRegionCount(EarlyMergedMappingRegion.class, 2);
+		myQVT.assertRegionCount(LateMergedMappingRegion.class, 0);
+		myQVT.assertRegionCount(MicroMappingRegion.class, 0);
 		CS2ASJavaCompilerParameters cgParams = new CS2ASJavaCompilerParametersImpl(
 			"",
 			"",

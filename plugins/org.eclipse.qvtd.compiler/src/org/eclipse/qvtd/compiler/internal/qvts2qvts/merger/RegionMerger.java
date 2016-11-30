@@ -23,7 +23,7 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Edge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.MappingRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.MicroMappingRegion;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NamedMappingRegion;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.EarlyMergedMappingRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
 
@@ -212,7 +212,7 @@ class RegionMerger // implements Region
 	}
 
 	protected @NonNull MappingRegion createNewRegion(@NonNull String newName) {
-		return new NamedMappingRegion(primaryRegion.getMultiRegion(), newName);
+		return new EarlyMergedMappingRegion(primaryRegion.getMultiRegion(), newName);
 	}
 
 	protected @NonNull EdgeMerger getEdgeMerger(@NonNull Edge oldEdge) {

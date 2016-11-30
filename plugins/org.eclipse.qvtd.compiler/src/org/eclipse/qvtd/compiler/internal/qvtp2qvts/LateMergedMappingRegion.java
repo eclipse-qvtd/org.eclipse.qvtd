@@ -12,11 +12,11 @@ package org.eclipse.qvtd.compiler.internal.qvtp2qvts;
 
 import org.eclipse.jdt.annotation.NonNull;
 
-public class NamedMappingRegion extends AbstractMappingRegion
+public class LateMergedMappingRegion extends AbstractMappingRegion
 {
 	protected final @NonNull String name;
 
-	public NamedMappingRegion(@NonNull MultiRegion multiRegion, @NonNull String name) {
+	public LateMergedMappingRegion(@NonNull MultiRegion multiRegion, @NonNull String name) {
 		super(multiRegion);
 		this.name = name;
 	}
