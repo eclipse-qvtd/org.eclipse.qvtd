@@ -24,8 +24,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Class;
-import org.eclipse.ocl.pivot.CollectionType;
-import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.CompleteModel;
 import org.eclipse.ocl.pivot.Import;
 import org.eclipse.ocl.pivot.Model;
@@ -36,15 +34,12 @@ import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotConstants;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.RealizedAnalysis;
 import org.eclipse.qvtd.compiler.internal.utilities.SymbolNameBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage;
-import org.eclipse.qvtd.pivot.schedule.ClassDatum;
-import org.eclipse.qvtd.pivot.schedule.PropertyDatum;
-
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Sets;
 
 public class RootScheduledRegion extends AbstractScheduledRegion
 {
@@ -80,6 +75,8 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 	 */
 	private final @NonNull Map<@NonNull Model, @NonNull DomainUsage> inputModels = new HashMap<>();
 
+	private final @NonNull RealizedAnalysis creationAnalysis;
+
 	/**
 	 * Mapping from each input class to the composite properties that may contain the class or its subclasses.
 	 *-- The mapping incorporates an inheritance closure; a composition property that may compose B instances
@@ -112,28 +109,20 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 	 */
 	private final @NonNull Map<@NonNull ClassDatumAnalysis, @NonNull List<@NonNull Node>> introducedClassDatumAnalysis2nodes = new HashMap<>();
 
-	/**
-	 * The Realized Nodes that produce each ClassDatum.
-	 */
-	private final @NonNull Map<@NonNull ClassDatumAnalysis, @NonNull List<@NonNull Node>> producedClassDatumAnalysis2realizedNodes = new HashMap<>();
-
-	/**
-	 * The Realized Edges that produce each PropertyDatum (or its opposite).
-	 */
-	private final @NonNull Map<@NonNull PropertyDatum, @NonNull List<@NonNull NavigableEdge>> producedPropertyDatum2realizedEdges = new HashMap<>();
-
 	private final @NonNull RootCompositionRegion rootContainmentRegion = new RootCompositionRegion(multiRegion);
 
 	public RootScheduledRegion(@NonNull String name, @NonNull Region primaryRegion) {
 		super(primaryRegion.getMultiRegion());
 		this.name = name;
 		this.completeModel = getSchedulerConstants().getEnvironmentFactory().getCompleteModel();
+		this.creationAnalysis = new RealizedAnalysis(getSchedulerConstants());
 	}
 
 	public RootScheduledRegion(@NonNull String name, @NonNull List<Region> regions) {
 		super(ClassUtil.nonNullState(regions.get(0)).getMultiRegion());
 		this.name = name;
 		this.completeModel = getSchedulerConstants().getEnvironmentFactory().getCompleteModel();
+		this.creationAnalysis = new RealizedAnalysis(getSchedulerConstants());
 		for (@SuppressWarnings("null")@NonNull Region region : regions) {
 			addRegion(region);
 		}
@@ -231,47 +220,13 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 	}
 
 	private void addIntroducedNode(@NonNull Node introducedNode) {
-		ClassDatumAnalysis classDatumAnalysis = getElementalClassDatumAnalysis(introducedNode);
+		ClassDatumAnalysis classDatumAnalysis = getSchedulerConstants().getElementalClassDatumAnalysis(introducedNode);
 		List<@NonNull Node> nodes = introducedClassDatumAnalysis2nodes.get(classDatumAnalysis);
 		if (nodes == null) {
 			nodes = new ArrayList<>();
 			introducedClassDatumAnalysis2nodes.put(classDatumAnalysis, nodes);
 		}
 		nodes.add(introducedNode);
-	}
-
-	private void addProducedEdge(@NonNull NavigableEdge producedEdge) {
-		PropertyDatum propertyDatum = basicGetPropertyDatum(producedEdge);
-		if (propertyDatum == null) {
-			propertyDatum = basicGetPropertyDatum(producedEdge);		// FIXME debugging
-		}
-		assert propertyDatum != null;
-		addProducedEdge(producedEdge, propertyDatum);
-	}
-	private void addProducedEdge(@NonNull NavigableEdge producedEdge, @NonNull PropertyDatum propertyDatum) {
-		List<@NonNull NavigableEdge> edges = producedPropertyDatum2realizedEdges.get(propertyDatum);
-		if (edges == null) {
-			edges = new ArrayList<>();
-			producedPropertyDatum2realizedEdges.put(propertyDatum, edges);
-		}
-		if (!edges.contains(producedEdge)) {
-			edges.add(producedEdge);
-			for (@NonNull PropertyDatum superAbstractDatum : ClassUtil.nullFree(propertyDatum.getSuper())) {
-				addProducedEdge(producedEdge, superAbstractDatum);
-			}
-		}
-	}
-
-	private void addProducedNode(@NonNull Node producedNode) {
-		ClassDatumAnalysis classDatumAnalysis = getElementalClassDatumAnalysis(producedNode);
-		for (@NonNull ClassDatumAnalysis superClassDatumAnalysis : classDatumAnalysis.getSuperClassDatumAnalyses()) {
-			List<@NonNull Node> nodes = producedClassDatumAnalysis2realizedNodes.get(superClassDatumAnalysis);
-			if (nodes == null) {
-				nodes = new ArrayList<>();
-				producedClassDatumAnalysis2realizedNodes.put(superClassDatumAnalysis, nodes);
-			}
-			nodes.add(producedNode);
-		}
 	}
 
 	/*	private void assignDepths() {
@@ -310,68 +265,73 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 		Edges.USED_BINDING.createEdge(this, joinNode, null, usedNode);
 	} */
 
-	protected @Nullable PropertyDatum basicGetPropertyDatum(@NonNull NavigableEdge producedEdge) {
-		assert !producedEdge.isCast();				// Handled by caller
-		Property forwardProperty = producedEdge.getProperty();
-		ClassDatumAnalysis classDatumAnalysis = producedEdge.getSource().getClassDatumAnalysis();
-		ClassDatum forwardClassDatum = classDatumAnalysis.getElementalClassDatum();
-		//		PropertyDatum forwardPropertyDatum = getSchedulerConstants().getPropertyDatum(forwardClassDatum, property);
-		//		if (forwardPropertyDatum.getClassDatum() == forwardClassDatum) {
-		//			return forwardPropertyDatum;
-		//		}
-		Iterable<@NonNull PropertyDatum> forwardPropertyDatums = getSchedulerConstants().getAllPropertyDatums(forwardClassDatum);
-		for (PropertyDatum propertyDatum : forwardPropertyDatums) {
-			if ((propertyDatum.getProperty() == forwardProperty) && (propertyDatum.getClassDatum() == forwardClassDatum)) {
-				return propertyDatum;
-			}
-		}
-		PropertyDatum bestPropertyDatum = null;
-		for (PropertyDatum propertyDatum : forwardPropertyDatums) {
-			if (propertyDatum.getProperty() == forwardProperty) {
-				if (bestPropertyDatum == null) {
-					bestPropertyDatum = propertyDatum;
-				}
-				else {
-					CompleteClass completeClass = propertyDatum.getClassDatum().getCompleteClass();
-					assert completeClass != null;
-					Set<@NonNull CompleteClass> allSuperCompleteClasses = Sets.newHashSet(completeClass.getProperSuperCompleteClasses());
-					if (allSuperCompleteClasses.contains(bestPropertyDatum.getClassDatum().getCompleteClass())) {
-						bestPropertyDatum = propertyDatum;
+	/*	private void computeProperty2introducedClasses() {
+		//
+		//	Find the composite properties for each consumed class and its super classes, and accumulate
+		//	the container classes of all used properties as additional consumed classes.
+		//
+		Set<ClassDatumAnalysis> allConsumedClassDatumAnalyses = new HashSet<>(consumedClassDatumAnalysis2headNodes.keySet());
+		List<ClassDatumAnalysis> allConsumedClassDatumAnalysesList = new ArrayList<>(allConsumedClassDatumAnalyses);
+		for (int i = 0; i < allConsumedClassDatumAnalysesList.size(); i++) {
+			ClassDatumAnalysis consumedClassDatumAnalysis = allConsumedClassDatumAnalysesList.get(i);
+			for (@SuppressWarnings("null")@NonNull ClassDatumAnalysis consumedSuperClassDatumAnalysis : consumedClassDatumAnalysis.getSuperClassDatumAnalyses()) {
+				Set<Property> compositeProperties = containedClassDatumAnalysisClosure2compositeProperties.get(consumedSuperClassDatumAnalysis);
+				if (compositeProperties != null) {
+					for (Property compositeProperty : compositeProperties) {
+						Set<Property> consumedCompositeProperties = consumedClassDatumAnalysis2compositionProperties.get(consumedClassDatumAnalysis);
+						if (consumedCompositeProperties == null) {
+							consumedCompositeProperties = new HashSet<>();
+							consumedClassDatumAnalysis2compositionProperties.put(consumedClassDatumAnalysis, consumedCompositeProperties);
+						}
+						consumedCompositeProperties.add(compositeProperty);
+						Set<ClassDatumAnalysis> introducedClassDatumAnalyses = consumedCompositeProperty2introducedClassDatumAnalyses.get(compositeProperty);
+						if (introducedClassDatumAnalyses == null) {
+							introducedClassDatumAnalyses = new HashSet<>();
+							consumedCompositeProperty2introducedClassDatumAnalyses.put(compositeProperty, introducedClassDatumAnalyses);
+						}
+						introducedClassDatumAnalyses.add(consumedSuperClassDatumAnalysis);
+						org.eclipse.ocl.pivot.Class containerClass = compositeProperty.getOwningClass();
+						assert containerClass != null;
+						ClassDatumAnalysis containerSuperClassDatumAnalysis = getSchedulerConstants().getClassDatumAnalysis(containerClass, consumedSuperClassDatumAnalysis.getDomainUsage());
+						if (allConsumedClassDatumAnalyses.add(containerSuperClassDatumAnalysis)) {
+							allConsumedClassDatumAnalysesList.add(containerSuperClassDatumAnalysis);
+						}
 					}
 				}
 			}
 		}
-		if (bestPropertyDatum != null) {
-			return bestPropertyDatum;
-		}
-		Property reverseProperty = forwardProperty.getOpposite();
-		classDatumAnalysis = producedEdge.getTarget().getClassDatumAnalysis();
-		ClassDatum reverseClassDatum = classDatumAnalysis.getElementalClassDatum();
-		Iterable<@NonNull PropertyDatum> reversePropertyDatums = getSchedulerConstants().getAllPropertyDatums(reverseClassDatum);
-		for (PropertyDatum propertyDatum : reversePropertyDatums) {
-			if ((propertyDatum.getProperty() == reverseProperty) && (propertyDatum.getClassDatum() == reverseClassDatum)) {
-				return propertyDatum;
-			}
-		}
-		for (PropertyDatum propertyDatum : reversePropertyDatums) {
-			if (propertyDatum.getProperty() == reverseProperty) {
-				if (bestPropertyDatum == null) {
-					bestPropertyDatum = propertyDatum;
-				}
-				else {
-					CompleteClass completeClass = propertyDatum.getClassDatum().getCompleteClass();
-					assert completeClass != null;
-					Set<@NonNull CompleteClass> allSuperCompleteClasses = Sets.newHashSet(completeClass.getProperSuperCompleteClasses());
-					if (allSuperCompleteClasses.contains(bestPropertyDatum.getClassDatum().getCompleteClass())) {
-						bestPropertyDatum = propertyDatum;
+		assert allConsumedClassDatumAnalyses.size() == allConsumedClassDatumAnalysesList.size();
+		//
+		//	Find the composite properties for which a superclass of a contained class is a consumed class.
+		//
+		for (Entry<ClassDatumAnalysis, Set<Property>> entry : containedClassDatumAnalysisClosure2compositeProperties.entrySet()) {
+			ClassDatumAnalysis classDatumAnalysis = entry.getKey();
+			for (@SuppressWarnings("null")@NonNull ClassDatumAnalysis superClassDatumAnalysis : classDatumAnalysis.getSuperClassDatumAnalyses()) {
+				if (consumedClassDatumAnalysis2headNodes.get(superClassDatumAnalysis) != null) {
+					for (Property compositeProperty : entry.getValue()) {
+						Set<ClassDatumAnalysis> introducedClassDatumAnalyses = consumedCompositeProperty2introducedClassDatumAnalyses.get(compositeProperty);
+						if (introducedClassDatumAnalyses == null) {
+							introducedClassDatumAnalyses = new HashSet<>();
+							consumedCompositeProperty2introducedClassDatumAnalyses.put(compositeProperty, introducedClassDatumAnalyses);
+						}
+						introducedClassDatumAnalyses.add(superClassDatumAnalysis);
 					}
 				}
 			}
 		}
-		if (bestPropertyDatum != null) {
-			return bestPropertyDatum;
+	} */
+
+	/**
+	 * Identify all the classes that are produced by mappings.
+	 */
+	private void computeClassDatumAnalysis2realizedNodes() {
+		//
+		//	Single-node head groups contribute a corresponding consumed class provided the
+		//	class is part of the input model and is not an internal convenience.
+		//
+		for (@NonNull Region region : getRegions()) {
+			creationAnalysis.addRegion(region);
 		}
-		return null;
 	}
 
 	/**
@@ -625,26 +585,6 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 		}
 	} */
 
-	/**
-	 * Identify all the classes that are produced by mappings.
-	 */
-	private void computeProducedClassDatumAnalysis2realizedNodes() {
-		//
-		//	Single-node head groups contribute a corresponding consumed class provided the
-		//	class is part of the input model and is not an internal convenience.
-		//
-		for (@NonNull Region region : getRegions()) {
-			for (@NonNull Node assignedNode : region.getAssignedNodes()) {
-				if (assignedNode.isClass()) {
-					addProducedNode(assignedNode);
-				}
-			}
-			for (@NonNull NavigableEdge realizedNavigationEdge : region.getRealizedNavigationEdges()) {
-				addProducedEdge(realizedNavigationEdge);
-			}
-		}
-	}
-
 	@Override
 	protected @NonNull SymbolNameBuilder computeSymbolName() {
 		SymbolNameBuilder s = new SymbolNameBuilder();
@@ -803,11 +743,11 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 			QVTp2QVTs.DUMP_CLASS_TO_CONTAINING_PROPERTIES.println(dumpClass2ContainingProperties().reduce("", stringJoin("\n\t")));
 		}
 		//
-		//	Identify all classes that are produced by mappings.
+		//	Identify all classes and edges that are realized by mappings.
 		//
-		computeProducedClassDatumAnalysis2realizedNodes();
+		computeClassDatumAnalysis2realizedNodes();
 		if (QVTp2QVTs.DUMP_CLASS_TO_REALIZED_NODES.isActive()) {
-			QVTp2QVTs.DUMP_CLASS_TO_REALIZED_NODES.println(dumpClass2ProducingNode().reduce("", stringJoin("\n\t")));
+			QVTp2QVTs.DUMP_CLASS_TO_REALIZED_NODES.println(dumpClass2RealizedNode().reduce("", stringJoin("\n\t")));
 		}
 		//
 		//	Identify all classes that are consumed as independent inputs of mappings.
@@ -973,10 +913,11 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 		return entries.sorted();
 	}
 
-	public Stream<String> dumpClass2ProducingNode() {
-		Stream<String> entries = producedClassDatumAnalysis2realizedNodes.keySet().stream().map(
+	public Stream<String> dumpClass2RealizedNode() {
+		Map<@NonNull ClassDatumAnalysis, @NonNull List<@NonNull Node>> classDatumAnalysis2realizedNodes = creationAnalysis.getClassDatumAnalysis2realizedNodes();
+		Stream<String> entries = classDatumAnalysis2realizedNodes.keySet().stream().map(
 			k -> {
-				List<Node> list = producedClassDatumAnalysis2realizedNodes.get(k);
+				List<Node> list = classDatumAnalysis2realizedNodes.get(k);
 				assert list != null;
 				return k.getDomainUsage() + " " + String.valueOf(k) + " : " +
 				list.stream().map(
@@ -994,62 +935,13 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 		return entries.sorted();
 	}
 
-	/**
-	 * Return all Realized NavigationEdges corresponding to predicatedEdge that navigate an isComposite property in either direction.
-	 * Returns null in the very unusual event that there are none.
-	 *
-	 * It is assumed that edge is an predicated oclContainer edge to which almost all containment edges are compatible for a pathological
-	 * input model whose metamodel extends the transformed metamodel with derived classes that merge the containment relationship
-	 * of predicated/realized candidates.
-	 *
-	 * FIXME In the event that the ends of the realized edges are realized variables, we do know the precise
-	 * type and could filter accordingly; a not-yet-exploited optimisation.
-	 */
-	private @Nullable Iterable<@NonNull NavigableEdge> getCompositeRealizedEdges(@NonNull NavigableEdge predicatedEdge) {
-		Set<@NonNull NavigableEdge> realizedEdges = null;
-		for (Map.Entry<@NonNull PropertyDatum, @NonNull List<@NonNull NavigableEdge>> entry : producedPropertyDatum2realizedEdges.entrySet()) {
-			Property property = entry.getKey().getProperty();
-			if (property != null) {
-				@Nullable Property compositeProperty = null;
-				if (property.isIsComposite()) {
-					compositeProperty = property;
-				}
-				else {
-					Property oppositeProperty = property.getOpposite();
-					if ((oppositeProperty != null) && oppositeProperty.isIsComposite()) {
-						compositeProperty = oppositeProperty;
-					}
-				}
-				if (compositeProperty != null) {
-					if (realizedEdges == null) {
-						realizedEdges = new HashSet<>();
-					}
-					realizedEdges.addAll(entry.getValue());
-				}
-			}
-		}
-		return realizedEdges;
-	}
-
-	protected @NonNull ClassDatumAnalysis getElementalClassDatumAnalysis(@NonNull Node calledNode) {
-		ClassDatumAnalysis classDatumAnalysis = calledNode.getClassDatumAnalysis();
-		CompleteClass completeClass = classDatumAnalysis.getCompleteClass();
-		org.eclipse.ocl.pivot.Class primaryClass = completeClass.getPrimaryClass();
-		if (primaryClass instanceof CollectionType) {
-			org.eclipse.ocl.pivot.Class elementType = (org.eclipse.ocl.pivot.Class)((CollectionType)primaryClass).getElementType();
-			assert elementType != null;
-			classDatumAnalysis = getSchedulerConstants().getClassDatumAnalysis(elementType, classDatumAnalysis.getTypedModel());
-		}
-		return classDatumAnalysis;
-	}
-
 	@Override
 	public @NonNull List<@NonNull Node> getHeadNodes() {
 		return QVTp2QVTs.EMPTY_NODE_LIST;
 	}
 
-	public @Nullable Iterable<@NonNull Node> getIntroducingNodes(@NonNull ClassDatumAnalysis classDatumAnalysis) {
-		/*	List<Node> introducingNodes = null;
+	/*	public @Nullable Iterable<@NonNull Node> getIntroducingNodes(@NonNull ClassDatumAnalysis classDatumAnalysis) {
+		/ *	List<Node> introducingNodes = null;
 		CompleteClass completeClass = classDatumAnalysis.getCompleteClass();
 		for (ClassDatumAnalysis aClassDatumAnalysis : introducedClassDatumAnalysis2nodes.keySet()) {		// FIXME cache
 			if (completeClass.conformsTo(aClassDatumAnalysis.getCompleteClass())) {
@@ -1058,39 +950,18 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 				}
 				introducingNodes.addAll(introducedClassDatumAnalysis2nodes.get(aClassDatumAnalysis));
 			}
-		} */
+		} * /
 		return introducedClassDatumAnalysis2nodes.get(classDatumAnalysis);	// Separate introduction of each consumed type
-	}
+	} */
 
-	public @Nullable Iterable<@NonNull Node> getIntroducingOrProducingNodes(@NonNull Node headNode) {
+	public @Nullable Iterable<@NonNull Node> getIntroducingOrRealizedNodes(@NonNull Node headNode) {
 		ClassDatumAnalysis classDatumAnalysis = headNode.getClassDatumAnalysis();
 		if (classDatumAnalysis.getDomainUsage().isInput()) {
 			return Collections.singletonList(rootContainmentRegion.getIntroducerNode(headNode));
 		}
 		else {
-			return getIntroducingOrProducingNodes(classDatumAnalysis);
+			return creationAnalysis.getRealizedNodes(classDatumAnalysis);
 		}
-	}
-
-	public @Nullable Iterable<@NonNull Node> getIntroducingOrProducingNodes(@NonNull ClassDatumAnalysis classDatumAnalysis) {
-		//		Iterable<@NonNull Node> introducedNodes = introducedClassDatumAnalysis2nodes.get(classDatumAnalysis);
-		Iterable<@NonNull Node> producedNodes = producedClassDatumAnalysis2realizedNodes.get(classDatumAnalysis);
-		//		if (introducedNodes != null) {
-		//			if (producedNodes != null) {
-		//				return Iterables.concat(introducedNodes, producedNodes);
-		//			}
-		//			else {
-		//				return introducedNodes;
-		//			}
-		//		}
-		//		else {
-		if (producedNodes != null) {
-			return producedNodes;
-		}
-		else {
-			return null;
-		}
-		//		}
 	}
 
 	/*	public @NonNull List<ConnectionRegion> getConnectionRegions(@NonNull Region toRegion) {
@@ -1122,37 +993,11 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 	}
 
 	public @Nullable Iterable<@NonNull NavigableEdge> getRealizedEdges(@NonNull NavigableEdge edge, @NonNull ClassDatumAnalysis requiredClassDatumAnalysis) {
-		Property property = edge.getProperty();
-		if (property.eContainer() == null) {			// Ignore pseudo-properties such as «iterate»
-			return null;
-		}
-		PropertyDatum propertyDatum = basicGetPropertyDatum(edge);
-		if (propertyDatum == null) {
-			if (property == getStandardLibraryHelper().getOclContainerProperty()) {
-				return getCompositeRealizedEdges(edge);
-			}
-			propertyDatum = basicGetPropertyDatum(edge);				// FIXME debugging
-		}
-		if (propertyDatum == null) {			// May be null for edges only used by operation dependencies
-			return null;
-		}
-		Iterable<@NonNull NavigableEdge> realizedEdges = producedPropertyDatum2realizedEdges.get(propertyDatum);
-		if (realizedEdges == null) {
-			return null;
-		}
-		CompleteClass requiredClass = requiredClassDatumAnalysis.getCompleteClass();
-		List<@NonNull NavigableEdge> conformantRealizedEdges = null;
-		for (@NonNull NavigableEdge realizedEdge : realizedEdges) {
-			Node targetNode = realizedEdge.getTarget();
-			CompleteClass realizedClass = targetNode.getCompleteClass();
-			if (realizedClass.conformsTo(requiredClass) /*|| realizedClass.conformsTo(requiredClass.getBehavioralClass())*/) {
-				if (conformantRealizedEdges == null) {
-					conformantRealizedEdges = new ArrayList<>();
-				}
-				conformantRealizedEdges.add(realizedEdge);
-			}
-		}
-		return conformantRealizedEdges;
+		return creationAnalysis.getRealizedEdges(edge, requiredClassDatumAnalysis);
+	}
+
+	public @Nullable Iterable<@NonNull Node> getRealizedNodes(@NonNull ClassDatumAnalysis classDatumAnalysis) {
+		return creationAnalysis.getRealizedNodes(classDatumAnalysis);
 	}
 
 	@Override

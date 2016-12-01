@@ -249,6 +249,18 @@ public abstract class SchedulerConstants
 		return ClassUtil.nonNullState(analysis.getUsage(element));
 	}
 
+	public @NonNull ClassDatumAnalysis getElementalClassDatumAnalysis(@NonNull Node calledNode) {
+		ClassDatumAnalysis classDatumAnalysis = calledNode.getClassDatumAnalysis();
+		CompleteClass completeClass = classDatumAnalysis.getCompleteClass();
+		org.eclipse.ocl.pivot.Class primaryClass = completeClass.getPrimaryClass();
+		if (primaryClass instanceof CollectionType) {
+			org.eclipse.ocl.pivot.Class elementType = (org.eclipse.ocl.pivot.Class)((CollectionType)primaryClass).getElementType();
+			assert elementType != null;
+			classDatumAnalysis = getClassDatumAnalysis(elementType, classDatumAnalysis.getTypedModel());
+		}
+		return classDatumAnalysis;
+	}
+
 	public @NonNull EnvironmentFactory getEnvironmentFactory() {
 		return environmentFactory;
 	}

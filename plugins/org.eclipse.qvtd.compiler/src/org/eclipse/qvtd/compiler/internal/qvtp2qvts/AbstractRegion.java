@@ -922,7 +922,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 			}
 		}
 		else {
-			Iterable<@NonNull Node> sourceNodes = rootScheduledRegion.getIntroducingOrProducingNodes(classDatumAnalysis);
+			Iterable<@NonNull Node> sourceNodes = rootScheduledRegion.getRealizedNodes(classDatumAnalysis);
 			//			if (sourceNodes != null) {
 			Iterable<@NonNull NavigableEdge> realizedEdges = rootScheduledRegion.getRealizedEdges(predicatedEdge, classDatumAnalysis);
 			if (realizedEdges != null) {
@@ -1018,7 +1018,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 		//
 		//	Locate compatible introducers and non-recursive producers
 		//
-		Iterable<@NonNull Node> sourceNodes = rootScheduledRegion.getIntroducingOrProducingNodes(headNode);
+		Iterable<@NonNull Node> sourceNodes = rootScheduledRegion.getIntroducingOrRealizedNodes(headNode);
 		if (sourceNodes != null) {
 			for (@NonNull Node sourceNode : sourceNodes) {
 				Region sourceRegion = sourceNode.getRegion();
