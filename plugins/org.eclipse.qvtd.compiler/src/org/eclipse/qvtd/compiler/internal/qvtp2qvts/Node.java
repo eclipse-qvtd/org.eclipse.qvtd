@@ -60,8 +60,6 @@ public interface Node extends ConnectionEnd, GraphStringBuilder.GraphNode, Namea
 	 */
 	void getAllAncestors(@NonNull Set<@NonNull Node> ancestors);
 	@NonNull Iterable<@NonNull Edge> getArgumentEdges();
-	@Nullable Edge getAssignmentEdge(@NonNull Property source2targetProperty);
-	@NonNull Iterable<@NonNull NavigableEdge> getAssignmentEdges();
 	@NonNull Iterable<@NonNull NavigableEdge> getCastEdges();
 	@NonNull ClassDatumAnalysis getClassDatumAnalysis();
 	@NonNull CompleteClass getCompleteClass();

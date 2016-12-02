@@ -236,25 +236,6 @@ public abstract class NodeImpl implements Node
 	}
 
 	@Override
-	public final @Nullable Edge getAssignmentEdge(@NonNull Property source2targetProperty) {
-		for (Edge edge : getOutgoingEdges()) {
-			if (edge.isRealized() && (edge instanceof NavigableEdge)) {
-				if (((NavigableEdge)edge).getProperty() == source2targetProperty) {
-					return edge;
-				}
-			}
-		}
-		return null;
-	}
-
-	@Override
-	public final @NonNull Iterable<@NonNull NavigableEdge> getAssignmentEdges() {
-		@SuppressWarnings("unchecked")
-		Iterable<@NonNull NavigableEdge> filter = (Iterable<@NonNull NavigableEdge>)(Object)Iterables.filter(getOutgoingEdges(), AbstractRegion.IsAssignmentEdgePredicate.INSTANCE);
-		return filter;
-	}
-
-	@Override
 	public final @NonNull Iterable<@NonNull NavigableEdge> getCastEdges() {
 		@SuppressWarnings("unchecked")
 		@NonNull Iterable<@NonNull NavigableEdge> filter = (Iterable<@NonNull NavigableEdge>)(Object)Iterables.filter(getOutgoingEdges(), AbstractRegion.IsCastEdgePredicate.INSTANCE);

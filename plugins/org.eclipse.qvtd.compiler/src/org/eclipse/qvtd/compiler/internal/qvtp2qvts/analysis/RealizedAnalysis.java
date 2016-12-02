@@ -87,7 +87,7 @@ public class RealizedAnalysis
 	}
 
 	public void addRegion(Region region) {
-		for (@NonNull Node assignedNode : region.getAssignedNodes()) {
+		for (@NonNull Node assignedNode : region.getNewNodes()) {
 			if (assignedNode.isClass()) {
 				addRealizedNode(assignedNode);
 			}

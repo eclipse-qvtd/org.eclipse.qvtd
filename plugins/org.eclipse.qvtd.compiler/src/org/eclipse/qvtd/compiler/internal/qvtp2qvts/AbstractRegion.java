@@ -85,26 +85,6 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 		}
 	}
 
-	public static final class IsAssignedNodePredicate implements Predicate<@NonNull Node>
-	{
-		public static final @NonNull IsAssignedNodePredicate INSTANCE = new IsAssignedNodePredicate();
-
-		@Override
-		public boolean apply(@NonNull Node node) {
-			return node.isRealized() || node.isSpeculation();
-		}
-	}
-
-	public static final class IsAssignmentEdgePredicate implements Predicate<@NonNull Edge>
-	{
-		public static final @NonNull IsAssignmentEdgePredicate INSTANCE = new IsAssignmentEdgePredicate();
-
-		@Override
-		public boolean apply(@NonNull Edge edge) {
-			return edge.isRealized();
-		}
-	}
-
 	public static final class IsCallableRegionPredicate implements Predicate<@NonNull Region>
 	{
 		public static final @NonNull IsCallableRegionPredicate INSTANCE = new IsCallableRegionPredicate();
@@ -191,7 +171,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 
 		@Override
 		public boolean apply(@NonNull Node node) {
-			return node.isRealized() || node.isSpeculation();
+			return node.isNew();
 		}
 	}
 
@@ -201,7 +181,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 
 		@Override
 		public boolean apply(@NonNull Node node) {
-			return node.isConstant() || node.isLoaded() || node.isPredicated() || node.isSpeculated();
+			return node.isOld();
 		}
 	}
 
@@ -1311,17 +1291,6 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 			}
 		}
 		return ancestors;
-	}
-
-	@Override
-	public final @NonNull Iterable<@NonNull Node> getAssignedNodes() {
-		return Iterables.filter(nodes, IsAssignedNodePredicate.INSTANCE);
-	}
-
-	public final @NonNull Iterable<@NonNull NavigableEdge> getAssignmentEdges() {
-		@SuppressWarnings("unchecked")
-		@NonNull Iterable<@NonNull NavigableEdge> filter = (Iterable<@NonNull NavigableEdge>)(Object)Iterables.filter(edges, IsAssignmentEdgePredicate.INSTANCE);
-		return filter;
 	}
 
 	protected @Nullable List<@NonNull NavigableEdge> getBestPath(@Nullable List<@NonNull NavigableEdge> bestPath, @Nullable List<@NonNull NavigableEdge> candidatePath) {

@@ -48,7 +48,6 @@ public interface Region extends Visitable, GraphNode, Nameable, Symbolable
 	 * Return all the nodes in this region that are call-tree ancestors of node.
 	 */
 	@NonNull Iterable<@NonNull Node> getAncestorsOf(@NonNull Node node);
-	@NonNull Iterable<@NonNull Node> getAssignedNodes();
 
 	/**
 	 * Return the regions that this region can actually call directly after taking account the connection dependencies.
