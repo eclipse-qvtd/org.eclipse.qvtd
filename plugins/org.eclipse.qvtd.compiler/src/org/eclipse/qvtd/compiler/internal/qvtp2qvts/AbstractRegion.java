@@ -998,7 +998,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 		//
 		//	Locate compatible introducers and non-recursive producers
 		//
-		Iterable<@NonNull Node> sourceNodes = rootScheduledRegion.getIntroducingOrRealizedNodes(headNode);
+		Iterable<@NonNull Node> sourceNodes = rootScheduledRegion.getIntroducingOrNewNodes(headNode);
 		if (sourceNodes != null) {
 			for (@NonNull Node sourceNode : sourceNodes) {
 				Region sourceRegion = sourceNode.getRegion();

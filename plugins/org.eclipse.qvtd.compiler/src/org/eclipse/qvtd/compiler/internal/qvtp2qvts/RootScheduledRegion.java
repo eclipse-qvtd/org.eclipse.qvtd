@@ -13,21 +13,15 @@ package org.eclipse.qvtd.compiler.internal.qvtp2qvts;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.function.BinaryOperator;
 import java.util.stream.Stream;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.Class;
 import org.eclipse.ocl.pivot.CompleteModel;
-import org.eclipse.ocl.pivot.Import;
 import org.eclipse.ocl.pivot.Model;
-import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
@@ -38,6 +32,7 @@ import org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.RealizedAnalysis;
 import org.eclipse.qvtd.compiler.internal.utilities.SymbolNameBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage;
+
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
@@ -78,36 +73,10 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 	private final @NonNull RealizedAnalysis creationAnalysis;
 
 	/**
-	 * Mapping from each input class to the composite properties that may contain the class or its subclasses.
-	 *-- The mapping incorporates an inheritance closure; a composition property that may compose B instances
-	 *-- is also registered as a composition of all of B's superclasses such as OclAny. Consequently a consumer
-	 *-- of some type need only lookup the consumed type to obtain all the composition properties that could
-	 *-- introduce the consumed type; the exact type or its superclasses that may need dynamic type selection.
-	 *-- If an input model is unhelpful enough to provide a composes-OclAny relationship, then this unhelpful
-	 *-- relationship is included in every entry since it must be considered as an introducer for every possible
-	 *-- consumption.
-	 */
-	private final @NonNull Map<@NonNull ClassDatumAnalysis, @NonNull Set<@NonNull Property>> containedClassDatumAnalysis2compositeProperties = new HashMap<>();
-
-	/**
 	 * The input model classes that may be used as independent inputs by mappings and the nodes at which they are consumed.
 	 * In the worst case a flat schedule just permutes allInstances() to provide all mapping inputs.
 	 */
 	private final @NonNull Map<@NonNull ClassDatumAnalysis, @NonNull List<@NonNull Node>> consumedClassDatumAnalysis2headNodes = new HashMap<>();
-
-	/**
-	 * Mapping from each composite property to the classes consumed by mappings and transitive compositions.
-	 * No mapping entry is created for composition properties that are not required to introduce model elements.
-	 *
-	 * For simple cases each composition introduces instances of just a single class corresponding to its composed type.
-	 * In more complex cases a composition may also introduce instances of superclasses of its composed type.
-	 */
-	private final @NonNull Map<@NonNull Property, @NonNull Set<@NonNull ClassDatumAnalysis>> consumedCompositeProperty2introducedClassDatumAnalyses = new HashMap<>();
-
-	/**
-	 * The per-class join nodes that identify all introducers.
-	 */
-	private final @NonNull Map<@NonNull ClassDatumAnalysis, @NonNull List<@NonNull Node>> introducedClassDatumAnalysis2nodes = new HashMap<>();
 
 	private final @NonNull RootCompositionRegion rootContainmentRegion = new RootCompositionRegion(multiRegion);
 
@@ -217,16 +186,6 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 		if (!nodes.contains(headNode)) {
 			nodes.add(headNode);
 		}
-	}
-
-	private void addIntroducedNode(@NonNull Node introducedNode) {
-		ClassDatumAnalysis classDatumAnalysis = getSchedulerConstants().getElementalClassDatumAnalysis(introducedNode);
-		List<@NonNull Node> nodes = introducedClassDatumAnalysis2nodes.get(classDatumAnalysis);
-		if (nodes == null) {
-			nodes = new ArrayList<>();
-			introducedClassDatumAnalysis2nodes.put(classDatumAnalysis, nodes);
-		}
-		nodes.add(introducedNode);
 	}
 
 	/*	private void assignDepths() {
@@ -398,115 +357,6 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 		} */
 	}
 
-	/**
-	 * Identify all the containment relationships in the input models.
-	 */
-	private void computeContainedClassDatumAnalysis2compositeProperties() {
-		Map<org.eclipse.ocl.pivot.@NonNull Package, @NonNull DomainUsage> allPackagesSet = new HashMap<>();
-		List<org.eclipse.ocl.pivot.@NonNull Package> allPackagesList = new ArrayList<>();
-		for (@NonNull Model asModel : inputModels.keySet()) {
-			DomainUsage domainUsage = inputModels.get(asModel);
-			assert domainUsage != null;
-			for (org.eclipse.ocl.pivot.@NonNull Package asPackage : ClassUtil.nullFree(asModel.getOwnedPackages())) {
-				if (allPackagesSet.put(asPackage, domainUsage) == null) {
-					allPackagesList.add(asPackage);
-				}
-			}
-			for (@NonNull Import asImport : ClassUtil.nullFree(asModel.getOwnedImports())) {
-				EObject importedObject = asImport.getImportedNamespace();
-				while ((importedObject != null) && !(importedObject instanceof org.eclipse.ocl.pivot.Package)) {
-					importedObject = importedObject.eContainer();
-				}
-				if (importedObject instanceof org.eclipse.ocl.pivot.Package) {
-					org.eclipse.ocl.pivot.Package asPackage = (org.eclipse.ocl.pivot.Package)importedObject;
-					if (allPackagesSet.put(asPackage, domainUsage) == null) {
-						allPackagesList.add(asPackage);
-					}
-				}
-			}
-		}
-		for (int i = 0; i < allPackagesList.size(); i++) {
-			org.eclipse.ocl.pivot.Package asPackage = allPackagesList.get(i);
-			DomainUsage domainUsage = ClassUtil.nonNullState(allPackagesSet.get(asPackage));
-			for (org.eclipse.ocl.pivot.@NonNull Package asPackage2 : ClassUtil.nullFree(asPackage.getOwnedPackages())) {
-				if (allPackagesSet.put(asPackage2, domainUsage) == null) {
-					allPackagesList.add(asPackage2);
-				}
-			}
-			for (org.eclipse.ocl.pivot.@NonNull Class asClass : ClassUtil.nullFree(asPackage.getOwnedClasses())) {
-				for (@NonNull Property asProperty : ClassUtil.nullFree(asClass.getOwnedProperties())) {
-					if (asProperty.isIsComposite()) {
-						computeContainedClassDatumAnalysis2compositeProperties3(asProperty, domainUsage);
-					}
-					Type asType = asProperty.getType();
-					if (asType instanceof org.eclipse.ocl.pivot.Class) {
-						org.eclipse.ocl.pivot.Package asPackage2 = ((org.eclipse.ocl.pivot.Class)asType).getOwningPackage();
-						if (asPackage2 != null) {
-							if (allPackagesSet.put(asPackage2, domainUsage) == null) {
-								allPackagesList.add(asPackage2);
-							}
-						}
-					}
-				}
-			}
-		}
-		assert allPackagesSet.size() == allPackagesList.size();
-		assert allPackagesSet.keySet().equals(new HashSet<>(allPackagesList));
-	}
-
-	private void computeContainedClassDatumAnalysis2compositeProperties3(@NonNull Property asProperty, @NonNull DomainUsage domainUsage) {
-		Type asType = PivotUtil.getElementalType(ClassUtil.nonNullState(asProperty.getType()));
-		if (asType instanceof org.eclipse.ocl.pivot.Class) {
-			ClassDatumAnalysis classDatumAnalysis = getSchedulerConstants().getClassDatumAnalysis((Class) asType, ClassUtil.nonNullState(domainUsage.getTypedModel(null)));
-			Set<@NonNull Property> compositeProperties = containedClassDatumAnalysis2compositeProperties.get(classDatumAnalysis);
-			if (compositeProperties == null) {
-				compositeProperties = new HashSet<>();
-				containedClassDatumAnalysis2compositeProperties.put(classDatumAnalysis, compositeProperties);
-			}
-			compositeProperties.add(asProperty);
-		}
-	}
-
-	/**
-	 * Identify all the classes/superClasses/subClasses that each compositeProperty may introduce for use as mapping heads. We do not
-	 * need to worry about arbitrary user extensions since the introducer will introduce such an extension as one or more of the types
-	 * that are actually interesting as inputs.
-	 *
-	 * NB. A mapping expecting an instance of K is statically applicable for any instance of a class derived from K,
-	 * and dynamically applicable for any instance of K masquerading as one of its super Class.
-	 */
-	private void computeConsumedCompositeProperty2introducedClassDatumAnalyses() {
-		//
-		//	Find the composite properties for each consumed class and its super classes, and accumulate
-		//	the container classes of all used properties as additional consumed classes.
-		//
-		Set<@NonNull ClassDatumAnalysis> allConsumedClassDatumAnalyses = new HashSet<>(consumedClassDatumAnalysis2headNodes.keySet());
-		List<@NonNull ClassDatumAnalysis> allConsumedClassDatumAnalysesList = new ArrayList<>(allConsumedClassDatumAnalyses);
-		for (int i = 0; i < allConsumedClassDatumAnalysesList.size(); i++) {
-			ClassDatumAnalysis consumedClassDatumAnalysis = allConsumedClassDatumAnalysesList.get(i);
-			for (@NonNull ClassDatumAnalysis consumedSuperClassDatumAnalysis : consumedClassDatumAnalysis.getSuperClassDatumAnalyses()) {
-				Set<@NonNull Property> consumedCompositeProperties = containedClassDatumAnalysis2compositeProperties.get(consumedSuperClassDatumAnalysis);
-				if (consumedCompositeProperties != null) {
-					for (@NonNull Property consumedCompositeProperty : consumedCompositeProperties) {
-						Set<@NonNull ClassDatumAnalysis> introducedClassDatumAnalyses = consumedCompositeProperty2introducedClassDatumAnalyses.get(consumedCompositeProperty);
-						if (introducedClassDatumAnalyses == null) {
-							introducedClassDatumAnalyses = new HashSet<>();
-							consumedCompositeProperty2introducedClassDatumAnalyses.put(consumedCompositeProperty, introducedClassDatumAnalyses);
-						}
-						introducedClassDatumAnalyses.add(consumedClassDatumAnalysis);
-						org.eclipse.ocl.pivot.Class containerClass = consumedCompositeProperty.getOwningClass();
-						assert containerClass != null;
-						ClassDatumAnalysis containerSuperClassDatumAnalysis = getSchedulerConstants().getClassDatumAnalysis(containerClass, consumedClassDatumAnalysis.getTypedModel());
-						if (allConsumedClassDatumAnalyses.add(containerSuperClassDatumAnalysis)) {
-							allConsumedClassDatumAnalysesList.add(containerSuperClassDatumAnalysis);
-						}
-					}
-				}
-			}
-		}
-		assert allConsumedClassDatumAnalyses.size() == allConsumedClassDatumAnalysesList.size();
-	}
-
 	private void computeInputModels() {
 		for (ClassDatumAnalysis classDatumAnalysis : getSchedulerConstants().getClassDatumAnalyses()) {
 			DomainUsage domainUsage = classDatumAnalysis.getDomainUsage();
@@ -632,14 +482,14 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 		} */
 		addRegion(rootContainmentRegion);
 
-		for (@NonNull Region region : getCallableRegions()) {
+		/*		for (@NonNull Region region : getCallableRegions()) {
 			for (@NonNull Node node : region.getHeadNodes()) {
 				if (node.isLoaded()) {
 					Node introducedNode = rootContainmentRegion.getIntroducerNode(node);
-					addIntroducedNode(introducedNode);
+					contentsAnalysis.addIntroducedNode(introducedNode);
 				}
 			}
-		}
+		} */
 		/*		for (Map.Entry<@NonNull ClassDatumAnalysis, @NonNull List<@NonNull Node>> entry : consumedClassDatumAnalysis2headNodes.entrySet()) {
 			@NonNull ClassDatumAnalysis classDatumAnalysis = entry.getKey();
 			CompleteClass completeClass = classDatumAnalysis.getCompleteClass();
@@ -736,13 +586,6 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 			QVTp2QVTs.DUMP_INPUT_MODEL_TO_DOMAIN_USAGE.println(dumpInputModels().reduce("", stringJoin("\n\t")));
 		}
 		//
-		//	Identify all the containment relationships in the input models.
-		//
-		computeContainedClassDatumAnalysis2compositeProperties();
-		if (QVTp2QVTs.DUMP_CLASS_TO_CONTAINING_PROPERTIES.isActive()) {
-			QVTp2QVTs.DUMP_CLASS_TO_CONTAINING_PROPERTIES.println(dumpClass2ContainingProperties().reduce("", stringJoin("\n\t")));
-		}
-		//
 		//	Identify all classes and edges that are realized by mappings.
 		//
 		computeClassDatumAnalysis2realizedNodes();
@@ -755,13 +598,6 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 		computeConsumedConsumedClassDatumAnalysis2headNodes();
 		if (QVTp2QVTs.DUMP_CLASS_TO_CONSUMING_NODES.isActive()) {
 			QVTp2QVTs.DUMP_CLASS_TO_CONSUMING_NODES.println(dumpClass2consumingNode().reduce("", stringJoin("\n\t")));
-		}
-		//
-		//	Identify all classes that are transitively consumed as containers of consumed classes.
-		//
-		computeConsumedCompositeProperty2introducedClassDatumAnalyses();
-		if (QVTp2QVTs.DUMP_PROPERTY_TO_CONSUMING_CLASSES.isActive()) {
-			QVTp2QVTs.DUMP_PROPERTY_TO_CONSUMING_CLASSES.println(dumpClass2ConsumingProperty().reduce("", stringJoin("\n\t")));
 		}
 		//
 		//	Create the root containment region to introduce all root and otherwise contained consumed classes.
@@ -886,33 +722,6 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 		return entries.sorted();
 	}
 
-	public Stream<String> dumpClass2ConsumingProperty() {
-		Stream<String> entries = consumedCompositeProperty2introducedClassDatumAnalyses.keySet().stream().map(
-			k -> {
-				Set<ClassDatumAnalysis> set = consumedCompositeProperty2introducedClassDatumAnalyses.get(k);
-				assert set != null;
-				return String.valueOf(k) + " : " +
-				set.stream().map(
-					p -> p.toString()
-						).sorted().reduce("", stringJoin("\n\t\t"));
-			}
-				);
-		return entries.sorted();
-	}
-
-	public Stream<String> dumpClass2ContainingProperties() {
-		Stream<String> entries = containedClassDatumAnalysis2compositeProperties.keySet().stream().map(
-			k -> {
-				Set<Property> set = containedClassDatumAnalysis2compositeProperties.get(k);
-				assert set != null;
-				return String.valueOf(k) + " " + k.getClass().getSimpleName() + "@" + Integer.toHexString(System.identityHashCode(k)) + " : " + set.stream().map(
-					p -> String.valueOf(p)).sorted().reduce("", stringJoin("\n\t\t")
-							);
-			}
-				);
-		return entries.sorted();
-	}
-
 	public Stream<String> dumpClass2RealizedNode() {
 		Map<@NonNull ClassDatumAnalysis, @NonNull List<@NonNull Node>> classDatumAnalysis2realizedNodes = creationAnalysis.getClassDatumAnalysis2realizedNodes();
 		Stream<String> entries = classDatumAnalysis2realizedNodes.keySet().stream().map(
@@ -954,7 +763,7 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 		return introducedClassDatumAnalysis2nodes.get(classDatumAnalysis);	// Separate introduction of each consumed type
 	} */
 
-	public @Nullable Iterable<@NonNull Node> getIntroducingOrRealizedNodes(@NonNull Node headNode) {
+	public @Nullable Iterable<@NonNull Node> getIntroducingOrNewNodes(@NonNull Node headNode) {
 		ClassDatumAnalysis classDatumAnalysis = headNode.getClassDatumAnalysis();
 		if (classDatumAnalysis.getDomainUsage().isInput()) {
 			return Collections.singletonList(rootContainmentRegion.getIntroducerNode(headNode));
