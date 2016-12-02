@@ -878,7 +878,7 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 		Node castTarget = RegionUtil.getCastTarget(castEdge.getTarget());
 		ClassDatumAnalysis classDatumAnalysis = castTarget.getClassDatumAnalysis();
 		if (classDatumAnalysis.getCompleteClass().getPrimaryClass() instanceof DataType) {
-			Iterable<@NonNull NavigableEdge> realizedEdges = rootScheduledRegion.getRealizedEdges(predicatedEdge, classDatumAnalysis);
+			Iterable<@NonNull NavigableEdge> realizedEdges = rootScheduledRegion.getNewEdges(predicatedEdge, classDatumAnalysis);
 			if (realizedEdges != null) {
 				List<@NonNull Node> sourceNodes = new ArrayList<>();
 				for (@NonNull NavigableEdge realizedEdge : realizedEdges) {
@@ -902,9 +902,9 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 			}
 		}
 		else {
-			Iterable<@NonNull Node> sourceNodes = rootScheduledRegion.getRealizedNodes(classDatumAnalysis);
+			Iterable<@NonNull Node> sourceNodes = rootScheduledRegion.getNewNodes(classDatumAnalysis);
 			//			if (sourceNodes != null) {
-			Iterable<@NonNull NavigableEdge> realizedEdges = rootScheduledRegion.getRealizedEdges(predicatedEdge, classDatumAnalysis);
+			Iterable<@NonNull NavigableEdge> realizedEdges = rootScheduledRegion.getNewEdges(predicatedEdge, classDatumAnalysis);
 			if (realizedEdges != null) {
 				Set<@NonNull Region> edgeSourceRegions = new HashSet<>();
 				Set<@NonNull Region> nodeSourceRegions = new HashSet<>();

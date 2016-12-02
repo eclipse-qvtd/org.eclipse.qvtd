@@ -28,7 +28,7 @@ import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotConstants;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.RealizedAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ContentsAnalysis;
 import org.eclipse.qvtd.compiler.internal.utilities.SymbolNameBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage;
@@ -70,13 +70,7 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 	 */
 	private final @NonNull Map<@NonNull Model, @NonNull DomainUsage> inputModels = new HashMap<>();
 
-	private final @NonNull RealizedAnalysis creationAnalysis;
-
-	/**
-	 * The input model classes that may be used as independent inputs by mappings and the nodes at which they are consumed.
-	 * In the worst case a flat schedule just permutes allInstances() to provide all mapping inputs.
-	 */
-	private final @NonNull Map<@NonNull ClassDatumAnalysis, @NonNull List<@NonNull Node>> consumedClassDatumAnalysis2headNodes = new HashMap<>();
+	private final @NonNull ContentsAnalysis contentsAnalysis;
 
 	private final @NonNull RootCompositionRegion rootContainmentRegion = new RootCompositionRegion(multiRegion);
 
@@ -84,14 +78,14 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 		super(primaryRegion.getMultiRegion());
 		this.name = name;
 		this.completeModel = getSchedulerConstants().getEnvironmentFactory().getCompleteModel();
-		this.creationAnalysis = new RealizedAnalysis(getSchedulerConstants());
+		this.contentsAnalysis = new ContentsAnalysis(getSchedulerConstants());
 	}
 
 	public RootScheduledRegion(@NonNull String name, @NonNull List<Region> regions) {
 		super(ClassUtil.nonNullState(regions.get(0)).getMultiRegion());
 		this.name = name;
 		this.completeModel = getSchedulerConstants().getEnvironmentFactory().getCompleteModel();
-		this.creationAnalysis = new RealizedAnalysis(getSchedulerConstants());
+		this.contentsAnalysis = new ContentsAnalysis(getSchedulerConstants());
 		for (@SuppressWarnings("null")@NonNull Region region : regions) {
 			addRegion(region);
 		}
@@ -171,22 +165,6 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 		}
 		return region2orderingEdge2usedEdges;
 	} */
-
-	private void addConsumedNode(@NonNull Node headNode) {
-		//		assert !"EObject".equals(headNode.getCompleteClass().getName());
-		Region region = headNode.getRegion();
-		Region invokingRegion = region.getInvokingRegion();
-		assert (invokingRegion == this) || (invokingRegion == null);
-		ClassDatumAnalysis consumedClassDatumAnalysis = headNode.getClassDatumAnalysis();
-		List<@NonNull Node> nodes = consumedClassDatumAnalysis2headNodes.get(consumedClassDatumAnalysis);
-		if (nodes == null) {
-			nodes = new ArrayList<>();
-			consumedClassDatumAnalysis2headNodes.put(consumedClassDatumAnalysis, nodes);
-		}
-		if (!nodes.contains(headNode)) {
-			nodes.add(headNode);
-		}
-	}
 
 	/*	private void assignDepths() {
 		Map<Region, Integer> region2depth = new HashMap<>();
@@ -279,83 +257,6 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 			}
 		}
 	} */
-
-	/**
-	 * Identify all the classes that are produced by mappings.
-	 */
-	private void computeClassDatumAnalysis2realizedNodes() {
-		//
-		//	Single-node head groups contribute a corresponding consumed class provided the
-		//	class is part of the input model and is not an internal convenience.
-		//
-		for (@NonNull Region region : getRegions()) {
-			creationAnalysis.addRegion(region);
-		}
-	}
-
-	/**
-	 * Identify all the classes whose instances may be required as independent mapping inputs.
-	 */
-	private void computeConsumedConsumedClassDatumAnalysis2headNodes() {
-		//
-		//	Single-node head groups contribute a corresponding consumed class provided the
-		//	class is part of the input model and is not an internal convenience.
-		//
-		for (@NonNull Region region : getRegions()) {
-			for (@NonNull Node predicatedNode : region.getOldNodes()) {
-				if (!predicatedNode.isHead()) {
-					if (!predicatedNode.isLoaded() && !predicatedNode.isConstant() && !predicatedNode.isDependency()) {
-						if (!isOnlyCastOrRecursed(predicatedNode)) {			// FIXME Eliminate cast nodes
-							addConsumedNode(predicatedNode);
-						}
-						/*						boolean isCast = true;
-						for (Edge outgoingEdge : predicatedNode.getOutgoingEdges()) {
-							if (!outgoingEdge.isCast()) {
-								isCast = false;
-								break;
-							}
-						}
-						if (!isCast) {			// FIXME Eliminate cast nodes
-							addConsumedNode(predicatedNode);
-						} */
-					}
-				}
-			}
-			for (@NonNull Node headNode : region.getHeadNodes()) {
-				if (headNode.isLoaded() && !headNode.isDependency()) {
-					addConsumedNode(headNode);
-				}
-			}
-		}
-		//
-		//	Multiple-node head groups contribute similarly, but just one corresponding class,
-		//	preferably one that is already consumed.
-		//
-		/*		for (@SuppressWarnings("null")@NonNull Region region : getRegions()) {
-			for (List<Node> headNodes : region.getHeadNodeGroups()) {
-				if (headNodes.size() != 1) {
-					boolean gotOne = false;
-					for (Node headNode : headNodes) {
-						if (!headNode.isKnown()) {
-							gotOne = true;
-							break;
-						}
-						else {
-							ClassDatumAnalysis consumedClassDatumAnalysis = headNode.getClassDatumAnalysis();
-							if (consumedClassDatumAnalysis2headNodes.containsKey(consumedClassDatumAnalysis)) {
-								gotOne = true;
-								break;
-							}
-						}
-					}
-					if (!gotOne) {
-						Node bestHeadNode = selectBestHeadNode(headNodes);
-						addConsumedNode(bestHeadNode);
-					}
-				}
-			}
-		} */
-	}
 
 	private void computeInputModels() {
 		for (ClassDatumAnalysis classDatumAnalysis : getSchedulerConstants().getClassDatumAnalyses()) {
@@ -586,18 +487,16 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 			QVTp2QVTs.DUMP_INPUT_MODEL_TO_DOMAIN_USAGE.println(dumpInputModels().reduce("", stringJoin("\n\t")));
 		}
 		//
-		//	Identify all classes and edges that are realized by mappings.
+		//	Identify the content of each region.
 		//
-		computeClassDatumAnalysis2realizedNodes();
-		if (QVTp2QVTs.DUMP_CLASS_TO_REALIZED_NODES.isActive()) {
-			QVTp2QVTs.DUMP_CLASS_TO_REALIZED_NODES.println(dumpClass2RealizedNode().reduce("", stringJoin("\n\t")));
+		for (@NonNull Region region : getRegions()) {
+			contentsAnalysis.addRegion(region);
 		}
-		//
-		//	Identify all classes that are consumed as independent inputs of mappings.
-		//
-		computeConsumedConsumedClassDatumAnalysis2headNodes();
+		if (QVTp2QVTs.DUMP_CLASS_TO_REALIZED_NODES.isActive()) {
+			QVTp2QVTs.DUMP_CLASS_TO_REALIZED_NODES.println(contentsAnalysis.dumpClass2newNode().reduce("", stringJoin("\n\t")));
+		}
 		if (QVTp2QVTs.DUMP_CLASS_TO_CONSUMING_NODES.isActive()) {
-			QVTp2QVTs.DUMP_CLASS_TO_CONSUMING_NODES.println(dumpClass2consumingNode().reduce("", stringJoin("\n\t")));
+			QVTp2QVTs.DUMP_CLASS_TO_CONSUMING_NODES.println(contentsAnalysis.dumpClass2oldNode().reduce("", stringJoin("\n\t")));
 		}
 		//
 		//	Create the root containment region to introduce all root and otherwise contained consumed classes.
@@ -709,36 +608,7 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 		}
 	} */
 
-	public Stream<String> dumpClass2consumingNode() {
-		Stream<String> entries = consumedClassDatumAnalysis2headNodes.keySet().stream().map(
-			k -> {
-				List<Node> list = consumedClassDatumAnalysis2headNodes.get(k);
-				assert list != null;
-				return String.valueOf(k) + " : " + list.stream().map(
-					p -> p.getDisplayName()
-						).sorted().reduce("", stringJoin("\n\t\t"));
-			}
-				);
-		return entries.sorted();
-	}
-
-	public Stream<String> dumpClass2RealizedNode() {
-		Map<@NonNull ClassDatumAnalysis, @NonNull List<@NonNull Node>> classDatumAnalysis2realizedNodes = creationAnalysis.getClassDatumAnalysis2realizedNodes();
-		Stream<String> entries = classDatumAnalysis2realizedNodes.keySet().stream().map(
-			k -> {
-				List<Node> list = classDatumAnalysis2realizedNodes.get(k);
-				assert list != null;
-				return k.getDomainUsage() + " " + String.valueOf(k) + " : " +
-				list.stream().map(
-					p -> p.getDisplayName()
-						).sorted().reduce("", stringJoin("\n\t\t")
-								);
-			}
-				);
-		return entries.sorted();
-	}
-
-	public Stream<String> dumpInputModels() {
+	private Stream<String> dumpInputModels() {
 		Stream<String> entries = inputModels.keySet().stream().map(
 			k -> String.valueOf(k) + " : " + String.valueOf(inputModels.get(k)));
 		return entries.sorted();
@@ -769,7 +639,7 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 			return Collections.singletonList(rootContainmentRegion.getIntroducerNode(headNode));
 		}
 		else {
-			return creationAnalysis.getRealizedNodes(classDatumAnalysis);
+			return contentsAnalysis.getNewNodes(classDatumAnalysis);
 		}
 	}
 
@@ -801,12 +671,12 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 		return name;
 	}
 
-	public @Nullable Iterable<@NonNull NavigableEdge> getRealizedEdges(@NonNull NavigableEdge edge, @NonNull ClassDatumAnalysis requiredClassDatumAnalysis) {
-		return creationAnalysis.getRealizedEdges(edge, requiredClassDatumAnalysis);
+	public @Nullable Iterable<@NonNull NavigableEdge> getNewEdges(@NonNull NavigableEdge edge, @NonNull ClassDatumAnalysis requiredClassDatumAnalysis) {
+		return contentsAnalysis.getNewEdges(edge, requiredClassDatumAnalysis);
 	}
 
-	public @Nullable Iterable<@NonNull Node> getRealizedNodes(@NonNull ClassDatumAnalysis classDatumAnalysis) {
-		return creationAnalysis.getRealizedNodes(classDatumAnalysis);
+	public @Nullable Iterable<@NonNull Node> getNewNodes(@NonNull ClassDatumAnalysis classDatumAnalysis) {
+		return contentsAnalysis.getNewNodes(classDatumAnalysis);
 	}
 
 	@Override
@@ -849,21 +719,6 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 		@NonNull Iterable<Edge> filter = Iterables.filter(getEdges(), IsUsedBindingEdgePredicate.INSTANCE);
 		return filter;
 	} */
-
-	/**
-	 * Return true if this node is consumed solely by casts (or recursions) and so need not be considered as a true consumer.
-	 * The downstream usages will consume more accurately.
-	 */
-	protected boolean isOnlyCastOrRecursed(@NonNull Node predicatedNode) {
-		boolean isCast = false;
-		for (Edge outgoingEdge : predicatedNode.getOutgoingEdges()) {
-			if (!outgoingEdge.isCast() && !outgoingEdge.isRecursion()) {
-				return false;
-			}
-			isCast = true;
-		}
-		return isCast;
-	}
 
 	@Override
 	public void toCallGraph(@NonNull GraphStringBuilder s) {

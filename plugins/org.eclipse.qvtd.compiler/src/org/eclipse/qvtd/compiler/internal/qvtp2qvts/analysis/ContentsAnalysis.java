@@ -17,11 +17,15 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.BinaryOperator;
+import java.util.stream.Stream;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Edge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NavigableEdge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
@@ -32,72 +36,114 @@ import org.eclipse.qvtd.pivot.schedule.PropertyDatum;
 import com.google.common.collect.Sets;
 
 /**
- * A RealizedAnalysis identifies all realized nodes and edges.
+ * A ContentsAnalysis provides an analysis of many (all) regions to facilate lookup of all producers consumers of particular types and properties.
  */
-public class RealizedAnalysis
+public class ContentsAnalysis
 {
+	public static @NonNull BinaryOperator<@NonNull String> stringJoin(@NonNull String delimiter) {
+		return (a, b) -> String.valueOf(a) + delimiter + String.valueOf(b);
+	}
+
 	protected final @NonNull SchedulerConstants schedulerConstants;
 
 	/**
-	 * The Realized Nodes that produce each ClassDatum.
+	 * The Speculation or Realized Nodes that produce each ClassDatum.
 	 */
-	private final @NonNull Map<@NonNull ClassDatumAnalysis, @NonNull List<@NonNull Node>> classDatumAnalysis2realizedNodes = new HashMap<>();
+	private final @NonNull Map<@NonNull ClassDatumAnalysis, @NonNull List<@NonNull Node>> classDatumAnalysis2newNodes = new HashMap<>();
+
+	/**
+	 * The input model classes that may be used as independent inputs by mappings and the nodes at which they are consumed.
+	 * In the worst case a flat schedule just permutes allInstances() to provide all mapping inputs.
+	 */
+	private final @NonNull Map<@NonNull ClassDatumAnalysis, @NonNull List<@NonNull Node>> classDatumAnalysis2oldNodes = new HashMap<>();
 
 	/**
 	 * The Realized Edges that produce each PropertyDatum (or its opposite).
 	 */
-	private final @NonNull Map<@NonNull PropertyDatum, @NonNull List<@NonNull NavigableEdge>> propertyDatum2realizedEdges = new HashMap<>();
+	private final @NonNull Map<@NonNull PropertyDatum, @NonNull List<@NonNull NavigableEdge>> propertyDatum2newEdges = new HashMap<>();
 
-	public RealizedAnalysis(@NonNull SchedulerConstants schedulerConstants) {
+	public ContentsAnalysis(@NonNull SchedulerConstants schedulerConstants) {
 		this.schedulerConstants = schedulerConstants;
 	}
 
-	private void addRealizedEdge(@NonNull NavigableEdge producedEdge) {
-		PropertyDatum propertyDatum = basicGetPropertyDatum(producedEdge);
+	private void addNewEdge(@NonNull NavigableEdge newEdge) {
+		PropertyDatum propertyDatum = basicGetPropertyDatum(newEdge);
 		if (propertyDatum == null) {
-			propertyDatum = basicGetPropertyDatum(producedEdge);		// FIXME debugging
+			propertyDatum = basicGetPropertyDatum(newEdge);		// FIXME debugging
 		}
 		assert propertyDatum != null;
-		addRealizedEdge(producedEdge, propertyDatum);
+		addNewEdge(newEdge, propertyDatum);
 	}
-	private void addRealizedEdge(@NonNull NavigableEdge producedEdge, @NonNull PropertyDatum propertyDatum) {
-		List<@NonNull NavigableEdge> edges = propertyDatum2realizedEdges.get(propertyDatum);
+	private void addNewEdge(@NonNull NavigableEdge newEdge, @NonNull PropertyDatum propertyDatum) {
+		List<@NonNull NavigableEdge> edges = propertyDatum2newEdges.get(propertyDatum);
 		if (edges == null) {
 			edges = new ArrayList<>();
-			propertyDatum2realizedEdges.put(propertyDatum, edges);
+			propertyDatum2newEdges.put(propertyDatum, edges);
 		}
-		if (!edges.contains(producedEdge)) {
-			edges.add(producedEdge);
+		if (!edges.contains(newEdge)) {
+			edges.add(newEdge);
 			for (@NonNull PropertyDatum superAbstractDatum : ClassUtil.nullFree(propertyDatum.getSuper())) {
-				addRealizedEdge(producedEdge, superAbstractDatum);
+				addNewEdge(newEdge, superAbstractDatum);
 			}
 		}
 	}
 
-	private void addRealizedNode(@NonNull Node producedNode) {
-		ClassDatumAnalysis classDatumAnalysis = schedulerConstants.getElementalClassDatumAnalysis(producedNode);
+	private void addNewNode(@NonNull Node newNode) {
+		ClassDatumAnalysis classDatumAnalysis = schedulerConstants.getElementalClassDatumAnalysis(newNode);
 		for (@NonNull ClassDatumAnalysis superClassDatumAnalysis : classDatumAnalysis.getSuperClassDatumAnalyses()) {
-			List<@NonNull Node> nodes = classDatumAnalysis2realizedNodes.get(superClassDatumAnalysis);
+			List<@NonNull Node> nodes = classDatumAnalysis2newNodes.get(superClassDatumAnalysis);
 			if (nodes == null) {
 				nodes = new ArrayList<>();
-				classDatumAnalysis2realizedNodes.put(superClassDatumAnalysis, nodes);
+				classDatumAnalysis2newNodes.put(superClassDatumAnalysis, nodes);
 			}
-			nodes.add(producedNode);
+			nodes.add(newNode);
 		}
 	}
 
-	public void addRegion(Region region) {
-		for (@NonNull Node assignedNode : region.getNewNodes()) {
-			if (assignedNode.isClass()) {
-				addRealizedNode(assignedNode);
-			}
+	private void addOldNode(@NonNull Node oldNode) {
+		//		assert !"EObject".equals(headNode.getCompleteClass().getName());
+		//		Region region = oldNode.getRegion();
+		//		Region invokingRegion = region.getInvokingRegion();
+		//		assert (invokingRegion == this) || (invokingRegion == null);
+		ClassDatumAnalysis classDatumAnalysis = oldNode.getClassDatumAnalysis();
+		List<@NonNull Node> nodes = classDatumAnalysis2oldNodes.get(classDatumAnalysis);
+		if (nodes == null) {
+			nodes = new ArrayList<>();
+			classDatumAnalysis2oldNodes.put(classDatumAnalysis, nodes);
 		}
-		for (@NonNull NavigableEdge realizedNavigationEdge : region.getRealizedNavigationEdges()) {
-			addRealizedEdge(realizedNavigationEdge);
+		if (!nodes.contains(oldNode)) {
+			nodes.add(oldNode);
 		}
 	}
 
-	protected @Nullable PropertyDatum basicGetPropertyDatum(@NonNull NavigableEdge producedEdge) {
+	public void addRegion(@NonNull Region region) {
+		for (@NonNull Node oldNode : region.getOldNodes()) {
+			if (!oldNode.isDependency() && !oldNode.isConstant()) {
+				if (oldNode.isHead()) {
+					//					if (oldNode.isLoaded()) {
+					addOldNode(oldNode);
+					//					}
+				}
+				else {
+					//					if (!oldNode.isLoaded()) {
+					if (!isOnlyCastOrRecursed(oldNode)) {			// FIXME Eliminate cast nodes
+						addOldNode(oldNode);
+					}
+					//					}
+				}
+			}
+		}
+		for (@NonNull Node newNode : region.getNewNodes()) {
+			if (newNode.isClass()) {
+				addNewNode(newNode);
+			}
+		}
+		for (@NonNull NavigableEdge newEdge : region.getRealizedNavigationEdges()) {
+			addNewEdge(newEdge);
+		}
+	}
+
+	private @Nullable PropertyDatum basicGetPropertyDatum(@NonNull NavigableEdge producedEdge) {
 		assert !producedEdge.isCast();				// Handled by caller
 		Property forwardProperty = producedEdge.getProperty();
 		ClassDatumAnalysis classDatumAnalysis = producedEdge.getSource().getClassDatumAnalysis();
@@ -161,6 +207,34 @@ public class RealizedAnalysis
 		return null;
 	}
 
+	public Stream<String> dumpClass2oldNode() {
+		Stream<String> entries = classDatumAnalysis2oldNodes.keySet().stream().map(
+			k -> {
+				List<Node> list = classDatumAnalysis2oldNodes.get(k);
+				assert list != null;
+				return String.valueOf(k) + " : " + list.stream().map(
+					p -> p.getDisplayName()
+						).sorted().reduce("", stringJoin("\n\t\t"));
+			}
+				);
+		return entries.sorted();
+	}
+
+	public Stream<String> dumpClass2newNode() {
+		Stream<String> entries = classDatumAnalysis2newNodes.keySet().stream().map(
+			k -> {
+				List<Node> list = classDatumAnalysis2newNodes.get(k);
+				assert list != null;
+				return k.getDomainUsage() + " " + String.valueOf(k) + " : " +
+				list.stream().map(
+					p -> p.getDisplayName()
+						).sorted().reduce("", stringJoin("\n\t\t")
+								);
+			}
+				);
+		return entries.sorted();
+	}
+
 	/**
 	 * Return all Realized NavigationEdges corresponding to predicatedEdge that navigate an isComposite property in either direction.
 	 * Returns null in the very unusual event that there are none.
@@ -172,9 +246,9 @@ public class RealizedAnalysis
 	 * FIXME In the event that the ends of the realized edges are realized variables, we do know the precise
 	 * type and could filter accordingly; a not-yet-exploited optimisation.
 	 */
-	private @Nullable Iterable<@NonNull NavigableEdge> getCompositeRealizedEdges(@NonNull NavigableEdge predicatedEdge) {
+	private @Nullable Iterable<@NonNull NavigableEdge> getCompositeNewEdges(@NonNull NavigableEdge predicatedEdge) {
 		Set<@NonNull NavigableEdge> realizedEdges = null;
-		for (Map.Entry<@NonNull PropertyDatum, @NonNull List<@NonNull NavigableEdge>> entry : propertyDatum2realizedEdges.entrySet()) {
+		for (Map.Entry<@NonNull PropertyDatum, @NonNull List<@NonNull NavigableEdge>> entry : propertyDatum2newEdges.entrySet()) {
 			Property property = entry.getKey().getProperty();
 			if (property != null) {
 				@Nullable Property compositeProperty = null;
@@ -198,11 +272,7 @@ public class RealizedAnalysis
 		return realizedEdges;
 	}
 
-	public @NonNull Map<@NonNull ClassDatumAnalysis, @NonNull List<@NonNull Node>> getClassDatumAnalysis2realizedNodes(){
-		return classDatumAnalysis2realizedNodes;
-	}
-
-	public @Nullable Iterable<@NonNull NavigableEdge> getRealizedEdges(@NonNull NavigableEdge edge, @NonNull ClassDatumAnalysis requiredClassDatumAnalysis) {
+	public @Nullable Iterable<@NonNull NavigableEdge> getNewEdges(@NonNull NavigableEdge edge, @NonNull ClassDatumAnalysis requiredClassDatumAnalysis) {
 		Property property = edge.getProperty();
 		if (property.eContainer() == null) {			// Ignore pseudo-properties such as «iterate»
 			return null;
@@ -210,14 +280,14 @@ public class RealizedAnalysis
 		PropertyDatum propertyDatum = basicGetPropertyDatum(edge);
 		if (propertyDatum == null) {
 			if (property == schedulerConstants.getStandardLibraryHelper().getOclContainerProperty()) {
-				return getCompositeRealizedEdges(edge);
+				return getCompositeNewEdges(edge);
 			}
 			propertyDatum = basicGetPropertyDatum(edge);				// FIXME debugging
 		}
 		if (propertyDatum == null) {			// May be null for edges only used by operation dependencies
 			return null;
 		}
-		Iterable<@NonNull NavigableEdge> realizedEdges = propertyDatum2realizedEdges.get(propertyDatum);
+		Iterable<@NonNull NavigableEdge> realizedEdges = propertyDatum2newEdges.get(propertyDatum);
 		if (realizedEdges == null) {
 			return null;
 		}
@@ -236,7 +306,26 @@ public class RealizedAnalysis
 		return conformantRealizedEdges;
 	}
 
-	public @Nullable Iterable<@NonNull Node> getRealizedNodes(@NonNull ClassDatumAnalysis classDatumAnalysis) {
-		return classDatumAnalysis2realizedNodes.get(classDatumAnalysis);
+	public @Nullable Iterable<@NonNull Node> getNewNodes(@NonNull ClassDatumAnalysis classDatumAnalysis) {
+		return classDatumAnalysis2newNodes.get(classDatumAnalysis);
+	}
+
+	public @Nullable Iterable<@NonNull Node> getOldNodes(@NonNull ClassDatumAnalysis classDatumAnalysis) {
+		return classDatumAnalysis2oldNodes.get(classDatumAnalysis);
+	}
+
+	/**
+	 * Return true if this node is consumed solely by casts (or recursions) and so need not be considered as a true consumer.
+	 * The downstream usages will consume more accurately.
+	 */
+	private boolean isOnlyCastOrRecursed(@NonNull Node predicatedNode) {
+		boolean isCast = false;
+		for (Edge outgoingEdge : predicatedNode.getOutgoingEdges()) {
+			if (!outgoingEdge.isCast() && !outgoingEdge.isRecursion()) {
+				return false;
+			}
+			isCast = true;
+		}
+		return isCast;
 	}
 }
