@@ -292,7 +292,7 @@ public class RegionUtil
 	}
 
 	public static @NonNull Node createStepNode(@NonNull Region region, @NonNull Node typedNode, boolean isMatched) {
-		NodeRole stepNodeRole = NodeRoleImpl.getNodeRole(Role.Phase.PREDICATED);
+		NodeRole stepNodeRole = typedNode.getNodeRole();
 		return PatternTypedNodeImpl.create(stepNodeRole, region, typedNode.getName(), typedNode.getClassDatumAnalysis(), isMatched);
 	}
 
