@@ -30,8 +30,6 @@ import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.ScheduledRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ContentsAnalysis;
-import org.eclipse.qvtd.compiler.internal.utilities.SymbolNameBuilder;
-
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
@@ -57,10 +55,8 @@ public class LateConsumerMerger extends AbstractMerger
 		}
 
 		@Override
-		protected @NonNull SymbolNameBuilder computeSymbolName() {
-			SymbolNameBuilder s = super.computeSymbolName();
-			s.appendString(".late");;
-			return s;
+		protected @NonNull String getSymbolNameSuffix() {
+			return "_lc";
 		}
 	}
 
@@ -419,7 +415,7 @@ public class LateConsumerMerger extends AbstractMerger
 						mergedRegion.addIndex(index);
 					}
 				}
-				mergedRegion.writeDebugGraphs("8-late");
+				mergedRegion.writeDebugGraphs(null);
 			}
 		}
 	}

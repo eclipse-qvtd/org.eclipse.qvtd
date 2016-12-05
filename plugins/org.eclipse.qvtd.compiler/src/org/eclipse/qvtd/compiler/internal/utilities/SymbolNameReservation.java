@@ -20,7 +20,7 @@ import org.eclipse.jdt.annotation.NonNull;
  */
 public class SymbolNameReservation
 {
-	private @NonNull Map<@NonNull String, @NonNull Object> symbolName2symbolable = new HashMap<@NonNull String, @NonNull Object>();
+	private @NonNull Map<@NonNull String, @NonNull Object> symbolName2symbolable = new HashMap<>();
 
 	public @NonNull String reserveSymbolName(@NonNull SymbolNameBuilder symbolNameBuilder, @NonNull Object newObject) {
 		String symbolName = symbolNameBuilder.toString();

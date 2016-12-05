@@ -35,8 +35,9 @@ import org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl.VariableNodeImpl;
  */
 class PartitioningVisitor extends AbstractVisitor<@Nullable Visitable>
 {
-	public static @NonNull PartitioningVisitor createPartialRegion(@NonNull MappingRegion fullRegion, @NonNull String prefix, @NonNull String suffix, @NonNull AbstractPartition partition) {
-		MicroMappingRegion partialRegion = new MicroMappingRegion(fullRegion, prefix, suffix);
+	public static @NonNull PartitioningVisitor createPartialRegion(@NonNull MappingRegion fullRegion,
+			@NonNull String namePrefix, @NonNull String symbolSuffix, @NonNull AbstractPartition partition) {
+		MicroMappingRegion partialRegion = new MicroMappingRegion(fullRegion, namePrefix, symbolSuffix);
 		PartitioningVisitor partitioningVisitor = new PartitioningVisitor(partialRegion, partition);
 		fullRegion.accept(partitioningVisitor);
 		return partitioningVisitor;

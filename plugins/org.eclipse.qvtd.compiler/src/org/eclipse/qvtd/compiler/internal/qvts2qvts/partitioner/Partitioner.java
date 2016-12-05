@@ -353,7 +353,7 @@ public class Partitioner
 
 	private @NonNull MicroMappingRegion createAssignmentRegion(@NonNull NavigableEdge outputEdge, int i) {
 		AssignmentPartition realizedPartition = new AssignmentPartition(this, outputEdge);
-		MicroMappingRegion microMappingRegion = realizedPartition.createMicroMappingRegion("«edge" + i + "»", ".p" + i);
+		MicroMappingRegion microMappingRegion = realizedPartition.createMicroMappingRegion("«edge" + i + "»", "_p" + i);
 		if (QVTp2QVTs.DEBUG_GRAPHS.isActive()) {
 			microMappingRegion.writeDebugGraphs(null);
 		}
@@ -362,7 +362,7 @@ public class Partitioner
 
 	private @NonNull MicroMappingRegion createRealizedRegion() {
 		RealizedPartition realizedPartition = new RealizedPartition(this);
-		MicroMappingRegion microMappingRegion = realizedPartition.createMicroMappingRegion("«realized»", ".r0");
+		MicroMappingRegion microMappingRegion = realizedPartition.createMicroMappingRegion("«realized»", "_r0");
 		if (QVTp2QVTs.DEBUG_GRAPHS.isActive()) {
 			microMappingRegion.writeDebugGraphs(null);
 		}
@@ -371,7 +371,7 @@ public class Partitioner
 
 	private @NonNull MicroMappingRegion createSpeculatedRegion() {
 		SpeculatedPartition speculatedPartition = new SpeculatedPartition(this);
-		MicroMappingRegion microMappingRegion = speculatedPartition.createMicroMappingRegion("«speculated»", ".p1");
+		MicroMappingRegion microMappingRegion = speculatedPartition.createMicroMappingRegion("«speculated»", "_p1");
 		if (QVTp2QVTs.DEBUG_GRAPHS.isActive()) {
 			microMappingRegion.writeDebugGraphs(null);
 		}
@@ -380,7 +380,7 @@ public class Partitioner
 
 	private @NonNull MicroMappingRegion createSpeculationRegion() {
 		SpeculationPartition speculationPartition = new SpeculationPartition(this);
-		MicroMappingRegion microMappingRegion = speculationPartition.createMicroMappingRegion("«speculation»", ".p0");
+		MicroMappingRegion microMappingRegion = speculationPartition.createMicroMappingRegion("«speculation»", "_p0");
 		if (QVTp2QVTs.DEBUG_GRAPHS.isActive()) {
 			microMappingRegion.writeDebugGraphs(null);
 		}

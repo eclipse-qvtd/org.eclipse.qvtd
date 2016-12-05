@@ -170,6 +170,11 @@ public class RootCompositionRegion extends AbstractRegion
 	}
 
 	@Override
+	protected @NonNull String getSymbolNamePrefix() {
+		return "";
+	}
+
+	@Override
 	public boolean isRootCompositionRegion() {
 		return true;
 	}

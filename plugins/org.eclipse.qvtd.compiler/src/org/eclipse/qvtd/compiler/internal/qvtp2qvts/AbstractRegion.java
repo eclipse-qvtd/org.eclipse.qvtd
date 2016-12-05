@@ -28,6 +28,7 @@ import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.StringUtil;
 import org.eclipse.qvtd.compiler.CompilerProblem;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis;
@@ -759,22 +760,85 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 		SymbolNameBuilder s = null;
 		Set<@NonNull Node> bestToOneSubRegion = null;
 		Node bestNamingNode = null;
-		for (@NonNull Node newNode : getNewNodes()) {
-			Set<@NonNull Node> toOneSubRegion = computeToOneSubRegion(new HashSet<>(), newNode);
-			if ((bestToOneSubRegion == null) || (toOneSubRegion.size() > bestToOneSubRegion.size())) {
-				bestToOneSubRegion = toOneSubRegion;
-				bestNamingNode = newNode;
-			}
-			else if ((bestNamingNode != null) && (toOneSubRegion.size() == bestToOneSubRegion.size())) {
-				if (ClassUtil.safeCompareTo(bestNamingNode.getCompleteClass().getName(), newNode.getCompleteClass().getName()) > 0) {
+		int bestToOneSubRegionSize = 0;
+		for (@NonNull Node node : getNodes()) {
+			if (node.isNew() || node.isPredicated() || node.isSpeculated()) {
+				Set<@NonNull Node> toOneSubRegion = computeToOneSubRegion(new HashSet<>(), node);
+				int toOneSubRegionSize = toOneSubRegion.size();
+				Boolean isBetter = null;
+				if ((bestToOneSubRegion == null) || (bestNamingNode == null)) {
+					isBetter = true;
+				}
+				else if (toOneSubRegionSize > bestToOneSubRegionSize) {
+					isBetter = true;
+				}
+				else if (toOneSubRegionSize < bestToOneSubRegionSize) {
+					isBetter = false;
+				}
+				else if (node.isNew() && !bestNamingNode.isNew()) {
+					isBetter = true;
+				}
+				else {
+					int bestRealizedNavigationEdgesSize = Iterables.size(bestNamingNode.getRealizedNavigationEdges());
+					int realizedNavigationEdgesSize = Iterables.size(node.getRealizedNavigationEdges());
+					if (realizedNavigationEdgesSize > bestRealizedNavigationEdgesSize) {
+						isBetter = true;
+					}
+					else if (realizedNavigationEdgesSize < bestRealizedNavigationEdgesSize) {
+						isBetter = false;
+					}
+					else {
+						int diff = ClassUtil.safeCompareTo(bestNamingNode.getCompleteClass().getName(), node.getCompleteClass().getName());
+						if (diff > 0) {
+							isBetter = true;
+						}
+						else if (diff < 0) {
+							isBetter = false;
+						}
+					}
+				}
+				if (isBetter == Boolean.TRUE) {
 					bestToOneSubRegion = toOneSubRegion;
-					bestNamingNode = newNode;
+					bestToOneSubRegionSize = toOneSubRegionSize;
+					bestNamingNode = node;
 				}
 			}
 		}
 		if (bestNamingNode != null) {
+			List<@NonNull String> edgeNames = new ArrayList<>();
+			for (@NonNull NavigableEdge edge : bestNamingNode.getRealizedNavigationEdges()) {
+				String name = PivotUtil.getName(edge.getProperty());
+				edgeNames.add(name);
+			}
+			if (edgeNames.size() > 0) {
+				s = new SymbolNameBuilder();
+				s.appendName(bestNamingNode.getCompleteClass().getName());
+				Collections.sort(edgeNames);
+				for (@NonNull String edgeName : edgeNames) {
+					s.appendString("_");
+					s.appendString(edgeName);
+				}
+			}
+			else {
+				for (@NonNull NavigableEdge edge : getRealizedNavigationEdges()) {
+					String name = PivotUtil.getName(edge.getProperty());
+					edgeNames.add(name);
+				}
+				if (edgeNames.size() > 0) {
+					s = new SymbolNameBuilder();
+					s.appendName(bestNamingNode.getCompleteClass().getName());
+					s.appendString("_");
+					Collections.sort(edgeNames);
+					for (@NonNull String edgeName : edgeNames) {
+						s.appendString("_");
+						s.appendString(edgeName);
+					}
+				}
+			}
+		}
+		if ((s == null) && (bestNamingNode != null)) {
 			s = new SymbolNameBuilder();
-			s.appendString("m_");
+			s.appendString(getSymbolNamePrefix());
 			s.appendName(bestNamingNode.getCompleteClass().getName());
 			List<@NonNull String> headNames = new ArrayList<>();
 			for (@NonNull Node headNode : getHeadNodes()) {
@@ -788,29 +852,25 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 				s.appendString(headName);
 			}
 		}
-		else {
+		if (s == null) {
 			for (@NonNull Node headNode : getHeadNodes()) {
 				s = new SymbolNameBuilder();
-				s.appendString("m_");
+				s.appendString(getSymbolNamePrefix());
 				s.appendName(headNode.getCompleteClass().getName());
-				List<String> edgeNames = new ArrayList<>();
+				List<@NonNull String> edgeNames = new ArrayList<>();
 				for (@NonNull NavigableEdge edge : headNode.getNavigationEdges()) {
-					String propertyName = edge.getProperty().getName();
+					String propertyName = PivotUtil.getName(edge.getProperty());
 					edgeNames.add(edge.getTarget().isExplicitNull() ? propertyName + "0" : propertyName);
 				}
 				Collections.sort(edgeNames);
-				for (String edgeName : edgeNames) {
+				for (@NonNull String edgeName : edgeNames) {
 					s.appendString("_");
 					s.appendName(edgeName);
 				}
 				break;
 			}
 		}
-		if (s == null) {
-			s = new SymbolNameBuilder();
-			s.appendString("m_");
-		}
-		return s;
+		return s != null ? s : new SymbolNameBuilder();
 	}
 
 	private @NonNull Set<@NonNull Node> computeToOneSubRegion(@NonNull Set<@NonNull Node> toOneSubRegion, @NonNull Node atNode) {
@@ -1750,10 +1810,21 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 	public final @NonNull String getSymbolName() {
 		String symbolName2 = symbolName;
 		if (symbolName2 == null) {
-			SymbolNameBuilder computedSymbolName = computeSymbolName();
-			symbolName = symbolName2 = getSchedulerConstants().reserveSymbolName(computedSymbolName, this);
+			SymbolNameBuilder s = new SymbolNameBuilder(0);
+			s.appendString(getSymbolNamePrefix());
+			s.appendString(computeSymbolName().toString());
+			s.appendString(getSymbolNameSuffix());
+			symbolName = symbolName2 = getSchedulerConstants().reserveSymbolName(s, this);
 		}
 		return symbolName2;
+	}
+
+	protected @NonNull String getSymbolNamePrefix() {
+		return "m_";
+	}
+
+	protected @NonNull String getSymbolNameSuffix() {
+		return "";
 	}
 
 	@Override
@@ -2181,7 +2252,8 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 
 	public void writeDebugGraphs(@Nullable String context) {
 		SchedulerConstants scheduler = getSchedulerConstants();
-		scheduler.writeDOTfile(this, context != null ? "-" + context : null);
-		scheduler.writeGraphMLfile(this, context != null ? "-" + context : null);
+		String suffix = context != null ? "-" + context : null;
+		scheduler.writeDOTfile(this, suffix);
+		scheduler.writeGraphMLfile(this, suffix);
 	}
 }

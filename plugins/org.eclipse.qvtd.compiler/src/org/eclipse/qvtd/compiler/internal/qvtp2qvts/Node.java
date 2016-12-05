@@ -93,6 +93,7 @@ public interface Node extends ConnectionEnd, GraphStringBuilder.GraphNode, Namea
 	@NonNull Iterable<@NonNull Node> getPassedBindingTargets();
 	@Nullable Edge getPredicateEdge(@NonNull Property source2targetProperty);
 	@NonNull Iterable<@NonNull NavigableEdge> getPredicateEdges();
+	@NonNull Iterable<@NonNull NavigableEdge> getRealizedNavigationEdges();
 	@NonNull Iterable<@NonNull Edge> getRecursionEdges();
 
 	/**

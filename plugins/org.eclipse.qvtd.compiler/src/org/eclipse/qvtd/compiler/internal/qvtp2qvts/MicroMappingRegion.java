@@ -11,7 +11,6 @@
 package org.eclipse.qvtd.compiler.internal.qvtp2qvts;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.qvtd.compiler.internal.utilities.SymbolNameBuilder;
 
 /**
  * A MicroMappingRegion provides the partitioned QVTs node-edge graph representation of a QVTp mapping.
@@ -20,26 +19,24 @@ import org.eclipse.qvtd.compiler.internal.utilities.SymbolNameBuilder;
 public class MicroMappingRegion extends AbstractMappingRegion
 {
 	protected final @NonNull MappingRegion mappingRegion;
-	private final @NonNull String prefix;
-	private final @NonNull String suffix;
+	private final @NonNull String namePrefix;
+	private final @NonNull String symbolSuffix;
 
-	public MicroMappingRegion(@NonNull MappingRegion mappingRegion, @NonNull String prefix, @NonNull String suffix) {
+	public MicroMappingRegion(@NonNull MappingRegion mappingRegion, @NonNull String namePrefix, @NonNull String symbolSuffix) {
 		super(mappingRegion.getMultiRegion());
 		assert !(mappingRegion instanceof MicroMappingRegion);
 		this.mappingRegion = mappingRegion;
-		this.prefix = prefix;
-		this.suffix = suffix;
-	}
-
-	@Override
-	protected @NonNull SymbolNameBuilder computeSymbolName() {
-		SymbolNameBuilder s = new SymbolNameBuilder(mappingRegion.getSymbolName());
-		s.setSuffix(suffix);
-		return s;
+		this.namePrefix = namePrefix;
+		this.symbolSuffix = symbolSuffix;
 	}
 
 	@Override
 	public @NonNull String getName() {
-		return prefix + " " + mappingRegion.getName();
+		return namePrefix + " " + mappingRegion.getName();
+	}
+
+	@Override
+	protected @NonNull String getSymbolNameSuffix() {
+		return symbolSuffix;
 	}
 }

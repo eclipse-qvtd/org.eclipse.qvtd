@@ -150,8 +150,8 @@ abstract class AbstractPartition
 		return new PartitionForest(partitioner.getRealizedMiddleNodes(), navigableEdges);
 	}
 
-	public @NonNull MicroMappingRegion createMicroMappingRegion(@NonNull String prefix, @NonNull String suffix) {
-		PartitioningVisitor partitioningVisitor = PartitioningVisitor.createPartialRegion(partitioner.getRegion(), prefix, suffix, this);
+	public @NonNull MicroMappingRegion createMicroMappingRegion(@NonNull String namePrefix, @NonNull String symbolSuffix) {
+		PartitioningVisitor partitioningVisitor = PartitioningVisitor.createPartialRegion(partitioner.getRegion(), namePrefix, symbolSuffix, this);
 		MicroMappingRegion microMappingRegion = partitioningVisitor.getRegion();
 		microMappingRegion.getHeadNodes();
 		check(microMappingRegion);

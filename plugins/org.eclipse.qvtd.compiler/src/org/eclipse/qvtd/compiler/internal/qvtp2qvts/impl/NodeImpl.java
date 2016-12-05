@@ -447,6 +447,13 @@ public abstract class NodeImpl implements Node
 	}
 
 	@Override
+	public final @NonNull Iterable<@NonNull NavigableEdge> getRealizedNavigationEdges() {
+		@SuppressWarnings("unchecked")
+		Iterable<@NonNull NavigableEdge> filter = (Iterable<@NonNull NavigableEdge>)(Object)Iterables.filter(getOutgoingEdges(), AbstractRegion.IsRealizedNavigationEdgePredicate.INSTANCE);
+		return filter;
+	}
+
+	@Override
 	public final @NonNull Iterable<@NonNull Edge> getRecursionEdges() {
 		@NonNull Iterable<@NonNull Edge> filter = Iterables.filter(getOutgoingEdges(), AbstractRegion.IsRecursionEdgePredicate.INSTANCE);
 		return filter;

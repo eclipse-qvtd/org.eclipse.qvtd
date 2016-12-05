@@ -120,7 +120,6 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 	@Override
 	protected @NonNull SymbolNameBuilder computeSymbolName() {
 		SymbolNameBuilder s = new SymbolNameBuilder();
-		s.appendString("s_");
 		s.appendName(name);
 		return s;
 	}
@@ -227,6 +226,11 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 
 	public @NonNull QVTp2QVTs getScheduler() {
 		return (QVTp2QVTs)getSchedulerConstants();
+	}
+
+	@Override
+	protected @NonNull String getSymbolNamePrefix() {
+		return "s_";
 	}
 
 	@Override

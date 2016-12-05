@@ -11,21 +11,26 @@
 package org.eclipse.qvtd.compiler.internal.utilities;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 
 /**
  * SymbolNameBuilder supports building a symbol name including replacement of awkward characters.
  */
 public class SymbolNameBuilder
 {
+	private final int lengthLimit;
 	private final @NonNull StringBuilder s = new StringBuilder();
-	private @Nullable String suffix = null;
 
-	public SymbolNameBuilder() {}
-
-	public SymbolNameBuilder(@NonNull String s) {
-		this.s.append(s);
+	public SymbolNameBuilder() {
+		this.lengthLimit = 50;
 	}
+
+	public SymbolNameBuilder(int lengthLimit) {
+		this.lengthLimit = lengthLimit;
+	}
+
+	//	public SymbolNameBuilder(@NonNull String s) {
+	//		this.s.append(s);
+	//	}
 
 	public void appendName(/*@NonNull*/ String name) {
 		assert name != null;
@@ -52,21 +57,12 @@ public class SymbolNameBuilder
 		s.append(string);
 	}
 
-	public void setSuffix(@NonNull String suffix) {
-		this.suffix = suffix;
-	}
-
 	@Override
 	public @NonNull String toString() {
 		String string = s.toString();
-		if (s.length() > 50) {
-			string = string.substring(0, 50);
+		if ((lengthLimit > 0) && (s.length() > lengthLimit)) {
+			string = string.substring(0, lengthLimit);
 		}
-		if (suffix != null) {
-			return string + suffix;
-		}
-		else {
-			return string;
-		}
+		return string;
 	}
 }

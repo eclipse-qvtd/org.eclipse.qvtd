@@ -34,8 +34,6 @@ import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.QVTp2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis;
-import org.eclipse.qvtd.compiler.internal.utilities.SymbolNameBuilder;
-
 import com.google.common.collect.Sets;
 
 /**
@@ -51,10 +49,8 @@ public class EarlyMerger extends AbstractMerger
 		}
 
 		@Override
-		protected @NonNull SymbolNameBuilder computeSymbolName() {
-			SymbolNameBuilder s = super.computeSymbolName();
-			s.appendString(".early");;
-			return s;
+		protected @NonNull String getSymbolNameSuffix() {
+			return "_e";
 		}
 	}
 
@@ -222,7 +218,7 @@ public class EarlyMerger extends AbstractMerger
 			else {
 				outputRegions.add(mergedRegion);
 				if (QVTp2QVTs.DEBUG_GRAPHS.isActive()) {
-					mergedRegion.writeDebugGraphs("2-merged");
+					mergedRegion.writeDebugGraphs(null);
 				}
 			}
 			residualInputRegions.remove(candidateRegion);
