@@ -456,7 +456,7 @@ public class DatumCaches
 		TypedModel typedModel = classDatum.getTypedModel();
 		assert typedModel != null;
 		CompleteClass targetCompleteClass = classDatum.getCompleteClass();
-		org.eclipse.ocl.pivot.Class owningClass = (org.eclipse.ocl.pivot.Class)PivotUtil.getOwningClass(property);
+		org.eclipse.ocl.pivot.Class owningClass = PivotUtil.getOwningClass(property);
 		CompleteClass hostCompleteClass = completeModel.getCompleteClass(owningClass);
 		PropertyDatum propertyDatum = ScheduleFactory.eINSTANCE.createPropertyDatum();
 		propertyDatum.setTypedModel(typedModel);
