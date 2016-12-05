@@ -11,6 +11,7 @@
 package org.eclipse.qvtd.compiler.internal.qvtp2qvts.impl;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.EdgeRole;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NavigableEdge;
@@ -53,5 +54,11 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl
 	@Override
 	public final boolean isNavigation() {
 		return true;
+	}
+
+	@Override
+	public void setSource(@Nullable Node sourceNode) {
+		assert (sourceNode == null) || !sourceNode.isExplicitNull();
+		super.setSource(sourceNode);
 	}
 }
