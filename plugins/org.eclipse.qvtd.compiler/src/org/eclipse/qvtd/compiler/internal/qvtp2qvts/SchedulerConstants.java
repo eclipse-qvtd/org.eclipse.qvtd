@@ -39,6 +39,8 @@ import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.StringUtil;
 import org.eclipse.ocl.pivot.values.Unlimited;
+import org.eclipse.qvtd.compiler.CompilerChain;
+import org.eclipse.qvtd.compiler.CompilerChain.Key;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ContainmentAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.OperationDependencyAnalysis;
@@ -89,6 +91,7 @@ public abstract class SchedulerConstants
 
 	private final @NonNull EnvironmentFactory environmentFactory;
 	private final @NonNull Transformation transformation;
+	private @Nullable Map<@NonNull Key<? extends Object>, @Nullable Object> schedulerOptions;
 	private final @NonNull RootDomainUsageAnalysis domainAnalysis;
 	private final @NonNull DatumCaches datumCaches;
 
@@ -127,9 +130,11 @@ public abstract class SchedulerConstants
 
 	private /*@LazyNonNull*/ List<@NonNull Mapping> orderedMappings;	// Only ordered to improve determinacy
 
-	protected SchedulerConstants(@NonNull EnvironmentFactory environmentFactory, @NonNull Transformation asTransformation) {
+	protected SchedulerConstants(@NonNull EnvironmentFactory environmentFactory, @NonNull Transformation asTransformation,
+			@Nullable Map<@NonNull Key<? extends Object>, @Nullable Object> schedulerOptions) {
 		this.environmentFactory = environmentFactory;
 		this.transformation = asTransformation;
+		this.schedulerOptions = schedulerOptions;
 		this.domainAnalysis = new QVTcoreDomainUsageAnalysis(environmentFactory);
 		domainAnalysis.analyzeTransformation(asTransformation);
 		this.datumCaches = new DatumCaches(domainAnalysis);
@@ -327,6 +332,22 @@ public abstract class SchedulerConstants
 	 */
 	public boolean isDirty(@NonNull Property property) {
 		return domainAnalysis.isDirty(property);
+	}
+
+	public boolean isNoEarlyMerge() {
+		Map<@NonNull Key<? extends Object>, @Nullable Object> schedulerOptions2 = schedulerOptions;
+		if (schedulerOptions2 == null) {
+			return false;
+		}
+		return schedulerOptions2.get(CompilerChain.SCHEDULER_NO_EARLY_MERGE) == Boolean.TRUE;
+	}
+
+	public boolean isNoLateConsumerMerge() {
+		Map<@NonNull Key<? extends Object>, @Nullable Object> schedulerOptions2 = schedulerOptions;
+		if (schedulerOptions2 == null) {
+			return false;
+		}
+		return schedulerOptions2.get(CompilerChain.SCHEDULER_NO_LATE_CONSUMER_MERGE) == Boolean.TRUE;
 	}
 
 	public boolean isKnown(@NonNull VariableDeclaration sourceVariable) {

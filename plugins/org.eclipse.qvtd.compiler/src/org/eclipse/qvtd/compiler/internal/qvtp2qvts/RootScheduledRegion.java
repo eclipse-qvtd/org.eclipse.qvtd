@@ -23,7 +23,6 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CompleteModel;
 import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.Type;
-import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotConstants;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
@@ -81,15 +80,15 @@ public class RootScheduledRegion extends AbstractScheduledRegion
 		this.contentsAnalysis = new ContentsAnalysis(getSchedulerConstants());
 	}
 
-	public RootScheduledRegion(@NonNull String name, @NonNull List<Region> regions) {
+	/*	public RootScheduledRegion(@NonNull String name, @NonNull List<@NonNull Region> regions) {
 		super(ClassUtil.nonNullState(regions.get(0)).getMultiRegion());
 		this.name = name;
 		this.completeModel = getSchedulerConstants().getEnvironmentFactory().getCompleteModel();
 		this.contentsAnalysis = new ContentsAnalysis(getSchedulerConstants());
-		for (@SuppressWarnings("null")@NonNull Region region : regions) {
+		for (@NonNull Region region : regions) {
 			addRegion(region);
 		}
-	}
+	} */
 
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {

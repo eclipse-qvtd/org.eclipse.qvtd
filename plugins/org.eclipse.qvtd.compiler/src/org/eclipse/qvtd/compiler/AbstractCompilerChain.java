@@ -238,8 +238,9 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 		public @NonNull RootScheduledRegion execute(@NonNull Resource pResource) throws IOException {
 			CreateStrategy savedStrategy = environmentFactory.setCreateStrategy(QVTcEnvironmentFactory.CREATE_STRATEGY);
 			try {
+				Map<@NonNull Key<? extends Object>, @Nullable Object> schedulerOptions = getOption(CompilerChain.SCHEDULER_OPTIONS_KEY);
 				Transformation asTransformation = AbstractCompilerChain.getTransformation(pResource);
-				QVTp2QVTs qvtp2qvts = new QVTp2QVTs(this, environmentFactory, asTransformation);
+				QVTp2QVTs qvtp2qvts = new QVTp2QVTs(this, environmentFactory, asTransformation, schedulerOptions);
 				MultiRegion multiRegion = qvtp2qvts.transform();
 				throwCompilerChainExceptionForErrors();
 				String rootName = ClassUtil.nonNullState(asTransformation.eResource().getURI().trimFileExtension().trimFileExtension().lastSegment());

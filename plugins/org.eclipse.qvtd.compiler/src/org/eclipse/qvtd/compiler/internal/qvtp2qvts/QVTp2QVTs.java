@@ -16,7 +16,9 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.ExpressionInOCL;
 import org.eclipse.ocl.pivot.LanguageExpression;
 import org.eclipse.ocl.pivot.OCLExpression;
@@ -27,6 +29,7 @@ import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.ParserException;
 import org.eclipse.ocl.pivot.utilities.TracingOption;
+import org.eclipse.qvtd.compiler.CompilerChain.Key;
 import org.eclipse.qvtd.compiler.CompilerConstants;
 import org.eclipse.qvtd.compiler.CompilerProblem;
 import org.eclipse.qvtd.compiler.ProblemHandler;
@@ -61,12 +64,13 @@ public class QVTp2QVTs extends SchedulerConstants
 	 */
 	private final @NonNull Map<@NonNull Mapping, @NonNull BasicMappingRegion> mapping2mappingRegion = new HashMap<>();
 
-	public QVTp2QVTs(@NonNull ProblemHandler problemHandler, @NonNull EnvironmentFactory environmentFactory, @NonNull Transformation asTransformation) {
-		super(environmentFactory, asTransformation);
+	private Map<@NonNull OperationDatum, @NonNull OperationRegion> operationDatum2operationRegion = new HashMap<>();
+
+	public QVTp2QVTs(@NonNull ProblemHandler problemHandler, @NonNull EnvironmentFactory environmentFactory, @NonNull Transformation asTransformation,
+			@Nullable Map<@NonNull Key<? extends Object>, @Nullable Object> schedulerOptions) {
+		super(environmentFactory, asTransformation, schedulerOptions);
 		this.problemHandler = problemHandler;
 	}
-
-	private Map<@NonNull OperationDatum, @NonNull OperationRegion> map = new HashMap<>();
 
 	public void addProblem(@NonNull CompilerProblem problem) {
 		problemHandler.addProblem(problem);
@@ -80,10 +84,10 @@ public class QVTp2QVTs extends SchedulerConstants
 		try {
 			specification = getEnvironmentFactory().getMetamodelManager().parseSpecification(bodyExpression);
 			OperationDatum operationDatum = createOperationDatum(operationCallExp);
-			OperationRegion operationRegion = map.get(operationDatum);
+			OperationRegion operationRegion = operationDatum2operationRegion.get(operationDatum);
 			if (operationRegion == null) {
 				operationRegion = new OperationRegion(multiRegion, operationDatum, specification, operationCallExp);
-				map.put(operationDatum, operationRegion);
+				operationDatum2operationRegion.put(operationDatum, operationRegion);
 				if (QVTp2QVTs.DEBUG_GRAPHS.isActive()) {
 					operationRegion.writeDebugGraphs(null);
 				}
@@ -148,7 +152,8 @@ public class QVTp2QVTs extends SchedulerConstants
 			orderedRegions.add(mappingRegion);
 			//			mappingRegion.resolveRecursion();
 		}
-		List<@NonNull Region> activeRegions = new ArrayList<>(EarlyMerger.merge(orderedRegions));
+		boolean noEarlyMerge = isNoEarlyMerge();
+		List<@NonNull Region> activeRegions = new ArrayList<>(noEarlyMerge ? orderedRegions : EarlyMerger.merge(orderedRegions));
 		//		for (@NonNull Region activeRegion : activeRegions) {
 		//			((AbstractRegion)activeRegion).resolveRecursion();
 		//		}

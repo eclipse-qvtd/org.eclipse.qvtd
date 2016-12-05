@@ -165,19 +165,9 @@ public abstract class AbstractScheduledRegion extends AbstractRegion implements 
 			writeDebugGraphs("7-pruned", true, true, false);
 		}
 
-		Map<@NonNull Region, @NonNull List<@NonNull Region>> newRegion2oldRegions = LateConsumerMerger.merge(this);
-		for (Map.Entry<@NonNull Region, @NonNull List<@NonNull Region>> entry : newRegion2oldRegions.entrySet()) {
-			Region newRegion = entry.getKey();
-			List<@NonNull Region> oldRegions = entry.getValue();
-			assert oldRegions.size() >= 2;
-			int orderedRegionIndex = orderedRegions.indexOf(oldRegions.get(0));
-			for (@NonNull Region oldRegion : oldRegions) {
-				orderedRegions.remove(oldRegion);
-			}
-			orderedRegions.add(orderedRegionIndex, newRegion);
-			QVTs2QVTiVisitor.POLLED_PROPERTIES.println("building indexes for " + newRegion + " " + newRegion.getIndexRangeText());
-			newRegion.buildPredicatedNavigationEdgesIndex(typedModel2property2predicatedEdges);
-			newRegion.buildRealizedNavigationEdgesIndex(typedModel2property2realizedEdges);
+		boolean noLateConsumerMerge = getSchedulerConstants().isNoLateConsumerMerge();
+		if (!noLateConsumerMerge) {
+			lateMerge(orderedRegions, typedModel2property2predicatedEdges, typedModel2property2realizedEdges);
 		}
 
 		for (@NonNull Region region : orderedRegions) {
@@ -420,6 +410,25 @@ public abstract class AbstractScheduledRegion extends AbstractRegion implements 
 	@Override
 	public @NonNull List<@NonNull Region> getRegions() {
 		return regions;
+	}
+
+	protected void lateMerge(@NonNull List<@NonNull Region> orderedRegions,
+			@NonNull Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>>> typedModel2property2predicatedEdges,
+			@NonNull Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>>> typedModel2property2realizedEdges) {
+		Map<@NonNull Region, @NonNull List<@NonNull Region>> newRegion2oldRegions = LateConsumerMerger.merge(this);
+		for (Map.Entry<@NonNull Region, @NonNull List<@NonNull Region>> entry : newRegion2oldRegions.entrySet()) {
+			Region newRegion = entry.getKey();
+			List<@NonNull Region> oldRegions = entry.getValue();
+			assert oldRegions.size() >= 2;
+			int orderedRegionIndex = orderedRegions.indexOf(oldRegions.get(0));
+			for (@NonNull Region oldRegion : oldRegions) {
+				orderedRegions.remove(oldRegion);
+			}
+			orderedRegions.add(orderedRegionIndex, newRegion);
+			QVTs2QVTiVisitor.POLLED_PROPERTIES.println("building indexes for " + newRegion + " " + newRegion.getIndexRangeText());
+			newRegion.buildPredicatedNavigationEdgesIndex(typedModel2property2predicatedEdges);
+			newRegion.buildRealizedNavigationEdgesIndex(typedModel2property2realizedEdges);
+		}
 	}
 
 	@Override

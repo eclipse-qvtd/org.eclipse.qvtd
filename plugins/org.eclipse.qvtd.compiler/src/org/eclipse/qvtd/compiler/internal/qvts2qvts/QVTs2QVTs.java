@@ -121,7 +121,6 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		RootScheduledRegion rootRegion = createRootRegion(activeRegions);
 		rootRegion.createSchedule();
 		createSchedule(rootRegion);
-		//		LateConsumerMerger.merge(rootRegion);
 		if (QVTp2QVTs.DEBUG_GRAPHS.isActive()) {
 			rootRegion.writeDebugGraphs("9-final", true, true, true);
 		}

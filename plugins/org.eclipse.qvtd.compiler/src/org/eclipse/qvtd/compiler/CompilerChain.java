@@ -63,23 +63,27 @@ public interface CompilerChain
 	public static final @NonNull String QVTU_STEP = "QVTu";
 	public static final @NonNull String TRACE_STEP = "Trace";
 
-	public static final @NonNull Key<Boolean> CHECK_KEY = new Key<Boolean>("check");
-	public static final @NonNull Key<Boolean> DEBUG_KEY = new Key<Boolean>("debug");
-	//	public static final @NonNull Key<@NonNull QVTuConfiguration> QVTU_CONFIGURATION_KEY = new Key<@NonNull QVTuConfiguration>("qvtuConfiguration");
-	public static final @NonNull Key<@NonNull Map<@NonNull String, @Nullable String>> GENMODEL_OPTIONS_KEY = new Key<@NonNull Map<@NonNull String, @Nullable String>>("genmodel-options");
-	public static final @NonNull Key<@Nullable Collection<@NonNull ? extends GenPackage>> GENMODEL_USED_GENPACKAGES_KEY = new Key<@Nullable Collection<@NonNull ? extends GenPackage>>("genmodel-usedGenPackages");;
-	public static final @NonNull Key<@NonNull Map<@NonNull String, @Nullable String>> TRACE_OPTIONS_KEY = new Key<@NonNull Map<@NonNull String, @Nullable String>>("trace-options");
-	public static final @NonNull Key<@NonNull Map<Object, Object>> SAVE_OPTIONS_KEY = new Key<@NonNull Map<Object, Object>>("save");
-	public static final @NonNull Key<@Nullable URI> URI_KEY = new Key<@Nullable URI>("uri");
-	public static final @NonNull Key<Boolean> VALIDATE_KEY = new Key<Boolean>("validate");
+	public static final @NonNull Key<Boolean> CHECK_KEY = new Key<>("check");
+	public static final @NonNull Key<Boolean> DEBUG_KEY = new Key<>("debug");
+	//	public static final @NonNull Key<@NonNull QVTuConfiguration> QVTU_CONFIGURATION_KEY = new Key<>("qvtuConfiguration");
+	public static final @NonNull Key<@NonNull Map<@NonNull String, @Nullable String>> GENMODEL_OPTIONS_KEY = new Key<>("genmodel-options");
+	public static final @NonNull Key<@Nullable Collection<@NonNull ? extends GenPackage>> GENMODEL_USED_GENPACKAGES_KEY = new Key<>("genmodel-usedGenPackages");;
+	public static final @NonNull Key<@NonNull Map<@NonNull String, @Nullable String>> TRACE_OPTIONS_KEY = new Key<>("trace-options");
+	public static final @NonNull Key<@NonNull Map<Object, Object>> SAVE_OPTIONS_KEY = new Key<>("save");
+	public static final @NonNull Key<@NonNull Map<@NonNull Key<? extends Object>, @Nullable Object>> SCHEDULER_OPTIONS_KEY = new Key<>("scheduler-options");
+	public static final @NonNull Key<@Nullable URI> URI_KEY = new Key<>("uri");
+	public static final @NonNull Key<Boolean> VALIDATE_KEY = new Key<>("validate");
 
-	public static final @NonNull Key<@Nullable String> JAVA_EXTRA_PREFIX_KEY = new Key<@Nullable String>("javaExtraPrefix");
-	public static final @NonNull Key<@Nullable Boolean> JAVA_INCREMENTAL_KEY = new Key<@Nullable Boolean>("javaIncremental");
+	public static final @NonNull Key<@Nullable String> JAVA_EXTRA_PREFIX_KEY = new Key<>("javaExtraPrefix");
+	public static final @NonNull Key<@Nullable Boolean> JAVA_INCREMENTAL_KEY = new Key<>("javaIncremental");
 
 	public static final @NonNull String GENMODEL_BASE_PREFIX = "genModelBasePrefix";
 	public static final @NonNull String GENMODEL_COPYRIGHT_TEXT = "genModelCopyrightText";
 
 	public static final @NonNull String TRACE_NS_URI = "traceNsURI";
+
+	public static final @NonNull Key<Boolean> SCHEDULER_NO_EARLY_MERGE = new Key<>("schedulerNoEarlyMerge");
+	public static final @NonNull Key<Boolean> SCHEDULER_NO_LATE_CONSUMER_MERGE = new Key<>("schedulerNoLateConsumerMerge");
 
 	void addListener(@NonNull Listener listener);
 	@NonNull Class<? extends Transformer> build(@NonNull String outputName, @NonNull String ... genModelFiles) throws Exception;
