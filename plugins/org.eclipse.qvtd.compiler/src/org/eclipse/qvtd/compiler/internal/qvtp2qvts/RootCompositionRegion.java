@@ -169,10 +169,10 @@ public class RootCompositionRegion extends AbstractRegion
 		return nullNode2;
 	}
 
-	@Override
-	protected @NonNull String getSymbolNamePrefix() {
-		return "";
-	}
+	//	@Override
+	//	protected @NonNull String getSymbolNamePrefix() {
+	//		return "";
+	//	}
 
 	@Override
 	public boolean isRootCompositionRegion() {

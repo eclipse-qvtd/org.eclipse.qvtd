@@ -999,11 +999,11 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		assert pReferredMapping != null;
 		CGMapping cgReferredMapping = analyzer.getMapping(pReferredMapping);
 		assert cgReferredMapping != null;
-		List<CGMappingCallBinding> cgMappingCallBindings = cgMappingCall.getMappingCallBindings();
+		Iterable<@NonNull CGMappingCallBinding> cgMappingCallBindings = QVTiCGUtil.getOwnedMappingCallBindings(cgMappingCall);
 		//
 		//	Set loopVariable non-null if it needs to be type-checked and cast to a narrower type.
 		//
-		for (@SuppressWarnings("null")@NonNull CGMappingCallBinding cgMappingCallBinding : cgMappingCallBindings) {
+		for (@NonNull CGMappingCallBinding cgMappingCallBinding : cgMappingCallBindings) {
 			TypeDescriptor checkedType = needsTypeCheck(cgMappingCallBinding);
 			if (checkedType != null) {
 				js.append("if (");
@@ -1043,7 +1043,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			js.append(mappingCtorName);
 			js.append(".invoke(");
 			boolean isFirst = true;
-			for (@SuppressWarnings("null")@NonNull CGMappingCallBinding cgMappingCallBinding : cgMappingCallBindings) {
+			for (@NonNull CGMappingCallBinding cgMappingCallBinding : cgMappingCallBindings) {
 				if (!isFirst) {
 					js.append(", ");
 				}
@@ -1061,7 +1061,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		//
 		//	End the type check.
 		//
-		for (@SuppressWarnings("null")@NonNull CGMappingCallBinding cgMappingCallBinding : cgMappingCallBindings) {
+		for (@NonNull CGMappingCallBinding cgMappingCallBinding : cgMappingCallBindings) {
 			TypeDescriptor checkedType = needsTypeCheck(cgMappingCallBinding);
 			if (checkedType != null) {
 				js.popIndentation();
@@ -1362,10 +1362,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 	}
 
 	protected void doRun(@NonNull CGTransformation cgTransformation) {
-		CGMapping cgRootMapping = NameUtil.getNameable(cgTransformation.getMappings(), QVTimperativeUtil.ROOT_MAPPING_NAME);
-		if (cgRootMapping == null) {
-			throw new IllegalStateException("Transformation " + cgTransformation.getName() + " has no root mapping");
-		}
+		CGMapping cgRootMapping = QVTiCGUtil.getRootMapping(cgTransformation);
 		js.append("@Override\n");
 		js.append("public boolean run() {\n");
 		js.pushIndentation(null);
@@ -1444,9 +1441,9 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		return (QVTiGlobalContext) globalContext;
 	}
 
-	private @Nullable Iterable<@NonNull CGMappingCallBinding> getIterateBindings(@NonNull List<CGMappingCallBinding> cgMappingCallBindings) {
+	private @Nullable Iterable<@NonNull CGMappingCallBinding> getIterateBindings(@NonNull Iterable<@NonNull CGMappingCallBinding> cgMappingCallBindings) {
 		List<@NonNull CGMappingCallBinding> bindings = null;
-		for (CGMappingCallBinding cgMappingCallBinding : cgMappingCallBindings) {
+		for (@NonNull CGMappingCallBinding cgMappingCallBinding : cgMappingCallBindings) {
 			Element ast = cgMappingCallBinding.getAst();
 			if (ast instanceof LoopParameterBinding) {
 				if (bindings == null) {

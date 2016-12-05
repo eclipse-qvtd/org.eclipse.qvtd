@@ -41,6 +41,7 @@ import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.AppendParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.AppendParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
+import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
@@ -55,6 +56,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ObservableStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.SimpleParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 
@@ -287,10 +289,33 @@ public class QVTimperativeUtil extends QVTbaseUtil
 		return (@NonNull Iterable<@NonNull ImperativeTypedModel>)modelParameter;
 	}
 
-	public static @NonNull Mapping getRootMapping(@NonNull ImperativeTransformation transformation) {
-		Mapping mapping = getOwnedMapping(transformation, QVTimperativeUtil.ROOT_MAPPING_NAME);
-		//		assert mapping == transformation.getRule().get(0);
-		return mapping;
+	public static @NonNull Mapping getRootMapping(@NonNull ImperativeTransformation asTransformation) {
+		Mapping asRootMapping = NameUtil.getNameable(getOwnedMappings(asTransformation), QVTimperativeUtil.ROOT_MAPPING_NAME);	// Obsolete relic
+		for (@NonNull Mapping asMapping : getOwnedMappings(asTransformation)) {
+			boolean isRoot = true;
+			for (@NonNull MappingParameter asParameter : QVTimperativeUtil.getOwnedMappingParameters(asMapping)) {
+				if (asParameter instanceof GuardParameter) {
+					isRoot = false;
+					break;
+				}
+				if (asParameter instanceof SimpleParameter) {
+					isRoot = false;
+					break;
+				}
+			}
+			if (isRoot) {
+				if (asRootMapping == null) {
+					asRootMapping = asMapping;
+				}
+				else if (asRootMapping != asMapping) {
+					throw new IllegalStateException("Transformation " + asTransformation.getName() + " has ambiguous root mappings: " + asRootMapping + ", " + asMapping);
+				}
+			}
+		}
+		if (asRootMapping  == null) {
+			throw new IllegalStateException("Transformation " + asTransformation.getName() + " has no root mapping");
+		}
+		return asRootMapping;
 	}
 
 	public static @NonNull Property getTargetProperty(@NonNull SetStatement asSetStatement) {
