@@ -40,6 +40,6 @@ public class MicroMappingRegion extends AbstractMappingRegion
 
 	@Override
 	public @NonNull String getName() {
-		return prefix + "\\n" + mappingRegion.getName();
+		return prefix + " " + mappingRegion.getName();
 	}
 }

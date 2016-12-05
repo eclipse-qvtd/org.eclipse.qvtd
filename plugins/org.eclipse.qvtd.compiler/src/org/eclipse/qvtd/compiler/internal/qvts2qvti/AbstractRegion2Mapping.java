@@ -30,7 +30,6 @@ import org.eclipse.ocl.pivot.PropertyCallExp;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.TypeExp;
 import org.eclipse.ocl.pivot.TypedElement;
-import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.ids.IdManager;
 import org.eclipse.ocl.pivot.ids.IdResolver;
@@ -40,7 +39,6 @@ import org.eclipse.ocl.pivot.internal.complete.StandardLibraryInternal;
 import org.eclipse.ocl.pivot.internal.manager.PivotMetamodelManager;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
-import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NodeConnection;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
@@ -146,88 +144,7 @@ public abstract class AbstractRegion2Mapping
 		return helper.createOperationCallExp(asSource, "oclAsType", asTypeExp);
 	}
 
-	/*	protected @NonNull OperationCallExp createOperationCallExp(@NonNull OCLExpression asSource, @NonNull Operation asOperation, /*@NonNull* / OCLExpression... asArguments) {
-		PivotMetamodelManager metamodelManager = getMetamodelManager();
-		StandardLibraryInternal standardLibrary = metamodelManager.getStandardLibrary();
-		@NonNull Operation asBestOperation = asOperation;
-		org.eclipse.ocl.pivot.Class asType = (org.eclipse.ocl.pivot.Class)asSource.getType();
-		assert asType != null;
-		org.eclipse.ocl.pivot.Class sourceType1 = PivotUtil.getUnspecializedTemplateableElement(asType);
-		for (Operation asOverrideOperation : metamodelManager.getFinalAnalysis().getOverrides(asOperation)) {
-			if (asOverrideOperation.getOwningClass().conformsTo(standardLibrary, sourceType1)) {		// FIXME arguments, generic method
-				asBestOperation = asOverrideOperation;
-			}
-		}
-		OperationCallExp asCallExp = PivotUtil.createOperationCallExp(asSource, asBestOperation, asArguments);
-		Type formalType = asBestOperation.getType();
-		if ((formalType instanceof TemplateParameter) || ((formalType instanceof TemplateableElement) && (((TemplateableElement)formalType).getUnspecializedElement() != null))) {
-			assert formalType != null;
-			Type sourceType2 = asSource.getType();
-			Type sourceTypeValue = asSource.getTypeValue();
-			Type returnType = null;
-			if (sourceType2 != null) {
-				if (asBestOperation.isIsTypeof()) {
-					returnType = metamodelManager.specializeType(formalType, asCallExp, sourceType2, null);
-				}
-				else {
-					returnType = metamodelManager.specializeType(formalType, asCallExp, sourceType2, sourceTypeValue);
-				}
-			}
-			asCallExp.setType(returnType);
-		}
-		return asCallExp;
-	}
-
-	// FIXME Unify two createOperationCallExp's
-	protected @NonNull OperationCallExp createOperationCallExp(@Nullable OCLExpression asSource, @NonNull Operation asOperation, @NonNull List<OCLExpression> asArguments) {
-		Type formalType = asOperation.getType();
-		OperationCallExp asCallExp = PivotFactory.eINSTANCE.createOperationCallExp();
-		asCallExp.setReferredOperation(asOperation);
-		asCallExp.setOwnedSource(asSource);
-		asCallExp.getOwnedArguments().addAll(asArguments);
-		asCallExp.setIsRequired(asOperation.isIsRequired());
-
-		Type sourceType = null;
-		Type sourceTypeValue = null;
-		if (asSource != null) {
-			sourceType = asSource.getType();
-			sourceTypeValue = asSource.getTypeValue();
-		}
-		Type returnType = null;
-		if ((formalType != null) && (sourceType != null)) {
-			PivotMetamodelManager metamodelManager = getMetamodelManager();
-			if (asOperation.isIsTypeof()) {
-				returnType = metamodelManager.specializeType(formalType, asCallExp, sourceType, null);
-			}
-			else {
-				returnType = metamodelManager.specializeType(formalType, asCallExp, sourceType, sourceTypeValue);
-			}
-		}
-		asCallExp.setType(returnType);
-		return asCallExp;
-	} */
-
 	public abstract void createStatements();
-
-	/*	private @NonNull OCLExpression createUnrealizedVariableExp(@NonNull Node node) {	// FIXME redundant
-		Variable variable = node2variable.get(node);
-		if (variable == null) {
-			ClassDatumAnalysis classDatumAnalysis = node.getClassDatumAnalysis();
-			BottomPattern bottomPattern = mapping/*getArea(classDatumAnalysis.getDomainUsage())* /.getBottomPattern();
-			OCLExpression initExpression = getExpression(node);
-
-			variable = PivotUtil.createVariable(getName(node), classDatumAnalysis.getCompleteClass().getPrimaryClass(), true, initExpression);
-			bottomPattern.getVariable().add(variable);
-			node2variable.put(node, variable);
-		}
-		return PivotUtil.createVariableExp(variable);
-	} */
-
-	protected @NonNull Variable createVariable(@NonNull Node node) {
-		Type asType = node.getClassDatumAnalysis().getCompleteClass().getPrimaryClass();
-		assert asType != null;
-		return PivotUtil.createVariable(getSafeName(node), asType, true, null);
-	}
 
 	protected int getCollectionDepth(@NonNull Type type) {
 		if (type instanceof CollectionType) {
@@ -259,22 +176,6 @@ public abstract class AbstractRegion2Mapping
 	public abstract @NonNull List<@NonNull Node> getGuardNodes();
 
 	public abstract @NonNull MappingParameter getGuardVariable(@NonNull Node node);
-
-	/*	private @Nullable OCLExpression getInitExpression(@NonNull Node node) {
-		List<Edge> incomingEdges = node.getIncomingEdges();
-		if (incomingEdges != null) {
-			for (Edge edge : incomingEdges) {
-				EdgeRole edgeRole = edge.getEdgeRole();
-				if (edgeRole.isNavigation() && edgeRole.isLoaded()) {
-					OCLExpression source = edge.getSource());
-					if (source != null) {
-						return createPropertyCallExp(source, ((NavigationEdge)edge).getProperty());
-					}
-				}
-			}
-		}
-		return null;
-	} */
 
 	public @NonNull Mapping getMapping() {
 		return mapping;

@@ -11,9 +11,12 @@
 package org.eclipse.qvtd.compiler.internal.qvtp2qvts;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
@@ -364,6 +367,44 @@ public class RegionUtil
 		}
 	}
 
+	/**
+	 * Return all nodes to which node is transitively cast or just node in the total absence of casts.
+	 * If includeUsedIntermediates is set, cast edge inputs that are used by non-cast edges are also returned.
+	 */
+	public static @NonNull Iterable<@NonNull Node> getCastTargets(@NonNull Node node, boolean includeUsedIntermediates) {
+		for (@NonNull Edge edge : node.getOutgoingEdges()) {
+			if (edge.isRecursion() || edge.isSecondary()) {
+				continue;
+			}
+			else if (edge.isCast()) {
+				Set<@NonNull Node> castTargets = new HashSet<>();
+				getCastTargets(node, includeUsedIntermediates, new HashSet<>(), castTargets);
+				return castTargets;
+			}
+		}
+		return Collections.singletonList(node);
+	}
+	private static void getCastTargets(@NonNull Node sourceNode, boolean includeUsedIntermediates, @NonNull Set<@NonNull Node> castSources, @NonNull Set<@NonNull Node> castTargets) {
+		if (castSources.add(sourceNode)) {
+			boolean hasCast = false;
+			for (@NonNull Edge edge : sourceNode.getOutgoingEdges()) {
+				if (edge.isRecursion() || edge.isSecondary()) {
+					continue;
+				}
+				else if (edge.isCast()) {
+					hasCast = true;
+					getCastTargets(edge.getTarget(), includeUsedIntermediates, castSources, castTargets);
+				}
+				else if (includeUsedIntermediates) {
+					castTargets.add(sourceNode);
+				}
+			}
+			if (!hasCast) {
+				castTargets.add(sourceNode);
+			}
+		}
+	}
+
 	public static @NonNull Map<@NonNull CompleteClass, @NonNull List<@NonNull Node>> getCompleteClass2Nodes(@NonNull Region region) {
 		Map<@NonNull CompleteClass, @NonNull List<@NonNull Node>> completeClass2nodes = new HashMap<>();
 		for (@NonNull Node node : region.getNodes()) {
@@ -568,10 +609,22 @@ public class RegionUtil
 		else if (secondRole.isRealized()) {
 			return secondRole;
 		}
-		else if (firstRole.isPredicated()){
+		else if (firstRole.isSpeculated()) {
 			return firstRole;
 		}
-		else if (secondRole.isPredicated()){
+		else if (secondRole.isSpeculated()) {
+			return secondRole;
+		}
+		else if (firstRole.isSpeculation()) {
+			return firstRole;
+		}
+		else if (secondRole.isSpeculation()) {
+			return secondRole;
+		}
+		else if (firstRole.isPredicated()) {
+			return firstRole;
+		}
+		else if (secondRole.isPredicated()) {
 			return secondRole;
 		}
 		throw new UnsupportedOperationException();

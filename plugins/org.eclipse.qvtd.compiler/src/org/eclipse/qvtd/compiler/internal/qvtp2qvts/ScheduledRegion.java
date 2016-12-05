@@ -21,9 +21,10 @@ import org.eclipse.ocl.pivot.Property;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis;
 
 public interface ScheduledRegion extends Region
-{	
+{
 	void addEdgeConnection(@NonNull EdgeConnection edgeConnection);
 	void addNodeConnection(@NonNull NodeConnection nodeConnection);
+	void addRegion(@NonNull Region region);
 	@NonNull CyclicScheduledRegion createCyclicScheduledRegion(@NonNull Iterable<@NonNull Region> cycle);
 	void createLocalSchedule();
 	void createLocalSchedule2(@NonNull List<@NonNull Region> orderedRegions);
@@ -38,6 +39,7 @@ public interface ScheduledRegion extends Region
 	@NonNull List<@NonNull Region> getRegions();
 	@NonNull RootScheduledRegion getRootScheduledRegion();
 	void removeConnection(@NonNull Connection connection);
+	void removeRegion(@NonNull Region region);
 	void replaceSources(@NonNull NodeConnection connection, @NonNull Set<@NonNull Node> obsoleteSourceNodes, @NonNull Node newSourceNode);
 	void writeDebugGraphs(@NonNull String context, boolean doNodesGraph, boolean doRegionGraph, boolean doCallGraph);
 }

@@ -27,11 +27,14 @@ import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.MappingRegion;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.MultiRegion;
+import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NamedMappingRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.NavigableEdge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.QVTp2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis;
+import org.eclipse.qvtd.compiler.internal.utilities.SymbolNameBuilder;
 
 import com.google.common.collect.Sets;
 
@@ -41,6 +44,38 @@ import com.google.common.collect.Sets;
  */
 public class EarlyMerger extends AbstractMerger
 {
+	public static class EarlyMergedMappingRegion extends NamedMappingRegion
+	{
+		public EarlyMergedMappingRegion(@NonNull MultiRegion multiRegion, @NonNull String name) {
+			super(multiRegion, name);
+		}
+
+		@Override
+		protected @NonNull SymbolNameBuilder computeSymbolName() {
+			SymbolNameBuilder s = super.computeSymbolName();
+			s.appendString(".early");;
+			return s;
+		}
+	}
+
+	protected static class EarlyRegionMerger extends RegionMerger
+	{
+		protected EarlyRegionMerger(@NonNull MappingRegion primaryRegion) {
+			super(primaryRegion);
+		}
+
+		@Override
+		protected @NonNull MappingRegion createNewRegion(@NonNull String newName) {
+			return new EarlyMergedMappingRegion(primaryRegion.getMultiRegion(), newName);
+		}
+	}
+
+	private static class EarlyStrategy extends Correlator.AbstractCorrelationStrategy
+	{
+		public static @NonNull EarlyStrategy INSTANCE = new EarlyStrategy();
+
+	}
+
 	/**
 	 * Replace those inputRegions that may be merged by merged regions.
 	 *
@@ -136,21 +171,6 @@ public class EarlyMerger extends AbstractMerger
 		return toOneReachableClasses.contains(classDatumAnalysis);
 	}
 
-	/**
-	 * Return true if any primaryRegion head coincides with a secondaryRegion head.
-	 */
-	protected boolean isSharedHead(@NonNull Region primaryRegion, @NonNull Region secondaryRegion) {
-		for (@NonNull Node primaryHead : primaryRegion.getHeadNodes()) {
-			ClassDatumAnalysis primaryClassDatumAnalysis = primaryHead.getClassDatumAnalysis();
-			for (@NonNull Node secondaryHead : secondaryRegion.getHeadNodes()) {
-				if (primaryClassDatumAnalysis == secondaryHead.getClassDatumAnalysis()) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-
 	private boolean isToOne(@Nullable TypedElement typedElement) {
 		if (typedElement == null) {
 			return false;
@@ -215,19 +235,22 @@ public class EarlyMerger extends AbstractMerger
 		MappingRegion mergedRegion = null;
 		for (@NonNull MappingRegion secondaryRegion : secondaryRegions) {
 			if (residualInputRegions.contains(secondaryRegion)) {
-				Correlator secondary2primary = Correlator.correlate(secondaryRegion, primaryRegion);
+				if (EARLY.isActive()) {
+					EARLY.println("Correlating: " + secondaryRegion + ", " + primaryRegion);
+				}
+				Correlator secondary2primary = Correlator.correlate(secondaryRegion, primaryRegion, EarlyStrategy.INSTANCE, null);
 				if (secondary2primary != null) {
 					boolean doMerge = false;
 					if (!isSharedHead(primaryRegion, secondaryRegion)) {
 						doMerge = true;
 					}
-					else if (Correlator.correlate(primaryRegion, secondaryRegion) != null) {
+					else if (Correlator.correlate(primaryRegion, secondaryRegion, EarlyStrategy.INSTANCE, secondary2primary.getNode2Node()) != null) {
 						doMerge = true;
 					}
 					if (doMerge) {
 						residualInputRegions.remove(mergedRegion);
 						residualInputRegions.remove(secondaryRegion);
-						RegionMerger regionMerger = new RegionMerger(primaryRegion);
+						RegionMerger regionMerger = new EarlyRegionMerger(primaryRegion);
 						regionMerger.addSecondaryRegion(secondaryRegion, secondary2primary.getNode2Node());
 						regionMerger.prune();
 						mergedRegion = regionMerger.create();

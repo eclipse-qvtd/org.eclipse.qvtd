@@ -81,6 +81,7 @@ public interface Region extends Visitable, GraphNode, Nameable, Symbolable
 	 * The schedule index at which the latest dependent becomes available and consequently the latest that deferred execution may occur.
 	 */
 	int getFinalExecutionIndex();
+	int getFirstIndex();
 
 	@NonNull List<@NonNull Node> getHeadNodes();
 	@NonNull Iterable<@NonNull DatumConnection> getIncomingConnections();
@@ -150,8 +151,10 @@ public interface Region extends Visitable, GraphNode, Nameable, Symbolable
 	boolean isOperationRegion();
 	boolean isRootCompositionRegion();
 	void refineBindings(@NonNull Region bindingRegion);
+	void removeCallToChild(@NonNull Region region);
 	void removeEdge(@NonNull Edge edge);
 	void removeNode(@NonNull Node node);
+	void replaceCallToChild(@NonNull Region oldRegion, @NonNull Region newRegion);
 	void resetHead(@NonNull Node headNode);
 	void setInvokingRegion(@NonNull ScheduledRegion invokingRegion);
 	//	void setIsCyclic();

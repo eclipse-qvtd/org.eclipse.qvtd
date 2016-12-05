@@ -24,6 +24,7 @@ import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.analysis.ClassDatumAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvti.QVTs2QVTiVisitor;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.LateConsumerMerger;
 import org.eclipse.qvtd.compiler.internal.utilities.SymbolNameBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
@@ -80,6 +81,7 @@ public abstract class AbstractScheduledRegion extends AbstractRegion implements 
 		connections.add(nodeConnection);
 	}
 
+	@Override
 	public void addRegion(@NonNull Region region) {
 		assert !regions.contains(region);
 		if (regions.add(region)) {
@@ -161,6 +163,21 @@ public abstract class AbstractScheduledRegion extends AbstractRegion implements 
 		}
 		if (QVTp2QVTs.DEBUG_GRAPHS.isActive()) {
 			writeDebugGraphs("7-pruned", true, true, false);
+		}
+
+		Map<@NonNull Region, @NonNull List<@NonNull Region>> newRegion2oldRegions = LateConsumerMerger.merge(this);
+		for (Map.Entry<@NonNull Region, @NonNull List<@NonNull Region>> entry : newRegion2oldRegions.entrySet()) {
+			Region newRegion = entry.getKey();
+			List<@NonNull Region> oldRegions = entry.getValue();
+			assert oldRegions.size() >= 2;
+			int orderedRegionIndex = orderedRegions.indexOf(oldRegions.get(0));
+			for (@NonNull Region oldRegion : oldRegions) {
+				orderedRegions.remove(oldRegion);
+			}
+			orderedRegions.add(orderedRegionIndex, newRegion);
+			QVTs2QVTiVisitor.POLLED_PROPERTIES.println("building indexes for " + newRegion + " " + newRegion.getIndexRangeText());
+			newRegion.buildPredicatedNavigationEdgesIndex(typedModel2property2predicatedEdges);
+			newRegion.buildRealizedNavigationEdgesIndex(typedModel2property2realizedEdges);
 		}
 
 		for (@NonNull Region region : orderedRegions) {
@@ -302,9 +319,9 @@ public abstract class AbstractScheduledRegion extends AbstractRegion implements 
 		//		firstPassRegion.writeDOTfile();
 		//		firstPassRegion.writeGraphMLfile();
 		//
-		if (QVTp2QVTs.DEBUG_GRAPHS.isActive()) {
-			writeDebugGraphs("9-final", true, true, true);
-		}
+		//		if (QVTp2QVTs.DEBUG_GRAPHS.isActive()) {
+		//			writeDebugGraphs("9-final", true, true, true);
+		//		}
 	}
 
 	@Override
@@ -429,7 +446,8 @@ public abstract class AbstractScheduledRegion extends AbstractRegion implements 
 		}
 	}
 
-	protected void removeRegion(@NonNull Region region) {
+	@Override
+	public void removeRegion(@NonNull Region region) {
 		regions.remove(region);
 	}
 
@@ -524,12 +542,14 @@ public abstract class AbstractScheduledRegion extends AbstractRegion implements 
 			writeDebugGraphs(context);
 		}
 		if (doRegionGraph) {
-			scheduler.writeRegionDOTfile(this, "-r-" + context);
-			scheduler.writeRegionGraphMLfile(this, "-r-" + context);
+			String suffix = "-r-" + context;
+			scheduler.writeRegionDOTfile(this, suffix);
+			scheduler.writeRegionGraphMLfile(this, suffix);
 		}
 		if (doCallGraph) {
-			scheduler.writeCallDOTfile(this, "-c-" + context);
-			scheduler.writeCallGraphMLfile(this, "-c-" + context);
+			String suffix = "-c-" + context;
+			scheduler.writeCallDOTfile(this, suffix);
+			scheduler.writeCallGraphMLfile(this, suffix);
 		}
 	}
 }

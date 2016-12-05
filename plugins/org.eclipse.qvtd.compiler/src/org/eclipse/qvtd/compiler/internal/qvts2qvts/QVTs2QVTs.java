@@ -22,7 +22,6 @@ import org.eclipse.qvtd.compiler.internal.qvtp2qvts.QVTp2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RootScheduledRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.ScheduledRegion;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.LateMerger;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.Partitioner;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeHelper;
@@ -122,7 +121,10 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		RootScheduledRegion rootRegion = createRootRegion(activeRegions);
 		rootRegion.createSchedule();
 		createSchedule(rootRegion);
-		LateMerger.merge(rootRegion);
+		//		LateConsumerMerger.merge(rootRegion);
+		if (QVTp2QVTs.DEBUG_GRAPHS.isActive()) {
+			rootRegion.writeDebugGraphs("9-final", true, true, true);
+		}
 		return rootRegion;
 	}
 }

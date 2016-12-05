@@ -12,6 +12,7 @@ package org.eclipse.qvtd.compiler.internal.qvts2qvts;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -69,7 +70,19 @@ public class CallTreeBuilder
 	 * intermediate regions between the common region and the regions that use the connection variable as a source or target.
 	 */
 	protected void installConnections() {
-		for (@NonNull NodeConnection connection : connection2commonRegion.keySet()) {
+		List<@NonNull NodeConnection> connections = new ArrayList<>(connection2commonRegion.keySet());
+		Collections.sort(connections, new Comparator<@NonNull NodeConnection>()		// impriive determinism
+			{
+			@Override
+			public int compare(@NonNull NodeConnection o1, @NonNull NodeConnection o2) {
+				List<@NonNull Integer> l1 = o1.getIndexes();
+				List<@NonNull Integer> l2 = o2.getIndexes();
+				int x1 = l1.size() > 0 ? l1.get(0) : -1;
+				int x2 = l2.size() > 0 ? l2.get(0) : -1;
+				return x1-x2;
+			}
+			});
+		for (@NonNull NodeConnection connection : connections) {
 			if (connection.isPassed()) {
 				Region commonRegion = connection2commonRegion.get(connection);
 				assert commonRegion != null;
@@ -94,7 +107,7 @@ public class CallTreeBuilder
 				//				Scheduler.REGION_LOCALITY.println(connection + " => " + commonRegion + " " + intermediateRegions);
 			}
 		}
-		for (@NonNull NodeConnection connection : connection2commonRegion.keySet()) {
+		for (@NonNull NodeConnection connection : connections) {
 			if (connection.isPassed()) {
 				Region commonRegion = connection.getCommonRegion();
 				assert commonRegion != null;

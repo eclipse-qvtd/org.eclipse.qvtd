@@ -55,6 +55,13 @@ org.eclipse.qvtd.compiler/qvtr2qvtc/synthesize=false
 # Turn on tracing of the QVTr variables analysis 
 org.eclipse.qvtd.compiler/qvtr2qvtc/variables=false
 
+# Turn on tracing of the early merge correlation attempts
+org.eclipse.qvtd.compiler/qvts2qvts/merge/early=false
+# Turn on tracing of the merge correelation failures
+org.eclipse.qvtd.compiler/qvts2qvts/merge/failure=false
+# Turn on tracing of the late merge correlation attempts
+org.eclipse.qvtd.compiler/qvts2qvts/merge/late=false
+
 # Turn on tracing of the analysis for splitting of multi-headed regions
 #org.eclipse.qvtd.compiler/qvtp2qvts/split/analysis=false
 # Turn on tracing of the groups within multi-headed regions

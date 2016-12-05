@@ -328,4 +328,51 @@ public class ContentsAnalysis
 		}
 		return isCast;
 	}
+
+	private void removeNewEdge(@NonNull NavigableEdge newEdge) {
+		PropertyDatum propertyDatum = basicGetPropertyDatum(newEdge);
+		if (propertyDatum == null) {
+			propertyDatum = basicGetPropertyDatum(newEdge);		// FIXME debugging
+		}
+		assert propertyDatum != null;
+		removeNewEdge(newEdge, propertyDatum);
+	}
+	private void removeNewEdge(@NonNull NavigableEdge newEdge, @NonNull PropertyDatum propertyDatum) {
+		List<@NonNull NavigableEdge> edges = propertyDatum2newEdges.get(propertyDatum);
+		if (edges != null) {
+			if (edges.remove(newEdge)) {
+				for (@NonNull PropertyDatum superAbstractDatum : ClassUtil.nullFree(propertyDatum.getSuper())) {
+					removeNewEdge(newEdge, superAbstractDatum);
+				}
+			}
+		}
+	}
+
+	private void removeNewNode(@NonNull Node newNode) {
+		ClassDatumAnalysis classDatumAnalysis = newNode.getClassDatumAnalysis();
+		List<@NonNull Node> nodes = classDatumAnalysis2newNodes.get(classDatumAnalysis);
+		if (nodes != null) {
+			nodes.remove(newNode);
+		}
+	}
+
+	private void removeOldNode(@NonNull Node oldNode) {
+		ClassDatumAnalysis classDatumAnalysis = oldNode.getClassDatumAnalysis();
+		List<@NonNull Node> nodes = classDatumAnalysis2oldNodes.get(classDatumAnalysis);
+		if (nodes != null) {
+			nodes.remove(oldNode);
+		}
+	}
+
+	public void removeRegion(@NonNull Region region) {
+		for (@NonNull Node oldNode : region.getOldNodes()) {
+			removeOldNode(oldNode);
+		}
+		for (@NonNull Node newNode : region.getNewNodes()) {
+			removeNewNode(newNode);
+		}
+		for (@NonNull NavigableEdge newEdge : region.getRealizedNavigationEdges()) {
+			removeNewEdge(newEdge);
+		}
+	}
 }

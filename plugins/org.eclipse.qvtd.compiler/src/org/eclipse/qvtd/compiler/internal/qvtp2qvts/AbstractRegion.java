@@ -1446,6 +1446,13 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 	}
 
 	@Override
+	public int getFirstIndex() {
+		int size = indexes.size();
+		assert size > 0;
+		return indexes.get(0);
+	}
+
+	@Override
 	public @NonNull Iterable<@NonNull DatumConnection> getIncomingConnections() {		// FIXME cache
 		List<@NonNull DatumConnection> connections = new ArrayList<>();
 		for (@NonNull Node headNode : getHeadNodes()) {
@@ -1743,7 +1750,8 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 	public final @NonNull String getSymbolName() {
 		String symbolName2 = symbolName;
 		if (symbolName2 == null) {
-			symbolName = symbolName2 = getSchedulerConstants().reserveSymbolName(computeSymbolName(), this);
+			SymbolNameBuilder computedSymbolName = computeSymbolName();
+			symbolName = symbolName2 = getSchedulerConstants().reserveSymbolName(computedSymbolName, this);
 		}
 		return symbolName2;
 	}
@@ -2011,6 +2019,12 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 	}
 
 	@Override
+	public void removeCallToChild(@NonNull Region region) {
+		callableChildren.remove(region);
+		((AbstractRegion)region).callableParents.remove(this);
+	}
+
+	@Override
 	public void removeEdge(@NonNull Edge edge) {
 		boolean wasRemoved = edges.remove(edge);
 		assert wasRemoved;
@@ -2020,6 +2034,15 @@ public abstract class AbstractRegion implements Region, ToDOT.ToDOTable
 	public void removeNode(@NonNull Node node) {
 		boolean wasRemoved = nodes.remove(node);
 		assert wasRemoved;
+	}
+
+	@Override
+	public void replaceCallToChild(@NonNull Region oldRegion, @NonNull Region newRegion) {
+		int index = callableChildren.indexOf(oldRegion);
+		callableChildren.remove(oldRegion);
+		callableChildren.add(index, newRegion);
+		((AbstractRegion)oldRegion).callableParents.remove(this);
+		((AbstractRegion)oldRegion).callableParents.add(this);
 	}
 
 	@Override

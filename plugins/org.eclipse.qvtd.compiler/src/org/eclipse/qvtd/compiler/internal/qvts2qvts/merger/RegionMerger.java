@@ -22,8 +22,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Edge;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.MappingRegion;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.MicroMappingRegion;
-import org.eclipse.qvtd.compiler.internal.qvtp2qvts.EarlyMergedMappingRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Node;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
 
@@ -35,7 +33,7 @@ import com.google.common.collect.Iterables;
  *
  * RegionMerger is used by classes such as EarlyMerger and LateMerger that orchestrate what may be merged safely.
  */
-class RegionMerger // implements Region
+abstract class RegionMerger // implements Region
 {
 	/**
 	 * The primary original region contributing to the merged region.
@@ -69,7 +67,7 @@ class RegionMerger // implements Region
 
 	protected RegionMerger(@NonNull MappingRegion primaryRegion) {
 		this.primaryRegion = primaryRegion;
-		assert !(primaryRegion instanceof MicroMappingRegion);
+		//		assert !(primaryRegion instanceof MicroMappingRegion);
 		//
 		for (@NonNull Node primaryNode : primaryRegion.getNodes()) {
 			new NodeMerger(this, primaryNode);
@@ -113,7 +111,7 @@ class RegionMerger // implements Region
 	}
 
 	public void addSecondaryRegion(@NonNull MappingRegion secondaryRegion, @NonNull Map<@NonNull Node, @NonNull Node> secondaryNode2primaryNode) {
-		assert !(secondaryRegion instanceof MicroMappingRegion);
+		//		assert !(secondaryRegion instanceof MicroMappingRegion);
 		assert !secondaryRegions.contains(secondaryRegion);
 		secondaryRegions.add(secondaryRegion);
 		this.secondaryNode2primaryNode.putAll(secondaryNode2primaryNode);
@@ -182,9 +180,9 @@ class RegionMerger // implements Region
 
 	protected @NonNull String createNewName() {
 		List<@NonNull String> names = new ArrayList<>();
-		names.add(primaryRegion.getName());
+		names.add(primaryRegion.getName().replace("»\\n", "» "));
 		for (@NonNull MappingRegion secondaryRegion : secondaryRegions) {
-			names.add(secondaryRegion.getName());
+			names.add(secondaryRegion.getName().replace("»\\n", "» "));
 		}
 		Collections.sort(names);
 		StringBuilder s = new StringBuilder();
@@ -211,9 +209,7 @@ class RegionMerger // implements Region
 		}
 	}
 
-	protected @NonNull MappingRegion createNewRegion(@NonNull String newName) {
-		return new EarlyMergedMappingRegion(primaryRegion.getMultiRegion(), newName);
-	}
+	protected abstract @NonNull MappingRegion createNewRegion(@NonNull String newName);
 
 	protected @NonNull EdgeMerger getEdgeMerger(@NonNull Edge oldEdge) {
 		return ClassUtil.nonNullState(oldEdge2edgeMerger.get(oldEdge));
@@ -221,6 +217,10 @@ class RegionMerger // implements Region
 
 	protected @NonNull NodeMerger getNodeMerger(@NonNull Node oldNode) {
 		return ClassUtil.nonNullState(oldNode2nodeMerger.get(oldNode));
+	}
+
+	protected @NonNull List<@NonNull MappingRegion> getSecondaryRegions() {
+		return secondaryRegions;
 	}
 
 	protected void mapOldEdge(@NonNull Edge oldEdge, @NonNull EdgeMerger edgeMerger) {
@@ -233,6 +233,11 @@ class RegionMerger // implements Region
 		assert oldMergedNode == null;
 	}
 
+	/**
+	 * Prune nodes (and edges) that are not needed.
+	 *
+	 * Nodes that can be folded into other nodes, e.g. the input of a cast can be folded into its output, are pruned.
+	 */
 	public void prune() {
 		List<@NonNull EdgeMerger> foldableEdgeMergers = new ArrayList<>();
 		for (@NonNull NodeMerger nodeMerger : new HashSet<>(oldNode2nodeMerger.values())) {
