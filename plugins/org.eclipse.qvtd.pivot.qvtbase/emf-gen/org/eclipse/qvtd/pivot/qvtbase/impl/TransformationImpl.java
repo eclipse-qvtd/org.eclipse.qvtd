@@ -255,10 +255,8 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 	 * @generated
 	 */
 	@Override
-	public Function getFunction(String name) {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+	public Function getFunction(final String name) {
+		throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTbase!Transformation!getFunction(String)
 	}
 
 	/**

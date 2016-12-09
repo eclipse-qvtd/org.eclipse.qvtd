@@ -47,6 +47,7 @@ public interface Domain extends NamedElement, ReferringElement {
 	 * @see #setIsCheckable(boolean)
 	 * @see org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage#getDomain_IsCheckable()
 	 * @model unsettable="true"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTbase!Domain!isCheckable'"
 	 * @generated
 	 */
 	boolean isIsCheckable();
@@ -100,6 +101,7 @@ public interface Domain extends NamedElement, ReferringElement {
 	 * @see #setIsEnforceable(boolean)
 	 * @see org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage#getDomain_IsEnforceable()
 	 * @model unsettable="true"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTbase!Domain!isEnforceable'"
 	 * @generated
 	 */
 	boolean isIsEnforceable();
@@ -153,6 +155,7 @@ public interface Domain extends NamedElement, ReferringElement {
 	 * @see org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage#getDomain_Rule()
 	 * @see org.eclipse.qvtd.pivot.qvtbase.Rule#getDomain
 	 * @model opposite="domain" required="true"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTbase!Domain!rule'"
 	 * @generated
 	 */
 	Rule getRule();
@@ -178,7 +181,7 @@ public interface Domain extends NamedElement, ReferringElement {
 	 * @return the value of the '<em>Typed Model</em>' reference.
 	 * @see #setTypedModel(TypedModel)
 	 * @see org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage#getDomain_TypedModel()
-	 * @model
+	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTbase!Domain!typedModel'"
 	 * @generated
 	 */
 	TypedModel getTypedModel();

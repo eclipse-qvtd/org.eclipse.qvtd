@@ -12,8 +12,11 @@ package org.eclipse.qvtd.pivot.qvttemplate.impl;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EGenericType;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp;
@@ -22,6 +25,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem;
 import org.eclipse.qvtd.pivot.qvttemplate.QVTtemplateFactory;
 import org.eclipse.qvtd.pivot.qvttemplate.QVTtemplatePackage;
 import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
+import org.eclipse.qvtd.pivot.qvttemplate.util.QVTtemplateValidator;
 
 /**
  * <!-- begin-user-doc -->
@@ -86,7 +90,7 @@ public class QVTtemplatePackageImpl extends EPackageImpl implements QVTtemplateP
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link QVTtemplatePackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -114,10 +118,20 @@ public class QVTtemplatePackageImpl extends EPackageImpl implements QVTtemplateP
 		// Initialize created meta-data
 		theQVTtemplatePackage.initializePackageContents();
 
+		// Register package validator
+		EValidator.Registry.INSTANCE.put
+		(theQVTtemplatePackage,
+			new EValidator.Descriptor() {
+			@Override
+			public EValidator getEValidator() {
+				return QVTtemplateValidator.INSTANCE;
+			}
+		});
+
 		// Mark meta-data to indicate it can't be changed
 		theQVTtemplatePackage.freeze();
 
-  
+
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(QVTtemplatePackage.eNS_URI, theQVTtemplatePackage);
 		return theQVTtemplatePackage;
@@ -372,18 +386,46 @@ public class QVTtemplatePackageImpl extends EPackageImpl implements QVTtemplateP
 		initEReference(getPropertyTemplateItem_ObjContainer(), this.getObjectTemplateExp(), this.getObjectTemplateExp_Part(), "objContainer", null, 1, 1, PropertyTemplateItem.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPropertyTemplateItem_ReferredProperty(), thePivotPackage.getProperty(), null, "referredProperty", null, 1, 1, PropertyTemplateItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPropertyTemplateItem_Value(), thePivotPackage.getOCLExpression(), null, "value", null, 1, 1, PropertyTemplateItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getPropertyTemplateItem_IsOpposite(), thePivotPackage.getBoolean(), "isOpposite", "false", 0, 1, PropertyTemplateItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPropertyTemplateItem_IsOpposite(), ecorePackage.getEBoolean(), "isOpposite", "false", 0, 1, PropertyTemplateItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(templateExpEClass, TemplateExp.class, "TemplateExp", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTemplateExp_BindsTo(), thePivotPackage.getVariable(), null, "bindsTo", null, 0, 1, TemplateExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTemplateExp_Where(), thePivotPackage.getOCLExpression(), null, "where", null, 0, 1, TemplateExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		EOperation op = addEOperation(templateExpEClass, ecorePackage.getEBoolean(), "validateIsTrue", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
+		EGenericType g1 = createEGenericType(ecorePackage.getEMap());
+		EGenericType g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		// Create resource
 		createResource(eNS_URI);
 
 		// Create annotations
+		// http://www.eclipse.org/emf/2002/Ecore
+		createEcoreAnnotations();
 		// http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName
 		createEmofAnnotations();
+		// http://www.eclipse.org/uml2/2.0.0/UML
+		createUMLAnnotations();
+	}
+
+	/**
+	 * Initializes the annotations for <b>http://www.eclipse.org/emf/2002/Ecore</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createEcoreAnnotations() {
+		String source = "http://www.eclipse.org/emf/2002/Ecore";
+		addAnnotation
+		(this,
+			source,
+			new String[] {
+		});
 	}
 
 	/**
@@ -393,43 +435,59 @@ public class QVTtemplatePackageImpl extends EPackageImpl implements QVTtemplateP
 	 * @generated
 	 */
 	protected void createEmofAnnotations() {
-		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";	
+		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";
 		addAnnotation
-		  (getCollectionTemplateExp_Member(), 
-		   source, 
-		   new String[] {
-			 "body", "listContainer"
-		   });	
+		(getCollectionTemplateExp_Member(),
+			source,
+			new String[] {
+				"body", "listContainer"
+		});
 		addAnnotation
-		  (getCollectionTemplateExp_Rest(), 
-		   source, 
-		   new String[] {
-			 "body", "matchingExp"
-		   });	
+		(getCollectionTemplateExp_Rest(),
+			source,
+			new String[] {
+				"body", "matchingExp"
+		});
 		addAnnotation
-		  (getPropertyTemplateItem_ReferredProperty(), 
-		   source, 
-		   new String[] {
-			 "body", "propertyItem"
-		   });	
+		(getPropertyTemplateItem_ReferredProperty(),
+			source,
+			new String[] {
+				"body", "propertyItem"
+		});
 		addAnnotation
-		  (getPropertyTemplateItem_Value(), 
-		   source, 
-		   new String[] {
-			 "body", "propertyItem"
-		   });	
+		(getPropertyTemplateItem_Value(),
+			source,
+			new String[] {
+				"body", "propertyItem"
+		});
 		addAnnotation
-		  (getTemplateExp_BindsTo(), 
-		   source, 
-		   new String[] {
-			 "body", "templateExp"
-		   });	
+		(getTemplateExp_BindsTo(),
+			source,
+			new String[] {
+				"body", "templateExp"
+		});
 		addAnnotation
-		  (getTemplateExp_Where(), 
-		   source, 
-		   new String[] {
-			 "body", "owner"
-		   });
+		(getTemplateExp_Where(),
+			source,
+			new String[] {
+				"body", "owner"
+		});
+	}
+
+	/**
+	 * Initializes the annotations for <b>http://www.eclipse.org/uml2/2.0.0/UML</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createUMLAnnotations() {
+		String source = "http://www.eclipse.org/uml2/2.0.0/UML";
+		addAnnotation
+		(templateExpEClass.getEOperations().get(0),
+			source,
+			new String[] {
+				"originalName", "IsTrue"
+		});
 	}
 
 } //QVTtemplatePackageImpl

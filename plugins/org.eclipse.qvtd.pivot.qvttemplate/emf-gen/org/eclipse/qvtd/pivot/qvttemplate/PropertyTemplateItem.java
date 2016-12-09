@@ -48,6 +48,7 @@ public interface PropertyTemplateItem extends Element {
 	 * @see org.eclipse.qvtd.pivot.qvttemplate.QVTtemplatePackage#getPropertyTemplateItem_ObjContainer()
 	 * @see org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp#getPart
 	 * @model opposite="part" required="true"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTtemplate!PropertyTemplateItem!objContainer'"
 	 * @generated
 	 */
 	ObjectTemplateExp getObjContainer();
@@ -75,6 +76,7 @@ public interface PropertyTemplateItem extends Element {
 	 * @see org.eclipse.qvtd.pivot.qvttemplate.QVTtemplatePackage#getPropertyTemplateItem_ReferredProperty()
 	 * @model required="true"
 	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='propertyItem'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTtemplate!PropertyTemplateItem!referredProperty'"
 	 * @generated
 	 */
 	Property getReferredProperty();
@@ -102,6 +104,7 @@ public interface PropertyTemplateItem extends Element {
 	 * @see org.eclipse.qvtd.pivot.qvttemplate.QVTtemplatePackage#getPropertyTemplateItem_Value()
 	 * @model containment="true" required="true"
 	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='propertyItem'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTtemplate!PropertyTemplateItem!value'"
 	 * @generated
 	 */
 	OCLExpression getValue();
@@ -128,7 +131,8 @@ public interface PropertyTemplateItem extends Element {
 	 * @return the value of the '<em>Is Opposite</em>' attribute.
 	 * @see #setIsOpposite(boolean)
 	 * @see org.eclipse.qvtd.pivot.qvttemplate.QVTtemplatePackage#getPropertyTemplateItem_IsOpposite()
-	 * @model default="false" dataType="org.eclipse.ocl.pivot.Boolean"
+	 * @model default="false"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTtemplate!PropertyTemplateItem!isOpposite'"
 	 * @generated
 	 */
 	boolean isIsOpposite();

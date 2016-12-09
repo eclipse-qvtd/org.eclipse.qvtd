@@ -36,12 +36,12 @@ public abstract class AbstractQVTtemplateASSaverLocateVisitor
 {
 	/**
 	 * Initializes me with an initial value for my result.
-	 * 
+	 *
 	 * @param context my initial result value
 	 */
 	protected AbstractQVTtemplateASSaverLocateVisitor(@NonNull ASSaver context) {
 		super(context);
-	}	
+	}
 
 	@Override
 	public @Nullable Object visitCollectionTemplateExp(org.eclipse.qvtd.pivot.qvttemplate.@NonNull CollectionTemplateExp object) {

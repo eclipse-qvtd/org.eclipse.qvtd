@@ -45,6 +45,7 @@ public interface RelationDomainAssignment extends Element {
 	 * @see org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage#getRelationDomainAssignment_ValueExp()
 	 * @model containment="true" required="true"
 	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='domainAssignment'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTrelation!RelationDomainAssignment!valueExp'"
 	 * @generated
 	 */
 	OCLExpression getValueExp();
@@ -72,6 +73,7 @@ public interface RelationDomainAssignment extends Element {
 	 * @see org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage#getRelationDomainAssignment_Variable()
 	 * @model required="true"
 	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='domainAssignment'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTrelation!RelationDomainAssignment!variable'"
 	 * @generated
 	 */
 	Variable getVariable();

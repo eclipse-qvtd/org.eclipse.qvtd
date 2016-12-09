@@ -36,12 +36,12 @@ public abstract class AbstractQVTtemplateAS2XMIidVisitor
 {
 	/**
 	 * Initializes me with an initial value for my result.
-	 * 
+	 *
 	 * @param context my initial result value
 	 */
 	protected AbstractQVTtemplateAS2XMIidVisitor(@NonNull AS2XMIid context) {
 		super(context);
-	}	
+	}
 
 	@Override
 	public @Nullable Boolean visitCollectionTemplateExp(org.eclipse.qvtd.pivot.qvttemplate.@NonNull CollectionTemplateExp object) {

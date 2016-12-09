@@ -39,12 +39,12 @@ public abstract class AbstractQVTcoreTemplateParameterSubstitutionVisitor
 {
 	/**
 	 * Initializes me with an initial value for my result.
-	 * 
+	 *
 	 * @param context my initial result value
 	 */
 	protected AbstractQVTcoreTemplateParameterSubstitutionVisitor(@NonNull EnvironmentFactoryInternal environmentFactory, @Nullable Type selfType, @Nullable Type selfTypeValue) {
 		super(environmentFactory, selfType, selfTypeValue);
-	}	
+	}
 
 	@Override
 	public @Nullable Object visitAssignment(org.eclipse.qvtd.pivot.qvtcore.@NonNull Assignment object) {

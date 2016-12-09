@@ -36,12 +36,12 @@ public abstract class AbstractQVTimperativeASSaverResolveVisitor
 {
 	/**
 	 * Initializes me with an initial value for my result.
-	 * 
+	 *
 	 * @param context my initial result value
 	 */
 	protected AbstractQVTimperativeASSaverResolveVisitor(@NonNull ASSaver context) {
 		super(context);
-	}	
+	}
 
 	@Override
 	public @Nullable Object visitAddStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull AddStatement object) {

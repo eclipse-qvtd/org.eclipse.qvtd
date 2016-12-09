@@ -48,6 +48,7 @@ public interface Rule extends NamedElement {
 	 * @see org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage#getRule_Domain()
 	 * @see org.eclipse.qvtd.pivot.qvtbase.Domain#getRule
 	 * @model opposite="rule" containment="true"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTbase!Rule!domain'"
 	 * @generated
 	 */
 	EList<Domain> getDomain();
@@ -64,7 +65,8 @@ public interface Rule extends NamedElement {
 	 * @return the value of the '<em>Is Default</em>' attribute.
 	 * @see #setIsDefault(boolean)
 	 * @see org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage#getRule_IsDefault()
-	 * @model default="false" dataType="org.eclipse.ocl.pivot.Boolean"
+	 * @model default="false"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTbase!Rule!isDefault'"
 	 * @generated
 	 */
 	boolean isIsDefault();
@@ -93,6 +95,7 @@ public interface Rule extends NamedElement {
 	 * @see org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage#getRule_Overrides()
 	 * @see org.eclipse.qvtd.pivot.qvtbase.Rule#getOverridden
 	 * @model opposite="overridden"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTbase!Rule!overrides'"
 	 * @generated
 	 */
 	Rule getOverrides();
@@ -121,6 +124,7 @@ public interface Rule extends NamedElement {
 	 * @see org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage#getRule_Transformation()
 	 * @see org.eclipse.qvtd.pivot.qvtbase.Transformation#getRule
 	 * @model opposite="rule" resolveProxies="false"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTbase!Rule!transformation'"
 	 * @generated
 	 */
 	Transformation getTransformation();
@@ -149,7 +153,7 @@ public interface Rule extends NamedElement {
 	 * @see org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage#getRule_Overridden()
 	 * @see org.eclipse.qvtd.pivot.qvtbase.Rule#getOverrides
 	 * @model opposite="overrides" ordered="false"
-	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='overriden'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTbase!Rule!overridden'"
 	 * @generated
 	 */
 	EList<Rule> getOverridden();

@@ -36,12 +36,12 @@ public abstract class AbstractQVTcoreASSaverResolveVisitor
 {
 	/**
 	 * Initializes me with an initial value for my result.
-	 * 
+	 *
 	 * @param context my initial result value
 	 */
 	protected AbstractQVTcoreASSaverResolveVisitor(@NonNull ASSaver context) {
 		super(context);
-	}	
+	}
 
 	@Override
 	public @Nullable Object visitAssignment(org.eclipse.qvtd.pivot.qvtcore.@NonNull Assignment object) {

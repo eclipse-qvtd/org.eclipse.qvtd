@@ -36,12 +36,12 @@ public abstract class AbstractQVTimperativeAS2XMIidVisitor
 {
 	/**
 	 * Initializes me with an initial value for my result.
-	 * 
+	 *
 	 * @param context my initial result value
 	 */
 	protected AbstractQVTimperativeAS2XMIidVisitor(@NonNull AS2XMIid context) {
 		super(context);
-	}	
+	}
 
 	@Override
 	public @Nullable Boolean visitAddStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull AddStatement object) {

@@ -36,12 +36,12 @@ public abstract class AbstractQVTrelationASSaverResolveVisitor
 {
 	/**
 	 * Initializes me with an initial value for my result.
-	 * 
+	 *
 	 * @param context my initial result value
 	 */
 	protected AbstractQVTrelationASSaverResolveVisitor(@NonNull ASSaver context) {
 		super(context);
-	}	
+	}
 
 	@Override
 	public @Nullable Object visitDomainPattern(org.eclipse.qvtd.pivot.qvtrelation.@NonNull DomainPattern object) {

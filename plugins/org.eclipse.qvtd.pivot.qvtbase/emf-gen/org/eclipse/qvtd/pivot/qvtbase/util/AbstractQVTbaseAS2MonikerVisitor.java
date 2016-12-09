@@ -36,12 +36,12 @@ public abstract class AbstractQVTbaseAS2MonikerVisitor
 {
 	/**
 	 * Initializes me with an initial value for my result.
-	 * 
+	 *
 	 * @param context my initial result value
 	 */
 	protected AbstractQVTbaseAS2MonikerVisitor(@NonNull AS2Moniker context) {
 		super(context);
-	}	
+	}
 
 	@Override
 	public @Nullable Object visitBaseModel(org.eclipse.qvtd.pivot.qvtbase.@NonNull BaseModel object) {

@@ -32,12 +32,12 @@ public abstract class AbstractExtendingQVTtemplateVisitor<R, C>
 {
 	/**
 	 * Initializes me with an initial value for my result.
-	 * 
+	 *
 	 * @param context my initial result value
 	 */
 	protected AbstractExtendingQVTtemplateVisitor(C context) {
 		super(context);
-	}	
+	}
 
 	@Override
 	public R visitCollectionTemplateExp(org.eclipse.qvtd.pivot.qvttemplate.@NonNull CollectionTemplateExp object) {

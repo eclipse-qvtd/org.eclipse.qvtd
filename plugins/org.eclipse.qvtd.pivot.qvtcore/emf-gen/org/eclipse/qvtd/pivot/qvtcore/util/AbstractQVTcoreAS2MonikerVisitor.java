@@ -36,12 +36,12 @@ public abstract class AbstractQVTcoreAS2MonikerVisitor
 {
 	/**
 	 * Initializes me with an initial value for my result.
-	 * 
+	 *
 	 * @param context my initial result value
 	 */
 	protected AbstractQVTcoreAS2MonikerVisitor(@NonNull AS2Moniker context) {
 		super(context);
-	}	
+	}
 
 	@Override
 	public @Nullable Object visitAssignment(org.eclipse.qvtd.pivot.qvtcore.@NonNull Assignment object) {

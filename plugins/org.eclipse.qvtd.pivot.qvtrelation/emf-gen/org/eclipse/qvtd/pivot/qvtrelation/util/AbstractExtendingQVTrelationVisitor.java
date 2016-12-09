@@ -32,12 +32,12 @@ public abstract class AbstractExtendingQVTrelationVisitor<R, C>
 {
 	/**
 	 * Initializes me with an initial value for my result.
-	 * 
+	 *
 	 * @param context my initial result value
 	 */
 	protected AbstractExtendingQVTrelationVisitor(C context) {
 		super(context);
-	}	
+	}
 
 	@Override
 	public R visitDomainPattern(org.eclipse.qvtd.pivot.qvtrelation.@NonNull DomainPattern object) {

@@ -126,12 +126,12 @@ public class QVTrelationAdapterFactory extends AdapterFactoryImpl {
 				return createRelationDomainAssignmentAdapter();
 			}
 			@Override
-			public Adapter caseRelationModel(RelationModel object) {
-				return createRelationModelAdapter();
-			}
-			@Override
 			public Adapter caseRelationImplementation(RelationImplementation object) {
 				return createRelationImplementationAdapter();
+			}
+			@Override
+			public Adapter caseRelationModel(RelationModel object) {
+				return createRelationModelAdapter();
 			}
 			@Override
 			public Adapter caseRelationalTransformation(RelationalTransformation object) {

@@ -48,6 +48,7 @@ public interface Transformation extends org.eclipse.ocl.pivot.Class {
 	 * @return the value of the '<em>Owned Tag</em>' containment reference list.
 	 * @see org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage#getTransformation_OwnedTag()
 	 * @model containment="true" ordered="false"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTbase!Transformation!ownedTag'"
 	 * @generated
 	 */
 	@NonNull EList<Annotation> getOwnedTag();
@@ -66,6 +67,7 @@ public interface Transformation extends org.eclipse.ocl.pivot.Class {
 	 * @see org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage#getTransformation_ModelParameter()
 	 * @see org.eclipse.qvtd.pivot.qvtbase.TypedModel#getTransformation
 	 * @model opposite="transformation" containment="true"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTbase!Transformation!modelParameter'"
 	 * @generated
 	 */
 	@NonNull EList<TypedModel> getModelParameter();
@@ -84,6 +86,7 @@ public interface Transformation extends org.eclipse.ocl.pivot.Class {
 	 * @see org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage#getTransformation_Rule()
 	 * @see org.eclipse.qvtd.pivot.qvtbase.Rule#getTransformation
 	 * @model opposite="transformation" containment="true" ordered="false"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTbase!Transformation!rule'"
 	 * @generated
 	 */
 	@NonNull EList<Rule> getRule();
@@ -100,6 +103,7 @@ public interface Transformation extends org.eclipse.ocl.pivot.Class {
 	 * @see #setExtends(Transformation)
 	 * @see org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage#getTransformation_Extends()
 	 * @model annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='extendedBy'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTbase!Transformation!extends'"
 	 * @generated
 	 */
 	Transformation getExtends();
@@ -126,6 +130,7 @@ public interface Transformation extends org.eclipse.ocl.pivot.Class {
 	 * @see #setOwnedContext(Variable)
 	 * @see org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage#getTransformation_OwnedContext()
 	 * @model containment="true"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTbase!Transformation!ownedContext'"
 	 * @generated
 	 */
 	Variable getOwnedContext();
@@ -144,6 +149,7 @@ public interface Transformation extends org.eclipse.ocl.pivot.Class {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model required="true" nameRequired="true"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTbase!Transformation!getFunction(String)'"
 	 * @generated
 	 */
 	Function getFunction(String name);
@@ -152,6 +158,7 @@ public interface Transformation extends org.eclipse.ocl.pivot.Class {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model required="true" nameRequired="true"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTbase!Transformation!getModelParameter(String)'"
 	 * @generated
 	 */
 	TypedModel getModelParameter(String name);

@@ -32,12 +32,12 @@ public abstract class AbstractExtendingQVTimperativeVisitor<R, C>
 {
 	/**
 	 * Initializes me with an initial value for my result.
-	 * 
+	 *
 	 * @param context my initial result value
 	 */
 	protected AbstractExtendingQVTimperativeVisitor(C context) {
 		super(context);
-	}	
+	}
 
 	@Override
 	public R visitAddStatement(org.eclipse.qvtd.pivot.qvtimperative.@NonNull AddStatement object) {

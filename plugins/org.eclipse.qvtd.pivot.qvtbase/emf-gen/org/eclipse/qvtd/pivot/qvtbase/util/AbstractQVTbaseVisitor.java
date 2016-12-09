@@ -28,7 +28,7 @@ public abstract class AbstractQVTbaseVisitor<R, C>
 {
 	/**
 	 * Initializes me with an initial value for my result.
-	 * 
+	 *
 	 * @param context my initial result value
 	 */
 	protected AbstractQVTbaseVisitor(C context) {

@@ -28,7 +28,7 @@
     </ownedClasses>
     <ownedClasses xmi:id="T.qvtbase.Rule" isAbstract="true" name="Rule" superClasses="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.NamedElement">
       <ownedProperties xmi:id="p.qvtbase.Rule.domain" isComposite="true" name="domain" opposite="#p.qvtbase.Domain.rule" type="#//@ownedPackages.2/@ownedClasses.13"/>
-      <ownedProperties xmi:id="p.qvtbase.Rule.isDefault" defaultValueString="false" isRequired="false" name="isDefault" type="pivot:PrimitiveType ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#Boolean"/>
+      <ownedProperties xmi:id="p.qvtbase.Rule.isDefault" defaultValueString="false" isRequired="false" name="isDefault" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"/>
       <ownedProperties xmi:id="p.qvtbase.Rule.overridden" name="overridden" opposite="#p.qvtbase.Rule.overrides" type="#//@ownedPackages.2/@ownedClasses.19"/>
       <ownedProperties xmi:id="p.qvtbase.Rule.overrides" isRequired="false" name="overrides" opposite="#p.qvtbase.Rule.overridden" type="#T.qvtbase.Rule"/>
       <ownedProperties xmi:id="p.qvtbase.Rule.transformation" isRequired="false" isResolveProxies="false" isTransient="true" name="transformation"
@@ -55,6 +55,9 @@
           type="#T.qvtbase.Transformation"/>
     </ownedClasses>
     <ownedClasses xmi:id="T.qvtbase.TypedModel" name="TypedModel" superClasses="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.NamedElement">
+      <ownedInvariants xmi:id="ciqvtbase.TypedModel.IsTrue" isCallable="true" name="IsTrue">
+        <ownedSpecification xsi:type="pivot:ExpressionInOCL" body="true&#xA;&#xA;"/>
+      </ownedInvariants>
       <ownedProperties xmi:id="p.qvtbase.TypedModel.dependsOn" name="dependsOn" opposite="#p.qvtbase.TypedModel.dependent" type="#//@ownedPackages.2/@ownedClasses.20"/>
       <ownedProperties xmi:id="p.qvtbase.TypedModel.ownedContext" isComposite="true" isRequired="false" name="ownedContext" opposite="#p.pivot.Variable.TypedModel"
           type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Variable"/>

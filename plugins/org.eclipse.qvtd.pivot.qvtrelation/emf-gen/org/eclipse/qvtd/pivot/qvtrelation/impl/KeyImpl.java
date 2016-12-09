@@ -38,9 +38,9 @@ import org.eclipse.qvtd.pivot.qvtrelation.util.QVTrelationVisitor;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtrelation.impl.KeyImpl#getIdentifies <em>Identifies</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtrelation.impl.KeyImpl#getOppositePart <em>Opposite Part</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtrelation.impl.KeyImpl#getPart <em>Part</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtrelation.impl.KeyImpl#getTransformation <em>Transformation</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtrelation.impl.KeyImpl#getOppositePart <em>Opposite Part</em>}</li>
  * </ul>
  *
  * @generated
@@ -57,16 +57,6 @@ public class KeyImpl extends ElementImpl implements Key {
 	protected org.eclipse.ocl.pivot.Class identifies;
 
 	/**
-	 * The cached value of the '{@link #getPart() <em>Part</em>}' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getPart()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Property> part;
-
-	/**
 	 * The cached value of the '{@link #getOppositePart() <em>Opposite Part</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -75,6 +65,16 @@ public class KeyImpl extends ElementImpl implements Key {
 	 * @ordered
 	 */
 	protected EList<Property> oppositePart;
+
+	/**
+	 * The cached value of the '{@link #getPart() <em>Part</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPart()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Property> part;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -259,12 +259,12 @@ public class KeyImpl extends ElementImpl implements Key {
 			case QVTrelationPackage.KEY__IDENTIFIES:
 				if (resolve) return getIdentifies();
 				return basicGetIdentifies();
+			case QVTrelationPackage.KEY__OPPOSITE_PART:
+				return getOppositePart();
 			case QVTrelationPackage.KEY__PART:
 				return getPart();
 			case QVTrelationPackage.KEY__TRANSFORMATION:
 				return getTransformation();
-			case QVTrelationPackage.KEY__OPPOSITE_PART:
-				return getOppositePart();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -281,16 +281,16 @@ public class KeyImpl extends ElementImpl implements Key {
 			case QVTrelationPackage.KEY__IDENTIFIES:
 				setIdentifies((org.eclipse.ocl.pivot.Class)newValue);
 				return;
+			case QVTrelationPackage.KEY__OPPOSITE_PART:
+				getOppositePart().clear();
+				getOppositePart().addAll((Collection<? extends Property>)newValue);
+				return;
 			case QVTrelationPackage.KEY__PART:
 				getPart().clear();
 				getPart().addAll((Collection<? extends Property>)newValue);
 				return;
 			case QVTrelationPackage.KEY__TRANSFORMATION:
 				setTransformation((RelationalTransformation)newValue);
-				return;
-			case QVTrelationPackage.KEY__OPPOSITE_PART:
-				getOppositePart().clear();
-				getOppositePart().addAll((Collection<? extends Property>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -307,14 +307,14 @@ public class KeyImpl extends ElementImpl implements Key {
 			case QVTrelationPackage.KEY__IDENTIFIES:
 				setIdentifies((org.eclipse.ocl.pivot.Class)null);
 				return;
+			case QVTrelationPackage.KEY__OPPOSITE_PART:
+				getOppositePart().clear();
+				return;
 			case QVTrelationPackage.KEY__PART:
 				getPart().clear();
 				return;
 			case QVTrelationPackage.KEY__TRANSFORMATION:
 				setTransformation((RelationalTransformation)null);
-				return;
-			case QVTrelationPackage.KEY__OPPOSITE_PART:
-				getOppositePart().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -330,12 +330,12 @@ public class KeyImpl extends ElementImpl implements Key {
 		switch (featureID) {
 			case QVTrelationPackage.KEY__IDENTIFIES:
 				return identifies != null;
+			case QVTrelationPackage.KEY__OPPOSITE_PART:
+				return oppositePart != null && !oppositePart.isEmpty();
 			case QVTrelationPackage.KEY__PART:
 				return part != null && !part.isEmpty();
 			case QVTrelationPackage.KEY__TRANSFORMATION:
 				return getTransformation() != null;
-			case QVTrelationPackage.KEY__OPPOSITE_PART:
-				return oppositePart != null && !oppositePart.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

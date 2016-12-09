@@ -38,12 +38,12 @@ public abstract class AbstractQVTcoreASSaverNormalizeVisitor
 {
 	/**
 	 * Initializes me with an initial value for my result.
-	 * 
+	 *
 	 * @param context my initial result value
 	 */
 	protected AbstractQVTcoreASSaverNormalizeVisitor(@NonNull ASSaver context) {
 		super(context);
-	}	
+	}
 
 	@Override
 	public @Nullable Object visitAssignment(org.eclipse.qvtd.pivot.qvtcore.@NonNull Assignment object) {

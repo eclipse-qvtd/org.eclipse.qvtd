@@ -42,6 +42,7 @@ public interface Function extends Operation {
 	 * @see #setQueryExpression(OCLExpression)
 	 * @see org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage#getFunction_QueryExpression()
 	 * @model containment="true"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTbase!Function!queryExpression'"
 	 * @generated
 	 */
 	OCLExpression getQueryExpression();

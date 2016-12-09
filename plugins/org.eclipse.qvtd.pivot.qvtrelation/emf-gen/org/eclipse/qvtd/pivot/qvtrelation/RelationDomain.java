@@ -47,6 +47,7 @@ public interface RelationDomain extends Domain {
 	 * @see org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage#getRelationDomain_DefaultAssignment()
 	 * @model containment="true" ordered="false"
 	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='owner'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTrelation!RelationDomain!defaultAssignment'"
 	 * @generated
 	 */
 	@NonNull EList<RelationDomainAssignment> getDefaultAssignment();
@@ -63,6 +64,7 @@ public interface RelationDomain extends Domain {
 	 * @return the value of the '<em>Pattern</em>' containment reference list.
 	 * @see org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage#getRelationDomain_Pattern()
 	 * @model containment="true"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTrelation!RelationDomain!pattern'"
 	 * @generated
 	 */
 	@NonNull EList<DomainPattern> getPattern();
@@ -79,6 +81,7 @@ public interface RelationDomain extends Domain {
 	 * @return the value of the '<em>Root Variable</em>' reference list.
 	 * @see org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage#getRelationDomain_RootVariable()
 	 * @model required="true"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTrelation!RelationDomain!rootVariable'"
 	 * @generated
 	 */
 	@NonNull EList<Variable> getRootVariable();

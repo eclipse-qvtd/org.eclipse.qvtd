@@ -36,12 +36,12 @@ public abstract class AbstractQVTbaseAS2XMIidVisitor
 {
 	/**
 	 * Initializes me with an initial value for my result.
-	 * 
+	 *
 	 * @param context my initial result value
 	 */
 	protected AbstractQVTbaseAS2XMIidVisitor(@NonNull AS2XMIid context) {
 		super(context);
-	}	
+	}
 
 	@Override
 	public @Nullable Boolean visitBaseModel(org.eclipse.qvtd.pivot.qvtbase.@NonNull BaseModel object) {

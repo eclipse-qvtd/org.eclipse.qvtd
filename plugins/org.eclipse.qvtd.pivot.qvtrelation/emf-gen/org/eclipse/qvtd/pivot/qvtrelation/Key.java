@@ -24,9 +24,9 @@ import org.eclipse.ocl.pivot.Property;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtrelation.Key#getIdentifies <em>Identifies</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtrelation.Key#getOppositePart <em>Opposite Part</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtrelation.Key#getPart <em>Part</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtrelation.Key#getTransformation <em>Transformation</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtrelation.Key#getOppositePart <em>Opposite Part</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage#getKey()
@@ -47,6 +47,7 @@ public interface Key extends Element {
 	 * @see org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage#getKey_Identifies()
 	 * @model required="true"
 	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='key'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTrelation!Key!identifies'"
 	 * @generated
 	 */
 	org.eclipse.ocl.pivot.Class getIdentifies();
@@ -74,6 +75,7 @@ public interface Key extends Element {
 	 * @see org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage#getKey_Part()
 	 * @model ordered="false"
 	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='key'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTrelation!Key!part'"
 	 * @generated
 	 */
 	EList<Property> getPart();
@@ -92,6 +94,7 @@ public interface Key extends Element {
 	 * @see org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage#getKey_Transformation()
 	 * @see org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation#getOwnedKey
 	 * @model opposite="ownedKey"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTrelation!Key!transformation'"
 	 * @generated
 	 */
 	RelationalTransformation getTransformation();
@@ -119,6 +122,7 @@ public interface Key extends Element {
 	 * @see org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage#getKey_OppositePart()
 	 * @model ordered="false"
 	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='oppKey'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTrelation!Key!oppositePart'"
 	 * @generated
 	 */
 	EList<Property> getOppositePart();

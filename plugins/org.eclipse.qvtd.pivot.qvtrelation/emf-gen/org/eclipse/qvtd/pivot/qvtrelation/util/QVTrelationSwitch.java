@@ -161,6 +161,14 @@ public class QVTrelationSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case QVTrelationPackage.RELATION_IMPLEMENTATION: {
+				RelationImplementation relationImplementation = (RelationImplementation)theEObject;
+				T result = caseRelationImplementation(relationImplementation);
+				if (result == null) result = caseElement(relationImplementation);
+				if (result == null) result = caseVisitable(relationImplementation);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case QVTrelationPackage.RELATION_MODEL: {
 				RelationModel relationModel = (RelationModel)theEObject;
 				T result = caseRelationModel(relationModel);
@@ -171,14 +179,6 @@ public class QVTrelationSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = caseElement(relationModel);
 				if (result == null) result = caseNameable(relationModel);
 				if (result == null) result = caseVisitable(relationModel);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case QVTrelationPackage.RELATION_IMPLEMENTATION: {
-				RelationImplementation relationImplementation = (RelationImplementation)theEObject;
-				T result = caseRelationImplementation(relationImplementation);
-				if (result == null) result = caseElement(relationImplementation);
-				if (result == null) result = caseVisitable(relationImplementation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

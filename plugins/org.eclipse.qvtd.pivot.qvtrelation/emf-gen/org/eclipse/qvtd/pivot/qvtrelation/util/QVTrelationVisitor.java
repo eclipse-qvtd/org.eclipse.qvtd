@@ -20,6 +20,7 @@ package	org.eclipse.qvtd.pivot.qvtrelation.util;
 import org.eclipse.jdt.annotation.NonNull;
 
 /**
+ * @noimplement This interface is not intended to be implemented by clients.
  */
 public interface QVTrelationVisitor<R> extends org.eclipse.qvtd.pivot.qvttemplate.util.QVTtemplateVisitor<R>
 {

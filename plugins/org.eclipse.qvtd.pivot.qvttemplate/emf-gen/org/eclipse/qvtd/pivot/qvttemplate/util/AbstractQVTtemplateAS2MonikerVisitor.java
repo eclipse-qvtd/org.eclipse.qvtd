@@ -36,12 +36,12 @@ public abstract class AbstractQVTtemplateAS2MonikerVisitor
 {
 	/**
 	 * Initializes me with an initial value for my result.
-	 * 
+	 *
 	 * @param context my initial result value
 	 */
 	protected AbstractQVTtemplateAS2MonikerVisitor(@NonNull AS2Moniker context) {
 		super(context);
-	}	
+	}
 
 	@Override
 	public @Nullable Object visitCollectionTemplateExp(org.eclipse.qvtd.pivot.qvttemplate.@NonNull CollectionTemplateExp object) {

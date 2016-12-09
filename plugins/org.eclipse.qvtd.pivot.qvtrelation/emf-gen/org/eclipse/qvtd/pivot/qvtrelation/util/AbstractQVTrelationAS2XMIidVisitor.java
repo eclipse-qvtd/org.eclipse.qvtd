@@ -36,12 +36,12 @@ public abstract class AbstractQVTrelationAS2XMIidVisitor
 {
 	/**
 	 * Initializes me with an initial value for my result.
-	 * 
+	 *
 	 * @param context my initial result value
 	 */
 	protected AbstractQVTrelationAS2XMIidVisitor(@NonNull AS2XMIid context) {
 		super(context);
-	}	
+	}
 
 	@Override
 	public @Nullable Boolean visitDomainPattern(org.eclipse.qvtd.pivot.qvtrelation.@NonNull DomainPattern object) {

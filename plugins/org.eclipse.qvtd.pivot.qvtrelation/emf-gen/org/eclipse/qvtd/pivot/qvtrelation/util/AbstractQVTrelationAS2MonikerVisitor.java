@@ -36,12 +36,12 @@ public abstract class AbstractQVTrelationAS2MonikerVisitor
 {
 	/**
 	 * Initializes me with an initial value for my result.
-	 * 
+	 *
 	 * @param context my initial result value
 	 */
 	protected AbstractQVTrelationAS2MonikerVisitor(@NonNull AS2Moniker context) {
 		super(context);
-	}	
+	}
 
 	@Override
 	public @Nullable Object visitDomainPattern(org.eclipse.qvtd.pivot.qvtrelation.@NonNull DomainPattern object) {
