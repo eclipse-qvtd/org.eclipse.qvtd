@@ -4,12 +4,11 @@
     modelDirectory="/org.eclipse.qvtd.pivot.qvtimperative/emf-gen" modelPluginID="org.eclipse.qvtd.pivot.qvtimperative"
     modelName="QVTimperative" suppressEMFModelTags="true" importerID="org.eclipse.emf.importer.ecore"
     complianceLevel="8.0" copyrightFields="false" runtimeVersion="2.7" usedGenPackages="../../org.eclipse.ocl.pivot/model/Pivot.genmodel#//pivot ../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.genmodel#//qvtbase"
-    classNamePattern="">
+    classNamePattern="" operationReflection="true">
   <genAnnotations source="http://www.eclipse.org/OCL/GenModel">
     <details key="Use Delegates" value="false"/>
     <details key="Use Null Annotations" value="true"/>
   </genAnnotations>
-  <genAnnotations source="http://www.eclipse.org/OCL/GenModel/ToString"/>
   <genAnnotations source="http://www.eclipse.org/OCL/GenModel/Visitor">
     <details key="Root Visitor Class" value="org.eclipse.ocl.pivot.util.Visitor"/>
     <details key="Derived Visitor Class" value="org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor"/>
