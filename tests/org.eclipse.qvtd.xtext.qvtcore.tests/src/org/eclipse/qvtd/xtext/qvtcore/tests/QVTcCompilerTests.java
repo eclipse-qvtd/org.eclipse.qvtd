@@ -41,7 +41,7 @@ import org.eclipse.qvtd.compiler.internal.qvtp2qvts.MicroMappingRegion;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.QVTp2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.Region;
 import org.eclipse.qvtd.compiler.internal.qvtp2qvts.RootScheduledRegion;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.AbstractMerger;
+//import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.AbstractMerger;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.EarlyMerger;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.LateConsumerMerger;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.splitter.Splitter;
@@ -531,9 +531,9 @@ public class QVTcCompilerTests extends LoadTestCase
 		//		Scheduler.REGION_ORDER.setState(true);
 		//		Scheduler.REGION_TRAVERSAL.setState(true);
 		//		QVTs2QVTiVisitor.POLLED_PROPERTIES.setState(true);
-		AbstractMerger.EARLY.setState(true);
-		AbstractMerger.FAILURE.setState(true);
-		AbstractMerger.LATE.setState(true);
+		//		AbstractMerger.EARLY.setState(true);
+		//		AbstractMerger.FAILURE.setState(true);
+		//		AbstractMerger.LATE.setState(true);
 		String testFolderName = "hsv2hls";
 		MyQVT myQVT = new MyQVT(testFolderName);
 		try {
@@ -664,9 +664,9 @@ public class QVTcCompilerTests extends LoadTestCase
 		//    	Scheduler.REGION_ORDER.setState(true);
 		//    	Scheduler.REGION_STACK.setState(true);
 		//    	Scheduler.REGION_TRAVERSAL.setState(true);
-		AbstractMerger.EARLY.setState(true);
-		AbstractMerger.FAILURE.setState(true);
-		AbstractMerger.LATE.setState(true);
+		//		AbstractMerger.EARLY.setState(true);
+		//		AbstractMerger.FAILURE.setState(true);
+		//		AbstractMerger.LATE.setState(true);
 		String testFolderName = "upper2lower";
 		MyQVT myQVT = new MyQVT(testFolderName);
 		//		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
