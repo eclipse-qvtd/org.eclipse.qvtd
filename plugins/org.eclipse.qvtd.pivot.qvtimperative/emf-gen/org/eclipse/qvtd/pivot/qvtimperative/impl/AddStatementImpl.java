@@ -243,7 +243,7 @@ public class AddStatementImpl extends MappingStatementImpl implements AddStateme
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public String toString() {

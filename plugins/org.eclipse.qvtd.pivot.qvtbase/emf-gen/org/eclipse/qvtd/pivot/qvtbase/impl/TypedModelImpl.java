@@ -10,6 +10,7 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtbase.impl;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 
 import java.util.Map;
@@ -389,6 +390,21 @@ public class TypedModelImpl extends NamedElementImpl implements TypedModel {
 				return ownedContext != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	@SuppressWarnings("unchecked")
+	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
+		switch (operationID) {
+			case QVTbasePackage.TYPED_MODEL___VALIDATE_IS_TRUE__DIAGNOSTICCHAIN_MAP:
+				return validateIsTrue((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
+		}
+		return super.eInvoke(operationID, arguments);
 	}
 
 	/**

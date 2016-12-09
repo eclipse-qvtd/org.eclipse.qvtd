@@ -10,6 +10,7 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtimperative.impl;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -22,6 +23,8 @@ import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Element;
+import org.eclipse.ocl.pivot.PivotPackage;
+import org.eclipse.ocl.pivot.ReferringElement;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
@@ -168,7 +171,7 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public String toString() {
@@ -352,6 +355,36 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 				return referredMapping != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedOperationID(int baseOperationID, Class<?> baseClass) {
+		if (baseClass == ReferringElement.class) {
+			switch (baseOperationID) {
+				case PivotPackage.REFERRING_ELEMENT___GET_REFERRED_ELEMENT: return QVTimperativePackage.MAPPING_CALL___GET_REFERRED_ELEMENT;
+				default: return -1;
+			}
+		}
+		return super.eDerivedOperationID(baseOperationID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
+		switch (operationID) {
+			case QVTimperativePackage.MAPPING_CALL___GET_REFERRED_ELEMENT:
+				return getReferredElement();
+		}
+		return super.eInvoke(operationID, arguments);
 	}
 
 	/**

@@ -14,6 +14,7 @@
  */
 package org.eclipse.qvtd.pivot.qvtcore.impl;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -178,6 +179,20 @@ public class CorePatternImpl extends PatternImpl implements CorePattern {
 				return variable != null && !variable.isEmpty();
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
+		switch (operationID) {
+			case QVTcorePackage.CORE_PATTERN___GET_AREA:
+				return getArea();
+		}
+		return super.eInvoke(operationID, arguments);
 	}
 
 	/**

@@ -191,7 +191,7 @@ public class DeclareStatementImpl extends VariableStatementImpl implements Decla
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public String toString() {

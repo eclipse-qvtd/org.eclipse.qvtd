@@ -453,6 +453,26 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 	 * @generated
 	 */
 	@Override
+	public EOperation getTransformation__GetFunction__String() {
+		return transformationEClass.getEOperations().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getTransformation__GetModelParameter__String() {
+		return transformationEClass.getEOperations().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getTypedModel() {
 		return typedModelEClass;
 	}
@@ -495,6 +515,16 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 	@Override
 	public EReference getTypedModel_OwnedContext() {
 		return (EReference)typedModelEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getTypedModel__ValidateIsTrue__DiagnosticChain_Map() {
+		return typedModelEClass.getEOperations().get(0);
 	}
 
 	/**
@@ -560,12 +590,15 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 		createEReference(transformationEClass, TRANSFORMATION__RULE);
 		createEReference(transformationEClass, TRANSFORMATION__EXTENDS);
 		createEReference(transformationEClass, TRANSFORMATION__OWNED_CONTEXT);
+		createEOperation(transformationEClass, TRANSFORMATION___GET_FUNCTION__STRING);
+		createEOperation(transformationEClass, TRANSFORMATION___GET_MODEL_PARAMETER__STRING);
 
 		typedModelEClass = createEClass(TYPED_MODEL);
 		createEReference(typedModelEClass, TYPED_MODEL__TRANSFORMATION);
 		createEReference(typedModelEClass, TYPED_MODEL__USED_PACKAGE);
 		createEReference(typedModelEClass, TYPED_MODEL__DEPENDS_ON);
 		createEReference(typedModelEClass, TYPED_MODEL__OWNED_CONTEXT);
+		createEOperation(typedModelEClass, TYPED_MODEL___VALIDATE_IS_TRUE__DIAGNOSTICCHAIN_MAP);
 	}
 
 	/**
@@ -610,7 +643,7 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 		transformationEClass.getESuperTypes().add(thePivotPackage.getClass_());
 		typedModelEClass.getESuperTypes().add(thePivotPackage.getNamedElement());
 
-		// Initialize classes and features; add operations and parameters
+		// Initialize classes, features, and operations; add parameters
 		initEClass(baseModelEClass, BaseModel.class, "BaseModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(domainEClass, Domain.class, "Domain", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -646,10 +679,10 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 		initEReference(getTransformation_Extends(), this.getTransformation(), null, "extends", null, 0, 1, Transformation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTransformation_OwnedContext(), thePivotPackage.getVariable(), null, "ownedContext", null, 0, 1, Transformation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		EOperation op = addEOperation(transformationEClass, this.getFunction(), "getFunction", 1, 1, IS_UNIQUE, IS_ORDERED);
+		EOperation op = initEOperation(getTransformation__GetFunction__String(), this.getFunction(), "getFunction", 1, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "name", 1, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(transformationEClass, this.getTypedModel(), "getModelParameter", 1, 1, IS_UNIQUE, IS_ORDERED);
+		op = initEOperation(getTransformation__GetModelParameter__String(), this.getTypedModel(), "getModelParameter", 1, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "name", 1, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(typedModelEClass, TypedModel.class, "TypedModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -658,7 +691,7 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 		initEReference(getTypedModel_DependsOn(), this.getTypedModel(), null, "dependsOn", null, 0, -1, TypedModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getTypedModel_OwnedContext(), thePivotPackage.getVariable(), null, "ownedContext", null, 0, 1, TypedModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		op = addEOperation(typedModelEClass, ecorePackage.getEBoolean(), "validateIsTrue", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = initEOperation(getTypedModel__ValidateIsTrue__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateIsTrue", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
 		EGenericType g1 = createEGenericType(ecorePackage.getEMap());
 		EGenericType g2 = createEGenericType(ecorePackage.getEJavaObject());
@@ -731,7 +764,7 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 	protected void createUMLAnnotations() {
 		String source = "http://www.eclipse.org/uml2/2.0.0/UML";
 		addAnnotation
-		(typedModelEClass.getEOperations().get(0),
+		(getTypedModel__ValidateIsTrue__DiagnosticChain_Map(),
 			source,
 			new String[] {
 				"originalName", "IsTrue"

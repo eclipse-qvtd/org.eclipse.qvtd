@@ -12,6 +12,7 @@ package org.eclipse.qvtd.pivot.qvttemplate;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.ocl.pivot.PivotPackage;
@@ -191,6 +192,51 @@ public interface QVTtemplatePackage extends EPackage {
 	int TEMPLATE_EXP_FEATURE_COUNT = PivotPackage.LITERAL_EXP_FEATURE_COUNT + 2;
 
 	/**
+	 * The operation id for the '<em>All Owned Elements</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPLATE_EXP___ALL_OWNED_ELEMENTS = PivotPackage.LITERAL_EXP___ALL_OWNED_ELEMENTS;
+
+	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPLATE_EXP___GET_VALUE__TYPE_STRING = PivotPackage.LITERAL_EXP___GET_VALUE__TYPE_STRING;
+
+	/**
+	 * The operation id for the '<em>Compatible Body</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPLATE_EXP___COMPATIBLE_BODY__VALUESPECIFICATION = PivotPackage.LITERAL_EXP___COMPATIBLE_BODY__VALUESPECIFICATION;
+
+	/**
+	 * The operation id for the '<em>Validate Is True</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPLATE_EXP___VALIDATE_IS_TRUE__DIAGNOSTICCHAIN_MAP = PivotPackage.LITERAL_EXP_OPERATION_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>Template Exp</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPLATE_EXP_OPERATION_COUNT = PivotPackage.LITERAL_EXP_OPERATION_COUNT + 1;
+
+	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvttemplate.impl.CollectionTemplateExpImpl <em>Collection Template Exp</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -336,6 +382,51 @@ public interface QVTtemplatePackage extends EPackage {
 	int COLLECTION_TEMPLATE_EXP_FEATURE_COUNT = TEMPLATE_EXP_FEATURE_COUNT + 3;
 
 	/**
+	 * The operation id for the '<em>All Owned Elements</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_TEMPLATE_EXP___ALL_OWNED_ELEMENTS = TEMPLATE_EXP___ALL_OWNED_ELEMENTS;
+
+	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_TEMPLATE_EXP___GET_VALUE__TYPE_STRING = TEMPLATE_EXP___GET_VALUE__TYPE_STRING;
+
+	/**
+	 * The operation id for the '<em>Compatible Body</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_TEMPLATE_EXP___COMPATIBLE_BODY__VALUESPECIFICATION = TEMPLATE_EXP___COMPATIBLE_BODY__VALUESPECIFICATION;
+
+	/**
+	 * The operation id for the '<em>Validate Is True</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_TEMPLATE_EXP___VALIDATE_IS_TRUE__DIAGNOSTICCHAIN_MAP = TEMPLATE_EXP___VALIDATE_IS_TRUE__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The number of operations of the '<em>Collection Template Exp</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_TEMPLATE_EXP_OPERATION_COUNT = TEMPLATE_EXP_OPERATION_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvttemplate.impl.ObjectTemplateExpImpl <em>Object Template Exp</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -472,6 +563,51 @@ public interface QVTtemplatePackage extends EPackage {
 	int OBJECT_TEMPLATE_EXP_FEATURE_COUNT = TEMPLATE_EXP_FEATURE_COUNT + 2;
 
 	/**
+	 * The operation id for the '<em>All Owned Elements</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OBJECT_TEMPLATE_EXP___ALL_OWNED_ELEMENTS = TEMPLATE_EXP___ALL_OWNED_ELEMENTS;
+
+	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OBJECT_TEMPLATE_EXP___GET_VALUE__TYPE_STRING = TEMPLATE_EXP___GET_VALUE__TYPE_STRING;
+
+	/**
+	 * The operation id for the '<em>Compatible Body</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OBJECT_TEMPLATE_EXP___COMPATIBLE_BODY__VALUESPECIFICATION = TEMPLATE_EXP___COMPATIBLE_BODY__VALUESPECIFICATION;
+
+	/**
+	 * The operation id for the '<em>Validate Is True</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OBJECT_TEMPLATE_EXP___VALIDATE_IS_TRUE__DIAGNOSTICCHAIN_MAP = TEMPLATE_EXP___VALIDATE_IS_TRUE__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The number of operations of the '<em>Object Template Exp</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OBJECT_TEMPLATE_EXP_OPERATION_COUNT = TEMPLATE_EXP_OPERATION_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvttemplate.impl.PropertyTemplateItemImpl <em>Property Template Item</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -561,6 +697,34 @@ public interface QVTtemplatePackage extends EPackage {
 	 * @ordered
 	 */
 	int PROPERTY_TEMPLATE_ITEM_FEATURE_COUNT = PivotPackage.ELEMENT_FEATURE_COUNT + 4;
+
+
+	/**
+	 * The operation id for the '<em>All Owned Elements</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_TEMPLATE_ITEM___ALL_OWNED_ELEMENTS = PivotPackage.ELEMENT___ALL_OWNED_ELEMENTS;
+
+	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_TEMPLATE_ITEM___GET_VALUE__TYPE_STRING = PivotPackage.ELEMENT___GET_VALUE__TYPE_STRING;
+
+	/**
+	 * The number of operations of the '<em>Property Template Item</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_TEMPLATE_ITEM_OPERATION_COUNT = PivotPackage.ELEMENT_OPERATION_COUNT + 0;
 
 
 	/**
@@ -725,6 +889,16 @@ public interface QVTtemplatePackage extends EPackage {
 	EReference getTemplateExp_Where();
 
 	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvttemplate.TemplateExp#validateIsTrue(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Is True</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Is True</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvttemplate.TemplateExp#validateIsTrue(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getTemplateExp__ValidateIsTrue__DiagnosticChain_Map();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -873,6 +1047,14 @@ public interface QVTtemplatePackage extends EPackage {
 		 * @generated
 		 */
 		EReference TEMPLATE_EXP__WHERE = eINSTANCE.getTemplateExp_Where();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Is True</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation TEMPLATE_EXP___VALIDATE_IS_TRUE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getTemplateExp__ValidateIsTrue__DiagnosticChain_Map();
 
 	}
 

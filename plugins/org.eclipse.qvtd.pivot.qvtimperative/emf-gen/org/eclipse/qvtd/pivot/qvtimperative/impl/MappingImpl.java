@@ -10,6 +10,7 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtimperative.impl;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 
 import java.util.Map;
@@ -199,7 +200,7 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public String toString() {
@@ -301,6 +302,21 @@ public class MappingImpl extends RuleImpl implements Mapping {
 				return ownedStatements != null && !ownedStatements.isEmpty();
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	@SuppressWarnings("unchecked")
+	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
+		switch (operationID) {
+			case QVTimperativePackage.MAPPING___VALIDATEIS_TRUE__DIAGNOSTICCHAIN_MAP:
+				return validateisTrue((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
+		}
+		return super.eInvoke(operationID, arguments);
 	}
 
 	/**

@@ -293,6 +293,16 @@ public class QVTtemplatePackageImpl extends EPackageImpl implements QVTtemplateP
 	 * @generated
 	 */
 	@Override
+	public EOperation getTemplateExp__ValidateIsTrue__DiagnosticChain_Map() {
+		return templateExpEClass.getEOperations().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public QVTtemplateFactory getQVTtemplateFactory() {
 		return (QVTtemplateFactory)getEFactoryInstance();
 	}
@@ -334,6 +344,7 @@ public class QVTtemplatePackageImpl extends EPackageImpl implements QVTtemplateP
 		templateExpEClass = createEClass(TEMPLATE_EXP);
 		createEReference(templateExpEClass, TEMPLATE_EXP__BINDS_TO);
 		createEReference(templateExpEClass, TEMPLATE_EXP__WHERE);
+		createEOperation(templateExpEClass, TEMPLATE_EXP___VALIDATE_IS_TRUE__DIAGNOSTICCHAIN_MAP);
 	}
 
 	/**
@@ -372,7 +383,7 @@ public class QVTtemplatePackageImpl extends EPackageImpl implements QVTtemplateP
 		propertyTemplateItemEClass.getESuperTypes().add(thePivotPackage.getElement());
 		templateExpEClass.getESuperTypes().add(thePivotPackage.getLiteralExp());
 
-		// Initialize classes and features; add operations and parameters
+		// Initialize classes, features, and operations; add parameters
 		initEClass(collectionTemplateExpEClass, CollectionTemplateExp.class, "CollectionTemplateExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCollectionTemplateExp_Member(), thePivotPackage.getOCLExpression(), null, "member", null, 0, -1, CollectionTemplateExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getCollectionTemplateExp_ReferredCollectionType(), thePivotPackage.getCollectionType(), null, "referredCollectionType", null, 1, 1, CollectionTemplateExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -392,7 +403,7 @@ public class QVTtemplatePackageImpl extends EPackageImpl implements QVTtemplateP
 		initEReference(getTemplateExp_BindsTo(), thePivotPackage.getVariable(), null, "bindsTo", null, 0, 1, TemplateExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTemplateExp_Where(), thePivotPackage.getOCLExpression(), null, "where", null, 0, 1, TemplateExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		EOperation op = addEOperation(templateExpEClass, ecorePackage.getEBoolean(), "validateIsTrue", 0, 1, IS_UNIQUE, IS_ORDERED);
+		EOperation op = initEOperation(getTemplateExp__ValidateIsTrue__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateIsTrue", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
 		EGenericType g1 = createEGenericType(ecorePackage.getEMap());
 		EGenericType g2 = createEGenericType(ecorePackage.getEJavaObject());
@@ -483,7 +494,7 @@ public class QVTtemplatePackageImpl extends EPackageImpl implements QVTtemplateP
 	protected void createUMLAnnotations() {
 		String source = "http://www.eclipse.org/uml2/2.0.0/UML";
 		addAnnotation
-		(templateExpEClass.getEOperations().get(0),
+		(getTemplateExp__ValidateIsTrue__DiagnosticChain_Map(),
 			source,
 			new String[] {
 				"originalName", "IsTrue"

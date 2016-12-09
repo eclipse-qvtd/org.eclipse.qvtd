@@ -404,6 +404,16 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 	 * @generated
 	 */
 	@Override
+	public EOperation getCorePattern__GetArea() {
+		return corePatternEClass.getEOperations().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getEnforcementOperation() {
 		return enforcementOperationEClass;
 	}
@@ -544,6 +554,36 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 	 * @generated
 	 */
 	@Override
+	public EOperation getOppositePropertyAssignment__GetReferredTargetProperty() {
+		return oppositePropertyAssignmentEClass.getEOperations().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getOppositePropertyAssignment__ValidateOppositePropertyIsImplicit__DiagnosticChain_Map() {
+		return oppositePropertyAssignmentEClass.getEOperations().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getOppositePropertyAssignment__ValidateTargetPropetyIsSlotProperty__DiagnosticChain_Map() {
+		return oppositePropertyAssignmentEClass.getEOperations().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getPropertyAssignment() {
 		return propertyAssignmentEClass;
 	}
@@ -556,6 +596,36 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 	@Override
 	public EReference getPropertyAssignment_TargetProperty() {
 		return (EReference)propertyAssignmentEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getPropertyAssignment__GetReferredTargetProperty() {
+		return propertyAssignmentEClass.getEOperations().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getPropertyAssignment__ValidatePropertyIsNotImplicit__DiagnosticChain_Map() {
+		return propertyAssignmentEClass.getEOperations().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getPropertyAssignment__ValidateTargetPropetyIsSlotProperty__DiagnosticChain_Map() {
+		return propertyAssignmentEClass.getEOperations().get(2);
 	}
 
 	/**
@@ -670,6 +740,7 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 
 		corePatternEClass = createEClass(CORE_PATTERN);
 		createEReference(corePatternEClass, CORE_PATTERN__VARIABLE);
+		createEOperation(corePatternEClass, CORE_PATTERN___GET_AREA);
 
 		enforcementOperationEClass = createEClass(ENFORCEMENT_OPERATION);
 		createEAttribute(enforcementOperationEClass, ENFORCEMENT_OPERATION__ENFORCEMENT_MODE);
@@ -692,9 +763,15 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 
 		oppositePropertyAssignmentEClass = createEClass(OPPOSITE_PROPERTY_ASSIGNMENT);
 		createEReference(oppositePropertyAssignmentEClass, OPPOSITE_PROPERTY_ASSIGNMENT__TARGET_PROPERTY);
+		createEOperation(oppositePropertyAssignmentEClass, OPPOSITE_PROPERTY_ASSIGNMENT___GET_REFERRED_TARGET_PROPERTY);
+		createEOperation(oppositePropertyAssignmentEClass, OPPOSITE_PROPERTY_ASSIGNMENT___VALIDATE_OPPOSITE_PROPERTY_IS_IMPLICIT__DIAGNOSTICCHAIN_MAP);
+		createEOperation(oppositePropertyAssignmentEClass, OPPOSITE_PROPERTY_ASSIGNMENT___VALIDATE_TARGET_PROPETY_IS_SLOT_PROPERTY__DIAGNOSTICCHAIN_MAP);
 
 		propertyAssignmentEClass = createEClass(PROPERTY_ASSIGNMENT);
 		createEReference(propertyAssignmentEClass, PROPERTY_ASSIGNMENT__TARGET_PROPERTY);
+		createEOperation(propertyAssignmentEClass, PROPERTY_ASSIGNMENT___GET_REFERRED_TARGET_PROPERTY);
+		createEOperation(propertyAssignmentEClass, PROPERTY_ASSIGNMENT___VALIDATE_PROPERTY_IS_NOT_IMPLICIT__DIAGNOSTICCHAIN_MAP);
+		createEOperation(propertyAssignmentEClass, PROPERTY_ASSIGNMENT___VALIDATE_TARGET_PROPETY_IS_SLOT_PROPERTY__DIAGNOSTICCHAIN_MAP);
 
 		realizedVariableEClass = createEClass(REALIZED_VARIABLE);
 
@@ -756,7 +833,7 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 		realizedVariableEClass.getESuperTypes().add(thePivotPackage.getVariable());
 		variableAssignmentEClass.getESuperTypes().add(this.getAssignment());
 
-		// Initialize classes and features; add operations and parameters
+		// Initialize classes, features, and operations; add parameters
 		initEClass(areaEClass, Area.class, "Area", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getArea_GuardPattern(), this.getGuardPattern(), this.getGuardPattern_Area(), "guardPattern", null, 1, 1, Area.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getArea_BottomPattern(), this.getBottomPattern(), this.getBottomPattern_Area(), "bottomPattern", null, 1, 1, Area.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -781,7 +858,7 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 		initEClass(corePatternEClass, CorePattern.class, "CorePattern", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCorePattern_Variable(), thePivotPackage.getVariable(), null, "variable", null, 0, -1, CorePattern.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
-		addEOperation(corePatternEClass, this.getArea(), "getArea", 1, 1, IS_UNIQUE, IS_ORDERED);
+		initEOperation(getCorePattern__GetArea(), this.getArea(), "getArea", 1, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(enforcementOperationEClass, EnforcementOperation.class, "EnforcementOperation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getEnforcementOperation_EnforcementMode(), this.getEnforcementMode(), "enforcementMode", null, 0, 1, EnforcementOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -805,9 +882,9 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 		initEClass(oppositePropertyAssignmentEClass, OppositePropertyAssignment.class, "OppositePropertyAssignment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getOppositePropertyAssignment_TargetProperty(), thePivotPackage.getProperty(), null, "targetProperty", null, 1, 1, OppositePropertyAssignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		addEOperation(oppositePropertyAssignmentEClass, thePivotPackage.getProperty(), "getReferredTargetProperty", 1, 1, IS_UNIQUE, IS_ORDERED);
+		initEOperation(getOppositePropertyAssignment__GetReferredTargetProperty(), thePivotPackage.getProperty(), "getReferredTargetProperty", 1, 1, IS_UNIQUE, IS_ORDERED);
 
-		EOperation op = addEOperation(oppositePropertyAssignmentEClass, ecorePackage.getEBoolean(), "validateOppositePropertyIsImplicit", 0, 1, IS_UNIQUE, IS_ORDERED);
+		EOperation op = initEOperation(getOppositePropertyAssignment__ValidateOppositePropertyIsImplicit__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateOppositePropertyIsImplicit", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
 		EGenericType g1 = createEGenericType(ecorePackage.getEMap());
 		EGenericType g2 = createEGenericType(ecorePackage.getEJavaObject());
@@ -816,7 +893,7 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 		g1.getETypeArguments().add(g2);
 		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(oppositePropertyAssignmentEClass, ecorePackage.getEBoolean(), "validateTargetPropetyIsSlotProperty", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = initEOperation(getOppositePropertyAssignment__ValidateTargetPropetyIsSlotProperty__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateTargetPropetyIsSlotProperty", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(ecorePackage.getEMap());
 		g2 = createEGenericType(ecorePackage.getEJavaObject());
@@ -828,9 +905,9 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 		initEClass(propertyAssignmentEClass, PropertyAssignment.class, "PropertyAssignment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getPropertyAssignment_TargetProperty(), thePivotPackage.getProperty(), null, "targetProperty", null, 1, 1, PropertyAssignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		addEOperation(propertyAssignmentEClass, thePivotPackage.getProperty(), "getReferredTargetProperty", 1, 1, IS_UNIQUE, IS_ORDERED);
+		initEOperation(getPropertyAssignment__GetReferredTargetProperty(), thePivotPackage.getProperty(), "getReferredTargetProperty", 1, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(propertyAssignmentEClass, ecorePackage.getEBoolean(), "validatePropertyIsNotImplicit", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = initEOperation(getPropertyAssignment__ValidatePropertyIsNotImplicit__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validatePropertyIsNotImplicit", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(ecorePackage.getEMap());
 		g2 = createEGenericType(ecorePackage.getEJavaObject());
@@ -839,7 +916,7 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 		g1.getETypeArguments().add(g2);
 		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(propertyAssignmentEClass, ecorePackage.getEBoolean(), "validateTargetPropetyIsSlotProperty", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = initEOperation(getPropertyAssignment__ValidateTargetPropetyIsSlotProperty__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateTargetPropetyIsSlotProperty", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(ecorePackage.getEMap());
 		g2 = createEGenericType(ecorePackage.getEJavaObject());
@@ -934,25 +1011,25 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 	protected void createUMLAnnotations() {
 		String source = "http://www.eclipse.org/uml2/2.0.0/UML";
 		addAnnotation
-		(oppositePropertyAssignmentEClass.getEOperations().get(1),
+		(getOppositePropertyAssignment__ValidateOppositePropertyIsImplicit__DiagnosticChain_Map(),
 			source,
 			new String[] {
 				"originalName", "OppositePropertyIsImplicit"
 		});
 		addAnnotation
-		(oppositePropertyAssignmentEClass.getEOperations().get(2),
+		(getOppositePropertyAssignment__ValidateTargetPropetyIsSlotProperty__DiagnosticChain_Map(),
 			source,
 			new String[] {
 				"originalName", "TargetPropetyIsSlotProperty"
 		});
 		addAnnotation
-		(propertyAssignmentEClass.getEOperations().get(1),
+		(getPropertyAssignment__ValidatePropertyIsNotImplicit__DiagnosticChain_Map(),
 			source,
 			new String[] {
 				"originalName", "PropertyIsNotImplicit"
 		});
 		addAnnotation
-		(propertyAssignmentEClass.getEOperations().get(2),
+		(getPropertyAssignment__ValidateTargetPropetyIsSlotProperty__DiagnosticChain_Map(),
 			source,
 			new String[] {
 				"originalName", "TargetPropetyIsSlotProperty"

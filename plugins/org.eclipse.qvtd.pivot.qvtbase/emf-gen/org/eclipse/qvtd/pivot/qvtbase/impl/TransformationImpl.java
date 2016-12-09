@@ -10,6 +10,7 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtbase.impl;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -397,6 +398,22 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 				return ownedContext != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
+		switch (operationID) {
+			case QVTbasePackage.TRANSFORMATION___GET_FUNCTION__STRING:
+				return getFunction((String)arguments.get(0));
+			case QVTbasePackage.TRANSFORMATION___GET_MODEL_PARAMETER__STRING:
+				return getModelParameter((String)arguments.get(0));
+		}
+		return super.eInvoke(operationID, arguments);
 	}
 
 	/**

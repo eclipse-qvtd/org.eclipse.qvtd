@@ -362,6 +362,16 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 	 * @generated
 	 */
 	@Override
+	public EOperation getRelationCallExp__ValidateMatchingArgumentCount__DiagnosticChain_Map() {
+		return relationCallExpEClass.getEOperations().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getRelationDomain() {
 		return relationDomainEClass;
 	}
@@ -564,6 +574,7 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 		relationCallExpEClass = createEClass(RELATION_CALL_EXP);
 		createEReference(relationCallExpEClass, RELATION_CALL_EXP__ARGUMENT);
 		createEReference(relationCallExpEClass, RELATION_CALL_EXP__REFERRED_RELATION);
+		createEOperation(relationCallExpEClass, RELATION_CALL_EXP___VALIDATE_MATCHING_ARGUMENT_COUNT__DIAGNOSTICCHAIN_MAP);
 
 		relationDomainEClass = createEClass(RELATION_DOMAIN);
 		createEReference(relationDomainEClass, RELATION_DOMAIN__DEFAULT_ASSIGNMENT);
@@ -634,7 +645,7 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 		sharedVariableEClass.getESuperTypes().add(thePivotPackage.getVariable());
 		templateVariableEClass.getESuperTypes().add(thePivotPackage.getVariable());
 
-		// Initialize classes and features; add operations and parameters
+		// Initialize classes, features, and operations; add parameters
 		initEClass(domainPatternEClass, DomainPattern.class, "DomainPattern", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getDomainPattern_TemplateExpression(), theQVTtemplatePackage.getTemplateExp(), null, "templateExpression", null, 0, 1, DomainPattern.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -655,7 +666,7 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 		initEReference(getRelationCallExp_Argument(), thePivotPackage.getOCLExpression(), null, "argument", null, 2, -1, RelationCallExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRelationCallExp_ReferredRelation(), this.getRelation(), null, "referredRelation", null, 1, 1, RelationCallExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		EOperation op = addEOperation(relationCallExpEClass, ecorePackage.getEBoolean(), "validateMatchingArgumentCount", 0, 1, IS_UNIQUE, IS_ORDERED);
+		EOperation op = initEOperation(getRelationCallExp__ValidateMatchingArgumentCount__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateMatchingArgumentCount", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
 		EGenericType g1 = createEGenericType(ecorePackage.getEMap());
 		EGenericType g2 = createEGenericType(ecorePackage.getEJavaObject());
@@ -793,7 +804,7 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 	protected void createUMLAnnotations() {
 		String source = "http://www.eclipse.org/uml2/2.0.0/UML";
 		addAnnotation
-		(relationCallExpEClass.getEOperations().get(0),
+		(getRelationCallExp__ValidateMatchingArgumentCount__DiagnosticChain_Map(),
 			source,
 			new String[] {
 				"originalName", "MatchingArgumentCount"

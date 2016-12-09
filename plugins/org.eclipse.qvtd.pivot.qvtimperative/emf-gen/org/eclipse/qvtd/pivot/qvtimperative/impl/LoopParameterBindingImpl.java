@@ -155,7 +155,7 @@ public class LoopParameterBindingImpl extends MappingParameterBindingImpl implem
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public String toString() {

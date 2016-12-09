@@ -161,7 +161,7 @@ public class SimpleParameterBindingImpl extends MappingParameterBindingImpl impl
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public String toString() {

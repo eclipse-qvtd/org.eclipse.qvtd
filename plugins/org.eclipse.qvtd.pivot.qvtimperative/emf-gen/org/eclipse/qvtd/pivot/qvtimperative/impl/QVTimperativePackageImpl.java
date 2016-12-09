@@ -678,6 +678,16 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * @generated
 	 */
 	@Override
+	public EOperation getMapping__ValidateisTrue__DiagnosticChain_Map() {
+		return mappingEClass.getEOperations().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getMappingCall() {
 		return mappingCallEClass;
 	}
@@ -1070,6 +1080,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		createEAttribute(mappingEClass, MAPPING__IS_STRICT);
 		createEReference(mappingEClass, MAPPING__OWNED_PARAMETERS);
 		createEReference(mappingEClass, MAPPING__OWNED_STATEMENTS);
+		createEOperation(mappingEClass, MAPPING___VALIDATEIS_TRUE__DIAGNOSTICCHAIN_MAP);
 
 		mappingCallEClass = createEClass(MAPPING_CALL);
 		createEReference(mappingCallEClass, MAPPING_CALL__BINDING);
@@ -1185,7 +1196,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		variableStatementEClass.getESuperTypes().add(thePivotPackage.getVariableDeclaration());
 		variableStatementEClass.getESuperTypes().add(this.getStatement());
 
-		// Initialize classes and features; add operations and parameters
+		// Initialize classes, features, and operations; add parameters
 		initEClass(addStatementEClass, AddStatement.class, "AddStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAddStatement_TargetVariable(), this.getConnectionVariable(), null, "targetVariable", null, 1, 1, AddStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAddStatement_IsEnforcedUnique(), ecorePackage.getEBoolean(), "isEnforcedUnique", null, 0, 1, AddStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1236,7 +1247,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		initEReference(getMapping_OwnedParameters(), this.getMappingParameter(), null, "ownedParameters", null, 0, -1, Mapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getMapping_OwnedStatements(), this.getStatement(), null, "ownedStatements", null, 0, -1, Mapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		EOperation op = addEOperation(mappingEClass, ecorePackage.getEBoolean(), "validateisTrue", 0, 1, IS_UNIQUE, IS_ORDERED);
+		EOperation op = initEOperation(getMapping__ValidateisTrue__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateisTrue", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
 		EGenericType g1 = createEGenericType(ecorePackage.getEMap());
 		EGenericType g2 = createEGenericType(ecorePackage.getEJavaObject());
@@ -1323,7 +1334,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	protected void createUMLAnnotations() {
 		String source = "http://www.eclipse.org/uml2/2.0.0/UML";
 		addAnnotation
-		(mappingEClass.getEOperations().get(0),
+		(getMapping__ValidateisTrue__DiagnosticChain_Map(),
 			source,
 			new String[] {
 				"originalName", "isTrue"

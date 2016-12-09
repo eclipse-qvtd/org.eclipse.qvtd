@@ -218,7 +218,7 @@ public class EnforcementOperationImpl extends ElementImpl implements Enforcement
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public String toString() {

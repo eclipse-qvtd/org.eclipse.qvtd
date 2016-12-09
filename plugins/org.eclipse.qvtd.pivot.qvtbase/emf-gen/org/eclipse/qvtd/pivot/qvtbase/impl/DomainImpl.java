@@ -10,13 +10,17 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtbase.impl;
 
+import java.lang.reflect.InvocationTargetException;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.ocl.pivot.Element;
+import org.eclipse.ocl.pivot.PivotPackage;
+import org.eclipse.ocl.pivot.ReferringElement;
 import org.eclipse.ocl.pivot.internal.NamedElementImpl;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
@@ -313,7 +317,7 @@ public abstract class DomainImpl extends NamedElementImpl implements Domain {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public String toString() {
@@ -451,6 +455,36 @@ public abstract class DomainImpl extends NamedElementImpl implements Domain {
 				return typedModel != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedOperationID(int baseOperationID, Class<?> baseClass) {
+		if (baseClass == ReferringElement.class) {
+			switch (baseOperationID) {
+				case PivotPackage.REFERRING_ELEMENT___GET_REFERRED_ELEMENT: return QVTbasePackage.DOMAIN___GET_REFERRED_ELEMENT;
+				default: return -1;
+			}
+		}
+		return super.eDerivedOperationID(baseOperationID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
+		switch (operationID) {
+			case QVTbasePackage.DOMAIN___GET_REFERRED_ELEMENT:
+				return getReferredElement();
+		}
+		return super.eInvoke(operationID, arguments);
 	}
 
 	/**
