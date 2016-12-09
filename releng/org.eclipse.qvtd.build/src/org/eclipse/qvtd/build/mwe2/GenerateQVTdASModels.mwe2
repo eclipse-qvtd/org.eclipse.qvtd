@@ -23,14 +23,122 @@ import org.eclipse.emf.ecore.resource.impl.*
  *	Generate the Pivot-based Models.
  */
 Workflow {
-	bean = ResourceSetImpl : resourceSet {}
-    bean = StandaloneSetup { resourceSet = resourceSet
+	bean = ResourceSetImpl : qvtdCreateResourceSet {}
+    bean = ProjectMapSetup { resourceSet = qvtdCreateResourceSet }
+    bean = StandaloneSetup { resourceSet = qvtdCreateResourceSet
     	platformUri = ".."
     	scanClassPath = true
     }
-    bean = EcoreGenModelSetup { resourceSet = resourceSet }
+    bean = EcoreGenModelSetup { resourceSet = qvtdCreateResourceSet }
+ 
+    component = ResourceRenamer { resourceSet = qvtdCreateResourceSet skipOnErrors = true
+    	projectName = "org.eclipse.qvtd.pivot.qvtbase"
+    	resourceRename = {
+    		from = "model/QVTbaseStructural.ecore"
+    		to = "model/QVTbase.ecore"
+    	}
+    	resourceRename = {
+    		from = "../org.eclipse.qvtd.pivot.qvtcore/model/QVTcoreStructural.ecore"
+    		to = "../org.eclipse.qvtd.pivot.qvtcore/model/QVTcore.ecore"
+    	}
+    	resourceRename = {
+    		from = "../org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperativeStructural.ecore"
+    		to = "../org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperative.ecore"
+    	}
+    	resourceRename = {
+    		from = "../org.eclipse.qvtd.pivot.qvtrelation/model/QVTrelationStructural.ecore"
+    		to = "../org.eclipse.qvtd.pivot.qvtrelation/model/QVTrelation.ecore"
+    	}
+    	resourceRename = {
+    		from = "../org.eclipse.qvtd.pivot.qvttemplate/model/QVTtemplateStructural.ecore"
+    		to = "../org.eclipse.qvtd.pivot.qvttemplate/model/QVTtemplate.ecore"
+    	}
+    }
+    //
+    //
+    //
+	bean = ResourceSetImpl : qvtbMergeResourceSet {}
+    bean = ProjectMapSetup { resourceSet = qvtbMergeResourceSet }
+    bean = UMLStandaloneSetup { resourceSet = qvtbMergeResourceSet }
+    bean = OCLStandaloneSetup {}
+    bean = EcoreGenModelSetup { resourceSet = qvtbMergeResourceSet }
+    component = ConstraintMerger { resourceSet = qvtbMergeResourceSet skipOnErrors = true
+    	projectName = "org.eclipse.qvtd.pivot.qvtbase"
+    	libraryURI = "http://www.eclipse.org/qvt/2015/QVTbaseLibrary"
+    	ecoreURI = "model/QVTbase.ecore"
+    	oclURI = "model/QVTbase.ocl"
+    	invariantPrefix = "validate"
+    }
+    //
+    //
+    //
+	bean = ResourceSetImpl : qvtcMergeResourceSet {}
+    bean = ProjectMapSetup { resourceSet = qvtcMergeResourceSet }
+    bean = UMLStandaloneSetup { resourceSet = qvtcMergeResourceSet }
+    bean = OCLStandaloneSetup {}
+    bean = EcoreGenModelSetup { resourceSet = qvtcMergeResourceSet }
+    component = ConstraintMerger { resourceSet = qvtcMergeResourceSet skipOnErrors = true
+    	projectName = "org.eclipse.qvtd.pivot.qvtcore"
+    	libraryURI = "http://www.eclipse.org/qvt/2015/QVTbaseLibrary"
+    	ecoreURI = "model/QVTcore.ecore"
+    	oclURI = "model/QVTcore.ocl"
+    	invariantPrefix = "validate"
+    }
+    //
+    //
+    //
+	bean = ResourceSetImpl : qvtiMergeResourceSet {}
+    bean = ProjectMapSetup { resourceSet = qvtiMergeResourceSet }
+    bean = UMLStandaloneSetup { resourceSet = qvtiMergeResourceSet }
+    bean = OCLStandaloneSetup {}
+    bean = EcoreGenModelSetup { resourceSet = qvtiMergeResourceSet }
+    component = ConstraintMerger { resourceSet = qvtiMergeResourceSet skipOnErrors = true
+    	projectName = "org.eclipse.qvtd.pivot.qvtimperative"
+    	libraryURI = "http://www.eclipse.org/qvt/2015/QVTbaseLibrary"
+    	ecoreURI = "model/QVTimperative.ecore"
+    	oclURI = "model/QVTimperative.ocl"
+    	invariantPrefix = "validate"
+    }
+    //
+    //
+    //
+	bean = ResourceSetImpl : qvttMergeResourceSet {}
+    bean = ProjectMapSetup { resourceSet = qvttMergeResourceSet }
+    bean = UMLStandaloneSetup { resourceSet = qvttMergeResourceSet }
+    bean = OCLStandaloneSetup {}
+    bean = EcoreGenModelSetup { resourceSet = qvttMergeResourceSet }
+    component = ConstraintMerger { resourceSet = qvttMergeResourceSet skipOnErrors = true
+    	projectName = "org.eclipse.qvtd.pivot.qvttemplate"
+    	libraryURI = "http://www.eclipse.org/qvt/2015/QVTbaseLibrary"
+    	ecoreURI = "model/QVTtemplate.ecore"
+    	oclURI = "model/QVTtemplate.ocl"
+    	invariantPrefix = "validate"
+    }
+    //
+    //
+    //
+	bean = ResourceSetImpl : qvtrMergeResourceSet {}
+    bean = ProjectMapSetup { resourceSet = qvtrMergeResourceSet }
+    bean = UMLStandaloneSetup { resourceSet = qvtrMergeResourceSet }
+    bean = OCLStandaloneSetup {}
+    bean = EcoreGenModelSetup { resourceSet = qvtrMergeResourceSet }
+    component = ConstraintMerger { resourceSet = qvtrMergeResourceSet skipOnErrors = true
+    	projectName = "org.eclipse.qvtd.pivot.qvtrelation"
+    	libraryURI = "http://www.eclipse.org/qvt/2015/QVTbaseLibrary"
+    	ecoreURI = "model/QVTrelation.ecore"
+    	oclURI = "model/QVTrelation.ocl"
+    	invariantPrefix = "validate"
+    }
 
-    component = @SubGenerateASModel { resourceSet = resourceSet
+	bean = ResourceSetImpl : resourceSet2 {}
+    bean = StandaloneSetup { resourceSet = resourceSet2
+    	platformUri = ".."
+    	scanClassPath = true
+    }
+    bean = EcoreGenModelSetup { resourceSet = resourceSet2 }
+ 
+
+    component = @SubGenerateASModel { resourceSet = resourceSet2
     	projectName = "org.eclipse.qvtd.pivot.qvtbase"
     	genModelFile =  "model/QVTbase.genmodel"
     	superProjectName = "org.eclipse.ocl.pivot"
@@ -59,7 +167,7 @@ Workflow {
 //    		to = "org.eclipse.qvtd.pivot.qvtbase.model.QVTbaseMetamodel"
 //    	}
     }
-    component = @SubGenerateASModel { resourceSet = resourceSet
+    component = @SubGenerateASModel { resourceSet = resourceSet2
     	projectName = "org.eclipse.qvtd.pivot.qvtcore"
     	genModelFile =  "model/QVTcore.genmodel"
     	superProjectName = "org.eclipse.qvtd.pivot.qvtbase"
@@ -67,7 +175,7 @@ Workflow {
     	baseProjectName = "org.eclipse.ocl.pivot"
     	baseGenModelFile = "model/Pivot.genmodel"
     }
-    component = @SubGenerateASModel { resourceSet = resourceSet
+    component = @SubGenerateASModel { resourceSet = resourceSet2
     	projectName = "org.eclipse.qvtd.pivot.qvtimperative"
     	genModelFile =  "model/QVTimperative.genmodel"
     	superProjectName = "org.eclipse.qvtd.pivot.qvtbase"
@@ -75,7 +183,7 @@ Workflow {
     	baseProjectName = "org.eclipse.ocl.pivot"
     	baseGenModelFile = "model/Pivot.genmodel"
     }
-    component = @SubGenerateASModel { resourceSet = resourceSet
+    component = @SubGenerateASModel { resourceSet = resourceSet2
     	projectName = "org.eclipse.qvtd.pivot.qvttemplate"
     	genModelFile =  "model/QVTtemplate.genmodel"
     	superProjectName = "org.eclipse.qvtd.pivot.qvtbase"
@@ -83,7 +191,7 @@ Workflow {
     	baseProjectName = "org.eclipse.ocl.pivot"
     	baseGenModelFile = "model/Pivot.genmodel"
     }
-    component = @SubGenerateASModel { resourceSet = resourceSet
+    component = @SubGenerateASModel { resourceSet = resourceSet2
     	projectName = "org.eclipse.qvtd.pivot.qvtrelation"
     	genModelFile =  "model/QVTrelation.genmodel"
     	superProjectName = "org.eclipse.qvtd.pivot.qvttemplate"

@@ -1,0 +1,8 @@
+import 'QVTtemplate.ecore'
+
+package qvttemplate
+
+context TemplateExp
+inv IsTrue: true
+
+endpackage

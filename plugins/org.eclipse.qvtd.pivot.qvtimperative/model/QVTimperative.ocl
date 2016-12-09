@@ -1,75 +1,9 @@
-import 'platform:/resource/org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperative.ecore'
-import 'platform:/resource/org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore'
---import 'http://www.eclipse.org/ocl/2015/Pivot'
-
-package ocl
-context Element
-def: joinNames(names : Set(String)) : String = '{' + names->sortedBy(n | n)->iterate(n; s : String = '' | if s = '' then n else s + ';' + n endif) + '}'
-
-endpackage
+import 'QVTimperative.ecore'
 
 package qvtimperative
 
 context Mapping
-def: guardVariables : Set(ocl::Variable) = ownedParameters
-def: boundGuardVariables : Set(ocl::Variable) = ownedStatements->selectByKind(DeclareStatement)
-/* Mapping guard variables that are assigned  */
---def: boundGuardVariables : Set(ocl::Variable) = guardVariables->select(initExpression <> null)
-def: unboundGuardVariables : Set(ocl::Variable) = guardVariables - boundGuardVariables
--- def: noInheritance : Boolean = self.refinement->isEmpty()
--- def: noParents : Boolean = self.specification->isEmpty()
-/* Mappings are either L to M or M to R, but not both */
---inv ViaMiddle: isToMiddle xor isFromMiddle
-/* No mapping refinement */
--- inv NoRefinement: noInheritance and noParents
---inv NoMiddleGuardPatternVariables: guardPattern.ownedGuardVariables->isEmpty()
---inv NoMiddleBottomPatternVariables: bottomPattern.variable->isEmpty() and bottomPattern.realizedVariable->isEmpty()
-
-context MappingCall
-def: referredNames : Set(String) = referredMapping.unboundGuardVariables.name->asSet()
-def: referringNames : Set(String) = binding.boundVariable.name->asSet()
-inv MatchingCallBindings('Mismatched bindings ' + referredMapping.name + joinNames(referredNames) + ' <= ' + joinNames(referringNames)): referredNames = referringNames
-inv UniqueCallBindings: binding->isUnique(boundVariable)
+inv isTrue: true
 
 endpackage
 
-package qvtimperative
-
---context Area
---def: mapping : qvtimperative::Mapping = if oclIsKindOf(qvtimperative::Mapping) then self else oclAsType(ImperativeDomain).rule endif.oclAsType(qvtimperative::Mapping)
---def: isMiddle : Boolean = oclIsKindOf(qvtimperative::Mapping)
---def: isSource : Boolean = oclIsKindOf(ImperativeDomain) and oclAsType(ImperativeDomain).isCheckable
---def: isTarget : Boolean = oclIsKindOf(ImperativeDomain) and oclAsType(ImperativeDomain).isEnforceable
-
---context BottomPattern
---inv UniquePropertyAssignments: assignment->select(PropertyAssignment)->isUnique(a : PropertyAssignment | a.targetProperty)	-- FIXME redundant "a : PropertyAssignment | a."
-
-
-context SetStatement
-inv IsNotReadOnly: not targetProperty.isReadOnly
-inv PropertyOfSlot(targetVariable.type.name + ' must conform to ' + targetProperty.owningClass.name): targetVariable.type.conformsTo(targetProperty.owningClass)
-inv CompatibleType(ownedExpression.type.name + ' must conform to ' + targetProperty.type.name): ownedExpression.type.conformsTo(targetProperty.type)
-inv NoRealizedVariableNavigations: ownedExpression->closure(oclContents())->selectByKind(ocl::VariableExp)->select(referredVariable.oclIsKindOf(NewStatement))->select(oclContainer().oclIsKindOf(ocl::CallExp))->isEmpty()
-
---context NewStatement
---def: isBottom : Boolean = oclContainer().oclIsKindOf(BottomPattern)
---def: isGuard : Boolean = oclContainer().oclIsKindOf(GuardPattern)
---inv IsBottom('RealizedVariable ' + name + ' must be in a BottomPattern'): isBottom
---inv IsEnforced('RealizedVariable ' + name + ' must be in an enforceable Area'): isBottom and oclContainer().oclAsType(BottomPattern).area.isTarget
-
---context Variable
---inv IsInGuard: oclContainer().oclIsKindOf(GuardPattern)
---inv IsEnforced: let area = oclContainer().oclAsType(GuardPattern).area, mapping = area.mapping in
---	if mapping.isToMiddle then area = mapping else area.oclAsType(CoreDomain).isEnforceable endif
-
-context GuardParameterBinding
-inv CheckedTypeIsNotConformant: isCheck implies not value.type.conformsTo(boundVariable.type)
-inv UncheckedTypeIsConformant: not isCheck implies value.type.conformsTo(boundVariable.type)
-inv CompatibleBinding: let elementType = value.type in elementType.conformsTo(boundVariable.type) or boundVariable.type.conformsTo(elementType)
-
-context SimpleParameterBinding
-inv CheckedTypeIsNotConformant: isCheck implies not value.type.conformsTo(boundVariable.type)
-inv UncheckedTypeIsConformant: not isCheck implies value.type.conformsTo(boundVariable.type)
---inv CompatibleType: ownedInit.type.conformsTo(type)
-
-endpackage

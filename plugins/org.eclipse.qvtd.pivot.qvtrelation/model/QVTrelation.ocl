@@ -1,0 +1,8 @@
+import 'QVTrelation.ecore'
+
+package qvtrelation
+
+context RelationCallExp
+inv MatchingArgumentCount: self.argument->size() = self.referredRelation.domain.oclAsType(RelationDomain).rootVariable->size()
+
+endpackage

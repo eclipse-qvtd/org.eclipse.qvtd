@@ -1,104 +1,206 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="qvtcore" nsURI="http://www.eclipse.org/qvt/2015/QVTcore" nsPrefix="qvtc">
-  <eClassifiers xsi:type="ecore:EClass" name="Area" abstract="true" interface="true"
-      eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#//Element">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="guardPattern" lowerBound="1"
-        eType="#//GuardPattern" containment="true" eOpposite="#//GuardPattern/area"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="bottomPattern" lowerBound="1"
-        eType="#//BottomPattern" containment="true" eOpposite="#//BottomPattern/area"/>
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmi:id="P-qvtcore" name="qvtcore" nsURI="http://www.eclipse.org/qvt/2015/QVTcore"
+    nsPrefix="qvtc">
+  <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+    <details key="invocationDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
+    <details key="settingDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
+    <details key="validationDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="T-qvtcore-Area" name="Area" abstract="true"
+      interface="true" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Element">
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtcore-Area-guardPattern"
+        name="guardPattern" lowerBound="1" eType="#T-qvtcore-GuardPattern" containment="true"
+        eOpposite="#F-qvtcore-GuardPattern-area"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtcore-Area-bottomPattern"
+        name="bottomPattern" lowerBound="1" eType="#T-qvtcore-BottomPattern" containment="true"
+        eOpposite="#F-qvtcore-BottomPattern-area"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Assignment" abstract="true" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#//Element">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="bottomPattern" lowerBound="1"
-        eType="#//BottomPattern" transient="true" eOpposite="#//BottomPattern/assignment"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//OCLExpression"
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="T-qvtcore-Assignment" name="Assignment"
+      abstract="true" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Element">
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtcore-Assignment-bottomPattern"
+        name="bottomPattern" lowerBound="1" eType="#T-qvtcore-BottomPattern" transient="true"
+        eOpposite="#F-qvtcore-BottomPattern-assignment"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtcore-Assignment-value"
+        name="value" lowerBound="1" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-OCLExpression"
         containment="true">
       <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
         <details key="body" value="valueAssignment"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isDefault" eType="ecore:EDataType ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//Boolean"
+    <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="F-qvtcore-Assignment-isDefault"
+        name="isDefault" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         unsettable="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="BottomPattern" eSuperTypes="#//CorePattern">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="area" lowerBound="1" eType="#//Area"
-        transient="true" eOpposite="#//Area/bottomPattern"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="assignment" ordered="false"
-        upperBound="-1" eType="#//Assignment" containment="true" eOpposite="#//Assignment/bottomPattern"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="enforcementOperation" ordered="false"
-        upperBound="-1" eType="#//EnforcementOperation" containment="true" eOpposite="#//EnforcementOperation/bottomPattern"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="realizedVariable" ordered="false"
-        upperBound="-1" eType="#//RealizedVariable" containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="BottomVariable" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#//Variable"/>
-  <eClassifiers xsi:type="ecore:EClass" name="CoreDomain" eSuperTypes="../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#//Domain #//Area"/>
-  <eClassifiers xsi:type="ecore:EClass" name="CoreModel" eSuperTypes="../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#//BaseModel"/>
-  <eClassifiers xsi:type="ecore:EClass" name="CorePattern" eSuperTypes="../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#//Pattern">
-    <eOperations name="getArea" lowerBound="1" eType="#//Area"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="variable" ordered="false"
-        upperBound="-1" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//Variable"
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="T-qvtcore-BottomPattern" name="BottomPattern"
+      eSuperTypes="#T-qvtcore-CorePattern">
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtcore-BottomPattern-area"
+        name="area" lowerBound="1" eType="#T-qvtcore-Area" transient="true" eOpposite="#F-qvtcore-Area-bottomPattern"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtcore-BottomPattern-assignment"
+        name="assignment" ordered="false" upperBound="-1" eType="#T-qvtcore-Assignment"
+        containment="true" eOpposite="#F-qvtcore-Assignment-bottomPattern"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtcore-BottomPattern-enforcementOperation"
+        name="enforcementOperation" ordered="false" upperBound="-1" eType="#T-qvtcore-EnforcementOperation"
+        containment="true" eOpposite="#F-qvtcore-EnforcementOperation-bottomPattern"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtcore-BottomPattern-realizedVariable"
+        name="realizedVariable" ordered="false" upperBound="-1" eType="#T-qvtcore-RealizedVariable"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EnforcementOperation" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#//Element">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="enforcementMode" eType="#//EnforcementMode"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="bottomPattern" eType="#//BottomPattern"
-        transient="true" eOpposite="#//BottomPattern/enforcementOperation"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="operationCallExp" lowerBound="1"
-        eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//OperationCallExp"
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="T-qvtcore-BottomVariable" name="BottomVariable"
+      eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Variable"/>
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="T-qvtcore-CoreDomain" name="CoreDomain"
+      eSuperTypes="../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#T-qvtbase-Domain #T-qvtcore-Area"/>
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="T-qvtcore-CoreModel" name="CoreModel"
+      eSuperTypes="../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#T-qvtbase-BaseModel"/>
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="T-qvtcore-CorePattern" name="CorePattern"
+      eSuperTypes="../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#T-qvtbase-Pattern">
+    <eOperations name="getArea" lowerBound="1" eType="#T-qvtcore-Area"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtcore-CorePattern-variable"
+        name="variable" ordered="false" upperBound="-1" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Variable"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="GuardPattern" eSuperTypes="#//CorePattern">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="area" lowerBound="1" eType="#//Area"
-        transient="true" eOpposite="#//Area/guardPattern"/>
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="T-qvtcore-EnforcementOperation" name="EnforcementOperation"
+      eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Element">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="F-qvtcore-EnforcementOperation-enforcementMode"
+        name="enforcementMode" eType="#T-qvtcore-EnforcementMode"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtcore-EnforcementOperation-bottomPattern"
+        name="bottomPattern" eType="#T-qvtcore-BottomPattern" transient="true" eOpposite="#F-qvtcore-BottomPattern-enforcementOperation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtcore-EnforcementOperation-operationCallExp"
+        name="operationCallExp" lowerBound="1" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-OperationCallExp"
+        containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="GuardVariable" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#//Variable"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Mapping" eSuperTypes="../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#//Rule #//Area">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="context" ordered="false"
-        eType="#//Mapping" eOpposite="#//Mapping/local"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="local" ordered="false"
-        upperBound="-1" eType="#//Mapping" containment="true" eOpposite="#//Mapping/context"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="refinement" ordered="false"
-        upperBound="-1" eType="#//Mapping" eOpposite="#//Mapping/specification"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="specification" ordered="false"
-        upperBound="-1" eType="#//Mapping" eOpposite="#//Mapping/refinement"/>
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="T-qvtcore-GuardPattern" name="GuardPattern"
+      eSuperTypes="#T-qvtcore-CorePattern">
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtcore-GuardPattern-area"
+        name="area" lowerBound="1" eType="#T-qvtcore-Area" transient="true" eOpposite="#F-qvtcore-Area-guardPattern"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="NavigationAssignment" abstract="true"
-      eSuperTypes="#//Assignment">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="slotExpression" lowerBound="1"
-        eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//OCLExpression"
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="T-qvtcore-GuardVariable" name="GuardVariable"
+      eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Variable"/>
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="T-qvtcore-Mapping" name="Mapping"
+      eSuperTypes="../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#T-qvtbase-Rule #T-qvtcore-Area">
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtcore-Mapping-context"
+        name="context" eType="#T-qvtcore-Mapping" eOpposite="#F-qvtcore-Mapping-local"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtcore-Mapping-local"
+        name="local" ordered="false" upperBound="-1" eType="#T-qvtcore-Mapping" containment="true"
+        eOpposite="#F-qvtcore-Mapping-context"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtcore-Mapping-refinement"
+        name="refinement" ordered="false" upperBound="-1" eType="#T-qvtcore-Mapping"
+        eOpposite="#F-qvtcore-Mapping-specification"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtcore-Mapping-specification"
+        name="specification" ordered="false" upperBound="-1" eType="#T-qvtcore-Mapping"
+        eOpposite="#F-qvtcore-Mapping-refinement"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="T-qvtcore-NavigationAssignment" name="NavigationAssignment"
+      abstract="true" eSuperTypes="#T-qvtcore-Assignment">
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtcore-NavigationAssignment-slotExpression"
+        name="slotExpression" lowerBound="1" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-OCLExpression"
         containment="true">
       <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
         <details key="body" value="slotAssignment"/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="OppositePropertyAssignment" eSuperTypes="#//NavigationAssignment">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="targetProperty" lowerBound="1"
-        eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//Property">
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="T-qvtcore-OppositePropertyAssignment"
+      name="OppositePropertyAssignment" eSuperTypes="#T-qvtcore-NavigationAssignment">
+    <eOperations name="getReferredTargetProperty" lowerBound="1" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Property">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="targetProperty.opposite&#xA;"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="validateOppositePropertyIsImplicit" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <details key="originalName" value="OppositePropertyIsImplicit"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="targetProperty.isImplicit&#xA;"/>
+      </eAnnotations>
+      <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
+      <eParameters name="context">
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
+    <eOperations name="validateTargetPropetyIsSlotProperty" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <details key="originalName" value="TargetPropetyIsSlotProperty"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="slotExpression.type.conformsTo(getReferredTargetProperty().owningClass)&#xA;&#xA;"/>
+      </eAnnotations>
+      <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
+      <eParameters name="context">
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtcore-OppositePropertyAssignment-targetProperty"
+        name="targetProperty" lowerBound="1" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Property">
       <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
         <details key="body" value="assignment"/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="PropertyAssignment" eSuperTypes="#//NavigationAssignment">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="targetProperty" lowerBound="1"
-        eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//Property">
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="T-qvtcore-PropertyAssignment" name="PropertyAssignment"
+      eSuperTypes="#T-qvtcore-NavigationAssignment">
+    <eOperations name="getReferredTargetProperty" lowerBound="1" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Property">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="targetProperty&#xA;"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="validatePropertyIsNotImplicit" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <details key="originalName" value="PropertyIsNotImplicit"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="not targetProperty.isImplicit&#xA;"/>
+      </eAnnotations>
+      <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
+      <eParameters name="context">
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
+    <eOperations name="validateTargetPropetyIsSlotProperty" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <details key="originalName" value="TargetPropetyIsSlotProperty"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="slotExpression.type.conformsTo(getReferredTargetProperty().owningClass)&#xA;&#xA;"/>
+      </eAnnotations>
+      <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
+      <eParameters name="context">
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtcore-PropertyAssignment-targetProperty"
+        name="targetProperty" lowerBound="1" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Property">
       <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
         <details key="body" value="assignment"/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="RealizedVariable" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#//Variable"/>
-  <eClassifiers xsi:type="ecore:EClass" name="VariableAssignment" eSuperTypes="#//Assignment">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="targetVariable" lowerBound="1"
-        eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//Variable">
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="T-qvtcore-RealizedVariable" name="RealizedVariable"
+      eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Variable"/>
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="T-qvtcore-VariableAssignment" name="VariableAssignment"
+      eSuperTypes="#T-qvtcore-Assignment">
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtcore-VariableAssignment-targetVariable"
+        name="targetVariable" lowerBound="1" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Variable">
       <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
         <details key="body" value="assignment"/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EEnum" name="EnforcementMode">
-    <eLiterals name="Creation"/>
-    <eLiterals name="Deletion" value="1"/>
+  <eClassifiers xsi:type="ecore:EEnum" xmi:id="T-qvtcore-EnforcementMode" name="EnforcementMode">
+    <eLiterals xmi:id="L-qvtcore-EnforcementMode-Creation" name="Creation"/>
+    <eLiterals xmi:id="L-qvtcore-EnforcementMode-Deletion" name="Deletion" value="1"/>
   </eClassifiers>
 </ecore:EPackage>

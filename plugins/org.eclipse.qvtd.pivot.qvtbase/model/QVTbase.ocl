@@ -1,0 +1,9 @@
+import 'platform:/resource/org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore'
+--import 'http://www.eclipse.org/ocl/2015/Pivot'
+
+package qvtbase
+
+context TypedModel
+inv IsTrue: true
+
+endpackage

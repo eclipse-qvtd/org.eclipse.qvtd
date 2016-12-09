@@ -15,60 +15,78 @@
   </genAnnotations>
   <foreignModel>QVTcore.ecore</foreignModel>
   <genPackages prefix="QVTcore" basePackage="org.eclipse.qvtd.pivot" disposableProviderFactory="true"
-      contentTypeIdentifier="org.eclipse.qvtd.qvtcore" fileExtensions="qvtcas" ecorePackage="QVTcore.ecore#/">
-    <genEnums typeSafeEnumCompatible="false" ecoreEnum="QVTcore.ecore#//EnforcementMode">
-      <genEnumLiterals ecoreEnumLiteral="QVTcore.ecore#//EnforcementMode/Creation"/>
-      <genEnumLiterals ecoreEnumLiteral="QVTcore.ecore#//EnforcementMode/Deletion"/>
+      contentTypeIdentifier="org.eclipse.qvtd.qvtcore" fileExtensions="qvtcas" ecorePackage="QVTcore.ecore#P-qvtcore">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="QVTcore.ecore#T-qvtcore-EnforcementMode">
+      <genEnumLiterals ecoreEnumLiteral="QVTcore.ecore#L-qvtcore-EnforcementMode-Creation"/>
+      <genEnumLiterals ecoreEnumLiteral="QVTcore.ecore#L-qvtcore-EnforcementMode-Deletion"/>
     </genEnums>
-    <genClasses image="false" ecoreClass="QVTcore.ecore#//Area">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcore.ecore#//Area/guardPattern"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcore.ecore#//Area/bottomPattern"/>
+    <genClasses image="false" ecoreClass="QVTcore.ecore#T-qvtcore-Area">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcore.ecore#F-qvtcore-Area-guardPattern"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcore.ecore#F-qvtcore-Area-bottomPattern"/>
     </genClasses>
-    <genClasses image="false" ecoreClass="QVTcore.ecore#//Assignment">
-      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference QVTcore.ecore#//Assignment/bottomPattern"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcore.ecore#//Assignment/value"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTcore.ecore#//Assignment/isDefault"/>
+    <genClasses image="false" ecoreClass="QVTcore.ecore#T-qvtcore-Assignment">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference QVTcore.ecore#F-qvtcore-Assignment-bottomPattern"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcore.ecore#F-qvtcore-Assignment-value"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTcore.ecore#F-qvtcore-Assignment-isDefault"/>
     </genClasses>
-    <genClasses ecoreClass="QVTcore.ecore#//BottomPattern">
-      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference QVTcore.ecore#//BottomPattern/area"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcore.ecore#//BottomPattern/assignment"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcore.ecore#//BottomPattern/enforcementOperation"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcore.ecore#//BottomPattern/realizedVariable"/>
+    <genClasses ecoreClass="QVTcore.ecore#T-qvtcore-BottomPattern">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference QVTcore.ecore#F-qvtcore-BottomPattern-area"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcore.ecore#F-qvtcore-BottomPattern-assignment"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcore.ecore#F-qvtcore-BottomPattern-enforcementOperation"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcore.ecore#F-qvtcore-BottomPattern-realizedVariable"/>
     </genClasses>
-    <genClasses ecoreClass="QVTcore.ecore#//BottomVariable"/>
-    <genClasses ecoreClass="QVTcore.ecore#//CoreDomain"/>
-    <genClasses ecoreClass="QVTcore.ecore#//CoreModel"/>
-    <genClasses ecoreClass="QVTcore.ecore#//CorePattern">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcore.ecore#//CorePattern/variable"/>
+    <genClasses ecoreClass="QVTcore.ecore#T-qvtcore-BottomVariable"/>
+    <genClasses ecoreClass="QVTcore.ecore#T-qvtcore-CoreDomain"/>
+    <genClasses ecoreClass="QVTcore.ecore#T-qvtcore-CoreModel"/>
+    <genClasses ecoreClass="QVTcore.ecore#T-qvtcore-CorePattern">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcore.ecore#F-qvtcore-CorePattern-variable"/>
       <genOperations ecoreOperation="QVTcore.ecore#//CorePattern/getArea"/>
     </genClasses>
-    <genClasses ecoreClass="QVTcore.ecore#//EnforcementOperation">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTcore.ecore#//EnforcementOperation/enforcementMode"/>
-      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference QVTcore.ecore#//EnforcementOperation/bottomPattern"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcore.ecore#//EnforcementOperation/operationCallExp"/>
+    <genClasses ecoreClass="QVTcore.ecore#T-qvtcore-EnforcementOperation">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTcore.ecore#F-qvtcore-EnforcementOperation-enforcementMode"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference QVTcore.ecore#F-qvtcore-EnforcementOperation-bottomPattern"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcore.ecore#F-qvtcore-EnforcementOperation-operationCallExp"/>
     </genClasses>
-    <genClasses ecoreClass="QVTcore.ecore#//GuardPattern">
-      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference QVTcore.ecore#//GuardPattern/area"/>
+    <genClasses ecoreClass="QVTcore.ecore#T-qvtcore-GuardPattern">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference QVTcore.ecore#F-qvtcore-GuardPattern-area"/>
     </genClasses>
-    <genClasses ecoreClass="QVTcore.ecore#//GuardVariable"/>
-    <genClasses ecoreClass="QVTcore.ecore#//Mapping">
-      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference QVTcore.ecore#//Mapping/context"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTcore.ecore#//Mapping/local"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTcore.ecore#//Mapping/refinement"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTcore.ecore#//Mapping/specification"/>
+    <genClasses ecoreClass="QVTcore.ecore#T-qvtcore-GuardVariable"/>
+    <genClasses ecoreClass="QVTcore.ecore#T-qvtcore-Mapping">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference QVTcore.ecore#F-qvtcore-Mapping-context"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcore.ecore#F-qvtcore-Mapping-local"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTcore.ecore#F-qvtcore-Mapping-refinement"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTcore.ecore#F-qvtcore-Mapping-specification"/>
     </genClasses>
-    <genClasses image="false" ecoreClass="QVTcore.ecore#//NavigationAssignment">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcore.ecore#//NavigationAssignment/slotExpression"/>
+    <genClasses image="false" ecoreClass="QVTcore.ecore#T-qvtcore-NavigationAssignment">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcore.ecore#F-qvtcore-NavigationAssignment-slotExpression"/>
     </genClasses>
-    <genClasses ecoreClass="QVTcore.ecore#//OppositePropertyAssignment">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTcore.ecore#//OppositePropertyAssignment/targetProperty"/>
+    <genClasses ecoreClass="QVTcore.ecore#T-qvtcore-OppositePropertyAssignment">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTcore.ecore#F-qvtcore-OppositePropertyAssignment-targetProperty"/>
+      <genOperations ecoreOperation="QVTcore.ecore#//OppositePropertyAssignment/getReferredTargetProperty"/>
+      <genOperations ecoreOperation="QVTcore.ecore#//OppositePropertyAssignment/validateOppositePropertyIsImplicit">
+        <genParameters ecoreParameter="QVTcore.ecore#//OppositePropertyAssignment/validateOppositePropertyIsImplicit/diagnostics"/>
+        <genParameters ecoreParameter="QVTcore.ecore#//OppositePropertyAssignment/validateOppositePropertyIsImplicit/context"/>
+      </genOperations>
+      <genOperations ecoreOperation="QVTcore.ecore#//OppositePropertyAssignment/validateTargetPropetyIsSlotProperty">
+        <genParameters ecoreParameter="QVTcore.ecore#//OppositePropertyAssignment/validateTargetPropetyIsSlotProperty/diagnostics"/>
+        <genParameters ecoreParameter="QVTcore.ecore#//OppositePropertyAssignment/validateTargetPropetyIsSlotProperty/context"/>
+      </genOperations>
     </genClasses>
-    <genClasses ecoreClass="QVTcore.ecore#//PropertyAssignment">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTcore.ecore#//PropertyAssignment/targetProperty"/>
+    <genClasses ecoreClass="QVTcore.ecore#T-qvtcore-PropertyAssignment">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTcore.ecore#F-qvtcore-PropertyAssignment-targetProperty"/>
+      <genOperations ecoreOperation="QVTcore.ecore#//PropertyAssignment/getReferredTargetProperty"/>
+      <genOperations ecoreOperation="QVTcore.ecore#//PropertyAssignment/validatePropertyIsNotImplicit">
+        <genParameters ecoreParameter="QVTcore.ecore#//PropertyAssignment/validatePropertyIsNotImplicit/diagnostics"/>
+        <genParameters ecoreParameter="QVTcore.ecore#//PropertyAssignment/validatePropertyIsNotImplicit/context"/>
+      </genOperations>
+      <genOperations ecoreOperation="QVTcore.ecore#//PropertyAssignment/validateTargetPropetyIsSlotProperty">
+        <genParameters ecoreParameter="QVTcore.ecore#//PropertyAssignment/validateTargetPropetyIsSlotProperty/diagnostics"/>
+        <genParameters ecoreParameter="QVTcore.ecore#//PropertyAssignment/validateTargetPropetyIsSlotProperty/context"/>
+      </genOperations>
     </genClasses>
-    <genClasses ecoreClass="QVTcore.ecore#//RealizedVariable"/>
-    <genClasses ecoreClass="QVTcore.ecore#//VariableAssignment">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTcore.ecore#//VariableAssignment/targetVariable"/>
+    <genClasses ecoreClass="QVTcore.ecore#T-qvtcore-RealizedVariable"/>
+    <genClasses ecoreClass="QVTcore.ecore#T-qvtcore-VariableAssignment">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTcore.ecore#F-qvtcore-VariableAssignment-targetVariable"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

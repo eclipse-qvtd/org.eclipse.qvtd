@@ -1,0 +1,19 @@
+import 'QVTcore.ecore'
+
+package qvtcore
+
+--context NavigationAssignment
+--def: getReferredTargetProperty() : pivot::Property[1] = invalid
+--inv TargetPropetyIsSlotProperty: slotExpression.type.conformsTo(getReferredTargetProperty().owningClass)
+
+context OppositePropertyAssignment
+def: getReferredTargetProperty() : pivot::Property[1] = targetProperty.opposite
+inv OppositePropertyIsImplicit: targetProperty.isImplicit
+inv TargetPropetyIsSlotProperty: slotExpression.type.conformsTo(getReferredTargetProperty().owningClass)
+
+context PropertyAssignment
+def: getReferredTargetProperty() : pivot::Property[1] = targetProperty
+inv PropertyIsNotImplicit: not targetProperty.isImplicit
+inv TargetPropetyIsSlotProperty: slotExpression.type.conformsTo(getReferredTargetProperty().owningClass)
+
+endpackage
