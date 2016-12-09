@@ -172,7 +172,9 @@ public class QVTbaseValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_UniqueID(function, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(function, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(function, diagnostics, context);
+		if (result || diagnostics != null) result &= pivotValidator.validateFeature_validateNameIsNotNull(function, diagnostics, context);
 		if (result || diagnostics != null) result &= pivotValidator.validateFeature_validateTypeIsNotInvalid(function, diagnostics, context);
+		if (result || diagnostics != null) result &= pivotValidator.validateFeature_validateTypeIsNotNull(function, diagnostics, context);
 		if (result || diagnostics != null) result &= pivotValidator.validateOperation_validateCompatibleReturn(function, diagnostics, context);
 		if (result || diagnostics != null) result &= pivotValidator.validateOperation_validateLoadableImplementation(function, diagnostics, context);
 		if (result || diagnostics != null) result &= pivotValidator.validateOperation_validateUniquePostconditionName(function, diagnostics, context);
@@ -195,7 +197,9 @@ public class QVTbaseValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_UniqueID(functionParameter, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(functionParameter, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(functionParameter, diagnostics, context);
+		if (result || diagnostics != null) result &= pivotValidator.validateVariableDeclaration_validateNameIsNotNull(functionParameter, diagnostics, context);
 		if (result || diagnostics != null) result &= pivotValidator.validateVariableDeclaration_validateTypeIsNotInvalid(functionParameter, diagnostics, context);
+		if (result || diagnostics != null) result &= pivotValidator.validateVariableDeclaration_validateTypeIsNotNull(functionParameter, diagnostics, context);
 		return result;
 	}
 

@@ -185,6 +185,7 @@ public class QVTrelationValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_UniqueID(relationCallExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(relationCallExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(relationCallExp, diagnostics, context);
+		if (result || diagnostics != null) result &= pivotValidator.validateOCLExpression_validateTypeIsNotNull(relationCallExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validateRelationCallExp_validateMatchingArgumentCount(relationCallExp, diagnostics, context);
 		return result;
 	}
@@ -269,7 +270,9 @@ public class QVTrelationValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_UniqueID(sharedVariable, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(sharedVariable, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(sharedVariable, diagnostics, context);
+		if (result || diagnostics != null) result &= pivotValidator.validateVariableDeclaration_validateNameIsNotNull(sharedVariable, diagnostics, context);
 		if (result || diagnostics != null) result &= pivotValidator.validateVariableDeclaration_validateTypeIsNotInvalid(sharedVariable, diagnostics, context);
+		if (result || diagnostics != null) result &= pivotValidator.validateVariableDeclaration_validateTypeIsNotNull(sharedVariable, diagnostics, context);
 		if (result || diagnostics != null) result &= pivotValidator.validateVariable_validateCompatibleInitialiserType(sharedVariable, diagnostics, context);
 		return result;
 	}
@@ -289,7 +292,9 @@ public class QVTrelationValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_UniqueID(templateVariable, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(templateVariable, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(templateVariable, diagnostics, context);
+		if (result || diagnostics != null) result &= pivotValidator.validateVariableDeclaration_validateNameIsNotNull(templateVariable, diagnostics, context);
 		if (result || diagnostics != null) result &= pivotValidator.validateVariableDeclaration_validateTypeIsNotInvalid(templateVariable, diagnostics, context);
+		if (result || diagnostics != null) result &= pivotValidator.validateVariableDeclaration_validateTypeIsNotNull(templateVariable, diagnostics, context);
 		if (result || diagnostics != null) result &= pivotValidator.validateVariable_validateCompatibleInitialiserType(templateVariable, diagnostics, context);
 		return result;
 	}

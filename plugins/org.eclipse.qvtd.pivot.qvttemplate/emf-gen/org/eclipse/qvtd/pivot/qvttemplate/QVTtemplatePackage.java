@@ -219,6 +219,15 @@ public interface QVTtemplatePackage extends EPackage {
 	int TEMPLATE_EXP___COMPATIBLE_BODY__VALUESPECIFICATION = PivotPackage.LITERAL_EXP___COMPATIBLE_BODY__VALUESPECIFICATION;
 
 	/**
+	 * The operation id for the '<em>Validate Type Is Not Null</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPLATE_EXP___VALIDATE_TYPE_IS_NOT_NULL__DIAGNOSTICCHAIN_MAP = PivotPackage.LITERAL_EXP___VALIDATE_TYPE_IS_NOT_NULL__DIAGNOSTICCHAIN_MAP;
+
+	/**
 	 * The operation id for the '<em>Validate Is True</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -409,6 +418,15 @@ public interface QVTtemplatePackage extends EPackage {
 	int COLLECTION_TEMPLATE_EXP___COMPATIBLE_BODY__VALUESPECIFICATION = TEMPLATE_EXP___COMPATIBLE_BODY__VALUESPECIFICATION;
 
 	/**
+	 * The operation id for the '<em>Validate Type Is Not Null</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_TEMPLATE_EXP___VALIDATE_TYPE_IS_NOT_NULL__DIAGNOSTICCHAIN_MAP = TEMPLATE_EXP___VALIDATE_TYPE_IS_NOT_NULL__DIAGNOSTICCHAIN_MAP;
+
+	/**
 	 * The operation id for the '<em>Validate Is True</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -588,6 +606,15 @@ public interface QVTtemplatePackage extends EPackage {
 	 * @ordered
 	 */
 	int OBJECT_TEMPLATE_EXP___COMPATIBLE_BODY__VALUESPECIFICATION = TEMPLATE_EXP___COMPATIBLE_BODY__VALUESPECIFICATION;
+
+	/**
+	 * The operation id for the '<em>Validate Type Is Not Null</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OBJECT_TEMPLATE_EXP___VALIDATE_TYPE_IS_NOT_NULL__DIAGNOSTICCHAIN_MAP = TEMPLATE_EXP___VALIDATE_TYPE_IS_NOT_NULL__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The operation id for the '<em>Validate Is True</em>' operation.

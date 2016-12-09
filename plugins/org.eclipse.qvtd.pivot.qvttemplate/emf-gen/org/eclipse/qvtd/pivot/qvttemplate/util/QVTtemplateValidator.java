@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.EPackage;
 
 import org.eclipse.emf.ecore.util.EObjectValidator;
 
+import org.eclipse.ocl.pivot.util.PivotValidator;
 import org.eclipse.qvtd.pivot.qvttemplate.*;
 
 /**
@@ -76,6 +77,14 @@ public class QVTtemplateValidator extends EObjectValidator {
 	protected static final int DIAGNOSTIC_CODE_COUNT = GENERATED_DIAGNOSTIC_CODE_COUNT;
 
 	/**
+	 * The cached base package validator.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected PivotValidator pivotValidator;
+
+	/**
 	 * Creates an instance of the switch.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -83,6 +92,7 @@ public class QVTtemplateValidator extends EObjectValidator {
 	 */
 	public QVTtemplateValidator() {
 		super();
+		pivotValidator = PivotValidator.INSTANCE;
 	}
 
 	/**
@@ -133,6 +143,7 @@ public class QVTtemplateValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_UniqueID(collectionTemplateExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(collectionTemplateExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(collectionTemplateExp, diagnostics, context);
+		if (result || diagnostics != null) result &= pivotValidator.validateOCLExpression_validateTypeIsNotNull(collectionTemplateExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validateTemplateExp_validateIsTrue(collectionTemplateExp, diagnostics, context);
 		return result;
 	}
@@ -152,6 +163,7 @@ public class QVTtemplateValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_UniqueID(objectTemplateExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(objectTemplateExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(objectTemplateExp, diagnostics, context);
+		if (result || diagnostics != null) result &= pivotValidator.validateOCLExpression_validateTypeIsNotNull(objectTemplateExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validateTemplateExp_validateIsTrue(objectTemplateExp, diagnostics, context);
 		return result;
 	}
@@ -180,6 +192,7 @@ public class QVTtemplateValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_UniqueID(templateExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(templateExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(templateExp, diagnostics, context);
+		if (result || diagnostics != null) result &= pivotValidator.validateOCLExpression_validateTypeIsNotNull(templateExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validateTemplateExp_validateIsTrue(templateExp, diagnostics, context);
 		return result;
 	}

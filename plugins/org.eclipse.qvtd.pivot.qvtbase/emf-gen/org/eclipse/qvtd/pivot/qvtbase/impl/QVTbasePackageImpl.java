@@ -130,7 +130,7 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 *
+	 * 
 	 * <p>This method is used to initialize {@link QVTbasePackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -160,18 +160,17 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 
 		// Register package validator
 		EValidator.Registry.INSTANCE.put
-		(theQVTbasePackage,
-			new EValidator.Descriptor() {
-			@Override
-			public EValidator getEValidator() {
-				return QVTbaseValidator.INSTANCE;
-			}
-		});
+			(theQVTbasePackage, 
+			 new EValidator.Descriptor() {
+				 public EValidator getEValidator() {
+					 return QVTbaseValidator.INSTANCE;
+				 }
+			 });
 
 		// Mark meta-data to indicate it can't be changed
 		theQVTbasePackage.freeze();
 
-
+  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(QVTbasePackage.eNS_URI, theQVTbasePackage);
 		return theQVTbasePackage;
@@ -719,12 +718,12 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 	 * @generated
 	 */
 	protected void createEcoreAnnotations() {
-		String source = "http://www.eclipse.org/emf/2002/Ecore";
+		String source = "http://www.eclipse.org/emf/2002/Ecore";	
 		addAnnotation
-		(this,
-			source,
-			new String[] {
-		});
+		  (this, 
+		   source, 
+		   new String[] {
+		   });
 	}
 
 	/**
@@ -734,25 +733,25 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 	 * @generated
 	 */
 	protected void createEmofAnnotations() {
-		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";
+		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";	
 		addAnnotation
-		(getPredicate_ConditionExpression(),
-			source,
-			new String[] {
-				"body", "predicate"
-		});
+		  (getPredicate_ConditionExpression(), 
+		   source, 
+		   new String[] {
+			 "body", "predicate"
+		   });	
 		addAnnotation
-		(getTransformation_Extends(),
-			source,
-			new String[] {
-				"body", "extendedBy"
-		});
+		  (getTransformation_Extends(), 
+		   source, 
+		   new String[] {
+			 "body", "extendedBy"
+		   });	
 		addAnnotation
-		(getTypedModel_DependsOn(),
-			source,
-			new String[] {
-				"body", "dependent"
-		});
+		  (getTypedModel_DependsOn(), 
+		   source, 
+		   new String[] {
+			 "body", "dependent"
+		   });
 	}
 
 	/**
@@ -762,13 +761,13 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 	 * @generated
 	 */
 	protected void createUMLAnnotations() {
-		String source = "http://www.eclipse.org/uml2/2.0.0/UML";
+		String source = "http://www.eclipse.org/uml2/2.0.0/UML";	
 		addAnnotation
-		(getTypedModel__ValidateIsTrue__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "IsTrue"
-		});
+		  (getTypedModel__ValidateIsTrue__DiagnosticChain_Map(), 
+		   source, 
+		   new String[] {
+			 "originalName", "IsTrue"
+		   });
 	}
 
 } //QVTbasePackageImpl

@@ -148,7 +148,7 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 *
+	 * 
 	 * <p>This method is used to initialize {@link QVTrelationPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -179,18 +179,17 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 
 		// Register package validator
 		EValidator.Registry.INSTANCE.put
-		(theQVTrelationPackage,
-			new EValidator.Descriptor() {
-			@Override
-			public EValidator getEValidator() {
-				return QVTrelationValidator.INSTANCE;
-			}
-		});
+			(theQVTrelationPackage, 
+			 new EValidator.Descriptor() {
+				 public EValidator getEValidator() {
+					 return QVTrelationValidator.INSTANCE;
+				 }
+			 });
 
 		// Mark meta-data to indicate it can't be changed
 		theQVTrelationPackage.freeze();
 
-
+  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(QVTrelationPackage.eNS_URI, theQVTrelationPackage);
 		return theQVTrelationPackage;
@@ -717,12 +716,12 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 	 * @generated
 	 */
 	protected void createEcoreAnnotations() {
-		String source = "http://www.eclipse.org/emf/2002/Ecore";
+		String source = "http://www.eclipse.org/emf/2002/Ecore";	
 		addAnnotation
-		(this,
-			source,
-			new String[] {
-		});
+		  (this, 
+		   source, 
+		   new String[] {
+		   });
 	}
 
 	/**
@@ -732,67 +731,67 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 	 * @generated
 	 */
 	protected void createEmofAnnotations() {
-		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";
+		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";	
 		addAnnotation
-		(getKey_Identifies(),
-			source,
-			new String[] {
-				"body", "key"
-		});
+		  (getKey_Identifies(), 
+		   source, 
+		   new String[] {
+			 "body", "key"
+		   });	
 		addAnnotation
-		(getKey_OppositePart(),
-			source,
-			new String[] {
-				"body", "oppKey"
-		});
+		  (getKey_OppositePart(), 
+		   source, 
+		   new String[] {
+			 "body", "oppKey"
+		   });	
 		addAnnotation
-		(getKey_Part(),
-			source,
-			new String[] {
-				"body", "key"
-		});
+		  (getKey_Part(), 
+		   source, 
+		   new String[] {
+			 "body", "key"
+		   });	
 		addAnnotation
-		(getRelation_When(),
-			source,
-			new String[] {
-				"body", "whenOwner"
-		});
+		  (getRelation_When(), 
+		   source, 
+		   new String[] {
+			 "body", "whenOwner"
+		   });	
 		addAnnotation
-		(getRelation_Where(),
-			source,
-			new String[] {
-				"body", "whereOwner"
-		});
+		  (getRelation_Where(), 
+		   source, 
+		   new String[] {
+			 "body", "whereOwner"
+		   });	
 		addAnnotation
-		(getRelationCallExp_Argument(),
-			source,
-			new String[] {
-				"body", "relationCallExp"
-		});
+		  (getRelationCallExp_Argument(), 
+		   source, 
+		   new String[] {
+			 "body", "relationCallExp"
+		   });	
 		addAnnotation
-		(getRelationCallExp_ReferredRelation(),
-			source,
-			new String[] {
-				"body", "relationCallExp"
-		});
+		  (getRelationCallExp_ReferredRelation(), 
+		   source, 
+		   new String[] {
+			 "body", "relationCallExp"
+		   });	
 		addAnnotation
-		(getRelationDomain_DefaultAssignment(),
-			source,
-			new String[] {
-				"body", "owner"
-		});
+		  (getRelationDomain_DefaultAssignment(), 
+		   source, 
+		   new String[] {
+			 "body", "owner"
+		   });	
 		addAnnotation
-		(getRelationDomainAssignment_ValueExp(),
-			source,
-			new String[] {
-				"body", "domainAssignment"
-		});
+		  (getRelationDomainAssignment_ValueExp(), 
+		   source, 
+		   new String[] {
+			 "body", "domainAssignment"
+		   });	
 		addAnnotation
-		(getRelationDomainAssignment_Variable(),
-			source,
-			new String[] {
-				"body", "domainAssignment"
-		});
+		  (getRelationDomainAssignment_Variable(), 
+		   source, 
+		   new String[] {
+			 "body", "domainAssignment"
+		   });
 	}
 
 	/**
@@ -802,13 +801,13 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 	 * @generated
 	 */
 	protected void createUMLAnnotations() {
-		String source = "http://www.eclipse.org/uml2/2.0.0/UML";
+		String source = "http://www.eclipse.org/uml2/2.0.0/UML";	
 		addAnnotation
-		(getRelationCallExp__ValidateMatchingArgumentCount__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "MatchingArgumentCount"
-		});
+		  (getRelationCallExp__ValidateMatchingArgumentCount__DiagnosticChain_Map(), 
+		   source, 
+		   new String[] {
+			 "originalName", "MatchingArgumentCount"
+		   });
 	}
 
 } //QVTrelationPackageImpl

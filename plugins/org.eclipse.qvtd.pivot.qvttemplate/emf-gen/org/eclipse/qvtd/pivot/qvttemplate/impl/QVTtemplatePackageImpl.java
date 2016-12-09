@@ -90,7 +90,7 @@ public class QVTtemplatePackageImpl extends EPackageImpl implements QVTtemplateP
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 *
+	 * 
 	 * <p>This method is used to initialize {@link QVTtemplatePackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -120,18 +120,17 @@ public class QVTtemplatePackageImpl extends EPackageImpl implements QVTtemplateP
 
 		// Register package validator
 		EValidator.Registry.INSTANCE.put
-		(theQVTtemplatePackage,
-			new EValidator.Descriptor() {
-			@Override
-			public EValidator getEValidator() {
-				return QVTtemplateValidator.INSTANCE;
-			}
-		});
+			(theQVTtemplatePackage, 
+			 new EValidator.Descriptor() {
+				 public EValidator getEValidator() {
+					 return QVTtemplateValidator.INSTANCE;
+				 }
+			 });
 
 		// Mark meta-data to indicate it can't be changed
 		theQVTtemplatePackage.freeze();
 
-
+  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(QVTtemplatePackage.eNS_URI, theQVTtemplatePackage);
 		return theQVTtemplatePackage;
@@ -431,12 +430,12 @@ public class QVTtemplatePackageImpl extends EPackageImpl implements QVTtemplateP
 	 * @generated
 	 */
 	protected void createEcoreAnnotations() {
-		String source = "http://www.eclipse.org/emf/2002/Ecore";
+		String source = "http://www.eclipse.org/emf/2002/Ecore";	
 		addAnnotation
-		(this,
-			source,
-			new String[] {
-		});
+		  (this, 
+		   source, 
+		   new String[] {
+		   });
 	}
 
 	/**
@@ -446,43 +445,43 @@ public class QVTtemplatePackageImpl extends EPackageImpl implements QVTtemplateP
 	 * @generated
 	 */
 	protected void createEmofAnnotations() {
-		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";
+		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";	
 		addAnnotation
-		(getCollectionTemplateExp_Member(),
-			source,
-			new String[] {
-				"body", "listContainer"
-		});
+		  (getCollectionTemplateExp_Member(), 
+		   source, 
+		   new String[] {
+			 "body", "listContainer"
+		   });	
 		addAnnotation
-		(getCollectionTemplateExp_Rest(),
-			source,
-			new String[] {
-				"body", "matchingExp"
-		});
+		  (getCollectionTemplateExp_Rest(), 
+		   source, 
+		   new String[] {
+			 "body", "matchingExp"
+		   });	
 		addAnnotation
-		(getPropertyTemplateItem_ReferredProperty(),
-			source,
-			new String[] {
-				"body", "propertyItem"
-		});
+		  (getPropertyTemplateItem_ReferredProperty(), 
+		   source, 
+		   new String[] {
+			 "body", "propertyItem"
+		   });	
 		addAnnotation
-		(getPropertyTemplateItem_Value(),
-			source,
-			new String[] {
-				"body", "propertyItem"
-		});
+		  (getPropertyTemplateItem_Value(), 
+		   source, 
+		   new String[] {
+			 "body", "propertyItem"
+		   });	
 		addAnnotation
-		(getTemplateExp_BindsTo(),
-			source,
-			new String[] {
-				"body", "templateExp"
-		});
+		  (getTemplateExp_BindsTo(), 
+		   source, 
+		   new String[] {
+			 "body", "templateExp"
+		   });	
 		addAnnotation
-		(getTemplateExp_Where(),
-			source,
-			new String[] {
-				"body", "owner"
-		});
+		  (getTemplateExp_Where(), 
+		   source, 
+		   new String[] {
+			 "body", "owner"
+		   });
 	}
 
 	/**
@@ -492,13 +491,13 @@ public class QVTtemplatePackageImpl extends EPackageImpl implements QVTtemplateP
 	 * @generated
 	 */
 	protected void createUMLAnnotations() {
-		String source = "http://www.eclipse.org/uml2/2.0.0/UML";
+		String source = "http://www.eclipse.org/uml2/2.0.0/UML";	
 		addAnnotation
-		(getTemplateExp__ValidateIsTrue__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "IsTrue"
-		});
+		  (getTemplateExp__ValidateIsTrue__DiagnosticChain_Map(), 
+		   source, 
+		   new String[] {
+			 "originalName", "IsTrue"
+		   });
 	}
 
 } //QVTtemplatePackageImpl

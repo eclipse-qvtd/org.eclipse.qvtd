@@ -24,7 +24,9 @@
 package org.eclipse.qvtd.pivot.qvtimperative;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.ParameterTypes;
 import org.eclipse.ocl.pivot.PivotTables;
+import org.eclipse.ocl.pivot.TemplateParameters;
 import org.eclipse.ocl.pivot.internal.library.ecore.EcoreExecutorPackage;
 import org.eclipse.ocl.pivot.internal.library.ecore.EcoreExecutorProperty;
 import org.eclipse.ocl.pivot.internal.library.ecore.EcoreExecutorType;
@@ -33,9 +35,11 @@ import org.eclipse.ocl.pivot.internal.library.executor.ExecutorFragment;
 import org.eclipse.ocl.pivot.internal.library.executor.ExecutorOperation;
 import org.eclipse.ocl.pivot.internal.library.executor.ExecutorProperty;
 import org.eclipse.ocl.pivot.internal.library.executor.ExecutorPropertyWithImplementation;
+import org.eclipse.ocl.pivot.internal.library.executor.ExecutorSpecializedType;
 import org.eclipse.ocl.pivot.internal.library.executor.ExecutorStandardLibrary;
 import org.eclipse.ocl.pivot.internal.library.executor.ExecutorType;
 import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibTables;
+import org.eclipse.ocl.pivot.utilities.TypeUtil;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbaseTables;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeTables;
 
@@ -67,8 +71,10 @@ public class QVTimperativeTables
 	 */
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull RootPackageId PACKid_$metamodel$ = org.eclipse.ocl.pivot.ids.IdManager.getRootPackageId("$metamodel$");
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_QVTimperative = org.eclipse.ocl.pivot.ids.IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/2016/QVTimperative", null, org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage.eINSTANCE);
+	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId BAG_PRIMid_String = org.eclipse.ocl.pivot.ids.TypeId.BAG.getSpecializedId(org.eclipse.ocl.pivot.ids.TypeId.STRING);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_AddStatement = org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_QVTimperative.getClassId("AddStatement", 0);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_AppendParameterBinding = org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_QVTimperative.getClassId("AppendParameterBinding", 0);
+	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Class = org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeTables.PACKid_$metamodel$.getClassId("Class", 0);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_ConnectionVariable = org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_QVTimperative.getClassId("ConnectionVariable", 0);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_GuardParameter = org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_QVTimperative.getClassId("GuardParameter", 0);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_GuardParameterBinding = org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_QVTimperative.getClassId("GuardParameterBinding", 0);
@@ -84,11 +90,27 @@ public class QVTimperativeTables
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_NewStatement = org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_QVTimperative.getClassId("NewStatement", 0);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_OCLExpression = org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeTables.PACKid_$metamodel$.getClassId("OCLExpression", 0);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Property = org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeTables.PACKid_$metamodel$.getClassId("Property", 0);
+	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_SetStatement = org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_QVTimperative.getClassId("SetStatement", 0);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_SimpleParameter = org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_QVTimperative.getClassId("SimpleParameter", 0);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Statement = org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_QVTimperative.getClassId("Statement", 0);
+	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Type = org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeTables.PACKid_$metamodel$.getClassId("Type", 0);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_VariableDeclaration = org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeTables.PACKid_$metamodel$.getClassId("VariableDeclaration", 0);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue INT_0 = org.eclipse.ocl.pivot.utilities.ValueUtil.integerValueOf("0");
-	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_Mapping_c_c_isTrue = "Mapping::isTrue";
+	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_PRIMid_String = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.ocl.pivot.ids.TypeId.STRING);
+	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId SEQ_PRIMid_String = org.eclipse.ocl.pivot.ids.TypeId.SEQUENCE.getSpecializedId(org.eclipse.ocl.pivot.ids.TypeId.STRING);
+	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId SET_PRIMid_String = org.eclipse.ocl.pivot.ids.TypeId.SET.getSpecializedId(org.eclipse.ocl.pivot.ids.TypeId.STRING);
+	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_ = "";
+	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_AddStatement_c_c_CompatibleTypeForValue = "AddStatement::CompatibleTypeForValue";
+	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_MappingCall_c_c_MatchingCallBindings = "MappingCall::MatchingCallBindings";
+	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_MappingCall_c_c_UniqueCallBindings = "MappingCall::UniqueCallBindings";
+	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_Mismatched_32_bindings_32 = "Mismatched bindings ";
+	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_NewStatement_c_c_CompatibleTypeForValue = "NewStatement::CompatibleTypeForValue";
+	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_SetStatement_c_c_CompatibleClassForProperty = "SetStatement::CompatibleClassForProperty";
+	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_SetStatement_c_c_CompatibleTypeForValue = "SetStatement::CompatibleTypeForValue";
+	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR__123 = "{";
+	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR__125 = "}";
+	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR__32_l_q_32 = " <= ";
+	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR__59 = ";";
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId BAG_CLSSid_AddStatement = org.eclipse.ocl.pivot.ids.TypeId.BAG.getSpecializedId(org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeTables.CLSSid_AddStatement);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId BAG_CLSSid_AppendParameterBinding = org.eclipse.ocl.pivot.ids.TypeId.BAG.getSpecializedId(org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeTables.CLSSid_AppendParameterBinding);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId BAG_CLSSid_GuardParameter = org.eclipse.ocl.pivot.ids.TypeId.BAG.getSpecializedId(org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeTables.CLSSid_GuardParameter);
@@ -102,6 +124,7 @@ public class QVTimperativeTables
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_MappingParameterBinding = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeTables.CLSSid_MappingParameterBinding);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_MappingStatement = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeTables.CLSSid_MappingStatement);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_Statement = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeTables.CLSSid_Statement);
+	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId SEQ_CLSSid_MappingParameter = org.eclipse.ocl.pivot.ids.TypeId.SEQUENCE.getSpecializedId(org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeTables.CLSSid_MappingParameter);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId SET_CLSSid_MappingParameter = org.eclipse.ocl.pivot.ids.TypeId.SET.getSpecializedId(org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeTables.CLSSid_MappingParameter);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId SET_CLSSid_Property = org.eclipse.ocl.pivot.ids.TypeId.SET.getSpecializedId(org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeTables.CLSSid_Property);
 
@@ -508,6 +531,7 @@ public class QVTimperativeTables
 			Fragments.init();
 		}
 
+		public static final @NonNull ParameterTypes _OrderedSet__String__ = TypeUtil.createParameterTypes(new ExecutorSpecializedType("OrderedSet", OCLstdlibTables.Types._String));
 
 		static {
 			Init.initEnd();
@@ -531,6 +555,9 @@ public class QVTimperativeTables
 			Init.initStart();
 			Parameters.init();
 		}
+
+		public static final @NonNull ExecutorOperation _Statement__joinNames = new ExecutorOperation("joinNames", Parameters._OrderedSet__String__, Types._Statement,
+			0, TemplateParameters.EMPTY_LIST, null);
 
 		static {
 			Init.initEnd();
@@ -599,6 +626,8 @@ public class QVTimperativeTables
 		public static final @NonNull ExecutorProperty _MappingCall__isInstall = new EcoreExecutorProperty(QVTimperativePackage.Literals.MAPPING_CALL__IS_INSTALL, Types._MappingCall, 1);
 		public static final @NonNull ExecutorProperty _MappingCall__isInvoke = new EcoreExecutorProperty(QVTimperativePackage.Literals.MAPPING_CALL__IS_INVOKE, Types._MappingCall, 2);
 		public static final @NonNull ExecutorProperty _MappingCall__referredMapping = new EcoreExecutorProperty(QVTimperativePackage.Literals.MAPPING_CALL__REFERRED_MAPPING, Types._MappingCall, 3);
+		public static final @NonNull ExecutorProperty _MappingCall__referredNames = new EcoreExecutorProperty(QVTimperativePackage.Literals.MAPPING_CALL__REFERRED_NAMES, Types._MappingCall, 4);
+		public static final @NonNull ExecutorProperty _MappingCall__referringNames = new EcoreExecutorProperty(QVTimperativePackage.Literals.MAPPING_CALL__REFERRING_NAMES, Types._MappingCall, 5);
 
 		public static final @NonNull ExecutorProperty _MappingLoop__ownedExpression = new EcoreExecutorProperty(QVTimperativePackage.Literals.MAPPING_LOOP__OWNED_EXPRESSION, Types._MappingLoop, 0);
 		public static final @NonNull ExecutorProperty _MappingLoop__ownedIterators = new EcoreExecutorProperty(QVTimperativePackage.Literals.MAPPING_LOOP__OWNED_ITERATORS, Types._MappingLoop, 1);
@@ -1114,7 +1143,9 @@ public class QVTimperativeTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _AddStatement__Statement = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _AddStatement__Statement = {
+			QVTimperativeTables.Operations._Statement__joinNames /* joinNames(OrderedSet(String)) */
+		};
 		private static final @NonNull ExecutorOperation @NonNull [] _AddStatement__Visitable = {};
 
 		private static final @NonNull ExecutorOperation @NonNull [] _AppendParameter__AppendParameter = {};
@@ -1234,7 +1265,9 @@ public class QVTimperativeTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _BufferStatement__Statement = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _BufferStatement__Statement = {
+			QVTimperativeTables.Operations._Statement__joinNames /* joinNames(OrderedSet(String)) */
+		};
 		private static final @NonNull ExecutorOperation @NonNull [] _BufferStatement__TypedElement = {
 			PivotTables.Operations._TypedElement__CompatibleBody /* CompatibleBody(ValueSpecification[1]) */,
 			PivotTables.Operations._TypedElement__CompatibleBody /* CompatibleBody(ValueSpecification[1]) */
@@ -1279,7 +1312,9 @@ public class QVTimperativeTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _CheckStatement__Statement = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _CheckStatement__Statement = {
+			QVTimperativeTables.Operations._Statement__joinNames /* joinNames(OrderedSet(String)) */
+		};
 		private static final @NonNull ExecutorOperation @NonNull [] _CheckStatement__Visitable = {};
 
 		private static final @NonNull ExecutorOperation @NonNull [] _ConnectionVariable__ConnectionVariable = {};
@@ -1360,7 +1395,9 @@ public class QVTimperativeTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _DeclareStatement__Statement = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _DeclareStatement__Statement = {
+			QVTimperativeTables.Operations._Statement__joinNames /* joinNames(OrderedSet(String)) */
+		};
 		private static final @NonNull ExecutorOperation @NonNull [] _DeclareStatement__TypedElement = {
 			PivotTables.Operations._TypedElement__CompatibleBody /* CompatibleBody(ValueSpecification[1]) */,
 			PivotTables.Operations._TypedElement__CompatibleBody /* CompatibleBody(ValueSpecification[1]) */
@@ -1742,7 +1779,9 @@ public class QVTimperativeTables
 			PivotTables.Operations._ReferringElement__getReferredElement /* getReferredElement() */,
 			PivotTables.Operations._ReferringElement__getReferredElement /* getReferredElement() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _MappingCall__Statement = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _MappingCall__Statement = {
+			QVTimperativeTables.Operations._Statement__joinNames /* joinNames(OrderedSet(String)) */
+		};
 		private static final @NonNull ExecutorOperation @NonNull [] _MappingCall__Visitable = {};
 
 		private static final @NonNull ExecutorOperation @NonNull [] _MappingLoop__MappingLoop = {};
@@ -1782,7 +1821,9 @@ public class QVTimperativeTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _MappingLoop__Statement = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _MappingLoop__Statement = {
+			QVTimperativeTables.Operations._Statement__joinNames /* joinNames(OrderedSet(String)) */
+		};
 		private static final @NonNull ExecutorOperation @NonNull [] _MappingLoop__Visitable = {};
 
 		private static final @NonNull ExecutorOperation @NonNull [] _MappingParameter__MappingParameter = {};
@@ -1897,7 +1938,9 @@ public class QVTimperativeTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _MappingStatement__Statement = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _MappingStatement__Statement = {
+			QVTimperativeTables.Operations._Statement__joinNames /* joinNames(OrderedSet(String)) */
+		};
 		private static final @NonNull ExecutorOperation @NonNull [] _MappingStatement__Visitable = {};
 
 		private static final @NonNull ExecutorOperation @NonNull [] _NewStatement__NewStatement = {};
@@ -1936,7 +1979,9 @@ public class QVTimperativeTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _NewStatement__Statement = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _NewStatement__Statement = {
+			QVTimperativeTables.Operations._Statement__joinNames /* joinNames(OrderedSet(String)) */
+		};
 		private static final @NonNull ExecutorOperation @NonNull [] _NewStatement__TypedElement = {
 			PivotTables.Operations._TypedElement__CompatibleBody /* CompatibleBody(ValueSpecification[1]) */,
 			PivotTables.Operations._TypedElement__CompatibleBody /* CompatibleBody(ValueSpecification[1]) */
@@ -1980,7 +2025,9 @@ public class QVTimperativeTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _ObservableStatement__Statement = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _ObservableStatement__Statement = {
+			QVTimperativeTables.Operations._Statement__joinNames /* joinNames(OrderedSet(String)) */
+		};
 		private static final @NonNull ExecutorOperation @NonNull [] _ObservableStatement__Visitable = {};
 
 		private static final @NonNull ExecutorOperation @NonNull [] _SetStatement__SetStatement = {};
@@ -2019,7 +2066,9 @@ public class QVTimperativeTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _SetStatement__Statement = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _SetStatement__Statement = {
+			QVTimperativeTables.Operations._Statement__joinNames /* joinNames(OrderedSet(String)) */
+		};
 		private static final @NonNull ExecutorOperation @NonNull [] _SetStatement__Visitable = {};
 
 		private static final @NonNull ExecutorOperation @NonNull [] _SimpleParameter__SimpleParameter = {};
@@ -2101,7 +2150,9 @@ public class QVTimperativeTables
 		};
 		private static final @NonNull ExecutorOperation @NonNull [] _SimpleParameterBinding__Visitable = {};
 
-		private static final @NonNull ExecutorOperation @NonNull [] _Statement__Statement = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _Statement__Statement = {
+			QVTimperativeTables.Operations._Statement__joinNames /* joinNames(OrderedSet(String)) */
+		};
 		private static final @NonNull ExecutorOperation @NonNull [] _Statement__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
@@ -2173,7 +2224,9 @@ public class QVTimperativeTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _VariableStatement__Statement = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _VariableStatement__Statement = {
+			QVTimperativeTables.Operations._Statement__joinNames /* joinNames(OrderedSet(String)) */
+		};
 		private static final @NonNull ExecutorOperation @NonNull [] _VariableStatement__TypedElement = {
 			PivotTables.Operations._TypedElement__CompatibleBody /* CompatibleBody(ValueSpecification[1]) */,
 			PivotTables.Operations._TypedElement__CompatibleBody /* CompatibleBody(ValueSpecification[1]) */
@@ -2553,7 +2606,9 @@ public class QVTimperativeTables
 			QVTimperativeTables.Properties._MappingCall__binding,
 			QVTimperativeTables.Properties._MappingCall__isInstall,
 			QVTimperativeTables.Properties._MappingCall__isInvoke,
-			QVTimperativeTables.Properties._MappingCall__referredMapping
+			QVTimperativeTables.Properties._MappingCall__referredMapping,
+			QVTimperativeTables.Properties._MappingCall__referredNames,
+			QVTimperativeTables.Properties._MappingCall__referringNames
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _MappingLoop = {

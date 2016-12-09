@@ -282,13 +282,22 @@ public interface QVTimperativePackage extends EPackage {
 	int STATEMENT___GET_VALUE__TYPE_STRING = PivotPackage.NAMED_ELEMENT___GET_VALUE__TYPE_STRING;
 
 	/**
+	 * The operation id for the '<em>Join Names</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATEMENT___JOIN_NAMES__ELIST = PivotPackage.NAMED_ELEMENT_OPERATION_COUNT + 0;
+
+	/**
 	 * The number of operations of the '<em>Statement</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STATEMENT_OPERATION_COUNT = PivotPackage.NAMED_ELEMENT_OPERATION_COUNT + 0;
+	int STATEMENT_OPERATION_COUNT = PivotPackage.NAMED_ELEMENT_OPERATION_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -361,6 +370,15 @@ public interface QVTimperativePackage extends EPackage {
 	 * @ordered
 	 */
 	int MAPPING_STATEMENT___GET_VALUE__TYPE_STRING = STATEMENT___GET_VALUE__TYPE_STRING;
+
+	/**
+	 * The operation id for the '<em>Join Names</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_STATEMENT___JOIN_NAMES__ELIST = STATEMENT___JOIN_NAMES__ELIST;
 
 	/**
 	 * The number of operations of the '<em>Mapping Statement</em>' class.
@@ -480,13 +498,31 @@ public interface QVTimperativePackage extends EPackage {
 	int ADD_STATEMENT___GET_VALUE__TYPE_STRING = MAPPING_STATEMENT___GET_VALUE__TYPE_STRING;
 
 	/**
+	 * The operation id for the '<em>Join Names</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ADD_STATEMENT___JOIN_NAMES__ELIST = MAPPING_STATEMENT___JOIN_NAMES__ELIST;
+
+	/**
+	 * The operation id for the '<em>Validate Compatible Type For Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ADD_STATEMENT___VALIDATE_COMPATIBLE_TYPE_FOR_VALUE__DIAGNOSTICCHAIN_MAP = MAPPING_STATEMENT_OPERATION_COUNT + 0;
+
+	/**
 	 * The number of operations of the '<em>Add Statement</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ADD_STATEMENT_OPERATION_COUNT = MAPPING_STATEMENT_OPERATION_COUNT + 0;
+	int ADD_STATEMENT_OPERATION_COUNT = MAPPING_STATEMENT_OPERATION_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.AppendParameterImpl <em>Append Parameter</em>}' class.
@@ -635,6 +671,15 @@ public interface QVTimperativePackage extends EPackage {
 	int CONNECTION_VARIABLE___COMPATIBLE_BODY__VALUESPECIFICATION = PivotPackage.VARIABLE_DECLARATION___COMPATIBLE_BODY__VALUESPECIFICATION;
 
 	/**
+	 * The operation id for the '<em>Validate Name Is Not Null</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONNECTION_VARIABLE___VALIDATE_NAME_IS_NOT_NULL__DIAGNOSTICCHAIN_MAP = PivotPackage.VARIABLE_DECLARATION___VALIDATE_NAME_IS_NOT_NULL__DIAGNOSTICCHAIN_MAP;
+
+	/**
 	 * The operation id for the '<em>Validate Type Is Not Invalid</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -642,6 +687,15 @@ public interface QVTimperativePackage extends EPackage {
 	 * @ordered
 	 */
 	int CONNECTION_VARIABLE___VALIDATE_TYPE_IS_NOT_INVALID__DIAGNOSTICCHAIN_MAP = PivotPackage.VARIABLE_DECLARATION___VALIDATE_TYPE_IS_NOT_INVALID__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The operation id for the '<em>Validate Type Is Not Null</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONNECTION_VARIABLE___VALIDATE_TYPE_IS_NOT_NULL__DIAGNOSTICCHAIN_MAP = PivotPackage.VARIABLE_DECLARATION___VALIDATE_TYPE_IS_NOT_NULL__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The number of operations of the '<em>Connection Variable</em>' class.
@@ -779,6 +833,15 @@ public interface QVTimperativePackage extends EPackage {
 	int APPEND_PARAMETER___COMPATIBLE_BODY__VALUESPECIFICATION = CONNECTION_VARIABLE___COMPATIBLE_BODY__VALUESPECIFICATION;
 
 	/**
+	 * The operation id for the '<em>Validate Name Is Not Null</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APPEND_PARAMETER___VALIDATE_NAME_IS_NOT_NULL__DIAGNOSTICCHAIN_MAP = CONNECTION_VARIABLE___VALIDATE_NAME_IS_NOT_NULL__DIAGNOSTICCHAIN_MAP;
+
+	/**
 	 * The operation id for the '<em>Validate Type Is Not Invalid</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -786,6 +849,15 @@ public interface QVTimperativePackage extends EPackage {
 	 * @ordered
 	 */
 	int APPEND_PARAMETER___VALIDATE_TYPE_IS_NOT_INVALID__DIAGNOSTICCHAIN_MAP = CONNECTION_VARIABLE___VALIDATE_TYPE_IS_NOT_INVALID__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The operation id for the '<em>Validate Type Is Not Null</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APPEND_PARAMETER___VALIDATE_TYPE_IS_NOT_NULL__DIAGNOSTICCHAIN_MAP = CONNECTION_VARIABLE___VALIDATE_TYPE_IS_NOT_NULL__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The number of operations of the '<em>Append Parameter</em>' class.
@@ -1200,6 +1272,15 @@ public interface QVTimperativePackage extends EPackage {
 	int BUFFER_STATEMENT___COMPATIBLE_BODY__VALUESPECIFICATION = CONNECTION_VARIABLE___COMPATIBLE_BODY__VALUESPECIFICATION;
 
 	/**
+	 * The operation id for the '<em>Validate Name Is Not Null</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUFFER_STATEMENT___VALIDATE_NAME_IS_NOT_NULL__DIAGNOSTICCHAIN_MAP = CONNECTION_VARIABLE___VALIDATE_NAME_IS_NOT_NULL__DIAGNOSTICCHAIN_MAP;
+
+	/**
 	 * The operation id for the '<em>Validate Type Is Not Invalid</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1209,13 +1290,31 @@ public interface QVTimperativePackage extends EPackage {
 	int BUFFER_STATEMENT___VALIDATE_TYPE_IS_NOT_INVALID__DIAGNOSTICCHAIN_MAP = CONNECTION_VARIABLE___VALIDATE_TYPE_IS_NOT_INVALID__DIAGNOSTICCHAIN_MAP;
 
 	/**
+	 * The operation id for the '<em>Validate Type Is Not Null</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUFFER_STATEMENT___VALIDATE_TYPE_IS_NOT_NULL__DIAGNOSTICCHAIN_MAP = CONNECTION_VARIABLE___VALIDATE_TYPE_IS_NOT_NULL__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The operation id for the '<em>Join Names</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUFFER_STATEMENT___JOIN_NAMES__ELIST = CONNECTION_VARIABLE_OPERATION_COUNT + 0;
+
+	/**
 	 * The number of operations of the '<em>Buffer Statement</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BUFFER_STATEMENT_OPERATION_COUNT = CONNECTION_VARIABLE_OPERATION_COUNT + 0;
+	int BUFFER_STATEMENT_OPERATION_COUNT = CONNECTION_VARIABLE_OPERATION_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -1297,6 +1396,15 @@ public interface QVTimperativePackage extends EPackage {
 	 * @ordered
 	 */
 	int OBSERVABLE_STATEMENT___GET_VALUE__TYPE_STRING = STATEMENT___GET_VALUE__TYPE_STRING;
+
+	/**
+	 * The operation id for the '<em>Join Names</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OBSERVABLE_STATEMENT___JOIN_NAMES__ELIST = STATEMENT___JOIN_NAMES__ELIST;
 
 	/**
 	 * The number of operations of the '<em>Observable Statement</em>' class.
@@ -1396,6 +1504,15 @@ public interface QVTimperativePackage extends EPackage {
 	 * @ordered
 	 */
 	int CHECK_STATEMENT___GET_VALUE__TYPE_STRING = OBSERVABLE_STATEMENT___GET_VALUE__TYPE_STRING;
+
+	/**
+	 * The operation id for the '<em>Join Names</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHECK_STATEMENT___JOIN_NAMES__ELIST = OBSERVABLE_STATEMENT___JOIN_NAMES__ELIST;
 
 	/**
 	 * The number of operations of the '<em>Check Statement</em>' class.
@@ -1524,6 +1641,15 @@ public interface QVTimperativePackage extends EPackage {
 	int VARIABLE_STATEMENT___COMPATIBLE_BODY__VALUESPECIFICATION = PivotPackage.VARIABLE_DECLARATION___COMPATIBLE_BODY__VALUESPECIFICATION;
 
 	/**
+	 * The operation id for the '<em>Validate Name Is Not Null</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_STATEMENT___VALIDATE_NAME_IS_NOT_NULL__DIAGNOSTICCHAIN_MAP = PivotPackage.VARIABLE_DECLARATION___VALIDATE_NAME_IS_NOT_NULL__DIAGNOSTICCHAIN_MAP;
+
+	/**
 	 * The operation id for the '<em>Validate Type Is Not Invalid</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1533,13 +1659,31 @@ public interface QVTimperativePackage extends EPackage {
 	int VARIABLE_STATEMENT___VALIDATE_TYPE_IS_NOT_INVALID__DIAGNOSTICCHAIN_MAP = PivotPackage.VARIABLE_DECLARATION___VALIDATE_TYPE_IS_NOT_INVALID__DIAGNOSTICCHAIN_MAP;
 
 	/**
+	 * The operation id for the '<em>Validate Type Is Not Null</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_STATEMENT___VALIDATE_TYPE_IS_NOT_NULL__DIAGNOSTICCHAIN_MAP = PivotPackage.VARIABLE_DECLARATION___VALIDATE_TYPE_IS_NOT_NULL__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The operation id for the '<em>Join Names</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_STATEMENT___JOIN_NAMES__ELIST = PivotPackage.VARIABLE_DECLARATION_OPERATION_COUNT + 0;
+
+	/**
 	 * The number of operations of the '<em>Variable Statement</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABLE_STATEMENT_OPERATION_COUNT = PivotPackage.VARIABLE_DECLARATION_OPERATION_COUNT + 0;
+	int VARIABLE_STATEMENT_OPERATION_COUNT = PivotPackage.VARIABLE_DECLARATION_OPERATION_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -1686,6 +1830,15 @@ public interface QVTimperativePackage extends EPackage {
 	int DECLARE_STATEMENT___COMPATIBLE_BODY__VALUESPECIFICATION = VARIABLE_STATEMENT___COMPATIBLE_BODY__VALUESPECIFICATION;
 
 	/**
+	 * The operation id for the '<em>Validate Name Is Not Null</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECLARE_STATEMENT___VALIDATE_NAME_IS_NOT_NULL__DIAGNOSTICCHAIN_MAP = VARIABLE_STATEMENT___VALIDATE_NAME_IS_NOT_NULL__DIAGNOSTICCHAIN_MAP;
+
+	/**
 	 * The operation id for the '<em>Validate Type Is Not Invalid</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1693,6 +1846,24 @@ public interface QVTimperativePackage extends EPackage {
 	 * @ordered
 	 */
 	int DECLARE_STATEMENT___VALIDATE_TYPE_IS_NOT_INVALID__DIAGNOSTICCHAIN_MAP = VARIABLE_STATEMENT___VALIDATE_TYPE_IS_NOT_INVALID__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The operation id for the '<em>Validate Type Is Not Null</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECLARE_STATEMENT___VALIDATE_TYPE_IS_NOT_NULL__DIAGNOSTICCHAIN_MAP = VARIABLE_STATEMENT___VALIDATE_TYPE_IS_NOT_NULL__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The operation id for the '<em>Join Names</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECLARE_STATEMENT___JOIN_NAMES__ELIST = VARIABLE_STATEMENT___JOIN_NAMES__ELIST;
 
 	/**
 	 * The number of operations of the '<em>Declare Statement</em>' class.
@@ -1821,6 +1992,15 @@ public interface QVTimperativePackage extends EPackage {
 	int MAPPING_PARAMETER___COMPATIBLE_BODY__VALUESPECIFICATION = PivotPackage.VARIABLE_DECLARATION___COMPATIBLE_BODY__VALUESPECIFICATION;
 
 	/**
+	 * The operation id for the '<em>Validate Name Is Not Null</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_PARAMETER___VALIDATE_NAME_IS_NOT_NULL__DIAGNOSTICCHAIN_MAP = PivotPackage.VARIABLE_DECLARATION___VALIDATE_NAME_IS_NOT_NULL__DIAGNOSTICCHAIN_MAP;
+
+	/**
 	 * The operation id for the '<em>Validate Type Is Not Invalid</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1828,6 +2008,15 @@ public interface QVTimperativePackage extends EPackage {
 	 * @ordered
 	 */
 	int MAPPING_PARAMETER___VALIDATE_TYPE_IS_NOT_INVALID__DIAGNOSTICCHAIN_MAP = PivotPackage.VARIABLE_DECLARATION___VALIDATE_TYPE_IS_NOT_INVALID__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The operation id for the '<em>Validate Type Is Not Null</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_PARAMETER___VALIDATE_TYPE_IS_NOT_NULL__DIAGNOSTICCHAIN_MAP = PivotPackage.VARIABLE_DECLARATION___VALIDATE_TYPE_IS_NOT_NULL__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The number of operations of the '<em>Mapping Parameter</em>' class.
@@ -1965,6 +2154,15 @@ public interface QVTimperativePackage extends EPackage {
 	int GUARD_PARAMETER___COMPATIBLE_BODY__VALUESPECIFICATION = MAPPING_PARAMETER___COMPATIBLE_BODY__VALUESPECIFICATION;
 
 	/**
+	 * The operation id for the '<em>Validate Name Is Not Null</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GUARD_PARAMETER___VALIDATE_NAME_IS_NOT_NULL__DIAGNOSTICCHAIN_MAP = MAPPING_PARAMETER___VALIDATE_NAME_IS_NOT_NULL__DIAGNOSTICCHAIN_MAP;
+
+	/**
 	 * The operation id for the '<em>Validate Type Is Not Invalid</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1972,6 +2170,15 @@ public interface QVTimperativePackage extends EPackage {
 	 * @ordered
 	 */
 	int GUARD_PARAMETER___VALIDATE_TYPE_IS_NOT_INVALID__DIAGNOSTICCHAIN_MAP = MAPPING_PARAMETER___VALIDATE_TYPE_IS_NOT_INVALID__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The operation id for the '<em>Validate Type Is Not Null</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GUARD_PARAMETER___VALIDATE_TYPE_IS_NOT_NULL__DIAGNOSTICCHAIN_MAP = MAPPING_PARAMETER___VALIDATE_TYPE_IS_NOT_NULL__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The number of operations of the '<em>Guard Parameter</em>' class.
@@ -2930,6 +3137,15 @@ public interface QVTimperativePackage extends EPackage {
 	int LOOP_VARIABLE___COMPATIBLE_BODY__VALUESPECIFICATION = PivotPackage.VARIABLE_DECLARATION___COMPATIBLE_BODY__VALUESPECIFICATION;
 
 	/**
+	 * The operation id for the '<em>Validate Name Is Not Null</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOOP_VARIABLE___VALIDATE_NAME_IS_NOT_NULL__DIAGNOSTICCHAIN_MAP = PivotPackage.VARIABLE_DECLARATION___VALIDATE_NAME_IS_NOT_NULL__DIAGNOSTICCHAIN_MAP;
+
+	/**
 	 * The operation id for the '<em>Validate Type Is Not Invalid</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2937,6 +3153,15 @@ public interface QVTimperativePackage extends EPackage {
 	 * @ordered
 	 */
 	int LOOP_VARIABLE___VALIDATE_TYPE_IS_NOT_INVALID__DIAGNOSTICCHAIN_MAP = PivotPackage.VARIABLE_DECLARATION___VALIDATE_TYPE_IS_NOT_INVALID__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The operation id for the '<em>Validate Type Is Not Null</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOOP_VARIABLE___VALIDATE_TYPE_IS_NOT_NULL__DIAGNOSTICCHAIN_MAP = PivotPackage.VARIABLE_DECLARATION___VALIDATE_TYPE_IS_NOT_NULL__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The number of operations of the '<em>Loop Variable</em>' class.
@@ -3092,22 +3317,13 @@ public interface QVTimperativePackage extends EPackage {
 	int MAPPING___GET_VALUE__TYPE_STRING = QVTbasePackage.RULE___GET_VALUE__TYPE_STRING;
 
 	/**
-	 * The operation id for the '<em>Validateis True</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAPPING___VALIDATEIS_TRUE__DIAGNOSTICCHAIN_MAP = QVTbasePackage.RULE_OPERATION_COUNT + 0;
-
-	/**
 	 * The number of operations of the '<em>Mapping</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_OPERATION_COUNT = QVTbasePackage.RULE_OPERATION_COUNT + 1;
+	int MAPPING_OPERATION_COUNT = QVTbasePackage.RULE_OPERATION_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -3191,13 +3407,31 @@ public interface QVTimperativePackage extends EPackage {
 	int MAPPING_CALL__REFERRED_MAPPING = MAPPING_STATEMENT_FEATURE_COUNT + 3;
 
 	/**
+	 * The feature id for the '<em><b>Referred Names</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_CALL__REFERRED_NAMES = MAPPING_STATEMENT_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Referring Names</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_CALL__REFERRING_NAMES = MAPPING_STATEMENT_FEATURE_COUNT + 5;
+
+	/**
 	 * The number of structural features of the '<em>Mapping Call</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_CALL_FEATURE_COUNT = MAPPING_STATEMENT_FEATURE_COUNT + 4;
+	int MAPPING_CALL_FEATURE_COUNT = MAPPING_STATEMENT_FEATURE_COUNT + 6;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -3218,6 +3452,15 @@ public interface QVTimperativePackage extends EPackage {
 	int MAPPING_CALL___GET_VALUE__TYPE_STRING = MAPPING_STATEMENT___GET_VALUE__TYPE_STRING;
 
 	/**
+	 * The operation id for the '<em>Join Names</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_CALL___JOIN_NAMES__ELIST = MAPPING_STATEMENT___JOIN_NAMES__ELIST;
+
+	/**
 	 * The operation id for the '<em>Get Referred Element</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3227,13 +3470,31 @@ public interface QVTimperativePackage extends EPackage {
 	int MAPPING_CALL___GET_REFERRED_ELEMENT = MAPPING_STATEMENT_OPERATION_COUNT + 0;
 
 	/**
+	 * The operation id for the '<em>Validate Matching Call Bindings</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_CALL___VALIDATE_MATCHING_CALL_BINDINGS__DIAGNOSTICCHAIN_MAP = MAPPING_STATEMENT_OPERATION_COUNT + 1;
+
+	/**
+	 * The operation id for the '<em>Validate Unique Call Bindings</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_CALL___VALIDATE_UNIQUE_CALL_BINDINGS__DIAGNOSTICCHAIN_MAP = MAPPING_STATEMENT_OPERATION_COUNT + 2;
+
+	/**
 	 * The number of operations of the '<em>Mapping Call</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_CALL_OPERATION_COUNT = MAPPING_STATEMENT_OPERATION_COUNT + 1;
+	int MAPPING_CALL_OPERATION_COUNT = MAPPING_STATEMENT_OPERATION_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -3342,6 +3603,15 @@ public interface QVTimperativePackage extends EPackage {
 	 * @ordered
 	 */
 	int MAPPING_LOOP___GET_VALUE__TYPE_STRING = MAPPING_STATEMENT___GET_VALUE__TYPE_STRING;
+
+	/**
+	 * The operation id for the '<em>Join Names</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_LOOP___JOIN_NAMES__ELIST = MAPPING_STATEMENT___JOIN_NAMES__ELIST;
 
 	/**
 	 * The number of operations of the '<em>Mapping Loop</em>' class.
@@ -3507,6 +3777,15 @@ public interface QVTimperativePackage extends EPackage {
 	int NEW_STATEMENT___COMPATIBLE_BODY__VALUESPECIFICATION = VARIABLE_STATEMENT___COMPATIBLE_BODY__VALUESPECIFICATION;
 
 	/**
+	 * The operation id for the '<em>Validate Name Is Not Null</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NEW_STATEMENT___VALIDATE_NAME_IS_NOT_NULL__DIAGNOSTICCHAIN_MAP = VARIABLE_STATEMENT___VALIDATE_NAME_IS_NOT_NULL__DIAGNOSTICCHAIN_MAP;
+
+	/**
 	 * The operation id for the '<em>Validate Type Is Not Invalid</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3516,13 +3795,40 @@ public interface QVTimperativePackage extends EPackage {
 	int NEW_STATEMENT___VALIDATE_TYPE_IS_NOT_INVALID__DIAGNOSTICCHAIN_MAP = VARIABLE_STATEMENT___VALIDATE_TYPE_IS_NOT_INVALID__DIAGNOSTICCHAIN_MAP;
 
 	/**
+	 * The operation id for the '<em>Validate Type Is Not Null</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NEW_STATEMENT___VALIDATE_TYPE_IS_NOT_NULL__DIAGNOSTICCHAIN_MAP = VARIABLE_STATEMENT___VALIDATE_TYPE_IS_NOT_NULL__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The operation id for the '<em>Join Names</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NEW_STATEMENT___JOIN_NAMES__ELIST = VARIABLE_STATEMENT___JOIN_NAMES__ELIST;
+
+	/**
+	 * The operation id for the '<em>Validate Compatible Type For Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NEW_STATEMENT___VALIDATE_COMPATIBLE_TYPE_FOR_VALUE__DIAGNOSTICCHAIN_MAP = VARIABLE_STATEMENT_OPERATION_COUNT + 0;
+
+	/**
 	 * The number of operations of the '<em>New Statement</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int NEW_STATEMENT_OPERATION_COUNT = VARIABLE_STATEMENT_OPERATION_COUNT + 0;
+	int NEW_STATEMENT_OPERATION_COUNT = VARIABLE_STATEMENT_OPERATION_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.SetStatementImpl <em>Set Statement</em>}' class.
@@ -3661,13 +3967,40 @@ public interface QVTimperativePackage extends EPackage {
 	int SET_STATEMENT___GET_VALUE__TYPE_STRING = OBSERVABLE_STATEMENT___GET_VALUE__TYPE_STRING;
 
 	/**
+	 * The operation id for the '<em>Join Names</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SET_STATEMENT___JOIN_NAMES__ELIST = OBSERVABLE_STATEMENT___JOIN_NAMES__ELIST;
+
+	/**
+	 * The operation id for the '<em>Validate Compatible Class For Property</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SET_STATEMENT___VALIDATE_COMPATIBLE_CLASS_FOR_PROPERTY__DIAGNOSTICCHAIN_MAP = OBSERVABLE_STATEMENT_OPERATION_COUNT + 0;
+
+	/**
+	 * The operation id for the '<em>Validate Compatible Type For Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SET_STATEMENT___VALIDATE_COMPATIBLE_TYPE_FOR_VALUE__DIAGNOSTICCHAIN_MAP = OBSERVABLE_STATEMENT_OPERATION_COUNT + 1;
+
+	/**
 	 * The number of operations of the '<em>Set Statement</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SET_STATEMENT_OPERATION_COUNT = OBSERVABLE_STATEMENT_OPERATION_COUNT + 0;
+	int SET_STATEMENT_OPERATION_COUNT = OBSERVABLE_STATEMENT_OPERATION_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.SimpleParameterImpl <em>Simple Parameter</em>}' class.
@@ -3806,6 +4139,15 @@ public interface QVTimperativePackage extends EPackage {
 	int SIMPLE_PARAMETER___COMPATIBLE_BODY__VALUESPECIFICATION = MAPPING_PARAMETER___COMPATIBLE_BODY__VALUESPECIFICATION;
 
 	/**
+	 * The operation id for the '<em>Validate Name Is Not Null</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SIMPLE_PARAMETER___VALIDATE_NAME_IS_NOT_NULL__DIAGNOSTICCHAIN_MAP = MAPPING_PARAMETER___VALIDATE_NAME_IS_NOT_NULL__DIAGNOSTICCHAIN_MAP;
+
+	/**
 	 * The operation id for the '<em>Validate Type Is Not Invalid</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3813,6 +4155,15 @@ public interface QVTimperativePackage extends EPackage {
 	 * @ordered
 	 */
 	int SIMPLE_PARAMETER___VALIDATE_TYPE_IS_NOT_INVALID__DIAGNOSTICCHAIN_MAP = MAPPING_PARAMETER___VALIDATE_TYPE_IS_NOT_INVALID__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The operation id for the '<em>Validate Type Is Not Null</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SIMPLE_PARAMETER___VALIDATE_TYPE_IS_NOT_NULL__DIAGNOSTICCHAIN_MAP = MAPPING_PARAMETER___VALIDATE_TYPE_IS_NOT_NULL__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The number of operations of the '<em>Simple Parameter</em>' class.
@@ -3983,6 +4334,16 @@ public interface QVTimperativePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getAddStatement_OwnedExpression();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtimperative.AddStatement#validateCompatibleTypeForValue(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Compatible Type For Value</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Compatible Type For Value</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.AddStatement#validateCompatibleTypeForValue(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getAddStatement__ValidateCompatibleTypeForValue__DiagnosticChain_Map();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtimperative.AppendParameter <em>Append Parameter</em>}'.
@@ -4312,16 +4673,6 @@ public interface QVTimperativePackage extends EPackage {
 	EReference getMapping_OwnedStatements();
 
 	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtimperative.Mapping#validateisTrue(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validateis True</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Validateis True</em>' operation.
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.Mapping#validateisTrue(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
-	 * @generated
-	 */
-	EOperation getMapping__ValidateisTrue__DiagnosticChain_Map();
-
-	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtimperative.MappingCall <em>Mapping Call</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4341,6 +4692,48 @@ public interface QVTimperativePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getMappingCall_ReferredMapping();
+
+	/**
+	 * Returns the meta object for the attribute list '{@link org.eclipse.qvtd.pivot.qvtimperative.MappingCall#getReferredNames <em>Referred Names</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Referred Names</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.MappingCall#getReferredNames()
+	 * @see #getMappingCall()
+	 * @generated
+	 */
+	EAttribute getMappingCall_ReferredNames();
+
+	/**
+	 * Returns the meta object for the attribute list '{@link org.eclipse.qvtd.pivot.qvtimperative.MappingCall#getReferringNames <em>Referring Names</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Referring Names</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.MappingCall#getReferringNames()
+	 * @see #getMappingCall()
+	 * @generated
+	 */
+	EAttribute getMappingCall_ReferringNames();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtimperative.MappingCall#validateMatchingCallBindings(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Matching Call Bindings</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Matching Call Bindings</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.MappingCall#validateMatchingCallBindings(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getMappingCall__ValidateMatchingCallBindings__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtimperative.MappingCall#validateUniqueCallBindings(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Unique Call Bindings</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Unique Call Bindings</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.MappingCall#validateUniqueCallBindings(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getMappingCall__ValidateUniqueCallBindings__DiagnosticChain_Map();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.pivot.qvtimperative.MappingCall#getBinding <em>Binding</em>}'.
@@ -4503,6 +4896,16 @@ public interface QVTimperativePackage extends EPackage {
 	EReference getNewStatement_OwnedExpression();
 
 	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtimperative.NewStatement#validateCompatibleTypeForValue(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Compatible Type For Value</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Compatible Type For Value</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.NewStatement#validateCompatibleTypeForValue(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getNewStatement__ValidateCompatibleTypeForValue__DiagnosticChain_Map();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtimperative.ObservableStatement <em>Observable Statement</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4589,6 +4992,26 @@ public interface QVTimperativePackage extends EPackage {
 	EReference getSetStatement_OwnedExpression();
 
 	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtimperative.SetStatement#validateCompatibleClassForProperty(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Compatible Class For Property</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Compatible Class For Property</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.SetStatement#validateCompatibleClassForProperty(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getSetStatement__ValidateCompatibleClassForProperty__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtimperative.SetStatement#validateCompatibleTypeForValue(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Compatible Type For Value</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Compatible Type For Value</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.SetStatement#validateCompatibleTypeForValue(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getSetStatement__ValidateCompatibleTypeForValue__DiagnosticChain_Map();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtimperative.SimpleParameter <em>Simple Parameter</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4650,6 +5073,16 @@ public interface QVTimperativePackage extends EPackage {
 	 * @generated
 	 */
 	EClass getStatement();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtimperative.Statement#joinNames(org.eclipse.emf.common.util.EList) <em>Join Names</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Join Names</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.Statement#joinNames(org.eclipse.emf.common.util.EList)
+	 * @generated
+	 */
+	EOperation getStatement__JoinNames__EList();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtimperative.VariableStatement <em>Variable Statement</em>}'.
@@ -4716,6 +5149,14 @@ public interface QVTimperativePackage extends EPackage {
 		 * @generated
 		 */
 		EReference ADD_STATEMENT__OWNED_EXPRESSION = eINSTANCE.getAddStatement_OwnedExpression();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Compatible Type For Value</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation ADD_STATEMENT___VALIDATE_COMPATIBLE_TYPE_FOR_VALUE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getAddStatement__ValidateCompatibleTypeForValue__DiagnosticChain_Map();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.AppendParameterImpl <em>Append Parameter</em>}' class.
@@ -4994,14 +5435,6 @@ public interface QVTimperativePackage extends EPackage {
 		EReference MAPPING__OWNED_STATEMENTS = eINSTANCE.getMapping_OwnedStatements();
 
 		/**
-		 * The meta object literal for the '<em><b>Validateis True</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation MAPPING___VALIDATEIS_TRUE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getMapping__ValidateisTrue__DiagnosticChain_Map();
-
-		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingCallImpl <em>Mapping Call</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -5018,6 +5451,38 @@ public interface QVTimperativePackage extends EPackage {
 		 * @generated
 		 */
 		EReference MAPPING_CALL__REFERRED_MAPPING = eINSTANCE.getMappingCall_ReferredMapping();
+
+		/**
+		 * The meta object literal for the '<em><b>Referred Names</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MAPPING_CALL__REFERRED_NAMES = eINSTANCE.getMappingCall_ReferredNames();
+
+		/**
+		 * The meta object literal for the '<em><b>Referring Names</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MAPPING_CALL__REFERRING_NAMES = eINSTANCE.getMappingCall_ReferringNames();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Matching Call Bindings</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation MAPPING_CALL___VALIDATE_MATCHING_CALL_BINDINGS__DIAGNOSTICCHAIN_MAP = eINSTANCE.getMappingCall__ValidateMatchingCallBindings__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Unique Call Bindings</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation MAPPING_CALL___VALIDATE_UNIQUE_CALL_BINDINGS__DIAGNOSTICCHAIN_MAP = eINSTANCE.getMappingCall__ValidateUniqueCallBindings__DiagnosticChain_Map();
 
 		/**
 		 * The meta object literal for the '<em><b>Binding</b></em>' containment reference list feature.
@@ -5150,6 +5615,14 @@ public interface QVTimperativePackage extends EPackage {
 		EReference NEW_STATEMENT__OWNED_EXPRESSION = eINSTANCE.getNewStatement_OwnedExpression();
 
 		/**
+		 * The meta object literal for the '<em><b>Validate Compatible Type For Value</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation NEW_STATEMENT___VALIDATE_COMPATIBLE_TYPE_FOR_VALUE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getNewStatement__ValidateCompatibleTypeForValue__DiagnosticChain_Map();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.ObservableStatementImpl <em>Observable Statement</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -5218,6 +5691,22 @@ public interface QVTimperativePackage extends EPackage {
 		EReference SET_STATEMENT__OWNED_EXPRESSION = eINSTANCE.getSetStatement_OwnedExpression();
 
 		/**
+		 * The meta object literal for the '<em><b>Validate Compatible Class For Property</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation SET_STATEMENT___VALIDATE_COMPATIBLE_CLASS_FOR_PROPERTY__DIAGNOSTICCHAIN_MAP = eINSTANCE.getSetStatement__ValidateCompatibleClassForProperty__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Compatible Type For Value</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation SET_STATEMENT___VALIDATE_COMPATIBLE_TYPE_FOR_VALUE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getSetStatement__ValidateCompatibleTypeForValue__DiagnosticChain_Map();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.SimpleParameterImpl <em>Simple Parameter</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -5270,6 +5759,14 @@ public interface QVTimperativePackage extends EPackage {
 		 * @generated
 		 */
 		EClass STATEMENT = eINSTANCE.getStatement();
+
+		/**
+		 * The meta object literal for the '<em><b>Join Names</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation STATEMENT___JOIN_NAMES__ELIST = eINSTANCE.getStatement__JoinNames__EList();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.VariableStatementImpl <em>Variable Statement</em>}' class.

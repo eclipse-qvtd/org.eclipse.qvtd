@@ -1,15 +1,15 @@
 /**
  * <copyright>
- * 
+ *
  * Copyright (c) 2013, 2017 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
- * 
+ *
  * </copyright>
  */
 package org.eclipse.qvtd.pivot.qvtimperative.util;
@@ -56,12 +56,52 @@ public class QVTimperativeValidator extends EObjectValidator {
 	public static final String DIAGNOSTIC_SOURCE = "org.eclipse.qvtd.pivot.qvtimperative";
 
 	/**
-	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validateis True' of 'Mapping'.
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Compatible Type For Value' of 'Add Statement'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int MAPPING__VALIDATEIS_TRUE = 1;
+	public static final int ADD_STATEMENT__VALIDATE_COMPATIBLE_TYPE_FOR_VALUE = 1;
+
+	/**
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Matching Call Bindings' of 'Mapping Call'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final int MAPPING_CALL__VALIDATE_MATCHING_CALL_BINDINGS = 2;
+
+	/**
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Unique Call Bindings' of 'Mapping Call'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final int MAPPING_CALL__VALIDATE_UNIQUE_CALL_BINDINGS = 3;
+
+	/**
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Compatible Type For Value' of 'New Statement'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final int NEW_STATEMENT__VALIDATE_COMPATIBLE_TYPE_FOR_VALUE = 4;
+
+	/**
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Compatible Class For Property' of 'Set Statement'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final int SET_STATEMENT__VALIDATE_COMPATIBLE_CLASS_FOR_PROPERTY = 5;
+
+	/**
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Compatible Type For Value' of 'Set Statement'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final int SET_STATEMENT__VALIDATE_COMPATIBLE_TYPE_FOR_VALUE = 6;
 
 	/**
 	 * A constant with a fixed name that can be used as the base value for additional hand written constants.
@@ -69,7 +109,7 @@ public class QVTimperativeValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private static final int GENERATED_DIAGNOSTIC_CODE_COUNT = 1;
+	private static final int GENERATED_DIAGNOSTIC_CODE_COUNT = 6;
 
 	/**
 	 * A constant with a fixed name that can be used as the base value for additional hand written constants in a derived class.
@@ -192,7 +232,27 @@ public class QVTimperativeValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateAddStatement(AddStatement addStatement, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(addStatement, diagnostics, context);
+		if (!validate_NoCircularContainment(addStatement, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms(addStatement, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(addStatement, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(addStatement, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(addStatement, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(addStatement, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(addStatement, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(addStatement, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(addStatement, diagnostics, context);
+		if (result || diagnostics != null) result &= validateAddStatement_validateCompatibleTypeForValue(addStatement, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * Validates the validateCompatibleTypeForValue constraint of '<em>Add Statement</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateAddStatement_validateCompatibleTypeForValue(AddStatement addStatement, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return addStatement.validateCompatibleTypeForValue(diagnostics, context);
 	}
 
 	/**
@@ -210,7 +270,9 @@ public class QVTimperativeValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_UniqueID(appendParameter, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(appendParameter, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(appendParameter, diagnostics, context);
+		if (result || diagnostics != null) result &= pivotValidator.validateVariableDeclaration_validateNameIsNotNull(appendParameter, diagnostics, context);
 		if (result || diagnostics != null) result &= pivotValidator.validateVariableDeclaration_validateTypeIsNotInvalid(appendParameter, diagnostics, context);
+		if (result || diagnostics != null) result &= pivotValidator.validateVariableDeclaration_validateTypeIsNotNull(appendParameter, diagnostics, context);
 		return result;
 	}
 
@@ -238,7 +300,9 @@ public class QVTimperativeValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_UniqueID(bufferStatement, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(bufferStatement, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(bufferStatement, diagnostics, context);
+		if (result || diagnostics != null) result &= pivotValidator.validateVariableDeclaration_validateNameIsNotNull(bufferStatement, diagnostics, context);
 		if (result || diagnostics != null) result &= pivotValidator.validateVariableDeclaration_validateTypeIsNotInvalid(bufferStatement, diagnostics, context);
+		if (result || diagnostics != null) result &= pivotValidator.validateVariableDeclaration_validateTypeIsNotNull(bufferStatement, diagnostics, context);
 		return result;
 	}
 
@@ -266,7 +330,9 @@ public class QVTimperativeValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_UniqueID(connectionVariable, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(connectionVariable, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(connectionVariable, diagnostics, context);
+		if (result || diagnostics != null) result &= pivotValidator.validateVariableDeclaration_validateNameIsNotNull(connectionVariable, diagnostics, context);
 		if (result || diagnostics != null) result &= pivotValidator.validateVariableDeclaration_validateTypeIsNotInvalid(connectionVariable, diagnostics, context);
+		if (result || diagnostics != null) result &= pivotValidator.validateVariableDeclaration_validateTypeIsNotNull(connectionVariable, diagnostics, context);
 		return result;
 	}
 
@@ -285,7 +351,9 @@ public class QVTimperativeValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_UniqueID(declareStatement, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(declareStatement, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(declareStatement, diagnostics, context);
+		if (result || diagnostics != null) result &= pivotValidator.validateVariableDeclaration_validateNameIsNotNull(declareStatement, diagnostics, context);
 		if (result || diagnostics != null) result &= pivotValidator.validateVariableDeclaration_validateTypeIsNotInvalid(declareStatement, diagnostics, context);
+		if (result || diagnostics != null) result &= pivotValidator.validateVariableDeclaration_validateTypeIsNotNull(declareStatement, diagnostics, context);
 		return result;
 	}
 
@@ -304,7 +372,9 @@ public class QVTimperativeValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_UniqueID(guardParameter, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(guardParameter, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(guardParameter, diagnostics, context);
+		if (result || diagnostics != null) result &= pivotValidator.validateVariableDeclaration_validateNameIsNotNull(guardParameter, diagnostics, context);
 		if (result || diagnostics != null) result &= pivotValidator.validateVariableDeclaration_validateTypeIsNotInvalid(guardParameter, diagnostics, context);
+		if (result || diagnostics != null) result &= pivotValidator.validateVariableDeclaration_validateTypeIsNotNull(guardParameter, diagnostics, context);
 		return result;
 	}
 
@@ -388,7 +458,9 @@ public class QVTimperativeValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_UniqueID(loopVariable, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(loopVariable, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(loopVariable, diagnostics, context);
+		if (result || diagnostics != null) result &= pivotValidator.validateVariableDeclaration_validateNameIsNotNull(loopVariable, diagnostics, context);
 		if (result || diagnostics != null) result &= pivotValidator.validateVariableDeclaration_validateTypeIsNotInvalid(loopVariable, diagnostics, context);
+		if (result || diagnostics != null) result &= pivotValidator.validateVariableDeclaration_validateTypeIsNotNull(loopVariable, diagnostics, context);
 		return result;
 	}
 
@@ -398,27 +470,7 @@ public class QVTimperativeValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateMapping(Mapping mapping, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(mapping, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms(mapping, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(mapping, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(mapping, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(mapping, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves(mapping, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID(mapping, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique(mapping, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(mapping, diagnostics, context);
-		if (result || diagnostics != null) result &= validateMapping_validateisTrue(mapping, diagnostics, context);
-		return result;
-	}
-
-	/**
-	 * Validates the validateisTrue constraint of '<em>Mapping</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateMapping_validateisTrue(Mapping mapping, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return mapping.validateisTrue(diagnostics, context);
+		return validate_EveryDefaultConstraint(mapping, diagnostics, context);
 	}
 
 	/**
@@ -427,7 +479,38 @@ public class QVTimperativeValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateMappingCall(MappingCall mappingCall, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(mappingCall, diagnostics, context);
+		if (!validate_NoCircularContainment(mappingCall, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms(mappingCall, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(mappingCall, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(mappingCall, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(mappingCall, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(mappingCall, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(mappingCall, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(mappingCall, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(mappingCall, diagnostics, context);
+		if (result || diagnostics != null) result &= validateMappingCall_validateMatchingCallBindings(mappingCall, diagnostics, context);
+		if (result || diagnostics != null) result &= validateMappingCall_validateUniqueCallBindings(mappingCall, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * Validates the validateMatchingCallBindings constraint of '<em>Mapping Call</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateMappingCall_validateMatchingCallBindings(MappingCall mappingCall, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return mappingCall.validateMatchingCallBindings(diagnostics, context);
+	}
+
+	/**
+	 * Validates the validateUniqueCallBindings constraint of '<em>Mapping Call</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateMappingCall_validateUniqueCallBindings(MappingCall mappingCall, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return mappingCall.validateUniqueCallBindings(diagnostics, context);
 	}
 
 	/**
@@ -454,7 +537,9 @@ public class QVTimperativeValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_UniqueID(mappingParameter, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(mappingParameter, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(mappingParameter, diagnostics, context);
+		if (result || diagnostics != null) result &= pivotValidator.validateVariableDeclaration_validateNameIsNotNull(mappingParameter, diagnostics, context);
 		if (result || diagnostics != null) result &= pivotValidator.validateVariableDeclaration_validateTypeIsNotInvalid(mappingParameter, diagnostics, context);
+		if (result || diagnostics != null) result &= pivotValidator.validateVariableDeclaration_validateTypeIsNotNull(mappingParameter, diagnostics, context);
 		return result;
 	}
 
@@ -491,8 +576,21 @@ public class QVTimperativeValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_UniqueID(newStatement, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(newStatement, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(newStatement, diagnostics, context);
+		if (result || diagnostics != null) result &= pivotValidator.validateVariableDeclaration_validateNameIsNotNull(newStatement, diagnostics, context);
 		if (result || diagnostics != null) result &= pivotValidator.validateVariableDeclaration_validateTypeIsNotInvalid(newStatement, diagnostics, context);
+		if (result || diagnostics != null) result &= pivotValidator.validateVariableDeclaration_validateTypeIsNotNull(newStatement, diagnostics, context);
+		if (result || diagnostics != null) result &= validateNewStatement_validateCompatibleTypeForValue(newStatement, diagnostics, context);
 		return result;
+	}
+
+	/**
+	 * Validates the validateCompatibleTypeForValue constraint of '<em>New Statement</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateNewStatement_validateCompatibleTypeForValue(NewStatement newStatement, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return newStatement.validateCompatibleTypeForValue(diagnostics, context);
 	}
 
 	/**
@@ -510,7 +608,38 @@ public class QVTimperativeValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateSetStatement(SetStatement setStatement, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(setStatement, diagnostics, context);
+		if (!validate_NoCircularContainment(setStatement, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms(setStatement, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(setStatement, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(setStatement, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(setStatement, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(setStatement, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(setStatement, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(setStatement, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(setStatement, diagnostics, context);
+		if (result || diagnostics != null) result &= validateSetStatement_validateCompatibleClassForProperty(setStatement, diagnostics, context);
+		if (result || diagnostics != null) result &= validateSetStatement_validateCompatibleTypeForValue(setStatement, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * Validates the validateCompatibleClassForProperty constraint of '<em>Set Statement</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateSetStatement_validateCompatibleClassForProperty(SetStatement setStatement, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return setStatement.validateCompatibleClassForProperty(diagnostics, context);
+	}
+
+	/**
+	 * Validates the validateCompatibleTypeForValue constraint of '<em>Set Statement</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateSetStatement_validateCompatibleTypeForValue(SetStatement setStatement, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return setStatement.validateCompatibleTypeForValue(diagnostics, context);
 	}
 
 	/**
@@ -528,7 +657,9 @@ public class QVTimperativeValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_UniqueID(simpleParameter, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(simpleParameter, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(simpleParameter, diagnostics, context);
+		if (result || diagnostics != null) result &= pivotValidator.validateVariableDeclaration_validateNameIsNotNull(simpleParameter, diagnostics, context);
 		if (result || diagnostics != null) result &= pivotValidator.validateVariableDeclaration_validateTypeIsNotInvalid(simpleParameter, diagnostics, context);
+		if (result || diagnostics != null) result &= pivotValidator.validateVariableDeclaration_validateTypeIsNotNull(simpleParameter, diagnostics, context);
 		return result;
 	}
 
@@ -565,7 +696,9 @@ public class QVTimperativeValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_UniqueID(variableStatement, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(variableStatement, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(variableStatement, diagnostics, context);
+		if (result || diagnostics != null) result &= pivotValidator.validateVariableDeclaration_validateNameIsNotNull(variableStatement, diagnostics, context);
 		if (result || diagnostics != null) result &= pivotValidator.validateVariableDeclaration_validateTypeIsNotInvalid(variableStatement, diagnostics, context);
+		if (result || diagnostics != null) result &= pivotValidator.validateVariableDeclaration_validateTypeIsNotNull(variableStatement, diagnostics, context);
 		return result;
 	}
 

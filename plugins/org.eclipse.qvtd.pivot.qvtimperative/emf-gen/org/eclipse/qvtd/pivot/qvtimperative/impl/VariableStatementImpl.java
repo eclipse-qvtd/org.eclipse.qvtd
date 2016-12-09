@@ -14,11 +14,20 @@
  */
 package org.eclipse.qvtd.pivot.qvtimperative.impl;
 
+import java.lang.reflect.InvocationTargetException;
+import java.util.Iterator;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.internal.VariableDeclarationImpl;
 
+import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
+import org.eclipse.ocl.pivot.library.string.StringConcatOperation;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
+import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeTables;
+import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 import org.eclipse.qvtd.pivot.qvtimperative.VariableStatement;
 
 /**
@@ -46,6 +55,84 @@ public abstract class VariableStatementImpl extends VariableDeclarationImpl impl
 	@Override
 	protected EClass eStaticClass() {
 		return QVTimperativePackage.Literals.VARIABLE_STATEMENT;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String joinNames(final EList<String> names) {
+		/**
+		 * '{' + names->iterate(n; s : String[?] = '' |
+		 *   if (s = '')
+		 *   then n
+		 *   else s + ';' + n
+		 *   endif) + '}'
+		 */
+		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
+		final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@NonNull IdResolver idResolver = executor.getIdResolver();
+		final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_names = idResolver.createOrderedSetOfAll(QVTimperativeTables.ORD_PRIMid_String, names);
+		/*@NonInvalid*/ java.lang.@Nullable String s = QVTimperativeTables.STR_;
+		@Nullable Iterator<Object> ITERATOR_n = BOXED_names.iterator();
+		/*@Thrown*/ java.lang.@Nullable String iterate;
+		while (true) {
+			if (!ITERATOR_n.hasNext()) {
+				iterate = s;
+				break;
+			}
+			/*@NonInvalid*/ java.lang.@Nullable String n = (String)ITERATOR_n.next();
+			/**
+			 * if s = '' then n else s + ';' + n endif
+			 */
+			final /*@NonInvalid*/ boolean eq = QVTimperativeTables.STR_.equals(s);
+			/*@Thrown*/ java.lang.@Nullable String symbol_0;
+			if (eq) {
+				symbol_0 = n;
+			}
+			else {
+				final /*@Thrown*/ java.lang.@NonNull String sum = StringConcatOperation.INSTANCE.evaluate(s, QVTimperativeTables.STR__59);
+				final /*@Thrown*/ java.lang.@NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, n);
+				symbol_0 = sum_0;
+			}
+			//
+			s = symbol_0;
+		}
+		final /*@NonInvalid*/ java.lang.@NonNull String sum_1 = StringConcatOperation.INSTANCE.evaluate(QVTimperativeTables.STR__123, iterate);
+		final /*@NonInvalid*/ java.lang.@NonNull String sum_2 = StringConcatOperation.INSTANCE.evaluate(sum_1, QVTimperativeTables.STR__125);
+		return sum_2;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedOperationID(int baseOperationID, Class<?> baseClass) {
+		if (baseClass == Statement.class) {
+			switch (baseOperationID) {
+				case QVTimperativePackage.STATEMENT___JOIN_NAMES__ELIST: return QVTimperativePackage.VARIABLE_STATEMENT___JOIN_NAMES__ELIST;
+				default: return -1;
+			}
+		}
+		return super.eDerivedOperationID(baseOperationID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	@SuppressWarnings("unchecked")
+	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
+		switch (operationID) {
+			case QVTimperativePackage.VARIABLE_STATEMENT___JOIN_NAMES__ELIST:
+				return joinNames((EList<String>)arguments.get(0));
+		}
+		return super.eInvoke(operationID, arguments);
 	}
 
 

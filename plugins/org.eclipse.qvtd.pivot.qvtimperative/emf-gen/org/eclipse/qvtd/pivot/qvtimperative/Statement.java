@@ -14,6 +14,7 @@
  */
 package org.eclipse.qvtd.pivot.qvtimperative;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.ocl.pivot.NamedElement;
 
 /**
@@ -30,5 +31,12 @@ import org.eclipse.ocl.pivot.NamedElement;
  * @generated
  */
 public interface Statement extends NamedElement {
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	String joinNames(EList<String> names);
 
 } // Statement
