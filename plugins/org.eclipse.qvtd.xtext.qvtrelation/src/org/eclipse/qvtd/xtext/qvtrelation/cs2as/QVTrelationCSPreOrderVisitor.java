@@ -111,9 +111,11 @@ public class QVTrelationCSPreOrderVisitor extends AbstractQVTrelationCSPreOrderV
 				VariableExp asVariableExp = (VariableExp)asElement;
 				Variable asVariable = (Variable)asVariableExp.getReferredVariable();
 				if ((asVariable != null) && asVariable.isIsImplicit()) {
-					asVariable.setType(asCollectionType.getElementType());
+					Type elementType = asCollectionType.getElementType();
+					asVariable.setType(elementType);
 					asVariable.setTypeValue(null);
 					asVariable.setIsRequired(true);
+					asVariableExp.setType(elementType);
 				}
 			}
 			return null;
