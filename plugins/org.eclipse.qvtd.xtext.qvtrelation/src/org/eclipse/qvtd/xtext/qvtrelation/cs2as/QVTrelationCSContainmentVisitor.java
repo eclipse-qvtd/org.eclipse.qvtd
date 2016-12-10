@@ -214,6 +214,10 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 		assert asTemplateExp != null;
 		Variable asBoundVariable = asTemplateExp.getBindsTo();
 		assert asBoundVariable != null;
+		if (csTemplate.getName() == null) {
+			asBoundVariable.setName(QVTrelationUtil.DUMMY_VARIABLE_NAME + relationVariables.size());
+			asBoundVariable.setIsImplicit(true);
+		}
 		relationVariables.add(asBoundVariable);
 		boundVariables.add(asBoundVariable);
 		if (csTemplate instanceof ObjectTemplateCS) {
@@ -238,7 +242,7 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 					VariableExp asVariableExp = context.refreshModelElement(VariableExp.class, PivotPackage.Literals.VARIABLE_EXP, csMember);
 					if (name == null) {
 						Variable asMemberVariable = QVTrelationFactory.eINSTANCE.createSharedVariable();
-						asMemberVariable.setName(QVTrelationUtil.DUMMY_VARIABLE_NAME + specialVariables.size());
+						asMemberVariable.setName(QVTrelationUtil.DUMMY_VARIABLE_NAME + relationVariables.size());
 						asMemberVariable.setIsImplicit(true);
 						specialVariables.add(asMemberVariable);
 						relationVariables.add(asMemberVariable);
@@ -267,7 +271,7 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 					asRestVariable.setIsImplicit(true);
 					asRestVariable.setTypeValue(null);
 					asRestVariable.setIsRequired(true);
-					asRestVariable.setName(QVTrelationUtil.DUMMY_VARIABLE_NAME + specialVariables.size());
+					asRestVariable.setName(QVTrelationUtil.DUMMY_VARIABLE_NAME + relationVariables.size());
 					specialVariables.add(asRestVariable);
 					relationVariables.add(asRestVariable);
 					csRestTemplate.setPivot(asRestVariable);
