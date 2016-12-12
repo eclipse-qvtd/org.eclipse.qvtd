@@ -190,7 +190,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 				GraphMLBuilder s = new GraphMLBuilder();
 				//FIXME	        	getTransformationStatus().accept(new EvaluationStatus2GraphVisitor(s));
 				File projectFile = getProjectFile();
-				File graphFile = new File(projectFile.toString() + "/" + fileNamePrefix + transformation.getName() + "_" + mode + ".graphml");
+				File graphFile = new File(projectFile.toString() + "/" + fileNamePrefix + /*"graphs/" +*/ transformation.getName() + "_" + mode + ".graphml");
 				FileWriter writer = new FileWriter(graphFile);
 				writer.append(s.toString());
 				writer.close();
@@ -199,7 +199,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 
 		public void writeExecutionGraphMLfile(@NonNull String suffix) {
 			@SuppressWarnings("null")@NonNull URI baseURI = getTransformation().eResource().getURI();
-			URI graphmlURI = URI.createURI(getTransformation().getName().replace("\n",  "_").replace("\\n",  "_") + suffix + ".graphml").resolve(baseURI);
+			URI graphmlURI = URI.createURI(/*"graphs/" +*/ getTransformation().getName().replace("\n",  "_").replace("\\n",  "_") + suffix + ".graphml").resolve(baseURI);
 			try {
 				OutputStream outputStream = URIConverter.INSTANCE.createOutputStream(graphmlURI);
 				GraphMLStringBuilder s = new GraphMLStringBuilder();
@@ -347,10 +347,10 @@ public class QVTiInterpreterTests extends LoadTestCase
 		//    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 		MyQvtiExecutor testEvaluator = myQVT.createEvaluator("Tree2TallTree", "Tree2TallTree.qvti", QVTiIncrementalExecutor.Mode.INCREMENTAL);
 		testEvaluator.saveTransformation(null);
-		testEvaluator.loadModel("tree", "Tree.xmi");
-		testEvaluator.createModel("tree2talltree", "Tree2TallTree.xmi");
-		testEvaluator.createModel("talltree", "TallTree.xmi");
-		testEvaluator.loadReference("talltree", "TallTreeValidate.xmi");
+		testEvaluator.loadModel("tree", "samples/Tree.xmi");
+		testEvaluator.createModel("tree2talltree", "samples/Tree2TallTree.xmi");
+		testEvaluator.createModel("talltree", "samples/TallTree.xmi");
+		testEvaluator.loadReference("talltree", "samples/TallTreeValidate.xmi");
 		testEvaluator.test();
 		testEvaluator.writeExecutionGraphMLfile("-execution");
 		testEvaluator.dispose();
@@ -370,10 +370,10 @@ public class QVTiInterpreterTests extends LoadTestCase
 		//    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 		MyQvtiExecutor testEvaluator = myQVT.createEvaluator("Tree2TallTree", "Tree2TallTree.qvti", QVTiIncrementalExecutor.Mode.LAZY);
 		testEvaluator.saveTransformation(null);
-		testEvaluator.loadModel("tree", "Tree.xmi");
-		testEvaluator.createModel("tree2talltree", "Tree2TallTree.xmi");
-		testEvaluator.createModel("talltree", "TallTree.xmi");
-		testEvaluator.loadReference("talltree", "TallTreeValidate.xmi");
+		testEvaluator.loadModel("tree", "samples/Tree.xmi");
+		testEvaluator.createModel("tree2talltree", "samples/Tree2TallTree.xmi");
+		testEvaluator.createModel("talltree", "samples/TallTree.xmi");
+		testEvaluator.loadReference("talltree", "samples/TallTreeValidate.xmi");
 		testEvaluator.test();
 		testEvaluator.dispose();
 

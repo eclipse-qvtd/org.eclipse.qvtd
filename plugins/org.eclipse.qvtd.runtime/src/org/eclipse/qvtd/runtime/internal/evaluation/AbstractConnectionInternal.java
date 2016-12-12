@@ -59,6 +59,11 @@ public abstract class AbstractConnectionInternal extends AbstractConnection
 	}
 
 	@Override
+	public int debugGetSize() {
+		return values.size();
+	}
+
+	@Override
 	public int getCapacity() {
 		return values.size();
 	}

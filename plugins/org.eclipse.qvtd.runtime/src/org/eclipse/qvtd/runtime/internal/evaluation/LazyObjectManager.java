@@ -160,15 +160,15 @@ public class LazyObjectManager extends AbstractObjectManager
 
 		public synchronized void assigned(@NonNull LazyObjectManager objectManager, @NonNull Object eObject, @NonNull EStructuralFeature eFeature, @Nullable Object ecoreValue) {
 			switch (mode) {
-			case ASSIGNABLE:
-				mode = SlotMode.ASSIGNED;
-				unblock(objectManager);
-				break;
-			case ASSIGNED:
-				if (!(eFeature instanceof EOppositeReferenceImpl)) {
-					System.out.println("Re-assignment of " + eFeature.getEContainingClass().getName() + "::" + eFeature.getName() + " for " + eObject + " with " + ecoreValue);
-				}
-				break;
+				case ASSIGNABLE:
+					mode = SlotMode.ASSIGNED;
+					unblock(objectManager);
+					break;
+				case ASSIGNED:
+					if (!(eFeature instanceof EOppositeReferenceImpl)) {
+						System.out.println("Re-assignment of " + eFeature.getEContainingClass().getName() + "::" + eFeature.getName() + " for " + eObject + " with " + ecoreValue);
+					}
+					break;
 			}
 		}
 
@@ -194,10 +194,10 @@ public class LazyObjectManager extends AbstractObjectManager
 		@Override
 		public synchronized void getting(@NonNull Object eObject, @NonNull EStructuralFeature eFeature) {
 			switch (mode) {
-			case ASSIGNABLE:
-				throw new InvocationFailedException(this);
-			case ASSIGNED:
-				break;
+				case ASSIGNABLE:
+					throw new InvocationFailedException(this);
+				case ASSIGNED:
+					break;
 			}
 		}
 
@@ -511,24 +511,24 @@ public class LazyObjectManager extends AbstractObjectManager
 		public void assignedElement(@NonNull Object eContainer, @NonNull EReference eReference, Object eObject) {
 			//			super.assigned(objectManager, eContainer, eReference, eObject);
 			switch (mode) {
-			case ASSIGNABLE:
-				mode = SlotMode.ASSIGNED;
-				unblock(LazyObjectManager.this);
-				break;
-			case ASSIGNED:
-				break;
+				case ASSIGNABLE:
+					mode = SlotMode.ASSIGNED;
+					unblock(LazyObjectManager.this);
+					break;
+				case ASSIGNED:
+					break;
 			}
 		}
 
 		@Override
 		public synchronized void getting(@NonNull Object eObject, @NonNull EStructuralFeature eFeature) {
 			switch (mode) {
-			case ASSIGNABLE:
-				mode = SlotMode.ASSIGNED;
-				unblock(LazyObjectManager.this);
-				break;
-			case ASSIGNED:
-				break;
+				case ASSIGNABLE:
+					mode = SlotMode.ASSIGNED;
+					unblock(LazyObjectManager.this);
+					break;
+				case ASSIGNED:
+					break;
 			}
 		}
 	}
@@ -889,6 +889,11 @@ public class LazyObjectManager extends AbstractObjectManager
 
 	@Override
 	public void created(Invocation.@NonNull Incremental invocation, @NonNull Object eObject) {
+		// Ignore incremental API
+	}
+
+	@Override
+	public void destroyed(@NonNull Object eObject) {
 		// Ignore incremental API
 	}
 

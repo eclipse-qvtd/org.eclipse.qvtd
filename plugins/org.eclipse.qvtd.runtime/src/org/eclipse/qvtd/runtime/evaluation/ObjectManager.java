@@ -40,6 +40,8 @@ public interface ObjectManager extends ExecutionVisitable
 	 */
 	void created(Invocation.@NonNull Incremental invocation, @NonNull Object eObject);
 
+	void destroyed(@NonNull Object eObject);
+
 	@NonNull Iterable<@NonNull ? extends Object> getObjects();
 	@NonNull Iterable<@NonNull ? extends SlotState> getSlotStates(@NonNull Object object);
 

@@ -123,7 +123,8 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 					Set<@NonNull Integer> allClassIndexes = eClass2allClassIndexes.get(eClass);
 					if (allClassIndexes != null) {
 						for (@NonNull Integer classIndex : allClassIndexes) {
-							((Connection.Incremental)classIndex2connection[classIndex]).removeElement(eObject);
+							Connection.Incremental connection = (Connection.Incremental)classIndex2connection[classIndex];
+							connection.removeElement(eObject);
 						}
 					}
 				}
@@ -190,7 +191,7 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 			for (int i = 0; i < classIds; i++) {
 				@NonNull
 				ClassId classId = classIndex2classId[i];
-				classIndex2connection[i] = transformer.createConnection(name + "-" + classId, classId, false);
+				classIndex2connection[i] = transformer.createConnection(name /*+ "-" + classId*/, classId, false);
 			}
 		}
 
@@ -266,9 +267,9 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 				isNotContainedCount++;
 				assert !potentialOrphanObjects.contains(eObject);
 				potentialOrphanObjects.add(eObject);
-				EClass eClass = transformer.eClass(eObject);
-				accumulateEObject1(eObject, eClass);
 			}
+			EClass eClass = transformer.eClass(eObject);
+			accumulateEObject1(eObject, eClass);
 		}
 
 		/**
@@ -580,11 +581,7 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 	 */
 	@Override
 	public void addRootObjects(@NonNull String modelName, @NonNull Iterable<@NonNull ? extends Object> eRootObjects) {
-		Integer modelIndex = modelIndexes.get(modelName);
-		if (modelIndex == null) {
-			throw new IllegalStateException("Unknown model name '" + modelName + "'");
-		}
-		models[modelIndex].addRootObjects(eRootObjects);
+		getTypedModelInstance(modelName).addRootObjects(eRootObjects);
 	}
 
 	protected @NonNull Connection createConnection(@NonNull String name, @NonNull TypeId typeId, boolean isStrict) {
@@ -740,12 +737,9 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 	 */
 	@Override
 	public @NonNull Collection<@NonNull EObject> getRootEObjects(@NonNull String modelName) {
-		Integer modelIndex = modelIndexes.get(modelName);
-		if (modelIndex == null) {
-			throw new IllegalStateException("Unknown model name '" + modelName + "'");
-		}
+		Model model = getTypedModelInstance(modelName);
 		List<@NonNull EObject> rootEObjects = new ArrayList<>();
-		for (@NonNull Object rootObject : models[modelIndex].getRootObjects()) {
+		for (@NonNull Object rootObject : model.getRootObjects()) {
 			if (rootObject instanceof EObject) {
 				rootEObjects.add((EObject)rootObject);
 			}
@@ -758,11 +752,16 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 	 */
 	@Override
 	public @NonNull Collection<@NonNull Object> getRootObjects(@NonNull String modelName) {
+		return getTypedModelInstance(modelName).getRootObjects();
+	}
+
+	@Override
+	public @NonNull Model getTypedModelInstance(@NonNull String modelName) {
 		Integer modelIndex = modelIndexes.get(modelName);
 		if (modelIndex == null) {
 			throw new IllegalStateException("Unknown model name '" + modelName + "'");
 		}
-		return models[modelIndex].getRootObjects();
+		return models[modelIndex];
 	}
 
 	/**

@@ -14,11 +14,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.ids.IdResolver;
+import org.eclipse.qvtd.runtime.evaluation.AbstractInvocation;
 import org.eclipse.qvtd.runtime.evaluation.Connection;
 import org.eclipse.qvtd.runtime.evaluation.ExecutionVisitor;
 import org.eclipse.qvtd.runtime.evaluation.Interval;
@@ -32,8 +32,30 @@ public abstract class AbstractInvocationConstructor implements InvocationConstru
 	{
 		protected int sequence = 0;
 
-		public Incremental(@NonNull InvocationManager invocationManager, @NonNull String name, boolean isStrict) {
-			super(invocationManager, name, isStrict);
+		/**
+		 * List of consumed connections.
+		 */
+		private final @NonNull List<Connection.@NonNull Incremental> consumedConnections = new ArrayList<>();
+
+		public Incremental(@NonNull InvocationManager invocationManager, @NonNull String name) {
+			super(invocationManager, name, true);
+		}
+
+		@Override
+		public synchronized void addConsumedConnection(Connection.@NonNull Incremental connection) {
+			//			assert !consumedConnections.contains(connection);
+			consumedConnections.add(connection);
+			super.addConsumedConnection(connection);
+		}
+
+		@Override
+		public @NonNull List<Connection.@NonNull Incremental> getConsumedConnections() {
+			return consumedConnections;
+		}
+
+		@Override
+		protected final @NonNull Invocation newInstance(@NonNull Object @NonNull [] values) {
+			throw new IllegalStateException("Incremental invocations require an invocationHashCode.");
 		}
 
 		@Override
@@ -254,7 +276,7 @@ public abstract class AbstractInvocationConstructor implements InvocationConstru
 	/**
 	 * Flattened copy of hashCode2invocations.values(). Not maintained until actually requested.
 	 */
-	private /*@LazyNonNull*/ List<@NonNull Invocation> allInvocations = null;
+	//	private /*@LazyNonNull*/ List<@NonNull Invocation> allInvocations = null;
 
 	/**
 	 * The number of values required to match the Mapping.ownedParameters.
@@ -319,8 +341,6 @@ public abstract class AbstractInvocationConstructor implements InvocationConstru
 	@Override
 	public synchronized void addConsumedConnection(@NonNull Connection connection) {
 		assert values == null;
-		//		assert !consumedConnections.contains(connection);
-		//		consumedConnections.add(connection);
 		connection.addConsumer(this);
 		if (firstConsumer != null) {
 			firstConsumer.appendConsumer(valuesCount, connection);
@@ -332,27 +352,42 @@ public abstract class AbstractInvocationConstructor implements InvocationConstru
 		valuesCount++;
 	}
 
+	//	@Override
+	public synchronized void destroy(AbstractInvocation.@NonNull Incremental invocation, int invocationHashCode) {
+		Object zeroOrMoreInvocations = hashCode2invocations.get(invocationHashCode);
+		if (zeroOrMoreInvocations instanceof Invocation) {
+			Invocation oneInvocation = (Invocation)zeroOrMoreInvocations;
+			if (oneInvocation == invocation) {
+				hashCode2invocations.remove(invocationHashCode);
+			}
+		}
+		else if (zeroOrMoreInvocations instanceof List<?>) {
+			@SuppressWarnings("unchecked")@NonNull List<@NonNull Invocation> zeroOrMoreInvocations2 = (List<@NonNull Invocation>)zeroOrMoreInvocations;
+			zeroOrMoreInvocations2.remove(invocation);
+			if (zeroOrMoreInvocations2.size() == 1) {
+				hashCode2invocations.put(invocationHashCode, zeroOrMoreInvocations2.get(0));
+			}
+		}
+	}
+
 	@Override
 	public @NonNull Interval getInterval() {
 		return interval;
 	}
 
 	@Override
-	public @NonNull Iterable<@NonNull Invocation> getInvocations() {
-		List<@NonNull Invocation> allInvocations2 = allInvocations;
-		if (allInvocations2 == null) {
-			allInvocations2 = allInvocations = new ArrayList<>();
-			for (Object zeroOrMoreInvocations : hashCode2invocations.values()) {
-				if (zeroOrMoreInvocations instanceof Invocation) {
-					allInvocations2.add((Invocation)zeroOrMoreInvocations);
-				}
-				else if (zeroOrMoreInvocations instanceof List<?>) {
-					@SuppressWarnings("unchecked")@NonNull List<@NonNull Invocation> zeroOrMoreInvocations2 = (List<@NonNull Invocation>)zeroOrMoreInvocations;
-					allInvocations2.addAll(zeroOrMoreInvocations2);
-				}
+	public @NonNull Iterable<@NonNull Invocation> debugGetInvocations() {
+		List<@NonNull Invocation> allInvocations = new ArrayList<>();
+		for (Object zeroOrMoreInvocations : hashCode2invocations.values()) {
+			if (zeroOrMoreInvocations instanceof Invocation) {
+				allInvocations.add((Invocation)zeroOrMoreInvocations);
+			}
+			else if (zeroOrMoreInvocations instanceof List<?>) {
+				@SuppressWarnings("unchecked")@NonNull List<@NonNull Invocation> zeroOrMoreInvocations2 = (List<@NonNull Invocation>)zeroOrMoreInvocations;
+				allInvocations.addAll(zeroOrMoreInvocations2);
 			}
 		}
-		return allInvocations2;
+		return allInvocations;
 	}
 
 	@Override
@@ -368,12 +403,12 @@ public abstract class AbstractInvocationConstructor implements InvocationConstru
 	public @NonNull Invocation invoke(@NonNull Object @NonNull ... argValues) {
 		Invocation theInvocation;
 		if (isStrict) {
-			int hashCode = 0;
-			for (@Nullable Object argValue : argValues) {
-				hashCode = 3 * hashCode + idResolver.oclHashCode(argValue);
+			int invocationHashCode = 0;
+			for (@NonNull Object argValue : argValues) {
+				invocationHashCode = 3 * invocationHashCode + idResolver.oclHashCode(argValue);
 			}
 			synchronized (hashCode2invocations) {
-				Object zeroOrMoreInvocations = hashCode2invocations.get(hashCode);
+				Object zeroOrMoreInvocations = hashCode2invocations.get(invocationHashCode);
 				Invocation oneInvocation = null;
 				List<@NonNull Invocation> twoOrMoreInvocations = null;
 				if (zeroOrMoreInvocations instanceof Invocation) {
@@ -391,16 +426,16 @@ public abstract class AbstractInvocationConstructor implements InvocationConstru
 						}
 					}
 				}
-				theInvocation = newInstance(argValues);
+				theInvocation = newInstance(invocationHashCode, argValues);
 				if (zeroOrMoreInvocations == null) {
-					hashCode2invocations.put(hashCode, theInvocation);
+					hashCode2invocations.put(invocationHashCode, theInvocation);
 				}
 				else if (twoOrMoreInvocations == null) {
 					twoOrMoreInvocations = new ArrayList<@NonNull Invocation>(4);
 					assert oneInvocation != null;
 					twoOrMoreInvocations.add(oneInvocation);
 					twoOrMoreInvocations.add(theInvocation);
-					hashCode2invocations.put(hashCode, twoOrMoreInvocations);
+					hashCode2invocations.put(invocationHashCode, twoOrMoreInvocations);
 				}
 				else {
 					twoOrMoreInvocations.add(theInvocation);
@@ -410,9 +445,9 @@ public abstract class AbstractInvocationConstructor implements InvocationConstru
 		else {
 			theInvocation = newInstance(argValues);
 		}
-		if (allInvocations != null) {
-			allInvocations.add(theInvocation);
-		}
+		//		if (allInvocations != null) {
+		//			allInvocations.add(theInvocation);
+		//		}
 		interval.queue(theInvocation);
 		return theInvocation;
 	}
@@ -432,6 +467,14 @@ public abstract class AbstractInvocationConstructor implements InvocationConstru
 	 * Create the mapping instance. In due course, its execute() method is invoked.
 	 */
 	protected abstract @NonNull Invocation newInstance(@NonNull Object @NonNull [] values);
+
+	/**
+	 * Create the mapping instance. In due course, its execute() method is invoked.
+	 * Eventually the invocationHashCode may be used to facilitate destroy().
+	 */
+	protected @NonNull Invocation newInstance(int invocationHashCode, @NonNull Object @NonNull [] values) {
+		return newInstance(values);
+	}
 
 	@Override
 	public void propagate() {

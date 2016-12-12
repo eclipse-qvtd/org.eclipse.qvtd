@@ -148,6 +148,17 @@ public abstract class AbstractIncrementalConnectionInternal extends AbstractConn
 	}
 
 	@Override
+	public int debugGetSize() {
+		int size = 0;
+		for (@Nullable List<@NonNull Object> valueAndConsumingInvocations : listOfValueAndConsumingInvocations) {
+			if (valueAndConsumingInvocations != null) {
+				size++;
+			}
+		}
+		return size;
+	}
+
+	@Override
 	public @NonNull Iterable<@NonNull InvocationConstructor> getAppenders() {
 		return appenders;
 	}

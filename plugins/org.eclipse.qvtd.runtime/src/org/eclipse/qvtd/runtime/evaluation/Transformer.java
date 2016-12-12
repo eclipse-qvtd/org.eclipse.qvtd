@@ -48,5 +48,6 @@ public interface Transformer extends ExecutionVisitable
 	@NonNull ObjectManager getObjectManager();
 	@NonNull Collection<@NonNull ? extends EObject> getRootEObjects(@NonNull String modelName);
 	@NonNull Collection<@NonNull Object> getRootObjects(@NonNull String modelName);
+	@NonNull TypedModelInstance getTypedModelInstance(@NonNull String modelName);
 	boolean run() throws Exception;
 }

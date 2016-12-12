@@ -45,13 +45,31 @@ public class StrictIncrementalConnection extends StrictIncrementalConnectionInte
 				if (count <= 0) {
 					listOfValueAndConsumingInvocations.set(i, null);
 					int jMax = valueAndConsumingInvocations.size();
-					for (int j = INDEX_INDEX+1; j < jMax; j++) {
+					for (int j = COUNT_INDEX+1; j < jMax; j++) {
 						AbstractInvocation.Incremental consumingInvocation = (AbstractInvocation.Incremental) valueAndConsumingInvocations.get(j);
-						consumingInvocation.revokeExecution();
+						consumingInvocation.revoke();
 					}
 				}
 				else {
 					valueAndConsumingInvocations.set(COUNT_INDEX, count-1);
+				}
+				break;
+			}
+		}
+	}
+
+	@Override
+	public void revokeConsumer(@NonNull Object anElement, Invocation.@NonNull Incremental invocation) {	// FIXME Use connectionKey
+		for (int i = 0; i < listOfValueAndConsumingInvocations.size(); i++) {
+			List<@NonNull Object> valueAndConsumingInvocations = listOfValueAndConsumingInvocations.get(i);
+			if ((valueAndConsumingInvocations != null) && (valueAndConsumingInvocations.get(VALUE_INDEX) == anElement)) {
+				int jMax = valueAndConsumingInvocations.size();
+				for (int j = COUNT_INDEX+1; j < jMax; j++) {
+					AbstractInvocation.Incremental consumingInvocation = (AbstractInvocation.Incremental) valueAndConsumingInvocations.get(j);
+					if (consumingInvocation == invocation) {
+						valueAndConsumingInvocations.remove(j);
+						break;
+					}
 				}
 				break;
 			}

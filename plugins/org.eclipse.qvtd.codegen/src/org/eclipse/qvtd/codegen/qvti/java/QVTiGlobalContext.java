@@ -26,6 +26,8 @@ import org.eclipse.ocl.pivot.Property;
 public class QVTiGlobalContext extends JavaGlobalContext<@NonNull QVTiCodeGenerator>
 {
 	public static final @NonNull String CONSTRUCTOR_NAME = "constructor";
+	public static final @NonNull String INVOCATION_HASH_CODE_NAME = "invocationHashCode";
+	public static final @NonNull String OBJECT_MANAGER_NAME = "objectManager";
 	public static final @NonNull String MODELS_NAME = "models";
 
 	/**
@@ -38,7 +40,9 @@ public class QVTiGlobalContext extends JavaGlobalContext<@NonNull QVTiCodeGenera
 		nameManager.reserveName(JavaConstants.EXECUTOR_NAME, null);
 		nameManager.reserveName(JavaConstants.EVALUATION_CACHE_NAME, null);
 		nameManager.reserveName(CONSTRUCTOR_NAME, null);
+		nameManager.reserveName(INVOCATION_HASH_CODE_NAME, null);
 		nameManager.reserveName(MODELS_NAME, null);
+		nameManager.reserveName(OBJECT_MANAGER_NAME, null);
 	}
 
 	public @NonNull String addOppositeProperty(@NonNull Property pivotProperty) {

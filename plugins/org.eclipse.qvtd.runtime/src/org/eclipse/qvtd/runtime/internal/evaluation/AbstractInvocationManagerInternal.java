@@ -18,7 +18,10 @@ import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.qvtd.runtime.evaluation.AbstractInvocationManager;
 import org.eclipse.qvtd.runtime.evaluation.DefaultInterval;
 import org.eclipse.qvtd.runtime.evaluation.Interval;
+import org.eclipse.qvtd.runtime.evaluation.Invocation;
 import org.eclipse.qvtd.runtime.evaluation.InvocationConstructor;
+
+import com.google.common.collect.Iterables;
 
 /**
  * InvocationManager supervises and provides thread safety for the lists of blocked and waiting invocations.
@@ -69,6 +72,14 @@ public abstract class AbstractInvocationManagerInternal extends AbstractInvocati
 		invokers.add(invoker);
 		return invoker;
 	} */
+
+	public @NonNull Iterable<@NonNull Invocation> debugGetAllInvocations() {
+		List<@NonNull Invocation> allInvocations = new ArrayList<>();
+		for (@NonNull InvocationConstructor invoker : invokers) {
+			Iterables.addAll(allInvocations, invoker.debugGetInvocations());
+		}
+		return allInvocations;
+	}
 
 	@Override
 	public boolean flush() {

@@ -61,7 +61,7 @@ public abstract class AbstractSlotState implements SlotState
 
 		protected void revokeTargets() {
 			for (Execution.@NonNull Incremental target : getTargets()) {
-				target.revokeExecution();
+				target.revoke();
 			}
 		}
 	}

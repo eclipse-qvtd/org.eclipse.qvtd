@@ -125,6 +125,29 @@ public abstract class AbstractIntervalInternal implements Interval
 		return connection;
 	}
 
+	public synchronized void destroy(@NonNull Invocation invocation) {
+		assert invocation.getInterval() == this;
+		if (debugInvocations) {
+			AbstractTransformer.INVOCATIONS.println("destroy " + invocation);
+		}
+		AbstractInvocationInternal castInvocation = (AbstractInvocationInternal) invocation;
+		assert blockedInvocations != castInvocation;
+		if (waitingInvocations == castInvocation) {
+			waitingInvocations = castInvocation.next;
+			if (waitingInvocations == castInvocation) {
+				waitingInvocations = null;
+			}
+		}
+		AbstractInvocationInternal prevInvocation = castInvocation.prev;
+		if (prevInvocation != castInvocation) {
+			AbstractInvocationInternal nextInvocation = castInvocation.next;
+			prevInvocation.next = nextInvocation;
+			nextInvocation.prev = prevInvocation;
+			castInvocation.next = castInvocation;
+			castInvocation.prev = castInvocation;
+		}
+	}
+
 	@Override
 	public boolean flush() {
 		while (headConnection != null) {

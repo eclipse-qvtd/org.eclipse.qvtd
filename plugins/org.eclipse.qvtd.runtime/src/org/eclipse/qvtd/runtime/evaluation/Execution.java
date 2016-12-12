@@ -30,13 +30,13 @@ public interface Execution extends ExecutionVisitable, Nameable
 		 * Revoke the consequences of a previous execution in preparation for a new execution.
 		 * This reverts all assigned slot states back to REASSIGNABLE.
 		 */
-		void revokeExecution();
+		void revoke();
 
 		/**
 		 * Revoke the consequences of a previous execution that will not be re-executed.
 		 * All created objects are revoked.
 		 */
-		void revokeInvocation();
+		void destroy();
 	}
 
 	@Override

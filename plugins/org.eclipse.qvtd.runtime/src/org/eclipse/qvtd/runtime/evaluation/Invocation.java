@@ -49,8 +49,10 @@ public interface Invocation extends Execution
 	{
 		void addCreatedObject(@NonNull Object createdObject);
 		void addWriteSlot(SlotState.@NonNull Incremental writeSlot);
+		@NonNull Object getBoundValue(int index);
+		int getBoundValues();
+		InvocationConstructor.@NonNull Incremental getConstructor();
 		@NonNull Iterable<SlotState.@NonNull Incremental> getReadSlots();
 		@NonNull Iterable<SlotState.@NonNull Incremental> getWriteSlots();
-		//		void invalidate();
 	}
 }

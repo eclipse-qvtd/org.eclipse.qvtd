@@ -128,7 +128,7 @@ public abstract class StrictIncrementalConnectionInternal extends AbstractIncrem
 		int iMax = valueAndConsumingInvocations.size();
 		for (int i = COUNT_INDEX+1; i < iMax; i++) {
 			AbstractInvocation.Incremental consumingInvocation = (AbstractInvocation.Incremental) valueAndConsumingInvocations.get(i);
-			consumingInvocation.revokeExecution();
+			consumingInvocation.revoke();
 		}
 	}
 }

@@ -26,7 +26,12 @@ public abstract class AbstractComputation implements Computation
 	{
 		public static final @NonNull List<@NonNull Object> EMPTY_OBJECT_LIST = Collections.emptyList();
 
+		protected final @NonNull String name;
 		private Set<SlotState.@NonNull Incremental> readSlots = null;
+
+		protected Incremental(@NonNull String name) {
+			this.name = name;
+		}
 
 		@Override
 		public void addReadSlot(SlotState.@NonNull Incremental readSlot) {
@@ -43,13 +48,18 @@ public abstract class AbstractComputation implements Computation
 		}
 
 		@Override
-		public void revokeExecution() {
+		public void destroy() {
 			// TODO Auto-generated method stub
 
 		}
 
 		@Override
-		public void revokeInvocation() {
+		public @NonNull String getName() {
+			return name;
+		}
+
+		@Override
+		public void revoke() {
 			// TODO Auto-generated method stub
 
 		}

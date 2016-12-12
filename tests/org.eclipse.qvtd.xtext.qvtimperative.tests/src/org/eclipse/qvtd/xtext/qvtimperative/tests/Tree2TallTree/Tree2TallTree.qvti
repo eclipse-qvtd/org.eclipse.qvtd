@@ -9,31 +9,27 @@ transformation Tree2TallTree {
 }
 
 map __root__ in Tree2TallTree {
---    buffer nodes := tree.objectsOfKind(Node)->sortedBy(name);
-    buffer nodes := tree.objectsOfKind(Node);
-    for node : tree::Node in nodes {
-        call Node2MiddleNode {
-            node iterates node;
-        } 
+    append nodes : tree::Node;
+    buffer node2tallNodes : tree2talltree::Node2TallNode;
+    install Node2MiddleNode {
+        node consumes nodes;
+        node2tallNodes appendsTo node2tallNodes;	
     } 
-    for node : tree::Node in nodes {
-        call Edge2MiddleEdge {
-            node iterates node;
-        } 
+    install Edge2MiddleEdge {
+        node consumes nodes;
     } 
---    for node2tallNode : tree2talltree::Node2TallNode in tree2talltree.objectsOfKind(Node2TallNode)->sortedBy(name) {
-    for node2tallNode : tree2talltree::Node2TallNode in tree2talltree.objectsOfKind(Node2TallNode) {
-        call MiddleNode2TallNode {
-            node2tallNode iterates node2tallNode;	
-        } 
+    install MiddleNode2TallNode {
+        node2tallNode consumes node2tallNodes;	
     } 
 }
 
 map Node2MiddleNode in Tree2TallTree {
 	guard:tree node : Node; 
+	append node2tallNodes : tree2talltree::Node2TallNode; 
 	new:tree2talltree node2tallNode : Node2TallNode;
 	set node2tallNode.node := node;
 	set node2tallNode.name := node.name;
+	add node2tallNodes += node2tallNode;
 }
 
 map Edge2MiddleEdge in Tree2TallTree {

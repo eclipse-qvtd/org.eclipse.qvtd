@@ -63,6 +63,11 @@ public class IncrementalConnectionInternal extends AbstractIncrementalConnection
 		}
 	}
 
+	@Override
+	public void consume(int elementIndex, @NonNull Invocation invocation) {
+		super.consume(elementIndex, invocation);
+	}
+
 	/**
 	 * Remove, inverse append, the old anElement. The old value is removed,
 	 * its consumingInvocations are revoked so that their appends are also revoked.
@@ -76,7 +81,7 @@ public class IncrementalConnectionInternal extends AbstractIncrementalConnection
 				int jMax = valueAndConsumingInvocations.size();
 				for (int j = INDEX_INDEX+1; j < jMax; j++) {
 					AbstractInvocation.Incremental consumingInvocation = (AbstractInvocation.Incremental) valueAndConsumingInvocations.get(j);
-					consumingInvocation.revokeExecution();
+					consumingInvocation.destroy();
 				}
 				break;
 			}
@@ -103,8 +108,8 @@ public class IncrementalConnectionInternal extends AbstractIncrementalConnection
 	}
 
 	/**
-	 * Revoke, inverse append, the old value at connectionKey. The old value is removed,
-	 * its consumingInvocations are revoked so that their appends are also revoked.
+	 * Revoke, inverse append, the old value at connectionKey. The old object at copnnectionKey no longer exists.
+	 * Its consumingInvocations are destroyed.
 	 */
 	@Override
 	public synchronized void revoke(@NonNull Object connectionKey) {
@@ -114,7 +119,25 @@ public class IncrementalConnectionInternal extends AbstractIncrementalConnection
 		int iMax = valueAndConsumingInvocations.size();
 		for (int i = INDEX_INDEX+1; i < iMax; i++) {
 			AbstractInvocation.Incremental consumingInvocation = (AbstractInvocation.Incremental) valueAndConsumingInvocations.get(i);
-			consumingInvocation.revokeExecution();
+			consumingInvocation.destroy();
+		}
+	}
+
+	@Override
+	public void revokeConsumer(@NonNull Object anElement, Invocation.@NonNull Incremental invocation) {	// FIXME Use connectionKey
+		for (int i = 0; i < listOfValueAndConsumingInvocations.size(); i++) {
+			List<@NonNull Object> valueAndConsumingInvocations = listOfValueAndConsumingInvocations.get(i);
+			if ((valueAndConsumingInvocations != null) && (valueAndConsumingInvocations.get(VALUE_INDEX) == anElement)) {
+				int jMax = valueAndConsumingInvocations.size();
+				for (int j = INDEX_INDEX+1; j < jMax; j++) {
+					AbstractInvocation.Incremental consumingInvocation = (AbstractInvocation.Incremental) valueAndConsumingInvocations.get(j);
+					if (consumingInvocation == invocation) {
+						valueAndConsumingInvocations.remove(j);
+						break;
+					}
+				}
+				break;
+			}
 		}
 	}
 }

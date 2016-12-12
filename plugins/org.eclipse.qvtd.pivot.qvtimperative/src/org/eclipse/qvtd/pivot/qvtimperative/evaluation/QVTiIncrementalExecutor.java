@@ -77,15 +77,15 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 
 		public InterpretedInvocationConstructor(@NonNull QVTiIncrementalExecutor executor, @NonNull Mapping asMapping,
 				@NonNull MappingCall mappingCall, @NonNull EvaluationVisitor undecoratedVisitor) {
-			super(executor.getInvocationManager(), QVTimperativeUtil.getName(asMapping), asMapping.isIsStrict());
+			super(executor.getInvocationManager(), QVTimperativeUtil.getName(asMapping));
 			this.executor = executor;
 			this.mappingCall = mappingCall;
 			this.undecoratedVisitor = undecoratedVisitor;
 		}
 
 		@Override
-		public @NonNull Invocation newInstance(@NonNull Object @NonNull [] theseValues) {
-			return new InterpretedInvocation(this, theseValues);
+		public @NonNull Invocation newInstance(int invocationHashCode, @NonNull Object @NonNull [] theseValues) {
+			return new InterpretedInvocation(this, invocationHashCode, theseValues);
 		}
 
 		private Object internalExecuteInvocation(@NonNull InterpretedInvocation invocation, @NonNull Object @NonNull [] theseValues) {
@@ -97,8 +97,8 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 	{
 		protected final @NonNull Object @NonNull [] theseValues;
 
-		public InterpretedInvocation(@NonNull InterpretedInvocationConstructor constructor, @NonNull Object @NonNull [] theseValues) {
-			super(constructor);
+		public InterpretedInvocation(@NonNull InterpretedInvocationConstructor constructor, int invocationHashCode, @NonNull Object @NonNull [] theseValues) {
+			super(constructor, invocationHashCode);
 			int iMax = theseValues.length;
 			this.theseValues = new @NonNull Object[iMax];
 			for (int i = 0; i < iMax; i++) {
@@ -110,6 +110,16 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 		public boolean execute() throws InvocationFailedException {
 			Object returnStatus = ((InterpretedInvocationConstructor)constructor).internalExecuteInvocation(this, theseValues);
 			return returnStatus == ValueUtil.TRUE_VALUE;
+		}
+
+		@Override
+		public @NonNull Object getBoundValue(int index) {
+			return theseValues[index];
+		}
+
+		@Override
+		public int getBoundValues() {
+			return theseValues.length;
 		}
 
 		@Override
@@ -192,7 +202,7 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 			{
 				@Override
 				public @NonNull Computation newInstance(@Nullable Object @NonNull [] theseValues) {
-					Computation.Incremental computation = new AbstractComputation.Incremental()
+					Computation.Incremental computation = new AbstractComputation.Incremental(PivotUtil.getName(asFunction))
 					{
 						protected Object result = QVTiIncrementalExecutor.super.internalExecuteFunctionCallExp(operationCallExp, asFunction, theseValues);
 

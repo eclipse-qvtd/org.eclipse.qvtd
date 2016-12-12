@@ -70,6 +70,8 @@ public interface Connection extends ExecutionVisitable, Nameable
 		 * so that their appends are also revoked.
 		 */
 		void revoke(@NonNull Object connectionKey);
+
+		void revokeConsumer(@NonNull Object anElement, Invocation.@NonNull Incremental invocation);
 	}
 
 	void addAppender(@NonNull InvocationConstructor appendingInvoker);
@@ -83,6 +85,8 @@ public interface Connection extends ExecutionVisitable, Nameable
 	 * Return the new entry.
 	 */
 	@NonNull Object appendElement(@NonNull Object anElement);
+
+	int debugGetSize();
 
 	int getCapacity();
 

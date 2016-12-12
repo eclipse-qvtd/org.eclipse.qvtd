@@ -17,6 +17,7 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.ids.TypeId;
+import org.eclipse.qvtd.runtime.internal.evaluation.AbstractIntervalInternal;
 import org.eclipse.qvtd.runtime.internal.evaluation.AbstractInvocationInternal;
 
 /**
@@ -29,16 +30,19 @@ public abstract class AbstractInvocation extends AbstractInvocationInternal
 		public static final @NonNull List<@NonNull Object> EMPTY_OBJECT_LIST = Collections.emptyList();
 		public static final @NonNull List<SlotState.@NonNull Incremental> EMPTY_SLOT_LIST = Collections.emptyList();
 
-		protected final @NonNull InvocationConstructor constructor;
+		protected final InvocationConstructor.@NonNull Incremental constructor;
+		private final int invocationHashCode;
 		protected final int sequence;
 
 		private Set<@NonNull Object> createdObjects = null;
 		private Set<SlotState.@NonNull Incremental> readSlots = null;
 		private Set<SlotState.@NonNull Incremental> writeSlots = null;
+		private boolean isDestroyed = false;
 
-		protected Incremental(InvocationConstructor.@NonNull Incremental constructor) {
+		protected Incremental(InvocationConstructor.@NonNull Incremental constructor, int invocationHashCode) {
 			super(constructor);
 			this.constructor = constructor;
+			this.invocationHashCode = invocationHashCode;
 			this.sequence = constructor.nextSequence();
 		}
 
@@ -77,6 +81,33 @@ public abstract class AbstractInvocation extends AbstractInvocationInternal
 		}
 
 		@Override
+		public void destroy() {
+			isDestroyed = true;
+			((AbstractIntervalInternal)interval).destroy(this);
+			constructor.destroy(this, invocationHashCode);
+			if (AbstractTransformer.INVOCATIONS.isActive()) {
+				AbstractTransformer.INVOCATIONS.println("destroy " + this);
+			}
+			if (writeSlots != null) {
+				for (SlotState.@NonNull Incremental writeSlot : writeSlots) {
+					writeSlot.revokeAssigned();
+				}
+			}
+			/*
+			 * Revoke all consumed input objects.
+			 */
+			int i = 0;
+			for (Connection.@NonNull Incremental consumedConnection : constructor.getConsumedConnections()) {
+				consumedConnection.revokeConsumer(getBoundValue(i), this);
+			}
+		}
+
+		@Override
+		public InvocationConstructor.@NonNull Incremental getConstructor() {
+			return constructor;
+		}
+
+		@Override
 		public @NonNull Iterable<@NonNull Object> getCreatedObjects() {
 			return createdObjects != null ? createdObjects : EMPTY_OBJECT_LIST;
 		}
@@ -99,28 +130,28 @@ public abstract class AbstractInvocation extends AbstractInvocationInternal
 		}
 
 		@Override
-		public void revokeExecution() {
+		public void revoke() {
+			if (AbstractTransformer.INVOCATIONS.isActive()) {
+				AbstractTransformer.INVOCATIONS.println("revoke " + this);
+			}
 			if (writeSlots != null) {
 				for (SlotState.@NonNull Incremental writeSlot : writeSlots) {
 					writeSlot.revokeAssigned();
 				}
 			}
-			interval.queue(this);
-		}
-
-		@Override
-		public void revokeInvocation() {
-			if (writeSlots != null) {
-				for (SlotState.@NonNull Incremental writeSlot : writeSlots) {
-					writeSlot.revokeAssigned();
-				}
+			if (!isDestroyed) {
+				interval.queue(this);
 			}
-			interval.queue(this);
 		}
 
 		@Override
 		public @NonNull String toString() {
 			return getName();
+		}
+
+		@Override
+		public void unblock() {
+			super.unblock();
 		}
 	}
 

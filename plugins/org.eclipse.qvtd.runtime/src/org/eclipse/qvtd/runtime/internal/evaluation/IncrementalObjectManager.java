@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibPackage;
 import org.eclipse.ocl.pivot.utilities.LabelUtil;
 import org.eclipse.qvtd.runtime.evaluation.AbstractObjectManager;
@@ -42,7 +43,7 @@ public class IncrementalObjectManager extends AbstractObjectManager
 		public enum SlotMode {
 			ASSIGNABLE,		// No assignment has been performed, object reads are blocked (collections reads may be unblocked)
 			ASSIGNED,		// Last assignment has been performed, reads are unblocked
-			REASSIGNABLE,	// No assignment has been performed by a re-execution, object reads are blocked (collections reads may be unblocked)
+			REASSIGNABLE	// No assignment has been performed by a re-execution, object reads are blocked (collections reads may be unblocked)
 		}
 
 		protected final @NonNull Object eObject;
@@ -137,8 +138,11 @@ public class IncrementalObjectManager extends AbstractObjectManager
 
 		@Override
 		public void revokeAssigned() {
-			assert isAssigned();
+			SlotMode mode2 = mode;
 			mode = SlotMode.REASSIGNABLE;
+			if (mode2 == SlotMode.ASSIGNED) {
+				revokeTargets();
+			}
 		}
 
 		@Override
@@ -425,7 +429,7 @@ public class IncrementalObjectManager extends AbstractObjectManager
 				}
 			}
 			//			super.assigned(objectManager, eObject, eFeature, ecoreValue);
-			assignedElement(eObject, (EReference)eFeature, (EObject)ecoreValue);
+			assignedElement(eObject, (EReference)eFeature, /*(EObject)*/ecoreValue);
 		}
 
 		public void assignedElement(@NonNull Object eContainer, @NonNull EReference eReference, Object eObject) {
@@ -726,6 +730,19 @@ public class IncrementalObjectManager extends AbstractObjectManager
 		invocation.addWriteSlot(slotState);
 	}
 
+	public @Nullable Map<@NonNull EStructuralFeature, @NonNull BasicSlotState> basicGetObjectState(@NonNull Object eObject) {
+		return object2feature2slotState.get(eObject);
+	}
+
+	public @Nullable BasicSlotState basicGetSlotState(@NonNull Object eObject, @NonNull EStructuralFeature eFeature) {
+		assert eFeature != null;
+		Map<EStructuralFeature, BasicSlotState> objectState = basicGetObjectState(eObject);
+		if (objectState == null) {
+			return null;
+		}
+		return objectState.get(eFeature);
+	}
+
 	@NonNull BasicSlotState createManyToManySlotState(
 			@NonNull Object eObject, @NonNull EReference eFeature, @NonNull EReference eOppositeFeature) {
 		throw new UnsupportedOperationException();
@@ -769,7 +786,13 @@ public class IncrementalObjectManager extends AbstractObjectManager
 		invocation.addCreatedObject(eObject);
 	}
 
-	public @NonNull Map<EStructuralFeature, BasicSlotState> getObjectState(@NonNull Object eObject) {
+	@Override
+	public void destroyed(@NonNull Object eObject) {
+		PivotUtilInternal.resetContainer((EObject) eObject);
+		object2feature2slotState.remove(eObject);
+	}
+
+	public @NonNull Map<@NonNull EStructuralFeature, @NonNull BasicSlotState> getObjectState(@NonNull Object eObject) {
 		Map<@NonNull EStructuralFeature, @NonNull BasicSlotState> feature2state = object2feature2slotState.get(eObject);
 		if (feature2state == null) {
 			feature2state = new HashMap<@NonNull EStructuralFeature, @NonNull BasicSlotState>();
@@ -856,9 +879,11 @@ public class IncrementalObjectManager extends AbstractObjectManager
 	}
 
 	public void modified(@NonNull Object eObject, @NonNull EStructuralFeature eFeature) {
-		BasicSlotState slotState = getSlotState(eObject, eFeature);
-		for (Execution.@NonNull Incremental execution : slotState.getTargets()) {
-			execution.revokeExecution();
+		BasicSlotState slotState = basicGetSlotState(eObject, eFeature);
+		if (slotState != null) {
+			for (Execution.@NonNull Incremental execution : slotState.getTargets()) {
+				execution.revoke();
+			}
 		}
 	}
 }

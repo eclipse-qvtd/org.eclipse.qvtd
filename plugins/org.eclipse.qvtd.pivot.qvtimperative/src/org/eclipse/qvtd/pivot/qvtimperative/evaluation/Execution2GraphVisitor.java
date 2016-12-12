@@ -220,7 +220,7 @@ public class Execution2GraphVisitor extends AbstractExecutionVisitor<@Nullable O
 				public void appendNode(@NonNull GraphStringBuilder s, @NonNull String nodeName) {
 					s.setLabel(label);
 					s.setShape("ellipse");
-					s.setColor("brown");
+					s.setColor("blue");
 					s.appendAttributedNode(nodeName);
 				}
 			};
@@ -419,7 +419,7 @@ public class Execution2GraphVisitor extends AbstractExecutionVisitor<@Nullable O
 			Object value = object.getValue(i);
 			if (value != null) {
 				GraphNode objectNode = getObjectNode(value);
-				appendEdge(connectionNode, objectNode, "brown", "dotted");
+				appendEdge(connectionNode, objectNode, "blue", "dotted");
 				//			for (@NonNull Invocation invocation : object.getConsumers(i)) {
 				//				GraphNode consumerNode = getInvocationNode(invocation);
 				//			}
@@ -502,8 +502,22 @@ public class Execution2GraphVisitor extends AbstractExecutionVisitor<@Nullable O
 
 	@Override
 	public @Nullable String visitInvocation(@NonNull Invocation object) {
-		@SuppressWarnings("unused")
 		GraphNode invocationNode = getInvocationNode(object);
+		if (object instanceof Invocation.Incremental) {
+			Invocation.Incremental invocation = (Invocation.Incremental)object;
+			int iMax = invocation.getBoundValues();
+			for (int i = 0; i < iMax; i++) {
+				Object boundObject = invocation.getBoundValue(i);
+				if (boundObject instanceof Connection) {
+					GraphNode connectionNode = getConnectionNode((Connection) boundObject);
+					appendEdge(invocationNode, connectionNode, "green", "dotted");
+				}
+				else {
+					GraphNode objectNode = getObjectNode(boundObject);
+					appendEdge(objectNode, invocationNode, "cyan", null);
+				}
+			}
+		}
 		/*		context.appendNode(mappingId, "hexagon", "#ffcc00", 30, 150, mappingId.replace("-",  "\n"));
 			for (ElementStatus inputStatus : object.getInputs()) {
 				if (inputStatus instanceof ClassStatus) {
@@ -537,7 +551,7 @@ public class Execution2GraphVisitor extends AbstractExecutionVisitor<@Nullable O
 		GraphNode invokerNode = getInvocationConstructorNode(object);
 		GraphNode intervalNode = getIntervalNode(object.getInterval());
 		appendEdge(invokerNode, intervalNode, "black", "dashed");
-		for (@NonNull Invocation invocation : object.getInvocations()) {
+		for (@NonNull Invocation invocation : object.debugGetInvocations()) {
 			GraphNode invocationNode = getInvocationNode(invocation);
 			appendEdge(invokerNode, invocationNode, "orange", "dotted");
 		}
@@ -593,10 +607,10 @@ public class Execution2GraphVisitor extends AbstractExecutionVisitor<@Nullable O
 			GraphNode slotNode = getSlotNode(slotState);
 			slotState.accept(this);
 			for (@NonNull Invocation invocation : slotState.getSources()) {
-				appendEdge(getInvocationNode(invocation), slotNode, "green", null);
+				appendEdge(getInvocationNode(invocation), slotNode, "green", "dashed");
 			}
 			for (@NonNull Execution invocation : slotState.getTargets()) {
-				appendEdge(slotNode, getExecutionNode(invocation), "cyan", null);
+				appendEdge(slotNode, getExecutionNode(invocation), "cyan", "dashed");
 			}
 			Iterables.addAll(allExecutions, slotState.getTargets());
 		}
@@ -607,7 +621,7 @@ public class Execution2GraphVisitor extends AbstractExecutionVisitor<@Nullable O
 				for (SlotState.@NonNull Incremental slotState : slots) {
 					GraphNode slotNode = getSlotNode(slotState);
 					slotState.accept(this);
-					appendEdge(objectNode, slotNode, "blue", null);
+					appendEdge(objectNode, slotNode, "blue", "dashed");
 				}
 			}
 		}

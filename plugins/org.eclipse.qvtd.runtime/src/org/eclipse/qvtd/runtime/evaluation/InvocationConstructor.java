@@ -10,6 +10,8 @@
  *******************************************************************************/
 package org.eclipse.qvtd.runtime.evaluation;
 
+import java.util.List;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.utilities.Nameable;
 
@@ -22,6 +24,11 @@ public interface InvocationConstructor extends ExecutionVisitable, Nameable
 {
 	public interface Incremental extends InvocationConstructor
 	{
+		void addConsumedConnection(Connection.@NonNull Incremental connection);
+
+		void destroy(AbstractInvocation.@NonNull Incremental incremental, int invocationHashCode);
+
+		@NonNull List<Connection.@NonNull Incremental> getConsumedConnections();
 
 		int nextSequence();
 	}
@@ -30,9 +37,9 @@ public interface InvocationConstructor extends ExecutionVisitable, Nameable
 
 	void addConsumedConnection(@NonNull Connection connection);
 
-	@NonNull Interval getInterval();
+	@NonNull Iterable<@NonNull Invocation> debugGetInvocations();
 
-	@NonNull Iterable<@NonNull Invocation> getInvocations();
+	@NonNull Interval getInterval();
 
 	@Override
 	@NonNull String getName();
