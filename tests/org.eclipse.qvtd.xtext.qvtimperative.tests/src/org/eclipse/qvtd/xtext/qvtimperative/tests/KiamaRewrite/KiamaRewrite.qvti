@@ -3,256 +3,134 @@ import 'KiamaCS.ecore#/';
 
 transformation KiamaRewrite_qvtp_qvtcas
 {
-	leftCS imports kiamacs;
-	rightAS imports kiamaas;
+	check leftCS imports kiamacs;
+	enforce rightAS imports kiamaas;
 }
 
-map __root__ in KiamaRewrite_qvtp_qvtcas
+map r___root__ in KiamaRewrite_qvtp_qvtcas
 {
-	var roots : Set(ocl::OclElement) := leftCS.rootObjects();
-	var _'«child-NumCS»' : Set(kiamacs::NumCS) := roots->selectByKind(kiamacs::NumCS);
-	buffer ji_NumCS1 : kiamacs::NumCS := _'«child-NumCS»';
-	var _'«child-PlusCS»' : Set(kiamacs::PlusCS) := roots->selectByKind(kiamacs::PlusCS);
-	buffer ji_PlusCS1 : kiamacs::PlusCS := _'«child-PlusCS»';
-	var _'«child-TopCS»' : Set(kiamacs::TopCS) := roots->selectByKind(kiamacs::TopCS);
-	var ji_TopCS1 : Set(kiamacs::TopCS) := _'«child-TopCS»';
-	for loop0 : kiamacs::TopCS in ji_TopCS1 {
-		call m_TopCS_ast {
-			lTopCS iterates loop0;
-		}
+	var _'«NumCS»' : Set(kiamacs::NumCS) := leftCS.objectsOfKind(kiamacs::NumCS);
+	buffer ji_NumCS : kiamacs::NumCS := _'«NumCS»';
+	var _'«PlusCS»' : Set(kiamacs::PlusCS) := leftCS.objectsOfKind(kiamacs::PlusCS);
+	buffer ji_PlusCS : kiamacs::PlusCS := _'«PlusCS»';
+	var _'«TopCS»' : Set(kiamacs::TopCS) := leftCS.objectsOfKind(kiamacs::TopCS);
+	buffer ji_TopCS : kiamacs::TopCS := _'«TopCS»';
+	install m_Num_height_value_e {
+		lNumCS consumes ji_NumCS;
 	}
-	for loop0 : kiamacs::TopCS in ji_TopCS1 {
-		call r_TopCS_node {
-			ji_NumCS appendsTo ji_NumCS1;
-			ji_PlusCS appendsTo ji_PlusCS1;
-			_'«parent»' iterates loop0;
-		}
+	install m_Plus__ast {
+		lPlusCS consumes ji_PlusCS;
 	}
-	for loop0 : kiamacs::PlusCS in ji_PlusCS1 {
-		call r__PlusCS {
-			ji_NumCS appendsTo ji_NumCS1;
-			ji_PlusCS appendsTo ji_PlusCS1;
-			_'«head»' iterates loop0;
-		}
+	install m_Top__ast {
+		lTopCS consumes ji_TopCS;
 	}
-	for loop0 : kiamacs::NumCS in ji_NumCS1 {
-		call m_NumCS_ast {
-			lNumCS iterates loop0;
-		}
+	install m_Node__Plus_Plus_left_right_lc {
+		lPlusCS consumes ji_PlusCS;
 	}
-	for loop0 : kiamacs::PlusCS in ji_PlusCS1 {
-		call m_PlusCS_ast_2 {
-			lPlusCS iterates loop0;
-		}
+	install m_Node__Top_node {
+		lTopCS consumes ji_TopCS;
 	}
-	for loop0 : kiamacs::NumCS in ji_NumCS1 {
-		call m_NumCS_ast_value_1 {
-			lNumCS iterates loop0;
-		}
+	install m_Node__depth_1 {
+		lPlusCS consumes ji_PlusCS;
 	}
-	for loop0 : kiamacs::PlusCS in ji_PlusCS1 {
-		call m_PlusCS_ast_left {
-			lPlusCS iterates loop0;
-		}
+	install m_Node__depth {
+		lNumCS consumes ji_NumCS;
 	}
-	for loop0 : kiamacs::PlusCS in ji_PlusCS1 {
-		call m_PlusCS_ast_right {
-			lPlusCS iterates loop0;
-		}
-	}
-	for loop0 : kiamacs::TopCS in ji_TopCS1 {
-		call m_TopCS_ast_node {
-			lTopCS iterates loop0;
-		}
-	}
-	for loop0 : kiamacs::PlusCS in ji_PlusCS1 {
-		call m_PlusCS_ast_1 {
-			lPlusCS iterates loop0;
-		}
-	}
-	for loop0 : kiamacs::NumCS in ji_NumCS1 {
-		call m_NumCS_ast_2 {
-			lNumCS iterates loop0;
-		}
-	}
-	for loop0 : kiamacs::PlusCS in ji_PlusCS1 {
-		call m_PlusCS_ast {
-			lPlusCS iterates loop0;
-		}
+	install m_Node__height_1 {
+		lPlusCS consumes ji_PlusCS;
 	}
 }
 
-map m_NumCS_ast in KiamaRewrite_qvtp_qvtcas
+map m_Num_height_value_e in KiamaRewrite_qvtp_qvtcas
 {
-	guard:leftCS lNumCS : NumCS;
-	new:rightAS rNum : Num;
-	set lNumCS.ast := rNum;
-}
-
-map m_NumCS_ast_2 in KiamaRewrite_qvtp_qvtcas
-{
-	guard:leftCS lNumCS : NumCS;
-	var ast : ecore::EObject := lNumCS.ast;
-	var aNum : kiamaas::Num := ast.oclAsType(kiamaas::Num);
-	var oclContainer : ocl::OclElement := aNum.oclContainer;
-	var _'oclIsKindOf\nkiamaas::Top' : Boolean := oclContainer.oclIsKindOf(kiamaas::Top);
-	var _'if' : Integer := if _'oclIsKindOf\nkiamaas::Top'
-	then 0
-	else oclContainer.oclAsType(kiamaas::Plus).depth + 1 endif;
-	notify set aNum.depth := _'if';
-}
-
-map m_NumCS_ast_value_1 in KiamaRewrite_qvtp_qvtcas
-{
-	guard:leftCS lNumCS : NumCS;
-	var ast : ecore::EObject := lNumCS.ast;
+	guard:leftCS lNumCS : kiamacs::NumCS;
 	var value : ecore::EInt := lNumCS.value;
-	var aNum : kiamaas::Num := ast.oclAsType(kiamaas::Num);
-	notify set aNum.height := 0;
-	set aNum.value := value;
+	new:rightAS rNum : kiamaas::Num;
+	notify set rNum.height := 0;
+	set lNumCS.ast := rNum;
+	set rNum.value := value;
 }
 
-map m_PlusCS_ast in KiamaRewrite_qvtp_qvtcas
+map m_Plus__ast in KiamaRewrite_qvtp_qvtcas
 {
-	guard:leftCS lPlusCS : PlusCS;
-	var ast : ecore::EObject := lPlusCS.ast;
-	var aPlus : kiamaas::Plus := ast.oclAsType(kiamaas::Plus);
-	var left : kiamaas::Node := aPlus.left;
-	var right : kiamaas::Node := aPlus.right;
-	observe kiamaas::Node::height var height : ecore::EIntegerObject := left.height;
-	observe kiamaas::Node::height var height1 : ecore::EIntegerObject := right.height;
-	var oclAsSet : Set(ecore::EIntegerObject) := height.oclAsSet();
-	var including : Set(ecore::EIntegerObject) := oclAsSet->including(height1);
-	var max : ecore::EIntegerObject := including->max();
-	var _'+' : Integer := max + 1;
-	notify set aPlus.height := _'+';
-}
-
-map m_PlusCS_ast_1 in KiamaRewrite_qvtp_qvtcas
-{
-	guard:leftCS lPlusCS : PlusCS;
-	var ast : ecore::EObject := lPlusCS.ast;
-	var aPlus : kiamaas::Plus := ast.oclAsType(kiamaas::Plus);
-	var oclContainer : ocl::OclElement := aPlus.oclContainer;
-	var _'oclIsKindOf\nkiamaas::Top' : Boolean := oclContainer.oclIsKindOf(kiamaas::Top);
-	observe kiamaas::Node::depth var _'if' : Integer := if _'oclIsKindOf\nkiamaas::Top'
-	then 0
-	else oclContainer.oclAsType(kiamaas::Plus).depth + 1 endif;
-	notify set aPlus.depth := _'if';
-}
-
-map m_PlusCS_ast_2 in KiamaRewrite_qvtp_qvtcas
-{
-	guard:leftCS lPlusCS : PlusCS;
-	new:rightAS rPlus : Plus;
+	guard:leftCS lPlusCS : kiamacs::PlusCS;
+	new:rightAS rPlus : kiamaas::Plus;
 	set lPlusCS.ast := rPlus;
 }
 
-map m_PlusCS_ast_left in KiamaRewrite_qvtp_qvtcas
+map m_Top__ast in KiamaRewrite_qvtp_qvtcas
 {
-	guard:leftCS lPlusCS : PlusCS;
-	var ast : ecore::EObject := lPlusCS.ast;
-	var left : kiamacs::NodeCS := lPlusCS.left;
-	var aPlus : kiamaas::Plus := ast.oclAsType(kiamaas::Plus);
-	var ast1 : ecore::EObject := left.ast;
-	var aNode : kiamaas::Node := ast1.oclAsType(kiamaas::Node);
-	set aPlus.left := aNode;
-}
-
-map m_PlusCS_ast_right in KiamaRewrite_qvtp_qvtcas
-{
-	guard:leftCS lPlusCS : PlusCS;
-	var ast : ecore::EObject := lPlusCS.ast;
-	var right : kiamacs::NodeCS := lPlusCS.right;
-	var aPlus : kiamaas::Plus := ast.oclAsType(kiamaas::Plus);
-	var ast1 : ecore::EObject := right.ast;
-	var aNode : kiamaas::Node := ast1.oclAsType(kiamaas::Node);
-	set aPlus.right := aNode;
-}
-
-map m_TopCS_ast in KiamaRewrite_qvtp_qvtcas
-{
-	guard:leftCS lTopCS : TopCS;
-	new:rightAS rTop : Top;
+	guard:leftCS lTopCS : kiamacs::TopCS;
+	new:rightAS rTop : kiamaas::Top;
 	set lTopCS.ast := rTop;
 }
 
-map m_TopCS_ast_node in KiamaRewrite_qvtp_qvtcas
+map m_Node__Plus_Plus_left_right_lc in KiamaRewrite_qvtp_qvtcas
 {
-	guard:leftCS lTopCS : TopCS;
-	var ast : ecore::EObject := lTopCS.ast;
-	var node : kiamacs::NodeCS := lTopCS.node;
-	var aTop : kiamaas::Top := ast.oclAsType(kiamaas::Top);
-	var ast1 : ecore::EObject := node.ast;
-	var aNode : kiamaas::Node := ast1.oclAsType(kiamaas::Node);
-	set aTop.node := aNode;
+	guard:leftCS lPlusCS : kiamacs::PlusCS;
+	var ast : kiamaas::Node[1] := lPlusCS.ast;
+	var ast3 : kiamaas::Node[1] := lPlusCS.ast;
+	var left : kiamacs::NodeCS := lPlusCS.left;
+	var right : kiamacs::NodeCS := lPlusCS.right;
+	var aPlus : kiamaas::Plus[1] := ast.oclAsType(kiamaas::Plus);
+	var ast1 : kiamaas::Node := left.ast;
+	var ast2 : kiamaas::Node := right.ast;
+	check ast3 = lPlusCS.ast;
+	set aPlus.left := ast1;
+	set aPlus.right := ast2;
+
 }
 
-map r_PlusCS_left in KiamaRewrite_qvtp_qvtcas
+map m_Node__Top_node in KiamaRewrite_qvtp_qvtcas
 {
-	append ji_PlusCS : kiamacs::PlusCS;
-	append ji_NumCS : kiamacs::NumCS;
-	in:leftCS _'«parent»' : PlusCS;
-	var allChildren : Set(kiamacs::NodeCS) := _'«parent»'.left.oclAsSet();
-	var _'«child-PlusCS»' : Set(kiamacs::PlusCS) := allChildren->selectByKind(kiamacs::PlusCS);
-	var _'«child-NumCS»' : Set(kiamacs::NumCS) := allChildren->selectByKind(kiamacs::NumCS);
-	add ji_PlusCS += _'«child-PlusCS»';
-	add ji_NumCS += _'«child-NumCS»';
-	for aChild : kiamacs::PlusCS in _'«child-PlusCS»' {
-		call r_PlusCS_left {
-			_'«parent»' uses aChild;
-			ji_PlusCS appendsTo ji_PlusCS;
-			ji_NumCS appendsTo ji_NumCS;
-		}
-	}
+	guard:leftCS lTopCS : kiamacs::TopCS;
+	var ast : kiamaas::Node[1] := lTopCS.ast;
+	var node : kiamacs::NodeCS[1] := lTopCS.node;
+	var aTop : kiamaas::Top[1] := ast.oclAsType(kiamaas::Top);
+	var ast1 : kiamaas::Node := node.ast;
+	set aTop.node := ast1;
 }
 
-map r_PlusCS_right in KiamaRewrite_qvtp_qvtcas
+map m_Node__depth_1 in KiamaRewrite_qvtp_qvtcas
 {
-	append ji_PlusCS : kiamacs::PlusCS;
-	append ji_NumCS : kiamacs::NumCS;
-	in:leftCS _'«parent»' : PlusCS;
-	var allChildren : Set(kiamacs::NodeCS) := _'«parent»'.right.oclAsSet();
-	var _'«child-PlusCS»' : Set(kiamacs::PlusCS) := allChildren->selectByKind(kiamacs::PlusCS);
-	var _'«child-NumCS»' : Set(kiamacs::NumCS) := allChildren->selectByKind(kiamacs::NumCS);
-	add ji_PlusCS += _'«child-PlusCS»';
-	add ji_NumCS += _'«child-NumCS»';
-	for aChild : kiamacs::PlusCS in _'«child-PlusCS»' {
-		call r_PlusCS_right {
-			_'«parent»' uses aChild;
-			ji_PlusCS appendsTo ji_PlusCS;
-			ji_NumCS appendsTo ji_NumCS;
-		}
-	}
+	guard:leftCS lPlusCS : kiamacs::PlusCS;
+	var ast : kiamaas::Node[1] := lPlusCS.ast;
+	var aPlus : kiamaas::Plus[1] := ast.oclAsType(kiamaas::Plus);
+	var oclContainer : ocl::OclElement := aPlus.oclContainer;
+	var _'oclIsKindOf\nkiamaas::Top' : Boolean[1] := oclContainer.oclIsKindOf(kiamaas::Top);
+	observe kiamaas::Node::depth var _'if' : Integer[1] := if _'oclIsKindOf\nkiamaas::Top'
+	then 0
+	else oclContainer.oclAsType(kiamaas::Plus).depth + 1 endif;
+	notify set aPlus.depth := _'if';
+
 }
 
-map r_TopCS_node in KiamaRewrite_qvtp_qvtcas
+map m_Node__depth in KiamaRewrite_qvtp_qvtcas
 {
-	append ji_PlusCS : kiamacs::PlusCS;
-	append ji_PlusCS_3 : kiamacs::PlusCS;
-	append ji_NumCS : kiamacs::NumCS;
-	guard:leftCS _'«parent»' : TopCS;
-	var allChildren : Set(kiamacs::NodeCS) := _'«parent»'.node.oclAsSet();
-	var _'«child-PlusCS»' : Set(kiamacs::PlusCS) := allChildren->selectByKind(kiamacs::PlusCS);
-	var _'«child-NumCS»' : Set(kiamacs::NumCS) := allChildren->selectByKind(kiamacs::NumCS);
-	add ji_PlusCS += _'«child-PlusCS»';
-	add ji_PlusCS_3 += _'«child-PlusCS»';
-	add ji_NumCS += _'«child-NumCS»';
+	guard:leftCS lNumCS : kiamacs::NumCS;
+	var ast : kiamaas::Node[1] := lNumCS.ast;
+	var aNum : kiamaas::Num[1] := ast.oclAsType(kiamaas::Num);
+	var oclContainer : ocl::OclElement := aNum.oclContainer;
+	var _'oclIsKindOf\nkiamaas::Top' : Boolean[1] := oclContainer.oclIsKindOf(kiamaas::Top);
+	var _'if' : Integer[1] := if _'oclIsKindOf\nkiamaas::Top'
+	then 0
+	else oclContainer.oclAsType(kiamaas::Plus).depth + 1 endif;
+	set aNum.depth := _'if';
+
 }
 
-strict map r__PlusCS in KiamaRewrite_qvtp_qvtcas
+map m_Node__height_1 in KiamaRewrite_qvtp_qvtcas
 {
-	append ji_PlusCS : kiamacs::PlusCS;
-	append ji_NumCS : kiamacs::NumCS;
-	guard:leftCS _'«head»' : PlusCS;
-	call r_PlusCS_left {
-		ji_NumCS appendsTo ji_NumCS;
-		 ji_PlusCS appendsTo ji_PlusCS;
-		_'«parent»' uses _'«head»';
-	}
-	call r_PlusCS_right {
-		ji_NumCS appendsTo ji_NumCS;
-		 ji_PlusCS appendsTo ji_PlusCS;
-		_'«parent»' uses _'«head»';
-	}
+	guard:leftCS lPlusCS : kiamacs::PlusCS;
+	var ast : kiamaas::Node[1] := lPlusCS.ast;
+	var aPlus : kiamaas::Plus[1] := ast.oclAsType(kiamaas::Plus);
+	var left : kiamaas::Node := aPlus.left;
+	var right : kiamaas::Node := aPlus.right;
+	observe kiamaas::Node::height var height : ecore::EIntegerObject := right.height;
+	observe kiamaas::Node::height var height1 : ecore::EIntegerObject := left.height;
+	var oclAsSet : Set(ecore::EIntegerObject) := height1.oclAsSet();
+	var including : Set(ecore::EIntegerObject) := oclAsSet->including(height);
+	var max : ecore::EIntegerObject[1] := including->max();
+	var _'+' : Integer[1] := max + 1;
+	notify set aPlus.height := _'+';
 }
