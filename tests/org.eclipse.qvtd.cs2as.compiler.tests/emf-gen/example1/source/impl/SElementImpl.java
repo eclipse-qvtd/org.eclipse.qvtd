@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import example1.source.SElement;
 import example1.source.SourcePackage;
+import example1.target.util.Visitable;
 
 /**
  * <!-- begin-user-doc -->
@@ -44,7 +45,7 @@ public class SElementImpl extends MinimalEObjectImpl.Container implements SEleme
 	 * @generated
 	 * @ordered
 	 */
-	protected EObject ast;
+	protected Visitable ast;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -71,10 +72,10 @@ public class SElementImpl extends MinimalEObjectImpl.Container implements SEleme
 	 * @generated
 	 */
 	@Override
-	public EObject getAst() {
-		if (ast != null && ast.eIsProxy()) {
+	public Visitable getAst() {
+		if (ast != null && ((EObject)ast).eIsProxy()) {
 			InternalEObject oldAst = (InternalEObject)ast;
-			ast = eResolveProxy(oldAst);
+			ast = (Visitable)eResolveProxy(oldAst);
 			if (ast != oldAst) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, SourcePackage.SELEMENT__AST, oldAst, ast));
@@ -88,7 +89,7 @@ public class SElementImpl extends MinimalEObjectImpl.Container implements SEleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EObject basicGetAst() {
+	public Visitable basicGetAst() {
 		return ast;
 	}
 
@@ -98,8 +99,8 @@ public class SElementImpl extends MinimalEObjectImpl.Container implements SEleme
 	 * @generated
 	 */
 	@Override
-	public void setAst(EObject newAst) {
-		EObject oldAst = ast;
+	public void setAst(Visitable newAst) {
+		Visitable oldAst = ast;
 		ast = newAst;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, SourcePackage.SELEMENT__AST, oldAst, ast));
@@ -129,7 +130,7 @@ public class SElementImpl extends MinimalEObjectImpl.Container implements SEleme
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case SourcePackage.SELEMENT__AST:
-				setAst((EObject)newValue);
+				setAst((Visitable)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -144,7 +145,7 @@ public class SElementImpl extends MinimalEObjectImpl.Container implements SEleme
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case SourcePackage.SELEMENT__AST:
-				setAst((EObject)null);
+				setAst((Visitable)null);
 				return;
 		}
 		super.eUnset(featureID);

@@ -151,7 +151,7 @@ public class LookupEnvironmentImpl extends MinimalEObjectImpl.Container implemen
 	@Override
 	public <NE extends NamedElement> LookupEnvironment addElements(final Collection<NE> elements) {
 		/**
-		 * 
+		 *
 		 * LookupEnvironment{
 		 *   namedElements = namedElements->includingAll(elements), parentEnv = parentEnv
 		 * }
@@ -183,7 +183,7 @@ public class LookupEnvironmentImpl extends MinimalEObjectImpl.Container implemen
 	@Override
 	public LookupEnvironment addElement(final NamedElement element) {
 		/**
-		 * 
+		 *
 		 * LookupEnvironment{
 		 *   namedElements = namedElements->including(element), parentEnv = parentEnv
 		 * }

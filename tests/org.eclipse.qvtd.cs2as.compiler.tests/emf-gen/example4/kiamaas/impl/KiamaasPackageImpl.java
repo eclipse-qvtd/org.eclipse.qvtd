@@ -13,6 +13,7 @@
 package example4.kiamaas.impl;
 
 import example4.kiamaas.Composite;
+import example4.kiamaas.Element;
 import example4.kiamaas.KiamaasFactory;
 import example4.kiamaas.KiamaasPackage;
 import example4.kiamaas.Leaf;
@@ -60,6 +61,13 @@ public class KiamaasPackageImpl extends EPackageImpl implements KiamaasPackage {
 	 * @generated
 	 */
 	private EClass leafEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass elementEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -209,6 +217,16 @@ public class KiamaasPackageImpl extends EPackageImpl implements KiamaasPackage {
 	 * @generated
 	 */
 	@Override
+	public EClass getElement() {
+		return elementEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public KiamaasFactory getKiamaasFactory() {
 		return (KiamaasFactory)getEFactoryInstance();
 	}
@@ -243,6 +261,8 @@ public class KiamaasPackageImpl extends EPackageImpl implements KiamaasPackage {
 		createEReference(compositeEClass, COMPOSITE__CHILD);
 
 		leafEClass = createEClass(LEAF);
+
+		elementEClass = createEClass(ELEMENT);
 	}
 
 	/**
@@ -273,6 +293,8 @@ public class KiamaasPackageImpl extends EPackageImpl implements KiamaasPackage {
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
+		topEClass.getESuperTypes().add(this.getElement());
+		nodeEClass.getESuperTypes().add(this.getElement());
 		compositeEClass.getESuperTypes().add(this.getNode());
 		leafEClass.getESuperTypes().add(this.getNode());
 
@@ -288,6 +310,8 @@ public class KiamaasPackageImpl extends EPackageImpl implements KiamaasPackage {
 		initEReference(getComposite_Child(), this.getNode(), null, "child", null, 0, 1, Composite.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(leafEClass, Leaf.class, "Leaf", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(elementEClass, Element.class, "Element", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);

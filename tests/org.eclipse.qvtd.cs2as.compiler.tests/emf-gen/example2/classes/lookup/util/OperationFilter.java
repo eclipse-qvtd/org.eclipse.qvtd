@@ -49,12 +49,12 @@ public class OperationFilter
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Parameter = PACKid_http_c_s_s_cs2as_s_tests_s_example2_s_classes_s_1_0.getClassId("Parameter", 0);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_Argument = TypeId.ORDERED_SET.getSpecializedId(CLSSid_Argument);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_Parameter = TypeId.ORDERED_SET.getSpecializedId(CLSSid_Parameter);
-	
+
 	protected final @NonNull EvaluationCache evaluationCache;
 	protected final /*@Thrown*/ org.eclipse.ocl.pivot.evaluation.@org.eclipse.jdt.annotation.NonNull Executor executor;
 	protected final /*@Thrown*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull IdResolver idResolver;
 	protected final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<Argument> args;
-	
+
 	public OperationFilter(@NonNull Executor executor,final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<Argument> args) {
 		super(Operation.class);
 		this.args =  args;
@@ -62,15 +62,15 @@ public class OperationFilter
 		this.idResolver = executor.getIdResolver();
 		this.evaluationCache = ((ExecutorInternal.ExecutorInternalExtension)executor).getEvaluationCache();
 	}
-	
+
 	@Override
 	protected Boolean _matches(final /*@NonInvalid*/ example2.classes.@org.eclipse.jdt.annotation.NonNull Operation element_0) {
 		return INSTANCE_OperationFilter__matches.evaluate(element_0);
 	}
-	
+
 	/**
 	 * _'example2.classes.lookup.util'::OperationFilter::_matches(element : classes::Operation[1]) : Boolean[?]
-	 * 
+	 *
 	 * _'null' : Boolean[?]
 	 */
 	public class CACHE_OperationFilter__matches extends AbstractEvaluationOperation
@@ -150,7 +150,7 @@ public class OperationFilter
 					//
 					if (CAUGHT_eq_0 == ValueUtil.FALSE_VALUE) {					// Normal unsuccessful body evaluation result
 						forAll = ValueUtil.FALSE_VALUE;
-						break;														// Stop immediately 
+						break;														// Stop immediately
 					}
 					else if (CAUGHT_eq_0 == ValueUtil.TRUE_VALUE) {				// Normal successful body evaluation result
 						;															// Carry on
@@ -170,11 +170,11 @@ public class OperationFilter
 			final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean and = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_eq, CAUGHT_forAll);
 			return and;
 		}
-		
+
 		public Boolean evaluate(final /*@NonInvalid*/ example2.classes.@org.eclipse.jdt.annotation.NonNull Operation element_0) {
 			return (Boolean)evaluationCache.getCachedEvaluationResult(this, caller, new @Nullable Object[]{element_0});
 		}
 	}
-	
+
 	protected final @NonNull CACHE_OperationFilter__matches INSTANCE_OperationFilter__matches = new CACHE_OperationFilter__matches();
 }

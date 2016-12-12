@@ -95,6 +95,10 @@ public class KiamaasAdapterFactory extends AdapterFactoryImpl {
 				return createLeafAdapter();
 			}
 			@Override
+			public Adapter caseElement(Element object) {
+				return createElementAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -167,6 +171,20 @@ public class KiamaasAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createLeafAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link example4.kiamaas.Element <em>Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see example4.kiamaas.Element
+	 * @generated
+	 */
+	public Adapter createElementAdapter() {
 		return null;
 	}
 

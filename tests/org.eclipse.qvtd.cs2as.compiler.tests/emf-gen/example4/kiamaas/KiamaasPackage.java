@@ -67,6 +67,34 @@ public interface KiamaasPackage extends EPackage {
 	KiamaasPackage eINSTANCE = example4.kiamaas.impl.KiamaasPackageImpl.init();
 
 	/**
+	 * The meta object id for the '{@link example4.kiamaas.impl.ElementImpl <em>Element</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see example4.kiamaas.impl.ElementImpl
+	 * @see example4.kiamaas.impl.KiamaasPackageImpl#getElement()
+	 * @generated
+	 */
+	int ELEMENT = 4;
+
+	/**
+	 * The number of structural features of the '<em>Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ELEMENT_FEATURE_COUNT = 0;
+
+	/**
+	 * The number of operations of the '<em>Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ELEMENT_OPERATION_COUNT = 0;
+
+	/**
 	 * The meta object id for the '{@link example4.kiamaas.impl.TopImpl <em>Top</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -83,7 +111,7 @@ public interface KiamaasPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TOP__NODE = 0;
+	int TOP__NODE = ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Top</em>' class.
@@ -92,7 +120,7 @@ public interface KiamaasPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TOP_FEATURE_COUNT = 1;
+	int TOP_FEATURE_COUNT = ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of operations of the '<em>Top</em>' class.
@@ -101,7 +129,7 @@ public interface KiamaasPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TOP_OPERATION_COUNT = 0;
+	int TOP_OPERATION_COUNT = ELEMENT_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link example4.kiamaas.impl.NodeImpl <em>Node</em>}' class.
@@ -120,7 +148,7 @@ public interface KiamaasPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NODE__HEIGHT = 0;
+	int NODE__HEIGHT = ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Depth</b></em>' attribute.
@@ -129,7 +157,7 @@ public interface KiamaasPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NODE__DEPTH = 1;
+	int NODE__DEPTH = ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Node</em>' class.
@@ -138,7 +166,7 @@ public interface KiamaasPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NODE_FEATURE_COUNT = 2;
+	int NODE_FEATURE_COUNT = ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of operations of the '<em>Node</em>' class.
@@ -147,7 +175,7 @@ public interface KiamaasPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NODE_OPERATION_COUNT = 0;
+	int NODE_OPERATION_COUNT = ELEMENT_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link example4.kiamaas.impl.CompositeImpl <em>Composite</em>}' class.
@@ -336,6 +364,16 @@ public interface KiamaasPackage extends EPackage {
 	EClass getLeaf();
 
 	/**
+	 * Returns the meta object for class '{@link example4.kiamaas.Element <em>Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Element</em>'.
+	 * @see example4.kiamaas.Element
+	 * @generated
+	 */
+	EClass getElement();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -429,6 +467,16 @@ public interface KiamaasPackage extends EPackage {
 		 * @generated
 		 */
 		EClass LEAF = eINSTANCE.getLeaf();
+
+		/**
+		 * The meta object literal for the '{@link example4.kiamaas.impl.ElementImpl <em>Element</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see example4.kiamaas.impl.ElementImpl
+		 * @see example4.kiamaas.impl.KiamaasPackageImpl#getElement()
+		 * @generated
+		 */
+		EClass ELEMENT = eINSTANCE.getElement();
 
 	}
 

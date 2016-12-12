@@ -14,6 +14,7 @@ package example5.tderived.util;
 
 import example5.tbase.A;
 import example5.tbase.B;
+import example5.tbase.Element;
 import example5.tbase.NamedElement;
 
 import example5.tderived.*;
@@ -86,6 +87,7 @@ public class TderivedSwitch<@Nullable T> extends Switch<T> {
 				T result = caseA2(a2);
 				if (result == null) result = caseA(a2);
 				if (result == null) result = caseNamedElement(a2);
+				if (result == null) result = caseElement(a2);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -94,12 +96,14 @@ public class TderivedSwitch<@Nullable T> extends Switch<T> {
 				T result = caseB2(b2);
 				if (result == null) result = caseB(b2);
 				if (result == null) result = caseNamedElement(b2);
+				if (result == null) result = caseElement(b2);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case TderivedPackage.D: {
 				D d = (D)theEObject;
 				T result = caseD(d);
+				if (result == null) result = caseElement(d);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -149,6 +153,21 @@ public class TderivedSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseD(D object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseElement(Element object) {
 		return null;
 	}
 

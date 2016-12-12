@@ -12,6 +12,7 @@
  */
 package example5.sbase;
 
+import example5.tbase.Element;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -40,12 +41,12 @@ public interface SElement extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Ast</em>' reference.
-	 * @see #setAst(EObject)
+	 * @see #setAst(Element)
 	 * @see example5.sbase.SbasePackage#getSElement_Ast()
 	 * @model
 	 * @generated
 	 */
-	EObject getAst();
+	Element getAst();
 
 	/**
 	 * Sets the value of the '{@link example5.sbase.SElement#getAst <em>Ast</em>}' reference.
@@ -55,6 +56,6 @@ public interface SElement extends EObject {
 	 * @see #getAst()
 	 * @generated
 	 */
-	void setAst(EObject value);
+	void setAst(Element value);
 
 } // SElement

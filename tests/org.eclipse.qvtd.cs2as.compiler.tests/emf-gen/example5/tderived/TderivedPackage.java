@@ -196,7 +196,7 @@ public interface TderivedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int D_FEATURE_COUNT = 0;
+	int D_FEATURE_COUNT = TbasePackage.ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of operations of the '<em>D</em>' class.
@@ -205,7 +205,7 @@ public interface TderivedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int D_OPERATION_COUNT = 0;
+	int D_OPERATION_COUNT = TbasePackage.ELEMENT_OPERATION_COUNT + 0;
 
 
 	/**

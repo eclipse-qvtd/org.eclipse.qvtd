@@ -42,22 +42,22 @@ public class ClassesUnqualifiedPackageLookupVisitor
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Package = PACKid_http_c_s_s_cs2as_s_tests_s_example2_s_classes_s_1_0.getClassId("Package", 0);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Root = PACKid_http_c_s_s_cs2as_s_tests_s_example2_s_classes_s_1_0.getClassId("Root", 0);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_Package = TypeId.ORDERED_SET.getSpecializedId(CLSSid_Package);
-	
+
 	protected final /*@Thrown*/ org.eclipse.ocl.pivot.evaluation.@org.eclipse.jdt.annotation.NonNull Executor executor;
 	protected final /*@Thrown*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull IdResolver idResolver;
 	protected /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Object child_0;
-	
+
 	public ClassesUnqualifiedPackageLookupVisitor(@NonNull LookupEnvironment context) {
 		super(context);
 		this.executor = ClassUtil.nonNull(context.getExecutor());
 		this.idResolver = executor.getIdResolver();
 	}
-	
+
 	@Override
 	protected @Nullable LookupEnvironment doVisiting(@NonNull Visitable visitable) {
 		return parentEnv((EObject)visitable);
 	}
-	
+
 	/**
 	 * Continue the search for matches in the parent of element.
 	 */
@@ -71,10 +71,10 @@ public class ClassesUnqualifiedPackageLookupVisitor
 			return context;
 		}
 	}
-	
+
 	/**
 	 * _'example2.classes.util'::ClassesUnqualifiedPackageLookupVisitor::visitPackage(element : classes::Package[1]) : lookup::LookupEnvironment[?]
-	 * 
+	 *
 	 * _'null' : lookup::LookupEnvironment[1]
 	 */
 	protected class CACHE_ClassesUnqualifiedPackageLookupVisitor_visitPackage extends AbstractEvaluationOperation
@@ -97,17 +97,17 @@ public class ClassesUnqualifiedPackageLookupVisitor
 			}
 			return symbol_0;
 		}
-		
+
 		public LookupEnvironment evaluate(final /*@NonInvalid*/ example2.classes.@org.eclipse.jdt.annotation.NonNull Package element_0) {
 			return (LookupEnvironment)evaluationCache.getCachedEvaluationResult(this, caller, new @Nullable Object[]{element_0});
 		}
 	}
-	
+
 	protected final @NonNull CACHE_ClassesUnqualifiedPackageLookupVisitor_visitPackage INSTANCE_ClassesUnqualifiedPackageLookupVisitor_visitPackage = new CACHE_ClassesUnqualifiedPackageLookupVisitor_visitPackage();
-	
+
 	/**
 	 * _'example2.classes.util'::ClassesUnqualifiedPackageLookupVisitor::visitRoot(element : classes::Root[1]) : lookup::LookupEnvironment[?]
-	 * 
+	 *
 	 * _'null' : lookup::LookupEnvironment[1]
 	 */
 	protected class CACHE_ClassesUnqualifiedPackageLookupVisitor_visitRoot extends AbstractEvaluationOperation
@@ -130,11 +130,11 @@ public class ClassesUnqualifiedPackageLookupVisitor
 			}
 			return symbol_0;
 		}
-		
+
 		public LookupEnvironment evaluate(final /*@NonInvalid*/ example2.classes.@org.eclipse.jdt.annotation.NonNull Root element_1) {
 			return (LookupEnvironment)evaluationCache.getCachedEvaluationResult(this, caller, new @Nullable Object[]{element_1});
 		}
 	}
-	
+
 	protected final @NonNull CACHE_ClassesUnqualifiedPackageLookupVisitor_visitRoot INSTANCE_ClassesUnqualifiedPackageLookupVisitor_visitRoot = new CACHE_ClassesUnqualifiedPackageLookupVisitor_visitRoot();
 }

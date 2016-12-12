@@ -68,6 +68,34 @@ public interface TbasePackage extends EPackage {
 	TbasePackage eINSTANCE = example5.tbase.impl.TbasePackageImpl.init();
 
 	/**
+	 * The meta object id for the '{@link example5.tbase.impl.ElementImpl <em>Element</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see example5.tbase.impl.ElementImpl
+	 * @see example5.tbase.impl.TbasePackageImpl#getElement()
+	 * @generated
+	 */
+	int ELEMENT = 5;
+
+	/**
+	 * The number of structural features of the '<em>Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ELEMENT_FEATURE_COUNT = 0;
+
+	/**
+	 * The number of operations of the '<em>Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ELEMENT_OPERATION_COUNT = 0;
+
+	/**
 	 * The meta object id for the '{@link example5.tbase.impl.NamedElementImpl <em>Named Element</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -84,7 +112,7 @@ public interface TbasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NAMED_ELEMENT__NAME = 0;
+	int NAMED_ELEMENT__NAME = ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Named Element</em>' class.
@@ -93,7 +121,7 @@ public interface TbasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NAMED_ELEMENT_FEATURE_COUNT = 1;
+	int NAMED_ELEMENT_FEATURE_COUNT = ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of operations of the '<em>Named Element</em>' class.
@@ -102,7 +130,7 @@ public interface TbasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NAMED_ELEMENT_OPERATION_COUNT = 0;
+	int NAMED_ELEMENT_OPERATION_COUNT = ELEMENT_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link example5.tbase.impl.AImpl <em>A</em>}' class.
@@ -213,7 +241,7 @@ public interface TbasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int C_FEATURE_COUNT = 0;
+	int C_FEATURE_COUNT = ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of operations of the '<em>C</em>' class.
@@ -222,7 +250,7 @@ public interface TbasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int C_OPERATION_COUNT = 0;
+	int C_OPERATION_COUNT = ELEMENT_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link example5.tbase.impl.TRootImpl <em>TRoot</em>}' class.
@@ -241,7 +269,7 @@ public interface TbasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TROOT__OWNED_A = 0;
+	int TROOT__OWNED_A = ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>TRoot</em>' class.
@@ -250,7 +278,7 @@ public interface TbasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TROOT_FEATURE_COUNT = 1;
+	int TROOT_FEATURE_COUNT = ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of operations of the '<em>TRoot</em>' class.
@@ -259,7 +287,7 @@ public interface TbasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TROOT_OPERATION_COUNT = 0;
+	int TROOT_OPERATION_COUNT = ELEMENT_OPERATION_COUNT + 0;
 
 
 	/**
@@ -355,6 +383,16 @@ public interface TbasePackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getNamedElement_Name();
+
+	/**
+	 * Returns the meta object for class '{@link example5.tbase.Element <em>Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Element</em>'.
+	 * @see example5.tbase.Element
+	 * @generated
+	 */
+	EClass getElement();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -460,6 +498,16 @@ public interface TbasePackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute NAMED_ELEMENT__NAME = eINSTANCE.getNamedElement_Name();
+
+		/**
+		 * The meta object literal for the '{@link example5.tbase.impl.ElementImpl <em>Element</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see example5.tbase.impl.ElementImpl
+		 * @see example5.tbase.impl.TbasePackageImpl#getElement()
+		 * @generated
+		 */
+		EClass ELEMENT = eINSTANCE.getElement();
 
 	}
 

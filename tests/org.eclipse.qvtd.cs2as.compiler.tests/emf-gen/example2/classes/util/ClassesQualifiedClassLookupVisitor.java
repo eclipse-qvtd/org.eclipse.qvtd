@@ -37,24 +37,24 @@ public class ClassesQualifiedClassLookupVisitor
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_LookupEnvironment = PACKid_http_c_s_s_cs2as_s_tests_s_example2_s_env_s_1_0.getClassId("LookupEnvironment", 0);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Package = PACKid_http_c_s_s_cs2as_s_tests_s_example2_s_classes_s_1_0.getClassId("Package", 0);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_Class = TypeId.ORDERED_SET.getSpecializedId(CLSSid_Class);
-	
+
 	protected final /*@Thrown*/ org.eclipse.ocl.pivot.evaluation.@org.eclipse.jdt.annotation.NonNull Executor executor;
 	protected final /*@Thrown*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull IdResolver idResolver;
-	
+
 	public ClassesQualifiedClassLookupVisitor(@NonNull LookupEnvironment context) {
 		super(context);
 		this.executor = ClassUtil.nonNull(context.getExecutor());
 		this.idResolver = executor.getIdResolver();
 	}
-	
+
 	@Override
 	protected @Nullable LookupEnvironment doVisiting(@NonNull Visitable visitable) {
 		return context;
 	}
-	
+
 	/**
 	 * _'example2.classes.util'::ClassesQualifiedClassLookupVisitor::visitPackage(element : classes::Package[1]) : lookup::LookupEnvironment[?]
-	 * 
+	 *
 	 * _'null' : lookup::LookupEnvironment[1]
 	 */
 	protected class CACHE_ClassesQualifiedClassLookupVisitor_visitPackage extends AbstractEvaluationOperation
@@ -68,11 +68,11 @@ public class ClassesQualifiedClassLookupVisitor
 			final /*@Thrown*/ example2.classes.lookup.@org.eclipse.jdt.annotation.NonNull LookupEnvironment addElements = context.addElements(ownedClasses);
 			return addElements;
 		}
-		
+
 		public LookupEnvironment evaluate(final /*@NonInvalid*/ example2.classes.@org.eclipse.jdt.annotation.NonNull Package element_0) {
 			return (LookupEnvironment)evaluationCache.getCachedEvaluationResult(this, caller, new @Nullable Object[]{element_0});
 		}
 	}
-	
+
 	protected final @NonNull CACHE_ClassesQualifiedClassLookupVisitor_visitPackage INSTANCE_ClassesQualifiedClassLookupVisitor_visitPackage = new CACHE_ClassesQualifiedClassLookupVisitor_visitPackage();
 }

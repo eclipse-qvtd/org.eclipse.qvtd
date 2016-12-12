@@ -12,12 +12,11 @@
  */
 package example5.tderived.impl;
 
+import example5.tbase.impl.ElementImpl;
 import example5.tderived.D;
 import example5.tderived.TderivedPackage;
 
 import org.eclipse.emf.ecore.EClass;
-
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -26,7 +25,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  *
  * @generated
  */
-public class DImpl extends MinimalEObjectImpl.Container implements D {
+public class DImpl extends ElementImpl implements D {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

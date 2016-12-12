@@ -80,6 +80,7 @@ public class KiamaasSwitch<@Nullable T> extends Switch<T> {
 			case KiamaasPackage.TOP: {
 				Top top = (Top)theEObject;
 				T result = caseTop(top);
+				if (result == null) result = caseNode(top);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

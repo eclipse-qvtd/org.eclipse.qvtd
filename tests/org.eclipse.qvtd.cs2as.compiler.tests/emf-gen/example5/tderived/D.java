@@ -12,7 +12,7 @@
  */
 package example5.tderived;
 
-import org.eclipse.emf.ecore.EObject;
+import example5.tbase.Element;
 
 /**
  * <!-- begin-user-doc -->
@@ -24,5 +24,5 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface D extends EObject {
+public interface D extends Element {
 } // D

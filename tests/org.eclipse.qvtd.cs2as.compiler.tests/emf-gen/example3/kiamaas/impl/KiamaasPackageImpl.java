@@ -295,6 +295,7 @@ public class KiamaasPackageImpl extends EPackageImpl implements KiamaasPackage {
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
+		topEClass.getESuperTypes().add(this.getNode());
 		plusEClass.getESuperTypes().add(this.getNode());
 		numEClass.getESuperTypes().add(this.getNode());
 

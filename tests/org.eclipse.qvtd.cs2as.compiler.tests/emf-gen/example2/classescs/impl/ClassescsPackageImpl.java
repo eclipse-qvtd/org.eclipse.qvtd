@@ -12,6 +12,7 @@
  */
 package example2.classescs.impl;
 
+import example2.classes.ClassesPackage;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
@@ -170,6 +171,9 @@ public class ClassescsPackageImpl extends EPackageImpl implements ClassescsPacka
 		ClassescsPackageImpl theClassescsPackage = (ClassescsPackageImpl)(ePackage instanceof ClassescsPackageImpl ? ePackage : new ClassescsPackageImpl());
 
 		isInited = true;
+
+		// Initialize simple dependencies
+		ClassesPackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects
 		theClassescsPackage.createPackageContents();
@@ -570,6 +574,9 @@ public class ClassescsPackageImpl extends EPackageImpl implements ClassescsPacka
 		setNsPrefix(eNS_PREFIX);
 		setNsURI(eNS_URI);
 
+		// Obtain other dependent packages
+		ClassesPackage theClassesPackage = (ClassesPackage)EPackage.Registry.INSTANCE.getEPackage(ClassesPackage.eNS_URI);
+
 		// Create type parameters
 
 		// Set bounds for type parameters
@@ -589,7 +596,7 @@ public class ClassescsPackageImpl extends EPackageImpl implements ClassescsPacka
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(elementCSEClass, ElementCS.class, "ElementCS", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getElementCS_Ast(), ecorePackage.getEObject(), null, "ast", null, 0, 1, ElementCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getElementCS_Ast(), theClassesPackage.getVisitable(), null, "ast", null, 0, 1, ElementCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(namedElementCSEClass, NamedElementCS.class, "NamedElementCS", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getNamedElementCS_Name(), ecorePackage.getEString(), "name", null, 0, 1, NamedElementCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

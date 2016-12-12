@@ -14,6 +14,7 @@ package example5.tderived.util;
 
 import example5.tbase.A;
 import example5.tbase.B;
+import example5.tbase.Element;
 import example5.tbase.NamedElement;
 
 import example5.tderived.*;
@@ -95,6 +96,10 @@ public class TderivedAdapterFactory extends AdapterFactoryImpl {
 				return createDAdapter();
 			}
 			@Override
+			public Adapter caseElement(Element object) {
+				return createElementAdapter();
+			}
+			@Override
 			public Adapter caseNamedElement(NamedElement object) {
 				return createNamedElementAdapter();
 			}
@@ -165,6 +170,20 @@ public class TderivedAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createDAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link example5.tbase.Element <em>Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see example5.tbase.Element
+	 * @generated
+	 */
+	public Adapter createElementAdapter() {
 		return null;
 	}
 

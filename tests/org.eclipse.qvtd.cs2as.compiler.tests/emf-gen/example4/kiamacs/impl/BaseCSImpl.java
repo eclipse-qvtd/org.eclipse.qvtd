@@ -12,13 +12,13 @@
  */
 package example4.kiamacs.impl;
 
+import example4.kiamaas.Element;
 import example4.kiamacs.BaseCS;
 import example4.kiamacs.KiamacsPackage;
 
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -46,7 +46,7 @@ public abstract class BaseCSImpl extends MinimalEObjectImpl.Container implements
 	 * @generated
 	 * @ordered
 	 */
-	protected EObject ast;
+	protected Element ast;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -73,10 +73,10 @@ public abstract class BaseCSImpl extends MinimalEObjectImpl.Container implements
 	 * @generated
 	 */
 	@Override
-	public EObject getAst() {
+	public Element getAst() {
 		if (ast != null && ast.eIsProxy()) {
 			InternalEObject oldAst = (InternalEObject)ast;
-			ast = eResolveProxy(oldAst);
+			ast = (Element)eResolveProxy(oldAst);
 			if (ast != oldAst) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, KiamacsPackage.BASE_CS__AST, oldAst, ast));
@@ -90,7 +90,7 @@ public abstract class BaseCSImpl extends MinimalEObjectImpl.Container implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EObject basicGetAst() {
+	public Element basicGetAst() {
 		return ast;
 	}
 
@@ -100,8 +100,8 @@ public abstract class BaseCSImpl extends MinimalEObjectImpl.Container implements
 	 * @generated
 	 */
 	@Override
-	public void setAst(EObject newAst) {
-		EObject oldAst = ast;
+	public void setAst(Element newAst) {
+		Element oldAst = ast;
 		ast = newAst;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, KiamacsPackage.BASE_CS__AST, oldAst, ast));
@@ -131,7 +131,7 @@ public abstract class BaseCSImpl extends MinimalEObjectImpl.Container implements
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case KiamacsPackage.BASE_CS__AST:
-				setAst((EObject)newValue);
+				setAst((Element)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -146,7 +146,7 @@ public abstract class BaseCSImpl extends MinimalEObjectImpl.Container implements
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case KiamacsPackage.BASE_CS__AST:
-				setAst((EObject)null);
+				setAst((Element)null);
 				return;
 		}
 		super.eUnset(featureID);

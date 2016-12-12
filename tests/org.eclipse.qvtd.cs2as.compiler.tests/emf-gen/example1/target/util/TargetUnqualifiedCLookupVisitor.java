@@ -49,22 +49,22 @@ public class TargetUnqualifiedCLookupVisitor
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_OclElement = PACKid_$metamodel$.getClassId("OclElement", 0);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_TargetUnqualifiedCLookupVisitor = PACKid_java_c_s_s_example1_target_util.getClassId("TargetUnqualifiedCLookupVisitor", 0);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_C = TypeId.ORDERED_SET.getSpecializedId(CLSSid_C);
-	
+
 	protected final /*@Thrown*/ org.eclipse.ocl.pivot.evaluation.@org.eclipse.jdt.annotation.NonNull Executor executor;
 	protected final /*@Thrown*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull IdResolver idResolver;
 	protected /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Object child_0;
-	
+
 	public TargetUnqualifiedCLookupVisitor(@NonNull LookupEnvironment context) {
 		super(context);
 		this.executor = ClassUtil.nonNull(context.getExecutor());
 		this.idResolver = executor.getIdResolver();
 	}
-	
+
 	@Override
 	protected @Nullable LookupEnvironment doVisiting(@NonNull Visitable visitable) {
 		return parentEnv((EObject)visitable);
 	}
-	
+
 	/**
 	 * Continue the search for matches in the parent of element.
 	 */
@@ -78,10 +78,10 @@ public class TargetUnqualifiedCLookupVisitor
 			return context;
 		}
 	}
-	
+
 	/**
 	 * _'example1.target.util'::TargetUnqualifiedCLookupVisitor::visitA2(element : target::A2[1]) : lookup::LookupEnvironment[?]
-	 * 
+	 *
 	 * _'null' : lookup::LookupEnvironment[1]
 	 */
 	protected class CACHE_TargetUnqualifiedCLookupVisitor_visitA2 extends AbstractEvaluationOperation
@@ -136,11 +136,11 @@ public class TargetUnqualifiedCLookupVisitor
 			}
 			return symbol_1;
 		}
-		
+
 		public LookupEnvironment evaluate(final /*@NonInvalid*/ example1.target.@org.eclipse.jdt.annotation.NonNull A2 element_0) {
 			return (LookupEnvironment)evaluationCache.getCachedEvaluationResult(this, caller, new @Nullable Object[]{element_0});
 		}
 	}
-	
+
 	protected final @NonNull CACHE_TargetUnqualifiedCLookupVisitor_visitA2 INSTANCE_TargetUnqualifiedCLookupVisitor_visitA2 = new CACHE_TargetUnqualifiedCLookupVisitor_visitA2();
 }

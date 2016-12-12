@@ -436,8 +436,7 @@ public class EnvironmentTables
 
 		private static final @NonNull ExecutorProperty @NonNull [] _LookupEnvironment = {
 			EnvironmentTables.Properties._LookupEnvironment__namedElements,
-			EnvironmentTables.Properties._LookupEnvironment__parentEnv,
-			EnvironmentTables.Properties._LookupEnvironment__LookupEnvironment__parentEnv
+			EnvironmentTables.Properties._LookupEnvironment__parentEnv
 		};
 
 		/**

@@ -238,6 +238,7 @@ public class TderivedPackageImpl extends EPackageImpl implements TderivedPackage
 		// Add supertypes to classes
 		a2EClass.getESuperTypes().add(theTbasePackage.getA());
 		b2EClass.getESuperTypes().add(theTbasePackage.getB());
+		dEClass.getESuperTypes().add(theTbasePackage.getElement());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(a2EClass, example5.tderived.A2.class, "A2", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

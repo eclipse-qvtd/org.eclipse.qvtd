@@ -20,11 +20,11 @@ public abstract class AbstractDelegatingVisitor<R, C, @NonNull D extends Visitor
 	implements Visitor<R>
 {
 	protected final @NonNull D delegate;
-	
+
 	protected AbstractDelegatingVisitor(@NonNull D delegate, C context) {
 		super(context);
 	//	assert delegate != null : "cannot decorate a null visitor"; //$NON-NLS-1$
-		this.delegate = delegate;		
+		this.delegate = delegate;
 	//	delegate.setUndecoratedVisitor(this);
 	}
 
@@ -37,7 +37,7 @@ public abstract class AbstractDelegatingVisitor<R, C, @NonNull D extends Visitor
 
 	/**
 	 * Obtains the visitor that I decorate.
-	 * 
+	 *
 	 * @return my decorated visitor
 	 */
 	protected final @NonNull D getDelegate() {

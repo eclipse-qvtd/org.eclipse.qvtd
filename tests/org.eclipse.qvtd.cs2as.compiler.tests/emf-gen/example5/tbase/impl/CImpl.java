@@ -17,8 +17,6 @@ import example5.tbase.TbasePackage;
 
 import org.eclipse.emf.ecore.EClass;
 
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
 /**
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>C</b></em>'.
@@ -26,7 +24,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  *
  * @generated
  */
-public class CImpl extends MinimalEObjectImpl.Container implements C {
+public class CImpl extends ElementImpl implements C {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -907,44 +907,34 @@ public class TargetTables
 		}
 
 		private static final @NonNull ExecutorProperty @NonNull [] _A = {
-			TargetTables.Properties._NamedElement__name,
-			TargetTables.Properties._A__D__toA,
-			TargetTables.Properties._A__TRoot__ownedA
+			TargetTables.Properties._NamedElement__name
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _A1 = {
 			TargetTables.Properties._NamedElement__name,
-			TargetTables.Properties._A1__ownsB,
-			TargetTables.Properties._A__D__toA,
-			TargetTables.Properties._A__TRoot__ownedA
+			TargetTables.Properties._A1__ownsB
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _A2 = {
 			TargetTables.Properties._NamedElement__name,
-			TargetTables.Properties._A2__ownsC,
-			TargetTables.Properties._A__D__toA,
-			TargetTables.Properties._A__TRoot__ownedA
+			TargetTables.Properties._A2__ownsC
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _A3 = {
 			TargetTables.Properties._NamedElement__name,
-			TargetTables.Properties._A2__ownsC,
-			TargetTables.Properties._A__D__toA,
-			TargetTables.Properties._A__TRoot__ownedA
+			TargetTables.Properties._A2__ownsC
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _B = {
 			TargetTables.Properties._NamedElement__name,
 			TargetTables.Properties._B__ownsD,
-			TargetTables.Properties._B__toA1,
-			TargetTables.Properties._B__D__refsB
+			TargetTables.Properties._B__toA1
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _C = {
 			TargetTables.Properties._NamedElement__name,
 			TargetTables.Properties._C__ownsD,
-			TargetTables.Properties._C__toA2,
-			TargetTables.Properties._C__D__refsC
+			TargetTables.Properties._C__toA2
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _D = {

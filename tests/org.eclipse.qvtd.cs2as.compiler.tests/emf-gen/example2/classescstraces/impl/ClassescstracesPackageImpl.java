@@ -101,7 +101,6 @@ public class ClassescstracesPackageImpl extends EPackageImpl implements Classesc
 		isInited = true;
 
 		// Initialize simple dependencies
-		ClassesPackage.eINSTANCE.eClass();
 		ClassescsPackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects

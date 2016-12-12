@@ -24,6 +24,7 @@ import example1.source.SElement;
 import example1.source.SRoot;
 import example1.source.SourceFactory;
 import example1.source.SourcePackage;
+import example1.target.TargetPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -141,6 +142,9 @@ public class SourcePackageImpl extends EPackageImpl implements SourcePackage {
 		SourcePackageImpl theSourcePackage = (SourcePackageImpl)(ePackage instanceof SourcePackageImpl ? ePackage : new SourcePackageImpl());
 
 		isInited = true;
+
+		// Initialize simple dependencies
+		TargetPackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects
 		theSourcePackage.createPackageContents();
@@ -461,6 +465,9 @@ public class SourcePackageImpl extends EPackageImpl implements SourcePackage {
 		setNsPrefix(eNS_PREFIX);
 		setNsURI(eNS_URI);
 
+		// Obtain other dependent packages
+		TargetPackage theTargetPackage = (TargetPackage)EPackage.Registry.INSTANCE.getEPackage(TargetPackage.eNS_URI);
+
 		// Create type parameters
 
 		// Set bounds for type parameters
@@ -499,7 +506,7 @@ public class SourcePackageImpl extends EPackageImpl implements SourcePackage {
 		initEReference(getSRoot_OwnedX(), this.getX(), null, "ownedX", null, 0, -1, SRoot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(sElementEClass, SElement.class, "SElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getSElement_Ast(), ecorePackage.getEObject(), null, "ast", null, 0, 1, SElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSElement_Ast(), theTargetPackage.getVisitable(), null, "ast", null, 0, 1, SElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(pathNameCSEClass, PathNameCS.class, "PathNameCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getPathNameCS_Path(), this.getPathElementCS(), null, "path", null, 1, -1, PathNameCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

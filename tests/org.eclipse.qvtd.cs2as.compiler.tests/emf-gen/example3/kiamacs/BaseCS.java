@@ -12,6 +12,7 @@
  */
 package example3.kiamacs;
 
+import example3.kiamaas.Node;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -40,12 +41,12 @@ public interface BaseCS extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Ast</em>' reference.
-	 * @see #setAst(EObject)
+	 * @see #setAst(Node)
 	 * @see example3.kiamacs.KiamacsPackage#getBaseCS_Ast()
 	 * @model
 	 * @generated
 	 */
-	EObject getAst();
+	Node getAst();
 
 	/**
 	 * Sets the value of the '{@link example3.kiamacs.BaseCS#getAst <em>Ast</em>}' reference.
@@ -55,6 +56,6 @@ public interface BaseCS extends EObject {
 	 * @see #getAst()
 	 * @generated
 	 */
-	void setAst(EObject value);
+	void setAst(Node value);
 
 } // BaseCS

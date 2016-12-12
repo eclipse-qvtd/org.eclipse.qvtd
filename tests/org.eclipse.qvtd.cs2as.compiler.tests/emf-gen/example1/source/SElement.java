@@ -12,6 +12,7 @@
  */
 package example1.source;
 
+import example1.target.util.Visitable;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -40,12 +41,12 @@ public interface SElement extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Ast</em>' reference.
-	 * @see #setAst(EObject)
+	 * @see #setAst(Visitable)
 	 * @see example1.source.SourcePackage#getSElement_Ast()
-	 * @model
+	 * @model type="example1.target.Visitable"
 	 * @generated
 	 */
-	EObject getAst();
+	Visitable getAst();
 
 	/**
 	 * Sets the value of the '{@link example1.source.SElement#getAst <em>Ast</em>}' reference.
@@ -55,6 +56,6 @@ public interface SElement extends EObject {
 	 * @see #getAst()
 	 * @generated
 	 */
-	void setAst(EObject value);
+	void setAst(Visitable value);
 
 } // SElement

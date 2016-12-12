@@ -12,6 +12,7 @@
  */
 package example2.classescs;
 
+import example2.classes.util.Visitable;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -40,12 +41,12 @@ public interface ElementCS extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Ast</em>' reference.
-	 * @see #setAst(EObject)
+	 * @see #setAst(Visitable)
 	 * @see example2.classescs.ClassescsPackage#getElementCS_Ast()
-	 * @model
+	 * @model type="example2.classes.Visitable"
 	 * @generated
 	 */
-	EObject getAst();
+	Visitable getAst();
 
 	/**
 	 * Sets the value of the '{@link example2.classescs.ElementCS#getAst <em>Ast</em>}' reference.
@@ -55,6 +56,6 @@ public interface ElementCS extends EObject {
 	 * @see #getAst()
 	 * @generated
 	 */
-	void setAst(EObject value);
+	void setAst(Visitable value);
 
 } // ElementCS

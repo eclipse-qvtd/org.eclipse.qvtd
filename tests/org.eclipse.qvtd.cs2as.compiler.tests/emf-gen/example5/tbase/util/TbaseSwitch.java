@@ -81,6 +81,7 @@ public class TbaseSwitch<@Nullable T> extends Switch<T> {
 				A a = (A)theEObject;
 				T result = caseA(a);
 				if (result == null) result = caseNamedElement(a);
+				if (result == null) result = caseElement(a);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -88,24 +89,34 @@ public class TbaseSwitch<@Nullable T> extends Switch<T> {
 				B b = (B)theEObject;
 				T result = caseB(b);
 				if (result == null) result = caseNamedElement(b);
+				if (result == null) result = caseElement(b);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case TbasePackage.C: {
 				C c = (C)theEObject;
 				T result = caseC(c);
+				if (result == null) result = caseElement(c);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case TbasePackage.TROOT: {
 				TRoot tRoot = (TRoot)theEObject;
 				T result = caseTRoot(tRoot);
+				if (result == null) result = caseElement(tRoot);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case TbasePackage.NAMED_ELEMENT: {
 				NamedElement namedElement = (NamedElement)theEObject;
 				T result = caseNamedElement(namedElement);
+				if (result == null) result = caseElement(namedElement);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case TbasePackage.ELEMENT: {
+				Element element = (Element)theEObject;
+				T result = caseElement(element);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -185,6 +196,21 @@ public class TbaseSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseNamedElement(NamedElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseElement(Element object) {
 		return null;
 	}
 

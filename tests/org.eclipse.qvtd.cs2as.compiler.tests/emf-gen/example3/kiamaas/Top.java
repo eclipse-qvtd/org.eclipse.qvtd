@@ -12,8 +12,6 @@
  */
 package example3.kiamaas;
 
-import org.eclipse.emf.ecore.EObject;
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Top</b></em>'.
@@ -30,7 +28,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface Top extends EObject {
+public interface Top extends Node {
 	/**
 	 * Returns the value of the '<em><b>Node</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

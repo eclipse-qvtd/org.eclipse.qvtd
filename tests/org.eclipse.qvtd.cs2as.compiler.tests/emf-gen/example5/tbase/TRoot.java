@@ -14,8 +14,6 @@ package example5.tbase;
 
 import org.eclipse.emf.common.util.EList;
 
-import org.eclipse.emf.ecore.EObject;
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>TRoot</b></em>'.
@@ -32,7 +30,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface TRoot extends EObject {
+public interface TRoot extends Element {
 	/**
 	 * Returns the value of the '<em><b>Owned A</b></em>' containment reference list.
 	 * The list contents are of type {@link example5.tbase.A}.

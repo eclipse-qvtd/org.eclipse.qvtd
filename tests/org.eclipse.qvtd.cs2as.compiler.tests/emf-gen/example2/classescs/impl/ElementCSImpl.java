@@ -12,6 +12,7 @@
  */
 package example2.classescs.impl;
 
+import example2.classes.util.Visitable;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -44,7 +45,7 @@ public abstract class ElementCSImpl extends MinimalEObjectImpl.Container impleme
 	 * @generated
 	 * @ordered
 	 */
-	protected EObject ast;
+	protected Visitable ast;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -71,10 +72,10 @@ public abstract class ElementCSImpl extends MinimalEObjectImpl.Container impleme
 	 * @generated
 	 */
 	@Override
-	public EObject getAst() {
-		if (ast != null && ast.eIsProxy()) {
+	public Visitable getAst() {
+		if (ast != null && ((EObject)ast).eIsProxy()) {
 			InternalEObject oldAst = (InternalEObject)ast;
-			ast = eResolveProxy(oldAst);
+			ast = (Visitable)eResolveProxy(oldAst);
 			if (ast != oldAst) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ClassescsPackage.ELEMENT_CS__AST, oldAst, ast));
@@ -88,7 +89,7 @@ public abstract class ElementCSImpl extends MinimalEObjectImpl.Container impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EObject basicGetAst() {
+	public Visitable basicGetAst() {
 		return ast;
 	}
 
@@ -98,8 +99,8 @@ public abstract class ElementCSImpl extends MinimalEObjectImpl.Container impleme
 	 * @generated
 	 */
 	@Override
-	public void setAst(EObject newAst) {
-		EObject oldAst = ast;
+	public void setAst(Visitable newAst) {
+		Visitable oldAst = ast;
 		ast = newAst;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ClassescsPackage.ELEMENT_CS__AST, oldAst, ast));
@@ -129,7 +130,7 @@ public abstract class ElementCSImpl extends MinimalEObjectImpl.Container impleme
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case ClassescsPackage.ELEMENT_CS__AST:
-				setAst((EObject)newValue);
+				setAst((Visitable)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -144,7 +145,7 @@ public abstract class ElementCSImpl extends MinimalEObjectImpl.Container impleme
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case ClassescsPackage.ELEMENT_CS__AST:
-				setAst((EObject)null);
+				setAst((Visitable)null);
 				return;
 		}
 		super.eUnset(featureID);

@@ -12,6 +12,7 @@
  */
 package example5.tbase.impl;
 
+import example5.tbase.Element;
 import example5.tbase.NamedElement;
 import example5.tbase.TRoot;
 import example5.tbase.TbaseFactory;
@@ -65,6 +66,13 @@ public class TbasePackageImpl extends EPackageImpl implements TbasePackage {
 	 * @generated
 	 */
 	private EClass namedElementEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass elementEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -224,6 +232,16 @@ public class TbasePackageImpl extends EPackageImpl implements TbasePackage {
 	 * @generated
 	 */
 	@Override
+	public EClass getElement() {
+		return elementEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public TbaseFactory getTbaseFactory() {
 		return (TbaseFactory)getEFactoryInstance();
 	}
@@ -260,6 +278,8 @@ public class TbasePackageImpl extends EPackageImpl implements TbasePackage {
 
 		namedElementEClass = createEClass(NAMED_ELEMENT);
 		createEAttribute(namedElementEClass, NAMED_ELEMENT__NAME);
+
+		elementEClass = createEClass(ELEMENT);
 	}
 
 	/**
@@ -292,6 +312,9 @@ public class TbasePackageImpl extends EPackageImpl implements TbasePackage {
 		// Add supertypes to classes
 		aEClass.getESuperTypes().add(this.getNamedElement());
 		bEClass.getESuperTypes().add(this.getNamedElement());
+		cEClass.getESuperTypes().add(this.getElement());
+		tRootEClass.getESuperTypes().add(this.getElement());
+		namedElementEClass.getESuperTypes().add(this.getElement());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(aEClass, example5.tbase.A.class, "A", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -307,6 +330,8 @@ public class TbasePackageImpl extends EPackageImpl implements TbasePackage {
 
 		initEClass(namedElementEClass, NamedElement.class, "NamedElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getNamedElement_Name(), ecorePackage.getEString(), "name", null, 0, 1, NamedElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(elementEClass, Element.class, "Element", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);

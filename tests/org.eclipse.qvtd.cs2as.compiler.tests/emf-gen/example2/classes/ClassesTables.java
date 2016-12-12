@@ -1172,25 +1172,20 @@ public class ClassesTables
 		}
 
 		private static final @NonNull ExecutorProperty @NonNull [] _Argument = {
-			ClassesTables.Properties._NamedElement__name,
-			ClassesTables.Properties._Argument__OperationCallExp__ownedArguments
+			ClassesTables.Properties._NamedElement__name
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _CallExp = {
 			ClassesTables.Properties._CallExp__ownedCallExp,
 			ClassesTables.Properties._CallExp__owningSource,
-			ClassesTables.Properties._TypedElement__type,
-			ClassesTables.Properties._CallExp__Operation__ownedExpressions
+			ClassesTables.Properties._TypedElement__type
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _Class = {
 			ClassesTables.Properties._NamedElement__name,
 			ClassesTables.Properties._Class__ownedOperations,
 			ClassesTables.Properties._Class__ownedProperties,
-			ClassesTables.Properties._Class__superClass,
-			ClassesTables.Properties._Class__Class__superClass,
-			ClassesTables.Properties._Class__Package__ownedClasses,
-			ClassesTables.Properties._Class__TypedElement__type
+			ClassesTables.Properties._Class__superClass
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _Element = {};
@@ -1205,9 +1200,7 @@ public class ClassesTables
 			ClassesTables.Properties._NamedElement__name,
 			ClassesTables.Properties._Operation__ownedExpressions,
 			ClassesTables.Properties._Operation__ownedParameters,
-			ClassesTables.Properties._TypedElement__type,
-			ClassesTables.Properties._Operation__Class__ownedOperations,
-			ClassesTables.Properties._Operation__OperationCallExp__referredOperation
+			ClassesTables.Properties._TypedElement__type
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _OperationCallExp = {
@@ -1215,36 +1208,29 @@ public class ClassesTables
 			ClassesTables.Properties._CallExp__ownedCallExp,
 			ClassesTables.Properties._CallExp__owningSource,
 			ClassesTables.Properties._OperationCallExp__referredOperation,
-			ClassesTables.Properties._TypedElement__type,
-			ClassesTables.Properties._CallExp__Operation__ownedExpressions
+			ClassesTables.Properties._TypedElement__type
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _Package = {
 			ClassesTables.Properties._NamedElement__name,
 			ClassesTables.Properties._Package__ownedClasses,
-			ClassesTables.Properties._Package__ownedPackages,
-			ClassesTables.Properties._Package__Package__ownedPackages,
-			ClassesTables.Properties._Package__Root__ownedPackages
+			ClassesTables.Properties._Package__ownedPackages
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _Parameter = {
-			ClassesTables.Properties._NamedElement__name,
-			ClassesTables.Properties._Parameter__Operation__ownedParameters
+			ClassesTables.Properties._NamedElement__name
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _Property = {
 			ClassesTables.Properties._NamedElement__name,
-			ClassesTables.Properties._TypedElement__type,
-			ClassesTables.Properties._Property__Class__ownedProperties,
-			ClassesTables.Properties._Property__PropertyCallExp__referredProperty
+			ClassesTables.Properties._TypedElement__type
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _PropertyCallExp = {
 			ClassesTables.Properties._CallExp__ownedCallExp,
 			ClassesTables.Properties._CallExp__owningSource,
 			ClassesTables.Properties._PropertyCallExp__referredProperty,
-			ClassesTables.Properties._TypedElement__type,
-			ClassesTables.Properties._CallExp__Operation__ownedExpressions
+			ClassesTables.Properties._TypedElement__type
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _Root = {

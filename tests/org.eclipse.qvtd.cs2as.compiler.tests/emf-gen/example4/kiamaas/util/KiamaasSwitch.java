@@ -80,12 +80,14 @@ public class KiamaasSwitch<@Nullable T> extends Switch<T> {
 			case KiamaasPackage.TOP: {
 				Top top = (Top)theEObject;
 				T result = caseTop(top);
+				if (result == null) result = caseElement(top);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case KiamaasPackage.NODE: {
 				Node node = (Node)theEObject;
 				T result = caseNode(node);
+				if (result == null) result = caseElement(node);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -93,6 +95,7 @@ public class KiamaasSwitch<@Nullable T> extends Switch<T> {
 				Composite composite = (Composite)theEObject;
 				T result = caseComposite(composite);
 				if (result == null) result = caseNode(composite);
+				if (result == null) result = caseElement(composite);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -100,6 +103,13 @@ public class KiamaasSwitch<@Nullable T> extends Switch<T> {
 				Leaf leaf = (Leaf)theEObject;
 				T result = caseLeaf(leaf);
 				if (result == null) result = caseNode(leaf);
+				if (result == null) result = caseElement(leaf);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case KiamaasPackage.ELEMENT: {
+				Element element = (Element)theEObject;
+				T result = caseElement(element);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -164,6 +174,21 @@ public class KiamaasSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseLeaf(Leaf object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseElement(Element object) {
 		return null;
 	}
 

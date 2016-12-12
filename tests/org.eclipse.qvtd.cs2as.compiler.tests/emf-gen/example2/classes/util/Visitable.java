@@ -31,6 +31,6 @@ public interface Visitable
 	 * @return the result of the visit.
 	 */
 	<R> R accept(example2.classes.util.@NonNull Visitor<R> visitor);
-	
+
 	EClass eClass();
 }

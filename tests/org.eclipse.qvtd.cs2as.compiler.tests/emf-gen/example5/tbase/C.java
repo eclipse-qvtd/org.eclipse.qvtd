@@ -12,8 +12,6 @@
  */
 package example5.tbase;
 
-import org.eclipse.emf.ecore.EObject;
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>C</b></em>'.
@@ -24,5 +22,5 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface C extends EObject {
+public interface C extends Element {
 } // C

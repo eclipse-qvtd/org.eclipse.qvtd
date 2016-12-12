@@ -77,33 +77,6 @@ public interface KiamaasPackage extends EPackage {
 	int TOP = 0;
 
 	/**
-	 * The feature id for the '<em><b>Node</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TOP__NODE = 0;
-
-	/**
-	 * The number of structural features of the '<em>Top</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TOP_FEATURE_COUNT = 1;
-
-	/**
-	 * The number of operations of the '<em>Top</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TOP_OPERATION_COUNT = 0;
-
-	/**
 	 * The meta object id for the '{@link example3.kiamaas.impl.NodeImpl <em>Node</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -148,6 +121,51 @@ public interface KiamaasPackage extends EPackage {
 	 * @ordered
 	 */
 	int NODE_OPERATION_COUNT = 0;
+
+	/**
+	 * The feature id for the '<em><b>Height</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TOP__HEIGHT = NODE__HEIGHT;
+
+	/**
+	 * The feature id for the '<em><b>Depth</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TOP__DEPTH = NODE__DEPTH;
+
+	/**
+	 * The feature id for the '<em><b>Node</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TOP__NODE = NODE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Top</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TOP_FEATURE_COUNT = NODE_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>Top</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TOP_OPERATION_COUNT = NODE_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link example3.kiamaas.impl.PlusImpl <em>Plus</em>}' class.

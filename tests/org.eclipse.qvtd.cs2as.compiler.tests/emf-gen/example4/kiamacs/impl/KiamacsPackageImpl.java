@@ -12,6 +12,7 @@
  */
 package example4.kiamacs.impl;
 
+import example4.kiamaas.KiamaasPackage;
 import example4.kiamacs.BaseCS;
 import example4.kiamacs.CompositeCS;
 import example4.kiamacs.KiamacsFactory;
@@ -114,6 +115,9 @@ public class KiamacsPackageImpl extends EPackageImpl implements KiamacsPackage {
 		KiamacsPackageImpl theKiamacsPackage = (KiamacsPackageImpl)(ePackage instanceof KiamacsPackageImpl ? ePackage : new KiamacsPackageImpl());
 
 		isInited = true;
+
+		// Initialize simple dependencies
+		KiamaasPackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects
 		theKiamacsPackage.createPackageContents();
@@ -276,6 +280,9 @@ public class KiamacsPackageImpl extends EPackageImpl implements KiamacsPackage {
 		setNsPrefix(eNS_PREFIX);
 		setNsURI(eNS_URI);
 
+		// Obtain other dependent packages
+		KiamaasPackage theKiamaasPackage = (KiamaasPackage)EPackage.Registry.INSTANCE.getEPackage(KiamaasPackage.eNS_URI);
+
 		// Create type parameters
 
 		// Set bounds for type parameters
@@ -298,7 +305,7 @@ public class KiamacsPackageImpl extends EPackageImpl implements KiamacsPackage {
 		initEClass(leafCSEClass, LeafCS.class, "LeafCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(baseCSEClass, BaseCS.class, "BaseCS", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getBaseCS_Ast(), ecorePackage.getEObject(), null, "ast", null, 0, 1, BaseCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getBaseCS_Ast(), theKiamaasPackage.getElement(), null, "ast", null, 0, 1, BaseCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);
