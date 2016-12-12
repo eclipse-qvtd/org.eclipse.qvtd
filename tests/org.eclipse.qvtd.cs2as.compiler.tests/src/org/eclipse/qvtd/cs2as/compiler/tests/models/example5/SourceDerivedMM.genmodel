@@ -3,7 +3,7 @@
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.qvtd.cs2as.compiler.tests/emf-gen"
     modelPluginID="org.eclipse.qvtd.cs2as.compiler.tests" modelName="SourceDerivedMM"
     rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" importerID="org.eclipse.emf.importer.ecore"
-    bundleManifest="false" complianceLevel="8.0" copyrightFields="false" usedGenPackages="SourceBaseMM.genmodel#//sbase"
+    bundleManifest="false" complianceLevel="8.0" copyrightFields="false" usedGenPackages="SourceBaseMM.genmodel#//sbase TargetBaseMM.genmodel#//tbase"
     operationReflection="true" importOrganizing="true" pluginKey="">
   <foreignModel>SourceDerivedMM.ecore</foreignModel>
   <genPackages prefix="Sderived" basePackage="example5" disposableProviderFactory="true"

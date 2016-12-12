@@ -14,12 +14,13 @@
   <eClassifiers xsi:type="ecore:EClass" name="B" eSuperTypes="#//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownsC" eType="#//C" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="C"/>
-  <eClassifiers xsi:type="ecore:EClass" name="TRoot">
+  <eClassifiers xsi:type="ecore:EClass" name="C" eSuperTypes="#//Element"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TRoot" eSuperTypes="#//Element">
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedA" upperBound="-1"
         eType="#//A" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="NamedElement">
+  <eClassifiers xsi:type="ecore:EClass" name="NamedElement" eSuperTypes="#//Element">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Element" abstract="true"/>
 </ecore:EPackage>

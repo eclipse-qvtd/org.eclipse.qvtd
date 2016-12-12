@@ -16,6 +16,6 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BaseCS" abstract="true">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="ast" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ast" eType="ecore:EClass KiamaAS.ecore#//Node"/>
   </eClassifiers>
 </ecore:EPackage>

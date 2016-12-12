@@ -14,5 +14,5 @@
   <eClassifiers xsi:type="ecore:EClass" name="B2" eSuperTypes="TargetBaseMM.ecore#//B">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="anotherName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="D"/>
+  <eClassifiers xsi:type="ecore:EClass" name="D" eSuperTypes="TargetBaseMM.ecore#//Element"/>
 </ecore:EPackage>

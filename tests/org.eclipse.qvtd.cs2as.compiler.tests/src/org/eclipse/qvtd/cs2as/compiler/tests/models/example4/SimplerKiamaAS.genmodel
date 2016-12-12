@@ -19,5 +19,6 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SimplerKiamaAS.ecore#//Composite/child"/>
     </genClasses>
     <genClasses ecoreClass="SimplerKiamaAS.ecore#//Leaf"/>
+    <genClasses image="false" ecoreClass="SimplerKiamaAS.ecore#//Element"/>
   </genPackages>
 </genmodel:GenModel>

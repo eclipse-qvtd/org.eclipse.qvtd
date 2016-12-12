@@ -3,7 +3,7 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="classescs" nsURI="http://cs2as/tests/example2/classescs/1.0"
     nsPrefix="classescs">
   <eClassifiers xsi:type="ecore:EClass" name="ElementCS" abstract="true">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="ast" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ast" eType="ecore:EClass Classes.ecore#//Visitable"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NamedElementCS" abstract="true" eSuperTypes="#//ElementCS">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

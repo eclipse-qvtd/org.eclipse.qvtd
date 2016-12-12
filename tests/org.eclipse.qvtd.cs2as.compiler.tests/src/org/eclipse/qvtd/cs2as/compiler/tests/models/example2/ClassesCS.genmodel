@@ -3,8 +3,8 @@
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.qvtd.cs2as.compiler.tests/emf-gen"
     modelPluginID="org.eclipse.qvtd.cs2as.compiler.tests" modelName="Example2ClassesCS"
     rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" importerID="org.eclipse.emf.importer.ecore"
-    bundleManifest="false" complianceLevel="8.0" copyrightFields="false" operationReflection="true"
-    importOrganizing="true" pluginKey="">
+    bundleManifest="false" complianceLevel="8.0" copyrightFields="false" usedGenPackages="Classes.genmodel#//classes"
+    operationReflection="true" importOrganizing="true" pluginKey="">
   <foreignModel>ClassesCS.ecore</foreignModel>
   <genPackages prefix="Classescs" basePackage="example2" disposableProviderFactory="true"
       ecorePackage="ClassesCS.ecore#/">

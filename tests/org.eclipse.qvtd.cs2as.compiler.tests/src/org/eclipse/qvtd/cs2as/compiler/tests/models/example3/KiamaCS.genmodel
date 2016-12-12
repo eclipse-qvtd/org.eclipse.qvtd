@@ -3,7 +3,8 @@
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.qvtd.cs2as.compiler.tests/emf-gen"
     modelPluginID="org.eclipse.qvtd.cs2as.compiler.tests" modelName="KiamaCS" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     importerID="org.eclipse.emf.importer.ecore" bundleManifest="false" complianceLevel="8.0"
-    copyrightFields="false" operationReflection="true" importOrganizing="true" pluginKey="">
+    copyrightFields="false" usedGenPackages="KiamaAS.genmodel#//kiamaas" operationReflection="true"
+    importOrganizing="true" pluginKey="">
   <foreignModel>KiamaCS.ecore</foreignModel>
   <genPackages prefix="Kiamacs" basePackage="example3" disposableProviderFactory="true"
       ecorePackage="KiamaCS.ecore#/">

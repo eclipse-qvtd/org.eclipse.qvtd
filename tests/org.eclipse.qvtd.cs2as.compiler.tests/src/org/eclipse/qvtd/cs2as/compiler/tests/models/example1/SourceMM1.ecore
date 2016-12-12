@@ -26,7 +26,7 @@
         eType="#//X" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SElement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="ast" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ast" eType="ecore:EClass TargetMM1.ecore#//Visitable"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PathNameCS" eSuperTypes="#//SElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="path" lowerBound="1" upperBound="-1"

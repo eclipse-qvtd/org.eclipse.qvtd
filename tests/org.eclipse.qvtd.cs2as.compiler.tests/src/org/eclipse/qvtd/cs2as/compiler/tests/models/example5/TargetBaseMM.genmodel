@@ -21,5 +21,6 @@
     <genClasses ecoreClass="TargetBaseMM.ecore#//NamedElement">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TargetBaseMM.ecore#//NamedElement/name"/>
     </genClasses>
+    <genClasses image="false" ecoreClass="TargetBaseMM.ecore#//Element"/>
   </genPackages>
 </genmodel:GenModel>
