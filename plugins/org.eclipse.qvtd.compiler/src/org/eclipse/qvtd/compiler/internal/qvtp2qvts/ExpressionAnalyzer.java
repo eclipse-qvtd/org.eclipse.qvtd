@@ -13,7 +13,6 @@ package org.eclipse.qvtd.compiler.internal.qvtp2qvts;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CallExp;
@@ -727,11 +726,9 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@NonNull
 		Type propertyType = ClassUtil.nonNullState(property.getType());
 		CompleteClass targetCompleteClass = environmentFactory.getCompleteModel().getCompleteClass(propertyType);
 		if (!valueCompleteClass.conformsTo(targetCompleteClass)) {
-			if (targetCompleteClass.getPrimaryClass().getESObject() != EcorePackage.Literals.EOBJECT) {		// FIXME fudge for Adolfo's suspect tests
-				// FIXME we could synthesize a cast, but it's easier to do oclAsType() in QVTm/QVTp
-				if (!valueCompleteClass.conformsTo(targetCompleteClass) /*&& !valueCompleteClass.conformsTo(targetCompleteClass.getBehavioralClass())*/) {
-					throw new IllegalStateException("Incompatible types for " + asNavigationAssignment);
-				}
+			// FIXME we could synthesize a cast, but it's easier to do oclAsType() in QVTm/QVTp
+			if (!valueCompleteClass.conformsTo(targetCompleteClass) /*&& !valueCompleteClass.conformsTo(targetCompleteClass.getBehavioralClass())*/) {
+				throw new IllegalStateException("Incompatible types for " + asNavigationAssignment);
 			}
 		}
 		return slotNode;

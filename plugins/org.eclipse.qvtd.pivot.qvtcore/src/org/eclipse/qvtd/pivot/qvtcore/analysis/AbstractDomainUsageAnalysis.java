@@ -641,7 +641,7 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTco
 				intersection(sourceUsage, rightUsage);
 				return getRootAnalysis().getPrimitiveUsage();
 			}
-			if ("oclAsType".equals(operationName) && !sourceUsage.isPrimitive()) {		// FIXME fudge for Adolfo's suspect EObjects
+			/*			if ("oclAsType".equals(operationName) && !sourceUsage.isPrimitive()) {		// FIX ME fudge for Adolfo's suspect EObjects
 				TemplateParameter templateParameter = operation.getType().isTemplateParameter();
 				if (templateParameter != null) {
 					List<Parameter> ownedParameters = operation.getOwnedParameters();
@@ -656,7 +656,7 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTco
 					}
 				}
 				return sourceUsage;
-			}
+			} */
 			TemplateParameter templateParameter = operation.getType().isTemplateParameter();
 			if (templateParameter != null) {			// Handle e.g oclAsType()
 				List<Parameter> ownedParameters = operation.getOwnedParameters();

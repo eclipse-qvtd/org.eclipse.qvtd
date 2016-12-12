@@ -18,7 +18,6 @@ import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.xmi.XMLResource;
@@ -436,7 +435,7 @@ public abstract class BasicQVTiExecutor extends AbstractExecutor implements QVTi
 			//			Type valueType2 = getIdResolver().getStaticTypeOf(value);
 			//			Type valueType = valueType1;
 			Type variableType = ClassUtil.nonNullState(asVariable.getType());
-			if (!valueType.conformsTo(getStandardLibrary(), variableType) && (variableType.getESObject() != EcorePackage.Literals.EOBJECT)) {	// FIXME EObject fudge for Adolfo's test models
+			if (!valueType.conformsTo(getStandardLibrary(), variableType)) {
 				throw new InvalidValueException("Attempted to assign incompatible value to " + asVariable);
 			}
 		}
