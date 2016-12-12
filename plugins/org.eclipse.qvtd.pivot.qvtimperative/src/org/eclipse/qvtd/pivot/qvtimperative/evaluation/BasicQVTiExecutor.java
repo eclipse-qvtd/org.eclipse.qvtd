@@ -253,7 +253,7 @@ public abstract class BasicQVTiExecutor extends AbstractExecutor implements QVTi
 			pushEvaluationEnvironment(calledMapping, mappingCall);
 			try {
 				int index = 0;
-				for (MappingParameterBinding binding : mappingCall.getBinding()) {
+				for (@NonNull MappingParameterBinding binding : QVTimperativeUtil.getOwnedMappingParameterBindings(mappingCall)) {
 					MappingParameter boundVariable = ClassUtil.nonNullState(binding.getBoundVariable());
 					Object boundValue = boundValues[index++];
 					if (binding instanceof AppendParameterBinding) {	// FIXME visit the bindings

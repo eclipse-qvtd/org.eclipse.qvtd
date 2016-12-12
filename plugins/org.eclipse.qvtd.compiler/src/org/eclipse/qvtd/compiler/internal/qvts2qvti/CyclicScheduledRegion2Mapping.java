@@ -96,7 +96,7 @@ public class CyclicScheduledRegion2Mapping extends AbstractScheduledRegion2Mappi
 			//
 			org.eclipse.ocl.pivot.Class elementType = classDatumAnalysis.getCompleteClass().getPrimaryClass();
 			guardVariable = helper.createAppendParameter(getSafeName(headNode), elementType, false);
-			mapping.getOwnedParameters().add(guardVariable);
+			mapping.getOwnedMappingParameters().add(guardVariable);
 
 			Iterable<@NonNull NodeConnection> outgoingConnections = headNode.getOutgoingPassedConnections();
 			assert Iterables.size(outgoingConnections) == 1;
@@ -169,7 +169,7 @@ public class CyclicScheduledRegion2Mapping extends AbstractScheduledRegion2Mappi
 			//
 			NodeConnection intermediateConnection = accumulatedConnection;
 			AppendParameter accumulatedVariable2 = accumulatedVariable = createAppendParameter(intermediateConnection);
-			mapping.getOwnedParameters().add(accumulatedVariable2);
+			mapping.getOwnedMappingParameters().add(accumulatedVariable2);
 			connection2variable.put(intermediateConnection, accumulatedVariable2);
 		}
 	}
@@ -231,7 +231,7 @@ public class CyclicScheduledRegion2Mapping extends AbstractScheduledRegion2Mappi
 				assert name != null;
 				connectionVariable = helper.createAppendParameter(getSafeName(name), getConnectionSourcesType(intermediateConnection), true);
 				connection2variable.put(intermediateConnection, connectionVariable);
-				mapping.getOwnedParameters().add(connectionVariable);
+				mapping.getOwnedMappingParameters().add(connectionVariable);
 			}
 		}
 	}

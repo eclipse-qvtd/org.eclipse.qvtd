@@ -24,7 +24,7 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedExpression" lowerBound="1"
-        eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//OCLExpression"
+        eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-OCLExpression"
         containment="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The expression whose evaluation yields the value to append."/>
@@ -50,7 +50,7 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="A BufferStatement declares a connection buffer and optionally assigns initial content.&#xA;&#xA;syntax: oclText[buffer name : type := expression;]&#xA;&#xA;oclText[type] or oclText[expression] but not both may be omitted. An omitted type is deduced from the initial expression values."/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedExpression" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//OCLExpression"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedExpression" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-OCLExpression"
         containment="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The optional expression computing initial content values."/>
@@ -62,11 +62,11 @@
       <details key="documentation" value="A CheckStatement evaluates a predicate. If the evaluation is false, the mapping execution&#xA;terminates fails and does nothing.&#xA;&#xA;syntax: oclText[check expression;]"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedExpression" lowerBound="1"
-        eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//OCLExpression"
+        eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-OCLExpression"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ConnectionVariable" abstract="true"
-      eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#//VariableDeclaration">
+      eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-VariableDeclaration">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="A ConnectionVariable identifes a variable used as a connection buffer."/>
     </eAnnotations>
@@ -88,7 +88,7 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedExpression" lowerBound="1"
-        eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//OCLExpression"
+        eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-OCLExpression"
         containment="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The expression computing the variable's value."/>
@@ -122,17 +122,17 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ImperativeModel" eSuperTypes="../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#//BaseModel">
+  <eClassifiers xsi:type="ecore:EClass" name="ImperativeModel" eSuperTypes="../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#T-qvtbase-BaseModel">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="The Model of an Imperative QVT transformation."/>
     </eAnnotations>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ImperativeTransformation" eSuperTypes="../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#//Transformation">
+  <eClassifiers xsi:type="ecore:EClass" name="ImperativeTransformation" eSuperTypes="../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#T-qvtbase-Transformation">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="An ImperativeTransfornmation distinguishes a QVTi transformation from other transformations."/>
     </eAnnotations>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ImperativeTypedModel" eSuperTypes="../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#//TypedModel">
+  <eClassifiers xsi:type="ecore:EClass" name="ImperativeTypedModel" eSuperTypes="../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#T-qvtbase-TypedModel">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="An ImperativeTypedModel defines an input,middle or output modek for the transformation."/>
     </eAnnotations>
@@ -165,14 +165,14 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="LoopVariable" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#//VariableDeclaration">
+  <eClassifiers xsi:type="ecore:EClass" name="LoopVariable" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-VariableDeclaration">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="A LoopVariable defines the iterator of a MappingLoop."/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="owningMappingLoop" lowerBound="1"
         eType="#//MappingLoop" eOpposite="#//MappingLoop/ownedIterators"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Mapping" eSuperTypes="../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#//Rule">
+  <eClassifiers xsi:type="ecore:EClass" name="Mapping" eSuperTypes="../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#T-qvtbase-Rule">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="An Imperative Mapping extends the abstract declarative mapping to support&#xA;explicit nested invocation of mappings with bindings for the invoked mapping's&#xA;bound variables."/>
     </eAnnotations>
@@ -182,17 +182,18 @@
         <details key="documentation" value="Repeated invocations of a strict Mapping are suppressed at run-time.&#xD;&#xA;&#xD;&#xA;Repeated invocations of a not-strict Mapping are guaranteed not to occur."/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedParameters" ordered="false"
-        upperBound="-1" eType="#//MappingParameter" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedMappingParameters"
+        ordered="false" upperBound="-1" eType="#//MappingParameter" containment="true"
+        eOpposite="#//MappingParameter/owningMapping"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedStatements" upperBound="-1"
         eType="#//Statement" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="MappingCall" eSuperTypes="#//MappingStatement ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//ReferringElement">
+  <eClassifiers xsi:type="ecore:EClass" name="MappingCall" eSuperTypes="#//MappingStatement ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-ReferringElement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="A MappingCall specifies the invocation of a referredMapping with a set of bindings.&#xA;An installed mapping is invoked asynchronously whenever suitable values are available on consumed connections.&#xA;An invoked mapping is invoked synchronously with values provided by the caller."/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="binding" upperBound="-1"
-        eType="#//MappingParameterBinding" containment="true" eOpposite="#//MappingParameterBinding/mappingCall">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedMappingParameterBindings"
+        upperBound="-1" eType="#//MappingParameterBinding" containment="true" eOpposite="#//MappingParameterBinding/owningMappingCall">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The Set of bindings of variables or expressions to forma parameters."/>
       </eAnnotations>
@@ -233,25 +234,31 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedExpression" lowerBound="1"
-        eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//OCLExpression"
+        eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-OCLExpression"
         containment="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The expression whose values provide the iterator values."/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="MappingParameter" abstract="true" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#//VariableDeclaration">
+  <eClassifiers xsi:type="ecore:EClass" name="MappingParameter" abstract="true" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-VariableDeclaration">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="A MappingParameter defines a formal parameter of a mapping. The parameter is bound by the&#xA;mapping invocation to satisfy the requirements of the derived parameter class."/>
     </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owningMapping" lowerBound="1"
+        eType="#//Mapping" eOpposite="#//Mapping/ownedMappingParameters">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The containing MappingCall."/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MappingParameterBinding" abstract="true"
-      eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#//Element">
+      eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Element">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="A MappingCallBinding specifies the binding of a single variable or value to&#xA;the formal parameter of a mapping as part of its inviocatuon or installation."/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="mappingCall" eType="#//MappingCall"
-        eOpposite="#//MappingCall/binding">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owningMappingCall" lowerBound="1"
+        eType="#//MappingCall" eOpposite="#//MappingCall/ownedMappingParameterBindings">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The containing MappingCall."/>
       </eAnnotations>
@@ -278,7 +285,7 @@
         <details key="documentation" value="The TypedModel to which the new object is added."/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedExpression" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//OCLExpression"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedExpression" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-OCLExpression"
         containment="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Optional expression that constructs the new object."/>
@@ -291,7 +298,7 @@
       <details key="documentation" value="An ObservableStatement may involve evaluation of an expression that accesses object properties whose&#xA;values may not be available. If not ready,the mapping execution is suspended until the required value&#xA;is made available by a notifying SetStatement.&#xA;&#xA;syntax: oclText[observe class::property ...]"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="observedProperties" ordered="false"
-        upperBound="-1" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//Property">
+        upperBound="-1" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Property">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The properties whose accesses must be checked for readiness."/>
       </eAnnotations>
@@ -302,13 +309,13 @@
       <details key="documentation" value="A SetStatement sets an object property to a computed value.&#xA;&#xA;syntax: oclText[notify set name : type := expression;]&#xA;&#xA;If oclText[notify] is specified, execution defines the property as ready enabling&#xA;mappings whose ObservableStatements are waiting for the value to resume."/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="targetVariable" lowerBound="1"
-        eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//VariableDeclaration"/>
+        eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-VariableDeclaration"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="targetProperty" lowerBound="1"
-        eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//Property"/>
+        eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Property"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isOpposite" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isNotify" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedExpression" lowerBound="1"
-        eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//OCLExpression"
+        eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-OCLExpression"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SimpleParameter" eSuperTypes="#//MappingParameter">
@@ -326,7 +333,7 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="A SimpleParameterBinding binds a simple parameter of an invoked Mapping to the value of an expression&#xA;computed by the invoker. Execution of the mapping may use the value.&#xA;&#xA;syntax: oclText[formalName uses expression;]"/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//OCLExpression"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-OCLExpression"
         containment="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The value or collection of values to bind to boundVariable"/>
@@ -339,12 +346,12 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Statement" abstract="true" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#//NamedElement">
+  <eClassifiers xsi:type="ecore:EClass" name="Statement" abstract="true" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-NamedElement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="A Statement is the basis for all execution by a Mapping."/>
     </eAnnotations>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="VariableStatement" abstract="true" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#//VariableDeclaration #//Statement">
+  <eClassifiers xsi:type="ecore:EClass" name="VariableStatement" abstract="true" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-VariableDeclaration #//Statement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="A VariableStatement is the basis for a Mapping execution that makes a name available to subsequent starements."/>
     </eAnnotations>

@@ -134,7 +134,7 @@ public class QVTimperativeUtil extends QVTbaseUtil
 	public static @NonNull MappingCall createMappingCall(@NonNull Mapping mapping, @NonNull List<@NonNull MappingParameterBinding> mappingParameterBindings) {
 		MappingCall mappingCall = QVTimperativeFactory.eINSTANCE.createMappingCall();
 		mappingCall.setReferredMapping(mapping);
-		mappingCall.getBinding().addAll(mappingParameterBindings);
+		mappingCall.getOwnedMappingParameterBindings().addAll(mappingParameterBindings);
 		return mappingCall;
 	}
 
@@ -268,8 +268,14 @@ public class QVTimperativeUtil extends QVTbaseUtil
 	}
 
 	@SuppressWarnings("unchecked")
+	public static @NonNull Iterable<@NonNull MappingParameterBinding> getOwnedMappingParameterBindings(@NonNull MappingCall mappingCall) {
+		Object ownedParameters = mappingCall.getOwnedMappingParameterBindings();
+		return (@NonNull Iterable<@NonNull MappingParameterBinding>)ownedParameters;
+	}
+
+	@SuppressWarnings("unchecked")
 	public static @NonNull Iterable<@NonNull MappingParameter> getOwnedMappingParameters(@NonNull Mapping mapping) {
-		Object ownedParameters = mapping.getOwnedParameters();
+		Object ownedParameters = mapping.getOwnedMappingParameters();
 		return (@NonNull Iterable<@NonNull MappingParameter>)ownedParameters;
 	}
 
@@ -416,6 +422,10 @@ public class QVTimperativeUtil extends QVTbaseUtil
 			//
 			ClassUtil.sort(variables, new PatternVariableComparator(def2refs));
 		}
+	}
+
+	public static @NonNull MappingCall getOwningMappingCall(@NonNull MappingParameterBinding mappingParameterBinding) {
+		return ClassUtil.nonNullState(mappingParameterBinding.getOwningMappingCall());
 	}
 
 	/**

@@ -618,13 +618,13 @@ public class QVTimperativeTables
 		public static final @NonNull ExecutorProperty _LoopVariable__LoopParameterBinding__value = new ExecutorPropertyWithImplementation("LoopParameterBinding", Types._LoopVariable, 1, new EcoreLibraryOppositeProperty(QVTimperativePackage.Literals.LOOP_PARAMETER_BINDING__VALUE));
 
 		public static final @NonNull ExecutorProperty _Mapping__isStrict = new EcoreExecutorProperty(QVTimperativePackage.Literals.MAPPING__IS_STRICT, Types._Mapping, 0);
-		public static final @NonNull ExecutorProperty _Mapping__ownedParameters = new EcoreExecutorProperty(QVTimperativePackage.Literals.MAPPING__OWNED_PARAMETERS, Types._Mapping, 1);
+		public static final @NonNull ExecutorProperty _Mapping__ownedMappingParameters = new EcoreExecutorProperty(QVTimperativePackage.Literals.MAPPING__OWNED_MAPPING_PARAMETERS, Types._Mapping, 1);
 		public static final @NonNull ExecutorProperty _Mapping__ownedStatements = new EcoreExecutorProperty(QVTimperativePackage.Literals.MAPPING__OWNED_STATEMENTS, Types._Mapping, 2);
 		public static final @NonNull ExecutorProperty _Mapping__MappingCall__referredMapping = new ExecutorPropertyWithImplementation("MappingCall", Types._Mapping, 3, new EcoreLibraryOppositeProperty(QVTimperativePackage.Literals.MAPPING_CALL__REFERRED_MAPPING));
 
-		public static final @NonNull ExecutorProperty _MappingCall__binding = new EcoreExecutorProperty(QVTimperativePackage.Literals.MAPPING_CALL__BINDING, Types._MappingCall, 0);
-		public static final @NonNull ExecutorProperty _MappingCall__isInstall = new EcoreExecutorProperty(QVTimperativePackage.Literals.MAPPING_CALL__IS_INSTALL, Types._MappingCall, 1);
-		public static final @NonNull ExecutorProperty _MappingCall__isInvoke = new EcoreExecutorProperty(QVTimperativePackage.Literals.MAPPING_CALL__IS_INVOKE, Types._MappingCall, 2);
+		public static final @NonNull ExecutorProperty _MappingCall__isInstall = new EcoreExecutorProperty(QVTimperativePackage.Literals.MAPPING_CALL__IS_INSTALL, Types._MappingCall, 0);
+		public static final @NonNull ExecutorProperty _MappingCall__isInvoke = new EcoreExecutorProperty(QVTimperativePackage.Literals.MAPPING_CALL__IS_INVOKE, Types._MappingCall, 1);
+		public static final @NonNull ExecutorProperty _MappingCall__ownedMappingParameterBindings = new EcoreExecutorProperty(QVTimperativePackage.Literals.MAPPING_CALL__OWNED_MAPPING_PARAMETER_BINDINGS, Types._MappingCall, 2);
 		public static final @NonNull ExecutorProperty _MappingCall__referredMapping = new EcoreExecutorProperty(QVTimperativePackage.Literals.MAPPING_CALL__REFERRED_MAPPING, Types._MappingCall, 3);
 		public static final @NonNull ExecutorProperty _MappingCall__referredNames = new EcoreExecutorProperty(QVTimperativePackage.Literals.MAPPING_CALL__REFERRED_NAMES, Types._MappingCall, 4);
 		public static final @NonNull ExecutorProperty _MappingCall__referringNames = new EcoreExecutorProperty(QVTimperativePackage.Literals.MAPPING_CALL__REFERRING_NAMES, Types._MappingCall, 5);
@@ -633,11 +633,11 @@ public class QVTimperativeTables
 		public static final @NonNull ExecutorProperty _MappingLoop__ownedIterators = new EcoreExecutorProperty(QVTimperativePackage.Literals.MAPPING_LOOP__OWNED_ITERATORS, Types._MappingLoop, 1);
 		public static final @NonNull ExecutorProperty _MappingLoop__ownedMappingStatements = new EcoreExecutorProperty(QVTimperativePackage.Literals.MAPPING_LOOP__OWNED_MAPPING_STATEMENTS, Types._MappingLoop, 2);
 
-		public static final @NonNull ExecutorProperty _MappingParameter__Mapping__ownedParameters = new ExecutorPropertyWithImplementation("Mapping", Types._MappingParameter, 0, new EcoreLibraryOppositeProperty(QVTimperativePackage.Literals.MAPPING__OWNED_PARAMETERS));
+		public static final @NonNull ExecutorProperty _MappingParameter__owningMapping = new EcoreExecutorProperty(QVTimperativePackage.Literals.MAPPING_PARAMETER__OWNING_MAPPING, Types._MappingParameter, 0);
 		public static final @NonNull ExecutorProperty _MappingParameter__MappingParameterBinding__boundVariable = new ExecutorPropertyWithImplementation("MappingParameterBinding", Types._MappingParameter, 1, new EcoreLibraryOppositeProperty(QVTimperativePackage.Literals.MAPPING_PARAMETER_BINDING__BOUND_VARIABLE));
 
 		public static final @NonNull ExecutorProperty _MappingParameterBinding__boundVariable = new EcoreExecutorProperty(QVTimperativePackage.Literals.MAPPING_PARAMETER_BINDING__BOUND_VARIABLE, Types._MappingParameterBinding, 0);
-		public static final @NonNull ExecutorProperty _MappingParameterBinding__mappingCall = new EcoreExecutorProperty(QVTimperativePackage.Literals.MAPPING_PARAMETER_BINDING__MAPPING_CALL, Types._MappingParameterBinding, 1);
+		public static final @NonNull ExecutorProperty _MappingParameterBinding__owningMappingCall = new EcoreExecutorProperty(QVTimperativePackage.Literals.MAPPING_PARAMETER_BINDING__OWNING_MAPPING_CALL, Types._MappingParameterBinding, 1);
 
 		public static final @NonNull ExecutorProperty _MappingStatement__MappingLoop__ownedMappingStatements = new ExecutorPropertyWithImplementation("MappingLoop", Types._MappingStatement, 0, new EcoreLibraryOppositeProperty(QVTimperativePackage.Literals.MAPPING_LOOP__OWNED_MAPPING_STATEMENTS));
 
@@ -2535,12 +2535,13 @@ public class QVTimperativeTables
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _AppendParameter = {
-			QVTimperativeTables.Properties._ConnectionVariable__isStrict
+			QVTimperativeTables.Properties._ConnectionVariable__isStrict,
+			QVTimperativeTables.Properties._MappingParameter__owningMapping
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _AppendParameterBinding = {
 			QVTimperativeTables.Properties._MappingParameterBinding__boundVariable,
-			QVTimperativeTables.Properties._MappingParameterBinding__mappingCall,
+			QVTimperativeTables.Properties._MappingParameterBinding__owningMappingCall,
 			QVTimperativeTables.Properties._AppendParameterBinding__value
 		};
 
@@ -2566,13 +2567,14 @@ public class QVTimperativeTables
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _GuardParameter = {
+			QVTimperativeTables.Properties._MappingParameter__owningMapping,
 			QVTimperativeTables.Properties._GuardParameter__referredTypedModel
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _GuardParameterBinding = {
 			QVTimperativeTables.Properties._MappingParameterBinding__boundVariable,
 			QVTimperativeTables.Properties._GuardParameterBinding__isCheck,
-			QVTimperativeTables.Properties._MappingParameterBinding__mappingCall,
+			QVTimperativeTables.Properties._MappingParameterBinding__owningMappingCall,
 			QVTimperativeTables.Properties._GuardParameterBinding__value
 		};
 
@@ -2588,7 +2590,7 @@ public class QVTimperativeTables
 		private static final @NonNull ExecutorProperty @NonNull [] _LoopParameterBinding = {
 			QVTimperativeTables.Properties._MappingParameterBinding__boundVariable,
 			QVTimperativeTables.Properties._LoopParameterBinding__isCheck,
-			QVTimperativeTables.Properties._MappingParameterBinding__mappingCall,
+			QVTimperativeTables.Properties._MappingParameterBinding__owningMappingCall,
 			QVTimperativeTables.Properties._LoopParameterBinding__value
 		};
 
@@ -2598,14 +2600,14 @@ public class QVTimperativeTables
 
 		private static final @NonNull ExecutorProperty @NonNull [] _Mapping = {
 			QVTimperativeTables.Properties._Mapping__isStrict,
-			QVTimperativeTables.Properties._Mapping__ownedParameters,
+			QVTimperativeTables.Properties._Mapping__ownedMappingParameters,
 			QVTimperativeTables.Properties._Mapping__ownedStatements
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _MappingCall = {
-			QVTimperativeTables.Properties._MappingCall__binding,
 			QVTimperativeTables.Properties._MappingCall__isInstall,
 			QVTimperativeTables.Properties._MappingCall__isInvoke,
+			QVTimperativeTables.Properties._MappingCall__ownedMappingParameterBindings,
 			QVTimperativeTables.Properties._MappingCall__referredMapping,
 			QVTimperativeTables.Properties._MappingCall__referredNames,
 			QVTimperativeTables.Properties._MappingCall__referringNames
@@ -2618,11 +2620,13 @@ public class QVTimperativeTables
 			QVTimperativeTables.Properties._MappingLoop__ownedMappingStatements
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _MappingParameter = {};
+		private static final @NonNull ExecutorProperty @NonNull [] _MappingParameter = {
+			QVTimperativeTables.Properties._MappingParameter__owningMapping
+		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _MappingParameterBinding = {
 			QVTimperativeTables.Properties._MappingParameterBinding__boundVariable,
-			QVTimperativeTables.Properties._MappingParameterBinding__mappingCall
+			QVTimperativeTables.Properties._MappingParameterBinding__owningMappingCall
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _MappingStatement = {};
@@ -2647,13 +2651,14 @@ public class QVTimperativeTables
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _SimpleParameter = {
+			QVTimperativeTables.Properties._MappingParameter__owningMapping,
 			QVTimperativeTables.Properties._SimpleParameter__referredTypedModel
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _SimpleParameterBinding = {
 			QVTimperativeTables.Properties._MappingParameterBinding__boundVariable,
 			QVTimperativeTables.Properties._SimpleParameterBinding__isCheck,
-			QVTimperativeTables.Properties._MappingParameterBinding__mappingCall,
+			QVTimperativeTables.Properties._MappingParameterBinding__owningMappingCall,
 			QVTimperativeTables.Properties._SimpleParameterBinding__value
 		};
 

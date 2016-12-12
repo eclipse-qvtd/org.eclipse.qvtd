@@ -229,9 +229,9 @@
         <details key="documentation" value="Repeated invocations of a strict Mapping are suppressed at run-time.&#xD;&#xA;&#xD;&#xA;Repeated invocations of a not-strict Mapping are guaranteed not to occur."/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtimperative-Mapping-ownedParameters"
-        name="ownedParameters" ordered="false" upperBound="-1" eType="#T-qvtimperative-MappingParameter"
-        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtimperative-Mapping-ownedMappingParameters"
+        name="ownedMappingParameters" ordered="false" upperBound="-1" eType="#T-qvtimperative-MappingParameter"
+        containment="true" eOpposite="#F-qvtimperative-MappingParameter-owningMapping"/>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtimperative-Mapping-ownedStatements"
         name="ownedStatements" upperBound="-1" eType="#T-qvtimperative-Statement"
         containment="true"/>
@@ -261,7 +261,7 @@
         <details key="originalName" value="UniqueCallBindings"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="binding->isUnique(boundVariable)&#xA;&#xA;"/>
+        <details key="body" value="ownedMappingParameterBindings->isUnique(boundVariable)&#xA;&#xA;"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -271,9 +271,9 @@
         </eGenericType>
       </eParameters>
     </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtimperative-MappingCall-binding"
-        name="binding" upperBound="-1" eType="#T-qvtimperative-MappingParameterBinding"
-        containment="true" eOpposite="#F-qvtimperative-MappingParameterBinding-mappingCall">
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtimperative-MappingCall-ownedMappingParameterBindings"
+        name="ownedMappingParameterBindings" upperBound="-1" eType="#T-qvtimperative-MappingParameterBinding"
+        containment="true" eOpposite="#F-qvtimperative-MappingParameterBinding-owningMappingCall">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The Set of bindings of variables or expressions to forma parameters."/>
       </eAnnotations>
@@ -302,7 +302,7 @@
         name="referredNames" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         changeable="false" volatile="true" transient="true" derived="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="derivation" value="referredMapping.ownedParameters.name->asSet()->sortedBy(n | n)&#xA;"/>
+        <details key="derivation" value="referredMapping.ownedMappingParameters.name->asSet()->sortedBy(n | n)&#xA;"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/OCL/Collection">
         <details key="nullFree" value="false"/>
@@ -312,7 +312,7 @@
         name="referringNames" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         changeable="false" volatile="true" transient="true" derived="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="derivation" value="binding.boundVariable.name->asSet()->sortedBy(n | n)&#xA;"/>
+        <details key="derivation" value="ownedMappingParameterBindings.boundVariable.name->asSet()->sortedBy(n | n)&#xA;"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/OCL/Collection">
         <details key="nullFree" value="false"/>
@@ -351,14 +351,21 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="A MappingParameter defines a formal parameter of a mapping. The parameter is bound by the&#xA;mapping invocation to satisfy the requirements of the derived parameter class."/>
     </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtimperative-MappingParameter-owningMapping"
+        name="owningMapping" lowerBound="1" eType="#T-qvtimperative-Mapping" eOpposite="#F-qvtimperative-Mapping-ownedMappingParameters">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The containing MappingCall."/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" xmi:id="T-qvtimperative-MappingParameterBinding"
       name="MappingParameterBinding" abstract="true" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Element">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="A MappingCallBinding specifies the binding of a single variable or value to&#xA;the formal parameter of a mapping as part of its inviocatuon or installation."/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtimperative-MappingParameterBinding-mappingCall"
-        name="mappingCall" eType="#T-qvtimperative-MappingCall" eOpposite="#F-qvtimperative-MappingCall-binding">
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtimperative-MappingParameterBinding-owningMappingCall"
+        name="owningMappingCall" lowerBound="1" eType="#T-qvtimperative-MappingCall"
+        eOpposite="#F-qvtimperative-MappingCall-ownedMappingParameterBindings">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The containing MappingCall."/>
       </eAnnotations>

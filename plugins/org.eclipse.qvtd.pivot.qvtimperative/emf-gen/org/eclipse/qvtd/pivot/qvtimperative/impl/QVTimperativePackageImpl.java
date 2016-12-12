@@ -275,7 +275,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link QVTimperativePackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -305,17 +305,18 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 
 		// Register package validator
 		EValidator.Registry.INSTANCE.put
-			(theQVTimperativePackage, 
-			 new EValidator.Descriptor() {
-				 public EValidator getEValidator() {
-					 return QVTimperativeValidator.INSTANCE;
-				 }
-			 });
+		(theQVTimperativePackage,
+			new EValidator.Descriptor() {
+			@Override
+			public EValidator getEValidator() {
+				return QVTimperativeValidator.INSTANCE;
+			}
+		});
 
 		// Mark meta-data to indicate it can't be changed
 		theQVTimperativePackage.freeze();
 
-  
+
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(QVTimperativePackage.eNS_URI, theQVTimperativePackage);
 		return theQVTimperativePackage;
@@ -366,6 +367,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EOperation getAddStatement__ValidateCompatibleTypeForValue__DiagnosticChain_Map() {
 		return addStatementEClass.getEOperations().get(0);
 	}
@@ -666,7 +668,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * @generated
 	 */
 	@Override
-	public EReference getMapping_OwnedParameters() {
+	public EReference getMapping_OwnedMappingParameters() {
 		return (EReference)mappingEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -688,6 +690,16 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	@Override
 	public EClass getMappingCall() {
 		return mappingCallEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getMappingCall_OwnedMappingParameterBindings() {
+		return (EReference)mappingCallEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -738,16 +750,6 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	@Override
 	public EOperation getMappingCall__ValidateUniqueCallBindings__DiagnosticChain_Map() {
 		return mappingCallEClass.getEOperations().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getMappingCall_Binding() {
-		return (EReference)mappingCallEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -826,6 +828,16 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * @generated
 	 */
 	@Override
+	public EReference getMappingParameter_OwningMapping() {
+		return (EReference)mappingParameterEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getMappingParameterBinding() {
 		return mappingParameterBindingEClass;
 	}
@@ -836,7 +848,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * @generated
 	 */
 	@Override
-	public EReference getMappingParameterBinding_MappingCall() {
+	public EReference getMappingParameterBinding_OwningMappingCall() {
 		return (EReference)mappingParameterBindingEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -895,6 +907,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EOperation getNewStatement__ValidateCompatibleTypeForValue__DiagnosticChain_Map() {
 		return newStatementEClass.getEOperations().get(0);
 	}
@@ -984,6 +997,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EOperation getSetStatement__ValidateCompatibleClassForProperty__DiagnosticChain_Map() {
 		return setStatementEClass.getEOperations().get(0);
 	}
@@ -993,6 +1007,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EOperation getSetStatement__ValidateCompatibleTypeForValue__DiagnosticChain_Map() {
 		return setStatementEClass.getEOperations().get(1);
 	}
@@ -1154,11 +1169,11 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 
 		mappingEClass = createEClass(MAPPING);
 		createEAttribute(mappingEClass, MAPPING__IS_STRICT);
-		createEReference(mappingEClass, MAPPING__OWNED_PARAMETERS);
+		createEReference(mappingEClass, MAPPING__OWNED_MAPPING_PARAMETERS);
 		createEReference(mappingEClass, MAPPING__OWNED_STATEMENTS);
 
 		mappingCallEClass = createEClass(MAPPING_CALL);
-		createEReference(mappingCallEClass, MAPPING_CALL__BINDING);
+		createEReference(mappingCallEClass, MAPPING_CALL__OWNED_MAPPING_PARAMETER_BINDINGS);
 		createEAttribute(mappingCallEClass, MAPPING_CALL__IS_INSTALL);
 		createEAttribute(mappingCallEClass, MAPPING_CALL__IS_INVOKE);
 		createEReference(mappingCallEClass, MAPPING_CALL__REFERRED_MAPPING);
@@ -1173,9 +1188,10 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		createEReference(mappingLoopEClass, MAPPING_LOOP__OWNED_EXPRESSION);
 
 		mappingParameterEClass = createEClass(MAPPING_PARAMETER);
+		createEReference(mappingParameterEClass, MAPPING_PARAMETER__OWNING_MAPPING);
 
 		mappingParameterBindingEClass = createEClass(MAPPING_PARAMETER_BINDING);
-		createEReference(mappingParameterBindingEClass, MAPPING_PARAMETER_BINDING__MAPPING_CALL);
+		createEReference(mappingParameterBindingEClass, MAPPING_PARAMETER_BINDING__OWNING_MAPPING_CALL);
 		createEReference(mappingParameterBindingEClass, MAPPING_PARAMETER_BINDING__BOUND_VARIABLE);
 
 		mappingStatementEClass = createEClass(MAPPING_STATEMENT);
@@ -1336,11 +1352,11 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 
 		initEClass(mappingEClass, Mapping.class, "Mapping", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getMapping_IsStrict(), ecorePackage.getEBoolean(), "isStrict", "false", 0, 1, Mapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getMapping_OwnedParameters(), this.getMappingParameter(), null, "ownedParameters", null, 0, -1, Mapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getMapping_OwnedMappingParameters(), this.getMappingParameter(), this.getMappingParameter_OwningMapping(), "ownedMappingParameters", null, 0, -1, Mapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getMapping_OwnedStatements(), this.getStatement(), null, "ownedStatements", null, 0, -1, Mapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(mappingCallEClass, MappingCall.class, "MappingCall", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getMappingCall_Binding(), this.getMappingParameterBinding(), this.getMappingParameterBinding_MappingCall(), "binding", null, 0, -1, MappingCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMappingCall_OwnedMappingParameterBindings(), this.getMappingParameterBinding(), this.getMappingParameterBinding_OwningMappingCall(), "ownedMappingParameterBindings", null, 0, -1, MappingCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMappingCall_IsInstall(), ecorePackage.getEBoolean(), "isInstall", "false", 0, 1, MappingCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMappingCall_IsInvoke(), ecorePackage.getEBoolean(), "isInvoke", "false", 0, 1, MappingCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMappingCall_ReferredMapping(), this.getMapping(), null, "referredMapping", null, 1, 1, MappingCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1371,9 +1387,10 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		initEReference(getMappingLoop_OwnedExpression(), thePivotPackage.getOCLExpression(), null, "ownedExpression", null, 1, 1, MappingLoop.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(mappingParameterEClass, MappingParameter.class, "MappingParameter", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getMappingParameter_OwningMapping(), this.getMapping(), this.getMapping_OwnedMappingParameters(), "owningMapping", null, 1, 1, MappingParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(mappingParameterBindingEClass, MappingParameterBinding.class, "MappingParameterBinding", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getMappingParameterBinding_MappingCall(), this.getMappingCall(), this.getMappingCall_Binding(), "mappingCall", null, 0, 1, MappingParameterBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMappingParameterBinding_OwningMappingCall(), this.getMappingCall(), this.getMappingCall_OwnedMappingParameterBindings(), "owningMappingCall", null, 1, 1, MappingParameterBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMappingParameterBinding_BoundVariable(), this.getMappingParameter(), null, "boundVariable", null, 1, 1, MappingParameterBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(mappingStatementEClass, MappingStatement.class, "MappingStatement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1452,12 +1469,12 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * @generated
 	 */
 	protected void createEcoreAnnotations() {
-		String source = "http://www.eclipse.org/emf/2002/Ecore";	
+		String source = "http://www.eclipse.org/emf/2002/Ecore";
 		addAnnotation
-		  (this, 
-		   source, 
-		   new String[] {
-		   });
+		(this,
+			source,
+			new String[] {
+		});
 	}
 
 	/**
@@ -1467,43 +1484,43 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * @generated
 	 */
 	protected void createUMLAnnotations() {
-		String source = "http://www.eclipse.org/uml2/2.0.0/UML";	
+		String source = "http://www.eclipse.org/uml2/2.0.0/UML";
 		addAnnotation
-		  (getAddStatement__ValidateCompatibleTypeForValue__DiagnosticChain_Map(), 
-		   source, 
-		   new String[] {
-			 "originalName", "CompatibleTypeForValue"
-		   });	
+		(getAddStatement__ValidateCompatibleTypeForValue__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "CompatibleTypeForValue"
+		});
 		addAnnotation
-		  (getMappingCall__ValidateMatchingCallBindings__DiagnosticChain_Map(), 
-		   source, 
-		   new String[] {
-			 "originalName", "MatchingCallBindings"
-		   });	
+		(getMappingCall__ValidateMatchingCallBindings__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "MatchingCallBindings"
+		});
 		addAnnotation
-		  (getMappingCall__ValidateUniqueCallBindings__DiagnosticChain_Map(), 
-		   source, 
-		   new String[] {
-			 "originalName", "UniqueCallBindings"
-		   });	
+		(getMappingCall__ValidateUniqueCallBindings__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "UniqueCallBindings"
+		});
 		addAnnotation
-		  (getNewStatement__ValidateCompatibleTypeForValue__DiagnosticChain_Map(), 
-		   source, 
-		   new String[] {
-			 "originalName", "CompatibleTypeForValue"
-		   });	
+		(getNewStatement__ValidateCompatibleTypeForValue__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "CompatibleTypeForValue"
+		});
 		addAnnotation
-		  (getSetStatement__ValidateCompatibleClassForProperty__DiagnosticChain_Map(), 
-		   source, 
-		   new String[] {
-			 "originalName", "CompatibleClassForProperty"
-		   });	
+		(getSetStatement__ValidateCompatibleClassForProperty__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "CompatibleClassForProperty"
+		});
 		addAnnotation
-		  (getSetStatement__ValidateCompatibleTypeForValue__DiagnosticChain_Map(), 
-		   source, 
-		   new String[] {
-			 "originalName", "CompatibleTypeForValue"
-		   });
+		(getSetStatement__ValidateCompatibleTypeForValue__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "CompatibleTypeForValue"
+		});
 	}
 
 	/**
@@ -1513,25 +1530,25 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * @generated
 	 */
 	protected void createCollectionAnnotations() {
-		String source = "http://www.eclipse.org/OCL/Collection";	
+		String source = "http://www.eclipse.org/OCL/Collection";
 		addAnnotation
-		  (getMappingCall_ReferredNames(), 
-		   source, 
-		   new String[] {
-			 "nullFree", "false"
-		   });	
+		(getMappingCall_ReferredNames(),
+			source,
+			new String[] {
+				"nullFree", "false"
+		});
 		addAnnotation
-		  (getMappingCall_ReferringNames(), 
-		   source, 
-		   new String[] {
-			 "nullFree", "false"
-		   });	
+		(getMappingCall_ReferringNames(),
+			source,
+			new String[] {
+				"nullFree", "false"
+		});
 		addAnnotation
-		  ((getStatement__JoinNames__EList()).getEParameters().get(0), 
-		   source, 
-		   new String[] {
-			 "nullFree", "false"
-		   });
+		((getStatement__JoinNames__EList()).getEParameters().get(0),
+			source,
+			new String[] {
+				"nullFree", "false"
+		});
 	}
 
 } //QVTimperativePackageImpl

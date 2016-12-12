@@ -71,6 +71,8 @@ import org.eclipse.qvtd.runtime.evaluation.Interval;
 import org.eclipse.qvtd.runtime.evaluation.InvocationConstructor;
 import org.eclipse.qvtd.runtime.evaluation.InvocationFailedException;
 
+import com.google.common.collect.Iterables;
+
 /**
  * QVTimperativeEvaluationVisitor is the class for ...
  */
@@ -114,9 +116,10 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 		if (referredMapping == null) {
 			return null;
 		}
-		@NonNull Object @NonNull [] boundValues = new @NonNull Object[mappingCall.getBinding().size()];
+		Iterable<@NonNull MappingParameterBinding> mappingParameterBindings = QVTimperativeUtil.getOwnedMappingParameterBindings(mappingCall);
+		@NonNull Object @NonNull [] boundValues = new @NonNull Object[Iterables.size(mappingParameterBindings)];
 		int index = 0;
-		for (MappingParameterBinding binding : mappingCall.getBinding()) {
+		for (@NonNull MappingParameterBinding binding : mappingParameterBindings) {
 			VariableDeclaration boundVariable = binding.getBoundVariable();
 			if (boundVariable == null) {
 				return null;
@@ -215,7 +218,7 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 			return null;
 		}
 		InvocationConstructor invocationConstructor = executor.getInvocationConstructor(mappingCall, undecoratedVisitor);
-		List<MappingParameterBinding> mappingBindings = mappingCall.getBinding();
+		Iterable<@NonNull MappingParameterBinding> mappingBindings = QVTimperativeUtil.getOwnedMappingParameterBindings(mappingCall);
 		assert mappingBindings != null;
 		for (MappingParameterBinding asMappingCallBinding : mappingBindings) {
 			if (asMappingCallBinding instanceof GuardParameterBinding) {

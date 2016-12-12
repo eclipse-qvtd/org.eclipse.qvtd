@@ -602,7 +602,7 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 		MappingCS csMapping = context.refreshNamedElement(MappingCS.class, QVTimperativeCSPackage.Literals.MAPPING_CS, asMapping);
 		csMapping.setPivot(asMapping);
 		refreshOwnedInTransformation(csMapping, asMapping);
-		context.refreshList(csMapping.getOwnedParameters(), context.visitDeclarations(MappingParameterCS.class, asMapping.getOwnedParameters(), null));
+		context.refreshList(csMapping.getOwnedParameters(), context.visitDeclarations(MappingParameterCS.class, asMapping.getOwnedMappingParameters(), null));
 		context.refreshList(csMapping.getOwnedStatements(), context.visitDeclarations(StatementCS.class, asMapping.getOwnedStatements(), null));
 		csMapping.setIsStrict(asMapping.isIsStrict());
 		return csMapping;
@@ -612,7 +612,7 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 	public ElementCS visitMappingCall(@NonNull MappingCall asMappingCall) {
 		MappingCallCS csMappingCall = context.refreshElement(MappingCallCS.class, QVTimperativeCSPackage.Literals.MAPPING_CALL_CS, asMappingCall);
 		csMappingCall.setPivot(asMappingCall);
-		context.refreshList(csMappingCall.getOwnedBindings(), context.visitDeclarations(MappingParameterBindingCS.class, asMappingCall.getBinding(), null));
+		context.refreshList(csMappingCall.getOwnedBindings(), context.visitDeclarations(MappingParameterBindingCS.class, asMappingCall.getOwnedMappingParameterBindings(), null));
 		csMappingCall.setIsInstall(asMappingCall.isIsInstall());
 		csMappingCall.setIsInvoke(asMappingCall.isIsInvoke());
 		refreshReferredMapping(csMappingCall, asMappingCall);

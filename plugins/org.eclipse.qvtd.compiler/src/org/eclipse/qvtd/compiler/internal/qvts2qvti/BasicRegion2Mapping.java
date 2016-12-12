@@ -837,7 +837,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		Type variableType = guardNode.getCompleteClass().getPrimaryClass();
 		ImperativeTypedModel iTypedModel = ClassUtil.nonNullState(visitor.getQVTiTypedModel(classDatumAnalysis.getTypedModel()));
 		GuardParameter guardVariable = helper.createGuardParameter(getSafeName(guardNode), iTypedModel, variableType, true);
-		mapping.getOwnedParameters().add(guardVariable);
+		mapping.getOwnedMappingParameters().add(guardVariable);
 		VariableDeclaration oldVariable = node2variable.put(guardNode, guardVariable);
 		assert oldVariable == null;
 		return guardVariable;

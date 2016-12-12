@@ -345,7 +345,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 
 		public void doBottoms() {
 			List<@NonNull CGGuardVariable> cgFreeVariables = new ArrayList<>();
-			for (@NonNull MappingParameter pMappingParameter : ClassUtil.nullFree(asMapping.getOwnedParameters())) {
+			for (@NonNull MappingParameter pMappingParameter : QVTimperativeUtil.getOwnedMappingParameters(asMapping)) {
 				cgFreeVariables.add(getGuardVariable(pMappingParameter));
 			}
 			Collections.sort(cgFreeVariables, NameUtil.NAMEABLE_COMPARATOR);
@@ -399,7 +399,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 			for (@NonNull EObject eObject : new TreeIterable(asMapping, false)) {
 				if (eObject instanceof AppendParameterBinding) {
 					AppendParameterBinding appendParameterBinding = (AppendParameterBinding)eObject;
-					MappingCall mappingCall = appendParameterBinding.getMappingCall();
+					MappingCall mappingCall = QVTimperativeUtil.getOwningMappingCall(appendParameterBinding);
 					Mapping referredMapping = mappingCall.getReferredMapping();
 					Integer appendingIntervalIndex = mapping2intervalIndex.get(referredMapping);
 					assert appendingIntervalIndex != null;
@@ -420,7 +420,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 			for (@NonNull EObject eObject : new TreeIterable(asMapping, false)) {
 				if (eObject instanceof GuardParameterBinding) {
 					GuardParameterBinding guardParameterBinding = (GuardParameterBinding)eObject;
-					MappingCall mappingCall = guardParameterBinding.getMappingCall();
+					MappingCall mappingCall = QVTimperativeUtil.getOwningMappingCall(guardParameterBinding);
 					Mapping referredMapping = mappingCall.getReferredMapping();
 					assert referredMapping != null;
 					Integer consumingIntervalIndex = mapping2intervalIndex.get(referredMapping);
@@ -994,7 +994,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 		CGMappingCall cgMappingCall = QVTiCGModelFactory.eINSTANCE.createCGMappingCall();
 		setAst(cgMappingCall, asMappingCall);
 		List<@NonNull CGMappingCallBinding> cgMappingCallBindings = new ArrayList<>();
-		for (MappingParameterBinding asMappingCallBinding : asMappingCall.getBinding()) {
+		for (@NonNull MappingParameterBinding asMappingCallBinding : QVTimperativeUtil.getOwnedMappingParameterBindings(asMappingCall)) {
 			CGMappingCallBinding cgMappingCallBinding = doVisit(CGMappingCallBinding.class, asMappingCallBinding);
 			cgMappingCallBindings.add(cgMappingCallBinding);
 		}

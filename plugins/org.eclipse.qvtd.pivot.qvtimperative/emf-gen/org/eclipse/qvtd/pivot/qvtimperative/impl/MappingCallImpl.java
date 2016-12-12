@@ -66,7 +66,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingCallImpl#getBinding <em>Binding</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingCallImpl#getOwnedMappingParameterBindings <em>Owned Mapping Parameter Bindings</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingCallImpl#isIsInstall <em>Is Install</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingCallImpl#isIsInvoke <em>Is Invoke</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingCallImpl#getReferredMapping <em>Referred Mapping</em>}</li>
@@ -78,14 +78,14 @@ import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
  */
 public class MappingCallImpl extends MappingStatementImpl implements MappingCall {
 	/**
-	 * The cached value of the '{@link #getBinding() <em>Binding</em>}' containment reference list.
+	 * The cached value of the '{@link #getOwnedMappingParameterBindings() <em>Owned Mapping Parameter Bindings</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getBinding()
+	 * @see #getOwnedMappingParameterBindings()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<MappingParameterBinding> binding;
+	protected EList<MappingParameterBinding> ownedMappingParameterBindings;
 
 	/**
 	 * The default value of the '{@link #isIsInstall() <em>Is Install</em>}' attribute.
@@ -162,6 +162,19 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 	 * @generated
 	 */
 	@Override
+	public EList<MappingParameterBinding> getOwnedMappingParameterBindings() {
+		if (ownedMappingParameterBindings == null) {
+			ownedMappingParameterBindings = new EObjectContainmentWithInverseEList<MappingParameterBinding>(MappingParameterBinding.class, this, QVTimperativePackage.MAPPING_CALL__OWNED_MAPPING_PARAMETER_BINDINGS, QVTimperativePackage.MAPPING_PARAMETER_BINDING__OWNING_MAPPING_CALL);
+		}
+		return ownedMappingParameterBindings;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Mapping getReferredMapping() {
 		if (referredMapping != null && referredMapping.eIsProxy()) {
 			InternalEObject oldReferredMapping = (InternalEObject)referredMapping;
@@ -204,7 +217,7 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 	@Override
 	public EList<String> getReferredNames() {
 		/**
-		 * referredMapping.ownedParameters.name->asSet()->sortedBy(n | n)
+		 * referredMapping.ownedMappingParameters.name->asSet()->sortedBy(n | n)
 		 */
 		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
 		final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@NonNull IdResolver idResolver = executor.getIdResolver();
@@ -212,10 +225,10 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 		@SuppressWarnings("null")
 		final /*@Thrown*/ org.eclipse.qvtd.pivot.qvtimperative.@NonNull Mapping referredMapping = this.getReferredMapping();
 		@SuppressWarnings("null")
-		final /*@Thrown*/ java.util.@NonNull List<MappingParameter> ownedParameters = referredMapping.getOwnedParameters();
-		final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SetValue BOXED_ownedParameters = idResolver.createSetOfAll(QVTimperativeTables.SET_CLSSid_MappingParameter, ownedParameters);
+		final /*@Thrown*/ java.util.@NonNull List<MappingParameter> ownedMappingParameters = referredMapping.getOwnedMappingParameters();
+		final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SetValue BOXED_ownedMappingParameters = idResolver.createSetOfAll(QVTimperativeTables.SET_CLSSid_MappingParameter, ownedMappingParameters);
 		/*@Thrown*/ BagValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator = ValueUtil.createBagAccumulatorValue(QVTimperativeTables.BAG_PRIMid_String);
-		@NonNull Iterator<Object> ITERATOR__1 = BOXED_ownedParameters.iterator();
+		@NonNull Iterator<Object> ITERATOR__1 = BOXED_ownedMappingParameters.iterator();
 		/*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull BagValue collect;
 		while (true) {
 			if (!ITERATOR__1.hasNext()) {
@@ -262,16 +275,16 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 	@Override
 	public EList<String> getReferringNames() {
 		/**
-		 * binding.boundVariable.name->asSet()->sortedBy(n | n)
+		 * ownedMappingParameterBindings.boundVariable.name->asSet()->sortedBy(n | n)
 		 */
 		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
 		final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@NonNull IdResolver idResolver = executor.getIdResolver();
 		final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull StandardLibrary standardLibrary = idResolver.getStandardLibrary();
 		@SuppressWarnings("null")
-		final /*@Thrown*/ java.util.@NonNull List<MappingParameterBinding> binding = this.getBinding();
-		final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_binding = idResolver.createOrderedSetOfAll(QVTimperativeTables.ORD_CLSSid_MappingParameterBinding, binding);
+		final /*@Thrown*/ java.util.@NonNull List<MappingParameterBinding> ownedMappingParameterBindings = this.getOwnedMappingParameterBindings();
+		final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_ownedMappingParameterBindings = idResolver.createOrderedSetOfAll(QVTimperativeTables.ORD_CLSSid_MappingParameterBinding, ownedMappingParameterBindings);
 		/*@Thrown*/ SequenceValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator = ValueUtil.createSequenceAccumulatorValue(QVTimperativeTables.SEQ_CLSSid_MappingParameter);
-		@NonNull Iterator<Object> ITERATOR__1 = BOXED_binding.iterator();
+		@NonNull Iterator<Object> ITERATOR__1 = BOXED_ownedMappingParameterBindings.iterator();
 		/*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SequenceValue collect_0;
 		while (true) {
 			if (!ITERATOR__1.hasNext()) {
@@ -424,7 +437,8 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 		 *     if severity <= 0
 		 *     then true
 		 *     else
-		 *       let status : OclAny[1] = binding->isUnique(boundVariable)
+		 *       let
+		 *         status : OclAny[1] = ownedMappingParameterBindings->isUnique(boundVariable)
 		 *       in
 		 *         'MappingCall::UniqueCallBindings'.logDiagnostic(self, null, diagnostics, context, null, severity, status, 0)
 		 *     endif
@@ -441,10 +455,10 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 			/*@Caught*/ @NonNull Object CAUGHT_status;
 			try {
 				@SuppressWarnings("null")
-				final /*@Thrown*/ java.util.@NonNull List<MappingParameterBinding> binding = this.getBinding();
-				final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_binding = idResolver.createOrderedSetOfAll(QVTimperativeTables.ORD_CLSSid_MappingParameterBinding, binding);
+				final /*@Thrown*/ java.util.@NonNull List<MappingParameterBinding> ownedMappingParameterBindings = this.getOwnedMappingParameterBindings();
+				final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_ownedMappingParameterBindings = idResolver.createOrderedSetOfAll(QVTimperativeTables.ORD_CLSSid_MappingParameterBinding, ownedMappingParameterBindings);
 				/*@Thrown*/ SetValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator = ValueUtil.createSetAccumulatorValue(QVTimperativeTables.ORD_CLSSid_MappingParameterBinding);
-				@NonNull Iterator<Object> ITERATOR__1 = BOXED_binding.iterator();
+				@NonNull Iterator<Object> ITERATOR__1 = BOXED_ownedMappingParameterBindings.iterator();
 				/*@Thrown*/ boolean status;
 				while (true) {
 					if (!ITERATOR__1.hasNext()) {
@@ -486,19 +500,6 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 	@Override
 	public String toString() {
 		return super.toString();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EList<MappingParameterBinding> getBinding() {
-		if (binding == null) {
-			binding = new EObjectContainmentWithInverseEList<MappingParameterBinding>(MappingParameterBinding.class, this, QVTimperativePackage.MAPPING_CALL__BINDING, QVTimperativePackage.MAPPING_PARAMETER_BINDING__MAPPING_CALL);
-		}
-		return binding;
 	}
 
 	/**
@@ -556,8 +557,8 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTimperativePackage.MAPPING_CALL__BINDING:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getBinding()).basicAdd(otherEnd, msgs);
+			case QVTimperativePackage.MAPPING_CALL__OWNED_MAPPING_PARAMETER_BINDINGS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedMappingParameterBindings()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -570,8 +571,8 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTimperativePackage.MAPPING_CALL__BINDING:
-				return ((InternalEList<?>)getBinding()).basicRemove(otherEnd, msgs);
+			case QVTimperativePackage.MAPPING_CALL__OWNED_MAPPING_PARAMETER_BINDINGS:
+				return ((InternalEList<?>)getOwnedMappingParameterBindings()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -584,8 +585,8 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTimperativePackage.MAPPING_CALL__BINDING:
-				return getBinding();
+			case QVTimperativePackage.MAPPING_CALL__OWNED_MAPPING_PARAMETER_BINDINGS:
+				return getOwnedMappingParameterBindings();
 			case QVTimperativePackage.MAPPING_CALL__IS_INSTALL:
 				return isIsInstall();
 			case QVTimperativePackage.MAPPING_CALL__IS_INVOKE:
@@ -610,9 +611,9 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTimperativePackage.MAPPING_CALL__BINDING:
-				getBinding().clear();
-				getBinding().addAll((Collection<? extends MappingParameterBinding>)newValue);
+			case QVTimperativePackage.MAPPING_CALL__OWNED_MAPPING_PARAMETER_BINDINGS:
+				getOwnedMappingParameterBindings().clear();
+				getOwnedMappingParameterBindings().addAll((Collection<? extends MappingParameterBinding>)newValue);
 				return;
 			case QVTimperativePackage.MAPPING_CALL__IS_INSTALL:
 				setIsInstall((Boolean)newValue);
@@ -635,8 +636,8 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTimperativePackage.MAPPING_CALL__BINDING:
-				getBinding().clear();
+			case QVTimperativePackage.MAPPING_CALL__OWNED_MAPPING_PARAMETER_BINDINGS:
+				getOwnedMappingParameterBindings().clear();
 				return;
 			case QVTimperativePackage.MAPPING_CALL__IS_INSTALL:
 				setIsInstall(IS_INSTALL_EDEFAULT);
@@ -659,8 +660,8 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTimperativePackage.MAPPING_CALL__BINDING:
-				return binding != null && !binding.isEmpty();
+			case QVTimperativePackage.MAPPING_CALL__OWNED_MAPPING_PARAMETER_BINDINGS:
+				return ownedMappingParameterBindings != null && !ownedMappingParameterBindings.isEmpty();
 			case QVTimperativePackage.MAPPING_CALL__IS_INSTALL:
 				return isInstall != IS_INSTALL_EDEFAULT;
 			case QVTimperativePackage.MAPPING_CALL__IS_INVOKE:

@@ -797,13 +797,22 @@ public interface QVTimperativePackage extends EPackage {
 	int APPEND_PARAMETER__IS_STRICT = CONNECTION_VARIABLE__IS_STRICT;
 
 	/**
+	 * The feature id for the '<em><b>Owning Mapping</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APPEND_PARAMETER__OWNING_MAPPING = CONNECTION_VARIABLE_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>Append Parameter</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int APPEND_PARAMETER_FEATURE_COUNT = CONNECTION_VARIABLE_FEATURE_COUNT + 0;
+	int APPEND_PARAMETER_FEATURE_COUNT = CONNECTION_VARIABLE_FEATURE_COUNT + 1;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -915,13 +924,13 @@ public interface QVTimperativePackage extends EPackage {
 	int MAPPING_PARAMETER_BINDING__OWNED_EXTENSIONS = PivotPackage.ELEMENT__OWNED_EXTENSIONS;
 
 	/**
-	 * The feature id for the '<em><b>Mapping Call</b></em>' container reference.
+	 * The feature id for the '<em><b>Owning Mapping Call</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_PARAMETER_BINDING__MAPPING_CALL = PivotPackage.ELEMENT_FEATURE_COUNT + 0;
+	int MAPPING_PARAMETER_BINDING__OWNING_MAPPING_CALL = PivotPackage.ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Bound Variable</b></em>' reference.
@@ -1055,13 +1064,13 @@ public interface QVTimperativePackage extends EPackage {
 	int APPEND_PARAMETER_BINDING__OWNED_EXTENSIONS = MAPPING_PARAMETER_BINDING__OWNED_EXTENSIONS;
 
 	/**
-	 * The feature id for the '<em><b>Mapping Call</b></em>' container reference.
+	 * The feature id for the '<em><b>Owning Mapping Call</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int APPEND_PARAMETER_BINDING__MAPPING_CALL = MAPPING_PARAMETER_BINDING__MAPPING_CALL;
+	int APPEND_PARAMETER_BINDING__OWNING_MAPPING_CALL = MAPPING_PARAMETER_BINDING__OWNING_MAPPING_CALL;
 
 	/**
 	 * The feature id for the '<em><b>Bound Variable</b></em>' reference.
@@ -1956,13 +1965,22 @@ public interface QVTimperativePackage extends EPackage {
 	int MAPPING_PARAMETER__TYPE_VALUE = PivotPackage.VARIABLE_DECLARATION__TYPE_VALUE;
 
 	/**
+	 * The feature id for the '<em><b>Owning Mapping</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_PARAMETER__OWNING_MAPPING = PivotPackage.VARIABLE_DECLARATION_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>Mapping Parameter</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_PARAMETER_FEATURE_COUNT = PivotPackage.VARIABLE_DECLARATION_FEATURE_COUNT + 0;
+	int MAPPING_PARAMETER_FEATURE_COUNT = PivotPackage.VARIABLE_DECLARATION_FEATURE_COUNT + 1;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -2109,6 +2127,15 @@ public interface QVTimperativePackage extends EPackage {
 	int GUARD_PARAMETER__TYPE_VALUE = MAPPING_PARAMETER__TYPE_VALUE;
 
 	/**
+	 * The feature id for the '<em><b>Owning Mapping</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GUARD_PARAMETER__OWNING_MAPPING = MAPPING_PARAMETER__OWNING_MAPPING;
+
+	/**
 	 * The feature id for the '<em><b>Referred Typed Model</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2226,13 +2253,13 @@ public interface QVTimperativePackage extends EPackage {
 	int GUARD_PARAMETER_BINDING__OWNED_EXTENSIONS = MAPPING_PARAMETER_BINDING__OWNED_EXTENSIONS;
 
 	/**
-	 * The feature id for the '<em><b>Mapping Call</b></em>' container reference.
+	 * The feature id for the '<em><b>Owning Mapping Call</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int GUARD_PARAMETER_BINDING__MAPPING_CALL = MAPPING_PARAMETER_BINDING__MAPPING_CALL;
+	int GUARD_PARAMETER_BINDING__OWNING_MAPPING_CALL = MAPPING_PARAMETER_BINDING__OWNING_MAPPING_CALL;
 
 	/**
 	 * The feature id for the '<em><b>Bound Variable</b></em>' reference.
@@ -2939,13 +2966,13 @@ public interface QVTimperativePackage extends EPackage {
 	int LOOP_PARAMETER_BINDING__OWNED_EXTENSIONS = MAPPING_PARAMETER_BINDING__OWNED_EXTENSIONS;
 
 	/**
-	 * The feature id for the '<em><b>Mapping Call</b></em>' container reference.
+	 * The feature id for the '<em><b>Owning Mapping Call</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LOOP_PARAMETER_BINDING__MAPPING_CALL = MAPPING_PARAMETER_BINDING__MAPPING_CALL;
+	int LOOP_PARAMETER_BINDING__OWNING_MAPPING_CALL = MAPPING_PARAMETER_BINDING__OWNING_MAPPING_CALL;
 
 	/**
 	 * The feature id for the '<em><b>Bound Variable</b></em>' reference.
@@ -3272,13 +3299,13 @@ public interface QVTimperativePackage extends EPackage {
 	int MAPPING__IS_STRICT = QVTbasePackage.RULE_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Owned Parameters</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Mapping Parameters</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING__OWNED_PARAMETERS = QVTbasePackage.RULE_FEATURE_COUNT + 1;
+	int MAPPING__OWNED_MAPPING_PARAMETERS = QVTbasePackage.RULE_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Owned Statements</b></em>' containment reference list.
@@ -3371,13 +3398,13 @@ public interface QVTimperativePackage extends EPackage {
 	int MAPPING_CALL__NAME = MAPPING_STATEMENT__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Binding</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Mapping Parameter Bindings</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_CALL__BINDING = MAPPING_STATEMENT_FEATURE_COUNT + 0;
+	int MAPPING_CALL__OWNED_MAPPING_PARAMETER_BINDINGS = MAPPING_STATEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Is Install</b></em>' attribute.
@@ -4094,6 +4121,15 @@ public interface QVTimperativePackage extends EPackage {
 	int SIMPLE_PARAMETER__TYPE_VALUE = MAPPING_PARAMETER__TYPE_VALUE;
 
 	/**
+	 * The feature id for the '<em><b>Owning Mapping</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SIMPLE_PARAMETER__OWNING_MAPPING = MAPPING_PARAMETER__OWNING_MAPPING;
+
+	/**
 	 * The feature id for the '<em><b>Referred Typed Model</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4221,13 +4257,13 @@ public interface QVTimperativePackage extends EPackage {
 	int SIMPLE_PARAMETER_BINDING__OWNED_EXTENSIONS = MAPPING_PARAMETER_BINDING__OWNED_EXTENSIONS;
 
 	/**
-	 * The feature id for the '<em><b>Mapping Call</b></em>' container reference.
+	 * The feature id for the '<em><b>Owning Mapping Call</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SIMPLE_PARAMETER_BINDING__MAPPING_CALL = MAPPING_PARAMETER_BINDING__MAPPING_CALL;
+	int SIMPLE_PARAMETER_BINDING__OWNING_MAPPING_CALL = MAPPING_PARAMETER_BINDING__OWNING_MAPPING_CALL;
 
 	/**
 	 * The feature id for the '<em><b>Bound Variable</b></em>' reference.
@@ -4651,15 +4687,15 @@ public interface QVTimperativePackage extends EPackage {
 	EAttribute getMapping_IsStrict();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.pivot.qvtimperative.Mapping#getOwnedParameters <em>Owned Parameters</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.pivot.qvtimperative.Mapping#getOwnedMappingParameters <em>Owned Mapping Parameters</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Owned Parameters</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.Mapping#getOwnedParameters()
+	 * @return the meta object for the containment reference list '<em>Owned Mapping Parameters</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.Mapping#getOwnedMappingParameters()
 	 * @see #getMapping()
 	 * @generated
 	 */
-	EReference getMapping_OwnedParameters();
+	EReference getMapping_OwnedMappingParameters();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.pivot.qvtimperative.Mapping#getOwnedStatements <em>Owned Statements</em>}'.
@@ -4681,6 +4717,17 @@ public interface QVTimperativePackage extends EPackage {
 	 * @generated
 	 */
 	EClass getMappingCall();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.pivot.qvtimperative.MappingCall#getOwnedMappingParameterBindings <em>Owned Mapping Parameter Bindings</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Owned Mapping Parameter Bindings</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.MappingCall#getOwnedMappingParameterBindings()
+	 * @see #getMappingCall()
+	 * @generated
+	 */
+	EReference getMappingCall_OwnedMappingParameterBindings();
 
 	/**
 	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtimperative.MappingCall#getReferredMapping <em>Referred Mapping</em>}'.
@@ -4734,17 +4781,6 @@ public interface QVTimperativePackage extends EPackage {
 	 * @generated
 	 */
 	EOperation getMappingCall__ValidateUniqueCallBindings__DiagnosticChain_Map();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.pivot.qvtimperative.MappingCall#getBinding <em>Binding</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Binding</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.MappingCall#getBinding()
-	 * @see #getMappingCall()
-	 * @generated
-	 */
-	EReference getMappingCall_Binding();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtimperative.MappingCall#isIsInstall <em>Is Install</em>}'.
@@ -4822,6 +4858,17 @@ public interface QVTimperativePackage extends EPackage {
 	EClass getMappingParameter();
 
 	/**
+	 * Returns the meta object for the container reference '{@link org.eclipse.qvtd.pivot.qvtimperative.MappingParameter#getOwningMapping <em>Owning Mapping</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Owning Mapping</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.MappingParameter#getOwningMapping()
+	 * @see #getMappingParameter()
+	 * @generated
+	 */
+	EReference getMappingParameter_OwningMapping();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtimperative.MappingParameterBinding <em>Mapping Parameter Binding</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4832,15 +4879,15 @@ public interface QVTimperativePackage extends EPackage {
 	EClass getMappingParameterBinding();
 
 	/**
-	 * Returns the meta object for the container reference '{@link org.eclipse.qvtd.pivot.qvtimperative.MappingParameterBinding#getMappingCall <em>Mapping Call</em>}'.
+	 * Returns the meta object for the container reference '{@link org.eclipse.qvtd.pivot.qvtimperative.MappingParameterBinding#getOwningMappingCall <em>Owning Mapping Call</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Mapping Call</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.MappingParameterBinding#getMappingCall()
+	 * @return the meta object for the container reference '<em>Owning Mapping Call</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.MappingParameterBinding#getOwningMappingCall()
 	 * @see #getMappingParameterBinding()
 	 * @generated
 	 */
-	EReference getMappingParameterBinding_MappingCall();
+	EReference getMappingParameterBinding_OwningMappingCall();
 
 	/**
 	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtimperative.MappingParameterBinding#getBoundVariable <em>Bound Variable</em>}'.
@@ -5419,12 +5466,12 @@ public interface QVTimperativePackage extends EPackage {
 		EAttribute MAPPING__IS_STRICT = eINSTANCE.getMapping_IsStrict();
 
 		/**
-		 * The meta object literal for the '<em><b>Owned Parameters</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Owned Mapping Parameters</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference MAPPING__OWNED_PARAMETERS = eINSTANCE.getMapping_OwnedParameters();
+		EReference MAPPING__OWNED_MAPPING_PARAMETERS = eINSTANCE.getMapping_OwnedMappingParameters();
 
 		/**
 		 * The meta object literal for the '<em><b>Owned Statements</b></em>' containment reference list feature.
@@ -5443,6 +5490,14 @@ public interface QVTimperativePackage extends EPackage {
 		 * @generated
 		 */
 		EClass MAPPING_CALL = eINSTANCE.getMappingCall();
+
+		/**
+		 * The meta object literal for the '<em><b>Owned Mapping Parameter Bindings</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MAPPING_CALL__OWNED_MAPPING_PARAMETER_BINDINGS = eINSTANCE.getMappingCall_OwnedMappingParameterBindings();
 
 		/**
 		 * The meta object literal for the '<em><b>Referred Mapping</b></em>' reference feature.
@@ -5483,14 +5538,6 @@ public interface QVTimperativePackage extends EPackage {
 		 * @generated
 		 */
 		EOperation MAPPING_CALL___VALIDATE_UNIQUE_CALL_BINDINGS__DIAGNOSTICCHAIN_MAP = eINSTANCE.getMappingCall__ValidateUniqueCallBindings__DiagnosticChain_Map();
-
-		/**
-		 * The meta object literal for the '<em><b>Binding</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference MAPPING_CALL__BINDING = eINSTANCE.getMappingCall_Binding();
 
 		/**
 		 * The meta object literal for the '<em><b>Is Install</b></em>' attribute feature.
@@ -5553,6 +5600,14 @@ public interface QVTimperativePackage extends EPackage {
 		EClass MAPPING_PARAMETER = eINSTANCE.getMappingParameter();
 
 		/**
+		 * The meta object literal for the '<em><b>Owning Mapping</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MAPPING_PARAMETER__OWNING_MAPPING = eINSTANCE.getMappingParameter_OwningMapping();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingParameterBindingImpl <em>Mapping Parameter Binding</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -5563,12 +5618,12 @@ public interface QVTimperativePackage extends EPackage {
 		EClass MAPPING_PARAMETER_BINDING = eINSTANCE.getMappingParameterBinding();
 
 		/**
-		 * The meta object literal for the '<em><b>Mapping Call</b></em>' container reference feature.
+		 * The meta object literal for the '<em><b>Owning Mapping Call</b></em>' container reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference MAPPING_PARAMETER_BINDING__MAPPING_CALL = eINSTANCE.getMappingParameterBinding_MappingCall();
+		EReference MAPPING_PARAMETER_BINDING__OWNING_MAPPING_CALL = eINSTANCE.getMappingParameterBinding_OwningMappingCall();
 
 		/**
 		 * The meta object literal for the '<em><b>Bound Variable</b></em>' reference feature.

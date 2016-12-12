@@ -132,7 +132,7 @@ public abstract class AbstractRegion2Mapping
 			for (@NonNull NodeConnection connection : intermediateConnections) {
 				AppendParameter connectionVariable = createAppendParameter(connection);
 				connection2variable.put(connection, connectionVariable);
-				mapping.getOwnedParameters().add(connectionVariable);
+				mapping.getOwnedMappingParameters().add(connectionVariable);
 			}
 		}
 	}

@@ -21,6 +21,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.AppendParameterBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 
 public class AppendParameterBindingAttribution extends EmptyAttribution
 {
@@ -29,41 +30,39 @@ public class AppendParameterBindingAttribution extends EmptyAttribution
 	@Override
 	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
 		AppendParameterBinding mappingParameterBinding = (AppendParameterBinding)target;
-		MappingCall mappingCall = mappingParameterBinding.getMappingCall();
-		if (mappingCall != null) {
-			EStructuralFeature targetReference = environmentView.getReference();
-			EClassifier targetType = targetReference.getEType();
-			if (targetType == QVTimperativePackage.Literals.APPEND_PARAMETER) {
-				Mapping referredMapping = mappingCall.getReferredMapping();
-				if (referredMapping != null) {
-					environmentView.addNamedElements(referredMapping.getOwnedParameters());
-				}
+		MappingCall mappingCall = QVTimperativeUtil.getOwningMappingCall(mappingParameterBinding);
+		EStructuralFeature targetReference = environmentView.getReference();
+		EClassifier targetType = targetReference.getEType();
+		if (targetType == QVTimperativePackage.Literals.APPEND_PARAMETER) {
+			Mapping referredMapping = mappingCall.getReferredMapping();
+			if (referredMapping != null) {
+				environmentView.addNamedElements(QVTimperativeUtil.getOwnedMappingParameters(referredMapping));
 			}
-			/*			else if (targetType == QVTimperativePackage.Literals.GUARD_PARAMETER) {
-				Mapping referredMapping = mappingCall.getReferredMapping();
-				if (referredMapping != null) {
-					environmentView.addNamedElements(referredMapping.getOwnedParameters());
-				}
-			}
-			else if (targetType == QVTimperativePackage.Literals.MAPPING_PARAMETER) {
-				Mapping referredMapping = mappingCall.getReferredMapping();
-				if (referredMapping != null) {
-					environmentView.addNamedElements(referredMapping.getOwnedParameters());
-				}
-			}
-			else if (targetType == PivotPackage.Literals.VARIABLE_DECLARATION) {
-				Mapping referredMapping = mappingCall.getReferredMapping();
-				if (referredMapping != null) {
-					environmentView.addNamedElements(referredMapping.getOwnedParameters());
-				}
-			}
-			else if (targetType == QVTimperativePackage.Literals.CONNECTION_VARIABLE) {
-				Mapping referredMapping = mappingCall.getReferredMapping();
-				if (referredMapping != null) {
-					environmentView.addNamedElements(referredMapping.getOwnedParameters());
-				}
-			}  */
 		}
+		/*			else if (targetType == QVTimperativePackage.Literals.GUARD_PARAMETER) {
+			Mapping referredMapping = mappingCall.getReferredMapping();
+			if (referredMapping != null) {
+				environmentView.addNamedElements(referredMapping.getOwnedParameters());
+			}
+		}
+		else if (targetType == QVTimperativePackage.Literals.MAPPING_PARAMETER) {
+			Mapping referredMapping = mappingCall.getReferredMapping();
+			if (referredMapping != null) {
+				environmentView.addNamedElements(referredMapping.getOwnedParameters());
+			}
+		}
+		else if (targetType == PivotPackage.Literals.VARIABLE_DECLARATION) {
+			Mapping referredMapping = mappingCall.getReferredMapping();
+			if (referredMapping != null) {
+				environmentView.addNamedElements(referredMapping.getOwnedParameters());
+			}
+		}
+		else if (targetType == QVTimperativePackage.Literals.CONNECTION_VARIABLE) {
+			Mapping referredMapping = mappingCall.getReferredMapping();
+			if (referredMapping != null) {
+				environmentView.addNamedElements(referredMapping.getOwnedParameters());
+			}
+		}  */
 		return super.computeLookup(target, environmentView, scopeView);
 	}
 }

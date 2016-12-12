@@ -34,7 +34,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingParameterBindingImpl#getMappingCall <em>Mapping Call</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingParameterBindingImpl#getOwningMappingCall <em>Owning Mapping Call</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingParameterBindingImpl#getBoundVariable <em>Bound Variable</em>}</li>
  * </ul>
  *
@@ -76,8 +76,8 @@ public abstract class MappingParameterBindingImpl extends ElementImpl implements
 	 * @generated
 	 */
 	@Override
-	public MappingCall getMappingCall() {
-		if (eContainerFeatureID() != QVTimperativePackage.MAPPING_PARAMETER_BINDING__MAPPING_CALL) return null;
+	public MappingCall getOwningMappingCall() {
+		if (eContainerFeatureID() != QVTimperativePackage.MAPPING_PARAMETER_BINDING__OWNING_MAPPING_CALL) return null;
 		return (MappingCall)eInternalContainer();
 	}
 
@@ -86,8 +86,8 @@ public abstract class MappingParameterBindingImpl extends ElementImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetMappingCall(MappingCall newMappingCall, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newMappingCall, QVTimperativePackage.MAPPING_PARAMETER_BINDING__MAPPING_CALL, msgs);
+	public NotificationChain basicSetOwningMappingCall(MappingCall newOwningMappingCall, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newOwningMappingCall, QVTimperativePackage.MAPPING_PARAMETER_BINDING__OWNING_MAPPING_CALL, msgs);
 		return msgs;
 	}
 
@@ -97,20 +97,20 @@ public abstract class MappingParameterBindingImpl extends ElementImpl implements
 	 * @generated
 	 */
 	@Override
-	public void setMappingCall(MappingCall newMappingCall) {
-		if (newMappingCall != eInternalContainer() || (eContainerFeatureID() != QVTimperativePackage.MAPPING_PARAMETER_BINDING__MAPPING_CALL && newMappingCall != null)) {
-			if (EcoreUtil.isAncestor(this, newMappingCall))
+	public void setOwningMappingCall(MappingCall newOwningMappingCall) {
+		if (newOwningMappingCall != eInternalContainer() || (eContainerFeatureID() != QVTimperativePackage.MAPPING_PARAMETER_BINDING__OWNING_MAPPING_CALL && newOwningMappingCall != null)) {
+			if (EcoreUtil.isAncestor(this, newOwningMappingCall))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
-			if (newMappingCall != null)
-				msgs = ((InternalEObject)newMappingCall).eInverseAdd(this, QVTimperativePackage.MAPPING_CALL__BINDING, MappingCall.class, msgs);
-			msgs = basicSetMappingCall(newMappingCall, msgs);
+			if (newOwningMappingCall != null)
+				msgs = ((InternalEObject)newOwningMappingCall).eInverseAdd(this, QVTimperativePackage.MAPPING_CALL__OWNED_MAPPING_PARAMETER_BINDINGS, MappingCall.class, msgs);
+			msgs = basicSetOwningMappingCall(newOwningMappingCall, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.MAPPING_PARAMETER_BINDING__MAPPING_CALL, newMappingCall, newMappingCall));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.MAPPING_PARAMETER_BINDING__OWNING_MAPPING_CALL, newOwningMappingCall, newOwningMappingCall));
 	}
 
 	/**
@@ -161,10 +161,10 @@ public abstract class MappingParameterBindingImpl extends ElementImpl implements
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTimperativePackage.MAPPING_PARAMETER_BINDING__MAPPING_CALL:
+			case QVTimperativePackage.MAPPING_PARAMETER_BINDING__OWNING_MAPPING_CALL:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetMappingCall((MappingCall)otherEnd, msgs);
+				return basicSetOwningMappingCall((MappingCall)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -177,8 +177,8 @@ public abstract class MappingParameterBindingImpl extends ElementImpl implements
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTimperativePackage.MAPPING_PARAMETER_BINDING__MAPPING_CALL:
-				return basicSetMappingCall(null, msgs);
+			case QVTimperativePackage.MAPPING_PARAMETER_BINDING__OWNING_MAPPING_CALL:
+				return basicSetOwningMappingCall(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -191,8 +191,8 @@ public abstract class MappingParameterBindingImpl extends ElementImpl implements
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case QVTimperativePackage.MAPPING_PARAMETER_BINDING__MAPPING_CALL:
-				return eInternalContainer().eInverseRemove(this, QVTimperativePackage.MAPPING_CALL__BINDING, MappingCall.class, msgs);
+			case QVTimperativePackage.MAPPING_PARAMETER_BINDING__OWNING_MAPPING_CALL:
+				return eInternalContainer().eInverseRemove(this, QVTimperativePackage.MAPPING_CALL__OWNED_MAPPING_PARAMETER_BINDINGS, MappingCall.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -205,8 +205,8 @@ public abstract class MappingParameterBindingImpl extends ElementImpl implements
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTimperativePackage.MAPPING_PARAMETER_BINDING__MAPPING_CALL:
-				return getMappingCall();
+			case QVTimperativePackage.MAPPING_PARAMETER_BINDING__OWNING_MAPPING_CALL:
+				return getOwningMappingCall();
 			case QVTimperativePackage.MAPPING_PARAMETER_BINDING__BOUND_VARIABLE:
 				if (resolve) return getBoundVariable();
 				return basicGetBoundVariable();
@@ -222,8 +222,8 @@ public abstract class MappingParameterBindingImpl extends ElementImpl implements
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTimperativePackage.MAPPING_PARAMETER_BINDING__MAPPING_CALL:
-				setMappingCall((MappingCall)newValue);
+			case QVTimperativePackage.MAPPING_PARAMETER_BINDING__OWNING_MAPPING_CALL:
+				setOwningMappingCall((MappingCall)newValue);
 				return;
 			case QVTimperativePackage.MAPPING_PARAMETER_BINDING__BOUND_VARIABLE:
 				setBoundVariable((MappingParameter)newValue);
@@ -240,8 +240,8 @@ public abstract class MappingParameterBindingImpl extends ElementImpl implements
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTimperativePackage.MAPPING_PARAMETER_BINDING__MAPPING_CALL:
-				setMappingCall((MappingCall)null);
+			case QVTimperativePackage.MAPPING_PARAMETER_BINDING__OWNING_MAPPING_CALL:
+				setOwningMappingCall((MappingCall)null);
 				return;
 			case QVTimperativePackage.MAPPING_PARAMETER_BINDING__BOUND_VARIABLE:
 				setBoundVariable((MappingParameter)null);
@@ -258,8 +258,8 @@ public abstract class MappingParameterBindingImpl extends ElementImpl implements
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTimperativePackage.MAPPING_PARAMETER_BINDING__MAPPING_CALL:
-				return getMappingCall() != null;
+			case QVTimperativePackage.MAPPING_PARAMETER_BINDING__OWNING_MAPPING_CALL:
+				return getOwningMappingCall() != null;
 			case QVTimperativePackage.MAPPING_PARAMETER_BINDING__BOUND_VARIABLE:
 				return boundVariable != null;
 		}

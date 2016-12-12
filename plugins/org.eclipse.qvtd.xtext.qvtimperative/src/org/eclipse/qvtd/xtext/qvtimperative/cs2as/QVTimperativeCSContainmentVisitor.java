@@ -290,7 +290,7 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 	@Override
 	public Continuation<?> visitMappingCS(@NonNull MappingCS csElement) {
 		Mapping pivotElement = refreshNamedElement(Mapping.class, QVTimperativePackage.Literals.MAPPING, csElement);
-		context.refreshPivotList(MappingParameter.class, pivotElement.getOwnedParameters(), csElement.getOwnedParameters());
+		context.refreshPivotList(MappingParameter.class, pivotElement.getOwnedMappingParameters(), csElement.getOwnedParameters());
 		context.refreshPivotList(Statement.class, pivotElement.getOwnedStatements(), csElement.getOwnedStatements());
 		pivotElement.setIsStrict(csElement.isIsStrict());
 		return null;
@@ -299,7 +299,7 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 	@Override
 	public Continuation<?> visitMappingCallCS(@NonNull MappingCallCS csElement) {
 		@NonNull MappingCall pivotElement = context.refreshModelElement(MappingCall.class, QVTimperativePackage.Literals.MAPPING_CALL, csElement);
-		context.refreshPivotList(MappingParameterBinding.class, pivotElement.getBinding(), csElement.getOwnedBindings());
+		context.refreshPivotList(MappingParameterBinding.class, pivotElement.getOwnedMappingParameterBindings(), csElement.getOwnedBindings());
 		pivotElement.setIsInstall(csElement.isIsInstall());
 		pivotElement.setIsInvoke(csElement.isIsInvoke());
 		context.refreshComments(pivotElement, csElement);

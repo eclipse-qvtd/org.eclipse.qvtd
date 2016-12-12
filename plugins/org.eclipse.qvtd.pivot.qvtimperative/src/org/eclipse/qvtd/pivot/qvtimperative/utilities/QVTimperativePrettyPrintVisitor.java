@@ -210,7 +210,7 @@ public class QVTimperativePrettyPrintVisitor extends QVTbasePrettyPrintVisitor i
 		context.appendName(pMapping.getTransformation());
 		context.append(" {\n");
 		context.push("", "");
-		for (MappingParameter pVariable : pMapping.getOwnedParameters()) {
+		for (@NonNull MappingParameter pVariable : QVTimperativeUtil.getOwnedMappingParameters(pMapping)) {
 			safeVisit(pVariable);
 		}
 		for (Statement pStatement : pMapping.getOwnedStatements()) {
@@ -226,7 +226,7 @@ public class QVTimperativePrettyPrintVisitor extends QVTbasePrettyPrintVisitor i
 		context.appendName(pMappingCall.getReferredMapping());
 		context.append(" {\n");
 		context.push("", "");
-		for (MappingParameterBinding mappingParameterBinding : pMappingCall.getBinding()) {
+		for (@NonNull MappingParameterBinding mappingParameterBinding : QVTimperativeUtil.getOwnedMappingParameterBindings(pMappingCall)) {
 			safeVisit(mappingParameterBinding);
 		}
 		context.append("}");

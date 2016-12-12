@@ -245,7 +245,7 @@ public class QVTimperativeToStringVisitor extends QVTbaseToStringVisitor impleme
 		appendQualifiedName(object.getReferredMapping());
 		append(" {");
 		boolean isFirst = true;
-		for (MappingParameterBinding binding : object.getBinding()) {
+		for (@NonNull MappingParameterBinding binding : QVTimperativeUtil.getOwnedMappingParameterBindings(object)) {
 			if (!isFirst) {
 				append(", ");
 			}

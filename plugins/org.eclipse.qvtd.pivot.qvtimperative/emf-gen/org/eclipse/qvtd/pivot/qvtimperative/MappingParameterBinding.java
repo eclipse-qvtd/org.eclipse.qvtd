@@ -30,7 +30,7 @@ import org.eclipse.ocl.pivot.Element;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.MappingParameterBinding#getMappingCall <em>Mapping Call</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.MappingParameterBinding#getOwningMappingCall <em>Owning Mapping Call</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.MappingParameterBinding#getBoundVariable <em>Bound Variable</em>}</li>
  * </ul>
  *
@@ -39,30 +39,30 @@ import org.eclipse.ocl.pivot.Element;
  */
 public interface MappingParameterBinding extends Element {
 	/**
-	 * Returns the value of the '<em><b>Mapping Call</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtimperative.MappingCall#getBinding <em>Binding</em>}'.
+	 * Returns the value of the '<em><b>Owning Mapping Call</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtimperative.MappingCall#getOwnedMappingParameterBindings <em>Owned Mapping Parameter Bindings</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * The containing MappingCall.
 	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Mapping Call</em>' container reference.
-	 * @see #setMappingCall(MappingCall)
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getMappingParameterBinding_MappingCall()
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.MappingCall#getBinding
+	 * @return the value of the '<em>Owning Mapping Call</em>' container reference.
+	 * @see #setOwningMappingCall(MappingCall)
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getMappingParameterBinding_OwningMappingCall()
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.MappingCall#getOwnedMappingParameterBindings
 	 * @generated
 	 */
-	MappingCall getMappingCall();
+	MappingCall getOwningMappingCall();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtimperative.MappingParameterBinding#getMappingCall <em>Mapping Call</em>}' container reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtimperative.MappingParameterBinding#getOwningMappingCall <em>Owning Mapping Call</em>}' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Mapping Call</em>' container reference.
-	 * @see #getMappingCall()
+	 * @param value the new value of the '<em>Owning Mapping Call</em>' container reference.
+	 * @see #getOwningMappingCall()
 	 * @generated
 	 */
-	void setMappingCall(MappingCall value);
+	void setOwningMappingCall(MappingCall value);
 
 	/**
 	 * Returns the value of the '<em><b>Bound Variable</b></em>' reference.

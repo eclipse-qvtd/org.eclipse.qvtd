@@ -29,7 +29,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Rule;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.Mapping#isIsStrict <em>Is Strict</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.Mapping#getOwnedParameters <em>Owned Parameters</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.Mapping#getOwnedMappingParameters <em>Owned Mapping Parameters</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.Mapping#getOwnedStatements <em>Owned Statements</em>}</li>
  * </ul>
  *
@@ -65,19 +65,21 @@ public interface Mapping extends Rule {
 	void setIsStrict(boolean value);
 
 	/**
-	 * Returns the value of the '<em><b>Owned Parameters</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Owned Mapping Parameters</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.pivot.qvtimperative.MappingParameter}.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtimperative.MappingParameter#getOwningMapping <em>Owning Mapping</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Owned Parameters</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Owned Mapping Parameters</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Owned Parameters</em>' containment reference list.
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getMapping_OwnedParameters()
+	 * @return the value of the '<em>Owned Mapping Parameters</em>' containment reference list.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getMapping_OwnedMappingParameters()
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.MappingParameter#getOwningMapping
 	 * @generated
 	 */
-	EList<MappingParameter> getOwnedParameters();
+	EList<MappingParameter> getOwnedMappingParameters();
 
 	/**
 	 * Returns the value of the '<em><b>Owned Statements</b></em>' containment reference list.

@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.util.Visitor;
@@ -38,7 +39,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingImpl#isIsStrict <em>Is Strict</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingImpl#getOwnedParameters <em>Owned Parameters</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingImpl#getOwnedMappingParameters <em>Owned Mapping Parameters</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingImpl#getOwnedStatements <em>Owned Statements</em>}</li>
  * </ul>
  *
@@ -66,14 +67,14 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	protected boolean isStrict = IS_STRICT_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getOwnedParameters() <em>Owned Parameters</em>}' containment reference list.
+	 * The cached value of the '{@link #getOwnedMappingParameters() <em>Owned Mapping Parameters</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getOwnedParameters()
+	 * @see #getOwnedMappingParameters()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<MappingParameter> ownedParameters;
+	protected EList<MappingParameter> ownedMappingParameters;
 
 	/**
 	 * The cached value of the '{@link #getOwnedStatements() <em>Owned Statements</em>}' containment reference list.
@@ -133,11 +134,11 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	 * @generated
 	 */
 	@Override
-	public EList<MappingParameter> getOwnedParameters() {
-		if (ownedParameters == null) {
-			ownedParameters = new EObjectContainmentEList<MappingParameter>(MappingParameter.class, this, QVTimperativePackage.MAPPING__OWNED_PARAMETERS);
+	public EList<MappingParameter> getOwnedMappingParameters() {
+		if (ownedMappingParameters == null) {
+			ownedMappingParameters = new EObjectContainmentWithInverseEList<MappingParameter>(MappingParameter.class, this, QVTimperativePackage.MAPPING__OWNED_MAPPING_PARAMETERS, QVTimperativePackage.MAPPING_PARAMETER__OWNING_MAPPING);
 		}
-		return ownedParameters;
+		return ownedMappingParameters;
 	}
 
 	/**
@@ -151,6 +152,21 @@ public class MappingImpl extends RuleImpl implements Mapping {
 			ownedStatements = new EObjectContainmentEList<Statement>(Statement.class, this, QVTimperativePackage.MAPPING__OWNED_STATEMENTS);
 		}
 		return ownedStatements;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case QVTimperativePackage.MAPPING__OWNED_MAPPING_PARAMETERS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedMappingParameters()).basicAdd(otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -171,8 +187,8 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTimperativePackage.MAPPING__OWNED_PARAMETERS:
-				return ((InternalEList<?>)getOwnedParameters()).basicRemove(otherEnd, msgs);
+			case QVTimperativePackage.MAPPING__OWNED_MAPPING_PARAMETERS:
+				return ((InternalEList<?>)getOwnedMappingParameters()).basicRemove(otherEnd, msgs);
 			case QVTimperativePackage.MAPPING__OWNED_STATEMENTS:
 				return ((InternalEList<?>)getOwnedStatements()).basicRemove(otherEnd, msgs);
 		}
@@ -189,8 +205,8 @@ public class MappingImpl extends RuleImpl implements Mapping {
 		switch (featureID) {
 			case QVTimperativePackage.MAPPING__IS_STRICT:
 				return isIsStrict();
-			case QVTimperativePackage.MAPPING__OWNED_PARAMETERS:
-				return getOwnedParameters();
+			case QVTimperativePackage.MAPPING__OWNED_MAPPING_PARAMETERS:
+				return getOwnedMappingParameters();
 			case QVTimperativePackage.MAPPING__OWNED_STATEMENTS:
 				return getOwnedStatements();
 		}
@@ -209,9 +225,9 @@ public class MappingImpl extends RuleImpl implements Mapping {
 			case QVTimperativePackage.MAPPING__IS_STRICT:
 				setIsStrict((Boolean)newValue);
 				return;
-			case QVTimperativePackage.MAPPING__OWNED_PARAMETERS:
-				getOwnedParameters().clear();
-				getOwnedParameters().addAll((Collection<? extends MappingParameter>)newValue);
+			case QVTimperativePackage.MAPPING__OWNED_MAPPING_PARAMETERS:
+				getOwnedMappingParameters().clear();
+				getOwnedMappingParameters().addAll((Collection<? extends MappingParameter>)newValue);
 				return;
 			case QVTimperativePackage.MAPPING__OWNED_STATEMENTS:
 				getOwnedStatements().clear();
@@ -232,8 +248,8 @@ public class MappingImpl extends RuleImpl implements Mapping {
 			case QVTimperativePackage.MAPPING__IS_STRICT:
 				setIsStrict(IS_STRICT_EDEFAULT);
 				return;
-			case QVTimperativePackage.MAPPING__OWNED_PARAMETERS:
-				getOwnedParameters().clear();
+			case QVTimperativePackage.MAPPING__OWNED_MAPPING_PARAMETERS:
+				getOwnedMappingParameters().clear();
 				return;
 			case QVTimperativePackage.MAPPING__OWNED_STATEMENTS:
 				getOwnedStatements().clear();
@@ -252,8 +268,8 @@ public class MappingImpl extends RuleImpl implements Mapping {
 		switch (featureID) {
 			case QVTimperativePackage.MAPPING__IS_STRICT:
 				return isStrict != IS_STRICT_EDEFAULT;
-			case QVTimperativePackage.MAPPING__OWNED_PARAMETERS:
-				return ownedParameters != null && !ownedParameters.isEmpty();
+			case QVTimperativePackage.MAPPING__OWNED_MAPPING_PARAMETERS:
+				return ownedMappingParameters != null && !ownedMappingParameters.isEmpty();
 			case QVTimperativePackage.MAPPING__OWNED_STATEMENTS:
 				return ownedStatements != null && !ownedStatements.isEmpty();
 		}

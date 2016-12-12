@@ -11,6 +11,7 @@
 package org.eclipse.qvtd.xtext.qvtimperative.ui.outline;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.xtext.basecs.ImportCS;
 import org.eclipse.ocl.xtext.basecs.PackageCS;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
@@ -22,6 +23,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.xtext.qvtbase.ui.outline.QVTbaseOutlineTreeProvider;
 import org.eclipse.qvtd.xtext.qvtimperativecs.DirectionCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS;
@@ -38,7 +40,8 @@ import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 public class QVTimperativeOutlineTreeProvider extends QVTbaseOutlineTreeProvider
 {
 	protected void _createChildren(IOutlineNode parentNode, Mapping ele) {
-		for (MappingParameter asVariable : ele.getOwnedParameters()) {
+		assert ele != null;
+		for (@NonNull MappingParameter asVariable : QVTimperativeUtil.getOwnedMappingParameters(ele)) {
 			createNode(parentNode, asVariable);
 		}
 		for (Domain asDomain : ele.getDomain()) {

@@ -30,7 +30,7 @@ import org.eclipse.ocl.pivot.ReferringElement;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.MappingCall#getBinding <em>Binding</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.MappingCall#getOwnedMappingParameterBindings <em>Owned Mapping Parameter Bindings</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.MappingCall#isIsInstall <em>Is Install</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.MappingCall#isIsInvoke <em>Is Invoke</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.MappingCall#getReferredMapping <em>Referred Mapping</em>}</li>
@@ -42,6 +42,22 @@ import org.eclipse.ocl.pivot.ReferringElement;
  * @generated
  */
 public interface MappingCall extends MappingStatement, ReferringElement {
+	/**
+	 * Returns the value of the '<em><b>Owned Mapping Parameter Bindings</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.qvtd.pivot.qvtimperative.MappingParameterBinding}.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtimperative.MappingParameterBinding#getOwningMappingCall <em>Owning Mapping Call</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The Set of bindings of variables or expressions to forma parameters.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Owned Mapping Parameter Bindings</em>' containment reference list.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getMappingCall_OwnedMappingParameterBindings()
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.MappingParameterBinding#getOwningMappingCall
+	 * @generated
+	 */
+	EList<MappingParameterBinding> getOwnedMappingParameterBindings();
+
 	/**
 	 * Returns the value of the '<em><b>Referred Mapping</b></em>' reference.
 	 * <!-- begin-user-doc -->
@@ -113,26 +129,6 @@ public interface MappingCall extends MappingStatement, ReferringElement {
 	 * @generated
 	 */
 	boolean validateUniqueCallBindings(DiagnosticChain diagnostics, Map<Object, Object> context);
-
-	/**
-	 * Returns the value of the '<em><b>Binding</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.qvtd.pivot.qvtimperative.MappingParameterBinding}.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtimperative.MappingParameterBinding#getMappingCall <em>Mapping Call</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Binding</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * The Set of bindings of variables or expressions to forma parameters.
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Binding</em>' containment reference list.
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getMappingCall_Binding()
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.MappingParameterBinding#getMappingCall
-	 * @generated
-	 */
-	EList<MappingParameterBinding> getBinding();
 
 	/**
 	 * Returns the value of the '<em><b>Is Install</b></em>' attribute.

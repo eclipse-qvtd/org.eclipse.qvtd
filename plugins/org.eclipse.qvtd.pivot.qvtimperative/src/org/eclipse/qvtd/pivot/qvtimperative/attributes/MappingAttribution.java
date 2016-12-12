@@ -76,7 +76,7 @@ public class MappingAttribution extends AbstractAttribution
 					environmentView.addNamedElement(asStatement);
 				}
 			}
-			environmentView.addNamedElements(mapping.getOwnedParameters());
+			environmentView.addNamedElements(QVTimperativeUtil.getOwnedMappingParameters(mapping));
 			ImperativeTransformation transformation = QVTimperativeUtil.getContainingTransformation(mapping);
 			if (transformation != null) {
 				for (@NonNull ImperativeTypedModel typedModel : QVTimperativeUtil.getOwnedTypedModels(transformation)) {
