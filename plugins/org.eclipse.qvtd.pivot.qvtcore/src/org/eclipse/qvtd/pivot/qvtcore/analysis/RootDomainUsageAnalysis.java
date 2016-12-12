@@ -380,7 +380,7 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 				//				}
 				OCLExpression slotExpression = propertyAssignment.getSlotExpression();
 				assert slotExpression != null;
-				DomainUsage domainUsage = getUsage(slotExpression);
+				DomainUsage domainUsage = getUsage(PivotUtil.getType(slotExpression));
 				if (!domainUsage.isOutput() && !domainUsage.isMiddle()) {
 					Property targetProperty = ClassUtil.nonNullState(propertyAssignment.getTargetProperty());
 					//					System.out.println("Dirty " + targetProperty + " for " + eObject);
@@ -490,8 +490,8 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis impleme
 		if (ownedContext != null) {
 			setUsage(ownedContext, getAnyUsage());
 		}
-		visit(transformation);
 		analyzePropertyAssignments(transformation);
+		visit(transformation);
 		return element2usage;
 	}
 
