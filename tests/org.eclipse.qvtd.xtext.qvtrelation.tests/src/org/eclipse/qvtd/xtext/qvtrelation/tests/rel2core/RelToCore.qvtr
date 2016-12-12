@@ -15,12 +15,11 @@ import pivotocl     :   'platform:/resource/org.eclipse.ocl.pivot/model/Pivot.ec
 import qvtbase      :   'platform:/resource/org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore'::qvtbase;               -- HHR Use Pivot metamodels
 import qvttemplate  :   'platform:/resource/org.eclipse.qvtd.pivot.qvttemplate/model/QVTtemplate.ecore'::qvttemplate;   -- HHR Use Pivot metamodels
 import qvtrelation  :   'platform:/resource/org.eclipse.qvtd.pivot.qvtrelation/model/QVTrelation.ecore'::qvtrelation;   -- HHR Use Pivot metamodels
-import qvtcorebase  :   'platform:/resource/org.eclipse.qvtd.pivot.qvtcorebase/model/QVTcoreBase.ecore'::qvtcorebase;   -- HHR Use Pivot metamodels
 import qvtcore      :   'platform:/resource/org.eclipse.qvtd.pivot.qvtcore/model/QVTcore.ecore'::qvtcore;               -- HHR Use Pivot metamodels
 
 
 
-transformation org::eclipse::qvtd::xtext::qvtrelation2::tests::rel2core::relToCore(relations:{qvtrelation,qvttemplate,qvtbase,pivotocl}, core:{qvtcore,qvtcorebase,qvtbase,pivotocl}) -- HHR Use Pivot metamodels
+transformation org::eclipse::qvtd::xtext::qvtrelation2::tests::rel2core::relToCore(relations:{qvtrelation,qvttemplate,qvtbase,pivotocl}, core:{qvtcore,qvtbase,pivotocl}) -- HHR Use Pivot metamodels
 {    
     -- Rule 1: Corresponding to each relation there exists a trace class in core.
     -- The trace class contains a property corresponding to each object node in the
