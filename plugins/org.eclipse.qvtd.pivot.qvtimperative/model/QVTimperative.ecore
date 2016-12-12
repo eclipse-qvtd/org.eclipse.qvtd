@@ -18,6 +18,21 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="An AddStatement appends the value of an expression to a connection.&#xA;&#xA;syntax: oclText[add connection := expression;]"/>
     </eAnnotations>
+    <eOperations name="validateCompatibleTypeForValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <details key="originalName" value="CompatibleTypeForValue"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="ownedExpression.type.conformsTo(targetVariable.type)&#xA;&#xA;"/>
+      </eAnnotations>
+      <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
+      <eParameters name="context">
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtimperative-AddStatement-targetVariable"
         name="targetVariable" lowerBound="1" eType="#T-qvtimperative-ConnectionVariable">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -207,21 +222,6 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="An Imperative Mapping extends the abstract declarative mapping to support&#xA;explicit nested invocation of mappings with bindings for the invoked mapping's&#xA;bound variables."/>
     </eAnnotations>
-    <eOperations name="validateisTrue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
-      <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
-        <details key="originalName" value="isTrue"/>
-      </eAnnotations>
-      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="true&#xA;&#xA;"/>
-      </eAnnotations>
-      <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
-      <eParameters name="context">
-        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
-          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
-          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
-        </eGenericType>
-      </eParameters>
-    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="F-qvtimperative-Mapping-isStrict"
         name="isStrict" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         defaultValueLiteral="false">
@@ -241,6 +241,36 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="A MappingCall specifies the invocation of a referredMapping with a set of bindings.&#xA;An installed mapping is invoked asynchronously whenever suitable values are available on consumed connections.&#xA;An invoked mapping is invoked synchronously with values provided by the caller."/>
     </eAnnotations>
+    <eOperations name="validateMatchingCallBindings" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <details key="originalName" value="MatchingCallBindings"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="Tuple {&#xA;&#x9;message : String = 'Mismatched bindings ' + referredMapping.name + joinNames(referredNames) + ' &lt;= ' + joinNames(referringNames),&#xA;&#x9;status : Boolean = referredNames = referringNames&#xA;&#xA;}.status"/>
+      </eAnnotations>
+      <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
+      <eParameters name="context">
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
+    <eOperations name="validateUniqueCallBindings" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <details key="originalName" value="UniqueCallBindings"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="binding->isUnique(boundVariable)&#xA;&#xA;"/>
+      </eAnnotations>
+      <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
+      <eParameters name="context">
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtimperative-MappingCall-binding"
         name="binding" upperBound="-1" eType="#T-qvtimperative-MappingParameterBinding"
         containment="true" eOpposite="#F-qvtimperative-MappingParameterBinding-mappingCall">
@@ -266,8 +296,6 @@
         name="referredMapping" lowerBound="1" eType="#T-qvtimperative-Mapping">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The Mapping invoked by the MappingCall."/>
-<<<<<<< ewillink/412341
-=======
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="F-qvtimperative-MappingCall-referredNames"
@@ -288,7 +316,6 @@
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/OCL/Collection">
         <details key="nullFree" value="false"/>
->>>>>>> 3ed711c regen
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
@@ -354,6 +381,21 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="A NewStatement creates an instance of a class and binds a name to it.&#xA;&#xA;syntax: oclText[new:typedModel name : type := expression;]&#xA;&#xA;If expression is omitted, a new instance if the tyope is created. If expression is provided, it&#xA;computes the 'new' object, typically a singlton supervisor fpr a QVTr key."/>
     </eAnnotations>
+    <eOperations name="validateCompatibleTypeForValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <details key="originalName" value="CompatibleTypeForValue"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="ownedExpression &lt;> null implies ownedExpression.type.conformsTo(type)&#xA;&#xA;"/>
+      </eAnnotations>
+      <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
+      <eParameters name="context">
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtimperative-NewStatement-referredTypedModel"
         name="referredTypedModel" lowerBound="1" eType="#T-qvtimperative-ImperativeTypedModel">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -385,6 +427,36 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="A SetStatement sets an object property to a computed value.&#xA;&#xA;syntax: oclText[notify set name : type := expression;]&#xA;&#xA;If oclText[notify] is specified, execution defines the property as ready enabling&#xA;mappings whose ObservableStatements are waiting for the value to resume."/>
     </eAnnotations>
+    <eOperations name="validateCompatibleClassForProperty" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <details key="originalName" value="CompatibleClassForProperty"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="let propertySourceType = if isOpposite then targetProperty.type else targetProperty.owningClass endif in targetVariable.type.conformsTo(propertySourceType)&#xA;"/>
+      </eAnnotations>
+      <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
+      <eParameters name="context">
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
+    <eOperations name="validateCompatibleTypeForValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <details key="originalName" value="CompatibleTypeForValue"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="let propertyTargetType = if isOpposite then targetProperty.owningClass else targetProperty.type endif in ownedExpression.type.conformsTo(propertyTargetType)&#xA;&#xA;"/>
+      </eAnnotations>
+      <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
+      <eParameters name="context">
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtimperative-SetStatement-targetVariable"
         name="targetVariable" lowerBound="1" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-VariableDeclaration"/>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtimperative-SetStatement-targetProperty"

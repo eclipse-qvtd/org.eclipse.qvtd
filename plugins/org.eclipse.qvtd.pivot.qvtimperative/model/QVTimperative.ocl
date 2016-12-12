@@ -1,9 +1,46 @@
 import 'QVTimperative.ecore'
 
+--package ocl
+--context Element
+--def: joinNames(names : Set(String)) : String = '{' + names->sortedBy(n | n)->iterate(n; s : String = '' | if s = '' then n else s + ';' + n endif) + '}'
+--endpackage
+
 package qvtimperative
 
-context Mapping
-inv isTrue: true
+context AddStatement
+inv CompatibleTypeForValue: ownedExpression.type.conformsTo(targetVariable.type)
+
+--context Mapping
+--def: guardVariables : Set(MappingParameter) = ownedParameters
+--def: boundGuardVariables : OrderedSet(DeclareStatement) = ownedStatements->selectByKind(DeclareStatement)
+/* Mapping guard variables that are assigned  */
+--def: boundGuardVariables : Set(ocl::Variable) = guardVariables->select(initExpression <> null)
+--def: unboundGuardVariables : Set(ocl::Variable) = guardVariables - boundGuardVariables
+-- def: noInheritance : Boolean = self.refinement->isEmpty()
+-- def: noParents : Boolean = self.specification->isEmpty()
+/* Mappings are either L to M or M to R, but not both */
+--inv ViaMiddle: isToMiddle xor isFromMiddle
+/* No mapping refinement */
+-- inv NoRefinement: noInheritance and noParents
+--inv NoMiddleGuardPatternVariables: guardPattern.ownedGuardVariables->isEmpty()
+--inv NoMiddleBottomPatternVariables: bottomPattern.variable->isEmpty() and bottomPattern.realizedVariable->isEmpty()
+
+context MappingCall
+def: referredNames : OrderedSet(String) = referredMapping.ownedParameters.name->asSet()->sortedBy(n | n)
+def: referringNames : OrderedSet(String) = binding.boundVariable.name->asSet()->sortedBy(n | n)
+inv MatchingCallBindings('Mismatched bindings ' + referredMapping.name + joinNames(referredNames) + ' <= ' + joinNames(referringNames)): referredNames = referringNames
+inv UniqueCallBindings: binding->isUnique(boundVariable)
+
+context NewStatement
+inv CompatibleTypeForValue: ownedExpression <> null implies ownedExpression.type.conformsTo(type)
+
+context SetStatement
+inv CompatibleClassForProperty: let propertySourceType = if isOpposite then targetProperty.type else targetProperty.owningClass endif in targetVariable.type.conformsTo(propertySourceType)
+inv CompatibleTypeForValue: let propertyTargetType = if isOpposite then targetProperty.owningClass else targetProperty.type endif in ownedExpression.type.conformsTo(propertyTargetType)
+
+context Statement
+def: joinNames(names : OrderedSet(String)) : String = '{' + names/*->sortedBy(n | n)*/->iterate(n; s : String = '' | if s = '' then n else s + ';' + n endif) + '}'
+
 
 endpackage
 
