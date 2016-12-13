@@ -1,15 +1,15 @@
 /**
  * <copyright>
- * 
+ *
  * Copyright (c) 2013, 2017 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
- * 
+ *
  * </copyright>
  */
 package org.eclipse.qvtd.pivot.qvtrelation.util;
@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.util.EObjectValidator;
 
 import org.eclipse.ocl.pivot.util.PivotValidator;
 
+import org.eclipse.qvtd.pivot.qvtbase.util.QVTbaseValidator;
 import org.eclipse.qvtd.pivot.qvtrelation.*;
 
 /**
@@ -86,6 +87,14 @@ public class QVTrelationValidator extends EObjectValidator {
 	protected PivotValidator pivotValidator;
 
 	/**
+	 * The cached base package validator.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected QVTbaseValidator qvTbaseValidator;
+
+	/**
 	 * Creates an instance of the switch.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -93,6 +102,7 @@ public class QVTrelationValidator extends EObjectValidator {
 	 */
 	public QVTrelationValidator() {
 		super();
+		qvTbaseValidator = QVTbaseValidator.INSTANCE;
 		pivotValidator = PivotValidator.INSTANCE;
 	}
 
@@ -104,7 +114,7 @@ public class QVTrelationValidator extends EObjectValidator {
 	 */
 	@Override
 	protected EPackage getEPackage() {
-	  return QVTrelationPackage.eINSTANCE;
+		return QVTrelationPackage.eINSTANCE;
 	}
 
 	/**
@@ -167,7 +177,19 @@ public class QVTrelationValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateRelation(Relation relation, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(relation, diagnostics, context);
+		if (!validate_NoCircularContainment(relation, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms(relation, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(relation, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(relation, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(relation, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(relation, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(relation, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(relation, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(relation, diagnostics, context);
+		if (result || diagnostics != null) result &= qvTbaseValidator.validateRule_validateDomainNameIsUnique(relation, diagnostics, context);
+		if (result || diagnostics != null) result &= qvTbaseValidator.validateRule_validateOverridesRuleIsExtendedRule(relation, diagnostics, context);
+		if (result || diagnostics != null) result &= qvTbaseValidator.validateRule_validateOverridesRuleOverridesAllDomains(relation, diagnostics, context);
+		return result;
 	}
 
 	/**
@@ -206,7 +228,18 @@ public class QVTrelationValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateRelationDomain(RelationDomain relationDomain, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(relationDomain, diagnostics, context);
+		if (!validate_NoCircularContainment(relationDomain, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms(relationDomain, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(relationDomain, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(relationDomain, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(relationDomain, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(relationDomain, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(relationDomain, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(relationDomain, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(relationDomain, diagnostics, context);
+		if (result || diagnostics != null) result &= qvTbaseValidator.validateDomain_validateNameIsTypedModelName(relationDomain, diagnostics, context);
+		if (result || diagnostics != null) result &= qvTbaseValidator.validateDomain_validateTypedModelIsTransformationModelParameter(relationDomain, diagnostics, context);
+		return result;
 	}
 
 	/**
@@ -252,6 +285,9 @@ public class QVTrelationValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(relationalTransformation, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(relationalTransformation, diagnostics, context);
 		if (result || diagnostics != null) result &= pivotValidator.validateClass_validateUniqueInvariantName(relationalTransformation, diagnostics, context);
+		if (result || diagnostics != null) result &= qvTbaseValidator.validateTransformation_validateContextTypeIsTransformation(relationalTransformation, diagnostics, context);
+		if (result || diagnostics != null) result &= qvTbaseValidator.validateTransformation_validateExtendedTypedModelIsExtended(relationalTransformation, diagnostics, context);
+		if (result || diagnostics != null) result &= qvTbaseValidator.validateTransformation_validateModelParameterIsUnique(relationalTransformation, diagnostics, context);
 		return result;
 	}
 

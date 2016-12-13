@@ -635,6 +635,9 @@ public class QVTimperativeValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(imperativeTransformation, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(imperativeTransformation, diagnostics, context);
 		if (result || diagnostics != null) result &= pivotValidator.validateClass_validateUniqueInvariantName(imperativeTransformation, diagnostics, context);
+		if (result || diagnostics != null) result &= qvTbaseValidator.validateTransformation_validateContextTypeIsTransformation(imperativeTransformation, diagnostics, context);
+		if (result || diagnostics != null) result &= qvTbaseValidator.validateTransformation_validateExtendedTypedModelIsExtended(imperativeTransformation, diagnostics, context);
+		if (result || diagnostics != null) result &= qvTbaseValidator.validateTransformation_validateModelParameterIsUnique(imperativeTransformation, diagnostics, context);
 		if (result || diagnostics != null) result &= validateImperativeTransformation_validateallRulesAreMappings(imperativeTransformation, diagnostics, context);
 		return result;
 	}
@@ -664,7 +667,6 @@ public class QVTimperativeValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_UniqueID(imperativeTypedModel, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(imperativeTypedModel, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(imperativeTypedModel, diagnostics, context);
-		if (result || diagnostics != null) result &= qvTbaseValidator.validateTypedModel_validateIsTrue(imperativeTypedModel, diagnostics, context);
 		if (result || diagnostics != null) result &= validateImperativeTypedModel_validateNameIsNotNull(imperativeTypedModel, diagnostics, context);
 		if (result || diagnostics != null) result &= validateImperativeTypedModel_validateNotBothCheckedAndEnforced(imperativeTypedModel, diagnostics, context);
 		return result;
@@ -745,6 +747,9 @@ public class QVTimperativeValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_UniqueID(mapping, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(mapping, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(mapping, diagnostics, context);
+		if (result || diagnostics != null) result &= qvTbaseValidator.validateRule_validateDomainNameIsUnique(mapping, diagnostics, context);
+		if (result || diagnostics != null) result &= qvTbaseValidator.validateRule_validateOverridesRuleIsExtendedRule(mapping, diagnostics, context);
+		if (result || diagnostics != null) result &= qvTbaseValidator.validateRule_validateOverridesRuleOverridesAllDomains(mapping, diagnostics, context);
 		if (result || diagnostics != null) result &= validateMapping_validateNameIsNotNull(mapping, diagnostics, context);
 		if (result || diagnostics != null) result &= validateMapping_validateMappingParameterNamesAreUnique(mapping, diagnostics, context);
 		if (result || diagnostics != null) result &= validateMapping_validateLocalVariabelNamesAreUnique(mapping, diagnostics, context);

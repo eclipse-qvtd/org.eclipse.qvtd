@@ -1,15 +1,15 @@
 /**
  * <copyright>
- * 
+ *
  * Copyright (c) 2013, 2017 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
- * 
+ *
  * </copyright>
  */
 package org.eclipse.qvtd.pivot.qvtbase.util;
@@ -18,14 +18,19 @@ import java.util.Map;
 
 import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.ResourceLocator;
-
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.util.EObjectValidator;
-
 import org.eclipse.ocl.pivot.util.PivotValidator;
-
-import org.eclipse.qvtd.pivot.qvtbase.*;
+import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
+import org.eclipse.qvtd.pivot.qvtbase.Domain;
+import org.eclipse.qvtd.pivot.qvtbase.Function;
+import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
+import org.eclipse.qvtd.pivot.qvtbase.Pattern;
+import org.eclipse.qvtd.pivot.qvtbase.Predicate;
+import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
+import org.eclipse.qvtd.pivot.qvtbase.Rule;
+import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 
 /**
  * <!-- begin-user-doc -->
@@ -54,12 +59,92 @@ public class QVTbaseValidator extends EObjectValidator {
 	public static final String DIAGNOSTIC_SOURCE = "org.eclipse.qvtd.pivot.qvtbase";
 
 	/**
-	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Is True' of 'Typed Model'.
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Name Is Typed Model Name' of 'Domain'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int TYPED_MODEL__VALIDATE_IS_TRUE = 1;
+	public static final int DOMAIN__VALIDATE_NAME_IS_TYPED_MODEL_NAME = 1;
+
+	/**
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Typed Model Is Transformation Model Parameter' of 'Domain'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final int DOMAIN__VALIDATE_TYPED_MODEL_IS_TRANSFORMATION_MODEL_PARAMETER = 2;
+
+	/**
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Parameters Are Function Parameter' of 'Function'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final int FUNCTION__VALIDATE_PARAMETERS_ARE_FUNCTION_PARAMETER = 3;
+
+	/**
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Return Type Is Query Type' of 'Function'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final int FUNCTION__VALIDATE_RETURN_TYPE_IS_QUERY_TYPE = 4;
+
+	/**
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Condition Is Boolean' of 'Predicate'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final int PREDICATE__VALIDATE_CONDITION_IS_BOOLEAN = 5;
+
+	/**
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Domain Name Is Unique' of 'Rule'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final int RULE__VALIDATE_DOMAIN_NAME_IS_UNIQUE = 6;
+
+	/**
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Overrides Rule Is Extended Rule' of 'Rule'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final int RULE__VALIDATE_OVERRIDES_RULE_IS_EXTENDED_RULE = 7;
+
+	/**
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Overrides Rule Overrides All Domains' of 'Rule'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final int RULE__VALIDATE_OVERRIDES_RULE_OVERRIDES_ALL_DOMAINS = 8;
+
+	/**
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Context Type Is Transformation' of 'Transformation'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final int TRANSFORMATION__VALIDATE_CONTEXT_TYPE_IS_TRANSFORMATION = 9;
+
+	/**
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Extended Typed Model Is Extended' of 'Transformation'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final int TRANSFORMATION__VALIDATE_EXTENDED_TYPED_MODEL_IS_EXTENDED = 10;
+
+	/**
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Model Parameter Is Unique' of 'Transformation'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final int TRANSFORMATION__VALIDATE_MODEL_PARAMETER_IS_UNIQUE = 11;
 
 	/**
 	 * A constant with a fixed name that can be used as the base value for additional hand written constants.
@@ -67,7 +152,7 @@ public class QVTbaseValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private static final int GENERATED_DIAGNOSTIC_CODE_COUNT = 1;
+	private static final int GENERATED_DIAGNOSTIC_CODE_COUNT = 11;
 
 	/**
 	 * A constant with a fixed name that can be used as the base value for additional hand written constants in a derived class.
@@ -104,7 +189,7 @@ public class QVTbaseValidator extends EObjectValidator {
 	 */
 	@Override
 	protected EPackage getEPackage() {
-	  return QVTbasePackage.eINSTANCE;
+		return QVTbasePackage.eINSTANCE;
 	}
 
 	/**
@@ -154,7 +239,38 @@ public class QVTbaseValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateDomain(Domain domain, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(domain, diagnostics, context);
+		if (!validate_NoCircularContainment(domain, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms(domain, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(domain, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(domain, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(domain, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(domain, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(domain, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(domain, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(domain, diagnostics, context);
+		if (result || diagnostics != null) result &= validateDomain_validateNameIsTypedModelName(domain, diagnostics, context);
+		if (result || diagnostics != null) result &= validateDomain_validateTypedModelIsTransformationModelParameter(domain, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * Validates the validateNameIsTypedModelName constraint of '<em>Domain</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateDomain_validateNameIsTypedModelName(Domain domain, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return domain.validateNameIsTypedModelName(diagnostics, context);
+	}
+
+	/**
+	 * Validates the validateTypedModelIsTransformationModelParameter constraint of '<em>Domain</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateDomain_validateTypedModelIsTransformationModelParameter(Domain domain, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return domain.validateTypedModelIsTransformationModelParameter(diagnostics, context);
 	}
 
 	/**
@@ -179,7 +295,29 @@ public class QVTbaseValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= pivotValidator.validateOperation_validateLoadableImplementation(function, diagnostics, context);
 		if (result || diagnostics != null) result &= pivotValidator.validateOperation_validateUniquePostconditionName(function, diagnostics, context);
 		if (result || diagnostics != null) result &= pivotValidator.validateOperation_validateUniquePreconditionName(function, diagnostics, context);
+		if (result || diagnostics != null) result &= validateFunction_validateParametersAreFunctionParameter(function, diagnostics, context);
+		if (result || diagnostics != null) result &= validateFunction_validateReturnTypeIsQueryType(function, diagnostics, context);
 		return result;
+	}
+
+	/**
+	 * Validates the validateParametersAreFunctionParameter constraint of '<em>Function</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateFunction_validateParametersAreFunctionParameter(Function function, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return function.validateParametersAreFunctionParameter(diagnostics, context);
+	}
+
+	/**
+	 * Validates the validateReturnTypeIsQueryType constraint of '<em>Function</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateFunction_validateReturnTypeIsQueryType(Function function, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return function.validateReturnTypeIsQueryType(diagnostics, context);
 	}
 
 	/**
@@ -218,7 +356,27 @@ public class QVTbaseValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validatePredicate(Predicate predicate, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(predicate, diagnostics, context);
+		if (!validate_NoCircularContainment(predicate, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms(predicate, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(predicate, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(predicate, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(predicate, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(predicate, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(predicate, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(predicate, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(predicate, diagnostics, context);
+		if (result || diagnostics != null) result &= validatePredicate_validateConditionIsBoolean(predicate, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * Validates the validateConditionIsBoolean constraint of '<em>Predicate</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validatePredicate_validateConditionIsBoolean(Predicate predicate, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return predicate.validateConditionIsBoolean(diagnostics, context);
 	}
 
 	/**
@@ -227,7 +385,49 @@ public class QVTbaseValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateRule(Rule rule, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(rule, diagnostics, context);
+		if (!validate_NoCircularContainment(rule, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms(rule, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(rule, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(rule, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(rule, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(rule, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(rule, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(rule, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(rule, diagnostics, context);
+		if (result || diagnostics != null) result &= validateRule_validateDomainNameIsUnique(rule, diagnostics, context);
+		if (result || diagnostics != null) result &= validateRule_validateOverridesRuleIsExtendedRule(rule, diagnostics, context);
+		if (result || diagnostics != null) result &= validateRule_validateOverridesRuleOverridesAllDomains(rule, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * Validates the validateDomainNameIsUnique constraint of '<em>Rule</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateRule_validateDomainNameIsUnique(Rule rule, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return rule.validateDomainNameIsUnique(diagnostics, context);
+	}
+
+	/**
+	 * Validates the validateOverridesRuleIsExtendedRule constraint of '<em>Rule</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateRule_validateOverridesRuleIsExtendedRule(Rule rule, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return rule.validateOverridesRuleIsExtendedRule(diagnostics, context);
+	}
+
+	/**
+	 * Validates the validateOverridesRuleOverridesAllDomains constraint of '<em>Rule</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateRule_validateOverridesRuleOverridesAllDomains(Rule rule, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return rule.validateOverridesRuleOverridesAllDomains(diagnostics, context);
 	}
 
 	/**
@@ -246,7 +446,40 @@ public class QVTbaseValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(transformation, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(transformation, diagnostics, context);
 		if (result || diagnostics != null) result &= pivotValidator.validateClass_validateUniqueInvariantName(transformation, diagnostics, context);
+		if (result || diagnostics != null) result &= validateTransformation_validateContextTypeIsTransformation(transformation, diagnostics, context);
+		if (result || diagnostics != null) result &= validateTransformation_validateExtendedTypedModelIsExtended(transformation, diagnostics, context);
+		if (result || diagnostics != null) result &= validateTransformation_validateModelParameterIsUnique(transformation, diagnostics, context);
 		return result;
+	}
+
+	/**
+	 * Validates the validateContextTypeIsTransformation constraint of '<em>Transformation</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateTransformation_validateContextTypeIsTransformation(Transformation transformation, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return transformation.validateContextTypeIsTransformation(diagnostics, context);
+	}
+
+	/**
+	 * Validates the validateExtendedTypedModelIsExtended constraint of '<em>Transformation</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateTransformation_validateExtendedTypedModelIsExtended(Transformation transformation, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return transformation.validateExtendedTypedModelIsExtended(diagnostics, context);
+	}
+
+	/**
+	 * Validates the validateModelParameterIsUnique constraint of '<em>Transformation</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateTransformation_validateModelParameterIsUnique(Transformation transformation, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return transformation.validateModelParameterIsUnique(diagnostics, context);
 	}
 
 	/**
@@ -255,27 +488,7 @@ public class QVTbaseValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateTypedModel(TypedModel typedModel, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(typedModel, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms(typedModel, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(typedModel, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(typedModel, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(typedModel, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves(typedModel, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID(typedModel, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique(typedModel, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(typedModel, diagnostics, context);
-		if (result || diagnostics != null) result &= validateTypedModel_validateIsTrue(typedModel, diagnostics, context);
-		return result;
-	}
-
-	/**
-	 * Validates the validateIsTrue constraint of '<em>Typed Model</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateTypedModel_validateIsTrue(TypedModel typedModel, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return typedModel.validateIsTrue(diagnostics, context);
+		return validate_EveryDefaultConstraint(typedModel, diagnostics, context);
 	}
 
 	/**

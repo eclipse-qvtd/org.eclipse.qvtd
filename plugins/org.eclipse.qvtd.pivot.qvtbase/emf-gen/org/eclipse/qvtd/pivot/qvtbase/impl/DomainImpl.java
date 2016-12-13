@@ -11,20 +11,41 @@
 package org.eclipse.qvtd.pivot.qvtbase.impl;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.Map;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.ReferringElement;
+import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.NamedElementImpl;
+import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
+import org.eclipse.ocl.pivot.library.classifier.ClassifierOclContainerOperation;
+import org.eclipse.ocl.pivot.library.collection.CollectionIncludesOperation;
+import org.eclipse.ocl.pivot.library.logical.BooleanAndOperation;
+import org.eclipse.ocl.pivot.library.logical.BooleanImpliesOperation;
+import org.eclipse.ocl.pivot.library.oclany.OclAnyOclAsTypeOperation;
+import org.eclipse.ocl.pivot.library.oclany.OclAnyOclIsKindOfOperation;
+import org.eclipse.ocl.pivot.library.oclany.OclComparableLessThanEqualOperation;
+import org.eclipse.ocl.pivot.library.string.CGStringGetSeverityOperation;
+import org.eclipse.ocl.pivot.library.string.CGStringLogDiagnosticOperation;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.ValueUtil;
+import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
+import org.eclipse.qvtd.pivot.qvtbase.QVTbaseTables;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
+import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 
 /**
@@ -317,6 +338,161 @@ public abstract class DomainImpl extends NamedElementImpl implements Domain {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean validateNameIsTypedModelName(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
+		/**
+		 *
+		 * inv NameIsTypedModelName:
+		 *   let severity : Integer[1] = 'Domain::NameIsTypedModelName'.getSeverity()
+		 *   in
+		 *     if severity <= 0
+		 *     then true
+		 *     else
+		 *       let status : OclAny[?] = typedModel <> null implies name = typedModel.name
+		 *       in
+		 *         'Domain::NameIsTypedModelName'.logDiagnostic(self, null, diagnostics, context, null, severity, status, 0)
+		 *     endif
+		 */
+		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
+		final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTbaseTables.STR_Domain_c_c_NameIsTypedModelName);
+		final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTbaseTables.INT_0).booleanValue();
+		/*@NonInvalid*/ boolean symbol_0;
+		if (le) {
+			symbol_0 = ValueUtil.TRUE_VALUE;
+		}
+		else {
+			/*@Caught*/ @Nullable Object CAUGHT_status;
+			try {
+				/*@Caught*/ @NonNull Object CAUGHT_ne;
+				try {
+					final /*@Thrown*/ org.eclipse.qvtd.pivot.qvtbase.@Nullable TypedModel typedModel = this.getTypedModel();
+					final /*@Thrown*/ boolean ne = typedModel != null;
+					CAUGHT_ne = ne;
+				}
+				catch (Exception e) {
+					CAUGHT_ne = ValueUtil.createInvalidValue(e);
+				}
+				/*@Caught*/ @NonNull Object CAUGHT_eq;
+				try {
+					final /*@Thrown*/ java.lang.@Nullable String name = this.getName();
+					final /*@Thrown*/ org.eclipse.qvtd.pivot.qvtbase.@Nullable TypedModel typedModel_0 = this.getTypedModel();
+					if (typedModel_0 == null) {
+						throw new InvalidValueException("Null source for \'NamedElement::name\'");
+					}
+					final /*@Thrown*/ java.lang.@Nullable String name_0 = typedModel_0.getName();
+					final /*@Thrown*/ boolean eq = (name != null) ? name.equals(name_0) : (name_0 == null);
+					CAUGHT_eq = eq;
+				}
+				catch (Exception e) {
+					CAUGHT_eq = ValueUtil.createInvalidValue(e);
+				}
+				final /*@Thrown*/ java.lang.@Nullable Boolean status = BooleanImpliesOperation.INSTANCE.evaluate(CAUGHT_ne, CAUGHT_eq);
+				CAUGHT_status = status;
+			}
+			catch (Exception e) {
+				CAUGHT_status = ValueUtil.createInvalidValue(e);
+			}
+			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTbaseTables.STR_Domain_c_c_NameIsTypedModelName, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_status, QVTbaseTables.INT_0).booleanValue();
+			symbol_0 = logDiagnostic;
+		}
+		return Boolean.TRUE == symbol_0;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean validateTypedModelIsTransformationModelParameter(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
+		/**
+		 *
+		 * inv TypedModelIsTransformationModelParameter:
+		 *   let
+		 *     severity : Integer[1] = 'Domain::TypedModelIsTransformationModelParameter'.getSeverity()
+		 *   in
+		 *     if severity <= 0
+		 *     then true
+		 *     else
+		 *       let
+		 *         status : OclAny[?] = oclContainer()
+		 *         .oclIsKindOf(Transformation) and typedModel <> null implies
+		 *         oclContainer()
+		 *         .oclAsType(Transformation)
+		 *         .modelParameter->includes(typedModel)
+		 *       in
+		 *         'Domain::TypedModelIsTransformationModelParameter'.logDiagnostic(self, null, diagnostics, context, null, severity, status, 0)
+		 *     endif
+		 */
+		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
+		final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@NonNull IdResolver idResolver = executor.getIdResolver();
+		final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTbaseTables.STR_Domain_c_c_TypedModelIsTransformationModelParameter);
+		final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTbaseTables.INT_0).booleanValue();
+		/*@NonInvalid*/ boolean symbol_0;
+		if (le) {
+			symbol_0 = ValueUtil.TRUE_VALUE;
+		}
+		else {
+			/*@Caught*/ @Nullable Object CAUGHT_status;
+			try {
+				/*@Caught*/ @Nullable Object CAUGHT_and;
+				try {
+					/*@Caught*/ @NonNull Object CAUGHT_oclIsKindOf;
+					try {
+						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_qvtbase_c_c_Transformation = idResolver.getClass(QVTbaseTables.CLSSid_Transformation, null);
+						final /*@NonInvalid*/ java.lang.@Nullable Object oclContainer = ClassifierOclContainerOperation.INSTANCE.evaluate(executor, this);
+						final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, oclContainer, TYP_qvtbase_c_c_Transformation).booleanValue();
+						CAUGHT_oclIsKindOf = oclIsKindOf;
+					}
+					catch (Exception e) {
+						CAUGHT_oclIsKindOf = ValueUtil.createInvalidValue(e);
+					}
+					/*@Caught*/ @NonNull Object CAUGHT_ne;
+					try {
+						final /*@Thrown*/ org.eclipse.qvtd.pivot.qvtbase.@Nullable TypedModel typedModel = this.getTypedModel();
+						final /*@Thrown*/ boolean ne = typedModel != null;
+						CAUGHT_ne = ne;
+					}
+					catch (Exception e) {
+						CAUGHT_ne = ValueUtil.createInvalidValue(e);
+					}
+					final /*@Thrown*/ java.lang.@Nullable Boolean and = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_oclIsKindOf, CAUGHT_ne);
+					CAUGHT_and = and;
+				}
+				catch (Exception e) {
+					CAUGHT_and = ValueUtil.createInvalidValue(e);
+				}
+				/*@Caught*/ @NonNull Object CAUGHT_includes;
+				try {
+					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_qvtbase_c_c_Transformation_0 = idResolver.getClass(QVTbaseTables.CLSSid_Transformation, null);
+					final /*@NonInvalid*/ java.lang.@Nullable Object oclContainer_0 = ClassifierOclContainerOperation.INSTANCE.evaluate(executor, this);
+					final /*@Thrown*/ org.eclipse.qvtd.pivot.qvtbase.@NonNull Transformation oclAsType = ClassUtil.nonNullState((Transformation)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, oclContainer_0, TYP_qvtbase_c_c_Transformation_0));
+					final /*@Thrown*/ java.util.@NonNull List<TypedModel> modelParameter = oclAsType.getModelParameter();
+					final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_modelParameter = idResolver.createOrderedSetOfAll(QVTbaseTables.ORD_CLSSid_TypedModel, modelParameter);
+					final /*@Thrown*/ org.eclipse.qvtd.pivot.qvtbase.@Nullable TypedModel typedModel_0 = this.getTypedModel();
+					final /*@Thrown*/ boolean includes = CollectionIncludesOperation.INSTANCE.evaluate(BOXED_modelParameter, typedModel_0).booleanValue();
+					CAUGHT_includes = includes;
+				}
+				catch (Exception e) {
+					CAUGHT_includes = ValueUtil.createInvalidValue(e);
+				}
+				final /*@Thrown*/ java.lang.@Nullable Boolean status = BooleanImpliesOperation.INSTANCE.evaluate(CAUGHT_and, CAUGHT_includes);
+				CAUGHT_status = status;
+			}
+			catch (Exception e) {
+				CAUGHT_status = ValueUtil.createInvalidValue(e);
+			}
+			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTbaseTables.STR_Domain_c_c_TypedModelIsTransformationModelParameter, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_status, QVTbaseTables.INT_0).booleanValue();
+			symbol_0 = logDiagnostic;
+		}
+		return Boolean.TRUE == symbol_0;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
 	@Override
@@ -479,8 +655,13 @@ public abstract class DomainImpl extends NamedElementImpl implements Domain {
 	 * @generated
 	 */
 	@Override
+	@SuppressWarnings("unchecked")
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
 		switch (operationID) {
+			case QVTbasePackage.DOMAIN___VALIDATE_NAME_IS_TYPED_MODEL_NAME__DIAGNOSTICCHAIN_MAP:
+				return validateNameIsTypedModelName((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
+			case QVTbasePackage.DOMAIN___VALIDATE_TYPED_MODEL_IS_TRANSFORMATION_MODEL_PARAMETER__DIAGNOSTICCHAIN_MAP:
+				return validateTypedModelIsTransformationModelParameter((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 			case QVTbasePackage.DOMAIN___GET_REFERRED_ELEMENT:
 				return getReferredElement();
 		}

@@ -1,15 +1,15 @@
 /**
  * <copyright>
- * 
+ *
  * Copyright (c) 2013, 2017 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
- * 
+ *
  * </copyright>
  */
 package org.eclipse.qvtd.pivot.qvtcore.util;
@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.util.EObjectValidator;
 
 import org.eclipse.ocl.pivot.util.PivotValidator;
 
+import org.eclipse.qvtd.pivot.qvtbase.util.QVTbaseValidator;
 import org.eclipse.qvtd.pivot.qvtcore.*;
 
 /**
@@ -110,6 +111,14 @@ public class QVTcoreValidator extends EObjectValidator {
 	protected PivotValidator pivotValidator;
 
 	/**
+	 * The cached base package validator.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected QVTbaseValidator qvTbaseValidator;
+
+	/**
 	 * Creates an instance of the switch.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -118,6 +127,7 @@ public class QVTcoreValidator extends EObjectValidator {
 	public QVTcoreValidator() {
 		super();
 		pivotValidator = PivotValidator.INSTANCE;
+		qvTbaseValidator = QVTbaseValidator.INSTANCE;
 	}
 
 	/**
@@ -128,7 +138,7 @@ public class QVTcoreValidator extends EObjectValidator {
 	 */
 	@Override
 	protected EPackage getEPackage() {
-	  return QVTcorePackage.eINSTANCE;
+		return QVTcorePackage.eINSTANCE;
 	}
 
 	/**
@@ -234,7 +244,18 @@ public class QVTcoreValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateCoreDomain(CoreDomain coreDomain, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(coreDomain, diagnostics, context);
+		if (!validate_NoCircularContainment(coreDomain, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms(coreDomain, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(coreDomain, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(coreDomain, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(coreDomain, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(coreDomain, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(coreDomain, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(coreDomain, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(coreDomain, diagnostics, context);
+		if (result || diagnostics != null) result &= qvTbaseValidator.validateDomain_validateNameIsTypedModelName(coreDomain, diagnostics, context);
+		if (result || diagnostics != null) result &= qvTbaseValidator.validateDomain_validateTypedModelIsTransformationModelParameter(coreDomain, diagnostics, context);
+		return result;
 	}
 
 	/**
@@ -301,7 +322,19 @@ public class QVTcoreValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateMapping(Mapping mapping, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(mapping, diagnostics, context);
+		if (!validate_NoCircularContainment(mapping, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms(mapping, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(mapping, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(mapping, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(mapping, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(mapping, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(mapping, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(mapping, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(mapping, diagnostics, context);
+		if (result || diagnostics != null) result &= qvTbaseValidator.validateRule_validateDomainNameIsUnique(mapping, diagnostics, context);
+		if (result || diagnostics != null) result &= qvTbaseValidator.validateRule_validateOverridesRuleIsExtendedRule(mapping, diagnostics, context);
+		if (result || diagnostics != null) result &= qvTbaseValidator.validateRule_validateOverridesRuleOverridesAllDomains(mapping, diagnostics, context);
+		return result;
 	}
 
 	/**

@@ -1,15 +1,15 @@
 /*******************************************************************************
  * <copyright>
- * 
+ *
  * Copyright (c) 2013, 2017 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
- * 
+ *
  * </copyright>
  *************************************************************************
  * This code is 100% auto-generated
@@ -70,25 +70,45 @@ public class QVTbaseTables
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull RootPackageId PACKid_$metamodel$ = org.eclipse.ocl.pivot.ids.IdManager.getRootPackageId("$metamodel$");
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbase = org.eclipse.ocl.pivot.ids.IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/2015/QVTbase", null, org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage.eINSTANCE);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Annotation = org.eclipse.qvtd.pivot.qvtbase.QVTbaseTables.PACKid_$metamodel$.getClassId("Annotation", 0);
+	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Class = org.eclipse.qvtd.pivot.qvtbase.QVTbaseTables.PACKid_$metamodel$.getClassId("Class", 0);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Domain = org.eclipse.qvtd.pivot.qvtbase.QVTbaseTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbase.getClassId("Domain", 0);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Function = org.eclipse.qvtd.pivot.qvtbase.QVTbaseTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbase.getClassId("Function", 0);
+	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_FunctionParameter = org.eclipse.qvtd.pivot.qvtbase.QVTbaseTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbase.getClassId("FunctionParameter", 0);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_OCLExpression = org.eclipse.qvtd.pivot.qvtbase.QVTbaseTables.PACKid_$metamodel$.getClassId("OCLExpression", 0);
+	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_OclElement = org.eclipse.qvtd.pivot.qvtbase.QVTbaseTables.PACKid_$metamodel$.getClassId("OclElement", 0);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Package = org.eclipse.qvtd.pivot.qvtbase.QVTbaseTables.PACKid_$metamodel$.getClassId("Package", 0);
+	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Parameter = org.eclipse.qvtd.pivot.qvtbase.QVTbaseTables.PACKid_$metamodel$.getClassId("Parameter", 0);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Pattern = org.eclipse.qvtd.pivot.qvtbase.QVTbaseTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbase.getClassId("Pattern", 0);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Predicate = org.eclipse.qvtd.pivot.qvtbase.QVTbaseTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbase.getClassId("Predicate", 0);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Rule = org.eclipse.qvtd.pivot.qvtbase.QVTbaseTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbase.getClassId("Rule", 0);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Transformation = org.eclipse.qvtd.pivot.qvtbase.QVTbaseTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbase.getClassId("Transformation", 0);
+	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Type = org.eclipse.qvtd.pivot.qvtbase.QVTbaseTables.PACKid_$metamodel$.getClassId("Type", 0);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_TypedModel = org.eclipse.qvtd.pivot.qvtbase.QVTbaseTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbase.getClassId("TypedModel", 0);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Variable = org.eclipse.qvtd.pivot.qvtbase.QVTbaseTables.PACKid_$metamodel$.getClassId("Variable", 0);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue INT_0 = org.eclipse.ocl.pivot.utilities.ValueUtil.integerValueOf("0");
-	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_TypedModel_c_c_IsTrue = "TypedModel::IsTrue";
+	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId SEQ_PRIMid_String = org.eclipse.ocl.pivot.ids.TypeId.SEQUENCE.getSpecializedId(org.eclipse.ocl.pivot.ids.TypeId.STRING);
+	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_Domain_c_c_NameIsTypedModelName = "Domain::NameIsTypedModelName";
+	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_Domain_c_c_TypedModelIsTransformationModelParameter = "Domain::TypedModelIsTransformationModelParameter";
+	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_Function_c_c_ParametersAreFunctionParameter = "Function::ParametersAreFunctionParameter";
+	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_Function_c_c_ReturnTypeIsQueryType = "Function::ReturnTypeIsQueryType";
+	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_Predicate_c_c_ConditionIsBoolean = "Predicate::ConditionIsBoolean";
+	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_Rule_c_c_DomainNameIsUnique = "Rule::DomainNameIsUnique";
+	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_Rule_c_c_OverridesRuleIsExtendedRule = "Rule::OverridesRuleIsExtendedRule";
+	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_Rule_c_c_OverridesRuleOverridesAllDomains = "Rule::OverridesRuleOverridesAllDomains";
+	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_Transformation_c_c_ContextTypeIsTransformation = "Transformation::ContextTypeIsTransformation";
+	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_Transformation_c_c_ExtendedTypedModelIsExtended = "Transformation::ExtendedTypedModelIsExtended";
+	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_Transformation_c_c_ModelParameterIsUnique = "Transformation::ModelParameterIsUnique";
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId BAG_CLSSid_Domain = org.eclipse.ocl.pivot.ids.TypeId.BAG.getSpecializedId(org.eclipse.qvtd.pivot.qvtbase.QVTbaseTables.CLSSid_Domain);
+	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId BAG_CLSSid_Rule = org.eclipse.ocl.pivot.ids.TypeId.BAG.getSpecializedId(org.eclipse.qvtd.pivot.qvtbase.QVTbaseTables.CLSSid_Rule);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_Domain = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.qvtd.pivot.qvtbase.QVTbaseTables.CLSSid_Domain);
+	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_Parameter = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.qvtd.pivot.qvtbase.QVTbaseTables.CLSSid_Parameter);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_TypedModel = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.qvtd.pivot.qvtbase.QVTbaseTables.CLSSid_TypedModel);
+	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId SEQ_CLSSid_Package = org.eclipse.ocl.pivot.ids.TypeId.SEQUENCE.getSpecializedId(org.eclipse.qvtd.pivot.qvtbase.QVTbaseTables.CLSSid_Package);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId SET_CLSSid_Annotation = org.eclipse.ocl.pivot.ids.TypeId.SET.getSpecializedId(org.eclipse.qvtd.pivot.qvtbase.QVTbaseTables.CLSSid_Annotation);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId SET_CLSSid_Package = org.eclipse.ocl.pivot.ids.TypeId.SET.getSpecializedId(org.eclipse.qvtd.pivot.qvtbase.QVTbaseTables.CLSSid_Package);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId SET_CLSSid_Predicate = org.eclipse.ocl.pivot.ids.TypeId.SET.getSpecializedId(org.eclipse.qvtd.pivot.qvtbase.QVTbaseTables.CLSSid_Predicate);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId SET_CLSSid_Rule = org.eclipse.ocl.pivot.ids.TypeId.SET.getSpecializedId(org.eclipse.qvtd.pivot.qvtbase.QVTbaseTables.CLSSid_Rule);
+	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId SET_CLSSid_Transformation = org.eclipse.ocl.pivot.ids.TypeId.SET.getSpecializedId(org.eclipse.qvtd.pivot.qvtbase.QVTbaseTables.CLSSid_Transformation);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId SET_CLSSid_TypedModel = org.eclipse.ocl.pivot.ids.TypeId.SET.getSpecializedId(org.eclipse.qvtd.pivot.qvtbase.QVTbaseTables.CLSSid_TypedModel);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId SET_CLSSid_Variable = org.eclipse.ocl.pivot.ids.TypeId.SET.getSpecializedId(org.eclipse.qvtd.pivot.qvtbase.QVTbaseTables.CLSSid_Variable);
 
@@ -378,123 +398,123 @@ public class QVTbaseTables
 		}
 
 		private static final @NonNull ExecutorFragment @NonNull [] _BaseModel =
-		{
-			Fragments._BaseModel__OclAny /* 0 */,
-			Fragments._BaseModel__OclElement /* 1 */,
-			Fragments._BaseModel__Nameable /* 2 */,
-			Fragments._BaseModel__Visitable /* 2 */,
-			Fragments._BaseModel__Element /* 3 */,
-			Fragments._BaseModel__NamedElement /* 4 */,
-			Fragments._BaseModel__Namespace /* 5 */,
-			Fragments._BaseModel__Model /* 6 */,
-			Fragments._BaseModel__BaseModel /* 7 */
-		};
+			{
+				Fragments._BaseModel__OclAny /* 0 */,
+				Fragments._BaseModel__OclElement /* 1 */,
+				Fragments._BaseModel__Nameable /* 2 */,
+				Fragments._BaseModel__Visitable /* 2 */,
+				Fragments._BaseModel__Element /* 3 */,
+				Fragments._BaseModel__NamedElement /* 4 */,
+				Fragments._BaseModel__Namespace /* 5 */,
+				Fragments._BaseModel__Model /* 6 */,
+				Fragments._BaseModel__BaseModel /* 7 */
+			};
 		private static final int @NonNull [] __BaseModel = { 1,1,2,1,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _Domain =
-		{
-			Fragments._Domain__OclAny /* 0 */,
-			Fragments._Domain__OclElement /* 1 */,
-			Fragments._Domain__Nameable /* 2 */,
-			Fragments._Domain__ReferringElement /* 2 */,
-			Fragments._Domain__Visitable /* 2 */,
-			Fragments._Domain__Element /* 3 */,
-			Fragments._Domain__NamedElement /* 4 */,
-			Fragments._Domain__Domain /* 5 */
-		};
+			{
+				Fragments._Domain__OclAny /* 0 */,
+				Fragments._Domain__OclElement /* 1 */,
+				Fragments._Domain__Nameable /* 2 */,
+				Fragments._Domain__ReferringElement /* 2 */,
+				Fragments._Domain__Visitable /* 2 */,
+				Fragments._Domain__Element /* 3 */,
+				Fragments._Domain__NamedElement /* 4 */,
+				Fragments._Domain__Domain /* 5 */
+			};
 		private static final int @NonNull [] __Domain = { 1,1,3,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _Function =
-		{
-			Fragments._Function__OclAny /* 0 */,
-			Fragments._Function__OclElement /* 1 */,
-			Fragments._Function__Nameable /* 2 */,
-			Fragments._Function__Visitable /* 2 */,
-			Fragments._Function__Element /* 3 */,
-			Fragments._Function__NamedElement /* 4 */,
-			Fragments._Function__TemplateableElement /* 4 */,
-			Fragments._Function__Namespace /* 5 */,
-			Fragments._Function__TypedElement /* 5 */,
-			Fragments._Function__Feature /* 6 */,
-			Fragments._Function__Operation /* 7 */,
-			Fragments._Function__Function /* 8 */
-		};
+			{
+				Fragments._Function__OclAny /* 0 */,
+				Fragments._Function__OclElement /* 1 */,
+				Fragments._Function__Nameable /* 2 */,
+				Fragments._Function__Visitable /* 2 */,
+				Fragments._Function__Element /* 3 */,
+				Fragments._Function__NamedElement /* 4 */,
+				Fragments._Function__TemplateableElement /* 4 */,
+				Fragments._Function__Namespace /* 5 */,
+				Fragments._Function__TypedElement /* 5 */,
+				Fragments._Function__Feature /* 6 */,
+				Fragments._Function__Operation /* 7 */,
+				Fragments._Function__Function /* 8 */
+			};
 		private static final int @NonNull [] __Function = { 1,1,2,1,2,2,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _FunctionParameter =
-		{
-			Fragments._FunctionParameter__OclAny /* 0 */,
-			Fragments._FunctionParameter__OclElement /* 1 */,
-			Fragments._FunctionParameter__Nameable /* 2 */,
-			Fragments._FunctionParameter__Visitable /* 2 */,
-			Fragments._FunctionParameter__Element /* 3 */,
-			Fragments._FunctionParameter__NamedElement /* 4 */,
-			Fragments._FunctionParameter__TypedElement /* 5 */,
-			Fragments._FunctionParameter__VariableDeclaration /* 6 */,
-			Fragments._FunctionParameter__Parameter /* 7 */,
-			Fragments._FunctionParameter__FunctionParameter /* 8 */
-		};
+			{
+				Fragments._FunctionParameter__OclAny /* 0 */,
+				Fragments._FunctionParameter__OclElement /* 1 */,
+				Fragments._FunctionParameter__Nameable /* 2 */,
+				Fragments._FunctionParameter__Visitable /* 2 */,
+				Fragments._FunctionParameter__Element /* 3 */,
+				Fragments._FunctionParameter__NamedElement /* 4 */,
+				Fragments._FunctionParameter__TypedElement /* 5 */,
+				Fragments._FunctionParameter__VariableDeclaration /* 6 */,
+				Fragments._FunctionParameter__Parameter /* 7 */,
+				Fragments._FunctionParameter__FunctionParameter /* 8 */
+			};
 		private static final int @NonNull [] __FunctionParameter = { 1,1,2,1,1,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _Pattern =
-		{
-			Fragments._Pattern__OclAny /* 0 */,
-			Fragments._Pattern__OclElement /* 1 */,
-			Fragments._Pattern__Visitable /* 2 */,
-			Fragments._Pattern__Element /* 3 */,
-			Fragments._Pattern__Pattern /* 4 */
-		};
+			{
+				Fragments._Pattern__OclAny /* 0 */,
+				Fragments._Pattern__OclElement /* 1 */,
+				Fragments._Pattern__Visitable /* 2 */,
+				Fragments._Pattern__Element /* 3 */,
+				Fragments._Pattern__Pattern /* 4 */
+			};
 		private static final int @NonNull [] __Pattern = { 1,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _Predicate =
-		{
-			Fragments._Predicate__OclAny /* 0 */,
-			Fragments._Predicate__OclElement /* 1 */,
-			Fragments._Predicate__Visitable /* 2 */,
-			Fragments._Predicate__Element /* 3 */,
-			Fragments._Predicate__Predicate /* 4 */
-		};
+			{
+				Fragments._Predicate__OclAny /* 0 */,
+				Fragments._Predicate__OclElement /* 1 */,
+				Fragments._Predicate__Visitable /* 2 */,
+				Fragments._Predicate__Element /* 3 */,
+				Fragments._Predicate__Predicate /* 4 */
+			};
 		private static final int @NonNull [] __Predicate = { 1,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _Rule =
-		{
-			Fragments._Rule__OclAny /* 0 */,
-			Fragments._Rule__OclElement /* 1 */,
-			Fragments._Rule__Nameable /* 2 */,
-			Fragments._Rule__Visitable /* 2 */,
-			Fragments._Rule__Element /* 3 */,
-			Fragments._Rule__NamedElement /* 4 */,
-			Fragments._Rule__Rule /* 5 */
-		};
+			{
+				Fragments._Rule__OclAny /* 0 */,
+				Fragments._Rule__OclElement /* 1 */,
+				Fragments._Rule__Nameable /* 2 */,
+				Fragments._Rule__Visitable /* 2 */,
+				Fragments._Rule__Element /* 3 */,
+				Fragments._Rule__NamedElement /* 4 */,
+				Fragments._Rule__Rule /* 5 */
+			};
 		private static final int @NonNull [] __Rule = { 1,1,2,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _Transformation =
-		{
-			Fragments._Transformation__OclAny /* 0 */,
-			Fragments._Transformation__OclElement /* 1 */,
-			Fragments._Transformation__Nameable /* 2 */,
-			Fragments._Transformation__OclType /* 2 */,
-			Fragments._Transformation__Visitable /* 2 */,
-			Fragments._Transformation__Element /* 3 */,
-			Fragments._Transformation__NamedElement /* 4 */,
-			Fragments._Transformation__TemplateableElement /* 4 */,
-			Fragments._Transformation__Namespace /* 5 */,
-			Fragments._Transformation__Type /* 5 */,
-			Fragments._Transformation__Class /* 6 */,
-			Fragments._Transformation__Transformation /* 7 */
-		};
+			{
+				Fragments._Transformation__OclAny /* 0 */,
+				Fragments._Transformation__OclElement /* 1 */,
+				Fragments._Transformation__Nameable /* 2 */,
+				Fragments._Transformation__OclType /* 2 */,
+				Fragments._Transformation__Visitable /* 2 */,
+				Fragments._Transformation__Element /* 3 */,
+				Fragments._Transformation__NamedElement /* 4 */,
+				Fragments._Transformation__TemplateableElement /* 4 */,
+				Fragments._Transformation__Namespace /* 5 */,
+				Fragments._Transformation__Type /* 5 */,
+				Fragments._Transformation__Class /* 6 */,
+				Fragments._Transformation__Transformation /* 7 */
+			};
 		private static final int @NonNull [] __Transformation = { 1,1,3,1,2,2,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _TypedModel =
-		{
-			Fragments._TypedModel__OclAny /* 0 */,
-			Fragments._TypedModel__OclElement /* 1 */,
-			Fragments._TypedModel__Nameable /* 2 */,
-			Fragments._TypedModel__Visitable /* 2 */,
-			Fragments._TypedModel__Element /* 3 */,
-			Fragments._TypedModel__NamedElement /* 4 */,
-			Fragments._TypedModel__TypedModel /* 5 */
-		};
+			{
+				Fragments._TypedModel__OclAny /* 0 */,
+				Fragments._TypedModel__OclElement /* 1 */,
+				Fragments._TypedModel__Nameable /* 2 */,
+				Fragments._TypedModel__Visitable /* 2 */,
+				Fragments._TypedModel__Element /* 3 */,
+				Fragments._TypedModel__NamedElement /* 4 */,
+				Fragments._TypedModel__TypedModel /* 5 */
+			};
 		private static final int @NonNull [] __TypedModel = { 1,1,2,1,1,1 };
 
 		/**

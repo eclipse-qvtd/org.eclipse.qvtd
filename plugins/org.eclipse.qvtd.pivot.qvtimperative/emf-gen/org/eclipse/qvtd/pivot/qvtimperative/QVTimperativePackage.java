@@ -32,17 +32,17 @@ import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
  * <!-- end-user-doc -->
  * <!-- begin-model-doc -->
  * The Package for an Imperative QVT transformation.
- * 
+ *
  * An Imperative QVT trabsformation is expected to be created by an autogenerator that observes the following run-time restrictions:
- * 
+ *
  * A mapping that my be re-invoked must have MappingCall.isInfinite set for every possible invocation.
- * 
+ *
  * A mapping that reads object slots before they are guaranteed to have been assigned must declare the slots property in a corresponding ImperativeArea.checkedProperties entry.
- * 
+ *
  * A mapping that assigns an object slot that any mapping may access before assignment is guaranteed must declare declare the slots property in a corresponding ImperativeArea.enforcedProperties entry.
- * 
+ *
  * All reads by Functions/Queries must be guaranteed to succeed; i.e. the invoking mapping must check readiness before calling the query.
- * 
+ *
  * All writes to multi-valued properties must be guaranteed to occur before any read of the property.
  * <!-- end-model-doc -->
  * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeFactory
@@ -2830,6 +2830,33 @@ public interface QVTimperativePackage extends EPackage {
 	int IMPERATIVE_TRANSFORMATION___GET_MODEL_PARAMETER__STRING = QVTbasePackage.TRANSFORMATION___GET_MODEL_PARAMETER__STRING;
 
 	/**
+	 * The operation id for the '<em>Validate Context Type Is Transformation</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_TRANSFORMATION___VALIDATE_CONTEXT_TYPE_IS_TRANSFORMATION__DIAGNOSTICCHAIN_MAP = QVTbasePackage.TRANSFORMATION___VALIDATE_CONTEXT_TYPE_IS_TRANSFORMATION__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The operation id for the '<em>Validate Extended Typed Model Is Extended</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_TRANSFORMATION___VALIDATE_EXTENDED_TYPED_MODEL_IS_EXTENDED__DIAGNOSTICCHAIN_MAP = QVTbasePackage.TRANSFORMATION___VALIDATE_EXTENDED_TYPED_MODEL_IS_EXTENDED__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The operation id for the '<em>Validate Model Parameter Is Unique</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_TRANSFORMATION___VALIDATE_MODEL_PARAMETER_IS_UNIQUE__DIAGNOSTICCHAIN_MAP = QVTbasePackage.TRANSFORMATION___VALIDATE_MODEL_PARAMETER_IS_UNIQUE__DIAGNOSTICCHAIN_MAP;
+
+	/**
 	 * The operation id for the '<em>Validateall Rules Are Mappings</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2981,15 +3008,6 @@ public interface QVTimperativePackage extends EPackage {
 	 * @ordered
 	 */
 	int IMPERATIVE_TYPED_MODEL___GET_VALUE__TYPE_STRING = QVTbasePackage.TYPED_MODEL___GET_VALUE__TYPE_STRING;
-
-	/**
-	 * The operation id for the '<em>Validate Is True</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IMPERATIVE_TYPED_MODEL___VALIDATE_IS_TRUE__DIAGNOSTICCHAIN_MAP = QVTbasePackage.TYPED_MODEL___VALIDATE_IS_TRUE__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The operation id for the '<em>Validate Name Is Not Null</em>' operation.
@@ -3450,6 +3468,33 @@ public interface QVTimperativePackage extends EPackage {
 	 * @ordered
 	 */
 	int MAPPING___GET_VALUE__TYPE_STRING = QVTbasePackage.RULE___GET_VALUE__TYPE_STRING;
+
+	/**
+	 * The operation id for the '<em>Validate Domain Name Is Unique</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING___VALIDATE_DOMAIN_NAME_IS_UNIQUE__DIAGNOSTICCHAIN_MAP = QVTbasePackage.RULE___VALIDATE_DOMAIN_NAME_IS_UNIQUE__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The operation id for the '<em>Validate Overrides Rule Is Extended Rule</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING___VALIDATE_OVERRIDES_RULE_IS_EXTENDED_RULE__DIAGNOSTICCHAIN_MAP = QVTbasePackage.RULE___VALIDATE_OVERRIDES_RULE_IS_EXTENDED_RULE__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The operation id for the '<em>Validate Overrides Rule Overrides All Domains</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING___VALIDATE_OVERRIDES_RULE_OVERRIDES_ALL_DOMAINS__DIAGNOSTICCHAIN_MAP = QVTbasePackage.RULE___VALIDATE_OVERRIDES_RULE_OVERRIDES_ALL_DOMAINS__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The operation id for the '<em>Validate Name Is Not Null</em>' operation.

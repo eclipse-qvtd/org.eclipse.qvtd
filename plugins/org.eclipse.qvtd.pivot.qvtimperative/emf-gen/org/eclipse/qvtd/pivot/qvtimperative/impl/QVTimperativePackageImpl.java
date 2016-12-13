@@ -275,7 +275,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 *
+	 * 
 	 * <p>This method is used to initialize {@link QVTimperativePackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -305,18 +305,17 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 
 		// Register package validator
 		EValidator.Registry.INSTANCE.put
-		(theQVTimperativePackage,
-			new EValidator.Descriptor() {
-			@Override
-			public EValidator getEValidator() {
-				return QVTimperativeValidator.INSTANCE;
-			}
-		});
+			(theQVTimperativePackage, 
+			 new EValidator.Descriptor() {
+				 public EValidator getEValidator() {
+					 return QVTimperativeValidator.INSTANCE;
+				 }
+			 });
 
 		// Mark meta-data to indicate it can't be changed
 		theQVTimperativePackage.freeze();
 
-
+  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(QVTimperativePackage.eNS_URI, theQVTimperativePackage);
 		return theQVTimperativePackage;
@@ -1813,12 +1812,12 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * @generated
 	 */
 	protected void createEcoreAnnotations() {
-		String source = "http://www.eclipse.org/emf/2002/Ecore";
+		String source = "http://www.eclipse.org/emf/2002/Ecore";	
 		addAnnotation
-		(this,
-			source,
-			new String[] {
-		});
+		  (this, 
+		   source, 
+		   new String[] {
+		   });
 	}
 
 	/**
@@ -1828,139 +1827,139 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * @generated
 	 */
 	protected void createUMLAnnotations() {
-		String source = "http://www.eclipse.org/uml2/2.0.0/UML";
+		String source = "http://www.eclipse.org/uml2/2.0.0/UML";	
 		addAnnotation
-		(getAddStatement__ValidateCompatibleTypeForValue__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "CompatibleTypeForValue"
-		});
+		  (getAddStatement__ValidateCompatibleTypeForValue__DiagnosticChain_Map(), 
+		   source, 
+		   new String[] {
+			 "originalName", "CompatibleTypeForValue"
+		   });	
 		addAnnotation
-		(getBufferStatement__ValidateCompatibleTypeForValue__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "CompatibleTypeForValue"
-		});
+		  (getBufferStatement__ValidateCompatibleTypeForValue__DiagnosticChain_Map(), 
+		   source, 
+		   new String[] {
+			 "originalName", "CompatibleTypeForValue"
+		   });	
 		addAnnotation
-		(getCheckStatement__ValidateTypeIsBoolean__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "TypeIsBoolean"
-		});
+		  (getCheckStatement__ValidateTypeIsBoolean__DiagnosticChain_Map(), 
+		   source, 
+		   new String[] {
+			 "originalName", "TypeIsBoolean"
+		   });	
 		addAnnotation
-		(getDeclareStatement__ValidateCompatibleTypeForCheckedValue__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "CompatibleTypeForCheckedValue"
-		});
+		  (getDeclareStatement__ValidateCompatibleTypeForCheckedValue__DiagnosticChain_Map(), 
+		   source, 
+		   new String[] {
+			 "originalName", "CompatibleTypeForCheckedValue"
+		   });	
 		addAnnotation
-		(getDeclareStatement__ValidateCompatibleTypeForUncheckedValue__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "CompatibleTypeForUncheckedValue"
-		});
+		  (getDeclareStatement__ValidateCompatibleTypeForUncheckedValue__DiagnosticChain_Map(), 
+		   source, 
+		   new String[] {
+			 "originalName", "CompatibleTypeForUncheckedValue"
+		   });	
 		addAnnotation
-		(getImperativeTransformation__ValidateallRulesAreMappings__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "allRulesAreMappings"
-		});
+		  (getImperativeTransformation__ValidateallRulesAreMappings__DiagnosticChain_Map(), 
+		   source, 
+		   new String[] {
+			 "originalName", "allRulesAreMappings"
+		   });	
 		addAnnotation
-		(getImperativeTypedModel__ValidateNameIsNotNull__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "NameIsNotNull"
-		});
+		  (getImperativeTypedModel__ValidateNameIsNotNull__DiagnosticChain_Map(), 
+		   source, 
+		   new String[] {
+			 "originalName", "NameIsNotNull"
+		   });	
 		addAnnotation
-		(getImperativeTypedModel__ValidateNotBothCheckedAndEnforced__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "NotBothCheckedAndEnforced"
-		});
+		  (getImperativeTypedModel__ValidateNotBothCheckedAndEnforced__DiagnosticChain_Map(), 
+		   source, 
+		   new String[] {
+			 "originalName", "NotBothCheckedAndEnforced"
+		   });	
 		addAnnotation
-		(getMapping__ValidateNameIsNotNull__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "NameIsNotNull"
-		});
+		  (getMapping__ValidateNameIsNotNull__DiagnosticChain_Map(), 
+		   source, 
+		   new String[] {
+			 "originalName", "NameIsNotNull"
+		   });	
 		addAnnotation
-		(getMapping__ValidateMappingParameterNamesAreUnique__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "MappingParameterNamesAreUnique"
-		});
+		  (getMapping__ValidateMappingParameterNamesAreUnique__DiagnosticChain_Map(), 
+		   source, 
+		   new String[] {
+			 "originalName", "MappingParameterNamesAreUnique"
+		   });	
 		addAnnotation
-		(getMapping__ValidateLocalVariabelNamesAreUnique__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "LocalVariabelNamesAreUnique"
-		});
+		  (getMapping__ValidateLocalVariabelNamesAreUnique__DiagnosticChain_Map(), 
+		   source, 
+		   new String[] {
+			 "originalName", "LocalVariabelNamesAreUnique"
+		   });	
 		addAnnotation
-		(getMappingCall__ValidateMatchingCallBindings__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "MatchingCallBindings"
-		});
+		  (getMappingCall__ValidateMatchingCallBindings__DiagnosticChain_Map(), 
+		   source, 
+		   new String[] {
+			 "originalName", "MatchingCallBindings"
+		   });	
 		addAnnotation
-		(getMappingCall__ValidateNotBothInstallAndInvoke__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "NotBothInstallAndInvoke"
-		});
+		  (getMappingCall__ValidateNotBothInstallAndInvoke__DiagnosticChain_Map(), 
+		   source, 
+		   new String[] {
+			 "originalName", "NotBothInstallAndInvoke"
+		   });	
 		addAnnotation
-		(getMappingCall__ValidateUniqueCallBindings__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "UniqueCallBindings"
-		});
+		  (getMappingCall__ValidateUniqueCallBindings__DiagnosticChain_Map(), 
+		   source, 
+		   new String[] {
+			 "originalName", "UniqueCallBindings"
+		   });	
 		addAnnotation
-		(getMappingParameterBinding__ValidateParameterIsMappingParameter__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "ParameterIsMappingParameter"
-		});
+		  (getMappingParameterBinding__ValidateParameterIsMappingParameter__DiagnosticChain_Map(), 
+		   source, 
+		   new String[] {
+			 "originalName", "ParameterIsMappingParameter"
+		   });	
 		addAnnotation
-		(getNewStatement__ValidateCompatibleTypeForValue__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "CompatibleTypeForValue"
-		});
+		  (getNewStatement__ValidateCompatibleTypeForValue__DiagnosticChain_Map(), 
+		   source, 
+		   new String[] {
+			 "originalName", "CompatibleTypeForValue"
+		   });	
 		addAnnotation
-		(getSetStatement__ValidateCompatibleClassForProperty__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "CompatibleClassForProperty"
-		});
+		  (getSetStatement__ValidateCompatibleClassForProperty__DiagnosticChain_Map(), 
+		   source, 
+		   new String[] {
+			 "originalName", "CompatibleClassForProperty"
+		   });	
 		addAnnotation
-		(getSetStatement__ValidateCompatibleTypeForValue__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "CompatibleTypeForValue"
-		});
+		  (getSetStatement__ValidateCompatibleTypeForValue__DiagnosticChain_Map(), 
+		   source, 
+		   new String[] {
+			 "originalName", "CompatibleTypeForValue"
+		   });	
 		addAnnotation
-		(getSetStatement__ValidateValueDoesNotNavigateFromRealizedVariables__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "ValueDoesNotNavigateFromRealizedVariables"
-		});
+		  (getSetStatement__ValidateValueDoesNotNavigateFromRealizedVariables__DiagnosticChain_Map(), 
+		   source, 
+		   new String[] {
+			 "originalName", "ValueDoesNotNavigateFromRealizedVariables"
+		   });	
 		addAnnotation
-		(getSetStatement__ValidateTargetPropertyIsNotReadOnly__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "TargetPropertyIsNotReadOnly"
-		});
+		  (getSetStatement__ValidateTargetPropertyIsNotReadOnly__DiagnosticChain_Map(), 
+		   source, 
+		   new String[] {
+			 "originalName", "TargetPropertyIsNotReadOnly"
+		   });	
 		addAnnotation
-		(getSimpleParameterBinding__ValidateCompatibleTypeForCheckedValue__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "CompatibleTypeForCheckedValue"
-		});
+		  (getSimpleParameterBinding__ValidateCompatibleTypeForCheckedValue__DiagnosticChain_Map(), 
+		   source, 
+		   new String[] {
+			 "originalName", "CompatibleTypeForCheckedValue"
+		   });	
 		addAnnotation
-		(getSimpleParameterBinding__ValidateCompatibleTypeForUncheckedValue__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "CompatibleTypeForUncheckedValue"
-		});
+		  (getSimpleParameterBinding__ValidateCompatibleTypeForUncheckedValue__DiagnosticChain_Map(), 
+		   source, 
+		   new String[] {
+			 "originalName", "CompatibleTypeForUncheckedValue"
+		   });
 	}
 
 	/**
@@ -1970,31 +1969,31 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * @generated
 	 */
 	protected void createCollectionAnnotations() {
-		String source = "http://www.eclipse.org/OCL/Collection";
+		String source = "http://www.eclipse.org/OCL/Collection";	
 		addAnnotation
-		(getImperativeTypedModel_AllUsedPackages(),
-			source,
-			new String[] {
-				"nullFree", "false"
-		});
+		  (getImperativeTypedModel_AllUsedPackages(), 
+		   source, 
+		   new String[] {
+			 "nullFree", "false"
+		   });	
 		addAnnotation
-		(getMappingCall_ReferredNames(),
-			source,
-			new String[] {
-				"nullFree", "false"
-		});
+		  (getMappingCall_ReferredNames(), 
+		   source, 
+		   new String[] {
+			 "nullFree", "false"
+		   });	
 		addAnnotation
-		(getMappingCall_ReferringNames(),
-			source,
-			new String[] {
-				"nullFree", "false"
-		});
+		  (getMappingCall_ReferringNames(), 
+		   source, 
+		   new String[] {
+			 "nullFree", "false"
+		   });	
 		addAnnotation
-		((getStatement__JoinNames__EList()).getEParameters().get(0),
-			source,
-			new String[] {
-				"nullFree", "false"
-		});
+		  ((getStatement__JoinNames__EList()).getEParameters().get(0), 
+		   source, 
+		   new String[] {
+			 "nullFree", "false"
+		   });
 	}
 
 } //QVTimperativePackageImpl

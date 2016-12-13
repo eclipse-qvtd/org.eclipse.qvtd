@@ -130,7 +130,7 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link QVTbasePackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -160,17 +160,18 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 
 		// Register package validator
 		EValidator.Registry.INSTANCE.put
-			(theQVTbasePackage, 
-			 new EValidator.Descriptor() {
-				 public EValidator getEValidator() {
-					 return QVTbaseValidator.INSTANCE;
-				 }
-			 });
+		(theQVTbasePackage,
+			new EValidator.Descriptor() {
+			@Override
+			public EValidator getEValidator() {
+				return QVTbaseValidator.INSTANCE;
+			}
+		});
 
 		// Mark meta-data to indicate it can't be changed
 		theQVTbasePackage.freeze();
 
-  
+
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(QVTbasePackage.eNS_URI, theQVTbasePackage);
 		return theQVTbasePackage;
@@ -242,6 +243,26 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 	 * @generated
 	 */
 	@Override
+	public EOperation getDomain__ValidateNameIsTypedModelName__DiagnosticChain_Map() {
+		return domainEClass.getEOperations().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getDomain__ValidateTypedModelIsTransformationModelParameter__DiagnosticChain_Map() {
+		return domainEClass.getEOperations().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getFunction() {
 		return functionEClass;
 	}
@@ -254,6 +275,26 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 	@Override
 	public EReference getFunction_QueryExpression() {
 		return (EReference)functionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getFunction__ValidateParametersAreFunctionParameter__DiagnosticChain_Map() {
+		return functionEClass.getEOperations().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getFunction__ValidateReturnTypeIsQueryType__DiagnosticChain_Map() {
+		return functionEClass.getEOperations().get(1);
 	}
 
 	/**
@@ -332,6 +373,16 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 	 * @generated
 	 */
 	@Override
+	public EOperation getPredicate__ValidateConditionIsBoolean__DiagnosticChain_Map() {
+		return predicateEClass.getEOperations().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getRule() {
 		return ruleEClass;
 	}
@@ -384,6 +435,36 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 	@Override
 	public EReference getRule_Overridden() {
 		return (EReference)ruleEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getRule__ValidateDomainNameIsUnique__DiagnosticChain_Map() {
+		return ruleEClass.getEOperations().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getRule__ValidateOverridesRuleIsExtendedRule__DiagnosticChain_Map() {
+		return ruleEClass.getEOperations().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getRule__ValidateOverridesRuleOverridesAllDomains__DiagnosticChain_Map() {
+		return ruleEClass.getEOperations().get(2);
 	}
 
 	/**
@@ -472,6 +553,36 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 	 * @generated
 	 */
 	@Override
+	public EOperation getTransformation__ValidateContextTypeIsTransformation__DiagnosticChain_Map() {
+		return transformationEClass.getEOperations().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getTransformation__ValidateExtendedTypedModelIsExtended__DiagnosticChain_Map() {
+		return transformationEClass.getEOperations().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getTransformation__ValidateModelParameterIsUnique__DiagnosticChain_Map() {
+		return transformationEClass.getEOperations().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getTypedModel() {
 		return typedModelEClass;
 	}
@@ -522,16 +633,6 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 	 * @generated
 	 */
 	@Override
-	public EOperation getTypedModel__ValidateIsTrue__DiagnosticChain_Map() {
-		return typedModelEClass.getEOperations().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public QVTbaseFactory getQVTbaseFactory() {
 		return (QVTbaseFactory)getEFactoryInstance();
 	}
@@ -562,9 +663,13 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 		createEAttribute(domainEClass, DOMAIN__IS_ENFORCEABLE);
 		createEReference(domainEClass, DOMAIN__RULE);
 		createEReference(domainEClass, DOMAIN__TYPED_MODEL);
+		createEOperation(domainEClass, DOMAIN___VALIDATE_NAME_IS_TYPED_MODEL_NAME__DIAGNOSTICCHAIN_MAP);
+		createEOperation(domainEClass, DOMAIN___VALIDATE_TYPED_MODEL_IS_TRANSFORMATION_MODEL_PARAMETER__DIAGNOSTICCHAIN_MAP);
 
 		functionEClass = createEClass(FUNCTION);
 		createEReference(functionEClass, FUNCTION__QUERY_EXPRESSION);
+		createEOperation(functionEClass, FUNCTION___VALIDATE_PARAMETERS_ARE_FUNCTION_PARAMETER__DIAGNOSTICCHAIN_MAP);
+		createEOperation(functionEClass, FUNCTION___VALIDATE_RETURN_TYPE_IS_QUERY_TYPE__DIAGNOSTICCHAIN_MAP);
 
 		functionParameterEClass = createEClass(FUNCTION_PARAMETER);
 
@@ -575,6 +680,7 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 		predicateEClass = createEClass(PREDICATE);
 		createEReference(predicateEClass, PREDICATE__CONDITION_EXPRESSION);
 		createEReference(predicateEClass, PREDICATE__PATTERN);
+		createEOperation(predicateEClass, PREDICATE___VALIDATE_CONDITION_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP);
 
 		ruleEClass = createEClass(RULE);
 		createEReference(ruleEClass, RULE__DOMAIN);
@@ -582,6 +688,9 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 		createEReference(ruleEClass, RULE__OVERRIDES);
 		createEReference(ruleEClass, RULE__TRANSFORMATION);
 		createEReference(ruleEClass, RULE__OVERRIDDEN);
+		createEOperation(ruleEClass, RULE___VALIDATE_DOMAIN_NAME_IS_UNIQUE__DIAGNOSTICCHAIN_MAP);
+		createEOperation(ruleEClass, RULE___VALIDATE_OVERRIDES_RULE_IS_EXTENDED_RULE__DIAGNOSTICCHAIN_MAP);
+		createEOperation(ruleEClass, RULE___VALIDATE_OVERRIDES_RULE_OVERRIDES_ALL_DOMAINS__DIAGNOSTICCHAIN_MAP);
 
 		transformationEClass = createEClass(TRANSFORMATION);
 		createEReference(transformationEClass, TRANSFORMATION__OWNED_TAG);
@@ -591,13 +700,15 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 		createEReference(transformationEClass, TRANSFORMATION__OWNED_CONTEXT);
 		createEOperation(transformationEClass, TRANSFORMATION___GET_FUNCTION__STRING);
 		createEOperation(transformationEClass, TRANSFORMATION___GET_MODEL_PARAMETER__STRING);
+		createEOperation(transformationEClass, TRANSFORMATION___VALIDATE_CONTEXT_TYPE_IS_TRANSFORMATION__DIAGNOSTICCHAIN_MAP);
+		createEOperation(transformationEClass, TRANSFORMATION___VALIDATE_EXTENDED_TYPED_MODEL_IS_EXTENDED__DIAGNOSTICCHAIN_MAP);
+		createEOperation(transformationEClass, TRANSFORMATION___VALIDATE_MODEL_PARAMETER_IS_UNIQUE__DIAGNOSTICCHAIN_MAP);
 
 		typedModelEClass = createEClass(TYPED_MODEL);
 		createEReference(typedModelEClass, TYPED_MODEL__TRANSFORMATION);
 		createEReference(typedModelEClass, TYPED_MODEL__USED_PACKAGE);
 		createEReference(typedModelEClass, TYPED_MODEL__DEPENDS_ON);
 		createEReference(typedModelEClass, TYPED_MODEL__OWNED_CONTEXT);
-		createEOperation(typedModelEClass, TYPED_MODEL___VALIDATE_IS_TRUE__DIAGNOSTICCHAIN_MAP);
 	}
 
 	/**
@@ -651,8 +762,44 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 		initEReference(getDomain_Rule(), this.getRule(), this.getRule_Domain(), "rule", null, 1, 1, Domain.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDomain_TypedModel(), this.getTypedModel(), null, "typedModel", null, 0, 1, Domain.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		EOperation op = initEOperation(getDomain__ValidateNameIsTypedModelName__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateNameIsTypedModelName", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
+		EGenericType g1 = createEGenericType(ecorePackage.getEMap());
+		EGenericType g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = initEOperation(getDomain__ValidateTypedModelIsTransformationModelParameter__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateTypedModelIsTransformationModelParameter", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(functionEClass, Function.class, "Function", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getFunction_QueryExpression(), thePivotPackage.getOCLExpression(), null, "queryExpression", null, 0, 1, Function.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		op = initEOperation(getFunction__ValidateParametersAreFunctionParameter__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateParametersAreFunctionParameter", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = initEOperation(getFunction__ValidateReturnTypeIsQueryType__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateReturnTypeIsQueryType", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(functionParameterEClass, FunctionParameter.class, "FunctionParameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -664,12 +811,48 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 		initEReference(getPredicate_ConditionExpression(), thePivotPackage.getOCLExpression(), null, "conditionExpression", null, 1, 1, Predicate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPredicate_Pattern(), this.getPattern(), this.getPattern_Predicate(), "pattern", null, 1, 1, Predicate.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		op = initEOperation(getPredicate__ValidateConditionIsBoolean__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateConditionIsBoolean", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(ruleEClass, Rule.class, "Rule", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getRule_Domain(), this.getDomain(), this.getDomain_Rule(), "domain", null, 0, -1, Rule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getRule_IsDefault(), ecorePackage.getEBoolean(), "isDefault", "false", 0, 1, Rule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRule_Overrides(), this.getRule(), this.getRule_Overridden(), "overrides", null, 0, 1, Rule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRule_Transformation(), this.getTransformation(), this.getTransformation_Rule(), "transformation", null, 0, 1, Rule.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRule_Overridden(), this.getRule(), this.getRule_Overrides(), "overridden", null, 0, -1, Rule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+
+		op = initEOperation(getRule__ValidateDomainNameIsUnique__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateDomainNameIsUnique", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = initEOperation(getRule__ValidateOverridesRuleIsExtendedRule__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateOverridesRuleIsExtendedRule", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = initEOperation(getRule__ValidateOverridesRuleOverridesAllDomains__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateOverridesRuleOverridesAllDomains", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(transformationEClass, Transformation.class, "Transformation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTransformation_OwnedTag(), thePivotPackage.getAnnotation(), null, "ownedTag", null, 0, -1, Transformation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
@@ -678,11 +861,38 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 		initEReference(getTransformation_Extends(), this.getTransformation(), null, "extends", null, 0, 1, Transformation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTransformation_OwnedContext(), thePivotPackage.getVariable(), null, "ownedContext", null, 0, 1, Transformation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		EOperation op = initEOperation(getTransformation__GetFunction__String(), this.getFunction(), "getFunction", 1, 1, IS_UNIQUE, IS_ORDERED);
+		op = initEOperation(getTransformation__GetFunction__String(), this.getFunction(), "getFunction", 1, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "name", 1, 1, IS_UNIQUE, IS_ORDERED);
 
 		op = initEOperation(getTransformation__GetModelParameter__String(), this.getTypedModel(), "getModelParameter", 1, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "name", 1, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = initEOperation(getTransformation__ValidateContextTypeIsTransformation__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateContextTypeIsTransformation", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = initEOperation(getTransformation__ValidateExtendedTypedModelIsExtended__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateExtendedTypedModelIsExtended", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = initEOperation(getTransformation__ValidateModelParameterIsUnique__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateModelParameterIsUnique", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(typedModelEClass, TypedModel.class, "TypedModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTypedModel_Transformation(), this.getTransformation(), this.getTransformation_ModelParameter(), "transformation", null, 1, 1, TypedModel.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -690,25 +900,16 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 		initEReference(getTypedModel_DependsOn(), this.getTypedModel(), null, "dependsOn", null, 0, -1, TypedModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getTypedModel_OwnedContext(), thePivotPackage.getVariable(), null, "ownedContext", null, 0, 1, TypedModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		op = initEOperation(getTypedModel__ValidateIsTrue__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateIsTrue", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
-		EGenericType g1 = createEGenericType(ecorePackage.getEMap());
-		EGenericType g2 = createEGenericType(ecorePackage.getEJavaObject());
-		g1.getETypeArguments().add(g2);
-		g2 = createEGenericType(ecorePackage.getEJavaObject());
-		g1.getETypeArguments().add(g2);
-		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
-
 		// Create resource
 		createResource(eNS_URI);
 
 		// Create annotations
 		// http://www.eclipse.org/emf/2002/Ecore
 		createEcoreAnnotations();
-		// http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName
-		createEmofAnnotations();
 		// http://www.eclipse.org/uml2/2.0.0/UML
 		createUMLAnnotations();
+		// http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName
+		createEmofAnnotations();
 	}
 
 	/**
@@ -718,12 +919,12 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 	 * @generated
 	 */
 	protected void createEcoreAnnotations() {
-		String source = "http://www.eclipse.org/emf/2002/Ecore";	
+		String source = "http://www.eclipse.org/emf/2002/Ecore";
 		addAnnotation
-		  (this, 
-		   source, 
-		   new String[] {
-		   });
+		(this,
+			source,
+			new String[] {
+		});
 	}
 
 	/**
@@ -733,25 +934,25 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 	 * @generated
 	 */
 	protected void createEmofAnnotations() {
-		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";	
+		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";
 		addAnnotation
-		  (getPredicate_ConditionExpression(), 
-		   source, 
-		   new String[] {
-			 "body", "predicate"
-		   });	
+		(getPredicate_ConditionExpression(),
+			source,
+			new String[] {
+				"body", "predicate"
+		});
 		addAnnotation
-		  (getTransformation_Extends(), 
-		   source, 
-		   new String[] {
-			 "body", "extendedBy"
-		   });	
+		(getTransformation_Extends(),
+			source,
+			new String[] {
+				"body", "extendedBy"
+		});
 		addAnnotation
-		  (getTypedModel_DependsOn(), 
-		   source, 
-		   new String[] {
-			 "body", "dependent"
-		   });
+		(getTypedModel_DependsOn(),
+			source,
+			new String[] {
+				"body", "dependent"
+		});
 	}
 
 	/**
@@ -761,13 +962,73 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 	 * @generated
 	 */
 	protected void createUMLAnnotations() {
-		String source = "http://www.eclipse.org/uml2/2.0.0/UML";	
+		String source = "http://www.eclipse.org/uml2/2.0.0/UML";
 		addAnnotation
-		  (getTypedModel__ValidateIsTrue__DiagnosticChain_Map(), 
-		   source, 
-		   new String[] {
-			 "originalName", "IsTrue"
-		   });
+		(getDomain__ValidateNameIsTypedModelName__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "NameIsTypedModelName"
+		});
+		addAnnotation
+		(getDomain__ValidateTypedModelIsTransformationModelParameter__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "TypedModelIsTransformationModelParameter"
+		});
+		addAnnotation
+		(getFunction__ValidateParametersAreFunctionParameter__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "ParametersAreFunctionParameter"
+		});
+		addAnnotation
+		(getFunction__ValidateReturnTypeIsQueryType__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "ReturnTypeIsQueryType"
+		});
+		addAnnotation
+		(getPredicate__ValidateConditionIsBoolean__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "ConditionIsBoolean"
+		});
+		addAnnotation
+		(getRule__ValidateDomainNameIsUnique__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "DomainNameIsUnique"
+		});
+		addAnnotation
+		(getRule__ValidateOverridesRuleIsExtendedRule__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "OverridesRuleIsExtendedRule"
+		});
+		addAnnotation
+		(getRule__ValidateOverridesRuleOverridesAllDomains__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "OverridesRuleOverridesAllDomains"
+		});
+		addAnnotation
+		(getTransformation__ValidateContextTypeIsTransformation__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "ContextTypeIsTransformation"
+		});
+		addAnnotation
+		(getTransformation__ValidateExtendedTypedModelIsExtended__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "ExtendedTypedModelIsExtended"
+		});
+		addAnnotation
+		(getTransformation__ValidateModelParameterIsUnique__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "ModelParameterIsUnique"
+		});
 	}
 
 } //QVTbasePackageImpl

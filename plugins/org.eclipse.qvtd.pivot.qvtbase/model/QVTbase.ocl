@@ -3,7 +3,43 @@ import 'platform:/resource/org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore'
 
 package qvtbase
 
-context TypedModel
-inv IsTrue: true
+context Domain
+inv NameIsTypedModelName:
+typedModel <> null implies name = typedModel.name
+inv TypedModelIsTransformationModelParameter:
+oclContainer().oclIsKindOf(Transformation) and typedModel <> null implies
+oclContainer().oclAsType(Transformation).modelParameter->includes(typedModel)
+
+context Function
+inv ParametersAreFunctionParameter:
+ownedParameters->forAll(oclIsKindOf(FunctionParameter))
+inv ReturnTypeIsQueryType:
+queryExpression <> null implies type = queryExpression.type
+
+context Predicate
+inv ConditionIsBoolean:
+conditionExpression.type = Boolean
+
+context Rule
+inv DomainNameIsUnique:
+domain->isUnique(name)
+inv OverridesRuleIsExtendedRule:
+overrides <> null implies
+let extendedRules = transformation->closure(_extends)->excluding(transformation).rule
+in extendedRules->includes(overrides)
+inv OverridesRuleOverridesAllDomains:
+overrides <> null implies
+overrides.domain->forAll(od | self.domain.name->includes(od.name))
+
+context Transformation
+inv ContextTypeIsTransformation:
+ownedContext <> null implies ownedContext.type = self
+inv ExtendedTypedModelIsExtended:
+_extends <> null implies
+_extends.modelParameter->forAll(etm |
+	self.modelParameter->select(name = etm.name).usedPackage->includesAll(etm.usedPackage)
+)
+inv ModelParameterIsUnique:
+modelParameter->isUnique(name)
 
 endpackage

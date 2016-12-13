@@ -328,13 +328,31 @@ public interface QVTbasePackage extends EPackage {
 	int DOMAIN___GET_REFERRED_ELEMENT = PivotPackage.NAMED_ELEMENT_OPERATION_COUNT + 0;
 
 	/**
+	 * The operation id for the '<em>Validate Name Is Typed Model Name</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN___VALIDATE_NAME_IS_TYPED_MODEL_NAME__DIAGNOSTICCHAIN_MAP = PivotPackage.NAMED_ELEMENT_OPERATION_COUNT + 1;
+
+	/**
+	 * The operation id for the '<em>Validate Typed Model Is Transformation Model Parameter</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN___VALIDATE_TYPED_MODEL_IS_TRANSFORMATION_MODEL_PARAMETER__DIAGNOSTICCHAIN_MAP = PivotPackage.NAMED_ELEMENT_OPERATION_COUNT + 2;
+
+	/**
 	 * The number of operations of the '<em>Domain</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DOMAIN_OPERATION_COUNT = PivotPackage.NAMED_ELEMENT_OPERATION_COUNT + 1;
+	int DOMAIN_OPERATION_COUNT = PivotPackage.NAMED_ELEMENT_OPERATION_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtbase.impl.FunctionImpl <em>Function</em>}' class.
@@ -698,13 +716,31 @@ public interface QVTbasePackage extends EPackage {
 	int FUNCTION___VALIDATE_UNIQUE_PRECONDITION_NAME__DIAGNOSTICCHAIN_MAP = PivotPackage.OPERATION___VALIDATE_UNIQUE_PRECONDITION_NAME__DIAGNOSTICCHAIN_MAP;
 
 	/**
+	 * The operation id for the '<em>Validate Parameters Are Function Parameter</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FUNCTION___VALIDATE_PARAMETERS_ARE_FUNCTION_PARAMETER__DIAGNOSTICCHAIN_MAP = PivotPackage.OPERATION_OPERATION_COUNT + 0;
+
+	/**
+	 * The operation id for the '<em>Validate Return Type Is Query Type</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FUNCTION___VALIDATE_RETURN_TYPE_IS_QUERY_TYPE__DIAGNOSTICCHAIN_MAP = PivotPackage.OPERATION_OPERATION_COUNT + 1;
+
+	/**
 	 * The number of operations of the '<em>Function</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FUNCTION_OPERATION_COUNT = PivotPackage.OPERATION_OPERATION_COUNT + 0;
+	int FUNCTION_OPERATION_COUNT = PivotPackage.OPERATION_OPERATION_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtbase.impl.FunctionParameterImpl <em>Function Parameter</em>}' class.
@@ -1079,13 +1115,22 @@ public interface QVTbasePackage extends EPackage {
 	int PREDICATE___GET_VALUE__TYPE_STRING = PivotPackage.ELEMENT___GET_VALUE__TYPE_STRING;
 
 	/**
+	 * The operation id for the '<em>Validate Condition Is Boolean</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PREDICATE___VALIDATE_CONDITION_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP = PivotPackage.ELEMENT_OPERATION_COUNT + 0;
+
+	/**
 	 * The number of operations of the '<em>Predicate</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PREDICATE_OPERATION_COUNT = PivotPackage.ELEMENT_OPERATION_COUNT + 0;
+	int PREDICATE_OPERATION_COUNT = PivotPackage.ELEMENT_OPERATION_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtbase.impl.RuleImpl <em>Rule</em>}' class.
@@ -1215,13 +1260,40 @@ public interface QVTbasePackage extends EPackage {
 	int RULE___GET_VALUE__TYPE_STRING = PivotPackage.NAMED_ELEMENT___GET_VALUE__TYPE_STRING;
 
 	/**
+	 * The operation id for the '<em>Validate Domain Name Is Unique</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RULE___VALIDATE_DOMAIN_NAME_IS_UNIQUE__DIAGNOSTICCHAIN_MAP = PivotPackage.NAMED_ELEMENT_OPERATION_COUNT + 0;
+
+	/**
+	 * The operation id for the '<em>Validate Overrides Rule Is Extended Rule</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RULE___VALIDATE_OVERRIDES_RULE_IS_EXTENDED_RULE__DIAGNOSTICCHAIN_MAP = PivotPackage.NAMED_ELEMENT_OPERATION_COUNT + 1;
+
+	/**
+	 * The operation id for the '<em>Validate Overrides Rule Overrides All Domains</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RULE___VALIDATE_OVERRIDES_RULE_OVERRIDES_ALL_DOMAINS__DIAGNOSTICCHAIN_MAP = PivotPackage.NAMED_ELEMENT_OPERATION_COUNT + 2;
+
+	/**
 	 * The number of operations of the '<em>Rule</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RULE_OPERATION_COUNT = PivotPackage.NAMED_ELEMENT_OPERATION_COUNT + 0;
+	int RULE_OPERATION_COUNT = PivotPackage.NAMED_ELEMENT_OPERATION_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtbase.impl.TransformationImpl <em>Transformation</em>}' class.
@@ -1549,13 +1621,40 @@ public interface QVTbasePackage extends EPackage {
 	int TRANSFORMATION___GET_MODEL_PARAMETER__STRING = PivotPackage.CLASS_OPERATION_COUNT + 1;
 
 	/**
+	 * The operation id for the '<em>Validate Context Type Is Transformation</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSFORMATION___VALIDATE_CONTEXT_TYPE_IS_TRANSFORMATION__DIAGNOSTICCHAIN_MAP = PivotPackage.CLASS_OPERATION_COUNT + 2;
+
+	/**
+	 * The operation id for the '<em>Validate Extended Typed Model Is Extended</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSFORMATION___VALIDATE_EXTENDED_TYPED_MODEL_IS_EXTENDED__DIAGNOSTICCHAIN_MAP = PivotPackage.CLASS_OPERATION_COUNT + 3;
+
+	/**
+	 * The operation id for the '<em>Validate Model Parameter Is Unique</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSFORMATION___VALIDATE_MODEL_PARAMETER_IS_UNIQUE__DIAGNOSTICCHAIN_MAP = PivotPackage.CLASS_OPERATION_COUNT + 4;
+
+	/**
 	 * The number of operations of the '<em>Transformation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSFORMATION_OPERATION_COUNT = PivotPackage.CLASS_OPERATION_COUNT + 2;
+	int TRANSFORMATION_OPERATION_COUNT = PivotPackage.CLASS_OPERATION_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtbase.impl.TypedModelImpl <em>Typed Model</em>}' class.
@@ -1677,22 +1776,13 @@ public interface QVTbasePackage extends EPackage {
 	int TYPED_MODEL___GET_VALUE__TYPE_STRING = PivotPackage.NAMED_ELEMENT___GET_VALUE__TYPE_STRING;
 
 	/**
-	 * The operation id for the '<em>Validate Is True</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPED_MODEL___VALIDATE_IS_TRUE__DIAGNOSTICCHAIN_MAP = PivotPackage.NAMED_ELEMENT_OPERATION_COUNT + 0;
-
-	/**
 	 * The number of operations of the '<em>Typed Model</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPED_MODEL_OPERATION_COUNT = PivotPackage.NAMED_ELEMENT_OPERATION_COUNT + 1;
+	int TYPED_MODEL_OPERATION_COUNT = PivotPackage.NAMED_ELEMENT_OPERATION_COUNT + 0;
 
 
 	/**
@@ -1760,6 +1850,26 @@ public interface QVTbasePackage extends EPackage {
 	EReference getDomain_TypedModel();
 
 	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtbase.Domain#validateNameIsTypedModelName(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Name Is Typed Model Name</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Name Is Typed Model Name</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvtbase.Domain#validateNameIsTypedModelName(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getDomain__ValidateNameIsTypedModelName__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtbase.Domain#validateTypedModelIsTransformationModelParameter(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Typed Model Is Transformation Model Parameter</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Typed Model Is Transformation Model Parameter</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvtbase.Domain#validateTypedModelIsTransformationModelParameter(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getDomain__ValidateTypedModelIsTransformationModelParameter__DiagnosticChain_Map();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtbase.Function <em>Function</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1779,6 +1889,26 @@ public interface QVTbasePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getFunction_QueryExpression();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtbase.Function#validateParametersAreFunctionParameter(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Parameters Are Function Parameter</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Parameters Are Function Parameter</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvtbase.Function#validateParametersAreFunctionParameter(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getFunction__ValidateParametersAreFunctionParameter__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtbase.Function#validateReturnTypeIsQueryType(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Return Type Is Query Type</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Return Type Is Query Type</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvtbase.Function#validateReturnTypeIsQueryType(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getFunction__ValidateReturnTypeIsQueryType__DiagnosticChain_Map();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtbase.FunctionParameter <em>Function Parameter</em>}'.
@@ -1855,6 +1985,16 @@ public interface QVTbasePackage extends EPackage {
 	EReference getPredicate_Pattern();
 
 	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtbase.Predicate#validateConditionIsBoolean(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Condition Is Boolean</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Condition Is Boolean</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvtbase.Predicate#validateConditionIsBoolean(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getPredicate__ValidateConditionIsBoolean__DiagnosticChain_Map();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtbase.Rule <em>Rule</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1918,6 +2058,36 @@ public interface QVTbasePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getRule_Overridden();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtbase.Rule#validateDomainNameIsUnique(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Domain Name Is Unique</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Domain Name Is Unique</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvtbase.Rule#validateDomainNameIsUnique(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getRule__ValidateDomainNameIsUnique__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtbase.Rule#validateOverridesRuleIsExtendedRule(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Overrides Rule Is Extended Rule</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Overrides Rule Is Extended Rule</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvtbase.Rule#validateOverridesRuleIsExtendedRule(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getRule__ValidateOverridesRuleIsExtendedRule__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtbase.Rule#validateOverridesRuleOverridesAllDomains(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Overrides Rule Overrides All Domains</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Overrides Rule Overrides All Domains</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvtbase.Rule#validateOverridesRuleOverridesAllDomains(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getRule__ValidateOverridesRuleOverridesAllDomains__DiagnosticChain_Map();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtbase.Transformation <em>Transformation</em>}'.
@@ -2005,6 +2175,36 @@ public interface QVTbasePackage extends EPackage {
 	EOperation getTransformation__GetModelParameter__String();
 
 	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtbase.Transformation#validateContextTypeIsTransformation(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Context Type Is Transformation</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Context Type Is Transformation</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvtbase.Transformation#validateContextTypeIsTransformation(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getTransformation__ValidateContextTypeIsTransformation__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtbase.Transformation#validateExtendedTypedModelIsExtended(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Extended Typed Model Is Extended</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Extended Typed Model Is Extended</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvtbase.Transformation#validateExtendedTypedModelIsExtended(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getTransformation__ValidateExtendedTypedModelIsExtended__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtbase.Transformation#validateModelParameterIsUnique(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Model Parameter Is Unique</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Model Parameter Is Unique</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvtbase.Transformation#validateModelParameterIsUnique(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getTransformation__ValidateModelParameterIsUnique__DiagnosticChain_Map();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtbase.TypedModel <em>Typed Model</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2057,16 +2257,6 @@ public interface QVTbasePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getTypedModel_OwnedContext();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtbase.TypedModel#validateIsTrue(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Is True</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Validate Is True</em>' operation.
-	 * @see org.eclipse.qvtd.pivot.qvtbase.TypedModel#validateIsTrue(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
-	 * @generated
-	 */
-	EOperation getTypedModel__ValidateIsTrue__DiagnosticChain_Map();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -2143,6 +2333,22 @@ public interface QVTbasePackage extends EPackage {
 		EReference DOMAIN__TYPED_MODEL = eINSTANCE.getDomain_TypedModel();
 
 		/**
+		 * The meta object literal for the '<em><b>Validate Name Is Typed Model Name</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation DOMAIN___VALIDATE_NAME_IS_TYPED_MODEL_NAME__DIAGNOSTICCHAIN_MAP = eINSTANCE.getDomain__ValidateNameIsTypedModelName__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Typed Model Is Transformation Model Parameter</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation DOMAIN___VALIDATE_TYPED_MODEL_IS_TRANSFORMATION_MODEL_PARAMETER__DIAGNOSTICCHAIN_MAP = eINSTANCE.getDomain__ValidateTypedModelIsTransformationModelParameter__DiagnosticChain_Map();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtbase.impl.FunctionImpl <em>Function</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2159,6 +2365,22 @@ public interface QVTbasePackage extends EPackage {
 		 * @generated
 		 */
 		EReference FUNCTION__QUERY_EXPRESSION = eINSTANCE.getFunction_QueryExpression();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Parameters Are Function Parameter</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation FUNCTION___VALIDATE_PARAMETERS_ARE_FUNCTION_PARAMETER__DIAGNOSTICCHAIN_MAP = eINSTANCE.getFunction__ValidateParametersAreFunctionParameter__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Return Type Is Query Type</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation FUNCTION___VALIDATE_RETURN_TYPE_IS_QUERY_TYPE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getFunction__ValidateReturnTypeIsQueryType__DiagnosticChain_Map();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtbase.impl.FunctionParameterImpl <em>Function Parameter</em>}' class.
@@ -2223,6 +2445,14 @@ public interface QVTbasePackage extends EPackage {
 		EReference PREDICATE__PATTERN = eINSTANCE.getPredicate_Pattern();
 
 		/**
+		 * The meta object literal for the '<em><b>Validate Condition Is Boolean</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation PREDICATE___VALIDATE_CONDITION_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP = eINSTANCE.getPredicate__ValidateConditionIsBoolean__DiagnosticChain_Map();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtbase.impl.RuleImpl <em>Rule</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2271,6 +2501,30 @@ public interface QVTbasePackage extends EPackage {
 		 * @generated
 		 */
 		EReference RULE__OVERRIDDEN = eINSTANCE.getRule_Overridden();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Domain Name Is Unique</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation RULE___VALIDATE_DOMAIN_NAME_IS_UNIQUE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getRule__ValidateDomainNameIsUnique__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Overrides Rule Is Extended Rule</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation RULE___VALIDATE_OVERRIDES_RULE_IS_EXTENDED_RULE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getRule__ValidateOverridesRuleIsExtendedRule__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Overrides Rule Overrides All Domains</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation RULE___VALIDATE_OVERRIDES_RULE_OVERRIDES_ALL_DOMAINS__DIAGNOSTICCHAIN_MAP = eINSTANCE.getRule__ValidateOverridesRuleOverridesAllDomains__DiagnosticChain_Map();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtbase.impl.TransformationImpl <em>Transformation</em>}' class.
@@ -2339,6 +2593,30 @@ public interface QVTbasePackage extends EPackage {
 		EOperation TRANSFORMATION___GET_MODEL_PARAMETER__STRING = eINSTANCE.getTransformation__GetModelParameter__String();
 
 		/**
+		 * The meta object literal for the '<em><b>Validate Context Type Is Transformation</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation TRANSFORMATION___VALIDATE_CONTEXT_TYPE_IS_TRANSFORMATION__DIAGNOSTICCHAIN_MAP = eINSTANCE.getTransformation__ValidateContextTypeIsTransformation__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Extended Typed Model Is Extended</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation TRANSFORMATION___VALIDATE_EXTENDED_TYPED_MODEL_IS_EXTENDED__DIAGNOSTICCHAIN_MAP = eINSTANCE.getTransformation__ValidateExtendedTypedModelIsExtended__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Model Parameter Is Unique</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation TRANSFORMATION___VALIDATE_MODEL_PARAMETER_IS_UNIQUE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getTransformation__ValidateModelParameterIsUnique__DiagnosticChain_Map();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtbase.impl.TypedModelImpl <em>Typed Model</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2379,14 +2657,6 @@ public interface QVTbasePackage extends EPackage {
 		 * @generated
 		 */
 		EReference TYPED_MODEL__OWNED_CONTEXT = eINSTANCE.getTypedModel_OwnedContext();
-
-		/**
-		 * The meta object literal for the '<em><b>Validate Is True</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation TYPED_MODEL___VALIDATE_IS_TRUE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getTypedModel__ValidateIsTrue__DiagnosticChain_Map();
 
 	}
 

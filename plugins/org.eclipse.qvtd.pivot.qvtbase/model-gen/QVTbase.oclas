@@ -4,6 +4,12 @@
   <ownedPackages xmi:id="P.qvtbase" URI="http://www.eclipse.org/qvt/2015/QVTbase" name="qvtbase" nsPrefix="qvtb">
     <ownedClasses xmi:id="T.qvtbase.BaseModel" name="BaseModel" superClasses="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Model"/>
     <ownedClasses xmi:id="T.qvtbase.Domain" isAbstract="true" name="Domain" superClasses="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.NamedElement ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.ReferringElement">
+      <ownedInvariants xmi:id="ciqvtbase.Domain.NameIsTypedModelName" isCallable="true" name="NameIsTypedModelName">
+        <ownedSpecification xsi:type="pivot:ExpressionInOCL" body="&#xA;typedModel &lt;> null implies name = typedModel.name&#xA;"/>
+      </ownedInvariants>
+      <ownedInvariants xmi:id="ciqvtbase.Domain.TypedModelIsTransformationModelParameter" isCallable="true" name="TypedModelIsTransformationModelParameter">
+        <ownedSpecification xsi:type="pivot:ExpressionInOCL" body="&#xA;oclContainer().oclIsKindOf(Transformation) and typedModel &lt;> null implies&#xA;oclContainer().oclAsType(Transformation).modelParameter->includes(typedModel)&#xA;&#xA;"/>
+      </ownedInvariants>
       <ownedProperties xmi:id="p.qvtbase.Domain.isCheckable" isRequired="false" isUnsettable="true" name="isCheckable" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"/>
       <ownedProperties xmi:id="p.qvtbase.Domain.isEnforceable" isRequired="false" isUnsettable="true" name="isEnforceable" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"/>
       <ownedProperties xmi:id="p.qvtbase.Domain.rule" isTransient="true" name="rule" opposite="#p.qvtbase.Rule.domain" type="#T.qvtbase.Rule"/>
@@ -11,6 +17,12 @@
           type="#T.qvtbase.TypedModel"/>
     </ownedClasses>
     <ownedClasses xmi:id="T.qvtbase.Function" name="Function" superClasses="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Operation">
+      <ownedInvariants xmi:id="ciqvtbase.Function.ParametersAreFunctionParameter" isCallable="true" name="ParametersAreFunctionParameter">
+        <ownedSpecification xsi:type="pivot:ExpressionInOCL" body="&#xA;ownedParameters->forAll(oclIsKindOf(FunctionParameter))&#xA;"/>
+      </ownedInvariants>
+      <ownedInvariants xmi:id="ciqvtbase.Function.ReturnTypeIsQueryType" isCallable="true" name="ReturnTypeIsQueryType">
+        <ownedSpecification xsi:type="pivot:ExpressionInOCL" body="&#xA;queryExpression &lt;> null implies type = queryExpression.type&#xA;&#xA;"/>
+      </ownedInvariants>
       <ownedProperties xmi:id="p.qvtbase.Function.queryExpression" isComposite="true" isRequired="false" name="queryExpression" opposite="#p.pivot.OCLExpression.Function"
           type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.OCLExpression"/>
     </ownedClasses>
@@ -21,12 +33,24 @@
           type="#//@ownedPackages.2/@ownedClasses.18"/>
     </ownedClasses>
     <ownedClasses xmi:id="T.qvtbase.Predicate" name="Predicate" superClasses="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Element">
+      <ownedInvariants xmi:id="ciqvtbase.Predicate.ConditionIsBoolean" isCallable="true" name="ConditionIsBoolean">
+        <ownedSpecification xsi:type="pivot:ExpressionInOCL" body="&#xA;conditionExpression.type = Boolean&#xA;&#xA;"/>
+      </ownedInvariants>
       <ownedProperties xmi:id="p.qvtbase.Predicate.conditionExpression" isComposite="true" name="conditionExpression" opposite="#p.pivot.OCLExpression.predicate"
           type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.OCLExpression"/>
       <ownedProperties xmi:id="p.qvtbase.Predicate.pattern" isTransient="true" name="pattern" opposite="#p.qvtbase.Pattern.predicate"
           type="#T.qvtbase.Pattern"/>
     </ownedClasses>
     <ownedClasses xmi:id="T.qvtbase.Rule" isAbstract="true" name="Rule" superClasses="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.NamedElement">
+      <ownedInvariants xmi:id="ciqvtbase.Rule.DomainNameIsUnique" isCallable="true" name="DomainNameIsUnique">
+        <ownedSpecification xsi:type="pivot:ExpressionInOCL" body="&#xA;domain->isUnique(name)&#xA;"/>
+      </ownedInvariants>
+      <ownedInvariants xmi:id="ciqvtbase.Rule.OverridesRuleIsExtendedRule" isCallable="true" name="OverridesRuleIsExtendedRule">
+        <ownedSpecification xsi:type="pivot:ExpressionInOCL" body="&#xA;overrides &lt;> null implies&#xA;let extendedRules = transformation->closure(_extends)->excluding(transformation).rule&#xA;in extendedRules->includes(overrides)&#xA;"/>
+      </ownedInvariants>
+      <ownedInvariants xmi:id="ciqvtbase.Rule.OverridesRuleOverridesAllDomains" isCallable="true" name="OverridesRuleOverridesAllDomains">
+        <ownedSpecification xsi:type="pivot:ExpressionInOCL" body="&#xA;overrides &lt;> null implies&#xA;overrides.domain->forAll(od | self.domain.name->includes(od.name))&#xA;&#xA;"/>
+      </ownedInvariants>
       <ownedProperties xmi:id="p.qvtbase.Rule.domain" isComposite="true" name="domain" opposite="#p.qvtbase.Domain.rule" type="#//@ownedPackages.2/@ownedClasses.13"/>
       <ownedProperties xmi:id="p.qvtbase.Rule.isDefault" defaultValueString="false" isRequired="false" name="isDefault" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"/>
       <ownedProperties xmi:id="p.qvtbase.Rule.overridden" name="overridden" opposite="#p.qvtbase.Rule.overrides" type="#//@ownedPackages.2/@ownedClasses.19"/>
@@ -35,6 +59,15 @@
           opposite="#p.qvtbase.Transformation.rule" type="#T.qvtbase.Transformation"/>
     </ownedClasses>
     <ownedClasses xmi:id="T.qvtbase.Transformation" name="Transformation" superClasses="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Class">
+      <ownedInvariants xmi:id="ciqvtbase.Transformation.ContextTypeIsTransformation" isCallable="true" name="ContextTypeIsTransformation">
+        <ownedSpecification xsi:type="pivot:ExpressionInOCL" body="&#xA;ownedContext &lt;> null implies ownedContext.type = self&#xA;"/>
+      </ownedInvariants>
+      <ownedInvariants xmi:id="ciqvtbase.Transformation.ExtendedTypedModelIsExtended" isCallable="true" name="ExtendedTypedModelIsExtended">
+        <ownedSpecification xsi:type="pivot:ExpressionInOCL" body="&#xA;_extends &lt;> null implies&#xA;_extends.modelParameter->forAll(etm |&#xA;&#x9;self.modelParameter->select(name = etm.name).usedPackage->includesAll(etm.usedPackage)&#xA;)&#xA;"/>
+      </ownedInvariants>
+      <ownedInvariants xmi:id="ciqvtbase.Transformation.ModelParameterIsUnique" isCallable="true" name="ModelParameterIsUnique">
+        <ownedSpecification xsi:type="pivot:ExpressionInOCL" body="&#xA;modelParameter->isUnique(name)&#xA;&#xA;"/>
+      </ownedInvariants>
       <ownedOperations xmi:id="o.qvtbase.Transformation.getFunction..ocl.String" name="getFunction" type="#T.qvtbase.Function">
         <ownedParameters xmi:id="p0o.qvtbase.Transformation.getFunction..ocl.String" name="name" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"/>
       </ownedOperations>
@@ -55,9 +88,6 @@
           type="#T.qvtbase.Transformation"/>
     </ownedClasses>
     <ownedClasses xmi:id="T.qvtbase.TypedModel" name="TypedModel" superClasses="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.NamedElement">
-      <ownedInvariants xmi:id="ciqvtbase.TypedModel.IsTrue" isCallable="true" name="IsTrue">
-        <ownedSpecification xsi:type="pivot:ExpressionInOCL" body="true&#xA;&#xA;"/>
-      </ownedInvariants>
       <ownedProperties xmi:id="p.qvtbase.TypedModel.dependsOn" name="dependsOn" opposite="#p.qvtbase.TypedModel.dependent" type="#//@ownedPackages.2/@ownedClasses.20"/>
       <ownedProperties xmi:id="p.qvtbase.TypedModel.ownedContext" isComposite="true" isRequired="false" name="ownedContext" opposite="#p.pivot.Variable.TypedModel"
           type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#T.pivot.Variable"/>
