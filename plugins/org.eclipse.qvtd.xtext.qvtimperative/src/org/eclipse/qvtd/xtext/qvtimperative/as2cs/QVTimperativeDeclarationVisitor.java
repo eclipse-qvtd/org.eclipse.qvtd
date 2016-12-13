@@ -395,9 +395,7 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 
 	@Override
 	public ElementCS visitBufferStatement(@NonNull BufferStatement asVariable) {
-		BufferStatementCS csVariable = context.refreshNamedElement(BufferStatementCS.class, QVTimperativeCSPackage.Literals.BUFFER_STATEMENT_CS, asVariable);
-		csVariable.setPivot(asVariable);
-		csVariable.setOwnedType(createTypeRefCS(asVariable.getType(), null)); //getScope(asVariable)));
+		BufferStatementCS csVariable = context.refreshTypedElement(BufferStatementCS.class, QVTimperativeCSPackage.Literals.BUFFER_STATEMENT_CS, asVariable);
 		csVariable.setOwnedExpression(context.visitDeclaration(ExpCS.class, asVariable.getOwnedExpression()));
 		csVariable.setIsStrict(asVariable.isIsStrict());
 		return csVariable;
@@ -451,7 +449,6 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 	@Override
 	public ElementCS visitGuardParameter(@NonNull GuardParameter asVariable) {
 		ImperativeTypedModel asTypedModel = asVariable.getReferredTypedModel();
-		org.eclipse.ocl.pivot.Package asUsedPackage = asTypedModel.getUsedPackage().size() > 0 ? asTypedModel.getUsedPackage().get(0) : null;
 		Mapping containingMapping = QVTimperativeUtil.getContainingMapping(asVariable);
 		assert containingMapping != null;
 		GuardParameterCS csUnrealizedVariable = context.refreshNamedElement(GuardParameterCS.class, QVTimperativeCSPackage.Literals.GUARD_PARAMETER_CS, asVariable);
@@ -519,16 +516,6 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 	@Override
 	public ElementCS visitImperativeTransformation(@NonNull ImperativeTransformation asTransformation) {
 		TransformationCS csTransformation = context.refreshNamedElement(TransformationCS.class, QVTimperativeCSPackage.Literals.TRANSFORMATION_CS, asTransformation);
-		//		csTransformation.setPivot(asTransformation);
-		//		org.eclipse.ocl.pivot.Package owningPackage = asTransformation.getOwningPackage();
-		//		if ((owningPackage == null) || "".equals(owningPackage.getName()) || (owningPackage.getName() == null)) {
-		//			csTransformation.setOwnedPathName(null);
-		//		}
-		//		else {
-		//			PathNameCS csPathName = BaseCSFactory.eINSTANCE.createPathNameCS();
-		//			csTransformation.setOwnedPathName(csPathName);
-		//			context.refreshPathName(csPathName, owningPackage, null);
-		//		}
 		context.refreshList(csTransformation.getOwnedDirections(), context.visitDeclarations(DirectionCS.class, asTransformation.getModelParameter(), null));
 		return csTransformation;
 	}
@@ -660,11 +647,8 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 
 	@Override
 	public ElementCS visitNewStatement(@NonNull NewStatement asNewStatement) {
-		ImperativeTypedModel asTypedModel = asNewStatement.getReferredTypedModel();
-		org.eclipse.ocl.pivot.Package asUsedPackage = asTypedModel.getUsedPackage().size() > 0 ? asTypedModel.getUsedPackage().get(0) : null;
-		NewStatementCS csNewStatement = context.refreshNamedElement(NewStatementCS.class, QVTimperativeCSPackage.Literals.NEW_STATEMENT_CS, asNewStatement);
-		csNewStatement.setOwnedType(createTypeRefCS(asNewStatement.getType(), null));
-		csNewStatement.setReferredTypedModel(asTypedModel);
+		NewStatementCS csNewStatement = context.refreshTypedElement(NewStatementCS.class, QVTimperativeCSPackage.Literals.NEW_STATEMENT_CS, asNewStatement);
+		csNewStatement.setReferredTypedModel(asNewStatement.getReferredTypedModel());
 		csNewStatement.setOwnedExpression(context.visitDeclaration(ExpCS.class, asNewStatement.getOwnedExpression()));
 		refreshObservedProperties(asNewStatement, csNewStatement.getObservedProperties(), ClassUtil.nullFree(asNewStatement.getObservedProperties()));
 		return csNewStatement;
@@ -677,25 +661,10 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 
 	@Override
 	public ElementCS visitPackage(org.eclipse.ocl.pivot.@NonNull Package asPackage) {
-		//		List<org.eclipse.ocl.pivot.@NonNull Class> asClasses = ClassUtil.nullFree(asPackage.getOwnedClasses());
-		//		List<org.eclipse.ocl.pivot.@NonNull Package> asPackages = ClassUtil.nullFree(asPackage.getOwnedPackages());
-		//		if (needsQualifiedPackageCS(asPackage)) {
-		//			assert needsQualifiedPackageCS(asPackage);
 		QualifiedPackageCS csPackage = context.refreshNamedElement(QualifiedPackageCS.class, QVTbaseCSPackage.Literals.QUALIFIED_PACKAGE_CS, asPackage);
-		//			context.refreshList(csPackage.getOwnedClasses(), context.visitDeclarations(ClassCS.class, asClasses, null));
 		csPackage.setNsPrefix(asPackage.getNsPrefix());
 		csPackage.setNsURI(asPackage.getURI());
-		//			context.refreshList(csPackage.getOwnedPackages(), context.visitDeclarations(QualifiedPackageCS.class, asPackages, null));
 		return csPackage;
-		//		}
-		//		else {
-		//			PackageCS csPackage = context.refreshNamedElement(PackageCS.class, BaseCSPackage.Literals.PACKAGE_CS, asPackage);
-		//			context.refreshList(csPackage.getOwnedClasses(), context.visitDeclarations(ClassCS.class, asClasses, null));
-		//			csPackage.setNsPrefix(asPackage.getNsPrefix());
-		//			csPackage.setNsURI(asPackage.getURI());
-		//			context.refreshList(csPackage.getOwnedPackages(), context.visitDeclarations(PackageCS.class, asPackages, null));
-		//			return csPackage;
-		//		}
 	}
 
 	@Override
@@ -726,13 +695,11 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 
 	@Override
 	public ElementCS visitSimpleParameter(@NonNull SimpleParameter asVariable) {
-		ImperativeTypedModel asTypedModel = asVariable.getReferredTypedModel();
-		org.eclipse.ocl.pivot.Package asUsedPackage = asTypedModel.getUsedPackage().size() > 0 ? asTypedModel.getUsedPackage().get(0) : null;
 		Mapping containingMapping = QVTimperativeUtil.getContainingMapping(asVariable);
 		assert containingMapping != null;
 		SimpleParameterCS csUnrealizedVariable = context.refreshNamedElement(SimpleParameterCS.class, QVTimperativeCSPackage.Literals.SIMPLE_PARAMETER_CS, asVariable);
 		csUnrealizedVariable.setPivot(asVariable);
-		csUnrealizedVariable.setReferredTypedModel(asTypedModel);
+		csUnrealizedVariable.setReferredTypedModel(asVariable.getReferredTypedModel());
 		csUnrealizedVariable.setOwnedType(createTypeRefCS(asVariable.getType(), null));
 		return csUnrealizedVariable;
 	}
@@ -765,27 +732,7 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 	@Override
 	public ElementCS visitVariable(@NonNull Variable asVariable) {
 		assert !(asVariable.eContainer() instanceof Mapping);
-		/*		if (asVariable.eContainer() instanceof Mapping) {
-			Mapping containingMapping = QVTimperativeUtil.getContainingMapping(asVariable);
-			assert containingMapping != null;
-			for (CheckStatement asPredicate : containingMapping.getGuardPredicates()) {
-				if (asPredicate instanceof VariablePredicate) {
-					VariablePredicate asVariablePredicate = (VariablePredicate)asPredicate;
-					if (asVariablePredicate.getTargetVariable() == asVariable) {
-						OCLExpression ownedExpression = asVariablePredicate.getConditionExpression();
-						PredicateVariableCS csUnrealizedVariable = context.refreshNamedElement(PredicateVariableCS.class, QVTimperativeCSPackage.Literals.PREDICATE_VARIABLE_CS, asVariable);
-						csUnrealizedVariable.setPivot(asVariable);
-						csUnrealizedVariable.setOwnedType(createTypeRefCS(asVariable.getType(), getScope(asVariable)));
-						csUnrealizedVariable.setOwnedExpressionExpression(context.visitDeclaration(ExpCS.class, ownedExpression));
-						return csUnrealizedVariable;
-					}
-				}
-			}
-			throw new UnsupportedOperationException(); // Should be GuardVariable
-		}
-		else { */
 		return super.visitVariable(asVariable);
-		//		}
 	}
 
 	@Override
