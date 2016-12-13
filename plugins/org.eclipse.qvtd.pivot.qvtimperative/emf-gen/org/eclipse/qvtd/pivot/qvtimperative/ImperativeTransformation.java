@@ -14,6 +14,8 @@
  */
 package org.eclipse.qvtd.pivot.qvtimperative;
 
+import java.util.Map;
+import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 
 /**
@@ -30,4 +32,11 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
  * @generated
  */
 public interface ImperativeTransformation extends Transformation {
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	boolean validateallRulesAreMappings(DiagnosticChain diagnostics, Map<Object, Object> context);
 } // ImperativeTransformation

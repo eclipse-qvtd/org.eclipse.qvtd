@@ -10,33 +10,61 @@ package qvtimperative
 context AddStatement
 inv CompatibleTypeForValue: ownedExpression.type.conformsTo(targetVariable.type)
 
---context Mapping
---def: guardVariables : Set(MappingParameter) = ownedParameters
---def: boundGuardVariables : OrderedSet(DeclareStatement) = ownedStatements->selectByKind(DeclareStatement)
-/* Mapping guard variables that are assigned  */
---def: boundGuardVariables : Set(ocl::Variable) = guardVariables->select(initExpression <> null)
---def: unboundGuardVariables : Set(ocl::Variable) = guardVariables - boundGuardVariables
--- def: noInheritance : Boolean = self.refinement->isEmpty()
--- def: noParents : Boolean = self.specification->isEmpty()
-/* Mappings are either L to M or M to R, but not both */
---inv ViaMiddle: isToMiddle xor isFromMiddle
-/* No mapping refinement */
--- inv NoRefinement: noInheritance and noParents
---inv NoMiddleGuardPatternVariables: guardPattern.ownedGuardVariables->isEmpty()
---inv NoMiddleBottomPatternVariables: bottomPattern.variable->isEmpty() and bottomPattern.realizedVariable->isEmpty()
+context BufferStatement
+inv CompatibleTypeForValue: ownedExpression <> null implies ownedExpression.type.oclAsType(ocl::CollectionType).elementType.conformsTo(type)
+
+context CheckStatement
+inv TypeIsBoolean: ownedExpression.type = Boolean
+
+context DeclareStatement
+inv CompatibleTypeForCheckedValue: isCheck implies type.conformsTo(ownedExpression.type)
+inv CompatibleTypeForUncheckedValue: not isCheck implies ownedExpression.type.conformsTo(type)
+
+--context GuardParameter
+--FIXME completeType inv TypedModelContainsType: referredTypedModel.allUsedPackages->includes(type.oclContainer())
+
+context ImperativeTransformation
+inv allRulesAreMappings: rule->forAll(oclIsKindOf(Mapping))
+
+context ImperativeTypedModel
+def: allUsedPackages : Set(ocl::Package) = usedPackage
+inv NameIsNotNull : name <> null
+inv NotBothCheckedAndEnforced: not (isChecked and isEnforced)
+
+context Mapping
+inv NameIsNotNull : name <> null
+inv MappingParameterNamesAreUnique: ownedMappingParameters->isUnique(name)
+inv LocalVariabelNamesAreUnique: ownedMappingParameters->union(ownedStatements->selectByKind(VariableStatement))->isUnique(name)
+-- FIXME statment ordering
 
 context MappingCall
 def: referredNames : OrderedSet(String) = referredMapping.ownedMappingParameters.name->asSet()->sortedBy(n | n)
 def: referringNames : OrderedSet(String) = ownedMappingParameterBindings.boundVariable.name->asSet()->sortedBy(n | n)
 inv MatchingCallBindings('Mismatched bindings ' + referredMapping.name + joinNames(referredNames) + ' <= ' + joinNames(referringNames)): referredNames = referringNames
+inv NotBothInstallAndInvoke: not (isInstall and isInvoke)
 inv UniqueCallBindings: ownedMappingParameterBindings->isUnique(boundVariable)
+
+context MappingParameterBinding
+inv ParameterIsMappingParameter: owningMappingCall.referredMapping.ownedMappingParameters->includes(boundVariable)
 
 context NewStatement
 inv CompatibleTypeForValue: ownedExpression <> null implies ownedExpression.type.conformsTo(type)
+--FIXME completeType inv TypedModelContainsType: referredTypedModel.allUsedPackages->includes(type.oclContainer())
 
 context SetStatement
-inv CompatibleClassForProperty: let propertySourceType = if isOpposite then targetProperty.type else targetProperty.owningClass endif in targetVariable.type.conformsTo(propertySourceType)
-inv CompatibleTypeForValue: let propertyTargetType = if isOpposite then targetProperty.owningClass else targetProperty.type endif in ownedExpression.type.conformsTo(propertyTargetType)
+def:resolvedProperty : ocl::Property[1] = if isOpposite then targetProperty.opposite else targetProperty endif
+inv CompatibleClassForProperty(targetVariable.type.name + ' must conform to ' + resolvedProperty.owningClass.name):
+targetVariable.type.conformsTo(resolvedProperty.owningClass)
+inv CompatibleTypeForValue(ownedExpression.type.name + ' must conform to ' + resolvedProperty.type.name):
+ownedExpression.type.conformsTo(resolvedProperty.type)
+inv ValueDoesNotNavigateFromRealizedVariables:
+ownedExpression->closure(e : ocl::OclElement | e.oclContents())->selectByKind(ocl::VariableExp)->select(referredVariable.oclIsKindOf(NewStatement))->select(s | s.oclContainer().oclIsKindOf(ocl::CallExp) and s.oclContainer().oclAsType(ocl::CallExp).ownedSource = s)->isEmpty()
+inv TargetPropertyIsNotReadOnly:
+not resolvedProperty.isReadOnly
+
+context SimpleParameterBinding
+inv CompatibleTypeForCheckedValue: isCheck implies boundVariable.type.conformsTo(value.type)
+inv CompatibleTypeForUncheckedValue: not isCheck implies value.type.conformsTo(boundVariable.type)
 
 context Statement
 def: joinNames(names : OrderedSet(String)) : String = '{' + names/*->sortedBy(n | n)*/->iterate(n; s : String = '' | if s = '' then n else s + ';' + n endif) + '}'

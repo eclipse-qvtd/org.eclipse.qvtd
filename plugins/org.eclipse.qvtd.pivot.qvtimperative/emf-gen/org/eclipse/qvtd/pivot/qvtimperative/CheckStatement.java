@@ -14,6 +14,8 @@
  */
 package org.eclipse.qvtd.pivot.qvtimperative;
 
+import java.util.Map;
+import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.ocl.pivot.OCLExpression;
 
 /**
@@ -63,5 +65,12 @@ public interface CheckStatement extends ObservableStatement {
 	 * @generated
 	 */
 	void setOwnedExpression(OCLExpression value);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	boolean validateTypeIsBoolean(DiagnosticChain diagnostics, Map<Object, Object> context);
 
 } // CheckStatement

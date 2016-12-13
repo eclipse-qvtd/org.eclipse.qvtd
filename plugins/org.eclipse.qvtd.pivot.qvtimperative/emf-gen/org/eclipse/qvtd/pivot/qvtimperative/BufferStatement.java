@@ -14,6 +14,8 @@
  */
 package org.eclipse.qvtd.pivot.qvtimperative;
 
+import java.util.Map;
+import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.ocl.pivot.OCLExpression;
 
 /**
@@ -67,5 +69,12 @@ public interface BufferStatement extends ConnectionVariable, VariableStatement, 
 	 * @generated
 	 */
 	void setOwnedExpression(OCLExpression value);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	boolean validateCompatibleTypeForValue(DiagnosticChain diagnostics, Map<Object, Object> context);
 
 } // BufferStatement

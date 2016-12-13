@@ -32,9 +32,17 @@
     </genClasses>
     <genClasses ecoreClass="QVTimperative.ecore#T-qvtimperative-BufferStatement">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperative.ecore#F-qvtimperative-BufferStatement-ownedExpression"/>
+      <genOperations ecoreOperation="QVTimperative.ecore#//BufferStatement/validateCompatibleTypeForValue">
+        <genParameters ecoreParameter="QVTimperative.ecore#//BufferStatement/validateCompatibleTypeForValue/diagnostics"/>
+        <genParameters ecoreParameter="QVTimperative.ecore#//BufferStatement/validateCompatibleTypeForValue/context"/>
+      </genOperations>
     </genClasses>
     <genClasses ecoreClass="QVTimperative.ecore#T-qvtimperative-CheckStatement">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperative.ecore#F-qvtimperative-CheckStatement-ownedExpression"/>
+      <genOperations ecoreOperation="QVTimperative.ecore#//CheckStatement/validateTypeIsBoolean">
+        <genParameters ecoreParameter="QVTimperative.ecore#//CheckStatement/validateTypeIsBoolean/diagnostics"/>
+        <genParameters ecoreParameter="QVTimperative.ecore#//CheckStatement/validateTypeIsBoolean/context"/>
+      </genOperations>
     </genClasses>
     <genClasses image="false" ecoreClass="QVTimperative.ecore#T-qvtimperative-ConnectionVariable">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperative.ecore#F-qvtimperative-ConnectionVariable-isStrict"/>
@@ -42,6 +50,14 @@
     <genClasses ecoreClass="QVTimperative.ecore#T-qvtimperative-DeclareStatement">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperative.ecore#F-qvtimperative-DeclareStatement-isCheck"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperative.ecore#F-qvtimperative-DeclareStatement-ownedExpression"/>
+      <genOperations ecoreOperation="QVTimperative.ecore#//DeclareStatement/validateCompatibleTypeForCheckedValue">
+        <genParameters ecoreParameter="QVTimperative.ecore#//DeclareStatement/validateCompatibleTypeForCheckedValue/diagnostics"/>
+        <genParameters ecoreParameter="QVTimperative.ecore#//DeclareStatement/validateCompatibleTypeForCheckedValue/context"/>
+      </genOperations>
+      <genOperations ecoreOperation="QVTimperative.ecore#//DeclareStatement/validateCompatibleTypeForUncheckedValue">
+        <genParameters ecoreParameter="QVTimperative.ecore#//DeclareStatement/validateCompatibleTypeForUncheckedValue/diagnostics"/>
+        <genParameters ecoreParameter="QVTimperative.ecore#//DeclareStatement/validateCompatibleTypeForUncheckedValue/context"/>
+      </genOperations>
     </genClasses>
     <genClasses ecoreClass="QVTimperative.ecore#T-qvtimperative-GuardParameter">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperative.ecore#F-qvtimperative-GuardParameter-referredTypedModel"/>
@@ -51,10 +67,24 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperative.ecore#F-qvtimperative-GuardParameterBinding-isCheck"/>
     </genClasses>
     <genClasses ecoreClass="QVTimperative.ecore#T-qvtimperative-ImperativeModel"/>
-    <genClasses ecoreClass="QVTimperative.ecore#T-qvtimperative-ImperativeTransformation"/>
+    <genClasses ecoreClass="QVTimperative.ecore#T-qvtimperative-ImperativeTransformation">
+      <genOperations ecoreOperation="QVTimperative.ecore#//ImperativeTransformation/validateallRulesAreMappings">
+        <genParameters ecoreParameter="QVTimperative.ecore#//ImperativeTransformation/validateallRulesAreMappings/diagnostics"/>
+        <genParameters ecoreParameter="QVTimperative.ecore#//ImperativeTransformation/validateallRulesAreMappings/context"/>
+      </genOperations>
+    </genClasses>
     <genClasses ecoreClass="QVTimperative.ecore#T-qvtimperative-ImperativeTypedModel">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperative.ecore#F-qvtimperative-ImperativeTypedModel-isChecked"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperative.ecore#F-qvtimperative-ImperativeTypedModel-isEnforced"/>
+      <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference QVTimperative.ecore#F-qvtimperative-ImperativeTypedModel-allUsedPackages"/>
+      <genOperations ecoreOperation="QVTimperative.ecore#//ImperativeTypedModel/validateNameIsNotNull">
+        <genParameters ecoreParameter="QVTimperative.ecore#//ImperativeTypedModel/validateNameIsNotNull/diagnostics"/>
+        <genParameters ecoreParameter="QVTimperative.ecore#//ImperativeTypedModel/validateNameIsNotNull/context"/>
+      </genOperations>
+      <genOperations ecoreOperation="QVTimperative.ecore#//ImperativeTypedModel/validateNotBothCheckedAndEnforced">
+        <genParameters ecoreParameter="QVTimperative.ecore#//ImperativeTypedModel/validateNotBothCheckedAndEnforced/diagnostics"/>
+        <genParameters ecoreParameter="QVTimperative.ecore#//ImperativeTypedModel/validateNotBothCheckedAndEnforced/context"/>
+      </genOperations>
     </genClasses>
     <genClasses ecoreClass="QVTimperative.ecore#T-qvtimperative-LoopParameterBinding">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperative.ecore#F-qvtimperative-LoopParameterBinding-value"/>
@@ -67,6 +97,18 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperative.ecore#F-qvtimperative-Mapping-isStrict"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperative.ecore#F-qvtimperative-Mapping-ownedMappingParameters"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperative.ecore#F-qvtimperative-Mapping-ownedStatements"/>
+      <genOperations ecoreOperation="QVTimperative.ecore#//Mapping/validateNameIsNotNull">
+        <genParameters ecoreParameter="QVTimperative.ecore#//Mapping/validateNameIsNotNull/diagnostics"/>
+        <genParameters ecoreParameter="QVTimperative.ecore#//Mapping/validateNameIsNotNull/context"/>
+      </genOperations>
+      <genOperations ecoreOperation="QVTimperative.ecore#//Mapping/validateMappingParameterNamesAreUnique">
+        <genParameters ecoreParameter="QVTimperative.ecore#//Mapping/validateMappingParameterNamesAreUnique/diagnostics"/>
+        <genParameters ecoreParameter="QVTimperative.ecore#//Mapping/validateMappingParameterNamesAreUnique/context"/>
+      </genOperations>
+      <genOperations ecoreOperation="QVTimperative.ecore#//Mapping/validateLocalVariabelNamesAreUnique">
+        <genParameters ecoreParameter="QVTimperative.ecore#//Mapping/validateLocalVariabelNamesAreUnique/diagnostics"/>
+        <genParameters ecoreParameter="QVTimperative.ecore#//Mapping/validateLocalVariabelNamesAreUnique/context"/>
+      </genOperations>
     </genClasses>
     <genClasses ecoreClass="QVTimperative.ecore#T-qvtimperative-MappingCall">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperative.ecore#F-qvtimperative-MappingCall-ownedMappingParameterBindings"/>
@@ -78,6 +120,10 @@
       <genOperations ecoreOperation="QVTimperative.ecore#//MappingCall/validateMatchingCallBindings">
         <genParameters ecoreParameter="QVTimperative.ecore#//MappingCall/validateMatchingCallBindings/diagnostics"/>
         <genParameters ecoreParameter="QVTimperative.ecore#//MappingCall/validateMatchingCallBindings/context"/>
+      </genOperations>
+      <genOperations ecoreOperation="QVTimperative.ecore#//MappingCall/validateNotBothInstallAndInvoke">
+        <genParameters ecoreParameter="QVTimperative.ecore#//MappingCall/validateNotBothInstallAndInvoke/diagnostics"/>
+        <genParameters ecoreParameter="QVTimperative.ecore#//MappingCall/validateNotBothInstallAndInvoke/context"/>
       </genOperations>
       <genOperations ecoreOperation="QVTimperative.ecore#//MappingCall/validateUniqueCallBindings">
         <genParameters ecoreParameter="QVTimperative.ecore#//MappingCall/validateUniqueCallBindings/diagnostics"/>
@@ -95,6 +141,10 @@
     <genClasses image="false" ecoreClass="QVTimperative.ecore#T-qvtimperative-MappingParameterBinding">
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference QVTimperative.ecore#F-qvtimperative-MappingParameterBinding-owningMappingCall"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperative.ecore#F-qvtimperative-MappingParameterBinding-boundVariable"/>
+      <genOperations ecoreOperation="QVTimperative.ecore#//MappingParameterBinding/validateParameterIsMappingParameter">
+        <genParameters ecoreParameter="QVTimperative.ecore#//MappingParameterBinding/validateParameterIsMappingParameter/diagnostics"/>
+        <genParameters ecoreParameter="QVTimperative.ecore#//MappingParameterBinding/validateParameterIsMappingParameter/context"/>
+      </genOperations>
     </genClasses>
     <genClasses image="false" ecoreClass="QVTimperative.ecore#T-qvtimperative-MappingStatement"/>
     <genClasses ecoreClass="QVTimperative.ecore#T-qvtimperative-NewStatement">
@@ -114,6 +164,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperative.ecore#F-qvtimperative-SetStatement-isOpposite"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperative.ecore#F-qvtimperative-SetStatement-isNotify"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperative.ecore#F-qvtimperative-SetStatement-ownedExpression"/>
+      <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference QVTimperative.ecore#F-qvtimperative-SetStatement-resolvedProperty"/>
       <genOperations ecoreOperation="QVTimperative.ecore#//SetStatement/validateCompatibleClassForProperty">
         <genParameters ecoreParameter="QVTimperative.ecore#//SetStatement/validateCompatibleClassForProperty/diagnostics"/>
         <genParameters ecoreParameter="QVTimperative.ecore#//SetStatement/validateCompatibleClassForProperty/context"/>
@@ -122,6 +173,14 @@
         <genParameters ecoreParameter="QVTimperative.ecore#//SetStatement/validateCompatibleTypeForValue/diagnostics"/>
         <genParameters ecoreParameter="QVTimperative.ecore#//SetStatement/validateCompatibleTypeForValue/context"/>
       </genOperations>
+      <genOperations ecoreOperation="QVTimperative.ecore#//SetStatement/validateValueDoesNotNavigateFromRealizedVariables">
+        <genParameters ecoreParameter="QVTimperative.ecore#//SetStatement/validateValueDoesNotNavigateFromRealizedVariables/diagnostics"/>
+        <genParameters ecoreParameter="QVTimperative.ecore#//SetStatement/validateValueDoesNotNavigateFromRealizedVariables/context"/>
+      </genOperations>
+      <genOperations ecoreOperation="QVTimperative.ecore#//SetStatement/validateTargetPropertyIsNotReadOnly">
+        <genParameters ecoreParameter="QVTimperative.ecore#//SetStatement/validateTargetPropertyIsNotReadOnly/diagnostics"/>
+        <genParameters ecoreParameter="QVTimperative.ecore#//SetStatement/validateTargetPropertyIsNotReadOnly/context"/>
+      </genOperations>
     </genClasses>
     <genClasses ecoreClass="QVTimperative.ecore#T-qvtimperative-SimpleParameter">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperative.ecore#F-qvtimperative-SimpleParameter-referredTypedModel"/>
@@ -129,6 +188,14 @@
     <genClasses ecoreClass="QVTimperative.ecore#T-qvtimperative-SimpleParameterBinding">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperative.ecore#F-qvtimperative-SimpleParameterBinding-value"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperative.ecore#F-qvtimperative-SimpleParameterBinding-isCheck"/>
+      <genOperations ecoreOperation="QVTimperative.ecore#//SimpleParameterBinding/validateCompatibleTypeForCheckedValue">
+        <genParameters ecoreParameter="QVTimperative.ecore#//SimpleParameterBinding/validateCompatibleTypeForCheckedValue/diagnostics"/>
+        <genParameters ecoreParameter="QVTimperative.ecore#//SimpleParameterBinding/validateCompatibleTypeForCheckedValue/context"/>
+      </genOperations>
+      <genOperations ecoreOperation="QVTimperative.ecore#//SimpleParameterBinding/validateCompatibleTypeForUncheckedValue">
+        <genParameters ecoreParameter="QVTimperative.ecore#//SimpleParameterBinding/validateCompatibleTypeForUncheckedValue/diagnostics"/>
+        <genParameters ecoreParameter="QVTimperative.ecore#//SimpleParameterBinding/validateCompatibleTypeForUncheckedValue/context"/>
+      </genOperations>
     </genClasses>
     <genClasses image="false" ecoreClass="QVTimperative.ecore#T-qvtimperative-Statement">
       <genOperations ecoreOperation="QVTimperative.ecore#//Statement/joinNames">

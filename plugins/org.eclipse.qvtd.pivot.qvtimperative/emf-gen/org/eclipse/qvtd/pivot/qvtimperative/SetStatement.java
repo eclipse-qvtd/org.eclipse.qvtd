@@ -43,6 +43,7 @@ import org.eclipse.ocl.pivot.VariableDeclaration;
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.SetStatement#isIsOpposite <em>Is Opposite</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.SetStatement#isIsNotify <em>Is Notify</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.SetStatement#getOwnedExpression <em>Owned Expression</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.SetStatement#getResolvedProperty <em>Resolved Property</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getSetStatement()
@@ -175,6 +176,20 @@ public interface SetStatement extends ObservableStatement {
 	void setOwnedExpression(OCLExpression value);
 
 	/**
+	 * Returns the value of the '<em><b>Resolved Property</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Resolved Property</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Resolved Property</em>' reference.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getSetStatement_ResolvedProperty()
+	 * @generated
+	 */
+	Property getResolvedProperty();
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -187,5 +202,19 @@ public interface SetStatement extends ObservableStatement {
 	 * @generated
 	 */
 	boolean validateCompatibleTypeForValue(DiagnosticChain diagnostics, Map<Object, Object> context);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	boolean validateValueDoesNotNavigateFromRealizedVariables(DiagnosticChain diagnostics, Map<Object, Object> context);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	boolean validateTargetPropertyIsNotReadOnly(DiagnosticChain diagnostics, Map<Object, Object> context);
 
 } // SetStatement

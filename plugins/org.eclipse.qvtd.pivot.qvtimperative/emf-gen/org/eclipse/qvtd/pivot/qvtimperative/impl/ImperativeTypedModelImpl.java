@@ -14,14 +14,29 @@
  */
 package org.eclipse.qvtd.pivot.qvtimperative.impl;
 
+import java.lang.reflect.InvocationTargetException;
+import java.util.Map;
+
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.util.DiagnosticChain;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.ids.TypeId;
+import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
+import org.eclipse.ocl.pivot.library.logical.BooleanAndOperation;
+import org.eclipse.ocl.pivot.library.logical.BooleanNotOperation;
+import org.eclipse.ocl.pivot.library.oclany.OclComparableLessThanEqualOperation;
+import org.eclipse.ocl.pivot.library.string.CGStringGetSeverityOperation;
+import org.eclipse.ocl.pivot.library.string.CGStringLogDiagnosticOperation;
 import org.eclipse.ocl.pivot.util.Visitor;
+import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.qvtd.pivot.qvtbase.impl.TypedModelImpl;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
+import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeTables;
 import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
 
 /**
@@ -34,6 +49,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.ImperativeTypedModelImpl#isIsChecked <em>Is Checked</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.ImperativeTypedModelImpl#isIsEnforced <em>Is Enforced</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.ImperativeTypedModelImpl#getAllUsedPackages <em>All Used Packages</em>}</li>
  * </ul>
  *
  * @generated
@@ -147,6 +163,131 @@ public class ImperativeTypedModelImpl extends TypedModelImpl implements Imperati
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EList<org.eclipse.ocl.pivot.Package> getAllUsedPackages() {
+		/**
+		 * usedPackage
+		 */
+		final /*@Thrown*/ java.util.@NonNull List<org.eclipse.ocl.pivot.Package> usedPackage = this.getUsedPackage();
+		return (EList<org.eclipse.ocl.pivot.Package>)usedPackage;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean validateNameIsNotNull(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
+		/**
+		 *
+		 * inv NameIsNotNull:
+		 *   let
+		 *     severity : Integer[1] = 'ImperativeTypedModel::NameIsNotNull'.getSeverity()
+		 *   in
+		 *     if severity <= 0
+		 *     then true
+		 *     else
+		 *       let status : OclAny[1] = name <> null
+		 *       in
+		 *         'ImperativeTypedModel::NameIsNotNull'.logDiagnostic(self, null, diagnostics, context, null, severity, status, 0)
+		 *     endif
+		 */
+		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
+		final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativeTables.STR_ImperativeTypedModel_c_c_NameIsNotNull);
+		final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTimperativeTables.INT_0).booleanValue();
+		/*@NonInvalid*/ boolean symbol_0;
+		if (le) {
+			symbol_0 = ValueUtil.TRUE_VALUE;
+		}
+		else {
+			/*@Caught*/ @NonNull Object CAUGHT_status;
+			try {
+				final /*@Thrown*/ java.lang.@Nullable String name = this.getName();
+				final /*@Thrown*/ boolean status = name != null;
+				CAUGHT_status = status;
+			}
+			catch (Exception e) {
+				CAUGHT_status = ValueUtil.createInvalidValue(e);
+			}
+			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTimperativeTables.STR_ImperativeTypedModel_c_c_NameIsNotNull, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_status, QVTimperativeTables.INT_0).booleanValue();
+			symbol_0 = logDiagnostic;
+		}
+		return Boolean.TRUE == symbol_0;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean validateNotBothCheckedAndEnforced(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
+		/**
+		 *
+		 * inv NotBothCheckedAndEnforced:
+		 *   let
+		 *     severity : Integer[1] = 'ImperativeTypedModel::NotBothCheckedAndEnforced'.getSeverity()
+		 *   in
+		 *     if severity <= 0
+		 *     then true
+		 *     else
+		 *       let status : OclAny[?] = not (isChecked and isEnforced)
+		 *       in
+		 *         'ImperativeTypedModel::NotBothCheckedAndEnforced'.logDiagnostic(self, null, diagnostics, context, null, severity, status, 0)
+		 *     endif
+		 */
+		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
+		final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativeTables.STR_ImperativeTypedModel_c_c_NotBothCheckedAndEnforced);
+		final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTimperativeTables.INT_0).booleanValue();
+		/*@NonInvalid*/ boolean symbol_0;
+		if (le) {
+			symbol_0 = ValueUtil.TRUE_VALUE;
+		}
+		else {
+			/*@Caught*/ @Nullable Object CAUGHT_status;
+			try {
+				/*@Caught*/ @Nullable Object CAUGHT_and;
+				try {
+					/*@Caught*/ @Nullable Object CAUGHT_isChecked;
+					try {
+						final /*@Thrown*/ java.lang.@Nullable Boolean isChecked = this.isIsChecked();
+						CAUGHT_isChecked = isChecked;
+					}
+					catch (Exception e) {
+						CAUGHT_isChecked = ValueUtil.createInvalidValue(e);
+					}
+					/*@Caught*/ @Nullable Object CAUGHT_isEnforced;
+					try {
+						final /*@Thrown*/ java.lang.@Nullable Boolean isEnforced = this.isIsEnforced();
+						CAUGHT_isEnforced = isEnforced;
+					}
+					catch (Exception e) {
+						CAUGHT_isEnforced = ValueUtil.createInvalidValue(e);
+					}
+					final /*@Thrown*/ java.lang.@Nullable Boolean and = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_isChecked, CAUGHT_isEnforced);
+					CAUGHT_and = and;
+				}
+				catch (Exception e) {
+					CAUGHT_and = ValueUtil.createInvalidValue(e);
+				}
+				final /*@Thrown*/ java.lang.@Nullable Boolean status = BooleanNotOperation.INSTANCE.evaluate(CAUGHT_and);
+				CAUGHT_status = status;
+			}
+			catch (Exception e) {
+				CAUGHT_status = ValueUtil.createInvalidValue(e);
+			}
+			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTimperativeTables.STR_ImperativeTypedModel_c_c_NotBothCheckedAndEnforced, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_status, QVTimperativeTables.INT_0).booleanValue();
+			symbol_0 = logDiagnostic;
+		}
+		return Boolean.TRUE == symbol_0;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
 	@Override
@@ -166,6 +307,8 @@ public class ImperativeTypedModelImpl extends TypedModelImpl implements Imperati
 				return isIsChecked();
 			case QVTimperativePackage.IMPERATIVE_TYPED_MODEL__IS_ENFORCED:
 				return isIsEnforced();
+			case QVTimperativePackage.IMPERATIVE_TYPED_MODEL__ALL_USED_PACKAGES:
+				return getAllUsedPackages();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -218,8 +361,27 @@ public class ImperativeTypedModelImpl extends TypedModelImpl implements Imperati
 				return isChecked != IS_CHECKED_EDEFAULT;
 			case QVTimperativePackage.IMPERATIVE_TYPED_MODEL__IS_ENFORCED:
 				return isEnforced != IS_ENFORCED_EDEFAULT;
+			case QVTimperativePackage.IMPERATIVE_TYPED_MODEL__ALL_USED_PACKAGES:
+				return !getAllUsedPackages().isEmpty();
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	@SuppressWarnings("unchecked")
+	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
+		switch (operationID) {
+			case QVTimperativePackage.IMPERATIVE_TYPED_MODEL___VALIDATE_NAME_IS_NOT_NULL__DIAGNOSTICCHAIN_MAP:
+				return validateNameIsNotNull((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
+			case QVTimperativePackage.IMPERATIVE_TYPED_MODEL___VALIDATE_NOT_BOTH_CHECKED_AND_ENFORCED__DIAGNOSTICCHAIN_MAP:
+				return validateNotBothCheckedAndEnforced((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
+		}
+		return super.eInvoke(operationID, arguments);
 	}
 
 	/**

@@ -10,6 +10,8 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtimperative;
 
+import java.util.Map;
+import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 
@@ -95,5 +97,26 @@ public interface Mapping extends Rule {
 	 * @generated
 	 */
 	EList<Statement> getOwnedStatements();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	boolean validateNameIsNotNull(DiagnosticChain diagnostics, Map<Object, Object> context);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	boolean validateMappingParameterNamesAreUnique(DiagnosticChain diagnostics, Map<Object, Object> context);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	boolean validateLocalVariabelNamesAreUnique(DiagnosticChain diagnostics, Map<Object, Object> context);
 
 } // Mapping

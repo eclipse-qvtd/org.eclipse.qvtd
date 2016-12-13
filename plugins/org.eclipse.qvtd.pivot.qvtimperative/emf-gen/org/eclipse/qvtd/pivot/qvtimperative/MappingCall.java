@@ -128,6 +128,13 @@ public interface MappingCall extends MappingStatement, ReferringElement {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	boolean validateNotBothInstallAndInvoke(DiagnosticChain diagnostics, Map<Object, Object> context);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	boolean validateUniqueCallBindings(DiagnosticChain diagnostics, Map<Object, Object> context);
 
 	/**

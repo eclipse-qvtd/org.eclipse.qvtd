@@ -14,6 +14,9 @@
  */
 package org.eclipse.qvtd.pivot.qvtimperative;
 
+import java.util.Map;
+import org.eclipse.emf.common.util.DiagnosticChain;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 
 /**
@@ -31,6 +34,7 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel#isIsChecked <em>Is Checked</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel#isIsEnforced <em>Is Enforced</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel#getAllUsedPackages <em>All Used Packages</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getImperativeTypedModel()
@@ -94,5 +98,34 @@ public interface ImperativeTypedModel extends TypedModel {
 	 * @generated
 	 */
 	void setIsEnforced(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>All Used Packages</b></em>' reference list.
+	 * The list contents are of type {@link org.eclipse.ocl.pivot.Package}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>All Used Packages</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>All Used Packages</em>' reference list.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getImperativeTypedModel_AllUsedPackages()
+	 * @generated
+	 */
+	EList<org.eclipse.ocl.pivot.Package> getAllUsedPackages();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	boolean validateNameIsNotNull(DiagnosticChain diagnostics, Map<Object, Object> context);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	boolean validateNotBothCheckedAndEnforced(DiagnosticChain diagnostics, Map<Object, Object> context);
 
 } // ImperativeTypedModel

@@ -239,13 +239,14 @@ map classComplexAttributes_LM in simpleUML2RDBMS::SimpleUML2RDBMS
 	check fao.umlClass = c;
 	check a.owner = c;
 	check a.type = t;
+	var leafs := fao.fromAttributes.leafs->asSet();
 	new:middle fa : NonLeafAttribute;
 	set fa._'attribute' := a;
 	set fa.kind := a.kind;
 	set fa.owner := fao;
 --	set fa.owner := fao;
 	set fa.name := a.name;
-	set fa.leafs := fao.fromAttributes.leafs->asSet();
+	set fa.leafs := leafs;
 --	set fa.kind := a.kind;
 }
 
@@ -287,10 +288,11 @@ map complexAttributeComplexAttributes_LM in simpleUML2RDBMS::SimpleUML2RDBMS
 	check a.owner = c;
 	check ca.type = c;
 	check a.type = t;
+	var leafs := fao.fromAttributes.leafs->asSet();
 	new:middle fa : NonLeafAttribute;
 	set fa.owner := fao;
 	set fa.kind := a.kind;
-	set fa.leafs := fao.fromAttributes.leafs->asSet();
+	set fa.leafs := leafs;
 	set fa._'attribute' := a;
 --	set fa._'attribute' := a;
 	set fa.name := fao.name + '_' + a.name;

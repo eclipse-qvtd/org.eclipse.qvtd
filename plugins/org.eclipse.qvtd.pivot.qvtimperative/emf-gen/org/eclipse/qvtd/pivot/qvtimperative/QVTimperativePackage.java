@@ -969,13 +969,22 @@ public interface QVTimperativePackage extends EPackage {
 	int MAPPING_PARAMETER_BINDING___GET_VALUE__TYPE_STRING = PivotPackage.ELEMENT___GET_VALUE__TYPE_STRING;
 
 	/**
+	 * The operation id for the '<em>Validate Parameter Is Mapping Parameter</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_PARAMETER_BINDING___VALIDATE_PARAMETER_IS_MAPPING_PARAMETER__DIAGNOSTICCHAIN_MAP = PivotPackage.ELEMENT_OPERATION_COUNT + 0;
+
+	/**
 	 * The number of operations of the '<em>Mapping Parameter Binding</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_PARAMETER_BINDING_OPERATION_COUNT = PivotPackage.ELEMENT_OPERATION_COUNT + 0;
+	int MAPPING_PARAMETER_BINDING_OPERATION_COUNT = PivotPackage.ELEMENT_OPERATION_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.DeclareStatementImpl <em>Declare Statement</em>}' class.
@@ -1116,6 +1125,15 @@ public interface QVTimperativePackage extends EPackage {
 	 * @ordered
 	 */
 	int APPEND_PARAMETER_BINDING___GET_VALUE__TYPE_STRING = MAPPING_PARAMETER_BINDING___GET_VALUE__TYPE_STRING;
+
+	/**
+	 * The operation id for the '<em>Validate Parameter Is Mapping Parameter</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APPEND_PARAMETER_BINDING___VALIDATE_PARAMETER_IS_MAPPING_PARAMETER__DIAGNOSTICCHAIN_MAP = MAPPING_PARAMETER_BINDING___VALIDATE_PARAMETER_IS_MAPPING_PARAMETER__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The number of operations of the '<em>Append Parameter Binding</em>' class.
@@ -1317,13 +1335,22 @@ public interface QVTimperativePackage extends EPackage {
 	int BUFFER_STATEMENT___JOIN_NAMES__ELIST = CONNECTION_VARIABLE_OPERATION_COUNT + 0;
 
 	/**
+	 * The operation id for the '<em>Validate Compatible Type For Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUFFER_STATEMENT___VALIDATE_COMPATIBLE_TYPE_FOR_VALUE__DIAGNOSTICCHAIN_MAP = CONNECTION_VARIABLE_OPERATION_COUNT + 1;
+
+	/**
 	 * The number of operations of the '<em>Buffer Statement</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BUFFER_STATEMENT_OPERATION_COUNT = CONNECTION_VARIABLE_OPERATION_COUNT + 1;
+	int BUFFER_STATEMENT_OPERATION_COUNT = CONNECTION_VARIABLE_OPERATION_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -1524,13 +1551,22 @@ public interface QVTimperativePackage extends EPackage {
 	int CHECK_STATEMENT___JOIN_NAMES__ELIST = OBSERVABLE_STATEMENT___JOIN_NAMES__ELIST;
 
 	/**
+	 * The operation id for the '<em>Validate Type Is Boolean</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CHECK_STATEMENT___VALIDATE_TYPE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP = OBSERVABLE_STATEMENT_OPERATION_COUNT + 0;
+
+	/**
 	 * The number of operations of the '<em>Check Statement</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CHECK_STATEMENT_OPERATION_COUNT = OBSERVABLE_STATEMENT_OPERATION_COUNT + 0;
+	int CHECK_STATEMENT_OPERATION_COUNT = OBSERVABLE_STATEMENT_OPERATION_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -1875,13 +1911,31 @@ public interface QVTimperativePackage extends EPackage {
 	int DECLARE_STATEMENT___JOIN_NAMES__ELIST = VARIABLE_STATEMENT___JOIN_NAMES__ELIST;
 
 	/**
+	 * The operation id for the '<em>Validate Compatible Type For Checked Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECLARE_STATEMENT___VALIDATE_COMPATIBLE_TYPE_FOR_CHECKED_VALUE__DIAGNOSTICCHAIN_MAP = VARIABLE_STATEMENT_OPERATION_COUNT + 0;
+
+	/**
+	 * The operation id for the '<em>Validate Compatible Type For Unchecked Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECLARE_STATEMENT___VALIDATE_COMPATIBLE_TYPE_FOR_UNCHECKED_VALUE__DIAGNOSTICCHAIN_MAP = VARIABLE_STATEMENT_OPERATION_COUNT + 1;
+
+	/**
 	 * The number of operations of the '<em>Declare Statement</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DECLARE_STATEMENT_OPERATION_COUNT = VARIABLE_STATEMENT_OPERATION_COUNT + 0;
+	int DECLARE_STATEMENT_OPERATION_COUNT = VARIABLE_STATEMENT_OPERATION_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -2314,6 +2368,15 @@ public interface QVTimperativePackage extends EPackage {
 	 * @ordered
 	 */
 	int GUARD_PARAMETER_BINDING___GET_VALUE__TYPE_STRING = MAPPING_PARAMETER_BINDING___GET_VALUE__TYPE_STRING;
+
+	/**
+	 * The operation id for the '<em>Validate Parameter Is Mapping Parameter</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GUARD_PARAMETER_BINDING___VALIDATE_PARAMETER_IS_MAPPING_PARAMETER__DIAGNOSTICCHAIN_MAP = MAPPING_PARAMETER_BINDING___VALIDATE_PARAMETER_IS_MAPPING_PARAMETER__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The number of operations of the '<em>Guard Parameter Binding</em>' class.
@@ -2767,13 +2830,22 @@ public interface QVTimperativePackage extends EPackage {
 	int IMPERATIVE_TRANSFORMATION___GET_MODEL_PARAMETER__STRING = QVTbasePackage.TRANSFORMATION___GET_MODEL_PARAMETER__STRING;
 
 	/**
+	 * The operation id for the '<em>Validateall Rules Are Mappings</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_TRANSFORMATION___VALIDATEALL_RULES_ARE_MAPPINGS__DIAGNOSTICCHAIN_MAP = QVTbasePackage.TRANSFORMATION_OPERATION_COUNT + 0;
+
+	/**
 	 * The number of operations of the '<em>Imperative Transformation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IMPERATIVE_TRANSFORMATION_OPERATION_COUNT = QVTbasePackage.TRANSFORMATION_OPERATION_COUNT + 0;
+	int IMPERATIVE_TRANSFORMATION_OPERATION_COUNT = QVTbasePackage.TRANSFORMATION_OPERATION_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -2875,13 +2947,22 @@ public interface QVTimperativePackage extends EPackage {
 	int IMPERATIVE_TYPED_MODEL__IS_ENFORCED = QVTbasePackage.TYPED_MODEL_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>All Used Packages</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_TYPED_MODEL__ALL_USED_PACKAGES = QVTbasePackage.TYPED_MODEL_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Imperative Typed Model</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IMPERATIVE_TYPED_MODEL_FEATURE_COUNT = QVTbasePackage.TYPED_MODEL_FEATURE_COUNT + 2;
+	int IMPERATIVE_TYPED_MODEL_FEATURE_COUNT = QVTbasePackage.TYPED_MODEL_FEATURE_COUNT + 3;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -2911,13 +2992,31 @@ public interface QVTimperativePackage extends EPackage {
 	int IMPERATIVE_TYPED_MODEL___VALIDATE_IS_TRUE__DIAGNOSTICCHAIN_MAP = QVTbasePackage.TYPED_MODEL___VALIDATE_IS_TRUE__DIAGNOSTICCHAIN_MAP;
 
 	/**
+	 * The operation id for the '<em>Validate Name Is Not Null</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_TYPED_MODEL___VALIDATE_NAME_IS_NOT_NULL__DIAGNOSTICCHAIN_MAP = QVTbasePackage.TYPED_MODEL_OPERATION_COUNT + 0;
+
+	/**
+	 * The operation id for the '<em>Validate Not Both Checked And Enforced</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_TYPED_MODEL___VALIDATE_NOT_BOTH_CHECKED_AND_ENFORCED__DIAGNOSTICCHAIN_MAP = QVTbasePackage.TYPED_MODEL_OPERATION_COUNT + 1;
+
+	/**
 	 * The number of operations of the '<em>Imperative Typed Model</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IMPERATIVE_TYPED_MODEL_OPERATION_COUNT = QVTbasePackage.TYPED_MODEL_OPERATION_COUNT + 0;
+	int IMPERATIVE_TYPED_MODEL_OPERATION_COUNT = QVTbasePackage.TYPED_MODEL_OPERATION_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.LoopParameterBindingImpl <em>Loop Parameter Binding</em>}' class.
@@ -3027,6 +3126,15 @@ public interface QVTimperativePackage extends EPackage {
 	 * @ordered
 	 */
 	int LOOP_PARAMETER_BINDING___GET_VALUE__TYPE_STRING = MAPPING_PARAMETER_BINDING___GET_VALUE__TYPE_STRING;
+
+	/**
+	 * The operation id for the '<em>Validate Parameter Is Mapping Parameter</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOOP_PARAMETER_BINDING___VALIDATE_PARAMETER_IS_MAPPING_PARAMETER__DIAGNOSTICCHAIN_MAP = MAPPING_PARAMETER_BINDING___VALIDATE_PARAMETER_IS_MAPPING_PARAMETER__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The number of operations of the '<em>Loop Parameter Binding</em>' class.
@@ -3344,13 +3452,40 @@ public interface QVTimperativePackage extends EPackage {
 	int MAPPING___GET_VALUE__TYPE_STRING = QVTbasePackage.RULE___GET_VALUE__TYPE_STRING;
 
 	/**
+	 * The operation id for the '<em>Validate Name Is Not Null</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING___VALIDATE_NAME_IS_NOT_NULL__DIAGNOSTICCHAIN_MAP = QVTbasePackage.RULE_OPERATION_COUNT + 0;
+
+	/**
+	 * The operation id for the '<em>Validate Mapping Parameter Names Are Unique</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING___VALIDATE_MAPPING_PARAMETER_NAMES_ARE_UNIQUE__DIAGNOSTICCHAIN_MAP = QVTbasePackage.RULE_OPERATION_COUNT + 1;
+
+	/**
+	 * The operation id for the '<em>Validate Local Variabel Names Are Unique</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING___VALIDATE_LOCAL_VARIABEL_NAMES_ARE_UNIQUE__DIAGNOSTICCHAIN_MAP = QVTbasePackage.RULE_OPERATION_COUNT + 2;
+
+	/**
 	 * The number of operations of the '<em>Mapping</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_OPERATION_COUNT = QVTbasePackage.RULE_OPERATION_COUNT + 0;
+	int MAPPING_OPERATION_COUNT = QVTbasePackage.RULE_OPERATION_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -3506,13 +3641,22 @@ public interface QVTimperativePackage extends EPackage {
 	int MAPPING_CALL___VALIDATE_MATCHING_CALL_BINDINGS__DIAGNOSTICCHAIN_MAP = MAPPING_STATEMENT_OPERATION_COUNT + 1;
 
 	/**
+	 * The operation id for the '<em>Validate Not Both Install And Invoke</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_CALL___VALIDATE_NOT_BOTH_INSTALL_AND_INVOKE__DIAGNOSTICCHAIN_MAP = MAPPING_STATEMENT_OPERATION_COUNT + 2;
+
+	/**
 	 * The operation id for the '<em>Validate Unique Call Bindings</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_CALL___VALIDATE_UNIQUE_CALL_BINDINGS__DIAGNOSTICCHAIN_MAP = MAPPING_STATEMENT_OPERATION_COUNT + 2;
+	int MAPPING_CALL___VALIDATE_UNIQUE_CALL_BINDINGS__DIAGNOSTICCHAIN_MAP = MAPPING_STATEMENT_OPERATION_COUNT + 3;
 
 	/**
 	 * The number of operations of the '<em>Mapping Call</em>' class.
@@ -3521,7 +3665,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_CALL_OPERATION_COUNT = MAPPING_STATEMENT_OPERATION_COUNT + 3;
+	int MAPPING_CALL_OPERATION_COUNT = MAPPING_STATEMENT_OPERATION_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -3967,13 +4111,22 @@ public interface QVTimperativePackage extends EPackage {
 	int SET_STATEMENT__OWNED_EXPRESSION = OBSERVABLE_STATEMENT_FEATURE_COUNT + 4;
 
 	/**
+	 * The feature id for the '<em><b>Resolved Property</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SET_STATEMENT__RESOLVED_PROPERTY = OBSERVABLE_STATEMENT_FEATURE_COUNT + 5;
+
+	/**
 	 * The number of structural features of the '<em>Set Statement</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SET_STATEMENT_FEATURE_COUNT = OBSERVABLE_STATEMENT_FEATURE_COUNT + 5;
+	int SET_STATEMENT_FEATURE_COUNT = OBSERVABLE_STATEMENT_FEATURE_COUNT + 6;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -4021,13 +4174,31 @@ public interface QVTimperativePackage extends EPackage {
 	int SET_STATEMENT___VALIDATE_COMPATIBLE_TYPE_FOR_VALUE__DIAGNOSTICCHAIN_MAP = OBSERVABLE_STATEMENT_OPERATION_COUNT + 1;
 
 	/**
+	 * The operation id for the '<em>Validate Value Does Not Navigate From Realized Variables</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SET_STATEMENT___VALIDATE_VALUE_DOES_NOT_NAVIGATE_FROM_REALIZED_VARIABLES__DIAGNOSTICCHAIN_MAP = OBSERVABLE_STATEMENT_OPERATION_COUNT + 2;
+
+	/**
+	 * The operation id for the '<em>Validate Target Property Is Not Read Only</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SET_STATEMENT___VALIDATE_TARGET_PROPERTY_IS_NOT_READ_ONLY__DIAGNOSTICCHAIN_MAP = OBSERVABLE_STATEMENT_OPERATION_COUNT + 3;
+
+	/**
 	 * The number of operations of the '<em>Set Statement</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SET_STATEMENT_OPERATION_COUNT = OBSERVABLE_STATEMENT_OPERATION_COUNT + 2;
+	int SET_STATEMENT_OPERATION_COUNT = OBSERVABLE_STATEMENT_OPERATION_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.SimpleParameterImpl <em>Simple Parameter</em>}' class.
@@ -4320,13 +4491,40 @@ public interface QVTimperativePackage extends EPackage {
 	int SIMPLE_PARAMETER_BINDING___GET_VALUE__TYPE_STRING = MAPPING_PARAMETER_BINDING___GET_VALUE__TYPE_STRING;
 
 	/**
+	 * The operation id for the '<em>Validate Parameter Is Mapping Parameter</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SIMPLE_PARAMETER_BINDING___VALIDATE_PARAMETER_IS_MAPPING_PARAMETER__DIAGNOSTICCHAIN_MAP = MAPPING_PARAMETER_BINDING___VALIDATE_PARAMETER_IS_MAPPING_PARAMETER__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The operation id for the '<em>Validate Compatible Type For Checked Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SIMPLE_PARAMETER_BINDING___VALIDATE_COMPATIBLE_TYPE_FOR_CHECKED_VALUE__DIAGNOSTICCHAIN_MAP = MAPPING_PARAMETER_BINDING_OPERATION_COUNT + 0;
+
+	/**
+	 * The operation id for the '<em>Validate Compatible Type For Unchecked Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SIMPLE_PARAMETER_BINDING___VALIDATE_COMPATIBLE_TYPE_FOR_UNCHECKED_VALUE__DIAGNOSTICCHAIN_MAP = MAPPING_PARAMETER_BINDING_OPERATION_COUNT + 1;
+
+	/**
 	 * The number of operations of the '<em>Simple Parameter Binding</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SIMPLE_PARAMETER_BINDING_OPERATION_COUNT = MAPPING_PARAMETER_BINDING_OPERATION_COUNT + 0;
+	int SIMPLE_PARAMETER_BINDING_OPERATION_COUNT = MAPPING_PARAMETER_BINDING_OPERATION_COUNT + 2;
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtimperative.AddStatement <em>Add Statement</em>}'.
@@ -4434,6 +4632,16 @@ public interface QVTimperativePackage extends EPackage {
 	EReference getBufferStatement_OwnedExpression();
 
 	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtimperative.BufferStatement#validateCompatibleTypeForValue(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Compatible Type For Value</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Compatible Type For Value</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.BufferStatement#validateCompatibleTypeForValue(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getBufferStatement__ValidateCompatibleTypeForValue__DiagnosticChain_Map();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtimperative.CheckStatement <em>Check Statement</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4453,6 +4661,16 @@ public interface QVTimperativePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getCheckStatement_OwnedExpression();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtimperative.CheckStatement#validateTypeIsBoolean(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Type Is Boolean</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Type Is Boolean</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.CheckStatement#validateTypeIsBoolean(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getCheckStatement__ValidateTypeIsBoolean__DiagnosticChain_Map();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable <em>Connection Variable</em>}'.
@@ -4506,6 +4724,26 @@ public interface QVTimperativePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getDeclareStatement_OwnedExpression();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement#validateCompatibleTypeForCheckedValue(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Compatible Type For Checked Value</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Compatible Type For Checked Value</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement#validateCompatibleTypeForCheckedValue(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getDeclareStatement__ValidateCompatibleTypeForCheckedValue__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement#validateCompatibleTypeForUncheckedValue(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Compatible Type For Unchecked Value</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Compatible Type For Unchecked Value</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement#validateCompatibleTypeForUncheckedValue(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getDeclareStatement__ValidateCompatibleTypeForUncheckedValue__DiagnosticChain_Map();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtimperative.GuardParameter <em>Guard Parameter</em>}'.
@@ -4581,6 +4819,16 @@ public interface QVTimperativePackage extends EPackage {
 	EClass getImperativeTransformation();
 
 	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation#validateallRulesAreMappings(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validateall Rules Are Mappings</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validateall Rules Are Mappings</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation#validateallRulesAreMappings(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getImperativeTransformation__ValidateallRulesAreMappings__DiagnosticChain_Map();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel <em>Imperative Typed Model</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4611,6 +4859,37 @@ public interface QVTimperativePackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getImperativeTypedModel_IsEnforced();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel#getAllUsedPackages <em>All Used Packages</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>All Used Packages</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel#getAllUsedPackages()
+	 * @see #getImperativeTypedModel()
+	 * @generated
+	 */
+	EReference getImperativeTypedModel_AllUsedPackages();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel#validateNameIsNotNull(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Name Is Not Null</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Name Is Not Null</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel#validateNameIsNotNull(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getImperativeTypedModel__ValidateNameIsNotNull__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel#validateNotBothCheckedAndEnforced(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Not Both Checked And Enforced</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Not Both Checked And Enforced</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel#validateNotBothCheckedAndEnforced(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getImperativeTypedModel__ValidateNotBothCheckedAndEnforced__DiagnosticChain_Map();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtimperative.LoopParameterBinding <em>Loop Parameter Binding</em>}'.
@@ -4709,6 +4988,36 @@ public interface QVTimperativePackage extends EPackage {
 	EReference getMapping_OwnedStatements();
 
 	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtimperative.Mapping#validateNameIsNotNull(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Name Is Not Null</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Name Is Not Null</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.Mapping#validateNameIsNotNull(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getMapping__ValidateNameIsNotNull__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtimperative.Mapping#validateMappingParameterNamesAreUnique(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Mapping Parameter Names Are Unique</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Mapping Parameter Names Are Unique</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.Mapping#validateMappingParameterNamesAreUnique(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getMapping__ValidateMappingParameterNamesAreUnique__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtimperative.Mapping#validateLocalVariabelNamesAreUnique(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Local Variabel Names Are Unique</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Local Variabel Names Are Unique</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.Mapping#validateLocalVariabelNamesAreUnique(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getMapping__ValidateLocalVariabelNamesAreUnique__DiagnosticChain_Map();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtimperative.MappingCall <em>Mapping Call</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4771,6 +5080,16 @@ public interface QVTimperativePackage extends EPackage {
 	 * @generated
 	 */
 	EOperation getMappingCall__ValidateMatchingCallBindings__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtimperative.MappingCall#validateNotBothInstallAndInvoke(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Not Both Install And Invoke</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Not Both Install And Invoke</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.MappingCall#validateNotBothInstallAndInvoke(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getMappingCall__ValidateNotBothInstallAndInvoke__DiagnosticChain_Map();
 
 	/**
 	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtimperative.MappingCall#validateUniqueCallBindings(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Unique Call Bindings</em>}' operation.
@@ -4899,6 +5218,16 @@ public interface QVTimperativePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getMappingParameterBinding_BoundVariable();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtimperative.MappingParameterBinding#validateParameterIsMappingParameter(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Parameter Is Mapping Parameter</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Parameter Is Mapping Parameter</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.MappingParameterBinding#validateParameterIsMappingParameter(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getMappingParameterBinding__ValidateParameterIsMappingParameter__DiagnosticChain_Map();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtimperative.MappingStatement <em>Mapping Statement</em>}'.
@@ -5039,6 +5368,17 @@ public interface QVTimperativePackage extends EPackage {
 	EReference getSetStatement_OwnedExpression();
 
 	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtimperative.SetStatement#getResolvedProperty <em>Resolved Property</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Resolved Property</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.SetStatement#getResolvedProperty()
+	 * @see #getSetStatement()
+	 * @generated
+	 */
+	EReference getSetStatement_ResolvedProperty();
+
+	/**
 	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtimperative.SetStatement#validateCompatibleClassForProperty(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Compatible Class For Property</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5057,6 +5397,26 @@ public interface QVTimperativePackage extends EPackage {
 	 * @generated
 	 */
 	EOperation getSetStatement__ValidateCompatibleTypeForValue__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtimperative.SetStatement#validateValueDoesNotNavigateFromRealizedVariables(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Value Does Not Navigate From Realized Variables</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Value Does Not Navigate From Realized Variables</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.SetStatement#validateValueDoesNotNavigateFromRealizedVariables(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getSetStatement__ValidateValueDoesNotNavigateFromRealizedVariables__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtimperative.SetStatement#validateTargetPropertyIsNotReadOnly(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Target Property Is Not Read Only</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Target Property Is Not Read Only</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.SetStatement#validateTargetPropertyIsNotReadOnly(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getSetStatement__ValidateTargetPropertyIsNotReadOnly__DiagnosticChain_Map();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtimperative.SimpleParameter <em>Simple Parameter</em>}'.
@@ -5110,6 +5470,26 @@ public interface QVTimperativePackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getSimpleParameterBinding_IsCheck();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtimperative.SimpleParameterBinding#validateCompatibleTypeForCheckedValue(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Compatible Type For Checked Value</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Compatible Type For Checked Value</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.SimpleParameterBinding#validateCompatibleTypeForCheckedValue(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getSimpleParameterBinding__ValidateCompatibleTypeForCheckedValue__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtimperative.SimpleParameterBinding#validateCompatibleTypeForUncheckedValue(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Compatible Type For Unchecked Value</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Compatible Type For Unchecked Value</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.SimpleParameterBinding#validateCompatibleTypeForUncheckedValue(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getSimpleParameterBinding__ValidateCompatibleTypeForUncheckedValue__DiagnosticChain_Map();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtimperative.Statement <em>Statement</em>}'.
@@ -5252,6 +5632,14 @@ public interface QVTimperativePackage extends EPackage {
 		EReference BUFFER_STATEMENT__OWNED_EXPRESSION = eINSTANCE.getBufferStatement_OwnedExpression();
 
 		/**
+		 * The meta object literal for the '<em><b>Validate Compatible Type For Value</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation BUFFER_STATEMENT___VALIDATE_COMPATIBLE_TYPE_FOR_VALUE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getBufferStatement__ValidateCompatibleTypeForValue__DiagnosticChain_Map();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.CheckStatementImpl <em>Check Statement</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -5268,6 +5656,14 @@ public interface QVTimperativePackage extends EPackage {
 		 * @generated
 		 */
 		EReference CHECK_STATEMENT__OWNED_EXPRESSION = eINSTANCE.getCheckStatement_OwnedExpression();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Type Is Boolean</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation CHECK_STATEMENT___VALIDATE_TYPE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP = eINSTANCE.getCheckStatement__ValidateTypeIsBoolean__DiagnosticChain_Map();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.ConnectionVariableImpl <em>Connection Variable</em>}' class.
@@ -5312,6 +5708,22 @@ public interface QVTimperativePackage extends EPackage {
 		 * @generated
 		 */
 		EReference DECLARE_STATEMENT__OWNED_EXPRESSION = eINSTANCE.getDeclareStatement_OwnedExpression();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Compatible Type For Checked Value</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation DECLARE_STATEMENT___VALIDATE_COMPATIBLE_TYPE_FOR_CHECKED_VALUE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getDeclareStatement__ValidateCompatibleTypeForCheckedValue__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Compatible Type For Unchecked Value</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation DECLARE_STATEMENT___VALIDATE_COMPATIBLE_TYPE_FOR_UNCHECKED_VALUE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getDeclareStatement__ValidateCompatibleTypeForUncheckedValue__DiagnosticChain_Map();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.GuardParameterImpl <em>Guard Parameter</em>}' class.
@@ -5378,6 +5790,14 @@ public interface QVTimperativePackage extends EPackage {
 		EClass IMPERATIVE_TRANSFORMATION = eINSTANCE.getImperativeTransformation();
 
 		/**
+		 * The meta object literal for the '<em><b>Validateall Rules Are Mappings</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation IMPERATIVE_TRANSFORMATION___VALIDATEALL_RULES_ARE_MAPPINGS__DIAGNOSTICCHAIN_MAP = eINSTANCE.getImperativeTransformation__ValidateallRulesAreMappings__DiagnosticChain_Map();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.ImperativeTypedModelImpl <em>Imperative Typed Model</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -5402,6 +5822,30 @@ public interface QVTimperativePackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute IMPERATIVE_TYPED_MODEL__IS_ENFORCED = eINSTANCE.getImperativeTypedModel_IsEnforced();
+
+		/**
+		 * The meta object literal for the '<em><b>All Used Packages</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference IMPERATIVE_TYPED_MODEL__ALL_USED_PACKAGES = eINSTANCE.getImperativeTypedModel_AllUsedPackages();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Name Is Not Null</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation IMPERATIVE_TYPED_MODEL___VALIDATE_NAME_IS_NOT_NULL__DIAGNOSTICCHAIN_MAP = eINSTANCE.getImperativeTypedModel__ValidateNameIsNotNull__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Not Both Checked And Enforced</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation IMPERATIVE_TYPED_MODEL___VALIDATE_NOT_BOTH_CHECKED_AND_ENFORCED__DIAGNOSTICCHAIN_MAP = eINSTANCE.getImperativeTypedModel__ValidateNotBothCheckedAndEnforced__DiagnosticChain_Map();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.LoopParameterBindingImpl <em>Loop Parameter Binding</em>}' class.
@@ -5482,6 +5926,30 @@ public interface QVTimperativePackage extends EPackage {
 		EReference MAPPING__OWNED_STATEMENTS = eINSTANCE.getMapping_OwnedStatements();
 
 		/**
+		 * The meta object literal for the '<em><b>Validate Name Is Not Null</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation MAPPING___VALIDATE_NAME_IS_NOT_NULL__DIAGNOSTICCHAIN_MAP = eINSTANCE.getMapping__ValidateNameIsNotNull__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Mapping Parameter Names Are Unique</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation MAPPING___VALIDATE_MAPPING_PARAMETER_NAMES_ARE_UNIQUE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getMapping__ValidateMappingParameterNamesAreUnique__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Local Variabel Names Are Unique</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation MAPPING___VALIDATE_LOCAL_VARIABEL_NAMES_ARE_UNIQUE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getMapping__ValidateLocalVariabelNamesAreUnique__DiagnosticChain_Map();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingCallImpl <em>Mapping Call</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -5530,6 +5998,14 @@ public interface QVTimperativePackage extends EPackage {
 		 * @generated
 		 */
 		EOperation MAPPING_CALL___VALIDATE_MATCHING_CALL_BINDINGS__DIAGNOSTICCHAIN_MAP = eINSTANCE.getMappingCall__ValidateMatchingCallBindings__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Not Both Install And Invoke</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation MAPPING_CALL___VALIDATE_NOT_BOTH_INSTALL_AND_INVOKE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getMappingCall__ValidateNotBothInstallAndInvoke__DiagnosticChain_Map();
 
 		/**
 		 * The meta object literal for the '<em><b>Validate Unique Call Bindings</b></em>' operation.
@@ -5632,6 +6108,14 @@ public interface QVTimperativePackage extends EPackage {
 		 * @generated
 		 */
 		EReference MAPPING_PARAMETER_BINDING__BOUND_VARIABLE = eINSTANCE.getMappingParameterBinding_BoundVariable();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Parameter Is Mapping Parameter</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation MAPPING_PARAMETER_BINDING___VALIDATE_PARAMETER_IS_MAPPING_PARAMETER__DIAGNOSTICCHAIN_MAP = eINSTANCE.getMappingParameterBinding__ValidateParameterIsMappingParameter__DiagnosticChain_Map();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingStatementImpl <em>Mapping Statement</em>}' class.
@@ -5746,6 +6230,14 @@ public interface QVTimperativePackage extends EPackage {
 		EReference SET_STATEMENT__OWNED_EXPRESSION = eINSTANCE.getSetStatement_OwnedExpression();
 
 		/**
+		 * The meta object literal for the '<em><b>Resolved Property</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SET_STATEMENT__RESOLVED_PROPERTY = eINSTANCE.getSetStatement_ResolvedProperty();
+
+		/**
 		 * The meta object literal for the '<em><b>Validate Compatible Class For Property</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -5760,6 +6252,22 @@ public interface QVTimperativePackage extends EPackage {
 		 * @generated
 		 */
 		EOperation SET_STATEMENT___VALIDATE_COMPATIBLE_TYPE_FOR_VALUE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getSetStatement__ValidateCompatibleTypeForValue__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Value Does Not Navigate From Realized Variables</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation SET_STATEMENT___VALIDATE_VALUE_DOES_NOT_NAVIGATE_FROM_REALIZED_VARIABLES__DIAGNOSTICCHAIN_MAP = eINSTANCE.getSetStatement__ValidateValueDoesNotNavigateFromRealizedVariables__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Target Property Is Not Read Only</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation SET_STATEMENT___VALIDATE_TARGET_PROPERTY_IS_NOT_READ_ONLY__DIAGNOSTICCHAIN_MAP = eINSTANCE.getSetStatement__ValidateTargetPropertyIsNotReadOnly__DiagnosticChain_Map();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.SimpleParameterImpl <em>Simple Parameter</em>}' class.
@@ -5804,6 +6312,22 @@ public interface QVTimperativePackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute SIMPLE_PARAMETER_BINDING__IS_CHECK = eINSTANCE.getSimpleParameterBinding_IsCheck();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Compatible Type For Checked Value</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation SIMPLE_PARAMETER_BINDING___VALIDATE_COMPATIBLE_TYPE_FOR_CHECKED_VALUE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getSimpleParameterBinding__ValidateCompatibleTypeForCheckedValue__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Compatible Type For Unchecked Value</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation SIMPLE_PARAMETER_BINDING___VALIDATE_COMPATIBLE_TYPE_FOR_UNCHECKED_VALUE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getSimpleParameterBinding__ValidateCompatibleTypeForUncheckedValue__DiagnosticChain_Map();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.StatementImpl <em>Statement</em>}' class.

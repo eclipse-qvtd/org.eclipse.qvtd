@@ -14,6 +14,8 @@
  */
 package org.eclipse.qvtd.pivot.qvtimperative;
 
+import java.util.Map;
+import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.ocl.pivot.OCLExpression;
 
 /**
@@ -97,5 +99,19 @@ public interface DeclareStatement extends VariableStatement, ObservableStatement
 	 * @generated
 	 */
 	void setOwnedExpression(OCLExpression value);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	boolean validateCompatibleTypeForCheckedValue(DiagnosticChain diagnostics, Map<Object, Object> context);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	boolean validateCompatibleTypeForUncheckedValue(DiagnosticChain diagnostics, Map<Object, Object> context);
 
 } // PredicateVariable

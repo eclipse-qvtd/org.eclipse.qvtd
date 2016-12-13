@@ -12,9 +12,9 @@ package org.eclipse.qvtd.pivot.qvtimperative.impl;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
-
 import java.util.Iterator;
 import java.util.Map;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.DiagnosticChain;
@@ -37,6 +37,8 @@ import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.library.AbstractBinaryOperation;
 import org.eclipse.ocl.pivot.library.LibraryIteration;
 import org.eclipse.ocl.pivot.library.collection.CollectionAsSetOperation;
+import org.eclipse.ocl.pivot.library.logical.BooleanAndOperation;
+import org.eclipse.ocl.pivot.library.logical.BooleanNotOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclComparableLessThanEqualOperation;
 import org.eclipse.ocl.pivot.library.string.CGStringGetSeverityOperation;
 import org.eclipse.ocl.pivot.library.string.CGStringLogDiagnosticOperation;
@@ -428,6 +430,73 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 	 * @generated
 	 */
 	@Override
+	public boolean validateNotBothInstallAndInvoke(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
+		/**
+		 *
+		 * inv NotBothInstallAndInvoke:
+		 *   let
+		 *     severity : Integer[1] = 'MappingCall::NotBothInstallAndInvoke'.getSeverity()
+		 *   in
+		 *     if severity <= 0
+		 *     then true
+		 *     else
+		 *       let status : OclAny[?] = not (isInstall and isInvoke)
+		 *       in
+		 *         'MappingCall::NotBothInstallAndInvoke'.logDiagnostic(self, null, diagnostics, context, null, severity, status, 0)
+		 *     endif
+		 */
+		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
+		final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativeTables.STR_MappingCall_c_c_NotBothInstallAndInvoke);
+		final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTimperativeTables.INT_0).booleanValue();
+		/*@NonInvalid*/ boolean symbol_0;
+		if (le) {
+			symbol_0 = ValueUtil.TRUE_VALUE;
+		}
+		else {
+			/*@Caught*/ @Nullable Object CAUGHT_status;
+			try {
+				/*@Caught*/ @Nullable Object CAUGHT_and;
+				try {
+					/*@Caught*/ @Nullable Object CAUGHT_isInstall;
+					try {
+						final /*@Thrown*/ java.lang.@Nullable Boolean isInstall = this.isIsInstall();
+						CAUGHT_isInstall = isInstall;
+					}
+					catch (Exception e) {
+						CAUGHT_isInstall = ValueUtil.createInvalidValue(e);
+					}
+					/*@Caught*/ @Nullable Object CAUGHT_isInvoke;
+					try {
+						final /*@Thrown*/ java.lang.@Nullable Boolean isInvoke = this.isIsInvoke();
+						CAUGHT_isInvoke = isInvoke;
+					}
+					catch (Exception e) {
+						CAUGHT_isInvoke = ValueUtil.createInvalidValue(e);
+					}
+					final /*@Thrown*/ java.lang.@Nullable Boolean and = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_isInstall, CAUGHT_isInvoke);
+					CAUGHT_and = and;
+				}
+				catch (Exception e) {
+					CAUGHT_and = ValueUtil.createInvalidValue(e);
+				}
+				final /*@Thrown*/ java.lang.@Nullable Boolean status = BooleanNotOperation.INSTANCE.evaluate(CAUGHT_and);
+				CAUGHT_status = status;
+			}
+			catch (Exception e) {
+				CAUGHT_status = ValueUtil.createInvalidValue(e);
+			}
+			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTimperativeTables.STR_MappingCall_c_c_NotBothInstallAndInvoke, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_status, QVTimperativeTables.INT_0).booleanValue();
+			symbol_0 = logDiagnostic;
+		}
+		return Boolean.TRUE == symbol_0;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public boolean validateUniqueCallBindings(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
 		/**
 		 *
@@ -703,6 +772,8 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 		switch (operationID) {
 			case QVTimperativePackage.MAPPING_CALL___VALIDATE_MATCHING_CALL_BINDINGS__DIAGNOSTICCHAIN_MAP:
 				return validateMatchingCallBindings((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
+			case QVTimperativePackage.MAPPING_CALL___VALIDATE_NOT_BOTH_INSTALL_AND_INVOKE__DIAGNOSTICCHAIN_MAP:
+				return validateNotBothInstallAndInvoke((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 			case QVTimperativePackage.MAPPING_CALL___VALIDATE_UNIQUE_CALL_BINDINGS__DIAGNOSTICCHAIN_MAP:
 				return validateUniqueCallBindings((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 			case QVTimperativePackage.MAPPING_CALL___GET_REFERRED_ELEMENT:

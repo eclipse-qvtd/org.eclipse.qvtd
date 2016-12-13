@@ -64,7 +64,8 @@ map uRoot_ownedPackages in classescs2as
 	guard:rightAS root : Root;
 	guard:leftCS rootCS : RootCS;
 	check rootCS.RootCS2Root.root = root;
-	set root.ownedPackages := rootCS.ownedPackages.PackageCS2Package._'package'->asOrderedSet();
+	var ownedPackages := rootCS.ownedPackages.PackageCS2Package._'package'->asOrderedSet();
+	set root.ownedPackages := ownedPackages;
 }
 
 map uPackage_name in classescs2as
@@ -80,7 +81,8 @@ map uPackage_ownedClasses in classescs2as
 	guard:rightAS _'package' : Package;
 	guard:leftCS packageCS : PackageCS;
 	check packageCS.PackageCS2Package._'package' = _'package';
-	set	_'package'.ownedClasses := packageCS.ownedClasses.ClassCS2Class._'class'->asOrderedSet();
+	var ownedClasses := packageCS.ownedClasses.ClassCS2Class._'class'->asOrderedSet();
+	set	_'package'.ownedClasses := ownedClasses;
 }
 
 map __root__ in classescs2as
