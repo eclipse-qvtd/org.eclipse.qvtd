@@ -48,11 +48,12 @@ public class QVTcoreHelper extends QVTbaseHelper
 		return asVariable;
 	}
 
-	public @NonNull GuardVariable createGuardVariable(@NonNull String name, @NonNull Type asType, boolean isRequired) {
+	public @NonNull GuardVariable createGuardVariable(@NonNull String name, @NonNull Type asType, boolean isRequired, @Nullable OCLExpression asInitExpression) {
 		GuardVariable asVariable = QVTcoreFactory.eINSTANCE.createGuardVariable();
 		asVariable.setName(name);
 		asVariable.setType(asType);
 		asVariable.setIsRequired(isRequired);
+		asVariable.setOwnedInit(asInitExpression);
 		return asVariable;
 	}
 

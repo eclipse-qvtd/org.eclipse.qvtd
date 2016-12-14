@@ -34,6 +34,21 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" xmi:id="T-qvtcore-BottomPattern" name="BottomPattern"
       eSuperTypes="#T-qvtcore-CorePattern">
+    <eOperations name="validateVariablesAreBottomVariables" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <details key="originalName" value="VariablesAreBottomVariables"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="&#xA;&#x9;variable->forAll(oclIsKindOf(BottomVariable))&#xA;&#xA;"/>
+      </eAnnotations>
+      <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
+      <eParameters name="context">
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtcore-BottomPattern-area"
         name="area" lowerBound="1" eType="#T-qvtcore-Area" transient="true" eOpposite="#F-qvtcore-Area-bottomPattern"/>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtcore-BottomPattern-assignment"
@@ -71,6 +86,21 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" xmi:id="T-qvtcore-GuardPattern" name="GuardPattern"
       eSuperTypes="#T-qvtcore-CorePattern">
+    <eOperations name="validateVariablesAreGuardVariables" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <details key="originalName" value="VariablesAreGuardVariables"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="&#xA;&#x9;variable->forAll(oclIsKindOf(GuardVariable))&#xA;&#xA;"/>
+      </eAnnotations>
+      <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
+      <eParameters name="context">
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtcore-GuardPattern-area"
         name="area" lowerBound="1" eType="#T-qvtcore-Area" transient="true" eOpposite="#F-qvtcore-Area-guardPattern"/>
   </eClassifiers>
@@ -78,6 +108,51 @@
       eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Variable"/>
   <eClassifiers xsi:type="ecore:EClass" xmi:id="T-qvtcore-Mapping" name="Mapping"
       eSuperTypes="../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#T-qvtbase-Rule #T-qvtcore-Area">
+    <eOperations name="validateDomainsAreCoreDomains" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <details key="originalName" value="DomainsAreCoreDomains"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="&#xA;&#x9;domain->forAll(oclIsKindOf(CoreDomain))&#xA;&#xA;"/>
+      </eAnnotations>
+      <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
+      <eParameters name="context">
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
+    <eOperations name="validateNestedNameIsNull" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <details key="originalName" value="NestedNameIsNull"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="&#xA;--&#x9;_context &lt;> null implies name = null&#xA;&#x9;transformation = null implies name = null&#xA;&#xA;"/>
+      </eAnnotations>
+      <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
+      <eParameters name="context">
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
+    <eOperations name="validateRootNameIsNotNull" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <details key="originalName" value="RootNameIsNotNull"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="&#xA;&#x9;transformation &lt;> null implies name &lt;> null&#xA;&#xA;"/>
+      </eAnnotations>
+      <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
+      <eParameters name="context">
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtcore-Mapping-context"
         name="context" eType="#T-qvtcore-Mapping" eOpposite="#F-qvtcore-Mapping-local"/>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtcore-Mapping-local"
@@ -104,15 +179,30 @@
       name="OppositePropertyAssignment" eSuperTypes="#T-qvtcore-NavigationAssignment">
     <eOperations name="getReferredTargetProperty" lowerBound="1" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Property">
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="targetProperty.opposite&#xA;"/>
+        <details key="body" value="targetProperty.opposite&#xA;&#xA;"/>
       </eAnnotations>
+    </eOperations>
+    <eOperations name="validateCompatibleTypeForValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <details key="originalName" value="CompatibleTypeForValue"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="Tuple {&#xA;&#x9;message : String = 'OppositePropertyAssignment::CompatibleTypeForValue: ' + value.type.name + ' must conform to ' + getReferredTargetProperty().type.name + ' or vice-versa',&#xA;&#x9;status : Boolean = &#xA;&#x9;let propertyType = getReferredTargetProperty().type in&#xA;&#x9;let valueType = value.type in&#xA;&#x9;&#x9;valueType.conformsTo(propertyType)&#xA;&#x9;&#x9;or propertyType.conformsTo(valueType)&#xA;&#xA;&#xA;}.status"/>
+      </eAnnotations>
+      <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
+      <eParameters name="context">
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eGenericType>
+      </eParameters>
     </eOperations>
     <eOperations name="validateOppositePropertyIsImplicit" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
         <details key="originalName" value="OppositePropertyIsImplicit"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="targetProperty.isImplicit&#xA;"/>
+        <details key="body" value="&#xA;&#x9;targetProperty.isImplicit&#xA;&#x9;&#xA;"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -127,7 +217,7 @@
         <details key="originalName" value="TargetPropetyIsSlotProperty"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="slotExpression.type.conformsTo(getReferredTargetProperty().owningClass)&#xA;&#xA;"/>
+        <details key="body" value="&#xA;&#x9;slotExpression.type.conformsTo(getReferredTargetProperty().owningClass)&#xA;&#xA;"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -148,15 +238,30 @@
       eSuperTypes="#T-qvtcore-NavigationAssignment">
     <eOperations name="getReferredTargetProperty" lowerBound="1" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Property">
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="targetProperty&#xA;"/>
+        <details key="body" value="targetProperty&#xA;&#xA;"/>
       </eAnnotations>
+    </eOperations>
+    <eOperations name="validateCompatibleTypeForValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <details key="originalName" value="CompatibleTypeForValue"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="Tuple {&#xA;&#x9;message : String = 'PropertyAssignment::CompatibleTypeForValue: ' + value.type.name + ' must conform to ' + getReferredTargetProperty().type.name + ' or vice-versa',&#xA;&#x9;status : Boolean = &#xA;&#x9;let propertyType = getReferredTargetProperty().type in&#xA;&#x9;let valueType = value.type in&#xA;&#x9;&#x9;valueType.conformsTo(propertyType)&#xA;&#x9;&#x9;or propertyType.conformsTo(valueType)&#xA;&#xA;&#xA;}.status"/>
+      </eAnnotations>
+      <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
+      <eParameters name="context">
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eGenericType>
+      </eParameters>
     </eOperations>
     <eOperations name="validatePropertyIsNotImplicit" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
         <details key="originalName" value="PropertyIsNotImplicit"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="not targetProperty.isImplicit&#xA;"/>
+        <details key="body" value="&#xA;&#x9;not targetProperty.isImplicit&#xA;&#xA;"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -171,7 +276,7 @@
         <details key="originalName" value="TargetPropetyIsSlotProperty"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="slotExpression.type.conformsTo(getReferredTargetProperty().owningClass)&#xA;&#xA;"/>
+        <details key="body" value="&#xA;&#x9;slotExpression.type.conformsTo(getReferredTargetProperty().owningClass)&#xA;&#xA;"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -192,6 +297,21 @@
       eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Variable"/>
   <eClassifiers xsi:type="ecore:EClass" xmi:id="T-qvtcore-VariableAssignment" name="VariableAssignment"
       eSuperTypes="#T-qvtcore-Assignment">
+    <eOperations name="validateCompatibleTypeForValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <details key="originalName" value="CompatibleTypeForValue"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="Tuple {&#xA;&#x9;message : String = 'VariableAssignment::CompatibleTypeForValue: ' + value.type.name + ' must conform to ' + targetVariable.type.name + ' or vice-versa',&#xA;&#x9;status : Boolean = &#xA;&#x9;targetVariable.type.conformsTo(value.type)&#xA;&#x9;or value.type.conformsTo(targetVariable.type)&#xA;&#xA;&#xA;}.status"/>
+      </eAnnotations>
+      <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
+      <eParameters name="context">
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtcore-VariableAssignment-targetVariable"
         name="targetVariable" lowerBound="1" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Variable">
       <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">

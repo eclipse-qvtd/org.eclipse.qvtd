@@ -27,7 +27,7 @@ public class CoreVariableAnalysis extends AbstractVariableAnalysis
 
 	public CoreVariableAnalysis(@NonNull VariablesAnalysis variablesAnalysis, @NonNull String name, @NonNull Type type, @Nullable OCLExpression initValue) {
 		super(variablesAnalysis, name);
-		this.cVariable = variablesAnalysis.createBottomVariable(this.name, type, true, initValue);
+		this.cVariable = variablesAnalysis.createGuardVariable(this.name, type, true, initValue);
 	}
 
 	public CoreVariableAnalysis(@NonNull VariablesAnalysis variablesAnalysis, @NonNull String name, @NonNull Type type) {

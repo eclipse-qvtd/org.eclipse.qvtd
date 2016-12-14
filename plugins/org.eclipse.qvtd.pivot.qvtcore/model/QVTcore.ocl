@@ -2,18 +2,62 @@ import 'QVTcore.ecore'
 
 package qvtcore
 
+context BottomPattern
+inv VariablesAreBottomVariables:
+	variable->forAll(oclIsKindOf(BottomVariable))
+
+context GuardPattern
+inv VariablesAreGuardVariables:
+	variable->forAll(oclIsKindOf(GuardVariable))
+
+context Mapping
+inv DomainsAreCoreDomains:
+	domain->forAll(oclIsKindOf(CoreDomain))
+
+inv NestedNameIsNull:
+--	_context <> null implies name = null
+	transformation = null implies name = null
+
+inv RootNameIsNotNull:
+	transformation <> null implies name <> null
+
 --context NavigationAssignment
 --def: getReferredTargetProperty() : pivot::Property[1] = invalid
 --inv TargetPropetyIsSlotProperty: slotExpression.type.conformsTo(getReferredTargetProperty().owningClass)
 
 context OppositePropertyAssignment
 def: getReferredTargetProperty() : pivot::Property[1] = targetProperty.opposite
-inv OppositePropertyIsImplicit: targetProperty.isImplicit
-inv TargetPropetyIsSlotProperty: slotExpression.type.conformsTo(getReferredTargetProperty().owningClass)
+
+inv CompatibleTypeForValue('OppositePropertyAssignment::CompatibleTypeForValue: ' + value.type.name + ' must conform to ' + getReferredTargetProperty().type.name + ' or vice-versa'):
+	let propertyType = getReferredTargetProperty().type in
+	let valueType = value.type in
+		valueType.conformsTo(propertyType)
+		or propertyType.conformsTo(valueType)
+
+inv OppositePropertyIsImplicit:
+	targetProperty.isImplicit
+	
+inv TargetPropetyIsSlotProperty:
+	slotExpression.type.conformsTo(getReferredTargetProperty().owningClass)
 
 context PropertyAssignment
 def: getReferredTargetProperty() : pivot::Property[1] = targetProperty
-inv PropertyIsNotImplicit: not targetProperty.isImplicit
-inv TargetPropetyIsSlotProperty: slotExpression.type.conformsTo(getReferredTargetProperty().owningClass)
+
+inv CompatibleTypeForValue('PropertyAssignment::CompatibleTypeForValue: ' + value.type.name + ' must conform to ' + getReferredTargetProperty().type.name + ' or vice-versa'):
+	let propertyType = getReferredTargetProperty().type in
+	let valueType = value.type in
+		valueType.conformsTo(propertyType)
+		or propertyType.conformsTo(valueType)
+
+inv PropertyIsNotImplicit:
+	not targetProperty.isImplicit
+
+inv TargetPropetyIsSlotProperty:
+	slotExpression.type.conformsTo(getReferredTargetProperty().owningClass)
+
+context VariableAssignment
+inv CompatibleTypeForValue('VariableAssignment::CompatibleTypeForValue: ' + value.type.name + ' must conform to ' + targetVariable.type.name + ' or vice-versa'):
+	targetVariable.type.conformsTo(value.type)
+	or value.type.conformsTo(targetVariable.type)
 
 endpackage

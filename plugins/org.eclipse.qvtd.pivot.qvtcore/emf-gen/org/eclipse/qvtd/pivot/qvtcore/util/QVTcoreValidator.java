@@ -55,12 +55,60 @@ public class QVTcoreValidator extends EObjectValidator {
 	public static final String DIAGNOSTIC_SOURCE = "org.eclipse.qvtd.pivot.qvtcore";
 
 	/**
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Variables Are Bottom Variables' of 'Bottom Pattern'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final int BOTTOM_PATTERN__VALIDATE_VARIABLES_ARE_BOTTOM_VARIABLES = 1;
+
+	/**
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Variables Are Guard Variables' of 'Guard Pattern'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final int GUARD_PATTERN__VALIDATE_VARIABLES_ARE_GUARD_VARIABLES = 2;
+
+	/**
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Domains Are Core Domains' of 'Mapping'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final int MAPPING__VALIDATE_DOMAINS_ARE_CORE_DOMAINS = 3;
+
+	/**
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Nested Name Is Null' of 'Mapping'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final int MAPPING__VALIDATE_NESTED_NAME_IS_NULL = 4;
+
+	/**
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Root Name Is Not Null' of 'Mapping'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final int MAPPING__VALIDATE_ROOT_NAME_IS_NOT_NULL = 5;
+
+	/**
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Compatible Type For Value' of 'Opposite Property Assignment'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final int OPPOSITE_PROPERTY_ASSIGNMENT__VALIDATE_COMPATIBLE_TYPE_FOR_VALUE = 6;
+
+	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Opposite Property Is Implicit' of 'Opposite Property Assignment'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int OPPOSITE_PROPERTY_ASSIGNMENT__VALIDATE_OPPOSITE_PROPERTY_IS_IMPLICIT = 1;
+	public static final int OPPOSITE_PROPERTY_ASSIGNMENT__VALIDATE_OPPOSITE_PROPERTY_IS_IMPLICIT = 7;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Target Propety Is Slot Property' of 'Opposite Property Assignment'.
@@ -68,7 +116,15 @@ public class QVTcoreValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int OPPOSITE_PROPERTY_ASSIGNMENT__VALIDATE_TARGET_PROPETY_IS_SLOT_PROPERTY = 2;
+	public static final int OPPOSITE_PROPERTY_ASSIGNMENT__VALIDATE_TARGET_PROPETY_IS_SLOT_PROPERTY = 8;
+
+	/**
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Compatible Type For Value' of 'Property Assignment'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final int PROPERTY_ASSIGNMENT__VALIDATE_COMPATIBLE_TYPE_FOR_VALUE = 9;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Property Is Not Implicit' of 'Property Assignment'.
@@ -76,7 +132,7 @@ public class QVTcoreValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int PROPERTY_ASSIGNMENT__VALIDATE_PROPERTY_IS_NOT_IMPLICIT = 3;
+	public static final int PROPERTY_ASSIGNMENT__VALIDATE_PROPERTY_IS_NOT_IMPLICIT = 10;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Target Propety Is Slot Property' of 'Property Assignment'.
@@ -84,7 +140,15 @@ public class QVTcoreValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int PROPERTY_ASSIGNMENT__VALIDATE_TARGET_PROPETY_IS_SLOT_PROPERTY = 4;
+	public static final int PROPERTY_ASSIGNMENT__VALIDATE_TARGET_PROPETY_IS_SLOT_PROPERTY = 11;
+
+	/**
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Compatible Type For Value' of 'Variable Assignment'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final int VARIABLE_ASSIGNMENT__VALIDATE_COMPATIBLE_TYPE_FOR_VALUE = 12;
 
 	/**
 	 * A constant with a fixed name that can be used as the base value for additional hand written constants.
@@ -92,7 +156,7 @@ public class QVTcoreValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private static final int GENERATED_DIAGNOSTIC_CODE_COUNT = 4;
+	private static final int GENERATED_DIAGNOSTIC_CODE_COUNT = 12;
 
 	/**
 	 * A constant with a fixed name that can be used as the base value for additional hand written constants in a derived class.
@@ -138,7 +202,7 @@ public class QVTcoreValidator extends EObjectValidator {
 	 */
 	@Override
 	protected EPackage getEPackage() {
-		return QVTcorePackage.eINSTANCE;
+	  return QVTcorePackage.eINSTANCE;
 	}
 
 	/**
@@ -213,7 +277,27 @@ public class QVTcoreValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateBottomPattern(BottomPattern bottomPattern, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(bottomPattern, diagnostics, context);
+		if (!validate_NoCircularContainment(bottomPattern, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms(bottomPattern, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(bottomPattern, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(bottomPattern, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(bottomPattern, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(bottomPattern, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(bottomPattern, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(bottomPattern, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(bottomPattern, diagnostics, context);
+		if (result || diagnostics != null) result &= validateBottomPattern_validateVariablesAreBottomVariables(bottomPattern, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * Validates the validateVariablesAreBottomVariables constraint of '<em>Bottom Pattern</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateBottomPattern_validateVariablesAreBottomVariables(BottomPattern bottomPattern, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return bottomPattern.validateVariablesAreBottomVariables(diagnostics, context);
 	}
 
 	/**
@@ -291,7 +375,27 @@ public class QVTcoreValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateGuardPattern(GuardPattern guardPattern, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(guardPattern, diagnostics, context);
+		if (!validate_NoCircularContainment(guardPattern, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms(guardPattern, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(guardPattern, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(guardPattern, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(guardPattern, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(guardPattern, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(guardPattern, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(guardPattern, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(guardPattern, diagnostics, context);
+		if (result || diagnostics != null) result &= validateGuardPattern_validateVariablesAreGuardVariables(guardPattern, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * Validates the validateVariablesAreGuardVariables constraint of '<em>Guard Pattern</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateGuardPattern_validateVariablesAreGuardVariables(GuardPattern guardPattern, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return guardPattern.validateVariablesAreGuardVariables(diagnostics, context);
 	}
 
 	/**
@@ -334,7 +438,40 @@ public class QVTcoreValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= qvTbaseValidator.validateRule_validateDomainNameIsUnique(mapping, diagnostics, context);
 		if (result || diagnostics != null) result &= qvTbaseValidator.validateRule_validateOverridesRuleIsExtendedRule(mapping, diagnostics, context);
 		if (result || diagnostics != null) result &= qvTbaseValidator.validateRule_validateOverridesRuleOverridesAllDomains(mapping, diagnostics, context);
+		if (result || diagnostics != null) result &= validateMapping_validateDomainsAreCoreDomains(mapping, diagnostics, context);
+		if (result || diagnostics != null) result &= validateMapping_validateNestedNameIsNull(mapping, diagnostics, context);
+		if (result || diagnostics != null) result &= validateMapping_validateRootNameIsNotNull(mapping, diagnostics, context);
 		return result;
+	}
+
+	/**
+	 * Validates the validateDomainsAreCoreDomains constraint of '<em>Mapping</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateMapping_validateDomainsAreCoreDomains(Mapping mapping, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return mapping.validateDomainsAreCoreDomains(diagnostics, context);
+	}
+
+	/**
+	 * Validates the validateNestedNameIsNull constraint of '<em>Mapping</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateMapping_validateNestedNameIsNull(Mapping mapping, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return mapping.validateNestedNameIsNull(diagnostics, context);
+	}
+
+	/**
+	 * Validates the validateRootNameIsNotNull constraint of '<em>Mapping</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateMapping_validateRootNameIsNotNull(Mapping mapping, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return mapping.validateRootNameIsNotNull(diagnostics, context);
 	}
 
 	/**
@@ -361,9 +498,20 @@ public class QVTcoreValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_UniqueID(oppositePropertyAssignment, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(oppositePropertyAssignment, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(oppositePropertyAssignment, diagnostics, context);
+		if (result || diagnostics != null) result &= validateOppositePropertyAssignment_validateCompatibleTypeForValue(oppositePropertyAssignment, diagnostics, context);
 		if (result || diagnostics != null) result &= validateOppositePropertyAssignment_validateOppositePropertyIsImplicit(oppositePropertyAssignment, diagnostics, context);
 		if (result || diagnostics != null) result &= validateOppositePropertyAssignment_validateTargetPropetyIsSlotProperty(oppositePropertyAssignment, diagnostics, context);
 		return result;
+	}
+
+	/**
+	 * Validates the validateCompatibleTypeForValue constraint of '<em>Opposite Property Assignment</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateOppositePropertyAssignment_validateCompatibleTypeForValue(OppositePropertyAssignment oppositePropertyAssignment, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return oppositePropertyAssignment.validateCompatibleTypeForValue(diagnostics, context);
 	}
 
 	/**
@@ -401,9 +549,20 @@ public class QVTcoreValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_UniqueID(propertyAssignment, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(propertyAssignment, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(propertyAssignment, diagnostics, context);
+		if (result || diagnostics != null) result &= validatePropertyAssignment_validateCompatibleTypeForValue(propertyAssignment, diagnostics, context);
 		if (result || diagnostics != null) result &= validatePropertyAssignment_validatePropertyIsNotImplicit(propertyAssignment, diagnostics, context);
 		if (result || diagnostics != null) result &= validatePropertyAssignment_validateTargetPropetyIsSlotProperty(propertyAssignment, diagnostics, context);
 		return result;
+	}
+
+	/**
+	 * Validates the validateCompatibleTypeForValue constraint of '<em>Property Assignment</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validatePropertyAssignment_validateCompatibleTypeForValue(PropertyAssignment propertyAssignment, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return propertyAssignment.validateCompatibleTypeForValue(diagnostics, context);
 	}
 
 	/**
@@ -454,7 +613,27 @@ public class QVTcoreValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateVariableAssignment(VariableAssignment variableAssignment, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(variableAssignment, diagnostics, context);
+		if (!validate_NoCircularContainment(variableAssignment, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms(variableAssignment, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(variableAssignment, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(variableAssignment, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(variableAssignment, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(variableAssignment, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(variableAssignment, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(variableAssignment, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(variableAssignment, diagnostics, context);
+		if (result || diagnostics != null) result &= validateVariableAssignment_validateCompatibleTypeForValue(variableAssignment, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * Validates the validateCompatibleTypeForValue constraint of '<em>Variable Assignment</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateVariableAssignment_validateCompatibleTypeForValue(VariableAssignment variableAssignment, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return variableAssignment.validateCompatibleTypeForValue(diagnostics, context);
 	}
 
 	/**

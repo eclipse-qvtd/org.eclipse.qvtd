@@ -34,12 +34,15 @@ import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.library.classifier.OclTypeConformsToOperation;
 import org.eclipse.ocl.pivot.library.logical.BooleanNotOperation;
+import org.eclipse.ocl.pivot.library.logical.BooleanOrOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclComparableLessThanEqualOperation;
 import org.eclipse.ocl.pivot.library.string.CGStringGetSeverityOperation;
 import org.eclipse.ocl.pivot.library.string.CGStringLogDiagnosticOperation;
+import org.eclipse.ocl.pivot.library.string.StringConcatOperation;
 import org.eclipse.ocl.pivot.util.Visitor;
 
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
+import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.qvtd.pivot.qvtcore.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
 
@@ -142,6 +145,140 @@ public class PropertyAssignmentImpl extends NavigationAssignmentImpl implements 
 		@SuppressWarnings("null")
 		final /*@Thrown*/ org.eclipse.ocl.pivot.@NonNull Property targetProperty = this.getTargetProperty();
 		return targetProperty;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean validateCompatibleTypeForValue(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
+		/**
+		 *
+		 * inv CompatibleTypeForValue:
+		 *   let
+		 *     severity : Integer[1] = 'PropertyAssignment::CompatibleTypeForValue'.getSeverity()
+		 *   in
+		 *     if severity <= 0
+		 *     then true
+		 *     else
+		 *       let
+		 *         status : OclAny[?] = let
+		 *           propertyType : Type[?] = getReferredTargetProperty().type
+		 *         in
+		 *           let valueType : Type[?] = value.type
+		 *           in
+		 *             valueType.conformsTo(propertyType) or
+		 *             propertyType.conformsTo(valueType)
+		 *       in
+		 *         let
+		 *           message : String[?] = if status <> true
+		 *           then 'PropertyAssignment::CompatibleTypeForValue: ' + value.type.name + ' must conform to ' +
+		 *             getReferredTargetProperty().type.name + ' or vice-versa'
+		 *           else null
+		 *           endif
+		 *         in
+		 *           'PropertyAssignment::CompatibleTypeForValue'.logDiagnostic(self, null, diagnostics, context, message, severity, status, 0)
+		 *     endif
+		 */
+		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
+		final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTcoreTables.STR_PropertyAssignment_c_c_CompatibleTypeForValue);
+		final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTcoreTables.INT_0).booleanValue();
+		/*@NonInvalid*/ boolean symbol_0;
+		if (le) {
+			symbol_0 = ValueUtil.TRUE_VALUE;
+		}
+		else {
+			/*@Caught*/ @Nullable Object CAUGHT_or;
+			try {
+				/*@Caught*/ @Nullable Object CAUGHT_propertyType;
+				try {
+					@SuppressWarnings("null")
+					final /*@Thrown*/ org.eclipse.ocl.pivot.@NonNull Property getReferredTargetProperty = this.getReferredTargetProperty();
+					final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable Type propertyType = getReferredTargetProperty.getType();
+					CAUGHT_propertyType = propertyType;
+				}
+				catch (Exception e) {
+					CAUGHT_propertyType = ValueUtil.createInvalidValue(e);
+				}
+				/*@Caught*/ @Nullable Object CAUGHT_valueType;
+				try {
+					@SuppressWarnings("null")
+					final /*@Thrown*/ org.eclipse.ocl.pivot.@NonNull OCLExpression value = this.getValue();
+					final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable Type valueType = value.getType();
+					CAUGHT_valueType = valueType;
+				}
+				catch (Exception e) {
+					CAUGHT_valueType = ValueUtil.createInvalidValue(e);
+				}
+				/*@Caught*/ @NonNull Object CAUGHT_conformsTo;
+				try {
+					if (CAUGHT_valueType instanceof InvalidValueException) {
+						throw (InvalidValueException)CAUGHT_valueType;
+					}
+					if (CAUGHT_propertyType instanceof InvalidValueException) {
+						throw (InvalidValueException)CAUGHT_propertyType;
+					}
+					final /*@Thrown*/ boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(executor, CAUGHT_valueType, CAUGHT_propertyType).booleanValue();
+					CAUGHT_conformsTo = conformsTo;
+				}
+				catch (Exception e) {
+					CAUGHT_conformsTo = ValueUtil.createInvalidValue(e);
+				}
+				/*@Caught*/ @NonNull Object CAUGHT_conformsTo_0;
+				try {
+					if (CAUGHT_propertyType instanceof InvalidValueException) {
+						throw (InvalidValueException)CAUGHT_propertyType;
+					}
+					if (CAUGHT_valueType instanceof InvalidValueException) {
+						throw (InvalidValueException)CAUGHT_valueType;
+					}
+					final /*@Thrown*/ boolean conformsTo_0 = OclTypeConformsToOperation.INSTANCE.evaluate(executor, CAUGHT_propertyType, CAUGHT_valueType).booleanValue();
+					CAUGHT_conformsTo_0 = conformsTo_0;
+				}
+				catch (Exception e) {
+					CAUGHT_conformsTo_0 = ValueUtil.createInvalidValue(e);
+				}
+				final /*@Thrown*/ java.lang.@Nullable Boolean or = BooleanOrOperation.INSTANCE.evaluate(CAUGHT_conformsTo, CAUGHT_conformsTo_0);
+				CAUGHT_or = or;
+			}
+			catch (Exception e) {
+				CAUGHT_or = ValueUtil.createInvalidValue(e);
+			}
+			if (CAUGHT_or instanceof InvalidValueException) {
+				throw (InvalidValueException)CAUGHT_or;
+			}
+			final /*@Thrown*/ boolean ne = CAUGHT_or == Boolean.FALSE;
+			/*@NonInvalid*/ java.lang.@Nullable String message_0;
+			if (ne) {
+				@SuppressWarnings("null")
+				final /*@Thrown*/ org.eclipse.ocl.pivot.@NonNull OCLExpression value_0 = this.getValue();
+				final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable Type type = value_0.getType();
+				if (type == null) {
+					throw new InvalidValueException("Null source for \'NamedElement::name\'");
+				}
+				final /*@Thrown*/ java.lang.@Nullable String name = type.getName();
+				final /*@NonInvalid*/ java.lang.@NonNull String sum = StringConcatOperation.INSTANCE.evaluate(QVTcoreTables.STR_PropertyAssignment_c_c_CompatibleTypeForValue_c_32, name);
+				final /*@NonInvalid*/ java.lang.@NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, QVTcoreTables.STR__32_must_32_conform_32_to_32);
+				@SuppressWarnings("null")
+				final /*@Thrown*/ org.eclipse.ocl.pivot.@NonNull Property getReferredTargetProperty_0 = this.getReferredTargetProperty();
+				final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable Type type_0 = getReferredTargetProperty_0.getType();
+				if (type_0 == null) {
+					throw new InvalidValueException("Null source for \'NamedElement::name\'");
+				}
+				final /*@Thrown*/ java.lang.@Nullable String name_0 = type_0.getName();
+				final /*@NonInvalid*/ java.lang.@NonNull String sum_1 = StringConcatOperation.INSTANCE.evaluate(sum_0, name_0);
+				final /*@NonInvalid*/ java.lang.@NonNull String sum_2 = StringConcatOperation.INSTANCE.evaluate(sum_1, QVTcoreTables.STR__32_or_32_vice_m_versa);
+				message_0 = sum_2;
+			}
+			else {
+				message_0 = null;
+			}
+			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTcoreTables.STR_PropertyAssignment_c_c_CompatibleTypeForValue, this, (Object)null, diagnostics, context, message_0, severity_0, CAUGHT_or, QVTcoreTables.INT_0).booleanValue();
+			symbol_0 = logDiagnostic;
+		}
+		return Boolean.TRUE == symbol_0;
 	}
 
 	/**
@@ -318,6 +455,8 @@ public class PropertyAssignmentImpl extends NavigationAssignmentImpl implements 
 		switch (operationID) {
 			case QVTcorePackage.PROPERTY_ASSIGNMENT___GET_REFERRED_TARGET_PROPERTY:
 				return getReferredTargetProperty();
+			case QVTcorePackage.PROPERTY_ASSIGNMENT___VALIDATE_COMPATIBLE_TYPE_FOR_VALUE__DIAGNOSTICCHAIN_MAP:
+				return validateCompatibleTypeForValue((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 			case QVTcorePackage.PROPERTY_ASSIGNMENT___VALIDATE_PROPERTY_IS_NOT_IMPLICIT__DIAGNOSTICCHAIN_MAP:
 				return validatePropertyIsNotImplicit((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 			case QVTcorePackage.PROPERTY_ASSIGNMENT___VALIDATE_TARGET_PROPETY_IS_SLOT_PROPERTY__DIAGNOSTICCHAIN_MAP:

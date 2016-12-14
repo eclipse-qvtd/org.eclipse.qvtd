@@ -320,7 +320,7 @@ map uAnnotationCS_2_Annotation_ownedDetails in BaseCS2AS_qvtp_qvtcas
 
 	where() {
 		annotationCS.pivot.oclAsType(pivot::Annotation).ownedDetails :=
-		annotationCS.ownedDetails.pivot.oclAsType(pivot::Detail);
+		annotationCS.ownedDetails.pivot.oclAsType(pivot::Detail)->asOrderedSet();
 	}
 }
 map uAnnotationCS_2_Annotation_ownedContents in BaseCS2AS_qvtp_qvtcas
@@ -332,7 +332,7 @@ map uAnnotationCS_2_Annotation_ownedContents in BaseCS2AS_qvtp_qvtcas
 
 	where() {
 		annotationCS.pivot.oclAsType(pivot::Annotation).ownedContents :=
-		annotationCS.ownedContents.pivot.oclAsType(pivot::Element);
+		annotationCS.ownedContents.pivot.oclAsType(pivot::Element)->asOrderedSet();
 	}
 }
 map uAnnotationCS_2_Annotation_ownedAnnotations in BaseCS2AS_qvtp_qvtcas
@@ -344,7 +344,7 @@ map uAnnotationCS_2_Annotation_ownedAnnotations in BaseCS2AS_qvtp_qvtcas
 
 	where() {
 		annotationCS.pivot.oclAsType(pivot::Annotation).ownedAnnotations :=
-		annotationCS.ownedAnnotations.pivot.oclAsType(pivot::Element);
+		annotationCS.ownedAnnotations.pivot.oclAsType(pivot::Element)->asOrderedSet();
 	}
 }
 map uAnnotationCS_2_Annotation_references in BaseCS2AS_qvtp_qvtcas
@@ -356,7 +356,7 @@ map uAnnotationCS_2_Annotation_references in BaseCS2AS_qvtp_qvtcas
 
 	where() {
 		annotationCS.pivot.oclAsType(pivot::Annotation).references :=
-		annotationCS.ownedReferences.pivot.oclAsType(pivot::Element);
+		annotationCS.ownedReferences.pivot.oclAsType(pivot::Element)->asOrderedSet();
 	}
 }
 map uAttributeCS_2_Property_name in BaseCS2AS_qvtp_qvtcas
@@ -467,7 +467,7 @@ map uAttributeCS_2_Property_ownedExpression in BaseCS2AS_qvtp_qvtcas
 
 	where() {
 		attributeCS.pivot.oclAsType(pivot::Property).ownedExpression :=
-		attributeCS.ownedDefaultExpressions.pivot.oclAsType(pivot::LanguageExpression);
+		attributeCS.ownedDefaultExpressions.pivot.oclAsType(pivot::LanguageExpression)->first();
 	}
 }
 map uAttributeCS_2_Property_ownedAnnotations in BaseCS2AS_qvtp_qvtcas
@@ -479,7 +479,7 @@ map uAttributeCS_2_Property_ownedAnnotations in BaseCS2AS_qvtp_qvtcas
 
 	where() {
 		attributeCS.pivot.oclAsType(pivot::Property).ownedAnnotations :=
-		attributeCS.ownedAnnotations.pivot.oclAsType(pivot::Element);
+		attributeCS.ownedAnnotations.pivot.oclAsType(pivot::Element)->asOrderedSet();
 	}
 }
 map uAttributeCS_2_Property_type in BaseCS2AS_qvtp_qvtcas
@@ -573,7 +573,7 @@ map uDataTypeCS_2_DataType_ownedAnnotations in BaseCS2AS_qvtp_qvtcas
 
 	where() {
 		dataTypeCS.pivot.oclAsType(pivot::DataType).ownedAnnotations :=
-		dataTypeCS.ownedAnnotations.pivot.oclAsType(pivot::Element);
+		dataTypeCS.ownedAnnotations.pivot.oclAsType(pivot::Element)->asOrderedSet();
 	}
 }
 map uDataTypeCS_2_DataType_ownedInvariants in BaseCS2AS_qvtp_qvtcas
@@ -585,7 +585,7 @@ map uDataTypeCS_2_DataType_ownedInvariants in BaseCS2AS_qvtp_qvtcas
 
 	where() {
 		dataTypeCS.pivot.oclAsType(pivot::DataType).ownedInvariants :=
-		dataTypeCS.ownedConstraints.pivot.oclAsType(pivot::Constraint);
+		dataTypeCS.ownedConstraints.pivot.oclAsType(pivot::Constraint)->asSet();
 	}
 }
 map uDataTypeCS_2_DataType_superClasses in BaseCS2AS_qvtp_qvtcas
@@ -596,7 +596,7 @@ map uDataTypeCS_2_DataType_superClasses in BaseCS2AS_qvtp_qvtcas
 	enforce rightAS() {}
 
 	where() {
-		dataTypeCS.pivot.oclAsType(pivot::DataType).superClasses := ocl::OclElement;
+		dataTypeCS.pivot.oclAsType(pivot::DataType).superClasses := Set{ocl::OclElement};
 	}
 }
 map uDetailCS_2_Detail_name in BaseCS2AS_qvtp_qvtcas
@@ -618,7 +618,7 @@ map uDetailCS_2_Detail_values in BaseCS2AS_qvtp_qvtcas
 	enforce rightAS() {}
 
 	where() {
-		detailCS.pivot.oclAsType(pivot::Detail).values := detailCS.values;
+		detailCS.pivot.oclAsType(pivot::Detail).values := detailCS.values->asSet();
 	}
 }
 map uEnumerationCS_2_Enumeration_name in BaseCS2AS_qvtp_qvtcas
@@ -663,7 +663,7 @@ map uEnumerationCS_2_Enumeration_ownedLiterals in BaseCS2AS_qvtp_qvtcas
 
 	where() {
 		enumerationCS.pivot.oclAsType(ocl::Enumeration).ownedLiterals :=
-		enumerationCS.ownedLiterals.pivot.oclAsType(ocl::EnumerationLiteral);
+		enumerationCS.ownedLiterals.pivot.oclAsType(ocl::EnumerationLiteral)->asOrderedSet();
 	}
 }
 map uEnumerationCS_2_Enumeration_ownedSignature in BaseCS2AS_qvtp_qvtcas
@@ -687,7 +687,7 @@ map uEnumerationCS_2_Enumeration_ownedAnnotations in BaseCS2AS_qvtp_qvtcas
 
 	where() {
 		enumerationCS.pivot.oclAsType(ocl::Enumeration).ownedAnnotations :=
-		enumerationCS.ownedAnnotations.pivot.oclAsType(pivot::Element);
+		enumerationCS.ownedAnnotations.pivot.oclAsType(pivot::Element)->asOrderedSet();
 	}
 }
 map uEnumerationCS_2_Enumeration_ownedInvariants in BaseCS2AS_qvtp_qvtcas
@@ -699,7 +699,7 @@ map uEnumerationCS_2_Enumeration_ownedInvariants in BaseCS2AS_qvtp_qvtcas
 
 	where() {
 		enumerationCS.pivot.oclAsType(ocl::Enumeration).ownedInvariants :=
-		enumerationCS.ownedConstraints.pivot.oclAsType(pivot::Constraint);
+		enumerationCS.ownedConstraints.pivot.oclAsType(pivot::Constraint)->asSet();
 	}
 }
 map uEnumerationCS_2_Enumeration_superClasses in BaseCS2AS_qvtp_qvtcas
@@ -710,7 +710,7 @@ map uEnumerationCS_2_Enumeration_superClasses in BaseCS2AS_qvtp_qvtcas
 	enforce rightAS() {}
 
 	where() {
-		enumerationCS.pivot.oclAsType(ocl::Enumeration).superClasses := ocl::OclElement;
+		enumerationCS.pivot.oclAsType(ocl::Enumeration).superClasses := Set{ocl::OclElement};
 	}
 }
 map uEnumerationLiteralCS_2_EnumerationLiteral_name in BaseCS2AS_qvtp_qvtcas
@@ -744,7 +744,7 @@ map uEnumerationLiteralCS_2_EnumerationLiteral_ownedAnnotations in BaseCS2AS_qvt
 
 	where() {
 		enumerationLiteralCS.pivot.oclAsType(ocl::EnumerationLiteral).ownedAnnotations :=
-		enumerationLiteralCS.ownedAnnotations.pivot.oclAsType(pivot::Element);
+		enumerationLiteralCS.ownedAnnotations.pivot.oclAsType(pivot::Element)->asOrderedSet();
 	}
 }
 map uImportCS_2_Import_name in BaseCS2AS_qvtp_qvtcas
@@ -859,7 +859,7 @@ map uOperationCS_2_Operation_ownedParameters in BaseCS2AS_qvtp_qvtcas
 
 	where() {
 		operationCS.pivot.oclAsType(pivot::Operation).ownedParameters :=
-		operationCS.ownedParameters.pivot.oclAsType(pivot::Parameter);
+		operationCS.ownedParameters.pivot.oclAsType(pivot::Parameter)->asOrderedSet();
 	}
 }
 map uOperationCS_2_Operation_raisedExceptions in BaseCS2AS_qvtp_qvtcas
@@ -871,7 +871,7 @@ map uOperationCS_2_Operation_raisedExceptions in BaseCS2AS_qvtp_qvtcas
 
 	where() {
 		operationCS.pivot.oclAsType(pivot::Operation).raisedExceptions :=
-		operationCS.ownedExceptions.pivot.oclAsType(pivot::Element);
+		operationCS.ownedExceptions.pivot.oclAsType(pivot::Element)->asSet();
 	}
 }
 map uOperationCS_2_Operation_ownedAnnotations in BaseCS2AS_qvtp_qvtcas
@@ -883,7 +883,7 @@ map uOperationCS_2_Operation_ownedAnnotations in BaseCS2AS_qvtp_qvtcas
 
 	where() {
 		operationCS.pivot.oclAsType(pivot::Operation).ownedAnnotations :=
-		operationCS.ownedAnnotations.pivot.oclAsType(pivot::Element);
+		operationCS.ownedAnnotations.pivot.oclAsType(pivot::Element)->asOrderedSet();
 	}
 }
 map uOperationCS_2_Operation_ownedPreconditions in BaseCS2AS_qvtp_qvtcas
@@ -895,7 +895,7 @@ map uOperationCS_2_Operation_ownedPreconditions in BaseCS2AS_qvtp_qvtcas
 
 	where() {
 		operationCS.pivot.oclAsType(pivot::Operation).ownedPreconditions :=
-		operationCS.ownedPreconditions.pivot.oclAsType(pivot::Constraint);
+		operationCS.ownedPreconditions.pivot.oclAsType(pivot::Constraint)->asSet();
 	}
 }
 map uOperationCS_2_Operation_ownedPostconditions in BaseCS2AS_qvtp_qvtcas
@@ -907,7 +907,7 @@ map uOperationCS_2_Operation_ownedPostconditions in BaseCS2AS_qvtp_qvtcas
 
 	where() {
 		operationCS.pivot.oclAsType(pivot::Operation).ownedPostconditions :=
-		operationCS.ownedPostconditions.pivot.oclAsType(pivot::Constraint);
+		operationCS.ownedPostconditions.pivot.oclAsType(pivot::Constraint)->asSet();
 	}
 }
 map uOperationCS_2_Operation_bodyExpression in BaseCS2AS_qvtp_qvtcas
@@ -919,7 +919,7 @@ map uOperationCS_2_Operation_bodyExpression in BaseCS2AS_qvtp_qvtcas
 
 	where() {
 		operationCS.pivot.oclAsType(pivot::Operation).bodyExpression :=
-		operationCS.ownedBodyExpressions.pivot.oclAsType(pivot::LanguageExpression);
+		operationCS.ownedBodyExpressions.pivot.oclAsType(pivot::LanguageExpression)->first();
 	}
 }
 map uOperationCS_2_Operation_type in BaseCS2AS_qvtp_qvtcas
@@ -988,7 +988,7 @@ map uPackageCS_2_Package_ownedPackages in BaseCS2AS_qvtp_qvtcas
 	enforce rightAS() {}
 
 	where() {
-		packageCS.pivot.oclAsType(pivot::Package).ownedPackages := packageCS.ownedPackages.pivot.oclAsType(pivot::Package);
+		packageCS.pivot.oclAsType(pivot::Package).ownedPackages := packageCS.ownedPackages.pivot.oclAsType(pivot::Package)->asSet();
 	}
 }
 map uPackageCS_2_Package_ownedAnnotations in BaseCS2AS_qvtp_qvtcas
@@ -1000,7 +1000,7 @@ map uPackageCS_2_Package_ownedAnnotations in BaseCS2AS_qvtp_qvtcas
 
 	where() {
 		packageCS.pivot.oclAsType(pivot::Package).ownedAnnotations :=
-		packageCS.ownedAnnotations.pivot.oclAsType(pivot::Element);
+		packageCS.ownedAnnotations.pivot.oclAsType(pivot::Element)->asOrderedSet();
 	}
 }
 map uPackageCS_2_Package_ownedClasses in BaseCS2AS_qvtp_qvtcas
@@ -1011,7 +1011,7 @@ map uPackageCS_2_Package_ownedClasses in BaseCS2AS_qvtp_qvtcas
 	enforce rightAS() {}
 
 	where() {
-		packageCS.pivot.oclAsType(pivot::Package).ownedClasses := packageCS.ownedClasses.pivot.oclAsType(ocl::Class);
+		packageCS.pivot.oclAsType(pivot::Package).ownedClasses := packageCS.ownedClasses.pivot.oclAsType(ocl::Class)->asSet();
 	}
 }
 map uParameterCS_2_Parameter_name in BaseCS2AS_qvtp_qvtcas
@@ -1034,7 +1034,7 @@ map uParameterCS_2_Parameter_ownedAnnotations in BaseCS2AS_qvtp_qvtcas
 
 	where() {
 		parameterCS.pivot.oclAsType(pivot::Parameter).ownedAnnotations :=
-		parameterCS.ownedAnnotations.pivot.oclAsType(pivot::Element);
+		parameterCS.ownedAnnotations.pivot.oclAsType(pivot::Element)->asOrderedSet();
 	}
 }
 map uParameterCS_2_Parameter_type in BaseCS2AS_qvtp_qvtcas
@@ -1167,7 +1167,7 @@ map uReferenceCS_2_Property_0_keys in BaseCS2AS_qvtp_qvtcas
 	enforce rightAS() {}
 
 	where() {
-		referenceCS.pivot.oclAsType(pivot::Property).keys := referenceCS.referredKeys;
+		referenceCS.pivot.oclAsType(pivot::Property).keys := referenceCS.referredKeys->asSet();
 	}
 }
 map uReferenceCS_2_Property_0_defaultValueString in BaseCS2AS_qvtp_qvtcas
@@ -1190,7 +1190,7 @@ map uReferenceCS_2_Property_0_ownedExpression in BaseCS2AS_qvtp_qvtcas
 
 	where() {
 		referenceCS.pivot.oclAsType(pivot::Property).ownedExpression := if referenceCS.ownedDefaultExpressions->notEmpty()
-		then referenceCS.ownedDefaultExpressions.pivot.oclAsType(pivot::LanguageExpression) else null
+		then referenceCS.ownedDefaultExpressions.pivot.oclAsType(pivot::LanguageExpression)->first() else null
 		endif;
 	}
 }
@@ -1203,7 +1203,7 @@ map uReferenceCS_2_Property_0_ownedAnnotations in BaseCS2AS_qvtp_qvtcas
 
 	where() {
 		referenceCS.pivot.oclAsType(pivot::Property).ownedAnnotations :=
-		referenceCS.ownedAnnotations.pivot.oclAsType(pivot::Element);
+		referenceCS.ownedAnnotations.pivot.oclAsType(pivot::Element)->asOrderedSet();
 	}
 }
 map uReferenceCS_2_Property_0_type in BaseCS2AS_qvtp_qvtcas
@@ -1254,7 +1254,7 @@ map uRootPackageCS_2_Model_ownedImports in BaseCS2AS_qvtp_qvtcas
 
 	where() {
 		rootPackageCS.pivot.oclAsType(pivot::Model).ownedImports :=
-		rootPackageCS.ownedImports.pivot.oclAsType(pivot::Import);
+		rootPackageCS.ownedImports.pivot.oclAsType(pivot::Import)->asOrderedSet();
 	}
 }
 map uRootPackageCS_2_Model_ownedPackages in BaseCS2AS_qvtp_qvtcas
@@ -1266,7 +1266,7 @@ map uRootPackageCS_2_Model_ownedPackages in BaseCS2AS_qvtp_qvtcas
 
 	where() {
 		rootPackageCS.pivot.oclAsType(pivot::Model).ownedPackages :=
-		rootPackageCS.ownedPackages.pivot.oclAsType(pivot::Package);
+		rootPackageCS.ownedPackages.pivot.oclAsType(pivot::Package)->asSet();
 	}
 }
 map uSpecificationCS_2_LanguageExpression_language in BaseCS2AS_qvtp_qvtcas
@@ -1288,7 +1288,7 @@ map uSpecificationCS_2_LanguageExpression_body in BaseCS2AS_qvtp_qvtcas
 	enforce rightAS() {}
 
 	where() {
-		specificationCS.pivot.oclAsType(pivot::LanguageExpression)._'body' := Sequence(String){specificationCS.exprString};
+		specificationCS.pivot.oclAsType(pivot::LanguageExpression)._'body' := specificationCS.exprString;
 	}
 }
 map uStructuredClassCS_2_Class_name in BaseCS2AS_qvtp_qvtcas
@@ -1356,7 +1356,7 @@ map uStructuredClassCS_2_Class_ownedAnnotations in BaseCS2AS_qvtp_qvtcas
 
 	where() {
 		structuredClassCS.pivot.oclAsType(ocl::Class).ownedAnnotations :=
-		structuredClassCS.ownedAnnotations.pivot.oclAsType(pivot::Element);
+		structuredClassCS.ownedAnnotations.pivot.oclAsType(pivot::Element)->asOrderedSet();
 	}
 }
 map uStructuredClassCS_2_Class_ownedOperations in BaseCS2AS_qvtp_qvtcas
@@ -1368,7 +1368,7 @@ map uStructuredClassCS_2_Class_ownedOperations in BaseCS2AS_qvtp_qvtcas
 
 	where() {
 		structuredClassCS.pivot.oclAsType(ocl::Class).ownedOperations :=
-		structuredClassCS.ownedOperations.pivot.oclAsType(pivot::Operation);
+		structuredClassCS.ownedOperations.pivot.oclAsType(pivot::Operation)->asOrderedSet();
 	}
 }
 map uStructuredClassCS_2_Class_ownedProperties in BaseCS2AS_qvtp_qvtcas
@@ -1380,7 +1380,7 @@ map uStructuredClassCS_2_Class_ownedProperties in BaseCS2AS_qvtp_qvtcas
 
 	where() {
 		structuredClassCS.pivot.oclAsType(ocl::Class).ownedProperties :=
-		structuredClassCS.ownedProperties.pivot.oclAsType(pivot::Element);
+		structuredClassCS.ownedProperties.pivot.oclAsType(pivot::Element)->asOrderedSet();
 	}
 }
 map uStructuredClassCS_2_Class_ownedInvariants in BaseCS2AS_qvtp_qvtcas
@@ -1392,7 +1392,7 @@ map uStructuredClassCS_2_Class_ownedInvariants in BaseCS2AS_qvtp_qvtcas
 
 	where() {
 		structuredClassCS.pivot.oclAsType(ocl::Class).ownedInvariants :=
-		structuredClassCS.ownedConstraints.pivot.oclAsType(pivot::Constraint);
+		structuredClassCS.ownedConstraints.pivot.oclAsType(pivot::Constraint)->asSet();
 	}
 }
 map uStructuredClassCS_2_Class_superClasses in BaseCS2AS_qvtp_qvtcas
@@ -1404,8 +1404,8 @@ map uStructuredClassCS_2_Class_superClasses in BaseCS2AS_qvtp_qvtcas
 
 	where() {
 		structuredClassCS.pivot.oclAsType(ocl::Class).superClasses := if structuredClassCS.ownedSuperTypes = null then
-		ocl::OclElement
-		else structuredClassCS.ownedSuperTypes.pivot.oclAsType(pivot::Element) endif;
+		Set{ocl::OclElement}
+		else structuredClassCS.ownedSuperTypes.pivot.oclAsType(pivot::Element)->asSet() endif;
 	}
 }
 map uTemplateBindingCS_2_TemplateBinding_ownedSubstitutions in BaseCS2AS_qvtp_qvtcas
@@ -1417,7 +1417,7 @@ map uTemplateBindingCS_2_TemplateBinding_ownedSubstitutions in BaseCS2AS_qvtp_qv
 
 	where() {
 		templateBindingCS.pivot.oclAsType(pivot::TemplateBinding).ownedSubstitutions :=
-		templateBindingCS.ownedSubstitutions.pivot.oclAsType(pivot::TemplateParameterSubstitution);
+		templateBindingCS.ownedSubstitutions.pivot.oclAsType(pivot::TemplateParameterSubstitution)->asSet();
 	}
 }
 map uTemplateBindingCS_2_TemplateBinding_templateSignature in BaseCS2AS_qvtp_qvtcas
@@ -1468,7 +1468,7 @@ enforce rightAS() {}
 
 where() {
 	templateSignatureCS.pivot.oclAsType(pivot::TemplateSignature).ownedParameters :=
-	templateSignatureCS.ownedParameters.pivot.oclAsType(pivot::Element);
+	templateSignatureCS.ownedParameters.pivot.oclAsType(pivot::Element)->asOrderedSet();
 }
 }
 map uTuplePartCS_2_Property_name in BaseCS2AS_qvtp_qvtcas
@@ -1513,7 +1513,7 @@ enforce rightAS() {}
 
 where() {
 	tupleTypeCS.pivot.oclAsType(pivot::TupleType).ownedProperties :=
-	tupleTypeCS.ownedParts.pivot.oclAsType(pivot::Property);
+	tupleTypeCS.ownedParts.pivot.oclAsType(pivot::Property)->asOrderedSet();
 }
 }
 map uTypeParameterCS_2_TemplateParameter_constrainingClasses in BaseCS2AS_qvtp_qvtcas

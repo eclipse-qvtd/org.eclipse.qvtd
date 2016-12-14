@@ -549,13 +549,22 @@ public interface QVTcorePackage extends EPackage {
 	int BOTTOM_PATTERN___GET_AREA = CORE_PATTERN___GET_AREA;
 
 	/**
+	 * The operation id for the '<em>Validate Variables Are Bottom Variables</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOTTOM_PATTERN___VALIDATE_VARIABLES_ARE_BOTTOM_VARIABLES__DIAGNOSTICCHAIN_MAP = CORE_PATTERN_OPERATION_COUNT + 0;
+
+	/**
 	 * The number of operations of the '<em>Bottom Pattern</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BOTTOM_PATTERN_OPERATION_COUNT = CORE_PATTERN_OPERATION_COUNT + 0;
+	int BOTTOM_PATTERN_OPERATION_COUNT = CORE_PATTERN_OPERATION_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtcore.impl.BottomVariableImpl <em>Bottom Variable</em>}' class.
@@ -1283,13 +1292,22 @@ public interface QVTcorePackage extends EPackage {
 	int GUARD_PATTERN___GET_AREA = CORE_PATTERN___GET_AREA;
 
 	/**
+	 * The operation id for the '<em>Validate Variables Are Guard Variables</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GUARD_PATTERN___VALIDATE_VARIABLES_ARE_GUARD_VARIABLES__DIAGNOSTICCHAIN_MAP = CORE_PATTERN_OPERATION_COUNT + 0;
+
+	/**
 	 * The number of operations of the '<em>Guard Pattern</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int GUARD_PATTERN_OPERATION_COUNT = CORE_PATTERN_OPERATION_COUNT + 0;
+	int GUARD_PATTERN_OPERATION_COUNT = CORE_PATTERN_OPERATION_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtcore.impl.GuardVariableImpl <em>Guard Variable</em>}' class.
@@ -1699,13 +1717,40 @@ public interface QVTcorePackage extends EPackage {
 	int MAPPING___VALIDATE_OVERRIDES_RULE_OVERRIDES_ALL_DOMAINS__DIAGNOSTICCHAIN_MAP = QVTbasePackage.RULE___VALIDATE_OVERRIDES_RULE_OVERRIDES_ALL_DOMAINS__DIAGNOSTICCHAIN_MAP;
 
 	/**
+	 * The operation id for the '<em>Validate Domains Are Core Domains</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING___VALIDATE_DOMAINS_ARE_CORE_DOMAINS__DIAGNOSTICCHAIN_MAP = QVTbasePackage.RULE_OPERATION_COUNT + 0;
+
+	/**
+	 * The operation id for the '<em>Validate Nested Name Is Null</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING___VALIDATE_NESTED_NAME_IS_NULL__DIAGNOSTICCHAIN_MAP = QVTbasePackage.RULE_OPERATION_COUNT + 1;
+
+	/**
+	 * The operation id for the '<em>Validate Root Name Is Not Null</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING___VALIDATE_ROOT_NAME_IS_NOT_NULL__DIAGNOSTICCHAIN_MAP = QVTbasePackage.RULE_OPERATION_COUNT + 2;
+
+	/**
 	 * The number of operations of the '<em>Mapping</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_OPERATION_COUNT = QVTbasePackage.RULE_OPERATION_COUNT + 0;
+	int MAPPING_OPERATION_COUNT = QVTbasePackage.RULE_OPERATION_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtcore.impl.NavigationAssignmentImpl <em>Navigation Assignment</em>}' class.
@@ -1953,13 +1998,22 @@ public interface QVTcorePackage extends EPackage {
 	int OPPOSITE_PROPERTY_ASSIGNMENT___GET_REFERRED_TARGET_PROPERTY = NAVIGATION_ASSIGNMENT_OPERATION_COUNT + 0;
 
 	/**
+	 * The operation id for the '<em>Validate Compatible Type For Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPPOSITE_PROPERTY_ASSIGNMENT___VALIDATE_COMPATIBLE_TYPE_FOR_VALUE__DIAGNOSTICCHAIN_MAP = NAVIGATION_ASSIGNMENT_OPERATION_COUNT + 1;
+
+	/**
 	 * The operation id for the '<em>Validate Opposite Property Is Implicit</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OPPOSITE_PROPERTY_ASSIGNMENT___VALIDATE_OPPOSITE_PROPERTY_IS_IMPLICIT__DIAGNOSTICCHAIN_MAP = NAVIGATION_ASSIGNMENT_OPERATION_COUNT + 1;
+	int OPPOSITE_PROPERTY_ASSIGNMENT___VALIDATE_OPPOSITE_PROPERTY_IS_IMPLICIT__DIAGNOSTICCHAIN_MAP = NAVIGATION_ASSIGNMENT_OPERATION_COUNT + 2;
 
 	/**
 	 * The operation id for the '<em>Validate Target Propety Is Slot Property</em>' operation.
@@ -1968,7 +2022,7 @@ public interface QVTcorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OPPOSITE_PROPERTY_ASSIGNMENT___VALIDATE_TARGET_PROPETY_IS_SLOT_PROPERTY__DIAGNOSTICCHAIN_MAP = NAVIGATION_ASSIGNMENT_OPERATION_COUNT + 2;
+	int OPPOSITE_PROPERTY_ASSIGNMENT___VALIDATE_TARGET_PROPETY_IS_SLOT_PROPERTY__DIAGNOSTICCHAIN_MAP = NAVIGATION_ASSIGNMENT_OPERATION_COUNT + 3;
 
 	/**
 	 * The number of operations of the '<em>Opposite Property Assignment</em>' class.
@@ -1977,7 +2031,7 @@ public interface QVTcorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OPPOSITE_PROPERTY_ASSIGNMENT_OPERATION_COUNT = NAVIGATION_ASSIGNMENT_OPERATION_COUNT + 3;
+	int OPPOSITE_PROPERTY_ASSIGNMENT_OPERATION_COUNT = NAVIGATION_ASSIGNMENT_OPERATION_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtcore.impl.PropertyAssignmentImpl <em>Property Assignment</em>}' class.
@@ -2107,13 +2161,22 @@ public interface QVTcorePackage extends EPackage {
 	int PROPERTY_ASSIGNMENT___GET_REFERRED_TARGET_PROPERTY = NAVIGATION_ASSIGNMENT_OPERATION_COUNT + 0;
 
 	/**
+	 * The operation id for the '<em>Validate Compatible Type For Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_ASSIGNMENT___VALIDATE_COMPATIBLE_TYPE_FOR_VALUE__DIAGNOSTICCHAIN_MAP = NAVIGATION_ASSIGNMENT_OPERATION_COUNT + 1;
+
+	/**
 	 * The operation id for the '<em>Validate Property Is Not Implicit</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_ASSIGNMENT___VALIDATE_PROPERTY_IS_NOT_IMPLICIT__DIAGNOSTICCHAIN_MAP = NAVIGATION_ASSIGNMENT_OPERATION_COUNT + 1;
+	int PROPERTY_ASSIGNMENT___VALIDATE_PROPERTY_IS_NOT_IMPLICIT__DIAGNOSTICCHAIN_MAP = NAVIGATION_ASSIGNMENT_OPERATION_COUNT + 2;
 
 	/**
 	 * The operation id for the '<em>Validate Target Propety Is Slot Property</em>' operation.
@@ -2122,7 +2185,7 @@ public interface QVTcorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_ASSIGNMENT___VALIDATE_TARGET_PROPETY_IS_SLOT_PROPERTY__DIAGNOSTICCHAIN_MAP = NAVIGATION_ASSIGNMENT_OPERATION_COUNT + 2;
+	int PROPERTY_ASSIGNMENT___VALIDATE_TARGET_PROPETY_IS_SLOT_PROPERTY__DIAGNOSTICCHAIN_MAP = NAVIGATION_ASSIGNMENT_OPERATION_COUNT + 3;
 
 	/**
 	 * The number of operations of the '<em>Property Assignment</em>' class.
@@ -2131,7 +2194,7 @@ public interface QVTcorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_ASSIGNMENT_OPERATION_COUNT = NAVIGATION_ASSIGNMENT_OPERATION_COUNT + 3;
+	int PROPERTY_ASSIGNMENT_OPERATION_COUNT = NAVIGATION_ASSIGNMENT_OPERATION_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtcore.impl.RealizedVariableImpl <em>Realized Variable</em>}' class.
@@ -2442,13 +2505,22 @@ public interface QVTcorePackage extends EPackage {
 	int VARIABLE_ASSIGNMENT___GET_VALUE__TYPE_STRING = ASSIGNMENT___GET_VALUE__TYPE_STRING;
 
 	/**
+	 * The operation id for the '<em>Validate Compatible Type For Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_ASSIGNMENT___VALIDATE_COMPATIBLE_TYPE_FOR_VALUE__DIAGNOSTICCHAIN_MAP = ASSIGNMENT_OPERATION_COUNT + 0;
+
+	/**
 	 * The number of operations of the '<em>Variable Assignment</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABLE_ASSIGNMENT_OPERATION_COUNT = ASSIGNMENT_OPERATION_COUNT + 0;
+	int VARIABLE_ASSIGNMENT_OPERATION_COUNT = ASSIGNMENT_OPERATION_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtcore.EnforcementMode <em>Enforcement Mode</em>}' enum.
@@ -2590,6 +2662,16 @@ public interface QVTcorePackage extends EPackage {
 	EReference getBottomPattern_RealizedVariable();
 
 	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtcore.BottomPattern#validateVariablesAreBottomVariables(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Variables Are Bottom Variables</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Variables Are Bottom Variables</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvtcore.BottomPattern#validateVariablesAreBottomVariables(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getBottomPattern__ValidateVariablesAreBottomVariables__DiagnosticChain_Map();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtcore.BottomVariable <em>Bottom Variable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2715,6 +2797,16 @@ public interface QVTcorePackage extends EPackage {
 	EReference getGuardPattern_Area();
 
 	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtcore.GuardPattern#validateVariablesAreGuardVariables(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Variables Are Guard Variables</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Variables Are Guard Variables</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvtcore.GuardPattern#validateVariablesAreGuardVariables(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getGuardPattern__ValidateVariablesAreGuardVariables__DiagnosticChain_Map();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtcore.GuardVariable <em>Guard Variable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2755,6 +2847,36 @@ public interface QVTcorePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getMapping_Specification();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtcore.Mapping#validateDomainsAreCoreDomains(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Domains Are Core Domains</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Domains Are Core Domains</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvtcore.Mapping#validateDomainsAreCoreDomains(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getMapping__ValidateDomainsAreCoreDomains__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtcore.Mapping#validateNestedNameIsNull(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Nested Name Is Null</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Nested Name Is Null</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvtcore.Mapping#validateNestedNameIsNull(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getMapping__ValidateNestedNameIsNull__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtcore.Mapping#validateRootNameIsNotNull(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Root Name Is Not Null</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Root Name Is Not Null</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvtcore.Mapping#validateRootNameIsNotNull(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getMapping__ValidateRootNameIsNotNull__DiagnosticChain_Map();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtcore.NavigationAssignment <em>Navigation Assignment</em>}'.
@@ -2809,6 +2931,16 @@ public interface QVTcorePackage extends EPackage {
 	EOperation getOppositePropertyAssignment__GetReferredTargetProperty();
 
 	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtcore.OppositePropertyAssignment#validateCompatibleTypeForValue(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Compatible Type For Value</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Compatible Type For Value</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvtcore.OppositePropertyAssignment#validateCompatibleTypeForValue(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getOppositePropertyAssignment__ValidateCompatibleTypeForValue__DiagnosticChain_Map();
+
+	/**
 	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtcore.OppositePropertyAssignment#validateOppositePropertyIsImplicit(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Opposite Property Is Implicit</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2860,6 +2992,16 @@ public interface QVTcorePackage extends EPackage {
 	EOperation getPropertyAssignment__GetReferredTargetProperty();
 
 	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtcore.PropertyAssignment#validateCompatibleTypeForValue(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Compatible Type For Value</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Compatible Type For Value</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvtcore.PropertyAssignment#validateCompatibleTypeForValue(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getPropertyAssignment__ValidateCompatibleTypeForValue__DiagnosticChain_Map();
+
+	/**
 	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtcore.PropertyAssignment#validatePropertyIsNotImplicit(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Property Is Not Implicit</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2909,6 +3051,16 @@ public interface QVTcorePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getVariableAssignment_TargetVariable();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtcore.VariableAssignment#validateCompatibleTypeForValue(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Compatible Type For Value</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Compatible Type For Value</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvtcore.VariableAssignment#validateCompatibleTypeForValue(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getVariableAssignment__ValidateCompatibleTypeForValue__DiagnosticChain_Map();
 
 	/**
 	 * Returns the meta object for enum '{@link org.eclipse.qvtd.pivot.qvtcore.EnforcementMode <em>Enforcement Mode</em>}'.
@@ -3067,6 +3219,14 @@ public interface QVTcorePackage extends EPackage {
 		EReference BOTTOM_PATTERN__REALIZED_VARIABLE = eINSTANCE.getBottomPattern_RealizedVariable();
 
 		/**
+		 * The meta object literal for the '<em><b>Validate Variables Are Bottom Variables</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation BOTTOM_PATTERN___VALIDATE_VARIABLES_ARE_BOTTOM_VARIABLES__DIAGNOSTICCHAIN_MAP = eINSTANCE.getBottomPattern__ValidateVariablesAreBottomVariables__DiagnosticChain_Map();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtcore.impl.BottomVariableImpl <em>Bottom Variable</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3175,6 +3335,14 @@ public interface QVTcorePackage extends EPackage {
 		EReference GUARD_PATTERN__AREA = eINSTANCE.getGuardPattern_Area();
 
 		/**
+		 * The meta object literal for the '<em><b>Validate Variables Are Guard Variables</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation GUARD_PATTERN___VALIDATE_VARIABLES_ARE_GUARD_VARIABLES__DIAGNOSTICCHAIN_MAP = eINSTANCE.getGuardPattern__ValidateVariablesAreGuardVariables__DiagnosticChain_Map();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtcore.impl.GuardVariableImpl <em>Guard Variable</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3209,6 +3377,30 @@ public interface QVTcorePackage extends EPackage {
 		 * @generated
 		 */
 		EReference MAPPING__SPECIFICATION = eINSTANCE.getMapping_Specification();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Domains Are Core Domains</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation MAPPING___VALIDATE_DOMAINS_ARE_CORE_DOMAINS__DIAGNOSTICCHAIN_MAP = eINSTANCE.getMapping__ValidateDomainsAreCoreDomains__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Nested Name Is Null</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation MAPPING___VALIDATE_NESTED_NAME_IS_NULL__DIAGNOSTICCHAIN_MAP = eINSTANCE.getMapping__ValidateNestedNameIsNull__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Root Name Is Not Null</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation MAPPING___VALIDATE_ROOT_NAME_IS_NOT_NULL__DIAGNOSTICCHAIN_MAP = eINSTANCE.getMapping__ValidateRootNameIsNotNull__DiagnosticChain_Map();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtcore.impl.NavigationAssignmentImpl <em>Navigation Assignment</em>}' class.
@@ -3255,6 +3447,14 @@ public interface QVTcorePackage extends EPackage {
 		EOperation OPPOSITE_PROPERTY_ASSIGNMENT___GET_REFERRED_TARGET_PROPERTY = eINSTANCE.getOppositePropertyAssignment__GetReferredTargetProperty();
 
 		/**
+		 * The meta object literal for the '<em><b>Validate Compatible Type For Value</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation OPPOSITE_PROPERTY_ASSIGNMENT___VALIDATE_COMPATIBLE_TYPE_FOR_VALUE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getOppositePropertyAssignment__ValidateCompatibleTypeForValue__DiagnosticChain_Map();
+
+		/**
 		 * The meta object literal for the '<em><b>Validate Opposite Property Is Implicit</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3295,6 +3495,14 @@ public interface QVTcorePackage extends EPackage {
 		 * @generated
 		 */
 		EOperation PROPERTY_ASSIGNMENT___GET_REFERRED_TARGET_PROPERTY = eINSTANCE.getPropertyAssignment__GetReferredTargetProperty();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Compatible Type For Value</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation PROPERTY_ASSIGNMENT___VALIDATE_COMPATIBLE_TYPE_FOR_VALUE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getPropertyAssignment__ValidateCompatibleTypeForValue__DiagnosticChain_Map();
 
 		/**
 		 * The meta object literal for the '<em><b>Validate Property Is Not Implicit</b></em>' operation.
@@ -3339,6 +3547,14 @@ public interface QVTcorePackage extends EPackage {
 		 * @generated
 		 */
 		EReference VARIABLE_ASSIGNMENT__TARGET_VARIABLE = eINSTANCE.getVariableAssignment_TargetVariable();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Compatible Type For Value</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation VARIABLE_ASSIGNMENT___VALIDATE_COMPATIBLE_TYPE_FOR_VALUE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getVariableAssignment__ValidateCompatibleTypeForValue__DiagnosticChain_Map();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtcore.EnforcementMode <em>Enforcement Mode</em>}' enum.

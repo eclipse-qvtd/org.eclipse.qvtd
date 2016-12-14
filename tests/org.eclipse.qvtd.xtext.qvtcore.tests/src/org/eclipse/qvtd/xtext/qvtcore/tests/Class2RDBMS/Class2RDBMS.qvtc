@@ -161,7 +161,7 @@ map classToTable in umlRdbms {
             pk.kind := 'primary';
             pc.owner := t;
             pc.key->includes(pk);
-            default pc.key := Set(Key){pk};
+            default pc.key := OrderedSet(Key){pk};
             default pc.type := 'NUMBER';
         }
         where () {
@@ -210,7 +210,7 @@ map associationToForeignKey in umlRdbms refines flattening {
         fc.owner := st;
         fk.refersTo := rk;
         fc.foreignKeys->includes(fk);
-        default fc.foreignKeys := Set(ForeignKey){fk};
+        default fc.foreignKeys := OrderedSet(ForeignKey){fk};
     }
     where (p2s:PackageToSchema, sc2t:ClassToTable, dc2t:ClassToTable |
             sc2t.owner = p2s;

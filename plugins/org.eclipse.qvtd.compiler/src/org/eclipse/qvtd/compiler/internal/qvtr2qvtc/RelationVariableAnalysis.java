@@ -29,6 +29,7 @@ import org.eclipse.qvtd.pivot.qvtcore.Assignment;
 import org.eclipse.qvtd.pivot.qvtcore.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcore.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcore.CorePattern;
+import org.eclipse.qvtd.pivot.qvtcore.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtcore.NavigationAssignment;
 import org.eclipse.qvtd.pivot.qvtcore.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtcore.VariableAssignment;
@@ -299,7 +300,12 @@ public class RelationVariableAnalysis extends AbstractVariableAnalysis
 				cPattern.getVariable().add(cVariable2);
 			}
 			else if (!isRealized) {
-				cVariable2 = variablesAnalysis.createBottomVariable(name, type, rVariable.isIsRequired(), null);
+				if (cPattern instanceof GuardPattern) {
+					cVariable2 = variablesAnalysis.createGuardVariable(name, type, rVariable.isIsRequired(), null);
+				}
+				else {
+					cVariable2 = variablesAnalysis.createBottomVariable(name, type, rVariable.isIsRequired(), null);
+				}
 				cPattern.getVariable().add(cVariable2);
 			}
 			else  {

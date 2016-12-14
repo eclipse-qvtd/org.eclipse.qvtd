@@ -34,6 +34,10 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcore.ecore#F-qvtcore-BottomPattern-assignment"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcore.ecore#F-qvtcore-BottomPattern-enforcementOperation"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcore.ecore#F-qvtcore-BottomPattern-realizedVariable"/>
+      <genOperations ecoreOperation="QVTcore.ecore#//BottomPattern/validateVariablesAreBottomVariables">
+        <genParameters ecoreParameter="QVTcore.ecore#//BottomPattern/validateVariablesAreBottomVariables/diagnostics"/>
+        <genParameters ecoreParameter="QVTcore.ecore#//BottomPattern/validateVariablesAreBottomVariables/context"/>
+      </genOperations>
     </genClasses>
     <genClasses ecoreClass="QVTcore.ecore#T-qvtcore-BottomVariable"/>
     <genClasses ecoreClass="QVTcore.ecore#T-qvtcore-CoreDomain"/>
@@ -49,6 +53,10 @@
     </genClasses>
     <genClasses ecoreClass="QVTcore.ecore#T-qvtcore-GuardPattern">
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference QVTcore.ecore#F-qvtcore-GuardPattern-area"/>
+      <genOperations ecoreOperation="QVTcore.ecore#//GuardPattern/validateVariablesAreGuardVariables">
+        <genParameters ecoreParameter="QVTcore.ecore#//GuardPattern/validateVariablesAreGuardVariables/diagnostics"/>
+        <genParameters ecoreParameter="QVTcore.ecore#//GuardPattern/validateVariablesAreGuardVariables/context"/>
+      </genOperations>
     </genClasses>
     <genClasses ecoreClass="QVTcore.ecore#T-qvtcore-GuardVariable"/>
     <genClasses ecoreClass="QVTcore.ecore#T-qvtcore-Mapping">
@@ -56,6 +64,18 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcore.ecore#F-qvtcore-Mapping-local"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTcore.ecore#F-qvtcore-Mapping-refinement"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTcore.ecore#F-qvtcore-Mapping-specification"/>
+      <genOperations ecoreOperation="QVTcore.ecore#//Mapping/validateDomainsAreCoreDomains">
+        <genParameters ecoreParameter="QVTcore.ecore#//Mapping/validateDomainsAreCoreDomains/diagnostics"/>
+        <genParameters ecoreParameter="QVTcore.ecore#//Mapping/validateDomainsAreCoreDomains/context"/>
+      </genOperations>
+      <genOperations ecoreOperation="QVTcore.ecore#//Mapping/validateNestedNameIsNull">
+        <genParameters ecoreParameter="QVTcore.ecore#//Mapping/validateNestedNameIsNull/diagnostics"/>
+        <genParameters ecoreParameter="QVTcore.ecore#//Mapping/validateNestedNameIsNull/context"/>
+      </genOperations>
+      <genOperations ecoreOperation="QVTcore.ecore#//Mapping/validateRootNameIsNotNull">
+        <genParameters ecoreParameter="QVTcore.ecore#//Mapping/validateRootNameIsNotNull/diagnostics"/>
+        <genParameters ecoreParameter="QVTcore.ecore#//Mapping/validateRootNameIsNotNull/context"/>
+      </genOperations>
     </genClasses>
     <genClasses image="false" ecoreClass="QVTcore.ecore#T-qvtcore-NavigationAssignment">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcore.ecore#F-qvtcore-NavigationAssignment-slotExpression"/>
@@ -63,6 +83,10 @@
     <genClasses ecoreClass="QVTcore.ecore#T-qvtcore-OppositePropertyAssignment">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTcore.ecore#F-qvtcore-OppositePropertyAssignment-targetProperty"/>
       <genOperations ecoreOperation="QVTcore.ecore#//OppositePropertyAssignment/getReferredTargetProperty"/>
+      <genOperations ecoreOperation="QVTcore.ecore#//OppositePropertyAssignment/validateCompatibleTypeForValue">
+        <genParameters ecoreParameter="QVTcore.ecore#//OppositePropertyAssignment/validateCompatibleTypeForValue/diagnostics"/>
+        <genParameters ecoreParameter="QVTcore.ecore#//OppositePropertyAssignment/validateCompatibleTypeForValue/context"/>
+      </genOperations>
       <genOperations ecoreOperation="QVTcore.ecore#//OppositePropertyAssignment/validateOppositePropertyIsImplicit">
         <genParameters ecoreParameter="QVTcore.ecore#//OppositePropertyAssignment/validateOppositePropertyIsImplicit/diagnostics"/>
         <genParameters ecoreParameter="QVTcore.ecore#//OppositePropertyAssignment/validateOppositePropertyIsImplicit/context"/>
@@ -75,6 +99,10 @@
     <genClasses ecoreClass="QVTcore.ecore#T-qvtcore-PropertyAssignment">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTcore.ecore#F-qvtcore-PropertyAssignment-targetProperty"/>
       <genOperations ecoreOperation="QVTcore.ecore#//PropertyAssignment/getReferredTargetProperty"/>
+      <genOperations ecoreOperation="QVTcore.ecore#//PropertyAssignment/validateCompatibleTypeForValue">
+        <genParameters ecoreParameter="QVTcore.ecore#//PropertyAssignment/validateCompatibleTypeForValue/diagnostics"/>
+        <genParameters ecoreParameter="QVTcore.ecore#//PropertyAssignment/validateCompatibleTypeForValue/context"/>
+      </genOperations>
       <genOperations ecoreOperation="QVTcore.ecore#//PropertyAssignment/validatePropertyIsNotImplicit">
         <genParameters ecoreParameter="QVTcore.ecore#//PropertyAssignment/validatePropertyIsNotImplicit/diagnostics"/>
         <genParameters ecoreParameter="QVTcore.ecore#//PropertyAssignment/validatePropertyIsNotImplicit/context"/>
@@ -87,6 +115,10 @@
     <genClasses ecoreClass="QVTcore.ecore#T-qvtcore-RealizedVariable"/>
     <genClasses ecoreClass="QVTcore.ecore#T-qvtcore-VariableAssignment">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTcore.ecore#F-qvtcore-VariableAssignment-targetVariable"/>
+      <genOperations ecoreOperation="QVTcore.ecore#//VariableAssignment/validateCompatibleTypeForValue">
+        <genParameters ecoreParameter="QVTcore.ecore#//VariableAssignment/validateCompatibleTypeForValue/diagnostics"/>
+        <genParameters ecoreParameter="QVTcore.ecore#//VariableAssignment/validateCompatibleTypeForValue/context"/>
+      </genOperations>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>
