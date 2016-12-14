@@ -15,22 +15,21 @@ import pivotocl     :   'platform:/resource/org.eclipse.ocl.pivot/model/Pivot.ec
 import qvtbase      :   'platform:/resource/org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore'::qvtbase;               -- HHR Use Pivot metamodels
 import qvttemplate  :   'platform:/resource/org.eclipse.qvtd.pivot.qvttemplate/model/QVTtemplate.ecore'::qvttemplate;   -- HHR Use Pivot metamodels
 import qvtrelation  :   'platform:/resource/org.eclipse.qvtd.pivot.qvtrelation/model/QVTrelation.ecore'::qvtrelation;   -- HHR Use Pivot metamodels
-import qvtcorebase  :   'platform:/resource/org.eclipse.qvtd.pivot.qvtcorebase/model/QVTcoreBase.ecore'::qvtcorebase;   -- HHR Use Pivot metamodels
 import qvtcore      :   'platform:/resource/org.eclipse.qvtd.pivot.qvtcore/model/QVTcore.ecore'::qvtcore;               -- HHR Use Pivot metamodels
 
 
 
-transformation relToCore(relations:{qvtrelation,qvttemplate,qvtbase,pivotocl}, core:{qvtcore,qvtcorebase,qvtbase,pivotocl}) -- HHR Use Pivot metamodels
+transformation relToCore(relations:{qvtrelation,qvttemplate,qvtbase,pivotocl}, core:{qvtcore,qvtbase,pivotocl}) -- HHR Use Pivot metamodels
 {
     
     key qvtcore::Mapping{name, transformation};
-    key qvtcorebase::GuardPattern{area};        -- HHR Use Pivot metamodels
-    key qvtcorebase::BottomPattern{area};       -- HHR Use Pivot metamodels
+    key qvtcore::GuardPattern{area};        -- HHR Use Pivot metamodels
+    key qvtcore::BottomPattern{area};       -- HHR Use Pivot metamodels
     key pivotocl::Variable{name, type};         -- HHR Use Pivot metamodels
     key pivotocl::Type{name};                   -- HHR Use Pivot metamodels
     key pivotocl::Class{name};                  -- HHR Use Pivot metamodels
     key pivotocl::Property{name, owningClass};  -- HHR Use Pivot metamodels
-    key qvtcorebase::CoreDomain{name, rule};    -- HHR Use Pivot metamodels
+    key qvtcore::CoreDomain{name, rule};    -- HHR Use Pivot metamodels
     key qvtbase::TypedModel{name, usedPackage, transformation};
     key pivotocl::Package{name};                -- HHR Use Pivot metamodels
     key qvtbase::Transformation{name};
@@ -2022,7 +2021,7 @@ transformation relToCore(relations:{qvtrelation,qvttemplate,qvtbase,pivotocl}, c
         
     relation RRelImplToMBottomEnforcementOperation
     {
-        emptySet:Set(qvtcorebase::EnforcementOperation);        -- HHR Use Pivot metamodels
+        emptySet:Set(qvtcore::EnforcementOperation);        -- HHR Use Pivot metamodels
         
         domain relations
             r:Relation {
