@@ -2,7 +2,52 @@ import 'QVTrelation.ecore'
 
 package qvtrelation
 
+context Key
+--def: resolvedParts : Set(ocl::Property) = part->union(oppositePart.opposite)
+
+inv IdentifiesIsAUsedPackageClass:
+	transformation.modelParameter.usedPackage->includes(identifies.owningPackage)
+
+inv OppositePartsHaveOpposites:
+	oppositePart->forAll(opposite <> null)
+
+inv OppositePartsAreOppositeParts:
+	oppositePart->forAll(self.identifies.conformsTo(type))
+
+inv PartsAreParts:
+	part->forAll(self.identifies.conformsTo(owningClass))
+
+inv PartsAreUnique:
+	part->excludesAll(oppositePart.opposite)
+
+context Relation
+inv DomainsAreRelationDomains:
+	domain->forAll(oclIsKindOf(RelationDomain))
+
+inv TransformationIsRelationalTransformation:
+	transformation.oclIsKindOf(RelationalTransformation)
+
+--inv VariablesAreUnique:
+--	variable->isUnique(name)
+	
 context RelationCallExp
-inv MatchingArgumentCount: self.argument->size() = self.referredRelation.domain.oclAsType(RelationDomain).rootVariable->size()
+inv MatchingArgumentCount:
+	self.argument->size() = self.referredRelation.domain.oclAsType(RelationDomain).rootVariable->size()
+
+context RelationDomain
+inv RelationDomainAssignmentsAreUnique:
+	defaultAssignment->isUnique(variable)
+
+context RelationDomainAssignment
+inv CompatibleTypeForValue:
+	valueExp.type.conformsTo(variable.type)
+
+context RelationalTransformation
+inv KeysAreUnique:
+	ownedKey->isUnique(identifies)
+
+inv RulesAreRelations:
+	rule->forAll(oclIsKindOf(Relation))
+
 
 endpackage

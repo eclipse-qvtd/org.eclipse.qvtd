@@ -148,7 +148,7 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link QVTrelationPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -179,17 +179,18 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 
 		// Register package validator
 		EValidator.Registry.INSTANCE.put
-			(theQVTrelationPackage, 
-			 new EValidator.Descriptor() {
-				 public EValidator getEValidator() {
-					 return QVTrelationValidator.INSTANCE;
-				 }
-			 });
+		(theQVTrelationPackage,
+			new EValidator.Descriptor() {
+			@Override
+			public EValidator getEValidator() {
+				return QVTrelationValidator.INSTANCE;
+			}
+		});
 
 		// Mark meta-data to indicate it can't be changed
 		theQVTrelationPackage.freeze();
 
-  
+
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(QVTrelationPackage.eNS_URI, theQVTrelationPackage);
 		return theQVTrelationPackage;
@@ -261,6 +262,56 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 	 * @generated
 	 */
 	@Override
+	public EOperation getKey__ValidateIdentifiesIsAUsedPackageClass__DiagnosticChain_Map() {
+		return keyEClass.getEOperations().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getKey__ValidateOppositePartsHaveOpposites__DiagnosticChain_Map() {
+		return keyEClass.getEOperations().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getKey__ValidateOppositePartsAreOppositeParts__DiagnosticChain_Map() {
+		return keyEClass.getEOperations().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getKey__ValidatePartsAreParts__DiagnosticChain_Map() {
+		return keyEClass.getEOperations().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getKey__ValidatePartsAreUnique__DiagnosticChain_Map() {
+		return keyEClass.getEOperations().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EReference getKey_OppositePart() {
 		return (EReference)keyEClass.getEStructuralFeatures().get(1);
 	}
@@ -323,6 +374,26 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 	@Override
 	public EReference getRelation_Where() {
 		return (EReference)relationEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getRelation__ValidateDomainsAreRelationDomains__DiagnosticChain_Map() {
+		return relationEClass.getEOperations().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getRelation__ValidateTransformationIsRelationalTransformation__DiagnosticChain_Map() {
+		return relationEClass.getEOperations().get(1);
 	}
 
 	/**
@@ -411,6 +482,16 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 	 * @generated
 	 */
 	@Override
+	public EOperation getRelationDomain__ValidateRelationDomainAssignmentsAreUnique__DiagnosticChain_Map() {
+		return relationDomainEClass.getEOperations().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getRelationDomainAssignment() {
 		return relationDomainAssignmentEClass;
 	}
@@ -433,6 +514,16 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 	@Override
 	public EReference getRelationDomainAssignment_Variable() {
 		return (EReference)relationDomainAssignmentEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getRelationDomainAssignment__ValidateCompatibleTypeForValue__DiagnosticChain_Map() {
+		return relationDomainAssignmentEClass.getEOperations().get(0);
 	}
 
 	/**
@@ -511,6 +602,26 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 	 * @generated
 	 */
 	@Override
+	public EOperation getRelationalTransformation__ValidateKeysAreUnique__DiagnosticChain_Map() {
+		return relationalTransformationEClass.getEOperations().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getRelationalTransformation__ValidateRulesAreRelations__DiagnosticChain_Map() {
+		return relationalTransformationEClass.getEOperations().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getSharedVariable() {
 		return sharedVariableEClass;
 	}
@@ -562,6 +673,11 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 		createEReference(keyEClass, KEY__OPPOSITE_PART);
 		createEReference(keyEClass, KEY__PART);
 		createEReference(keyEClass, KEY__TRANSFORMATION);
+		createEOperation(keyEClass, KEY___VALIDATE_IDENTIFIES_IS_AUSED_PACKAGE_CLASS__DIAGNOSTICCHAIN_MAP);
+		createEOperation(keyEClass, KEY___VALIDATE_OPPOSITE_PARTS_HAVE_OPPOSITES__DIAGNOSTICCHAIN_MAP);
+		createEOperation(keyEClass, KEY___VALIDATE_OPPOSITE_PARTS_ARE_OPPOSITE_PARTS__DIAGNOSTICCHAIN_MAP);
+		createEOperation(keyEClass, KEY___VALIDATE_PARTS_ARE_PARTS__DIAGNOSTICCHAIN_MAP);
+		createEOperation(keyEClass, KEY___VALIDATE_PARTS_ARE_UNIQUE__DIAGNOSTICCHAIN_MAP);
 
 		relationEClass = createEClass(RELATION);
 		createEAttribute(relationEClass, RELATION__IS_TOP_LEVEL);
@@ -569,6 +685,8 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 		createEReference(relationEClass, RELATION__VARIABLE);
 		createEReference(relationEClass, RELATION__WHEN);
 		createEReference(relationEClass, RELATION__WHERE);
+		createEOperation(relationEClass, RELATION___VALIDATE_DOMAINS_ARE_RELATION_DOMAINS__DIAGNOSTICCHAIN_MAP);
+		createEOperation(relationEClass, RELATION___VALIDATE_TRANSFORMATION_IS_RELATIONAL_TRANSFORMATION__DIAGNOSTICCHAIN_MAP);
 
 		relationCallExpEClass = createEClass(RELATION_CALL_EXP);
 		createEReference(relationCallExpEClass, RELATION_CALL_EXP__ARGUMENT);
@@ -579,10 +697,12 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 		createEReference(relationDomainEClass, RELATION_DOMAIN__DEFAULT_ASSIGNMENT);
 		createEReference(relationDomainEClass, RELATION_DOMAIN__PATTERN);
 		createEReference(relationDomainEClass, RELATION_DOMAIN__ROOT_VARIABLE);
+		createEOperation(relationDomainEClass, RELATION_DOMAIN___VALIDATE_RELATION_DOMAIN_ASSIGNMENTS_ARE_UNIQUE__DIAGNOSTICCHAIN_MAP);
 
 		relationDomainAssignmentEClass = createEClass(RELATION_DOMAIN_ASSIGNMENT);
 		createEReference(relationDomainAssignmentEClass, RELATION_DOMAIN_ASSIGNMENT__VALUE_EXP);
 		createEReference(relationDomainAssignmentEClass, RELATION_DOMAIN_ASSIGNMENT__VARIABLE);
+		createEOperation(relationDomainAssignmentEClass, RELATION_DOMAIN_ASSIGNMENT___VALIDATE_COMPATIBLE_TYPE_FOR_VALUE__DIAGNOSTICCHAIN_MAP);
 
 		relationImplementationEClass = createEClass(RELATION_IMPLEMENTATION);
 		createEReference(relationImplementationEClass, RELATION_IMPLEMENTATION__IMPL);
@@ -593,6 +713,8 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 
 		relationalTransformationEClass = createEClass(RELATIONAL_TRANSFORMATION);
 		createEReference(relationalTransformationEClass, RELATIONAL_TRANSFORMATION__OWNED_KEY);
+		createEOperation(relationalTransformationEClass, RELATIONAL_TRANSFORMATION___VALIDATE_KEYS_ARE_UNIQUE__DIAGNOSTICCHAIN_MAP);
+		createEOperation(relationalTransformationEClass, RELATIONAL_TRANSFORMATION___VALIDATE_RULES_ARE_RELATIONS__DIAGNOSTICCHAIN_MAP);
 
 		sharedVariableEClass = createEClass(SHARED_VARIABLE);
 
@@ -654,6 +776,51 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 		initEReference(getKey_Part(), thePivotPackage.getProperty(), null, "part", null, 0, -1, Key.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getKey_Transformation(), this.getRelationalTransformation(), this.getRelationalTransformation_OwnedKey(), "transformation", null, 0, 1, Key.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		EOperation op = initEOperation(getKey__ValidateIdentifiesIsAUsedPackageClass__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateIdentifiesIsAUsedPackageClass", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
+		EGenericType g1 = createEGenericType(ecorePackage.getEMap());
+		EGenericType g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = initEOperation(getKey__ValidateOppositePartsHaveOpposites__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateOppositePartsHaveOpposites", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = initEOperation(getKey__ValidateOppositePartsAreOppositeParts__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateOppositePartsAreOppositeParts", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = initEOperation(getKey__ValidatePartsAreParts__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validatePartsAreParts", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = initEOperation(getKey__ValidatePartsAreUnique__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validatePartsAreUnique", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(relationEClass, Relation.class, "Relation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getRelation_IsTopLevel(), ecorePackage.getEBoolean(), "isTopLevel", null, 0, 1, Relation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRelation_OperationalImpl(), this.getRelationImplementation(), this.getRelationImplementation_Relation(), "operationalImpl", null, 0, -1, Relation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
@@ -661,14 +828,32 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 		initEReference(getRelation_When(), theQVTbasePackage.getPattern(), null, "when", null, 0, 1, Relation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRelation_Where(), theQVTbasePackage.getPattern(), null, "where", null, 0, 1, Relation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		op = initEOperation(getRelation__ValidateDomainsAreRelationDomains__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateDomainsAreRelationDomains", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = initEOperation(getRelation__ValidateTransformationIsRelationalTransformation__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateTransformationIsRelationalTransformation", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(relationCallExpEClass, RelationCallExp.class, "RelationCallExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getRelationCallExp_Argument(), thePivotPackage.getOCLExpression(), null, "argument", null, 2, -1, RelationCallExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRelationCallExp_ReferredRelation(), this.getRelation(), null, "referredRelation", null, 1, 1, RelationCallExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		EOperation op = initEOperation(getRelationCallExp__ValidateMatchingArgumentCount__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateMatchingArgumentCount", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = initEOperation(getRelationCallExp__ValidateMatchingArgumentCount__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateMatchingArgumentCount", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
-		EGenericType g1 = createEGenericType(ecorePackage.getEMap());
-		EGenericType g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
 		g1.getETypeArguments().add(g2);
 		g2 = createEGenericType(ecorePackage.getEJavaObject());
 		g1.getETypeArguments().add(g2);
@@ -679,9 +864,27 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 		initEReference(getRelationDomain_Pattern(), this.getDomainPattern(), null, "pattern", null, 0, -1, RelationDomain.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRelationDomain_RootVariable(), thePivotPackage.getVariable(), null, "rootVariable", null, 1, -1, RelationDomain.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		op = initEOperation(getRelationDomain__ValidateRelationDomainAssignmentsAreUnique__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateRelationDomainAssignmentsAreUnique", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(relationDomainAssignmentEClass, RelationDomainAssignment.class, "RelationDomainAssignment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getRelationDomainAssignment_ValueExp(), thePivotPackage.getOCLExpression(), null, "valueExp", null, 1, 1, RelationDomainAssignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRelationDomainAssignment_Variable(), thePivotPackage.getVariable(), null, "variable", null, 1, 1, RelationDomainAssignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		op = initEOperation(getRelationDomainAssignment__ValidateCompatibleTypeForValue__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateCompatibleTypeForValue", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(relationImplementationEClass, RelationImplementation.class, "RelationImplementation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getRelationImplementation_Impl(), thePivotPackage.getOperation(), null, "impl", null, 1, 1, RelationImplementation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -693,6 +896,24 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 		initEClass(relationalTransformationEClass, RelationalTransformation.class, "RelationalTransformation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getRelationalTransformation_OwnedKey(), this.getKey(), this.getKey_Transformation(), "ownedKey", null, 0, -1, RelationalTransformation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
+		op = initEOperation(getRelationalTransformation__ValidateKeysAreUnique__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateKeysAreUnique", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = initEOperation(getRelationalTransformation__ValidateRulesAreRelations__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateRulesAreRelations", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(sharedVariableEClass, SharedVariable.class, "SharedVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(templateVariableEClass, TemplateVariable.class, "TemplateVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -703,10 +924,10 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 		// Create annotations
 		// http://www.eclipse.org/emf/2002/Ecore
 		createEcoreAnnotations();
-		// http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName
-		createEmofAnnotations();
 		// http://www.eclipse.org/uml2/2.0.0/UML
 		createUMLAnnotations();
+		// http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName
+		createEmofAnnotations();
 	}
 
 	/**
@@ -716,12 +937,12 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 	 * @generated
 	 */
 	protected void createEcoreAnnotations() {
-		String source = "http://www.eclipse.org/emf/2002/Ecore";	
+		String source = "http://www.eclipse.org/emf/2002/Ecore";
 		addAnnotation
-		  (this, 
-		   source, 
-		   new String[] {
-		   });
+		(this,
+			source,
+			new String[] {
+		});
 	}
 
 	/**
@@ -731,67 +952,67 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 	 * @generated
 	 */
 	protected void createEmofAnnotations() {
-		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";	
+		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";
 		addAnnotation
-		  (getKey_Identifies(), 
-		   source, 
-		   new String[] {
-			 "body", "key"
-		   });	
+		(getKey_Identifies(),
+			source,
+			new String[] {
+				"body", "key"
+		});
 		addAnnotation
-		  (getKey_OppositePart(), 
-		   source, 
-		   new String[] {
-			 "body", "oppKey"
-		   });	
+		(getKey_OppositePart(),
+			source,
+			new String[] {
+				"body", "oppKey"
+		});
 		addAnnotation
-		  (getKey_Part(), 
-		   source, 
-		   new String[] {
-			 "body", "key"
-		   });	
+		(getKey_Part(),
+			source,
+			new String[] {
+				"body", "key"
+		});
 		addAnnotation
-		  (getRelation_When(), 
-		   source, 
-		   new String[] {
-			 "body", "whenOwner"
-		   });	
+		(getRelation_When(),
+			source,
+			new String[] {
+				"body", "whenOwner"
+		});
 		addAnnotation
-		  (getRelation_Where(), 
-		   source, 
-		   new String[] {
-			 "body", "whereOwner"
-		   });	
+		(getRelation_Where(),
+			source,
+			new String[] {
+				"body", "whereOwner"
+		});
 		addAnnotation
-		  (getRelationCallExp_Argument(), 
-		   source, 
-		   new String[] {
-			 "body", "relationCallExp"
-		   });	
+		(getRelationCallExp_Argument(),
+			source,
+			new String[] {
+				"body", "relationCallExp"
+		});
 		addAnnotation
-		  (getRelationCallExp_ReferredRelation(), 
-		   source, 
-		   new String[] {
-			 "body", "relationCallExp"
-		   });	
+		(getRelationCallExp_ReferredRelation(),
+			source,
+			new String[] {
+				"body", "relationCallExp"
+		});
 		addAnnotation
-		  (getRelationDomain_DefaultAssignment(), 
-		   source, 
-		   new String[] {
-			 "body", "owner"
-		   });	
+		(getRelationDomain_DefaultAssignment(),
+			source,
+			new String[] {
+				"body", "owner"
+		});
 		addAnnotation
-		  (getRelationDomainAssignment_ValueExp(), 
-		   source, 
-		   new String[] {
-			 "body", "domainAssignment"
-		   });	
+		(getRelationDomainAssignment_ValueExp(),
+			source,
+			new String[] {
+				"body", "domainAssignment"
+		});
 		addAnnotation
-		  (getRelationDomainAssignment_Variable(), 
-		   source, 
-		   new String[] {
-			 "body", "domainAssignment"
-		   });
+		(getRelationDomainAssignment_Variable(),
+			source,
+			new String[] {
+				"body", "domainAssignment"
+		});
 	}
 
 	/**
@@ -801,13 +1022,79 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 	 * @generated
 	 */
 	protected void createUMLAnnotations() {
-		String source = "http://www.eclipse.org/uml2/2.0.0/UML";	
+		String source = "http://www.eclipse.org/uml2/2.0.0/UML";
 		addAnnotation
-		  (getRelationCallExp__ValidateMatchingArgumentCount__DiagnosticChain_Map(), 
-		   source, 
-		   new String[] {
-			 "originalName", "MatchingArgumentCount"
-		   });
+		(getKey__ValidateIdentifiesIsAUsedPackageClass__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "IdentifiesIsAUsedPackageClass"
+		});
+		addAnnotation
+		(getKey__ValidateOppositePartsHaveOpposites__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "OppositePartsHaveOpposites"
+		});
+		addAnnotation
+		(getKey__ValidateOppositePartsAreOppositeParts__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "OppositePartsAreOppositeParts"
+		});
+		addAnnotation
+		(getKey__ValidatePartsAreParts__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "PartsAreParts"
+		});
+		addAnnotation
+		(getKey__ValidatePartsAreUnique__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "PartsAreUnique"
+		});
+		addAnnotation
+		(getRelation__ValidateDomainsAreRelationDomains__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "DomainsAreRelationDomains"
+		});
+		addAnnotation
+		(getRelation__ValidateTransformationIsRelationalTransformation__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "TransformationIsRelationalTransformation"
+		});
+		addAnnotation
+		(getRelationCallExp__ValidateMatchingArgumentCount__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "MatchingArgumentCount"
+		});
+		addAnnotation
+		(getRelationDomain__ValidateRelationDomainAssignmentsAreUnique__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "RelationDomainAssignmentsAreUnique"
+		});
+		addAnnotation
+		(getRelationDomainAssignment__ValidateCompatibleTypeForValue__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "CompatibleTypeForValue"
+		});
+		addAnnotation
+		(getRelationalTransformation__ValidateKeysAreUnique__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "KeysAreUnique"
+		});
+		addAnnotation
+		(getRelationalTransformation__ValidateRulesAreRelations__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "RulesAreRelations"
+		});
 	}
 
 } //QVTrelationPackageImpl

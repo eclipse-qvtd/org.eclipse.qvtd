@@ -10,10 +10,14 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtrelation.impl;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
+import java.util.Iterator;
+import java.util.Map;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -22,11 +26,23 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.ids.TypeId;
+import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
+import org.eclipse.ocl.pivot.library.oclany.OclAnyOclIsKindOfOperation;
+import org.eclipse.ocl.pivot.library.oclany.OclComparableLessThanEqualOperation;
+import org.eclipse.ocl.pivot.library.string.CGStringGetSeverityOperation;
+import org.eclipse.ocl.pivot.library.string.CGStringLogDiagnosticOperation;
+import org.eclipse.ocl.pivot.messages.PivotMessages;
 import org.eclipse.ocl.pivot.util.Visitor;
+import org.eclipse.ocl.pivot.utilities.ValueUtil;
+import org.eclipse.ocl.pivot.values.InvalidValueException;
+import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
 import org.eclipse.qvtd.pivot.qvtbase.impl.RuleImpl;
 import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage;
+import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationTables;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationImplementation;
 import org.eclipse.qvtd.pivot.qvtrelation.util.QVTrelationVisitor;
@@ -270,6 +286,133 @@ public class RelationImpl extends RuleImpl implements Relation {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean validateDomainsAreRelationDomains(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
+		/**
+		 *
+		 * inv DomainsAreRelationDomains:
+		 *   let
+		 *     severity : Integer[1] = 'Relation::DomainsAreRelationDomains'.getSeverity()
+		 *   in
+		 *     if severity <= 0
+		 *     then true
+		 *     else
+		 *       let
+		 *         status : OclAny[?] = domain->forAll(
+		 *           oclIsKindOf(RelationDomain))
+		 *       in
+		 *         'Relation::DomainsAreRelationDomains'.logDiagnostic(self, null, diagnostics, context, null, severity, status, 0)
+		 *     endif
+		 */
+		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
+		final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@NonNull IdResolver idResolver = executor.getIdResolver();
+		final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTrelationTables.STR_Relation_c_c_DomainsAreRelationDomains);
+		final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTrelationTables.INT_0).booleanValue();
+		/*@NonInvalid*/ boolean symbol_0;
+		if (le) {
+			symbol_0 = ValueUtil.TRUE_VALUE;
+		}
+		else {
+			/*@Caught*/ @NonNull Object CAUGHT_status;
+			try {
+				@SuppressWarnings("null")
+				final /*@Thrown*/ java.util.@NonNull List<Domain> domain = this.getDomain();
+				final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_domain = idResolver.createOrderedSetOfAll(QVTrelationTables.ORD_CLSSid_Domain, domain);
+				/*@Thrown*/ java.lang.@Nullable Object accumulator = ValueUtil.TRUE_VALUE;
+				@NonNull Iterator<Object> ITERATOR__1 = BOXED_domain.iterator();
+				/*@Thrown*/ boolean status;
+				while (true) {
+					if (!ITERATOR__1.hasNext()) {
+						if (accumulator == ValueUtil.TRUE_VALUE) {
+							status = ValueUtil.TRUE_VALUE;
+						}
+						else {
+							throw (InvalidValueException)accumulator;
+						}
+						break;
+					}
+					@SuppressWarnings("null")
+					/*@NonInvalid*/ org.eclipse.qvtd.pivot.qvtbase.@NonNull Domain _1 = (Domain)ITERATOR__1.next();
+					/**
+					 * oclIsKindOf(RelationDomain)
+					 */
+					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_qvtrelation_c_c_RelationDomain = idResolver.getClass(QVTrelationTables.CLSSid_RelationDomain, null);
+					final /*@NonInvalid*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, _1, TYP_qvtrelation_c_c_RelationDomain).booleanValue();
+					//
+					if (oclIsKindOf == ValueUtil.FALSE_VALUE) {					// Normal unsuccessful body evaluation result
+						status = ValueUtil.FALSE_VALUE;
+						break;														// Stop immediately
+					}
+					else if (oclIsKindOf == ValueUtil.TRUE_VALUE) {				// Normal successful body evaluation result
+						;															// Carry on
+					}
+					else {															// Impossible badly typed result
+						accumulator = new InvalidValueException(PivotMessages.NonBooleanBody, "forAll");
+					}
+				}
+				CAUGHT_status = status;
+			}
+			catch (Exception e) {
+				CAUGHT_status = ValueUtil.createInvalidValue(e);
+			}
+			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTrelationTables.STR_Relation_c_c_DomainsAreRelationDomains, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_status, QVTrelationTables.INT_0).booleanValue();
+			symbol_0 = logDiagnostic;
+		}
+		return Boolean.TRUE == symbol_0;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean validateTransformationIsRelationalTransformation(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
+		/**
+		 *
+		 * inv TransformationIsRelationalTransformation:
+		 *   let
+		 *     severity : Integer[1] = 'Relation::TransformationIsRelationalTransformation'.getSeverity()
+		 *   in
+		 *     if severity <= 0
+		 *     then true
+		 *     else
+		 *       let
+		 *         status : OclAny[1] = transformation.oclIsKindOf(RelationalTransformation)
+		 *       in
+		 *         'Relation::TransformationIsRelationalTransformation'.logDiagnostic(self, null, diagnostics, context, null, severity, status, 0)
+		 *     endif
+		 */
+		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
+		final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@NonNull IdResolver idResolver = executor.getIdResolver();
+		final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTrelationTables.STR_Relation_c_c_TransformationIsRelationalTransformation);
+		final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTrelationTables.INT_0).booleanValue();
+		/*@NonInvalid*/ boolean symbol_0;
+		if (le) {
+			symbol_0 = ValueUtil.TRUE_VALUE;
+		}
+		else {
+			/*@Caught*/ @NonNull Object CAUGHT_status;
+			try {
+				final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_qvtrelation_c_c_RelationalTransformation = idResolver.getClass(QVTrelationTables.CLSSid_RelationalTransformation, null);
+				final /*@Thrown*/ org.eclipse.qvtd.pivot.qvtbase.@Nullable Transformation transformation = this.getTransformation();
+				final /*@Thrown*/ boolean status = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, transformation, TYP_qvtrelation_c_c_RelationalTransformation).booleanValue();
+				CAUGHT_status = status;
+			}
+			catch (Exception e) {
+				CAUGHT_status = ValueUtil.createInvalidValue(e);
+			}
+			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTrelationTables.STR_Relation_c_c_TransformationIsRelationalTransformation, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_status, QVTrelationTables.INT_0).booleanValue();
+			symbol_0 = logDiagnostic;
+		}
+		return Boolean.TRUE == symbol_0;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
 	@Override
@@ -411,6 +554,23 @@ public class RelationImpl extends RuleImpl implements Relation {
 				return where != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	@SuppressWarnings("unchecked")
+	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
+		switch (operationID) {
+			case QVTrelationPackage.RELATION___VALIDATE_DOMAINS_ARE_RELATION_DOMAINS__DIAGNOSTICCHAIN_MAP:
+				return validateDomainsAreRelationDomains((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
+			case QVTrelationPackage.RELATION___VALIDATE_TRANSFORMATION_IS_RELATIONAL_TRANSFORMATION__DIAGNOSTICCHAIN_MAP:
+				return validateTransformationIsRelationalTransformation((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
+		}
+		return super.eInvoke(operationID, arguments);
 	}
 
 	/**

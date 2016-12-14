@@ -25,6 +25,26 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTrelation.ecore#F-qvtrelation-Key-oppositePart"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTrelation.ecore#F-qvtrelation-Key-part"/>
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference QVTrelation.ecore#F-qvtrelation-Key-transformation"/>
+      <genOperations ecoreOperation="QVTrelation.ecore#//Key/validateIdentifiesIsAUsedPackageClass">
+        <genParameters ecoreParameter="QVTrelation.ecore#//Key/validateIdentifiesIsAUsedPackageClass/diagnostics"/>
+        <genParameters ecoreParameter="QVTrelation.ecore#//Key/validateIdentifiesIsAUsedPackageClass/context"/>
+      </genOperations>
+      <genOperations ecoreOperation="QVTrelation.ecore#//Key/validateOppositePartsHaveOpposites">
+        <genParameters ecoreParameter="QVTrelation.ecore#//Key/validateOppositePartsHaveOpposites/diagnostics"/>
+        <genParameters ecoreParameter="QVTrelation.ecore#//Key/validateOppositePartsHaveOpposites/context"/>
+      </genOperations>
+      <genOperations ecoreOperation="QVTrelation.ecore#//Key/validateOppositePartsAreOppositeParts">
+        <genParameters ecoreParameter="QVTrelation.ecore#//Key/validateOppositePartsAreOppositeParts/diagnostics"/>
+        <genParameters ecoreParameter="QVTrelation.ecore#//Key/validateOppositePartsAreOppositeParts/context"/>
+      </genOperations>
+      <genOperations ecoreOperation="QVTrelation.ecore#//Key/validatePartsAreParts">
+        <genParameters ecoreParameter="QVTrelation.ecore#//Key/validatePartsAreParts/diagnostics"/>
+        <genParameters ecoreParameter="QVTrelation.ecore#//Key/validatePartsAreParts/context"/>
+      </genOperations>
+      <genOperations ecoreOperation="QVTrelation.ecore#//Key/validatePartsAreUnique">
+        <genParameters ecoreParameter="QVTrelation.ecore#//Key/validatePartsAreUnique/diagnostics"/>
+        <genParameters ecoreParameter="QVTrelation.ecore#//Key/validatePartsAreUnique/context"/>
+      </genOperations>
     </genClasses>
     <genClasses ecoreClass="QVTrelation.ecore#T-qvtrelation-Relation">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTrelation.ecore#F-qvtrelation-Relation-isTopLevel"/>
@@ -32,6 +52,14 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTrelation.ecore#F-qvtrelation-Relation-variable"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTrelation.ecore#F-qvtrelation-Relation-when"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTrelation.ecore#F-qvtrelation-Relation-where"/>
+      <genOperations ecoreOperation="QVTrelation.ecore#//Relation/validateDomainsAreRelationDomains">
+        <genParameters ecoreParameter="QVTrelation.ecore#//Relation/validateDomainsAreRelationDomains/diagnostics"/>
+        <genParameters ecoreParameter="QVTrelation.ecore#//Relation/validateDomainsAreRelationDomains/context"/>
+      </genOperations>
+      <genOperations ecoreOperation="QVTrelation.ecore#//Relation/validateTransformationIsRelationalTransformation">
+        <genParameters ecoreParameter="QVTrelation.ecore#//Relation/validateTransformationIsRelationalTransformation/diagnostics"/>
+        <genParameters ecoreParameter="QVTrelation.ecore#//Relation/validateTransformationIsRelationalTransformation/context"/>
+      </genOperations>
     </genClasses>
     <genClasses ecoreClass="QVTrelation.ecore#T-qvtrelation-RelationCallExp">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTrelation.ecore#F-qvtrelation-RelationCallExp-argument"/>
@@ -45,10 +73,18 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTrelation.ecore#F-qvtrelation-RelationDomain-defaultAssignment"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTrelation.ecore#F-qvtrelation-RelationDomain-pattern"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTrelation.ecore#F-qvtrelation-RelationDomain-rootVariable"/>
+      <genOperations ecoreOperation="QVTrelation.ecore#//RelationDomain/validateRelationDomainAssignmentsAreUnique">
+        <genParameters ecoreParameter="QVTrelation.ecore#//RelationDomain/validateRelationDomainAssignmentsAreUnique/diagnostics"/>
+        <genParameters ecoreParameter="QVTrelation.ecore#//RelationDomain/validateRelationDomainAssignmentsAreUnique/context"/>
+      </genOperations>
     </genClasses>
     <genClasses ecoreClass="QVTrelation.ecore#T-qvtrelation-RelationDomainAssignment">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTrelation.ecore#F-qvtrelation-RelationDomainAssignment-valueExp"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTrelation.ecore#F-qvtrelation-RelationDomainAssignment-variable"/>
+      <genOperations ecoreOperation="QVTrelation.ecore#//RelationDomainAssignment/validateCompatibleTypeForValue">
+        <genParameters ecoreParameter="QVTrelation.ecore#//RelationDomainAssignment/validateCompatibleTypeForValue/diagnostics"/>
+        <genParameters ecoreParameter="QVTrelation.ecore#//RelationDomainAssignment/validateCompatibleTypeForValue/context"/>
+      </genOperations>
     </genClasses>
     <genClasses ecoreClass="QVTrelation.ecore#T-qvtrelation-RelationImplementation">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTrelation.ecore#F-qvtrelation-RelationImplementation-impl"/>
@@ -58,6 +94,14 @@
     <genClasses ecoreClass="QVTrelation.ecore#T-qvtrelation-RelationModel"/>
     <genClasses ecoreClass="QVTrelation.ecore#T-qvtrelation-RelationalTransformation">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTrelation.ecore#F-qvtrelation-RelationalTransformation-ownedKey"/>
+      <genOperations ecoreOperation="QVTrelation.ecore#//RelationalTransformation/validateKeysAreUnique">
+        <genParameters ecoreParameter="QVTrelation.ecore#//RelationalTransformation/validateKeysAreUnique/diagnostics"/>
+        <genParameters ecoreParameter="QVTrelation.ecore#//RelationalTransformation/validateKeysAreUnique/context"/>
+      </genOperations>
+      <genOperations ecoreOperation="QVTrelation.ecore#//RelationalTransformation/validateRulesAreRelations">
+        <genParameters ecoreParameter="QVTrelation.ecore#//RelationalTransformation/validateRulesAreRelations/diagnostics"/>
+        <genParameters ecoreParameter="QVTrelation.ecore#//RelationalTransformation/validateRulesAreRelations/context"/>
+      </genOperations>
     </genClasses>
     <genClasses ecoreClass="QVTrelation.ecore#T-qvtrelation-SharedVariable"/>
     <genClasses ecoreClass="QVTrelation.ecore#T-qvtrelation-TemplateVariable"/>

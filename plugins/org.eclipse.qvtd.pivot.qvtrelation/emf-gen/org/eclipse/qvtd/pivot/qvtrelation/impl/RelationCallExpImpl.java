@@ -211,8 +211,8 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 					/**
 					 * oclAsType(RelationDomain)
 					 */
-					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_qvtrelation_c_c_RelationDomain = idResolver.getClass(QVTrelationTables.CLSSid_RelationDomain, null);
-					final /*@Thrown*/ org.eclipse.qvtd.pivot.qvtrelation.@NonNull RelationDomain oclAsType = ClassUtil.nonNullState((RelationDomain)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, _1, TYP_qvtrelation_c_c_RelationDomain));
+					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_qvtrelation_c_c_RelationDomain_0 = idResolver.getClass(QVTrelationTables.CLSSid_RelationDomain, null);
+					final /*@Thrown*/ org.eclipse.qvtd.pivot.qvtrelation.@NonNull RelationDomain oclAsType = ClassUtil.nonNullState((RelationDomain)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, _1, TYP_qvtrelation_c_c_RelationDomain_0));
 					//
 					accumulator.add(oclAsType);
 				}

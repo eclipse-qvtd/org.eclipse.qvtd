@@ -294,13 +294,58 @@ public interface QVTrelationPackage extends EPackage {
 	int KEY___GET_VALUE__TYPE_STRING = PivotPackage.ELEMENT___GET_VALUE__TYPE_STRING;
 
 	/**
+	 * The operation id for the '<em>Validate Identifies Is AUsed Package Class</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KEY___VALIDATE_IDENTIFIES_IS_AUSED_PACKAGE_CLASS__DIAGNOSTICCHAIN_MAP = PivotPackage.ELEMENT_OPERATION_COUNT + 0;
+
+	/**
+	 * The operation id for the '<em>Validate Opposite Parts Have Opposites</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KEY___VALIDATE_OPPOSITE_PARTS_HAVE_OPPOSITES__DIAGNOSTICCHAIN_MAP = PivotPackage.ELEMENT_OPERATION_COUNT + 1;
+
+	/**
+	 * The operation id for the '<em>Validate Opposite Parts Are Opposite Parts</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KEY___VALIDATE_OPPOSITE_PARTS_ARE_OPPOSITE_PARTS__DIAGNOSTICCHAIN_MAP = PivotPackage.ELEMENT_OPERATION_COUNT + 2;
+
+	/**
+	 * The operation id for the '<em>Validate Parts Are Parts</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KEY___VALIDATE_PARTS_ARE_PARTS__DIAGNOSTICCHAIN_MAP = PivotPackage.ELEMENT_OPERATION_COUNT + 3;
+
+	/**
+	 * The operation id for the '<em>Validate Parts Are Unique</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KEY___VALIDATE_PARTS_ARE_UNIQUE__DIAGNOSTICCHAIN_MAP = PivotPackage.ELEMENT_OPERATION_COUNT + 4;
+
+	/**
 	 * The number of operations of the '<em>Key</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int KEY_OPERATION_COUNT = PivotPackage.ELEMENT_OPERATION_COUNT + 0;
+	int KEY_OPERATION_COUNT = PivotPackage.ELEMENT_OPERATION_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtrelation.impl.RelationImpl <em>Relation</em>}' class.
@@ -502,13 +547,31 @@ public interface QVTrelationPackage extends EPackage {
 	int RELATION___VALIDATE_OVERRIDES_RULE_OVERRIDES_ALL_DOMAINS__DIAGNOSTICCHAIN_MAP = QVTbasePackage.RULE___VALIDATE_OVERRIDES_RULE_OVERRIDES_ALL_DOMAINS__DIAGNOSTICCHAIN_MAP;
 
 	/**
+	 * The operation id for the '<em>Validate Domains Are Relation Domains</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION___VALIDATE_DOMAINS_ARE_RELATION_DOMAINS__DIAGNOSTICCHAIN_MAP = QVTbasePackage.RULE_OPERATION_COUNT + 0;
+
+	/**
+	 * The operation id for the '<em>Validate Transformation Is Relational Transformation</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION___VALIDATE_TRANSFORMATION_IS_RELATIONAL_TRANSFORMATION__DIAGNOSTICCHAIN_MAP = QVTbasePackage.RULE_OPERATION_COUNT + 1;
+
+	/**
 	 * The number of operations of the '<em>Relation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_OPERATION_COUNT = QVTbasePackage.RULE_OPERATION_COUNT + 0;
+	int RELATION_OPERATION_COUNT = QVTbasePackage.RULE_OPERATION_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtrelation.impl.RelationCallExpImpl <em>Relation Call Exp</em>}' class.
@@ -855,13 +918,22 @@ public interface QVTrelationPackage extends EPackage {
 	int RELATION_DOMAIN___VALIDATE_TYPED_MODEL_IS_TRANSFORMATION_MODEL_PARAMETER__DIAGNOSTICCHAIN_MAP = QVTbasePackage.DOMAIN___VALIDATE_TYPED_MODEL_IS_TRANSFORMATION_MODEL_PARAMETER__DIAGNOSTICCHAIN_MAP;
 
 	/**
+	 * The operation id for the '<em>Validate Relation Domain Assignments Are Unique</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION_DOMAIN___VALIDATE_RELATION_DOMAIN_ASSIGNMENTS_ARE_UNIQUE__DIAGNOSTICCHAIN_MAP = QVTbasePackage.DOMAIN_OPERATION_COUNT + 0;
+
+	/**
 	 * The number of operations of the '<em>Relation Domain</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_DOMAIN_OPERATION_COUNT = QVTbasePackage.DOMAIN_OPERATION_COUNT + 0;
+	int RELATION_DOMAIN_OPERATION_COUNT = QVTbasePackage.DOMAIN_OPERATION_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtrelation.impl.RelationDomainAssignmentImpl <em>Relation Domain Assignment</em>}' class.
@@ -955,13 +1027,22 @@ public interface QVTrelationPackage extends EPackage {
 	int RELATION_DOMAIN_ASSIGNMENT___GET_VALUE__TYPE_STRING = PivotPackage.ELEMENT___GET_VALUE__TYPE_STRING;
 
 	/**
+	 * The operation id for the '<em>Validate Compatible Type For Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION_DOMAIN_ASSIGNMENT___VALIDATE_COMPATIBLE_TYPE_FOR_VALUE__DIAGNOSTICCHAIN_MAP = PivotPackage.ELEMENT_OPERATION_COUNT + 0;
+
+	/**
 	 * The number of operations of the '<em>Relation Domain Assignment</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_DOMAIN_ASSIGNMENT_OPERATION_COUNT = PivotPackage.ELEMENT_OPERATION_COUNT + 0;
+	int RELATION_DOMAIN_ASSIGNMENT_OPERATION_COUNT = PivotPackage.ELEMENT_OPERATION_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtrelation.impl.RelationModelImpl <em>Relation Model</em>}' class.
@@ -1562,13 +1643,31 @@ public interface QVTrelationPackage extends EPackage {
 	int RELATIONAL_TRANSFORMATION___VALIDATE_MODEL_PARAMETER_IS_UNIQUE__DIAGNOSTICCHAIN_MAP = QVTbasePackage.TRANSFORMATION___VALIDATE_MODEL_PARAMETER_IS_UNIQUE__DIAGNOSTICCHAIN_MAP;
 
 	/**
+	 * The operation id for the '<em>Validate Keys Are Unique</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATIONAL_TRANSFORMATION___VALIDATE_KEYS_ARE_UNIQUE__DIAGNOSTICCHAIN_MAP = QVTbasePackage.TRANSFORMATION_OPERATION_COUNT + 0;
+
+	/**
+	 * The operation id for the '<em>Validate Rules Are Relations</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATIONAL_TRANSFORMATION___VALIDATE_RULES_ARE_RELATIONS__DIAGNOSTICCHAIN_MAP = QVTbasePackage.TRANSFORMATION_OPERATION_COUNT + 1;
+
+	/**
 	 * The number of operations of the '<em>Relational Transformation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RELATIONAL_TRANSFORMATION_OPERATION_COUNT = QVTbasePackage.TRANSFORMATION_OPERATION_COUNT + 0;
+	int RELATIONAL_TRANSFORMATION_OPERATION_COUNT = QVTbasePackage.TRANSFORMATION_OPERATION_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtrelation.impl.SharedVariableImpl <em>Shared Variable</em>}' class.
@@ -2033,6 +2132,56 @@ public interface QVTrelationPackage extends EPackage {
 	EReference getKey_Transformation();
 
 	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtrelation.Key#validateIdentifiesIsAUsedPackageClass(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Identifies Is AUsed Package Class</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Identifies Is AUsed Package Class</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvtrelation.Key#validateIdentifiesIsAUsedPackageClass(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getKey__ValidateIdentifiesIsAUsedPackageClass__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtrelation.Key#validateOppositePartsHaveOpposites(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Opposite Parts Have Opposites</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Opposite Parts Have Opposites</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvtrelation.Key#validateOppositePartsHaveOpposites(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getKey__ValidateOppositePartsHaveOpposites__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtrelation.Key#validateOppositePartsAreOppositeParts(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Opposite Parts Are Opposite Parts</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Opposite Parts Are Opposite Parts</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvtrelation.Key#validateOppositePartsAreOppositeParts(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getKey__ValidateOppositePartsAreOppositeParts__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtrelation.Key#validatePartsAreParts(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Parts Are Parts</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Parts Are Parts</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvtrelation.Key#validatePartsAreParts(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getKey__ValidatePartsAreParts__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtrelation.Key#validatePartsAreUnique(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Parts Are Unique</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Parts Are Unique</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvtrelation.Key#validatePartsAreUnique(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getKey__ValidatePartsAreUnique__DiagnosticChain_Map();
+
+	/**
 	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.pivot.qvtrelation.Key#getOppositePart <em>Opposite Part</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2107,6 +2256,26 @@ public interface QVTrelationPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getRelation_Where();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtrelation.Relation#validateDomainsAreRelationDomains(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Domains Are Relation Domains</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Domains Are Relation Domains</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvtrelation.Relation#validateDomainsAreRelationDomains(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getRelation__ValidateDomainsAreRelationDomains__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtrelation.Relation#validateTransformationIsRelationalTransformation(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Transformation Is Relational Transformation</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Transformation Is Relational Transformation</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvtrelation.Relation#validateTransformationIsRelationalTransformation(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getRelation__ValidateTransformationIsRelationalTransformation__DiagnosticChain_Map();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtrelation.RelationCallExp <em>Relation Call Exp</em>}'.
@@ -2194,6 +2363,16 @@ public interface QVTrelationPackage extends EPackage {
 	EReference getRelationDomain_RootVariable();
 
 	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtrelation.RelationDomain#validateRelationDomainAssignmentsAreUnique(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Relation Domain Assignments Are Unique</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Relation Domain Assignments Are Unique</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvtrelation.RelationDomain#validateRelationDomainAssignmentsAreUnique(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getRelationDomain__ValidateRelationDomainAssignmentsAreUnique__DiagnosticChain_Map();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtrelation.RelationDomainAssignment <em>Relation Domain Assignment</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2224,6 +2403,16 @@ public interface QVTrelationPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getRelationDomainAssignment_Variable();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtrelation.RelationDomainAssignment#validateCompatibleTypeForValue(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Compatible Type For Value</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Compatible Type For Value</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvtrelation.RelationDomainAssignment#validateCompatibleTypeForValue(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getRelationDomainAssignment__ValidateCompatibleTypeForValue__DiagnosticChain_Map();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtrelation.RelationModel <em>Relation Model</em>}'.
@@ -2298,6 +2487,26 @@ public interface QVTrelationPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getRelationalTransformation_OwnedKey();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation#validateKeysAreUnique(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Keys Are Unique</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Keys Are Unique</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation#validateKeysAreUnique(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getRelationalTransformation__ValidateKeysAreUnique__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation#validateRulesAreRelations(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Rules Are Relations</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Rules Are Relations</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation#validateRulesAreRelations(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getRelationalTransformation__ValidateRulesAreRelations__DiagnosticChain_Map();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtrelation.SharedVariable <em>Shared Variable</em>}'.
@@ -2394,6 +2603,46 @@ public interface QVTrelationPackage extends EPackage {
 		EReference KEY__TRANSFORMATION = eINSTANCE.getKey_Transformation();
 
 		/**
+		 * The meta object literal for the '<em><b>Validate Identifies Is AUsed Package Class</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation KEY___VALIDATE_IDENTIFIES_IS_AUSED_PACKAGE_CLASS__DIAGNOSTICCHAIN_MAP = eINSTANCE.getKey__ValidateIdentifiesIsAUsedPackageClass__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Opposite Parts Have Opposites</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation KEY___VALIDATE_OPPOSITE_PARTS_HAVE_OPPOSITES__DIAGNOSTICCHAIN_MAP = eINSTANCE.getKey__ValidateOppositePartsHaveOpposites__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Opposite Parts Are Opposite Parts</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation KEY___VALIDATE_OPPOSITE_PARTS_ARE_OPPOSITE_PARTS__DIAGNOSTICCHAIN_MAP = eINSTANCE.getKey__ValidateOppositePartsAreOppositeParts__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Parts Are Parts</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation KEY___VALIDATE_PARTS_ARE_PARTS__DIAGNOSTICCHAIN_MAP = eINSTANCE.getKey__ValidatePartsAreParts__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Parts Are Unique</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation KEY___VALIDATE_PARTS_ARE_UNIQUE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getKey__ValidatePartsAreUnique__DiagnosticChain_Map();
+
+		/**
 		 * The meta object literal for the '<em><b>Opposite Part</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2450,6 +2699,22 @@ public interface QVTrelationPackage extends EPackage {
 		 * @generated
 		 */
 		EReference RELATION__WHERE = eINSTANCE.getRelation_Where();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Domains Are Relation Domains</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation RELATION___VALIDATE_DOMAINS_ARE_RELATION_DOMAINS__DIAGNOSTICCHAIN_MAP = eINSTANCE.getRelation__ValidateDomainsAreRelationDomains__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Transformation Is Relational Transformation</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation RELATION___VALIDATE_TRANSFORMATION_IS_RELATIONAL_TRANSFORMATION__DIAGNOSTICCHAIN_MAP = eINSTANCE.getRelation__ValidateTransformationIsRelationalTransformation__DiagnosticChain_Map();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtrelation.impl.RelationCallExpImpl <em>Relation Call Exp</em>}' class.
@@ -2520,6 +2785,14 @@ public interface QVTrelationPackage extends EPackage {
 		EReference RELATION_DOMAIN__ROOT_VARIABLE = eINSTANCE.getRelationDomain_RootVariable();
 
 		/**
+		 * The meta object literal for the '<em><b>Validate Relation Domain Assignments Are Unique</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation RELATION_DOMAIN___VALIDATE_RELATION_DOMAIN_ASSIGNMENTS_ARE_UNIQUE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getRelationDomain__ValidateRelationDomainAssignmentsAreUnique__DiagnosticChain_Map();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtrelation.impl.RelationDomainAssignmentImpl <em>Relation Domain Assignment</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2544,6 +2817,14 @@ public interface QVTrelationPackage extends EPackage {
 		 * @generated
 		 */
 		EReference RELATION_DOMAIN_ASSIGNMENT__VARIABLE = eINSTANCE.getRelationDomainAssignment_Variable();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Compatible Type For Value</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation RELATION_DOMAIN_ASSIGNMENT___VALIDATE_COMPATIBLE_TYPE_FOR_VALUE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getRelationDomainAssignment__ValidateCompatibleTypeForValue__DiagnosticChain_Map();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtrelation.impl.RelationModelImpl <em>Relation Model</em>}' class.
@@ -2606,6 +2887,22 @@ public interface QVTrelationPackage extends EPackage {
 		 * @generated
 		 */
 		EReference RELATIONAL_TRANSFORMATION__OWNED_KEY = eINSTANCE.getRelationalTransformation_OwnedKey();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Keys Are Unique</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation RELATIONAL_TRANSFORMATION___VALIDATE_KEYS_ARE_UNIQUE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getRelationalTransformation__ValidateKeysAreUnique__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Rules Are Relations</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation RELATIONAL_TRANSFORMATION___VALIDATE_RULES_ARE_RELATIONS__DIAGNOSTICCHAIN_MAP = eINSTANCE.getRelationalTransformation__ValidateRulesAreRelations__DiagnosticChain_Map();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtrelation.impl.SharedVariableImpl <em>Shared Variable</em>}' class.
