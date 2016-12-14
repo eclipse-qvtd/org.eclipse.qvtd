@@ -14,6 +14,7 @@ import java.io.IOException;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
@@ -23,14 +24,14 @@ import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
  * Tests that load a model and verify that there are no unresolved proxies as a result.
  */
 public class QVTiEditorTests extends LoadTestCase
-{	
+{
 	@Override
-	public void doLoad_Concrete(@NonNull String inputName) throws IOException {
+	public void doLoad_Concrete(@NonNull String inputName, @NonNull String @Nullable [] messages) throws IOException {
 		OCL ocl = QVTimperative.newInstance(getProjectMap(), null);
-//		OCL ocl = OCL.newInstance(getProjectMap());
+		//		OCL ocl = OCL.newInstance(getProjectMap());
 		URI inputURI = getProjectFileURI(inputName);
 		@NonNull URI pivotURI = inputURI.trimFileExtension().appendFileExtension("qvtias");
-		doLoad_Concrete(ocl, inputURI, pivotURI);
+		doLoad_Concrete(ocl, inputURI, pivotURI, messages);
 		ocl.dispose();
 	}
 
@@ -41,15 +42,15 @@ public class QVTiEditorTests extends LoadTestCase
 		super.setUp();
 	}
 	public void testLoad_HSV2HLS_qvti() throws IOException, InterruptedException {
-		doLoad_Concrete("HSV2HLS/HSV2HLS.qvti");
-	}	
-	
-	
-	public void testLoad_Classescs2Classes_qvti() throws IOException, InterruptedException {
-		doLoad_Concrete("ClassesCS2AS/ClassesCS2AS.qvti");
+		doLoad_Concrete("HSV2HLS/HSV2HLS.qvti", null);
 	}
 
-//	public void testLoad_ClassToRDBMSSchedule_qvti() throws IOException, InterruptedException {
-//		doLoad_Concrete("ClassToRDBMSSchedule.qvti");
-//	}	
+
+	public void testLoad_Classescs2Classes_qvti() throws IOException, InterruptedException {
+		doLoad_Concrete("ClassesCS2AS/ClassesCS2AS.qvti", null);
+	}
+
+	//	public void testLoad_ClassToRDBMSSchedule_qvti() throws IOException, InterruptedException {
+	//		doLoad_Concrete("ClassToRDBMSSchedule.qvti");
+	//	}
 }

@@ -14,7 +14,9 @@ package org.eclipse.qvtd.xtext.qvtbase.tests;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -64,6 +66,58 @@ public class PivotTestCase extends TestCase
 	public static final @NonNull TracingOption TEST_START = new TracingOption(PLUGIN_ID, "test/start");
 	private static StandaloneProjectMap projectMap = null;
 
+	public static @NonNull List<Diagnostic> assertDiagnostics(@NonNull String prefix, @NonNull List<Diagnostic> diagnostics, String... messages) {
+		Map<String, Integer> expected = new HashMap<String, Integer>();
+		for (String message : messages) {
+			Integer count = expected.get(message);
+			count = count == null ? 1 : count + 1;
+			expected.put(message, count);
+		}
+		StringBuilder s1 = null;
+		for (Diagnostic diagnostic : diagnostics) {
+			String actual = diagnostic.getMessage();
+			Integer expectedCount = expected.get(actual);
+			if ((expectedCount == null) || (expectedCount <= 0)) {
+				if (s1 == null) {
+					s1 = new StringBuilder();
+					s1.append("\nUnexpected errors");
+				}
+				s1.append("\n");
+				s1.append(actual);
+			}
+			else {
+				expected.put(actual, expectedCount-1);
+			}
+		}
+		StringBuilder s2 = null;
+		for (String key : expected.keySet()) {
+			Integer count = expected.get(key);
+			assert count != null;
+			while (count-- > 0) {
+				if (s2 == null) {
+					s2 = new StringBuilder();
+					s2.append("\nMissing errors");
+				}
+				s2.append("\n");
+				s2.append(key);
+			}
+		}
+		if (s1 == null) {
+			if (s2 != null) {
+				fail(s2.toString());
+			}
+		}
+		else {
+			if (s2 == null) {
+				fail(s1.toString());
+			}
+			else {
+				fail(s1.toString() + s2.toString());
+			}
+		}
+		return diagnostics;
+	}
+
 	public static void assertNoDiagnosticErrors(String message, XtextResource xtextResource) {
 		List<Diagnostic> diagnostics = xtextResource.validateConcreteSyntax();
 		if (diagnostics.size() > 0) {
@@ -77,7 +131,7 @@ public class PivotTestCase extends TestCase
 		}
 	}
 
-	public static void assertNoResourceErrors(String prefix, Resource resource) {
+	public static void assertNoResourceErrors(@NonNull String prefix, @NonNull Resource resource) {
 		String message = PivotUtil.formatResourceDiagnostics(resource.getErrors(), prefix, "\n\t");
 		if (message != null)
 			fail(message);
@@ -200,6 +254,20 @@ public class PivotTestCase extends TestCase
 		}
 	}
 
+	public static @NonNull List<Diagnostic> assertValidationDiagnostics(@NonNull String prefix, @NonNull Resource resource, String... messages) {
+		Map<Object, Object> validationContext = LabelUtil.createDefaultContext(Diagnostician.INSTANCE);
+		return assertValidationDiagnostics(prefix, resource, validationContext, messages);
+	}
+
+	public static @NonNull List<Diagnostic> assertValidationDiagnostics(@NonNull String prefix, @NonNull Resource resource, Map<Object, Object> validationContext, String... messages) {
+		List<Diagnostic> diagnostics = new ArrayList<Diagnostic>();
+		for (EObject eObject : resource.getContents()) {
+			Diagnostic diagnostic = Diagnostician.INSTANCE.validate(eObject, validationContext);
+			diagnostics.addAll(diagnostic.getChildren());
+		}
+		return messages != null ? assertDiagnostics(prefix, diagnostics, messages) : Collections.emptyList();
+	}
+
 	protected static Value failOn(String expression, Throwable e) {
 		if (e instanceof EvaluationException) {
 			Throwable eCause = e.getCause();
@@ -221,6 +289,7 @@ public class PivotTestCase extends TestCase
 		URI xtextURI = URI.createURI("test.oclinecore");
 		ResourceSet resourceSet = new ResourceSetImpl();
 		EssentialOCLCSResource xtextResource = (EssentialOCLCSResource) resourceSet.createResource(xtextURI, null);
+		assert xtextResource != null;
 		ocl.getEnvironmentFactory().adapt(xtextResource);
 		xtextResource.load(inputStream, null);
 		assertNoResourceErrors("Loading Xtext", xtextResource);
@@ -247,10 +316,10 @@ public class PivotTestCase extends TestCase
 	//		projectMap = null;
 	//	}
 
-	public static Resource savePivotAsEcore(@NonNull OCL ocl, Resource pivotResource, URI ecoreURI, boolean validateSaved) throws IOException {
+	public static Resource savePivotAsEcore(@NonNull OCL ocl, @NonNull Resource pivotResource, URI ecoreURI, boolean validateSaved) throws IOException {
 		return savePivotAsEcore(ocl, pivotResource, ecoreURI, null, validateSaved);
 	}
-	public static Resource savePivotAsEcore(@NonNull OCL ocl, Resource pivotResource, URI ecoreURI, Map<String,Object> options, boolean validateSaved) throws IOException {
+	public static Resource savePivotAsEcore(@NonNull OCL ocl, @NonNull  Resource pivotResource, URI ecoreURI, Map<String,Object> options, boolean validateSaved) throws IOException {
 		URI uri = ecoreURI != null ? ecoreURI : URI.createURI("test.ecore");
 		Resource ecoreResource = AS2Ecore.createResource((EnvironmentFactoryInternal) ocl.getEnvironmentFactory(), pivotResource, uri, null);
 		assertNoResourceErrors("Ecore2Pivot failed", ecoreResource);
@@ -263,7 +332,7 @@ public class PivotTestCase extends TestCase
 		return ecoreResource;
 	}
 
-	public static Resource savePivotFromCS(@NonNull OCL ocl, BaseCSResource xtextResource, URI pivotURI) throws IOException {
+	public static @NonNull Resource savePivotFromCS(@NonNull OCL ocl, @NonNull BaseCSResource xtextResource, URI pivotURI) throws IOException {
 		Resource pivotResource = xtextResource.getASResource();
 		assertNoUnresolvedProxies("Unresolved proxies", pivotResource);
 		if (pivotURI != null) {

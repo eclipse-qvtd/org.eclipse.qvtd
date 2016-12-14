@@ -44,11 +44,11 @@ public class QVTiSerializeTests extends LoadTestCase
 	protected void doSerializeRoundTrip(@NonNull String stem) throws Exception {
 		OCL ocl1 = QVTimperative.newInstance(OCL.CLASS_PATH, null);
 		OCL ocl2 = QVTimperative.newInstance(OCL.CLASS_PATH, null);
-		Resource asResource1 = doLoad_Concrete(ocl1, stem + ".qvti", stem + ".qvtias");
+		Resource asResource1 = doLoad_Concrete(ocl1, stem + ".qvti", stem + ".qvtias", null);
 		URI inputURI = getProjectFileURI(stem + ".qvtias");
 		URI referenceURI = getProjectFileURI(stem + "ref.qvtias");
 		doSerialize(inputURI, stem, referenceURI, null, true, true);
-		Resource asResource3 = doLoad_Concrete(ocl2, stem + ".serialized.qvti", stem + ".serialized.qvtias");
+		Resource asResource3 = doLoad_Concrete(ocl2, stem + ".serialized.qvti", stem + ".serialized.qvtias", null);
 		((Model)asResource3.getContents().get(0)).setExternalURI(((Model)asResource1.getContents().get(0)).getExternalURI());
 		TestsXMLUtil.resetTransients(asResource1);
 		TestsXMLUtil.resetTransients(asResource3);
@@ -63,7 +63,7 @@ public class QVTiSerializeTests extends LoadTestCase
 		Resource asResource1 = ocl1.getMetamodelManager().getASResourceSet().getResource(inputURI, true);
 		URI referenceURI = getProjectFileURI(stem + "ref.qvtcas");
 		doSerialize(inputURI, stem, referenceURI, null, true, true);
-		Resource asResource3 = doLoad_Concrete(ocl2, stem + ".serialized.qvti", stem + ".serialized.qvtias");
+		Resource asResource3 = doLoad_Concrete(ocl2, stem + ".serialized.qvti", stem + ".serialized.qvtias", null);
 		((Model)asResource3.getContents().get(0)).setExternalURI(((Model)asResource1.getContents().get(0)).getExternalURI());
 		assertSameModel(asResource1, asResource3);
 		ocl1.dispose();
@@ -72,6 +72,7 @@ public class QVTiSerializeTests extends LoadTestCase
 
 	protected ASResource loadQVTiAS(@NonNull OCL ocl, @NonNull URI inputURI) {
 		Resource asResource = ocl.getMetamodelManager().getASResourceSet().getResource(inputURI, true);
+		assert asResource != null;
 		//		List<String> conversionErrors = new ArrayList<String>();
 		//		RootPackageCS documentCS = Ecore2OCLinEcore.importFromEcore(resourceSet, null, ecoreResource);
 		//		Resource eResource = documentCS.eResource();

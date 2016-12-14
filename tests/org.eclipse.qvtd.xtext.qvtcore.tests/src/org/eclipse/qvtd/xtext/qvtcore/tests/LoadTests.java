@@ -19,7 +19,7 @@ import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
  * Tests that load a model and verify that there are no unresolved proxies as a result.
  */
 public class LoadTests extends LoadTestCase
-{	
+{
 	@Override
 	protected void setUp() throws Exception {
 		BaseLinkingService.DEBUG_RETRY.setState(true);
@@ -28,30 +28,30 @@ public class LoadTests extends LoadTestCase
 	}
 
 	public void testLoad_expressions_qvtc() throws IOException, InterruptedException {
-		doLoad_Concrete("models/expressions.qvtc");
-	}	
+		doLoad_Concrete("models/expressions.qvtc", null);
+	}
 
 	public void testLoad_mini_qvtc() throws IOException, InterruptedException {
-		doLoad_Concrete("models/mini.qvtc");
-	}	
+		doLoad_Concrete("models/mini.qvtc", null);
+	}
 
 	public void testLoad_uml2rdbms_qvtc() throws IOException, InterruptedException {
-		doLoad_Concrete("models/uml2rdbms.qvtc");
-	}	
+		doLoad_Concrete("models/uml2rdbms.qvtc", null);
+	}
 
 	public void testLoad_uml2rdbms_qvti_qvtc() throws IOException, InterruptedException {
-		doLoad_Concrete("models/uml2rdbms.qvti.qvtc");
-	}	
+		doLoad_Concrete("models/uml2rdbms.qvti.qvtc", null);
+	}
 
 	public void testLoad_uml2rdbms_qvtu_qvtc() throws IOException, InterruptedException {
-		doLoad_Concrete("models/uml2rdbms.qvtu.qvtc");
-	}	
+		doLoad_Concrete("models/uml2rdbms.qvtu.qvtc", null);
+	}
 
 	public void testLoad_HSV2HLS_qvtc() throws IOException, InterruptedException {
-		doLoad_Concrete("models/HSV2HLS.qvtc");
-	}	
+		doLoad_Concrete("models/HSV2HLS.qvtc", null);
+	}
 
 	public void testLoad_Class2RDBMS_qvtc() throws IOException, InterruptedException {
-		doLoad_Concrete("Class2RDBMS/Class2RDBMS.qvtc");
-	}	
+		doLoad_Concrete("Class2RDBMS/Class2RDBMS.qvtc", null);
+	}
 }
