@@ -21,23 +21,60 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTtemplate.ecore#F-qvttemplate-CollectionTemplateExp-member"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTtemplate.ecore#F-qvttemplate-CollectionTemplateExp-referredCollectionType"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTtemplate.ecore#F-qvttemplate-CollectionTemplateExp-rest"/>
+      <genOperations ecoreOperation="QVTtemplate.ecore#//CollectionTemplateExp/validateMemberTypeisCollectionElementType">
+        <genParameters ecoreParameter="QVTtemplate.ecore#//CollectionTemplateExp/validateMemberTypeisCollectionElementType/diagnostics"/>
+        <genParameters ecoreParameter="QVTtemplate.ecore#//CollectionTemplateExp/validateMemberTypeisCollectionElementType/context"/>
+      </genOperations>
+      <genOperations ecoreOperation="QVTtemplate.ecore#//CollectionTemplateExp/validateRestTypeisCollectionType">
+        <genParameters ecoreParameter="QVTtemplate.ecore#//CollectionTemplateExp/validateRestTypeisCollectionType/diagnostics"/>
+        <genParameters ecoreParameter="QVTtemplate.ecore#//CollectionTemplateExp/validateRestTypeisCollectionType/context"/>
+      </genOperations>
+      <genOperations ecoreOperation="QVTtemplate.ecore#//CollectionTemplateExp/validateTypeisCollectionType">
+        <genParameters ecoreParameter="QVTtemplate.ecore#//CollectionTemplateExp/validateTypeisCollectionType/diagnostics"/>
+        <genParameters ecoreParameter="QVTtemplate.ecore#//CollectionTemplateExp/validateTypeisCollectionType/context"/>
+      </genOperations>
     </genClasses>
     <genClasses ecoreClass="QVTtemplate.ecore#T-qvttemplate-ObjectTemplateExp">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTtemplate.ecore#F-qvttemplate-ObjectTemplateExp-part"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTtemplate.ecore#F-qvttemplate-ObjectTemplateExp-referredClass"/>
+      <genOperations ecoreOperation="QVTtemplate.ecore#//ObjectTemplateExp/validatePartPropertyIsUnique">
+        <genParameters ecoreParameter="QVTtemplate.ecore#//ObjectTemplateExp/validatePartPropertyIsUnique/diagnostics"/>
+        <genParameters ecoreParameter="QVTtemplate.ecore#//ObjectTemplateExp/validatePartPropertyIsUnique/context"/>
+      </genOperations>
+      <genOperations ecoreOperation="QVTtemplate.ecore#//ObjectTemplateExp/validateTypeisObjectType">
+        <genParameters ecoreParameter="QVTtemplate.ecore#//ObjectTemplateExp/validateTypeisObjectType/diagnostics"/>
+        <genParameters ecoreParameter="QVTtemplate.ecore#//ObjectTemplateExp/validateTypeisObjectType/context"/>
+      </genOperations>
     </genClasses>
     <genClasses ecoreClass="QVTtemplate.ecore#T-qvttemplate-PropertyTemplateItem">
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference QVTtemplate.ecore#F-qvttemplate-PropertyTemplateItem-objContainer"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTtemplate.ecore#F-qvttemplate-PropertyTemplateItem-referredProperty"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTtemplate.ecore#F-qvttemplate-PropertyTemplateItem-value"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTtemplate.ecore#F-qvttemplate-PropertyTemplateItem-isOpposite"/>
+      <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference QVTtemplate.ecore#F-qvttemplate-PropertyTemplateItem-resolvedProperty"/>
+      <genOperations ecoreOperation="QVTtemplate.ecore#//PropertyTemplateItem/validateCompatibleClassForProperty">
+        <genParameters ecoreParameter="QVTtemplate.ecore#//PropertyTemplateItem/validateCompatibleClassForProperty/diagnostics"/>
+        <genParameters ecoreParameter="QVTtemplate.ecore#//PropertyTemplateItem/validateCompatibleClassForProperty/context"/>
+      </genOperations>
+      <genOperations ecoreOperation="QVTtemplate.ecore#//PropertyTemplateItem/validateCompatibleTypeForObjectValue">
+        <genParameters ecoreParameter="QVTtemplate.ecore#//PropertyTemplateItem/validateCompatibleTypeForObjectValue/diagnostics"/>
+        <genParameters ecoreParameter="QVTtemplate.ecore#//PropertyTemplateItem/validateCompatibleTypeForObjectValue/context"/>
+      </genOperations>
+      <genOperations ecoreOperation="QVTtemplate.ecore#//PropertyTemplateItem/validateCompatibleTypeForCollectionElementValue">
+        <genParameters ecoreParameter="QVTtemplate.ecore#//PropertyTemplateItem/validateCompatibleTypeForCollectionElementValue/diagnostics"/>
+        <genParameters ecoreParameter="QVTtemplate.ecore#//PropertyTemplateItem/validateCompatibleTypeForCollectionElementValue/context"/>
+      </genOperations>
+      <genOperations ecoreOperation="QVTtemplate.ecore#//PropertyTemplateItem/validateCompatibleTypeForCollectionValue">
+        <genParameters ecoreParameter="QVTtemplate.ecore#//PropertyTemplateItem/validateCompatibleTypeForCollectionValue/diagnostics"/>
+        <genParameters ecoreParameter="QVTtemplate.ecore#//PropertyTemplateItem/validateCompatibleTypeForCollectionValue/context"/>
+      </genOperations>
     </genClasses>
     <genClasses image="false" ecoreClass="QVTtemplate.ecore#T-qvttemplate-TemplateExp">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTtemplate.ecore#F-qvttemplate-TemplateExp-bindsTo"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTtemplate.ecore#F-qvttemplate-TemplateExp-where"/>
-      <genOperations ecoreOperation="QVTtemplate.ecore#//TemplateExp/validateIsTrue">
-        <genParameters ecoreParameter="QVTtemplate.ecore#//TemplateExp/validateIsTrue/diagnostics"/>
-        <genParameters ecoreParameter="QVTtemplate.ecore#//TemplateExp/validateIsTrue/context"/>
+      <genOperations ecoreOperation="QVTtemplate.ecore#//TemplateExp/validateWhereIsBoolean">
+        <genParameters ecoreParameter="QVTtemplate.ecore#//TemplateExp/validateWhereIsBoolean/diagnostics"/>
+        <genParameters ecoreParameter="QVTtemplate.ecore#//TemplateExp/validateWhereIsBoolean/context"/>
       </genOperations>
     </genClasses>
   </genPackages>

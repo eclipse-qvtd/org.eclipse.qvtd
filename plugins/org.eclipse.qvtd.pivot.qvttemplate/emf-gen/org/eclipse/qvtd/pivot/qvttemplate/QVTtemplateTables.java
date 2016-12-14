@@ -65,15 +65,28 @@ public class QVTtemplateTables
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull RootPackageId PACKid_$metamodel$ = org.eclipse.ocl.pivot.ids.IdManager.getRootPackageId("$metamodel$");
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTtemplate = org.eclipse.ocl.pivot.ids.IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/2015/QVTtemplate", null, org.eclipse.qvtd.pivot.qvttemplate.QVTtemplatePackage.eINSTANCE);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Class = org.eclipse.qvtd.pivot.qvttemplate.QVTtemplateTables.PACKid_$metamodel$.getClassId("Class", 0);
+	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_CollectionTemplateExp = org.eclipse.qvtd.pivot.qvttemplate.QVTtemplateTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTtemplate.getClassId("CollectionTemplateExp", 0);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_CollectionType = org.eclipse.qvtd.pivot.qvttemplate.QVTtemplateTables.PACKid_$metamodel$.getClassId("CollectionType", 0);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_OCLExpression = org.eclipse.qvtd.pivot.qvttemplate.QVTtemplateTables.PACKid_$metamodel$.getClassId("OCLExpression", 0);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_ObjectTemplateExp = org.eclipse.qvtd.pivot.qvttemplate.QVTtemplateTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTtemplate.getClassId("ObjectTemplateExp", 0);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Property = org.eclipse.qvtd.pivot.qvttemplate.QVTtemplateTables.PACKid_$metamodel$.getClassId("Property", 0);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_PropertyTemplateItem = org.eclipse.qvtd.pivot.qvttemplate.QVTtemplateTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTtemplate.getClassId("PropertyTemplateItem", 0);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_TemplateExp = org.eclipse.qvtd.pivot.qvttemplate.QVTtemplateTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTtemplate.getClassId("TemplateExp", 0);
+	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Type = org.eclipse.qvtd.pivot.qvttemplate.QVTtemplateTables.PACKid_$metamodel$.getClassId("Type", 0);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Variable = org.eclipse.qvtd.pivot.qvttemplate.QVTtemplateTables.PACKid_$metamodel$.getClassId("Variable", 0);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue INT_0 = org.eclipse.ocl.pivot.utilities.ValueUtil.integerValueOf("0");
-	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_TemplateExp_c_c_IsTrue = "TemplateExp::IsTrue";
+	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_CollectionTemplateExp_c_c_MemberTypeisCollectionElementType = "CollectionTemplateExp::MemberTypeisCollectionElementType";
+	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_CollectionTemplateExp_c_c_RestTypeisCollectionType = "CollectionTemplateExp::RestTypeisCollectionType";
+	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_CollectionTemplateExp_c_c_TypeisCollectionType = "CollectionTemplateExp::TypeisCollectionType";
+	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_ObjectTemplateExp_c_c_PartPropertyIsUnique = "ObjectTemplateExp::PartPropertyIsUnique";
+	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_ObjectTemplateExp_c_c_TypeisObjectType = "ObjectTemplateExp::TypeisObjectType";
+	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_PropertyTemplateItem_c_c_CompatibleClassForProperty = "PropertyTemplateItem::CompatibleClassForProperty";
+	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_PropertyTemplateItem_c_c_CompatibleTypeForCollectionElementValue = "PropertyTemplateItem::CompatibleTypeForCollectionElementValue";
+	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_PropertyTemplateItem_c_c_CompatibleTypeForCollectionValue = "PropertyTemplateItem::CompatibleTypeForCollectionValue";
+	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_PropertyTemplateItem_c_c_CompatibleTypeForObjectValue = "PropertyTemplateItem::CompatibleTypeForObjectValue";
+	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_TemplateExp_c_c_WhereIsBoolean = "TemplateExp::WhereIsBoolean";
+	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR__32_must_32_conform_32_to_32 = " must conform to ";
+	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR__32_or_32_vice_m_versa = " or vice-versa";
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId SET_CLSSid_OCLExpression = org.eclipse.ocl.pivot.ids.TypeId.SET.getSpecializedId(org.eclipse.qvtd.pivot.qvttemplate.QVTtemplateTables.CLSSid_OCLExpression);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId SET_CLSSid_PropertyTemplateItem = org.eclipse.ocl.pivot.ids.TypeId.SET.getSpecializedId(org.eclipse.qvtd.pivot.qvttemplate.QVTtemplateTables.CLSSid_PropertyTemplateItem);
 
@@ -261,7 +274,8 @@ public class QVTtemplateTables
 		public static final @NonNull ExecutorProperty _PropertyTemplateItem__isOpposite = new EcoreExecutorProperty(QVTtemplatePackage.Literals.PROPERTY_TEMPLATE_ITEM__IS_OPPOSITE, Types._PropertyTemplateItem, 0);
 		public static final @NonNull ExecutorProperty _PropertyTemplateItem__objContainer = new EcoreExecutorProperty(QVTtemplatePackage.Literals.PROPERTY_TEMPLATE_ITEM__OBJ_CONTAINER, Types._PropertyTemplateItem, 1);
 		public static final @NonNull ExecutorProperty _PropertyTemplateItem__referredProperty = new EcoreExecutorProperty(QVTtemplatePackage.Literals.PROPERTY_TEMPLATE_ITEM__REFERRED_PROPERTY, Types._PropertyTemplateItem, 2);
-		public static final @NonNull ExecutorProperty _PropertyTemplateItem__value = new EcoreExecutorProperty(QVTtemplatePackage.Literals.PROPERTY_TEMPLATE_ITEM__VALUE, Types._PropertyTemplateItem, 3);
+		public static final @NonNull ExecutorProperty _PropertyTemplateItem__resolvedProperty = new EcoreExecutorProperty(QVTtemplatePackage.Literals.PROPERTY_TEMPLATE_ITEM__RESOLVED_PROPERTY, Types._PropertyTemplateItem, 3);
+		public static final @NonNull ExecutorProperty _PropertyTemplateItem__value = new EcoreExecutorProperty(QVTtemplatePackage.Literals.PROPERTY_TEMPLATE_ITEM__VALUE, Types._PropertyTemplateItem, 4);
 
 		public static final @NonNull ExecutorProperty _TemplateExp__bindsTo = new EcoreExecutorProperty(QVTtemplatePackage.Literals.TEMPLATE_EXP__BINDS_TO, Types._TemplateExp, 0);
 		public static final @NonNull ExecutorProperty _TemplateExp__where = new EcoreExecutorProperty(QVTtemplatePackage.Literals.TEMPLATE_EXP__WHERE, Types._TemplateExp, 1);
@@ -605,6 +619,7 @@ public class QVTtemplateTables
 			QVTtemplateTables.Properties._PropertyTemplateItem__isOpposite,
 			QVTtemplateTables.Properties._PropertyTemplateItem__objContainer,
 			QVTtemplateTables.Properties._PropertyTemplateItem__referredProperty,
+			QVTtemplateTables.Properties._PropertyTemplateItem__resolvedProperty,
 			QVTtemplateTables.Properties._PropertyTemplateItem__value
 		};
 

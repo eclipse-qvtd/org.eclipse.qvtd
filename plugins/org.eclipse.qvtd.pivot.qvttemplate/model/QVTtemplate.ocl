@@ -2,7 +2,59 @@ import 'QVTtemplate.ecore'
 
 package qvttemplate
 
+context CollectionTemplateExp
+inv MemberTypeisCollectionElementType:
+	member->forAll(type.conformsTo(referredCollectionType.elementType))
+
+inv RestTypeisCollectionType:
+	rest <> null implies
+		rest.type = referredCollectionType
+
+inv TypeisCollectionType:
+	type = referredCollectionType
+
+context ObjectTemplateExp
+inv PartPropertyIsUnique:
+	part->isUnique(resolvedProperty)
+
+inv TypeisObjectType:
+	type = referredClass
+
+context PropertyTemplateItem
+def:resolvedProperty : ocl::Property[1] =
+	if isOpposite then referredProperty.opposite else referredProperty endif
+
+inv CompatibleClassForProperty(objContainer.referredClass.name + ' must conform to ' + resolvedProperty.owningClass.name):
+	objContainer.referredClass.conformsTo(resolvedProperty.owningClass)
+
+inv CompatibleTypeForObjectValue(value.type.name + ' must conform to ' + resolvedProperty.type.name + ' or vice-versa'):
+	not resolvedProperty.type.oclIsKindOf(ocl::CollectionType) implies
+		let propertyType = resolvedProperty.type in
+		let valueType = value.type in
+			valueType.conformsTo(propertyType)
+			or propertyType.conformsTo(valueType)
+
+inv CompatibleTypeForCollectionElementValue(value.type.name + ' must conform to ' + resolvedProperty.type.oclAsType(ocl::CollectionType).elementType.name + ' or vice-versa'):
+	resolvedProperty.type.oclIsKindOf(ocl::CollectionType)
+	and not value.type.oclIsKindOf(ocl::CollectionType) implies
+		let propertyType = resolvedProperty.type.oclAsType(ocl::CollectionType).elementType in
+		let valueType = value.type in
+			valueType.conformsTo(propertyType)
+			or propertyType.conformsTo(valueType)
+
+inv CompatibleTypeForCollectionValue(value.type.oclAsType(ocl::CollectionType).elementType.name + ' must conform to ' + resolvedProperty.type.oclAsType(ocl::CollectionType).elementType.name + ' or vice-versa'):
+	resolvedProperty.type.oclIsKindOf(ocl::CollectionType)
+	and value.type.oclIsKindOf(ocl::CollectionType) implies
+		let propertyType = resolvedProperty.type.oclAsType(ocl::CollectionType).elementType in
+		let valueType = value.type.oclAsType(ocl::CollectionType).elementType in
+--		Tuple {
+--			message : String = valueType.conformsTo(propertyType) or propertyType.conformsTo(valueType),
+			/*status : Boolean =*/ valueType.conformsTo(propertyType) or propertyType.conformsTo(valueType)
+--		}.status
+
 context TemplateExp
-inv IsTrue: true
+inv WhereIsBoolean:
+	where <> null implies
+		where.type = Boolean
 
 endpackage

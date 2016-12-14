@@ -228,13 +228,13 @@ public interface QVTtemplatePackage extends EPackage {
 	int TEMPLATE_EXP___VALIDATE_TYPE_IS_NOT_NULL__DIAGNOSTICCHAIN_MAP = PivotPackage.LITERAL_EXP___VALIDATE_TYPE_IS_NOT_NULL__DIAGNOSTICCHAIN_MAP;
 
 	/**
-	 * The operation id for the '<em>Validate Is True</em>' operation.
+	 * The operation id for the '<em>Validate Where Is Boolean</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TEMPLATE_EXP___VALIDATE_IS_TRUE__DIAGNOSTICCHAIN_MAP = PivotPackage.LITERAL_EXP_OPERATION_COUNT + 0;
+	int TEMPLATE_EXP___VALIDATE_WHERE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP = PivotPackage.LITERAL_EXP_OPERATION_COUNT + 0;
 
 	/**
 	 * The number of operations of the '<em>Template Exp</em>' class.
@@ -427,13 +427,40 @@ public interface QVTtemplatePackage extends EPackage {
 	int COLLECTION_TEMPLATE_EXP___VALIDATE_TYPE_IS_NOT_NULL__DIAGNOSTICCHAIN_MAP = TEMPLATE_EXP___VALIDATE_TYPE_IS_NOT_NULL__DIAGNOSTICCHAIN_MAP;
 
 	/**
-	 * The operation id for the '<em>Validate Is True</em>' operation.
+	 * The operation id for the '<em>Validate Where Is Boolean</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COLLECTION_TEMPLATE_EXP___VALIDATE_IS_TRUE__DIAGNOSTICCHAIN_MAP = TEMPLATE_EXP___VALIDATE_IS_TRUE__DIAGNOSTICCHAIN_MAP;
+	int COLLECTION_TEMPLATE_EXP___VALIDATE_WHERE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP = TEMPLATE_EXP___VALIDATE_WHERE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The operation id for the '<em>Validate Member Typeis Collection Element Type</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_TEMPLATE_EXP___VALIDATE_MEMBER_TYPEIS_COLLECTION_ELEMENT_TYPE__DIAGNOSTICCHAIN_MAP = TEMPLATE_EXP_OPERATION_COUNT + 0;
+
+	/**
+	 * The operation id for the '<em>Validate Rest Typeis Collection Type</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_TEMPLATE_EXP___VALIDATE_REST_TYPEIS_COLLECTION_TYPE__DIAGNOSTICCHAIN_MAP = TEMPLATE_EXP_OPERATION_COUNT + 1;
+
+	/**
+	 * The operation id for the '<em>Validate Typeis Collection Type</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_TEMPLATE_EXP___VALIDATE_TYPEIS_COLLECTION_TYPE__DIAGNOSTICCHAIN_MAP = TEMPLATE_EXP_OPERATION_COUNT + 2;
 
 	/**
 	 * The number of operations of the '<em>Collection Template Exp</em>' class.
@@ -442,7 +469,7 @@ public interface QVTtemplatePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COLLECTION_TEMPLATE_EXP_OPERATION_COUNT = TEMPLATE_EXP_OPERATION_COUNT + 0;
+	int COLLECTION_TEMPLATE_EXP_OPERATION_COUNT = TEMPLATE_EXP_OPERATION_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvttemplate.impl.ObjectTemplateExpImpl <em>Object Template Exp</em>}' class.
@@ -617,13 +644,31 @@ public interface QVTtemplatePackage extends EPackage {
 	int OBJECT_TEMPLATE_EXP___VALIDATE_TYPE_IS_NOT_NULL__DIAGNOSTICCHAIN_MAP = TEMPLATE_EXP___VALIDATE_TYPE_IS_NOT_NULL__DIAGNOSTICCHAIN_MAP;
 
 	/**
-	 * The operation id for the '<em>Validate Is True</em>' operation.
+	 * The operation id for the '<em>Validate Where Is Boolean</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OBJECT_TEMPLATE_EXP___VALIDATE_IS_TRUE__DIAGNOSTICCHAIN_MAP = TEMPLATE_EXP___VALIDATE_IS_TRUE__DIAGNOSTICCHAIN_MAP;
+	int OBJECT_TEMPLATE_EXP___VALIDATE_WHERE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP = TEMPLATE_EXP___VALIDATE_WHERE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The operation id for the '<em>Validate Part Property Is Unique</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OBJECT_TEMPLATE_EXP___VALIDATE_PART_PROPERTY_IS_UNIQUE__DIAGNOSTICCHAIN_MAP = TEMPLATE_EXP_OPERATION_COUNT + 0;
+
+	/**
+	 * The operation id for the '<em>Validate Typeis Object Type</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OBJECT_TEMPLATE_EXP___VALIDATE_TYPEIS_OBJECT_TYPE__DIAGNOSTICCHAIN_MAP = TEMPLATE_EXP_OPERATION_COUNT + 1;
 
 	/**
 	 * The number of operations of the '<em>Object Template Exp</em>' class.
@@ -632,7 +677,7 @@ public interface QVTtemplatePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OBJECT_TEMPLATE_EXP_OPERATION_COUNT = TEMPLATE_EXP_OPERATION_COUNT + 0;
+	int OBJECT_TEMPLATE_EXP_OPERATION_COUNT = TEMPLATE_EXP_OPERATION_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvttemplate.impl.PropertyTemplateItemImpl <em>Property Template Item</em>}' class.
@@ -717,13 +762,22 @@ public interface QVTtemplatePackage extends EPackage {
 	int PROPERTY_TEMPLATE_ITEM__IS_OPPOSITE = PivotPackage.ELEMENT_FEATURE_COUNT + 3;
 
 	/**
+	 * The feature id for the '<em><b>Resolved Property</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_TEMPLATE_ITEM__RESOLVED_PROPERTY = PivotPackage.ELEMENT_FEATURE_COUNT + 4;
+
+	/**
 	 * The number of structural features of the '<em>Property Template Item</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_TEMPLATE_ITEM_FEATURE_COUNT = PivotPackage.ELEMENT_FEATURE_COUNT + 4;
+	int PROPERTY_TEMPLATE_ITEM_FEATURE_COUNT = PivotPackage.ELEMENT_FEATURE_COUNT + 5;
 
 
 	/**
@@ -745,13 +799,49 @@ public interface QVTtemplatePackage extends EPackage {
 	int PROPERTY_TEMPLATE_ITEM___GET_VALUE__TYPE_STRING = PivotPackage.ELEMENT___GET_VALUE__TYPE_STRING;
 
 	/**
+	 * The operation id for the '<em>Validate Compatible Class For Property</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_TEMPLATE_ITEM___VALIDATE_COMPATIBLE_CLASS_FOR_PROPERTY__DIAGNOSTICCHAIN_MAP = PivotPackage.ELEMENT_OPERATION_COUNT + 0;
+
+	/**
+	 * The operation id for the '<em>Validate Compatible Type For Object Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_TEMPLATE_ITEM___VALIDATE_COMPATIBLE_TYPE_FOR_OBJECT_VALUE__DIAGNOSTICCHAIN_MAP = PivotPackage.ELEMENT_OPERATION_COUNT + 1;
+
+	/**
+	 * The operation id for the '<em>Validate Compatible Type For Collection Element Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_TEMPLATE_ITEM___VALIDATE_COMPATIBLE_TYPE_FOR_COLLECTION_ELEMENT_VALUE__DIAGNOSTICCHAIN_MAP = PivotPackage.ELEMENT_OPERATION_COUNT + 2;
+
+	/**
+	 * The operation id for the '<em>Validate Compatible Type For Collection Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_TEMPLATE_ITEM___VALIDATE_COMPATIBLE_TYPE_FOR_COLLECTION_VALUE__DIAGNOSTICCHAIN_MAP = PivotPackage.ELEMENT_OPERATION_COUNT + 3;
+
+	/**
 	 * The number of operations of the '<em>Property Template Item</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_TEMPLATE_ITEM_OPERATION_COUNT = PivotPackage.ELEMENT_OPERATION_COUNT + 0;
+	int PROPERTY_TEMPLATE_ITEM_OPERATION_COUNT = PivotPackage.ELEMENT_OPERATION_COUNT + 4;
 
 
 	/**
@@ -798,6 +888,36 @@ public interface QVTtemplatePackage extends EPackage {
 	EReference getCollectionTemplateExp_Rest();
 
 	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp#validateMemberTypeisCollectionElementType(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Member Typeis Collection Element Type</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Member Typeis Collection Element Type</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp#validateMemberTypeisCollectionElementType(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getCollectionTemplateExp__ValidateMemberTypeisCollectionElementType__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp#validateRestTypeisCollectionType(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Rest Typeis Collection Type</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Rest Typeis Collection Type</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp#validateRestTypeisCollectionType(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getCollectionTemplateExp__ValidateRestTypeisCollectionType__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp#validateTypeisCollectionType(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Typeis Collection Type</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Typeis Collection Type</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp#validateTypeisCollectionType(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getCollectionTemplateExp__ValidateTypeisCollectionType__DiagnosticChain_Map();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp <em>Object Template Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -828,6 +948,26 @@ public interface QVTtemplatePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getObjectTemplateExp_ReferredClass();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp#validatePartPropertyIsUnique(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Part Property Is Unique</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Part Property Is Unique</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp#validatePartPropertyIsUnique(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getObjectTemplateExp__ValidatePartPropertyIsUnique__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp#validateTypeisObjectType(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Typeis Object Type</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Typeis Object Type</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp#validateTypeisObjectType(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getObjectTemplateExp__ValidateTypeisObjectType__DiagnosticChain_Map();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem <em>Property Template Item</em>}'.
@@ -884,6 +1024,57 @@ public interface QVTtemplatePackage extends EPackage {
 	EAttribute getPropertyTemplateItem_IsOpposite();
 
 	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem#getResolvedProperty <em>Resolved Property</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Resolved Property</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem#getResolvedProperty()
+	 * @see #getPropertyTemplateItem()
+	 * @generated
+	 */
+	EReference getPropertyTemplateItem_ResolvedProperty();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem#validateCompatibleClassForProperty(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Compatible Class For Property</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Compatible Class For Property</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem#validateCompatibleClassForProperty(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getPropertyTemplateItem__ValidateCompatibleClassForProperty__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem#validateCompatibleTypeForObjectValue(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Compatible Type For Object Value</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Compatible Type For Object Value</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem#validateCompatibleTypeForObjectValue(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getPropertyTemplateItem__ValidateCompatibleTypeForObjectValue__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem#validateCompatibleTypeForCollectionElementValue(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Compatible Type For Collection Element Value</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Compatible Type For Collection Element Value</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem#validateCompatibleTypeForCollectionElementValue(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getPropertyTemplateItem__ValidateCompatibleTypeForCollectionElementValue__DiagnosticChain_Map();
+
+	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem#validateCompatibleTypeForCollectionValue(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Compatible Type For Collection Value</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Compatible Type For Collection Value</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem#validateCompatibleTypeForCollectionValue(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getPropertyTemplateItem__ValidateCompatibleTypeForCollectionValue__DiagnosticChain_Map();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvttemplate.TemplateExp <em>Template Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -916,14 +1107,14 @@ public interface QVTtemplatePackage extends EPackage {
 	EReference getTemplateExp_Where();
 
 	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvttemplate.TemplateExp#validateIsTrue(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Is True</em>}' operation.
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvttemplate.TemplateExp#validateWhereIsBoolean(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Where Is Boolean</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Validate Is True</em>' operation.
-	 * @see org.eclipse.qvtd.pivot.qvttemplate.TemplateExp#validateIsTrue(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @return the meta object for the '<em>Validate Where Is Boolean</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvttemplate.TemplateExp#validateWhereIsBoolean(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
 	 * @generated
 	 */
-	EOperation getTemplateExp__ValidateIsTrue__DiagnosticChain_Map();
+	EOperation getTemplateExp__ValidateWhereIsBoolean__DiagnosticChain_Map();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -982,6 +1173,30 @@ public interface QVTtemplatePackage extends EPackage {
 		EReference COLLECTION_TEMPLATE_EXP__REST = eINSTANCE.getCollectionTemplateExp_Rest();
 
 		/**
+		 * The meta object literal for the '<em><b>Validate Member Typeis Collection Element Type</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation COLLECTION_TEMPLATE_EXP___VALIDATE_MEMBER_TYPEIS_COLLECTION_ELEMENT_TYPE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getCollectionTemplateExp__ValidateMemberTypeisCollectionElementType__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Rest Typeis Collection Type</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation COLLECTION_TEMPLATE_EXP___VALIDATE_REST_TYPEIS_COLLECTION_TYPE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getCollectionTemplateExp__ValidateRestTypeisCollectionType__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Typeis Collection Type</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation COLLECTION_TEMPLATE_EXP___VALIDATE_TYPEIS_COLLECTION_TYPE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getCollectionTemplateExp__ValidateTypeisCollectionType__DiagnosticChain_Map();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvttemplate.impl.ObjectTemplateExpImpl <em>Object Template Exp</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1006,6 +1221,22 @@ public interface QVTtemplatePackage extends EPackage {
 		 * @generated
 		 */
 		EReference OBJECT_TEMPLATE_EXP__REFERRED_CLASS = eINSTANCE.getObjectTemplateExp_ReferredClass();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Part Property Is Unique</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation OBJECT_TEMPLATE_EXP___VALIDATE_PART_PROPERTY_IS_UNIQUE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getObjectTemplateExp__ValidatePartPropertyIsUnique__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Typeis Object Type</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation OBJECT_TEMPLATE_EXP___VALIDATE_TYPEIS_OBJECT_TYPE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getObjectTemplateExp__ValidateTypeisObjectType__DiagnosticChain_Map();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvttemplate.impl.PropertyTemplateItemImpl <em>Property Template Item</em>}' class.
@@ -1050,6 +1281,46 @@ public interface QVTtemplatePackage extends EPackage {
 		EAttribute PROPERTY_TEMPLATE_ITEM__IS_OPPOSITE = eINSTANCE.getPropertyTemplateItem_IsOpposite();
 
 		/**
+		 * The meta object literal for the '<em><b>Resolved Property</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PROPERTY_TEMPLATE_ITEM__RESOLVED_PROPERTY = eINSTANCE.getPropertyTemplateItem_ResolvedProperty();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Compatible Class For Property</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation PROPERTY_TEMPLATE_ITEM___VALIDATE_COMPATIBLE_CLASS_FOR_PROPERTY__DIAGNOSTICCHAIN_MAP = eINSTANCE.getPropertyTemplateItem__ValidateCompatibleClassForProperty__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Compatible Type For Object Value</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation PROPERTY_TEMPLATE_ITEM___VALIDATE_COMPATIBLE_TYPE_FOR_OBJECT_VALUE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getPropertyTemplateItem__ValidateCompatibleTypeForObjectValue__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Compatible Type For Collection Element Value</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation PROPERTY_TEMPLATE_ITEM___VALIDATE_COMPATIBLE_TYPE_FOR_COLLECTION_ELEMENT_VALUE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getPropertyTemplateItem__ValidateCompatibleTypeForCollectionElementValue__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Compatible Type For Collection Value</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation PROPERTY_TEMPLATE_ITEM___VALIDATE_COMPATIBLE_TYPE_FOR_COLLECTION_VALUE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getPropertyTemplateItem__ValidateCompatibleTypeForCollectionValue__DiagnosticChain_Map();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvttemplate.impl.TemplateExpImpl <em>Template Exp</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1076,12 +1347,12 @@ public interface QVTtemplatePackage extends EPackage {
 		EReference TEMPLATE_EXP__WHERE = eINSTANCE.getTemplateExp_Where();
 
 		/**
-		 * The meta object literal for the '<em><b>Validate Is True</b></em>' operation.
+		 * The meta object literal for the '<em><b>Validate Where Is Boolean</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EOperation TEMPLATE_EXP___VALIDATE_IS_TRUE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getTemplateExp__ValidateIsTrue__DiagnosticChain_Map();
+		EOperation TEMPLATE_EXP___VALIDATE_WHERE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP = eINSTANCE.getTemplateExp__ValidateWhereIsBoolean__DiagnosticChain_Map();
 
 	}
 
