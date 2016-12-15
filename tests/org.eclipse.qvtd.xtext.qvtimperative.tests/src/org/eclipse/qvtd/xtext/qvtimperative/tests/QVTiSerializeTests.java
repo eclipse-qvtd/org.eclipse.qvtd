@@ -182,10 +182,9 @@ public class QVTiSerializeTests extends LoadTestCase
 		doSerializeRoundTrip("ManualUML2RDBMS/ManualUML2RDBMS");
 	}
 
-	/*	FIXME BUG 492293
 	public void testSerialize_SimpleUML2RDBMS_qvti() throws Exception {
 		doSerializeRoundTrip("SimpleUML2RDBMS/SimpleUML2RDBMS");
-	} */
+	}
 
 	public void testSerialize_Tree2TallTree_qvti() throws Exception {
 		doSerializeRoundTrip("Tree2TallTree/Tree2TallTree");
