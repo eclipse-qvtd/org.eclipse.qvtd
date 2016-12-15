@@ -299,9 +299,6 @@
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
         <details key="derivation" value="usedPackage&#xA;"/>
       </eAnnotations>
-      <eAnnotations source="http://www.eclipse.org/OCL/Collection">
-        <details key="nullFree" value="false"/>
-      </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" xmi:id="T-qvtimperative-LoopParameterBinding"
@@ -479,18 +476,12 @@
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
         <details key="derivation" value="referredMapping.ownedMappingParameters.name->asSet()->sortedBy(n | n)&#xA;"/>
       </eAnnotations>
-      <eAnnotations source="http://www.eclipse.org/OCL/Collection">
-        <details key="nullFree" value="false"/>
-      </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="F-qvtimperative-MappingCall-referringNames"
         name="referringNames" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         changeable="false" volatile="true" transient="true" derived="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
         <details key="derivation" value="ownedMappingParameterBindings.boundVariable.name->asSet()->sortedBy(n | n)&#xA;"/>
-      </eAnnotations>
-      <eAnnotations source="http://www.eclipse.org/OCL/Collection">
-        <details key="nullFree" value="false"/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
@@ -774,11 +765,7 @@
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
         <details key="body" value="'{' + names/*->sortedBy(n | n)*/->iterate(n; s : String = '' | if s = '' then n else s + ';' + n endif) + '}'&#xA;&#xA;&#xA;"/>
       </eAnnotations>
-      <eParameters name="names" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
-        <eAnnotations source="http://www.eclipse.org/OCL/Collection">
-          <details key="nullFree" value="false"/>
-        </eAnnotations>
-      </eParameters>
+      <eParameters name="names" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eOperations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" xmi:id="T-qvtimperative-VariableStatement"

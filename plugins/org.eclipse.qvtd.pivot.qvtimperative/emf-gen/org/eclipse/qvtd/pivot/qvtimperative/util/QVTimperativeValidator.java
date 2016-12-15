@@ -634,6 +634,7 @@ public class QVTimperativeValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_UniqueID(imperativeTransformation, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(imperativeTransformation, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(imperativeTransformation, diagnostics, context);
+		if (result || diagnostics != null) result &= pivotValidator.validateClass_validateNameIsNotNull(imperativeTransformation, diagnostics, context);
 		if (result || diagnostics != null) result &= pivotValidator.validateClass_validateUniqueInvariantName(imperativeTransformation, diagnostics, context);
 		if (result || diagnostics != null) result &= qvTbaseValidator.validateTransformation_validateContextTypeIsTransformation(imperativeTransformation, diagnostics, context);
 		if (result || diagnostics != null) result &= qvTbaseValidator.validateTransformation_validateExtendedTypedModelIsExtended(imperativeTransformation, diagnostics, context);

@@ -445,6 +445,7 @@ public class QVTbaseValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_UniqueID(transformation, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(transformation, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(transformation, diagnostics, context);
+		if (result || diagnostics != null) result &= pivotValidator.validateClass_validateNameIsNotNull(transformation, diagnostics, context);
 		if (result || diagnostics != null) result &= pivotValidator.validateClass_validateUniqueInvariantName(transformation, diagnostics, context);
 		if (result || diagnostics != null) result &= validateTransformation_validateContextTypeIsTransformation(transformation, diagnostics, context);
 		if (result || diagnostics != null) result &= validateTransformation_validateExtendedTypedModelIsExtended(transformation, diagnostics, context);

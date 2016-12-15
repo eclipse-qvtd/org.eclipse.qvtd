@@ -12,9 +12,9 @@ package org.eclipse.qvtd.pivot.qvtimperative.impl;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
-
 import java.util.Iterator;
 import java.util.Map;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.DiagnosticChain;
@@ -37,7 +37,6 @@ import org.eclipse.ocl.pivot.library.string.CGStringGetSeverityOperation;
 import org.eclipse.ocl.pivot.library.string.CGStringLogDiagnosticOperation;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
-import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.ocl.pivot.values.OrderedSetValue;
 import org.eclipse.ocl.pivot.values.SetValue;
 import org.eclipse.qvtd.pivot.qvtbase.impl.RuleImpl;
@@ -329,20 +328,18 @@ public class MappingImpl extends RuleImpl implements Mapping {
 				final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue selectByKind = (OrderedSetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(executor, BOXED_ownedStatements, TYP_qvtimperative_c_c_VariableStatement);
 				final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SetValue union = (SetValue)CollectionUnionOperation.INSTANCE.evaluate(BOXED_ownedMappingParameters, selectByKind);
 				/*@Thrown*/ SetValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator = ValueUtil.createSetAccumulatorValue(QVTimperativeTables.SET_CLSSid_VariableDeclaration);
-				@Nullable Iterator<Object> ITERATOR__1 = union.iterator();
+				@NonNull Iterator<Object> ITERATOR__1 = union.iterator();
 				/*@Thrown*/ boolean status;
 				while (true) {
 					if (!ITERATOR__1.hasNext()) {
 						status = ValueUtil.TRUE_VALUE;
 						break;
 					}
-					/*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable VariableDeclaration _1 = (VariableDeclaration)ITERATOR__1.next();
+					@SuppressWarnings("null")
+					/*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull VariableDeclaration _1 = (VariableDeclaration)ITERATOR__1.next();
 					/**
 					 * name
 					 */
-					if (_1 == null) {
-						throw new InvalidValueException("Null source for \'NamedElement::name\'");
-					}
 					final /*@Thrown*/ java.lang.@Nullable String name = _1.getName();
 					//
 					if (accumulator.includes(name) == ValueUtil.TRUE_VALUE) {

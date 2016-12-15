@@ -1802,8 +1802,6 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		createEcoreAnnotations();
 		// http://www.eclipse.org/uml2/2.0.0/UML
 		createUMLAnnotations();
-		// http://www.eclipse.org/OCL/Collection
-		createCollectionAnnotations();
 	}
 
 	/**
@@ -1960,40 +1958,6 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 			source,
 			new String[] {
 				"originalName", "CompatibleTypeForUncheckedValue"
-		});
-	}
-
-	/**
-	 * Initializes the annotations for <b>http://www.eclipse.org/OCL/Collection</b>.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void createCollectionAnnotations() {
-		String source = "http://www.eclipse.org/OCL/Collection";
-		addAnnotation
-		(getImperativeTypedModel_AllUsedPackages(),
-			source,
-			new String[] {
-				"nullFree", "false"
-		});
-		addAnnotation
-		(getMappingCall_ReferredNames(),
-			source,
-			new String[] {
-				"nullFree", "false"
-		});
-		addAnnotation
-		(getMappingCall_ReferringNames(),
-			source,
-			new String[] {
-				"nullFree", "false"
-		});
-		addAnnotation
-		((getStatement__JoinNames__EList()).getEParameters().get(0),
-			source,
-			new String[] {
-				"nullFree", "false"
 		});
 	}
 

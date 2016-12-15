@@ -75,19 +75,20 @@ public abstract class VariableStatementImpl extends VariableDeclarationImpl impl
 		final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@NonNull IdResolver idResolver = executor.getIdResolver();
 		final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_names = idResolver.createOrderedSetOfAll(QVTimperativeTables.ORD_PRIMid_String, names);
 		/*@NonInvalid*/ java.lang.@Nullable String s = QVTimperativeTables.STR_;
-		@Nullable Iterator<Object> ITERATOR_n = BOXED_names.iterator();
+		@NonNull Iterator<Object> ITERATOR_n = BOXED_names.iterator();
 		/*@Thrown*/ java.lang.@Nullable String iterate;
 		while (true) {
 			if (!ITERATOR_n.hasNext()) {
 				iterate = s;
 				break;
 			}
-			/*@NonInvalid*/ java.lang.@Nullable String n = (String)ITERATOR_n.next();
+			@SuppressWarnings("null")
+			/*@NonInvalid*/ java.lang.@NonNull String n = (String)ITERATOR_n.next();
 			/**
 			 * if s = '' then n else s + ';' + n endif
 			 */
 			final /*@NonInvalid*/ boolean eq = QVTimperativeTables.STR_.equals(s);
-			/*@Thrown*/ java.lang.@Nullable String symbol_0;
+			/*@Thrown*/ java.lang.@NonNull String symbol_0;
 			if (eq) {
 				symbol_0 = n;
 			}

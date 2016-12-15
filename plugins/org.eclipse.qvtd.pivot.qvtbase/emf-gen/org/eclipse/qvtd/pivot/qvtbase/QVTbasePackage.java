@@ -1594,6 +1594,15 @@ public interface QVTbasePackage extends EPackage {
 	int TRANSFORMATION___SPECIALIZE_IN__CALLEXP_TYPE = PivotPackage.CLASS___SPECIALIZE_IN__CALLEXP_TYPE;
 
 	/**
+	 * The operation id for the '<em>Validate Name Is Not Null</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSFORMATION___VALIDATE_NAME_IS_NOT_NULL__DIAGNOSTICCHAIN_MAP = PivotPackage.CLASS___VALIDATE_NAME_IS_NOT_NULL__DIAGNOSTICCHAIN_MAP;
+
+	/**
 	 * The operation id for the '<em>Validate Unique Invariant Name</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

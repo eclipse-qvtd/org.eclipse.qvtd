@@ -383,7 +383,7 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 		 *     else
 		 *       let status : OclAny[?] = overrides <> null implies
 		 *         let
-		 *           extendedRules : Bag(qvtbase::Rule)[*|1] = transformation->closure(extends)
+		 *           extendedRules : Bag(qvtbase::Rule) = transformation->closure(extends)
 		 *           ->excluding(transformation).rule
 		 *         in extendedRules->includes(overrides)
 		 *       in

@@ -1589,6 +1589,15 @@ public interface QVTrelationPackage extends EPackage {
 	int RELATIONAL_TRANSFORMATION___SPECIALIZE_IN__CALLEXP_TYPE = QVTbasePackage.TRANSFORMATION___SPECIALIZE_IN__CALLEXP_TYPE;
 
 	/**
+	 * The operation id for the '<em>Validate Name Is Not Null</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATIONAL_TRANSFORMATION___VALIDATE_NAME_IS_NOT_NULL__DIAGNOSTICCHAIN_MAP = QVTbasePackage.TRANSFORMATION___VALIDATE_NAME_IS_NOT_NULL__DIAGNOSTICCHAIN_MAP;
+
+	/**
 	 * The operation id for the '<em>Validate Unique Invariant Name</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

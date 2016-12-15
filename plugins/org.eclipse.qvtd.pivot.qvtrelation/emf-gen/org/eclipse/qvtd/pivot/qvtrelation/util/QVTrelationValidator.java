@@ -202,7 +202,7 @@ public class QVTrelationValidator extends EObjectValidator {
 	 */
 	@Override
 	protected EPackage getEPackage() {
-	  return QVTrelationPackage.eINSTANCE;
+		return QVTrelationPackage.eINSTANCE;
 	}
 
 	/**
@@ -489,6 +489,7 @@ public class QVTrelationValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_UniqueID(relationalTransformation, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(relationalTransformation, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(relationalTransformation, diagnostics, context);
+		if (result || diagnostics != null) result &= pivotValidator.validateClass_validateNameIsNotNull(relationalTransformation, diagnostics, context);
 		if (result || diagnostics != null) result &= pivotValidator.validateClass_validateUniqueInvariantName(relationalTransformation, diagnostics, context);
 		if (result || diagnostics != null) result &= qvTbaseValidator.validateTransformation_validateContextTypeIsTransformation(relationalTransformation, diagnostics, context);
 		if (result || diagnostics != null) result &= qvTbaseValidator.validateTransformation_validateExtendedTypedModelIsExtended(relationalTransformation, diagnostics, context);
