@@ -2,7 +2,7 @@
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="qvtrelationcs" nsURI="http://www.eclipse.org/qvt/2015/QVTrelationCS"
     nsPrefix="qvtrcs">
-  <eClassifiers xsi:type="ecore:EClass" name="AbstractDomainCS" abstract="true" eSuperTypes="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//ModelElementCS ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//Nameable"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractDomainCS" abstract="true" eSuperTypes="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//ModelElementCS ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Nameable"/>
   <eClassifiers xsi:type="ecore:EClass" name="CollectionTemplateCS" eSuperTypes="#//TemplateCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedMemberIdentifiers"
         lowerBound="1" upperBound="-1" eType="#//TemplateVariableCS" containment="true"/>
@@ -14,13 +14,13 @@
         eType="ecore:EClass ../../org.eclipse.ocl.xtext.essentialocl/model/EssentialOCLCS.ecore#//ExpCS"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="propertyId" lowerBound="1"
-        eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtrelation/model/QVTrelation.ecore#//SharedVariable"/>
+        eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtrelation/model/QVTrelation.ecore#T-qvtrelation-SharedVariable"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DomainCS" eSuperTypes="#//AbstractDomainCS">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="implementedBy" eType="ecore:EDataType ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="implementedBy" eType="ecore:EDataType ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-String"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isCheckonly" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isEnforce" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="modelId" eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#//TypedModel"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="modelId" eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#T-qvtbase-TypedModel"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isReplace" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedPattern" upperBound="-1"
         eType="#//DomainPatternCS" containment="true"/>
@@ -34,22 +34,22 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ElementTemplateCS" eSuperTypes="#//TemplateVariableCS">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="identifier" eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtrelation/model/QVTrelation.ecore#//SharedVariable"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="identifier" eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtrelation/model/QVTrelation.ecore#T-qvtrelation-SharedVariable"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="KeyDeclCS" eSuperTypes="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//ModelElementCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedPathName" eType="ecore:EClass ../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//PathNameCS"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="propertyIds" upperBound="-1"
-        eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//Property"/>
+        eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Property"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedOppositePropertyIds"
         upperBound="-1" eType="ecore:EClass ../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//PathNameCS"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="classId" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//Class"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="classId" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Class"
         changeable="false" volatile="true" transient="true" derived="true" resolveProxies="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ModelDeclCS" eSuperTypes="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//NamedElementCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="metamodelIds" upperBound="-1"
-        eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//Namespace"/>
+        eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Namespace"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ObjectTemplateCS" eSuperTypes="#//TemplateCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedPropertyTemplates"
@@ -69,7 +69,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="PropertyTemplateCS" eSuperTypes="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//ModelElementCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="owningObjectTemplate" eType="#//ObjectTemplateCS"
         resolveProxies="false" eOpposite="#//ObjectTemplateCS/ownedPropertyTemplates"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="propertyId" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//Property"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="propertyId" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Property"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedOppositePropertyId"
         eType="ecore:EClass ../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//PathNameCS"
         containment="true"/>
@@ -89,7 +89,7 @@
         defaultValueLiteral="false"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isTop" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         defaultValueLiteral="false"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="overrides" eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtrelation/model/QVTrelation.ecore#QVTRelation.Relation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="overrides" eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtrelation/model/QVTrelation.ecore#T-qvtrelation-Relation"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedVarDeclarations" upperBound="-1"
         eType="#//VarDeclarationCS" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedDomains" upperBound="-1"
@@ -116,7 +116,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedModelDecls" upperBound="-1"
         eType="#//ModelDeclCS" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="extends" upperBound="-1"
-        eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#//Transformation"/>
+        eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#T-qvtbase-Transformation"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedKeyDecls" upperBound="-1"
         eType="#//KeyDeclCS" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedQueries" upperBound="-1"
