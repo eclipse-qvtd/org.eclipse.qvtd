@@ -28,7 +28,7 @@ public abstract class AbstractQVTrelationCSVisitor<R, C>
 {
 	/**
 	 * Initializes me with an initial value for my result.
-	 * 
+	 *
 	 * @param context my initial result value
 	 */
 	protected AbstractQVTrelationCSVisitor(C context) {

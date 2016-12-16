@@ -24,7 +24,7 @@ import org.eclipse.jdt.annotation.Nullable;
  * An AbstractNullQVTcoreCSVisitor provides a default implementation for each
  * visitXxx method that returns null.
  *
- * @deprecated Explicit 'Null' functionality is obsolete with Java 8 @Nullable annotations.  
+ * @deprecated Explicit 'Null' functionality is obsolete with Java 8 @Nullable annotations.
  */
  @Deprecated
 public abstract class AbstractNullQVTcoreCSVisitor<@Nullable R, C>
@@ -32,12 +32,12 @@ public abstract class AbstractNullQVTcoreCSVisitor<@Nullable R, C>
 {
 	/**
 	 * Initializes me with an initial value for my result.
-	 * 
+	 *
 	 * @param context my initial result value
 	 */
 	protected AbstractNullQVTcoreCSVisitor(C context) {
 		super(context);
-	}	
+	}
 
 	@Override
 	public R visitAreaCS(org.eclipse.qvtd.xtext.qvtcorecs.@NonNull AreaCS object) {

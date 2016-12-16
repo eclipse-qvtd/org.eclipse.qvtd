@@ -32,12 +32,12 @@ public abstract class AbstractExtendingQVTcoreCSVisitor<R, C>
 {
 	/**
 	 * Initializes me with an initial value for my result.
-	 * 
+	 *
 	 * @param context my initial result value
 	 */
 	protected AbstractExtendingQVTcoreCSVisitor(C context) {
 		super(context);
-	}	
+	}
 
 	@Override
 	public R visitAreaCS(org.eclipse.qvtd.xtext.qvtcorecs.@NonNull AreaCS object) {

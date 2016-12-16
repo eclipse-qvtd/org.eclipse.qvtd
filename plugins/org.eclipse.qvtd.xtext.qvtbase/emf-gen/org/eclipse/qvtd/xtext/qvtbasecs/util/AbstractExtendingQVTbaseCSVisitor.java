@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *
@@ -25,17 +25,17 @@ import org.eclipse.jdt.annotation.NonNull;
  * suitable first super class, the method delegates to visiting().
  */
 public abstract class AbstractExtendingQVTbaseCSVisitor<R, C>
-	extends org.eclipse.ocl.xtext.essentialoclcs.util.AbstractExtendingEssentialOCLCSVisitor<R, C>
-	implements QVTbaseCSVisitor<R>
+extends org.eclipse.ocl.xtext.essentialoclcs.util.AbstractExtendingEssentialOCLCSVisitor<R, C>
+implements QVTbaseCSVisitor<R>
 {
 	/**
 	 * Initializes me with an initial value for my result.
-	 * 
+	 *
 	 * @param context my initial result value
 	 */
 	protected AbstractExtendingQVTbaseCSVisitor(C context) {
 		super(context);
-	}	
+	}
 
 	@Override
 	public R visitAbstractTransformationCS(org.eclipse.qvtd.xtext.qvtbasecs.@NonNull AbstractTransformationCS object) {

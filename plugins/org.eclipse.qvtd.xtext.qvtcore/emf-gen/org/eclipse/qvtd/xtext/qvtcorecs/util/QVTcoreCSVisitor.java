@@ -20,6 +20,7 @@ package	org.eclipse.qvtd.xtext.qvtcorecs.util;
 import org.eclipse.jdt.annotation.NonNull;
 
 /**
+ * @noimplement This interface is not intended to be implemented by clients.
  */
 public interface QVTcoreCSVisitor<R> extends org.eclipse.qvtd.xtext.qvtbasecs.util.QVTbaseCSVisitor<R>
 {

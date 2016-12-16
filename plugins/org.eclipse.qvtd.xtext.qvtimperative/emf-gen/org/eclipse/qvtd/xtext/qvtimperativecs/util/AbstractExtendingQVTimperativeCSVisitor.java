@@ -32,12 +32,12 @@ public abstract class AbstractExtendingQVTimperativeCSVisitor<R, C>
 {
 	/**
 	 * Initializes me with an initial value for my result.
-	 * 
+	 *
 	 * @param context my initial result value
 	 */
 	protected AbstractExtendingQVTimperativeCSVisitor(C context) {
 		super(context);
-	}	
+	}
 
 	@Override
 	public R visitAddStatementCS(org.eclipse.qvtd.xtext.qvtimperativecs.@NonNull AddStatementCS object) {
