@@ -49,6 +49,7 @@ inv ParameterIsMappingParameter: owningMappingCall.referredMapping.ownedMappingP
 
 context NewStatement
 inv CompatibleTypeForValue: ownedExpression <> null implies ownedExpression.type.conformsTo(type)
+inv NonDataTypeForType: not type.oclIsKindOf(ocl::DataType)
 --FIXME completeType inv TypedModelContainsType: referredTypedModel.allUsedPackages->includes(type.oclContainer())
 
 context SetStatement

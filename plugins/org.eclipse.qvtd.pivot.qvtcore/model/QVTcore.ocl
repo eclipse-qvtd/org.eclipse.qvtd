@@ -54,6 +54,9 @@ inv PropertyIsNotImplicit:
 inv TargetPropetyIsSlotProperty:
 	slotExpression.type.conformsTo(getReferredTargetProperty().owningClass)
 
+context RealizedVariable
+inv NonDataTypeForType: not type.oclIsKindOf(ocl::DataType)
+
 context VariableAssignment
 inv CompatibleTypeForValue('VariableAssignment::CompatibleTypeForValue: ' + value.type.name + ' must conform to ' + targetVariable.type.name + ' or vice-versa'):
 	targetVariable.type.conformsTo(value.type)
